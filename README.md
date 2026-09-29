@@ -1,4 +1,4 @@
-# A.I. slop waiting for human validation, work in progress with Claude A.I.
+# A.I. slop waiting for human validation, notes of work in progress with Claude A.I.
 # Pocket Camera (Japan) — Disassembly Findings
 
 Primary target: **Pocket Camera (Japan) (Rev A)**, MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`.
