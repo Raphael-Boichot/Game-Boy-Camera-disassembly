@@ -1,4 +1,3 @@
-# A.I. slop waiting for human validation, notes of work in progress with Claude A.I.
 # Pocket Camera (Japan) — Disassembly Findings
 
 Primary target: **Pocket Camera (Japan) (Rev A)**, MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`.
@@ -79,10 +78,116 @@ banks that hold BGM data. Not deeply investigated yet — **flagged for follow-u
 | `$d5d8` | **R66**, bank004-dominant | Frequently-read counter/index in bank $004 (our "VIEW/Album" theory bank) |
 | `$d5df` | R46 W72, banks 3/4/7/8 | **Confirmed from earlier session: shared "last input" shadow**, read by several menu banks' input handlers |
 
-### $D6xx–$D9xx
-Not yet systematically walked this session — census data exists (`assets/ram_census_jp.csv`) but
-needs the same kind of call-site tracing as §above. **Flagging as next-session work** unless you
-want me to prioritize a specific sub-range.
+### $D5A0–$D5B4 — boot-time scratch (bank $0A only)
+21 bytes, each written once and read once, only from bank $0A, only around the boot self-test
+sequence (§8 of this doc). Consistent with a **one-shot scratch buffer** for the two boot pings
+(`Cam_BootPing1`/`Cam_BootPing2`) rather than persistent state — not deeply traced, low priority
+(nothing else in the ROM reads it).
+
+### $D600–$D643 — bank $004 (VIEW/Album) core state
+**Confirmed** — this is the album browser's central bookkeeping:
+
+| Addr | Meaning |
+|---|---|
+| `$d63d` | **Current category index** (confirmed: used as `c` into two 20-byte parallel arrays at `$d615` and `$d629`). Cycles 0→1→2→(3 only if `$d582==1`, else wraps at 3) — i.e. **a normally-3-way category selector that gains a 4th option when `$d582` is set**. This is a genuine, code-verified example of the CoroCoro/extended-content flag gating an extra VIEW category — not the same mechanism as the Album-B unlock (§3), but the same WRAM byte reused for a related purpose in this bank. |
+| `$d615` | Base of a 20-byte array, one entry per category, indexed by `$d63d` — contents not yet individually decoded (next step: dump all 20 bytes' consumers) |
+| `$d629` | Second parallel 20-byte array, same indexing, read right alongside `$d615`'s — likely a paired (min,max) or (count,flags) per category |
+
+### $D665–$D72D — bank $003 (Owner registration / on-screen keyboard) UI state
+Heavy, exclusively-bank-$003 read/write activity (confirmed by call-site pattern, matches the
+name/sex/birthdate/blood-type keyboard we walked through live with BGB last session). Not
+individually traced byte-by-byte this round, but the shape is very clear: `$d665-$d67e` (dense
+R/W, no pointer use — scalar cursor/field state) followed by `$d681,$d6b2` (pure-pointer, P=28
+and P=18 — almost certainly the keyboard **layout table base addresses**, one for the hiragana
+grid, one for the alphabet grid we saw the game switch between). Good next-session target if you
+want the keyboard fully mapped rather than just located.
+
+### $D7C1 — cross-screen signal flag (banks $002/$003/$004/$008)
+**Confirmed**: set to `$12` by one screen, polled (`cp $12`) by another which clears it and sets a
+different flag (`$dbcc`) on match. A simple one-shot "the previous screen finished with this
+specific outcome" signal, reused across four different banks rather than each having its own.
+
+### $D7D2–$D7FF — bank $006 (SHOOT) live-capture UI state
+Very active (`$d7e3` alone: 30 reads), exclusively bank $006 except for a couple of bank-$000
+crossovers. This is SHOOT mode's own working set (self-timer / zoom / retake-count style state,
+by position and density) — **not yet individually decoded**; flagging as a good target if SHOOT
+mode is still the priority thread.
+
+### $D800–$D835 — bank $008 (Print) settings
+**Confirmed, and connects directly to the GB Printer packet-builder in bank $000**:
+
+| Addr | Meaning |
+|---|---|
+| `$d801`,`$d802` | **Print margin**, nibble-packed. Confirmed: bank $000's `Call_000_3339` (which builds the actual GB Printer `PRNT` command — default margin `$10,$03`) reads exactly these two bytes, nibble-splitting `$d802` into high/low. This is the "FEED margin 0-30" spinner from the TCRF-documented print option screen. |
+| `$d803` | Current print-job **photo/page index** (incremented per page; gates which of two layout templates — `08:$50F6` plain vs `08:$540D` framed — gets loaded, via the shared flag `$dbcb`) |
+| `$d804` | Copy count (initialized to 1) |
+| `$d806` bit 0 | Selects an alternate default margin (`$d801=1,$d802=$10`) — looks like a "use wide margin" toggle, possibly tied to wild-frame printing needing more border space |
+| `$d810` | **Wild-frame selector** — confirmed used as `×4` index (`sla a` twice) into a 4-byte-stride table, matching the 8-entry wild-frame set (§4) |
+| `$d814` | Reset alongside `$d803` at print-session start; likely "printing in progress" flag |
+
+Bank $000's `Call_000_1BA4`/`Call_000_3339` build a 12-byte print-command block at `$dc2d`
+(contrast=`$dc08`, margin=`$dc09`, palette=`$dc0a` hardcoded `$E4`, plus `$daab` and a 2-byte
+value) — this is the actual `PRNT` packet payload later sent over the GB Printer link cable. This
+is a solid bridge point if you want to correlate this game's print settings directly against the
+raw GBP packet captures you gave me.
+
+### $D890–$D9F8 — bank $005 grid/cursor mechanism
+**Confirmed**: bank $005 initializes **three parallel 3-byte cursor structures** at `$d8c8-$d8ca`,
+`$d8f3-$d8f5`, `$d8fa-$d8fc` — each `(position, previous-position-or-$FF, flags)`, seeded to
+different starting positions (9, 7, 5). All three position bytes are independently used as `rst
+$18` jump-table indices (their own per-position dispatch tables, not the top-level `$d5cf` one) —
+i.e. **three simultaneously-navigable cursors on one screen**, each driving its own local
+jump-table. `$d92e` is written 81 times in this bank alone — almost certainly a shared
+"redraw/blit the currently-highlighted cell" trigger fired after every cursor move on any of the
+three. I haven't pinned down *which* screen this is yet (candidates: a multi-category stamp
+picker, given TCRF documents several parallel stamp categories — small/big/Pokémon/Mario/symbols —
+that would each need their own cursor). `$d9d1-$d9f1` (confirmed from last session: `$d9d3`,
+`$d9d5`,`$d9d6` are per-slot validity flags) sits right after this cluster and is read by the same
+bank, consistent with it being the per-item data the three cursors are browsing.
+
+### $DA00–$DA42 — bank $007 (frame/stamp picker, working theory) + bank $009 boundary
+Dense bank-$007-only activity through `$DA2F`, **not yet traced this round**. From `$DA33`
+onward the same range switches to being bank-$009-dominant (see next entry) — the two banks' state
+don't overlap in practice since only one mode-bank is active at a time, they just happen to share
+address space (completely normal/expected for this kind of engine).
+
+### $DA3B–$DA42 — bank $009 (PLAY/hidden RPG minigame) battle state
+**Confirmed**, traced directly: this is the battle-menu cursor system for the hidden RPG minigame
+found last session (とる/アイテム/チェック/まほう/にげる). `Call_009_5B9D` reads `$da3c`
+and compares it against a cascade of thresholds (`$4a,$47,$44,$41,$3e,$4d` — these read as
+if-else band boundaries, not literal ASCII) to pick a branch target, then uses `$da3d` (doubled,
+`sla a`) as an index into a **pointer table at `$5C0E`** to fetch a per-item handler address, and
+`$da3b` as an index into a second array at `$DA4D`. Working read: `$da3b`=selected-item slot,
+`$da3c`=cursor's row/band position, `$da3d`=cursor's column within that band. Not fully decoded
+down to "which byte is HP vs which is a turn counter" — would need to trace into the `$5C0E`
+handler table itself, flagging as a good next target if the hidden minigame interests you.
+
+### $DBCF — shared "sub-dialog result code" (banks $004/$006/$007/$009)
+**Confirmed**: a generic return-value channel — one screen sets it to a small constant (`$04`,
+`$08`, `$0E`, or a value pulled from a small lookup table at `07:$4186` keyed by `$dc50`) right
+before handing off to what looks like a shared confirmation/sub-menu routine, and the *original*
+caller later reads it back (`cp $0e`, `cp $04`) to decide where to resume. This is the "which
+outcome did the shared dialog produce" pattern — worth fully mapping if you want the shared-dialog
+infrastructure (delete-photo confirm, etc.) understood in general rather than per-bank.
+
+### $DC00–$DC5E — bank $000, sound engine channel state
+**Confirmed** as the (fixed-bank-resident, i.e. always-available) BGM/SFX engine's per-channel
+working set, called from `Call_000_1BA4`/`Call_000_1B97` etc.: `$dc08,$dc09,$dc0a` are copied
+in sequence into a 12-byte "note event" block at `$dc2d` alongside `$daab` — matches a 4-field
+(channel-type, param, palette-or-volume, duration) sound-event record, consistent with the sound
+sequencer we flagged but didn't chase down at `$d520` last round. `$dc08` doubles as the print
+contrast byte in the print-packet-building context above (same fixed-bank helper is reused for
+both music events and printer commands — a nice, tight bit of code reuse rather than two separate
+addresses meaning two different things).
+
+### Not yet touched
+`$D6xx` tail past `$D643` outside what's listed above, `$DAA0-$DB80` region generally (lots of
+low-traffic pointer-only entries, likely more UI-transition scratch), `$DD00-$DD7D` (dense,
+exclusively bank `$01F` — a bank we haven't identified the role of at all yet), and everything
+past `$DE00` (mostly single-hit entries scattered across graphics/data banks $028-$03E, probably
+not meaningful engine state, more likely incidental self-modifying-adjacent addressing in those
+banks' own private use). Full census remains in `assets/ram_census_jp.csv` if you want to point me
+at a specific address.
 
 ### HRAM ($FF80–$FFFE)
 | Addr | Meaning |
@@ -111,10 +216,16 @@ your question use — confirmed by cross-checking against it):
 | `$11FFE-$11FFF` | Checksum of the echo copy | **Confirmed this session** |
 | `$1FFD-$1FFF` | CoroCoro unlock signature (`56 56 53`) | Confirmed (your info + byte-verified against ROM bank $08 reference table at `08:$7347`/`08:$731C` in JP) |
 
-Note the calibration vector's flat address (`$04FF2`) is **not** a WRAM address — it only *looks*
-like one because it's small; it's SRAM bank 2 offset `$FF2`. I initially wasn't sure which of WRAM
-or SRAM you meant by the first range in your question; the code makes it unambiguous: both ranges
-are SRAM, addressed via `ld [$4000],a` (bank select) then `$A000`-window pointers `$AFF2`/`$BFF2`.
+Note on bank addressing: SRAM bank selection for the 30 photo slots is **computed**, not a fixed
+per-slot immediate value (searched for literal `ld a,$0X / ld [$4000],a` bank-select pairs across
+every bank — essentially only bank $0A's CAM-register-window select (`$10`) shows up as a hardcoded
+immediate; genuine SRAM data banks are selected via a variable holding the slot index). That's
+consistent with 30× 4096-byte slots needing more than 8 banks and being addressed generically
+rather than case-by-case. I haven't yet re-derived the per-slot metadata footer layout
+independently from JP code (the table in §4 above is sourced from the Inject-pictures
+documentation, not yet cross-verified against a disassembled read site) — flagging as a real gap,
+not a confirmed-from-code entry, if you want it closed properly rather than trusted from the doc.
+
 
 ---
 
@@ -357,8 +468,17 @@ say more than "the metering avoids it and nothing crops it."
 4. §4: want a tile-by-tile match of the asset catalog against each TCRF section (Main Menu, Photo
    Option, Magic Bank, etc.) rather than just the banks I've matched so far?
 5. §9: per above — datasheet pointer would help close this one out properly.
-6. Priority for next pass: continue the WRAM map into `$D6xx-$D9xx` (UI/print/view state, largely
-   untouched so far), or go deeper on the camera cluster we already have good traction on?
+6. New this round — the bank $005 triple-cursor screen (§2, `$D890-$D9F8`): I have the mechanism
+   fully confirmed but not the screen identity. Want me to render its tile/tilemap sources to
+   settle which screen it is (my best guess is a multi-category stamp picker)?
+7. New this round — the photo-slot metadata footer (§SRAM note) is currently trusted from the
+   Inject-pictures documentation rather than re-derived from JP code. Worth closing that gap, or
+   is the documented layout good enough to proceed on?
+8. New this round — bank `$01F` (`$DD00-$DD7D`, dense, single-bank-exclusive) hasn't been
+   identified at all yet. Want it prioritized?
+9. Next WRAM pass: `$D615`/`$D629` (the two 20-byte VIEW-category arrays), the bank-$003 keyboard
+   layout tables at `$D681`/`$D6B2`, bank-$006 SHOOT state (`$D7D2-D7FF`), or bank-$007's
+   `$DA00-DA2F` cluster — which first?
 
 ---
 
