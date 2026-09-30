@@ -1,5 +1,3 @@
-# WORK IN PROGRESS, A.I. SLOP UNTIL VALIDATED !!!
-
 # Pocket Camera (Japan) — Disassembly Findings
 
 Primary target: **Pocket Camera (Japan) (Rev A)**, MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`.
@@ -303,18 +301,113 @@ directly into `$d5b5-$d5c0` (WRAM working copy) before calling the loader. This 
 fallback, not computed from anything — worth knowing if you're hand-crafting save files: these
 exact 12 bytes are what a "pretend nothing was ever calibrated" SRAM produces.
 
-I have **not yet** traced exactly what `Cam_Calib_RepairPaths` and `Call_00a_46cf` (the
-commit-back-to-SRAM routine used once both copies agree) do byte-for-byte — the read/compare side
-is fully nailed down; the write-back side is the natural next step if useful.
+### The write-back side — now fully traced
 
-**What the 12 bytes mean physically**: displayed on the hidden factory-test screen (§8) as two
-labeled hex pairs, "GAIN8" = bytes 0,1 (`$04FF2`,`$04FF3`) and "GAINA" = bytes 10,11
-(`$04FFC`,`$04FFD`). Bytes 0,4,8 of the vector (`$d5b5`,`$d5b9`,`$d5bd`) get pulled out
-specifically as "the three reference targets" when the brightest gain candidate is chosen — so
-the vector is very likely **one target-brightness byte per gain/exposure band** (up to 12 bands),
-not a single global calibration constant. This matches your "O register" instinct: it isn't a
-single register value, it's a per-band table of target readings that the auto-exposure search
-compares its live popcount against.
+`Call_00a_46cf` / `Call_00a_46e1` are a generic pair, not calibration-specific:
+
+```
+Call_00a_46cf (LOAD 12+2 bytes FROM [hl] INTO WRAM):
+    de = $d5b5 ; repeat 12×: [de++] = [hl++]        ; the 12 data bytes
+    $ff8b = [hl++] ; $ff8c = [hl++]                  ; the 2 checksum bytes
+
+Call_00a_46e1 (STORE WRAM back TO [hl], SRAM-write-enabled):
+    [$0000] = $0A                                    ; enable SRAM writes (the MBC "RAM enable" register)
+    de = $d5b5 ; repeat 12×: [hl++] = [de++]
+    [hl++] = $ff8b ; [hl] = $ff8c                     ; re-use the SAME checksum bytes, not recomputed
+    [$0000] = $00                                     ; disable SRAM writes again
+```
+
+`Cam_Calib_RepairPaths` = "primary good → overwrite echo": select bank 2, `Call_00a_46cf` from
+`$AFF2` (loads primary into WRAM); select bank 8, `Call_00a_46e1` to `$BFF2` (writes WRAM to echo).
+The mirror-image routine (`jr_00a_46b7`, "echo good → overwrite primary") does the same thing with
+the two banks swapped. Either way the **surviving copy's checksum bytes get copied verbatim**,
+which is correct — the checksum only depends on the 12 data bytes, and those didn't change.
+
+### The self-test/re-measure gate — a real discovery
+
+`Cam_Calib_Loader`, called after validation/repair succeeds, does something I hadn't expected:
+it re-reads all 12 bytes from **both** copies and checks whether **every single byte is `$AA`**
+(bank 2 first, then bank 8). If either copy is all-`$AA`, it returns immediately — **no
+measurement is taken**. Only if the data is *not* the blank/erased pattern does it fall into
+`Cam_Calib_BootMeasureSeq`, which calls `Cam_ExposureBandSelect` (the real sensor measurement,
+§3) on **every single boot**, not just first-time setup.
+
+So `$AA`-filled SRAM is a deliberate "this cartridge has never been factory-calibrated, don't
+bother measuring against garbage targets" sentinel — consistent with `$AA` being used elsewhere in
+SRAM as a general "slot is blank/uninitialized" marker (matches the pattern in the unlock save you
+gave me, which was mostly `$AA`-filled). Practical consequence: **the device recalibrates its gain
+against the stored reference targets on every cold boot**, not once at the factory and never
+again — this is a genuine adaptive system, not a one-time factory trim.
+
+### The calibration vector — complete byte-by-byte mapping
+
+Traced by reading all three branches of `Cam_ExposureBandSelect` (previously I'd only read the
+`gain=0` branch). The coarse gain search tries REG1 = 0, 1, 2 in sequence (stopping at the first
+that produces a usable test capture); whichever wins picks **three** bytes out of the vector as
+the live reference targets (`$d5cb`,`$d5cc`,`$d5cd`):
+
+| Winning gain | `$d5cb` ← | `$d5cc` ← | `$d5cd` ← |
+|---|---|---|---|
+| 0 | `$d5b5` (byte 0) | `$d5b9` (byte 4) | `$d5bd` (byte 8) |
+| 1 | `$d5b6` (byte 1) | `$d5ba` (byte 5) | `$d5bd` (byte 8) |
+| 2 | `$d5b7` (byte 2) | `$d5bb` (byte 6) | `$d5be` (byte 9) |
+| (fallback/"3") | `$d5b8` (byte 3) | `$d5bc` (byte 7) | `$d5be` (byte 9) |
+
+So the 12-byte vector is really a **3×4 grid** (one row of 4 per "target slot", read down columns
+by gain index), with gains 0↔1 sharing their third-slot target and gains 2↔3 sharing theirs:
+
+```
+       gain=0   gain=1   gain=2   gain=3(fallback)
+slot A: $04FF2   $04FF3   $04FF4   $04FF5      <- $d5cb, "primary" target
+slot B: $04FF6   $04FF7   $04FF8   $04FF9      <- $d5cc, "secondary" target
+slot C: $04FFA (shared 0&1)   $04FFB (shared 2&3)    <- $d5cd, "tertiary" target
+```
+
+`$04FFC`/`$04FFD` ("GAINA" on the factory screen, `$d5bf`/`$d5c0`) are **not** part of this 3-target
+selection at all — they're displayed separately on the diagnostic screen but consumed elsewhere
+(most likely by the deeper 8-point factory sweep below; I haven't pinned down their exact
+consumer yet).
+
+These three chosen bytes (`$d5cb/cc/cd`) are the **target popcount values** the continuous
+auto-exposure loop compares its live measurement against (see §11's pseudocode) — i.e. "for this
+gain and this part of the exposure curve, a correctly-exposed image should produce approximately
+this many dark pixels in the sampled region." That's the precise answer to "which value is which
+camera register": **none of the 12 bytes is a register value directly** — they're auto-exposure
+*targets*, consumed by WRAM (not written to `$A0xx` hardware registers themselves). The actual
+register values (REG1/REG4/REG5) come from a *different*, smaller per-band table (`$d5c1-$d5c9`,
+mentioned last round, not re-verified this pass).
+
+There's also a deeper, 8-point factory sweep (`Cam_FactoryMeasure1`, called from `Call_00a_4947`
+alongside `Cam_FactoryMeasure2` + `Cam_CommitVectorToSRAM`) that tests REG1 = `$20,$21,$22,$23,
+$E4,$E5,$E8,$0A` (gain×edge-mode combinations beyond the simple 0/1/2 used at boot) and stores
+results into `$d59d-$d5a8` (REG4 low bits) and `$d5a9-$d5b4` (O-register results) — 8 raw
+measurement pairs. This is very likely what actually **produces** the 12-byte vector in the first
+place (probably via `Cam_CommitVectorToSRAM`, which I haven't traced yet) — i.e. a genuine factory
+calibration pass, distinct from the lightweight boot-time re-check. Flagging as the natural next
+trace if you want the full origin story closed out.
+
+### Where exactly is the checksum — unambiguous diagram
+
+```
+SRAM flat address:  04FF2 04FF3 04FF4 04FF5 04FF6 04FF7 04FF8 04FF9 04FFA 04FFB 04FFC 04FFD | 04FFE 04FFF
+                    └──────────────────────── 12 data bytes ─────────────────────────────┘   └ checksum ┘
+                                                                                                 (sum+13, xor+35)
+
+SRAM flat address:  11FF2 ................................................................ 11FFD | 11FFE 11FFF
+                    └──────────────────────── echo of the same 12 bytes ─────────────────┘   └ checksum ┘
+```
+Checksum algorithm (identical for both copies):
+```
+sum = 0 ; xor = 0
+for each of the 12 data bytes b:
+    sum = (sum + b) & 0xFF
+    xor = (xor ^ b) & 0xFF
+expected_byte1 = (sum + 0x0D) & 0xFF      # compared against 04FFE / 11FFE
+expected_byte2 = (xor + 0x23) & 0xFF      # compared against 04FFF / 11FFF
+```
+This is a different, simpler algorithm than the image-tag checksum documented in the
+Inject-pictures README — two independent checksum schemes coexist in this SRAM, one for photo
+slots and this one specifically for the calibration vector.
 
 ---
 
@@ -458,29 +551,148 @@ say more than "the metering avoids it and nothing crops it."
 
 ---
 
-## 10. Open questions
+## 10. Auto-exposure: what part of the image, and the full algorithm
 
-1. §6: want me to finish tracing `Cam_Calib_RepairPaths`/`Call_00a_46cf` (the write-back side of
-   calibration), or is the read/validate side sufficient for now?
-2. §7: want the two dither tables ($7C20/$7C60) rendered as a visual gradient comparison, and/or
-   the third unused table ($7CA0) fully characterized (it's structurally identical in shape, just
-   dead)?
-3. §8: want me to chase down what `$d561` gates on the Select+Start+Up shortcut, and what bank
-   $004 state `$0A` actually shows?
-4. §4: want a tile-by-tile match of the asset catalog against each TCRF section (Main Menu, Photo
-   Option, Magic Bank, etc.) rather than just the banks I've matched so far?
-5. §9: per above — datasheet pointer would help close this one out properly.
-6. New this round — the bank $005 triple-cursor screen (§2, `$D890-$D9F8`): I have the mechanism
-   fully confirmed but not the screen identity. Want me to render its tile/tilemap sources to
-   settle which screen it is (my best guess is a multi-category stamp picker)?
-7. New this round — the photo-slot metadata footer (§SRAM note) is currently trusted from the
-   Inject-pictures documentation rather than re-derived from JP code. Worth closing that gap, or
-   is the documented layout good enough to proceed on?
-8. New this round — bank `$01F` (`$DD00-$DD7D`, dense, single-bank-exclusive) hasn't been
-   identified at all yet. Want it prioritized?
-9. Next WRAM pass: `$D615`/`$D629` (the two 20-byte VIEW-category arrays), the bank-$003 keyboard
-   layout tables at `$D681`/`$D6B2`, bank-$006 SHOOT state (`$D7D2-D7FF`), or bank-$007's
-   `$DA00-DA2F` cluster — which first?
+**There are two genuinely different sampling mechanisms** in this code, easy to conflate — I did,
+last round. Clearing that up:
+
+### A. The coarse gain search's sanity check — a tiny fixed 4×4 patch, NOT the main metering
+
+`Cam_PixelTestHelper` (called from the 3-way gain loop and from the O-register SAR search) reads
+just **4 bytes** from the capture buffer at a fixed address (`$A002` or `$A082`, i.e. tile #0 or
+tile #8, row 1), testing 4 specific bits (columns 1–4 of an 8-pixel-wide row) per byte — a **4×4
+pixel micro-patch** at a fixed position, used only as a cheap "did this test-capture come back
+roughly sane" check during the coarse gain/O-register search. It is not the real photometry.
+
+### B. The continuous fine-adjustment loop — the real metering, and it's the center ~75%×62%
+
+`Cam_PopcountSampleLoop`, called from `Cam_MainDispatch` (the routine that runs continuously
+during live preview) starting at `$A320`, walks tile-by-tile across:
+```
+x: pixel 16 .. 111   (96 of 128 columns — 16px margin left, 16px margin right)
+y: pixel 24 .. 103   (80 of 128 rows   — 24px margin top,  25px margin bottom)
+```
+i.e. a **96×80 center-cropped region** (not a tiny patch, not the full 128×128 frame either) —
+roughly the middle three-quarters horizontally and five-eighths vertically. This is the region
+the live auto-exposure/auto-gain loop actually measures, every frame, while you're framing a
+shot. Verified by symbolically emulating the sample-address sequence against the real ROM bytes
+(not guessed) — confirmed no row below 103 or above 24, no column outside 16-111, is ever touched
+by this loop.
+
+### The full algorithm, in readable pseudocode
+
+In the spirit of the prototype's `AKARUSA`/`CNTR2`/`CNTR3` naming — here's the retail routine with
+meaningful names, verified against the actual disassembly (bank $0A):
+
+```
+# ---- Runs once per live-preview frame, after a capture completes ----
+def Cam_MainDispatch(target_popcount):
+    # target_popcount was picked earlier by the coarse gain search (Cam_ExposureBandSelect)
+    # from the 12-byte SRAM calibration vector — see table above.
+    select_SRAM_bank(0)                       # 0 = the live image buffer, not general SRAM
+    dark_pixels = popcount_scan(x=16..111, y=24..103)   # sum of set comparator bits, center region
+
+    # --- integer "how many target-units fit" via repeated subtraction, capped at 159 ---
+    level = 0
+    remainder = dark_pixels
+    while remainder >= target_popcount and level < 159:
+        remainder -= target_popcount
+        level += 1
+    # level is now 0..159: higher = more dark pixels measured = more underexposed
+
+    correction_shift = CorrectionShiftTable[level]     # bank0A $7B00, 256 bytes, see shape below
+    exposure = read_16bit(d596, d597)                  # current REG2:REG3 shadow
+
+    if level >= 36:
+        # too many dark pixels -> underexposed -> INCREASE exposure time
+        exposure = exposure + (exposure >> correction_shift)
+    else:
+        # few enough dark pixels -> adequately/over exposed -> DECREASE exposure time
+        exposure = exposure - (exposure >> correction_shift)
+    # (16-bit add/sub; overflow on increase clamps to $FFFF, underflow on decrease is handled
+    #  by the gain-band-switch logic below rather than clamping to 0)
+
+    select_CAM_register_window()
+    d596, d597 = exposure                     # commit the new exposure candidate to WRAM shadow
+
+    # --- automatic gain-band switching at the edges of the current band's useful range ---
+    if d587 == d589:        # currently on the "brightest-candidate" band
+        goto band_specific_handler_1
+    elif d587 == 0x08:      # currently on the fixed N-bit/dark band
+        goto band_specific_handler_2
+    elif d587 == 0x0a:
+        goto band_specific_handler_3
+    elif REG1_shadow.bit7:  # "already at the top of the range" flag
+        if exposure - 0x00CF underflows:
+            if exposure - 0xEE00(signed) also underflows:      # truly pinned at max
+                commit_exposure_and_return()
+            else:
+                # step UP to the next-brighter gain band ($d589), fresh mid-range exposure
+                d587 = d589 ; REG1 = d589 | 0xE0 ; exposure = 0x0D80
+                REG4 = d5c3 ; REG5 = d5c8 | 0x80          # per-band REG4/REG5 from the small table
+                rebuild_dither_matrix()
+    else:
+        if exposure - 0x0030 underflows:        # exposure dropped below ~48 ticks
+            # step DOWN to the next-dimmer gain band ($d588), fresh mid-range exposure
+            d587 = d588 ; REG1 = d588 | 0xE0 ; exposure = 0x0048
+            REG4 = d5c2
+        elif exposure - 0x0010 underflows:       # small enough to just floor it
+            commit_exposure_and_return()
+        else:
+            d597 = 0x10                          # floor the low byte, commit
+            commit_exposure_and_return()
+
+    write_registers(A002=exposure_hi, A003=exposure_lo, A004=REG4, A005=REG5, A001=REG1)
+```
+
+**Why the correction table has the shape it does** (dumped directly from ROM, `bank0A $7B00`):
+values are **small (2–4) at the extremes** of the 0–159 range and **peak at 16 right around
+index 35–38** (the increase/decrease boundary), then settle to a flat 3 for the rest of the range.
+Because the value is a *right-shift count*, small values mean "shift by only a little" = a **large**
+proportional correction, while large values (up near 16) mean "shift by a lot" = a **tiny**
+correction. So the real shape is: **big, aggressive corrections when the image is badly over- or
+under-exposed, and very fine nudges right around the crossover point** — a textbook proportional
+controller shaped to avoid hunting/oscillation near the setpoint, confirmed directly from the
+table's contents rather than assumed.
+
+This closes the loop on your original question: the "O register" instinct was right in spirit —
+what actually happens is a **combined exposure-time-and-gain-band feedback loop**, metering the
+center ~96×80 region every frame, compared against a per-gain-band target pulled from the SRAM
+calibration vector, with an aggressive-near-extremes/gentle-near-target proportional correction
+curve, and automatic hand-off between gain bands when the exposure time would otherwise run off
+either end of the current band's useful range.
+
+---
+
+## 11. Open questions
+
+**Resolved this round** (no longer open): calibration write-back/repair paths, the boot
+re-measure gate, the full 12-byte vector mapping, exact checksum locations, auto-exposure sample
+region, and the full fine-adjustment algorithm.
+
+**New from this round's tracing:**
+1. §6: `Cam_CommitVectorToSRAM` (called from `Call_00a_4947` after the 8-point factory sweep) is
+   the last untraced piece of the calibration story — it's very likely what actually *computes*
+   the 12-byte vector from the 8 raw sweep measurements. Want that closed out?
+2. §6: `$04FFC`/`$04FFD` (`$d5bf`/`$d5c0`, shown as "GAINA" on the diagnostic screen) are read
+   but their consumer wasn't identified this round — candidates are somewhere in the 8-point sweep
+   or `Cam_CommitVectorToSRAM`.
+3. §10: the fixed constants used when switching gain bands (`$0D80`, `$0048`, `REG4` from
+   `$d5c2`/`$d5c3`, etc.) are transcribed correctly but not independently explained — would need
+   the same kind of tracing as the main vector to say *why* those specific values.
+
+**Still open from before:**
+4. §7: want the two dither tables ($7C20/$7C60) rendered as a visual gradient, and/or the third,
+   unused table ($7CA0) fully characterized?
+5. §8: what `$d561` gates on the Select+Start+Up shortcut, and what bank $004 state `$0A` shows?
+6. §4: tile-by-tile match of the asset catalog against each TCRF section?
+7. §9 (masked lines): still need a datasheet pointer or your own probing data to close out properly.
+8. §2: the bank $005 triple-cursor screen's identity (mechanism confirmed, screen unknown).
+9. §SRAM: the photo-slot metadata footer is still trusted from the Inject-pictures doc, not
+   re-derived from JP code.
+10. Bank `$01F` (`$DD00-$DD7D`) is still completely unidentified.
+11. Next WRAM targets: `$D615`/`$D629` (VIEW-category arrays), bank-$003 keyboard layout tables,
+    bank-$006 SHOOT state, or bank-$007's `$DA00-DA2F` — which first?
 
 ---
 
