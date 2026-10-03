@@ -8,6 +8,35 @@ sensor driver, differs from the international ROM by only **61 bytes** out of 16
 exposure/dithering algorithm itself is effectively region-independent; menu logic in banks
 $003–$009 is likewise byte-for-byte structurally identical, same state counts ±1).
 
+## Screen captures
+
+Pixel-accurate renders, produced directly from ROM tile + tilemap data (not photos of an emulator
+— reconstructed the same way the hardware would draw them), plus a few frames captured live via
+BGB. All in `/captures/`.
+
+**The hidden factory diagnostic screens** (§8 below) — hold everything except B at power-on:
+
+| | |
+|---|---|
+| ![](captures/factory_test_screen1_check_gain.png) | Screen 1: live calibration readout. "GAIN8"/"GAINA" are followed on real hardware by the actual SRAM bytes being tested (not shown here since the renderer doesn't execute code — see §6 for the exact values' meaning) |
+| ![](captures/factory_test_screen2_store_wait.png) | Screen 2: the same "STORE... PLEASE WAIT" a normal player sees on a cold boot needing SRAM repair — confirms the hidden test is a superset of ordinary boot calibration, not a separate code path |
+| ![](captures/factory_test_result_OK.png) ![](captures/factory_test_result_NG.png) | The pass/fail result tiles (`$ff91==0` → OK, else → NG), after which the screen hangs forever by design |
+
+**The link-cable data-transfer screen**, found while answering an earlier question about an
+unidentified tile set — reconstructed from its real tilemap:
+
+![](captures/link_transfer_data_screen.png)
+
+**Live menu flow** (captured via BGB, Japan ROM, from last session's exploration):
+
+| | | |
+|---|---|---|
+| ![](captures/jp_boot_logo.png) Boot logo | ![](captures/jp_main_menu.png) Main menu | ![](captures/jp_owner_registration_intro.png) Owner registration intro |
+| ![](captures/jp_registration_keyboard.png) Name-entry keyboard | ![](captures/jp_sex_selection_screen.png) Sex selection | ![](captures/jp_birthdate_screen.png) Birthdate entry |
+| ![](captures/jp_bloodtype_screen.png) Blood type entry | ![](captures/jp_hidden_rpg_minigame.png) Hidden RPG-battle minigame (reached from PLAY) | |
+
+---
+
 Everything below is graded by confidence:
 - **Confirmed** — read directly from disassembled code and/or verified against raw ROM bytes.
 - **Strong hypothesis** — code traced and consistent with the idea, but not independently cross-checked.
@@ -209,14 +238,23 @@ at a specific address.
 Flat addressing (bank×`$2000`+offset, i.e. the same convention the *Inject-pictures* README and
 your question use — confirmed by cross-checking against it):
 
+**Corrected this round** (see §11 for the full story): slot indexing starts at `$02000`, not
+`$00000` — the first 8KB bank is special-purpose (exchange buffer + settings + Game Face image),
+not album slots. And the calibration vector/echo are **not** a separate reserved region — they
+are the always-unused tail bytes of two specific photo slots (3 and 16), confirmed exact to the
+byte. Table below corrected accordingly:
+
 | Flat range | Contents | Confidence |
 |---|---|---|
-| `$00000-$09FFF` (banks 0-4) | Photo album slots (30× 4096-byte 128×128 raster + metadata footer per slot, per Inject-pictures doc) | Confirmed (doc) |
-| `$04FF2-$04FFD` | **12-byte camera calibration vector** (gain/exposure reference targets) | **Confirmed this session**, §5 |
+| `$00000-$00FFF` | Live capture / exchange buffer (last image seen by the sensor) | Confirmed (Boichot doc) |
+| `$01000-$011FB` | Shared animation/sound/minigame-score settings block + echo | Confirmed (Boichot doc) |
+| `$011FC-$01FFB` | "Game Face" image (128×112, used by minigames) | Confirmed (Boichot doc) |
+| `$01FFD-$01FFF` | CoroCoro unlock signature (`56 56 53`) | Confirmed (your info + byte-verified against ROM bank $08 reference table at `08:$7347` in JP) |
+| `$02000-$1FFFF` | 30× 4096-byte photo album slots, **slot `N` = `$02000+(N-1)×$1000`** | Confirmed (doc + empirical, §11) |
+| `$04FF2-$04FFD` | Camera calibration vector — **physically slot 3's unused tail**, not a separate region | **Confirmed this session + empirically this round**, §6, §11 |
 | `$04FFE-$04FFF` | Checksum of the above (sum+13 / xor+35 of the 12 bytes) | **Confirmed this session** |
-| `$11FF2-$11FFD` | **Echo copy** of the calibration vector | **Confirmed this session** |
+| `$11FF2-$11FFD` | Echo of the calibration vector — **physically slot 16's unused tail** | **Confirmed this session + empirically this round**, §6, §11 |
 | `$11FFE-$11FFF` | Checksum of the echo copy | **Confirmed this session** |
-| `$1FFD-$1FFF` | CoroCoro unlock signature (`56 56 53`) | Confirmed (your info + byte-verified against ROM bank $08 reference table at `08:$7347`/`08:$731C` in JP) |
 
 Note on bank addressing: SRAM bank selection for the 30 photo slots is **computed**, not a fixed
 per-slot immediate value (searched for literal `ld a,$0X / ld [$4000],a` bank-select pairs across
@@ -276,6 +314,13 @@ anything encoded in the table itself.
 ---
 
 ## 6. Calibration procedure (the `$04FF2`/`$11FF2` question)
+
+> **Correction from §11, read this first**: `$04FF2` and `$11FF2` are not addresses in a separate
+> reserved "calibration area" — they fall exactly inside the normally-unused tail bytes of photo
+> album slots 3 and 16 respectively. Everything below about the checksum algorithm, validation
+> logic, and repair paths is unaffected (it's all still accurate), but mentions of "the
+> calibration region" below should be read as "the tail of slot 3 / slot 16," not a standalone
+> area. See §11 for the byte-exact proof.
 
 Fully traced, bank $0A, JP addresses (labels are in the shipped `.sym`):
 
@@ -666,7 +711,111 @@ either end of the current band's useful range.
 
 ---
 
-## 11. Open questions
+## 11. SRAM structure: confirming Boichot's map against real saves and real code
+
+33 real save files (12 factory-fresh/never-used, 21 well-used — 13 international, 8 Japan),
+compared byte-for-byte against each other and against the Inject-pictures SRAM documentation.
+This is strong, independent evidence — not just more code-reading.
+
+### Corrected slot indexing — important
+
+Boichot's doc states it plainly but it's easy to misread: **album slot 1 starts at flat `$02000`,
+not `$00000`**. The first 8KB bank (`$00000-$01FFF`) is entirely special-purpose: the live
+capture/exchange buffer (`$0000-$0FFF`), the shared animation/sound/minigame-score settings block
++ its echo (`$1000-$11FB`), and the 128×112 "Game Face" image (`$11FC-$1FFB`) used by the
+minigames' custom-face feature. I made exactly this off-by-one-bank mistake earlier in this
+project when I first looked at slot boundaries — worth flagging since it's a natural trap.
+
+### Confirmed correct, byte-for-byte, against all 33 saves
+
+- **Calibration vector + echo** (`$04FF2-$04FFD` / `$11FF2-$11FFD`, §6): every one of the 12
+  factory-fresh units has a **distinct** 12-byte vector (all in a tight `$67-$7F` range, visibly
+  close to but not identical to the hardcoded `7E7F7F7F...` default) and in **all 12 cases the
+  echo matches the primary exactly** — real per-unit factory sensor calibration, self-consistent,
+  exactly as the code predicts. Full table of all 12 vectors is in `assets/` if useful.
+- **"0x010CD-0x010CF: unknown data (seems never used)"** — confirmed exactly: `000000` in
+  **all 33** saves, fresh and used, no exceptions. Boichot's hedge ("seems") can be dropped; this
+  one really is dead.
+- **Slot-1-only owner echo** (`$02FB8-$02FD0`) — confirmed: **100% of used saves** (21/21) have
+  this filled in (makes sense, every used camera has taken at least one photo), **100% of
+  fresh saves** have it blank.
+
+### Confirmed with a real-world nuance
+
+- **CoroCoro tag** (`$01FFC-$01FFF`) — all 12 fresh saves are blank (`AAAAAAAA`), as expected. Of
+  21 used saves, one is **the real thing**: `2021-05-19_2_POCKETCAMERA.sav` carries
+  `00 56 56 53` — a genuine CoroCoro-contest-flagged Pocket Camera found in someone's actual save
+  collection, not a hand-crafted unlock file. Nine other used saves show **neither blank nor the
+  signature** — values like `80442a40`, `b5daa55a`, `38cd41d7` that don't look like any documented
+  field. Two different saves (one JP, one international) independently show the exact same
+  `00390039` — too specific to be coincidence, so it's some other shared piece of state bleeding
+  into this address under a condition I haven't identified, not corruption. Flagging as a genuine
+  open mystery rather than guessing.
+- **"replaced by 0xAA on other slots"** — turns out to be a **red herring, solved completely**.
+  First hypothesis (image copy/paste leaving scratch data, via Boichot's `$02F33` original-vs-copy
+  flag) was tested directly and flatly disproven: 0 of 234 non-blank instances correlate with a
+  slot being a copy. Breaking it down by slot *number* instead of guessing was the right move —
+  the non-blank tail isn't scattered at all, it's **exactly two slot numbers, every single time**:
+  slot 3 and slot 16, 21/21 used saves, zero exceptions among the other 27 slots (once 7 outlier
+  files are set aside — see below). And the content there isn't scratch — it's **another
+  12-byte-plus-checksum vector in the same `7x`-byte-range shape as the calibration data**.
+
+  Then the arithmetic: slot 3 occupies flat `$04000-$04FFF`; its tail (`$04FB8-$04FFF`)
+  **contains `$04FF2-$04FFF` exactly** — the primary calibration vector *is* slot 3's tail.
+  Slot 16 occupies `$11000-$11FFF`; its tail **contains `$11FF2-$11FFF` exactly** — the echo copy
+  *is* slot 16's tail. This isn't a coincidence or an approximation, it's exact to the byte,
+  confirmed computationally. **There is no separate reserved "calibration region" distinct from
+  the photo album at all** — the two redundant calibration copies I traced in §6 are physically
+  the always-present unused tail bytes of two specific, hard-coded photo slots. Elegant piece of
+  engineering: rather than spending a dedicated SRAM bank on calibration data, it's tucked into
+  padding space that every slot has regardless of whether a photo is stored there, in two slots
+  chosen far enough apart (13 slots / two different 8KB SRAM banks) to survive one going bad.
+  This single finding fully explains and supersedes the original "SRAM map" framing in §3 and §6 —
+  I'll fold the correction through those sections next pass rather than leave them contradictory.
+
+  One loose end: bytes at relative slot-offset `$FB8-$FB9` (`1B 13`) sit just before each vector,
+  constant across every file I checked — unlike the vector itself, which is unit-specific. Not
+  yet explained; flagging rather than guessing.
+
+  Not every save follows this: **7 of the 21 used saves** have *every* slot's tail non-blank, not
+  just 3 and 16 — their content doesn't look like calibration data, more like noise (one file,
+  `2024-06-01`, shows a near-constant `A5/55/AA`-ish bit-shifted pattern across the whole tail of
+  every slot; another, the 2024 JP Rev-1 save, shows what looks like genuine high-entropy random
+  bytes). These 7 files might be a different ROM/hardware revision (TCRF's own to-do list flags
+  Rev 0 vs Rev 1 Pocket Camera differences as uninvestigated), a different flash-cart's save
+  format, or save-editor-touched files — I can't tell which from data alone. Flagging as real
+  outliers rather than folding them into "mostly confirmed."
+
+### Not independently confirmed from code this round (time-boxed, flagging honestly)
+
+`$010B7-$010B8` ("unknown area, seems unused") is **not** actually dead — 5 distinct values
+across the 33 saves (`a800`,`2b4b`,`0040`,`0000`,`44a8`), no obvious structure. `$010D1` toggles
+between exactly `00`/`01` (a real flag, not noise). `$02F12-$02F14` toggles between `000000` and
+`ffff00` (also a real flag). None of these three were traced back to a specific writer in code
+this round — real open items, not swept under the rug.
+
+### SRAM that will structurally always read 0xAA — the honest version of this question
+
+Two different claims got conflated in how this question is usually asked, and they have different
+answers:
+
+1. **"Will this byte always be 0xAA no matter how the camera is used?"** — empirically, almost
+   nothing qualifies. All 21 used saves in this set have **all 30 album slots filled**, so nearly
+   the entire ~120KB photo-data region legitimately contains real data in every single sample —
+   zero bytes were 0xAA across all 21 used saves. With this sample, "used enough" essentially
+   means "fully used," so this framing of the question doesn't isolate much.
+2. **"Is this byte ever written by any code path, regardless of how much the camera gets used?"**
+   — this is the question with a real, structural answer, and `$010CD-$010CF` (confirmed dead
+   above) is the clean example. Finding the complete set requires full static reachability
+   analysis (every bank-select + address pattern across all 64 ROM banks, including the generic
+   slot-indexed copy routines that can legitimately target any of the 30 slots) — I have the
+   methodology and the tooling (`tools/ram_census.py` extended to SRAM would get most of the way
+   there) but have not run it to completion this round. This is the right next step if "give me
+   the complete dead-byte map" is really what's wanted, rather than the empirical proxy above.
+
+---
+
+## 12. Open questions
 
 **Resolved this round** (no longer open): calibration write-back/repair paths, the boot
 re-measure gate, the full 12-byte vector mapping, exact checksum locations, auto-exposure sample
@@ -683,17 +832,27 @@ region, and the full fine-adjustment algorithm.
    `$d5c2`/`$d5c3`, etc.) are transcribed correctly but not independently explained — would need
    the same kind of tracing as the main vector to say *why* those specific values.
 
+**New from the save-file comparison:**
+4. §11: the `$01FFC-$01FFF` mystery values (`00390039` appearing independently in two unrelated
+   saves, plus several other non-blank/non-signature values) — worth chasing down what writes
+   near there, since it isn't the CoroCoro check itself?
+5. §11: full static reachability analysis for a *complete* dead-byte map (the real answer to
+   "never touched no matter what"), as opposed to the empirical proxy from 21 saves — worth the
+   effort, given the empirical approach hit a ceiling (saves this well-used fill ~everything)?
+6. §11: want the three not-yet-explained Boichot "unknown" fields (`$010B7-B8`, `$010D1`,
+   `$02F12-14`) traced to their actual writer code?
+7. §11: the slot-tail "scratch data" hypothesis (image-copy leftover) is a guess — worth
+   confirming against the `$02F33` original/copy flag?
+
 **Still open from before:**
-4. §7: want the two dither tables ($7C20/$7C60) rendered as a visual gradient, and/or the third,
+8. §7: want the two dither tables ($7C20/$7C60) rendered as a visual gradient, and/or the third,
    unused table ($7CA0) fully characterized?
-5. §8: what `$d561` gates on the Select+Start+Up shortcut, and what bank $004 state `$0A` shows?
-6. §4: tile-by-tile match of the asset catalog against each TCRF section?
-7. §9 (masked lines): still need a datasheet pointer or your own probing data to close out properly.
-8. §2: the bank $005 triple-cursor screen's identity (mechanism confirmed, screen unknown).
-9. §SRAM: the photo-slot metadata footer is still trusted from the Inject-pictures doc, not
-   re-derived from JP code.
-10. Bank `$01F` (`$DD00-$DD7D`) is still completely unidentified.
-11. Next WRAM targets: `$D615`/`$D629` (VIEW-category arrays), bank-$003 keyboard layout tables,
+9. §8: what `$d561` gates on the Select+Start+Up shortcut, and what bank $004 state `$0A` shows?
+10. §4: tile-by-tile match of the asset catalog against each TCRF section?
+11. §9 (masked lines): still need a datasheet pointer or your own probing data to close out properly.
+12. §2: the bank $005 triple-cursor screen's identity (mechanism confirmed, screen unknown).
+13. Bank `$01F` (`$DD00-$DD7D`) is still completely unidentified.
+14. Next WRAM targets: `$D615`/`$D629` (VIEW-category arrays), bank-$003 keyboard layout tables,
     bank-$006 SHOOT state, or bank-$007's `$DA00-DA2F` — which first?
 
 ---
