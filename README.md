@@ -1,3 +1,5 @@
+#AI slop, do not trust until human validation (WIP)
+
 # Pocket Camera (Japan) — Disassembly Findings
 
 Primary target: **Pocket Camera (Japan) (Rev A)**, MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`.
