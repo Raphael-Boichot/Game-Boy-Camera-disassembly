@@ -811,6 +811,50 @@ answers:
    there) but have not run it to completion this round. This is the right next step if "give me
    the complete dead-byte map" is really what's wanted, rather than the empirical proxy above.
 
+### Every field Boichot explicitly marks "unknown" in the main (non-Hello-Kitty, non-prototype)
+### SRAM map, traced against code
+
+Found the actual settings-block initializer: `Jump_002_4183` in bank $002 (which turns out to be
+the **Animation/Trippy-H editor bank** — identified by its 14+ uses of `$b000`-relative
+addressing, the shared-settings block's SRAM-bank-0 location). It resets two instances of the
+217-byte (`$00D9`) settings block to factory defaults, byte-exact, which hands over the ground
+truth for several of Boichot's "unknown" fields at once:
+
+```
+Jump_002_4183 (bank $002) — settings-block default initializer:
+    relative $00-$2E  = $FE  (47 bytes)
+    relative $2F      = $00
+    relative $30-$5E  = $00  (47 bytes)
+    relative $5F      = $09
+    relative $60      = $00
+    relative $61-$BA  = <90 bytes copied from ROM bank $002:$41F3>   <- covers SOUND I/II/NOISE AND $B7-$B8
+    relative $BB-$CF  = $00  (21 bytes, explicit zero-fill)           <- covers $CD-$CF exactly
+    relative $D0      = $40
+    relative $D1      = $00                                          <- the Game Face flag, see below
+    relative $D2-$D6  = <5 bytes copied from ROM bank $002:$4000>
+    relative $00-$D6  -> checksum routine (Call_002_432f, length $D7) -> written to $D7-$D8
+```
+
+| Boichot's "unknown" field | Resolution |
+|---|---|
+| `$01061` SOUND I, top 2 bits | **Resolved: unused padding bits.** ROM default preset byte is `$09` (top bits 0). Empirically 0 in **33/33** real saves, zero exceptions. |
+| `$01089` SOUND II, top 2 bits | **Resolved: unused padding bits.** Same evidence, ROM default `$09`, 33/33 saves show 0. |
+| `$010A1` NOISE, bits 6-4 | **Resolved (practically): unused padding bits.** ROM default `$8F` (those bits 0). Empirical: 0 in 32/33 saves — the one exception is `2021-05-19_6_POCKETCAMERA.sav`, which is independently one of the 7 "anomalous" files flagged in the slot-tail analysis (see below), not a sign of real usage. |
+| `$010B7-$010B8` | **Partially resolved: a real, user-editable field, not padding.** Sits inside the 90-byte ROM-copied preset (`$61-$BA`), right after a run of alternating `$55` bytes that looks like a wave/envelope table — my best guess is this is part of the Trippy-H wave-pattern or sweep data, but I haven't pinned down the exact UI field. ROM default is `$0000`; real saves show 5 distinct non-default values, confirming it's actively written by normal use of the Animation feature, contra Boichot's "seems unused." |
+| `$010CD-$010CF` | **Fully resolved: genuinely dead, confirmed two independent ways.** Code: explicitly zero-filled as part of a larger 21-byte reserved block (`$BB-$CF`) every time the settings are reset, and nothing else in the ROM writes there afterward (no further references found). Empirical: `000000` in all 33 real saves, zero exceptions. Boichot's "seems never used" can be stated as fact. |
+| `$010D1` | **Fully resolved: the "Game Face is set" flag.** Traced in bank $002: read into WRAM `$d581`; if zero, nothing happens; if nonzero, the 3584-byte Game Face image (`$011FC-$01FFB`) is copied into WRAM `$C000` for the minigames' custom-face feature. Defaults to `$00` (no custom face) on reset, exactly matching the initializer above. |
+| `$02F12-$02F14` (per-photo metadata) | **Partially resolved, empirically.** `000000` in 26 of 26 "normal" used saves (excluding the 7 anomalous files) across every slot checked, and in all 12 fresh saves — strong evidence it's genuinely unused in regular play. Did not find the writer in code this round (per-slot metadata is built through the same kind of computed/indexed addressing as the album system generally, which resists literal-address search) — the one real-save exception is, again, from the same anomalous-file cluster. |
+
+**A pattern worth flagging on its own**: every single unexplained exception found this round —
+the lone NOISE-bits outlier, the lone `$02F12-14` outlier, and (from last round) the lone
+`0x50`-pattern outlier — traces back to the **same small cluster of 7 "anomalous" used saves**
+(the ones where every album slot's tail is non-blank, not just slots 3 and 16). That's not a
+coincidence worth ignoring: whatever makes those 7 files different from the other 26 (different
+ROM/hardware revision, a different flash-cart's save format, editor-touched files) is very likely
+the root cause of most of the genuinely unexplained data in this whole dataset, rather than each
+anomaly being an independent mystery. Identifying what's actually different about those 7 files
+would probably clear up more open questions at once than chasing any single byte further.
+
 ---
 
 ## 12. Open questions
@@ -830,7 +874,17 @@ region, and the full fine-adjustment algorithm.
    `$d5c2`/`$d5c3`, etc.) are transcribed correctly but not independently explained — would need
    the same kind of tracing as the main vector to say *why* those specific values.
 
-**New from the save-file comparison:**
+**New this round:**
+1. The 7 anomalous used-save files are now the single highest-value target — they explain nearly
+   every remaining unexplained data point in the dataset. Worth a dedicated comparison pass
+   (their headers, their overall structure, whether they cluster by date/source) rather than more
+   single-byte chasing?
+2. `$010B7-$010B8`'s exact field identity within the Animation/Trippy-H wave data — traceable with
+   more time in bank $002's field-editing UI code, just not resolved this round.
+3. `$02F12-$02F14`'s writer in code — same computed-addressing obstacle as the photo-metadata
+   fields generally; would need the generic per-slot metadata-write routine found first.
+
+**From the save-file comparison:**
 4. §11: the `$01FFC-$01FFF` mystery values (`00390039` appearing independently in two unrelated
    saves, plus several other non-blank/non-signature values) — worth chasing down what writes
    near there, since it isn't the CoroCoro check itself?
