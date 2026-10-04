@@ -33,7 +33,7 @@ unidentified tile set — reconstructed from its real tilemap:
 |---|---|---|
 | ![](captures/jp_boot_logo.png) Boot logo | ![](captures/jp_main_menu.png) Main menu | ![](captures/jp_owner_registration_intro.png) Owner registration intro |
 | ![](captures/jp_registration_keyboard.png) Name-entry keyboard | ![](captures/jp_sex_selection_screen.png) Sex selection | ![](captures/jp_birthdate_screen.png) Birthdate entry |
-| ![](captures/jp_bloodtype_screen.png) Blood type entry | ![](captures/jp_hidden_rpg_minigame.png) Hidden RPG-battle minigame (reached from PLAY) | |
+| ![](captures/jp_bloodtype_screen.png) Blood type entry | ![](captures/jp_capture_menu_screen.png) Main capture (SHOOT) menu | |
 
 ---
 
@@ -182,16 +182,22 @@ onward the same range switches to being bank-$009-dominant (see next entry) — 
 don't overlap in practice since only one mode-bank is active at a time, they just happen to share
 address space (completely normal/expected for this kind of engine).
 
-### $DA3B–$DA42 — bank $009 (PLAY/hidden RPG minigame) battle state
-**Confirmed**, traced directly: this is the battle-menu cursor system for the hidden RPG minigame
-found last session (とる/アイテム/チェック/まほう/にげる). `Call_009_5B9D` reads `$da3c`
-and compares it against a cascade of thresholds (`$4a,$47,$44,$41,$3e,$4d` — these read as
-if-else band boundaries, not literal ASCII) to pick a branch target, then uses `$da3d` (doubled,
-`sla a`) as an index into a **pointer table at `$5C0E`** to fetch a per-item handler address, and
-`$da3b` as an index into a second array at `$DA4D`. Working read: `$da3b`=selected-item slot,
-`$da3c`=cursor's row/band position, `$da3d`=cursor's column within that band. Not fully decoded
-down to "which byte is HP vs which is a turn counter" — would need to trace into the `$5C0E`
-handler table itself, flagging as a good next target if the hidden minigame interests you.
+### $DA3B–$DA42 — bank $009, cursor/dispatch mechanism — **correction, purpose unconfirmed**
+**Correction**: the screen I'd identified as a "hidden RPG-battle minigame" (とる/アイテム/
+チェック/まほう/にげる, reached with a quick A-press from the main menu) is actually just the
+**main capture/SHOOT menu** — confirmed directly by you. My transcription of that low-resolution
+Japanese text was unreliable and I over-interpreted it to fit a hypothesis I'd already formed; the
+actual on-screen text is almost certainly ordinary camera UI (とる = "take [a photo]" is a far
+more mundane reading than I gave it credit for).
+
+This means the code finding below — `$da3c` compared against a threshold cascade, `$da3d` as a
+doubled index into a pointer table at `$5C0E`, `$da3b` indexing a second array at `$DA4D` — is
+real (it's genuine code in bank $009), but **its connection to that screen was never established
+in the first place**, since the screen isn't what I thought it was. I don't actually know what
+bank $009 is yet. Whether it's one of the documented arcade minigames (Space Fever II / Ball / DJ
+/ Run!Run!Run!), something else entirely, or coincidentally related to SHOOT mode after all, is
+now an open question rather than something I should guess at again. Flagging as needing a fresh,
+independent identification rather than quietly relabeling it.
 
 ### $DBCF — shared "sub-dialog result code" (banks $004/$006/$007/$009)
 **Confirmed**: a generic return-value channel — one screen sets it to a small constant (`$04`,
@@ -917,3 +923,5 @@ region, and the full fine-adjustment algorithm.
 - `tools/asset_catalog.py` — enumerates every banked graphics/tilemap copy call site
 - `tools/render_tiles.py`, `tools/render_album.py` — render raw 2bpp ROM data to PNG for visual matching
 - `pocketcamera_jp.sym` — the growing symbol file; regenerate the disassembly from this after any addition
+
+---
