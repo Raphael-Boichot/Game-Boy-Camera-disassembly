@@ -1,4 +1,5 @@
-# AI slop, do not trust until human validation (not performed yet, work in progress)
+# AI slop, do not trust until human validation
+# (not performed yet, work in progress)
 
 # Pocket Camera (Japan) — Disassembly Findings
 
