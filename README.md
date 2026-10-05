@@ -560,14 +560,44 @@ when the SRAM calibration data needs (re)writing, which is why holding all-butto
 a normal cold boot with valid save data still shows it: the diagnostic screen is a superset of the
 normal calibration-repair flow, not a separate code path.
 
-### Second hidden combo, different bank
+### Second hidden combo, different bank — fully resolved, and it's not a boot-time check at all
 
-Also found this session, unrelated to the above: **Select+Start+Up**, checked in bank $004
-(`jr_004_4859`, appears at two call sites). Requires WRAM `$d561` to be nonzero (i.e. gated —
-doesn't fire from every screen), plays sound `$03`, then jumps straight to local state `$0A` in
-whatever screen bank $004 is (our "VIEW/Album" theory). Looks like a developer shortcut into a
-specific album sub-screen, skipping normal navigation. Haven't identified what `$d561` gates it on
-yet, or fully mapped what state 10 is bank $004's tree — flagging for follow-up.
+**Select+Start+Up**, checked in bank $004 (VIEW/Album). Important distinction from the documented
+erase-all-data combo: that one is checked once, early in bank $000's boot initialization, before
+anything else runs. This one is checked **continuously, every frame, only while already on a
+specific screen inside bank $004** — there is no boot-time path to it at all. Holding it at
+power-on, before the game has even reached the main menu, cannot do anything, by construction —
+it isn't that the combo "fails," it's that bank $004's code isn't running yet.
+
+The precondition — `$d561 > 0` — is also now fully traced:
+
+```
+Call_002_4406 (bank $002, Animation mode):
+    copy 30 bytes from SRAM bank 0 flat $011B2 (the documented "state vector", one entry
+    per album slot) into WRAM $d563
+
+(bank $002, the $d561 computation):
+    count = 0
+    for each of the 30 bytes at $d563:
+        if byte != $FF: count += 1        # $FF = empty/unformatted slot
+    $d561 = count
+```
+
+So `$d561` is simply **how many of your 30 album photo slots actually contain a photo** — and,
+critically, **this count is only ever computed inside Animation mode**. Nothing in bank $004 (or
+anywhere else) populates it independently. WRAM isn't cleared on power-on, so until Animation mode
+has run at least once in the current session, `$d561` holds whatever garbage was left in RAM — on
+real hardware that's typically **not** a clean, reliably-nonzero value.
+
+Put together, this explains the "does nothing" result completely: to actually see the effect you
+need, in order, (1) at least one photo saved in the album, (2) a visit to Animation mode in the
+current play session (to populate `$d561`), (3) back out to the specific View screen that checks
+this, then (4) hold Select+Start+Up with at least one of the three freshly pressed while on that
+screen. Testing it cold at boot — the natural thing to try, matching how the documented
+erase-all-data combo works — will never trigger it, regardless of whether the finding is correct,
+because the check it depends on simply isn't reachable that early. The effect itself (sound `$03`,
+jump to bank $004's local state `$0A`) is still not identified beyond "some specific album
+sub-screen" — that part remains open.
 
 A third candidate, **Select+Right+Up** in bank $015, exists as a comparison but the surrounding
 code is in one of the not-yet-symbol-annotated banks and reads as garbage in the current
@@ -907,7 +937,8 @@ region, and the full fine-adjustment algorithm.
 **Still open from before:**
 8. §7: want the two dither tables ($7C20/$7C60) rendered as a visual gradient, and/or the third,
    unused table ($7CA0) fully characterized?
-9. §8: what `$d561` gates on the Select+Start+Up shortcut, and what bank $004 state `$0A` shows?
+9. §8: `$d561`'s gating is now fully resolved (photo count, populated only via Animation mode —
+   see above); what bank $004 state `$0A` actually shows is still open.
 10. §4: tile-by-tile match of the asset catalog against each TCRF section?
 11. §9 (masked lines): still need a datasheet pointer or your own probing data to close out properly.
 12. §2: the bank $005 triple-cursor screen's identity (mechanism confirmed, screen unknown).
@@ -923,5 +954,3 @@ region, and the full fine-adjustment algorithm.
 - `tools/asset_catalog.py` — enumerates every banked graphics/tilemap copy call site
 - `tools/render_tiles.py`, `tools/render_album.py` — render raw 2bpp ROM data to PNG for visual matching
 - `pocketcamera_jp.sym` — the growing symbol file; regenerate the disassembly from this after any addition
-
----
