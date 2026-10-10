@@ -1,0 +1,5 @@
+2026-10-08 10:07:12 corpus /mnt/user-data/outputs/coverage_run/worker7_a/corpus.jsonl entries 18785 roots 1162 kept 69 save unl_PC10696894
+2026-10-08 10:09:12 ckpt 3500 replayed exec 59759 organic 59759 sigchg 1128
+2026-10-08 10:11:12 ckpt 6656 replayed exec 70247 organic 70247 sigchg 2838
+2026-10-08 10:12:35 ckpt 8585 replayed exec 72195 organic 72195 sigchg 4685
+2026-10-08 10:12:35 done 8585 entries 2247005 frames 323 s

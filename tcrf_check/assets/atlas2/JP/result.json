@@ -1,0 +1,1444 @@
+{
+ "00:00": {
+  "entry": 32,
+  "reached": "00:00",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 192
+ },
+ "00:01": {
+  "entry": 167,
+  "reached": "00:02",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "00:02": {
+  "entry": 168,
+  "reached": "00:02",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "00:03": {
+  "entry": 166,
+  "reached": "00:03",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 1
+ },
+ "00:04": {
+  "entry": 202,
+  "reached": "00:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "00:05": {
+  "entry": 560,
+  "reached": "00:05",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "00:06": {
+  "entry": 923,
+  "reached": "00:06",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "00:07": {
+  "entry": 574,
+  "reached": "00:07",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "01:00": {
+  "entry": 177,
+  "reached": "01:00",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "01:01": {
+  "entry": 342,
+  "reached": "01:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 20
+ },
+ "01:02": {
+  "entry": 287,
+  "reached": "00:01",
+  "swaps": 0,
+  "sav": "unl_CE10550742",
+  "combo": 240
+ },
+ "01:03": {
+  "entry": 313,
+  "reached": "01:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "01:04": {
+  "entry": 315,
+  "reached": "01:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "01:06": {
+  "entry": 377,
+  "reached": "01:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "01:07": {
+  "entry": 324,
+  "reached": "01:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "01:08": {
+  "entry": 325,
+  "reached": "01:08",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "01:0A": {
+  "entry": 442,
+  "reached": "01:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "02:00": {
+  "entry": 207,
+  "reached": "02:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "02:01": {
+  "entry": 208,
+  "reached": "02:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "03:00": {
+  "entry": 526,
+  "reached": "03:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "03:01": {
+  "entry": 506,
+  "reached": "03:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "04:01": {
+  "entry": 584,
+  "reached": "04:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "05:00": {
+  "entry": 968,
+  "reached": "05:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "05:01": {
+  "entry": 617,
+  "reached": "05:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "06:01": {
+  "entry": 899,
+  "reached": "06:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "07:01": {
+  "entry": 252,
+  "reached": "07:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "07:02": {
+  "entry": 197,
+  "reached": "07:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "07:03": {
+  "entry": 237,
+  "reached": "07:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "07:04": {
+  "entry": 249,
+  "reached": "07:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "08:00": {
+  "entry": 175,
+  "reached": "08:00",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "08:01": {
+  "entry": 189,
+  "reached": "08:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "08:04": {
+  "entry": 212,
+  "reached": "08:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "08:07": {
+  "entry": 352,
+  "reached": "08:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 192
+ },
+ "08:08": {
+  "entry": 803,
+  "reached": "08:08",
+  "swaps": 0,
+  "sav": "unl_CE10785322",
+  "combo": 32
+ },
+ "08:09": {
+  "entry": 1482,
+  "reached": "08:09",
+  "swaps": 0,
+  "sav": "unl_CE10785322",
+  "combo": 32
+ },
+ "08:0A": {
+  "entry": 1264,
+  "reached": "08:0A",
+  "swaps": 0,
+  "sav": "unl_CE10785322",
+  "combo": 32
+ },
+ "08:0D": {
+  "entry": 839,
+  "reached": "08:0D",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "08:0F": {
+  "entry": 891,
+  "reached": "08:10",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "08:10": {
+  "entry": 910,
+  "reached": "08:10",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "08:12": {
+  "entry": 2393,
+  "reached": "08:13",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 100
+ },
+ "08:13": {
+  "entry": 2419,
+  "reached": "08:13",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 100
+ },
+ "08:14": {
+  "entry": 2420,
+  "reached": "08:14",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 100
+ },
+ "08:15": {
+  "entry": 2435,
+  "reached": "08:15",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 100
+ },
+ "08:16": {
+  "entry": 2524,
+  "reached": "08:15",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 100
+ },
+ "08:17": {
+  "entry": 2422,
+  "reached": "08:17",
+  "swaps": 0,
+  "sav": "unl_CE10229233",
+  "combo": 100
+ },
+ "09:01": {
+  "entry": 317,
+  "reached": "09:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "09:02": {
+  "entry": 280,
+  "reached": "09:02",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:03": {
+  "entry": 476,
+  "reached": "09:03",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:04": {
+  "entry": 385,
+  "reached": "09:04",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:05": {
+  "entry": 275,
+  "reached": "09:05",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:06": {
+  "entry": 447,
+  "reached": "09:06",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:09": {
+  "entry": 434,
+  "reached": "09:09",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:0A": {
+  "entry": 435,
+  "reached": "09:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "09:0C": {
+  "entry": 2757,
+  "reached": "09:0C",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "0A:01": {
+  "entry": 582,
+  "reached": "0A:01",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 50
+ },
+ "0A:02": {
+  "entry": 261,
+  "reached": "0A:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:03": {
+  "entry": 262,
+  "reached": "0A:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:04": {
+  "entry": 276,
+  "reached": "0A:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:05": {
+  "entry": 813,
+  "reached": "0A:05",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:06": {
+  "entry": 760,
+  "reached": "0A:06",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:07": {
+  "entry": 277,
+  "reached": "0A:07",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:08": {
+  "entry": 348,
+  "reached": "0A:08",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:0B": {
+  "entry": 801,
+  "reached": "0A:0B",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:0C": {
+  "entry": 809,
+  "reached": "0A:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0A:0E": {
+  "entry": 1544,
+  "reached": "0A:0E",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0B:00": {
+  "entry": 2071,
+  "reached": "0B:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0B:01": {
+  "entry": 293,
+  "reached": "0B:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0C:01": {
+  "entry": 437,
+  "reached": "0C:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0C:03": {
+  "entry": 1034,
+  "reached": "0C:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:00": {
+  "entry": 298,
+  "reached": "0D:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:01": {
+  "entry": 300,
+  "reached": "0D:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:02": {
+  "entry": 303,
+  "reached": "0D:02",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:03": {
+  "entry": 304,
+  "reached": "0D:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:04": {
+  "entry": 309,
+  "reached": "0D:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:06": {
+  "entry": 387,
+  "reached": "0D:07",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:07": {
+  "entry": 455,
+  "reached": "0D:07",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0D:08": {
+  "entry": 388,
+  "reached": "0D:07",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0E:01": {
+  "entry": 914,
+  "reached": "0E:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "0F:00": {
+  "entry": 656,
+  "reached": "0F:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0F:02": {
+  "entry": 2847,
+  "reached": "0F:02",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 32
+ },
+ "0F:03": {
+  "entry": 658,
+  "reached": "0F:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0F:06": {
+  "entry": 448,
+  "reached": "0F:06",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "0F:07": {
+  "entry": 465,
+  "reached": "0F:07",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "0F:09": {
+  "entry": 1731,
+  "reached": "0F:09",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "0F:0C": {
+  "entry": 2852,
+  "reached": "0F:0C",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 32
+ },
+ "0F:0D": {
+  "entry": 680,
+  "reached": "0F:0D",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "10:01": {
+  "entry": 1045,
+  "reached": "10:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "10:03": {
+  "entry": 478,
+  "reached": "10:03",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "10:04": {
+  "entry": 492,
+  "reached": "10:04",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "10:05": {
+  "entry": 695,
+  "reached": "10:05",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "10:06": {
+  "entry": 1395,
+  "reached": "10:06",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "10:07": {
+  "entry": 595,
+  "reached": "09:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "10:09": {
+  "entry": 511,
+  "reached": "10:09",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "11:01": {
+  "entry": 607,
+  "reached": "11:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "11:03": {
+  "entry": 545,
+  "reached": "11:03",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "11:04": {
+  "entry": 1006,
+  "reached": "11:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "11:05": {
+  "entry": 539,
+  "reached": "11:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "11:07": {
+  "entry": 579,
+  "reached": "11:07",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "12:00": {
+  "entry": 717,
+  "reached": "12:00",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:01": {
+  "entry": 718,
+  "reached": "12:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:03": {
+  "entry": 1296,
+  "reached": "12:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:04": {
+  "entry": 1533,
+  "reached": "12:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:05": {
+  "entry": 1432,
+  "reached": "05:00",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:07": {
+  "entry": 1340,
+  "reached": "12:08",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:08": {
+  "entry": 721,
+  "reached": "12:08",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:09": {
+  "entry": 1238,
+  "reached": "12:09",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:0B": {
+  "entry": 1239,
+  "reached": "12:0B",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:0C": {
+  "entry": 1289,
+  "reached": "12:0C",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:0F": {
+  "entry": 1367,
+  "reached": "12:0F",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:12": {
+  "entry": 2379,
+  "reached": "12:12",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:14": {
+  "entry": 1372,
+  "reached": "12:15",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:15": {
+  "entry": 1329,
+  "reached": "12:15",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:16": {
+  "entry": 1253,
+  "reached": "12:17",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:18": {
+  "entry": 1254,
+  "reached": "12:18",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:19": {
+  "entry": 1284,
+  "reached": "12:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:1B": {
+  "entry": 1365,
+  "reached": "12:1B",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:1C": {
+  "entry": 1366,
+  "reached": "12:1C",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:1E": {
+  "entry": 1361,
+  "reached": "12:1E",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:1F": {
+  "entry": 1413,
+  "reached": "12:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:20": {
+  "entry": 1297,
+  "reached": "12:20",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:21": {
+  "entry": 1330,
+  "reached": "12:21",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "12:22": {
+  "entry": 1332,
+  "reached": "12:22",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "13:01": {
+  "entry": 954,
+  "reached": "13:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "13:02": {
+  "entry": 995,
+  "reached": "13:07",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "13:07": {
+  "entry": 1022,
+  "reached": "13:07",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "14:00": {
+  "entry": 180,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "14:01": {
+  "entry": 205,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 2
+ },
+ "14:02": {
+  "entry": 383,
+  "reached": "14:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "14:03": {
+  "entry": 779,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "14:04": {
+  "entry": 372,
+  "reached": "14:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "14:05": {
+  "entry": 185,
+  "reached": "14:05",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "14:06": {
+  "entry": 373,
+  "reached": "14:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "14:07": {
+  "entry": 399,
+  "reached": "14:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "14:08": {
+  "entry": 420,
+  "reached": "14:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "14:0B": {
+  "entry": 195,
+  "reached": "14:0B",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "14:0C": {
+  "entry": 210,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "15:00": {
+  "entry": 371,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:01": {
+  "entry": 332,
+  "reached": "15:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:02": {
+  "entry": 327,
+  "reached": "15:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:03": {
+  "entry": 329,
+  "reached": "15:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:05": {
+  "entry": 1089,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:06": {
+  "entry": 735,
+  "reached": "15:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:07": {
+  "entry": 736,
+  "reached": "15:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:08": {
+  "entry": 739,
+  "reached": "15:08",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "15:09": {
+  "entry": 740,
+  "reached": "01:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "16:01": {
+  "entry": 2253,
+  "reached": "16:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "16:02": {
+  "entry": 468,
+  "reached": "16:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "16:03": {
+  "entry": 471,
+  "reached": "16:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "16:04": {
+  "entry": 2216,
+  "reached": "16:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "16:05": {
+  "entry": 1215,
+  "reached": "16:05",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "16:06": {
+  "entry": 1220,
+  "reached": "16:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:00": {
+  "entry": 522,
+  "reached": "17:00",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:01": {
+  "entry": 523,
+  "reached": "17:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:02": {
+  "entry": 525,
+  "reached": "17:02",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:05": {
+  "entry": 688,
+  "reached": "17:02",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:07": {
+  "entry": 667,
+  "reached": "17:07",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:0A": {
+  "entry": 610,
+  "reached": "17:0A",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:0B": {
+  "entry": 1135,
+  "reached": "17:0A",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:0D": {
+  "entry": 612,
+  "reached": "17:0D",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "17:12": {
+  "entry": 638,
+  "reached": "17:12",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "18:00": {
+  "entry": 2190,
+  "reached": "18:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "18:01": {
+  "entry": 2141,
+  "reached": "18:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "18:02": {
+  "entry": 2181,
+  "reached": "18:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "18:03": {
+  "entry": 2143,
+  "reached": "1D:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "19:00": {
+  "entry": 6,
+  "reached": "19:00",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 64
+ },
+ "19:02": {
+  "entry": 169,
+  "reached": "19:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "19:03": {
+  "entry": 0,
+  "reached": "19:03",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 0
+ },
+ "1A:01": {
+  "entry": 1018,
+  "reached": "1A:01",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:03": {
+  "entry": 1016,
+  "reached": "1A:03",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:04": {
+  "entry": 1019,
+  "reached": "1A:04",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:05": {
+  "entry": 1068,
+  "reached": "1A:05",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:06": {
+  "entry": 1095,
+  "reached": "1A:06",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:07": {
+  "entry": 1053,
+  "reached": "1A:07",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:08": {
+  "entry": 1093,
+  "reached": "1A:08",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:09": {
+  "entry": 1101,
+  "reached": "1A:09",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:0A": {
+  "entry": 1404,
+  "reached": "1A:03",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1A:0E": {
+  "entry": 1078,
+  "reached": "1A:0E",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1B:00": {
+  "entry": 864,
+  "reached": "1B:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "1B:01": {
+  "entry": 865,
+  "reached": "1B:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "1C:01": {
+  "entry": 868,
+  "reached": "1C:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "1C:03": {
+  "entry": 289,
+  "reached": "1C:03",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1C:04": {
+  "entry": 1356,
+  "reached": "1C:06",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1C:05": {
+  "entry": 1258,
+  "reached": "1C:05",
+  "swaps": 0,
+  "sav": "unl_PC10696894",
+  "combo": 128
+ },
+ "1C:06": {
+  "entry": 1357,
+  "reached": "1C:06",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1C:0A": {
+  "entry": 1358,
+  "reached": "1C:0A",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1C:0D": {
+  "entry": 1416,
+  "reached": "1C:0D",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1D:01": {
+  "entry": 290,
+  "reached": "1D:0A",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1D:03": {
+  "entry": 2183,
+  "reached": "1D:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "1D:04": {
+  "entry": 2145,
+  "reached": "1D:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "1D:05": {
+  "entry": 2149,
+  "reached": "1D:05",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "1D:09": {
+  "entry": 1464,
+  "reached": "1D:0A",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1D:0A": {
+  "entry": 291,
+  "reached": "1D:0A",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 2
+ },
+ "1E:01": {
+  "entry": 927,
+  "reached": "1E:01",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "1E:02": {
+  "entry": 2576,
+  "reached": "1E:02",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "1E:03": {
+  "entry": 971,
+  "reached": "1E:03",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 8
+ },
+ "20:00": {
+  "entry": 1973,
+  "reached": "20:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "20:01": {
+  "entry": 1974,
+  "reached": "20:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "20:04": {
+  "entry": 1976,
+  "reached": "20:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "20:06": {
+  "entry": 1988,
+  "reached": "20:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "20:07": {
+  "entry": 1979,
+  "reached": "20:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "20:0A": {
+  "entry": 1990,
+  "reached": "20:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 4
+ },
+ "21:01": {
+  "entry": 350,
+  "reached": "21:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 0
+ },
+ "21:02": {
+  "entry": 825,
+  "reached": "21:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 0
+ },
+ "21:04": {
+  "entry": 379,
+  "reached": "21:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 0
+ },
+ "21:05": {
+  "entry": 826,
+  "reached": "21:05",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 0
+ },
+ "21:06": {
+  "entry": 649,
+  "reached": "21:06",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 0
+ }
+}

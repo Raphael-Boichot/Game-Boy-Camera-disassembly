@@ -1,0 +1,12 @@
+ROM pocketcamera_jp.gb
+_ff                                tag ffffff   00:00 19:00 19:01 19:03  $D582=0 $D562=18
+_zero                              tag 000000   00:00 19:00 19:01 19:03  $D582=0 $D562=18
+CE10229233.sav                     tag aaaaaa   00:00 19:00 19:01 19:03  $D582=0 $D562=18
+GAMEBOYCAMERA_all_unlocked.sav     tag 565653   00:00 19:00 19:01 19:03  $D582=1 $D562=1E
+intl_notag.sav                     tag 000000   00:00 19:00 19:01 19:03  $D582=0 $D562=18
+ROM roms/gbcam_usa_eu.gb
+_ff                                tag ffffff   00:00 19:00 19:01 19:03  $D582=1 $D562=1E
+_zero                              tag 000000   00:00 19:00 19:01 19:03  $D582=1 $D562=1E
+CE10229233.sav                     tag aaaaaa   00:00 19:00 19:01 19:03  $D582=1 $D562=1E
+GAMEBOYCAMERA_all_unlocked.sav     tag 565653   00:00 19:00 19:01 19:03  $D582=1 $D562=1E
+intl_notag.sav                     tag 000000   00:00 19:00 19:01 19:03  $D582=1 $D562=1E

@@ -109,3 +109,15 @@ Owner must decide / supply:
 (Y + C, X + B, tile, attribute) to the OAM shadow (`$D400 + [FF9A]`) until a record starts with `$80`. `00:2464` (table `02:6E4B`) and `00:247D` (table `02:5272`) are the same adder for bank 2.
 Parsing both bank-1 tables: 249 + 246 lists, 3,247 records, 14,473 bytes (`$4000-$7888`) with no gap, then 1,911 zero bytes (`$7889-$7FFF`).
 In `coverage_jp_v3.csv` bank 01 therefore reads "13,719 referenced / 2,665 unreferenced" only because the coverage tool sees just the two table base addresses.
+
+
+## Addendum: emulator coverage run (README section 13)
+
+Run with a native SM83 core (`coverage/`), 197.7 M frames in the fuzz-style passes plus settle / sweep / long / damaged-save / hotspot-save passes; no BGB, no hardware.
+
+* **Tracer completeness:** 0 executed instructions outside `trace_jp_v3.json` (0 mis-aligned entries). 55,935 of 60,449 traced instructions (92.5 %) executed; 47,862 (79.2 %) from joypad input + an SRAM image alone; 8,073 only in forced-state runs (52 of them suspect: entered through an edge that is not in the static control flow); 4,514 (8,773 bytes) never executed.
+* **Dead roots (blocker 3 above):** none of the 45 executed from joypad input; `00:0751` (3 instrs) ran once in a forced run through a non-CFG edge (artefact). Recommendation: assemble as code tagged `unreferenced`; owner decides.
+* **Data banks (blocker 1 above):** all 64 banks selected; all 14 unreferenced banks (2B 2D 2E 30-35 37 3A-3D) are read, with the reading mode, calling routine and byte ranges logged (`coverage/results/report_v6/data_bank_map.md`, `data_extents.csv`, table in README 13.5). Open: type and extent of each asset inside a bank (needs the index tables of the reader routines `04:58DE`, `04:5A9D`, `08:5400`, `08:5055`, `02:4CFF`, `06:5CFF`); 56,947 non-padding bytes were never read by any run.
+* **Never-executed code, by cause** (`unexec_components.csv`, `gating_summary.md`): link cable (`$DC44`, `$DC51`, `$DC59`, `$DC43`), Super Game Boy (`$FFC3`), printer statuses the stand-in never returns, SHOOT boss branch (`$D865`), 10 state-table slots never entered (bank 04 st.10, 06 st.18/19, 07 st.9/15/17, 09 st.9/11/12/13), effect-table entries 45, 51, 53, 83 and eleven `ret` slots of `0A:541A`, and `04:5E4C` (255 instrs, gating variable not identified).
+* **Labels:** `Cam_BootHiddenCombo_Check` (`0A:6A41`) is the tail of a block-copy outer loop, not the hidden-combination test (that is `0A:6A52`, already `Cam_BootSelfTest_Entry`); not renamed here because rgbds is not available in the session to re-verify the md5 after regenerating.
+* **Limits:** core not compared cycle-exactly with BGB / hardware; no link partner, SGB, printer faults.

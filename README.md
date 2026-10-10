@@ -4,10 +4,12 @@
 # Pocket Camera (Japan) — Disassembly Findings
 
 Primary target: **Pocket Camera (Japan) (Rev A)**, MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`.
-International and Zelda-edition ROMs are treated as derivatives (confirmed: bank $0A, the
-sensor driver, differs from the international ROM by only **61 bytes** out of 16384 — the
-exposure/dithering algorithm itself is effectively region-independent; menu logic in banks
-$003–$009 is likewise byte-for-byte structurally identical, same state counts ±1).
+The international ROM is **not** a trivial derivative. Bank $0A, the sensor driver, differs from
+the international ROM by only **61 bytes** out of 16384 (the exposure/dithering algorithm itself is
+effectively region-independent), but the code banks $00–$09 differ by 8,874–14,932 bytes each: the
+two ROMs are different builds that share the numbering of the modes and the flow of the states
+(§16.1; an earlier sentence here, "menu logic in banks $003–$009 is byte-for-byte structurally
+identical", was wrong and is withdrawn). The Zelda-edition ROM was not examined.
 
 ## Contents
 
@@ -25,6 +27,10 @@ $003–$009 is likewise byte-for-byte structurally identical, same state counts 
 | 10 | Auto-exposure |
 | 11 | SRAM evidence from the 33 real saves |
 | 12 | Open questions |
+| 13 | **Emulator coverage run** — what executes, what never does and why, the 14 unreferenced data banks, dead-root verdict |
+| 14 | **Game Link Cable photo exchange** — byte-level protocol sniffed on two emulated cameras, roles, commands, thumbnails, abort/cancel/time-out, and the SRAM signature of an exchanged photo |
+| 15 | **TCRF and unlock cross-check** — what the unlocking saves reach (credits, CoroCoro, Album B, stamps, mini-games), the documented-content checklist (54 items), re-classification of code that never ran (the hold-A stamp branch, the hot-spot effect handlers), mode names from screenshots, asset inventory |
+| 16 | **Menu names, the international ROM, BGB cross-validation** — the 34 modes named from the screens (Japanese / international / the Funtography guide), the mirrored main menu, the two ROMs are different builds, Album B (8 vs 14 conditions) and the CoroCoro flag in the international ROM, BGB results (sweep, credits gate, tag, Pokémon pages, hold-A, hot-spots, link, gender bits), hot-spot effect behaviour, the 20 Pokémon stamps |
 | Appendix | Tools |
 
 ## Screen captures
@@ -107,18 +113,18 @@ All consistency checks pass (no overlapping instructions, every callback ends in
 
 **What is lacking, by importance**
 
-1. **The data banks are unstructured.** Banks `$0B-$3F` except the sound bank `$1F` (52 banks, 851,968 bytes) are not described: the asset catalog (`assets/catalog_jp.csv`, 385 copy sites) accounts for 254,546 bytes (29.9 %). 25 of these banks have no catalogued byte, and **14 banks (`2B 2D 2E 30-35 37 3A-3D`, 229,376 bytes) have no static reference at all** yet hold real content (not padding). They are reached through computed bank numbers and pointer tables that static tracing cannot follow. Until that is solved a source file can only `INCBIN` them, not name sections.
+1. **The data banks are unstructured.** *(Update, §13.5: the emulator run reads all 14 banks that no code references and logs which mode, state and routine reads which range; the type and extent of each asset inside a bank are still open.)* Banks `$0B-$3F` except the sound bank `$1F` (52 banks, 851,968 bytes) are not described: the asset catalog (`assets/catalog_jp.csv`, 385 copy sites) accounts for 254,546 bytes (29.9 %). 25 of these banks have no catalogued byte, and **14 banks (`2B 2D 2E 30-35 37 3A-3D`, 229,376 bytes) have no static reference at all** yet hold real content (not padding). They are reached through computed bank numbers and pointer tables that static tracing cannot follow. Until that is solved a source file can only `INCBIN` them, not name sections.
    Bank `$01` is not in these 52: it is the one data bank that is **already fully typed**. It holds the sprite-composition lists drawn by the OAM adders `00:24AF` (pointer table `$4000`, 249 entries) and `00:2496` (pointer table `$5D47`, 246 entries): each pointer leads to 4-byte OAM records (Y, X, tile, attribute) ended by `$80` (3,247 records in all; `A` = list number, `C`/`B` = Y/X offset added to every record, written to the OAM shadow at `$D400 + FF9A`). Parsing both tables covers `$4000-$7888` (14,473 bytes) with no gap; `$7889-$7FFF` (1,911 bytes) is zero padding. Bank `$02` has two more tables of the same kind (`$6E4B` for `00:2464`, `$5272` for `00:247D`), not parsed yet.
 2. **About 57 KB of data inside the code banks has no known type or extent** (bank `$02` 11.9 KB, `$1F` sound data 12.3 KB, `$08` 10.0 KB, `$09` 5.3 KB, `$00` 4.1 KB, `$06` 3.4 KB, `$0A` 2.3 KB…): word tables vs strings vs tiles vs song streams. This is an upper bound: `tools/rom_coverage.py` credits a table as referenced when any `ld rr,nn` constant lands near it, and a bank-0 `ld hl,nn` ≥ `$4000` is credited to every bank. The only data of known extent is the 254,344 bytes copied through `call $0450` with a constant length.
-3. **Reachable is not live.** 45 roots (1,014 bytes) are unreferenced code (library stubs, an unused sound-effect starter, twin routines `05:7F1C` / `09:721D`…). Only a runtime log can say whether they ever run.
+3. **Reachable is not live.** 45 roots (1,014 bytes) are unreferenced code (library stubs, an unused sound-effect starter, twin routines `05:7F1C` / `09:721D`…). *(Update, §13.3: in the emulator run none of the 45 executed from joypad input; one ran once in a forced run through an edge that is not in the static control flow, which I treat as an artefact.)*
 4. **Heuristic completeness.** The cooperative-task entries of bank 3 (program counters stored as split immediates `ld a,lo ; ld [$D6FD],a ; …`) and the 23 hand-resolved callbacks come from pattern scans, not from a proof that none is missing. The tracer also had one real bug, fixed in v2: an `rst $18` table at `05:48C4` was read one word too long and swallowed the first instruction of `Bank005_State12` as table data (bytes unchanged, labelling wrong).
 5. **No text / charset table.** Strings other than the ASCII `MAIN PASS` (`00:2E88`) cannot be typed; the Japanese and the international character sets are not extracted.
 
-**What needs the emulator or the hardware** (PyBoy hooks: see `tools/emu_calib_check.py` for a working example): a PC + ROM-bank coverage log over a scripted tour of every mode (any executed PC outside the trace is a tracer gap; the 45 dead roots must never execute); a ROM-read log (address + bank) for the 14 unreferenced banks to find which tables select them; the index ranges of the third block of the `0A` table (indices 64-95, `A | $40`) and of every `rst $18` table; and a diff of the same routines in `gbcam_usa_eu.gb` / `gbcam_gold.gb` (67 % of the newly proven bytes are byte-identical at the same bank:address there), which would settle several dead-code verdicts.
+**What needs the emulator or the hardware.** *Done, see §13:* a coverage log over a scripted search of every mode (92.5 % of the traced instructions executed, 79.2 % from joypad input and an SRAM image alone, **0 executed instructions outside the trace**, none of the 45 dead roots executed from joypad input) and a ROM-read log for the 14 unreferenced banks. *Still open:* confirmation of the covered paths in BGB or on hardware (the core is not cycle-exact); a link-cable partner and Super Game Boy, which gate the largest never-executed blocks (§13.4); the 4,514 never-executed instructions in general; the index ranges that real input produces for the `0A:541A` effect table (the third block, indices 64-95, `A | $40`; entries 45, 51, 53 and 83 and eleven `ret` slots were never selected) and for the `rst $18` tables of the ten states that were never entered; and a diff of the same routines in `gbcam_usa_eu.gb` / `gbcam_gold.gb` (67 % of the newly proven bytes are byte-identical at the same bank:address there), which would settle several dead-code verdicts.
 
-**What the project owner must decide or supply:** the policy for the 45 dead roots (assemble as code tagged `unreferenced`, or leave as `db`); a scripted emulator coverage run (input sequences for every mode — I can write it, it needs the emulator); the character table for text; and a naming convention for the ~130 new code roots. Quirks that a rebuilt source must keep bit-exact are real ROM behaviour, e.g. `0A:4C51` is an unconditional `jr` that skips an `inc b` (it looks like a `jr z` that was meant, but the bytes are what they are).
+**What the project owner must decide or supply:** the policy for the 45 dead roots (assemble as code tagged `unreferenced`, or leave as `db`; recommendation in §13.6); the character table for text; and a naming convention for the ~130 new code roots. Quirks that a rebuilt source must keep bit-exact are real ROM behaviour, e.g. `0A:4C51` is an unconditional `jr` that skips an `inc b` (it looks like a `jr z` that was meant, but the bytes are what they are).
 
-Full report with the per-bank table, the resolved indirect sites and the verdict on the 15 unreferenced regions: `disasm/code_gaps.md` and `disasm/coverage_jp_v3.csv` in the package.
+Full report with the per-bank table, the resolved indirect sites and the verdict on the 15 unreferenced regions: `disasm/code_gaps.md` and `disasm/coverage_jp_v3.csv` in the package. The runtime counterpart (what executes, what never does) is §13 and the package folder `coverage/`.
 
 ---
 
@@ -216,38 +222,38 @@ The table has **34 entries (`$00-$21`)**; entry `$22` would decode as bank `$F7`
 
 | Mode | Entry | What it is | St |
 |---|---|---|---|
-| `$00` | 7:`$71AF` | **Main menu**: upper page items 0-2, lower page items 3-6. A → mode `[07:7804 + item]` = `$01 $02 $07 $04 $06 $03 $05` for items 0..6 (`FF` refused); B → mode `$19` state 2; Start → mode `$08` | C |
-| `$01` | 4:`$6F96` | Three-page menu (states 0/2/4); its choices lead to modes `$15`, `$16`, `$09` and back to itself (`04:7084`); what the pages are called on screen is not established | C (flow) / I (role) |
-| `$02` | 7:`$51AC` | Two-choice screen over an animated background; next mode `$0A` or `$0B`, B → mode 0 | C |
-| `$03` | 7:`$53BE` | Main-menu item 5; role not identified | ? |
-| `$04`, `$05`, `$06` | 3:`$7AA8`, 3:`$7BFD`, 3:`$7695` | Main-menu items 3, 6, 4: cursor-choice screens of bank 3 (`$D5EF-$D5F2`, Up/Down or Left/Right, sound `$02` on a move); which screens they are is not identified | ? |
-| `$07` | 7:`$54ED` | Vertical shoot-'em-up whose first wave is the menu that starts modes `$1F`, `$20`, `$21` (name "Space Fever II" is an inference from the documentation) | C (behaviour) / I (name) |
-| `$08` | 9:`$4883` | Owner registration / statistics (on-screen keyboard `$DA33-$DA43`, statistics `$DA96-$DAAB`, comment editor `$DA91`) | C |
-| `$09` | 4:`$683F` | Album photo-option menu: photo-number slider (`$D67B-$D67E`); Left → pen (`$10`) / stamp (`$11`) tool, Right → far calls `8:4DF2` / `9:4281`, Up → mode `$1C` (print), Down → mode `$0F` (erase viewer) | C |
-| `$0A` | 4:`$7488` | Same menu with the photo fixed (`$D5ED`) | C |
-| `$0B` | 3:`$78E9` | Reached from mode `$02`; role not identified | ? |
-| `$0C` | 3:`$6310` | **Hotspot viewer**: tests the pointer against the five hotspots of a photo | C |
-| `$0D` | 7:`$6B03` | **Auto-play viewer**: hub with two wandering sprites, then a photo show (interval `$D7D4`, random or sequential, `$D5FC`) | C |
-| `$0E` | 7:`$4000` | **Link-cable exchange screen** (states 4/9/13/17 use the whole `$C000-$CFFF` as exchange buffer) | C |
-| `$0F` | 4:`$4649` | Album **copy and erase viewer** (delete-photo scatter effect `$DAAC-$DB4C`; the "erase ALL photos?" confirm of §8 is in this mode) | C |
-| `$10` | 4:`$604B` | **Pen tool** (8.8 fixed-point cursor with inertia, size / pattern / speed options) | C |
-| `$11` | 4:`$56F9` | **Stamp tool** (17 categories, category 3 only if the CoroCoro flag `$D582` = 1; A held 3 s runs a bitmap transposition, inferred rotation) | C |
-| `$12` | 3:`$4000` | **Slide-show (animation) editor**, 35 states (it is *not* owner registration, as the first-round map said) | C |
-| `$13` | 3:`$5FA0` | Slide-show player | C |
-| `$14` | 6:`$5DE6` | SHOOT live view / shot (variant `$D7E3`) | C |
-| `$15` | 6:`$4000` | Self-timer and interval parameter screens | C (flow) / I |
-| `$16` | 6:`$44D9` | Option screens (4-item menu, 3 sub-screens; writes a selection code 3..`$15` to `$D7E3`, then mode `$14`); meaning of the choices not established | C (flow) / ? |
-| `$17` | 6:`$4C9F` | Photo composition (4-photo / 2-photo layout, flag `$D600`) | C |
-| `$18` | 6:`$598E` | 4-photo list | C |
-| `$19` | 8:`$723E` | **Title / logo scenes** (boot mode, entered by the main-loop prologue; B from the main menu returns here) | C |
-| `$1A` | 3:`$69F5` | **Hotspot editor** (five hotspots, block `$D643-$D660`) | C |
-| `$1B` | 8:`$4000` | Print menu (state 2 = photo page) | C |
-| `$1C` | 8:`$40F8` | Print one photo (14 states, option screen = state 3) | C |
-| `$1D` | 0:`$3015` | **Print engine**, a mode that lives in the fixed bank; entered by constant writes in `06:5A9F`, `08:464D`, `08:469A`, `08:4776` | C |
-| `$1E` | 8:`$4887` | Print several photos (6 states, 60-bit selection bitmap `$D808`); not entered by a constant write | C |
-| `$1F` | 5:`$4000` | **Music ("sound") editor and player** (SOUND I, SOUND II, NOISE pages); entered by `07:56CB`; the documentation's name "DJ" is an inference | C (structure) / I (name) |
-| `$20` | 5:`$74CC` | Three-object action mini-game with a two-row menu (entered by `06:48C2`, `07:56E9`) | C (structure) / I (name) |
-| `$21` | 9:`$5FE3` | Mini-game with a character pick (`$D9F8`) and a score lock (entered by `07:5707`) | I |
+| `$00` | 7:`$71AF` | **Main menu**: upper page items 0-2, lower page items 3-6. A → mode `[07:7804 + item]` = `$01 $02 $07 $04 $06 $03 $05` for items 0..6 (`FF` refused); B → mode `$19` state 2; Start → mode `$08`. On screen: Japanese みる / とる / あそぶ, international VIEW / SHOOT / PLAY with the upper-left and upper-right items **mirrored** (§16.3); the lower page is the guide's *Studio Menu* (§16.2) | C |
+| `$01` | 4:`$6F96` | **SHOOT parlor**, an RPG-battle window (states 0/2/4): **SHOOT / ITEMS / MAGIC / CHECK / RUN** (Japanese とる / アイテム / まほう / チェック / にげる). Replayed in the core: SHOOT → `$15` → `$14`; ITEMS → states 6-7 of this mode, then `$15`; MAGIC → `$16`; CHECK → `$09` (the guide: "Check mode serves essentially the same function as Album"); RUN → states 9-A of this mode (`04:7084`; the guide: "a joke command") (§16.2) | C |
+| `$02` | 7:`$51AC` | **VIEW menu** over an animated background: **ALBUM / SHOW** (Japanese みる / どみーる, §16.2); next mode `$0A` or `$0B`, B → mode 0 | C |
+| `$03` | 7:`$53BE` | Main-menu item 5 = **とくしゅ ("special")**: two choices ピクトリップ (the hot-spot function) and ごうせい (compose), over a picture of a stone lantern and a doll captioned "Happy?" (screenshot `03:01`, §15.7); international **SPECIAL: HOT-SPOT / COMPOSE** (guide, Special p.44, §16.2) | C |
+| `$04`, `$05`, `$06` | 3:`$7AA8`, 3:`$7BFD`, 3:`$7695` | Main-menu items 3, 6, 4: cursor-choice screens of bank 3 (`$D5EF-$D5F2`, Up/Down or Left/Right, sound `$02` on a move). Matched to the lower page of the main menu by their screenshots (§15.7) and by the international screens (§16.2): `$04` = **らくがき** / **DOODLE** (caption スタンプ / [STAMP]), `$05` = **へんしゅう** / **EDIT** (choice アルバム / アニメーション = ALBUM / ANIMATION), `$06` = **つうしん** / **LINK** (Japanese screen headed ACCESS, with プリント / こうかん = PRINT / TRANSFER) | C |
+| `$07` | 7:`$54ED` | **Space Fever II** (its own logo on the screen, §16.2): vertical shoot-'em-up whose first wave is the menu **? / D.J. / BALL** that starts modes `$1F`, `$20`, `$21` (target-to-mode pairing by the names of the screens that open: I); the third target is shifted when the best score is below 2,000 (§16.4) | C (behaviour, name) / I (pairing) |
+| `$08` | 9:`$4883` | Owner registration / statistics (on-screen keyboard `$DA33-$DA43`, statistics `$DA96-$DAAB`, comment editor `$DA91`). On screen: **RECORD** (SHOTS / DELETED / TRANSFERS / RECEIVED ♂♀ / PRINTS), **HI-SCORE**, NAME & SEX, BIRTH DATE, credits (the guide's "User Screen") | C |
+| `$09` | 4:`$683F` | Album photo-option menu (single-photo viewer with film-strip border and photo number): photo-number slider (`$D67B-$D67E`); Left → pen (`$10`) / stamp (`$11`) tool, Right → far calls `8:4DF2` / `9:4281`, Up → mode `$1C` (print), Down → mode `$0F` (erase viewer) | C |
+| `$0A` | 4:`$7488` | Same menu with the photo fixed (`$D5ED`); the photo grid is captioned **view which photo?** with the VIEW icon (Japanese どの写真を見ますか?) | C |
+| `$0B` | 3:`$78E9` | **SHOW menu**, reached from mode `$02`: **SLIDE SHOW / ANIMATION / HOT-SPOT** (Japanese スライドショー / アニメーション / ピクトリップ; guide: Show) | C |
+| `$0C` | 3:`$6310` | **Hotspot viewer**: tests the pointer against the five hotspots of a photo (grid caption HOT-SPOT, then the photo) | C |
+| `$0D` | 7:`$6B03` | **Auto-play viewer**: hub with two wandering sprites, then a photo show (interval `$D7D4`, random or sequential, `$D5FC`); international **SLIDE SHOW #1 — A ROLL IT, B CUT**, option **SHUFFLE** ON/OFF (Japanese ランダム再生) | C |
+| `$0E` | 7:`$4000` | **Link-cable exchange screen** (states 4/9/13/17 use the whole `$C000-$CFFF` as exchange buffer). On screen: **SEND / RECEIVE** (Japanese あげる / もらう); after the exchange sent / received + GOOD (あげました / もらいました + よろしい) | C |
+| `$0F` | 4:`$4649` | Album **copy and erase viewer** (delete-photo scatter effect `$DAAC-$DB4C`; the "erase ALL photos?" confirm of §8 is in this mode); screens **delete which photo?** and **DELETE?? YES / NO** | C |
+| `$10` | 4:`$604B` | **Pen tool** (8.8 fixed-point cursor with inertia, size / pattern / speed options); title **PAINT** (Japanese ペイント) | C |
+| `$11` | 4:`$56F9` | **Stamp tool** (17 categories, category 3 only if the CoroCoro flag `$D582` = 1; A held 3 s, then every 100 frames, **mirrors (reverses) the stamp**, period 2; the earlier "rotation" guess was wrong, §15.4; the guide says "about two seconds", §16.4); title STAMP, confirm SAVE? YES / NO | C |
+| `$12` | 3:`$4000` | **Slide-show (animation) editor**, 35 states (it is *not* owner registration, as the first-round map said); tools bar **LOOP / SORT / PACK / TEST / CLEAR** (the SORT popup also offers Normal / Shuffle, which the guide does not mention) | C |
+| `$13` | 3:`$5FA0` | Slide-show (animation) player, title **ANIMATION** ("press A to begin", Up/Down chooses the music) | C |
+| `$14` | 6:`$5DE6` | SHOOT live view / shot (variant `$D7E3`); option cross **flip / palette / dither / shutter**, SAVE / CANCEL | C |
+| `$15` | 6:`$4000` | Self-timer and interval parameter screens (**Self-timer**, **Interval / Exposures**; guide: Items, Self-timer, Time-lapse) | C |
+| `$16` | 6:`$44D9` | **MAGIC menu** (Japanese header とーるくん, international SHUTTERBUG): **TRICK LENSES / MONTAGE / PANORAMA / GAME FACE** (4-item menu, 3 sub-screens; writes a selection code 3..`$15` to `$D7E3`, then mode `$14`); what each variant does to the picture is not traced | C (flow, names) / ? (effects) |
+| `$17` | 6:`$4C9F` | Photo composition (4-photo / 2-photo layout, flag `$D600`); screen **SPLIT / FUSION** (Japanese 4ぶんかつ / フュージョン; guide: Special, Compose) | C |
+| `$18` | 6:`$598E` | 4-photo list; screen **PANORAMA** print (A PRINT / B CANCEL) | C |
+| `$19` | 8:`$723E` | **Title / logo scenes** (boot mode, entered by the main-loop prologue; B from the main menu returns here): "© 1995 Creatures / © 1995 GAME FREAK"; in the Japanese ROM with the CoroCoro tag a second copyright screen follows, in the international ROM never (§16.5) | C |
+| `$1A` | 3:`$69F5` | **Hotspot editor** (five hotspots, block `$D643-$D660`); grid caption **select photo. HOT-SPOT** | C |
+| `$1B` | 8:`$4000` | Print menu (state 2 = photo page); **PRINT / OPTION** (Japanese プリント / オプション) | C |
+| `$1C` | 8:`$40F8` | Print one photo (14 states, option screen = state 3); grid caption **print which photo?** | C |
+| `$1D` | 0:`$3015` | **Print engine**, a mode that lives in the fixed bank; entered by constant writes in `06:5A9F`, `08:464D`, `08:469A`, `08:4776`; screen **transferring…** (Japanese データ転送中) | C |
+| `$1E` | 8:`$4887` | Print several photos (6 states, 60-bit selection bitmap `$D808`); not entered by a constant write; printer **OPTION: FEED MARGIN / TOTAL PRINT** (Japanese かんかく / ごうけい) | C |
+| `$1F` | 5:`$4000` | **Music ("sound") editor and player** (SOUND I, SOUND II, NOISE pages); entered by `07:56CB`; its name **D.J.** is the label of a first-wave target of mode `$07` (guide, Music: DJ) | C |
+| `$20` | 5:`$74CC` | **BALL** (Japanese 顔ボル; "FACE 12?"; guide, Arcade: Ball): three-object action mini-game with a two-row menu (entered by `06:48C2`, `07:56E9`) | C |
+| `$21` | 9:`$5FE3` | **RUN! RUN! RUN!** (§16.2): mini-game with a character pick (`$D9F8`) and a score lock (entered by `07:5707`) | C (name) / I (rest) |
 
 Bank 5 is therefore a **mode bank** (`$1F`, `$20`), not a "grid/cursor mechanism of three parallel cursors" as the first-round map read it.
 
@@ -449,7 +455,7 @@ Bank 5 is therefore a **mode bank** (`$1F`, `$20`), not a "grid/cursor mechanism
 | `$D5F1` | 1 | reg_cursor_c | u8 0..1 | 3 | 2-item cursor of another bank-3 mode-5 state; `03:7D17` maps it to the next mode (a value >= $22 = 'not available' sound `$0B`, state decremented) … | I |
 | `$D5F2` | 1 | reg_cursor_d | u8 | 3 | Cursor-like index of bank-3 mode 6 (03:7695) / mode $0B region; read 6 times, written 3 times (03:7734, 03:773B, 03:7873) … | ? |
 | `$D5F3` | 1 | copy_photo_idx_b | u8 | 8 | Copy of D5D8 at the init of the bank-8 print screen (08:4149, 08:45E0, 08:47ED); passed in `$FF9E` to `02:4E31` [used by: write 08:4215, reads … | C |
-| `$D5F5` | 1 | saved_dc52 | u8 | 7 | Copy of `$DC52` taken in bank-7 state 1; when non-zero sets bit 7 of `$DC55` (07:4141-414C) and selects the 'store as new photo' branch of states 9 … | I |
+| `$D5F5` | 1 | link_role_flag | u8: 0 = this unit sends, 1 = this unit receives | 7 | Two meanings in sequence (§14.3): before a link exists it is the **Left (0) / Right (1) choice** (`07:4272`), and on the initiator it becomes bit 7 of the info byte when A is pressed (`07:4141-414C`); once a link is up it is **overwritten with the protocol role `$DC52`** (`07:418A-418D`), so the responder's own choice never matters. It then selects the 'store as new photo' (1) or 'delete the sent photo' (0) branch of states 9 / 17 and the receive/send variants of states 4, 11, 13. Observed on two cores, all combinations. | C |
 | `$D5F6` | 1 | copy_photo_idx_c | u8 | 4 | Copy of D5D8 in Bank004_State05; passed in `$FF9E` to far calls `02:5110`, `02:4DD7`, `02:4E31` [used by: 04:4B4B (copy of D5D8), reads 04:4B4B-4BBF] | C |
 | `$D5F7` | 1 | copy_photo_idx_d | u8 | 4 | Copy of D5D8; stored into `D671` at 04:5D28 [used by: 04:57D6 (only if `D800 == 0`), read 04:5D28] | C |
 | `$D5F8` | 1 | copy_photo_idx_e | u8 | 3 | Copy of D5D8 in bank 3 (03:6A19) [used by: 03:6AD9 (write), reads 03:6AEA, 03:6F97] | C |
@@ -490,7 +496,7 @@ Only one *mode bank* is active at a time (`$D5CE` = mode, `$D5CF` = state, both 
 
 **Buffers that mirror SRAM (all three are loaded / saved by bank 2).** (1) Hotspot block `$D643-$D660` = 30 bytes of the photo slot footer (slot bytes `F36-F53`): `02:4D88` (raw read, `HL=$AF36+slot`), `02:4DD7` (read + conversion of the 5 jump targets with `$15ED`), `02:4832` (raw write) and `02:488F` (write, conversion back with `$1600`); stock pictures (number >= `$1E`) come from the ROM table `02:5218`. (2) Slide-show data `$D680-$D6E3` = SRAM `1000-1060` (list 47 + loop flag, timing 47, speed, border), not per photo: `02:4EAE` / `02:4EE8` (load; the second converts the 47 entries slot -> photo number with `$15ED`), `02:49A8` / `02:4A07` (save, `$1600`). (3) Border `$D7C1` = slot byte `F54`: `02:4E31` (load, photo >= `$1E` -> default `$12`), `02:48F7` (save). Nothing else in this range is persistent. **Arrays indexed by album slot:** none live here (the per-slot tables are in `$D563+`, see §2.5); the only slot numbers in this range are *values* (list entries `$D681[]`, hotspot jump targets `$D65C[]`, `$D671`, `$D7EE/$D7F7/$D7F9` photo numbers). The two 20-byte arrays `$D615/$D629` are indexed by *stamp category*, not by photo.
 
-**Bank 4, mode `$11` (04:56F9) = stamp tool.** State 2 (04:5733) initialises the cursor at (64,56) and loads the category graphics; the user moves a stamp cursor with the D-pad (04:5D92, about 1 px per frame), holding A for 3 s runs bit-transposition routines on the stamp bitmaps (04:5E4C-5FE1; a 90-degree rotation, inferred; timer `$D641`), releasing A stamps it into the picture with the software blitter 00:1EA4 (04:5FE2; sets the dirty flag `$D66D`), Start or pushing against the picture edge for 10 frames opens the palette (state 3, 04:596D) in which Left/Right change page (`$D63E`), the D-pad moves in the stamp grid (`$D63F`) and moving onto the category column (`$D614`) lets Up/Down change category (`$D63D`, 17 categories; category 3 only if the CoroCoro flag `$D582` = 1). The last page and stamp of each category are remembered in `$D629[cat]` / `$D615[cat]` for the next visit (no other bank writes them, so they survive mode changes but not a reset). B leaves (state 5) or, when `$D66D` is set, goes through the bank-7 save dialog (states 6-8, `$D66E-$D671`).
+**Bank 4, mode `$11` (04:56F9) = stamp tool.** State 2 (04:5733) initialises the cursor at (64,56) and loads the category graphics; the user moves a stamp cursor with the D-pad (04:5D92, about 1 px per frame), holding A for 3 s (180 frames), and then every 100 frames, runs a bit-reversal routine on the stamp bitmaps (04:5E4C-5FE1, timer `$D641`). **Confirmed in the emulator with joypad input only (§15.4):** the four work buffers change at each firing and are back to their original content after two firings, so the operation is an involution (a mirror-type flip), **not** the 90-degree rotation guessed earlier; a mirror of the stamp: you report that holding A reverses it, §15.4, releasing A stamps it into the picture with the software blitter 00:1EA4 (04:5FE2; sets the dirty flag `$D66D`), Start or pushing against the picture edge for 10 frames opens the palette (state 3, 04:596D) in which Left/Right change page (`$D63E`), the D-pad moves in the stamp grid (`$D63F`) and moving onto the category column (`$D614`) lets Up/Down change category (`$D63D`, 17 categories; category 3 only if the CoroCoro flag `$D582` = 1). The last page and stamp of each category are remembered in `$D629[cat]` / `$D615[cat]` for the next visit (no other bank writes them, so they survive mode changes but not a reset). B leaves (state 5) or, when `$D66D` is set, goes through the bank-7 save dialog (states 6-8, `$D66E-$D671`).
 
 **Bank 4, mode `$10` (04:604B) = pen tool.** Same skeleton (init 04:6089, drawing state 3 = 04:618D, option panel states 4-6, exit states 7-10) but a floating pen with inertia: 8.8 fixed-point position `$D602-$D605` and velocity `$D606-$D609`, updated by 04:6454 at a rate chosen by the speed option `$D60B`; A held draws the brush (blit data selected by size `$D60C` and pattern `$D60D`) at the cursor and sets `$D66D`. The option panel has three rows (size 4 choices, pattern 4, speed 3) navigated with `$D610` (row), `$D611` (focus), `$D612` (item), `$D613` (row shown).
 
@@ -973,7 +979,7 @@ Where the first-round WRAM map spoke of a "bank-007 frame/stamp picker" (`$DA00-
 | `$DA44-$DA48` | 5 | shoot_fx_vector[5] | 5 x u8 ($00 / $FF masks) | 6 | Block-copied by 06:6C54 (P row 06:6C61), then read byte-wise: DA44/DA45 at 06:7484/7488, 06:7591/7595, 06:76C2/76C6; DA46/DA47 at 06:74C7/74CB … | C (data flow); ? (visual effect) |
 | `$DA49-$DA4C` | 4 | owner_id | 4 bytes = 8 digit nibbles (digit+1) | 2,9 | Owner ID number (8 digits). Accessed only as a block (02:5054 load, 02:4BF4 save, 02:46F0) and by the draw/edit routines of bank 9 through HL. | C |
 | `$DA4D-$DA55` | 9 | owner_name | 9 chars (keyboard grid code + 1, 0 = blank) | 9 | Owner name, 9 characters, edited with cursor DA3B. Drawn by 09:49B9, 09:54BC/54D5, edited at 09:5BF3, 09:5CA1, 09:5F24 (all through HL). | C |
-| `$DA56` | 1 | owner_gender_blood | u8: bits 0-1 gender key (0..2), bits 2-4 blood-type key | 2,7,9 | Written by 09:5D44 (and $FC then or key) and 09:5EBA (key<<2 or gender) … | C (layout and flows); I (male/female) |
+| `$DA56` | 1 | owner_gender_blood | u8: bits 0-1 gender key (0..2), bits 2-4 blood-type key | 2,7,9 | Written by 09:5D44 (and $FC then or key) and 09:5EBA (key<<2 or gender) … | C (layout, flows and male/female: bit 0 = male, bit 1 = female, §16.7) |
 | `$DA57-$DA58` | 2 | owner_birth_year | 2 bytes = 4 digit nibbles (digit+1) | 9 | Birth year. | C |
 | `$DA59` | 1 | owner_birth_month | 2 digit nibbles (digit+1) | 9 | Birth month. | C |
 | `$DA5A` | 1 | owner_birth_day | 2 digit nibbles (digit+1) | 9 | Birth day. | C |
@@ -997,8 +1003,8 @@ Where the first-round WRAM map spoke of a "bank-007 frame/stamp picker" (`$DA00-
 | `$DA98-$DA99` | 2 | cnt_erased | u16 BCD LE (10BD-10BE) | 4,9 | Photos erased: 04:50E5 loads the block (02:503F), adds 1 in BCD with 00:0F9C (ld hl,$da98, B=2, 04:50F1-50F6) and saves it with 02:4BB2; read by … | C |
 | `$DA9A-$DA9B` | 2 | cnt_sent | u16 BCD LE (10BF-10C0) | 2,7,9 | Photos transferred: incremented by 07:4ADA (P 07:4AE6), called from 07:4603 (state 9) and 07:48A7 (state 17); read by 09:532F/5335, 02:4D31/4D37. | C |
 | `$DA9C-$DA9D` | 2 | cnt_printed | u16 BCD LE (10C1-10C2) | 0,2,9 | Photos printed: incremented by 00:354D (P 00:3559) when the last page of a job is done (00:33DC state 6 with DBC5); read by 09:534E/5354 … | C |
-| `$DA9E` | 1 | cnt_recv_a | u8 BCD (10C3) | 7,9 | Photos received from a camera whose owner byte has bit 0: 07:4A17 (P 07:4A21), called from 07:460C, 07:48B0; reads $CFFF bit 0, cap $99 … | C (flow); I (male/female) |
-| `$DA9F` | 1 | cnt_recv_b | u8 BCD (10C4) | 9 | Same for bit 1; read by 09:5345. | C (flow); I (male/female) |
+| `$DA9E` | 1 | cnt_recv_a | u8 BCD (10C3) | 7,9 | Photos received from a camera whose owner byte has bit 0: 07:4A17 (P 07:4A21), called from 07:460C, 07:48B0; reads $CFFF bit 0, cap $99 … (bit 0 = male sender, §16.7) | C |
+| `$DA9F` | 1 | cnt_recv_b | u8 BCD (10C4) | 9 | Same for bit 1 (= female sender, §16.7); read by 09:5345. | C |
 | `$DAA0-$DAA3` | 4 | best_shooter | u32 BCD LE, 8 digits (10C5-10C8) | 2,7,9 | Best score of the mode-$07 shooter (called "Space Fever II" in the manual; I) … | C (flow); I (game name) |
 | `$DAA4-$DAA5` | 2 | best_ball | u16 BCD LE (10C9-10CA) | 2,4,5,9 | Best score of mode $20 (05:74CC; the "Ball" game, I): 05:7E89 compares $D9E6/$D9E7 through HL (P 05:7E8C, 05:7E9F) and saves with 02:4BB2 … | C (flow); I (game name) |
 | `$DAA6-$DAA7` | 2 | best_run | u16 (10CB-10CC): DAA7 = first digit pair, DAA6 = second pair, stored as the nine's complement of the displayed digits | 2,9 | Best result of mode $21 (09:5FE3; the "Run! Run! Run!" game, I) … | C (flow and complement display); I (game name, time reading) |
@@ -1503,7 +1509,7 @@ README (`$D800-$D835` section and the `$D890-$D9F8` / `$D9D1-$D9F1` rows of the 
 * `$DA5B-$DA5E` (tag owner ID): no proven reader; and `$DA8E` (tag flag F33): its meaning is unknown.
 * `$DA07/$DA08`: mechanism fully decoded, but the visual effect on screen was not observed.
 * `$DA44-$DA48`: data flow decoded, visual meaning of the six effects not known.
-* Which of the two bits of `$DA56` is male and which female (README §3.3 says bit 0 = male, bit 1 = female, status B; no instruction states it), and what gender key 0 means.
+* ~~Which of the two bits of `$DA56` is male and which female~~ **Answered (§16.7):** BGB gives `$DA56 = 00` for "?", `01` for the first symbol (♂), `02` for the second (♀); key 0 = "?" (not set).
 * `$DA1A-$DA2E` writers and the `DA2E` reader are in hand-decoded code that the tracer does not reach (`7:7AF1-7B43`, `7:7BF4-7D30`).
 * Units of the link time-outs `$DA0B:DA0C` (frames assumed).
 * `$DAA6-$DAA7`: what the number measures (a time? lower is better; `$D028/$D029` is in the d000 region).
@@ -1619,7 +1625,7 @@ Written as a whole by the routines named in the last column, then re-checksummed
 | `10BD-10BE` | 2 | Counter: photos **erased** | | | |
 | `10BF-10C0` | 2 | Counter: photos **transferred** | | | |
 | `10C1-10C2` | 2 | Counter: photos **printed** | | | |
-| `10C3` / `10C4` | 1 + 1 | Counters: pictures **received**, by a *male-owner* camera / by a *female-owner* camera (BCD, cap 99) | | `bank7:$4A17` (+1 on `10C3` if bit 0, on `10C4` if bit 1 of the owner gender byte `$CFFF` = `$DA56`) | called right after `$462F` stores a picture (§3.3, `F12-F14`) |
+| `10C3` / `10C4` | 1 + 1 | Counters: pictures **received from a male-owner sender** / **from a female-owner sender** (BCD, cap 99). *Corrected by the two-core link run (§14.6): earlier text said "by a male-owner camera"* | | `bank7:$4A17` (+1 on `10C3` if bit 0, on `10C4` if bit 1 of `$CFFF`; `$CFFF` is the last byte of the 4,096-byte exchange buffer and holds the **sender's** `$DA56`, written by `07:4409` / `07:477D` before sending) | called by the link-exchange "transfer finished" states on the receiving unit, right before `$462F` stores the picture (§3.3, `F12-F14`, §14) |
 | `10C5-10C8` | **4** | **Space Fever II** score (8 BCD digits, low byte first) | | | **Boichot lists `10C5-10C6` only: it is 4 bytes** (the unlock test reads `10C6…10C8`) |
 | `10C9-10CA` | 2 | Ball-game score | | | |
 | `10CB-10CC` | 2 | Run!Run!Run! score (99 − value on screen) | | | |
@@ -1670,7 +1676,7 @@ Values seen in other saves: `AAAAAAAA` (all fresh and most used), `00390039` (tw
 | `F04-F0C` | 9 | Owner name (tile codes `$56`=A … ; `00` = blank) | C | idem |
 | `F0D` | 1 | Gender (0 none, 1 male, 2 female) + blood type (+4 A, +8 B, +$C O, +$10 AB; JP only) | B | idem |
 | `F0E-F11` | 4 | Birthdate (each digit pair + 11 per Boichot) | B | idem |
-| **`F12-F14`** | 3 | **Per-photo "reception" counters** (binary, cap 99): `F12` +1 if the **camera owner is male** (owner gender byte `$DA56`, bit 0), `F13` +1 if **female** (bit 1), `F14` +1 always | C + D | only writer: `bank2:$462F` = *store the picture held in the WRAM buffer as a new photo* (bank 7 states 9 and 17, branch `$D5F5` ≠ 0; the other branch of the same two states deletes photo `$D5D8` with `$452A`+`$44FB`). The same branch then bumps the camera-level counters `10C3/10C4` (`bank7:$4A17`). `$462F` also clears the hotspot fields `F36-F53` and rewrites `Magic` and both tag checksums. **Observed** in 4 slots (5-8) of `2021-05-19_6`, whose owner byte is `02` (female): `1A 1A 1A → 1A 1B 1B` (three slots) and `00 00 00 → 00 01 01` (one slot), i.e. exactly +0/+1/+1; zero in all other saves. Boichot: "3 unknown bytes". In those slots the primary tag was `1A`-filled and the echo all-zero (both with valid checksums: a hand-made primary-vs-echo test), and `$462F` bumped each copy separately. Which menu action reaches states 9/17 (probably the link-cable *receive* path): **?** |
+| **`F12-F14`** | 3 | **Per-photo "reception" counters** (binary, cap 99): `F12` +1 if the **owner of the *receiving* camera is male** (its own owner gender byte `$DA56`, bit 0), `F13` +1 if **female** (bit 1), `F14` +1 always (= number of cable transfers the photo has been through; the counters travel with the tag and keep accumulating, §14.6) | C + D | only writer: `bank2:$462F` = *store the picture held in the WRAM buffer as a new photo* (bank 7 states 9 and 17, branch `$D5F5` ≠ 0; the other branch of the same two states deletes photo `$D5D8` with `$452A`+`$44FB`). The same branch then bumps the camera-level counters `10C3/10C4` (`bank7:$4A17`). `$462F` also clears the hotspot fields `F36-F53` and rewrites `Magic` and both tag checksums. **Observed** in 4 slots (5-8) of `2021-05-19_6`, whose owner byte is `02` (female): `1A 1A 1A → 1A 1B 1B` (three slots) and `00 00 00 → 00 01 01` (one slot), i.e. exactly +0/+1/+1; zero in all other saves. Boichot: "3 unknown bytes". In those slots the primary tag was `1A`-filled and the echo all-zero (both with valid checksums: a hand-made primary-vs-echo test), and `$462F` bumped each copy separately. **Settled by the two-core link run (§14):** states 9/17 are the "transfer finished" states of the link-cable exchange screen (mode `$0E`, reached from the main menu with Down, Right, A from the default cursor); the F12/F13 test uses the *receiving* camera's own `$DA56` (a female receiver bumps `F13`: consistent with the four real slots above, owner byte `02`). Every photo received by cable carries `F14 ≥ 1`. |
 | `F15-F2F` | 27 | **Comments** (same tile charset as the name) | B | WRAM tag-head buffer `$DA5B…$DA90` ↔ `F00-F35`; `$494B` writes it to both tag copies, `$4E5F` reads it |
 | `F30-F32` | 3 | `00` | B | cleared when a photo is created; non-zero (`1A 1A 1A`) only in the three `1A`-filled slots of `2021-05-19_6` |
 | **`F33`** | 1 | **Copy flag**: `01` = created by the album *Copy* function | C | `$45A1` sets it in both tag copies and draws the thumbnail badge; seen `01` in 6 slots of one save |
@@ -1799,7 +1805,7 @@ the CoroCoro repair (§3.2), so their origin is not established.
 **Still inconclusive (flagged, not guessed):**
 
 1. Which NOISE-editor control feeds RAM `$D9AD` (→ `10A1` bits 6-4, probably the envelope time that the NOISE editor does not expose; value 5 seen once), and what the per-step LFSR-width flag of `10B7-10B8` is called on screen (its hardware effect, NR43 bit 3, is settled).
-2. Which menu action reaches bank 7 states 9 / 17 (the only callers of `$462F`, hence of the `F12-F14` and `10C3/10C4` counters). The rule (+male / +female / +total) is code-traced and matches the 4 observed slots; the *name* of the action (link-cable receive?) is inferred.
+2. ~~Which menu action reaches bank 7 states 9 / 17~~ **Answered (§14):** the link-cable photo exchange (mode `$0E`); the rule (+male / +female / +total counters) is run on two emulated cameras and matches the 4 real slots. Still open: the on-screen name of the menu entry (§14.9).
 3. What wrote the shifted record and the 6 stray bytes per slot in the camera `CE10550742` (an injection with another layout, the factory line, or a PC-side tool of 2005; hypotheses only; the owner's cameras went through injections, swaps and battery changes) and the origin of the `00 39` and `80 44 2A 40` patterns. Patterns made of `00`/`55`/`FF` also appear in the factory-fresh exchange buffers (§11.9), in `AA 55 FF FF 00…` rows of `2023-06-01` and in the `00 FF` record of `CE10251329`: they look like memory-test patterns, which would fit a test jig, but this is not demonstrated.
 4. `F34-F35`: 52 of the 369 used slots have a non-zero value that differs from the photo (25 of them in one save). In-camera editing (`$47C4` does not refresh the value) would explain it, but this is not demonstrated for those saves. The only code that *computes* the value is `$4005` (one caller, `$46FA`); no code that *compares* it was found. `bank0:$16F4` (called right after every `$46F0` in bank 6, and at bank 7 `$717B`) splits the two bytes into 4 nibbles `$DD03-$DD06` for the text routine `$2A7C` (A=`$10`) — probably a displayed photo code; not confirmed on screen.
 5. Who writes `1B 13` in a camera: the retail ROMs never do; the Hello Kitty ROM stamps it at the end of its SRAM-initialisation routine (bank 1 `$49A4`), so the factory/cartridge-preparation program is probably of that kind. Why the factory test needs *two* tolerances of 27 and 19 for the `AFFC`/`AFFD` pair is unexplained.
@@ -1822,7 +1828,7 @@ Confirmed against your PDFs and rendered directly from the JP ROM:
 - **Album B (30 pictures)**: `$0DA000` + i×`$1000`, matches TCRF's B01–B30 list exactly (rendered — see `assets/albumB_jp.png`). Per-picture metadata footer confirmed at offset `$F00-$FFF` of each slot (magic bytes, user-ID echo, border index, hot-spot flags, checksum) matching the Inject-pictures documentation's field layout.
 - **Wild frames (8)**: `$0C4000` + i×`$1800` (rendered — `assets/wildframes_jp.png`); only wild-frame index 4 (the 5th) is byte-identical between JP and international, matching TCRF's note that frames 07/08 are CoroCoro-exclusive and everything else is region-swapped art.
 - **Hidden factory-test font**: bank `$24` offset `$57E0`, 0x300 bytes = 48 tiles, a plain `0-9 A-Z + - *` charset used only by the hidden diagnostic screen (§8) — **not documented anywhere we've seen**, genuinely new.
-- Main Menu / Photo Option / Magic Bank / Album Bank / Run!Run!Run! / DJ / Printer graphics banks named in the TCRF "unused graphics" page: identified candidate source blocks in the catalog by cross-referencing caller bank against our menu-bank map (Bank 3≈registration/owner-name, 4≈View/Album, 6≈Shoot, 8≈Print — established last session) but **not yet individually matched tile-for-tile against each TCRF screenshot**. This is mechanical, straightforward follow-up work — say the word and I'll produce a labeled contact sheet per TCRF section.
+- Main Menu / Photo Option / Magic Bank / Album Bank / Run!Run!Run! / DJ / Printer graphics banks named in the TCRF "unused graphics" page: identified candidate source blocks in the catalog by cross-referencing caller bank against our menu-bank map (Bank 3≈registration/owner-name, 4≈View/Album, 6≈Shoot, 8≈Print — established last session) and since then **matched against each TCRF item** (§15, `tcrf_check/TCRF_CHECKLIST.md`): of the 11 unused-graphics items, 7 are located at least in part (3 of them only partly) and 4 are not located (listed in §15.3). Correction to the lines above: the wild-frame sheet is 20 tiles wide (not 16) and the CoroCoro stamps are at `2B:4000` (not bank `2A`).
 
 ---
 
@@ -2505,8 +2511,7 @@ the CoroCoro repair routine, the per-block self-repair rules, and the status of 
 
 **SRAM — still open** (details in §3.8, flagged there as inconclusive):
 1. The 2005 layout is **not** a ROM revision (§3.8, §11.9): the camera `CE10550742` holds the standard USA/EU ROM and the retail code ignores its shifted record. Its origin cannot be recovered: the owner's cameras went through many injections of synthetic saves, battery replacements and save swaps, and no record says what was done to which unit. Treat every provenance statement about these cartridges (`1B 13` present or absent, identical vectors, repeated owner IDs, the `CE10866859` case) as a hypothesis; only the ROM-behaviour findings are firm.
-2. Which menu action reaches bank 7 states 9/17, the only callers of `bank2:$462F` (hence of the `F12-F14` and `10C3/10C4` counters)? The rule is code-traced and
-   matches the 4 observed slots; the screen/action (link-cable receive?) is inferred.
+2. ~~Which menu action reaches bank 7 states 9/17~~ (the only callers of `bank2:$462F`, hence of the `F12-F14` and `10C3/10C4` counters)? **Answered in §14:** the link-cable photo exchange, run on two emulated cameras. (The single-unit run of §13.3 could not enter these states; the two-core run does, byte by byte, with the SRAM effects documented.)
 3. NOISE editor: which control feeds `$D9AD` (`10A1` bits 6-4, value 5 seen once) and what the per-step LFSR-width flag of `10B7-10B8` is called on screen.
 4. Origin of the `00 39` pattern (Vinted slots 19-20, `01FFC` of two saves) and of `80 44 2A 40`.
 5. `F34-F35`: 52 non-zero mismatches among 369 used slots (25 in one save) — in-camera editing is plausible but unproven; no code that *compares* the value was found;
@@ -2514,17 +2519,17 @@ the CoroCoro repair routine, the per-block self-repair rules, and the status of 
 6. Who writes `1B 13` in a real camera (the Hello Kitty ROM does, at the end of its SRAM-initialisation routine; the retail camera ROMs never do)? Is the Hello Kitty routine the cartridge-preparation tool, or only a game-side "initialise" menu?
 
 **WRAM / HRAM — still open** (the complete lists are in §2.13; these are the ones where your knowledge of the real console helps most):
-- W1. Which screens are the main-menu items 3, 4, 5, 6 (modes `$04`, `$06`, `$03`, `$05`) and mode `$0B`? They are cursor-choice screens of banks 3 / 7 whose on-screen identity I cannot read from the code.
-- W2. Modes `$07`, `$1F`, `$20`, `$21` are, by behaviour, a vertical shoot-'em-up, the music editor and two mini-games; which documented game (Space Fever II, Ball, Run! Run! Run!, DJ) each one is, is an inference.
-- W3. What the SHOOT variants and options look like (`$D7E3` values 3-`$15`, the option cross `$D7E9-$D7EC`, the option screens `$D5E3-$D5EB`): dispatch and data flow are traced, the visible effect is not.
-- W4. Which bit of `$DA56` is male and which female; the message texts behind `$DBCF`; the visible effect of the five-byte vectors `$DA44-$DA48`.
+- ~~W1. Which screens are the main-menu items 3, 4, 5, 6 (modes `$04`, `$06`, `$03`, `$05`) and mode `$0B`?~~ **Answered (§16.2):** DOODLE, LINK, SPECIAL, EDIT; mode `$0B` is the SHOW menu.
+- ~~W2. Which documented game each of the modes `$07`, `$1F`, `$20`, `$21` is.~~ **Answered (§16.2):** Space Fever II, D.J., BALL, RUN! RUN! RUN! (the screens carry the names).
+- W3. What the SHOOT variants and options look like (`$D7E3` values 3-`$15`, the option cross `$D7E9-$D7EC`, the option screens `$D5E3-$D5EB`): dispatch and data flow are traced and the **names** are now known (§16.2: MAGIC = TRICK LENSES / MONTAGE / PANORAMA / GAME FACE; option cross flip / palette / dither / shutter); the visible effect of each variant is not traced.
+- W4. ~~Which bit of `$DA56` is male and which female~~ (answered, §16.7: bit 0 male, bit 1 female); the message texts behind `$DBCF`; the visible effect of the five-byte vectors `$DA44-$DA48`.
 - W5. Why STAT handler 1 flips the tile-data bit at line 84 on nearly every screen (which picture is split there).
 - W6. Meaning of the sound ids; the `$55` hello byte `$DC5D` that nothing sends; whether the printer checksum-retry path that advances `$DC1F:20` by `$0280` is a ROM bug.
 
 **Disassembly — still open** (§1.2):
-- D1. Structure of the 14 data banks that no code references (`2B 2D 2E 30-35 37 3A-3D`) and of the other data banks: needs an emulator ROM-read log (which table selects which bank).
-- D2. Policy for the 45 dead-code roots (assemble as code tagged `unreferenced`, or leave as `db`).
-- D3. A scripted emulator coverage run over every mode, to catch tracer gaps and confirm the dead roots never execute.
+- D1. *Partly resolved (§13.5, §13.6):* the ROM-read log gives, for the 14 banks that no code references (`2B 2D 2E 30-35 37 3A-3D`) and for all other data banks, the reading mode, the calling routine and the byte ranges read. Open: the type and extent of each asset, i.e. the index / pointer tables inside the reader routines (`04:58DE`, `04:5A9D`, `08:5400`, `08:5055`, `02:4CFF`, `06:5CFF`), and 56,947 non-padding bytes that no run read (§13.7).
+- D2. Policy for the 45 dead-code roots (assemble as code tagged `unreferenced`, or leave as `db`). *Evidence in (§13.3): none executed from joypad input; recommendation §13.6; the decision is yours.*
+- D3. *Done (§13):* scripted coverage run over every mode. 0 tracer gaps; the dead roots never ran organically. Remaining limits: the BGB comparison was done afterwards for the joypad paths and the checks of §16.6 (not for the printer or the BGB debugger); link partner done in §14 and §16.6; no SGB; printer faults not modelled (§13.7).
 - D4. A character table for the strings (only the ASCII `MAIN PASS` is typed).
 
 **Calibration — still open:**
@@ -2539,8 +2544,540 @@ the CoroCoro repair routine, the per-block self-repair rules, and the status of 
 13. *(resolved in §2.3 / §2.13)* Bank `$005` is a mode bank: the three cursors are the field cursors of the three channel pages of the music editor (mode `$1F`); mode `$20` is a mini-game. Only the mapping of `$20` to a documented game remains open (W2).
 14. *(resolved in §2.9)* `$DD00-$DD7F` is the state of the sound driver of bank `$1F`; what is still open is the meaning of the individual sound ids (W6).
 15. *(done in §2)* The WRAM/HRAM map covers all 1,153 accessed addresses. The next mapping targets are the open points W1-W6 and D1-D4 above; which first?
+16. *(new, §15)* TCRF items not located in the Japanese ROM: the kanji 中 and 持, the two unused main-menu tiles, the unused icon and tile of the photo-option bank, the D.J. め tile, the printer wave pattern, the "Unused Graphic Bank 11" newspaper hand, the "SPORADIC VACUUM" lettering (my core garbles the View-screen band).
+17. *(resolved, §15.4)* The hold-A stamp branch (`04:5E4C`) mirrors the stamp (user observation: "holding A in stamp mode reverses the stamp"); the code shows a period-2 bit reversal.
+18. *(new, §15.5)* Whether TCRF's "S icon = wave" exists in the code: all eight extra icons dispatch to `03:6983`, which does not test the effect number (the eight original handlers were run and confirmed).
+19. *(resolved, §16.4)* The Run!Run!Run! record is a time: the guide's Record screen shows "RUN! RUN! RUN! 15:99" and its credits and Album B conditions are in seconds. Stored as the nine's complement of the displayed digits; the credits gate is stored `>= $7799`, displayed 22:00 or lower; the fresh-save display 99:99 is stored `0000`.
+20. Naming questions to the owner of the cameras: the **names of the 16 hot-spot effect icons** (the effect menu of the real camera; the behaviour of effects 0-7 is in §16.8), the names of the 20 Pokémon stamps (my visual identification is in §16.9; stamp 5 is undecided), the literal reading of "どみーる" (it is the SHOW choice, §16.2), whether a real **international camera** shows wild frames 07-08 and stamp category 3 without any tag (§16.5). Answered: the link-exchange screen is SEND / RECEIVE (Japanese あげる / もらう) under LINK > TRANSFER.
 
 ---
+
+## 13. Emulator coverage run: what executes, what never does, and what reads the data banks
+
+This section closes the points that §1.2 listed as "needs the emulator": a scripted tour of every mode (D3), a ROM-read log for the 14 unreferenced data banks (D1), a check of the tracer for gaps, and a runtime verdict on the 45 dead-code roots (D2).
+Evidence tags as elsewhere: **F** = fact observed in a run or read from a ROM byte; **I** = inference; anything inconclusive is listed in §13.7 and not smoothed over.
+
+**Update (v8, §15.1): with the unlocking and link runs 57,582 instructions (95.3 %) executed, 50,008 (82.7 %) organically, 2,867 never; the paragraph below describes the earlier v7 run.**
+
+**Result in one paragraph.** Of the 60,449 traced instructions, **55,935 (92.5 %) were executed**; **47,862 (79.2 %) were reached by joypad input and an SRAM image alone** (no RAM was written from outside); the other 8,073 only after a run forced a RAM variable or a mode.
+**No instruction was ever executed outside the static trace** (0 tracer gaps, 0 mis-aligned entries), so the trace is complete for everything the camera did in this run. **None of the 45 dead-code roots ran organically** (one, `00:0751`, 3 instructions, ran in a forced run; §13.3).
+The 4,514 instructions (8,773 bytes, 7.5 % of the code) that never ran are explained in §13.4: almost all of them sit behind a named hardware condition (link cable, Super Game Boy, printer states the stand-in printer never produces) or behind a dispatch-table slot no input reached.
+All 64 ROM banks were selected at least once, and all 14 banks that no code references statically are read (§13.5).
+
+### 13.1 The emulator: a purpose-built core, and what it does not model
+
+Neither PyBoy nor BGB was used for the bulk of the work: BGB runs on your PC, not here, and a search over hundreds of millions of frames with cheap snapshot-and-branch needs a core that does the bookkeeping itself (about 8,000 frames per second per worker, roughly 135 times real time).
+So the run uses a small native SM83 core written for this purpose (`coverage/src/gbcov.c`, 462 lines of C, driven from Python through `ctypes`). It records, per ROM byte, **executed as opcode / executed as operand / read as data** (and by which call site and mode), every write to the bank-select registers, and every call site; it can snapshot and restore the complete machine state, which makes the search deterministic and resumable.
+What it implements: the SM83 instruction set, interrupts, `halt`, the timers, LCD timing (LY / STAT / VBlank / LYC, without any rendering), the joypad, the serial port with a simple printer on the far end, and the Pocket Camera mapper (ROM bank, RAM bank, camera-register bank, the capture-start bit and a capture-complete countdown). A **synthetic sensor image** lets "shoot" and the exposure loop run; the **minimal Game Boy Printer** answers the handshake, accepts the data and reports a clean status, so the print modes run.
+What it does **not** model: any picture output, sound, a link-cable partner, Super Game Boy commands, and cycle-exact behaviour. It was **not** compared cycle by cycle with BGB or with hardware (**limit**, §13.7).
+
+Validation that the core behaves like the console where it matters for this analysis: (1) booting each of the 14 real saves and the two synthetic battery-loss saves (all `00`, all `FF`) for 240 frames leaves in WRAM `$D5B5-$D5C0` exactly the 12-byte calibration vector that the rule of §6 predicts from the SRAM image (primary record / echo / default vector): **16 of 16 cases agree** (`tools/validate_calib.py`); (2) the real saves boot to the main menu (`$D5CE = $00`); (3) **0 executed opcodes fall outside the static trace**, which a faulty core would almost certainly produce (wild jumps) and which the guard described below also checks.
+
+### 13.2 Method: organic versus forced, and how branches were flipped
+
+**Organic coverage** is the strict one: the run started from a real save (or one of the synthetic ones) and only joypad presses were applied afterwards. SRAM images used: the 14 real cameras (`saves/`), the all-`00` and all-`FF` images (battery loss, by your rule), damaged copies of the real saves (flipped bytes inside the protected blocks, the calibration record, the tag block and its echo; 3,400 variants) and nine saves whose photo slots carry the "hotspot" bytes `F36-F53` (a viewer mode, `$0C`, that only shows when they are present).
+**Forced coverage** is any run in which a RAM variable was written from outside, or the mode byte `$D5CE` was set directly. Forced coverage proves that the code is **decodable and executes without a crash from that state**, not that the state can be reached with the buttons. It is reported separately everywhere.
+
+Instead of recording what the screen shows, the search follows **the conditions that keep the program in a state** (your suggestion): the core logs, for every compare and bit test, which RAM byte was read and what it was compared with; the fuzzer then pokes that byte with the value that flips the branch and continues (a "compare-log" search, as in fuzzers). Before each forced run the snapshot is checked by a **wild guard**: a run that starts executing at an address that is not an instruction start of the trace is discarded, so the forced set cannot contain an opcode outside the trace by construction.
+One contamination was found and removed: early sweeps also poked the stack (`$DE00-$DFFF`), which corrupts return addresses and produced spurious "coverage" of unrelated code (for example the dead root `00:069F`). The stack and the HRAM DMA stub are now excluded from pokes, the affected sweeps were repeated, and the contaminated outputs were left out of the final merge. Forced-only code is further classified by `forced_legit.py`: **credible** if static control flow reaches it from organic code or it is entered at a table / root entry, **suspect** otherwise (§13.3).
+
+Passes (each row is the coverage of that pass alone, including the replay of the corpus it started from; "organic" is not available for the first pass, which predates the split):
+
+| pass | what it did | instr. executed | of which organic |
+|---|---|---:|---:|
+| 1 | random key sequences from the main menu, two workers, 18.5 M frames | 41,797 | - |
+| 2 | + compare-log pokes, input pool, read-set mutation (two workers, 45 M frames; the row is worker a) | 49,192 | 42,884 |
+| 3 | longer run of the same fuzzer (worker a: 52.8 M frames, 13,293 corpus entries) | 51,023 | 43,019 |
+| 4 | final fuzz generation, stack excluded (worker a: 64.9 M frames, 18,785 entries) | 52,718 | 43,563 |
+| 5 | **settle runs**: replay of the corpus with long idle / tap waits (some states only change after thousands of frames) | 52,665 | 44,054 |
+| 6 | **sweeps**: in 488 selected states, up to 500 of the variables the state reads, each set to up to 13 chosen values | 53,298 | 43,201 |
+| 6b | **SHOOT-variable sweep** (forced, mode `$14`: `$D7EB` = 0-2, `$D7E3` = 0-32, `$D7E4` = 0-3), stand-alone | 11,502 | 0 |
+| 7 | **long boot runs**: 192 power-on runs of up to 9,000 frames with held-key combinations (the hidden factory test needs about 3,900 frames, then spins on its OK / NG tile) | 3,998 | 3,998 |
+| 8 | **damaged saves**: boots with 3,400 corrupted SRAM images (repair paths of §3) | 39,533 | 39,533 |
+| 9 | **hotspot saves** (19,902 iterations, 9.8 M frames) | 48,155 | 17,362 |
+| | **merged** (union of all passes) | **55,935** | **47,862** |
+
+Totals over the passes that count iterations and frames (1-4, 8, 9): 435,746 iterations and 197,716,188 frames (about 38 days of console time at 59.7 frames per second), 35,705 s of CPU time; the settle, sweep, long-run and replay passes are not included in that count. Pass folders (coverage, logs, stats) are in `coverage/results/passes/`, the replayable corpora in `coverage/results/corpus/`.
+
+### 13.3 Results
+
+**Per bank** (instructions of the static trace; "forced-state only" = executed only after a poke or forced mode; "never" = in no run):
+
+| bank | traced instr. | executed | % | organic | forced-state only | never |
+|---|---:|---:|---:|---:|---:|---:|
+| 00 | 6800 | 6016 | 88.5 | 5324 (78.3%) | 692 | 784 |
+| 02 | 2467 | 2352 | 95.3 | 2037 (82.6%) | 315 | 115 |
+| 03 | 7324 | 6760 | 92.3 | 6551 (89.4%) | 209 | 564 |
+| 04 | 6615 | 6063 | 91.7 | 5938 (89.8%) | 125 | 552 |
+| 05 | 7233 | 6498 | 89.8 | 3628 (50.2%) | 2870 | 735 |
+| 06 | 6466 | 6355 | 98.3 | 6297 (97.4%) | 58 | 111 |
+| 07 | 6509 | 6032 | 92.7 | 4716 (72.5%) | 1316 | 477 |
+| 08 | 2758 | 2656 | 96.3 | 2639 (95.7%) | 17 | 102 |
+| 09 | 5367 | 4756 | 88.6 | 4592 (85.6%) | 164 | 611 |
+| 0A | 6778 | 6493 | 95.8 | 4363 (64.4%) | 2130 | 285 |
+| 1F | 2132 | 1954 | 91.7 | 1777 (83.3%) | 177 | 178 |
+| **all** | 60449 | 55935 | 92.5 | 47862 (79.2%) | 8073 | 4514 |
+
+- **Tracer gaps: none.** 0 executed opcodes outside the 60,449 traced instruction starts, 0 that fall inside a traced instruction (F). The only code executed outside the ROM is the OAM-DMA stub copied to HRAM `$FF80-$FF89` (the 10 bytes at `00:03F0`, which are data in ROM; they never "execute" at their ROM address, which is why that live root shows as not executed).
+- **Roots** (the 134 hand-resolved roots of `tools/extra_roots.json`): 89 live roots, **73 executed (32 organically)**, 16 not executed: the OAM-DMA stub image above, and 15 entries of the bank `$0A` effect table `$541A`. Eleven of them (indices 57, 59-61, 63, 89, 91-95) point into runs of bare `ret` bytes (`0A:61AB-61B1`, `0A:685F-6865`): no-op slots, i.e. effect numbers with nothing behind them (F: the bytes are `C9`). Four (indices 45, 51, 53, 83 at `0A:5E40`, `6037`, `60B1`, `6704`) are real effect code that no index sequence selected. **45 dead-code roots: 0 executed organically.** One of them, `00:0751` (3 instructions), executed in a forced run; it is one of the 6 suspect runs below, i.e. entered by an edge that is not in the static control flow, so I treat it as a poke artefact, **not** as evidence of use (I).
+- **Forced-only code: 8,073 instructions; 8,021 are credible, 52 suspect.** Credible = reachable along static control flow from organic code, or entered at a dispatch-table / root entry; suspect = entered by an edge that is not in the static control flow (a poke made the program land in the middle of a routine, or return to a corrupted address). The six suspect runs (instruction start, last instruction, count, contains a dead root):
+
+| first | last | instr. | dead root |
+|---|---|---:|---|
+| 00:06CA | 00:06F4 | 38 |  |
+| 00:0751 | 00:0755 | 3 | yes |
+| 00:0771 | 00:0772 | 2 |  |
+| 09:6BDB | 09:6BE0 | 3 |  |
+| 0A:5900 | 0A:590B | 5 |  |
+| 0A:5AB7 | 0A:5AB7 | 1 |  |
+
+- **Bank selection.** Every ROM bank `$00-$3F` was selected at least once (1,621 distinct (writer address, new bank) pairs, 296 of them in organic runs); the selecting code is a handful of helpers: `00:0333` (the bulk graphics copy, which accounts for most of the traffic), `00:2F2D`, `00:0AD7`, `00:020D`, `02:4CFF`, `06:5CFF`, `08:5400`, `04:58DE`, `04:5A9D` and a few per-mode readers. The per-bank table with the first reading mode and the main call sites is `coverage/results/report_v6/data_bank_map.md`.
+- **State machines.** The 34 mode tables hold 374 state slots; **364 were entered, 10 never**: bank 04 state 10 (130 instructions, `04:4D1B`), bank 06 states 18 and 19, bank 07 states 9, 15, 17, bank 09 states 9, 11, 12, 13 (state 11 is the 525-instruction component at `09:6441`). Bank 07 states 9 and 17 are the only callers of `bank2:$462F` (§12 SRAM item 2); **they were not reached in any run, forced or not, so that question stays open** (I: the entry is probably the link-cable receive path).
+- **Byte classes of the whole ROM** (`rom_map_summary.md`): organically executed code 93,480 B; code executed only in forced runs 15,374 B; code never executed 8,773 B; inline jump tables 1,256 B; bytes read as data 813,687 B (642,342 B in organic runs); **bytes neither executed nor read: 116,006 B (11.1 % of the ROM)**, of which 59,059 B are runs of 16 or more `00`/`FF` bytes (padding, F) and **56,947 B are content that no run touched** (mostly in data banks `3B` 9,587 B, `0B` 5,564 B, `33` 5,476 B, `3C` 5,116 B, `2B` 4,457 B, `17`, `2A`, `10`, `19`; see §13.7).
+
+### 13.4 Code that never ran, and why
+
+Every never-executed instruction was grouped into connected components and classified by what keeps it out (`gating_branches.py`; `unexec_components.csv` has all 305 components):
+
+| class | components | instructions | bytes | of which forced-executed |
+|---|---:|---:|---:|---:|
+| GATED | 196 | 1620 | 3235 | 0 |
+| TABLE | 62 | 2340 | 4547 | 0 |
+| DEAD | 43 | 527 | 942 | 0 |
+| RAMCODE | 1 | 6 | 10 | 0 |
+| ORPHAN | 3 | 21 | 39 | 0 |
+
+(Total 4,514 instructions, 8,773 bytes.) **GATED**: entered only through a conditional branch or `ret` whose condition never came true; **TABLE**: entered only from a dispatch-table slot (state table, effect table, `jp hl` table) that was never selected; **DEAD**: reachable only from a dead-code root; **RAMCODE**: the OAM-DMA stub image; **ORPHAN**: no entry found.
+The 22 largest components hold 2,858 of the 4,514 instructions (the 40 largest hold 3,373):
+
+| first address | class | instrs | entered by (executed gating branch / dispatch-table entry) |
+|---|---|---:|---|
+| 09:6441 | TABLE | 525 | 09:5FE7[11];09:5FE7[12] |
+| 05:5EC0 | TABLE | 262 | 05:5A67[23];05:5A67[24];05:5A67[25];05:5A67[26] |
+| 04:5E4C | GATED | 255 | 04:5E4B(ft) |
+| 03:657F | TABLE | 252 | 03:655D[1];03:655D[6];03:655D[7] |
+| 00:2B3A | GATED | 219 | 00:2AF1;00:2AF8 |
+| 07:45FD | TABLE | 179 | 07:4004[17];07:4004[9] |
+| 04:4D1B | TABLE | 143 | 04:464D[10] |
+| 00:1D45 | GATED | 130 | 00:1DA0(ft) |
+| 02:462F | TABLE | 107 | call:1;far:1;flow:7 |
+| 08:46A3 | GATED | 87 | 08:45F5 |
+| 05:6670 | TABLE | 73 | 05:475F[7] |
+| 05:6A82 | TABLE | 71 | 05:4806[1] |
+| 0A:5853 | TABLE | 70 | 0A:541A[13] effect table |
+| 00:0781 | DEAD | 69 | flow:8;root:1 |
+| 03:65B3 | TABLE | 67 | 03:655D[2] |
+| 05:7149 | TABLE | 60 | 05:48C4[2] |
+| 03:6983 | TABLE | 56 | 03:655D[10];03:655D[11];03:655D[12];03:655D[13] |
+| 03:6901 | TABLE | 52 | 03:655D[8] |
+| 05:71C3 | TABLE | 51 | 05:48C4[3] |
+| 04:7C9D | DEAD | 49 | call:1;flow:7;root:1 |
+| 00:1A7B | GATED | 42 | 00:1A79(ft) |
+| 0A:5E40 | TABLE | 39 | 0A:541A[45] effect table |
+
+The gates that keep the most code out, with the variable they test (names from the WRAM map of §2; "(no memory read just before)" = the flag is in a register, I could not name it):
+
+| branch | instruction | gated target | instrs behind | variable it tests |
+|---|---|---|---:|---|
+| 04:5E4B | `ret nz` | 04:5E4C | 255 | (no memory read just before) |
+| 00:2AF1 | `jp nz,$2bc6` | 00:2BC6 | 160 | $DC44 lnk_connected |
+| 00:1DA0 | `ret z` | 00:1DA1 | 130 | $FFC3 sgb_present |
+| 08:45F5 | `jp nz,$46a3` | 08:46A3 | 87 | $D806 `print_extra_flag` (bit 0) |
+| 00:2AF8 | `jr nz,$2b3a` | 00:2B3A | 86 | $DC51 lnk_stage |
+| 00:1A79 | `jr z,$1adc` | 00:1A7B | 42 | $DC27 prn_status |
+| 07:6744 | `jr nc,$6759` | 07:6759 | 35 | $D865 `shoot_boss_hits` |
+| 07:46CC | `jr z,$46fb` | 07:46CE | 24 | $DC59 lnk_cmd_rx |
+| 09:63F7 | `ret c` | 09:63F8 | 24 | $D047 ([7] collision mask 1+7) |
+| 06:48AE | `jr nz,$48cb` | 06:48CB | 23 | (no memory read just before) |
+| 04:6115 | `jr nz,$6129` | 04:6129 | 19 | $D800 `extras_launch_flag` (return-to-mode-4 flag) |
+| 0A:427A | `jr c,$42ad` | 0A:427C | 19 | (no memory read just before) |
+| 00:33F2 | `jr nz,$3404` | 00:3404 | 18 | $DBC5 print_last_page |
+| 00:2E1C | `ret z` | 00:2E1D | 17 | $DC43 lnk_turn |
+| 07:46FD | `ret z` | 07:46FE | 17 | (no memory read just before) |
+| 00:05D5 | `jr z,$05e0` | 00:05E0 | 16 | (no memory read just before) |
+| 09:5CBA | `jr nc,$5cd8` | 09:5CBC | 16 | (no memory read just before) |
+| 05:517B | `jr z,$519c` | 05:517D | 14 | $FF26 NR52 |
+| 07:625D | `ret c` | 07:625E | 14 | $D502 (sprite_anim_frame[15]+2) |
+| 00:1E87 | `ret z` | 00:1E88 | 13 | $FFC3 sgb_present |
+| 04:485D | `jr nz,$4877` | 04:485F | 13 | $FFA1 keys_held |
+| 04:4918 | `ret nz` | 04:4919 | 13 | $FFA1 keys_held |
+| 07:584F | `ret z` | 07:5850 | 13 | $FFA1 keys_held |
+| 0A:470B | `jr nz,$4724` | 0A:470D | 13 | (no memory read just before) |
+
+What this says, grouped by cause (I where marked):
+1. **Link cable** (mode `$0E` and the serial helpers): `00:2AF1`/`00:2AF8` (`$DC44` link connected, `$DC51` stage) gate 00:2B3A and its 219 instructions, `07:46CC` (`$DC59` command received) and `00:2E1C` (`$DC43` turn) gate more. The core has no partner, so none of this can run; a second core wired to the first would run it. This and the SGB item are limits of the tool, not properties of the ROM.
+2. **Super Game Boy**: `00:1DA0` and `00:1E87` test `$FFC3` (sgb present) and gate 130 + 13 instructions (the SGB packet code). The core has no SGB, so the ROM's own detection finds none.
+3. **Printer states beyond the stand-in**: `00:1A79` (`$DC27` printer status), `00:33F2` (`$DBC5` last page), `08:45F5` (`$D806` extra flag, 87 instructions): the stand-in printer always returns a clean status, so branches that test other status values or later pages (I: that is what these three variables carry) never ran. The extended-printer states are not exercised (**limit**).
+4. **SHOOT**: `07:6744` (`$D865` boss hits): the branch taken once enough boss hits are counted (35 instructions; I: the boss-defeated path) needs a long play-through; plausibly reachable by input, not found by the search.
+5. **Dispatch slots nobody selected**: `09:6441` (525 instructions behind states 11 and 12 of bank 9), `05:5EC0` (262, states 23-26 of the `05:5A67` table), `03:657F` (252, slots 1, 6, 7 of the effect-handler table `03:655D` used by the hotspot viewer, mode `$0C`), `07:45FD`, `04:4D1B`, and 24 entries of the `0A:541A` effect table whose handler contains never-executed code (indices 13, 19, 21, 25, 27-31, 45, 51, 53, 57, 59-61, 63, 83, 89, 91-95; the whole-handler case is `0A:5853` = index 13 and the like). For the hotspot effect table the handlers were executed in forced runs (they are in the forced-only count), never from a save with hotspot bytes by buttons alone, so **"which on-screen effect is it" is not answered** (**limit**).
+6. **`04:5E4C`** (255 instructions, a stamp-tool routine behind a `ret nz` at `04:5E4B`): the condition is a register, the variable was not identified; **inconclusive** (§13.7).
+7. **Dead code**: 43 components, 527 instructions (942 bytes), all behind the dead-code roots. Library stubs and twin routines, as predicted in §1.2.
+
+### 13.5 The 14 data banks that no code references
+
+All 14 are read. They are reached through computed bank numbers and pointer tables that static tracing could not follow; the log gives, per bank, the bytes read, the mode and state that first read them, and the call sites (level 0 = the routine that executed the copy; `00:0333` is the generic bulk copy and says nothing about the asset, so the next call site up is the informative one). Content column = what the bytes look like when rendered as 2bpp tiles (`d1sheets/`); **inferred (I)**, not read from a table.
+
+| bank | bytes read (organic) | read first by (mode:state, bytes) | through call sites (level 0) | content seen in the rendered tile sheet (inferred, **I**) |
+|---|---:|---|---|---|
+| `2B` | 1,234 (0) | $14:00 SHOOT (12 B); $14:01 SHOOT (10 B) |  | sprite-like tile art at the start (first 960 B read); rest unread / noise (see footnote c) |
+| `2D` | 15,572 (15,424) | $11:03 stamp tool (14,849 B); $11:02 stamp tool (65 B) | 04:58DE (11264); 04:5A9D (3394); 00:0333 (256) | stamp icons / characters (sprite-like 8x8 tiles) |
+| `2E` | 16,384 (13,920) | $11:03 stamp tool (9,760 B); $0B:17 ? (6,624 B) | 04:58DE (7222); 00:0333 (6200); 04:5A9D (2400) | hand-drawn kana / kanji glyph sheets |
+| `30` | 16,384 (6,976) | $11:03 stamp tool (5,374 B); $14:01 SHOOT (37 B); $14:00 SHOOT (34 B) | 04:58DE (4800); 04:5A9D (576) | kana glyph sheets and tile sets |
+| `31` | 15,574 (13,056) | $1C:0D print one photo (13,056 B) | 00:0333 (7932); 08:5400 (5124) | scene artwork / tile sets (a logo is legible) |
+| `32` | 11,398 (11,392) | $1C:0D print one photo (11,392 B); $14:00 SHOOT (2 B); $14:01 SHOOT (2 B) | 00:0333 (6512); 08:5400 (4880) | scene artwork / tile sets |
+| `33` | 6,935 (2,432) | $1C:0D print one photo (2,432 B); $14:00 SHOOT (11 B); $14:01 SHOOT (2 B) | 00:0333 (1594); 08:5400 (838); 05:41C5 (1) | tile sets with logos and small text strips |
+| `34` | 15,940 (15,048) | $12:21 slide-show editor (5,016 B); $0F:05 album copy/erase viewer (3,344 B); $09:09 album photo-option menu (3,344 B) | 08:5055 (4767); 00:0333 (3944); 08:50E2 (2412) | UI / frame (border) tiles and small text strips |
+| `35` | 15,194 (15,048) | $1C:0A print one photo (5,016 B); $0A:02 photo-option menu (fixed photo) (3,344 B); $12:21 slide-show editor (3,344 B) | 00:0333 (5430); 08:509D (4938); 08:5055 (3093) | frame (border) tiles and pattern tiles |
+| `37` | 16,097 (4,792) | $09:01 album photo-option menu (7,536 B); $09:00 album photo-option menu (3,768 B); $1C:02 print one photo (3,768 B) | 02:4CFF (9729); 00:0333 (5289); 06:5CFF (800) | full-size pictures (stock pictures, 128x112) |
+| `3A` | 16,168 (7,840) | $1D:03 print engine (7,168 B); $09:01 album photo-option menu (4,228 B); $18:01 4-photo list (900 B) | 00:31B4 (7010); 00:0333 (3293); 02:4CFF (1093) | full-size pictures |
+| `3B` | 6,797 (224) | $00:00 main menu (6,463 B); $18:01 4-photo list (224 B); $14:00 SHOOT (11 B) | 06:5CFF (200); 06:5D15 (8); 06:5D2B (8) | full-size pictures (mostly unread) |
+| `3C` | 9,048 (4,248) | $12:01 slide-show editor (7,168 B); $18:02 4-photo list (224 B); $12:02 slide-show editor (224 B) | 00:0333 (7120); 03:5BF4 (328); 03:5C60 (320) | full-size pictures |
+| `3D` | 16,211 (3,808) | $00:00 main menu (4,851 B); $12:01 slide-show editor (3,584 B); $18:01 4-photo list (584 B) | 00:0333 (3428); 06:5CFF (600); 03:5BF4 (188) | full-size pictures |
+
+Footnotes. (a) "bytes read (organic)": bytes of the bank read at least once as data; in parentheses, read in a run with no forced state. (b) Banks `2D 2E 30` (stamps, kana) are read by the stamp tool (mode `$11`) through `04:58DE` / `04:5A9D`; banks `31-33` are read while printing a photo (mode `$1C`) through `00:0333` and `08:5400`; banks `34 35` are the frame (border) graphics of the album, photo-option and slide-show screens; `37 3A-3D` hold full-size 128x112 pictures read by the album and photo-option menus, the slide-show editor, the print engine (`3A`, mode `$1D`) and the main menu (`3B`, `3D`). (c) Bank `2B` is read for 1,234 bytes **only in forced runs of mode `$14` (SHOOT)**: one 960-byte range `4000-43BF` (60 tiles' worth) plus about 270 scattered bytes. The sheet shows sprite-like tile art at the start of the bank and noise further on; the rest of the bank (15,150 bytes) is untouched. Which SHOOT variant uses it is not established (I: SHOOT sprite or effect graphics). (d) The mode:state `$0B:17` listed for bank `2E` (6,624 B) comes from a forced mode and is not evidence of a real screen. The per-asset extents (967 read ranges with gap <= 16 bytes) are in `coverage/results/report_v6/data_extents.csv`; they are exact for what was read and say nothing about bytes that were not read.
+
+### 13.6 Consequences for the disassembly (D1-D4)
+
+- **D1 (data banks): partly resolved.** The bank selected by each reader, the reader modes and the byte ranges read are known for all 52 data banks (736,678 of their 851,968 bytes were read as data; 115,290 were not). What is *not* resolved is the **type and extent of each asset inside a bank**: the log shows ranges that were copied, not the index tables that select them. A rebuilt source can now `INCBIN` each bank in labelled sections along the read extents; naming the assets needs the pointer / index tables of the reader routines (next target: the callers `04:58DE`, `04:5A9D`, `08:5400`, `08:5055`, `02:4CFF`, `06:5CFF`).
+- **D2 (dead roots): evidence in, decision is yours.** None of the 45 ran organically; one ran in a forced run through a non-CFG edge (artefact). Recommendation: assemble them as code with an `unreferenced` tag (their bytes are identical either way; the tag keeps them out of the live-code statistics), and keep the 527-instruction DEAD components under the same tag.
+- **D3 (coverage run): done**, with the limits of §13.7. Tracer complete on everything reached (0 gaps).
+- **D4 (character table): untouched.** The run does not produce text. (The kana sheets of banks `2D 2E 30` are the natural source; extracting them is a separate step.)
+- **Labels to fix** (naming debt found while reading the code): `Cam_BootHiddenCombo_Check` (`0A:6A41`) is the tail of the outer loop of a block copy (`ldh a,[$ff8a] ; dec a ; ret z …`), not the hidden-combination test. The test is at `0A:6A52` (`ldh a,[$ffa1] ; cp $fd` = all keys but B held, jump to the factory test; `cp $ff` = no key), already labelled `Cam_BootSelfTest_Entry`. And symbol-based statistics are misleading wherever one label precedes a large unlabelled region: `Cam_PopcountSampleLoop_inner` (`0A:5091`) "contains" 4,581 instructions of effect code, `Bank005_State12` 6,283.
+
+### 13.7 Caveats and inconclusive points
+
+1. **Core fidelity.** Not compared cycle-exactly with BGB or hardware. Timing-dependent code (STAT / LY loops, serial, sensor timing, DMA timing) was exercised only as far as the approximations allow. Every covered path should be confirmed in BGB before it is quoted as a hardware fact. For hypotheses that matter, the BGB check is cheap: load the same save, press the same keys (the corpus entries are replayable key sequences).
+2. **Forced is not reachable.** The 8,073 forced-only instructions show the code runs from a plausible state; they do not show that the buttons reach it. 52 instructions are suspect (6 runs, table above).
+3. **Never executed is not dead.** 4,514 instructions never ran, almost all behind a named gate (§13.4). Only the 43 DEAD components are unreferenced by construction.
+4. **Not modelled:** link partner, SGB, printer faults, real sensor noise, real lighting (a fixed synthetic image), real time-of-day / RTC-like state (none exists on the camera). Anything those gate stays open.
+5. **`04:5E4C`** (255 instructions, stamp tool, bank 4): the gating variable is not identified.
+6. **Bank 07 states 9 and 17** (callers of `bank2:$462F`, §12 SRAM item 2) and the other seven never-entered states: no input sequence or poke entered them. Unknown whether they are reachable on a real camera.
+7. **56,947 bytes of non-padding content were never read** (banks `3B`, `0B`, `33`, `3C`, `2B`, …). They may be pictures that only appear in modes or conditions not exercised (the 128x112 stock pictures of `3B`-`3D` are read only in part), or genuinely unused assets. The log cannot tell which.
+8. **"Read" means the CPU copied or read the byte**, not that it was displayed. A bulk copy of 2 KB into VRAM marks 2 KB as read.
+9. Hotspot effect handlers (`03:655D`, `0A:541A` slots): run only in forced states; their on-screen meaning is open (W3).
+
+### 13.8 Files and how to reproduce
+
+In the package, folder `coverage/` (see its `README.md`):
+- `src/` the C core (`gbcov.c`), its Python wrapper and `build.sh`; `tools/` the 19 driver and analysis scripts (fuzzer, sweeps, settle / long / damaged-save runs, hotspot-save generator, merge, report, ROM-byte-class map, data-bank map, gating-branch analysis, state graph, forced-coverage classifier, disassembler with execution marks `gbdis.py BB:AAAA [n]`); `final_merge.sh` rebuilds every report from the run states.
+- `results/report_v6/`: `coverage_report.md` (the tables of §13.3), `roots_status.csv`, `rom_map.csv` / `rom_map_summary.md`, `data_bank_map.md` / `.csv`, `data_extents.csv`, `bank_callsites.csv`, `bank_select.csv`, `gating_branches*.csv`, `unexec_components*.csv`, `gating_summary*.md`, `state_graph.md`, `forced_legit.md`, `forced_suspects.csv`, `unexecuted_traced_runs.csv`, `merged_cov.npz`.
+- `results/` also holds the corpus (replayable key sequences) and the logs of every pass; `saves/` the 14 real saves; `d1sheets/` the rendered tile sheets of the data banks.
+- Re-run: `build.sh` (needs a C compiler; you supply the ROM, md5 `fdcfe686cf4df461e870b6e53b2b5a8b`), then `tools/coverage_run.py` (fuzz), the pass scripts, `./final_merge.sh MERGED REPORT results/passes/*`. All runs are deterministic from (ROM, save, key sequence).
+- **Checked:** rebuilding the merge from the shipped pass folders reproduces the executed, organic and data-read bits of the merged coverage bit for bit (55,935 / 47,862 instructions, 909,137 data-read bytes) and every table of §13.3-§13.4. Only the "first reader" tags and the per-site bank-select counts (section 6 of `coverage_report.md`) depend on the merge order and on how often replays were counted. `tools/validate_calib.py` reproduces the 16 / 16 calibration check (§13.1).
+
+---
+
+## 14. Game Link Cable photo exchange: protocol and SRAM effects (sniffed with two cores)
+
+*Status of this section.* The byte values and state machines come from the ROM code (`00:2AE9-2E7A`, `07:4000-51B6`, `02:462F`, `07:4A17`, `07:4ADA`); every claim was then **run** on two instances of the emulator core joined by a modelled cable (§13.1, `cov/link_lib.py`) and compared with the SRAM of both units before and after. Five scenarios were logged byte by byte (`link_protocol/sniff_logs/*.csv`, one row per byte exchange); the unplug and simultaneous-press cases (14.7) were observed but not logged. A BGB-to-BGB exchange (README §16.6, both ROMs) gives the same SRAM result; BGB was not made to log the bytes and the real hardware was not tried, so the *timing* figures below are still the emulator's (marked "emulator"), and the *byte values and the order* follow from the ROM. Labels: **code** = read in the ROM, **observed** = seen in the two-core runs, **inferred** = reasoning only.
+
+### 14.1 What the exchange does (summary)
+
+* The Pocket Camera moves **one photo per session** between two cameras. The photo **leaves the sender's album** (the vector entry becomes `FF`; the pixels stay in the slot until overwritten) and **enters the receiver's album as a new photo** with the sender's own tag (owner ID, name, comments, image checksum) plus three reception counters (`F12-F14`). **observed**, five sender/receiver pairs, a receiver-initiated session, and a 3-hop chain.
+* One unit is the **initiator** (the player who presses A on the link screen, mode `$0E`, state 1). Its own Left/Right choice (`$D5F5`: Left = *send*, Right = *receive*) decides the roles of **both** units. The other unit (the **responder**) just waits armed; its own Left/Right choice is ignored and overwritten (`07:418A` copies the protocol role `$DC52` into `$D5F5`). **observed**: with the responder pressing Left, nothing or Right, the result is identical.
+* The initiator is also the only unit that sends **commands**; the responder only answers. The unit that **sends the photo always confirms with A** (the confirmation dialog of state 5 for an initiator-sender, state 14 for a responder-sender); B in that dialog refuses (the requester returns to its browse screen).
+* On the wire every byte is exchanged **full duplex**, and the two units **alternate as clock master for each byte**. A whole photo is 4,103 exchanges (4,096 data + 7 protocol exchanges); a thumbnail page is 2,055. About 5.9 s and 2.9 s (emulator).
+
+### 14.2 Physical layer and timing (code, observed)
+
+* Standard DMG serial port. Master = `SC=$81` (internal 8,192 Hz clock, one byte = 4,096 CPU cycles = 0.98 ms); slave = `SC=$80` (external clock), armed in advance.
+* **Strict alternation.** After each byte the serial IRQ (`00:2AE9`) re-arms `SC=$80` and flips `$DC43`. The unit whose `$DC43` is then 1 starts the timer (`TAC=$06`, 65,536 Hz, `TIMA=$EE`: 18 ticks = 275 µs); the timer IRQ (`00:2D50`) stops it and writes `SC=$81`, which makes this unit the master of the next byte. The other unit stays armed as slave. Hence in the logs the master column goes A, B, A, B, … (exceptions: after a half-size page, and at the start of a request, see 14.4).
+* Because a shift register holds the byte just received, a byte that the IRQ does not reload is **echoed** back on the next exchange (seen in the dummy first data exchange, which carries the last SYNC bytes).
+* Cost measured on the emulator: 5,981 cycles per exchange (1.43 ms, ~700 bytes/s) including IRQ latency and the 275 µs timer delay. **emulator**.
+* The serial vector `$0058` jumps through the table at `$0385` indexed by `FFC6` (1 = camera link `00:2AE9`, 0 = printer driver `00:0F16`). Link set-up `00:2D5F` (called by `07:4119` on first entry of the link screen) sets `SB=$12`, `SC=$80`, clears `$DC43-$DC5E`, sets both buffer pointers to `$C000`, `TIMA=TMA=$EE`, `TAC=2` (stopped) and `IE |= $0C` (serial + timer). Link tear-down `00:2DD8` (B button on the link screen) or `00:2CEF`.
+
+### 14.3 Handshake and roles (code, observed)
+
+Exchange numbers are those of the log `flow1` (sender = initiator) and `flow2` (receiver = initiator); `M` = clock master of that byte.
+
+| # | Phase | M | Bytes (initiator → responder, responder → initiator) | Meaning |
+|---:|---|---|---|---|
+| 0 | HELLO | initiator | `$29` , `$12` | The initiator (A pressed, `07:414D` → `00:2DED`) sets `DC54 := own count \| $40 if own album full`, sends `$29` with `SC=$81`. The idle responder always has `SB=$12`, `SC=$80`. On `$12` the initiator sets `DC45=1`, `DC51=1`; on `$29` the responder accepts if `DC45 = 0`. Any other byte (`$FF`: nobody listening) makes a unit re-arm as responder (`SB=$12`, `DC45=0`): **no error, no time-out**, the link screen simply stays at state 1, press A again. `$55` is accepted like `$12` (sets `DC5D`) but no code sends it. |
+| 1 | INFO | responder | `DC54` of each side | **Info byte**: bit 7 = "I want to receive" (set on the initiator only: `07:4146` ORs `D5F5≠0` into `DC55` when A is pressed), bit 6 = own album full (`D561 ≥ 30`), bits 0-5 = number of photos (`D561`). Observed: `$1B` (27 photos) and `$00`; `$80` (receive, 0 photos). |
+| (idle) | | | *no traffic* | After INFO both units are *connected* (`DC44=1`) and stay silent until the initiator's player chooses something. No time-out while the players choose (observed waiting 32 s). Initiator screen: state 3 (pick a photo to send / browse the peer's thumbnails); responder: state 10 then 11 (wait for a command). |
+| 2 | PRELUDE | initiator | `$00 , $00` (ignored) | Started by `00:2E0E` / `00:2E41` (they write `SC=$81` at once, no timer). Also repeated at the start of **every** later request. |
+| 3 | COMMAND | responder | initiator's `DC56` , responder's `DC56` (`$00`) | **Command byte**, see 14.5. The responder stores it in `DC59`; both set the byte count (`DC47 = $10` for a photo, `$08` for a thumbnail page) and the argument `DC5A = byte & $3F`. `$EF` = cancel (14.7). |
+| 4… | SYNC | alternating | `DC5B` of each side (`$00` not ready, `$01` ready, `$EF` cancel) | Ready loop: each unit keeps sending its `DC5B` until it has seen a non-zero byte from the peer (or has itself sent a non-zero one: latch `DC5C`). The unit that must prepare something (the sender: load the photo, show the dialog and wait for A) keeps `DC5B=0` meanwhile; with a responder-sender this loop ran for 1,100+ exchanges while the player looked at the confirmation (observed). |
+| next | DATA (dummy) | | echoes | First exchange of the bulk phase: the index is `$FFFF`, so **nothing is stored**, and the buffer byte 0 is loaded into `SB`. |
+| then | DATA | alternating | `[$C000+k]` of each side | **4,096 exchanges** (photo) or **2,048** (thumbnail page). In exchange *k* each unit stores the received byte at its own `$C000+k` and loads `$C000+k+1` (`00:2C88-2CAB`; `DC4C:DC4D` = k, big-endian). Both buffers travel; **only the sender's is meaningful**, the receiver's buffer content (leftover graphics) goes back to the sender and is discarded. |
+| end | | | | When `DC4C` reaches `DC47`: photo (`$10`) → tear-down `00:2CEF` (`DC44=DC45=…=0`, `SB=SC=0`, `IE` serial/timer off, `DC4E=1` "ended"); thumbnail page (`$08`) → `00:2CC7`: back to the PRELUDE stage (`DC51=1`, `DC4F=1` "half done") so that the initiator can issue the next command on the same connection. |
+
+**Role decision** (code `00:2B3A-2BA4`, observed, all eight combinations of Left/Right × album states were run). `rx` is the peer's info byte.
+
+| Unit | Rule |
+|---|---|
+| initiator | receiver if its own `DC55` bit 7 is set (it pressed Right), otherwise sender |
+| responder | **receiver if the peer's info byte has bit 7 clear, sender if set** (own choice ignored) |
+
+Refusals right after INFO (both units run the test, so each shows a message): receiver with `album full` (`DC54` bit 6) → `DC50=1`; sender whose peer has `album full` → `DC50=2`; receiver whose peer has **no photo** (`count=0`) → `DC50=3`; sender with an **empty album** → `DC50=4`. Bank 7 maps `DC50` through the table `07:4186` = `09 09 0A 0B` into the message index `$DBCF` and goes to state 18/19 (error screen). Observed pairs: (sender, full receiver) → sender `2`, receiver `1`; (empty sender, receiver) → sender `4`, receiver `3`. Only **two** exchanges (HELLO, INFO) cross the cable in these cases.
+
+### 14.4 Mode `$0E` (bank 7 `7:4000`), states seen on each side (observed)
+
+| Flow | Initiator | Responder |
+|---|---|---|
+| initiator **sends** | 1 → 3 (pick own photo) → 4 → 5 (confirm A / B) → 6 → 8 (bulk) → **9** (done) → 0 | 1 → 10 → 11 (wait for command) → 16 (bulk) → **17** (done) → 0 |
+| initiator **receives** | 1 → 3 (**browse** the peer's thumbnails; stays here while paging) → 4 → 7 (wait) → 8 (bulk) → **9** → 0 | 1 → 10 → 11 ⇄ 12 (serve one thumbnail page, repeated) → 13 → 14 (confirm dialog, A/B) → 15 → 16 (bulk) → **17** → 0 |
+| error | 18 → 19 (message `$DBCF`; the abort cases of 14.3 were seen ending in 19, the time-out in 18) | idem |
+
+States 9 and 17 are the same code (`07:45FD`, `07:48A1`): `call 07:4ADA` (**transferred counter +1, both roles**), then `$D5F5 ≠ 0` (this unit received): `07:4A17` (received counters) and `02:462F` (store the photo as a new one); `$D5F5 = 0` (this unit sent): delete the sent photo (`02:452A`, `02:44FB`). This answers the open question of §3.3: **the only callers of `02:462F` are the two "transfer finished" states of the link-cable exchange**.
+
+### 14.5 Command byte, thumbnails and the buffer (code, observed)
+
+| Byte | Sent by | Meaning |
+|---|---|---|
+| `$40 \| n` | initiator | Transfer **photo number n** (album position `n`, 0-29) = `07:4579` (initiator-sender: own photo `D5D8`) or `07:517C` (initiator-receiver: peer photo chosen in the browse screen). Observed: `$40` (photo 0), `$4B` (photo 11). |
+| `$80 \| x` | initiator-receiver | Send a **thumbnail page**: the responder uses **bits 0-1 only** as the page number (page *p* = photos 8p … 8p+7, so at most 4 pages) and loads 8 thumbnails of 256 bytes = `$0800` bytes into `$C000-$C7FF` (`02:50CD`). The argument `DC5A = A >> 3` of `07:5169` also carries bits 3-4 of the caller's value, which the responder ignores: observed `$80` (page 0 at entry), `$99` (page 1), `$9A` (page 2), `$9B` (page 3), `$92` (page 2 again when the cursor wraps backwards). The page is a **look-ahead** for the cursor's direction. Verified byte for byte: the received buffer equals the sender's thumbnails `E00-EFF` of album positions 0-7. |
+| `$EF` | either | Cancel (14.7). |
+
+**Photo buffer** (4,096 bytes, `$C000-$CFFF` on both sides): `0000-0DFF` photo (3,584 B), `0E00-0EFF` thumbnail, `0F00-0F5B` tag, `0F5C-0FB7` tag echo = **the first `$FB8` bytes of the slot, unchanged** (loaded by `02:4C80`, `07:43F2`, `07:4766`); `0FB8-0FFE` = `00`; **`0FFF` = the sender's owner byte `$DA56`** (gender + blood type, `07:4409`, `07:477D`). Verified: after a transfer the receiver's `$C000-$CFB7` equals the sender's slot `000-FB7` and `$CFFF` equals the sender's `$DA56`.
+
+### 14.6 SRAM effects, and the signature of an exchanged photo (observed, code)
+
+Compared with a run of the same scenario without cable, only these bytes differ (settings/vector checksums and echoes aside):
+
+| Where | Sender | Receiver |
+|---|---|---|
+| State vector `11B2-11CF` (+ echo `11D7-11F4`) | entry of the sent album position → **`FF`** (no compaction of the other entries); Magic/checksum `11D5-11D6` recomputed | first `FF` entry → **photo number** (`00` for slot 1), checksum recomputed |
+| Slots | **none** (pixels, thumbnail and tag stay in the slot; it is only no longer listed) | first free slot gets the whole `$FB8` image, thumbnail and **both tag copies** |
+| Counter `10BF-10C0` (photos **transferred**, BCD) | +1 | +1 (**both roles** count: the unlock test "transferred ≥ 15" counts sent plus received) |
+| Counters `10C3` / `10C4` (received from a male / female owner) | unchanged | **+1 on `10C3` if the *sender's* owner byte has bit 0, on `10C4` if bit 1** (`07:4A17` reads `$CFFF`, which the transfer overwrote with the **sender's** `$DA56`). Observed: male sender → female receiver bumps `10C3` (not `10C4`). §3.2 said "by a male-owner camera": corrected to "from a male-owner sender". Cap `$99` (a save whose counters are all `99` does not change). |
+| Settings block `10D7-10D8`, echo `11B0-11B1` | recomputed (counter changed) | recomputed |
+
+**Tag of the received photo** (`F00-F5B`, copy `F5C-FB7`), compared with the sender's tag of the same photo: **only these bytes differ**: `F12`, `F13`, `F14` and the two checksum bytes `F5A-F5B` / `FB6-FB7`. Everything else is copied: owner **ID** `F00-F03`, **name** `F04-F0C`, gender/blood `F0D`, birth date `F0E-F11`, comments `F15-F2F`, copy flag `F33`, **image checksum `F34-F35` (stays valid: it matches the pixels)**. The hot-spot block `F36-F53` is **cleared** by `02:462F` (verified only on tags that had none; the clearing is in the code, `02:468B`), and `Magic` and both checksums are rewritten.
+
+**The signature, therefore:**
+
+1. **`F14 ≥ 1`**: the number of cable transfers the photo has been through (cap 99). A photo shot on this camera has `F12-F14 = 00 00 00`.
+2. **`F12` = number of those hops whose *receiver's* owner was male** (`$DA56` bit 0 of the *receiving* camera, `02:4664`), **`F13`** = female receivers (bit 1). A receiver with an unset gender adds nothing to `F12/F13` but still `F14`.
+3. The owner ID `F00-F03` (and name) is that of the **camera that shot the photo**, so it differs from the receiving camera's own owner block. On a camera that shot and then passed the photo on, the ID of the shooter is kept.
+4. The three counters **travel with the tag** and keep accumulating on every further hop. Observed chain (male sender → camera with unset gender → female camera → male camera): `(F12,F13,F14)` = `0,0,1` → `0,1,2` → `1,1,3`.
+5. The thumbnail carries **no** badge (the copy badge is only drawn for `F33 = 01`, album copy).
+6. At camera level, `10BF` and `10C3/10C4` move as in the table above.
+
+Not exchanged, therefore never in a received tag: the receiver's own owner ID, the hot-spot data (cleared).
+
+### 14.7 Cancel, refusal, time-outs, unplugging (observed)
+
+* **Receiver presses B while browsing**: the initiator sends `$EF` as command (in the log: a COMMAND exchange with `$EF`); both units tear the link down (`DC4E=1`) and return to the main menu (mode 6).
+* **Sender presses B in the confirmation dialog**: it puts `$EF` in `DC5B`; the SYNC exchange carries `$EF`, `00:2BFD` jumps to the "half done" path (`00:2CC7`), no data are transferred, and the requester **returns to its browse screen** with the link still up (log `flow5`: the next command is the thumbnail request `$80` again).
+* **Cable pulled during a transfer**: nothing is detected on the wire. Bank 7 counts a 16-bit frame counter `DA0B:DA0C` down once per frame (loaded with `$0200` = 512 frames when the bulk phase is set up, `$00B4` = 180 frames after a command has been issued or received) and when it reaches zero it shows the error screen with message `$0C` (state 18). **It is a deadline, not a per-byte watchdog**: it is not re-armed by progress. Observed: pulled during the bulk phase, the error came exactly when the remaining count had run out (469 frames after the unplug, the counter held `$01D5`). A photo needs about 350 frames (margin ~160); a thumbnail page needs about 175 frames against the 180-frame budget (**emulator timing**; a margin of 5 frames, so a slower real cable cycle would show this error; **inferred**, not tried on hardware).
+* **Both players press A**: if one press precedes the other by 1-3 frames (tested) the first unit is the initiator and the session proceeds normally. If both are processed in the *same* frame (the harness's coincidence case) the first hello succeeds on one unit while the other has just started its own hello: the pair is left inconsistent (one unit waiting in stage 1, `DC51=1`, whose `00:2DED` and `00:2DD8` then refuse to act; observed once, not analysed further; the real probability of two hands pressing within the same 16 ms is not modelled).
+* **Nobody listening**: the hello reads `$FF` (no partner or cable unplugged) and the unit re-arms as responder (`SB=$12`, `SC=$80`): no message, no time-out (observed).
+
+### 14.8 SRAM of the two cameras after the first example (reproduce)
+
+`link_protocol/saves/flow1_*` and `flow2_*`: before/after images written by the emulator for the sender-initiates and the receiver-initiates scenarios (**emulator-generated, not real cameras**; each also carries the ~3.5 KB of normal boot-time changes, so diff them against the *unlinked* run or look only at the regions of 14.6). The generator is `cov/linksniff/gen_logs.py`; the log format is described in `link_protocol/README.md`.
+
+### 14.9 What is still open (kept as questions, not guessed)
+
+* **Hardware / BGB confirmation** of the byte timing and of the alternation: a BGB-to-BGB exchange was run on both ROMs (§16.6, row 7) and gives the same SRAM result as the emulator (sender entry set to `FF`, receiver slot filled, `F14` 0 → 1, checksums and `F70` changed). BGB was not made to log the bytes, so the byte *timing* is still the emulator's; real hardware was not tried.
+* Meaning of **bits 3-4 of the thumbnail command** (`$18` vs `$10`) and of the unused count bit 5 (the maximum count is 30, so it is never set).
+* Whether the **`$55`** hello variant, the `DC5D` flag and the `$0800` page for "photos 24-31" in a 27-photo album show anything on screen (the last page's unused 5 thumbnails are whatever the album loader leaves; not examined).
+* ~~The Japanese names of the main-menu entry that opens mode `$0E` and of the link screen's options~~ **Answered (§16.2):** main-menu lower page つうしん (LINK; the Japanese screen is headed ACCESS) with プリント / こうかん (PRINT / TRANSFER), then あげる / もらう (SEND / RECEIVE): Left = send, Right = receive, as the code says.
+
+## 15. TCRF and unlock cross-check: what the unlocking saves reach, the documented-content checklist, code that "never ran"
+
+*Why this section exists.* You asked (a) to confirm findings in BGB where possible and (b) to re-run with an unlocking save so that no code is called garbage that is really the credits, the CoroCoro content or a TCRF-documented asset, and (c) to retrieve every known asset. (b) and (c) are done with the emulator of §13, using joypad input and an SRAM image only unless a line says "poke". (a) was **not possible when this section was written** (no link to your computer) and was done afterwards: the findings marked "BGB-confirmed" below were reproduced in BGB (§16.6); everything else in §15 is core-only.
+Evidence tags as before: **C** code or data traced, or seen on an emulator screenshot of the ROM; **I** inferred; **?** inconclusive or not located (never guessed). The item-by-item table is `tcrf_check/TCRF_CHECKLIST.md` (`.csv` next to it); this section gives the findings behind it.
+
+### 15.1 Method
+
+* **Unlocking saves** (`make_unlock_saves.py`): the 14 real cameras' SRAM with the unlock counters of the settings block (`10BB-10D0`, shadow `$DA96-$DAAB`, §2 / §3.2) raised, and with the CoroCoro tag `56 56 53` at `$1FFD-$1FFF` (bank 0 `$BFFD-$BFFF`) in a second family. Fuzz runs from those saves: `unlock_runs/f1_organic` (joypad only).
+* **Coverage v8** = v7 plus the unlocking runs and the link runs: of the 60,449 traced instructions, **57,582 (95.3 %) executed**, **50,008 (82.7 %) from joypad and SRAM only**, 7,574 only in forced runs, **2,867 never**. Never-read non-padding data bytes: 10,047 (largest blocks: `0B:42C6-4897` 1,490 B, `32:4180-44FF` 896 B, `14:4170-43E3` 628 B, `0B:48A8-4A45` 414 B, `14:4000-415F` 352 B, `26:4500-465A` 347 B, `2A:78F6-7A24` 303 B, `33:61F0-630F` 288 B). These figures do **not** include the two confirmation runs of §15.4 and §15.5.
+* **VRAM tile census** (which tiles ever reach VRAM) is used only to *find candidates* for unused graphics. It cannot prove "unused", and two screens render wrongly in my core (§15.9), so it can be biased.
+
+### 15.2 Unlock-gated content: what the gates are (C)
+
+| Content | Gate | Where |
+|---|---|---|
+| **Real credits** (CLIP THIS, One Love, staff-roll text, ending picture "Don't butter me up! Be happy!!"); **BGB-confirmed** (§16.6): stored `99 99` reaches `08:17`, stored `93 77` (22:06) does not | stored `[$DAA7:$DAA6] >= $7799` | `09:4CFC-4D0B`: `ld a,[$daa7] ; cp $77 ; jr c,… ; jp nz,$4d86 ; ld a,[$daa6] ; cp $99 ; jp z,$4d86`. Below the gate only the dancers run (states `$17`, `$18`). Reached from mode `$08` state `$12` (`09:4CF2`); the credits states are `$12-$18` (`09:4CF2`, `4DE2`, `4EA4`, `4FD5`, `50D0`, `50E0`, `518C`). |
+| (same, what the number is) | `$DAA6-$DAA7` is **stored as the nine's complement** of the displayed Run!Run!Run! result (§2, row `best_run`), so a stored `$7799` is a displayed **22:00**, and a fresh save (stored `0000`) shows **99:99**. The gate therefore means "displayed result at or below 22:00" (I: it is a time; the code only compares). | |
+| **CoroCoro content** | tag `56 56 53` at `$1FFD-$1FFF`; **2 of 3 bytes are enough** and the routine rewrites all three | `08:72E0-731B` (constant at `08:7319`); success sets `$D582 = 1`, `$D562 = $1E`, shows the second copyright screen (`21:6BC0`, `$600` B, `08:72B7-72DF`). **BGB-confirmed (§16.6).** **In the international ROM the flag is set whether or not the tag matches (§16.5).** `$D582` is read by `08:52E0` (wild-frame pages 6 → 8) and bank 4 (stamp category 3 skipped without it, `04:59AB-59D0`). |
+| **Pokémon stamps 11-20** | gradual, not all-at-once | `04:5827-5832`: `$D642 = min($DAA5, 5) + 4` (pages of the stamp grid); `$DAA5` = hundreds byte of the Ball record (SRAM `10CA`). Each 100 points opens one more page (2 stamps), up to 500: TCRF's end points (10 free, 20 at 500) are right. |
+| **D.J. / Ball / Run!Run!Run!** | the first wave of Space Fever II (mode `$07`) shows a menu; the choice is tested by `$D503 / $D502 / $D504 == $0A` | `07:5AFA` (modes `$1F` / `$20` / `$21`). Reached organically. |
+| **Album B pictures B17-B24, B25-B30** (Japanese ROM) | counters in `$DA96-$DAAB` (B17-B24, photo numbers `$2E-$35`; **8** conditions at `02:4D05`), CoroCoro flag (B25-B30, `$36-$3B`; with the tag Album B has a fourth page B4, without it B1-B3 only) | `$D5D8 >= $1E` marks a stock picture. The **international** ROM tests **14** conditions at `02:4D0D` (the guide's B-17…B-30) and does not depend on the tag (§16.5). |
+
+### 15.3 The checklist (54 items), summary
+
+29 items are located or traced (C), 6 are inferred (I) and 19 keep an open point (?), counting every TCRF section: unlock-gated content (16 rows), the "unused" sections (18 rows) and the Japanese side of "Regional Differences" (20 rows). The checklist gives for each item the ROM location, the coverage computed from the merged run (touched / organic), the finding, the tag and the file names of the retrieved assets.
+
+**Located (I), unused graphics:** the "G" letter and the hand gestures of the album tiles (`13:5810`, `13:5C00-5F9F`); the unused B film roll and the unused Japanese text of the print bank (`18:5A50`, digits `18:5C70`, text `18:5F90`); the JP-only unknown main-menu tile = a circled X, three identical copies at `15:4480 / 4500 / 4580`; the "cannot combine the same picture" graphic (`0D:4000-425F`, 36 tiles never shown); the kanji 前 and 後 (`1C:54A0-55FF`, next to an OK tile); circled-B candidates in the photo-option bank (`0C:7A20`, `0C:7A60`). The `tcrf_check/assets/unused/located_items.png` sheet shows them.
+**Not located (?):** the kanji 中 and 持; the two unused main-menu tiles (ball, rectangle); the unused icon and tile of the photo-option bank; the D.J. め tile; the printer wave pattern; "Unused Graphic Bank 11" (a hand flipping a newspaper). Bank `$0B` is **not** it: it is Super Game Boy data (4 bpp border tiles and packets; its never-read tail is border data my core does not request without a full SGB handshake), and bank `$11` is read completely. Which bank TCRF means by "11" is unresolved. The "SPORADIC VACUUM" lettering (View screen) is also **not** confirmed: the band is garbled in my core (candidate `12:7400-75FF`).
+**Also unresolved:** the 0.9 s of song `0x45` and the prelude beeps of `0x31` were not checked by ear (the song data are fully read); TCRF's "Album B hot-spot shows only the exit menu" (`$D5D8 >= $1E` tests exist, the exit-only menu itself was not re-traced); "B during a song keeps the music playing" (JP only) was not examined.
+
+### 15.4 Reclassified: the hold-A branch of the stamp tool is not dead code (C)
+
+`04:5E4C-5FE1` (254 instructions, the largest "gated, never run" block of §13.4) runs in the placement state of the stamp tool (mode `$11`, state 4) when **A is held**: `$D641` is loaded with `$B4` (180) after each stamp or palette close (`04:5A15`, `04:5FE7`), `04:5E3B` decrements it every frame while A is held (`FFA1` bit 0), and at 0 it reloads `$64` (100) and falls into `04:5E4C`. **Confirmed with joypad input only** (`tools/stamp_hold_a.py`, `stamp_hold_a2.py`; and again in BGB on both ROMs, §16.6 row 5): the routine first executed 180 frames after the press and then every 100 frames; the four stamp work buffers (`$C000`, `$C1E0`, `$C3C0`, `$C5A0`) change at each firing and are **identical to their original content after two firings**, so the operation is an **involution**, not the 90-degree rotation inferred in earlier rounds (a rotation would need four firings). **You report that holding A in stamp mode reverses the stamp** (a mirror image): that fits the period of 2 and the routine's bit-reversal of every stamp byte (`rl [hl]` / `rr a` chains with the cell order swapped), so it is a **left-right mirror (C for the routine and the period, user observation for the name of the effect)**. My own pixel test of the screenshots (83 pixels differ inside the stamp's box) did not discriminate by itself (BGB reproduces the flip at the level of the work buffers, not of the axis), because the stamp is drawn semi-transparently over the photo, so the mirror axis is not verified in pixels. Screens and buffers: `tcrf_check/assets/stamp_hold/`.
+
+### 15.5 Reclassified: the hot-spot effect handlers (C) and the "S = wave" claim (?)
+
+The effect dispatcher `03:6543-655A` reads the effect number of the triggered hot spot from `$D657 + n`, adds 1, and jumps through the 17-entry table at `03:655D`: index 0 (effect `FF`, none) = `03:6625`; effects 0-7 = `03:6642, 66AF, 66DC, 67D5, 6801, 6838, 68A4, 6901` (eight different handlers: the eight icons of the normal game); **effects 8-15 all = `03:6983`**. The trigger is the hit test `03:72CD` (pointer cell `$D667/$D668` equal to an enabled hot spot's X/Y cell), reached from state 4 of mode `$0C` (`03:6435`) when A is pressed; the hit path (`03:6450-645D`) ran **only in forced runs** of v8, so the eight original handlers (about 250 instructions in §13.4 as "table targets") counted as never executed organically. **Confirmed in the emulator** (`tools/hotspot_effects.py`): with hot spot 0 armed under the pointer (a WRAM poke of the mirror `$D643-$D65C`, then a real A press) every effect 0-7 ran its own handler and effect 8 ran `03:6983`. Code-level facts about `03:6983`: it is one SCY raster loop (`$FF42` written per scanline between LY `$0F` and `$7F`, eight passes) followed by the reload of the photo into VRAM; it **never tests the effect number**, so the TCRF statement that only the "S" icon produces a wave and the other seven a page flip is **not visible in the code (?)**. The Game Genie `??FD-199-F76` (JP) patches `03:6D18 ld d,$07` to `$0F` (checked on the ROM byte), which is what lets the editor reach the eight extra icons.
+
+### 15.6 Asset inventory (all retrieved from the ROM or from the emulator, `tcrf_check/assets/`)
+
+| Set | Files | Notes |
+|---|---|---|
+| Album B pictures B01-B30 + thumbnails | `albumB/` (`albumB_all.png`) | `0xDA000 + i × 0x1000`; B17 Judge, B19 Tamanoripu, B22-B24 Pokémon, B25-B30 CoroCoro |
+| Wild frames 01-08 | `wild_frames/` | `0xC4000 + i × 0x1800`, 384 tiles, **20 tiles wide** (the 16-wide layout of an earlier round was wrong) |
+| Frames No.01-18 | `frames/` | chooser of mode `$09` state 9 |
+| Stamps | `stamps/` (17 category sheets, palette captures), `stamps_rom/` (20 Pokémon at `2C:6000 + n × $190`; 10 CoroCoro at `2B:4000 + n × $1E0`) | CoroCoro stamps are in bank `2B` (an earlier note said `2A`) |
+| Static screens | `screens/` (68 composed screens, `INDEX.csv`, 3 contact sheets) | from the copy-call catalogue of §4 |
+| Hot-spot effect icons | `hotspot/` (16 icons, `1C:58A0`) | |
+| Unused graphics located | `unused/located_items.png` | §15.3 |
+| Screenshots (credits, CoroCoro screen, wild frames, album, SGB border, stamps) | `shots/` | |
+| Per-mode screenshots | `work/atlas_modes/` (the 244 single shots exist in the working tree; the repository keeps the contact sheets `sheet_00-10.png`) | `MM_SS` = mode, state |
+| Confirmation runs | `stamp_hold/`, `hotspot_effects/` | §15.4, §15.5 |
+
+### 15.7 Screens matched to the main-menu items (I, new names)
+
+The lower page of the main menu has four items; the table at `07:7804 + item` sends them to modes `$04, $06, $03, $05` (items 3, 4, 5, 6). The labels shown next to the cursor in the atlas screenshots (`00:04-00:07`) are, in order, **らくがき, つうしん, とくしゅ, へんしゅう**, and the four target modes show screens that fit those labels: `$04` carries the caption スタンプ (tool pick of the doodle menu), `$06` is the "ACCESS" screen with プリント / こうかん (print / exchange) bubbles, `$03` offers ピクトリップ and ごうせい (hot-spot and compose), `$05` offers アルバム and アニメーション. Four-for-four consistency was good evidence for the mapping; the cursor-order assumption is now **confirmed (C)** by the international screens (DOODLE, LINK, SPECIAL, EDIT) and by the guide's *Studio Menu* (§16.2). Mode `$02` (two choices みる / どみーる, over an animated background) is the VIEW menu: ALBUM / SHOW (§16.2).
+
+### 15.8 Corrections made to earlier text
+
+* "Bank `$0B` = TCRF's unused graphic bank 11": **withdrawn** (§15.3).
+* CoroCoro stamps: bank `2B:4000`, not `2A`.
+* Wild-frame sheets are 20 tiles wide.
+* The stamp tool's hold-A routine mirrors (reverses) the stamp with a period of 2, as you reported; it is not a 90° rotation (§15.4).
+* The credits gate compares the **stored** (nine's-complement) Run!Run!Run! value (§15.2).
+
+### 15.9 Caveats and what is still open
+
+* **BGB.** When this section was written BGB was not available; it was used afterwards (§16.6) for the credits gate, the CoroCoro tag, the Pokémon pages, the hold-A flip (both ROMs), the hot-spot effects, the link exchange and the gender bits, all by demo replay and state comparison. **Not done:** BGB's debugger breakpoints (`BGB_TEST_SHEET.md` keeps the list) and its printer core.
+* My core renders two things wrongly although the ROM data are clean: the second stamp slot of category 2 (VRAM `$8510`) and the bottom band of the View screen. The VRAM census may therefore miss or invent a few candidates.
+* The two confirmation runs poke the hot-spot mirror in WRAM (the key press is real); the hold-A run is joypad only.
+* Open: the items marked ? in §15.3; whether "S = wave" exists; the names of the sixteen effect icons and the twenty Pokémon stamps (§16.8, §16.9). Named since: どみーる (= SHOW) and the link-exchange entry (SEND / RECEIVE), §16.2.
+
+## 16. Menu names, the international ROM, and BGB cross-validation
+
+*Why this section exists.* You attached the Funtography guide (the US manual) and BGB and said: when I have no idea what a menu is, enter the same joypad sequence on the international ROM and show you the menu if it is not in the guide; earlier you asked to confirm findings in BGB. This section gives both results. Evidence tags: **C** = code traced, or seen on a screenshot, or reproduced in BGB; **I** = inferred; **?** = not established (never guessed). "Guide" = the Funtography guide; page numbers are the *printed* ones of its table of contents (Arcade 34, Music 36, Link 42, Special 44, Doodle 47, Edit 48). The first lines of this README still apply: none of this has been validated by a human.
+
+### 16.1 The Japanese and the international ROM are two different builds (C) — earlier claim withdrawn
+
+Byte comparison, bank by bank (16,384 bytes each), Japanese Rev A against the international ROM used here (md5 `42d2f65e2549be9d1d126a6828b5d1c1`):
+
+| Banks | Bytes that differ |
+|---|---|
+| `$00`-`$09` (all the menu and mode code) | 12,696 · 8,874 · 11,329 · 14,932 · 10,792 · 14,883 · 12,487 · 14,067 · 9,113 · 11,778 |
+| `$0A` (sensor driver, §10) | **61** |
+| `$22` | 138 |
+| `$35` | 0 (the only identical bank) |
+| all 64 banks | 466,317 of 1,048,576 |
+
+So the sentence at the top of this README ("menu logic in banks `$003`-`$009` is byte-for-byte structurally identical") is **withdrawn**: only the sensor / exposure bank is nearly the same. What the two builds share is the **numbering of the modes and the flow of the states**. Replaying the 206 joypad-only paths of the Japanese corpus (one target (mode, state) each; my core reaches the target 156 times on the Japanese ROM): on the international ROM the same inputs reach the same (mode, state) **128 times** (92 with the inputs unchanged, 36 after the single rule of §16.3) and the same mode 162 times; a native exploration of the international ROM reaches 140 of its 187 targets; **150** distinct (mode, state) signatures were reached on both ROMs (161 on the Japanese ROM, 166 on the international ROM counting both international runs). Screens: `tcrf_check/assets/atlas2/{JP,INTL,INTL2}/MM_SS.png` (`MM_SS` = mode, state; `result.json` says what each path reached), pairs: `tcrf_check/assets/intl_compare/`. Tool: `tcrf_check/tools/atlas_replay.py` (`MIRROR=1 GBCAM_ROM=...`), `tcrf_check/tools/atlas_sheet.py`, `tcrf_check/tools/intl_replay.py`.
+
+### 16.2 Names of the 34 modes (screen text, Japanese / international / guide)
+
+Read from the screens (C for what is printed on them; the guide column says where the guide uses the same word). Items in **bold** are what the guide or the international screen calls the thing; the Japanese texts are copied as I read them from the screenshots (CJK in screenshots is the part most likely to contain a misreading).
+
+| Mode | Japanese screen | International screen | Guide |
+|---|---|---|---|
+| `$00` | main menu: みる (VIEW, left), とる (SHOOT, right), あそぶ (PLAY, below); lower page (Select): らくがき, つうしん, とくしゅ, へんしゅう. State 0 also carries the power-on prompt "セーブデータを全て消しますか? はい···A いいえ···B" | **SHOOT** (left), **VIEW** (right), **PLAY** (below) — **mirrored** (§16.3); lower page shows **DOODLE** and **SPECIAL**; prompt "erase all saved data? YES···A NO···B" | "Shoot/View/Play Menu"; Select = the "Studio Menu" (Link, Special, Doodle, Edit) |
+| `$01` | とる / アイテム / まほう / チェック / にげる, caption 女王さまがあらわれた! (an RPG battle window). In the core: とる → `$15` → `$14`; アイテム → states 6-7 of the same mode (then `$15`); まほう → `$16`; チェック → `$09`; にげる → states 9-A of the same mode | **SHOOT / ITEMS / MAGIC / CHECK / RUN**, captions "Welcome to my parlor!" / "Let's play!" | Game Face sidebar: "the Shoot Menu … is modeled after RPG menus"; "Check mode serves essentially the same function as Album" (code: CHECK → `$09`, the album viewer); "Run is a joke command that has no practical use" (code: stays in mode `$01`) |
+| `$02` | みる / どみーる | **ALBUM / SHOW** | View: Album, Show |
+| `$03` | ピクトリップ / ごうせい (picture of a stone lantern and a doll, caption "Happy?") | **HOT-SPOT / COMPOSE** (Mario in a kart) | Special (44): Hot Spot, Compose |
+| `$04` | caption スタンプ | caption **[STAMP]** | Doodle (47): Stamp, Paint |
+| `$05` | アルバム / アニメーション (dog photo with two speech bubbles) | **ALBUM / ANIMATION** | Edit (48): Album (Copy, Delete), Animation (Frame, Speed, Loop, Sort, Pack, Test, Clear) |
+| `$06` | **ACCESS**: プリント / こうかん | **LINK**: PRINT / TRANSFER | Link (42): Print, Option, Transfer |
+| `$07` | Space Fever II (the logo "SPACE FEVER II"); first-wave menu: **?** / **D.J.** / **BALL** with targets 30 / 10 / 5 | same | Arcade (34): Space Fever II, Ball, Run! Run! Run!; Music (36): DJ |
+| `$08` | user screens: RECORD (撮影 / 消した写真 / 交換 / もらった写真 ♂♀ / プリント), HI-SCORE, NAME & SEX, BIRTH DATE, credits | **RECORD** (SHOTS / DELETED / TRANSFERS / RECEIVED ♂♀ / PRINTS), **HI-SCORE** (SPACE FEVER II / BALL / RUN! RUN! RUN!), credits ("CLIP THIS", "HELLO! … THANK YOU FOR USING THE GAME BOY CAMERA. PLEASE TAKE GOOD CARE OF IT. THE STAFF") | Start = "User Screen": Record, Hi-Score, Credits, Name & Sex, Birth Date, User Name, User ID |
+| `$09` | single-photo viewer of the album (film-strip border, photo number) | same | Album (28-): Paint, Color, Speed, Stamp, Frame, Comment, Delete, Print |
+| `$0A` | photo grid どの写真を見ますか? with the みる icon | **view which photo?** with the **VIEW** icon | View → Album |
+| `$0B` | スライドショー / アニメーション / ピクトリップ (a monkey) | **SLIDE SHOW / ANIMATION / HOT-SPOT** | Show: Slide Show, Hot-Spot, Animation |
+| `$0C` | photo grid with the ピクトリップ icon, then the photo (pointer hand) | **view which photo?** with **HOT-SPOT** | View → Show → Hot-Spot ("the Hot-Spots will no longer be visible") |
+| `$0D` | スライドショー 1号, A おすざんす B やめるざんす; options ランダム再生 (ON/OFF) | **SLIDE SHOW #1**, A **ROLL IT**, B **CUT**; option **SHUFFLE** ON/OFF | Show: "ROLL IT" and "SHUFFLE" appear on the guide's menu map; Up/Down changes the speed |
+| `$0E` | あげる / もらう (caption 待望のレディースコーナー); after the exchange あげました / もらいました and よろしい | **SEND / RECEIVE** (caption "PRESS A TO BEGIN"); after the exchange **sent / received** and **GOOD** | Link → Transfer: "one must highlight Send while the other picks Receive … both cameras will display 'good'" |
+| `$0F` | どの写真を消しますか? (けす icon); confirm 消しますか?? はい / いいえ | **delete which photo?**, **DELETE??** YES / NO | Album → Delete; Edit → Album → Delete |
+| `$10` | ペイント (photo grid with the らくがき icon) | **PAINT** (grid caption **DOODLE**) | Doodle: Paint (Speed: Fast ··· Slow) |
+| `$11` | スタンプ; confirm セーブしますか? はい / いいえ | **STAMP**; **SAVE?** YES / NO | Doodle: Stamp |
+| `$12` | animation tools bar: ループ, コマおとし (popup title), two more entries I could not read, オールクリア | **LOOP / SORT / PACK / TEST / CLEAR** ("TOOLS"), popup SORT: CANCEL / Normal / Shuffle | Edit → Animation: Loop, Sort, Pack, Test, Clear (the guide does not mention a "Normal / Shuffle" choice of SORT) |
+| `$13` | アニメーション (A ボタンではじまるよ) | **ANIMATION** "press A to begin. use ↕ to select music." | Edit → Animation |
+| `$14` | live view "のこり30"; option cross はんてん / パレット / (ベタぬり) / シャッター音; きろく / やめる | "30 left"; **flip / palette / dither / shutter**; **SAVE / CANCEL**; "no blank frames." | Shoot: Brightness, Contrast, Flip, Dither, Palette, Shutter |
+| `$15` | セルフタイマー (…秒) / かんかく · さつえいまいすう | **Self-timer** / **Interval · Exposures** | Items (18): Self-timer, Time-lapse |
+| `$16` | とーるくん: とくしゅレンズ / モンタージュ / パノラマでポイ / ゲームモデル | **SHUTTERBUG**: **TRICK LENSES / MONTAGE / PANORAMA / GAME FACE** | Magic: Trick Lenses, Montage, Panorama, Game Face (Shoot, Play, Doodle) |
+| `$17` | 4ぶんかつ / フュージョン (つくる) | **SPLIT / FUSION** (BEGIN) | Special → Compose: Split, Fusion |
+| `$18` | パノラマプリント (A プリント / B やめる) | **PANORAMA** (A PRINT / B CANCEL, "scroll ↕ to select") | Panorama Print |
+| `$19` | title / copyright scenes: "© 1995 Creatures / © 1995 GAME FREAK", then, **only with the CoroCoro tag**, a second screen naming two authors and 小学館 (こしたてつひろ, 桜本学ヴ), then the title | "© 1995 Creatures / © 1995 GAME FREAK", then the title (no second screen, §16.5) | — |
+| `$1A` | 写真をえらんで下さい (ピクトリップ icon) | **select photo.** (**HOT-SPOT**) | Special → Hot-Spot (Album A only) |
+| `$1B` | GAME BOY Printer: プリント / オプション | **PRINT / OPTION** | Link → Print, Option |
+| `$1C` | どの写真をプリントしますか? | **print which photo?** | Link → Print |
+| `$1D` | データ転送中 (TV with dancing figures) | **transferring…** | — |
+| `$1E` | OPTION: かんかく / ごうけい | **OPTION**: **FEED MARGIN / TOTAL PRINT** | Link → Option |
+| `$1F` | (not reached in the replay; entered from the `D.J.` target of mode `$07`) | | Music (36): DJ |
+| `$20` | BGM 2, 顔ボル, ゲーム A スタート B でる | **BALL**, GAME A START B EXIT, "FACE 12?" | Arcade: Ball ("the juggling game") |
+| `$21` | RUN! RUN! RUN! (speech bubbles with instructions) | **RUN! RUN! RUN!** ("▲ to jump") | Arcade: Run! Run! Run! |
+
+What this settles: the three open questions W1 and W2 of §12 (what the main-menu items 3-6 and mode `$0B` are, and which game each of the modes `$07`, `$1F`, `$20`, `$21` is) are answered by the screens; the names of the **mode `$16` pages and the SHOOT variants** (W3) are answered as far as the screen text goes (TRICK LENSES, MONTAGE, PANORAMA, GAME FACE: Chapter "Magic"), the visible effect of each variant is still not traced. Not answered by the guide: the "Normal / Shuffle" popup of SORT, the printer OPTION screen's FEED MARGIN / TOTAL PRINT meanings, the Japanese captions (女王さまがあらわれた!, 待望のレディースコーナー), and **どみーる**, which the pair above identifies with **SHOW** (the literal reading of the word is still open).
+
+### 16.3 The main menu is mirrored in the international ROM (C)
+
+Japanese: みる (VIEW) at the upper left, とる (SHOOT) at the upper right, あそぶ (PLAY) below; international: **SHOOT upper left, VIEW upper right, PLAY below**. The default cursor is SHOOT in both, so the single rule needed to replay a Japanese path on the international ROM is: **swap Left and Right while mode `$00` is in states 0-2**. After the swap the same keys lead to the same modes: A on items 0-6 goes to modes `$01 $02 $07 $04 $06 $03 $05` (`07:7804 + item`, both ROMs). Probe: `tcrf_check/assets/intl_compare/probe_jp/`, `probe_intl/`, `sheet_mainmenu_probe.png`; tool `tcrf_check/tools/mainmenu_probe.py`.
+
+### 16.4 What the guide says that the code could check (C unless marked)
+
+* **Hold A in the stamp tool**: the guide says "hold the A Button (for **about two seconds**)" to flip the stamp. The code needs **180 frames** (about **3.0 s**) before the first mirror and then 100 frames per further flip (§15.4); BGB agrees (§16.6). The guide's "two seconds" is an approximation or a different build; the name of the effect (reversal / mirror image) is yours, the code does the bit-reversal and the period 2.
+* **Credits**: the guide says "finish the game in less than 22 seconds" (and, elsewhere, "a 22-second finish or better"). Code: stored `[$DAA7:$DAA6] >= $7799`, displayed **22:00 or lower** (§15.2): "or better" is the right reading. The guide's Record example shows "RUN! RUN! RUN! 15:99" and its Album B list asks for "17 seconds" / "16 seconds": the Run!Run!Run! record **is a time in seconds:hundredths** (open item 19 of §12 closed, C by the guide).
+* **Run!Run!Run! needs 2,000 points in Space Fever II** (guide, "Run! Run! Run!" under the hidden features). The code (`07:59F9-5A0E`) tests the best Space Fever II score (BCD, `DAA3-DAA0`): if `DAA3 = DAA2 = 0` and `DAA1 < $20` (below 2,000) the third target of the first-wave menu is shifted by `$40`: same figure (was "probable unlock, I", now C by the guide).
+* **Pokémon stamps / Ball 500** (TCRF) are not in the guide (the guide has no Pokémon stamps, see §16.5).
+* **Transfer**: the guide says the photo "will disappear from the sender's album and reappear in the receiver's album", that both cameras display "good", and that the transferred photo shows the **name and gender of the sender in Comment mode**: exactly the SRAM effect of §14.6 (sender entry set to `FF`, receiver slot filled, owner ID, name and gender kept in the copied tag) and the end screens of §16.6.
+* **Hot-spot**: "five hot spots per photo", effects are "transitional fade or wipe visuals (Effect)" plus Sound and Jump; "you won't be able to plant a trigger in Album B". All consistent with the block `$D643-$D660` (five flags, X, Y, sound, effect, jump) and with the tests `$D5D8 >= $1E` (stock picture).
+* **Tools of the animation editor**: five tools (Loop, Sort, Pack, Test, Clear) = the five entries of the tools bar of mode `$12`.
+
+### 16.5 Differences between the builds that the guide revealed (C)
+
+1. **Album B unlock test.** Japanese `02:4D05` tests **8** conditions (`d` register: shoot 60, print 30, transfer 15, Ball 700, Ball 1000, Space Fever II 3000, 5000, Run!Run!Run! 17 s, §3.2). The international routine `02:4D0D-4DA0` tests **14**, exactly the guide's list for **B-17…B-30**, in the guide's order: bit 0..7 of `e` = shoot 60 (`DA96/97`), **delete 60** (`DA98/99`), transfer 15 (`DA9A/9B`), **receive 5 from males** (`DA9E >= 5`), **receive 5 from females** (`DA9F >= 5`), print 30 (`DA9C/9D`), Space Fever II 3000, 5000; bit 0..5 of `d` = Space Fever II **7000**, Ball **500**, 700, 1000, Run!Run!Run! 17 s (`DAA7 >= $82`), **16 s** (`DAA7 >= $83`). So the counters `10C3/10C4` (received from male / female senders, §14.6) are **used by the international ROM** to unlock B-20 / B-21 (the guide: "Photos B19, B20, and B21 will appear in Album B only after you've used the Link function"); the Japanese ROM does not test them. With saves whose counters are 99, the Japanese ROM shows Album B as pages B1-B3 and, **only with the CoroCoro tag**, a fourth page B4 with the CoroCoro pictures; the international ROM shows B1-B4 with or without the tag (`tcrf_check/assets/intl_compare/albumB/`; tool `tcrf_check/tools/albumb_pages.py`).
+2. **The CoroCoro flag is always set in the international ROM.** Both ROMs contain the tag routine (`08:72E0` Japanese, `08:730E` international, constant `56 56 53`, "2 of 3 bytes" rule, rewrite of the tag). In the Japanese ROM the caller sets `$D582 := 1`, `$D562 := $1E` only when the tag matched. In the Japanese ROM the call at `08:72B2` (`call $72E0`) is followed by `jr nc` that skips the loads when the tag does not match. In the international ROM state 0 of mode `$19` calls the routine at `08:730E` (the call is at `08:72FC`) **and then loads `$D582 := 1`, `$D562 := $1E` unconditionally** (`08:72FF-7308`; the carry returned by the routine is not tested). Observed: in my core (table `tcrf_check/assets/intl_compare/boot_flags.txt`: `_ff`, `_zero`, a real save without tag and a save with the tag) **and in BGB** (`tcrf_check/assets/bgb/results/corocoro_tag_intl.txt`: the six tag values of §16.6 row 3 on the international ROM, all give `$D582 = 1`, `$D562 = $1E`, and a tag that does not match is left untouched) the international ROM leaves the boot with `$D582 = 1`, `$D562 = $1E`, the Japanese ROM only with the tag (`$D582 = 0`, `$D562 = $18` otherwise). Consequence: the content that the flag gates in `04:595B`/`5972` (stamp category 3) and `08:532A` (wild-frame pages 6 → 8) is available without a tag in the international ROM, and the image counts of Album B differ (`$D562` = 24 → 30 pictures in the Japanese ROM). What I did **not** check: what the international stamp category 3 and wild frames 07-08 show (the ROM data of bank `$2B` and the frame banks differ from the Japanese ones). Question for you: does your international camera show wild frames 07-08 and a third stamp category without any tag? (C for the code and the emulator, ? for the real camera.)
+3. **Second copyright screen** (mode `$19`): the Japanese ROM shows it only with the tag; the international boot never shows it (observed in the core over 1,000 frames, with and without tag): only the flag of point 2 is set.
+
+### 16.6 BGB cross-validation (BGB 1.5.x under Wine, headless; demo files)
+
+Method: BGB runs a **demo** (`-demoplay`: one joypad byte per frame, A=1 B=2 Select=4 Start=8 Right=$10 Left=$20 Up=$40 Down=$80), then dumps a **state file** (`-stateonexit`, WRAM/VRAM/SRAM chunks) and the **last screen** (`-screenonexit`); my tool `tcrf_check/tools/bgb_run.py` builds the demo, runs BGB and parses the state (mode `$D5CE` is at offset `$15CE` of the WRAM chunk). BGB needs **3 more boot frames** than my core for the same path (core free time 400 = BGB 403): with that shift the replay agrees. All the results below are in `tcrf_check/assets/bgb/results/*.txt` (screens and demos next to them; the 200 MB of BGB state files are not kept). Two instances can be linked on one computer with `-listen` / `-connect`, and they then run with **identical timing**.
+
+| # | Check (README section) | Result in BGB | Tag |
+|---|---|---|---|
+| 1 | **Sweep**: the 206 joypad-only paths of the Japanese corpus replayed in BGB and compared with my core's end state (`tcrf_check/tools/bgb_compare.py`, `bgb_sig.py`) | 166 paths comparable (40 need the printer and were skipped): **135 exact**, 13 same mode but another state, **18 different** (targets `0B:00-01`, `0C:01/03`, `0D:00-04/06-08`, `13:01/02/07`, `14:05`, `1E:01/03`, the slide-show, hot-spot, animation-player and print-option paths: BGB ends in the album grid `0A:0x`, in `0F:06/07`, `01:01`, `01:04` or `14:02` instead). Without the 3-frame shift: 124 / 14 / 28 | C (agreement), ? (the 18) |
+| 2 | **Credits gate** (§15.2): path to the credits (`08:17`) on the unlocking save CE10229233 and on its ordinary twin | unlocking save (stored `DAA6/DAA7 = 99 99`, displayed 00:00): reaches `08:17` (dancing man + real credits); ordinary save (stored `93 77` = displayed **22:06**, six hundredths above the gate): stays at `08:01` | C |
+| 3 | **CoroCoro tag** (§15.2): tag bytes at `$1FFD-$1FFF` in an ordinary save | `56 56 53`, `56 56 00`, `00 56 53` → `$D582 = 1`, `$D562 = $1E`, tag rewritten to `56 56 53`; `56 00 00`, `00 00 00`, `AA AA AA` → `$D582 = 0`, `$D562 = $18`, bytes untouched. On the **international** ROM all six give `$D582 = 1`, `$D562 = $1E` (`results/corocoro_tag_intl.txt`, §16.5) | C |
+| 4 | **Pokémon pages** (`04:5827`): `$D642 = min($DAA5, 5) + 4` | with the Ball value set in SRAM (`10CA`, checksums recomputed): `00..06, 10` → `$D642 = 04 05 06 07 08 09 09 09`; on 25 saves: rule holds on 18, on 7 the path did not reach the stamp tool (not a failure of the rule) | C |
+| 5 | **Hold A mirrors the stamp** (§15.4), both ROMs | stamp work buffers unchanged at 150 / 175 frames, **mirrored at 185 / 230 / 275**, original again at 285 / 330 / 385, mirrored again at 395: first flip between 176 and 185 frames, the second between 276 and 285, the third between 386 and 395 (period about 100 frames), on the Japanese **and** the international ROM (`$D641` = 180, then 100 after the first flip; `results/stamp_hold_jp.txt`, `stamp_hold_intl.txt`) | C |
+| 6 | **Hot-spot effects** (§15.5): effect k = 0..15 on a photo with one armed hot spot | BGB and core are in the same state at +30 and +90 frames after the A press for all 16 effects (`0C:04` at +30 for effects 1, 2, 3, 5, 6, 7, `0C:03` for the shorter ones 0, 4, 8-15; `0C:03` at +90 for all); **98.7 % of the pixels equal** on average (32 screen comparisons: 16 effects × two delays, +30 and +90 frames after the A press, `results/hotspot_effects.txt`); effects 8-15 behave alike | C |
+| 7 | **Link exchange** (§14), BGB to BGB, both ROMs | sender vector entry 0 → `FF`; receiver first free entry → photo number `00`; receiver slot compared with the sender's: `F14` 0 → 1, checksums `F5A-F5B` / `FB6-FB7` and the echo byte `F70` change, the rest of the tag equal (the owner block `FB8-FC9` of slot 1 differs because each of the two test saves keeps its own owner there); sender counter `10BF` +1; end screens: Japanese あげました / もらいました + よろしい, international sent / received + GOOD. Same bytes on both ROMs | C |
+| 8 | **Gender key** `$DA56` (§16.7) | see below | C |
+
+(The two `bgb_link` instances confirm the **result** of the exchange, the SRAM signature of §14.6; they do not log the byte timing: the sniffer of §14 stays the only record of it. The receiver of the test already had `10BF-10C0` and `10C3/10C4` at 99 (cap), so the male / female counter itself was not seen to move in BGB; on the sender `10BF-10C0` went from `00 00` to `01 00` in BGB on both ROMs, `results/link_counters.txt`.)
+
+### 16.7 Gender key: `$DA56` bit 0 = male, bit 1 = female (C)
+
+Owner registration (Start on the main menu, name keyboard, page button, gender page) with an unregistered save (`CE10517662`), cursor on the first symbol after "?" and on the second: BGB gives `$DA56 = 00` for "?" (no move), **`01`** for the first symbol (♂), **`02`** for the second (♀). The Japanese record screen shows "もらった写真 ♂ 00 ♀ 00" (received photos by sender gender), the guide's "Receive 5 Pics from Males / Females" (B-20 / B-21): so the counters `10C3` / `10C4` count senders with bit 0 / bit 1, and the reception counters `F12` / `F13` of a tag count receivers with bit 0 (male) / bit 1 (female). W4 of §12 is answered (the bit assignment is C); the message texts behind `$DBCF` are still open.
+
+### 16.8 Hot-spot effects: what each one does on screen (C for timing, I for the description)
+
+From the core on an armed hot spot (`tcrf_check/tools/hotspot_visibility.py`, `hotspot_filmstrip.py`; filmstrip `tcrf_check/assets/bgb/hotspot_effects/filmstrip.png`, frames at +3, +8, +16, +30, +60 after the A press), and agreeing with BGB (§16.6, row 6):
+
+| Effect | Frames in `0C:04` | Largest share of changed pixels | What the screen does |
+|---|---|---|---|
+| 0 | 25 | 0.4 % (the pointer) | nothing visible (I: a sound-only trigger or a very short effect) |
+| 1 | 78 | 34.7 % | ragged wipe that breaks the picture into stripes and comes back |
+| 2 | 75 | 53.9 % | fade to black |
+| 3 | 75 | 99.5 % | picture goes to negative (dark with white outlines) and returns |
+| 4 | 27 | 78.7 % | flash to white and back |
+| 5 | 80 | 32.2 % | horizontal shear / slicing |
+| 6 | 33 | 0.4 % | nothing visible |
+| 7 | 51 | 0.4 % | nothing visible |
+| 8-15 | 22 each | 0.4 % | nothing visible (all share `03:6983`) |
+
+The guide's wording ("transitional fade or wipe visuals") fits 1-5. Effects 0, 6, 7 take time without a visible change on the album photo used; this is **not** established as "no effect" (they may act on VRAM parts that this photo does not show). The names of the sixteen icons are still open: I need them from the effect menu of the real camera (§12 item 20).
+
+### 16.9 The twenty Pokémon stamps (I, visual identification of `tcrf_check/assets/stamps_rom/sheet_cat2_pokemon.png`)
+
+Stamps 1-20 of category 2 (ROM `2C:6000 + n × $190`): Charmander, Bulbasaur, Squirtle, Rattata, **? (spotted body, wings: I could not decide)**, Clefairy, Pikachu, Cubone, Poliwhirl, Eevee, Meowth, Jigglypuff, Dragonair, Machop, Horsea, Psyduck, Abra, Oddish, Diglett, Mew. The identification is by looking at 40 × 40 pixel sprites (I); the stamps are not named in the ROM or in the guide.
+
+### 16.10 What is still open after this round
+
+* The names of the sixteen hot-spot effect icons (the effect menu of the real camera), the twenty Pokémon stamp names (stamp 5 especially), the literal reading of どみーる, the Japanese captions of `$01` and `$0E`.
+* Whether a real international camera shows the CoroCoro-gated content without a tag (§16.5, point 2), and what it is.
+* The 18 sweep paths on which BGB and my core end in different modes (§16.6, row 1): timing or random-number dependent, not analysed.
+* BGB's **printer core** and the BGB debugger breakpoints of `BGB_TEST_SHEET.md` were not used: everything here is demo replay plus state comparison.
+* The F12 / F13 gender counters in BGB (the test receiver's counters were at the cap), and the byte timing of the link in BGB.
 
 ## Appendix: tools produced this session
 
@@ -2555,6 +3092,12 @@ the CoroCoro repair routine, the per-block self-repair rules, and the status of 
 - `tools/emu_calib_check.py` — PyBoy check of the calibration-record validity test with a given ROM and save (§11.9, point 2)
 - `tools/wram_readme.py` — renders the per-region CSV files of `wram/` as the condensed tables of §2
 - `wram/` — full per-region WRAM/HRAM write-ups (`wram_<region>.md`, evidence with `bank:addr` citations) and rows (`wram_<region>.csv`), the access tables and the traces
+- `coverage/` — emulator coverage run (§13): the native SM83 core `src/gbcov.c` + `gbcov.py`, 19 driver / analysis tools in `tools/` (fuzzer `coverage_run.py`, `sweep_auto.py`, `sweep_vars.py`, `settle_runs.py`, `long_runs.py`, `damaged_saves.py`, `make_hotspot_saves.py`, `replay_corpus.py`, `merge_states.py`, `coverage_report.py`, `rom_map.py`, `d1_map.py`, `gating_branches.py`, `state_graph.py`, `forced_legit.py`, `unexec_by_symbol.py`, `validate_calib.py`, `newcov.py`, `gbdis.py`), `final_merge.sh`, `results/` (merged coverage, report tables, corpus, logs), `saves/`, `d1sheets/`
+- `tools/tcrf_checklist.py COV.npz OUT.md OUT.csv` — builds the TCRF documented-content checklist with coverage computed from a merged `cov.npz` (§15.3)
+- `tools/stamp_atlas.py`, `stamp_sheets.py`, `stamps_from_rom.py`, `frame_atlas.py`, `extract_albumB.py`, `screen_assets.py`, `glyph_pairs.py`, `tile_view.py`, `bank_sheet.py`, `path_shots.py` — asset retrieval (§15.6)
+- `tools/stamp_hold_a.py`, `stamp_hold_a2.py` — hold-A branch of the stamp tool (§15.4); `tools/hotspot_effects.py` — the 16 hot-spot effects with an armed hot spot (§15.5)
+- BGB (§16.6; BGB itself is not in the repository, `BGB_DIR` points to it): `bgb_run.py` (demo + state-file runner, library and CLI), `bgb_sig.py` (replay of a corpus path), `bgb_compare.py`, `bgb_retry.py` (the 206-path sweep and its summary), `bgb_stamp_hold.py`, `bgb_credits_gate.py`, `bgb_corocoro.py`, `bgb_pokemon_gate.py`, `bgb_pokemon_ball.py`, `bgb_hotspot_effects.py`, `bgb_link.py` + `bgb_link_check.py` (two linked instances), `bgb_gender.py`, `export_bgb_compact.py` (keeps demos, screens and result texts, drops the state files)
+- International ROM and names (§16.1-16.5, 16.8): `intl_replay.py`, `atlas_replay.py` (`MIRROR=1`), `atlas_sheet.py`, `mainmenu_probe.py`, `parlor_targets.py` (what each SHOOT-parlor choice opens), `albumb_pages.py` (Album B page walk), `boot_flags.py` (`$D582` / `$D562` after boot), `hotspot_common.py`, `hotspot_filmstrip.py`, `hotspot_visibility.py`
 - `disasm/code_gaps.md` — full report behind §1.2 (resolved indirect sites, verdict on the unreferenced regions, blockers)
 - `pocketcamera_jp.sym` — the growing symbol file; regenerate the disassembly from this after any addition
 

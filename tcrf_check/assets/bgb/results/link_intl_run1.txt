@@ -1,0 +1,10 @@
+SRAM chunk sizes 131072 131072
+sender   vector before [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 255, 255, 255]
+sender   vector after  [255, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 255, 255, 255]
+receiver vector before [255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]
+receiver vector after  [0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]
+sender position emptied: [0]  receiver position filled: [0]
+slot numbering +0: sender slot base 01000 receiver slot base 01000: 3841 bytes differ; offsets: 000 001 002 003 004 005 006 007 008 009 00A 00B 00C 00D 00E 00F 010 011 012 013 014 015 016 061
+   F12-F14 sender-before 99901f receiver-after aaaaaa  tag block valid (receiver): False False
+slot numbering +1: sender slot base 02000 receiver slot base 02000: 47 bytes differ; offsets: F14 F5A F5B F70 FB6 FB7 FB8 FB9 FBA FBB FBC FBD FBE FBF FC0 FC1 FC2 FC3 FC4 FC5 FC6 FC7 FC8 FC9
+   F12-F14 sender-before 000000 receiver-after 000001  tag block valid (receiver): True True

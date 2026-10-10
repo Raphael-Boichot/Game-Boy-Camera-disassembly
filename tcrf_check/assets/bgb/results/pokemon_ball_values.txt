@@ -1,0 +1,8 @@
+SRAM $10CA = 00: $DAA5 = 00  $D642 = 04  expected 04  mode:state 11:04  ok
+SRAM $10CA = 01: $DAA5 = 01  $D642 = 05  expected 05  mode:state 11:04  ok
+SRAM $10CA = 02: $DAA5 = 02  $D642 = 06  expected 06  mode:state 11:04  ok
+SRAM $10CA = 03: $DAA5 = 03  $D642 = 07  expected 07  mode:state 11:04  ok
+SRAM $10CA = 04: $DAA5 = 04  $D642 = 08  expected 08  mode:state 11:04  ok
+SRAM $10CA = 05: $DAA5 = 05  $D642 = 09  expected 09  mode:state 11:04  ok
+SRAM $10CA = 06: $DAA5 = 06  $D642 = 09  expected 09  mode:state 11:04  ok
+SRAM $10CA = 10: $DAA5 = 10  $D642 = 09  expected 09  mode:state 11:04  ok
