@@ -90,7 +90,7 @@ Blockers, by importance:
 4. **Cooperative-task and callback pointers** found by heuristics (split immediates, word tables) may be incomplete.
 5. 0A:4C51 and other quirks are real ROM behaviour that a rebuilt source must keep bit-exact (it will, as `jr`).
 
-Needs emulator/hardware confirmation (PyBoy is already used in `emu/drv.py`; its `hook_register` can log PC and bank):
+Needs emulator/hardware confirmation (PyBoy is already used in `emu/drv.py`; its `hook_register` can log PC and bank). *Update: the first two items were done with a purpose-built core, see the addendum below and README section 13; the last two are only partly covered.*
 * PC + bank coverage over a scripted tour of every mode: any executed PC outside `trace_jp_v3.json` is a tracer gap; the 45 dead roots must never execute.
 * ROM read log (address + bank) for the 14 unreferenced banks to find which tables select them.
 * Index ranges: 0A table 64-95 (third block, A | $40) and every `rst $18` table maximum index.
@@ -99,7 +99,7 @@ Needs emulator/hardware confirmation (PyBoy is already used in `emu/drv.py`; its
 Owner must decide / supply:
 * Policy for the 45 dead roots: assemble as code tagged `unreferenced`, or leave as `db`.
 * Whether to adopt the four rules, the `RESOLVED_JPHL` table and `extra_roots.json` into `tools/rom_trace.py` (I did not touch it) and to fix `rom_coverage.py` (items 1-2 above).
-* A scripted emulator coverage run (input sequences for every mode), or permission for me to write it.
+* ~~A scripted emulator coverage run (input sequences for every mode), or permission for me to write it.~~ **Done** (permission given): see the addendum "emulator coverage run" below and README section 13 (`coverage/`).
 * Charset/text table for strings (`MAIN PASS` is ASCII; the rest is unknown to me) and label-naming convention for the ~130 new roots.
 
 
