@@ -1,0 +1,25 @@
+2026-10-07 23:34:36 RESUME from state2_b
+2026-10-07 23:36:37 resumed entries 5281 snaps 2014 counters (83248, 576389, 10, 275)
+2026-10-07 23:37:07 it 42504 fr 18691190  {'ex': 84734, 'dr': 584067, 'ram': 10, 'bsel': 276} org_ex 83257 entries 5327 (tainted 44) sigs 246
+2026-10-07 23:37:37 it 42935 fr 18915046  {'ex': 94492, 'dr': 610102, 'ram': 10, 'bsel': 290} org_ex 83257 entries 5519 (tainted 236) sigs 255
+2026-10-07 23:38:07 it 43351 fr 19135468  {'ex': 95370, 'dr': 615435, 'ram': 10, 'bsel': 292} org_ex 83257 entries 5571 (tainted 288) sigs 256
+2026-10-07 23:38:37 it 43804 fr 19355038  {'ex': 96763, 'dr': 636901, 'ram': 10, 'bsel': 296} org_ex 83257 entries 5604 (tainted 299) sigs 257
+2026-10-07 23:39:07 it 44234 fr 19573192  {'ex': 97245, 'dr': 646224, 'ram': 10, 'bsel': 298} org_ex 83257 entries 5661 (tainted 300) sigs 258
+2026-10-07 23:39:37 checkpoint 0.2s {'exec_bytes': 97446, 'rom_data_bytes': 647086, 'ram_exec_addrs': 10, 'bank_select_sites': 298} entries 5680 sigs 258
+2026-10-07 23:39:37 it 44653 fr 19789072  {'ex': 97446, 'dr': 647086, 'ram': 10, 'bsel': 298} org_ex 83257 entries 5680 (tainted 300) sigs 258
+2026-10-07 23:40:07 it 45069 fr 20007204  {'ex': 97546, 'dr': 647704, 'ram': 10, 'bsel': 298} org_ex 83257 entries 5703 (tainted 300) sigs 258
+2026-10-07 23:40:37 it 45534 fr 20231433  {'ex': 97600, 'dr': 659610, 'ram': 10, 'bsel': 305} org_ex 83257 entries 5761 (tainted 300) sigs 259
+2026-10-07 23:41:07 it 46000 fr 20460637  {'ex': 97738, 'dr': 668287, 'ram': 10, 'bsel': 308} org_ex 83257 entries 5771 (tainted 300) sigs 259
+2026-10-07 23:41:37 it 46456 fr 20687245  {'ex': 97740, 'dr': 669238, 'ram': 10, 'bsel': 309} org_ex 83257 entries 5789 (tainted 300) sigs 259
+2026-10-07 23:42:07 it 46910 fr 20920035  {'ex': 97751, 'dr': 676534, 'ram': 10, 'bsel': 454} org_ex 83257 entries 5795 (tainted 300) sigs 261
+2026-10-07 23:42:37 checkpoint 0.1s {'exec_bytes': 97811, 'rom_data_bytes': 678334, 'ram_exec_addrs': 10, 'bank_select_sites': 455} entries 5804 sigs 261
+2026-10-07 23:42:37 it 47377 fr 21147809  {'ex': 97811, 'dr': 678334, 'ram': 10, 'bsel': 455} org_ex 83257 entries 5804 (tainted 300) sigs 261
+2026-10-07 23:43:07 it 47866 fr 21374137  {'ex': 97887, 'dr': 683032, 'ram': 10, 'bsel': 456} org_ex 83257 entries 5809 (tainted 300) sigs 261
+2026-10-07 23:43:37 it 48343 fr 21608153  {'ex': 97922, 'dr': 686843, 'ram': 10, 'bsel': 457} org_ex 83257 entries 5815 (tainted 300) sigs 261
+2026-10-07 23:44:08 it 48813 fr 21843406  {'ex': 97931, 'dr': 688527, 'ram': 10, 'bsel': 459} org_ex 83257 entries 5819 (tainted 300) sigs 261
+2026-10-07 23:44:38 it 49272 fr 22071992  {'ex': 97931, 'dr': 692369, 'ram': 10, 'bsel': 461} org_ex 83257 entries 5831 (tainted 300) sigs 261
+2026-10-07 23:45:08 it 49713 fr 22295927  {'ex': 97987, 'dr': 692648, 'ram': 10, 'bsel': 464} org_ex 83257 entries 5864 (tainted 299) sigs 261
+2026-10-07 23:45:37 checkpoint 0.1s {'exec_bytes': 97994, 'rom_data_bytes': 695453, 'ram_exec_addrs': 10, 'bank_select_sites': 466} entries 5883 sigs 261
+2026-10-07 23:45:38 it 50167 fr 22525071  {'ex': 97994, 'dr': 695453, 'ram': 10, 'bsel': 466} org_ex 83264 entries 5883 (tainted 298) sigs 261
+2026-10-07 23:45:58 checkpoint 0.1s {'exec_bytes': 98117, 'rom_data_bytes': 695471, 'ram_exec_addrs': 10, 'bank_select_sites': 466} entries 5897 sigs 262
+2026-10-07 23:45:58 stopped

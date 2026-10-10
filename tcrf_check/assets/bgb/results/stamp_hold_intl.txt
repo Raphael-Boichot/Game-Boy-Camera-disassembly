@@ -1,0 +1,10 @@
+A held   0 frames: mode:state 11:04  buffers 69c60cee d9ad53e4 74876549 0266f14e    $D641 timer = 180
+A held 150 frames: mode:state 11:04  buffers 69c60cee d9ad53e4 74876549 0266f14e == original   $D641 timer = 180
+A held 175 frames: mode:state 11:04  buffers 69c60cee d9ad53e4 74876549 0266f14e == original   $D641 timer = 180
+A held 185 frames: mode:state 11:04  buffers 41cfb827 1ddd5086 32fc8a08 eb612534 != original   $D641 timer = 180
+A held 230 frames: mode:state 11:04  buffers 41cfb827 1ddd5086 32fc8a08 eb612534 != original   $D641 timer = 180
+A held 275 frames: mode:state 11:04  buffers 41cfb827 1ddd5086 32fc8a08 eb612534 != original   $D641 timer = 180
+A held 285 frames: mode:state 11:04  buffers 69c60cee d9ad53e4 74876549 0266f14e == original   $D641 timer = 100
+A held 330 frames: mode:state 11:04  buffers 69c60cee d9ad53e4 74876549 0266f14e == original   $D641 timer = 180
+A held 385 frames: mode:state 11:04  buffers 69c60cee d9ad53e4 74876549 0266f14e == original   $D641 timer = 180
+A held 395 frames: mode:state 11:04  buffers 41cfb827 1ddd5086 32fc8a08 eb612534 != original   $D641 timer = 180

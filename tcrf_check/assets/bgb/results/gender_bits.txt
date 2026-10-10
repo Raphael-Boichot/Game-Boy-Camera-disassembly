@@ -1,0 +1,4 @@
+save saves/CE10517662.sav (owner not yet registered), ROM pocketcamera_jp.gb; owner registration, gender page, cursor on "?" / first symbol / second symbol
+? (no move)                        -> mode:state 08:08  $DA56 = 00
+first symbol after ? (1 x Right)   -> mode:state 08:08  $DA56 = 01
+second symbol (2 x Right)          -> mode:state 08:08  $DA56 = 02

@@ -1,0 +1,7 @@
+BGB (3 extra boot frames) vs my core, joypad-only replay of the 206 corpus paths of the Japanese ROM:
+  exact                135
+  skipped (printer)     40
+  different             18
+  same mode             13
+  (compared = 166; exact = same (mode,state) at the end; same mode = same mode, other state; different = other mode; skipped = path needs the printer)
+  without the 3-frame shift: exact 124, same mode 14, different 28, skipped 40

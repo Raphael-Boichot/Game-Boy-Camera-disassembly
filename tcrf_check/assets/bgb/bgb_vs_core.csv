@@ -1,0 +1,207 @@
+target_sig,corpus_entry,core_reached,bgb_reached,comparison
+00:00,32,00:00,00:00,exact
+00:01,167,00:02,00:02,exact
+00:02,168,00:02,00:02,exact
+00:03,166,00:03,00:03,exact
+00:04,202,00:04,00:04,exact
+00:05,560,00:05,01:01,different
+00:06,923,00:06,00:01,same mode
+00:07,574,00:07,01:01,different
+01:00,177,01:00,01:01,same mode
+01:01,342,01:01,01:01,exact
+01:02,287,00:01,00:01,exact
+01:03,,,,skipped (printer)
+01:04,,,,skipped (printer)
+01:06,,,,skipped (printer)
+01:07,,,,skipped (printer)
+01:08,,,,skipped (printer)
+01:0A,,,,skipped (printer)
+02:00,207,02:01,02:01,exact
+02:01,208,02:01,02:01,exact
+03:00,526,03:01,03:01,exact
+03:01,506,03:01,03:01,exact
+04:01,584,04:01,14:01,different
+05:00,968,05:01,05:01,exact
+05:01,617,05:01,05:01,exact
+06:01,899,06:01,01:04,different
+07:01,252,07:01,07:02,same mode
+07:02,197,07:02,07:02,exact
+07:03,237,07:03,07:03,exact
+07:04,249,07:04,07:04,exact
+08:00,175,08:00,08:01,same mode
+08:01,189,08:01,08:01,exact
+08:04,212,08:04,08:04,exact
+08:07,352,08:07,08:07,exact
+08:08,803,08:08,08:08,exact
+08:09,1482,08:09,08:09,exact
+08:0A,1264,08:0A,08:0A,exact
+08:0D,839,08:0D,08:0D,exact
+08:0F,891,08:10,08:10,exact
+08:10,910,08:10,08:10,exact
+08:12,2393,08:13,08:13,exact
+08:13,2419,08:13,08:13,exact
+08:14,2420,08:14,08:14,exact
+08:15,2435,08:15,08:15,exact
+08:16,2524,08:15,08:15,exact
+08:17,2422,08:17,08:17,exact
+09:01,,,,skipped (printer)
+09:02,280,09:02,09:02,exact
+09:03,476,09:03,09:03,exact
+09:04,385,09:04,09:04,exact
+09:05,275,09:05,09:05,exact
+09:06,447,09:06,09:06,exact
+09:09,434,09:09,09:09,exact
+09:0A,435,09:01,09:01,exact
+09:0C,2757,09:0C,09:0C,exact
+0A:01,582,0A:01,0A:01,exact
+0A:02,261,0A:03,0A:03,exact
+0A:03,262,0A:03,0A:03,exact
+0A:04,276,0A:04,0A:04,exact
+0A:05,813,0A:05,0A:07,same mode
+0A:06,760,0A:06,0A:06,exact
+0A:07,277,0A:07,0A:07,exact
+0A:08,348,0A:08,0A:08,exact
+0A:0B,801,0A:0B,0A:0B,exact
+0A:0C,809,0A:03,0A:03,exact
+0A:0E,1544,0A:0E,0A:0E,exact
+0B:00,2071,0B:01,0A:04,different
+0B:01,293,0B:01,0A:03,different
+0C:01,437,0C:01,0A:04,different
+0C:03,1034,0C:03,0A:04,different
+0D:00,298,0D:01,0A:04,different
+0D:01,300,0D:01,0A:07,different
+0D:02,303,0D:02,0A:04,different
+0D:03,304,0D:03,0A:07,different
+0D:04,309,0D:04,0A:08,different
+0D:06,387,0D:07,0F:07,different
+0D:07,455,0D:07,0A:03,different
+0D:08,388,0D:07,0F:07,different
+0E:01,914,0E:01,01:0A,different
+0F:00,656,0F:03,0F:03,exact
+0F:02,2847,0F:02,0F:02,exact
+0F:03,658,0F:03,0F:03,exact
+0F:06,448,0F:06,0F:06,exact
+0F:07,465,0F:07,0F:07,exact
+0F:09,1731,0F:09,0F:06,same mode
+0F:0C,2852,0F:0C,0F:0C,exact
+0F:0D,680,0F:0D,0F:0D,exact
+10:01,1045,10:01,10:01,exact
+10:03,478,10:03,10:03,exact
+10:04,492,10:04,10:04,exact
+10:05,695,10:05,10:05,exact
+10:06,1395,10:06,10:06,exact
+10:07,595,09:01,09:01,exact
+10:09,511,10:09,10:09,exact
+11:01,607,11:01,14:01,different
+11:03,545,11:03,11:03,exact
+11:04,1006,11:04,11:04,exact
+11:05,539,11:01,11:01,exact
+11:07,579,11:07,11:07,exact
+12:00,717,12:00,12:01,same mode
+12:01,718,12:01,12:01,exact
+12:03,1296,12:03,12:03,exact
+12:04,1533,12:04,12:04,exact
+12:05,1432,05:00,05:01,same mode
+12:07,1340,12:08,12:08,exact
+12:08,721,12:08,12:08,exact
+12:09,1238,12:09,12:09,exact
+12:0B,1239,12:0B,12:0B,exact
+12:0C,1289,12:0C,12:0C,exact
+12:0F,1367,12:0F,12:01,same mode
+12:12,2379,12:12,12:12,exact
+12:14,1372,12:15,12:15,exact
+12:15,1329,12:15,12:15,exact
+12:16,1253,12:17,12:18,same mode
+12:18,1254,12:18,12:18,exact
+12:19,1284,12:01,12:01,exact
+12:1B,1365,12:1B,12:1B,exact
+12:1C,1366,12:1C,12:01,same mode
+12:1E,1361,12:1E,12:1E,exact
+12:1F,1413,12:01,12:01,exact
+12:20,1297,12:20,12:20,exact
+12:21,1330,12:21,12:21,exact
+12:22,1332,12:22,12:20,same mode
+13:01,954,13:01,0F:06,different
+13:02,995,13:07,0F:07,different
+13:07,1022,13:07,0A:03,different
+14:00,180,14:01,14:01,exact
+14:01,205,14:01,14:01,exact
+14:02,,,,skipped (printer)
+14:03,,,,skipped (printer)
+14:04,,,,skipped (printer)
+14:05,185,14:05,01:04,different
+14:06,,,,skipped (printer)
+14:07,,,,skipped (printer)
+14:08,,,,skipped (printer)
+14:0B,195,14:0B,14:0B,exact
+14:0C,210,14:01,14:01,exact
+15:00,,,,skipped (printer)
+15:01,,,,skipped (printer)
+15:02,,,,skipped (printer)
+15:03,,,,skipped (printer)
+15:05,,,,skipped (printer)
+15:06,,,,skipped (printer)
+15:07,,,,skipped (printer)
+15:08,,,,skipped (printer)
+15:09,,,,skipped (printer)
+16:01,,,,skipped (printer)
+16:02,,,,skipped (printer)
+16:03,,,,skipped (printer)
+16:04,,,,skipped (printer)
+16:05,,,,skipped (printer)
+16:06,,,,skipped (printer)
+17:00,522,17:00,17:01,same mode
+17:01,523,17:01,17:01,exact
+17:02,525,17:02,17:02,exact
+17:05,688,17:02,17:02,exact
+17:07,667,17:07,17:07,exact
+17:0A,610,17:0A,17:0A,exact
+17:0B,1135,17:0A,17:0A,exact
+17:0D,612,17:0D,17:0D,exact
+17:12,638,17:12,17:12,exact
+18:00,,,,skipped (printer)
+18:01,,,,skipped (printer)
+18:02,,,,skipped (printer)
+18:03,,,,skipped (printer)
+19:00,6,19:00,19:03,same mode
+19:02,169,19:03,19:03,exact
+19:03,0,19:03,19:03,exact
+1A:01,1018,1A:01,1A:01,exact
+1A:03,1016,1A:03,1A:03,exact
+1A:04,1019,1A:04,1A:04,exact
+1A:05,1068,1A:05,1A:05,exact
+1A:06,1095,1A:06,1A:06,exact
+1A:07,1053,1A:07,1A:07,exact
+1A:08,1093,1A:08,1A:08,exact
+1A:09,1101,1A:09,1A:09,exact
+1A:0A,1404,1A:03,1A:03,exact
+1A:0E,1078,1A:0E,1A:0E,exact
+1B:00,864,1B:01,14:01,different
+1B:01,865,1B:01,14:01,different
+1C:01,868,1C:01,14:02,different
+1C:03,289,1C:03,1C:03,exact
+1C:04,1356,1C:06,1C:06,exact
+1C:05,1258,1C:05,1C:05,exact
+1C:06,1357,1C:06,1C:06,exact
+1C:0A,1358,1C:0A,1C:0A,exact
+1C:0D,1416,1C:0D,1C:0D,exact
+1D:01,290,1D:0A,1D:0A,exact
+1D:03,,,,skipped (printer)
+1D:04,,,,skipped (printer)
+1D:05,,,,skipped (printer)
+1D:09,1464,1D:0A,1D:0A,exact
+1D:0A,291,1D:0A,1D:0A,exact
+1E:01,927,1E:01,01:0A,different
+1E:02,2576,1E:02,09:01,different
+1E:03,971,1E:03,01:01,different
+20:00,1973,20:01,20:01,exact
+20:01,1974,20:01,20:01,exact
+20:04,1976,20:04,20:04,exact
+20:06,1988,20:06,20:06,exact
+20:07,1979,20:07,20:07,exact
+20:0A,1990,20:0A,20:0A,exact
+21:01,,,,skipped (printer)
+21:02,,,,skipped (printer)
+21:04,,,,skipped (printer)
+21:05,,,,skipped (printer)
+21:06,,,,skipped (printer)

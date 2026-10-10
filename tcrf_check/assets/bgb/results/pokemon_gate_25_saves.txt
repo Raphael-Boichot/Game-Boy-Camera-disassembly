@@ -1,0 +1,26 @@
+GAMEBOYCAMERA_1M_space_fever_run_unlocked $DAA5=00 $D642=00 expected 04 mode:state 11:01 (path did not reach 11:04: rule not tested)
+GAMEBOYCAMERA_all_unlocked         $DAA5=00 $D642=00 expected 04 mode:state 11:01 (path did not reach 11:04: rule not tested)
+Universal_unlocking_save           $DAA5=00 $D642=00 expected 04 mode:state 00:00 (path did not reach 11:04: rule not tested)
+unl_CE10001819                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_CE10063189                     $DAA5=00 $D642=00 expected 04 mode:state 11:01 (path did not reach 11:04: rule not tested)
+unl_CE10229233                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_CE10238211                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_CE10251329                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_CE10517662                     $DAA5=00 $D642=00 expected 04 mode:state 11:01 (path did not reach 11:04: rule not tested)
+unl_CE10550742                     $DAA5=00 $D642=00 expected 04 mode:state 11:01 (path did not reach 11:04: rule not tested)
+unl_CE10785322                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_CE10811537                     $DAA5=00 $D642=00 expected 04 mode:state 11:01 (path did not reach 11:04: rule not tested)
+unl_CE10866859                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_PC10201702                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_PC10584071                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_PC10696894                     $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_CE10001819                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_CE10229233                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_CE10238211                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_CE10251329                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_CE10785322                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_CE10866859                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_PC10201702                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_PC10584071                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+unl_hs_PC10696894                  $DAA5=99 $D642=09 expected 09 mode:state 11:04 ok
+rule holds on 18 saves; mismatches 0 ; path did not reach 11:04 on 7 saves (not tested)
