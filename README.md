@@ -11,6 +11,10 @@ two ROMs are different builds that share the numbering of the modes and the flow
 (§16.1; an earlier sentence here, "menu logic in banks $003–$009 is byte-for-byte structurally
 identical", was wrong and is withdrawn). The Zelda-edition ROM was not examined.
 
+## Current status
+
+![](/jp_rom_reachability_map.png)
+
 ## Contents
 
 | § | Topic |
