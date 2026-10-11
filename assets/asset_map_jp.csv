@@ -1,0 +1,108 @@
+bank,start,end,type,description,consumer_or_context,evidence,community_sheet
+0B,4000,401F,sgb_packet,"MLT_REQ packets: $89 $00 (1 player, 4000) and $89 $01 (2 players, 4010); the multi-player probe 00:1CEA-1D43 sends them to detect the SGB",sender 00:1D38-1EA0,C,
+0B,4020,402F,sgb_packet,"PAL_SET: $51, palette ids $0010 x 4, $80 (cancel mask); the game window is drawn with palette 16 of the PAL_TRN block (BGB: its 4 colours)",sender 00:1D38-1EA0,C,
+0B,4030,403F,sgb_packet,ATTR_TRN packet $A9 $00 (data window 4040-503F),sender 00:1D38-1EA0,I,
+0B,4040,40A5,sgb_attr_trn_data,"start of the ATTR_TRN window: zeros up to 409C, then 40 40 40 90 90 90 E4 E4 E4 (not identified; the attribute files are not used by this sequence)",sender 00:1D38-1EA0,I,
+0B,40A6,40B5,sgb_packet,PAL_TRN packet $59 $00 (data window 40B6-50B5),sender 00:1D38-1EA0,C,
+0B,40B6,413D,sgb_pal_trn_data,SNES system palettes 0-16 (4 BGR555 colours each); id 16 at 4136-413D (FF7F B55A 6B35 6310) is the palette of the game window (BGB: exactly its 4 colours),sender 00:1D38-1EA0,C,
+0B,4156,4165,sgb_packet,CHR_TRN packet $99 $00: tiles 0-127 follow (4166-5165),sender 00:1D38-1EA0,C,
+0B,4166,5165,sgb_border_tiles,"SGB border tiles 0-127 (4bpp, 32 bytes each); 71 of the 256 tiles of both blocks are used by the map (2,272 B), the border is pixel-identical to BGB and to the community sheet",sender 00:1D38-1EA0,C,
+0B,5166,5175,sgb_packet,CHR_TRN packet $99 $01: tiles 128-255 follow (5176-6175),sender 00:1D38-1EA0,C,
+0B,5176,6175,sgb_border_tiles,SGB border tiles 128-255 (4bpp),sender 00:1D38-1EA0,C,
+0B,6176,6185,sgb_packet,"PCT_TRN packet $A1 $00 (data window 6186-7185: map, palettes)",sender 00:1D38-1EA0,C,
+0B,6186,6885,sgb_border_tilemap,"SGB border map rows 0-27 of the 32 x 32 words (tile, attribute); the 20 x 18 cells of the game window are tile 0 / attribute 0 (palette 0 = transparent)",sender 00:1D38-1EA0,C,
+0B,6886,6985,sgb_border_tilemap,map rows 28-31 (below the 224 lines the SGB shows); same pattern as the rows above (47 14 / 47 10),sender 00:1D38-1EA0,I,
+0B,6986,69C5,sgb_palettes,border palettes 4 and 5 (16 BGR555 words each; ff7f = white); the map uses only these two,sender 00:1D38-1EA0,C,
+0B,69E6,6A65,sgb_data_snd,"eight DATA_SND packets ($79, SNES address $085D down to $0810 in steps of $0B, bank 0, length 11) writing 88 contiguous bytes at $0810-$0867 (the bytes read as 65816 code, e.g. 4C 20 08 = JMP $0820, EA = NOP, 60 = RTS: that reading is I, the payload was not run); they lie inside the 4 KB PCT_TRN window where palette 7 would sit",sender 00:1D38-1EA0,C,
+0B,6A66,6A85,sgb_packet,"MASK_EN freeze $B9 $01 (6A66, sent by 00:1E69) and cancel $B9 $00 (6A76, 00:1E84)",sender 00:1D38-1EA0,C,
+10,74A0,74A2,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+10,78A8,78B7,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+10,7D51,7D51,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+17,65B1,65B3,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+17,65C2,65CF,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+17,667F,667F,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+19,716D,7170,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+19,7206,7206,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+19,7314,7316,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+19,7338,733F,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1A,5163,5181,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,5160,519F,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,5622,5622,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,564D,564D,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,570E,570F,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,5BDA,5BDF,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,5CCB,5CD2,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1C,5D47,5D47,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+1E,662E,6638,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
+14,4000,4553,banner_tiles,"128-px-wide Japanese banner (white katakana on black / grey, 16 tiles per row, about 5 tile rows) above a dithered picture strip; the picture part is read (14:4545-5380 by 00:289C), the banner part never is",block 14:4000-57FF,I,
+25,4A80,4DBF,bg_tilemap,"32-column BG tilemap: FE fill, 16x14 photo-area ramp (00-8F, 00-4F), side icons; sits between the maps copied from 25:47C0 and 25:4DC0",neighbours 25:47C0 and 25:4DC0 are copied to $9800,I,
+25,5080,50BF,bg_tilemap,first two rows (tile ramp 00-27) of the map whose other rows are read from 25:50C0,map 25:5080-,I,
+25,5320,535F,bg_tilemap,first two rows (tile ramp 00-27) of the map that starts at 25:5320,map 25:5320-,I,
+26,4500,487F,bg_tilemap,"32-column BG tilemap: 16x14 photo-area ramp with side icons, then $FF fill",before the map copied from 26:4EC0,I,
+27,4772,486F,bg_tilemap,"32-column BG tilemap rows filled with tile $FD (blank), before the map copied from 27:4870",map copied from 27:4870,I,
+27,4AA0,4CAF,tile_data,"small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs",unknown,I,
+28,51B8,53C9,kana_text_glyphs,white-on-black Japanese text glyph tiles (kana strings),text engine readers 00:061D-0639,I,
+2A,5160,517F,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,5280,52BF,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,5380,53BF,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,53E0,53F9,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,5DBE,5E47,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,5E62,5E67,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,5E84,5E97,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,6FC0,6FD8,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,701E,7026,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7035,7038,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7060,70B9,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,70E0,7114,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7131,7131,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,714E,726E,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,72B6,72B6,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,72C4,7355,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7363,7366,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7380,7380,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7391,73F9,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,740A,7419,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,742A,7439,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,744C,7458,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,746E,7470,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,74AC,74B9,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,74CC,74D9,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,74EC,74F9,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,750E,7519,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7540,7545,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,757F,757F,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7590,7593,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,75D1,7665,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,769F,7721,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7777,7777,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7794,7794,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,77A2,77A2,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,77B8,77DF,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7800,7829,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7839,783A,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7896,78A8,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,78D6,78DB,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,78F6,7A24,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7A32,7A33,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7AA9,7AD7,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7B00,7B28,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7B37,7B37,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7BAD,7BAD,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7BCA,7BD8,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7BEA,7BF8,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7C18,7C19,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7C6A,7C97,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7CAE,7CB0,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7CC4,7CCC,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7DFB,7E19,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7E2A,7E47,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7E62,7E69,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+2A,7E84,7E96,kana_glyph_tiles,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),text engine readers 00:061D-0639,I,"Stamps (JPN): the font block is bracketed ""Unused?"""
+31,5180,54FF,wild_frame_lateral,"lateral border strips of wild frame sheet idx0 (frame 01): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 31:4000, printer path 00:0468 / 1D:0A",I,Frames (JPN)
+31,6980,6CFF,wild_frame_lateral,"lateral border strips of wild frame sheet idx1 (frame 02): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 31:5800, printer path 00:0468 / 1D:0A",C,Frames (JPN)
+32,4180,44FF,wild_frame_lateral,"lateral border strips of wild frame sheet idx2 (frame 03): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 31:7000, printer path 00:0468 / 1D:0A",C,Frames (JPN)
+32,5980,5CFF,wild_frame_lateral,"lateral border strips of wild frame sheet idx3 (frame 04): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 32:4800, printer path 00:0468 / 1D:0A",I,Frames (JPN)
+32,7180,74FF,wild_frame_lateral,"lateral border strips of wild frame sheet idx4 (frame 05): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 32:6000, printer path 00:0468 / 1D:0A",C,Frames (JPN)
+33,4980,4CFF,wild_frame_lateral,"lateral border strips of wild frame sheet idx5 (frame 06): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 32:7800, printer path 00:0468 / 1D:0A",C,Frames (JPN)
+33,6180,64FF,wild_frame_lateral,"lateral border strips of wild frame sheet idx6 (frame 07): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 33:5000, printer path 00:0468 / 1D:0A",C,Frames (JPN)
+33,7980,7CFF,wild_frame_lateral,"lateral border strips of wild frame sheet idx7 (frame 08): sheet tiles 280-335 = 4 tiles wide x 14 rows, printed at columns 0,1,18,19 of rows 6-19","wild frame sheet at 33:6800, printer path 00:0468 / 1D:0A",C,Frames (JPN)

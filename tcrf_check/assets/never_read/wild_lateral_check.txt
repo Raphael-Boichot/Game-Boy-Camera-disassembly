@@ -1,0 +1,53 @@
+frame idx 1: sheet 0xc5800, printout 20x30 tiles
+  tiles with >=1 never-read byte: 51 (sheet tiles 333-383)
+  of them reproduced exactly by the printout: 51
+  with no twin in the read part of the sheet: 3, reproduced: 3
+  printed tiles changed by the ablation: 56
+  of which the baseline tile also exists in the never-read part: 3
+  changed but not matching any never-read tile (photo / other): 53
+  distinct tiles in the ablated printout at the changed positions: 1 (the fill tile)
+
+frame idx 2: sheet 0xc7000, printout 20x30 tiles
+  tiles with >=1 never-read byte: 104 (sheet tiles 280-383)
+  of them reproduced exactly by the printout: 104
+  with no twin in the read part of the sheet: 5, reproduced: 5
+  printed tiles changed by the ablation: 56
+  of which the baseline tile also exists in the never-read part: 56
+  changed but not matching any never-read tile (photo / other): 0
+  distinct tiles in the ablated printout at the changed positions: 1 (the fill tile)
+
+frame idx 4: sheet 0xca000, printout 20x30 tiles
+  tiles with >=1 never-read byte: 104 (sheet tiles 280-383)
+  of them reproduced exactly by the printout: 104
+  with no twin in the read part of the sheet: 56, reproduced: 56
+  printed tiles changed by the ablation: 56
+  of which the baseline tile also exists in the never-read part: 56
+  changed but not matching any never-read tile (photo / other): 0
+  distinct tiles in the ablated printout at the changed positions: 1 (the fill tile)
+
+frame idx 5: sheet 0xcb800, printout 20x30 tiles
+  tiles with >=1 never-read byte: 101 (sheet tiles 280-380)
+  of them reproduced exactly by the printout: 101
+  with no twin in the read part of the sheet: 0, reproduced: 0
+  printed tiles changed by the ablation: 56
+  of which the baseline tile also exists in the never-read part: 56
+  changed but not matching any never-read tile (photo / other): 0
+  distinct tiles in the ablated printout at the changed positions: 1 (the fill tile)
+
+frame idx 6: sheet 0xcd000, printout 20x30 tiles
+  tiles with >=1 never-read byte: 104 (sheet tiles 280-383)
+  of them reproduced exactly by the printout: 104
+  with no twin in the read part of the sheet: 33, reproduced: 33
+  printed tiles changed by the ablation: 56
+  of which the baseline tile also exists in the never-read part: 56
+  changed but not matching any never-read tile (photo / other): 0
+  distinct tiles in the ablated printout at the changed positions: 1 (the fill tile)
+
+frame idx 7: sheet 0xce800, printout 20x30 tiles
+  tiles with >=1 never-read byte: 104 (sheet tiles 280-383)
+  of them reproduced exactly by the printout: 104
+  with no twin in the read part of the sheet: 5, reproduced: 5
+  printed tiles changed by the ablation: 33
+  of which the baseline tile also exists in the never-read part: 33
+  changed but not matching any never-read tile (photo / other): 0
+  distinct tiles in the ablated printout at the changed positions: 1 (the fill tile)

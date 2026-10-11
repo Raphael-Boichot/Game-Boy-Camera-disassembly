@@ -26,12 +26,14 @@ md5 `fdcfe686cf4df461e870b6e53b2b5a8b`; the international ROM is md5 `42d2f65e25
 ## Gotchas learned
 * BGB runs a demo (one joypad byte per frame; 250-frame boot hold, then free frames) and gives a screenshot and the state at the end; mode `$D5CE`, state `$D5CF`.
   BGB needs 3 more boot frames than the core. Message states advance by themselves: use long waits and no extra key. Two CPUs: use 2 workers (about 250 BGB runs in 4 minutes).
+* `-screenonexit` in BGB saves only the 160 x 144 LCD; to see the Super Game Boy border run BGB with `SystemMode=2` in a visible window under Xvfb and capture the screen (`tcrf_check/tools/bgb_sgb_capture.sh`).
 * Long jobs in the background (`setsid nohup`); a foreground tool call over 120 s is killed. Never `pkill -f` a pattern that appears in your own command line (use the `[x]` trick).
 * Do not recompute what the README already states; check the section list at the top and §16.10 / §12 for open items.
 
 ## Where things stand
 * Japanese ROM coverage (v8): 95.3 % of the 60,449 traced instructions executed, 82.7 % by joypad and save only; 1.5 % of the ROM (15,288 B) never executed nor read
-  (map at the top of the README). Reassembles byte-exact; about 57 kB of data inside the code banks and most of the 52 data banks are still untyped (§1.2).
+  (map at the top of the README): 5,268 B are code that never ran, 10,020 B are data that no run read, and **10,017 of those are identified** (wild-frame side strips, kana
+  glyph banks, BG tilemaps, SGB data, tile-set gaps: §16.13, `assets/asset_map_jp.csv`, orange on the map). The SGB border of both ROMs is rebuilt from bank `$0B` and equals BGB's (C, §16.13 (5)). Reassembles byte-exact; about 57 kB of data inside the code banks and most of the 52 data banks are still untyped (§1.2).
 * International ROM: no instrumented coverage run (a fuzz was started and stopped; `coverage/tools/coverage_run.py` needs a variant without the Japanese trace).
   Behavioural parity checked in BGB: all menu nodes of the five Funtography flowcharts on both ROMs (§16.11); CoroCoro content absent (§16.12).
 * Closed by the owner: names of the 16 hot-spot icons, effect timing, CoroCoro on a real international camera (§16.12).
