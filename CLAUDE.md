@@ -32,7 +32,7 @@ md5 `fdcfe686cf4df461e870b6e53b2b5a8b`; the international ROM is md5 `42d2f65e25
 
 ## Where things stand
 * Japanese ROM coverage (v8): 95.3 % of the 60,449 traced instructions executed, 82.7 % by joypad and save only; 1.5 % of the ROM (15,288 B) never executed nor read
-  (map at the top of the README): 5,268 B are code that never ran, 10,020 B are data that no run read, and **10,017 of those are identified** (wild-frame side strips, kana
+  (map at the top of the README): 5,268 B are code that never ran (**1,191 of them were run afterwards**: SGB sender in BGB, hot-spot effect handlers, the APU branch; green on the map, §16.14, `assets/witness_jp.csv`, so 4,080 B stay red), 10,020 B are data that no run read, and **10,017 of those are identified** (wild-frame side strips, kana
   glyph banks, BG tilemaps, SGB data, tile-set gaps: §16.13, `assets/asset_map_jp.csv`, orange on the map). The SGB border of both ROMs is rebuilt from bank `$0B` and equals BGB's (C, §16.13 (5)). Reassembles byte-exact; about 57 kB of data inside the code banks and most of the 52 data banks are still untyped (§1.2).
 * International ROM: no instrumented coverage run (a fuzz was started and stopped; `coverage/tools/coverage_run.py` needs a variant without the Japanese trace).
   Behavioural parity checked in BGB: all menu nodes of the five Funtography flowcharts on both ROMs (§16.11); CoroCoro content absent (§16.12).

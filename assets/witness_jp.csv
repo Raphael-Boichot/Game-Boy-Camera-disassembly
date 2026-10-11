@@ -1,0 +1,12 @@
+bank,start,end,bytes,witness,evidence,description
+00,1D38,1D9C,101,sgb,C,BGB SystemMode=2 (Super Game Boy): block heads of the SGB sender
+00,1DA1,1E83,227,sgb,C,BGB SystemMode=2 (Super Game Boy): block heads of the SGB sender
+00,1E92,1EA3,18,sgb,C,BGB SystemMode=2 (Super Game Boy): block heads of the SGB sender
+05,517D,519B,31,apu,C,"BGB, music-editor corpus: branch on NR52 bit 0 / NR12 that my core cannot take"
+05,5249,524E,6,apu,C,"BGB, music-editor corpus: branch on NR52 bit 0 / NR12 that my core cannot take"
+03,657F,6624,166,hotspot,C,"my core, hot spot armed by a WRAM poke + real A press, effect values 0-15"
+03,6642,669E,93,hotspot,C,"my core, hot spot armed by a WRAM poke + real A press, effect values 0-15"
+03,66AF,66DB,45,hotspot,C,"my core, hot spot armed by a WRAM poke + real A press, effect values 0-15"
+03,67D5,695C,392,hotspot,C,"my core, hot spot armed by a WRAM poke + real A press, effect values 0-15"
+03,697D,69E6,106,hotspot,C,"my core, hot spot armed by a WRAM poke + real A press, effect values 0-15"
+03,69EF,69F4,6,hotspot,C,"my core, hot spot armed by a WRAM poke + real A press, effect values 0-15"
