@@ -26,6 +26,6 @@ Addresses are `bank:address` of the Japanese ROM (md5 fdcfe686cf4df461e870b6e53b
 | Link byte timing: HELLO `$29` / `$12`, info byte, command `$40|n`, 4,096 data bytes | two BGB instances | `00:2AE9` (serial IRQ), watch `$FF01`, `$FF02` | the values and alternation of `link_protocol/LINK_PROTOCOL.md`; the timing is the emulator's so far |
 | The F12 / F13 reception counters move by receiver gender | a receiver save whose `10C3/10C4` are not at the cap | SRAM after the exchange | `F12` +1 if the receiver's `$DA56` has bit 0, `F13` if bit 1 |
 | "Don't butter me up!" ending picture is in the JP ROM | after #2 | `09:50D0` | screen 16 of the credits |
-| Printer: packet driver and print-animation behaviour (§13.7) | BGB's printer emulation | `DC00-DC42` driver | not examined |
+| Printer: packet driver and print-animation behaviour (§13.7) | BGB has no printer on its command line: a printer helper on the link (`tools/bgb_printer.py`, README §17.1) | `DC00-DC42` driver | **done** (README §17): INIT / DATA / PRINT / INQUIRY sequences and the real-printer status values are reproduced, single photo, comment card, several photos and the TRIPY-H score printed; the print-animation timing was not measured |
 
 Please tell me what you see (a screenshot or the register values at a breakpoint is enough) and I will fold the result into README section 16.

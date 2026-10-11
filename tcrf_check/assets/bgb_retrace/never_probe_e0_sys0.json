@@ -1,0 +1,9 @@
+{
+ "corpus": "unlock_runs/f1_organic/corpus.jsonl",
+ "entry": 0,
+ "system": "0",
+ "never_heads": 877,
+ "hit": 0,
+ "hits": {},
+ "end": "19:03"
+}

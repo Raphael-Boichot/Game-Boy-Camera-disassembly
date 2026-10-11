@@ -1,0 +1,342 @@
+{"id": 0, "parent": -1, "gain": 0, "sig": [25, 3], "t": 0, "tainted": false, "spec": {"sav": "_ff", "combo": 4, "printer": 0, "free": 200}}
+{"id": 1, "parent": 0, "gain": 0, "sig": [7, 2], "t": 0, "tainted": false, "actions": [[128, 6, 160], [128, 30, 10], [48, 3, 2], [128, 12, 20], [8, 6, 160], [16, 4, 300]]}
+{"id": 2, "parent": 1, "gain": 0, "sig": [31, 5], "t": 0, "tainted": false, "actions": [[1, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [17, 1, 0], [17, 1, 0], [17, 1, 0], [17, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [17, 1, 0], [17, 1, 0], [17, 1, 0], [17, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [17, 1, 0], [17, 1, 0], [17, 1, 0], [17, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [1, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [0, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [16, 1, 0], [0, 1, 0], [0, 1, 0], [0, 120, 0]]}
+{"id": 3, "parent": 2, "gain": 0, "sig": [31, 9], "t": 0, "tainted": false, "actions": [[64, 4, 60]]}
+{"id": 4, "parent": 2, "gain": 34, "sig": [31, 1], "t": 0, "tainted": false, "actions": [[1, 30, 120], [32, 30, 20]]}
+{"id": 5, "parent": 3, "gain": 127, "sig": [31, 10], "t": 0, "tainted": false, "actions": [[16, 30, 40], [64, 90, 20], [144, 4, 20]]}
+{"id": 6, "parent": 2, "gain": 1, "sig": [31, 9], "t": 0, "tainted": false, "actions": [[2, 4, 40], [1, 90, 40], [64, 30, 40]]}
+{"id": 7, "parent": 5, "gain": 23, "sig": [31, 10], "t": 0, "tainted": false, "actions": [[4, 4, 40]]}
+{"id": 8, "parent": 7, "gain": 98, "sig": [31, 11], "t": 0, "tainted": false, "actions": [[64, 4, 40], [1, 90, 120], [16, 30, 40]]}
+{"id": 9, "parent": 5, "gain": 14, "sig": [31, 5], "t": 0, "tainted": false, "actions": [[8, 90, 40], [32, 4, 120], [16, 30, 20]]}
+{"id": 10, "parent": 8, "gain": 13, "sig": [31, 9], "t": 0, "tainted": false, "actions": [[64, 4, 40]]}
+{"id": 11, "parent": 10, "gain": 2, "sig": [31, 9], "t": 0, "tainted": false, "actions": [[8, 90, 40]]}
+{"id": 12, "parent": 6, "gain": 17, "sig": [31, 9], "t": 0, "tainted": false, "actions": [[128, 90, 40]]}
+{"id": 13, "parent": 2, "gain": 43, "sig": [31, 5], "t": 0, "tainted": false, "actions": [[160, 90, 120], [8, 30, 40], [8, 30, 20]]}
+{"id": 14, "parent": 6, "gain": 1, "sig": [31, 11], "t": 0, "tainted": false, "actions": [[64, 4, 20], [64, 90, 120], [144, 4, 20]]}
+{"id": 15, "parent": 2, "gain": 3, "sig": [31, 5], "t": 0, "tainted": false, "actions": [[2, 90, 40]]}
+{"id": 16, "parent": 12, "gain": 1, "sig": [31, 10], "t": 0, "tainted": false, "actions": [[16, 30, 40], [2, 4, 40], [64, 4, 40]]}
+{"id": 17, "parent": 5, "gain": 19, "sig": [31, 11], "t": 1, "tainted": false, "actions": [[16, 30, 40], [64, 90, 120], [1, 4, 120]]}
+{"id": 18, "parent": 17, "gain": 1, "sig": [31, 11], "t": 1, "tainted": false, "actions": [[2, 4, 20]]}
+{"id": 19, "parent": 15, "gain": 1, "sig": [31, 5], "t": 1, "tainted": false, "actions": [[128, 4, 40]]}
+{"id": 20, "parent": 13, "gain": 88, "sig": [31, 6], "t": 1, "tainted": false, "actions": [[32, 30, 40], [16, 4, 20]]}
+{"id": 21, "parent": 20, "gain": 29, "sig": [31, 1], "t": 1, "tainted": false, "actions": [[1, 4, 40], [32, 30, 120], [18, 90, 40]]}
+{"id": 22, "parent": 8, "gain": 26, "sig": [31, 10], "t": 1, "tainted": false, "actions": [[4, 4, 40], [64, 4, 20], [80, 30, 20]]}
+{"id": 23, "parent": 22, "gain": 3, "sig": [31, 10], "t": 1, "tainted": false, "actions": [[20, 4, 20], [8, 90, 40]]}
+{"id": 24, "parent": 13, "gain": 1, "sig": [31, 5], "t": 1, "tainted": false, "actions": [[128, 4, 40], [128, 4, 40], [17, 4, 20]]}
+{"id": 25, "parent": 12, "gain": 17, "sig": [31, 5], "t": 1, "tainted": false, "actions": [[160, 4, 40], [1, 4, 120], [4, 4, 20]]}
+{"id": 26, "parent": 18, "gain": 1, "sig": [31, 9], "t": 1, "tainted": false, "actions": [[16, 90, 40], [160, 4, 40], [64, 4, 40]]}
+{"id": 27, "parent": 2, "gain": 3, "sig": [31, 5], "t": 1, "tainted": false, "actions": [[48, 4, 40], [4, 30, 40]]}
+{"id": 28, "parent": 12, "gain": 19, "sig": [31, 9], "t": 2, "tainted": false, "actions": [[2, 30, 40], [4, 90, 40], [24, 90, 120]]}
+{"id": 29, "parent": 28, "gain": 18, "sig": [31, 9], "t": 2, "tainted": false, "actions": [[4, 30, 40]]}
+{"id": 30, "parent": 4, "gain": 0, "sig": [31, 2], "t": 2, "tainted": false, "actions": [[16, 4, 40], [4, 4, 40]]}
+{"id": 31, "parent": 10, "gain": 18, "sig": [31, 9], "t": 2, "tainted": false, "actions": [[144, 90, 120]]}
+{"id": 32, "parent": 20, "gain": 0, "sig": [31, 7], "t": 2, "tainted": false, "actions": [[128, 90, 40], [128, 4, 40], [24, 4, 40]]}
+{"id": 33, "parent": 18, "gain": 2, "sig": [31, 11], "t": 2, "tainted": false, "actions": [[8, 90, 120]]}
+{"id": 34, "parent": 32, "gain": 1, "sig": [31, 1], "t": 2, "tainted": false, "actions": [[1, 90, 20]]}
+{"id": 35, "parent": 25, "gain": 2, "sig": [31, 5], "t": 3, "tainted": false, "actions": [[8, 90, 40], [4, 4, 40], [48, 30, 20]]}
+{"id": 36, "parent": 34, "gain": 3, "sig": [31, 3], "t": 3, "tainted": false, "actions": [[18, 90, 120], [2, 90, 40]]}
+{"id": 37, "parent": 20, "gain": 0, "sig": [31, 0], "t": 3, "tainted": false, "actions": [[4, 30, 40], [1, 4, 120], [20, 30, 20]]}
+{"id": 38, "parent": 28, "gain": 1, "sig": [31, 9], "t": 3, "tainted": false, "actions": [[18, 4, 120]]}
+{"id": 39, "parent": 24, "gain": 13, "sig": [31, 5], "t": 3, "tainted": false, "actions": [[1, 4, 20], [4, 4, 40]]}
+{"id": 40, "parent": 21, "gain": 1, "sig": [31, 2], "t": 3, "tainted": false, "actions": [[16, 4, 40], [64, 4, 40], [2, 4, 20]]}
+{"id": 41, "parent": 7, "gain": 1, "sig": [31, 10], "t": 3, "tainted": false, "actions": [[17, 4, 20]]}
+{"id": 42, "parent": 29, "gain": 3, "sig": [31, 9], "t": 3, "tainted": false, "actions": [[4, 90, 40], [18, 30, 40]]}
+{"id": 43, "parent": 24, "gain": 8, "sig": [31, 5], "t": 4, "tainted": false, "actions": [[8, 30, 40], [160, 4, 40]]}
+{"id": 44, "parent": 3, "gain": 2, "sig": [31, 9], "t": 4, "tainted": false, "actions": [[2, 4, 40], [17, 90, 120]]}
+{"id": 45, "parent": 25, "gain": 2, "sig": [31, 5], "t": 4, "tainted": false, "actions": [[4, 4, 20]]}
+{"id": 46, "parent": 34, "gain": 7, "sig": [31, 5], "t": 4, "tainted": false, "actions": [[64, 30, 40], [18, 4, 20], [20, 30, 40]]}
+{"id": 47, "parent": 4, "gain": 4, "sig": [7, 2], "t": 4, "tainted": false, "actions": [[160, 4, 40], [20, 90, 40], [8, 90, 20]]}
+{"id": 48, "parent": 36, "gain": 6, "sig": [31, 5], "t": 5, "tainted": false, "actions": [[17, 4, 40]]}
+{"id": 49, "parent": 23, "gain": 2, "sig": [31, 10], "t": 5, "tainted": false, "actions": [[16, 4, 40], [18, 30, 40]]}
+{"id": 50, "parent": 35, "gain": 1, "sig": [31, 5], "t": 5, "tainted": false, "actions": [[4, 4, 120]]}
+{"id": 51, "parent": 22, "gain": 15, "sig": [31, 11], "t": 5, "tainted": false, "actions": [[80, 4, 40], [4, 90, 120], [8, 4, 120]]}
+{"id": 52, "parent": 29, "gain": 3, "sig": [31, 9], "t": 5, "tainted": false, "actions": [[24, 4, 20], [4, 90, 40]]}
+{"id": 53, "parent": 21, "gain": 0, "sig": [0, 3], "t": 5, "tainted": false, "actions": [[32, 90, 40]]}
+{"id": 54, "parent": 29, "gain": 6, "sig": [31, 9], "t": 6, "tainted": false, "actions": [[8, 4, 120], [8, 4, 120]]}
+{"id": 55, "parent": 30, "gain": 7, "sig": [31, 3], "t": 6, "tainted": false, "actions": [[17, 4, 120]]}
+{"id": 56, "parent": 33, "gain": 15, "sig": [31, 11], "t": 7, "tainted": false, "actions": [[4, 90, 120], [4, 4, 20], [1, 4, 120]]}
+{"id": 57, "parent": 9, "gain": 3, "sig": [31, 5], "t": 7, "tainted": false, "actions": [[1, 90, 40], [8, 90, 120]]}
+{"id": 58, "parent": 46, "gain": 3, "sig": [31, 9], "t": 7, "tainted": false, "actions": [[160, 4, 40], [64, 4, 40], [144, 4, 120]]}
+{"id": 59, "parent": 55, "gain": 4, "sig": [31, 2], "t": 7, "tainted": false, "actions": [[32, 30, 40]]}
+{"id": 60, "parent": 59, "gain": 1, "sig": [31, 3], "t": 8, "tainted": false, "actions": [[18, 4, 40]]}
+{"id": 61, "parent": 34, "gain": 1, "sig": [31, 3], "t": 8, "tainted": false, "actions": [[144, 30, 120]]}
+{"id": 62, "parent": 42, "gain": 16, "sig": [31, 5], "t": 8, "tainted": false, "actions": [[1, 90, 40], [16, 4, 40], [32, 4, 20]]}
+{"id": 63, "parent": 57, "gain": 8, "sig": [31, 6], "t": 8, "tainted": false, "actions": [[4, 90, 120], [8, 4, 40], [32, 4, 120]]}
+{"id": 64, "parent": 59, "gain": 2, "sig": [31, 1], "t": 8, "tainted": false, "actions": [[32, 4, 120]]}
+{"id": 65, "parent": 24, "gain": 1, "sig": [31, 6], "t": 9, "tainted": false, "actions": [[1, 30, 20], [18, 4, 40], [32, 4, 40]]}
+{"id": 66, "parent": 34, "gain": 1, "sig": [31, 1], "t": 9, "tainted": false, "actions": [[1, 4, 40], [2, 4, 40], [1, 90, 120]]}
+{"id": 67, "parent": 53, "gain": 39, "sig": [1, 1], "t": 10, "tainted": false, "actions": [[4, 90, 120], [20, 30, 40]]}
+{"id": 68, "parent": 61, "gain": 2, "sig": [31, 5], "t": 10, "tainted": false, "actions": [[160, 4, 120], [48, 4, 120], [48, 4, 20]]}
+{"id": 69, "parent": 67, "gain": 10, "sig": [21, 0], "t": 10, "tainted": false, "actions": [[2, 4, 40], [16, 4, 40]]}
+{"id": 70, "parent": 63, "gain": 14, "sig": [31, 5], "t": 11, "tainted": false, "actions": [[20, 30, 40], [16, 4, 20], [32, 4, 40]]}
+{"id": 71, "parent": 16, "gain": 26, "sig": [31, 10], "t": 11, "tainted": false, "actions": [[8, 4, 40], [4, 30, 40], [4, 4, 40]]}
+{"id": 72, "parent": 53, "gain": 16, "sig": [0, 2], "t": 11, "tainted": false, "actions": [[2, 4, 40]]}
+{"id": 73, "parent": 56, "gain": 1, "sig": [31, 11], "t": 11, "tainted": false, "actions": [[24, 4, 120]]}
+{"id": 74, "parent": 73, "gain": 1, "sig": [31, 9], "t": 12, "tainted": false, "actions": [[2, 4, 120], [64, 90, 20], [16, 4, 40]]}
+{"id": 75, "parent": 69, "gain": 2, "sig": [20, 1], "t": 12, "tainted": false, "actions": [[128, 30, 40]]}
+{"id": 76, "parent": 21, "gain": 2, "sig": [31, 5], "t": 12, "tainted": false, "actions": [[16, 4, 40], [17, 30, 40], [24, 4, 120]]}
+{"id": 77, "parent": 70, "gain": 5, "sig": [31, 5], "t": 12, "tainted": false, "actions": [[128, 4, 40], [8, 4, 20], [16, 4, 120]]}
+{"id": 78, "parent": 47, "gain": 0, "sig": [7, 4], "t": 12, "tainted": false, "actions": [[144, 4, 120]]}
+{"id": 79, "parent": 57, "gain": 1, "sig": [31, 5], "t": 12, "tainted": false, "actions": [[128, 30, 120], [1, 4, 40], [48, 4, 20]]}
+{"id": 80, "parent": 71, "gain": 20, "sig": [31, 10], "t": 12, "tainted": false, "actions": [[1, 4, 120]]}
+{"id": 81, "parent": 69, "gain": 0, "sig": [20, 2], "t": 12, "tainted": false, "actions": [[128, 4, 20], [16, 4, 20], [128, 90, 40]]}
+{"id": 82, "parent": 80, "gain": 30, "sig": [31, 10], "t": 12, "tainted": false, "actions": [[4, 30, 120], [17, 4, 20], [1, 30, 40]]}
+{"id": 83, "parent": 71, "gain": 1, "sig": [31, 10], "t": 13, "tainted": false, "actions": [[4, 4, 120], [1, 30, 40], [8, 4, 40]]}
+{"id": 84, "parent": 41, "gain": 25, "sig": [31, 10], "t": 13, "tainted": false, "actions": [[4, 90, 40], [4, 4, 40], [17, 90, 20]]}
+{"id": 85, "parent": 75, "gain": 0, "sig": [1, 6], "t": 13, "tainted": false, "actions": [[32, 30, 120], [24, 30, 40]]}
+{"id": 86, "parent": 43, "gain": 1, "sig": [31, 5], "t": 13, "tainted": false, "actions": [[128, 30, 20], [2, 30, 40]]}
+{"id": 87, "parent": 41, "gain": 1, "sig": [31, 6], "t": 13, "tainted": false, "actions": [[18, 90, 40], [48, 4, 20], [32, 4, 120]]}
+{"id": 88, "parent": 75, "gain": 27, "sig": [20, 1], "t": 14, "tainted": false, "actions": [[1, 90, 120], [64, 4, 40], [80, 30, 40]]}
+{"id": 89, "parent": 80, "gain": 1, "sig": [31, 5], "t": 14, "tainted": false, "actions": [[128, 30, 40], [24, 4, 40], [32, 90, 40]]}
+{"id": 90, "parent": 67, "gain": 0, "sig": [1, 7], "t": 15, "tainted": false, "actions": [[2, 4, 120], [24, 4, 120]]}
+{"id": 91, "parent": 90, "gain": 25, "sig": [21, 3], "t": 16, "tainted": false, "actions": [[17, 4, 120], [17, 30, 20]]}
+{"id": 92, "parent": 88, "gain": 0, "sig": [1, 0], "t": 16, "tainted": false, "actions": [[32, 30, 20]]}
+{"id": 93, "parent": 82, "gain": 17, "sig": [31, 10], "t": 16, "tainted": false, "actions": [[17, 4, 40]]}
+{"id": 94, "parent": 93, "gain": 4, "sig": [31, 10], "t": 17, "tainted": false, "actions": [[4, 4, 120], [128, 4, 20], [2, 4, 120]]}
+{"id": 95, "parent": 72, "gain": 0, "sig": [0, 1], "t": 17, "tainted": false, "actions": [[1, 4, 20]]}
+{"id": 96, "parent": 95, "gain": 0, "sig": [1, 2], "t": 17, "tainted": false, "actions": [[20, 90, 40], [1, 90, 20], [16, 4, 20]]}
+{"id": 97, "parent": 91, "gain": 8, "sig": [20, 1], "t": 17, "tainted": false, "actions": [[48, 4, 20], [20, 4, 40], [2, 4, 40]]}
+{"id": 98, "parent": 82, "gain": 1, "sig": [31, 11], "t": 17, "tainted": false, "actions": [[8, 4, 40], [128, 4, 120], [80, 4, 40]]}
+{"id": 99, "parent": 70, "gain": 7, "sig": [31, 5], "t": 17, "tainted": false, "actions": [[24, 4, 120], [128, 4, 120], [4, 90, 120]]}
+{"id": 100, "parent": 85, "gain": 0, "sig": [21, 6], "t": 17, "tainted": false, "actions": [[8, 30, 40], [144, 30, 40]]}
+{"id": 101, "parent": 72, "gain": 103, "sig": [10, 1], "t": 18, "tainted": false, "actions": [[16, 4, 40], [80, 30, 40], [16, 4, 20]]}
+{"id": 102, "parent": 96, "gain": 2, "sig": [9, 1], "t": 18, "tainted": false, "actions": [[8, 4, 120]]}
+{"id": 103, "parent": 97, "gain": 0, "sig": [21, 2], "t": 18, "tainted": false, "actions": [[4, 90, 40], [48, 90, 20]]}
+{"id": 104, "parent": 53, "gain": 0, "sig": [7, 1], "t": 18, "tainted": false, "actions": [[16, 90, 20]]}
+{"id": 105, "parent": 47, "gain": 0, "sig": [7, 3], "t": 19, "tainted": false, "actions": [[32, 30, 120]]}
+{"id": 106, "parent": 99, "gain": 2, "sig": [31, 5], "t": 19, "tainted": false, "actions": [[2, 30, 20], [144, 4, 120], [128, 90, 40]]}
+{"id": 107, "parent": 80, "gain": 1, "sig": [31, 10], "t": 19, "tainted": false, "actions": [[1, 4, 40], [2, 30, 40]]}
+{"id": 108, "parent": 88, "gain": 0, "sig": [20, 4], "t": 20, "tainted": false, "actions": [[64, 4, 120]]}
+{"id": 109, "parent": 93, "gain": 3, "sig": [31, 10], "t": 20, "tainted": false, "actions": [[20, 4, 40], [18, 90, 40]]}
+{"id": 110, "parent": 91, "gain": 1, "sig": [21, 2], "t": 20, "tainted": false, "actions": [[20, 4, 40]]}
+{"id": 111, "parent": 108, "gain": 12, "sig": [20, 1], "t": 20, "tainted": false, "actions": [[8, 30, 40], [24, 4, 40]]}
+{"id": 112, "parent": 71, "gain": 2, "sig": [31, 10], "t": 21, "tainted": false, "actions": [[8, 4, 40], [128, 4, 40]]}
+{"id": 113, "parent": 56, "gain": 15, "sig": [31, 11], "t": 21, "tainted": false, "actions": [[1, 90, 20]]}
+{"id": 114, "parent": 108, "gain": 0, "sig": [20, 7], "t": 22, "tainted": false, "actions": [[128, 30, 40], [4, 4, 120]]}
+{"id": 115, "parent": 108, "gain": 0, "sig": [20, 8], "t": 22, "tainted": false, "actions": [[8, 30, 40]]}
+{"id": 116, "parent": 100, "gain": 0, "sig": [21, 7], "t": 22, "tainted": false, "actions": [[16, 4, 120]]}
+{"id": 117, "parent": 101, "gain": 0, "sig": [2, 1], "t": 22, "tainted": false, "actions": [[160, 4, 40], [64, 30, 20]]}
+{"id": 118, "parent": 90, "gain": 1, "sig": [0, 1], "t": 22, "tainted": false, "actions": [[32, 4, 40], [2, 30, 40], [32, 4, 120]]}
+{"id": 119, "parent": 73, "gain": 1, "sig": [31, 5], "t": 22, "tainted": false, "actions": [[8, 4, 40], [32, 30, 20]]}
+{"id": 120, "parent": 96, "gain": 0, "sig": [9, 0], "t": 22, "tainted": false, "actions": [[64, 4, 20]]}
+{"id": 121, "parent": 109, "gain": 1, "sig": [31, 10], "t": 23, "tainted": false, "actions": [[2, 90, 40]]}
+{"id": 122, "parent": 98, "gain": 1, "sig": [31, 11], "t": 23, "tainted": false, "actions": [[1, 4, 40], [2, 30, 20], [18, 30, 120]]}
+{"id": 123, "parent": 103, "gain": 2, "sig": [1, 6], "t": 24, "tainted": false, "actions": [[2, 4, 40], [32, 4, 40]]}
+{"id": 124, "parent": 53, "gain": 0, "sig": [8, 1], "t": 25, "tainted": false, "actions": [[128, 4, 20], [4, 30, 20], [4, 90, 40]]}
+{"id": 125, "parent": 113, "gain": 1, "sig": [31, 9], "t": 25, "tainted": false, "actions": [[8, 4, 20], [64, 4, 20], [4, 4, 40]]}
+{"id": 126, "parent": 122, "gain": 3, "sig": [31, 11], "t": 25, "tainted": false, "actions": [[4, 4, 40], [8, 4, 40]]}
+{"id": 127, "parent": 80, "gain": 1, "sig": [31, 10], "t": 25, "tainted": false, "actions": [[2, 4, 40]]}
+{"id": 128, "parent": 93, "gain": 2, "sig": [31, 5], "t": 25, "tainted": false, "actions": [[8, 4, 40], [1, 4, 40], [48, 4, 20]]}
+{"id": 129, "parent": 117, "gain": 0, "sig": [11, 1], "t": 26, "tainted": false, "actions": [[1, 30, 40], [16, 4, 120]]}
+{"id": 130, "parent": 108, "gain": 25, "sig": [20, 4], "t": 26, "tainted": false, "actions": [[2, 4, 40], [1, 4, 120]]}
+{"id": 131, "parent": 123, "gain": 0, "sig": [1, 8], "t": 26, "tainted": false, "actions": [[18, 90, 40], [20, 4, 40]]}
+{"id": 132, "parent": 95, "gain": 0, "sig": [0, 4], "t": 26, "tainted": false, "actions": [[64, 4, 40], [128, 4, 40]]}
+{"id": 133, "parent": 121, "gain": 1, "sig": [31, 10], "t": 26, "tainted": false, "actions": [[8, 4, 120], [2, 4, 120]]}
+{"id": 134, "parent": 129, "gain": 0, "sig": [13, 1], "t": 27, "tainted": false, "actions": [[18, 30, 120]]}
+{"id": 135, "parent": 97, "gain": 2, "sig": [20, 1], "t": 27, "tainted": false, "actions": [[17, 4, 40], [2, 4, 120], [8, 4, 20]]}
+{"id": 136, "parent": 113, "gain": 2, "sig": [31, 11], "t": 27, "tainted": false, "actions": [[20, 90, 20], [128, 4, 40], [4, 4, 120]]}
+{"id": 137, "parent": 100, "gain": 1, "sig": [1, 7], "t": 28, "tainted": false, "actions": [[2, 4, 40], [1, 4, 40], [32, 90, 120]]}
+{"id": 138, "parent": 134, "gain": 0, "sig": [13, 10], "t": 28, "tainted": false, "actions": [[16, 4, 40]]}
+{"id": 139, "parent": 116, "gain": 0, "sig": [21, 8], "t": 28, "tainted": false, "actions": [[8, 4, 40], [128, 4, 40]]}
+{"id": 140, "parent": 132, "gain": 0, "sig": [4, 1], "t": 29, "tainted": false, "actions": [[18, 4, 40]]}
+{"id": 141, "parent": 107, "gain": 2, "sig": [31, 10], "t": 30, "tainted": false, "actions": [[16, 90, 40], [24, 4, 20], [24, 90, 120]]}
+{"id": 142, "parent": 140, "gain": 0, "sig": [16, 1], "t": 31, "tainted": false, "actions": [[18, 4, 40]]}
+{"id": 143, "parent": 134, "gain": 9, "sig": [13, 2], "t": 32, "tainted": false, "actions": [[64, 90, 40]]}
+{"id": 144, "parent": 113, "gain": 14, "sig": [31, 11], "t": 33, "tainted": false, "actions": [[1, 90, 40]]}
+{"id": 145, "parent": 137, "gain": 0, "sig": [21, 5], "t": 33, "tainted": false, "actions": [[8, 4, 40], [144, 4, 20], [8, 4, 20]]}
+{"id": 146, "parent": 129, "gain": 3, "sig": [11, 1], "t": 33, "tainted": false, "actions": [[32, 4, 20], [16, 4, 20], [1, 30, 40]]}
+{"id": 147, "parent": 143, "gain": 2, "sig": [13, 4], "t": 33, "tainted": false, "actions": [[2, 4, 120], [8, 30, 40], [1, 4, 40]]}
+{"id": 148, "parent": 124, "gain": 0, "sig": [8, 7], "t": 35, "tainted": false, "actions": [[16, 4, 40]]}
+{"id": 149, "parent": 95, "gain": 0, "sig": [8, 0], "t": 35, "tainted": false, "actions": [[128, 30, 40]]}
+{"id": 150, "parent": 143, "gain": 17, "sig": [13, 3], "t": 36, "tainted": false, "actions": [[8, 90, 40], [4, 30, 20]]}
+{"id": 151, "parent": 124, "gain": 0, "sig": [0, 0], "t": 38, "tainted": false, "actions": [[8, 30, 40], [4, 4, 40], [128, 30, 40]]}
+{"id": 152, "parent": 139, "gain": 4, "sig": [20, 3], "t": 39, "tainted": false, "actions": [[144, 30, 20], [16, 90, 20]]}
+{"id": 153, "parent": 97, "gain": 0, "sig": [21, 1], "t": 40, "tainted": false, "actions": [[2, 4, 20], [8, 4, 20], [32, 4, 20]]}
+{"id": 154, "parent": 135, "gain": 2, "sig": [20, 2], "t": 41, "tainted": false, "actions": [[1, 90, 120]]}
+{"id": 155, "parent": 130, "gain": 0, "sig": [20, 5], "t": 42, "tainted": false, "actions": [[2, 4, 20]]}
+{"id": 156, "parent": 150, "gain": 21, "sig": [13, 10], "t": 42, "tainted": false, "actions": [[18, 90, 40], [18, 4, 20]]}
+{"id": 157, "parent": 132, "gain": 0, "sig": [0, 5], "t": 42, "tainted": false, "actions": [[4, 90, 40]]}
+{"id": 158, "parent": 135, "gain": 0, "sig": [20, 6], "t": 43, "tainted": false, "actions": [[64, 30, 120], [1, 4, 20], [1, 30, 20]]}
+{"id": 159, "parent": 140, "gain": 1, "sig": [17, 1], "t": 45, "tainted": false, "actions": [[20, 90, 120]]}
+{"id": 160, "parent": 115, "gain": 3, "sig": [20, 8], "t": 45, "tainted": false, "actions": [[1, 4, 120]]}
+{"id": 161, "parent": 159, "gain": 1, "sig": [4, 1], "t": 45, "tainted": false, "actions": [[32, 30, 20], [2, 4, 120]]}
+{"id": 162, "parent": 155, "gain": 11, "sig": [20, 1], "t": 46, "tainted": false, "actions": [[20, 4, 20], [16, 4, 40]]}
+{"id": 163, "parent": 111, "gain": 1, "sig": [20, 1], "t": 47, "tainted": false, "actions": [[8, 30, 120], [2, 4, 40]]}
+{"id": 164, "parent": 154, "gain": 2, "sig": [20, 1], "t": 48, "tainted": false, "actions": [[160, 4, 20]]}
+{"id": 165, "parent": 157, "gain": 0, "sig": [0, 6], "t": 48, "tainted": false, "actions": [[1, 4, 20]]}
+{"id": 166, "parent": 127, "gain": 3, "sig": [31, 10], "t": 48, "tainted": false, "actions": [[20, 4, 20], [8, 4, 40], [1, 30, 40]]}
+{"id": 167, "parent": 144, "gain": 1, "sig": [31, 11], "t": 48, "tainted": false, "actions": [[8, 4, 20]]}
+{"id": 168, "parent": 136, "gain": 1, "sig": [31, 11], "t": 48, "tainted": false, "actions": [[16, 30, 120], [128, 4, 120], [2, 4, 20]]}
+{"id": 169, "parent": 129, "gain": 0, "sig": [13, 0], "t": 49, "tainted": false, "actions": [[17, 4, 40]]}
+{"id": 170, "parent": 154, "gain": 2, "sig": [20, 1], "t": 50, "tainted": false, "actions": [[16, 4, 20], [4, 90, 40]]}
+{"id": 171, "parent": 144, "gain": 1, "sig": [31, 11], "t": 52, "tainted": false, "actions": [[128, 4, 40], [2, 30, 40], [1, 4, 40]]}
+{"id": 172, "parent": 118, "gain": 3, "sig": [2, 1], "t": 52, "tainted": false, "actions": [[1, 4, 40], [2, 4, 120], [16, 90, 120]]}
+{"id": 173, "parent": 165, "gain": 0, "sig": [3, 1], "t": 53, "tainted": false, "actions": [[80, 4, 120], [128, 90, 20], [4, 4, 40]]}
+{"id": 174, "parent": 132, "gain": 0, "sig": [0, 7], "t": 55, "tainted": false, "actions": [[8, 4, 20], [32, 4, 40]]}
+{"id": 175, "parent": 45, "gain": 1, "sig": [31, 6], "t": 56, "tainted": false, "actions": [[4, 30, 40], [32, 4, 40], [48, 4, 20]]}
+{"id": 176, "parent": 172, "gain": 0, "sig": [11, 0], "t": 56, "tainted": false, "actions": [[17, 4, 40]]}
+{"id": 177, "parent": 160, "gain": 8, "sig": [20, 8], "t": 57, "tainted": false, "actions": [[1, 90, 40]]}
+{"id": 178, "parent": 173, "gain": 0, "sig": [26, 1], "t": 59, "tainted": false, "actions": [[16, 90, 40], [8, 30, 120], [2, 4, 120]]}
+{"id": 179, "parent": 171, "gain": 1, "sig": [31, 11], "t": 61, "tainted": false, "actions": [[20, 90, 20], [24, 4, 120]]}
+{"id": 180, "parent": 157, "gain": 0, "sig": [6, 1], "t": 62, "tainted": false, "actions": [[16, 90, 40]]}
+{"id": 181, "parent": 180, "gain": 0, "sig": [28, 1], "t": 63, "tainted": false, "actions": [[4, 4, 40], [16, 30, 40], [16, 4, 20]]}
+{"id": 182, "parent": 174, "gain": 5, "sig": [1, 3], "t": 70, "tainted": false, "actions": [[32, 4, 40], [18, 4, 40]]}
+{"id": 183, "parent": 182, "gain": 15, "sig": [1, 4], "t": 70, "tainted": false, "actions": [[128, 30, 40]]}
+{"id": 184, "parent": 183, "gain": 4, "sig": [1, 5], "t": 71, "tainted": false, "actions": [[4, 90, 20], [144, 4, 20]]}
+{"id": 185, "parent": 170, "gain": 6, "sig": [20, 1], "t": 71, "tainted": false, "actions": [[128, 90, 120], [8, 30, 40], [17, 4, 40]]}
+{"id": 186, "parent": 132, "gain": 5, "sig": [0, 6], "t": 71, "tainted": false, "actions": [[2, 30, 40], [1, 30, 40]]}
+{"id": 187, "parent": 165, "gain": 5, "sig": [0, 7], "t": 71, "tainted": false, "actions": [[8, 90, 120]]}
+{"id": 188, "parent": 180, "gain": 0, "sig": [14, 1], "t": 71, "tainted": false, "actions": [[1, 90, 20], [144, 30, 40]]}
+{"id": 189, "parent": 146, "gain": 2, "sig": [13, 1], "t": 72, "tainted": false, "actions": [[8, 4, 120], [20, 30, 40]]}
+{"id": 190, "parent": 187, "gain": 0, "sig": [5, 1], "t": 72, "tainted": false, "actions": [[18, 4, 40]]}
+{"id": 191, "parent": 183, "gain": 6, "sig": [20, 1], "t": 73, "tainted": false, "actions": [[64, 4, 120], [16, 30, 40], [1, 30, 40]]}
+{"id": 192, "parent": 83, "gain": 3, "sig": [31, 11], "t": 74, "tainted": false, "actions": [[80, 30, 120], [24, 30, 120], [8, 90, 120]]}
+{"id": 193, "parent": 70, "gain": 11, "sig": [31, 5], "t": 75, "tainted": false, "actions": [[2, 4, 40], [8, 4, 120]]}
+{"id": 194, "parent": 185, "gain": 2, "sig": [21, 2], "t": 76, "tainted": false, "actions": [[16, 90, 20], [2, 4, 120], [32, 90, 20]]}
+{"id": 195, "parent": 190, "gain": 0, "sig": [15, 13], "t": 77, "tainted": false, "actions": [[16, 90, 20], [144, 90, 40]]}
+{"id": 196, "parent": 19, "gain": 2, "sig": [31, 1], "t": 77, "tainted": false, "actions": [[32, 30, 40], [1, 4, 40], [17, 30, 40]]}
+{"id": 197, "parent": 180, "gain": 0, "sig": [27, 1], "t": 79, "tainted": false, "actions": [[1, 4, 40], [4, 4, 40], [48, 90, 40]]}
+{"id": 198, "parent": 195, "gain": 1, "sig": [5, 1], "t": 79, "tainted": false, "actions": [[2, 4, 40], [2, 4, 120], [32, 30, 20]]}
+{"id": 199, "parent": 198, "gain": 0, "sig": [15, 3], "t": 81, "tainted": false, "actions": [[128, 90, 20], [20, 4, 40], [16, 90, 120]]}
+{"id": 200, "parent": 198, "gain": 0, "sig": [15, 0], "t": 82, "tainted": false, "actions": [[4, 4, 20], [16, 4, 20]]}
+{"id": 201, "parent": 198, "gain": 0, "sig": [18, 0], "t": 83, "tainted": false, "actions": [[18, 4, 20]]}
+{"id": 202, "parent": 199, "gain": 0, "sig": [15, 12], "t": 85, "tainted": false, "actions": [[128, 90, 20], [16, 4, 20], [24, 30, 40]]}
+{"id": 203, "parent": 139, "gain": 0, "sig": [20, 0], "t": 85, "tainted": false, "actions": [[1, 4, 120], [1, 30, 40], [16, 4, 20]]}
+{"id": 204, "parent": 197, "gain": 0, "sig": [30, 1], "t": 85, "tainted": false, "actions": [[4, 90, 20], [2, 4, 40], [17, 4, 40]]}
+{"id": 205, "parent": 43, "gain": 1, "sig": [31, 9], "t": 86, "tainted": false, "actions": [[128, 4, 40], [8, 4, 40], [64, 90, 120]]}
+{"id": 206, "parent": 190, "gain": 0, "sig": [18, 1], "t": 86, "tainted": false, "actions": [[24, 30, 120]]}
+{"id": 207, "parent": 201, "gain": 0, "sig": [18, 4], "t": 87, "tainted": false, "actions": [[128, 4, 120], [2, 4, 20]]}
+{"id": 208, "parent": 199, "gain": 0, "sig": [15, 2], "t": 87, "tainted": false, "actions": [[8, 4, 40]]}
+{"id": 209, "parent": 204, "gain": 13, "sig": [30, 3], "t": 88, "tainted": false, "actions": [[8, 4, 40], [18, 4, 20], [8, 4, 40]]}
+{"id": 210, "parent": 204, "gain": 1, "sig": [30, 2], "t": 88, "tainted": false, "actions": [[8, 30, 120]]}
+{"id": 211, "parent": 209, "gain": 8, "sig": [30, 2], "t": 90, "tainted": false, "actions": [[144, 4, 20], [128, 4, 40], [17, 4, 120]]}
+{"id": 212, "parent": 180, "gain": 0, "sig": [27, 0], "t": 90, "tainted": false, "actions": [[2, 30, 120], [16, 4, 20]]}
+{"id": 213, "parent": 199, "gain": 2, "sig": [15, 2], "t": 91, "tainted": false, "actions": [[24, 4, 40], [18, 30, 20], [16, 4, 20]]}
+{"id": 214, "parent": 206, "gain": 0, "sig": [18, 9], "t": 92, "tainted": false, "actions": [[64, 4, 40], [16, 4, 40]]}
+{"id": 215, "parent": 211, "gain": 2, "sig": [27, 1], "t": 92, "tainted": false, "actions": [[48, 4, 20]]}
+{"id": 216, "parent": 209, "gain": 2, "sig": [27, 1], "t": 93, "tainted": false, "actions": [[32, 30, 40]]}
+{"id": 217, "parent": 208, "gain": 6, "sig": [0, 7], "t": 94, "tainted": false, "actions": [[32, 4, 120], [8, 90, 20], [32, 4, 20]]}
+{"id": 218, "parent": 182, "gain": 0, "sig": [22, 3], "t": 94, "tainted": false, "actions": [[8, 90, 20], [80, 90, 40], [16, 4, 40]]}
+{"id": 219, "parent": 211, "gain": 7, "sig": [27, 1], "t": 98, "tainted": false, "actions": [[17, 30, 40], [48, 4, 40]]}
+{"id": 220, "parent": 183, "gain": 0, "sig": [22, 2], "t": 99, "tainted": false, "actions": [[8, 90, 40], [16, 90, 20], [1, 30, 40]]}
+{"id": 221, "parent": 214, "gain": 0, "sig": [18, 21], "t": 99, "tainted": false, "actions": [[32, 4, 20], [144, 4, 120], [32, 30, 40]]}
+{"id": 222, "parent": 221, "gain": 0, "sig": [18, 23], "t": 100, "tainted": false, "actions": [[17, 4, 40]]}
+{"id": 223, "parent": 214, "gain": 0, "sig": [18, 11], "t": 102, "tainted": false, "actions": [[16, 90, 20]]}
+{"id": 224, "parent": 223, "gain": 0, "sig": [18, 12], "t": 103, "tainted": false, "actions": [[4, 30, 120], [64, 4, 40], [16, 4, 40]]}
+{"id": 225, "parent": 224, "gain": 0, "sig": [18, 10], "t": 103, "tainted": false, "actions": [[4, 4, 120], [144, 4, 120], [80, 4, 40]]}
+{"id": 226, "parent": 214, "gain": 0, "sig": [18, 3], "t": 104, "tainted": false, "actions": [[128, 4, 40], [4, 4, 40]]}
+{"id": 227, "parent": 209, "gain": 2, "sig": [30, 2], "t": 104, "tainted": false, "actions": [[4, 90, 40]]}
+{"id": 228, "parent": 226, "gain": 0, "sig": [18, 5], "t": 105, "tainted": false, "actions": [[32, 4, 40]]}
+{"id": 229, "parent": 226, "gain": 0, "sig": [18, 8], "t": 105, "tainted": false, "actions": [[64, 4, 120]]}
+{"id": 230, "parent": 221, "gain": 0, "sig": [18, 24], "t": 105, "tainted": false, "actions": [[16, 90, 20]]}
+{"id": 231, "parent": 227, "gain": 1, "sig": [30, 2], "t": 106, "tainted": false, "actions": [[17, 90, 40]]}
+{"id": 232, "parent": 209, "gain": 0, "sig": [30, 0], "t": 107, "tainted": false, "actions": [[1, 4, 40], [1, 4, 20], [24, 4, 20]]}
+{"id": 233, "parent": 173, "gain": 0, "sig": [23, 2], "t": 108, "tainted": false, "actions": [[4, 4, 120], [24, 90, 40], [16, 4, 40]]}
+{"id": 234, "parent": 233, "gain": 0, "sig": [23, 1], "t": 108, "tainted": false, "actions": [[64, 4, 40], [17, 30, 40], [20, 4, 120]]}
+{"id": 235, "parent": 221, "gain": 0, "sig": [18, 22], "t": 112, "tainted": false, "actions": [[32, 4, 20]]}
+{"id": 236, "parent": 124, "gain": 0, "sig": [8, 2], "t": 112, "tainted": false, "actions": [[4, 4, 120], [1, 90, 40], [32, 4, 40]]}
+{"id": 237, "parent": 220, "gain": 0, "sig": [22, 4], "t": 113, "tainted": false, "actions": [[24, 4, 20], [48, 30, 20], [48, 4, 40]]}
+{"id": 238, "parent": 230, "gain": 0, "sig": [5, 0], "t": 113, "tainted": false, "actions": [[2, 4, 20], [144, 4, 40], [4, 30, 20]]}
+{"id": 239, "parent": 226, "gain": 0, "sig": [18, 32], "t": 114, "tainted": false, "actions": [[16, 30, 40], [4, 4, 120]]}
+{"id": 240, "parent": 229, "gain": 0, "sig": [18, 30], "t": 116, "tainted": false, "actions": [[17, 4, 40], [64, 90, 20], [8, 4, 20]]}
+{"id": 241, "parent": 239, "gain": 0, "sig": [18, 33], "t": 117, "tainted": false, "actions": [[20, 4, 120]]}
+{"id": 242, "parent": 241, "gain": 0, "sig": [18, 34], "t": 117, "tainted": false, "actions": [[1, 90, 40], [2, 4, 20], [144, 30, 40]]}
+{"id": 243, "parent": 230, "gain": 0, "sig": [18, 25], "t": 136, "tainted": false, "actions": [[128, 4, 40], [16, 4, 20]]}
+{"id": 244, "parent": 233, "gain": 0, "sig": [23, 0], "t": 140, "tainted": false, "actions": [[32, 4, 40], [128, 4, 40], [16, 4, 40]]}
+{"id": 245, "parent": 242, "gain": 0, "sig": [18, 20], "t": 152, "tainted": false, "actions": [[64, 30, 40], [1, 4, 20], [32, 4, 20]]}
+{"id": 246, "parent": 234, "gain": 2, "sig": [23, 10], "t": 180, "tainted": false, "actions": [[1, 90, 40], [8, 4, 40], [64, 4, 40]]}
+{"id": 247, "parent": 206, "gain": 1, "sig": [18, 3], "t": 180, "tainted": false, "actions": [[20, 90, 40], [20, 30, 120], [128, 30, 20]]}
+{"id": 248, "parent": 246, "gain": 0, "sig": [23, 13], "t": 183, "tainted": false, "actions": [[48, 4, 20], [8, 4, 20]]}
+{"id": 249, "parent": 248, "gain": 0, "sig": [23, 15], "t": 189, "tainted": false, "actions": [[144, 4, 120], [2, 4, 40], [8, 4, 20]]}
+{"id": 250, "parent": 194, "gain": 1, "sig": [20, 0], "t": 194, "tainted": false, "actions": [[16, 90, 20], [16, 4, 40]]}
+{"id": 251, "parent": 237, "gain": 7, "sig": [20, 1], "t": 194, "tainted": false, "actions": [[20, 30, 40], [4, 4, 40], [16, 4, 40]]}
+{"id": 252, "parent": 206, "gain": 18, "sig": [18, 1], "t": 196, "tainted": false, "actions": [[128, 30, 120], [18, 30, 120]]}
+{"id": 253, "parent": 165, "gain": 0, "sig": [14, 0], "t": 201, "tainted": false, "actions": [[4, 4, 20], [17, 30, 120], [16, 4, 40]]}
+{"id": 254, "parent": 248, "gain": 0, "sig": [23, 14], "t": 202, "tainted": false, "actions": [[1, 4, 40], [18, 4, 20]]}
+{"id": 255, "parent": 220, "gain": 0, "sig": [22, 6], "t": 205, "tainted": false, "actions": [[8, 90, 20], [48, 4, 20]]}
+{"id": 256, "parent": 77, "gain": 6, "sig": [31, 5], "t": 217, "tainted": false, "actions": [[8, 4, 20], [20, 4, 40]]}
+{"id": 257, "parent": 255, "gain": 1, "sig": [32, 4], "t": 217, "tainted": false, "actions": [[8, 90, 40], [24, 4, 120]]}
+{"id": 258, "parent": 220, "gain": 0, "sig": [1, 10], "t": 218, "tainted": false, "actions": [[160, 4, 40], [1, 90, 40], [17, 90, 40]]}
+{"id": 259, "parent": 257, "gain": 0, "sig": [32, 7], "t": 221, "tainted": false, "actions": [[144, 30, 40], [64, 90, 20]]}
+{"id": 260, "parent": 233, "gain": 7, "sig": [23, 2], "t": 224, "tainted": false, "actions": [[24, 30, 120], [4, 30, 120], [128, 4, 120]]}
+{"id": 261, "parent": 101, "gain": 0, "sig": [10, 0], "t": 226, "tainted": false, "actions": [[2, 4, 20], [160, 4, 40], [144, 4, 20]]}
+{"id": 262, "parent": 236, "gain": 0, "sig": [8, 23], "t": 232, "tainted": false, "actions": [[32, 30, 20], [16, 4, 40]]}
+{"id": 263, "parent": 57, "gain": 2, "sig": [31, 5], "t": 233, "tainted": false, "actions": [[4, 4, 20], [48, 30, 120]]}
+{"id": 264, "parent": 234, "gain": 0, "sig": [26, 0], "t": 237, "tainted": false, "actions": [[128, 4, 40], [32, 4, 120], [20, 4, 20]]}
+{"id": 265, "parent": 42, "gain": 1, "sig": [31, 5], "t": 239, "tainted": false, "actions": [[17, 4, 120], [18, 4, 40], [32, 90, 120]]}
+{"id": 266, "parent": 252, "gain": 2, "sig": [18, 1], "t": 242, "tainted": false, "actions": [[8, 4, 120], [17, 30, 40]]}
+{"id": 267, "parent": 29, "gain": 1, "sig": [31, 9], "t": 250, "tainted": false, "actions": [[1, 4, 20], [8, 30, 40]]}
+{"id": 268, "parent": 52, "gain": 2, "sig": [31, 9], "t": 250, "tainted": false, "actions": [[1, 4, 120], [20, 30, 40]]}
+{"id": 269, "parent": 268, "gain": 15, "sig": [31, 9], "t": 255, "tainted": false, "actions": [[4, 90, 20], [1, 4, 40]]}
+{"id": 270, "parent": 269, "gain": 1, "sig": [31, 9], "t": 263, "tainted": false, "actions": [[2, 90, 120]]}
+{"id": 271, "parent": 269, "gain": 16, "sig": [31, 9], "t": 268, "tainted": false, "actions": [[1, 4, 20], [144, 90, 40], [8, 4, 20]]}
+{"id": 272, "parent": 262, "gain": 0, "sig": [8, 16], "t": 273, "tainted": false, "actions": [[80, 4, 40], [18, 4, 40]]}
+{"id": 273, "parent": 269, "gain": 1, "sig": [31, 9], "t": 277, "tainted": false, "actions": [[8, 4, 120]]}
+{"id": 274, "parent": 269, "gain": 1, "sig": [31, 10], "t": 280, "tainted": false, "actions": [[24, 30, 120], [128, 30, 20], [64, 30, 40]]}
+{"id": 275, "parent": 229, "gain": 0, "sig": [18, 26], "t": 286, "tainted": false, "actions": [[4, 4, 40], [1, 90, 120], [48, 4, 40]]}
+{"id": 276, "parent": 275, "gain": 0, "sig": [18, 27], "t": 287, "tainted": false, "actions": [[4, 30, 40], [4, 4, 20]]}
+{"id": 277, "parent": 269, "gain": 15, "sig": [31, 9], "t": 287, "tainted": false, "actions": [[1, 90, 40], [17, 4, 120], [16, 4, 40]]}
+{"id": 278, "parent": 277, "gain": 15, "sig": [31, 9], "t": 287, "tainted": false, "actions": [[1, 4, 40]]}
+{"id": 279, "parent": 278, "gain": 1, "sig": [31, 9], "t": 289, "tainted": false, "actions": [[16, 4, 40], [8, 4, 20], [2, 4, 120]]}
+{"id": 280, "parent": 277, "gain": 2, "sig": [31, 9], "t": 291, "tainted": false, "actions": [[2, 4, 40], [2, 4, 120]]}
+{"id": 281, "parent": 61, "gain": 1, "sig": [31, 3], "t": 294, "tainted": false, "actions": [[1, 4, 20], [8, 90, 20], [2, 30, 20]]}
+{"id": 282, "parent": 272, "gain": 0, "sig": [8, 13], "t": 298, "tainted": false, "actions": [[16, 30, 40], [18, 90, 120]]}
+{"id": 283, "parent": 226, "gain": 0, "sig": [18, 29], "t": 299, "tainted": false, "actions": [[64, 4, 40], [17, 30, 40]]}
+{"id": 284, "parent": 275, "gain": 0, "sig": [18, 15], "t": 302, "tainted": false, "actions": [[48, 4, 40], [64, 30, 20], [16, 30, 40]]}
+{"id": 285, "parent": 278, "gain": 15, "sig": [31, 9], "t": 309, "tainted": false, "actions": [[17, 4, 20]]}
+{"id": 286, "parent": 285, "gain": 2, "sig": [31, 9], "t": 314, "tainted": false, "actions": [[2, 30, 20], [2, 4, 20]]}
+{"id": 287, "parent": 286, "gain": 1, "sig": [31, 9], "t": 314, "tainted": false, "actions": [[8, 4, 40]]}
+{"id": 288, "parent": 283, "gain": 0, "sig": [18, 31], "t": 317, "tainted": false, "actions": [[64, 30, 20], [16, 4, 20]]}
+{"id": 289, "parent": 202, "gain": 1, "sig": [15, 12], "t": 324, "tainted": false, "actions": [[1, 90, 20]]}
+{"id": 290, "parent": 289, "gain": 2, "sig": [15, 12], "t": 325, "tainted": false, "actions": [[24, 4, 20]]}
+{"id": 291, "parent": 277, "gain": 1, "sig": [31, 9], "t": 328, "tainted": false, "actions": [[24, 4, 40]]}
+{"id": 292, "parent": 278, "gain": 1, "sig": [31, 9], "t": 334, "tainted": false, "actions": [[20, 4, 40]]}
+{"id": 293, "parent": 275, "gain": 0, "sig": [18, 28], "t": 334, "tainted": false, "actions": [[2, 4, 40], [32, 4, 20]]}
+{"id": 294, "parent": 285, "gain": 17, "sig": [31, 5], "t": 336, "tainted": false, "actions": [[17, 4, 20], [48, 4, 120], [16, 4, 40]]}
+{"id": 295, "parent": 285, "gain": 1, "sig": [31, 9], "t": 338, "tainted": false, "actions": [[8, 90, 120]]}
+{"id": 296, "parent": 277, "gain": 2, "sig": [31, 9], "t": 350, "tainted": false, "actions": [[24, 30, 120]]}
+{"id": 297, "parent": 234, "gain": 2, "sig": [23, 2], "t": 378, "tainted": false, "actions": [[48, 4, 120], [24, 90, 20]]}
+{"id": 298, "parent": 285, "gain": 4, "sig": [31, 9], "t": 382, "tainted": false, "actions": [[1, 90, 120], [8, 4, 40]]}
+{"id": 299, "parent": 297, "gain": 0, "sig": [23, 7], "t": 390, "tainted": false, "actions": [[8, 4, 120], [1, 90, 120], [64, 90, 40]]}
+{"id": 300, "parent": 146, "gain": 0, "sig": [19, 1], "t": 399, "tainted": false, "actions": [[8, 90, 40], [20, 4, 40], [64, 4, 40]]}
+{"id": 301, "parent": 300, "gain": 5, "sig": [19, 7], "t": 399, "tainted": false, "actions": [[16, 4, 120]]}
+{"id": 302, "parent": 301, "gain": 1, "sig": [19, 7], "t": 401, "tainted": false, "actions": [[48, 4, 20], [144, 30, 120]]}
+{"id": 303, "parent": 299, "gain": 0, "sig": [23, 9], "t": 401, "tainted": false, "actions": [[144, 30, 20], [4, 4, 40]]}
+{"id": 304, "parent": 300, "gain": 0, "sig": [19, 2], "t": 402, "tainted": false, "actions": [[1, 30, 40], [8, 4, 40], [24, 4, 40]]}
+{"id": 305, "parent": 259, "gain": 0, "sig": [22, 1], "t": 405, "tainted": false, "actions": [[32, 4, 20]]}
+{"id": 306, "parent": 255, "gain": 0, "sig": [22, 0], "t": 419, "tainted": false, "actions": [[32, 4, 20], [32, 4, 120], [18, 4, 40]]}
+{"id": 307, "parent": 297, "gain": 2, "sig": [23, 2], "t": 419, "tainted": false, "actions": [[4, 4, 40], [8, 90, 120], [20, 30, 40]]}
+{"id": 308, "parent": 300, "gain": 1, "sig": [19, 1], "t": 439, "tainted": false, "actions": [[64, 90, 120], [8, 90, 120], [64, 4, 120]]}
+{"id": 309, "parent": 256, "gain": 6, "sig": [31, 5], "t": 446, "tainted": false, "actions": [[8, 4, 40], [16, 4, 120]]}
+{"id": 310, "parent": 258, "gain": 1, "sig": [1, 10], "t": 464, "tainted": false, "actions": [[18, 30, 40], [16, 4, 20], [64, 4, 120]]}
+{"id": 311, "parent": 278, "gain": 1, "sig": [31, 9], "t": 468, "tainted": false, "actions": [[128, 4, 120], [1, 4, 20], [20, 90, 40]]}
+{"id": 312, "parent": 310, "gain": 4, "sig": [1, 0], "t": 470, "tainted": false, "actions": [[32, 4, 40]]}
+{"id": 313, "parent": 308, "gain": 0, "sig": [19, 3], "t": 511, "tainted": false, "actions": [[17, 30, 40]]}
+{"id": 314, "parent": 292, "gain": 2, "sig": [31, 9], "t": 522, "tainted": false, "actions": [[1, 4, 40], [1, 4, 120], [2, 4, 40]]}
+{"id": 315, "parent": 269, "gain": 1, "sig": [31, 9], "t": 535, "tainted": false, "actions": [[17, 4, 20], [20, 4, 40]]}
+{"id": 316, "parent": 220, "gain": 0, "sig": [22, 5], "t": 538, "tainted": false, "actions": [[8, 90, 20], [20, 4, 20]]}
+{"id": 317, "parent": 311, "gain": 6, "sig": [31, 9], "t": 549, "tainted": false, "actions": [[1, 4, 40], [16, 90, 40], [24, 90, 40]]}
+{"id": 318, "parent": 146, "gain": 0, "sig": [12, 1], "t": 564, "tainted": false, "actions": [[2, 4, 40], [8, 30, 40], [17, 90, 40]]}
+{"id": 319, "parent": 310, "gain": 0, "sig": [1, 9], "t": 580, "tainted": false, "actions": [[144, 30, 40], [64, 4, 120], [80, 4, 40]]}
+{"id": 320, "parent": 158, "gain": 1, "sig": [20, 1], "t": 589, "tainted": false, "actions": [[24, 90, 20], [8, 4, 40], [144, 4, 20]]}
+{"id": 321, "parent": 316, "gain": 0, "sig": [24, 1], "t": 598, "tainted": false, "actions": [[8, 90, 20], [80, 30, 40]]}
+{"id": 322, "parent": 321, "gain": 0, "sig": [29, 10], "t": 598, "tainted": false, "actions": [[80, 30, 40], [1, 4, 40], [2, 4, 120]]}
+{"id": 323, "parent": 321, "gain": 0, "sig": [29, 1], "t": 600, "tainted": false, "actions": [[8, 4, 120], [128, 4, 20], [17, 4, 20]]}
+{"id": 324, "parent": 289, "gain": 1, "sig": [15, 3], "t": 615, "tainted": false, "actions": [[80, 4, 40], [32, 4, 40], [16, 90, 120]]}
+{"id": 325, "parent": 300, "gain": 0, "sig": [19, 0], "t": 621, "tainted": false, "actions": [[64, 30, 40], [32, 4, 20], [17, 4, 40]]}
+{"id": 326, "parent": 308, "gain": 0, "sig": [19, 6], "t": 637, "tainted": false, "actions": [[16, 30, 40]]}
+{"id": 327, "parent": 305, "gain": 0, "sig": [32, 3], "t": 640, "tainted": false, "actions": [[128, 90, 20], [17, 4, 20]]}
+{"id": 328, "parent": 316, "gain": 17, "sig": [20, 1], "t": 665, "tainted": false, "actions": [[20, 90, 40], [144, 4, 40], [144, 90, 120]]}
+{"id": 329, "parent": 324, "gain": 11, "sig": [15, 4], "t": 685, "tainted": false, "actions": [[17, 4, 20], [80, 4, 40]]}
+{"id": 330, "parent": 329, "gain": 2, "sig": [15, 6], "t": 685, "tainted": false, "actions": [[2, 30, 40]]}
+{"id": 331, "parent": 330, "gain": 25, "sig": [15, 2], "t": 686, "tainted": false, "actions": [[160, 90, 40]]}
+{"id": 332, "parent": 290, "gain": 5, "sig": [15, 12], "t": 690, "tainted": false, "actions": [[1, 90, 20], [80, 30, 40], [2, 30, 40]]}
+{"id": 333, "parent": 329, "gain": 89, "sig": [15, 2], "t": 697, "tainted": false, "actions": [[18, 30, 40], [16, 30, 120]]}
+{"id": 334, "parent": 330, "gain": 0, "sig": [15, 9], "t": 699, "tainted": false, "actions": [[64, 90, 120], [128, 4, 40], [16, 30, 40]]}
+{"id": 335, "parent": 328, "gain": 5, "sig": [20, 1], "t": 709, "tainted": false, "actions": [[16, 4, 120], [20, 30, 40], [128, 90, 120]]}
+{"id": 336, "parent": 335, "gain": 6, "sig": [20, 1], "t": 722, "tainted": false, "actions": [[144, 30, 20], [1, 90, 20], [24, 90, 120]]}
+{"id": 337, "parent": 316, "gain": 0, "sig": [24, 2], "t": 735, "tainted": false, "actions": [[8, 90, 40], [17, 4, 120]]}
+{"id": 338, "parent": 330, "gain": 0, "sig": [15, 8], "t": 740, "tainted": false, "actions": [[1, 30, 20], [80, 4, 20]]}
+{"id": 339, "parent": 336, "gain": 1, "sig": [22, 1], "t": 763, "tainted": false, "actions": [[80, 4, 40], [24, 4, 40]]}
+{"id": 340, "parent": 330, "gain": 0, "sig": [15, 1], "t": 784, "tainted": false, "actions": [[160, 4, 20]]}
+{"id": 341, "parent": 331, "gain": 0, "sig": [15, 5], "t": 833, "tainted": false, "actions": [[80, 30, 20]]}

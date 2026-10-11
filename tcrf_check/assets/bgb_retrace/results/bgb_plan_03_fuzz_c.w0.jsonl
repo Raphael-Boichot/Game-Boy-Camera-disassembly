@@ -1,0 +1,1 @@
+{"id": 0, "new": 15, "confirmed": 5, "missing": ["00:0D6D", "00:0D72", "00:0D76", "00:0D87", "00:0D8D", "00:0D92", "00:0D9F", "1F:569C", "1F:56A0", "1F:56A9"], "unexpected": [], "lines": 5, "secs": 2.0, "notes": [], "core_end": "00:00", "bgb_end": "19:03"}
