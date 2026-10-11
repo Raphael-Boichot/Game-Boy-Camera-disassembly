@@ -9,6 +9,7 @@ out = sys.argv[1]; os.makedirs(out, exist_ok=True)
 corpus = sys.argv[2] if len(sys.argv) > 2 else 'unlock_runs/f1_organic/corpus.jsonl'
 C = lib.Corpus(corpus); i = C.best((0x11, 3)); g.set_organic(1); C.replay(i); g.run(30)
 EX = g.cov_exec(); OEX = g.org_exec()
+EX0 = lib.exec_baseline()
 def hit(): return int(EX[0x11E4C]), int(OEX[0x11E4C])
 print('start', lib.cur(), 'D641=%d' % g.peek(0xD641), 'ex@5E4C', hit())
 Image.fromarray(R.screen(g)).save(out + '/00_palette.png')
@@ -24,3 +25,4 @@ for f in range(0, 520, 10):
 g.keys(0); g.run(20); Image.fromarray(R.screen(g)).save(out + '/99_released.png')
 for l in log: print(l)
 print('end', lib.cur(), 'ex@5E4C', hit())
+lib.dump_exec_ranges(out + '/exec_ranges.csv', EX0)

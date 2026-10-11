@@ -1,0 +1,7 @@
+start (corpus entry 649)   21:06 x(runner 0,1,2)=(0, 241, 416) places D00D=0 D016=0 D01F=0 finished D047=0
+A every 2nd frame          21:0C x(runner 0,1,2)=(112, 64, 184) places D00D=1 D016=3 D01F=2 finished D047=2
+A every 12th frame         21:0C x(runner 0,1,2)=(176, 64, 120) places D00D=2 D016=3 D01F=1 finished D047=2
+no key                     21:06 x(runner 0,1,2)=(0, 9435, 12672) places D00D=0 D016=2 D01F=1 finished D047=2
+A every 3rd frame          21:0C x(runner 0,1,2)=(112, 64, 184) places D00D=1 D016=3 D01F=2 finished D047=2
+A every 4th frame          21:0C x(runner 0,1,2)=(112, 64, 184) places D00D=1 D016=3 D01F=2 finished D047=2
+executed beyond the replay: 12341 bytes in 223 ranges -> /tmp/claude-0/-home-claude/d280987c-d04f-542c-b2b0-9c89688a96f6/scratchpad/race2/exec_ranges.csv

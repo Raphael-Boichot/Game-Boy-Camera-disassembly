@@ -2,7 +2,7 @@
 """Whole JP ROM as 2bpp tiles (code and everything else), coloured by what the v8 coverage run reached.
 blue = executed or read by a run (dark: joypad + save only; light: only after a forced RAM / mode state), red = never executed nor read
 (including traced code that never ran), orange = never read but identified as asset data (assets/asset_map_jp.csv, evidence I or C per row),
-green = code the v8 run never executed but a later targeted run did (assets/witness_jp.csv: BGB in SGB mode, the hot-spot effect test, the APU-gated branch),
+green = code the v8 run never executed but a later targeted run did (assets/witness_jp.csv: BGB in SGB mode, the hot-spot effect test, the APU-gated branch, the printer runs, the stamp mirror, the music-editor and RUN! runs; README 16.14 / 16.15),
 muted red = untouched padding (runs >= 16 of 00 / FF).
 usage: rom_reach_map.py OUT.png [--rom pocketcamera_jp.gb] [--map coverage/results/report_v8/rom_map.csv] [--assets assets/asset_map_jp.csv | none] [--witness assets/witness_jp.csv | none]
 The ROM is not in the repository (md5 fdcfe686cf4df461e870b6e53b2b5a8b); the byte-class map is (written by coverage/tools/rom_map.py from the v8 merged coverage)."""
@@ -83,7 +83,7 @@ d.text((LEFT, 58), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F lef
 items = [(0, 'blue: executed or read, by joypad + save only  (%s B, %.1f %%)' % (format(n(organic), ','), 100 * n(organic) / tot)),
          (1, 'light blue: executed or read only after a forced RAM / mode state  (%s B, %.1f %%)' % (format(n(forced), ','), 100 * n(forced) / tot)),
          (2, 'RED: never executed nor read, not identified  (%s B, %.1f %%): %s B code that never ran + %s B data' % (format(r_bright, ','), 100 * r_bright / tot, format(r_code, ','), format(r_bright - r_code, ','))),
-         (5, 'GREEN: code the v8 run never executed but a later targeted run did  (%s B, %.1f %%): SGB sender (BGB, SGB mode), hot-spot effect handlers (core), APU-gated branch (BGB)' % (format(r_wit, ','), 100 * r_wit / tot)),
+         (5, 'GREEN: code the v8 run never executed but a later targeted run did  (%s B, %.1f %%): SGB sender, hot-spot effects, stamp mirror, comment card, D.J. score print and fields, RUN! result, MAGIC option (BGB or core)' % (format(r_wit, ','), 100 * r_wit / tot)),
          (4, 'ORANGE: never read, but identified as asset data  (%s B, %.1f %%): tilemaps, kana glyphs, wild-frame side strips, SGB data, tile-set gaps' % (format(r_ident, ','), 100 * r_ident / tot)),
          (3, 'muted red: untouched padding, runs of 16+ x 00 / FF  (%s B, %.1f %%)' % (format(r_pad, ','), 100 * r_pad / tot))]
 for k, (c, txt) in enumerate(items):

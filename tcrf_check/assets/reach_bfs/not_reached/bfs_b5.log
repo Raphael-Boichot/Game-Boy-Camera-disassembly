@@ -1,0 +1,22 @@
+start states: ['20:00', '20:01', '20:04', '20:06', '20:07', '20:0A']
+states expanded: 3; found 0 of 19 targets
+05:5445  not reached
+05:5456  not reached
+05:69A9  not reached
+05:6AF8  not reached
+05:496D  not reached
+05:497E  not reached
+05:49C2  not reached
+05:6AE1  not reached
+05:70A9  not reached
+05:5769  not reached
+05:4B1D  not reached
+05:686A  not reached
+05:6E7E  not reached
+05:60E0  not reached
+05:7397  not reached
+05:64F1  not reached
+05:7131  not reached
+05:71AB  not reached
+05:7214  not reached
+executed beyond the replay: 12330 bytes in 237 ranges -> /tmp/claude-0/-home-claude/d280987c-d04f-542c-b2b0-9c89688a96f6/scratchpad/bfs_b5/exec_ranges.csv

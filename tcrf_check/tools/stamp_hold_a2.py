@@ -23,6 +23,7 @@ lib.act((g.A, 4, 30)); g.run(10)
 snaps = {}
 def grab(tag): snaps[tag] = [buf(a) for a in (0xC000, 0xC1E0, 0xC3C0, 0xC5A0)]
 EX = g.cov_exec()
+EX0 = lib.exec_baseline()
 g.keys(g.A); f = 0; fired = 0; prev = int(EX[0x11E4C])
 grab('t000')
 for f in range(1, 520):
@@ -40,3 +41,4 @@ for r, n in enumerate(names):
 M.save(out + '/stamp_buffers.png'); print(names)
 for n in names:
     print(n, [hash(b) & 0xffff for b in snaps[n]], 'same-as-prev-c000' if False else '')
+lib.dump_exec_ranges(out + '/exec_ranges.csv', EX0)

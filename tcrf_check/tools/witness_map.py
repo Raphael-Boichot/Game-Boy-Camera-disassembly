@@ -6,6 +6,14 @@ Witnesses (all outside the v8 merge):
   apu      BGB, music-editor corpus: the 6 heads my core never executed because it does not emulate NR52 / NR12 ("contradictions"; README 17.7)
   hotspot  my core, tcrf_check/tools/hotspot_effects.py: hot spot 0 of the displayed photo armed by a WRAM poke of the mirror $D643-$D65C, then a real A press, for the 16 effect values;
            the bytes executed beyond the replay are in tcrf_check/assets/hotspot_effects/exec_ranges.csv (README 13.4 point 5, 16.8)
+  stamp_hold  my core, tcrf_check/tools/stamp_hold_a.py: stamp tool placement state, A held 180 frames then every 100 (joypad only, organic); the bytes executed beyond the replay
+           are in tcrf_check/assets/stamp_hold/exec_ranges.csv (stamp_hold_a2.py gives a subset); the same behaviour was seen in BGB on both ROMs (README 15.4, 16.6 row 5)
+  bgb_print   BGB with the Game Boy Printer helper (tcrf_check/tools/bgb_print_run.py, bgb_dj_print.py), the same runs as 17.3-17.6 (comment card, 3-photo print, D.J. score print)
+           with the 622 block heads that were still unwitnessed logged: tcrf_check/assets/bgb_retrace/printer_heads_n/nh_*.heads_hit.json (README 16.15)
+  dj_fields   my core, tcrf_check/tools/dj_fields.py: every key at every field of the three music-editor pages (joypad only); executed bytes in tcrf_check/assets/dj_fields/exec_ranges.csv
+  reach_bfs   my core, tcrf_check/tools/reach_bfs.py: breadth-first key search (joypad only) from corpus entries toward chosen targets; one folder per search in
+           tcrf_check/assets/reach_bfs/ (exec_ranges.csv = everything executed, reach_bfs.json = key path of every target found)
+  run_race    my core, tcrf_check/tools/run_race.py: RUN! RUN! RUN! played to the end with A pressed at different rates (joypad only, unlocking save): tcrf_check/assets/run_race/exec_ranges.csv
 A BGB head hit means the whole block ran (blocks.py: straight line up to the next head or terminator). Only bytes of class N are written; the printer runs of 17.1-17.6
 (tcrf_check/assets/bgb_retrace/printer_heads) hit none."""
 import sys, os, csv, json
@@ -39,6 +47,28 @@ hm = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'hotspot_effects', 'exec_ranges.csv'))):
     o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); hm[o1:o2 + 1] = True
 W.append(('hotspot', 'my core, hot spot armed by a WRAM poke + real A press, effect values 0-15', 'C', hm))
+import glob
+pm = np.zeros(N, bool)
+for fn in sorted(glob.glob(os.path.join(REPO, 'tcrf_check', 'assets', 'bgb_retrace', 'printer_heads_n', 'nh_*.heads_hit.json'))):
+    pm |= from_heads(json.load(open(fn))['hits'])
+W.append(('bgb_print', 'BGB + printer helper: comment-card print, 3-photo print, D.J. score print (heads logged)', 'C', pm))
+sm = np.zeros(N, bool)
+for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'stamp_hold', 'exec_ranges.csv'))):
+    o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); sm[o1:o2 + 1] = True
+W.append(('stamp_hold', 'my core, hold A in the stamp placement state (joypad only): the bit-reversal routine 04:5E4C', 'C', sm))
+dm = np.zeros(N, bool)
+for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'dj_fields', 'exec_ranges.csv'))):
+    o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); dm[o1:o2 + 1] = True
+W.append(('dj_fields', 'my core, every key at every field of the music-editor pages (joypad only): SOUND I field 7, NOISE field 3 and the field-handler branches', 'C', dm))
+rb = np.zeros(N, bool)
+for fn in sorted(glob.glob(os.path.join(REPO, 'tcrf_check', 'assets', 'reach_bfs', '*', 'exec_ranges.csv'))):
+    for r in csv.DictReader(open(fn)):
+        o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); rb[o1:o2 + 1] = True
+W.append(('reach_bfs', 'my core, key search (joypad only) from the corpus entries toward a target: MAGIC option screen, banks 3-9 menus', 'C', rb))
+rr = np.zeros(N, bool)
+for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'run_race', 'exec_ranges.csv'))):
+    o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); rr[o1:o2 + 1] = True
+W.append(('run_race', 'my core, RUN! RUN! RUN! won / lost with A pressed at different rates (joypad only): the finish and result code of mode $21', 'C', rr))
 rows = []; seen = np.zeros(N, bool)
 for name, desc, ev, m in W:
     m = m & isN & ~seen; seen |= m

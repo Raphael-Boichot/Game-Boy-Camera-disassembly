@@ -1,0 +1,8 @@
+heads hit 108
+BGB end mode:state 1F:09 rc 0  $D8C6 = 27
+link packets {1: 1, 108: 3, 106: 80770, 104: 26510}  printer bytes 26510  printer packets 153  pages 5
+  page {'file': 'page_01.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '30', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_02.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '00', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_03.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '00', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_04.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '00', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_05.png', 'width': 160, 'height': 48, 'sheets': 1, 'margins': '03', 'palette': 'E4', 'exposure': '40'}

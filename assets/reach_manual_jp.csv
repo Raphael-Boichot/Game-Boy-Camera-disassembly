@@ -1,0 +1,6 @@
+first_addr,verdict,evidence,note
+06:48E6,INPUT,I,"hidden third choice of the MAGIC option screen (16.15): Select+Down then A reaches 06:48CB (run in the core); this part needs the Game Face flag $D581 = 1 (SRAM $B0D1), i.e. a save that has a Game Face stored"
+09:652D,OPEN,?,"RUN! RUN! RUN!: runner 1 finishing first ($D016 = 1). In the 5 variants of run_race.py runner 2 is always ahead of runner 1 (x at frame 600: 2055 against 2832-3043), so it probably cannot happen; not proven (obstacles / randomness not checked)"
+09:63FE,OPEN,?,"RUN! RUN! RUN!: race ended with $D00D still 0. Runner 0 must be beyond $1580 to end the race and passing $1400 sets $D00D (09:6AF0-6AFC), so by the code order it looks unreachable; not proven"
+09:6414,OPEN,?,"RUN! RUN! RUN!: race ended with runner 2 not finished ($D01F = 0) while two others finished; runner 2 is faster than runner 1 in all runs, so it looks unreachable; not proven"
+07:6767,OPEN,?,"continuation after call 07:691E at 07:6764: the branch 07:6759 (value >= $32 at 07:6742) ran only in forced runs and the return was never reached"

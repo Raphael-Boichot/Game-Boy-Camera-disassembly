@@ -81,3 +81,20 @@ def SAV(name):
         else:
             _SAVCACHE[name] = bytes(0x20000) if name == '_zero' else (b'\xff' * 0x20000 if name == '_ff' else None)
     return _SAVCACHE[name]
+
+def exec_baseline():
+    """Copy of the core's executed-byte array (call it after the replay); pass it to dump_exec_ranges() at the end of a test."""
+    return np.array(g.cov_exec(), copy=True) != 0
+def dump_exec_ranges(path, ex0):
+    """Write the bytes executed since exec_baseline() as ranges (bank,start,end): witness_map.py intersects them with the never-run code of the v8 map.
+    The core marks every byte of an executed instruction."""
+    new = np.flatnonzero((np.array(g.cov_exec(), copy=True) != 0) & ~ex0); rows = []
+    for o in new:
+        o = int(o); b = o >> 14 if o >= 0x4000 else 0; a = o if b == 0 else 0x4000 + (o & 0x3FFF)
+        if rows and rows[-1][0] == b and rows[-1][2] == a - 1: rows[-1][2] = a
+        else: rows.append([b, a, a])
+    with open(path, 'w') as fh:
+        fh.write('bank,start,end\n')
+        for b, a, e in rows: fh.write('%02X,%04X,%04X\n' % (b, a, e))
+    print('executed beyond the replay: %d bytes in %d ranges -> %s' % (len(new), len(rows), path))
+

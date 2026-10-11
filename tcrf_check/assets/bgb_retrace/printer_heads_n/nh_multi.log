@@ -1,0 +1,6 @@
+heads listed 622 hit 0
+entry 927 root {'sav': '_zero', 'combo': 8, 'printer': 0, 'free': 60} core end sig [30, 1] -> BGB end 1E:01 rc 0
+link packets {1: 1, 108: 3, 106: 132918, 104: 18342}  printer bytes 18342  printer packets 105  pages 3
+  page {'file': 'page_01.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '13', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_02.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '03', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_03.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '03', 'palette': 'E4', 'exposure': '40'}
