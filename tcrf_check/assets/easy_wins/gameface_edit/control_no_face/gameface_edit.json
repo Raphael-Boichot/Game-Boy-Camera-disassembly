@@ -1,0 +1,135 @@
+{
+ "face": false,
+ "face_from": null,
+ "steps": [
+  {
+   "key": "Right",
+   "state": "16:05",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "B",
+   "state": "16:02",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "Down",
+   "state": "16:02",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "A",
+   "state": "16:06",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "Down",
+   "state": "16:06",
+   "D5EB": 1,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "Select+Down",
+   "state": "16:06",
+   "D5EB": 2,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "A",
+   "state": "16:06",
+   "D5EB": 2,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": true,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  }
+ ],
+ "flag_10D1": 0,
+ "start": "16:01",
+ "after_path": {
+  "state": "16:06",
+  "D800": 0,
+  "D581": 0,
+  "C000_nonzero": 3224,
+  "hits": {
+   "06:48CB": true,
+   "06:48E6": false,
+   "06:48F6": false,
+   "07:6A58": false,
+   "02:4C37": false,
+   "02:5078": false
+  }
+ },
+ "final_hits": {
+  "06:48CB": true,
+  "06:48E6": false,
+  "06:48F6": false,
+  "07:6A58": false,
+  "02:4C37": false,
+  "02:5078": false
+ }
+}

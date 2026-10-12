@@ -1,0 +1,223 @@
+{
+ "face": true,
+ "face_from": "unl_CE10238211",
+ "steps": [
+  {
+   "key": "Right",
+   "state": "16:05",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "B",
+   "state": "16:02",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "Down",
+   "state": "16:02",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "A",
+   "state": "16:06",
+   "D5EB": 0,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "Down",
+   "state": "16:06",
+   "D5EB": 1,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "Select+Down",
+   "state": "16:06",
+   "D5EB": 2,
+   "D581": 0,
+   "D800": 0,
+   "hits": {
+    "06:48CB": false,
+    "06:48E6": false,
+    "06:48F6": false,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": false
+   }
+  },
+  {
+   "key": "A",
+   "state": "04:01",
+   "D5EB": 2,
+   "D581": 1,
+   "D800": 1,
+   "hits": {
+    "06:48CB": true,
+    "06:48E6": true,
+    "06:48F6": true,
+    "07:6A58": false,
+    "02:4C37": false,
+    "02:5078": true
+   }
+  }
+ ],
+ "flag_10D1": 1,
+ "start": "16:01",
+ "after_path": {
+  "state": "04:01",
+  "D800": 1,
+  "D581": 1,
+  "C000_nonzero": 2632,
+  "hits": {
+   "06:48CB": true,
+   "06:48E6": true,
+   "06:48F6": true,
+   "07:6A58": false,
+   "02:4C37": false,
+   "02:5078": true
+  }
+ },
+ "bfs": {
+  "states": 13,
+  "07:6A58_after": [
+   "Left+A",
+   "A+B",
+   "Right",
+   "A",
+   "Right"
+  ],
+  "seen": [
+   [
+    "Left",
+    "04:01",
+    1
+   ],
+   [
+    "A",
+    "11:04",
+    1
+   ],
+   [
+    "B",
+    "16:06",
+    1
+   ],
+   [
+    "Left+A",
+    "10:03",
+    1
+   ],
+   [
+    "Left+B",
+    "16:06",
+    1
+   ],
+   [
+    "A B",
+    "04:01",
+    1
+   ],
+   [
+    "Left+A B",
+    "04:01",
+    1
+   ],
+   [
+    "Left+A Start",
+    "10:04",
+    1
+   ],
+   [
+    "Left+A A+B",
+    "10:09",
+    1
+   ],
+   [
+    "Left+A A+B Right",
+    "10:09",
+    1
+   ],
+   [
+    "Left+A A+B Right A",
+    "10:09",
+    1
+   ],
+   [
+    "Left+A A+B Right B",
+    "10:09",
+    1
+   ],
+   [
+    "Left+A A+B Right A+B",
+    "10:09",
+    1
+   ]
+  ]
+ },
+ "after_save_back": {
+  "state": "10:09",
+  "settings_blocks_valid": [
+   true,
+   true
+  ],
+  "flag_10D1": 1,
+  "flag_11AA": 1,
+  "face_image_equals_work_buffer_C000": true,
+  "face_image_changed_since_patch": true
+ },
+ "final_hits": {
+  "06:48CB": true,
+  "06:48E6": true,
+  "06:48F6": true,
+  "07:6A58": true,
+  "02:4C37": true,
+  "02:5078": true
+ }
+}

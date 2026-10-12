@@ -26,7 +26,6 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 05:622D,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:7F1C,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:7F33,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-06:48E6,06,GATED,9,22,06:48DC,$D581 gameface_present,,INPUT,I,"hidden third choice of the MAGIC option screen (16.15): Select+Down then A reaches 06:48CB (run in the core); this part needs the Game Face flag $D581 = 1 (SRAM $B0D1), i.e. a save that has a Game Face stored"
 09:6D00,09,DEAD,14,18,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 03:629A,03,GATED,7,17,03:6298(ft),,,OPEN,?,not analysed
 05:5445,05,GATED,9,17,05:542E,$FFA1 keys_held,,OPEN,?,not analysed
@@ -48,7 +47,6 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 05:49C2,05,GATED,8,11,05:49C0(ft),,,OPEN,?,not analysed
 00:0758,00,ORPHAN,7,10,flow:1,,,OPEN,?,not analysed
 05:6AE1,05,GATED,6,10,05:6AE0(ft),,,OPEN,?,not analysed
-07:6A58,07,GATED,4,10,07:6A47,$D800 `extras_launch_flag` (return-to-mode-4 flag),,OPEN,?,not analysed
 00:06F6,00,GATED,6,9,00:06F4(ft),,,OPEN,?,not analysed
 06:523B,06,GATED,3,9,06:5239(ft),$D7F7 compose2_photos[2],,OPEN,?,not analysed
 06:5276,06,GATED,3,9,06:5274(ft),$D7F8 (compose2_photos[2]+1),,OPEN,?,not analysed
