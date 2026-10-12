@@ -41,33 +41,6 @@ identical", was wrong and is withdrawn). The Zelda-edition ROM was not examined.
 | 18 | **The sensor registers** — what the ROM sends to the M64282FP through the MAC-GBD, in datasheet names; boot, calibration and normal use traced against bus-analyser recordings of a real camera and against BGB (offset search, threshold scan, auto-exposure bands, dither keys), and what the datasheet gets wrong |
 | Appendix | Tools |
 
-## Screen captures
-
-Pixel-accurate renders, produced directly from ROM tile + tilemap data (not photos of an emulator
-— reconstructed the same way the hardware would draw them), plus a few frames captured live via
-BGB. All in `/captures/`.
-
-**The hidden factory diagnostic screens** (§8 below) — hold everything except B at power-on:
-
-| | |
-|---|---|
-| ![](captures/factory_test_screen1_check_gain.png) | Screen 1: live calibration readout. "GAIN8"/"GAINA" are followed on real hardware by the actual SRAM bytes being tested (not shown here since the renderer doesn't execute code — see §6 for the exact values' meaning) |
-| ![](captures/factory_test_screen2_store_wait.png) | Screen 2: the same "STORE... PLEASE WAIT" a normal player sees on a cold boot needing SRAM repair — confirms the hidden test is a superset of ordinary boot calibration, not a separate code path |
-| ![](captures/factory_test_result_OK.png) ![](captures/factory_test_result_NG.png) | The pass/fail result tiles (`$ff91==0` → OK, else → NG), after which the screen hangs forever by design |
-
-**The link-cable data-transfer screen**, found while answering an earlier question about an
-unidentified tile set — reconstructed from its real tilemap:
-
-![](captures/link_transfer_data_screen.png)
-
-**Live menu flow** (captured via BGB, Japan ROM, from last session's exploration):
-
-| | | |
-|---|---|---|
-| ![](captures/jp_boot_logo.png) Boot logo | ![](captures/jp_main_menu.png) Main menu | ![](captures/jp_owner_registration_intro.png) Owner registration intro |
-| ![](captures/jp_registration_keyboard.png) Name-entry keyboard | ![](captures/jp_sex_selection_screen.png) Sex selection | ![](captures/jp_birthdate_screen.png) Birthdate entry |
-| ![](captures/jp_bloodtype_screen.png) Blood type entry | ![](captures/jp_capture_menu_screen.png) Main capture (SHOOT) menu | |
-
 ---
 
 Everything below is graded by confidence:
