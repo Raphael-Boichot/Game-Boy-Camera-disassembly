@@ -1,0 +1,6 @@
+Output of tools/sensor_a000_reads.py (BGB, normal boot, Japanese ROM):
+reads of $A000 in a normal boot (RAM bank >= $10): {'00': 1, '03': 409590, '02': 111}
+writes of $A000: {'03': 111}
+read sites (ROM bank:PC): ['09:5F54', '0A:48BC', '0A:4B82', '0A:4BC5', '0A:4C00']
+Reading: $03 = busy (bit 0 = 1) with bit 1 as written; $02 = idle; only bit 0 changes. The $00 read is the poll at 09:5F54, before $D594 is written. 111 writes = the 111 captures of the boot.
+Over the 14 BGB event logs of assets/sensor/bgb/: 4374 writes of $A000, all $03.

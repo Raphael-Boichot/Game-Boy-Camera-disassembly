@@ -1,6 +1,9 @@
 site,access,address,sensor register,bits,routine (nearest label),value source (previous instruction)
-06:5F7C,write,$A000,control,"start (bit 0, polled until clear)",Bank006_State09,cb C7 (set/res bit)
-06:5FAB,write,$A000,control,"start (bit 0, polled until clear)",Bank006_State09,cb C7 (set/res bit)
+06:5F7C,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Bank006_State09,cb C7 (set/res bit)
+06:5F82,read (via HL),$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Bank006_State09,"ld hl,$A000 (RAM bank $10 selected just before)"
+06:5FAB,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Bank006_State09,cb C7 (set/res bit)
+06:5FEB,read (via HL),$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Bank006_State09,"ld hl,$A000 (RAM bank $10 selected just before)"
+09:5F54,read (via HL),$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Bank009_State24,"ld hl,$A000 (RAM bank $10 selected just before)"
 0A:40C5,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
 0A:40CC,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
 0A:40D4,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
@@ -59,8 +62,8 @@ site,access,address,sensor register,bits,routine (nearest label),value source (p
 0A:4878,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_ExposureBandSelect,"ld a,$05"
 0A:487D,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ExposureBandSelect,"ld a,$80"
 0A:489A,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ExposureBandSelect,cb BF (set/res bit)
-0A:48B9,write,$A000,control,"start (bit 0, polled until clear)",Cam_ExposureBandSelect,cb C7 (set/res bit)
-0A:48BC,read,$A000,control,"start (bit 0, polled until clear)",Cam_ExposureBandSelect,(same value as the previous write)
+0A:48B9,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ExposureBandSelect,cb C7 (set/res bit)
+0A:48BC,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ExposureBandSelect,(same value as the previous write)
 0A:497C,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$20"
 0A:4983,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure1,xor a (0)
 0A:498B,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,"ld a,$30"
@@ -96,16 +99,16 @@ site,access,address,sensor register,bits,routine (nearest label),value source (p
 0A:4B48,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,xor a (0)
 0A:4B50,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
 0A:4B77,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Search,(same value as the previous write)
-0A:4B7F,write,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,cb C7 (set/res bit)
-0A:4B82,read,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,(same value as the previous write)
+0A:4B7F,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ORegister_SAR_Search,cb C7 (set/res bit)
+0A:4B82,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ORegister_SAR_Search,(same value as the previous write)
 0A:4BA1,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_ORegister_SAR_Search,op B1
 0A:4BBA,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Search,(same value as the previous write)
-0A:4BC2,write,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,cb C7 (set/res bit)
-0A:4BC5,read,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,(same value as the previous write)
+0A:4BC2,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ORegister_SAR_Search,cb C7 (set/res bit)
+0A:4BC5,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ORegister_SAR_Search,(same value as the previous write)
 0A:4BE0,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_ORegister_SAR_Search,op B1
 0A:4BF1,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Tail,(same value as the previous write)
-0A:4BFD,write,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Tail,cb C7 (set/res bit)
-0A:4C00,read,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Tail,(same value as the previous write)
+0A:4BFD,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ORegister_SAR_Tail,cb C7 (set/res bit)
+0A:4C00,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ORegister_SAR_Tail,(same value as the previous write)
 0A:4C25,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Tail,(same value as the previous write)
 0A:4C78,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$20"
 0A:4C7F,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure2,xor a (0)
@@ -145,18 +148,18 @@ site,access,address,sensor register,bits,routine (nearest label),value source (p
 0A:4E21,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$0A"
 0A:4E2A,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,"ld a,[$D5A8]"
 0A:4E35,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
-0A:4E5B,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,cb C7 (set/res bit)
-0A:4E5E,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,(same value as the previous write)
-0A:4E8C,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,cb C7 (set/res bit)
-0A:4E8F,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,(same value as the previous write)
-0A:4EBE,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,cb C7 (set/res bit)
-0A:4EC1,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,(same value as the previous write)
-0A:4F01,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,cb C7 (set/res bit)
-0A:4F04,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,(same value as the previous write)
-0A:4F33,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,cb C7 (set/res bit)
-0A:4F36,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,(same value as the previous write)
-0A:50BF,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_PopcountSampleLoop_inner,or $E0
-0A:50C7,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_PopcountSampleLoop_inner,"ld a,$10"
-0A:50CE,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_PopcountSampleLoop_inner,xor a (0)
-0A:50D7,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_PopcountSampleLoop_inner,"ld a,[$D5C3]"
-0A:50E2,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_PopcountSampleLoop_inner,cb FF (set/res bit)
+0A:4E5B,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge,cb C7 (set/res bit)
+0A:4E5E,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge,(same value as the previous write)
+0A:4E8C,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge,cb C7 (set/res bit)
+0A:4E8F,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge,(same value as the previous write)
+0A:4EBE,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge,cb C7 (set/res bit)
+0A:4EC1,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge,(same value as the previous write)
+0A:4F01,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge_Up,cb C7 (set/res bit)
+0A:4F04,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge_Up,(same value as the previous write)
+0A:4F33,write,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge_Up,cb C7 (set/res bit)
+0A:4F36,read,$A000,control,"control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)",Cam_ThresholdConverge_Up,(same value as the previous write)
+0A:50BF,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_LiveInit,or $E0
+0A:50C7,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_LiveInit,"ld a,$10"
+0A:50CE,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_LiveInit,xor a (0)
+0A:50D7,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_LiveInit,"ld a,[$D5C3]"
+0A:50E2,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_LiveInit,cb FF (set/res bit)

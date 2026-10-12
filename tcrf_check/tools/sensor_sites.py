@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """List every traced instruction of the Japanese ROM that writes or reads a camera register ($A000-$A005, `ld [$A00n],a` / `ld a,[$A000]`) with the datasheet name of the
-register and, when the previous instruction loads an immediate, the value (README section 18.2).  Indirect forms (`ld hl,$A000` ... `ld [hl],a`) are listed by sensor_sites.py
-only as a check: every one is in bank 2/6/9 or a polling loop (they read the busy bit or copy the image; the RAM bank is not $10 there) or in bank 0A band handlers (RAM bank 0).
+register and, when the previous instruction loads an immediate, the value (README section 18.2).  The busy-bit polls through HL (`ld hl,$A000 ; bit 0,[hl]`) are listed too; the other
+`ld hl,$A000` of the ROM (banks 2, 6) copy or clear the image in RAM bank 0 and are not camera-register accesses.
 usage: sensor_sites.py ROM.gb TRACE.json SYM OUT.csv       (TRACE.json = wram/trace_jp_v3.json, SYM = pocketcamera_jp.sym)"""
 import sys, json, csv, collections
 
-REG = {0xA000: ('A000', 'control', 'start (bit 0, polled until clear)'),
+REG = {0xA000: ('A000', 'control', 'control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)'),
        0xA001: ('A001', 'reg1 (001)', 'N VH1 VH0 G4-G0'),
        0xA002: ('A002', 'reg2 (010)', 'C1 exposure high byte (4.096 ms)'),
        0xA003: ('A003', 'reg3 (011)', 'C0 exposure low byte (16 us)'),
@@ -57,6 +57,12 @@ def main(rom_fn, trace_fn, sym_fn, out_fn):
             t = rom[o + 1] | rom[o + 2] << 8
             if 0xA000 <= t <= 0xA005 and (rom[o] == 0xEA or t == 0xA000):
                 rows.append(['%02X:%04X' % (b, a), 'write' if rom[o] == 0xEA else 'read', '$%04X' % t, REG[t][1], REG[t][2], label(b, a), prev(b, a)])
+    # busy-bit polls through HL: ld hl,$A000 ; bit 0,[hl] (06:5F7F, 06:5FE8, 09:5F51); a plain `ld hl,$A000` elsewhere copies or clears the image (RAM bank 0, bank 2 / 6) and is not listed
+    for (b, a), ln in sorted(code.items()):
+        o = off(b, a)
+        if ln == 3 and rom[o:o + 3] == b'\x21\x00\xa0' and rom[o + 3] == 0xCB and rom[o + 4] == 0x46 and (b, a + 3) in code:
+            rows.append(['%02X:%04X' % (b, a + 3), 'read (via HL)', '$A000', REG[0xA000][1], REG[0xA000][2], label(b, a), 'ld hl,$A000 (RAM bank $10 selected just before)'])
+    rows.sort(key=lambda r: (int(r[0][:2], 16), int(r[0][3:], 16)))
     with open(out_fn, 'w', newline='') as f:
         w = csv.writer(f); w.writerow(['site', 'access', 'address', 'sensor register', 'bits', 'routine (nearest label)', 'value source (previous instruction)'])
         w.writerows(rows)
