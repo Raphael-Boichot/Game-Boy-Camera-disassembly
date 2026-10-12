@@ -1,0 +1,25 @@
+{
+ "hits": [
+  "03:6155",
+  "03:6264",
+  "03:629A",
+  "03:628B",
+  "03:4D4B",
+  "03:4E21"
+ ],
+ "counts_in_bgb_run": {
+  "03:6155": 1,
+  "03:6264": 31,
+  "03:629A": 31,
+  "03:628B": 10,
+  "03:62BA": 0,
+  "03:611A": 1,
+  "03:623D": 940,
+  "03:4D4B": 1,
+  "03:4E21": 6,
+  "03:4E50": 0,
+  "03:4D1A": 1,
+  "03:4DDA": 620
+ },
+ "note": "logging breakpoints of tcrf_check/tools/bgb_slideshow.py (BGB, Japanese ROM, used save unl_CE10238211 with the list 0..5, markers $82 $02 $42 $81 $41 and the repeat-all flag $FF; guide-walk routes to the player (13:04) and to the editor preview (12:12)); 03:62BA and 03:4E50 are 0 in the run (and in the core): the end-of-list tests behind `dec b ; jr nz` can never be taken (B is zeroed by ld b,$00 before each dec); 03:611A, 03:623D, 03:4D1A, 03:4DDA are not class N. The control (save without markers, bgb_control/) logs 0 for the six marker heads."
+}

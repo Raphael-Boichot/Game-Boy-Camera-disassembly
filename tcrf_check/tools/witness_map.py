@@ -39,6 +39,8 @@ Witnesses (all outside the v8 merge):
   compose_picker  BGB, tcrf_check/tools/bgb_compose.py: used save unl_PC10696894, COMPOSE two-photo layout (mode $17): A held + Up / Down in the photo pickers (06:523B, 06:5276, 06:5769); heads in
            tcrf_check/assets/easy_wins/compose/bgb_compose.heads_hit.json; a head marker credits only the block up to the next call, so the bytes after the calls come from the same chain in my core
            (tcrf_check/tools/compose_picker.py, executed bytes in tcrf_check/assets/easy_wins/compose/core/exec_ranges.csv; README 16.19)
+  slideshow_markers  BGB, tcrf_check/tools/bgb_slideshow.py, and my core, tcrf_check/tools/slideshow_markers.py: used save unl_CE10238211 patched BEFORE the boot (list = photos 0..5, timing markers $82 $02 $42 $81 $41, repeat flag $FF), the slide-show
+           player (mode $13) and the preview of the editor (state 12:12); heads in tcrf_check/assets/easy_wins/slideshow_markers/bgb_slideshow.heads_hit.json, executed bytes in .../markers/ and .../loop/exec_ranges.csv (README 16.19)
 A BGB head hit means the whole block ran (blocks.py: straight line up to the next head or terminator). Only bytes of class N are written; the printer runs of 17.1-17.6
 (tcrf_check/assets/bgb_retrace/printer_heads) hit none."""
 import sys, os, csv, json
@@ -132,6 +134,9 @@ W.append(('editor_copy_flag', 'my core, a save whose photos all have F33 = 1, th
 W.append(('gameface_edit', 'my core, a Game Face stored in the SRAM (edited in the core at the MAGIC menu): the hidden third choice of the Game Face page, the Game Face editor and its save-back (README 16.19)', 'C', exec_masks('tcrf_check/assets/easy_wins/gameface_edit/*/exec_ranges.csv')))
 cp_ = json.load(open(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'compose', 'bgb_compose.heads_hit.json')))
 W.append(('compose_picker', 'BGB (block heads 06:523B, 06:5276, 06:5769) and my core (the bytes after the two calls), used save, COMPOSE two-photo layout: A held with Up / Down in the photo pickers (README 16.19)', 'C', from_heads(cp_['hits']) | exec_masks('tcrf_check/assets/easy_wins/compose/*/exec_ranges.csv')))
+ss_ = json.load(open(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'slideshow_markers', 'bgb_slideshow.heads_hit.json')))
+W.append(('slideshow_markers', 'BGB (block heads 03:6155, 03:6264, 03:629A, 03:628B, 03:4D4B, 03:4E21) and my core, used save with start / end markers in the timing array: the slide-show player and the editor preview (README 16.19)', 'C',
+          from_heads(ss_['hits']) | exec_masks('tcrf_check/assets/easy_wins/slideshow_markers/markers/exec_ranges.csv') | exec_masks('tcrf_check/assets/easy_wins/slideshow_markers/loop/exec_ranges.csv')))
 rows = []; seen = np.zeros(N, bool)
 for name, desc, ev, m in W:
     m = m & isN & ~seen; seen |= m

@@ -22,12 +22,10 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 04:75C5,04,GATED,9,24,04:75C3(ft),$D7C1 border_number,,OPEN,?,not analysed
 06:71CC,06,DEAD,14,24,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:253C,00,DEAD,13,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-03:6264,03,GATED,11,23,03:6262(ft),,,OPEN,?,not analysed
 05:622D,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:7F1C,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:7F33,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 09:6D00,09,DEAD,14,18,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-03:629A,03,GATED,7,17,03:6298(ft),,,OPEN,?,not analysed
 05:5445,05,GATED,9,17,05:542E,$FFA1 keys_held,,OPEN,?,not analysed
 05:5456,05,GATED,9,17,05:5432,$FFA1 keys_held,,OPEN,?,not analysed
 03:6533,03,GATED,8,16,03:6532(ft),,,OPEN,?,not analysed
@@ -42,8 +40,6 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 0A:59E9,0A,TABLE,5,12,0A:541A[19] effect table,,effect index 19 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:5A01,0A,TABLE,5,12,0A:541A[21] effect table,,effect index 21 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 00:1B25,00,GATED,7,11,00:1B23(ft),$DC0D prn_state,,UNREACHABLE,I,"printer engine entry 00:1B1E (idle INQUIRY poll) with $DC0D other than 1: its only caller is 00:0F4B in 00:0F2D, which returns unless $DC0D = 1; no other call / jp / pointer to 00:1B1E (the operand 00:1B36 found in bank 35 is data). Injected statuses (README 16.16) cannot change this"
-03:4D4B,03,GATED,5,11,03:4D49(ft),,,OPEN,?,not analysed
-03:6155,03,GATED,5,11,03:6153(ft),,,OPEN,?,not analysed
 05:49C2,05,GATED,8,11,05:49C0(ft),,,OPEN,?,not analysed
 00:0758,00,ORPHAN,7,10,flow:1,,,OPEN,?,not analysed
 05:6AE1,05,GATED,6,10,05:6AE0(ft),,,OPEN,?,not analysed
@@ -72,8 +68,8 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 00:190F,00,DEAD,3,5,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:19A2,00,DEAD,3,5,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:1CD2,00,GATED,2,5,00:1CD0(ft),,,OPEN,?,not analysed
-03:4E50,03,GATED,3,5,03:4E4E(ft),,,OPEN,?,not analysed
-03:62BA,03,GATED,3,5,03:62B8(ft),,,OPEN,?,not analysed
+03:4E50,03,GATED,3,5,03:4E4E(ft),,,UNREACHABLE,I,"slide-show editor preview (state $12, 03:4DDA): the end-of-list test `dec b ; jr nz,$4dec` (03:4E4D) is always taken because B is zeroed by `ld b,$00` at 03:4DF0 and 03:4E26 before every `dec b` (the `ld b,$2f` at 03:4DEA is dead); the list end is caught by `cp $2f` at 03:4E12 instead. 0 hits in the core and in BGB with a six-entry list, with and without the repeat-all flag (README 16.19)"
+03:62BA,03,GATED,3,5,03:62B8(ft),,,UNREACHABLE,I,"slide-show player (state 4, 03:623D): same pattern as 03:4E50, `dec b ; jr nz,$6256` (03:62B7) always taken because `ld b,$00` at 03:625A / 03:6290 clears B (the `ld b,$2f` at 03:6254 is dead); the list end is caught by `cp $2f` at 03:627C. 0 hits in the core and in BGB (README 16.19)"
 03:79AE,03,GATED,3,5,03:79AC(ft),,,OPEN,?,not analysed
 04:4FB8,04,GATED,3,5,04:4FB6(ft),$DA0F copies_of_photo,,OPEN,?,not analysed
 04:52E4,04,GATED,2,5,04:52E2(ft),,,OPEN,?,not analysed
@@ -107,9 +103,7 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 02:4998,02,GATED,1,1,02:4996(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4999)"
 02:4C2A,02,GATED,1,1,02:4C28(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4c2b)"
 03:41E8,03,GATED,1,1,03:41E6(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$41e9)"
-03:4E21,03,GATED,1,1,03:4E1A,$D6B0 anim_loop_flag,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$4e21)"
 03:5C13,03,GATED,1,1,03:5C11(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5c14)"
-03:628B,03,GATED,1,1,03:6284,$D6B0 anim_loop_flag,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$628b)"
 04:4E3B,04,GATED,1,1,04:4E39(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$4e3c)"
 04:5AE6,04,GATED,1,1,04:5AE4(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5ae7)"
 04:5B38,04,GATED,1,1,04:5B36(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5b39)"
