@@ -1,0 +1,11 @@
+{
+ "experiment": "scatter_x_off",
+ "doc": "erase effect (mode $0F, delete YES): the 16 particle X positions $DACC-$DADB := $B0 (all off the right edge) while the Y positions are still on screen: the X pass counts no moving particle, 04:52E4 sets the end flag $DB4C",
+ "start": "0F:02",
+ "hits": {
+  "04:52E4": true,
+  "04:5301": false
+ },
+ "end": "0F:02",
+ "photos_after": 19
+}

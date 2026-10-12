@@ -1,0 +1,29 @@
+{
+ "experiment": "printer_dc0b_retry",
+ "doc": "printer engine, comment-card print with $DC0B := 1, the tables filled and the printer answering a DATA packet with an error status (bit 0 / bit 1 = checksum / busy): the retry path of the engine (DC25 = 2) reads $DC0B again at 00:1A7E and takes 00:1A87-1AA7",
+ "variants": [
+  [
+   "data",
+   1,
+   "01",
+   "1C:03",
+   [
+    "00:1A24",
+    "00:1A5B",
+    "00:1A87",
+    "00:1AA8",
+    "00:1AD2",
+    "00:1ADC"
+   ]
+  ]
+ ],
+ "hits": {
+  "00:1A24": true,
+  "00:1A5B": true,
+  "00:1A87": true,
+  "00:1AA8": true,
+  "00:1AD2": true,
+  "00:1ACB": false,
+  "00:1ADC": true
+ }
+}

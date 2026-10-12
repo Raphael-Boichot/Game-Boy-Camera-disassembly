@@ -1,0 +1,211 @@
+{
+ "experiment": "state_sweep",
+ "doc": "every game mode of the corpus (one entry per mode): the state number $D5CF poked to 0..255 (the state handlers are fetched from a word table with that index, so values past the end of the table jump to whatever words follow it), 8 frames each; then the mode number $D5CE poked to 0..255 from the main menu. Only WRAM bytes are written; the code reached through an out-of-range number is a table overrun, not a designed path",
+ "modes": {
+  "00": 32,
+  "01": 177,
+  "02": 207,
+  "03": 506,
+  "04": 584,
+  "05": 617,
+  "06": 899,
+  "07": 197,
+  "08": 175,
+  "09": 317,
+  "0A": 582,
+  "0B": 293,
+  "0C": 437,
+  "0D": 298,
+  "0E": 914,
+  "0F": 448,
+  "10": 478,
+  "11": 607,
+  "12": 717,
+  "13": 954,
+  "14": 180,
+  "15": 327,
+  "16": 468,
+  "17": 522,
+  "18": 2141,
+  "19": 0,
+  "1A": 1018,
+  "1B": 864,
+  "1C": 289,
+  "1D": 290,
+  "1E": 927,
+  "20": 1973,
+  "21": 350
+ },
+ "log": [
+  [
+   "mode 00",
+   "new bytes",
+   0
+  ],
+  [
+   "mode 01",
+   "new bytes",
+   0
+  ],
+  [
+   "mode 02",
+   "new bytes",
+   3578
+  ],
+  [
+   "mode 03",
+   "new bytes",
+   2306
+  ],
+  [
+   "mode 04",
+   "new bytes",
+   2333
+  ],
+  [
+   "mode 05",
+   "new bytes",
+   1525
+  ],
+  [
+   "mode 06",
+   "new bytes",
+   453
+  ],
+  [
+   "mode 07",
+   "new bytes",
+   692
+  ],
+  [
+   "mode 08",
+   "new bytes",
+   0
+  ],
+  [
+   "mode 09",
+   "new bytes",
+   3617
+  ],
+  [
+   "mode 0A",
+   "new bytes",
+   815
+  ],
+  [
+   "mode 0B",
+   "new bytes",
+   591
+  ],
+  [
+   "mode 0C",
+   "new bytes",
+   789
+  ],
+  [
+   "mode 0D",
+   "new bytes",
+   0
+  ],
+  [
+   "mode 0E",
+   "new bytes",
+   1999
+  ],
+  [
+   "mode 0F",
+   "new bytes",
+   2150
+  ],
+  [
+   "mode 10",
+   "new bytes",
+   657
+  ],
+  [
+   "mode 11",
+   "new bytes",
+   355
+  ],
+  [
+   "mode 12",
+   "new bytes",
+   0
+  ],
+  [
+   "mode 13",
+   "new bytes",
+   392
+  ],
+  [
+   "mode 14",
+   "new bytes",
+   1106
+  ],
+  [
+   "mode 15",
+   "new bytes",
+   1247
+  ],
+  [
+   "mode 16",
+   "new bytes",
+   921
+  ],
+  [
+   "mode 17",
+   "new bytes",
+   2899
+  ],
+  [
+   "mode 18",
+   "new bytes",
+   597
+  ],
+  [
+   "mode 19",
+   "new bytes",
+   2420
+  ],
+  [
+   "mode 1A",
+   "new bytes",
+   1699
+  ],
+  [
+   "mode 1B",
+   "new bytes",
+   1883
+  ],
+  [
+   "mode 1C",
+   "new bytes",
+   839
+  ],
+  [
+   "mode 1D",
+   "new bytes",
+   482
+  ],
+  [
+   "mode 1E",
+   "new bytes",
+   1134
+  ],
+  [
+   "mode 20",
+   "new bytes",
+   1738
+  ],
+  [
+   "mode 21",
+   "new bytes",
+   4991
+  ],
+  [
+   "mode number sweep",
+   "new bytes",
+   0
+  ]
+ ]
+}

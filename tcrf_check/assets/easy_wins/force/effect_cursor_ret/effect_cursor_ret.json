@@ -1,0 +1,45 @@
+{
+ "experiment": "effect_cursor_ret",
+ "doc": "SHOOT (mode $14): the same out-of-range cursor, now for the table bytes 60 (k = 167 or 192) and 61 (k = 151): the placeholder effect slots 60 and 61 of 0A:541A, a bare `ret` each (0A:61AE, 0A:61AF)",
+ "trials": [
+  [
+   205,
+   "14:01",
+   "idx60 k=167",
+   [
+    "0A:61AE"
+   ]
+  ],
+  [
+   205,
+   "14:02",
+   "idx61 k=151",
+   [
+    "0A:61AE",
+    "0A:61AF"
+   ]
+  ],
+  [
+   205,
+   "00:00",
+   "idx60 k=192 page 1",
+   [
+    "0A:61AE",
+    "0A:61AF"
+   ]
+  ],
+  [
+   205,
+   "00:00",
+   "idx62 k=102",
+   [
+    "0A:61AE",
+    "0A:61AF"
+   ]
+  ]
+ ],
+ "hits": {
+  "0A:61AE": true,
+  "0A:61AF": true
+ }
+}

@@ -1,0 +1,56 @@
+{
+ "experiment": "erase_all_list",
+ "doc": "erase-all confirmation (mode $0F state 10, 04:4D1B): A = YES runs 04:4E26, which sets every entry of the RAM copy of the slide-show list ($D681, 47 bytes) that has bit 7 clear (a photo number) to $FE (04:4E3B); the stored saves hold an empty list ($FE / $FF only). Save unl_CE10238211 patched BEFORE the boot with the list = photos 0..5 then $FF (settings checksums fixed)",
+ "trials": [
+  [
+   "0F:02",
+   2847,
+   "0F:02",
+   {
+    "04:4E3B": false,
+    "04:4E26": false
+   }
+  ],
+  [
+   "0F:03",
+   658,
+   "0F:02",
+   {
+    "04:4E3B": true,
+    "04:4E26": true
+   }
+  ]
+ ],
+ "start_0F_02": [
+  2847,
+  "0F:02"
+ ],
+ "confirm": "0F:0A",
+ "A_presses": [
+  [
+   "0F:0A",
+   30,
+   1
+  ],
+  [
+   "0F:0A",
+   30,
+   1
+  ],
+  [
+   "0F:02",
+   0,
+   1
+  ]
+ ],
+ "start_0F_03": [
+  658,
+  "0F:03"
+ ],
+ "D681_after": "fe fe fe fe fe fe ff fe",
+ "hits": {
+  "04:4E3B": true,
+  "04:4E26": true
+ },
+ "end": "0F:02"
+}

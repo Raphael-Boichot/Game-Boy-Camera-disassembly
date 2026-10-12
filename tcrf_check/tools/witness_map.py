@@ -17,6 +17,9 @@ Witnesses (all outside the v8 merge):
            tcrf_check/assets/bgb_retrace/printer_status_heads/*.heads_hit.json (README 16.16)
   printer_status  my core with the printer status injected at every packet (tcrf_check/tools/printer_status.py, card and D.J. scenarios): one folder per scenario in
            tcrf_check/assets/printer_status/ (exec_ranges.csv = everything executed by any variant)
+  force_open  my core, tcrf_check/tools/force_open.py and dj_pages.py --cursor: WRAM / SRAM bytes poked (hot spot mirror, menu cursors, effect index, state numbers, place counter, printer tables, patched saves), one folder per experiment in
+           tcrf_check/assets/easy_wins/force/ (README 16.21)
+  state_overrun  my core, force_open.py state_sweep and hotspot_sweep: the state number $D5CF 0..255 in every mode, the mode number $D5CE 0..255 from the main menu and the hot-spot effect numbers 16..255: table overruns (the handler is whatever word follows the table), credited after force_open, one folder each in tcrf_check/assets/easy_wins/force/ (README 16.21)
   run_race    my core, tcrf_check/tools/run_race.py: RUN! RUN! RUN! played to the end with A pressed at different rates, four races in a row, Up before each hurdle (joypad only, unlocking save): tcrf_check/assets/run_race/exec_ranges.csv
               (the six podium orders of README 16.17 were replayed in BGB, tcrf_check/tools/bgb_run_race.py; the block heads it hit are in tcrf_check/assets/run_race/bgb/)
   dj_se    my core, tcrf_check/tools/dj_se.py: the sound-effect selector of the D.J. performance screen (mode $1F state 5) set to SE 1-9 and A pressed (once; 26 times for SE 9), joypad only;
@@ -137,6 +140,9 @@ W.append(('compose_picker', 'BGB (block heads 06:523B, 06:5276, 06:5769) and my 
 ss_ = json.load(open(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'slideshow_markers', 'bgb_slideshow.heads_hit.json')))
 W.append(('slideshow_markers', 'BGB (block heads 03:6155, 03:6264, 03:629A, 03:628B, 03:4D4B, 03:4E21) and my core, used save with start / end markers in the timing array: the slide-show player and the editor preview (README 16.19)', 'C',
           from_heads(ss_['hits']) | exec_masks('tcrf_check/assets/easy_wins/slideshow_markers/markers/exec_ranges.csv') | exec_masks('tcrf_check/assets/easy_wins/slideshow_markers/loop/exec_ranges.csv')))
+OVERRUN = ('state_sweep', 'hotspot_sweep')          # table overruns: credited after the designed experiments, as witness state_overrun
+W.append(('force_open', 'my core, WRAM / SRAM bytes poked like a save or a game state could hold them (an armed hot spot, an out-of-range menu cursor or effect index, a state number, a place counter, the printer size tables, a patched save) and real key presses at the natural caller; one process per experiment in tcrf_check/tools/force_open.py, plus the D.J. page search with the two cursors in the state key (dj_pages.py --cursor) (README 16.21)', 'C', sum((exec_masks('tcrf_check/assets/easy_wins/force/%s/exec_ranges.csv' % d) for d in sorted(os.listdir(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'force'))) if d not in OVERRUN), np.zeros(N, bool))))
+W.append(('state_overrun', 'my core, tcrf_check/tools/force_open.py state_sweep: for every game mode the state number $D5CF (and from the main menu the mode number $D5CE) poked to 0..255, 8 frames each, and hotspot_sweep: hot-spot effect numbers 16..255: the handler is fetched from a word table with an index past its end, so the code that runs is whatever the words after the table point to (a table overrun, not a designed path; README 16.21)', 'C', sum((exec_masks('tcrf_check/assets/easy_wins/force/%s/exec_ranges.csv' % d) for d in OVERRUN), np.zeros(N, bool))))
 rows = []; seen = np.zeros(N, bool)
 for name, desc, ev, m in W:
     m = m & isN & ~seen; seen |= m

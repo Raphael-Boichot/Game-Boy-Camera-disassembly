@@ -1,0 +1,12 @@
+{
+ "experiment": "erase_browse",
+ "doc": "mode $0A state 3 (04:7593, the \"view which photo?\" confirm screen): $D67E (photo-changed flag, only ever set by the unreferenced routine 04:7C9D) := 1 and $D5ED := 1: photo 1 has another border number than photo 0, so 04:75C5 redraws the frame background",
+ "start": "0A:03",
+ "border_before": 10,
+ "border_after": 15,
+ "hits": {
+  "04:75C5": true,
+  "04:75DD": true
+ },
+ "end": "0A:03"
+}

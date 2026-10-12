@@ -1,0 +1,9 @@
+{
+ "experiment": "hotspot_jump",
+ "doc": "hot spot 0 armed with a jump target (photo 2, $D65C = 2): 03:6533 draws the target photo; effect $FF",
+ "hits": {
+  "03:6533": true,
+  "03:6625": true
+ },
+ "end": "0C:03"
+}

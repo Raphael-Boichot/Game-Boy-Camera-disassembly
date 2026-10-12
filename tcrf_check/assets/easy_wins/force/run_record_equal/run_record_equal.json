@@ -1,0 +1,24 @@
+{
+ "experiment": "run_record_equal",
+ "doc": "RUN! RUN! RUN! (mode $21): the record test 09:725E (called when runner 0 gets a place) compares the race time ($D029 / $D028, as $99 - x: cpl ; add a,$9a) with the stored best time $DAA7 / $DAA6; when both digits are equal it ends with the `ret` at 09:7273. A race is played (A every 2nd frame); the frame in which runner 0 gets its place is played twice from a snapshot: the first time to read the final time, the second time with the best time $DAA6 / $DAA7 poked to $99 - $D028 / $99 - $D029, i.e. a best time equal to the time run",
+ "start": "21:06",
+ "times": [
+  102,
+  22
+ ],
+ "poked_best": [
+  51,
+  131
+ ],
+ "after": [
+  102,
+  22
+ ],
+ "frames": 939,
+ "hits": {
+  "09:7273": true,
+  "09:7274": false,
+  "09:725E": true
+ },
+ "end": "21:07"
+}

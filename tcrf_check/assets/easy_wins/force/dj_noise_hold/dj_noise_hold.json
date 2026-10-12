@@ -1,0 +1,28 @@
+{
+ "experiment": "dj_noise_hold",
+ "doc": "D.J. NOISE page (1F:0B, three Select from the SOUND I page): a field value stepped with A kept held and Up / Down (05:49BB): Up on a value above its minimum decrements it (05:49C4: the sound request $08 on $D92E and dec); the searches only ever pressed Up on the minimum (05:49C2 returns there). Joypad only: A kept held, Down, Down, Right, Up",
+ "start": "1F:0B",
+ "seq": [
+  [
+   "Down",
+   10
+  ],
+  [
+   "Down",
+   12
+  ],
+  [
+   "Right",
+   13
+  ],
+  [
+   "Up",
+   15
+  ]
+ ],
+ "hits": {
+  "05:49C2": true,
+  "05:49C4": true
+ },
+ "end": "1F:0B"
+}

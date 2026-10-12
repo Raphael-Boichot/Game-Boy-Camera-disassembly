@@ -1,0 +1,13 @@
+{
+ "experiment": "sf2_gameface",
+ "doc": "Space Fever II, key log of README 16.18 from corpus entry 197 (the blank `_ff` save): when the wave state $D863 reaches 6-8 poke $D88F := 2 (third boss) and $D581 := 1 (a Game Face is stored: SRAM $B0D1 bit 0); the boss set-up 07:60E1 then asks 00:16A6 for the graphics group 6 whose pointers are WRAM $C000 / $C380 / $C700: 00:1668 -> 00:16C4 takes its `bit 7,h` branch 00:16D7",
+ "poked_at_frame": 1308,
+ "stopped_at_frame": 2047,
+ "hits": {
+  "00:16D7": true,
+  "00:16AE": true,
+  "07:693A": true,
+  "07:60E1": true
+ },
+ "end": "07:02"
+}

@@ -1,0 +1,42 @@
+{
+ "experiment": "stamp_cancel_d640",
+ "doc": "stamp tool (mode $11): B on the placement state 11:04 opens the save dialog (11:07); $D640 (the state to return to, written only in state 4 and always 4) := 3 while the dialog is open, B cancels ($D670 = $FF): 04:5D63 (back to the palette)",
+ "start": "11:04",
+ "log": [
+  [
+   "B",
+   "11:07",
+   0
+  ],
+  [
+   "Down",
+   "11:07",
+   0
+  ],
+  [
+   "A",
+   "11:07",
+   0
+  ],
+  [
+   "B",
+   "11:07",
+   0
+  ],
+  [
+   "B",
+   "11:03",
+   255
+  ],
+  [
+   "A",
+   "11:04",
+   255
+  ]
+ ],
+ "hits": {
+  "04:5D63": true,
+  "04:5D4E": true
+ },
+ "end": "11:04"
+}

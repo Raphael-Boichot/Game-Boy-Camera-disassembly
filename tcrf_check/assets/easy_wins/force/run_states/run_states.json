@@ -1,0 +1,40 @@
+{
+ "experiment": "run_states",
+ "doc": "RUN! RUN! RUN! (mode $21, state table 09:5FE7): (1) a race played with A every 2nd frame; on the first frame of state 07 (the handler with the race-end test, 09:63B4) the three runner positions are poked past the finish line ($D001:$D000 := $1590, $D00F:$D00E and $D018:$D017 := $1500) together with the place counter $D047 := $FF and the three places $D00D / $D016 / $D01F := 0: the placement of runner 0 (09:6AF0-6AFC) wraps the counter to 0 and gives runner 0 the place 0, runners 1 and 2 make it 2, and the race-end test (09:63E1) finds runner 0 unplaced: 09:63FE; (2) after the race the state number $D5CF is poked to 9 (09:6435: sets state 3) and to $0D (09:66BB: a lone ret), states no code ever selects",
+ "start": "21:06",
+ "poked_at": 939,
+ "after_poke": {
+  "D047": 2,
+  "places": [
+   3,
+   1,
+   2
+  ],
+  "state": "21:07"
+ },
+ "race_frames": 961,
+ "places": [
+  3,
+  1,
+  2
+ ],
+ "D047": 2,
+ "after_race": "21:0C",
+ "hits_race": {
+  "09:6435": false,
+  "09:66BB": false,
+  "09:63FE": true,
+  "09:6409": false,
+  "09:6414": false
+ },
+ "state_09": "21:04",
+ "state_0D": "21:0D",
+ "hits": {
+  "09:6435": true,
+  "09:66BB": true,
+  "09:63FE": true,
+  "09:6409": false,
+  "09:6414": false
+ },
+ "end": "21:0D"
+}

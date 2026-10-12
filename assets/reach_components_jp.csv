@@ -1,143 +1,109 @@
 first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict,evidence,note
-00:0781,00,DEAD,69,107,flow:8;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 04:7C9D,04,DEAD,49,90,call:1;flow:7;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-0A:5853,0A,TABLE,70,87,0A:541A[13] effect table,,effect index 13 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 07:4A4D,07,DEAD,32,65,flow:2;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:1AEB,00,DEAD,30,64,flow:3;root:2,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-0A:5E40,0A,TABLE,39,63,0A:541A[45] effect table,,effect index 45 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:6037,0A,TABLE,38,61,0A:541A[51] effect table,,effect index 51 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:60B1,0A,TABLE,38,61,0A:541A[53] effect table,,effect index 53 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:6704,0A,TABLE,35,57,0A:541A[83] effect table,,effect index 83 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
+00:07BE,00,ORPHAN,32,46,flow:3,,,UNREFERENCED,I,"body of the deferred copy routine 00:0781, which no instruction of the ROM calls (dead function)"
 1F:53B9,1F,DEAD,37,46,flow:2;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:069F,00,DEAD,24,43,flow:2;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 07:4BC3,07,DEAD,17,39,call:2;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:10AC,00,DEAD,28,36,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 09:721D,09,DEAD,14,34,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:1A87,00,GATED,23,33,00:1A85(ft),$DC0B prn_comp_enable,,UNREACHABLE,I,"retry path of the printer engine taken only when $DC0B is not 0 (00:1A84: and a / jr z,$1AA8; its twin 00:1A24-1A47 is class F). $DC0B is read at 00:1A1B and 00:1A7E and no instruction anywhere in the ROM writes it (no ld [$DC0B],a, no ld hl/de/bc,$DC00-$DC0B; scan of the whole ROM), and the boot code clears WRAM at 00:0181, so it stays 0; a block write through another pointer is not excluded"
 07:4BEA,07,DEAD,19,30,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-03:6625,03,TABLE,11,29,03:655D[0],,,OPEN,?,not analysed
 00:2523,00,DEAD,14,25,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 1F:53E7,1F,DEAD,19,25,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:05E0,00,GATED,16,24,00:05D5,,,OPEN,?,not analysed
-04:75C5,04,GATED,9,24,04:75C3(ft),$D7C1 border_number,,OPEN,?,not analysed
 06:71CC,06,DEAD,14,24,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:253C,00,DEAD,13,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:622D,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:7F1C,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:7F33,05,DEAD,9,23,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
+00:1AEB,00,DEAD,11,21,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
+00:10AC,00,DEAD,14,20,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 09:6D00,09,DEAD,14,18,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-05:5445,05,GATED,9,17,05:542E,$FFA1 keys_held,,OPEN,?,not analysed
-05:5456,05,GATED,9,17,05:5432,$FFA1 keys_held,,OPEN,?,not analysed
-03:6533,03,GATED,8,16,03:6532(ft),,,OPEN,?,not analysed
 00:0762,00,DEAD,8,15,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:0810,00,GATED,8,15,00:080E(ft),,,OPEN,?,not analysed
+00:0810,00,GATED,8,15,00:080E(ft),,,UNREACHABLE,I,"ROM-source branch (HL below $8000, bank number in A) of the VRAM chunk copy 00:080C: every caller passes a source with bit 7 of H set ($8000 and above), so `bit 7,h ; jr nz,$081f` is always taken and the ROM branch is never entered. The source is a call-site immediate (README 16.21)"
 00:24F1,00,DEAD,10,15,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:258F,00,GATED,8,15,00:258D(ft),,,OPEN,?,not analysed
-04:5D63,04,GATED,6,15,04:5D61(ft),$D640 stamp_return_state,,OPEN,?,not analysed
+00:258F,00,GATED,8,15,00:258D(ft),,,UNREACHABLE,I,"ROM-source branch of the tile loader 00:2583 (`cp $a0 ; jr nc,$259e` at 00:258A): all callers hand a descriptor whose source address is in WRAM at $C000 (high byte >= $A0), so the RAM branch is always taken and the ROM branch is never entered"
 04:6403,04,DEAD,6,15,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 04:6412,04,DEAD,6,15,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:0773,00,DEAD,7,14,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
+00:0781,00,DEAD,6,12,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 0A:59E9,0A,TABLE,5,12,0A:541A[19] effect table,,effect index 19 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:5A01,0A,TABLE,5,12,0A:541A[21] effect table,,effect index 21 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
-00:1B25,00,GATED,7,11,00:1B23(ft),$DC0D prn_state,,UNREACHABLE,I,"printer engine entry 00:1B1E (idle INQUIRY poll) with $DC0D other than 1: its only caller is 00:0F4B in 00:0F2D, which returns unless $DC0D = 1; no other call / jp / pointer to 00:1B1E (the operand 00:1B36 found in bank 35 is data). Injected statuses (README 16.16) cannot change this"
-05:49C2,05,GATED,8,11,05:49C0(ft),,,OPEN,?,not analysed
-00:0758,00,ORPHAN,7,10,flow:1,,,OPEN,?,not analysed
-05:6AE1,05,GATED,6,10,05:6AE0(ft),,,OPEN,?,not analysed
-00:06F6,00,GATED,6,9,00:06F4(ft),,,OPEN,?,not analysed
-08:482C,08,GATED,4,9,08:482A(ft),$D7C1 border_number,,OPEN,?,not analysed
+00:1B07,00,GATED,5,11,00:1B01;00:1B06(ft),,,UNREFERENCED,I,"continuation of 00:1AEB, which nothing calls (dead printer helper)"
+00:05E0,00,GATED,5,10,00:05D5,,,UNREACHABLE,I,"2-byte tail of the 4-bytes-per-pass copy 00:0586 (`cp $02 ; jr z,$05e0` at 00:05D5): the loop subtracts 4 from BC per pass and leaves for the tail only when B = 0 and C = 2, i.e. for a byte count that is 2 mod 4. Every call site of 00:0586 passes a count that is a multiple of 4 (checked at all call sites), so C is never 2. The count is a call-site immediate, not a variable: no WRAM / SRAM poke can change it (README 16.21)"
+00:0758,00,ORPHAN,7,10,flow:1,,,UNREFERENCED,I,"`or`-merge helper 00:0751: no call / jp / jr / ld rr / pointer-table word reaches 00:0751 (scan of the whole ROM) - dead function, no state or SRAM value can call it"
+00:07AD,00,GATED,5,9,00:07AB(ft),,,UNREFERENCED,I,"branch of the deferred copy routine 00:0781, which no instruction of the ROM calls (dead function)"
 1F:5743,1F,DEAD,4,9,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-06:7417,06,TABLE,3,8,06:73AF[13],,slot 13 outside the values of the 06:60DB table,UNREACHABLE,I,"slot of 06:73AF, chosen by the same 88-byte index table 06:60DB (06:738F-73AE), which never produces this value"
 06:7457,06,TABLE,3,8,06:73AF[19],,slot 19 outside the values of the 06:60DB table,UNREACHABLE,I,"slot of 06:73AF, chosen by the same 88-byte index table 06:60DB (06:738F-73AE), which never produces this value"
 06:7467,06,TABLE,3,8,06:73AF[21],,slot 21 outside the values of the 06:60DB table,UNREACHABLE,I,"slot of 06:73AF, chosen by the same 88-byte index table 06:60DB (06:738F-73AE), which never produces this value"
 1F:46DD,1F,DEAD,3,8,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 1F:4A61,1F,DEAD,4,8,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-1F:5234,1F,GATED,4,8,1F:5224,,,OPEN,?,not analysed
+1F:5234,1F,GATED,4,8,1F:5224,,,UNREACHABLE,I,"flush-to-hardware tail of the wave-channel handlers (1F:4F72-5127): the wave handlers never call the flush routine 1F:520A that falls into 1F:5234; run in the core by sending sound ids $01-$48 into the seven mailboxes ($DD60, $DD68, $DD70, $DD78 and their +1 slots), four frames each, 504 trials (experiment sound_mailboxes): 1F:523C, 1F:5259 and 1F:4F72 ran, 1F:5234 and 1F:522A never"
 00:03D4,00,DEAD,4,7,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:03DB,00,DEAD,4,7,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:057F,00,DEAD,5,7,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:0861,00,GATED,4,7,00:0860(ft),,,OPEN,?,not analysed
-05:4B1D,05,GATED,5,7,05:4B17,,,OPEN,?,not analysed
+00:05F1,00,GATED,4,7,00:05F0(ft),,,UNREACHABLE,I,"second pop of the 2-byte tail of 00:0586 (same component as 00:05E0: needs `pop af` with the carry set, i.e. a ROM source below $8000 AND a byte count of 2 mod 4)"
+00:06F8,00,GATED,4,7,00:06F7(ft),,,UNREFERENCED,I,tail of the ROM-source copy 00:069F (dead: no caller anywhere)
+00:0861,00,GATED,4,7,00:0860(ft),,,UNREACHABLE,I,"exit of the same ROM-source branch of 00:080C (`pop af ; ret nc ; pop af ; ldh [$ff9b],a ; ld [$2000],a`): reached only with the carry set by the ROM-source entry 00:0810"
 1F:524B,1F,DEAD,4,7,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:2611,00,GATED,3,6,00:260F(ft),,,OPEN,?,not analysed
+00:2611,00,GATED,3,6,00:260F(ft),,,UNREACHABLE,I,exit of the ROM-source branch of 00:2583 (same condition as 00:258F)
 00:2E82,00,DEAD,5,6,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 07:41C8,07,DEAD,3,6,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-09:6435,09,TABLE,3,6,09:5FE7[9],,,UNREACHABLE,I,"RUN! RUN! RUN!: state $09 of the table 09:5FE7 (like $08 and $0A). The stores to $D5CF in bank 9 write 0, 3, 6, $0B and $0E, and 'inc [hl]' only in states 0-6 and $0B; nothing writes 8, 9 or $0A (README 16.17). A write from another bank is not excluded"
 0A:7CE6,0A,DEAD,2,6,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 0A:7CEC,0A,DEAD,2,6,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 1F:4FBC,1F,DEAD,3,6,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:190F,00,DEAD,3,5,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 00:19A2,00,DEAD,3,5,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:1CD2,00,GATED,2,5,00:1CD0(ft),,,OPEN,?,not analysed
 03:4E50,03,GATED,3,5,03:4E4E(ft),,,UNREACHABLE,I,"slide-show editor preview (state $12, 03:4DDA): the end-of-list test `dec b ; jr nz,$4dec` (03:4E4D) is always taken because B is zeroed by `ld b,$00` at 03:4DF0 and 03:4E26 before every `dec b` (the `ld b,$2f` at 03:4DEA is dead); the list end is caught by `cp $2f` at 03:4E12 instead. 0 hits in the core and in BGB with a six-entry list, with and without the repeat-all flag (README 16.19)"
 03:62BA,03,GATED,3,5,03:62B8(ft),,,UNREACHABLE,I,"slide-show player (state 4, 03:623D): same pattern as 03:4E50, `dec b ; jr nz,$6256` (03:62B7) always taken because `ld b,$00` at 03:625A / 03:6290 clears B (the `ld b,$2f` at 03:6254 is dead); the list end is caught by `cp $2f` at 03:627C. 0 hits in the core and in BGB (README 16.19)"
-03:79AE,03,GATED,3,5,03:79AC(ft),,,OPEN,?,not analysed
-04:4FB8,04,GATED,3,5,04:4FB6(ft),$DA0F copies_of_photo,,OPEN,?,not analysed
-04:52E4,04,GATED,2,5,04:52E2(ft),,,OPEN,?,not analysed
-05:686A,05,GATED,3,5,05:6869(ft),,,OPEN,?,not analysed
-05:6E7E,05,GATED,3,5,05:6E7D(ft),,,OPEN,?,not analysed
-07:5291,07,GATED,3,5,07:528F(ft),,,OPEN,?,not analysed
-07:5473,07,GATED,3,5,07:5471(ft),,,OPEN,?,not analysed
-08:4095,08,GATED,3,5,08:4093(ft),,,OPEN,?,not analysed
-09:63FE,09,GATED,2,5,09:63FC(ft),$D00D ([0] image-reducer accumulators+11),,UNREACHABLE,I,"RUN! RUN! RUN!: the race ends (09:63E1-63F7) only when runner 0 is beyond $1580, and runner 0 gets its place at x >= $1400 (09:6AE5-6AFC, every frame of states 06 and 07, before the end test), so $D00D is never 0 there; the 5 bytes are the fall-through of a test that cannot fail (README 16.17)"
-00:16D7,00,GATED,2,4,00:16C6,,,OPEN,?,not analysed
-00:1B36,00,GATED,2,4,00:1B34(ft),$DC3B prn_tx_busy,,UNREACHABLE,I,"same entry 00:1B1E, branch taken when $DC3B is not 0; 00:0F2D calls it only when $DC3B = 0"
-03:4B17,03,GATED,2,4,03:4B15(ft),,,OPEN,?,not analysed
-03:552F,03,GATED,3,4,03:552D(ft),,,OPEN,?,not analysed
-03:555A,03,GATED,3,4,03:5558(ft),,,OPEN,?,not analysed
-05:60E0,05,GATED,3,4,05:60D7,,,OPEN,?,not analysed
-05:7397,05,GATED,2,4,05:7395(ft),,,OPEN,?,not analysed
+07:5291,07,GATED,3,5,07:528F(ft),,,UNREACHABLE,I,"cursor $D5EC indexes the 1-byte table at 07:52E5 (`cp $ff ; jr nz` at 07:528F): the `dec state` branch needs the table byte $FF; no byte of the 256 after the table start is $FF, so no cursor value (even an out-of-range one poked into $D5EC) selects it"
+07:5473,07,GATED,3,5,07:5471(ft),,,UNREACHABLE,I,"cursor $D5FE indexes the table at 07:5495 (`cp $ff` at 07:546F): no byte of the 256 after the table start is $FF, so no cursor value selects the `dec state` branch"
+08:4095,08,GATED,3,5,08:4093(ft),,,UNREACHABLE,I,"cursor $D5FA indexes the table at 08:40B1 (`cp $ff` at 08:4093): no byte of the 256 after the table start is $FF, so no cursor value selects the `dec state` branch"
+00:1B36,00,GATED,2,4,00:1B34(ft),$DC3B prn_tx_busy,,UNREACHABLE,I,"same entry 00:1B1E, branch taken when $DC3B is not 0; 00:0F2D calls it only when $DC3B = 0 (and no serial interrupt can change $DC3B in that window, see 00:1B2D)"
 00:190B,00,DEAD,2,3,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-02:43EC,02,GATED,1,3,02:43E9(ft),,,OPEN,?,not analysed
+00:1B2D,00,GATED,2,3,00:1B2C(ft),,,UNREACHABLE,I,"printer engine entry 00:1B1E (idle INQUIRY poll) with a $DC0D other than 1, or with $DC3B not 0: its only caller is 00:0F4B inside 00:0F2D, which returns unless $DC0D = 1, and calls it only when $DC3B = 0; no other call / jp / pointer reaches 00:1B1E (the operand $1B36 found in bank 35 is data). Poking $DC0D / $DC3B before the call is useless (the caller tests them first); the only remaining way would be a serial interrupt that changes $DC0D between 00:0F30 and 00:1B21 while no packet is in flight, which the core cannot place (a poke lands between frames, README 16.21)"
 07:503D,07,DEAD,1,3,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 1F:7FF3,1F,DEAD,1,3,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-05:5769,05,GATED,2,2,05:5768(ft),,,OPEN,?,not analysed
-09:5CAF,09,GATED,2,2,09:5CAD(ft),,,OPEN,?,not analysed
-1F:522A,1F,GATED,2,2,1F:5228(ft),,,OPEN,?,not analysed
+00:253C,00,DEAD,2,2,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
+1F:522A,1F,GATED,2,2,1F:5228(ft),,,UNREACHABLE,I,"same: the 2 bytes before 1F:522A/1F:5234 are reached only through 1F:520A from a wave handler path that no sound id selects (504-trial mailbox sweep, README 16.21)"
 00:0367,00,DEAD,1,1,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:1137,00,GATED,1,1,00:1135(ft),"$D941 (**SOUND I** envelope: U/D, period (0..7), volume (0..15)+2)",,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$1138)"
+00:1137,00,GATED,1,1,00:1135(ft),"$D941 (**SOUND I** envelope: U/D, period (0..7), volume (0..15)+2)",,EDGE,?,"`ld a,[$d941] ; sub c(=[$d8cf]) ; jr nc ; xor a` clamp of the D.J. SOUND I envelope: needs $D941 < $D8CF at the moment of the subtraction. Both bytes are rewritten inside the frame by the D.J. handler (experiment dj_envelope: poke before the frame, negative); a poke cannot be placed between the rewrite and the read, so this byte is neither run nor excluded"
 00:1C56,00,DEAD,1,1,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
-00:2969,00,GATED,1,1,00:2967(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$296a)"
-02:487F,02,GATED,1,1,02:487D(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4880)"
-02:48E7,02,GATED,1,1,02:48E5(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$48e8)"
-02:493B,02,GATED,1,1,02:4939(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$493c)"
-02:4998,02,GATED,1,1,02:4996(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4999)"
-02:4C2A,02,GATED,1,1,02:4C28(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4c2b)"
-03:41E8,03,GATED,1,1,03:41E6(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$41e9)"
-03:5C13,03,GATED,1,1,03:5C11(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5c14)"
-04:4E3B,04,GATED,1,1,04:4E39(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$4e3c)"
-04:5AE6,04,GATED,1,1,04:5AE4(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5ae7)"
-04:5B38,04,GATED,1,1,04:5B36(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5b39)"
-05:5310,05,GATED,1,1,05:530E(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5311)"
-05:5319,05,GATED,1,1,05:5317(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$531a)"
-05:6ACC,05,GATED,1,1,05:6ACA(ft),"$D8D0 SOUND II wave-grid cursor (`$FF` = none, 0..31)",,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr z,$6acd)"
-06:4BA3,06,GATED,1,1,06:4BA1(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4ba4)"
-06:4BBD,06,GATED,1,1,06:4BBB(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4bbe)"
-06:4BF7,06,GATED,1,1,06:4BF5(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4bf8)"
-06:4BFE,06,GATED,1,1,06:4BFC(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4bff)"
-06:4C11,06,GATED,1,1,06:4C0F(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4c12)"
-06:4C52,06,GATED,1,1,06:4C50(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4c53)"
-06:4C74,06,GATED,1,1,06:4C72(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4c75)"
-06:4D4F,06,GATED,1,1,06:4D4D(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4d50)"
-06:4D56,06,GATED,1,1,06:4D54(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4d57)"
-06:4D60,06,GATED,1,1,06:4D5E(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4d61)"
-06:5715,06,GATED,1,1,06:5713(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5716)"
-06:572C,06,GATED,1,1,06:572A(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$572d)"
-06:5743,06,GATED,1,1,06:5741(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5744)"
-06:5D3B,06,GATED,1,1,06:5D39(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$5d3c)"
-06:64ED,06,GATED,1,1,06:64EB(ft),$D561 photo_count,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr c,$64ee)"
-06:7529,06,GATED,1,1,06:7527(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$752a)"
-06:758A,06,GATED,1,1,06:7588(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$758b)"
-06:7645,06,GATED,1,1,06:7643(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$7646)"
-06:76B2,06,GATED,1,1,06:76B0(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$76b3)"
-06:7776,06,GATED,1,1,06:7774(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$7777)"
-06:77E3,06,GATED,1,1,06:77E1(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$77e4)"
-07:68A9,07,GATED,1,1,07:68A7(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$68aa)"
-07:7918,07,GATED,1,1,07:7916(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$7919)"
-07:7921,07,GATED,1,1,07:791F(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$7922)"
-08:4D0B,08,GATED,1,1,08:4D09(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4d0c)"
-09:66BB,09,TABLE,1,1,09:5FE7[13],,,UNREACHABLE,I,"RUN! RUN! RUN!: state $0D (a lone 'ret'); state $0C leaves with a store of $0E (09:669F), not with 'inc' (README 16.17)"
-09:7273,09,GATED,1,1,09:7271(ft),,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nz,$7266)"
-0A:4036,0A,GATED,1,1,0A:4034(ft),$FF8A scratch_a,,EDGE,I,"one byte behind a carry / zero test of a pointer or loop update (jr nc,$4037)"
+02:487F,02,GATED,1,1,02:487D(ft),,,UNREACHABLE,I,"SRAM photo-block copy loop: DE starts at $0000 or $1000 (`ld de,$0000 ; rl d ; swap d`), B = 2 passes, DE steps by $5C each pass (pushed and popped around the copy): E goes $00 -> $5C -> $B8 and never carries into D, so the `inc d` after `jr nc` cannot run (arithmetic, README 16.21)"
+02:48E7,02,GATED,1,1,02:48E5(ft),,,UNREACHABLE,I,"SRAM photo-block copy loop: DE starts at $0000 or $1000 (`ld de,$0000 ; rl d ; swap d`), B = 2 passes, DE steps by $5C each pass (pushed and popped around the copy): E goes $00 -> $5C -> $B8 and never carries into D, so the `inc d` after `jr nc` cannot run (arithmetic, README 16.21)"
+02:493B,02,GATED,1,1,02:4939(ft),,,UNREACHABLE,I,"SRAM photo-block copy loop: DE starts at $0000 or $1000 (`ld de,$0000 ; rl d ; swap d`), B = 2 passes, DE steps by $5C each pass (pushed and popped around the copy): E goes $00 -> $5C -> $B8 and never carries into D, so the `inc d` after `jr nc` cannot run (arithmetic, README 16.21)"
+02:4998,02,GATED,1,1,02:4996(ft),,,UNREACHABLE,I,"SRAM photo-block copy loop: DE starts at $0000 or $1000 (`ld de,$0000 ; rl d ; swap d`), B = 2 passes, DE steps by $5C each pass (pushed and popped around the copy): E goes $00 -> $5C -> $B8 and never carries into D, so the `inc d` after `jr nc` cannot run (arithmetic, README 16.21)"
+02:4C2A,02,GATED,1,1,02:4C28(ft),,,UNREACHABLE,I,"SRAM photo-block copy loop: DE starts at $0000 or $1000 (`ld de,$0000 ; rl d ; swap d`), B = 2 passes, DE steps by $19 each pass (pushed and popped around the copy): E goes $00 -> $19 -> $32 and never carries into D, so the `inc d` after `jr nc` cannot run (arithmetic, README 16.21)"
+03:5C13,03,GATED,1,1,03:5C11(ft),,,UNREACHABLE,I,"copy loops of the photo thumbnail: DE starts at $91A0, three passes of (copy $40, add $40) end at $9320, then four passes of (copy 8, add 8): E goes $20 -> $60 at most; the `inc d` after the second `jr nc` would need E >= $F8 (arithmetic, README 16.21; 00:05F8 advances DE itself)"
+04:5AE6,04,GATED,1,1,04:5AE4(ft),,,UNREACHABLE,I,"DE is popped back to its start value $C000 and `add a,$10` is applied to E = $00: no carry"
+04:5B38,04,GATED,1,1,04:5B36(ft),,,UNREACHABLE,I,"DE is popped back to its start value $C1E0 and `add a,$10` is applied to E = $E0: $F0, no carry"
+05:5310,05,GATED,1,1,05:530E(ft),,,UNREACHABLE,I,"bank-5 list updater 05:52FB: DE is $D8A3, $D8A5 or $D8A6 at all 12 call sites (immediates) and the code adds $04 twice: E reaches $AE at most"
+05:5319,05,GATED,1,1,05:5317(ft),,,UNREACHABLE,I,"second `add a,$04` of 05:52FB (see 05:5310)"
+06:4BA3,06,GATED,1,1,06:4BA1(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4BBD,06,GATED,1,1,06:4BBB(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `sub` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4BF7,06,GATED,1,1,06:4BF5(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4BFE,06,GATED,1,1,06:4BFC(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4C11,06,GATED,1,1,06:4C0F(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `sub` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4C52,06,GATED,1,1,06:4C50(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4C74,06,GATED,1,1,06:4C72(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `sub` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4D4F,06,GATED,1,1,06:4D4D(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4D56,06,GATED,1,1,06:4D54(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:4D60,06,GATED,1,1,06:4D5E(ft),,,UNREACHABLE,I,"tile-map writer of bank 6: DE and HL start from immediates (VRAM $99xx / $98xx addresses, ROM $5xxx sources) and the counts are immediates; the low byte of the pointer at this `add` never carries (hand arithmetic along the loops, e.g. $C7 - 5 x $20 = $07 with no borrow at 06:4C74; for the loops in 06:4D35 the copy routine 00:0450 advances DE by 8 and the carry has already happened inside it) (README 16.21)"
+06:5715,06,GATED,1,1,06:5713(ft),,,UNREACHABLE,I,"06:56F4 (copy of a 4x... tile strip): all 15 call sites in bank 6 load `ld de,$9300 / $9400 / $9500 / $9600` (E = 0; the other hits of the word $56F4 in the ROM are in bank 5 calls to 05:56F4 and in data); E = 0 + $D0 + $10 + $10 never carries (README 16.21)"
+06:572C,06,GATED,1,1,06:572A(ft),,,UNREACHABLE,I,"same function 06:56F4, E = $D0 + $10 = $E0, no carry"
+06:5743,06,GATED,1,1,06:5741(ft),,,UNREACHABLE,I,"same function 06:56F4, E = $E0 + $10 = $F0, no carry"
+06:5D3B,06,GATED,1,1,06:5D39(ft),,,UNREACHABLE,I,"4-picture screen (mode $18) slot drawer 06:5CB2: HL = $0E00 + BC where BC comes from the pointer function 02:517B (list value 0-$3B: table 02:5218 whose first byte is always $00) or from values >= $3C that read past the 30-entry table; the carry needs the source low byte L0 in $10-$17 (L0 + $E8 mod 256 >= $F8). Poked the picker bound $D562 to 99 so that the slot values run to $80 and cycled every value on all four slots (experiment list_overrun_18): the windows hit were only $30-$37 (06:5D0F); for the 98 values the table read gives L0 = $00, $08, $33, $34, $36-$39 or >= $4x, never $10-$17 (computed for every value; values with bit 7 set are not drawn)"
+06:7529,06,GATED,1,1,06:7527(ft),,,UNREACHABLE,I,"effect blitters 06:73F7-7477: the carry `inc h` after `jr nz` is behind a mask test of the blit pattern; the stubs were run in a minimal SM83 simulator with the mask bytes $DA40-$DA5F set to $FF, $55, $01, $A5 and to the real masks: the gate runs but the byte never does (README 16.21)"
+06:758A,06,GATED,1,1,06:7588(ft),,,UNREACHABLE,I,"same family as 06:7529 (effect blitters, simulated, never executed)"
+06:7645,06,GATED,1,1,06:7643(ft),,,UNREACHABLE,I,"same family as 06:7529 (effect blitters, simulated, never executed)"
+06:76B2,06,GATED,1,1,06:76B0(ft),,,UNREACHABLE,I,"same family as 06:7529 (effect blitters, simulated, never executed)"
+06:7776,06,GATED,1,1,06:7774(ft),,,UNREACHABLE,I,"same family as 06:7529 (effect blitters, simulated, never executed)"
+06:77E3,06,GATED,1,1,06:77E1(ft),,,UNREACHABLE,I,"same family as 06:7529 (effect blitters, simulated, never executed)"
+07:68A9,07,GATED,1,1,07:68A7(ft),,,UNREACHABLE,I,"digit printer 07:6871: HL = $980A or $992A at all three call sites, `add a,$20` once per digit: L stays below $4B"
+07:7918,07,GATED,1,1,07:7916(ft),,,UNREACHABLE,I,"bank-7 list updater 07:78xx (twin of 05:52FB): DE starts at $DA1F (immediate), two `add a,$05`: E <= $29"
+07:7921,07,GATED,1,1,07:791F(ft),,,UNREACHABLE,I,"second `add a,$05` of the same updater (see 07:7918)"
+08:4D0B,08,GATED,1,1,08:4D09(ft),,,UNREACHABLE,I,"same photo thumbnail copy as 03:5C13: DE = $8CA0, three passes of +$80 then four passes of +$10: E <= $60"
+0A:4036,0A,GATED,1,1,0A:4034(ft),$FF8A scratch_a,,UNREACHABLE,I,"BC = $7B00 + A with A the loop counter $FF8A (0-$9F): C = A <= $9F, no carry out of the add"
 0A:4C53,0A,DEAD,1,1,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 0A:5AB6,0A,TABLE,1,1,0A:541A[25] effect table,,effect index 25 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:5AB8,0A,TABLE,1,1,0A:541A[27] effect table,,effect index 27 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
@@ -147,8 +113,6 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 0A:5ABC,0A,TABLE,1,1,0A:541A[31] effect table,,effect index 31 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:61AB,0A,TABLE,1,1,0A:541A[57] effect table,,effect index 57 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:61AD,0A,TABLE,1,1,0A:541A[59] effect table,,effect index 59 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
-0A:61AE,0A,TABLE,1,1,0A:541A[60] effect table,,effect index 60 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
-0A:61AF,0A,TABLE,1,1,0A:541A[61] effect table,,effect index 61 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:61B1,0A,TABLE,1,1,0A:541A[63] effect table,,effect index 63 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:685F,0A,TABLE,1,1,0A:541A[89] effect table,,effect index 89 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value
 0A:6861,0A,TABLE,1,1,0A:541A[91] effect table,,effect index 91 outside the 06:60DB table domain,UNREACHABLE,I,the only caller (06:781A) takes its index from the 88-byte table 06:60DB; no entry produces this value

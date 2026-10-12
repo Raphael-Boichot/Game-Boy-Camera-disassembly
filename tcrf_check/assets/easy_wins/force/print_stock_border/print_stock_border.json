@@ -1,0 +1,22 @@
+{
+ "experiment": "print_stock_border",
+ "doc": "print mode $1C: Select opens the layout state (08:4329), then $D5F3 (the printed photo, copied from $D5D8 at the screen init) := 30 (a stock picture: 02:4E31 answers the default border $12) just before B redraws the preview (08:47ED): 08:482C replaces the default border by 0",
+ "start": "1C:03",
+ "log": [
+  [
+   "Select",
+   "1C:04"
+  ],
+  [
+   "B (D5F3 := 30)",
+   "1C:03",
+   0,
+   1
+  ]
+ ],
+ "hits": {
+  "08:4800": true,
+  "08:482C": true
+ },
+ "end": "1C:03"
+}

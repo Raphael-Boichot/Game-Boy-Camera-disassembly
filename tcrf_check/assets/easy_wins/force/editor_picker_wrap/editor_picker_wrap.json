@@ -1,0 +1,36 @@
+{
+ "experiment": "editor_picker_wrap",
+ "doc": "editor 12:01, A held (state 2, the photo chooser 03:415C) + Left / Right / Up / Down chords: the wraps 03:552F (Left below photo 0, album A) and 03:555A (album B chooser below the first stock picture)",
+ "trials": [
+  [
+   "03:555A",
+   [
+    "Left"
+   ],
+   "12:02"
+  ],
+  [
+   "03:552F",
+   [
+    "Right",
+    "Down",
+    "Left"
+   ],
+   "12:02"
+  ]
+ ],
+ "found_after_A_held_then": {
+  "03:555A": [
+   "Left"
+  ],
+  "03:552F": [
+   "Right",
+   "Down",
+   "Left"
+  ]
+ },
+ "hits": {
+  "03:552F": true,
+  "03:555A": true
+ }
+}

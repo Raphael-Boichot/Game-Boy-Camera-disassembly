@@ -1,0 +1,20 @@
+{
+ "experiment": "dj_numbers",
+ "doc": "D.J. numbers: (1) the performance-screen values $D8B4 / $D8B5 / $D8B6 poked to 50 (the table index 3 * value + $6B at 05:5760-5768 then carries into the high byte, 05:5769; the toggle bytes $D8BA-BC are kept 0 so that the first call takes the value as index; B on a page redraws the numbers); (2) the D.J. score print (printer stand-in attached, route of printer_status.py --scenario dj) with $D9D1 (a number the print sheet writes in decimal, 05:5E5B -> 05:60BF) poked to 7, so that its hundreds digit is 0 (05:60E0)",
+ "after_perf": {
+  "05:5769": true,
+  "05:60E0": false,
+  "05:60D9": false
+ },
+ "perf_state": "1F:05",
+ "before_print": [
+  "1F:09",
+  120
+ ],
+ "hits": {
+  "05:5769": true,
+  "05:60E0": true,
+  "05:60D9": false
+ },
+ "end": "1F:09"
+}

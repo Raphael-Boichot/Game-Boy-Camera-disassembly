@@ -4,7 +4,7 @@ usage: reach_analysis.py OUT_DIR [ROM] [--manual FILE]       (run from anywhere;
 Reads (all in the repository): coverage/results/report_v8/rom_map.csv (byte classes of the v8 run), assets/witness_jp.csv (class N bytes that a later run executed:
   16.14), wram/trace_jp_v3.json (static trace), tools/extra_roots.json (hand-resolved roots), wram/wram_*.csv (variable names),
   assets/reach_manual_jp.csv (hand-written verdicts keyed by the first address of a component; may be missing)
-Writes: OUT_DIR/reach_components.csv (one row per never-run component), OUT_DIR/reach_summary.md, OUT_DIR/cov_with_witness.npz (intermediate)
+Writes: OUT_DIR/reach_components.csv (one row per never-run component), OUT_DIR/reach_ranges.csv (the byte runs of every component with its verdict: drawn by rom_reach_map.py), OUT_DIR/reach_summary.md, OUT_DIR/cov_with_witness.npz (intermediate)
 What it does:
  1. rebuilds the executed-byte arrays from the map (C, F = executed; N = not) and sets the witnessed bytes, then runs the component analysis of
     coverage/tools/gating_branches.py (components of never-run traced instructions: GATED / TABLE / DEAD / ORPHAN, the gating branch and the variable it tests);
@@ -80,7 +80,7 @@ DOMAIN = {v | e for v in tab for e in (0, 0x20, 0x40)}
 man = {}
 if os.path.exists(MANUAL):
     for r in csv.DictReader(open(MANUAL)): man[r['first_addr']] = r
-out = []
+out = []; rng = []
 for r in rows:
     c = r['c']; mem = comp[c]; first = r['comp']; cls = r['cls']
     gates = sorted(into.get(c, []))
@@ -116,7 +116,14 @@ for r in rows:
     m = man.get(first)
     if m: verdict, ev, note = m['verdict'], m['evidence'], m['note']
     out.append([first, '%02X' % B(min(mem)), cls, r['instrs'], r['bytes'], entry, var, auto, verdict or 'OPEN', ev or '?', note or 'not analysed'])
+    for f in sorted(mem):                               # byte runs of the component (rom_reach_map.py colours the proven-dead ones)
+        e = f + int(ilen[f]) - 1
+        if rng and rng[-1][3] == first and rng[-1][1] == f - 1: rng[-1][1] = e
+        else: rng.append([f, e, verdict or 'OPEN', first])
 out.sort(key=lambda x: -int(x[4]))
+with open(os.path.join(OUT, 'reach_ranges.csv'), 'w', newline='') as fh:
+    w = csv.writer(fh, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'verdict', 'component'])
+    for f1, f2, v_, first_ in sorted(rng): w.writerow(['%02X' % B(f1), '%04X' % A(f1), '%04X' % A(f2), v_, first_])
 with open(os.path.join(OUT, 'reach_components.csv'), 'w', newline='') as fh:
     w = csv.writer(fh, lineterminator='\n'); w.writerow(['first_addr', 'bank', 'class', 'instrs', 'bytes', 'entry', 'tested_variable', 'automatic_check', 'verdict', 'evidence', 'note']); w.writerows(out)
 by = collections.defaultdict(lambda: [0, 0]); byc = collections.defaultdict(lambda: [0, 0])

@@ -1,0 +1,38 @@
+{
+ "experiment": "dj_grid_hold",
+ "doc": "D.J. SOUND II wave grid (1F:0A, 05:6A82): the grid is edited only while A STAYS held (05:6A92-6A96 leaves it when A is released); with A kept held, Right moves the cell cursor $D8D0 (05:6ACC) and Up changes the cell value (05:6AE1). Joypad only, from the route of dj_pages.py: Select, Select, Up, Up, then A held for the rest of the sequence",
+ "start": "1F:0A",
+ "seq": [
+  [
+   "Right",
+   0,
+   0
+  ],
+  [
+   "Right",
+   1,
+   0
+  ],
+  [
+   "Up",
+   1,
+   1
+  ],
+  [
+   "Down",
+   1,
+   0
+  ],
+  [
+   "Left",
+   0,
+   0
+  ]
+ ],
+ "hits": {
+  "05:6ACC": true,
+  "05:6AE1": true,
+  "05:6AE2": true
+ },
+ "end": "1F:0A"
+}

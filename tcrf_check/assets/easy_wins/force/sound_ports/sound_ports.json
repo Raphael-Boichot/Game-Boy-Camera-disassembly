@@ -1,0 +1,20 @@
+{
+ "experiment": "sound_ports",
+ "doc": "sound engine: every sound number 1..$FF written to each of the four request ports ($DD60, $DD68, $DD70, $DD78 = the stores of 00:2A7C / 2A88 / 2A80 / 2A84) of the main menu, 150 frames each: the channel set-up 1F:5224-523A (channel structure DD65 / DD75 / DD7D, else 1F:522A)",
+ "first": {
+  "1F:522C": [
+   "0xdd60",
+   1
+  ],
+  "1F:523C": [
+   "0xdd60",
+   9
+  ]
+ },
+ "hits": {
+  "1F:5234": false,
+  "1F:522A": false,
+  "1F:522C": true,
+  "1F:523C": true
+ }
+}

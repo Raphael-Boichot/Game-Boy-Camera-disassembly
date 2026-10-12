@@ -1,0 +1,14 @@
+{
+ "experiment": "editor_count_digits",
+ "doc": "editor Select menu 12:0C: repeat count $D519 >= 10 with $D71C + $D71D = 30: the number sprite offset clamps to $10 (03:4B17)",
+ "start": "12:0C",
+ "pokes": {
+  "D519": 10,
+  "D71C": 14,
+  "D71D": 16
+ },
+ "hits": {
+  "03:4B17": true
+ },
+ "end": "12:0C"
+}
