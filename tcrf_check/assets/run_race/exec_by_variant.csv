@@ -1,0 +1,996 @@
+variant,bank,start,end
+"race 1, A every 2nd frame",00,0B86,0BD6
+"race 1, A every 2nd frame",09,6394,63FD
+"race 1, A every 2nd frame",09,6403,6413
+"race 1, A every 2nd frame",09,6419,642E
+"race 1, A every 2nd frame",09,6441,64F1
+"race 1, A every 2nd frame",09,64FC,652C
+"race 1, A every 2nd frame",09,6540,6546
+"race 1, A every 2nd frame",09,655A,6595
+"race 1, A every 2nd frame",09,65A2,65C9
+"race 1, A every 2nd frame",09,65D3,65FA
+"race 1, A every 2nd frame",09,6604,667A
+"race 1, A every 2nd frame",09,669A,669E
+"race 1, A every 2nd frame",09,66A5,66AA
+"race 1, A every 2nd frame",09,6744,6750
+"race 1, A every 2nd frame",09,6767,6789
+"race 1, A every 2nd frame",09,68B9,68BE
+"race 1, A every 2nd frame",09,6907,6915
+"race 1, A every 2nd frame",09,69CC,69CE
+"race 1, A every 2nd frame",09,6A11,6A11
+"race 1, A every 2nd frame",09,6A16,6A34
+"race 1, A every 2nd frame",09,6A40,6A58
+"race 1, A every 2nd frame",09,6AE8,6AFF
+"race 1, A every 2nd frame",09,6B4C,6B50
+"race 1, A every 2nd frame",09,6B5A,6B71
+"race 1, A every 2nd frame",09,6B92,6BA4
+"race 1, A every 2nd frame",09,6BB1,6BD3
+"race 1, A every 2nd frame",09,6BDD,6C98
+"race 1, A every 2nd frame",09,6D28,6D2C
+"race 1, A every 2nd frame",09,6D55,6D60
+"race 1, A every 2nd frame",09,6D67,6D6F
+"race 1, A every 2nd frame",09,6D75,6D7E
+"race 1, A every 2nd frame",09,6F7F,6F8F
+"race 1, A every 2nd frame",09,6FD3,6FE5
+"race 1, A every 2nd frame",09,6FEE,6FFF
+"race 1, A every 2nd frame",09,7014,7048
+"race 1, A every 2nd frame",09,70F4,70F8
+"race 1, A every 2nd frame",09,725E,726B
+"race 1, A every 2nd frame",1F,4E97,4EB7
+"race 1, A every 3rd frame",00,0B86,0BD6
+"race 1, A every 3rd frame",09,6394,63FD
+"race 1, A every 3rd frame",09,6403,6413
+"race 1, A every 3rd frame",09,6419,642E
+"race 1, A every 3rd frame",09,6441,64F1
+"race 1, A every 3rd frame",09,64FC,652C
+"race 1, A every 3rd frame",09,6540,6546
+"race 1, A every 3rd frame",09,655A,6595
+"race 1, A every 3rd frame",09,65A2,65C9
+"race 1, A every 3rd frame",09,65D3,65FA
+"race 1, A every 3rd frame",09,6604,669E
+"race 1, A every 3rd frame",09,66A5,66AA
+"race 1, A every 3rd frame",09,6744,6750
+"race 1, A every 3rd frame",09,6767,6789
+"race 1, A every 3rd frame",09,68A5,68AE
+"race 1, A every 3rd frame",09,68B9,68BE
+"race 1, A every 3rd frame",09,6907,6915
+"race 1, A every 3rd frame",09,69CC,69CE
+"race 1, A every 3rd frame",09,6A11,6A11
+"race 1, A every 3rd frame",09,6A16,6A34
+"race 1, A every 3rd frame",09,6A40,6A6D
+"race 1, A every 3rd frame",09,6AE8,6AFF
+"race 1, A every 3rd frame",09,6B4C,6B50
+"race 1, A every 3rd frame",09,6B5A,6B71
+"race 1, A every 3rd frame",09,6B92,6BA4
+"race 1, A every 3rd frame",09,6BB1,6BD3
+"race 1, A every 3rd frame",09,6BDD,6C98
+"race 1, A every 3rd frame",09,6D28,6D2C
+"race 1, A every 3rd frame",09,6D55,6D60
+"race 1, A every 3rd frame",09,6D67,6D6F
+"race 1, A every 3rd frame",09,6D75,6D7E
+"race 1, A every 3rd frame",09,6F7F,6F8F
+"race 1, A every 3rd frame",09,6FD3,6FE5
+"race 1, A every 3rd frame",09,6FEE,6FFF
+"race 1, A every 3rd frame",09,7014,7048
+"race 1, A every 3rd frame",09,70F4,70F8
+"race 1, A every 3rd frame",09,725E,726B
+"race 1, A every 3rd frame",1F,4E97,4EB7
+"race 1, A every 4th frame",00,0B86,0BD6
+"race 1, A every 4th frame",09,6394,63FD
+"race 1, A every 4th frame",09,6403,6413
+"race 1, A every 4th frame",09,6419,642E
+"race 1, A every 4th frame",09,6441,64F1
+"race 1, A every 4th frame",09,64FC,652C
+"race 1, A every 4th frame",09,6540,6546
+"race 1, A every 4th frame",09,655A,6595
+"race 1, A every 4th frame",09,65A2,65C9
+"race 1, A every 4th frame",09,65D3,65FA
+"race 1, A every 4th frame",09,6604,669E
+"race 1, A every 4th frame",09,66A5,66AA
+"race 1, A every 4th frame",09,6744,6750
+"race 1, A every 4th frame",09,6767,6789
+"race 1, A every 4th frame",09,68B9,68BE
+"race 1, A every 4th frame",09,6907,6915
+"race 1, A every 4th frame",09,69CC,69CE
+"race 1, A every 4th frame",09,6A11,6A11
+"race 1, A every 4th frame",09,6A16,6A34
+"race 1, A every 4th frame",09,6A40,6A6D
+"race 1, A every 4th frame",09,6AE8,6AFF
+"race 1, A every 4th frame",09,6B4C,6B50
+"race 1, A every 4th frame",09,6B5A,6B71
+"race 1, A every 4th frame",09,6B92,6BA4
+"race 1, A every 4th frame",09,6BB1,6BD3
+"race 1, A every 4th frame",09,6BDD,6C98
+"race 1, A every 4th frame",09,6D28,6D2C
+"race 1, A every 4th frame",09,6D55,6D60
+"race 1, A every 4th frame",09,6D67,6D6F
+"race 1, A every 4th frame",09,6D75,6D7E
+"race 1, A every 4th frame",09,6F7F,6F8F
+"race 1, A every 4th frame",09,6FD3,6FE5
+"race 1, A every 4th frame",09,6FEE,6FFF
+"race 1, A every 4th frame",09,7014,7048
+"race 1, A every 4th frame",09,70F4,70F8
+"race 1, A every 4th frame",09,725E,726B
+"race 1, A every 4th frame",1F,4E97,4EB7
+"race 1, A every 6th frame",00,0B86,0BD6
+"race 1, A every 6th frame",09,6394,63FD
+"race 1, A every 6th frame",09,6403,6413
+"race 1, A every 6th frame",09,6419,642E
+"race 1, A every 6th frame",09,6441,64F1
+"race 1, A every 6th frame",09,64FC,652C
+"race 1, A every 6th frame",09,6540,6546
+"race 1, A every 6th frame",09,655A,6595
+"race 1, A every 6th frame",09,65A2,65C9
+"race 1, A every 6th frame",09,65D3,65FA
+"race 1, A every 6th frame",09,6604,667A
+"race 1, A every 6th frame",09,669A,669E
+"race 1, A every 6th frame",09,66A5,66AA
+"race 1, A every 6th frame",09,6744,6750
+"race 1, A every 6th frame",09,6767,6789
+"race 1, A every 6th frame",09,68A5,68AE
+"race 1, A every 6th frame",09,68B9,68BE
+"race 1, A every 6th frame",09,6907,6915
+"race 1, A every 6th frame",09,69CC,69CE
+"race 1, A every 6th frame",09,6A11,6A11
+"race 1, A every 6th frame",09,6A16,6A34
+"race 1, A every 6th frame",09,6A40,6A58
+"race 1, A every 6th frame",09,6AE8,6AFF
+"race 1, A every 6th frame",09,6B4C,6B50
+"race 1, A every 6th frame",09,6B5A,6B71
+"race 1, A every 6th frame",09,6B92,6BA4
+"race 1, A every 6th frame",09,6BB1,6BD3
+"race 1, A every 6th frame",09,6BDD,6C98
+"race 1, A every 6th frame",09,6D28,6D2C
+"race 1, A every 6th frame",09,6D55,6D60
+"race 1, A every 6th frame",09,6D67,6D6F
+"race 1, A every 6th frame",09,6D75,6D7E
+"race 1, A every 6th frame",09,6F7F,6F8F
+"race 1, A every 6th frame",09,6FD3,6FE5
+"race 1, A every 6th frame",09,6FEE,6FFF
+"race 1, A every 6th frame",09,7014,7048
+"race 1, A every 6th frame",09,70F4,70F8
+"race 1, A every 6th frame",09,725E,726B
+"race 1, A every 6th frame",1F,4E97,4EB7
+"race 1, A every 8th frame",00,0599,059C
+"race 1, A every 8th frame",00,0B86,0BD6
+"race 1, A every 8th frame",09,6394,63FD
+"race 1, A every 8th frame",09,6403,6413
+"race 1, A every 8th frame",09,6419,642E
+"race 1, A every 8th frame",09,6441,64EC
+"race 1, A every 8th frame",09,64F2,652C
+"race 1, A every 8th frame",09,6540,6595
+"race 1, A every 8th frame",09,65A2,65C9
+"race 1, A every 8th frame",09,65D3,65FA
+"race 1, A every 8th frame",09,6604,665D
+"race 1, A every 8th frame",09,669A,669E
+"race 1, A every 8th frame",09,6744,6750
+"race 1, A every 8th frame",09,6767,6789
+"race 1, A every 8th frame",09,68A5,68AE
+"race 1, A every 8th frame",09,68B9,68BE
+"race 1, A every 8th frame",09,6907,6915
+"race 1, A every 8th frame",09,6A11,6A11
+"race 1, A every 8th frame",09,6A16,6A34
+"race 1, A every 8th frame",09,6A40,6A58
+"race 1, A every 8th frame",09,6AE8,6AFF
+"race 1, A every 8th frame",09,6B5A,6B71
+"race 1, A every 8th frame",09,6B92,6BA4
+"race 1, A every 8th frame",09,6BB1,6BC0
+"race 1, A every 8th frame",09,6BE1,6C58
+"race 1, A every 8th frame",09,6C6B,6C81
+"race 1, A every 8th frame",09,6C99,6CA0
+"race 1, A every 8th frame",09,6D28,6D2C
+"race 1, A every 8th frame",09,6D55,6D60
+"race 1, A every 8th frame",09,6D67,6D6F
+"race 1, A every 8th frame",09,6D75,6D7E
+"race 1, A every 8th frame",09,6F7F,6F8F
+"race 1, A every 8th frame",09,6FD3,6FE5
+"race 1, A every 8th frame",09,6FEE,6FFF
+"race 1, A every 8th frame",09,71EF,721C
+"race 1, A every 8th frame",09,725E,726B
+"race 1, A every 8th frame",1F,4E97,4EB7
+"race 1, A every 12th frame",00,0599,059C
+"race 1, A every 12th frame",00,0B86,0BD6
+"race 1, A every 12th frame",09,6394,63FD
+"race 1, A every 12th frame",09,6403,6413
+"race 1, A every 12th frame",09,6419,642E
+"race 1, A every 12th frame",09,6441,64EC
+"race 1, A every 12th frame",09,64F2,652C
+"race 1, A every 12th frame",09,6540,6595
+"race 1, A every 12th frame",09,65A2,65C9
+"race 1, A every 12th frame",09,65D3,65FA
+"race 1, A every 12th frame",09,6604,665D
+"race 1, A every 12th frame",09,669A,669E
+"race 1, A every 12th frame",09,6744,6750
+"race 1, A every 12th frame",09,6767,6789
+"race 1, A every 12th frame",09,68A5,68AE
+"race 1, A every 12th frame",09,68B9,68BE
+"race 1, A every 12th frame",09,6A11,6A11
+"race 1, A every 12th frame",09,6A16,6A34
+"race 1, A every 12th frame",09,6A40,6A58
+"race 1, A every 12th frame",09,6AE8,6AFF
+"race 1, A every 12th frame",09,6B5A,6B71
+"race 1, A every 12th frame",09,6B92,6BA4
+"race 1, A every 12th frame",09,6BB1,6BC0
+"race 1, A every 12th frame",09,6BE1,6C58
+"race 1, A every 12th frame",09,6C6B,6C81
+"race 1, A every 12th frame",09,6C99,6CA0
+"race 1, A every 12th frame",09,6D28,6D2C
+"race 1, A every 12th frame",09,6D55,6D60
+"race 1, A every 12th frame",09,6D67,6D6F
+"race 1, A every 12th frame",09,6D75,6D7E
+"race 1, A every 12th frame",09,6F7F,6F8F
+"race 1, A every 12th frame",09,6FD3,6FE5
+"race 1, A every 12th frame",09,6FEE,6FFF
+"race 1, A every 12th frame",09,71EF,721C
+"race 1, A every 12th frame",09,725E,726B
+"race 1, A every 12th frame",1F,4E97,4EB7
+"race 1, A every 16th frame",00,0599,059C
+"race 1, A every 16th frame",00,0B86,0BD6
+"race 1, A every 16th frame",09,6394,63FD
+"race 1, A every 16th frame",09,6403,6408
+"race 1, A every 16th frame",09,640E,6413
+"race 1, A every 16th frame",09,6419,642E
+"race 1, A every 16th frame",09,6441,64EC
+"race 1, A every 16th frame",09,64F2,652C
+"race 1, A every 16th frame",09,6540,6595
+"race 1, A every 16th frame",09,65A2,65C9
+"race 1, A every 16th frame",09,65D3,65FA
+"race 1, A every 16th frame",09,6604,665D
+"race 1, A every 16th frame",09,669A,669E
+"race 1, A every 16th frame",09,6744,6750
+"race 1, A every 16th frame",09,6767,6789
+"race 1, A every 16th frame",09,68A5,68AE
+"race 1, A every 16th frame",09,68B9,68BE
+"race 1, A every 16th frame",09,6A11,6A11
+"race 1, A every 16th frame",09,6A16,6A34
+"race 1, A every 16th frame",09,6A40,6A58
+"race 1, A every 16th frame",09,6AE8,6AFF
+"race 1, A every 16th frame",09,6B12,6B29
+"race 1, A every 16th frame",09,6B5A,6B71
+"race 1, A every 16th frame",09,6B92,6BA4
+"race 1, A every 16th frame",09,6BB1,6BC0
+"race 1, A every 16th frame",09,6BE1,6C58
+"race 1, A every 16th frame",09,6C6B,6C81
+"race 1, A every 16th frame",09,6C99,6CA0
+"race 1, A every 16th frame",09,6D28,6D2C
+"race 1, A every 16th frame",09,6D55,6D60
+"race 1, A every 16th frame",09,6D67,6D6F
+"race 1, A every 16th frame",09,6D75,6D7E
+"race 1, A every 16th frame",09,6F7F,6F8F
+"race 1, A every 16th frame",09,6FD3,6FE5
+"race 1, A every 16th frame",09,6FEE,6FFF
+"race 1, A every 16th frame",09,71EF,721C
+"race 1, A every 16th frame",09,725E,726B
+"race 1, A every 16th frame",1F,4E97,4EB7
+"race 1, A every 30th frame",00,0599,059C
+"race 1, A every 30th frame",00,0B86,0BD6
+"race 1, A every 30th frame",09,6394,63FD
+"race 1, A every 30th frame",09,6403,6408
+"race 1, A every 30th frame",09,640E,6413
+"race 1, A every 30th frame",09,6419,642E
+"race 1, A every 30th frame",09,6441,64EC
+"race 1, A every 30th frame",09,64F2,652C
+"race 1, A every 30th frame",09,6540,6595
+"race 1, A every 30th frame",09,65A2,65C9
+"race 1, A every 30th frame",09,65D3,65FA
+"race 1, A every 30th frame",09,6604,665D
+"race 1, A every 30th frame",09,669A,669E
+"race 1, A every 30th frame",09,6744,6750
+"race 1, A every 30th frame",09,6767,6789
+"race 1, A every 30th frame",09,68A5,68AE
+"race 1, A every 30th frame",09,68B9,68BE
+"race 1, A every 30th frame",09,6A11,6A11
+"race 1, A every 30th frame",09,6A16,6A34
+"race 1, A every 30th frame",09,6A40,6A58
+"race 1, A every 30th frame",09,6AE8,6AFF
+"race 1, A every 30th frame",09,6B12,6B29
+"race 1, A every 30th frame",09,6B5A,6B71
+"race 1, A every 30th frame",09,6B92,6BA4
+"race 1, A every 30th frame",09,6BB1,6BC0
+"race 1, A every 30th frame",09,6BE1,6C58
+"race 1, A every 30th frame",09,6C6B,6C81
+"race 1, A every 30th frame",09,6C99,6CA0
+"race 1, A every 30th frame",09,6D28,6D2C
+"race 1, A every 30th frame",09,6D55,6D5B
+"race 1, A every 30th frame",09,6D75,6D7E
+"race 1, A every 30th frame",09,6F7F,6F8F
+"race 1, A every 30th frame",09,6FD3,6FE5
+"race 1, A every 30th frame",09,6FEE,6FFF
+"race 1, A every 30th frame",09,71EF,721C
+"race 1, A every 30th frame",09,725E,726B
+"race 1, A every 30th frame",1F,4E97,4EB7
+"race 1, A every 30th frame",1F,5547,556C
+"race 1, A held",09,6767,6789
+"race 1, A held",09,68A5,68AE
+"race 1, A held",09,68B9,68BE
+"race 1, A held",09,6A11,6A11
+"race 1, A held",09,6B12,6B29
+"race 1, A held",09,6B5A,6B71
+"race 1, A held",09,6D55,6D5B
+"race 1, A held",09,6F7F,6F8F
+"race 1, no key",09,6B12,6B29
+"race 1, no key",09,6B5A,6B71
+"race 1, A every 2nd + Up every 32nd",00,0B86,0BD6
+"race 1, A every 2nd + Up every 32nd",09,6394,63FD
+"race 1, A every 2nd + Up every 32nd",09,6403,6413
+"race 1, A every 2nd + Up every 32nd",09,6419,642E
+"race 1, A every 2nd + Up every 32nd",09,6441,64F1
+"race 1, A every 2nd + Up every 32nd",09,64FC,652C
+"race 1, A every 2nd + Up every 32nd",09,6540,6546
+"race 1, A every 2nd + Up every 32nd",09,655A,6595
+"race 1, A every 2nd + Up every 32nd",09,65A2,65C9
+"race 1, A every 2nd + Up every 32nd",09,65D3,65FA
+"race 1, A every 2nd + Up every 32nd",09,6604,667A
+"race 1, A every 2nd + Up every 32nd",09,669A,669E
+"race 1, A every 2nd + Up every 32nd",09,66A5,66AA
+"race 1, A every 2nd + Up every 32nd",09,6744,6750
+"race 1, A every 2nd + Up every 32nd",09,6767,6789
+"race 1, A every 2nd + Up every 32nd",09,67D2,67FB
+"race 1, A every 2nd + Up every 32nd",09,6838,6849
+"race 1, A every 2nd + Up every 32nd",09,68B9,68BE
+"race 1, A every 2nd + Up every 32nd",09,6907,6915
+"race 1, A every 2nd + Up every 32nd",09,691E,693F
+"race 1, A every 2nd + Up every 32nd",09,6941,696D
+"race 1, A every 2nd + Up every 32nd",09,69CC,69CE
+"race 1, A every 2nd + Up every 32nd",09,6A11,6A11
+"race 1, A every 2nd + Up every 32nd",09,6A16,6A34
+"race 1, A every 2nd + Up every 32nd",09,6A40,6A58
+"race 1, A every 2nd + Up every 32nd",09,6AE8,6AFF
+"race 1, A every 2nd + Up every 32nd",09,6B4C,6B50
+"race 1, A every 2nd + Up every 32nd",09,6B5A,6B71
+"race 1, A every 2nd + Up every 32nd",09,6B92,6BA4
+"race 1, A every 2nd + Up every 32nd",09,6BB1,6BD3
+"race 1, A every 2nd + Up every 32nd",09,6BDD,6C98
+"race 1, A every 2nd + Up every 32nd",09,6D28,6D2C
+"race 1, A every 2nd + Up every 32nd",09,6D55,6D60
+"race 1, A every 2nd + Up every 32nd",09,6D67,6D6F
+"race 1, A every 2nd + Up every 32nd",09,6D75,6D7E
+"race 1, A every 2nd + Up every 32nd",09,6F7F,6F8F
+"race 1, A every 2nd + Up every 32nd",09,6FD3,6FE5
+"race 1, A every 2nd + Up every 32nd",09,6FEE,6FFF
+"race 1, A every 2nd + Up every 32nd",09,7014,7048
+"race 1, A every 2nd + Up every 32nd",09,70F4,70F8
+"race 1, A every 2nd + Up every 32nd",09,725E,726B
+"race 1, A every 2nd + Up every 32nd",1F,4B64,4B91
+"race 1, A every 2nd + Up every 32nd",1F,4E97,4EB7
+"race 1, A every 2nd + Up every 32nd + B held",00,0B86,0BD6
+"race 1, A every 2nd + Up every 32nd + B held",09,6394,63FD
+"race 1, A every 2nd + Up every 32nd + B held",09,6403,6413
+"race 1, A every 2nd + Up every 32nd + B held",09,6419,642E
+"race 1, A every 2nd + Up every 32nd + B held",09,6441,64F1
+"race 1, A every 2nd + Up every 32nd + B held",09,64FC,652C
+"race 1, A every 2nd + Up every 32nd + B held",09,6540,6546
+"race 1, A every 2nd + Up every 32nd + B held",09,655A,6595
+"race 1, A every 2nd + Up every 32nd + B held",09,65A2,65C9
+"race 1, A every 2nd + Up every 32nd + B held",09,65D3,65FA
+"race 1, A every 2nd + Up every 32nd + B held",09,6604,669E
+"race 1, A every 2nd + Up every 32nd + B held",09,66A5,66AA
+"race 1, A every 2nd + Up every 32nd + B held",09,6744,6750
+"race 1, A every 2nd + Up every 32nd + B held",09,6767,6789
+"race 1, A every 2nd + Up every 32nd + B held",09,67D2,67FB
+"race 1, A every 2nd + Up every 32nd + B held",09,6838,6859
+"race 1, A every 2nd + Up every 32nd + B held",09,68B9,68BE
+"race 1, A every 2nd + Up every 32nd + B held",09,6907,6915
+"race 1, A every 2nd + Up every 32nd + B held",09,691E,693F
+"race 1, A every 2nd + Up every 32nd + B held",09,6941,696D
+"race 1, A every 2nd + Up every 32nd + B held",09,69CC,69CE
+"race 1, A every 2nd + Up every 32nd + B held",09,6A11,6A11
+"race 1, A every 2nd + Up every 32nd + B held",09,6A16,6A34
+"race 1, A every 2nd + Up every 32nd + B held",09,6A40,6A6D
+"race 1, A every 2nd + Up every 32nd + B held",09,6AE8,6AFF
+"race 1, A every 2nd + Up every 32nd + B held",09,6B4C,6B50
+"race 1, A every 2nd + Up every 32nd + B held",09,6B5A,6B71
+"race 1, A every 2nd + Up every 32nd + B held",09,6B92,6BA4
+"race 1, A every 2nd + Up every 32nd + B held",09,6BB1,6BD3
+"race 1, A every 2nd + Up every 32nd + B held",09,6BDD,6C7A
+"race 1, A every 2nd + Up every 32nd + B held",09,6D28,6D2C
+"race 1, A every 2nd + Up every 32nd + B held",09,6D55,6D60
+"race 1, A every 2nd + Up every 32nd + B held",09,6D67,6D6F
+"race 1, A every 2nd + Up every 32nd + B held",09,6D75,6D7E
+"race 1, A every 2nd + Up every 32nd + B held",09,6F7F,6F8F
+"race 1, A every 2nd + Up every 32nd + B held",09,6FD3,6FE5
+"race 1, A every 2nd + Up every 32nd + B held",09,6FEE,6FFF
+"race 1, A every 2nd + Up every 32nd + B held",09,7014,7048
+"race 1, A every 2nd + Up every 32nd + B held",09,70F4,70F8
+"race 1, A every 2nd + Up every 32nd + B held",09,725E,726B
+"race 1, A every 2nd + Up every 32nd + B held",1F,4B64,4B91
+"race 1, A every 2nd + Up every 32nd + B held",1F,4E97,4EB7
+"race 1, A every 16th + Up every 32nd",09,676C,6789
+"race 1, A every 16th + Up every 32nd",09,67D2,67FB
+"race 1, A every 16th + Up every 32nd",09,6838,6849
+"race 1, A every 16th + Up every 32nd",09,68A5,68AE
+"race 1, A every 16th + Up every 32nd",09,691E,693F
+"race 1, A every 16th + Up every 32nd",09,6941,696D
+"race 1, A every 16th + Up every 32nd",09,6B12,6B29
+"race 1, A every 16th + Up every 32nd",09,6B5A,6B71
+"race 1, A every 16th + Up every 32nd",09,70F4,70F8
+"race 1, A every 16th + Up every 32nd",09,7145,714A
+"race 1, A every 16th + Up every 32nd",1F,4B64,4B91
+"race 1, A every 2nd + Up before each hurdle",00,0B86,0BD6
+"race 1, A every 2nd + Up before each hurdle",09,6394,63FD
+"race 1, A every 2nd + Up before each hurdle",09,6403,6413
+"race 1, A every 2nd + Up before each hurdle",09,6419,642E
+"race 1, A every 2nd + Up before each hurdle",09,6441,64F1
+"race 1, A every 2nd + Up before each hurdle",09,64FC,652C
+"race 1, A every 2nd + Up before each hurdle",09,6540,6546
+"race 1, A every 2nd + Up before each hurdle",09,655A,6595
+"race 1, A every 2nd + Up before each hurdle",09,65A2,65C9
+"race 1, A every 2nd + Up before each hurdle",09,65D3,65FA
+"race 1, A every 2nd + Up before each hurdle",09,6604,667A
+"race 1, A every 2nd + Up before each hurdle",09,669A,669E
+"race 1, A every 2nd + Up before each hurdle",09,66A5,66AA
+"race 1, A every 2nd + Up before each hurdle",09,6767,6789
+"race 1, A every 2nd + Up before each hurdle",09,67D2,67FB
+"race 1, A every 2nd + Up before each hurdle",09,6838,6849
+"race 1, A every 2nd + Up before each hurdle",09,68A5,68AE
+"race 1, A every 2nd + Up before each hurdle",09,68B9,68BE
+"race 1, A every 2nd + Up before each hurdle",09,6907,6915
+"race 1, A every 2nd + Up before each hurdle",09,691E,693F
+"race 1, A every 2nd + Up before each hurdle",09,6941,696D
+"race 1, A every 2nd + Up before each hurdle",09,69CC,69CE
+"race 1, A every 2nd + Up before each hurdle",09,6A11,6A11
+"race 1, A every 2nd + Up before each hurdle",09,6A16,6A1A
+"race 1, A every 2nd + Up before each hurdle",09,6A40,6A58
+"race 1, A every 2nd + Up before each hurdle",09,6AE8,6AFF
+"race 1, A every 2nd + Up before each hurdle",09,6B4C,6B50
+"race 1, A every 2nd + Up before each hurdle",09,6B5A,6B71
+"race 1, A every 2nd + Up before each hurdle",09,6B92,6BA4
+"race 1, A every 2nd + Up before each hurdle",09,6BB1,6BD3
+"race 1, A every 2nd + Up before each hurdle",09,6BDD,6C98
+"race 1, A every 2nd + Up before each hurdle",09,6D28,6D2C
+"race 1, A every 2nd + Up before each hurdle",09,6D55,6D60
+"race 1, A every 2nd + Up before each hurdle",09,6D67,6D6F
+"race 1, A every 2nd + Up before each hurdle",09,6D75,6D7E
+"race 1, A every 2nd + Up before each hurdle",09,6F7F,6F8F
+"race 1, A every 2nd + Up before each hurdle",09,6FD3,6FE5
+"race 1, A every 2nd + Up before each hurdle",09,6FEE,6FFF
+"race 1, A every 2nd + Up before each hurdle",09,7014,7048
+"race 1, A every 2nd + Up before each hurdle",09,70F4,70F8
+"race 1, A every 2nd + Up before each hurdle",09,725E,726B
+"race 1, A every 2nd + Up before each hurdle",1F,4B64,4B91
+"race 1, A every 2nd, then A on the result screen",00,0B86,0BD6
+"race 1, A every 2nd, then A on the result screen",09,6394,63FD
+"race 1, A every 2nd, then A on the result screen",09,6403,6413
+"race 1, A every 2nd, then A on the result screen",09,6419,642E
+"race 1, A every 2nd, then A on the result screen",09,6441,64F1
+"race 1, A every 2nd, then A on the result screen",09,64FC,652C
+"race 1, A every 2nd, then A on the result screen",09,6540,6546
+"race 1, A every 2nd, then A on the result screen",09,655A,6595
+"race 1, A every 2nd, then A on the result screen",09,65A2,65C9
+"race 1, A every 2nd, then A on the result screen",09,65D3,65FA
+"race 1, A every 2nd, then A on the result screen",09,6604,667A
+"race 1, A every 2nd, then A on the result screen",09,6688,669E
+"race 1, A every 2nd, then A on the result screen",09,66A5,66BA
+"race 1, A every 2nd, then A on the result screen",09,6744,6750
+"race 1, A every 2nd, then A on the result screen",09,6767,6789
+"race 1, A every 2nd, then A on the result screen",09,68B9,68BE
+"race 1, A every 2nd, then A on the result screen",09,6907,6915
+"race 1, A every 2nd, then A on the result screen",09,69CC,69CE
+"race 1, A every 2nd, then A on the result screen",09,6A11,6A11
+"race 1, A every 2nd, then A on the result screen",09,6A16,6A34
+"race 1, A every 2nd, then A on the result screen",09,6A40,6A6D
+"race 1, A every 2nd, then A on the result screen",09,6AE8,6AFF
+"race 1, A every 2nd, then A on the result screen",09,6B4C,6B50
+"race 1, A every 2nd, then A on the result screen",09,6B5A,6B71
+"race 1, A every 2nd, then A on the result screen",09,6B92,6BA4
+"race 1, A every 2nd, then A on the result screen",09,6BB1,6CE0
+"race 1, A every 2nd, then A on the result screen",09,6D28,6D2C
+"race 1, A every 2nd, then A on the result screen",09,6D55,6D60
+"race 1, A every 2nd, then A on the result screen",09,6D67,6D6F
+"race 1, A every 2nd, then A on the result screen",09,6D75,6D7E
+"race 1, A every 2nd, then A on the result screen",09,6F7F,6F8F
+"race 1, A every 2nd, then A on the result screen",09,6FD3,6FE5
+"race 1, A every 2nd, then A on the result screen",09,6FEE,6FFF
+"race 1, A every 2nd, then A on the result screen",09,7008,7048
+"race 1, A every 2nd, then A on the result screen",09,70F4,70F8
+"race 1, A every 2nd, then A on the result screen",09,725E,726B
+"race 1, A every 2nd, then A on the result screen",1F,4530,4548
+"race 1, A every 2nd, then A on the result screen",1F,459A,45B6
+"race 1, A every 2nd, then A on the result screen",1F,48DA,48DE
+"race 1, A every 2nd, then A on the result screen",1F,4A6E,4A8F
+"race 1, A every 2nd, then A on the result screen",1F,4E97,4EB7
+"race 1, A every 2nd, then A on the result screen",1F,4EBC,4ED8
+"race 1, A every 2nd, then one A tap on the result screen",00,0B86,0BD6
+"race 1, A every 2nd, then one A tap on the result screen",09,6394,63FD
+"race 1, A every 2nd, then one A tap on the result screen",09,6403,6413
+"race 1, A every 2nd, then one A tap on the result screen",09,6419,642E
+"race 1, A every 2nd, then one A tap on the result screen",09,6441,64F1
+"race 1, A every 2nd, then one A tap on the result screen",09,64FC,652C
+"race 1, A every 2nd, then one A tap on the result screen",09,6540,6546
+"race 1, A every 2nd, then one A tap on the result screen",09,655A,6595
+"race 1, A every 2nd, then one A tap on the result screen",09,65A2,65C9
+"race 1, A every 2nd, then one A tap on the result screen",09,65D3,65FA
+"race 1, A every 2nd, then one A tap on the result screen",09,6604,669E
+"race 1, A every 2nd, then one A tap on the result screen",09,66A5,66AA
+"race 1, A every 2nd, then one A tap on the result screen",09,6744,6750
+"race 1, A every 2nd, then one A tap on the result screen",09,6767,6789
+"race 1, A every 2nd, then one A tap on the result screen",09,68B9,68BE
+"race 1, A every 2nd, then one A tap on the result screen",09,6907,6915
+"race 1, A every 2nd, then one A tap on the result screen",09,69CC,69CE
+"race 1, A every 2nd, then one A tap on the result screen",09,6A11,6A11
+"race 1, A every 2nd, then one A tap on the result screen",09,6A16,6A34
+"race 1, A every 2nd, then one A tap on the result screen",09,6A40,6A6D
+"race 1, A every 2nd, then one A tap on the result screen",09,6AE8,6AFF
+"race 1, A every 2nd, then one A tap on the result screen",09,6B4C,6B50
+"race 1, A every 2nd, then one A tap on the result screen",09,6B5A,6B71
+"race 1, A every 2nd, then one A tap on the result screen",09,6B92,6BA4
+"race 1, A every 2nd, then one A tap on the result screen",09,6BB1,6BD3
+"race 1, A every 2nd, then one A tap on the result screen",09,6BDD,6C98
+"race 1, A every 2nd, then one A tap on the result screen",09,6D28,6D2C
+"race 1, A every 2nd, then one A tap on the result screen",09,6D55,6D60
+"race 1, A every 2nd, then one A tap on the result screen",09,6D67,6D6F
+"race 1, A every 2nd, then one A tap on the result screen",09,6D75,6D7E
+"race 1, A every 2nd, then one A tap on the result screen",09,6F7F,6F8F
+"race 1, A every 2nd, then one A tap on the result screen",09,6FD3,6FE5
+"race 1, A every 2nd, then one A tap on the result screen",09,6FEE,6FFF
+"race 1, A every 2nd, then one A tap on the result screen",09,7014,7048
+"race 1, A every 2nd, then one A tap on the result screen",09,70F4,70F8
+"race 1, A every 2nd, then one A tap on the result screen",09,725E,726B
+"race 1, A every 2nd, then one A tap on the result screen",1F,4E97,4EB7
+"races 1-3 (A every 2nd) and the way to race 4",00,0B86,0BD6
+"races 1-3 (A every 2nd) and the way to race 4",09,62E6,62EB
+"races 1-3 (A every 2nd) and the way to race 4",09,6394,63FD
+"races 1-3 (A every 2nd) and the way to race 4",09,6403,6413
+"races 1-3 (A every 2nd) and the way to race 4",09,6419,642E
+"races 1-3 (A every 2nd) and the way to race 4",09,6441,64F1
+"races 1-3 (A every 2nd) and the way to race 4",09,64FC,652C
+"races 1-3 (A every 2nd) and the way to race 4",09,6540,6546
+"races 1-3 (A every 2nd) and the way to race 4",09,655A,6595
+"races 1-3 (A every 2nd) and the way to race 4",09,65A2,65C9
+"races 1-3 (A every 2nd) and the way to race 4",09,65D3,65FA
+"races 1-3 (A every 2nd) and the way to race 4",09,6604,667A
+"races 1-3 (A every 2nd) and the way to race 4",09,669A,66AA
+"races 1-3 (A every 2nd) and the way to race 4",09,66BC,66D1
+"races 1-3 (A every 2nd) and the way to race 4",09,6744,6750
+"races 1-3 (A every 2nd) and the way to race 4",09,6767,6789
+"races 1-3 (A every 2nd) and the way to race 4",09,68B9,68BE
+"races 1-3 (A every 2nd) and the way to race 4",09,6907,6915
+"races 1-3 (A every 2nd) and the way to race 4",09,69CC,69CE
+"races 1-3 (A every 2nd) and the way to race 4",09,6A11,6A11
+"races 1-3 (A every 2nd) and the way to race 4",09,6A16,6A34
+"races 1-3 (A every 2nd) and the way to race 4",09,6A40,6A58
+"races 1-3 (A every 2nd) and the way to race 4",09,6AE8,6AFF
+"races 1-3 (A every 2nd) and the way to race 4",09,6B4C,6B50
+"races 1-3 (A every 2nd) and the way to race 4",09,6B5A,6B71
+"races 1-3 (A every 2nd) and the way to race 4",09,6B92,6BA4
+"races 1-3 (A every 2nd) and the way to race 4",09,6BB1,6BD3
+"races 1-3 (A every 2nd) and the way to race 4",09,6BDD,6C98
+"races 1-3 (A every 2nd) and the way to race 4",09,6D28,6D2C
+"races 1-3 (A every 2nd) and the way to race 4",09,6D55,6D60
+"races 1-3 (A every 2nd) and the way to race 4",09,6D67,6D6F
+"races 1-3 (A every 2nd) and the way to race 4",09,6D75,6D7E
+"races 1-3 (A every 2nd) and the way to race 4",09,6F7F,6F8F
+"races 1-3 (A every 2nd) and the way to race 4",09,6FD3,6FE5
+"races 1-3 (A every 2nd) and the way to race 4",09,6FEE,6FFF
+"races 1-3 (A every 2nd) and the way to race 4",09,7014,7048
+"races 1-3 (A every 2nd) and the way to race 4",09,70F4,70F8
+"races 1-3 (A every 2nd) and the way to race 4",09,725E,726B
+"races 1-3 (A every 2nd) and the way to race 4",1F,4E97,4EB7
+"race 4, A every 2nd frame",00,0B86,0BD6
+"race 4, A every 2nd frame",09,62E6,62EB
+"race 4, A every 2nd frame",09,6394,63FD
+"race 4, A every 2nd frame",09,6403,6413
+"race 4, A every 2nd frame",09,6419,642E
+"race 4, A every 2nd frame",09,6441,64F1
+"race 4, A every 2nd frame",09,64FC,652C
+"race 4, A every 2nd frame",09,6540,6546
+"race 4, A every 2nd frame",09,655A,6595
+"race 4, A every 2nd frame",09,65A2,65C9
+"race 4, A every 2nd frame",09,65D3,65FA
+"race 4, A every 2nd frame",09,6604,66AA
+"race 4, A every 2nd frame",09,66BC,66D1
+"race 4, A every 2nd frame",09,6744,6750
+"race 4, A every 2nd frame",09,6767,6789
+"race 4, A every 2nd frame",09,68B9,68BE
+"race 4, A every 2nd frame",09,6907,6915
+"race 4, A every 2nd frame",09,6998,699A
+"race 4, A every 2nd frame",09,69CC,69CE
+"race 4, A every 2nd frame",09,6A11,6A11
+"race 4, A every 2nd frame",09,6A16,6A34
+"race 4, A every 2nd frame",09,6A40,6A6D
+"race 4, A every 2nd frame",09,6AE8,6AFF
+"race 4, A every 2nd frame",09,6B12,6B29
+"race 4, A every 2nd frame",09,6B4C,6B50
+"race 4, A every 2nd frame",09,6B5A,6B71
+"race 4, A every 2nd frame",09,6B92,6BA4
+"race 4, A every 2nd frame",09,6BB1,6BD3
+"race 4, A every 2nd frame",09,6BDD,6C98
+"race 4, A every 2nd frame",09,6D28,6D2C
+"race 4, A every 2nd frame",09,6D55,6D60
+"race 4, A every 2nd frame",09,6D67,6D6F
+"race 4, A every 2nd frame",09,6D75,6D7E
+"race 4, A every 2nd frame",09,6F7F,6F8F
+"race 4, A every 2nd frame",09,6FD3,6FE5
+"race 4, A every 2nd frame",09,6FEE,6FFF
+"race 4, A every 2nd frame",09,7014,7048
+"race 4, A every 2nd frame",09,70F4,70F8
+"race 4, A every 2nd frame",09,725E,726B
+"race 4, A every 2nd frame",1F,4E97,4EB7
+"race 4, A every 3rd frame",00,0B86,0BD6
+"race 4, A every 3rd frame",09,62E6,62EB
+"race 4, A every 3rd frame",09,6394,63FD
+"race 4, A every 3rd frame",09,6403,6413
+"race 4, A every 3rd frame",09,6419,642E
+"race 4, A every 3rd frame",09,6441,64F1
+"race 4, A every 3rd frame",09,64FC,652C
+"race 4, A every 3rd frame",09,6540,6546
+"race 4, A every 3rd frame",09,655A,6595
+"race 4, A every 3rd frame",09,65A2,65C9
+"race 4, A every 3rd frame",09,65D3,65FA
+"race 4, A every 3rd frame",09,6604,66AA
+"race 4, A every 3rd frame",09,66BC,66D1
+"race 4, A every 3rd frame",09,6744,6750
+"race 4, A every 3rd frame",09,6767,6789
+"race 4, A every 3rd frame",09,68A5,68AE
+"race 4, A every 3rd frame",09,68B9,68BE
+"race 4, A every 3rd frame",09,6907,6915
+"race 4, A every 3rd frame",09,6998,699A
+"race 4, A every 3rd frame",09,69CC,69CE
+"race 4, A every 3rd frame",09,6A11,6A11
+"race 4, A every 3rd frame",09,6A16,6A34
+"race 4, A every 3rd frame",09,6A40,6A6D
+"race 4, A every 3rd frame",09,6AE8,6AFF
+"race 4, A every 3rd frame",09,6B12,6B29
+"race 4, A every 3rd frame",09,6B4C,6B50
+"race 4, A every 3rd frame",09,6B5A,6B71
+"race 4, A every 3rd frame",09,6B92,6BA4
+"race 4, A every 3rd frame",09,6BB1,6BD3
+"race 4, A every 3rd frame",09,6BDD,6C98
+"race 4, A every 3rd frame",09,6D28,6D2C
+"race 4, A every 3rd frame",09,6D55,6D60
+"race 4, A every 3rd frame",09,6D67,6D6F
+"race 4, A every 3rd frame",09,6D75,6D7E
+"race 4, A every 3rd frame",09,6F7F,6F8F
+"race 4, A every 3rd frame",09,6FD3,6FE5
+"race 4, A every 3rd frame",09,6FEE,6FFF
+"race 4, A every 3rd frame",09,7014,7048
+"race 4, A every 3rd frame",09,70F4,70F8
+"race 4, A every 3rd frame",09,725E,726B
+"race 4, A every 3rd frame",1F,4E97,4EB7
+"race 4, A every 4th frame",00,0599,059C
+"race 4, A every 4th frame",00,0B86,0BD6
+"race 4, A every 4th frame",09,62E6,62EB
+"race 4, A every 4th frame",09,6394,63FD
+"race 4, A every 4th frame",09,6403,6413
+"race 4, A every 4th frame",09,6419,642E
+"race 4, A every 4th frame",09,6441,6546
+"race 4, A every 4th frame",09,655A,6595
+"race 4, A every 4th frame",09,65A2,65C9
+"race 4, A every 4th frame",09,65D3,65FA
+"race 4, A every 4th frame",09,6604,667A
+"race 4, A every 4th frame",09,669A,66AA
+"race 4, A every 4th frame",09,66BC,66D1
+"race 4, A every 4th frame",09,6744,6750
+"race 4, A every 4th frame",09,6767,6789
+"race 4, A every 4th frame",09,68B9,68BE
+"race 4, A every 4th frame",09,6907,6915
+"race 4, A every 4th frame",09,6998,699A
+"race 4, A every 4th frame",09,69CC,69CE
+"race 4, A every 4th frame",09,6A11,6A11
+"race 4, A every 4th frame",09,6A16,6A34
+"race 4, A every 4th frame",09,6A40,6A58
+"race 4, A every 4th frame",09,6AE8,6AFF
+"race 4, A every 4th frame",09,6B12,6B29
+"race 4, A every 4th frame",09,6B4C,6B50
+"race 4, A every 4th frame",09,6B5A,6B71
+"race 4, A every 4th frame",09,6B92,6BA4
+"race 4, A every 4th frame",09,6BB1,6BD3
+"race 4, A every 4th frame",09,6BDD,6CA0
+"race 4, A every 4th frame",09,6D28,6D2C
+"race 4, A every 4th frame",09,6D55,6D60
+"race 4, A every 4th frame",09,6D67,6D6F
+"race 4, A every 4th frame",09,6D75,6D7E
+"race 4, A every 4th frame",09,6F7F,6F8F
+"race 4, A every 4th frame",09,6FD3,6FE5
+"race 4, A every 4th frame",09,6FEE,6FFF
+"race 4, A every 4th frame",09,7014,7048
+"race 4, A every 4th frame",09,70F4,70F8
+"race 4, A every 4th frame",09,71EF,721C
+"race 4, A every 4th frame",09,725E,726B
+"race 4, A every 4th frame",1F,4E97,4EB7
+"race 4, A every 6th frame",00,0599,059C
+"race 4, A every 6th frame",00,0B86,0BD6
+"race 4, A every 6th frame",09,62E6,62EB
+"race 4, A every 6th frame",09,6394,63FD
+"race 4, A every 6th frame",09,6403,6413
+"race 4, A every 6th frame",09,6419,642E
+"race 4, A every 6th frame",09,6441,6546
+"race 4, A every 6th frame",09,655A,6595
+"race 4, A every 6th frame",09,65A2,65C9
+"race 4, A every 6th frame",09,65D3,65FA
+"race 4, A every 6th frame",09,6604,667A
+"race 4, A every 6th frame",09,669A,66AA
+"race 4, A every 6th frame",09,66BC,66D1
+"race 4, A every 6th frame",09,6744,6750
+"race 4, A every 6th frame",09,6767,6789
+"race 4, A every 6th frame",09,68A5,68AE
+"race 4, A every 6th frame",09,68B9,68BE
+"race 4, A every 6th frame",09,6907,6915
+"race 4, A every 6th frame",09,6998,699A
+"race 4, A every 6th frame",09,69CC,69CE
+"race 4, A every 6th frame",09,6A11,6A11
+"race 4, A every 6th frame",09,6A16,6A34
+"race 4, A every 6th frame",09,6A40,6A6D
+"race 4, A every 6th frame",09,6AE8,6AFF
+"race 4, A every 6th frame",09,6B12,6B29
+"race 4, A every 6th frame",09,6B4C,6B50
+"race 4, A every 6th frame",09,6B5A,6B71
+"race 4, A every 6th frame",09,6B92,6BA4
+"race 4, A every 6th frame",09,6BB1,6BD3
+"race 4, A every 6th frame",09,6BDD,6CA0
+"race 4, A every 6th frame",09,6D28,6D2C
+"race 4, A every 6th frame",09,6D55,6D60
+"race 4, A every 6th frame",09,6D67,6D6F
+"race 4, A every 6th frame",09,6D75,6D7E
+"race 4, A every 6th frame",09,6F7F,6F8F
+"race 4, A every 6th frame",09,6FD3,6FE5
+"race 4, A every 6th frame",09,6FEE,6FFF
+"race 4, A every 6th frame",09,7014,7048
+"race 4, A every 6th frame",09,70F4,70F8
+"race 4, A every 6th frame",09,71EF,721C
+"race 4, A every 6th frame",09,725E,726B
+"race 4, A every 6th frame",1F,4E97,4EB7
+"race 4, A every 8th frame",00,0599,059C
+"race 4, A every 8th frame",00,0B86,0BD6
+"race 4, A every 8th frame",09,62E6,62EB
+"race 4, A every 8th frame",09,6394,63FD
+"race 4, A every 8th frame",09,6403,6413
+"race 4, A every 8th frame",09,6419,642E
+"race 4, A every 8th frame",09,6441,6546
+"race 4, A every 8th frame",09,655A,6595
+"race 4, A every 8th frame",09,65A2,65C9
+"race 4, A every 8th frame",09,65D3,65FA
+"race 4, A every 8th frame",09,6604,667A
+"race 4, A every 8th frame",09,669A,66AA
+"race 4, A every 8th frame",09,66BC,66D1
+"race 4, A every 8th frame",09,6744,6750
+"race 4, A every 8th frame",09,6767,6789
+"race 4, A every 8th frame",09,68A5,68AE
+"race 4, A every 8th frame",09,68B9,68BE
+"race 4, A every 8th frame",09,6907,6915
+"race 4, A every 8th frame",09,6998,699A
+"race 4, A every 8th frame",09,69CC,69CE
+"race 4, A every 8th frame",09,6A11,6A11
+"race 4, A every 8th frame",09,6A16,6A34
+"race 4, A every 8th frame",09,6A40,6A58
+"race 4, A every 8th frame",09,6AE8,6AFF
+"race 4, A every 8th frame",09,6B12,6B29
+"race 4, A every 8th frame",09,6B4C,6B50
+"race 4, A every 8th frame",09,6B5A,6B71
+"race 4, A every 8th frame",09,6B92,6BA4
+"race 4, A every 8th frame",09,6BB1,6BD3
+"race 4, A every 8th frame",09,6BDD,6CA0
+"race 4, A every 8th frame",09,6D28,6D2C
+"race 4, A every 8th frame",09,6D55,6D60
+"race 4, A every 8th frame",09,6D67,6D6F
+"race 4, A every 8th frame",09,6D75,6D7E
+"race 4, A every 8th frame",09,6F7F,6F8F
+"race 4, A every 8th frame",09,6FD3,6FE5
+"race 4, A every 8th frame",09,6FEE,6FFF
+"race 4, A every 8th frame",09,7014,7048
+"race 4, A every 8th frame",09,70F4,70F8
+"race 4, A every 8th frame",09,71EF,721C
+"race 4, A every 8th frame",09,725E,726B
+"race 4, A every 8th frame",1F,4E97,4EB7
+"race 4, A every 12th frame",00,0599,059C
+"race 4, A every 12th frame",00,0B86,0BD6
+"race 4, A every 12th frame",09,62E6,62EB
+"race 4, A every 12th frame",09,6394,63FD
+"race 4, A every 12th frame",09,6403,6413
+"race 4, A every 12th frame",09,6419,642E
+"race 4, A every 12th frame",09,6441,6546
+"race 4, A every 12th frame",09,655A,6595
+"race 4, A every 12th frame",09,65A2,65C9
+"race 4, A every 12th frame",09,65D3,65FA
+"race 4, A every 12th frame",09,6604,667A
+"race 4, A every 12th frame",09,669A,66AA
+"race 4, A every 12th frame",09,66BC,66D1
+"race 4, A every 12th frame",09,6744,6750
+"race 4, A every 12th frame",09,6767,6789
+"race 4, A every 12th frame",09,68A5,68AE
+"race 4, A every 12th frame",09,68B9,68BE
+"race 4, A every 12th frame",09,6907,6915
+"race 4, A every 12th frame",09,6998,699A
+"race 4, A every 12th frame",09,69CC,69CE
+"race 4, A every 12th frame",09,6A11,6A11
+"race 4, A every 12th frame",09,6A16,6A34
+"race 4, A every 12th frame",09,6A40,6A58
+"race 4, A every 12th frame",09,6AE8,6AFF
+"race 4, A every 12th frame",09,6B12,6B29
+"race 4, A every 12th frame",09,6B4C,6B50
+"race 4, A every 12th frame",09,6B5A,6B71
+"race 4, A every 12th frame",09,6B92,6BA4
+"race 4, A every 12th frame",09,6BB1,6BD3
+"race 4, A every 12th frame",09,6BDD,6CA0
+"race 4, A every 12th frame",09,6D28,6D2C
+"race 4, A every 12th frame",09,6D55,6D60
+"race 4, A every 12th frame",09,6D67,6D6F
+"race 4, A every 12th frame",09,6D75,6D7E
+"race 4, A every 12th frame",09,6F7F,6F8F
+"race 4, A every 12th frame",09,6FD3,6FE5
+"race 4, A every 12th frame",09,6FEE,6FFF
+"race 4, A every 12th frame",09,7014,7048
+"race 4, A every 12th frame",09,70F4,70F8
+"race 4, A every 12th frame",09,71EF,721C
+"race 4, A every 12th frame",09,725E,726B
+"race 4, A every 12th frame",1F,4E97,4EB7
+"race 4, A every 16th frame",00,0599,059C
+"race 4, A every 16th frame",00,0B86,0BD6
+"race 4, A every 16th frame",09,62E6,62EB
+"race 4, A every 16th frame",09,6394,63FD
+"race 4, A every 16th frame",09,6403,6413
+"race 4, A every 16th frame",09,6419,642E
+"race 4, A every 16th frame",09,6441,6546
+"race 4, A every 16th frame",09,655A,6595
+"race 4, A every 16th frame",09,65A2,65C9
+"race 4, A every 16th frame",09,65D3,65FA
+"race 4, A every 16th frame",09,6604,667A
+"race 4, A every 16th frame",09,669A,66AA
+"race 4, A every 16th frame",09,66BC,66D1
+"race 4, A every 16th frame",09,6744,6750
+"race 4, A every 16th frame",09,6767,6789
+"race 4, A every 16th frame",09,68A5,68AE
+"race 4, A every 16th frame",09,68B9,68BE
+"race 4, A every 16th frame",09,6907,6915
+"race 4, A every 16th frame",09,6998,699A
+"race 4, A every 16th frame",09,69CC,69CE
+"race 4, A every 16th frame",09,6A11,6A11
+"race 4, A every 16th frame",09,6A16,6A34
+"race 4, A every 16th frame",09,6A40,6A58
+"race 4, A every 16th frame",09,6AE8,6AFF
+"race 4, A every 16th frame",09,6B12,6B29
+"race 4, A every 16th frame",09,6B4C,6B50
+"race 4, A every 16th frame",09,6B5A,6B71
+"race 4, A every 16th frame",09,6B92,6BA4
+"race 4, A every 16th frame",09,6BB1,6BD3
+"race 4, A every 16th frame",09,6BDD,6CA0
+"race 4, A every 16th frame",09,6D28,6D2C
+"race 4, A every 16th frame",09,6D55,6D60
+"race 4, A every 16th frame",09,6D67,6D6F
+"race 4, A every 16th frame",09,6D75,6D7E
+"race 4, A every 16th frame",09,6F7F,6F8F
+"race 4, A every 16th frame",09,6FD3,6FE5
+"race 4, A every 16th frame",09,6FEE,6FFF
+"race 4, A every 16th frame",09,7014,7048
+"race 4, A every 16th frame",09,70F4,70F8
+"race 4, A every 16th frame",09,71EF,721C
+"race 4, A every 16th frame",09,725E,726B
+"race 4, A every 16th frame",1F,4E97,4EB7
+"race 4, A every 16th frame",1F,5547,556C
+"race 4, A every 2nd + Up every 32nd",00,0B86,0BD6
+"race 4, A every 2nd + Up every 32nd",09,62E6,62EB
+"race 4, A every 2nd + Up every 32nd",09,6394,63FD
+"race 4, A every 2nd + Up every 32nd",09,6403,6413
+"race 4, A every 2nd + Up every 32nd",09,6419,642E
+"race 4, A every 2nd + Up every 32nd",09,6441,64F1
+"race 4, A every 2nd + Up every 32nd",09,64FC,652C
+"race 4, A every 2nd + Up every 32nd",09,6540,6546
+"race 4, A every 2nd + Up every 32nd",09,655A,6595
+"race 4, A every 2nd + Up every 32nd",09,65A2,65C9
+"race 4, A every 2nd + Up every 32nd",09,65D3,65FA
+"race 4, A every 2nd + Up every 32nd",09,6604,667A
+"race 4, A every 2nd + Up every 32nd",09,669A,66AA
+"race 4, A every 2nd + Up every 32nd",09,66BC,66D1
+"race 4, A every 2nd + Up every 32nd",09,6744,6750
+"race 4, A every 2nd + Up every 32nd",09,6767,6789
+"race 4, A every 2nd + Up every 32nd",09,67D2,67FB
+"race 4, A every 2nd + Up every 32nd",09,6838,6849
+"race 4, A every 2nd + Up every 32nd",09,68B9,68BE
+"race 4, A every 2nd + Up every 32nd",09,6907,6915
+"race 4, A every 2nd + Up every 32nd",09,691E,693F
+"race 4, A every 2nd + Up every 32nd",09,6941,696D
+"race 4, A every 2nd + Up every 32nd",09,6998,699A
+"race 4, A every 2nd + Up every 32nd",09,69CC,69CE
+"race 4, A every 2nd + Up every 32nd",09,6A11,6A11
+"race 4, A every 2nd + Up every 32nd",09,6A16,6A34
+"race 4, A every 2nd + Up every 32nd",09,6A40,6A58
+"race 4, A every 2nd + Up every 32nd",09,6AE8,6AFF
+"race 4, A every 2nd + Up every 32nd",09,6B12,6B29
+"race 4, A every 2nd + Up every 32nd",09,6B4C,6B50
+"race 4, A every 2nd + Up every 32nd",09,6B5A,6B71
+"race 4, A every 2nd + Up every 32nd",09,6B92,6BA4
+"race 4, A every 2nd + Up every 32nd",09,6BB1,6BD3
+"race 4, A every 2nd + Up every 32nd",09,6BDD,6C98
+"race 4, A every 2nd + Up every 32nd",09,6D28,6D2C
+"race 4, A every 2nd + Up every 32nd",09,6D55,6D60
+"race 4, A every 2nd + Up every 32nd",09,6D67,6D6F
+"race 4, A every 2nd + Up every 32nd",09,6D75,6D7E
+"race 4, A every 2nd + Up every 32nd",09,6F7F,6F8F
+"race 4, A every 2nd + Up every 32nd",09,6FD3,6FE5
+"race 4, A every 2nd + Up every 32nd",09,6FEE,6FFF
+"race 4, A every 2nd + Up every 32nd",09,7014,7048
+"race 4, A every 2nd + Up every 32nd",09,70F4,70F8
+"race 4, A every 2nd + Up every 32nd",09,725E,726B
+"race 4, A every 2nd + Up every 32nd",1F,4B64,4B91
+"race 4, A every 2nd + Up every 32nd",1F,4E97,4EB7
+"race 4, A every 2nd + Up before each hurdle",00,0B86,0BD6
+"race 4, A every 2nd + Up before each hurdle",09,62E6,62EB
+"race 4, A every 2nd + Up before each hurdle",09,6394,63FD
+"race 4, A every 2nd + Up before each hurdle",09,6403,642E
+"race 4, A every 2nd + Up before each hurdle",09,6441,64F1
+"race 4, A every 2nd + Up before each hurdle",09,64FC,652C
+"race 4, A every 2nd + Up before each hurdle",09,6540,6546
+"race 4, A every 2nd + Up before each hurdle",09,655A,6595
+"race 4, A every 2nd + Up before each hurdle",09,65A2,65C9
+"race 4, A every 2nd + Up before each hurdle",09,65D3,65FA
+"race 4, A every 2nd + Up before each hurdle",09,6604,667A
+"race 4, A every 2nd + Up before each hurdle",09,669A,66AA
+"race 4, A every 2nd + Up before each hurdle",09,66BC,66D1
+"race 4, A every 2nd + Up before each hurdle",09,6744,6750
+"race 4, A every 2nd + Up before each hurdle",09,6767,6789
+"race 4, A every 2nd + Up before each hurdle",09,67D2,67FB
+"race 4, A every 2nd + Up before each hurdle",09,6838,6849
+"race 4, A every 2nd + Up before each hurdle",09,68A5,68AE
+"race 4, A every 2nd + Up before each hurdle",09,68B9,68BE
+"race 4, A every 2nd + Up before each hurdle",09,6907,6915
+"race 4, A every 2nd + Up before each hurdle",09,691E,693F
+"race 4, A every 2nd + Up before each hurdle",09,6941,696D
+"race 4, A every 2nd + Up before each hurdle",09,6998,699A
+"race 4, A every 2nd + Up before each hurdle",09,69CC,69CE
+"race 4, A every 2nd + Up before each hurdle",09,6A11,6A11
+"race 4, A every 2nd + Up before each hurdle",09,6A16,6A34
+"race 4, A every 2nd + Up before each hurdle",09,6A40,6A58
+"race 4, A every 2nd + Up before each hurdle",09,6AE8,6AFF
+"race 4, A every 2nd + Up before each hurdle",09,6B12,6B29
+"race 4, A every 2nd + Up before each hurdle",09,6B4C,6B50
+"race 4, A every 2nd + Up before each hurdle",09,6B5A,6B71
+"race 4, A every 2nd + Up before each hurdle",09,6B92,6BA4
+"race 4, A every 2nd + Up before each hurdle",09,6BB1,6BD3
+"race 4, A every 2nd + Up before each hurdle",09,6BDD,6C98
+"race 4, A every 2nd + Up before each hurdle",09,6D28,6D2C
+"race 4, A every 2nd + Up before each hurdle",09,6D55,6D60
+"race 4, A every 2nd + Up before each hurdle",09,6D67,6D6F
+"race 4, A every 2nd + Up before each hurdle",09,6D75,6D7E
+"race 4, A every 2nd + Up before each hurdle",09,6F7F,6F8F
+"race 4, A every 2nd + Up before each hurdle",09,6FD3,6FE5
+"race 4, A every 2nd + Up before each hurdle",09,6FEE,6FFF
+"race 4, A every 2nd + Up before each hurdle",09,7014,7048
+"race 4, A every 2nd + Up before each hurdle",09,70F4,70F8
+"race 4, A every 2nd + Up before each hurdle",09,725E,726B
+"race 4, A every 2nd + Up before each hurdle",1F,4B64,4B91
+"race 4, A every 2nd + Up before each hurdle",1F,4E97,4EB7
+"race 4, Up before each hurdle, 40 frames late",00,0B86,0BD6
+"race 4, Up before each hurdle, 40 frames late",09,62E6,62EB
+"race 4, Up before each hurdle, 40 frames late",09,6394,63FD
+"race 4, Up before each hurdle, 40 frames late",09,6403,642E
+"race 4, Up before each hurdle, 40 frames late",09,6441,64F1
+"race 4, Up before each hurdle, 40 frames late",09,64FC,652C
+"race 4, Up before each hurdle, 40 frames late",09,6540,6546
+"race 4, Up before each hurdle, 40 frames late",09,655A,6595
+"race 4, Up before each hurdle, 40 frames late",09,65A2,65C9
+"race 4, Up before each hurdle, 40 frames late",09,65D3,65FA
+"race 4, Up before each hurdle, 40 frames late",09,6604,66AA
+"race 4, Up before each hurdle, 40 frames late",09,66BC,66D1
+"race 4, Up before each hurdle, 40 frames late",09,6744,6750
+"race 4, Up before each hurdle, 40 frames late",09,6767,6789
+"race 4, Up before each hurdle, 40 frames late",09,67D2,67FB
+"race 4, Up before each hurdle, 40 frames late",09,6838,6849
+"race 4, Up before each hurdle, 40 frames late",09,68A5,68AE
+"race 4, Up before each hurdle, 40 frames late",09,68B9,68BE
+"race 4, Up before each hurdle, 40 frames late",09,6907,6915
+"race 4, Up before each hurdle, 40 frames late",09,691E,693F
+"race 4, Up before each hurdle, 40 frames late",09,6941,696D
+"race 4, Up before each hurdle, 40 frames late",09,6998,699A
+"race 4, Up before each hurdle, 40 frames late",09,69CC,69CE
+"race 4, Up before each hurdle, 40 frames late",09,6A11,6A11
+"race 4, Up before each hurdle, 40 frames late",09,6A16,6A34
+"race 4, Up before each hurdle, 40 frames late",09,6A40,6A6D
+"race 4, Up before each hurdle, 40 frames late",09,6AE8,6AFF
+"race 4, Up before each hurdle, 40 frames late",09,6B12,6B29
+"race 4, Up before each hurdle, 40 frames late",09,6B4C,6B50
+"race 4, Up before each hurdle, 40 frames late",09,6B5A,6B71
+"race 4, Up before each hurdle, 40 frames late",09,6B92,6BA4
+"race 4, Up before each hurdle, 40 frames late",09,6BB1,6BD3
+"race 4, Up before each hurdle, 40 frames late",09,6BDD,6C98
+"race 4, Up before each hurdle, 40 frames late",09,6D28,6D2C
+"race 4, Up before each hurdle, 40 frames late",09,6D55,6D60
+"race 4, Up before each hurdle, 40 frames late",09,6D67,6D6F
+"race 4, Up before each hurdle, 40 frames late",09,6D75,6D7E
+"race 4, Up before each hurdle, 40 frames late",09,6F7F,6F8F
+"race 4, Up before each hurdle, 40 frames late",09,6FD3,6FE5
+"race 4, Up before each hurdle, 40 frames late",09,6FEE,6FFF
+"race 4, Up before each hurdle, 40 frames late",09,7014,7048
+"race 4, Up before each hurdle, 40 frames late",09,70F4,70F8
+"race 4, Up before each hurdle, 40 frames late",09,725E,726B
+"race 4, Up before each hurdle, 40 frames late",1F,4B64,4B91
+"race 4, Up before each hurdle, 40 frames late",1F,4E97,4EB7

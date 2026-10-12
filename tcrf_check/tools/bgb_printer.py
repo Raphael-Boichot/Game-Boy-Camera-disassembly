@@ -10,13 +10,22 @@ PKT = 8
 def pkt(b1, b2=0, b3=0, b4=0, i1=0): return struct.pack('<BBBBI', b1, b2, b3, b4, i1)
 SHADES = (255, 170, 85, 0)
 PRINT_POLLS = int(os.environ.get('PRN_POLLS', '20'))      # INQUIRY polls answered 06 after a PRINT (a real printer needs about 140 for a photo)
+# PRN_ERR = 'CMD:N:STATUS[:COUNT],...'  injects a status byte instead of the modelled reply: CMD = init | data | print | inq, N = 1-based number of that command's packet
+# in the run, STATUS = hex byte (e.g. 10), COUNT = how many consecutive packets of that command get it (default 1).  With bit 0 (checksum error) or bit 4 (packet error)
+# set, a DATA packet is dropped (not added to the page), as a real printer discards a packet it flagged.  README 16.16.
+CMDS = dict(init=0x01, print=0x02, data=0x04, inq=0x0F)
+def parse_err(s):
+    out = []
+    for it in filter(None, (s or '').split(',')):
+        f = it.split(':'); out.append((CMDS[f[0]], int(f[1]), int(f[2], 16), int(f[3]) if len(f) > 3 else 1))
+    return out
 
 class Printer:
     def __init__(self, outdir):
         self.outdir = outdir; os.makedirs(outdir, exist_ok=True)
         self.state = 0; self.cmd = 0; self.comp = 0; self.len = 0; self.cnt = 0; self.sum = 0; self.data = bytearray(); self.chk = 0
         self.status = 0; self.busy = 0; self.printing = False; self.unproc = False; self.buf = bytearray(); self.pages = []; self.log = []; self.bytes = 0
-        self.ack_done = False
+        self.ack_done = False; self.err = parse_err(os.environ.get('PRN_ERR')); self.ncmd = {}
     def xfer(self, tx):
         rx = 0x00; s = self.state; self.bytes += 1
         if s == 0:
@@ -43,7 +52,10 @@ class Printer:
         INIT 00; first DATA 00, DATA after DATA 08; INQUIRY 00 (clears the flag); PRINT 08; then INQUIRY 06 for a while, 04 twice, then 00."""
         c = self.cmd; flag = self.unproc
         rec = dict(t=round(time.time() - T0, 3), cmd=c, comp=self.comp, len=self.len, checksum_ok=ok)
-        reply = 0x00
+        reply = 0x00; self.ncmd[c] = n = self.ncmd.get(c, 0) + 1; inj = None
+        for ec, en, es, ecount in self.err:
+            if ec == c and en <= n < en + ecount: inj = es
+        if inj is not None and c == 0x04 and inj & 0x11: self.data = bytearray()          # a flagged DATA packet is discarded
         if c == 0x01: self.busy = 0; self.printing = False; self.buf = bytearray(); self.unproc = False; reply = 0x00
         elif c == 0x04:
             if self.comp: rec['note'] = 'compressed data (run-length) not decoded'
@@ -60,6 +72,7 @@ class Printer:
                 if reply == 0x00: self.unproc = False
             else: reply = 0x00; self.unproc = False
         if not ok: reply |= 0x01; rec['note'] = 'checksum error flagged'
+        if inj is not None: reply = inj; rec['injected'] = '%02X' % inj
         rec['reply'] = '%02X' % reply
         self.status = reply; self.log.append(rec)
     def render(self, d):

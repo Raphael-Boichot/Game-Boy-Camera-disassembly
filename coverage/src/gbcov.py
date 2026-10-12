@@ -9,6 +9,7 @@ L.gb_load_rom.argtypes = [C.c_char_p]; L.gb_load_rom.restype = C.c_int
 L.gb_reset.argtypes = [C.c_char_p, C.c_size_t]
 L.gb_save.argtypes = [C.c_void_p]; L.gb_load.argtypes = [C.c_void_p]
 L.gb_set_keys.argtypes = [C.c_uint8]; L.gb_attach_printer.argtypes = [C.c_int]
+L.gb_printer_model.argtypes = [C.c_int]; L.gb_printer_inject.argtypes = [C.c_int] * 4; L.gb_printer_inject.restype = C.c_int; L.gb_printer_log.argtypes = [C.c_void_p, C.c_void_p, C.c_int]; L.gb_printer_log.restype = C.c_int
 L.gb_run_frames.argtypes = [C.c_int]; L.gb_run_frame.restype = C.c_int
 L.gb_peek.argtypes = [C.c_uint16]; L.gb_peek.restype = C.c_uint8
 L.gb_poke.argtypes = [C.c_uint16, C.c_uint8]

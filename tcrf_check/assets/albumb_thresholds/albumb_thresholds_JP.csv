@@ -1,0 +1,10 @@
+condition,counters,below_bytes,at_bytes,routine_below,routine_at,album_below,album_at,agree
+shoot 60 photos,DA96/97,DA96=59 DA97=00,DA96=60 DA97=00,-,B17,-,B17,True
+print 30 photos,DA9C/9D,DA9C=29 DA9D=00,DA9C=30 DA9D=00,-,B18,-,B18,True
+transfer 15 photos,DA9A/9B,DA9A=14 DA9B=00,DA9A=15 DA9B=00,-,B19,-,B19,True
+Space Fever II best 3000,DAA0-A3,DAA0=99 DAA1=29,DAA0=00 DAA1=30,-,B22,-,B22,True
+Space Fever II best 5000,DAA0-A3,DAA0=99 DAA1=49,DAA0=00 DAA1=50,B22,B22 B23,B22,B22 B23,True
+Ball best 700,DAA4/A5,DAA4=99 DAA5=06,DAA4=00 DAA5=07,-,B20,-,B20,True
+Ball best 1000,DAA4/A5,DAA4=99 DAA5=09,DAA4=00 DAA5=10,B20,B20 B21,B20,B20 B21,True
+RUN! RUN! RUN! best 17 s,DAA6/A7,DAA6=FF DAA7=81,DAA6=00 DAA7=82,-,B24,-,B24,True
+transfer 5 photos (the number the page gives for B19),DA9A/9B,DA9A=05 DA9B=00,DA9A=05 DA9B=00,-,-,-,-,True

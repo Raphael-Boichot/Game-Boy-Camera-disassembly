@@ -1,0 +1,5 @@
+heads listed 153 hit 93
+entry 289 root {'sav': 'unl_CE10238211', 'combo': 2, 'printer': 0, 'free': 400} core end sig [28, 3] -> BGB end 1C:03 rc 0
+link packets {1: 1, 108: 3, 106: 121142, 104: 12218}  printer bytes 12218  printer packets 69  pages 2
+  page {'file': 'page_01.png', 'width': 160, 'height': 128, 'sheets': 1, 'margins': '10', 'palette': 'E4', 'exposure': '40'}
+  page {'file': 'page_02.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '13', 'palette': 'E4', 'exposure': '40'}

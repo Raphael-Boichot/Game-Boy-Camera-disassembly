@@ -2,6 +2,8 @@
 """Run a key sequence in the real BGB (Windows exe under wine, headless) and report the game's (mode,state), a screenshot and a few WRAM bytes.
 Library + CLI.  CLI: bgb_run.py ROM SAV OUTPREFIX 'Right:8:5,A:8:30,...' [--combo N] [--free F] [--br ADDR[,ADDR]]
 Sequence items are KEYS:hold:wait, KEYS joined with '+' (Right Left Up Down A B Select Start), frames at 59.7 Hz.
+Environment: BGB_DIR (the BGB folder), BGB_HF = the headless flags (default -hf; in the sandbox of 2026-10-11 a run with -demoplay and the printer link (-connect) hung at the link handshake with -hf,
+`BGB_HF=-headless` works: it is not run-fast, but a linked BGB runs at about 50-60 frames per second anyway).
 Joypad bits of the BGB demo byte: low nibble A=1 B=2 Select=4 Start=8, high nibble Right=$10 Left=$20 Up=$40 Down=$80 (checked on the camera)."""
 import sys, os, subprocess, struct, shutil
 BGB = os.environ.get('BGB_DIR', '/home/claude/bgbx')
@@ -32,7 +34,7 @@ def run(rom, sav, prefix, seq, combo=0, free=400, br=None, timeout=900, extra=()
     if sav is not None: shutil.copy(sav, sv)
     for f in (sna, bmp):
         if os.path.exists(f): os.remove(f)
-    cmd = ['xvfb-run', '-a', 'wine', os.path.join(BGB, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(BGB, 'bgb.ini'),
+    cmd = ['xvfb-run', '-a', 'wine', os.path.join(BGB, 'bgb.exe'), os.environ.get('BGB_HF', '-hf'), '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(BGB, 'bgb.ini'),
            '-rom', os.path.abspath(rom), '-demoplay', os.path.abspath(dem), '-stateonexit', os.path.abspath(sna), '-screenonexit', os.path.abspath(bmp)]
     if sav is not None: cmd += ['-loadbatt', os.path.abspath(sv)]
     if br: cmd += ['-br', br]

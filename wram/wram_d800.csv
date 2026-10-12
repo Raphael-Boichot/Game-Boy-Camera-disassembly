@@ -74,7 +74,7 @@ d8ab,4,animator slots: sprite Y,byte x4,5,I,Used by: 5:52FB
 d8af,4,animator slots: finished flags (`$D8B2` = slot 3),byte x4,5,I,"Used by: 5:532A (sets 1/0), 5:4F18 (reads D8B2)"
 d8b3,1,performance-screen control cursor 0..4,byte,5,C,"0 tempo, 1 SOUND I on/off, 2 SOUND II, 3 NOISE, 4 level (`D8B7`) Used by: 5:53EF (`5:5467` via 499B BC=$0004)"
 d8b4,3,channel states SOUND I / SOUND II / NOISE,"byte x3 (0 off, 1 on, 2 fading out, 3 fading in)","5,0",C,"`$D8B4` SOUND I, `$D8B5` SOUND II, `$D8B6` NOISE Used by: 5:56AE (state machine), 5:5651 (Up/Down edits), 0:1017 (tests !=0 before writing NR2x/NR3x/NR4x)"
-d8b7,1,performance-screen level 0..8 (control 4),byte,5,I,"only drives a digit tile (5:580F), a slider sprite (5:52ED via D8BE) and animation 5; no reader in the sound engine Used by: 5:5616,580F,4D42"
+d8b7,1,performance-screen level 0..8 (control 4) = sound effect SE 1..9,byte,5,C,"drives a digit tile (5:580F), a slider sprite (5:52ED via D8BE) and animation 5, and is the SE selector: 05:547D reads it when A is newly pressed and posts [05:554D + 2*D8B7] (= $2C + SE - 1) on the channel-1 mailbox $DD60 (README 16.18; the earlier text said no reader in the sound engine) Used by: 5:547D,5616,580F,4D42"
 d8b8,1,"performer ""speaking"" icon flag",byte,5,I,"selects sprite position of the icon `$D2` Used by: W 5:4F18 (=0), 5:5087/5488 (=1); R 5:52D5"
 d8b9,1,NR51 mask (channel enables),byte,"5,0",C,"bits 1/5 SOUND I, 2/6 SOUND II, 3/7 NOISE, 0/4 always set Used by: W 5:56AE,582E,5828 (=$11),4D55 (=$FF); R 0:10A5 (`NR51 = (D93C|$11) & D8B9`)"
 d8ba,3,per-channel indicator blink toggle,byte x3,5,I,flips every call while the channel state is >=2; cleared while paused Used by: 5:574C via 578B/57B7/57E3

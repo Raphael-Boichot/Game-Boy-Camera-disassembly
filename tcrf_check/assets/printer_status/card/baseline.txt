@@ -1,0 +1,3 @@
+baseline of the card scenario (mode:state path, then the printer exchange: i = INIT, d = DATA, p = PRINT, q = INQUIRY, followed by the reply byte)
+path: 1C:03 1C:07 1C:08 1D:01 1D:02 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:05 1D:06 1D:07 1D:08 1C:08 1D:01 1D:02 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:03 1D:04 1D:05 1D:06 1D:07 1D:08 1C:02 1C:03
+replies: i00 d00 q00 d00 d08 q00 d00 d08 q00 d00 d08 q00 d00 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04 i00 d00 d08 q00 d00 d08 q00 d00 d08 d08 q00 d00 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04

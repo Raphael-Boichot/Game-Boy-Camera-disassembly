@@ -1,0 +1,4 @@
+heads hit 3
+BGB end mode:state 1F:09 rc 0  $D8C6 = 09
+link packets {1: 1, 108: 3, 106: 84666, 104: 5904}  printer bytes 5904  printer packets 14  pages 1
+  page {'file': 'page_01.png', 'width': 160, 'height': 144, 'sheets': 1, 'margins': '30', 'palette': 'E4', 'exposure': '40'}

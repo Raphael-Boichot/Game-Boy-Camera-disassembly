@@ -13,7 +13,18 @@ Witnesses (all outside the v8 merge):
   dj_fields   my core, tcrf_check/tools/dj_fields.py: every key at every field of the three music-editor pages (joypad only); executed bytes in tcrf_check/assets/dj_fields/exec_ranges.csv
   reach_bfs   my core, tcrf_check/tools/reach_bfs.py: breadth-first key search (joypad only) from corpus entries toward chosen targets; one folder per search in
            tcrf_check/assets/reach_bfs/ (exec_ranges.csv = everything executed, reach_bfs.json = key path of every target found)
-  run_race    my core, tcrf_check/tools/run_race.py: RUN! RUN! RUN! played to the end with A pressed at different rates (joypad only, unlocking save): tcrf_check/assets/run_race/exec_ranges.csv
+  bgb_status  BGB + the printer helper with a status byte injected (PRN_ERR; tcrf_check/tools/bgb_printer.py, bgb_print_run.py): the heads hit are in
+           tcrf_check/assets/bgb_retrace/printer_status_heads/*.heads_hit.json (README 16.16)
+  printer_status  my core with the printer status injected at every packet (tcrf_check/tools/printer_status.py, card and D.J. scenarios): one folder per scenario in
+           tcrf_check/assets/printer_status/ (exec_ranges.csv = everything executed by any variant)
+  run_race    my core, tcrf_check/tools/run_race.py: RUN! RUN! RUN! played to the end with A pressed at different rates, four races in a row, Up before each hurdle (joypad only, unlocking save): tcrf_check/assets/run_race/exec_ranges.csv
+              (the six podium orders of README 16.17 were replayed in BGB, tcrf_check/tools/bgb_run_race.py; the block heads it hit are in tcrf_check/assets/run_race/bgb/)
+  dj_se    my core, tcrf_check/tools/dj_se.py: the sound-effect selector of the D.J. performance screen (mode $1F state 5) set to SE 1-9 and A pressed (once; 26 times for SE 9), joypad only;
+           the bytes executed beyond the replay are in tcrf_check/assets/dj_se/exec_ranges.csv (BGB replays of SE 4, SE 8 and SE 9 x 26, tcrf_check/tools/bgb_dj_se.py, hit the same block heads: tcrf_check/assets/dj_se/bgb/; README 16.18)
+  sf2      my core, tcrf_check/tools/sf2_play.py: Space Fever II played with the joypad only from the first-wave menu to the best score 7113 (boss destroyed 9 times, the three boss variants), the death dialog left with B; executed bytes in tcrf_check/assets/sf2/exec_ranges.csv (README 16.18)
+           (the same keys do not replay in BGB: the wave offsets come from the random-number table; the ball game, tcrf_check/tools/ball_play.py, reaches 1100 in the core and in BGB and executes no new never-run byte: tcrf_check/assets/ball/)
+  cheat_checks  my core, tcrf_check/tools/cheat_checks.py: the behavioural cheats of the GameFAQs page (title-screen and VIEW speed, hold A in the D.J. screen, slide-show options, Start+Select at boot, Select+Start+Up in the erase-album page);
+           bytes executed beyond the replay in tcrf_check/assets/cheat_checks/exec_ranges.csv, BGB agreement in cheat_checks.csv (README 16.18)
 A BGB head hit means the whole block ran (blocks.py: straight line up to the next head or terminator). Only bytes of class N are written; the printer runs of 17.1-17.6
 (tcrf_check/assets/bgb_retrace/printer_heads) hit none."""
 import sys, os, csv, json
@@ -34,10 +45,11 @@ for r in csv.DictReader(open(MAP)):
     cls[flat(int(r['bank'], 16), int(r['start'], 16)):][:int(r['length'])] = ord(r['class'])
 isN = cls == ord('N')
 rep = json.load(open(os.path.join(REPO, 'tcrf_check', 'assets', 'bgb_retrace', 'trace_report.json')))
-def from_heads(hs):
+def from_heads(hs, strict=True):                       # strict=False: an address that is not the head of a block of the static trace is only a probe (the D.J. status runs also logged 05:5A21, 05:5A39) and is skipped
     m = np.zeros(N, bool)
     for k in hs:
         b, ad = k.split(':'); key = (int(b, 16), int(ad, 16))
+        if key not in members and not strict: continue
         assert key in members, k
         for bb, aa, ln in members[key]: m[flat(bb, aa):flat(bb, aa) + ln] = True
     return m
@@ -55,6 +67,10 @@ W.append(('bgb_print', 'BGB + printer helper: comment-card print, 3-photo print,
 sm = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'stamp_hold', 'exec_ranges.csv'))):
     o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); sm[o1:o2 + 1] = True
+sbm = np.zeros(N, bool)
+for fn in sorted(glob.glob(os.path.join(REPO, 'tcrf_check', 'assets', 'bgb_retrace', 'printer_status_heads', '*.heads_hit.json'))):
+    sbm |= from_heads(json.load(open(fn))['hits'], strict=False)
+W.append(('bgb_status', 'BGB + printer helper, status byte injected (checksum / busy bits on a DATA reply, the error bits)', 'C', sbm))
 W.append(('stamp_hold', 'my core, hold A in the stamp placement state (joypad only): the bit-reversal routine 04:5E4C', 'C', sm))
 dm = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'dj_fields', 'exec_ranges.csv'))):
@@ -68,7 +84,23 @@ W.append(('reach_bfs', 'my core, key search (joypad only) from the corpus entrie
 rr = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'run_race', 'exec_ranges.csv'))):
     o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); rr[o1:o2 + 1] = True
-W.append(('run_race', 'my core, RUN! RUN! RUN! won / lost with A pressed at different rates (joypad only): the finish and result code of mode $21', 'C', rr))
+W.append(('run_race', 'my core, RUN! RUN! RUN! races 1-4 played with A at different rates and Up at the hurdles (joypad only; BGB confirms the six podiums, README 16.17): the finish and result code of mode $21', 'C', rr))
+psm = np.zeros(N, bool)
+for fn in sorted(glob.glob(os.path.join(REPO, 'tcrf_check', 'assets', 'printer_status', '*', 'exec_ranges.csv'))):
+    for r in csv.DictReader(open(fn)):
+        o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); psm[o1:o2 + 1] = True
+W.append(('printer_status', 'my core, printer status injected at every packet (every bit and combinations) in the card and the D.J. print', 'C', psm))
+ds = np.zeros(N, bool)
+for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'dj_se', 'exec_ranges.csv'))):
+    o1 = flat(int(r['bank'], 16), int(r['start'], 16)); o2 = flat(int(r['bank'], 16), int(r['end'], 16)); ds[o1:o2 + 1] = True
+W.append(('dj_se', 'my core, D.J. performance screen: sound-effect selector SE 4, SE 8 and SE 9 (26 presses) with A (joypad only; BGB hits the same block heads, README 16.18): sound-engine handlers 1F:4940, 49E3, 4A42', 'C', ds))
+def exec_mask(rel):
+    m = np.zeros(N, bool)
+    for r in csv.DictReader(open(os.path.join(REPO, *rel.split('/')))):
+        m[flat(int(r['bank'], 16), int(r['start'], 16)):flat(int(r['bank'], 16), int(r['end'], 16)) + 1] = True
+    return m
+W.append(('sf2', 'my core, Space Fever II played with the joypad only to the best score 7113: boss fights (nine boss kills), the three boss variants, the death dialog (README 16.18)', 'C', exec_mask('tcrf_check/assets/sf2/exec_ranges.csv')))
+W.append(('cheat_checks', 'my core, the behavioural cheats of the GameFAQs page: Select+Start+Up in the erase-album page, both copies of the shortcut (04:491E, 04:4865; README 16.18)', 'C', exec_mask('tcrf_check/assets/cheat_checks/exec_ranges.csv')))
 rows = []; seen = np.zeros(N, bool)
 for name, desc, ev, m in W:
     m = m & isN & ~seen; seen |= m

@@ -66,6 +66,8 @@ typedef struct {
   /* printer */
   uint8_t pr_state; uint16_t pr_len; uint16_t pr_cnt; uint8_t pr_cmd; uint8_t pr_status; uint8_t pr_busy; uint16_t pr_sum;
   uint8_t pr_rx_next; uint8_t pr_attached; uint32_t pr_bytes;
+  uint8_t pr_unproc, pr_printing;      /* real-trace model (gb_printer_model(1)) */
+  uint16_t pr_n[16];                   /* packets answered so far, per command (counted from gb_attach_printer) */
 } GB;
 static GB g;
 static uint32_t cur_fetch_pc_bank;
@@ -94,6 +96,11 @@ static uint8_t rd(uint16_t a);
 static void req(int bit){ g.io[0x0F] |= (1<<bit); }
 
 /* ---- printer (very small model of the Game Boy Printer) ---- */
+/* status injection (README 16.16): the reply of the nth packet of a command (01 INIT, 02 PRINT, 04 DATA, 0F INQUIRY) is replaced by a chosen status byte, count packets in a row;
+   plog = every reply given (command, status). Not part of the snapshot: call gb_printer_inject_clear() at the start of a run. */
+static uint8_t inj_cmd[16], inj_st[16]; static uint16_t inj_nth[16], inj_cnt[16]; static int inj_n;
+static uint8_t plog_cmd[8192], plog_rx[8192]; static int plog_n;
+static int pr_real;   /* gb_printer_model(1): replies copied from the real printer traces (as tcrf_check/tools/bgb_printer.py): INIT 00, first DATA 00, later DATA 08, PRINT 08, INQUIRY 06 x18, 04 x2, then 00 */
 static uint8_t printer_xfer(uint8_t tx){
   uint8_t rx=0x00;
   switch(g.pr_state){
@@ -108,11 +115,22 @@ static uint8_t printer_xfer(uint8_t tx){
     case 8: g.pr_state=9; rx=0x00; break;                      /* checksum hi */
     case 9: rx=0x81; g.pr_state=10; break;                     /* device id */
     case 10: {                                                  /* status */
-      if(g.pr_cmd==0x01){ g.pr_status=0x00; g.pr_busy=0; }
+      if(pr_real){
+        if(g.pr_cmd==0x01){ g.pr_status=0x00; g.pr_busy=0; g.pr_printing=0; g.pr_unproc=0; }
+        else if(g.pr_cmd==0x04){ g.pr_status=g.pr_unproc?0x08:0x00; g.pr_unproc=1; }
+        else if(g.pr_cmd==0x02){ g.pr_status=0x08; g.pr_printing=1; g.pr_busy=20; }
+        else if(g.pr_cmd==0x0F){
+          if(g.pr_printing){ if(g.pr_busy>2){ g.pr_status=0x06; g.pr_busy--; } else if(g.pr_busy>0){ g.pr_status=0x04; g.pr_busy--; } else { g.pr_status=0x00; g.pr_printing=0; g.pr_unproc=0; } }
+          else { g.pr_status=0x00; g.pr_unproc=0; } }
+      }
+      else if(g.pr_cmd==0x01){ g.pr_status=0x00; g.pr_busy=0; }
       else if(g.pr_cmd==0x04){ g.pr_status=0x08; }
       else if(g.pr_cmd==0x02){ g.pr_status=0x06; g.pr_busy=6; }
       else if(g.pr_cmd==0x0F){ if(g.pr_busy){ g.pr_busy--; g.pr_status=g.pr_busy>2?0x06:(g.pr_busy?0x04:0x00);} }
-      rx=g.pr_status; g.pr_state=0; break; }
+      rx=g.pr_status; g.pr_state=0;
+      { uint16_t n=++g.pr_n[g.pr_cmd&15]; for(int i=0;i<inj_n;i++) if(inj_cmd[i]==g.pr_cmd && n>=inj_nth[i] && n<(uint32_t)inj_nth[i]+inj_cnt[i]) rx=inj_st[i];
+        if(plog_n<8192){ plog_cmd[plog_n]=g.pr_cmd; plog_rx[plog_n]=rx; plog_n++; } }
+      break; }
   }
   g.pr_bytes++;
   return rx;
@@ -414,7 +432,11 @@ static int step_cpu(void){
 }
 
 void gb_set_keys(uint8_t k){ uint8_t old=cur_lines(); g.keys=k; uint8_t nl=cur_lines(); if((old&~nl)&0x0F) req(4); g.last_p1lines=nl; }
-void gb_attach_printer(int on){ g.pr_attached=on; g.pr_state=0; }
+void gb_attach_printer(int on){ g.pr_attached=on; g.pr_state=0; memset(g.pr_n,0,sizeof g.pr_n); }
+void gb_printer_model(int real){ pr_real=real; }
+void gb_printer_inject_clear(void){ inj_n=0; plog_n=0; }
+int gb_printer_inject(int cmd,int nth,int status,int count){ if(inj_n>=16) return -1; inj_cmd[inj_n]=cmd; inj_nth[inj_n]=nth; inj_st[inj_n]=status; inj_cnt[inj_n]=count; return inj_n++; }
+int gb_printer_log(uint8_t*cmds,uint8_t*rxs,int max){ int n=plog_n<max?plog_n:max; memcpy(cmds,plog_cmd,n); memcpy(rxs,plog_rx,n); return plog_n; }
 
 void gb_reset(const uint8_t*sram, size_t n){
   memset(&g,0,sizeof(g));

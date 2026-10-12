@@ -1,0 +1,7 @@
+JP ROM, Album B routine, zeroed counters                                              unlocked: -
+JP ROM, Album B routine, SF2 best from the played save (13710000)                     unlocked: B22 B23
+JP ROM, Album B routine, BALL best from the played save (0011)                        unlocked: B20 B21
+JP ROM, Album B routine, RUN! record of my fastest race (15:48, run_record.py: $8451) unlocked: B24
+JP ROM, Album B routine, both played scores                                           unlocked: B20 B21 B22 B23
+JP ROM, route to the RUN! race loop (corpus entry 649) with zeroed counters                                      ends in 07:02
+JP ROM, route to the RUN! race loop (corpus entry 649) with SF2 best from the played save (13710000)             ends in 21:06

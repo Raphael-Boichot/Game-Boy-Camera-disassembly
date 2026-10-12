@@ -13,7 +13,7 @@ What it does:
     only call site 06:781A, so the values that table can produce are enumerated and compared with the slots whose code never ran, (c) one-instruction components behind a
     carry / zero test (pointer arithmetic edge);
  3. merges the manual verdicts.
-Verdicts: INPUT (the condition can be produced with the joypad and the save; recipe in the note), PRINTER (needs a printer status the helper never returns),
+Verdicts: INPUT (the condition can be produced with the joypad and the save; recipe in the note), PRINTER (needs a printer reply that no status-injection run produced; none left after README 16.16),
 LINK (needs a link partner), UNREACHABLE (static argument: nothing can select it), UNREFERENCED (dead root, no reference found), EDGE (arithmetic edge case), OPEN.
 Evidence: C = executed in a run, I = inferred from the code, ? = not analysed."""
 import sys, os, re, csv, json, collections
@@ -112,7 +112,7 @@ for r in rows:
     if not verdict and int(r['instrs']) == 1 and int(r['bytes']) == 1 and gates:
         verdict, ev, note = 'EDGE', 'I', 'one byte behind a carry / zero test of a pointer or loop update (%s)' % mnem(gates[0][0])
     if not verdict and 'prn_' in var:
-        verdict, ev, note = 'PRINTER', 'I', 'the gate tests the printer engine state / status (%s); the BGB helper always answers a clean status' % var
+        verdict, ev, note = 'PRINTER', 'I', 'the gate tests the printer engine state / status (%s); no status-injection run (README 16.16) executed it' % var
     m = man.get(first)
     if m: verdict, ev, note = m['verdict'], m['evidence'], m['note']
     out.append([first, '%02X' % B(min(mem)), cls, r['instrs'], r['bytes'], entry, var, auto, verdict or 'OPEN', ev or '?', note or 'not analysed'])
