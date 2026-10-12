@@ -36,6 +36,9 @@ Witnesses (all outside the v8 merge):
   gameface_edit  my core, tcrf_check/tools/gameface_edit.py: a Game Face stored in the SRAM (flag $10D1 and the image $11FC-$1FFB, both settings copies re-checksummed; the SRAM is edited in the core once the game
            sits at the MAGIC menu), Select+Down then A on the Game Face page (06:48E6), then the pen tool of the Game Face editor and its save-back (07:6A58 -> 02:4C37); executed bytes in
            tcrf_check/assets/easy_wins/gameface_edit/face_stored/exec_ranges.csv (README 16.19)
+  compose_picker  BGB, tcrf_check/tools/bgb_compose.py: used save unl_PC10696894, COMPOSE two-photo layout (mode $17): A held + Up / Down in the photo pickers (06:523B, 06:5276, 06:5769); heads in
+           tcrf_check/assets/easy_wins/compose/bgb_compose.heads_hit.json; a head marker credits only the block up to the next call, so the bytes after the calls come from the same chain in my core
+           (tcrf_check/tools/compose_picker.py, executed bytes in tcrf_check/assets/easy_wins/compose/core/exec_ranges.csv; README 16.19)
 A BGB head hit means the whole block ran (blocks.py: straight line up to the next head or terminator). Only bytes of class N are written; the printer runs of 17.1-17.6
 (tcrf_check/assets/bgb_retrace/printer_heads) hit none."""
 import sys, os, csv, json
@@ -127,6 +130,8 @@ def exec_masks(pattern):
 W.append(('dj_pages', 'my core, breadth-first key search over every state of the D.J. pages (joypad only): fields and page handlers of bank 5 (README 16.19)', 'C', exec_masks('tcrf_check/assets/easy_wins/dj_pages/*/exec_ranges.csv')))
 W.append(('editor_copy_flag', 'my core, a save whose photos all have F33 = 1, then the pen-tool exit and save-back of a corpus path (joypad only): the copy-badge branch 02:47FE (README 16.19)', 'C', exec_masks('tcrf_check/assets/easy_wins/editor_copy_flag/*/exec_ranges.csv')))
 W.append(('gameface_edit', 'my core, a Game Face stored in the SRAM (edited in the core at the MAGIC menu): the hidden third choice of the Game Face page, the Game Face editor and its save-back (README 16.19)', 'C', exec_masks('tcrf_check/assets/easy_wins/gameface_edit/*/exec_ranges.csv')))
+cp_ = json.load(open(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'compose', 'bgb_compose.heads_hit.json')))
+W.append(('compose_picker', 'BGB (block heads 06:523B, 06:5276, 06:5769) and my core (the bytes after the two calls), used save, COMPOSE two-photo layout: A held with Up / Down in the photo pickers (README 16.19)', 'C', from_heads(cp_['hits']) | exec_masks('tcrf_check/assets/easy_wins/compose/*/exec_ranges.csv')))
 rows = []; seen = np.zeros(N, bool)
 for name, desc, ev, m in W:
     m = m & isN & ~seen; seen |= m

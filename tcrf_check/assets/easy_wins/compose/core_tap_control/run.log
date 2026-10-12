@@ -1,0 +1,9 @@
+('start', '17:0A', 0, 0, 0, 30)
+('A tap', '17:0A', 0, 0)
+('Up tap', '17:01', 0, 0)
+('Down tap', '17:0A', 0, 0)
+('Right tap', '17:0A', 0, 0)
+('Left tap', '17:0A', 0, 0)
+('B tap', '03:01', 0, 0)
+hits {'06:523B': False, '06:5276': False, '06:5769': False, '06:5779': False}
+executed beyond the replay: 15366 bytes in 281 ranges -> /home/claude/w/clone/Game-Boy-Camera-disassembly/tcrf_check/assets/easy_wins/compose/core_tap_control/exec_ranges.csv

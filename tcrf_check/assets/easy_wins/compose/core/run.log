@@ -1,0 +1,12 @@
+('start', '17:0A', 0, 0, 0, 30)
+('hold A', '17:0B')
+('A+Up', '17:0B', 1, {'06:523B': True, '06:5276': False, '06:5769': False, '06:5779': False})
+('A+Down', '17:0B', 0, {'06:523B': True, '06:5276': False, '06:5769': False, '06:5779': False})
+('A+Down', '17:0B', 59, {'06:523B': True, '06:5276': False, '06:5769': False, '06:5779': True})
+('A+Up', '17:0B', 0, {'06:523B': True, '06:5276': False, '06:5769': True, '06:5779': True})
+('release A', '17:0A', 0)
+('Right, hold A', '17:0C', 1)
+('A+Up', '17:0C', 1, {'06:523B': True, '06:5276': True, '06:5769': True, '06:5779': True})
+('release A', '17:0A', 0, 1)
+hits {'06:523B': True, '06:5276': True, '06:5769': True, '06:5779': True}
+executed beyond the replay: 15437 bytes in 279 ranges -> /home/claude/w/clone/Game-Boy-Camera-disassembly/tcrf_check/assets/easy_wins/compose/core/exec_ranges.csv

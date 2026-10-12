@@ -2,7 +2,7 @@
 """Whole JP ROM as 2bpp tiles (code and everything else), coloured by what the v8 coverage run reached.
 blue = executed or read by a run (dark: joypad + save only; light: only after a forced RAM / mode state), red = never executed nor read
 (including traced code that never ran), orange = never read but identified as asset data (assets/asset_map_jp.csv, evidence I or C per row),
-green = code the v8 run never executed but a later targeted run did (assets/witness_jp.csv: BGB in SGB mode, the hot-spot effect test, the APU-gated branch, the printer runs, the stamp mirror, the music-editor, RUN!, D.J. sound-effect, Space Fever II and erase-all runs, the link counters / $55 hello, the blank calibration, the D.J. pages, the editor copy badge, the Game Face editor; README 16.14 / 16.15 / 16.18 / 16.19),
+green = code the v8 run never executed but a later targeted run did (assets/witness_jp.csv: BGB in SGB mode, the hot-spot effect test, the APU-gated branch, the printer runs, the stamp mirror, the music-editor, RUN!, D.J. sound-effect, Space Fever II and erase-all runs, the link counters / $55 hello, the blank calibration, the D.J. pages, the editor copy badge, the Game Face editor, the COMPOSE pickers; README 16.14 / 16.15 / 16.18 / 16.19),
 muted red = untouched padding (runs >= 16 of 00 / FF).
 usage: rom_reach_map.py OUT.png [--rom pocketcamera_jp.gb] [--map coverage/results/report_v8/rom_map.csv] [--assets assets/asset_map_jp.csv | none] [--witness assets/witness_jp.csv | none]
 The ROM is not in the repository (md5 fdcfe686cf4df461e870b6e53b2b5a8b); the byte-class map is (written by coverage/tools/rom_map.py from the v8 merged coverage)."""

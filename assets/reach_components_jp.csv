@@ -48,8 +48,6 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 00:0758,00,ORPHAN,7,10,flow:1,,,OPEN,?,not analysed
 05:6AE1,05,GATED,6,10,05:6AE0(ft),,,OPEN,?,not analysed
 00:06F6,00,GATED,6,9,00:06F4(ft),,,OPEN,?,not analysed
-06:523B,06,GATED,3,9,06:5239(ft),$D7F7 compose2_photos[2],,OPEN,?,not analysed
-06:5276,06,GATED,3,9,06:5274(ft),$D7F8 (compose2_photos[2]+1),,OPEN,?,not analysed
 08:482C,08,GATED,4,9,08:482A(ft),$D7C1 border_number,,OPEN,?,not analysed
 1F:5743,1F,DEAD,4,9,flow:1;root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 06:7417,06,TABLE,3,8,06:73AF[13],,slot 13 outside the values of the 06:60DB table,UNREACHABLE,I,"slot of 06:73AF, chosen by the same 88-byte index table 06:60DB (06:738F-73AE), which never produces this value"
@@ -97,7 +95,6 @@ first_addr,bank,class,instrs,bytes,entry,tested_variable,automatic_check,verdict
 07:503D,07,DEAD,1,3,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 1F:7FF3,1F,DEAD,1,3,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)
 05:5769,05,GATED,2,2,05:5768(ft),,,OPEN,?,not analysed
-06:5769,06,GATED,2,2,06:5768(ft),,,OPEN,?,not analysed
 09:5CAF,09,GATED,2,2,09:5CAD(ft),,,OPEN,?,not analysed
 1F:522A,1F,GATED,2,2,1F:5228(ft),,,OPEN,?,not analysed
 00:0367,00,DEAD,1,1,root:1,,refs: code none; table-like words none,UNREFERENCED,I,no call / jp / jr / ld rr / pointer-table word reaches it (a computed jump is not excluded)

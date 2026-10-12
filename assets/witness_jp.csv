@@ -78,3 +78,6 @@ bank,start,end,bytes,witness,evidence,description
 02,47FE,4802,5,editor_copy_flag,C,"my core, a save whose photos all have F33 = 1, then the pen-tool exit and save-back of a corpus path (joypad only): the copy-badge branch 02:47FE (README 16.19)"
 06,48E6,48FB,22,gameface_edit,C,"my core, a Game Face stored in the SRAM (edited in the core at the MAGIC menu): the hidden third choice of the Game Face page, the Game Face editor and its save-back (README 16.19)"
 07,6A58,6A61,10,gameface_edit,C,"my core, a Game Face stored in the SRAM (edited in the core at the MAGIC menu): the hidden third choice of the Game Face page, the Game Face editor and its save-back (README 16.19)"
+06,523B,5243,9,compose_picker,C,"BGB (block heads 06:523B, 06:5276, 06:5769) and my core (the bytes after the two calls), used save, COMPOSE two-photo layout: A held with Up / Down in the photo pickers (README 16.19)"
+06,5276,527E,9,compose_picker,C,"BGB (block heads 06:523B, 06:5276, 06:5769) and my core (the bytes after the two calls), used save, COMPOSE two-photo layout: A held with Up / Down in the photo pickers (README 16.19)"
+06,5769,576A,2,compose_picker,C,"BGB (block heads 06:523B, 06:5276, 06:5769) and my core (the bytes after the two calls), used save, COMPOSE two-photo layout: A held with Up / Down in the photo pickers (README 16.19)"
