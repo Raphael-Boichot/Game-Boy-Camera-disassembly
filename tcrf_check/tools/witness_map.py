@@ -25,6 +25,14 @@ Witnesses (all outside the v8 merge):
            (the same keys do not replay in BGB: the wave offsets come from the random-number table; the ball game, tcrf_check/tools/ball_play.py, reaches 1100 in the core and in BGB and executes no new never-run byte: tcrf_check/assets/ball/)
   cheat_checks  my core, tcrf_check/tools/cheat_checks.py: the behavioural cheats of the GameFAQs page (title-screen and VIEW speed, hold A in the D.J. screen, slide-show options, Start+Select at boot, Select+Start+Up in the erase-album page);
            bytes executed beyond the replay in tcrf_check/assets/cheat_checks/exec_ranges.csv, BGB agreement in cheat_checks.csv (README 16.18)
+  link_variants  BGB-to-BGB link runs (tcrf_check/tools/bgb_link_variants.py): owner male / female on both units (the receive-counter branches 02:466D-467C and 07:4A2D-4A3E) and the $55 hello
+           (00:2B20, a copy of the ROM whose idle hello byte is $55); the block heads hit are in tcrf_check/assets/easy_wins/link_variants/*.heads_hit.json (README 16.19)
+  boot_aa  BGB, boot with the 12 calibration bytes of both SRAM copies set to $AA (blank): the two loops and the exit of Cam_Calib_Loader 0A:470D-4721 (README 16.19);
+           heads in tcrf_check/assets/easy_wins/boot_aa/boot_aa.heads_hit.json
+  dj_pages  my core, tcrf_check/tools/dj_pages.py: breadth-first search over every state of the D.J. pages (modes $1F / $20, eight keys and chords, joypad only, unlocking save); bytes executed
+           beyond the replay in tcrf_check/assets/easy_wins/dj_pages/*/exec_ranges.csv (README 16.19)
+  editor_copy_flag  my core, tcrf_check/tools/editor_copy_flag.py --f33: all 30 slots of the unlocking save patched to F33 = 1 (checksums fixed), corpus path 595 replayed (joypad only): the pen-tool exit
+           (state 10:09, Right) runs the editor save-back, which draws the copy badge when [$CF33] != 0 (02:47FE); executed bytes in tcrf_check/assets/easy_wins/editor_copy_flag/f33_save/exec_ranges.csv (README 16.19)
 A BGB head hit means the whole block ran (blocks.py: straight line up to the next head or terminator). Only bytes of class N are written; the printer runs of 17.1-17.6
 (tcrf_check/assets/bgb_retrace/printer_heads) hit none."""
 import sys, os, csv, json
@@ -101,6 +109,20 @@ def exec_mask(rel):
     return m
 W.append(('sf2', 'my core, Space Fever II played with the joypad only to the best score 7113: boss fights (nine boss kills), the three boss variants, the death dialog (README 16.18)', 'C', exec_mask('tcrf_check/assets/sf2/exec_ranges.csv')))
 W.append(('cheat_checks', 'my core, the behavioural cheats of the GameFAQs page: Select+Start+Up in the erase-album page, both copies of the shortcut (04:491E, 04:4865; README 16.18)', 'C', exec_mask('tcrf_check/assets/cheat_checks/exec_ranges.csv')))
+lm = np.zeros(N, bool)
+for fn in sorted(glob.glob(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'link_variants', '*.heads_hit.json'))):
+    lm |= from_heads(json.load(open(fn))['hits'], strict=False)
+W.append(('link_variants', 'BGB-to-BGB link runs: owner male / female on both units (receive counters 02:466D-467C, 07:4A2D-4A3E) and the $55 hello byte (00:2B20)', 'C', lm))
+bj = json.load(open(os.path.join(REPO, 'tcrf_check', 'assets', 'easy_wins', 'boot_aa', 'boot_aa.heads_hit.json')))
+W.append(('boot_aa', 'BGB, calibration bytes of both SRAM copies = $AA: the loops and the exit of Cam_Calib_Loader (0A:470D-4721)', 'C', from_heads(bj['hits'] + bj['implied_heads'])))
+def exec_masks(pattern):
+    m = np.zeros(N, bool)
+    for fn in sorted(glob.glob(os.path.join(REPO, *pattern.split('/')))):
+        for r in csv.DictReader(open(fn)):
+            m[flat(int(r['bank'], 16), int(r['start'], 16)):flat(int(r['bank'], 16), int(r['end'], 16)) + 1] = True
+    return m
+W.append(('dj_pages', 'my core, breadth-first key search over every state of the D.J. pages (joypad only): fields and page handlers of bank 5 (README 16.19)', 'C', exec_masks('tcrf_check/assets/easy_wins/dj_pages/*/exec_ranges.csv')))
+W.append(('editor_copy_flag', 'my core, a save whose photos all have F33 = 1, then the pen-tool exit and save-back of a corpus path (joypad only): the copy-badge branch 02:47FE (README 16.19)', 'C', exec_masks('tcrf_check/assets/easy_wins/editor_copy_flag/*/exec_ranges.csv')))
 rows = []; seen = np.zeros(N, bool)
 for name, desc, ev, m in W:
     m = m & isN & ~seen; seen |= m

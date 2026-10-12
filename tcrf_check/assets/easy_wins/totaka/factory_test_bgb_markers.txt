@@ -1,0 +1,19 @@
+# BGB, hidden factory test (boot with the combo $FD), markers of tools/bgb_factory_test.py; clock = total clocks at the hit
+# marker counts (before the spin loop): FactoryMeasure1 1, FactoryMeasure2 1, NG_request 1, PixelTest 537, PixelTestResult 537, ResultNG 1, SAR 12, ThresholdConverge 12
+MK FactoryMeasure1 00A5CE16
+MK FactoryMeasure2 023E27B4
+MK ThresholdConverge 023E2846 ff8e=00
+MK ThresholdConverge 02436BDC ff8e=7C
+MK ThresholdConverge 0248C6C4 ff8e=7C
+MK ThresholdConverge 024D10F2 ff8e=7D
+MK ThresholdConverge 0250468A ff8e=7E
+MK ThresholdConverge 0263914E ff8e=6F
+MK ThresholdConverge 026B10C6 ff8e=7A
+MK ThresholdConverge 02706D48 ff8e=7C
+MK ThresholdConverge 027B246A ff8e=77
+MK ThresholdConverge 02A82540 ff8e=58
+MK ThresholdConverge 0315708A ff8e=1B
+MK ThresholdConverge 0393E1EE ff8e=0B
+MK ResultNG 041259D0 ff91=FF
+MK NG_request 0412624A
+# Hang marker (0A:6B54, the endless loop jr $-2 after the verdict): hit 1,536,288 times before the run was stopped

@@ -1,0 +1,40 @@
+root state 1F:05 ; 34 keys; targets 22
+depth 1: 3 states, frontier 2
+depth 2: 12 states, frontier 9
+depth 3: 52 states, frontier 40
+depth 4: 183 states, frontier 131
+depth 5: 395 states, frontier 212
+depth 6: 674 states, frontier 279
+depth 7: 1158 states, frontier 484
+depth 8: 1949 states, frontier 791
+depth 9: 2940 states, frontier 991
+depth 10: 3982 states, frontier 1042
+depth 11: 5096 states, frontier 1114
+depth 12: 6235 states, frontier 1139
+depth 13: 7279 states, frontier 1044
+depth 14: 8000 states, frontier 721
+states pressed: 8000 (depth 14) CAP
+(mode,state) of the states: [('1F:00', 1), ('1F:01', 1), ('1F:02', 1), ('1F:03', 1), ('1F:05', 1940), ('1F:06', 1707), ('1F:09', 1495), ('1F:0A', 1463), ('1F:0B', 1391)]
+05:5445   17 B  not reached
+05:5456   17 B  not reached
+05:69A9   16 B  RAN after Select Select Up Up Right+A
+05:6AF8   16 B  RAN after Select Select Up Up Right+A
+05:496D   13 B  RAN after Select Up Left+A
+05:497E   11 B  RAN after Select Up Right+A
+05:49C2   11 B  not reached
+05:6AE1   10 B  not reached
+05:70A9   10 B  RAN after Select Select Select Up Up Up+A
+05:4B1D    7 B  not reached
+05:686A    5 B  not reached
+05:6E7E    5 B  not reached
+05:60E0    4 B  not reached
+05:7397    4 B  not reached
+05:5769    2 B  not reached
+05:64F1    2 B  RAN after Select Up Up Right Right Right Up+A
+05:7131    2 B  RAN after Select Select Select Up Up Right Down+A
+05:71AB    2 B  RAN after Select Select Select Up Up Right Right Up+A
+05:7214    2 B  RAN after Select Select Select Up Up Right Right Right Up+A
+05:5310    1 B  not reached
+05:5319    1 B  not reached
+05:6ACC    1 B  not reached
+executed beyond the replay: 20884 bytes in 293 ranges -> /home/claude/w/dj_pages_coarse/exec_ranges.csv
