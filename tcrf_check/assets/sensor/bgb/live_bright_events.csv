@@ -1,0 +1,5297 @@
+kind,what,value,rombank,pc,clocks_hex,extra
+M,BootPing1,,,,A1FE50,
+M,ValidityCheck,,,,A1FE5C,
+M,CalibLoader,,,,A202DA,
+M,BootMeasureSeq,,,,A20300,
+M,ExposureBandSelect,,,,A20320,
+W,A001,00,0A,486A,A20350,
+W,A002,00,0A,486E,A2035A,
+W,A003,10,0A,4873,A20366,
+W,A004,05,0A,4878,A20372,
+W,A005,80,0A,487D,A2037E,
+W,A006,D5,0A,488B,A2039A,
+M,SAR,,,,A207C2,
+W,A005,BF,0A,4B77,A207E8,
+W,A000,03,0A,4B7F,A207FC,
+M,PixelTest,,,,A30BAE,thr=09 ptr=A002
+M,PixelTestResult,,,,A30CA4,count=0C thr=09
+W,A004,01,0A,4BA1,A30CF4,
+W,A000,03,0A,4B7F,A30D22,
+M,PixelTest,,,,A410D4,thr=09 ptr=A002
+M,PixelTestResult,,,,A411CA,count=0C thr=09
+W,A004,02,0A,4BA1,A4121A,
+W,A000,03,0A,4B7F,A41248,
+M,PixelTest,,,,A515FA,thr=09 ptr=A002
+M,PixelTestResult,,,,A516F0,count=0C thr=09
+W,A004,03,0A,4BA1,A51740,
+W,A000,03,0A,4B7F,A5176E,
+M,PixelTest,,,,A61B20,thr=09 ptr=A002
+M,PixelTestResult,,,,A61C16,count=0C thr=09
+W,A004,04,0A,4BA1,A61C66,
+W,A000,03,0A,4B7F,A61C94,
+M,PixelTest,,,,A72046,thr=09 ptr=A002
+M,PixelTestResult,,,,A7213C,count=0C thr=09
+W,A004,05,0A,4BA1,A7218C,
+W,A000,03,0A,4B7F,A721BA,
+M,PixelTest,,,,A8256C,thr=09 ptr=A002
+M,PixelTestResult,,,,A82662,count=0C thr=09
+W,A004,06,0A,4BA1,A826B2,
+W,A000,03,0A,4B7F,A826E0,
+M,PixelTest,,,,A92A92,thr=09 ptr=A002
+M,PixelTestResult,,,,A92B88,count=00 thr=09
+W,A005,A0,0A,4BF1,A92BD2,
+W,A000,03,0A,4BFD,A92BF0,
+M,PixelTest,,,,AA2FA2,thr=09 ptr=A002
+M,PixelTestResult,,,,AA3098,count=0C thr=09
+W,A005,B0,0A,4C25,AA30F2,
+W,A000,03,0A,4BFD,AA311A,
+M,PixelTest,,,,AB34CC,thr=09 ptr=A002
+M,PixelTestResult,,,,AB35C2,count=00 thr=09
+W,A005,A8,0A,4C25,AB3618,
+W,A000,03,0A,4BFD,AB3640,
+M,PixelTest,,,,AC39F2,thr=09 ptr=A002
+M,PixelTestResult,,,,AC3AE8,count=00 thr=09
+W,A005,A4,0A,4C25,AC3B3E,
+W,A000,03,0A,4BFD,AC3B66,
+M,PixelTest,,,,AD3F18,thr=09 ptr=A002
+M,PixelTestResult,,,,AD400E,count=00 thr=09
+W,A005,A2,0A,4C25,AD4064,
+W,A000,03,0A,4BFD,AD408C,
+M,PixelTest,,,,AE443E,thr=09 ptr=A002
+M,PixelTestResult,,,,AE4534,count=00 thr=09
+W,A005,A1,0A,4C25,AE458A,
+W,A000,03,0A,4BFD,AE45B2,
+M,PixelTest,,,,AF4964,thr=09 ptr=A002
+M,PixelTestResult,,,,AF4A5A,count=0C thr=09
+W,A005,A1,0A,4C25,AF4AB4,
+W,A005,21,0A,489A,AF4AE2,
+W,A006,80,0A,48A8,AF4AFE,
+W,A000,03,0A,48B9,AF4F38,
+M,PixelTest,,,,B052EA,thr=09 ptr=A002
+M,PixelTestResult,,,,B053E0,count=00 thr=09
+W,A001,01,0A,486A,B0543C,
+W,A002,00,0A,486E,B05446,
+W,A003,10,0A,4873,B05452,
+W,A004,05,0A,4878,B0545E,
+W,A005,80,0A,487D,B0546A,
+W,A006,D5,0A,488B,B05486,
+M,SAR,,,,B058AE,
+W,A005,BF,0A,4B77,B058D4,
+W,A000,03,0A,4B7F,B058E8,
+M,PixelTest,,,,B15C9A,thr=09 ptr=A002
+M,PixelTestResult,,,,B15D90,count=0C thr=09
+W,A004,07,0A,4BA1,B15DE0,
+W,A005,A0,0A,4BF1,B15E0A,
+W,A000,03,0A,4BFD,B15E28,
+M,PixelTest,,,,B261DA,thr=09 ptr=A002
+M,PixelTestResult,,,,B262D0,count=00 thr=09
+W,A005,90,0A,4C25,B26326,
+W,A000,03,0A,4BFD,B2634E,
+M,PixelTest,,,,B36700,thr=09 ptr=A002
+M,PixelTestResult,,,,B367F6,count=00 thr=09
+W,A005,98,0A,4C25,B3684C,
+W,A000,03,0A,4BFD,B36874,
+M,PixelTest,,,,B46C26,thr=09 ptr=A002
+M,PixelTestResult,,,,B46D1C,count=00 thr=09
+W,A005,9C,0A,4C25,B46D72,
+W,A000,03,0A,4BFD,B46D9A,
+M,PixelTest,,,,B5714C,thr=09 ptr=A002
+M,PixelTestResult,,,,B57242,count=00 thr=09
+W,A005,9E,0A,4C25,B57298,
+W,A000,03,0A,4BFD,B572C0,
+M,PixelTest,,,,B67672,thr=09 ptr=A002
+M,PixelTestResult,,,,B67768,count=00 thr=09
+W,A005,9F,0A,4C25,B677BE,
+W,A000,03,0A,4BFD,B677E6,
+M,PixelTest,,,,B77B98,thr=09 ptr=A002
+M,PixelTestResult,,,,B77C8E,count=00 thr=09
+W,A005,9F,0A,4C25,B77CE4,
+W,A005,1F,0A,489A,B77D12,
+W,A006,80,0A,48A8,B77D2E,
+W,A000,03,0A,48B9,B78168,
+M,PixelTest,,,,B8851A,thr=09 ptr=A002
+M,PixelTestResult,,,,B88610,count=00 thr=09
+W,A001,02,0A,486A,B8866C,
+W,A002,00,0A,486E,B88676,
+W,A003,10,0A,4873,B88682,
+W,A004,05,0A,4878,B8868E,
+W,A005,80,0A,487D,B8869A,
+W,A006,D5,0A,488B,B886B6,
+M,SAR,,,,B88ADE,
+W,A005,BF,0A,4B77,B88B04,
+W,A000,03,0A,4B7F,B88B18,
+M,PixelTest,,,,B98ECA,thr=09 ptr=A002
+M,PixelTestResult,,,,B98FC0,count=0C thr=09
+W,A004,08,0A,4BA1,B99010,
+W,A000,03,0A,4B7F,B9903E,
+M,PixelTest,,,,BA93F0,thr=09 ptr=A002
+M,PixelTestResult,,,,BA94E6,count=0C thr=09
+W,A004,09,0A,4BA1,BA9536,
+W,A000,03,0A,4B7F,BA9564,
+M,PixelTest,,,,BB9916,thr=09 ptr=A002
+M,PixelTestResult,,,,BB9A0C,count=0C thr=09
+W,A004,0A,0A,4BA1,BB9A5C,
+W,A000,03,0A,4B7F,BB9A8A,
+M,PixelTest,,,,BC9E3C,thr=09 ptr=A002
+M,PixelTestResult,,,,BC9F32,count=0C thr=09
+W,A004,0B,0A,4BA1,BC9F82,
+W,A000,03,0A,4B7F,BC9FB0,
+M,PixelTest,,,,BDA362,thr=09 ptr=A002
+M,PixelTestResult,,,,BDA458,count=0C thr=09
+W,A004,0C,0A,4BA1,BDA4A8,
+W,A000,03,0A,4B7F,BDA4D6,
+M,PixelTest,,,,BEA888,thr=09 ptr=A002
+M,PixelTestResult,,,,BEA97E,count=0C thr=09
+W,A004,0D,0A,4BA1,BEA9CE,
+W,A000,03,0A,4B7F,BEA9FC,
+M,PixelTest,,,,BFADAE,thr=09 ptr=A002
+M,PixelTestResult,,,,BFAEA4,count=0C thr=09
+W,A004,0E,0A,4BA1,BFAEF4,
+W,A000,03,0A,4B7F,BFAF22,
+M,PixelTest,,,,C0B2D4,thr=09 ptr=A002
+M,PixelTestResult,,,,C0B3CA,count=0C thr=09
+W,A004,0F,0A,4BA1,C0B41A,
+W,A005,A0,0A,4BF1,C0B444,
+W,A000,03,0A,4BFD,C0B462,
+M,PixelTest,,,,C1B814,thr=09 ptr=A002
+M,PixelTestResult,,,,C1B90A,count=0C thr=09
+W,A005,B0,0A,4C25,C1B964,
+W,A000,03,0A,4BFD,C1B98C,
+M,PixelTest,,,,C2BD3E,thr=09 ptr=A002
+M,PixelTestResult,,,,C2BE34,count=0C thr=09
+W,A005,B8,0A,4C25,C2BE8E,
+W,A000,03,0A,4BFD,C2BEB6,
+M,PixelTest,,,,C3C268,thr=09 ptr=A002
+M,PixelTestResult,,,,C3C35E,count=0C thr=09
+W,A005,BC,0A,4C25,C3C3B8,
+W,A000,03,0A,4BFD,C3C3E0,
+M,PixelTest,,,,C4C792,thr=09 ptr=A002
+M,PixelTestResult,,,,C4C888,count=0C thr=09
+W,A005,BE,0A,4C25,C4C8E2,
+W,A000,03,0A,4BFD,C4C90A,
+M,PixelTest,,,,C5CCBC,thr=09 ptr=A002
+M,PixelTestResult,,,,C5CDB2,count=0C thr=09
+W,A005,BF,0A,4C25,C5CE0C,
+W,A000,03,0A,4BFD,C5CE34,
+M,PixelTest,,,,C6D1E6,thr=09 ptr=A002
+M,PixelTestResult,,,,C6D2DC,count=0C thr=09
+W,A005,BF,0A,4C25,C6D336,
+W,A005,3F,0A,489A,C6D364,
+W,A006,80,0A,48A8,C6D380,
+W,A000,03,0A,48B9,C6D7BA,
+M,PixelTest,,,,C7DB6C,thr=09 ptr=A002
+M,PixelTestResult,,,,C7DC62,count=00 thr=09
+W,A006,7D,0A,473E,C7DD36,
+W,A001,23,0A,474F,C7E170,
+W,A002,00,0A,4756,C7E182,
+W,A003,10,0A,475E,C7E196,
+W,A004,03,0A,4766,C7E1AA,
+M,SAR,,,,C7E1C0,
+W,A005,BF,0A,4B77,C7E1E6,
+W,A000,03,0A,4B7F,C7E1FA,
+M,PixelTest,,,,C8E5AC,thr=09 ptr=A002
+M,PixelTestResult,,,,C8E6A2,count=00 thr=09
+W,A005,9F,0A,4BBA,C8E6EA,
+W,A000,03,0A,4BC2,C8E6FE,
+M,PixelTest,,,,C9EAB0,thr=09 ptr=A002
+M,PixelTestResult,,,,C9EBA6,count=0C thr=09
+W,A005,A0,0A,4BF1,C9EBE0,
+W,A000,03,0A,4BFD,C9EBFE,
+M,PixelTest,,,,CAEFB0,thr=09 ptr=A002
+M,PixelTestResult,,,,CAF0A6,count=00 thr=09
+W,A005,90,0A,4C25,CAF0FC,
+W,A000,03,0A,4BFD,CAF124,
+M,PixelTest,,,,CBF4D6,thr=09 ptr=A002
+M,PixelTestResult,,,,CBF5CC,count=0C thr=09
+W,A005,88,0A,4C25,CBF626,
+W,A000,03,0A,4BFD,CBF64E,
+M,PixelTest,,,,CCFA00,thr=09 ptr=A002
+M,PixelTestResult,,,,CCFAF6,count=0C thr=09
+W,A005,84,0A,4C25,CCFB50,
+W,A000,03,0A,4BFD,CCFB78,
+M,PixelTest,,,,CDFF2A,thr=09 ptr=A002
+M,PixelTestResult,,,,CE0020,count=0C thr=09
+W,A005,82,0A,4C25,CE007A,
+W,A000,03,0A,4BFD,CE00A2,
+M,PixelTest,,,,CF0454,thr=09 ptr=A002
+M,PixelTestResult,,,,CF054A,count=00 thr=09
+W,A005,83,0A,4C25,CF05A0,
+W,A000,03,0A,4BFD,CF05C8,
+M,PixelTest,,,,D0097A,thr=09 ptr=A002
+M,PixelTestResult,,,,D00A70,count=0C thr=09
+W,A005,83,0A,4C25,D00ACA,
+W,A006,7C,0A,4789,D00B26,
+W,A001,23,0A,4795,D00F54,
+W,A004,23,0A,479D,D00F68,
+M,SAR,,,,D00F7E,
+W,A005,BF,0A,4B77,D00FA4,
+W,A000,03,0A,4B7F,D00FB8,
+M,PixelTest,,,,D1136A,thr=09 ptr=A002
+M,PixelTestResult,,,,D11460,count=00 thr=09
+W,A005,9F,0A,4BBA,D114A8,
+W,A000,03,0A,4BC2,D114BC,
+M,PixelTest,,,,D2186E,thr=09 ptr=A002
+M,PixelTestResult,,,,D21964,count=0C thr=09
+W,A005,A0,0A,4BF1,D2199E,
+W,A000,03,0A,4BFD,D219BC,
+M,PixelTest,,,,D31D6E,thr=09 ptr=A002
+M,PixelTestResult,,,,D31E64,count=00 thr=09
+W,A005,90,0A,4C25,D31EBA,
+W,A000,03,0A,4BFD,D31EE2,
+M,PixelTest,,,,D42294,thr=09 ptr=A002
+M,PixelTestResult,,,,D4238A,count=0C thr=09
+W,A005,88,0A,4C25,D423E4,
+W,A000,03,0A,4BFD,D4240C,
+M,PixelTest,,,,D527BE,thr=09 ptr=A002
+M,PixelTestResult,,,,D528B4,count=0C thr=09
+W,A005,84,0A,4C25,D5290E,
+W,A000,03,0A,4BFD,D52936,
+M,PixelTest,,,,D62CE8,thr=09 ptr=A002
+M,PixelTestResult,,,,D62DDE,count=00 thr=09
+W,A005,86,0A,4C25,D62E34,
+W,A000,03,0A,4BFD,D62E5C,
+M,PixelTest,,,,D7320E,thr=09 ptr=A002
+M,PixelTestResult,,,,D73304,count=0C thr=09
+W,A005,85,0A,4C25,D7335E,
+W,A000,03,0A,4BFD,D73386,
+M,PixelTest,,,,D83738,thr=09 ptr=A002
+M,PixelTestResult,,,,D8382E,count=0C thr=09
+W,A005,85,0A,4C25,D83888,
+W,A006,7A,0A,47C0,D838E4,
+W,A001,25,0A,47CC,D83D12,
+W,A004,23,0A,47D4,D83D26,
+M,SAR,,,,D83D3C,
+W,A005,BF,0A,4B77,D83D62,
+W,A000,03,0A,4B7F,D83D76,
+M,PixelTest,,,,D94128,thr=09 ptr=A002
+M,PixelTestResult,,,,D9421E,count=00 thr=09
+W,A005,9F,0A,4BBA,D94266,
+W,A000,03,0A,4BC2,D9427A,
+M,PixelTest,,,,DA462C,thr=09 ptr=A002
+M,PixelTestResult,,,,DA4722,count=0C thr=09
+W,A005,A0,0A,4BF1,DA475C,
+W,A000,03,0A,4BFD,DA477A,
+M,PixelTest,,,,DB4B2C,thr=09 ptr=A002
+M,PixelTestResult,,,,DB4C22,count=0C thr=09
+W,A005,B0,0A,4C25,DB4C7C,
+W,A000,03,0A,4BFD,DB4CA4,
+M,PixelTest,,,,DC5056,thr=09 ptr=A002
+M,PixelTestResult,,,,DC514C,count=00 thr=09
+W,A005,A8,0A,4C25,DC51A2,
+W,A000,03,0A,4BFD,DC51CA,
+M,PixelTest,,,,DD557C,thr=09 ptr=A002
+M,PixelTestResult,,,,DD5672,count=00 thr=09
+W,A005,A4,0A,4C25,DD56C8,
+W,A000,03,0A,4BFD,DD56F0,
+M,PixelTest,,,,DE5AA2,thr=09 ptr=A002
+M,PixelTestResult,,,,DE5B98,count=0C thr=09
+W,A005,A6,0A,4C25,DE5BF2,
+W,A000,03,0A,4BFD,DE5C1A,
+M,PixelTest,,,,DF5FCC,thr=09 ptr=A002
+M,PixelTestResult,,,,DF60C2,count=00 thr=09
+W,A005,A5,0A,4C25,DF6118,
+W,A000,03,0A,4BFD,DF6140,
+M,PixelTest,,,,E064F2,thr=09 ptr=A002
+M,PixelTestResult,,,,E065E8,count=00 thr=09
+W,A005,A4,0A,4C25,E0663E,
+W,A006,78,0A,47F7,E0669A,
+W,A001,28,0A,4802,E06AC4,
+W,A004,23,0A,480A,E06AD8,
+M,SAR,,,,E06AEE,
+W,A005,BF,0A,4B77,E06B14,
+W,A000,03,0A,4B7F,E06B28,
+M,PixelTest,,,,E16EDA,thr=09 ptr=A002
+M,PixelTestResult,,,,E16FD0,count=00 thr=09
+W,A005,9F,0A,4BBA,E17018,
+W,A000,03,0A,4BC2,E1702C,
+M,PixelTest,,,,E273DE,thr=09 ptr=A002
+M,PixelTestResult,,,,E274D4,count=0C thr=09
+W,A005,A0,0A,4BF1,E2750E,
+W,A000,03,0A,4BFD,E2752C,
+M,PixelTest,,,,E378DE,thr=09 ptr=A002
+M,PixelTestResult,,,,E379D4,count=0C thr=09
+W,A005,B0,0A,4C25,E37A2E,
+W,A000,03,0A,4BFD,E37A56,
+M,PixelTest,,,,E47E08,thr=09 ptr=A002
+M,PixelTestResult,,,,E47EFE,count=00 thr=09
+W,A005,A8,0A,4C25,E47F54,
+W,A000,03,0A,4BFD,E47F7C,
+M,PixelTest,,,,E5832E,thr=09 ptr=A002
+M,PixelTestResult,,,,E58424,count=0C thr=09
+W,A005,AC,0A,4C25,E5847E,
+W,A000,03,0A,4BFD,E584A6,
+M,PixelTest,,,,E68858,thr=09 ptr=A002
+M,PixelTestResult,,,,E6894E,count=0C thr=09
+W,A005,AE,0A,4C25,E689A8,
+W,A000,03,0A,4BFD,E689D0,
+M,PixelTest,,,,E78D82,thr=09 ptr=A002
+M,PixelTestResult,,,,E78E78,count=0C thr=09
+W,A005,AF,0A,4C25,E78ED2,
+W,A000,03,0A,4BFD,E78EFA,
+M,PixelTest,,,,E892AC,thr=09 ptr=A002
+M,PixelTestResult,,,,E893A2,count=00 thr=09
+W,A005,AE,0A,4C25,E893F8,
+W,A006,6A,0A,482D,E89454,
+W,A001,0A,0A,4836,E8987A,
+W,A004,03,0A,483E,E8988E,
+M,SAR,,,,E898A4,
+W,A005,BF,0A,4B77,E898CA,
+W,A000,03,0A,4B7F,E898DE,
+M,PixelTest,,,,E99C90,thr=09 ptr=A002
+M,PixelTestResult,,,,E99D86,count=00 thr=09
+W,A005,9F,0A,4BBA,E99DCE,
+W,A000,03,0A,4BC2,E99DE2,
+M,PixelTest,,,,EAA194,thr=09 ptr=A002
+M,PixelTestResult,,,,EAA28A,count=0C thr=09
+W,A005,A0,0A,4BF1,EAA2C4,
+W,A000,03,0A,4BFD,EAA2E2,
+M,PixelTest,,,,EBA694,thr=09 ptr=A002
+M,PixelTestResult,,,,EBA78A,count=0C thr=09
+W,A005,B0,0A,4C25,EBA7E4,
+W,A000,03,0A,4BFD,EBA80C,
+M,PixelTest,,,,ECABBE,thr=09 ptr=A002
+M,PixelTestResult,,,,ECACB4,count=0C thr=09
+W,A005,B8,0A,4C25,ECAD0E,
+W,A000,03,0A,4BFD,ECAD36,
+M,PixelTest,,,,EDB0E8,thr=09 ptr=A002
+M,PixelTestResult,,,,EDB1DE,count=00 thr=09
+W,A005,B4,0A,4C25,EDB234,
+W,A000,03,0A,4BFD,EDB25C,
+M,PixelTest,,,,EEB60E,thr=09 ptr=A002
+M,PixelTestResult,,,,EEB704,count=00 thr=09
+W,A005,B2,0A,4C25,EEB75A,
+W,A000,03,0A,4BFD,EEB782,
+M,PixelTest,,,,EFBB34,thr=09 ptr=A002
+M,PixelTestResult,,,,EFBC2A,count=0C thr=09
+W,A005,B3,0A,4C25,EFBC84,
+W,A000,03,0A,4BFD,EFBCAC,
+M,PixelTest,,,,F0C05E,thr=09 ptr=A002
+M,PixelTestResult,,,,F0C154,count=0C thr=09
+W,A005,B3,0A,4C25,F0C1AE,
+M,BootPing2,,,,F0C2A6,
+M,LiveInit,,,,F0C2B2,
+M,ExposureBandSelect,,,,F0C2BE,
+W,A001,00,0A,486A,F0C2EE,
+W,A002,00,0A,486E,F0C2F8,
+W,A003,10,0A,4873,F0C304,
+W,A004,05,0A,4878,F0C310,
+W,A005,80,0A,487D,F0C31C,
+W,A006,D5,0A,488B,F0C338,
+M,SAR,,,,F0C760,
+W,A005,BF,0A,4B77,F0C786,
+W,A000,03,0A,4B7F,F0C79A,
+M,PixelTest,,,,F1CB4C,thr=09 ptr=A002
+M,PixelTestResult,,,,F1CC42,count=0C thr=09
+W,A004,04,0A,4BA1,F1CC92,
+W,A000,03,0A,4B7F,F1CCC0,
+M,PixelTest,,,,F2D072,thr=09 ptr=A002
+M,PixelTestResult,,,,F2D168,count=0C thr=09
+W,A004,05,0A,4BA1,F2D1B8,
+W,A000,03,0A,4B7F,F2D1E6,
+M,PixelTest,,,,F3D598,thr=09 ptr=A002
+M,PixelTestResult,,,,F3D68E,count=0C thr=09
+W,A004,06,0A,4BA1,F3D6DE,
+W,A000,03,0A,4B7F,F3D70C,
+M,PixelTest,,,,F4DABE,thr=09 ptr=A002
+M,PixelTestResult,,,,F4DBB4,count=00 thr=09
+W,A005,A0,0A,4BF1,F4DBFE,
+W,A000,03,0A,4BFD,F4DC1C,
+M,PixelTest,,,,F5DFCE,thr=09 ptr=A002
+M,PixelTestResult,,,,F5E0C4,count=0C thr=09
+W,A005,B0,0A,4C25,F5E11E,
+W,A000,03,0A,4BFD,F5E146,
+M,PixelTest,,,,F6E4F8,thr=09 ptr=A002
+M,PixelTestResult,,,,F6E5EE,count=00 thr=09
+W,A005,A8,0A,4C25,F6E644,
+W,A000,03,0A,4BFD,F6E66C,
+M,PixelTest,,,,F7EA1E,thr=09 ptr=A002
+M,PixelTestResult,,,,F7EB14,count=00 thr=09
+W,A005,A4,0A,4C25,F7EB6A,
+W,A000,03,0A,4BFD,F7EB92,
+M,PixelTest,,,,F8EF44,thr=09 ptr=A002
+M,PixelTestResult,,,,F8F03A,count=00 thr=09
+W,A005,A2,0A,4C25,F8F090,
+W,A000,03,0A,4BFD,F8F0B8,
+M,PixelTest,,,,F9F46A,thr=09 ptr=A002
+M,PixelTestResult,,,,F9F560,count=00 thr=09
+W,A005,A1,0A,4C25,F9F5B6,
+W,A000,03,0A,4BFD,F9F5DE,
+M,PixelTest,,,,FAF990,thr=09 ptr=A002
+M,PixelTestResult,,,,FAFA86,count=00 thr=09
+W,A005,A0,0A,4C25,FAFADC,
+W,A005,20,0A,489A,FAFB0A,
+W,A006,80,0A,48A8,FAFB26,
+W,A000,03,0A,48B9,FAFF60,
+M,PixelTest,,,,FC0312,thr=09 ptr=A002
+M,PixelTestResult,,,,FC0408,count=00 thr=09
+W,A001,01,0A,486A,FC0464,
+W,A002,00,0A,486E,FC046E,
+W,A003,10,0A,4873,FC047A,
+W,A004,05,0A,4878,FC0486,
+W,A005,80,0A,487D,FC0492,
+W,A006,D5,0A,488B,FC04AE,
+M,SAR,,,,FC08D6,
+W,A005,BF,0A,4B77,FC08FC,
+W,A000,03,0A,4B7F,FC0910,
+M,PixelTest,,,,FD0CC2,thr=09 ptr=A002
+M,PixelTestResult,,,,FD0DB8,count=0C thr=09
+W,A004,07,0A,4BA1,FD0E08,
+W,A005,A0,0A,4BF1,FD0E32,
+W,A000,03,0A,4BFD,FD0E50,
+M,PixelTest,,,,FE1202,thr=09 ptr=A002
+M,PixelTestResult,,,,FE12F8,count=00 thr=09
+W,A005,90,0A,4C25,FE134E,
+W,A000,03,0A,4BFD,FE1376,
+M,PixelTest,,,,FF1728,thr=09 ptr=A002
+M,PixelTestResult,,,,FF181E,count=00 thr=09
+W,A005,98,0A,4C25,FF1874,
+W,A000,03,0A,4BFD,FF189C,
+M,PixelTest,,,,1001C4E,thr=09 ptr=A002
+M,PixelTestResult,,,,1001D44,count=00 thr=09
+W,A005,9C,0A,4C25,1001D9A,
+W,A000,03,0A,4BFD,1001DC2,
+M,PixelTest,,,,1012174,thr=09 ptr=A002
+M,PixelTestResult,,,,101226A,count=00 thr=09
+W,A005,9E,0A,4C25,10122C0,
+W,A000,03,0A,4BFD,10122E8,
+M,PixelTest,,,,102269A,thr=09 ptr=A002
+M,PixelTestResult,,,,1022790,count=00 thr=09
+W,A005,9F,0A,4C25,10227E6,
+W,A000,03,0A,4BFD,102280E,
+M,PixelTest,,,,1032BC0,thr=09 ptr=A002
+M,PixelTestResult,,,,1032CB6,count=00 thr=09
+W,A005,9F,0A,4C25,1032D0C,
+W,A005,1F,0A,489A,1032D3A,
+W,A006,80,0A,48A8,1032D56,
+W,A000,03,0A,48B9,1033190,
+M,PixelTest,,,,1043542,thr=09 ptr=A002
+M,PixelTestResult,,,,1043638,count=00 thr=09
+W,A001,02,0A,486A,1043694,
+W,A002,00,0A,486E,104369E,
+W,A003,10,0A,4873,10436AA,
+W,A004,05,0A,4878,10436B6,
+W,A005,80,0A,487D,10436C2,
+W,A006,D5,0A,488B,10436DE,
+M,SAR,,,,1043B06,
+W,A005,BF,0A,4B77,1043B2C,
+W,A000,03,0A,4B7F,1043B40,
+M,PixelTest,,,,1053EF2,thr=09 ptr=A002
+M,PixelTestResult,,,,1053FE8,count=0C thr=09
+W,A004,08,0A,4BA1,1054038,
+W,A000,03,0A,4B7F,1054066,
+M,PixelTest,,,,1064418,thr=09 ptr=A002
+M,PixelTestResult,,,,106450E,count=0C thr=09
+W,A004,09,0A,4BA1,106455E,
+W,A000,03,0A,4B7F,106458C,
+M,PixelTest,,,,107493E,thr=09 ptr=A002
+M,PixelTestResult,,,,1074A34,count=0C thr=09
+W,A004,0A,0A,4BA1,1074A84,
+W,A000,03,0A,4B7F,1074AB2,
+M,PixelTest,,,,1084E64,thr=09 ptr=A002
+M,PixelTestResult,,,,1084F5A,count=0C thr=09
+W,A004,0B,0A,4BA1,1084FAA,
+W,A000,03,0A,4B7F,1084FD8,
+M,PixelTest,,,,109538A,thr=09 ptr=A002
+M,PixelTestResult,,,,1095480,count=0C thr=09
+W,A004,0C,0A,4BA1,10954D0,
+W,A000,03,0A,4B7F,10954FE,
+M,PixelTest,,,,10A58B0,thr=09 ptr=A002
+M,PixelTestResult,,,,10A59A6,count=0C thr=09
+W,A004,0D,0A,4BA1,10A59F6,
+W,A000,03,0A,4B7F,10A5A24,
+M,PixelTest,,,,10B5DD6,thr=09 ptr=A002
+M,PixelTestResult,,,,10B5ECC,count=0C thr=09
+W,A004,0E,0A,4BA1,10B5F1C,
+W,A000,03,0A,4B7F,10B5F4A,
+M,PixelTest,,,,10C62FC,thr=09 ptr=A002
+M,PixelTestResult,,,,10C63F2,count=0C thr=09
+W,A004,0F,0A,4BA1,10C6442,
+W,A005,A0,0A,4BF1,10C646C,
+W,A000,03,0A,4BFD,10C648A,
+M,PixelTest,,,,10D683C,thr=09 ptr=A002
+M,PixelTestResult,,,,10D6932,count=0C thr=09
+W,A005,B0,0A,4C25,10D698C,
+W,A000,03,0A,4BFD,10D69B4,
+M,PixelTest,,,,10E6D66,thr=09 ptr=A002
+M,PixelTestResult,,,,10E6E5C,count=0C thr=09
+W,A005,B8,0A,4C25,10E6EB6,
+W,A000,03,0A,4BFD,10E6EDE,
+M,PixelTest,,,,10F7290,thr=09 ptr=A002
+M,PixelTestResult,,,,10F7386,count=0C thr=09
+W,A005,BC,0A,4C25,10F73E0,
+W,A000,03,0A,4BFD,10F7408,
+M,PixelTest,,,,11077BA,thr=09 ptr=A002
+M,PixelTestResult,,,,11078B0,count=0C thr=09
+W,A005,BE,0A,4C25,110790A,
+W,A000,03,0A,4BFD,1107932,
+M,PixelTest,,,,1117CE4,thr=09 ptr=A002
+M,PixelTestResult,,,,1117DDA,count=0C thr=09
+W,A005,BF,0A,4C25,1117E34,
+W,A000,03,0A,4BFD,1117E5C,
+M,PixelTest,,,,112820E,thr=09 ptr=A002
+M,PixelTestResult,,,,1128304,count=0C thr=09
+W,A005,BF,0A,4C25,112835E,
+W,A005,3F,0A,489A,112838C,
+W,A006,80,0A,48A8,11283A8,
+W,A000,03,0A,48B9,11287E2,
+M,PixelTest,,,,1138B94,thr=09 ptr=A002
+M,PixelTestResult,,,,1138C8A,count=00 thr=09
+W,A001,E5,0A,50BF,1138D6C,
+W,A002,10,0A,50C7,1138D80,
+W,A003,00,0A,50CE,1138D92,
+W,A004,03,0A,50D7,1138DAA,
+W,A005,A4,0A,50E2,1138DC6,
+W,A006,8C,0A,443F,1138F4C,
+W,A006,8C,0A,443F,34EDFDA,
+W,A000,03,06,5F7C,34EE348,
+W,A000,03,06,5FAB,352AAF8,
+M,MainDispatch,,,,355ADB0,
+M,Level,,,,355FAFA,level=1D d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,355FB1C,level=1D shift=06 exp=1000
+M,ExposureNew,,,,355FBF2,exp=0FC0
+W,A002,0F,0A,42B0,355FC64,
+W,A003,C0,0A,42B6,355FC74,
+W,A000,03,06,5FAB,356F438,
+M,MainDispatch,,,,359EEEC,
+M,Level,,,,35A3C36,level=1D d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,35A3C58,level=1D shift=06 exp=0FC0
+M,ExposureNew,,,,35A3D2E,exp=0F81
+W,A002,0F,0A,42B0,35A3DA0,
+W,A003,81,0A,42B6,35A3DB0,
+W,A000,03,06,5FAB,35B3D78,
+M,MainDispatch,,,,35E3124,
+M,Level,,,,35E7E6E,level=1D d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,35E7E90,level=1D shift=06 exp=0F81
+M,ExposureNew,,,,35E7F66,exp=0F43
+W,A002,0F,0A,42B0,35E7FD8,
+W,A003,43,0A,42B6,35E7FE8,
+W,A000,03,06,5FAB,35F86B8,
+M,MainDispatch,,,,36271D4,
+M,Level,,,,362BFCC,level=1C d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,362BFEE,level=1C shift=06 exp=0F43
+M,ExposureNew,,,,362C0C4,exp=0F06
+W,A002,0F,0A,42B0,362C136,
+W,A003,06,0A,42B6,362C146,
+W,A000,03,06,5FAB,363CFF8,
+M,MainDispatch,,,,366B36A,
+M,Level,,,,367013C,level=1B d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,367015E,level=1B shift=05 exp=0F06
+M,ExposureNew,,,,367021C,exp=0E8E
+W,A002,0E,0A,42B0,367028E,
+W,A003,8E,0A,42B6,367029E,
+W,A000,03,06,5FAB,3681938,
+M,MainDispatch,,,,36AEDB0,
+M,Level,,,,36B350C,level=1B d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,36B352E,level=1B shift=05 exp=0E8E
+M,ExposureNew,,,,36B35EC,exp=0E1A
+W,A002,0E,0A,42B0,36B365E,
+W,A003,1A,0A,42B6,36B366E,
+W,A000,03,06,5FAB,36C6278,
+M,MainDispatch,,,,36F2874,
+M,Level,,,,36F6FAA,level=1A d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,36F6FCC,level=1A shift=06 exp=0E1A
+M,ExposureNew,,,,36F70A2,exp=0DE2
+W,A002,0D,0A,42B0,36F7114,
+W,A003,E2,0A,42B6,36F7124,
+W,A000,03,06,5FAB,3702290,
+M,MainDispatch,,,,372E184,
+M,Level,,,,3732894,level=19 d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,37328B6,level=19 shift=05 exp=0DE2
+M,ExposureNew,,,,3732974,exp=0D73
+W,A002,0D,0A,42B0,37329E6,
+W,A003,73,0A,42B6,37329F6,
+W,A000,03,06,5FAB,373E2A8,
+M,MainDispatch,,,,37693C2,
+M,Level,,,,376DAF8,level=1A d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,376DB1A,level=1A shift=06 exp=0D73
+M,ExposureNew,,,,376DBF0,exp=0D3E
+W,A002,0D,0A,42B0,376DC62,
+W,A003,3E,0A,42B6,376DC72,
+W,A000,03,06,5FAB,377A2C0,
+M,MainDispatch,,,,37A4D2C,
+M,Level,,,,37A943C,level=19 d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,37A945E,level=19 shift=05 exp=0D3E
+M,ExposureNew,,,,37A951C,exp=0CD5
+W,A002,0C,0A,42B0,37A958E,
+W,A003,D5,0A,42B6,37A959E,
+W,A000,03,06,5FAB,37B62D8,
+M,MainDispatch,,,,37E0696,
+M,Level,,,,37E4CF8,level=1A d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,37E4D1A,level=1A shift=06 exp=0CD5
+M,ExposureNew,,,,37E4DF0,exp=0CA2
+W,A002,0C,0A,42B0,37E4E62,
+W,A003,A2,0A,42B6,37E4E72,
+W,A000,03,06,5FAB,37F22F0,
+M,MainDispatch,,,,381B9DC,
+M,Level,,,,38206AA,level=1A d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,38206CC,level=1A shift=06 exp=0CA2
+M,ExposureNew,,,,38207A2,exp=0C70
+W,A002,0C,0A,42B0,3820814,
+W,A003,70,0A,42B6,3820824,
+W,A000,03,06,5FAB,382E308,
+M,MainDispatch,,,,38573C4,
+M,Level,,,,385C06C,level=19 d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,385C08E,level=19 shift=05 exp=0C70
+M,ExposureNew,,,,385C14C,exp=0C0D
+W,A002,0C,0A,42B0,385C1BE,
+W,A003,0D,0A,42B6,385C1CE,
+W,A000,03,06,5FAB,386A320,
+M,MainDispatch,,,,389277C,
+M,Level,,,,3897424,level=19 d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,3897446,level=19 shift=05 exp=0C0D
+M,ExposureNew,,,,3897504,exp=0BAD
+W,A002,0B,0A,42B0,3897576,
+W,A003,AD,0A,42B6,3897586,
+W,A000,03,06,5FAB,38A6338,
+M,MainDispatch,,,,38CDB8E,
+M,Level,,,,38D285C,level=1A d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,38D287E,level=1A shift=06 exp=0BAD
+M,ExposureNew,,,,38D2954,exp=0B7F
+W,A002,0B,0A,42B0,38D29C6,
+W,A003,7F,0A,42B6,38D29D6,
+W,A000,03,06,5FAB,38E2350,
+M,MainDispatch,,,,39095E2,
+M,Level,,,,390E2D6,level=1B d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,390E2F8,level=1B shift=05 exp=0B7F
+M,ExposureNew,,,,390E3B6,exp=0B24
+W,A002,0B,0A,42B0,390E428,
+W,A003,24,0A,42B6,390E438,
+W,A000,03,06,5FAB,391E368,
+M,MainDispatch,,,,3944B6E,
+M,Level,,,,3949892,level=1C d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,39498B4,level=1C shift=06 exp=0B24
+M,ExposureNew,,,,394998A,exp=0AF8
+W,A002,0A,0A,42B0,39499FC,
+W,A003,F8,0A,42B6,3949A0C,
+W,A000,03,06,5FAB,395A380,
+M,MainDispatch,,,,3980536,
+M,Level,,,,398532E,level=1C d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,3985350,level=1C shift=06 exp=0AF8
+M,ExposureNew,,,,3985426,exp=0ACD
+W,A002,0A,0A,42B0,3985498,
+W,A003,CD,0A,42B6,39854A8,
+W,A000,03,06,5FAB,3996398,
+M,MainDispatch,,,,39BBFE4,
+M,Level,,,,39C0E02,level=1D d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,39C0E24,level=1D shift=06 exp=0ACD
+M,ExposureNew,,,,39C0EFA,exp=0AA2
+W,A002,0A,0A,42B0,39C0F6C,
+W,A003,A2,0A,42B6,39C0F7C,
+W,A000,03,06,5FAB,39D23B0,
+M,MainDispatch,,,,39F7AA4,
+M,Level,,,,39FC8E8,level=1E d59a=54 d59b=08 band=05
+M,ShiftLoaded,,,,39FC90A,level=1E shift=06 exp=0AA2
+M,ExposureNew,,,,39FC9E0,exp=0A78
+W,A002,0A,0A,42B0,39FCA52,
+W,A003,78,0A,42B6,39FCA62,
+W,A000,03,06,5FAB,3A0E3D6,
+M,MainDispatch,,,,3A337CA,
+M,Level,,,,3A386DA,level=1B d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3A386FC,level=1B shift=05 exp=0A78
+M,ExposureNew,,,,3A387BA,exp=0A25
+W,A002,0A,0A,42B0,3A3882C,
+W,A003,25,0A,42B6,3A3883C,
+W,A000,03,06,5FAB,3A4A4F0,
+M,MainDispatch,,,,3A6F886,
+M,Level,,,,3A74736,level=1D d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3A74758,level=1D shift=06 exp=0A25
+M,ExposureNew,,,,3A7482E,exp=09FD
+W,A002,09,0A,42B0,3A748A0,
+W,A003,FD,0A,42B6,3A748B0,
+W,A000,03,06,5FAB,3A86508,
+M,MainDispatch,,,,3AAB898,
+M,Level,,,,3AB0716,level=1F d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3AB0738,level=1F shift=07 exp=09FD
+M,ExposureNew,,,,3AB0826,exp=09EA
+W,A002,09,0A,42B0,3AB0898,
+W,A003,EA,0A,42B6,3AB08A8,
+W,A000,03,06,5FAB,3AC2410,
+M,MainDispatch,,,,3AE77CA,
+M,Level,,,,3AEC678,level=20 d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3AEC69A,level=20 shift=07 exp=09EA
+M,ExposureNew,,,,3AEC788,exp=09D7
+W,A002,09,0A,42B0,3AEC7FA,
+W,A003,D7,0A,42B6,3AEC80A,
+W,A000,03,06,5FAB,3AFE428,
+M,MainDispatch,,,,3B237E2,
+M,Level,,,,3B286DC,level=22 d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3B286FE,level=22 shift=09 exp=09D7
+M,ExposureNew,,,,3B2881C,exp=09D3
+W,A002,09,0A,42B0,3B2888E,
+W,A003,D3,0A,42B6,3B2889E,
+W,A000,03,06,5FAB,3B3A440,
+M,MainDispatch,,,,3B5F7FA,
+M,Level,,,,3B64724,level=23 d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3B64746,level=23 shift=10 exp=09D3
+M,ExposureNew,,,,3B6490C,exp=09D3
+W,A002,09,0A,42B0,3B6497E,
+W,A003,D3,0A,42B6,3B6498E,
+W,A000,03,06,5FAB,3B76458,
+M,MainDispatch,,,,3B9B812,
+M,Level,,,,3BA0762,level=24 d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3BA0784,level=24 shift=10 exp=09D3
+M,ExposureNew,,,,3BA0942,exp=09D3
+W,A002,09,0A,42B0,3BA09B4,
+W,A003,D3,0A,42B6,3BA09C4,
+W,A000,03,06,5FAB,3BB2470,
+M,MainDispatch,,,,3BD782A,
+M,Level,,,,3BDC7AA,level=25 d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3BDC7CC,level=25 shift=10 exp=09D3
+M,ExposureNew,,,,3BDC98A,exp=09D3
+W,A002,09,0A,42B0,3BDC9FC,
+W,A003,D3,0A,42B6,3BDCA0C,
+W,A000,03,06,5FAB,3BEE488,
+M,MainDispatch,,,,3C13842,
+M,Level,,,,3C187E8,level=26 d59a=60 d59b=08 band=05
+M,ShiftLoaded,,,,3C1880A,level=26 shift=09 exp=09D3
+M,ExposureNew,,,,3C18920,exp=09D7
+W,A002,09,0A,42B0,3C18992,
+W,A003,D7,0A,42B6,3C189A2,
+W,A000,03,06,5FAB,3C2A4A0,
+M,MainDispatch,,,,3C4F8A0,
+M,Level,,,,3C54908,level=23 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3C5492A,level=23 shift=10 exp=09D7
+M,ExposureNew,,,,3C54AF0,exp=09D7
+W,A002,09,0A,42B0,3C54B62,
+W,A003,D7,0A,42B6,3C54B72,
+W,A000,03,06,5FAB,3C665C8,
+M,MainDispatch,,,,3C8B95C,
+M,Level,,,,3C90948,level=24 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3C9096A,level=24 shift=10 exp=09D7
+M,ExposureNew,,,,3C90B28,exp=09D7
+W,A002,09,0A,42B0,3C90B9A,
+W,A003,D7,0A,42B6,3C90BAA,
+W,A000,03,06,5FAB,3CA25E0,
+M,MainDispatch,,,,3CC796E,
+M,Level,,,,3CCC8D2,level=24 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3CCC8F4,level=24 shift=10 exp=09D7
+M,ExposureNew,,,,3CCCAB2,exp=09D7
+W,A002,09,0A,42B0,3CCCB24,
+W,A003,D7,0A,42B6,3CCCB34,
+W,A000,03,06,5FAB,3CDE4E8,
+M,MainDispatch,,,,3D038A0,
+M,Level,,,,3D0882A,level=25 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3D0884C,level=25 shift=10 exp=09D7
+M,ExposureNew,,,,3D08A0A,exp=09D7
+W,A002,09,0A,42B0,3D08A7C,
+W,A003,D7,0A,42B6,3D08A8C,
+W,A000,03,06,5FAB,3D1A500,
+M,MainDispatch,,,,3D3F8B8,
+M,Level,,,,3D4484C,level=25 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3D4486E,level=25 shift=10 exp=09D7
+M,ExposureNew,,,,3D44A2C,exp=09D7
+W,A002,09,0A,42B0,3D44A9E,
+W,A003,D7,0A,42B6,3D44AAE,
+W,A000,03,06,5FAB,3D56518,
+M,MainDispatch,,,,3D7B8D0,
+M,Level,,,,3D8088A,level=26 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3D808AC,level=26 shift=09 exp=09D7
+M,ExposureNew,,,,3D809C2,exp=09DB
+W,A002,09,0A,42B0,3D80A34,
+W,A003,DB,0A,42B6,3D80A44,
+W,A000,03,06,5FAB,3D92530,
+M,MainDispatch,,,,3DB78E8,
+M,Level,,,,3DBC8A2,level=26 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3DBC8C4,level=26 shift=09 exp=09DB
+M,ExposureNew,,,,3DBC9DA,exp=09DF
+W,A002,09,0A,42B0,3DBCA4C,
+W,A003,DF,0A,42B6,3DBCA5C,
+W,A000,03,06,5FAB,3DCE548,
+M,MainDispatch,,,,3DF3900,
+M,Level,,,,3DF888A,level=25 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3DF88AC,level=25 shift=10 exp=09DF
+M,ExposureNew,,,,3DF8A6A,exp=09DF
+W,A002,09,0A,42B0,3DF8ADC,
+W,A003,DF,0A,42B6,3DF8AEC,
+W,A000,03,06,5FAB,3E0A560,
+M,MainDispatch,,,,3E2F918,
+M,Level,,,,3E348D2,level=26 d59a=6C d59b=08 band=05
+M,ShiftLoaded,,,,3E348F4,level=26 shift=09 exp=09DF
+M,ExposureNew,,,,3E34A0A,exp=09E3
+W,A002,09,0A,42B0,3E34A7C,
+W,A003,E3,0A,42B6,3E34A8C,
+W,A000,03,06,5FAB,3E46578,
+M,MainDispatch,,,,3E6B982,
+M,Level,,,,3E709EA,level=22 d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3E70A0C,level=22 shift=09 exp=09E3
+M,ExposureNew,,,,3E70B2A,exp=09DF
+W,A002,09,0A,42B0,3E70B9C,
+W,A003,DF,0A,42B6,3E70BAC,
+W,A000,03,06,5FAB,3E826A0,
+M,MainDispatch,,,,3EA7A38,
+M,Level,,,,3EAC9E2,level=22 d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3EACA04,level=22 shift=09 exp=09DF
+M,ExposureNew,,,,3EACB22,exp=09DB
+W,A002,09,0A,42B0,3EACB94,
+W,A003,DB,0A,42B6,3EACBA4,
+W,A000,03,06,5FAB,3EBE6B8,
+M,MainDispatch,,,,3EE3A4A,
+M,Level,,,,3EE8962,level=22 d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3EE8984,level=22 shift=09 exp=09DB
+M,ExposureNew,,,,3EE8AA2,exp=09D7
+W,A002,09,0A,42B0,3EE8B14,
+W,A003,D7,0A,42B6,3EE8B24,
+W,A000,03,06,5FAB,3EFA5C0,
+M,MainDispatch,,,,3F1F97C,
+M,Level,,,,3F2486E,level=21 d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3F24890,level=21 shift=08 exp=09D7
+M,ExposureNew,,,,3F24996,exp=09CE
+W,A002,09,0A,42B0,3F24A08,
+W,A003,CE,0A,42B6,3F24A18,
+W,A000,03,06,5FAB,3F365D8,
+M,MainDispatch,,,,3F5B994,
+M,Level,,,,3F60886,level=21 d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3F608A8,level=21 shift=08 exp=09CE
+M,ExposureNew,,,,3F609AE,exp=09C5
+W,A002,09,0A,42B0,3F60A20,
+W,A003,C5,0A,42B6,3F60A30,
+W,A000,03,06,5FAB,3F725F0,
+M,MainDispatch,,,,3F979AC,
+M,Level,,,,3F9C878,level=20 d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3F9C89A,level=20 shift=07 exp=09C5
+M,ExposureNew,,,,3F9C988,exp=09B2
+W,A002,09,0A,42B0,3F9C9FA,
+W,A003,B2,0A,42B6,3F9CA0A,
+W,A000,03,06,5FAB,3FAE608,
+M,MainDispatch,,,,3FD39C4,
+M,Level,,,,3FD8860,level=1F d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,3FD8882,level=1F shift=07 exp=09B2
+M,ExposureNew,,,,3FD8970,exp=099F
+W,A002,09,0A,42B0,3FD89E2,
+W,A003,9F,0A,42B6,3FD89F2,
+W,A000,03,06,5FAB,3FEA620,
+M,MainDispatch,,,,400F9DC,
+M,Level,,,,4014852,level=1E d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,4014874,level=1E shift=06 exp=099F
+M,ExposureNew,,,,401494A,exp=0979
+W,A002,09,0A,42B0,40149BC,
+W,A003,79,0A,42B6,40149CC,
+W,A000,03,06,5FAB,4026638,
+M,MainDispatch,,,,404B9F4,
+M,Level,,,,405083A,level=1D d59a=78 d59b=08 band=05
+M,ShiftLoaded,,,,405085C,level=1D shift=06 exp=0979
+M,ExposureNew,,,,4050932,exp=0954
+W,A002,09,0A,42B0,40509A4,
+W,A003,54,0A,42B6,40509B4,
+W,A000,03,06,5FAB,4062650,
+M,MainDispatch,,,,4087A50,
+M,Level,,,,408C944,level=19 d59a=84 d59b=08 band=05
+M,ShiftLoaded,,,,408C966,level=19 shift=05 exp=0954
+M,ExposureNew,,,,408CA24,exp=090A
+W,A002,09,0A,42B0,408CA96,
+W,A003,0A,0A,42B6,408CAA6,
+W,A000,03,06,5FAB,409E78A,
+M,MainDispatch,,,,40C3B52,
+M,Level,,,,40C89DE,level=17 d59a=90 d59b=08 band=05
+M,ShiftLoaded,,,,40C8A00,level=17 shift=05 exp=090A
+M,ExposureNew,,,,40C8ABE,exp=08C2
+W,A002,08,0A,42B0,40C8B30,
+W,A003,C2,0A,42B6,40C8B40,
+W,A000,03,06,5FAB,40DA790,
+M,MainDispatch,,,,40FFB24,
+M,Level,,,,41048DE,level=16 d59a=90 d59b=08 band=05
+M,ShiftLoaded,,,,4104900,level=16 shift=05 exp=08C2
+M,ExposureNew,,,,41049BE,exp=087C
+W,A002,08,0A,42B0,4104A30,
+W,A003,7C,0A,42B6,4104A40,
+W,A000,03,06,5FAB,41167A8,
+M,MainDispatch,,,,413BB36,
+M,Level,,,,4140842,level=15 d59a=90 d59b=08 band=05
+M,ShiftLoaded,,,,4140864,level=15 shift=05 exp=087C
+M,ExposureNew,,,,4140922,exp=0839
+W,A002,08,0A,42B0,4140994,
+W,A003,39,0A,42B6,41409A4,
+W,A000,03,06,5FAB,41526B0,
+M,MainDispatch,,,,4177A68,
+M,Level,,,,417C0D8,level=14 d59a=90 d59b=08 band=05
+M,ShiftLoaded,,,,417C766,level=14 shift=04 exp=0839
+M,ExposureNew,,,,417C80C,exp=07B6
+W,A001,E3,0A,41C4,417C87E,
+W,A002,0B,0A,41CC,417C892,
+W,A003,00,0A,41D4,417C8A6,
+W,A004,03,0A,41DD,417C8BE,
+W,A005,85,0A,41E8,417C8DA,
+W,A006,89,0A,443F,417CA2C,
+W,A000,03,06,5FAB,418E6C8,
+M,MainDispatch,,,,41B497A,
+M,Level,,,,41B9600,level=12 d59a=90 d59b=08 band=03
+M,ShiftLoaded,,,,41B9622,level=12 shift=04 exp=0B00
+M,ExposureNew,,,,41B96C8,exp=0A50
+W,A002,0A,0A,42B0,41B9762,
+W,A003,50,0A,42B6,41B9772,
+W,A000,03,06,5FAB,41CA6E0,
+M,MainDispatch,,,,41EFA98,
+M,Level,,,,41F408C,level=11 d59a=90 d59b=08 band=03
+M,ShiftLoaded,,,,41F40AE,level=11 shift=04 exp=0A50
+M,ExposureNew,,,,41F47C0,exp=09AB
+W,A002,09,0A,42B0,41F485A,
+W,A003,AB,0A,42B6,41F486A,
+W,A000,03,06,5FAB,42066F8,
+M,MainDispatch,,,,422BAB0,
+M,Level,,,,423009A,level=11 d59a=90 d59b=08 band=03
+M,ShiftLoaded,,,,42300BC,level=11 shift=04 exp=09AB
+M,ExposureNew,,,,42307CE,exp=0911
+W,A002,09,0A,42B0,4230868,
+W,A003,11,0A,42B6,4230878,
+W,A000,03,06,5FAB,4242710,
+M,MainDispatch,,,,4267AC8,
+M,Level,,,,426C0B2,level=11 d59a=90 d59b=08 band=03
+M,ShiftLoaded,,,,426C0D4,level=11 shift=04 exp=0911
+M,ExposureNew,,,,426C7E6,exp=0880
+W,A002,08,0A,42B0,426C880,
+W,A003,80,0A,42B6,426C890,
+W,A000,03,06,5FAB,427E728,
+M,MainDispatch,,,,42A3B2A,
+M,Level,,,,42A80C8,level=0F d59a=9C d59b=08 band=03
+M,ShiftLoaded,,,,42A80EA,level=0F shift=04 exp=0880
+M,ExposureNew,,,,42A8942,exp=07F8
+W,A002,07,0A,42B0,42A89DC,
+W,A003,F8,0A,42B6,42A89EC,
+W,A000,03,06,5FAB,42BA874,
+M,MainDispatch,,,,42DFC30,
+M,Level,,,,42E4948,level=0E d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,42E496A,level=0E shift=04 exp=07F8
+M,ExposureNew,,,,42E4A10,exp=0779
+W,A002,07,0A,42B0,42E4AAA,
+W,A003,79,0A,42B6,42E4ABA,
+W,A000,03,06,5FAB,42F6868,
+M,MainDispatch,,,,431BC00,
+M,Level,,,,4320178,level=0E d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,432088E,level=0E shift=04 exp=0779
+M,ExposureNew,,,,4320934,exp=0702
+W,A002,07,0A,42B0,43209CE,
+W,A003,02,0A,42B6,43209DE,
+W,A000,03,06,5FAB,4332880,
+M,MainDispatch,,,,4357C12,
+M,Level,,,,435C18A,level=0E d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,435C1AC,level=0E shift=04 exp=0702
+M,ExposureNew,,,,435C8BE,exp=0692
+W,A002,06,0A,42B0,435C958,
+W,A003,92,0A,42B6,435C968,
+W,A000,03,06,5FAB,436E788,
+M,MainDispatch,,,,4393B44,
+M,Level,,,,43980BC,level=0E d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,43980DE,level=0E shift=04 exp=0692
+M,ExposureNew,,,,4398184,exp=0629
+W,A002,06,0A,42B0,439888A,
+W,A003,29,0A,42B6,439889A,
+W,A000,03,06,5FAB,43AA7A0,
+M,MainDispatch,,,,43CFB5C,
+M,Level,,,,43D40D4,level=0E d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,43D40F6,level=0E shift=04 exp=0629
+M,ExposureNew,,,,43D419C,exp=05C7
+W,A002,05,0A,42B0,43D48A2,
+W,A003,C7,0A,42B6,43D48B2,
+W,A000,03,06,5FAB,43E67B8,
+M,MainDispatch,,,,440BB74,
+M,Level,,,,4410112,level=0F d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,4410134,level=0F shift=04 exp=05C7
+M,ExposureNew,,,,44101DA,exp=056B
+W,A002,05,0A,42B0,44108E0,
+W,A003,6B,0A,42B6,44108F0,
+W,A000,03,06,5FAB,44227D0,
+M,MainDispatch,,,,4447B8C,
+M,Level,,,,444C134,level=0F d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,444C156,level=0F shift=04 exp=056B
+M,ExposureNew,,,,444C1FC,exp=0515
+W,A002,05,0A,42B0,444C902,
+W,A003,15,0A,42B6,444C912,
+W,A000,03,06,5FAB,445E7E8,
+M,MainDispatch,,,,4483BA4,
+M,Level,,,,448814C,level=0F d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,448816E,level=0F shift=04 exp=0515
+M,ExposureNew,,,,4488214,exp=04C4
+W,A002,04,0A,42B0,448891A,
+W,A003,C4,0A,42B6,448892A,
+W,A000,03,06,5FAB,449A800,
+M,MainDispatch,,,,44BFBBC,
+M,Level,,,,44C418A,level=10 d59a=A8 d59b=08 band=03
+M,ShiftLoaded,,,,44C41AC,level=10 shift=04 exp=04C4
+M,ExposureNew,,,,44C48CC,exp=0478
+W,A002,04,0A,42B0,44C4966,
+W,A003,78,0A,42B6,44C4976,
+W,A000,03,06,5FAB,44D683C,
+M,MainDispatch,,,,44FBC1C,
+M,Level,,,,45001C4,level=0F d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,45001E6,level=0F shift=04 exp=0478
+M,ExposureNew,,,,4500A2C,exp=0431
+W,A002,04,0A,42B0,4500AC6,
+W,A003,31,0A,42B6,4500AD6,
+W,A000,03,06,5FAB,4512940,
+M,MainDispatch,,,,4537CD6,
+M,Level,,,,453C9A2,level=10 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,453C9C4,level=10 shift=04 exp=0431
+M,ExposureNew,,,,453CA6A,exp=03EE
+W,A002,03,0A,42B0,453CB04,
+W,A003,EE,0A,42B6,453CB14,
+W,A000,03,06,5FAB,454E958,
+M,MainDispatch,,,,4573CE8,
+M,Level,,,,457892C,level=10 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,457894E,level=10 shift=04 exp=03EE
+M,ExposureNew,,,,45789F4,exp=03B0
+W,A002,03,0A,42B0,4578A8E,
+W,A003,B0,0A,42B6,4578A9E,
+W,A000,03,06,5FAB,458A860,
+M,MainDispatch,,,,45AFC1A,
+M,Level,,,,45B4222,level=11 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,45B4244,level=11 shift=04 exp=03B0
+M,ExposureNew,,,,45B4956,exp=0375
+W,A002,03,0A,42B0,45B49F0,
+W,A003,75,0A,42B6,45B4A00,
+W,A000,03,06,5FAB,45C6878,
+M,MainDispatch,,,,45EBC32,
+M,Level,,,,45F0260,level=12 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,45F0282,level=12 shift=04 exp=0375
+M,ExposureNew,,,,45F0994,exp=033E
+W,A002,03,0A,42B0,45F0A2E,
+W,A003,3E,0A,42B6,45F0A3E,
+W,A000,03,06,5FAB,4602890,
+M,MainDispatch,,,,4627C4A,
+M,Level,,,,462C282,level=12 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,462C2A4,level=12 shift=04 exp=033E
+M,ExposureNew,,,,462C9B6,exp=030B
+W,A002,03,0A,42B0,462CA50,
+W,A003,0B,0A,42B6,462CA60,
+W,A000,03,06,5FAB,463E8A8,
+M,MainDispatch,,,,4663C62,
+M,Level,,,,46682C0,level=13 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,46682E2,level=13 shift=05 exp=030B
+M,ExposureNew,,,,4668A0C,exp=02F3
+W,A002,02,0A,42B0,4668AA6,
+W,A003,F3,0A,42B6,4668AB6,
+W,A000,03,06,5FAB,467A8C0,
+M,MainDispatch,,,,469FC7A,
+M,Level,,,,46A42E2,level=13 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,46A4970,level=13 shift=05 exp=02F3
+M,ExposureNew,,,,46A4A2E,exp=02DC
+W,A002,02,0A,42B0,46A4AC8,
+W,A003,DC,0A,42B6,46A4AD8,
+W,A000,03,06,5FAB,46B68D8,
+M,MainDispatch,,,,46DBC92,
+M,Level,,,,46E098C,level=14 d59a=B4 d59b=08 band=03
+M,ShiftLoaded,,,,46E09AE,level=14 shift=04 exp=02DC
+M,ExposureNew,,,,46E0A54,exp=02AF
+W,A002,02,0A,42B0,46E0AEE,
+W,A003,AF,0A,42B6,46E0AFE,
+W,A000,03,06,5FAB,46F2910,
+M,MainDispatch,,,,4717CF4,
+M,Level,,,,471CB2C,level=14 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,471CB4E,level=14 shift=04 exp=02AF
+M,ExposureNew,,,,471CBF4,exp=0285
+W,A002,02,0A,42B0,471CC8E,
+W,A003,85,0A,42B6,471CC9E,
+W,A000,03,06,5FAB,472EA18,
+M,MainDispatch,,,,4753DB0,
+M,Level,,,,4758B62,level=15 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4758B84,level=15 shift=05 exp=0285
+M,ExposureNew,,,,4758C42,exp=0271
+W,A002,02,0A,42B0,4758CDC,
+W,A003,71,0A,42B6,4758CEC,
+W,A000,03,06,5FAB,476AA30,
+M,MainDispatch,,,,478FDC2,
+M,Level,,,,4794AF6,level=15 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4794B18,level=15 shift=05 exp=0271
+M,ExposureNew,,,,4794BD6,exp=025E
+W,A002,02,0A,42B0,4794C70,
+W,A003,5E,0A,42B6,4794C80,
+W,A000,03,06,5FAB,47A6938,
+M,MainDispatch,,,,47CBCF4,
+M,Level,,,,47D0A4E,level=16 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,47D0A70,level=16 shift=05 exp=025E
+M,ExposureNew,,,,47D0B2E,exp=024C
+W,A002,02,0A,42B0,47D0BC8,
+W,A003,4C,0A,42B6,47D0BD8,
+W,A000,03,06,5FAB,47E2950,
+M,MainDispatch,,,,4807D0C,
+M,Level,,,,480CA70,level=16 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,480CA92,level=16 shift=05 exp=024C
+M,ExposureNew,,,,480CB50,exp=023A
+W,A002,02,0A,42B0,480CBEA,
+W,A003,3A,0A,42B6,480CBFA,
+W,A000,03,06,5FAB,481E968,
+M,MainDispatch,,,,4843D24,
+M,Level,,,,4848AAE,level=17 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4848AD0,level=17 shift=05 exp=023A
+M,ExposureNew,,,,4848B8E,exp=0229
+W,A002,02,0A,42B0,4848C28,
+W,A003,29,0A,42B6,4848C38,
+W,A000,03,06,5FAB,485A980,
+M,MainDispatch,,,,487FD3C,
+M,Level,,,,4884AF6,level=18 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4884B18,level=18 shift=05 exp=0229
+M,ExposureNew,,,,4884BD6,exp=0218
+W,A002,02,0A,42B0,4884C70,
+W,A003,18,0A,42B6,4884C80,
+W,A000,03,06,5FAB,4896998,
+M,MainDispatch,,,,48BBD54,
+M,Level,,,,48C0B34,level=19 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,48C0B56,level=19 shift=05 exp=0218
+M,ExposureNew,,,,48C0C14,exp=0208
+W,A002,02,0A,42B0,48C0CAE,
+W,A003,08,0A,42B6,48C0CBE,
+W,A000,03,06,5FAB,48D29B0,
+M,MainDispatch,,,,48F7D6C,
+M,Level,,,,48FCB56,level=19 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,48FCB78,level=19 shift=05 exp=0208
+M,ExposureNew,,,,48FCC36,exp=01F8
+W,A002,01,0A,42B0,48FCCD0,
+W,A003,F8,0A,42B6,48FCCE0,
+W,A000,03,06,5FAB,490E9D6,
+M,MainDispatch,,,,4933D90,
+M,Level,,,,4938BA0,level=1A d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4938BC2,level=1A shift=06 exp=01F8
+M,ExposureNew,,,,4938C98,exp=01F1
+W,A002,01,0A,42B0,4938D32,
+W,A003,F1,0A,42B6,4938D42,
+W,A000,03,06,5FAB,494A9E0,
+M,MainDispatch,,,,496FD9C,
+M,Level,,,,4974BAC,level=1A d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4974BCE,level=1A shift=06 exp=01F1
+M,ExposureNew,,,,4974CA4,exp=01EA
+W,A002,01,0A,42B0,4974D3E,
+W,A003,EA,0A,42B6,4974D4E,
+W,A000,03,06,5FAB,49869F8,
+M,MainDispatch,,,,49ABDB4,
+M,Level,,,,49B0BF4,level=1B d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,49B0C16,level=1B shift=05 exp=01EA
+M,ExposureNew,,,,49B0CD4,exp=01DB
+W,A002,01,0A,42B0,49B0D6E,
+W,A003,DB,0A,42B6,49B0D7E,
+W,A000,03,06,5FAB,49C2A10,
+M,MainDispatch,,,,49E7DCC,
+M,Level,,,,49ECC0C,level=1B d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,49ECC2E,level=1B shift=05 exp=01DB
+M,ExposureNew,,,,49ECCEC,exp=01CD
+W,A002,01,0A,42B0,49ECD86,
+W,A003,CD,0A,42B6,49ECD96,
+W,A000,03,06,5FAB,49FEA28,
+M,MainDispatch,,,,4A23DE4,
+M,Level,,,,4A28C54,level=1C d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4A28C76,level=1C shift=06 exp=01CD
+M,ExposureNew,,,,4A28D4C,exp=01C6
+W,A002,01,0A,42B0,4A28DE6,
+W,A003,C6,0A,42B6,4A28DF6,
+W,A000,03,06,5FAB,4A3AA40,
+M,MainDispatch,,,,4A5FDFC,
+M,Level,,,,4A64C6C,level=1C d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4A64C8E,level=1C shift=06 exp=01C6
+M,ExposureNew,,,,4A64D64,exp=01BF
+W,A002,01,0A,42B0,4A64DFE,
+W,A003,BF,0A,42B6,4A64E0E,
+W,A000,03,06,5FAB,4A76A58,
+M,MainDispatch,,,,4A9BE14,
+M,Level,,,,4AA0C84,level=1C d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4AA0CA6,level=1C shift=06 exp=01BF
+M,ExposureNew,,,,4AA0D7C,exp=01B9
+W,A002,01,0A,42B0,4AA0E16,
+W,A003,B9,0A,42B6,4AA0E26,
+W,A000,03,06,5FAB,4AB2A70,
+M,MainDispatch,,,,4AD7E2C,
+M,Level,,,,4ADCCC2,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4ADCCE4,level=1D shift=06 exp=01B9
+M,ExposureNew,,,,4ADCDBA,exp=01B3
+W,A002,01,0A,42B0,4ADCE54,
+W,A003,B3,0A,42B6,4ADCE64,
+W,A000,03,06,5FAB,4AEEA88,
+M,MainDispatch,,,,4B13E44,
+M,Level,,,,4B18CE4,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4B18D06,level=1D shift=06 exp=01B3
+M,ExposureNew,,,,4B18DDC,exp=01AD
+W,A002,01,0A,42B0,4B18E76,
+W,A003,AD,0A,42B6,4B18E86,
+W,A000,03,06,5FAB,4B2AAA0,
+M,MainDispatch,,,,4B4FE68,
+M,Level,,,,4B54D08,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4B54D2A,level=1D shift=06 exp=01AD
+M,ExposureNew,,,,4B54E00,exp=01A7
+W,A002,01,0A,42B0,4B54E9A,
+W,A003,A7,0A,42B6,4B54EAA,
+W,A000,03,06,5FAB,4B66AB8,
+M,MainDispatch,,,,4B8BE74,
+M,Level,,,,4B90D14,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4B90D36,level=1D shift=06 exp=01A7
+M,ExposureNew,,,,4B90E0C,exp=01A1
+W,A002,01,0A,42B0,4B90EA6,
+W,A003,A1,0A,42B6,4B90EB6,
+W,A000,03,06,5FAB,4BA2AD0,
+M,MainDispatch,,,,4BC7E8C,
+M,Level,,,,4BCCD2C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4BCCD4E,level=1D shift=06 exp=01A1
+M,ExposureNew,,,,4BCCE24,exp=019B
+W,A002,01,0A,42B0,4BCCEBE,
+W,A003,9B,0A,42B6,4BCCECE,
+W,A000,03,06,5FAB,4BDEAE8,
+M,MainDispatch,,,,4C03EA4,
+M,Level,,,,4C08D44,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4C08D66,level=1D shift=06 exp=019B
+M,ExposureNew,,,,4C08E3C,exp=0195
+W,A002,01,0A,42B0,4C08ED6,
+W,A003,95,0A,42B6,4C08EE6,
+W,A000,03,06,5FAB,4C1AB00,
+M,MainDispatch,,,,4C3FEBC,
+M,Level,,,,4C44D5C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4C44D7E,level=1D shift=06 exp=0195
+M,ExposureNew,,,,4C44E54,exp=018F
+W,A002,01,0A,42B0,4C44EEE,
+W,A003,8F,0A,42B6,4C44EFE,
+W,A000,03,06,5FAB,4C56B18,
+M,MainDispatch,,,,4C7BED4,
+M,Level,,,,4C80D9A,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4C80DBC,level=1E shift=06 exp=018F
+M,ExposureNew,,,,4C80E92,exp=0189
+W,A002,01,0A,42B0,4C80F2C,
+W,A003,89,0A,42B6,4C80F3C,
+W,A000,03,06,5FAB,4C92B30,
+M,MainDispatch,,,,4CB7EEC,
+M,Level,,,,4CBCDB2,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4CBCDD4,level=1E shift=06 exp=0189
+M,ExposureNew,,,,4CBCEAA,exp=0183
+W,A002,01,0A,42B0,4CBCF44,
+W,A003,83,0A,42B6,4CBCF54,
+W,A000,03,06,5FAB,4CCEB48,
+M,MainDispatch,,,,4CF3F04,
+M,Level,,,,4CF8DCA,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4CF8DEC,level=1E shift=06 exp=0183
+M,ExposureNew,,,,4CF8EC2,exp=017D
+W,A002,01,0A,42B0,4CF8F5C,
+W,A003,7D,0A,42B6,4CF8F6C,
+W,A000,03,06,5FAB,4D0AB60,
+M,MainDispatch,,,,4D2FF1C,
+M,Level,,,,4D34DBC,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4D34DDE,level=1D shift=06 exp=017D
+M,ExposureNew,,,,4D34EB4,exp=0178
+W,A002,01,0A,42B0,4D34F4E,
+W,A003,78,0A,42B6,4D34F5E,
+W,A000,03,06,5FAB,4D46B78,
+M,MainDispatch,,,,4D6BF34,
+M,Level,,,,4D70DFA,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4D70E1C,level=1E shift=06 exp=0178
+M,ExposureNew,,,,4D70EF2,exp=0173
+W,A002,01,0A,42B0,4D70F8C,
+W,A003,73,0A,42B6,4D70F9C,
+W,A000,03,06,5FAB,4D82B90,
+M,MainDispatch,,,,4DA7F4C,
+M,Level,,,,4DACDEC,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4DACE0E,level=1D shift=06 exp=0173
+M,ExposureNew,,,,4DACEE4,exp=016E
+W,A002,01,0A,42B0,4DACF7E,
+W,A003,6E,0A,42B6,4DACF8E,
+W,A000,03,06,5FAB,4DBEBA8,
+M,MainDispatch,,,,4DE3F64,
+M,Level,,,,4DE8E04,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4DE8E26,level=1D shift=06 exp=016E
+M,ExposureNew,,,,4DE8EFC,exp=0169
+W,A002,01,0A,42B0,4DE8F96,
+W,A003,69,0A,42B6,4DE8FA6,
+W,A000,03,06,5FAB,4DFABC0,
+M,MainDispatch,,,,4E1FF7C,
+M,Level,,,,4E24E1C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4E24E3E,level=1D shift=06 exp=0169
+M,ExposureNew,,,,4E24F14,exp=0164
+W,A002,01,0A,42B0,4E24FAE,
+W,A003,64,0A,42B6,4E24FBE,
+W,A000,03,06,5FAB,4E36BD8,
+M,MainDispatch,,,,4E5BF94,
+M,Level,,,,4E60E34,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4E60E56,level=1D shift=06 exp=0164
+M,ExposureNew,,,,4E60F2C,exp=015F
+W,A002,01,0A,42B0,4E60FC6,
+W,A003,5F,0A,42B6,4E60FD6,
+W,A000,03,06,5FAB,4E72BF0,
+M,MainDispatch,,,,4E97FAC,
+M,Level,,,,4E9CE4C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4E9CE6E,level=1D shift=06 exp=015F
+M,ExposureNew,,,,4E9CF44,exp=015A
+W,A002,01,0A,42B0,4E9CFDE,
+W,A003,5A,0A,42B6,4E9CFEE,
+W,A000,03,06,5FAB,4EAEC08,
+M,MainDispatch,,,,4ED3FC4,
+M,Level,,,,4ED8E64,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4ED8E86,level=1D shift=06 exp=015A
+M,ExposureNew,,,,4ED8F5C,exp=0155
+W,A002,01,0A,42B0,4ED8FF6,
+W,A003,55,0A,42B6,4ED9006,
+W,A000,03,06,5FAB,4EEAC20,
+M,MainDispatch,,,,4F0FFDC,
+M,Level,,,,4F14E7C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4F14E9E,level=1D shift=06 exp=0155
+M,ExposureNew,,,,4F14F74,exp=0150
+W,A002,01,0A,42B0,4F1500E,
+W,A003,50,0A,42B6,4F1501E,
+W,A000,03,06,5FAB,4F26C38,
+M,MainDispatch,,,,4F4BFF4,
+M,Level,,,,4F50E94,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4F50EB6,level=1D shift=06 exp=0150
+M,ExposureNew,,,,4F50F8C,exp=014B
+W,A002,01,0A,42B0,4F51026,
+W,A003,4B,0A,42B6,4F51036,
+W,A000,03,06,5FAB,4F62C50,
+M,MainDispatch,,,,4F8800C,
+M,Level,,,,4F8CED2,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4F8CEF4,level=1E shift=06 exp=014B
+M,ExposureNew,,,,4F8CFCA,exp=0146
+W,A002,01,0A,42B0,4F8D064,
+W,A003,46,0A,42B6,4F8D074,
+W,A000,03,06,5FAB,4F9EC68,
+M,MainDispatch,,,,4FC4024,
+M,Level,,,,4FC8EEA,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,4FC8F0C,level=1E shift=06 exp=0146
+M,ExposureNew,,,,4FC8FE2,exp=0141
+W,A002,01,0A,42B0,4FC907C,
+W,A003,41,0A,42B6,4FC908C,
+W,A000,03,06,5FAB,4FDAC80,
+M,MainDispatch,,,,500003C,
+M,Level,,,,5004F02,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5004F24,level=1E shift=06 exp=0141
+M,ExposureNew,,,,5004FFA,exp=013C
+W,A002,01,0A,42B0,5005094,
+W,A003,3C,0A,42B6,50050A4,
+W,A000,03,06,5FAB,5016C98,
+M,MainDispatch,,,,503C054,
+M,Level,,,,5040F1A,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5040F3C,level=1E shift=06 exp=013C
+M,ExposureNew,,,,5041012,exp=0138
+W,A002,01,0A,42B0,50410AC,
+W,A003,38,0A,42B6,50410BC,
+W,A000,03,06,5FAB,5052CB0,
+M,MainDispatch,,,,507806C,
+M,Level,,,,507CF3C,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,507CF5E,level=1E shift=06 exp=0138
+M,ExposureNew,,,,507D034,exp=0134
+W,A002,01,0A,42B0,507D0CE,
+W,A003,34,0A,42B6,507D0DE,
+W,A000,03,06,5FAB,508ECC8,
+M,MainDispatch,,,,50B4084,
+M,Level,,,,50B8F7A,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,50B8F9C,level=1F shift=07 exp=0134
+M,ExposureNew,,,,50B908A,exp=0132
+W,A002,01,0A,42B0,50B9124,
+W,A003,32,0A,42B6,50B9134,
+W,A000,03,06,5FAB,50CACE0,
+M,MainDispatch,,,,50F009C,
+M,Level,,,,50F4F92,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,50F4FB4,level=1F shift=07 exp=0132
+M,ExposureNew,,,,50F50A2,exp=0130
+W,A002,01,0A,42B0,50F513C,
+W,A003,30,0A,42B6,50F514C,
+W,A000,03,06,5FAB,5106CF8,
+M,MainDispatch,,,,512C0B4,
+M,Level,,,,5130FAA,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5130FCC,level=1F shift=07 exp=0130
+M,ExposureNew,,,,51310BA,exp=012E
+W,A002,01,0A,42B0,5131154,
+W,A003,2E,0A,42B6,5131164,
+W,A000,03,06,5FAB,5142D10,
+M,MainDispatch,,,,51680CC,
+M,Level,,,,516CFC2,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,516CFE4,level=1F shift=07 exp=012E
+M,ExposureNew,,,,516D0D2,exp=012C
+W,A002,01,0A,42B0,516D16C,
+W,A003,2C,0A,42B6,516D17C,
+W,A000,03,06,5FAB,517ED28,
+M,MainDispatch,,,,51A40E4,
+M,Level,,,,51A900A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,51A902C,level=20 shift=07 exp=012C
+M,ExposureNew,,,,51A911A,exp=012A
+W,A002,01,0A,42B0,51A91B4,
+W,A003,2A,0A,42B6,51A91C4,
+W,A000,03,06,5FAB,51BAD40,
+M,MainDispatch,,,,51E00FC,
+M,Level,,,,51E5022,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,51E5044,level=20 shift=07 exp=012A
+M,ExposureNew,,,,51E5132,exp=0128
+W,A002,01,0A,42B0,51E51CC,
+W,A003,28,0A,42B6,51E51DC,
+W,A000,03,06,5FAB,51F6D58,
+M,MainDispatch,,,,521C114,
+M,Level,,,,522103A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,522105C,level=20 shift=07 exp=0128
+M,ExposureNew,,,,522114A,exp=0126
+W,A002,01,0A,42B0,52211E4,
+W,A003,26,0A,42B6,52211F4,
+W,A000,03,06,5FAB,5232D70,
+M,MainDispatch,,,,525812C,
+M,Level,,,,525D052,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,525D074,level=20 shift=07 exp=0126
+M,ExposureNew,,,,525D162,exp=0124
+W,A002,01,0A,42B0,525D1FC,
+W,A003,24,0A,42B6,525D20C,
+W,A000,03,06,5FAB,526ED88,
+M,MainDispatch,,,,5294144,
+M,Level,,,,529906A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,529908C,level=20 shift=07 exp=0124
+M,ExposureNew,,,,529917A,exp=0122
+W,A002,01,0A,42B0,5299214,
+W,A003,22,0A,42B6,5299224,
+W,A000,03,06,5FAB,52AADA0,
+M,MainDispatch,,,,52D015C,
+M,Level,,,,52D5082,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,52D50A4,level=20 shift=07 exp=0122
+M,ExposureNew,,,,52D5192,exp=0120
+W,A002,01,0A,42B0,52D522C,
+W,A003,20,0A,42B6,52D523C,
+W,A000,03,06,5FAB,52E6DB8,
+M,MainDispatch,,,,530C174,
+M,Level,,,,53110C0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,53110E2,level=21 shift=08 exp=0120
+M,ExposureNew,,,,53111E8,exp=011F
+W,A002,01,0A,42B0,5311282,
+W,A003,1F,0A,42B6,5311292,
+W,A000,03,06,5FAB,5322DD0,
+M,MainDispatch,,,,534818C,
+M,Level,,,,534D0D8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,534D0FA,level=21 shift=08 exp=011F
+M,ExposureNew,,,,534D200,exp=011E
+W,A002,01,0A,42B0,534D29A,
+W,A003,1E,0A,42B6,534D2AA,
+W,A000,03,06,5FAB,535EDE8,
+M,MainDispatch,,,,53841A4,
+M,Level,,,,53890FA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,538911C,level=21 shift=08 exp=011E
+M,ExposureNew,,,,5389222,exp=011D
+W,A002,01,0A,42B0,53892BC,
+W,A003,1D,0A,42B6,53892CC,
+W,A000,03,06,5FAB,539AE00,
+M,MainDispatch,,,,53C01BC,
+M,Level,,,,53C5112,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,53C5134,level=21 shift=08 exp=011D
+M,ExposureNew,,,,53C523A,exp=011C
+W,A002,01,0A,42B0,53C52D4,
+W,A003,1C,0A,42B6,53C52E4,
+W,A000,03,06,5FAB,53D6E18,
+M,MainDispatch,,,,53FC1D4,
+M,Level,,,,540112A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,540114C,level=21 shift=08 exp=011C
+M,ExposureNew,,,,5401252,exp=011B
+W,A002,01,0A,42B0,54012EC,
+W,A003,1B,0A,42B6,54012FC,
+W,A000,03,06,5FAB,5412E30,
+M,MainDispatch,,,,54381EC,
+M,Level,,,,543D142,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,543D164,level=21 shift=08 exp=011B
+M,ExposureNew,,,,543D26A,exp=011A
+W,A002,01,0A,42B0,543D304,
+W,A003,1A,0A,42B6,543D314,
+W,A000,03,06,5FAB,544EE48,
+M,MainDispatch,,,,5474204,
+M,Level,,,,547915A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,547917C,level=21 shift=08 exp=011A
+M,ExposureNew,,,,5479282,exp=0119
+W,A002,01,0A,42B0,547931C,
+W,A003,19,0A,42B6,547932C,
+W,A000,03,06,5FAB,548AE60,
+M,MainDispatch,,,,54B021C,
+M,Level,,,,54B5198,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,54B51BA,level=22 shift=09 exp=0119
+M,ExposureNew,,,,54B52D8,exp=0119
+W,A002,01,0A,42B0,54B5372,
+W,A003,19,0A,42B6,54B5382,
+W,A000,03,06,5FAB,54C6E78,
+M,MainDispatch,,,,54EC234,
+M,Level,,,,54F11B0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,54F11D2,level=22 shift=09 exp=0119
+M,ExposureNew,,,,54F12F0,exp=0119
+W,A002,01,0A,42B0,54F138A,
+W,A003,19,0A,42B6,54F139A,
+W,A000,03,06,5FAB,5502E90,
+M,MainDispatch,,,,552824C,
+M,Level,,,,552D1C8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,552D1EA,level=22 shift=09 exp=0119
+M,ExposureNew,,,,552D308,exp=0119
+W,A002,01,0A,42B0,552D3A2,
+W,A003,19,0A,42B6,552D3B2,
+W,A000,03,06,5FAB,553EEA8,
+M,MainDispatch,,,,5564264,
+M,Level,,,,55691E0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5569202,level=22 shift=09 exp=0119
+M,ExposureNew,,,,5569320,exp=0119
+W,A002,01,0A,42B0,55693BA,
+W,A003,19,0A,42B6,55693CA,
+W,A000,03,06,5FAB,557AEC0,
+M,MainDispatch,,,,55A027C,
+M,Level,,,,55A51F8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,55A521A,level=22 shift=09 exp=0119
+M,ExposureNew,,,,55A5338,exp=0119
+W,A002,01,0A,42B0,55A53D2,
+W,A003,19,0A,42B6,55A53E2,
+W,A000,03,06,5FAB,55B6ED8,
+M,MainDispatch,,,,55DC294,
+M,Level,,,,55E121A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,55E123C,level=22 shift=09 exp=0119
+M,ExposureNew,,,,55E135A,exp=0119
+W,A002,01,0A,42B0,55E13F4,
+W,A003,19,0A,42B6,55E1404,
+W,A000,03,06,5FAB,55F2EF0,
+M,MainDispatch,,,,56182AC,
+M,Level,,,,561D232,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,561D254,level=22 shift=09 exp=0119
+M,ExposureNew,,,,561D372,exp=0119
+W,A002,01,0A,42B0,561D40C,
+W,A003,19,0A,42B6,561D41C,
+W,A000,03,06,5FAB,562EF08,
+M,MainDispatch,,,,56542C4,
+M,Level,,,,565924A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,565926C,level=22 shift=09 exp=0119
+M,ExposureNew,,,,565938A,exp=0119
+W,A002,01,0A,42B0,5659424,
+W,A003,19,0A,42B6,5659434,
+W,A000,03,06,5FAB,566AF20,
+M,MainDispatch,,,,56902DC,
+M,Level,,,,5695262,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5695284,level=22 shift=09 exp=0119
+M,ExposureNew,,,,56953A2,exp=0119
+W,A002,01,0A,42B0,569543C,
+W,A003,19,0A,42B6,569544C,
+W,A000,03,06,5FAB,56A6F38,
+M,MainDispatch,,,,56CC2F4,
+M,Level,,,,56D127A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,56D129C,level=22 shift=09 exp=0119
+M,ExposureNew,,,,56D13BA,exp=0119
+W,A002,01,0A,42B0,56D1454,
+W,A003,19,0A,42B6,56D1464,
+W,A000,03,06,5FAB,56E2F50,
+M,MainDispatch,,,,570830C,
+M,Level,,,,570D292,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,570D2B4,level=22 shift=09 exp=0119
+M,ExposureNew,,,,570D3D2,exp=0119
+W,A002,01,0A,42B0,570D46C,
+W,A003,19,0A,42B6,570D47C,
+W,A000,03,06,5FAB,571EF68,
+M,MainDispatch,,,,5744324,
+M,Level,,,,57492A0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,57492C2,level=22 shift=09 exp=0119
+M,ExposureNew,,,,57493E0,exp=0119
+W,A002,01,0A,42B0,574947A,
+W,A003,19,0A,42B6,574948A,
+W,A000,03,06,5FAB,575AF80,
+M,MainDispatch,,,,578033C,
+M,Level,,,,57852B8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,57852DA,level=22 shift=09 exp=0119
+M,ExposureNew,,,,57853F8,exp=0119
+W,A002,01,0A,42B0,5785492,
+W,A003,19,0A,42B6,57854A2,
+W,A000,03,06,5FAB,5796F98,
+M,MainDispatch,,,,57BC354,
+M,Level,,,,57C12D0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,57C12F2,level=22 shift=09 exp=0119
+M,ExposureNew,,,,57C1410,exp=0119
+W,A002,01,0A,42B0,57C14AA,
+W,A003,19,0A,42B6,57C14BA,
+W,A000,03,06,5FAB,57D2FB0,
+M,MainDispatch,,,,57F836C,
+M,Level,,,,57FD2E8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,57FD30A,level=22 shift=09 exp=0119
+M,ExposureNew,,,,57FD428,exp=0119
+W,A002,01,0A,42B0,57FD4C2,
+W,A003,19,0A,42B6,57FD4D2,
+W,A000,03,06,5FAB,580EFC8,
+M,MainDispatch,,,,5834384,
+M,Level,,,,58392DA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,58392FC,level=21 shift=08 exp=0119
+M,ExposureNew,,,,5839402,exp=0118
+W,A002,01,0A,42B0,583949C,
+W,A003,18,0A,42B6,58394AC,
+W,A000,03,06,5FAB,584AFE0,
+M,MainDispatch,,,,587039C,
+M,Level,,,,58752F2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5875314,level=21 shift=08 exp=0118
+M,ExposureNew,,,,587541A,exp=0117
+W,A002,01,0A,42B0,58754B4,
+W,A003,17,0A,42B6,58754C4,
+W,A000,03,06,5FAB,5886FF8,
+M,MainDispatch,,,,58AC3B4,
+M,Level,,,,58B130A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,58B132C,level=21 shift=08 exp=0117
+M,ExposureNew,,,,58B1432,exp=0116
+W,A002,01,0A,42B0,58B14CC,
+W,A003,16,0A,42B6,58B14DC,
+W,A000,03,06,5FAB,58C3010,
+M,MainDispatch,,,,58E83CC,
+M,Level,,,,58ED318,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,58ED33A,level=21 shift=08 exp=0116
+M,ExposureNew,,,,58ED440,exp=0115
+W,A002,01,0A,42B0,58ED4DA,
+W,A003,15,0A,42B6,58ED4EA,
+W,A000,03,06,5FAB,58FF028,
+M,MainDispatch,,,,59243E4,
+M,Level,,,,592930A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,592932C,level=20 shift=07 exp=0115
+M,ExposureNew,,,,592941A,exp=0113
+W,A002,01,0A,42B0,59294B4,
+W,A003,13,0A,42B6,59294C4,
+W,A000,03,06,5FAB,593B040,
+M,MainDispatch,,,,59603FC,
+M,Level,,,,5965322,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5965344,level=20 shift=07 exp=0113
+M,ExposureNew,,,,5965432,exp=0111
+W,A002,01,0A,42B0,59654CC,
+W,A003,11,0A,42B6,59654DC,
+W,A000,03,06,5FAB,5977058,
+M,MainDispatch,,,,599C414,
+M,Level,,,,59A133A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,59A135C,level=20 shift=07 exp=0111
+M,ExposureNew,,,,59A144A,exp=010F
+W,A002,01,0A,42B0,59A14E4,
+W,A003,0F,0A,42B6,59A14F4,
+W,A000,03,06,5FAB,59B3070,
+M,MainDispatch,,,,59D842C,
+M,Level,,,,59DD352,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,59DD374,level=20 shift=07 exp=010F
+M,ExposureNew,,,,59DD462,exp=010D
+W,A002,01,0A,42B0,59DD4FC,
+W,A003,0D,0A,42B6,59DD50C,
+W,A000,03,06,5FAB,59EF088,
+M,MainDispatch,,,,5A14444,
+M,Level,,,,5A1933A,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5A1935C,level=1F shift=07 exp=010D
+M,ExposureNew,,,,5A1944A,exp=010B
+W,A002,01,0A,42B0,5A194E4,
+W,A003,0B,0A,42B6,5A194F4,
+W,A000,03,06,5FAB,5A2B0A0,
+M,MainDispatch,,,,5A5045C,
+M,Level,,,,5A55352,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5A55374,level=1F shift=07 exp=010B
+M,ExposureNew,,,,5A55462,exp=0109
+W,A002,01,0A,42B0,5A554FC,
+W,A003,09,0A,42B6,5A5550C,
+W,A000,03,06,5FAB,5A670B8,
+M,MainDispatch,,,,5A8C474,
+M,Level,,,,5A9136A,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5A9138C,level=1F shift=07 exp=0109
+M,ExposureNew,,,,5A9147A,exp=0107
+W,A002,01,0A,42B0,5A91514,
+W,A003,07,0A,42B6,5A91524,
+W,A000,03,06,5FAB,5AA30D0,
+M,MainDispatch,,,,5AC848C,
+M,Level,,,,5ACD35C,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5ACD37E,level=1E shift=06 exp=0107
+M,ExposureNew,,,,5ACD454,exp=0103
+W,A002,01,0A,42B0,5ACD4EE,
+W,A003,03,0A,42B6,5ACD4FE,
+W,A000,03,06,5FAB,5ADF0E8,
+M,MainDispatch,,,,5B044A4,
+M,Level,,,,5B0936A,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5B0938C,level=1E shift=06 exp=0103
+M,ExposureNew,,,,5B09462,exp=00FF
+W,A002,00,0A,42B0,5B094FC,
+W,A003,FF,0A,42B6,5B0950C,
+W,A000,03,06,5FAB,5B1B100,
+M,MainDispatch,,,,5B404BC,
+M,Level,,,,5B45382,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5B453A4,level=1E shift=06 exp=00FF
+M,ExposureNew,,,,5B4547A,exp=00FC
+W,A002,00,0A,42B0,5B45514,
+W,A003,FC,0A,42B6,5B45524,
+W,A000,03,06,5FAB,5B57118,
+M,MainDispatch,,,,5B7C4D4,
+M,Level,,,,5B8139A,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5B813BC,level=1E shift=06 exp=00FC
+M,ExposureNew,,,,5B81492,exp=00F9
+W,A002,00,0A,42B0,5B8152C,
+W,A003,F9,0A,42B6,5B8153C,
+W,A000,03,06,5FAB,5B93130,
+M,MainDispatch,,,,5BB84EC,
+M,Level,,,,5BBD38C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5BBD3AE,level=1D shift=06 exp=00F9
+M,ExposureNew,,,,5BBD484,exp=00F6
+W,A002,00,0A,42B0,5BBD51E,
+W,A003,F6,0A,42B6,5BBD52E,
+W,A000,03,06,5FAB,5BCF148,
+M,MainDispatch,,,,5BF4504,
+M,Level,,,,5BF93A4,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5BF93C6,level=1D shift=06 exp=00F6
+M,ExposureNew,,,,5BF949C,exp=00F3
+W,A002,00,0A,42B0,5BF9536,
+W,A003,F3,0A,42B6,5BF9546,
+W,A000,03,06,5FAB,5C0B160,
+M,MainDispatch,,,,5C3051C,
+M,Level,,,,5C353BC,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5C353DE,level=1D shift=06 exp=00F3
+M,ExposureNew,,,,5C354B4,exp=00F0
+W,A002,00,0A,42B0,5C3554E,
+W,A003,F0,0A,42B6,5C3555E,
+W,A000,03,06,5FAB,5C47178,
+M,MainDispatch,,,,5C6C534,
+M,Level,,,,5C713CA,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5C713EC,level=1D shift=06 exp=00F0
+M,ExposureNew,,,,5C714C2,exp=00ED
+W,A002,00,0A,42B0,5C7155C,
+W,A003,ED,0A,42B6,5C7156C,
+W,A000,03,06,5FAB,5C83190,
+M,MainDispatch,,,,5CA854C,
+M,Level,,,,5CAD3E2,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5CAD404,level=1D shift=06 exp=00ED
+M,ExposureNew,,,,5CAD4DA,exp=00EA
+W,A002,00,0A,42B0,5CAD574,
+W,A003,EA,0A,42B6,5CAD584,
+W,A000,03,06,5FAB,5CBF1A8,
+M,MainDispatch,,,,5CE4564,
+M,Level,,,,5CE93FA,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5CE941C,level=1D shift=06 exp=00EA
+M,ExposureNew,,,,5CE94F2,exp=00E7
+W,A002,00,0A,42B0,5CE958C,
+W,A003,E7,0A,42B6,5CE959C,
+W,A000,03,06,5FAB,5CFB1C0,
+M,MainDispatch,,,,5D2057C,
+M,Level,,,,5D25412,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5D25434,level=1D shift=06 exp=00E7
+M,ExposureNew,,,,5D2550A,exp=00E4
+W,A002,00,0A,42B0,5D255A4,
+W,A003,E4,0A,42B6,5D255B4,
+W,A000,03,06,5FAB,5D371D8,
+M,MainDispatch,,,,5D5C594,
+M,Level,,,,5D61434,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5D61456,level=1D shift=06 exp=00E4
+M,ExposureNew,,,,5D6152C,exp=00E1
+W,A002,00,0A,42B0,5D615C6,
+W,A003,E1,0A,42B6,5D615D6,
+W,A000,03,06,5FAB,5D731F0,
+M,MainDispatch,,,,5D985AC,
+M,Level,,,,5D9D44C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5D9D46E,level=1D shift=06 exp=00E1
+M,ExposureNew,,,,5D9D544,exp=00DE
+W,A002,00,0A,42B0,5D9D5DE,
+W,A003,DE,0A,42B6,5D9D5EE,
+W,A000,03,06,5FAB,5DAF208,
+M,MainDispatch,,,,5DD45C4,
+M,Level,,,,5DD9464,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5DD9486,level=1D shift=06 exp=00DE
+M,ExposureNew,,,,5DD955C,exp=00DB
+W,A002,00,0A,42B0,5DD95F6,
+W,A003,DB,0A,42B6,5DD9606,
+W,A000,03,06,5FAB,5DEB220,
+M,MainDispatch,,,,5E105DC,
+M,Level,,,,5E1547C,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5E1549E,level=1D shift=06 exp=00DB
+M,ExposureNew,,,,5E15574,exp=00D8
+W,A002,00,0A,42B0,5E1560E,
+W,A003,D8,0A,42B6,5E1561E,
+W,A000,03,06,5FAB,5E27238,
+M,MainDispatch,,,,5E4C5F4,
+M,Level,,,,5E51494,level=1D d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5E514B6,level=1D shift=06 exp=00D8
+M,ExposureNew,,,,5E5158C,exp=00D5
+W,A002,00,0A,42B0,5E51626,
+W,A003,D5,0A,42B6,5E51636,
+W,A000,03,06,5FAB,5E63250,
+M,MainDispatch,,,,5E8860C,
+M,Level,,,,5E8D4D2,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5E8D4F4,level=1E shift=06 exp=00D5
+M,ExposureNew,,,,5E8D5CA,exp=00D2
+W,A002,00,0A,42B0,5E8D664,
+W,A003,D2,0A,42B6,5E8D674,
+W,A000,03,06,5FAB,5E9F268,
+M,MainDispatch,,,,5EC4624,
+M,Level,,,,5EC94EA,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5EC950C,level=1E shift=06 exp=00D2
+M,ExposureNew,,,,5EC95E2,exp=00CF
+W,A002,00,0A,42B0,5EC967C,
+W,A003,CF,0A,42B6,5EC968C,
+W,A000,03,06,5FAB,5EDB280,
+M,MainDispatch,,,,5F0063C,
+M,Level,,,,5F05502,level=1E d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5F05524,level=1E shift=06 exp=00CF
+M,ExposureNew,,,,5F055FA,exp=00CC
+W,A002,00,0A,42B0,5F05694,
+W,A003,CC,0A,42B6,5F056A4,
+W,A000,03,06,5FAB,5F17298,
+M,MainDispatch,,,,5F3C654,
+M,Level,,,,5F4154A,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5F4156C,level=1F shift=07 exp=00CC
+M,ExposureNew,,,,5F4165A,exp=00CB
+W,A002,00,0A,42B0,5F416F4,
+W,A003,CB,0A,42B6,5F41704,
+W,A000,03,06,5FAB,5F532B0,
+M,MainDispatch,,,,5F7866C,
+M,Level,,,,5F7D562,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5F7D584,level=1F shift=07 exp=00CB
+M,ExposureNew,,,,5F7D672,exp=00CA
+W,A002,00,0A,42B0,5F7D70C,
+W,A003,CA,0A,42B6,5F7D71C,
+W,A000,03,06,5FAB,5F8F2C8,
+M,MainDispatch,,,,5FB4684,
+M,Level,,,,5FB957A,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5FB959C,level=1F shift=07 exp=00CA
+M,ExposureNew,,,,5FB968A,exp=00C9
+W,A002,00,0A,42B0,5FB9724,
+W,A003,C9,0A,42B6,5FB9734,
+W,A000,03,06,5FAB,5FCB2E0,
+M,MainDispatch,,,,5FF069C,
+M,Level,,,,5FF5592,level=1F d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,5FF55B4,level=1F shift=07 exp=00C9
+M,ExposureNew,,,,5FF56A2,exp=00C8
+W,A002,00,0A,42B0,5FF573C,
+W,A003,C8,0A,42B6,5FF574C,
+W,A000,03,06,5FAB,60072F8,
+M,MainDispatch,,,,602C6B4,
+M,Level,,,,60315DA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,60315FC,level=20 shift=07 exp=00C8
+M,ExposureNew,,,,60316EA,exp=00C7
+W,A002,00,0A,42B0,6031784,
+W,A003,C7,0A,42B6,6031794,
+W,A000,03,06,5FAB,6043310,
+M,MainDispatch,,,,60686CC,
+M,Level,,,,606D5F2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,606D614,level=20 shift=07 exp=00C7
+M,ExposureNew,,,,606D702,exp=00C6
+W,A002,00,0A,42B0,606D79C,
+W,A003,C6,0A,42B6,606D7AC,
+W,A000,03,06,5FAB,607F328,
+M,MainDispatch,,,,60A46E4,
+M,Level,,,,60A960A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,60A962C,level=20 shift=07 exp=00C6
+M,ExposureNew,,,,60A971A,exp=00C5
+W,A002,00,0A,42B0,60A97B4,
+W,A003,C5,0A,42B6,60A97C4,
+W,A000,03,06,5FAB,60BB340,
+M,MainDispatch,,,,60E06FC,
+M,Level,,,,60E5648,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,60E566A,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,60E5770,exp=00C5
+W,A002,00,0A,42B0,60E580A,
+W,A003,C5,0A,42B6,60E581A,
+W,A000,03,06,5FAB,60F7358,
+M,MainDispatch,,,,611C714,
+M,Level,,,,6121660,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6121682,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,6121788,exp=00C5
+W,A002,00,0A,42B0,6121822,
+W,A003,C5,0A,42B6,6121832,
+W,A000,03,06,5FAB,6133370,
+M,MainDispatch,,,,615872C,
+M,Level,,,,615D682,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,615D6A4,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,615D7AA,exp=00C5
+W,A002,00,0A,42B0,615D844,
+W,A003,C5,0A,42B6,615D854,
+W,A000,03,06,5FAB,616F388,
+M,MainDispatch,,,,6194744,
+M,Level,,,,619969A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,61996BC,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,61997C2,exp=00C5
+W,A002,00,0A,42B0,619985C,
+W,A003,C5,0A,42B6,619986C,
+W,A000,03,06,5FAB,61AB3A0,
+M,MainDispatch,,,,61D075C,
+M,Level,,,,61D56B2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,61D56D4,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,61D57DA,exp=00C5
+W,A002,00,0A,42B0,61D5874,
+W,A003,C5,0A,42B6,61D5884,
+W,A000,03,06,5FAB,61E73B8,
+M,MainDispatch,,,,620C774,
+M,Level,,,,62116F0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6211712,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,6211830,exp=00C5
+W,A002,00,0A,42B0,62118CA,
+W,A003,C5,0A,42B6,62118DA,
+W,A000,03,06,5FAB,62233D0,
+M,MainDispatch,,,,624878C,
+M,Level,,,,624D708,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,624D72A,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,624D848,exp=00C5
+W,A002,00,0A,42B0,624D8E2,
+W,A003,C5,0A,42B6,624D8F2,
+W,A000,03,06,5FAB,625F3E8,
+M,MainDispatch,,,,62847A4,
+M,Level,,,,6289720,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6289742,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,6289860,exp=00C5
+W,A002,00,0A,42B0,62898FA,
+W,A003,C5,0A,42B6,628990A,
+W,A000,03,06,5FAB,629B400,
+M,MainDispatch,,,,62C07BC,
+M,Level,,,,62C5738,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,62C575A,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,62C5878,exp=00C5
+W,A002,00,0A,42B0,62C5912,
+W,A003,C5,0A,42B6,62C5922,
+W,A000,03,06,5FAB,62D7418,
+M,MainDispatch,,,,62FC7D4,
+M,Level,,,,6301750,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6301772,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,6301890,exp=00C5
+W,A002,00,0A,42B0,630192A,
+W,A003,C5,0A,42B6,630193A,
+W,A000,03,06,5FAB,6313430,
+M,MainDispatch,,,,63387EC,
+M,Level,,,,633D768,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,633D78A,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,633D8A8,exp=00C5
+W,A002,00,0A,42B0,633D942,
+W,A003,C5,0A,42B6,633D952,
+W,A000,03,06,5FAB,634F448,
+M,MainDispatch,,,,6374804,
+M,Level,,,,6379780,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,63797A2,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,63798C0,exp=00C5
+W,A002,00,0A,42B0,637995A,
+W,A003,C5,0A,42B6,637996A,
+W,A000,03,06,5FAB,638B460,
+M,MainDispatch,,,,63B081C,
+M,Level,,,,63B5798,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,63B57BA,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,63B58D8,exp=00C5
+W,A002,00,0A,42B0,63B5972,
+W,A003,C5,0A,42B6,63B5982,
+W,A000,03,06,5FAB,63C7478,
+M,MainDispatch,,,,63EC834,
+M,Level,,,,63F17B0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,63F17D2,level=22 shift=09 exp=00C5
+M,ExposureNew,,,,63F18F0,exp=00C5
+W,A002,00,0A,42B0,63F198A,
+W,A003,C5,0A,42B6,63F199A,
+W,A000,03,06,5FAB,6403490,
+M,MainDispatch,,,,642884C,
+M,Level,,,,642D7A2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,642D7C4,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,642D8CA,exp=00C5
+W,A002,00,0A,42B0,642D964,
+W,A003,C5,0A,42B6,642D974,
+W,A000,03,06,5FAB,643F4A8,
+M,MainDispatch,,,,6464864,
+M,Level,,,,64697BA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,64697DC,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,64698E2,exp=00C5
+W,A002,00,0A,42B0,646997C,
+W,A003,C5,0A,42B6,646998C,
+W,A000,03,06,5FAB,647B4C0,
+M,MainDispatch,,,,64A087C,
+M,Level,,,,64A57D2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,64A57F4,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,64A58FA,exp=00C5
+W,A002,00,0A,42B0,64A5994,
+W,A003,C5,0A,42B6,64A59A4,
+W,A000,03,06,5FAB,64B74D8,
+M,MainDispatch,,,,64DC894,
+M,Level,,,,64E17E0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,64E1802,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,64E1908,exp=00C5
+W,A002,00,0A,42B0,64E19A2,
+W,A003,C5,0A,42B6,64E19B2,
+W,A000,03,06,5FAB,64F34F0,
+M,MainDispatch,,,,65188AC,
+M,Level,,,,651D7F8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,651D81A,level=21 shift=08 exp=00C5
+M,ExposureNew,,,,651D920,exp=00C5
+W,A002,00,0A,42B0,651D9BA,
+W,A003,C5,0A,42B6,651D9CA,
+W,A000,03,06,5FAB,652F508,
+M,MainDispatch,,,,65548C4,
+M,Level,,,,65597EA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,655980C,level=20 shift=07 exp=00C5
+M,ExposureNew,,,,65598FA,exp=00C4
+W,A002,00,0A,42B0,6559994,
+W,A003,C4,0A,42B6,65599A4,
+W,A000,03,06,5FAB,656B520,
+M,MainDispatch,,,,65908DC,
+M,Level,,,,6595802,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6595824,level=20 shift=07 exp=00C4
+M,ExposureNew,,,,6595912,exp=00C3
+W,A002,00,0A,42B0,65959AC,
+W,A003,C3,0A,42B6,65959BC,
+W,A000,03,06,5FAB,65A7538,
+M,MainDispatch,,,,65CC8F4,
+M,Level,,,,65D181A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,65D183C,level=20 shift=07 exp=00C3
+M,ExposureNew,,,,65D192A,exp=00C2
+W,A002,00,0A,42B0,65D19C4,
+W,A003,C2,0A,42B6,65D19D4,
+W,A000,03,06,5FAB,65E3550,
+M,MainDispatch,,,,660890C,
+M,Level,,,,660D832,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,660D854,level=20 shift=07 exp=00C2
+M,ExposureNew,,,,660D942,exp=00C1
+W,A002,00,0A,42B0,660D9DC,
+W,A003,C1,0A,42B6,660D9EC,
+W,A000,03,06,5FAB,661F568,
+M,MainDispatch,,,,6644924,
+M,Level,,,,664984A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,664986C,level=20 shift=07 exp=00C1
+M,ExposureNew,,,,664995A,exp=00C0
+W,A002,00,0A,42B0,66499F4,
+W,A003,C0,0A,42B6,6649A04,
+W,A000,03,06,5FAB,665B580,
+M,MainDispatch,,,,668093C,
+M,Level,,,,6685862,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6685884,level=20 shift=07 exp=00C0
+M,ExposureNew,,,,6685972,exp=00BF
+W,A002,00,0A,42B0,6685A0C,
+W,A003,BF,0A,42B6,6685A1C,
+W,A000,03,06,5FAB,6697598,
+M,MainDispatch,,,,66BC954,
+M,Level,,,,66C187A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,66C189C,level=20 shift=07 exp=00BF
+M,ExposureNew,,,,66C198A,exp=00BE
+W,A002,00,0A,42B0,66C1A24,
+W,A003,BE,0A,42B6,66C1A34,
+W,A000,03,06,5FAB,66D35B0,
+M,MainDispatch,,,,66F896C,
+M,Level,,,,66FD892,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,66FD8B4,level=20 shift=07 exp=00BE
+M,ExposureNew,,,,66FD9A2,exp=00BD
+W,A002,00,0A,42B0,66FDA3C,
+W,A003,BD,0A,42B6,66FDA4C,
+W,A000,03,06,5FAB,670F5C8,
+M,MainDispatch,,,,6734984,
+M,Level,,,,67398AA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,67398CC,level=20 shift=07 exp=00BD
+M,ExposureNew,,,,67399BA,exp=00BC
+W,A002,00,0A,42B0,6739A54,
+W,A003,BC,0A,42B6,6739A64,
+W,A000,03,06,5FAB,674B5E0,
+M,MainDispatch,,,,677099C,
+M,Level,,,,67758C2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,67758E4,level=20 shift=07 exp=00BC
+M,ExposureNew,,,,67759D2,exp=00BB
+W,A002,00,0A,42B0,6775A6C,
+W,A003,BB,0A,42B6,6775A7C,
+W,A000,03,06,5FAB,67875F8,
+M,MainDispatch,,,,67AC9B4,
+M,Level,,,,67B18DA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,67B18FC,level=20 shift=07 exp=00BB
+M,ExposureNew,,,,67B19EA,exp=00BA
+W,A002,00,0A,42B0,67B1A84,
+W,A003,BA,0A,42B6,67B1A94,
+W,A000,03,06,5FAB,67C3610,
+M,MainDispatch,,,,67E89CC,
+M,Level,,,,67ED8F2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,67ED914,level=20 shift=07 exp=00BA
+M,ExposureNew,,,,67EDA02,exp=00B9
+W,A002,00,0A,42B0,67EDA9C,
+W,A003,B9,0A,42B6,67EDAAC,
+W,A000,03,06,5FAB,67FF628,
+M,MainDispatch,,,,68249E4,
+M,Level,,,,682990A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,682992C,level=20 shift=07 exp=00B9
+M,ExposureNew,,,,6829A1A,exp=00B8
+W,A002,00,0A,42B0,6829AB4,
+W,A003,B8,0A,42B6,6829AC4,
+W,A000,03,06,5FAB,683B640,
+M,MainDispatch,,,,68609FC,
+M,Level,,,,6865948,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,686596A,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,6865A70,exp=00B8
+W,A002,00,0A,42B0,6865B0A,
+W,A003,B8,0A,42B6,6865B1A,
+W,A000,03,06,5FAB,6877658,
+M,MainDispatch,,,,689CA14,
+M,Level,,,,68A1960,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,68A1982,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,68A1A88,exp=00B8
+W,A002,00,0A,42B0,68A1B22,
+W,A003,B8,0A,42B6,68A1B32,
+W,A000,03,06,5FAB,68B3670,
+M,MainDispatch,,,,68D8A2C,
+M,Level,,,,68DD978,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,68DD99A,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,68DDAA0,exp=00B8
+W,A002,00,0A,42B0,68DDB3A,
+W,A003,B8,0A,42B6,68DDB4A,
+W,A000,03,06,5FAB,68EF688,
+M,MainDispatch,,,,6914A44,
+M,Level,,,,691999A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,69199BC,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,6919AC2,exp=00B8
+W,A002,00,0A,42B0,6919B5C,
+W,A003,B8,0A,42B6,6919B6C,
+W,A000,03,06,5FAB,692B6A0,
+M,MainDispatch,,,,6950A5C,
+M,Level,,,,69559B2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,69559D4,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,6955ADA,exp=00B8
+W,A002,00,0A,42B0,6955B74,
+W,A003,B8,0A,42B6,6955B84,
+W,A000,03,06,5FAB,69676B8,
+M,MainDispatch,,,,698CA74,
+M,Level,,,,69919CA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,69919EC,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,6991AF2,exp=00B8
+W,A002,00,0A,42B0,6991B8C,
+W,A003,B8,0A,42B6,6991B9C,
+W,A000,03,06,5FAB,69A36D0,
+M,MainDispatch,,,,69C8A8C,
+M,Level,,,,69CD9E2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,69CDA04,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,69CDB0A,exp=00B8
+W,A002,00,0A,42B0,69CDBA4,
+W,A003,B8,0A,42B6,69CDBB4,
+W,A000,03,06,5FAB,69DF6E8,
+M,MainDispatch,,,,6A04AA4,
+M,Level,,,,6A099FA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6A09A1C,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,6A09B22,exp=00B8
+W,A002,00,0A,42B0,6A09BBC,
+W,A003,B8,0A,42B6,6A09BCC,
+W,A000,03,06,5FAB,6A1B700,
+M,MainDispatch,,,,6A40ABC,
+M,Level,,,,6A45A38,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6A45A5A,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6A45B78,exp=00B8
+W,A002,00,0A,42B0,6A45C12,
+W,A003,B8,0A,42B6,6A45C22,
+W,A000,03,06,5FAB,6A57718,
+M,MainDispatch,,,,6A7CAD4,
+M,Level,,,,6A81A50,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6A81A72,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6A81B90,exp=00B8
+W,A002,00,0A,42B0,6A81C2A,
+W,A003,B8,0A,42B6,6A81C3A,
+W,A000,03,06,5FAB,6A93730,
+M,MainDispatch,,,,6AB8AEC,
+M,Level,,,,6ABDA68,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6ABDA8A,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6ABDBA8,exp=00B8
+W,A002,00,0A,42B0,6ABDC42,
+W,A003,B8,0A,42B6,6ABDC52,
+W,A000,03,06,5FAB,6ACF748,
+M,MainDispatch,,,,6AF4B04,
+M,Level,,,,6AF9A80,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6AF9AA2,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6AF9BC0,exp=00B8
+W,A002,00,0A,42B0,6AF9C5A,
+W,A003,B8,0A,42B6,6AF9C6A,
+W,A000,03,06,5FAB,6B0B760,
+M,MainDispatch,,,,6B30B1C,
+M,Level,,,,6B35A98,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6B35ABA,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6B35BD8,exp=00B8
+W,A002,00,0A,42B0,6B35C72,
+W,A003,B8,0A,42B6,6B35C82,
+W,A000,03,06,5FAB,6B47778,
+M,MainDispatch,,,,6B6CB34,
+M,Level,,,,6B71AB0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6B71AD2,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6B71BF0,exp=00B8
+W,A002,00,0A,42B0,6B71C8A,
+W,A003,B8,0A,42B6,6B71C9A,
+W,A000,03,06,5FAB,6B83790,
+M,MainDispatch,,,,6BA8B4C,
+M,Level,,,,6BADAD2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6BADAF4,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6BADC12,exp=00B8
+W,A002,00,0A,42B0,6BADCAC,
+W,A003,B8,0A,42B6,6BADCBC,
+W,A000,03,06,5FAB,6BBF7A8,
+M,MainDispatch,,,,6BE4B64,
+M,Level,,,,6BE9AEA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6BE9B0C,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,6BE9C2A,exp=00B8
+W,A002,00,0A,42B0,6BE9CC4,
+W,A003,B8,0A,42B6,6BE9CD4,
+W,A000,03,06,5FAB,6BFB7C0,
+M,MainDispatch,,,,6C20B7C,
+M,Level,,,,6C25B28,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6C25B4A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6C25D10,exp=00B8
+W,A002,00,0A,42B0,6C25DAA,
+W,A003,B8,0A,42B6,6C25DBA,
+W,A000,03,06,5FAB,6C377D8,
+M,MainDispatch,,,,6C5CB94,
+M,Level,,,,6C61B40,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6C61B62,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6C61D28,exp=00B8
+W,A002,00,0A,42B0,6C61DC2,
+W,A003,B8,0A,42B6,6C61DD2,
+W,A000,03,06,5FAB,6C737F0,
+M,MainDispatch,,,,6C98BAC,
+M,Level,,,,6C9DB58,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6C9DB7A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6C9DD40,exp=00B8
+W,A002,00,0A,42B0,6C9DDDA,
+W,A003,B8,0A,42B6,6C9DDEA,
+W,A000,03,06,5FAB,6CAF808,
+M,MainDispatch,,,,6CD4BC4,
+M,Level,,,,6CD9B70,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6CD9B92,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6CD9D58,exp=00B8
+W,A002,00,0A,42B0,6CD9DF2,
+W,A003,B8,0A,42B6,6CD9E02,
+W,A000,03,06,5FAB,6CEB820,
+M,MainDispatch,,,,6D10BDC,
+M,Level,,,,6D15B88,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6D15BAA,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6D15D70,exp=00B8
+W,A002,00,0A,42B0,6D15E0A,
+W,A003,B8,0A,42B6,6D15E1A,
+W,A000,03,06,5FAB,6D27838,
+M,MainDispatch,,,,6D4CBF4,
+M,Level,,,,6D51BA0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6D51BC2,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6D51D88,exp=00B8
+W,A002,00,0A,42B0,6D51E22,
+W,A003,B8,0A,42B6,6D51E32,
+W,A000,03,06,5FAB,6D63850,
+M,MainDispatch,,,,6D88C0C,
+M,Level,,,,6D8DBB8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6D8DBDA,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6D8DDA0,exp=00B8
+W,A002,00,0A,42B0,6D8DE3A,
+W,A003,B8,0A,42B6,6D8DE4A,
+W,A000,03,06,5FAB,6D9F868,
+M,MainDispatch,,,,6DC4C24,
+M,Level,,,,6DC9BD0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6DC9BF2,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6DC9DB8,exp=00B8
+W,A002,00,0A,42B0,6DC9E52,
+W,A003,B8,0A,42B6,6DC9E62,
+W,A000,03,06,5FAB,6DDB880,
+M,MainDispatch,,,,6E00C3C,
+M,Level,,,,6E05BE8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6E05C0A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6E05DD0,exp=00B8
+W,A002,00,0A,42B0,6E05E6A,
+W,A003,B8,0A,42B6,6E05E7A,
+W,A000,03,06,5FAB,6E17898,
+M,MainDispatch,,,,6E3CC54,
+M,Level,,,,6E41C00,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6E41C22,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6E41DE8,exp=00B8
+W,A002,00,0A,42B0,6E41E82,
+W,A003,B8,0A,42B6,6E41E92,
+W,A000,03,06,5FAB,6E538B0,
+M,MainDispatch,,,,6E78C6C,
+M,Level,,,,6E7DC18,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6E7DC3A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6E7DE00,exp=00B8
+W,A002,00,0A,42B0,6E7DE9A,
+W,A003,B8,0A,42B6,6E7DEAA,
+W,A000,03,06,5FAB,6E8F8C8,
+M,MainDispatch,,,,6EB4C84,
+M,Level,,,,6EB9C30,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6EB9C52,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6EB9E18,exp=00B8
+W,A002,00,0A,42B0,6EB9EB2,
+W,A003,B8,0A,42B6,6EB9EC2,
+W,A000,03,06,5FAB,6ECB8E0,
+M,MainDispatch,,,,6EF0C9C,
+M,Level,,,,6EF5C48,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6EF5C6A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6EF5E30,exp=00B8
+W,A002,00,0A,42B0,6EF5ECA,
+W,A003,B8,0A,42B6,6EF5EDA,
+W,A000,03,06,5FAB,6F078F8,
+M,MainDispatch,,,,6F2CCB4,
+M,Level,,,,6F31C60,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6F31C82,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6F31E48,exp=00B8
+W,A002,00,0A,42B0,6F31EE2,
+W,A003,B8,0A,42B6,6F31EF2,
+W,A000,03,06,5FAB,6F43910,
+M,MainDispatch,,,,6F68CCC,
+M,Level,,,,6F6DC78,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6F6DC9A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6F6DE60,exp=00B8
+W,A002,00,0A,42B0,6F6DEFA,
+W,A003,B8,0A,42B6,6F6DF0A,
+W,A000,03,06,5FAB,6F7F928,
+M,MainDispatch,,,,6FA4CE4,
+M,Level,,,,6FA9C90,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6FA9CB2,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6FA9E78,exp=00B8
+W,A002,00,0A,42B0,6FA9F12,
+W,A003,B8,0A,42B6,6FA9F22,
+W,A000,03,06,5FAB,6FBB940,
+M,MainDispatch,,,,6FE0CFC,
+M,Level,,,,6FE5CA8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,6FE5CCA,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,6FE5E90,exp=00B8
+W,A002,00,0A,42B0,6FE5F2A,
+W,A003,B8,0A,42B6,6FE5F3A,
+W,A000,03,06,5FAB,6FF7958,
+M,MainDispatch,,,,701CD14,
+M,Level,,,,7021CC0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7021CE2,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,7021EA8,exp=00B8
+W,A002,00,0A,42B0,7021F42,
+W,A003,B8,0A,42B6,7021F52,
+W,A000,03,06,5FAB,7033970,
+M,MainDispatch,,,,7058D2C,
+M,Level,,,,705DCD8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,705DCFA,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,705DEC0,exp=00B8
+W,A002,00,0A,42B0,705DF5A,
+W,A003,B8,0A,42B6,705DF6A,
+W,A000,03,06,5FAB,706F988,
+M,MainDispatch,,,,7094D44,
+M,Level,,,,7099CF0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7099D12,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,7099ED8,exp=00B8
+W,A002,00,0A,42B0,7099F72,
+W,A003,B8,0A,42B6,7099F82,
+W,A000,03,06,5FAB,70AB9A0,
+M,MainDispatch,,,,70D0D5C,
+M,Level,,,,70D5D08,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,70D5D2A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,70D5EF0,exp=00B8
+W,A002,00,0A,42B0,70D5F8A,
+W,A003,B8,0A,42B6,70D5F9A,
+W,A000,03,06,5FAB,70E79B8,
+M,MainDispatch,,,,710CD74,
+M,Level,,,,7111D20,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7111D42,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,7111F08,exp=00B8
+W,A002,00,0A,42B0,7111FA2,
+W,A003,B8,0A,42B6,7111FB2,
+W,A000,03,06,5FAB,71239D0,
+M,MainDispatch,,,,7148D8C,
+M,Level,,,,714DD38,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,714DD5A,level=23 shift=10 exp=00B8
+M,ExposureNew,,,,714DF20,exp=00B8
+W,A002,00,0A,42B0,714DFBA,
+W,A003,B8,0A,42B6,714DFCA,
+W,A000,03,06,5FAB,715F9E8,
+M,MainDispatch,,,,7184DA4,
+M,Level,,,,7189D2A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7189D4C,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,7189E6A,exp=00B8
+W,A002,00,0A,42B0,7189F04,
+W,A003,B8,0A,42B6,7189F14,
+W,A000,03,06,5FAB,719BA00,
+M,MainDispatch,,,,71C0DBC,
+M,Level,,,,71C5D38,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,71C5D5A,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,71C5E78,exp=00B8
+W,A002,00,0A,42B0,71C5F12,
+W,A003,B8,0A,42B6,71C5F22,
+W,A000,03,06,5FAB,71D7A18,
+M,MainDispatch,,,,71FCDD4,
+M,Level,,,,7201D50,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7201D72,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,7201E90,exp=00B8
+W,A002,00,0A,42B0,7201F2A,
+W,A003,B8,0A,42B6,7201F3A,
+W,A000,03,06,5FAB,7213A30,
+M,MainDispatch,,,,7238DEC,
+M,Level,,,,723DD68,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,723DD8A,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,723DEA8,exp=00B8
+W,A002,00,0A,42B0,723DF42,
+W,A003,B8,0A,42B6,723DF52,
+W,A000,03,06,5FAB,724FA48,
+M,MainDispatch,,,,7274E04,
+M,Level,,,,7279D80,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7279DA2,level=22 shift=09 exp=00B8
+M,ExposureNew,,,,7279EC0,exp=00B8
+W,A002,00,0A,42B0,7279F5A,
+W,A003,B8,0A,42B6,7279F6A,
+W,A000,03,06,5FAB,728BA60,
+M,MainDispatch,,,,72B0E1C,
+M,Level,,,,72B5D72,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,72B5D94,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,72B5E9A,exp=00B8
+W,A002,00,0A,42B0,72B5F34,
+W,A003,B8,0A,42B6,72B5F44,
+W,A000,03,06,5FAB,72C7A78,
+M,MainDispatch,,,,72ECE34,
+M,Level,,,,72F1D8A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,72F1DAC,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,72F1EB2,exp=00B8
+W,A002,00,0A,42B0,72F1F4C,
+W,A003,B8,0A,42B6,72F1F5C,
+W,A000,03,06,5FAB,7303A90,
+M,MainDispatch,,,,7328E4C,
+M,Level,,,,732DDA2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,732DDC4,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,732DECA,exp=00B8
+W,A002,00,0A,42B0,732DF64,
+W,A003,B8,0A,42B6,732DF74,
+W,A000,03,06,5FAB,733FAA8,
+M,MainDispatch,,,,7364E64,
+M,Level,,,,7369DBA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7369DDC,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,7369EE2,exp=00B8
+W,A002,00,0A,42B0,7369F7C,
+W,A003,B8,0A,42B6,7369F8C,
+W,A000,03,06,5FAB,737BAC0,
+M,MainDispatch,,,,73A0E7C,
+M,Level,,,,73A5DC8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,73A5DEA,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,73A5EF0,exp=00B8
+W,A002,00,0A,42B0,73A5F8A,
+W,A003,B8,0A,42B6,73A5F9A,
+W,A000,03,06,5FAB,73B7AD8,
+M,MainDispatch,,,,73DCE94,
+M,Level,,,,73E1DE0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,73E1E02,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,73E1F08,exp=00B8
+W,A002,00,0A,42B0,73E1FA2,
+W,A003,B8,0A,42B6,73E1FB2,
+W,A000,03,06,5FAB,73F3AF0,
+M,MainDispatch,,,,7418EAC,
+M,Level,,,,741DDF8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,741DE1A,level=21 shift=08 exp=00B8
+M,ExposureNew,,,,741DF20,exp=00B8
+W,A002,00,0A,42B0,741DFBA,
+W,A003,B8,0A,42B6,741DFCA,
+W,A000,03,06,5FAB,742FB08,
+M,MainDispatch,,,,7454EC4,
+M,Level,,,,7459DEA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7459E0C,level=20 shift=07 exp=00B8
+M,ExposureNew,,,,7459EFA,exp=00B7
+W,A002,00,0A,42B0,7459F94,
+W,A003,B7,0A,42B6,7459FA4,
+W,A000,03,06,5FAB,746BB20,
+M,MainDispatch,,,,7490EDC,
+M,Level,,,,7495E02,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7495E24,level=20 shift=07 exp=00B7
+M,ExposureNew,,,,7495F12,exp=00B6
+W,A002,00,0A,42B0,7495FAC,
+W,A003,B6,0A,42B6,7495FBC,
+W,A000,03,06,5FAB,74A7B38,
+M,MainDispatch,,,,74CCEF4,
+M,Level,,,,74D1E1A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,74D1E3C,level=20 shift=07 exp=00B6
+M,ExposureNew,,,,74D1F2A,exp=00B5
+W,A002,00,0A,42B0,74D1FC4,
+W,A003,B5,0A,42B6,74D1FD4,
+W,A000,03,06,5FAB,74E3B50,
+M,MainDispatch,,,,7508F0C,
+M,Level,,,,750DE32,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,750DE54,level=20 shift=07 exp=00B5
+M,ExposureNew,,,,750DF42,exp=00B4
+W,A002,00,0A,42B0,750DFDC,
+W,A003,B4,0A,42B6,750DFEC,
+W,A000,03,06,5FAB,751FB68,
+M,MainDispatch,,,,7544F24,
+M,Level,,,,7549E4A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7549E6C,level=20 shift=07 exp=00B4
+M,ExposureNew,,,,7549F5A,exp=00B3
+W,A002,00,0A,42B0,7549FF4,
+W,A003,B3,0A,42B6,754A004,
+W,A000,03,06,5FAB,755BB80,
+M,MainDispatch,,,,7580F3C,
+M,Level,,,,7585E62,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7585E84,level=20 shift=07 exp=00B3
+M,ExposureNew,,,,7585F72,exp=00B2
+W,A002,00,0A,42B0,758600C,
+W,A003,B2,0A,42B6,758601C,
+W,A000,03,06,5FAB,7597B98,
+M,MainDispatch,,,,75BCF54,
+M,Level,,,,75C1E7A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,75C1E9C,level=20 shift=07 exp=00B2
+M,ExposureNew,,,,75C1F8A,exp=00B1
+W,A002,00,0A,42B0,75C2024,
+W,A003,B1,0A,42B6,75C2034,
+W,A000,03,06,5FAB,75D3BB0,
+M,MainDispatch,,,,75F8F6C,
+M,Level,,,,75FDE92,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,75FDEB4,level=20 shift=07 exp=00B1
+M,ExposureNew,,,,75FDFA2,exp=00B0
+W,A002,00,0A,42B0,75FE03C,
+W,A003,B0,0A,42B6,75FE04C,
+W,A000,03,06,5FAB,760FBC8,
+M,MainDispatch,,,,7634F84,
+M,Level,,,,7639EAA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7639ECC,level=20 shift=07 exp=00B0
+M,ExposureNew,,,,7639FBA,exp=00AF
+W,A002,00,0A,42B0,763A054,
+W,A003,AF,0A,42B6,763A064,
+W,A000,03,06,5FAB,764BBE0,
+M,MainDispatch,,,,7670F9C,
+M,Level,,,,7675EC2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7675EE4,level=20 shift=07 exp=00AF
+M,ExposureNew,,,,7675FD2,exp=00AE
+W,A002,00,0A,42B0,767606C,
+W,A003,AE,0A,42B6,767607C,
+W,A000,03,06,5FAB,7687BF8,
+M,MainDispatch,,,,76ACFB4,
+M,Level,,,,76B1EDA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,76B1EFC,level=20 shift=07 exp=00AE
+M,ExposureNew,,,,76B1FEA,exp=00AD
+W,A002,00,0A,42B0,76B2084,
+W,A003,AD,0A,42B6,76B2094,
+W,A000,03,06,5FAB,76C3C10,
+M,MainDispatch,,,,76E8FCC,
+M,Level,,,,76EDEF2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,76EDF14,level=20 shift=07 exp=00AD
+M,ExposureNew,,,,76EE002,exp=00AC
+W,A002,00,0A,42B0,76EE09C,
+W,A003,AC,0A,42B6,76EE0AC,
+W,A000,03,06,5FAB,76FFC28,
+M,MainDispatch,,,,7724FE4,
+M,Level,,,,7729F0A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7729F2C,level=20 shift=07 exp=00AC
+M,ExposureNew,,,,772A01A,exp=00AB
+W,A002,00,0A,42B0,772A0B4,
+W,A003,AB,0A,42B6,772A0C4,
+W,A000,03,06,5FAB,773BC40,
+M,MainDispatch,,,,7760FFC,
+M,Level,,,,7765F22,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7765F44,level=20 shift=07 exp=00AB
+M,ExposureNew,,,,7766032,exp=00AA
+W,A002,00,0A,42B0,77660CC,
+W,A003,AA,0A,42B6,77660DC,
+W,A000,03,06,5FAB,7777C58,
+M,MainDispatch,,,,779D014,
+M,Level,,,,77A1F60,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,77A1F82,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,77A2088,exp=00AA
+W,A002,00,0A,42B0,77A2122,
+W,A003,AA,0A,42B6,77A2132,
+W,A000,03,06,5FAB,77B3C70,
+M,MainDispatch,,,,77D902C,
+M,Level,,,,77DDF78,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,77DDF9A,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,77DE0A0,exp=00AA
+W,A002,00,0A,42B0,77DE13A,
+W,A003,AA,0A,42B6,77DE14A,
+W,A000,03,06,5FAB,77EFC88,
+M,MainDispatch,,,,7815044,
+M,Level,,,,7819F9A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7819FBC,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,781A0C2,exp=00AA
+W,A002,00,0A,42B0,781A15C,
+W,A003,AA,0A,42B6,781A16C,
+W,A000,03,06,5FAB,782BCA0,
+M,MainDispatch,,,,785105C,
+M,Level,,,,7855FB2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7855FD4,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,78560DA,exp=00AA
+W,A002,00,0A,42B0,7856174,
+W,A003,AA,0A,42B6,7856184,
+W,A000,03,06,5FAB,7867CB8,
+M,MainDispatch,,,,788D074,
+M,Level,,,,7891FCA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7891FEC,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,78920F2,exp=00AA
+W,A002,00,0A,42B0,789218C,
+W,A003,AA,0A,42B6,789219C,
+W,A000,03,06,5FAB,78A3CD0,
+M,MainDispatch,,,,78C908C,
+M,Level,,,,78CDFE2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,78CE004,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,78CE10A,exp=00AA
+W,A002,00,0A,42B0,78CE1A4,
+W,A003,AA,0A,42B6,78CE1B4,
+W,A000,03,06,5FAB,78DFCE8,
+M,MainDispatch,,,,79050A4,
+M,Level,,,,790A020,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,790A042,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,790A160,exp=00AA
+W,A002,00,0A,42B0,790A1FA,
+W,A003,AA,0A,42B6,790A20A,
+W,A000,03,06,5FAB,791BD00,
+M,MainDispatch,,,,79410BC,
+M,Level,,,,7946038,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,794605A,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7946178,exp=00AA
+W,A002,00,0A,42B0,7946212,
+W,A003,AA,0A,42B6,7946222,
+W,A000,03,06,5FAB,7957D18,
+M,MainDispatch,,,,797D0D4,
+M,Level,,,,7982050,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7982072,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7982190,exp=00AA
+W,A002,00,0A,42B0,798222A,
+W,A003,AA,0A,42B6,798223A,
+W,A000,03,06,5FAB,7993D30,
+M,MainDispatch,,,,79B90EC,
+M,Level,,,,79BE072,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,79BE094,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,79BE1B2,exp=00AA
+W,A002,00,0A,42B0,79BE24C,
+W,A003,AA,0A,42B6,79BE25C,
+W,A000,03,06,5FAB,79CFD48,
+M,MainDispatch,,,,79F5104,
+M,Level,,,,79FA08A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,79FA0AC,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,79FA1CA,exp=00AA
+W,A002,00,0A,42B0,79FA264,
+W,A003,AA,0A,42B6,79FA274,
+W,A000,03,06,5FAB,7A0BD60,
+M,MainDispatch,,,,7A3111C,
+M,Level,,,,7A360C8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7A360EA,level=23 shift=10 exp=00AA
+M,ExposureNew,,,,7A362B0,exp=00AA
+W,A002,00,0A,42B0,7A3634A,
+W,A003,AA,0A,42B6,7A3635A,
+W,A000,03,06,5FAB,7A47D78,
+M,MainDispatch,,,,7A6D134,
+M,Level,,,,7A720E0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7A72102,level=23 shift=10 exp=00AA
+M,ExposureNew,,,,7A722C8,exp=00AA
+W,A002,00,0A,42B0,7A72362,
+W,A003,AA,0A,42B6,7A72372,
+W,A000,03,06,5FAB,7A83D90,
+M,MainDispatch,,,,7AA914C,
+M,Level,,,,7AAE0F8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7AAE11A,level=23 shift=10 exp=00AA
+M,ExposureNew,,,,7AAE2E0,exp=00AA
+W,A002,00,0A,42B0,7AAE37A,
+W,A003,AA,0A,42B6,7AAE38A,
+W,A000,03,06,5FAB,7ABFDA8,
+M,MainDispatch,,,,7AE5164,
+M,Level,,,,7AEA110,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7AEA132,level=23 shift=10 exp=00AA
+M,ExposureNew,,,,7AEA2F8,exp=00AA
+W,A002,00,0A,42B0,7AEA392,
+W,A003,AA,0A,42B6,7AEA3A2,
+W,A000,03,06,5FAB,7AFBDC0,
+M,MainDispatch,,,,7B2117C,
+M,Level,,,,7B26128,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7B2614A,level=23 shift=10 exp=00AA
+M,ExposureNew,,,,7B26310,exp=00AA
+W,A002,00,0A,42B0,7B263AA,
+W,A003,AA,0A,42B6,7B263BA,
+W,A000,03,06,5FAB,7B37DD8,
+M,MainDispatch,,,,7B5D194,
+M,Level,,,,7B62140,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7B62162,level=23 shift=10 exp=00AA
+M,ExposureNew,,,,7B62328,exp=00AA
+W,A002,00,0A,42B0,7B623C2,
+W,A003,AA,0A,42B6,7B623D2,
+W,A000,03,06,5FAB,7B73DF0,
+M,MainDispatch,,,,7B991AC,
+M,Level,,,,7B9E132,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7B9E154,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7B9E272,exp=00AA
+W,A002,00,0A,42B0,7B9E30C,
+W,A003,AA,0A,42B6,7B9E31C,
+W,A000,03,06,5FAB,7BAFE08,
+M,MainDispatch,,,,7BD51C4,
+M,Level,,,,7BDA14A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7BDA16C,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7BDA28A,exp=00AA
+W,A002,00,0A,42B0,7BDA324,
+W,A003,AA,0A,42B6,7BDA334,
+W,A000,03,06,5FAB,7BEBE20,
+M,MainDispatch,,,,7C111DC,
+M,Level,,,,7C16162,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7C16184,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7C162A2,exp=00AA
+W,A002,00,0A,42B0,7C1633C,
+W,A003,AA,0A,42B6,7C1634C,
+W,A000,03,06,5FAB,7C27E38,
+M,MainDispatch,,,,7C4D1F4,
+M,Level,,,,7C52170,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7C52192,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7C522B0,exp=00AA
+W,A002,00,0A,42B0,7C5234A,
+W,A003,AA,0A,42B6,7C5235A,
+W,A000,03,06,5FAB,7C63E50,
+M,MainDispatch,,,,7C8920C,
+M,Level,,,,7C8E188,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7C8E1AA,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7C8E2C8,exp=00AA
+W,A002,00,0A,42B0,7C8E362,
+W,A003,AA,0A,42B6,7C8E372,
+W,A000,03,06,5FAB,7C9FE68,
+M,MainDispatch,,,,7CC5224,
+M,Level,,,,7CCA1A0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7CCA1C2,level=22 shift=09 exp=00AA
+M,ExposureNew,,,,7CCA2E0,exp=00AA
+W,A002,00,0A,42B0,7CCA37A,
+W,A003,AA,0A,42B6,7CCA38A,
+W,A000,03,06,5FAB,7CDBE80,
+M,MainDispatch,,,,7D0123C,
+M,Level,,,,7D06192,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7D061B4,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,7D062BA,exp=00AA
+W,A002,00,0A,42B0,7D06354,
+W,A003,AA,0A,42B6,7D06364,
+W,A000,03,06,5FAB,7D17E98,
+M,MainDispatch,,,,7D3D254,
+M,Level,,,,7D421AA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7D421CC,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,7D422D2,exp=00AA
+W,A002,00,0A,42B0,7D4236C,
+W,A003,AA,0A,42B6,7D4237C,
+W,A000,03,06,5FAB,7D53EB0,
+M,MainDispatch,,,,7D7926C,
+M,Level,,,,7D7E1B8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7D7E1DA,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,7D7E2E0,exp=00AA
+W,A002,00,0A,42B0,7D7E37A,
+W,A003,AA,0A,42B6,7D7E38A,
+W,A000,03,06,5FAB,7D8FEC8,
+M,MainDispatch,,,,7DB5284,
+M,Level,,,,7DBA1D0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7DBA1F2,level=21 shift=08 exp=00AA
+M,ExposureNew,,,,7DBA2F8,exp=00AA
+W,A002,00,0A,42B0,7DBA392,
+W,A003,AA,0A,42B6,7DBA3A2,
+W,A000,03,06,5FAB,7DCBEE0,
+M,MainDispatch,,,,7DF129C,
+M,Level,,,,7DF61C2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7DF61E4,level=20 shift=07 exp=00AA
+M,ExposureNew,,,,7DF62D2,exp=00A9
+W,A002,00,0A,42B0,7DF636C,
+W,A003,A9,0A,42B6,7DF637C,
+W,A000,03,06,5FAB,7E07EF8,
+M,MainDispatch,,,,7E2D2B4,
+M,Level,,,,7E321DA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7E321FC,level=20 shift=07 exp=00A9
+M,ExposureNew,,,,7E322EA,exp=00A8
+W,A002,00,0A,42B0,7E32384,
+W,A003,A8,0A,42B6,7E32394,
+W,A000,03,06,5FAB,7E43F10,
+M,MainDispatch,,,,7E692CC,
+M,Level,,,,7E6E1F2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7E6E214,level=20 shift=07 exp=00A8
+M,ExposureNew,,,,7E6E302,exp=00A7
+W,A002,00,0A,42B0,7E6E39C,
+W,A003,A7,0A,42B6,7E6E3AC,
+W,A000,03,06,5FAB,7E7FF28,
+M,MainDispatch,,,,7EA52E4,
+M,Level,,,,7EAA20A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7EAA22C,level=20 shift=07 exp=00A7
+M,ExposureNew,,,,7EAA31A,exp=00A6
+W,A002,00,0A,42B0,7EAA3B4,
+W,A003,A6,0A,42B6,7EAA3C4,
+W,A000,03,06,5FAB,7EBBF40,
+M,MainDispatch,,,,7EE12FC,
+M,Level,,,,7EE6222,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7EE6244,level=20 shift=07 exp=00A6
+M,ExposureNew,,,,7EE6332,exp=00A5
+W,A002,00,0A,42B0,7EE63CC,
+W,A003,A5,0A,42B6,7EE63DC,
+W,A000,03,06,5FAB,7EF7F58,
+M,MainDispatch,,,,7F1D314,
+M,Level,,,,7F2223A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7F2225C,level=20 shift=07 exp=00A5
+M,ExposureNew,,,,7F2234A,exp=00A4
+W,A002,00,0A,42B0,7F223E4,
+W,A003,A4,0A,42B6,7F223F4,
+W,A000,03,06,5FAB,7F33F70,
+M,MainDispatch,,,,7F5932C,
+M,Level,,,,7F5E252,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7F5E274,level=20 shift=07 exp=00A4
+M,ExposureNew,,,,7F5E362,exp=00A3
+W,A002,00,0A,42B0,7F5E3FC,
+W,A003,A3,0A,42B6,7F5E40C,
+W,A000,03,06,5FAB,7F6FF88,
+M,MainDispatch,,,,7F95344,
+M,Level,,,,7F9A26A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7F9A28C,level=20 shift=07 exp=00A3
+M,ExposureNew,,,,7F9A37A,exp=00A2
+W,A002,00,0A,42B0,7F9A414,
+W,A003,A2,0A,42B6,7F9A424,
+W,A000,03,06,5FAB,7FABFA0,
+M,MainDispatch,,,,7FD135C,
+M,Level,,,,7FD62A8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,7FD62CA,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,7FD63D0,exp=00A2
+W,A002,00,0A,42B0,7FD646A,
+W,A003,A2,0A,42B6,7FD647A,
+W,A000,03,06,5FAB,7FE7FB8,
+M,MainDispatch,,,,800D374,
+M,Level,,,,80122C0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,80122E2,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,80123E8,exp=00A2
+W,A002,00,0A,42B0,8012482,
+W,A003,A2,0A,42B6,8012492,
+W,A000,03,06,5FAB,8023FD0,
+M,MainDispatch,,,,804938C,
+M,Level,,,,804E2D8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,804E2FA,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,804E400,exp=00A2
+W,A002,00,0A,42B0,804E49A,
+W,A003,A2,0A,42B6,804E4AA,
+W,A000,03,06,5FAB,805FFE8,
+M,MainDispatch,,,,80853A4,
+M,Level,,,,808A2F0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,808A312,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,808A418,exp=00A2
+W,A002,00,0A,42B0,808A4B2,
+W,A003,A2,0A,42B6,808A4C2,
+W,A000,03,06,5FAB,809C000,
+M,MainDispatch,,,,80C13BC,
+M,Level,,,,80C6308,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,80C632A,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,80C6430,exp=00A2
+W,A002,00,0A,42B0,80C64CA,
+W,A003,A2,0A,42B6,80C64DA,
+W,A000,03,06,5FAB,80D8018,
+M,MainDispatch,,,,80FD3D4,
+M,Level,,,,810232A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,810234C,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8102452,exp=00A2
+W,A002,00,0A,42B0,81024EC,
+W,A003,A2,0A,42B6,81024FC,
+W,A000,03,06,5FAB,8114030,
+M,MainDispatch,,,,81393EC,
+M,Level,,,,813E342,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,813E364,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,813E46A,exp=00A2
+W,A002,00,0A,42B0,813E504,
+W,A003,A2,0A,42B6,813E514,
+W,A000,03,06,5FAB,8150048,
+M,MainDispatch,,,,8175404,
+M,Level,,,,817A35A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,817A37C,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,817A482,exp=00A2
+W,A002,00,0A,42B0,817A51C,
+W,A003,A2,0A,42B6,817A52C,
+W,A000,03,06,5FAB,818C060,
+M,MainDispatch,,,,81B141C,
+M,Level,,,,81B6372,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,81B6394,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,81B649A,exp=00A2
+W,A002,00,0A,42B0,81B6534,
+W,A003,A2,0A,42B6,81B6544,
+W,A000,03,06,5FAB,81C8078,
+M,MainDispatch,,,,81ED434,
+M,Level,,,,81F238A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,81F23AC,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,81F24B2,exp=00A2
+W,A002,00,0A,42B0,81F254C,
+W,A003,A2,0A,42B6,81F255C,
+W,A000,03,06,5FAB,8204090,
+M,MainDispatch,,,,822944C,
+M,Level,,,,822E3A2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,822E3C4,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,822E4CA,exp=00A2
+W,A002,00,0A,42B0,822E564,
+W,A003,A2,0A,42B6,822E574,
+W,A000,03,06,5FAB,82400A8,
+M,MainDispatch,,,,8265464,
+M,Level,,,,826A3BA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,826A3DC,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,826A4E2,exp=00A2
+W,A002,00,0A,42B0,826A57C,
+W,A003,A2,0A,42B6,826A58C,
+W,A000,03,06,5FAB,827C0C0,
+M,MainDispatch,,,,82A147C,
+M,Level,,,,82A63F8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,82A641A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,82A6538,exp=00A2
+W,A002,00,0A,42B0,82A65D2,
+W,A003,A2,0A,42B6,82A65E2,
+W,A000,03,06,5FAB,82B80D8,
+M,MainDispatch,,,,82DD494,
+M,Level,,,,82E2410,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,82E2432,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,82E2550,exp=00A2
+W,A002,00,0A,42B0,82E25EA,
+W,A003,A2,0A,42B6,82E25FA,
+W,A000,03,06,5FAB,82F40F0,
+M,MainDispatch,,,,83194AC,
+M,Level,,,,831E428,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,831E44A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,831E568,exp=00A2
+W,A002,00,0A,42B0,831E602,
+W,A003,A2,0A,42B6,831E612,
+W,A000,03,06,5FAB,8330108,
+M,MainDispatch,,,,83554C4,
+M,Level,,,,835A440,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,835A462,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,835A580,exp=00A2
+W,A002,00,0A,42B0,835A61A,
+W,A003,A2,0A,42B6,835A62A,
+W,A000,03,06,5FAB,836C120,
+M,MainDispatch,,,,83914DC,
+M,Level,,,,8396458,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,839647A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8396598,exp=00A2
+W,A002,00,0A,42B0,8396632,
+W,A003,A2,0A,42B6,8396642,
+W,A000,03,06,5FAB,83A8138,
+M,MainDispatch,,,,83CD4F4,
+M,Level,,,,83D2470,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,83D2492,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,83D25B0,exp=00A2
+W,A002,00,0A,42B0,83D264A,
+W,A003,A2,0A,42B6,83D265A,
+W,A000,03,06,5FAB,83E4150,
+M,MainDispatch,,,,840950C,
+M,Level,,,,840E492,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,840E4B4,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,840E5D2,exp=00A2
+W,A002,00,0A,42B0,840E66C,
+W,A003,A2,0A,42B6,840E67C,
+W,A000,03,06,5FAB,8420168,
+M,MainDispatch,,,,8445524,
+M,Level,,,,844A4AA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,844A4CC,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,844A5EA,exp=00A2
+W,A002,00,0A,42B0,844A684,
+W,A003,A2,0A,42B6,844A694,
+W,A000,03,06,5FAB,845C180,
+M,MainDispatch,,,,848153C,
+M,Level,,,,84864C2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,84864E4,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8486602,exp=00A2
+W,A002,00,0A,42B0,848669C,
+W,A003,A2,0A,42B6,84866AC,
+W,A000,03,06,5FAB,8498198,
+M,MainDispatch,,,,84BD554,
+M,Level,,,,84C2500,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,84C2522,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,84C26E8,exp=00A2
+W,A002,00,0A,42B0,84C2782,
+W,A003,A2,0A,42B6,84C2792,
+W,A000,03,06,5FAB,84D41B0,
+M,MainDispatch,,,,84F956C,
+M,Level,,,,84FE518,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,84FE53A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,84FE700,exp=00A2
+W,A002,00,0A,42B0,84FE79A,
+W,A003,A2,0A,42B6,84FE7AA,
+W,A000,03,06,5FAB,85101C8,
+M,MainDispatch,,,,8535584,
+M,Level,,,,853A530,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,853A552,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,853A718,exp=00A2
+W,A002,00,0A,42B0,853A7B2,
+W,A003,A2,0A,42B6,853A7C2,
+W,A000,03,06,5FAB,854C1E0,
+M,MainDispatch,,,,857159C,
+M,Level,,,,8576548,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,857656A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8576730,exp=00A2
+W,A002,00,0A,42B0,85767CA,
+W,A003,A2,0A,42B6,85767DA,
+W,A000,03,06,5FAB,85881F8,
+M,MainDispatch,,,,85AD5B4,
+M,Level,,,,85B2560,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,85B2582,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,85B2748,exp=00A2
+W,A002,00,0A,42B0,85B27E2,
+W,A003,A2,0A,42B6,85B27F2,
+W,A000,03,06,5FAB,85C4210,
+M,MainDispatch,,,,85E95CC,
+M,Level,,,,85EE578,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,85EE59A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,85EE760,exp=00A2
+W,A002,00,0A,42B0,85EE7FA,
+W,A003,A2,0A,42B6,85EE80A,
+W,A000,03,06,5FAB,8600228,
+M,MainDispatch,,,,86255E4,
+M,Level,,,,862A590,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,862A5B2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,862A778,exp=00A2
+W,A002,00,0A,42B0,862A812,
+W,A003,A2,0A,42B6,862A822,
+W,A000,03,06,5FAB,863C240,
+M,MainDispatch,,,,86615FC,
+M,Level,,,,86665A8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,86665CA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8666790,exp=00A2
+W,A002,00,0A,42B0,866682A,
+W,A003,A2,0A,42B6,866683A,
+W,A000,03,06,5FAB,8678258,
+M,MainDispatch,,,,869D614,
+M,Level,,,,86A25C0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,86A25E2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,86A27A8,exp=00A2
+W,A002,00,0A,42B0,86A2842,
+W,A003,A2,0A,42B6,86A2852,
+W,A000,03,06,5FAB,86B4270,
+M,MainDispatch,,,,86D962C,
+M,Level,,,,86DE5D8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,86DE5FA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,86DE7C0,exp=00A2
+W,A002,00,0A,42B0,86DE85A,
+W,A003,A2,0A,42B6,86DE86A,
+W,A000,03,06,5FAB,86F0288,
+M,MainDispatch,,,,8715644,
+M,Level,,,,871A5F0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,871A612,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,871A7D8,exp=00A2
+W,A002,00,0A,42B0,871A872,
+W,A003,A2,0A,42B6,871A882,
+W,A000,03,06,5FAB,872C2A0,
+M,MainDispatch,,,,875165C,
+M,Level,,,,8756608,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,875662A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,87567F0,exp=00A2
+W,A002,00,0A,42B0,875688A,
+W,A003,A2,0A,42B6,875689A,
+W,A000,03,06,5FAB,87682B8,
+M,MainDispatch,,,,878D674,
+M,Level,,,,8792620,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8792642,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8792808,exp=00A2
+W,A002,00,0A,42B0,87928A2,
+W,A003,A2,0A,42B6,87928B2,
+W,A000,03,06,5FAB,87A42D0,
+M,MainDispatch,,,,87C968C,
+M,Level,,,,87CE638,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,87CE65A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,87CE820,exp=00A2
+W,A002,00,0A,42B0,87CE8BA,
+W,A003,A2,0A,42B6,87CE8CA,
+W,A000,03,06,5FAB,87E02E8,
+M,MainDispatch,,,,88056A4,
+M,Level,,,,880A650,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,880A672,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,880A838,exp=00A2
+W,A002,00,0A,42B0,880A8D2,
+W,A003,A2,0A,42B6,880A8E2,
+W,A000,03,06,5FAB,881C300,
+M,MainDispatch,,,,88416BC,
+M,Level,,,,8846668,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,884668A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8846850,exp=00A2
+W,A002,00,0A,42B0,88468EA,
+W,A003,A2,0A,42B6,88468FA,
+W,A000,03,06,5FAB,8858318,
+M,MainDispatch,,,,887D6D4,
+M,Level,,,,8882680,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,88826A2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8882868,exp=00A2
+W,A002,00,0A,42B0,8882902,
+W,A003,A2,0A,42B6,8882912,
+W,A000,03,06,5FAB,8894330,
+M,MainDispatch,,,,88B96EC,
+M,Level,,,,88BE698,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,88BE6BA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,88BE880,exp=00A2
+W,A002,00,0A,42B0,88BE91A,
+W,A003,A2,0A,42B6,88BE92A,
+W,A000,03,06,5FAB,88D0348,
+M,MainDispatch,,,,88F5704,
+M,Level,,,,88FA6B0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,88FA6D2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,88FA898,exp=00A2
+W,A002,00,0A,42B0,88FA932,
+W,A003,A2,0A,42B6,88FA942,
+W,A000,03,06,5FAB,890C360,
+M,MainDispatch,,,,893171C,
+M,Level,,,,89366C8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,89366EA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,89368B0,exp=00A2
+W,A002,00,0A,42B0,893694A,
+W,A003,A2,0A,42B6,893695A,
+W,A000,03,06,5FAB,8948378,
+M,MainDispatch,,,,896D734,
+M,Level,,,,89726E0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8972702,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,89728C8,exp=00A2
+W,A002,00,0A,42B0,8972962,
+W,A003,A2,0A,42B6,8972972,
+W,A000,03,06,5FAB,8984390,
+M,MainDispatch,,,,89A974C,
+M,Level,,,,89AE6F8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,89AE71A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,89AE8E0,exp=00A2
+W,A002,00,0A,42B0,89AE97A,
+W,A003,A2,0A,42B6,89AE98A,
+W,A000,03,06,5FAB,89C03A8,
+M,MainDispatch,,,,89E5764,
+M,Level,,,,89EA710,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,89EA732,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,89EA8F8,exp=00A2
+W,A002,00,0A,42B0,89EA992,
+W,A003,A2,0A,42B6,89EA9A2,
+W,A000,03,06,5FAB,89FC3C0,
+M,MainDispatch,,,,8A2177C,
+M,Level,,,,8A26728,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8A2674A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8A26910,exp=00A2
+W,A002,00,0A,42B0,8A269AA,
+W,A003,A2,0A,42B6,8A269BA,
+W,A000,03,06,5FAB,8A383D8,
+M,MainDispatch,,,,8A5D794,
+M,Level,,,,8A62740,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8A62762,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8A62928,exp=00A2
+W,A002,00,0A,42B0,8A629C2,
+W,A003,A2,0A,42B6,8A629D2,
+W,A000,03,06,5FAB,8A743F0,
+M,MainDispatch,,,,8A997AC,
+M,Level,,,,8A9E758,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8A9E77A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8A9E940,exp=00A2
+W,A002,00,0A,42B0,8A9E9DA,
+W,A003,A2,0A,42B6,8A9E9EA,
+W,A000,03,06,5FAB,8AB0408,
+M,MainDispatch,,,,8AD57C4,
+M,Level,,,,8ADA770,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8ADA792,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8ADA958,exp=00A2
+W,A002,00,0A,42B0,8ADA9F2,
+W,A003,A2,0A,42B6,8ADAA02,
+W,A000,03,06,5FAB,8AEC420,
+M,MainDispatch,,,,8B117DC,
+M,Level,,,,8B16788,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8B167AA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8B16970,exp=00A2
+W,A002,00,0A,42B0,8B16A0A,
+W,A003,A2,0A,42B6,8B16A1A,
+W,A000,03,06,5FAB,8B28438,
+M,MainDispatch,,,,8B4D7F4,
+M,Level,,,,8B527A0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8B527C2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,8B52988,exp=00A2
+W,A002,00,0A,42B0,8B52A22,
+W,A003,A2,0A,42B6,8B52A32,
+W,A000,03,06,5FAB,8B64450,
+M,MainDispatch,,,,8B8980C,
+M,Level,,,,8B8E792,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8B8E7B4,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8B8E8D2,exp=00A2
+W,A002,00,0A,42B0,8B8E96C,
+W,A003,A2,0A,42B6,8B8E97C,
+W,A000,03,06,5FAB,8BA0468,
+M,MainDispatch,,,,8BC5824,
+M,Level,,,,8BCA7AA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8BCA7CC,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8BCA8EA,exp=00A2
+W,A002,00,0A,42B0,8BCA984,
+W,A003,A2,0A,42B6,8BCA994,
+W,A000,03,06,5FAB,8BDC480,
+M,MainDispatch,,,,8C0183C,
+M,Level,,,,8C067B8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8C067DA,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8C068F8,exp=00A2
+W,A002,00,0A,42B0,8C06992,
+W,A003,A2,0A,42B6,8C069A2,
+W,A000,03,06,5FAB,8C18498,
+M,MainDispatch,,,,8C3D854,
+M,Level,,,,8C427DA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8C427FC,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8C4291A,exp=00A2
+W,A002,00,0A,42B0,8C429B4,
+W,A003,A2,0A,42B6,8C429C4,
+W,A000,03,06,5FAB,8C544B0,
+M,MainDispatch,,,,8C7986C,
+M,Level,,,,8C7E7E8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8C7E80A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8C7E928,exp=00A2
+W,A002,00,0A,42B0,8C7E9C2,
+W,A003,A2,0A,42B6,8C7E9D2,
+W,A000,03,06,5FAB,8C904C8,
+M,MainDispatch,,,,8CB5884,
+M,Level,,,,8CBA800,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8CBA822,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8CBA940,exp=00A2
+W,A002,00,0A,42B0,8CBA9DA,
+W,A003,A2,0A,42B6,8CBA9EA,
+W,A000,03,06,5FAB,8CCC4E0,
+M,MainDispatch,,,,8CF189C,
+M,Level,,,,8CF6818,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8CF683A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8CF6958,exp=00A2
+W,A002,00,0A,42B0,8CF69F2,
+W,A003,A2,0A,42B6,8CF6A02,
+W,A000,03,06,5FAB,8D084F8,
+M,MainDispatch,,,,8D2D8B4,
+M,Level,,,,8D32830,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8D32852,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8D32970,exp=00A2
+W,A002,00,0A,42B0,8D32A0A,
+W,A003,A2,0A,42B6,8D32A1A,
+W,A000,03,06,5FAB,8D44510,
+M,MainDispatch,,,,8D698CC,
+M,Level,,,,8D6E848,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8D6E86A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8D6E988,exp=00A2
+W,A002,00,0A,42B0,8D6EA22,
+W,A003,A2,0A,42B6,8D6EA32,
+W,A000,03,06,5FAB,8D80528,
+M,MainDispatch,,,,8DA58E4,
+M,Level,,,,8DAA860,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8DAA882,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8DAA9A0,exp=00A2
+W,A002,00,0A,42B0,8DAAA3A,
+W,A003,A2,0A,42B6,8DAAA4A,
+W,A000,03,06,5FAB,8DBC540,
+M,MainDispatch,,,,8DE18FC,
+M,Level,,,,8DE6852,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8DE6874,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8DE697A,exp=00A2
+W,A002,00,0A,42B0,8DE6A14,
+W,A003,A2,0A,42B6,8DE6A24,
+W,A000,03,06,5FAB,8DF8558,
+M,MainDispatch,,,,8E1D914,
+M,Level,,,,8E2286A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8E2288C,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8E22992,exp=00A2
+W,A002,00,0A,42B0,8E22A2C,
+W,A003,A2,0A,42B6,8E22A3C,
+W,A000,03,06,5FAB,8E34570,
+M,MainDispatch,,,,8E5992C,
+M,Level,,,,8E5E882,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8E5E8A4,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8E5E9AA,exp=00A2
+W,A002,00,0A,42B0,8E5EA44,
+W,A003,A2,0A,42B6,8E5EA54,
+W,A000,03,06,5FAB,8E70588,
+M,MainDispatch,,,,8E95944,
+M,Level,,,,8E9A89A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8E9A8BC,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8E9A9C2,exp=00A2
+W,A002,00,0A,42B0,8E9AA5C,
+W,A003,A2,0A,42B6,8E9AA6C,
+W,A000,03,06,5FAB,8EAC5A0,
+M,MainDispatch,,,,8ED195C,
+M,Level,,,,8ED68B2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8ED68D4,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8ED69DA,exp=00A2
+W,A002,00,0A,42B0,8ED6A74,
+W,A003,A2,0A,42B6,8ED6A84,
+W,A000,03,06,5FAB,8EE85B8,
+M,MainDispatch,,,,8F0D974,
+M,Level,,,,8F128CA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8F128EC,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8F129F2,exp=00A2
+W,A002,00,0A,42B0,8F12A8C,
+W,A003,A2,0A,42B6,8F12A9C,
+W,A000,03,06,5FAB,8F245D0,
+M,MainDispatch,,,,8F4998C,
+M,Level,,,,8F4E8E2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8F4E904,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8F4EA0A,exp=00A2
+W,A002,00,0A,42B0,8F4EAA4,
+W,A003,A2,0A,42B6,8F4EAB4,
+W,A000,03,06,5FAB,8F605E8,
+M,MainDispatch,,,,8F859A4,
+M,Level,,,,8F8A8FA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8F8A91C,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,8F8AA22,exp=00A2
+W,A002,00,0A,42B0,8F8AABC,
+W,A003,A2,0A,42B6,8F8AACC,
+W,A000,03,06,5FAB,8F9C600,
+M,MainDispatch,,,,8FC19BC,
+M,Level,,,,8FC6938,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,8FC695A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,8FC6A78,exp=00A2
+W,A002,00,0A,42B0,8FC6B12,
+W,A003,A2,0A,42B6,8FC6B22,
+W,A000,03,06,5FAB,8FD8618,
+M,MainDispatch,,,,8FFD9D4,
+M,Level,,,,9002950,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9002972,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,9002A90,exp=00A2
+W,A002,00,0A,42B0,9002B2A,
+W,A003,A2,0A,42B6,9002B3A,
+W,A000,03,06,5FAB,9014630,
+M,MainDispatch,,,,90399EC,
+M,Level,,,,903E968,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,903E98A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,903EAA8,exp=00A2
+W,A002,00,0A,42B0,903EB42,
+W,A003,A2,0A,42B6,903EB52,
+W,A000,03,06,5FAB,9050648,
+M,MainDispatch,,,,9075A04,
+M,Level,,,,907A980,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,907A9A2,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,907AAC0,exp=00A2
+W,A002,00,0A,42B0,907AB5A,
+W,A003,A2,0A,42B6,907AB6A,
+W,A000,03,06,5FAB,908C660,
+M,MainDispatch,,,,90B1A1C,
+M,Level,,,,90B6998,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,90B69BA,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,90B6AD8,exp=00A2
+W,A002,00,0A,42B0,90B6B72,
+W,A003,A2,0A,42B6,90B6B82,
+W,A000,03,06,5FAB,90C8678,
+M,MainDispatch,,,,90EDA34,
+M,Level,,,,90F29B0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,90F29D2,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,90F2AF0,exp=00A2
+W,A002,00,0A,42B0,90F2B8A,
+W,A003,A2,0A,42B6,90F2B9A,
+W,A000,03,06,5FAB,9104690,
+M,MainDispatch,,,,9129A4C,
+M,Level,,,,912E9D2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,912E9F4,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,912EB12,exp=00A2
+W,A002,00,0A,42B0,912EBAC,
+W,A003,A2,0A,42B6,912EBBC,
+W,A000,03,06,5FAB,91406A8,
+M,MainDispatch,,,,9165A64,
+M,Level,,,,916A9EA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,916AA0C,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,916AB2A,exp=00A2
+W,A002,00,0A,42B0,916ABC4,
+W,A003,A2,0A,42B6,916ABD4,
+W,A000,03,06,5FAB,917C6C0,
+M,MainDispatch,,,,91A1A7C,
+M,Level,,,,91A6A28,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,91A6A4A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,91A6C10,exp=00A2
+W,A002,00,0A,42B0,91A6CAA,
+W,A003,A2,0A,42B6,91A6CBA,
+W,A000,03,06,5FAB,91B86D8,
+M,MainDispatch,,,,91DDA94,
+M,Level,,,,91E2A40,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,91E2A62,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,91E2C28,exp=00A2
+W,A002,00,0A,42B0,91E2CC2,
+W,A003,A2,0A,42B6,91E2CD2,
+W,A000,03,06,5FAB,91F46F0,
+M,MainDispatch,,,,9219AAC,
+M,Level,,,,921EA58,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,921EA7A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,921EC40,exp=00A2
+W,A002,00,0A,42B0,921ECDA,
+W,A003,A2,0A,42B6,921ECEA,
+W,A000,03,06,5FAB,9230708,
+M,MainDispatch,,,,9255AC4,
+M,Level,,,,925AA70,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,925AA92,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,925AC58,exp=00A2
+W,A002,00,0A,42B0,925ACF2,
+W,A003,A2,0A,42B6,925AD02,
+W,A000,03,06,5FAB,926C720,
+M,MainDispatch,,,,9291ADC,
+M,Level,,,,9296A88,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9296AAA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,9296C70,exp=00A2
+W,A002,00,0A,42B0,9296D0A,
+W,A003,A2,0A,42B6,9296D1A,
+W,A000,03,06,5FAB,92A8738,
+M,MainDispatch,,,,92CDAF4,
+M,Level,,,,92D2AA0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,92D2AC2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,92D2C88,exp=00A2
+W,A002,00,0A,42B0,92D2D22,
+W,A003,A2,0A,42B6,92D2D32,
+W,A000,03,06,5FAB,92E4750,
+M,MainDispatch,,,,9309B0C,
+M,Level,,,,930EAB8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,930EADA,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,930ECA0,exp=00A2
+W,A002,00,0A,42B0,930ED3A,
+W,A003,A2,0A,42B6,930ED4A,
+W,A000,03,06,5FAB,9320768,
+M,MainDispatch,,,,9345B24,
+M,Level,,,,934AAD0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,934AAF2,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,934ACB8,exp=00A2
+W,A002,00,0A,42B0,934AD52,
+W,A003,A2,0A,42B6,934AD62,
+W,A000,03,06,5FAB,935C780,
+M,MainDispatch,,,,9381B3C,
+M,Level,,,,9386AE8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9386B0A,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,9386CD0,exp=00A2
+W,A002,00,0A,42B0,9386D6A,
+W,A003,A2,0A,42B6,9386D7A,
+W,A000,03,06,5FAB,9398798,
+M,MainDispatch,,,,93BDB54,
+M,Level,,,,93C2B00,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,93C2B22,level=23 shift=10 exp=00A2
+M,ExposureNew,,,,93C2CE8,exp=00A2
+W,A002,00,0A,42B0,93C2D82,
+W,A003,A2,0A,42B6,93C2D92,
+W,A000,03,06,5FAB,93D47B0,
+M,MainDispatch,,,,93F9B6C,
+M,Level,,,,93FEAF2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,93FEB14,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,93FEC32,exp=00A2
+W,A002,00,0A,42B0,93FECCC,
+W,A003,A2,0A,42B6,93FECDC,
+W,A000,03,06,5FAB,94107C8,
+M,MainDispatch,,,,9435B84,
+M,Level,,,,943AB0A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,943AB2C,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,943AC4A,exp=00A2
+W,A002,00,0A,42B0,943ACE4,
+W,A003,A2,0A,42B6,943ACF4,
+W,A000,03,06,5FAB,944C7E0,
+M,MainDispatch,,,,9471B9C,
+M,Level,,,,9476B18,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9476B3A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,9476C58,exp=00A2
+W,A002,00,0A,42B0,9476CF2,
+W,A003,A2,0A,42B6,9476D02,
+W,A000,03,06,5FAB,94887F8,
+M,MainDispatch,,,,94ADBB4,
+M,Level,,,,94B2B30,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,94B2B52,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,94B2C70,exp=00A2
+W,A002,00,0A,42B0,94B2D0A,
+W,A003,A2,0A,42B6,94B2D1A,
+W,A000,03,06,5FAB,94C4810,
+M,MainDispatch,,,,94E9BCC,
+M,Level,,,,94EEB48,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,94EEB6A,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,94EEC88,exp=00A2
+W,A002,00,0A,42B0,94EED22,
+W,A003,A2,0A,42B6,94EED32,
+W,A000,03,06,5FAB,9500828,
+M,MainDispatch,,,,9525BE4,
+M,Level,,,,952AB60,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,952AB82,level=22 shift=09 exp=00A2
+M,ExposureNew,,,,952ACA0,exp=00A2
+W,A002,00,0A,42B0,952AD3A,
+W,A003,A2,0A,42B6,952AD4A,
+W,A000,03,06,5FAB,953C840,
+M,MainDispatch,,,,9561BFC,
+M,Level,,,,9566B52,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9566B74,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,9566C7A,exp=00A2
+W,A002,00,0A,42B0,9566D14,
+W,A003,A2,0A,42B6,9566D24,
+W,A000,03,06,5FAB,9578858,
+M,MainDispatch,,,,959DC14,
+M,Level,,,,95A2B6A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,95A2B8C,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,95A2C92,exp=00A2
+W,A002,00,0A,42B0,95A2D2C,
+W,A003,A2,0A,42B6,95A2D3C,
+W,A000,03,06,5FAB,95B4870,
+M,MainDispatch,,,,95D9C2C,
+M,Level,,,,95DEB78,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,95DEB9A,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,95DECA0,exp=00A2
+W,A002,00,0A,42B0,95DED3A,
+W,A003,A2,0A,42B6,95DED4A,
+W,A000,03,06,5FAB,95F0888,
+M,MainDispatch,,,,9615C44,
+M,Level,,,,961AB90,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,961ABB2,level=21 shift=08 exp=00A2
+M,ExposureNew,,,,961ACB8,exp=00A2
+W,A002,00,0A,42B0,961AD52,
+W,A003,A2,0A,42B6,961AD62,
+W,A000,03,06,5FAB,962C8A0,
+M,MainDispatch,,,,9651C5C,
+M,Level,,,,9656B82,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9656BA4,level=20 shift=07 exp=00A2
+M,ExposureNew,,,,9656C92,exp=00A1
+W,A002,00,0A,42B0,9656D2C,
+W,A003,A1,0A,42B6,9656D3C,
+W,A000,03,06,5FAB,96688B8,
+M,MainDispatch,,,,968DC74,
+M,Level,,,,9692B9A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9692BBC,level=20 shift=07 exp=00A1
+M,ExposureNew,,,,9692CAA,exp=00A0
+W,A002,00,0A,42B0,9692D44,
+W,A003,A0,0A,42B6,9692D54,
+W,A000,03,06,5FAB,96A48D0,
+M,MainDispatch,,,,96C9C8C,
+M,Level,,,,96CEBB2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,96CEBD4,level=20 shift=07 exp=00A0
+M,ExposureNew,,,,96CECC2,exp=009F
+W,A002,00,0A,42B0,96CED5C,
+W,A003,9F,0A,42B6,96CED6C,
+W,A000,03,06,5FAB,96E08E8,
+M,MainDispatch,,,,9705CA4,
+M,Level,,,,970ABCA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,970ABEC,level=20 shift=07 exp=009F
+M,ExposureNew,,,,970ACDA,exp=009E
+W,A002,00,0A,42B0,970AD74,
+W,A003,9E,0A,42B6,970AD84,
+W,A000,03,06,5FAB,971C900,
+M,MainDispatch,,,,9741CBC,
+M,Level,,,,9746BE2,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9746C04,level=20 shift=07 exp=009E
+M,ExposureNew,,,,9746CF2,exp=009D
+W,A002,00,0A,42B0,9746D8C,
+W,A003,9D,0A,42B6,9746D9C,
+W,A000,03,06,5FAB,9758918,
+M,MainDispatch,,,,977DCD4,
+M,Level,,,,9782BFA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9782C1C,level=20 shift=07 exp=009D
+M,ExposureNew,,,,9782D0A,exp=009C
+W,A002,00,0A,42B0,9782DA4,
+W,A003,9C,0A,42B6,9782DB4,
+W,A000,03,06,5FAB,9794930,
+M,MainDispatch,,,,97B9CEC,
+M,Level,,,,97BEC38,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,97BEC5A,level=21 shift=08 exp=009C
+M,ExposureNew,,,,97BED60,exp=009C
+W,A002,00,0A,42B0,97BEDFA,
+W,A003,9C,0A,42B6,97BEE0A,
+W,A000,03,06,5FAB,97D0948,
+M,MainDispatch,,,,97F5D04,
+M,Level,,,,97FAC2A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,97FAC4C,level=20 shift=07 exp=009C
+M,ExposureNew,,,,97FAD3A,exp=009B
+W,A002,00,0A,42B0,97FADD4,
+W,A003,9B,0A,42B6,97FADE4,
+W,A000,03,06,5FAB,980C960,
+M,MainDispatch,,,,9831D1C,
+M,Level,,,,9836C68,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9836C8A,level=21 shift=08 exp=009B
+M,ExposureNew,,,,9836D90,exp=009B
+W,A002,00,0A,42B0,9836E2A,
+W,A003,9B,0A,42B6,9836E3A,
+W,A000,03,06,5FAB,9848978,
+M,MainDispatch,,,,986DD34,
+M,Level,,,,9872C5A,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9872C7C,level=20 shift=07 exp=009B
+M,ExposureNew,,,,9872D6A,exp=009A
+W,A002,00,0A,42B0,9872E04,
+W,A003,9A,0A,42B6,9872E14,
+W,A000,03,06,5FAB,9884990,
+M,MainDispatch,,,,98A9D4C,
+M,Level,,,,98AEC72,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,98AEC94,level=20 shift=07 exp=009A
+M,ExposureNew,,,,98AED82,exp=0099
+W,A002,00,0A,42B0,98AEE1C,
+W,A003,99,0A,42B6,98AEE2C,
+W,A000,03,06,5FAB,98C09A8,
+M,MainDispatch,,,,98E5D64,
+M,Level,,,,98EACB0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,98EACD2,level=21 shift=08 exp=0099
+M,ExposureNew,,,,98EADD8,exp=0099
+W,A002,00,0A,42B0,98EAE72,
+W,A003,99,0A,42B6,98EAE82,
+W,A000,03,06,5FAB,98FC9C0,
+M,MainDispatch,,,,9921D7C,
+M,Level,,,,9926CC8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9926CEA,level=21 shift=08 exp=0099
+M,ExposureNew,,,,9926DF0,exp=0099
+W,A002,00,0A,42B0,9926E8A,
+W,A003,99,0A,42B6,9926E9A,
+W,A000,03,06,5FAB,99389D8,
+M,MainDispatch,,,,995DD94,
+M,Level,,,,9962CE0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9962D02,level=21 shift=08 exp=0099
+M,ExposureNew,,,,9962E08,exp=0099
+W,A002,00,0A,42B0,9962EA2,
+W,A003,99,0A,42B6,9962EB2,
+W,A000,03,06,5FAB,99749F0,
+M,MainDispatch,,,,9999DAC,
+M,Level,,,,999ECF8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,999ED1A,level=21 shift=08 exp=0099
+M,ExposureNew,,,,999EE20,exp=0099
+W,A002,00,0A,42B0,999EEBA,
+W,A003,99,0A,42B6,999EECA,
+W,A000,03,06,5FAB,99B0A08,
+M,MainDispatch,,,,99D5DC4,
+M,Level,,,,99DAD1A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,99DAD3C,level=21 shift=08 exp=0099
+M,ExposureNew,,,,99DAE42,exp=0099
+W,A002,00,0A,42B0,99DAEDC,
+W,A003,99,0A,42B6,99DAEEC,
+W,A000,03,06,5FAB,99ECA20,
+M,MainDispatch,,,,9A11DDC,
+M,Level,,,,9A16D32,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9A16D54,level=21 shift=08 exp=0099
+M,ExposureNew,,,,9A16E5A,exp=0099
+W,A002,00,0A,42B0,9A16EF4,
+W,A003,99,0A,42B6,9A16F04,
+W,A000,03,06,5FAB,9A28A38,
+M,MainDispatch,,,,9A4DDF4,
+M,Level,,,,9A52D4A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9A52D6C,level=21 shift=08 exp=0099
+M,ExposureNew,,,,9A52E72,exp=0099
+W,A002,00,0A,42B0,9A52F0C,
+W,A003,99,0A,42B6,9A52F1C,
+W,A000,03,06,5FAB,9A64A50,
+M,MainDispatch,,,,9A89E0C,
+M,Level,,,,9A8ED62,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9A8ED84,level=21 shift=08 exp=0099
+M,ExposureNew,,,,9A8EE8A,exp=0099
+W,A002,00,0A,42B0,9A8EF24,
+W,A003,99,0A,42B6,9A8EF34,
+W,A000,03,06,5FAB,9AA0A68,
+M,MainDispatch,,,,9AC5E24,
+M,Level,,,,9ACAD7A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9ACAD9C,level=21 shift=08 exp=0099
+M,ExposureNew,,,,9ACAEA2,exp=0099
+W,A002,00,0A,42B0,9ACAF3C,
+W,A003,99,0A,42B6,9ACAF4C,
+W,A000,03,06,5FAB,9ADCA80,
+M,MainDispatch,,,,9B01E3C,
+M,Level,,,,9B06DB8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9B06DDA,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9B06EF8,exp=0099
+W,A002,00,0A,42B0,9B06F92,
+W,A003,99,0A,42B6,9B06FA2,
+W,A000,03,06,5FAB,9B18A98,
+M,MainDispatch,,,,9B3DE54,
+M,Level,,,,9B42DD0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9B42DF2,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9B42F10,exp=0099
+W,A002,00,0A,42B0,9B42FAA,
+W,A003,99,0A,42B6,9B42FBA,
+W,A000,03,06,5FAB,9B54AB0,
+M,MainDispatch,,,,9B79E6C,
+M,Level,,,,9B7EDE8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9B7EE0A,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9B7EF28,exp=0099
+W,A002,00,0A,42B0,9B7EFC2,
+W,A003,99,0A,42B6,9B7EFD2,
+W,A000,03,06,5FAB,9B90AC8,
+M,MainDispatch,,,,9BB5E84,
+M,Level,,,,9BBAE00,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9BBAE22,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9BBAF40,exp=0099
+W,A002,00,0A,42B0,9BBAFDA,
+W,A003,99,0A,42B6,9BBAFEA,
+W,A000,03,06,5FAB,9BCCAE0,
+M,MainDispatch,,,,9BF1E9C,
+M,Level,,,,9BF6E18,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9BF6E3A,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9BF6F58,exp=0099
+W,A002,00,0A,42B0,9BF6FF2,
+W,A003,99,0A,42B6,9BF7002,
+W,A000,03,06,5FAB,9C08AF8,
+M,MainDispatch,,,,9C2DEB4,
+M,Level,,,,9C32E30,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9C32E52,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9C32F70,exp=0099
+W,A002,00,0A,42B0,9C3300A,
+W,A003,99,0A,42B6,9C3301A,
+W,A000,03,06,5FAB,9C44B10,
+M,MainDispatch,,,,9C69ECC,
+M,Level,,,,9C6EE52,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9C6EE74,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9C6EF92,exp=0099
+W,A002,00,0A,42B0,9C6F02C,
+W,A003,99,0A,42B6,9C6F03C,
+W,A000,03,06,5FAB,9C80B28,
+M,MainDispatch,,,,9CA5EE4,
+M,Level,,,,9CAAE6A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9CAAE8C,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9CAAFAA,exp=0099
+W,A002,00,0A,42B0,9CAB044,
+W,A003,99,0A,42B6,9CAB054,
+W,A000,03,06,5FAB,9CBCB40,
+M,MainDispatch,,,,9CE1EFC,
+M,Level,,,,9CE6E82,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9CE6EA4,level=22 shift=09 exp=0099
+M,ExposureNew,,,,9CE6FC2,exp=0099
+W,A002,00,0A,42B0,9CE705C,
+W,A003,99,0A,42B6,9CE706C,
+W,A000,03,06,5FAB,9CF8B58,
+M,MainDispatch,,,,9D1DF14,
+M,Level,,,,9D22EC0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9D22EE2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9D230A8,exp=0099
+W,A002,00,0A,42B0,9D23142,
+W,A003,99,0A,42B6,9D23152,
+W,A000,03,06,5FAB,9D34B70,
+M,MainDispatch,,,,9D59F2C,
+M,Level,,,,9D5EED8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9D5EEFA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9D5F0C0,exp=0099
+W,A002,00,0A,42B0,9D5F15A,
+W,A003,99,0A,42B6,9D5F16A,
+W,A000,03,06,5FAB,9D70B88,
+M,MainDispatch,,,,9D95F44,
+M,Level,,,,9D9AEF0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9D9AF12,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9D9B0D8,exp=0099
+W,A002,00,0A,42B0,9D9B172,
+W,A003,99,0A,42B6,9D9B182,
+W,A000,03,06,5FAB,9DACBA0,
+M,MainDispatch,,,,9DD1F5C,
+M,Level,,,,9DD6F08,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9DD6F2A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9DD70F0,exp=0099
+W,A002,00,0A,42B0,9DD718A,
+W,A003,99,0A,42B6,9DD719A,
+W,A000,03,06,5FAB,9DE8BB8,
+M,MainDispatch,,,,9E0DF74,
+M,Level,,,,9E12F20,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9E12F42,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9E13108,exp=0099
+W,A002,00,0A,42B0,9E131A2,
+W,A003,99,0A,42B6,9E131B2,
+W,A000,03,06,5FAB,9E24BD0,
+M,MainDispatch,,,,9E49F8C,
+M,Level,,,,9E4EF38,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9E4EF5A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9E4F120,exp=0099
+W,A002,00,0A,42B0,9E4F1BA,
+W,A003,99,0A,42B6,9E4F1CA,
+W,A000,03,06,5FAB,9E60BE8,
+M,MainDispatch,,,,9E85FA4,
+M,Level,,,,9E8AF50,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9E8AF72,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9E8B138,exp=0099
+W,A002,00,0A,42B0,9E8B1D2,
+W,A003,99,0A,42B6,9E8B1E2,
+W,A000,03,06,5FAB,9E9CC00,
+M,MainDispatch,,,,9EC1FBC,
+M,Level,,,,9EC6F68,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9EC6F8A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9EC7150,exp=0099
+W,A002,00,0A,42B0,9EC71EA,
+W,A003,99,0A,42B6,9EC71FA,
+W,A000,03,06,5FAB,9ED8C18,
+M,MainDispatch,,,,9EFDFD4,
+M,Level,,,,9F02F80,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9F02FA2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9F03168,exp=0099
+W,A002,00,0A,42B0,9F03202,
+W,A003,99,0A,42B6,9F03212,
+W,A000,03,06,5FAB,9F14C30,
+M,MainDispatch,,,,9F39FEC,
+M,Level,,,,9F3EF98,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9F3EFBA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9F3F180,exp=0099
+W,A002,00,0A,42B0,9F3F21A,
+W,A003,99,0A,42B6,9F3F22A,
+W,A000,03,06,5FAB,9F50C48,
+M,MainDispatch,,,,9F76004,
+M,Level,,,,9F7AFB0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9F7AFD2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9F7B198,exp=0099
+W,A002,00,0A,42B0,9F7B232,
+W,A003,99,0A,42B6,9F7B242,
+W,A000,03,06,5FAB,9F8CC60,
+M,MainDispatch,,,,9FB201C,
+M,Level,,,,9FB6FC8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9FB6FEA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9FB71B0,exp=0099
+W,A002,00,0A,42B0,9FB724A,
+W,A003,99,0A,42B6,9FB725A,
+W,A000,03,06,5FAB,9FC8C78,
+M,MainDispatch,,,,9FEE034,
+M,Level,,,,9FF2FE0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,9FF3002,level=23 shift=10 exp=0099
+M,ExposureNew,,,,9FF31C8,exp=0099
+W,A002,00,0A,42B0,9FF3262,
+W,A003,99,0A,42B6,9FF3272,
+W,A000,03,06,5FAB,A004C90,
+M,MainDispatch,,,,A02A04C,
+M,Level,,,,A02EFF8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A02F01A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A02F1E0,exp=0099
+W,A002,00,0A,42B0,A02F27A,
+W,A003,99,0A,42B6,A02F28A,
+W,A000,03,06,5FAB,A040CA8,
+M,MainDispatch,,,,A066064,
+M,Level,,,,A06B010,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A06B032,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A06B1F8,exp=0099
+W,A002,00,0A,42B0,A06B292,
+W,A003,99,0A,42B6,A06B2A2,
+W,A000,03,06,5FAB,A07CCC0,
+M,MainDispatch,,,,A0A207C,
+M,Level,,,,A0A7028,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A0A704A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A0A7210,exp=0099
+W,A002,00,0A,42B0,A0A72AA,
+W,A003,99,0A,42B6,A0A72BA,
+W,A000,03,06,5FAB,A0B8CD8,
+M,MainDispatch,,,,A0DE094,
+M,Level,,,,A0E3040,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A0E3062,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A0E3228,exp=0099
+W,A002,00,0A,42B0,A0E32C2,
+W,A003,99,0A,42B6,A0E32D2,
+W,A000,03,06,5FAB,A0F4CF0,
+M,MainDispatch,,,,A11A0AC,
+M,Level,,,,A11F058,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A11F07A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A11F240,exp=0099
+W,A002,00,0A,42B0,A11F2DA,
+W,A003,99,0A,42B6,A11F2EA,
+W,A000,03,06,5FAB,A130D08,
+M,MainDispatch,,,,A1560C4,
+M,Level,,,,A15B070,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A15B092,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A15B258,exp=0099
+W,A002,00,0A,42B0,A15B2F2,
+W,A003,99,0A,42B6,A15B302,
+W,A000,03,06,5FAB,A16CD20,
+M,MainDispatch,,,,A1920DC,
+M,Level,,,,A197088,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A1970AA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A197270,exp=0099
+W,A002,00,0A,42B0,A19730A,
+W,A003,99,0A,42B6,A19731A,
+W,A000,03,06,5FAB,A1A8D38,
+M,MainDispatch,,,,A1CE0F4,
+M,Level,,,,A1D30A0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A1D30C2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A1D3288,exp=0099
+W,A002,00,0A,42B0,A1D3322,
+W,A003,99,0A,42B6,A1D3332,
+W,A000,03,06,5FAB,A1E4D50,
+M,MainDispatch,,,,A20A10C,
+M,Level,,,,A20F0B8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A20F0DA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A20F2A0,exp=0099
+W,A002,00,0A,42B0,A20F33A,
+W,A003,99,0A,42B6,A20F34A,
+W,A000,03,06,5FAB,A220D68,
+M,MainDispatch,,,,A246124,
+M,Level,,,,A24B0D0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A24B0F2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A24B2B8,exp=0099
+W,A002,00,0A,42B0,A24B352,
+W,A003,99,0A,42B6,A24B362,
+W,A000,03,06,5FAB,A25CD80,
+M,MainDispatch,,,,A28213C,
+M,Level,,,,A2870E8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A28710A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A2872D0,exp=0099
+W,A002,00,0A,42B0,A28736A,
+W,A003,99,0A,42B6,A28737A,
+W,A000,03,06,5FAB,A298D98,
+M,MainDispatch,,,,A2BE154,
+M,Level,,,,A2C3100,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A2C3122,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A2C32E8,exp=0099
+W,A002,00,0A,42B0,A2C3382,
+W,A003,99,0A,42B6,A2C3392,
+W,A000,03,06,5FAB,A2D4DB0,
+M,MainDispatch,,,,A2FA16C,
+M,Level,,,,A2FF118,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A2FF13A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A2FF300,exp=0099
+W,A002,00,0A,42B0,A2FF39A,
+W,A003,99,0A,42B6,A2FF3AA,
+W,A000,03,06,5FAB,A310DC8,
+M,MainDispatch,,,,A336184,
+M,Level,,,,A33B130,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A33B152,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A33B318,exp=0099
+W,A002,00,0A,42B0,A33B3B2,
+W,A003,99,0A,42B6,A33B3C2,
+W,A000,03,06,5FAB,A34CDE0,
+M,MainDispatch,,,,A37219C,
+M,Level,,,,A377148,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A37716A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A377330,exp=0099
+W,A002,00,0A,42B0,A3773CA,
+W,A003,99,0A,42B6,A3773DA,
+W,A000,03,06,5FAB,A388DF8,
+M,MainDispatch,,,,A3AE1B4,
+M,Level,,,,A3B3160,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A3B3182,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A3B3348,exp=0099
+W,A002,00,0A,42B0,A3B33E2,
+W,A003,99,0A,42B6,A3B33F2,
+W,A000,03,06,5FAB,A3C4E10,
+M,MainDispatch,,,,A3EA1CC,
+M,Level,,,,A3EF178,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A3EF19A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A3EF360,exp=0099
+W,A002,00,0A,42B0,A3EF3FA,
+W,A003,99,0A,42B6,A3EF40A,
+W,A000,03,06,5FAB,A400E28,
+M,MainDispatch,,,,A4261E4,
+M,Level,,,,A42B190,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A42B1B2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A42B378,exp=0099
+W,A002,00,0A,42B0,A42B412,
+W,A003,99,0A,42B6,A42B422,
+W,A000,03,06,5FAB,A43CE40,
+M,MainDispatch,,,,A4621FC,
+M,Level,,,,A4671A8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A4671CA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A467390,exp=0099
+W,A002,00,0A,42B0,A46742A,
+W,A003,99,0A,42B6,A46743A,
+W,A000,03,06,5FAB,A478E58,
+M,MainDispatch,,,,A49E214,
+M,Level,,,,A4A31C0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A4A31E2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A4A33A8,exp=0099
+W,A002,00,0A,42B0,A4A3442,
+W,A003,99,0A,42B6,A4A3452,
+W,A000,03,06,5FAB,A4B4E70,
+M,MainDispatch,,,,A4DA22C,
+M,Level,,,,A4DF1D8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A4DF1FA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A4DF3C0,exp=0099
+W,A002,00,0A,42B0,A4DF45A,
+W,A003,99,0A,42B6,A4DF46A,
+W,A000,03,06,5FAB,A4F0E88,
+M,MainDispatch,,,,A516244,
+M,Level,,,,A51B1F0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A51B212,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A51B3D8,exp=0099
+W,A002,00,0A,42B0,A51B472,
+W,A003,99,0A,42B6,A51B482,
+W,A000,03,06,5FAB,A52CEA0,
+M,MainDispatch,,,,A55225C,
+M,Level,,,,A557208,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A55722A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A5573F0,exp=0099
+W,A002,00,0A,42B0,A55748A,
+W,A003,99,0A,42B6,A55749A,
+W,A000,03,06,5FAB,A568EB8,
+M,MainDispatch,,,,A58E274,
+M,Level,,,,A593220,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A593242,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A593408,exp=0099
+W,A002,00,0A,42B0,A5934A2,
+W,A003,99,0A,42B6,A5934B2,
+W,A000,03,06,5FAB,A5A4ED0,
+M,MainDispatch,,,,A5CA28C,
+M,Level,,,,A5CF212,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A5CF234,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A5CF352,exp=0099
+W,A002,00,0A,42B0,A5CF3EC,
+W,A003,99,0A,42B6,A5CF3FC,
+W,A000,03,06,5FAB,A5E0EE8,
+M,MainDispatch,,,,A6062A4,
+M,Level,,,,A60B22A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A60B24C,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A60B36A,exp=0099
+W,A002,00,0A,42B0,A60B404,
+W,A003,99,0A,42B6,A60B414,
+W,A000,03,06,5FAB,A61CF00,
+M,MainDispatch,,,,A6422BC,
+M,Level,,,,A647242,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A647264,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A647382,exp=0099
+W,A002,00,0A,42B0,A64741C,
+W,A003,99,0A,42B6,A64742C,
+W,A000,03,06,5FAB,A658F18,
+M,MainDispatch,,,,A67E2D4,
+M,Level,,,,A68325A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A68327C,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A68339A,exp=0099
+W,A002,00,0A,42B0,A683434,
+W,A003,99,0A,42B6,A683444,
+W,A000,03,06,5FAB,A694F30,
+M,MainDispatch,,,,A6BA2EC,
+M,Level,,,,A6BF272,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A6BF294,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A6BF3B2,exp=0099
+W,A002,00,0A,42B0,A6BF44C,
+W,A003,99,0A,42B6,A6BF45C,
+W,A000,03,06,5FAB,A6D0F48,
+M,MainDispatch,,,,A6F6304,
+M,Level,,,,A6FB28A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A6FB2AC,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A6FB3CA,exp=0099
+W,A002,00,0A,42B0,A6FB464,
+W,A003,99,0A,42B6,A6FB474,
+W,A000,03,06,5FAB,A70CF60,
+M,MainDispatch,,,,A73231C,
+M,Level,,,,A737298,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A7372BA,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A7373D8,exp=0099
+W,A002,00,0A,42B0,A737472,
+W,A003,99,0A,42B6,A737482,
+W,A000,03,06,5FAB,A748F78,
+M,MainDispatch,,,,A76E334,
+M,Level,,,,A7732BA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A7732DC,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A7733FA,exp=0099
+W,A002,00,0A,42B0,A773494,
+W,A003,99,0A,42B6,A7734A4,
+W,A000,03,06,5FAB,A784F90,
+M,MainDispatch,,,,A7AA34C,
+M,Level,,,,A7AF2D2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A7AF2F4,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A7AF412,exp=0099
+W,A002,00,0A,42B0,A7AF4AC,
+W,A003,99,0A,42B6,A7AF4BC,
+W,A000,03,06,5FAB,A7C0FA8,
+M,MainDispatch,,,,A7E6364,
+M,Level,,,,A7EB2EA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A7EB30C,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A7EB42A,exp=0099
+W,A002,00,0A,42B0,A7EB4C4,
+W,A003,99,0A,42B6,A7EB4D4,
+W,A000,03,06,5FAB,A7FCFC0,
+M,MainDispatch,,,,A82237C,
+M,Level,,,,A827302,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A827324,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A827442,exp=0099
+W,A002,00,0A,42B0,A8274DC,
+W,A003,99,0A,42B6,A8274EC,
+W,A000,03,06,5FAB,A838FD8,
+M,MainDispatch,,,,A85E394,
+M,Level,,,,A86331A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A86333C,level=22 shift=09 exp=0099
+M,ExposureNew,,,,A86345A,exp=0099
+W,A002,00,0A,42B0,A8634F4,
+W,A003,99,0A,42B6,A863504,
+W,A000,03,06,5FAB,A874FF0,
+M,MainDispatch,,,,A89A3AC,
+M,Level,,,,A89F358,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A89F37A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A89F540,exp=0099
+W,A002,00,0A,42B0,A89F5DA,
+W,A003,99,0A,42B6,A89F5EA,
+W,A000,03,06,5FAB,A8B1008,
+M,MainDispatch,,,,A8D63C4,
+M,Level,,,,A8DB370,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A8DB392,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A8DB558,exp=0099
+W,A002,00,0A,42B0,A8DB5F2,
+W,A003,99,0A,42B6,A8DB602,
+W,A000,03,06,5FAB,A8ED020,
+M,MainDispatch,,,,A9123DC,
+M,Level,,,,A917388,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A9173AA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A917570,exp=0099
+W,A002,00,0A,42B0,A91760A,
+W,A003,99,0A,42B6,A91761A,
+W,A000,03,06,5FAB,A929038,
+M,MainDispatch,,,,A94E3F4,
+M,Level,,,,A9533A0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A9533C2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A953588,exp=0099
+W,A002,00,0A,42B0,A953622,
+W,A003,99,0A,42B6,A953632,
+W,A000,03,06,5FAB,A965050,
+M,MainDispatch,,,,A98A40C,
+M,Level,,,,A98F3B8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A98F3DA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A98F5A0,exp=0099
+W,A002,00,0A,42B0,A98F63A,
+W,A003,99,0A,42B6,A98F64A,
+W,A000,03,06,5FAB,A9A1068,
+M,MainDispatch,,,,A9C6424,
+M,Level,,,,A9CB3D0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,A9CB3F2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,A9CB5B8,exp=0099
+W,A002,00,0A,42B0,A9CB652,
+W,A003,99,0A,42B6,A9CB662,
+W,A000,03,06,5FAB,A9DD080,
+M,MainDispatch,,,,AA0243C,
+M,Level,,,,AA073E8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AA0740A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AA075D0,exp=0099
+W,A002,00,0A,42B0,AA0766A,
+W,A003,99,0A,42B6,AA0767A,
+W,A000,03,06,5FAB,AA19098,
+M,MainDispatch,,,,AA3E454,
+M,Level,,,,AA43400,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AA43422,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AA435E8,exp=0099
+W,A002,00,0A,42B0,AA43682,
+W,A003,99,0A,42B6,AA43692,
+W,A000,03,06,5FAB,AA550B0,
+M,MainDispatch,,,,AA7A46C,
+M,Level,,,,AA7F418,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AA7F43A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AA7F600,exp=0099
+W,A002,00,0A,42B0,AA7F69A,
+W,A003,99,0A,42B6,AA7F6AA,
+W,A000,03,06,5FAB,AA910C8,
+M,MainDispatch,,,,AAB6484,
+M,Level,,,,AABB430,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AABB452,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AABB618,exp=0099
+W,A002,00,0A,42B0,AABB6B2,
+W,A003,99,0A,42B6,AABB6C2,
+W,A000,03,06,5FAB,AACD0E0,
+M,MainDispatch,,,,AAF249C,
+M,Level,,,,AAF7448,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AAF746A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AAF7630,exp=0099
+W,A002,00,0A,42B0,AAF76CA,
+W,A003,99,0A,42B6,AAF76DA,
+W,A000,03,06,5FAB,AB090F8,
+M,MainDispatch,,,,AB2E4B4,
+M,Level,,,,AB33460,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AB33482,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AB33648,exp=0099
+W,A002,00,0A,42B0,AB336E2,
+W,A003,99,0A,42B6,AB336F2,
+W,A000,03,06,5FAB,AB45110,
+M,MainDispatch,,,,AB6A4CC,
+M,Level,,,,AB6F478,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AB6F49A,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AB6F660,exp=0099
+W,A002,00,0A,42B0,AB6F6FA,
+W,A003,99,0A,42B6,AB6F70A,
+W,A000,03,06,5FAB,AB81128,
+M,MainDispatch,,,,ABA64E4,
+M,Level,,,,ABAB490,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,ABAB4B2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,ABAB678,exp=0099
+W,A002,00,0A,42B0,ABAB712,
+W,A003,99,0A,42B6,ABAB722,
+W,A000,03,06,5FAB,ABBD140,
+M,MainDispatch,,,,ABE24FC,
+M,Level,,,,ABE74A8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,ABE74CA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,ABE7690,exp=0099
+W,A002,00,0A,42B0,ABE772A,
+W,A003,99,0A,42B6,ABE773A,
+W,A000,03,06,5FAB,ABF9158,
+M,MainDispatch,,,,AC1E514,
+M,Level,,,,AC234C0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AC234E2,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AC236A8,exp=0099
+W,A002,00,0A,42B0,AC23742,
+W,A003,99,0A,42B6,AC23752,
+W,A000,03,06,5FAB,AC35170,
+M,MainDispatch,,,,AC5A52C,
+M,Level,,,,AC5F4D8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AC5F4FA,level=23 shift=10 exp=0099
+M,ExposureNew,,,,AC5F6C0,exp=0099
+W,A002,00,0A,42B0,AC5F75A,
+W,A003,99,0A,42B6,AC5F76A,
+W,A000,03,06,5FAB,AC71188,
+M,MainDispatch,,,,AC96544,
+M,Level,,,,AC9B4CA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AC9B4EC,level=22 shift=09 exp=0099
+M,ExposureNew,,,,AC9B60A,exp=0099
+W,A002,00,0A,42B0,AC9B6A4,
+W,A003,99,0A,42B6,AC9B6B4,
+W,A000,03,06,5FAB,ACAD1A0,
+M,MainDispatch,,,,ACD255C,
+M,Level,,,,ACD74D8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,ACD74FA,level=22 shift=09 exp=0099
+M,ExposureNew,,,,ACD7618,exp=0099
+W,A002,00,0A,42B0,ACD76B2,
+W,A003,99,0A,42B6,ACD76C2,
+W,A000,03,06,5FAB,ACE91B8,
+M,MainDispatch,,,,AD0E574,
+M,Level,,,,AD134F0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AD13512,level=22 shift=09 exp=0099
+M,ExposureNew,,,,AD13630,exp=0099
+W,A002,00,0A,42B0,AD136CA,
+W,A003,99,0A,42B6,AD136DA,
+W,A000,03,06,5FAB,AD251D0,
+M,MainDispatch,,,,AD4A58C,
+M,Level,,,,AD4F508,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AD4F52A,level=22 shift=09 exp=0099
+M,ExposureNew,,,,AD4F648,exp=0099
+W,A002,00,0A,42B0,AD4F6E2,
+W,A003,99,0A,42B6,AD4F6F2,
+W,A000,03,06,5FAB,AD611E8,
+M,MainDispatch,,,,AD865A4,
+M,Level,,,,AD8B4FA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AD8B51C,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AD8B622,exp=0099
+W,A002,00,0A,42B0,AD8B6BC,
+W,A003,99,0A,42B6,AD8B6CC,
+W,A000,03,06,5FAB,AD9D200,
+M,MainDispatch,,,,ADC25BC,
+M,Level,,,,ADC7512,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,ADC7534,level=21 shift=08 exp=0099
+M,ExposureNew,,,,ADC763A,exp=0099
+W,A002,00,0A,42B0,ADC76D4,
+W,A003,99,0A,42B6,ADC76E4,
+W,A000,03,06,5FAB,ADD9218,
+M,MainDispatch,,,,ADFE5D4,
+M,Level,,,,AE0352A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AE0354C,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AE03652,exp=0099
+W,A002,00,0A,42B0,AE036EC,
+W,A003,99,0A,42B6,AE036FC,
+W,A000,03,06,5FAB,AE15230,
+M,MainDispatch,,,,AE3A5EC,
+M,Level,,,,AE3F542,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AE3F564,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AE3F66A,exp=0099
+W,A002,00,0A,42B0,AE3F704,
+W,A003,99,0A,42B6,AE3F714,
+W,A000,03,06,5FAB,AE51248,
+M,MainDispatch,,,,AE76604,
+M,Level,,,,AE7B55A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AE7B57C,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AE7B682,exp=0099
+W,A002,00,0A,42B0,AE7B71C,
+W,A003,99,0A,42B6,AE7B72C,
+W,A000,03,06,5FAB,AE8D260,
+M,MainDispatch,,,,AEB261C,
+M,Level,,,,AEB7568,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AEB758A,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AEB7690,exp=0099
+W,A002,00,0A,42B0,AEB772A,
+W,A003,99,0A,42B6,AEB773A,
+W,A000,03,06,5FAB,AEC9278,
+M,MainDispatch,,,,AEEE634,
+M,Level,,,,AEF3580,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AEF35A2,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AEF36A8,exp=0099
+W,A002,00,0A,42B0,AEF3742,
+W,A003,99,0A,42B6,AEF3752,
+W,A000,03,06,5FAB,AF05290,
+M,MainDispatch,,,,AF2A64C,
+M,Level,,,,AF2F598,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AF2F5BA,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AF2F6C0,exp=0099
+W,A002,00,0A,42B0,AF2F75A,
+W,A003,99,0A,42B6,AF2F76A,
+W,A000,03,06,5FAB,AF412A8,
+M,MainDispatch,,,,AF66664,
+M,Level,,,,AF6B5B0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AF6B5D2,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AF6B6D8,exp=0099
+W,A002,00,0A,42B0,AF6B772,
+W,A003,99,0A,42B6,AF6B782,
+W,A000,03,06,5FAB,AF7D2C0,
+M,MainDispatch,,,,AFA267C,
+M,Level,,,,AFA75C8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AFA75EA,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AFA76F0,exp=0099
+W,A002,00,0A,42B0,AFA778A,
+W,A003,99,0A,42B6,AFA779A,
+W,A000,03,06,5FAB,AFB92D8,
+M,MainDispatch,,,,AFDE694,
+M,Level,,,,AFE35E0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,AFE3602,level=21 shift=08 exp=0099
+M,ExposureNew,,,,AFE3708,exp=0099
+W,A002,00,0A,42B0,AFE37A2,
+W,A003,99,0A,42B6,AFE37B2,
+W,A000,03,06,5FAB,AFF52F0,
+M,MainDispatch,,,,B01A6AC,
+M,Level,,,,B01F5F8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B01F61A,level=21 shift=08 exp=0099
+M,ExposureNew,,,,B01F720,exp=0099
+W,A002,00,0A,42B0,B01F7BA,
+W,A003,99,0A,42B6,B01F7CA,
+W,A000,03,06,5FAB,B031308,
+M,MainDispatch,,,,B0566C4,
+M,Level,,,,B05B5EA,level=20 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B05B60C,level=20 shift=07 exp=0099
+M,ExposureNew,,,,B05B6FA,exp=0098
+W,A002,00,0A,42B0,B05B794,
+W,A003,98,0A,42B6,B05B7A4,
+W,A000,03,06,5FAB,B06D320,
+M,MainDispatch,,,,B0926DC,
+M,Level,,,,B097628,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B09764A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B097750,exp=0098
+W,A002,00,0A,42B0,B0977EA,
+W,A003,98,0A,42B6,B0977FA,
+W,A000,03,06,5FAB,B0A9338,
+M,MainDispatch,,,,B0CE6F4,
+M,Level,,,,B0D3640,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B0D3662,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B0D3768,exp=0098
+W,A002,00,0A,42B0,B0D3802,
+W,A003,98,0A,42B6,B0D3812,
+W,A000,03,06,5FAB,B0E5350,
+M,MainDispatch,,,,B10A70C,
+M,Level,,,,B10F658,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B10F67A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B10F780,exp=0098
+W,A002,00,0A,42B0,B10F81A,
+W,A003,98,0A,42B6,B10F82A,
+W,A000,03,06,5FAB,B121368,
+M,MainDispatch,,,,B146724,
+M,Level,,,,B14B670,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B14B692,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B14B798,exp=0098
+W,A002,00,0A,42B0,B14B832,
+W,A003,98,0A,42B6,B14B842,
+W,A000,03,06,5FAB,B15D380,
+M,MainDispatch,,,,B18273C,
+M,Level,,,,B187688,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B1876AA,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B1877B0,exp=0098
+W,A002,00,0A,42B0,B18784A,
+W,A003,98,0A,42B6,B18785A,
+W,A000,03,06,5FAB,B199398,
+M,MainDispatch,,,,B1BE754,
+M,Level,,,,B1C36A0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B1C36C2,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B1C37C8,exp=0098
+W,A002,00,0A,42B0,B1C3862,
+W,A003,98,0A,42B6,B1C3872,
+W,A000,03,06,5FAB,B1D53B0,
+M,MainDispatch,,,,B1FA76C,
+M,Level,,,,B1FF6B8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B1FF6DA,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B1FF7E0,exp=0098
+W,A002,00,0A,42B0,B1FF87A,
+W,A003,98,0A,42B6,B1FF88A,
+W,A000,03,06,5FAB,B2113C8,
+M,MainDispatch,,,,B236784,
+M,Level,,,,B23B6D0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B23B6F2,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B23B7F8,exp=0098
+W,A002,00,0A,42B0,B23B892,
+W,A003,98,0A,42B6,B23B8A2,
+W,A000,03,06,5FAB,B24D3E0,
+M,MainDispatch,,,,B27279C,
+M,Level,,,,B2776F2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B277714,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B27781A,exp=0098
+W,A002,00,0A,42B0,B2778B4,
+W,A003,98,0A,42B6,B2778C4,
+W,A000,03,06,5FAB,B2893F8,
+M,MainDispatch,,,,B2AE7B4,
+M,Level,,,,B2B370A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B2B372C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B2B3832,exp=0098
+W,A002,00,0A,42B0,B2B38CC,
+W,A003,98,0A,42B6,B2B38DC,
+W,A000,03,06,5FAB,B2C5410,
+M,MainDispatch,,,,B2EA7CC,
+M,Level,,,,B2EF722,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B2EF744,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B2EF84A,exp=0098
+W,A002,00,0A,42B0,B2EF8E4,
+W,A003,98,0A,42B6,B2EF8F4,
+W,A000,03,06,5FAB,B301428,
+M,MainDispatch,,,,B3267E4,
+M,Level,,,,B32B73A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B32B75C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B32B862,exp=0098
+W,A002,00,0A,42B0,B32B8FC,
+W,A003,98,0A,42B6,B32B90C,
+W,A000,03,06,5FAB,B33D440,
+M,MainDispatch,,,,B3627FC,
+M,Level,,,,B367752,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B367774,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B36787A,exp=0098
+W,A002,00,0A,42B0,B367914,
+W,A003,98,0A,42B6,B367924,
+W,A000,03,06,5FAB,B379458,
+M,MainDispatch,,,,B39E814,
+M,Level,,,,B3A376A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B3A378C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,B3A3892,exp=0098
+W,A002,00,0A,42B0,B3A392C,
+W,A003,98,0A,42B6,B3A393C,
+W,A000,03,06,5FAB,B3B5470,
+M,MainDispatch,,,,B3DA82C,
+M,Level,,,,B3DF7A8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B3DF7CA,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B3DF8E8,exp=0098
+W,A002,00,0A,42B0,B3DF982,
+W,A003,98,0A,42B6,B3DF992,
+W,A000,03,06,5FAB,B3F1488,
+M,MainDispatch,,,,B416844,
+M,Level,,,,B41B7C0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B41B7E2,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B41B900,exp=0098
+W,A002,00,0A,42B0,B41B99A,
+W,A003,98,0A,42B6,B41B9AA,
+W,A000,03,06,5FAB,B42D4A0,
+M,MainDispatch,,,,B45285C,
+M,Level,,,,B4577D8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B4577FA,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B457918,exp=0098
+W,A002,00,0A,42B0,B4579B2,
+W,A003,98,0A,42B6,B4579C2,
+W,A000,03,06,5FAB,B4694B8,
+M,MainDispatch,,,,B48E874,
+M,Level,,,,B4937F0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B493812,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B493930,exp=0098
+W,A002,00,0A,42B0,B4939CA,
+W,A003,98,0A,42B6,B4939DA,
+W,A000,03,06,5FAB,B4A54D0,
+M,MainDispatch,,,,B4CA88C,
+M,Level,,,,B4CF808,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B4CF82A,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B4CF948,exp=0098
+W,A002,00,0A,42B0,B4CF9E2,
+W,A003,98,0A,42B6,B4CF9F2,
+W,A000,03,06,5FAB,B4E14E8,
+M,MainDispatch,,,,B5068A4,
+M,Level,,,,B50B82A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B50B84C,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B50B96A,exp=0098
+W,A002,00,0A,42B0,B50BA04,
+W,A003,98,0A,42B6,B50BA14,
+W,A000,03,06,5FAB,B51D500,
+M,MainDispatch,,,,B5428BC,
+M,Level,,,,B547842,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B547864,level=22 shift=09 exp=0098
+M,ExposureNew,,,,B547982,exp=0098
+W,A002,00,0A,42B0,B547A1C,
+W,A003,98,0A,42B6,B547A2C,
+W,A000,03,06,5FAB,B559518,
+M,MainDispatch,,,,B57E8D4,
+M,Level,,,,B583880,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B5838A2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B583A68,exp=0098
+W,A002,00,0A,42B0,B583B02,
+W,A003,98,0A,42B6,B583B12,
+W,A000,03,06,5FAB,B595530,
+M,MainDispatch,,,,B5BA8EC,
+M,Level,,,,B5BF898,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B5BF8BA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B5BFA80,exp=0098
+W,A002,00,0A,42B0,B5BFB1A,
+W,A003,98,0A,42B6,B5BFB2A,
+W,A000,03,06,5FAB,B5D1548,
+M,MainDispatch,,,,B5F6904,
+M,Level,,,,B5FB8B0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B5FB8D2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B5FBA98,exp=0098
+W,A002,00,0A,42B0,B5FBB32,
+W,A003,98,0A,42B6,B5FBB42,
+W,A000,03,06,5FAB,B60D560,
+M,MainDispatch,,,,B63291C,
+M,Level,,,,B6378C8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B6378EA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B637AB0,exp=0098
+W,A002,00,0A,42B0,B637B4A,
+W,A003,98,0A,42B6,B637B5A,
+W,A000,03,06,5FAB,B649578,
+M,MainDispatch,,,,B66E934,
+M,Level,,,,B6738E0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B673902,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B673AC8,exp=0098
+W,A002,00,0A,42B0,B673B62,
+W,A003,98,0A,42B6,B673B72,
+W,A000,03,06,5FAB,B685590,
+M,MainDispatch,,,,B6AA94C,
+M,Level,,,,B6AF8F8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B6AF91A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B6AFAE0,exp=0098
+W,A002,00,0A,42B0,B6AFB7A,
+W,A003,98,0A,42B6,B6AFB8A,
+W,A000,03,06,5FAB,B6C15A8,
+M,MainDispatch,,,,B6E6964,
+M,Level,,,,B6EB910,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B6EB932,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B6EBAF8,exp=0098
+W,A002,00,0A,42B0,B6EBB92,
+W,A003,98,0A,42B6,B6EBBA2,
+W,A000,03,06,5FAB,B6FD5C0,
+M,MainDispatch,,,,B72297C,
+M,Level,,,,B727928,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B72794A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B727B10,exp=0098
+W,A002,00,0A,42B0,B727BAA,
+W,A003,98,0A,42B6,B727BBA,
+W,A000,03,06,5FAB,B7395D8,
+M,MainDispatch,,,,B75E994,
+M,Level,,,,B763940,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B763962,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B763B28,exp=0098
+W,A002,00,0A,42B0,B763BC2,
+W,A003,98,0A,42B6,B763BD2,
+W,A000,03,06,5FAB,B7755F0,
+M,MainDispatch,,,,B79A9AC,
+M,Level,,,,B79F958,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B79F97A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B79FB40,exp=0098
+W,A002,00,0A,42B0,B79FBDA,
+W,A003,98,0A,42B6,B79FBEA,
+W,A000,03,06,5FAB,B7B1608,
+M,MainDispatch,,,,B7D69C4,
+M,Level,,,,B7DB970,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B7DB992,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B7DBB58,exp=0098
+W,A002,00,0A,42B0,B7DBBF2,
+W,A003,98,0A,42B6,B7DBC02,
+W,A000,03,06,5FAB,B7ED620,
+M,MainDispatch,,,,B8129DC,
+M,Level,,,,B817988,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B8179AA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B817B70,exp=0098
+W,A002,00,0A,42B0,B817C0A,
+W,A003,98,0A,42B6,B817C1A,
+W,A000,03,06,5FAB,B829638,
+M,MainDispatch,,,,B84E9F4,
+M,Level,,,,B8539A0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B8539C2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B853B88,exp=0098
+W,A002,00,0A,42B0,B853C22,
+W,A003,98,0A,42B6,B853C32,
+W,A000,03,06,5FAB,B865650,
+M,MainDispatch,,,,B88AA0C,
+M,Level,,,,B88F9B8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B88F9DA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B88FBA0,exp=0098
+W,A002,00,0A,42B0,B88FC3A,
+W,A003,98,0A,42B6,B88FC4A,
+W,A000,03,06,5FAB,B8A1668,
+M,MainDispatch,,,,B8C6A24,
+M,Level,,,,B8CB9D0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B8CB9F2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B8CBBB8,exp=0098
+W,A002,00,0A,42B0,B8CBC52,
+W,A003,98,0A,42B6,B8CBC62,
+W,A000,03,06,5FAB,B8DD680,
+M,MainDispatch,,,,B902A3C,
+M,Level,,,,B9079E8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B907A0A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B907BD0,exp=0098
+W,A002,00,0A,42B0,B907C6A,
+W,A003,98,0A,42B6,B907C7A,
+W,A000,03,06,5FAB,B919698,
+M,MainDispatch,,,,B93EA54,
+M,Level,,,,B943A00,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B943A22,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B943BE8,exp=0098
+W,A002,00,0A,42B0,B943C82,
+W,A003,98,0A,42B6,B943C92,
+W,A000,03,06,5FAB,B9556B0,
+M,MainDispatch,,,,B97AA6C,
+M,Level,,,,B97FA18,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B97FA3A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B97FC00,exp=0098
+W,A002,00,0A,42B0,B97FC9A,
+W,A003,98,0A,42B6,B97FCAA,
+W,A000,03,06,5FAB,B9916C8,
+M,MainDispatch,,,,B9B6A84,
+M,Level,,,,B9BBA30,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B9BBA52,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B9BBC18,exp=0098
+W,A002,00,0A,42B0,B9BBCB2,
+W,A003,98,0A,42B6,B9BBCC2,
+W,A000,03,06,5FAB,B9CD6E0,
+M,MainDispatch,,,,B9F2A9C,
+M,Level,,,,B9F7A48,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,B9F7A6A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,B9F7C30,exp=0098
+W,A002,00,0A,42B0,B9F7CCA,
+W,A003,98,0A,42B6,B9F7CDA,
+W,A000,03,06,5FAB,BA096F8,
+M,MainDispatch,,,,BA2EAB4,
+M,Level,,,,BA33A60,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BA33A82,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BA33C48,exp=0098
+W,A002,00,0A,42B0,BA33CE2,
+W,A003,98,0A,42B6,BA33CF2,
+W,A000,03,06,5FAB,BA45710,
+M,MainDispatch,,,,BA6AACC,
+M,Level,,,,BA6FA78,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BA6FA9A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BA6FC60,exp=0098
+W,A002,00,0A,42B0,BA6FCFA,
+W,A003,98,0A,42B6,BA6FD0A,
+W,A000,03,06,5FAB,BA81728,
+M,MainDispatch,,,,BAA6AE4,
+M,Level,,,,BAABA90,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BAABAB2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BAABC78,exp=0098
+W,A002,00,0A,42B0,BAABD12,
+W,A003,98,0A,42B6,BAABD22,
+W,A000,03,06,5FAB,BABD740,
+M,MainDispatch,,,,BAE2AFC,
+M,Level,,,,BAE7AA8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BAE7ACA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BAE7C90,exp=0098
+W,A002,00,0A,42B0,BAE7D2A,
+W,A003,98,0A,42B6,BAE7D3A,
+W,A000,03,06,5FAB,BAF9758,
+M,MainDispatch,,,,BB1EB14,
+M,Level,,,,BB23AC0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BB23AE2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BB23CA8,exp=0098
+W,A002,00,0A,42B0,BB23D42,
+W,A003,98,0A,42B6,BB23D52,
+W,A000,03,06,5FAB,BB35770,
+M,MainDispatch,,,,BB5AB2C,
+M,Level,,,,BB5FAD8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BB5FAFA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BB5FCC0,exp=0098
+W,A002,00,0A,42B0,BB5FD5A,
+W,A003,98,0A,42B6,BB5FD6A,
+W,A000,03,06,5FAB,BB71788,
+M,MainDispatch,,,,BB96B44,
+M,Level,,,,BB9BAF0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BB9BB12,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BB9BCD8,exp=0098
+W,A002,00,0A,42B0,BB9BD72,
+W,A003,98,0A,42B6,BB9BD82,
+W,A000,03,06,5FAB,BBAD7A0,
+M,MainDispatch,,,,BBD2B5C,
+M,Level,,,,BBD7B08,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BBD7B2A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BBD7CF0,exp=0098
+W,A002,00,0A,42B0,BBD7D8A,
+W,A003,98,0A,42B6,BBD7D9A,
+W,A000,03,06,5FAB,BBE97B8,
+M,MainDispatch,,,,BC0EB74,
+M,Level,,,,BC13B20,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BC13B42,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BC13D08,exp=0098
+W,A002,00,0A,42B0,BC13DA2,
+W,A003,98,0A,42B6,BC13DB2,
+W,A000,03,06,5FAB,BC257D0,
+M,MainDispatch,,,,BC4AB8C,
+M,Level,,,,BC4FB38,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BC4FB5A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BC4FD20,exp=0098
+W,A002,00,0A,42B0,BC4FDBA,
+W,A003,98,0A,42B6,BC4FDCA,
+W,A000,03,06,5FAB,BC617E8,
+M,MainDispatch,,,,BC86BA4,
+M,Level,,,,BC8BB50,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BC8BB72,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BC8BD38,exp=0098
+W,A002,00,0A,42B0,BC8BDD2,
+W,A003,98,0A,42B6,BC8BDE2,
+W,A000,03,06,5FAB,BC9D800,
+M,MainDispatch,,,,BCC2BBC,
+M,Level,,,,BCC7B68,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BCC7B8A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BCC7D50,exp=0098
+W,A002,00,0A,42B0,BCC7DEA,
+W,A003,98,0A,42B6,BCC7DFA,
+W,A000,03,06,5FAB,BCD9818,
+M,MainDispatch,,,,BCFEBD4,
+M,Level,,,,BD03B80,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BD03BA2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BD03D68,exp=0098
+W,A002,00,0A,42B0,BD03E02,
+W,A003,98,0A,42B6,BD03E12,
+W,A000,03,06,5FAB,BD15830,
+M,MainDispatch,,,,BD3ABEC,
+M,Level,,,,BD3FB98,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BD3FBBA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BD3FD80,exp=0098
+W,A002,00,0A,42B0,BD3FE1A,
+W,A003,98,0A,42B6,BD3FE2A,
+W,A000,03,06,5FAB,BD51848,
+M,MainDispatch,,,,BD76C04,
+M,Level,,,,BD7BBB0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BD7BBD2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BD7BD98,exp=0098
+W,A002,00,0A,42B0,BD7BE32,
+W,A003,98,0A,42B6,BD7BE42,
+W,A000,03,06,5FAB,BD8D860,
+M,MainDispatch,,,,BDB2C1C,
+M,Level,,,,BDB7BC8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BDB7BEA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BDB7DB0,exp=0098
+W,A002,00,0A,42B0,BDB7E4A,
+W,A003,98,0A,42B6,BDB7E5A,
+W,A000,03,06,5FAB,BDC9878,
+M,MainDispatch,,,,BDEEC34,
+M,Level,,,,BDF3BE0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BDF3C02,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BDF3DC8,exp=0098
+W,A002,00,0A,42B0,BDF3E62,
+W,A003,98,0A,42B6,BDF3E72,
+W,A000,03,06,5FAB,BE05890,
+M,MainDispatch,,,,BE2AC4C,
+M,Level,,,,BE2FBF8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BE2FC1A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BE2FDE0,exp=0098
+W,A002,00,0A,42B0,BE2FE7A,
+W,A003,98,0A,42B6,BE2FE8A,
+W,A000,03,06,5FAB,BE418A8,
+M,MainDispatch,,,,BE66C64,
+M,Level,,,,BE6BC10,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BE6BC32,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BE6BDF8,exp=0098
+W,A002,00,0A,42B0,BE6BE92,
+W,A003,98,0A,42B6,BE6BEA2,
+W,A000,03,06,5FAB,BE7D8C0,
+M,MainDispatch,,,,BEA2C7C,
+M,Level,,,,BEA7C28,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BEA7C4A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BEA7E10,exp=0098
+W,A002,00,0A,42B0,BEA7EAA,
+W,A003,98,0A,42B6,BEA7EBA,
+W,A000,03,06,5FAB,BEB98D8,
+M,MainDispatch,,,,BEDEC94,
+M,Level,,,,BEE3C40,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BEE3C62,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BEE3E28,exp=0098
+W,A002,00,0A,42B0,BEE3EC2,
+W,A003,98,0A,42B6,BEE3ED2,
+W,A000,03,06,5FAB,BEF58F0,
+M,MainDispatch,,,,BF1ACAC,
+M,Level,,,,BF1FC58,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BF1FC7A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BF1FE40,exp=0098
+W,A002,00,0A,42B0,BF1FEDA,
+W,A003,98,0A,42B6,BF1FEEA,
+W,A000,03,06,5FAB,BF31908,
+M,MainDispatch,,,,BF56CC4,
+M,Level,,,,BF5BC70,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BF5BC92,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BF5BE58,exp=0098
+W,A002,00,0A,42B0,BF5BEF2,
+W,A003,98,0A,42B6,BF5BF02,
+W,A000,03,06,5FAB,BF6D920,
+M,MainDispatch,,,,BF92CDC,
+M,Level,,,,BF97C88,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BF97CAA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BF97E70,exp=0098
+W,A002,00,0A,42B0,BF97F0A,
+W,A003,98,0A,42B6,BF97F1A,
+W,A000,03,06,5FAB,BFA9938,
+M,MainDispatch,,,,BFCECF4,
+M,Level,,,,BFD3CA0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,BFD3CC2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,BFD3E88,exp=0098
+W,A002,00,0A,42B0,BFD3F22,
+W,A003,98,0A,42B6,BFD3F32,
+W,A000,03,06,5FAB,BFE5950,
+M,MainDispatch,,,,C00AD0C,
+M,Level,,,,C00FCB8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C00FCDA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C00FEA0,exp=0098
+W,A002,00,0A,42B0,C00FF3A,
+W,A003,98,0A,42B6,C00FF4A,
+W,A000,03,06,5FAB,C021968,
+M,MainDispatch,,,,C046D24,
+M,Level,,,,C04BCD0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C04BCF2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C04BEB8,exp=0098
+W,A002,00,0A,42B0,C04BF52,
+W,A003,98,0A,42B6,C04BF62,
+W,A000,03,06,5FAB,C05D980,
+M,MainDispatch,,,,C082D3C,
+M,Level,,,,C087CE8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C087D0A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C087ED0,exp=0098
+W,A002,00,0A,42B0,C087F6A,
+W,A003,98,0A,42B6,C087F7A,
+W,A000,03,06,5FAB,C099998,
+M,MainDispatch,,,,C0BED54,
+M,Level,,,,C0C3D00,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C0C3D22,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C0C3EE8,exp=0098
+W,A002,00,0A,42B0,C0C3F82,
+W,A003,98,0A,42B6,C0C3F92,
+W,A000,03,06,5FAB,C0D59B0,
+M,MainDispatch,,,,C0FAD6C,
+M,Level,,,,C0FFD18,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C0FFD3A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C0FFF00,exp=0098
+W,A002,00,0A,42B0,C0FFF9A,
+W,A003,98,0A,42B6,C0FFFAA,
+W,A000,03,06,5FAB,C1119C8,
+M,MainDispatch,,,,C136D84,
+M,Level,,,,C13BD30,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C13BD52,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C13BF18,exp=0098
+W,A002,00,0A,42B0,C13BFB2,
+W,A003,98,0A,42B6,C13BFC2,
+W,A000,03,06,5FAB,C14D9E0,
+M,MainDispatch,,,,C172D9C,
+M,Level,,,,C177D48,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C177D6A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C177F30,exp=0098
+W,A002,00,0A,42B0,C177FCA,
+W,A003,98,0A,42B6,C177FDA,
+W,A000,03,06,5FAB,C1899F8,
+M,MainDispatch,,,,C1AEDB4,
+M,Level,,,,C1B3D60,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C1B3D82,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C1B3F48,exp=0098
+W,A002,00,0A,42B0,C1B3FE2,
+W,A003,98,0A,42B6,C1B3FF2,
+W,A000,03,06,5FAB,C1C5A10,
+M,MainDispatch,,,,C1EADCC,
+M,Level,,,,C1EFD78,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C1EFD9A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C1EFF60,exp=0098
+W,A002,00,0A,42B0,C1EFFFA,
+W,A003,98,0A,42B6,C1F000A,
+W,A000,03,06,5FAB,C201A28,
+M,MainDispatch,,,,C226DE4,
+M,Level,,,,C22BD90,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C22BDB2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C22BF78,exp=0098
+W,A002,00,0A,42B0,C22C012,
+W,A003,98,0A,42B6,C22C022,
+W,A000,03,06,5FAB,C23DA40,
+M,MainDispatch,,,,C262DFC,
+M,Level,,,,C267DA8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C267DCA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C267F90,exp=0098
+W,A002,00,0A,42B0,C26802A,
+W,A003,98,0A,42B6,C26803A,
+W,A000,03,06,5FAB,C279A58,
+M,MainDispatch,,,,C29EE14,
+M,Level,,,,C2A3DC0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C2A3DE2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C2A3FA8,exp=0098
+W,A002,00,0A,42B0,C2A4042,
+W,A003,98,0A,42B6,C2A4052,
+W,A000,03,06,5FAB,C2B5A70,
+M,MainDispatch,,,,C2DAE2C,
+M,Level,,,,C2DFDD8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C2DFDFA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C2DFFC0,exp=0098
+W,A002,00,0A,42B0,C2E005A,
+W,A003,98,0A,42B6,C2E006A,
+W,A000,03,06,5FAB,C2F1A88,
+M,MainDispatch,,,,C316E44,
+M,Level,,,,C31BDF0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C31BE12,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C31BFD8,exp=0098
+W,A002,00,0A,42B0,C31C072,
+W,A003,98,0A,42B6,C31C082,
+W,A000,03,06,5FAB,C32DAA0,
+M,MainDispatch,,,,C352E5C,
+M,Level,,,,C357E08,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C357E2A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C357FF0,exp=0098
+W,A002,00,0A,42B0,C35808A,
+W,A003,98,0A,42B6,C35809A,
+W,A000,03,06,5FAB,C369AB8,
+M,MainDispatch,,,,C38EE74,
+M,Level,,,,C393E20,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C393E42,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C394008,exp=0098
+W,A002,00,0A,42B0,C3940A2,
+W,A003,98,0A,42B6,C3940B2,
+W,A000,03,06,5FAB,C3A5AD0,
+M,MainDispatch,,,,C3CAE8C,
+M,Level,,,,C3CFE38,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C3CFE5A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C3D0020,exp=0098
+W,A002,00,0A,42B0,C3D00BA,
+W,A003,98,0A,42B6,C3D00CA,
+W,A000,03,06,5FAB,C3E1AE8,
+M,MainDispatch,,,,C406EA4,
+M,Level,,,,C40BE50,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C40BE72,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C40C038,exp=0098
+W,A002,00,0A,42B0,C40C0D2,
+W,A003,98,0A,42B6,C40C0E2,
+W,A000,03,06,5FAB,C41DB00,
+M,MainDispatch,,,,C442EBC,
+M,Level,,,,C447E68,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C447E8A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C448050,exp=0098
+W,A002,00,0A,42B0,C4480EA,
+W,A003,98,0A,42B6,C4480FA,
+W,A000,03,06,5FAB,C459B18,
+M,MainDispatch,,,,C47EED4,
+M,Level,,,,C483E80,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C483EA2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,C484068,exp=0098
+W,A002,00,0A,42B0,C484102,
+W,A003,98,0A,42B6,C484112,
+W,A000,03,06,5FAB,C495B30,
+M,MainDispatch,,,,C4BAEEC,
+M,Level,,,,C4BFE72,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C4BFE94,level=22 shift=09 exp=0098
+M,ExposureNew,,,,C4BFFB2,exp=0098
+W,A002,00,0A,42B0,C4C004C,
+W,A003,98,0A,42B6,C4C005C,
+W,A000,03,06,5FAB,C4D1B48,
+M,MainDispatch,,,,C4F6F04,
+M,Level,,,,C4FBE80,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C4FBEA2,level=22 shift=09 exp=0098
+M,ExposureNew,,,,C4FBFC0,exp=0098
+W,A002,00,0A,42B0,C4FC05A,
+W,A003,98,0A,42B6,C4FC06A,
+W,A000,03,06,5FAB,C50DB60,
+M,MainDispatch,,,,C532F1C,
+M,Level,,,,C537E98,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C537EBA,level=22 shift=09 exp=0098
+M,ExposureNew,,,,C537FD8,exp=0098
+W,A002,00,0A,42B0,C538072,
+W,A003,98,0A,42B6,C538082,
+W,A000,03,06,5FAB,C549B78,
+M,MainDispatch,,,,C56EF34,
+M,Level,,,,C573EB0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C573ED2,level=22 shift=09 exp=0098
+M,ExposureNew,,,,C573FF0,exp=0098
+W,A002,00,0A,42B0,C57408A,
+W,A003,98,0A,42B6,C57409A,
+W,A000,03,06,5FAB,C585B90,
+M,MainDispatch,,,,C5AAF4C,
+M,Level,,,,C5AFEC8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C5AFEEA,level=22 shift=09 exp=0098
+M,ExposureNew,,,,C5B0008,exp=0098
+W,A002,00,0A,42B0,C5B00A2,
+W,A003,98,0A,42B6,C5B00B2,
+W,A000,03,06,5FAB,C5C1BA8,
+M,MainDispatch,,,,C5E6F64,
+M,Level,,,,C5EBEE0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C5EBF02,level=22 shift=09 exp=0098
+M,ExposureNew,,,,C5EC020,exp=0098
+W,A002,00,0A,42B0,C5EC0BA,
+W,A003,98,0A,42B6,C5EC0CA,
+W,A000,03,06,5FAB,C5FDBC0,
+M,MainDispatch,,,,C622F7C,
+M,Level,,,,C627ED2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C627EF4,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C627FFA,exp=0098
+W,A002,00,0A,42B0,C628094,
+W,A003,98,0A,42B6,C6280A4,
+W,A000,03,06,5FAB,C639BD8,
+M,MainDispatch,,,,C65EF94,
+M,Level,,,,C663EEA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C663F0C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C664012,exp=0098
+W,A002,00,0A,42B0,C6640AC,
+W,A003,98,0A,42B6,C6640BC,
+W,A000,03,06,5FAB,C675BF0,
+M,MainDispatch,,,,C69AFAC,
+M,Level,,,,C69FF02,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C69FF24,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C6A002A,exp=0098
+W,A002,00,0A,42B0,C6A00C4,
+W,A003,98,0A,42B6,C6A00D4,
+W,A000,03,06,5FAB,C6B1C08,
+M,MainDispatch,,,,C6D6FC4,
+M,Level,,,,C6DBF1A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C6DBF3C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C6DC042,exp=0098
+W,A002,00,0A,42B0,C6DC0DC,
+W,A003,98,0A,42B6,C6DC0EC,
+W,A000,03,06,5FAB,C6EDC20,
+M,MainDispatch,,,,C712FDC,
+M,Level,,,,C717F32,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C717F54,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C71805A,exp=0098
+W,A002,00,0A,42B0,C7180F4,
+W,A003,98,0A,42B6,C718104,
+W,A000,03,06,5FAB,C729C38,
+M,MainDispatch,,,,C74EFF4,
+M,Level,,,,C753F40,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C753F62,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C754068,exp=0098
+W,A002,00,0A,42B0,C754102,
+W,A003,98,0A,42B6,C754112,
+W,A000,03,06,5FAB,C765C50,
+M,MainDispatch,,,,C78B00C,
+M,Level,,,,C78FF58,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C78FF7A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C790080,exp=0098
+W,A002,00,0A,42B0,C79011A,
+W,A003,98,0A,42B6,C79012A,
+W,A000,03,06,5FAB,C7A1C68,
+M,MainDispatch,,,,C7C7024,
+M,Level,,,,C7CBF70,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C7CBF92,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C7CC098,exp=0098
+W,A002,00,0A,42B0,C7CC132,
+W,A003,98,0A,42B6,C7CC142,
+W,A000,03,06,5FAB,C7DDC80,
+M,MainDispatch,,,,C80303C,
+M,Level,,,,C807F88,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C807FAA,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C8080B0,exp=0098
+W,A002,00,0A,42B0,C80814A,
+W,A003,98,0A,42B6,C80815A,
+W,A000,03,06,5FAB,C819C98,
+M,MainDispatch,,,,C83F054,
+M,Level,,,,C843FA0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C843FC2,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C8440C8,exp=0098
+W,A002,00,0A,42B0,C844162,
+W,A003,98,0A,42B6,C844172,
+W,A000,03,06,5FAB,C855CB0,
+M,MainDispatch,,,,C87B06C,
+M,Level,,,,C87FFB8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C87FFDA,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C8800E0,exp=0098
+W,A002,00,0A,42B0,C88017A,
+W,A003,98,0A,42B6,C88018A,
+W,A000,03,06,5FAB,C891CC8,
+M,MainDispatch,,,,C8B7084,
+M,Level,,,,C8BBFD0,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C8BBFF2,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C8BC0F8,exp=0098
+W,A002,00,0A,42B0,C8BC192,
+W,A003,98,0A,42B6,C8BC1A2,
+W,A000,03,06,5FAB,C8CDCE0,
+M,MainDispatch,,,,C8F309C,
+M,Level,,,,C8F7FE8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C8F800A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C8F8110,exp=0098
+W,A002,00,0A,42B0,C8F81AA,
+W,A003,98,0A,42B6,C8F81BA,
+W,A000,03,06,5FAB,C909CF8,
+M,MainDispatch,,,,C92F0B4,
+M,Level,,,,C934000,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C934022,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C934128,exp=0098
+W,A002,00,0A,42B0,C9341C2,
+W,A003,98,0A,42B6,C9341D2,
+W,A000,03,06,5FAB,C945D10,
+M,MainDispatch,,,,C96B0CC,
+M,Level,,,,C970018,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C97003A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C970140,exp=0098
+W,A002,00,0A,42B0,C9701DA,
+W,A003,98,0A,42B6,C9701EA,
+W,A000,03,06,5FAB,C981D28,
+M,MainDispatch,,,,C9A70E4,
+M,Level,,,,C9AC030,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C9AC052,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C9AC158,exp=0098
+W,A002,00,0A,42B0,C9AC1F2,
+W,A003,98,0A,42B6,C9AC202,
+W,A000,03,06,5FAB,C9BDD40,
+M,MainDispatch,,,,C9E30FC,
+M,Level,,,,C9E8048,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,C9E806A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,C9E8170,exp=0098
+W,A002,00,0A,42B0,C9E820A,
+W,A003,98,0A,42B6,C9E821A,
+W,A000,03,06,5FAB,C9F9D58,
+M,MainDispatch,,,,CA1F114,
+M,Level,,,,CA24060,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CA24082,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CA24188,exp=0098
+W,A002,00,0A,42B0,CA24222,
+W,A003,98,0A,42B6,CA24232,
+W,A000,03,06,5FAB,CA35D70,
+M,MainDispatch,,,,CA5B12C,
+M,Level,,,,CA60078,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CA6009A,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CA601A0,exp=0098
+W,A002,00,0A,42B0,CA6023A,
+W,A003,98,0A,42B6,CA6024A,
+W,A000,03,06,5FAB,CA71D88,
+M,MainDispatch,,,,CA97144,
+M,Level,,,,CA9C090,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CA9C0B2,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CA9C1B8,exp=0098
+W,A002,00,0A,42B0,CA9C252,
+W,A003,98,0A,42B6,CA9C262,
+W,A000,03,06,5FAB,CAADDA0,
+M,MainDispatch,,,,CAD315C,
+M,Level,,,,CAD80A8,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CAD80CA,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CAD81D0,exp=0098
+W,A002,00,0A,42B0,CAD826A,
+W,A003,98,0A,42B6,CAD827A,
+W,A000,03,06,5FAB,CAE9DB8,
+M,MainDispatch,,,,CB0F174,
+M,Level,,,,CB140CA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CB140EC,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CB141F2,exp=0098
+W,A002,00,0A,42B0,CB1428C,
+W,A003,98,0A,42B6,CB1429C,
+W,A000,03,06,5FAB,CB25DD0,
+M,MainDispatch,,,,CB4B18C,
+M,Level,,,,CB500E2,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CB50104,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CB5020A,exp=0098
+W,A002,00,0A,42B0,CB502A4,
+W,A003,98,0A,42B6,CB502B4,
+W,A000,03,06,5FAB,CB61DE8,
+M,MainDispatch,,,,CB871A4,
+M,Level,,,,CB8C0FA,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CB8C11C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CB8C222,exp=0098
+W,A002,00,0A,42B0,CB8C2BC,
+W,A003,98,0A,42B6,CB8C2CC,
+W,A000,03,06,5FAB,CB9DE00,
+M,MainDispatch,,,,CBC31BC,
+M,Level,,,,CBC8112,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CBC8134,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CBC823A,exp=0098
+W,A002,00,0A,42B0,CBC82D4,
+W,A003,98,0A,42B6,CBC82E4,
+W,A000,03,06,5FAB,CBD9E18,
+M,MainDispatch,,,,CBFF1D4,
+M,Level,,,,CC0412A,level=21 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CC0414C,level=21 shift=08 exp=0098
+M,ExposureNew,,,,CC04252,exp=0098
+W,A002,00,0A,42B0,CC042EC,
+W,A003,98,0A,42B6,CC042FC,
+W,A000,03,06,5FAB,CC15E30,
+M,MainDispatch,,,,CC3B1EC,
+M,Level,,,,CC40168,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CC4018A,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CC402A8,exp=0098
+W,A002,00,0A,42B0,CC40342,
+W,A003,98,0A,42B6,CC40352,
+W,A000,03,06,5FAB,CC51E48,
+M,MainDispatch,,,,CC77204,
+M,Level,,,,CC7C180,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CC7C1A2,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CC7C2C0,exp=0098
+W,A002,00,0A,42B0,CC7C35A,
+W,A003,98,0A,42B6,CC7C36A,
+W,A000,03,06,5FAB,CC8DE60,
+M,MainDispatch,,,,CCB321C,
+M,Level,,,,CCB8198,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CCB81BA,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CCB82D8,exp=0098
+W,A002,00,0A,42B0,CCB8372,
+W,A003,98,0A,42B6,CCB8382,
+W,A000,03,06,5FAB,CCC9E78,
+M,MainDispatch,,,,CCEF234,
+M,Level,,,,CCF41B0,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CCF41D2,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CCF42F0,exp=0098
+W,A002,00,0A,42B0,CCF438A,
+W,A003,98,0A,42B6,CCF439A,
+W,A000,03,06,5FAB,CD05E90,
+M,MainDispatch,,,,CD2B24C,
+M,Level,,,,CD301C8,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CD301EA,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CD30308,exp=0098
+W,A002,00,0A,42B0,CD303A2,
+W,A003,98,0A,42B6,CD303B2,
+W,A000,03,06,5FAB,CD41EA8,
+M,MainDispatch,,,,CD67264,
+M,Level,,,,CD6C1EA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CD6C20C,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CD6C32A,exp=0098
+W,A002,00,0A,42B0,CD6C3C4,
+W,A003,98,0A,42B6,CD6C3D4,
+W,A000,03,06,5FAB,CD7DEC0,
+M,MainDispatch,,,,CDA327C,
+M,Level,,,,CDA8202,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CDA8224,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CDA8342,exp=0098
+W,A002,00,0A,42B0,CDA83DC,
+W,A003,98,0A,42B6,CDA83EC,
+W,A000,03,06,5FAB,CDB9ED8,
+M,MainDispatch,,,,CDDF294,
+M,Level,,,,CDE421A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CDE423C,level=22 shift=09 exp=0098
+M,ExposureNew,,,,CDE435A,exp=0098
+W,A002,00,0A,42B0,CDE43F4,
+W,A003,98,0A,42B6,CDE4404,
+W,A000,03,06,5FAB,CDF5EF0,
+M,MainDispatch,,,,CE1B2AC,
+M,Level,,,,CE20258,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CE2027A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CE20440,exp=0098
+W,A002,00,0A,42B0,CE204DA,
+W,A003,98,0A,42B6,CE204EA,
+W,A000,03,06,5FAB,CE31F08,
+M,MainDispatch,,,,CE572C4,
+M,Level,,,,CE5C270,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CE5C292,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CE5C458,exp=0098
+W,A002,00,0A,42B0,CE5C4F2,
+W,A003,98,0A,42B6,CE5C502,
+W,A000,03,06,5FAB,CE6DF20,
+M,MainDispatch,,,,CE932DC,
+M,Level,,,,CE98288,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CE982AA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CE98470,exp=0098
+W,A002,00,0A,42B0,CE9850A,
+W,A003,98,0A,42B6,CE9851A,
+W,A000,03,06,5FAB,CEA9F38,
+M,MainDispatch,,,,CECF2F4,
+M,Level,,,,CED42A0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CED42C2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CED4488,exp=0098
+W,A002,00,0A,42B0,CED4522,
+W,A003,98,0A,42B6,CED4532,
+W,A000,03,06,5FAB,CEE5F50,
+M,MainDispatch,,,,CF0B30C,
+M,Level,,,,CF102B8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CF102DA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CF104A0,exp=0098
+W,A002,00,0A,42B0,CF1053A,
+W,A003,98,0A,42B6,CF1054A,
+W,A000,03,06,5FAB,CF21F68,
+M,MainDispatch,,,,CF47324,
+M,Level,,,,CF4C2D0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CF4C2F2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CF4C4B8,exp=0098
+W,A002,00,0A,42B0,CF4C552,
+W,A003,98,0A,42B6,CF4C562,
+W,A000,03,06,5FAB,CF5DF80,
+M,MainDispatch,,,,CF8333C,
+M,Level,,,,CF882E8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CF8830A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CF884D0,exp=0098
+W,A002,00,0A,42B0,CF8856A,
+W,A003,98,0A,42B6,CF8857A,
+W,A000,03,06,5FAB,CF99F98,
+M,MainDispatch,,,,CFBF354,
+M,Level,,,,CFC4300,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,CFC4322,level=23 shift=10 exp=0098
+M,ExposureNew,,,,CFC44E8,exp=0098
+W,A002,00,0A,42B0,CFC4582,
+W,A003,98,0A,42B6,CFC4592,
+W,A000,03,06,5FAB,CFD5FB0,
+M,MainDispatch,,,,CFFB36C,
+M,Level,,,,D000318,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D00033A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D000500,exp=0098
+W,A002,00,0A,42B0,D00059A,
+W,A003,98,0A,42B6,D0005AA,
+W,A000,03,06,5FAB,D011FC8,
+M,MainDispatch,,,,D037384,
+M,Level,,,,D03C330,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D03C352,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D03C518,exp=0098
+W,A002,00,0A,42B0,D03C5B2,
+W,A003,98,0A,42B6,D03C5C2,
+W,A000,03,06,5FAB,D04DFE0,
+M,MainDispatch,,,,D07339C,
+M,Level,,,,D078348,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D07836A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D078530,exp=0098
+W,A002,00,0A,42B0,D0785CA,
+W,A003,98,0A,42B6,D0785DA,
+W,A000,03,06,5FAB,D089FF8,
+M,MainDispatch,,,,D0AF3B4,
+M,Level,,,,D0B4360,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D0B4382,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D0B4548,exp=0098
+W,A002,00,0A,42B0,D0B45E2,
+W,A003,98,0A,42B6,D0B45F2,
+W,A000,03,06,5FAB,D0C6010,
+M,MainDispatch,,,,D0EB3CC,
+M,Level,,,,D0F0352,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D0F0374,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D0F0492,exp=0098
+W,A002,00,0A,42B0,D0F052C,
+W,A003,98,0A,42B6,D0F053C,
+W,A000,03,06,5FAB,D102028,
+M,MainDispatch,,,,D1273E4,
+M,Level,,,,D12C36A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D12C38C,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D12C4AA,exp=0098
+W,A002,00,0A,42B0,D12C544,
+W,A003,98,0A,42B6,D12C554,
+W,A000,03,06,5FAB,D13E040,
+M,MainDispatch,,,,D1633FC,
+M,Level,,,,D168382,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D1683A4,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D1684C2,exp=0098
+W,A002,00,0A,42B0,D16855C,
+W,A003,98,0A,42B6,D16856C,
+W,A000,03,06,5FAB,D17A058,
+M,MainDispatch,,,,D19F414,
+M,Level,,,,D1A439A,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D1A43BC,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D1A44DA,exp=0098
+W,A002,00,0A,42B0,D1A4574,
+W,A003,98,0A,42B6,D1A4584,
+W,A000,03,06,5FAB,D1B6070,
+M,MainDispatch,,,,D1DB42C,
+M,Level,,,,D1E03B2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D1E03D4,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D1E04F2,exp=0098
+W,A002,00,0A,42B0,D1E058C,
+W,A003,98,0A,42B6,D1E059C,
+W,A000,03,06,5FAB,D1F2088,
+M,MainDispatch,,,,D217444,
+M,Level,,,,D21C3CA,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D21C3EC,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D21C50A,exp=0098
+W,A002,00,0A,42B0,D21C5A4,
+W,A003,98,0A,42B6,D21C5B4,
+W,A000,03,06,5FAB,D22E0A0,
+M,MainDispatch,,,,D25345C,
+M,Level,,,,D2583E2,level=22 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D258404,level=22 shift=09 exp=0098
+M,ExposureNew,,,,D258522,exp=0098
+W,A002,00,0A,42B0,D2585BC,
+W,A003,98,0A,42B6,D2585CC,
+W,A000,03,06,5FAB,D26A0B8,
+M,MainDispatch,,,,D28F474,
+M,Level,,,,D294420,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D294442,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D294608,exp=0098
+W,A002,00,0A,42B0,D2946A2,
+W,A003,98,0A,42B6,D2946B2,
+W,A000,03,06,5FAB,D2A60D0,
+M,MainDispatch,,,,D2CB48C,
+M,Level,,,,D2D0438,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D2D045A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D2D0620,exp=0098
+W,A002,00,0A,42B0,D2D06BA,
+W,A003,98,0A,42B6,D2D06CA,
+W,A000,03,06,5FAB,D2E20E8,
+M,MainDispatch,,,,D3074A4,
+M,Level,,,,D30C450,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D30C472,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D30C638,exp=0098
+W,A002,00,0A,42B0,D30C6D2,
+W,A003,98,0A,42B6,D30C6E2,
+W,A000,03,06,5FAB,D31E100,
+M,MainDispatch,,,,D3434BC,
+M,Level,,,,D348468,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D34848A,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D348650,exp=0098
+W,A002,00,0A,42B0,D3486EA,
+W,A003,98,0A,42B6,D3486FA,
+W,A000,03,06,5FAB,D35A118,
+M,MainDispatch,,,,D37F4D4,
+M,Level,,,,D384480,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D3844A2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D384668,exp=0098
+W,A002,00,0A,42B0,D384702,
+W,A003,98,0A,42B6,D384712,
+W,A000,03,06,5FAB,D396130,
+M,MainDispatch,,,,D3BB4EC,
+M,Level,,,,D3C0498,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D3C04BA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D3C0680,exp=0098
+W,A002,00,0A,42B0,D3C071A,
+W,A003,98,0A,42B6,D3C072A,
+W,A000,03,06,5FAB,D3D2148,
+M,MainDispatch,,,,D3F7504,
+M,Level,,,,D3FC4B0,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D3FC4D2,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D3FC698,exp=0098
+W,A002,00,0A,42B0,D3FC732,
+W,A003,98,0A,42B6,D3FC742,
+W,A000,03,06,5FAB,D40E160,
+M,MainDispatch,,,,D43351C,
+M,Level,,,,D4384C8,level=23 d59a=C0 d59b=08 band=03
+M,ShiftLoaded,,,,D4384EA,level=23 shift=10 exp=0098
+M,ExposureNew,,,,D4386B0,exp=0098
+W,A002,00,0A,42B0,D43874A,
+W,A003,98,0A,42B6,D43875A,
+W,A000,03,06,5FAB,D44A178,

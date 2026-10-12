@@ -1,0 +1,162 @@
+site,access,address,sensor register,bits,routine (nearest label),value source (previous instruction)
+06:5F7C,write,$A000,control,"start (bit 0, polled until clear)",Bank006_State09,cb C7 (set/res bit)
+06:5FAB,write,$A000,control,"start (bit 0, polled until clear)",Bank006_State09,cb C7 (set/res bit)
+0A:40C5,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:40CC,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:40D4,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:40DD,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:40E8,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:4109,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:411C,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:4127,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:4143,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:414A,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:4152,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:415B,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:4166,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:4187,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:418F,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:4196,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:419F,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:41AA,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:41C4,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:41CC,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:41D4,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:41DD,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:41E8,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:4210,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:4218,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:421F,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:4228,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:4233,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:4242,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:424A,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:4251,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:425A,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:4265,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:4286,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_MainDispatch,(same value as the previous write)
+0A:428E,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,(same value as the previous write)
+0A:4295,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,(same value as the previous write)
+0A:429E,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_MainDispatch,(same value as the previous write)
+0A:42A9,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_MainDispatch,(same value as the previous write)
+0A:42B0,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_MainDispatch,"ld a,[$D596]"
+0A:42B6,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_MainDispatch,"ld a,[$D597]"
+0A:474F,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_Calib_BootMeasureSeq,or $20
+0A:4756,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_Calib_BootMeasureSeq,xor a (0)
+0A:475E,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_Calib_BootMeasureSeq,"ld a,$10"
+0A:4766,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_Calib_BootMeasureSeq,"ld a,$03"
+0A:4795,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_Calib_BootMeasureSeq,or $20
+0A:479D,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_Calib_BootMeasureSeq,"ld a,$23"
+0A:47CC,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_Calib_BootMeasureSeq,or $20
+0A:47D4,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_Calib_BootMeasureSeq,"ld a,$23"
+0A:4802,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_Calib_BootMeasureSeq,or $20
+0A:480A,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_Calib_BootMeasureSeq,"ld a,$23"
+0A:4836,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_Calib_BootMeasureSeq,"ld a,$0A"
+0A:483E,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_Calib_BootMeasureSeq,"ld a,$03"
+0A:486A,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_ExposureBandSelect,"ld a,[$D587]"
+0A:486E,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_ExposureBandSelect,xor a (0)
+0A:4873,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_ExposureBandSelect,"ld a,$10"
+0A:4878,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_ExposureBandSelect,"ld a,$05"
+0A:487D,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ExposureBandSelect,"ld a,$80"
+0A:489A,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ExposureBandSelect,cb BF (set/res bit)
+0A:48B9,write,$A000,control,"start (bit 0, polled until clear)",Cam_ExposureBandSelect,cb C7 (set/res bit)
+0A:48BC,read,$A000,control,"start (bit 0, polled until clear)",Cam_ExposureBandSelect,(same value as the previous write)
+0A:497C,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$20"
+0A:4983,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure1,xor a (0)
+0A:498B,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,"ld a,$30"
+0A:4993,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:49AE,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$21"
+0A:49B6,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:49D1,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$22"
+0A:49D9,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:49F4,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$23"
+0A:49FC,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4A17,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E0"
+0A:4A1F,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure1,"ld a,$09"
+0A:4A26,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,xor a (0)
+0A:4A2E,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4A49,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E1"
+0A:4A51,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4A6C,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E2"
+0A:4A74,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4A8F,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E3"
+0A:4A97,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4AB2,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E4"
+0A:4ABA,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure1,"ld a,$20"
+0A:4AC1,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,xor a (0)
+0A:4AC9,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4AE4,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E5"
+0A:4AEC,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4B07,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$E8"
+0A:4B0F,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure1,"ld a,$32"
+0A:4B16,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,xor a (0)
+0A:4B1E,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4B39,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure1,"ld a,$0A"
+0A:4B41,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure1,"ld a,$80"
+0A:4B48,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure1,xor a (0)
+0A:4B50,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure1,"ld a,$03"
+0A:4B77,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Search,(same value as the previous write)
+0A:4B7F,write,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,cb C7 (set/res bit)
+0A:4B82,read,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,(same value as the previous write)
+0A:4BA1,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_ORegister_SAR_Search,op B1
+0A:4BBA,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Search,(same value as the previous write)
+0A:4BC2,write,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,cb C7 (set/res bit)
+0A:4BC5,read,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Search,(same value as the previous write)
+0A:4BE0,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_ORegister_SAR_Search,op B1
+0A:4BF1,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Tail,(same value as the previous write)
+0A:4BFD,write,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Tail,cb C7 (set/res bit)
+0A:4C00,read,$A000,control,"start (bit 0, polled until clear)",Cam_ORegister_SAR_Tail,(same value as the previous write)
+0A:4C25,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_ORegister_SAR_Tail,(same value as the previous write)
+0A:4C78,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$20"
+0A:4C7F,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_FactoryMeasure2,xor a (0)
+0A:4C87,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_FactoryMeasure2,"ld a,$10"
+0A:4C90,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,"ld a,[$D59D]"
+0A:4C9B,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4CAB,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$21"
+0A:4CB4,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,"ld a,[$D59E]"
+0A:4CBF,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4CCF,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$22"
+0A:4CD8,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,"ld a,[$D59F]"
+0A:4CE3,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4CF3,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$23"
+0A:4CFC,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,"ld a,[$D5A0]"
+0A:4D07,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4D17,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$20"
+0A:4D22,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4D2D,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4D3D,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$21"
+0A:4D48,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4D53,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4D63,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$22"
+0A:4D6E,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4D79,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4D89,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$23"
+0A:4D94,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4D9F,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4DAF,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$24"
+0A:4DBA,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4DC5,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4DD5,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$25"
+0A:4DE0,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4DEB,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4DFB,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$28"
+0A:4E06,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,or $20
+0A:4E11,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4E21,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_FactoryMeasure2,"ld a,$0A"
+0A:4E2A,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_FactoryMeasure2,"ld a,[$D5A8]"
+0A:4E35,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_FactoryMeasure2,cb FF (set/res bit)
+0A:4E5B,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,cb C7 (set/res bit)
+0A:4E5E,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,(same value as the previous write)
+0A:4E8C,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,cb C7 (set/res bit)
+0A:4E8F,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,(same value as the previous write)
+0A:4EBE,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,cb C7 (set/res bit)
+0A:4EC1,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge,(same value as the previous write)
+0A:4F01,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,cb C7 (set/res bit)
+0A:4F04,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,(same value as the previous write)
+0A:4F33,write,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,cb C7 (set/res bit)
+0A:4F36,read,$A000,control,"start (bit 0, polled until clear)",Cam_ThresholdConverge_Up,(same value as the previous write)
+0A:50BF,write,$A001,reg1 (001),N VH1 VH0 G4-G0,Cam_PopcountSampleLoop_inner,or $E0
+0A:50C7,write,$A002,reg2 (010),C1 exposure high byte (4.096 ms),Cam_PopcountSampleLoop_inner,"ld a,$10"
+0A:50CE,write,$A003,reg3 (011),C0 exposure low byte (16 us),Cam_PopcountSampleLoop_inner,xor a (0)
+0A:50D7,write,$A004,reg7 (111),E3-E0 I V2-V0,Cam_PopcountSampleLoop_inner,"ld a,[$D5C3]"
+0A:50E2,write,$A005,reg0 (000),Z1 Z0 O5-O0,Cam_PopcountSampleLoop_inner,cb FF (set/res bit)

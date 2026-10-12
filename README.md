@@ -38,6 +38,7 @@ identical", was wrong and is withdrawn). The Zelda-edition ROM was not examined.
 | 15 | **TCRF and unlock cross-check** — what the unlocking saves reach (credits, CoroCoro, Album B, stamps, mini-games), the documented-content checklist (54 items), re-classification of code that never ran (the hold-A stamp branch, the hot-spot effect handlers), mode names from screenshots, asset inventory |
 | 16 | **Menu names, the international ROM, BGB cross-validation** — the 34 modes named from the screens (Japanese / international / the Funtography guide), the mirrored main menu, the two ROMs are different builds, Album B (8 vs 14 conditions) and the CoroCoro flag in the international ROM, BGB results (sweep, credits gate, tag, Pokémon pages, hold-A, hot-spots, link, gender bits), hot-spot effect behaviour, the 20 Pokémon stamps, the five Funtography flowcharts walked in BGB, the CoroCoro content on the international build (§16.12), **the code that later runs executed (§16.14), what keeps the rest from running (§16.15) and what the Camera does with each printer status bit (§16.16), the RUN! RUN! RUN! rules, the three podium places, the flag and the sounds it asks for (§16.17), the GameFAQs cheats page tried line by line and Space Fever II and BALL played to their Album B scores (§16.18)** (§16.14), **what the never-read data is** (§16.13: wild-frame side strips, glyph banks, tilemaps, the SGB border rebuilt from bank `$0B` and matched to BGB; the orange of the map) |
 | 17 | **Printing in BGB** — a printer helper for BGB (link protocol, status model), the print screens (single photo, the Start option = the 「Camera コメント」 card with its tag-field mapping, several photos, the TRIPY-H score), and the **BGB re-trace of the coverage run** (81 % of the core's blocks re-hit, SGB-only and APU-gated blocks, where the two disagree) |
+| 18 | **The sensor registers** — what the ROM sends to the M64282FP through the MAC-GBD, in datasheet names; boot, calibration and normal use traced against bus-analyser recordings of a real camera and against BGB (offset search, threshold scan, auto-exposure bands, dither keys), and what the datasheet gets wrong |
 | Appendix | Tools |
 
 ## Screen captures
@@ -96,7 +97,7 @@ make            # runs rgbasm -> rgblink -> rgbfix -> md5sum
 
 `pocketcamera_jp.sym` (included) currently annotates:
 - All 7 menu-bank state-dispatch tables (banks $003–$009) as `.data`, with every state entry labeled — this alone fixed most of the code/data misalignment in those banks.
-- ~28 hand-traced entry points inside bank $0A (sensor/calibration/factory-test) and its 5 lookup tables, also marked `.data` so mgbdis stops misreading them as instructions.
+- ~28 hand-traced entry points inside bank $0A (sensor/calibration/factory-test) and its 5 lookup tables, also marked `.data` so mgbdis stops misreading them as instructions; the sensor pass (§18) adds 11 bank-$0A labels (the factory test, the full calibration, the live-view start, four far stubs, the three dither variants, and the 160-byte exposure shift table at `$7B00`, also marked `.data`) and renames three misleading ones (`Cam_BootPing1/2`, `Cam_BootAllButtons_or_SensorFail`). **Not re-assembled in the session that made these symbol edits (mgbdis and rgbasm were not available there): run the procedure above and compare the md5 before trusting them.**
 
 This is a **living file** — every further routine we label goes here and the disassembly regenerates clean. This is the recommended workflow for the rest of the project: never hand-edit the generated `.asm`, only ever add to the `.sym` file and regenerate.
 
@@ -414,20 +415,20 @@ Bank 5 is therefore a **mode bank** (`$1F`, `$20`), not a "grid/cursor mechanism
 | `$D583-$D586` | 4 | dither_params[4] | u8[4] | 0A | 4-byte row copied from table `0a:7C20` (if B == d588, or B == 8, or default) or `0a:7C60` (if B == d589); row = register C - 1 (4 bytes per row; C = … | C |
 | `$D587` | 1 | cam_gain_sel | u8 | 6,0A (8,0: consts) | Active REG1 gain selector: 0,1,2 during the coarse search (0a:485F, 48CE), forced to `$08` / `$0A` for the special band captures (0a:417F, 420A … | C |
 | `$D588` | 1 | cam_gain_committed | u8 0..3 | 0A | Gain candidate that ended the coarse search (3 = fallback) [used by: writer 0a:48D9 (Cam_ExposureBandSelect); readers Cam_MainDispatch … | C |
-| `$D589` | 1 | cam_gain_alt | u8 = 4 or 5 | 0A (+4,5 reads) | `$04` when gain 0 or 1 won, `$05` when gain 2 or the fallback won … | C |
-| `$D594` | 1 | cam_a000_shadow | u8 (only value ever stored: $02) | 0A,6 | Shadow of REG0 `$A000` (bit 0, start, is ORed in when the capture is triggered) [used by: 0a:4745, 4864 (writes $02); read by Cam_ThresholdConverge / … | C |
-| `$D595` | 1 | cam_a001_shadow | u8 | 0A | Shadow of REG1 `$A001` (gain/edge byte, ORed with `$20`/`$E0` per band) [used by: 38 writes (Cam_FactoryMeasure1/2, Cam_MainDispatch, BootMeasureSeq)] | C |
-| `$D596-$D597` | 2 | cam_exposure_shadow | u16 big-endian (d596 hi, d597 lo) | 0A,6 | Shadow of REG2/REG3 `$A002/$A003` = 16-bit exposure time; adjusted by the shift table at `0a:7B00` in Cam_MainDispatch [used by: Cam_MainDispatch … | C |
-| `$D598` | 1 | cam_a004_shadow | u8 | 0A | Shadow of REG4 `$A004`; after a measurement `& 7` is stored in `$D5C1+n` (see below) [used by: 59 accesses (FactoryMeasure1/2, BootMeasureSeq … | C |
-| `$D599` | 1 | cam_a005_shadow | u8 | 0A | Shadow of REG5 `$A005`; after a measurement `& $7F` is stored in `$D5C6+n` [used by: 46 accesses] | C |
-| `$D59A` | 1 | cam_meter_divisor | u8 ($54 seen) | 6,0A | Divisor of the metering loop `0a:4018-402B`: the 16-bit measurement returned by `0a:4FBD` (DE=$A320) is divided by it by repeated subtraction … | C |
-| `$D59B` | 1 | cam_dither_row | u8 (1-based row) | 6,0A | Row index (register C) passed to Cam_BuildDitherMatrix; row = C-1 in the 4-byte table [used by: writers 06:5F6C ($08), 06:6183, 0a:50F4; readers … | C |
-| `$D59C` | 1 | cam_dither_mode | u8 | 6,0A | 0 = flat fill (jp `0a:440C`), 1 = ramp A (jp `0a:4427`), else ramp B (normal photos) [used by: writers 06:5E47, 06:6753, 0a:50EF ($01); reader … | C |
-| `$D59D-$D5B4` | 24 | cam_factory_raw[24] | u8[24] = $D59D-$D5B4 | 0A | 12 + 12 raw results of the factory sweep: first 12 = REG4 low bits, next 12 = O-register results (README §6); consumed once by Cam_FactoryMeasure2 to … | I |
-| `$D5B5-$D5C0` | 12 | cam_calib_vector[12] | u8[12] | 0A | Working copy of the 12-byte calibration vector (SRAM flat `$04FF2-$04FFD` and `$11FF2-$11FFD`, README §3.8): bytes 0-3 / 4-7 / 8-9 feed D5CB / D5CC / … | C |
-| `$D5C1-$D5C5` | 5 | cam_boot_reg4[5] | u8[5] (values 0..7) | 0A | `$D598 & 7` read back after the 5 boot measurements (REG4 low 3 bits found by the search at `0a:4B6A`); one entry per measurement level (D5CB, D5CC … | C |
-| `$D5C6-$D5CA` | 5 | cam_boot_reg5[5] | u8[5] (values 0..$7F) | 0A | `$D599 & $7F` (bit 7 cleared) after the same 5 measurements = REG5 offset found for each level … | C |
-| `$D5CB-$D5CD` | 3 | cam_targets[3] | u8[3] | 0A | Active reference targets: copied from the vector by winning gain, `d5cb`/`d5cc`/`d5cd` <- (b0,b4,b8) if gain 0; (b1,b5,b8) gain 1; (b2,b6,b9) gain 2 … | C |
+| `$D589` | 1 | cam_gain_alt | u8 = 4 or 5 | 0A (+4,5 reads) | Gain index of live band 2: 4 when the gain-probe winner is 0 or 1, 5 when it is 2 or the fallback (`0a:48DF-4931`) … | C |
+| `$D594` | 1 | cam_a000_shadow | u8 (only value ever stored: $02) | 0A,6 | Shadow of `$A000`, the MAC-GBD control byte: `$02` is stored once; at each capture start the ROM writes `$D594 \| 1` = `$03` and polls bit 0 until it clears … | C |
+| `$D595` | 1 | cam_a001_shadow | u8 | 0A | Shadow of `$A001` = sensor register 1 (N, VH1-VH0, G4-G0): `$20 \| G` in band 0 (H-edge), `$E0 \| G` in bands 1-3 (2-D edge), `$0A` in band 4 (positive image) … | C |
+| `$D596-$D597` | 2 | cam_exposure_shadow | u16 big-endian (d596 hi, d597 lo) | 0A,6 | Shadow of `$A002/$A003` = sensor registers 2 and 3 = exposure C1:C0, big-endian; time = value x 16 us (`$0010` = 0.256 ms floor, `$1000` = 65.5 ms at live … | C |
+| `$D598` | 1 | cam_a004_shadow | u8 | 0A | Shadow of `$A004` = sensor register 7 (E3-E0, I, V2-V0): the ROM uses E = 0 or 2, I = 0; after an offset search `& 7` (V) is stored in `$D5C1+n` … | C |
+| `$D599` | 1 | cam_a005_shadow | u8 | 0A | Shadow of `$A005` = sensor register 0 (Z1 Z0, O5-O0): the ROM sets bit 7 (Z = 10) except in the last capture of each gain trial of the gain probe (Z = 00) … | C |
+| `$D59A` | 1 | cam_brightness_setpoint | u8 ($54 seen) | 6,0A | BRIGHTNESS setpoint, default `$54` (84), 12..192 in steps of 12 (key handler `06:6133`): the divisor of the metering loop `0a:4018-402B`; the pixel sum … | C |
+| `$D59B` | 1 | cam_contrast_row | u8 (1-based row) | 6,0A | CONTRAST setting 1..16, default 8 (key handler `06:615E`): row index (register C) passed to Cam_BuildDitherMatrix; row = C-1 in the 4-byte table … | C |
+| `$D59C` | 1 | cam_dither_mode | u8 | 6,0A | Dither variant: 0 = flat fill (jp `0a:440C`, the same three bytes in all 16 cells), 1 = ramp A (jp `0a:4427`; set when the live view is entered … | C |
+| `$D59D-$D5B4` | 24 | cam_factory_vo[24] | u8[24] = $D59D-$D5B4 | 0A | Results of the 12 `Cam_FactoryMeasure1` offset searches: `$D59D-$D5A8` = V (sensor register 7 bits 2-0), `$D5A9-$D5B4` = O (register 0 & `$7F`), one pair per … | C |
+| `$D5B5-$D5C0` | 12 | cam_calib_vector[12] | u8[12] | 0A | Working copy of the 12-byte calibration vector (SRAM flat `$04FF2-$04FFD` and `$11FF2-$11FFD`, README §3.8) = the 12 results of the factory threshold scans … | C |
+| `$D5C1-$D5C5` | 5 | cam_boot_v[5] | u8[5] (values 0..7) | 0A | V = `$D598 & 7` (sensor register 7 bits 2-0) found by boot offset search n = 1..5, one entry per live band 0..4 (the searches use the matrix bytes D5CB, D5CC … | C |
+| `$D5C6-$D5CA` | 5 | cam_boot_o[5] | u8[5] (values 0..$7F) | 0A | O = `$D599 & $7F` (the 6-bit offset of sensor register 0; the live registers use `$80 \| O`) found by the same 5 boot searches, one per live band 0..4 … | C |
+| `$D5CB-$D5CD` | 3 | cam_boot_matrix_ref[3] | u8[3] | 0A | Flat matrix bytes of boot offset searches 1-3 (the black-level reference of that mode, I), copied from the vector by winning gain: `d5cb`/`d5cc`/`d5cd` <- … | C |
 | `$D5CE` | 1 | mode | u8 $00-$21 | shared (3-9; 0) | Current mode (first mode after boot = `$19`, the CoroCoro-tag check, 00:2EA4-2EAD): index into the 34-entry table at `$2F3F` (3-byte entries … | C |
 | `$D5CF` | 1 | state | u8 | shared (all mode banks) | State inside the mode; the dispatcher of every mode bank indexes an inline pointer table with it … | C |
 | `$D5D0` | 1 | substate | u8 | 3,4,6,7,8,9 | Second-level state used by the multi-phase screens of banks 4, 7, 8, 9 (phase 0 = build screen and fade in, then browse, then confirm/exit) … | C |
@@ -1390,7 +1391,8 @@ The 217-byte settings block has **no flat image in WRAM**: bank 2 moves it field
 8. **`$D5BF/$D5C0`**: besides the factory-test role (README §6/§8) they are the 4th and 5th reference levels of `Cam_Calib_BootMeasureSeq` (`0a:47ED`, `0a:4823`).
 9. **§2 describes `$D5CE` as a 'cross-bank flag, likely screen transition'**: it is the mode (the later §8 text and the code agree). **`$D5DF` 'last input shadow'** holds only the A/B edge of a confirm state (1 = A, 2 = B).
 10. **`$D5D6/$D5D7`** are the prompt-strip and icon selectors (not 'scratch'); **`$D5D8`** is the album photo index; **`$D5ED/$D5EE`** are bank-local copies/selections (README §8 route verified at `04:6D28`, `04:7AC8`).
-11. **README §6 'If either copy is all-`$AA`, [the loader] returns immediately'** is imprecise. `Cam_Calib_Loader` (`0a:46FD-4723`) tests the primary first (`0a:4705-470E`): if **any** of its 12 bytes is not `$AA` it falls straight into `Cam_Calib_BootMeasureSeq` (`0a:4724`) without looking at the echo; only if the primary is all-`$AA` is the echo tested (`0a:4715-471F`), and only if **both** are all-`$AA` does it return `A = $FF` without measuring (then `$D5C1-$D5CD` are never written). So the skip needs both copies blank, not either.
+11. **README §6 'If either copy is all-`$AA`, [the loader] returns immediately'** is imprecise. `Cam_Calib_Loader` (`0a:46FD-4723`) tests the primary first (`0a:4705-470E`): if **any** of its 12 bytes is not `$AA` it falls straight into `Cam_Calib_BootMeasureSeq` (`0a:4724`) without looking at the echo; only if the primary is all-`$AA` is the echo tested (`0a:4715-471F`), and only if **both** are all-`$AA` does it return `A = $FF` without measuring (then `$D5C1-$D5CD` are never written). So the skip needs both copies blank, not either, and what follows is not a skip but the STORE PLEASE WAIT first-boot calibration (§6, §18.4-18.5).
+12. **README §6 / §10 'the vector bytes are target popcount values of the live loop' and `$D5CB-$D5CD` 'auto-exposure targets'** are wrong (sensor pass, §18): the live loop reads no vector byte; `$D5CB-$D5CD`, `$D5BF`, `$D5C0` are the flat matrix bytes of the five boot offset searches, and `$D5C1-$D5CA` are their results (V and O of the five live bands). `$D59A` is the BRIGHTNESS setpoint, `$D59B` the CONTRAST row, `$D59C` the dither variant; `$D59D-$D5B4` holds V and O of the 12 factory points (C, formerly I).
 
 **`$D600-$D7FF`**
 
@@ -1919,28 +1921,20 @@ The mirror-image routine (`jr_00a_46b7`, "echo good → overwrite primary") does
 the two banks swapped. Either way the **surviving copy's checksum bytes get copied verbatim**,
 which is correct — the checksum only depends on the 12 data bytes, and those didn't change.
 
-### The self-test/re-measure gate — a real discovery
+### The self-test/re-measure gate — corrected by §18
 
-`Cam_Calib_Loader`, called after validation/repair succeeds, does something I hadn't expected:
-it re-reads all 12 bytes from **both** copies and checks whether **every single byte is `$AA`**
-(bank 2 first, then bank 8). If either copy is all-`$AA`, it returns immediately — **no
-measurement is taken**. Only if the data is *not* the blank/erased pattern does it fall into
-`Cam_Calib_BootMeasureSeq`, which calls `Cam_ExposureBandSelect` (the real sensor measurement,
-§3) on **every single boot**, not just first-time setup.
+`Cam_Calib_Loader` (`0A:46FD-4723`), called after validation/repair succeeds, tests the 12 bytes of the **primary** copy (bank 2, `$AFF2-$AFFD`) against `$AA`: if any byte differs it jumps at once to `Cam_Calib_BootMeasureSeq` (`0A:4724`); only if the primary is blank is the echo (bank 8, `$BFF2`) tested, and only if **both** copies are twelve `$AA` does the loader return `A = $FF`. The caller (`Cam_BootSelfTest_Entry`, `0A:6A52`) then goes to `0A:6B73`: **STORE PLEASE WAIT** and the first-time factory calibration (`Cam_FullCalibration`, `0A:4947`: 12 offset searches and 12 threshold scans, then the commit of the 12-byte vector to both SRAM copies, §18.5), after which the camera stays on that screen (`jr` loop at `0A:6BDB`) until the power is cycled. In every other case (a valid record, a record repaired from its echo, an invalid record replaced by the default vector in WRAM only) the boot **re-measures**: gain probe and five offset searches against the stored reference bytes (§18.4). Checked in BGB: both copies `$AA` → STORE PLEASE WAIT and 537 captures, an SRAM of `$FF` bytes → 111 captures, i.e. the normal boot (C).
 
-So `$AA`-filled SRAM is a deliberate "this cartridge has never been factory-calibrated, don't
-bother measuring against garbage targets" sentinel — consistent with `$AA` being used elsewhere in
-SRAM as a general "slot is blank/uninitialized" marker (matches the pattern in the unlock save you
-gave me, which was mostly `$AA`-filled). Practical consequence: **the device recalibrates its gain
-against the stored reference targets on every cold boot**, not once at the factory and never
-again — this is a genuine adaptive system, not a one-time factory trim.
+The earlier text of this section ("if either copy is all-`$AA`, it returns immediately — **no measurement is taken**; only otherwise does it fall into `Cam_Calib_BootMeasureSeq`") was wrong twice: it needs **both** copies, and the outcome is not "skip the measurement" but the first-time calibration (Corrections 11 in §2 already said "both").
+
+So twelve `$AA` in both copies is the "this camera has never been calibrated" sentinel (`$AA` is also the general "blank slot" marker elsewhere in SRAM). Every other cold boot re-trims the sensor **offsets** against the stored reference bytes: the reference levels themselves change only when the vector is rewritten by a calibration. So the camera adapts its offsets at every start but is not re-calibrated at every start (the 5 offset searches and the gain probe are what the bus recording of a normal boot shows, §18.4).
 
 ### The calibration vector — complete byte-by-byte mapping
 
 Traced by reading all three branches of `Cam_ExposureBandSelect` (previously I'd only read the
 `gain=0` branch). The coarse gain search tries REG1 = 0, 1, 2 in sequence (stopping at the first
 that produces a usable test capture); whichever wins picks **three** bytes out of the vector as
-the live reference targets (`$d5cb`,`$d5cc`,`$d5cd`):
+the reference bytes of the first three boot offset searches (`$d5cb`,`$d5cc`,`$d5cd`, §18.4):
 
 | Winning gain | `$d5cb` ← | `$d5cc` ← | `$d5cd` ← |
 |---|---|---|---|
@@ -1959,26 +1953,11 @@ slot B: $04FF6   $04FF7   $04FF8   $04FF9      <- $d5cc, "secondary" target
 slot C: $04FFA (shared 0&1)   $04FFB (shared 2&3)    <- $d5cd, "tertiary" target
 ```
 
-`$04FFC`/`$04FFD` ("GAINA" on the factory screen, `$d5bf`/`$d5c0`) are **not** part of this 3-target
-selection at all. Their consumer is the **hidden factory test** (`0a:$455A-$45C8`): it re-measures `$D5BF`/`$D5C0` and compares them with
-`$AFFC`/`$AFFD`, accepting a difference up to `$AFF0` (= `$1B`) and `$AFF1` (= `$13`) respectively (§3.3); `$FF91` = 0 → "OK".
+These three chosen bytes (`$d5cb/cc/cd`) are **not** targets of the auto-exposure loop (the earlier text called them "target popcount values"; the live loop never reads the vector, §10 and §18.6). They are the **flat matrix bytes of boot offset searches 1-3**: `Cam_Calib_BootMeasureSeq` fills the sensor matrix `$A006-$A035` with `$D5CB`, `$D5CC`, `$D5CD`, then `$D5BF` and `$D5C0`, and for each runs the offset search `0A:4B6A`, which finds the sensor offset O (register 0) at which the pixel test flips at that level; the five (V, O) pairs go to `$D5C1-$D5CA` and become the registers of the five live bands (§18.4). So **none of the 12 bytes is a register value**: each is, by my reading (I), the **black-level reference of one sensor mode**, measured at the factory with the threshold scan `Cam_ThresholdConverge` at the offset found for that mode. The slot map (§18.5): slots 0-3 = horizontal-edge mode, E = 0, gain index 0-3; slots 4-10 = horizontal-edge mode, E = 2, gain index 0, 1, 2, 3, 4, 5, 8; slot 11 = positive image, gain index 10. For a winning gain g the table above picks slot g, slot 4+g and slot 8 (g = 0, 1) or 9 (g = 2, 3), which are the slots measured in the very mode (reg 1, reg 7) that boot searches 1-3 run in.
 
-These three chosen bytes (`$d5cb/cc/cd`) are the **target popcount values** the continuous
-auto-exposure loop compares its live measurement against (see §10's pseudocode) — i.e. "for this
-gain and this part of the exposure curve, a correctly-exposed image should produce approximately
-this many dark pixels in the sampled region." That's the precise answer to "which value is which
-camera register": **none of the 12 bytes is a register value directly** — they're auto-exposure
-*targets*, consumed by WRAM (not written to `$A0xx` hardware registers themselves). The actual
-register values (REG1/REG4/REG5) come from a *different*, smaller per-band table (`$d5c1-$d5c9`,
-mentioned last round, not re-verified this pass).
+`$04FFC`/`$04FFD` ("GAINA" on the factory screen, `$d5bf`/`$d5c0` = slots 10 and 11, gain index 8 and 10) are consumed twice: by the hidden factory test (`0a:$455A-$45C8`), which re-measures them and compares them with `$AFFC`/`$AFFD`, accepting a difference up to `$AFF0` (= `$1B`) and `$AFF1` (= `$13`) respectively (§3.3; `$FF91` = 0 → "OK"), and as the matrix bytes of boot searches 4 and 5.
 
-There's also a deeper, 8-point factory sweep (`Cam_FactoryMeasure1`, called from `Call_00a_4947`
-alongside `Cam_FactoryMeasure2` + `Cam_CommitVectorToSRAM`) that tests REG1 = `$20,$21,$22,$23,
-$E4,$E5,$E8,$0A` (gain×edge-mode combinations beyond the simple 0/1/2 used at boot) and stores
-results into `$d59d-$d5a8` (REG4 low bits) and `$d5a9-$d5b4` (O-register results) — 8 raw
-measurement pairs. `Cam_CommitVectorToSRAM` (`0a:$4F58`, now traced) is only the *store* step: it copies the 12 bytes at WRAM
-`$D5B5` to `$AFF2` (RAM bank 2, slot 3) and `$BFF2` (RAM bank 8, slot 16), each followed by `Σ+$0D` and `XOR+$23` (§3.3). How the sweep results
-become those 12 bytes is the part that is **not** traced yet.
+The factory step has **twelve** points, not eight (§18.5): `Cam_FullCalibration` (`0a:4947`, formerly `Call_00a_4947`) runs `Cam_FactoryMeasure1` (12 offset searches at reg 1 = `$20 $21 $22 $23`, `$E0 $E1 $E2 $E3`, `$E4`, `$E5`, `$E8`, `$0A`, exposure `$0030 / $0900 / $2000 / $3200 / $8000`, flat matrix `$80`; V goes to `$d59d-$d5a8`, O to `$d5a9-$d5b4`), then `Cam_FactoryMeasure2` (12 threshold scans at C = `$0010`; **their 12 results are the 12 bytes of the vector**: that is how the sweep becomes the vector), then `Cam_CommitVectorToSRAM` (`0a:$4F58`), which copies the 12 bytes at WRAM `$D5B5` to `$AFF2` (RAM bank 2, slot 3) and `$BFF2` (RAM bank 8, slot 16), each followed by `Σ+$0D` and `XOR+$23` (§3.3). A bus-analyser recording of this routine on a real unit (172 register loads) is decoded in §18.5.
 
 ### Where exactly is the checksum — unambiguous diagram
 
@@ -2014,8 +1993,10 @@ Traced fully to source. **Correction to what I told you last session**: `Cam_Bui
 - **`$d59c == 0`** → `Jump_00a_440c`: writes the **same** 3-byte pattern (`$d583,$d584,$d585`) into
   all 16 register groups uniformly. A **flat/uniform threshold matrix** — effectively no spatial
   dithering, every 2×2 (or however the hardware groups them) cell gets an identical comparator
-  value. Used for the gain-search test captures (which fill the matrix with constant `$D5` then
-  `$80` purely to get a clean above/below-threshold popcount, not a real picture).
+  value. This is one of the three live-view dither variants (set by the option cross, `06:6753`).
+  It is **not** what the boot and calibration test captures use: those fill `$a006-$a035` with
+  one flat value through their own inline loops (`0a:4738`, `4783`, `47ba`, `47f1`, `4827`,
+  `4885`, `48a2`, `4968` and the three in `Cam_ThresholdConverge`, §18.3).
 - **`$d59c == 1`** → `Jump_00a_4427`: a computed **linear 16-level ramp** from `$d583` in steps of
   `swap($d584-$d583)`, written across the matrix in the interleaved group order I found last
   session (not simple ascending order — matches the hardware's expected scan order for the 4×4
@@ -2023,26 +2004,30 @@ Traced fully to source. **Correction to what I told you last session**: `Cam_Bui
 - **else (≥2, the normal-photo path)** → the fall-through ramp code: same idea as `$d59c==1` but a
   visibly different write order/grouping (`$a006→$a024→$a01e→$a00c→$a015→$a033...` vs the other
   variant's `$a006,$a012,$a009,$a015` grouping) — **not yet fully diffed against variant 1**, but
-  clearly a second, distinct interleaving. This is the one used for ordinary SHOOT-mode captures.
+  clearly a second, distinct interleaving. `$d59c` is set to **1** when the live view is entered
+  (and **2** for the SHOOT variants with `$d7e3` = `$0a`, `$0b`, `$15`, `06:5e3e-5e47`), so the
+  ordinary live view uses variant 1 and this one is the other two variants' (§18.7). Which of the
+  three the on-screen option calls "dither" is not established (?).
 
 **Table selection** (which 16-row, 4-bytes/row source table feeds `$d583-$d586`), from
 `Cam_BuildDitherMatrix`'s own entry logic — confirmed, all 6 call sites in bank $0A checked:
 
 ```
-B = $d587 (active gain)      C = $d59b (exposure-band index, 0-15, row selector)
-if B == $d588 (committed/normal gain):        table = $7C20
-elif B == $d589 (set to $04 only when the
-                 brightest gain candidate won):  table = $7C60
-elif B == $08 (fixed N-bit/dark capture gain):   table = $7C20
-else:                                             table = $7C20   (default)
+B = $d587 (active gain index)   C = $d59b (CONTRAST setting 1-16, row = C-1)
+if B == $d588 (winner of the gain probe, 0-3):   table = $7C20
+elif B == $d589 (gain index of band 2, 4 or 5):  table = $7C60
+elif B == $08:                                   table = $7C20
+else:                                            table = $7C20   (default)
 ```
 
-So **`$7C20` is the default table used for the overwhelming majority of captures** (normal gain,
-and the special dark/"N-bit" gain both route here), and **`$7C60` is a distinct alternate table
-that only activates specifically when the auto-gain search's most-sensitive/brightest candidate
-wins** — i.e. it looks like a bright-scene-specific dithering profile, separate from the general
-one. Both tables' raw 16×4 bytes are dumped in the session log; happy to render them as an actual
-visual gradient comparison if useful.
+So `$7C20` serves bands 0, 1, 3 and 4 and **`$7C60` only while the active gain is `$d589`, i.e. in
+band 2** (2-D edge mode, gain index 4 / 5, exposures 55-364 ms, §18.6). The earlier text ("only when
+the brightest gain candidate wins", "set to `$04` only when …") is corrected: `$d589` is 4 or 5 for
+every unit, and band 2 is the second band of the live view, not a bright-scene special case. What
+band 2 gains from a table of its own is not established (?). The row index is the CONTRAST key
+(1-16, default 8): row 1 = `80 8F D0 E6` (thresholds spread over `$80-$E6`), row 8 = `89 92 A2 D2`,
+row 16 = `92 92 92 92` (a single flat threshold); all rows of the three tables are in
+`tcrf_check/assets/sensor/dither_tables.csv` and no sensor register is written by the key (§18.7).
 
 There is also a **third, completely unreferenced table** at bank $0A `$7CA0` (same shape, 16×4
 bytes) — confirmed zero references anywhere in the ROM. Genuine unused/leftover data, flagging as
@@ -2058,13 +2043,8 @@ It:
 
 1. Reads the **held** buttons (`$ffa1`, not newly-pressed — this has to be held *through* power-on).
 2. If held buttons `== $FD` (everything **except B**) → jumps into the hidden diagnostic screen (below).
-3. Else if held buttons `== $FF` (literally everything) → jumps to `Cam_BootAllButtons_or_SensorFail`.
-4. Else (normal boot): pings the sensor twice (`Cam_BootPing1`/`Cam_BootPing2`, two tiny bank-$0A
-   stubs at `$7D04`/`$7D10` — not yet individually decoded, low information density, likely just a
-   presence/ack check) — **and if the first ping returns nonzero (error), it's funneled into the
-   same path as holding all 8 buttons.** So `Cam_BootAllButtons_or_SensorFail` is reached two ways:
-   deliberately (hold everything) or organically (sensor not responding) — a debug shortcut to
-   reach the same failure-handling code without needing to break your cartridge.
+3. Else if held buttons `== $FF` (literally everything) → jumps to `0A:6B73` (named `Cam_BootAllButtons_or_SensorFail` until now; it is the **STORE PLEASE WAIT** first-boot calibration screen, below). Not exercised: BGB's demo input `$FF` is read as no key (`$FFA1` = 0), so this branch is static reading only (?).
+4. Else (normal boot): calls two far stubs of bank $0A, `0A:7D04` (named `Cam_BootPing1`; it is a `call $45C9` = `Cam_Calib_ValidityCheck`, which loads the SRAM calibration vector and then runs `Cam_Calib_Loader` → `Cam_Calib_BootMeasureSeq` → the gain probe `Cam_ExposureBandSelect`) and `0A:7D10` (named `Cam_BootPing2`; `call $50AA` = `Cam_LiveInit`, which runs the gain probe again and loads the first live registers). **They are not "pings": the first one measures**, with 58 register loads on a real camera's sensor bus (§18.4). It returns nonzero (`$FF`) only when both SRAM copies of the calibration vector are twelve `$AA`; then the boot goes to `0A:6B73`, prints **STORE PLEASE WAIT** and runs the first-time calibration (`Cam_FullCalibration`, via the stub `0A:7D0A`; §6, §18.5) and ends on a `jr` loop at `0A:6BDB`. So `0A:6B73` is reached by holding every key or by a blank calibration vector, **not** by a sensor that does not answer; the earlier reading ("sensor not responding", "a debug shortcut to reach the same failure-handling code") was wrong.
 
 ### The hidden combo, decoded completely — this is the "undocumented oddity" you asked for
 
@@ -2232,111 +2212,61 @@ say more than "the metering avoids it and nothing crops it."
 **There are two genuinely different sampling mechanisms** in this code, easy to conflate — I did,
 last round. Clearing that up:
 
-### A. The coarse gain search's sanity check — a tiny fixed 4×4 patch, NOT the main metering
+### A. The pixel test of the gain probe and the offset searches — 12 pixels in the first tile row, NOT the main metering
 
-`Cam_PixelTestHelper` (called from the 3-way gain loop and from the O-register SAR search) reads
-just **4 bytes** from the capture buffer at a fixed address (`$A002` or `$A082`, i.e. tile #0 or
-tile #8, row 1), testing 4 specific bits (columns 1–4 of an 8-pixel-wide row) per byte — a **4×4
-pixel micro-patch** at a fixed position, used only as a cheap "did this test-capture come back
-roughly sane" check during the coarse gain/O-register search. It is not the real photometry.
+`Cam_PixelTestHelper` (`0A:4C30`, called from the gain probe and from the offset search `Cam_ORegister_SAR_Search`) reads **four bytes** of the capture buffer at a fixed address (`[DE]`, `[DE+2]`, `[DE+4]`, `[DE+6]` with `DE = $A002` — tile 0, rows 1-4, plane 0 — or `$A082` in the factory routine) and counts the set bits in **columns 1-3 (bits 6-4)** of each byte: **12 pixels** (the test of bit 3 is jumped over at `0A:4C51`; the earlier text said "4 bytes, 4 bits each, columns 1-4", a 4×4 patch, which was wrong). It returns 1 when the count reaches 9 (8 in one pass of the threshold scan). The captures that feed it use a flat matrix, so it is a one-bit comparator read-out of the sensor, not photometry; these pixels lie in the first tile row of the frame buffer, the 8 lines above the 112-line photo (§18.3).
 
-### B. The continuous fine-adjustment loop — the real metering, and it's the center ~75%×62%
+### B. The continuous fine-adjustment loop — the real metering: 168 sparse tile-row reads, centre-weighted
 
-`Cam_PopcountSampleLoop`, called from `Cam_MainDispatch` (the routine that runs continuously
-during live preview) starting at `$A320`, walks tile-by-tile across:
-```
-x: pixel 16 .. 111   (96 of 128 columns — 16px margin left, 16px margin right)
-y: pixel 24 .. 103   (80 of 128 rows   — 24px margin top,  25px margin bottom)
-```
-i.e. a **96×80 center-cropped region** (not a tiny patch, not the full 128×128 frame either) —
-roughly the middle three-quarters horizontally and five-eighths vertically. This is the region
-the live auto-exposure/auto-gain loop actually measures, every frame, while you're framing a
-shot. Verified by symbolically emulating the sample-address sequence against the real ROM bytes
-(not guessed) — confirmed no row below 103 or above 24, no column outside 16-111, is ever touched
-by this loop.
+`Cam_PopcountSampleLoop` (`0A:4FBD`), called from `Cam_MainDispatch` (the routine that runs once per live-preview frame) with `DE = $A320` and `BC = 0`, is **not a dense scan of a window**: it makes **168 reads of one tile row each** (2 bytes: plane 0, then plane 1, of an 8-pixel row of a tile; the helper `0A:5091` adds `popcount(plane 0) + 2 × popcount(plane 1)` through the 256-entry popcount table at `$7300`, i.e. the sum of the 2-bit pixel values of the 8 pixels; the larger the sum, the darker the picture). The reads step by 22 or 6 bytes, about one read per tile column and per iteration, the row inside the tile advancing by 3 each time. **Loop 1** is 10 iterations × 12 reads = 120 reads inside the box x 16-119, y 24-103; its running sum is then **doubled** (`sla c ; rl b`, `0A:5036`); **loop 2** is 6 iterations × 8 reads = 48 reads inside the central box x 32-95, y 40-87, added once. So Σ = 2·S₁ + S₂ is a sparse, **centre-weighted** sample (maximum Σ = 2 × 120 × 24 + 48 × 24 = 6,912). The iteration step `+$4F` (`0A:502A`) is `$103` bytes, so every second iteration of loop 1 starts on an **odd address**: 60 of the 120 reads take plane 1 of a row as "plane 0" and plane 0 of the next row as "plane 1" (whether that is intended is not known, ?).
+
+The earlier text of this paragraph (a dense **96×80 centre-cropped region**, "x 16-111, y 24-103, no column outside 16-111", "roughly the middle three-quarters horizontally") was wrong: it gave the bounding box of the reads (whose real right edge is x = 119) as an area that is measured. The geometry is read from the ROM bytes by `tcrf_check/tools/sensor_meter_geom.py`. **C in BGB:** the frame buffer of RAM bank 0 left by a live-view run gives Σ = 2 × 1,758 + 895 = 4,411 = `$113B`, exactly the last sum the ROM computed in that run (`assets/sensor/meter_check.txt`), and `L = floor(Σ / D59A)` holds on 236 of 236 dispatches of it.
 
 ### The full algorithm, in readable pseudocode
 
-In the spirit of the prototype's `AKARUSA`/`CNTR2`/`CNTR3` naming — here's the retail routine with
-meaningful names, verified against the actual disassembly (bank $0A):
+In the spirit of the prototype's `AKARUSA`/`CNTR2`/`CNTR3` naming — here is the retail routine with
+meaningful names, **corrected in the sensor-register pass (§18.6)** and checked on a real camera's bus recording
+(207 of 207 live steps) and in BGB (2,377 of 2,377 dispatches; bank $0A):
 
 ```
-# ---- Runs once per live-preview frame, after a capture completes ----
-def Cam_MainDispatch(target_popcount):
-    # target_popcount was picked earlier by the coarse gain search (Cam_ExposureBandSelect)
-    # from the 12-byte SRAM calibration vector — see table above.
-    select_SRAM_bank(0)                       # 0 = the live image buffer, not general SRAM
-    dark_pixels = popcount_scan(x=16..111, y=24..103)   # sum of set comparator bits, center region
+# ---- once per live-preview frame, after a capture completes (Cam_MainDispatch, A = $D59A) ----
+def Cam_MainDispatch(setpoint):                      # setpoint = D59A, default 84 (the BRIGHTNESS key)
+    select_SRAM_bank(0)                              # the frame buffer, not general SRAM
+    sigma = 2 * S1 + S2                              # Cam_PopcountSampleLoop 0A:4FBD: 120 + 48 sparse tile-row reads (§B);
+                                                     # one read = popcount(plane 0) + 2 * popcount(plane 1) of an 8-pixel row
+    level = 0                                        # quotient by repeated subtraction, capped at 159
+    while sigma >= setpoint and level < 159:
+        sigma -= setpoint; level += 1                # (the remainder is dropped)
+    s = ShiftTable[level]                            # 160 bytes at 0A:7B00
+    e = D596:D597                                    # sensor registers C1:C0; exposure = e * 16 us
+    if level >= 36: e = min(e + (e >> s), 0xFFFF)    # large sum = dark picture -> longer exposure
+    else:           e = e - (e >> s)
+    # s = 16 (level 35, 36, 37): e >> 16 = 0, no change
 
-    # --- integer "how many target-units fit" via repeated subtraction, capped at 159 ---
-    level = 0
-    remainder = dark_pixels
-    while remainder >= target_popcount and level < 159:
-        remainder -= target_popcount
-        level += 1
-    # level is now 0..159: higher = more dark pixels measured = more underexposed
-
-    correction_shift = CorrectionShiftTable[level]     # bank0A $7B00, 256 bytes, see shape below
-    exposure = read_16bit(d596, d597)                  # current REG2:REG3 shadow
-
-    if level >= 36:
-        # too many dark pixels -> underexposed -> INCREASE exposure time
-        exposure = exposure + (exposure >> correction_shift)
-    else:
-        # few enough dark pixels -> adequately/over exposed -> DECREASE exposure time
-        exposure = exposure - (exposure >> correction_shift)
-    # (16-bit add/sub; overflow on increase clamps to $FFFF, underflow on decrease is handled
-    #  by the gain-band-switch logic below rather than clamping to 0)
-
-    select_CAM_register_window()
-    d596, d597 = exposure                     # commit the new exposure candidate to WRAM shadow
-
-    # --- automatic gain-band switching at the edges of the current band's useful range ---
-    if d587 == d589:        # currently on the "brightest-candidate" band
-        goto band_specific_handler_1
-    elif d587 == 0x08:      # currently on the fixed N-bit/dark band
-        goto band_specific_handler_2
-    elif d587 == 0x0a:
-        goto band_specific_handler_3
-    elif REG1_shadow.bit7:  # "already at the top of the range" flag
-        if exposure - 0x00CF underflows:
-            if exposure - 0xEE00(signed) also underflows:      # truly pinned at max
-                commit_exposure_and_return()
-            else:
-                # step UP to the next-brighter gain band ($d589), fresh mid-range exposure
-                d587 = d589 ; REG1 = d589 | 0xE0 ; exposure = 0x0D80
-                REG4 = d5c3 ; REG5 = d5c8 | 0x80          # per-band REG4/REG5 from the small table
-                rebuild_dither_matrix()
-    else:
-        if exposure - 0x0030 underflows:        # exposure dropped below ~48 ticks
-            # step DOWN to the next-dimmer gain band ($d588), fresh mid-range exposure
-            d587 = d588 ; REG1 = d588 | 0xE0 ; exposure = 0x0048
-            REG4 = d5c2
-        elif exposure - 0x0010 underflows:       # small enough to just floor it
-            commit_exposure_and_return()
-        else:
-            d597 = 0x10                          # floor the low byte, commit
-            commit_exposure_and_return()
-
-    write_registers(A002=exposure_hi, A003=exposure_lo, A004=REG4, A005=REG5, A001=REG1)
+    # ---- the band state machine: only the current band's two thresholds are tested ----
+    band 0 (reg1 $20,  H-edge):        e >= $0030 -> band 1, e = $0048;      e < $0010 -> e = $0010
+    band 1 (reg1 $E0-$E3, 2-D edge):   e >= $1200 -> band 2, e = $0D80;      e < $0031 -> band 0, e = $001F
+    band 2 (reg1 $E4/$E5):             e >= $6000 -> band 3, e = $3500;      e < $0800 -> band 1, e = $0B00
+    band 3 (reg1 $E8):                 e >= $C000 -> band 4, e = $8500;      e < $2800 -> band 2, e = $4500
+    band 4 (reg1 $0A,  positive):      (saturates at $FFFF);                 e < $6000 -> band 3, e = $8C00
+    # on a switch: reg1 = band id, reg7 = D5C1+n, reg0 = D5C6+n | $80 (the five boot results), dither matrix rebuilt
+    write A002/A003 = e                              # the five registers go out with the next capture start
 ```
 
-**Why the correction table has the shape it does** (dumped directly from ROM, `bank0A $7B00`):
-values are **small (2–4) at the extremes** of the 0–159 range and **peak at 16 right around
-index 35–38** (the increase/decrease boundary), then settle to a flat 3 for the rest of the range.
-Because the value is a *right-shift count*, small values mean "shift by only a little" = a **large**
-proportional correction, while large values (up near 16) mean "shift by a lot" = a **tiny**
-correction. So the real shape is: **big, aggressive corrections when the image is badly over- or
-under-exposed, and very fine nudges right around the crossover point** — a textbook proportional
-controller shaped to avoid hunting/oscillation near the setpoint, confirmed directly from the
-table's contents rather than assumed.
+**The correction table** (`0A:7B00`, **160** bytes, not 256): the shifts run 2, 3, 3, 3, 4, … up to 9 at L = 34, are **16 (= no
+correction) for L = 35, 36, 37**, are 9 at L = 38 and fall to 5-6 around L = 44-49, 4-5 for L = 50-79 and 3 from L = 80 on. A
+shift `s` is a correction of 2^-s of the exposure per frame: 25 % at the extreme (`s` = 2, L = 0, a very bright picture), 12.5 %
+for L ≥ 80 (a very dark one), and a **dead band of three levels around the setpoint** with tiny steps (`s` = 9, 0.2 %) just
+outside it. **I:** a proportional controller with a dead band, shaped not to hunt. The earlier description ("values small at the
+extremes and peak at 16 right around index 35-38, then settle to a flat 3") had the dead band as a smooth peak and the tail as
+flat; the table is the one above (`tcrf_check/assets/sensor/live_exposure_bands.png` shows the bands and the exposure of a real
+live recording).
 
-This closes the loop on your original question: the "O register" instinct was right in spirit —
-what actually happens is a **combined exposure-time-and-gain-band feedback loop**, metering the
-center ~96×80 region every frame, compared against a per-gain-band target pulled from the SRAM
-calibration vector, with an aggressive-near-extremes/gentle-near-target proportional correction
-curve, and automatic hand-off between gain bands when the exposure time would otherwise run off
-either end of the current band's useful range.
+The loop samples 168 tile rows of the frame every frame (centre-weighted, §B), divides the pixel sum by the BRIGHTNESS setpoint `$D59A`, corrects the
+16-bit exposure by 2^-s of itself and hands over between **five sensor bands** (reg 1 / reg 7 / reg 0 sets, in datasheet terms in
+§18.6) when the exposure leaves the band's range. The earlier statement that the loop compares the measurement "against a
+per-gain-band target pulled from the SRAM calibration vector" (and that `target_popcount` is one of the vector bytes) is
+**wrong**: the vector does not enter the loop; it only decides, at boot, which offset O each band uses (§6, §18.4).
 
 ---
 
@@ -2540,11 +2470,12 @@ the CoroCoro repair routine, the per-block self-repair rules, and the status of 
 - D4. A character table for the strings (only the ASCII `MAIN PASS` is typed).
 
 **Calibration — still open:**
-7. How the 8-point sweep results (`$D59D-$D5B4`) become the 12 bytes at `$D5B5` that `Cam_CommitVectorToSRAM` stores (§6).
-8. §10: the fixed constants used when switching gain bands (`$0D80`, `$0048`, `REG4` from `$d5c2`/`$d5c3`, …) are transcribed correctly but not independently explained.
+7. ~~How the sweep results (`$D59D-$D5B4`) become the 12 bytes at `$D5B5` that `Cam_CommitVectorToSRAM` stores (§6).~~ **Answered (§18.5, C):** they do not: `Cam_FactoryMeasure1` (12 offset searches) fills `$D59D-$D5B4` with the V and O of 12 operating points, and `Cam_FactoryMeasure2` runs 12 threshold scans at those registers whose results *are* the 12 bytes. Open (I): what exactly the vector represents (a per-mode black-level reference, §18.5) and in which conditions the factory step is done.
+8. ~~§10: the fixed constants used when switching gain bands (`$0D80`, `$0048`, `REG4` from `$d5c2`/`$d5c3`, …) are not independently explained.~~ **Explained (§18.6, C for the values, I for the reason):** `$0030` / `$0048` is the datasheet's 0.768 ms limit for the vertical / 2-D edge modes, and each upward band switch is a +6 dB gain step with the exposure reloaded to 55-75 % of the trigger value (a hysteresis); `REG4` there is sensor register 7 (V, bits 2-0), taken from the five boot searches.
+8b. Sensor pass, still open (§18.9): the meaning of bit 1 of the `$03` written to `$A000`; why the first test capture of the gain probe uses the matrix byte `$D5`; which SHOOT variants freeze the auto-exposure (`$D7E3 ≥ $13`); what the extra `print` sheet of the owner's workbooks recorded; the printing menus (no extra captures seen in BGB, the printer helper was not attached); the SRAM of the recorded unit, to compare with the vector implied by its threshold scans (§18.5).
 
 **Still open from before:**
-9. §7: want the two dither tables (`$7C20`/`$7C60`) rendered as a visual gradient, and/or the third, unused table (`$7CA0`) fully characterised?
+9. §7: the two dither tables (`$7C20`/`$7C60`) and the unused one (`$7CA0`) are listed row by row in `tcrf_check/assets/sensor/dither_tables.csv` (§18.7); a visual gradient rendering and the visible effect of each variant are not done.
 10. §8: Select+Start+Up is resolved (erase-ALL-photos confirm on the erase album, mode `$0F`). Still open: the real-hardware menu route into mode `$0F`, and who computes `$d561` at boot.
 11. §4: tile-by-tile match of the asset catalog against each TCRF section?
 12. §9 (masked lines): still need a datasheet pointer or your own probing data to close out properly.
@@ -2751,7 +2682,7 @@ Footnotes. (a) "bytes read (organic)": bytes of the bank read at least once as d
 - **D2 (dead roots): evidence in, decision is yours.** None of the 45 ran organically; one ran in a forced run through a non-CFG edge (artefact). Recommendation: assemble them as code with an `unreferenced` tag (their bytes are identical either way; the tag keeps them out of the live-code statistics), and keep the 527-instruction DEAD components under the same tag.
 - **D3 (coverage run): done**, with the limits of §13.7. Tracer complete on everything reached (0 gaps).
 - **D4 (character table): untouched.** The run does not produce text. (The kana sheets of banks `2D 2E 30` are the natural source; extracting them is a separate step.)
-- **Labels to fix** (naming debt found while reading the code): `Cam_BootHiddenCombo_Check` (`0A:6A41`) is the tail of the outer loop of a block copy (`ldh a,[$ff8a] ; dec a ; ret z …`), not the hidden-combination test. The test is at `0A:6A52` (`ldh a,[$ffa1] ; cp $fd` = all keys but B held, jump to the factory test; `cp $ff` = no key), already labelled `Cam_BootSelfTest_Entry`. And symbol-based statistics are misleading wherever one label precedes a large unlabelled region: `Cam_PopcountSampleLoop_inner` (`0A:5091`) "contains" 4,581 instructions of effect code, `Bank005_State12` 6,283.
+- **Labels to fix** (naming debt found while reading the code): `Cam_BootHiddenCombo_Check` (`0A:6A41`) is the tail of the outer loop of a block copy (`ldh a,[$ff8a] ; dec a ; ret z …`), not the hidden-combination test. The test is at `0A:6A52` (`ldh a,[$ffa1] ; cp $fd` = all keys but B held, jump to the factory test; `cp $ff` = all keys held, jump to `0A:6B73`), already labelled `Cam_BootSelfTest_Entry`. The sensor pass (§18) renames `Cam_BootPing1` / `Cam_BootPing2` (`0A:7D04`, `0A:7D10`: far stubs of `Cam_Calib_ValidityCheck` and `Cam_LiveInit`, not pings) and `Cam_BootAllButtons_or_SensorFail` (`0A:6B73`: the STORE PLEASE WAIT first-boot calibration) in `pocketcamera_jp.sym`; `Cam_ExposureBandSelect` (`0A:4859`) is the gain probe, not an exposure-band selector (name kept: it is used throughout this README). And symbol-based statistics are misleading wherever one label precedes a large unlabelled region: `Cam_PopcountSampleLoop_inner` (`0A:5091`) "contains" 4,581 instructions of effect code, `Bank005_State12` 6,283.
 
 ### 13.7 Caveats and inconclusive points
 
@@ -3646,6 +3577,191 @@ The coverage claims of §13 therefore stand with these refinements: what my core
 * `tools/bgb_printer.py` (printer helper), `bgb_print_run.py`, `bgb_dj_print.py`, `dj_route.py`, `dj_print_probe.py`, `dj_screens.py`, `print_explore.py`, `album_nav.py`, `bgb_link_sniff.py` (17.1-17.6); `printer_status.py` (status injection in my core, §16.16); `blocks.py`, `bgb_trace_core.py`, `bgb_trace_plan.py`, `bgb_trace_run.py`, `bgb_trace_report.py` (writes `bgbtrace/trace_report.json`, `confirmed_heads.json`), `bgb_never_probe.py`, `bgb_divergence.py`, `dj_corpus.py` (17.7). They expect the working-directory layout of the earlier tools (`saves/`, `saves_unl/`, `merged_v8/cov.npz`, `package/…`, `BGB_DIR` pointing to a BGB directory); the results (`trace_report.json`, `confirmed_heads.json`, `printer_only_result.json`, the per-run JSONL files in `results/`, the music-editor corpus `dj_corpus.jsonl`, the printer runs' head hits in `printer_heads/`, which `bgb_trace_report.py` reads as `bgbtrace/ph_*/heads_hit.json`, and the printer logs) are in `tcrf_check/assets/bgb_retrace/` and `tcrf_check/assets/bgb_printer/`.
 * Open: the 625 heads not reproduced (a second witness lineage per head, with longer waits, was not built); the 1,872 heads that need forced states or the link; the SGB probe was run on 97 of 171 end states; printing from the SOUND II and NOISE pages of the editor, the effect of the density and frame options of `1C:05` / `1C:06` on the PRINT packet, and the feed values 0 and 6+ of `$1E` were not printed; the spelling of the 16 hot-spot effect icons, the 20 Pokémon stamps and the literal meaning of どみーる remain the questions listed in 16.10; blood types B, O and AB on the comment card were not printed (only A and "?").
 
+## 18. The sensor registers: what the ROM sends, and what the camera does at boot, in calibration and in normal use
+
+> **Where this comes from.** (1) Three register-load recordings made by the owner with a bus analyser hooked on the M64282FP wires of a real camera: `Search_for_sensor_at_boot.xlsx` ("at boot"), `Calibration_procedure.xlsx` ("during sensor calibration"), `Exposure_strategy_regular_camera_volts.xlsx` ("normal use"); the first two also carry an identical extra sheet `print` (859 more register loads, see 18.9). One row = one capture = the eight sensor registers as the sensor received them. The workbooks are the owner's data and are not in git; their decoded rows are `tcrf_check/assets/sensor/{boot,calibration,live}_rows.csv`. (2) The Mitsubishi M64282FP datasheet (ver. 1.1E, §11), read against the recordings (18.8). (3) The Japanese ROM: bank `$0A` (sensor driver) and the two capture starts in bank 6. (4) BGB, which emulates the MAC-GBD with a **fake sensor** (a made-up picture that does not behave like a sensor: at fixed registers and matrix the pixel sum drifts from frame to frame, e.g. 3,168, 3,087, 2,967, 2,823 at the same exposure and band, and with gain index 3 the sum rose from 3,478 to 4,311 while the exposure grew from `$066F` to `$0954`, where a real sensor gives a smaller sum for a longer exposure): the code path, the order of the registers and every constant can be compared with the real bus; the pixel-dependent decisions (which gain wins, where the search stops, how long a scan lasts) cannot, and they differ. Tags as everywhere: **C** = traced in the ROM and reproduced (bus recording and/or BGB), **I** = inferred, **?** = not established. Tools and data: 18.10.
+
+### 18.1 The three phases in a few lines
+
+* **Boot (C).** `Cam_BootSelfTest_Entry` (`0A:6A52`) reads the held keys, then calls two far stubs: `0A:7D04` (= `Cam_Calib_ValidityCheck`, §6: SRAM calibration vector → WRAM, no sensor traffic, then `Cam_Calib_Loader` → `Cam_Calib_BootMeasureSeq`) and `0A:7D10` (= `Cam_LiveInit`). On the bus this is **58 register loads**: one *gain probe* (9 captures), five *offset searches* (8 captures each: the five modes the live view will use), and a second gain probe (9). Nothing is taken from the image except 12 pixels per capture.
+* **Calibration (C), first start of a camera whose SRAM vector is blank (twelve `$AA` in both copies).** `STORE PLEASE WAIT` appears and `Cam_FullCalibration` (`0A:4947`) runs: 12 offset/bias searches at 12 gain/mode points with long exposures (`Cam_FactoryMeasure1`, 96 captures), then 12 *threshold scans* at one short exposure (`Cam_FactoryMeasure2` + `Cam_ThresholdConverge`, 76 captures on the real unit) whose 12 results are the 12 bytes of the calibration vector, written with their two checksums to the two SRAM copies (`Cam_CommitVectorToSRAM`); the camera then stays on that screen (an endless `jr` at `0A:6BDB`) until the power is cycled. The hidden factory test (hold everything except B at power-on) runs **the same two measurement routines but does not store anything**: it compares two of the 12 results with the stored ones (18.5).
+* **Normal use (C).** `Cam_LiveInit` loads the first live registers (2-D edge enhancement at 50 %, gain index 4 or 5, exposure `$1000` = 65.5 ms, offset found at boot). After that, each live frame: the CPU sums the 2-bit pixel values of a sparse, centre-weighted sample of the frame (168 tile-row reads, §10-B), divides by the BRIGHTNESS setpoint (`$D59A`, default 84) to get a level 0-159, and nudges the 16-bit exposure by `e >> s` up or down (`s` from a 160-byte table). When the exposure leaves its range the camera changes **band** (a coherent set of N, VH, G, V, O): five bands from 14 dB H-edge at 0.26 ms to 32 dB positive image at 1.05 s. 207 of 207 register loads of the real live recording and 2,377 of 2,377 live steps in BGB (11 scenarios) obey this rule.
+
+The user-visible menus change none of the sensor registers directly: BRIGHTNESS moves the setpoint `$D59A`, CONTRAST selects the dither-table row `$D59B`, the option cross selects the dither variant `$D59C` (18.7).
+
+### 18.2 What the ROM writes, and the datasheet names
+
+The ROM never talks to the sensor directly. It writes the **MAC-GBD** registers at `$A000-$A035` (RAM bank `$10`), and the MAC-GBD sends the eight sensor registers itself. Of the eight, the ROM supplies five; **P, M and X (sensor registers 4-6) are the MAC-GBD's** and have the same value on every row of the three recordings: `P = $01, M = $00, X = $01` (the datasheet's typical "1-D filtering kernel" row, §11.6.10). Column "owner's column" is the heading in the left columns of the workbooks.
+
+| ROM address | sensor register (bus address) | datasheet symbols | owner's column(s) | WRAM shadow | ROM usage |
+|---|---|---|---|---|---|
+| `$A001` | reg 1 (`001`) | `N VH1 VH0 G4-G0` | Edge Exclusive / Edge Operation / Analog output gain | `$D595` | band id: `$20 \| G` (H-edge), `$E0 \| G` (2-D edge), `$0A` (positive); G = gain index |
+| `$A002` | reg 2 (`010`) | `C17-C10` ("C1") | Exposure Time A | `$D596` | exposure, high byte |
+| `$A003` | reg 3 (`011`) | `C07-C00` ("C0") | Exposure Time B | `$D597` | exposure, low byte |
+| `$A004` | reg 7 (`111`) | `E3-E0 I V2-V0` | Edge Enhancement Ratio / Invert / Output node bias voltage | `$D598` | E (0 or 2), I = 0, V = Vref index |
+| `$A005` | reg 0 (`000`) | `Z1 Z0 O5-O0` | Zero Point Calibration / Output Ref Voltage | `$D599` | `$80 \| O` = Z = 10 (calibration for a positive signal) and offset O; `O` alone (Z = 00) in the last capture of each gain trial of the gain probe |
+| not written | reg 4, 5, 6 | `P7-0`, `M7-0`, `X7-0` | (not in the left columns) | - | `01 / 00 / 01`, MAC-GBD constants |
+| `$A000` | (MAC-GBD control) | - | - | `$D594` (= 2) | start: `$D594 \| 1` = `$03` written, then bit 0 is polled until it clears (the capture is done) |
+| `$A006-$A035` | (MAC-GBD matrix, not on the sensor bus) | - | - | `$D583-$D586` anchors | 16 cells × 3 thresholds: the 2-bit quantiser of the pixels |
+
+Bus order of the eight registers in the workbooks: `001, 010, 011, 100, 101, 110, 111, 000`. The README's older "REGn" names (§2, §6, §10) are **cartridge indices** (`$A00n`), not sensor register numbers: REG1 = `$A001` = sensor reg 1, REG2/REG3 = `$A002/$A003` = C1/C0, REG4 = `$A004` = sensor reg **7**, REG5 = `$A005` = sensor reg **0**. The meaning of bit 1 of the `$03` written to `$A000` is not established (?). Every static write site of the Japanese ROM is listed in `assets/sensor/register_sites.csv` (161 sites: 39 `$A001`, 17 `$A002`, 17 `$A003`, 41 `$A004`, 27 `$A005`, 11 `$A000` writes and 9 busy-bit reads; the only `$A000` writes outside bank `$0A` are the two capture starts `06:5F7C` and `06:5FAB`).
+
+**Conversions** (datasheet §11.6, checked against the recordings; all `Z = 10`, `I = 0`, `P/M/X = 01/00/01` on every row):
+
+| field | rule | ROM values seen |
+|---|---|---|
+| exposure | `(C1·256 + C0) × 16 µs` (C1 step 4.096 ms, C0 step 16 µs) | `$0010` = 0.256 ms (boot, calibration, band 0 floor); `$0030` = 0.768 ms; `$1000` = 65.5 ms (first live value); `$FFFF` = 1,048.6 ms |
+| O (offset) | 6-bit sign-magnitude, 32 mV per step: `$20` = 0 V, `$3F` = +0.99 V; `$00` = 0 V, `$1F` = −0.99 V | `$3F` / `$1F` (search ends), `$20` (search start), `$22`-`$29` (live) |
+| V (Vref) | `V × 0.5 V` (0.0 … 3.5 V) | 5 (2.5 V) in the gain probe, 3 (1.5 V) in everything else on the real unit |
+| G | 14.0 dB (G = 0), 15.5, 17.0, 18.5, 20.0 (G = 4), 21.5 (G = 5), 23.0, 24.5, 26.0 (G = 8), 29.0, 32.0 (G = `$0A`); +6 dB with G4 | G = 0-3 (index chosen at boot), 4 or 5, 8, `$0A`; G4 never set |
+| E | α = 50 % (E = 0), 75, 100 % (E = 2), 125, 200, 300, 400, 500 %; E3 = 1 would be edge *extraction* | E = 0 in live view, E = 2 in some boot/calibration points; E3 never set |
+| N, VH | N = 1 forces P and M to the vertical kernel and ignores them; VH = 01 horizontal, 10 vertical, 11 2-D edge mode | band 0: N = 0, VH = 01; bands 1-3: N = 1, VH = 11; band 4 and the gain probe: N = 0, VH = 00 |
+
+### 18.3 The primitives (C)
+
+**One capture.** The ROM writes the five registers, optionally refills the 48-byte matrix (`$A006-$A035`) with one flat value, writes `$03` to `$A000` and polls bit 0. The MAC-GBD then sends the 8 × 8 bits to the sensor (bus recordings: one row per capture).
+
+**The pixel test `Cam_PixelTestHelper` (`0A:4C30`).** Looks at 12 pixels of the capture just taken, in the first tile row of the 128 × 128 frame (RAM bank 0 `$A000-$AFFF`; the 112-line photo is `$A100-$AEFF`, so these are among the 8 lines above it that the photo does not use; BGB confirms the frame location): the four bytes at `[DE], [DE+2], [DE+4], [DE+6]` with `DE = $A002` (tile 0, rows 1-4, plane 0), columns 1, 2, 3 (bits 6, 5, 4) of each byte; `DE = $A082` (tile 8) in `Cam_FactoryMeasure1`. It counts the set bits and returns **A = 1 when the count ≥ H** (H = 9 in the searches, 8 in the second scan of `Cam_ThresholdConverge`) else 0. Two details the earlier text had wrong: it is **12 pixels, not 4 × 4** (the test of bit 3 is jumped over at `0A:4C51`, so only bits 6-4 count), and the pixel data it reads are the **MAC-GBD's 2-bit result for the flat matrix** (all cells equal), so the test asks "does this pixel's analog value sit below the flat threshold": a one-bit comparator read-out of the sensor signal.
+
+**Offset/bias search `Cam_ORegister_SAR_Search` (`0A:4B6A`).** Finds, for the current N, VH, G, E, C, V and matrix, the offset O at which the pixel test flips (successive approximation, plus a coarse Vref step if O alone cannot reach):
+1. `reg0 = $BF` (Z = 10, O = **+1 V**); capture; pixel test. **Pass** (≥ 9 pixels still below the threshold even with the maximum lift): V += 1 (reg 7 low bits, up to 7) and repeat, then go to 3. **Fail:** go to 2.
+2. `reg0 = $9F` (O = **−1 V**); capture; test. **Fail** (still above the threshold with the lowest offset): V −= 1 (down to 1) and repeat. **Pass:** go to 3.
+3. Six captures that follow the two tables at `0A:7BA0` ("Above", used when the test passed) and `0A:7BE0` ("Below"): start at `reg0 = $A0` (O = 0), next `reg0` = `Above[reg0 & $3F]` after a pass, `Below[reg0 & $3F]` after a fail; the table lookup after the sixth capture is the result. They are a sign-magnitude binary search: steps of 16, 8, 4, 2, 1 LSB (0.51 V … 32 mV) around zero. The result is written to reg 0 and `$D599`; `V` stays in `$D598 & 7`.
+
+So each search is 8 captures when V does not move (`$BF, $9F, $A0, $B0/$90, …`). **On the real unit V never moved** (reg 7 is constant inside every search of all three recordings), so what is visible on the bus is the offset search only. **Check (C):** every table-driven step of the real recordings is one of `Above[O]` / `Below[O]`: **35 / 35** at boot, **60 / 60** in calibration; BGB 55 / 55 (boot), 60 / 60 (blank record: calibration), 60 / 60 (hidden factory test), 55 / 55 (boot with `$FF` keys) (`sensor_sar_check.py`; `assets/sensor/sar_check_real.txt`). The pass/fail decisions themselves are not on the bus, so the result of a search is only known to be one of two table entries (see the boot / live cross-check in 18.5).
+
+**Threshold scan `Cam_ThresholdConverge` (`0A:4E44`).** Registers fixed; the flat matrix value `t` runs from `$80`: if the test (H = 9) fails at `$80`, `t` goes up one per capture until it passes, then down until the test with H = 8 fails; if it passes at `$80`, `t` goes down until the H = 9 test fails, then further down until the H = 8 test fails. The result `(t₁ + t₂) / 2` is the flat threshold between the 8th and 9th of the 12 pixels (the "8.5th order statistic" of the 12 analog values). The bus shows it as **N identical register rows** (the matrix is not on the sensor bus). **Check (C):** in BGB, for a result below `$80`, `N = $81 − result` to within 1 on 11 of 11 runs (`sensor_tc_check.py --bgb`).
+
+### 18.4 Phase 1: boot (C), on the real unit and in BGB
+
+Sequence on the bus (real recording, 58 rows, `assets/sensor/boot_rows.csv`; P/M/X = 01/00/01, C = `$0010` on every row):
+
+| rows | ROM routine | reg 1 | reg 7 | what it is in datasheet terms |
+|---|---|---|---|---|
+| 0-8 | `Cam_ExposureBandSelect` (`0A:4859`), gain index G = 0 | `$00` (N = 0, VH = 00, G = 0) | `$05` (E = 0, I = 0, **V = 5 = 2.5 V**) | positive image, no edge operation, 14 dB, 0.256 ms. Eight search captures (`$BF $9F $A0 $B0 $A8 $A4 $A2 $A3`), then a ninth with **Z = 00** and the found O (`$23`) and a flat matrix `$80`: the pixel test (H = 9) decides whether this gain is usable. It passed at the first gain here. |
+| 9-16 | `Cam_Calib_BootMeasureSeq` (`0A:4724`), search 1 | `$20` (N = 0, **VH = 01**, G = D588 = 0) | `$03` (E = 0, V = 3) | **H-edge enhancement 50 %** (band 0 mode), matrix = reference byte `$D5CB` |
+| 17-24 | search 2 | `$20` | `$23` (**E = 2 = 100 %**) | H-edge enhancement 100 %, matrix `$D5CC` |
+| 25-32 | search 3 | `$24` (G = D589 = 4) | `$23` | H-edge 100 %, G = 4 (20 dB), matrix `$D5CD` |
+| 33-40 | search 4 | `$28` (G = 8, 26 dB) | `$23` | H-edge 100 %, G = 8, matrix `$D5BF` |
+| 41-48 | search 5 | `$0A` (N = 0, VH = 00, **G = 10, 32 dB**) | `$03` | positive image, no edge operation, matrix `$D5C0` |
+| 49-57 | `Cam_LiveInit` → `Cam_ExposureBandSelect` again | `$00` | `$05` | same 9 captures as rows 0-8 |
+
+What each step does:
+* The **gain probe** tries G = 0, 1, 2 (`$D587`) and keeps the first for which the test passes at Z = 00 with the O just found; if none passes G = 3 is kept (`$D588` = winner). It then sets `$D589` = 4 when the winner is 0 or 1 and 5 when it is 2 or 3 (the gain index of the second band), and copies three bytes of the calibration vector into `$D5CB-$D5CD` (table in §6). **I:** it compensates the unit-to-unit spread of the sensor's dark level/gain by choosing among the four lowest gain steps (14.0, 15.5, 17.0, 18.5 dB). The real unit passed at G = 0 (both probes), so its group is `reg1 = $00`; BGB's fake picture never passes, so BGB walks G = 0, 1, 2 (with Vref moving, see the quirk below) and ends on G = 3 (`$D588` = 3, `$D589` = 5): its later groups are `$23, $23, $25, $28, $0A` instead of `$20, $20, $24, $28, $0A`. Same constants, different decisions.
+* The **five searches** are run with the matrix filled with one of the five reference bytes of the calibration vector (the *threshold at which a black frame flips* for that mode, see 18.5) so each search finds the **offset O that puts the black level at the stored reference** for that mode. Their results are kept in `$D5C1-$D5C5` (V = `$D598 & 7`) and `$D5C6-$D5CA` (O = `$D599 & $7F`), one pair per live **band**: search 1 → band 0, 2 → band 1, 3 → band 2, 4 → band 3, 5 → band 4 (the band-switch code reads exactly these pairs: `0A:4155/415E`, `40D7/40E0`, `4254/425D`, `4199/41A2`, `4222/422B`). Searches 2-4 use the **H-edge mode with E = 2** although bands 1-3 will run in 2-D edge mode with E = 0: **I:** the search exposure (0.256 ms) is below the datasheet's 0.768 ms minimum for vertical / 2-D edge modes (§11.6.6), so the nearest allowed mode is used as a proxy.
+* `Cam_LiveInit` (`0A:50AA`) runs the gain probe once more, then loads the first live registers (18.6).
+* **What can happen at boot (all traced; "B" = also run in BGB):** keys held `$FD` (all but B) → the hidden factory test (`0A:6A7B`: `Cam_FactoryTest` `0A:455A` via the stub `0A:7CE0`; it measures and compares, 18.5; B: 537 captures, no SRAM write); both SRAM copies = twelve `$AA` → `Cam_Calib_Loader` returns `$FF` → `0A:6B73` = `STORE PLEASE WAIT` and the full calibration with commit (18.5; B: 537 captures); anything else (valid record, one valid copy repaired from the other, an invalid record replaced by the default vector `7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A` in WRAM only) → the boot measurement above (B: 111 captures; an SRAM of `$FF` bytes gives the same 111: **only the all-`$AA` pattern triggers calibration, not every invalid record**). The path `cp $FF` at `0A:6A59` (also `0A:6B73`) is not reachable with BGB's demo input `$FF`: the ROM reads `$FFA1 = 0` at `0A:6A54` for that input (and `$FD` / `$FB` are read correctly), so it was not forced from the keys (?). The earlier text of §8 (the first stub "returns nonzero (error)" … "likely just a presence/ack check", "funnelled into the same path as holding all 8 buttons") and of §6 ("returns immediately … no measurement is taken") is corrected in place.
+* **A ROM quirk, reproduced in BGB:** `Cam_ExposureBandSelect` writes `$05` to `$A004` but not to its shadow `$D598`, so if the `$BF` test *passes* (BGB's fake picture does) the V step of the search starts from the stale shadow: reg 7 goes `$05 → $01 → $02 …`; and when the stale V is 7 the `+1` carries into bit 3 = **I (inverted output)**: BGB's third trial runs with reg 7 = `$08 … $0F`. The real unit never passed at `$BF`, so its reg 7 stays `$05` in both gain probes.
+
+**Check (C): boot offsets → live offsets.** The five live bands of the real live recording use O = `$A2`, `$A3`, `$A5`, `$A9`, `$A5` (Z = 10, 0.064 / 0.096 / 0.160 / 0.288 / 0.160 V): each is one of the two candidates (`Above` / `Below` of the last captured O) of the matching boot search of the real boot recording (`{A3,A2}`, `{A3,A2}`, `{A5,A4}`, `{A9,A8}`, `{A5,A4}`): **5 / 5** (two different sessions of the same unit).
+
+### 18.5 Phase 2: calibration (C), what the factory routine measures
+
+`Cam_FullCalibration` (`0A:4947`) = `Cam_FactoryMeasure1` (pointer `DE = $A082`), then `Cam_FactoryMeasure2` (`DE = $A002`), then `Cam_CommitVectorToSRAM`. Real recording: 172 rows (`assets/sensor/calibration_rows.csv`).
+
+**Part 1: 12 offset searches at the 12 operating points (rows 0-95, 8 captures each, flat matrix `$80`).** C is the typical exposure of the band the point belongs to; V and O of every point are kept in `$D59D-$D5A8` (V) and `$D5A9-$D5B4` (O):
+
+| points | reg 1 | reg 7 | C | datasheet mode |
+|---|---|---|---|---|
+| 1-4 | `$20 $21 $22 $23` (G = 0-3) | `$03` | `$0030` = 0.768 ms | H-edge enhancement 50 %, 14.0 / 15.5 / 17.0 / 18.5 dB |
+| 5-8 | `$E0 $E1 $E2 $E3` | `$03` | `$0900` = 36.9 ms | 2-D edge enhancement 50 %, same gains |
+| 9-10 | `$E4 $E5` (G = 4, 5) | `$03` | `$2000` = 131 ms | 2-D edge enhancement, 20.0 / 21.5 dB |
+| 11 | `$E8` (G = 8) | `$03` | `$3200` = 205 ms | 2-D edge enhancement, 26.0 dB |
+| 12 | `$0A` (G = 10) | `$03` | `$8000` = 524 ms | positive image, no edge, 32.0 dB |
+
+`$0030` = 0.768 ms is exactly the datasheet's minimum exposure for the vertical edge / 2-D modes; the long exposures (131-524 ms) show that part 1 is made in the dark or under a fixed light, not in a lit room (**I**; the conditions of the factory step are unknown).
+
+**Part 2: 12 threshold scans at one short exposure (rows 96-171 on the real unit).** All 12 with `C = $0010`, V and O from part 1 (`reg 0 = $80 | O`, reg 7 = V, or `V | $20` = E = 2 for the second group); matrix scanned by `Cam_ThresholdConverge`:
+
+| scan (= vector byte) | reg 1 | reg 7 | mode |
+|---|---|---|---|
+| 1-4 (bytes 0-3 `$D5B5-$D5B8`) | `$20 $21 $22 $23` | V | H-edge, E = 0, G = 0-3 |
+| 5-11 (bytes 4-10 `$D5B9-$D5BF`) | `$20 $21 $22 $23 $24 $25 $28` | V `\| $20` | H-edge, **E = 2**, G = 0, 1, 2, 3, 4, 5, 8 (V, O taken from points 5-11 = the 2-D modes) |
+| 12 (byte 11 `$D5C0`) | `$0A` | V | positive, G = 10 |
+
+This is the **slot map of the 12-byte vector** (§6): slot 0-3 = H-edge E = 0, slots 4-10 = H-edge E = 2, slot 11 = positive G = 10; the boot picks slot `g`, slot `4 + g` and slot 8 or 9 (`$D5CB-$D5CD`) for its first three searches and slots 10 and 11 (`$D5BF`, `$D5C0`) for searches 4 and 5. The two checksums (`Σ + $0D`, `XOR + $23`) and the two SRAM copies are §6.
+
+**I:** a vector byte is the flat comparator threshold at which 8.5 of 12 pixels flip when the sensor is run in that exact mode (G, VH, E) at the offset found in part 1 with the short exposure `$0010`: **a reference level per mode**. The boot searches then use, for each of their five modes, the byte measured at the factory in the *same* mode (slot `g` for search 1, `4 + g` for 2, 8 or 9 for 3, 10 for 4, 11 for 5: each boot search's reg 1 / reg 7 / C equals its slot's scan) and re-find the offset O at which the pixel test flips at that reference. So the offset follows the sensor's drift (temperature, supply, ageing) while the reference stays the factory one: the camera re-trims its offsets at every cold boot (18.4) but its reference level changes only if the SRAM vector is rewritten.
+
+**Check (C/I): the recorded unit's vector.** Each scan lasts about `$81 − byte` captures (18.3), so the run lengths of the real recording, `3 4 4 3 | 4 5 4 6 5 6 9 | 23`, imply the bytes `7E 7D 7D 7E | 7D 7C 7D 7B 7C 7B 78 | 6A` (±1 each) — the same pattern as the vectors in the real saves (§11.3, e.g. `7D 7E 7C 7D 7D 7C 7D 7C 7A 7A 78 6A`). If the SRAM of that camera is still available, bytes `$AFF2-$AFFD` (bank 2) should be within ±1 of these (a prediction, not a result). `assets/sensor/` has no copy of that SRAM.
+
+**The hidden factory test (`Cam_FactoryTest`, `0A:455A`; C, BGB: 537 captures).** It calls `Cam_FactoryMeasure1` and `Cam_FactoryMeasure2` exactly as above (so the bus traffic of a factory test and of a first-boot calibration is the same 172-row pattern) but **does not call `Cam_CommitVectorToSRAM`**. It then compares only the last two scans, slot 10 (`$D5BF`, G = 8) and slot 11 (`$D5C0`, G = 10), with the stored `$AFFC` and `$AFFD`: the absolute differences must not exceed `$AFF0` (= `$1B`, 27) and `$AFF1` (= `$13`, 19) respectively (§3.3); `$FF91 = 0` → "OK" (sound `$16`), else "NG" (sound `$29`), then an endless loop (`0A:6B54`). The screen shows the four stored bytes before the test and the re-measured ones, the sign (`$24` / `$25`) and the differences after it. So production testing re-measures the two highest-gain reference levels of a camera against its own stored vector: a drift check, not a re-calibration. The recording of the calibration cannot say which entry was used (the same 96 + 76 register loads); the commit writes SRAM, not the sensor.
+
+**BGB:** with a blank record (`boot_aa`): 537 captures = 100 (part 1: 96 plus 4 extra captures where V moves because the fake picture is out of range) + 437 (part 2); `STORE PLEASE WAIT`, the 12 `Cam_FactoryMeasure1` searches, the 12 scans and `Cam_CommitVectorToSRAM` all run in the order and with the constants of the real recording (C `$0030 $0900 $2000 $3200 $8000` then `$0010`; reg 1 `$20-$23`, `$E0-$E5 $E8`, `$0A`; reg 7 `$03` and, in part 2, `V \| $20`, with the V of BGB's moved searches). `Cam_CommitVectorToSRAM` (`0A:4F58`) copies the 12 bytes with `Σ + $0D` and `XOR + $23` to `$AFF2` (bank 2) and `$BFF2` (bank 8) (checked in the BGB state file, §6). The scans of BGB last 3 to 118 captures and the same cost law holds there (18.3).
+
+### 18.6 Phase 3: normal use (C)
+
+**Start (`Cam_LiveInit`, `0A:50AA`).** After the gain probe: `reg 1 = D589 | $E0` (`$E4`: N = 1, VH = 11, G = 4; or `$E5`), `C = $1000` (65.5 ms), `reg 7 = $D5C3` (E = 0, I = 0, V from boot search 3), `reg 0 = $D5C8 | $80`; setpoint `$D59A = $54` (84), contrast `$D59B = 8`, dither variant `$D59C = 1`; the dither matrix is built (18.7). The same defaults are written again every time the SHOOT live view is entered (`06:5F65-5F6C`), so BRIGHTNESS and CONTRAST do not survive leaving the live view.
+
+**The frame loop (bank 6, `06:5FAB-6019`).** Start a capture (`$A000 \| 1`, `06:5FAB`); while the sensor works, run the per-frame code of the SHOOT variant (`06:738F`) and copy the WRAM tile buffer to VRAM; wait for the busy bit (`06:5FE8`); handle the keys (`06:6133` BRIGHTNESS, `06:615E` CONTRAST, then `6254`, `6296`, `6317`); then run the auto-exposure step `Cam_MainDispatch` (`0A:4000`, via the stub `0A:7CF8`, A = `$D59A`) on the frame just captured; its registers are used by the next start (`06:600F-6019`). The step is skipped (exposure frozen) when `$D7E3 ≥ $13`, `$D7E3 ≠ $15` and `$D7ED ≠ 0` (`06:5FFE-600D`; which variants those are is not established, ?). Once per frame:
+
+```
+Σ    = 2·S1 + S2, S = sum of popcount(plane 0) + 2·popcount(plane 1) over 120 (S1) and 48 (S2) tile-row reads   # Cam_PopcountSampleLoop 0A:4FBD, §10-B; Σ ≤ 6,912
+L    = floor(Σ / D59A), at most 159                                                    # L >= 36 lengthens the exposure, so a large Σ means a dark picture
+s    = ShiftTable[L]                                                                   # 160 bytes at 0A:7B00 (§10)
+e'   = e + (e >> s) if L >= 36 (too dark: lengthen),  e - (e >> s) if L < 36, saturating at $FFFF; s = 16 means no change (L = 35, 36, 37)
+```
+
+* The setpoint is `L = 36`: with the default `D59A = 84` the loop is at rest when Σ is between 2,940 and 3,191. **BRIGHTNESS** is `D59A` itself (Up: −12 down to 12, Down: +12 up to 192); a smaller divisor means a larger L for the same picture, so Up makes the loop settle at a longer exposure (BGB: `D59A` 12 … 192 seen, every step of every dispatch reproduced by the formula).
+* **The correction table (§10) was misdescribed:** the shifts run 2, 3, 3, 3, 4, … up to 9 at L = 34, then **16 (= no correction) for L = 35, 36, 37** (not "a tiny correction"), then 9 at L = 38, falling to 5-6 around L = 44-49, 4-5 for L = 50-79 and 3 from L = 80 on. The largest steps are therefore 25 % per frame (`e >> 2`, L = 0: a very bright picture) and 12.5 % (`e >> 3`, L ≥ 80: a very dark picture).
+* The earlier text of §6 and §10 that `L` is compared with "target popcount values" of the calibration vector, and that `Cam_MainDispatch` counts "dark pixels", is wrong: the vector does not enter the loop at all; the only inputs are the sampled tile rows, `D59A`, the 16-bit exposure and the band.
+
+**Bands.** The band is `(N, VH, G)` of reg 1: band 0 = (0, 01, 0), band 1 = (1, 11, G < 4), band 2 = (1, 11, 4 or 5), band 3 = (1, 11, 8), band 4 = (0, 00, 10). After the exposure update, only the thresholds of the current band are tested (all constants are in `sensor_exposure_check.py`); the band's V and O come from `$D5C1-$D5CA`, and on a switch the dither matrix is rebuilt:
+
+| band | reg 1 | mode (datasheet) | exposure range seen on the real unit | leaves upward when | leaves downward when |
+|---|---|---|---|---|---|
+| 0 | `$20` | H-edge enh. 50 %, 14.0 dB | `$0010` (floor) … `$002C` = 0.26-0.70 ms | `e ≥ $30` (0.768 ms) → band 1 at `$0048` (1.15 ms) | `e < $10` is floored to `$10` |
+| 1 | `$E0`-`$E3` | 2-D edge enh. 50 %, 14-18.5 dB | `$0048`-`$1014` = 1.15-65.9 ms | `e ≥ $1200` (73.7 ms) → band 2 at `$0D80` (55.3 ms) | `e < $31` → band 0 at `$1F` (0.50 ms) |
+| 2 | `$E4`/`$E5` | 2-D edge enh. 50 %, 20/21.5 dB | `$0D80`-`$58D0` = 55-364 ms | `e ≥ $6000` (393 ms) → band 3 at `$3500` (217 ms) | `e < $0800` (32.8 ms) → band 1 at `$0B00` (45.1 ms) |
+| 3 | `$E8` | 2-D edge enh. 50 %, 26.0 dB | `$3500`-`$AC17` = 217-705 ms | `e ≥ $C000` (786 ms) → band 4 at `$8500` (545 ms) | `e < $2800` (163.8 ms) → band 2 at `$4500` (282.6 ms) |
+| 4 | `$0A` | positive image, no edge op., 32.0 dB | `$8500`-`$FFFF` = 545-1,049 ms | saturates at `$FFFF` | `e < $6000` → band 3 at `$8C00` (573 ms) |
+
+Reading the table with the datasheet: (a) **the band 0 / band 1 boundary is the datasheet's 0.768 ms limit**: the vertical / 2-D edge modes need an exposure *greater than* 0.768 ms, and the camera enters band 1 at `e ≥ $30` (0.768 ms) with a first value of `$48`, and leaves it for the H-edge mode below `$31`; (b) each upward switch is a +6 dB gain step (G = 0→4, 4→8, 8→10: 14 → 20 → 26 → 32 dB) with the exposure reloaded to 55-75 % of the value that triggered it (`$1200→$0D80` 0.75, `$6000→$3500` 0.55, `$C000→$8500` 0.69), i.e. the product exposure × gain (±6 dB = ×2 or ×½) rises by 10-50 % at an upward switch and falls by 14-31 % at a downward one (`$0B00 / $0800` = 1.4, `$4500 / $2800` = 1.7, `$8C00 / $6000` = 1.5 for ½ the gain): **I:** a hysteresis, so the loop cannot flip straight back; (c) band 4 drops the edge operation (positive image, N = 0, VH = 00) and tops out at the datasheet's maximum, 1,044.5 ms + 4.08 ms. In the real data the datasheet's plain **positive image (VH = 00) is only used in band 4 and in the gain probe**: bands 0-3 all apply edge *enhancement* at the lowest ratio (E = 0, 50 %), band 0 in the horizontal mode, bands 1-3 in the 2-D mode.
+
+**Check (C): 207 of 207 steps.** `sensor_exposure_check.py` replays the rule on the real live recording: every one of the 207 frame-to-frame steps is `e ± (e >> s)` for a shift in the table (or a band switch with the exact reload above); the four switches 0→1, 1→2, 2→3, 3→4 occur once each (`assets/sensor/exposure_check_real.txt`, `live_exposure_bands.png`). The same holds for the `print` sheet (859 of 859, with 12 switches in both directions). The level `L` is not on the bus, so for an ordinary step the check says "some `L` produces it"; the exact reload values and thresholds are what a band switch tests. **In BGB** `sensor_bgb_law.py` replays Level, ShiftLoaded and ExposureNew of the ROM: `shift == table[L]` and `e'` equals the formula on **2,377 of 2,377** dispatches of 11 scenarios (`live` 236, `live_bc` 388, `live_dark` 270, `live_bright` 678, `live_opt` 21, `shutter` 21, `shutter_save` 180, `trick_go` 136, `montage_go` 156, `gameface_go` 135, `panorama_a` 156; L runs from 0 to 152: 1,423 dispatches shorten the exposure (L ≤ 34), 397 leave it unchanged (L = 35-37) and 557 lengthen it).
+
+### 18.7 What the menus and the other modes do to the sensor (C)
+
+* **BRIGHTNESS** (Up/Down, `06:6133`) → `D59A`; **CONTRAST** (Left/Right, `06:615E`) → `D59B` (1-16, default 8), which rebuilds the dither matrix (`Cam_BuildDitherMatrix`, `0A:42BA`; rows of 4 anchor bytes at `0A:7C20`, or `0A:7C60` only while `D587 = D589`, i.e. in band 2): row 1 = `80 8F D0 E6`, row 8 (the default) = `89 92 A2 D2`, row 16 = `92 92 92 92`: the ramp step `(b − a)` shrinks from `$0F` to 0 as CONTRAST rises, so **I:** row 1 is the softest picture (thresholds spread over `$80`-`$E6`) and row 16 a single flat threshold (a pure two-level picture); all rows of the three tables are in `assets/sensor/dither_tables.csv`. **No sensor register is written by either key** (BGB: `live_bc`, 500 captures, `D59A` 36…144 and `D59B` 5…12 with every register row still of the five band types; the matrix is on the MAC-GBD).
+* **Dither variant `D59C`** (0, 1, 2): 0 = the same three thresholds in all 16 cells (`0A:440C`), 1 = ramp across the cells (`0A:4427`), 2 = a second ramp order (§7). It is set to 1 (2 for SHOOT variants with `$D7E3` = `$0A`, `$0B`, `$15`) when the live view is entered (`06:5E3E-5E47`) and by the option cross (`06:6753`, from `$D674`). Which of the three the on-screen choice calls "dither" is not established (?).
+* **The other SHOOT features** (self-timer, time-lapse, trick lenses, magic montage, panorama, game face, shutter and save): every static register write site is in bank `$0A` and the two capture starts are the same two; in BGB the live view, trick lenses, montage, game face, panorama (A) and the shutter-and-save path (`shutter_save`, 293 captures) produce only the band registers above (same capture site `06:5FAB`); the shutter does not switch to a different mode, a photo is a live frame. The self-timer and time-lapse runs stopped on their countdown screens within the wait (111 captures = boot only), so for those two the only evidence is the static site list.
+* **Printing.** The two printing paths I could drive in BGB from a capture mode (panorama → PRINT, `panorama_print`) stopped on their print screen with no capture beyond the boot (111); the printer helper (§17) was not attached in these runs. So the print menus add no sensor traffic that I could see (?, not conclusive). The workbooks' extra sheet `print` is a second *live-view* recording of another unit (18.9).
+
+### 18.8 Reading the datasheet against the recordings
+
+The datasheet (ver. 1.1E, "preliminary") is a poor translation; these are the points where the recordings and the ROM settle what it leaves unclear or contradicts:
+
+| datasheet | what the data say |
+|---|---|
+| C0 and C1: "the sum of the value of C0 register and that of C1 register determines the actual exposure time" | the *times* add: `C1 × 4.096 ms + C0 × 16 µs`, i.e. `(C1·256 + C0) × 16 µs`; C1 is the high byte (reg 2), C0 the low byte (reg 3). The ROM's 16-bit exposure `$D596:$D597` is big-endian C1:C0 (live recording, 207/207) |
+| "set C0 and C1 to 00: optical black" | the ROM **never** sets C = 0: the floor is `$0010` (0.256 ms), also used for the gain probes and every threshold scan; the datasheet's offset-level mode is not used |
+| "exposure time should be greater than 0.768 msec" (vertical edge modes) | `$30` (0.768 ms) is the exact band 0 / band 1 switch (18.6): the camera uses H-edge below it |
+| N: "if set, P and M are exclusively set to a specific vertical edge mode… In the case of H, P is 02 and M is 05" | the text mixes H and V; the typical-mode table of §11.6.10 gives *V Enh.* as N = 1, VH = 10 with P/M = 01/00, while §11.6.11 gives *V Enh.* as N = 0 (!), VH = 10 with P/M = 02/05. The ROM uses N = 1 with VH = 11 (2-D) for bands 1-3 and N = 0 with VH = 01 (H) for band 0; P/M are the MAC-GBD's `01/00` on every row, so with N = 1 they are ignored by the sensor, with N = 0 they are the plain pass-through |
+| Z: "calibrates the zero value by setting the dark level output signal to Vref"; the table lists 10 = positive, 01 = negative | the ROM uses only Z = 10 (every search and every live row) and, for the two test captures of the gain probe, Z = 00 |
+| O: sign bit O5 "H for plus"; `$20` = 0 V, `$3F` = +1 V; `$00` = 0 V, `$1F` = −1 V | both `$20` and `$00` are zero; the ROM's searches start at `$20`, walk through the positive side first and into the negative side (`$90 …`) through the tables |
+| V (Vref 0.0-3.5 V) and G (14-38 dB) | G table is laid out with the 6 dB (G4) column in a second column: G = 0 is 14.0 dB, G = `$0A` 32.0 dB, G = `$0A` + G4 38.0 dB; the ROM never sets G4. V = 5 (2.5 V) is used only for the gain probe, V = 3 (1.5 V) everywhere on the real unit |
+| E: E3 = 1 edge *extraction*, 0 *enhancement* | E3 is never set: the ROM uses enhancement (50 % live, 100 % in the proxies) |
+| "Typical register settings": P/M/X = 01/00/01 | those are the constants on every recorded row: they come from the MAC-GBD |
+
+### 18.9 What was not established, and what the extra sheet is
+
+* **Not on the bus, therefore not checked on the real unit:** the pixel-test result of each capture, the matrix, the level `L`, and V when it moves (it did not).
+* **The meaning of bit 1 of `$A000`** (`$03`), the **purpose of `$D5` in the matrix of the first search of the gain probe** (the second capture uses `$80`), and why the search order is Above/Below around **zero** rather than around the previous result: ?
+* **The metering loop's sampling** (§10-B): sparse, centre-weighted (the sum of the first 120 reads is doubled) and, in every second iteration of its first loop, starting at an odd address (plane 1 read as plane 0). Read from the ROM and reproduced in BGB (C); whether the odd start is intended, and why the picture is metered this way, is not known (?).
+* **Interpretations tagged I:** the gain probe as a unit-spread compensation, the vector as a black-level reference, the proxy modes of the boot searches, the dark/fixed-light condition of the factory step, `E = 2` as the proxy ratio.
+* **The `print` sheet** of two of the workbooks (identical in both): 859 register loads of N, VH, E, Z, I, C (ms), O, V, G (no raw bits), band 1 → 0 / 1 → 2 and back, O = `$29` / `$29` / `$2B` for bands 1, 0, 2 (different from the live recording's `$A3`, `$A2`, `$A5`, so another unit or another session). It obeys the live-view rule 859 / 859, so it is another live-view recording; I cannot tell from the data which action produced it (the "printing menus" were tried in BGB, 18.7, without any camera traffic).
+* **BGB limits:** its fake picture is not a sensor model (above), so BGB's live view only visits bands 1, 2 and 3 (reg 1 = `$E3`, `$E5`, `$E8`: the switches 1 ↔ 2 and 2 ↔ 3 are run by the ROM there), never band 0 or 4 and no 0 ↔ 1 or 3 ↔ 4 switch (those are validated on the two real recordings only), and its V / gain decisions differ from the real unit's (18.4).
+* **Not done:** the effect of the option cross choices on the matrix beyond what 18.7 states; a run of the printer helper with a capture; the SRAM of the recorded unit.
+
+### 18.10 Tools and data of this section
+
+* `tcrf_check/tools/sensor_decode.py` (decodes the workbooks, writes `assets/sensor/{boot,calibration,live}_rows.csv`: raw registers and datasheet fields), `sensor_sar_check.py` (35/35, 60/60), `sensor_exposure_check.py` (207/207, 859/859), `sensor_tc_check.py` (threshold-scan cost, implied vector), `sensor_sites.py` (writes `assets/sensor/register_sites.csv`), `sensor_plots.py` (the two figures), `sensor_bgb_log.py` (BGB with write watchpoints on `$A000-$A005` and breakpoint markers on the routines: `-wp 'A00n//w/…'`, `-br 'addr///MK name …'`, `-setting DebugMsgFile=1`; BGB writes a debug file that is kept in a private BGB folder), `sensor_scenarios.py` (24 boots / live view / SHOOT-variant scenarios), `sensor_bgb_law.py ROM EVENTS.csv…` (the exposure law on BGB's own dispatches: 2,377 of 2,377; and `L = floor(Σ / D59A)`: 236 of 236 where the sum was logged), `sensor_meter_geom.py ROM [FRAME.bin [EVENTS.csv]]` (the exact read addresses of the metering loop `0A:4FBD` taken from the ROM bytes, and its sum for a frame buffer).
+* `tcrf_check/assets/sensor/`: `*_rows.csv`, `register_sites.csv`, `sar_check_real.txt`, `exposure_check_real.txt`, `live_exposure_bands.png`, `sar_traces.png`, `dither_tables.csv`, `meter_check.txt` (the metering sum recomputed from BGB's frame buffer = the ROM's own sum), and `bgb/` (`live_frame_bank0.bin` = RAM bank 0 `$A000-$AFFF` at the end of the `live` run, `NAME_captures.csv` for the 24 scenarios, `NAME_events.csv` for the 14 that were logged with breakpoint markers: boot, boot_ff, boot_aa, live, live_bc, live_dark, live_bright, live_opt, shutter, shutter_save, trick_go, montage_go, gameface_go, panorama_a).
+
+![](tcrf_check/assets/sensor/live_exposure_bands.png)
+
+![](tcrf_check/assets/sensor/sar_traces.png)
+
 ## Appendix: tools produced this session
 
 - `tools/ram_census.py` — full WRAM/HRAM access census from an mgbdis disassembly
@@ -3663,6 +3779,7 @@ The coverage claims of §13 therefore stand with these refinements: what my core
 - The GameFAQs cheats page and the two games (§16.18): `tcrf_check/tools/cheat_checks.py` (28 key scenarios, core and BGB), `albumb_thresholds.py` (every Album B threshold, both ROMs), `run_record.py` (RUN! race record → the three gates), `sf2_play.py` and `ball_play.py` (Space Fever II and BALL played with the joypad only; `ball_play.py` ports the ROM's own autopilot), `play_effects.py` (what the played scores unlock), `dj_se.py` and `bgb_dj_se.py` (D.J. sound effects SE 1-9), `counter_scan.py` (which corpus paths change the Album B counters)
 - Printer status bits (§16.16): `tcrf_check/tools/printer_status.py` (the card and D.J. prints in my core with a status byte injected at every packet: `--grid`, `--sweep`, `--errors`, `--only CMD:N:HEX`), the injection API of `coverage/src/gbcov.c` / `gbcov.py` (`gb_printer_model`, `gb_printer_inject`, `gb_printer_inject_clear`, `gb_printer_log`), `PRN_ERR` in `tcrf_check/tools/bgb_printer.py` (the same injection in BGB) and `BGB_HF` in `bgb_run.py` (`-headless` for linked runs); results in `tcrf_check/assets/printer_status/` and `tcrf_check/assets/bgb_retrace/printer_status_heads/`
 - Never-read data (§16.13): `tcrf_check/tools/asset_map_build.py` (writes `assets/asset_map_jp.csv`), `render_marked_tiles.py` (contact sheet of a ROM range, never-read bytes tinted red, 2bpp or 1bpp), `bgb_print_wild.py` (prints one photo with a chosen wild frame in BGB with the printer helper; `--rom` takes a modified ROM), `wild_border_check.py` (printout vs sheet, and the blanking comparison), `sheet_tile_match.py` + `sheet_map_table.py` (community sprite sheets vs the ROM, `assets/spriter_sheet_map_jp.csv`), `witness_map.py` (class-N bytes that a later run executed: `assets/witness_jp.csv`, the green of the map), `sgb_border_check.py` (decodes the SGB packets of either ROM, rebuilds the border, compares it with a BGB capture or the community sheet) and `bgb_sgb_capture.sh` (BGB in SGB mode under Xvfb, whole-window screenshot)
+- The sensor registers (§18): `tcrf_check/tools/sensor_decode.py` (bus-analyser workbooks → `assets/sensor/*_rows.csv`), `sensor_sar_check.py`, `sensor_exposure_check.py`, `sensor_tc_check.py`, `sensor_sites.py` (every static write site of `$A000-$A005`), `sensor_plots.py`, `sensor_bgb_log.py` + `sensor_scenarios.py` (BGB with write watchpoints and breakpoint markers; 24 scenarios, `assets/sensor/bgb/`), `sensor_bgb_law.py` (the exposure law on BGB's dispatches), `sensor_meter_geom.py` (the metering loop's read addresses and sum)
 - `wram/` — full per-region WRAM/HRAM write-ups (`wram_<region>.md`, evidence with `bank:addr` citations) and rows (`wram_<region>.csv`), the access tables and the traces
 - `coverage/` — emulator coverage run (§13): the native SM83 core `src/gbcov.c` + `gbcov.py`, 19 driver / analysis tools in `tools/` (fuzzer `coverage_run.py`, `sweep_auto.py`, `sweep_vars.py`, `settle_runs.py`, `long_runs.py`, `damaged_saves.py`, `make_hotspot_saves.py`, `replay_corpus.py`, `merge_states.py`, `coverage_report.py`, `rom_map.py`, `d1_map.py`, `gating_branches.py`, `state_graph.py`, `forced_legit.py`, `unexec_by_symbol.py`, `validate_calib.py`, `newcov.py`, `gbdis.py`), `final_merge.sh`, `results/` (merged coverage, report tables, corpus, logs), `saves/`, `d1sheets/`
 - `tools/tcrf_checklist.py COV.npz OUT.md OUT.csv` — builds the TCRF documented-content checklist with coverage computed from a merged `cov.npz` (§15.3)

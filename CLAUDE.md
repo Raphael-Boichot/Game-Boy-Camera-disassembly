@@ -9,13 +9,15 @@ md5 `fdcfe686cf4df461e870b6e53b2b5a8b`; the international ROM is md5 `42d2f65e25
 * Use **BGB** (not the Python core) for every screenshot or asset comparison: the core draws the VIEW-screen band and one stamp slot wrongly (README §15.9).
 * The two ROMs are different builds (44 % of the bytes differ, §16.1): the Japanese static trace and coverage numbers do not transfer. The main menu is mirrored
   (VIEW = Left on the Japanese ROM, Right on the international one).
-* Delivery: the owner pushes. Claude has no write access to GitHub; deliver `git format-patch --binary` files, tested with `git am` on a clean
-  `git clone -c core.autocrlf=false` of upstream main (fetch first: main moves), and give PowerShell commands. Commit trailers:
+* Delivery: when GitHub is linked to the session, `git push origin <branch>:main` works (the owner confirmed main; earlier sessions had no write access). Always
+  `git fetch origin` first and check that the push is a fast-forward (main moves); one squashed commit per batch on top of current upstream main; say in the answer
+  where it was pushed (main or a feature branch). Do not push scratch branches the stop hook asks about. If a push is refused, fall back to `git format-patch --binary`
+  files tested with `git am --keep-cr` on a clean `git clone -c core.autocrlf=false` of upstream main, and give PowerShell commands. Commit trailers:
   `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>` and the session URL line the harness gives; committer `Claude <noreply@anthropic.com>`.
   When asked to "merge the patches", deliver one commit on top of current main.
 
 ## What is in the repository, and what is not
-* In git: `README.md` (§1-17), `tools/`, `tcrf_check/` (checklist, `tools/`, `assets/`), `coverage/` (core sources `coverage/src`, fuzzer and report tools, `results/report_v6`,
+* In git: `README.md` (§1-18), `tools/`, `tcrf_check/` (checklist, `tools/`, `assets/`), `coverage/` (core sources `coverage/src`, fuzzer and report tools, `results/report_v6`,
   `results/report_v8`), `wram/`, `link_protocol/`, `disasm/`, `cameras/`, `pocketcamera_jp.sym`.
 * **Not in git, must be recreated or supplied:** the ROMs; BGB (a Windows binary run headless under Wine; helpers `tcrf_check/tools/bgb_run.py`,
   `bgb_us_jp_job.py`, `guide_bgb_walk.py`, `bgb_corocoro_intl.py`; `BGB_DIR` points to it); the save files (unlocking saves in `saves_unl/`, the 14 real cameras' SRAM);
@@ -37,9 +39,10 @@ md5 `fdcfe686cf4df461e870b6e53b2b5a8b`; the international ROM is md5 `42d2f65e25
   glyph banks, BG tilemaps, SGB data, tile-set gaps: §16.13, `assets/asset_map_jp.csv`, orange on the map). The SGB border of both ROMs is rebuilt from bank `$0B` and equals BGB's (C, §16.13 (5)). Reassembles byte-exact; about 57 kB of data inside the code banks and most of the 52 data banks are still untyped (§1.2).
 * International ROM: no instrumented coverage run (a fuzz was started and stopped; `coverage/tools/coverage_run.py` needs a variant without the Japanese trace).
   Behavioural parity checked in BGB: all menu nodes of the five Funtography flowcharts on both ROMs (§16.11); CoroCoro content absent (§16.12).
+* Sensor registers (README §18, `tcrf_check/assets/sensor/`, `tcrf_check/tools/sensor_*.py`): what the ROM sends to the MAC-GBD / M64282FP, in datasheet names, for boot, calibration and normal use, checked against the owner's bus-analyser recordings (`Search_for_sensor_at_boot.xlsx`, `Calibration_procedure.xlsx`, `Exposure_strategy_regular_camera_volts.xlsx`; **not in git**, ask for them; their decoded rows are in `assets/sensor/*_rows.csv`) and the M64282FP datasheet (not in git). BGB's fake sensor is not a sensor model (its pixel sum drifts at fixed registers): it reproduces the code path and constants, not pixel-dependent decisions (§18.9 lists what is open). The symbol-file edits of that pass were not re-assembled (no mgbdis / rgbasm in that sandbox).
 * Closed by the owner: names of the 16 hot-spot icons, effect timing, CoroCoro on a real international camera (§16.12).
 * GameFAQs cheats page (https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats): every line tried in the core and BGB, Space Fever II and BALL played with the joypad only to 7,113 / 1,100 points, all Album B gates run at the exact threshold on both ROMs, RUN! gates run with real races: §16.18. Page vs code: B19 needs 15 transferred pictures (page: 5), the "5 males / 5 females" counters count received pictures by the sender's gender bit, "17 / 16 seconds" = displayed below 18:00 / 17:00. Cite the page in the README wherever a finding matches it. Space Fever II cannot be replayed in BGB (random wave offsets); BALL can.
 * Next runs for the never-run code (§16.15, "what is not proven"): a save with a Game Face for `06:48E6` and for the third Space Fever II boss (`07:693A`), the sound-engine handlers `1F:5234` / `522A`, the 62 OPEN components, `07:4A2D` / `4A3A` (receive counters below the cap: need a link partner or a forced call), the international credits and 16 s gates.
-* Still open: §12 (SRAM and WRAM lists), §16.10 (18 sweep paths where BGB and the core disagree; F12 / F13 gender counters in BGB; link byte timing in BGB),
+* Still open: §12 (SRAM and WRAM lists), §18.9 (sensor: A000 bit 1, the `print` sheet, printing paths, the recorded unit's SRAM), §16.10 (18 sweep paths where BGB and the core disagree; F12 / F13 gender counters in BGB; link byte timing in BGB),
   §16.11 "what this walk does not prove" (panorama print, COMPOSE result, animation tools, transfer exchange), the other pages of the international stamp category 3,
   naming of the ~130 new code roots, no charset table.

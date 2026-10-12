@@ -47,20 +47,20 @@ Status tags: **C** code-traced (instructions cited as `bank:addr`), **I** inferr
 | `$D583-$D586` | 4 | `dither_params[4]` | u8[4] | Cam_BuildDitherMatrix 0a:42EB-42F8 (write through DE), reads 0a:4306-4507 | 4-byte row copied from table `0a:7C20` (if B == d588, or B == 8, or default) or `0a:7C60` (if B == d589); row = register C - 1 (4 bytes per row; C = d59b). d583 = base ('black'), d584 = top, `swap(d584-d583)` = ramp step, d585 = third byte (flat mode pattern and ramp parameter), d586 = fourth byte (only read at 43B8 and 44F7) | C |
 | `$D587` | 1 | `cam_gain_sel` | u8 | Cam_MainDispatch (13 acc.), Cam_ExposureBandSelect, 0a:50AA, 06:5F8B/615E/6734 | Active REG1 gain selector: 0,1,2 during the coarse search (0a:485F, 48CE), forced to `$08` / `$0A` for the special band captures (0a:417F, 420A, 427E). Compared with d588/d589 to choose the dither table | C |
 | `$D588` | 1 | `cam_gain_committed` | u8 0..3 | writer 0a:48D9 (Cam_ExposureBandSelect); readers Cam_MainDispatch, Cam_BuildDitherMatrix, Cam_Calib_BootMeasureSeq (474A, 4790) | Gain candidate that ended the coarse search (3 = fallback) | C |
-| `$D589` | 1 | `cam_gain_alt` | u8 = 4 or 5 | writers 0a:48E1, 48FD, 4919, 4931; readers Cam_MainDispatch, Cam_BuildDitherMatrix, BootMeasureSeq 47C7 | `$04` when gain 0 or 1 won, `$05` when gain 2 or the fallback won. Selects the second dither table (`$7C60`) and the REG1 value used for the 3rd boot measurement. (Old README: '$04 only when candidate 0 wins' is imprecise) | C |
-| `$D594` | 1 | `cam_a000_shadow` | u8 (only value ever stored: $02) | 0a:4745, 4864 (writes $02); read by Cam_ThresholdConverge / Cam_ORegister_SAR_Search / Cam_ExposureBandSelect | Shadow of REG0 `$A000` (bit 0, start, is ORed in when the capture is triggered) | C |
-| `$D595` | 1 | `cam_a001_shadow` | u8 | 38 writes (Cam_FactoryMeasure1/2, Cam_MainDispatch, BootMeasureSeq) | Shadow of REG1 `$A001` (gain/edge byte, ORed with `$20`/`$E0` per band) | C |
-| `$D596-$D597` | 2 | `cam_exposure_shadow` | u16 big-endian (d596 hi, d597 lo) | Cam_MainDispatch (writes 0a:407C/407F), FactoryMeasure1, BootMeasureSeq | Shadow of REG2/REG3 `$A002/$A003` = 16-bit exposure time; adjusted by the shift table at `0a:7B00` in Cam_MainDispatch | C |
-| `$D598` | 1 | `cam_a004_shadow` | u8 | 59 accesses (FactoryMeasure1/2, BootMeasureSeq, MainDispatch) | Shadow of REG4 `$A004`; after a measurement `& 7` is stored in `$D5C1+n` (see below) | C |
-| `$D599` | 1 | `cam_a005_shadow` | u8 | 46 accesses | Shadow of REG5 `$A005`; after a measurement `& $7F` is stored in `$D5C6+n` | C |
-| `$D59A` | 1 | `cam_meter_divisor` | u8 ($54 seen) | writers 0a:4000 (entry parameter A of Cam_MainDispatch), 06:5F67, 06:615A, 0a:50EA; reader 0a:4011 | Divisor of the metering loop `0a:4018-402B`: the 16-bit measurement returned by `0a:4FBD` (DE=$A320) is divided by it by repeated subtraction (quotient capped at `$9F`) to give a level index. Old README calls it 'exposure-band index'; the code uses it as a divisor | C |
-| `$D59B` | 1 | `cam_dither_row` | u8 (1-based row) | writers 06:5F6C ($08), 06:6183, 0a:50F4; readers Cam_MainDispatch (4 sites), 06:615E, 06:6254 | Row index (register C) passed to Cam_BuildDitherMatrix; row = C-1 in the 4-byte table | C |
-| `$D59C` | 1 | `cam_dither_mode` | u8 | writers 06:5E47, 06:6753, 0a:50EF ($01); reader 0a:42F9 | 0 = flat fill (jp `0a:440C`), 1 = ramp A (jp `0a:4427`), else ramp B (normal photos) | C |
-| `$D59D-$D5B4` | 24 | `cam_factory_raw[24]` | u8[24] = $D59D-$D5B4 | Cam_FactoryMeasure1 (one write each), Cam_FactoryMeasure2 (one read each) | 12 + 12 raw results of the factory sweep: first 12 = REG4 low bits, next 12 = O-register results (README §6); consumed once by Cam_FactoryMeasure2 to build the calibration vector. Old README §2 gave `$D5A0-$D5B4` (21 bytes); README §6 (`$D59D-$D5A8` + `$D5A9-$D5B4`) is the right extent | I |
-| `$D5B5-$D5C0` | 12 | `cam_calib_vector[12]` | u8[12] | Cam_Calib_ValidityCheck (default `7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A`), Cam_CommitVectorToSRAM, ExposureBandSelect, FactoryMeasure2, BootMeasureSeq | Working copy of the 12-byte calibration vector (SRAM flat `$04FF2-$04FFD` and `$11FF2-$11FFD`, README §3.8): bytes 0-3 / 4-7 / 8-9 feed D5CB / D5CC / D5CD by winning gain; bytes 10,11 (`$D5BF`, `$D5C0`) are the two values re-measured by the hidden factory test and are also the 4th/5th measurement levels of Cam_Calib_BootMeasureSeq (0a:47ED, 4823) | C |
-| `$D5C1-$D5C5` | 5 | `cam_boot_reg4[5]` | u8[5] (values 0..7) | writers Cam_Calib_BootMeasureSeq 0a:4774/47AB/47E2/4818/484C; readers Cam_MainDispatch 40D7-42A1 | `$D598 & 7` read back after the 5 boot measurements (REG4 low 3 bits found by the search at `0a:4B6A`); one entry per measurement level (D5CB, D5CC, D5CD, D5BF, D5C0). Used by Cam_MainDispatch to load REG4 per band | C |
-| `$D5C6-$D5CA` | 5 | `cam_boot_reg5[5]` | u8[5] (values 0..$7F) | writers Cam_Calib_BootMeasureSeq 0a:477C/47B3/47EA/4820/4854; readers Cam_MainDispatch | `$D599 & $7F` (bit 7 cleared) after the same 5 measurements = REG5 offset found for each level. Together with `$D5C1+n` they replace the old README's 'per-band REG4/REG5 lookup `$D5C1-$D5C9`' (the range is $D5C1-$D5CA, 2 x 5 bytes, written at boot by 0a:4774-4854, not constants) | C |
-| `$D5CB-$D5CD` | 3 | `cam_targets[3]` | u8[3] | writers Cam_ExposureBandSelect (4 x 3, 0a:48E7-4943); read by BootMeasureSeq 0a:4734, 477F, 47B6 | Active reference targets: copied from the vector by winning gain, `d5cb`/`d5cc`/`d5cd` <- (b0,b4,b8) if gain 0; (b1,b5,b8) gain 1; (b2,b6,b9) gain 2; (b3,b7,b9) fallback (README §6 table is correct). In BootMeasureSeq each is used as the fill value of `$A006-$A035` for a boot measurement. Old README claim 'copy of b0,b4,b8 only' is only the gain-0 row | C |
+| `$D589` | 1 | `cam_gain_alt` | u8 = 4 or 5 | writers 0a:48E1, 48FD, 4919, 4931; readers Cam_MainDispatch, Cam_BuildDitherMatrix, BootMeasureSeq 47C7 | Gain index of live band 2: 4 when the gain-probe winner is 0 or 1, 5 when it is 2 or the fallback (`0a:48DF-4931`). Band 2 runs with reg 1 = `D589 \| $E0` (the live view starts there, `0a:50AA`), boot offset search 3 with `D589 \| $20`, and the second dither table (`$7C60`) is selected when it equals the active gain `$D587` (README §18.4, §7). (Old README: '$04 only when candidate 0 wins' is imprecise) | C |
+| `$D594` | 1 | `cam_a000_shadow` | u8 (only value ever stored: $02) | 0a:4745, 4864 (writes $02); read by Cam_ThresholdConverge / Cam_ORegister_SAR_Search / Cam_ExposureBandSelect | Shadow of `$A000`, the MAC-GBD control byte: `$02` is stored once; at each capture start the ROM writes `$D594 \| 1` = `$03` and polls bit 0 until it clears. The meaning of bit 1 is not established (?) (README §18.2) | C |
+| `$D595` | 1 | `cam_a001_shadow` | u8 | 38 writes (Cam_FactoryMeasure1/2, Cam_MainDispatch, BootMeasureSeq) | Shadow of `$A001` = sensor register 1 (N, VH1-VH0, G4-G0): `$20 \| G` in band 0 (H-edge), `$E0 \| G` in bands 1-3 (2-D edge), `$0A` in band 4 (positive image) (README §18.2, §18.6) | C |
+| `$D596-$D597` | 2 | `cam_exposure_shadow` | u16 big-endian (d596 hi, d597 lo) | Cam_MainDispatch (writes 0a:407C/407F), FactoryMeasure1, BootMeasureSeq | Shadow of `$A002/$A003` = sensor registers 2 and 3 = exposure C1:C0, big-endian; time = value x 16 us (`$0010` = 0.256 ms floor, `$1000` = 65.5 ms at live start, `$FFFF` = 1.05 s); adjusted by e +/- (e >> s) with s from the table at `0a:7B00` in Cam_MainDispatch (README §18.6) | C |
+| `$D598` | 1 | `cam_a004_shadow` | u8 | 59 accesses (FactoryMeasure1/2, BootMeasureSeq, MainDispatch) | Shadow of `$A004` = sensor register 7 (E3-E0, I, V2-V0): the ROM uses E = 0 or 2, I = 0; after an offset search `& 7` (V) is stored in `$D5C1+n`. Quirk: `0a:4876` writes `$05` to `$A004` without updating this shadow (README §18.4) | C |
+| `$D599` | 1 | `cam_a005_shadow` | u8 | 46 accesses | Shadow of `$A005` = sensor register 0 (Z1 Z0, O5-O0): the ROM sets bit 7 (Z = 10) except in the last capture of each gain trial of the gain probe (Z = 00); after an offset search `& $7F` (the offset O) is stored in `$D5C6+n` (README §18.2) | C |
+| `$D59A` | 1 | `cam_brightness_setpoint` | u8 ($54 seen) | writers 0a:4000 (entry parameter A of Cam_MainDispatch), 06:5F67, 06:615A, 0a:50EA; reader 0a:4011 | BRIGHTNESS setpoint, default `$54` (84), 12..192 in steps of 12 (key handler `06:6133`): the divisor of the metering loop `0a:4018-402B`; the pixel sum returned by `0a:4FBD` (DE = `$A320`; 2 x S1 + S2 over 120 + 48 sparse tile-row reads, one read = popcount(plane 0) + 2 x popcount(plane 1), README §10-B) is divided by it by repeated subtraction (quotient capped at `$9F`) to give the level L (README §18.6). Old README calls it 'exposure-band index'; the code uses it as a divisor | C |
+| `$D59B` | 1 | `cam_contrast_row` | u8 (1-based row) | writers 06:5F6C ($08), 06:6183, 0a:50F4; readers Cam_MainDispatch (4 sites), 06:615E, 06:6254 | CONTRAST setting 1..16, default 8 (key handler `06:615E`): row index (register C) passed to Cam_BuildDitherMatrix; row = C-1 in the 4-byte table. No sensor register is written by the key (README §18.7) | C |
+| `$D59C` | 1 | `cam_dither_mode` | u8 | writers 06:5E47, 06:6753, 0a:50EF ($01); reader 0a:42F9 | Dither variant: 0 = flat fill (jp `0a:440C`, the same three bytes in all 16 cells), 1 = ramp A (jp `0a:4427`; set when the live view is entered, `06:5E3E-5E47`), else ramp B (`0a:4306`; entered as 2 for the SHOOT variants with `D7E3` = `$0A`, `$0B`, `$15`). The flat matrices of the boot and calibration test captures are not made through this (inline fills, README §18.3). Which on-screen option sets it: ? | C |
+| `$D59D-$D5B4` | 24 | `cam_factory_vo[24]` | u8[24] = $D59D-$D5B4 | Cam_FactoryMeasure1 (one write each), Cam_FactoryMeasure2 (one read each) | Results of the 12 `Cam_FactoryMeasure1` offset searches: `$D59D-$D5A8` = V (sensor register 7 bits 2-0), `$D5A9-$D5B4` = O (register 0 & `$7F`), one pair per operating point (reg 1 = `$20-$23`, `$E0-$E3`, `$E4`, `$E5`, `$E8`, `$0A`); read back by Cam_FactoryMeasure2 as the registers of its 12 threshold scans, whose results are the calibration vector (README §18.5). Old README §2 gave `$D5A0-$D5B4` (21 bytes); README §6 (`$D59D-$D5A8` + `$D5A9-$D5B4`) is the right extent | C |
+| `$D5B5-$D5C0` | 12 | `cam_calib_vector[12]` | u8[12] | Cam_Calib_ValidityCheck (default `7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A`), Cam_CommitVectorToSRAM, ExposureBandSelect, FactoryMeasure2, BootMeasureSeq | Working copy of the 12-byte calibration vector (SRAM flat `$04FF2-$04FFD` and `$11FF2-$11FFD`, README §3.8) = the 12 results of the factory threshold scans: slots 0-3 H-edge E = 0 G = 0-3, slots 4-10 H-edge E = 2 G = 0,1,2,3,4,5,8, slot 11 positive G = 10 (README §18.5). Bytes 0-3 / 4-7 / 8-9 feed D5CB / D5CC / D5CD by winning gain; bytes 10, 11 (`$D5BF`, `$D5C0`) are the two values re-measured by the hidden factory test and are also the matrix bytes of boot searches 4 and 5 (0a:47ED, 4823). Not read by the live loop | C |
+| `$D5C1-$D5C5` | 5 | `cam_boot_v[5]` | u8[5] (values 0..7) | writers Cam_Calib_BootMeasureSeq 0a:4774/47AB/47E2/4818/484C; readers Cam_MainDispatch 40D7-42A1 | V = `$D598 & 7` (sensor register 7 bits 2-0) found by boot offset search n = 1..5, one entry per live band 0..4 (the searches use the matrix bytes D5CB, D5CC, D5CD, D5BF, D5C0); read by Cam_MainDispatch to load register 7 on a band switch (README §18.4, §18.6) | C |
+| `$D5C6-$D5CA` | 5 | `cam_boot_o[5]` | u8[5] (values 0..$7F) | writers Cam_Calib_BootMeasureSeq 0a:477C/47B3/47EA/4820/4854; readers Cam_MainDispatch | O = `$D599 & $7F` (the 6-bit offset of sensor register 0; the live registers use `$80 \| O`) found by the same 5 boot searches, one per live band 0..4. Together with `$D5C1+n` they replace the old README's 'per-band REG4/REG5 lookup `$D5C1-$D5C9`' (the range is $D5C1-$D5CA, 2 x 5 bytes, written at boot by 0a:4774-4854, not constants) | C |
+| `$D5CB-$D5CD` | 3 | `cam_boot_matrix_ref[3]` | u8[3] | writers Cam_ExposureBandSelect (4 x 3, 0a:48E7-4943); read by BootMeasureSeq 0a:4734, 477F, 47B6 | Flat matrix bytes of boot offset searches 1-3 (the black-level reference of that mode, I), copied from the vector by winning gain: `d5cb`/`d5cc`/`d5cd` <- (b0,b4,b8) if gain 0; (b1,b5,b8) gain 1; (b2,b6,b9) gain 2; (b3,b7,b9) fallback (README §6 table). Each is the fill value of `$A006-$A035` for one boot measurement in BootMeasureSeq; they are not auto-exposure targets (README §6, §18.4) | C |
 
 ## $D5CE-$D5FF: shared UI state and per-screen cursors
 
@@ -112,13 +112,16 @@ Status tags: **C** code-traced (instructions cited as `bank:addr`), **I** inferr
 | `$D5FE` | 1 | `yesno_v7` | u8 0/1 | 07:5497 (Up/Down via `$FFA3`, sound $38), 07:544C, 07:54B8 | 2-way vertical choice of mode 7 (07:54ED): `07:5495` = ($1A, $17) gives the next mode (mode `$1A` or `$17`); without A (`D5DF` bit 0 clear) returns to mode 0 | C |
 | `$D5FF` | 1 | `page_index_8` | u8 0..5 (0..7 if D582 = 1) | 08:52A0 (draw `D5FF+1` as two digits), 08:52DB (Left/Right via `$FFA3`, wrap at 6 or 8), 08:5315 / 08:5365 (write + 10-step slide), 08:53BC-5481 | Page number of a paged bank-8 screen: 6 pages, 8 when the CoroCoro flag `D582` is set (08:52E0-52E7); a 10-step transition slides to the new page. Which screen it is: ? | C |
 
+
+**Renamed by the sensor pass (README §18):** `cam_boot_matrix_ref[3]` (was `cam_targets[3]`), `cam_boot_v[5]` (was `cam_boot_reg4[5]`), `cam_boot_o[5]` (was `cam_boot_reg5[5]`), `cam_factory_vo[24]` (was `cam_factory_raw[24]`), `cam_brightness_setpoint` (was `cam_meter_divisor`), `cam_contrast_row` (was `cam_dither_row`).
+
 ## Notes per overlay / mechanism
 
 **`$D500-$D51F` sprite-animation pairs.** Slot n has a frame byte at `$D500+n` and a tick byte at `$D510+n`. A per-frame routine draws the sprite group of the current frame, increments the tick, and when the tick equals the duration stored with the frame in a ROM table it advances the frame and zeroes the tick (verified for the `$D50F/$D51F` pair at `04:7832-786E`; the other pairs use the same pattern, e.g. `03:649B`, `03:7117`, `03:7162`, `03:7774`, `07:55BA`, `07:620F`, `04:72E3`). `00:100B` clears the whole 32-byte area (callers `03:6371`, `07:558F`); other screens zero individual slots on entry. Which sprite each slot drives is only inferred (bank 3: cursor blink, sprite loops and two-actor scripts of the registration screens; bank 7: frame/stamp screens; bank 8: print animation, frame 0..4; bank 4: mode-1 cursor and the pointer-arrow `$D50F`). `$D509`, `$D50A`, `$D50E`, `$D516`, `$D51E` do not appear in the access table; `$D506` has no tick partner.
 
 **`$D520-$D529` and the table.** Not a sound sequencer. The sound engine is bank `$1F` with its own state in `$DC00-$DC5E` and `$D9xx` (other regions). `$D520/$D521` are the write/read indices of the VBlank VRAM-transfer queue; the queue has only two writers (`08:4EE9`, `08:5290`), so most screens upload through direct copies (`$0450`, `$05F8`, `$0721`) instead. `$D524-$D526` are loaded with the constants of the next screen and faded in by `00:0D18`.
 
-**Camera chain (bank 0A), partial answer to README §6 'how are the 12 bytes used'.** (1) Factory sweep `Cam_FactoryMeasure1` fills `$D59D-$D5B4` (12 REG4-bit results, 12 O-register results); `Cam_FactoryMeasure2` turns them into the 12-byte vector `$D5B5-$D5C0`, which `Cam_CommitVectorToSRAM` writes to SRAM (`$AFF2` bank 2 and `$BFF2` bank 8). (2) At normal start `Cam_Calib_ValidityCheck` loads the vector from SRAM, or the default `7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A`, into `$D5B5-$D5C0`. (3) Unless both SRAM copies are blank (`Cam_Calib_Loader`, see Corrections 11), `Cam_Calib_BootMeasureSeq` (`0a:4724`) first calls `Cam_ExposureBandSelect` (`0a:4859`), which tries gains 0, 1, 2 (`$D587`), stores the winner in `$D588`, sets `$D589` (4 or 5) and copies three vector bytes into `$D5CB-$D5CD`; it then fills the sensor array `$A006-$A035` with each of five reference levels (`$D5CB`, `$D5CC`, `$D5CD`, `$D5BF`, `$D5C0`) in turn, runs the register search `0a:4B6A` and records REG4 & 7 in `$D5C1-$D5C5` and REG5 & $7F in `$D5C6-$D5CA`. (4) `Cam_MainDispatch` (auto-exposure step; A = `$D59A`) reads `$D5C1-$D5CA` and `$D587-$D589` per band, builds the dither matrix with `Cam_BuildDitherMatrix` (`$D583-$D586` from `0a:7C20`/`0a:7C60`) and updates `$D596/$D597` from the shift table `0a:7B00`.
+**Camera chain (bank 0A), partial answer to README §6 'how are the 12 bytes used'.** (1) Factory sweep `Cam_FactoryMeasure1` fills `$D59D-$D5B4` (12 REG4-bit results, 12 O-register results); `Cam_FactoryMeasure2` turns them into the 12-byte vector `$D5B5-$D5C0`, which `Cam_CommitVectorToSRAM` writes to SRAM (`$AFF2` bank 2 and `$BFF2` bank 8). (2) At normal start `Cam_Calib_ValidityCheck` loads the vector from SRAM, or the default `7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A`, into `$D5B5-$D5C0`. (3) Unless both SRAM copies are blank (`Cam_Calib_Loader`, see Corrections 11), `Cam_Calib_BootMeasureSeq` (`0a:4724`) first calls `Cam_ExposureBandSelect` (`0a:4859`), which tries gains 0, 1, 2 (`$D587`), stores the winner in `$D588`, sets `$D589` (4 or 5) and copies three vector bytes into `$D5CB-$D5CD`; it then fills the sensor array `$A006-$A035` with each of five reference levels (`$D5CB`, `$D5CC`, `$D5CD`, `$D5BF`, `$D5C0`) in turn, runs the register search `0a:4B6A` and records V (= `$D598 & 7`, sensor register 7) in `$D5C1-$D5C5` and O (= `$D599 & $7F`, register 0) in `$D5C6-$D5CA`. (4) `Cam_MainDispatch` (auto-exposure step; A = `$D59A`, the BRIGHTNESS setpoint) reads `$D5C1-$D5CA` and `$D587-$D589` per band, builds the dither matrix with `Cam_BuildDitherMatrix` (`$D583-$D586` from `0a:7C20`/`0a:7C60`) and updates `$D596/$D597` from the shift table `0a:7B00`. **Corrected by the sensor pass (README §18):** (1) the factory sweep is 12 points: `$D59D-$D5A8` = V and `$D5A9-$D5B4` = O of the 12 operating points, and `Cam_FactoryMeasure2` runs 12 threshold scans whose results are the 12 vector bytes (no separate 'turn them into'); (3) the five reference bytes are the flat matrix bytes of the boot offset searches; (4) the loop reads no vector byte.
 
 **Photo-index family.** `$D5D8` is the album's current photo index (0..29, `$1E+n` stock pictures when `$D5DB` != 0). Bank-local copies: `$D5ED` (mode `$0A`), `$D5EE` (mode `$09` slider), `$D5F3` (print, bank 8), `$D5F6` (04 State05), `$D5F7`, `$D5F9` (via `$D671`), `$D5F8` (bank 3), `$D5FB` (bank 3), `$D5FC` (bank 7 random/slideshow). They are passed in `$FF9E` to bank-2 routines (`$5110` draw, `$4DD7`, `$4E31`, `$4C80`, `$4E5F`). Modes `$09` and `$0A` on 'A = yes' write `D5D8 := D5ED/D5EE`, `D5DF := 1`, `D5D6 := 2`, `D5D7 := 0`, `D5CE := $0F`, `D5CF := 5` (`04:6D28`, `04:7AC8`): this confirms the README §8 route into the erase viewer. `D5D6`/`D5D7` choose the prompt strip (`$8800`, 40 tiles) and the icon (`$8B00`, 16 tiles) of those pickers.
 
@@ -163,7 +166,8 @@ The 217-byte settings block (SRAM bank 0 `$B000-$B0D8`, flat `$01000`) has **no 
 8. **`$D5BF/$D5C0`**: besides the factory-test role (README §6/§8) they are the 4th and 5th reference levels of `Cam_Calib_BootMeasureSeq` (`0a:47ED`, `0a:4823`).
 9. **§2 describes `$D5CE` as a 'cross-bank flag, likely screen transition'**: it is the mode (the later §8 text and the code agree). **`$D5DF` 'last input shadow'** holds only the A/B edge of a confirm state (1 = A, 2 = B).
 10. **`$D5D6/$D5D7`** are the prompt-strip and icon selectors (not 'scratch'); **`$D5D8`** is the album photo index; **`$D5ED/$D5EE`** are bank-local copies/selections (README §8 route verified at `04:6D28`, `04:7AC8`).
-11. **README §6 'If either copy is all-`$AA`, [the loader] returns immediately'** is imprecise. `Cam_Calib_Loader` (`0a:46FD-4723`) tests the primary first (`0a:4705-470E`): if **any** of its 12 bytes is not `$AA` it falls straight into `Cam_Calib_BootMeasureSeq` (`0a:4724`) without looking at the echo; only if the primary is all-`$AA` is the echo tested (`0a:4715-471F`), and only if **both** are all-`$AA` does it return `A = $FF` without measuring (then `$D5C1-$D5CD` are never written). So the skip needs both copies blank, not either.
+11. **README §6 'If either copy is all-`$AA`, [the loader] returns immediately'** is imprecise. `Cam_Calib_Loader` (`0a:46FD-4723`) tests the primary first (`0a:4705-470E`): if **any** of its 12 bytes is not `$AA` it falls straight into `Cam_Calib_BootMeasureSeq` (`0a:4724`) without looking at the echo; only if the primary is all-`$AA` is the echo tested (`0a:4715-471F`), and only if **both** are all-`$AA` does it return `A = $FF` without measuring (then `$D5C1-$D5CD` are never written). So the skip needs both copies blank, not either. What follows is not a skip but the STORE PLEASE WAIT first-boot calibration (README §6, §18.4-18.5).
+12. **README §6 / §10 'the vector bytes are target popcount values of the live loop' and `$D5CB-$D5CD` 'auto-exposure targets'** are wrong (sensor pass, README §18): the live loop reads no vector byte; `$D5CB-$D5CD`, `$D5BF`, `$D5C0` are the flat matrix bytes of the five boot offset searches, and `$D5C1-$D5CA` are their results (V and O of the five live bands). `$D59A` is the BRIGHTNESS setpoint, `$D59B` the CONTRAST row, `$D59C` the dither variant; `$D59D-$D5B4` holds V and O of the 12 factory points (C, formerly I).
 
 ## Still inconclusive
 
@@ -240,33 +244,33 @@ Counts are of proven instructions only; accesses through `HL/DE` after a pointer
 | `$D597` | 2 | 18 | 0 | 0a:20 | `cam_exposure_shadow` |
 | `$D598` | 19 | 40 | 0 | 0a:59 | `cam_a004_shadow` |
 | `$D599` | 19 | 27 | 0 | 0a:46 | `cam_a005_shadow` |
-| `$D59A` | 4 | 4 | 0 | 06:5 0a:3 | `cam_meter_divisor` |
-| `$D59B` | 8 | 3 | 0 | 06:6 0a:5 | `cam_dither_row` |
+| `$D59A` | 4 | 4 | 0 | 06:5 0a:3 | `cam_brightness_setpoint` |
+| `$D59B` | 8 | 3 | 0 | 06:6 0a:5 | `cam_contrast_row` |
 | `$D59C` | 1 | 3 | 0 | 06:2 0a:2 | `cam_dither_mode` |
-| `$D59D` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D59E` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D59F` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A0` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A1` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A2` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A3` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A4` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A5` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A6` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A7` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A8` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5A9` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5AA` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5AB` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5AC` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5AD` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5AE` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5AF` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5B0` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5B1` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5B2` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5B3` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
-| `$D5B4` | 1 | 1 | 0 | 0a:2 | `cam_factory_raw[24]` |
+| `$D59D` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D59E` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D59F` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A0` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A1` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A2` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A3` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A4` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A5` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A6` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A7` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A8` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5A9` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5AA` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5AB` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5AC` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5AD` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5AE` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5AF` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5B0` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5B1` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5B2` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5B3` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
+| `$D5B4` | 1 | 1 | 0 | 0a:2 | `cam_factory_vo[24]` |
 | `$D5B5` | 1 | 2 | 4 | 0a:7 | `cam_calib_vector[12]` |
 | `$D5B6` | 1 | 2 | 0 | 0a:3 | `cam_calib_vector[12]` |
 | `$D5B7` | 1 | 2 | 0 | 0a:3 | `cam_calib_vector[12]` |
@@ -279,19 +283,19 @@ Counts are of proven instructions only; accesses through `HL/DE` after a pointer
 | `$D5BE` | 2 | 2 | 0 | 0a:4 | `cam_calib_vector[12]` |
 | `$D5BF` | 3 | 2 | 0 | 0a:5 | `cam_calib_vector[12]` |
 | `$D5C0` | 3 | 2 | 0 | 0a:5 | `cam_calib_vector[12]` |
-| `$D5C1` | 1 | 1 | 0 | 0a:2 | `cam_boot_reg4[5]` |
-| `$D5C2` | 2 | 1 | 0 | 0a:3 | `cam_boot_reg4[5]` |
-| `$D5C3` | 3 | 1 | 0 | 0a:4 | `cam_boot_reg4[5]` |
-| `$D5C4` | 2 | 1 | 0 | 0a:3 | `cam_boot_reg4[5]` |
-| `$D5C5` | 1 | 1 | 0 | 0a:2 | `cam_boot_reg4[5]` |
-| `$D5C6` | 1 | 1 | 0 | 0a:2 | `cam_boot_reg5[5]` |
-| `$D5C7` | 2 | 1 | 0 | 0a:3 | `cam_boot_reg5[5]` |
-| `$D5C8` | 3 | 1 | 0 | 0a:4 | `cam_boot_reg5[5]` |
-| `$D5C9` | 2 | 1 | 0 | 0a:3 | `cam_boot_reg5[5]` |
-| `$D5CA` | 1 | 1 | 0 | 0a:2 | `cam_boot_reg5[5]` |
-| `$D5CB` | 1 | 4 | 0 | 0a:5 | `cam_targets[3]` |
-| `$D5CC` | 1 | 4 | 0 | 0a:5 | `cam_targets[3]` |
-| `$D5CD` | 1 | 4 | 0 | 0a:5 | `cam_targets[3]` |
+| `$D5C1` | 1 | 1 | 0 | 0a:2 | `cam_boot_v[5]` |
+| `$D5C2` | 2 | 1 | 0 | 0a:3 | `cam_boot_v[5]` |
+| `$D5C3` | 3 | 1 | 0 | 0a:4 | `cam_boot_v[5]` |
+| `$D5C4` | 2 | 1 | 0 | 0a:3 | `cam_boot_v[5]` |
+| `$D5C5` | 1 | 1 | 0 | 0a:2 | `cam_boot_v[5]` |
+| `$D5C6` | 1 | 1 | 0 | 0a:2 | `cam_boot_o[5]` |
+| `$D5C7` | 2 | 1 | 0 | 0a:3 | `cam_boot_o[5]` |
+| `$D5C8` | 3 | 1 | 0 | 0a:4 | `cam_boot_o[5]` |
+| `$D5C9` | 2 | 1 | 0 | 0a:3 | `cam_boot_o[5]` |
+| `$D5CA` | 1 | 1 | 0 | 0a:2 | `cam_boot_o[5]` |
+| `$D5CB` | 1 | 4 | 0 | 0a:5 | `cam_boot_matrix_ref[3]` |
+| `$D5CC` | 1 | 4 | 0 | 0a:5 | `cam_boot_matrix_ref[3]` |
+| `$D5CD` | 1 | 4 | 0 | 0a:5 | `cam_boot_matrix_ref[3]` |
 | `$D5CE` | 3 | 83 | 0 | 03:14 04:30 05:1 06:15 07:14 08:10 09:2 | `mode` |
 | `$D5CF` | 42 | 395 | 180 | 03:139 04:131 05:26 06:114 07:131 08:38 09:38 | `state` |
 | `$D5D0` | 7 | 27 | 19 | 03:5 04:14 06:2 07:15 08:9 09:8 | `substate` |
