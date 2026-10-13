@@ -340,15 +340,3 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 30,74A8,120,content-classified span,Gfx_30_74A8_Unref,mixed,A10,2bpp tile data with no neighbouring consumer
 30,7534,660,content-classified span,Gfx_30_7534_Unref,mixed,A10,2bpp tile data with no neighbouring consumer
 30,77D8,56,content-classified span,Gfx_30_77D8_Unref,mixed,A10,2bpp tile data with no neighbouring consumer
-32,4000,1280,visually identified range,Gfx_32_4000_FramePieceTiles,mixed,A12,rounded frame / button pieces and round icons
-33,4000,19,unknown data (no reader found),Data_33_4000,mixed,A12 C13,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-33,4026,298,content-classified span,Gfx_33_4026_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,4160,320,content-classified span,Gfx_33_4160_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,42B0,300,content-classified span,Gfx_33_42B0_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,43F0,32,unknown data (no reader found),Data_33_43F0,mixed,A12 C13,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-33,4420,240,content-classified span,Gfx_33_4420_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,4530,288,content-classified span,Gfx_33_4530_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,4670,32,unknown data (no reader found),Data_33_4670,mixed,A12 C13,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-33,46AA,224,content-classified span,Gfx_33_46AA_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,47B0,144,content-classified span,Gfx_33_47B0_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer
-33,4850,284,content-classified span,Gfx_33_4850_Unref,mixed,A12 C13,2bpp tile data with no neighbouring consumer

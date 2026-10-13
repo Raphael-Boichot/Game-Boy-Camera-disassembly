@@ -5433,7 +5433,9 @@ bank,addr,name,conf,note,source
 31,6980,WildFrame1_LateralStrips,C,sheet tiles 280-335: 4 x 14 lateral strips (README 16.13),assets
 31,6D00,WildFrame1_TilesTail,C,sheet tiles 336-383,assets
 31,7000,WildFrame2_Tiles,C,sheet tiles 0-279,assets
-32,4000,Gfx_32_4000_FramePieceTiles,?,rounded frame / button pieces and round icons (visual),assets
+32,4000,WildFrame2_TilesPart2,C,"sheet tiles 256-279 of wild frame 03 (idx 2, starts at 31:7000): continues WildFrame2_Tiles across the bank 31/32 boundary (tile 256 = byte $1000)",fix
+32,4180,WildFrame2_LateralStrips,C,"sheet tiles 280-335: 4 x 14 lateral strips (README 16.13), tested by blanking (frame 03)",fix
+32,4500,WildFrame2_TilesTail,C,sheet tiles 336-383: 48 blank tiles,fix
 32,4800,WildFrame3_Tiles,C,sheet tiles 0-279,assets
 32,5980,WildFrame3_LateralStrips,C,sheet tiles 280-335: 4 x 14 lateral strips (README 16.13),assets
 32,5D00,WildFrame3_TilesTail,C,sheet tiles 336-383,assets
@@ -5441,18 +5443,9 @@ bank,addr,name,conf,note,source
 32,7180,WildFrame4_LateralStrips,C,sheet tiles 280-335: 4 x 14 lateral strips (README 16.13),assets
 32,7500,WildFrame4_TilesTail,C,sheet tiles 336-383,assets
 32,7800,WildFrame5_Tiles,C,sheet tiles 0-279,assets
-33,4000,Data_33_4000,?,"no copy site, table or sheet covers these bytes",assets
-33,4026,Gfx_33_4026_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,4160,Gfx_33_4160_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,42B0,Gfx_33_42B0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,43F0,Data_33_43F0,?,"no copy site, table or sheet covers these bytes",assets
-33,4420,Gfx_33_4420_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,4530,Gfx_33_4530_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,4670,Data_33_4670,?,"no copy site, table or sheet covers these bytes",assets
-33,46AA,Gfx_33_46AA_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,47B0,Gfx_33_47B0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,4850,Gfx_33_4850_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-33,4FF4,Sheet_MiscellaneousFramesJpn_33_4FF4,I,"Spriter's Resource sheet ""Miscellaneous - Frames (JPN)"", 114 tiles",assets
+33,4000,WildFrame5_TilesPart2,C,"sheet tiles 128-279 of wild frame 06 (idx 5, starts at 32:7800): continues WildFrame5_Tiles across the bank 32/33 boundary (tile 128 = byte $800)",fix
+33,4980,WildFrame5_LateralStrips,C,"sheet tiles 280-335: 4 x 14 lateral strips, all $FF (README 16.13), tested by blanking (frame 06)",fix
+33,4D00,WildFrame5_TilesTail,C,"sheet tiles 336-383: 48 blank tiles ($00, 33:4FF4-4FFF included)",fix
 33,5000,WildFrame6_Tiles,C,sheet tiles 0-279,assets
 33,6180,WildFrame6_LateralStrips,C,sheet tiles 280-335: 4 x 14 lateral strips (README 16.13),assets
 33,6500,WildFrame6_TilesTail,C,sheet tiles 336-383,assets

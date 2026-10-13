@@ -8,10 +8,10 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 15 | 22354 | a yes/no on the family name |
+| visually identified range | 14 | 21074 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 33 | 27201 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 120 | 23805 | what each span is: look at the bank image, or tell me the screen it belongs to |
-| unknown data (no reader found) | 185 | 3379 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
+| content-classified span | 112 | 21707 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| unknown data (no reader found) | 182 | 3296 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 16 | 925 | what the table indexes |
 | hand name, unconfirmed | 10 | 558 | a check of the guess |
 | mode state | 106 | 5954 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
@@ -23,7 +23,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
 | dead code | 21 | 527 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (15)
+## visually identified range (14)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
@@ -43,7 +43,6 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 | 21:4D00 | `Gfx_21_4D00_SpaceFeverFont` | 896 | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines;  |
 | 23:5CC0 | `Gfx_23_5CC0_LetterGlyphStrip` | 580 | Latin letter glyph row | Latin letter glyph row (visual) |
 | 25:7814 | `Gfx_25_7814_LetterGlyphStrip` | 588 | narrow Latin letter glyph strip | narrow Latin letter glyph strip (visual) |
-| 32:4000 | `Gfx_32_4000_FramePieceTiles` | 1280 | rounded frame / button pieces and round icons | rounded frame / button pieces and round icons (visual) |
 
 ## far-pointer asset, extent unknown (33)
 
@@ -85,7 +84,7 @@ _Why doubtful:_ end taken as the next pointer or asset. _To settle:_ read the co
 | 30:4000 | `Gfx_30_4000_StampCat08_09` | 3118 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 08, 09 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
 | 30:6000 | `Gfx_30_6000_StampCat12_13` | 16 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 12, 13 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
 
-## content-classified span (120)
+## content-classified span (112)
 
 _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
@@ -112,9 +111,8 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 2D: `4F40` Unref (48 B), `4F80` Unref (116 B), `5044` Unref (174 B), `5252` Unref (146 B), `5648` Unref (178 B), `570C` Unref (240 B), `5846` Unref (154 B), `6BC0` Unref (54 B), `6C50` Unref (48 B), `6C90` Unref (86 B)
 - bank 2F: `5E50` Unref (112 B), `62C6` Unref (54 B), `6703` MiscellaneousStampsJpn_Aux (55 B), `674A` Unref (70 B), `730A` Unref (114 B)
 - bank 30: `548C` Unref (48 B), `6705` Unref (139 B), `6983` MiscellaneousStampsJpn_Aux (59 B), `69D0` Unref (173 B), `6CC1` MiscellaneousStampsJpn_Aux (407 B), `7000` Unref (752 B), `7306` Unref (230 B), `7400` Unref (120 B), `74A8` Unref (120 B), `7534` Unref (660 B), `77D8` Unref (56 B)
-- bank 33: `4026` Unref (298 B), `4160` Unref (320 B), `42B0` Unref (300 B), `4420` Unref (240 B), `4530` Unref (288 B), `46AA` Unref (224 B), `47B0` Unref (144 B), `4850` Unref (284 B)
 
-## unknown data (no reader found) (185)
+## unknown data (no reader found) (182)
 
 _Why doubtful:_ no pointer, table or sheet covers it. _To settle:_ VRAM viewer / read breakpoint in an emulator.
 
@@ -138,7 +136,6 @@ _Why doubtful:_ no pointer, table or sheet covers it. _To settle:_ VRAM viewer /
 - bank 2E: `5555` 36 B, `558E` 38 B, `55C4` 28 B, `55F0` 14 B, `561E` 22 B, `564C` 38 B
 - bank 2F: `5D6B` 5 B, `5DC0` 32 B, `5E0C` 20 B, `5ED0` 16 B, `5EF0` 32 B, `5F20` 16 B, `5F40` 16 B, `5F60` 18 B, `5F8A` 6 B, `62B1` 5 B, `67B0` 32 B, `67E4` 12 B, `680E` 18 B, `72E0` 20 B
 - bank 30: `53C5` 46 B, `540C` 47 B, `545D` 31 B, `54CE` 46 B, `551C` 32 B, `66A4` 10 B, `66E6` 4 B, `6A8E` 18 B, `6E85` 19 B, `6ECF` 35 B
-- bank 33: `4000` 19 B, `43F0` 32 B, `4670` 32 B
 
 ## auto-named table (16)
 

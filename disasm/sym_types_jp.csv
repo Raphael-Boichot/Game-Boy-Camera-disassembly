@@ -2009,3 +2009,9 @@ bank,start,end,type,width,note
 09,509C,50D0,data,4,13 x {lo
 09,5145,5155,data,4,4 x {lo
 09,517D,518C,data,3,5 x {lo
+32,4000,4180,data,16,Gfx
+32,4180,4500,data,16,Gfx
+32,4500,4800,data,16,Gfx
+33,4000,4980,data,16,Gfx
+33,4980,4D00,data,16,Gfx
+33,4D00,5000,data,16,Gfx
