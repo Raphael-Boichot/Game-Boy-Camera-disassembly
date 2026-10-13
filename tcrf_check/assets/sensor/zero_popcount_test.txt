@@ -1,0 +1,17 @@
+Popcount table zeroed (Pocket Camera Japan Rev A, 0A:7300-73FF = 00, 256 bytes), live view, BGB, 2026-10-13
+Same save (CE10000843.sav), same scenario ("live" of sensor_scenarios.py: SHOOT live view, about 25 s, BGB's fixed fake picture), same key script; only the table differs.
+Cam_MainDispatch (0A:4000) runs 239 times in each run.
+
+                     original ROM          table = 00
+Sigma (marker Sum)   1292..4458            0..0
+Level L              0..35                 0..0
+first exposure       $1000 (65.5 ms)       $1000
+last exposure (C1:C0 of the last capture)  $0CDD   $0010
+last reg 1 written   $E3                   $23    ($E3 = 2-D edge, band 1; $23 = band 0, H-edge)
+frames at the floor  0 of 241 captures     219 of 241 captures
+
+With the table at 00 every Sigma is 0, L = 0 on all 239 dispatches, the shift is 2, and the exposure loses a quarter per frame ($1000, $0C00, $0900, $06C0 ...,
+with the band switches of the controller on the way) until it reaches the $0010 floor (0.256 ms) in band 0, where it stays for the last 219 of 241 captures.
+Original ROM: L 0..35, exposure between $0528 and $0F00 over the run, last $0CDD (51 ms). BGB's sensor is a fixed fake picture, so what is shown is the
+exposure the code asks for, not an image: that the picture would go dark in a lit scene is the consequence of the formula (I), not something seen on screen.
+Sigma is the "bc" value of the marker at 0A:4011. Tool: tcrf_check/tools/sensor_scenarios.py with --only live (the patched ROM is the JP ROM with bytes 0x2B300-0x2B3FF set to 0).

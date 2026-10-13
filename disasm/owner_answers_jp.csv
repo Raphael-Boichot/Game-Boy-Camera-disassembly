@@ -41,3 +41,21 @@ snd_sfx1_14,channel-1 effect $14,Effect ch1 (pulse) 14,Hot spot related,sure,202
 snd_sfx1_15,channel-1 effect $15,Effect ch1 (pulse) 15,Hot spot related,sure,2026-10-13T11:41
 snd_sfx1_24,channel-1 effect $24,Effect ch1 (pulse) 24,Sound from Space Fever 2,,2026-10-13T11:42
 snd_sfx1_28,channel-1 effect $28,Effect ch1 (pulse) 28,Shutter sound,sure,2026-10-13T11:38
+ast_10_7F00,10:7F00,Gfx_10_7F00_Unref,graphic (by eye),,2026-10-13T14:23
+ast_15_5200,15:5200,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,graphic (by eye),,2026-10-13T14:23
+ast_15_5500,15:5500,Gfx_15_5500_SlidePlay_ReadKeys_Aux,graphic (by eye),,2026-10-13T14:23
+ast_18_7D80,18:7D80,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,graphic (by eye),,2026-10-13T14:23
+ast_1A_5182,1A:5182,Gfx_1A_5182_Unref,graphic (by eye),,2026-10-13T14:23
+tcrf_Album_Hand_Gestures,TCRF Album: unused hand gestures,13:5A00-5FFF (23 of 32 non-blank tiles found),"partly (the ROM span matches only part of the TCRF picture, by eye)",,2026-10-13T14:21
+tcrf_CannotCombine,TCRF Cannot combine the same picture,1E:6600-697F (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:21
+tcrf_Hot_Spot_Graphical_Effects,TCRF Hot-spot effect icons (8 extra),1C:5920-5B1F (span only),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Japanese_Menu_Tile,TCRF Japanese menu tile (circled X),"15:4480 / 4500 / 4580 (candidate, 8x8 vs 14x14)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Magic_Bank_Tile,TCRF Magic bank tile,0D:7000-765F (candidate),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Magic_Bank_Tiles,TCRF Magic bank tiles,"0D:7870-7AB0 (partial, layout differs)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Margin_Print_B_Film_Roll,TCRF Margin print: B film roll,"18:5A50-5AAF (span, 4 of 24 tiles pixel-equal)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Margin_Print_Font,TCRF Margin print: font,"18:5F90-604F (span, 5 of 40 tiles pixel-equal)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_MiddleBeforeAfterHave,TCRF Kanji: middle / before / after / have,0D:7660 + 0D:7760 (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:21
+tcrf_Photo_Option_B_CANCEL,TCRF Photo option: B CANCEL,1A:7D80-7DDF (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Photo_Option_Icon,TCRF Photo option: icon,"1A:7C90 / 7CA0 (candidate, on screen in normal play)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
+tcrf_Run_Run_Run_Star,TCRF RUN! RUN! RUN!: star,1B:618A (candidate),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
+tcrf_SOUND_Print_Modulation_Icon,TCRF SOUND print modulation icon,10:7A80 + 10:7B80 (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
