@@ -56,7 +56,7 @@ for b in (0x10, 0x17, 0x19, 0x1A, 0x1C, 0x1E):
     for s, e in auto_runs(b):
         add(b, s, e, 'tile_set_gap', 'bytes of a 2bpp tile block that no copy reads (organic readers on both sides)', 'tile blocks loaded by 00:17E8', 'I')
 # --- bank $14: text/banner tiles
-add(0x14, 0x4000, 0x4553, 'banner_tiles', '128-px-wide Japanese banner (white katakana on black / grey, 16 tiles per row, about 5 tile rows) above a dithered picture strip; the picture part is read (14:4545-5380 by 00:289C), the banner part never is', 'block 14:4000-57FF', 'I')
+add(0x14, 0x4000, 0x4553, 'alt_exchange_screen_tiles', 'tiles 0-84 of the unused alternate stand-by screen of the image exchange (tile set 14:4000-502F, tile map 23:5CC0; tracked as a de-duplicated tile list, so a raster reading looks like strips of different widths); the thumbnail reducer 00:289C reads 14:4554 onward only through a stray pointer, never as tiles', 'no loader in either ROM (BGB + code search; README 14.4 / 16.24 (3))', 'I')
 # --- tilemaps, banks $25-$27
 add(0x25, 0x4A80, 0x4DBF, 'bg_tilemap', '32-column BG tilemap: FE fill, 16x14 photo-area ramp (00-8F, 00-4F), side icons; sits between the maps copied from 25:47C0 and 25:4DC0', 'neighbours 25:47C0 and 25:4DC0 are copied to $9800', 'I')
 add(0x25, 0x5080, 0x50BF, 'bg_tilemap', 'first two rows (tile ramp 00-27) of the map whose other rows are read from 25:50C0', 'map 25:5080-', 'I')

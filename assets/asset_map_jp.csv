@@ -34,7 +34,7 @@ bank,start,end,type,description,consumer_or_context,evidence,community_sheet
 1C,5CCB,5CD2,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
 1C,5D47,5D47,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
 1E,662E,6638,tile_set_gap,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),tile blocks loaded by 00:17E8,I,
-14,4000,4553,banner_tiles,"128-px-wide Japanese banner (white katakana on black / grey, 16 tiles per row, about 5 tile rows) above a dithered picture strip; the picture part is read (14:4545-5380 by 00:289C), the banner part never is",block 14:4000-57FF,I,
+14,4000,4553,alt_exchange_screen_tiles,"tiles 0-84 of the unused alternate stand-by screen of the image exchange (tile set 14:4000-502F, tile map 23:5CC0; tracked as a de-duplicated tile list, so a raster reading looks like strips of different widths); the thumbnail reducer 00:289C reads 14:4554 onward only through a stray pointer, never as tiles",no loader in either ROM (BGB + code search; README 14.4 / 16.24 (3)),I,
 25,4A80,4DBF,bg_tilemap,"32-column BG tilemap: FE fill, 16x14 photo-area ramp (00-8F, 00-4F), side icons; sits between the maps copied from 25:47C0 and 25:4DC0",neighbours 25:47C0 and 25:4DC0 are copied to $9800,I,
 25,5080,50BF,bg_tilemap,first two rows (tile ramp 00-27) of the map whose other rows are read from 25:50C0,map 25:5080-,I,
 25,5320,535F,bg_tilemap,first two rows (tile ramp 00-27) of the map that starts at 25:5320,map 25:5320-,I,

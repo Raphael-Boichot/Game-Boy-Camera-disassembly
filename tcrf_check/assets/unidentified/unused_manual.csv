@@ -1,0 +1,4 @@
+bank,start,end,kind,note
+14,4000,4553,Gfx,"tile set (tiles 0-84) of the unused alternate stand-by screen of the image exchange: no loader in either ROM (code search + BGB, README 14.4 / 16.24 (3)); not an open asset in the sym, so the tracker never listed it"
+14,4554,502F,Gfx,"tiles 85-258 of the same screen; the tracker's 'on screen' is the thumbnail reducer 00:289C reading it through a stray pointer (14:4554, not a tile boundary), never these tiles as tiles"
+23,5CC0,5F03,Map,"the tile map of the same screen (18 x 32 + 4 bytes); the tracker's 36 forced-run tiles are value matches, BGB shows that the exchange screen loads 15:6C00 + 24:5180 instead"
