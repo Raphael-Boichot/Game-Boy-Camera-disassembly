@@ -3569,8 +3569,8 @@
 13:7000 Gfx_13_7000_Mode08_CreditsReal
 13:7440 Src_13_7440_Tbl65CA_2
 13:7800 Gfx_13_7800_Mode08_CreditsReal
-14:4000 Banner_14_4000_ReversedStrips
-14:4554 Banner_14_4554_ReversedStrips_Face
+14:4000 Gfx_14_4000_UnrefScreen_Tiles
+14:4554 Gfx_14_4554_UnrefScreen_Tiles_StrayPtr
 14:5800 Gfx_14_5800_Mode0D_State00_Init
 14:5c78 Src_14_5C78_Tbl65FB_0
 14:6000 Gfx_14_6000_Mode0D_State00_Init
@@ -7188,7 +7188,7 @@
 23:5ac2 .padding:1e
 23:5ae0 .data:2:10
 23:5ae2 .padding:1de
-23:5cc0 .data:244:10
+23:5cc0 .data:244:20
 23:5f04 .padding:18
 23:5f1c .data:8:10
 23:5f24 .padding:18

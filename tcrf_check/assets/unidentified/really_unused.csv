@@ -22,7 +22,7 @@ bank,addr,bytes,name,kind,tier,info_tiles,tiles_on_screen_stable,stable_in_organ
 10,7D52,366,Gfx_10_7D52_Unref,Gfx,never shown,22,0,0,0,0,366,0,
 10,7F00,184,Gfx_10_7F00_Unref,Gfx,never shown,11,0,0,0,0,184,0,
 11,5400,256,Gfx_11_5400_MainMenuUpperItemFramesA,Gfx,shown,16,16,16,0,65278,256,256,
-14,4554,2780,Banner_14_4554_ReversedStrips_Face,Banner,shown,173,173,173,0,21196,2780,2780,
+14,4554,2780,Gfx_14_4554_UnrefScreen_Tiles_StrayPtr,Gfx,shown,173,173,173,0,21196,2780,2780,
 14,7A01,95,Gfx_14_7A01_PenMenu_Build_Aux,Gfx,shown,5,5,5,0,58474,95,95,
 15,5200,512,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,Gfx,never shown,31,0,0,0,0,512,0,
 15,5500,256,Gfx_15_5500_SlidePlay_ReadKeys_Aux,Gfx,never shown,16,0,0,0,0,256,0,

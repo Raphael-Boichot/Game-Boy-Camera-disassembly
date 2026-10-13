@@ -2052,3 +2052,4 @@ bank,start,end,type,width,note
 1A,7CB0,7CF0,data,16,Gfx
 11,5600,5800,data,16,Gfx
 11,5800,6940,data,16,Gfx
+23,5CC0,5F04,data,32,Map
