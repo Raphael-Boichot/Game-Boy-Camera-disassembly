@@ -3522,7 +3522,7 @@
 11:5400 Gfx_11_5400_MainMenuUpperItemFramesA
 11:5500 Gfx_11_5500_MainMenu_DrawUpperItem0
 11:5600 Gfx_11_5600_MainMenu_DrawUpperItem1
-11:5700 Gfx_11_5700_MainMenuIconAnimFrames
+11:5800 Unused_TCRF_HandNewspaperFrames_Gfx
 11:7000 Gfx_11_7000_Compose_DrawJitter
 11:7200 Gfx_11_7200_Icon06_5D54
 11:7300 Gfx_11_7300_Icon06_5D54
@@ -6482,8 +6482,8 @@
 11:5300 .data:100:10
 11:5400 .data:100:10
 11:5500 .data:100:10
-11:5600 .data:100:10
-11:5700 .data:1240:10
+11:5600 .data:200:10
+11:5800 .data:1140:10
 11:6940 .padding:6c0
 11:7000 .data:200:10
 11:7200 .data:100:10

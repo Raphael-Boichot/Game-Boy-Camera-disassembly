@@ -8,7 +8,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 12 | 19234 | a yes/no on the family name |
+| visually identified range | 11 | 14562 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 17 | 213 | where each block ends (the length copied at run time) and what it is |
 | content-classified span | 58 | 15290 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 75 | 812 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
@@ -21,9 +21,9 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | keyboard / glyph | 36 | 1336 | which glyph page each loader fills |
 | main-menu slide | 18 | 1234 | which transition each slide is |
 | arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
-| dead code | 28 | 1759 | whether the code is truly dead (TCRF unused-content notes) |
+| dead code | 29 | 6175 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (12)
+## visually identified range (11)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
@@ -34,7 +34,6 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 | 0D:7000 | `Gfx_0D_7000_FillPatternTiles` | 1632 | dot, crosshatch and dither fill tiles plus a few glyph pieces | dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by |
 | 10:7602 | `Gfx_10_7602_DjLetterGlyphStrip` | 678 | Latin letter / digit glyph strip | Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420 |
 | 11:5400 | `Gfx_11_5400_MainMenuUpperItemFramesA` | 256 | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_ | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by |
-| 11:5700 | `Gfx_11_5700_MainMenuIconAnimFrames` | 4672 | tall animated sprite frames (stacked boxes / segmented figure, 5 frames) drawn next to the main-menu upper items; same b | tall animated sprite frames (stacked boxes / segmented figure, 5 frames) drawn next to the main-menu upper ite |
 | 14:4554 | `Banner_14_4554_ReversedStrips_Face` | 2780 | rest of the reversed strips: 14:4554-46xx tail of the katakana line, 14:4720-4F1F a clean dithered manga picture (16 til | rest of the reversed strips: 14:4554-46xx tail of the katakana line, 14:4720-4F1F a clean dithered manga pictu |
 | 17:4000 | `Gfx_17_4000_ShootMenuIconsA` | 320 | icon row of the SHOOT-menu tile bank | icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init |
 | 17:4200 | `Gfx_17_4200_ShootCounterIcons` | 1152 | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcon |
@@ -596,7 +595,7 @@ _Why doubtful:_ direction and owner inferred from the table index. _To settle:_ 
 | 07:6FB0 | `SlideOptB_DrawArrow` | 61 | small arrow / cursor sprite or tile drawing routine |  |
 | 07:6FF1 | `SlideOptB_DrawArrow_Tbl6FF1` | 6 | small arrow / cursor sprite or tile drawing routine | auto: 6 bytes, bytes; referenced by SlideOptB_DrawArrow |
 
-## dead code (28)
+## dead code (29)
 
 _Why doubtful:_ never executed in the static trace; purpose read from the instructions only. _To settle:_ TCRF note, or a debugger test with a forced jump.
 
@@ -618,6 +617,7 @@ _Why doubtful:_ never executed in the static trace; purpose read from the instru
 | 07:4BEA | `Unused_Link_SumSlotBuffer` | 30 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED: 16-bit sum of the $1000 byte buffer |
 | 07:503D | `Unused_LinkPick_LoadPhotoIndexB` | 3 | code or data that no trace path and no table reaches (left over from earlier versions) | entry of arbitrary address (README 16.14) |
 | 0D:7660 | `Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx` | 384 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 o |
+| 11:5800 | `Unused_TCRF_HandNewspaperFrames_Gfx` | 4416 | code or data that no trace path and no table reaches (left over from earlier versions) | nine sprite frames of a hand flipping a newspaper (TCRF B16, Unused Graphic Bank 11): 25 tiles per frame in 51 |
 | 15:4480 | `Unused_TCRF_JapaneseMenuTile_CircledX_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: the circled X tile of the Japanese main-menu bank (copy 1 of 3, same tile at 15:4500 and  |
 | 15:4500 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: circled X, copy 2 of 3 |
 | 15:4580 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: circled X, copy 3 of 3 |
