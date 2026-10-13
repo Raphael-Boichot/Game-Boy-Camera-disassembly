@@ -3496,7 +3496,7 @@
 10:74a3 Gfx_10_74A3_Unref
 10:7602 Gfx_10_7602_DjLetterGlyphStrip
 10:78a8 TileGap_10_78A8
-10:78b8 Data_10_78B8
+10:78b8 Gfx_10_78B8_Unref
 10:78e8 Data_10_78E8
 10:7908 Gfx_10_7908_Unref
 10:7a08 Data_10_7A08
@@ -4732,9 +4732,9 @@
 1f:7f01 Song1F_Pat7F01
 1f:7f0b Song1F_Pat7F0B
 1f:7f15 Song1F_Pat7F15
-1f:7f1f Song48_Hdr
-1f:7f2a Song48_Trk2List
-1f:7f2c Song48_Trk1List
+1f:7f1f Song48_ErrorIncomplete_Hdr
+1f:7f2a Song48_ErrorIncomplete_Trk2List
+1f:7f2c Song48_ErrorIncomplete_Trk1List
 1f:7f30 Song29_TotakaTune_Pat7F30
 1f:7f3c Song29_TotakaTune_Pat7F3C
 1f:7f48 Song29_TotakaTune_Pat7F48
@@ -4796,7 +4796,7 @@
 21:6566 Gfx_21_6566_Unref
 21:65c0 Gfx_21_65C0_SaveDialog_Substate0_Init
 21:6ac7 Gfx_21_6AC7_Unref
-21:6b91 Data_21_6B91
+21:6b91 Gfx_21_6B91_Unref
 21:6bc0 Gfx_21_6BC0_Mode19_State00_CopyrightScreens
 21:71c0 Gfx_21_71C0_WildFrame_PageSrcTbl
 21:77c0 Gfx_21_77C0_Print_DrawSelectedMarker
@@ -4860,7 +4860,7 @@
 23:5aa0 Data_23_5AA0
 23:5ac0 Data_23_5AC0
 23:5ae0 Data_23_5AE0
-23:5cc0 Gfx_23_5CC0_LetterGlyphStrip
+23:5cc0 Map_23_5CC0_Unref
 23:5f1c Data_23_5F1C
 23:5f3c Data_23_5F3C
 23:5f5c Data_23_5F5C
@@ -4989,9 +4989,9 @@
 25:71a0 Src_25_71A0_Tbl4B67_0
 25:73a0 Map_25_73A0_Mode15_StepValue
 25:75f4 Data_25_75F4
-25:7614 Gfx_25_7614_Unref
+25:7614 Map_25_7614_Unref
 25:77f4 Data_25_77F4
-25:7814 Gfx_25_7814_LetterGlyphStrip
+25:7814 Map_25_7814_Unref
 25:7a60 Map_25_7A60_Boot_EraseAllPrompt_Far
 25:7ca0 Map_25_7CA0_Bank08
 25:7ee0 Src_25_7EE0_Tbl539D_40

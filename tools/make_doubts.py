@@ -31,6 +31,7 @@ G=[ # group, regex on name, best guess, why doubtful, what settles it
 ]
 out=[]
 def add(r,group,guess,why,settle):
+    if 'Owner (review page' in r['note'] and 'by eye' in r['note']: why='type confirmed by the owner (review page, by eye); role and consumer not found'   # a by-eye answer settles the type, not the role
     out.append(dict(bank=r['bank'],addr=r['addr'],name=r['name'],conf=r['conf'],group=group,size=nxt.get((r['bank'],r['addr']),''),best_guess=guess,evidence=r['note'],why_doubtful=why,what_would_settle_it=settle))
 for r in rows:
     n=r['name']; c=r['conf']; src=r['source']
@@ -40,8 +41,8 @@ for r in rows:
         kd=n.split('_')[0]
         owner=re.sub(r'_Aux$','',re.sub(r'^\w+?_[0-9A-F]{2}_[0-9A-F]{4}_','',n))
         add(r,'content-classified span','%s data placed next to %s; function = same family as its neighbour'%('tile map' if kd=='Map' else '2bpp tile',owner) if not n.endswith('_Unref') else '%s data with no neighbouring consumer'%('tile map' if kd=='Map' else '2bpp tile'),'type chosen from the bytes (map rows vs tiles), consumer not found','view the bank image, then find the reader with a breakpoint on the bank number write')
-    elif c=='?':
-        if src=='assets' and '(visual' in r['note']: add(r,'visually identified range',r['note'].split('(visual')[0].strip(' ;,.')[:120],'identified from the picture and the neighbouring assets only; no code reads it directly','check against the Spriters Resource sheet or a VRAM view while the screen runs')
+    elif c=='?' or ('Owner (review page' in r['note'] and 'by eye' in r['note']):
+        if src in ('assets','fix') and '(visual' in r['note']: add(r,'visually identified range',r['note'].split('(visual')[0].strip(' ;,.')[:120],'identified from the picture and the neighbouring assets only; no code reads it directly','check against the Spriters Resource sheet or a VRAM view while the screen runs')
         elif src=='assets': add(r,'far-pointer asset, extent unknown','data loaded through a banked copy helper; length not stated at the load site','end taken as the next pointer or asset','read the copy length at run time (breakpoint on the helper)')
         elif src=='auto': add(r,'auto-named table','table or word list found by pattern; no immediate reference','no code loads it directly (indexed or computed access)','breakpoint on reads of the address')
         else: add(r,'hand name, unconfirmed',r['note'][:90] or 'see name','named from neighbours only','emulator trace')

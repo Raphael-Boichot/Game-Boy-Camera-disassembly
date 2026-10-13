@@ -8,10 +8,10 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 14 | 20402 | a yes/no on the family name |
+| visually identified range | 12 | 19234 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 17 | 213 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 54 | 14051 | what each span is: look at the bank image, or tell me the screen it belongs to |
-| unknown data (no reader found) | 77 | 883 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
+| content-classified span | 58 | 15290 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| unknown data (no reader found) | 75 | 812 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 16 | 925 | what the table indexes |
 | hand name, unconfirmed | 12 | 686 | a check of the guess |
 | mode state | 106 | 5954 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
@@ -23,7 +23,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
 | dead code | 28 | 1759 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (14)
+## visually identified range (12)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
@@ -41,8 +41,6 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 | 17:4820 | `Gfx_17_4820_ShootMenuIconsB` | 288 | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual) |
 | 17:5500 | `Gfx_17_5500_ShootOptionLabelGlyphs` | 4864 | Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot | Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, w |
 | 21:4D00 | `Gfx_21_4D00_SpaceFeverFont` | 896 | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines;  |
-| 23:5CC0 | `Gfx_23_5CC0_LetterGlyphStrip` | 580 | Latin letter glyph row | Latin letter glyph row (visual) |
-| 25:7814 | `Gfx_25_7814_LetterGlyphStrip` | 588 | narrow Latin letter glyph strip | narrow Latin letter glyph strip (visual) |
 
 ## far-pointer asset, extent unknown (17)
 
@@ -68,13 +66,13 @@ _Why doubtful:_ end taken as the next pointer or asset. _To settle:_ read the co
 | 2A:58D6 | `Sheet_MiscellaneousStampsJpn_2A_58D6_Gap` | 6 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
 | 2A:58F6 | `Sheet_MiscellaneousStampsJpn_2A_58F6_Gap` | 4 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
 
-## content-classified span (54)
+## content-classified span (58)
 
 _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
 - bank 0C: `7E20` Album_LoadNumeralTile_Aux (352 B)
 - bank 0F: `5800` UserMap_LoadPlanetTiles_Aux (122 B), `5904` Unref (84 B)
-- bank 10: `7420` DjTitle_LoadNumeralTile_Aux (128 B), `74A3` Unref (157 B), `7908` Unref (238 B), `7A24` Unref (92 B), `7ADE` Unref (162 B), `7BF8` Unref (345 B), `7D52` Unref (366 B), `7F00` Unref (184 B)
+- bank 10: `7420` DjTitle_LoadNumeralTile_Aux (128 B), `74A3` Unref (157 B), `78B8` Unref (24 B), `7908` Unref (238 B), `7A24` Unref (92 B), `7ADE` Unref (162 B), `7BF8` Unref (345 B), `7D52` Unref (366 B), `7F00` Unref (184 B)
 - bank 14: `7A01` PenMenu_Build_Aux (95 B)
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
@@ -84,25 +82,24 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 1D: `6D11` MenusShootMenu_Aux (1315 B), `724E` Unref (82 B), `7631` MenusShootMenu_Aux (341 B), `7796` Unref (330 B), `7B41` Tbl539D_Aux (63 B)
 - bank 1E: `64E0` Compose_DrawPhotoNumber_Aux (144 B), `6590` Mode16_DrawCaptionBlink_Aux (61 B), `7D00` Unref (184 B)
 - bank 20: `64E0` OwnerCard_LoadGenderTiles_Aux (64 B), `66C0` Unref (256 B), `70F0` Mode15_DrawTwoDigitsInterval_Aux (144 B), `71A0` Mode15_DrawTwoDigits_Aux (288 B)
-- bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (69 B), `6AC7` Unref (177 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
-- bank 23: `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
+- bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (69 B), `6AC7` Unref (177 B), `6B91` Unref (47 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
+- bank 23: `5CC0` Unref (580 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
 - bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `6360` Mode01_State00_Intro_Aux (64 B), `78C0` PenMenu_Build_Aux (66 B), `7913` Unref (77 B)
-- bank 25: `7160` Mode05_State00_Init_Aux (64 B), `7614` Unref (460 B)
+- bank 25: `7160` Mode05_State00_Init_Aux (64 B), `7614` Unref (460 B), `7814` Unref (588 B)
 - bank 26: `7080` Mode16_State08_StartShoot_Aux (576 B), `7BC0` CreditsNishimuraDanceMap4_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (352 B)
 - bank 2A: `59FF` MiscellaneousStampsJpn_Aux (105 B)
 
-## unknown data (no reader found) (77)
+## unknown data (no reader found) (75)
 
 _Why doubtful:_ no pointer, table or sheet covers it. _To settle:_ VRAM viewer / read breakpoint in an emulator.
 
 - bank 0F: `596C` 6 B, `5984` 20 B
-- bank 10: `78B8` 24 B, `78E8` 8 B, `7A08` 8 B, `7BC2` 10 B, `7BE4` 4 B
+- bank 10: `78E8` 8 B, `7A08` 8 B, `7BC2` 10 B, `7BE4` 4 B
 - bank 1A: `5160` 3 B
 - bank 1B: `6EA0` 10 B
 - bank 1C: `5620` 2 B, `5623` 42 B, `564E` 18 B, `5720` 16 B, `5BC0` 26 B, `5CC0` 11 B, `5CD3` 13 B, `5D20` 39 B, `5D48` 24 B
 - bank 1E: `64C0` 16 B
 - bank 20: `667D` 3 B
-- bank 21: `6B91` 47 B
 - bank 22: `7F40` 10 B, `7F61` 5 B, `7F81` 5 B, `7FA4` 6 B, `7FC4` 6 B, `7FE0` 10 B
 - bank 23: `58C0` 2 B, `58E0` 2 B, `5900` 2 B, `5920` 2 B, `5940` 2 B, `5960` 2 B, `5980` 2 B, `59A0` 2 B, `59C0` 2 B, `59E0` 2 B, `5A00` 2 B, `5A20` 2 B, `5A40` 2 B, `5A60` 2 B, `5A80` 2 B, `5AA0` 2 B, `5AC0` 2 B, `5AE0` 2 B, `5F1C` 8 B, `5F3C` 8 B, `5F5C` 8 B, `5F94` 12 B, `7760` 32 B, `7D54` 12 B
 - bank 24: `4E40` 32 B, `4F20` 32 B, `5F00` 20 B, `6080` 34 B, `7780` 32 B
@@ -372,7 +369,7 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:4384 | `Sfx1_Step_3B_EraseAnim` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 3B (table $4276) |
 | 1F:43C2 | `Sfx1_Init_2A_ChooseC` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 2A (table $41FA) |
 | 1F:43CA | `Sfx1_Step_2A_ChooseC` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 2A (table $4276) |
-| 1F:4401 | `Sfx1_Init_1E_26_Choose` | 38 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1E 26 (table $41FA) |
+| 1F:4401 | `Sfx1_Init_1E_26_Choose` | 38 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: us |
 | 1F:4409 | `Sfx1_Step_26_BossHit` | 30 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 26 (table $4276) |
 | 1F:4431 | `Sfx1_Init_25_SpaceFeverStart` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 25 (table $41FA) |
 | 1F:4439 | `Sfx1_Step_25_SpaceFeverStart` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 25 (table $4276) |
@@ -387,7 +384,7 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:451E | `Sfx1_Step_1B_TargetMenu` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 1B (table $4276) |
 | 1F:4530 | `Sfx1_Init_16_OptionChange` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 16 (table $41FA) |
 | 1F:453D | `Sfx1_Step_16_OptionChange` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 16 (table $4276) |
-| 1F:4554 | `Sfx1_Init_3C_3D_3E_StopMusic` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3C 3D 3E (table $41FA) |
+| 1F:4554 | `Sfx1_Init_3C_3D_3E_StopMusic` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3C 3D 3E (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 3D: |
 | 1F:4569 | `Sfx1_Step_3C_3D_3E_Mode07Play` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 3C 3D 3E (table $4276) |
 | 1F:45C1 | `Sfx1_Init_29_ChooseB` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 29 (table $41FA) |
 | 1F:45C9 | `Sfx1_Step_29_ChooseB` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 29 (table $4276) |
@@ -437,7 +434,7 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:4C43 | `Sfx1_Step_19_3A_LayoutKey` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 19 3A (table $4276) |
 | 1F:4C61 | `Sfx1_Init_08_MenuPageDown` | 80 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 08 (table $41FA) |
 | 1F:4C6F | `Sfx1_Step_08_MenuPageDown` | 66 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 08 (table $4276) |
-| 1F:4D28 | `Sfx4_Init_05_EraseAnim` | 74 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 05 (table $431A) |
+| 1F:4D28 | `Sfx4_Init_05_EraseAnim` | 74 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used  |
 | 1F:4D86 | `Sfx4_Init_01_StampCommit` | 34 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 01 (table $431A) |
 | 1F:4D8E | `Sfx4_Step_01_StampCommit` | 26 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 01 (table $433E) |
 | 1F:4E21 | `Sfx4_Init_07_FireShots` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 07 (table $431A) |

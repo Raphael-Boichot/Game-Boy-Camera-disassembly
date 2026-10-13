@@ -3494,10 +3494,10 @@ bank,addr,name,conf,note,source
 10,7400,Src_10_7400_DjTitle_LoadNumeralTile,I,"far pointer loaded by DjTitle_LoadNumeralTile (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
 10,7420,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of DjTitle_LoadNumeralTile); classified from its content - see sym_unconclusive",assets
 10,74A0,TileGap_10_74A0,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-10,74A3,Gfx_10_74A3_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+10,74A3,Gfx_10_74A3_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 10,7602,Gfx_10_7602_DjLetterGlyphStrip,?,Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420,assets
 10,78A8,TileGap_10_78A8,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-10,78B8,Data_10_78B8,?,"no copy site, table or sheet covers these bytes",assets
+10,78B8,Gfx_10_78B8_Unref,C,"small unread block of 24 bytes (was Data_10_78B8). Owner (review page, 2026-10-13): graphic, by eye.",fix
 10,78E8,Data_10_78E8,?,"no copy site, table or sheet covers these bytes",assets
 10,7908,Gfx_10_7908_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 10,7A08,Data_10_7A08,?,"no copy site, table or sheet covers these bytes",assets
@@ -3512,7 +3512,7 @@ bank,addr,name,conf,note,source
 10,7BF8,Gfx_10_7BF8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 10,7D51,TileGap_10_7D51,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 10,7D52,Gfx_10_7D52_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7F00,Gfx_10_7F00_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+10,7F00,Gfx_10_7F00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 11,4000,Gfx_11_4000_Anim07_7C8A,C,"entry 3 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
 11,4500,Gfx_11_4500_Anim07_7C8A,C,"entry 8 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
 11,4A00,Gfx_11_4A00_Anim07_7C8A,C,"entry 10 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
@@ -3603,9 +3603,9 @@ bank,addr,name,conf,note,source
 15,4D00,Gfx_15_4D00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
 15,4E00,Gfx_15_4E00_MainMenu_LoadBaseTiles,I,copied to VRAM/WRAM by MainMenu_LoadBaseTiles (assets/catalog_jp.csv),assets
 15,5000,Gfx_15_5000_MainMenu_DrawUpperItem2,I,"far pointer loaded by MainMenu_DrawUpperItem2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
-15,5200,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MainMenu_DrawUpperItem2); classified from its content - see sym_unconclusive",assets
+15,5200,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of MainMenu_DrawUpperItem2); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 15,5400,Gfx_15_5400_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
-15,5500,Gfx_15_5500_SlidePlay_ReadKeys_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of SlidePlay_ReadKeys); classified from its content - see sym_unconclusive",assets
+15,5500,Gfx_15_5500_SlidePlay_ReadKeys_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of SlidePlay_ReadKeys); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 15,5600,Gfx_15_5600_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
 15,5700,Gfx_15_5700_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
 15,5F00,Gfx_15_5F00_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
@@ -3660,7 +3660,7 @@ bank,addr,name,conf,note,source
 17,5400,Gfx_17_5400_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 17,5440,Gfx_17_5440_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
 17,54E0,Gfx_17_54E0_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
-17,5500,Gfx_17_5500_ShootOptionLabelGlyphs,?,"Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot_DrawOptionPanel and Mode14_State04_OptionsPage load) (visual)",assets
+17,5500,Gfx_17_5500_ShootOptionLabelGlyphs,C,"Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot_DrawOptionPanel and Mode14_State04_OptionsPage load) (visual). Owner (review page, 2026-10-13): graphic, by eye.",fix
 17,6800,Gfx_17_6800_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 17,7000,Gfx_17_7000_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 17,7800,Gfx_17_7800_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
@@ -3687,7 +3687,7 @@ bank,addr,name,conf,note,source
 18,7BA0,Gfx_18_7BA0_Mode0E_State02_MessageStrip,I,"copied to VRAM/WRAM by Mode0E_State02_MessageStrip, Mode0E_State0C_ExchangeWaitB (assets/catalog_jp.csv)",assets
 18,7C40,Gfx_18_7C40_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
 18,7D60,Gfx_18_7D60_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
-18,7D80,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode0F_State04_LeaveSelected); classified from its content - see sym_unconclusive",assets
+18,7D80,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of Mode0F_State04_LeaveSelected); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 18,7E80,Gfx_18_7E80_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
 18,7F60,Gfx_18_7F60_Mode1C_State02_ShowPrintScreen,I,copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv),assets
 19,4000,Gfx_19_4000_Bank07,I,copied to VRAM/WRAM by Bank07 (assets/catalog_jp.csv),assets
@@ -3720,7 +3720,7 @@ bank,addr,name,conf,note,source
 1A,50A0,Gfx_1A_50A0_Mode1F_State06_SavePanel,I,"far pointer loaded by Mode1F_State06_SavePanel (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc",assets
 1A,5160,Data_1A_5160,?,"no copy site, table or sheet covers these bytes",assets
 1A,5163,TileGap_1A_5163,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-1A,5182,Gfx_1A_5182_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1A,5182,Gfx_1A_5182_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 1A,5200,Gfx_1A_5200_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
 1A,5A00,Gfx_1A_5A00_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
 1A,6200,Gfx_1A_6200_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
@@ -3731,7 +3731,7 @@ bank,addr,name,conf,note,source
 1A,7C90,Unused_TCRF_PhotoOptionIcon_Candidate_Gfx,?,"exact pixel match of the TCRF ""photo option icon"" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play (65,535 frames in organic runs), so it is probably a displayed icon that looks like the TCRF one, not an unused one (README 16.24)",fix
 1A,7CB0,Gfx_1A_7600_Album_ShowPageScreenB_Cont,I,continues Gfx_1A_7600_Album_ShowPageScreenB (after the TCRF icon candidate),fix
 1A,7D80,Unused_TCRF_PhotoOption_BCancel_Gfx,C,"TCRF unused graphic ""B CANCEL"" (circled B + the word CANCEL, 6 tiles): exact match of the TCRF image (2x upscale, 0 differing pixels of 384); never on screen in any replay and never read in an organic run (README 16.24)",fix
-1A,7E00,Gfx_1A_7E00_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1A,7E00,Gfx_1A_7E00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 1B,4000,Gfx_1B_4000_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, ScrollEngine_RowToOffset (assets/catalog_jp.csv)",assets
 1B,4800,Gfx_1B_4800_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, ScrollEngine_RowToOffset (assets/catalog_jp.csv)",assets
 1B,5000,Gfx_1B_5000_ScrollEngine_RowToOffset,I,copied to VRAM/WRAM by ScrollEngine_RowToOffset (assets/catalog_jp.csv),assets
@@ -3774,7 +3774,7 @@ bank,addr,name,conf,note,source
 1C,5BC0,Data_1C_5BC0,?,"no copy site, table or sheet covers these bytes",assets
 1C,5BDA,TileGap_1C_5BDA,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 1C,5BE0,Gfx_1C_5BE0_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-1C,5C20,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode09_State02_PhotoArrows); classified from its content - see sym_unconclusive",assets
+1C,5C20,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of Mode09_State02_PhotoArrows); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 1C,5C60,Gfx_1C_5C60_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State04_LeaveSelected (assets/catalog_jp.csv)",assets
 1C,5C80,Gfx_1C_5C80_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 1C,5CC0,Data_1C_5CC0,?,"no copy site, table or sheet covers these bytes",assets
@@ -3819,7 +3819,7 @@ bank,addr,name,conf,note,source
 1D,7A00,Src_1D_7A00_Tbl539D_16,I,"target 16 of the {lo,hi,bank} table 04:539D",assets
 1D,7A60,Src_1D_7A60_Tbl539D_17,I,"target 17 of the {lo,hi,bank} table 04:539D",assets
 1D,7AC0,Src_1D_7AC0_Tbl539D_23,I,"target 23 of the {lo,hi,bank} table 04:539D",assets
-1D,7B41,Gfx_1D_7B41_Tbl539D_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Tbl539D); classified from its content - see sym_unconclusive",assets
+1D,7B41,Gfx_1D_7B41_Tbl539D_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of Tbl539D); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye; looks like an ennemy in Space fever.",fix
 1D,7B80,Src_1D_7B80_Tbl539D_29,I,"target 29 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets
 1D,7C3A,Sheet_MiscellaneousStampsJpn_1D_7C3A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 48 tiles",assets
 1D,7C40,Src_1D_7C40_Tbl539D_27,I,"target 27 of the {lo,hi,bank} table 04:539D",assets
@@ -3846,7 +3846,7 @@ bank,addr,name,conf,note,source
 1E,6620,Unused_TCRF_CannotCombineSamePicture_Gfx,C,"TCRF unused graphic ""cannot combine the same picture"" (prohibition sign + the two lines of Japanese text): exact match of the TCRF image, 56 of 56 tiles (the first two are blank, 1E:6600 / 6610), laid out 8 tiles wide; never on screen in any replay and never read in an organic run (README 16.24)",fix
 1E,6A00,Gfx_1E_6A00_ResultPic1_BaldMan_Tune29Totaka,C,"picture 1 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 29Totaka; seen in BGB (SHOOT parlor RUN)",assets
 1E,7800,Gfx_1E_7800_SaveDialog_Substate3_FullInit,I,"far pointer loaded by SaveDialog_Substate3_FullInit (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
-1E,7D00,Gfx_1E_7D00_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1E,7D00,Gfx_1E_7D00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 1E,7E00,Map_1E_7E00_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 1F,4000,Snd_NoiseNR43Tbl,C,37 bytes: NR43 value per noise note (bank 0 sound code; README 2.7 $D917),hand+auto
 1F,4025,Snd_LengthTbl,C,20 bytes: NR21/NR31 length values (bank 0 sound code),hand+auto
@@ -3883,10 +3883,10 @@ bank,addr,name,conf,note,source
 1F,43C2,Sfx1_Init_2A_ChooseC,I,channel-1 effect init handler of ids 2A (table $41FA),hand+auto
 1F,43CA,Sfx1_Step_2A_ChooseC,I,channel-1 effect step handler of ids 2A (table $4276),hand+auto
 1F,43DF,Sfx1_Data_43DF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,43E4,Sfx1_Init_24_SpaceFeverII,?,"channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no request for it was found in the code",fix
+1F,43E4,Sfx1_Init_24_SpaceFeverII,?,"channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no request for it was found in the code. Owner (review page, 2026-10-13, by ear): sfx1 24: used - Space fever probably; no request for it was found in the code, so ""no caller"" does not mean unused.",fix
 1F,43EC,Sfx1_Step_24_SpaceFeverII,?,channel-1 effect step handler of id 24 (owner: Space Fever II sound),fix
 1F,43F7,Sfx1_Data_43F7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4401,Sfx1_Init_1E_26_Choose,I,channel-1 effect init handler of ids 1E 26 (table $41FA),hand+auto
+1F,4401,Sfx1_Init_1E_26_Choose,I,"channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: used - boss death in space fever; the name BossHit comes from the caller SpaceFever_BossHit (id 26); name kept, the sounds agree on Space Fever.",fix
 1F,4409,Sfx1_Step_26_BossHit,I,channel-1 effect step handler of ids 26 (table $4276),hand+auto
 1F,4427,Sfx1_Data_4427,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4431,Sfx1_Init_25_SpaceFeverStart,I,channel-1 effect init handler of ids 25 (table $41FA),hand+auto
@@ -3913,7 +3913,7 @@ bank,addr,name,conf,note,source
 1F,4530,Sfx1_Init_16_OptionChange,I,channel-1 effect init handler of ids 16 (table $41FA),hand+auto
 1F,453D,Sfx1_Step_16_OptionChange,I,channel-1 effect step handler of ids 16 (table $4276),hand+auto
 1F,4549,Sfx1_Data_4549,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4554,Sfx1_Init_3C_3D_3E_StopMusic,I,channel-1 effect init handler of ids 3C 3D 3E (table $41FA),hand+auto
+1F,4554,Sfx1_Init_3C_3D_3E_StopMusic,I,"channel-1 effect init handler of ids 3C 3D 3E (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 3D: used - death in Ball or Space fever; ids 3D and 3E share this handler; owner for 3E: death in Ball or space fever (used).",fix
 1F,4569,Sfx1_Step_3C_3D_3E_Mode07Play,I,channel-1 effect step handler of ids 3C 3D 3E (table $4276),hand+auto
 1F,4575,Sfx1_Data_4575,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4583,Sfx1_Init_17,C,channel-1 effect init handler of ids 17 (table $41FA),hand+auto
@@ -3976,7 +3976,7 @@ bank,addr,name,conf,note,source
 1F,48DF,Sfx1_Data_48DF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,48EC,Sfx1_Init_2D,C,channel-1 effect init handler of ids 2D (table $41FA),hand+auto
 1F,4904,Sfx1_Data_4904,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,490E,Sfx1_Init_2F,C,channel-1 effect init handler of ids 2F (table $41FA),hand+auto
+1F,490E,Sfx1_Init_2F,C,"channel-1 effect init handler of ids 2F (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 2F: unsure; listed as the D.J. performance screen SE 4 (05:554D).",fix
 1F,491B,Sfx1_Step_2F,C,channel-1 effect step handler of ids 2F (table $4276),hand+auto
 1F,4954,Sfx1_Data_4954,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,495E,Sfx1_Init_2E,C,channel-1 effect init handler of ids 2E (table $41FA),hand+auto
@@ -4032,7 +4032,7 @@ bank,addr,name,conf,note,source
 1F,4CDF,Sfx4_Init_09,C,channel-4 effect init handler of ids 09 (table $431A),hand+auto
 1F,4CE7,Sfx4_Step_09,C,channel-4 effect step handler of ids 09 (table $433E),hand+auto
 1F,4D07,Sfx4_Data_4D07,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4D28,Sfx4_Init_05_EraseAnim,I,channel-4 effect init handler of ids 05 (table $431A),hand+auto
+1F,4D28,Sfx4_Init_05_EraseAnim,I,"channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used - player death in space fever ?; the name EraseAnim comes from the caller EraseAnim_Run; the owner hears a death sound, to be settled.",fix
 1F,4D3F,Sfx4_Init_06,C,channel-4 effect init handler of ids 06 (table $431A),hand+auto
 1F,4D47,Sfx4_Step_06,C,channel-4 effect step handler of ids 06 (table $433E),hand+auto
 1F,4D72,Sfx4_Data_4D72,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
@@ -4095,7 +4095,7 @@ bank,addr,name,conf,note,source
 1F,507D,Sfx3_Init_02_ViewArcadeSelect,I,channel-3 effect init handler of ids 02 (table $42F2),hand+auto
 1F,508B,Sfx3_Data_508B,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
 1F,5090,Sfx3_Step_04,C,channel-3 effect step handler of ids 04 (table $4306),hand+auto
-1F,50AB,Sfx3_Init_04,C,channel-3 effect init handler of ids 04 (table $42F2),hand+auto
+1F,50AB,Sfx3_Init_04,C,"channel-3 effect init handler of ids 04 (table $42F2). Owner (review page, 2026-10-13, by ear): sfx3 04: unsure.",fix
 1F,50B9,Sfx3_Data_50B9,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
 1F,50BE,Sfx3_Step_01_ShootSelect,I,channel-3 effect step handler of ids 01 (table $4306),hand+auto
 1F,50D7,Sfx3_Init_01_ShootSelect,I,channel-3 effect init handler of ids 01 (table $42F2),hand+auto
@@ -4283,7 +4283,7 @@ bank,addr,name,conf,note,source
 1F,600B,Song1B_Pat600B,C,note pattern ($00 ends it),hand+auto
 1F,600F,Song1B_Pat600F,C,note pattern ($00 ends it),hand+auto
 1F,6030,Song1B_Pat6030,C,note pattern ($00 ends it),hand+auto
-1F,6049,Song11_Jingle_Hdr,C,header of song ids 11 44,hand+auto
+1F,6049,Song11_Jingle_Hdr,C,"header of song ids 11 44. Owner (review page, 2026-10-13, by ear): music 44: used - credits, short; the header is shared with id 11; the callers of 44 are Mode0E_State06_ExchangeSetup / State0A_ExchangeSetupB, so the same tune is used both for the short credits and in the link exchange; name kept.",fix
 1F,6054,Song11_Jingle_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,605A,Song11_Jingle_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,6060,Song11_Jingle_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4561,7 +4561,7 @@ bank,addr,name,conf,note,source
 1F,7113,Song33_Pat7113,C,note pattern ($00 ends it),hand+auto
 1F,711C,Song33_Pat711C,C,note pattern ($00 ends it),hand+auto
 1F,7125,Song33_Pat7125,C,note pattern ($00 ends it),hand+auto
-1F,7156,Song32_SpaceFeverBossEnd_Hdr,C,header of song id 32,hand+auto
+1F,7156,Song32_SpaceFeverBossEnd_Hdr,C,"header of song id 32. Owner (review page, 2026-10-13, by ear): music 32: used - Space fever main theme during gameplay; NOT the same as the name, which comes from the callers SpaceFever_Boss_EndA (2 static callers): the owner hears the main theme, the callers sit at the boss end; name kept, to be settled.",fix
 1F,7161,Song32_SpaceFeverBossEnd_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7167,Song32_SpaceFeverBossEnd_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,716D,Song32_SpaceFeverBossEnd_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4628,7 +4628,7 @@ bank,addr,name,conf,note,source
 1F,74A7,Song28_Hdr,C,header of song id 28,hand+auto
 1F,74B2,Song28_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,74BA,Song28_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
-1F,74C2,Song08_TimerPrintOpt_Hdr,C,header of song ids 08 0D 1A,hand+auto
+1F,74C2,Song08_TimerPrintOpt_Hdr,C,"header of song ids 08 0D 1A. Owner (review page, 2026-10-13, by ear): music 08: used - Printer waiting jingle during multiple print selection; kept: the name comes from the screens that call ids 08 / 0D / 1A.",fix
 1F,74CD,Song08_TimerPrintOpt_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,74D3,Song08_TimerPrintOpt_Pat74D3,C,note pattern ($00 ends it),hand+auto
 1F,7500,Song08_TimerPrintOpt_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4638,7 +4638,7 @@ bank,addr,name,conf,note,source
 1F,7520,Song04_Shutterbug_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7526,Song04_Shutterbug_Pat7526,C,note pattern ($00 ends it),hand+auto
 1F,7545,Song04_Shutterbug_Pat7545,C,note pattern ($00 ends it),hand+auto
-1F,7575,Song27_TransferPrint_Hdr,C,header of song id 27,hand+auto
+1F,7575,Song27_TransferPrint_Hdr,C,"header of song id 27. Owner (review page, 2026-10-13, by ear): music 27: used - jingle during waiting time when the game boy printer is busy printing; consistent with the caller Mode1D_State05_SendPrint.",fix
 1F,7580,Song27_TransferPrint_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7586,Song27_TransferPrint_Pat7586,C,note pattern ($00 ends it),hand+auto
 1F,75A0,Song13_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4685,7 +4685,7 @@ bank,addr,name,conf,note,source
 1F,7A6A,Song2E_Pat7A6A,C,note pattern ($00 ends it),hand+auto
 1F,7A99,Song2E_Pat7A99,C,note pattern ($00 ends it),hand+auto
 1F,7AA2,Song2E_Pat7AA2,C,note pattern ($00 ends it),hand+auto
-1F,7AB1,Song1C_Hdr,C,header of song ids 1C 47,hand+auto
+1F,7AB1,Song1C_Hdr,C,"header of song ids 1C 47. Owner (review page, 2026-10-13, by ear): music 47: unused - classical music theme (mozart ?); id 47 shares this header with id 1C; 47 is only in the slide-show music list (#13).",fix
 1F,7ABC,Song1C_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7AC2,Song1C_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7AC8,Song1C_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4733,9 +4733,9 @@ bank,addr,name,conf,note,source
 1F,7F01,Song1F_Pat7F01,C,note pattern ($00 ends it),hand+auto
 1F,7F0B,Song1F_Pat7F0B,C,note pattern ($00 ends it),hand+auto
 1F,7F15,Song1F_Pat7F15,C,note pattern ($00 ends it),hand+auto
-1F,7F1F,Song48_Hdr,C,header of song id 48,hand+auto
-1F,7F2A,Song48_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
-1F,7F2C,Song48_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
+1F,7F1F,Song48_ErrorIncomplete_Hdr,C,"header of song id 48. Owner (review page, 2026-10-13, by ear): music 48: known - error message, incomplete; confirmed the earlier answer (error message, incomplete).",fix
+1F,7F2A,Song48_ErrorIncomplete_Trk2List,C,"pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop). Owner (review page, 2026-10-13, by ear): music 48: known - error message, incomplete.",fix
+1F,7F2C,Song48_ErrorIncomplete_Trk1List,C,"pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop). Owner (review page, 2026-10-13, by ear): music 48: known - error message, incomplete.",fix
 1F,7F30,Song29_TotakaTune_Pat7F30,C,note pattern ($00 ends it),hand+auto
 1F,7F3C,Song29_TotakaTune_Pat7F3C,C,note pattern ($00 ends it),hand+auto
 1F,7F48,Song29_TotakaTune_Pat7F48,C,note pattern ($00 ends it),hand+auto
@@ -4796,8 +4796,8 @@ bank,addr,name,conf,note,source
 21,5FD0,Sheet_MenusShootMenu_21_5FD0,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 90 tiles",assets
 21,6566,Gfx_21_6566_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 21,65C0,Gfx_21_65C0_SaveDialog_Substate0_Init,I,"far pointer loaded by SaveDialog_Substate0_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
-21,6AC7,Gfx_21_6AC7_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-21,6B91,Data_21_6B91,?,"no copy site, table or sheet covers these bytes",assets
+21,6AC7,Gfx_21_6AC7_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
+21,6B91,Gfx_21_6B91_Unref,C,"small unread block of 47 bytes (was Data_21_6B91). Owner (review page, 2026-10-13): graphic, by eye.",fix
 21,6BC0,Gfx_21_6BC0_Mode19_State00_CopyrightScreens,I,"far pointer loaded by Mode19_State00_CopyrightScreens (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1536 from the nearby ld bc",assets
 21,71C0,Gfx_21_71C0_WildFrame_PageSrcTbl,I,copied to VRAM/WRAM by WildFrame_PageSrcTbl (assets/catalog_jp.csv),assets
 21,77C0,Gfx_21_77C0_Print_DrawSelectedMarker,I,"copied to VRAM/WRAM by Print_DrawSelectedMarker, WildFramePicker_Substate0_Init (assets/catalog_jp.csv)",assets
@@ -4861,7 +4861,7 @@ bank,addr,name,conf,note,source
 23,5AA0,Data_23_5AA0,?,"no copy site, table or sheet covers these bytes",assets
 23,5AC0,Data_23_5AC0,?,"no copy site, table or sheet covers these bytes",assets
 23,5AE0,Data_23_5AE0,?,"no copy site, table or sheet covers these bytes",assets
-23,5CC0,Gfx_23_5CC0_LetterGlyphStrip,?,Latin letter glyph row (visual),assets
+23,5CC0,Map_23_5CC0_Unref,C,"map (tile indices). Owner (review page, 2026-10-13): map, by eye; tile-index rows, not glyphs (the old name guessed a Latin letter strip): 580 bytes, long runs of $0F, $16 and $F4 and descending runs $F3..$ED; shown only under forced state (36 frames) in the display-tracking runs.",fix
 23,5F1C,Data_23_5F1C,?,"no copy site, table or sheet covers these bytes",assets
 23,5F3C,Data_23_5F3C,?,"no copy site, table or sheet covers these bytes",assets
 23,5F5C,Data_23_5F5C,?,"no copy site, table or sheet covers these bytes",assets
@@ -4990,9 +4990,9 @@ bank,addr,name,conf,note,source
 25,71A0,Src_25_71A0_Tbl4B67_0,I,"target 0 of the {lo,hi,bank} table 06:4B67; extent not known: runs to the next pointer or asset",assets
 25,73A0,Map_25_73A0_Mode15_StepValue,I,copied to VRAM/WRAM by Mode15_StepValue (assets/catalog_jp.csv),assets
 25,75F4,Data_25_75F4,?,"no copy site, table or sheet covers these bytes",assets
-25,7614,Gfx_25_7614_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+25,7614,Map_25_7614_Unref,C,"map (tile indices). Owner (review page, 2026-10-13): map, by eye; tile-index rows of 32: $FF fill, $E0 $E0 borders and counters $00-$0F, $10-$1F ...; 460 bytes; never on screen in the display-tracking runs.",fix
 25,77F4,Data_25_77F4,?,"no copy site, table or sheet covers these bytes",assets
-25,7814,Gfx_25_7814_LetterGlyphStrip,?,narrow Latin letter glyph strip (visual),assets
+25,7814,Map_25_7814_Unref,C,"map (tile indices). Owner (review page, 2026-10-13): map, by eye; tile-index rows, not glyphs (the old name guessed a narrow Latin letter strip): 588 bytes, mostly $29 and $E9 with descending runs ($E7 $E6 ... $D5); never on screen in the display-tracking runs.",fix
 25,7A60,Map_25_7A60_Boot_EraseAllPrompt_Far,I,copied to VRAM/WRAM by Boot_EraseAllPrompt_Far (assets/catalog_jp.csv),assets
 25,7CA0,Map_25_7CA0_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
 25,7EE0,Src_25_7EE0_Tbl539D_40,I,"target 40 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets

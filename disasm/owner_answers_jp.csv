@@ -36,10 +36,10 @@ snd_music_28,music $28,Song 28,Who are you running from 1 / error message,sure,2
 snd_music_2A,music $2A,Song 2A,Jambo Nintendo !,sure,2026-10-13T11:38
 snd_music_2D,music $2D,Song 2D,Ball BGM,sure,2026-10-13T11:40
 snd_music_30,music $30,Song 30,Who are you running from 2 / error message,sure,2026-10-13T11:37
-snd_music_48,music $48,Song 48,Error message but incomplete,likely,2026-10-13T11:39
+snd_music_48,song $48,Song 48,"known: error message, incomplete",likely,2026-10-13T14:30
 snd_sfx1_14,channel-1 effect $14,Effect ch1 (pulse) 14,Hot spot related,sure,2026-10-13T11:41
 snd_sfx1_15,channel-1 effect $15,Effect ch1 (pulse) 15,Hot spot related,sure,2026-10-13T11:41
-snd_sfx1_24,channel-1 effect $24,Effect ch1 (pulse) 24,Sound from Space Fever 2,,2026-10-13T11:42
+snd_sfx1_24,channel-1 effect $24,Effect ch1 (pulse) 24,used: Space fever probably,,2026-10-13T14:30
 snd_sfx1_28,channel-1 effect $28,Effect ch1 (pulse) 28,Shutter sound,sure,2026-10-13T11:38
 ast_10_7F00,10:7F00,Gfx_10_7F00_Unref,graphic (by eye),,2026-10-13T14:23
 ast_15_5200,15:5200,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,graphic (by eye),,2026-10-13T14:23
@@ -59,3 +59,36 @@ tcrf_Photo_Option_B_CANCEL,TCRF Photo option: B CANCEL,1A:7D80-7DDF (exact),"rig
 tcrf_Photo_Option_Icon,TCRF Photo option: icon,"1A:7C90 / 7CA0 (candidate, on screen in normal play)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
 tcrf_Run_Run_Run_Star,TCRF RUN! RUN! RUN!: star,1B:618A (candidate),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
 tcrf_SOUND_Print_Modulation_Icon,TCRF SOUND print modulation icon,10:7A80 + 10:7B80 (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
+ast_10_74A3,10:74A3,Gfx_10_74A3_Unref,graphic (by eye),,2026-10-13T14:26
+ast_10_78B8,10:78B8,Data_10_78B8,graphic (by eye),,2026-10-13T14:26
+ast_10_78E8,10:78E8,Data_10_78E8,unsure,,2026-10-13T14:27
+ast_10_7A08,10:7A08,Data_10_7A08,unsure,,2026-10-13T14:27
+ast_10_7BC2,10:7BC2,Data_10_7BC2,unsure,,2026-10-13T14:27
+ast_10_7BE4,10:7BE4,Data_10_7BE4,unsure,,2026-10-13T14:27
+ast_17_5500,17:5500,Gfx_17_5500_ShootOptionLabelGlyphs,graphic (by eye),,2026-10-13T14:26
+ast_1A_5160,1A:5160,Data_1A_5160,unsure,,2026-10-13T14:27
+ast_1A_7E00,1A:7E00,Gfx_1A_7E00_Unref,graphic (by eye),,2026-10-13T14:24
+ast_1C_5620,1C:5620,Data_1C_5620,unsure,,2026-10-13T14:27
+ast_1C_5623,1C:5623,Data_1C_5623,unsure,,2026-10-13T14:27
+ast_1C_564E,1C:564E,Data_1C_564E,unsure,,2026-10-13T14:27
+ast_1C_5720,1C:5720,Data_1C_5720,unsure,,2026-10-13T14:27
+ast_1C_5BC0,1C:5BC0,Data_1C_5BC0,unsure,,2026-10-13T14:27
+ast_1C_5C20,1C:5C20,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,graphic (by eye),,2026-10-13T14:24
+ast_1D_7B41,1D:7B41,Gfx_1D_7B41_Tbl539D_Aux,graphic (by eye) - looks like an ennemy in Space fever,,2026-10-13T14:24
+ast_1E_7D00,1E:7D00,Gfx_1E_7D00_Unref,graphic (by eye),,2026-10-13T14:24
+ast_21_6AC7,21:6AC7,Gfx_21_6AC7_Unref,graphic (by eye),,2026-10-13T14:24
+ast_21_6B91,21:6B91,Data_21_6B91,graphic (by eye),,2026-10-13T14:28
+ast_23_5CC0,23:5CC0,Gfx_23_5CC0_LetterGlyphStrip,"map (tile indices, by eye)",,2026-10-13T14:26
+ast_25_7614,25:7614,Gfx_25_7614_Unref,"map (tile indices, by eye)",,2026-10-13T14:25
+ast_25_7814,25:7814,Gfx_25_7814_LetterGlyphStrip,"map (tile indices, by eye)",,2026-10-13T14:25
+snd_music_08,song $08,heard on the review page,used: Printer waiting jingle during multiple print selection,,2026-10-13T14:32
+snd_music_27,song $27,heard on the review page,used: jingle during waiting time when the game boy printer is busy printing,,2026-10-13T14:33
+snd_music_32,song $32,heard on the review page,used: Space fever main theme during gameplay,,2026-10-13T14:33
+snd_music_44,song $44,heard on the review page,"used: credits, short",,2026-10-13T14:34
+snd_music_47,song $47,heard on the review page,unused: classical music theme (mozart ?),,2026-10-13T14:31
+snd_sfx1_26,channel-1 effect $26,heard on the review page,used: boss death in space fever,,2026-10-13T14:34
+snd_sfx1_2F,channel-1 effect $2F,heard on the review page,unsure,,2026-10-13T14:31
+snd_sfx1_3D,channel-1 effect $3D,heard on the review page,used: death in Ball or Space fever,,2026-10-13T14:32
+snd_sfx1_3E,channel-1 effect $3E,heard on the review page,used: death in Ball or space fever,,2026-10-13T14:32
+snd_sfx3_04,channel-3 effect $04,heard on the review page,unsure,,2026-10-13T14:30
+snd_sfx4_05,channel-4 effect $05,heard on the review page,used: player death in space fever ?,,2026-10-13T14:35

@@ -10,7 +10,7 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 10,7420,128,content-classified span,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,mixed,,2bpp tile data placed next to DjTitle_LoadNumeralTile; function = same family as its neighbour
 10,74A3,157,content-classified span,Gfx_10_74A3_Unref,mixed,,2bpp tile data with no neighbouring consumer
 10,7602,678,visually identified range,Gfx_10_7602_DjLetterGlyphStrip,mixed,,Latin letter / digit glyph strip
-10,78B8,24,unknown data (no reader found),Data_10_78B8,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+10,78B8,24,content-classified span,Gfx_10_78B8_Unref,mixed,,2bpp tile data with no neighbouring consumer
 10,78E8,8,unknown data (no reader found),Data_10_78E8,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 10,7908,238,content-classified span,Gfx_10_7908_Unref,mixed,,2bpp tile data with no neighbouring consumer
 10,7A08,8,unknown data (no reader found),Data_10_7A08,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
@@ -71,7 +71,7 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 21,5C31,927,content-classified span,Gfx_21_5C31_MenusShootMenu_Aux,mixed,,2bpp tile data placed next to MenusShootMenu; function = same family as its neighbour
 21,6566,69,content-classified span,Gfx_21_6566_Unref,mixed,,2bpp tile data with no neighbouring consumer
 21,6AC7,177,content-classified span,Gfx_21_6AC7_Unref,mixed,,2bpp tile data with no neighbouring consumer
-21,6B91,47,unknown data (no reader found),Data_21_6B91,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+21,6B91,47,content-classified span,Gfx_21_6B91_Unref,two values,,2bpp tile data with no neighbouring consumer
 21,7BC0,63,content-classified span,Gfx_21_7BC0_BorderPicker_AnimateIcon_Aux,mixed,,2bpp tile data placed next to BorderPicker_AnimateIcon; function = same family as its neighbour
 22,7F40,10,unknown data (no reader found),Data_22_7F40,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 22,7F61,5,unknown data (no reader found),Data_22_7F61,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
@@ -97,7 +97,7 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 23,5AA0,2,unknown data (no reader found),Data_23_5AA0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5AC0,2,unknown data (no reader found),Data_23_5AC0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5AE0,2,unknown data (no reader found),Data_23_5AE0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-23,5CC0,580,visually identified range,Gfx_23_5CC0_LetterGlyphStrip,mixed,,Latin letter glyph row
+23,5CC0,580,content-classified span,Map_23_5CC0_Unref,mixed,,tile map data with no neighbouring consumer
 23,5F1C,8,unknown data (no reader found),Data_23_5F1C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5F3C,8,unknown data (no reader found),Data_23_5F3C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5F5C,8,unknown data (no reader found),Data_23_5F5C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
@@ -119,9 +119,9 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 25,5834,12,unknown data (no reader found),Data_25_5834,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 25,7160,64,content-classified span,Map_25_7160_Mode05_State00_Init_Aux,mixed,,tile map data placed next to Mode05_State00_Init; function = same family as its neighbour
 25,75F4,12,unknown data (no reader found),Data_25_75F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-25,7614,460,content-classified span,Gfx_25_7614_Unref,mixed,,2bpp tile data with no neighbouring consumer
+25,7614,460,content-classified span,Map_25_7614_Unref,mixed,,tile map data with no neighbouring consumer
 25,77F4,12,unknown data (no reader found),Data_25_77F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-25,7814,588,visually identified range,Gfx_25_7814_LetterGlyphStrip,mixed,,narrow Latin letter glyph strip
+25,7814,588,content-classified span,Map_25_7814_Unref,mixed,,tile map data with no neighbouring consumer
 26,7080,576,content-classified span,Map_26_7080_Mode16_State08_StartShoot_Aux,mixed,,tile map data placed next to Mode16_State08_StartShoot; function = same family as its neighbour
 26,7BC0,576,content-classified span,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,mixed,,tile map data placed next to CreditsNishimuraDanceMap4; function = same family as its neighbour
 26,7E20,352,content-classified span,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,mixed,,2bpp tile data placed next to Album_LoadNumeralTileB; function = same family as its neighbour
