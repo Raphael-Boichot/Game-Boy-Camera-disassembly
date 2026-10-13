@@ -1,0 +1,325 @@
+<title>Unused Assets Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky bar (name, tabs, progress) over one long review list. Each card shows the bytes drawn as tiles (flip, width, invert, hex) and a verdict box. Same look as the Worklist page. */
+:root{
+  --bg:#eff0ea; --surface:#f9faf5; --fg:#1c231f; --muted:#5b665d; --line:#d6d9cd; --chip:#e3e6d9;
+  --accent:#2d6a64; --accent-fg:#ffffff; --accent-soft:#d9e8e3; --warn:#9a5b14; --warn-soft:#f1e3cc; --good:#2f6f37; --good-soft:#d7e8d4; --bad:#9b3a2e; --bad-soft:#f0d9d4;
+  --plate:#f4f4ee;
+  --font-display:"Archivo","Helvetica Neue",Arial,sans-serif; --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif; --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131713; --surface:#1b211c; --fg:#e4e9df; --muted:#9aa69b; --line:#2b332c; --chip:#252c26;
+  --accent:#78c6bb; --accent-fg:#0c1411; --accent-soft:#1f3532; --warn:#e2a964; --warn-soft:#3a2d18; --good:#8fd08a; --good-soft:#20341f; --bad:#e58f82; --bad-soft:#3d221d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#131713; --surface:#1b211c; --fg:#e4e9df; --muted:#9aa69b; --line:#2b332c; --chip:#252c26;
+  --accent:#78c6bb; --accent-fg:#0c1411; --accent-soft:#1f3532; --warn:#e2a964; --warn-soft:#3a2d18; --good:#8fd08a; --good-soft:#20341f; --bad:#e58f82; --bad-soft:#3d221d; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--font-body);margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-block:10px}
+.brand{font:700 18px/1.2 var(--font-display);margin:0;margin-right:auto}
+.brand small{display:block;font:400 12px/1.3 var(--font-mono);color:var(--muted);margin-top:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:4px}
+.tab{background:none;border:1px solid transparent;border-radius:6px;padding:6px 11px;cursor:pointer;color:var(--muted);font-weight:500}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-fg)}
+.tab:not([aria-selected="true"]):hover{border-color:var(--line);color:var(--fg)}
+.tab b{font:500 12px var(--font-mono);opacity:.85;margin-left:6px}
+.prog{font:500 12px var(--font-mono);color:var(--muted);display:flex;gap:10px;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--muted);display:inline-block}
+.dot.ok{background:var(--good)}
+main{padding-block:20px 64px;display:flex;flex-direction:column;gap:26px}
+.intro{max-width:72ch;display:flex;flex-direction:column;gap:8px}
+.intro h2{font:700 24px/1.2 var(--font-display);margin:0;text-wrap:balance}
+.intro p{margin:0;color:var(--muted)}
+h3{font:700 17px/1.3 var(--font-display);margin:0;text-wrap:balance}
+.sec{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sec>header{display:flex;flex-direction:column;gap:2px;max-width:78ch}
+.sec>header p{margin:0;color:var(--muted);font-size:14px}
+.count{font:500 12px var(--font-mono);color:var(--muted);margin-left:8px}
+.tools{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.field{display:flex;flex-direction:column;gap:3px;min-width:0}
+.field>span{font:500 11px var(--font-mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button,.ctl button{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 10px;cursor:pointer;font-weight:500}
+.seg button[aria-pressed="true"],.ctl button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:12px;align-items:start}
+.cards.sm{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:8px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card.done{border-color:var(--accent)}
+.head{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.head b{font:500 14px var(--font-mono)}
+.head .ttl{font:600 15px var(--font-body)}
+.nm{font:400 12px var(--font-mono);color:var(--muted);overflow-wrap:anywhere}
+.mono{font-family:var(--font-mono);font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.pill{display:inline-block;font:500 11px var(--font-mono);padding:1px 7px;border-radius:99px;background:var(--chip);color:var(--muted);white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.acc{background:var(--accent-soft);color:var(--accent)}
+.view{background:var(--plate);border:1px solid var(--line);border-radius:6px;padding:8px;overflow:auto;max-height:520px}
+.view canvas{display:block;image-rendering:pixelated;max-width:100%;height:auto}
+.hex{margin:0;font:400 11px/1.45 var(--font-mono);white-space:pre;color:#1c231f}
+.ctl{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.ctl select{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:4px 6px}
+.ctl .sp{width:6px}
+.clue{font-size:13.5px;margin:0;overflow-wrap:anywhere}
+.clue.m{color:var(--muted)}
+.ans{display:flex;flex-direction:column;gap:6px}
+.ans select,.ans input{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0;width:100%}
+.ans input::placeholder{color:var(--muted)}
+.pair{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-start}
+.pair figure{margin:0;display:flex;flex-direction:column;gap:4px;min-width:0;max-width:100%}
+.pair figcaption{font:500 11px var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ref{display:block;image-rendering:pixelated;background:var(--plate);border:1px solid var(--line);border-radius:4px;max-width:100%;height:auto}
+.tcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:12px;align-items:start}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(220px,300px);gap:12px 18px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;align-items:start}
+@media (max-width:760px){.row{grid-template-columns:auto minmax(0,1fr)}.row .ans{grid-column:1/-1}}
+.row.done{border-color:var(--accent)}
+.list{display:flex;flex-direction:column;gap:8px}
+.play{width:44px;height:44px;border-radius:50%;border:1px solid var(--accent);background:var(--accent-soft);cursor:pointer;display:grid;place-items:center;position:relative}
+.play::before{content:"";border-left:13px solid var(--accent);border-block:8px solid transparent;margin-left:4px}
+.play.on::before{border:none;width:12px;height:14px;margin:0;background:linear-gradient(90deg,var(--accent) 0 38%,transparent 38% 62%,var(--accent) 62%)}
+.sid{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sid span{font:500 11px var(--font-mono);color:var(--muted);text-align:center;max-width:64px}
+.info{display:flex;flex-direction:column;gap:4px;min-width:0}
+details.fold>summary{cursor:pointer;font:700 17px/1.3 var(--font-display);list-style:none;display:flex;align-items:baseline;gap:6px}
+details.fold>summary::before{content:"+";font:500 15px var(--font-mono);width:16px;color:var(--accent)}
+details.fold[open]>summary::before{content:"\2212"}
+details.fold>.cards,details.fold>p{margin-top:12px}
+.hint{font-size:13px;color:var(--muted);max-width:78ch;margin:0}
+.export textarea{width:100%;min-height:140px;font:12px/1.4 var(--font-mono);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px;color:var(--fg)}
+.btn{background:var(--accent);color:var(--accent-fg);border:0;border-radius:6px;padding:7px 13px;cursor:pointer;font-weight:500}
+footer{color:var(--muted);font-size:13px;max-width:78ch}
+@media (prefers-reduced-motion:no-preference){.card,.row{transition:border-color .2s}}
+</style>
+
+<div class="bar"><div class="wrap">
+  <h1 class="brand">Unused Assets Review<small>Japan Rev A · md5 fdcfe686…</small></h1>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="prog" aria-live="polite"><span id="p-done">0 answered</span><span><i class="dot" id="p-dot"></i> <span id="p-where">connecting</span></span></div>
+</div></div>
+
+<main class="wrap">
+  <div class="intro">
+    <h2>What looks unused, drawn so you can tell</h2>
+    <p>Every item is drawn straight from the ROM bytes as 2bpp tiles. Pick a verdict and type what it is. Answers save as you type and I can read them back. The width, flip and invert buttons change only the drawing, so you can line tiles up, undo a flip or switch to hex.</p>
+  </div>
+  <div class="tools">
+    <div class="field"><span>Zoom</span><div class="seg" id="zoom" role="group" aria-label="Zoom"></div></div>
+  </div>
+  <div id="panels"></div>
+  <details class="fold export sec" id="export">
+    <summary>Export answers</summary>
+    <p class="hint">One line per answered item. Paste it into the chat if you prefer that to the saved copy.</p>
+    <textarea id="exp" readonly aria-label="Exported answers"></textarea>
+    <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="copy">Copy</button><span class="hint" id="copied" style="align-self:center"></span></div>
+  </details>
+  <footer>Evidence comes from replaying 37,370 menu states plus the stamp-menu walks in a Game Boy core that follows each ROM byte to the screen. "Never on screen" means no replay showed it; the core is not a real console, so this is strong but not proof. Sound clips are the game's own sound engine run in an emulator, not recordings of a console.</footer>
+</main>
+
+<script type="application/json" id="data">/*DATA*/</script>
+<script>
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const PAL=[[244,244,238],[168,168,160],[84,84,80],[22,22,20]];
+const VERDICTS={
+  gfx:[['','Verdict'],['graphic','Graphic'],['font','Font or text strip'],['map','Tile map or table'],['sound','Sound or music data'],['code','Code or other data'],['pad','Padding or leftovers'],['unsure','Not sure']],
+  tcrf:[['','Is the match right?'],['right','Match is right'],['partly','Partly right'],['wrong','Match is wrong'],['unsure','Cannot tell']],
+  snd:[['','Verdict'],['used','Used by the game'],['unused','Unused'],['known','A jingle I know'],['unsure','Not sure']]
+};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $=(s,r=document)=>r.querySelector(s);
+const bytes={}, st={}; let zoom=3;
+function dec(k,b64){const s=atob(b64),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);bytes[k]=u}
+DATA.cards.forEach(c=>dec(c.k,c.d)); DATA.tcrf.forEach(c=>dec(c.k,c.d));
+
+/* drawing */
+function tilesCanvas(d,off,len,cols,fh,fv,inv){
+  const nt=len>>4, rows=Math.max(1,Math.ceil(nt/cols)), W=Math.max(1,Math.min(nt,cols))*8, Hh=rows*8;
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=Hh; const ctx=cv.getContext('2d'); const im=ctx.createImageData(W,Hh), p=im.data;
+  for(let i=0;i<W*Hh;i++){p[i*4]=PAL[0][0];p[i*4+1]=PAL[0][1];p[i*4+2]=PAL[0][2];p[i*4+3]=255}
+  for(let t=0;t<nt;t++){const tx=(t%cols)*8, ty=Math.floor(t/cols)*8;
+    for(let y=0;y<8;y++){const b0=d[off+t*16+y*2], b1=d[off+t*16+y*2+1];
+      for(let x=0;x<8;x++){let c=(((b1>>(7-x))&1)<<1)|((b0>>(7-x))&1); if(inv)c=3-c;
+        const px=tx+(fh?7-x:x), py=ty+(fv?7-y:y), o=(py*W+px)*4, col=PAL[c]; p[o]=col[0];p[o+1]=col[1];p[o+2]=col[2];}}}
+  ctx.putImageData(im,0,0); return cv;
+}
+function greyCanvas(d,off,len,cols,inv){
+  const rows=Math.ceil(len/cols), cv=document.createElement('canvas'); cv.width=cols; cv.height=rows; const ctx=cv.getContext('2d'), im=ctx.createImageData(cols,rows), p=im.data;
+  for(let i=0;i<cols*rows;i++){const v=i<len?d[off+i]:255, g=inv?v:255-v; p[i*4]=g;p[i*4+1]=g;p[i*4+2]=g;p[i*4+3]=255}
+  ctx.putImageData(im,0,0); return cv;
+}
+function hexPre(d,off,len,base){
+  let s=''; for(let i=0;i<len;i+=16){let h='';for(let j=0;j<16&&i+j<len;j++)h+=d[off+i+j].toString(16).toUpperCase().padStart(2,'0')+(j==7?'  ':' ');
+    s+=(base+i).toString(16).toUpperCase().padStart(4,'0')+'  '+h+'\n'}
+  const pre=document.createElement('pre'); pre.className='hex'; pre.textContent=s; return pre;
+}
+function scaled(cv,mult){cv.style.width=(cv.width*zoom*mult)+'px'; return cv}
+function paintCard(el){
+  const k=el.dataset.k, s=st[k], c=el._c, v=$('[data-view]',el); v.textContent='';
+  if(s.mode==='hex'){v.appendChild(hexPre(bytes[k],0,c.n,parseInt(c.addr,16)));return}
+  if(s.mode==='grey'){v.appendChild(scaled(greyCanvas(bytes[k],0,c.n,s.cols,s.inv),2));return}
+  v.appendChild(scaled(tilesCanvas(bytes[k],0,c.n,s.cols,s.fh,s.fv,s.inv),1));
+}
+function paintTcrf(el){
+  const k=el.dataset.k, s=st[k], c=el._c, d=bytes[k], v=$('[data-view]',el);
+  v.querySelectorAll('canvas').forEach(n=>n.remove());
+  if(!c.blocks.length) return;
+  const cvs=c.blocks.map(b=>tilesCanvas(d,b.o,b.l,b.cols,s.fh,s.fv,s.inv));
+  const gap=8, W=cvs.reduce((a,x)=>a+x.width,0)+gap*(cvs.length-1), Hh=Math.max(...cvs.map(x=>x.height));
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=Hh; const ctx=cv.getContext('2d'); ctx.fillStyle='rgb(244,244,238)'; ctx.fillRect(0,0,W,Hh);
+  let x=0; cvs.forEach(q=>{ctx.drawImage(q,x,0); x+=q.width+gap});
+  v.appendChild(scaled(cv,1));
+  const img=$('img.ref',el); if(img) img.style.width=(c.w*zoom/c.sc)+'px';
+}
+function paintAll(){document.querySelectorAll('.card[data-k]').forEach(el=>{ if(el._tc) paintTcrf(el); else if(el._c) paintCard(el)})}
+
+/* card builders */
+function ansHTML(k,kind){
+  return `<div class="ans"><select id="v-${k}" data-k="${k}" aria-label="Verdict">${VERDICTS[kind].map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('')}</select><input id="n-${k}" data-k="${k}" type="text" placeholder="What is it? Where does it show?" autocomplete="off"></div>`;
+}
+const tierPill={never:['never on screen','bad'],forced:['forced only','warn'],tcrf:['TCRF label','good'],scrap:['leftover',''],shown:['on screen',''],other:['read in play',''],maps:['never on screen','bad'],maps_shown:['on screen',''],ref:['reference','']};
+function cardEl(c){
+  const el=document.createElement('article'); el.className='card'; el.dataset.k=c.k; el._c=c; const t=tierPill[c.sec]||['',''];
+  st[c.k]={mode:c.mode,cols:c.cols,fh:false,fv:false,inv:false};
+  const colsOpts=[1,2,4,6,8,12,16,20,32].map(n=>`<option value="${n}"${n===c.cols?' selected':''}>${n}</option>`).join('');
+  el.innerHTML=`<div class="head"><b>${c.bank}:${c.addr}</b><span class="mono">${c.n} B</span>${t[0]?`<span class="pill ${t[1]}">${t[0]}</span>`:''}</div>
+  <div class="nm">${esc(c.name)}</div><div class="view" data-view></div>
+  <div class="ctl"><button data-a="mode" data-m="tiles" aria-pressed="${c.mode==='tiles'}">Tiles</button><button data-a="mode" data-m="grey" aria-pressed="${c.mode==='grey'}">Map</button><button data-a="mode" data-m="hex" aria-pressed="${c.mode==='hex'}">Hex</button><span class="sp"></span>
+  <label class="mono">wide <select data-a="cols" aria-label="Tiles per row">${colsOpts}</select></label><button data-a="fh" aria-pressed="false">Flip H</button><button data-a="fv" aria-pressed="false">Flip V</button><button data-a="inv" aria-pressed="false">Invert</button></div>
+  <p class="clue">${esc(c.ev)}</p>${c.guess?`<p class="clue m">Earlier guess: ${esc(c.guess)}</p>`:''}${c.tcrf?`<p class="clue m">TCRF ids that overlap: ${esc(c.tcrf)}</p>`:''}
+  ${c.sec==='ref'?'':ansHTML(c.k,'gfx')}`;
+  return el;
+}
+const statusPill={exact:['exact match','good'],partial:['partial match','warn'],span:['span only','warn'],candidate:['candidate','warn'],none:['not located','bad'],intl:['international ROM only','']};
+function tcrfEl(c){
+  const el=document.createElement('article'); el.className='card'; el.dataset.k=c.k; el._c=c; el._tc=true; st[c.k]={fh:false,fv:false,inv:false};
+  const t=statusPill[c.status];
+  el.innerHTML=`<div class="head"><span class="ttl">${esc(c.title)}</span><span class="pill ${t[1]}">${t[0]}</span></div>
+  <div class="pair"><figure><figcaption>TCRF image</figcaption><img class="ref" alt="TCRF image: ${esc(c.title)}" src="${c.img}"></figure>
+  ${c.blocks.length?`<figure data-view><figcaption>ROM bytes</figcaption></figure>`:'<figure data-view><figcaption>ROM bytes: none</figcaption></figure>'}</div>
+  ${c.loc?`<div class="mono">${esc(c.loc)}</div>`:''}<p class="clue">${esc(c.note)}</p>${c.ev?`<p class="clue m">${esc(c.ev)}</p>`:''}
+  ${c.blocks.length?`<div class="ctl"><button data-a="fh" aria-pressed="false">Flip H</button><button data-a="fv" aria-pressed="false">Flip V</button><button data-a="inv" aria-pressed="false">Invert</button></div>`:''}
+  ${ansHTML(c.k,'tcrf')}`;
+  return el;
+}
+function sndRow(s){
+  const el=document.createElement('div'); el.className='row'; el.dataset.k=s.k; el.dataset.snd='1';
+  const callers=s.callers?`${s.callers} caller${s.callers>1?'s':''} in the code`:'no caller in the code';
+  el.innerHTML=`<div class="sid"><button class="play" aria-label="Play ${s.ch} ${s.id}" data-file="${s.file}"></button><span>${s.ch} ${s.id}</span></div>
+  <div class="info"><div class="head"><b>${esc(s.kind)} ${s.id}</b><span class="pill">${esc(s.tier.slice(0,1))}</span>${s.tag?`<span class="pill acc">${esc(s.tag)}</span>`:''}</div>
+  <p class="clue">${esc(s.tier.slice(2))}.</p><p class="clue m">Handler ${esc(s.handler)} · ${callers}${s.lists?' · '+esc(s.lists):''}${s.same?' · same handler as '+esc(s.same):''}</p></div>
+  ${ansHTML(s.k,'snd')}`;
+  return el;
+}
+let curAudio=null;
+function playTog(btn){
+  if(curAudio&&curAudio.btn===btn){curAudio.a.pause();btn.classList.remove('on');curAudio=null;return}
+  if(curAudio){curAudio.a.pause();curAudio.btn.classList.remove('on')}
+  const a=new Audio(btn.dataset.file); btn.classList.add('on'); curAudio={a,btn};
+  a.onended=()=>{btn.classList.remove('on');if(curAudio&&curAudio.a===a)curAudio=null};
+  a.play().catch(()=>{btn.classList.remove('on');curAudio=null});
+}
+
+/* layout */
+const bySec={}; DATA.cards.forEach(c=>(bySec[c.sec]=bySec[c.sec]||[]).push(c));
+const N=s=>(bySec[s]||[]).length;
+function sec(title,sub,cards,small,fold){
+  const s=document.createElement(fold?'details':'section'); s.className=fold?'fold sec':'sec';
+  const h=document.createElement(fold?'summary':'header');
+  h.innerHTML=fold?`${esc(title)}<span class="count">${cards.length}</span>`:`<h3>${esc(title)}<span class="count">${cards.length}</span></h3><p>${esc(sub)}</p>`;
+  s.appendChild(h); if(fold){const p=document.createElement('p');p.className='hint';p.textContent=sub;s.appendChild(p)}
+  const g=document.createElement('div'); g.className='cards'+(small?' sm':''); cards.forEach(c=>g.appendChild(cardEl(c))); s.appendChild(g); return s;
+}
+const TABS=[
+ ['tcrf','TCRF list',DATA.tcrf.length,()=>{const w=document.createElement('section');w.className='sec';
+   w.innerHTML=`<header><h3>The TCRF images against the ROM<span class="count">${DATA.tcrf.length}</span></h3><p>Left: the picture from your zip, shown at the same size as the ROM drawing. Right: the ROM bytes where I matched it. Say whether the match is right. Status "exact" means every tile is pixel-equal; the others need your eye.</p></header>`;
+   const g=document.createElement('div');g.className='tcards';DATA.tcrf.forEach(c=>g.appendChild(tcrfEl(c)));w.appendChild(g);return [w]}],
+ ['gfx','Graphics',N('tcrf')+N('never')+N('forced')+N('scrap')+N('shown'),()=>[
+   sec('Labelled from the TCRF list','Spans named Unused_TCRF_* in the symbol file. Same bytes as the first tab, one card per span.',bySec.tcrf||[],false),
+   sec('Never on screen, never read in normal play','No replay showed these and only forced runs read them. These are the best candidates for really unused graphics.',bySec.never||[],false),
+   sec('On screen only when state is forced','Shown only by runs that poke state variables, so probably not reachable on a real camera.',bySec.forced||[],false),
+   sec('Small leftovers','Short blocks between assets that nothing shows and normal play never reads. Mostly padding or tile slack.',bySec.scrap||[],true),
+   sec('On screen in normal play (for reference)','These were listed as open in the symbol file but the replays show them, so they are used. Open to compare how used graphics look.',bySec.shown||[],true,true)]],
+ ['tables','Tables and maps',N('maps')+N('maps_shown')+N('other'),()=>[
+   sec('Tile maps never on screen','Bytes that look like a background map (one byte per tile cell). Map view draws each byte as a grey cell.',bySec.maps||[],false),
+   sec('Other open data blocks, read in play','Small blocks the game reads but the symbol file cannot name. Hex view first; try Tiles or Map if it looks like a picture or a table.',bySec.other||[],true),
+   sec('Tile maps on screen (for reference)','Maps the replays show on screen.',bySec.maps_shown||[],false,true)]],
+ ['snd','Sounds',DATA.sounds.length,()=>{const w=document.createElement('section');w.className='sec';
+   w.innerHTML=`<header><h3>Sounds the replays never asked for in normal play<span class="count">${DATA.sounds.length}</span></h3><p>A = no caller, no list, never requested. B = in a picker list, never chosen. C = same data as a used sound. D = has a caller, reached only when state is forced. Clips come from the game's sound engine in an emulator.</p></header>`;
+   const l=document.createElement('div');l.className='list';DATA.sounds.forEach(s=>l.appendChild(sndRow(s)));w.appendChild(l);return [w]}],
+ ['ref','Reference',N('ref'),()=>{const w=document.createElement('section');w.className='sec';
+   w.innerHTML=`<header><h3>Sound data drawn as tiles<span class="count">${N('ref')}</span></h3><p>This is what bytes of song data look like when drawn as graphics: no outlines, no shapes, repeating patterns. If an item in the other tabs looks like this, it is probably sound data that landed in the list by mistake.</p></header>`;
+   const g=document.createElement('div');g.className='cards';(bySec.ref||[]).forEach(c=>g.appendChild(cardEl(c)));w.appendChild(g);return [w]}]
+];
+const panels=$('#panels'), tabs=$('#tabs'); const built={};
+TABS.forEach(t=>{
+  const b=document.createElement('button'); b.className='tab'; b.setAttribute('role','tab'); b.id='tab-'+t[0]; b.setAttribute('aria-selected','false'); b.setAttribute('aria-controls','p-'+t[0]); b.innerHTML=`${t[1]}<b>${t[2]}</b>`; b.onclick=()=>show(t[0]); tabs.appendChild(b);
+  const p=document.createElement('div'); p.id='p-'+t[0]; p.setAttribute('role','tabpanel'); p.hidden=true; p.style.display='flex'; p.style.flexDirection='column'; p.style.gap='26px'; panels.appendChild(p);
+});
+function show(id){
+  TABS.forEach(t=>{const on=t[0]===id; $('#tab-'+t[0]).setAttribute('aria-selected',on); $('#p-'+t[0]).hidden=!on});
+  if(!built[id]){built[id]=1; const p=$('#p-'+id); TABS.find(t=>t[0]===id)[3]().forEach(n=>p.appendChild(n)); paintAll(); wire(p); fillAll();}
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+}
+function wire(root){
+  root.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    if(b.classList.contains('play')){playTog(b);return}
+    const a=b.dataset.a; if(!a) return; const el=b.closest('.card'); if(!el) return; const s=st[el.dataset.k];
+    if(a==='mode'){s.mode=b.dataset.m; el.querySelectorAll('[data-a=mode]').forEach(x=>x.setAttribute('aria-pressed',x===b))}
+    else {s[a]=!s[a]; b.setAttribute('aria-pressed',s[a])}
+    if(el._tc) paintTcrf(el); else paintCard(el);
+  });
+  root.addEventListener('change',e=>{
+    const t=e.target;
+    if(t.dataset.a==='cols'){const el=t.closest('.card'); st[el.dataset.k].cols=+t.value; if(st[el.dataset.k].mode==='hex') st[el.dataset.k].mode='tiles'; el.querySelectorAll('[data-a=mode]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.m===st[el.dataset.k].mode)); paintCard(el)}
+    else if(t.matches('.ans select')) changed(t.dataset.k);
+  });
+  root.addEventListener('input',e=>{if(e.target.matches('.ans input')) changed(e.target.dataset.k)});
+}
+$('#zoom').innerHTML=[2,3,4,6].map(z=>`<button data-z="${z}" aria-pressed="${z===zoom}">${z}x</button>`).join('');
+$('#zoom').onclick=e=>{const b=e.target.closest('button');if(!b)return;zoom=+b.dataset.z;$('#zoom').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));paintAll()};
+
+/* answers: db when available, otherwise this browser */
+const ans={}; let col=null, where='this browser only'; const timers={}, chain={};
+function titleOf(k){const c=DATA.cards.find(x=>x.k===k); if(c) return c.bank+':'+c.addr+' '+c.name; const t=DATA.tcrf.find(x=>x.k===k); if(t) return 'TCRF '+t.title; const s=DATA.sounds.find(x=>x.k===k); return s?s.ch+' '+s.id:k}
+function fill(k){
+  const a=ans[k]||{}, v=document.getElementById('v-'+k), n=document.getElementById('n-'+k); if(!v) return;
+  if(document.activeElement!==v) v.value=a.verdict||''; if(document.activeElement!==n) n.value=a.note||'';
+  const box=v.closest('.card,.row'); if(box) box.classList.toggle('done',!!(a.verdict||a.note));
+}
+function fillAll(){Object.keys(ans).forEach(fill)}
+function prog(){
+  const n=Object.values(ans).filter(a=>a&&(a.verdict||a.note)).length; $('#p-done').textContent=n+' answered'; $('#p-dot').classList.toggle('ok',!!col); $('#p-where').textContent=where;
+  const lines=Object.keys(ans).filter(k=>ans[k]&&(ans[k].verdict||ans[k].note)).sort().map(k=>[k,titleOf(k),ans[k].verdict||'',(ans[k].note||'').replace(/\s+/g,' ')].join(' | '));
+  $('#exp').value=lines.join('\n');
+}
+function changed(k){
+  const v=document.getElementById('v-'+k).value, n=document.getElementById('n-'+k).value;
+  ans[k]={verdict:v,note:n}; const box=document.getElementById('v-'+k).closest('.card,.row'); if(box) box.classList.toggle('done',!!(v||n)); prog();
+  clearTimeout(timers[k]); timers[k]=setTimeout(()=>save(k),600);
+}
+function save(k){
+  const a=ans[k]; const body={verdict:a.verdict||'',note:a.note||'',item:titleOf(k),time:new Date().toISOString()};
+  if(!col){try{localStorage.setItem('ua_'+k,JSON.stringify(body))}catch(e){} return}
+  chain[k]=(chain[k]||Promise.resolve()).then(()=>(body.verdict||body.note)?col.doc(k).set(body):col.doc(k).delete()).catch(()=>{where='save failed, kept here'; prog()});
+}
+(async()=>{
+  let db=null; try{db=await claude.use('db')}catch(e){}
+  if(db){
+    col=db.collection('answers'); where='saved';
+    col.onSnapshot(s=>{s.docs.forEach(d=>{const x=d.data(); if(x&&!timers[d.id]) {ans[d.id]={verdict:x.verdict||'',note:x.note||''}; fill(d.id)}}); prog()},()=>{col=null;where='this browser only';prog()});
+  } else {
+    try{for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i); if(key.startsWith('ua_')){const x=JSON.parse(localStorage.getItem(key)); ans[key.slice(3)]={verdict:x.verdict||'',note:x.note||''}}}}catch(e){}
+  }
+  prog(); fillAll();
+})();
+$('#copy').onclick=async()=>{const t=$('#exp'); try{await navigator.clipboard.writeText(t.value);$('#copied').textContent='Copied'}catch(e){t.select();$('#copied').textContent='Press copy on the selected text'}};
+const h=(location.hash||'').slice(1); show(TABS.some(t=>t[0]===h)?h:'tcrf');
+</script>

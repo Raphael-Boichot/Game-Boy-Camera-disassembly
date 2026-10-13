@@ -3436,6 +3436,8 @@ bank,addr,name,conf,note,source
 0D,6E00,Gfx_0D_6E00_Icon06_478F,C,"entry 5 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
 0D,6F00,Gfx_0D_6F00_Icon06_478F,C,"entry 6 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
 0D,7000,Gfx_0D_7000_FillPatternTiles,?,"dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by a pattern number",assets
+0D,7660,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,I,TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 of 16 unique); never on screen (README 16.24),fix
+0D,77E0,Gfx_0D_77E0_FillPatternTiles_Cont,I,continues the span of Gfx_0D_7000_FillPatternTiles (the label before the TCRF-unused block),fix
 0D,7900,Gfx_0D_7900_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
 0E,4000,Gfx_0E_4000_MsgStrip,C,"entry 0 of the {lo,hi,bank} table 04:4493, 640 bytes each (constant pitch)",assets
 0E,4280,Gfx_0E_4280_MsgStrip,C,"entry 1 of the {lo,hi,bank} table 04:4493, 640 bytes each (constant pitch)",assets
@@ -3500,7 +3502,11 @@ bank,addr,name,conf,note,source
 10,7908,Gfx_10_7908_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 10,7A08,Data_10_7A08,?,"no copy site, table or sheet covers these bytes",assets
 10,7A24,Gfx_10_7A24_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+10,7A80,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, top row (tiles 0-1 of 2x2): exact match of the TCRF image; bottom row at 10:7B80; never on screen, never read in an organic run (README 16.24)",fix
+10,7AA0,Gfx_10_7A24_Unref_Cont,I,continues Gfx_10_7A24_Unref (after the TCRF icon row),fix
 10,7ADE,Gfx_10_7ADE_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+10,7B80,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, bottom row (tiles 2-3 of 2x2); top row at 10:7A80 (README 16.24)",fix
+10,7BA0,Gfx_10_7ADE_Unref_Cont,I,continues Gfx_10_7ADE_Unref (after the TCRF icon row),fix
 10,7BC2,Data_10_7BC2,?,"no copy site, table or sheet covers these bytes",assets
 10,7BE4,Data_10_7BE4,?,"no copy site, table or sheet covers these bytes",assets
 10,7BF8,Gfx_10_7BF8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
@@ -3550,6 +3556,8 @@ bank,addr,name,conf,note,source
 13,5880,Gfx_13_5880_Mode0F_State0A_EraseAll,I,"far pointer loaded by Mode0F_State0A_EraseAll (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5950,Gfx_13_5950_Mode0F_DrawCopyCount,I,"far pointer loaded by Mode0F_DrawCopyCount (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5C80,Src_13_5C80_Tbl65CA_0,I,"target 0 of the {lo,hi,bank} table 09:65CA",assets
+13,5CA0,Unused_TCRF_AlbumHandGestures_Gfx,?,"candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF (23 of 32 informative tiles found: 13:5CA0-5CF0, 5DA0-5DF0, 5EA0-5EF0 as a 6 x 4 block, plus 5A40-5AB0, 5BC0-5BF0, 5AE0-5AF0); CONFLICT: these tiles are on screen for 22-26 frames in organic runs (README 16.24)",fix
+13,5D00,Gfx_13_5D00_Tbl65CA_0_Cont,I,continues the span of Src_13_5C80_Tbl65CA_0 (the label before the TCRF-unused block),fix
 13,6400,Src_13_6400_PhotoPicker_LoadPageThumbs,I,"far pointer loaded by LinkPick_LoadPageThumbs, PhotoPicker_LoadPageThumbs (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,6800,Gfx_13_6800_Icon04_44DC,C,"entry 0 of the {lo,hi,bank} table 04:44DC, 256 bytes each (constant pitch)",assets
 13,6900,Gfx_13_6900_Icon04_44DC,C,"entry 1 of the {lo,hi,bank} table 04:44DC, 256 bytes each (constant pitch)",assets
@@ -3581,6 +3589,12 @@ bank,addr,name,conf,note,source
 14,7E30,Gfx_14_7E30_Mode10_State02_Setup,I,copied to VRAM/WRAM by Mode10_State02_Setup (assets/catalog_jp.csv),assets
 14,7F00,Gfx_14_7F00_Mode10_State02_Setup,I,copied to VRAM/WRAM by Mode10_State02_Setup (assets/catalog_jp.csv),assets
 15,4000,Gfx_15_4000_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
+15,4480,Unused_TCRF_JapaneseMenuTile_CircledX_Gfx,I,"TCRF unused graphic: the circled X tile of the Japanese main-menu bank (copy 1 of 3, same tile at 15:4500 and 15:4580); on screen only in forced runs (README 16.24)",fix
+15,4490,Gfx_15_4490_MainMenu_LoadBackground_Cont,I,continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block),fix
+15,4500,Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx,I,"TCRF unused graphic: circled X, copy 2 of 3",fix
+15,4510,Gfx_15_4510_MainMenu_LoadBackground_Cont,I,continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block),fix
+15,4580,Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx,I,"TCRF unused graphic: circled X, copy 3 of 3",fix
+15,4590,Gfx_15_4590_MainMenu_LoadBackground_Cont,I,continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block),fix
 15,4600,Gfx_15_4600_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
 15,4900,Gfx_15_4900_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
 15,4A00,Gfx_15_4A00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
@@ -3657,7 +3671,11 @@ bank,addr,name,conf,note,source
 18,4800,Gfx_18_4800_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 18,5000,Gfx_18_5000_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 18,5470,Gfx_18_5470_Mode1C_DrawOptionScreen,I,copied to VRAM/WRAM by Mode1C_DrawOptionScreen (assets/catalog_jp.csv),assets
+18,5A50,Unused_TCRF_MarginPrint_BFilmRoll_Gfx,I,TCRF unused graphic: film roll with a B for the margin-print option (6 tiles); loaded with the option screen but never stably on screen (README 16.24),fix
+18,5AB0,Gfx_18_5AB0_Mode1C_DrawOptionScreen_Cont,I,continues the span of Gfx_18_5470_Mode1C_DrawOptionScreen (the label before the TCRF-unused block),fix
 18,5C70,Gfx_18_5C70_Mode1C_DrawOptionScreen,I,copied to VRAM/WRAM by Mode1C_DrawOptionScreen (assets/catalog_jp.csv),assets
+18,5F90,Unused_TCRF_MarginPrint_OutlinedText_Gfx,I,TCRF unused graphic: outlined Japanese text of the margin-print option (12 tiles); never stably on screen (README 16.24),fix
+18,6050,Gfx_18_6050_Mode1C_DrawOptionScreen_Cont,I,continues the span of Gfx_18_5C70_Mode1C_DrawOptionScreen (the label before the TCRF-unused block),fix
 18,6470,Gfx_18_6470_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
 18,6C70,Gfx_18_6C70_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
 18,7400,Gfx_18_7400_Mode1C_State02_ShowPrintScreen,I,"far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_State02_ShowPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -3710,7 +3728,9 @@ bank,addr,name,conf,note,source
 1A,6C00,Gfx_1A_6C00_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 1A,7400,Gfx_1A_7400_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 1A,7600,Gfx_1A_7600_Album_ShowPageScreenB,I,"far pointer loaded by Album_LoadBorderScreen, Album_ShowPageScreenB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1792 from the nearby ld bc",assets
-1A,7D80,Gfx_1A_7D80_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1A,7C90,Unused_TCRF_PhotoOptionIcon_Candidate_Gfx,?,"exact pixel match of the TCRF ""photo option icon"" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play (65,535 frames in organic runs), so it is probably a displayed icon that looks like the TCRF one, not an unused one (README 16.24)",fix
+1A,7CB0,Gfx_1A_7600_Album_ShowPageScreenB_Cont,I,continues Gfx_1A_7600_Album_ShowPageScreenB (after the TCRF icon candidate),fix
+1A,7D80,Unused_TCRF_PhotoOption_BCancel_Gfx,C,"TCRF unused graphic ""B CANCEL"" (circled B + the word CANCEL, 6 tiles): exact match of the TCRF image (2x upscale, 0 differing pixels of 384); never on screen in any replay and never read in an organic run (README 16.24)",fix
 1A,7E00,Gfx_1A_7E00_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 1B,4000,Gfx_1B_4000_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, ScrollEngine_RowToOffset (assets/catalog_jp.csv)",assets
 1B,4800,Gfx_1B_4800_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, ScrollEngine_RowToOffset (assets/catalog_jp.csv)",assets
@@ -3747,6 +3767,8 @@ bank,addr,name,conf,note,source
 1C,5760,Gfx_1C_5760_HotSpotEd_CopyNumberTile,I,"far pointer loaded by HotSpotEd_CopyNumberTile (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 1C,57A0,Gfx_1C_57A0_HotSpotEd_CopyNumberTile_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of HotSpotEd_CopyNumberTile); classified from its content - see sym_unconclusive",assets
 1C,58A0,Gfx_1C_58A0_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State04_LeaveSelected (assets/catalog_jp.csv)",assets
+1C,5920,Unused_TCRF_HotSpotEffectIcons_Extra_Gfx,I,"TCRF unused graphics: the 8 extra hot-spot effect icons (32 tiles); on screen only in runs that force the effect number above 7 (README 16.8, 16.24)",fix
+1C,5B20,Gfx_1C_5B20_Mode0C_State02_Setup_Cont,I,continues the span of Gfx_1C_58A0_Mode0C_State02_Setup (the label before the TCRF-unused block),fix
 1C,5B60,Gfx_1C_5B60_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State04_LeaveSelected (assets/catalog_jp.csv)",assets
 1C,5B80,Gfx_1C_5B80_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 1C,5BC0,Data_1C_5BC0,?,"no copy site, table or sheet covers these bytes",assets
@@ -3821,15 +3843,7 @@ bank,addr,name,conf,note,source
 1E,6570,Gfx_1E_6570_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
 1E,6580,Gfx_1E_6580_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
 1E,6590,Gfx_1E_6590_Mode16_DrawCaptionBlink_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode16_DrawCaptionBlink); classified from its content - see sym_unconclusive",assets
-1E,662A,Data_1E_662A,?,"no copy site, table or sheet covers these bytes",assets
-1E,662E,TileGap_1E_662E,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-1E,6639,Data_1E_6639,?,"no copy site, table or sheet covers these bytes",assets
-1E,66A0,Gfx_1E_66A0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1E,6710,Gfx_1E_6710_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1E,67A0,Gfx_1E_67A0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1E,680E,Gfx_1E_680E_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1E,6880,Gfx_1E_6880_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1E,6912,Gfx_1E_6912_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1E,6620,Unused_TCRF_CannotCombineSamePicture_Gfx,C,"TCRF unused graphic ""cannot combine the same picture"" (prohibition sign + the two lines of Japanese text): exact match of the TCRF image, 56 of 56 tiles (the first two are blank, 1E:6600 / 6610), laid out 8 tiles wide; never on screen in any replay and never read in an organic run (README 16.24)",fix
 1E,6A00,Gfx_1E_6A00_ResultPic1_BaldMan_Tune29Totaka,C,"picture 1 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 29Totaka; seen in BGB (SHOOT parlor RUN)",assets
 1E,7800,Gfx_1E_7800_SaveDialog_Substate3_FullInit,I,"far pointer loaded by SaveDialog_Substate3_FullInit (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
 1E,7D00,Gfx_1E_7D00_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
@@ -5130,302 +5144,23 @@ bank,addr,name,conf,note,source
 2A,5E62,Kana_2A_5E62,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
 2A,5E84,Kana_2A_5E84,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
 2A,5FFA,Sheet_MiscellaneousStampsJpn_2A_5FFA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,6000,Gfx_2A_6000_StampCat04_05,I,"storage of stamp categories 04, 05 (04:5337 Stamp_PageGfxTbl, stride $00A0, 2 blocks per page); extent: to the next pointer or asset",assets
-2A,6FC0,Kana_2A_6FC0,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,6FD9,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part6FD9,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,701E,Kana_2A_701E,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7027,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7027,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7035,Kana_2A_7035,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7039,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7039,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7060,Kana_2A_7060,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,70BA,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part70BA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,70E0,Kana_2A_70E0,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7115,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7115,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7131,Kana_2A_7131,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7132,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7132,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,714E,Kana_2A_714E,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,726F,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part726F,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,72B6,Kana_2A_72B6,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,72B7,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part72B7,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,72C4,Kana_2A_72C4,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7356,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7356,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7363,Kana_2A_7363,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7367,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7367,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7380,Kana_2A_7380,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7381,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7381,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7391,Kana_2A_7391,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,73FA,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part73FA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,740A,Kana_2A_740A,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,741A,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part741A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,742A,Kana_2A_742A,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,743A,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part743A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,744C,Kana_2A_744C,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7459,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7459,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,746E,Kana_2A_746E,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7471,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7471,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,74AC,Kana_2A_74AC,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,74BA,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part74BA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,74CC,Kana_2A_74CC,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,74DA,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part74DA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,74EC,Kana_2A_74EC,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,74FA,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part74FA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,750E,Kana_2A_750E,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,751A,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part751A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7540,Kana_2A_7540,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7546,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7546,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,757F,Kana_2A_757F,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7580,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7580,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7590,Kana_2A_7590,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7594,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7594,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,75D1,Kana_2A_75D1,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7666,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7666,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,769F,Kana_2A_769F,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7722,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7722,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7777,Kana_2A_7777,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7778,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7778,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7794,Kana_2A_7794,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7795,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part7795,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,77A2,Kana_2A_77A2,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,77A3,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part77A3,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,77B8,Kana_2A_77B8,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,77E0,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part77E0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7800,Kana_2A_7800,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,782A,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part782A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7839,Kana_2A_7839,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,783B,Sheet_MiscellaneousStampsJpn_2A_5FFA_Part783B,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 2379 tiles",assets
-2A,7887,Data_2A_7887,?,"no copy site, table or sheet covers these bytes",assets
-2A,7896,Kana_2A_7896,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,78D6,Kana_2A_78D6,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,78F6,Kana_2A_78F6,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7A25,Sheet_MiscellaneousStampsJpn_2A_7900_Part7A25,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7A32,Kana_2A_7A32,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7A34,Sheet_MiscellaneousStampsJpn_2A_7900_Part7A34,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7AA9,Kana_2A_7AA9,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7AD8,Sheet_MiscellaneousStampsJpn_2A_7900_Part7AD8,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7B00,Kana_2A_7B00,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7B29,Sheet_MiscellaneousStampsJpn_2A_7900_Part7B29,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7B37,Kana_2A_7B37,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7B38,Sheet_MiscellaneousStampsJpn_2A_7900_Part7B38,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7BAD,Kana_2A_7BAD,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7BAE,Sheet_MiscellaneousStampsJpn_2A_7900_Part7BAE,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7BCA,Kana_2A_7BCA,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7BD9,Sheet_MiscellaneousStampsJpn_2A_7900_Part7BD9,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7BEA,Kana_2A_7BEA,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7BF9,Sheet_MiscellaneousStampsJpn_2A_7900_Part7BF9,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7C18,Kana_2A_7C18,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7C1A,Sheet_MiscellaneousStampsJpn_2A_7900_Part7C1A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7C6A,Kana_2A_7C6A,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7C98,Sheet_MiscellaneousStampsJpn_2A_7900_Part7C98,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7CAE,Kana_2A_7CAE,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7CB1,Sheet_MiscellaneousStampsJpn_2A_7900_Part7CB1,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7CC4,Kana_2A_7CC4,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7CCD,Sheet_MiscellaneousStampsJpn_2A_7900_Part7CCD,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7DFB,Kana_2A_7DFB,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7E1A,Sheet_MiscellaneousStampsJpn_2A_7900_Part7E1A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7E2A,Kana_2A_7E2A,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7E48,Sheet_MiscellaneousStampsJpn_2A_7900_Part7E48,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7E62,Kana_2A_7E62,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7E6A,Sheet_MiscellaneousStampsJpn_2A_7900_Part7E6A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2A,7E84,Kana_2A_7E84,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
-2A,7E97,Sheet_MiscellaneousStampsJpn_2A_7900_Part7E97,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 479 tiles",assets
-2B,4000,Gfx_2B_4000_StampCat03,?,"storage of stamp category 03 (04:5337 Stamp_PageGfxTbl, stride $03C0, 1 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-2B,43DE,Sheet_MiscellaneousStampsJpn_2B_43DE,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 159 tiles",assets
-2B,4EC0,Data_2B_4EC0,?,"no copy site, table or sheet covers these bytes",assets
-2B,4F6B,Data_2B_4F6B,?,"no copy site, table or sheet covers these bytes",assets
-2B,4FA7,Gfx_2B_4FA7_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2B,50EE,Gfx_2B_50EE_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2B,5130,Gfx_2B_5130_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2B,5180,Gfx_2B_5180_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2B,51D0,Gfx_2B_51D0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2B,5220,Gfx_2B_5220_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2B,5280,Data_2B_5280,?,"no copy site, table or sheet covers these bytes",assets
-2B,5800,Gfx_2B_5800_StampPrepareBuf3,?,record 3 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known: runs to the next pointer or asset,assets
-2C,4000,Src_2C_4000_Tbl539D_51,I,"target 51 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets
-2C,4290,Sheet_MiscellaneousStampsJpn_2C_4290,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 67 tiles",assets
-2C,4750,Data_2C_4750,?,"no copy site, table or sheet covers these bytes",assets
-2C,4788,Gfx_2C_4788_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,47CA,Sheet_MiscellaneousStampsJpn_2C_47CA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 47 tiles",assets
-2C,493D,Data_2C_493D,?,"no copy site, table or sheet covers these bytes",assets
-2C,4960,Data_2C_4960,?,"no copy site, table or sheet covers these bytes",assets
-2C,498C,Gfx_2C_498C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,49F0,Data_2C_49F0,?,"no copy site, table or sheet covers these bytes",assets
-2C,4A11,Data_2C_4A11,?,"no copy site, table or sheet covers these bytes",assets
-2C,4A50,Data_2C_4A50,?,"no copy site, table or sheet covers these bytes",assets
-2C,4A8C,Gfx_2C_4A8C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,4AE0,Data_2C_4AE0,?,"no copy site, table or sheet covers these bytes",assets
-2C,4B0E,Gfx_2C_4B0E_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,4B70,Data_2C_4B70,?,"no copy site, table or sheet covers these bytes",assets
-2C,4B8B,Sheet_MiscellaneousStampsUsa_2C_4B8B,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (USA)"", 66 tiles",assets
-2C,4F50,Data_2C_4F50,?,"no copy site, table or sheet covers these bytes",assets
-2C,4F90,Data_2C_4F90,?,"no copy site, table or sheet covers these bytes",assets
-2C,4FD0,Data_2C_4FD0,?,"no copy site, table or sheet covers these bytes",assets
-2C,501A,Data_2C_501A,?,"no copy site, table or sheet covers these bytes",assets
-2C,5050,Data_2C_5050,?,"no copy site, table or sheet covers these bytes",assets
-2C,508C,Gfx_2C_508C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,5117,Data_2C_5117,?,"no copy site, table or sheet covers these bytes",assets
-2C,5150,Data_2C_5150,?,"no copy site, table or sheet covers these bytes",assets
-2C,5190,Data_2C_5190,?,"no copy site, table or sheet covers these bytes",assets
-2C,51D0,Data_2C_51D0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5206,Gfx_2C_5206_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,528B,Data_2C_528B,?,"no copy site, table or sheet covers these bytes",assets
-2C,52C3,Data_2C_52C3,?,"no copy site, table or sheet covers these bytes",assets
-2C,531E,Data_2C_531E,?,"no copy site, table or sheet covers these bytes",assets
-2C,5350,Data_2C_5350,?,"no copy site, table or sheet covers these bytes",assets
-2C,5396,Data_2C_5396,?,"no copy site, table or sheet covers these bytes",assets
-2C,53D0,Data_2C_53D0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5406,Data_2C_5406,?,"no copy site, table or sheet covers these bytes",assets
-2C,5440,Data_2C_5440,?,"no copy site, table or sheet covers these bytes",assets
-2C,5450,Sheet_MiscellaneousStampsJpn_2C_5450,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 48 tiles",assets
-2C,56A1,Data_2C_56A1,?,"no copy site, table or sheet covers these bytes",assets
-2C,56D0,Data_2C_56D0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5718,Data_2C_5718,?,"no copy site, table or sheet covers these bytes",assets
-2C,5750,Data_2C_5750,?,"no copy site, table or sheet covers these bytes",assets
-2C,5786,Gfx_2C_5786_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,588B,Gfx_2C_588B_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,590A,Gfx_2C_590A_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,599A,Data_2C_599A,?,"no copy site, table or sheet covers these bytes",assets
-2C,59D0,Data_2C_59D0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5A18,Data_2C_5A18,?,"no copy site, table or sheet covers these bytes",assets
-2C,5A50,Data_2C_5A50,?,"no copy site, table or sheet covers these bytes",assets
-2C,5A8A,Gfx_2C_5A8A_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,5B12,Data_2C_5B12,?,"no copy site, table or sheet covers these bytes",assets
-2C,5B50,Data_2C_5B50,?,"no copy site, table or sheet covers these bytes",assets
-2C,5B8B,Gfx_2C_5B8B_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,5BD0,Data_2C_5BD0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5C10,Data_2C_5C10,?,"no copy site, table or sheet covers these bytes",assets
-2C,5C50,Data_2C_5C50,?,"no copy site, table or sheet covers these bytes",assets
-2C,5C99,Data_2C_5C99,?,"no copy site, table or sheet covers these bytes",assets
-2C,5CD1,Data_2C_5CD1,?,"no copy site, table or sheet covers these bytes",assets
-2C,5CE0,Sheet_MiscellaneousStampsJpn_2C_5CE0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 33 tiles",assets
-2C,5EA0,Data_2C_5EA0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5ED0,Data_2C_5ED0,?,"no copy site, table or sheet covers these bytes",assets
-2C,5F58,Data_2C_5F58,?,"no copy site, table or sheet covers these bytes",assets
-2C,6000,Gfx_2C_6000_StampCat02,?,"storage of stamp category 02 (04:5337 Stamp_PageGfxTbl, stride $0320, 1 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-2C,681A,Sheet_MiscellaneousStampsJpn_2C_681A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 112 tiles",assets
-2C,6FBC,Data_2C_6FBC,?,"no copy site, table or sheet covers these bytes",assets
-2C,6FF8,Gfx_2C_6FF8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,716E,Data_2C_716E,?,"no copy site, table or sheet covers these bytes",assets
-2C,7190,Gfx_2C_7190_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,7280,Gfx_2C_7280_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,72DC,Data_2C_72DC,?,"no copy site, table or sheet covers these bytes",assets
-2C,72FC,Data_2C_72FC,?,"no copy site, table or sheet covers these bytes",assets
-2C,7320,Sheet_MiscellaneousStampsJpn_2C_7320,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 40 tiles",assets
-2C,75FE,Data_2C_75FE,?,"no copy site, table or sheet covers these bytes",assets
-2C,761A,Data_2C_761A,?,"no copy site, table or sheet covers these bytes",assets
-2C,7640,Gfx_2C_7640_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,7682,Gfx_2C_7682_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,777A,Data_2C_777A,?,"no copy site, table or sheet covers these bytes",assets
-2C,7780,Sheet_MiscellaneousStampsJpn_2C_7780,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 50 tiles",assets
-2C,7AAE,Data_2C_7AAE,?,"no copy site, table or sheet covers these bytes",assets
-2C,7AE0,Gfx_2C_7AE0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,7B40,Gfx_2C_7B40_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,7B90,Gfx_2C_7B90_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2C,7BE3,Data_2C_7BE3,?,"no copy site, table or sheet covers these bytes",assets
-2C,7C8C,Sheet_MiscellaneousStampsJpn_2C_7C8C,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 45 tiles",assets
-2C,7F3B,Data_2C_7F3B,?,"no copy site, table or sheet covers these bytes",assets
-2D,4000,Gfx_2D_4000_StampCat01,?,"storage of stamp category 01 (04:5337 Stamp_PageGfxTbl, stride $0300, 1 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-2D,480A,Sheet_MiscellaneousStampsJpn_2D_480A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 46 tiles",assets
-2D,4AF1,Sheet_MiscellaneousStampsJpn_2D_4AF1_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2D,4B12,Sheet_MiscellaneousStampsJpn_2D_4B12_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2D,4B50,Sheet_MiscellaneousStampsJpn_2D_4B50_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2D,4B88,Sheet_MiscellaneousStampsJpn_2D_4B88_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2D,4BA0,Sheet_MiscellaneousStampsJpn_2D_4BA0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 56 tiles",assets
-2D,4F08,Data_2D_4F08,?,"no copy site, table or sheet covers these bytes",assets
-2D,4F40,Gfx_2D_4F40_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,4F80,Gfx_2D_4F80_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,501C,Data_2D_501C,?,"no copy site, table or sheet covers these bytes",assets
-2D,5044,Gfx_2D_5044_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,5110,Data_2D_5110,?,"no copy site, table or sheet covers these bytes",assets
-2D,5150,Data_2D_5150,?,"no copy site, table or sheet covers these bytes",assets
-2D,5190,Data_2D_5190,?,"no copy site, table or sheet covers these bytes",assets
-2D,51D0,Data_2D_51D0,?,"no copy site, table or sheet covers these bytes",assets
-2D,51EC,Data_2D_51EC,?,"no copy site, table or sheet covers these bytes",assets
-2D,522E,Data_2D_522E,?,"no copy site, table or sheet covers these bytes",assets
-2D,5252,Gfx_2D_5252_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,531E,Data_2D_531E,?,"no copy site, table or sheet covers these bytes",assets
-2D,533A,Sheet_MiscellaneousStampsJpn_2D_533A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 63 tiles",assets
-2D,55F1,Data_2D_55F1,?,"no copy site, table or sheet covers these bytes",assets
-2D,5618,Data_2D_5618,?,"no copy site, table or sheet covers these bytes",assets
-2D,5648,Gfx_2D_5648_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,570C,Gfx_2D_570C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,5810,Data_2D_5810,?,"no copy site, table or sheet covers these bytes",assets
-2D,5846,Gfx_2D_5846_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,58E0,Sheet_MiscellaneousStampsJpn_2D_58E0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 183 tiles",assets
-2D,64CB,Sheet_MiscellaneousStampsJpn_2D_64CB_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2D,650C,Sheet_MiscellaneousStampsJpn_2D_650C,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 88 tiles",assets
-2D,6B21,Data_2D_6B21,?,"no copy site, table or sheet covers these bytes",assets
-2D,6B50,Data_2D_6B50,?,"no copy site, table or sheet covers these bytes",assets
-2D,6B90,Data_2D_6B90,?,"no copy site, table or sheet covers these bytes",assets
-2D,6BC0,Gfx_2D_6BC0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,6C0A,Data_2D_6C0A,?,"no copy site, table or sheet covers these bytes",assets
-2D,6C50,Gfx_2D_6C50_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,6C90,Gfx_2D_6C90_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2D,7000,Gfx_2D_7000_StampPrepareBuf0,?,record 0 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known: runs to the next pointer or asset,assets
-2E,4000,Gfx_2E_4000_StampCat06_07,?,"storage of stamp categories 06, 07 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-2E,49FE,Sheet_MiscellaneousStampsJpn_2E_49FE,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 261 tiles",assets
-2E,5555,Data_2E_5555,?,"no copy site, table or sheet covers these bytes",assets
-2E,558E,Data_2E_558E,?,"no copy site, table or sheet covers these bytes",assets
-2E,55C4,Data_2E_55C4,?,"no copy site, table or sheet covers these bytes",assets
-2E,55F0,Data_2E_55F0,?,"no copy site, table or sheet covers these bytes",assets
-2E,561E,Data_2E_561E,?,"no copy site, table or sheet covers these bytes",assets
-2E,564C,Data_2E_564C,?,"no copy site, table or sheet covers these bytes",assets
-2E,5800,Gfx_2E_5800_StampCat14_15,?,"storage of stamp categories 14, 15 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-2E,5810,Sheet_MiscellaneousStampsJpn_2E_5810,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 455 tiles",assets
-2E,7000,Gfx_2E_7000_StampPrepareBuf2,?,record 2 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known: runs to the next pointer or asset,assets
-2F,4000,Gfx_2F_4000_StampPrepareBuf1,?,record 1 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known: runs to the next pointer or asset,assets
+2A,6000,StampCat04_05_SmallKana_Gfx,C,"stamp categories 4 and 5 (same graphics, different mask fill): small kana, 245 items x $20 B (2 tiles)",fix
+2B,4000,StampCat03_CoroCoro_Gfx,C,"stamp category 3 (only if $D582 = 1): CoroCoro stamps in the Japanese ROM (Mario and Luigi in the international one), 10 items x $1E0 B (30 tiles)",fix
+2B,5800,StampCat03_Mask,C,"1bpp mask of stamp category 3 (10 items x $F0 B), record 3 of 04:548B",fix
+2C,4000,StampCat00_Face_Gfx,C,"stamp category 0: face parts (eyes, brows, noses, mouths), 63 items x $80 B (8 tiles 2bpp); tables Stamp_PageGfxTbl 04:5337 / Stamp_PrepareBuffers_Tbl5436, loaded by Stamp_LoadPageGfx 04:589E",fix
+2C,6000,StampCat02_Pokemon_Gfx,C,"stamp category 2: the 20 Pokemon stamps, 20 items x $190 B (25 tiles, 40x40 px); pages shown limited by $D642",fix
+2D,4000,StampCat01_Icons_Gfx,C,"stamp category 1: icons (wings, flowers, paw, dog, stars...), 45 items x $100 B (16 tiles 2bpp)",fix
+2D,7000,StampCat00_Mask,C,"1bpp mask of stamp category 0 (63 items x $40 B), copied by Stamp_PrepareBuffers (record 0 of 04:548B)",fix
+2E,4000,StampCat06_07_Hiragana_Gfx,C,"stamp categories 6 and 7 (same graphics, different mask fill): hiragana, 90 items x $40 B (4 tiles)",fix
+2E,5800,StampCat14_15_Kanji_Gfx,C,"stamp categories 14 and 15 (same graphics, different mask fill): kanji, 90 items x $40 B",fix
+2E,7000,StampCat02_Mask,C,"1bpp mask of stamp category 2 (20 items x $C8 B), record 2 of 04:548B",fix
+2F,4000,StampCat01_Mask,C,"1bpp mask of stamp category 1 (45 items x $80 B), record 1 of 04:548B",fix
 2F,57F5,Sheet_MiscellaneousStampsJpn_2F_57F5,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 116 tiles",assets
-2F,5800,Gfx_2F_5800_StampCat16,I,"storage of stamp category 16 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the next pointer or asset",assets
-2F,5D6B,Data_2F_5D6B,?,"no copy site, table or sheet covers these bytes",assets
-2F,5DC0,Data_2F_5DC0,?,"no copy site, table or sheet covers these bytes",assets
-2F,5E0C,Data_2F_5E0C,?,"no copy site, table or sheet covers these bytes",assets
-2F,5E50,Gfx_2F_5E50_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2F,5ED0,Data_2F_5ED0,?,"no copy site, table or sheet covers these bytes",assets
-2F,5EF0,Data_2F_5EF0,?,"no copy site, table or sheet covers these bytes",assets
-2F,5F20,Data_2F_5F20,?,"no copy site, table or sheet covers these bytes",assets
-2F,5F40,Data_2F_5F40,?,"no copy site, table or sheet covers these bytes",assets
-2F,5F60,Data_2F_5F60,?,"no copy site, table or sheet covers these bytes",assets
-2F,5F8A,Data_2F_5F8A,?,"no copy site, table or sheet covers these bytes",assets
-2F,5F90,Sheet_MiscellaneousStampsJpn_2F_5F90,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 58 tiles",assets
-2F,614B,Sheet_MiscellaneousStampsJpn_2F_614B,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 50 tiles",assets
-2F,62B1,Data_2F_62B1,?,"no copy site, table or sheet covers these bytes",assets
-2F,62C6,Gfx_2F_62C6_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2F,62FC,Sheet_MiscellaneousStampsJpn_2F_62FC,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 66 tiles",assets
-2F,6703,Gfx_2F_6703_MiscellaneousStampsJpn_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousStampsJpn); classified from its content - see sym_unconclusive",assets
-2F,674A,Gfx_2F_674A_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2F,67B0,Data_2F_67B0,?,"no copy site, table or sheet covers these bytes",assets
-2F,67E4,Data_2F_67E4,?,"no copy site, table or sheet covers these bytes",assets
-2F,680E,Data_2F_680E,?,"no copy site, table or sheet covers these bytes",assets
-2F,7000,Sheet_MiscellaneousStampsJpn_2F_7000,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 61 tiles",assets
-2F,72E0,Data_2F_72E0,?,"no copy site, table or sheet covers these bytes",assets
-2F,730A,Gfx_2F_730A_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-2F,737C,Sheet_MiscellaneousStampsJpn_2F_737C,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 37 tiles",assets
-30,4000,Gfx_30_4000_StampCat08_09,?,"storage of stamp categories 08, 09 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-30,4C5A,Sheet_MiscellaneousStampsJpn_30_4C5A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 182 tiles",assets
-30,53C5,Data_30_53C5,?,"no copy site, table or sheet covers these bytes",assets
-30,540C,Data_30_540C,?,"no copy site, table or sheet covers these bytes",assets
-30,545D,Data_30_545D,?,"no copy site, table or sheet covers these bytes",assets
-30,548C,Gfx_30_548C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,54CE,Data_30_54CE,?,"no copy site, table or sheet covers these bytes",assets
-30,551C,Data_30_551C,?,"no copy site, table or sheet covers these bytes",assets
-30,6000,Gfx_30_6000_StampCat12_13,?,"storage of stamp categories 12, 13 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the next pointer or asset; extent not known: runs to the next pointer or asset",assets
-30,6010,Sheet_MiscellaneousStampsJpn_30_6010,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 136 tiles",assets
-30,66A4,Data_30_66A4,?,"no copy site, table or sheet covers these bytes",assets
-30,66E6,Data_30_66E6,?,"no copy site, table or sheet covers these bytes",assets
-30,6705,Gfx_30_6705_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,6790,Sheet_MiscellaneousStampsJpn_30_6790,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 37 tiles",assets
-30,6983,Gfx_30_6983_MiscellaneousStampsJpn_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousStampsJpn); classified from its content - see sym_unconclusive",assets
-30,69D0,Gfx_30_69D0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,6A8E,Data_30_6A8E,?,"no copy site, table or sheet covers these bytes",assets
-30,6AA0,Sheet_MiscellaneousStampsJpn_30_6AA0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 36 tiles",assets
-30,6CC1,Gfx_30_6CC1_MiscellaneousStampsJpn_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousStampsJpn); classified from its content - see sym_unconclusive",assets
-30,6E85,Data_30_6E85,?,"no copy site, table or sheet covers these bytes",assets
-30,6ECF,Data_30_6ECF,?,"no copy site, table or sheet covers these bytes",assets
-30,7000,Gfx_30_7000_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,7306,Gfx_30_7306_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,7400,Gfx_30_7400_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,74A8,Gfx_30_74A8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,7534,Gfx_30_7534_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-30,77D8,Gfx_30_77D8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+2F,5800,StampCat16_Symbols_Gfx,C,"stamp category 16: symbols (suits, stars, currency, line pieces, arrows), 65 items x $40 B",fix
+2F,7000,StampCat10_11_Digits_Gfx,C,"stamp categories 10 and 11 (same graphics, different mask fill): digits 0-9 and kanji numerals, 20 items x $40 B",fix
+30,4000,StampCat08_09_Katakana_Gfx,C,"stamp categories 8 and 9 (same graphics, different mask fill): katakana, 85 items x $40 B",fix
+30,6000,StampCat12_13_Latin_Gfx,C,"stamp categories 12 and 13 (same graphics, different mask fill): Latin capitals and lower case, 60 items x $40 B",fix
+30,7000,StampCat16_Mask,C,1bpp mask of stamp category 16 (65 items x $20 B); categories 4-15 have no mask data (constant fill $00 / $FF),fix
 31,4000,WildFrame0_Tiles,C,sheet tiles 0-279,assets
 31,5180,WildFrame0_LateralStrips,C,sheet tiles 280-335: 4 x 14 lateral strips (README 16.13),assets
 31,5500,WildFrame0_TilesTail,C,sheet tiles 336-383,assets
