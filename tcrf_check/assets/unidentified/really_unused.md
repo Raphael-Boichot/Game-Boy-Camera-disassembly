@@ -21,7 +21,7 @@
 | `15:4580` | 16 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx` | TCRF label | forced runs: 1 of 1 tiles stable, max 1588 frames; organic runs: never on screen |
 | `15:5200` | 512 | `Gfx_15_5200_MainMenu_DrawUpperItem2_Aux` | never shown | never on screen; read only in forced runs |
 | `15:5500` | 256 | `Gfx_15_5500_SlidePlay_ReadKeys_Aux` | never shown | never on screen; read only in forced runs |
-| `17:5500` | 4864 | `Gfx_17_5500_ShootOptionLabelGlyphs` | forced runs only | on screen only in forced runs (664 frames) |
+| `17:5500` | 4864 | `Gfx_17_5500_Unused_MainMenuTiles` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 194 of 262 tiles on screen, 664 frames; tile block (304 tiles; the map uses ids 0-233) of the unused one-page main menu: BGB draws it with the map 25:7814 (README 16.25); byte-identical in the international ROM; no copy site and no table entry reaches it (copy_sites_jp.csv); the tracker saw it only in forced runs |
 | `18:5A50` | 96 | `Unused_TCRF_MarginPrint_BFilmRoll_Gfx` | TCRF label | never stably on screen (6 flash tiles) |
 | `18:5F90` | 192 | `Unused_TCRF_MarginPrint_OutlinedText_Gfx` | TCRF label | never stably on screen (7 flash tiles) |
 | `18:7D80` | 256 | `Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux` | never shown | never on screen; read only in forced runs |
@@ -36,9 +36,7 @@
 | `21:6AC7` | 177 | `Gfx_21_6AC7_Unref` | never shown | never on screen; read only in forced runs |
 | `21:6B91` | 47 | `Gfx_21_6B91_Unref` | never shown | never on screen; read only in forced runs |
 | `23:5CC0` | 580 | `Map_23_5CC0_Mode0E_ExchangeAlt_Unref` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 36 of 36 tiles on screen, 264 frames; the tile map of the same screen (18 x 32 + 4 bytes); the tracker's 36 forced-run tiles are value matches, BGB shows that the exchange screen loads 15:6C00 + 24:5180 instead |
-| `24:6360` | 64 | `Map_24_6360_Mode01_State00_Intro_Aux` | never shown | never on screen; read only in forced runs |
-| `25:7160` | 64 | `Map_25_7160_Mode05_State00_Init_Aux` | never shown | never on screen; read only in forced runs |
-| `25:7614` | 460 | `Map_25_7614_Unref` | never shown | never on screen; read only in forced runs |
-| `25:7814` | 588 | `Map_25_7814_Unref` | never shown | never on screen; read only in forced runs |
-| `26:7080` | 576 | `Map_26_7080_Mode16_State08_StartShoot_Aux` | never shown | never on screen; read only in forced runs |
-| | **24,024** | **41 spans** | | |
+| `25:7614` | 460 | `Map_25_7614_Unused_PhotoAreaRight` | never shown | never on screen; read only in forced runs; photo-area map (14 rows of 32 + 12 bytes) with the picture in columns 12-31, like the unused one-page main menu; no copy site reaches it; the tiles are the dynamic photo tiles, so nothing to draw (README 16.25) |
+| `25:7814` | 588 | `Map_25_7814_Unused_MainMenu` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 0 of 36 tiles on screen, 0 frames; the tile map of the unused one-page main menu (18 x 32 + 12 bytes, the picture is in columns 12-31: SCX = 96): BGB draws a flow-chart menu with tsushin / mi-ru / toru / miru / asobu / rakugaki / henshuu and BASIC / VIEW / EDIT MODE, STATUS; identical in the international ROM (25:75D4) |
+| `26:7080` | 576 | `Map_26_7080_Unused_Picture` | never shown | never on screen; read only in forced runs; full-screen picture map (18 rows of 32, picture in columns 0-19, $A5 filler in 20-31; 245 distinct ids, 4-column side strip + 16-column picture); no copy site reaches it and no tile block fits it (tile_seam_search.py: 0.80 per pixel against 0.42 for a true set), so what it shows is not known (README 16.25) |
+| | **23,896** | **39 spans** | | |

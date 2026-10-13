@@ -163,3 +163,4 @@ if ASSETS != 'none' and os.path.exists(ASSETS):
         m = np.zeros(N, bool); m[o1:o2 + 1] = True; brk[(r['type'], r['evidence'])] += int((m & ident & ~unused).sum())
     print('orange by (type, evidence):', {k: v for k, v in sorted(brk.items()) if v})
 print(img.size, os.path.getsize(OUT), 'red', r_bright, 'identified', r_ident, 'unused', r_unused, n_unused_spans, 'witnessed', r_wit, 'lateral', r_lat, 'stamps', r_stamp, 'sgb', r_sgb, 'organic', r_org, 'forced', r_forc, 'pad red', r_pad)
+print('yellow takes from: orange', n(unused & ident), 'blue', n(unused & organic), 'light blue', n(unused & forced & ~organic), 'other', n(unused) - n(unused & ident) - n(unused & organic) - n(unused & forced & ~organic))

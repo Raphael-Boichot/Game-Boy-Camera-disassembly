@@ -49,6 +49,9 @@ names = {}
 for r in csv.DictReader(open(REPO + '/disasm/sym_names_jp.csv', encoding='utf-8')): names[(int(r['bank'], 16), int(r['addr'], 16))] = r
 types = {}
 for r in csv.DictReader(open(REPO + '/disasm/sym_types_jp.csv', encoding='utf-8')): types[(int(r['bank'], 16), int(r['start'], 16))] = int(r['end'], 16)
+for r in rows:     # open_assets.csv is written by unidentified_sheets.py and can be older than the sym: the live label wins
+    nm = names.get((r['b'], r['a']))
+    if nm and nm['name'] != '-' and nm['name'] != r['name']: r['name'] = nm['name']; r['kind'] = nm['name'].split('_')[0]
 for (b, a), r in sorted(names.items()):
     if r['name'].startswith('Unused_TCRF_'):
         e = types.get((b, a), a + 16)
@@ -60,12 +63,13 @@ if os.path.exists(MAN):
     for m in csv.DictReader(open(MAN, encoding='utf-8')):
         b = int(m['bank'], 16); a = int(m['start'], 16); e = int(m['end'], 16)
         rows[:] = [r for r in rows if not (r['b'] == b and a <= r['a'] <= e)]
-        rows.append(dict(bank=m['bank'], addr=m['start'].upper(), b=b, a=a, n=e - a + 1, name=names[(b, a)]['name'], kind=m['kind'], tcrf='', src='manual', note=m['note']))
+        rows.append(dict(bank=m['bank'], addr=m['start'].upper(), b=b, a=a, n=e - a + 1, name=names[(b, a)]['name'], kind=m['kind'], tcrf='', src='manual', note=m['note'],
+                         mtier=(m.get('tier') or 'no loader'), pic=(m.get('pic') or ''), drawn=(m.get('drawn') or '')))
 for r in rows:
     o = off(r['b'], r['a']); r['v'] = verdict(o, r['n'])
     v = r['v']
     if r['src'] == 'manual':
-        r['tier'] = 'no loader'
+        r['tier'] = r['mtier']     # 'no loader' (default) or another tier named in unused_manual.csv, e.g. 'head rows' (two rows of a used map that its loader skips)
     elif r['kind'] == 'TCRF':
         r['tier'] = 'TCRF'
     elif r['kind'] in ('Gfx', 'Banner', 'Map'):
@@ -153,9 +157,9 @@ def cell(r):
     o = off(r['b'], r['a']); d = ROM[o:o + r['n']]
     img = greymap(d) if r['kind'] == 'Map' else tiles(d[:len(d) // 16 * 16])
     drawn = ''
-    pic = OUT + '/23_5CC0_map_screen.png'      # the unused stand-by screen drawn through its tile set (map_23_5CC0_screen.py): shown instead of the map's byte values
-    if r['tier'] == 'no loader' and r['kind'] == 'Map' and os.path.exists(pic):
-        im = Image.open(pic).convert('RGB'); img = im.resize((16 * 8 * SC, round(im.height * 16 * 8 * SC / im.width)), Image.NEAREST); drawn = ', drawn through 14:4000'
+    pic = OUT + '/' + r['pic'] if r.get('pic') else ''      # an unused map drawn through its tile set (map_23_5CC0_screen.py, bgb_show_unused.py): shown instead of the map's byte values
+    if r['tier'] == 'no loader' and r['kind'] == 'Map' and pic and os.path.exists(pic):
+        im = Image.open(pic).convert('RGB'); img = im.resize((16 * 8 * SC, round(im.height * 16 * 8 * SC / im.width)), Image.NEAREST); drawn = r.get('drawn', '')
     cap = ['%s:%s  %d B%s' % (r['bank'], r['addr'], r['n'], ('  (tile map%s)' % drawn) if r['kind'] == 'Map' else '')] + wrap(short(r['name']).replace('Unused_TCRF_', 'TCRF ') + (' (?)' if r.get('conf') == '?' else ''), 34)[:3] + wrap(evidence(r), 34)[:4]
     return cap, img
 def section(rs, y0, title, sub):
@@ -165,7 +169,7 @@ def section(rs, y0, title, sub):
         h = 16 * len(cap) + img.height + 18; c = min(range(COLN), key=lambda k: ncol[k]); cols_[c].append((cap, img, r)); ncol[c] += h
     return big, cols_, (max(ncol) if big else 0)
 by = collections.OrderedDict()
-for t, ttl, sub in (('no loader', 'Unused alternate stand-by screen of the image exchange: no loader in either ROM', 'teal = hand-listed from a code search and BGB (unused_manual.csv): the tracker saw these bytes as a thumbnail or as value matches, but the exchange screen loads other banks (README 14.4, 16.24 (3))'),
+for t, ttl, sub in (('no loader', 'Unused screens with no loader in either ROM: the alternate stand-by screen of the image exchange, the one-page main menu', 'teal = hand-listed from a code search and BGB (unused_manual.csv); the stand-by bytes were seen only as a thumbnail / value matches (README 14.4, 16.24 (3)); main menu: README 16.25'),
                     ('TCRF', 'TCRF-documented unused graphics located in this ROM (sym labels Unused_TCRF_*)', 'purple = labelled from the images the owner supplied from TCRF; (?) = candidate (partial pixel match); ORGANIC = the tile was on screen in a run without state pokes'),
                     ('never shown', 'Never on screen and never read in an organic run', 'red = no stable frame in 37,370 replayed menu states and the stamp-menu walks, and only the forced runs ever read it (graphics and tile maps)'),
                     ('forced only', 'On screen only when state variables are forced', 'amber = shown by forced runs only; no organic route found, so probably not reachable on a real camera')):
@@ -189,7 +193,7 @@ total = 70 + sum(60 + s[5] for s in secs) + 60 + scrap_h + 70 + SOUND_ROWH * (le
 sheet = Image.new('RGB', (WIDTH, total), 'white'); dr_ = ImageDraw.Draw(sheet)
 nshown = sum(1 for r in rows if r['tier'] == 'shown')
 dr_.text((GAP, 8), 'REALLY unused assets, Game Boy Camera / Pocket Camera (Japan) Rev A', fill=(0, 0, 0), font=FONTH)
-dr_.text((GAP, 30), 'Menu states replayed (%s) in an emulator core that follows every ROM byte to the screen; %d spans checked (open assets + 3 hand-listed), %d on screen.' % ('37,370 + stamp walks', sum(1 for r in rows if r['src'] in ('open', 'manual')), nshown), fill=(60, 60, 60), font=FONT)
+dr_.text((GAP, 30), 'Menu states replayed (%s) in an emulator core that follows every ROM byte to the screen; %d spans checked (open assets + %d hand-listed), %d on screen.' % ('37,370 + stamp walks', sum(1 for r in rows if r['src'] in ('open', 'manual')), sum(1 for r in rows if r['src'] == 'manual'), nshown), fill=(60, 60, 60), font=FONT)
 dr_.text((GAP, 46), 'caption = bank:address, bytes, label, evidence; 2bpp tiles, 16 per row, x2 (tile maps: byte value as grey).', fill=(60, 60, 60), font=FONT)
 y = 70
 for t, ttl, sub, big, cols_, h in secs:

@@ -29,7 +29,6 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 17,4000,320,visually identified range,Gfx_17_4000_ShootMenuIconsA,mixed,,icon row of the SHOOT-menu tile bank
 17,4200,1152,visually identified range,Gfx_17_4200_ShootCounterIcons,mixed,,"digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens"
 17,4820,288,visually identified range,Gfx_17_4820_ShootMenuIconsB,mixed,,icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets
-17,5500,4864,visually identified range,Gfx_17_5500_ShootOptionLabelGlyphs,mixed,,"Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot"
 18,7D80,256,content-classified span,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,mixed,,2bpp tile data placed next to Mode0F_State04_LeaveSelected; function = same family as its neighbour
 1A,4D80,128,content-classified span,Gfx_1A_4D80_DjPerf_DrawTempo_Aux,mixed,,2bpp tile data placed next to DjPerf_DrawTempo; function = same family as its neighbour
 1A,5160,3,unknown data (no reader found),Data_1A_5160,all 00,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
@@ -111,17 +110,12 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 24,6080,34,unknown data (no reader found),Data_24_6080,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 24,60B2,270,content-classified span,Gfx_24_60B2_Unref,mixed,,2bpp tile data with no neighbouring consumer
 24,6200,288,content-classified span,Map_24_6200_Mode01_State02_ApplyPageA_Aux,mixed,,tile map data placed next to Mode01_State02_ApplyPageA; function = same family as its neighbour
-24,6360,64,content-classified span,Map_24_6360_Mode01_State00_Intro_Aux,mixed,,tile map data placed next to Mode01_State00_Intro; function = same family as its neighbour
 24,7780,32,unknown data (no reader found),Data_24_7780,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 24,78C0,66,content-classified span,Gfx_24_78C0_PenMenu_Build_Aux,mixed,,2bpp tile data placed next to PenMenu_Build; function = same family as its neighbour
 24,7913,77,content-classified span,Gfx_24_7913_Unref,mixed,,2bpp tile data with no neighbouring consumer
 25,5834,12,unknown data (no reader found),Data_25_5834,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-25,7160,64,content-classified span,Map_25_7160_Mode05_State00_Init_Aux,mixed,,tile map data placed next to Mode05_State00_Init; function = same family as its neighbour
 25,75F4,12,unknown data (no reader found),Data_25_75F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-25,7614,460,content-classified span,Map_25_7614_Unref,mixed,,tile map data with no neighbouring consumer
 25,77F4,12,unknown data (no reader found),Data_25_77F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-25,7814,588,content-classified span,Map_25_7814_Unref,mixed,,tile map data with no neighbouring consumer
-26,7080,576,content-classified span,Map_26_7080_Mode16_State08_StartShoot_Aux,mixed,,tile map data placed next to Mode16_State08_StartShoot; function = same family as its neighbour
 26,7BC0,576,content-classified span,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,mixed,,tile map data placed next to CreditsNishimuraDanceMap4; function = same family as its neighbour
 26,7E20,352,content-classified span,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,mixed,,2bpp tile data placed next to Album_LoadNumeralTileB; function = same family as its neighbour
 27,5BB0,22,unknown data (no reader found),Data_27_5BB0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"

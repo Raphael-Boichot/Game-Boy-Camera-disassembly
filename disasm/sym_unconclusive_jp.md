@@ -8,9 +8,9 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 11 | 14562 | a yes/no on the family name |
+| visually identified range | 10 | 9698 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 17 | 213 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 58 | 15290 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| content-classified span | 53 | 13538 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 75 | 812 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 16 | 925 | what the table indexes |
 | hand name, unconfirmed | 12 | 686 | a check of the guess |
@@ -23,7 +23,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
 | dead code | 29 | 6175 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (11)
+## visually identified range (10)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
@@ -38,7 +38,6 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 | 17:4000 | `Gfx_17_4000_ShootMenuIconsA` | 320 | icon row of the SHOOT-menu tile bank | icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init |
 | 17:4200 | `Gfx_17_4200_ShootCounterIcons` | 1152 | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcon |
 | 17:4820 | `Gfx_17_4820_ShootMenuIconsB` | 288 | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual) |
-| 17:5500 | `Gfx_17_5500_ShootOptionLabelGlyphs` | 4864 | Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot | Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, w |
 | 21:4D00 | `Gfx_21_4D00_SpaceFeverFont` | 896 | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines;  |
 
 ## far-pointer asset, extent unknown (17)
@@ -65,7 +64,7 @@ _Why doubtful:_ end taken as the next pointer or asset. _To settle:_ read the co
 | 2A:58D6 | `Sheet_MiscellaneousStampsJpn_2A_58D6_Gap` | 6 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
 | 2A:58F6 | `Sheet_MiscellaneousStampsJpn_2A_58F6_Gap` | 4 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
 
-## content-classified span (58)
+## content-classified span (53)
 
 _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
@@ -83,9 +82,8 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 20: `64E0` OwnerCard_LoadGenderTiles_Aux (64 B), `66C0` Unref (256 B), `70F0` Mode15_DrawTwoDigitsInterval_Aux (144 B), `71A0` Mode15_DrawTwoDigits_Aux (288 B)
 - bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (69 B), `6AC7` Unref (177 B), `6B91` Unref (47 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
 - bank 23: `5CC0` Mode0E_ExchangeAlt_Unref (580 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
-- bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `6360` Mode01_State00_Intro_Aux (64 B), `78C0` PenMenu_Build_Aux (66 B), `7913` Unref (77 B)
-- bank 25: `7160` Mode05_State00_Init_Aux (64 B), `7614` Unref (460 B), `7814` Unref (588 B)
-- bank 26: `7080` Mode16_State08_StartShoot_Aux (576 B), `7BC0` CreditsNishimuraDanceMap4_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (352 B)
+- bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `78C0` PenMenu_Build_Aux (66 B), `7913` Unref (77 B)
+- bank 26: `7BC0` CreditsNishimuraDanceMap4_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (352 B)
 - bank 2A: `59FF` MiscellaneousStampsJpn_Aux (105 B)
 
 ## unknown data (no reader found) (75)

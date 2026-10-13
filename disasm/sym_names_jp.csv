@@ -3660,7 +3660,7 @@ bank,addr,name,conf,note,source
 17,5400,Gfx_17_5400_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 17,5440,Gfx_17_5440_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
 17,54E0,Gfx_17_54E0_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
-17,5500,Gfx_17_5500_ShootOptionLabelGlyphs,C,"Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot_DrawOptionPanel and Mode14_State04_OptionsPage load) (visual). Owner (review page, 2026-10-13): graphic, by eye.",fix
+17,5500,Gfx_17_5500_Unused_MainMenuTiles,C,"tile block (304 tiles, 4,864 bytes) of an unused one-page main menu: the map 25:7814 uses ids 0-233 of it and BGB draws the flow-chart menu with it (README 16.25); tiles 234-303 are line / arc fragments (by eye). Replaces the owner's 'glyph strips of the SHOOT option menus' reading (by eye), which the seam search and BGB do not support. Identical in the international ROM; no copy site reaches it.",fix
 17,6800,Gfx_17_6800_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 17,7000,Gfx_17_7000_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 17,7800,Gfx_17_7800_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
@@ -4930,8 +4930,8 @@ bank,addr,name,conf,note,source
 24,61C0,Map_24_61C0_Mode01_State02_ApplyPageA,I,"far pointer loaded by Mode01_State02_ApplyPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 24,6200,Map_24_6200_Mode01_State02_ApplyPageA_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode01_State02_ApplyPageA); classified from its content - see sym_unconclusive",assets
 24,6320,Map_24_6320_Mode01_State00_Intro,I,"far pointer loaded by Mode01_State00_Intro (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-24,6360,Map_24_6360_Mode01_State00_Intro_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode01_State00_Intro); classified from its content - see sym_unconclusive",assets
-24,63A0,Src_24_63A0_Tbl4B67_2,I,"target 2 of the {lo,hi,bank} table 06:4B67; extent not known: runs to the next pointer or asset",assets
+24,6360,Map_24_6360_Mode16_OptionPage2_HeadRows,C,"rows 0-1 (ramp 00-27) of the option-page map of mode $16 whose rows 2-17 are 24:63A0; Mode16_BuildOptionList (06:4B39) copies 24:63A0 to $9840 (row 2), so these two rows are never loaded",fix
+24,63A0,Map_24_63A0_Mode16_OptionPage2,C,"option page 2: 16 rows to $9840 (table entry 2), then Mode16_BuildList4 reads pieces from 24:6507 and 24:65A0",fix
 24,6598,Gfx_24_6598_Mode17_State00_Init,I,"far pointer loaded by Mode17_State00_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 8 from the nearby ld bc",assets
 24,65A0,Map_24_65A0_Mode16_BuildList4,I,"far pointer loaded by Mode16_BuildList4 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 24,6620,Map_24_6620_Mode1A_State02_Setup,I,copied to VRAM/WRAM by Mode1A_State02_Setup (assets/catalog_jp.csv),assets
@@ -4959,14 +4959,14 @@ bank,addr,name,conf,note,source
 25,4500,Gfx_25_4480_CreditsGirlFrame00_Part4500,C,"frame 0 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 25,47C0,Map_25_47C0_Mode14_State0C_Reinit,I,"far pointer loaded by Mode14_State00_Init, Mode14_State0C_Reinit, Shoot_RestoreViewScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 25,4980,Map_25_47C0_Mode14_State00_Init_Part4980,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
-25,4A80,BgMap_25_4A80,I,"32-column BG tilemap: FE fill, 16x14 photo-area ramp (00-8F, 00-4F), side icons; sits between the ma",assets
-25,4B00,Map_25_4B00_Unused_LoadTilemap25_4B00,I,"far pointer loaded by Unused_LoadTilemap25_4B00 (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+25,4A80,Map_25_4A80_BlankRows,I,four blank rows ($FE) between the map copied from 25:47C0 (22 rows) and the map at 25:4B00; filler,fix
+25,4B00,BgMap_25_4B00,I,"22-row map (0x2C0 bytes): 16x14 photo-area ramp (00-8F, 00-4F) with icon blocks (A0-DF) and two icon",assets
 25,4DC0,Map_25_4DC0_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
-25,5080,BgMap_25_5080,I,first two rows (tile ramp 00-27) of the map whose other rows are read from 25:50C0,assets
-25,50C0,Src_25_50C0_Tbl4B67_1,I,"target 1 of the {lo,hi,bank} table 06:4B67; extent not known: runs to the next pointer or asset",assets
+25,5080,Map_25_5080_Mode16_OptionPage1_HeadRows,C,rows 0-1 (ramp 00-27) of option page 1 (rows 2-17 = 25:50C0); never loaded,fix
+25,50C0,Map_25_50C0_Mode16_OptionPage1,C,"option page 1: 16 rows to $9840 (table entry 1), then Mode16_BuildList2 reads 8-byte pieces from 25:51E7 and 25:52C0",fix
 25,52C0,Map_25_52C0_Mode16_BuildList2,I,"far pointer loaded by Mode16_BuildList2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
-25,5320,BgMap_25_5320,I,first two rows (tile ramp 00-27) of the map that starts at 25:5320,assets
-25,5360,Src_25_5360_Tbl4B67_3,I,"target 3 of the {lo,hi,bank} table 06:4B67; extent not known: runs to the next pointer or asset",assets
+25,5320,Map_25_5320_Mode16_OptionPage3_HeadRows,C,rows 0-1 (ramp 00-27) of option page 3 (rows 2-17 = 25:5360); never loaded,fix
+25,5360,Map_25_5360_Mode16_OptionPage3,C,"option page 3: 16 rows to $9840 (table entry 3), then Mode16_BuildList6 reads pieces from 25:5507 and 25:5560",fix
 25,5560,Map_25_5560_Mode16_BuildList6,I,"far pointer loaded by Mode16_BuildList6 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
 25,55C0,Map_25_55C0_SpecialMenu_DrawCursor,I,copied to VRAM/WRAM by SpecialMenu_DrawCursor (assets/catalog_jp.csv),assets
 25,5680,Map_25_5680_SpaceFever_Boss_EndB,I,"far pointer loaded by SpaceFever_Boss_EndB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -4986,18 +4986,18 @@ bank,addr,name,conf,note,source
 25,6AA0,Map_25_6AA0_Mode15_State04_TimerApply,I,copied to VRAM/WRAM by Mode15_State04_TimerApply (assets/catalog_jp.csv),assets
 25,6CE0,Map_25_6CE0_WildFramePicker_Substate0_Init,I,copied to VRAM/WRAM by WildFramePicker_Substate0_Init (assets/catalog_jp.csv),assets
 25,6F20,Map_25_6F20_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
-25,7160,Map_25_7160_Mode05_State00_Init_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode05_State00_Init); classified from its content - see sym_unconclusive",assets
-25,71A0,Src_25_71A0_Tbl4B67_0,I,"target 0 of the {lo,hi,bank} table 06:4B67; extent not known: runs to the next pointer or asset",assets
+25,7160,Map_25_7160_Mode16_OptionPage0_HeadRows,C,"rows 0-1 (ramp 00-27) of option page 0 (rows 2-17 = 25:71A0); never loaded, as for every page",fix
+25,71A0,Map_25_71A0_Mode16_OptionPage0,C,option page 0 of mode $16: 16 rows of 32 copied to $9840 by Mode16_BuildOptionList (table 06:4B67 entry 0); its builder Mode16_BuildList0 is a bare ret,fix
 25,73A0,Map_25_73A0_Mode15_StepValue,I,copied to VRAM/WRAM by Mode15_StepValue (assets/catalog_jp.csv),assets
 25,75F4,Data_25_75F4,?,"no copy site, table or sheet covers these bytes",assets
-25,7614,Map_25_7614_Unref,C,"map (tile indices). Owner (review page, 2026-10-13): map, by eye; tile-index rows of 32: $FF fill, $E0 $E0 borders and counters $00-$0F, $10-$1F ...; 460 bytes; never on screen in the display-tracking runs.",fix
+25,7614,Map_25_7614_Unused_PhotoAreaRight,I,"map (14 rows of 32 + 12 bytes): $FF in columns 0-11, then $E0 $E0, the 16-wide photo ramp $00-$DF (14 rows) and $E0 $E0, like the other photo screens but in columns 12-31 (the same columns as the unused main menu 25:7814); no copy site reaches it; tile set = the dynamic photo tiles, so nothing to draw (README 16.25). Identical in the international ROM (25:73D4).",fix
 25,77F4,Data_25_77F4,?,"no copy site, table or sheet covers these bytes",assets
-25,7814,Map_25_7814_Unref,C,"map (tile indices). Owner (review page, 2026-10-13): map, by eye; tile-index rows, not glyphs (the old name guessed a narrow Latin letter strip): 588 bytes, mostly $29 and $E9 with descending runs ($E7 $E6 ... $D5); never on screen in the display-tracking runs.",fix
+25,7814,Map_25_7814_Unused_MainMenu,C,"tile map (18 rows of 32 + 12 bytes) of the unused one-page main menu; the picture is in columns 12-31 (SCX = 96 in BGB), ids 00-E9 de-duplicated and descending, 00-2B = the STATUS strip; BGB draws it with 17:5500 (README 16.25). Identical in the international ROM (25:75D4); no copy site reaches it.",fix
 25,7A60,Map_25_7A60_Boot_EraseAllPrompt_Far,I,copied to VRAM/WRAM by Boot_EraseAllPrompt_Far (assets/catalog_jp.csv),assets
 25,7CA0,Map_25_7CA0_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
 25,7EE0,Src_25_7EE0_Tbl539D_40,I,"target 40 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets
 26,4000,Gfx_26_4000_CreditsGirlFrame06,C,"frame 6 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
-26,4500,BgMap_26_4500,I,"32-column BG tilemap: 16x14 photo-area ramp with side icons, then $FF fill",assets
+26,4500,Map_26_4500_Unused_IconFrame,I,"18-row map: 16x14 photo-area ramp (00-8F, 00-4F) with icon columns and icon blocks in rows 14-17, then $FF fill; no copy site and no table entry reaches it (README 16.25)",fix
 26,4880,Gfx_26_4880_Mode1A_State03_Browse,I,"far pointer loaded by Mode1A_State03_Browse (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from the nearby ld bc",assets
 26,4C80,Map_26_4C80_CreditsEndingPlate_Map,C,20 x 18 map of the ending picture (0x240 bytes to $9800),assets
 26,4EC0,Map_26_4EC0_Run_CompareRecord,I,copied to VRAM/WRAM by Run_CompareRecord (assets/catalog_jp.csv),assets
@@ -5017,7 +5017,7 @@ bank,addr,name,conf,note,source
 26,69C0,Map_26_69C0_WildFrame_PageSrcTbl,I,copied to VRAM/WRAM by WildFrame_PageSrcTbl (assets/catalog_jp.csv),assets
 26,6C00,Map_26_6C00_Mode21_State07_RaceEnd,I,copied to VRAM/WRAM by Mode21_State07_RaceEnd (assets/catalog_jp.csv),assets
 26,6E40,Map_26_6E40_Mode16_State08_StartShoot,I,copied to VRAM/WRAM by Mode16_State08_StartShoot (assets/catalog_jp.csv),assets
-26,7080,Map_26_7080_Mode16_State08_StartShoot_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode16_State08_StartShoot); classified from its content - see sym_unconclusive",assets
+26,7080,Map_26_7080_Unused_Picture,I,"full-screen picture map (18 rows of 32, picture in columns 0-19, $A5 filler in 20-31): 245 distinct ids, descending, a 4-column side strip (00-23) and a 16-column picture (24-F5) like the unused main menu; no copy site reaches it and no tile block fits it (tile_seam_search.py: best 0.80 per pixel against 0.42 for a true set), so what it shows is not known. Identical in the international ROM (26:6E40).",fix
 26,72C0,Map_26_72C0_Mode08_State13_CreditsPageA,I,copied to VRAM/WRAM by Mode08_State13_CreditsPageA (assets/catalog_jp.csv),assets
 26,7500,Map_26_7500_CreditsNishimuraDanceMap2,C,"map 2 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 26,7740,Map_26_7740_CreditsNishimuraDanceMap3,C,"map 3 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
@@ -5030,9 +5030,9 @@ bank,addr,name,conf,note,source
 27,4472,Map_27_4472_Mode1C_DrawOptionScreen,I,"far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_DrawPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 27,44B2,Map_27_44B2_Mode17_State08_Split_Build,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode17_State08_Split_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 27,4730,Map_27_44B2_Compose_Split_DrawMakeBlink_Part4730,I,"copied to VRAM/WRAM by Compose_Fusion_DrawMakeBlink, Compose_Split_DrawMakeBlink, Mode0E_State02_MessageStrip (assets/catalog_jp.csv)",assets
-27,4772,BgMap_27_4772,I,"32-column BG tilemap rows filled with tile $FD (blank), before the map copied from 27:4870",assets
+27,4772,Map_27_4772_BlankRows,I,eight blank rows ($FD) after the 22-row map copied from 27:44B2 and before the map copied from 27:4870; filler,fix
 27,4870,Map_27_4870_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
-27,4AA0,TileSet_27_4AA0,I,"small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs",assets
+27,4AB0,TileSet_27_4AB0,I,"small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs; it start",assets
 27,4CB0,Map_27_4CB0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 27,4EB0,Map_27_4EB0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 27,50B0,Map_27_50B0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
