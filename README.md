@@ -59,22 +59,37 @@ rgbds v1.0.4  (rgbasm/rgblink/rgbfix)  — installed, matches what mgbdis's Make
 mgbdis v3.0   — github.com/mattcurrie/mgbdis, used for the static disassembly pass
 ```
 
-Procedure (byte-exact, verified working):
+Procedure (byte-exact, verified working). mgbdis v3.0 has no `--sym` option: it reads `<rom basename>.sym` from the folder of the ROM, so the symbol file must sit beside `pocketcamera_jp.gb` under that name:
 
 ```bash
-python3 mgbdis.py --output-dir disasm_labeled --sym pocketcamera_jp.sym pocketcamera_jp.gb
+cp pocketcamera_jp.sym /path/to/rom/folder/            # beside pocketcamera_jp.gb
+python3 mgbdis.py --output-dir disasm_labeled pocketcamera_jp.gb
 cd disasm_labeled
 make            # runs rgbasm -> rgblink -> rgbfix -> md5sum
 # md5sum must print fdcfe686cf4df461e870b6e53b2b5a8b
 ```
 
-`pocketcamera_jp.sym` (included) currently annotates:
-- All 7 menu-bank state-dispatch tables (banks $003–$009) as `.data`, with every state entry labeled — this alone fixed most of the code/data misalignment in those banks.
-- ~28 hand-traced entry points inside bank $0A (sensor/calibration/factory-test) and its 5 lookup tables, also marked `.data` so mgbdis stops misreading them as instructions; the sensor pass (§18) adds 11 bank-$0A labels (the factory test, the full calibration, the live-view start, four far stubs, the three dither variants, and the 160-byte exposure shift table at `$7B00`, also marked `.data`) and renames three misleading ones (`Cam_BootPing1/2`, `Cam_BootAllButtons_or_SensorFail`). **Not re-assembled in the session that made these symbol edits (mgbdis and rgbasm were not available there): run the procedure above and compare the md5 before trusting them.**
+Optional readability pass (does not change a byte, checked by the same md5): `python3 mgbdis.py --print-hex --output-dir out pocketcamera_jp.gb && python3 tools/sym_fix.py out --tables && (cd out && make)`. mgbdis v3.0 prints a label for *any* 16-bit operand equal to the address of a label of the current bank (or of bank 0 below `$4000`), whatever the operand means (`ld bc, Label` for a byte count, `ld [Label], a` for an MBC register write, a far pointer read in the wrong bank, a word table as `db $lo, $hi`). `tools/sym_fix.py` rewrites the cases that the code itself decides (74 MBC writes, 28 byte counts, 40 far-pointer loads, 1,761 + 220 word-table rows as `dw`, 255 `{lo,hi,bank}` rows as `dw Label` + `db BANK(Label)`); what is left of the artefact is cosmetic (a number printed as the label that happens to share its value).
 
-This is a **living file** — every further routine we label goes here and the disassembly regenerates clean. This is the recommended workflow for the rest of the project: never hand-edit the generated `.asm`, only ever add to the `.sym` file and regenerate.
+#### 1.1.1 The complete symbol file (`pocketcamera_jp.sym`, `disasm/sym_*_jp.csv`)
 
-Remaining known-dirty regions: the classification of the data banks and of the typeless data inside the code banks, measured in §1.2.
+`pocketcamera_jp.sym` now covers **every byte of the 1 MiB ROM**: 5,679 labels and 8,670 lines in mgbdis v3.0 syntax (`BB:AAAA Name`, plus the block types `.code:LEN`, `.data:LEN[:WIDTH]`, `.text:LEN`, `.padding:LEN`).
+Bytes by type: code 117,627 (the 60,449 instructions of the trace, so every `.code` block starts on a proven instruction and the disassembler agrees with the trace on every boundary), data 849,711 (with a row width per structure: 2 for word tables, 3 for `{lo,hi,bank}` far pointers, 32 for tile maps, 16 for tiles), padding 81,223, text 15 (`MAIN PASS` at `00:2E88` and the SRAM check string `Magic` at `02:4000`).
+It is **generated, not hand-edited**: `tools/sym_build.py` builds it from two layered tables,
+`disasm/sym_names_jp.csv` (`bank,addr,name,conf,note,source`: later layers win: assets < auto < hand < fixes) and `disasm/sym_types_jp.csv` (the block rows), and the trace `wram/trace_jp_v3.json`:
+
+```bash
+python3 tools/sym_build.py pocketcamera_jp.gb --names disasm/sym_names_jp.csv --types disasm/sym_types_jp.csv --trace wram/trace_jp_v3.json --out pocketcamera_jp.sym --report
+```
+
+To rename or retype something, edit a row of the two CSV files and rebuild; the builder refuses duplicate names, a label inside an instruction, a hole or overlap between blocks, and a `.padding` block that is not one repeated byte.
+
+*Naming.* `Module_Verb` in PascalCase (`Album_DrawPage`, `Cam_CalibrateSensor`, `Sfx1_Init_3B_EraseAnim`); a data asset carries its type, bank, address and consumer: `Gfx_17_5500_ShootOptionLabelGlyphs` (2bpp tiles), `Map_24_4B20_PenMenuSizePanel0` (tile-map rows), `Src_BB_AAAA_Owner` (loaded through a far pointer, destination class unknown), `Sheet_<Name>_BB_AAAA` (a Spriters Resource sheet), `*_Part<addr>` (a continuation of the same asset). Each name has a confidence tag in the CSV: **C** confirmed (code read, README, emulator), **I** inferred (consumer or neighbour evidence), **?** doubtful: 3,424 / 1,820 / 435.
+*Where the names come from:* the 134 trace roots and the hand names of the earlier passes (README sections); the WRAM map (§2) for variable-driven names; the table-driven extents (message strips 15 x `$280` bytes, heads 24 x `$380`, the credits rows 234 x 32 bytes, the Album B slots, the stamp tables of `04:5337`, the pen-menu panel tables of `04:67A5`/`67EF`/`6839`); the TCRF and Spriters Resource sheets (`assets/spriter_sheet_map_jp.csv`, `assets/catalog_jp.csv`) for graphics; and, for 22 ranges, the picture of the bytes (`disasm/sym_unconclusive_banks/`).
+A load site only counts as a far pointer when the immediate really reaches the banked helper unchanged: `ld hl,TABLE` + `add hl,bc` + `ld a,[hl+]` (a pointer table of the current bank, as in the pen-menu builders) is not one, while `ld hl,BASE` + `add hl,de` (a digit-indexed tile table) is.
+
+*What is not settled* is listed in `disasm/sym_unconclusive_jp.md` / `.csv` (850 rows: every `?` name plus the `I` names of eight groups with their best guess, evidence and what would settle each): 200 small unread data blocks, 163 spans classified by content only (map rows vs tiles, named after the neighbouring consumer: `_Aux` / `_Unref`), 33 far-pointer assets whose extent is the next pointer, 15 identified from the picture, 106 mode-state handlers, 91 sound-effect tags, 88 bank-`$0A` effect slots, 43 Run mini-game names, 36 glyph loaders, 21 dead-code names, 18 main-menu slide routines, 16 auto-named tables, 12 arrow routines, 8 hand names. Bank pictures of the unresolved data are in `disasm/sym_unconclusive_banks/` (`tools/bank_pics.py`; orange = span in the list, blue = other `?` asset).
+Limits: names are inferred from code, README, WRAM map, TCRF, Spriters Resource and the pictures; they are not hardware-verified. Stamp storage (`2D:7000-7FFF`, noise-like) and the semantics of the 80 effect slots are open.
 
 ### 1.2 Disassembly status: what is proven, and what is lacking for a confident disassembly
 
@@ -3915,7 +3930,7 @@ The datasheet (ver. 1.1E, "preliminary") is a poor translation; these are the po
 - International ROM and names (§16.1-16.5, 16.8): `intl_replay.py`, `atlas_replay.py` (`MIRROR=1`), `atlas_sheet.py`, `mainmenu_probe.py`, `parlor_targets.py` (what each SHOOT-parlor choice opens), `albumb_pages.py` (Album B page walk), `boot_flags.py` (`$D582` / `$D562` after boot), `hotspot_common.py`, `hotspot_filmstrip.py`, `hotspot_visibility.py`
 - Printing and the BGB re-trace (§17): `bgb_printer.py` (printer helper for BGB), `bgb_print_run.py`, `bgb_dj_print.py`, `dj_route.py`, `dj_print_probe.py`, `dj_screens.py`, `print_explore.py`, `album_nav.py`, `bgb_link_sniff.py`; `blocks.py`, `bgb_trace_core.py`, `bgb_trace_plan.py`, `bgb_trace_run.py`, `bgb_trace_report.py`, `bgb_never_probe.py`, `bgb_divergence.py`, `dj_corpus.py`; results in `tcrf_check/assets/bgb_retrace/`, printed pages in `tcrf_check/assets/bgb_printer/`
 - `disasm/code_gaps.md` — full report behind §1.2 (resolved indirect sites, verdict on the unreferenced regions, blockers)
-- `pocketcamera_jp.sym` — the growing symbol file; regenerate the disassembly from this after any addition
+- `pocketcamera_jp.sym` — the complete symbol file (every byte typed and every routine / asset named, §1.1.1), generated by `tools/sym_build.py` from `disasm/sym_names_jp.csv` and `disasm/sym_types_jp.csv`; `tools/sym_fix.py` (readability pass over the mgbdis output), `tools/make_doubts.py` and `tools/bank_pics.py` (the doubt list `disasm/sym_unconclusive_jp.md` / `.csv` and its bank pictures)
 
 ### Mode table (`$2F3F`)
 

@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Post-process an mgbdis disassembly of Pocket Camera (Japan) Rev A so that the numbers mgbdis turns into labels read as numbers again.
+
+  mgbdis --print-hex --output-dir disasm_out pocketcamera_jp.gb          # pocketcamera_jp.sym must sit beside the ROM
+  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace wram/trace_jp_v3.json] [--tables] [--strip-hex]
+  cd disasm_out && make && md5sum game.gb                                # must still be fdcfe686cf4df461e870b6e53b2b5a8b
+
+Why: mgbdis v3.0 prints a symbol for ANY 16-bit operand that equals the address of a label of the current bank (or of bank 0 below $4000),
+whatever the operand means. The bytes are identical either way (the file still assembles to the same ROM); only the reading is wrong. This script
+repairs the cases that can be told from the code (every decision uses the instruction bytes in the `; $ADDR: $xx $yy $zz` comment and the static trace):
+
+  1. `ld [Label], a`  (opcode EA, operand < $8000)  -> `ld [$xxxx], a`      MBC register write (RAM enable, ROM bank, RAM bank, mode): never a label
+  2. `ld bc, Label`  (opcode 01)                    -> `ld bc, $xxxx`       BC holds a byte count unless the value is above $2000, the code is in bank $1F (sound),
+                                                                           or a [bc] access follows before BC is reloaded
+  3. `ld hl|de, Label` whose pointer feeds a banked helper (the banked copy and call helpers 00:0450, 00:0479, 00:0586, 00:05F8, 00:069F, 00:08BB, 00:08C1) with `ld a, BANK` -> the label of that
+                                                                           bank at that address, or the plain number when the target has no label
+  4. `--tables`: a `.data:LEN:2` block (word table) is written as `dw Label` / `dw $xxxx` instead of `db $lo, $hi` (the label is used only when a
+                                                                           label sits exactly at that address in bank 0 or in the table's own bank); a `.data:LEN:3` block of
+                                                                           {lo,hi,bank} far pointers is written `dw Label` + `db BANK(Label)` for every row whose target has a label
+  Not repaired (kept as the label mgbdis chose): `ld hl|de, Label` that is really a number (e.g. `ld de, $4000` used as an offset), and
+  `ld a, [Label]` reads of ROM bytes (3 of them, all real table reads).
+Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-identical; check with the md5 above."""
+import sys, os, re, json, argparse, collections, glob
+ap = argparse.ArgumentParser()
+ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
+ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
+a = ap.parse_args()
+rom_path = a.rom or (glob.glob(os.path.join(a.dir, '..', '*.gb')) or glob.glob(os.path.join(a.dir, '..', '..', '*.gb')) or ['pocketcamera_jp.gb'])[0]
+sym_path = a.sym or os.path.splitext(rom_path)[0] + '.sym'
+ROM = open(rom_path, 'rb').read()
+T = json.load(open(a.trace))
+def off(b, ad): return ad if b == 0 else b * 0x4000 + (ad - 0x4000)
+code = collections.defaultdict(dict)
+for k, n in T['code'].items():
+    b, ad = k.split(':')
+    if n > 0: code[int(b, 16)][int(ad, 16)] = n
+PREV = {(cb, ca + n): ca for cb, m in code.items() for ca, n in m.items()}
+FAR_HELPERS = {0x0450, 0x0479, 0x0586, 0x05F8, 0x069F, 0x08BB, 0x08C1}
+# ---- symbols
+bynm = {}; byad = {}; words = []; trips = []     # (bank,start,end) of .data blocks of width 2 (word tables) and width 3 ({lo,hi,bank} far pointers)
+for l in open(sym_path):
+    l = l.strip()
+    if not l or l.startswith(';'): continue
+    loc, nm = l.split()[:2]; b, ad = loc.split(':'); b = int(b, 16); ad = int(ad, 16)
+    if nm.startswith('.'):
+        p = nm[1:].split(':')
+        if p[0] == 'data' and len(p) == 3 and int(p[2], 16) == 2: words.append((b, ad, ad + int(p[1], 16)))
+        if p[0] == 'data' and len(p) == 3 and int(p[2], 16) == 3: trips.append((b, ad, ad + int(p[1], 16)))
+    else: bynm[nm] = (b, ad); byad[(b, ad)] = nm
+# ---- evidence helpers (same rules as the naming pass)
+def bc_deref(b, ad, window=40):
+    p = ad + code[b].get(ad, 3)
+    for _ in range(window):
+        n = code[b].get(p)
+        if not n: return False
+        o = ROM[off(b, p)]
+        if o in (0x0A, 0x02): return True
+        if o == 0x01 or o in (0xC9, 0xD9, 0xC3, 0x18, 0xE9): return False
+        p += n
+    return False
+HL_MOD={0x2A,0x3A,0x7E,0x46,0x4E,0x56,0x5E,0x66,0x6E,0xE1,0x21,0xF8}      # [HL] is read (HL is a pointer to a pointer table of the current bank), HL reloaded or popped
+def far_bank(cb, ca):
+    """bank loaded into A for the banked helper call that consumes the `ld hl, imm` at cb:ca (None when there is none)"""
+    p = ca; found = False
+    for _ in range(9):
+        n = code[cb].get(p)
+        if not n: return None
+        o = ROM[off(cb, p)]
+        if o == 0xCD:
+            if (ROM[off(cb, p) + 1] | ROM[off(cb, p) + 2] << 8) in FAR_HELPERS: found = True; break
+            return None
+        if o in (0xC3, 0xC9, 0x18): return None
+        if p != ca and o in HL_MOD: return None      # [HL] is read or HL reloaded before the call: the immediate is a local pointer-table base
+        p += n
+    if not found: return None
+    p = ca
+    for _ in range(8):
+        q = PREV.get((cb, p))
+        if q is None: break
+        if ROM[off(cb, q)] == 0x3E: return ROM[off(cb, q) + 1]
+        p = q
+    p = ca
+    for _ in range(9):
+        n = code[cb].get(p)
+        if not n: break
+        if ROM[off(cb, p)] == 0x3E: return ROM[off(cb, p) + 1]
+        p += n
+    return None
+# ---- rewrite
+LINE = re.compile(r'^(\s+)(\S.*?)(\s*)(; \$([0-9a-f]{4}): ((?:\$[0-9a-f]{2} ?)+))\s*$')
+stats = collections.Counter()
+def word_target(bank, w):
+    if w < 0x4000: return byad.get((0, w))
+    return byad.get((bank, w))
+def in_blocks(lst, bank, ad):
+    for b, s, e in lst:
+        if b == bank and s <= ad < e: return True
+    return False
+for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
+    bank = int(re.search(r'bank_([0-9a-f]+)\.asm', fn).group(1), 16)
+    out = []; cur = None
+    for line in open(fn, encoding='utf-8').read().split('\n'):
+        m = LINE.match(line)
+        if m:
+            ind, ins, pad, cm, ad, hx = m.groups(); ad = int(ad, 16); by = [int(x[1:], 16) for x in hx.split()]
+            cur = ad + len(by); new = ins
+            mm = re.match(r'^ld \[([A-Za-z_]\w*)\], a$', ins)
+            if mm and by[0] == 0xEA and len(by) == 3:
+                v = by[1] | by[2] << 8
+                if v < 0x8000: new = 'ld [$%04x], a' % v; stats['mbc_write'] += 1
+            mm = re.match(r'^ld (hl|de|bc), ([A-Za-z_]\w*)$', ins)
+            if mm and len(by) == 3 and by[0] in (0x21, 0x11, 0x01):
+                v = by[1] | by[2] << 8
+                if by[0] == 0x01:
+                    if not (v > 0x2000 or bank == 0x1F or bc_deref(bank, ad)):
+                        new = 'ld bc, $%04x' % v; stats['bc_count'] += 1
+                elif 0x4000 <= v < 0x8000:
+                    bk = far_bank(bank, ad)
+                    if bk is not None and bk != bank:
+                        t = byad.get((bk, v))
+                        new = 'ld %s, %s' % (mm.group(1), t if t else '$%04x' % v); stats['far_ptr' if t else 'far_ptr_numeric'] += 1
+            line = ind + new + (pad + cm if not a.strip_hex else '') if new != ins or a.strip_hex else line
+            out.append(line); continue
+        s = line.strip()
+        ml = re.match(r'^([A-Za-z_]\w*)::?$', s)
+        if ml:
+            if ml.group(1) in bynm: cur = bynm[ml.group(1)][1]
+            else:
+                mj = re.match(r'^(?:Call|Jump|jr)_[0-9a-f]{3}_([0-9a-f]{4})$', ml.group(1))
+                cur = int(mj.group(1), 16) if mj else None
+            out.append(line); continue
+        md = re.match(r'^db (.*)$', s)
+        if md and cur is not None:
+            items = [x.strip() for x in md.group(1).split(',')]
+            nb = sum(len(x) - 2 for x in items if x.startswith('"') and x.endswith('"')) + sum(1 for x in items if x.startswith('$'))
+            if a.tables and nb == 2 and len(items) == 2 and all(x.startswith('$') for x in items) and in_blocks(words, bank, cur):
+                w = int(items[0][1:], 16) | int(items[1][1:], 16) << 8
+                t = word_target(bank, w); ind = line[:len(line) - len(line.lstrip())]
+                line = '%sdw %s' % (ind, t if t else '$%04x' % w); stats['dw_label' if t else 'dw_numeric'] += 1
+            elif a.tables and nb == 3 and len(items) == 3 and all(x.startswith('$') for x in items) and in_blocks(trips, bank, cur):
+                w = int(items[0][1:], 16) | int(items[1][1:], 16) << 8; bk = int(items[2][1:], 16)
+                t = byad.get((bk, w)) if bk < 0x40 and (0x4000 <= w < 0x8000 or (bk == 0 and w < 0x4000)) else None
+                if t:
+                    ind = line[:len(line) - len(line.lstrip())]
+                    line = '%sdw %s\n%sdb BANK(%s)' % (ind, t, ind, t); stats['far_ptr_row'] += 1
+            cur += nb
+        elif re.match(r'^ds \$[0-9a-f]+', s) and cur is not None:
+            cur += int(re.match(r'^ds \$([0-9a-f]+)', s).group(1), 16)
+        out.append(line)
+    open(fn, 'w', encoding='utf-8').write('\n'.join(out))
+print('sym_fix: ' + ', '.join('%s=%d' % kv for kv in sorted(stats.items())))
