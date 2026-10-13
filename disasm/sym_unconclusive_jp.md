@@ -6,20 +6,20 @@ Reading the names: `Gfx_BB_AAAA_*` = 2bpp tile data, `Map_BB_AAAA_*` = tile map 
 
 Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (every 2bpp tile of the bank, 32 tiles per row, row label = address of the first tile; grey = typed and named, orange = span listed in the groups "content-classified span" / "unknown data", blue = other `?` assets).
 
-| group | rows | bytes (to next label) | what would help |
+| group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 15 | 26874 | a yes/no on the family name |
-| far-pointer asset, extent unknown | 33 | 36270 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 163 | 41926 | what each span is: look at the bank image, or tell me the screen it belongs to |
-| unknown data (no reader found) | 200 | 16476 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
-| auto-named table | 16 | 1165 | what the table indexes |
-| hand name, unconfirmed | 8 | 528 | a check of the guess |
-| mode state | 106 | 5417 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
-| effect slot | 88 | 5706 | which visible effect each slot gives |
-| SFX tag | 91 | 1500 | the sound each id plays |
-| Run minigame | 43 | 1451 | variable roles during play |
-| keyboard / glyph | 36 | 1429 | which glyph page each loader fills |
-| main-menu slide | 18 | 1060 | which transition each slide is |
+| visually identified range | 15 | 22354 | a yes/no on the family name |
+| far-pointer asset, extent unknown | 33 | 27201 | where each block ends (the length copied at run time) and what it is |
+| content-classified span | 120 | 23805 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| unknown data (no reader found) | 185 | 3379 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
+| auto-named table | 16 | 925 | what the table indexes |
+| hand name, unconfirmed | 10 | 558 | a check of the guess |
+| mode state | 106 | 5954 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| effect slot | 88 | 11689 | which visible effect each slot gives |
+| SFX tag | 95 | 2536 | the sound each id plays |
+| Run minigame | 43 | 1755 | variable roles during play |
+| keyboard / glyph | 36 | 1336 | which glyph page each loader fills |
+| main-menu slide | 18 | 1234 | which transition each slide is |
 | arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
 | dead code | 21 | 527 | whether the code is truly dead (TCRF unused-content notes) |
 
@@ -34,16 +34,16 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 | 0D:7000 | `Gfx_0D_7000_FillPatternTiles` | 2304 | dot, crosshatch and dither fill tiles plus a few glyph pieces | dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by |
 | 10:7602 | `Gfx_10_7602_DjLetterGlyphStrip` | 678 | Latin letter / digit glyph strip | Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420 |
 | 11:5400 | `Gfx_11_5400_MainMenuUpperItemFramesA` | 256 | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_ | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by |
-| 11:5700 | `Gfx_11_5700_MainMenuIconAnimFrames` | 6400 | tall animated sprite frames (stacked boxes / segmented figure, 5 frames) drawn next to the main-menu upper items; same b | tall animated sprite frames (stacked boxes / segmented figure, 5 frames) drawn next to the main-menu upper ite |
-| 14:4554 | `Banner_14_4554_Continued` | 4780 | continues Banner_14_4000: Japanese banner letters followed by dithered picture data | continues Banner_14_4000: Japanese banner letters followed by dithered picture data (visual) |
+| 11:5700 | `Gfx_11_5700_MainMenuIconAnimFrames` | 4672 | tall animated sprite frames (stacked boxes / segmented figure, 5 frames) drawn next to the main-menu upper items; same b | tall animated sprite frames (stacked boxes / segmented figure, 5 frames) drawn next to the main-menu upper ite |
+| 14:4554 | `Banner_14_4554_Continued` | 2780 | continues Banner_14_4000: Japanese banner letters followed by dithered picture data | continues Banner_14_4000: Japanese banner letters followed by dithered picture data (visual) |
 | 17:4000 | `Gfx_17_4000_ShootMenuIconsA` | 320 | icon row of the SHOOT-menu tile bank | icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init |
 | 17:4200 | `Gfx_17_4200_ShootCounterIcons` | 1152 | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcon |
 | 17:4820 | `Gfx_17_4820_ShootMenuIconsB` | 288 | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual) |
 | 17:5500 | `Gfx_17_5500_ShootOptionLabelGlyphs` | 4864 | Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, which Shoot | Japanese label glyph strips of the SHOOT option menus (contrast / brightness / timer ... style as 4C00-5400, w |
 | 21:4D00 | `Gfx_21_4D00_SpaceFeverFont` | 896 | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines;  |
-| 23:5CC0 | `Gfx_23_5CC0_LetterGlyphStrip` | 604 | Latin letter glyph row | Latin letter glyph row (visual) |
+| 23:5CC0 | `Gfx_23_5CC0_LetterGlyphStrip` | 580 | Latin letter glyph row | Latin letter glyph row (visual) |
 | 25:7814 | `Gfx_25_7814_LetterGlyphStrip` | 588 | narrow Latin letter glyph strip | narrow Latin letter glyph strip (visual) |
-| 32:4000 | `Gfx_32_4000_FramePieceTiles` | 2048 | rounded frame / button pieces and round icons | rounded frame / button pieces and round icons (visual) |
+| 32:4000 | `Gfx_32_4000_FramePieceTiles` | 1280 | rounded frame / button pieces and round icons | rounded frame / button pieces and round icons (visual) |
 
 ## far-pointer asset, extent unknown (33)
 
@@ -51,100 +51,94 @@ _Why doubtful:_ end taken as the next pointer or asset. _To settle:_ read the co
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 2A:44D4 | `Sheet_MiscellaneousStampsJpn_2A_44D4_Gap` | 32 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:44D4 | `Sheet_MiscellaneousStampsJpn_2A_44D4_Gap` | 6 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
 | 2A:44F4 | `Sheet_MiscellaneousStampsJpn_2A_44F4_Gap` | 16 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:4A23 | `Sheet_MiscellaneousStampsJpn_2A_4A23_Gap` | 43 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:4A4E | `Sheet_MiscellaneousStampsJpn_2A_4A4E_Gap` | 28 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5401 | `Sheet_MiscellaneousStampsJpn_2A_5401_Gap` | 47 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5430 | `Sheet_MiscellaneousStampsJpn_2A_5430_Gap` | 34 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5452 | `Sheet_MiscellaneousStampsJpn_2A_5452_Gap` | 30 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5470 | `Sheet_MiscellaneousStampsJpn_2A_5470_Gap` | 34 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5492 | `Sheet_MiscellaneousStampsJpn_2A_5492_Gap` | 30 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:54B0 | `Sheet_MiscellaneousStampsJpn_2A_54B0_Gap` | 32 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:54D0 | `Sheet_MiscellaneousStampsJpn_2A_54D0_Gap` | 32 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:54F0 | `Sheet_MiscellaneousStampsJpn_2A_54F0_Gap` | 34 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5512 | `Sheet_MiscellaneousStampsJpn_2A_5512_Gap` | 24 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:585B | `Sheet_MiscellaneousStampsJpn_2A_585B_Gap` | 61 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5898 | `Sheet_MiscellaneousStampsJpn_2A_5898_Gap` | 62 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:58D6 | `Sheet_MiscellaneousStampsJpn_2A_58D6_Gap` | 32 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:58F6 | `Sheet_MiscellaneousStampsJpn_2A_58F6_Gap` | 20 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2B:4000 | `Gfx_2B_4000_StampCat03` | 990 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp category 03 (04:5337 Stamp_PageGfxTbl, stride $03C0, 1 blocks per page); extent: to the next  |
-| 2B:5800 | `Gfx_2B_5800_StampPrepareBuf3` | 10240 | data loaded through a banked copy helper; length not stated at the load site | record 3 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
+| 2A:4A23 | `Sheet_MiscellaneousStampsJpn_2A_4A23_Gap` | 23 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:4A4E | `Sheet_MiscellaneousStampsJpn_2A_4A4E_Gap` | 12 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5401 | `Sheet_MiscellaneousStampsJpn_2A_5401_Gap` | 25 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5430 | `Sheet_MiscellaneousStampsJpn_2A_5430_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5452 | `Sheet_MiscellaneousStampsJpn_2A_5452_Gap` | 8 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5470 | `Sheet_MiscellaneousStampsJpn_2A_5470_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5492 | `Sheet_MiscellaneousStampsJpn_2A_5492_Gap` | 2 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:54B0 | `Sheet_MiscellaneousStampsJpn_2A_54B0_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:54D0 | `Sheet_MiscellaneousStampsJpn_2A_54D0_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:54F0 | `Sheet_MiscellaneousStampsJpn_2A_54F0_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5512 | `Sheet_MiscellaneousStampsJpn_2A_5512_Gap` | 8 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:585B | `Sheet_MiscellaneousStampsJpn_2A_585B_Gap` | 31 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:5898 | `Sheet_MiscellaneousStampsJpn_2A_5898_Gap` | 22 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:58D6 | `Sheet_MiscellaneousStampsJpn_2A_58D6_Gap` | 6 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2A:58F6 | `Sheet_MiscellaneousStampsJpn_2A_58F6_Gap` | 4 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2B:4000 | `Gfx_2B_4000_StampCat03` | 942 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp category 03 (04:5337 Stamp_PageGfxTbl, stride $03C0, 1 blocks per page); extent: to the next  |
+| 2B:5800 | `Gfx_2B_5800_StampPrepareBuf3` | 2400 | data loaded through a banked copy helper; length not stated at the load site | record 3 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
 | 2C:6000 | `Gfx_2C_6000_StampCat02` | 2074 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp category 02 (04:5337 Stamp_PageGfxTbl, stride $0320, 1 blocks per page); extent: to the next  |
-| 2D:4000 | `Gfx_2D_4000_StampCat01` | 2058 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp category 01 (04:5337 Stamp_PageGfxTbl, stride $0300, 1 blocks per page); extent: to the next  |
-| 2D:4AF1 | `Sheet_MiscellaneousStampsJpn_2D_4AF1_Gap` | 33 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2D:4B12 | `Sheet_MiscellaneousStampsJpn_2D_4B12_Gap` | 62 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2D:4B50 | `Sheet_MiscellaneousStampsJpn_2D_4B50_Gap` | 56 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2D:4000 | `Gfx_2D_4000_StampCat01` | 2018 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp category 01 (04:5337 Stamp_PageGfxTbl, stride $0300, 1 blocks per page); extent: to the next  |
+| 2D:4AF1 | `Sheet_MiscellaneousStampsJpn_2D_4AF1_Gap` | 9 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2D:4B12 | `Sheet_MiscellaneousStampsJpn_2D_4B12_Gap` | 30 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2D:4B50 | `Sheet_MiscellaneousStampsJpn_2D_4B50_Gap` | 32 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
 | 2D:4B88 | `Sheet_MiscellaneousStampsJpn_2D_4B88_Gap` | 24 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2D:64CB | `Sheet_MiscellaneousStampsJpn_2D_64CB_Gap` | 65 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2D:7000 | `Gfx_2D_7000_StampPrepareBuf0` | 4096 | data loaded through a banked copy helper; length not stated at the load site | record 0 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
-| 2E:4000 | `Gfx_2E_4000_StampCat06_07` | 2558 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 06, 07 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
+| 2D:64CB | `Sheet_MiscellaneousStampsJpn_2D_64CB_Gap` | 25 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
+| 2D:7000 | `Gfx_2D_7000_StampPrepareBuf0` | 4032 | data loaded through a banked copy helper; length not stated at the load site | record 0 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
+| 2E:4000 | `Gfx_2E_4000_StampCat06_07` | 2492 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 06, 07 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
 | 2E:5800 | `Gfx_2E_5800_StampCat14_15` | 16 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 14, 15 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
-| 2E:7000 | `Gfx_2E_7000_StampPrepareBuf2` | 4096 | data loaded through a banked copy helper; length not stated at the load site | record 2 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
-| 2F:4000 | `Gfx_2F_4000_StampPrepareBuf1` | 6133 | data loaded through a banked copy helper; length not stated at the load site | record 1 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
-| 30:4000 | `Gfx_30_4000_StampCat08_09` | 3162 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 08, 09 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
+| 2E:7000 | `Gfx_2E_7000_StampPrepareBuf2` | 4000 | data loaded through a banked copy helper; length not stated at the load site | record 2 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
+| 2F:4000 | `Gfx_2F_4000_StampPrepareBuf1` | 5760 | data loaded through a banked copy helper; length not stated at the load site | record 1 of 04:548B (Stamp_PrepareBuffers_Gfx548B): source of a 240-byte stamp work buffer; extent not known:  |
+| 30:4000 | `Gfx_30_4000_StampCat08_09` | 3118 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 08, 09 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
 | 30:6000 | `Gfx_30_6000_StampCat12_13` | 16 | data loaded through a banked copy helper; length not stated at the load site | storage of stamp categories 12, 13 (04:5337 Stamp_PageGfxTbl, stride $0140, 2 blocks per page); extent: to the |
 
-## content-classified span (163)
+## content-classified span (120)
 
 _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
-- bank 0C: `7E20` Album_LoadNumeralTile_Aux (432 B)
-- bank 0F: `5800` UserMap_LoadPlanetTiles_Aux (260 B), `5904` Unref (104 B)
-- bank 10: `7420` DjTitle_LoadNumeralTile_Aux (128 B), `74A3` Unref (351 B), `7908` Unref (256 B), `7A24` Unref (186 B), `7ADE` Unref (228 B), `7BF8` Unref (345 B), `7D52` Unref (430 B), `7F00` Unref (256 B)
-- bank 14: `7A01` PenMenu_Build_Aux (127 B)
+- bank 0C: `7E20` Album_LoadNumeralTile_Aux (352 B)
+- bank 0F: `5800` UserMap_LoadPlanetTiles_Aux (122 B), `5904` Unref (84 B)
+- bank 10: `7420` DjTitle_LoadNumeralTile_Aux (128 B), `74A3` Unref (157 B), `7908` Unref (238 B), `7A24` Unref (168 B), `7ADE` Unref (212 B), `7BF8` Unref (345 B), `7D52` Unref (366 B), `7F00` Unref (184 B)
+- bank 14: `7A01` PenMenu_Build_Aux (95 B)
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
-- bank 17: `7B04` Unref (378 B), `7C7E` Unref (97 B), `7D61` MiscellaneousAlbumBPhotos_Aux (58 B), `7FC0` Unref (64 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
-- bank 1A: `4D80` DjPerf_DrawTempo_Aux (128 B), `5182` Unref (126 B), `7D80` Unref (128 B), `7E00` Unref (512 B)
-- bank 1B: `6EBA` Unref (194 B), `6F7C` Unref (68 B)
-- bank 1C: `4241` MenusShootMenu_Aux (623 B), `44B0` Unref (448 B), `5670` HotSpotEd_CopyNumberTile_Aux (158 B), `57A0` HotSpotEd_CopyNumberTile_Aux (256 B), `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
-- bank 1D: `6D11` MenusShootMenu_Aux (1341 B), `724E` Unref (82 B), `7631` MenusShootMenu_Aux (357 B), `7796` Unref (330 B), `7B41` Tbl539D_Aux (63 B)
-- bank 1E: `64E0` Compose_DrawPhotoNumber_Aux (144 B), `6590` Mode16_DrawCaptionBlink_Aux (154 B), `66A0` Unref (112 B), `6710` Unref (144 B), `67A0` Unref (110 B), `680E` Unref (114 B), `6880` Unref (146 B), `6912` Unref (238 B), `71E1` MiscellaneousErrorFaces_Aux (79 B), `73DD` MiscellaneousErrorFaces_Aux (595 B), `77C8` Unref (56 B), `7D00` Unref (256 B)
+- bank 1A: `4D80` DjPerf_DrawTempo_Aux (128 B), `5182` Unref (90 B), `7D80` Unref (96 B), `7E00` Unref (501 B)
+- bank 1B: `6EBA` Unref (176 B), `6F7C` Unref (68 B)
+- bank 1C: `4241` MenusShootMenu_Aux (607 B), `44B0` Unref (448 B), `5670` HotSpotEd_CopyNumberTile_Aux (158 B), `57A0` HotSpotEd_CopyNumberTile_Aux (256 B), `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
+- bank 1D: `6D11` MenusShootMenu_Aux (1315 B), `724E` Unref (82 B), `7631` MenusShootMenu_Aux (341 B), `7796` Unref (330 B), `7B41` Tbl539D_Aux (63 B)
+- bank 1E: `64E0` Compose_DrawPhotoNumber_Aux (144 B), `6590` Mode16_DrawCaptionBlink_Aux (61 B), `66A0` Unref (64 B), `6710` Unref (80 B), `67A0` Unref (64 B), `680E` Unref (98 B), `6880` Unref (108 B), `6912` Unref (92 B), `7D00` Unref (184 B)
 - bank 20: `64E0` OwnerCard_LoadGenderTiles_Aux (64 B), `66C0` Unref (256 B), `70F0` Mode15_DrawTwoDigitsInterval_Aux (144 B), `71A0` Mode15_DrawTwoDigits_Aux (288 B)
-- bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (90 B), `6AC7` Unref (202 B), `7BC0` BorderPicker_AnimateIcon_Aux (256 B)
-- bank 22: `4298` Unref (170 B), `4342` Unref (126 B), `43C0` Unref (318 B), `4A0C` Unref (84 B), `4DE6` Unref (234 B), `4ED0` Unref (278 B), `51B6` Unref (74 B), `5200` Unref (136 B), `54CD` MiscellaneousAlbumBPhotos_Aux (91 B), `5641` MiscellaneousAlbumBPhotos_Aux (95 B), `56A0` Unref (594 B), `58F2` Unref (462 B), `5B1C` Unref (162 B), `5BBE` Unref (226 B), `5CA0` Unref (220 B), `5E7B` MiscellaneousFramesJpn_Aux (197 B), `6FEE` MiscellaneousFramesUsa_Aux (144 B), `707E` Unref (226 B), `7160` Unref (384 B), `72E0` Unref (96 B)
-- bank 23: `405C` Unref (241 B), `441D` MiscellaneousFramesJpn_Aux (99 B), `4480` Unref (64 B), `6C80` Mode1F_State0A_PageSound2_Aux (278 B), `6DC0` Unref (608 B), `7020` Unref (960 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
-- bank 24: `441A` Unref (102 B), `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `6360` Mode01_State00_Intro_Aux (64 B), `78C0` PenMenu_Build_Aux (83 B), `7913` Unref (77 B)
-- bank 25: `401C` Unref (117 B), `7160` Mode05_State00_Init_Aux (64 B), `7614` Unref (480 B)
-- bank 26: `4000` Unref (272 B), `4110` Unref (496 B), `4409` MiscellaneousAlbumBPhotos_Aux (91 B), `4480` Unref (128 B), `7080` Mode16_State08_StartShoot_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (480 B)
-- bank 27: `4040` Unref (96 B), `40A0` Unref (92 B)
-- bank 28: `725F` MiscellaneousAlbumBPhotos_Aux (95 B), `731D` MiscellaneousAlbumBPhotos_Aux (1251 B), `7C81` MiscellaneousAlbumBPhotos_Aux (447 B), `7E40` Unref (448 B)
-- bank 2A: `59FF` MiscellaneousStampsJpn_Aux (123 B)
-- bank 2B: `4FA7` Unref (327 B), `50EE` Unref (66 B), `5130` Unref (80 B), `5180` Unref (80 B), `51D0` Unref (80 B), `5220` Unref (96 B)
-- bank 2C: `4788` Unref (66 B), `498C` Unref (100 B), `4A8C` Unref (84 B), `4B0E` Unref (98 B), `508C` Unref (139 B), `5206` Unref (133 B), `5786` Unref (261 B), `588B` Unref (127 B), `590A` Unref (144 B), `5A8A` Unref (136 B), `5B8B` Unref (69 B), `6FF8` Unref (374 B), `7190` Unref (240 B), `7280` Unref (92 B), `7640` Unref (66 B), `7682` Unref (248 B), `7AE0` Unref (96 B), `7B40` Unref (80 B), `7B90` Unref (83 B)
-- bank 2D: `4F40` Unref (64 B), `4F80` Unref (156 B), `5044` Unref (204 B), `5252` Unref (204 B), `5648` Unref (196 B), `570C` Unref (260 B), `5846` Unref (154 B), `6BC0` Unref (74 B), `6C50` Unref (64 B), `6C90` Unref (880 B)
-- bank 2F: `5E50` Unref (128 B), `62C6` Unref (54 B), `6703` MiscellaneousStampsJpn_Aux (71 B), `674A` Unref (102 B), `730A` Unref (114 B)
-- bank 30: `548C` Unref (66 B), `6705` Unref (139 B), `6983` MiscellaneousStampsJpn_Aux (77 B), `69D0` Unref (190 B), `6CC1` MiscellaneousStampsJpn_Aux (452 B), `7000` Unref (774 B), `7306` Unref (250 B), `7400` Unref (168 B), `74A8` Unref (140 B), `7534` Unref (676 B), `77D8` Unref (2088 B)
-- bank 33: `4026` Unref (314 B), `4160` Unref (336 B), `42B0` Unref (320 B), `4420` Unref (272 B), `4530` Unref (320 B), `46AA` Unref (262 B), `47B0` Unref (160 B), `4850` Unref (1956 B)
+- bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (69 B), `6AC7` Unref (177 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
+- bank 23: `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
+- bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `6360` Mode01_State00_Intro_Aux (64 B), `78C0` PenMenu_Build_Aux (66 B), `7913` Unref (77 B)
+- bank 25: `7160` Mode05_State00_Init_Aux (64 B), `7614` Unref (460 B)
+- bank 26: `7080` Mode16_State08_StartShoot_Aux (576 B), `7BC0` CreditsNishimuraDanceMap4_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (352 B)
+- bank 2A: `59FF` MiscellaneousStampsJpn_Aux (105 B)
+- bank 2B: `4FA7` Unref (151 B), `50EE` Unref (50 B), `5130` Unref (64 B), `5180` Unref (64 B), `51D0` Unref (64 B), `5220` Unref (60 B)
+- bank 2C: `4788` Unref (66 B), `498C` Unref (70 B), `4A8C` Unref (54 B), `4B0E` Unref (68 B), `508C` Unref (104 B), `5206` Unref (112 B), `5786` Unref (240 B), `588B` Unref (107 B), `590A` Unref (96 B), `5A8A` Unref (104 B), `5B8B` Unref (53 B), `6FF8` Unref (308 B), `7190` Unref (224 B), `7280` Unref (48 B), `7640` Unref (48 B), `7682` Unref (200 B), `7AE0` Unref (64 B), `7B40` Unref (48 B), `7B90` Unref (48 B)
+- bank 2D: `4F40` Unref (48 B), `4F80` Unref (116 B), `5044` Unref (174 B), `5252` Unref (146 B), `5648` Unref (178 B), `570C` Unref (240 B), `5846` Unref (154 B), `6BC0` Unref (54 B), `6C50` Unref (48 B), `6C90` Unref (86 B)
+- bank 2F: `5E50` Unref (112 B), `62C6` Unref (54 B), `6703` MiscellaneousStampsJpn_Aux (55 B), `674A` Unref (70 B), `730A` Unref (114 B)
+- bank 30: `548C` Unref (48 B), `6705` Unref (139 B), `6983` MiscellaneousStampsJpn_Aux (59 B), `69D0` Unref (173 B), `6CC1` MiscellaneousStampsJpn_Aux (407 B), `7000` Unref (752 B), `7306` Unref (230 B), `7400` Unref (120 B), `74A8` Unref (120 B), `7534` Unref (660 B), `77D8` Unref (56 B)
+- bank 33: `4026` Unref (298 B), `4160` Unref (320 B), `42B0` Unref (300 B), `4420` Unref (240 B), `4530` Unref (288 B), `46AA` Unref (224 B), `47B0` Unref (144 B), `4850` Unref (284 B)
 
-## unknown data (no reader found) (200)
+## unknown data (no reader found) (185)
 
 _Why doubtful:_ no pointer, table or sheet covers it. _To settle:_ VRAM viewer / read breakpoint in an emulator.
 
-- bank 0F: `596C` 24 B, `5984` 124 B
-- bank 10: `78B8` 48 B, `78E8` 32 B, `7A08` 28 B, `7BC2` 34 B, `7BE4` 20 B
-- bank 17: `7F7F` 65 B
+- bank 0F: `596C` 6 B, `5984` 20 B
+- bank 10: `78B8` 24 B, `78E8` 8 B, `7A08` 8 B, `7BC2` 10 B, `7BE4` 4 B
 - bank 1A: `5160` 3 B
-- bank 1B: `6EA0` 26 B
-- bank 1C: `5620` 2 B, `5623` 42 B, `564E` 18 B, `5720` 64 B, `5BC0` 26 B, `5CC0` 11 B, `5CD3` 13 B, `5D20` 39 B, `5D48` 24 B
-- bank 1E: `64C0` 16 B, `662A` 4 B, `6639` 103 B
+- bank 1B: `6EA0` 10 B
+- bank 1C: `5620` 2 B, `5623` 42 B, `564E` 18 B, `5720` 16 B, `5BC0` 26 B, `5CC0` 11 B, `5CD3` 13 B, `5D20` 39 B, `5D48` 24 B
+- bank 1E: `64C0` 16 B, `662A` 4 B, `6639` 39 B
 - bank 20: `667D` 3 B
 - bank 21: `6B91` 47 B
-- bank 22: `4000` 39 B, `4277` 33 B, `519B` 27 B, `5AC0` 46 B, `5AEE` 46 B, `7F40` 33 B, `7F61` 32 B, `7F81` 35 B, `7FA4` 32 B, `7FC4` 28 B, `7FE0` 32 B
-- bank 23: `4000` 62 B, `403E` 30 B, `58C0` 32 B, `58E0` 32 B, `5900` 32 B, `5920` 32 B, `5940` 32 B, `5960` 32 B, `5980` 32 B, `59A0` 32 B, `59C0` 32 B, `59E0` 32 B, `5A00` 32 B, `5A20` 32 B, `5A40` 32 B, `5A60` 32 B, `5A80` 32 B, `5AA0` 32 B, `5AC0` 32 B, `5AE0` 480 B, `5F1C` 32 B, `5F3C` 32 B, `5F5C` 56 B, `5F94` 300 B, `6D96` 42 B, `7760` 32 B, `7D54` 12 B
-- bank 24: `4000` 6 B, `4E40` 32 B, `4F20` 32 B, `5F00` 64 B, `6080` 50 B, `7780` 32 B
-- bank 25: `4000` 28 B, `5834` 12 B, `75F4` 32 B, `77F4` 32 B
-- bank 26: `4464` 28 B
-- bank 27: `4000` 64 B, `40FC` 4 B, `4465` 11 B, `5BB0` 40 B, `5BD8` 32 B, `5BF8` 40 B, `5C20` 24 B, `5C38` 40 B, `5C60` 24 B, `5C78` 40 B, `5CA0` 24 B, `5CB8` 40 B, `5CE0` 24 B, `5CF8` 40 B, `5D20` 32 B, `5D40` 48 B, `76F0` 19 B, `7703` 13 B, `7810` 19 B, `7823` 13 B
+- bank 22: `7F40` 10 B, `7F61` 5 B, `7F81` 5 B, `7FA4` 6 B, `7FC4` 6 B, `7FE0` 10 B
+- bank 23: `58C0` 2 B, `58E0` 2 B, `5900` 2 B, `5920` 2 B, `5940` 2 B, `5960` 2 B, `5980` 2 B, `59A0` 2 B, `59C0` 2 B, `59E0` 2 B, `5A00` 2 B, `5A20` 2 B, `5A40` 2 B, `5A60` 2 B, `5A80` 2 B, `5AA0` 2 B, `5AC0` 2 B, `5AE0` 2 B, `5F1C` 8 B, `5F3C` 8 B, `5F5C` 8 B, `5F94` 12 B, `7760` 32 B, `7D54` 12 B
+- bank 24: `4E40` 32 B, `4F20` 32 B, `5F00` 20 B, `6080` 34 B, `7780` 32 B
+- bank 25: `5834` 12 B, `75F4` 12 B, `77F4` 12 B
+- bank 27: `5BB0` 22 B, `5BD8` 16 B, `5BF8` 8 B, `5C20` 8 B, `5C38` 8 B, `5C60` 8 B, `5C78` 8 B, `5CA0` 8 B, `5CB8` 8 B, `5CE0` 8 B, `5CF8` 8 B, `5D20` 8 B, `5D40` 31 B, `76F0` 1 B, `7703` 13 B, `7810` 1 B, `7823` 13 B
 - bank 2A: `5A7A` 12 B, `7887` 15 B
-- bank 2B: `4EC0` 171 B, `4F6B` 60 B, `5280` 1408 B
-- bank 2C: `4750` 56 B, `493D` 35 B, `4960` 44 B, `49F0` 33 B, `4A11` 63 B, `4A50` 60 B, `4AE0` 46 B, `4B70` 27 B, `4F50` 64 B, `4F90` 64 B, `4FD0` 74 B, `501A` 54 B, `5050` 60 B, `5117` 57 B, `5150` 64 B, `5190` 64 B, `51D0` 54 B, `528B` 56 B, `52C3` 91 B, `531E` 50 B, `5350` 70 B, `5396` 58 B, `53D0` 54 B, `5406` 58 B, `5440` 16 B, `56A1` 47 B, `56D0` 72 B, `5718` 56 B, `5750` 54 B, `599A` 54 B, `59D0` 72 B, `5A18` 56 B, `5A50` 58 B, `5B12` 62 B, `5B50` 59 B, `5BD0` 64 B, `5C10` 64 B, `5C50` 73 B, `5C99` 56 B, `5CD1` 15 B, `5EA0` 48 B, `5ED0` 136 B, `5F58` 168 B, `6FBC` 60 B, `716E` 34 B, `72DC` 32 B, `72FC` 36 B, `75FE` 28 B, `761A` 38 B, `777A` 6 B, `7AAE` 50 B, `7BE3` 169 B, `7F3B` 197 B
-- bank 2D: `4F08` 56 B, `501C` 40 B, `5110` 64 B, `5150` 64 B, `5190` 64 B, `51D0` 28 B, `51EC` 66 B, `522E` 36 B, `531E` 28 B, `55F1` 39 B, `5618` 48 B, `5810` 54 B, `6B21` 47 B, `6B50` 64 B, `6B90` 48 B, `6C0A` 70 B
-- bank 2E: `5555` 57 B, `558E` 54 B, `55C4` 44 B, `55F0` 46 B, `561E` 46 B, `564C` 436 B
-- bank 2F: `5D6B` 85 B, `5DC0` 76 B, `5E0C` 68 B, `5ED0` 32 B, `5EF0` 48 B, `5F20` 32 B, `5F40` 32 B, `5F60` 42 B, `5F8A` 6 B, `62B1` 21 B, `67B0` 52 B, `67E4` 42 B, `680E` 2034 B, `72E0` 42 B
-- bank 30: `53C5` 71 B, `540C` 81 B, `545D` 47 B, `54CE` 78 B, `551C` 2788 B, `66A4` 66 B, `66E6` 31 B, `6A8E` 18 B, `6E85` 74 B, `6ECF` 305 B
-- bank 33: `4000` 38 B, `43F0` 48 B, `4670` 58 B
+- bank 2B: `4EC0` 46 B, `4F6B` 37 B, `5280` 26 B
+- bank 2C: `4750` 26 B, `493D` 3 B, `4960` 22 B, `49F0` 2 B, `4A11` 31 B, `4A50` 28 B, `4AE0` 22 B, `4B70` 2 B, `4F50` 24 B, `4F90` 32 B, `4FD0` 30 B, `501A` 22 B, `5050` 28 B, `5117` 25 B, `5150` 30 B, `5190` 32 B, `51D0` 32 B, `528B` 37 B, `52C3` 45 B, `531E` 34 B, `5350` 40 B, `5396` 26 B, `53D0` 24 B, `5406` 42 B, `5440` 16 B, `56A1` 15 B, `56D0` 20 B, `5718` 24 B, `5750` 20 B, `599A` 22 B, `59D0` 20 B, `5A18` 24 B, `5A50` 20 B, `5B12` 30 B, `5B50` 32 B, `5BD0` 20 B, `5C10` 32 B, `5C50` 32 B, `5C99` 23 B, `5CD1` 15 B, `5EA0` 16 B, `5ED0` 20 B, `5F58` 24 B, `6FBC` 36 B, `716E` 2 B, `72DC` 4 B, `72FC` 4 B, `75FE` 2 B, `761A` 6 B, `777A` 6 B, `7AAE` 34 B, `7BE3` 37 B, `7F3B` 5 B
+- bank 2D: `4F08` 40 B, `501C` 20 B, `5110` 24 B, `5150` 16 B, `5190` 16 B, `51D0` 12 B, `51EC` 4 B, `522E` 2 B, `531E` 2 B, `55F1` 9 B, `5618` 24 B, `5810` 32 B, `6B21` 31 B, `6B50` 32 B, `6B90` 32 B, `6C0A` 38 B
+- bank 2E: `5555` 36 B, `558E` 38 B, `55C4` 28 B, `55F0` 14 B, `561E` 22 B, `564C` 38 B
+- bank 2F: `5D6B` 5 B, `5DC0` 32 B, `5E0C` 20 B, `5ED0` 16 B, `5EF0` 32 B, `5F20` 16 B, `5F40` 16 B, `5F60` 18 B, `5F8A` 6 B, `62B1` 5 B, `67B0` 32 B, `67E4` 12 B, `680E` 18 B, `72E0` 20 B
+- bank 30: `53C5` 46 B, `540C` 47 B, `545D` 31 B, `54CE` 46 B, `551C` 32 B, `66A4` 10 B, `66E6` 4 B, `6A8E` 18 B, `6E85` 19 B, `6ECF` 35 B
+- bank 33: `4000` 19 B, `43F0` 32 B, `4670` 32 B
 
 ## auto-named table (16)
 
@@ -165,11 +159,11 @@ _Why doubtful:_ no code loads it directly (indexed or computed access). _To sett
 | 09:68E3 | `Run_SpeedLevelTbl_Data68E3` | 16 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
 | 09:6AC6 | `Run_FlagHoistKeys_Data6AC6` | 16 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
 | 0A:7301 | `Cam_PopcountTable256_Data7301` | 255 | table or word list found by pattern; no immediate reference | auto: 255 bytes, bytes; referenced by no immediate load found |
-| 0A:7600 | `Cam_BitReverseTbl_Data7600` | 320 | table or word list found by pattern; no immediate reference | auto: 256 bytes, bytes; referenced by no immediate load found |
-| 0A:7740 | `Cam_BitReverseTbl_Data7740` | 192 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
+| 0A:7600 | `Cam_BitReverseTbl_Data7600` | 256 | table or word list found by pattern; no immediate reference | auto: 256 bytes, bytes; referenced by no immediate load found |
+| 0A:7740 | `Cam_BitReverseTbl_Data7740` | 16 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
 | 0A:7800 | `Cam_BitReverseTbl_Data7800` | 256 | table or word list found by pattern; no immediate reference | auto: 256 bytes, bytes; referenced by no immediate load found |
 
-## hand name, unconfirmed (8)
+## hand name, unconfirmed (10)
 
 _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 
@@ -183,6 +177,8 @@ _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 | 00:1720 | `Prn_CopyBandRecords` | 79 | copies 18-byte records HL(bank A) -> DE until a terminator; returns the row count in B | copies 18-byte records HL(bank A) -> DE until a terminator; returns the row count in B |
 | 00:29F9 | `Thumb_ApplyCornerPatches` | 24 | 6 records {offset | 6 records {offset |
 | 00:2A11 | `Thumb_CornerPatchTbl` | 18 | 6 x 3 bytes | 6 x 3 bytes |
+| 1F:43E4 | `Sfx1_Init_24_SpaceFeverII` | 19 | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no con | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no r |
+| 1F:43EC | `Sfx1_Step_24_SpaceFeverII` | 11 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) | channel-1 effect step handler of id 24 (owner: Space Fever II sound) |
 
 ## mode state (106)
 
@@ -208,7 +204,7 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 04:5009 | `Mode0F_DrawCopyCount_Tbl5009` | 15 | state handler or helper of a screen mode | auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount |
 | 04:5044 | `Mode0F_EraseJingleTiles` | 91 | state handler or helper of a screen mode | plays sound $45 and builds four quadrant tiles of the erase animation |
 | 04:509F | `Mode0F_EraseTileTbl` | 16 | state handler or helper of a screen mode | table read by 5044 |
-| 04:50AF | `Mode0F_CopyPieceToVram` | 54 | state handler or helper of a screen mode | copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800) |
+| 04:50AF | `Mode0F_CopyPieceToVram` | 238 | state handler or helper of a screen mode | copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800) |
 | 04:7023 | `Mode01_State01_MenuPageA_Tbl7023` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State01_MenuPageA |
 | 04:7084 | `Mode01_State02_ApplyPageA_Tbl7084` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State02_ApplyPageA |
 | 04:70DB | `Mode01_State04_MenuPageB_Tbl70DB` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State04_MenuPageB |
@@ -232,22 +228,22 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 06:4665 | `Mode16_State03_TrickLensesMenu` | 114 | state handler or helper of a screen mode | option 1 (opt1_row / opt1_value) |
 | 06:46D7 | `Mode16_State03_TrickLensesMenu_Gfx46D7` | 6 | state handler or helper of a screen mode | auto: 6 bytes, tile data; referenced by Mode16_State03_TrickLensesMenu |
 | 06:46DD | `Mode16_State03_TrickLensesMenu_Gfx46DD` | 18 | state handler or helper of a screen mode | auto: 18 bytes, tile data; referenced by Mode16_State03_TrickLensesMenu |
-| 06:46EF | `Mode16_State00_Init_Gfx46EF` | 27 | state handler or helper of a screen mode | auto: 27 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLense |
+| 06:46EF | `Mode16_State00_Init_Gfx46EF` | 15 | state handler or helper of a screen mode | auto: 27 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLense |
 | 06:470A | `Mode16_State04_MontageMenu` | 113 | state handler or helper of a screen mode | option 2 (opt2_row / opt2_value) |
 | 06:477B | `Mode16_State04_MontageMenu_Gfx477B` | 6 | state handler or helper of a screen mode | auto: 6 bytes, tile data; referenced by Mode16_State04_MontageMenu |
 | 06:4781 | `Mode16_State04_MontageMenu_Gfx4781` | 14 | state handler or helper of a screen mode | auto: 14 bytes, tile data; referenced by Mode16_State04_MontageMenu |
 | 06:478F | `Mode16_State00_Init_Gfx478F` | 21 | state handler or helper of a screen mode | auto: 21 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State04_MontageMen |
-| 06:47A4 | `Mode16_State05_PanoramaMenu` | 103 | state handler or helper of a screen mode | option 3 (two toggles) |
+| 06:47A4 | `Mode16_State05_PanoramaMenu` | 206 | state handler or helper of a screen mode | option 3 (two toggles) |
 | 06:480B | `Mode16_DrawPanoramaHint` | 40 | state handler or helper of a screen mode |  |
 | 06:4833 | `Mode16_DrawPanoramaToggles` | 63 | state handler or helper of a screen mode |  |
 | 06:4872 | `Mode16_State05_PanoramaMenu_Tbl4872` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode16_State05_PanoramaMenu |
 | 06:487A | `Mode16_State06_GameFaceMenu` | 164 | state handler or helper of a screen mode | option 4: game or Game Face editor |
 | 06:491E | `Mode16_State06_GameFaceMenu_Tbl491E` | 6 | state handler or helper of a screen mode | auto: 6 bytes, bytes; referenced by Mode16_State06_GameFaceMenu |
 | 06:4A9B | `Mode16_DrawCursorFromTable_Tbl4A9B` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode16_DrawCursorFromTable |
-| 06:4AA3 | `Mode16_DrawIcon` | 25 | state handler or helper of a screen mode |  |
+| 06:4AA3 | `Mode16_DrawIcon` | 116 | state handler or helper of a screen mode |  |
 | 06:4AF8 | `Mode16_LoadPageTiles` | 31 | state handler or helper of a screen mode |  |
 | 06:4B17 | `Mode16_LoadPageTiles_Gfx4B17` | 12 | state handler or helper of a screen mode | auto: 12 bytes, tile data; referenced by Mode16_LoadPageTiles |
-| 06:4B23 | `Mode16_LoadIconTiles` | 22 | state handler or helper of a screen mode |  |
+| 06:4B23 | `Mode16_LoadIconTiles` | 68 | state handler or helper of a screen mode |  |
 | 06:4B67 | `Mode16_BuildOptionList_Map4B67` | 12 | state handler or helper of a screen mode | auto: 12 bytes, tile map; referenced by Mode16_BuildOptionList |
 | 06:4B7C | `Mode16_BuildList2` | 84 | state handler or helper of a screen mode | two rows |
 | 06:4BD0 | `Mode16_BuildList4` | 84 | state handler or helper of a screen mode | four rows |
@@ -265,15 +261,15 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 06:5C45 | `Mode18_Pick2_DrawCursor` | 55 | state handler or helper of a screen mode |  |
 | 06:5C7C | `Mode18_Pick2_DrawCursor_PtrTbl5C7C` | 8 | state handler or helper of a screen mode | auto: 8 bytes, word table; referenced by Mode18_Pick2_DrawCursor |
 | 06:5C84 | `Mode18_Pick2_DrawCursor_Tbl5C84` | 7 | state handler or helper of a screen mode | auto: 7 bytes, bytes; referenced by Mode18_Pick2_DrawCursor |
-| 06:5C8B | `Mode18_DrawArrows` | 17 | state handler or helper of a screen mode |  |
+| 06:5C8B | `Mode18_DrawArrows` | 185 | state handler or helper of a screen mode |  |
 | 06:5C9C | `Mode18_LoadAllThumbs` | 22 | state handler or helper of a screen mode |  |
 | 06:5D44 | `Mode18_LoadThumb_Tbl5D44` | 16 | state handler or helper of a screen mode | auto: 16 bytes, bytes; referenced by Mode18_LoadThumb |
 | 06:5D54 | `Mode18_LoadThumb_Tbl5D54` | 24 | state handler or helper of a screen mode | auto: 24 bytes, bytes; referenced by Mode18_LoadThumb |
-| 06:5D6C | `Mode18_DrawThumbFrame` | 107 | state handler or helper of a screen mode |  |
+| 06:5D6C | `Mode18_DrawThumbFrame` | 126 | state handler or helper of a screen mode |  |
 | 06:5DD7 | `Mode18_LoadTileIndexed` | 15 | state handler or helper of a screen mode |  |
 | 06:7034 | `Mode18_DrawArrows_Tbl7034` | 56 | state handler or helper of a screen mode | auto: 56 bytes, bytes; referenced by Mode18_DrawArrows |
 | 06:706C | `Mode18_DrawArrows_Tbl706C` | 70 | state handler or helper of a screen mode | auto: 70 bytes, bytes; referenced by Mode18_DrawArrows |
-| 07:4186 | `Mode0E_State01_Handshake_Tbl4186` | 66 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake |
+| 07:4186 | `Mode0E_State01_Handshake_Tbl4186` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake |
 | 07:43D6 | `Mode0E_State04_PickDone` | 231 | state handler or helper of a screen mode | after the dialog: loads the chosen photo into the link buffer |
 | 07:44BD | `Mode0E_State05_AbortWait` | 55 | state handler or helper of a screen mode | jitter sprite; A leaves |
 | 07:44F4 | `Mode0E_State06_ExchangeSetup` | 165 | state handler or helper of a screen mode | bars and lamps for the exchange (first direction) |
@@ -313,11 +309,11 @@ _Why doubtful:_ slot roles inferred from the first instructions, not from the vi
 | 03:68EA | `HotSpotFx_SpiralStepLeft` | 15 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
 | 03:68F9 | `HotSpotFx_Delay` | 8 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
 | 03:695D | `HotSpotFx_WaveTbl` | 32 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | SCY offsets for the wave |
-| 03:697D | `HotSpotFx_Delay2` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
+| 03:697D | `HotSpotFx_Delay2` | 106 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
 | 03:69A3 | `HotSpotFx_PageFlipRamp` | 68 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | SCY ramp per scanline |
 | 03:69E7 | `HotSpotFx_PageFlipTbl` | 8 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:69EF | `HotSpotFx_Delay3` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 0A:54DA | `Fx00_CopyRows_A100toC000` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 00; scratch FF8A-FF8D loops |
+| 03:69EF | `HotSpotFx_Delay3` | 10 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
+| 0A:54DA | `Fx00_CopyRows_A100toC000` | 5891 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 00; scratch FF8A-FF8D loops |
 | 0A:54E6 | `Fx01_MirrorCopy_A180toC080` | 72 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 01;22; scratch FF8A-FF8D loops |
 | 0A:552E | `Fx02_MirrorCopy_A100toC000` | 73 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 02;21; scratch FF8A-FF8D loops |
 | 0A:5577 | `Fx03_Copy_A800toC60E` | 67 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 03;44; scratch FF8A-FF8D loops |
@@ -392,102 +388,106 @@ _Why doubtful:_ slot roles inferred from the first instructions, not from the vi
 | 0A:6906 | `FxShared_ReduceBody_G1` | 164 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | shared body of slots 29-2C |
 | 0A:69AA | `FxShared_ReduceBody_G2` | 151 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | shared body of slots 49-4C |
 
-## SFX tag (91)
+## SFX tag (95)
 
 _Why doubtful:_ tag chosen from the routine that triggers the id (key press, erase, shutter...), not by listening. _To settle:_ play the effect id in an emulator and compare with the tag.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
 | 1F:4362 | `Sfx1_Data_4362` | 1 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | one byte $C9 before the first register block |
-| 1F:4368 | `Sfx1_Init_04_KeyB` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 04 (table $41FA) |
-| 1F:437C | `Sfx1_Init_3B_EraseAnim` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3B (table $41FA) |
+| 1F:4368 | `Sfx1_Init_04_KeyB` | 15 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 04 (table $41FA) |
+| 1F:437C | `Sfx1_Init_3B_EraseAnim` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3B (table $41FA) |
 | 1F:4384 | `Sfx1_Step_3B_EraseAnim` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 3B (table $4276) |
-| 1F:43C2 | `Sfx1_Init_2A_ChooseC` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 2A (table $41FA) |
+| 1F:43C2 | `Sfx1_Init_2A_ChooseC` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 2A (table $41FA) |
 | 1F:43CA | `Sfx1_Step_2A_ChooseC` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 2A (table $4276) |
-| 1F:4401 | `Sfx1_Init_1E_26_Choose` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1E 26 (table $41FA) |
+| 1F:4401 | `Sfx1_Init_1E_26_Choose` | 38 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1E 26 (table $41FA) |
 | 1F:4409 | `Sfx1_Step_26_BossHit` | 30 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 26 (table $4276) |
-| 1F:4431 | `Sfx1_Init_25_SpaceFeverStart` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 25 (table $41FA) |
+| 1F:4431 | `Sfx1_Init_25_SpaceFeverStart` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 25 (table $41FA) |
 | 1F:4439 | `Sfx1_Step_25_SpaceFeverStart` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 25 (table $4276) |
 | 1F:4457 | `Sfx1_Init_27_Shot` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 27 (table $41FA) |
-| 1F:4464 | `Sfx1_Init_0E_Hit` | 17 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0E (table $41FA) |
+| 1F:4464 | `Sfx1_Init_0E_Hit` | 43 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0E (table $41FA) |
 | 1F:4475 | `Sfx1_Step_0E_Hit` | 26 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 0E (table $4276) |
 | 1F:44A1 | `Sfx1_Step_1A_1E_Choose` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 1A 1E (table $4276) |
-| 1F:44CA | `Sfx1_Init_03_KeyA` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 03 (table $41FA) |
+| 1F:44CA | `Sfx1_Init_03_KeyA` | 36 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 03 (table $41FA) |
 | 1F:44D2 | `Sfx1_Step_03_KeyA` | 28 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 03 (table $4276) |
 | 1F:44F3 | `Sfx1_Init_0B_Select` | 9 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0B (table $41FA) |
-| 1F:4511 | `Sfx1_Init_1B_TargetMenu` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1B (table $41FA) |
+| 1F:4511 | `Sfx1_Init_1B_TargetMenu` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1B (table $41FA) |
 | 1F:451E | `Sfx1_Step_1B_TargetMenu` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 1B (table $4276) |
-| 1F:4530 | `Sfx1_Init_16_OptionChange` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 16 (table $41FA) |
+| 1F:4530 | `Sfx1_Init_16_OptionChange` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 16 (table $41FA) |
 | 1F:453D | `Sfx1_Step_16_OptionChange` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 16 (table $4276) |
-| 1F:4554 | `Sfx1_Init_3C_3D_3E_StopMusic` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3C 3D 3E (table $41FA) |
+| 1F:4554 | `Sfx1_Init_3C_3D_3E_StopMusic` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3C 3D 3E (table $41FA) |
 | 1F:4569 | `Sfx1_Step_3C_3D_3E_Mode07Play` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 3C 3D 3E (table $4276) |
-| 1F:45C1 | `Sfx1_Init_29_ChooseB` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 29 (table $41FA) |
+| 1F:45C1 | `Sfx1_Init_29_ChooseB` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 29 (table $41FA) |
 | 1F:45C9 | `Sfx1_Step_29_ChooseB` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 29 (table $4276) |
-| 1F:45F7 | `Sfx1_Init_05_ModeEnter` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 05 (table $41FA) |
+| 1F:45F7 | `Sfx1_Init_05_ModeEnter` | 48 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 05 (table $41FA) |
 | 1F:45FF | `Sfx1_Step_05_ModeEnter` | 40 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 05 (table $4276) |
-| 1F:463E | `Sfx1_Init_0A_MenuPageTurn` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0A (table $41FA) |
+| 1F:463E | `Sfx1_Init_0A_MenuPageTurn` | 50 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0A (table $41FA) |
 | 1F:4646 | `Sfx1_Step_0A_MenuPageTurn` | 42 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 0A (table $4276) |
-| 1F:467A | `Sfx1_Init_02_CursorMove` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 02 (table $41FA) |
+| 1F:467A | `Sfx1_Init_02_CursorMove` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 02 (table $41FA) |
 | 1F:4682 | `Sfx1_Step_02_CursorMove` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 02 (table $4276) |
 | 1F:469C | `Sfx1_Init_20_StepFast` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 20 (table $41FA) |
 | 1F:46A9 | `Sfx1_Init_21_StepValue` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 21 (table $41FA) |
 | 1F:46B6 | `Sfx1_Init_22_DirectionKey` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 22 (table $41FA) |
 | 1F:46C3 | `Sfx1_Init_23_2B_BallPoint` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 23 2B (table $41FA) |
 | 1F:46D0 | `Sfx1_Init_01_ValueTick` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 01 (table $41FA) |
-| 1F:4745 | `Sfx1_Init_10_TagJingle` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 10 (table $41FA) |
+| 1F:4745 | `Sfx1_Init_10_TagJingle` | 54 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 10 (table $41FA) |
 | 1F:474D | `Sfx1_Step_10_TagJingle` | 28 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 10 (table $4276) |
-| 1F:47B4 | `Sfx1_Init_06_0D_SliderStep` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 06 0D (table $41FA) |
+| 1F:47B4 | `Sfx1_Init_06_0D_SliderStep` | 37 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 06 0D (table $41FA) |
 | 1F:47C0 | `Sfx1_Step_06_0D_SliderStep` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 06 0D (table $4276) |
-| 1F:47EC | `Sfx1_Init_09_MenuPageUp` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 09 (table $41FA) |
+| 1F:47EC | `Sfx1_Init_09_MenuPageUp` | 46 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 09 (table $41FA) |
 | 1F:47F4 | `Sfx1_Step_09_MenuPageUp` | 38 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 09 (table $4276) |
+| 1F:481F | `Sfx1_Init_14_HotSpot` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure) |
+| 1F:482C | `Sfx1_Step_14_HotSpot` | 19 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of id 14 (hot spot) |
+| 1F:4844 | `Sfx1_Init_15_HotSpot` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of id 15: hot-spot related (owner, by ear: sure) |
+| 1F:4851 | `Sfx1_Step_15_HotSpot` | 19 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of id 15 (hot spot) |
 | 1F:4871 | `Sfx1_Init_12_1D_WindowSlideIn` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 12 1D (table $41FA) |
 | 1F:4883 | `Sfx1_Init_0C_EnemyKill` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0C (table $41FA) |
 | 1F:4894 | `Sfx1_Init_07_MainMenuPick` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 07 (table $41FA) |
-| 1F:4A6E | `Sfx1_Init_30_Celebration` | 16 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 30 (table $41FA) |
+| 1F:4A6E | `Sfx1_Init_30_Celebration` | 34 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 30 (table $41FA) |
 | 1F:4A7E | `Sfx1_Step_30_Celebration` | 18 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 30 (table $4276) |
-| 1F:4AC7 | `Sfx1_Init_38_Move` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 38 (table $41FA) |
+| 1F:4AC7 | `Sfx1_Init_38_Move` | 24 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 38 (table $41FA) |
 | 1F:4AD4 | `Sfx1_Step_38_Move` | 11 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 38 (table $4276) |
-| 1F:4AEE | `Sfx1_Init_37_CopyBrowse` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 37 (table $41FA) |
+| 1F:4AEE | `Sfx1_Init_37_CopyBrowse` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 37 (table $41FA) |
 | 1F:4AFB | `Sfx1_Step_37_CopyBrowse` | 10 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 37 (table $4276) |
-| 1F:4B17 | `Sfx1_Init_39_MenuChoose` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 39 (table $41FA) |
+| 1F:4B17 | `Sfx1_Init_39_MenuChoose` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 39 (table $41FA) |
 | 1F:4B24 | `Sfx1_Step_39_MenuChoose` | 10 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 39 (table $4276) |
-| 1F:4B3D | `Sfx1_Init_36_PageStep` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 36 (table $41FA) |
+| 1F:4B3D | `Sfx1_Init_36_PageStep` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 36 (table $41FA) |
 | 1F:4B4A | `Sfx1_Step_36_PageStep` | 10 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 36 (table $4276) |
-| 1F:4B64 | `Sfx1_Init_35_Jump` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 35 (table $41FA) |
+| 1F:4B64 | `Sfx1_Init_35_Jump` | 46 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 35 (table $41FA) |
 | 1F:4B71 | `Sfx1_Step_35_Jump` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 35 (table $4276) |
-| 1F:4BA6 | `Sfx1_Init_0F_EnemyKillC` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0F (table $41FA) |
+| 1F:4BA6 | `Sfx1_Init_0F_EnemyKillC` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0F (table $41FA) |
 | 1F:4BAE | `Sfx1_Step_0F_EnemyKillC` | 17 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 0F (table $4276) |
-| 1F:4BCE | `Sfx1_Init_11_Confirm` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 11 (table $41FA) |
+| 1F:4BCE | `Sfx1_Init_11_Confirm` | 41 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 11 (table $41FA) |
 | 1F:4BD6 | `Sfx1_Step_11_Confirm` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 11 (table $4276) |
-| 1F:4C09 | `Sfx1_Init_13_WindowSlideOut` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 13 (table $41FA) |
+| 1F:4C09 | `Sfx1_Init_13_WindowSlideOut` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 13 (table $41FA) |
 | 1F:4C11 | `Sfx1_Step_13_WindowSlideOut` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 13 (table $4276) |
-| 1F:4C3B | `Sfx1_Init_19_3A_LayoutKey` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 19 3A (table $41FA) |
+| 1F:4C3B | `Sfx1_Init_19_3A_LayoutKey` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 19 3A (table $41FA) |
 | 1F:4C43 | `Sfx1_Step_19_3A_LayoutKey` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 19 3A (table $4276) |
-| 1F:4C61 | `Sfx1_Init_08_MenuPageDown` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 08 (table $41FA) |
+| 1F:4C61 | `Sfx1_Init_08_MenuPageDown` | 80 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 08 (table $41FA) |
 | 1F:4C6F | `Sfx1_Step_08_MenuPageDown` | 66 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 08 (table $4276) |
-| 1F:4D28 | `Sfx4_Init_05_EraseAnim` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 05 (table $431A) |
-| 1F:4D86 | `Sfx4_Init_01_StampCommit` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 01 (table $431A) |
+| 1F:4D28 | `Sfx4_Init_05_EraseAnim` | 74 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 05 (table $431A) |
+| 1F:4D86 | `Sfx4_Init_01_StampCommit` | 34 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 01 (table $431A) |
 | 1F:4D8E | `Sfx4_Step_01_StampCommit` | 26 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 01 (table $433E) |
-| 1F:4E21 | `Sfx4_Init_07_FireShots` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 07 (table $431A) |
+| 1F:4E21 | `Sfx4_Init_07_FireShots` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 07 (table $431A) |
 | 1F:4E29 | `Sfx4_Step_07_FireShots` | 24 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 07 (table $433E) |
-| 1F:4E49 | `Sfx4_Init_0A_LinkChoose` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 0A (table $431A) |
+| 1F:4E49 | `Sfx4_Init_0A_LinkChoose` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 0A (table $431A) |
 | 1F:4E57 | `Sfx4_Step_0A_LinkChoose` | 15 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 0A (table $433E) |
-| 1F:4E6E | `Sfx4_Init_12_MusicSelect` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 12 (table $431A) |
+| 1F:4E6E | `Sfx4_Init_12_MusicSelect` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 12 (table $431A) |
 | 1F:4E76 | `Sfx4_Step_12_MusicSelect` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 12 (table $433E) |
-| 1F:4E97 | `Sfx4_Init_04_HurdleCollision` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 04 (table $431A) |
+| 1F:4E97 | `Sfx4_Init_04_HurdleCollision` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 04 (table $431A) |
 | 1F:4E9F | `Sfx4_Step_04_HurdleCollision` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 04 (table $433E) |
-| 1F:4EBC | `Sfx4_Init_11_FlagHeight` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 11 (table $431A) |
+| 1F:4EBC | `Sfx4_Init_11_FlagHeight` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 11 (table $431A) |
 | 1F:4EC4 | `Sfx4_Step_11_FlagHeight` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 11 (table $433E) |
 | 1F:4EDD | `Sfx4_Init_08_StopMusic` | 11 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 08 (table $431A) |
-| 1F:4FCB | `Sfx3_Step_09_DeleteDialogB` | 22 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 09 (table $4306) |
+| 1F:4FCB | `Sfx3_Step_09_DeleteDialogB` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 09 (table $4306) |
 | 1F:4FE1 | `Sfx3_Init_09_DeleteDialogB` | 9 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 09 (table $42F2) |
-| 1F:4FF5 | `Sfx3_Step_08_DeleteDialogA` | 41 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 08 (table $4306) |
+| 1F:4FF5 | `Sfx3_Step_08_DeleteDialogA` | 50 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 08 (table $4306) |
 | 1F:501E | `Sfx3_Init_08_DeleteDialogA` | 9 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 08 (table $42F2) |
-| 1F:502C | `Sfx3_Step_03_BossHit` | 26 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 03 (table $4306) |
+| 1F:502C | `Sfx3_Step_03_BossHit` | 40 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 03 (table $4306) |
 | 1F:5046 | `Sfx3_Init_03_BossHit` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 03 (table $42F2) |
-| 1F:5059 | `Sfx3_Step_02_ViewArcadeSelect` | 36 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 02 (table $4306) |
+| 1F:5059 | `Sfx3_Step_02_ViewArcadeSelect` | 50 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 02 (table $4306) |
 | 1F:507D | `Sfx3_Init_02_ViewArcadeSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 02 (table $42F2) |
-| 1F:50BE | `Sfx3_Step_01_ShootSelect` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 01 (table $4306) |
+| 1F:50BE | `Sfx3_Step_01_ShootSelect` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 01 (table $4306) |
 | 1F:50D7 | `Sfx3_Init_01_ShootSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 01 (table $42F2) |
 
 ## Run minigame (43)
@@ -500,17 +500,17 @@ _Why doubtful:_ role of several state variables guessed. _To settle:_ play the g
 | 09:6270 | `Run_PlaceRunner1` | 35 | Run (marathon) mini-game routine or table |  |
 | 09:6293 | `Run_PlaceRunner2` | 27 | Run (marathon) mini-game routine or table |  |
 | 09:62AE | `Run_PlaceRunner3` | 19 | Run (marathon) mini-game routine or table | unused fourth slot? |
-| 09:6604 | `Run_ConfettiInit` | 62 | Run (marathon) mini-game routine or table | random confetti x positions |
+| 09:6604 | `Run_ConfettiInit` | 221 | Run (marathon) mini-game routine or table | random confetti x positions |
 | 09:66A5 | `Run_FlagLanded` | 22 | Run (marathon) mini-game routine or table |  |
 | 09:67BE | `Run_PlayerRun_Tbl67BE` | 7 | Run (marathon) mini-game routine or table | auto: 7 bytes, bytes; referenced by Run_PlayerRun |
 | 09:67FC | `Run_PlayerJump_Tbl67FC` | 52 | Run (marathon) mini-game routine or table | auto: 52 bytes, bytes; referenced by Run_PlayerJump |
 | 09:685A | `Run_PlayerAirB_Tbl685A` | 26 | Run (marathon) mini-game routine or table | auto: 26 bytes, bytes; referenced by Run_PlayerAirB |
 | 09:68F3 | `Run_PlayerSpeedFromCounter_Tbl68F3` | 7 | Run (marathon) mini-game routine or table | auto: 7 bytes, bytes; referenced by Run_PlayerSpeedFromCounter |
-| 09:68FA | `Run_PlayerFrameFromSpeed` | 28 | Run (marathon) mini-game routine or table |  |
+| 09:68FA | `Run_PlayerFrameFromSpeed` | 116 | Run (marathon) mini-game routine or table |  |
 | 09:6916 | `Run_PlayerLanding` | 88 | Run (marathon) mini-game routine or table |  |
 | 09:696E | `Run_PlayerLanding_Tbl696E` | 32 | Run (marathon) mini-game routine or table | auto: 32 bytes, bytes; referenced by Run_PlayerLanding |
 | 09:6A6E | `Run_FlagHoistKeys_Tbl6A6E` | 52 | Run (marathon) mini-game routine or table | auto: 52 bytes, bytes; referenced by Run_FlagHoistKeys |
-| 09:6AA2 | `Run_FlagHoistKeys_Tbl6AA2` | 36 | Run (marathon) mini-game routine or table | auto: 20 bytes, bytes; referenced by Run_FlagHoistKeys |
+| 09:6AA2 | `Run_FlagHoistKeys_Tbl6AA2` | 20 | Run (marathon) mini-game routine or table | auto: 20 bytes, bytes; referenced by Run_FlagHoistKeys |
 | 09:6B72 | `Run_MoveRunner3X` | 10 | Run (marathon) mini-game routine or table |  |
 | 09:6B7C | `Run_ScrollCamera` | 41 | Run (marathon) mini-game routine or table |  |
 | 09:6BA5 | `Run_CopyPlayerPos` | 12 | Run (marathon) mini-game routine or table |  |
@@ -523,10 +523,10 @@ _Why doubtful:_ role of several state variables guessed. _To settle:_ play the g
 | 09:6DDC | `Run_DrawPlayer_Tbl6DDC` | 42 | Run (marathon) mini-game routine or table | auto: 42 bytes, bytes; referenced by Run_DrawPlayer |
 | 09:6E34 | `Run_DrawChick_Tbl6E34` | 98 | Run (marathon) mini-game routine or table | auto: 98 bytes, bytes; referenced by Run_DrawChick |
 | 09:6EC4 | `Run_DrawMoleAndScene_Tbl6EC4` | 70 | Run (marathon) mini-game routine or table | auto: 70 bytes, bytes; referenced by Run_DrawMoleAndScene |
-| 09:6F0A | `Run_DrawRunner3` | 27 | Run (marathon) mini-game routine or table |  |
+| 09:6F0A | `Run_DrawRunner3` | 42 | Run (marathon) mini-game routine or table |  |
 | 09:6F25 | `Run_DrawPodiumBanner` | 15 | Run (marathon) mini-game routine or table |  |
 | 09:6F34 | `Run_BannerSpriteTbl` | 28 | Run (marathon) mini-game routine or table |  |
-| 09:6F50 | `Run_DrawBackgroundScroll` | 17 | Run (marathon) mini-game routine or table |  |
+| 09:6F50 | `Run_DrawBackgroundScroll` | 75 | Run (marathon) mini-game routine or table |  |
 | 09:6FB3 | `Run_DrawHurdles_Tbl6FB3` | 12 | Run (marathon) mini-game routine or table | auto: 12 bytes, bytes; referenced by Run_DrawHurdles |
 | 09:6FBF | `Run_DrawFinishLine` | 39 | Run (marathon) mini-game routine or table |  |
 | 09:6FE6 | `Run_DrawFinishLine_Tbl6FE6` | 8 | Run (marathon) mini-game routine or table | auto: 8 bytes, bytes; referenced by Run_DrawFinishLine |
@@ -552,7 +552,7 @@ _Why doubtful:_ glyph set identity (kana / Latin / symbol page) deduced from til
 | 09:53F5 | `Kb_LoadGlyphSetB_Gfx53F5` | 25 | character-input page or glyph-set loader | auto: 25 bytes, tile data; referenced by Kb_LoadGlyphSetB |
 | 09:540E | `Kb_LoadGlyphSetC` | 9 | character-input page or glyph-set loader | list at 09:5417 |
 | 09:5417 | `Kb_LoadGlyphSetC_Gfx5417` | 13 | character-input page or glyph-set loader | auto: 13 bytes, tile data; referenced by Kb_LoadGlyphSetC |
-| 09:5424 | `Kb_LoadGlyphList` | 44 | character-input page or glyph-set loader |  |
+| 09:5424 | `Kb_LoadGlyphList` | 229 | character-input page or glyph-set loader |  |
 | 09:5450 | `Kb_GlyphOffset` | 15 | character-input page or glyph-set loader |  |
 | 09:545F | `Kb_FindCharInList` | 42 | character-input page or glyph-set loader |  |
 | 09:5685 | `Kb_Page0_Draw_Tbl5685` | 160 | character-input page or glyph-set loader | auto: 160 bytes, bytes; referenced by Kb_Page0_Draw, Run_DrawPickCharacterSprite |
@@ -563,22 +563,22 @@ _Why doubtful:_ glyph set identity (kana / Latin / symbol page) deduced from til
 | 09:57DD | `Kb_DrawTabs_Tbl57DD` | 4 | character-input page or glyph-set loader | auto: 4 bytes, bytes; referenced by Kb_DrawTabs |
 | 09:5827 | `Kb_DrawCursor_Tbl5827` | 12 | character-input page or glyph-set loader | auto: 12 bytes, bytes; referenced by Kb_DrawCursor |
 | 09:5833 | `Kb_DrawCursor_Tbl5833` | 16 | character-input page or glyph-set loader | auto: 16 bytes, bytes; referenced by Kb_DrawCursor |
-| 09:5843 | `Kb_DrawTabPages` | 62 | character-input page or glyph-set loader |  |
+| 09:5843 | `Kb_DrawTabPages` | 113 | character-input page or glyph-set loader |  |
 | 09:58B4 | `Kb_TabAnimFrame_Tbl58B4` | 14 | character-input page or glyph-set loader | auto: 14 bytes, bytes; referenced by Kb_TabAnimFrame |
 | 09:58EA | `Kb_Page0_Navigate_Tbl58EA` | 81 | character-input page or glyph-set loader | auto: 81 bytes, bytes; referenced by Kb_Page0_Navigate |
 | 09:593B | `Kb_Page0_Navigate_Tbl593B` | 80 | character-input page or glyph-set loader | auto: 80 bytes, bytes; referenced by Kb_Page0_Navigate |
 | 09:598B | `Kb_Page0_Navigate_Tbl598B` | 80 | character-input page or glyph-set loader | auto: 80 bytes, bytes; referenced by Kb_Page0_Navigate |
-| 09:59E8 | `Kb_Page1_Navigate_Tbl59E8` | 34 | character-input page or glyph-set loader | auto: 6 bytes, bytes; referenced by Kb_Page1_Navigate |
+| 09:59E8 | `Kb_Page1_Navigate_Tbl59E8` | 6 | character-input page or glyph-set loader | auto: 6 bytes, bytes; referenced by Kb_Page1_Navigate |
 | 09:5A13 | `Kb_Page1_Navigate_Tbl5A13` | 32 | character-input page or glyph-set loader | auto: 32 bytes, bytes; referenced by Kb_Page1_Navigate |
-| 09:5A40 | `Kb_Page2_Navigate_Tbl5A40` | 50 | character-input page or glyph-set loader | auto: 25 bytes, bytes; referenced by Kb_Page2_Navigate |
+| 09:5A40 | `Kb_Page2_Navigate_Tbl5A40` | 25 | character-input page or glyph-set loader | auto: 25 bytes, bytes; referenced by Kb_Page2_Navigate |
 | 09:5A89 | `Kb_Page2_Navigate_Tbl5A89` | 48 | character-input page or glyph-set loader | auto: 48 bytes, bytes; referenced by Kb_Page2_Navigate |
-| 09:5AC6 | `Kb_Page3_Navigate_Tbl5AC6` | 50 | character-input page or glyph-set loader | auto: 23 bytes, bytes; referenced by Kb_Page3_Navigate |
+| 09:5AC6 | `Kb_Page3_Navigate_Tbl5AC6` | 23 | character-input page or glyph-set loader | auto: 23 bytes, bytes; referenced by Kb_Page3_Navigate |
 | 09:5B09 | `Kb_Page3_Navigate_Tbl5B09` | 48 | character-input page or glyph-set loader | auto: 48 bytes, bytes; referenced by Kb_Page3_Navigate |
 | 09:5B6F | `Kb_NavigateVertical` | 18 | character-input page or glyph-set loader |  |
 | 09:5B81 | `Kb_NavigateHorizontal` | 28 | character-input page or glyph-set loader |  |
-| 09:5C0E | `Kb_Page0_Press_PtrTbl5C0E` | 111 | character-input page or glyph-set loader | auto: 6 bytes, word table; referenced by Kb_Page0_Press |
-| 09:5C7D | `Kb_Page0_Press_Tbl5C7D` | 22 | character-input page or glyph-set loader | auto: 16 bytes, bytes; referenced by Kb_Page0_Press |
-| 09:5C93 | `Kb_Page0_Press_Tbl5C93` | 145 | character-input page or glyph-set loader | auto: 7 bytes, bytes; referenced by Kb_Page0_Press |
+| 09:5C0E | `Kb_Page0_Press_PtrTbl5C0E` | 6 | character-input page or glyph-set loader | auto: 6 bytes, word table; referenced by Kb_Page0_Press |
+| 09:5C7D | `Kb_Page0_Press_Tbl5C7D` | 16 | character-input page or glyph-set loader | auto: 16 bytes, bytes; referenced by Kb_Page0_Press |
+| 09:5C93 | `Kb_Page0_Press_Tbl5C93` | 7 | character-input page or glyph-set loader | auto: 7 bytes, bytes; referenced by Kb_Page0_Press |
 | 09:5F03 | `Kb_BackspaceOnB` | 15 | character-input page or glyph-set loader |  |
 | 09:5F12 | `Kb_BlinkBackground` | 12 | character-input page or glyph-set loader | BGP xor $3C every 4th frame |
 | 09:6874 | `Kb_DrawTabPages_Gfx6874` | 6 | character-input page or glyph-set loader | auto: 6 bytes, tile data; referenced by Kb_DrawTabPages |
@@ -589,23 +589,23 @@ _Why doubtful:_ slide A/B split by code layout only. _To settle:_ watch the menu
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 07:7BDC | `MainMenu_SlideA_Begin` | 24 | slide animation between main-menu pages | four-step page transition (HL = draw callback; DE = table of 3-byte steps) |
+| 07:7BDC | `MainMenu_SlideA_Begin` | 63 | slide animation between main-menu pages | four-step page transition (HL = draw callback; DE = table of 3-byte steps) |
 | 07:7BF4 | `MainMenu_SlideA_Step` | 39 | slide animation between main-menu pages |  |
-| 07:7C1B | `MainMenu_SlideA_Tbl0` | 12 | slide animation between main-menu pages |  |
+| 07:7C1B | `MainMenu_SlideA_Tbl0` | 48 | slide animation between main-menu pages |  |
 | 07:7C27 | `MainMenu_SlideA_Tbl1` | 12 | slide animation between main-menu pages |  |
 | 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages |  |
 | 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages |  |
-| 07:7C4B | `MainMenu_SlideB_Begin` | 24 | slide animation between main-menu pages |  |
+| 07:7C4B | `MainMenu_SlideB_Begin` | 63 | slide animation between main-menu pages |  |
 | 07:7C63 | `MainMenu_SlideB_Step` | 39 | slide animation between main-menu pages |  |
 | 07:7C8A | `MainMenu_SlideB_Tbl0` | 12 | slide animation between main-menu pages |  |
 | 07:7C96 | `MainMenu_SlideB_Tbl1` | 12 | slide animation between main-menu pages |  |
 | 07:7CA2 | `MainMenu_SlideB_Tbl2` | 12 | slide animation between main-menu pages |  |
 | 07:7CAE | `MainMenu_SlideB_Tbl3` | 12 | slide animation between main-menu pages |  |
-| 07:7CBA | `MainMenu_SlideC_Begin` | 24 | slide animation between main-menu pages |  |
+| 07:7CBA | `MainMenu_SlideC_Begin` | 63 | slide animation between main-menu pages |  |
 | 07:7CD2 | `MainMenu_SlideC_Step` | 39 | slide animation between main-menu pages |  |
-| 07:7CF9 | `MainMenu_SlideC_Tbl0` | 12 | slide animation between main-menu pages |  |
+| 07:7CF9 | `MainMenu_SlideC_Tbl0` | 24 | slide animation between main-menu pages |  |
 | 07:7D05 | `MainMenu_SlideC_Tbl1` | 12 | slide animation between main-menu pages |  |
-| 07:7D11 | `MainMenu_SlideWait` | 23 | slide animation between main-menu pages | shared wait step: pacing by menu_trans_stamp |
+| 07:7D11 | `MainMenu_SlideWait` | 32 | slide animation between main-menu pages | shared wait step: pacing by menu_trans_stamp |
 | 07:7D28 | `MainMenu_SlideWaitLoop` | 728 | slide animation between main-menu pages |  |
 
 ## arrow drawing (12)

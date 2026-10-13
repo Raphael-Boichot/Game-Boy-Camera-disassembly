@@ -1,0 +1,43 @@
+key,item,label_on_the_page,owner_answer,owner_confidence,time_utc
+ast_17_7B04,17:7B04,Gfx_17_7B04_Unref,Part of dancing girl in credits,guess,2026-10-13T11:44
+ast_17_7C7E,17:7C7E,Gfx_17_7C7E_Unref,Part of dancing girl in credits,guess,2026-10-13T11:44
+ast_17_7FC0,17:7FC0,Gfx_17_7FC0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:44
+ast_22_4298,22:4298,Gfx_22_4298_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_4342,22:4342,Gfx_22_4342_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_43C0,22:43C0,Gfx_22_43C0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_4A0C,22:4A0C,Gfx_22_4A0C_Unref,Miyamoto dance in credits (corrected 14:18: the dancer is Kentaro Nishimura),likely,2026-10-13T11:46
+ast_22_4DE6,22:4DE6,Gfx_22_4DE6_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_4ED0,22:4ED0,Gfx_22_4ED0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_51B6,22:51B6,Gfx_22_51B6_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_5200,22:5200,Gfx_22_5200_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_56A0,22:56A0,Gfx_22_56A0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_58F2,22:58F2,Gfx_22_58F2_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_5B1C,22:5B1C,Gfx_22_5B1C_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_5BBE,22:5BBE,Gfx_22_5BBE_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_5CA0,22:5CA0,Gfx_22_5CA0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_6FEE,22:6FEE,Gfx_22_6FEE_MiscellaneousFramesUsa_Aux,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_707E,22:707E,Gfx_22_707E_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_7160,22:7160,Gfx_22_7160_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_72E0,22:72E0,Gfx_22_72E0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_405C,23:405C,Gfx_23_405C_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_4480,23:4480,Gfx_23_4480_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_6C80,23:6C80,Gfx_23_6C80_Mode1F_State0A_PageSound2_Aux,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_6DC0,23:6DC0,Gfx_23_6DC0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_24_441A,24:441A,Gfx_24_441A_Unref,Part of dancing girl in credits,likely,2026-10-13T11:48
+ast_25_401C,25:401C,Gfx_25_401C_Unref,Part of dancing girl in credits,likely,2026-10-13T11:49
+ast_26_4000,26:4000,Gfx_26_4000_Unref,Part of dancing girl in credits,likely,2026-10-13T11:50
+ast_26_4110,26:4110,Gfx_26_4110_Unref,Part of dancing girl in credits,likely,2026-10-13T11:50
+ast_27_4040,27:4040,Gfx_27_4040_Unref,miyamoto dance in credits (corrected: Kentaro Nishimura),likely,2026-10-13T11:50
+ast_27_40A0,27:40A0,Gfx_27_40A0_Unref,Miyamoto dance in credits (corrected: Kentaro Nishimura),,2026-10-13T11:51
+ast_28_731D,28:731D,Gfx_28_731D_MiscellaneousAlbumBPhotos_Aux,"end credits, last image",likely,2026-10-13T11:52
+ast_28_7C81,28:7C81,Gfx_28_7C81_MiscellaneousAlbumBPhotos_Aux,"end credits, last image",sure,2026-10-13T11:52
+snd_music_1F,music $1F,Song 1F,From space Fever,likely,2026-10-13T11:41
+snd_music_28,music $28,Song 28,Who are you running from 1 / error message,sure,2026-10-13T11:37
+snd_music_2A,music $2A,Song 2A,Jambo Nintendo !,sure,2026-10-13T11:38
+snd_music_2D,music $2D,Song 2D,Ball BGM,sure,2026-10-13T11:40
+snd_music_30,music $30,Song 30,Who are you running from 2 / error message,sure,2026-10-13T11:37
+snd_music_48,music $48,Song 48,Error message but incomplete,likely,2026-10-13T11:39
+snd_sfx1_14,channel-1 effect $14,Effect ch1 (pulse) 14,Hot spot related,sure,2026-10-13T11:41
+snd_sfx1_15,channel-1 effect $15,Effect ch1 (pulse) 15,Hot spot related,sure,2026-10-13T11:41
+snd_sfx1_24,channel-1 effect $24,Effect ch1 (pulse) 24,Sound from Space Fever 2,,2026-10-13T11:42
+snd_sfx1_28,channel-1 effect $28,Effect ch1 (pulse) 28,Shutter sound,sure,2026-10-13T11:38

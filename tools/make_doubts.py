@@ -4,12 +4,20 @@ import csv, re, collections
 import sys
 NAMES=sys.argv[1] if len(sys.argv)>1 else 'disasm/sym_names_jp.csv'; OUTDIR=sys.argv[2] if len(sys.argv)>2 else 'disasm'
 rows=list(csv.DictReader(open(NAMES,encoding='utf-8')))
+SYM=sys.argv[3] if len(sys.argv)>3 else 'pocketcamera_jp.sym'
+blk={}                        # (bank,addr) -> length of the block that starts there
+try:
+    for l in open(SYM):
+        p=l.split()
+        if len(p)==2 and p[1].startswith('.'):
+            b,a=p[0].split(':'); blk[(b.upper(),a.upper())]=int(p[1][1:].split(':')[1],16)
+except OSError: pass
 nxt={}
 _k=sorted((int(r['bank'],16),int(r['addr'],16)) for r in rows)
 for i,(b,a) in enumerate(_k):
     e=0x8000 if b else 0x4000
     if i+1<len(_k) and _k[i+1][0]==b: e=_k[i+1][1]
-    nxt[('%02X'%b,'%04X'%a)]=e-a
+    nxt[('%02X'%b,'%04X'%a)]=blk.get(('%02X'%b,'%04X'%a),e-a)
 G=[ # group, regex on name, best guess, why doubtful, what settles it
  ('SFX tag','^Sfx\\d','sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine','tag chosen from the routine that triggers the id (key press, erase, shutter...), not by listening','play the effect id in an emulator and compare with the tag'),
  ('dead code','^Unused_','code or data that no trace path and no table reaches (left over from earlier versions)','never executed in the static trace; purpose read from the instructions only','TCRF note, or a debugger test with a forced jump'),
@@ -71,7 +79,7 @@ L.append('# Unconclusive names of the Pocket Camera (Japan) Rev A symbol file\n'
 L.append('Generated from `sym_names_jp.csv` by `tools/make_doubts.py` (companion: `sym_unconclusive_jp.csv`, same rows with evidence and "what would settle it"). It lists every label whose name is a guess I could not settle from the code, the README, the WRAM map, TCRF, the Spriters Resource sheets or the bank pictures, plus the `I` (inferred) names in the groups below that deserve a second look. **Nothing here blocks the disassembly**: the `.sym` is complete (every ROM byte is typed and every routine or table has a name) and builds the exact ROM; the names below are the ones most likely to be renamed later.\n')
 L.append('Reading the names: `Gfx_BB_AAAA_*` = 2bpp tile data, `Map_BB_AAAA_*` = tile map rows (32 bytes per row, 20 visible), `Src_BB_AAAA_*` = data loaded through a far pointer whose destination class is not known, `*_Aux` = same family as the neighbouring named asset (consumer not found), `*_Unref` = no neighbouring consumer at all, `Data_BB_AAAA` = small unread block.\n')
 L.append('Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (every 2bpp tile of the bank, 32 tiles per row, row label = address of the first tile; grey = typed and named, orange = span listed in the groups "content-classified span" / "unknown data", blue = other `?` assets).\n')
-L.append('| group | rows | bytes (to next label) | what would help |\n|---|---|---|---|')
+L.append('| group | rows | bytes (of the block) | what would help |\n|---|---|---|---|')
 for gname in ORDER:
     L.append('| %s | %d | %d | %s |'%(gname,g.get(gname,0),sz.get(gname,0),ASK[gname]))
 L.append('')

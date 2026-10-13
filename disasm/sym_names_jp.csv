@@ -2967,15 +2967,13 @@ bank,addr,name,conf,note,source
 09,4F9D,Credits_DrawAnimSprite,C,6 phases from table 09:4FC9,hand+auto
 09,4FC9,Credits_AnimSpriteTbl,C,,hand+auto
 09,4FD5,Mode08_State15_CreditsScroll,C,staff roll via ScrollEngine_Step,hand+auto
-09,509A,Mode08_State15_CreditsScroll_Tbl509A,I,"auto: 2 bytes, bytes; referenced by Mode08_State15_CreditsScroll",auto
-09,509C,Mode08_State15_CreditsScroll_Gfx509C,I,"auto: 3 bytes, tile data; referenced by Mode08_State15_CreditsScroll",auto
-09,509F,Credits_ScrollFrameTbl,I,,hand+auto
+09,509A,Credits_ScrollSpriteTileTbl,I,"2 bytes: OAM tile-number offset of the dancer sprite, indexed by the buffer toggle $C005",fix
+09,509C,Credits_ScrollFrameTbl,C,"13 records {lo,hi,bank,duration}: the staff-roll dancer frames (a dancing girl, not identified) (0x500 bytes each, 12 frames per record); copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll; checked by running the real credits (core and BGB)",fix
 09,50D0,Mode08_State16_CreditsWaitA,C,A -> state $18,hand+auto
 09,50E0,Mode08_State17_CreditsDancingMan,C,,hand+auto
-09,5145,Mode08_State17_CreditsDancingMan_Gfx5145,I,"auto: 3 bytes, tile data; referenced by Mode08_State17_CreditsDancingMan",auto
-09,5148,Credits_DancingManFrameTbl,I,,hand+auto
+09,5145,Credits_NishimuraDanceFrameTbl,C,"4 records {lo,hi,bank,duration=8}: frames of the dance of Kentaro Nishimura (credited CORDINATOR (sic) and SOUND COMPOSER; the 'Miyamoto' attribution found on the web is an error, owner) of the short credits (22:4500, 22:4970, 27:4000, 22:4970; 0x470 bytes each) used by Mode08_State17_CreditsDancingMan",fix
 09,5155,Credits_NextDancingFrame,C,,hand+auto
-09,517D,Credits_NextDancingFrame_Map517D,I,"auto: 15 bytes, tile map; referenced by Credits_NextDancingFrame",auto
+09,517D,Credits_NishimuraDanceMapTbl,C,"5 records {lo,hi,bank}: BG maps of the Nishimura dance screen (26:5E80, 25:6860, 26:7500, 26:7740, 26:7980; 0x240 bytes each) cycled by Credits_NextDancingFrame",fix
 09,518C,Mode08_State18_Leave,C,,hand+auto
 09,5198,UserMap_ReadKeys,C,Left/Right moves choice4_cursor,hand+auto
 09,51BB,UserMap_LoadPlanetTiles,C,,hand+auto
@@ -3654,15 +3652,7 @@ bank,addr,name,conf,note,source
 17,7800,Gfx_17_7800_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 17,7900,Src_17_7900_Player_CopyDigitTile,I,"far pointer loaded by Player_CopyDigitTile (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 17,7940,Sheet_MenusAnimationTitle_17_6800_Part7940,I,"Spriter's Resource sheet ""Menus - Animation Title"", 418 tiles",assets
-17,7B04,Gfx_17_7B04_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-17,7C7E,Gfx_17_7C7E_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-17,7CDF,Sheet_MenusViewMenu_17_7CDF,I,"Spriter's Resource sheet ""Menus - View Menu"", 36 tiles",assets
-17,7D1B,Sheet_MiscellaneousAlbumBPhotos_17_7CDF_Part7D1B,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 54 tiles",assets
-17,7D61,Gfx_17_7D61_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-17,7D9B,Sheet_MenusViewMenu_17_7D9B,I,"Spriter's Resource sheet ""Menus - View Menu"", 83 tiles",assets
-17,7F6F,Sheet_MiscellaneousAlbumBPhotos_17_7DE6_Part7F6F,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 72 tiles",assets
-17,7F7F,Data_17_7F7F,?,"no copy site, table or sheet covers these bytes",assets
-17,7FC0,Gfx_17_7FC0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+17,7B00,Gfx_17_7B00_CreditsGirlFrame04,C,"frame 4 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 18,4000,Gfx_18_4000_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 18,4800,Gfx_18_4800_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 18,5000,Gfx_18_5000_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
@@ -3793,7 +3783,7 @@ bank,addr,name,conf,note,source
 1D,4800,Gfx_1D_4800_Mode1F_State09_PageSound1,I,"far pointer loaded by Mode1F_State09_PageSound1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 1D,4A00,Gfx_1D_4A00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 768 from the nearby ld bc",assets
 1D,4D00,Gfx_1D_4D00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
-1D,4F00,Src_1D_4F00_Tbl7332_3,I,"target 3 of the {lo,hi,bank} table 09:7332; extent not known: runs to the next pointer or asset",assets
+1D,4F00,Gfx_1D_4F00_ResultPic3_Equator_Tune2A,C,"picture 3 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 2A; seen in BGB (SHOOT parlor RUN)",assets
 1D,5D00,Gfx_1D_5D00_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
 1D,6B10,Sheet_MenusShootMenu_1D_6B10,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 46 tiles",assets
 1D,6D11,Gfx_1D_6D11_MenusShootMenu_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MenusShootMenu); classified from its content - see sym_unconclusive",assets
@@ -3819,9 +3809,8 @@ bank,addr,name,conf,note,source
 1D,7EE0,Src_1D_7EE0_Tbl539D_25,I,"target 25 of the {lo,hi,bank} table 04:539D",assets
 1D,7F40,Src_1D_7F40_Tbl539D_20,I,"target 20 of the {lo,hi,bank} table 04:539D",assets
 1D,7FC0,Map_1D_7FC0_Mode12_State08_ToolsMenu,I,"far pointer loaded by Mode12_State08_ToolsMenu (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-1E,4000,Src_1E_4000_Tbl7332_2,I,"target 2 of the {lo,hi,bank} table 09:7332; extent not known: runs to the next pointer or asset",assets
-1E,414A,Sheet_MiscellaneousErrorFaces_1E_414A,I,"Spriter's Resource sheet ""Miscellaneous - Error Faces"", 582 tiles",assets
-1E,4E00,Src_1E_4E00_Tbl7332_0,I,"target 0 of the {lo,hi,bank} table 09:7332",assets
+1E,4000,Gfx_1E_4000_ResultPic2_RibbonWoman_Tune30,C,"picture 2 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune n_Tune30; seen in BGB (SHOOT parlor RUN)",assets
+1E,4E00,Gfx_1E_4E00_ResultPic0_HornedMan_Tune28,C,"picture 0 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune n_Tune28; seen in BGB (SHOOT parlor RUN)",assets
 1E,5C00,Gfx_1E_5C00_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
 1E,5F00,Gfx_1E_5F00_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
 1E,6480,Gfx_1E_6480_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
@@ -3841,13 +3830,7 @@ bank,addr,name,conf,note,source
 1E,680E,Gfx_1E_680E_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 1E,6880,Gfx_1E_6880_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 1E,6912,Gfx_1E_6912_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1E,6A00,Src_1E_6A00_Tbl7332_1,I,"target 1 of the {lo,hi,bank} table 09:7332; extent not known: runs to the next pointer or asset",assets
-1E,6E30,Sheet_MiscellaneousErrorFaces_1E_6E30,I,"Spriter's Resource sheet ""Miscellaneous - Error Faces"", 54 tiles",assets
-1E,71E1,Gfx_1E_71E1_MiscellaneousErrorFaces_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousErrorFaces); classified from its content - see sym_unconclusive",assets
-1E,7230,Sheet_MiscellaneousErrorFaces_1E_7230,I,"Spriter's Resource sheet ""Miscellaneous - Error Faces"", 31 tiles",assets
-1E,73DD,Gfx_1E_73DD_MiscellaneousErrorFaces_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousErrorFaces); classified from its content - see sym_unconclusive",assets
-1E,7630,Sheet_MiscellaneousErrorFaces_1E_7630,I,"Spriter's Resource sheet ""Miscellaneous - Error Faces"", 37 tiles",assets
-1E,77C8,Gfx_1E_77C8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1E,6A00,Gfx_1E_6A00_ResultPic1_BaldMan_Tune29Totaka,C,"picture 1 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 29Totaka; seen in BGB (SHOOT parlor RUN)",assets
 1E,7800,Gfx_1E_7800_SaveDialog_Substate3_FullInit,I,"far pointer loaded by SaveDialog_Substate3_FullInit (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
 1E,7D00,Gfx_1E_7D00_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 1E,7E00,Map_1E_7E00_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
@@ -3880,14 +3863,14 @@ bank,addr,name,conf,note,source
 1F,437C,Sfx1_Init_3B_EraseAnim,I,channel-1 effect init handler of ids 3B (table $41FA),hand+auto
 1F,4384,Sfx1_Step_3B_EraseAnim,I,channel-1 effect step handler of ids 3B (table $4276),hand+auto
 1F,4391,Sfx1_Data_4391,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,439B,Sfx1_Init_28,C,channel-1 effect init handler of ids 28 (table $41FA),hand+auto
-1F,43A3,Sfx1_Step_28,C,channel-1 effect step handler of ids 28 (table $4276),hand+auto
+1F,439B,Sfx1_Init_28_Shutter,C,"channel-1 effect init handler of id 28: the shutter sound (owner, by ear: sure)",fix
+1F,43A3,Sfx1_Step_28_Shutter,C,channel-1 effect step handler of id 28: the shutter sound,fix
 1F,43B8,Sfx1_Data_43B8,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,43C2,Sfx1_Init_2A_ChooseC,I,channel-1 effect init handler of ids 2A (table $41FA),hand+auto
 1F,43CA,Sfx1_Step_2A_ChooseC,I,channel-1 effect step handler of ids 2A (table $4276),hand+auto
 1F,43DF,Sfx1_Data_43DF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,43E4,Sfx1_Init_24,C,channel-1 effect init handler of ids 24 (table $41FA),hand+auto
-1F,43EC,Sfx1_Step_24,C,channel-1 effect step handler of ids 24 (table $4276),hand+auto
+1F,43E4,Sfx1_Init_24_SpaceFeverII,?,"channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no request for it was found in the code",fix
+1F,43EC,Sfx1_Step_24_SpaceFeverII,?,channel-1 effect step handler of id 24 (owner: Space Fever II sound),fix
 1F,43F7,Sfx1_Data_43F7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4401,Sfx1_Init_1E_26_Choose,I,channel-1 effect init handler of ids 1E 26 (table $41FA),hand+auto
 1F,4409,Sfx1_Step_26_BossHit,I,channel-1 effect step handler of ids 26 (table $4276),hand+auto
@@ -3962,11 +3945,11 @@ bank,addr,name,conf,note,source
 1F,47EC,Sfx1_Init_09_MenuPageUp,I,channel-1 effect init handler of ids 09 (table $41FA),hand+auto
 1F,47F4,Sfx1_Step_09_MenuPageUp,I,channel-1 effect step handler of ids 09 (table $4276),hand+auto
 1F,481A,Sfx1_Data_481A,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,481F,Sfx1_Init_14,C,channel-1 effect init handler of ids 14 (table $41FA),hand+auto
-1F,482C,Sfx1_Step_14,C,channel-1 effect step handler of ids 14 (table $4276),hand+auto
+1F,481F,Sfx1_Init_14_HotSpot,I,"channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure)",fix
+1F,482C,Sfx1_Step_14_HotSpot,I,channel-1 effect step handler of id 14 (hot spot),fix
 1F,483F,Sfx1_Data_483F,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4844,Sfx1_Init_15,C,channel-1 effect init handler of ids 15 (table $41FA),hand+auto
-1F,4851,Sfx1_Step_15,C,channel-1 effect step handler of ids 15 (table $4276),hand+auto
+1F,4844,Sfx1_Init_15_HotSpot,I,"channel-1 effect init handler of id 15: hot-spot related (owner, by ear: sure)",fix
+1F,4851,Sfx1_Step_15_HotSpot,I,channel-1 effect step handler of id 15 (hot spot),fix
 1F,4864,Sfx1_Data_4864,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4869,Sfx1_Init_18,C,channel-1 effect init handler of ids 18 (table $41FA),hand+auto
 1F,4871,Sfx1_Init_12_1D_WindowSlideIn,I,channel-1 effect init handler of ids 12 1D (table $41FA),hand+auto
@@ -4808,40 +4791,15 @@ bank,addr,name,conf,note,source
 21,7BC0,Gfx_21_7BC0_BorderPicker_AnimateIcon_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of BorderPicker_AnimateIcon); classified from its content - see sym_unconclusive",assets
 21,7CC0,Map_21_7CC0_ScrollEngine_RowToOffset,I,copied to VRAM/WRAM by ScrollEngine_RowToOffset (assets/catalog_jp.csv),assets
 21,7F00,Map_21_7F00_ScrollEngine_RowToOffset,I,copied to VRAM/WRAM by ScrollEngine_RowToOffset (assets/catalog_jp.csv),assets
-22,4000,Data_22_4000,?,"no copy site, table or sheet covers these bytes",assets
-22,4027,Sheet_MenusViewMenu_22_4027,I,"Spriter's Resource sheet ""Menus - View Menu"", 56 tiles",assets
-22,4274,Sheet_MiscellaneousAlbumBPhotos_22_4182_Part4274,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 38 tiles",assets
-22,4277,Data_22_4277,?,"no copy site, table or sheet covers these bytes",assets
-22,4298,Gfx_22_4298_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,4342,Gfx_22_4342_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,43C0,Gfx_22_43C0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,44FE,Sheet_MiscellaneousDancingMan_22_44FE,I,"Spriter's Resource sheet ""Miscellaneous - Dancing Man"", 71 tiles",assets
-22,4500,Gfx_22_4500_Mode08_State12_CreditsEntry,I,copied to VRAM/WRAM by Mode08_State12_CreditsEntry (assets/catalog_jp.csv),assets
-22,4970,Sheet_MiscellaneousDancingMan_22_44FE_Part4970,I,"Spriter's Resource sheet ""Miscellaneous - Dancing Man"", 71 tiles",assets
-22,4A0C,Gfx_22_4A0C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,4A60,Sheet_MiscellaneousDancingMan_22_4A60,I,"Spriter's Resource sheet ""Miscellaneous - Dancing Man"", 44 tiles",assets
-22,4DE6,Gfx_22_4DE6_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,4ED0,Gfx_22_4ED0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,4FE6,Sheet_MiscellaneousAlbumBPhotos_22_4FE6,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 48 tiles",assets
-22,519B,Data_22_519B,?,"no copy site, table or sheet covers these bytes",assets
-22,51B6,Gfx_22_51B6_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,5200,Gfx_22_5200_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,5288,Sheet_MiscellaneousAlbumBPhotos_22_5288,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 118 tiles",assets
-22,54CD,Gfx_22_54CD_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-22,5528,Sheet_MiscellaneousAlbumBPhotos_22_5528,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 51 tiles",assets
-22,5641,Gfx_22_5641_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-22,56A0,Gfx_22_56A0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,58F2,Gfx_22_58F2_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,5AC0,Data_22_5AC0,?,"no copy site, table or sheet covers these bytes",assets
-22,5AEE,Data_22_5AEE,?,"no copy site, table or sheet covers these bytes",assets
-22,5B1C,Gfx_22_5B1C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,5BBE,Gfx_22_5BBE_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,5CA0,Gfx_22_5CA0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,5D7C,Sheet_MiscellaneousAlbumBPhotos_22_5D7C,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 53 tiles",assets
-22,5E61,Sheet_MenusViewMenu_22_5D83_Part5E61,I,"Spriter's Resource sheet ""Menus - View Menu"", 31 tiles",assets
-22,5E7A,Sheet_MiscellaneousFramesJpn_22_5D8A_Part5E7A,I,"Spriter's Resource sheet ""Miscellaneous - Frames (JPN)"", 38 tiles",assets
-22,5E7B,Gfx_22_5E7B_MiscellaneousFramesJpn_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousFramesJpn); classified from its content - see sym_unconclusive",assets
-22,5F40,Map_22_5F40_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
+22,4000,Gfx_22_4000_CreditsGirlFrame03,C,"frame 3 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+22,4500,Gfx_22_4500_CreditsNishimuraDanceFrame00,C,"frame 0 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
+22,4970,Gfx_22_4970_CreditsNishimuraDanceFrame01,C,"frame 1 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
+22,4DE0,Gfx_22_4DE0_CreditsGirlFrame10,C,"frame 10 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+22,52E0,Gfx_22_5240_CreditsGirlFrame02_Part52E0,C,"frame 2 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+22,5740,Gfx_22_56A0_CreditsGirlFrame07_Part5740,C,"frame 7 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+22,5BA0,Gfx_22_5B00_CreditsGirlFrame11_Part5BA0,C,"frame 11 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+22,5F40,Map_22_5F40_Mode20_State02_GameSetup,I,"far pointer loaded by Mode20_State02_GameSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+22,6000,Map_22_5F40_Ball_MenuLoadRow_Part6000,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
 22,6340,Map_22_6340_HotSpotEd_SoundList,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
 22,6740,Gfx_22_6740_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
 22,6810,Gfx_22_6810_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
@@ -4850,12 +4808,9 @@ bank,addr,name,conf,note,source
 22,6AB0,Gfx_22_6AB0_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
 22,6B40,Map_22_6B40_Bank03,I,"copied to VRAM/WRAM by Bank03, Mode12_State12_TestRun, Mode12_State22_BorderPickerReturn (assets/catalog_jp.csv)",assets
 22,6DE0,Map_22_6DE0_Mode12_State06_ToolsOpen,I,"far pointer loaded by Mode12_State06_ToolsOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-22,6F40,Sheet_MiscellaneousFramesUsa_22_6F14_Part6F40,I,"Spriter's Resource sheet ""Miscellaneous - Frames (USA)"", 33 tiles",assets
-22,6FEE,Gfx_22_6FEE_MiscellaneousFramesUsa_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousFramesUsa); classified from its content - see sym_unconclusive",assets
-22,707E,Gfx_22_707E_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,7160,Gfx_22_7160_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,72E0,Gfx_22_72E0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-22,7340,Map_22_7340_Mode21_PickCharacterKeys,I,"copied to VRAM/WRAM by Mode21_PickCharacterKeys, Mode21_State07_RaceEnd (assets/catalog_jp.csv)",assets
+22,6F40,Gfx_22_6F40_CreditsGirlFrame08,C,"frame 8 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+22,7340,Map_22_7340_Mode21_State02_RaceSceneInit,I,"far pointer loaded by Mode21_State02_RaceSceneInit, Mode21_State0B_ResultSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+22,7440,Map_22_7340_Mode21_PickCharacterKeys_Part7440,I,"copied to VRAM/WRAM by Mode21_PickCharacterKeys, Mode21_State07_RaceEnd (assets/catalog_jp.csv)",assets
 22,7740,Map_22_7740_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
 22,7B40,Map_22_7B40_DjTitle_DrawFrame3,I,copied to VRAM/WRAM by DjTitle_DrawFrame3 (assets/catalog_jp.csv),assets
 22,7F40,Data_22_7F40,?,"no copy site, table or sheet covers these bytes",assets
@@ -4864,13 +4819,9 @@ bank,addr,name,conf,note,source
 22,7FA4,Data_22_7FA4,?,"no copy site, table or sheet covers these bytes",assets
 22,7FC4,Data_22_7FC4,?,"no copy site, table or sheet covers these bytes",assets
 22,7FE0,Data_22_7FE0,?,"no copy site, table or sheet covers these bytes",assets
-23,4000,Data_23_4000,?,"no copy site, table or sheet covers these bytes",assets
-23,403E,Data_23_403E,?,"no copy site, table or sheet covers these bytes",assets
-23,405C,Gfx_23_405C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-23,414D,Sheet_MiscellaneousFramesJpn_23_414D,I,"Spriter's Resource sheet ""Miscellaneous - Frames (JPN)"", 71 tiles",assets
-23,441D,Gfx_23_441D_MiscellaneousFramesJpn_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousFramesJpn); classified from its content - see sym_unconclusive",assets
-23,4480,Gfx_23_4480_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-23,44C0,Map_23_44C0_HotSpotEd_SoundList,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
+23,4000,Gfx_23_4000_CreditsGirlFrame09,C,"frame 9 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+23,44C0,Map_23_44C0_Mode06_State00_Init,I,"far pointer loaded by Mode06_State00_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+23,4500,Map_23_44C0_HotSpotEd_SoundList_Part4500,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
 23,48C0,Map_23_48C0_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 23,49E0,Map_23_49E0_Mode13_State02_Start,I,"far pointer loaded by Mode13_State02_Start (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,4B00,Map_23_4B00_Mode13_State02_Start,I,"far pointer loaded by Mode13_State02_Start (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
@@ -4911,10 +4862,8 @@ bank,addr,name,conf,note,source
 23,6B00,Map_23_6B00_Mode1F_State09_PageSound1,I,"far pointer loaded by Mode1F_State09_PageSound1 (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,6B80,Map_23_6B80_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 23,6C00,Map_23_6C00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
-23,6C80,Gfx_23_6C80_Mode1F_State0A_PageSound2_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode1F_State0A_PageSound2); classified from its content - see sym_unconclusive",assets
-23,6D96,Data_23_6D96,?,"no copy site, table or sheet covers these bytes",assets
-23,6DC0,Gfx_23_6DC0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-23,7020,Map_23_7020_Unref,?,tile map rows with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+23,6C80,Gfx_23_6C80_CreditsGirlFrame12,C,"frame 12 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+23,7180,Map_23_7180_CreditsGirlFrame12_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of CreditsGirlFrame12); classified from its content - see sym_unconclusive",assets
 23,73E0,Map_23_73E0_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
 23,74A0,Map_23_74A0_Kb_Page1_PressSex,I,"far pointer loaded by Kb_Page1_PressSex (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,7620,Map_23_7620_Kb_Page0_Press,I,"far pointer loaded by Kb_Page0_Press, Kb_Page2_PressBirthDate (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
@@ -4929,13 +4878,9 @@ bank,addr,name,conf,note,source
 23,7D60,Map_23_7D60_ShowMenu_LoadHighlightTiles,I,"far pointer loaded by ShowMenu_LoadHighlightTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
 23,7DC0,Gfx_23_7DC0_ShowMenu_LoadHighlightTiles_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of ShowMenu_LoadHighlightTiles); classified from its content - see sym_unconclusive",assets
 23,7E80,Src_23_7E80_Tbl53A6_3,I,"target 3 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset",assets
-24,4000,Data_24_4000,?,"no copy site, table or sheet covers these bytes",assets
-24,4006,Sheet_MiscellaneousAlbumBPhotos_24_4006,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 80 tiles",assets
-24,42A3,Sheet_MenusViewMenu_24_41BF_Part42A3,I,"Spriter's Resource sheet ""Menus - View Menu"", 77 tiles",assets
-24,43FE,Sheet_MiscellaneousFramesJpn_24_42CC_Part43FE,I,"Spriter's Resource sheet ""Miscellaneous - Frames (JPN)"", 38 tiles",assets
-24,441A,Gfx_24_441A_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-24,4480,Map_24_4480_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
-24,4500,Map_24_4500_Ball_MenuLoadRow,I,"far pointer loaded by Ball_MenuLoadRow (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+24,4000,Gfx_24_4000_CreditsGirlFrame01,C,"frame 1 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+24,4480,Map_24_4480_Mode20_State00_MenuInit,I,"far pointer loaded by Mode20_State00_MenuInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+24,4500,Map_24_4480_Mode20_State00_MenuInit_Part4500,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 24,46C0,Map_24_46C0_Ball_MenuLoadRow,I,"far pointer loaded by Ball_MenuLoadRow (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from the nearby ld bc",assets
 24,47C0,Map_24_47C0_Mode0D_State01_Hub,I,"far pointer loaded by Mode0D_State01_Hub (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 24,4840,Map_24_4840_Mode0D_State00_Init,I,copied to VRAM/WRAM by Mode0D_State00_Init (assets/catalog_jp.csv),assets
@@ -4995,11 +4940,9 @@ bank,addr,name,conf,note,source
 24,7960,Map_24_7960_Shoot_RestoreViewScreen,I,"far pointer loaded by Shoot_DrawOptionPanel, Shoot_RestoreViewScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 704 from the nearby ld bc",assets
 24,7C20,Map_24_7C20_PenMenu_BuildSpeed,I,"copied to VRAM/WRAM by Mode0A_State02_Setup, PenMenu_BuildSpeed (assets/catalog_jp.csv)",assets
 24,7EE0,Map_24_7C20_Mode12_State11_TestStart_Part7EE0,I,"copied to VRAM/WRAM by Mode12_State11_TestStart, Mode13_State03_PlayPrepare (assets/catalog_jp.csv)",assets
-25,4000,Data_25_4000,?,"no copy site, table or sheet covers these bytes",assets
-25,401C,Gfx_25_401C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-25,4091,Sheet_MenusViewMenu_25_4091,I,"Spriter's Resource sheet ""Menus - View Menu"", 42 tiles",assets
-25,4186,Sheet_MiscellaneousAlbumBPhotos_25_4091_Part4186,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 144 tiles",assets
-25,4480,Gfx_25_4480_Mode08_State14_CreditsPageB,I,copied to VRAM/WRAM by Mode08_State14_CreditsPageB (assets/catalog_jp.csv),assets
+25,4000,Gfx_25_4000_CreditsGirlFrame05,C,"frame 5 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
+25,4480,Gfx_25_4480_Mode08_State14_CreditsPageB,I,"far pointer loaded by Mode08_State14_CreditsPageB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+25,4500,Gfx_25_4480_CreditsGirlFrame00_Part4500,C,"frame 0 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 25,47C0,Map_25_47C0_Mode14_State0C_Reinit,I,"far pointer loaded by Mode14_State00_Init, Mode14_State0C_Reinit, Shoot_RestoreViewScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 25,4980,Map_25_47C0_Mode14_State00_Init_Part4980,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
 25,4A80,BgMap_25_4A80,I,"32-column BG tilemap: FE fill, 16x14 photo-area ramp (00-8F, 00-4F), side icons; sits between the ma",assets
@@ -5025,7 +4968,7 @@ bank,addr,name,conf,note,source
 25,61A0,Map_25_61A0_Mode21_PickCharacterKeys,I,copied to VRAM/WRAM by Mode21_PickCharacterKeys (assets/catalog_jp.csv),assets
 25,63E0,Map_25_63E0_Mode1D_State01_LoadScreen,I,copied to VRAM/WRAM by Mode1D_State01_LoadScreen (assets/catalog_jp.csv),assets
 25,6620,Map_25_6620_Bank06,I,copied to VRAM/WRAM by Bank06 (assets/catalog_jp.csv),assets
-25,6860,Src_25_6860_Tbl517D_1,I,"target 1 of the {lo,hi,bank} table 09:517D; extent not known: runs to the next pointer or asset",assets
+25,6860,Map_25_6860_CreditsNishimuraDanceMap1,C,"map 1 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 25,6AA0,Map_25_6AA0_Mode15_State04_TimerApply,I,copied to VRAM/WRAM by Mode15_State04_TimerApply (assets/catalog_jp.csv),assets
 25,6CE0,Map_25_6CE0_WildFramePicker_Substate0_Init,I,copied to VRAM/WRAM by WildFramePicker_Substate0_Init (assets/catalog_jp.csv),assets
 25,6F20,Map_25_6F20_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
@@ -5039,15 +4982,10 @@ bank,addr,name,conf,note,source
 25,7A60,Map_25_7A60_Boot_EraseAllPrompt_Far,I,copied to VRAM/WRAM by Boot_EraseAllPrompt_Far (assets/catalog_jp.csv),assets
 25,7CA0,Map_25_7CA0_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
 25,7EE0,Src_25_7EE0_Tbl539D_40,I,"target 40 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets
-26,4000,Gfx_26_4000_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-26,4110,Gfx_26_4110_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-26,4300,Sheet_MiscellaneousAlbumBPhotos_26_4300,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 40 tiles",assets
-26,4409,Gfx_26_4409_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-26,4464,Data_26_4464,?,"no copy site, table or sheet covers these bytes",assets
-26,4480,Gfx_26_4480_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+26,4000,Gfx_26_4000_CreditsGirlFrame06,C,"frame 6 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 26,4500,BgMap_26_4500,I,"32-column BG tilemap: 16x14 photo-area ramp with side icons, then $FF fill",assets
 26,4880,Gfx_26_4880_Mode1A_State03_Browse,I,"far pointer loaded by Mode1A_State03_Browse (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from the nearby ld bc",assets
-26,4C80,Map_26_4C80_Mode08_State15_CreditsScroll,I,"far pointer loaded by Mode08_State15_CreditsScroll (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 576 from the nearby ld bc",assets
+26,4C80,Map_26_4C80_CreditsEndingPlate_Map,C,20 x 18 map of the ending picture (0x240 bytes to $9800),assets
 26,4EC0,Map_26_4EC0_Run_CompareRecord,I,copied to VRAM/WRAM by Run_CompareRecord (assets/catalog_jp.csv),assets
 26,5100,Map_26_5100_Mode08_State00_Init,I,copied to VRAM/WRAM by Mode08_State00_Init (assets/catalog_jp.csv),assets
 26,5340,Map_26_5340_Link_ShowScreenA,I,copied to VRAM/WRAM by Link_ShowScreenA (assets/catalog_jp.csv),assets
@@ -5057,7 +4995,7 @@ bank,addr,name,conf,note,source
 26,5A00,Map_26_5A00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
 26,5A60,Src_26_5A60_Tbl7CF9_7,I,"target 7 of the {lo,hi,bank} table 07:7CF9",assets
 26,5C40,Map_26_5C40_Mode1D_State06_LoadWaitScreen,I,copied to VRAM/WRAM by Mode1D_State06_LoadWaitScreen (assets/catalog_jp.csv),assets
-26,5E80,Map_26_5E80_Mode08_State12_CreditsEntry,I,copied to VRAM/WRAM by Mode08_State12_CreditsEntry (assets/catalog_jp.csv),assets
+26,5E80,Map_26_5E80_CreditsNishimuraDanceMap0,C,"map 0 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 26,60C0,Map_26_60C0_WildFrame_LoadForPrintJob,I,copied to VRAM/WRAM by WildFrame_LoadForPrintJob (assets/catalog_jp.csv),assets
 26,6300,Map_26_6300_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
 26,6540,Map_26_6540_Link_ShowScreenB,I,copied to VRAM/WRAM by Link_ShowScreenB (assets/catalog_jp.csv),assets
@@ -5067,17 +5005,13 @@ bank,addr,name,conf,note,source
 26,6E40,Map_26_6E40_Mode16_State08_StartShoot,I,copied to VRAM/WRAM by Mode16_State08_StartShoot (assets/catalog_jp.csv),assets
 26,7080,Map_26_7080_Mode16_State08_StartShoot_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode16_State08_StartShoot); classified from its content - see sym_unconclusive",assets
 26,72C0,Map_26_72C0_Mode08_State13_CreditsPageA,I,copied to VRAM/WRAM by Mode08_State13_CreditsPageA (assets/catalog_jp.csv),assets
-26,7500,Src_26_7500_Tbl517D_2,I,"target 2 of the {lo,hi,bank} table 09:517D; extent not known: runs to the next pointer or asset",assets
-26,7740,Src_26_7740_Tbl517D_3,I,"target 3 of the {lo,hi,bank} table 09:517D; extent not known: runs to the next pointer or asset",assets
-26,7980,Src_26_7980_Tbl517D_4,I,"target 4 of the {lo,hi,bank} table 09:517D; extent not known: runs to the next pointer or asset",assets
+26,7500,Map_26_7500_CreditsNishimuraDanceMap2,C,"map 2 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
+26,7740,Map_26_7740_CreditsNishimuraDanceMap3,C,"map 3 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
+26,7980,Map_26_7980_CreditsNishimuraDanceMap4,C,"map 4 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
+26,7BC0,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of CreditsNishimuraDanceMap4); classified from its content - see sym_unconclusive",assets
 26,7E00,Src_26_7E00_Album_LoadNumeralTileB,I,"far pointer loaded by Album_LoadNumeralTileB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
 26,7E20,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Album_LoadNumeralTileB); classified from its content - see sym_unconclusive",assets
-27,4000,Data_27_4000,?,"no copy site, table or sheet covers these bytes",assets
-27,4040,Gfx_27_4040_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-27,40A0,Gfx_27_40A0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-27,40FC,Data_27_40FC,?,"no copy site, table or sheet covers these bytes",assets
-27,4100,Sheet_MiscellaneousDancingMan_27_4100,I,"Spriter's Resource sheet ""Miscellaneous - Dancing Man"", 46 tiles",assets
-27,4465,Data_27_4465,?,"no copy site, table or sheet covers these bytes",assets
+27,4000,Gfx_27_4000_CreditsNishimuraDanceFrame02,C,"frame 2 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
 27,4470,Map_27_4470_Mode0D_State06_PlayInit,I,copied to VRAM/WRAM by Mode0D_State06_PlayInit (assets/catalog_jp.csv),assets
 27,4472,Map_27_4472_Mode1C_DrawOptionScreen,I,"far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_DrawPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 27,44B2,Map_27_44B2_Mode17_State08_Split_Build,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode17_State08_Split_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -5151,15 +5085,8 @@ bank,addr,name,conf,note,source
 28,5B80,Gfx_28_5B80_MsgStripB,C,"entry 11 of the {lo,hi,bank} table 09:739E, 640 bytes each (constant pitch)",assets
 28,5E00,Gfx_28_5E00_MsgStripB,C,"entry 12 of the {lo,hi,bank} table 09:739E, 640 bytes each (constant pitch)",assets
 28,6080,Gfx_28_6080_MsgStripB,C,"entry 14 of the {lo,hi,bank} table 09:739E, 640 bytes each (constant pitch)",assets
-28,7000,Gfx_28_7000_Mode08_State15_CreditsScroll,I,"far pointer loaded by Mode08_State15_CreditsScroll (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 2048 from the nearby ld bc",assets
-28,721E,Sheet_MiscellaneousAlbumBPhotos_28_721E,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 38 tiles",assets
-28,725F,Gfx_28_725F_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-28,72BE,Sheet_MiscellaneousAlbumBPhotos_28_72BE,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 43 tiles",assets
-28,731D,Gfx_28_731D_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-28,7800,Gfx_28_7800_Mode08_State15_CreditsScroll,I,"far pointer loaded by Mode08_State15_CreditsScroll (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 2048 from the nearby ld bc",assets
-28,7BF4,Sheet_MiscellaneousAlbumBPhotos_28_7BF4,I,"Spriter's Resource sheet ""Miscellaneous - Album B Photos"", 37 tiles",assets
-28,7C81,Gfx_28_7C81_MiscellaneousAlbumBPhotos_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousAlbumBPhotos); classified from its content - see sym_unconclusive",assets
-28,7E40,Gfx_28_7E40_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+28,7000,Gfx_28_7000_CreditsEndingPlate_TilesA,C,ending picture 'Don't butter me up! Be happy!!' (fork and plate on a checkered border): tiles to $9000 by Mode08_State15_CreditsScroll; seen in BGB at 08:16,assets
+28,7800,Gfx_28_7800_CreditsEndingPlate_TilesB,C,"second half of the ending picture, tiles to $8800 (BGB screenshot of 08:16)",assets
 29,4000,Credits_ScrollRowTbl,I,"234 records of 32 bytes (5-byte header + tile numbers, $FF/$FE = blank): ScrollEngine_Sub1_FetchRow loads bank $29 and addresses $4000 + row*32 (ScrollEngine_RowToOffset)",assets
 29,6000,Map_29_6000_Map05_62A3,C,"entry 0 of the {lo,hi,bank} table 05:62A3, 89 bytes each (constant pitch)",assets
 29,6059,Map_29_6059_Map05_62A3,C,"entry 1 of the {lo,hi,bank} table 05:62A3, 89 bytes each (constant pitch)",assets
