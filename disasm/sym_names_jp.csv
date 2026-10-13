@@ -3886,7 +3886,7 @@ bank,addr,name,conf,note,source
 1F,43E4,Sfx1_Init_24_SpaceFeverII,?,"channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no request for it was found in the code. Owner (review page, 2026-10-13, by ear): sfx1 24: used - Space fever probably; no request for it was found in the code, so ""no caller"" does not mean unused.",fix
 1F,43EC,Sfx1_Step_24_SpaceFeverII,?,channel-1 effect step handler of id 24 (owner: Space Fever II sound),fix
 1F,43F7,Sfx1_Data_43F7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4401,Sfx1_Init_1E_26_Choose,I,"channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: used - boss death in space fever; the name BossHit comes from the caller SpaceFever_BossHit (id 26); name kept, the sounds agree on Space Fever.",fix
+1F,4401,Sfx1_Init_1E_26_Choose,I,"channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: used - boss death in space fever; the name BossHit comes from the caller SpaceFever_BossHit (id 26); name kept, the sounds agree on Space Fever. Requested 12 times from frame 2799 in the Space Fever II key-log replay (organic; sf2_sounds.csv), so it is NOT 'only reached when forced'.",fix
 1F,4409,Sfx1_Step_26_BossHit,I,channel-1 effect step handler of ids 26 (table $4276),hand+auto
 1F,4427,Sfx1_Data_4427,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4431,Sfx1_Init_25_SpaceFeverStart,I,channel-1 effect init handler of ids 25 (table $41FA),hand+auto
@@ -4561,7 +4561,7 @@ bank,addr,name,conf,note,source
 1F,7113,Song33_Pat7113,C,note pattern ($00 ends it),hand+auto
 1F,711C,Song33_Pat711C,C,note pattern ($00 ends it),hand+auto
 1F,7125,Song33_Pat7125,C,note pattern ($00 ends it),hand+auto
-1F,7156,Song32_SpaceFeverBossEnd_Hdr,C,"header of song id 32. Owner (review page, 2026-10-13, by ear): music 32: used - Space fever main theme during gameplay; NOT the same as the name, which comes from the callers SpaceFever_Boss_EndA (2 static callers): the owner hears the main theme, the callers sit at the boss end; name kept, to be settled.",fix
+1F,7156,Song32_SpaceFeverBossEnd_Hdr,C,"header of song id 32. Owner (review page, 2026-10-13, by ear): music 32: used - Space fever main theme during gameplay; NOT the same as the name, which comes from the callers SpaceFever_Boss_EndA (2 static callers): the owner hears the main theme, the callers sit at the boss end; name kept, to be settled. The request in SpaceFever_Boss_EndA (state 10, 'boss gone; back to wave state 2') can as well restart the gameplay music: the name was built from the place of the call, not from the tune. Requested 12 times from frame 3128 in the Space Fever II key-log replay (organic, after the boss music $42; sf2_sounds.csv), so it is NOT 'only reached when forced'. What plays in waves 1-3 of that replay ($31 runs 138 frames at the start) was not checked.",fix
 1F,7161,Song32_SpaceFeverBossEnd_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7167,Song32_SpaceFeverBossEnd_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,716D,Song32_SpaceFeverBossEnd_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto

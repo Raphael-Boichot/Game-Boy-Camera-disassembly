@@ -1,0 +1,48 @@
+Targets: 162 open spans, 35549 B.  Domain: 33590 B of untyped-as-asset data, banks 00-28.
+
+Part 1: pointer clusters (hits >= 3, 4, 5, 6, 8, 10 in one bank)
+  real starts          :  1148    615    444    400      9      4
+  null mean (40 trials): 964.9  794.0  530.8  366.1   78.5   13.8
+  null max             :  1377    987    829    790    730    382
+  null min             :   499    431      9      4      0      0
+  strongest real clusters (stride, distance, first byte, entries, bank, hits, covering label):
+    s=2 d=+1 at 08:57FE entries=20 target bank 17 hits=20  WildFrame_PageSrcTbl
+    s=4 d=+1 at 04:565A entries=13 target bank 20 hits=13  Stamp_PaletteCursorTbl
+    s=1 d=-24 at 03:54A4 entries=23 target bank 26 hits=12  AnimEd_DrawHandSprite_Tbl5466
+    s=1 d=-20 at 03:54A4 entries=19 target bank 26 hits=10  AnimEd_DrawHandSprite_Tbl5466
+    s=1 d=-98 at 02:5395 entries=17 target bank 27 hits=9  OamPtrTbl_B02_5272
+    s=1 d=-18 at 03:54A4 entries=17 target bank 26 hits=9  AnimEd_DrawHandSprite_Tbl5466
+    s=3 d=+1 at 02:521B entries=46 target bank 0D hits=8  AlbumB_SlotTbl
+    s=1 d=-100 at 02:5397 entries=15 target bank 27 hits=8  OamPtrTbl_B02_5272
+    s=1 d=-16 at 03:54A4 entries=15 target bank 26 hits=8  AnimEd_DrawHandSprite_Tbl5466
+    s=1 d=+644 at 00:356C entries=13 target bank 17 hits=7  Bank00_ZeroFill
+    s=1 d=+643 at 00:356D entries=13 target bank 17 hits=7  Bank00_ZeroFill
+    s=1 d=+642 at 00:356E entries=13 target bank 17 hits=7  Bank00_ZeroFill
+
+Part 2: evenly spaced series of open-span starts (>= 4 terms, one bank, constant gap)
+  real: 16 series
+    bank 23 gap 0x20 terms 18 span sizes [2]: 58C0 58E0 5900 5920 5940 5960 5980 59A0 59C0 59E0 5A00 5A20 5A40 5A60 5A80 5AA0 5AC0 5AE0
+    bank 23 gap 0x40 terms 9 span sizes [2]: 58C0 5900 5940 5980 59C0 5A00 5A40 5A80 5AC0
+    bank 23 gap 0x60 terms 6 span sizes [2]: 58C0 5920 5980 59E0 5A40 5AA0
+    bank 23 gap 0x80 terms 5 span sizes [2]: 58C0 5940 59C0 5A40 5AC0
+    bank 23 gap 0xA0 terms 4 span sizes [2]: 58C0 5960 5A00 5AA0
+    bank 23 gap 0x40 terms 9 span sizes [2]: 58E0 5920 5960 59A0 59E0 5A20 5A60 5AA0 5AE0
+    bank 23 gap 0x60 terms 6 span sizes [2]: 58E0 5940 59A0 5A00 5A60 5AC0
+    bank 23 gap 0x80 terms 5 span sizes [2]: 58E0 5960 59E0 5A60 5AE0
+    bank 23 gap 0xA0 terms 4 span sizes [2]: 58E0 5980 5A20 5AC0
+    bank 23 gap 0x60 terms 6 span sizes [2]: 5900 5960 59C0 5A20 5A80 5AE0
+    bank 23 gap 0x80 terms 4 span sizes [2]: 5900 5980 5A00 5A80
+    bank 23 gap 0xA0 terms 4 span sizes [2]: 5900 59A0 5A40 5AE0
+    bank 23 gap 0x80 terms 4 span sizes [2]: 5920 59A0 5A20 5AA0
+    bank 27 gap 0x40 terms 5 span sizes [8]: 5BF8 5C38 5C78 5CB8 5CF8
+    bank 27 gap 0x40 terms 5 span sizes [8]: 5C20 5C60 5CA0 5CE0 5D20
+    bank 2A gap 0x40 terms 4 span sizes [10]: 5430 5470 54B0 54F0
+  null (200 shifted-start trials): mean 0.23, max 2
+
+Part 3: how often the bank of each open span is selected
+  group                                   spans  bank never selected organically  bank never selected at all  with read bytes inside
+  content-classified span                    58                    0                            0                    0
+  far-pointer asset, extent unknown          17                    0                            0                    0
+  unknown data (no reader found)             75                    0                            0                    0
+  visually identified range                  12                    0                            0                    0
+  per bank (selected total / organic): 0C 3531193/251378, 0D 2002312/85350, 0F 506108/64428, 10 958116/132882, 11 6441552/2774182, 14 1483393/47325, 15 1685639/750558, 17 2898204/1236020, 18 2623306/42783, 1A 418725/34201, 1B 12856659/10659082, 1C 1483000/407468, 1D 1471769/208024, 1E 11966901/122887, 20 3050115/114751, 21 3333815/1124582, 22 977205/145620, 23 8790108/3202341, 24 12361983/5272853, 25 1910765/204037, 26 2399810/330517, 27 2651639/489858, 2A 2362418/119821

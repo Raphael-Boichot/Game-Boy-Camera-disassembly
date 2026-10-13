@@ -64,10 +64,18 @@ for r in rows:
         r['tier'] = 'scrap' if (v['stable'] == 0 and v['read_org'] == 0) else 'other'
 # ---- sounds
 CH = {'sfx1': (0, 4), 'music': (1, 5), 'sfx3': (2, 6), 'sfx4': (3, 7)}
+# The Space Fever II key-log replay (sf2_sound.py, organic corpus, no poke) is not part of the menu / stamp replays above: an id it requested counts as organic
+# (music 32 and sfx1 26 were listed as "only forced" until this was added, although credits_parlor/sf2_sounds.csv had them since §16.18)
+SF2 = set()
+_sf2 = REPO + '/tcrf_check/assets/credits_parlor/sf2_sounds.csv'
+if os.path.exists(_sf2):
+    for r in csv.DictReader(open(_sf2, encoding='utf-8')):
+        if int(r['mailbox_requests_seen']) > 0: SF2.add((r['channel'], r['id'].upper()))
 sounds = []
 for r in csv.DictReader(open(OUT + '/sound_inventory.csv', encoding='utf-8')):
     rq, run = CH[r['channel']]; i = int(r['id'], 16); seen = int(snd[rq][i]) | int(snd[run][i])
     dyn = 'organic' if seen & 2 else ('forced only' if seen & 1 else 'never')
+    if (r['channel'], r['id'].upper()) in SF2: dyn = 'organic'
     ncall = int(r['static_callers']); lst = bool(r['picker_lists'])
     if dyn == 'organic': continue
     if dyn == 'never' and not ncall and not lst: tier = 'A never requested, no caller, no list'

@@ -11,8 +11,6 @@ sfx1,2B,BallPoint,classified,1F:46C3,0,,23,forced only,"C alias of a used id, on
 sfx1,3D,StopMusic,classified,1F:4554,0,,3C 3E,forced only,"C alias of a used id, only forced"
 sfx1,3E,StopMusic,classified,1F:4554,0,,3C 3D,forced only,"C alias of a used id, only forced"
 music,27,TransferPrint,classified,1F:7575,1,,,forced only,"D has a caller, only reached when forced"
-music,32,SpaceFeverBossEnd,classified,1F:7156,2,,,forced only,"D has a caller, only reached when forced"
 music,44,Jingle,classified,1F:6049,2,,11,forced only,"D has a caller, only reached when forced"
-sfx1,26,Choose,classified,1F:4401,1,,1E,forced only,"D has a caller, only reached when forced"
 sfx4,05,EraseAnim,classified,1F:4D28,1,,,forced only,"D has a caller, only reached when forced"
 sfx4,11,FlagHeight,classified,1F:4EBC,1,,,forced only,"D has a caller, only reached when forced"
