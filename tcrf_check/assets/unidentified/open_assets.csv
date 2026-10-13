@@ -22,7 +22,7 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 10,7D52,366,content-classified span,Gfx_10_7D52_Unref,mixed,,2bpp tile data with no neighbouring consumer
 10,7F00,184,content-classified span,Gfx_10_7F00_Unref,mixed,,2bpp tile data with no neighbouring consumer
 11,5400,256,visually identified range,Gfx_11_5400_MainMenuUpperItemFramesA,mixed,,gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_
-14,4554,2780,visually identified range,Gfx_14_4554_UnrefScreen_Tiles_StrayPtr,mixed,,"tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t"
+14,4554,2780,visually identified range,Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr,mixed,,"tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t"
 14,7A01,95,content-classified span,Gfx_14_7A01_PenMenu_Build_Aux,mixed,,2bpp tile data placed next to PenMenu_Build; function = same family as its neighbour
 15,5200,512,content-classified span,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,mixed,,2bpp tile data placed next to MainMenu_DrawUpperItem2; function = same family as its neighbour
 15,5500,256,content-classified span,Gfx_15_5500_SlidePlay_ReadKeys_Aux,mixed,,2bpp tile data placed next to SlidePlay_ReadKeys; function = same family as its neighbour
@@ -96,7 +96,7 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 23,5AA0,2,unknown data (no reader found),Data_23_5AA0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5AC0,2,unknown data (no reader found),Data_23_5AC0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5AE0,2,unknown data (no reader found),Data_23_5AE0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-23,5CC0,580,content-classified span,Map_23_5CC0_Unref,mixed,,tile map data with no neighbouring consumer
+23,5CC0,580,content-classified span,Map_23_5CC0_Mode0E_ExchangeAlt_Unref,mixed,,tile map data with no neighbouring consumer
 23,5F1C,8,unknown data (no reader found),Data_23_5F1C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5F3C,8,unknown data (no reader found),Data_23_5F3C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 23,5F5C,8,unknown data (no reader found),Data_23_5F5C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"

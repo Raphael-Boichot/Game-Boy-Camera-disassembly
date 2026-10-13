@@ -34,7 +34,7 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 | 0D:7000 | `Gfx_0D_7000_FillPatternTiles` | 1632 | dot, crosshatch and dither fill tiles plus a few glyph pieces | dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by |
 | 10:7602 | `Gfx_10_7602_DjLetterGlyphStrip` | 678 | Latin letter / digit glyph strip | Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420 |
 | 11:5400 | `Gfx_11_5400_MainMenuUpperItemFramesA` | 256 | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_ | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by |
-| 14:4554 | `Gfx_14_4554_UnrefScreen_Tiles_StrayPtr` | 2780 | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only read |
+| 14:4554 | `Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr` | 2780 | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only read |
 | 17:4000 | `Gfx_17_4000_ShootMenuIconsA` | 320 | icon row of the SHOOT-menu tile bank | icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init |
 | 17:4200 | `Gfx_17_4200_ShootCounterIcons` | 1152 | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcon |
 | 17:4820 | `Gfx_17_4820_ShootMenuIconsB` | 288 | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual) |
@@ -82,7 +82,7 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 1E: `64E0` Compose_DrawPhotoNumber_Aux (144 B), `6590` Mode16_DrawCaptionBlink_Aux (61 B), `7D00` Unref (184 B)
 - bank 20: `64E0` OwnerCard_LoadGenderTiles_Aux (64 B), `66C0` Unref (256 B), `70F0` Mode15_DrawTwoDigitsInterval_Aux (144 B), `71A0` Mode15_DrawTwoDigits_Aux (288 B)
 - bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (69 B), `6AC7` Unref (177 B), `6B91` Unref (47 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
-- bank 23: `5CC0` Unref (580 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
+- bank 23: `5CC0` Mode0E_ExchangeAlt_Unref (580 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
 - bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `6360` Mode01_State00_Intro_Aux (64 B), `78C0` PenMenu_Build_Aux (66 B), `7913` Unref (77 B)
 - bank 25: `7160` Mode05_State00_Init_Aux (64 B), `7614` Unref (460 B), `7814` Unref (588 B)
 - bank 26: `7080` Mode16_State08_StartShoot_Aux (576 B), `7BC0` CreditsNishimuraDanceMap4_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (352 B)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the unreferenced screen of the tile set 14:4000-502F with its tile map 23:5CC0.  README 16.24 "(3) The small holes".
+"""Draw the unused alternate link-exchange stand-by screen (mode $0E) from the tile set 14:4000-502F and its tile map 23:5CC0.  README 16.24 "(3) The small holes", 14.4.
 
 23:5CC0-5F03 (580 bytes) is a BG tile map: 18 rows x 32 columns (576 bytes) + 4 trailing $16 bytes.  Its tile ids index the 259 tiles at 14:4000
 directly (id = (address - 14:4000) / 16, checked on the picture: the seams of every neighbouring tile pair match).  Columns 0-19 are the visible screen;
