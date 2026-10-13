@@ -3569,8 +3569,8 @@
 13:7000 Gfx_13_7000_Mode08_CreditsReal
 13:7440 Src_13_7440_Tbl65CA_2
 13:7800 Gfx_13_7800_Mode08_CreditsReal
-14:4000 Banner_14_4000
-14:4554 Banner_14_4554_Continued
+14:4000 Banner_14_4000_ReversedStrips
+14:4554 Banner_14_4554_ReversedStrips_Face
 14:5800 Gfx_14_5800_Mode0D_State00_Init
 14:5c78 Src_14_5C78_Tbl65FB_0
 14:6000 Gfx_14_6000_Mode0D_State00_Init

@@ -3570,8 +3570,8 @@ bank,addr,name,conf,note,source
 13,7000,Gfx_13_7000_Mode08_CreditsReal,I,copied to VRAM/WRAM by Mode08_CreditsReal (assets/catalog_jp.csv),assets
 13,7440,Src_13_7440_Tbl65CA_2,I,"target 2 of the {lo,hi,bank} table 09:65CA",assets
 13,7800,Gfx_13_7800_Mode08_CreditsReal,I,copied to VRAM/WRAM by Mode08_CreditsReal (assets/catalog_jp.csv),assets
-14,4000,Banner_14_4000,I,"128-px-wide Japanese banner (white katakana on black / grey, 16 tiles per row, about 5 tile rows) ab",assets
-14,4554,Banner_14_4554_Continued,?,continues Banner_14_4000: Japanese banner letters followed by dithered picture data (visual),assets
+14,4000,Banner_14_4000_ReversedStrips,I,"start of a stack of tile strips stored with the tile order reversed (last tile of a strip = its top-left tile, tiles not flipped); not 16 wide: 14:4000-43BF is a 10-tile-wide x 6-row block of large black kanji (rearranged 2026-10-13 at the owner's request: tcrf_check/assets/unidentified/14_4000_strips_rearranged.png), 14:4440-465F a 17-wide x 2-row katakana line (white on grey, width = best reading). Never read by any code; README 16.24 (small holes).",fix
+14,4554,Banner_14_4554_ReversedStrips_Face,?,"rest of the reversed strips: 14:4554-46xx tail of the katakana line, 14:4720-4F1F a clean dithered manga picture (16 tiles wide x 8 rows, tile order reversed: a face close-up, a second face shouting at the right), 14:4F20-502F a 17-tile heading row of outlined kanji in FORWARD order; 14:5030-57FF is zero padding. Only reader seen: the thumbnail reducer (nibble expander 00:289C) from the stray pointer 14:4554 (bytes 54 45 54 at 02:527B = AlbumB_SlotTbl[33], past its 30 entries; bank $54 = $14 on the 6-bit mapper), which is why the read starts 4 bytes into a tile (visual)",fix
 14,5800,Gfx_14_5800_Mode0D_State00_Init,I,copied to VRAM/WRAM by Mode0D_State00_Init (assets/catalog_jp.csv),assets
 14,5C78,Src_14_5C78_Tbl65FB_0,I,"target 0 of the {lo,hi,bank} table 09:65FB",assets
 14,6000,Gfx_14_6000_Mode0D_State00_Init,I,copied to VRAM/WRAM by Mode0D_State00_Init (assets/catalog_jp.csv),assets
