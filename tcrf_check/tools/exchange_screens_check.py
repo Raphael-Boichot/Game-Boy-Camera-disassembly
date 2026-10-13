@@ -7,6 +7,7 @@ Input: the end-of-run files of two BGB-to-BGB exchanges (tcrf_check/tools/bgb_li
 (WAIT 100-450 frames after the confirm = states $08 / $10; each run writes OUT/jp_sender.sna / .bmp ...).  For each sender state file the tool compares BGB's VRAM with the ROM
 sources that Mode0E_State06_ExchangeSetup copies (bank $15 $6C00 / $7400 / $7C00 to $9000 / $8800 / $8000, bank $24 $5180 to $9800, bank $24 $53C0 to $9C00; the international ROM's second map is at 22:6340) and with the
 unreferenced set 14:4000 (tiles) / 23:5CC0 (map), and draws the two BGB screenshots next to the unreferenced screen.
+It also writes OUT_same_palette.png beside OUT.png: the Japanese shipped stand-by screen (BG layer rebuilt from BGB's VRAM, no sprites) and the unused set, both in the plain palette.
 usage: exchange_screens_check.py JP_ROM JP_PREFIX INTL_ROM INTL_PREFIX OUT.png"""
 import sys, os
 import numpy as np
@@ -50,3 +51,18 @@ SC = 3; W = 160 * SC; c = Image.new('L', (3 * W + 4 * 10, 144 * SC + 40), 200); 
 for i, (t, p) in enumerate(panels):
     x = 10 + i * (W + 10); d.text((x, 6), t, fill=0); c.paste(p.resize((W, 144 * SC), Image.NEAREST), (x, 24))
 c.save(out); print(out, c.size)
+# same-palette comparison: BG layer of the Japanese stand-by screen from BGB's VRAM (map $9800, LCDC.4 = 0 addressing) against the unused set
+stj = bgb_run.read_state(jp_pre + '_sender.sna'); vj = np.frombuffer(stj['VRAM'], np.uint8)[:0x2000]
+def vtile(i):
+    a = (0x9000 + 16 * i if i < 128 else 0x8800 + 16 * (i - 128)) - 0x8000; t = np.zeros((8, 8), np.uint8)
+    for y in range(8):
+        b0, b1 = int(vj[a + 2 * y]), int(vj[a + 2 * y + 1])
+        for x in range(8): t[y, x] = ((b1 >> (7 - x)) & 1) << 1 | ((b0 >> (7 - x)) & 1)
+    return t
+vm = vj[0x1800:0x1A40].reshape(18, 32); ship = np.zeros((144, 160), np.uint8)
+for r in range(18):
+    for cc in range(20): ship[r * 8:r * 8 + 8, cc * 8:cc * 8 + 8] = vtile(int(vm[r, cc]))
+SC2 = 4; W2 = 160 * SC2; c2 = Image.new('L', (2 * W2 + 30, 144 * SC2 + 52), 200); d2 = ImageDraw.Draw(c2)
+for i, (t, arr) in enumerate((('shipped: Japanese ROM, 15:6C00 + 24:5180 (BG layer from BGB VRAM, no sprites; the game shows it inverted)', ship), ('unused: 14:4000 + 23:5CC0 (both ROMs)', img))):
+    x = 10 + i * (W2 + 10); d2.text((x, 6), t, fill=0); c2.paste(Image.fromarray(GREY[arr]).resize((W2, 144 * SC2), Image.NEAREST), (x, 40))
+out2 = out[:-4] + '_same_palette.png'; c2.save(out2); print(out2, c2.size)
