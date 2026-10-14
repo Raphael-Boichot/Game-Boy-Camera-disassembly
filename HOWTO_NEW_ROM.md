@@ -3,6 +3,7 @@
 Written 2026-10-14 for the next Claude session that gets a new ROM. Everything here was done at least once on `fdcfe686cf4df461e870b6e53b2b5a8b`
 (README §1-§18); what was *not* done is marked **not done here**. Read `CLAUDE.md` first (standing rules, gotchas), then this file.
 The ROM is never in the repository: ask for it, and for every sibling ROM (other region, revision, edition).
+A condensed copy of this playbook, in skill format, is `skills/gb-rom-disassembly/SKILL.md`.
 
 ## 0. What "done" means: six levels
 
