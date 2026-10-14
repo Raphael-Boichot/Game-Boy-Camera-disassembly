@@ -3,10 +3,12 @@
 one doc per item: {verdict, note, item, time}; the answers are then copied into disasm/owner_answers_jp.csv by hand / by a short script).
 What it asks: what needs ears or eyes and cannot be read from the code -- the sound tags (disasm/sym_unconclusive_jp.csv, group "SFX tag", merged per id), the
 SHOOT effect variants (06:60DB -> 0A:541A), the screens of the modes whose state names are generic, and six graphics (the remaining `?` spans and the two TCRF candidates).
-usage: owner_page.py OUT.html [TCRF_IMAGE_DIR]     (reads disasm/sym_unconclusive_jp.csv, sym_names_jp.csv, the ROM and the two TCRF PNGs)"""
+Sound clips: MP3 recordings of every effect id made in BGB by sound_clips.py (tcrf_check/assets/sound_clips/: one MP3 per id and sound_clips_jp.csv; one run per channel, plus a second run with a longer window for the ids that were cut), embedded as base64 and played with WebAudio.
+usage: owner_page.py OUT.html [TCRF_IMAGE_DIR] [CLIP_DIR]     (reads disasm/sym_unconclusive_jp.csv, sym_names_jp.csv, the ROM, the two TCRF PNGs and CLIP_DIR/sound_clips_jp.csv + the MP3s)"""
 import sys, os, csv, re, json, base64, collections
 REPO = os.environ.get('GBCAM_REPO', os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 OUT = sys.argv[1]
+CD = sys.argv[3] if len(sys.argv) > 3 else os.path.join(REPO, 'tcrf_check', 'assets', 'sound_clips')
 TD = sys.argv[2] if len(sys.argv) > 2 else '/tmp/claude-0/-home-claude/d280987c-d04f-542c-b2b0-9c89688a96f6/scratchpad/tcrfzip/Unused graphics according to TCRF'
 ROM = open(os.environ.get('GBCAM_ROM', '/home/claude/gbcam_jp/pocketcamera_jp.gb'), 'rb').read()
 def off(b, a): return a if b == 0 else b * 0x4000 + (a - 0x4000)
@@ -96,8 +98,13 @@ pics = [
  dict(key='tcrf_1A_7C90', title='1A:7C80-7CBF, candidate for the TCRF photo option icon', name='Unused_TCRF_PhotoOptionIcon_Candidate_Gfx', cols=4, data=b64(rd(0x1A, 0x7C80, 0x40)), ref=img('Game_Boy_Camera_Unused_Photo_Option_Icon.png'), refcap='TCRF image',
       clue='Exact pixel match of the TCRF icon (2 tiles at 1A:7C90), but these tiles are on screen in normal play. Is this an icon you see in the photo option menu?'),
 ]
-DATA = dict(sounds=sounds, variants=variants, screens=screens, pics=pics)
+# ---------------------------------------------------------------- sound clips: key '<channel>_<ID>' -> {b: base64 mp3, s: seconds, cut: only the start of a longer sound}
+clips = {}
+for r in csv.DictReader(open(os.path.join(CD, 'sound_clips_jp.csv'))):
+    clips['%s_%s' % (r['channel'][3:], r['id'])] = dict(b=b64(open(os.path.join(CD, '%s_%s.mp3' % (r['channel'], r['id'])), 'rb').read()), s=float(r['clip_s']), cut=r['cut_at_window_end'] == '1')
+DATA = dict(sounds=sounds, variants=variants, screens=screens, pics=pics, clips=clips)
 tpl = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'owner_page.tpl.html'), encoding='utf-8').read()
 html = tpl.replace('__DATA__', json.dumps(DATA, ensure_ascii=False).replace('</', '<\\/'))
 open(OUT, 'w', encoding='utf-8').write(html)
+print('clips', len(clips), 'cut', sorted(k for k, v in clips.items() if v['cut']), 'mp3 bytes', sum(len(base64.b64decode(v['b'])) for v in clips.values()))
 print('sounds', len(sounds), 'variants', len(variants), 'screens', len(screens), 'pics', len(pics), 'bytes', len(html))
