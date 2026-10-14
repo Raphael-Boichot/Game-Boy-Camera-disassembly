@@ -38,15 +38,8 @@ bank,start,end,type,width,note
 00,3483,348D,data,10,
 00,34F7,3515,data,16,
 00,36F0,3700,data,16,nibble map
-00,3700,3780,data,16,
-00,3780,3800,data,16,
-00,3800,3818,data,16,
-00,3818,3878,data,16,
-00,3878,3910,data,16,
-00,3910,3D81,data,16,
-00,3D81,3E54,data,16,
-00,3E54,3F78,data,16,
-00,3F78,4000,data,16,
+00,3700,3800,data,16,
+00,3800,4000,data,16,8 pages of 256 bytes
 02,4000,4005,data,5,
 02,41F3,424D,data,16,
 02,46E6,46E9,data,3,
@@ -74,7 +67,7 @@ bank,start,end,type,width,note
 03,59F1,59F7,data,2,
 03,5AF8,5B00,data,2,
 03,5BB0,5BB8,data,2,
-03,5DF1,5E0F,data,16,
+03,5DF1,5E0F,data,6,
 03,5F1B,5F2B,data,16,
 03,5FA4,5FB6,data,2,
 03,61FD,623D,data,16,
@@ -109,9 +102,8 @@ bank,start,end,type,width,note
 04,4493,44BD,data,16,
 04,44DC,44F1,data,16,
 04,464D,466B,data,2,
-04,4D09,4D1B,data,16,
-04,5009,5018,data,15,
-04,5018,5019,data,16,
+04,4D09,4D1B,data,6,"9 {frame,duration} pairs by shape (I)"
+04,5009,5019,data,16,"8 {x,y} pairs by shape (I)"
 04,509F,50AF,data,16,
 04,519D,51CD,data,16,
 04,51CD,520D,data,16,
@@ -156,7 +148,7 @@ bank,start,end,type,width,note
 04,71B1,71B5,data,4,
 04,724F,7271,data,16,
 04,7271,7279,data,8,
-04,72CA,72E3,data,16,
+04,72CA,72E3,data,4,
 04,7321,7340,data,16,
 04,7372,7376,data,2,
 04,73A2,73AB,data,9,
@@ -186,8 +178,7 @@ bank,start,end,type,width,note
 05,4F9E,4FEC,data,16,
 05,5006,500B,data,5,
 05,5025,502A,data,5,
-05,5044,5048,data,4,
-05,5048,5049,data,1,
+05,5044,5049,data,5,
 05,5063,5068,data,5,
 05,5082,5087,data,5,
 05,50D3,50D8,data,5,
@@ -251,8 +242,7 @@ bank,start,end,type,width,note
 05,7C4F,7C6B,data,16,
 05,7F66,7F69,data,3,
 05,7F86,7FE1,data,16,
-06,4004,4008,data,2,
-06,4008,4018,data,2,
+06,4004,4018,data,2,10 state handlers
 06,4289,42A7,data,16,
 06,44DD,44F1,data,2,
 06,4603,4607,data,16,
@@ -304,9 +294,8 @@ bank,start,end,type,width,note
 06,6B1F,6B25,data,6,
 06,6B4A,6B76,data,16,
 06,6C74,6CEC,data,16,
-06,6E32,7034,data,16,
-06,7034,706C,data,16,
-06,706C,70B2,data,16,
+06,6E32,6E5E,data,2,22 list pointers
+06,6E5E,70B2,data,16,record lists ended by $FF
 06,7199,719E,data,5,
 06,73AF,73EF,data,2,
 06,7845,784D,data,8,
@@ -359,10 +348,10 @@ bank,start,end,type,width,note
 07,6D40,6D42,data,2,
 07,6D42,6D44,data,2,
 07,6ED6,6EDA,data,4,
-07,6EDA,6EE0,data,6,
+07,6EDA,6EE0,data,6,"3 {meta,duration}"
 07,6EFB,6EFF,data,4,
 07,6FED,6FF1,data,4,
-07,6FF1,6FF7,data,6,
+07,6FF1,6FF7,data,6,"3 {meta,duration}"
 07,7016,701A,data,4,
 07,71B3,71C5,data,2,
 07,7259,7260,data,7,
@@ -400,18 +389,12 @@ bank,start,end,type,width,note
 08,4DF6,4DFC,data,2,
 08,4E74,4E94,data,32,map row
 08,4FC4,4FD9,data,16,
-08,501F,5033,data,16,
-08,5033,5037,data,4,
+08,501F,5037,data,6,8 x 3 bytes
 08,511F,5191,data,16,
 08,5195,519B,data,2,
 08,5347,5365,data,16,
 08,5397,53B5,data,16,
-08,54C6,5833,data,16,
-08,5833,5A59,data,16,
-08,5A59,6244,data,16,
-08,6244,6259,data,16,
-08,6259,6A44,data,16,
-08,6A44,723E,data,16,
+08,54C6,723E,data,16,
 08,7245,724F,data,2,
 08,7319,731C,data,3,
 08,74DC,74F1,data,16,
@@ -438,15 +421,15 @@ bank,start,end,type,width,note
 09,5509,550C,data,3,
 09,55CD,55D7,data,10,
 09,566A,5675,data,11,
-09,5685,5725,data,16,
-09,5732,5746,data,16,
-09,5753,5783,data,16,
-09,5790,57B4,data,16,
+09,5685,5725,data,16,"80 {y,x}"
+09,5732,5746,data,16,"10 {y,x}"
+09,5753,5783,data,16,"24 {y,x}"
+09,5790,57B4,data,16,"18 {y,x}"
 09,57D7,57DD,data,6,
 09,57DD,57E1,data,4,
-09,5827,5833,data,12,
-09,5833,5843,data,16,
-09,58B4,58C2,data,14,
+09,5827,5833,data,12,"6 {y,x}"
+09,5833,5843,data,16,"8 {y,x}"
+09,58B4,58C2,data,14,"7 {frame,duration}"
 09,58EA,593B,data,16,
 09,593B,598B,data,16,
 09,598B,59DB,data,16,
@@ -460,8 +443,8 @@ bank,start,end,type,width,note
 09,5AF7,5B09,data,6,index to position
 09,5B09,5B39,data,16,position to index
 09,5C0E,5C14,data,2,
-09,5C7D,5C8D,data,16,
-09,5C93,5C9A,data,7,
+09,5C7D,5C8D,data,16,"5 {first,count,new} + $FF"
+09,5C93,5C9A,data,7,"2 {first,count,new} + $FF"
 09,5FE7,6005,data,2,
 09,60A5,60A8,data,16,
 09,6147,614A,data,3,
@@ -472,8 +455,7 @@ bank,start,end,type,width,note
 09,678A,67BE,data,16,
 09,67BE,67C5,data,7,
 09,67FC,6830,data,16,
-09,685A,6874,data,16,
-09,6874,687A,data,16,
+09,685A,687A,data,16,32 entries
 09,68BF,68F3,data,16,52 entries
 09,68F3,68FA,data,7,
 09,696E,698E,data,16,
@@ -486,8 +468,8 @@ bank,start,end,type,width,note
 09,6CE1,6CEE,data,13,
 09,6D9C,6DA4,data,8,
 09,6DA4,6DA8,data,4,
-09,6DA8,6DDC,data,16,
-09,6DDC,6E06,data,16,
+09,6DA8,6DDC,data,16,"{meta,duration}"
+09,6DDC,6E06,data,16,"{value,duration}"
 09,6E34,6E96,data,16,
 09,6EC4,6F0A,data,16,
 09,6F34,6F50,data,16,
@@ -495,7 +477,7 @@ bank,start,end,type,width,note
 09,6FB3,6FBF,data,12,
 09,6FE6,6FEE,data,8,
 09,7000,7008,data,8,
-09,7049,706D,data,16,
+09,7049,706D,data,16,"{meta,duration} pairs"
 09,707C,70B4,data,16,
 09,725B,725E,data,3,
 09,7294,729A,data,2,
@@ -545,7 +527,8 @@ bank,start,end,type,width,note
 0C,5100,5500,data,16,Gfx
 0C,5500,5770,data,16,Gfx
 0C,5770,5800,data,16,Gfx
-0C,5800,5B40,data,16,Gfx
+0C,5800,5A40,data,16,
+0C,5A40,5B40,data,16,
 0C,5B40,5B60,data,16,Gfx
 0C,5B60,5C80,data,16,Gfx
 0C,5C80,5CA0,data,16,Gfx
@@ -649,7 +632,7 @@ bank,start,end,type,width,note
 10,5880,5C00,data,16,Gfx
 10,5C00,7400,data,16,Gfx
 10,7400,7540,data,16,Gfx
-10,7602,78A8,data,16,Gfx
+10,7600,78A8,data,16,
 10,78A8,78B8,data,16,Gfx
 10,78B8,78D0,data,16,Data
 10,78E8,7908,data,16,Gfx
@@ -774,7 +757,7 @@ bank,start,end,type,width,note
 16,7B80,7D80,data,16,Gfx
 16,7D80,7FC0,data,32,Map
 16,7FC0,8000,data,32,Map
-17,4000,4140,data,16,Gfx
+17,4000,4140,data,16,
 17,4140,4180,data,16,Gfx
 17,4180,4200,data,16,Gfx
 17,4200,4680,data,16,Gfx
@@ -1002,7 +985,8 @@ bank,start,end,type,width,note
 21,4850,4C00,data,16,Gfx
 21,4C00,4C60,data,16,Gfx
 21,4C60,4CC1,data,16,Gfx
-21,4D00,5080,data,16,Gfx
+21,4D00,4E00,data,16,
+21,4E00,5080,data,16,
 21,5080,54E0,data,16,Gfx
 21,54E0,5620,data,16,Gfx
 21,5620,56C0,data,16,Gfx
@@ -1021,7 +1005,7 @@ bank,start,end,type,width,note
 21,71C0,77C0,data,16,Gfx
 21,77C0,7BB0,data,16,Gfx
 21,7BB0,7BC0,data,16,Gfx
-21,7BC0,7BFF,data,16,Gfx
+21,7BC0,7C00,data,16,
 21,7CC0,7F00,data,32,Map
 21,7F00,8000,data,32,Map
 22,4000,4500,data,16,Gfx
@@ -1069,8 +1053,9 @@ bank,start,end,type,width,note
 23,6B00,6B80,data,32,Map
 23,6B80,6C00,data,32,Map
 23,6C00,6C80,data,32,Map
-23,6C80,7180,data,16,Gfx
-23,7180,73E0,data,32,Map
+23,6C80,7040,data,16,
+23,7040,7280,data,32,
+23,7280,73E0,data,32,
 23,73E0,74A0,data,32,Map
 23,74A0,7620,data,32,Map
 23,7620,7760,data,32,Map
@@ -1082,7 +1067,7 @@ bank,start,end,type,width,note
 23,7B00,7C00,data,32,Map
 23,7C00,7D60,data,32,Map
 23,7D60,7DC0,data,32,Map
-23,7DC0,7E80,data,16,Gfx
+23,7DC0,7E80,data,32,Map
 23,7E80,8000,data,16,Data
 24,4000,4480,data,16,Gfx
 24,4480,4500,data,16,Gfx
@@ -1117,8 +1102,8 @@ bank,start,end,type,width,note
 24,5DC0,5F00,data,32,Map
 24,5F00,5F40,data,32,Map
 24,5F40,6080,data,32,Map
-24,6080,60A2,data,16,Data
-24,60B2,61C0,data,16,Gfx
+24,6080,60A0,data,32,
+24,60A0,61C0,data,32,
 24,61C0,6200,data,32,Map
 24,6200,6320,data,32,Map
 24,6320,6360,data,32,Map

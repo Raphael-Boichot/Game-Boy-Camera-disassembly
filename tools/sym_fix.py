@@ -11,7 +11,8 @@ repairs the cases that can be told from the code (every decision uses the instru
 
   1. `ld [Label], a`  (opcode EA, operand < $8000)  -> `ld [$xxxx], a`      MBC register write (RAM enable, ROM bank, RAM bank, mode): never a label
   2. `ld bc, Label`  (opcode 01)                    -> `ld bc, $xxxx`       BC holds a byte count unless the value is above $2000, the code is in bank $1F (sound),
-                                                                           or a [bc] access follows before BC is reloaded
+                                                                           or a [bc] access follows before BC is reloaded; a value above $2000 is also a number when the next call
+                                                                           is Oam_AddMeta* / Run_DrawMeta / HotSpotEd_DrawArrows (BC = a sprite position, B = x and C = y offset: L3 pass 2026-10-14)
   3. `ld hl|de, Label` whose pointer feeds a banked helper (the banked copy and call helpers 00:0450, 00:0479, 00:0586, 00:05F8, 00:069F, 00:08BB, 00:08C1) with `ld a, BANK` -> the label of that
                                                                            bank at that address, or the plain number when the target has no label
   4. `--tables`: a `.data:LEN:2` block (word table) is written as `dw Label` / `dw $xxxx` instead of `db $lo, $hi` (the label is used only when a
@@ -56,6 +57,21 @@ def bc_deref(b, ad, window=40):
         o = ROM[off(b, p)]
         if o in (0x0A, 0x02): return True
         if o == 0x01 or o in (0xC9, 0xD9, 0xC3, 0x18, 0xE9): return False
+        p += n
+    return False
+COORD_CALLEES = ('Oam_AddMeta', 'Run_DrawMeta', 'HotSpotEd_DrawArrows')   # routines that take a sprite position in BC (the meta-sprite bytes are added as y + C and x + B: B = x offset, C = y offset)
+def bc_coords(b, ad, window=8):
+    """`ld bc, imm` whose BC is consumed as a sprite position by the next call (BC is not reloaded before it): the immediate is a position (B = x, C = y), not an address"""
+    p = ad + code[b].get(ad, 3)
+    for _ in range(window):
+        n = code[b].get(p)
+        if not n: return False
+        o = ROM[off(b, p)]
+        if o == 0xCD:
+            t = ROM[off(b, p) + 1] | ROM[off(b, p) + 2] << 8
+            nm = byad.get((0, t)) if t < 0x4000 else byad.get((b, t))
+            return bool(nm and nm.startswith(COORD_CALLEES))
+        if o in (0x01, 0xC9, 0xD9, 0xC3, 0x18, 0xE9, 0xC4, 0xCC, 0xD4, 0xDC) or o in (0x20, 0x28, 0x30, 0x38, 0xC2, 0xCA, 0xD2, 0xDA): return False
         p += n
     return False
 HL_MOD={0x2A,0x3A,0x7E,0x46,0x4E,0x56,0x5E,0x66,0x6E,0xE1,0x21,0xF8}      # [HL] is read (HL is a pointer to a pointer table of the current bank), HL reloaded or popped
@@ -114,6 +130,8 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
                 if by[0] == 0x01:
                     if not (v > 0x2000 or bank == 0x1F or bc_deref(bank, ad)):
                         new = 'ld bc, $%04x' % v; stats['bc_count'] += 1
+                    elif v > 0x2000 and bank != 0x1F and bc_coords(bank, ad):
+                        new = 'ld bc, $%04x' % v; stats['bc_coords'] += 1
                 elif 0x4000 <= v < 0x8000:
                     bk = far_bank(bank, ad)
                     if bk is not None and bk != bank:

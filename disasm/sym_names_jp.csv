@@ -115,7 +115,7 @@ bank,addr,name,conf,note,source
 00,15E5,Img_AndMaskTiles_Ptrs,C,pointer table indexed by $D7E4 x 2: image pointers for Img_AndMaskTiles_Bank27,hand
 00,15ED,Vec_GetPhotoVectorByte,I,A<$80: A = photo_vector_ram[A],hand+auto
 00,1600,Vec_GetPhotoVectorByteFar,I,A<$80: far call 02:444D,hand+auto
-00,1615,Gfx_Copy16FromBank10,I,copies the 16-byte tile (A) of the bank 10 table at $7600 to DE,hand+auto
+00,1615,Gfx_Copy16FromBank10,C,"glyph A of the font table of bank $10 ($7600 + 16 x A, 160 slots up to $7FFF) copied as 16 bytes to DE; the DJ print renderer (05:60EE) calls it twice per character: glyph code and code + $10 (an 8x16 character, two tiles one over the other, to $C200 + col x 16 and +$130 for the second row), except codes $20 (top $20, bottom $9F), $30 / $5F (top $9F, bottom the code), $4F / $9F (same glyph twice) and >= $F0 (pair from the table 05:61A6)",hand+auto
 00,1668,Sf2_BuildBossMasks,C,builds the three boss collision masks at D000/D040/D080 (via 05:7F69 and 16C4),hand+auto
 00,16A6,Sf2_BossVariantToGroup,C,boss variant -> graphics group (variant 2 depends on gameface_present),hand+auto
 00,16C0,Sf2_BossGroupTable,C,4 bytes,hand+auto
@@ -267,15 +267,8 @@ bank,addr,name,conf,note,source
 00,354D,Print_CountPrintedPhoto,C,far calls 02:503F then adds 1 to the printed-photos counter (BCD saturating) and far calls 02:4BB2,hand+auto
 00,356C,Bank00_ZeroFill,C,388 zero bytes (padding),hand+auto
 00,36F0,Img_NibbleMapTbl,C,16 entries: (popcount of bits 3-2) << 4 | popcount of bits 1-0 of the nibble; the old 1 + 15 byte split was a typing artefact,hand+auto
-00,3700,Img_PairLookupTbl,C,256 entries; index = pixel pair byte,hand+auto
-00,3780,AlbumPage_DrawDown_Tbl3780,I,"auto: 128 bytes, bytes; referenced by AlbumPage_DrawDown",auto
-00,3800,Blit_ShiftTbl,I,8 pages of 256 bytes: page k = source byte shifted for an x offset of k pixels (page 0 = identity),hand+auto
-00,3818,Mode16_DrawPanoramaToggles_Gfx3818,I,"auto: 96 bytes, tile data; referenced by Mode16_DrawPanoramaToggles",auto
-00,3878,Compose_Split_DrawMakeBlink_Gfx3878,I,"auto: 152 bytes, tile data; referenced by Compose_Fusion_DrawMakeBlink, Compose_Split_DrawMakeBlink",auto
-00,3910,AlbumPage_DrawUp_Tbl3910,I,"auto: 1137 bytes, bytes; referenced by AlbumPage_DrawUp",auto
-00,3D81,DjPerf_DrawPlayIcon_Tbl3D81,I,"auto: 211 bytes, bytes; referenced by DjPerf_DrawPlayIcon",auto
-00,3E54,DjTitle_DrawArrowUp2_Tbl3E54,I,"auto: 292 bytes, bytes; referenced by DjTitle_DrawArrowUp2",auto
-00,3F78,Mode1A_State06_PickEffect_Tbl3F78,I,"auto: 136 bytes, bytes; referenced by DjPerf_DrawPlayIcon, Mode1A_State06_PickEffect",auto
+00,3700,Img_PairLookupTbl,C,"256 entries; index = pixel pair byte | the false labels at 3780 (ld bc,$3780 of AlbumPage_DrawDown = a sprite position) were removed: this table is the whole 3700-37FF",hand+auto
+00,3800,Blit_ShiftTbl,I,"8 pages of 256 bytes: page k = source byte shifted for an x offset of k pixels (page 0 = identity) | 2,048 bytes = 8 pages of 256 (3800-3FFF); the labels that used to cut it at 3818, 3878, 3910, 3D81, 3E54 and 3F78 were sprite positions (`ld bc,$3818` etc. before Oam_AddMeta calls of Mode16_DrawPanoramaToggles, Compose_*_DrawMakeBlink, AlbumPage_DrawUp, DjPerf_DrawPlayIcon, DjTitle_DrawArrowUp2, HotSpotEd/Mode1A) and were removed; coverage: read by the blitter in the organic runs",hand+auto
 01,4000,OamPtrTbl_B01_4000,C,249 words: list number -> OAM record list (4-byte records Y X tile attr; ends with Y=$80); used by Oam_AddMeta_B01_4000 (00:24AF),hand+auto
 01,41F2,OamList_B01_4000_00,C,OAM list 00 of the table 4000,hand+auto
 01,41FB,OamList_B01_4000_01,C,OAM list 01 of the table 4000,hand+auto
@@ -812,7 +805,7 @@ bank,addr,name,conf,note,source
 02,452A,Photo_Erase_UnlinkAll_Far,I,erases a photo then removes every reference to it from the hot spots and the animation list,hand+auto
 02,45A1,Photo_SaveCopy_Far,I,saves the working image into a free slot with the copy flag set (copy badge); needs photo_count < 30,hand+auto
 02,462F,Photo_SaveReceived_Far,C,link receive: stores the received photo and bumps the gender counters F12 / F13 of its tag,hand+auto
-02,46E6,Photo_SaveReceived_Far_Data46E6,?,"3 bytes 00 C0 00 (decode as nop / ret nz / nop) between the jp of Photo_SaveReceived_Far and Sram_ZeroTagBytes; no reference in the trace, read in forced runs only",auto
+02,46E6,Unused_Photo_SaveReceived_Far_Stray46E6,I,"3 bytes 00 C0 00 between the jp of Photo_SaveReceived_Far (02:46E3) and Sram_ZeroTagBytes (02:46E9); read as code they would be nop / ret nz / nop but nothing jumps here. Evidence: never executed or read in the 18,739-entry replay coverage (organic or forced runs: only the forced runs touched the bytes as data); BGB with logging watchpoints during a real two-emulator link photo exchange (tcrf_check/tools/bgb_link_wp.py): the jp at 02:46E3 executed 2 times, 0 reads and 0 executions of 02:46E6-46E8; the same 3 bytes sit between the same two routines in the international ROM and no pointer targets them (I)",hand
 02,46E9,Sram_ZeroTagBytes,I,zeroes C bytes at HL,hand+auto
 02,46F0,Photo_SaveShot_Far,C,stores a new shot: checksums,hand+auto
 02,47B3,Photo_SaveShot_Far_Tbl47B3,I,"auto: 3 bytes, bytes; referenced by Photo_SaveShot_Far",auto
@@ -1304,7 +1297,7 @@ bank,addr,name,conf,note,source
 03,5D69,AnimEd_ClearAll,C,empties the list ($FE),hand+auto
 03,5D94,AnimEd_InitEditor,C,resets the editor variables and loads the first entry,hand+auto
 03,5DCE,AnimEd_LoadMenuTiles,I,tiles for the highlighted tool menu entry,hand+auto
-03,5DF1,AnimEd_LoadMenuTiles_Tbl5DF1,I,"auto: 30 bytes, bytes; referenced by AnimEd_LoadMenuTiles",auto
+03,5DF1,AnimEd_LoadMenuTiles_Tbl5DF1,C,"5 records of 6 bytes {src lo, src hi, dst lo, dst hi, len lo, len hi}, bank $0C: 5A40 -> $8D50, 5AC0 -> $8DD0, 6100 -> $8E50, 5B80 -> $8ED0, 5C00 -> $8F50, 0x80 bytes each; AnimEd_LoadMenuTiles (03:5DCE) selects the record with $D719",auto
 03,5E0F,AnimEd_ClearSparks,C,zeroes the 16 spark lifetimes,hand+auto
 03,5E1A,AnimEd_SpawnSpark,C,starts a spark sprite at the cursor (sound $36),hand+auto
 03,5EC7,AnimEd_UpdateSparks,C,moves the sparks,hand+auto
@@ -1433,7 +1426,7 @@ bank,addr,name,conf,note,source
 03,7505,HotSpotEd_ShowJumpThumb,I,thumbnail of the jump target,hand+auto
 03,7573,HotSpotEd_PickerScroll,C,scrolls the value picker while Up / Down is held; Z/NZ,hand+auto
 03,75B0,HotSpotEd_PickerScrollStep,I,,hand+auto
-03,75C6,HotSpotEd_DrawArrows,I,up / down arrow sprites,hand+auto
+03,75C6,HotSpotEd_DrawArrows,C,"arrow sprite of the HotSpotEd pickers: the caller puts the position in BC (the effect picker passes x = $3F, y = $78 through `ld bc`); the meta is $CF while no key is held, $D1 while Up ($FFA1 bit 6) and $D0 while Down (bit 7) is held, drawn by Oam_AddMeta_B01_4000",hand+auto
 03,75D9,HotSpotEd_ClearAnim,I,zeroes the pointer animation state,hand+auto
 03,75E9,HotSpotEd_PreviewSound,C,plays the chosen sound from the list at 7615,hand+auto
 03,7615,HotSpotEd_SoundList,C,list of {sound,hand+auto
@@ -1527,7 +1520,7 @@ bank,addr,name,conf,note,source
 04,4C0B,Mode0F_State07_ConfirmApply,C,YES: erases the photo and its references; then back to mode 09 or 0A,hand+auto
 04,4C7C,Mode0F_LeaveScreen,C,fade out + LCD off + clear STAT mode-0 IRQ bits,hand+auto
 04,4C8D,Mode0F_State09_EraseOne,C,single photo erase after YES (animation then counters),hand+auto
-04,4D09,Mode0F_State09_EraseOne_Data4D09,?,18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; no instruction in the trace loads an address in 04:4D00-4D1A (only other banks use 4D00-4D1A as their own addresses) and the bytes were read only in forced runs,auto
+04,4D09,Unused_Mode0F_State09_EraseOne_Tbl4D09,I,"18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; they read as 9 {frame,duration} pairs (frames 5 6 7 6 7 8 11 12 14, durations 15 5 5 5 5 5 5 5 20) but nothing reads them. Evidence: no instruction loads an address in 04:4D09-4D1A; BGB with logging watchpoints (tcrf_check/tools/bgb_wp_probe.py, replay entry 783 = erase one photo): Mode0F_State09_EraseOne entered 2 times and returned 2 times, the control watchpoint on the neighbouring routine bytes fired 12 times, 0 reads of 04:4D09-4D1A; identical bytes at the same place in the international ROM (I)",hand
 04,4D1B,Mode0F_State0A_EraseAll,C,"erase-all branch: A erases every photo, B cancels (130 instructions, never played until §16.14)",hand+auto
 04,4DF9,Mode0F_DrawEraseAllJitter,C,two sprites $B4 / $B5 that shake by one pixel (erase-all prompt),hand+auto
 04,4E26,Mode0F_ForgetAllAnimations,C,far 02:4EE8 then marks every animation entry $FE and stores it (02:4A07),hand+auto
@@ -1536,7 +1529,6 @@ bank,addr,name,conf,note,source
 04,4FA3,Mode0F_DrawBigCursor,C,cursor metasprite at (50,hand+auto
 04,4FAF,Mode0F_DrawCopyCount,C,two decimal digits of copies_of_photo as tile copies,hand+auto
 04,5009,Mode0F_DrawCopyCount_Tbl5009,I,"auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount",auto
-04,5018,Mode09_State02_PhotoArrows_Gfx5018,I,"auto: 1 bytes, tile data; referenced by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows",auto
 04,5019,Mode0F_DrawCopiedMarker,C,sprite showing that a copy was made; counts down copied_marker_timer,hand+auto
 04,5044,Mode0F_EraseJingleTiles,I,plays sound $45 and builds four quadrant tiles of the erase animation,hand+auto
 04,509F,Mode0F_EraseTileTbl,I,table read by 5044,hand+auto
@@ -1689,17 +1681,17 @@ bank,addr,name,conf,note,source
 04,7279,Parlor_DrawCursor,C,,hand+auto
 04,7285,Parlor_Animate,C,animates the queen tiles and sprite,hand+auto
 04,728C,Parlor_AnimQueenTiles,C,,hand+auto
-04,72CA,Parlor_AnimQueenTiles_Tbl72CA,I,"auto: 25 bytes, bytes; referenced by Parlor_AnimQueenTiles",auto
+04,72CA,Parlor_AnimQueenTiles_Tbl72CA,C,"4-byte records {src lo, src hi, duration, flag}: 24:6140 for $10 ticks, 24:62E0 for $0E, ... flag $FF wraps the frame index; the record is read by Parlor_AnimQueenTiles (04:728C) with the frame index $D500 x 4; 6 records + end",auto
 04,72E3,Parlor_AnimQueenSprite,C,,hand+auto
 04,7321,Parlor_AnimQueenSprite_Tbl7321,I,"auto: 31 bytes, bytes; referenced by Parlor_AnimQueenSprite",auto
 04,7340,Parlor_AnimateB,I,,hand+auto
-04,7372,Parlor_AnimateB_PtrTbl7372,I,"auto: 4 bytes, word table; referenced by Parlor_AnimateB",auto
+04,7372,Parlor_AnimateB_PtrTbl7372,C,"word table: the two 11-row map pieces 23:7040 and 23:7280 copied by Parlor_AnimateB (04:7340), index $D500 xor 1 every $14 frames",auto
 04,7376,Parlor_AnimateC,I,,hand+auto
 04,73A2,Parlor_AnimateC_Tbl73A2,I,"auto: 9 bytes, bytes; referenced by Parlor_AnimateC",auto
 04,73AB,Parlor_DrawPortraits,I,metasprites $DD / $DE,hand+auto
 04,73BC,Parlor_ScreenOn,C,clears OAM and fades the screen in once; sets lcdc and palettes,hand+auto
 04,73EF,Parlor_LoadPage,C,graphics and map of page A in the table at 7436 (A = page),hand+auto
-04,7436,Parlor_PageTbl,C,3 pointers to lists of {bank,hand+auto
+04,7436,Parlor_PageTbl,C,"3 pointers to lists of 7-byte records {src lo, src hi, bank, dst lo, dst hi, len lo, len hi} ended by $FF; the tail of each list is {lo,hi,bank} of the page map: page 0 -> 24:60A0, page 1 -> 23:7040, page 2 -> 26:7BC0 (C, read from the ROM)",hand+auto
 04,7479,Parlor_SpiralWipeIn,C,spiral wipe in of the map saved in menu_map_ptr,hand+auto
 04,7488,Mode0A_AlbumView,C,mode 0A: VIEW album: pick a photo then browse with a slider and edit pages,hand+auto
 04,748C,Mode0A_StateTable,C,"16 states, rst $18 table of mode $0A",hand+auto
@@ -1746,15 +1738,15 @@ bank,addr,name,conf,note,source
 05,40E6,DjTitle_ReadSourceKeys,C,Left / Right changes start_menu_1 (0..2; saved only if present),hand+auto
 05,4107,DjTitle_DrawMenu1,C,,hand+auto
 05,4114,DjTitle_DrawSourceSprite,I,,hand+auto
-05,412A,DjTitle_DrawArrowLeft,I,,hand+auto
-05,4145,DjTitle_DrawArrowRight,I,,hand+auto
+05,412A,DjTitle_DrawArrowLeft,C,"left arrow of the tune-source selector ($D9D5 = 0 factory songs / 1 blank / 2 saved): drawn when $D9D5 >= 1 at x = $13 (value 1) or $2B (value 2), y = $59, meta $60 + frame; the sprite alternates between two frames every 4 frames ($FFC8 >> 2 & 1) through Oam_AddMeta_B02_6E4B",hand+auto
+05,4145,DjTitle_DrawArrowRight,C,"right arrow of the tune-source selector: drawn when $D9D5 < 2 at x = $2D (value 0) or $45 (value 1), y = $59, meta $5E + frame; the sprite alternates between two frames every 4 frames ($FFC8 >> 2 & 1) through Oam_AddMeta_B02_6E4B",hand+auto
 05,4162,DjTitle_DrawPerformer,I,performer sprite from start_menu_performer_character,hand+auto
 05,416E,Mode1F_State02_MenuSong,C,start menu 2: factory song number (4 songs),hand+auto
 05,4195,DjTitle_ReadSongKeys,C,,hand+auto
 05,41B9,DjTitle_DrawMenu2,C,,hand+auto
 05,41C9,DjTitle_DrawFrame2,I,two sprites $6E / $6F,hand+auto
-05,41DA,DjTitle_DrawArrowUp2,I,,hand+auto
-05,41F1,DjTitle_DrawArrowDown2,I,,hand+auto
+05,41DA,DjTitle_DrawArrowUp2,C,"up arrow of the factory-song selector ($D9D6 = 0-3): drawn when $D9D6 >= 1 at x = $3E, y = $54, meta $6A + frame; the sprite alternates between two frames every 4 frames ($FFC8 >> 2 & 1) through Oam_AddMeta_B02_6E4B",hand+auto
+05,41F1,DjTitle_DrawArrowDown2,C,"down arrow of the factory-song selector: drawn when $D9D6 < 3 at x = $4E, y = $54, meta $6C + frame; the sprite alternates between two frames every 4 frames ($FFC8 >> 2 & 1) through Oam_AddMeta_B02_6E4B",hand+auto
 05,4208,DjTitle_DrawSourceSprite2,I,,hand+auto
 05,4216,DjTitle_DrawPerformer2,I,,hand+auto
 05,4222,DjTitle_DrawSongNumber,C,song number as two numeral tiles at $8800,hand+auto
@@ -1764,8 +1756,8 @@ bank,addr,name,conf,note,source
 05,42EC,DjTitle_DrawMenu3,C,,hand+auto
 05,42FC,DjTitle_DrawSourceSprite3,I,,hand+auto
 05,430A,DjTitle_DrawPerformerBlink,I,,hand+auto
-05,4321,DjTitle_DrawArrowLeft3,I,,hand+auto
-05,4338,DjTitle_DrawArrowRight3,I,,hand+auto
+05,4321,DjTitle_DrawArrowLeft3,C,"left arrow of the performer-set selector ($D9D3 = 0-2): drawn when $D9D3 >= 1 at x = $1E, y = $8D, meta $66 + frame; the sprite alternates between two frames every 4 frames ($FFC8 >> 2 & 1) through Oam_AddMeta_B02_6E4B",hand+auto
+05,4338,DjTitle_DrawArrowRight3,C,"right arrow of the performer-set selector: drawn when $D9D3 < 2 at x = $42, y = $8D, meta $68 + frame; the sprite alternates between two frames every 4 frames ($FFC8 >> 2 & 1) through Oam_AddMeta_B02_6E4B",hand+auto
 05,434F,DjTitle_DrawFrame3,I,,hand+auto
 05,4365,Mode1F_State04_PerformanceSetup,C,performance screen: graphics; three channel indicators; tempo and level digits,hand+auto
 05,4419,Mode1F_State05_Performance,C,plays the tune; Select goes to the edit pages (state 08),hand+auto
@@ -1827,8 +1819,7 @@ bank,addr,name,conf,note,source
 05,4F9E,DjPerf_PerformerScript_Tbl4F9E,I,"auto: 78 bytes, bytes; referenced by DjPerf_PerformerScript",auto
 05,5006,DjPerf_PerformerScript_Tbl5006,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
 05,5025,DjPerf_PerformerScript_Tbl5025,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
-05,5044,DjPerf_PerformerScript_Tbl5044,I,"auto: 4 bytes, bytes; referenced by DjPerf_PerformerScript",auto
-05,5048,Ball_DrawPauseText_Tbl5048,I,"auto: 1 bytes, bytes; referenced by Ball_DrawPauseText",auto
+05,5044,DjPerf_PerformerScript_Tbl5044,I,"auto: 4 bytes, bytes; referenced by DjPerf_PerformerScript | 5 bytes 22 25 50 60 03 (the last one was cut off by a false label at 5048 = `ld bc,$5048` in Ball_DrawPauseText, a sprite position); the code of DjPerf_PerformerScript starts at 5049",auto
 05,5063,DjPerf_PerformerScript_Tbl5063,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
 05,5082,DjPerf_PerformerScript_Tbl5082,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
 05,50D3,DjPerf_PerformerScript_Tbl50D3,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
@@ -2172,8 +2163,7 @@ bank,addr,name,conf,note,source
 05,7F69,Photo_FarGetAddress,C,far helper: photo / graphics pointer (24 callers),hand+auto
 05,7F86,Photo_FarGetAddress_Tbl7F86,I,"auto: 91 bytes, bytes; referenced by Photo_FarGetAddress",auto
 06,4000,Mode15_SelfTimerInterval,C,mode 15: self-timer (delay) and interval shooting,hand+auto
-06,4004,Mode15_StateTable,C,10 states,hand+auto
-06,4008,Shoot_DrawBurstIcon_PtrTbl4008,I,"auto: 16 bytes, word table; referenced by Shoot_DrawBurstIcon",auto
+06,4004,Mode15_StateTable,C,"10 states | 10 words 4018, 4027, 40C2, 410A, 4142, 416A, 4222, 42A7, 4308, 434F = the whole table up to 4018 (the label that cut it at 4008 was `ld bc,$4008`, a sprite position of Shoot_DrawBurstIcon)",hand+auto
 06,4018,Mode15_State00_ReturnToShoot,C,shoot_variant 0 and back to mode 14,hand+auto
 06,4027,Mode15_State01_TimerInit,C,self-timer screen,hand+auto
 06,40C2,Mode15_State02_TimerChoose,C,Up / Down changes the delay in seconds,hand+auto
@@ -2389,9 +2379,7 @@ bank,addr,name,conf,note,source
 06,6DAD,Shoot_LoadBurstPhoto,I,,hand+auto
 06,6DD3,Shoot_LoadBurstPhotoB,I,,hand+auto
 06,6E06,Shoot_LoadTimerScreen,C,timer / counter text of the variant,hand+auto
-06,6E32,Shoot_LoadTimerScreen_Tbl6E32,I,"auto: 514 bytes, bytes; referenced by Shoot_LoadTimerScreen",auto
-06,7034,Mode18_DrawArrows_Tbl7034,I,"auto: 56 bytes, bytes; referenced by Mode18_DrawArrows",auto
-06,706C,Mode18_DrawArrows_Tbl706C,I,"auto: 70 bytes, bytes; referenced by Mode18_DrawArrows",auto
+06,6E32,Shoot_LoadTimerScreen_Tbl6E32,I,"auto: 514 bytes, bytes; referenced by Shoot_LoadTimerScreen | 22 words 6E5E, 6E6D, 6E8A ... 70A3 (the last two words of the old reading, 4180 and A017, belong to the next bytes); the lists they point to run from 6E5E to 70B2 (the labels at 7034 and 706C were `ld bc` sprite positions of Mode18_DrawArrows and were removed)",auto
 06,70B2,Shoot_DrawPhotosLeft,I,,hand+auto
 06,70CA,Shoot_DrawTimerMinutes,I,,hand+auto
 06,7106,Shoot_DrawShotsLeftTimer,I,,hand+auto
@@ -2664,16 +2652,16 @@ bank,addr,name,conf,note,source
 07,6D44,Mode0D_State02_OptionsMenu,C,blinking arrows; Up/Down picks option row,hand+auto
 07,6DED,Mode0D_State03_OptionA,I,option A (D7D2): photo number shown on/off,hand+auto
 07,6E7D,SlideOptA_ReadKeys,I,Left/Right toggle D674,hand+auto
-07,6E99,SlideOptA_DrawArrow,I,,hand+auto
+07,6E99,SlideOptA_DrawArrow,C,"draws the arrow of option A: position = SlideOptA_ArrowPosTbl[$D674] ({y,x} in C,B); animation phase $D50F (2 = finished, nothing drawn), tick $D51F: meta and duration come from SlideOptA_DrawArrow_Tbl6EDA[phase]; the phase advances when the tick equals the duration and the tick counts only while the phase is not 0 (C)",hand+auto
 07,6ED6,SlideOptA_ArrowPosTbl,I,,hand+auto
-07,6EDA,SlideOptA_DrawArrow_Tbl6EDA,I,"auto: 6 bytes, bytes; referenced by SlideOptA_DrawArrow",auto
+07,6EDA,SlideOptA_DrawArrow_Tbl6EDA,C,"3 x {meta, duration}: 08/10, 09/0B, 09/FF (the third entry is never used: phase 2 returns before the table is read); read by SlideOptA_DrawArrow with $D50F x 2 (C)",auto
 07,6EE0,SlideOptA_DrawValue,I,,hand+auto
 07,6EFB,SlideOptA_ValuePosTbl,I,,hand+auto
 07,6EFF,Mode0D_State04_OptionB,I,option B (D7D3): random / in order,hand+auto
 07,6F94,SlideOptB_ReadKeys,I,Left/Right toggle D675,hand+auto
-07,6FB0,SlideOptB_DrawArrow,I,,hand+auto
+07,6FB0,SlideOptB_DrawArrow,C,"draws the arrow of option B: same routine as SlideOptA_DrawArrow with $D675, SlideOptB_ArrowPosTbl and SlideOptB_DrawArrow_Tbl6FF1 (C)",hand+auto
 07,6FED,SlideOptB_ArrowPosTbl,I,,hand+auto
-07,6FF1,SlideOptB_DrawArrow_Tbl6FF1,I,"auto: 6 bytes, bytes; referenced by SlideOptB_DrawArrow",auto
+07,6FF1,SlideOptB_DrawArrow_Tbl6FF1,C,"3 x {meta, duration}: 0A/10, 0B/0B, 0B/FF (the third entry is never used); read by SlideOptB_DrawArrow (C)",auto
 07,6FF7,SlideOptB_DrawValue,I,,hand+auto
 07,7016,SlideOptB_ValuePosTbl,I,,hand+auto
 07,701A,Mode0D_State05_FadeOutHub,C,B -> mode 0B; A -> next state,hand+auto
@@ -2728,24 +2716,24 @@ bank,addr,name,conf,note,source
 07,7B00,MainMenu_IconCallback3,C,,hand+auto
 07,7B05,MainMenu_IconCallback4,C,falls into the common body at 7B08,hand+auto
 07,7B44,MainMenu_IconFrameTbl,C,2-byte entries: sprite; duration; $FF = loop target in the next byte,hand+auto
-07,7BDC,MainMenu_SlideA_Begin,I,four-step page transition (HL = draw callback; DE = table of 3-byte steps),hand+auto
-07,7BF4,MainMenu_SlideA_Step,I,,hand+auto
-07,7C1B,MainMenu_SlideA_Tbl0,I,,hand+auto
-07,7C27,MainMenu_SlideA_Tbl1,I,,hand+auto
-07,7C33,MainMenu_SlideA_Tbl2,I,,hand+auto
-07,7C3F,MainMenu_SlideA_Tbl3,I,,hand+auto
-07,7C4B,MainMenu_SlideB_Begin,I,,hand+auto
-07,7C63,MainMenu_SlideB_Step,I,,hand+auto
-07,7C8A,MainMenu_SlideB_Tbl0,I,,hand+auto
-07,7C96,MainMenu_SlideB_Tbl1,I,,hand+auto
-07,7CA2,MainMenu_SlideB_Tbl2,I,,hand+auto
-07,7CAE,MainMenu_SlideB_Tbl3,I,,hand+auto
-07,7CBA,MainMenu_SlideC_Begin,I,,hand+auto
-07,7CD2,MainMenu_SlideC_Step,I,,hand+auto
-07,7CF9,MainMenu_SlideC_Tbl0,I,,hand+auto
-07,7D05,MainMenu_SlideC_Tbl1,I,,hand+auto
-07,7D11,MainMenu_SlideWait,I,shared wait step: pacing by menu_trans_stamp,hand+auto
-07,7D28,MainMenu_SlideWaitLoop,I,,hand+auto
+07,7BDC,MainMenu_SlideA_Begin,C,"page transition A, entry (BC = $0400): HL = draw callback (the caller loads MainMenu_DrawUpperItem0 or a sibling), DE = a table of 4 records {src lo, src hi, bank}. It hides the unused sprites, waits one VBlank, then runs 4 steps (B counts 4 down, C = step 0..3): each step stamps $FFC8 into $DA2E, calls the callback with the return address MainMenu_SlideA_Step, and after step 4 tail-jumps to the callback once more. Callers load Tbl0 (07:7297, 72B6, 72D8) or Tbl1 (07:7321, 73AD, 7782) only; no code does arithmetic on DE (C: all 6 call sites read in the listing)",hand+auto
+07,7BF4,MainMenu_SlideA_Step,C,"step of page transition A: record number C (3 x C added to the table) gives {src lo, hi, bank}; Vram_CopyFromBank copies 0x200 bytes (32 tiles) to $9100, then MainMenu_SlideWait paces the step to 4 frames; the callback is called every frame during the wait",hand+auto
+07,7C1B,MainMenu_SlideA_Tbl0,C,"4 x {lo,hi,bank} = 16:6B80, 6D80, 6F80, 7180 (frames 1-4 of the 10-frame strip 16:6980-7D7F, forward sweep); used by the callers 07:7297, 72B6, 72D8",hand+auto
+07,7C27,MainMenu_SlideA_Tbl1,C,"4 x {lo,hi,bank} = 16:6F80, 6D80, 6B80, 6980 (the same frames backwards); used by the callers 07:7321, 73AD, 7782",hand+auto
+07,7C33,MainMenu_SlideA_Tbl2,I,"4 x {lo,hi,bank} = 16:7580, 7780, 7980, 7B80 (frames 6-9 of the strip, forward). NO caller: only Tbl0 and Tbl1 are ever loaded into DE ('ld de,Tbl' sites 07:7297-7782) and the step code never adds an offset; same layout and same absence in the international ROM (07:7BF6 there, no 'ld de,7BF6'). Frame 9 (16:7B80) is read elsewhere (MainMenu_LoadIconTilesA, page index >= 3), frames 6-8 only here (I)",hand+auto
+07,7C3F,MainMenu_SlideA_Tbl3,I,"4 x {lo,hi,bank} = 16:7980, 7780, 7580, 7380 (frames 8, 7, 6, 5 of the strip, backward). NO caller (see Tbl2); 16:7380 is read by no organic run and no code (I)",hand+auto
+07,7C4B,MainMenu_SlideB_Begin,C,"page transition B, entry: same loop as MainMenu_SlideA_Begin (4 steps, 3-byte records {lo,hi,bank} from DE, draw callback in HL); callers load Tbl0 (07:73F6), Tbl1 (07:776C), Tbl2 (07:7425) or Tbl3 (07:775C)",hand+auto
+07,7C63,MainMenu_SlideB_Step,C,"step of page transition B: record C of the table, Vram_CopyFromBank copies 0x500 bytes (80 tiles) to $9200, then MainMenu_SlideWait",hand+auto
+07,7C8A,MainMenu_SlideB_Tbl0,C,"4 x {lo,hi,bank} = 16:5A80, 5F80, 6480, 11:4000 (0x500 bytes each, frames 1-4 of the 7-frame strip 16:5580-697F + 11:4000-4EFF, forward); used by the caller 07:73F6",hand+auto
+07,7C96,MainMenu_SlideB_Tbl1,C,"4 x {lo,hi,bank} = 16:6480, 5F80, 5A80, 5580 (backward); used by the caller 07:776C",hand+auto
+07,7CA2,MainMenu_SlideB_Tbl2,C,"4 x {lo,hi,bank} = 11:4500, 4500, 4A00, 4A00 (each frame twice); used by the caller 07:7425",hand+auto
+07,7CAE,MainMenu_SlideB_Tbl3,C,"4 x {lo,hi,bank} = 11:4500, 4500, 4000, 4000 (each frame twice, backward); used by the caller 07:775C",hand+auto
+07,7CBA,MainMenu_SlideC_Begin,C,"page transition C, entry: same loop (4 steps, records {lo,hi,bank}); callers load Tbl0 (07:742E) or Tbl1 (07:7753)",hand+auto
+07,7CD2,MainMenu_SlideC_Step,C,"step of page transition C: record C, Vram_CopyFromBank copies 0x1C0 bytes (14 map rows of 32) to $9860 = the background map strip from row 3, then MainMenu_SlideWait",hand+auto
+07,7CF9,MainMenu_SlideC_Tbl0,C,"4 x {lo,hi,bank} = 27:54B0, 5830, 5670, 5F30 (map strips of 0x1C0 bytes to $9860); used by the caller 07:742E",hand+auto
+07,7D05,MainMenu_SlideC_Tbl1,C,"4 x {lo,hi,bank} = 27:5670, 5830, 54B0, 26:5A60 (map strips of 0x1C0 bytes to $9860, backward); used by the caller 07:7753",hand+auto
+07,7D11,MainMenu_SlideWait,C,"shared wait of the three transitions: waits ($DA2E - $FFC8 + 4) VBlanks, i.e. one step takes 4 frames counted from the stamp taken at the start of the step; the caller's draw callback (found on the stack) is called once per frame through MainMenu_SlideWaitLoop",hand+auto
+07,7D28,MainMenu_SlideWaitLoop,C,"one frame of the wait: hides the unused sprites, waits for VBlank, decrements the count and loops back into MainMenu_SlideWait (ret when 0)",hand+auto
 08,4000,Mode1B_PrintMenu,C,mode 1B: printer menu (Left = mode 1C; Right = mode 1E),hand+auto
 08,4004,Mode1B_StateTable,C,,hand+auto
 08,400A,Mode1B_State00_Init,C,,hand+auto
@@ -2827,8 +2815,7 @@ bank,addr,name,conf,note,source
 08,4F75,BorderPicker_SlideToPrevious,I,page slide,hand+auto
 08,4FC4,BorderPicker_SlideTblA,I,,hand+auto
 08,4FD9,BorderPicker_SlideToNext,I,page slide,hand+auto
-08,501F,BorderPicker_SlideTblB,I,,hand+auto
-08,5033,WildFramePicker_DrawPageNumber_Tbl5033,I,"auto: 4 bytes, bytes; referenced by WildFramePicker_DrawPageNumber",auto
+08,501F,BorderPicker_SlideTblB,I,"24 bytes = 8 records of 3 bytes (38 00 00 / 68 20 7F / 90 00 57 / B0 00 37 / C8 00 1F / D8 00 17 / E0 00 07 / 00 20 00); the last record was cut off by a false label at 5033 (`ld bc,$5033`, a sprite position)",hand+auto
 08,5037,Border_LoadMap_LcdOff,C,far: border tilemap with the LCD off,hand+auto
 08,507F,Border_LoadMap_Safe,C,far: border tilemap during VBlank,hand+auto
 08,50C7,Border_LoadMapRect,C,,hand+auto
@@ -2855,12 +2842,8 @@ bank,addr,name,conf,note,source
 08,5473,Wild_MemCopyAdvance,I,,hand+auto
 08,5481,WildFrame_LoadForOptionScreen,I,far: called from 08:4847,hand+auto
 08,54B8,Wild_VramCopyAdvance,I,,hand+auto
-08,54C6,WildFrame_PageSrcTbl,C,3-byte {lo;hi;bank} per page: $4000 bank $31 ...,hand+auto
-08,5833,WildFramePicker_DrawPageNumber_Tbl5833,I,"auto: 550 bytes, bytes; referenced by WildFramePicker_DrawPageNumber",auto
-08,5A59,BorderPicker_DrawNumber_Tbl5A59,I,"auto: 2027 bytes, bytes; referenced by BorderPicker_DrawNumber",auto
-08,6244,WildFramePicker_DrawPageNumber_Tbl6244,I,"auto: 21 bytes, bytes; referenced by WildFramePicker_DrawPageNumber",auto
-08,6259,BorderPicker_DrawNumber_Tbl6259,I,"auto: 2027 bytes, bytes; referenced by BorderPicker_DrawNumber",auto
-08,6A44,WildFramePicker_DrawPageNumber_Tbl6A44,I,"auto: 2042 bytes, bytes; referenced by WildFramePicker_DrawPageNumber",auto
+08,54C6,WildFrame_PageSrcTbl,C,"3-byte {lo;hi;bank} per page: $4000 bank $31 ... | only the first 24 bytes (8 x {lo,hi,bank}: 31:4000, 31:5800, 31:7000, 32:4800, 32:6000, 32:7800, 33:5000, 33:6800) are the table; what follows is WildFrame_PageData_54DE",hand+auto
+08,54DE,WildFrame_PageData_54DE,?,"5,472 bytes between the 8-page pointer table and Mode19_TitleScreens: lists of short records such as 9A 22 01 A9 00 / 9A 23 01 AA 00 (54DE), 01 07 01 08 01 09 ... (5833), 03 90 00 91 00 92 ... (5A59), 7D 02 7E 02 7F 02 00 40 00 40 ... (6244), DF 11 CF 11 BF 11 ... (6A44); five auto labels (5833, 5A59, 6244, 6259, 6A44) that cut it were `ld bc` sprite positions of WildFramePicker_DrawPageNumber / BorderPicker_DrawNumber and were removed; the bytes are read by the printer packet routine in the replay coverage (17E8) and the record format is not decoded: the page map / tile lists of the wild-frame pages (?)",hand
 08,723E,Mode19_TitleScreens,C,mode 19: copyright; title scene,hand+auto
 08,7245,Mode19_StateTable,C,5 states,hand+auto
 08,724F,Mode19_State00_CopyrightScreens,C,2nd copyright screen if the CoroCoro tag matches,hand+auto
@@ -2999,7 +2982,7 @@ bank,addr,name,conf,note,source
 09,5417,Kb_GlyphListC,C,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetC_Gfx5417)",hand
 09,5424,Kb_LoadGlyphList,C,"list in HL: entry n,g = n glyphs from slot g; entry $80+n,g = n copies of slot g; 0 ends; each glyph = 32 B from 2A:$4000 + 32 x slot copied to DE; lists A / B / C at 09:53D3 / 53F5 / 5417",hand+auto
 09,5450,Kb_GlyphOffset,C,BC = A x 32 (byte offset of glyph slot A),hand+auto
-09,545F,Kb_FindCharInList,I,,hand+auto
+09,545F,Kb_FindCharInList,C,"A = key index ($DA3C), HL = one of the three glyph lists Kb_GlyphListA/B/C (pairs {n, slot}, $80+n = n copies of the slot, 0 ends): returns the character code of the key = slot + 1 (0 for the blank run, slot $FF); the only caller is Kb_Page0_Press (09:5BE9), which stores it in the name at $DA4D + $DA3B (C)",hand+auto
 09,5489,OwnerCard_DrawOwnerId,C,owner_id at $99CA,hand+auto
 09,5495,OwnerCard_DrawDigits,C,,hand+auto
 09,54BC,OwnerCard_LoadNameGlyphs,C,owner_name to tiles at $8800,hand+auto
@@ -3020,22 +3003,22 @@ bank,addr,name,conf,note,source
 09,564D,OwnerCard_DrawBloodLowB,I,,hand+auto
 09,566A,OwnerCard_DrawBloodLowB_Tbl566A,I,"auto: 11 bytes, bytes; referenced by OwnerCard_DrawBloodLowB",auto
 09,5675,Kb_Page0_Draw,C,name keyboard; tab page 0,hand+auto
-09,5685,Kb_Page0_Draw_Tbl5685,I,"auto: 160 bytes, bytes; referenced by Kb_Page0_Draw, Run_DrawPickCharacterSprite",auto
+09,5685,Kb_Page0_Draw_Tbl5685,C,"80 key highlight positions {y, x} (y = 3C, 4C, 5C, 6C, 7C; x from 08 to 90, then 70 / 88 repeated for the wide keys), entry n for the key index $DA3C = n; Kb_DrawKeyHighlight (09:58C2) loads C = y, B = x and draws the blinking marker $A3 with Oam_AddMeta_B02_5272 when $FFC8 & $0F >= 4 (C). Run_DrawPickCharacterSprite's `ld bc,$5685` is a sprite position, not a reference",auto
 09,5725,Kb_Page1_Draw,C,,hand+auto
-09,5732,Kb_Page1_Draw_Tbl5732,I,"auto: 20 bytes, bytes; referenced by Kb_Page1_Draw",auto
+09,5732,Kb_Page1_Draw_Tbl5732,C,"10 key highlight positions {y, x} of page 1 of the keyboard, entry n for the key index $DA3C = n (Kb_Page1_Draw -> Kb_DrawKeyHighlight, marker $A3 blinking with $FFC8 & $0F >= 4) (C)",auto
 09,5746,Kb_Page2_Draw,C,,hand+auto
-09,5753,Kb_Page2_Draw_Tbl5753,I,"auto: 48 bytes, bytes; referenced by Kb_Page2_Draw",auto
+09,5753,Kb_Page2_Draw_Tbl5753,C,"24 key highlight positions {y, x} of page 2 of the keyboard, entry n for the key index $DA3C = n (Kb_Page2_Draw -> Kb_DrawKeyHighlight, marker $A3 blinking with $FFC8 & $0F >= 4) (C)",auto
 09,5783,Kb_Page3_Draw,C,,hand+auto
-09,5790,Kb_Page3_Draw_Tbl5790,I,"auto: 36 bytes, bytes; referenced by Kb_Page3_Draw",auto
+09,5790,Kb_Page3_Draw_Tbl5790,C,"18 key highlight positions {y, x} of page 3 of the keyboard, entry n for the key index $DA3C = n (Kb_Page3_Draw -> Kb_DrawKeyHighlight, marker $A3 blinking with $FFC8 & $0F >= 4) (C)",auto
 09,57B4,Kb_DrawTabs,C,,hand+auto
-09,57D7,Kb_DrawTabs_Tbl57D7,I,"auto: 6 bytes, bytes; referenced by Kb_DrawTabs",auto
-09,57DD,Kb_DrawTabs_Tbl57DD,I,"auto: 4 bytes, bytes; referenced by Kb_DrawTabs",auto
+09,57D7,Kb_DrawTabs_Tbl57D7,C,"base meta-sprite id of the page marker, indexed by the page $DA3D (0-5): 97 97 97 9A 9D A0; Kb_DrawTabs adds Tbl57DD[($FFC8 >> 3) & 3] and draws it at x = $1D, y = $1B (Oam_AddMeta_B02_5272) (C)",auto
+09,57DD,Kb_DrawTabs_Tbl57DD,C,"4 frame offsets 0, 1, 0, 2 of the page marker, selected by ($FFC8 >> 3) & 3 (Kb_DrawTabs) (C)",auto
 09,57E1,Kb_DrawCursor,C,,hand+auto
-09,5827,Kb_DrawCursor_Tbl5827,I,"auto: 12 bytes, bytes; referenced by Kb_DrawCursor",auto
-09,5833,Kb_DrawCursor_Tbl5833,I,"auto: 16 bytes, bytes; referenced by Kb_DrawCursor",auto
-09,5843,Kb_DrawTabPages,I,,hand+auto
+09,5827,Kb_DrawCursor_Tbl5827,C,"6 x {y, x of the first character} of the blinking cursor, indexed by the page $DA3D (pages 0-3: 19/28, 19/28, 19/28, 19/80; entry 4 = 29/28 is never used because page 4 branches to Kb_DrawCursor_Tbl5833; entry 5 = 29/84); the cursor sprite $A4 is drawn at x + 8 x $DA3B (name position) when $FFC8 & $0F >= 4 (C)",auto
+09,5833,Kb_DrawCursor_Tbl5833,C,"8 x {y, x} cursor positions of page 4 (y = 29; x = 28, 30, 38, 40, 50, 58, 68, 70), indexed by $DA3B: Kb_DrawCursor (09:57E1) uses it instead of Kb_DrawCursor_Tbl5827 when $DA3D = 4 (C)",auto
+09,5843,Kb_DrawTabPages,C,"draws the three page tabs (meta $91 + frame / $93 + frame / $95 + frame, frame from Kb_TabAnimFrame, at the positions (x,y) $68/$74, $80/$74, $68/$84 given as immediate `ld bc`) and, for pages 0 and 1 only ($DA3D < 2), two more sprites: $8F at (x $50, y $7C) and $90 at (x $58, y $7C) (C)",hand+auto
 09,5881,Kb_TabAnimFrame,C,,hand+auto
-09,58B4,Kb_TabAnimFrame_Tbl58B4,I,"auto: 14 bytes, bytes; referenced by Kb_TabAnimFrame",auto
+09,58B4,Kb_TabAnimFrame_Tbl58B4,C,"7 phases {frame 0/1, duration in frames}: 00/4, 00/4, 01/4, 00/3, 01/3, 00/2, 01/2 (accelerating blink); Kb_TabAnimFrame (09:5881) advances the phase $DA41 + tab when its counter $DA3E + tab reaches the duration, 0 = idle, wraps 7 -> 0, and returns the frame added to the tab meta id (C)",auto
 09,58C2,Kb_DrawKeyHighlight,C,,hand+auto
 09,58DD,Kb_Page0_Navigate,C,key map tables 09:58EA / 593B / 598B,hand+auto
 09,58EA,Kb_Page0_NavLimitsTbl,C,byte 0 = last row; then one byte per grid position (row<<4|col): steps allowed to the left << 4 | steps allowed to the right; read by Kb_NavigateGeneric (DE) from Kb_Page0_Navigate,hand
@@ -3054,17 +3037,17 @@ bank,addr,name,conf,note,source
 09,5AF7,Kb_Page3_NavIndexToPosTbl,C,cursor index ($DA3C) -> grid position (row<<4|col); 18 cursor indexes (3 rows of 6); read by Kb_NavigateGeneric (HL),hand
 09,5B09,Kb_Page3_NavPosToIndexTbl,C,"grid position (row<<4|col) -> cursor index; row stride $10; read by Kb_NavigateGeneric (BC), the result is stored in $DA3C",hand
 09,5B39,Kb_NavigateGeneric,C,,hand+auto
-09,5B6F,Kb_NavigateVertical,I,,hand+auto
-09,5B81,Kb_NavigateHorizontal,I,,hand+auto
+09,5B6F,Kb_NavigateVertical,C,"grid step up / down: A = row, E = last row; $FFA3 bit 6 (Up newly pressed) decrements unless the row is 0, bit 7 (Down) increments unless the row is E; returns the new row in A (C)",hand+auto
+09,5B81,Kb_NavigateHorizontal,C,"grid step left / right: A = column, D = step limits of the row (high nibble = left step, low nibble = right step); $FFA3 bit 5 (Left) subtracts the high nibble, bit 4 (Right) adds the low nibble; returns A (C)",hand+auto
 09,5B9D,Kb_Page0_Press,C,A on a key; handlers via table 09:5C0E,hand+auto
-09,5C0E,Kb_Page0_Press_PtrTbl5C0E,I,"auto: 6 bytes, word table; referenced by Kb_Page0_Press",auto
-09,5C7D,Kb_Page0_Press_Tbl5C7D,I,"auto: 16 bytes, bytes; referenced by Kb_Page0_Press",auto
-09,5C93,Kb_Page0_Press_Tbl5C93,I,"auto: 7 bytes, bytes; referenced by Kb_Page0_Press",auto
+09,5C0E,Kb_Page0_Press_PtrTbl5C0E,C,"3 pointers to Kb_GlyphListA / B / C (09:53D3, 53F5, 5417) indexed by the page $DA3D (0-2); Kb_Page0_Press passes the selected list to Kb_FindCharInList (C)",auto
+09,5C7D,Kb_DakutenMapTbl,C,"voiced-mark map of the key $30: records {first code, count, new first code} ended by $FF: 06/0F/33, 1A/05/42, 58/01/86, 5B/0F/88, 6F/05/97. Kb_Page0_Press jumps to 09:5C77 for the key $30, loads this table and, for the character before the cursor, adds (code - first) to the new first code when the code lies in a run (C). The run lengths 15, 5, 1, 15, 5 match the dakuten (voiced mark) of the k/s/t rows, the h row (to b) and u (to vu) in hiragana and katakana: ka = 06, ha = 1A, katakana u = 58, ka = 5B, ha = 6F (I, from the counts; the glyph shapes were not looked at)",hand
+09,5C93,Kb_HandakutenMapTbl,C,"semi-voiced-mark map of the key $31: records {first code, count, new first code} ended by $FF: 1A/05/47 and 6F/05/9C, i.e. the 5 h-row codes of hiragana (ha = 1A) and of katakana (ha = 6F) to the p row; same routine as Kb_DakutenMapTbl (09:5C9A) (C; the kana reading is I)",hand
 09,5D24,Kb_Page1_PressSex,C,,hand+auto
 09,5DAD,Kb_Page2_PressBirthDate,C,,hand+auto
 09,5E95,Kb_Page3_PressBloodType,C,,hand+auto
-09,5F03,Kb_BackspaceOnB,I,,hand+auto
-09,5F12,Kb_BlinkBackground,I,BGP xor $3C every 4th frame,hand+auto
+09,5F03,Kb_BackspaceOnB,C,"B (newly pressed, $FFA2 bit 1) moves the name cursor $DA3B back by one unless it is 0: backspace without erasing (C)",hand+auto
+09,5F12,Kb_BlinkBackground,C,every 4th frame ($FFC8 & 3 = 0) xor $3C into the BGP shadow $FFB0: the blinking palette of the keyboard background (C),hand+auto
 09,5F1E,Kb_WriteNameChar,C,owner_name[kb_cursor],hand+auto
 09,5F4B,Boot_EraseAllPrompt_Far,C,Start+Select at power-on: A erases; B boots (README 16.18),hand+auto
 09,5FE3,Mode21_RunRunRun,C,mode 21: RUN! RUN! RUN! (three runners; 12 hurdles),hand+auto
@@ -3078,10 +3061,10 @@ bank,addr,name,conf,note,source
 09,614A,Mode21_State02_RaceSceneInit,C,,hand+auto
 09,61EF,Mode21_State03_RaceSetup,C,clears $D000-$D047,hand+auto
 09,6204,Mode21_State04_Countdown,C,ends with race counter D04F++,hand+auto
-09,624D,Run_PlaceRunner0,I,place check of runner 0,hand+auto
-09,6270,Run_PlaceRunner1,I,,hand+auto
-09,6293,Run_PlaceRunner2,I,,hand+auto
-09,62AE,Run_PlaceRunner3,I,unused fourth slot?,hand+auto
+09,624D,Run_PlaceRunner0,C,"line-up of the four runners during Mode21_State04_Countdown (the countdown before the race): the runners start at x = $FF60 (player), $FF00 (chick), $FFA0 (mole) and $00A0 (fourth runner, speed $FF = -1, coming from the right) and Run_MovePlayerX/ChickX/MoleX/MoveRunner3X add the speed each frame; this routine (called with C = 4) returns while the 16-bit position $D000/$D001 is not 0; when it is 0 it decrements C and, if the speed $D002 is non-zero, stops the runner (speed := 0, animation counter $D00A and $D00C := 0, pose $D009 := 5, $D00B := $0D), so that C = 0 after the four calls means all four stand on the start line; the initial values are the table Run_InitialStateTbl (09:66E1) copied to $D000 (C)",hand+auto
+09,6270,Run_PlaceRunner1,C,"line-up of the four runners during Mode21_State04_Countdown (the countdown before the race): the runners start at x = $FF60 (player), $FF00 (chick), $FFA0 (mole) and $00A0 (fourth runner, speed $FF = -1, coming from the right) and Run_MovePlayerX/ChickX/MoleX/MoveRunner3X add the speed each frame; this routine (called with C = 4) returns while the 16-bit position $D00E/$D00F is not 0; when it is 0 it decrements C and, if the speed $D010 is non-zero, stops the runner (speed := 0, $D015 and $D00C := 0, pose $D014 := 4, $D00B := $0F), so that C = 0 after the four calls means all four stand on the start line; the initial values are the table Run_InitialStateTbl (09:66E1) copied to $D000 (C)",hand+auto
+09,6293,Run_PlaceRunner2,C,"line-up of the four runners during Mode21_State04_Countdown (the countdown before the race): the runners start at x = $FF60 (player), $FF00 (chick), $FFA0 (mole) and $00A0 (fourth runner, speed $FF = -1, coming from the right) and Run_MovePlayerX/ChickX/MoleX/MoveRunner3X add the speed each frame; this routine (called with C = 4) returns while the 16-bit position $D017/$D018 is not 0; when it is 0 it decrements C and, if the speed $D019 is non-zero, stops the runner (speed := 0, $D01E := 0, pose $D01D := 5), so that C = 0 after the four calls means all four stand on the start line; the initial values are the table Run_InitialStateTbl (09:66E1) copied to $D000 (C)",hand+auto
+09,62AE,Run_PlaceRunner3,C,"line-up of the four runners during Mode21_State04_Countdown (the countdown before the race): the runners start at x = $FF60 (player), $FF00 (chick), $FFA0 (mole) and $00A0 (fourth runner, speed $FF = -1, coming from the right) and Run_MovePlayerX/ChickX/MoleX/MoveRunner3X add the speed each frame; this routine (called with C = 4) returns while the 16-bit position $D024/$D025 is not 0; when it is 0 it decrements C and, if the speed $D026 is non-zero, stops the runner (speed := 0), so that C = 0 after the four calls means all four stand on the start line; the initial values are the table Run_InitialStateTbl (09:66E1) copied to $D000 (C) This is the fourth runner (drawn by Run_DrawRunner3, meta $34), not an unused slot",hand+auto
 09,62C1,Mode21_State05_ReadySteadyGo,I,,hand+auto
 09,634F,Mode21_State06_RaceLoop,C,Start leaves for state 0E,hand+auto
 09,63A3,Mode21_State07_RaceEnd,C,runner without a place gets 3,hand+auto
@@ -3096,9 +3079,9 @@ bank,addr,name,conf,note,source
 09,65CA,Run_PodiumChickTbl,C,,hand+auto
 09,65D3,Run_DrawPodiumMole,C,,hand+auto
 09,65FB,Run_PodiumMoleTbl,C,,hand+auto
-09,6604,Run_ConfettiInit,I,random confetti x positions,hand+auto
+09,6604,Run_ConfettiInit,C,"initialises the 10 confetti records of 6 bytes at $D052 and clears $D051: {x = (random & $F8) + 4, dx = +2 or -2, y = random & $7F, dy = 1, frame = (9 when bit 1 of the loop counter 10..1 is set, else 0) + (random & 7), 0} (C)",hand+auto
 09,6642,Mode21_State0C_ResultScreen,C,B or Start leaves for 0E,hand+auto
-09,66A5,Run_FlagLanded,I,,hand+auto
+09,66A5,Run_FlagLanded,I,"returns Z when the flag counter $D048 is 2 and the y byte (record + 2, from $D054, step 6) of all 10 confetti records is 0, NZ otherwise: Mode21_State0C_ResultScreen draws the confetti while NZ and the celebration + crown when Z; $D048 is the flag height computed by Run_FlagHeight (0-$74), so the condition reads 'flag at its lowest and all confetti at rest' (I: the name 'landed' is the reading of that condition)",hand+auto
 09,66BB,Mode21_State0D_Unused,C,a lone ret,hand+auto
 09,66BC,Mode21_State0E_Leave,C,state := 0,hand+auto
 09,66D2,Run_ClearRaceState,C,copies 72 B from 09:66E1 to $D000,hand+auto
@@ -3107,18 +3090,17 @@ bank,addr,name,conf,note,source
 09,673F,Run_StumbleTick,C,D044 counts down,hand+auto
 09,6751,Run_PlayerRun,C,A key = one step; counter D003,hand+auto
 09,678A,Run_SpeedStepTbl,C,,hand+auto
-09,67BE,Run_PlayerRun_Tbl67BE,I,"auto: 7 bytes, bytes; referenced by Run_PlayerRun",auto
+09,67BE,Run_PlayerRun_Tbl67BE,C,"7 values indexed by the speed level $D002 (0-6): 01 01 01 02 02 03 03, stored to $D008 at every A press of Run_PlayerRun (C)",auto
 09,67C5,Run_PlayerJump,C,Up = jump; sound $35,hand+auto
-09,67FC,Run_PlayerJump_Tbl67FC,I,"auto: 52 bytes, bytes; referenced by Run_PlayerJump",auto
+09,67FC,Run_PlayerJump_Tbl67FC,C,"52 jump heights indexed by the run counter $D003: 24 26 26 26 28 28 28 28 2A x8, 2B x4, 2C x4, 2D x4, 2E x4, 2F x8, 30 x12; Run_PlayerJump stores the entry to $D005 (height) when Up is pressed (C)",auto
 09,6830,Run_PlayerAirB,C,B in the air raises D007,hand+auto
-09,685A,Run_PlayerAirB_Tbl685A,I,"auto: 26 bytes, bytes; referenced by Run_PlayerAirB",auto
-09,6874,Kb_DrawTabPages_Gfx6874,I,"auto: 6 bytes, tile data; referenced by Kb_DrawTabPages",auto
+09,685A,Run_PlayerAirB_Tbl685A,C,"32 bytes indexed by $D007 (0-31): 12 12 12 12 11 11 10 10 0F 0F 0E 0E 0D 0D 0C 0C 0B 0B 0A 0A 09 09 08 08 07 06 05 04 03 02 01 00; Run_PlayerAirB (09:6830, state >= $0C) adds the entry to $D007 while the jump button is held and subtracts 2 otherwise (C). The last 6 bytes (05 04 03 02 01 00) used to be a separate label 6874 (`ld bc,$6874` of Kb_DrawTabPages = a sprite position)",auto
 09,687A,Run_PlayerSpeedFromCounter,C,,hand+auto
 09,68BF,Run_SpeedLevelTbl,C,52 entries indexed by the counter $D003: speed level 0-6 (00 01 01 01 02.. 06); read by Run_PlayerSpeedFromCounter; the 20 + padding 16 + 16 byte split was a typing artefact,hand+auto
-09,68F3,Run_PlayerSpeedFromCounter_Tbl68F3,I,"auto: 7 bytes, bytes; referenced by Run_PlayerSpeedFromCounter",auto
-09,68FA,Run_PlayerFrameFromSpeed,I,,hand+auto
-09,6916,Run_PlayerLanding,I,,hand+auto
-09,696E,Run_PlayerLanding_Tbl696E,I,"auto: 32 bytes, bytes; referenced by Run_PlayerLanding",auto
+09,68F3,Run_PlayerSpeedFromCounter_Tbl68F3,C,"7 values indexed by the speed level $D002: 0E 0E 12 15 20 2A 40, stored to $D004 = the tick step passed to Run_DrawMeta by Run_DrawPlayer (the run animation goes faster with the level) (C)",auto
+09,68FA,Run_PlayerFrameFromSpeed,C,"swaps the run frame of $D00B with the counter $D003: below $2F a frame 9 becomes 6, from $2F a frame 4 becomes $0B (C)",hand+auto
+09,6916,Run_PlayerLanding,C,"landing logic of the jump, for the state $D009 (bit 7 ignored) >= $0C (it sets the tick step $D004 := 1): in state $0C, when $D00A = 1, it subtracts Run_PlayerLanding_Tbl696E[$D007] from the height $D005 (floor 0) and when the height is below $10 clears $D00A and sets the state $10; in state $12 it clears the height and takes $20 off the run counter $D003 (floor 0) (C)",hand+auto
+09,696E,Run_PlayerLanding_Tbl696E,C,"32 height steps indexed by $D007 (0-31): 12 12 10 10 0E 0E 0A 0A 08 x12, 07 x4, 06 x8; subtracted from the jump height $D005 by Run_PlayerLanding (C)",auto
 09,698E,Run_UpdateChick,C,table 69AB (3 px/frame) or 69B7 (5 px/frame),hand+auto
 09,69AB,Run_ChickPathTblSlow,C,,hand+auto
 09,69B7,Run_ChickPathTblFast,C,,hand+auto
@@ -3132,55 +3114,55 @@ bank,addr,name,conf,note,source
 09,6AD6,Run_MovePlayerX,C,16-bit position += speed,hand+auto
 09,6B00,Run_MoveChickX,C,,hand+auto
 09,6B2A,Run_MoveMoleX,C,sets D050 when the player leads by $A0,hand+auto
-09,6B72,Run_MoveRunner3X,I,,hand+auto
-09,6B7C,Run_ScrollCamera,I,,hand+auto
-09,6BA5,Run_CopyPlayerPos,I,,hand+auto
+09,6B72,Run_MoveRunner3X,C,adds the signed speed byte $D026 (sign-extended) to the 16-bit position $D024/$D025 of the fourth runner (Run_Add16) (C),hand+auto
+09,6B7C,Run_ScrollCamera,C,camera: while the player position $D000/$D001 is below $1400 the camera $D020/$D021 follows it (Run_CopyPlayerPos); from $1400 (the finish line) the camera is frozen at $1400 (C),hand+auto
+09,6BA5,Run_CopyPlayerPos,C,copies the 16-bit player position $D000/$D001 into the camera $D020/$D021 (C),hand+auto
 09,6BB1,Run_FlagHeight,C,D048 = min($74; D048 + 5 or 6) - D049,hand+auto
-09,6BE1,Run_ConfettiUpdate,I,,hand+auto
-09,6BEF,Run_ConfettiParticle,I,,hand+auto
-09,6C7B,Run_ConfettiRespawn,I,,hand+auto
+09,6BE1,Run_ConfettiUpdate,C,"updates the 10 confetti records: Run_ConfettiParticle for each record, step 6 (C)",hand+auto
+09,6BEF,Run_ConfettiParticle,C,"one confetti record (offset C): by its frame number the sideways speed dx is applied in full (frames 2, 6, $0B, $0F), halved (1, 3, 5, 7, $0A, $0C, $0E, $10) or replaced by a new random +-2 when bit 7 is set; x stays within 4..$FB; then y += dy and a carry out of y calls Run_ConfettiRespawn (C)",hand+auto
+09,6C7B,Run_ConfettiRespawn,C,"respawn of a confetti record: when $D048 = 2 it sets y and dy to 0 (the piece stays), else a new random x ((random & $F8) + 4) and y (random & $0F) (C)",hand+auto
 09,6CA1,Run_Celebration,C,requests $30 then $16; pose table 09:6CE1,hand+auto
 09,6CE1,Run_CelebrationPoseTbl,C,,hand+auto
 09,6CEE,Run_Add16,C,[DE] += [HL] with sign extension,hand+auto
 09,6D00,Unused_Run_Sub16,C,UNREFERENCED: 16-bit subtraction helper,hand+auto
 09,6D12,Run_DrawPlayer,C,,hand+auto
-09,6D9C,Run_DrawPlayer_Tbl6D9C,I,"auto: 8 bytes, bytes; referenced by Run_DrawPlayer",auto
-09,6DA4,Run_DrawPlayer_Tbl6DA4,I,"auto: 4 bytes, bytes; referenced by Run_DrawPlayer",auto
-09,6DA8,Run_DrawPlayer_Tbl6DA8,I,"auto: 52 bytes, bytes; referenced by Run_DrawPlayer",auto
-09,6DDC,Run_DrawPlayer_Tbl6DDC,I,"auto: 42 bytes, bytes; referenced by Run_DrawPlayer",auto
+09,6D9C,Run_DrawPlayer_Tbl6D9C,C,"8 vertical offsets for the metas $13-$1A, added to height/2 by Run_DrawPlayer before the second layer (SplitScreenLine): FF FF 00 00 01 04 06 02 (C)",auto
+09,6DA4,Run_DrawPlayer_Tbl6DA4,C,4 vertical offsets for the metas $53-$56: 04 03 04 02 (Run_DrawPlayer) (C),auto
+09,6DA8,Run_DrawPlayer_Tbl6DA8,C,"player animation list ($D009 = pose, step $D004): 13 04 14 04 15 04 16 04 FF 00 (run cycle, loops to 0) / 13 80 FF 05 / 13 80 14 80 15 80 16 80 FF 07 / 1A 04 17 04 18 04 FF 0C / 19 04 16 03 16 00 FF 07 / 53 0C 54 0C FF 14 / 55 20 56 20 FF 17: animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",auto
+09,6DDC,Run_DrawPlayer_Tbl6DDC,C,"second layer of the player: list of {value, duration} read by Run_SplitScreenLine with the state $D00B; the value plus the vertical offset goes to $FFBA (scroll Y of the LCD split band): E0 20 30 20 FF 00 / E0 C0 30 C0 FF 03 / 30 80 FF 03 / 88 D0 30 80 FF 08 / 30 80 FF 08 / E0 80 FF 0D / E0 10 30 40 FF 0D / E0 0C 30 0C FF 12 (C)",auto
 09,6E06,Run_DrawChick,C,,hand+auto
-09,6E34,Run_DrawChick_Tbl6E34,I,"auto: 98 bytes, bytes; referenced by Run_DrawChick",auto
+09,6E34,Run_DrawChick_Tbl6E34,C,"chick animation list ($D014 = state, step $D012): animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",auto
 09,6E96,Run_DrawMoleAndScene,C,,hand+auto
-09,6EC4,Run_DrawMoleAndScene_Tbl6EC4,I,"auto: 70 bytes, bytes; referenced by Run_DrawMoleAndScene",auto
-09,6F0A,Run_DrawRunner3,I,,hand+auto
-09,6F25,Run_DrawPodiumBanner,I,,hand+auto
-09,6F34,Run_BannerSpriteTbl,I,,hand+auto
-09,6F50,Run_DrawBackgroundScroll,I,,hand+auto
+09,6EC4,Run_DrawMoleAndScene_Tbl6EC4,C,"mole animation list ($D01D = state, step $D01B): animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",auto
+09,6F0A,Run_DrawRunner3,C,"draws the fourth runner (meta $34 at x = -(position / 2), y = 0) when its position $D024/$D025 is on screen (Run_ScaledPosition returns NC) (C)",hand+auto
+09,6F25,Run_DrawPodiumBanner,C,"draws the podium banner at x = $36, y = $40 with Run_BannerSpriteTbl and the state $D02A (Run_DrawMeta, tick step 1) (C)",hand+auto
+09,6F34,Run_BannerSpriteTbl,C,"banner animation list: 00 50 26 03 27 03 28 20 27 03 26 03 00 30 2A 01 29 01 2A 02 2B 10 00 02 00 80 FF 0C (meta 0 = nothing): animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",hand+auto
+09,6F50,Run_DrawBackgroundScroll,C,background scroll: $FFBC := -(camera $D020/$D021 / 2) (C),hand+auto
 09,6F61,Run_DrawHurdles,C,12 hurdles from table 09:6F9B,hand+auto
 09,6F9B,Run_HurdleXTbl,C,$180 $380 $580 $680 $880 $940 $B40 $C40 $D00 $F00 $1000 $1200,hand+auto
-09,6FB3,Run_DrawHurdles_Tbl6FB3,I,"auto: 12 bytes, bytes; referenced by Run_DrawHurdles",auto
-09,6FBF,Run_DrawFinishLine,I,,hand+auto
-09,6FE6,Run_DrawFinishLine_Tbl6FE6,I,"auto: 8 bytes, bytes; referenced by Run_DrawFinishLine",auto
+09,6FB3,Run_DrawHurdles_Tbl6FB3,C,"hurdle animation list: 1B 04 FF 00 (still) / 1C 02 1D 02 1E 02 FF 04 (knocked over): animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",auto
+09,6FBF,Run_DrawFinishLine,C,"draws the finish line at the world position $1400: x = $78 - (($1400 - camera) / 2) (low byte) when on screen, y = $70, animation Run_DrawFinishLine_Tbl6FE6 with the state $D045 (C)",hand+auto
+09,6FE6,Run_DrawFinishLine_Tbl6FE6,C,"finish line animation list: 2D 06 2E 06 2F 06 FF 00 (loop): animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",auto
 09,6FEE,Run_DrawFlag,C,,hand+auto
-09,7000,Run_FlagSpriteTbl,I,,hand+auto
+09,7000,Run_FlagSpriteTbl,C,"flag animation list: 35 08 36 08 37 08 FF 00 (loop; Run_DrawFlag draws it at x = $96, y = height $D048 with the state $D04B): animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",hand+auto
 09,7008,Run_DrawCrown,C,,hand+auto
 09,7014,Run_DrawConfetti,C,,hand+auto
-09,702E,Run_DrawConfettiSprite,I,,hand+auto
-09,7049,UserMap_AnimateDecoSprites_Gfx7049,I,"auto: 36 bytes, tile data; referenced by Run_DrawConfettiSprite, UserMap_AnimateDecoSprites",auto
+09,702E,Run_DrawConfettiSprite,C,"draws one confetti piece: x = record x / 2, y = record y / 2 - $10, animation Run_DrawConfettiSprite_AnimTbl7049 with the frame and tick bytes of the record (Run_DrawMeta) (C)",hand+auto
+09,7049,Run_DrawConfettiSprite_AnimTbl7049,C,"animation list {meta id, duration} (the pair 'FF, n' jumps to entry n): 49 04 4A 04 4B 04 4C 04 4D 04 4C 04 4B 04 4A 04 FF 00 / 4E 04 4F 04 50 04 51 04 52 04 51 04 50 04 4F 04 FF 09; passed in HL to Run_DrawMeta by Run_DrawConfettiSprite (09:702E). It was named UserMap_AnimateDecoSprites_Gfx7049 because `ld bc,$7049` in UserMap_AnimateDecoSprites is a sprite position, not a reference",hand
 09,706D,Run_DrawPickCharacterSprite,C,,hand+auto
-09,707C,Run_DrawPickCharacterSprite_Tbl707C,I,"auto: 56 bytes, bytes; referenced by Run_DrawPickCharacterSprite",auto
+09,707C,Run_DrawPickCharacterSprite_Tbl707C,C,"animation lists of the character-pick sprite: 00 10 0C 02 0D 02 0E 02 0F 02 10 02 FF 05 / 00 10 0C 02 0D 02 0E 02 0F 02 11 02 FF 0C / 00 10 0C 02 0D 02 0E 02 0F 02 12 02 FF 13 / 0F 02 0E 02 0D 02 0C 02 00 10 00 08 FF 1A: animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",auto
 09,70B4,Run_DrawMeta,C,sprite list with flip: bc = origin; hl = list,hand+auto
-09,70E1,Run_SplitScreenLine,I,LYC split from the player position,hand+auto
-09,7127,Run_ScaledPosition,I,,hand+auto
+09,70E1,Run_SplitScreenLine,C,"sets the LCD split parameters from the player's vertical offset C: $FFB6 (second split line) := $5A - C, $FFAF (first split line) := 8 (C < $17), $1F - C ($17 <= C < $1C), 3 ($1C <= C < $80) or 8 (C >= $80), and $FFBA (scroll Y of the band) := list value + C with the animation state in DE (same list format as Run_DrawMeta, entries {value, duration}) (C)",hand+auto
+09,7127,Run_OffscreenTest,C,"visibility test of a half-scale position (A = high byte, C = low byte): returns NC when the position is on screen (A = 0 and C < $B0, or A = $FF and C >= $B0), carry set when it is off screen; the callers draw only when NC (Run_DrawChick, Run_DrawMoleAndScene, Run_DrawRunner3, Run_DrawFinishLine, Run_DrawPlayer, which then forces the position to $A0 (player) or $C0 (chick, mole) when off screen) (C)",hand+auto
 09,713E,Run_RaceTimerTick,C,BCD +$000167 per frame until the player is placed,hand+auto
-09,7173,Run_DrawTimerDigit,I,,hand+auto
-09,717E,Run_DrawTimerDigitB,I,,hand+auto
+09,7173,Run_DrawTimerDigit,C,draws a BCD byte as two digits: for the high nibble then the low nibble it calls Run_DrawTimerDigitB (C),hand+auto
+09,717E,Run_DrawTimerDigitB,C,copies the 32 bytes of the digit (nibble x 32) from 1B:6E80 to VRAM at DE (Vram_CopyFromBank) (C),hand+auto
 09,7194,Run_LoadCharacterGraphicsA,C,toggle D9F9,hand+auto
 09,71EF,Run_LoadCharacterGraphicsB,C,far 05:7F69,hand+auto
 09,7206,Run_LoadCharacterGraphicsC,C,far 05:7F69,hand+auto
 09,721D,Unused_Run_LoadCharacterGraphicsD,C,UNREFERENCED: twin of 09:7206,hand+auto
-09,723F,Run_CharacterToGfxIndex,I,Game Face present test (D581),hand+auto
-09,725B,Run_CharacterToGfxIndex_Tbl725B,I,"auto: 3 bytes, bytes; referenced by Run_CharacterToGfxIndex",auto
+09,723F,Run_CharacterToGfxIndex,C,"graphics index of the selected character: A = $D9F8 (0-2); when it is 2 and bit 0 of $D581 (Game Face) is clear, $D9F9 is used instead; the index is Run_CharacterToGfxIndex_Tbl725B[A] (C)",hand+auto
+09,725B,Run_CharacterToGfxIndex_Tbl725B,C,"3 graphics indices 00 05 06 for the characters 0, 1, 2 (C)",auto
 09,725E,Run_CompareRecord,C,time vs record DAA6/7 (nine complement),hand+auto
 09,7290,ResultScreen_Far,C,shared result / error screen (3 substates); Totaka tune 1 in 3,hand+auto
 09,7294,ResultScreen_SubstateTbl,C,,hand+auto
@@ -3331,7 +3313,7 @@ bank,addr,name,conf,note,source
 0A,7400,Cam_BitReverseTbl,C,"table[i] = bit-reversed byte i (horizontal mirror of 8 pixels); read with ld b,4 by the 20 MirrorCopy effect handlers (Fx01, Fx02, Fx20, Fx25, Fx2D-Fx38, Fx41, Fx42) and by Fx23 / Fx24",hand+auto
 0A,7500,Cam_ZoomX2_HiTbl,C,"table[c] = high nibble of c with every bit doubled (4 pixels -> 8 pixels, 16 groups of 16 equal bytes); first output byte of Fx06 / Fx07 / Fx46 / Fx47 (ld b,5); Fx06 re-simulated byte for byte against the core (3,584 cells)",hand
 0A,7600,Cam_ZoomX2_LoTbl,C,"table[c] = low nibble of c with every bit doubled (period 16); second output byte, 16 bytes further, of Fx06 / Fx07 / Fx46 / Fx47 (ld b,6)",hand
-0A,7700,Cam_ZoomX2Mirror_HiTbl,C,"table[c] = high nibble of c, bits in reverse order, every bit doubled (16 groups of 16 bytes; byte 0A:774D is  where the pattern gives /bin/bashC); first output byte of the mirrored zoom Fx26 / Fx27 (ld b,7); Fx26 re-simulated byte for byte against the core",hand
+0A,7700,Cam_ZoomX2Mirror_HiTbl,C,"table[c] = high nibble of c, bits in reverse order, every bit doubled (16 groups of 16 bytes; byte 0A:774D is $C0 where the pattern gives $0C, a single odd byte in the ROM); first output byte of the mirrored zoom Fx26 / Fx27 (ld b,7); Fx26 re-simulated byte for byte against the core",hand
 0A,7800,Cam_ZoomX2Mirror_LoTbl,C,"table[c] = low nibble of c, bits in reverse order, every bit doubled (period 16); second output byte (16 bytes before) of Fx26 / Fx27 (ld b,8)",hand
 0A,7900,Cam_ReduceTbl_Lo,I,bit decimation (every other bit pair),hand+auto
 0A,7A00,Cam_ReduceTbl_Hi,I,same as 7900 shifted by 2 bits,hand+auto
@@ -3378,9 +3360,10 @@ bank,addr,name,conf,note,source
 0C,5100,Gfx_0C_5100_Mode12_State0F_ClearAll,I,"far pointer loaded by AnimEd_LoadEntryThumb, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5500,Gfx_0C_5500_Mode12_State0F_ClearAll,I,"far pointer loaded by AnimEd_StartExitTransition, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5770,Gfx_0C_5770_AnimEd_ShowLoopFlag,I,"far pointer loaded by AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,5800,Gfx_0C_5800_AnimEdMenuLabelsAlt,?,"second copy of the Animation-editor menu labels (クリア ループ ここから テスト プレイ オール PHOTO MOVIE FRAME PLAY) at 4A00-5000; the bank-03 mode 12 loads 4000-57FF, this set is never pointed at (visual)",assets
+0C,5800,Gfx_0C_5800_AnimEdMenuLabelsAlt,?,"576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by any loader or in any organic run (checked again in the L3 pass: AnimEd_LoadMenuTiles loads 5A40-5B3F, 5B80-5C7F and 6100-617F, nothing below 5A40); by eye the labels of 4A00-5000 (I)",hand
+0C,5A40,Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1,C,"entries 0 (5A40 -> $8D50) and 1 (5AC0 -> $8DD0) of AnimEd_LoadMenuTiles_Tbl5DF1: 0x80 bytes each from bank $0C (AnimEd_LoadMenuTiles, 03:5DCE; copy site 03:5DED; index $D719); every byte is read in the organic runs (C)",hand
 0C,5B40,Gfx_0C_5B40_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,5B60,Gfx_0C_5B60_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+0C,5B60,Gfx_0C_5B60_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call) | also entries 3 (5B80 -> $8ED0) and 4 (5C00 -> $8F50), 0x80 bytes each, of AnimEd_LoadMenuTiles_Tbl5DF1 (03:5DF1)",assets
 0C,5C80,Gfx_0C_5C80_AnimEd_ShowLoopFlag,I,"far pointer loaded by AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5CA0,Gfx_0C_5CA0_AnimEd_Ctx0_Decor,I,"far pointer loaded by AnimEd_Ctx0_Decor, AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5CC0,Gfx_0C_5CC0_AnimEd_Ctx0_Decor,I,"far pointer loaded by AnimEd_Ctx0_Decor, AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -3391,12 +3374,12 @@ bank,addr,name,conf,note,source
 0C,5FA0,Gfx_0C_5FA0_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5FE0,Gfx_0C_5FE0_Mode12_State04_ToggleLoop,I,"far pointer loaded by Mode12_State04_ToggleLoop (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,6000,Gfx_0C_6000_Mode12_State04_ToggleLoop,I,"far pointer loaded by Mode12_State04_ToggleLoop (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,6020,Gfx_0C_6020_AnimEd_Ctx0_Decor,I,"far pointer loaded by AnimEd_Ctx0_Decor (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+0C,6020,Gfx_0C_6020_AnimEd_Ctx0_Decor,I,"far pointer loaded by AnimEd_Ctx0_Decor (ld a,BANK; ld hl,ADDR; call banked copy/far call) | also entry 2 (6100 -> $8E50, 0x80 bytes) of AnimEd_LoadMenuTiles_Tbl5DF1 (03:5DF1)",assets
 0C,6180,Gfx_0C_6180_Mode12_State14_SaveDialogOpen,I,"far pointer loaded by Mode12_State14_SaveDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 992 from the nearby ld bc",assets
 0C,6560,Gfx_0C_6560_Mode12_State1A_ClearDialogOpen,I,"far pointer loaded by Mode12_State1A_ClearDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 880 from the nearby ld bc",assets
 0C,6730,Gfx_0C_6730_Mode12_State17_ExitDialogOpen,I,"far pointer loaded by Mode12_State17_ExitDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 896 from the nearby ld bc",assets
 0C,68D0,Gfx_0C_68D0_AnimEdKanaStrips,I,"kana strips of the Animation-editor dialogs (by eye); 68D0-6AB0 is inside the 0x380 bytes that Mode12_State17_ExitDialogOpen copies from 6730 (copy site 03:4F62), so the tiles are loaded",hand
-0C,6AB0,Gfx_0C_6AB0_AnimEdKanaStrips_Tail,?,kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it,hand
+0C,6AB0,Gfx_0C_6AB0_AnimEdKanaStrips_Tail,?,"kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it | L3 check 2026-10-14: 6730 + 0x380 = 6AB0 is where the copy of Mode12_State17_ExitDialogOpen (03:4F62) ends and 6C30 where the SortDialog copy (03:5048) starts; no loader found between them; no organic read inside 6AB0-6C2F at all, forced reads only",hand
 0C,6C30,Gfx_0C_6C30_Mode12_State1D_SortDialogOpen,I,"far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 880 from the nearby ld bc",assets
 0C,6FA0,Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen,I,"far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 656 from the nearby ld bc",assets
 0C,7800,Gfx_0C_7800_Mode09_State00_Init,I,"copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (assets/catalog_jp.csv)",assets
@@ -3431,7 +3414,7 @@ bank,addr,name,conf,note,source
 0D,6D00,Gfx_0D_6D00_Icon06_478F,C,"entry 4 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
 0D,6E00,Gfx_0D_6E00_Icon06_478F,C,"entry 5 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
 0D,6F00,Gfx_0D_6F00_Icon06_478F,C,"entry 6 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
-0D,7000,Gfx_0D_7000_FillPatternTiles,?,"dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by a pattern number",assets
+0D,7000,Gfx_0D_7000_FillPatternTiles,?,"dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by a pattern number | L3 check 2026-10-14: no loader found; Mode16_State00_Init (06:44F1) loads 4000 / 4800 / 5000, Mode16_LoadPageTiles (06:4AF8) the four 0x280 strips 5300-5A80, the icon tables 6000-6F00 and the message strips 5D00; nothing indexes 7000-78FF; no organic read, forced reads only (the printer packet reader)",assets
 0D,7660,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,I,TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 of 16 unique); never on screen (README 16.24),fix
 0D,77E0,Gfx_0D_77E0_FillPatternTiles_Cont,I,continues the span of Gfx_0D_7000_FillPatternTiles (the label before the TCRF-unused block),fix
 0D,7900,Gfx_0D_7900_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
@@ -3484,27 +3467,27 @@ bank,addr,name,conf,note,source
 10,5880,Gfx_10_5880_Head,C,"entry 23 of the {lo,hi,bank} table 05:7F8E, 896 bytes each (constant pitch)",assets
 10,5C00,Gfx_10_5C00_Mode1F_State00_TitleInit,I,copied to VRAM/WRAM by Mode1F_State00_TitleInit (assets/catalog_jp.csv),assets
 10,7400,Gfx_10_7400_DjTitle_LoadNumeralTile,C,"numeral table: DjTitle_LoadNumeralTile (05:423A) copies 32 bytes from $7400 + A x 32; 10 entries = 7400-7540 (the next asset starts there); were Gfx_10_7420_..._Aux, TileGap_10_74A0 and Gfx_10_74A3_Unref",hand
-10,7602,Gfx_10_7602_DjLetterGlyphStrip,?,Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420,assets
-10,78A8,TileGap_10_78A8,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-10,78B8,Gfx_10_78B8_Unref,C,"small unread block of 24 bytes (was Data_10_78B8). Owner (review page, 2026-10-13): graphic, by eye.",fix
-10,78E8,TileGap_10_78E8,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_78E8",hand
-10,7908,Gfx_10_7908_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7A08,TileGap_10_7A08,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7A08",hand
-10,7A24,Gfx_10_7A24_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7A80,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, top row (tiles 0-1 of 2x2): exact match of the TCRF image; bottom row at 10:7B80; never on screen, never read in an organic run (README 16.24)",fix
-10,7AA0,Gfx_10_7A24_Unref_Cont,I,continues Gfx_10_7A24_Unref (after the TCRF icon row),fix
-10,7ADE,Gfx_10_7ADE_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7B80,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, bottom row (tiles 2-3 of 2x2); top row at 10:7A80 (README 16.24)",fix
-10,7BA0,Gfx_10_7ADE_Unref_Cont,I,continues Gfx_10_7ADE_Unref (after the TCRF icon row),fix
-10,7BC2,TileGap_10_7BC2,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7BC2",hand
-10,7BE4,TileGap_10_7BE4,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7BE4",hand
-10,7BF8,Gfx_10_7BF8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7D51,TileGap_10_7D51,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-10,7D52,Gfx_10_7D52_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7F00,Gfx_10_7F00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-11,4000,Gfx_11_4000_Anim07_7C8A,C,"entry 3 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-11,4500,Gfx_11_4500_Anim07_7C8A,C,"entry 8 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-11,4A00,Gfx_11_4A00_Anim07_7C8A,C,"entry 10 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
+10,7600,Gfx_10_7600_DjPrintFont_Tiles00to2A,C,"tiles 00-2A of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,78A8,TileGap_10_78A8,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides) | inside the printer text font: slots 2A-2B (Gfx_10_7600_DjPrintFont_Tiles00to2A and the neighbours); the glyph is addressable by Gfx_Copy16FromBank10 but no copy read these bytes in the replays,assets
+10,78B8,Gfx_10_78B8_DjPrintFont_Tiles2Bto2C,C,"tiles 2B-2C of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,78E8,TileGap_10_78E8,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_78E8 | inside the printer text font: slots 2E-30 (Gfx_10_7600_DjPrintFont_Tiles00to2A and the neighbours); the glyph is addressable by Gfx_Copy16FromBank10 but no copy read these bytes in the replays",hand
+10,7908,Gfx_10_7908_DjPrintFont_Tiles30to3F,C,"tiles 30-3F of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7A08,TileGap_10_7A08,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7A08 | inside the printer text font: slots 40-42 (Gfx_10_7600_DjPrintFont_Tiles00to2A and the neighbours); the glyph is addressable by Gfx_Copy16FromBank10 but no copy read these bytes in the replays",hand
+10,7A24,Gfx_10_7A24_DjPrintFont_Tiles42to47,C,"tiles 42-47 of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7A80,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, top row (tiles 0-1 of 2x2): exact match of the TCRF image; bottom row at 10:7B80; never on screen, never read in an organic run (README 16.24) | slots $48-$49 of the printer text font (character codes $48 and $49; bottom halves = slots $58-$59 at 10:7B80): DjPrintRow_S2WaveTitle (05:5E78) stores code $44 (+1) when the SOUND II wave pattern $D985 is 0 and code $48 (+1) when it is 1, from DjPrintRow_S2WaveTitle_Tbl5EBE (05:5EBE), so the printed title row of the wave pattern sheet draws this 2-character icon (C, code); the row is printed only to a printer (never on screen)",fix
+10,7AA0,Gfx_10_7AA0_DjPrintFont_Tiles4Ato4C,C,"tiles 4A-4C of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7ADE,Gfx_10_7ADE_DjPrintFont_Tiles4Dto57,C,"tiles 4D-57 of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7B80,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, bottom row (tiles 2-3 of 2x2); top row at 10:7A80 (README 16.24) | bottom halves (slots $58-$59) of the 2-character icon whose top halves are at 10:7A80: the renderer draws glyph c and c + $10 (C, code)",fix
+10,7BA0,Gfx_10_7BA0_DjPrintFont_Tiles5Ato5B,C,"tiles 5A-5B of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7BC2,TileGap_10_7BC2,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7BC2 | inside the printer text font: slots 5C-5E (Gfx_10_7600_DjPrintFont_Tiles00to2A and the neighbours); the glyph is addressable by Gfx_Copy16FromBank10 but no copy read these bytes in the replays",hand
+10,7BE4,TileGap_10_7BE4,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7BE4 | inside the printer text font: slots 5E-5F (Gfx_10_7600_DjPrintFont_Tiles00to2A and the neighbours); the glyph is addressable by Gfx_Copy16FromBank10 but no copy read these bytes in the replays",hand
+10,7BF8,Gfx_10_7BF8_DjPrintFont_Tiles5Fto75,C,"tiles 5F-75 of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7D51,TileGap_10_7D51,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides) | inside the printer text font: slots 75-75 (Gfx_10_7600_DjPrintFont_Tiles00to2A and the neighbours); the glyph is addressable by Gfx_Copy16FromBank10 but no copy read these bytes in the replays,assets
+10,7D52,Gfx_10_7D52_DjPrintFont_Tiles75to8B,C,"tiles 75-8B of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+10,7F00,Gfx_10_7F00_DjPrintFont_Tiles90to9B,C,"tiles 90-9B of the printer text font: slot k = 16 bytes at $7600 + 16 k, read by Gfx_Copy16FromBank10 (00:1615) which the D.J. score print renderer (05:60EE, calls 05:610D / 05:611B) feeds with the character codes of the 20-code row tables (05:5ABB-5EBE) and the computed codes; read in the forced runs only (the rows are printed only to a Game Boy Printer), never in an organic run",hand
+11,4000,Gfx_11_4000_MainMenu_IconStripB_F4,C,"frame 4 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl0 step 4 and Tbl3 steps 3-4",hand
+11,4500,Gfx_11_4500_MainMenu_IconStripB_F5,C,"frame 5 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl2 steps 1-2 and Tbl3 steps 1-2",hand
+11,4A00,Gfx_11_4A00_MainMenu_IconStripB_F6,C,"frame 6 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl2 steps 3-4; resting tiles when $DA16 >= 3 (MainMenu_LoadIconTilesB, 07:785B)",hand
 11,4F00,Gfx_11_4F00_MainMenu_LoadBaseTiles,I,"copied to VRAM/WRAM by MainMenu_LoadBaseTiles, MainMenu_DrawUpperItem0 (assets/catalog_jp.csv)",assets
 11,5000,Gfx_11_5000_MainMenu_DrawUpperItem1,I,"far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 11,5200,Gfx_11_5200_MainMenu_DrawUpperItem0,I,"far pointer loaded by MainMenu_DrawUpperItem0 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
@@ -3605,26 +3588,26 @@ bank,addr,name,conf,note,source
 16,4000,Gfx_16_4000_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
 16,4800,Gfx_16_4800_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
 16,5000,Gfx_16_5000_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
-16,5580,Gfx_16_5580_Anim07_7C8A,C,"entry 7 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-16,5A80,Gfx_16_5A80_Anim07_7C8A,C,"entry 0 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-16,5F80,Gfx_16_5F80_Anim07_7C8A,C,"entry 1 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-16,6480,Gfx_16_6480_Anim07_7C8A,C,"entry 2 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-16,6980,Gfx_16_6980_Anim07_7C1B,C,"entry 7 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,6B80,Gfx_16_6B80_Anim07_7C1B,C,"entry 0 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,6D80,Gfx_16_6D80_Anim07_7C1B,C,"entry 1 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,6F80,Gfx_16_6F80_Anim07_7C1B,C,"entry 2 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7180,Gfx_16_7180_Anim07_7C1B,C,"entry 3 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7380,Gfx_16_7380_Anim07_7C1B,C,"entry 15 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7580,Gfx_16_7580_Anim07_7C1B,C,"entry 8 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7780,Gfx_16_7780_Anim07_7C1B,C,"entry 9 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7980,Gfx_16_7980_Anim07_7C1B,C,"entry 10 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7B80,Gfx_16_7B80_Anim07_7C1B,C,"entry 11 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
+16,5580,Gfx_16_5580_MainMenu_IconStripB_F0,C,"frame 0 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl1 step 4; resting tiles when $DA16 < 3 (MainMenu_LoadIconTilesB, 07:784C)",hand
+16,5A80,Gfx_16_5A80_MainMenu_IconStripB_F1,C,"frame 1 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl0 step 1 and Tbl1 step 3",hand
+16,5F80,Gfx_16_5F80_MainMenu_IconStripB_F2,C,"frame 2 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl0 step 2 and Tbl1 step 2",hand
+16,6480,Gfx_16_6480_MainMenu_IconStripB_F3,C,"frame 3 of 7 of the menu strip B (0x500 bytes = 80 tiles, copied to $9200 by the page transition B; frames 0-3 in bank $16 at pitch 0x500, frames 4-6 in bank $11): Tbl0 step 3 and Tbl1 step 1",hand
+16,6980,Gfx_16_6980_MainMenu_IconStripA_F0,C,"frame 0 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl1 step 4 (the last frame of the backward sweep); resting tiles of the menu icons when $DA16 = 0 (MainMenu_LoadIconTilesA, 07:7836); read by the organic runs (C)",hand
+16,6B80,Gfx_16_6B80_MainMenu_IconStripA_F1,C,"frame 1 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl0 step 1 and Tbl1 step 3; read by the organic runs (C)",hand
+16,6D80,Gfx_16_6D80_MainMenu_IconStripA_F2,C,"frame 2 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl0 step 2 and Tbl1 step 2; read by the organic runs (C)",hand
+16,6F80,Gfx_16_6F80_MainMenu_IconStripA_F3,C,"frame 3 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl0 step 3 and Tbl1 step 1; read by the organic runs (C)",hand
+16,7180,Gfx_16_7180_MainMenu_IconStripA_F4,C,"frame 4 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl0 step 4 (end of the forward sweep); resting tiles when $DA16 = 1 or 2 (MainMenu_LoadIconTilesA, 07:7818); read by the organic runs (C)",hand
+16,7380,Gfx_16_7380_MainMenu_IconStripA_F5_Unref,I,"frame 5 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl3 step 4 only - Tbl3 has no caller; no organic run reads it (I)",hand
+16,7580,Gfx_16_7580_MainMenu_IconStripA_F6_Unref,I,"frame 6 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl2 step 1 and Tbl3 step 3 - Tbl2 / Tbl3 have no caller; no organic run reads it (I)",hand
+16,7780,Gfx_16_7780_MainMenu_IconStripA_F7_Unref,I,"frame 7 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl2 step 2 and Tbl3 step 2 - no caller; no organic run reads it (I)",hand
+16,7980,Gfx_16_7980_MainMenu_IconStripA_F8_Unref,I,"frame 8 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl2 step 3 and Tbl3 step 1 - no caller; no organic run reads it (I)",hand
+16,7B80,Gfx_16_7B80_MainMenu_IconStripA_F9,C,"frame 9 of 10 of the menu icon strip (0x200 bytes = 32 tiles, pitch 0x200, copied to $9100 by the page transition A): Tbl2 step 4 (no caller); resting tiles when $DA16 >= 3 (MainMenu_LoadIconTilesA, 07:7827, read by the organic runs); read by the organic runs (C)",hand
 16,7D80,Map_16_7D80_Mode18_State00_Init,I,copied to VRAM/WRAM by Mode18_State00_Init (assets/catalog_jp.csv),assets
 16,7FC0,Map_16_7FC0_Mode18_State00_Init,I,copied to VRAM/WRAM by Mode18_State00_Init (assets/catalog_jp.csv),assets
-17,4000,Gfx_17_4000_ShootMenuIconsA,?,icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init,assets
-17,4140,Gfx_17_4140_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
-17,4180,Gfx_17_4180_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
-17,4200,Gfx_17_4200_ShootCounterIcons,?,"digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcons, Compose_DrawFreeCount",assets
+17,4000,Gfx_17_4000_Shoot_DrawDigitAt_Digits,C,"digit table of the SHOOT screens: 10 digits x 32 bytes (2 tiles each), digit n at $4000 + 32 x n; Shoot_DrawDigitAt (06:7125) adds digit x 32 to $4000 and copies the two 16-byte halves of bank $17 through Shoot_CopyTileSafe (copy sites 06:7150 / 06:7155); all 320 bytes are read in the organic runs; the shapes are numerals (I, visual)",hand
+17,4140,Gfx_17_4140_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv) | also the first sources of lists 1 and 2 of Shoot_LoadTimerScreen (06:6E06, table 06:6E32): 4140 -> $8950 and 4160 -> $8A50, 32 bytes each (C)",assets
+17,4180,Gfx_17_4180_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv) | also the first record of every list of Shoot_LoadTimerScreen (06:6E06): 4180 -> $89A0 and 41C0 -> $8AA0, 0x40 bytes each (C)",assets
+17,4200,Gfx_17_4200_Shoot_LoadTimerScreen_Frames,C,"18 pieces of 0x40 bytes (two 32-byte halves, to $8900 and $8A00): the clock frames of the self-timer screen. Shoot_LoadTimerScreen (06:6E06) indexes Shoot_LoadTimerScreen_Tbl6E32 (22 lists of 7-byte records {src lo,hi,bank,dst lo,hi,len lo,hi} ended by $FF) with $D7E3 and copies each record with Vram_CopyFromBankAuto (06:6E28): list 2 uses 4200, lists 3-18 use 4240 ... 4600, list 21 uses 4640; every byte of 4200-467F is the source of a record (C); what the frames show is by eye (I)",hand
 17,4680,Gfx_17_4680_Mode0F_State05_ConfirmInit,I,"copied to VRAM/WRAM by Mode0F_State05_ConfirmInit, Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode14_State00_Init, Mode14_State0C_Reinit, Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv)",assets
 17,4690,Gfx_17_4680_Compose_Split_DrawMakeBlink_Part4690,I,"copied to VRAM/WRAM by Compose_Fusion_DrawMakeBlink, Compose_Split_DrawMakeBlink, Mode0E_State02_MessageStrip (assets/catalog_jp.csv)",assets
 17,46A0,Gfx_17_46A0_Mode0F_State05_ConfirmInit,I,"far pointer loaded by Mode0F_State05_ConfirmInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -3632,8 +3615,8 @@ bank,addr,name,conf,note,source
 17,4740,Gfx_17_4740_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc",assets
 17,4780,Gfx_17_4780_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 17,47C0,Gfx_17_47C0_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-17,4800,Gfx_17_4800_Compose_DrawFreeCount,I,"far pointer loaded by Compose_DrawFreeCount, Shoot_DrawShotsLeft, Unused_Link_DrawPhotoNumber (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-17,4820,Gfx_17_4820_ShootMenuIconsB,?,icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual),assets
+17,4800,Gfx_17_4800_Compose_DrawFreeCount,I,"far pointer loaded by Compose_DrawFreeCount, Shoot_DrawShotsLeft, Unused_Link_DrawPhotoNumber (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc | digit 0 of the second digit table: 4800 + 32 x digit (digits 0-9 = 4800-493F), used by Compose_DrawFreeCount, Shoot_DrawShotsLeft and Unused_Link_DrawPhotoNumber (C)",assets
+17,4820,Gfx_17_4820_Shoot_DrawShotsLeft_Digits1to9,C,"digits 1-9 of the digit table at 4800 (32 bytes each, $4800 + 32 x digit): Shoot_DrawShotsLeft (06:6196) copies tens to $8720 (06:61BB) and units to $8700 (06:61D3); Compose_DrawFreeCount (06:5916) reads the same table; all 288 bytes are read in the organic runs (C); the shapes are numerals (I)",hand
 17,4940,Gfx_17_4940_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
 17,4950,Gfx_17_4950_Shoot_DrawTimerMinutes,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Shoot_DrawTimerMinutes (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 17,4960,Gfx_17_4960_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
@@ -3813,7 +3796,7 @@ bank,addr,name,conf,note,source
 1E,64D0,Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits,C,10 digit tiles 0-9 (rendered): Compose_DrawPhotoNumber copies 16 bytes from $64D0 + digit x 16 for the tens ($8050) and the units ($8060); 64D0-6570,hand
 1E,6570,Gfx_1E_6570_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
 1E,6580,Gfx_1E_6580_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
-1E,6590,Gfx_1E_6590_Mode16_DrawCaptionBlink_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode16_DrawCaptionBlink); classified from its content - see sym_unconclusive",assets
+1E,6590,Gfx_1E_6590_Mode17_State00_Init_LowerHalves,C,"4 tiles (6590, 65A0, 65B0, 65C0) of which Mode17_State00_Init (06:4D3A-4D62) reads only the second 8 bytes (rows 4-7): 6598, 65A8, 65B8 and 65C8, because Mem_CopyFromBank (copy site 06:4D45) advances HL and DE by 8 and the loop then adds 8 again; the four 8-byte pieces go to $93C8, $93D8, $93E8 and $93F8 (the second halves of 4 consecutive VRAM tiles) and the whole loop runs 4 times, +$100 each time; the first halves are not read (C); was Gfx_1E_6590_Mode16_DrawCaptionBlink_Aux",hand
 1E,6620,Unused_TCRF_CannotCombineSamePicture_Gfx,C,"TCRF unused graphic ""cannot combine the same picture"" (prohibition sign + the two lines of Japanese text): exact match of the TCRF image, 56 of 56 tiles (the first two are blank, 1E:6600 / 6610), laid out 8 tiles wide; never on screen in any replay and never read in an organic run (README 16.24)",fix
 1E,6A00,Gfx_1E_6A00_ResultPic1_BaldMan_Tune29Totaka,C,"picture 1 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 29Totaka; seen in BGB (SHOOT parlor RUN)",assets
 1E,7800,Gfx_1E_7800_SaveDialog_Substate3_FullInit,I,"far pointer loaded by SaveDialog_Substate3_FullInit (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
@@ -4750,7 +4733,8 @@ bank,addr,name,conf,note,source
 21,4850,Gfx_21_4850_SpaceFever_LoadHudTiles,I,"far pointer loaded by SpaceFever_LoadHudTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 21,4C00,Sheet_MinigamesSpaceFeverIi_21_49FC_Part4C00,I,"Spriter's Resource sheet ""Minigames - Space Fever II"", 157 tiles",assets
 21,4C60,Gfx_21_4C60_SpaceFever_DrawBestHud,I,"far pointer loaded by SpaceFever_DrawBestHud (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-21,4D00,Gfx_21_4D00_SpaceFeverFont,?,"large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neighbours are loaded by SpaceFever_DrawBestHud and CommentCard_DrawDigit) (visual)",assets
+21,4D00,Gfx_21_4D00_CommentCard_DrawPhotoNumber_Tens,C,"tens digits 0-3 of the photo number on the comment card: 4 entries of 0x40 bytes (4 tiles each), $4D00 + 0x40 x tens; CommentCard_DrawPhotoNumber_Far (09:4775) takes the photo number [$DA95] (+1, minus 30 above 29), counts the tens in C and calls CommentCard_DrawDigitC (09:479F: A x 64 + HL, 0x40 bytes of bank $21 to $9540, copy site 09:47B2); 768 of the 896 bytes read in the organic runs (C); was Gfx_21_4D00_SpaceFeverFont (by eye, wrong)",hand
+21,4E00,Gfx_21_4E00_CommentCard_DrawPhotoNumber_Ones,C,"units digits 0-9 of the photo number on the comment card: 10 entries of 0x40 bytes, $4E00 + 0x40 x digit; the second call of CommentCard_DrawPhotoNumber_Far (09:4796, HL = $4E00) via CommentCard_DrawDigitC (copy site 09:47B2); ends where Gfx_21_5080_CommentCard_DrawDigit starts (C)",hand
 21,5080,Gfx_21_5080_CommentCard_DrawDigit,I,"far pointer loaded by CommentCard_DrawDigit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 21,54E0,Gfx_21_54E0_CommentCard_DrawBlood_Far,I,"far pointer loaded by CommentCard_DrawBlood_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 21,5620,Src_21_5620_CommentCard_DrawNibble,I,"far pointer loaded by CommentCard_DrawNibble (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -4768,8 +4752,8 @@ bank,addr,name,conf,note,source
 21,6BC0,Gfx_21_6BC0_Mode19_State00_CopyrightScreens,I,"far pointer loaded by Mode19_State00_CopyrightScreens (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1536 from the nearby ld bc",assets
 21,71C0,Gfx_21_71C0_Mode19_State00_CopyrightScreens,I,copied to VRAM/WRAM by Mode19_State00_CopyrightScreens (assets/catalog_jp.csv),assets
 21,77C0,Gfx_21_77C0_BorderPicker_Substate0_Init,I,"copied to VRAM/WRAM by BorderPicker_Substate0_Init, WildFramePicker_Substate0_Init (assets/catalog_jp.csv)",assets
-21,7BB0,Src_21_7BB0_BorderPicker_AnimateIcon,I,"far pointer loaded by BorderPicker_AnimateIcon, WildFramePicker_AnimateIcon (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-21,7BC0,Gfx_21_7BC0_BorderPicker_AnimateIcon_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of BorderPicker_AnimateIcon); classified from its content - see sym_unconclusive",assets
+21,7BB0,Src_21_7BB0_BorderPicker_AnimateIcon,I,"far pointer loaded by BorderPicker_AnimateIcon, WildFramePicker_AnimateIcon (ld a,BANK; ld hl,ADDR; call banked copy/far call) | frame 0 of the 5-frame icon animation: frames 1-4 are Gfx_21_7BC0_BorderPicker_AnimateIcon_Frames1to4",assets
+21,7BC0,Gfx_21_7BC0_BorderPicker_AnimateIcon_Frames1to4,C,frames 1-4 of the 5-frame icon animation (1 tile = 16 bytes each at $7BB0 + 16 x frame): BorderPicker_AnimateIcon (08:4EBB) and WildFramePicker_AnimateIcon (08:5262) copy 16 bytes with Mem_CopyFromBank (copy site 08:4ECF) to a Vq_Push packet for VRAM $8FE0 and wrap the frame counter $D500 at 5 (C); frame 0 is Src_21_7BB0,hand
 21,7CC0,Map_21_7CC0_CommentEditor_Sub0_Init,I,copied to VRAM/WRAM by CommentEditor_Sub0_Init (assets/catalog_jp.csv),assets
 21,7F00,Map_21_7F00_CommentEditor_Sub0_Init,I,copied to VRAM/WRAM by CommentEditor_Sub0_Init (assets/catalog_jp.csv),assets
 22,4000,Gfx_22_4000_CreditsGirlFrame03,C,"frame 3 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
@@ -4817,8 +4801,9 @@ bank,addr,name,conf,note,source
 23,6B00,Map_23_6B00_Mode1F_State09_PageSound1,I,"far pointer loaded by Mode1F_State09_PageSound1 (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,6B80,Map_23_6B80_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 23,6C00,Map_23_6C00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
-23,6C80,Gfx_23_6C80_CreditsGirlFrame12,C,"frame 12 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
-23,7180,Map_23_7180_CreditsGirlFrame12_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of CreditsGirlFrame12); classified from its content - see sym_unconclusive",assets
+23,6C80,Gfx_23_6C80_CreditsGirlFrame12,C,"frame 12 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll | the real tile data stops at 23:7040 (the parlor map starts there): Mode08_State15_CreditsScroll copies 0x500 bytes, which for frame 12 overshoots into the map and reads 7040-717F as unused garbage",assets
+23,7040,Map_23_7040_Parlor_Page1,C,"map of page 1 of the SHOOT parlor (04:744E list): 18 rows of 32 bytes (0x240 up to 23:7280); Parlor_LoadPage (04:73EF) ends each page list ($FF) with {lo,hi,bank} stored in $D7D9-$D7DB, which Parlor_SpiralWipeIn (04:7479) hands to Map_SpiralWipeIn (00:0DA0); the coverage shows columns 0-19 of 18 rows read by Map_SpiralWipeIn (00:0DD9 / 0E18), the 12 filler bytes of each row are never read; its top 11 rows are redrawn by Parlor_AnimateB (04:7340): 0x160 bytes alternately from 23:7040 and 23:7280 to $9800",hand
+23,7280,Map_23_7280_Parlor_Page1_AltTopRows,C,"0x160 bytes (11 rows): second entry of Parlor_AnimateB_PtrTbl7372, copied from bank $23 to $9800 by Parlor_AnimateB (04:7366) every 20 frames, alternating with the first 11 rows of 23:7040; only 4 tiles of row 0 differ ($D7-$DA instead of $D4-$D1): a blink of the face",hand
 23,73E0,Map_23_73E0_Mode08_State06_EditorInit,I,copied to VRAM/WRAM by Mode08_State06_EditorInit (assets/catalog_jp.csv),assets
 23,74A0,Map_23_74A0_Kb_Page1_PressSex,I,"far pointer loaded by Kb_Page1_PressSex (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,7620,Map_23_7620_Kb_Page0_Press,I,"far pointer loaded by Kb_Page0_Press, Kb_Page2_PressBirthDate (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
@@ -4829,8 +4814,9 @@ bank,addr,name,conf,note,source
 23,7A60,Map_23_7A60_Link_DrawPressAText,I,"far pointer loaded by Link_AnimateStep3, Link_DrawPressAText (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 160 from the nearby ld bc",assets
 23,7B00,Map_23_7B00_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
 23,7C00,Map_23_7C00_ShowMenu_LoadNormalTiles,I,"far pointer loaded by ShowMenu_LoadNormalTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-23,7D60,Map_23_7D60_ShowMenu_LoadHighlightTiles,I,"far pointer loaded by ShowMenu_LoadHighlightTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
-23,7DC0,Gfx_23_7DC0_ShowMenu_LoadHighlightTiles_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of ShowMenu_LoadHighlightTiles); classified from its content - see sym_unconclusive",assets
+23,7D60,Map_23_7D60_ShowMenu_LoadHighlightTiles,I,"far pointer loaded by ShowMenu_LoadHighlightTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc | item 0 of 3: ShowMenu_LoadHighlightTiles (03:7A62) copies 0x60 bytes (3 map rows) from $7D60 + 0x60 x item ([$D5EF] = 0-2) to the BG map at $9900 + 0x60 x item (C)",assets
+23,7DC0,Map_23_7DC0_ShowMenu_LoadHighlightTiles_Item1,C,"item 1 of 3 highlighted menu strips (3 map rows of 32, 0x60 bytes): ShowMenu_LoadHighlightTiles (03:7A62) copies $7D60 + 0x60 x item to $9900 + 0x60 x item through Vram_CopyFromBank (copy site 03:7A80), item = [$D5EF] limited to 0-2 by the cp $02 test of the caller (03:7A48); 7DC0-7E1F; was Gfx_23_7DC0_ShowMenu_LoadHighlightTiles_Aux (it is a map, not tiles)",hand
+23,7E20,Map_23_7E20_ShowMenu_LoadHighlightTiles_Item2,C,"item 2 of 3 highlighted menu strips (3 map rows of 32, 0x60 bytes) 7E20-7E7F, same loader as Map_23_7D60 / Map_23_7DC0 (ShowMenu_LoadHighlightTiles, 03:7A62)",hand
 23,7E80,Src_23_7E80_Tbl53A6_3,I,"target 3 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset",assets
 24,4000,Gfx_24_4000_CreditsGirlFrame01,C,"frame 1 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 24,4480,Map_24_4480_Mode20_State00_MenuInit,I,"far pointer loaded by Mode20_State00_MenuInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -4865,10 +4851,11 @@ bank,addr,name,conf,note,source
 24,5DC0,Map_24_5DC0_Kb_Page1_PressSex,I,"far pointer loaded by Kb_Page1_PressSex, Kb_Page3_PressBloodType (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
 24,5F00,Map_24_5F00_Kb_Page1_PressSex_ExtraRows,I,2 rows after the 10 rows (0x140) of the map 24:5DC0 that Kb_Page1_PressSex copies; the last one is the descending id ramp $36-$23 seen after the other keyboard maps; no copy reads it; was Data_24_5F00,hand
 24,5F40,Map_24_5F40_Kb_Page2_PressBirthDate,I,"far pointer loaded by Kb_Page2_PressBirthDate (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
-24,6080,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,I,row 10 and the start of row 11 of the map 24:5F40 (0x140 copied by Kb_Page2_PressBirthDate): the id ramp $36-$23 then fill; no copy reads it; was Data_24_6080,hand
-24,60B2,Gfx_24_60B2_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+24,6080,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,I,row 10 and the start of row 11 of the map 24:5F40 (0x140 copied by Kb_Page2_PressBirthDate): the id ramp $36-$23 then fill; no copy reads it; was Data_24_6080 | the 32 bytes 6080-609F are one whole map row; the 2 bytes of the old 60A0-60A1 tail belong to the Parlor page 0 map (24:60A0),hand
+24,60A0,Map_24_60A0_Parlor_Page0,C,"map of page 0 of the SHOOT parlor (04:743C list): 18 rows of 32 bytes (0x240 up to 24:62E0); Parlor_LoadPage (04:73EF) ends each page list ($FF) with {lo,hi,bank} stored in $D7D9-$D7DB, which Parlor_SpiralWipeIn (04:7479) hands to Map_SpiralWipeIn (00:0DA0); the coverage shows columns 0-19 of 18 rows read by Map_SpiralWipeIn (00:0DD9 / 0E18), the 12 filler bytes of each row are never read; rows 5-6 (24:6140) are overwritten at run time by Parlor_AnimQueenTiles (frame B at 24:62E0), rows 9-10 (24:61C0) are copied again by Mode01_State02_ApplyPageA",hand
+24,6140,Map_24_6140_Parlor_Page0_QueenFrameA,C,"rows 5-6 of the page 0 map (0x40 bytes): first entry of Parlor_AnimQueenTiles_Tbl72CA, copied from bank $24 to $98A0 by Parlor_AnimQueenTiles (04:728C) every few frames; the neutral face of the queen (frame B is 24:62E0)",hand
 24,61C0,Map_24_61C0_Mode01_State02_ApplyPageA,I,"far pointer loaded by Mode01_State02_ApplyPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-24,6200,Map_24_6200_Mode01_State02_ApplyPageA_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode01_State02_ApplyPageA); classified from its content - see sym_unconclusive",assets
+24,62E0,Map_24_62E0_Parlor_Page0_QueenFrameB,C,"0x40 bytes: second entry of Parlor_AnimQueenTiles_Tbl72CA, copied from bank $24 to $98A0 (rows 5-6 of the BG map) by Parlor_AnimQueenTiles (04:728C); the changed tiles ($CB-$CE, row 5) are the blink / mouth frame of the queen",hand
 24,6320,Map_24_6320_Mode01_State00_Intro,I,"far pointer loaded by Mode01_State00_Intro (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 24,6360,Map_24_6360_Mode16_OptionPage2_HeadRows,C,"rows 0-1 (ramp 00-27) of the option-page map of mode $16 whose rows 2-17 are 24:63A0; Mode16_BuildOptionList (06:4B39) copies 24:63A0 to $9840 (row 2), so these two rows are never loaded",fix
 24,63A0,Map_24_63A0_Mode16_OptionPage2,C,"option page 2: 16 rows to $9840 (table entry 2), then Mode16_BuildList4 reads pieces from 24:6507 and 24:65A0",fix
@@ -4958,7 +4945,7 @@ bank,addr,name,conf,note,source
 26,7500,Map_26_7500_CreditsNishimuraDanceMap2,C,"map 2 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 26,7740,Map_26_7740_CreditsNishimuraDanceMap3,C,"map 3 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 26,7980,Map_26_7980_CreditsNishimuraDanceMap4,C,"map 4 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
-26,7BC0,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of CreditsNishimuraDanceMap4); classified from its content - see sym_unconclusive",assets
+26,7BC0,Map_26_7BC0_Parlor_Page2,C,"map of page 2 of the SHOOT parlor (04:7460 list): 18 rows of 32 bytes (0x240 up to 26:7E00); Parlor_LoadPage (04:73EF) ends each page list ($FF) with {lo,hi,bank} stored in $D7D9-$D7DB, which Parlor_SpiralWipeIn (04:7479) hands to Map_SpiralWipeIn (00:0DA0); the coverage shows columns 0-19 of 18 rows read by Map_SpiralWipeIn (00:0DD9 / 0E18), the 12 filler bytes of each row are never read",hand
 26,7E00,Gfx_26_7E00_Album_LoadNumeralTileB,C,numeral table: Album_LoadNumeralTileB (04:7D21) copies 32 bytes from $7E00 + A x 32 (the second digit set of the album); same layout as Gfx_0C_7E00_Album_LoadNumeralTile; was Gfx_26_7E20_..._Aux,hand
 27,4000,Gfx_27_4000_CreditsNishimuraDanceFrame02,C,"frame 2 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
 27,4470,Map_27_4470_Mode0D_State06_PlayInit,I,"copied to VRAM/WRAM by Album_ShowPageScreen, Album_ShowPageScreenB, Mode0A_State03_SliderBrowse, Album_LoadSliderScreen, Album_LoadBorderScreen, Mode0D_State06_PlayInit (assets/catalog_jp.csv)",assets

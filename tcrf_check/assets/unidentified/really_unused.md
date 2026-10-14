@@ -2,16 +2,8 @@
 |---|---|---|---|---|
 | `0D:7000` | 1632 | `Gfx_0D_7000_FillPatternTiles` | never shown | never on screen; read only in forced runs |
 | `0D:7660` | 384 | `Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx` | TCRF label | never on screen; read only in forced runs |
-| `10:7602` | 678 | `Gfx_10_7602_DjLetterGlyphStrip` | never shown | never on screen; read only in forced runs |
-| `10:78B8` | 24 | `Gfx_10_78B8_Unref` | never shown | never on screen; read only in forced runs |
-| `10:7908` | 238 | `Gfx_10_7908_Unref` | never shown | never on screen; read only in forced runs |
-| `10:7A24` | 92 | `Gfx_10_7A24_Unref` | never shown | never on screen; read only in forced runs |
 | `10:7A80` | 32 | `Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx` | TCRF label | never on screen; read only in forced runs |
-| `10:7ADE` | 162 | `Gfx_10_7ADE_Unref` | never shown | never on screen; read only in forced runs |
 | `10:7B80` | 32 | `Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx` | TCRF label | never on screen; read only in forced runs |
-| `10:7BF8` | 345 | `Gfx_10_7BF8_Unref` | never shown | never on screen; read only in forced runs |
-| `10:7D52` | 366 | `Gfx_10_7D52_Unref` | never shown | never on screen; read only in forced runs |
-| `10:7F00` | 184 | `Gfx_10_7F00_Unref` | never shown | never on screen; read only in forced runs |
 | `11:5800` | 4416 | `Unused_TCRF_HandNewspaperFrames_Gfx` | TCRF label | never on screen; read only in forced runs |
 | `14:4000` | 1364 | `Gfx_14_4000_Mode0E_ExchangeAlt_Tiles` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 0 of 79 tiles on screen, 0 frames; tile set (tiles 0-84) of the unused alternate stand-by screen of the image exchange: no loader in either ROM (code search + BGB, README 14.4 / 16.24 (3)); not an open asset in the sym, so the tracker never listed it |
 | `14:4554` | 2780 | `Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 173 of 173 tiles on screen, 21196 frames; tiles 85-258 of the same screen; the tracker's 'on screen' is the thumbnail reducer 00:289C reading it through a stray pointer (14:4554, not a tile boundary), never these tiles as tiles |
@@ -20,6 +12,10 @@
 | `15:4580` | 16 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx` | TCRF label | forced runs: 1 of 1 tiles stable, max 1588 frames; organic runs: never on screen |
 | `15:5200` | 512 | `Gfx_15_5200_MainMenu_DrawUpperItem2_Aux` | never shown | never on screen; read only in forced runs |
 | `15:5500` | 256 | `Gfx_15_5500_SlidePlay_ReadKeys_Aux` | never shown | never on screen; read only in forced runs |
+| `16:7380` | 512 | `Gfx_16_7380_MainMenu_IconStripA_F5_Unref` | forced runs only | on screen only in forced runs (666 frames); frame 5 of 10 of the main menu icon strip A (16:6980-7D7F): listed only by Tbl3 of the page transition A, and Tbl2 / Tbl3 (07:7C33 / 07:7C3F) have no caller in the JP or the international ROM (I); no organic run reads it |
+| `16:7580` | 512 | `Gfx_16_7580_MainMenu_IconStripA_F6_Unref` | forced runs only | on screen only in forced runs (666 frames); frame 6 of 10 of the main menu icon strip A: Tbl2 step 1 / Tbl3 step 3, no caller of Tbl2 / Tbl3 (I); no organic run reads it |
+| `16:7780` | 512 | `Gfx_16_7780_MainMenu_IconStripA_F7_Unref` | forced runs only | on screen only in forced runs (666 frames); frame 7 of 10 of the main menu icon strip A: Tbl2 step 2 / Tbl3 step 2, no caller of Tbl2 / Tbl3 (I); no organic run reads it |
+| `16:7980` | 512 | `Gfx_16_7980_MainMenu_IconStripA_F8_Unref` | forced runs only | on screen only in forced runs (666 frames); frame 8 of 10 of the main menu icon strip A: Tbl2 step 3 / Tbl3 step 1, no caller of Tbl2 / Tbl3 (I); no organic run reads it |
 | `17:5500` | 4864 | `Gfx_17_5500_Unused_MainMenuTiles` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 194 of 262 tiles on screen, 664 frames; tile block (304 tiles; the map uses ids 0-233) of the unused one-page main menu: BGB draws it with the map 25:7814 (README 16.25); byte-identical in the international ROM; no copy site and no table entry reaches it (copy_sites_jp.csv); the tracker saw it only in forced runs |
 | `18:5A50` | 96 | `Unused_TCRF_MarginPrint_BFilmRoll_Gfx` | TCRF label | never stably on screen (6 flash tiles) |
 | `18:5F90` | 192 | `Unused_TCRF_MarginPrint_OutlinedText_Gfx` | TCRF label | never stably on screen (7 flash tiles) |
@@ -38,6 +34,8 @@
 | `25:7614` | 460 | `Map_25_7614_Unused_PhotoAreaRight` | never shown | never on screen; read only in forced runs; photo-area map (14 rows of 32 + 12 bytes) with the picture in columns 12-31, like the unused one-page main menu; no copy site reaches it; the tiles are the dynamic photo tiles, so nothing to draw (README 16.25) |
 | `25:7814` | 588 | `Map_25_7814_Unused_MainMenu` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 0 of 36 tiles on screen, 0 frames; the tile map of the unused one-page main menu (18 x 32 + 12 bytes, the picture is in columns 12-31: SCX = 96): BGB draws a flow-chart menu with tsushin / mi-ru / toru / miru / asobu / rakugaki / henshuu and BASIC / VIEW / EDIT MODE, STATUS; identical in the international ROM (25:75D4) |
 | `26:7080` | 576 | `Map_26_7080_Unused_Picture` | never shown | never on screen; read only in forced runs; full-screen picture map (18 rows of 32, picture in columns 0-19, $A5 filler in 20-31; 245 distinct ids, 4-column side strip + 16-column picture); no copy site reaches it and no tile block fits it (tile_seam_search.py: 0.80 per pixel against 0.42 for a true set), so what it shows is not known (README 16.25) |
-| | **23,739** | **38 spans** | | |
+| | **23,698** | **34 spans** | | |
 
 *Withdrawn after the L3 pass of 2026-10-14:* `10:74A3` (157 B, was "forced runs only", "on screen only in forced runs (100 frames)"): it is the tail of the numeral table `10:7400` (`DjTitle_LoadNumeralTile`, `05:423A`, tile = `$7400` + digit x 32, digits 0-9; the span holds the tiles of 5-9). The replays never put a digit above 4 on that screen, so the span is value-gated, not unused. 39 spans / 23,896 B before, 38 / 23,739 B now.
+
+*Withdrawn after the second L3 pass of 2026-10-14 (loader hunt):* the eight spans `10:7602`, `10:78B8`, `10:7908`, `10:7A24`, `10:7ADE`, `10:7BF8`, `10:7D52`, `10:7F00` (2,089 B, tier "never shown") are glyphs of the printer text font `10:7600-7FFF`: slot k is 16 bytes at `$7600` + 16 k, copied by `Gfx_Copy16FromBank10` (`00:1615`), which the D.J. print renderer `05:60EE` feeds with the character codes of the row tables `05:5ABB-5EBE`; the rows are printed only to a Game Boy Printer, so no replay can show them on a screen. They are labelled `Gfx_10_*_DjPrintFont_Tiles*` now. *Added:* the four frames `16:7380`, `16:7580`, `16:7780`, `16:7980` (2,048 B, tier "forced runs only"): frames 5-8 of the ten-frame main menu icon strip A, listed only by Tbl2 / Tbl3 of the page transition A (`07:7C33` / `07:7C3F`), which have no caller in either ROM (I). 38 spans / 23,739 B before, 34 / 23,698 B now.

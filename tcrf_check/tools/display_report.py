@@ -62,8 +62,10 @@ MAN = OUT + '/unused_manual.csv'
 if os.path.exists(MAN):
     for m in csv.DictReader(open(MAN, encoding='utf-8')):
         b = int(m['bank'], 16); a = int(m['start'], 16); e = int(m['end'], 16)
+        gone = [r for r in rows if (r['b'] == b and a <= r['a'] <= e)]
         rows[:] = [r for r in rows if not (r['b'] == b and a <= r['a'] <= e)]
-        rows.append(dict(bank=m['bank'], addr=m['start'].upper(), b=b, a=a, n=e - a + 1, name=names[(b, a)]['name'], kind=m['kind'], tcrf='', src='manual', note=m['note'],
+        nm0 = (names.get((b, a)) or {}).get('name') or (gone[0]['name'] if gone else 'Gfx_%02X_%04X' % (b, a))     # a span that starts inside a labelled block keeps the name of the open row it replaces
+        rows.append(dict(bank=m['bank'], addr=m['start'].upper(), b=b, a=a, n=e - a + 1, name=nm0, kind=m['kind'], tcrf='', src='manual', note=m['note'],
                          mtier=(m.get('tier') or 'no loader'), pic=(m.get('pic') or ''), drawn=(m.get('drawn') or '')))
 for r in rows:
     o = off(r['b'], r['a']); r['v'] = verdict(o, r['n'])

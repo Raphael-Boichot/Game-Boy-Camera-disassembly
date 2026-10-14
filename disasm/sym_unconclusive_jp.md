@@ -8,74 +8,59 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 8 | 8578 | a yes/no on the family name |
+| visually identified range | 2 | 4412 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 0 | 0 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 26 | 7667 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| content-classified span | 16 | 6246 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
-| auto-named table | 2 | 21 | what the table indexes |
-| hand name, unconfirmed | 5 | 542 | a check of the guess |
-| mode state | 106 | 5954 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| auto-named table | 0 | 0 | what the table indexes |
+| hand name, unconfirmed | 7 | 8638 | a check of the guess |
+| mode state | 102 | 5597 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 88 | 11689 | which visible effect each slot gives |
 | SFX tag | 95 | 2536 | the sound each id plays |
-| Run minigame | 41 | 1683 | variable roles during play |
-| keyboard / glyph | 19 | 579 | which glyph page each loader fills |
-| main-menu slide | 18 | 1234 | which transition each slide is |
-| arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
-| dead code | 29 | 6175 | whether the code is truly dead (TCRF unused-content notes) |
+| Run minigame | 1 | 22 | variable roles during play |
+| keyboard / glyph | 0 | 0 | which glyph page each loader fills |
+| main-menu slide | 2 | 24 | which transition each slide is |
+| arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
+| dead code | 31 | 6196 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (8)
+## visually identified range (2)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 0C:5800 | `Gfx_0C_5800_AnimEdMenuLabelsAlt` | 832 | second copy of the Animation-editor menu labels (クリア ループ ここから テスト プレイ オール PHOTO MOVIE FRAME PLAY) at 4A00-5000; the bank | second copy of the Animation-editor menu labels (クリア ループ ここから テスト プレイ オール PHOTO MOVIE FRAME PLAY) at 4A00-5000 |
 | 0D:7000 | `Gfx_0D_7000_FillPatternTiles` | 1632 | dot, crosshatch and dither fill tiles plus a few glyph pieces | dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by |
-| 10:7602 | `Gfx_10_7602_DjLetterGlyphStrip` | 678 | Latin letter / digit glyph strip | Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420 |
 | 14:4554 | `Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr` | 2780 | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only read |
-| 17:4000 | `Gfx_17_4000_ShootMenuIconsA` | 320 | icon row of the SHOOT-menu tile bank | icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init |
-| 17:4200 | `Gfx_17_4200_ShootCounterIcons` | 1152 | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcon |
-| 17:4820 | `Gfx_17_4820_ShootMenuIconsB` | 288 | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual) |
-| 21:4D00 | `Gfx_21_4D00_SpaceFeverFont` | 896 | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines;  |
 
-## content-classified span (26)
+## content-classified span (16)
 
 _Why doubtful:_ type confirmed by the owner (review page, by eye); role and consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
-- bank 10: `78B8` Unref (24 B), `7908` Unref (238 B), `7A24` Unref (92 B), `7ADE` Unref (162 B), `7BF8` Unref (345 B), `7D52` Unref (366 B), `7F00` Unref (184 B)
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
+- bank 16: `7380` MainMenu_IconStripA_F5_Unref (512 B), `7580` MainMenu_IconStripA_F6_Unref (512 B), `7780` MainMenu_IconStripA_F7_Unref (512 B), `7980` MainMenu_IconStripA_F8_Unref (512 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
 - bank 1A: `5182` Unref (90 B), `7E00` Unref (501 B)
 - bank 1C: `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
 - bank 1D: `7B41` Tbl539D_Aux (63 B)
-- bank 1E: `6590` Mode16_DrawCaptionBlink_Aux (61 B), `7D00` Unref (184 B)
-- bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
-- bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
-- bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B)
-- bank 26: `7BC0` CreditsNishimuraDanceMap4_Aux (576 B)
+- bank 1E: `7D00` Unref (184 B)
+- bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
+- bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## auto-named table (2)
-
-_Why doubtful:_ no code loads it directly (indexed or computed access). _To settle:_ breakpoint on reads of the address.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 02:46E6 | `Photo_SaveReceived_Far_Data46E6` | 3 | table or word list found by pattern; no immediate reference | 3 bytes 00 C0 00 (decode as nop / ret nz / nop) between the jp of Photo_SaveReceived_Far and Sram_ZeroTagBytes |
-| 04:4D09 | `Mode0F_State09_EraseOne_Data4D09` | 18 | table or word list found by pattern; no immediate reference | 18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; |
-
-## hand name, unconfirmed (5)
+## hand name, unconfirmed (7)
 
 _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 0C:6AB0 | `Gfx_0C_6AB0_AnimEdKanaStrips_Tail` | 384 | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no co | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it |
+| 08:54DE | `WildFrame_PageData_54DE` | 7520 | 5,472 bytes between the 8-page pointer table and Mode19_TitleScreens: lists of short recor | 5,472 bytes between the 8-page pointer table and Mode19_TitleScreens: lists of short records such as 9A 22 01  |
+| 0C:5800 | `Gfx_0C_5800_AnimEdMenuLabelsAlt` | 576 | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by an | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by any loader or in any o |
+| 0C:6AB0 | `Gfx_0C_6AB0_AnimEdKanaStrips_Tail` | 384 | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no co | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it /  |
 | 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide  | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF ( |
 | 1A:7C90 | `Unused_TCRF_PhotoOptionIcon_Candidate_Gfx` | 32 | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON S | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play |
 | 1F:43E4 | `Sfx1_Init_24_SpaceFeverII` | 19 | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no con | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no r |
 | 1F:43EC | `Sfx1_Step_24_SpaceFeverII` | 11 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) | channel-1 effect step handler of id 24 (owner: Space Fever II sound) |
 
-## mode state (106)
+## mode state (102)
 
 _Why doubtful:_ state purpose read from the data it writes; screen function partly guessed. _To settle:_ play the screen in an emulator; match with the TCRF / Funtography screen name.
 
@@ -90,13 +75,11 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 00:34B3 | `Mode1D_DrawBusyIcon` | 19 | state handler or helper of a screen mode | blinking sprite while printing |
 | 00:34C6 | `Mode1D_DrawTvAnimation` | 49 | state handler or helper of a screen mode | 15 sprite pieces of the TV animation |
 | 00:34F7 | `Mode1D_TvAnimTbl` | 30 | state handler or helper of a screen mode | 15 x {x |
-| 00:3818 | `Mode16_DrawPanoramaToggles_Gfx3818` | 96 | state handler or helper of a screen mode | auto: 96 bytes, tile data; referenced by Mode16_DrawPanoramaToggles |
-| 00:3F78 | `Mode1A_State06_PickEffect_Tbl3F78` | 136 | state handler or helper of a screen mode | auto: 136 bytes, bytes; referenced by DjPerf_DrawPlayIcon, Mode1A_State06_PickEffect |
 | 03:6C2D | `Mode1A_State04_PlaceOrDelete` | 105 | state handler or helper of a screen mode | A opens the sound picker |
 | 03:6DAD | `Mode1A_State08_PickConfirm` | 87 | state handler or helper of a screen mode | A confirms with the button animation |
 | 03:6E04 | `Mode1A_State09_ExitDialog` | 160 | state handler or helper of a screen mode | keep / discard dialog |
 | 03:6EE1 | `Mode1A_State0A_DeleteDialog` | 93 | state handler or helper of a screen mode | delete this hot spot? dialog |
-| 04:5009 | `Mode0F_DrawCopyCount_Tbl5009` | 15 | state handler or helper of a screen mode | auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount |
+| 04:5009 | `Mode0F_DrawCopyCount_Tbl5009` | 16 | state handler or helper of a screen mode | auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount |
 | 04:5044 | `Mode0F_EraseJingleTiles` | 91 | state handler or helper of a screen mode | plays sound $45 and builds four quadrant tiles of the erase animation |
 | 04:509F | `Mode0F_EraseTileTbl` | 16 | state handler or helper of a screen mode | table read by 5044 |
 | 04:50AF | `Mode0F_CopyPieceToVram` | 238 | state handler or helper of a screen mode | copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800) |
@@ -162,8 +145,6 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 06:5D54 | `Mode18_LoadThumb_Tbl5D54` | 24 | state handler or helper of a screen mode | auto: 24 bytes, bytes; referenced by Mode18_LoadThumb |
 | 06:5D6C | `Mode18_DrawThumbFrame` | 126 | state handler or helper of a screen mode |  |
 | 06:5DD7 | `Mode18_LoadTileIndexed` | 15 | state handler or helper of a screen mode |  |
-| 06:7034 | `Mode18_DrawArrows_Tbl7034` | 56 | state handler or helper of a screen mode | auto: 56 bytes, bytes; referenced by Mode18_DrawArrows |
-| 06:706C | `Mode18_DrawArrows_Tbl706C` | 70 | state handler or helper of a screen mode | auto: 70 bytes, bytes; referenced by Mode18_DrawArrows |
 | 07:4186 | `Mode0E_State01_Handshake_Tbl4186` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake |
 | 07:43D6 | `Mode0E_State04_PickDone` | 231 | state handler or helper of a screen mode | after the dialog: loads the chosen photo into the link buffer |
 | 07:44BD | `Mode0E_State05_AbortWait` | 55 | state handler or helper of a screen mode | jitter sprite; A leaves |
@@ -385,131 +366,32 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:50BE | `Sfx3_Step_01_ShootSelect` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 01 (table $4306) |
 | 1F:50D7 | `Sfx3_Init_01_ShootSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 01 (table $42F2) |
 
-## Run minigame (41)
+## Run minigame (1)
 
 _Why doubtful:_ role of several state variables guessed. _To settle:_ play the game with a watch on the named variables.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 09:624D | `Run_PlaceRunner0` | 35 | Run (marathon) mini-game routine or table | place check of runner 0 |
-| 09:6270 | `Run_PlaceRunner1` | 35 | Run (marathon) mini-game routine or table |  |
-| 09:6293 | `Run_PlaceRunner2` | 27 | Run (marathon) mini-game routine or table |  |
-| 09:62AE | `Run_PlaceRunner3` | 19 | Run (marathon) mini-game routine or table | unused fourth slot? |
-| 09:6604 | `Run_ConfettiInit` | 221 | Run (marathon) mini-game routine or table | random confetti x positions |
-| 09:66A5 | `Run_FlagLanded` | 22 | Run (marathon) mini-game routine or table |  |
-| 09:67BE | `Run_PlayerRun_Tbl67BE` | 7 | Run (marathon) mini-game routine or table | auto: 7 bytes, bytes; referenced by Run_PlayerRun |
-| 09:67FC | `Run_PlayerJump_Tbl67FC` | 52 | Run (marathon) mini-game routine or table | auto: 52 bytes, bytes; referenced by Run_PlayerJump |
-| 09:685A | `Run_PlayerAirB_Tbl685A` | 26 | Run (marathon) mini-game routine or table | auto: 26 bytes, bytes; referenced by Run_PlayerAirB |
-| 09:68F3 | `Run_PlayerSpeedFromCounter_Tbl68F3` | 7 | Run (marathon) mini-game routine or table | auto: 7 bytes, bytes; referenced by Run_PlayerSpeedFromCounter |
-| 09:68FA | `Run_PlayerFrameFromSpeed` | 116 | Run (marathon) mini-game routine or table |  |
-| 09:6916 | `Run_PlayerLanding` | 88 | Run (marathon) mini-game routine or table |  |
-| 09:696E | `Run_PlayerLanding_Tbl696E` | 32 | Run (marathon) mini-game routine or table | auto: 32 bytes, bytes; referenced by Run_PlayerLanding |
-| 09:6B72 | `Run_MoveRunner3X` | 10 | Run (marathon) mini-game routine or table |  |
-| 09:6B7C | `Run_ScrollCamera` | 41 | Run (marathon) mini-game routine or table |  |
-| 09:6BA5 | `Run_CopyPlayerPos` | 12 | Run (marathon) mini-game routine or table |  |
-| 09:6BE1 | `Run_ConfettiUpdate` | 14 | Run (marathon) mini-game routine or table |  |
-| 09:6BEF | `Run_ConfettiParticle` | 140 | Run (marathon) mini-game routine or table |  |
-| 09:6C7B | `Run_ConfettiRespawn` | 38 | Run (marathon) mini-game routine or table |  |
-| 09:6D9C | `Run_DrawPlayer_Tbl6D9C` | 8 | Run (marathon) mini-game routine or table | auto: 8 bytes, bytes; referenced by Run_DrawPlayer |
-| 09:6DA4 | `Run_DrawPlayer_Tbl6DA4` | 4 | Run (marathon) mini-game routine or table | auto: 4 bytes, bytes; referenced by Run_DrawPlayer |
-| 09:6DA8 | `Run_DrawPlayer_Tbl6DA8` | 52 | Run (marathon) mini-game routine or table | auto: 52 bytes, bytes; referenced by Run_DrawPlayer |
-| 09:6DDC | `Run_DrawPlayer_Tbl6DDC` | 42 | Run (marathon) mini-game routine or table | auto: 42 bytes, bytes; referenced by Run_DrawPlayer |
-| 09:6E34 | `Run_DrawChick_Tbl6E34` | 98 | Run (marathon) mini-game routine or table | auto: 98 bytes, bytes; referenced by Run_DrawChick |
-| 09:6EC4 | `Run_DrawMoleAndScene_Tbl6EC4` | 70 | Run (marathon) mini-game routine or table | auto: 70 bytes, bytes; referenced by Run_DrawMoleAndScene |
-| 09:6F0A | `Run_DrawRunner3` | 42 | Run (marathon) mini-game routine or table |  |
-| 09:6F25 | `Run_DrawPodiumBanner` | 15 | Run (marathon) mini-game routine or table |  |
-| 09:6F34 | `Run_BannerSpriteTbl` | 28 | Run (marathon) mini-game routine or table |  |
-| 09:6F50 | `Run_DrawBackgroundScroll` | 75 | Run (marathon) mini-game routine or table |  |
-| 09:6FB3 | `Run_DrawHurdles_Tbl6FB3` | 12 | Run (marathon) mini-game routine or table | auto: 12 bytes, bytes; referenced by Run_DrawHurdles |
-| 09:6FBF | `Run_DrawFinishLine` | 39 | Run (marathon) mini-game routine or table |  |
-| 09:6FE6 | `Run_DrawFinishLine_Tbl6FE6` | 8 | Run (marathon) mini-game routine or table | auto: 8 bytes, bytes; referenced by Run_DrawFinishLine |
-| 09:7000 | `Run_FlagSpriteTbl` | 8 | Run (marathon) mini-game routine or table |  |
-| 09:702E | `Run_DrawConfettiSprite` | 27 | Run (marathon) mini-game routine or table |  |
-| 09:707C | `Run_DrawPickCharacterSprite_Tbl707C` | 56 | Run (marathon) mini-game routine or table | auto: 56 bytes, bytes; referenced by Run_DrawPickCharacterSprite |
-| 09:70E1 | `Run_SplitScreenLine` | 70 | Run (marathon) mini-game routine or table | LYC split from the player position |
-| 09:7127 | `Run_ScaledPosition` | 23 | Run (marathon) mini-game routine or table |  |
-| 09:7173 | `Run_DrawTimerDigit` | 11 | Run (marathon) mini-game routine or table |  |
-| 09:717E | `Run_DrawTimerDigitB` | 22 | Run (marathon) mini-game routine or table |  |
-| 09:723F | `Run_CharacterToGfxIndex` | 28 | Run (marathon) mini-game routine or table | Game Face present test (D581) |
-| 09:725B | `Run_CharacterToGfxIndex_Tbl725B` | 3 | Run (marathon) mini-game routine or table | auto: 3 bytes, bytes; referenced by Run_CharacterToGfxIndex |
+| 09:66A5 | `Run_FlagLanded` | 22 | Run (marathon) mini-game routine or table | returns Z when the flag counter $D048 is 2 and the y byte (record + 2, from $D054, step 6) of all 10 confetti  |
 
-## keyboard / glyph (19)
-
-_Why doubtful:_ glyph set identity (kana / Latin / symbol page) deduced from tile addresses. _To settle:_ view the loaded tiles in a VRAM viewer.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 09:545F | `Kb_FindCharInList` | 42 | character-input page or glyph-set loader |  |
-| 09:5685 | `Kb_Page0_Draw_Tbl5685` | 160 | character-input page or glyph-set loader | auto: 160 bytes, bytes; referenced by Kb_Page0_Draw, Run_DrawPickCharacterSprite |
-| 09:5732 | `Kb_Page1_Draw_Tbl5732` | 20 | character-input page or glyph-set loader | auto: 20 bytes, bytes; referenced by Kb_Page1_Draw |
-| 09:5753 | `Kb_Page2_Draw_Tbl5753` | 48 | character-input page or glyph-set loader | auto: 48 bytes, bytes; referenced by Kb_Page2_Draw |
-| 09:5790 | `Kb_Page3_Draw_Tbl5790` | 36 | character-input page or glyph-set loader | auto: 36 bytes, bytes; referenced by Kb_Page3_Draw |
-| 09:57D7 | `Kb_DrawTabs_Tbl57D7` | 6 | character-input page or glyph-set loader | auto: 6 bytes, bytes; referenced by Kb_DrawTabs |
-| 09:57DD | `Kb_DrawTabs_Tbl57DD` | 4 | character-input page or glyph-set loader | auto: 4 bytes, bytes; referenced by Kb_DrawTabs |
-| 09:5827 | `Kb_DrawCursor_Tbl5827` | 12 | character-input page or glyph-set loader | auto: 12 bytes, bytes; referenced by Kb_DrawCursor |
-| 09:5833 | `Kb_DrawCursor_Tbl5833` | 16 | character-input page or glyph-set loader | auto: 16 bytes, bytes; referenced by Kb_DrawCursor |
-| 09:5843 | `Kb_DrawTabPages` | 113 | character-input page or glyph-set loader |  |
-| 09:58B4 | `Kb_TabAnimFrame_Tbl58B4` | 14 | character-input page or glyph-set loader | auto: 14 bytes, bytes; referenced by Kb_TabAnimFrame |
-| 09:5B6F | `Kb_NavigateVertical` | 18 | character-input page or glyph-set loader |  |
-| 09:5B81 | `Kb_NavigateHorizontal` | 28 | character-input page or glyph-set loader |  |
-| 09:5C0E | `Kb_Page0_Press_PtrTbl5C0E` | 6 | character-input page or glyph-set loader | auto: 6 bytes, word table; referenced by Kb_Page0_Press |
-| 09:5C7D | `Kb_Page0_Press_Tbl5C7D` | 16 | character-input page or glyph-set loader | auto: 16 bytes, bytes; referenced by Kb_Page0_Press |
-| 09:5C93 | `Kb_Page0_Press_Tbl5C93` | 7 | character-input page or glyph-set loader | auto: 7 bytes, bytes; referenced by Kb_Page0_Press |
-| 09:5F03 | `Kb_BackspaceOnB` | 15 | character-input page or glyph-set loader |  |
-| 09:5F12 | `Kb_BlinkBackground` | 12 | character-input page or glyph-set loader | BGP xor $3C every 4th frame |
-| 09:6874 | `Kb_DrawTabPages_Gfx6874` | 6 | character-input page or glyph-set loader | auto: 6 bytes, tile data; referenced by Kb_DrawTabPages |
-
-## main-menu slide (18)
+## main-menu slide (2)
 
 _Why doubtful:_ slide A/B split by code layout only. _To settle:_ watch the menu transition frame by frame.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 07:7BDC | `MainMenu_SlideA_Begin` | 63 | slide animation between main-menu pages | four-step page transition (HL = draw callback; DE = table of 3-byte steps) |
-| 07:7BF4 | `MainMenu_SlideA_Step` | 39 | slide animation between main-menu pages |  |
-| 07:7C1B | `MainMenu_SlideA_Tbl0` | 48 | slide animation between main-menu pages |  |
-| 07:7C27 | `MainMenu_SlideA_Tbl1` | 12 | slide animation between main-menu pages |  |
-| 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages |  |
-| 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages |  |
-| 07:7C4B | `MainMenu_SlideB_Begin` | 63 | slide animation between main-menu pages |  |
-| 07:7C63 | `MainMenu_SlideB_Step` | 39 | slide animation between main-menu pages |  |
-| 07:7C8A | `MainMenu_SlideB_Tbl0` | 12 | slide animation between main-menu pages |  |
-| 07:7C96 | `MainMenu_SlideB_Tbl1` | 12 | slide animation between main-menu pages |  |
-| 07:7CA2 | `MainMenu_SlideB_Tbl2` | 12 | slide animation between main-menu pages |  |
-| 07:7CAE | `MainMenu_SlideB_Tbl3` | 12 | slide animation between main-menu pages |  |
-| 07:7CBA | `MainMenu_SlideC_Begin` | 63 | slide animation between main-menu pages |  |
-| 07:7CD2 | `MainMenu_SlideC_Step` | 39 | slide animation between main-menu pages |  |
-| 07:7CF9 | `MainMenu_SlideC_Tbl0` | 24 | slide animation between main-menu pages |  |
-| 07:7D05 | `MainMenu_SlideC_Tbl1` | 12 | slide animation between main-menu pages |  |
-| 07:7D11 | `MainMenu_SlideWait` | 32 | slide animation between main-menu pages | shared wait step: pacing by menu_trans_stamp |
-| 07:7D28 | `MainMenu_SlideWaitLoop` | 728 | slide animation between main-menu pages |  |
+| 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7580, 7780, 7980, 7B80 (frames 6-9 of the strip, forward). NO caller: only Tbl0 and Tbl1 |
+| 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7980, 7780, 7580, 7380 (frames 8, 7, 6, 5 of the strip, backward). NO caller (see Tbl2); |
 
-## arrow drawing (12)
-
-_Why doubtful:_ direction and owner inferred from the table index. _To settle:_ single-step with the cursor on screen.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 00:3E54 | `DjTitle_DrawArrowUp2_Tbl3E54` | 292 | small arrow / cursor sprite or tile drawing routine | auto: 292 bytes, bytes; referenced by DjTitle_DrawArrowUp2 |
-| 03:75C6 | `HotSpotEd_DrawArrows` | 19 | small arrow / cursor sprite or tile drawing routine | up / down arrow sprites |
-| 05:412A | `DjTitle_DrawArrowLeft` | 27 | small arrow / cursor sprite or tile drawing routine |  |
-| 05:4145 | `DjTitle_DrawArrowRight` | 29 | small arrow / cursor sprite or tile drawing routine |  |
-| 05:41DA | `DjTitle_DrawArrowUp2` | 23 | small arrow / cursor sprite or tile drawing routine |  |
-| 05:41F1 | `DjTitle_DrawArrowDown2` | 23 | small arrow / cursor sprite or tile drawing routine |  |
-| 05:4321 | `DjTitle_DrawArrowLeft3` | 23 | small arrow / cursor sprite or tile drawing routine |  |
-| 05:4338 | `DjTitle_DrawArrowRight3` | 23 | small arrow / cursor sprite or tile drawing routine |  |
-| 07:6E99 | `SlideOptA_DrawArrow` | 61 | small arrow / cursor sprite or tile drawing routine |  |
-| 07:6EDA | `SlideOptA_DrawArrow_Tbl6EDA` | 6 | small arrow / cursor sprite or tile drawing routine | auto: 6 bytes, bytes; referenced by SlideOptA_DrawArrow |
-| 07:6FB0 | `SlideOptB_DrawArrow` | 61 | small arrow / cursor sprite or tile drawing routine |  |
-| 07:6FF1 | `SlideOptB_DrawArrow_Tbl6FF1` | 6 | small arrow / cursor sprite or tile drawing routine | auto: 6 bytes, bytes; referenced by SlideOptB_DrawArrow |
-
-## dead code (29)
+## dead code (31)
 
 _Why doubtful:_ never executed in the static trace; purpose read from the instructions only. _To settle:_ TCRF note, or a debugger test with a forced jump.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
 | 00:2E88 | `Unused_Str_MainPass` | 10 | code or data that no trace path and no table reaches (left over from earlier versions) | ASCII 'MAIN PASS',0 right after Delay_BC; no immediate load of its address in the trace |
+| 02:46E6 | `Unused_Photo_SaveReceived_Far_Stray46E6` | 3 | code or data that no trace path and no table reaches (left over from earlier versions) | 3 bytes 00 C0 00 between the jp of Photo_SaveReceived_Far (02:46E3) and Sram_ZeroTagBytes (02:46E9); read as c |
+| 04:4D09 | `Unused_Mode0F_State09_EraseOne_Tbl4D09` | 18 | code or data that no trace path and no table reaches (left over from earlier versions) | 18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; |
 | 04:6403 | `Unused_LoadTilemap24_7120` | 15 | code or data that no trace path and no table reaches (left over from earlier versions) | dead code: copies the tilemap 24:7120 to $9800 (UNREFERENCED, README 16.15) |
 | 04:6412 | `Unused_LoadTilemap25_4B00` | 15 | code or data that no trace path and no table reaches (left over from earlier versions) | dead code: copies the tilemap 25:4B00 to $9800 (UNREFERENCED, README 16.15) |
 | 04:7C9D | `Unused_Mode0A_PhotoStepWrap` | 55 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED: Left / Right steps copy_photo_idx_a with wrap in 0..29 / 30..59 |
