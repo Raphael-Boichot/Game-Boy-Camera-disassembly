@@ -8,7 +8,7 @@ bank,addr,bytes,name,kind,tier,info_tiles,tiles_on_screen_stable,stable_in_organ
 0F,596C,6,Data_0F_596C,Data,other,0,0,0,0,0,6,6,,
 0F,5984,20,Data_0F_5984,Data,other,1,1,1,0,20758,20,20,,
 10,7420,128,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,Gfx,shown,8,8,4,0,25326,128,96,,
-10,74A3,157,Gfx_10_74A3_Unref,Gfx,forced only,9,4,0,0,100,157,0,,
+10,74A3,157,Gfx_10_7400_DjTitle_LoadNumeralTile,Gfx,used (withdrawn),9,4,0,0,100,157,0,,"withdrawn after the L3 pass of 2026-10-14: 10:74A3-753F are the tiles of the digits 5-9 of the numeral table 10:7400 (DjTitle_LoadNumeralTile, 05:423A: tile = 7400 + digit x 32, bank 10, C from the code); the replays never put a digit above 4 on that screen (value-gated, not unused)"
 10,7602,678,Gfx_10_7602_DjLetterGlyphStrip,Gfx,never shown,42,0,0,0,0,678,0,,
 10,78B8,24,Gfx_10_78B8_Unref,Gfx,never shown,1,0,0,0,0,24,0,,
 10,78E8,8,Data_10_78E8,Data,scrap,0,0,0,0,0,8,0,,

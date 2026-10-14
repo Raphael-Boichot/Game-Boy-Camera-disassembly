@@ -35,8 +35,8 @@ bank,addr,name,conf,note,source
 00,0447,Mem_Copy,C,HL -> DE BC bytes (BC>=1),hand+auto
 00,0450,Mem_CopyFromBank,C,A = ROM bank (HL<$8000) or SRAM bank (HL>=$8000); HL -> DE BC bytes,hand+auto
 00,0479,Vram_CopyFromBankAuto,C,LCD off: Mem_CopyFromBank; LCD on: Vram_CopyFromBank,hand+auto
-00,0486,Map_CopyRectAddTile_LcdOff,?,copies a 20-wide tilemap block adding C to each tile; LCD off variant,hand+auto
-00,04F3,Map_CopyRectAddTile_Safe,?,same with STAT waits,hand+auto
+00,0486,Border_CopyFrameAddTile_LcdOff,C,"copies a 20-tile-wide screen map (HL source, bank in A or SRAM bit; DE = VRAM $98xx) adding C to every tile number, 32-tile row stride in VRAM; no STAT wait (LCD off); callers 08:5079 (border picker, C = $90)",hand
+00,04F3,Border_CopyFrameAddTile_Safe,C,same copy as Border_CopyFrameAddTile_LcdOff with STAT waits (LCD on); callers 08:50C1 and 08:50F2 (border picker),hand
 00,057F,Delay_Short,I,unreferenced,hand+auto
 00,0586,Vram_CopyFromBank_4,I,4 bytes per HBlank window,hand+auto
 00,05F8,Vram_CopyFromBank,C,bank-aware VRAM copy during display: 6 bytes per HBlank window,hand+auto
@@ -64,8 +64,8 @@ bank,addr,name,conf,note,source
 00,091A,Rng_Init,C,fills the 55-byte table from SRAM $AFFF seed and stores a new seed back,hand+auto
 00,0977,Rng_InitOrder,C,54-byte index order used by Rng_Init,hand+auto
 00,09AD,Rng_Refill,C,one pass of the subtractive recurrence over the table,hand+auto
-00,09D4,Rng_Scaled,?,index into 09EE table; combines Rng_Next with 0F4F and returns the high bits,hand+auto
-00,09EE,Rng_Scaled_Tbl09EE,I,"auto: 32 bytes, bytes; referenced by Rng_Scaled",auto
+00,09D4,Rng_Scaled,C,"A = n (0-31): returns floor(Rng_Next x n / 256), i.e. a random value 0..n-1; builds L = n x 8 from Rng_Scaled_Mul8Tbl, multiplies with Math_MulAL and shifts H right 3 times; n >= 32 reads past the table",hand
+00,09EE,Rng_Scaled_Mul8Tbl,C,"32 entries n x 8 ($00 $08 ... $F8), read by Rng_Scaled as L for Math_MulAL (the multiplier n x 8 is shifted back by the 3 srl h)",hand
 00,0A0E,Joy_Read,C,reads the pad; keys_held / new / released / repeat / sticky,hand+auto
 00,0A82,Joy_ClearSticky,C,,hand+auto
 00,0A8A,Vq_Push,C,queues a block (BC = data pointer,hand+auto
@@ -111,8 +111,8 @@ bank,addr,name,conf,note,source
 00,1437,DjSnd_ModulationOnly,C,per-frame vibrato and frequency write when no new step,hand+auto
 00,1471,DjSnd_ModulateSoundI,C,vibrato / LFO of SOUND I (sine,hand+auto
 00,14ED,DjSnd_ModulateSoundII,C,vibrato / LFO of SOUND II,hand+auto
-00,1569,Img_AndMaskTiles_Bank27,?,ANDs a 7x8-tile image (pointer by shoot_phase table 15E5) with the mask at 27:5BB0; callers in bank 6,hand+auto
-00,15E5,Img_AndMaskTiles_Ptrs,?,,hand+auto
+00,1569,Img_AndMaskTiles_Bank27,C,"ANDs a 7x8-tile image (pointer from Img_AndMaskTiles_Ptrs indexed by $D7E4) with the mask at 27:5BB0, 2 image bytes per mask byte; callers in bank 6",hand
+00,15E5,Img_AndMaskTiles_Ptrs,C,pointer table indexed by $D7E4 x 2: image pointers for Img_AndMaskTiles_Bank27,hand
 00,15ED,Vec_GetPhotoVectorByte,I,A<$80: A = photo_vector_ram[A],hand+auto
 00,1600,Vec_GetPhotoVectorByteFar,I,A<$80: far call 02:444D,hand+auto
 00,1615,Gfx_Copy16FromBank10,I,copies the 16-byte tile (A) of the bank 10 table at $7600 to DE,hand+auto
@@ -121,7 +121,7 @@ bank,addr,name,conf,note,source
 00,16C0,Sf2_BossGroupTable,C,4 bytes,hand+auto
 00,16C4,Gfx_BuildCellMask,C,56 cells of 16 bytes OR-ed to one byte each (tile non-empty mask),hand+auto
 00,16F4,Snd_PlayTagDigits,I,splits tag_image_check into 4 digits and plays sound $10 (spoken digits),hand+auto
-00,1720,Prn_CopyBandRecords,?,copies 18-byte records HL(bank A) -> DE until a terminator; returns the row count in B,hand+auto
+00,1720,ScrollEngine_CopyRowRecords,C,"A = bank, HL = source, DE = row buffer: copies 32-byte row records (1 + 3 + 28 bytes) until 18 rows are copied or a record pair closes (first byte non-zero toggles bit 7 of C); returns the row count in B; only caller 09:403E ScrollEngine_Sub1_FetchRow (credits text scroller, bank $29 script); was Prn_CopyBandRecords",hand
 00,176F,Prn_SerialStep,C,one serial IRQ step of the printer packet state machine,hand+auto
 00,17AD,Prn_SendSyncByte,C,sends $88 $33,hand+auto
 00,17D2,Prn_SendPacketByte,C,sends one header/data byte and adds it to the checksum,hand+auto
@@ -197,8 +197,8 @@ bank,addr,name,conf,note,source
 00,28D8,Img_QuantizeBlockRound,I,adds 2 and keeps 2-bit level planes of an 8x2 block,hand+auto
 00,2925,Img_QuantizeBlockDither,I,same with the dither offsets D / E,hand+auto
 00,296F,Thumb_DrawFrame,I,draws the thumbnail frame and the bottom line at pixel row 27,hand+auto
-00,29F9,Thumb_ApplyCornerPatches,?,6 records {offset,hand+auto
-00,2A11,Thumb_CornerPatchTbl,?,6 x 3 bytes,hand+auto
+00,29F9,Thumb_DrawCopyBadge,C,"6 records {row byte offset, OR mask, XOR mask}: for the two bytes at DE+offset sets bits 7-2 to (b OR $FC) XOR mask, which draws a white C cut out of a black 6 x 6 block on tile rows 1-6 of the tile at D:E (D = $CE from 02:47FE); only called when the work-buffer copy flag $CF33 is not 0 (album copy), README 16.19; the picture was decoded by hand, the badge was not looked at on a screen",hand
+00,2A11,Thumb_CopyBadgeTbl,C,"6 x 3 bytes {offset, OR mask $FC, XOR mask}: 02 FC 30 / 04 FC 48 / 06 FC 40 / 08 FC 48 / 0A FC 30 / 0C FC 00 = the rows of the copy badge",hand
 00,2A23,Snd_Init_Tramp,I,calls 1F:7FF6 (sound init) from bank 0,hand+auto
 00,2A37,Snd_Tick_Tramp,C,calls the sound tick 1F:7FF0 from the timer-or-frame hook 00:0333,hand+auto
 00,2A4B,Snd_PlayFromList,C,HL = list of {sound,hand+auto
@@ -266,8 +266,7 @@ bank,addr,name,conf,note,source
 00,3515,Mode1D_AdvanceProgress,C,adds the page progress step and queues the progress-bar tile row (VRAM queue),hand+auto
 00,354D,Print_CountPrintedPhoto,C,far calls 02:503F then adds 1 to the printed-photos counter (BCD saturating) and far calls 02:4BB2,hand+auto
 00,356C,Bank00_ZeroFill,C,388 zero bytes (padding),hand+auto
-00,36F0,Img_NibbleMapTbl,C,16 entries mapping a nibble to two 2-bit levels,hand+auto
-00,36F1,Img_NibbleMapTbl_Data36F1,?,"auto: 15 bytes, bytes; referenced by no immediate load found",auto
+00,36F0,Img_NibbleMapTbl,C,16 entries: (popcount of bits 3-2) << 4 | popcount of bits 1-0 of the nibble; the old 1 + 15 byte split was a typing artefact,hand+auto
 00,3700,Img_PairLookupTbl,C,256 entries; index = pixel pair byte,hand+auto
 00,3780,AlbumPage_DrawDown_Tbl3780,I,"auto: 128 bytes, bytes; referenced by AlbumPage_DrawDown",auto
 00,3800,Blit_ShiftTbl,I,8 pages of 256 bytes: page k = source byte shifted for an x offset of k pixels (page 0 = identity),hand+auto
@@ -813,7 +812,7 @@ bank,addr,name,conf,note,source
 02,452A,Photo_Erase_UnlinkAll_Far,I,erases a photo then removes every reference to it from the hot spots and the animation list,hand+auto
 02,45A1,Photo_SaveCopy_Far,I,saves the working image into a free slot with the copy flag set (copy badge); needs photo_count < 30,hand+auto
 02,462F,Photo_SaveReceived_Far,C,link receive: stores the received photo and bumps the gender counters F12 / F13 of its tag,hand+auto
-02,46E6,Photo_SaveReceived_Far_Data46E6,?,"auto: 3 bytes, bytes; referenced by no immediate load found",auto
+02,46E6,Photo_SaveReceived_Far_Data46E6,?,"3 bytes 00 C0 00 (decode as nop / ret nz / nop) between the jp of Photo_SaveReceived_Far and Sram_ZeroTagBytes; no reference in the trace, read in forced runs only",auto
 02,46E9,Sram_ZeroTagBytes,I,zeroes C bytes at HL,hand+auto
 02,46F0,Photo_SaveShot_Far,C,stores a new shot: checksums,hand+auto
 02,47B3,Photo_SaveShot_Far_Tbl47B3,I,"auto: 3 bytes, bytes; referenced by Photo_SaveShot_Far",auto
@@ -1273,7 +1272,7 @@ bank,addr,name,conf,note,source
 03,55F3,AnimEd_CursorUpDown,I,moves by 16 entries (one row),hand+auto
 03,5614,AnimEd_StartDecorations,C,sets the three decoration contexts (5691 / 57BE / 5847),hand+auto
 03,5649,AnimEd_CoroYield,C,saves the registers of the running context and resumes the next of three (rst 08 after the third),hand+auto
-03,568B,AnimEd_CoroYield_PtrTbl568B,?,"auto: 6 bytes, word table; referenced by no immediate load found",auto
+03,568B,AnimEd_Decor_CtxEntryTbl,I,"3 words 5691 / 57BE / 5847 = entry points of AnimEd_Ctx0/1/2_Decor, the same values AnimEd_StartDecorations stores through split immediates; no reader of the table (read in forced runs only)",hand
 03,5691,AnimEd_Ctx0_Decor,I,context 0: draws the tool bar tiles,hand+auto
 03,57A6,AnimEd_Ctx0_Decor_Map57A6,I,"auto: 24 bytes, tile map; referenced by AnimEd_Ctx0_Decor",auto
 03,57BE,AnimEd_Ctx1_Decor,I,context 1: border animation (sprites and tiles),hand+auto
@@ -1285,7 +1284,7 @@ bank,addr,name,conf,note,source
 03,58F8,AnimEd_Ctx2_BorderSprite_PtrTbl58F8,I,"auto: 8 bytes, word table; referenced by AnimEd_Ctx2_BorderSprite",auto
 03,5900,AnimEd_StartExitTransition,I,sets the three exit contexts and draws the transition tiles,hand+auto
 03,59AF,AnimEd_CoroYield_B,I,same switch as 5649 for the exit contexts,hand+auto
-03,59F1,AnimEd_CoroYield_B_PtrTbl59F1,?,"auto: 6 bytes, word table; referenced by no immediate load found",auto
+03,59F1,AnimEd_Exit_CtxEntryTbl,I,"3 words 59F7 / 5A7A / 5B00 = entry points of AnimEd_ExitCtx0/1/2, the values AnimEd_StartExitTransition stores through split immediates; no reader of the table (read in forced runs only)",hand
 03,59F7,AnimEd_ExitCtx0,I,exit context 0,hand+auto
 03,5A7A,AnimEd_ExitCtx1,I,exit context 1,hand+auto
 03,5AE0,AnimEd_ExitCtx1_Sprite,I,,hand+auto
@@ -1528,7 +1527,7 @@ bank,addr,name,conf,note,source
 04,4C0B,Mode0F_State07_ConfirmApply,C,YES: erases the photo and its references; then back to mode 09 or 0A,hand+auto
 04,4C7C,Mode0F_LeaveScreen,C,fade out + LCD off + clear STAT mode-0 IRQ bits,hand+auto
 04,4C8D,Mode0F_State09_EraseOne,C,single photo erase after YES (animation then counters),hand+auto
-04,4D09,Mode0F_State09_EraseOne_Data4D09,?,"auto: 18 bytes, bytes; referenced by no immediate load found",auto
+04,4D09,Mode0F_State09_EraseOne_Data4D09,?,18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; no instruction in the trace loads an address in 04:4D00-4D1A (only other banks use 4D00-4D1A as their own addresses) and the bytes were read only in forced runs,auto
 04,4D1B,Mode0F_State0A_EraseAll,C,"erase-all branch: A erases every photo, B cancels (130 instructions, never played until §16.14)",hand+auto
 04,4DF9,Mode0F_DrawEraseAllJitter,C,two sprites $B4 / $B5 that shake by one pixel (erase-all prompt),hand+auto
 04,4E26,Mode0F_ForgetAllAnimations,C,far 02:4EE8 then marks every animation entry $FE and stores it (02:4A07),hand+auto
@@ -1888,9 +1887,9 @@ bank,addr,name,conf,note,source
 05,5A53,DjPrint_RowDispatch,C,jumps through the 39-entry row table at 5A67,hand+auto
 05,5A67,DjPrint_RowTbl,C,39 code pointers: one per printed line,hand+auto
 05,5AB5,DjPrintRow_Text0,I,fixed text line of the score sheet (rows 0 / 4),hand+auto
+05,5ABB,DjPrintRow_Text0_Tbl5ABB,C,"row table of DjPrintRow_Text0 (ld hl,5ABB; jp 60EE): 20 x $8B (blank row); was typed as padding",hand
 05,5ACF,DjPrintRow_Text1,I,fixed text line (rows 1 / 3),hand+auto
-05,5AD5,DjPrintRow_Text1_Tbl5AD5,I,"auto: 1 bytes, bytes; referenced by DjPrintRow_Text1",auto
-05,5AE8,DjPrintRow_Text1_Data5AE8,?,"auto: 1 bytes, bytes; referenced by no immediate load found",auto
+05,5AD5,DjPrintRow_Text1_Tbl5AD5,C,"row table of DjPrintRow_Text1: $8B, 18 x $9F, $8B (20 tile codes); the 1 + 18 + 1 byte split was a typing artefact",hand+auto
 05,5AE9,DjPrintRow_Text2,I,fixed text line (row 2),hand+auto
 05,5AEF,DjPrintRow_Text2_Tbl5AEF,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_Text2",auto
 05,5B03,DjPrintRow_Text3,I,fixed text line (row 6),hand+auto
@@ -1900,6 +1899,7 @@ bank,addr,name,conf,note,source
 05,5B37,DjPrintRow_Text5,I,fixed text line (row 30),hand+auto
 05,5B3D,DjPrintRow_Text5_Tbl5B3D,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_Text5",auto
 05,5B51,DjPrintRow_Text6,I,fixed text line (row 38),hand+auto
+05,5B57,DjPrintRow_Text6_Tbl5B57,C,"row table of DjPrintRow_Text6 (ld hl,5B57; jp 60EE): 20 x $4D; was typed as padding",hand
 05,5B6B,DjPrintRow_Text7,I,fixed text line (rows 7 / 17 / 31),hand+auto
 05,5B71,DjPrintRow_Text7_Tbl5B71,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_Text7",auto
 05,5B85,DjPrintRow_S1Notes0,C,SOUND I notes 0-3 and their stereo codes,hand+auto
@@ -2818,8 +2818,7 @@ bank,addr,name,conf,note,source
 08,4DF2,BorderPicker_Far,C,print border (frame) chooser; 3 substates,hand+auto
 08,4DF6,BorderPicker_SubstateTbl,C,,hand+auto
 08,4DFC,BorderPicker_Substate0_Init,C,,hand+auto
-08,4E74,BorderPicker_FillPatternTbl,I,$FE x20; $FF x12,hand+auto
-08,4E88,BorderPicker_FillPatternTbl_Data4E88,?,"auto: 12 bytes, bytes; referenced by no immediate load found",auto
+08,4E74,BorderPicker_FillPatternTbl,C,"one 32-byte background map row: 20 x $FE then 12 x $FF; Substate0_Init copies it 18 times to $9800 and $9C00 (ld a,$20 loop); the 20 + 12 split was a typing artefact",hand+auto
 08,4E94,BorderPicker_Substate1_Browse,C,,hand+auto
 08,4EAE,BorderPicker_Substate2_Exit,C,,hand+auto
 08,4EBB,BorderPicker_AnimateIcon,C,16-byte tile packet from 21:7BB0 to the VRAM queue,hand+auto
@@ -2931,7 +2930,7 @@ bank,addr,name,conf,note,source
 09,47B6,CommentCard_DrawOwnerName_Far,C,far: tag_owner_name,hand+auto
 09,47D9,CommentCard_DrawHalfByte,I,,hand+auto
 09,47EC,CommentCard_DrawNibble,I,,hand+auto
-09,4802,Glyph_LoadFromCharCode,C,character code to glyph tile (bank $2A); VRAM copy,hand+auto
+09,4802,Glyph_LoadFromCharCode,C,"character code to glyph (bank in C): copies 32 B from HL + (A - 1) x 32 to DE (HL = font base: $4000 = the 256-slot font, $6000 = the small-kana table); advances DE via Vram_CopyFromBankAuto",hand+auto
 09,481C,CommentEditor_SlidePanelOut,C,sound $12; WY delta table,hand+auto
 09,4841,CommentEditor_SlidePanelIn,C,sound $13,hand+auto
 09,4866,CommentEditor_LoadGridPage,C,$A0 * page bytes from 2A:4000 to $8E60,hand+auto
@@ -2992,14 +2991,14 @@ bank,addr,name,conf,note,source
 09,5372,HiScore_DrawScores,C,SPACE FEVER II; BALL; RUN,hand+auto
 09,53AF,HiScore_DrawBcdByte,C,,hand+auto
 09,53BA,HiScore_DrawTallDigit,C,,hand+auto
-09,53CA,Kb_LoadGlyphSetA,I,glyph list at 09:53D3 to $8800,hand+auto
-09,53D3,Kb_LoadGlyphSetA_Gfx53D3,I,"auto: 25 bytes, tile data; referenced by Kb_LoadGlyphSetA",auto
-09,53EC,Kb_LoadGlyphSetB,I,list at 09:53F5,hand+auto
-09,53F5,Kb_LoadGlyphSetB_Gfx53F5,I,"auto: 25 bytes, tile data; referenced by Kb_LoadGlyphSetB",auto
-09,540E,Kb_LoadGlyphSetC,I,list at 09:5417,hand+auto
-09,5417,Kb_LoadGlyphSetC_Gfx5417,I,"auto: 13 bytes, tile data; referenced by Kb_LoadGlyphSetC",auto
-09,5424,Kb_LoadGlyphList,I,,hand+auto
-09,5450,Kb_GlyphOffset,I,,hand+auto
+09,53CA,Kb_LoadGlyphSetA,C,loads glyph list A (09:53D3) to $8800 with Kb_LoadGlyphList,hand+auto
+09,53D3,Kb_GlyphListA,C,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetA_Gfx53D3)",hand
+09,53EC,Kb_LoadGlyphSetB,C,loads glyph list B (09:53F5) to $8800 with Kb_LoadGlyphList,hand+auto
+09,53F5,Kb_GlyphListB,C,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetB_Gfx53F5)",hand
+09,540E,Kb_LoadGlyphSetC,C,loads glyph list C (09:5417) to $8800 with Kb_LoadGlyphList,hand+auto
+09,5417,Kb_GlyphListC,C,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetC_Gfx5417)",hand
+09,5424,Kb_LoadGlyphList,C,"list in HL: entry n,g = n glyphs from slot g; entry $80+n,g = n copies of slot g; 0 ends; each glyph = 32 B from 2A:$4000 + 32 x slot copied to DE; lists A / B / C at 09:53D3 / 53F5 / 5417",hand+auto
+09,5450,Kb_GlyphOffset,C,BC = A x 32 (byte offset of glyph slot A),hand+auto
 09,545F,Kb_FindCharInList,I,,hand+auto
 09,5489,OwnerCard_DrawOwnerId,C,owner_id at $99CA,hand+auto
 09,5495,OwnerCard_DrawDigits,C,,hand+auto
@@ -3039,21 +3038,21 @@ bank,addr,name,conf,note,source
 09,58B4,Kb_TabAnimFrame_Tbl58B4,I,"auto: 14 bytes, bytes; referenced by Kb_TabAnimFrame",auto
 09,58C2,Kb_DrawKeyHighlight,C,,hand+auto
 09,58DD,Kb_Page0_Navigate,C,key map tables 09:58EA / 593B / 598B,hand+auto
-09,58EA,Kb_Page0_Navigate_Tbl58EA,I,"auto: 81 bytes, bytes; referenced by Kb_Page0_Navigate",auto
-09,593B,Kb_Page0_Navigate_Tbl593B,I,"auto: 80 bytes, bytes; referenced by Kb_Page0_Navigate",auto
-09,598B,Kb_Page0_Navigate_Tbl598B,I,"auto: 80 bytes, bytes; referenced by Kb_Page0_Navigate",auto
+09,58EA,Kb_Page0_NavLimitsTbl,C,byte 0 = last row; then one byte per grid position (row<<4|col): steps allowed to the left << 4 | steps allowed to the right; read by Kb_NavigateGeneric (DE) from Kb_Page0_Navigate,hand
+09,593B,Kb_Page0_NavIndexToPosTbl,C,"cursor index ($DA3C) -> grid position (row<<4|col), 5 rows of 10; read by Kb_NavigateGeneric (HL)",hand
+09,598B,Kb_Page0_NavPosToIndexTbl,C,grid position (row<<4|col) -> cursor index; row stride $10; read by Kb_NavigateGeneric (BC),hand
 09,59DB,Kb_Page1_Navigate,C,,hand+auto
-09,59E8,Kb_Page1_Navigate_Tbl59E8,I,"auto: 6 bytes, bytes; referenced by Kb_Page1_Navigate",auto
-09,5A0A,Kb_Page1_Navigate_Data5A0A,?,"auto: 9 bytes, bytes; referenced by no immediate load found",auto
-09,5A13,Kb_Page1_Navigate_Tbl5A13,I,"auto: 32 bytes, bytes; referenced by Kb_Page1_Navigate",auto
+09,59E8,Kb_Page1_NavLimitsTbl,C,byte 0 = last row; then one byte per grid position (row<<4|col): steps allowed to the left << 4 | steps allowed to the right; read by Kb_NavigateGeneric (DE); 2 rows,hand
+09,5A09,Kb_Page1_NavIndexToPosTbl,C,cursor index ($DA3C) -> grid position (row<<4|col); 10 cursor indexes (2 rows of 5); read by Kb_NavigateGeneric (HL),hand
+09,5A13,Kb_Page1_NavPosToIndexTbl,C,"grid position (row<<4|col) -> cursor index; row stride $10; read by Kb_NavigateGeneric (BC), the result is stored in $DA3C",hand
 09,5A33,Kb_Page2_Navigate,C,,hand+auto
-09,5A40,Kb_Page2_Navigate_Tbl5A40,I,"auto: 25 bytes, bytes; referenced by Kb_Page2_Navigate",auto
-09,5A72,Kb_Page2_Navigate_Data5A72,?,"auto: 23 bytes, bytes; referenced by no immediate load found",auto
-09,5A89,Kb_Page2_Navigate_Tbl5A89,I,"auto: 48 bytes, bytes; referenced by Kb_Page2_Navigate",auto
+09,5A40,Kb_Page2_NavLimitsTbl,C,byte 0 = last row; then one byte per grid position (row<<4|col): steps allowed to the left << 4 | steps allowed to the right; read by Kb_NavigateGeneric (DE); 3 rows,hand
+09,5A71,Kb_Page2_NavIndexToPosTbl,C,cursor index ($DA3C) -> grid position (row<<4|col); 24 cursor indexes (3 rows of 8); read by Kb_NavigateGeneric (HL),hand
+09,5A89,Kb_Page2_NavPosToIndexTbl,C,"grid position (row<<4|col) -> cursor index; row stride $10; read by Kb_NavigateGeneric (BC), the result is stored in $DA3C",hand
 09,5AB9,Kb_Page3_Navigate,C,,hand+auto
-09,5AC6,Kb_Page3_Navigate_Tbl5AC6,I,"auto: 23 bytes, bytes; referenced by Kb_Page3_Navigate",auto
-09,5AF8,Kb_Page3_Navigate_Data5AF8,?,"auto: 17 bytes, bytes; referenced by no immediate load found",auto
-09,5B09,Kb_Page3_Navigate_Tbl5B09,I,"auto: 48 bytes, bytes; referenced by Kb_Page3_Navigate",auto
+09,5AC6,Kb_Page3_NavLimitsTbl,C,byte 0 = last row; then one byte per grid position (row<<4|col): steps allowed to the left << 4 | steps allowed to the right; read by Kb_NavigateGeneric (DE); 3 rows,hand
+09,5AF7,Kb_Page3_NavIndexToPosTbl,C,cursor index ($DA3C) -> grid position (row<<4|col); 18 cursor indexes (3 rows of 6); read by Kb_NavigateGeneric (HL),hand
+09,5B09,Kb_Page3_NavPosToIndexTbl,C,"grid position (row<<4|col) -> cursor index; row stride $10; read by Kb_NavigateGeneric (BC), the result is stored in $DA3C",hand
 09,5B39,Kb_NavigateGeneric,C,,hand+auto
 09,5B6F,Kb_NavigateVertical,I,,hand+auto
 09,5B81,Kb_NavigateHorizontal,I,,hand+auto
@@ -3069,8 +3068,7 @@ bank,addr,name,conf,note,source
 09,5F1E,Kb_WriteNameChar,C,owner_name[kb_cursor],hand+auto
 09,5F4B,Boot_EraseAllPrompt_Far,C,Start+Select at power-on: A erases; B boots (README 16.18),hand+auto
 09,5FE3,Mode21_RunRunRun,C,mode 21: RUN! RUN! RUN! (three runners; 12 hurdles),hand+auto
-09,5FE7,Mode21_StateTable,C,15 states,hand+auto
-09,6000,OwnerCard_LoadNameGlyphs_Gfx6000,I,"auto: 5 bytes, tile data; referenced by CommentCard_DrawOwnerName_Far, OwnerCard_LoadNameGlyphs",auto
+09,5FE7,Mode21_StateTable,C,"15 states x 2 B (09:5FE7-6005); a false auto label at 6000 (from the ""ld hl,$6000"" of the owner-name glyph loaders, which points into bank 2A) was removed",hand+auto
 09,6005,Mode21_State00_Init,C,,hand+auto
 09,603C,Mode21_PickCharacterTbl,I,,hand+auto
 09,60A5,Mode21_PickCharacterTbl2,C,table of 09:603C (README 2.7),hand+auto
@@ -3116,8 +3114,7 @@ bank,addr,name,conf,note,source
 09,685A,Run_PlayerAirB_Tbl685A,I,"auto: 26 bytes, bytes; referenced by Run_PlayerAirB",auto
 09,6874,Kb_DrawTabPages_Gfx6874,I,"auto: 6 bytes, tile data; referenced by Kb_DrawTabPages",auto
 09,687A,Run_PlayerSpeedFromCounter,C,,hand+auto
-09,68BF,Run_SpeedLevelTbl,C,speed level from the counter,hand+auto
-09,68E3,Run_SpeedLevelTbl_Data68E3,?,"auto: 16 bytes, bytes; referenced by no immediate load found",auto
+09,68BF,Run_SpeedLevelTbl,C,52 entries indexed by the counter $D003: speed level 0-6 (00 01 01 01 02.. 06); read by Run_PlayerSpeedFromCounter; the 20 + padding 16 + 16 byte split was a typing artefact,hand+auto
 09,68F3,Run_PlayerSpeedFromCounter_Tbl68F3,I,"auto: 7 bytes, bytes; referenced by Run_PlayerSpeedFromCounter",auto
 09,68FA,Run_PlayerFrameFromSpeed,I,,hand+auto
 09,6916,Run_PlayerLanding,I,,hand+auto
@@ -3130,9 +3127,8 @@ bank,addr,name,conf,note,source
 09,69E3,Run_MolePathTblFast,C,,hand+auto
 09,69EF,Run_HurdleCollision,C,0 < x - hurdle <= 24: stumble; sound $04,hand+auto
 09,6A40,Run_FlagHoistKeys,C,A presses hoist the flag,hand+auto
-09,6A6E,Run_FlagHoistKeys_Tbl6A6E,I,"auto: 52 bytes, bytes; referenced by Run_FlagHoistKeys",auto
-09,6AA2,Run_FlagHoistKeys_Tbl6AA2,I,"auto: 20 bytes, bytes; referenced by Run_FlagHoistKeys",auto
-09,6AC6,Run_FlagHoistKeys_Data6AC6,?,"auto: 16 bytes, bytes; referenced by no immediate load found",auto
+09,6A6E,Run_FlagHoistKeys_StepTbl,C,"52 entries indexed by the flag counter $D04A: 16 x8, 15 x4, 14 x4 ... 8 x4, 7 6 5 4 3 2 1 0 0 0 0 0; an A press adds the entry to the counter (Run_FlagHoistKeys 6A5E-6A6A)",hand
+09,6AA2,Run_FlagHoistKeys_LevelTbl,C,52 entries indexed by the flag counter $D04A: level 0-6 stored to $D049; byte for byte the same as Run_SpeedLevelTbl; the 20 + padding 16 + 16 byte split was a typing artefact,hand
 09,6AD6,Run_MovePlayerX,C,16-bit position += speed,hand+auto
 09,6B00,Run_MoveChickX,C,,hand+auto
 09,6B2A,Run_MoveMoleX,C,sets D050 when the player leads by $A0,hand+auto
@@ -3331,12 +3327,12 @@ bank,addr,name,conf,note,source
 0A,6B6E,Cam_FactoryDiag_NibbleToTile_lo,I,from the previous .sym (camera / sensor code,hand+auto
 0A,6B73,Cam_FirstBoot_StorePleaseWait,I,from the previous .sym (camera / sensor code,hand+auto
 0A,6BDB,Cam_FactoryDiag_StoreWaitScreen,I,from the previous .sym (camera / sensor code,hand+auto
-0A,7300,Cam_PopcountTable256,I,from the previous .sym (camera / sensor code,hand+auto
-0A,7301,Cam_PopcountTable256_Data7301,?,"auto: 255 bytes, bytes; referenced by no immediate load found",auto
-0A,7400,Cam_BitReverseTbl,C,256-byte horizontal mirror table,hand+auto
-0A,7600,Cam_BitReverseTbl_Data7600,?,"auto: 256 bytes, bytes; referenced by no immediate load found",auto
-0A,7740,Cam_BitReverseTbl_Data7740,?,"auto: 16 bytes, bytes; referenced by no immediate load found",auto
-0A,7800,Cam_BitReverseTbl_Data7800,?,"auto: 256 bytes, bytes; referenced by no immediate load found",auto
+0A,7300,Cam_PopcountTable256,C,"table[i] = number of set bits of i (256 bytes, README 5); read with ld h,3 by Cam_PopcountSampleLoop_inner (0A:5091, 509C)",hand
+0A,7400,Cam_BitReverseTbl,C,"table[i] = bit-reversed byte i (horizontal mirror of 8 pixels); read with ld b,4 by the 20 MirrorCopy effect handlers (Fx01, Fx02, Fx20, Fx25, Fx2D-Fx38, Fx41, Fx42) and by Fx23 / Fx24",hand+auto
+0A,7500,Cam_ZoomX2_HiTbl,C,"table[c] = high nibble of c with every bit doubled (4 pixels -> 8 pixels, 16 groups of 16 equal bytes); first output byte of Fx06 / Fx07 / Fx46 / Fx47 (ld b,5); Fx06 re-simulated byte for byte against the core (3,584 cells)",hand
+0A,7600,Cam_ZoomX2_LoTbl,C,"table[c] = low nibble of c with every bit doubled (period 16); second output byte, 16 bytes further, of Fx06 / Fx07 / Fx46 / Fx47 (ld b,6)",hand
+0A,7700,Cam_ZoomX2Mirror_HiTbl,C,"table[c] = high nibble of c, bits in reverse order, every bit doubled (16 groups of 16 bytes; byte 0A:774D is  where the pattern gives /bin/bashC); first output byte of the mirrored zoom Fx26 / Fx27 (ld b,7); Fx26 re-simulated byte for byte against the core",hand
+0A,7800,Cam_ZoomX2Mirror_LoTbl,C,"table[c] = low nibble of c, bits in reverse order, every bit doubled (period 16); second output byte (16 bytes before) of Fx26 / Fx27 (ld b,8)",hand
 0A,7900,Cam_ReduceTbl_Lo,I,bit decimation (every other bit pair),hand+auto
 0A,7A00,Cam_ReduceTbl_Hi,I,same as 7900 shifted by 2 bits,hand+auto
 0A,7B00,Cam_ExposureShiftTable,I,from the previous .sym (camera / sensor code,hand+auto
@@ -3370,13 +3366,13 @@ bank,addr,name,conf,note,source
 0B,69C6,Sgb_Pad_69C6,C,,assets
 0B,69E6,Sgb_DataSndPackets,C,"eight DATA_SND packets ($79, SNES address $085D down to $0810; 11 bytes each)",assets
 0B,6A66,Sgb_MaskEnPackets,C,MASK_EN freeze $B9 $01 (6A66) and cancel $B9 $00 (6A76),assets
-0C,4000,Gfx_0C_4000_Bank03,I,"copied to VRAM/WRAM by Bank03, Mode12_State12_TestRun, Mode12_State22_BorderPickerReturn (assets/catalog_jp.csv)",assets
+0C,4000,Gfx_0C_4000_Mode12_State00_Init,I,"copied to VRAM/WRAM by Mode12_State00_Init, Mode12_State13_TestEnd, Mode12_State22_BorderPickerReturn (assets/catalog_jp.csv)",assets
 0C,4500,Gfx_0C_4500_Mode12_State1F_SortDialogClose,I,"far pointer loaded by Mode12_State1F_SortDialogClose (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,4600,Gfx_0C_4600_Mode12_State16_SaveDialogClose,I,"far pointer loaded by Mode12_State16_SaveDialogClose, Mode12_State19_ExitDialogClose, Mode12_State1C_ClearDialogClose (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,48C0,Gfx_0C_48C0_Mode12_State0F_ClearAll,I,"far pointer loaded by Mode12_State03_EditSpeed, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,4920,Gfx_0C_4920_Mode12_State20_BorderRow,I,"far pointer loaded by Mode12_State20_BorderRow (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,4950,Gfx_0C_4950_Mode12_State03_EditSpeed,I,"far pointer loaded by Mode12_State03_EditSpeed (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,4C60,Gfx_0C_4C60_Mode12_State16_SaveDialogClose,I,"far pointer loaded by Mode12_State16_SaveDialogClose, Mode12_State19_ExitDialogClose, Mode12_State1C_ClearDialogClose (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+0C,4C60,Gfx_0C_4C60_Mode12_State16_SaveDialogClose,I,"far pointer loaded by Mode12_State16_SaveDialogClose, Mode12_State19_ExitDialogClose, Mode12_State1C_ClearDialogClose, Mode12_State1F_SortDialogClose (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,4D50,Gfx_0C_4D50_Mode12_State07_ToolsSlideIn,I,"far pointer loaded by Mode12_State07_ToolsSlideIn (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,4FF0,Gfx_0C_4FF0_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5100,Gfx_0C_5100_Mode12_State0F_ClearAll,I,"far pointer loaded by AnimEd_LoadEntryThumb, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -3399,21 +3395,21 @@ bank,addr,name,conf,note,source
 0C,6180,Gfx_0C_6180_Mode12_State14_SaveDialogOpen,I,"far pointer loaded by Mode12_State14_SaveDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 992 from the nearby ld bc",assets
 0C,6560,Gfx_0C_6560_Mode12_State1A_ClearDialogOpen,I,"far pointer loaded by Mode12_State1A_ClearDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 880 from the nearby ld bc",assets
 0C,6730,Gfx_0C_6730_Mode12_State17_ExitDialogOpen,I,"far pointer loaded by Mode12_State17_ExitDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 896 from the nearby ld bc",assets
-0C,68D0,Gfx_0C_68D0_AnimEdKanaStrips,?,"kana strips of the Animation-editor dialogs, same style as 6000-68CF (visual)",assets
+0C,68D0,Gfx_0C_68D0_AnimEdKanaStrips,I,"kana strips of the Animation-editor dialogs (by eye); 68D0-6AB0 is inside the 0x380 bytes that Mode12_State17_ExitDialogOpen copies from 6730 (copy site 03:4F62), so the tiles are loaded",hand
+0C,6AB0,Gfx_0C_6AB0_AnimEdKanaStrips_Tail,?,kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it,hand
 0C,6C30,Gfx_0C_6C30_Mode12_State1D_SortDialogOpen,I,"far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 880 from the nearby ld bc",assets
 0C,6FA0,Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen,I,"far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 656 from the nearby ld bc",assets
-0C,7800,Gfx_0C_7800_PenMenu_BuildSpeed,I,copied to VRAM/WRAM by PenMenu_BuildSpeed (assets/catalog_jp.csv),assets
+0C,7800,Gfx_0C_7800_Mode09_State00_Init,I,"copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (assets/catalog_jp.csv)",assets
 0C,7900,Gfx_0C_7900_Album_LoadSliderScreen,I,"far pointer loaded by Album_LoadSliderScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,7930,Gfx_0C_7930_Mode09_State00_Init,I,"far pointer loaded by Album_LoadSliderScreen, Album_ShowPageScreen, Mode09_State00_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+0C,7930,Gfx_0C_7930_Mode09_State00_Init,I,"far pointer loaded by Mode09_State00_Init, Album_ShowPageScreen, Mode0A_State02_Setup, Album_LoadSliderScreen, Mode0D_State06_PlayInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,79A0,Gfx_0C_79A0_Mode0A_State02_Setup,I,"far pointer loaded by Album_LoadSliderScreen, Mode0A_State02_Setup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,7B00,Gfx_0C_7B00_PenMenu_BuildSpeed,I,copied to VRAM/WRAM by PenMenu_BuildSpeed (assets/catalog_jp.csv),assets
+0C,7B00,Gfx_0C_7B00_Mode09_State00_Init,I,"copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (assets/catalog_jp.csv)",assets
 0C,7C00,Gfx_0C_7C00_Album_LoadSliderScreen,I,"far pointer loaded by Album_LoadSliderScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,7E00,Src_0C_7E00_Album_LoadNumeralTile,I,"far pointer loaded by Album_LoadNumeralTile (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-0C,7E20,Gfx_0C_7E20_Album_LoadNumeralTile_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Album_LoadNumeralTile); classified from its content - see sym_unconclusive",assets
-0C,7FD0,Gfx_0C_7FD0_PenMenu_BuildSpeed,I,copied to VRAM/WRAM by PenMenu_BuildSpeed (assets/catalog_jp.csv),assets
-0D,4000,Gfx_0D_4000_Mode15_StepValue,I,copied to VRAM/WRAM by Mode15_StepValue (assets/catalog_jp.csv),assets
-0D,4800,Gfx_0D_4800_Mode15_StepValue,I,copied to VRAM/WRAM by Mode15_StepValue (assets/catalog_jp.csv),assets
-0D,5000,Gfx_0D_5000_Mode15_StepValue,I,copied to VRAM/WRAM by Mode15_StepValue (assets/catalog_jp.csv),assets
+0C,7E00,Gfx_0C_7E00_Album_LoadNumeralTile,C,"numeral table: Album_LoadNumeralTile (04:6F80) copies 32 bytes (2 tiles, 8 x 16 pixels) from $7E00 + A x 32 (swap a / sla c / rl b); entries 0-9 are the digits (rendered); the types extent to 7F80 is 12 entries, entries 10-11 are not explained; the second half was Gfx_0C_7E20_Album_LoadNumeralTile_Aux",hand
+0C,7FD0,Gfx_0C_7FD0_Mode09_State00_Init,I,"copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (assets/catalog_jp.csv)",assets
+0D,4000,Gfx_0D_4000_Mode16_State00_Init,I,"copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw (assets/catalog_jp.csv)",assets
+0D,4800,Gfx_0D_4800_Mode16_State00_Init,I,"copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw (assets/catalog_jp.csv)",assets
+0D,5000,Gfx_0D_5000_Mode16_State00_Init,I,"copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw (assets/catalog_jp.csv)",assets
 0D,5300,Gfx_0D_5300_Strip06_4B17,C,"entry 3 of the {lo,hi,bank} table 06:4B17, 640 bytes each (constant pitch)",assets
 0D,5580,Gfx_0D_5580_Strip06_4B17,C,"entry 2 of the {lo,hi,bank} table 06:4B17, 640 bytes each (constant pitch)",assets
 0D,5800,Gfx_0D_5800_Strip06_4B17,C,"entry 1 of the {lo,hi,bank} table 06:4B17, 640 bytes each (constant pitch)",assets
@@ -3438,7 +3434,7 @@ bank,addr,name,conf,note,source
 0D,7000,Gfx_0D_7000_FillPatternTiles,?,"dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by a pattern number",assets
 0D,7660,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,I,TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 of 16 unique); never on screen (README 16.24),fix
 0D,77E0,Gfx_0D_77E0_FillPatternTiles_Cont,I,continues the span of Gfx_0D_7000_FillPatternTiles (the label before the TCRF-unused block),fix
-0D,7900,Gfx_0D_7900_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
+0D,7900,Gfx_0D_7900_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
 0E,4000,Gfx_0E_4000_MsgStrip,C,"entry 0 of the {lo,hi,bank} table 04:4493, 640 bytes each (constant pitch)",assets
 0E,4280,Gfx_0E_4280_MsgStrip,C,"entry 1 of the {lo,hi,bank} table 04:4493, 640 bytes each (constant pitch)",assets
 0E,4500,Gfx_0E_4500_MsgStrip,C,"entry 2 of the {lo,hi,bank} table 04:4493, 640 bytes each (constant pitch)",assets
@@ -3466,11 +3462,7 @@ bank,addr,name,conf,note,source
 0F,4800,Gfx_0F_4800_Mode08_State00_Init,I,copied to VRAM/WRAM by Mode08_State00_Init (assets/catalog_jp.csv),assets
 0F,5000,Gfx_0F_5000_Mode08_State00_Init,I,copied to VRAM/WRAM by Mode08_State00_Init (assets/catalog_jp.csv),assets
 0F,5500,Gfx_0F_5500_UserMap_LoadPlanetTiles,I,"far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0F,5780,Gfx_0F_5780_UserMap_LoadPlanetTiles,I,"far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0F,5800,Gfx_0F_5800_UserMap_LoadPlanetTiles_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of UserMap_LoadPlanetTiles); classified from its content - see sym_unconclusive",assets
-0F,5904,Gfx_0F_5904_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-0F,596C,Data_0F_596C,?,"no copy site, table or sheet covers these bytes",assets
-0F,5984,Data_0F_5984,?,"no copy site, table or sheet covers these bytes",assets
+0F,5780,Gfx_0F_5780_UserMap_LoadPlanetTiles,C,"40 tiles (640 bytes) copied whole to $8500 by UserMap_LoadPlanetTiles (copy site 09:51DC, assets/copy_sites_jp.csv); the four planet sets are 5500 / 5780 / 5A00 / 5C80; the labels 5800 (Aux), 5904 (Unref), 596C and 5984 (Data) inside it were fill-run splits",hand
 0F,5A00,Gfx_0F_5A00_UserMap_LoadPlanetTiles,I,"far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 640 from the nearby ld bc",assets
 0F,5C80,Gfx_0F_5C80_UserMap_LoadPlanetTiles,I,"far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 640 from the nearby ld bc",assets
 0F,5F00,Gfx_0F_5F00_Head,C,"entry 0 of the {lo,hi,bank} table 05:7F8E, 896 bytes each (constant pitch)",assets
@@ -3491,24 +3483,21 @@ bank,addr,name,conf,note,source
 10,5500,Gfx_10_5500_Head,C,"entry 22 of the {lo,hi,bank} table 05:7F8E, 896 bytes each (constant pitch)",assets
 10,5880,Gfx_10_5880_Head,C,"entry 23 of the {lo,hi,bank} table 05:7F8E, 896 bytes each (constant pitch)",assets
 10,5C00,Gfx_10_5C00_Mode1F_State00_TitleInit,I,copied to VRAM/WRAM by Mode1F_State00_TitleInit (assets/catalog_jp.csv),assets
-10,7400,Src_10_7400_DjTitle_LoadNumeralTile,I,"far pointer loaded by DjTitle_LoadNumeralTile (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-10,7420,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of DjTitle_LoadNumeralTile); classified from its content - see sym_unconclusive",assets
-10,74A0,TileGap_10_74A0,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-10,74A3,Gfx_10_74A3_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
+10,7400,Gfx_10_7400_DjTitle_LoadNumeralTile,C,"numeral table: DjTitle_LoadNumeralTile (05:423A) copies 32 bytes from $7400 + A x 32; 10 entries = 7400-7540 (the next asset starts there); were Gfx_10_7420_..._Aux, TileGap_10_74A0 and Gfx_10_74A3_Unref",hand
 10,7602,Gfx_10_7602_DjLetterGlyphStrip,?,Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420,assets
 10,78A8,TileGap_10_78A8,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 10,78B8,Gfx_10_78B8_Unref,C,"small unread block of 24 bytes (was Data_10_78B8). Owner (review page, 2026-10-13): graphic, by eye.",fix
-10,78E8,Data_10_78E8,?,"no copy site, table or sheet covers these bytes",assets
+10,78E8,TileGap_10_78E8,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_78E8",hand
 10,7908,Gfx_10_7908_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-10,7A08,Data_10_7A08,?,"no copy site, table or sheet covers these bytes",assets
+10,7A08,TileGap_10_7A08,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7A08",hand
 10,7A24,Gfx_10_7A24_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 10,7A80,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, top row (tiles 0-1 of 2x2): exact match of the TCRF image; bottom row at 10:7B80; never on screen, never read in an organic run (README 16.24)",fix
 10,7AA0,Gfx_10_7A24_Unref_Cont,I,continues Gfx_10_7A24_Unref (after the TCRF icon row),fix
 10,7ADE,Gfx_10_7ADE_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 10,7B80,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,C,"TCRF unused ""SOUND print modulation"" icon, bottom row (tiles 2-3 of 2x2); top row at 10:7A80 (README 16.24)",fix
 10,7BA0,Gfx_10_7ADE_Unref_Cont,I,continues Gfx_10_7ADE_Unref (after the TCRF icon row),fix
-10,7BC2,Data_10_7BC2,?,"no copy site, table or sheet covers these bytes",assets
-10,7BE4,Data_10_7BE4,?,"no copy site, table or sheet covers these bytes",assets
+10,7BC2,TileGap_10_7BC2,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7BC2",hand
+10,7BE4,TileGap_10_7BE4,I,"tile-like bytes between unreferenced tile blocks of bank 10, no copy reads them (the coverage run saw only the printer packet sender and forced reads); was Data_10_7BE4",hand
 10,7BF8,Gfx_10_7BF8_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 10,7D51,TileGap_10_7D51,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 10,7D52,Gfx_10_7D52_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
@@ -3516,43 +3505,43 @@ bank,addr,name,conf,note,source
 11,4000,Gfx_11_4000_Anim07_7C8A,C,"entry 3 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
 11,4500,Gfx_11_4500_Anim07_7C8A,C,"entry 8 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
 11,4A00,Gfx_11_4A00_Anim07_7C8A,C,"entry 10 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
-11,4F00,Gfx_11_4F00_MainMenu_LoadBaseTiles,I,copied to VRAM/WRAM by MainMenu_LoadBaseTiles (assets/catalog_jp.csv),assets
+11,4F00,Gfx_11_4F00_MainMenu_LoadBaseTiles,I,"copied to VRAM/WRAM by MainMenu_LoadBaseTiles, MainMenu_DrawUpperItem0 (assets/catalog_jp.csv)",assets
 11,5000,Gfx_11_5000_MainMenu_DrawUpperItem1,I,"far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 11,5200,Gfx_11_5200_MainMenu_DrawUpperItem0,I,"far pointer loaded by MainMenu_DrawUpperItem0 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 11,5300,Gfx_11_5300_MainMenu_DrawUpperItem1,I,"far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
-11,5400,Gfx_11_5400_MainMenuUpperItemFramesA,?,gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_DrawUpperItem1 / 0) (visual),assets
+11,5400,Gfx_11_5400_MainMenuUpperItemFramesA,I,inside the 512-byte block 5300-5500 that MainMenu_DrawUpperItem1 copies (copy site 07:79E1); what the frames show is by eye,hand
 11,5500,Gfx_11_5500_MainMenu_DrawUpperItem0,I,"far pointer loaded by MainMenu_DrawUpperItem0 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 11,5600,Gfx_11_5600_MainMenu_DrawUpperItem1,I,"far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 11,5800,Unused_TCRF_HandNewspaperFrames_Gfx,I,"nine sprite frames of a hand flipping a newspaper (TCRF B16, Unused Graphic Bank 11): 25 tiles per frame in 512-byte slots at 11:5800 + $200*j (j 0-8, the last one cut at 11:693F); arranged by OAM list $BA (OamList_B01_4000_BA, 01:5504, 5 x 5 sprites 40 x 40 px, attr $10, tile T of slot j = 11:5800+$200*j+16*(T-$50)); frames 0 1 3 7 8 equal the TCRF picture pixel for pixel, frames 5 and 6 within 3 px (frame 2 has an extra top row there, frame 4 is clipped and lacks its bottom tile row), and every non-blank cell of that picture is a tile of this span; read only in forced runs; no code that draws list $BA or loads these slots was found (2026-10-13)",fix
-11,7000,Gfx_11_7000_Compose_DrawJitter,I,copied to VRAM/WRAM by Compose_DrawJitter (assets/catalog_jp.csv),assets
+11,7000,Gfx_11_7000_Mode18_State00_Init,I,copied to VRAM/WRAM by Mode18_State00_Init (assets/catalog_jp.csv),assets
 11,7200,Gfx_11_7200_Icon06_5D54,C,"entry 0 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7300,Gfx_11_7300_Icon06_5D54,C,"entry 1 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7400,Gfx_11_7400_Icon06_5D54,C,"entry 2 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7500,Gfx_11_7500_Icon06_5D54,C,"entry 3 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7600,Gfx_11_7600_Icon06_5D54,C,"entry 6 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7700,Gfx_11_7000_Compose_DrawJitter_Part7700,I,copied to VRAM/WRAM by Compose_DrawJitter (assets/catalog_jp.csv),assets
-11,7800,Gfx_11_7800_Compose_DrawJitter,I,copied to VRAM/WRAM by Compose_DrawJitter (assets/catalog_jp.csv),assets
+11,7800,Gfx_11_7800_Mode18_State00_Init,I,copied to VRAM/WRAM by Mode18_State00_Init (assets/catalog_jp.csv),assets
 11,7C40,Gfx_11_7C40_Mode18_DrawThumbFrame,I,"far pointer loaded by Mode18_DrawThumbFrame (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 11,7D00,Gfx_11_7D00_Icon06_5D54,C,"entry 5 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7E00,Gfx_11_7E00_Icon06_5D54,C,"entry 7 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)",assets
 11,7F00,Gfx_11_7800_Compose_DrawJitter_Part7F00,I,copied to VRAM/WRAM by Compose_DrawJitter (assets/catalog_jp.csv),assets
-12,4000,Gfx_12_4000_HotSpotEd_SoundList,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
-12,4800,Gfx_12_4800_HotSpotEd_SoundList,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
+12,4000,Gfx_12_4000_Mode06_State00_Init,I,copied to VRAM/WRAM by Mode06_State00_Init (assets/catalog_jp.csv),assets
+12,4800,Gfx_12_4800_Mode06_State00_Init,I,copied to VRAM/WRAM by Mode06_State00_Init (assets/catalog_jp.csv),assets
 12,48B0,Gfx_12_48B0_LinkMenu_LoadTilesSelected,I,"far pointer loaded by LinkMenu_LoadTilesSelected (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 12,49A0,Gfx_12_49A0_LinkMenu_LoadTilesDeselected,I,"far pointer loaded by LinkMenu_LoadTilesDeselected (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 12,4A40,Gfx_12_4A40_LinkMenu_LoadTilesDeselected,I,"far pointer loaded by LinkMenu_LoadTilesDeselected (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 12,4B30,Gfx_12_4B30_LinkMenu_LoadTilesSelected,I,"far pointer loaded by LinkMenu_LoadTilesSelected (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-12,5000,Gfx_12_5000_HotSpotEd_SoundList,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
+12,5000,Gfx_12_5000_Mode06_State00_Init,I,copied to VRAM/WRAM by Mode06_State00_Init (assets/catalog_jp.csv),assets
 12,5800,Gfx_12_5800_Mode21_State00_Init,I,copied to VRAM/WRAM by Mode21_State00_Init (assets/catalog_jp.csv),assets
 12,6000,Gfx_12_6000_Mode21_State00_Init,I,copied to VRAM/WRAM by Mode21_State00_Init (assets/catalog_jp.csv),assets
 12,6800,Gfx_12_6800_Mode21_State00_Init,I,copied to VRAM/WRAM by Mode21_State00_Init (assets/catalog_jp.csv),assets
-12,7000,Gfx_12_7000_ViewMenu_AnimateBackground,I,copied to VRAM/WRAM by ViewMenu_AnimateBackground (assets/catalog_jp.csv),assets
-12,7800,Gfx_12_7800_ViewMenu_AnimateBackground,I,copied to VRAM/WRAM by ViewMenu_AnimateBackground (assets/catalog_jp.csv),assets
-13,4000,Gfx_13_4000_LinkPick_RequestRemotePage,I,copied to VRAM/WRAM by LinkPick_RequestRemotePage (assets/catalog_jp.csv),assets
-13,4800,Gfx_13_4800_LinkPick_RequestRemotePage,I,copied to VRAM/WRAM by LinkPick_RequestRemotePage (assets/catalog_jp.csv),assets
-13,5000,Gfx_13_5000_LinkPick_RequestRemotePage,I,copied to VRAM/WRAM by LinkPick_RequestRemotePage (assets/catalog_jp.csv),assets
-13,5800,Gfx_13_5800_Mode0F_State00_Init,I,"copied to VRAM/WRAM by Bank04, Mode0F_State00_Init, Unused_Link_SumSlotBuffer (assets/catalog_jp.csv)",assets
-13,5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,I,"far pointer loaded by LinkPick_PageTilesLeft, LinkPick_PageTilesRight, PhotoPicker_LoadPageTabs2For (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+12,7000,Gfx_12_7000_Mode03_State00_Init,I,copied to VRAM/WRAM by Mode03_State00_Init (assets/catalog_jp.csv),assets
+12,7800,Gfx_12_7800_Mode03_State00_Init,I,copied to VRAM/WRAM by Mode03_State00_Init (assets/catalog_jp.csv),assets
+13,4000,Gfx_13_4000_Mode02_State00_Init,I,copied to VRAM/WRAM by Mode02_State00_Init (assets/catalog_jp.csv),assets
+13,4800,Gfx_13_4800_Mode02_State00_Init,I,copied to VRAM/WRAM by Mode02_State00_Init (assets/catalog_jp.csv),assets
+13,5000,Gfx_13_5000_Mode02_State00_Init,I,copied to VRAM/WRAM by Mode02_State00_Init (assets/catalog_jp.csv),assets
+13,5800,Gfx_13_5800_Mode0F_State00_Init,I,"copied to VRAM/WRAM by PhotoPicker_Init, PhotoPicker_LoadPageTabsFor, PhotoPicker_LoadPageTabs2For, Mode0F_State00_Init, Mode0F_State01_ReInit, LinkPick_Substate0_Init, LinkPick_PageTilesRight, LinkPick_PageTilesLeft (assets/catalog_jp.csv)",assets
+13,5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,I,"far pointer loaded by PhotoPicker_LoadPageTabsFor, PhotoPicker_LoadPageTabs2For, LinkPick_PageTilesRight, LinkPick_PageTilesLeft (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5880,Gfx_13_5880_Mode0F_State0A_EraseAll,I,"far pointer loaded by Mode0F_State0A_EraseAll (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5950,Gfx_13_5950_Mode0F_DrawCopyCount,I,"far pointer loaded by Mode0F_DrawCopyCount (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5C80,Src_13_5C80_Tbl65CA_0,I,"target 0 of the {lo,hi,bank} table 09:65CA",assets
@@ -3578,13 +3567,12 @@ bank,addr,name,conf,note,source
 14,6800,Gfx_14_6800_Mode0D_State00_Init,I,copied to VRAM/WRAM by Mode0D_State00_Init (assets/catalog_jp.csv),assets
 14,6CB8,Src_14_6CB8_Tbl65FB_1,I,"target 1 of the {lo,hi,bank} table 09:65FB",assets
 14,7000,Gfx_14_7000_PenMenu_Build,I,"far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1072 from the nearby ld bc",assets
-14,7430,Gfx_14_7430_Mode10_State02_Setup,I,copied to VRAM/WRAM by Mode10_State02_Setup (assets/catalog_jp.csv),assets
+14,7430,Gfx_14_7430_Mode10_State02_Setup,I,"copied to VRAM/WRAM by Mode10_State02_Setup, Mode10_State0A_SaveResult (assets/catalog_jp.csv)",assets
 14,7438,Src_14_7438_Tbl65FB_2,I,"target 2 of the {lo,hi,bank} table 09:65FB",assets
 14,75E0,Gfx_14_75E0_PenMenu_Build,I,"far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 14,7600,Gfx_14_7600_PenMenu_Build,I,"far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from the nearby ld bc",assets
 14,76B0,Sheet_MiscellaneousDoodleRips_14_76B0,I,"Spriter's Resource sheet ""Miscellaneous - Doodle Rips"", 70 tiles",assets
 14,7A00,Gfx_14_7A00_PenMenu_Build,I,"far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-14,7A01,Gfx_14_7A01_PenMenu_Build_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of PenMenu_Build); classified from its content - see sym_unconclusive",assets
 14,7A80,Sheet_MiscellaneousDoodleRips_14_7A80,I,"Spriter's Resource sheet ""Miscellaneous - Doodle Rips"", 63 tiles",assets
 14,7E30,Gfx_14_7E30_Mode10_State02_Setup,I,copied to VRAM/WRAM by Mode10_State02_Setup (assets/catalog_jp.csv),assets
 14,7F00,Gfx_14_7F00_Mode10_State02_Setup,I,copied to VRAM/WRAM by Mode10_State02_Setup (assets/catalog_jp.csv),assets
@@ -3595,28 +3583,28 @@ bank,addr,name,conf,note,source
 15,4510,Gfx_15_4510_MainMenu_LoadBackground_Cont,I,continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block),fix
 15,4580,Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx,I,"TCRF unused graphic: circled X, copy 3 of 3",fix
 15,4590,Gfx_15_4590_MainMenu_LoadBackground_Cont,I,continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block),fix
-15,4600,Gfx_15_4600_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
-15,4900,Gfx_15_4900_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
-15,4A00,Gfx_15_4A00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
-15,4B00,Gfx_15_4B00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
-15,4C00,Gfx_15_4C00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
-15,4D00,Gfx_15_4D00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
-15,4E00,Gfx_15_4E00_MainMenu_LoadBaseTiles,I,copied to VRAM/WRAM by MainMenu_LoadBaseTiles (assets/catalog_jp.csv),assets
+15,4600,Gfx_15_4600_Mode00_State00_Init,I,copied to VRAM/WRAM by Mode00_State00_Init (assets/catalog_jp.csv),assets
+15,4900,Gfx_15_4900_Mode00_State00_Init,I,copied to VRAM/WRAM by Mode00_State00_Init (assets/catalog_jp.csv),assets
+15,4A00,Gfx_15_4A00_MainMenu_LoadBackground,I,"copied to VRAM/WRAM by MainMenu_TransitionToLowerPage, Mode00_State04_Item3_Doodle, Mode00_State06_Item5_Special, Mode00_State07_Item6_Edit, MainMenu_LoadBackground (assets/catalog_jp.csv)",assets
+15,4B00,Gfx_15_4B00_MainMenu_LoadBackground,I,"copied to VRAM/WRAM by MainMenu_TransitionToLowerPage, Mode00_State04_Item3_Doodle, Mode00_State05_Item4_Link, Mode00_State07_Item6_Edit, MainMenu_LoadBackground (assets/catalog_jp.csv)",assets
+15,4C00,Gfx_15_4C00_MainMenu_LoadBackground,I,"copied to VRAM/WRAM by MainMenu_TransitionToLowerPage, Mode00_State04_Item3_Doodle, Mode00_State05_Item4_Link, Mode00_State06_Item5_Special, MainMenu_LoadBackground (assets/catalog_jp.csv)",assets
+15,4D00,Gfx_15_4D00_MainMenu_LoadBackground,I,"copied to VRAM/WRAM by MainMenu_TransitionToLowerPage, Mode00_State05_Item4_Link, Mode00_State06_Item5_Special, Mode00_State07_Item6_Edit, MainMenu_LoadBackground (assets/catalog_jp.csv)",assets
+15,4E00,Gfx_15_4E00_MainMenu_LoadBaseTiles,I,"copied to VRAM/WRAM by Mode00_State03_Item2_Arcade, MainMenu_LoadBaseTiles, MainMenu_DrawUpperItem2 (assets/catalog_jp.csv)",assets
 15,5000,Gfx_15_5000_MainMenu_DrawUpperItem2,I,"far pointer loaded by MainMenu_DrawUpperItem2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 15,5200,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of MainMenu_DrawUpperItem2); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-15,5400,Gfx_15_5400_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
+15,5400,Gfx_15_5400_Mode00_State00_Init,I,copied to VRAM/WRAM by Mode00_State00_Init (assets/catalog_jp.csv),assets
 15,5500,Gfx_15_5500_SlidePlay_ReadKeys_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of SlidePlay_ReadKeys); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-15,5600,Gfx_15_5600_SlidePlay_ReadKeys,I,copied to VRAM/WRAM by SlidePlay_ReadKeys (assets/catalog_jp.csv),assets
-15,5700,Gfx_15_5700_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
-15,5F00,Gfx_15_5F00_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
-15,6700,Gfx_15_6700_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
+15,5600,Gfx_15_5600_Mode00_State00_Init,I,copied to VRAM/WRAM by Mode00_State00_Init (assets/catalog_jp.csv),assets
+15,5700,Gfx_15_5700_Mode04_State00_Init,I,copied to VRAM/WRAM by Mode04_State00_Init (assets/catalog_jp.csv),assets
+15,5F00,Gfx_15_5F00_Mode04_State00_Init,I,copied to VRAM/WRAM by Mode04_State00_Init (assets/catalog_jp.csv),assets
+15,6700,Gfx_15_6700_Mode04_State00_Init,I,copied to VRAM/WRAM by Mode04_State00_Init (assets/catalog_jp.csv),assets
 15,6C00,Gfx_15_6C00_Mode0E_State06_ExchangeSetup,I,"far pointer loaded by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 15,6F00,Gfx_15_6C00_Mode0E_State06_ExchangeSetup_Part6F00,I,"copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (assets/catalog_jp.csv)",assets
 15,7400,Gfx_15_7400_Mode0E_State06_ExchangeSetup,I,"copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (assets/catalog_jp.csv)",assets
 15,7C00,Gfx_15_7C00_Mode0E_State06_ExchangeSetup,I,"copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (assets/catalog_jp.csv)",assets
-16,4000,Gfx_16_4000_LinkMenu_LoadTilesDeselected,I,copied to VRAM/WRAM by LinkMenu_LoadTilesDeselected (assets/catalog_jp.csv),assets
-16,4800,Gfx_16_4800_LinkMenu_LoadTilesDeselected,I,copied to VRAM/WRAM by LinkMenu_LoadTilesDeselected (assets/catalog_jp.csv),assets
-16,5000,Gfx_16_5000_LinkMenu_LoadTilesDeselected,I,copied to VRAM/WRAM by LinkMenu_LoadTilesDeselected (assets/catalog_jp.csv),assets
+16,4000,Gfx_16_4000_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
+16,4800,Gfx_16_4800_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
+16,5000,Gfx_16_5000_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
 16,5580,Gfx_16_5580_Anim07_7C8A,C,"entry 7 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
 16,5A80,Gfx_16_5A80_Anim07_7C8A,C,"entry 0 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
 16,5F80,Gfx_16_5F80_Anim07_7C8A,C,"entry 1 of the {lo,hi,bank} table 07:7C8A, 1280 bytes each (constant pitch)",assets
@@ -3631,13 +3619,13 @@ bank,addr,name,conf,note,source
 16,7780,Gfx_16_7780_Anim07_7C1B,C,"entry 9 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
 16,7980,Gfx_16_7980_Anim07_7C1B,C,"entry 10 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
 16,7B80,Gfx_16_7B80_Anim07_7C1B,C,"entry 11 of the {lo,hi,bank} table 07:7C1B, 512 bytes each (constant pitch)",assets
-16,7D80,Map_16_7D80_Compose_DrawJitter,I,copied to VRAM/WRAM by Compose_DrawJitter (assets/catalog_jp.csv),assets
-16,7FC0,Map_16_7FC0_Compose_DrawJitter,I,copied to VRAM/WRAM by Compose_DrawJitter (assets/catalog_jp.csv),assets
+16,7D80,Map_16_7D80_Mode18_State00_Init,I,copied to VRAM/WRAM by Mode18_State00_Init (assets/catalog_jp.csv),assets
+16,7FC0,Map_16_7FC0_Mode18_State00_Init,I,copied to VRAM/WRAM by Mode18_State00_Init (assets/catalog_jp.csv),assets
 17,4000,Gfx_17_4000_ShootMenuIconsA,?,icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init,assets
-17,4140,Gfx_17_4140_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
-17,4180,Gfx_17_4180_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
+17,4140,Gfx_17_4140_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
+17,4180,Gfx_17_4180_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
 17,4200,Gfx_17_4200_ShootCounterIcons,?,"digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcons, Compose_DrawFreeCount",assets
-17,4680,Gfx_17_4680_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
+17,4680,Gfx_17_4680_Mode0F_State05_ConfirmInit,I,"copied to VRAM/WRAM by Mode0F_State05_ConfirmInit, Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode14_State00_Init, Mode14_State0C_Reinit, Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv)",assets
 17,4690,Gfx_17_4680_Compose_Split_DrawMakeBlink_Part4690,I,"copied to VRAM/WRAM by Compose_Fusion_DrawMakeBlink, Compose_Split_DrawMakeBlink, Mode0E_State02_MessageStrip (assets/catalog_jp.csv)",assets
 17,46A0,Gfx_17_46A0_Mode0F_State05_ConfirmInit,I,"far pointer loaded by Mode0F_State05_ConfirmInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 17,4700,Gfx_17_4700_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from the nearby ld bc",assets
@@ -3646,10 +3634,10 @@ bank,addr,name,conf,note,source
 17,47C0,Gfx_17_47C0_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 17,4800,Gfx_17_4800_Compose_DrawFreeCount,I,"far pointer loaded by Compose_DrawFreeCount, Shoot_DrawShotsLeft, Unused_Link_DrawPhotoNumber (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
 17,4820,Gfx_17_4820_ShootMenuIconsB,?,icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual),assets
-17,4940,Gfx_17_4940_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
+17,4940,Gfx_17_4940_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
 17,4950,Gfx_17_4950_Shoot_DrawTimerMinutes,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Shoot_DrawTimerMinutes (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-17,4960,Gfx_17_4960_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
-17,4980,Gfx_17_4980_Compose_Split_DrawMakeBlink,I,"copied to VRAM/WRAM by Compose_Fusion_DrawMakeBlink, Compose_Split_DrawMakeBlink, Mode14_State00_Init (assets/catalog_jp.csv)",assets
+17,4960,Gfx_17_4960_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
+17,4980,Gfx_17_4980_Mode17_State08_Split_Build,I,"copied to VRAM/WRAM by Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode14_State00_Init, Shoot_RestoreViewScreen, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
 17,4A60,Gfx_17_4A60_Mode0E_State04_PickDone,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 17,4B60,Gfx_17_4B60_Mode0E_State04_PickDone,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 17,4B90,Gfx_17_4B90_Mode0E_State04_PickDone,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -3658,8 +3646,8 @@ bank,addr,name,conf,note,source
 17,5000,Gfx_17_5000_Mode14_State04_OptionsPage,I,"far pointer loaded by Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 17,5200,Gfx_17_5200_Mode14_State04_OptionsPage,I,"far pointer loaded by Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 17,5400,Gfx_17_5400_Shoot_LoadBurstIcons,I,"far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-17,5440,Gfx_17_5440_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
-17,54E0,Gfx_17_54E0_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_TimerTick (assets/catalog_jp.csv)",assets
+17,5440,Gfx_17_5440_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Shoot_RestoreViewScreen, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
+17,54E0,Gfx_17_54E0_Mode14_State00_Init,I,"copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (assets/catalog_jp.csv)",assets
 17,5500,Gfx_17_5500_Unused_MainMenuTiles,C,"tile block (304 tiles, 4,864 bytes) of an unused one-page main menu: the map 25:7814 uses ids 0-233 of it and BGB draws the flow-chart menu with it (README 16.25); tiles 234-303 are line / arc fragments (by eye). Replaces the owner's 'glyph strips of the SHOOT option menus' reading (by eye), which the seam search and BGB do not support. Identical in the international ROM; no copy site reaches it.",fix
 17,6800,Gfx_17_6800_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 17,7000,Gfx_17_7000_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
@@ -3670,36 +3658,36 @@ bank,addr,name,conf,note,source
 18,4000,Gfx_18_4000_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 18,4800,Gfx_18_4800_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 18,5000,Gfx_18_5000_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
-18,5470,Gfx_18_5470_Mode1C_DrawOptionScreen,I,copied to VRAM/WRAM by Mode1C_DrawOptionScreen (assets/catalog_jp.csv),assets
+18,5470,Gfx_18_5470_Mode1E_State00_Init,I,copied to VRAM/WRAM by Mode1E_State00_Init (assets/catalog_jp.csv),assets
 18,5A50,Unused_TCRF_MarginPrint_BFilmRoll_Gfx,I,TCRF unused graphic: film roll with a B for the margin-print option (6 tiles); loaded with the option screen but never stably on screen (README 16.24),fix
 18,5AB0,Gfx_18_5AB0_Mode1C_DrawOptionScreen_Cont,I,continues the span of Gfx_18_5470_Mode1C_DrawOptionScreen (the label before the TCRF-unused block),fix
-18,5C70,Gfx_18_5C70_Mode1C_DrawOptionScreen,I,copied to VRAM/WRAM by Mode1C_DrawOptionScreen (assets/catalog_jp.csv),assets
+18,5C70,Gfx_18_5C70_Mode1E_State00_Init,I,"copied to VRAM/WRAM by Mode1E_State00_Init, Print_LoadDigitTile (assets/catalog_jp.csv)",assets
 18,5F90,Unused_TCRF_MarginPrint_OutlinedText_Gfx,I,TCRF unused graphic: outlined Japanese text of the margin-print option (12 tiles); never stably on screen (README 16.24),fix
 18,6050,Gfx_18_6050_Mode1C_DrawOptionScreen_Cont,I,continues the span of Gfx_18_5C70_Mode1C_DrawOptionScreen (the label before the TCRF-unused block),fix
-18,6470,Gfx_18_6470_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
-18,6C70,Gfx_18_6C70_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
+18,6470,Gfx_18_6470_Mode1B_State00_Init,I,copied to VRAM/WRAM by Mode1B_State00_Init (assets/catalog_jp.csv),assets
+18,6C70,Gfx_18_6C70_Mode1B_State00_Init,I,copied to VRAM/WRAM by Mode1B_State00_Init (assets/catalog_jp.csv),assets
 18,7400,Gfx_18_7400_Mode1C_State02_ShowPrintScreen,I,"far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_State02_ShowPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 18,7470,Gfx_18_7400_Mode1C_State02_ShowPrintScreen_Part7470,I,copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv),assets
 18,7900,Gfx_18_7900_Mode1C_LoadToggleTiles,I,"far pointer loaded by Mode1C_LoadToggleTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc",assets
 18,79C0,Gfx_18_79C0_Mode1C_LoadToggleTiles,I,"far pointer loaded by Mode1C_LoadToggleTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc",assets
-18,7A80,Gfx_18_7A80_Mode1C_State02_ShowPrintScreen,I,copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv),assets
+18,7A80,Gfx_18_7A80_Mode1C_State02_ShowPrintScreen,I,"copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen, Mode1C_State04_OptionsMenu (assets/catalog_jp.csv)",assets
 18,7B00,Gfx_18_7B00_Mode1C_State02_ShowPrintScreen,I,copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv),assets
-18,7BA0,Gfx_18_7BA0_Mode0E_State02_MessageStrip,I,"copied to VRAM/WRAM by Mode0E_State02_MessageStrip, Mode0E_State0C_ExchangeWaitB (assets/catalog_jp.csv)",assets
-18,7C40,Gfx_18_7C40_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
-18,7D60,Gfx_18_7D60_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
+18,7BA0,Gfx_18_7BA0_Mode0E_State04_PickDone,I,"copied to VRAM/WRAM by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond (assets/catalog_jp.csv)",assets
+18,7C40,Gfx_18_7C40_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
+18,7D60,Gfx_18_7D60_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
 18,7D80,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of Mode0F_State04_LeaveSelected); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-18,7E80,Gfx_18_7E80_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
-18,7F60,Gfx_18_7F60_Mode1C_State02_ShowPrintScreen,I,copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv),assets
-19,4000,Gfx_19_4000_Bank07,I,copied to VRAM/WRAM by Bank07 (assets/catalog_jp.csv),assets
-19,4800,Gfx_19_4800_Bank07,I,copied to VRAM/WRAM by Bank07 (assets/catalog_jp.csv),assets
-19,5000,Gfx_19_5000_Bank07,I,copied to VRAM/WRAM by Bank07 (assets/catalog_jp.csv),assets
+18,7E80,Gfx_18_7E80_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
+18,7F60,Gfx_18_7F60_Mode1C_State02_ShowPrintScreen,I,"copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen, Mode1C_DrawPrintScreen (assets/catalog_jp.csv)",assets
+19,4000,Gfx_19_4000_Mode0E_State00_Init,I,copied to VRAM/WRAM by Mode0E_State00_Init (assets/catalog_jp.csv),assets
+19,4800,Gfx_19_4800_Mode0E_State00_Init,I,copied to VRAM/WRAM by Mode0E_State00_Init (assets/catalog_jp.csv),assets
+19,5000,Gfx_19_5000_Mode0E_State00_Init,I,copied to VRAM/WRAM by Mode0E_State00_Init (assets/catalog_jp.csv),assets
 19,5260,Gfx_19_5260_Mode08_State13_CreditsPageA,I,"far pointer loaded by Mode08_State13_CreditsPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 19,5800,Gfx_19_5260_Mode08_State13_CreditsPageA_Part5800,I,copied to VRAM/WRAM by Mode08_State13_CreditsPageA (assets/catalog_jp.csv),assets
 19,5A60,Gfx_19_5A60_Mode08_State13_CreditsPageA,I,copied to VRAM/WRAM by Mode08_State13_CreditsPageA (assets/catalog_jp.csv),assets
 19,6260,Gfx_19_6260_Mode08_State13_CreditsPageA,I,copied to VRAM/WRAM by Mode08_State13_CreditsPageA (assets/catalog_jp.csv),assets
-19,6460,Gfx_19_6460_Mode21_State07_RaceEnd,I,copied to VRAM/WRAM by Mode21_State07_RaceEnd (assets/catalog_jp.csv),assets
-19,6560,Gfx_19_6560_Mode21_State07_RaceEnd,I,copied to VRAM/WRAM by Mode21_State07_RaceEnd (assets/catalog_jp.csv),assets
-19,6D60,Gfx_19_6D60_Mode21_State07_RaceEnd,I,copied to VRAM/WRAM by Mode21_State07_RaceEnd (assets/catalog_jp.csv),assets
+19,6460,Gfx_19_6460_Mode21_State0B_ResultSetup,I,copied to VRAM/WRAM by Mode21_State0B_ResultSetup (assets/catalog_jp.csv),assets
+19,6560,Gfx_19_6560_Mode21_State0B_ResultSetup,I,copied to VRAM/WRAM by Mode21_State0B_ResultSetup (assets/catalog_jp.csv),assets
+19,6D60,Gfx_19_6D60_Mode21_State0B_ResultSetup,I,copied to VRAM/WRAM by Mode21_State0B_ResultSetup (assets/catalog_jp.csv),assets
 19,7160,Gfx_19_7160_Run_PodiumSetup,I,copied to VRAM/WRAM by Run_PodiumSetup (assets/catalog_jp.csv),assets
 19,716D,TileGap_19_716D,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 19,7171,Gfx_19_7160_Run_PodiumSetup_Part7171,I,copied to VRAM/WRAM by Run_PodiumSetup (assets/catalog_jp.csv),assets
@@ -3713,17 +3701,15 @@ bank,addr,name,conf,note,source
 19,7560,Gfx_19_7560_Mode0F_State0A_EraseAll,I,"far pointer loaded by Mode0F_State0A_EraseAll (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 640 from the nearby ld bc",assets
 19,77E0,Gfx_19_77E0_Mode0F_State0A_EraseAll,I,"far pointer loaded by Mode0F_State0A_EraseAll (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1536 from the nearby ld bc",assets
 19,7E60,Src_19_7E60_Tbl53A6_4,I,"target 4 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset",assets
-1A,4000,Gfx_1A_4000_DjTitle_DrawFrame3,I,copied to VRAM/WRAM by DjTitle_DrawFrame3 (assets/catalog_jp.csv),assets
-1A,4D60,Gfx_1A_4D60_DjPerf_DrawTempo,I,"far pointer loaded by DjPerf_DrawLevelDigit, DjPerf_DrawTempo (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-1A,4D80,Gfx_1A_4D80_DjPerf_DrawTempo_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of DjPerf_DrawTempo); classified from its content - see sym_unconclusive",assets
+1A,4000,Gfx_1A_4000_Mode1F_State04_PerformanceSetup,I,copied to VRAM/WRAM by Mode1F_State04_PerformanceSetup (assets/catalog_jp.csv),assets
+1A,4D60,Gfx_1A_4D60_DjPerf_DrawTempo,C,"digit table: DjPerf_DrawTempo (05:56F4) and DjPerf_DrawLevelDigit copy 16 bytes (1 tile) from $4D60 + digit x 16; 10 entries = 4D60-4E00, rendered as the digits 0-9; was followed by Gfx_1A_4D80_DjPerf_DrawTempo_Aux",hand
 1A,4E00,Gfx_1A_4E00_Mode1F_State05_Performance,I,"far pointer loaded by Mode1F_State05_Performance (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 672 from the nearby ld bc",assets
 1A,50A0,Gfx_1A_50A0_Mode1F_State06_SavePanel,I,"far pointer loaded by Mode1F_State06_SavePanel (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc",assets
-1A,5160,Data_1A_5160,?,"no copy site, table or sheet covers these bytes",assets
-1A,5163,TileGap_1A_5163,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
+1A,5160,TileGap_1A_5160,I,49 bytes of tile-like data (starts with 3 zero bytes) after Gfx_1A_50A0 (0xC0 copied by Mode1F_State06_SavePanel) and before the owner-reviewed graphic 5182; no copy reads it; was Data_1A_5160 + TileGap_1A_5163,hand
 1A,5182,Gfx_1A_5182_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-1A,5200,Gfx_1A_5200_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
-1A,5A00,Gfx_1A_5A00_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
-1A,6200,Gfx_1A_6200_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
+1A,5200,Gfx_1A_5200_Mode08_State03_CardInit,I,copied to VRAM/WRAM by Mode08_State03_CardInit (assets/catalog_jp.csv),assets
+1A,5A00,Gfx_1A_5A00_Mode08_State03_CardInit,I,copied to VRAM/WRAM by Mode08_State03_CardInit (assets/catalog_jp.csv),assets
+1A,6200,Gfx_1A_6200_Mode08_State03_CardInit,I,copied to VRAM/WRAM by Mode08_State03_CardInit (assets/catalog_jp.csv),assets
 1A,6400,Gfx_1A_6400_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 1A,6C00,Gfx_1A_6C00_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 1A,7400,Gfx_1A_7400_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
@@ -3732,93 +3718,80 @@ bank,addr,name,conf,note,source
 1A,7CB0,Gfx_1A_7600_Album_ShowPageScreenB_Cont,I,continues Gfx_1A_7600_Album_ShowPageScreenB (after the TCRF icon candidate),fix
 1A,7D80,Unused_TCRF_PhotoOption_BCancel_Gfx,C,"TCRF unused graphic ""B CANCEL"" (circled B + the word CANCEL, 6 tiles): exact match of the TCRF image (2x upscale, 0 differing pixels of 384); never on screen in any replay and never read in an organic run (README 16.24)",fix
 1A,7E00,Gfx_1A_7E00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-1B,4000,Gfx_1B_4000_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, ScrollEngine_RowToOffset (assets/catalog_jp.csv)",assets
-1B,4800,Gfx_1B_4800_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, ScrollEngine_RowToOffset (assets/catalog_jp.csv)",assets
-1B,5000,Gfx_1B_5000_ScrollEngine_RowToOffset,I,copied to VRAM/WRAM by ScrollEngine_RowToOffset (assets/catalog_jp.csv),assets
-1B,5100,Gfx_1B_5100_Mode20_State08_Leave,I,copied to VRAM/WRAM by Mode20_State08_Leave (assets/catalog_jp.csv),assets
-1B,6100,Gfx_1B_6100_Mode21_PickCharacterKeys,I,copied to VRAM/WRAM by Mode21_PickCharacterKeys (assets/catalog_jp.csv),assets
-1B,6680,Gfx_1B_6680_Mode21_PickCharacterKeys,I,copied to VRAM/WRAM by Mode21_PickCharacterKeys (assets/catalog_jp.csv),assets
-1B,6E80,Src_1B_6E80_Run_DrawTimerDigitB,I,"far pointer loaded by Run_DrawTimerDigitB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-1B,6EA0,Data_1B_6EA0,?,"no copy site, table or sheet covers these bytes",assets
-1B,6EBA,Gfx_1B_6EBA_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1B,6F7C,Gfx_1B_6F7C_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
+1B,4000,Gfx_1B_4000_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, CommentEditor_Sub0_Init (assets/catalog_jp.csv)",assets
+1B,4800,Gfx_1B_4800_Mode1C_State08_PrintJob,I,"copied to VRAM/WRAM by Mode1C_State08_PrintJob, CommentEditor_Sub0_Init (assets/catalog_jp.csv)",assets
+1B,5000,Gfx_1B_5000_CommentEditor_Sub0_Init,I,copied to VRAM/WRAM by CommentEditor_Sub0_Init (assets/catalog_jp.csv),assets
+1B,5100,Gfx_1B_5100_Mode20_State09_ResultInit,I,copied to VRAM/WRAM by Mode20_State09_ResultInit (assets/catalog_jp.csv),assets
+1B,6100,Gfx_1B_6100_Mode21_State02_RaceSceneInit,I,copied to VRAM/WRAM by Mode21_State02_RaceSceneInit (assets/catalog_jp.csv),assets
+1B,6680,Gfx_1B_6680_Mode21_State02_RaceSceneInit,I,copied to VRAM/WRAM by Mode21_State02_RaceSceneInit (assets/catalog_jp.csv),assets
+1B,6E80,Gfx_1B_6E80_Run_DrawTimerDigitB,C,"10 digits 0-9 of 32 bytes (2 tiles, 8 x 16 pixels), rendered; Run_DrawTimerDigitB (09:717E) copies 32 bytes from $6E80 + digit x 32 to VRAM; the last 8 digits were Data_1B_6EA0 / Gfx_1B_6EBA_Unref / Gfx_1B_6F7C_Unref (never shown in a run)",hand
 1B,6FC0,Gfx_1B_6FC0_Mode21_State05_ReadySteadyGo,I,copied to VRAM/WRAM by Mode21_State05_ReadySteadyGo (assets/catalog_jp.csv),assets
 1B,7100,Gfx_1B_7100_Mode1D_State06_LoadWaitScreen,I,copied to VRAM/WRAM by Mode1D_State06_LoadWaitScreen (assets/catalog_jp.csv),assets
 1B,7900,Gfx_1B_7900_Mode1D_State06_LoadWaitScreen,I,copied to VRAM/WRAM by Mode1D_State06_LoadWaitScreen (assets/catalog_jp.csv),assets
-1C,4010,Sheet_MenusShootMenu_1C_4010,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 49 tiles",assets
-1C,4241,Gfx_1C_4241_MenusShootMenu_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MenusShootMenu); classified from its content - see sym_unconclusive",assets
-1C,44B0,Gfx_1C_44B0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1C,4670,Sheet_MenusShootMenu_1C_4670,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 151 tiles",assets
-1C,4F60,Gfx_1C_4F60_Mode1A_State02_Setup,I,copied to VRAM/WRAM by Mode1A_State02_Setup (assets/catalog_jp.csv),assets
+1C,4010,Sheet_MenusShootMenu_1C_4010,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 49 tiles | also inside record 1 of page 1 of Parlor_PageTbl (1C:4000 +$0800 -> $9000, C)",assets
+1C,4241,Gfx_1C_4241_Parlor_Page1,C,"inside record 1 of page 1 (1C:4000 +$0800 -> $9000, VRAM $9241 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+1C,44B0,Gfx_1C_44B0_Parlor_Page1,C,"inside record 1 of page 1 (1C:4000 +$0800 -> $9000, VRAM $94B0 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+1C,4670,Sheet_MenusShootMenu_1C_4670,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 151 tiles | also inside record 1 of page 1 of Parlor_PageTbl (1C:4000 +$0800 -> $9000, C)",assets
+1C,4F60,Gfx_1C_4F60_Mode1A_State02_Setup,I,"copied to VRAM/WRAM by Mode1A_State02_Setup (assets/catalog_jp.csv) | also inside record 2 of page 1 of Parlor_PageTbl (1C:4800 +$0800 -> $8800, C)",assets
 1C,5160,TileGap_1C_5160,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 1C,51A0,Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete,I,"far pointer loaded by Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 1C,53A0,Gfx_1C_53A0_Mode1A_State02_Setup,I,copied to VRAM/WRAM by Mode1A_State02_Setup (assets/catalog_jp.csv),assets
-1C,5600,Gfx_1C_5600_Album_ShowPageScreenB,I,"far pointer loaded by Album_LoadBorderScreen, Album_ShowPageScreenB, Mode1C_DrawOptionScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-1C,5620,Data_1C_5620,?,"no copy site, table or sheet covers these bytes",assets
-1C,5622,TileGap_1C_5622,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-1C,5623,Data_1C_5623,?,"no copy site, table or sheet covers these bytes",assets
-1C,564D,TileGap_1C_564D,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-1C,564E,Data_1C_564E,?,"no copy site, table or sheet covers these bytes",assets
-1C,5660,Src_1C_5660_HotSpotEd_CopyNumberTile,I,"far pointer loaded by HotSpotEd_CopyNumberTile (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from the nearby ld bc",assets
-1C,5670,Gfx_1C_5670_HotSpotEd_CopyNumberTile_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of HotSpotEd_CopyNumberTile); classified from its content - see sym_unconclusive",assets
+1C,5600,Gfx_1C_5600_Album_ShowPageScreenB,I,"far pointer loaded by Album_ShowPageScreenB, Album_LoadBorderScreen, Shoot_DrawOptionPanel, Mode1C_DrawOptionScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+1C,5620,TileGap_1C_5620,I,64 bytes of tile-like data between the loaded 5600 block (32 bytes copied) and the digit table 5660: never copied; was Data_1C_5620 + TileGap_1C_5622 + Data_1C_5623 + TileGap_1C_564D + Data_1C_564E (fill-run splits),hand
+1C,5660,Gfx_1C_5660_HotSpotEd_CopyNumberTile,C,"digit table: HotSpotEd_CopyNumberTile (03:74C7) copies 16 bytes (1 tile) from $5660 + digit x 16 (+ B, 0 or a small offset); 10 entries = 5660-5700; was followed by Gfx_1C_5670_..._Aux",hand
 1C,570E,TileGap_1C_570E,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
 1C,5710,Gfx_1C_5710_HotSpotEd_ShowJump,I,"far pointer loaded by HotSpotEd_ShowJump (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from the nearby ld bc",assets
-1C,5720,Data_1C_5720,?,"no copy site, table or sheet covers these bytes",assets
-1C,5760,Gfx_1C_5760_HotSpotEd_CopyNumberTile,I,"far pointer loaded by HotSpotEd_CopyNumberTile (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-1C,57A0,Gfx_1C_57A0_HotSpotEd_CopyNumberTile_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of HotSpotEd_CopyNumberTile); classified from its content - see sym_unconclusive",assets
-1C,58A0,Gfx_1C_58A0_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State04_LeaveSelected (assets/catalog_jp.csv)",assets
+1C,5720,TileGap_1C_5720,I,64 bytes of tile-like data between Gfx_1C_5710_HotSpotEd_ShowJump (16 bytes copied) and the icon table 5760; no copy reads it; was Data_1C_5720,hand
+1C,5760,Gfx_1C_5760_HotSpotEd_ShowEffectIcon,I,"64-byte entries: 03:74EA-7504 copies 64 bytes from $5760 + A x 64 to $8CF0 (A = byte of the table $D657 indexed by $D665, swap a then two shifts left); the icons of the hot-spot editor; the block 57A0-58A0 was Gfx_1C_57A0_..._Aux. Extent of the table not known (the extra icons at 5920 are TCRF-unused ones)",hand
+1C,58A0,Gfx_1C_58A0_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State05_ConfirmInit (assets/catalog_jp.csv)",assets
 1C,5920,Unused_TCRF_HotSpotEffectIcons_Extra_Gfx,I,"TCRF unused graphics: the 8 extra hot-spot effect icons (32 tiles); on screen only in runs that force the effect number above 7 (README 16.8, 16.24)",fix
 1C,5B20,Gfx_1C_5B20_Mode0C_State02_Setup_Cont,I,continues the span of Gfx_1C_58A0_Mode0C_State02_Setup (the label before the TCRF-unused block),fix
-1C,5B60,Gfx_1C_5B60_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State04_LeaveSelected (assets/catalog_jp.csv)",assets
-1C,5B80,Gfx_1C_5B80_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-1C,5BC0,Data_1C_5BC0,?,"no copy site, table or sheet covers these bytes",assets
-1C,5BDA,TileGap_1C_5BDA,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
+1C,5B60,Gfx_1C_5B60_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State05_ConfirmInit (assets/catalog_jp.csv)",assets
+1C,5B80,Gfx_1C_5B80_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode1A_State02_Setup, Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage, Mode1C_State04_OptionsMenu (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+1C,5BC0,TileGap_1C_5BC0,I,32 bytes of tile-like data between two loaded PhotoArrows blocks (5B80+0x40 and 5BE0): no copy reads it; was Data_1C_5BC0 + TileGap_1C_5BDA,hand
 1C,5BE0,Gfx_1C_5BE0_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 1C,5C20,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of Mode09_State02_PhotoArrows); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-1C,5C60,Gfx_1C_5C60_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State04_LeaveSelected (assets/catalog_jp.csv)",assets
-1C,5C80,Gfx_1C_5C80_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-1C,5CC0,Data_1C_5CC0,?,"no copy site, table or sheet covers these bytes",assets
-1C,5CCB,TileGap_1C_5CCB,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-1C,5CD3,Data_1C_5CD3,?,"no copy site, table or sheet covers these bytes",assets
+1C,5C60,Gfx_1C_5C60_Mode0C_State02_Setup,I,"copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State05_ConfirmInit (assets/catalog_jp.csv)",assets
+1C,5C80,Gfx_1C_5C80_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode1A_State02_Setup, Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage, Mode1C_State04_OptionsMenu (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+1C,5CC0,TileGap_1C_5CC0,I,32 bytes of tile-like data between two loaded PhotoArrows blocks (5C80+0x40 and 5CE0): no copy reads it; was Data_1C_5CC0 + TileGap_1C_5CCB + Data_1C_5CD3,hand
 1C,5CE0,Gfx_1C_5CE0_Mode09_State02_PhotoArrows,I,"far pointer loaded by Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows, Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-1C,5D20,Data_1C_5D20,?,"no copy site, table or sheet covers these bytes",assets
-1C,5D47,TileGap_1C_5D47,I,bytes of a 2bpp tile block that no copy reads (organic readers on both sides),assets
-1C,5D48,Data_1C_5D48,?,"no copy site, table or sheet covers these bytes",assets
+1C,5D20,TileGap_1C_5D20,I,64 bytes of tile-like data after the PhotoArrows block 5CE0 (0x40 copied) and before Gfx_1C_5D60: no copy reads it; was Data_1C_5D20 + TileGap_1C_5D47 + Data_1C_5D48,hand
 1C,5D60,Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete,I,"far pointer loaded by HotSpotEd_ShowJumpThumb, Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc",assets
 1C,5E20,Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete,I,"far pointer loaded by HotSpotEd_ShowJumpThumb, Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 1C,5E60,Gfx_1C_5E60_Link_ShowScreenA,I,"copied to VRAM/WRAM by Link_ShowScreenA, Link_ShowScreenB (assets/catalog_jp.csv)",assets
 1C,6660,Gfx_1C_6660_Link_ShowScreenA,I,"copied to VRAM/WRAM by Link_ShowScreenA, Link_ShowScreenB (assets/catalog_jp.csv)",assets
 1C,6D50,Gfx_1C_6D50_Link_ShowScreenB,I,"far pointer loaded by Link_ShowScreenA, Link_ShowScreenB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-1C,6D60,Data_1C_6D60_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
+1C,6D60,Data_1C_6D60_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup (assets/catalog_jp.csv),assets
 1C,6DE0,Gfx_1C_6D60_Mode1F_State07_QuitPanel_Part6DE0,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
 1C,6E60,Src_1C_6E60_Mode1F_State08_EditPagesSetup,I,"far pointer loaded by Mode1F_State08_EditPagesSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 1C,6F60,Src_1C_6F60_Mode1F_State08_EditPagesSetup,I,"far pointer loaded by Mode1F_State08_EditPagesSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 1C,7060,Src_1C_7060_Mode1F_State08_EditPagesSetup,I,"far pointer loaded by Mode1F_State08_EditPagesSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-1C,7260,Gfx_1C_7260_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
-1C,7860,Gfx_1C_7860_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
+1C,7260,Gfx_1C_7260_Mode1F_State08_EditPagesSetup,I,copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup (assets/catalog_jp.csv),assets
+1C,7860,Gfx_1C_7860_Mode1F_State08_EditPagesSetup,I,copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup (assets/catalog_jp.csv),assets
 1C,7C60,Map_1C_7C60_Mode08_CreditsReal,I,copied to VRAM/WRAM by Mode08_CreditsReal (assets/catalog_jp.csv),assets
 1C,7D00,Map_1C_7D00_Mode08_State13_CreditsPageA,I,"far pointer loaded by Mode08_State13_CreditsPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 1C,7EA0,Map_1C_7EA0_Mode08_State13_CreditsPageA,I,"far pointer loaded by Mode08_State13_CreditsPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 352 from the nearby ld bc",assets
-1D,4000,Gfx_1D_4000_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
-1D,4300,Gfx_1D_4300_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
+1D,4000,Gfx_1D_4000_Mode1F_State08_EditPagesSetup,I,"copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup, Mode1F_State0B_PageNoise (assets/catalog_jp.csv)",assets
+1D,4300,Gfx_1D_4300_Mode1F_State08_EditPagesSetup,I,"copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup, Mode1F_State0B_PageNoise (assets/catalog_jp.csv)",assets
 1D,4500,Gfx_1D_4500_Mode1F_State09_PageSound1,I,"far pointer loaded by Mode1F_State09_PageSound1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 768 from the nearby ld bc",assets
 1D,4800,Gfx_1D_4800_Mode1F_State09_PageSound1,I,"far pointer loaded by Mode1F_State09_PageSound1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 1D,4A00,Gfx_1D_4A00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 768 from the nearby ld bc",assets
 1D,4D00,Gfx_1D_4D00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 1D,4F00,Gfx_1D_4F00_ResultPic3_Equator_Tune2A,C,"picture 3 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 2A; seen in BGB (SHOOT parlor RUN)",assets
-1D,5D00,Gfx_1D_5D00_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
-1D,6B10,Sheet_MenusShootMenu_1D_6B10,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 46 tiles",assets
-1D,6D11,Gfx_1D_6D11_MenusShootMenu_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MenusShootMenu); classified from its content - see sym_unconclusive",assets
-1D,724E,Gfx_1D_724E_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1D,72A0,Sheet_MenusShootMenu_1D_72A0,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 69 tiles",assets
-1D,7631,Gfx_1D_7631_MenusShootMenu_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MenusShootMenu); classified from its content - see sym_unconclusive",assets
-1D,7796,Gfx_1D_7796_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-1D,78E0,Sheet_MiscellaneousStampsJpn_1D_78E0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 35 tiles",assets
-1D,7940,Src_1D_7940_Tbl539D_5,I,"target 5 of the {lo,hi,bank} table 04:539D",assets
-1D,79A0,Src_1D_79A0_Tbl539D_0,I,"target 0 of the {lo,hi,bank} table 04:539D",assets
-1D,7A00,Src_1D_7A00_Tbl539D_16,I,"target 16 of the {lo,hi,bank} table 04:539D",assets
-1D,7A60,Src_1D_7A60_Tbl539D_17,I,"target 17 of the {lo,hi,bank} table 04:539D",assets
-1D,7AC0,Src_1D_7AC0_Tbl539D_23,I,"target 23 of the {lo,hi,bank} table 04:539D",assets
+1D,5D00,Gfx_1D_5D00_Mode20_State02_GameSetup,I,copied to VRAM/WRAM by Mode20_State02_GameSetup (assets/catalog_jp.csv),assets
+1D,6B10,Sheet_MenusShootMenu_1D_6B10,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 46 tiles | also inside record 1 of page 0 of Parlor_PageTbl (1D:6B00 +$0800 -> $9000, C)",assets
+1D,6D11,Gfx_1D_6D11_Parlor_Page0,C,"inside record 1 of page 0 (1D:6B00 +$0800 -> $9000, VRAM $9211 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+1D,724E,Gfx_1D_724E_Parlor_Page0,C,"inside record 1 of page 0 (1D:6B00 +$0800 -> $9000, VRAM $974E onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+1D,72A0,Sheet_MenusShootMenu_1D_72A0,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 69 tiles | also inside record 1 of page 0 of Parlor_PageTbl (1D:6B00 +$0800 -> $9000, C)",assets
+1D,7631,Gfx_1D_7631_Parlor_Page0,C,"inside record 2 of page 0 (1D:7300 +$0800 -> $8800, VRAM $8B31 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+1D,7796,Gfx_1D_7796_Parlor_Page0,C,"inside record 2 of page 0 (1D:7300 +$0800 -> $8800, VRAM $8C96 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+1D,7860,Gfx_1D_7860_Mode1F_State08_EditPagesSetup,C,"0x300 bytes from 7860 copied by Mode1F_State08_EditPagesSetup (copy site 05:45D9); the pieces 7940 / 79A0 / 7A00 / 7A60 / 7AC0 inside it are also loaded one by one through the pointer table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",hand
+1D,78E0,Sheet_MiscellaneousStampsJpn_1D_78E0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 35 tiles | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",assets
+1D,7940,Src_1D_7940_Tbl539D_5,I,"target 5 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",assets
+1D,79A0,Src_1D_79A0_Tbl539D_0,I,"target 0 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",assets
+1D,7A00,Src_1D_7A00_Tbl539D_16,I,"target 16 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",assets
+1D,7A60,Src_1D_7A60_Tbl539D_17,I,"target 17 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",assets
+1D,7AC0,Src_1D_7AC0_Tbl539D_23,I,"target 23 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 -> $8800, C)",assets
 1D,7B41,Gfx_1D_7B41_Tbl539D_Aux,C,"tile data with no direct pointer in the code (, same bank/neighbour of Tbl539D); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye; looks like an ennemy in Space fever.",fix
 1D,7B80,Src_1D_7B80_Tbl539D_29,I,"target 29 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets
 1D,7C3A,Sheet_MiscellaneousStampsJpn_1D_7C3A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 48 tiles",assets
@@ -3833,21 +3806,19 @@ bank,addr,name,conf,note,source
 1D,7FC0,Map_1D_7FC0_Mode12_State08_ToolsMenu,I,"far pointer loaded by Mode12_State08_ToolsMenu (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 1E,4000,Gfx_1E_4000_ResultPic2_RibbonWoman_Tune30,C,"picture 2 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune n_Tune30; seen in BGB (SHOOT parlor RUN)",assets
 1E,4E00,Gfx_1E_4E00_ResultPic0_HornedMan_Tune28,C,"picture 0 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune n_Tune28; seen in BGB (SHOOT parlor RUN)",assets
-1E,5C00,Gfx_1E_5C00_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
-1E,5F00,Gfx_1E_5F00_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
-1E,6480,Gfx_1E_6480_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
-1E,64B0,Gfx_1E_64B0_Compose_DrawPhotoNumber,I,"far pointer loaded by Compose_DrawPhotoNumber (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from the nearby ld bc",assets
-1E,64C0,Data_1E_64C0,?,"no copy site, table or sheet covers these bytes",assets
-1E,64D0,Gfx_1E_64D0_Compose_DrawPhotoNumber,I,"far pointer loaded by Compose_DrawPhotoNumber (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from the nearby ld bc",assets
-1E,64E0,Gfx_1E_64E0_Compose_DrawPhotoNumber_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Compose_DrawPhotoNumber); classified from its content - see sym_unconclusive",assets
-1E,6570,Gfx_1E_6570_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
-1E,6580,Gfx_1E_6580_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
+1E,5C00,Gfx_1E_5C00_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
+1E,5F00,Gfx_1E_5F00_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
+1E,6480,Gfx_1E_6480_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
+1E,64B0,Gfx_1E_64B0_Compose_DrawPhotoNumber_AlbumLetter,C,"2 tiles, the letters A and B (rendered): Compose_DrawPhotoNumber (06:569E) copies 16 bytes from $64B0 + (album 0 / 1) x 16 to VRAM $8030 (the album letter in front of the photo number)",hand
+1E,64D0,Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits,C,10 digit tiles 0-9 (rendered): Compose_DrawPhotoNumber copies 16 bytes from $64D0 + digit x 16 for the tens ($8050) and the units ($8060); 64D0-6570,hand
+1E,6570,Gfx_1E_6570_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
+1E,6580,Gfx_1E_6580_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
 1E,6590,Gfx_1E_6590_Mode16_DrawCaptionBlink_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode16_DrawCaptionBlink); classified from its content - see sym_unconclusive",assets
 1E,6620,Unused_TCRF_CannotCombineSamePicture_Gfx,C,"TCRF unused graphic ""cannot combine the same picture"" (prohibition sign + the two lines of Japanese text): exact match of the TCRF image, 56 of 56 tiles (the first two are blank, 1E:6600 / 6610), laid out 8 tiles wide; never on screen in any replay and never read in an organic run (README 16.24)",fix
 1E,6A00,Gfx_1E_6A00_ResultPic1_BaldMan_Tune29Totaka,C,"picture 1 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts); played with tune 29Totaka; seen in BGB (SHOOT parlor RUN)",assets
 1E,7800,Gfx_1E_7800_SaveDialog_Substate3_FullInit,I,"far pointer loaded by SaveDialog_Substate3_FullInit (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
 1E,7D00,Gfx_1E_7D00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
-1E,7E00,Map_1E_7E00_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
+1E,7E00,Map_1E_7E00_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext, LinkPick_PageTurnPrev (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 1F,4000,Snd_NoiseNR43Tbl,C,37 bytes: NR43 value per noise note (bank 0 sound code; README 2.7 $D917),hand+auto
 1F,4025,Snd_LengthTbl,C,20 bytes: NR21/NR31 length values (bank 0 sound code),hand+auto
 1F,4039,Snd_FreqTbl,C,72 words: GB frequency values; C-2 up (music note -> NR13/NR14),hand+auto
@@ -4752,34 +4723,30 @@ bank,addr,name,conf,note,source
 1F,7FF6,Snd_InitEntry,C,stub jp Snd_Init; called by bank 0 Snd_Init_Tramp,hand+auto
 20,4000,Gfx_20_4000_Mode08_State14_CreditsPageB,I,copied to VRAM/WRAM by Mode08_State14_CreditsPageB (assets/catalog_jp.csv),assets
 20,4800,Gfx_20_4800_Mode08_State14_CreditsPageB,I,copied to VRAM/WRAM by Mode08_State14_CreditsPageB (assets/catalog_jp.csv),assets
-20,4E00,Gfx_20_4E00_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
-20,5600,Gfx_20_5600_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
-20,5B00,Gfx_20_5B00_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
-20,6080,Gfx_20_6080_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
+20,4E00,Gfx_20_4E00_Mode08_State0C_RecordInit,I,"copied to VRAM/WRAM by Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit (assets/catalog_jp.csv)",assets
+20,5600,Gfx_20_5600_Mode08_State0C_RecordInit,I,"copied to VRAM/WRAM by Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit (assets/catalog_jp.csv)",assets
+20,5B00,Gfx_20_5B00_Mode08_State06_EditorInit,I,copied to VRAM/WRAM by Mode08_State06_EditorInit (assets/catalog_jp.csv),assets
+20,6080,Gfx_20_6080_Mode08_State06_EditorInit,I,copied to VRAM/WRAM by Mode08_State06_EditorInit (assets/catalog_jp.csv),assets
 20,64C0,Gfx_20_64C0_OwnerCard_LoadGenderTiles,I,"far pointer loaded by Kb_Page0_Press, OwnerCard_LoadGenderTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-20,64E0,Gfx_20_64E0_OwnerCard_LoadGenderTiles_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of OwnerCard_LoadGenderTiles); classified from its content - see sym_unconclusive",assets
 20,6520,Src_20_6520_OwnerCard_DrawBloodLow,I,"far pointer loaded by OwnerCard_DrawBloodLow (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
 20,6524,Sheet_MiscellaneousStampsJpn_20_6524,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 58 tiles",assets
 20,6660,Src_20_6660_OwnerCard_LoadBirthNumberTiles,I,"far pointer loaded by OwnerCard_LoadBirthNumberTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-20,667D,Data_20_667D,?,"no copy site, table or sheet covers these bytes",assets
 20,6680,Gfx_20_6680_OwnerCard_LoadBloodTiles,I,"far pointer loaded by OwnerCard_LoadBloodTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-20,66C0,Gfx_20_66C0_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-20,67C0,Gfx_20_67C0_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
-20,6800,Gfx_20_6800_Bank06,I,"copied to VRAM/WRAM by Bank06, Mode15_State04_TimerApply (assets/catalog_jp.csv)",assets
-20,6E40,Gfx_20_6E40_Bank06,I,"copied to VRAM/WRAM by Bank06, Mode15_State04_TimerApply (assets/catalog_jp.csv)",assets
-20,6EC0,Gfx_20_6EC0_Bank06,I,"copied to VRAM/WRAM by Bank06, Mode15_State04_TimerApply (assets/catalog_jp.csv)",assets
-20,6F20,Gfx_20_6F20_Bank06,I,"copied to VRAM/WRAM by Bank06, Mode15_State04_TimerApply (assets/catalog_jp.csv)",assets
-20,70E0,Map_20_70E0_Mode15_DrawTwoDigitsInterval,I,"far pointer loaded by Mode15_DrawTwoDigitsInterval (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from the nearby ld bc",assets
-20,70F0,Gfx_20_70F0_Mode15_DrawTwoDigitsInterval_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode15_DrawTwoDigitsInterval); classified from its content - see sym_unconclusive",assets
-20,7180,Gfx_20_7180_Mode15_DrawTwoDigits,I,"far pointer loaded by Mode15_DrawTwoDigits, Print_DrawDigitTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-20,71A0,Gfx_20_71A0_Mode15_DrawTwoDigits_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Mode15_DrawTwoDigits); classified from its content - see sym_unconclusive",assets
-20,72C0,Gfx_20_72C0_Bank06,I,"copied to VRAM/WRAM by Bank06, Mode15_State04_TimerApply (assets/catalog_jp.csv)",assets
-20,74F0,Gfx_20_74F0_Bank06,I,"copied to VRAM/WRAM by Bank06, Mode15_State04_TimerApply (assets/catalog_jp.csv)",assets
+20,66C0,Gfx_20_66C0_Kb_Page0_Press,C,inside the 0x300 bytes 64C0-67C0 that Kb_Page0_Press copies to $8800 (copy site 09:5CF9); was Gfx_20_66C0_Unref,hand
+20,67C0,Gfx_20_67C0_Mode08_State06_EditorInit,I,copied to VRAM/WRAM by Mode08_State06_EditorInit (assets/catalog_jp.csv),assets
+20,6800,Gfx_20_6800_Mode15_State01_TimerInit,I,"copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit (assets/catalog_jp.csv)",assets
+20,6E40,Gfx_20_6E40_Mode15_State01_TimerInit,I,"copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit (assets/catalog_jp.csv)",assets
+20,6EC0,Gfx_20_6EC0_Mode15_State01_TimerInit,I,"copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit (assets/catalog_jp.csv)",assets
+20,6F20,Gfx_20_6F20_Mode15_State01_TimerInit,I,"copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit (assets/catalog_jp.csv)",assets
+20,70E0,Gfx_20_70E0_Mode15_DrawTwoDigitsInterval,C,"digit table: Mode15_DrawTwoDigitsInterval (06:43F3) copies 16 bytes (1 tile) from $70E0 + digit x 16; 10 entries = 70E0-7180, rendered as the digits 0-9; was named Map_ and Gfx_20_70F0_..._Aux",hand
+20,7180,Gfx_20_7180_Mode15_DrawTwoDigits,C,numeral table: Mode15_DrawTwoDigits (06:43BC) splits A into tens and units and copies 32 bytes from $7180 + digit x 32; 10 entries = 7180-72C0 (the next asset starts there); was Gfx_20_71A0_..._Aux,hand
+20,72C0,Gfx_20_72C0_Mode15_State01_TimerInit,I,"copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit (assets/catalog_jp.csv)",assets
+20,74F0,Gfx_20_74F0_Mode15_State01_TimerInit,I,"copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit (assets/catalog_jp.csv)",assets
 20,7500,Gfx_20_7500_Mode1D_State01_LoadScreen,I,copied to VRAM/WRAM by Mode1D_State01_LoadScreen (assets/catalog_jp.csv),assets
 20,7D00,Gfx_20_7D00_Mode1D_State01_LoadScreen,I,copied to VRAM/WRAM by Mode1D_State01_LoadScreen (assets/catalog_jp.csv),assets
-21,4000,Gfx_21_4000_SpecialMenu_DrawCursor,I,copied to VRAM/WRAM by SpecialMenu_DrawCursor (assets/catalog_jp.csv),assets
+21,4000,Gfx_21_4000_Mode07_State00_Init,I,copied to VRAM/WRAM by Mode07_State00_Init (assets/catalog_jp.csv),assets
 21,4750,Gfx_21_4750_SpaceFever_LoadHudTiles,I,"far pointer loaded by SpaceFever_LoadHudTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-21,4800,Gfx_21_4800_SpecialMenu_DrawCursor,I,copied to VRAM/WRAM by SpecialMenu_DrawCursor (assets/catalog_jp.csv),assets
+21,4800,Gfx_21_4800_Mode07_State00_Init,I,copied to VRAM/WRAM by Mode07_State00_Init (assets/catalog_jp.csv),assets
 21,4850,Gfx_21_4850_SpaceFever_LoadHudTiles,I,"far pointer loaded by SpaceFever_LoadHudTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 21,4C00,Sheet_MinigamesSpaceFeverIi_21_49FC_Part4C00,I,"Spriter's Resource sheet ""Minigames - Space Fever II"", 157 tiles",assets
 21,4C60,Gfx_21_4C60_SpaceFever_DrawBestHud,I,"far pointer loaded by SpaceFever_DrawBestHud (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
@@ -4791,20 +4758,20 @@ bank,addr,name,conf,note,source
 21,56D0,Gfx_21_56D0_CommentCard_DrawGender_Far,I,"far pointer loaded by CommentCard_DrawGender_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 21,5790,Gfx_21_5790_CommentCard_DrawCopyBadge_Far,I,"far pointer loaded by CommentCard_DrawCopyBadge_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 224 from the nearby ld bc",assets
 21,5870,Gfx_21_5870_CommentCard_DrawCopyBadge_Far,I,"far pointer loaded by CommentCard_DrawCopyBadge_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 224 from the nearby ld bc",assets
-21,5A10,Sheet_MenusShootMenu_21_5A10,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 51 tiles",assets
-21,5C31,Gfx_21_5C31_MenusShootMenu_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MenusShootMenu); classified from its content - see sym_unconclusive",assets
-21,5FD0,Sheet_MenusShootMenu_21_5FD0,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 90 tiles",assets
-21,6566,Gfx_21_6566_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
-21,65C0,Gfx_21_65C0_SaveDialog_Substate0_Init,I,"far pointer loaded by SaveDialog_Substate0_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc",assets
+21,5A10,Sheet_MenusShootMenu_21_5A10,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 51 tiles | also inside record 1 of page 2 of Parlor_PageTbl (21:5A00 +$0800 -> $9000, C)",assets
+21,5C31,Gfx_21_5C31_Parlor_Page2,C,"inside record 1 of page 2 (21:5A00 +$0800 -> $9000, VRAM $9231 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+21,5FD0,Sheet_MenusShootMenu_21_5FD0,I,"Spriter's Resource sheet ""Menus - Shoot Menu"", 90 tiles | also inside record 1 of page 2 of Parlor_PageTbl (21:5A00 +$0800 -> $9000, C)",assets
+21,6566,Gfx_21_6566_Parlor_Page2,C,"inside record 2 of page 2 (21:6200 +$0800 -> $8800, VRAM $8B66 onward) and record 3 of page 2 (21:6560 +$0010 -> $8DF0, VRAM $8DF6 onward) of Parlor_PageTbl (04:7436), loaded by Parlor_LoadPage; load extent from the code and the coverage log (every byte of the record is read), content = tile data by its look (I)",hand
+21,65C0,Gfx_21_65C0_SaveDialog_Substate0_Init,I,"far pointer loaded by SaveDialog_Substate0_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1264 from the nearby ld bc | also inside record 2 of page 2 of Parlor_PageTbl (21:6200 +$0800 -> $8800, C)",assets
 21,6AC7,Gfx_21_6AC7_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
 21,6B91,Gfx_21_6B91_Unref,C,"small unread block of 47 bytes (was Data_21_6B91). Owner (review page, 2026-10-13): graphic, by eye.",fix
 21,6BC0,Gfx_21_6BC0_Mode19_State00_CopyrightScreens,I,"far pointer loaded by Mode19_State00_CopyrightScreens (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1536 from the nearby ld bc",assets
-21,71C0,Gfx_21_71C0_WildFrame_PageSrcTbl,I,copied to VRAM/WRAM by WildFrame_PageSrcTbl (assets/catalog_jp.csv),assets
-21,77C0,Gfx_21_77C0_Print_DrawSelectedMarker,I,"copied to VRAM/WRAM by Print_DrawSelectedMarker, WildFramePicker_Substate0_Init (assets/catalog_jp.csv)",assets
+21,71C0,Gfx_21_71C0_Mode19_State00_CopyrightScreens,I,copied to VRAM/WRAM by Mode19_State00_CopyrightScreens (assets/catalog_jp.csv),assets
+21,77C0,Gfx_21_77C0_BorderPicker_Substate0_Init,I,"copied to VRAM/WRAM by BorderPicker_Substate0_Init, WildFramePicker_Substate0_Init (assets/catalog_jp.csv)",assets
 21,7BB0,Src_21_7BB0_BorderPicker_AnimateIcon,I,"far pointer loaded by BorderPicker_AnimateIcon, WildFramePicker_AnimateIcon (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 21,7BC0,Gfx_21_7BC0_BorderPicker_AnimateIcon_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of BorderPicker_AnimateIcon); classified from its content - see sym_unconclusive",assets
-21,7CC0,Map_21_7CC0_ScrollEngine_RowToOffset,I,copied to VRAM/WRAM by ScrollEngine_RowToOffset (assets/catalog_jp.csv),assets
-21,7F00,Map_21_7F00_ScrollEngine_RowToOffset,I,copied to VRAM/WRAM by ScrollEngine_RowToOffset (assets/catalog_jp.csv),assets
+21,7CC0,Map_21_7CC0_CommentEditor_Sub0_Init,I,copied to VRAM/WRAM by CommentEditor_Sub0_Init (assets/catalog_jp.csv),assets
+21,7F00,Map_21_7F00_CommentEditor_Sub0_Init,I,copied to VRAM/WRAM by CommentEditor_Sub0_Init (assets/catalog_jp.csv),assets
 22,4000,Gfx_22_4000_CreditsGirlFrame03,C,"frame 3 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 22,4500,Gfx_22_4500_CreditsNishimuraDanceFrame00,C,"frame 0 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
 22,4970,Gfx_22_4970_CreditsNishimuraDanceFrame01,C,"frame 1 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
@@ -4814,90 +4781,63 @@ bank,addr,name,conf,note,source
 22,5BA0,Gfx_22_5B00_CreditsGirlFrame11_Part5BA0,C,"frame 11 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 22,5F40,Map_22_5F40_Mode20_State02_GameSetup,I,"far pointer loaded by Mode20_State02_GameSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 22,6000,Map_22_5F40_Ball_MenuLoadRow_Part6000,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
-22,6340,Map_22_6340_HotSpotEd_SoundList,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
+22,6340,Map_22_6340_Mode06_State00_Init,I,copied to VRAM/WRAM by Mode06_State00_Init (assets/catalog_jp.csv),assets
 22,6740,Gfx_22_6740_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
-22,6810,Gfx_22_6810_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
+22,6810,Gfx_22_6810_Mode11_State02_Setup,I,"copied to VRAM/WRAM by Mode11_State02_Setup, Mode11_State08_SaveResult (assets/catalog_jp.csv)",assets
 22,6A90,Gfx_22_6A90_Mode11_State04_Place,I,"far pointer loaded by Mode11_State04_Place (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 22,6AA0,Gfx_22_6AA0_Mode1A_State02_Setup,I,"far pointer loaded by Mode1A_State02_Setup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 22,6AB0,Gfx_22_6AB0_Mode11_State02_Setup,I,copied to VRAM/WRAM by Mode11_State02_Setup (assets/catalog_jp.csv),assets
-22,6B40,Map_22_6B40_Bank03,I,"copied to VRAM/WRAM by Bank03, Mode12_State12_TestRun, Mode12_State22_BorderPickerReturn (assets/catalog_jp.csv)",assets
+22,6B40,Map_22_6B40_Mode12_State00_Init,I,"copied to VRAM/WRAM by Mode12_State00_Init, Mode12_State0F_ClearAll, Mode12_State10_Pack, Mode12_State13_TestEnd, Mode12_State1F_SortDialogClose, Mode12_State22_BorderPickerReturn (assets/catalog_jp.csv)",assets
 22,6DE0,Map_22_6DE0_Mode12_State06_ToolsOpen,I,"far pointer loaded by Mode12_State06_ToolsOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 22,6F40,Gfx_22_6F40_CreditsGirlFrame08,C,"frame 8 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 22,7340,Map_22_7340_Mode21_State02_RaceSceneInit,I,"far pointer loaded by Mode21_State02_RaceSceneInit, Mode21_State0B_ResultSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 22,7440,Map_22_7340_Mode21_PickCharacterKeys_Part7440,I,"copied to VRAM/WRAM by Mode21_PickCharacterKeys, Mode21_State07_RaceEnd (assets/catalog_jp.csv)",assets
-22,7740,Map_22_7740_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
-22,7B40,Map_22_7B40_DjTitle_DrawFrame3,I,copied to VRAM/WRAM by DjTitle_DrawFrame3 (assets/catalog_jp.csv),assets
-22,7F40,Data_22_7F40,?,"no copy site, table or sheet covers these bytes",assets
-22,7F61,Data_22_7F61,?,"no copy site, table or sheet covers these bytes",assets
-22,7F81,Data_22_7F81,?,"no copy site, table or sheet covers these bytes",assets
-22,7FA4,Data_22_7FA4,?,"no copy site, table or sheet covers these bytes",assets
-22,7FC4,Data_22_7FC4,?,"no copy site, table or sheet covers these bytes",assets
-22,7FE0,Data_22_7FE0,?,"no copy site, table or sheet covers these bytes",assets
+22,7740,Map_22_7740_Mode20_State02_GameSetup,I,copied to VRAM/WRAM by Mode20_State02_GameSetup (assets/catalog_jp.csv),assets
+22,7B40,Map_22_7B40_Mode1F_State04_PerformanceSetup,I,copied to VRAM/WRAM by Mode1F_State04_PerformanceSetup (assets/catalog_jp.csv),assets
+22,7F40,Map_22_7F40_SpaceFever_LoadHudTiles,C,"6 rows x 10 tile ids taken with a row stride of 32 (192 bytes to the end of the bank): SpaceFever_LoadHudTiles (07:67E3) does ld a,$22 / ld hl,$7F40 / ld de,$98C9 / ld b,6 / call SpaceFever_CopyTextRows (10 tiles per row, both pointers advance by $20); the coverage run read exactly the first 10 bytes of each of the 6 rows; the other 22 bytes of each row are fill ($3F / $BF)",hand
 23,4000,Gfx_23_4000_CreditsGirlFrame09,C,"frame 9 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 23,44C0,Map_23_44C0_Mode06_State00_Init,I,"far pointer loaded by Mode06_State00_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,4500,Map_23_44C0_HotSpotEd_SoundList_Part4500,I,copied to VRAM/WRAM by HotSpotEd_SoundList (assets/catalog_jp.csv),assets
 23,48C0,Map_23_48C0_Mode13_State00_Init,I,copied to VRAM/WRAM by Mode13_State00_Init (assets/catalog_jp.csv),assets
 23,49E0,Map_23_49E0_Mode13_State02_Start,I,"far pointer loaded by Mode13_State02_Start (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,4B00,Map_23_4B00_Mode13_State02_Start,I,"far pointer loaded by Mode13_State02_Start (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
-23,4CC0,Map_23_4CC0_Mode20_State08_Leave,I,copied to VRAM/WRAM by Mode20_State08_Leave (assets/catalog_jp.csv),assets
+23,4CC0,Map_23_4CC0_Mode20_State09_ResultInit,I,copied to VRAM/WRAM by Mode20_State09_ResultInit (assets/catalog_jp.csv),assets
 23,50C0,Gfx_23_50C0_Mode16_State08_StartShoot,I,copied to VRAM/WRAM by Mode16_State08_StartShoot (assets/catalog_jp.csv),assets
 23,5350,Gfx_23_5350_Mode16_State08_StartShoot,I,copied to VRAM/WRAM by Mode16_State08_StartShoot (assets/catalog_jp.csv),assets
-23,54C0,Map_23_54C0_Mode0F_State04_LeaveSelected,I,copied to VRAM/WRAM by Mode0F_State04_LeaveSelected (assets/catalog_jp.csv),assets
-23,58C0,Data_23_58C0,?,"no copy site, table or sheet covers these bytes",assets
-23,58E0,Data_23_58E0,?,"no copy site, table or sheet covers these bytes",assets
-23,5900,Data_23_5900,?,"no copy site, table or sheet covers these bytes",assets
-23,5920,Data_23_5920,?,"no copy site, table or sheet covers these bytes",assets
-23,5940,Data_23_5940,?,"no copy site, table or sheet covers these bytes",assets
-23,5960,Data_23_5960,?,"no copy site, table or sheet covers these bytes",assets
-23,5980,Data_23_5980,?,"no copy site, table or sheet covers these bytes",assets
-23,59A0,Data_23_59A0,?,"no copy site, table or sheet covers these bytes",assets
-23,59C0,Data_23_59C0,?,"no copy site, table or sheet covers these bytes",assets
-23,59E0,Data_23_59E0,?,"no copy site, table or sheet covers these bytes",assets
-23,5A00,Data_23_5A00,?,"no copy site, table or sheet covers these bytes",assets
-23,5A20,Data_23_5A20,?,"no copy site, table or sheet covers these bytes",assets
-23,5A40,Data_23_5A40,?,"no copy site, table or sheet covers these bytes",assets
-23,5A60,Data_23_5A60,?,"no copy site, table or sheet covers these bytes",assets
-23,5A80,Data_23_5A80,?,"no copy site, table or sheet covers these bytes",assets
-23,5AA0,Data_23_5AA0,?,"no copy site, table or sheet covers these bytes",assets
-23,5AC0,Data_23_5AC0,?,"no copy site, table or sheet covers these bytes",assets
-23,5AE0,Data_23_5AE0,?,"no copy site, table or sheet covers these bytes",assets
-23,5CC0,Map_23_5CC0_Mode0E_ExchangeAlt_Unref,C,"map (tile indices) of the alternate link-exchange stand-by screen whose tiles are 14:4000: 18 rows x 32 columns (576 B) + 4 trailing $16 bytes; ids index 14:4000 directly; columns 0-19 = the visible 20x18 screen (print + 'アイデアがいっぱい' + 任天堂), 20-27 = $0F, 28-31 = $16; drawn by tcrf_check/tools/map_23_5CC0_screen.py (2026-10-13). Owner (review page): map, by eye; the owner named the screen (SEND/RECEIVE during an image exchange). Byte-identical in both ROMs; no code loads it (no ld hl,$5CC0 with bank $23, no {C0 5C 23} pointer); the shipped screen loads bank 15/24 (BGB VRAM check, README 14.4). The 36 'on screen' tiles of forced runs had reader sites in Mode0E_LinkTransfer.",fix
-23,5F1C,Data_23_5F1C,?,"no copy site, table or sheet covers these bytes",assets
-23,5F3C,Data_23_5F3C,?,"no copy site, table or sheet covers these bytes",assets
-23,5F5C,Data_23_5F5C,?,"no copy site, table or sheet covers these bytes",assets
-23,5F94,Data_23_5F94,?,"no copy site, table or sheet covers these bytes",assets
+23,54C0,Map_23_54C0_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
+23,58C0,Map_23_58C0_Mode0F_ConfirmFrameStrip_Unref,I,"1024 bytes = a 32 x 32 map whose only non-zero tiles are columns 0-1 of rows 0-17: aa 90 / 9c ab, 14 rows of 98 99 / a8 a9, 9b 91 / a0 90; these are the right-border tiles of the photo frame in the map 23:54C0 (its columns 20-21, rows 2-19, which Mode0F_State05_ConfirmInit copies to $9800); no code loads this copy (no ld hl,$58C0 with bank $23; the only reads in the coverage run are the printer packet sender 00:17E8 and a generic reader, none organic); was 18 placeholders Data_23_58C0..5AE0",hand
+23,5CC0,Map_23_5CC0_Mode0E_ExchangeAlt_Unref,C,"map (tile indices) of the alternate link-exchange stand-by screen whose tiles are 14:4000: 18 rows x 32 columns (576 B) + 4 trailing $16 bytes; ids index 14:4000 directly; columns 0-19 = the visible 20x18 screen (print + 'アイデアがいっぱい' + 任天堂), 20-27 = $0F, 28-31 = $16; drawn by tcrf_check/tools/map_23_5CC0_screen.py (2026-10-13). Owner (review page): map, by eye; the owner named the screen (SEND/RECEIVE during an image exchange). Byte-identical in both ROMs; no code loads it (no ld hl,$5CC0 with bank $23, no {C0 5C 23} pointer); the shipped screen loads bank 15/24 (BGB VRAM check, README 14.4). The 36 'on screen' tiles of forced runs had reader sites in Mode0E_LinkTransfer. | rows 18-31 (5F00-60C0, 448 bytes) are the filler rows of the same 32 x 32 map ($16 x 4, $0F x 24, $16 x 4; row 22 starts with 20 x $16; the last 9 rows are $0F); the labels Data_23_5F1C / 5F3C / 5F5C / 5F94 were fill-run splits of them (2026-10-14)",fix
 23,60C0,Gfx_23_60C0_Mode1A_State09_ExitDialog,I,"far pointer loaded by Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from the nearby ld bc",assets
-23,64C0,Map_23_64C0_ViewMenu_AnimateBackground,I,copied to VRAM/WRAM by ViewMenu_AnimateBackground (assets/catalog_jp.csv),assets
+23,64C0,Map_23_64C0_Mode03_State00_Init,I,copied to VRAM/WRAM by Mode03_State00_Init (assets/catalog_jp.csv),assets
 23,64E0,Map_23_64E0_SpecialMenu_DrawCursor,I,"far pointer loaded by SpecialMenu_DrawCursor (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,6700,Map_23_6700_SpecialMenu_DrawCursor,I,"far pointer loaded by SpecialMenu_DrawCursor (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 224 from the nearby ld bc",assets
 23,67E0,Map_23_67E0_SpecialMenu_DrawCursor,I,"far pointer loaded by SpecialMenu_DrawCursor (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 224 from the nearby ld bc",assets
-23,68C0,Map_23_68C0_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
+23,68C0,Map_23_68C0_Mode1F_State08_EditPagesSetup,I,copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup (assets/catalog_jp.csv),assets
 23,6900,Map_23_6900_Mode1F_State0B_PageNoise,I,"far pointer loaded by Mode1F_State0B_PageNoise (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,6B00,Map_23_6B00_Mode1F_State09_PageSound1,I,"far pointer loaded by Mode1F_State09_PageSound1 (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,6B80,Map_23_6B80_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 23,6C00,Map_23_6C00_Mode1F_State0A_PageSound2,I,"far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 23,6C80,Gfx_23_6C80_CreditsGirlFrame12,C,"frame 12 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 23,7180,Map_23_7180_CreditsGirlFrame12_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of CreditsGirlFrame12); classified from its content - see sym_unconclusive",assets
-23,73E0,Map_23_73E0_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
+23,73E0,Map_23_73E0_Mode08_State06_EditorInit,I,copied to VRAM/WRAM by Mode08_State06_EditorInit (assets/catalog_jp.csv),assets
 23,74A0,Map_23_74A0_Kb_Page1_PressSex,I,"far pointer loaded by Kb_Page1_PressSex (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 23,7620,Map_23_7620_Kb_Page0_Press,I,"far pointer loaded by Kb_Page0_Press, Kb_Page2_PressBirthDate (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
-23,7760,Data_23_7760,?,"no copy site, table or sheet covers these bytes",assets
-23,7780,Map_23_7780_Bank07,I,copied to VRAM/WRAM by Bank07 (assets/catalog_jp.csv),assets
-23,77A0,Map_23_77A0_Mode0E_State00_Init,I,"far pointer loaded by Link_AnimateStep3, Link_ChooseSendReceive, Link_DrawPressAText (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-23,79C0,Map_23_79C0_Mode0E_State00_Init,I,"far pointer loaded by Link_AnimateStep3, Link_ChooseSendReceive, Link_DrawPressAText (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 160 from the nearby ld bc",assets
+23,7760,Map_23_7760_Kb_Page0_Press_ExtraRow,I,one row of 32: 20 descending tile ids $36-$23 then $FF x 4...; the 11th row of the map 23:7620 (Kb_Page0_Press copies 0x140 = 10 rows to $98C0): not copied; was Data_23_7760,hand
+23,7780,Map_23_7780_Mode0E_State00_Init,I,copied to VRAM/WRAM by Mode0E_State00_Init (assets/catalog_jp.csv),assets
+23,77A0,Map_23_77A0_Mode0E_State00_Init,I,"far pointer loaded by Mode0E_State00_Init, Link_DrawPressAText, Link_AnimateStep3, Link_ChooseSendReceive (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+23,79C0,Map_23_79C0_Mode0E_State00_Init,I,"far pointer loaded by Mode0E_State00_Init, Link_DrawPressAText, Link_AnimateStep3, Link_ChooseSendReceive (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 160 from the nearby ld bc",assets
 23,7A60,Map_23_7A60_Link_DrawPressAText,I,"far pointer loaded by Link_AnimateStep3, Link_DrawPressAText (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 160 from the nearby ld bc",assets
-23,7B00,Map_23_7B00_LinkMenu_LoadTilesDeselected,I,copied to VRAM/WRAM by LinkMenu_LoadTilesDeselected (assets/catalog_jp.csv),assets
+23,7B00,Map_23_7B00_Mode0B_State00_Init,I,copied to VRAM/WRAM by Mode0B_State00_Init (assets/catalog_jp.csv),assets
 23,7C00,Map_23_7C00_ShowMenu_LoadNormalTiles,I,"far pointer loaded by ShowMenu_LoadNormalTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-23,7D54,Data_23_7D54,?,"no copy site, table or sheet covers these bytes",assets
 23,7D60,Map_23_7D60_ShowMenu_LoadHighlightTiles,I,"far pointer loaded by ShowMenu_LoadHighlightTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
 23,7DC0,Gfx_23_7DC0_ShowMenu_LoadHighlightTiles_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of ShowMenu_LoadHighlightTiles); classified from its content - see sym_unconclusive",assets
 23,7E80,Src_23_7E80_Tbl53A6_3,I,"target 3 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset",assets
 24,4000,Gfx_24_4000_CreditsGirlFrame01,C,"frame 1 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 24,4480,Map_24_4480_Mode20_State00_MenuInit,I,"far pointer loaded by Mode20_State00_MenuInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-24,4500,Map_24_4480_Mode20_State00_MenuInit_Part4500,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
+24,4500,Map_24_4480_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
 24,46C0,Map_24_46C0_Ball_MenuLoadRow,I,"far pointer loaded by Ball_MenuLoadRow (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from the nearby ld bc",assets
 24,47C0,Map_24_47C0_Mode0D_State01_Hub,I,"far pointer loaded by Mode0D_State01_Hub (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
-24,4840,Map_24_4840_Mode0D_State00_Init,I,copied to VRAM/WRAM by Mode0D_State00_Init (assets/catalog_jp.csv),assets
+24,4840,Map_24_4840_Mode0D_State00_Init,I,"copied to VRAM/WRAM by Mode0D_State00_Init, Mode0D_State02_OptionsMenu, Mode0D_State03_OptionA, Mode0D_State04_OptionB (assets/catalog_jp.csv)",assets
 24,4A40,Map_24_4A40_Mode0D_State02_OptionsMenu,I,"far pointer loaded by Mode0D_State02_OptionsMenu, Mode0D_State03_OptionA, Mode0D_State04_OptionB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 24,4A80,Map_24_4A80_Mode0D_State01_Hub,I,"far pointer loaded by Mode0D_State01_Hub (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 24,4B00,Map_24_4B00_PenMenu_BuildSize,I,"far pointer loaded by PenMenu_BuildPattern, PenMenu_BuildSize (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
@@ -4906,26 +4846,26 @@ bank,addr,name,conf,note,source
 24,4C00,Map_24_4C00_PenMenuSizePanel1,I,target 1 of the word table 04:67A5 (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,4CC0,Map_24_4CC0_PenMenuSizePanel2,I,target 2 of the word table 04:67A5 (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,4D80,Map_24_4D80_PenMenuSizePanel3,I,target 3 of the word table 04:67A5 (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
-24,4E40,Data_24_4E40,?,"no copy site, table or sheet covers these bytes",assets
+24,4E40,Map_24_4E40_PenMenuSizePanel3_ExtraRow,I,"7th row of the pen-menu panel 24:4D80 (the page builder copies 192 bytes = 6 rows, table 04:67A5): the bottom border row, not copied; was Data_24_4E40",hand
 24,4E60,Map_24_4E60_PenMenuPatternPanel0,I,target 0 of the word table 04:67EF (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
-24,4F20,Data_24_4F20,?,"no copy site, table or sheet covers these bytes",assets
+24,4F20,Map_24_4F20_PenMenuPatternPanel0_ExtraRow,I,"7th row of the pen-menu panel 24:4E60 (the page builder copies 192 bytes = 6 rows, table 04:67EF): the bottom border row, not copied; was Data_24_4F20",hand
 24,4F40,Map_24_4F40_PenMenuPatternPanel1,I,target 1 of the word table 04:67EF (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,5000,Map_24_5000_PenMenuPatternPanel2,I,target 2 of the word table 04:67EF (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,50C0,Map_24_50C0_PenMenuPatternPanel3,I,target 3 of the word table 04:67EF (indexed by the page builder: 4 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,5180,Map_24_5180_Mode0E_State06_ExchangeSetup,I,"copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (assets/catalog_jp.csv)",assets
 24,53C0,Map_24_53C0_Mode0E_State06_ExchangeSetup,I,"copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (assets/catalog_jp.csv)",assets
-24,54C0,Map_24_54C0_Mode0F_State00_Init,I,"copied to VRAM/WRAM by Bank04, Mode0F_State00_Init, Unused_Link_SumSlotBuffer (assets/catalog_jp.csv)",assets
-24,5500,Map_24_5500_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-24,57E0,Gfx_24_57E0_Link_ShowScreenB,I,copied to VRAM/WRAM by Link_ShowScreenB (assets/catalog_jp.csv),assets
+24,54C0,Map_24_54C0_Mode0F_State00_Init,I,"copied to VRAM/WRAM by PhotoPicker_Init, Mode0F_State00_Init, Mode0F_State01_ReInit, LinkPick_Substate0_Init (assets/catalog_jp.csv)",assets
+24,5500,Map_24_5500_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext, LinkPick_PageTurnPrev (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+24,57E0,Gfx_24_57E0_Unused_Link_LoadTiles,I,"copied to VRAM/WRAM by Unused_Link_LoadTiles, Cam_FactoryDiag_AllButtonsExceptB, Cam_FirstBoot_StorePleaseWait (assets/catalog_jp.csv)",assets
 24,58E0,Gfx_24_57E0_Cam_FactoryDiag_AllButtonsExceptB_Part58E0,I,"copied to VRAM/WRAM by Cam_FactoryDiag_AllButtonsExceptB, Cam_FirstBoot_StorePleaseWait (assets/catalog_jp.csv)",assets
-24,5AE0,Map_24_5AE0_Mode08_State02_PlanetOpen,I,copied to VRAM/WRAM by Mode08_State02_PlanetOpen (assets/catalog_jp.csv),assets
+24,5AE0,Map_24_5AE0_Mode08_State03_CardInit,I,"copied to VRAM/WRAM by Mode08_State03_CardInit, OwnerCard_BlinkTitle (assets/catalog_jp.csv)",assets
 24,5D00,Map_24_5D00_OwnerCard_BlinkTitle,I,"far pointer loaded by OwnerCard_BlinkTitle (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 24,5D20,Map_24_5D20_OwnerCard_BlinkTitle,I,"far pointer loaded by OwnerCard_BlinkTitle (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 24,5DA0,Map_24_5DA0_OwnerCard_BlinkTitle,I,"far pointer loaded by OwnerCard_BlinkTitle (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
 24,5DC0,Map_24_5DC0_Kb_Page1_PressSex,I,"far pointer loaded by Kb_Page1_PressSex, Kb_Page3_PressBloodType (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
-24,5F00,Data_24_5F00,?,"no copy site, table or sheet covers these bytes",assets
+24,5F00,Map_24_5F00_Kb_Page1_PressSex_ExtraRows,I,2 rows after the 10 rows (0x140) of the map 24:5DC0 that Kb_Page1_PressSex copies; the last one is the descending id ramp $36-$23 seen after the other keyboard maps; no copy reads it; was Data_24_5F00,hand
 24,5F40,Map_24_5F40_Kb_Page2_PressBirthDate,I,"far pointer loaded by Kb_Page2_PressBirthDate (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 320 from the nearby ld bc",assets
-24,6080,Data_24_6080,?,"no copy site, table or sheet covers these bytes",assets
+24,6080,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,I,row 10 and the start of row 11 of the map 24:5F40 (0x140 copied by Kb_Page2_PressBirthDate): the id ramp $36-$23 then fill; no copy reads it; was Data_24_6080,hand
 24,60B2,Gfx_24_60B2_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 24,61C0,Map_24_61C0_Mode01_State02_ApplyPageA,I,"far pointer loaded by Mode01_State02_ApplyPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 24,6200,Map_24_6200_Mode01_State02_ApplyPageA_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of Mode01_State02_ApplyPageA); classified from its content - see sym_unconclusive",assets
@@ -4935,25 +4875,22 @@ bank,addr,name,conf,note,source
 24,6598,Gfx_24_6598_Mode17_State00_Init,I,"far pointer loaded by Mode17_State00_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 8 from the nearby ld bc",assets
 24,65A0,Map_24_65A0_Mode16_BuildList4,I,"far pointer loaded by Mode16_BuildList4 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 24,6620,Map_24_6620_Mode1A_State02_Setup,I,copied to VRAM/WRAM by Mode1A_State02_Setup (assets/catalog_jp.csv),assets
-24,68E0,Map_24_68E0_Mode16_DrawCaptionBlink,I,copied to VRAM/WRAM by Mode16_DrawCaptionBlink (assets/catalog_jp.csv),assets
+24,68E0,Map_24_68E0_Mode17_State00_Init,I,copied to VRAM/WRAM by Mode17_State00_Init (assets/catalog_jp.csv),assets
 24,6A20,Map_24_6A20_Compose_DrawLayoutPreview,I,"far pointer loaded by Compose_DrawLayoutPreview (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 24,6B20,Map_24_6B20_Compose_DrawLayoutPreview,I,"far pointer loaded by Compose_DrawLayoutPreview (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
-24,6BA0,Map_24_6BA0_Mode1C_State02_ShowPrintScreen,I,copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (assets/catalog_jp.csv),assets
+24,6BA0,Map_24_6BA0_Mode1C_State02_ShowPrintScreen,I,"copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen, Mode1C_DrawOptionScreen (assets/catalog_jp.csv)",assets
 24,6E60,Map_24_6E60_Shoot_DrawOptionPanel,I,"far pointer loaded by Shoot_DrawOptionPanel (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 704 from the nearby ld bc",assets
-24,7120,Map_24_7120_Mode10_State02_Setup,I,copied to VRAM/WRAM by Mode10_State02_Setup (assets/catalog_jp.csv),assets
+24,7120,Map_24_7120_Mode10_State02_Setup,I,"copied to VRAM/WRAM by Mode10_State02_Setup, Unused_LoadTilemap24_7120 (assets/catalog_jp.csv)",assets
 24,73E0,Map_24_73E0_Album_ShowPageScreenB,I,"far pointer loaded by Album_LoadBorderScreen, Album_ShowPageScreenB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 704 from the nearby ld bc",assets
 24,76A0,Map_24_76A0_PenMenu_BuildSpeed,I,"far pointer loaded by PenMenu_BuildSpeed (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
 24,76C0,Map_24_76C0_PenMenuSpeedPanel0,I,target 0 of the word table 04:6839 (indexed by the page builder: 3 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,7720,Map_24_7720_PenMenu_BuildSpeed,I,"far pointer loaded by PenMenu_BuildSpeed (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
-24,7780,Data_24_7780,?,"no copy site, table or sheet covers these bytes",assets
 24,77A0,Map_24_77A0_PenMenuSpeedPanel1,I,target 1 of the word table 04:6839 (indexed by the page builder: 3 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,7800,Map_24_7800_PenMenuSpeedPanel2,I,target 2 of the word table 04:6839 (indexed by the page builder: 3 panels of 192 bytes); length 192 from the nearby ld bc,assets
 24,7860,Map_24_7860_PenMenu_Build,I,"far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from the nearby ld bc",assets
-24,78C0,Gfx_24_78C0_PenMenu_Build_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of PenMenu_Build); classified from its content - see sym_unconclusive",assets
-24,7913,Gfx_24_7913_Unref,?,tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive,assets
 24,7960,Map_24_7960_Shoot_RestoreViewScreen,I,"far pointer loaded by Shoot_DrawOptionPanel, Shoot_RestoreViewScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 704 from the nearby ld bc",assets
-24,7C20,Map_24_7C20_PenMenu_BuildSpeed,I,"copied to VRAM/WRAM by Mode0A_State02_Setup, PenMenu_BuildSpeed (assets/catalog_jp.csv)",assets
-24,7EE0,Map_24_7C20_Mode12_State11_TestStart_Part7EE0,I,"copied to VRAM/WRAM by Mode12_State11_TestStart, Mode13_State03_PlayPrepare (assets/catalog_jp.csv)",assets
+24,7C20,Map_24_7C20_Mode12_State11_TestStart,I,"copied to VRAM/WRAM by Mode12_State11_TestStart, Mode13_State03_PlayPrepare, Mode09_State00_Init, Album_ShowPageScreen, Mode0A_State02_Setup (assets/catalog_jp.csv)",assets
+24,7EE0,Map_24_7C20_SaveDialog_Substate3_FullInit,I,copied to VRAM/WRAM by SaveDialog_Substate3_FullInit (assets/catalog_jp.csv),assets
 25,4000,Gfx_25_4000_CreditsGirlFrame05,C,"frame 5 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 25,4480,Gfx_25_4480_Mode08_State14_CreditsPageB,I,"far pointer loaded by Mode08_State14_CreditsPageB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 25,4500,Gfx_25_4480_CreditsGirlFrame00_Part4500,C,"frame 0 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
@@ -4968,54 +4905,53 @@ bank,addr,name,conf,note,source
 25,5320,Map_25_5320_Mode16_OptionPage3_HeadRows,C,rows 0-1 (ramp 00-27) of option page 3 (rows 2-17 = 25:5360); never loaded,fix
 25,5360,Map_25_5360_Mode16_OptionPage3,C,"option page 3: 16 rows to $9840 (table entry 3), then Mode16_BuildList6 reads pieces from 25:5507 and 25:5560",fix
 25,5560,Map_25_5560_Mode16_BuildList6,I,"far pointer loaded by Mode16_BuildList6 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 96 from the nearby ld bc",assets
-25,55C0,Map_25_55C0_SpecialMenu_DrawCursor,I,copied to VRAM/WRAM by SpecialMenu_DrawCursor (assets/catalog_jp.csv),assets
+25,55C0,Map_25_55C0_Mode07_State00_Init,I,copied to VRAM/WRAM by Mode07_State00_Init (assets/catalog_jp.csv),assets
 25,5680,Map_25_5680_SpaceFever_Boss_EndB,I,"far pointer loaded by SpaceFever_Boss_EndB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 25,5820,Map_25_5820_SpaceFever_Boss_EndB,I,"far pointer loaded by SpaceFever_Boss_EndA, SpaceFever_Boss_EndB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 20 from the nearby ld bc",assets
-25,5834,Data_25_5834,?,"no copy site, table or sheet covers these bytes",assets
 25,5840,Map_25_5840_Cam_FactoryDiag_AllButtonsExceptB,I,copied to VRAM/WRAM by Cam_FactoryDiag_AllButtonsExceptB (assets/catalog_jp.csv),assets
 25,5A80,Map_25_5A80_Cam_FactoryDiag_AllButtonsExceptB,I,copied to VRAM/WRAM by Cam_FactoryDiag_AllButtonsExceptB (assets/catalog_jp.csv),assets
 25,5AA0,Map_25_5AA0_Cam_FactoryDiag_AllButtonsExceptB,I,copied to VRAM/WRAM by Cam_FactoryDiag_AllButtonsExceptB (assets/catalog_jp.csv),assets
 25,5AC0,Map_25_5AC0_Cam_FirstBoot_StorePleaseWait,I,copied to VRAM/WRAM by Cam_FirstBoot_StorePleaseWait (assets/catalog_jp.csv),assets
 25,5D00,Map_25_5D00_Cam_FirstBoot_StorePleaseWait,I,copied to VRAM/WRAM by Cam_FirstBoot_StorePleaseWait (assets/catalog_jp.csv),assets
-25,5D20,Map_25_5D20_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
+25,5D20,Map_25_5D20_Mode08_State0F_HiScoreInit,I,copied to VRAM/WRAM by Mode08_State0F_HiScoreInit (assets/catalog_jp.csv),assets
 25,5F60,Map_25_5F60_Mode21_State00_Init,I,copied to VRAM/WRAM by Mode21_State00_Init (assets/catalog_jp.csv),assets
-25,61A0,Map_25_61A0_Mode21_PickCharacterKeys,I,copied to VRAM/WRAM by Mode21_PickCharacterKeys (assets/catalog_jp.csv),assets
+25,61A0,Map_25_61A0_Mode21_State02_RaceSceneInit,I,copied to VRAM/WRAM by Mode21_State02_RaceSceneInit (assets/catalog_jp.csv),assets
 25,63E0,Map_25_63E0_Mode1D_State01_LoadScreen,I,copied to VRAM/WRAM by Mode1D_State01_LoadScreen (assets/catalog_jp.csv),assets
-25,6620,Map_25_6620_Bank06,I,copied to VRAM/WRAM by Bank06 (assets/catalog_jp.csv),assets
+25,6620,Map_25_6620_Mode15_State01_TimerInit,I,copied to VRAM/WRAM by Mode15_State01_TimerInit (assets/catalog_jp.csv),assets
 25,6860,Map_25_6860_CreditsNishimuraDanceMap1,C,"map 1 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
-25,6AA0,Map_25_6AA0_Mode15_State04_TimerApply,I,copied to VRAM/WRAM by Mode15_State04_TimerApply (assets/catalog_jp.csv),assets
+25,6AA0,Map_25_6AA0_Mode15_State05_IntervalInit,I,copied to VRAM/WRAM by Mode15_State05_IntervalInit (assets/catalog_jp.csv),assets
 25,6CE0,Map_25_6CE0_WildFramePicker_Substate0_Init,I,copied to VRAM/WRAM by WildFramePicker_Substate0_Init (assets/catalog_jp.csv),assets
 25,6F20,Map_25_6F20_Mode05_State00_Init,I,copied to VRAM/WRAM by Mode05_State00_Init (assets/catalog_jp.csv),assets
 25,7160,Map_25_7160_Mode16_OptionPage0_HeadRows,C,"rows 0-1 (ramp 00-27) of option page 0 (rows 2-17 = 25:71A0); never loaded, as for every page",fix
 25,71A0,Map_25_71A0_Mode16_OptionPage0,C,option page 0 of mode $16: 16 rows of 32 copied to $9840 by Mode16_BuildOptionList (table 06:4B67 entry 0); its builder Mode16_BuildList0 is a bare ret,fix
-25,73A0,Map_25_73A0_Mode15_StepValue,I,copied to VRAM/WRAM by Mode15_StepValue (assets/catalog_jp.csv),assets
-25,75F4,Data_25_75F4,?,"no copy site, table or sheet covers these bytes",assets
+25,73A0,Map_25_73A0_Mode16_State00_Init,I,"copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLensesMenu, Mode16_State04_MontageMenu, Mode16_State05_PanoramaMenu, Mode16_State06_GameFaceMenu (assets/catalog_jp.csv)",assets
+25,75F4,Map_25_75F4_Mode15_StepValue_RowTail,I,"12 invisible columns ($FF) of the row at 75E0, the first row after the 18 rows (0x240) that Mode15_StepValue copies from 25:73A0; no copy reads it; was Data_25_75F4",hand
 25,7614,Map_25_7614_Unused_PhotoAreaRight,I,"map (14 rows of 32 + 12 bytes): $FF in columns 0-11, then $E0 $E0, the 16-wide photo ramp $00-$DF (14 rows) and $E0 $E0, like the other photo screens but in columns 12-31 (the same columns as the unused main menu 25:7814); no copy site reaches it; tile set = the dynamic photo tiles, so nothing to draw (README 16.25). Identical in the international ROM (25:73D4).",fix
-25,77F4,Data_25_77F4,?,"no copy site, table or sheet covers these bytes",assets
+25,77F4,Map_25_77F4_Unused_PhotoAreaRight_RowTail,I,12 invisible columns ($FF) of the row at 77E0 after the unused map 25:7614; no copy reads it; was Data_25_77F4,hand
 25,7814,Map_25_7814_Unused_MainMenu,C,"tile map (18 rows of 32 + 12 bytes) of the unused one-page main menu; the picture is in columns 12-31 (SCX = 96 in BGB), ids 00-E9 de-duplicated and descending, 00-2B = the STATUS strip; BGB draws it with 17:5500 (README 16.25). Identical in the international ROM (25:75D4); no copy site reaches it.",fix
 25,7A60,Map_25_7A60_Boot_EraseAllPrompt_Far,I,copied to VRAM/WRAM by Boot_EraseAllPrompt_Far (assets/catalog_jp.csv),assets
-25,7CA0,Map_25_7CA0_Bank08,I,copied to VRAM/WRAM by Bank08 (assets/catalog_jp.csv),assets
+25,7CA0,Map_25_7CA0_Mode1B_State00_Init,I,copied to VRAM/WRAM by Mode1B_State00_Init (assets/catalog_jp.csv),assets
 25,7EE0,Src_25_7EE0_Tbl539D_40,I,"target 40 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset",assets
 26,4000,Gfx_26_4000_CreditsGirlFrame06,C,"frame 6 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 26,4500,Map_26_4500_Unused_IconFrame,I,"18-row map: 16x14 photo-area ramp (00-8F, 00-4F) with icon columns and icon blocks in rows 14-17, then $FF fill; no copy site and no table entry reaches it (README 16.25)",fix
 26,4880,Gfx_26_4880_Mode1A_State03_Browse,I,"far pointer loaded by Mode1A_State03_Browse (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from the nearby ld bc",assets
 26,4C80,Map_26_4C80_CreditsEndingPlate_Map,C,20 x 18 map of the ending picture (0x240 bytes to $9800),assets
-26,4EC0,Map_26_4EC0_Run_CompareRecord,I,copied to VRAM/WRAM by Run_CompareRecord (assets/catalog_jp.csv),assets
+26,4EC0,Map_26_4EC0_ResultScreen_Substate0_Init,I,copied to VRAM/WRAM by ResultScreen_Substate0_Init (assets/catalog_jp.csv),assets
 26,5100,Map_26_5100_Mode08_State00_Init,I,copied to VRAM/WRAM by Mode08_State00_Init (assets/catalog_jp.csv),assets
 26,5340,Map_26_5340_Link_ShowScreenA,I,copied to VRAM/WRAM by Link_ShowScreenA (assets/catalog_jp.csv),assets
 26,5580,Map_26_5580_Mode02_State00_Init,I,"far pointer loaded by Mode02_State00_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 704 from the nearby ld bc",assets
 26,55C0,Src_26_55C0_Tbl53A6_0,I,"target 0 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset",assets
-26,57C0,Map_26_57C0_Mode1C_DrawOptionScreen,I,copied to VRAM/WRAM by Mode1C_DrawOptionScreen (assets/catalog_jp.csv),assets
+26,57C0,Map_26_57C0_Mode1E_State00_Init,I,copied to VRAM/WRAM by Mode1E_State00_Init (assets/catalog_jp.csv),assets
 26,5A00,Map_26_5A00_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
 26,5A60,Src_26_5A60_Tbl7CF9_7,I,"target 7 of the {lo,hi,bank} table 07:7CF9",assets
 26,5C40,Map_26_5C40_Mode1D_State06_LoadWaitScreen,I,copied to VRAM/WRAM by Mode1D_State06_LoadWaitScreen (assets/catalog_jp.csv),assets
 26,5E80,Map_26_5E80_CreditsNishimuraDanceMap0,C,"map 0 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
-26,60C0,Map_26_60C0_WildFrame_LoadForPrintJob,I,copied to VRAM/WRAM by WildFrame_LoadForPrintJob (assets/catalog_jp.csv),assets
-26,6300,Map_26_6300_Mode08_State05_CardLeave,I,copied to VRAM/WRAM by Mode08_State05_CardLeave (assets/catalog_jp.csv),assets
+26,60C0,Map_26_60C0_WildFrame_LoadForPrintScreen,I,"copied to VRAM/WRAM by WildFrame_LoadForPrintScreen, WildFrame_LoadForOptionScreen (assets/catalog_jp.csv)",assets
+26,6300,Map_26_6300_Mode08_State0C_RecordInit,I,copied to VRAM/WRAM by Mode08_State0C_RecordInit (assets/catalog_jp.csv),assets
 26,6540,Map_26_6540_Link_ShowScreenB,I,copied to VRAM/WRAM by Link_ShowScreenB (assets/catalog_jp.csv),assets
 26,6780,Map_26_6780_Mode1F_State00_TitleInit,I,copied to VRAM/WRAM by Mode1F_State00_TitleInit (assets/catalog_jp.csv),assets
-26,69C0,Map_26_69C0_WildFrame_PageSrcTbl,I,copied to VRAM/WRAM by WildFrame_PageSrcTbl (assets/catalog_jp.csv),assets
-26,6C00,Map_26_6C00_Mode21_State07_RaceEnd,I,copied to VRAM/WRAM by Mode21_State07_RaceEnd (assets/catalog_jp.csv),assets
+26,69C0,Map_26_69C0_Mode19_State00_CopyrightScreens,I,copied to VRAM/WRAM by Mode19_State00_CopyrightScreens (assets/catalog_jp.csv),assets
+26,6C00,Map_26_6C00_Mode21_State0B_ResultSetup,I,copied to VRAM/WRAM by Mode21_State0B_ResultSetup (assets/catalog_jp.csv),assets
 26,6E40,Map_26_6E40_Mode16_State08_StartShoot,I,copied to VRAM/WRAM by Mode16_State08_StartShoot (assets/catalog_jp.csv),assets
 26,7080,Map_26_7080_Unused_Picture,I,"full-screen picture map (18 rows of 32, picture in columns 0-19, $A5 filler in 20-31): 245 distinct ids, descending, a 4-column side strip (00-23) and a 16-column picture (24-F5) like the unused main menu; no copy site reaches it and no tile block fits it (tile_seam_search.py: best 0.80 per pixel against 0.42 for a true set), so what it shows is not known. Identical in the international ROM (26:6E40).",fix
 26,72C0,Map_26_72C0_Mode08_State13_CreditsPageA,I,copied to VRAM/WRAM by Mode08_State13_CreditsPageA (assets/catalog_jp.csv),assets
@@ -5023,38 +4959,25 @@ bank,addr,name,conf,note,source
 26,7740,Map_26_7740_CreditsNishimuraDanceMap3,C,"map 3 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 26,7980,Map_26_7980_CreditsNishimuraDanceMap4,C,"map 4 of the dancing man (Kentaro Nishimura) (table 09:517D, 0x240 bytes to $9800), cycled by Credits_NextDancingFrame",assets
 26,7BC0,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,?,"tile map rows with no direct pointer in the code (, same bank/neighbour of CreditsNishimuraDanceMap4); classified from its content - see sym_unconclusive",assets
-26,7E00,Src_26_7E00_Album_LoadNumeralTileB,I,"far pointer loaded by Album_LoadNumeralTileB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from the nearby ld bc",assets
-26,7E20,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of Album_LoadNumeralTileB); classified from its content - see sym_unconclusive",assets
+26,7E00,Gfx_26_7E00_Album_LoadNumeralTileB,C,numeral table: Album_LoadNumeralTileB (04:7D21) copies 32 bytes from $7E00 + A x 32 (the second digit set of the album); same layout as Gfx_0C_7E00_Album_LoadNumeralTile; was Gfx_26_7E20_..._Aux,hand
 27,4000,Gfx_27_4000_CreditsNishimuraDanceFrame02,C,"frame 2 of the dancing man (Kentaro Nishimura, credited CORDINATOR (sic) and SOUND COMPOSER; the ""Miyamoto"" attribution found on the web is an error: owner) of the short credits: {lo,hi,bank,duration} table 09:5145 (4 records, 8 frames each), 0x470 bytes copied to $9000 by Mode08_State17_CreditsDancingMan",assets
-27,4470,Map_27_4470_Mode0D_State06_PlayInit,I,copied to VRAM/WRAM by Mode0D_State06_PlayInit (assets/catalog_jp.csv),assets
+27,4470,Map_27_4470_Mode0D_State06_PlayInit,I,"copied to VRAM/WRAM by Album_ShowPageScreen, Album_ShowPageScreenB, Mode0A_State03_SliderBrowse, Album_LoadSliderScreen, Album_LoadBorderScreen, Mode0D_State06_PlayInit (assets/catalog_jp.csv)",assets
 27,4472,Map_27_4472_Mode1C_DrawOptionScreen,I,"far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_DrawPrintScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-27,44B2,Map_27_44B2_Mode17_State08_Split_Build,I,"far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode17_State08_Split_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
+27,44B2,Map_27_44B2_Mode17_State08_Split_Build,I,"far pointer loaded by Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode0E_State04_PickDone, Mode0E_State0D_PickSecond (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 27,4730,Map_27_44B2_Compose_Split_DrawMakeBlink_Part4730,I,"copied to VRAM/WRAM by Compose_Fusion_DrawMakeBlink, Compose_Split_DrawMakeBlink, Mode0E_State02_MessageStrip (assets/catalog_jp.csv)",assets
 27,4772,Map_27_4772_BlankRows,I,eight blank rows ($FD) after the 22-row map copied from 27:44B2 and before the map copied from 27:4870; filler,fix
-27,4870,Map_27_4870_ShowMenu_LoadNormalTiles,I,copied to VRAM/WRAM by ShowMenu_LoadNormalTiles (assets/catalog_jp.csv),assets
+27,4870,Map_27_4870_Mode04_State00_Init,I,copied to VRAM/WRAM by Mode04_State00_Init (assets/catalog_jp.csv),assets
 27,4AB0,TileSet_27_4AB0,I,"small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs; it start",assets
-27,4CB0,Map_27_4CB0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
-27,4EB0,Map_27_4EB0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
-27,50B0,Map_27_50B0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
-27,52B0,Map_27_52B0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by LinkPick_PageTurnNext, LinkPick_PageTurnPrev, PhotoPicker_PageTransitionNext (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
+27,4CB0,Map_27_4CB0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext, LinkPick_PageTurnPrev (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
+27,4EB0,Map_27_4EB0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext, LinkPick_PageTurnPrev (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
+27,50B0,Map_27_50B0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext, LinkPick_PageTurnPrev (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
+27,52B0,Map_27_52B0_PhotoPicker_PageTransitionPrev,I,"far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext, LinkPick_PageTurnPrev (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from the nearby ld bc",assets
 27,54B0,Src_27_54B0_Tbl7CF9_0,I,"target 0 of the {lo,hi,bank} table 07:7CF9; extent not known: runs to the next pointer or asset",assets
 27,5670,Src_27_5670_Tbl7CF9_2,I,"target 2 of the {lo,hi,bank} table 07:7CF9; extent not known: runs to the next pointer or asset",assets
 27,5830,Src_27_5830_Tbl7CF9_1,I,"target 1 of the {lo,hi,bank} table 07:7CF9; extent not known: runs to the next pointer or asset",assets
-27,59F0,Map_27_59F0_DjTitle_DrawFrame3,I,copied to VRAM/WRAM by DjTitle_DrawFrame3 (assets/catalog_jp.csv),assets
+27,59F0,Map_27_59F0_Mode1F_State04_PerformanceSetup,I,copied to VRAM/WRAM by Mode1F_State04_PerformanceSetup (assets/catalog_jp.csv),assets
 27,5AB0,Src_27_5AB0_DjPerf_Equaliser,I,"far pointer loaded by DjPerf_Equaliser (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-27,5BB0,Data_27_5BB0,?,"no copy site, table or sheet covers these bytes",assets
-27,5BD8,Data_27_5BD8,?,"no copy site, table or sheet covers these bytes",assets
-27,5BF8,Data_27_5BF8,?,"no copy site, table or sheet covers these bytes",assets
-27,5C20,Data_27_5C20,?,"no copy site, table or sheet covers these bytes",assets
-27,5C38,Data_27_5C38,?,"no copy site, table or sheet covers these bytes",assets
-27,5C60,Data_27_5C60,?,"no copy site, table or sheet covers these bytes",assets
-27,5C78,Data_27_5C78,?,"no copy site, table or sheet covers these bytes",assets
-27,5CA0,Data_27_5CA0,?,"no copy site, table or sheet covers these bytes",assets
-27,5CB8,Data_27_5CB8,?,"no copy site, table or sheet covers these bytes",assets
-27,5CE0,Data_27_5CE0,?,"no copy site, table or sheet covers these bytes",assets
-27,5CF8,Data_27_5CF8,?,"no copy site, table or sheet covers these bytes",assets
-27,5D20,Data_27_5D20,?,"no copy site, table or sheet covers these bytes",assets
-27,5D40,Data_27_5D40,?,"no copy site, table or sheet covers these bytes",assets
+27,5BB0,Mask_27_5BB0_Img_AndMaskTiles_Oval,C,"448 bytes = 56 tile masks x 8 bytes (one mask byte per tile row, the same byte for both bit planes), 8 x 7 tiles = 64 x 56 pixels; read by Img_AndMaskTiles_Bank27 (00:1569, ld hl,$5BB0) which ANDs it into one quadrant of the image buffer ($C000 / $C080 / $C700 / $C780 chosen by $D7E4); drawn as 1 bit per pixel it is a filled ellipse; was 13 placeholders Data_27_5BB0..5D40 split at fill runs",hand
 27,5D70,Map_27_5D70_Mode1F_State05_Performance,I,"far pointer loaded by Mode1F_State05_Performance (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 224 from the nearby ld bc",assets
 27,5E50,Map_27_5E50_Mode1F_State06_SavePanel,I,"far pointer loaded by Mode1F_State06_SavePanel (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 224 from the nearby ld bc",assets
 27,5F30,Map_27_5F30_MainMenu_LoadBackground,I,copied to VRAM/WRAM by MainMenu_LoadBackground (assets/catalog_jp.csv),assets
@@ -5075,16 +4998,12 @@ bank,addr,name,conf,note,source
 27,7510,Map_27_7510_Mode12_State14_SaveDialogOpen,I,"far pointer loaded by Mode12_State14_SaveDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288 from the nearby ld bc",assets
 27,7630,Map_27_7630_Mode1A_State09_ExitDialog,I,"far pointer loaded by Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288 from the nearby ld bc",assets
 27,76B0,Map_27_76B0_HotSpotEd_DialogChoiceB,I,"far pointer loaded by HotSpotEd_DialogChoiceB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-27,76F0,Data_27_76F0,?,"no copy site, table or sheet covers these bytes",assets
-27,7703,Data_27_7703,?,"no copy site, table or sheet covers these bytes",assets
 27,7710,Map_27_7710_Mode1A_State09_ExitDialog,I,"far pointer loaded by HotSpotEd_DialogChoiceB, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 27,7750,Map_27_7750_Mode1A_State03_Browse,I,"far pointer loaded by Mode1A_State03_Browse (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288 from the nearby ld bc",assets
 27,77D0,Map_27_77D0_HotSpotEd_DialogChoiceA,I,"far pointer loaded by HotSpotEd_DialogChoiceA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
-27,7810,Data_27_7810,?,"no copy site, table or sheet covers these bytes",assets
-27,7823,Data_27_7823,?,"no copy site, table or sheet covers these bytes",assets
 27,7830,Map_27_7830_HotSpotEd_DialogChoiceA,I,"far pointer loaded by HotSpotEd_DialogChoiceA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc",assets
 27,7870,Map_27_7870_Mode12_State1A_ClearDialogOpen,I,"far pointer loaded by Mode12_State1A_ClearDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288 from the nearby ld bc",assets
-27,7990,Map_27_7990_Mode1F_State07_QuitPanel,I,copied to VRAM/WRAM by Mode1F_State07_QuitPanel (assets/catalog_jp.csv),assets
+27,7990,Map_27_7990_Mode1F_State08_EditPagesSetup,I,copied to VRAM/WRAM by Mode1F_State08_EditPagesSetup (assets/catalog_jp.csv),assets
 28,4000,Gfx_28_4000_MsgStripB,C,"entry 0 of the {lo,hi,bank} table 09:739E, 640 bytes each (constant pitch)",assets
 28,4280,Gfx_28_4280_MsgStripB,C,"entry 1 of the {lo,hi,bank} table 09:739E, 640 bytes each (constant pitch)",assets
 28,4500,Gfx_28_4500_MsgStripB,C,"entry 2 of the {lo,hi,bank} table 09:739E, 640 bytes each (constant pitch)",assets
@@ -5107,12 +5026,12 @@ bank,addr,name,conf,note,source
 29,60B2,Map_29_60B2_Map05_62A3,C,"entry 4 of the {lo,hi,bank} table 05:62A3, 89 bytes each (constant pitch)",assets
 29,610B,Map_29_610B_Map05_62A3,C,"entry 3 of the {lo,hi,bank} table 05:62A3, 89 bytes each (constant pitch)",assets
 29,6164,Map_29_6164_Map05_62A3,C,"entry 2 of the {lo,hi,bank} table 05:62A3, 89 bytes each (constant pitch)",assets
-2A,4000,Sheet_MiscellaneousStampsJpn_2A_4000,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 226 tiles",assets
-2A,44D4,Sheet_MiscellaneousStampsJpn_2A_44D4_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,44F4,Sheet_MiscellaneousStampsJpn_2A_44F4_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
+2A,4000,Sheet_MiscellaneousStampsJpn_2A_4000,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 226 tiles | start of the 256-slot glyph font table: slot k at $4000 + 32 k, read by Kb_LoadGlyphList (index) and Glyph_LoadFromCharCode (code - 1) (C, 09:5424 / 09:4802); the $6000 table is the small-kana one",assets
+2A,44D4,Gfx_2A_44D4_FontSlot26,C,"6 bytes inside slot $26 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by no Kb_LoadGlyphList list (A, B, C) names it: it is read through Glyph_LoadFromCharCode (09:4802, char code = slot + 1); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,44F4,Gfx_2A_44F4_FontSlots27to28,C,"16 bytes inside slots $27-$28 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set A, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
 2A,4504,Sheet_MiscellaneousStampsJpn_2A_4504,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 256 tiles",assets
-2A,4A23,Sheet_MiscellaneousStampsJpn_2A_4A23_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,4A4E,Sheet_MiscellaneousStampsJpn_2A_4A4E_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
+2A,4A23,Gfx_2A_4A23_FontSlot51,C,"23 bytes inside slot $51 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set A, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,4A4E,Gfx_2A_4A4E_FontSlot52,C,"12 bytes inside slot $52 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set A, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
 2A,4A6A,Sheet_MiscellaneousStampsJpn_2A_4A6A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 441 tiles",assets
 2A,5160,Kana_2A_5160,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
 2A,5180,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part5180,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 441 tiles",assets
@@ -5122,23 +5041,23 @@ bank,addr,name,conf,note,source
 2A,53C0,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part53C0,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 441 tiles",assets
 2A,53E0,Kana_2A_53E0,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
 2A,53FA,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part53FA,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 441 tiles",assets
-2A,5401,Sheet_MiscellaneousStampsJpn_2A_5401_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,5430,Sheet_MiscellaneousStampsJpn_2A_5430_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,5452,Sheet_MiscellaneousStampsJpn_2A_5452_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,5470,Sheet_MiscellaneousStampsJpn_2A_5470_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,5492,Sheet_MiscellaneousStampsJpn_2A_5492_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,54B0,Sheet_MiscellaneousStampsJpn_2A_54B0_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,54D0,Sheet_MiscellaneousStampsJpn_2A_54D0_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,54F0,Sheet_MiscellaneousStampsJpn_2A_54F0_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,5512,Sheet_MiscellaneousStampsJpn_2A_5512_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
+2A,5401,Gfx_2A_5401_FontSlotA0,C,"25 bytes inside slot $A0 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5430,Gfx_2A_5430_FontSlotA1,C,"10 bytes inside slot $A1 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5452,Gfx_2A_5452_FontSlotA2,C,"8 bytes inside slot $A2 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5470,Gfx_2A_5470_FontSlotA3,C,"10 bytes inside slot $A3 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5492,Gfx_2A_5492_FontSlotA4,C,"2 bytes inside slot $A4 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set A/B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,54B0,Gfx_2A_54B0_FontSlotA5,C,"10 bytes inside slot $A5 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,54D0,Gfx_2A_54D0_FontSlotA6,C,"10 bytes inside slot $A6 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,54F0,Gfx_2A_54F0_FontSlotA7,C,"10 bytes inside slot $A7 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5512,Gfx_2A_5512_FontSlotA8,C,"8 bytes inside slot $A8 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set B, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
 2A,552A,Sheet_MiscellaneousStampsJpn_2A_552A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 150 tiles",assets
-2A,585B,Sheet_MiscellaneousStampsJpn_2A_585B_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,5898,Sheet_MiscellaneousStampsJpn_2A_5898_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,58D6,Sheet_MiscellaneousStampsJpn_2A_58D6_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
-2A,58F6,Sheet_MiscellaneousStampsJpn_2A_58F6_Gap,?,unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matched to a sheet tile; probably more of the same graphics),assets
+2A,585B,Gfx_2A_585B_FontSlotsC2toC3,C,"31 bytes inside slots $C2-$C3 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set C, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5898,Gfx_2A_5898_FontSlotsC4toC5,C,"22 bytes inside slots $C4-$C5 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set C, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,58D6,Gfx_2A_58D6_FontSlotC6,C,"6 bytes inside slot $C6 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set C, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,58F6,Gfx_2A_58F6_FontSlotC7,C,"4 bytes inside slot $C7 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set C, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
 2A,590A,Sheet_MiscellaneousStampsJpn_2A_590A,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 41 tiles",assets
-2A,59FF,Gfx_2A_59FF_MiscellaneousStampsJpn_Aux,?,"tile data with no direct pointer in the code (, same bank/neighbour of MiscellaneousStampsJpn); classified from its content - see sym_unconclusive",assets
-2A,5A7A,Data_2A_5A7A,?,"no copy site, table or sheet covers these bytes",assets
+2A,59FF,Gfx_2A_59FF_FontSlotsCFtoD3,C,"105 bytes inside slots $CF-$D3 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot); every byte is read in the organic coverage runs, by Kb_LoadGlyphList (glyph set C, lists at 09:53D3 / 53F5 / 5417); content pixel data (the Spriters sheet match stops short of it)",hand
+2A,5A7A,Gfx_2A_5A7A_FontSlotsD3toD4_Blank,I,"12 zero bytes inside slots $D3-$D4 of the glyph font at 2A:4000, read organically by the call to Vram_CopyFromBank in Kb_LoadGlyphList (09:5445); Kb_LoadGlyphList (glyph set C, lists at 09:53D3 / 53F5 / 5417); blank part of a glyph (was 'a stamp tile load'); was Data_2A_5A7A",hand
 2A,5A86,Sheet_MiscellaneousStampsJpn_2A_5A86,I,"Spriter's Resource sheet ""Miscellaneous - Stamps (JPN)"", 131 tiles",assets
 2A,5DBE,Kana_2A_5DBE,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
 2A,5E62,Kana_2A_5E62,I,tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them),assets
@@ -5328,8 +5247,8 @@ bank,addr,name,conf,note,source
 3F,4000,Gfx_3F_4000_TitleScene,C,"entry 4 of the {lo,hi,bank} table 08:74DC, 3584 bytes each (constant pitch)",assets
 3F,4E00,Gfx_3F_4E00_TitleScene,C,"entry 5 of the {lo,hi,bank} table 08:74DC, 3584 bytes each (constant pitch)",assets
 3F,5C00,Gfx_3F_5C00_TitleScene,C,"entry 6 of the {lo,hi,bank} table 08:74DC, 3584 bytes each (constant pitch)",assets
-3F,6A00,Gfx_3F_6A00_Mode19_State01_TitleFirst,I,copied to VRAM/WRAM by Mode19_State01_TitleFirst (assets/catalog_jp.csv),assets
-3F,7100,Gfx_3F_7100_Mode19_State01_TitleFirst,I,copied to VRAM/WRAM by Mode19_State01_TitleFirst (assets/catalog_jp.csv),assets
-3F,7280,Map_3F_7280_WildFrame_PageSrcTbl,I,"copied to VRAM/WRAM by Mode19_State01_TitleFirst, WildFrame_PageSrcTbl (assets/catalog_jp.csv)",assets
+3F,6A00,Gfx_3F_6A00_Mode19_State01_TitleFirst,I,"copied to VRAM/WRAM by Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu (assets/catalog_jp.csv)",assets
+3F,7100,Gfx_3F_7100_Mode19_State01_TitleFirst,I,"copied to VRAM/WRAM by Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu (assets/catalog_jp.csv)",assets
+3F,7280,Map_3F_7280_Mode19_State00_CopyrightScreens,I,"copied to VRAM/WRAM by Mode19_State00_CopyrightScreens, Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu (assets/catalog_jp.csv)",assets
 3F,7700,Gfx_3F_7700_Mode0C_State02_Setup,I,copied to VRAM/WRAM by Mode0C_State02_Setup (assets/catalog_jp.csv),assets
 3F,7D00,Map_3F_7D00_Mode0C_State02_Setup,I,copied to VRAM/WRAM by Mode0C_State02_Setup (assets/catalog_jp.csv),assets

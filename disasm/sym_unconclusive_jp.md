@@ -8,139 +8,68 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 10 | 9698 | a yes/no on the family name |
-| far-pointer asset, extent unknown | 17 | 213 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 53 | 13538 | what each span is: look at the bank image, or tell me the screen it belongs to |
-| unknown data (no reader found) | 75 | 812 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
-| auto-named table | 16 | 925 | what the table indexes |
-| hand name, unconfirmed | 12 | 686 | a check of the guess |
+| visually identified range | 8 | 8578 | a yes/no on the family name |
+| far-pointer asset, extent unknown | 0 | 0 | where each block ends (the length copied at run time) and what it is |
+| content-classified span | 26 | 7667 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
+| auto-named table | 2 | 21 | what the table indexes |
+| hand name, unconfirmed | 5 | 542 | a check of the guess |
 | mode state | 106 | 5954 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 88 | 11689 | which visible effect each slot gives |
 | SFX tag | 95 | 2536 | the sound each id plays |
-| Run minigame | 43 | 1755 | variable roles during play |
-| keyboard / glyph | 36 | 1336 | which glyph page each loader fills |
+| Run minigame | 41 | 1683 | variable roles during play |
+| keyboard / glyph | 19 | 579 | which glyph page each loader fills |
 | main-menu slide | 18 | 1234 | which transition each slide is |
 | arrow drawing | 12 | 593 | which cursor / arrow each routine draws |
 | dead code | 29 | 6175 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (10)
+## visually identified range (8)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
 | 0C:5800 | `Gfx_0C_5800_AnimEdMenuLabelsAlt` | 832 | second copy of the Animation-editor menu labels (クリア ループ ここから テスト プレイ オール PHOTO MOVIE FRAME PLAY) at 4A00-5000; the bank | second copy of the Animation-editor menu labels (クリア ループ ここから テスト プレイ オール PHOTO MOVIE FRAME PLAY) at 4A00-5000 |
-| 0C:68D0 | `Gfx_0C_68D0_AnimEdKanaStrips` | 864 | kana strips of the Animation-editor dialogs, same style as 6000-68CF | kana strips of the Animation-editor dialogs, same style as 6000-68CF (visual) |
 | 0D:7000 | `Gfx_0D_7000_FillPatternTiles` | 1632 | dot, crosshatch and dither fill tiles plus a few glyph pieces | dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by |
 | 10:7602 | `Gfx_10_7602_DjLetterGlyphStrip` | 678 | Latin letter / digit glyph strip | Latin letter / digit glyph strip (visual); bank 10 also holds the DJ screens' numeral tiles at 7400-7420 |
-| 11:5400 | `Gfx_11_5400_MainMenuUpperItemFramesA` | 256 | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_ | gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by |
 | 14:4554 | `Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr` | 2780 | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only read |
 | 17:4000 | `Gfx_17_4000_ShootMenuIconsA` | 320 | icon row of the SHOOT-menu tile bank | icon row of the SHOOT-menu tile bank (visual); neighbours are loaded by Mode14_State00_Init |
 | 17:4200 | `Gfx_17_4200_ShootCounterIcons` | 1152 | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens | digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens (visual); neighbours Shoot_LoadBurstIcon |
 | 17:4820 | `Gfx_17_4820_ShootMenuIconsB` | 288 | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets | icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets (visual) |
 | 21:4D00 | `Gfx_21_4D00_SpaceFeverFont` | 896 | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh | large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines;  |
 
-## far-pointer asset, extent unknown (17)
+## content-classified span (26)
 
-_Why doubtful:_ end taken as the next pointer or asset. _To settle:_ read the copy length at run time (breakpoint on the helper).
+_Why doubtful:_ type confirmed by the owner (review page, by eye); role and consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 2A:44D4 | `Sheet_MiscellaneousStampsJpn_2A_44D4_Gap` | 6 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:44F4 | `Sheet_MiscellaneousStampsJpn_2A_44F4_Gap` | 16 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:4A23 | `Sheet_MiscellaneousStampsJpn_2A_4A23_Gap` | 23 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:4A4E | `Sheet_MiscellaneousStampsJpn_2A_4A4E_Gap` | 12 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5401 | `Sheet_MiscellaneousStampsJpn_2A_5401_Gap` | 25 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5430 | `Sheet_MiscellaneousStampsJpn_2A_5430_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5452 | `Sheet_MiscellaneousStampsJpn_2A_5452_Gap` | 8 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5470 | `Sheet_MiscellaneousStampsJpn_2A_5470_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5492 | `Sheet_MiscellaneousStampsJpn_2A_5492_Gap` | 2 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:54B0 | `Sheet_MiscellaneousStampsJpn_2A_54B0_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:54D0 | `Sheet_MiscellaneousStampsJpn_2A_54D0_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:54F0 | `Sheet_MiscellaneousStampsJpn_2A_54F0_Gap` | 10 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5512 | `Sheet_MiscellaneousStampsJpn_2A_5512_Gap` | 8 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:585B | `Sheet_MiscellaneousStampsJpn_2A_585B_Gap` | 31 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:5898 | `Sheet_MiscellaneousStampsJpn_2A_5898_Gap` | 22 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:58D6 | `Sheet_MiscellaneousStampsJpn_2A_58D6_Gap` | 6 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-| 2A:58F6 | `Sheet_MiscellaneousStampsJpn_2A_58F6_Gap` | 4 | data loaded through a banked copy helper; length not stated at the load site | unread gap between two parts of the Spriters sheet MiscellaneousStampsJpn: same family on both sides (not matc |
-
-## content-classified span (53)
-
-_Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
-
-- bank 0C: `7E20` Album_LoadNumeralTile_Aux (352 B)
-- bank 0F: `5800` UserMap_LoadPlanetTiles_Aux (122 B), `5904` Unref (84 B)
-- bank 10: `7420` DjTitle_LoadNumeralTile_Aux (128 B), `74A3` Unref (157 B), `78B8` Unref (24 B), `7908` Unref (238 B), `7A24` Unref (92 B), `7ADE` Unref (162 B), `7BF8` Unref (345 B), `7D52` Unref (366 B), `7F00` Unref (184 B)
-- bank 14: `7A01` PenMenu_Build_Aux (95 B)
+- bank 10: `78B8` Unref (24 B), `7908` Unref (238 B), `7A24` Unref (92 B), `7ADE` Unref (162 B), `7BF8` Unref (345 B), `7D52` Unref (366 B), `7F00` Unref (184 B)
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
-- bank 1A: `4D80` DjPerf_DrawTempo_Aux (128 B), `5182` Unref (90 B), `7E00` Unref (501 B)
-- bank 1B: `6EBA` Unref (176 B), `6F7C` Unref (68 B)
-- bank 1C: `4241` MenusShootMenu_Aux (607 B), `44B0` Unref (448 B), `5670` HotSpotEd_CopyNumberTile_Aux (158 B), `57A0` HotSpotEd_CopyNumberTile_Aux (256 B), `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
-- bank 1D: `6D11` MenusShootMenu_Aux (1315 B), `724E` Unref (82 B), `7631` MenusShootMenu_Aux (341 B), `7796` Unref (330 B), `7B41` Tbl539D_Aux (63 B)
-- bank 1E: `64E0` Compose_DrawPhotoNumber_Aux (144 B), `6590` Mode16_DrawCaptionBlink_Aux (61 B), `7D00` Unref (184 B)
-- bank 20: `64E0` OwnerCard_LoadGenderTiles_Aux (64 B), `66C0` Unref (256 B), `70F0` Mode15_DrawTwoDigitsInterval_Aux (144 B), `71A0` Mode15_DrawTwoDigits_Aux (288 B)
-- bank 21: `5C31` MenusShootMenu_Aux (927 B), `6566` Unref (69 B), `6AC7` Unref (177 B), `6B91` Unref (47 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
-- bank 23: `5CC0` Mode0E_ExchangeAlt_Unref (580 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
-- bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B), `78C0` PenMenu_Build_Aux (66 B), `7913` Unref (77 B)
-- bank 26: `7BC0` CreditsNishimuraDanceMap4_Aux (576 B), `7E20` Album_LoadNumeralTileB_Aux (352 B)
-- bank 2A: `59FF` MiscellaneousStampsJpn_Aux (105 B)
+- bank 1A: `5182` Unref (90 B), `7E00` Unref (501 B)
+- bank 1C: `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
+- bank 1D: `7B41` Tbl539D_Aux (63 B)
+- bank 1E: `6590` Mode16_DrawCaptionBlink_Aux (61 B), `7D00` Unref (184 B)
+- bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B), `7BC0` BorderPicker_AnimateIcon_Aux (63 B)
+- bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B), `7180` CreditsGirlFrame12_Aux (608 B), `7DC0` ShowMenu_LoadHighlightTiles_Aux (192 B)
+- bank 24: `60B2` Unref (270 B), `6200` Mode01_State02_ApplyPageA_Aux (288 B)
+- bank 26: `7BC0` CreditsNishimuraDanceMap4_Aux (576 B)
 
-## unknown data (no reader found) (75)
-
-_Why doubtful:_ no pointer, table or sheet covers it. _To settle:_ VRAM viewer / read breakpoint in an emulator.
-
-- bank 0F: `596C` 6 B, `5984` 20 B
-- bank 10: `78E8` 8 B, `7A08` 8 B, `7BC2` 10 B, `7BE4` 4 B
-- bank 1A: `5160` 3 B
-- bank 1B: `6EA0` 10 B
-- bank 1C: `5620` 2 B, `5623` 42 B, `564E` 18 B, `5720` 16 B, `5BC0` 26 B, `5CC0` 11 B, `5CD3` 13 B, `5D20` 39 B, `5D48` 24 B
-- bank 1E: `64C0` 16 B
-- bank 20: `667D` 3 B
-- bank 22: `7F40` 10 B, `7F61` 5 B, `7F81` 5 B, `7FA4` 6 B, `7FC4` 6 B, `7FE0` 10 B
-- bank 23: `58C0` 2 B, `58E0` 2 B, `5900` 2 B, `5920` 2 B, `5940` 2 B, `5960` 2 B, `5980` 2 B, `59A0` 2 B, `59C0` 2 B, `59E0` 2 B, `5A00` 2 B, `5A20` 2 B, `5A40` 2 B, `5A60` 2 B, `5A80` 2 B, `5AA0` 2 B, `5AC0` 2 B, `5AE0` 2 B, `5F1C` 8 B, `5F3C` 8 B, `5F5C` 8 B, `5F94` 12 B, `7760` 32 B, `7D54` 12 B
-- bank 24: `4E40` 32 B, `4F20` 32 B, `5F00` 20 B, `6080` 34 B, `7780` 32 B
-- bank 25: `5834` 12 B, `75F4` 12 B, `77F4` 12 B
-- bank 27: `5BB0` 22 B, `5BD8` 16 B, `5BF8` 8 B, `5C20` 8 B, `5C38` 8 B, `5C60` 8 B, `5C78` 8 B, `5CA0` 8 B, `5CB8` 8 B, `5CE0` 8 B, `5CF8` 8 B, `5D20` 8 B, `5D40` 31 B, `76F0` 1 B, `7703` 13 B, `7810` 1 B, `7823` 13 B
-- bank 2A: `5A7A` 12 B
-
-## auto-named table (16)
+## auto-named table (2)
 
 _Why doubtful:_ no code loads it directly (indexed or computed access). _To settle:_ breakpoint on reads of the address.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 00:36F1 | `Img_NibbleMapTbl_Data36F1` | 15 | table or word list found by pattern; no immediate reference | auto: 15 bytes, bytes; referenced by no immediate load found |
-| 02:46E6 | `Photo_SaveReceived_Far_Data46E6` | 3 | table or word list found by pattern; no immediate reference | auto: 3 bytes, bytes; referenced by no immediate load found |
-| 03:568B | `AnimEd_CoroYield_PtrTbl568B` | 6 | table or word list found by pattern; no immediate reference | auto: 6 bytes, word table; referenced by no immediate load found |
-| 03:59F1 | `AnimEd_CoroYield_B_PtrTbl59F1` | 6 | table or word list found by pattern; no immediate reference | auto: 6 bytes, word table; referenced by no immediate load found |
-| 04:4D09 | `Mode0F_State09_EraseOne_Data4D09` | 18 | table or word list found by pattern; no immediate reference | auto: 18 bytes, bytes; referenced by no immediate load found |
-| 05:5AE8 | `DjPrintRow_Text1_Data5AE8` | 1 | table or word list found by pattern; no immediate reference | auto: 1 bytes, bytes; referenced by no immediate load found |
-| 08:4E88 | `BorderPicker_FillPatternTbl_Data4E88` | 12 | table or word list found by pattern; no immediate reference | auto: 12 bytes, bytes; referenced by no immediate load found |
-| 09:5A0A | `Kb_Page1_Navigate_Data5A0A` | 9 | table or word list found by pattern; no immediate reference | auto: 9 bytes, bytes; referenced by no immediate load found |
-| 09:5A72 | `Kb_Page2_Navigate_Data5A72` | 23 | table or word list found by pattern; no immediate reference | auto: 23 bytes, bytes; referenced by no immediate load found |
-| 09:5AF8 | `Kb_Page3_Navigate_Data5AF8` | 17 | table or word list found by pattern; no immediate reference | auto: 17 bytes, bytes; referenced by no immediate load found |
-| 09:68E3 | `Run_SpeedLevelTbl_Data68E3` | 16 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
-| 09:6AC6 | `Run_FlagHoistKeys_Data6AC6` | 16 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
-| 0A:7301 | `Cam_PopcountTable256_Data7301` | 255 | table or word list found by pattern; no immediate reference | auto: 255 bytes, bytes; referenced by no immediate load found |
-| 0A:7600 | `Cam_BitReverseTbl_Data7600` | 256 | table or word list found by pattern; no immediate reference | auto: 256 bytes, bytes; referenced by no immediate load found |
-| 0A:7740 | `Cam_BitReverseTbl_Data7740` | 16 | table or word list found by pattern; no immediate reference | auto: 16 bytes, bytes; referenced by no immediate load found |
-| 0A:7800 | `Cam_BitReverseTbl_Data7800` | 256 | table or word list found by pattern; no immediate reference | auto: 256 bytes, bytes; referenced by no immediate load found |
+| 02:46E6 | `Photo_SaveReceived_Far_Data46E6` | 3 | table or word list found by pattern; no immediate reference | 3 bytes 00 C0 00 (decode as nop / ret nz / nop) between the jp of Photo_SaveReceived_Far and Sram_ZeroTagBytes |
+| 04:4D09 | `Mode0F_State09_EraseOne_Data4D09` | 18 | table or word list found by pattern; no immediate reference | 18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; |
 
-## hand name, unconfirmed (12)
+## hand name, unconfirmed (5)
 
 _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 00:0486 | `Map_CopyRectAddTile_LcdOff` | 109 | copies a 20-wide tilemap block adding C to each tile; LCD off variant | copies a 20-wide tilemap block adding C to each tile; LCD off variant |
-| 00:04F3 | `Map_CopyRectAddTile_Safe` | 140 | same with STAT waits | same with STAT waits |
-| 00:09D4 | `Rng_Scaled` | 26 | index into 09EE table; combines Rng_Next with 0F4F and returns the high bits | index into 09EE table; combines Rng_Next with 0F4F and returns the high bits |
-| 00:1569 | `Img_AndMaskTiles_Bank27` | 124 | ANDs a 7x8-tile image (pointer by shoot_phase table 15E5) with the mask at 27:5BB0; caller | ANDs a 7x8-tile image (pointer by shoot_phase table 15E5) with the mask at 27:5BB0; callers in bank 6 |
-| 00:15E5 | `Img_AndMaskTiles_Ptrs` | 8 | see name |  |
-| 00:1720 | `Prn_CopyBandRecords` | 79 | copies 18-byte records HL(bank A) -> DE until a terminator; returns the row count in B | copies 18-byte records HL(bank A) -> DE until a terminator; returns the row count in B |
-| 00:29F9 | `Thumb_ApplyCornerPatches` | 24 | 6 records {offset | 6 records {offset |
-| 00:2A11 | `Thumb_CornerPatchTbl` | 18 | 6 x 3 bytes | 6 x 3 bytes |
+| 0C:6AB0 | `Gfx_0C_6AB0_AnimEdKanaStrips_Tail` | 384 | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no co | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it |
 | 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide  | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF ( |
 | 1A:7C90 | `Unused_TCRF_PhotoOptionIcon_Candidate_Gfx` | 32 | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON S | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play |
 | 1F:43E4 | `Sfx1_Init_24_SpaceFeverII` | 19 | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no con | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no r |
@@ -456,7 +385,7 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:50BE | `Sfx3_Step_01_ShootSelect` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 01 (table $4306) |
 | 1F:50D7 | `Sfx3_Init_01_ShootSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 01 (table $42F2) |
 
-## Run minigame (43)
+## Run minigame (41)
 
 _Why doubtful:_ role of several state variables guessed. _To settle:_ play the game with a watch on the named variables.
 
@@ -475,8 +404,6 @@ _Why doubtful:_ role of several state variables guessed. _To settle:_ play the g
 | 09:68FA | `Run_PlayerFrameFromSpeed` | 116 | Run (marathon) mini-game routine or table |  |
 | 09:6916 | `Run_PlayerLanding` | 88 | Run (marathon) mini-game routine or table |  |
 | 09:696E | `Run_PlayerLanding_Tbl696E` | 32 | Run (marathon) mini-game routine or table | auto: 32 bytes, bytes; referenced by Run_PlayerLanding |
-| 09:6A6E | `Run_FlagHoistKeys_Tbl6A6E` | 52 | Run (marathon) mini-game routine or table | auto: 52 bytes, bytes; referenced by Run_FlagHoistKeys |
-| 09:6AA2 | `Run_FlagHoistKeys_Tbl6AA2` | 20 | Run (marathon) mini-game routine or table | auto: 20 bytes, bytes; referenced by Run_FlagHoistKeys |
 | 09:6B72 | `Run_MoveRunner3X` | 10 | Run (marathon) mini-game routine or table |  |
 | 09:6B7C | `Run_ScrollCamera` | 41 | Run (marathon) mini-game routine or table |  |
 | 09:6BA5 | `Run_CopyPlayerPos` | 12 | Run (marathon) mini-game routine or table |  |
@@ -506,20 +433,12 @@ _Why doubtful:_ role of several state variables guessed. _To settle:_ play the g
 | 09:723F | `Run_CharacterToGfxIndex` | 28 | Run (marathon) mini-game routine or table | Game Face present test (D581) |
 | 09:725B | `Run_CharacterToGfxIndex_Tbl725B` | 3 | Run (marathon) mini-game routine or table | auto: 3 bytes, bytes; referenced by Run_CharacterToGfxIndex |
 
-## keyboard / glyph (36)
+## keyboard / glyph (19)
 
 _Why doubtful:_ glyph set identity (kana / Latin / symbol page) deduced from tile addresses. _To settle:_ view the loaded tiles in a VRAM viewer.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 09:53CA | `Kb_LoadGlyphSetA` | 9 | character-input page or glyph-set loader | glyph list at 09:53D3 to $8800 |
-| 09:53D3 | `Kb_LoadGlyphSetA_Gfx53D3` | 25 | character-input page or glyph-set loader | auto: 25 bytes, tile data; referenced by Kb_LoadGlyphSetA |
-| 09:53EC | `Kb_LoadGlyphSetB` | 9 | character-input page or glyph-set loader | list at 09:53F5 |
-| 09:53F5 | `Kb_LoadGlyphSetB_Gfx53F5` | 25 | character-input page or glyph-set loader | auto: 25 bytes, tile data; referenced by Kb_LoadGlyphSetB |
-| 09:540E | `Kb_LoadGlyphSetC` | 9 | character-input page or glyph-set loader | list at 09:5417 |
-| 09:5417 | `Kb_LoadGlyphSetC_Gfx5417` | 13 | character-input page or glyph-set loader | auto: 13 bytes, tile data; referenced by Kb_LoadGlyphSetC |
-| 09:5424 | `Kb_LoadGlyphList` | 229 | character-input page or glyph-set loader |  |
-| 09:5450 | `Kb_GlyphOffset` | 15 | character-input page or glyph-set loader |  |
 | 09:545F | `Kb_FindCharInList` | 42 | character-input page or glyph-set loader |  |
 | 09:5685 | `Kb_Page0_Draw_Tbl5685` | 160 | character-input page or glyph-set loader | auto: 160 bytes, bytes; referenced by Kb_Page0_Draw, Run_DrawPickCharacterSprite |
 | 09:5732 | `Kb_Page1_Draw_Tbl5732` | 20 | character-input page or glyph-set loader | auto: 20 bytes, bytes; referenced by Kb_Page1_Draw |
@@ -531,15 +450,6 @@ _Why doubtful:_ glyph set identity (kana / Latin / symbol page) deduced from til
 | 09:5833 | `Kb_DrawCursor_Tbl5833` | 16 | character-input page or glyph-set loader | auto: 16 bytes, bytes; referenced by Kb_DrawCursor |
 | 09:5843 | `Kb_DrawTabPages` | 113 | character-input page or glyph-set loader |  |
 | 09:58B4 | `Kb_TabAnimFrame_Tbl58B4` | 14 | character-input page or glyph-set loader | auto: 14 bytes, bytes; referenced by Kb_TabAnimFrame |
-| 09:58EA | `Kb_Page0_Navigate_Tbl58EA` | 81 | character-input page or glyph-set loader | auto: 81 bytes, bytes; referenced by Kb_Page0_Navigate |
-| 09:593B | `Kb_Page0_Navigate_Tbl593B` | 80 | character-input page or glyph-set loader | auto: 80 bytes, bytes; referenced by Kb_Page0_Navigate |
-| 09:598B | `Kb_Page0_Navigate_Tbl598B` | 80 | character-input page or glyph-set loader | auto: 80 bytes, bytes; referenced by Kb_Page0_Navigate |
-| 09:59E8 | `Kb_Page1_Navigate_Tbl59E8` | 6 | character-input page or glyph-set loader | auto: 6 bytes, bytes; referenced by Kb_Page1_Navigate |
-| 09:5A13 | `Kb_Page1_Navigate_Tbl5A13` | 32 | character-input page or glyph-set loader | auto: 32 bytes, bytes; referenced by Kb_Page1_Navigate |
-| 09:5A40 | `Kb_Page2_Navigate_Tbl5A40` | 25 | character-input page or glyph-set loader | auto: 25 bytes, bytes; referenced by Kb_Page2_Navigate |
-| 09:5A89 | `Kb_Page2_Navigate_Tbl5A89` | 48 | character-input page or glyph-set loader | auto: 48 bytes, bytes; referenced by Kb_Page2_Navigate |
-| 09:5AC6 | `Kb_Page3_Navigate_Tbl5AC6` | 23 | character-input page or glyph-set loader | auto: 23 bytes, bytes; referenced by Kb_Page3_Navigate |
-| 09:5B09 | `Kb_Page3_Navigate_Tbl5B09` | 48 | character-input page or glyph-set loader | auto: 48 bytes, bytes; referenced by Kb_Page3_Navigate |
 | 09:5B6F | `Kb_NavigateVertical` | 18 | character-input page or glyph-set loader |  |
 | 09:5B81 | `Kb_NavigateHorizontal` | 28 | character-input page or glyph-set loader |  |
 | 09:5C0E | `Kb_Page0_Press_PtrTbl5C0E` | 6 | character-input page or glyph-set loader | auto: 6 bytes, word table; referenced by Kb_Page0_Press |

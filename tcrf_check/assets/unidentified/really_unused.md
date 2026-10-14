@@ -2,7 +2,6 @@
 |---|---|---|---|---|
 | `0D:7000` | 1632 | `Gfx_0D_7000_FillPatternTiles` | never shown | never on screen; read only in forced runs |
 | `0D:7660` | 384 | `Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx` | TCRF label | never on screen; read only in forced runs |
-| `10:74A3` | 157 | `Gfx_10_74A3_Unref` | forced runs only | on screen only in forced runs (100 frames) |
 | `10:7602` | 678 | `Gfx_10_7602_DjLetterGlyphStrip` | never shown | never on screen; read only in forced runs |
 | `10:78B8` | 24 | `Gfx_10_78B8_Unref` | never shown | never on screen; read only in forced runs |
 | `10:7908` | 238 | `Gfx_10_7908_Unref` | never shown | never on screen; read only in forced runs |
@@ -39,4 +38,6 @@
 | `25:7614` | 460 | `Map_25_7614_Unused_PhotoAreaRight` | never shown | never on screen; read only in forced runs; photo-area map (14 rows of 32 + 12 bytes) with the picture in columns 12-31, like the unused one-page main menu; no copy site reaches it; the tiles are the dynamic photo tiles, so nothing to draw (README 16.25) |
 | `25:7814` | 588 | `Map_25_7814_Unused_MainMenu` | no loader (hand-listed) | no loader in either ROM (code search + BGB); tracker: 0 of 36 tiles on screen, 0 frames; the tile map of the unused one-page main menu (18 x 32 + 12 bytes, the picture is in columns 12-31: SCX = 96): BGB draws a flow-chart menu with tsushin / mi-ru / toru / miru / asobu / rakugaki / henshuu and BASIC / VIEW / EDIT MODE, STATUS; identical in the international ROM (25:75D4) |
 | `26:7080` | 576 | `Map_26_7080_Unused_Picture` | never shown | never on screen; read only in forced runs; full-screen picture map (18 rows of 32, picture in columns 0-19, $A5 filler in 20-31; 245 distinct ids, 4-column side strip + 16-column picture); no copy site reaches it and no tile block fits it (tile_seam_search.py: 0.80 per pixel against 0.42 for a true set), so what it shows is not known (README 16.25) |
-| | **23,896** | **39 spans** | | |
+| | **23,739** | **38 spans** | | |
+
+*Withdrawn after the L3 pass of 2026-10-14:* `10:74A3` (157 B, was "forced runs only", "on screen only in forced runs (100 frames)"): it is the tail of the numeral table `10:7400` (`DjTitle_LoadNumeralTile`, `05:423A`, tile = `$7400` + digit x 32, digits 0-9; the span holds the tiles of 5-9). The replays never put a digit above 4 on that screen, so the span is value-gated, not unused. 39 spans / 23,896 B before, 38 / 23,739 B now.

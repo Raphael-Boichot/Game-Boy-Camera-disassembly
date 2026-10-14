@@ -37,7 +37,7 @@ bank,start,end,type,width,note
 00,32E8,32F2,data,2,
 00,3483,348D,data,10,
 00,34F7,3515,data,16,
-00,36F1,3700,data,15,
+00,36F0,3700,data,16,nibble map
 00,3700,3780,data,16,
 00,3780,3800,data,16,
 00,3800,3818,data,16,
@@ -205,12 +205,13 @@ bank,start,end,type,width,note
 05,554D,555F,data,16,
 05,576B,577A,data,15,
 05,5A67,5AB5,data,2,
-05,5AD5,5AD6,data,1,
-05,5AE8,5AE9,data,1,
+05,5ABB,5ACF,data,20,blank print row
+05,5AD5,5AE9,data,20,print row
 05,5AEF,5B03,data,16,
 05,5B09,5B1D,data,16,
 05,5B23,5B37,data,16,
 05,5B3D,5B51,data,16,
+05,5B57,5B6B,data,20,print row
 05,5B71,5B85,data,16,
 05,5C7E,5C92,data,16,
 05,5C92,5CAA,data,16,
@@ -397,7 +398,7 @@ bank,start,end,type,width,note
 08,4C6F,4C73,data,2,
 08,4CC5,4CCD,data,8,
 08,4DF6,4DFC,data,2,
-08,4E88,4E94,data,12,
+08,4E74,4E94,data,32,map row
 08,4FC4,4FD9,data,16,
 08,501F,5033,data,16,
 08,5033,5037,data,4,
@@ -431,9 +432,9 @@ bank,start,end,type,width,note
 09,5269,526D,data,4,
 09,5293,529B,data,8,
 09,529B,529F,data,2,
-09,53D3,53EC,data,16,
-09,53F5,540E,data,16,
-09,5417,5424,data,16,
+09,53D3,53EC,data,2,
+09,53F5,540E,data,2,
+09,5417,5424,data,2,
 09,5509,550C,data,3,
 09,55CD,55D7,data,10,
 09,566A,5675,data,11,
@@ -449,20 +450,19 @@ bank,start,end,type,width,note
 09,58EA,593B,data,16,
 09,593B,598B,data,16,
 09,598B,59DB,data,16,
-09,59E8,59EE,data,6,
-09,5A0A,5A13,data,9,
-09,5A13,5A33,data,16,
-09,5A40,5A59,data,16,
-09,5A72,5A89,data,16,
-09,5A89,5AB9,data,16,
-09,5AC6,5ADD,data,16,
-09,5AF8,5B09,data,16,
-09,5B09,5B39,data,16,
+09,59E8,5A09,data,16,nav limits
+09,5A09,5A13,data,5,index to position
+09,5A13,5A33,data,16,position to index
+09,5A40,5A71,data,16,nav limits
+09,5A71,5A89,data,8,index to position
+09,5A89,5AB9,data,16,position to index
+09,5AC6,5AF7,data,16,nav limits
+09,5AF7,5B09,data,6,index to position
+09,5B09,5B39,data,16,position to index
 09,5C0E,5C14,data,2,
 09,5C7D,5C8D,data,16,
 09,5C93,5C9A,data,7,
-09,5FE7,6000,data,2,
-09,6000,6005,data,16,
+09,5FE7,6005,data,2,
 09,60A5,60A8,data,16,
 09,6147,614A,data,3,
 09,6596,65A2,data,12,
@@ -474,17 +474,15 @@ bank,start,end,type,width,note
 09,67FC,6830,data,16,
 09,685A,6874,data,16,
 09,6874,687A,data,16,
-09,68BF,68D3,data,16,
-09,68E3,68F3,data,16,
+09,68BF,68F3,data,16,52 entries
 09,68F3,68FA,data,7,
 09,696E,698E,data,16,
 09,69AB,69B7,data,12,
 09,69B7,69C3,data,12,
 09,69DF,69E3,data,4,
 09,69E3,69EF,data,12,
-09,6A6E,6AA2,data,16,
-09,6AA2,6AB6,data,16,
-09,6AC6,6AD6,data,16,
+09,6A6E,6AA2,data,16,52 entries
+09,6AA2,6AD6,data,16,52 entries
 09,6CE1,6CEE,data,13,
 09,6D9C,6DA4,data,8,
 09,6DA4,6DA8,data,4,
@@ -505,10 +503,11 @@ bank,start,end,type,width,note
 09,733E,7346,data,8,
 09,739E,73CB,data,16,
 0A,541A,54DA,data,2,
-0A,7301,7400,data,16,
+0A,7300,7400,data,16,popcount table
 0A,7400,7500,data,16,
+0A,7500,7600,data,16,zoom x2 high nibble
 0A,7600,7700,data,16,
-0A,7740,7750,data,16,
+0A,7700,7800,data,16,zoom x2 mirrored high nibble
 0A,7800,7900,data,16,
 0A,7900,7A00,data,16,
 0A,7A00,7B00,data,16,
@@ -563,7 +562,8 @@ bank,start,end,type,width,note
 0C,6180,6560,data,16,Gfx
 0C,6560,6730,data,16,Gfx
 0C,6730,68D0,data,16,Gfx
-0C,68D0,6C30,data,16,Gfx
+0C,68D0,6AB0,data,16,Gfx
+0C,6AB0,6C30,data,16,Gfx
 0C,6C30,6F82,data,16,Gfx
 0C,6FA0,7230,data,16,Gfx
 0C,7800,7900,data,16,Gfx
@@ -572,8 +572,7 @@ bank,start,end,type,width,note
 0C,79A0,7B00,data,16,Gfx
 0C,7B00,7C00,data,16,Gfx
 0C,7C00,7E00,data,16,Gfx
-0C,7E00,7E20,data,16,Data
-0C,7E20,7F80,data,16,Gfx
+0C,7E00,7F80,data,16,Gfx
 0C,7FD0,8000,data,16,Gfx
 0D,4000,4800,data,16,Gfx
 0D,4800,5000,data,16,Gfx
@@ -628,11 +627,7 @@ bank,start,end,type,width,note
 0F,4800,5000,data,16,Gfx
 0F,5000,5500,data,16,Gfx
 0F,5500,5780,data,16,Gfx
-0F,5780,5800,data,16,Gfx
-0F,5800,587A,data,16,Gfx
-0F,5904,5958,data,16,Gfx
-0F,596C,5972,data,16,Data
-0F,5984,5998,data,16,Data
+0F,5780,5A00,data,16,planet tiles
 0F,5A00,5C0F,data,16,Gfx
 0F,5C80,5ED8,data,16,Gfx
 0F,5F00,6280,data,16,Gfx
@@ -653,20 +648,17 @@ bank,start,end,type,width,note
 10,5500,5880,data,16,Gfx
 10,5880,5C00,data,16,Gfx
 10,5C00,7400,data,16,Gfx
-10,7400,7420,data,16,Data
-10,7420,74A0,data,16,Gfx
-10,74A0,74A3,data,16,Gfx
-10,74A3,7540,data,16,Gfx
+10,7400,7540,data,16,Gfx
 10,7602,78A8,data,16,Gfx
 10,78A8,78B8,data,16,Gfx
 10,78B8,78D0,data,16,Data
-10,78E8,78F0,data,16,Data
+10,78E8,7908,data,16,Gfx
 10,7908,79F6,data,16,Gfx
-10,7A08,7A10,data,16,Data
+10,7A08,7A24,data,16,Gfx
 10,7A24,7ACC,data,16,Gfx
 10,7ADE,7BB2,data,16,Gfx
-10,7BC2,7BCC,data,16,Data
-10,7BE4,7BE8,data,16,Data
+10,7BC2,7BE4,data,16,Gfx
+10,7BE4,7BF8,data,16,Gfx
 10,7BF8,7D51,data,16,Gfx
 10,7D51,7D52,data,16,Gfx
 10,7D52,7EC0,data,16,Gfx
@@ -739,8 +731,7 @@ bank,start,end,type,width,note
 14,75E0,7600,data,16,Gfx
 14,7600,76B0,data,16,Gfx
 14,76B0,7A00,data,16,Gfx
-14,7A00,7A01,data,16,Gfx
-14,7A01,7A60,data,16,Gfx
+14,7A00,7A80,data,16,Gfx
 14,7A80,7E30,data,16,Gfx
 14,7E30,7F00,data,16,Gfx
 14,7F00,7FA0,data,16,Gfx
@@ -860,12 +851,10 @@ bank,start,end,type,width,note
 19,77E0,7DCB,data,16,Gfx
 19,7E60,8000,data,16,Data
 1A,4000,4D60,data,16,Gfx
-1A,4D60,4D80,data,16,Gfx
-1A,4D80,4E00,data,16,Gfx
+1A,4D60,4E00,data,16,Gfx
 1A,4E00,50A0,data,16,Gfx
 1A,50A0,5160,data,16,Gfx
-1A,5160,5163,data,16,Data
-1A,5163,5182,data,16,Gfx
+1A,5160,5182,data,16,Gfx
 1A,5182,51DC,data,16,Gfx
 1A,5200,5A00,data,16,Gfx
 1A,5A00,6200,data,16,Gfx
@@ -882,10 +871,7 @@ bank,start,end,type,width,note
 1B,5100,6100,data,16,Gfx
 1B,6100,6680,data,16,Gfx
 1B,6680,6E80,data,16,Gfx
-1B,6E80,6EA0,data,16,Data
-1B,6EA0,6EAA,data,16,Data
-1B,6EBA,6F6A,data,16,Gfx
-1B,6F7C,6FC0,data,16,Gfx
+1B,6E80,6FC0,data,16,timer digits
 1B,6FC0,7060,data,16,Gfx
 1B,7100,7900,data,16,Gfx
 1B,7900,7F50,data,16,Gfx
@@ -898,34 +884,23 @@ bank,start,end,type,width,note
 1C,51A0,53A0,data,16,Gfx
 1C,53A0,5600,data,16,Gfx
 1C,5600,5620,data,16,Gfx
-1C,5620,5622,data,16,Data
-1C,5622,5623,data,16,Gfx
-1C,5623,564D,data,16,Data
-1C,564D,564E,data,16,Gfx
-1C,564E,5660,data,16,Data
-1C,5660,5670,data,16,Data
-1C,5670,570E,data,16,Gfx
+1C,5620,5660,data,16,Gfx
+1C,5660,5710,data,16,Gfx
 1C,570E,5710,data,16,Gfx
 1C,5710,5720,data,16,Gfx
-1C,5720,5730,data,16,Data
-1C,5760,57A0,data,16,Gfx
-1C,57A0,58A0,data,16,Gfx
+1C,5720,5760,data,16,Gfx
+1C,5760,58A0,data,16,Gfx
 1C,58A0,5B20,data,16,Gfx
 1C,5B60,5B80,data,16,Gfx
 1C,5B80,5BC0,data,16,Gfx
-1C,5BC0,5BDA,data,16,Data
-1C,5BDA,5BE0,data,16,Gfx
+1C,5BC0,5BE0,data,16,Gfx
 1C,5BE0,5C20,data,16,Gfx
 1C,5C20,5C60,data,16,Gfx
 1C,5C60,5C80,data,16,Gfx
 1C,5C80,5CC0,data,16,Gfx
-1C,5CC0,5CCB,data,16,Data
-1C,5CCB,5CD3,data,16,Gfx
-1C,5CD3,5CE0,data,16,Data
+1C,5CC0,5CE0,data,16,Gfx
 1C,5CE0,5D20,data,16,Gfx
-1C,5D20,5D47,data,16,Data
-1C,5D47,5D48,data,16,Gfx
-1C,5D48,5D60,data,16,Data
+1C,5D20,5D60,data,16,Gfx
 1C,5D60,5E20,data,16,Gfx
 1C,5E20,5E60,data,16,Gfx
 1C,5E60,6660,data,16,Gfx
@@ -954,7 +929,8 @@ bank,start,end,type,width,note
 1D,724E,72A0,data,16,Gfx
 1D,72A0,7631,data,16,Gfx
 1D,7631,7786,data,16,Gfx
-1D,7796,78E0,data,16,Gfx
+1D,7796,7860,data,16,Gfx
+1D,7860,7940,data,16,Gfx
 1D,78E0,7940,data,16,Gfx
 1D,7940,79A0,data,16,Gfx
 1D,79A0,7A00,data,16,Gfx
@@ -978,10 +954,8 @@ bank,start,end,type,width,note
 1E,5C00,5F00,data,16,Gfx
 1E,5F00,6480,data,16,Gfx
 1E,6480,64B0,data,16,Gfx
-1E,64B0,64C0,data,16,Gfx
-1E,64C0,64D0,data,16,Data
-1E,64D0,64E0,data,16,Gfx
-1E,64E0,6570,data,16,Gfx
+1E,64B0,64D0,data,16,Gfx
+1E,64D0,6570,data,16,Gfx
 1E,6570,6580,data,16,Gfx
 1E,6580,6590,data,16,Gfx
 1E,6590,65CD,data,16,Gfx
@@ -1008,8 +982,7 @@ bank,start,end,type,width,note
 20,64E0,6520,data,16,Gfx
 20,6520,6524,data,16,Data
 20,6524,6660,data,16,Gfx
-20,6660,667D,data,16,Gfx
-20,667D,6680,data,16,Data
+20,6660,6680,data,16,Gfx
 20,6680,66AA,data,16,Gfx
 20,66C0,67C0,data,16,Gfx
 20,67C0,67E0,data,16,Gfx
@@ -1017,10 +990,8 @@ bank,start,end,type,width,note
 20,6E40,6EC0,data,16,Gfx
 20,6EC0,6F20,data,16,Gfx
 20,6F20,70E0,data,16,Gfx
-20,70E0,70F0,data,16,Map
-20,70F0,7180,data,16,Gfx
-20,7180,71A0,data,16,Gfx
-20,71A0,72C0,data,16,Gfx
+20,70E0,7180,data,16,Gfx
+20,7180,72C0,data,16,Gfx
 20,72C0,7490,data,16,Gfx
 20,74F0,7500,data,16,Gfx
 20,7500,7D00,data,16,Gfx
@@ -1075,12 +1046,7 @@ bank,start,end,type,width,note
 22,7440,7740,data,32,Map
 22,7740,7B40,data,32,Map
 22,7B40,7F40,data,32,Map
-22,7F40,7F4A,data,16,Data
-22,7F61,7F66,data,16,Data
-22,7F81,7F86,data,16,Data
-22,7FA4,7FAA,data,16,Data
-22,7FC4,7FCA,data,16,Data
-22,7FE0,7FEA,data,16,Data
+22,7F40,8000,data,32,Map
 23,4000,44C0,data,16,Gfx
 23,44C0,4500,data,16,Gfx
 23,4500,48C0,data,32,Map
@@ -1091,29 +1057,8 @@ bank,start,end,type,width,note
 23,50C0,5350,data,16,Gfx
 23,5350,5490,data,16,Gfx
 23,54C0,58C0,data,32,Map
-23,58C0,58C2,data,16,Data
-23,58E0,58E2,data,16,Data
-23,5900,5902,data,16,Data
-23,5920,5922,data,16,Data
-23,5940,5942,data,16,Data
-23,5960,5962,data,16,Data
-23,5980,5982,data,16,Data
-23,59A0,59A2,data,16,Data
-23,59C0,59C2,data,16,Data
-23,59E0,59E2,data,16,Data
-23,5A00,5A02,data,16,Data
-23,5A20,5A22,data,16,Data
-23,5A40,5A42,data,16,Data
-23,5A60,5A62,data,16,Data
-23,5A80,5A82,data,16,Data
-23,5AA0,5AA2,data,16,Data
-23,5AC0,5AC2,data,16,Data
-23,5AE0,5AE2,data,16,Data
-23,5CC0,5F04,data,16,Gfx
-23,5F1C,5F24,data,16,Data
-23,5F3C,5F44,data,16,Data
-23,5F5C,5F64,data,16,Data
-23,5F94,5FA0,data,16,Data
+23,58C0,5CC0,data,32,Map
+23,5CC0,60C0,data,32,Map
 23,60C0,6472,data,16,Gfx
 23,64C0,64E0,data,32,Map
 23,64E0,6700,data,32,Map
@@ -1135,8 +1080,7 @@ bank,start,end,type,width,note
 23,79C0,7A60,data,32,Map
 23,7A60,7B00,data,32,Map
 23,7B00,7C00,data,32,Map
-23,7C00,7D40,data,32,Map
-23,7D54,7D60,data,16,Data
+23,7C00,7D60,data,32,Map
 23,7D60,7DC0,data,32,Map
 23,7DC0,7E80,data,16,Gfx
 23,7E80,8000,data,16,Data
@@ -1154,9 +1098,9 @@ bank,start,end,type,width,note
 24,4C00,4CC0,data,32,Map
 24,4CC0,4D80,data,32,Map
 24,4D80,4E40,data,32,Map
-24,4E40,4E60,data,16,Data
+24,4E40,4E60,data,32,Map
 24,4E60,4F20,data,32,Map
-24,4F20,4F40,data,16,Data
+24,4F20,4F40,data,32,Map
 24,4F40,5000,data,32,Map
 24,5000,50C0,data,32,Map
 24,50C0,5180,data,32,Map
@@ -1171,7 +1115,7 @@ bank,start,end,type,width,note
 24,5D20,5DA0,data,32,Map
 24,5DA0,5DC0,data,32,Map
 24,5DC0,5F00,data,32,Map
-24,5F00,5F14,data,16,Data
+24,5F00,5F40,data,32,Map
 24,5F40,6080,data,32,Map
 24,6080,60A2,data,16,Data
 24,60B2,61C0,data,16,Gfx
@@ -1192,13 +1136,10 @@ bank,start,end,type,width,note
 24,73E0,768F,data,16,Map
 24,76A0,76C0,data,32,Map
 24,76C0,7720,data,32,Map
-24,7720,7780,data,32,Map
-24,7780,77A0,data,16,Data
+24,7720,77A0,data,32,Map
 24,77A0,7800,data,32,Map
 24,7800,7860,data,32,Map
-24,7860,78C0,data,32,Map
-24,78C0,7902,data,16,Gfx
-24,7913,7960,data,16,Gfx
+24,7860,7960,data,32,Map
 24,7960,7BD6,data,16,Map
 24,7C20,7EE0,data,32,Map
 24,7EE0,8000,data,32,Map
@@ -1218,8 +1159,7 @@ bank,start,end,type,width,note
 25,5560,55C0,data,32,Map
 25,55C0,5680,data,32,Map
 25,5680,5800,data,32,Map
-25,5820,5834,data,20,Map
-25,5834,5840,data,16,Data
+25,5820,5840,data,32,Map
 25,5840,5A80,data,32,Map
 25,5A80,5AA0,data,32,Map
 25,5AA0,5AC0,data,32,Map
@@ -1271,8 +1211,7 @@ bank,start,end,type,width,note
 26,7740,7980,data,8,Map
 26,7980,7BC0,data,8,Map
 26,7BC0,7E00,data,32,Map
-26,7E00,7E20,data,16,Data
-26,7E20,7F80,data,16,Gfx
+26,7E00,7F80,data,16,Gfx
 27,4000,4470,data,16,Gfx
 27,4470,4472,data,32,Map
 27,4472,44B2,data,32,Map
@@ -1290,19 +1229,7 @@ bank,start,end,type,width,note
 27,5830,59F0,data,16,Data
 27,59F0,5AB0,data,32,Map
 27,5AB0,5BB0,data,32,Map
-27,5BB0,5BC6,data,16,Data
-27,5BD8,5BE8,data,16,Data
-27,5BF8,5C00,data,16,Data
-27,5C20,5C28,data,16,Data
-27,5C38,5C40,data,16,Data
-27,5C60,5C68,data,16,Data
-27,5C78,5C80,data,16,Data
-27,5CA0,5CA8,data,16,Data
-27,5CB8,5CC0,data,16,Data
-27,5CE0,5CE8,data,16,Data
-27,5CF8,5D00,data,16,Data
-27,5D20,5D28,data,16,Data
-27,5D40,5D5F,data,16,Data
+27,5BB0,5D70,data,8,oval AND mask
 27,5D70,5E50,data,32,Map
 27,5E50,5F30,data,32,Map
 27,5F30,60F0,data,32,Map
@@ -1322,14 +1249,10 @@ bank,start,end,type,width,note
 27,73F0,7510,data,16,Data
 27,7510,7604,data,16,Map
 27,7630,76B0,data,32,Map
-27,76B0,76F0,data,32,Map
-27,76F0,76F1,data,16,Data
-27,7703,7710,data,16,Data
+27,76B0,7710,data,32,Map
 27,7710,7750,data,32,Map
 27,7750,77D0,data,32,Map
-27,77D0,7810,data,32,Map
-27,7810,7811,data,16,Data
-27,7823,7830,data,16,Data
+27,77D0,7830,data,32,Map
 27,7830,7870,data,32,Map
 27,7870,7964,data,16,Map
 27,7990,7A50,data,32,Map
@@ -2052,7 +1975,6 @@ bank,start,end,type,width,note
 1A,7CB0,7CF0,data,16,Gfx
 11,5600,5800,data,16,Gfx
 11,5800,6940,data,16,Gfx
-23,5CC0,5F04,data,32,Map
 25,71A0,73A0,data,32,Map
 25,50C0,52C0,data,32,Map
 25,5360,5560,data,32,Map

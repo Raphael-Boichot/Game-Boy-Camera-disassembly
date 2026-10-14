@@ -1,0 +1,296 @@
+bank,addr,old_name,new_name,old_conf,new_conf,reason
+00,0486,Map_CopyRectAddTile_LcdOff,Border_CopyFrameAddTile_LcdOff,?,C,owner or content now proven (? -> C)
+00,04F3,Map_CopyRectAddTile_Safe,Border_CopyFrameAddTile_Safe,?,C,owner or content now proven (? -> C)
+00,09EE,Rng_Scaled_Tbl09EE,Rng_Scaled_Mul8Tbl,I,C,owner or content now proven (I -> C)
+00,1720,Prn_CopyBandRecords,ScrollEngine_CopyRowRecords,?,C,owner or content now proven (? -> C)
+00,29F9,Thumb_ApplyCornerPatches,Thumb_DrawCopyBadge,?,C,owner or content now proven (? -> C)
+00,2A11,Thumb_CornerPatchTbl,Thumb_CopyBadgeTbl,?,C,owner or content now proven (? -> C)
+00,36F1,Img_NibbleMapTbl_Data36F1,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+03,568B,AnimEd_CoroYield_PtrTbl568B,AnimEd_Decor_CtxEntryTbl,?,I,owner or content now proven (? -> I)
+03,59F1,AnimEd_CoroYield_B_PtrTbl59F1,AnimEd_Exit_CtxEntryTbl,?,I,owner or content now proven (? -> I)
+05,5ABB,-,DjPrintRow_Text0_Tbl5ABB,-,C,new label
+05,5AE8,DjPrintRow_Text1_Data5AE8,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+05,5B57,-,DjPrintRow_Text6_Tbl5B57,-,C,new label
+08,4E88,BorderPicker_FillPatternTbl_Data4E88,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+09,53D3,Kb_LoadGlyphSetA_Gfx53D3,Kb_GlyphListA,I,C,owner or content now proven (I -> C)
+09,53F5,Kb_LoadGlyphSetB_Gfx53F5,Kb_GlyphListB,I,C,owner or content now proven (I -> C)
+09,5417,Kb_LoadGlyphSetC_Gfx5417,Kb_GlyphListC,I,C,owner or content now proven (I -> C)
+09,58EA,Kb_Page0_Navigate_Tbl58EA,Kb_Page0_NavLimitsTbl,I,C,owner or content now proven (I -> C)
+09,593B,Kb_Page0_Navigate_Tbl593B,Kb_Page0_NavIndexToPosTbl,I,C,owner or content now proven (I -> C)
+09,598B,Kb_Page0_Navigate_Tbl598B,Kb_Page0_NavPosToIndexTbl,I,C,owner or content now proven (I -> C)
+09,59E8,Kb_Page1_Navigate_Tbl59E8,Kb_Page1_NavLimitsTbl,I,C,owner or content now proven (I -> C)
+09,5A09,-,Kb_Page1_NavIndexToPosTbl,-,C,new label
+09,5A0A,Kb_Page1_Navigate_Data5A0A,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+09,5A13,Kb_Page1_Navigate_Tbl5A13,Kb_Page1_NavPosToIndexTbl,I,C,owner or content now proven (I -> C)
+09,5A40,Kb_Page2_Navigate_Tbl5A40,Kb_Page2_NavLimitsTbl,I,C,owner or content now proven (I -> C)
+09,5A71,-,Kb_Page2_NavIndexToPosTbl,-,C,new label
+09,5A72,Kb_Page2_Navigate_Data5A72,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+09,5A89,Kb_Page2_Navigate_Tbl5A89,Kb_Page2_NavPosToIndexTbl,I,C,owner or content now proven (I -> C)
+09,5AC6,Kb_Page3_Navigate_Tbl5AC6,Kb_Page3_NavLimitsTbl,I,C,owner or content now proven (I -> C)
+09,5AF7,-,Kb_Page3_NavIndexToPosTbl,-,C,new label
+09,5AF8,Kb_Page3_Navigate_Data5AF8,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+09,5B09,Kb_Page3_Navigate_Tbl5B09,Kb_Page3_NavPosToIndexTbl,I,C,owner or content now proven (I -> C)
+09,6000,OwnerCard_LoadNameGlyphs_Gfx6000,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+09,68E3,Run_SpeedLevelTbl_Data68E3,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+09,6A6E,Run_FlagHoistKeys_Tbl6A6E,Run_FlagHoistKeys_StepTbl,I,C,owner or content now proven (I -> C)
+09,6AA2,Run_FlagHoistKeys_Tbl6AA2,Run_FlagHoistKeys_LevelTbl,I,C,owner or content now proven (I -> C)
+09,6AC6,Run_FlagHoistKeys_Data6AC6,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0A,7301,Cam_PopcountTable256_Data7301,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0A,7500,-,Cam_ZoomX2_HiTbl,-,C,new label
+0A,7600,Cam_BitReverseTbl_Data7600,Cam_ZoomX2_LoTbl,?,C,owner or content now proven (? -> C)
+0A,7700,-,Cam_ZoomX2Mirror_HiTbl,-,C,new label
+0A,7740,Cam_BitReverseTbl_Data7740,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0A,7800,Cam_BitReverseTbl_Data7800,Cam_ZoomX2Mirror_LoTbl,?,C,owner or content now proven (? -> C)
+0C,4000,Gfx_0C_4000_Bank03,Gfx_0C_4000_Mode12_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode12_State00_Init, Mode12_State13_TestEnd, Mode12_State22_BorderPickerReturn"
+0C,6AB0,-,Gfx_0C_6AB0_AnimEdKanaStrips_Tail,-,?,new label
+0C,7800,Gfx_0C_7800_PenMenu_BuildSpeed,Gfx_0C_7800_Mode09_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode09_State00_Init, Album_ShowPageScreen"
+0C,7B00,Gfx_0C_7B00_PenMenu_BuildSpeed,Gfx_0C_7B00_Mode09_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode09_State00_Init, Album_ShowPageScreen"
+0C,7E00,Src_0C_7E00_Album_LoadNumeralTile,Gfx_0C_7E00_Album_LoadNumeralTile,I,C,owner or content now proven (I -> C)
+0C,7E20,Gfx_0C_7E20_Album_LoadNumeralTile_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0C,7FD0,Gfx_0C_7FD0_PenMenu_BuildSpeed,Gfx_0C_7FD0_Mode09_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode09_State00_Init, Album_ShowPageScreen"
+0D,4000,Gfx_0D_4000_Mode15_StepValue,Gfx_0D_4000_Mode16_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode16_State00_Init, Mode16_State01_Redraw"
+0D,4800,Gfx_0D_4800_Mode15_StepValue,Gfx_0D_4800_Mode16_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode16_State00_Init, Mode16_State01_Redraw"
+0D,5000,Gfx_0D_5000_Mode15_StepValue,Gfx_0D_5000_Mode16_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode16_State00_Init, Mode16_State01_Redraw"
+0D,7900,Gfx_0D_7900_Mode0F_State04_LeaveSelected,Gfx_0D_7900_Mode0F_State05_ConfirmInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0F_State05_ConfirmInit
+0F,5800,Gfx_0F_5800_UserMap_LoadPlanetTiles_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0F,5904,Gfx_0F_5904_Unref,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0F,596C,Data_0F_596C,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+0F,5984,Data_0F_5984,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+10,7400,Src_10_7400_DjTitle_LoadNumeralTile,Gfx_10_7400_DjTitle_LoadNumeralTile,I,C,owner or content now proven (I -> C)
+10,7420,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+10,74A0,TileGap_10_74A0,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+10,74A3,Gfx_10_74A3_Unref,-,C,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+10,78E8,Data_10_78E8,TileGap_10_78E8,?,I,owner or content now proven (? -> I)
+10,7A08,Data_10_7A08,TileGap_10_7A08,?,I,owner or content now proven (? -> I)
+10,7BC2,Data_10_7BC2,TileGap_10_7BC2,?,I,owner or content now proven (? -> I)
+10,7BE4,Data_10_7BE4,TileGap_10_7BE4,?,I,owner or content now proven (? -> I)
+11,7000,Gfx_11_7000_Compose_DrawJitter,Gfx_11_7000_Mode18_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode18_State00_Init
+11,7800,Gfx_11_7800_Compose_DrawJitter,Gfx_11_7800_Mode18_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode18_State00_Init
+12,4000,Gfx_12_4000_HotSpotEd_SoundList,Gfx_12_4000_Mode06_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode06_State00_Init
+12,4800,Gfx_12_4800_HotSpotEd_SoundList,Gfx_12_4800_Mode06_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode06_State00_Init
+12,5000,Gfx_12_5000_HotSpotEd_SoundList,Gfx_12_5000_Mode06_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode06_State00_Init
+12,7000,Gfx_12_7000_ViewMenu_AnimateBackground,Gfx_12_7000_Mode03_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode03_State00_Init
+12,7800,Gfx_12_7800_ViewMenu_AnimateBackground,Gfx_12_7800_Mode03_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode03_State00_Init
+13,4000,Gfx_13_4000_LinkPick_RequestRemotePage,Gfx_13_4000_Mode02_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode02_State00_Init
+13,4800,Gfx_13_4800_LinkPick_RequestRemotePage,Gfx_13_4800_Mode02_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode02_State00_Init
+13,5000,Gfx_13_5000_LinkPick_RequestRemotePage,Gfx_13_5000_Mode02_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode02_State00_Init
+14,7A01,Gfx_14_7A01_PenMenu_Build_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+15,4600,Gfx_15_4600_SlidePlay_ReadKeys,Gfx_15_4600_Mode00_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode00_State00_Init
+15,4900,Gfx_15_4900_SlidePlay_ReadKeys,Gfx_15_4900_Mode00_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode00_State00_Init
+15,5400,Gfx_15_5400_SlidePlay_ReadKeys,Gfx_15_5400_Mode00_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode00_State00_Init
+15,5600,Gfx_15_5600_SlidePlay_ReadKeys,Gfx_15_5600_Mode00_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode00_State00_Init
+15,5700,Gfx_15_5700_ShowMenu_LoadNormalTiles,Gfx_15_5700_Mode04_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode04_State00_Init
+15,5F00,Gfx_15_5F00_ShowMenu_LoadNormalTiles,Gfx_15_5F00_Mode04_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode04_State00_Init
+15,6700,Gfx_15_6700_ShowMenu_LoadNormalTiles,Gfx_15_6700_Mode04_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode04_State00_Init
+16,4000,Gfx_16_4000_LinkMenu_LoadTilesDeselected,Gfx_16_4000_Mode0B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0B_State00_Init
+16,4800,Gfx_16_4800_LinkMenu_LoadTilesDeselected,Gfx_16_4800_Mode0B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0B_State00_Init
+16,5000,Gfx_16_5000_LinkMenu_LoadTilesDeselected,Gfx_16_5000_Mode0B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0B_State00_Init
+16,7D80,Map_16_7D80_Compose_DrawJitter,Map_16_7D80_Mode18_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode18_State00_Init
+16,7FC0,Map_16_7FC0_Compose_DrawJitter,Map_16_7FC0_Mode18_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode18_State00_Init
+17,4680,Gfx_17_4680_Mode0F_State04_LeaveSelected,Gfx_17_4680_Mode0F_State05_ConfirmInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode0F_State05_ConfirmInit, Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode14_State00_Init, Mode14_State0C_Reinit, Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen"
+17,4980,Gfx_17_4980_Compose_Split_DrawMakeBlink,Gfx_17_4980_Mode17_State08_Split_Build,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode14_State00_Init, Shoot_RestoreViewScreen, Mode14_State0C_Reinit"
+18,5470,Gfx_18_5470_Mode1C_DrawOptionScreen,Gfx_18_5470_Mode1E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1E_State00_Init
+18,5C70,Gfx_18_5C70_Mode1C_DrawOptionScreen,Gfx_18_5C70_Mode1E_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode1E_State00_Init, Print_LoadDigitTile"
+18,6470,Gfx_18_6470_Bank08,Gfx_18_6470_Mode1B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1B_State00_Init
+18,6C70,Gfx_18_6C70_Bank08,Gfx_18_6C70_Mode1B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1B_State00_Init
+18,7BA0,Gfx_18_7BA0_Mode0E_State02_MessageStrip,Gfx_18_7BA0_Mode0E_State04_PickDone,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode0E_State04_PickDone, Mode0E_State0D_PickSecond"
+18,7C40,Gfx_18_7C40_Mode0F_State04_LeaveSelected,Gfx_18_7C40_Mode0F_State05_ConfirmInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0F_State05_ConfirmInit
+18,7D60,Gfx_18_7D60_Mode0F_State04_LeaveSelected,Gfx_18_7D60_Mode0F_State05_ConfirmInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0F_State05_ConfirmInit
+18,7E80,Gfx_18_7E80_Mode0F_State04_LeaveSelected,Gfx_18_7E80_Mode0F_State05_ConfirmInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0F_State05_ConfirmInit
+19,4000,Gfx_19_4000_Bank07,Gfx_19_4000_Mode0E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0E_State00_Init
+19,4800,Gfx_19_4800_Bank07,Gfx_19_4800_Mode0E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0E_State00_Init
+19,5000,Gfx_19_5000_Bank07,Gfx_19_5000_Mode0E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0E_State00_Init
+19,6460,Gfx_19_6460_Mode21_State07_RaceEnd,Gfx_19_6460_Mode21_State0B_ResultSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State0B_ResultSetup
+19,6560,Gfx_19_6560_Mode21_State07_RaceEnd,Gfx_19_6560_Mode21_State0B_ResultSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State0B_ResultSetup
+19,6D60,Gfx_19_6D60_Mode21_State07_RaceEnd,Gfx_19_6D60_Mode21_State0B_ResultSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State0B_ResultSetup
+1A,4000,Gfx_1A_4000_DjTitle_DrawFrame3,Gfx_1A_4000_Mode1F_State04_PerformanceSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State04_PerformanceSetup
+1A,4D80,Gfx_1A_4D80_DjPerf_DrawTempo_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1A,5160,Data_1A_5160,TileGap_1A_5160,?,I,owner or content now proven (? -> I)
+1A,5163,TileGap_1A_5163,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1A,5200,Gfx_1A_5200_Mode08_State02_PlanetOpen,Gfx_1A_5200_Mode08_State03_CardInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State03_CardInit
+1A,5A00,Gfx_1A_5A00_Mode08_State02_PlanetOpen,Gfx_1A_5A00_Mode08_State03_CardInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State03_CardInit
+1A,6200,Gfx_1A_6200_Mode08_State02_PlanetOpen,Gfx_1A_6200_Mode08_State03_CardInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State03_CardInit
+1B,5000,Gfx_1B_5000_ScrollEngine_RowToOffset,Gfx_1B_5000_CommentEditor_Sub0_Init,I,I,stale owner label: the old name came from an earlier label set; owners now CommentEditor_Sub0_Init
+1B,5100,Gfx_1B_5100_Mode20_State08_Leave,Gfx_1B_5100_Mode20_State09_ResultInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode20_State09_ResultInit
+1B,6100,Gfx_1B_6100_Mode21_PickCharacterKeys,Gfx_1B_6100_Mode21_State02_RaceSceneInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State02_RaceSceneInit
+1B,6680,Gfx_1B_6680_Mode21_PickCharacterKeys,Gfx_1B_6680_Mode21_State02_RaceSceneInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State02_RaceSceneInit
+1B,6E80,Src_1B_6E80_Run_DrawTimerDigitB,Gfx_1B_6E80_Run_DrawTimerDigitB,I,C,owner or content now proven (I -> C)
+1B,6EA0,Data_1B_6EA0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1B,6EBA,Gfx_1B_6EBA_Unref,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1B,6F7C,Gfx_1B_6F7C_Unref,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,4241,Gfx_1C_4241_MenusShootMenu_Aux,Gfx_1C_4241_Parlor_Page1,?,C,owner or content now proven (? -> C)
+1C,44B0,Gfx_1C_44B0_Unref,Gfx_1C_44B0_Parlor_Page1,?,C,owner or content now proven (? -> C)
+1C,5620,Data_1C_5620,TileGap_1C_5620,?,I,owner or content now proven (? -> I)
+1C,5622,TileGap_1C_5622,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5623,Data_1C_5623,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,564D,TileGap_1C_564D,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,564E,Data_1C_564E,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5660,Src_1C_5660_HotSpotEd_CopyNumberTile,Gfx_1C_5660_HotSpotEd_CopyNumberTile,I,C,owner or content now proven (I -> C)
+1C,5670,Gfx_1C_5670_HotSpotEd_CopyNumberTile_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5720,Data_1C_5720,TileGap_1C_5720,?,I,owner or content now proven (? -> I)
+1C,5760,Gfx_1C_5760_HotSpotEd_CopyNumberTile,Gfx_1C_5760_HotSpotEd_ShowEffectIcon,I,I,name refined
+1C,57A0,Gfx_1C_57A0_HotSpotEd_CopyNumberTile_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5BC0,Data_1C_5BC0,TileGap_1C_5BC0,?,I,owner or content now proven (? -> I)
+1C,5BDA,TileGap_1C_5BDA,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5CC0,Data_1C_5CC0,TileGap_1C_5CC0,?,I,owner or content now proven (? -> I)
+1C,5CCB,TileGap_1C_5CCB,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5CD3,Data_1C_5CD3,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5D20,Data_1C_5D20,TileGap_1C_5D20,?,I,owner or content now proven (? -> I)
+1C,5D47,TileGap_1C_5D47,-,I,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,5D48,Data_1C_5D48,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1C,7260,Gfx_1C_7260_Mode1F_State07_QuitPanel,Gfx_1C_7260_Mode1F_State08_EditPagesSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State08_EditPagesSetup
+1C,7860,Gfx_1C_7860_Mode1F_State07_QuitPanel,Gfx_1C_7860_Mode1F_State08_EditPagesSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State08_EditPagesSetup
+1D,4000,Gfx_1D_4000_Mode1F_State07_QuitPanel,Gfx_1D_4000_Mode1F_State08_EditPagesSetup,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode1F_State08_EditPagesSetup, Mode1F_State0B_PageNoise"
+1D,4300,Gfx_1D_4300_Mode1F_State07_QuitPanel,Gfx_1D_4300_Mode1F_State08_EditPagesSetup,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode1F_State08_EditPagesSetup, Mode1F_State0B_PageNoise"
+1D,5D00,Gfx_1D_5D00_Ball_MenuLoadRow,Gfx_1D_5D00_Mode20_State02_GameSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode20_State02_GameSetup
+1D,6D11,Gfx_1D_6D11_MenusShootMenu_Aux,Gfx_1D_6D11_Parlor_Page0,?,C,owner or content now proven (? -> C)
+1D,724E,Gfx_1D_724E_Unref,Gfx_1D_724E_Parlor_Page0,?,C,owner or content now proven (? -> C)
+1D,7631,Gfx_1D_7631_MenusShootMenu_Aux,Gfx_1D_7631_Parlor_Page0,?,C,owner or content now proven (? -> C)
+1D,7796,Gfx_1D_7796_Unref,Gfx_1D_7796_Parlor_Page0,?,C,owner or content now proven (? -> C)
+1D,7860,-,Gfx_1D_7860_Mode1F_State08_EditPagesSetup,-,C,new label
+1E,5C00,Gfx_1E_5C00_Mode16_DrawCaptionBlink,Gfx_1E_5C00_Mode17_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode17_State00_Init
+1E,5F00,Gfx_1E_5F00_Mode16_DrawCaptionBlink,Gfx_1E_5F00_Mode17_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode17_State00_Init
+1E,6480,Gfx_1E_6480_Mode16_DrawCaptionBlink,Gfx_1E_6480_Mode17_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode17_State00_Init
+1E,64B0,Gfx_1E_64B0_Compose_DrawPhotoNumber,Gfx_1E_64B0_Compose_DrawPhotoNumber_AlbumLetter,I,C,owner or content now proven (I -> C)
+1E,64C0,Data_1E_64C0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1E,64D0,Gfx_1E_64D0_Compose_DrawPhotoNumber,Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits,I,C,owner or content now proven (I -> C)
+1E,64E0,Gfx_1E_64E0_Compose_DrawPhotoNumber_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+1E,6570,Gfx_1E_6570_Mode16_DrawCaptionBlink,Gfx_1E_6570_Mode17_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode17_State00_Init
+1E,6580,Gfx_1E_6580_Mode16_DrawCaptionBlink,Gfx_1E_6580_Mode17_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode17_State00_Init
+20,4E00,Gfx_20_4E00_Mode08_State05_CardLeave,Gfx_20_4E00_Mode08_State0C_RecordInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit"
+20,5600,Gfx_20_5600_Mode08_State05_CardLeave,Gfx_20_5600_Mode08_State0C_RecordInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit"
+20,5B00,Gfx_20_5B00_Mode08_State05_CardLeave,Gfx_20_5B00_Mode08_State06_EditorInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State06_EditorInit
+20,6080,Gfx_20_6080_Mode08_State05_CardLeave,Gfx_20_6080_Mode08_State06_EditorInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State06_EditorInit
+20,64E0,Gfx_20_64E0_OwnerCard_LoadGenderTiles_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+20,667D,Data_20_667D,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+20,66C0,Gfx_20_66C0_Unref,Gfx_20_66C0_Kb_Page0_Press,?,C,owner or content now proven (? -> C)
+20,67C0,Gfx_20_67C0_Mode08_State05_CardLeave,Gfx_20_67C0_Mode08_State06_EditorInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State06_EditorInit
+20,6800,Gfx_20_6800_Bank06,Gfx_20_6800_Mode15_State01_TimerInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit, Mode15_State05_IntervalInit"
+20,6E40,Gfx_20_6E40_Bank06,Gfx_20_6E40_Mode15_State01_TimerInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit, Mode15_State05_IntervalInit"
+20,6EC0,Gfx_20_6EC0_Bank06,Gfx_20_6EC0_Mode15_State01_TimerInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit, Mode15_State05_IntervalInit"
+20,6F20,Gfx_20_6F20_Bank06,Gfx_20_6F20_Mode15_State01_TimerInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit, Mode15_State05_IntervalInit"
+20,70E0,Map_20_70E0_Mode15_DrawTwoDigitsInterval,Gfx_20_70E0_Mode15_DrawTwoDigitsInterval,I,C,owner or content now proven (I -> C)
+20,70F0,Gfx_20_70F0_Mode15_DrawTwoDigitsInterval_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+20,71A0,Gfx_20_71A0_Mode15_DrawTwoDigits_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+20,72C0,Gfx_20_72C0_Bank06,Gfx_20_72C0_Mode15_State01_TimerInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit, Mode15_State05_IntervalInit"
+20,74F0,Gfx_20_74F0_Bank06,Gfx_20_74F0_Mode15_State01_TimerInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit, Mode15_State05_IntervalInit"
+21,4000,Gfx_21_4000_SpecialMenu_DrawCursor,Gfx_21_4000_Mode07_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode07_State00_Init
+21,4800,Gfx_21_4800_SpecialMenu_DrawCursor,Gfx_21_4800_Mode07_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode07_State00_Init
+21,5C31,Gfx_21_5C31_MenusShootMenu_Aux,Gfx_21_5C31_Parlor_Page2,?,C,owner or content now proven (? -> C)
+21,6566,Gfx_21_6566_Unref,Gfx_21_6566_Parlor_Page2,?,C,owner or content now proven (? -> C)
+21,71C0,Gfx_21_71C0_WildFrame_PageSrcTbl,Gfx_21_71C0_Mode19_State00_CopyrightScreens,I,I,stale owner label: the old name came from an earlier label set; owners now Mode19_State00_CopyrightScreens
+21,77C0,Gfx_21_77C0_Print_DrawSelectedMarker,Gfx_21_77C0_BorderPicker_Substate0_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now BorderPicker_Substate0_Init, WildFramePicker_Substate0_Init"
+21,7CC0,Map_21_7CC0_ScrollEngine_RowToOffset,Map_21_7CC0_CommentEditor_Sub0_Init,I,I,stale owner label: the old name came from an earlier label set; owners now CommentEditor_Sub0_Init
+21,7F00,Map_21_7F00_ScrollEngine_RowToOffset,Map_21_7F00_CommentEditor_Sub0_Init,I,I,stale owner label: the old name came from an earlier label set; owners now CommentEditor_Sub0_Init
+22,6340,Map_22_6340_HotSpotEd_SoundList,Map_22_6340_Mode06_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode06_State00_Init
+22,6B40,Map_22_6B40_Bank03,Map_22_6B40_Mode12_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode12_State00_Init, Mode12_State0F_ClearAll, Mode12_State10_Pack, Mode12_State13_TestEnd, Mode12_State1F_SortDialogClose, Mode12_State22_BorderPickerReturn"
+22,7740,Map_22_7740_Ball_MenuLoadRow,Map_22_7740_Mode20_State02_GameSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode20_State02_GameSetup
+22,7B40,Map_22_7B40_DjTitle_DrawFrame3,Map_22_7B40_Mode1F_State04_PerformanceSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State04_PerformanceSetup
+22,7F40,Data_22_7F40,Map_22_7F40_SpaceFever_LoadHudTiles,?,C,owner or content now proven (? -> C)
+22,7F61,Data_22_7F61,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+22,7F81,Data_22_7F81,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+22,7FA4,Data_22_7FA4,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+22,7FC4,Data_22_7FC4,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+22,7FE0,Data_22_7FE0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,4CC0,Map_23_4CC0_Mode20_State08_Leave,Map_23_4CC0_Mode20_State09_ResultInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode20_State09_ResultInit
+23,54C0,Map_23_54C0_Mode0F_State04_LeaveSelected,Map_23_54C0_Mode0F_State05_ConfirmInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0F_State05_ConfirmInit
+23,58C0,Data_23_58C0,Map_23_58C0_Mode0F_ConfirmFrameStrip_Unref,?,I,owner or content now proven (? -> I)
+23,58E0,Data_23_58E0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5900,Data_23_5900,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5920,Data_23_5920,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5940,Data_23_5940,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5960,Data_23_5960,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5980,Data_23_5980,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,59A0,Data_23_59A0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,59C0,Data_23_59C0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,59E0,Data_23_59E0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5A00,Data_23_5A00,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5A20,Data_23_5A20,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5A40,Data_23_5A40,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5A60,Data_23_5A60,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5A80,Data_23_5A80,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5AA0,Data_23_5AA0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5AC0,Data_23_5AC0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5AE0,Data_23_5AE0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5F1C,Data_23_5F1C,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5F3C,Data_23_5F3C,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5F5C,Data_23_5F5C,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,5F94,Data_23_5F94,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+23,64C0,Map_23_64C0_ViewMenu_AnimateBackground,Map_23_64C0_Mode03_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode03_State00_Init
+23,68C0,Map_23_68C0_Mode1F_State07_QuitPanel,Map_23_68C0_Mode1F_State08_EditPagesSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State08_EditPagesSetup
+23,73E0,Map_23_73E0_Mode08_State05_CardLeave,Map_23_73E0_Mode08_State06_EditorInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State06_EditorInit
+23,7760,Data_23_7760,Map_23_7760_Kb_Page0_Press_ExtraRow,?,I,owner or content now proven (? -> I)
+23,7780,Map_23_7780_Bank07,Map_23_7780_Mode0E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0E_State00_Init
+23,7B00,Map_23_7B00_LinkMenu_LoadTilesDeselected,Map_23_7B00_Mode0B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode0B_State00_Init
+23,7D54,Data_23_7D54,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+24,4500,Map_24_4480_Mode20_State00_MenuInit_Part4500,Map_24_4480_Ball_MenuLoadRow,I,I,stale owner label: the old name came from an earlier label set; owners now Ball_MenuLoadRow
+24,4E40,Data_24_4E40,Map_24_4E40_PenMenuSizePanel3_ExtraRow,?,I,owner or content now proven (? -> I)
+24,4F20,Data_24_4F20,Map_24_4F20_PenMenuPatternPanel0_ExtraRow,?,I,owner or content now proven (? -> I)
+24,57E0,Gfx_24_57E0_Link_ShowScreenB,Gfx_24_57E0_Unused_Link_LoadTiles,I,I,"stale owner label: the old name came from an earlier label set; owners now Unused_Link_LoadTiles, Cam_FactoryDiag_AllButtonsExceptB, Cam_FirstBoot_StorePleaseWait"
+24,5AE0,Map_24_5AE0_Mode08_State02_PlanetOpen,Map_24_5AE0_Mode08_State03_CardInit,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode08_State03_CardInit, OwnerCard_BlinkTitle"
+24,5F00,Data_24_5F00,Map_24_5F00_Kb_Page1_PressSex_ExtraRows,?,I,owner or content now proven (? -> I)
+24,6080,Data_24_6080,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,?,I,owner or content now proven (? -> I)
+24,68E0,Map_24_68E0_Mode16_DrawCaptionBlink,Map_24_68E0_Mode17_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode17_State00_Init
+24,7780,Data_24_7780,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+24,78C0,Gfx_24_78C0_PenMenu_Build_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+24,7913,Gfx_24_7913_Unref,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+24,7C20,Map_24_7C20_PenMenu_BuildSpeed,Map_24_7C20_Mode12_State11_TestStart,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode12_State11_TestStart, Mode13_State03_PlayPrepare, Mode09_State00_Init, Album_ShowPageScreen, Mode0A_State02_Setup"
+24,7EE0,Map_24_7C20_Mode12_State11_TestStart_Part7EE0,Map_24_7C20_SaveDialog_Substate3_FullInit,I,I,stale owner label: the old name came from an earlier label set; owners now SaveDialog_Substate3_FullInit
+25,55C0,Map_25_55C0_SpecialMenu_DrawCursor,Map_25_55C0_Mode07_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode07_State00_Init
+25,5834,Data_25_5834,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+25,5D20,Map_25_5D20_Mode08_State05_CardLeave,Map_25_5D20_Mode08_State0F_HiScoreInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State0F_HiScoreInit
+25,61A0,Map_25_61A0_Mode21_PickCharacterKeys,Map_25_61A0_Mode21_State02_RaceSceneInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State02_RaceSceneInit
+25,6620,Map_25_6620_Bank06,Map_25_6620_Mode15_State01_TimerInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode15_State01_TimerInit
+25,6AA0,Map_25_6AA0_Mode15_State04_TimerApply,Map_25_6AA0_Mode15_State05_IntervalInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode15_State05_IntervalInit
+25,73A0,Map_25_73A0_Mode15_StepValue,Map_25_73A0_Mode16_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLensesMenu, Mode16_State04_MontageMenu, Mode16_State05_PanoramaMenu, Mode16_State06_GameFaceMenu"
+25,75F4,Data_25_75F4,Map_25_75F4_Mode15_StepValue_RowTail,?,I,owner or content now proven (? -> I)
+25,77F4,Data_25_77F4,Map_25_77F4_Unused_PhotoAreaRight_RowTail,?,I,owner or content now proven (? -> I)
+25,7CA0,Map_25_7CA0_Bank08,Map_25_7CA0_Mode1B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1B_State00_Init
+26,4EC0,Map_26_4EC0_Run_CompareRecord,Map_26_4EC0_ResultScreen_Substate0_Init,I,I,stale owner label: the old name came from an earlier label set; owners now ResultScreen_Substate0_Init
+26,57C0,Map_26_57C0_Mode1C_DrawOptionScreen,Map_26_57C0_Mode1E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1E_State00_Init
+26,60C0,Map_26_60C0_WildFrame_LoadForPrintJob,Map_26_60C0_WildFrame_LoadForPrintScreen,I,I,"stale owner label: the old name came from an earlier label set; owners now WildFrame_LoadForPrintScreen, WildFrame_LoadForOptionScreen"
+26,6300,Map_26_6300_Mode08_State05_CardLeave,Map_26_6300_Mode08_State0C_RecordInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode08_State0C_RecordInit
+26,69C0,Map_26_69C0_WildFrame_PageSrcTbl,Map_26_69C0_Mode19_State00_CopyrightScreens,I,I,stale owner label: the old name came from an earlier label set; owners now Mode19_State00_CopyrightScreens
+26,6C00,Map_26_6C00_Mode21_State07_RaceEnd,Map_26_6C00_Mode21_State0B_ResultSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode21_State0B_ResultSetup
+26,7E00,Src_26_7E00_Album_LoadNumeralTileB,Gfx_26_7E00_Album_LoadNumeralTileB,I,C,owner or content now proven (I -> C)
+26,7E20,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,4870,Map_27_4870_ShowMenu_LoadNormalTiles,Map_27_4870_Mode04_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode04_State00_Init
+27,59F0,Map_27_59F0_DjTitle_DrawFrame3,Map_27_59F0_Mode1F_State04_PerformanceSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State04_PerformanceSetup
+27,5BB0,Data_27_5BB0,Mask_27_5BB0_Img_AndMaskTiles_Oval,?,C,owner or content now proven (? -> C)
+27,5BD8,Data_27_5BD8,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5BF8,Data_27_5BF8,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5C20,Data_27_5C20,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5C38,Data_27_5C38,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5C60,Data_27_5C60,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5C78,Data_27_5C78,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5CA0,Data_27_5CA0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5CB8,Data_27_5CB8,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5CE0,Data_27_5CE0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5CF8,Data_27_5CF8,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5D20,Data_27_5D20,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,5D40,Data_27_5D40,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,76F0,Data_27_76F0,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,7703,Data_27_7703,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,7810,Data_27_7810,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,7823,Data_27_7823,-,?,-,"label removed (merged into a neighbour, false auto label, or folded into a block)"
+27,7990,Map_27_7990_Mode1F_State07_QuitPanel,Map_27_7990_Mode1F_State08_EditPagesSetup,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1F_State08_EditPagesSetup
+2A,44D4,Sheet_MiscellaneousStampsJpn_2A_44D4_Gap,Gfx_2A_44D4_FontSlot26,?,C,owner or content now proven (? -> C)
+2A,44F4,Sheet_MiscellaneousStampsJpn_2A_44F4_Gap,Gfx_2A_44F4_FontSlots27to28,?,C,owner or content now proven (? -> C)
+2A,4A23,Sheet_MiscellaneousStampsJpn_2A_4A23_Gap,Gfx_2A_4A23_FontSlot51,?,C,owner or content now proven (? -> C)
+2A,4A4E,Sheet_MiscellaneousStampsJpn_2A_4A4E_Gap,Gfx_2A_4A4E_FontSlot52,?,C,owner or content now proven (? -> C)
+2A,5401,Sheet_MiscellaneousStampsJpn_2A_5401_Gap,Gfx_2A_5401_FontSlotA0,?,C,owner or content now proven (? -> C)
+2A,5430,Sheet_MiscellaneousStampsJpn_2A_5430_Gap,Gfx_2A_5430_FontSlotA1,?,C,owner or content now proven (? -> C)
+2A,5452,Sheet_MiscellaneousStampsJpn_2A_5452_Gap,Gfx_2A_5452_FontSlotA2,?,C,owner or content now proven (? -> C)
+2A,5470,Sheet_MiscellaneousStampsJpn_2A_5470_Gap,Gfx_2A_5470_FontSlotA3,?,C,owner or content now proven (? -> C)
+2A,5492,Sheet_MiscellaneousStampsJpn_2A_5492_Gap,Gfx_2A_5492_FontSlotA4,?,C,owner or content now proven (? -> C)
+2A,54B0,Sheet_MiscellaneousStampsJpn_2A_54B0_Gap,Gfx_2A_54B0_FontSlotA5,?,C,owner or content now proven (? -> C)
+2A,54D0,Sheet_MiscellaneousStampsJpn_2A_54D0_Gap,Gfx_2A_54D0_FontSlotA6,?,C,owner or content now proven (? -> C)
+2A,54F0,Sheet_MiscellaneousStampsJpn_2A_54F0_Gap,Gfx_2A_54F0_FontSlotA7,?,C,owner or content now proven (? -> C)
+2A,5512,Sheet_MiscellaneousStampsJpn_2A_5512_Gap,Gfx_2A_5512_FontSlotA8,?,C,owner or content now proven (? -> C)
+2A,585B,Sheet_MiscellaneousStampsJpn_2A_585B_Gap,Gfx_2A_585B_FontSlotsC2toC3,?,C,owner or content now proven (? -> C)
+2A,5898,Sheet_MiscellaneousStampsJpn_2A_5898_Gap,Gfx_2A_5898_FontSlotsC4toC5,?,C,owner or content now proven (? -> C)
+2A,58D6,Sheet_MiscellaneousStampsJpn_2A_58D6_Gap,Gfx_2A_58D6_FontSlotC6,?,C,owner or content now proven (? -> C)
+2A,58F6,Sheet_MiscellaneousStampsJpn_2A_58F6_Gap,Gfx_2A_58F6_FontSlotC7,?,C,owner or content now proven (? -> C)
+2A,59FF,Gfx_2A_59FF_MiscellaneousStampsJpn_Aux,Gfx_2A_59FF_FontSlotsCFtoD3,?,C,owner or content now proven (? -> C)
+2A,5A7A,Data_2A_5A7A,Gfx_2A_5A7A_FontSlotsD3toD4_Blank,?,I,owner or content now proven (? -> I)
+3F,7280,Map_3F_7280_WildFrame_PageSrcTbl,Map_3F_7280_Mode19_State00_CopyrightScreens,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode19_State00_CopyrightScreens, Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu"

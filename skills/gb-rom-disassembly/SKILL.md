@@ -19,7 +19,7 @@ Full version: `HOWTO_NEW_ROM.md` in the Game-Boy-Camera-disassembly repository (
 | L5 | committed, buildable, editable tree: split files, assets as INCBIN, md5 check in `make` | tree in git |
 | L6 | understanding: charset table, sibling ROMs, owner-validated names | owner answers file |
 
-Pocket Camera JP on 2026-10-14: L0-L2 done, L3 mostly (5,334 names: C 3,499 / I 1,666 / ? 169), L4 not done (0 RAM labels, 5,632 raw WRAM and 2,583 raw HRAM operand lines), L5 not done, L6 partial. Do L0-L2 first, but start L4 and L5 as soon as L2 exists: they were left to the end and are still open.
+Pocket Camera JP on 2026-10-14: L0-L2 done, L3 mostly (5,253 names: C 3,579 / I 1,647 / ? 27, 449 doubtful rows on 40,385 distinct bytes), L4 not done (0 RAM labels, 5,632 raw WRAM and 2,583 raw HRAM operand lines), L5 not done, L6 partial. Do L0-L2 first, but start L4 and L5 as soon as L2 exists: they were left to the end and are still open.
 
 ## Stages, in order
 
@@ -39,6 +39,7 @@ Pocket Camera JP on 2026-10-14: L0-L2 done, L3 mostly (5,334 names: C 3,499 / I 
 - Screenshots and asset comparisons come from BGB, never from my core (it draws some screens wrongly).
 - A hex parser that expected upper case found nothing in the lower-case `.sym` and produced a false "nothing is displayed" claim: test a parser on a known label.
 - Never `pkill -f PATTERN` when PATTERN is in your own command line: kill by PID. Foreground calls over 120 s are killed.
+- L3 lessons (2026-10-14): asset names that embed a caller go stale when function labels are refined (115 of 5,334 did): rename them in a batch with a log; a run of 16+ equal bytes becomes `.padding` and hides the extent of the table or map around it; before calling a block unreferenced check the copy-site ranges AND the custom loaders (lists of `{src,bank,dst,len}` records, tables indexed by a value x16 / x32, glyph fonts indexed by char code); a far pointer whose bank sits in `C` (not `A`) or in a record is invisible to a scan for `ld a,BANK`; an auto label made by `ld hl,imm` with a far bank can split a real table (found once, `09:6000`); a hex comparison in awk reads `6E80` as a number (use Python); a "really unused" verdict can fall when a numeral or glyph table is found (one did).
 - Recompute every number before quoting it; regenerate derived tables with the tool. Corrections made in this project: a variable declared "never written" (only its reader was dead), a description of a branch flip written backwards, a count taken from the wrong column.
 
 ## Discipline
