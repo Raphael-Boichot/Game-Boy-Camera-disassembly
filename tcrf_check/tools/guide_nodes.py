@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Node table of the five Funtography flowcharts (USER / SHOOT / VIEW / PLAY / STUDIO): every node of the charts with the key path that reaches its screen
 from the main menu (tokens as lib.play: A B L R U D s=Select S=Start; 'V' = the key that moves the main-menu cursor to VIEW: Left on the Japanese ROM, Right on the international one;
-'wN' = wait N frames).  'D s' opens the STUDIO page (Select from the PLAY cursor; Select does nothing with the cursor on SHOOT).
+'wN' = wait N frames).  'D s' opens the STUDIO page (Select from the PLAY cursor; Select opens it from the SHOOT cursor too: BGB, both ROMs, 2026-10-14).
 expect = (mode, state) seen by the core on the Japanese ROM (None = no stable state / special route)."""
 R13 = 'R ' * 13
 NODES = [
