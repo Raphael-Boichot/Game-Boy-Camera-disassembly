@@ -132,3 +132,41 @@ def snd(): return _arr(L.gb_snd_ptr(), 8 * 256, C.c_uint8).reshape(8, 256)
 def snd_pcb(): return _arr(L.gb_snd_pcb_ptr(), 8 * 256, C.c_uint32).reshape(8, 256)
 def snd_new(): return L.gb_snd_new()
 def snd_clear(): L.gb_snd_clear()
+
+# ---- forcing (README 16.26): jump the PC, flip a conditional branch, stop at a PC; read the state struct ----
+L.gb_force_flip.argtypes = [C.c_uint32, C.c_int]; L.gb_force_hits.argtypes = [C.c_uint32]; L.gb_force_hits.restype = C.c_uint32
+L.gb_jump.argtypes = [C.c_uint16, C.c_uint8, C.c_uint16]; L.gb_set_stop.argtypes = [C.c_int32]; L.gb_stop_hit.restype = C.c_int
+L.gb_get_regs.argtypes = [C.c_void_p]; L.gb_set_regs.argtypes = [C.c_void_p]
+def flat(bank, addr): return addr if addr < 0x4000 else (bank << 14) | (addr - 0x4000)
+def force_flip(off, v=1): L.gb_force_flip(off, v)
+def force_clear(): L.gb_force_clear()
+def force_hits(off): return L.gb_force_hits(off)
+def jump(pc, bank, ret): L.gb_jump(pc, bank, ret)
+def set_stop(pc): L.gb_set_stop(-1 if pc is None else pc)
+def stop_hit(): return L.gb_stop_hit()
+def regs():
+    r = (C.c_uint16 * 9)(); L.gb_get_regs(r); return dict(zip(('a', 'f', 'bc', 'de', 'hl', 'sp', 'pc', 'bank', 'ime'), r))
+def set_regs(a, f, bc, de, hl, sp):
+    r = (C.c_uint16 * 6)(a, f, bc, de, hl, sp); L.gb_set_regs(r)
+class _State(C.Structure):          # mirror of struct GB in gbcov_display.c (same natural alignment); used to read VRAM / OAM and the VRAM provenance out of a snapshot
+    _fields_ = [('a', C.c_uint8), ('f', C.c_uint8), ('b', C.c_uint8), ('c', C.c_uint8), ('d', C.c_uint8), ('e', C.c_uint8), ('h', C.c_uint8), ('l', C.c_uint8),
+                ('sp', C.c_uint16), ('pc', C.c_uint16), ('ime', C.c_uint8), ('ei_delay', C.c_uint8), ('halted', C.c_uint8), ('stopped', C.c_uint8),
+                ('cycles', C.c_uint64), ('vram', C.c_uint8 * 0x2000), ('wram', C.c_uint8 * 0x2000), ('oam', C.c_uint8 * 0xA0), ('hram', C.c_uint8 * 0x80),
+                ('io', C.c_uint8 * 0x80), ('ie', C.c_uint8), ('sram', C.c_uint8 * 0x20000), ('cam', C.c_uint8 * 0x80),
+                ('rombank', C.c_uint8), ('rambank', C.c_uint8), ('ramen', C.c_uint8), ('div', C.c_uint16), ('tima_acc', C.c_int32),
+                ('line_cycle', C.c_int32), ('ly', C.c_uint8), ('stat_line', C.c_uint8), ('lcd_on', C.c_uint8), ('serial_cd', C.c_int32), ('serial_rx', C.c_uint8),
+                ('cam_cd', C.c_int32), ('keys', C.c_uint8), ('p1sel', C.c_uint8), ('last_p1lines', C.c_uint8), ('frame', C.c_uint32), ('rng', C.c_uint32),
+                ('pr_state', C.c_uint8), ('pr_len', C.c_uint16), ('pr_cnt', C.c_uint16), ('pr_cmd', C.c_uint8), ('pr_status', C.c_uint8), ('pr_busy', C.c_uint8), ('pr_sum', C.c_uint16),
+                ('pr_rx_next', C.c_uint8), ('pr_attached', C.c_uint8), ('pr_bytes', C.c_uint32), ('pr_unproc', C.c_uint8), ('pr_printing', C.c_uint8), ('pr_n', C.c_uint16 * 16),
+                ('t_vram', C.c_uint32 * 0x2000), ('t_wram', C.c_uint32 * 0x2000), ('t_hram', C.c_uint32 * 0x80), ('rv', C.c_uint8 * 8), ('rt', C.c_uint32 * 8), ('rp', C.c_uint8)]
+def state(s=None):
+    """snapshot as a _State copy (fields vram, oam, io, wram, t_vram = ROM flat offset + 1 of the source of each VRAM byte, 0 = none)"""
+    s = s or snapshot(); assert len(s) >= C.sizeof(_State) - 8, (len(s), C.sizeof(_State))
+    return _State.from_buffer_copy(s + bytes(max(0, C.sizeof(_State) - len(s))))
+
+L.gb_wlog.argtypes = [C.c_void_p, C.c_int]; L.gb_wlog.restype = C.c_int
+def wlog(maxn=8192):
+    """writes (address, value) made between jump() and the return to the pushed address"""
+    b = (C.c_uint32 * maxn)(); n = L.gb_wlog(b, maxn); return [(v >> 8, v & 0xFF) for v in b[:n]]
+L.gb_step.argtypes = [C.c_int]
+def step(n=1): L.gb_step(n)

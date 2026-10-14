@@ -247,7 +247,9 @@ static void wr_io(uint8_t o, uint8_t v){
   }
 }
 
+static uint32_t wlog[8192]; static int wlog_n=0, wlog_on=0, irq_depth=0;      /* write log, on only between gb_jump and the return (README 16.26): (address<<8)|value */
 static void wr(uint16_t a, uint8_t v){
+  if(wlog_on && irq_depth==0 && wlog_n<8192) wlog[wlog_n++]=((uint32_t)a<<8)|v;
   if(a>=0xDD60&&a<=0xDD79&&v){ int ch=-1; switch(a){ case 0xDD60:ch=0;break; case 0xDD68:ch=1;break; case 0xDD70:ch=2;break; case 0xDD78:ch=3;break; case 0xDD61:ch=4;break; case 0xDD69:ch=5;break; case 0xDD71:ch=6;break; case 0xDD79:ch=7;break; }
     if(ch>=0){ uint8_t f=1|(organic?2:0); if((snd_seen[ch][v]|f)!=snd_seen[ch][v]){ snd_seen[ch][v]|=f; snd_new++; if(!snd_pcb[ch][v]) snd_pcb[ch][v]=0x80000000u|cur_fetch_pc_bank; } } }
   { uint32_t*c=taint_cell(a); if(c){ uint32_t t=0; if(v!=0&&v!=0xFF){ for(int i=0;i<8;i++){ int k=(g.rp-1-i)&7; if(g.rt[k]&&g.rv[k]==v){ t=g.rt[k]; break; } } } *c=t; } }
@@ -348,7 +350,11 @@ static void alu(int op,uint8_t v){
     default: r=a-v; g.f=FN|((r&0xFF)==0?FZ:0)|(((a&15)<(v&15))?FH:0)|(r<0?FC:0); break;
   }
 }
-static int cc_ok(int cc){ switch(cc){case 0:return !(g.f&FZ);case 1:return g.f&FZ;case 2:return !(g.f&FC);default:return g.f&FC;} }
+static int32_t stop_pc=-1; static int stop_hit=0; static uint8_t jmp_sv[8], jmp_rb, jmp_ime, jmp_9b; static uint16_t jmp_sp; static int jmp_valid=0, jmp_bank=-1;   /* gb_run_frame stops as soon as the PC equals stop_pc */
+static uint8_t force_flip[ROMSZ]; static uint16_t force_hits[ROMSZ];   /* forcing (README 16.26): a conditional at this ROM offset takes the opposite decision */
+static int cc_ok(int cc){ int r; switch(cc){case 0:r=!(g.f&FZ);break;case 1:r=(g.f&FZ)!=0;break;case 2:r=!(g.f&FC);break;default:r=(g.f&FC)!=0;}
+  { uint32_t pc=cur_fetch_pc_bank&0xFFFF, bk=cur_fetch_pc_bank>>16, o=pc<0x4000?pc:((bk<<14)|(pc-0x4000)); if(o<ROMSZ&&force_flip[o]){ r=!r; if(force_hits[o]<65535) force_hits[o]++; } }
+  return r; }
 
 static int do_cb(void){
   uint8_t op=fetch(0); int r=op&7, y=(op>>3)&7;
@@ -379,7 +385,7 @@ static int step_cpu(void){
   if(g.halted){ if(pend) g.halted=0; else return 4; }
   if(g.ime && pend){
     int i=0; while(!(pend&(1<<i))) i++;
-    g.ime=0; g.io[0x0F]&=~(1<<i); push16(g.pc); g.pc=0x40+8*i; a_src=-1; return 20;
+    g.ime=0; g.io[0x0F]&=~(1<<i); push16(g.pc); g.pc=0x40+8*i; a_src=-1; if(wlog_on) irq_depth++; return 20;
   }
   if(!organic && known_loaded){ int ok; if(g.pc<0x8000) ok=known[romoff(g.pc)]; else ok=(g.pc>=0xFF80&&g.pc<0xFF90); if(!ok){ wild=1; return 4; } }
   int enable_ei=g.ei_delay; 
@@ -436,7 +442,7 @@ static int step_cpu(void){
     switch(op){
       case 0xC0:case 0xC8:case 0xD0:case 0xD8: if(cc_ok((op>>3)&3)){ g.pc=pop16(); cyc=20; } else cyc=8; break;
       case 0xC9: g.pc=pop16(); cyc=16; break;
-      case 0xD9: g.pc=pop16(); g.ime=1; cyc=16; break;
+      case 0xD9: g.pc=pop16(); g.ime=1; cyc=16; if(wlog_on && irq_depth>0) irq_depth--; break;
       case 0xC1: setBC(pop16()); cyc=12; break; case 0xD1: setDE(pop16()); cyc=12; break; case 0xE1: setHL(pop16()); cyc=12; break;
       case 0xF1: { uint16_t v=pop16(); g.a=v>>8; g.f=v&0xF0; cyc=12; break; }
       case 0xC5: push16(BC()); cyc=16; break; case 0xD5: push16(DE()); cyc=16; break; case 0xE5: push16(HL()); cyc=16; break;
@@ -490,7 +496,7 @@ void gb_reset(const uint8_t*sram, size_t n){
 /* run until the frame counter changes (or max cycles), return executed instructions */
 int gb_run_frame(void){
   uint32_t f0=g.frame; int n=0;
-  while(g.frame==f0 && n<2000000 && !wild){ int c=step_cpu(); tick_hw(c); n++; }
+  while(g.frame==f0 && n<2000000 && !wild){ int c=step_cpu(); tick_hw(c); n++; if((int32_t)g.pc==stop_pc && (!jmp_valid || g.sp==jmp_sp)){ stop_hit=1; stop_pc=-1; if(jmp_valid){ g.a=jmp_sv[0];g.f=jmp_sv[1];g.b=jmp_sv[2];g.c=jmp_sv[3];g.d=jmp_sv[4];g.e=jmp_sv[5];g.h=jmp_sv[6];g.l=jmp_sv[7]; g.rombank=jmp_rb; g.hram[0x1B]=jmp_9b; g.ime=jmp_ime; jmp_valid=0; } wlog_on=0; break; } }
   return n;
 }
 /* run exactly this many frames; stops early if pc leaves ROM-resident traced area is not checked here */
@@ -531,3 +537,16 @@ const uint8_t* gb_snd_ptr(void){ return &snd_seen[0][0]; } uint32_t gb_snd_new(v
 void gb_snd_clear(void){ memset(snd_seen,0,sizeof snd_seen); memset(snd_pcb,0,sizeof snd_pcb); snd_new=0; }
 
 const uint16_t* gb_dispfr_ptr(void){ return disp_fr; } const uint16_t* gb_dispfro_ptr(void){ return disp_fro; }
+
+/* ---- forcing API (README 16.26) ---- */
+void gb_force_flip(uint32_t off,int v){ if(off<ROMSZ) force_flip[off]=v?1:0; }
+void gb_force_clear(void){ memset(force_flip,0,sizeof force_flip); memset(force_hits,0,sizeof force_hits); }
+uint32_t gb_force_hits(uint32_t off){ return off<ROMSZ?force_hits[off]:0; }
+void gb_jump(uint16_t pc,uint8_t bank,uint16_t ret){   /* like an interrupt that saves everything: registers and ROM bank come back when the code returns to `ret` */
+  jmp_sv[0]=g.a;jmp_sv[1]=g.f;jmp_sv[2]=g.b;jmp_sv[3]=g.c;jmp_sv[4]=g.d;jmp_sv[5]=g.e;jmp_sv[6]=g.h;jmp_sv[7]=g.l; jmp_rb=g.rombank; jmp_9b=g.hram[0x1B]; jmp_ime=g.ime; jmp_sp=g.sp; irq_depth=0; jmp_valid=1; jmp_bank=ret<0x4000?-1:(g.rombank&0x3F);
+  if(bank){ g.rombank=bank&0x3F; g.hram[0x1B]=bank; } push16(ret); g.pc=pc; g.halted=0; a_src=-1; stop_pc=ret; stop_hit=0; wlog_n=0; wlog_on=1; }
+void gb_set_stop(int32_t pc){ stop_pc=pc; stop_hit=0; if(pc<0){ if(jmp_valid) g.ime=jmp_ime; jmp_valid=0; wlog_on=0; } }
+int gb_wlog(uint32_t*o,int max){ int n=wlog_n<max?wlog_n:max; memcpy(o,wlog,n*4); return n; } int gb_stop_hit(void){ return stop_hit; }
+void gb_get_regs(uint16_t*o){ o[0]=g.a; o[1]=g.f; o[2]=g.b<<8|g.c; o[3]=g.d<<8|g.e; o[4]=g.h<<8|g.l; o[5]=g.sp; o[6]=g.pc; o[7]=g.rombank; o[8]=g.ime; }
+void gb_set_regs(const uint16_t*i){ g.a=i[0]; g.f=i[1]&0xF0; g.b=i[2]>>8; g.c=i[2]; g.d=i[3]>>8; g.e=i[3]; g.h=i[4]>>8; g.l=i[4]; g.sp=i[5]; }
+void gb_step(int n){ for(int i=0;i<n && !wild;i++){ int c=step_cpu(); tick_hw(c); if((int32_t)g.pc==stop_pc && (!jmp_valid || g.sp==jmp_sp)){ stop_hit=1; stop_pc=-1; if(jmp_valid){ g.a=jmp_sv[0];g.f=jmp_sv[1];g.b=jmp_sv[2];g.c=jmp_sv[3];g.d=jmp_sv[4];g.e=jmp_sv[5];g.h=jmp_sv[6];g.l=jmp_sv[7]; g.rombank=jmp_rb; g.hram[0x1B]=jmp_9b; g.ime=jmp_ime; jmp_valid=0; } wlog_on=0; break; } } }   /* debugging: n instructions */
