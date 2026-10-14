@@ -92,3 +92,4 @@ snd_sfx1_3D,channel-1 effect $3D,heard on the review page,used: death in Ball or
 snd_sfx1_3E,channel-1 effect $3E,heard on the review page,used: death in Ball or space fever,,2026-10-13T14:32
 snd_sfx3_04,channel-3 effect $04,heard on the review page,unsure,,2026-10-13T14:30
 snd_sfx4_05,channel-4 effect $05,heard on the review page,used: player death in space fever ?,,2026-10-13T14:35
+ast_16_7380_7980,"16:7380, 16:7580, 16:7780, 16:7980","Gfx_16_7380..7980_MainMenu_IconStripA_F5..F8_Unref (volunteered, not asked on the page)","assets for the camera ball head animation when you press up/down on the main camera menu (SHOOT, VIEW, PLAY)",,2026-10-14T10:50

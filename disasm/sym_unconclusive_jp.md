@@ -37,7 +37,7 @@ _Why doubtful:_ identified from the picture and the neighbouring assets only; no
 _Why doubtful:_ type confirmed by the owner (review page, by eye); role and consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
-- bank 16: `7380` MainMenu_IconStripA_F5_Unref (512 B), `7580` MainMenu_IconStripA_F6_Unref (512 B), `7780` MainMenu_IconStripA_F7_Unref (512 B), `7980` MainMenu_IconStripA_F8_Unref (512 B)
+- bank 16: `7380` MainMenu_BallHeadAnim_F5_Unref (512 B), `7580` MainMenu_BallHeadAnim_F6_Unref (512 B), `7780` MainMenu_BallHeadAnim_F7_Unref (512 B), `7980` MainMenu_BallHeadAnim_F8_Unref (512 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
 - bank 1A: `5182` Unref (90 B), `7E00` Unref (501 B)
 - bank 1C: `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
@@ -380,8 +380,8 @@ _Why doubtful:_ slide A/B split by code layout only. _To settle:_ watch the menu
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7580, 7780, 7980, 7B80 (frames 6-9 of the strip, forward). NO caller: only Tbl0 and Tbl1 |
-| 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7980, 7780, 7580, 7380 (frames 8, 7, 6, 5 of the strip, backward). NO caller (see Tbl2); |
+| 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7580, 7780, 7980, 7B80 (frames 6-9 of the camera ball head animation, forward; the secon |
+| 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7980, 7780, 7580, 7380 (frames 8, 7, 6, 5 of the camera ball head animation, backward).  |
 
 ## dead code (31)
 
