@@ -1,7 +1,5 @@
-# AI slop, do not trust until human validation
-# (not performed yet, work in progress)
-
 # Pocket Camera (Japan) — Disassembly Findings
+# Work in progress, stay tuned
 
 Primary target: **Pocket Camera (Japan) (Rev A)**, MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`.
 The international ROM is **not** a trivial derivative. Bank $0A, the sensor driver, differs from
