@@ -81,7 +81,7 @@ for l in open(log, errors='replace'):
 wfs = sorted(glob.glob(pre + '*.wav')); assert wfs, 'no WAV recorded (rc %s)' % r['rc']
 w = wave.open(wfs[-1]); sr = w.getframerate(); d = np.frombuffer(w.readframes(w.getnframes()), dtype='<i2').reshape(-1, w.getnchannels()).astype(float).mean(1); w.close()
 print('requests', len(reqs), 'trigger writes', len(trig), 'wav %.1f s' % (len(d) / sr), 'mode:state %s:%s' % (r['mode'], r['state']))
-# ---- clock <-> WAV alignment by content: the NRx4 triggers (clock) are matched with the loud parts of the WAV over a grid of offsets (BGB's WAV time is not exactly the emulated clock, README 16.26)
+# ---- clock <-> WAV alignment by content: the NRx4 triggers (clock) are matched with the loud parts of the WAV over a grid of offsets (the WAV lags the emulated clock by a constant, -0.47 s in every run so far; it is found by content because it is not known in advance)
 dt = 0.01; nb = int(len(d) / sr / dt) + 1
 rms = np.array([np.sqrt(np.mean(d[int(k * dt * sr):int((k + 1) * dt * sr)] ** 2)) if int((k + 1) * dt * sr) <= len(d) else 0.0 for k in range(nb)])
 thr = max(150.0, rms.max() * 0.02); loud = rms > thr

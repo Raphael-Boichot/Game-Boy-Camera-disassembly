@@ -52,7 +52,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * `-screenonexit` in BGB saves only the 160 x 144 LCD; to see the Super Game Boy border run BGB with `SystemMode=2` in a visible window under Xvfb (`tcrf_check/tools/bgb_sgb_capture.sh`).
 * Long jobs in the background (`setsid nohup`); a foreground tool call over 120 s is killed. Never `pkill -f` a pattern that appears in your own command line (use the `[x]` trick or kill by PID).
 * Linked BGB runs (printer helper, `-connect`) stalled at the handshake with `-hf` in the sandbox: set `BGB_HF=-headless` (`bgb_run.py` reads it). `PRN_ERR=CMD:N:HEX` makes the helper answer a chosen status byte (§16.16).
-* Other BGB and core pitfalls (VRAM writes in PPU mode 3, hex logs, WAV time, forcing, two-pass snapshots): `HOWTO_NEW_ROM.md` §6 and §7.
+* Other BGB and core pitfalls (VRAM writes in PPU mode 3, hex logs, WAV offset, forcing, two-pass snapshots): `HOWTO_NEW_ROM.md` §6 and §7.
 * **TCRF pictures can be 2x enlargements:** reduce them before matching (`tcrf_check/tools/tcrf_exact_match.py`), allow palette folds and tile flips, and remember that ROM tile sheets are 16 tiles wide with rows 0x100 bytes apart.
   A 1-tile or 2-tile exact match is weak: check the display evidence.
 * A load site `ld hl,TABLE; add hl,bc; ld a,[hl+]` before a banked copy is a local pointer table, not a far pointer. The auto labeller turns any executed 16-bit immediate equal to a ROM address into a label
