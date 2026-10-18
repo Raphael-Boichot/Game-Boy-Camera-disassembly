@@ -19,7 +19,7 @@ Say which level a claim is about. The Pocket Camera status is in README §1.3.
 | L5 | A source tree a person can build and edit: split files, assets as `INCBIN` / PNG / text sources, a `make` that checks the md5 | tree in git, CI check |
 | L6 | Understanding: charset / text table (the Pocket Camera's name / comment table came from the font bank by rendering it and checking BGB screenshots pixel for pixel: README 16.27), sibling ROMs sharing one source, owner-validated names | owner answers file |
 
-Do L0-L2 first (a few passes), but **start L4 and L5 as soon as L2 exists**: this project left them to the end and they are still open.
+Do L0-L2 first (a few passes), but **start L4 and L5 as soon as L2 exists**: this project left them to the end (the RAM names of L4 came last, the constants and L5 are still open).
 
 ## 1. Intake (before any tool)
 
@@ -70,7 +70,7 @@ Recursive descent from: the vectors and the entry point, every code label, the m
 1. `tools/wram_db.py ROM trace SYM OUT`: every instruction touching `$C000-$DFFF`, `$FF80-$FFFE`, `$FF00-$FF7F`, with R / W / P (pointer load) kinds and written constants. `tools/ram_census.py` does the same on a listing. Read-modify-write through HL is invisible: read the code.
 2. Write one table per region (`wram/wram_<region>.csv`, address, name, type, writers, readers, evidence tag C/I/U) and the narrative beside it. Real saves of the cartridge RAM (SRAM) are worth more than any guess for the SRAM layout: use as many as you can get, and look for checksums, mirrors, magic strings.
 3. The modes and states variables (`$D5CE` / `$D5CF`) tell you the screen flow: record it first.
-4. **Apply the names (L4). Tested 2026-10-14: mgbdis accepts RAM labels in the `.sym`** (`00:d5ce wMode`, `00:ff9a hOamOffset`, bank 00 so they apply to every bank) and substitutes them everywhere; the assembler then fails with "undefined symbol" until an include defines them (`DEF wMode EQU $D5CE` or `SECTION "WRAM"` + `ds`). The same false-positive class as in section 2 applies (`ld bc, $D5CE` as a length): extend `sym_fix.py`. **Not done here** for the Pocket Camera (0 RAM labels in the sym).
+4. **Apply the names (L4).** mgbdis accepts RAM labels in the `.sym` (`00:d5ce wMode`, bank 00 so they apply to every bank) and substitutes them everywhere, but by address equality only: no bank scope, no `name + offset`, and it names the numbers that are not addresses (`ld bc, $D5CE` as a length, `ld de, $ffdf` as -$21). That is wrong as soon as one address holds several buffers (an overlay area) or a name covers a range. **Done here instead:** a names table with a scope per row (`disasm/ram_names_jp.csv`: `*`, bank, routine, one instruction), an exclusion list for the numbers that look like addresses, and a per-site pass in `sym_fix.py --ram` that takes the address from the instruction bytes and the routine from the access database (R / W operands are always addresses; a 16-bit immediate only where the database holds a pointer load). The include (`DEF wMode EQU $D5CE`) is generated and `INCLUDE`d by `game.asm`; the `.sym` for the debugger is a separate file mgbdis never reads. Check: a grep for raw `[$Dxxx]` / `ldh [$FFxx]` is empty except the documented exclusions, and the md5 is unchanged. Constants (`MODE_*`, key masks, sound requests) are the second half of L4 and were not done in the same pass.
 
 ## 6. Stage E: dynamic evidence
 
@@ -108,7 +108,7 @@ Order: own core with instrumentation first (fast, millions of frames), BGB secon
 1. Intake, no-symbol round trip (section 1). Header, sibling diff.
 2. Copy the builder (`sym_build.py`), `sym_fix.py`, `rom_trace.py`, `make_doubts.py`; adapt the helper list of the tracer to the new engine (banked call, copy, rst tables).
 3. Trace to 0 unresolved, build the first complete `.sym` (L1), md5 check in a script that you run after **every** CSV change. Add the consistency checker (section 8) as soon as the docs quote a number twice.
-4. WRAM / HRAM access database, then **apply the RAM labels at once** and extend `sym_fix.py` for false positives. Commit the include file.
+4. WRAM / HRAM access database, then **apply the RAM names at once** with a per-site pass (names table with scopes + exclusion list, step 4 of section 3), not through the `.sym`. Commit the names table and the generated include.
 5. Name the engine, then the mode / state handlers, then assets by consumer. Tag as you go; run `make_doubts.py`.
 6. Write the core, run coverage, build the reach map (code / data / never touched) and a ledger of what each run proved.
 7. BGB confirmation of the mode list and of every asset class; screenshots in BGB only.
@@ -118,4 +118,4 @@ Order: own core with instrumentation first (fast, millions of frames), BGB secon
 
 ## 10. Files to copy from this repository
 
-`tools/sym_build.py`, `tools/sym_fix.py`, `tools/rom_trace.py` (+ `tools/extra_roots.json` as a template), `tools/rom_coverage.py`, `tools/wram_db.py`, `tools/ram_census.py`, `tools/asset_catalog.py`, `tools/make_doubts.py`, `tools/check_repo_consistency.py` (adapt its patterns to the new docs), `tools/bank_pics.py`, `tools/render_tiles.py`, `tcrf_check/tools/bank_sheet.py`; `coverage/src/gbcov.c` + `gbcov.py` (core), `coverage/tools/coverage_run.py`, `replay_corpus.py`; `tcrf_check/tools/bgb_run.py`, `bgbgrab.py`, `bgb_dead_hook.py`, `gbcov_display.c`, `dead_jump.py`, `dead_flip.py`. Paths and constants inside them are specific to the Japanese Pocket Camera (the far-call helper addresses, the bank list, `GBCAM_*` environment variables): read each header before use.
+`tools/sym_build.py`, `tools/sym_fix.py`, `tools/rom_trace.py` (+ `tools/extra_roots.json` as a template), `tools/rom_coverage.py`, `tools/wram_db.py`, `tools/ram_census.py`, `tools/ram_names.py` (+ the two CSVs it reads), `tools/asset_catalog.py`, `tools/make_doubts.py`, `tools/check_repo_consistency.py` (adapt its patterns to the new docs), `tools/bank_pics.py`, `tools/render_tiles.py`, `tcrf_check/tools/bank_sheet.py`; `coverage/src/gbcov.c` + `gbcov.py` (core), `coverage/tools/coverage_run.py`, `replay_corpus.py`; `tcrf_check/tools/bgb_run.py`, `bgbgrab.py`, `bgb_dead_hook.py`, `gbcov_display.c`, `dead_jump.py`, `dead_flip.py`. Paths and constants inside them are specific to the Japanese Pocket Camera (the far-call helper addresses, the bank list, `GBCAM_*` environment variables): read each header before use.

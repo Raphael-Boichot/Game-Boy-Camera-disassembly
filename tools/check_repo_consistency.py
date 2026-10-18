@@ -23,7 +23,9 @@ What it checks (each line of the report is one check)
   tcrf       tcrf_check/TCRF_CHECKLIST.md and .csv list the same ids
   effects    tcrf_check/assets/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
              the counts quoted in README 16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
-  roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain and after sym_fix.py --tables
+  ram        disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
+             wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
+  roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
 Real exceptions (a Map type row that is not a multiple of 32 bytes, a Gfx label on a Map row, datasheet section numbers) are listed in ODD_MAP_ROWS, GFX_ON_MAP and EXTERNAL_REFS with the reason.
@@ -412,6 +414,51 @@ for f in sorted(cited):
     if not os.path.exists(P(f)): bad('effects', 'a label note cites %s, which does not exist' % f); ef_bad += 1
 if not ef_bad: ok('effects', '96 slots, %s; %d tcrf_check files cited by label notes exist' % (', '.join('%s %d' % (k, v) for k, v in facts.items()), len(cited)))
 
+# ------------------------------------------------------------------ RAM names (L4, README 2.13)
+sys.path.insert(0, P('tools'))
+import ram_names as RN
+RAM_BAD = 0
+try:
+    RAM_ROWS = RN.load(P('disasm/ram_names_jp.csv'))
+except Exception as e:
+    RAM_ROWS = []; bad('ram', 'disasm/ram_names_jp.csv does not load: %s' % e); RAM_BAD += 1
+RAM_TAGS = collections.Counter(r.tag for r in RAM_ROWS)
+ROMNAMES = {r['name'] for r in NAMES}
+for r in RAM_ROWS:
+    wram = r.name.startswith('w') and 0xC000 <= r.addr and r.end <= 0xE000
+    hram = r.name.startswith('h') and 0xFF80 <= r.addr and r.end <= 0xFFFF
+    ext = r.name == '_RAM' and r.addr == 0xC000
+    if not (re.fullmatch(r'[wh][A-Z][A-Za-z0-9]*', r.name) or ext) or not (wram or hram or ext):
+        bad('ram', '%s (%04X, %d bytes): the name must be w + PascalCase inside $C000-$DFFF or h + PascalCase inside $FF80-$FFFF' % (r.name, r.addr, r.size)); RAM_BAD += 1
+    if r.name in ROMNAMES: bad('ram', '%s is also a ROM label' % r.name); RAM_BAD += 1
+    if r.tag not in ('C', 'I', 'U', '?'): bad('ram', '%s: unknown tag %r' % (r.name, r.tag)); RAM_BAD += 1
+RAM_EXCL = list(csv.DictReader(io.StringIO(rd('disasm/ram_exclude_jp.csv'))))
+for fn, text in (('disasm/ram_jp.inc', RN.inc_text(RAM_ROWS)), ('pocketcamera_jp_ram.sym', RN.sym_text(RAM_ROWS))):
+    if not os.path.exists(P(fn)) or open(P(fn), encoding='utf-8', newline='').read() != text:
+        bad('ram', '%s is not what tools/ram_names.py writes from disasm/ram_names_jp.csv (run it)' % fn); RAM_BAD += 1
+# every proven access gets exactly one name; the exclusions are pointer loads of numbers
+RES = RN.Resolver(RAM_ROWS)
+excl = {(int(r['bank'], 16), int(r['pc'], 16)): int(r['value'], 16) for r in RAM_EXCL}
+acc_sites = set(); acc_unnamed = collections.Counter(); acc_kinds = collections.Counter(); excl_seen = set(); named_rows = set()
+for r in csv.DictReader(io.StringIO(rd('wram/wram_access.csv'))):
+    a = int(r['addr'], 16); key = (int(r['bank'], 16), int(r['pc'], 16))
+    if r['kind'] == 'P' and excl.get(key) == a: excl_seen.add(key); continue
+    if not (0xC000 <= a < 0xE000 or 0xFF80 <= a <= 0xFFFE): continue
+    try: res = RES.resolve(key[0], key[1], r['function'], a)
+    except ValueError as e: bad('ram', str(e)); RAM_BAD += 1; continue
+    if res is None: acc_unnamed[(key[0], a)] += 1; continue
+    acc_sites.add(key + (a,)); acc_kinds[r['kind']] += 1; named_rows.add(res[0].name)
+for (b, a), n in sorted(acc_unnamed.items()): bad('ram', 'bank %02X address $%04X (%d accesses) has no name for that bank: add a row to disasm/ram_names_jp.csv or an exclusion' % (b, a, n)); RAM_BAD += 1
+for k, v in excl.items():
+    if k not in excl_seen: bad('ram', 'ram_exclude_jp.csv %02X:%04X $%04X is not a pointer load of the access table' % (k[0], k[1], v)); RAM_BAD += 1
+if not RAM_BAD:
+    ok('ram', '%d names (C %d, I %d, U %d, ? %d), %d rows limited to a bank, routine or instruction, %d proven access sites named, %d exclusions; ram_jp.inc and the .sym are fresh' % (
+        len(RAM_ROWS), RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?'], sum(1 for r in RAM_ROWS if r.scope != '*'), len(acc_sites), len(excl)))
+    quoted('ram rows', r'(?<![\w.])([\d,]+) RAM names', lambda m: ((len(RAM_ROWS),), (num(m.group(1)),)), docs=('README.md', 'CLAUDE.md', 'SKILL.md', 'HOWTO_NEW_ROM.md'), need=('README.md',))
+    quoted('ram tags', r'RAM names \(C ([\d,]+) / I ([\d,]+) / U ([\d,]+) / \? ([\d,]+)', lambda m: ((RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+    quoted('ram sites', r'resolves? every access of `wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+    quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+
 # ------------------------------------------------------------------ TCRF checklist
 tm = rd('tcrf_check/TCRF_CHECKLIST.md'); tc = open(P('tcrf_check/TCRF_CHECKLIST.csv'), encoding='utf-8').read()
 ids_md = sorted(set(re.findall(r'^\| ([A-Z]\d\d) \|', tm, re.M))); ids_csv = sorted(set(re.findall(r'^"?([A-Z]\d\d)"?,', tc, re.M)))
@@ -427,13 +474,33 @@ if A.roundtrip:
         shutil.copy(A.rom, rom); shutil.copy(P('pocketcamera_jp.sym'), os.path.join(tmp, 'in', 'pocketcamera_jp.sym'))
         env = dict(os.environ); env['PATH'] = A.rgbds + ':' + env['PATH']
         want = 'fdcfe686cf4df461e870b6e53b2b5a8b'
-        for variant in ('plain', 'fixed'):
+        subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', os.path.join(tmp, 'hex'), '--overwrite', '--print-hex'], capture_output=True, text=True)    # sym_fix.py reads the `; $ADDR: $xx` comments
+        for variant in ('plain', 'fixed', 'ram'):
             d = os.path.join(tmp, variant)
             if variant == 'plain':
                 subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', d, '--overwrite'], capture_output=True, text=True)
-            else:
-                shutil.copytree(os.path.join(tmp, 'plain'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
+            elif variant == 'fixed':
+                shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
                 subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
+            else:
+                shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
+                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--ram', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
+                st = {k: int(v) for k, v in re.findall(r'(\w+)=(\d+)', sf.stdout.split('sym_fix:')[-1])}
+                quoted('sym_fix stats', r'\((\d+) MBC writes, (\d+) byte counts and (\d+) sprite positions in `bc`, (\d+) far-pointer loads, ([\d,]+) \+ ([\d,]+) word-table rows as `dw`, (\d+) `\{lo,hi,bank\}` rows',
+                       lambda m: (tuple(st.get(k, 0) for k in ('mbc_write', 'bc_count', 'bc_coords', 'far_ptr', 'dw_label', 'dw_numeric', 'far_ptr_row')), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+                named = {k: sum(v for kk, v in st.items() if kk in ks) for k, ks in (('abs', ('ram_mem', 'ram_mem_off')), ('ldh', ('ram_ldh', 'ram_ldh_off')), ('ptr', ('ram_ptr', 'ram_ptr_off')), ('ie', ('ram_ie',)))}
+                tot = sum(named.values())
+                # what is left: ld / ldh lines with an operand inside $C000-$DFFF or $FF80-$FFFE (the exclusions, nothing else)
+                left = []
+                for f in sorted(os.listdir(d)):
+                    if not re.match(r'bank_[0-9a-f]+\.asm$', f): continue
+                    for line in open(os.path.join(d, f), encoding='utf-8'):
+                        m = re.match(r'^\s+(ldh?|ld) [^;]*\$([0-9a-f]{4})\b[^;]*; \$([0-9a-f]{4}): ', line)
+                        if m and (0xC000 <= int(m.group(2), 16) < 0xE000 or 0xFF80 <= int(m.group(2), 16) <= 0xFFFE): left.append((f, m.group(3), m.group(2)))
+                nex = sum(1 for k, v in excl.items() if 0xC000 <= v < 0xE000 or 0xFF80 <= v <= 0xFFFE)
+                if len(left) != nex or st.get('ram_unnamed') or st.get('ram_unproven') or st.get('ram_no_token'): bad('roundtrip', 'ram listing: %d raw RAM operands left (the %d exclusions are the only ones allowed), stats %s' % (len(left), nex, st))
+                else: ok('roundtrip', 'ram: %s instructions use a RAM name (%s absolute, %s ldh, %s address loads, %s rIE), %d raw numbers left (the exclusions)' % (fmt(tot), fmt(named['abs']), fmt(named['ldh']), fmt(named['ptr']), fmt(named['ie']), len(left)))
+                quoted('ram operands', r'([\d,]+) instructions use a RAM name \(([\d,]+) absolute loads and stores, ([\d,]+) `ldh`, ([\d,]+) address loads, ([\d,]+) `ld hl, rIE`\)', lambda m: ((tot, named['abs'], named['ldh'], named['ptr'], named['ie']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
             subprocess.run(['make'], cwd=d, env=env, capture_output=True, text=True)
             import hashlib
             g = os.path.join(d, 'game.gb'); h = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else None

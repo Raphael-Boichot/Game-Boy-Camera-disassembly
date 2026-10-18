@@ -2,7 +2,7 @@
 """Post-process an mgbdis disassembly of Pocket Camera (Japan) Rev A so that the numbers mgbdis turns into labels read as numbers again.
 
   mgbdis --print-hex --output-dir disasm_out pocketcamera_jp.gb          # pocketcamera_jp.sym must sit beside the ROM
-  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace wram/trace_jp_v3.json] [--tables] [--strip-hex]
+  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace wram/trace_jp_v3.json] [--tables] [--ram] [--strip-hex]
   cd disasm_out && make && md5sum game.gb                                # must still be fdcfe686cf4df461e870b6e53b2b5a8b
 
 Why: mgbdis v3.0 prints a symbol for ANY 16-bit operand that equals the address of a label of the current bank (or of bank 0 below $4000),
@@ -18,13 +18,20 @@ repairs the cases that can be told from the code (every decision uses the instru
   4. `--tables`: a `.data:LEN:2` block (word table) is written as `dw Label` / `dw $xxxx` instead of `db $lo, $hi` (the label is used only when a
                                                                            label sits exactly at that address in bank 0 or in the table's own bank); a `.data:LEN:3` block of
                                                                            {lo,hi,bank} far pointers is written `dw Label` + `db BANK(Label)` for every row whose target has a label
+  5. `--ram` (L4): every instruction that uses a RAM address is written with the name of disasm/ram_names_jp.csv (tools/ram_names.py): `ld a, [$d5ce]` -> `ld a, [wMode]`,
+                                                                           `ldh [$ff9a], a` -> `ldh [hOamCursor], a`, `ld hl, $d52a` -> `ld hl, wRngTable`, an address inside a range -> `name + $off`; `ld hl, $ffff` before
+                                                                           `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (wram/wram_access.csv)
+                                                                           holds a pointer load (kind P) at that instruction and it is not listed in disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
+                                                                           that happen to equal an address). The names are defined in disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
   Not repaired (kept as the label mgbdis chose): `ld hl|de, Label` that is really a number (e.g. `ld de, $4000` used as an offset), and
   `ld a, [Label]` reads of ROM bytes (3 of them, all real table reads).
 Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-identical; check with the md5 above."""
-import sys, os, re, json, argparse, collections, glob
+import sys, os, re, json, argparse, collections, glob, csv
 ap = argparse.ArgumentParser()
 ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
 ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
+ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of disasm/ram_names_jp.csv and add disasm/ram_jp.inc to the listing')
+ap.add_argument('--ram-names', default=None); ap.add_argument('--ram-access', default=None); ap.add_argument('--ram-exclude', default=None)
 a = ap.parse_args()
 rom_path = a.rom or (glob.glob(os.path.join(a.dir, '..', '*.gb')) or glob.glob(os.path.join(a.dir, '..', '..', '*.gb')) or ['pocketcamera_jp.gb'])[0]
 sym_path = a.sym or os.path.splitext(rom_path)[0] + '.sym'
@@ -105,6 +112,47 @@ def far_bank(cb, ca):
 # ---- rewrite
 LINE = re.compile(r'^(\s+)(\S.*?)(\s*)(; \$([0-9a-f]{4}): ((?:\$[0-9a-f]{2} ?)+))\s*$')
 stats = collections.Counter()
+# ---- L4: RAM names
+RAMR = None
+if a.ram:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import ram_names
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    RAM_ROWS = ram_names.load(a.ram_names or os.path.join(ROOT, 'disasm', 'ram_names_jp.csv'))
+    RAMR = ram_names.Resolver(RAM_ROWS)
+    RACC = collections.defaultdict(dict)       # (bank, pc) -> {addr: kind}, and the routine of the instruction
+    RFUN = {}
+    for r in csv.DictReader(open(a.ram_access or os.path.join(ROOT, 'wram', 'wram_access.csv'), encoding='utf-8')):
+        k = (int(r['bank'], 16), int(r['pc'], 16)); RACC[k].setdefault(int(r['addr'], 16), set()).add(r['kind']); RFUN[k] = r['function']
+    RAM_EXCL = set()
+    for r in csv.DictReader(open(a.ram_exclude or os.path.join(ROOT, 'disasm', 'ram_exclude_jp.csv'), encoding='utf-8')):
+        RAM_EXCL.add((int(r['bank'], 16), int(r['pc'], 16)))
+    RAM_INC = ram_names.inc_text(RAM_ROWS)
+    RAM_TOK = re.compile(r'\$[0-9a-f]{4}\b')
+def is_ram(v): return 0xC000 <= v < 0xE000 or 0xFF80 <= v <= 0xFFFE
+def ram_rewrite(bank, ad, by, ins, nxt):
+    """new text of the instruction at bank:ad whose RAM operand is written as a name (None: leave it); nxt = text of the next instruction"""
+    o = by[0]
+    if o in (0xEA, 0xFA, 0x08) and len(by) == 3: v = by[1] | by[2] << 8; kind = 'ram_mem'
+    elif o in (0xE0, 0xF0) and len(by) == 2: v = 0xFF00 + by[1]; kind = 'ram_ldh'
+    elif o in (0x01, 0x11, 0x21, 0x31) and len(by) == 3: v = by[1] | by[2] << 8; kind = 'ram_ptr'
+    else: return None
+    if v == 0xFFFF and o == 0x21 and nxt and re.match(r'^(set|res) \d, \[hl\]$', nxt):
+        stats['ram_ie'] += 1; return re.sub(r'\$ffff\b', 'rIE', ins)
+    if not is_ram(v): return None
+    pc = (bank, ad)
+    if kind == 'ram_ptr':
+        if pc in RAM_EXCL: stats['ram_excluded'] += 1; return None
+        if o == 0x31: pass                                                 # ld sp: always an address
+        elif 'P' not in RACC.get(pc, {}).get(v, ()): stats['ram_imm_not_pointer'] += 1; return None
+    elif v not in RACC.get(pc, {}): stats['ram_unproven'] += 1; return None
+    r = RAMR.resolve(bank, ad, RFUN.get(pc), v)
+    if r is None: stats['ram_unnamed'] += 1; return None
+    txt = ram_names.ref(*r)
+    new, n = RAM_TOK.subn(lambda m: txt if int(m.group(0)[1:], 16) == v else m.group(0), ins, count=1)
+    if not n: stats['ram_no_token'] += 1; return None
+    stats[kind + ('_off' if r[1] else '')] += 1
+    return new
 def word_target(bank, w):
     if w < 0x4000: return byad.get((0, w))
     return byad.get((bank, w))
@@ -115,7 +163,8 @@ def in_blocks(lst, bank, ad):
 for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
     bank = int(re.search(r'bank_([0-9a-f]+)\.asm', fn).group(1), 16)
     out = []; cur = None
-    for line in open(fn, encoding='utf-8').read().split('\n'):
+    src = open(fn, encoding='utf-8').read().split('\n')
+    for li, line in enumerate(src):
         m = LINE.match(line)
         if m:
             ind, ins, pad, cm, ad, hx = m.groups(); ad = int(ad, 16); by = [int(x[1:], 16) for x in hx.split()]
@@ -137,6 +186,14 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
                     if bk is not None and bk != bank:
                         t = byad.get((bk, v))
                         new = 'ld %s, %s' % (mm.group(1), t if t else '$%04x' % v); stats['far_ptr' if t else 'far_ptr_numeric'] += 1
+            if RAMR is not None:
+                nxt = None
+                for lj in range(li + 1, min(li + 4, len(src))):
+                    mn = LINE.match(src[lj])
+                    if mn: nxt = mn.group(2); break
+                r2 = ram_rewrite(bank, ad, by, new, nxt)
+                if r2 is not None: new = r2
+            if new != ins and len(new) != len(ins): pad = ' ' * max(1, len(ins) + len(pad) - len(new))      # keep the comment column
             line = ind + new + (pad + cm if not a.strip_hex else '') if new != ins or a.strip_hex else line
             out.append(line); continue
         s = line.strip()
@@ -166,4 +223,15 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
             cur += int(re.match(r'^ds \$([0-9a-f]+)', s).group(1), 16)
         out.append(line)
     open(fn, 'w', encoding='utf-8').write('\n'.join(out))
+if RAMR is not None:
+    open(os.path.join(a.dir, 'ram_jp.inc'), 'w', encoding='utf-8', newline='\n').write(RAM_INC)
+    ga = os.path.join(a.dir, 'game.asm'); gt = open(ga, encoding='utf-8').read()
+    if 'ram_jp.inc' not in gt:
+        gt2 = re.sub(r'(INCLUDE "hardware\.inc"[^\n]*\n)', r'\1INCLUDE "ram_jp.inc"\n', gt, count=1)
+        if gt2 == gt: sys.exit('sym_fix: game.asm has no INCLUDE "hardware.inc" line')
+        open(ga, 'w', encoding='utf-8', newline='\n').write(gt2)
+    mk = os.path.join(a.dir, 'Makefile')
+    if os.path.exists(mk):
+        mt = open(mk, encoding='utf-8').read()
+        if 'ram_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('game.o: game.asm bank_*.asm', 'game.o: game.asm ram_jp.inc bank_*.asm'))
 print('sym_fix: ' + ', '.join('%s=%d' % kv for kv in sorted(stats.items())))
