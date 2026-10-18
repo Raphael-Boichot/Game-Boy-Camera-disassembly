@@ -394,7 +394,6 @@ bank,start,end,type,width,note
 08,5195,519B,data,2,
 08,5347,5365,data,16,
 08,5397,53B5,data,16,
-08,54C6,723E,data,16,
 08,7245,724F,data,2,
 08,7319,731C,data,3,
 08,74DC,74F1,data,16,
@@ -1910,6 +1909,12 @@ bank,start,end,type,width,note
 07,7CF9,7D11,data,3,2 tables x 4 {lo
 08,511F,5191,data,3,Border_SrcTbl: 19 pairs of {lo
 08,54C6,54DE,data,3,WildFrame_PageSrcTbl: 8 x {lo
+08,54DE,552E,data,5,Print_ProgressPackets: 16 x {dest hi; dest lo; $01; tile; $00}
+08,552E,57FE,data,40,Print_Layout0_Plain: 18 rows x 20 {tile; flags}
+08,57FE,5CAE,data,40,Print_Layout1_Framed: 30 rows x 20 {tile; flags}
+08,5CAE,656E,data,40,Print_Layout2_FourPhotos: 56 rows x 20 {tile; flags}
+08,656E,6F6E,data,40,Print_Layout3_FourPhotosRotated: 64 rows x 20 {tile; flags}
+08,6F6E,723E,data,40,Print_Layout4_InfoPage: 18 rows x 20 {tile; flags}
 08,74DC,74F1,data,3,Title_SceneTbl: 7 x {lo
 09,65CA,65D3,data,3,3 x {lo
 09,65FB,6604,data,3,3 x {lo

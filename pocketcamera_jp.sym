@@ -2842,7 +2842,12 @@
 08:5481 WildFrame_LoadForOptionScreen
 08:54b8 Wild_VramCopyAdvance
 08:54c6 WildFrame_PageSrcTbl
-08:54de WildFrame_PageData_54DE
+08:54de Print_ProgressPackets
+08:552e Print_Layout0_Plain
+08:57fe Print_Layout1_Framed
+08:5cae Print_Layout2_FourPhotos
+08:656e Print_Layout3_FourPhotosRotated
+08:6f6e Print_Layout4_InfoPage
 08:723e Mode19_TitleScreens
 08:7245 Mode19_StateTable
 08:724f Mode19_State00_CopyrightScreens
@@ -5960,7 +5965,12 @@
 08:5397 .data:1e:10
 08:53b5 .code:111
 08:54c6 .data:18:3
-08:54de .data:1d60:10
+08:54de .data:50:5
+08:552e .data:2d0:28
+08:57fe .data:4b0:28
+08:5cae .data:8c0:28
+08:656e .data:a00:28
+08:6f6e .data:2d0:28
 08:723e .code:7
 08:7245 .data:a:2
 08:724f .code:ca

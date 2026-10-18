@@ -10,7 +10,8 @@ inside code banks = tables), so the evidence behind a kind is the one of the lab
 gives (a Gfx_ block is a tile set whatever its role).  The kind of the Src_* / Data_* blocks (named after the far pointer that loads them, not after what they are) comes from assets/layout_kind_overrides_jp.csv,
 one row per block with the evidence (the code that copies it and where to, or how the bytes render).  UNCERTAIN = the bytes that stay unidentified after that: a '?' label whose name gives no kind, and any Src_* / Data_*
 block without a row.  Padding = runs of >= 16 x 00 / FF that no typed range of disasm/sym_types_jp.csv covers (the fill between the assets) and the zero fill named Bank*_Padding / ZeroFill in the symbol file.
-The outline marks tiles that contain bytes no run reached, with the classes of rom_reach_map.py (tcrf_check/tools/rom_reach_classes.py): black never-run code, red unused data, blue identified data the v8 run never read."""
+The outline marks tiles that contain bytes no run reached, with the classes of rom_reach_map.py (tcrf_check/tools/rom_reach_classes.py): black never-run code, red unused data, blue identified data the v8 run never read.
+A magenta cross marks every PURE padding tile: a 16-byte tile (aligned like the tile grid) whose 16 bytes are all padding; shorter padding is not marked."""
 import sys, os, csv, re, collections
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -52,7 +53,7 @@ CATS = [
  ('MAP',   'Tile maps (background layouts)',                                                               (245, 205, 50)),
  ('OAM',   'Sprite layouts (OAM lists and their pointer tables)',                                          (200, 165, 110)),
  ('SOUND', 'Sound data: songs, effect tables and parameters',                                              (255, 110, 100)),
- ('TBL',   'Other tables and text: jump / lookup tables, stamp masks, SGB packets, staff roll, parameters', (150, 168, 184)),
+ ('TBL',   'Other tables and text: jump / lookup tables, print layout scripts, stamp masks, SGB packets, staff roll, parameters', (150, 168, 184)),
  ('UNC',   'UNCERTAIN: bytes not identified (kind or record format not settled)',                          (255, 0, 200)),
  ('PAD',   'Padding: runs of 00 / FF between the assets (not typed as data)',                                                           (214, 214, 214)),
 ]
@@ -177,8 +178,8 @@ def ramp(c):                      # 4 shades of one colour: 0 = lightest ... 3 =
 FAM = [ramp(c) for _, _, c in CATS]
 FAM[KEY['PAD']] = [(248, 248, 248), (232, 232, 232), (214, 214, 214), (186, 186, 186)]
 BG, INK = 4 * len(CATS), 4 * len(CATS) + 1
-pal = [c for f in FAM for c in f] + [(255, 255, 255), (0, 0, 0), (214, 20, 40), (0, 70, 220), (110, 110, 110)]
-RED, BLUE, GREYI = INK + 1, INK + 2, INK + 3
+pal = [c for f in FAM for c in f] + [(255, 255, 255), (0, 0, 0), (214, 20, 40), (0, 70, 220), (110, 110, 110), (205, 0, 160)]
+RED, BLUE, GREYI, CROSS = INK + 1, INK + 2, INK + 3, INK + 4
 # a tile row is two bytes: the kind of the pair is the one with the lower rank (UNCERTAIN first, then code, then data, padding last)
 RANKK = np.zeros(len(CATS), np.int32); order = [KEY['UNC']] + list(range(11)) + list(range(11, len(CATS) - 1)) + [KEY['PAD']]
 order = [k for i, k in enumerate(order) if k not in order[:i]]
@@ -224,6 +225,13 @@ for b in range(banks):
                 if edge == 'B': canvas[y0 + T - 2:y0 + T, x0:x0 + T] = col
 img = Image.fromarray(canvas, 'P'); img.putpalette([v for c in pal for v in c] + [0] * (768 - 3 * len(pal)))
 d = ImageDraw.Draw(img)
+# magenta cross on every pure padding tile (all 16 bytes of the tile are padding)
+padtile = (kind.reshape(banks, 32, 32, 16) == KEY['PAD']).all(3); n_padtile = int(padtile.sum())
+for b in range(banks):
+    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY) + (GY - 6)
+    for ty, tx in zip(*np.nonzero(padtile[b])):
+        x0 = gx + int(tx) * T; y0 = gy + int(ty) * T
+        d.line([x0 + 1, y0 + 1, x0 + T - 2, y0 + T - 2], fill=CROSS, width=1); d.line([x0 + T - 2, y0 + 1, x0 + 1, y0 + T - 2], fill=CROSS, width=1)
 pct = lambda x: '%.1f %%' % (100 * x / N)
 fmt = lambda x: format(int(x), ',')
 d.text((LEFT, 12), 'Pocket Camera (Japan) Rev A: what is in each of the 64 banks (the ROM drawn as 2bpp tiles, code, data and padding alike)', fill=INK, font=F1)
@@ -247,8 +255,11 @@ for m, col in ((0, INK), (1, RED), (2, BLUE)):
     s = fmt(mk_tot[m]) + ' B'; d.text((XC + 46 + 110 - d.textlength(s, font=F3), yy - 1), s, fill=INK, font=F3)
     d.text((XC + 46 + 130, yy - 1), ['never-run code, proven dead (evidence I; README 16.15, 16.21)', 'data that no run shows or reads: the REALLY unused assets (I; README 16.24)',
                                     'identified data the v8 run never read (I; README 16.13)'][m], fill=INK, font=F3); yy += 27
+d.rectangle([XC, yy + 1, XC + 34, yy + 18], fill=FAM[KEY['PAD']][1]); d.line([XC + 4, yy + 3, XC + 30, yy + 16], fill=CROSS, width=2); d.line([XC + 30, yy + 3, XC + 4, yy + 16], fill=CROSS, width=2)
+s = fmt(n_padtile) + ' tiles'; d.text((XC + 46 + 110 - d.textlength(s, font=F3), yy - 1), s, fill=INK, font=F3)
+d.text((XC + 46 + 130, yy - 1), 'CROSS: a pure padding tile (all 16 bytes are padding)', fill=INK, font=F3); yy += 27
 d.text((XC, yy + 4), 'Not outlined: everything that at least one run executed, read or showed, and padding.', fill=INK, font=F4)
-d.text((XC, yy + 28), 'Padding is %s B, of which %s B no run touched.' % (fmt(tot_cat[KEY['PAD']]), fmt(mk_tot[3])), fill=INK, font=F4)
+d.text((XC, yy + 28), 'Padding is %s B, of which %s B no run touched; %s B of it lie in whole tiles (crossed).' % (fmt(tot_cat[KEY['PAD']]), fmt(mk_tot[3]), fmt(16 * n_padtile)), fill=INK, font=F4)
 d.text((XC, yy + 52), 'Per bank, in the title: the two largest kinds (padding excluded) and the unreachable bytes.', fill=INK, font=F4)
 for b in range(banks):
     gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY)
@@ -264,4 +275,4 @@ for b in range(banks):
 img.save(OUT, optimize=True)
 print(img.size, os.path.getsize(OUT), 'bytes')
 for i, (k, tx, c) in enumerate(CATS): print('%-6s %9s  %5s  %s' % (k, fmt(tot_cat[i]), pct(tot_cat[i]), tx[:60]))
-print('marks', [int(x) for x in mk_tot])
+print('marks', [int(x) for x in mk_tot]); print('pure padding tiles', n_padtile, 16 * n_padtile, 'B')

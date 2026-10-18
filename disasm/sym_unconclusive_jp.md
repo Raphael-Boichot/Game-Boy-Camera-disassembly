@@ -13,7 +13,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | content-classified span | 16 | 6246 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
-| hand name, unconfirmed | 7 | 8638 | a check of the guess |
+| hand name, unconfirmed | 6 | 1118 | a check of the guess |
 | mode state | 102 | 5597 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 88 | 11689 | which visible effect each slot gives |
 | SFX tag | 95 | 2536 | the sound each id plays |
@@ -46,13 +46,12 @@ _Why doubtful:_ type confirmed by the owner (review page, by eye); role and cons
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## hand name, unconfirmed (7)
+## hand name, unconfirmed (6)
 
 _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 08:54DE | `WildFrame_PageData_54DE` | 7520 | 7,520 bytes ($54DE-$723D) between the 8-page pointer table and Mode19_TitleScreens: lists  | 7,520 bytes ($54DE-$723D) between the 8-page pointer table and Mode19_TitleScreens: lists of short records suc |
 | 0C:5800 | `Gfx_0C_5800_AnimEdMenuLabelsAlt` | 576 | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by an | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by any loader or in any o |
 | 0C:6AB0 | `Gfx_0C_6AB0_AnimEdKanaStrips_Tail` | 384 | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no co | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it /  |
 | 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide  | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF ( |
