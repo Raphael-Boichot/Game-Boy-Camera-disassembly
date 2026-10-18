@@ -14,3 +14,11 @@ rLCDC,lcdc,LCD control register
 rIE,ie,interrupt enable register
 rSC,sc,serial control register
 rP1,p1,joypad select lines
+Snd_Sfx1,sfx1,"call target: A = effect id of channel 1 (00:2A7C stores it in the request mailbox wSndSfx1)"
+Snd_Sfx3,sfx3,"call target: A = effect id of channel 3 (00:2A80, mailbox wSndSfx3)"
+Snd_Sfx4,sfx4,"call target: A = effect id of channel 4 (00:2A84, mailbox wSndSfx4)"
+Snd_Music,music,"call target: A = song id, MUSIC_STOP or MUSIC_HOLD (00:2A88, mailbox wSndMusicReq)"
+wSndSfx1,sfx1,request mailbox of channel 1 (the engine posts the follow-up effects of its own into wSndSfx4)
+wSndSfx3,sfx3,request mailbox of channel 3
+wSndSfx4,sfx4,request mailbox of channel 4 (the engine chains 06 / 03 / 02 / 04 into it)
+wSndMusicReq,music,song mailbox

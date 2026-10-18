@@ -37,6 +37,171 @@ DEF MODE_BALL                  EQU $20 ; C mode: BALL
 DEF MODE_RUN_RUN_RUN           EQU $21 ; C mode: RUN! RUN! RUN! (three runners; 12 hurdles)
 DEF MODE_COUNT                 EQU $22 ; I mode: number of modes: the mode table `00:2F3F` has 34 entries; `cp $22 / jr c` accepts a table 
 DEF MODE_NONE                  EQU $ff ; C mode: no target: the *_TargetModeTbl tables hold $FF for an item that leads nowhere (the caller 
+DEF MUSIC_TITLE                EQU $01 ; C music: title scene, first run and return from the menu (Mode19 states 01 and 02)
+DEF MUSIC_CREDITS_PAGE_B       EQU $02 ; C music: USER section, credits page B (Mode08 state 14)
+DEF MUSIC_CREDITS              EQU $03 ; C music: USER section, the credits (Mode08_CreditsReal)
+DEF MUSIC_SHUTTERBUG           EQU $04 ; C music: SHUTTERBUG menu (Mode16 init and redraw) and the panorama print screen (Mode18 init)
+DEF MUSIC_MAIN_MENU            EQU $05 ; C music: main menu (Mode00 init)
+DEF MUSIC_SHOOT_INTRO_A        EQU $06 ; C music: SHOOT parlor, intro page A (Mode01 state 00)
+DEF MUSIC_SHOOT_INTRO_B        EQU $07 ; C music: SHOOT parlor, intro page B (Mode01 state 03)
+DEF MUSIC_TIMER_PRINT_OPTIONS_ALIAS_08 EQU $08 ; I music: same data as song 0D, requested by nothing; owner by ear (2026-10-18): waiting loop before
+DEF MUSIC_SHOW_MENU            EQU $09 ; C music: SHOW menu: slide show / animation / hot-spot (Mode0B init)
+DEF MUSIC_DOODLE_MENU          EQU $0a ; C music: Doodle menu: STAMP / PAINT (Mode04 init)
+DEF MUSIC_EDIT_MENU            EQU $0b ; C music: Edit menu: ALBUM / ANIMATION (Mode05 init)
+DEF MUSIC_LINK_MENU            EQU $0c ; C music: LINK menu: PRINT / TRANSFER (Mode06 init)
+DEF MUSIC_TIMER_PRINT_OPTIONS  EQU $0d ; C music: waiting loop of the self-timer and interval setup (Mode15) and of the several-photo print 
+DEF MUSIC_SHOOT_INTRO_C        EQU $0e ; C music: SHOOT parlor, intro page C (Mode01 state 06)
+DEF MUSIC_PHOTO_PICKER         EQU $0f ; C music: photo picker: delete / copy browse, album confirm, link photo pick (Mode0F, 07:4C7F)
+DEF MUSIC_SLIDESHOW_TUNE_31    EQU $10 ; I music: in no code path: only the slide-show player list (#31) and the hot-spot sound list (#33)
+DEF MUSIC_JINGLE               EQU $11 ; C music: short jingle: credits entry, factory-test buttons, first-boot "store please wait"; also sl
+DEF MUSIC_SLIDESHOW_TUNE_03    EQU $12 ; I music: in no code path: only the slide-show player list (#3)
+DEF MUSIC_SLIDESHOW_TUNE_04    EQU $13 ; I music: in no code path: only the slide-show player list (#4)
+DEF MUSIC_SLIDESHOW_TUNE_05    EQU $14 ; I music: in no code path: only the slide-show player list (#5)
+DEF MUSIC_SLIDESHOW_PLAY_ALIAS_15 EQU $15 ; I music: same data as song 21; only the slide-show player list (#6)
+DEF MUSIC_FACTORY_DIAG         EQU $16 ; C music: factory test: all buttons except B (Cam_FactoryDiag)
+DEF MUSIC_SLIDESHOW_TUNE_08    EQU $17 ; I music: in no code path: only the slide-show player list (#8)
+DEF MUSIC_SLIDESHOW_TUNE_09    EQU $18 ; I music: in no code path: only the slide-show player list (#9)
+DEF MUSIC_JAMBO_NINTENDO_ALIAS_19 EQU $19 ; I music: same data as song 2A; only the slide-show player list (#10)
+DEF MUSIC_TIMER_PRINT_OPTIONS_ALIAS_1A EQU $1a ; I music: same data as song 0D; only the slide-show player list (#11)
+DEF MUSIC_SLIDESHOW_TUNE_12    EQU $1b ; I music: in no code path: only the slide-show player list (#12)
+DEF MUSIC_BEETHOVEN_5TH_INTRO  EQU $1c ; I music: same data as song 47; only the slide-show player list (#13); owner by ear (2026-10-18), on
+DEF MUSIC_SLIDESHOW_TUNE_14    EQU $1d ; I music: in no code path: only the slide-show player list (#14)
+DEF MUSIC_TITLE_ALIAS_1E       EQU $1e ; I music: same data as song 01; only the slide-show player list (#15)
+DEF MUSIC_SPACE_FEVER_1F       EQU $1f ; I music: no caller and no list; owner by ear: "from Space Fever (likely)"
+DEF MUSIC_SLIDESHOW_INIT       EQU $20 ; C music: slide-show hub (Mode0D init); also slide-show player list (#18)
+DEF MUSIC_SLIDESHOW_PLAY       EQU $21 ; C music: slide-show playback (Mode0D state 06)
+DEF MUSIC_SLIDESHOW_TUNE_01    EQU $22 ; I music: in no code path: only the slide-show player list (#1)
+DEF MUSIC_ANIMATION_EDITOR     EQU $23 ; C music: animation editor (Mode12 init); also slide-show player list (#19)
+DEF MUSIC_STAMP                EQU $24 ; C music: STAMP tool (Mode11 setup)
+DEF MUSIC_PAINT                EQU $25 ; C music: PAINT tool (Mode10 setup); also slide-show player list (#32)
+DEF MUSIC_TRANSFER_SEND        EQU $26 ; C music: print engine transfer screen, send init (Mode1D state 02)
+DEF MUSIC_TRANSFER_PRINT       EQU $27 ; C music: print job: waiting jingle while the printer prints (Mode1D state 05); owner by ear (2026-1
+DEF MUSIC_WHO_ARE_YOU_RUNNING_FROM_1 EQU $28 ; I music: shared result / error screen, tune 1 of 4; owner by ear: "Who are you running from 1" (sur
+DEF MUSIC_TOTAKA_TUNE          EQU $29 ; I music: shared result / error screen, tune 2 of 4; also played by the factory test (all buttons ex
+DEF MUSIC_JAMBO_NINTENDO       EQU $2a ; I music: shared result / error screen, tune 4 of 4; owner by ear: "Jambo Nintendo !" (sure)
+DEF MUSIC_BALL_GAME_OVER       EQU $2b ; C music: BALL game over (Mode20 state 06)
+DEF MUSIC_BALL_MENU            EQU $2c ; C music: BALL menu (Mode20 state 00)
+DEF MUSIC_BALL_BGM_2           EQU $2d ; C music: BALL in-game music, second pick of the list at 05:781B; owner by ear: "Ball BGM" (sure)
+DEF MUSIC_BALL_BGM_1           EQU $2e ; C music: BALL in-game music, first pick of the list at 05:781B; also slide-show player list (#21)
+DEF MUSIC_DJ_TITLE             EQU $2f ; C music: D.J. title (Mode1F state 00)
+DEF MUSIC_WHO_ARE_YOU_RUNNING_FROM_2 EQU $30 ; I music: shared result / error screen, tune 3 of 4; owner by ear: "Who are you running from 2" (sur
+DEF MUSIC_SPACE_FEVER_START    EQU $31 ; C music: Space Fever II start (Mode07 state 01)
+DEF MUSIC_SPACE_FEVER_MAIN     EQU $32 ; C music: Space Fever II main theme: restarted when a boss is gone (SpaceFever_Boss_EndA); owner by 
+DEF MUSIC_SLIDESHOW_TUNE_23    EQU $33 ; I music: in no code path: only the slide-show player list (#23)
+DEF MUSIC_USER_SCREENS         EQU $34 ; C music: USER section (Mode08 init); also slide-show player list (#22)
+DEF MUSIC_RECORD_HI_SCORE      EQU $35 ; C music: record and hi-score screens (Mode08 states 0C and 0F)
+DEF MUSIC_SPECIAL_MENU         EQU $36 ; C music: Special menu (Mode03 init)
+DEF MUSIC_COMPOSE              EQU $37 ; C music: COMPOSE: split / fusion (Mode17 init); also slide-show player list (#24)
+DEF MUSIC_COMMENT_EDITOR       EQU $38 ; C music: comment editor (CommentEditor_Sub0_Init); also slide-show player list (#25)
+DEF MUSIC_VIEW_MENU            EQU $39 ; C music: VIEW menu (Mode02 init)
+DEF MUSIC_ALBUM_VIEWER         EQU $3a ; C music: album viewer and print screen (Modes 09, 0A, 0F confirm, 1C); also slide-show player list 
+DEF MUSIC_OWNER_CARD           EQU $3b ; C music: owner card and its editor (Mode08 states 03 and 06); also slide-show player list (#27)
+DEF MUSIC_RUN_PICK_CHARACTER   EQU $3c ; C music: RUN! RUN! RUN!: pick a character (Mode21_PickCharacterTbl); also slide-show player list (#
+DEF MUSIC_RUN_COUNTDOWN        EQU $3d ; C music: RUN! RUN! RUN!: countdown (Mode21 state 04)
+DEF MUSIC_RUN_READY_STEADY_GO  EQU $3e ; C music: RUN! RUN! RUN!: ready, steady, go (Mode21 state 05)
+DEF MUSIC_RUN_RACE             EQU $3f ; C music: RUN! RUN! RUN!: the race (Mode21 state 06); also the first-boot "store please wait" screen
+DEF MUSIC_RUN_RESULT_SETUP     EQU $40 ; C music: RUN! RUN! RUN!: result setup and screen (Mode21 states 0B, 0C); also slide-show player lis
+DEF MUSIC_RUN_RESULT           EQU $41 ; C music: RUN! RUN! RUN!: result screen (Mode21 state 0C); also slide-show player list (#7)
+DEF MUSIC_SPACE_FEVER_BOSS     EQU $42 ; C music: Space Fever II boss fight (SpaceFever_Boss_Init); also slide-show player list (#30)
+DEF MUSIC_RUN_RACE_SCENE       EQU $43 ; C music: RUN! RUN! RUN!: race scene init (Mode21 state 02); also slide-show player list (#16)
+DEF MUSIC_LINK_EXCHANGE_SETUP  EQU $44 ; C music: link exchange setup (Mode0E states 06 and 0A); same data as 11, owner by ear (2026-10-13):
+DEF MUSIC_ERASE_JINGLE         EQU $45 ; C music: photo erase (Mode0F_EraseJingleTiles)
+DEF MUSIC_USER_MAP_SCROLL_OUT  EQU $46 ; C music: USER map scroll-out (UserMap_ScrollOut)
+DEF MUSIC_BEETHOVEN_5TH_INTRO_ALIAS_47 EQU $47 ; I music: same data as song 1C, requested by nothing; owner by ear (2026-10-18): Beethoven 5th symph
+DEF MUSIC_ERROR_MESSAGE_INCOMPLETE EQU $48 ; I music: no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete
+DEF MUSIC_HOLD                 EQU $fe ; C music: engine control: this frame runs effect 1 only, the song and effects 3 and 4 do not advance
+DEF MUSIC_STOP                 EQU $ff ; C music: engine control: stop the song (Snd_RequestSong -> Snd_StopSong)
+DEF SFX1_KEY_LEFT_RIGHT        EQU $01 ; C sfx1: Left and Right in the shared key helper Snd_KeyBlips; many editors use it as their plain t
+DEF SFX1_KEY_UP_DOWN           EQU $02 ; C sfx1: Up and Down in Snd_KeyBlips
+DEF SFX1_KEY_A                 EQU $03 ; C sfx1: A in Snd_KeyBlips
+DEF SFX1_KEY_B                 EQU $04 ; C sfx1: B in Snd_KeyBlips
+DEF SFX1_KEY_START             EQU $05 ; C sfx1: Start in Snd_KeyBlips; BALL play and pause
+DEF SFX1_KEY_SELECT            EQU $06 ; C sfx1: Select in Snd_KeyBlips; Select in the album slider browse, the slide-show hub, the shoot o
+DEF SFX1_MAIN_MENU_MOVE        EQU $07 ; I sfx1: main menu, lower page: the cursor moves between the four items (Mode00 states 04-07)
+DEF SFX1_MAIN_MENU_PAGE_DOWN   EQU $08 ; C sfx1: main menu slides to the lower page (MainMenu_TransitionToLowerPage)
+DEF SFX1_MAIN_MENU_PAGE_UP     EQU $09 ; C sfx1: main menu slides back to the upper page (MainMenu_TransitionToUpperPage)
+DEF SFX1_MAIN_MENU_PAGE_TURN   EQU $0a ; C sfx1: both main-menu page transitions
+DEF SFX1_BEEP_REFUSED          EQU $0b ; I sfx1: refused choice (mode target $FF, photo index past the last photo) and the self-timer beep
+DEF SFX1_SPACE_FEVER_ENEMY_KILL EQU $0c ; C sfx1: Space Fever II: an enemy of waves 1-3 is shot (after SpaceFever_AddScore)
+DEF SFX1_SPACE_FEVER_BIG_ENEMY_KILL EQU $0d ; I sfx1: Space Fever II: enemy 0 of wave 3 is shot (30 points instead of 5); same data as 06
+DEF SFX1_CHOOSE_D              EQU $0e ; I sfx1: A in the SHOW menu and in the BALL menu; Space Fever II hit flash
+DEF SFX1_SPACE_FEVER_TARGET_KILL EQU $0f ; C sfx1: Space Fever II opening wave: one of the three game targets is shot
+DEF SFX1_TAG_DIGITS_JINGLE     EQU $10 ; C sfx1: plays the four digits of the tag check (Snd_PlayTagDigits); B in the BALL menu
+DEF SFX1_CONFIRM               EQU $11 ; I sfx1: animation editor sort choice; Start on the print screen
+DEF SFX1_PANEL_OPEN            EQU $12 ; I sfx1: a panel slides open (pen menu, palette, D.J. panel, dialogs: 8 sites); same data as 1D
+DEF SFX1_PANEL_CLOSE           EQU $13 ; I sfx1: a panel slides shut (same panels as 12)
+DEF SFX1_HOTSPOT_SOUND_01      EQU $14 ; I sfx1: only the hot-spot sound list (#1); owner by ear: hot spot related (sure)
+DEF SFX1_HOTSPOT_SOUND_02      EQU $15 ; I sfx1: only the hot-spot sound list (#2); owner by ear: hot spot related (sure)
+DEF SFX1_OPTION_CHANGE         EQU $16 ; I sfx1: A on a slide-show option, a key of the name keyboard or the animation loop count; RUN cele
+DEF SFX1_HOTSPOT_SOUND_04      EQU $17 ; I sfx1: only the hot-spot sound list (#4)
+DEF SFX1_HOTSPOT_SOUND_05      EQU $18 ; I sfx1: only the hot-spot sound list (#5)
+DEF SFX1_COMPOSE_LAYOUT_KEY    EQU $19 ; I sfx1: COMPOSE layout keys (Compose_ReadLayoutKeys); same data as 3A; hot-spot sound list (#6)
+DEF SFX1_HOTSPOT_SOUND_07      EQU $1a ; I sfx1: only the hot-spot sound list (#7)
+DEF SFX1_SPACE_FEVER_MENU_PICK_GAME EQU $1b ; C sfx1: Space Fever II first-wave menu: A on D.J. or BALL (Mode07_State04_TargetMenuB, then state 
+DEF SFX1_HOTSPOT_SOUND_09      EQU $1c ; I sfx1: only the hot-spot sound list (#9)
+DEF SFX1_PANEL_OPEN_ALIAS_1D   EQU $1d ; I sfx1: same data as 12; only the hot-spot sound list (#10)
+DEF SFX1_CHOOSE                EQU $1e ; I sfx1: A in the Special menu, animation range browse, split / fusion confirm, link handshake; sam
+DEF SFX1_HOTSPOT_SOUND_12      EQU $1f ; I sfx1: only the hot-spot sound list (#12)
+DEF SFX1_STEP_FAST             EQU $20 ; I sfx1: direction keys on a counter or a two-way choice (loop count, step keys, slide-show options
+DEF SFX1_STEP_VALUE            EQU $21 ; I sfx1: direction keys stepping a photo or stock value, a toggle, a keyboard page
+DEF SFX1_DIRECTION_KEY         EQU $22 ; I sfx1: direction keys in the animation tools menu, the print density and the comment editor
+DEF SFX1_BALL_POINT            EQU $23 ; C sfx1: BALL: a point is scored (Ball_AddPoint); same data as 2B
+DEF SFX1_SPACE_FEVER_START     EQU $25 ; C sfx1: Space Fever II: the game starts (SpaceFever_Wave0_Init)
+DEF SFX1_SPACE_FEVER_BOSS_DEATH EQU $26 ; C sfx1: Space Fever II: the boss is destroyed (SpaceFever_BossHit); owner by ear: boss death; same
+DEF SFX1_SPACE_FEVER_WAVE0_END EQU $27 ; I sfx1: Space Fever II: the opening wave is over, wave state 2 follows (SpaceFever_Wave0_Play)
+DEF SFX1_SHUTTER_SOUND_1       EQU $28 ; C sfx1: first of the four shutter sounds (wShutterSound = 0, list at 06:7845); owner by ear: shutt
+DEF SFX1_CHOOSE_B              EQU $29 ; I sfx1: A in the LINK menu and in the Edit menu
+DEF SFX1_CHOOSE_C              EQU $2a ; I sfx1: A in the VIEW menu; B in the animation range browse
+DEF SFX1_BALL_POINT_ALIAS_2B   EQU $2b ; I sfx1: same data as 23, requested by nothing
+DEF SFX1_DJ_PERFORM_SE_1       EQU $2c ; I sfx1: D.J. performance screen, sound effect 1 of 9 (list at 05:554D)
+DEF SFX1_DJ_PERFORM_SE_2       EQU $2d ; I sfx1: D.J. performance screen, sound effect 2 of 9
+DEF SFX1_DJ_PERFORM_SE_3       EQU $2e ; I sfx1: D.J. performance screen, sound effect 3 of 9; also hot-spot sound list (#15)
+DEF SFX1_DJ_PERFORM_SE_4       EQU $2f ; I sfx1: D.J. performance screen, sound effect 4 of 9 (list at 05:554D); owner by ear (2026-10-13):
+DEF SFX1_RUN_CELEBRATION       EQU $30 ; C sfx1: RUN! RUN! RUN!: celebration (Run_Celebration); also D.J. performance sound effect 5 of 9
+DEF SFX1_DJ_PERFORM_SE_6       EQU $31 ; I sfx1: D.J. performance screen, sound effect 6 of 9
+DEF SFX1_DJ_PERFORM_SE_7       EQU $32 ; I sfx1: D.J. performance screen, sound effect 7 of 9
+DEF SFX1_DJ_PERFORM_SE_8       EQU $33 ; I sfx1: D.J. performance screen, sound effect 8 of 9
+DEF SFX1_DJ_PERFORM_SE_9       EQU $34 ; I sfx1: D.J. performance screen, sound effect 9 of 9
+DEF SFX1_RUN_JUMP              EQU $35 ; C sfx1: RUN! RUN! RUN!: the player jumps (Run_PlayerJump); also hot-spot sound list (#16)
+DEF SFX1_PAGE_STEP             EQU $36 ; I sfx1: album and album-edit page turns (Left / Right / Up / Down pages); animation editor spark
+DEF SFX1_COPY_BROWSE           EQU $37 ; I sfx1: photo copy browse (Mode0F_State0C_CopyBrowse)
+DEF SFX1_CURSOR_MOVE           EQU $38 ; I sfx1: cursor moves in menus and pickers (19 sites); Space Fever II boss timer; also hot-spot sou
+DEF SFX1_MENU_CHOOSE           EQU $39 ; I sfx1: A on an entry of the SHOOT parlor, the BALL menu, photo delete, layout choose, print selec
+DEF SFX1_PICK_PHOTO            EQU $3a ; I sfx1: photo picker choose, delete browse, link photo pick; same data as 19
+DEF SFX1_ERASE_ANIM            EQU $3b ; C sfx1: photo erase animation (EraseAnim_Run); the engine adds sfx4 06 when it ends
+DEF SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE EQU $3c ; C sfx1: Space Fever II: B during play makes the ship explode (07:5623); stops the song and posts s
+DEF SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3D EQU $3d ; I sfx1: same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in S
+DEF SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E EQU $3e ; I sfx1: same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in S
+DEF SFX3_MAIN_MENU_SHOOT       EQU $01 ; I sfx3: main menu: the cursor goes to SHOOT (Mode00_State01_Item0_Shoot); also hot-spot sound list
+DEF SFX3_MAIN_MENU_VIEW_ARCADE EQU $02 ; I sfx3: main menu: Mode00 items VIEW and Arcade, return to the upper page; link exchange bars half
+DEF SFX3_SPACE_FEVER_BOSS_HIT  EQU $03 ; C sfx3: Space Fever II: the boss is hit (SpaceFever_BossHit)
+DEF SFX3_SHUTTER_SOUND_3       EQU $05 ; C sfx3: third of the four shutter sounds (list at 06:7845); same data as 0A; also hot-spot sound l
+DEF SFX3_SHUTTER_SOUND_2       EQU $06 ; C sfx3: second of the four shutter sounds (list at 06:7845); also hot-spot sound list (#24)
+DEF SFX3_DELETE_DIALOG_FIRST   EQU $08 ; C sfx3: hot-spot editor delete dialog: A on the first choice (Mode1A_State0A_DeleteDialog)
+DEF SFX3_DELETE_DIALOG_SECOND  EQU $09 ; C sfx3: hot-spot editor delete dialog: A on the second choice
+DEF SFX3_SHUTTER_SOUND_3_ALIAS_0A EQU $0a ; I sfx3: same data as 05, requested by nothing
+DEF SFX4_STAMP_COMMIT          EQU $01 ; C sfx4: STAMP: a stamp is put on the photo (Stamp_Commit)
+DEF SFX4_DEATH_NOISE           EQU $02 ; I sfx4: posted by the engine right after the song stop of sfx1 3C, 3D and 3E
+DEF SFX4_SHUTTER_SOUND_4       EQU $03 ; C sfx4: fourth of the four shutter sounds (list at 06:7845); the engine also posts it when sfx1 26
+DEF SFX4_RUN_HURDLE_HIT        EQU $04 ; C sfx4: RUN! RUN! RUN!: the runner hits a hurdle (Run_HurdleCollision); the engine also posts it f
+DEF SFX4_ERASE_ANIM            EQU $05 ; C sfx4: photo erase animation (EraseAnim_Run, with sfx1 3B); owner by ear (2026-10-13): player dea
+DEF SFX4_ERASE_ANIM_TAIL       EQU $06 ; I sfx4: posted by the engine when sfx1 3B (photo erase animation) ends
+DEF SFX4_SPACE_FEVER_FIRE_SHOTS EQU $07 ; C sfx4: Space Fever II: the ship fires (SpaceFever_FireShots)
+DEF SFX4_SPACE_FEVER_PLAYER_DEATH EQU $08 ; C sfx4: Space Fever II: the ship is hit by an enemy or a bullet (SpaceFever_PlayerDie, SpaceFever_
+DEF SFX4_HOTSPOT_SOUND_25      EQU $09 ; I sfx4: only the hot-spot sound list (#25)
+DEF SFX4_LINK_CHOOSE           EQU $0a ; C sfx4: link menu: SEND / RECEIVE choice (Link_ChooseSendReceive); also hot-spot sound list (#26)
+DEF SFX4_HOTSPOT_SOUND_27      EQU $0b ; I sfx4: only the hot-spot sound list (#27)
+DEF SFX4_HOTSPOT_SOUND_28      EQU $0c ; I sfx4: only the hot-spot sound list (#28)
+DEF SFX4_HOTSPOT_SOUND_29      EQU $0d ; I sfx4: only the hot-spot sound list (#29)
+DEF SFX4_HOTSPOT_SOUND_30      EQU $0e ; I sfx4: only the hot-spot sound list (#30)
+DEF SFX4_HOTSPOT_SOUND_31      EQU $0f ; I sfx4: only the hot-spot sound list (#31)
+DEF SFX4_HOTSPOT_SOUND_32      EQU $10 ; I sfx4: only the hot-spot sound list (#32)
+DEF SFX4_RUN_FLAG_HEIGHT       EQU $11 ; C sfx4: RUN! RUN! RUN!: the flag is raised to the height of the race (Run_FlagHeight)
+DEF SFX4_MUSIC_SELECT          EQU $12 ; C sfx4: slide-show player: Select changes the tune (Mode13_State01_MusicSelect)
+DEF SNDCH_SFX1                 EQU $01 ; C sndch: channel byte 1 of a sound list: the id goes to the request mailbox of effect 1 (Snd_PlayFr
+DEF SNDCH_MUSIC                EQU $02 ; C sndch: channel byte 2: the id goes to the song mailbox
+DEF SNDCH_SFX3                 EQU $03 ; C sndch: channel byte 3: the id goes to the request mailbox of effect 3
+DEF SNDCH_SFX4                 EQU $04 ; C sndch: channel byte 4: the id goes to the request mailbox of effect 4
 
 ; Key masks (the eight single keys PADF_A .. PADF_DOWN come from hardware.inc).
 DEF PADF_BUTTONS EQU PADF_A | PADF_B | PADF_SELECT | PADF_START

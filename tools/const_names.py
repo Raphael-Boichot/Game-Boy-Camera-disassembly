@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """Constants of Pocket Camera (Japan) Rev A: table loader, expression builder and generator of disasm/const_jp.inc.
 
-  tools/const_names.py [--names disasm/const_names_jp.csv] [--inc disasm/const_jp.inc] [--check]
+  tools/const_names.py [--names disasm/const_names_jp.csv] [--sounds disasm/sound_names_jp.csv] [--inc disasm/const_jp.inc] [--check]
 
 Sources of truth (hand-edited):
   disasm/const_names_jp.csv   group,value,name,tag,desc   one row per named value of a group (group `mode`: the 34 modes of the table 00:2F3F, taken from the
-                              entry labels `ModeNN_Name`, plus MODE_COUNT and MODE_NONE)
+                              entry labels `ModeNN_Name`, plus MODE_COUNT and MODE_NONE; group `sndch`: the channel byte of the sound lists)
+  disasm/sound_names_jp.csv   channel,id,name,tag,sites,desc,evidence   one row per sound id (162) plus the two control requests of the song mailbox; a row without a name has none yet.
+                              The channel (`music`, `sfx1`, `sfx3`, `sfx4`) is the group: the four id spaces are separate. `sites` = number of `ld a, id` / request pairs in the ROM
   disasm/const_types_jp.csv   variable,group,note         which RAM / register operands hold a value of which group (`wMode` -> mode, `hKeysNew` -> pad, `hLcdcShadow` -> lcdc ...)
-  disasm/const_tables_jp.csv  bank,addr,len,layout,group,note   byte tables whose bytes are values of a group (`M` = a mode, `S` = a state, left as a number)
+  disasm/const_tables_jp.csv  bank,addr,len,layout,group,note   byte tables whose bytes are values of a group (`M` = a mode, `S` = a state, left as a number; `K` = a sound id of the channel
+                              given by the next byte, `C` = that channel byte (group `sndch`): the (id, channel) lists read by Snd_PlayFromList)
 Derived, never edited by hand:
   disasm/const_jp.inc         `DEF MODE_MAIN_MENU EQU $00` lines and the two key-mask groups; INCLUDEd by game.asm after ram_jp.inc
 
-Groups: `mode` (names from the table), the flag groups `pad` (PADF_*), `lcdc` (LCDCF_*), `ie` (IEF_*), `sc` (SCF_*) whose names are the ones of hardware.inc (a value is written as
+Groups: `mode` (names from the table), `sndch` and the four sound groups `music` / `sfx1` / `sfx3` / `sfx4` (names of disasm/sound_names_jp.csv; the call target `Snd_Music` / `Snd_Sfx1` / ... types its
+`ld a, id`), the flag groups `pad` (PADF_*), `lcdc` (LCDCF_*), `ie` (IEF_*), `sc` (SCF_*) whose names are the ones of hardware.inc (a value is written as
 the OR of the flags it sets), and `p1` (P1F_GET_*, exact values). `tools/sym_fix.py --const` applies them; only where the operand is proven to hold a value of the group."""
 import csv, os, re, sys, argparse
 
@@ -44,11 +48,30 @@ class Const:
 def load_names(path=None):
     path = path or os.path.join(ROOT, 'disasm', 'const_names_jp.csv')
     rows = [Const(d) for d in csv.DictReader(open(path, encoding='utf-8'))]
+    check_unique(rows)
+    return rows
+
+
+def check_unique(rows):
+    """no name twice, no value of a group twice (the sound groups are separate value spaces)"""
     seen = set(); vals = set()
     for r in rows:
         if r.name in seen: raise ValueError('duplicate constant name %s' % r.name)
         if (r.group, r.value) in vals: raise ValueError('two names for %s $%02x' % (r.group, r.value))
         seen.add(r.name); vals.add((r.group, r.value))
+
+
+SOUND_GROUPS = ('music', 'sfx1', 'sfx3', 'sfx4')
+SNDCH_GROUP = {1: 'sfx1', 2: 'music', 3: 'sfx3', 4: 'sfx4'}      # the channel byte of a sound list (Snd_PlayFromList, 00:2A4B) -> the id space of the byte before it
+
+
+def load_sounds(path=None):
+    """the named rows of disasm/sound_names_jp.csv as Const rows (group = channel)"""
+    path = path or os.path.join(ROOT, 'disasm', 'sound_names_jp.csv')
+    rows = []
+    for d in csv.DictReader(open(path, encoding='utf-8')):
+        if d['name']: rows.append(Const({'group': d['channel'], 'value': d['id'], 'name': d['name'], 'tag': d['tag'], 'desc': d['desc']}))
+    check_unique(rows)
     return rows
 
 
@@ -103,10 +126,12 @@ def inc_text(rows):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--names', default=os.path.join(ROOT, 'disasm', 'const_names_jp.csv'))
+    ap.add_argument('--sounds', default=os.path.join(ROOT, 'disasm', 'sound_names_jp.csv'))
     ap.add_argument('--inc', default=os.path.join(ROOT, 'disasm', 'const_jp.inc'))
     ap.add_argument('--check', action='store_true')
     a = ap.parse_args()
-    rows = load_names(a.names)
+    rows = load_names(a.names) + load_sounds(a.sounds)
+    check_unique(rows)
     t = inc_text(rows)
     if a.check:
         if not os.path.exists(a.inc) or open(a.inc, encoding='utf-8', newline='').read() != t: print('differs:', a.inc); sys.exit(1)

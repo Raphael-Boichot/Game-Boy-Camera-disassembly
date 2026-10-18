@@ -464,9 +464,10 @@ import const_names as CN
 CN_BAD = 0
 try:
     C_ROWS = CN.load_names(P('disasm/const_names_jp.csv')); C_TYPES = CN.load_types(P('disasm/const_types_jp.csv')); C_TABS = CN.load_tables(P('disasm/const_tables_jp.csv'))
+    S_ROWS = CN.load_sounds(P('disasm/sound_names_jp.csv')); CN.check_unique(C_ROWS + S_ROWS)
 except Exception as e:
-    C_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
-CNAMER = CN.Namer(C_ROWS)
+    C_ROWS = []; S_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
+CNAMER = CN.Namer(C_ROWS + S_ROWS)
 C_TAGS = collections.Counter(r.tag for r in C_ROWS)
 RAM_IDS = {r.name for r in RAM_ROWS}
 def snake(x): return re.sub(r'(?<=[a-z0-9])(?=[A-Z])', '_', x).upper()
@@ -477,7 +478,7 @@ for r in C_ROWS:
     if not re.fullmatch(r'[A-Z][A-Z0-9_]*', r.name): bad('const', '%s: a constant is written in capitals' % r.name); CN_BAD += 1
     if r.name in NAMESET or r.name in RAM_IDS: bad('const', '%s is also a ROM label or a RAM name' % r.name); CN_BAD += 1
     if r.tag not in ('C', 'I'): bad('const', '%s: unknown tag %r' % (r.name, r.tag)); CN_BAD += 1
-    if r.group != 'mode': bad('const', '%s: group %s has no name table (the flag groups use the names of hardware.inc)' % (r.name, r.group)); CN_BAD += 1
+    if r.group not in ('mode', 'sndch'): bad('const', '%s: group %s has no name table (the flag groups use the names of hardware.inc, the sound ids are in sound_names_jp.csv)' % (r.name, r.group)); CN_BAD += 1
 if set(C_MODES) != set(range(0x22)) | {0x22, 0xFF} or C_MODES[0x22].name != 'MODE_COUNT' or C_MODES[0xFF].name != 'MODE_NONE':
     bad('const', 'the mode group must name $00-$21 and MODE_COUNT ($22), MODE_NONE ($FF)'); CN_BAD += 1
 else:
@@ -488,16 +489,26 @@ else:
         if not entry or not re.fullmatch('Mode%02X_\\w+' % m, entry) or 'MODE_' + snake(entry[7:]) != C_MODES[m].name:
             bad('const', 'mode $%02X is %s, but its entry label is %s (the constant is the label without its number, in capitals)' % (m, C_MODES[m].name, entry)); CN_BAD += 1
 C_HW = {'rLCDC', 'rIE', 'rSC', 'rP1'}
-C_GROUPS = {'mode'} | set(CN.FLAGS) | set(CN.EXACT)
+C_GROUPS = {'mode', 'sndch'} | set(CN.FLAGS) | set(CN.EXACT) | set(CN.SOUND_GROUPS)
+C_CALLS = {'Snd_Sfx1': 'sfx1', 'Snd_Sfx3': 'sfx3', 'Snd_Sfx4': 'sfx4', 'Snd_Music': 'music'}       # routines whose A is typed: the id spaces are told apart by the call target
 for v, g in C_TYPES.items():
-    if v not in RAM_IDS and v not in C_HW: bad('const', 'const_types_jp.csv: %s is neither a RAM name nor one of %s' % (v, sorted(C_HW))); CN_BAD += 1
+    if v in C_CALLS:
+        if C_CALLS[v] != g or v not in NAMESET: bad('const', 'const_types_jp.csv: %s must be the ROM routine that takes a %s id in A' % (v, C_CALLS[v])); CN_BAD += 1
+    elif v not in RAM_IDS and v not in C_HW: bad('const', 'const_types_jp.csv: %s is neither a RAM name, a request routine nor one of %s' % (v, sorted(C_HW))); CN_BAD += 1
     if g not in C_GROUPS: bad('const', 'const_types_jp.csv: %s has the unknown group %s' % (v, g)); CN_BAD += 1
 BLK = {(t[0], t[1]): t for t in TYPES}
-C_MODE_BYTES = 0
+C_MODE_BYTES = 0; C_SND_BYTES = 0
 for t in C_TABS:
     key = (t['bank'], t['addr']); bl = BLK.get(key)
     if not bl or bl[3] != 'data' or bl[2] - bl[1] != t['len']: bad('const', 'const_tables_jp.csv %02X:%04X: no data block of %d bytes starts there in sym_types_jp.csv' % (key + (t['len'],))); CN_BAD += 1; continue
     if key not in LABEL_AT: bad('const', 'const_tables_jp.csv %02X:%04X: the table has no label' % key); CN_BAD += 1
+    if t['layout'] == 'KC' and t['group'] == 'sound' and t['len'] % 2 == 0:       # an (id, channel) list of Snd_PlayFromList: every channel byte is 1-4
+        C_SND_BYTES += t['len']
+        if CROM:
+            o0 = t['addr'] if t['bank'] == 0 else t['bank'] * 0x4000 + t['addr'] - 0x4000
+            for i in range(0, t['len'], 2):
+                if CROM[o0 + i + 1] not in CN.SNDCH_GROUP: bad('const', 'const_tables_jp.csv %02X:%04X entry %d: channel byte $%02X is not 1-4' % (key + (i // 2 + 1, CROM[o0 + i + 1]))); CN_BAD += 1
+        continue
     if not t['layout'] or set(t['layout']) - set('MS') or t['len'] % len(t['layout']) or t['group'] != 'mode': bad('const', 'const_tables_jp.csv %02X:%04X: layout %r / group %r / length %d do not fit' % (key + (t['layout'], t['group'], t['len']))); CN_BAD += 1; continue
     for i in range(t['len']):
         if t['layout'][i % len(t['layout'])] != 'M': continue
@@ -505,13 +516,76 @@ for t in C_TABS:
         if CROM:
             ad = t['addr'] + i; v = CROM[ad if t['bank'] == 0 else t['bank'] * 0x4000 + ad - 0x4000]
             if CNAMER.value(t['group'], v) is None: bad('const', 'const_tables_jp.csv %02X:%04X byte %d = $%02X is not a mode' % (key + (i, v))); CN_BAD += 1
-if not os.path.exists(P('disasm/const_jp.inc')) or open(P('disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS):
-    bad('const', 'disasm/const_jp.inc is not what tools/const_names.py writes from disasm/const_names_jp.csv (run it)'); CN_BAD += 1
+if not os.path.exists(P('disasm/const_jp.inc')) or open(P('disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS + S_ROWS):
+    bad('const', 'disasm/const_jp.inc is not what tools/const_names.py writes from disasm/const_names_jp.csv and disasm/sound_names_jp.csv (run it)'); CN_BAD += 1
+C_TYPED_VARS = sum(1 for v in C_TYPES if v not in C_CALLS)
 if not CN_BAD:
-    ok('const', '%d names (C %d, I %d; %d modes), %d typed operands, %d mode tables with %d mode bytes; const_jp.inc is fresh' % (len(C_ROWS), C_TAGS['C'], C_TAGS['I'], len(C_MODES) - 2, len(C_TYPES), len(C_TABS), C_MODE_BYTES))
+    ok('const', '%d names (C %d, I %d; %d modes, %d sound channels) + %d sound names, %d typed operands and %d typed call targets, %d tables (%d mode bytes, %d sound-list bytes); const_jp.inc is fresh' % (len(C_ROWS), C_TAGS['C'], C_TAGS['I'], len(C_MODES) - 2, 4, len(S_ROWS), C_TYPED_VARS, len(C_CALLS), len(C_TABS), C_MODE_BYTES, C_SND_BYTES))
     quoted('const rows', r'const_names_jp\.csv` has ([\d,]+) constants \(C ([\d,]+) / I ([\d,]+)\)', lambda m: ((len(C_ROWS), C_TAGS['C'], C_TAGS['I']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
-    quoted('const types', r'const_types_jp\.csv` types ([\d,]+) operands', lambda m: ((len(C_TYPES),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
-    quoted('const tables', r'const_tables_jp\.csv` lists ([\d,]+) byte tables \(([\d,]+) mode bytes\)', lambda m: ((len(C_TABS), C_MODE_BYTES), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+    quoted('const types', r'const_types_jp\.csv` types ([\d,]+) operands and ([\d,]+) call targets', lambda m: ((C_TYPED_VARS, len(C_CALLS)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
+    quoted('const tables', r'const_tables_jp\.csv` lists ([\d,]+) byte tables \(([\d,]+) mode bytes and ([\d,]+) bytes of sound lists\)', lambda m: ((len(C_TABS), C_MODE_BYTES, C_SND_BYTES), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+
+# ------------------------------------------------------------------ sound names (L4, README 2.14 and 16.24)
+SND_BAD = 0
+SND_ROWS = list(csv.DictReader(io.StringIO(rd('disasm/sound_names_jp.csv'))))
+SND_INV = {(r['channel'], r['id'].upper()): r for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/sound_inventory.csv')))}
+SND_UNUSED = {(r['channel'], r['id'].upper()) for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/really_unused_sounds.csv')))}
+SND_OWNER = {r['key'] for r in csv.DictReader(io.StringIO(rd('disasm/owner_answers_jp.csv')))}
+SND_REVIEW = {r['key'] for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/sound_review/answers_2026-10-18.csv')))}       # the answers of the review page, given in the chat
+SND_PREFIX = {'music': 'MUSIC_', 'sfx1': 'SFX1_', 'sfx3': 'SFX3_', 'sfx4': 'SFX4_'}
+SND_CONTROL = {('music', 'FE'), ('music', 'FF')}              # requests of the song mailbox that are engine commands, not songs
+SND_HELPER = {0x2A7C: 'sfx1', 0x2A80: 'sfx3', 0x2A84: 'sfx4', 0x2A88: 'music'}      # Snd_Sfx1 / Snd_Sfx3 / Snd_Sfx4 / Snd_Music (00:2A7C ...)
+SND_MAILBOX = {0xDD60: 'sfx1', 0xDD68: 'music', 0xDD70: 'sfx3', 0xDD78: 'sfx4'}     # the request mailboxes the engine posts its follow-up effects into
+SND_SITES = collections.defaultdict(list)
+if CROM:                                    # every `ld a, id` right before a call of a request routine (also `call nz, ...`) or before a store into a mailbox
+    for o in range(len(CROM) - 5):
+        if CROM[o] != 0x3E: continue
+        op = CROM[o + 2]; w = CROM[o + 3] | CROM[o + 4] << 8
+        if op in (0xCD, 0xC4, 0xCC, 0xD4, 0xDC) and w in SND_HELPER: ch = SND_HELPER[w]
+        elif op == 0xEA and w in SND_MAILBOX: ch = SND_MAILBOX[w]
+        else: continue
+        at = o + 2; bk = at // 0x4000
+        SND_SITES[(ch, '%02X' % CROM[o + 1])].append((bk, at % 0x4000 + (0x4000 if bk else 0)))
+keys = [(r['channel'], r['id'].upper()) for r in SND_ROWS]
+if len(set(keys)) != len(keys) or set(keys) != set(SND_INV) | SND_CONTROL:
+    bad('sound', 'sound_names_jp.csv must have one row for each of the %d ids of sound_inventory.csv and the two control requests (%s)' % (len(SND_INV), sorted(set(keys) ^ (set(SND_INV) | SND_CONTROL))[:6])); SND_BAD += 1
+SND_NAMED = [r for r in SND_ROWS if r['name']]
+for r in SND_ROWS:
+    k = (r['channel'], r['id'].upper()); tag = k[0] + ' ' + k[1]
+    if r['tag'] not in ('C', 'I', '?') or bool(r['name']) != (r['tag'] != '?'): bad('sound', '%s: tag %r does not fit the name %r (a row without a name has the tag ?)' % (tag, r['tag'], r['name'])); SND_BAD += 1
+    if r['name']:
+        if not re.fullmatch(SND_PREFIX.get(r['channel'], '@') + r'[A-Z0-9_]+', r['name']): bad('sound', '%s: name %s must be capitals and start with %s' % (tag, r['name'], SND_PREFIX.get(r['channel']))); SND_BAD += 1
+        if r['name'] in NAMESET or r['name'] in RAM_IDS or r['name'] in {c.name for c in C_ROWS}: bad('sound', '%s is also a ROM label, a RAM name or another constant' % r['name']); SND_BAD += 1
+    elif not r['desc'].startswith('no name') or k not in SND_UNUSED:
+        bad('sound', '%s: a row without a name must say "no name" and be one of the ids that no organic run requested (really_unused_sounds.csv)' % tag); SND_BAD += 1
+    if not CROM: continue
+    ss = sorted(SND_SITES.get(k, []))
+    if int(r['sites']) != len(ss): bad('sound', '%s: sites = %s, the ROM has %d (an `ld a, id` before a call of a request routine, or before a store into a mailbox)' % (tag, r['sites'], len(ss))); SND_BAD += 1
+    cited = []
+    for e in r['evidence'].split():
+        m = re.fullmatch(r'([0-9A-F]{2}):([0-9A-F]{4})', e)
+        if m: cited.append((int(m.group(1), 16), int(m.group(2), 16))); continue
+        m = re.fullmatch(r'list:([0-9A-F]{2}):([0-9A-F]{4})#(\d+)', e)
+        if m:
+            bk, ad, n = int(m.group(1), 16), int(m.group(2), 16), int(m.group(3)); o = (ad if bk == 0 else bk * 0x4000 + ad - 0x4000) + 2 * (n - 1)
+            if CROM[o] != int(r['id'], 16) or CN.SNDCH_GROUP.get(CROM[o + 1]) != r['channel']: bad('sound', '%s: %s does not hold this id at entry %d' % (tag, e[5:].split('#')[0], n)); SND_BAD += 1
+            continue
+        if e.startswith('same:'):
+            if e[5:] not in (SND_INV.get(k, {}).get('same_as') or '').split(): bad('sound', '%s: %s, but sound_inventory.csv does not list it as the same data' % (tag, e)); SND_BAD += 1
+            continue
+        if e.startswith('owner:'):
+            if e[6:] not in SND_OWNER: bad('sound', '%s: %s is not a row of owner_answers_jp.csv' % (tag, e)); SND_BAD += 1
+            continue
+        if e.startswith('review:'):
+            if e[7:] not in SND_REVIEW: bad('sound', '%s: %s is not a row of sound_review/answers_2026-10-18.csv' % (tag, e)); SND_BAD += 1
+            continue
+        bad('sound', '%s: unknown evidence token %r' % (tag, e)); SND_BAD += 1
+    if cited != ss[:5]: bad('sound', '%s: the evidence cites %s, the first request sites in the ROM are %s' % (tag, ['%02X:%04X' % c for c in cited], ['%02X:%04X' % c for c in ss[:5]])); SND_BAD += 1
+SND_ID = [r for r in SND_NAMED if (r['channel'], r['id'].upper()) not in SND_CONTROL]
+SND_TAGS = collections.Counter(r['tag'] for r in SND_ID)
+if not SND_BAD:
+    ok('sound', '%d of %d ids named (C %d / I %d) and %d control requests; %d unnamed; %d request sites checked against the ROM' % (len(SND_ID), len(SND_INV), SND_TAGS['C'], SND_TAGS['I'], len(SND_NAMED) - len(SND_ID), len(SND_INV) - len(SND_ID), sum(len(v) for v in SND_SITES.values())))
+    quoted('sound names', r'sound_names_jp\.csv` names ([\d,]+) of ([\d,]+) sound ids \(C ([\d,]+) / I ([\d,]+)\) and ([\d,]+) control requests', lambda m: ((len(SND_ID), len(SND_INV), SND_TAGS['C'], SND_TAGS['I'], len(SND_NAMED) - len(SND_ID)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ TCRF checklist
 tm = rd('tcrf_check/TCRF_CHECKLIST.md'); tc = open(P('tcrf_check/TCRF_CHECKLIST.csv'), encoding='utf-8').read()
@@ -565,14 +639,14 @@ if A.roundtrip:
                             t = line.split(';')[0].strip()
                             if not t: continue
                             if not line[0].isspace() or t.startswith(('db ', 'dw ', 'ds ')): prev = None; continue       # a label or data line ends the straight line
-                            m = re.match(r'^(?:ld|ldh) \[(\w+)\], a$', t)
+                            m = re.match(r'^(?:ld|ldh) \[(\w+)\], a$', t) or re.match(r'^call (?:(?:nz|z|c|nc), )?(\w+)$', t)         # a store into a typed operand, or a call of a request routine
                             if m and m.group(1) in C_TYPES and prev and re.match(r'^ld a, \$[0-9a-f]{2}$', prev) and CNAMER.value(C_TYPES[m.group(1)], int(prev[-2:], 16)): raw.append((f, prev, t))
                             prev = t
-                    groups = {g: st.get('const_' + g, 0) for g in ('mode', 'pad', 'lcdc', 'sc', 'p1', 'ie')}
+                    groups = {g: st.get('const_' + g, 0) for g in ('mode', 'pad', 'lcdc', 'sc', 'p1', 'ie', 'music', 'sfx1', 'sfx3', 'sfx4')}
                     if raw or st.get('const_table_unnamed'): bad('roundtrip', 'const listing: %d typed stores keep a number (%s), %d table bytes unnamed' % (len(raw), raw[:3], st.get('const_table_unnamed', 0)))
-                    else: ok('roundtrip', 'const: %s operands read as constants (%s), %d mode table bytes' % (fmt(sum(groups.values())), ', '.join('%s %d' % kv for kv in groups.items()), st.get('const_table', 0)))
-                    quoted('const operands', r'([\d,]+) operands read as constants \(([\d,]+) mode, ([\d,]+) key mask, ([\d,]+) LCDC, ([\d,]+) serial control, ([\d,]+) joypad select, ([\d,]+) interrupt enable\) and ([\d,]+) bytes of mode tables',
-                           lambda m: ((sum(groups.values()), groups['mode'], groups['pad'], groups['lcdc'], groups['sc'], groups['p1'], groups['ie'], st.get('const_table', 0)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+                    else: ok('roundtrip', 'const: %s operands read as constants (%s), %d mode table bytes, %d sound list bytes (%d without a name)' % (fmt(sum(groups.values())), ', '.join('%s %d' % kv for kv in groups.items()), st.get('const_table', 0), st.get('const_sound_table', 0), st.get('const_sound_unnamed', 0)))
+                    quoted('const operands', r'([\d,]+) operands read as constants \(([\d,]+) mode, ([\d,]+) key mask, ([\d,]+) LCDC, ([\d,]+) serial control, ([\d,]+) joypad select, ([\d,]+) interrupt enable, ([\d,]+) song id, ([\d,]+) channel-1 effect id, ([\d,]+) channel-3 effect id, ([\d,]+) channel-4 effect id\), ([\d,]+) bytes of mode tables and ([\d,]+) bytes of sound lists',
+                           lambda m: ((sum(groups.values()), groups['mode'], groups['pad'], groups['lcdc'], groups['sc'], groups['p1'], groups['ie'], groups['music'], groups['sfx1'], groups['sfx3'], groups['sfx4'], st.get('const_table', 0), st.get('const_sound_table', 0)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
                 if variant == 'ram': quoted('ram operands', r'([\d,]+) instructions use a RAM name \(([\d,]+) absolute loads and stores, ([\d,]+) `ldh`, ([\d,]+) address loads, ([\d,]+) `ld hl, rIE`\)', lambda m: ((tot, named['abs'], named['ldh'], named['ptr'], named['ie']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
             subprocess.run(['make'], cwd=d, env=env, capture_output=True, text=True)
             import hashlib

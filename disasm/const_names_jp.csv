@@ -35,3 +35,7 @@ mode,20,MODE_BALL,C,BALL
 mode,21,MODE_RUN_RUN_RUN,C,RUN! RUN! RUN! (three runners; 12 hurdles)
 mode,22,MODE_COUNT,I,"number of modes: the mode table `00:2F3F` has 34 entries; `cp $22 / jr c` accepts a table entry as a mode, anything above is refused"
 mode,ff,MODE_NONE,C,no target: the *_TargetModeTbl tables hold $FF for an item that leads nowhere (the caller stays in its state)
+sndch,01,SNDCH_SFX1,C,channel byte 1 of a sound list: the id goes to the request mailbox of effect 1 (Snd_PlayFromList 00:2A4B)
+sndch,02,SNDCH_MUSIC,C,channel byte 2: the id goes to the song mailbox
+sndch,03,SNDCH_SFX3,C,channel byte 3: the id goes to the request mailbox of effect 3
+sndch,04,SNDCH_SFX4,C,channel byte 4: the id goes to the request mailbox of effect 4

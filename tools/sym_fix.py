@@ -29,6 +29,9 @@ repairs the cases that can be told from the code (every decision uses the instru
                                                                            (`db $1c, $1e` -> `db MODE_PRINT_PHOTO_PICKER, MODE_PRINT_OPTION`). Which operand holds which group is in disasm/const_types_jp.csv; the rewrite
                                                                            is made only on a straight line (no label between): a store right after `ld a, imm`, a compare / `bit` / `and` after a load of a typed variable (or of a
                                                                            byte of a mode table) while A is untouched. disasm/const_jp.inc defines the names and is INCLUDEd by game.asm.
+                                                                           Sound ids (disasm/sound_names_jp.csv): `ld a, $0C / call Snd_Sfx1` -> `ld a, SFX1_SPACE_FEVER_ENEMY_KILL` (also `call nz, ...`, and a store into a request mailbox),
+                                                                           the four id spaces being told apart by the call target (Snd_Music / Snd_Sfx1 / Snd_Sfx3 / Snd_Sfx4); the (id, channel) lists of Snd_PlayFromList
+                                                                           (layout `KC` of const_tables_jp.csv) read `db SFX1_HOTSPOT_SOUND_01, SNDCH_SFX1`.
   Not repaired (kept as the label mgbdis chose): `ld hl|de, Label` that is really a number (e.g. `ld de, $4000` used as an offset), and
   `ld a, [Label]` reads of ROM bytes (3 of them, all real table reads).
 Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-identical; check with the md5 above."""
@@ -39,7 +42,7 @@ ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--
 ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of disasm/ram_names_jp.csv and add disasm/ram_jp.inc to the listing')
 ap.add_argument('--ram-names', default=None); ap.add_argument('--ram-access', default=None); ap.add_argument('--ram-exclude', default=None)
 ap.add_argument('--const', action='store_true', help='write the values of the constant groups (modes, key masks, LCDC / IE / SC / P1 flags) with their names; implies --ram')
-ap.add_argument('--const-names', default=None); ap.add_argument('--const-types', default=None); ap.add_argument('--const-tables', default=None)
+ap.add_argument('--const-names', default=None); ap.add_argument('--const-types', default=None); ap.add_argument('--const-tables', default=None); ap.add_argument('--const-sounds', default=None)
 a = ap.parse_args()
 if a.const: a.ram = True
 rom_path = a.rom or (glob.glob(os.path.join(a.dir, '..', '*.gb')) or glob.glob(os.path.join(a.dir, '..', '..', '*.gb')) or ['pocketcamera_jp.gb'])[0]
@@ -144,18 +147,25 @@ if a.const:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import const_names
     ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'disasm', 'const_names_jp.csv'))
+    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'disasm', 'const_names_jp.csv')) + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'disasm', 'sound_names_jp.csv'))
+    const_names.check_unique(C_ROWS)
     CONST = const_names.Namer(C_ROWS)
     C_TYPES = const_names.load_types(a.const_types or os.path.join(ROOT, 'disasm', 'const_types_jp.csv'))
     C_TABS = const_names.load_tables(a.const_tables or os.path.join(ROOT, 'disasm', 'const_tables_jp.csv'))
     C_INC = const_names.inc_text(C_ROWS)
-    C_BYTES = collections.defaultdict(dict)        # bank -> {address: group} of the bytes of the mode tables that are values (layout letter M)
+    C_BYTES = collections.defaultdict(dict)        # bank -> {address: group} of the bytes of the typed tables that are values (layout letters M, K, C)
     C_TABLE_LABEL = {}                             # label of a mode table -> group
+    C_PAIRS = collections.defaultdict(list)        # bank -> [(start, end)] of the (id, channel) sound lists (layout KC): written one entry per line
     for t in C_TABS:
+        if t['layout'] == 'KC': C_PAIRS[t['bank']].append((t['addr'], t['addr'] + t['len']))
         for i in range(t['len']):
-            if t['layout'][i % len(t['layout'])] == 'M': C_BYTES[t['bank']][t['addr'] + i] = t['group']
+            lt = t['layout'][i % len(t['layout'])]
+            if lt == 'M': C_BYTES[t['bank']][t['addr'] + i] = t['group']
+            elif lt == 'K': C_BYTES[t['bank']][t['addr'] + i] = const_names.SNDCH_GROUP.get(ROM[off(t['bank'], t['addr'] + i + 1)])     # a sound id: its id space is named by the channel byte that follows
+            elif lt == 'C': C_BYTES[t['bank']][t['addr'] + i] = 'sndch'
         lab = byad.get((t['bank'], t['addr']))
-        if lab: C_TABLE_LABEL[lab] = t['group']
+        if lab and 'M' in t['layout']: C_TABLE_LABEL[lab] = t['group']
+    C_CALL = re.compile(r'^call (?:(?:nz|z|c|nc), )?(\w+)$')
     C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
     C_CPAND = re.compile(r'^(cp|and) \$([0-9a-f]{2})$'); C_BIT = re.compile(r'^bit ([0-7]), a$'); C_LDHL = re.compile(r'^ld a, \[hl\+?\]$')
     C_KEEP = re.compile(r'^(?:bit [0-7], a|cp \S.*|(?:jr|jp) (?:nz|z|nc|c), \S+|ret (?:nz|z|nc|c)|ld [bcdehl], a|ld \[[^\]]+\], a|ldh \[[^\]]+\], a|push af)$')
@@ -192,7 +202,7 @@ def const_code_pass(bank, out):
         t = P[k]['ins']
         m = C_LDA.match(t)
         if m and P[k]['by'][0] == 0x3E and k + 1 < n and not brk[k + 1]:
-            ms = C_ST.match(P[k + 1]['ins'])
+            ms = C_ST.match(P[k + 1]['ins']) or C_CALL.match(P[k + 1]['ins'])       # a store into a typed variable, or a call of a routine whose A is typed (Snd_Sfx1 ...)
             if ms and ms.group(1) in C_TYPES:
                 nm = CONST.value(C_TYPES[ms.group(1)], int(m.group(1), 16))
                 if nm: put(k, 'ld a, ' + nm, C_TYPES[ms.group(1)])
@@ -295,10 +305,16 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
                     g = C_BYTES[bank].get(cur + j)
                     if g:
                         nm = CONST.value(g, int(x[1:], 16))
-                        if nm: new_items[j] = nm; stats['const_table'] += 1
-                        else: stats['const_table_unnamed'] += 1
+                        snd = g != 'mode'
+                        if nm: new_items[j] = nm; stats['const_sound_table' if snd else 'const_table'] += 1
+                        else: stats['const_sound_unnamed' if snd else 'const_table_unnamed'] += 1
                 if new_items != items:
-                    line = line[:len(line) - len(line.lstrip())] + 'db ' + ', '.join(new_items); handled = True
+                    ind = line[:len(line) - len(line.lstrip())]
+                    tab = next(((s0, e0) for s0, e0 in C_PAIRS.get(bank, ()) if s0 <= cur < e0), None)
+                    if tab and len(items) % 2 == 0 and (cur - tab[0]) % 2 == 0:       # a sound list: one (id, channel) entry per line, numbered from 1 as the player and the hot-spot picker show them
+                        line = '\n'.join('%sdb %s, %s  ; #%d' % (ind, new_items[j], new_items[j + 1], (cur + j - tab[0]) // 2 + 1) for j in range(0, len(items), 2))
+                    else: line = ind + 'db ' + ', '.join(new_items)
+                    handled = True
             if handled: pass
             elif a.tables and nb == 2 and len(items) == 2 and all(x.startswith('$') for x in items) and in_blocks(words, bank, cur):
                 w = int(items[0][1:], 16) | int(items[1][1:], 16) << 8
