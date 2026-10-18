@@ -1161,10 +1161,8 @@ bank,start,end,type,width,note
 25,7160,71A0,data,32,Map
 25,71A0,73A0,data,16,Data
 25,73A0,75E0,data,32,Map
-25,75F4,7600,data,16,Data
-25,7614,77E0,data,16,Gfx
-25,77F4,7800,data,16,Data
-25,7814,7A60,data,16,Gfx
+25,75E0,7820,data,16,Gfx
+25,7820,7A60,data,16,Gfx
 25,7A60,7CA0,data,32,Map
 25,7CA0,7EE0,data,32,Map
 25,7EE0,8000,data,16,Data
@@ -1969,7 +1967,7 @@ bank,start,end,type,width,note
 25,50C0,52C0,data,32,Map
 25,5360,5560,data,32,Map
 24,63A0,65A0,data,32,Map
-25,7614,77E0,data,32,Map
-25,7814,7A60,data,32,Map
+25,75E0,7820,data,32,Map
+25,7820,7A60,data,32,Map
 27,4870,4AB0,data,32,Map
 27,4AB0,4CB0,data,16,Gfx

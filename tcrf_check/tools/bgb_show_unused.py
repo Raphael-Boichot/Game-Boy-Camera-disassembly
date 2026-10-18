@@ -3,7 +3,7 @@
 entry $0100 = JP $3600) that waits for VBlank, switches the LCD off, copies ROM blocks to VRAM, sets LCDC / SCX / SCY / BGP and loops forever (interrupts off); BGB then renders the frame
 (headless, wine, `bgb_run.run`) and the screenshot is converted to PNG.  Evidence class C for what BGB draws; what the game would use as palette is not known, so BGP = $E4 (plain) by default.
 usage: bgb_show_unused.py ROM OUT.png --copy BANK:SRC:DST:LEN[,BANK:SRC:DST:LEN...] [--lcdc 91] [--scx 0] [--scy 0] [--bgp E4] [--frames 120]
-  numbers are hexadecimal; e.g. --copy 17:5500:8000:1300,25:7814:9800:240 --scx 96   (the map 25:7814 keeps its picture in columns 12-31: SCX = 12 * 8 = 96, decimal)
+  numbers are hexadecimal; e.g. --copy 17:5500:8000:1300,25:7820:9800:240   (the map 25:7820 keeps its picture in columns 0-19, so no scroll; --scx N is decimal)
 Environment: BGB_DIR (a BGB folder, default /home/claude/bgbx), RGBDS in PATH or /home/claude/tc/rgbds."""
 import sys, os, subprocess, tempfile, shutil
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)

@@ -115,7 +115,6 @@ bank,addr,bytes,group,name,content,tcrf_ids,best_guess
 24,7913,77,content-classified span,Gfx_24_7913_Unref,mixed,,2bpp tile data with no neighbouring consumer
 25,5834,12,unknown data (no reader found),Data_25_5834,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 25,75F4,12,unknown data (no reader found),Data_25_75F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
-25,77F4,12,unknown data (no reader found),Data_25_77F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
 26,7BC0,576,content-classified span,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,mixed,,tile map data placed next to CreditsNishimuraDanceMap4; function = same family as its neighbour
 26,7E20,352,content-classified span,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,mixed,,2bpp tile data placed next to Album_LoadNumeralTileB; function = same family as its neighbour
 27,5BB0,22,unknown data (no reader found),Data_27_5BB0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"

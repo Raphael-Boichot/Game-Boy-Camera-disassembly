@@ -9,7 +9,8 @@ Verdict of a graphic span: the tiles are 'on screen' when a byte of the tile row
   never shown  = no stable frame at all, and never read in an organic run
   forced only  = stable frames only in forced runs (no organic route found)
 An unused tile map is drawn right beside the tile set it uses: the column 'tileset' of unused_manual.csv names that set as a span (BB:AAAA-BBBB), or says
-'none: ...' / 'not found: ...' (then an empty box stands in its place).
+'none: ...' / 'not found: ...' (then an empty box stands in its place).  BB:AAAA-BBBB@XX is a USED tile set that only holds the ids from XX up (the rest of the ids of the map are
+dynamic photo tiles): the map is then composed from the ROM tiles, photo cells hatched (no emulator, palette E4).
 usage: display_report.py [--npz-dir DIR] [--stable N]"""
 import sys, os, re, csv, glob, json, collections, argparse
 import numpy as np
@@ -173,8 +174,19 @@ def section(rs, y0, title, sub):
         h = 16 * len(cap) + img.height + 18; c = min(range(COLN), key=lambda k: ncol[k]); cols_[c].append((cap, img, r)); ncol[c] += h
     return big, cols_, (max(ncol) if big else 0)
 # ---- each unused tile map beside the tile set it is drawn with
-SPAN = re.compile(r'^([0-9A-Fa-f]{2}):([0-9A-Fa-f]{4})-([0-9A-Fa-f]{4})$')
+SPAN = re.compile(r'^([0-9A-Fa-f]{2}):([0-9A-Fa-f]{4})-([0-9A-Fa-f]{4})(?:@([0-9A-Fa-f]{2}))?$')
 PCAP = 34; PNOTE = 108
+def compose(m, d, base):
+    # the 20 x 18 visible cells of a map: ids of the tile set from the ROM, ids below it (dynamic photo tiles) hatched
+    o = off(m['b'], m['a']); im = Image.new('L', (160, 144), 255); px = im.load(); nt = len(d) // 16
+    for r in range(18):
+        for c in range(20):
+            k = ROM[o + 32 * r + c] - base
+            for y in range(8):
+                for x in range(8):
+                    if 0 <= k < nt: px[c * 8 + x, r * 8 + y] = PAL[((d[k * 16 + y * 2 + 1] >> (7 - x)) & 1) << 1 | ((d[k * 16 + y * 2] >> (7 - x)) & 1)]
+                    elif k < 0: px[c * 8 + x, r * 8 + y] = 205 if (x + y) % 2 == 0 else 238
+    return im.resize((16 * 8 * SC, round(144 * 16 * 8 * SC / 160)), Image.NEAREST).convert('RGB')
 pairs = []
 for m in rows:
     ts = m.get('tileset') if m['kind'] == 'Map' else ''
@@ -184,18 +196,24 @@ for m in rows:
         tb, ta, te = int(sp.group(1), 16), int(sp.group(2), 16), int(sp.group(3), 16)
         trs = [r for r in rows if r['b'] == tb and ta <= r['a'] <= te]
         for r in trs: r['pair'] = True
+        base = int(sp.group(4), 16) if sp.group(4) else None
         o = off(tb, ta); n = te - ta + 1; d = ROM[o:o + n]
-        tr = dict(b=tb, a=ta, n=n, tier=m['tier'], v=verdict(o, n), bank='%02X' % tb, addr='%04X' % ta)
-        tcap = ['%02X:%04X-%04X  %d B' % (tb, ta, te, n), 'tile set, %d tiles (%s)' % (n // 16, ' + '.join(r['addr'] for r in trs))] + wrap(evidence(tr), PCAP)[:4]
+        if base is None:
+            tr = dict(b=tb, a=ta, n=n, tier=m['tier'], v=verdict(o, n), bank='%02X' % tb, addr='%04X' % ta)
+            tcap = ['%02X:%04X-%04X  %d B' % (tb, ta, te, n), 'tile set, %d tiles (%s)' % (n // 16, ' + '.join(r['addr'] for r in trs))] + wrap(evidence(tr), PCAP)[:4]
+        else:
+            tcap = ['%02X:%04X-%04X  %d B' % (tb, ta, te, n), 'tile set, %d tiles = ids %02X-%02X' % (n // 16, base, base + n // 16 - 1)] + wrap('USED: the hot-spot viewer (mode 0C) loads it at $8E00', PCAP)[:3]
         timg = tiles(d[:n // 16 * 16]); tnote = ' '.join(r['note'] for r in trs if r.get('note'))
-        pairs.append(dict(m=m, tcap=tcap, timg=timg, tnote=tnote, tspan=ts))
+        pairs.append(dict(m=m, tcap=tcap, timg=timg, tnote=tnote, tspan=ts, base=base, tdata=d[:n // 16 * 16], tshow=ts.split('@')[0]))
     else:
-        pairs.append(dict(m=m, tcap=['no tile set'] + wrap(ts, PCAP)[:4], timg=None, tnote='', tspan=ts))
+        pairs.append(dict(m=m, tcap=['no tile set'] + wrap(ts, PCAP)[:4], timg=None, tnote='', tspan=ts, base=None, tshow=ts.split(':', 1)[0]))
 for p in pairs:
     m = p['m']; cap, img = cell(m)
-    cap[0] = '%s:%s  %d B  (tile map)' % (m['bank'], m['addr'], m['n']); p['mcap'] = cap; p['mimg'] = img
+    if p.get('base') is not None: img = compose(m, p['tdata'], p['base']); cap[0] = '%s:%s  %d B  (tile map)' % (m['bank'], m['addr'], m['n']); cap.insert(2, 'photo cells hatched')
+    else: cap[0] = '%s:%s  %d B  (tile map)' % (m['bank'], m['addr'], m['n'])
+    p['mcap'] = cap; p['mimg'] = img
     if p['timg'] is None: p['timg'] = Image.new('RGB', (img.width, max(img.height, 64)), (244, 244, 244)); p['empty'] = True
-    p['lines'] = wrap('Map ' + m['bank'] + ':' + m['addr'] + ': ' + m.get('note', ''), PNOTE) + ([''] + wrap('Tile set ' + p['tspan'] + ': ' + p['tnote'], PNOTE) if p['tnote'] else [])
+    p['lines'] = wrap('Map ' + m['bank'] + ':' + m['addr'] + ': ' + m.get('note', ''), PNOTE) + ([''] + wrap('Tile set ' + p['tshow'] + ': ' + p['tnote'], PNOTE) if p['tnote'] else [])
     p['h'] = 24 + max(16 * len(p['tcap']) + p['timg'].height, 16 * len(p['mcap']) + img.height, 16 * len(p['lines'])) + 22
 pairs_h = sum(p['h'] for p in pairs)
 by = collections.OrderedDict()
@@ -231,7 +249,7 @@ dr_.text((GAP, y + 26), 'left = tile set (2bpp, 16 per row, x2), middle = the ma
 yy = y + 50
 for p in pairs:
     m = p['m']; c = COL[m['tier']]; img = p['mimg']
-    dr_.text((GAP, yy), '%s:%s  tile map  <-  %s' % (m['bank'], m['addr'], p['tspan'] if SPAN.match(p['tspan']) else p['tspan'].split(':', 1)[0]), fill=c, font=FONTB)
+    dr_.text((GAP, yy), '%s:%s  tile map  <-  %s' % (m['bank'], m['addr'], p['tshow']), fill=c, font=FONTB)
     y2 = yy + 22
     for li, line in enumerate(p['tcap']): dr_.text((GAP, y2 + 16 * li), line, fill=c if li == 0 else (80, 80, 80), font=FONTB if li == 0 else FONT)
     ty = y2 + 16 * len(p['tcap'])

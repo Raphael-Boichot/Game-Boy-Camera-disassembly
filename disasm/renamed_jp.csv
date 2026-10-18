@@ -423,8 +423,12 @@ bank,addr,old_name,new_name,old_conf,new_conf,reason
 25,6AA0,Map_25_6AA0_Mode15_State04_TimerApply,Map_25_6AA0_Mode15_State05_IntervalInit,I,I,stale owner label: the old name came from an earlier label set; owners now Mode15_State05_IntervalInit
 25,73A0,Map_25_73A0_Mode15_StepValue,Map_25_73A0_Mode16_State00_Init,I,I,"stale owner label: the old name came from an earlier label set; owners now Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLensesMenu, Mode16_State04_MontageMenu, Mode16_State05_PanoramaMenu, Mode16_State06_GameFaceMenu"
 25,75F4,Data_25_75F4,Map_25_75F4_Mode15_StepValue_RowTail,?,I,owner or content now proven (? -> I)
-25,77F4,Data_25_77F4,Map_25_77F4_Unused_PhotoAreaRight_RowTail,?,I,owner or content now proven (? -> I)
 25,7CA0,Map_25_7CA0_Bank08,Map_25_7CA0_Mode1B_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1B_State00_Init
+25,77F4,Data_25_77F4,Map_25_77F4_Unused_PhotoAreaRight_RowTail,?,I,owner or content now proven (? -> I)
+25,7614,Map_25_7614_Unused_PhotoAreaRight,Map_25_75E0_Unused_PhotoScreen,I,I,"the map starts at 25:75E0: 18 rows of 32 between the loaded map 25:73A0 (ends 75DF) and the menu map, 12 bytes earlier than the first start (README 16.25.2); label moved and renamed"
+25,7814,Map_25_7814_Unused_MainMenu,Map_25_7820_Unused_MainMenu,C,C,"the map starts at 25:7820 (576 B, ends at 7A5F, where the loaded map 25:7A60 begins); the 12 bytes in front are the hidden columns of the previous map (README 16.25.1); label moved"
+25,75F4,Map_25_75F4_Mode15_StepValue_RowTail,,I,,"label removed: the 12 bytes are the hidden columns of row 0 of the map 25:75E0, not a tail of 25:73A0"
+25,77F4,Map_25_77F4_Unused_PhotoAreaRight_RowTail,,I,,label removed: the 12 bytes are the hidden columns of row 15 of the map 25:75E0
 26,4EC0,Map_26_4EC0_Run_CompareRecord,Map_26_4EC0_ResultScreen_Substate0_Init,I,I,stale owner label: the old name came from an earlier label set; owners now ResultScreen_Substate0_Init
 26,57C0,Map_26_57C0_Mode1C_DrawOptionScreen,Map_26_57C0_Mode1E_State00_Init,I,I,stale owner label: the old name came from an earlier label set; owners now Mode1E_State00_Init
 26,60C0,Map_26_60C0_WildFrame_LoadForPrintJob,Map_26_60C0_WildFrame_LoadForPrintScreen,I,I,"stale owner label: the old name came from an earlier label set; owners now WildFrame_LoadForPrintScreen, WildFrame_LoadForOptionScreen"
