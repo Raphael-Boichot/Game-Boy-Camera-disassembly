@@ -83,6 +83,9 @@ def main():
                 d = an[k + 1] - an[k]; step = (d & 0xFF) * 16        # 8.8 fixed point: BC = (b - a) * 16, taken mod 256 as the ROM does
                 vals = [(an[k] * 256 + lv * per * step) >> 8 & 0xFF for lv in range(16 // per)]
                 print('   byte t%d by level 0..%d: %s' % (k, 16 // per - 1, ' '.join('%02X' % v for v in vals)))
+            # the 50 %% reduction of the trick lenses 8 / 9 and the Game Face (Fx08-Fx0C) keeps the even pixel of each pair and every second row of a tile: cells (row, col) in {0,2} x {0,2}
+            lv = [M[r][c] for r in (0, 2) for c in (0, 2)]
+            print('  seen after the 50 %% reduction (cells (0|2, 0|2)): levels %s, thresholds t1 %s' % (lv, ' '.join('%02X' % ((an[1] * 256 + l * per * ((an[2] - an[1]) & 0xFF) * 16) >> 8 & 0xFF) for l in lv)))
     if a.reference: check_reference(rom, a.reference)
     if a.csv:
         with open(a.csv, 'w', newline='') as fh:
