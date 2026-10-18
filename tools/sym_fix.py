@@ -2,7 +2,7 @@
 """Post-process an mgbdis disassembly of Pocket Camera (Japan) Rev A so that the numbers mgbdis turns into labels read as numbers again.
 
   mgbdis --print-hex --output-dir disasm_out pocketcamera_jp.gb          # pocketcamera_jp.sym must sit beside the ROM
-  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace wram/trace_jp_v3.json] [--tables] [--ram] [--strip-hex]
+  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace wram/trace_jp_v3.json] [--tables] [--ram] [--const] [--strip-hex]
   cd disasm_out && make && md5sum game.gb                                # must still be fdcfe686cf4df461e870b6e53b2b5a8b
 
 Why: mgbdis v3.0 prints a symbol for ANY 16-bit operand that equals the address of a label of the current bank (or of bank 0 below $4000),
@@ -23,6 +23,12 @@ repairs the cases that can be told from the code (every decision uses the instru
                                                                            `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (wram/wram_access.csv)
                                                                            holds a pointer load (kind P) at that instruction and it is not listed in disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
                                                                            that happen to equal an address). The names are defined in disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
+  6. `--const` (L4, implies --ram): values of a group are written with their constant (disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
+                                                                           `ld a, [wMode] / cp $01` -> `cp MODE_SHOOT_PARLOR`, `ldh a, [hKeysNew] / bit 0, a` -> `bit PADB_A, a`, `and $0f` -> `and PADF_BUTTONS`,
+                                                                           `ld a, $43 / ldh [hLcdcShadow], a` -> `ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON`, and the bytes of the mode tables of disasm/const_tables_jp.csv
+                                                                           (`db $1c, $1e` -> `db MODE_PRINT_PHOTO_PICKER, MODE_PRINT_OPTION`). Which operand holds which group is in disasm/const_types_jp.csv; the rewrite
+                                                                           is made only on a straight line (no label between): a store right after `ld a, imm`, a compare / `bit` / `and` after a load of a typed variable (or of a
+                                                                           byte of a mode table) while A is untouched. disasm/const_jp.inc defines the names and is INCLUDEd by game.asm.
   Not repaired (kept as the label mgbdis chose): `ld hl|de, Label` that is really a number (e.g. `ld de, $4000` used as an offset), and
   `ld a, [Label]` reads of ROM bytes (3 of them, all real table reads).
 Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-identical; check with the md5 above."""
@@ -32,7 +38,10 @@ ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument(
 ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
 ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of disasm/ram_names_jp.csv and add disasm/ram_jp.inc to the listing')
 ap.add_argument('--ram-names', default=None); ap.add_argument('--ram-access', default=None); ap.add_argument('--ram-exclude', default=None)
+ap.add_argument('--const', action='store_true', help='write the values of the constant groups (modes, key masks, LCDC / IE / SC / P1 flags) with their names; implies --ram')
+ap.add_argument('--const-names', default=None); ap.add_argument('--const-types', default=None); ap.add_argument('--const-tables', default=None)
 a = ap.parse_args()
+if a.const: a.ram = True
 rom_path = a.rom or (glob.glob(os.path.join(a.dir, '..', '*.gb')) or glob.glob(os.path.join(a.dir, '..', '..', '*.gb')) or ['pocketcamera_jp.gb'])[0]
 sym_path = a.sym or os.path.splitext(rom_path)[0] + '.sym'
 ROM = open(rom_path, 'rb').read()
@@ -129,6 +138,77 @@ if a.ram:
         RAM_EXCL.add((int(r['bank'], 16), int(r['pc'], 16)))
     RAM_INC = ram_names.inc_text(RAM_ROWS)
     RAM_TOK = re.compile(r'\$[0-9a-f]{4}\b')
+# ---- L4: constants
+CONST = None
+if a.const:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import const_names
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'disasm', 'const_names_jp.csv'))
+    CONST = const_names.Namer(C_ROWS)
+    C_TYPES = const_names.load_types(a.const_types or os.path.join(ROOT, 'disasm', 'const_types_jp.csv'))
+    C_TABS = const_names.load_tables(a.const_tables or os.path.join(ROOT, 'disasm', 'const_tables_jp.csv'))
+    C_INC = const_names.inc_text(C_ROWS)
+    C_BYTES = collections.defaultdict(dict)        # bank -> {address: group} of the bytes of the mode tables that are values (layout letter M)
+    C_TABLE_LABEL = {}                             # label of a mode table -> group
+    for t in C_TABS:
+        for i in range(t['len']):
+            if t['layout'][i % len(t['layout'])] == 'M': C_BYTES[t['bank']][t['addr'] + i] = t['group']
+        lab = byad.get((t['bank'], t['addr']))
+        if lab: C_TABLE_LABEL[lab] = t['group']
+    C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
+    C_CPAND = re.compile(r'^(cp|and) \$([0-9a-f]{2})$'); C_BIT = re.compile(r'^bit ([0-7]), a$'); C_LDHL = re.compile(r'^ld a, \[hl\+?\]$')
+    C_KEEP = re.compile(r'^(?:bit [0-7], a|cp \S.*|(?:jr|jp) (?:nz|z|nc|c), \S+|ret (?:nz|z|nc|c)|ld [bcdehl], a|ld \[[^\]]+\], a|ldh \[[^\]]+\], a|push af)$')
+    C_HLADD = re.compile(r'^add hl, (?:bc|de)$'); C_LDHLLAB = re.compile(r'^ld hl, ([A-Za-z_]\w*)$')
+def const_code_pass(bank, out):
+    """constants in the instructions of one bank (out = its lines, already renamed by the RAM pass); straight-line rules, see the docstring (6)"""
+    P = []
+    for i, l in enumerate(out):
+        m = LINE.match(l)
+        if m: P.append({'i': i, 'ind': m.group(1), 'ins': m.group(2), 'pad': m.group(3), 'cm': m.group(4), 'by': [int(x[1:], 16) for x in m.group(6).split()], 'old': m.group(2)})
+    n = len(P)
+    brk = [True] * n                                    # brk[k]: something that is not an instruction (a label, data) sits between P[k-1] and P[k]
+    for k in range(1, n):
+        brk[k] = any(x.strip() and not x.strip().startswith(';') for ln in out[P[k - 1]['i'] + 1:P[k]['i']] for x in ln.split('\n')) or '\n' in out[P[k - 1]['i']]
+    def put(k, new, key):
+        if P[k]['ins'] != new: P[k]['ins'] = new; stats['const_' + key] += 1
+    def window(k, g):
+        j = k + 1
+        while j < n and not brk[j]:
+            t = P[j]['ins']; m = C_BIT.match(t)
+            if m:
+                nm = CONST.bit(g, int(m.group(1)))
+                if nm: put(j, 'bit %s, a' % nm, g)
+                j += 1; continue
+            m = C_CPAND.match(t)
+            if m:
+                nm = CONST.value(g, int(m.group(2), 16))
+                if nm and (m.group(1) == 'cp' or g in const_names.FLAGS): put(j, '%s %s' % (m.group(1), nm), g)
+                if m.group(1) == 'and': break
+                j += 1; continue
+            if C_KEEP.match(t): j += 1; continue
+            break
+    for k in range(n):
+        t = P[k]['ins']
+        m = C_LDA.match(t)
+        if m and P[k]['by'][0] == 0x3E and k + 1 < n and not brk[k + 1]:
+            ms = C_ST.match(P[k + 1]['ins'])
+            if ms and ms.group(1) in C_TYPES:
+                nm = CONST.value(C_TYPES[ms.group(1)], int(m.group(1), 16))
+                if nm: put(k, 'ld a, ' + nm, C_TYPES[ms.group(1)])
+            continue
+        m = C_LD.match(t)
+        if m and m.group(1) in C_TYPES: window(k, C_TYPES[m.group(1)]); continue
+        if C_LDHL.match(t):
+            j = k - 1
+            while j >= 0 and not brk[j + 1] and C_HLADD.match(P[j]['ins']): j -= 1
+            if j >= 0 and not brk[j + 1]:
+                ml = C_LDHLLAB.match(P[j]['ins'])
+                if ml and ml.group(1) in C_TABLE_LABEL: window(k, C_TABLE_LABEL[ml.group(1)])
+    for p in P:
+        if p['ins'] != p['old']:
+            pad = ' ' * max(1, len(p['old']) + len(p['pad']) - len(p['ins']))
+            out[p['i']] = p['ind'] + p['ins'] + pad + p['cm']
 def is_ram(v): return 0xC000 <= v < 0xE000 or 0xFF80 <= v <= 0xFFFE
 def ram_rewrite(bank, ad, by, ins, nxt):
     """new text of the instruction at bank:ad whose RAM operand is written as a name (None: leave it); nxt = text of the next instruction"""
@@ -208,7 +288,19 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
         if md and cur is not None:
             items = [x.strip() for x in md.group(1).split(',')]
             nb = sum(len(x) - 2 for x in items if x.startswith('"') and x.endswith('"')) + sum(1 for x in items if x.startswith('$'))
-            if a.tables and nb == 2 and len(items) == 2 and all(x.startswith('$') for x in items) and in_blocks(words, bank, cur):
+            handled = False
+            if CONST is not None and bank in C_BYTES and nb == len(items) and all(x.startswith('$') for x in items):
+                new_items = list(items)
+                for j, x in enumerate(items):
+                    g = C_BYTES[bank].get(cur + j)
+                    if g:
+                        nm = CONST.value(g, int(x[1:], 16))
+                        if nm: new_items[j] = nm; stats['const_table'] += 1
+                        else: stats['const_table_unnamed'] += 1
+                if new_items != items:
+                    line = line[:len(line) - len(line.lstrip())] + 'db ' + ', '.join(new_items); handled = True
+            if handled: pass
+            elif a.tables and nb == 2 and len(items) == 2 and all(x.startswith('$') for x in items) and in_blocks(words, bank, cur):
                 w = int(items[0][1:], 16) | int(items[1][1:], 16) << 8
                 t = word_target(bank, w); ind = line[:len(line) - len(line.lstrip())]
                 line = '%sdw %s' % (ind, t if t else '$%04x' % w); stats['dw_label' if t else 'dw_numeric'] += 1
@@ -222,6 +314,7 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
         elif re.match(r'^ds \$[0-9a-f]+', s) and cur is not None:
             cur += int(re.match(r'^ds \$([0-9a-f]+)', s).group(1), 16)
         out.append(line)
+    if CONST is not None: const_code_pass(bank, out)
     open(fn, 'w', encoding='utf-8').write('\n'.join(out))
 if RAMR is not None:
     open(os.path.join(a.dir, 'ram_jp.inc'), 'w', encoding='utf-8', newline='\n').write(RAM_INC)
@@ -234,4 +327,15 @@ if RAMR is not None:
     if os.path.exists(mk):
         mt = open(mk, encoding='utf-8').read()
         if 'ram_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('game.o: game.asm bank_*.asm', 'game.o: game.asm ram_jp.inc bank_*.asm'))
+if CONST is not None:
+    open(os.path.join(a.dir, 'const_jp.inc'), 'w', encoding='utf-8', newline='\n').write(C_INC)
+    ga = os.path.join(a.dir, 'game.asm'); gt = open(ga, encoding='utf-8').read()
+    if 'const_jp.inc' not in gt:
+        gt2 = gt.replace('INCLUDE "ram_jp.inc"\n', 'INCLUDE "ram_jp.inc"\nINCLUDE "const_jp.inc"\n', 1)
+        if gt2 == gt: sys.exit('sym_fix: game.asm has no INCLUDE "ram_jp.inc" line')
+        open(ga, 'w', encoding='utf-8', newline='\n').write(gt2)
+    mk = os.path.join(a.dir, 'Makefile')
+    if os.path.exists(mk):
+        mt = open(mk, encoding='utf-8').read()
+        if 'const_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('ram_jp.inc bank_*.asm', 'ram_jp.inc const_jp.inc bank_*.asm'))
 print('sym_fix: ' + ', '.join('%s=%d' % kv for kv in sorted(stats.items())))

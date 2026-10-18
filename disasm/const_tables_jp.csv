@@ -1,0 +1,14 @@
+bank,addr,len,layout,group,note
+03,7836,2,M,mode,item -> mode of the LINK menu (ACCESS: PRINT / TRANSFER); the shared tail stores the entry in wMode
+03,79E0,3,M,mode,item -> mode of the SHOW menu (SLIDE SHOW / ANIMATION / HOT-SPOT); $FF = refused
+03,7B8E,2,M,mode,item -> mode of the Doodle menu (STAMP / PAINT)
+03,7D17,2,M,mode,item -> mode of the Edit menu (ALBUM / ANIMATION)
+07,52E5,2,M,mode,item -> mode of the VIEW menu (album grid / slide-show menu); $FF = refused
+07,5495,2,M,mode,item -> mode of the Special menu (hot-spot editor / compose); $FF = refused
+07,7804,8,M,mode,main-menu item -> mode (README 2.3); $FF = refused
+08,40B1,2,M,mode,print-menu choice -> mode (single photo / several photos); $FF = refused
+00,3483,10,MS,mode,"print engine: caller code -> {mode, state} to return to (Mode1D_ReturnToCaller)"
+04,7084,10,MS,mode,"SHOOT parlor page A: choice -> {mode, state} (ld a,[hl+] into wMode, ld a,[hl] into wState)"
+04,712B,10,MS,mode,"SHOOT parlor page B: choice -> {mode, state}"
+04,71B1,4,MS,mode,"SHOOT parlor page C: choice -> {mode, state}"
+06,6B4A,44,MS,mode,"SHOOT live view: leave by variant -> {mode, state}"

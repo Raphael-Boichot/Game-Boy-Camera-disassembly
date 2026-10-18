@@ -459,6 +459,60 @@ if not RAM_BAD:
     quoted('ram sites', r'resolves? every access of `wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
+# ------------------------------------------------------------------ constants (L4, README 2.14)
+import const_names as CN
+CN_BAD = 0
+try:
+    C_ROWS = CN.load_names(P('disasm/const_names_jp.csv')); C_TYPES = CN.load_types(P('disasm/const_types_jp.csv')); C_TABS = CN.load_tables(P('disasm/const_tables_jp.csv'))
+except Exception as e:
+    C_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
+CNAMER = CN.Namer(C_ROWS)
+C_TAGS = collections.Counter(r.tag for r in C_ROWS)
+RAM_IDS = {r.name for r in RAM_ROWS}
+def snake(x): return re.sub(r'(?<=[a-z0-9])(?=[A-Z])', '_', x).upper()
+CROM = open(A.rom, 'rb').read() if A.rom else None
+LABEL_AT = {(int(r['bank'], 16), int(r['addr'], 16)): r['name'] for r in NAMES}
+C_MODES = {r.value: r for r in C_ROWS if r.group == 'mode'}
+for r in C_ROWS:
+    if not re.fullmatch(r'[A-Z][A-Z0-9_]*', r.name): bad('const', '%s: a constant is written in capitals' % r.name); CN_BAD += 1
+    if r.name in NAMESET or r.name in RAM_IDS: bad('const', '%s is also a ROM label or a RAM name' % r.name); CN_BAD += 1
+    if r.tag not in ('C', 'I'): bad('const', '%s: unknown tag %r' % (r.name, r.tag)); CN_BAD += 1
+    if r.group != 'mode': bad('const', '%s: group %s has no name table (the flag groups use the names of hardware.inc)' % (r.name, r.group)); CN_BAD += 1
+if set(C_MODES) != set(range(0x22)) | {0x22, 0xFF} or C_MODES[0x22].name != 'MODE_COUNT' or C_MODES[0xFF].name != 'MODE_NONE':
+    bad('const', 'the mode group must name $00-$21 and MODE_COUNT ($22), MODE_NONE ($FF)'); CN_BAD += 1
+else:
+    for m in range(0x22):    # the name of a mode is the name of its entry label in the mode table 00:2F3F
+        if CROM:
+            o = 0x2F3F + 3 * m; entry = LABEL_AT.get((CROM[o + 2], CROM[o] | CROM[o + 1] << 8))
+        else: entry = next((n for n in NAMESET if re.fullmatch('Mode%02X_\\w+' % m, n) and 'MODE_' + snake(n[7:]) == C_MODES[m].name), None)
+        if not entry or not re.fullmatch('Mode%02X_\\w+' % m, entry) or 'MODE_' + snake(entry[7:]) != C_MODES[m].name:
+            bad('const', 'mode $%02X is %s, but its entry label is %s (the constant is the label without its number, in capitals)' % (m, C_MODES[m].name, entry)); CN_BAD += 1
+C_HW = {'rLCDC', 'rIE', 'rSC', 'rP1'}
+C_GROUPS = {'mode'} | set(CN.FLAGS) | set(CN.EXACT)
+for v, g in C_TYPES.items():
+    if v not in RAM_IDS and v not in C_HW: bad('const', 'const_types_jp.csv: %s is neither a RAM name nor one of %s' % (v, sorted(C_HW))); CN_BAD += 1
+    if g not in C_GROUPS: bad('const', 'const_types_jp.csv: %s has the unknown group %s' % (v, g)); CN_BAD += 1
+BLK = {(t[0], t[1]): t for t in TYPES}
+C_MODE_BYTES = 0
+for t in C_TABS:
+    key = (t['bank'], t['addr']); bl = BLK.get(key)
+    if not bl or bl[3] != 'data' or bl[2] - bl[1] != t['len']: bad('const', 'const_tables_jp.csv %02X:%04X: no data block of %d bytes starts there in sym_types_jp.csv' % (key + (t['len'],))); CN_BAD += 1; continue
+    if key not in LABEL_AT: bad('const', 'const_tables_jp.csv %02X:%04X: the table has no label' % key); CN_BAD += 1
+    if not t['layout'] or set(t['layout']) - set('MS') or t['len'] % len(t['layout']) or t['group'] != 'mode': bad('const', 'const_tables_jp.csv %02X:%04X: layout %r / group %r / length %d do not fit' % (key + (t['layout'], t['group'], t['len']))); CN_BAD += 1; continue
+    for i in range(t['len']):
+        if t['layout'][i % len(t['layout'])] != 'M': continue
+        C_MODE_BYTES += 1
+        if CROM:
+            ad = t['addr'] + i; v = CROM[ad if t['bank'] == 0 else t['bank'] * 0x4000 + ad - 0x4000]
+            if CNAMER.value(t['group'], v) is None: bad('const', 'const_tables_jp.csv %02X:%04X byte %d = $%02X is not a mode' % (key + (i, v))); CN_BAD += 1
+if not os.path.exists(P('disasm/const_jp.inc')) or open(P('disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS):
+    bad('const', 'disasm/const_jp.inc is not what tools/const_names.py writes from disasm/const_names_jp.csv (run it)'); CN_BAD += 1
+if not CN_BAD:
+    ok('const', '%d names (C %d, I %d; %d modes), %d typed operands, %d mode tables with %d mode bytes; const_jp.inc is fresh' % (len(C_ROWS), C_TAGS['C'], C_TAGS['I'], len(C_MODES) - 2, len(C_TYPES), len(C_TABS), C_MODE_BYTES))
+    quoted('const rows', r'const_names_jp\.csv` has ([\d,]+) constants \(C ([\d,]+) / I ([\d,]+)\)', lambda m: ((len(C_ROWS), C_TAGS['C'], C_TAGS['I']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+    quoted('const types', r'const_types_jp\.csv` types ([\d,]+) operands', lambda m: ((len(C_TYPES),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+    quoted('const tables', r'const_tables_jp\.csv` lists ([\d,]+) byte tables \(([\d,]+) mode bytes\)', lambda m: ((len(C_TABS), C_MODE_BYTES), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+
 # ------------------------------------------------------------------ TCRF checklist
 tm = rd('tcrf_check/TCRF_CHECKLIST.md'); tc = open(P('tcrf_check/TCRF_CHECKLIST.csv'), encoding='utf-8').read()
 ids_md = sorted(set(re.findall(r'^\| ([A-Z]\d\d) \|', tm, re.M))); ids_csv = sorted(set(re.findall(r'^"?([A-Z]\d\d)"?,', tc, re.M)))
@@ -475,7 +529,7 @@ if A.roundtrip:
         env = dict(os.environ); env['PATH'] = A.rgbds + ':' + env['PATH']
         want = 'fdcfe686cf4df461e870b6e53b2b5a8b'
         subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', os.path.join(tmp, 'hex'), '--overwrite', '--print-hex'], capture_output=True, text=True)    # sym_fix.py reads the `; $ADDR: $xx` comments
-        for variant in ('plain', 'fixed', 'ram'):
+        for variant in ('plain', 'fixed', 'ram', 'const'):
             d = os.path.join(tmp, variant)
             if variant == 'plain':
                 subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', d, '--overwrite'], capture_output=True, text=True)
@@ -484,10 +538,11 @@ if A.roundtrip:
                 subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
             else:
                 shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
-                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--ram', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
+                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--const' if variant == 'const' else '--ram', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
                 st = {k: int(v) for k, v in re.findall(r'(\w+)=(\d+)', sf.stdout.split('sym_fix:')[-1])}
-                quoted('sym_fix stats', r'\((\d+) MBC writes, (\d+) byte counts and (\d+) sprite positions in `bc`, (\d+) far-pointer loads, ([\d,]+) \+ ([\d,]+) word-table rows as `dw`, (\d+) `\{lo,hi,bank\}` rows',
-                       lambda m: (tuple(st.get(k, 0) for k in ('mbc_write', 'bc_count', 'bc_coords', 'far_ptr', 'dw_label', 'dw_numeric', 'far_ptr_row')), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+                if variant == 'const':
+                    quoted('sym_fix stats', r'\((\d+) MBC writes, (\d+) byte counts and (\d+) sprite positions in `bc`, (\d+) far-pointer loads, ([\d,]+) \+ ([\d,]+) word-table rows as `dw`, (\d+) `\{lo,hi,bank\}` rows',
+                           lambda m: (tuple(st.get(k, 0) for k in ('mbc_write', 'bc_count', 'bc_coords', 'far_ptr', 'dw_label', 'dw_numeric', 'far_ptr_row')), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
                 named = {k: sum(v for kk, v in st.items() if kk in ks) for k, ks in (('abs', ('ram_mem', 'ram_mem_off')), ('ldh', ('ram_ldh', 'ram_ldh_off')), ('ptr', ('ram_ptr', 'ram_ptr_off')), ('ie', ('ram_ie',)))}
                 tot = sum(named.values())
                 # what is left: ld / ldh lines with an operand inside $C000-$DFFF or $FF80-$FFFE (the exclusions, nothing else)
@@ -498,9 +553,27 @@ if A.roundtrip:
                         m = re.match(r'^\s+(ldh?|ld) [^;]*\$([0-9a-f]{4})\b[^;]*; \$([0-9a-f]{4}): ', line)
                         if m and (0xC000 <= int(m.group(2), 16) < 0xE000 or 0xFF80 <= int(m.group(2), 16) <= 0xFFFE): left.append((f, m.group(3), m.group(2)))
                 nex = sum(1 for k, v in excl.items() if 0xC000 <= v < 0xE000 or 0xFF80 <= v <= 0xFFFE)
-                if len(left) != nex or st.get('ram_unnamed') or st.get('ram_unproven') or st.get('ram_no_token'): bad('roundtrip', 'ram listing: %d raw RAM operands left (the %d exclusions are the only ones allowed), stats %s' % (len(left), nex, st))
-                else: ok('roundtrip', 'ram: %s instructions use a RAM name (%s absolute, %s ldh, %s address loads, %s rIE), %d raw numbers left (the exclusions)' % (fmt(tot), fmt(named['abs']), fmt(named['ldh']), fmt(named['ptr']), fmt(named['ie']), len(left)))
-                quoted('ram operands', r'([\d,]+) instructions use a RAM name \(([\d,]+) absolute loads and stores, ([\d,]+) `ldh`, ([\d,]+) address loads, ([\d,]+) `ld hl, rIE`\)', lambda m: ((tot, named['abs'], named['ldh'], named['ptr'], named['ie']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+                if len(left) != nex or st.get('ram_unnamed') or st.get('ram_unproven') or st.get('ram_no_token'): bad('roundtrip', '%s listing: %d raw RAM operands left (the %d exclusions are the only ones allowed), stats %s' % (variant, len(left), nex, st))
+                elif variant == 'ram': ok('roundtrip', 'ram: %s instructions use a RAM name (%s absolute, %s ldh, %s address loads, %s rIE), %d raw numbers left (the exclusions)' % (fmt(tot), fmt(named['abs']), fmt(named['ldh']), fmt(named['ptr']), fmt(named['ie']), len(left)))
+                if variant == 'const':
+                    # a number stored into a typed operand, or compared right after loading one, must have become a constant
+                    raw = []
+                    for f in sorted(os.listdir(d)):
+                        if not re.match(r'bank_[0-9a-f]+\.asm$', f): continue
+                        prev = None
+                        for line in open(os.path.join(d, f), encoding='utf-8'):
+                            t = line.split(';')[0].strip()
+                            if not t: continue
+                            if not line[0].isspace() or t.startswith(('db ', 'dw ', 'ds ')): prev = None; continue       # a label or data line ends the straight line
+                            m = re.match(r'^(?:ld|ldh) \[(\w+)\], a$', t)
+                            if m and m.group(1) in C_TYPES and prev and re.match(r'^ld a, \$[0-9a-f]{2}$', prev) and CNAMER.value(C_TYPES[m.group(1)], int(prev[-2:], 16)): raw.append((f, prev, t))
+                            prev = t
+                    groups = {g: st.get('const_' + g, 0) for g in ('mode', 'pad', 'lcdc', 'sc', 'p1', 'ie')}
+                    if raw or st.get('const_table_unnamed'): bad('roundtrip', 'const listing: %d typed stores keep a number (%s), %d table bytes unnamed' % (len(raw), raw[:3], st.get('const_table_unnamed', 0)))
+                    else: ok('roundtrip', 'const: %s operands read as constants (%s), %d mode table bytes' % (fmt(sum(groups.values())), ', '.join('%s %d' % kv for kv in groups.items()), st.get('const_table', 0)))
+                    quoted('const operands', r'([\d,]+) operands read as constants \(([\d,]+) mode, ([\d,]+) key mask, ([\d,]+) LCDC, ([\d,]+) serial control, ([\d,]+) joypad select, ([\d,]+) interrupt enable\) and ([\d,]+) bytes of mode tables',
+                           lambda m: ((sum(groups.values()), groups['mode'], groups['pad'], groups['lcdc'], groups['sc'], groups['p1'], groups['ie'], st.get('const_table', 0)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+                if variant == 'ram': quoted('ram operands', r'([\d,]+) instructions use a RAM name \(([\d,]+) absolute loads and stores, ([\d,]+) `ldh`, ([\d,]+) address loads, ([\d,]+) `ld hl, rIE`\)', lambda m: ((tot, named['abs'], named['ldh'], named['ptr'], named['ie']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
             subprocess.run(['make'], cwd=d, env=env, capture_output=True, text=True)
             import hashlib
             g = os.path.join(d, 'game.gb'); h = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else None
