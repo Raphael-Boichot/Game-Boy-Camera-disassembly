@@ -37,7 +37,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * The symbol file is **generated**: edit `disasm/sym_names_jp.csv` / `sym_types_jp.csv` and run `tools/sym_build.py` (README §1.1.1); never edit `pocketcamera_jp.sym` by hand. mgbdis v3.0 reads `<rom basename>.sym` beside the ROM
   (no `--sym` option); check every change with mgbdis + rgbasm 1.0.4 (md5 `fdcfe686cf4df461e870b6e53b2b5a8b`), plain and after `tools/sym_fix.py --tables`. Regenerate the doubts list and the bank pictures (`tools/bank_pics.py`) after renames or retags. When a count changes,
   the consistency checker lists every sentence of README, `skills/gb-rom-disassembly/SKILL.md` and `HOWTO_NEW_ROM.md` that must follow.
-* **Not in git, must be recreated or supplied:** the ROMs; BGB (a Windows binary run headless under Wine; `BGB_DIR` points to it; helpers `tcrf_check/tools/bgb_run.py`, `bgb_us_jp_job.py`, `guide_bgb_walk.py`,
+* **Not in git, must be recreated or supplied:** the ROMs; BGB (a Windows binary run headless under Wine; `BGB_DIR` points to it; helpers `tcrf_check/tools/bgb_run.py`, `bgb_us_jp_job.py`, `guide_bgb_walk.py`, `bgb_effect_slots.py` (calls one ROM routine from a stub in the bank-0 padding and reads the memory it wrote: the effect slots, §16.28),
   `bgb_corocoro_intl.py`); the save files (unlocking saves in `saves_unl/`, the real cameras' SRAM); the built core library (`coverage/build.sh`); the owner's bus-analyser sheets (`Search_for_sensor_at_boot.xlsx`,
   `Calibration_procedure.xlsx`, `Exposure_strategy_regular_camera_volts.xlsx`; decoded rows are in `tcrf_check/assets/sensor/*_rows.csv`); the M64282FP datasheet; the BGB state files.
 * The helper tools were written for a working directory laid out as `<ROOT>/{tools, package/coverage/src, roms/gbcam_usa_eu.gb, pocketcamera_jp.gb, saves_unl, report_v8, work}`
@@ -66,7 +66,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
 
 ## Where things stand (pointers, not numbers)
-* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,702 / 1,536 / 5); 341 doubtful rows are listed with evidence
+* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,790 / 1,448 / 5); 253 doubtful rows are listed with evidence
   in `disasm/sym_unconclusive_jp.md`. L4 (RAM names in the source), L5 (committed buildable tree) are not done; L6 is partial (name / comment charset only, §16.27).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international ROM has no instrumented coverage run
   (`coverage/tools/coverage_run.py` needs a variant without the Japanese trace); behavioural parity was checked in BGB (§16.11, §16.12).

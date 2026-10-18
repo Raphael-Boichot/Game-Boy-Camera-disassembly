@@ -15,7 +15,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 4 | 158 | a check of the guess |
 | mode state | 102 | 5597 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
-| effect slot | 88 | 11689 | which visible effect each slot gives |
+| effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2536 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
@@ -165,101 +165,6 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 08:4587 | `Mode1C_DrawToggleArrow_Tbl4587` | 6 | state handler or helper of a screen mode | auto: 6 bytes, bytes; referenced by Mode1C_DrawToggleArrow |
 | 08:47ED | `Mode1C_DrawPrintScreen` | 94 | state handler or helper of a screen mode | tilemap 27:4472 and border tiles |
 | 08:484B | `Mode1C_DrawOptionScreen` | 60 | state handler or helper of a screen mode |  |
-
-## effect slot (88)
-
-_Why doubtful:_ slot roles inferred from the first instructions, not from the visible screen effect. _To settle:_ run each effect id in an emulator and look at the screen.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 03:669F | `HotSpotFx_00_Checkerboard_Gfx669F` | 16 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | auto: 16 bytes, tile data; referenced by HotSpotFx_00_Checkerboard |
-| 03:6872 | `HotSpotFx_FlipDE` | 9 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | D ^= $0F |
-| 03:687B | `HotSpotFx_ColumnPassA` | 23 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:6892 | `HotSpotFx_ColumnPassB` | 18 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:68C3 | `HotSpotFx_SpiralStepUp` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:68CF | `HotSpotFx_SpiralStepRight` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:68DB | `HotSpotFx_SpiralStepDown` | 15 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:68EA | `HotSpotFx_SpiralStepLeft` | 15 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:68F9 | `HotSpotFx_Delay` | 8 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:695D | `HotSpotFx_WaveTbl` | 32 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | SCY offsets for the wave |
-| 03:697D | `HotSpotFx_Delay2` | 106 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:69A3 | `HotSpotFx_PageFlipRamp` | 68 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | SCY ramp per scanline |
-| 03:69E7 | `HotSpotFx_PageFlipTbl` | 8 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 03:69EF | `HotSpotFx_Delay3` | 10 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) |  |
-| 0A:54DA | `Fx00_CopyRows_A100toC000` | 5891 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 00; scratch FF8A-FF8D loops |
-| 0A:54E6 | `Fx01_MirrorCopy_A180toC080` | 72 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 01;22; scratch FF8A-FF8D loops |
-| 0A:552E | `Fx02_MirrorCopy_A100toC000` | 73 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 02;21; scratch FF8A-FF8D loops |
-| 0A:5577 | `Fx03_Copy_A800toC60E` | 67 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 03;44; scratch FF8A-FF8D loops |
-| 0A:55BA | `Fx04_Copy_A100toC000` | 67 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 04;43; scratch FF8A-FF8D loops |
-| 0A:55FD | `Fx05_Copy_A400toC000` | 84 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 05; scratch FF8A-FF8D loops |
-| 0A:5651 | `Fx06_Copy_A140toC000` | 68 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 06; scratch FF8A-FF8D loops |
-| 0A:5695 | `Fx07_Copy_A440toC000` | 167 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 07; scratch FF8A-FF8D loops |
-| 0A:573C | `Fx08_Reduce79_A100toC000` | 255 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 08; scratch FF8A-FF8D loops |
-| 0A:583B | `Fx09_Reduce_A100_toward_C000` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C000; then shared body 0A:6866 (b=$79 reduce table); slots 09 |
-| 0A:5841 | `Fx0A_Reduce_A100_toward_C080` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C080; then shared body 0A:6866 (b=$79 reduce table); slots 0A |
-| 0A:5847 | `Fx0B_Reduce_A100_toward_C700` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C700; then shared body 0A:6866 (b=$79 reduce table); slots 0B |
-| 0A:584D | `Fx0C_Reduce_A100_toward_C780` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C780; then shared body 0A:6866 (b=$79 reduce table); slots 0C |
-| 0A:5853 | `Fx0D_Copy_A100toC000` | 87 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 0D; scratch FF8A-FF8D loops |
-| 0A:58AA | `Fx0E_Copy_A180toC080` | 86 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 0E; scratch FF8A-FF8D loops |
-| 0A:5900 | `Fx0F_CopyRows_A100toC000` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 0F; scratch FF8A-FF8D loops |
-| 0A:590C | `Fx10_CopyRows_A800toC700` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 10; scratch FF8A-FF8D loops |
-| 0A:5918 | `Fx11_Copy_A180toC080` | 137 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 11; scratch FF8A-FF8D loops |
-| 0A:59A1 | `Fx12_Copy_A180toC080` | 72 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 12; scratch FF8A-FF8D loops |
-| 0A:59E9 | `Fx13_CopyRows_A100toC000` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 13; scratch FF8A-FF8D loops |
-| 0A:59F5 | `Fx14_CopyRows_AB00toCA00` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 14; scratch FF8A-FF8D loops |
-| 0A:5A01 | `Fx15_CopyRows_A100toC000` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 15; scratch FF8A-FF8D loops |
-| 0A:5A0D | `Fx16_CopyRows_A500toC400` | 12 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 16; scratch FF8A-FF8D loops |
-| 0A:5A19 | `Fx17_Copy_A430toC330` | 87 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 17; scratch FF8A-FF8D loops |
-| 0A:5A70 | `Fx18_Copy_A880toC780` | 70 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 18; scratch FF8A-FF8D loops |
-| 0A:5ABD | `Fx20_MirrorCopy_A100toC0F0` | 122 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 20; scratch FF8A-FF8D loops |
-| 0A:5B37 | `Fx23_Copy_A800toC7F0` | 79 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 23; scratch FF8A-FF8D loops |
-| 0A:5B86 | `Fx24_Copy_A100toC0F0` | 79 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 24; scratch FF8A-FF8D loops |
-| 0A:5BD5 | `Fx25_MirrorCopy_A400toC0F0` | 101 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 25; scratch FF8A-FF8D loops |
-| 0A:5C3A | `Fx26_Copy_A140toC0F0` | 70 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 26; scratch FF8A-FF8D loops |
-| 0A:5C80 | `Fx27_Copy_A440toC0F0` | 167 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 27; scratch FF8A-FF8D loops |
-| 0A:5D27 | `Fx28_Reduce7A_A100toC070` | 257 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 28; scratch FF8A-FF8D loops |
-| 0A:5E28 | `Fx29_Reduce_A100_toward_C070` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C070; then shared body 0A:6906 (b=$79 reduce table); slots 29 |
-| 0A:5E2E | `Fx2A_Reduce_A100_toward_C0F0` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C0F0; then shared body 0A:6906 (b=$79 reduce table); slots 2A |
-| 0A:5E34 | `Fx2B_Reduce_A100_toward_C770` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C770; then shared body 0A:6906 (b=$79 reduce table); slots 2B |
-| 0A:5E3A | `Fx2C_Reduce_A100_toward_C7F0` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C7F0; then shared body 0A:6906 (b=$79 reduce table); slots 2C |
-| 0A:5E40 | `Fx2D_MirrorCopy_A180toC070` | 63 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 2D; scratch FF8A-FF8D loops |
-| 0A:5E7F | `Fx2E_MirrorCopy_A100toC0F0` | 64 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 2E; scratch FF8A-FF8D loops |
-| 0A:5EBF | `Fx2F_MirrorCopy_A100toC0F0` | 61 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 2F; scratch FF8A-FF8D loops |
-| 0A:5EFC | `Fx30_MirrorCopy_A800toC7F0` | 61 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 30; scratch FF8A-FF8D loops |
-| 0A:5F39 | `Fx31_MirrorCopy_A100toC0F0` | 128 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 31; scratch FF8A-FF8D loops |
-| 0A:5FB9 | `Fx32_MirrorCopy_A100toC0F0` | 126 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 32; scratch FF8A-FF8D loops |
-| 0A:6037 | `Fx33_MirrorCopy_A100toC0F0` | 61 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 33; scratch FF8A-FF8D loops |
-| 0A:6074 | `Fx34_MirrorCopy_AB00toCAF0` | 61 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 34; scratch FF8A-FF8D loops |
-| 0A:60B1 | `Fx35_MirrorCopy_A100toC0F0` | 61 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 35; scratch FF8A-FF8D loops |
-| 0A:60EE | `Fx36_MirrorCopy_A500toC4F0` | 61 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 36; scratch FF8A-FF8D loops |
-| 0A:612B | `Fx37_MirrorCopy_A430toC3C0` | 64 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 37; scratch FF8A-FF8D loops |
-| 0A:616B | `Fx38_MirrorCopy_A800toC7F0` | 64 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 38; scratch FF8A-FF8D loops |
-| 0A:61B2 | `Fx40_Copy_A100toCD0E` | 105 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 40; scratch FF8A-FF8D loops |
-| 0A:621B | `Fx41_MirrorCopy_A180toCD8E` | 78 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 41; scratch FF8A-FF8D loops |
-| 0A:6269 | `Fx42_MirrorCopy_A100toCD0E` | 79 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 42; scratch FF8A-FF8D loops |
-| 0A:62B8 | `Fx45_Copy_A400toCD0C` | 96 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 45; scratch FF8A-FF8D loops |
-| 0A:6318 | `Fx46_Copy_A140toCD0E` | 82 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 46; scratch FF8A-FF8D loops |
-| 0A:636A | `Fx47_Copy_A440toCD0C` | 167 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 47; scratch FF8A-FF8D loops |
-| 0A:6411 | `Fx48_Reduce79_A100toC60E` | 261 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 48; scratch FF8A-FF8D loops |
-| 0A:6516 | `Fx49_Reduce_A100_toward_C60E` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C60E; then shared body 0A:69AA (b=$79 reduce table); slots 49 |
-| 0A:651C | `Fx4A_Reduce_A100_toward_C68E` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := C68E; then shared body 0A:69AA (b=$79 reduce table); slots 4A |
-| 0A:6522 | `Fx4B_Reduce_A100_toward_CD0E` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := CD0E; then shared body 0A:69AA (b=$79 reduce table); slots 4B |
-| 0A:6528 | `Fx4C_Reduce_A100_toward_CD8E` | 6 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | stub: DE := CD8E; then shared body 0A:69AA (b=$79 reduce table); slots 4C |
-| 0A:652E | `Fx4D_Copy_A100toCD0E` | 60 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 4D; scratch FF8A-FF8D loops |
-| 0A:656A | `Fx4E_Copy_A180toCD8E` | 59 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 4E; scratch FF8A-FF8D loops |
-| 0A:65A5 | `Fx4F_Copy_A800toC60E` | 57 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 4F; scratch FF8A-FF8D loops |
-| 0A:65DE | `Fx50_Copy_A100toCD0E` | 57 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 50; scratch FF8A-FF8D loops |
-| 0A:6617 | `Fx51_Copy_A100toCD0E` | 120 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 51; scratch FF8A-FF8D loops |
-| 0A:668F | `Fx52_Copy_A100toCD0E` | 117 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 52; scratch FF8A-FF8D loops |
-| 0A:6704 | `Fx53_Copy_A500toC90E` | 57 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 53; scratch FF8A-FF8D loops |
-| 0A:673D | `Fx54_Copy_A100toCD0E` | 57 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 54; scratch FF8A-FF8D loops |
-| 0A:6776 | `Fx55_Copy_AB00toC30E` | 57 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 55; scratch FF8A-FF8D loops |
-| 0A:67AF | `Fx56_Copy_A100toCD0E` | 57 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 56; scratch FF8A-FF8D loops |
-| 0A:67E8 | `Fx57_Copy_A430toCA3E` | 60 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 57; scratch FF8A-FF8D loops |
-| 0A:6824 | `Fx58_Copy_A180toCD8E` | 59 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | effect table slot(s) 58; scratch FF8A-FF8D loops |
-| 0A:6866 | `FxShared_ReduceBody_G0` | 160 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | shared body of slots 09-0C (b=$79) |
-| 0A:6906 | `FxShared_ReduceBody_G1` | 164 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | shared body of slots 29-2C |
-| 0A:69AA | `FxShared_ReduceBody_G2` | 151 | one of the transition / hot-spot effect routines of bank 0A (80 effect slots) | shared body of slots 49-4C |
 
 ## SFX tag (95)
 

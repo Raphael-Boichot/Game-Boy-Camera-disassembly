@@ -21,6 +21,8 @@ What it checks (each line of the report is one check)
   docnames   every `Gfx_BB_AAAA_...` / `Map_` / `Src_` / `Data_` / `Sheet_` label quoted in README, CLAUDE.md, the skill and the HOWTO is a label of sym_names_jp.csv (or the start of one)
   bankpics   (needs --rom) disasm/sym_unconclusive_banks/*.png equal a fresh tools/bank_pics.py run
   tcrf       tcrf_check/TCRF_CHECKLIST.md and .csv list the same ids
+  effects    tcrf_check/assets/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
+             the counts quoted in README 16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain and after sym_fix.py --tables
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -367,6 +369,48 @@ if A.rom:
     shutil.rmtree(tmp, ignore_errors=True)
 else:
     skip('bankpics', 'no --rom: bank pictures not checked')
+
+# ------------------------------------------------------------------ the 96 effect slots (README 16.28)
+EF_CSV = 'tcrf_check/assets/effect_slots/effect_slots_bgb.csv'
+EF = list(csv.DictReader(io.StringIO(rd(EF_CSV))))
+NAME_AT = {(r['bank'].upper(), r['addr'].upper()): r['name'] for r in NAMES}
+ef_bad = 0
+if [r['slot'] for r in EF] != ['%02X' % i for i in range(96)]:
+    bad('effects', '%s does not hold the slots 00-5F in order' % EF_CSV); ef_bad += 1
+else:
+    if A.rom:
+        rom_b = open(A.rom, 'rb').read()
+        for i, r in enumerate(EF):
+            o = 0x0A * 0x4000 + 0x541A - 0x4000 + 2 * i; a = rom_b[o] | rom_b[o + 1] << 8
+            if r['entry'].upper() != '0A:%04X' % a: bad('effects', 'slot %02X: the csv says %s, the jump table holds 0A:%04X' % (i, r['entry'], a)); ef_bad += 1
+            elif NAME_AT.get(('0A', '%04X' % a)) != r['label']: bad('effects', 'slot %02X: csv label %s, sym_names_jp.csv has %s at 0A:%04X' % (i, r['label'], NAME_AT.get(('0A', '%04X' % a)), a)); ef_bad += 1
+    else:
+        skip('effects', 'no --rom: the entry addresses are not compared with the jump table (the rest is checked)')
+    writers = [r for r in EF if r['effect'] != 'NoWrite']
+    facts = {'slots that write': len(writers), 'lone rets': 96 - len(writers), 'routines': len({r['entry'] for r in EF}),
+             'selected by the game': sum(r['reached_by_game'] == 'yes' for r in EF), 'never selected': sum(r['reached_by_game'] != 'yes' for r in EF),
+             'never selected, writing': sum(r['reached_by_game'] != 'yes' for r in writers),
+             'on the flipped photo': sum(int(r['slot'], 16) >= 0x20 and (r['effect'] in ('FlipH', 'FlipV') or '_OnFlip' in r['effect']) for r in writers),
+             'picture flipped': sum(int(r['slot'], 16) >= 0x20 and re.search(r'_Flip[HV]$', r['effect']) is not None for r in writers),
+             'identity': sum(r['grey_levels'].startswith('identity (') for r in writers), 'identity except table byte': sum('wrong table byte' in r['grey_levels'] for r in writers)}
+    sec = README[README.index('### 16.28 '):README.index('\n## 17.')]
+    for desc, pat, keys in (('slots write', r'(\d+) of the 96 slots write the buffer; the other (\d+) ', ('slots that write', 'lone rets')),
+                            ('grey levels', r'For (\d+) of the (\d+) the output is exactly', ('identity', 'slots that write')),
+                            ('routines', r'the 96 slots hold (\d+) routines', ('routines',)),
+                            ('flip options', r'\*\*(\d+) of the 50 slots are the base slot applied to the flipped photo', ('on the flipped photo',)),
+                            ('flip picture', r'\*\*(\d+) flip the finished picture instead', ('picture flipped',)),
+                            ('never selected', r'The (\d+) slots the game never selects \((\d+) lone `ret`, (\d+) copies\)', ('never selected', 'lone rets', 'never selected, writing'))):
+        m = re.search(pat, sec)
+        if not m: bad('effects', 'README 16.28: no sentence matches %r (reword it or fix the checker)' % desc); ef_bad += 1; continue
+        exp = tuple(facts[k] for k in keys); got = tuple(int(g) for g in m.groups())
+        if exp != got: bad('effects', 'README 16.28 %s: says %s, %s says %s %s' % (desc, got, EF_CSV, keys, exp)); ef_bad += 1
+    if facts['identity'] + facts['identity except table byte'] != facts['slots that write']: bad('effects', 'a writing slot is neither an identity nor the table-byte case'); ef_bad += 1
+cited = set()
+for r in NAMES:
+    for f in re.findall(r'tcrf_check/[\w./\-]*[\w]\.(?:csv|png|py|md)\b', r['note']): cited.add(f)
+for f in sorted(cited):
+    if not os.path.exists(P(f)): bad('effects', 'a label note cites %s, which does not exist' % f); ef_bad += 1
+if not ef_bad: ok('effects', '96 slots, %s; %d tcrf_check files cited by label notes exist' % (', '.join('%s %d' % (k, v) for k, v in facts.items()), len(cited)))
 
 # ------------------------------------------------------------------ TCRF checklist
 tm = rd('tcrf_check/TCRF_CHECKLIST.md'); tc = open(P('tcrf_check/TCRF_CHECKLIST.csv'), encoding='utf-8').read()
