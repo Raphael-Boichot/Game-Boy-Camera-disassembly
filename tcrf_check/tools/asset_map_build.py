@@ -1,5 +1,5 @@
 """Write assets/asset_map_jp.csv: the never-read data bytes of the Japanese ROM (class U of the byte-class map, padding excluded) grouped into labelled ranges.
-usage: asset_map_build.py OUT.csv [--rom pocketcamera_jp.gb] [--map coverage/results/report_v8/rom_map.csv]
+usage: asset_map_build.py OUT.csv [--rom pocketcamera_jp.gb] [--map coverage/v8/report_v8/rom_map.csv]
 The hand-written rows carry the readings (README 16.13); the tile-set gaps and the bank $2A glyph runs are taken from the class map.
 The evidence tag of a row is C only where an emulator or BGB test backs it, else I."""
 import csv, sys, os, collections
@@ -9,7 +9,7 @@ ARGS = sys.argv[1:]
 def opt(n, d):
     if n in ARGS: i = ARGS.index(n); v = ARGS[i + 1]; del ARGS[i:i + 2]; return v
     return d
-ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(os.path.dirname(os.path.dirname(HERE)), 'coverage', 'results', 'report_v8', 'rom_map.csv'))
+ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(os.path.dirname(os.path.dirname(HERE)), 'coverage', 'v8', 'report_v8', 'rom_map.csv'))
 rom = open(ROM, 'rb').read(); cls = load_classes(MAP); pad = padmask(rom)
 def off(b, a): return b * 0x4000 + (a - 0x4000 if b else a)
 rows = []

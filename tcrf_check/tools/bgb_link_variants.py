@@ -9,6 +9,7 @@ usage: bgb_link_variants.py OUTDIR ROM SENDER.sav RECEIVER.sav NAME SENDER_GENDE
 output: OUTDIR/NAME_{sender,receiver}.{sna,bmp,sav,dem}, NAME_markers.txt (marker hits per unit), and the SRAM counters before / after"""
 import sys, os, subprocess, time, shutil, struct, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 BGB_SRC = os.environ.get('BGB_SRC', '/home/claude/bgbx')
 out, rom, sa, sb, name, gs, gr = sys.argv[1:8]; gs, gr = int(gs), int(gr)

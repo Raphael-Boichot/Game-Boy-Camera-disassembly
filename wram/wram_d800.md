@@ -23,7 +23,7 @@ The previous README read `$D890-$D9F8` as "three parallel 3-byte cursor structur
 
 ### Method and evidence
 
-* Every claim cites `bank:address` of instructions that I read in the linear-sweep listing (`disasm_hex/bank_XXX.asm`) and that belong to the proven-code set (`trace_jp.json` key `code`). "C" rows are code-traced; "I" rows name a role inferred from the data flow; "U" rows are dead/unused in the proven code; "?" rows are inconclusive.
+* Every claim cites `bank:address` of instructions that I read in a linear-sweep listing of the bank (mgbdis output; not kept) and that belong to the proven-code set (`trace_jp.json` key `code`). "C" rows are code-traced; "I" rows name a role inferred from the data flow; "U" rows are dead/unused in the proven code; "?" rows are inconclusive.
 * The tracer's built-in mode table stops at mode `$1D`; the traces used here add the roots `8:4887`, `5:4000`, `5:74CC`, `9:5FE3` (tools/extra_roots.json). The access tables now contain exactly the same 274 addresses for this range as a separate re-trace with those roots (checked: no address on either side only), so the numbers below use these tables.
 * Unresolved data-driven callbacks of that trace (bank 3 `$5F68/$5F91`, bank 7 `$792C/$7BF3/$7C62/$7CD1`, `call $FF80`) could touch variables of this page without being visible in the access table; nothing in the code read here suggests they do.
 * Names in the "Name" column are mine; sweep labels such as `Call_000_1017` are not names.

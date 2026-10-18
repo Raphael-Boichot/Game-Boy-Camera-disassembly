@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Sort the code that no run executed by what keeps it from running (README 16.15).
 usage: reach_analysis.py OUT_DIR [ROM] [--manual FILE]       (run from anywhere; ROM defaults to ./pocketcamera_jp.gb, the Japanese Rev A)
-Reads (all in the repository): coverage/results/report_v8/rom_map.csv (byte classes of the v8 run), assets/witness_jp.csv (class N bytes that a later run executed:
+Reads (all in the repository): coverage/v8/report_v8/rom_map.csv (byte classes of the v8 run), assets/witness_jp.csv (class N bytes that a later run executed:
   16.14), wram/trace_jp_v3.json (static trace), tools/extra_roots.json (hand-resolved roots), wram/wram_*.csv (variable names),
   assets/reach_manual_jp.csv (hand-written verdicts keyed by the first address of a component; may be missing)
 Writes: OUT_DIR/reach_components.csv (one row per never-run component), OUT_DIR/reach_ranges.csv (the byte runs of every component with its verdict: drawn by rom_reach_map.py), OUT_DIR/reach_summary.md, OUT_DIR/cov_with_witness.npz (intermediate)
@@ -26,7 +26,7 @@ def opt(n, d=None):
 MANUAL = opt('--manual', os.path.join(REPO, 'assets', 'reach_manual_jp.csv'))
 OUT = a[0]; ROM = a[1] if len(a) > 1 else 'pocketcamera_jp.gb'
 os.makedirs(OUT, exist_ok=True)
-MAP = os.path.join(REPO, 'coverage', 'results', 'report_v8', 'rom_map.csv'); WIT = os.path.join(REPO, 'assets', 'witness_jp.csv')
+MAP = os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'); WIT = os.path.join(REPO, 'assets', 'witness_jp.csv')
 GATING = os.path.join(REPO, 'coverage', 'tools', 'gating_branches.py')
 def flat(b, ad): return ad if (b == 0 and ad < 0x4000) else b * 0x4000 + ad - 0x4000
 # ---- 1. coverage arrays from the map + witnesses

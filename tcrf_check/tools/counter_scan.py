@@ -6,6 +6,7 @@ usage: counter_scan.py CORPUS OUTDIR [FIRST LAST]      (run from the working roo
 import sys, os, csv
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 corpus, out = sys.argv[1], sys.argv[2]; os.makedirs(out, exist_ok=True)
 C = lib.Corpus(corpus); ids = sorted(C.E)

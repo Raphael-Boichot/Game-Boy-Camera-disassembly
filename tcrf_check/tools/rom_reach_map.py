@@ -6,93 +6,23 @@ green = code the v8 run never executed but a later targeted run did, and three k
 purple = code that never ran and is proven dead (verdict UNREACHABLE or UNREFERENCED in assets/reach_ranges_jp.csv, from reach_analysis.py: README 16.15 / 16.21),
 yellow = asset data that no replay ever put on screen in a run without state pokes, the REALLY unused assets of README 16.24 (tcrf_check/assets/unidentified/really_unused.csv: tiers 'no loader', 'never shown', 'forced only' and the TCRF-labelled spans never on screen in an organic run; it takes the bytes of those spans away from blue, light blue and orange),
 muted red = untouched padding (runs >= 16 of 00 / FF).
-usage: rom_reach_map.py OUT.png [--rom pocketcamera_jp.gb] [--map coverage/results/report_v8/rom_map.csv] [--assets assets/asset_map_jp.csv | none] [--witness assets/witness_jp.csv | none] [--reach assets/reach_ranges_jp.csv | none] [--unused tcrf_check/assets/unidentified/really_unused.csv | none]
+usage: rom_reach_map.py OUT.png [--rom pocketcamera_jp.gb] [--map coverage/v8/report_v8/rom_map.csv] [--assets assets/asset_map_jp.csv | none] [--witness assets/witness_jp.csv | none] [--reach assets/reach_ranges_jp.csv | none] [--unused tcrf_check/assets/unidentified/really_unused.csv | none]
 The ROM is not in the repository (md5 fdcfe686cf4df461e870b6e53b2b5a8b); the byte-class map is (written by coverage/tools/rom_map.py from the v8 merged coverage)."""
 import sys, os, csv
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(HERE))
+HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(HERE)); sys.path.insert(0, HERE)
 a = sys.argv[1:]
 def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
-ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(REPO, 'coverage', 'results', 'report_v8', 'rom_map.csv'))
+ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))
 ASSETS = opt('--assets', os.path.join(REPO, 'assets', 'asset_map_jp.csv')); WIT = opt('--witness', os.path.join(REPO, 'assets', 'witness_jp.csv'))
 REACH = opt('--reach', os.path.join(REPO, 'assets', 'reach_ranges_jp.csv'))
 UNUSED = opt('--unused', os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv')); OUT = a[0]
-rom = np.frombuffer(open(ROM, 'rb').read(), np.uint8); N = len(rom)
-cls = np.zeros(N, np.uint8)
-for r in csv.DictReader(open(MAP)):
-    b = int(r['bank'], 16); ad = int(r['start'], 16); o = b * 0x4000 + (ad - 0x4000 if b else ad); cls[o:o + int(r['length'])] = ord(r['class'])
-assert (cls > 0).all(), 'the byte-class map does not cover the whole ROM'
-pad = np.zeros(N, bool); i = 0
-rb = rom.tobytes()
-while i < N:
-    j = i
-    while j < N and rb[j] == rb[i]: j += 1
-    if j - i >= 16 and rb[i] in (0, 255): pad[i:j] = True
-    i = j
-C = lambda ch: cls == ord(ch)
-wit = np.zeros(N, bool)         # class N bytes that a later targeted run executed (assets/witness_jp.csv)
-if WIT != 'none' and os.path.exists(WIT):
-    for r in csv.DictReader(open(WIT)):
-        b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
-        wit[o1:o2 + 1] = True
-wit &= C('N')
-dead = np.zeros(N, bool)         # never-run code proven dead by the reachability analysis (verdict UNREACHABLE or UNREFERENCED)
-if REACH != 'none' and os.path.exists(REACH):
-    for r in csv.DictReader(open(REACH)):
-        if r['verdict'] not in ('UNREACHABLE', 'UNREFERENCED'): continue
-        b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
-        dead[o1:o2 + 1] = True
-dead &= C('N') & ~wit
-red = (C('N') & ~wit) | C('U'); forced = C('F') | C('r'); organic = C('C') | C('R') | C('T')
-# bytes of the never-read data that assets/asset_map_jp.csv labels (padding stays padding)
-ident = np.zeros(N, bool)
-if ASSETS != 'none' and os.path.exists(ASSETS):
-    for r in csv.DictReader(open(ASSETS)):
-        b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
-        ident[o1:o2 + 1] = True
-# the wild-frame lateral strips are NOT unknown data any more: blanking them in BGB changes exactly the lateral tiles of the print (README 16.13 (1), C on frames 02, 03, 05, 06, 07, 08);
-# they are never read by the v8 core runs, so they get the colour of 'never run by v8, shown to be used by a later targeted run'. Their $FF runs (frames 05, 06, 08) are used too, not padding.
-lat = np.zeros(N, bool)
-if ASSETS != 'none' and os.path.exists(ASSETS):
-    for r in csv.DictReader(open(ASSETS)):
-        if r['type'] != 'wild_frame_lateral' or r['evidence'] != 'C': continue
-        b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
-        lat[o1:o2 + 1] = True
-lat &= C('U')
-# the data sent to the Super Game Boy (asset_map rows sgb_*, evidence C): the border that BGB shows in SGB mode equals the one rebuilt from these bytes (README 16.13 (5))
-sgb = np.zeros(N, bool)
-if ASSETS != 'none' and os.path.exists(ASSETS):
-    for r in csv.DictReader(open(ASSETS)):
-        if not r['type'].startswith('sgb_') or r['evidence'] != 'C': continue
-        b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
-        sgb[o1:o2 + 1] = True
-sgb &= C('U') & ~pad
-# the stamp pictures (sym labels StampCat*_Gfx, evidence C: README 16.24) that the v8 run never read but the stamp-menu walks of the display tracker put on screen in runs without state pokes
-stamp = np.zeros(N, bool)
-NM = os.path.join(REPO, 'disasm', 'sym_names_jp.csv'); TY = os.path.join(REPO, 'disasm', 'sym_types_jp.csv'); DU = os.path.join(REPO, 'tcrf_check', 'assets', 'display_run', 'display_union.npz')
-if all(os.path.exists(f) for f in (NM, TY, DU)):
-    ends = {}
-    for r in csv.DictReader(open(TY, encoding='utf-8')): ends[(int(r['bank'], 16), int(r['start'], 16))] = int(r['end'], 16)      # the last row of a start wins (types_fix)
-    tile_on = (np.load(DU)['fro'].astype(np.int64).reshape(-1, 16).max(1) >= 15).repeat(16)[:N]       # a 16-byte tile on screen in >= 15 organic frames
-    for r in csv.DictReader(open(NM, encoding='utf-8')):
-        if not r['name'].startswith('StampCat') or r['conf'] != 'C' or r['name'].endswith('_Mask'): continue                     # the graphics; the masks are 1bpp
-        b = int(r['bank'], 16); a0 = int(r['addr'], 16); o1 = b * 0x4000 + (a0 - 0x4000 if b else a0); stamp[o1:o1 + ends[(b, a0)] - a0] = True
-    stamp &= tile_on
-stamp &= C('U') & ~pad
-ident &= C('U') & ~pad & ~lat & ~stamp & ~sgb
-# the really unused assets of README 16.24 (display tracking + hand-listed spans): data only, padding stays padding
-unused = np.zeros(N, bool); n_unused_spans = 0; n_unused_tcrf = 0
-if UNUSED != 'none' and os.path.exists(UNUSED):
-    for r in csv.DictReader(open(UNUSED, encoding='utf-8')):
-        if not (r['tier'] in ('no loader', 'never shown', 'forced only') or (r['tier'] == 'TCRF' and int(r['stable_in_organic_runs']) == 0)): continue
-        b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['addr'], 16) - 0x4000 if b else int(r['addr'], 16)); unused[o1:o1 + int(r['bytes'])] = True
-        n_unused_spans += 1; n_unused_tcrf += r['tier'] == 'TCRF'
-unused &= ~(C('C') | C('F') | C('N')) & ~pad
-# category per byte: 0 organic blue, 1 forced-only light blue, 2 red, 3 untouched padding, 4 never read but identified as asset data (orange), 5 executed by a later targeted run (green)
-cat = np.zeros(N, np.uint8); cat[forced] = 1; cat[red] = 2; cat[dead] = 6; cat[C('U') & pad] = 3; cat[ident] = 4; cat[wit] = 5; cat[lat] = 5; cat[stamp] = 5; cat[sgb] = 5; cat[unused] = 7
+import rom_reach_classes as RC
+_g = RC.build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO)
+rom, N, cls, pad, C, wit, dead, red, forced, organic, ident, lat, sgb, stamp, unused, n_unused_spans, n_unused_tcrf, cat = (_g[k] for k in 'rom N cls pad C wit dead red forced organic ident lat sgb stamp unused n_unused_spans n_unused_tcrf cat'.split())
 # category per 2-byte tile row: the worst of the two bytes (red > proven dead > really unused > identified > padding > green > forced > organic) so that a red byte is never hidden
 RANK = np.array([0, 1, 7, 3, 4, 2, 6, 5]); BACK = np.array([0, 1, 5, 3, 4, 7, 6, 2])        # category -> rank, rank -> category
 rowcat = BACK[np.maximum(RANK[cat[0::2]], RANK[cat[1::2]])].reshape(-1, 8)  # (tiles, 8 rows)
@@ -138,7 +68,7 @@ items = [(0, 'blue: executed or read, by joypad + save only  (%s B, %.1f %%)' % 
          (2, 'RED: never executed nor read, not identified  (%s B, %.1f %%): %s B code that never ran + %s B data' % (format(r_bright, ','), 100 * r_bright / tot, format(r_code - r_dead, ','), format(r_bright - (r_code - r_dead), ','))),
          (5, 'GREEN: never run or read by the v8 run, but a later targeted run did  (%s B, %.1f %%): %s B of code (SGB sender, printer and its error exits, hot-spot effects, stamp mirror, D.J. pages and sound effects, Space Fever II boss, RUN! podium, slide-show markers, COMPOSE pickers, WRAM / SRAM-poked cases; README 16.14, 16.21)\n+ %s B of data: wild-frame lateral strips used by the print path (%s B, BGB blanking test, README 16.13), stamp pictures shown by the stamp-menu walks (%s B, README 16.24), data sent to the Super Game Boy, whose border BGB shows equal to the one rebuilt from it (%s B, README 16.13)' % (format(r_wit + r_lat + r_stamp + r_sgb, ','), 100 * (r_wit + r_lat + r_stamp + r_sgb) / tot, format(r_wit, ','), format(r_lat + r_stamp + r_sgb, ','), format(r_lat, ','), format(r_stamp, ','), format(r_sgb, ','))),
          (6, 'PURPLE: code that never ran and is proven dead  (%s B, %.1f %%): dead functions (nothing calls them) and branches no value can select (UNREFERENCED / UNREACHABLE, evidence I: README 16.15, 16.21)' % (format(r_dead, ','), 100 * r_dead / tot)),
-         (4, 'ORANGE: never read, but identified as asset data  (%s B, %.1f %%): tilemaps, kana glyphs and text, tile-set gaps, a few SGB blocks (evidence I); the wild-frame strips, the stamp pictures and the SGB data of evidence C moved to green' % (format(r_ident, ','), 100 * r_ident / tot)),
+         (4, 'ORANGE: never read, but identified as asset data  (%s B, %.1f %%): tilemaps, kana glyphs and text, tile-set gaps, a few SGB blocks (evidence I)' % (format(r_ident, ','), 100 * r_ident / tot)),
          (7, 'YELLOW: asset data no replay ever put on screen in a run without state pokes, the really unused assets  (%s B, %.1f %%, %d spans, %d of them TCRF-documented): the alternate stand-by screen of the image exchange, TCRF graphics, never-shown strips and tilemaps (README 16.24)' % (format(r_unused, ','), 100 * r_unused / tot, n_unused_spans, n_unused_tcrf)),
          (3, 'muted red: untouched padding, runs of 16+ x 00 / FF  (%s B, %.1f %%)' % (format(r_pad, ','), 100 * r_pad / tot))]
 y = 98; widest = 0

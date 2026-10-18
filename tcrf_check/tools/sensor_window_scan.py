@@ -8,7 +8,7 @@ Reads an mgbdis disassembly (bank_NNN.asm, the form used by copy_sites.py) and t
   3. the RAM-bank selects written with `ld a,imm` just before `ld [$4000],a` (the camera registers are bank $10; no other value from $10 up occurs; a select through a variable is not seen);
   4. optionally: the same sites in the international ROM's bank $0A and the bytes in which the two sensor-driver banks differ.
 usage: sensor_window_scan.py DISASM_DIR rom_map.csv [ROM_JP ROM_US]
-  e.g. sensor_window_scan.py rtrepo/fixed coverage/results/report_v8/rom_map.csv pocketcamera_jp.gb gbcam_usa_eu.gb"""
+  e.g. sensor_window_scan.py rtrepo/fixed coverage/v8/report_v8/rom_map.csv pocketcamera_jp.gb gbcam_usa_eu.gb"""
 import sys, re, csv, glob, collections, os
 dis, mapfn = sys.argv[1], sys.argv[2]
 idx = collections.defaultdict(list)

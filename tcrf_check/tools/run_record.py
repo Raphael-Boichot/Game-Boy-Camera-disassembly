@@ -11,6 +11,7 @@ import sys, os, csv
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g
 import numpy as np
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 out = sys.argv[1]; os.makedirs(out, exist_ok=True)
 C = lib.Corpus('unlock_runs/f1_organic/corpus.jsonl')

@@ -6,7 +6,7 @@ _s.path.insert(0, _o.path.join(_o.path.dirname(_o.path.abspath(__file__)), '..',
 import paths
 import sys, os, json, glob, time, zlib, argparse
 import numpy as np
-import gbcov5 as g
+import gbcov as g
 ap = argparse.ArgumentParser(); ap.add_argument('state'); ap.add_argument('out'); ap.add_argument('--rom', default=paths.ROM)
 a = ap.parse_args(); os.makedirs(a.out, exist_ok=True)
 g.load_rom(a.rom)

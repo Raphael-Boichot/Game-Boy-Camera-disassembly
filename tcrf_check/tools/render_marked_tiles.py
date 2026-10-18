@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Render a ROM range as 2bpp Game Boy tiles (contact sheet) with the never-read data bytes
-(class U of the byte-class map coverage/results/report_v8/rom_map.csv, padding excluded) tinted red.
+(class U of the byte-class map coverage/v8/report_v8/rom_map.csv, padding excluded) tinted red.
 
 usage: render_marked_tiles.py ROM ROM_MAP.csv OUT.png BANK:START-END [BANK:START-END ...]
                        [--ctx N] [--cols N] [--scale N] [--bpp 1|2]

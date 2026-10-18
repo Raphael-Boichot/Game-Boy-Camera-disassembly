@@ -29,7 +29,7 @@ CMD = dict(init=1, print=2, data=4, inq=15); CN = {v: k for k, v in CMD.items()}
 # ---- never-run code that is still unwitnessed (class N of the v8 map minus assets/witness_jp.csv) and the first address of each component
 def flat(b, ad): return ad if (b == 0 and ad < 0x4000) else b * 0x4000 + ad - 0x4000
 N = np.zeros(1 << 20, bool)
-for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'results', 'report_v8', 'rom_map.csv'))):
+for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))):
     if r['class'] == 'N': o = flat(int(r['bank'], 16), int(r['start'], 16)); N[o:o + int(r['length'])] = True
 for r in csv.DictReader(open(os.path.join(REPO, 'assets', 'witness_jp.csv'))):
     b = int(r['bank'], 16); N[flat(b, int(r['start'], 16)):flat(b, int(r['end'], 16)) + 1] = False

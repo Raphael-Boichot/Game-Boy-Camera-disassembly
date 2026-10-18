@@ -1,6 +1,6 @@
-# BGB confirmation sheet — results
+# BGB confirmation sheet: results
 
-AI slop, do not trust until human validation (not performed yet, work in progress).
+AI slop, do not trust until human validation.
 
 Addresses are `bank:address` of the Japanese ROM (md5 fdcfe686cf4df461e870b6e53b2b5a8b), as in `pocketcamera_jp.sym`; the international ROM used for comparison is md5 42d2f65e2549be9d1d126a6828b5d1c1. SRAM offsets are file offsets of the 128 KB `.sav`. Checksum rule of the protected blocks: lo = sum + $4E, hi = xor ^ $54 (README section 3).
 
@@ -18,14 +18,4 @@ Addresses are `bank:address` of the Japanese ROM (md5 fdcfe686cf4df461e870b6e53b
 | 7 | Link exchange: sender entry → `FF`, receiver slot filled, `F14` +1 (§14) | two BGB instances (`-listen` / `-connect`), both ROMs | as predicted; same bytes on both ROMs; sender `10BF-10C0` `00 00` → `01 00`; receiver counters were at the cap 99; end screens あげました / もらいました + よろしい (Japanese), sent / received + GOOD (international) | `link_run1.txt`, `link_intl_run1.txt`, `link_counters.txt` |
 | 8 | `$DA56` bit 0 = male, bit 1 = female (§16.7) | owner registration on an unregistered save | "?" → `00`, first symbol → `01`, second symbol → `02` | `gender_bits.txt` |
 
-**Not run (still to do in BGB's debugger, if wanted).**
-
-| Hypothesis | Setup | Breakpoint / watch | Expected |
-|---|---|---|---|
-| The two-stage hot-spot dispatch jumps to `6642 66AF 66DC 67D5 6801 6838 68A4 6901` for effects 0-7 and to `6983` for 8-15 | photo with a hot spot, pointer on it, A | `03:6543` | the jumps listed (does `6983` show a wave only for the S icon? TCRF says so; the code does not test the effect number) |
-| Link byte timing: HELLO `$29` / `$12`, info byte, command `$40|n`, 4,096 data bytes | two BGB instances | `00:2AE9` (serial IRQ), watch `$FF01`, `$FF02` | the values and alternation of `link_protocol/LINK_PROTOCOL.md`; the timing is the emulator's so far |
-| The F12 / F13 reception counters move by receiver gender | a receiver save whose `10C3/10C4` are not at the cap | SRAM after the exchange | `F12` +1 if the receiver's `$DA56` has bit 0, `F13` if bit 1 |
-| "Don't butter me up!" ending picture is in the JP ROM | after #2 | `09:50D0` | screen 16 of the credits |
-| Printer: packet driver and print-animation behaviour (§13.7) | BGB has no printer on its command line: a printer helper on the link (`tools/bgb_printer.py`, README §17.1) | `DC00-DC42` driver | **done** (README §17): INIT / DATA / PRINT / INQUIRY sequences and the real-printer status values are reproduced, single photo, comment card, several photos and the TRIPY-H score printed; the print-animation timing was not measured |
-
-Please tell me what you see (a screenshot or the register values at a breakpoint is enough) and I will fold the result into README section 16.
+Open points that need BGB's debugger (breakpoints, watch of `$FF01/$FF02`) are listed in README §16.10; the link byte timing seen in BGB is the emulator's own.

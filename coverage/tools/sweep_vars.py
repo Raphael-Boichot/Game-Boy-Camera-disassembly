@@ -7,7 +7,7 @@ _s.path.insert(0, _o.path.join(_o.path.dirname(_o.path.abspath(__file__)), '..',
 import paths
 import sys, os, json, glob, itertools, argparse, time
 import numpy as np
-import gbcov5 as g
+import gbcov as g
 ap = argparse.ArgumentParser(); ap.add_argument('state'); ap.add_argument('out')
 ap.add_argument('--mode', default='0x14'); ap.add_argument('--vars', required=True); ap.add_argument('--frames', type=int, default=40)
 ap.add_argument('--states', type=int, default=12); ap.add_argument('--rom', default=paths.ROM)

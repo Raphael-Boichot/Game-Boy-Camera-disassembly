@@ -16,7 +16,7 @@ REPO = os.environ.get('REPO', os.path.dirname(os.path.dirname(os.path.dirname(os
 N = len(lib.exec_baseline())
 def flat(b, a): return a if (b == 0 and a < 0x4000) else b * 0x4000 + a - 0x4000
 cls = np.zeros(N, np.uint8)
-for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'results', 'report_v8', 'rom_map.csv'))):
+for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))):
     cls[flat(int(r['bank'], 16), int(r['start'], 16)):][:int(r['length'])] = ord(r['class'])
 isN = cls == ord('N')
 WIT = np.zeros(N, bool)

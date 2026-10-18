@@ -52,7 +52,7 @@ _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 08:54DE | `WildFrame_PageData_54DE` | 7520 | 5,472 bytes between the 8-page pointer table and Mode19_TitleScreens: lists of short recor | 5,472 bytes between the 8-page pointer table and Mode19_TitleScreens: lists of short records such as 9A 22 01  |
+| 08:54DE | `WildFrame_PageData_54DE` | 7520 | 7,520 bytes ($54DE-$723D) between the 8-page pointer table and Mode19_TitleScreens: lists  | 7,520 bytes ($54DE-$723D) between the 8-page pointer table and Mode19_TitleScreens: lists of short records suc |
 | 0C:5800 | `Gfx_0C_5800_AnimEdMenuLabelsAlt` | 576 | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by an | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by any loader or in any o |
 | 0C:6AB0 | `Gfx_0C_6AB0_AnimEdKanaStrips_Tail` | 384 | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no co | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it /  |
 | 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide  | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF ( |

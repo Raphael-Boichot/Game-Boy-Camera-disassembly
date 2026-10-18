@@ -1,7 +1,7 @@
 # link_protocol — sniffed Game Link Cable photo exchange (Pocket Camera Japan, Rev A)
 
-* `LINK_PROTOCOL.md` — the protocol write-up (same text as README §14 of the findings README).
-* `sniff_logs/*.csv` — one row per serial byte exchange between two emulated cameras (two instances of `cov/gbcov7`, cable modelled in `cov/link_lib.py`):
+* The protocol write-up is README §14 of the findings README.
+* `sniff_logs/*.csv` — one row per serial byte exchange between two emulated cameras (two instances of the link-capable coverage core, `coverage/src/gbcov8.c`, whose API `gb_run_link` / `gb_link_*` lets a host script clock the two units and carry the bytes; the cable driver, a short Python script, is not kept: the logs and the saves are its output):
 
 | column | meaning |
 |---|---|
@@ -22,6 +22,5 @@
 | `flow5_sender_refuses` | sender presses B in the confirmation dialog: requester returns to browsing |
 
 * `saves/flow1_*`, `flow2_*` — before / after SRAM images of both units (**written by the emulator, not real cameras**; they also contain the normal boot-time changes, so compare the regions listed in §14.6 or an unlinked run).
-* `tools/` — the sniffer scripts. They need `cov/libgbcov7.so` + `libgbcov7b.so` (built from `cov/gbcov7.c`, `gcc -O2 -shared -fPIC`), `cov/link_lib.py`, the ROM and the saves; regenerate everything with `python3 tools/gen_logs.py OUTDIR` from the `cov/linksniff/` layout of the package.
 
 Limits: a BGB-to-BGB exchange (two BGB instances joined with `-listen` / `-connect`, both ROMs; README §16.6, `tcrf_check/assets/bgb/results/link_run1.txt`, `link_intl_run1.txt`, `link_counters.txt`) gives the same SRAM result as the emulator; BGB was not made to log the bytes and real hardware was not tried, so the byte values and order follow from the ROM and the byte *timing* is still the emulator's. On screen the exchange is LINK > TRANSFER > SEND / RECEIVE (Japanese つうしん > こうかん > あげる / もらう), the end screens read sent / received + GOOD (あげました / もらいました + よろしい).

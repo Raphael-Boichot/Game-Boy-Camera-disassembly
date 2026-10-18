@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g, R
 import numpy as np
 from PIL import Image
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S, ctypes
 which, out = sys.argv[1], sys.argv[2]; os.makedirs(out, exist_ok=True)
 C = lib.Corpus('unlock_runs/f1_organic/corpus.jsonl'); i = C.best((0xA, 1)); P = C.path(i); sp = dict(C.E[P[0]]['spec'])

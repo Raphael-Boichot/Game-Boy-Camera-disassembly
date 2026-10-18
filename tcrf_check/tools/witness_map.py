@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Code that the v8 coverage run never executed (class N) but a later targeted run did: writes assets/witness_jp.csv.
-usage: witness_map.py OUT.csv [--map coverage/results/report_v8/rom_map.csv] [--rom pocketcamera_jp.gb]
+usage: witness_map.py OUT.csv [--map coverage/v8/report_v8/rom_map.csv] [--rom pocketcamera_jp.gb]
 Witnesses (all outside the v8 merge):
   sgb      BGB with SystemMode=2 (Super Game Boy): the 50 block heads of the SGB sender 00:1D38-1EA0 (tcrf_check/assets/bgb_retrace/trace_report.json, "sgb_only_heads"; README 17.7)
   apu      BGB, music-editor corpus: the 6 heads my core never executed because it does not emulate NR52 / NR12 ("contradictions"; README 17.7)
@@ -54,7 +54,7 @@ a = sys.argv[1:]
 def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
-MAP = opt('--map', os.path.join(REPO, 'coverage', 'results', 'report_v8', 'rom_map.csv')); ROM = opt('--rom', 'pocketcamera_jp.gb'); OUT = a[0]
+MAP = opt('--map', os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv')); ROM = opt('--rom', 'pocketcamera_jp.gb'); OUT = a[0]
 rom = open(ROM, 'rb').read(); trace = json.load(open(os.path.join(REPO, 'wram', 'trace_jp_v3.json')))
 heads, members, code = B.blocks(rom, trace)
 N = 1 << 20

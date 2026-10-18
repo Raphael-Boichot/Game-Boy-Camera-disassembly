@@ -8,14 +8,16 @@ A purpose-built SM83 core plus the scripts that drove it over the Pocket Camera 
 | folder / file | content |
 |---|---|
 | `src/gbcov.c`, `src/gbcov.py`, `src/paths.py` | the core (C, ~460 lines), its `ctypes` wrapper, default paths (override with `GBCAM_ROM`, `GBCAM_TRACE`, `GBCAM_ROOTS`, `GBCAM_SYM`, `GBCAM_SAVES`) |
+| `src/gbcov8.c` | the same core with a link-cable partner interface instead of the printer stand-in (`gb_link_enable`, `gb_run_link`, `gb_link_out`, `gb_link_sc`, `gb_link_sb`, `gb_link_set_rx`, `gb_link_deliver`): two instances driven by a host script exchange serial bytes; it produced the link runs of README §14 and §15.1 (the host script is not kept) |
 | `build.sh` | builds the shared library (Linux / macOS `cc`; Windows MinGW `gcc`, see the comment in the script) |
 | `tools/` | 19 scripts: `coverage_run.py` (fuzzer), `sweep_auto.py`, `sweep_vars.py`, `settle_runs.py`, `long_runs.py`, `damaged_saves.py`, `make_hotspot_saves.py`, `replay_corpus.py`, `merge_states.py`, `coverage_report.py`, `rom_map.py`, `d1_map.py`, `gating_branches.py`, `state_graph.py`, `forced_legit.py`, `unexec_by_symbol.py`, `validate_calib.py`, `newcov.py`, `gbdis.py` |
 | `final_merge.sh` | merge of pass folders + every report in one go |
-| `saves/` | the 14 camera saves used as seeds; `saves_hotspot/`: the 9 saves with hotspot bytes (`make_hotspot_saves.py`) |
+| `saves/` | the 14 camera saves used as seeds (the 9 saves with hotspot bytes are written by `tools/make_hotspot_saves.py`) |
 | `results/passes/*` | per pass: `cov.npz` (coverage), `stats.json`, `log.txt` |
 | `results/corpus/*.jsonl.gz` | replayable key-sequence / poke entries (unzip a file to `corpus.jsonl` in its pass folder to resume or replay) |
-| `results/merged_state/` | merged coverage of all passes |
-| `results/report_v6/` | all tables: `coverage_report.md`, `roots_status.csv`, `rom_map*.csv/.md`, `data_bank_map.md/.csv`, `data_extents.csv`, `bank_callsites.csv`, `gating_*`, `unexec_components*.csv`, `state_graph.md`, `forced_legit.md`, `unexecuted_traced_runs.csv`, `merged_cov.npz` |
+| `results/merged_state/` | merged coverage of passes 1-9 |
+| `results/report_v6/` | all tables of the merge of passes 1-9 (README §13): `coverage_report.md`, `roots_status.csv`, `rom_map*.csv/.md`, `data_bank_map.md/.csv`, `data_extents.csv`, `bank_callsites.csv`, `gating_*`, `unexec_components*.csv`, `state_graph.md`, `forced_legit.md`, `unexecuted_traced_runs.csv`, `merged_cov.npz` |
+| `v8/` | the final merge (README §15.1): `merged_v8/` (merged coverage, corpus), `report_v8/` (the same tables as `report_v6/`; 57,582 of 60,449 traced instructions executed), `unlock_fuzz/` and `unlock_replay/` (runs from the unlocking saves, with `stats.json`) |
 | `d1sheets/` | rendered 2bpp tile sheets of the 14 unreferenced data banks (and two montages) |
 
 ## Quick start

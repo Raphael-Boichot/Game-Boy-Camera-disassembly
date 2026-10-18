@@ -2761,7 +2761,7 @@ bank,addr,name,conf,note,source
 08,4583,Mode1C_ToggleArrowPosTbl,I,,hand+auto
 08,4587,Mode1C_DrawToggleArrow_Tbl4587,I,"auto: 6 bytes, bytes; referenced by Mode1C_DrawToggleArrow",auto
 08,458D,Mode1C_State07_Leave,C,A -> print job (state 8); B -> back,hand+auto
-08,45E0,Mode1C_State08_PrintJob,C,builds the print job and sends it (README 2.12),hand+auto
+08,45E0,Mode1C_State08_PrintJob,C,builds the print job and sends it,hand+auto
 08,477F,Mode1C_State09_FadeToBorderPicker,C,,hand+auto
 08,4798,Mode1C_State0A_BorderPicker,C,far call 08:4DF2,hand+auto
 08,47A3,Mode1C_State0B_AfterBorder,C,far 02:48F7; then state 2 again,hand+auto
@@ -2843,7 +2843,7 @@ bank,addr,name,conf,note,source
 08,5481,WildFrame_LoadForOptionScreen,I,far: called from 08:4847,hand+auto
 08,54B8,Wild_VramCopyAdvance,I,,hand+auto
 08,54C6,WildFrame_PageSrcTbl,C,"3-byte {lo;hi;bank} per page: $4000 bank $31 ... | only the first 24 bytes (8 x {lo,hi,bank}: 31:4000, 31:5800, 31:7000, 32:4800, 32:6000, 32:7800, 33:5000, 33:6800) are the table; what follows is WildFrame_PageData_54DE",hand+auto
-08,54DE,WildFrame_PageData_54DE,?,"5,472 bytes between the 8-page pointer table and Mode19_TitleScreens: lists of short records such as 9A 22 01 A9 00 / 9A 23 01 AA 00 (54DE), 01 07 01 08 01 09 ... (5833), 03 90 00 91 00 92 ... (5A59), 7D 02 7E 02 7F 02 00 40 00 40 ... (6244), DF 11 CF 11 BF 11 ... (6A44); five auto labels (5833, 5A59, 6244, 6259, 6A44) that cut it were `ld bc` sprite positions of WildFramePicker_DrawPageNumber / BorderPicker_DrawNumber and were removed; the bytes are read by the printer packet routine in the replay coverage (17E8) and the record format is not decoded: the page map / tile lists of the wild-frame pages (?)",hand
+08,54DE,WildFrame_PageData_54DE,?,"7,520 bytes ($54DE-$723D) between the 8-page pointer table and Mode19_TitleScreens: lists of short records such as 9A 22 01 A9 00 / 9A 23 01 AA 00 (54DE), 01 07 01 08 01 09 ... (5833), 03 90 00 91 00 92 ... (5A59), 7D 02 7E 02 7F 02 00 40 00 40 ... (6244), DF 11 CF 11 BF 11 ... (6A44); five auto labels (5833, 5A59, 6244, 6259, 6A44) that cut it were `ld bc` sprite positions of WildFramePicker_DrawPageNumber / BorderPicker_DrawNumber and were removed; the bytes are read by the printer packet routine in the replay coverage (17E8) and the record format is not decoded: the page map / tile lists of the wild-frame pages (?)",hand
 08,723E,Mode19_TitleScreens,C,mode 19: copyright; title scene,hand+auto
 08,7245,Mode19_StateTable,C,5 states,hand+auto
 08,724F,Mode19_State00_CopyrightScreens,C,2nd copyright screen if the CoroCoro tag matches,hand+auto

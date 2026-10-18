@@ -22,7 +22,7 @@ REPO = os.environ.get('REPO', '/home/claude/w/clone/Game-Boy-Camera-disassembly'
 rom = os.path.join(ROOT, 'pocketcamera_jp.gb'); romb = open(rom, 'rb').read()
 heads, members, code = B.blocks(romb, json.load(open(os.path.join(REPO, 'wram', 'trace_jp_v3.json'))))
 N = 1 << 20; cls = np.zeros(N, np.uint8)
-for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'results', 'report_v8', 'rom_map.csv'))):
+for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))):
     cls[B.flat(int(r['bank'], 16), int(r['start'], 16)):][:int(r['length'])] = ord(r['class'])
 nheads = ['%02X:%04X' % h for h in sorted(heads) if h[0] in (9, 0x1F) and cls[B.flat(*h)] == ord('N')]            # bank 9 = the mode, bank 1F = the sound engine (the handler of request $11, 1F:4EBC)
 # corpus path to entry 649

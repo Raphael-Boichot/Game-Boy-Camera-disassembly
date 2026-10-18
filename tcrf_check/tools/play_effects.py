@@ -8,6 +8,7 @@ Writes OUTFILE (text)."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 which, sf2f, ballf, outf = sys.argv[1:5]
 C = lib.Corpus('unlock_runs/f1_organic/corpus.jsonl'); i = C.best((0xA, 1)); P = C.path(i); sp = dict(C.E[P[0]]['spec'])

@@ -4,7 +4,7 @@
 Unlock conditions (README section 3 / 10): album B counters (bank2 $4D05), CoroCoro flag D582 (bank 8 $72E0), Run!Run!Run! (mode $21), stamp category 3.
 Usage: make_unlock_saves.py SAVDIR OUTDIR"""
 import sys, os, glob
-sys.path.insert(0, '/home/claude/gbcam_jp/tools')
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 src, out = sys.argv[1], sys.argv[2]; os.makedirs(out, exist_ok=True)
 for f in sorted(glob.glob(os.path.join(src, '*.sav'))):

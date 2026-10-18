@@ -20,6 +20,7 @@ def stamps(lr, pages):         # stamp tool (11:04) -> Start = chooser (11:03) -
     seq += [K('Right', 4, 24)] * 5 + [K('Down', 4, 24)] * 2 + [K('Left', 4, 24)] + [K('Up', 3, 12)] * 25 + [K('Left', 3, 12)] * 4 + [K('Down', 3, 24)] * pages
     return seq
 def make_eff_save(k, jump=1, X=8, Y=7):          # every used photo slot gets hot spot 0 at (X,Y) with effect k and jump target (raw slot index) -> the transition to another photo
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
     import sram_analyze as S
     b = bytearray(open(SAV, 'rb').read()); used = [i for i in range(30) if b[0x11B2 + i] < 30]
     for sl in used:

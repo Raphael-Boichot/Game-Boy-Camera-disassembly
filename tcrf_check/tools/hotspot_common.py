@@ -4,6 +4,7 @@ usage: hotspot_filmstrip.py OUT.png [FRAMES ...]"""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g, R
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 from PIL import Image, ImageDraw
 SRC = os.path.join(lib.ROOT, 'saves_unl', 'unl_CE10238211.sav')

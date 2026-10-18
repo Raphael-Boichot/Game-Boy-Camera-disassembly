@@ -3,7 +3,7 @@
 
 usage: sgb_border_check.py ROM [--map ROM_MAP.csv] [--capture PNG [--crop X,Y,W,H]] [--sheet PNG] [--out PNG]
   ROM       pocketcamera_jp.gb or roms/gbcam_usa_eu.gb (same packet layout, same bank $0B addresses; the sender code sits at other 00: addresses)
-  --map     coverage/results/report_v8/rom_map.csv (JP only): counts the byte classes inside every transfer block
+  --map     coverage/v8/report_v8/rom_map.csv (JP only): counts the byte classes inside every transfer block
   --capture a BGB screenshot of a Super Game Boy run (SystemMode=2, no -hf, Xvfb + `import -window root`); --crop X,Y,W,H cuts the
             256x224 border window out of a larger screenshot (a 512x448 crop is scaled down by 2); the border pixels are compared with the rebuilt ones
   --sheet   a community picture (Spriters Resource "Super Game Boy Borders"): searched for the rebuilt border at every offset

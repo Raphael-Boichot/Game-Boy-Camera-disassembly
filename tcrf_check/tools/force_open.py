@@ -12,6 +12,7 @@ CORE = os.environ.get('GBCAM_CORE')        # the printer experiments need the co
 if CORE: sys.path.insert(0, CORE); import gbcov      # imported first so that lib.py finds this core (printer_status.py does the same)
 import lib; from lib import g
 import blocks as B
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))
 import sram_analyze as S
 CORPUS = 'unlock_runs/f1_organic/corpus.jsonl'
 EXPS = {}
