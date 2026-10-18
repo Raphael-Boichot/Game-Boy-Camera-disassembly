@@ -6,15 +6,16 @@ becomes `call $3600` and a hook in the bank-0 padding at $3600 calls it, counts 
 ($DD60 sfx1, $DD70 sfx3, $DD78 sfx4 = what the request helpers 00:2A4B-2A88 do).  BGB records its audio (WavFileOut=1, 44.1 kHz stereo) and logs every write of the mailbox and of NRx4 (TOTALCLKS).
 The first NRx4 write with bit 7 after the first request is matched with the first audible sample to line the clock and the WAV up; each clip runs from the request to the next request
 (trimmed after the last audible sample, at most PERIOD frames) and is written as a mono MP3.
-usage: sound_clips.py CHANNEL OUTDIR [ID ID ...] [--period PASSES] [--maxlen SECONDS] [--rom ROM] [--entry N]     (PERIOD = main-loop passes between two requests, about 1.77 frames each)
-  CHANNEL sfx1 | sfx3 | sfx4     (ids in hex; default: every id found in disasm/sym_names_jp.csv handler names of that channel)
-Output: OUTDIR/<channel>_<id>.mp3, OUTDIR/<channel>.json (request clocks, offset, clip lengths), the raw WAV.
+usage: sound_clips.py CHANNEL OUTDIR [ID ID ...] [--period PASSES] [--maxlen SECONDS] [--rom ROM] [--entry N] [--apu]     (PERIOD = main-loop passes between two requests, about 1.77 frames each, 1..65535)
+  CHANNEL sfx1 | sfx3 | sfx4 | music     (ids in hex; default for the effects: every id found in disasm/sym_names_jp.csv handler names of that channel; music needs the ids)
+  --apu    also log every write of the sound registers NR10-NR52 and of the wave RAM (FF10-FF3F) with its clock; the writes between a request and the next one go into the json (`apu`: [seconds after the request, register, value])
+Output: OUTDIR/<channel>_<id>.mp3, OUTDIR/<channel>.json (request clocks, offset, clip lengths, with --apu the register writes), the raw WAV.
 Needs BGB under wine (README gotchas), rgbasm / rgblink (/home/claude/tc/rgbds), ffmpeg.  The audio is what BGB's APU produced: nobody listened to it here."""
 import sys, os, re, json, glob, subprocess, tempfile, shutil, wave, csv
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import numpy as np
 REPO = os.path.dirname(os.path.dirname(HERE))
-MAILBOX = {'sfx1': 0xDD60, 'sfx3': 0xDD70, 'sfx4': 0xDD78}
+MAILBOX = {'sfx1': 0xDD60, 'sfx3': 0xDD70, 'sfx4': 0xDD78, 'music': 0xDD68}
 CH = {'sfx1': '1', 'sfx3': '3', 'sfx4': '4'}
 CLK = 2097152.0; FRAME = 35112; PASS_FRAMES = 1.9     # %TOTALCLKS% of BGB counts 2,097,152 per second (35,112 per frame: half of the 4.19 MHz clock), measured on the 3,600 frame-by-frame mailbox writes
 args = sys.argv[1:]
@@ -22,10 +23,13 @@ def opt(name, default=None):
     if name in args:
         i = args.index(name); v = args[i + 1]; del args[i:i + 2]; return v
     return default
+APU = '--apu' in args
+if APU: args.remove('--apu')
 period = int(opt('--period', '120')); maxlen = float(opt('--maxlen', '4.0')); rom_path = opt('--rom', '/home/claude/gbcam_jp/pocketcamera_jp.gb'); entry = int(opt('--entry', '0'))
-assert 1 <= period <= 255, 'the pass counter of the hook is one byte'
+assert 1 <= period <= 0xFFFF, 'the pass counter of the hook is two bytes'
 chan, out = args[0], args[1]; ids = [int(x, 16) for x in args[2:]]
 if not ids:
+    assert chan in CH, 'the music channel needs its ids on the command line'
     s = set()
     for r in csv.DictReader(open(REPO + '/disasm/sym_names_jp.csv', encoding='utf-8')):
         m = re.match(r'Sfx%s_(?:Init|Step)_([0-9A-F]{2}(?:_[0-9A-F]{2})*)' % CH[chan], r['name'])
@@ -36,7 +40,8 @@ os.makedirs(out, exist_ok=True)
 def build_rom():
     rom = bytearray(open(rom_path, 'rb').read())
     tbl = [0, 0] + ids + [0xFF]
-    asm = '\n'.join(['SECTION "hook", ROM0[$3600]', 'Hook:', '  call $0A82', '  ld a,[$DE00]', '  inc a', '  ld [$DE00],a', '  cp %d' % period, '  ret c', '  xor a', '  ld [$DE00],a',
+    asm = '\n'.join(['SECTION "hook", ROM0[$3600]', 'Hook:', '  call $0A82', '  ld a,[$DE00]', '  inc a', '  ld [$DE00],a', '  jr nz,.c', '  ld a,[$DE02]', '  inc a', '  ld [$DE02],a', '.c:', '  ld a,[$DE02]', '  cp %d' % (period >> 8), '  ret c', '  jr nz,.f',
+                     '  ld a,[$DE00]', '  cp %d' % (period & 255), '  ret c', '.f:', '  xor a', '  ld [$DE00],a', '  ld [$DE02],a',          # 16-bit pass counter: $DE00 low, $DE02 high ($DE01 = index in the table)
                      '  ld a,[$DE01]', '  and a', '  jr nz,.n', '  ld a,$FF', '  ld [$DD68],a', '  xor a', '.n:', '  ld e,a', '  inc a', '  ld [$DE01],a', '  ld d,0',     # first pass: request $FF in the music mailbox $DD68 (reset, README section 2.9) so that the menu music stops and nothing else sounds
                      '  ld hl,$3680', '  add hl,de', '  ld a,[hl]', '  cp $FF', '  ret z', '  and a', '  ret z',
                      '  ld [$%04X],a' % MAILBOX[chan], '  ret', 'SECTION "tbl", ROM0[$3680]', '  db ' + ','.join('$%02X' % x for x in tbl)]) + '\n'
@@ -69,11 +74,20 @@ if os.path.exists(log): os.remove(log)
 pre = os.path.join(out, chan + '_bgb')
 for f in glob.glob(pre + '*.wav'): os.remove(f)
 wps = ['%04X//w/REQ %%VALUE%% %%TOTALCLKS%%' % MAILBOX[chan]] + ['%s//w/TRIG %s %%VALUE%% %%TOTALCLKS%%' % (a, n) for a, n in (('FF14', 1), ('FF19', 2), ('FF1E', 3), ('FF23', 4))]
+APU_REGS = [0x10, 0x11, 0x12, 0x13, 0x14, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26]
+if APU:       # one watchpoint per register (a second one on the same address would not be trusted); the NRx4 triggers are read from these lines
+    wps = wps[:1] + ['FF%02X//w/APU %02X %%VALUE%% %%TOTALCLKS%%' % (r, r) for r in APU_REGS] + ['FF30-FF3F//w/APUW 00 %VALUE% %TOTALCLKS%']
 extra = ['-setting', 'DebugMsgFile=1', '-wp', ','.join(wps), '-setting', 'WavFileOut=1', '-setting', 'RecordPrefix=' + pre]
 frames = int((len(ids) + 3) * period * PASS_FRAMES) + 240     # the main loop of the main menu takes about 1.77 frames per pass (measured: 150 passes = 266 frames)
 r = bgb_run.run(rom, sav, os.path.join(out, chan + '_run'), [], combo=0, free=sp['free'] + 3, extra=extra, tail=frames, timeout=1500)
-reqs = []; trig = []
+reqs = []; trig = []; apu = []
 for l in open(log, errors='replace'):
+    m = re.match(r'\s*APUW? ([0-9A-Fa-f]{2}) ([0-9A-Fa-f]+) ([0-9A-Fa-f]+)', l)
+    if m:
+        reg = int(m.group(1), 16); val = int(m.group(2), 16); clk = int(m.group(3), 16)
+        apu.append((clk, 'W' if l.lstrip().startswith('APUW') else reg, val))
+        if reg in (0x14, 0x19, 0x1E, 0x23) and val & 0x80 and not l.lstrip().startswith('APUW'): trig.append(({0x14: 1, 0x19: 2, 0x1E: 3, 0x23: 4}[reg], clk))
+        continue
     m = re.match(r'\s*REQ ([0-9A-Fa-f]+) ([0-9A-Fa-f]+)', l)
     if m and int(m.group(1), 16): reqs.append((int(m.group(1), 16), int(m.group(2), 16)))
     m = re.match(r'\s*TRIG (\d) ([0-9A-Fa-f]+) ([0-9A-Fa-f]+)', l)
@@ -118,6 +132,9 @@ for k, (val, clks) in enumerate(reqs):
         mp3 = os.path.join(out, '%s_%02X.mp3' % (chan, val))
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-ac', '1', '-ar', '22050', '-af', 'afade=t=out:st=%.3f:d=0.08' % max(0.0, b - a - 0.08), '-c:a', 'libmp3lame', '-b:a', '32k', mp3], check=True); os.remove(tmp)
         row.update(mp3=mp3, bytes=os.path.getsize(mp3))
+    if APU:
+        t1 = reqs[k + 1][1] if k + 1 < len(reqs) else clks + int((maxlen + 0.5) * CLK)
+        row['apu'] = [[round((c - clks) / CLK, 4), ('%02X' % g) if g != 'W' else 'W', v] for c, g, v in apu if clks <= c < t1]
     info['requests'].append(row)
 json.dump(info, open(os.path.join(out, chan + '.json'), 'w'), indent=1)
 for q in info['requests']:
