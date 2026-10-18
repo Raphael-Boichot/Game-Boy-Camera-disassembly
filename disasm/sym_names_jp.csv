@@ -120,7 +120,7 @@ bank,addr,name,conf,note,source
 00,16A6,Sf2_BossVariantToGroup,C,boss variant -> graphics group (variant 2 depends on gameface_present),hand+auto
 00,16C0,Sf2_BossGroupTable,C,4 bytes,hand+auto
 00,16C4,Gfx_BuildCellMask,C,56 cells of 16 bytes OR-ed to one byte each (tile non-empty mask),hand+auto
-00,16F4,Snd_PlayTagDigits,I,splits tag_image_check into 4 digits and plays sound $10 (spoken digits),hand+auto
+00,16F4,Snd_PlayTagDigits,C,"splits the slot's image checksum (F34 = sum, F35 = xor of the 3,584 photo bytes, copied to $DA8F/$DA90) into four nibbles $DD03-$DD06 and requests sfx1 $10 = the P.VOICE; BGB 2026-10-14: the four nibbles equal F34/F35 for the 21 copied stock pictures in the slide show (P.VOICE option) and for a photo just shot and saved (README 16.27)",hand+auto
 00,1720,ScrollEngine_CopyRowRecords,C,"A = bank, HL = source, DE = row buffer: copies 32-byte row records (1 + 3 + 28 bytes) until 18 rows are copied or a record pair closes (first byte non-zero toggles bit 7 of C); returns the row count in B; only caller 09:403E ScrollEngine_Sub1_FetchRow (credits text scroller, bank $29 script); was Prn_CopyBandRecords",hand
 00,176F,Prn_SerialStep,C,one serial IRQ step of the printer packet state machine,hand+auto
 00,17AD,Prn_SendSyncByte,C,sends $88 $33,hand+auto
@@ -1312,7 +1312,7 @@ bank,addr,name,conf,note,source
 03,5FA0,Mode13_AnimationPlayer,C,plays the show,hand+auto
 03,5FA4,Mode13_StateTable,C,"9 states, rst $18 table of mode $13",hand+auto
 03,5FB6,Mode13_State00_Init,C,loads the player graphics (bank 17),hand+auto
-03,603F,Mode13_State01_MusicSelect,C,Select cycles the music (0..31),hand+auto
+03,603F,Mode13_State01_MusicSelect,C,"Select cycles the music (0..31); the list is 03:61FD, its n-th entry = BGM n (I: the jofamo article calls the 4th entry, song $13, 'BGM 04'); only the international ROM requests song $13 outside this screen and the hot-spot picker (RUN title, BGB, README 16.27)",hand+auto
 03,6089,Player_ShowMusicNumber,I,two digit tiles of the music number,hand+auto
 03,609E,Player_CopyDigitTile,I,copies a digit glyph from bank 17 to VRAM,hand+auto
 03,60B4,Mode13_State02_Start,C,B returns to the show menu (mode 0B); A shows the start banner and fades out,hand+auto
@@ -2650,7 +2650,7 @@ bank,addr,name,conf,note,source
 07,6D40,SlideHub_ActorLimitTbl,I,,hand+auto
 07,6D42,SlideHub_WalkActors_Tbl6D42,I,"auto: 2 bytes, bytes; referenced by SlideHub_WalkActors",auto
 07,6D44,Mode0D_State02_OptionsMenu,C,blinking arrows; Up/Down picks option row,hand+auto
-07,6DED,Mode0D_State03_OptionA,I,option A (D7D2): photo number shown on/off,hand+auto
+07,6DED,Mode0D_State03_OptionA,C,"option A ($D7D2): 0 = BGM (song $21), 1 = P.VOICE (music off; after each photo its four checksum digits are spoken, sfx1 $10); the earlier note 'photo number shown on/off' was wrong (README 16.27)",hand+auto
 07,6E7D,SlideOptA_ReadKeys,I,Left/Right toggle D674,hand+auto
 07,6E99,SlideOptA_DrawArrow,C,"draws the arrow of option A: position = SlideOptA_ArrowPosTbl[$D674] ({y,x} in C,B); animation phase $D50F (2 = finished, nothing drawn), tick $D51F: meta and duration come from SlideOptA_DrawArrow_Tbl6EDA[phase]; the phase advances when the tick equals the duration and the tick counts only while the phase is not 0 (C)",hand+auto
 07,6ED6,SlideOptA_ArrowPosTbl,I,,hand+auto
@@ -2671,7 +2671,7 @@ bank,addr,name,conf,note,source
 07,711C,Mode0D_State09_NoPhotosMessage,C,result_msg_id := 5,hand+auto
 07,712A,Mode0D_State0A_ResultScreen,C,far call 09:7290,hand+auto
 07,7135,Mode0D_State0B_Restart,C,jp state 0,hand+auto
-07,7138,SlidePlay_ShowNext,C,random (Rng_Scaled) or next/previous; far calls 02:5110 and 02:4E5F,hand+auto
+07,7138,SlidePlay_ShowNext,C,random (Rng_Scaled) or next/previous; far calls 02:5110 and 02:4E5F; with the P.VOICE option ($D7D2 = 1) also Snd_PlayTagDigits (07:7169-717E),hand+auto
 07,717F,SlidePlay_ReadKeys,C,Left/Right = direction; Up/Down = interval 1..$FA,hand+auto
 07,71AF,Mode00_MainMenu,C,mode 0: main menu (two pages: SHOOT/VIEW/Arcade; Doodle/LINK/Special/Edit),hand+auto
 07,71B3,Mode00_StateTable,C,9 states,hand+auto
@@ -4498,7 +4498,7 @@ bank,addr,name,conf,note,source
 1F,6FF4,Song12_Pat6FF4,C,note pattern ($00 ends it),hand+auto
 1F,7017,Song12_Pat7017,C,note pattern ($00 ends it),hand+auto
 1F,701E,Song12_Pat701E,C,note pattern ($00 ends it),hand+auto
-1F,7041,Song13_Hdr,C,header of song id 13,hand+auto
+1F,7041,Song13_Hdr,C,"header of song id 13 = 4th entry of the animation list 03:61FD (BGM 04 in the jofamo article); the Japanese ROM requests it only from the animation / hot-spot pickers, the international RUN! RUN! RUN! title does ($DD68 = $13; the Japanese one asks for $3C; BGB, README 16.27)",hand+auto
 1F,704C,Song23_AnimTools_Hdr,C,header of song id 23,hand+auto
 1F,7057,Song23_AnimTools_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,705D,Song23_AnimTools_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto

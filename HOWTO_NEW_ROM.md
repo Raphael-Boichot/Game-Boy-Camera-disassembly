@@ -17,7 +17,7 @@ Say which level a claim is about. The Pocket Camera status is in README §1.3.
 | L3 | Every routine and asset has a name with an evidence tag; the doubts are listed | `sym_names_*.csv`, `sym_unconclusive_*.csv` |
 | L4 | RAM variables and constants applied in the source (`wMode`, `hOamOffset`, `MODE_*`), no raw `[$D5CE]` | `grep` for raw RAM operands is empty |
 | L5 | A source tree a person can build and edit: split files, assets as `INCBIN` / PNG / text sources, a `make` that checks the md5 | tree in git, CI check |
-| L6 | Understanding: charset / text table, sibling ROMs sharing one source, owner-validated names | owner answers file |
+| L6 | Understanding: charset / text table (the Pocket Camera's name / comment table came from the font bank by rendering it and checking BGB screenshots pixel for pixel: README 16.27), sibling ROMs sharing one source, owner-validated names | owner answers file |
 
 Do L0-L2 first (a few passes), but **start L4 and L5 as soon as L2 exists**: this project left them to the end and they are still open.
 

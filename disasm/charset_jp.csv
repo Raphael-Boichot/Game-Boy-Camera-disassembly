@@ -1,0 +1,246 @@
+code,char,class,glyph_rom,in_album_b_comments,in_album_b_names,evidence
+01,あ,hiragana,2A:4000,B05 B15 B16 B17 B18 B20 B21,,C
+02,い,hiragana,2A:4020,B05 B07 B08 B13 B16 B18,B08 B17,C
+03,う,hiragana,2A:4040,B01 B05 B08 B12 B17 B18 B20,B04 B08 B16,C
+04,え,hiragana,2A:4060,B11 B15 B16,B21,C
+05,お,hiragana,2A:4080,B01 B06 B10,,C
+06,か,hiragana,2A:40A0,B04 B13 B18 B21,B19,C
+07,き,hiragana,2A:40C0,B01 B05 B06 B07 B11 B15 B18 B21,B03 B04,C
+08,く,hiragana,2A:40E0,B09 B10 B11 B13 B15 B16 B17 B18 B19 B21,B01,C
+09,け,hiragana,2A:4100,B06 B17,B16 B19,C
+0A,こ,hiragana,2A:4120,B11 B18,B03 B13 B19,C
+0B,さ,hiragana,2A:4140,B14 B16,,C
+0C,し,hiragana,2A:4160,B01 B05 B06 B10 B13 B15 B17 B18 B19 B21,B04,C
+0D,す,hiragana,2A:4180,B01 B06 B10 B16 B21,,C
+0E,せ,hiragana,2A:41A0,B03 B08,,C
+0F,そ,hiragana,2A:41C0,B15 B18,B18 B19,C
+10,た,hiragana,2A:41E0,B02 B05 B11 B15 B16 B21,B04 B16 B17 B19,C
+11,ち,hiragana,2A:4200,B05 B16,B08 B17,C
+12,つ,hiragana,2A:4220,B04 B09 B10 B15 B17,,C
+13,て,hiragana,2A:4240,B01 B03 B04 B06 B07 B13 B16 B17 B21,B04,C
+14,と,hiragana,2A:4260,B01 B02 B06 B10 B13 B18,,C
+15,な,hiragana,2A:4280,B01 B08 B10 B13 B16 B18 B21,,C
+16,に,hiragana,2A:42A0,B01 B04 B05 B07 B14 B15,,C
+17,ぬ,hiragana,2A:42C0,,,I
+18,ね,hiragana,2A:42E0,B04 B07 B11 B13,,C
+19,の,hiragana,2A:4300,B05 B09 B15 B16 B18 B21,B03 B13,C
+1A,は,hiragana,2A:4320,B02 B05 B07,,C
+1B,ひ,hiragana,2A:4340,B02 B14 B15,B19,C
+1C,ふ,hiragana,2A:4360,B11 B16 B20,B13,C
+1D,へ,hiragana,2A:4380,,,I
+1E,ほ,hiragana,2A:43A0,,B19,I
+1F,ま,hiragana,2A:43C0,B16 B21,,C
+20,み,hiragana,2A:43E0,B01 B14 B15 B16 B17,,C
+21,む,hiragana,2A:4400,,B13,I
+22,め,hiragana,2A:4420,B08 B09 B21,B17,C
+23,も,hiragana,2A:4440,B07 B18 B19,,C
+24,や,hiragana,2A:4460,B17,,C
+25,ゆ,hiragana,2A:4480,,,I
+26,よ,hiragana,2A:44A0,B01 B05 B07 B13 B14 B17 B18 B19,B03 B17,C
+27,、,punctuation,2A:44C0,,,I
+28,。,punctuation,2A:44E0,B11 B19,,C
+29,ら,hiragana,2A:4500,B10 B14 B15,B13,C
+2A,り,hiragana,2A:4520,B14 B18,B03,C
+2B,る,hiragana,2A:4540,B06 B11 B16 B20,,C
+2C,れ,hiragana,2A:4560,B20,,C
+2D,ろ,hiragana,2A:4580,B19,B16,C
+2E,わ,hiragana,2A:45A0,,B19,I
+2F,を,hiragana,2A:45C0,B01 B02 B03 B06 B08 B10 B11 B13 B16 B17,,C
+30,ん,hiragana,2A:45E0,B02 B03 B09 B13 B20 B21,B01 B16 B18 B21,C
+31,〜,symbol,2A:4600,,,I
+32,♥,symbol,2A:4620,B13,,C
+33,が,hiragana voiced/small,2A:4640,B02 B07 B09 B10 B11 B15 B16 B20 B21,B03 B04 B18,C
+34,ぎ,hiragana voiced/small,2A:4660,B14,,C
+35,ぐ,hiragana voiced/small,2A:4680,,,I
+36,げ,hiragana voiced/small,2A:46A0,B12,,C
+37,ご,hiragana voiced/small,2A:46C0,,,I
+38,ざ,hiragana voiced/small,2A:46E0,B08,,C
+39,じ,hiragana voiced/small,2A:4700,B12,B04 B13,C
+3A,ず,hiragana voiced/small,2A:4720,,,I
+3B,ぜ,hiragana voiced/small,2A:4740,B21,,C
+3C,ぞ,hiragana voiced/small,2A:4760,,,I
+3D,だ,hiragana voiced/small,2A:4780,B03 B12 B14 B20,B17,C
+3E,ぢ,hiragana voiced/small,2A:47A0,,,I
+3F,づ,hiragana voiced/small,2A:47C0,B09 B10,,C
+40,で,hiragana voiced/small,2A:47E0,B03 B09 B11 B12 B16 B17 B21,,C
+41,ど,hiragana voiced/small,2A:4800,,B08,I
+42,ば,hiragana voiced/small,2A:4820,B02 B03 B06,,C
+43,び,hiragana voiced/small,2A:4840,B08 B18,,C
+44,ぶ,hiragana voiced/small,2A:4860,B15 B18,,C
+45,べ,hiragana voiced/small,2A:4880,,,I
+46,ぼ,hiragana voiced/small,2A:48A0,B13,,C
+47,ぱ,hiragana voiced/small,2A:48C0,B01 B13,,C
+48,ぴ,hiragana voiced/small,2A:48E0,,,I
+49,ぷ,hiragana voiced/small,2A:4900,,,I
+4A,ぺ,hiragana voiced/small,2A:4920,,,I
+4B,ぽ,hiragana voiced/small,2A:4940,,,I
+4C,っ,hiragana voiced/small,2A:4960,B01 B02 B04 B07 B13 B15 B17,,C
+4D,ゃ,hiragana voiced/small,2A:4980,B13,B17,C
+4E,ゅ,hiragana voiced/small,2A:49A0,,,I
+4F,ょ,hiragana voiced/small,2A:49C0,B05 B08 B12 B18,B04,C
+50,・,punctuation,2A:49E0,B02 B03 B09 B10 B15,,C
+51,ぁ,hiragana small,2A:4A00,,,I
+52,ぃ,hiragana small,2A:4A20,,,I
+53,ぅ,hiragana small,2A:4A40,,,I
+54,ぇ,hiragana small,2A:4A60,B11,,C
+55,ぉ,hiragana small,2A:4A80,,,I
+56,ア,katakana,2A:4AA0,B17,,C
+57,イ,katakana,2A:4AC0,,B12 B20,I
+58,ウ,katakana,2A:4AE0,,B05,I
+59,エ,katakana,2A:4B00,B20,B20,C
+5A,オ,katakana,2A:4B20,B19,B18 B20,C
+5B,カ,katakana,2A:4B40,,,I
+5C,キ,katakana,2A:4B60,B12,B05,C
+5D,ク,katakana,2A:4B80,B20,B02 B14 B20,C
+5E,ケ,katakana,2A:4BA0,B02 B13,,C
+5F,コ,katakana,2A:4BC0,,B05 B06,I
+60,サ,katakana,2A:4BE0,,,I
+61,シ,katakana,2A:4C00,B07 B19,B14,C
+62,ス,katakana,2A:4C20,B01 B02 B06 B12 B20,B02 B05 B08 B12,C
+63,セ,katakana,2A:4C40,,,I
+64,ソ,katakana,2A:4C60,,,I
+65,タ,katakana,2A:4C80,B01 B02 B06 B10 B11 B13 B19 B20,B02 B07 B08,C
+66,チ,katakana,2A:4CA0,B12,,C
+67,ツ,katakana,2A:4CC0,,,I
+68,テ,katakana,2A:4CE0,,B14,I
+69,ト,katakana,2A:4D00,B06 B07 B11 B20,B06 B20,C
+6A,ナ,katakana,2A:4D20,,,I
+6B,ニ,katakana,2A:4D40,B17 B20,B14,C
+6C,ヌ,katakana,2A:4D60,,,I
+6D,ネ,katakana,2A:4D80,,,I
+6E,ノ,katakana,2A:4DA0,B19,,C
+6F,ハ,katakana,2A:4DC0,,,I
+70,ヒ,katakana,2A:4DE0,,,I
+71,フ,katakana,2A:4E00,B21,B01 B08,C
+72,ヘ,katakana,2A:4E20,,,I
+73,ホ,katakana,2A:4E40,,,I
+74,マ,katakana,2A:4E60,B19,B18,C
+75,ミ,katakana,2A:4E80,,B02,I
+76,ム,katakana,2A:4EA0,,B15,I
+77,メ,katakana,2A:4EC0,B04 B17,B06,C
+78,モ,katakana,2A:4EE0,B02 B04 B09,B15,C
+79,ヤ,katakana,2A:4F00,,,I
+7A,ユ,katakana,2A:4F20,B20,,C
+7B,ヨ,katakana,2A:4F40,,,I
+7C,!,punctuation,2A:4F60,B08 B13 B17,,C
+7D,?,punctuation,2A:4F80,B11 B15,,C
+7E,ラ,katakana,2A:4FA0,,B02 B12 B20,I
+7F,リ,katakana,2A:4FC0,B06 B07 B11 B19 B21,B01 B06 B07 B18,C
+80,ル,katakana,2A:4FE0,B07,B15,C
+81,レ,katakana,2A:5000,B20,B20,C
+82,ロ,katakana,2A:5020,B20,B20,C
+83,ワ,katakana,2A:5040,B14 B19,,C
+84,ヲ,katakana,2A:5060,,,I
+85,ン,katakana,2A:5080,B01 B02 B06 B07 B10 B11 B12 B14 B21,B06 B07 B14 B20 B21,C
+86,ヴ,katakana,2A:50A0,,,I
+87, ,blank glyph,2A:50C0,,,I
+88,ガ,katakana voiced/small/long,2A:50E0,,B05 B21,I
+89,ギ,katakana voiced/small/long,2A:5100,,,I
+8A,グ,katakana voiced/small/long,2A:5120,B21,,C
+8B,ゲ,katakana voiced/small/long,2A:5140,B20,B15,C
+8C,ゴ,katakana voiced/small/long,2A:5160,,,I
+8D,ザ,katakana voiced/small/long,2A:5180,,,I
+8E,ジ,katakana voiced/small/long,2A:51A0,B12,B12,C
+8F,ズ,katakana voiced/small/long,2A:51C0,B19,,C
+90,ゼ,katakana voiced/small/long,2A:51E0,,,I
+91,ゾ,katakana voiced/small/long,2A:5200,,,I
+92,ダ,katakana voiced/small/long,2A:5220,,,I
+93,ヂ,katakana voiced/small/long,2A:5240,,,I
+94,ヅ,katakana voiced/small/long,2A:5260,,,I
+95,デ,katakana voiced/small/long,2A:5280,B11,B15,C
+96,ド,katakana voiced/small/long,2A:52A0,B09 B12,B12,C
+97,バ,katakana voiced/small/long,2A:52C0,,,I
+98,ビ,katakana voiced/small/long,2A:52E0,,,I
+99,ブ,katakana voiced/small/long,2A:5300,,B02,I
+9A,ベ,katakana voiced/small/long,2A:5320,,,I
+9B,ボ,katakana voiced/small/long,2A:5340,B01 B06 B10,B06,C
+9C,パ,katakana voiced/small/long,2A:5360,B19,,C
+9D,ピ,katakana voiced/small/long,2A:5380,B12,,C
+9E,プ,katakana voiced/small/long,2A:53A0,B01 B02 B06 B07 B11,B01 B06 B07,C
+9F,ペ,katakana voiced/small/long,2A:53C0,,,I
+A0,ポ,katakana voiced/small/long,2A:53E0,B02 B13,,C
+A1,ッ,katakana voiced/small/long,2A:5400,B20,B01 B02 B05 B08,C
+A2,ャ,katakana voiced/small/long,2A:5420,,B14,I
+A3,ュ,katakana voiced/small/long,2A:5440,,,I
+A4,ョ,katakana voiced/small/long,2A:5460,,B12,I
+A5,ー,katakana voiced/small/long,2A:5480,B06 B07 B09 B11 B12 B19 B20 B21,B02 B05 B06 B12 B15,C
+A6,ァ,katakana voiced/small/long,2A:54A0,,,I
+A7,ィ,katakana voiced/small/long,2A:54C0,B21,,C
+A8,ゥ,katakana voiced/small/long,2A:54E0,,,I
+A9,ェ,katakana voiced/small/long,2A:5500,B12,,C
+AA,ォ,katakana voiced/small/long,2A:5520,,,I
+AB,A,latin upper / punctuation,2A:5540,B01 B02 B10,B09 B10 B11,C
+AC,B,latin upper / punctuation,2A:5560,B02,,C
+AD,C,latin upper / punctuation,2A:5580,,,I
+AE,D,latin upper / punctuation,2A:55A0,B09,B09 B10 B11 B14,C
+AF,E,latin upper / punctuation,2A:55C0,B03 B09 B14,,C
+B0,F,latin upper / punctuation,2A:55E0,B03,,C
+B1,G,latin upper / punctuation,2A:5600,,,I
+B2,H,latin upper / punctuation,2A:5620,,,I
+B3,I,latin upper / punctuation,2A:5640,B09,,C
+B4,J,latin upper / punctuation,2A:5660,,B09 B10 B11 B14,I
+B5,K,latin upper / punctuation,2A:5680,,,I
+B6,L,latin upper / punctuation,2A:56A0,B02,,C
+B7,M,latin upper / punctuation,2A:56C0,B14,,C
+B8,N,latin upper / punctuation,2A:56E0,B08 B09,,C
+B9,O,latin upper / punctuation,2A:5700,B09 B14,,C
+BA,P,latin upper / punctuation,2A:5720,B14,B09 B10 B11 B21,C
+BB,Q,latin upper / punctuation,2A:5740,,,I
+BC,R,latin upper / punctuation,2A:5760,B03 B08 B10,,C
+BD,S,latin upper / punctuation,2A:5780,B03 B09 B10 B14,B21,C
+BE,T,latin upper / punctuation,2A:57A0,B09 B10 B14,,C
+BF,U,latin upper / punctuation,2A:57C0,B08 B09,,C
+C0,V,latin upper / punctuation,2A:57E0,B03,,C
+C1,W,latin upper / punctuation,2A:5800,,,I
+C2,X,latin upper / punctuation,2A:5820,,,I
+C3,Y,latin upper / punctuation,2A:5840,,,I
+C4,Z,latin upper / punctuation,2A:5860,,,I
+C5,_,latin upper / punctuation,2A:5880,,,I
+C6,',latin upper / punctuation,2A:58A0,,,I
+C7,",",latin upper / punctuation,2A:58C0,,,I
+C8,.,latin upper / punctuation,2A:58E0,B03,,C
+C9,a,latin lower,2A:5900,,,I
+CA,b,latin lower,2A:5920,,,I
+CB,c,latin lower,2A:5940,,,I
+CC,d,latin lower,2A:5960,,,I
+CD,e,latin lower,2A:5980,,,I
+CE,f,latin lower,2A:59A0,,,I
+CF,g,latin lower,2A:59C0,,,I
+D0,h,latin lower,2A:59E0,,,I
+D1,i,latin lower,2A:5A00,,,I
+D2,j,latin lower,2A:5A20,,,I
+D3,k,latin lower,2A:5A40,,,I
+D4,l,latin lower,2A:5A60,,,I
+D5,m,latin lower,2A:5A80,,,I
+D6,n,latin lower,2A:5AA0,,,I
+D7,o,latin lower,2A:5AC0,,,I
+D8,p,latin lower,2A:5AE0,,,I
+D9,q,latin lower,2A:5B00,,,I
+DA,r,latin lower,2A:5B20,,,I
+DB,s,latin lower,2A:5B40,,,I
+DC,t,latin lower,2A:5B60,,,I
+DD,u,latin lower,2A:5B80,,,I
+DE,v,latin lower,2A:5BA0,,,I
+DF,w,latin lower,2A:5BC0,,,I
+E0,x,latin lower,2A:5BE0,,,I
+E1,y,latin lower,2A:5C00,,,I
+E2,z,latin lower,2A:5C20,,,I
+E3,[phone],icon,2A:5C40,,,I
+E4,[face1],icon,2A:5C60,,,I
+E5,[face2],icon,2A:5C80,,,I
+E6,-,symbol,2A:5CA0,,,I
+E7,0,digit / symbol,2A:5CC0,B03,B07 B21,C
+E8,1,digit / symbol,2A:5CE0,B09,B09,C
+E9,2,digit / symbol,2A:5D00,B03 B08,B10,C
+EA,3,digit / symbol,2A:5D20,,B11,I
+EB,4,digit / symbol,2A:5D40,,,I
+EC,5,digit / symbol,2A:5D60,,B07,I
+ED,6,digit / symbol,2A:5D80,,,I
+EE,7,digit / symbol,2A:5DA0,,,I
+EF,8,digit / symbol,2A:5DC0,,B07 B21,I
+F0,9,digit / symbol,2A:5DE0,,B21,I
+F1,/,digit / symbol,2A:5E00,,,I
+F2,:,digit / symbol,2A:5E20,,,I
+F3,~,digit / symbol,2A:5E40,,,I
+F4,"""",digit / symbol,2A:5E60,,,I
+F5,@,digit / symbol,2A:5E80,,,I
