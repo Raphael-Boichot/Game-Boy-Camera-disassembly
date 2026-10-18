@@ -545,7 +545,8 @@ bank,start,end,type,width,note
 0C,6560,6730,data,16,Gfx
 0C,6730,68D0,data,16,Gfx
 0C,68D0,6AB0,data,16,Gfx
-0C,6AB0,6C30,data,16,Gfx
+0C,6AB0,6C00,padding,,
+0C,6C00,6C30,data,16,Gfx
 0C,6C30,6F82,data,16,Gfx
 0C,6FA0,7230,data,16,Gfx
 0C,7800,7900,data,16,Gfx
@@ -1014,7 +1015,7 @@ bank,start,end,type,width,note
 22,52E0,5740,data,16,Gfx
 22,5740,5BA0,data,16,Gfx
 22,5BA0,5F40,data,16,Gfx
-22,5F40,6000,data,16,Gfx
+22,5F40,6000,data,32,Map
 22,6000,6340,data,32,Map
 22,6340,6740,data,32,Map
 22,6740,6810,data,16,Gfx
@@ -1025,13 +1026,13 @@ bank,start,end,type,width,note
 22,6B40,6DE0,data,32,Map
 22,6DE0,6F40,data,32,Map
 22,6F40,7340,data,16,Gfx
-22,7340,7440,data,16,Gfx
+22,7340,7440,data,32,Map
 22,7440,7740,data,32,Map
 22,7740,7B40,data,32,Map
 22,7B40,7F40,data,32,Map
 22,7F40,8000,data,32,Map
 23,4000,44C0,data,16,Gfx
-23,44C0,4500,data,16,Gfx
+23,44C0,4500,data,32,Map
 23,4500,48C0,data,32,Map
 23,48C0,49E0,data,32,Map
 23,49E0,4B00,data,32,Map
@@ -1069,7 +1070,7 @@ bank,start,end,type,width,note
 23,7DC0,7E80,data,32,Map
 23,7E80,8000,data,16,Data
 24,4000,4480,data,16,Gfx
-24,4480,4500,data,16,Gfx
+24,4480,4500,data,32,Map
 24,4500,46C0,data,32,Map
 24,46C0,47C0,data,32,Map
 24,47C0,4840,data,32,Map
@@ -1130,7 +1131,7 @@ bank,start,end,type,width,note
 25,4000,4480,data,16,Gfx
 25,4480,4500,data,16,Gfx
 25,4500,47C0,data,16,Gfx
-25,47C0,4980,data,16,Gfx
+25,47C0,4980,data,32,Map
 25,4980,4A80,data,32,Map
 25,4A80,4B00,data,32,Map
 25,4B00,4DC0,data,32,Map

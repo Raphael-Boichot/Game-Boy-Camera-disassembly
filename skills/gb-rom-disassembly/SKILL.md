@@ -19,7 +19,7 @@ Full version: `HOWTO_NEW_ROM.md` in the Game-Boy-Camera-disassembly repository (
 | L5 | committed, buildable, editable tree: split files, assets as INCBIN, md5 check in `make` | tree in git |
 | L6 | understanding: charset table, sibling ROMs, owner-validated names | owner answers file |
 
-Pocket Camera JP (measured 2026-10-14, README §1.3): L0-L2 done, L3 mostly (5,243 names: C 3,701 / I 1,534 / ? 8, 343 doubtful rows on 31,273 distinct bytes), L4 not done (0 RAM labels, 5,632 raw WRAM and 2,583 raw HRAM operand lines), L5 not done, L6 partial. Do L0-L2 first, but start L4 and L5 as soon as L2 exists: they were left to the end and are still open.
+Pocket Camera JP (measured 2026-10-14, README §1.3): L0-L2 done, L3 mostly (5,243 names: C 3,702 / I 1,536 / ? 5, 341 doubtful rows on 28,729 distinct bytes), L4 not done (0 RAM labels, 5,632 raw WRAM and 2,583 raw HRAM operand lines), L5 not done, L6 partial. Do L0-L2 first, but start L4 and L5 as soon as L2 exists: they were left to the end and are still open.
 
 ## Stages, in order
 
@@ -40,11 +40,12 @@ Pocket Camera JP (measured 2026-10-14, README §1.3): L0-L2 done, L3 mostly (5,2
 - A hex parser that expected upper case found nothing in the lower-case `.sym` and produced a false "nothing is displayed" claim: test a parser on a known label.
 - Never `pkill -f PATTERN` when PATTERN is in your own command line: kill by PID. Foreground calls over 120 s are killed.
 - L3 lessons (2026-10-14): asset names that embed a caller go stale when function labels are refined (115 of 5,334 did): rename them in a batch with a log; a run of 16+ equal bytes becomes `.padding` and hides the extent of the table or map around it; before calling a block unreferenced check the copy-site ranges AND the custom loaders (lists of `{src,bank,dst,len}` records, tables indexed by a value x16 / x32, glyph fonts indexed by char code); a far pointer whose bank sits in `C` (not `A`) or in a record is invisible to a scan for `ld a,BANK`; an auto label made by `ld hl,imm` with a far bank can split a real table (found once, `09:6000`); a hex comparison in awk reads `6E80` as a number (use Python); a "really unused" verdict can fall when a numeral or glyph table is found (one did).
+- Audit lessons (2026-10-18, none is a count): (1) a number quoted in 5-8 places (README, CLAUDE.md, this file, HOWTO) drifts: write a consistency checker as soon as a second copy exists (`tools/check_repo_consistency.py` in the repository): one regex per quoted figure compared with the file it comes from, `need=` so that a reworded sentence fails instead of passing silently, a diff of every generated file against a fresh run, the md5 round trip; test each new pattern on the OLD file and sentence before trusting it; (2) a `?` / `_Aux` / by-eye label is a hypothesis: 3 of 8 changed when re-derived by exact tile matching over the whole ROM and the sibling ROM, a loader scan (immediates with the bank, pointer tables, the copy-site list) and the display tracker (value-matched: look for duplicates of the tiles); (3) a tile map is a block of fixed-width rows (18 x 32 here, 12 hidden columns) in chains: check the neighbours before fixing a start, type it as a map, and remember that in the type CSV the last row wins; (4) a name that carries an address carries its own, a continuation is `_Part<addr>`; (5) a generator that overwrites a hand-kept paragraph, or an input list that is a frozen snapshot, needs that said in its docstring and in the README; (6) a seam search with a shuffled control proves only whole maps and lower halves.
 - Recompute every number before quoting it; regenerate derived tables with the tool. Corrections made in this project: a variable declared "never written" (only its reader was dead), a description of a branch flip written backwards, a count taken from the wrong column.
 
 ## Discipline
 
-Tag claims C / I / ?; never guess, say what was not checked. Keep the owner's answers in a CSV. Update README and checklist files together. One commit per batch: `git fetch origin`, `git merge-base --is-ancestor origin/main HEAD`, `git push origin <branch>:main`.
+Tag claims C / I / ?; never guess, say what was not checked. Run the repository's consistency checker (`tools/check_repo_consistency.py --rom ROM --roundtrip`) before every commit. Keep the owner's answers in a CSV. Update README and checklist files together. One commit per batch: `git fetch origin`, `git merge-base --is-ancestor origin/main HEAD`, `git push origin <branch>:main`.
 
 ## Answering "how far are we from a full disassembly?"
 

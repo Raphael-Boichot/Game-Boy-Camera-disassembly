@@ -3305,7 +3305,7 @@ bank,addr,name,conf,note,source
 0A,6866,FxShared_ReduceBody_G0,I,shared body of slots 09-0C (b=$79),hand+auto
 0A,6906,FxShared_ReduceBody_G1,I,shared body of slots 29-2C,hand+auto
 0A,69AA,FxShared_ReduceBody_G2,I,shared body of slots 49-4C,hand+auto
-0A,6A41,Cam_BootHiddenCombo_Check,I,from the previous .sym (camera / sensor code,hand+auto
+0A,6A41,FxShared_ReduceBody_G2_OuterLoopTail,C,"outer-loop tail of FxShared_ReduceBody_G2 (0A:69AA), reached by the jr z at the end of its inner loop: ldh a,[$ff8a]; dec a; ret z (the reduction ends when the outer counter $FF8A reaches 0), else $FF8A := a, dec d, e += $A0, inc h, l := 0 and jp 0A:69B3. The old name Cam_BootHiddenCombo_Check was wrong: the boot key-combination test is Cam_BootSelfTest_Entry (0A:6A52). Code read 2026-10-18",hand
 0A,6A52,Cam_BootSelfTest_Entry,I,from the previous .sym (camera / sensor code,hand+auto
 0A,6A7B,Cam_FactoryDiag_AllButtonsExceptB,I,from the previous .sym (camera / sensor code,hand+auto
 0A,6B56,Cam_FactoryDiag_HexDigitWrite,I,from the previous .sym (camera / sensor code,hand+auto
@@ -3365,7 +3365,7 @@ bank,addr,name,conf,note,source
 0C,5100,Gfx_0C_5100_Mode12_State0F_ClearAll,I,"far pointer loaded by AnimEd_LoadEntryThumb, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5500,Gfx_0C_5500_Mode12_State0F_ClearAll,I,"far pointer loaded by AnimEd_StartExitTransition, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5770,Gfx_0C_5770_AnimEd_ShowLoopFlag,I,"far pointer loaded by AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-0C,5800,Gfx_0C_5800_AnimEdMenuLabelsAlt,?,"576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by any loader or in any organic run (checked again in the L3 pass: AnimEd_LoadMenuTiles loads 5A40-5B3F, 5B80-5C7F and 6100-617F, nothing below 5A40); by eye the labels of 4A00-5000 (I)",hand
+0C,5800,Gfx_0C_5800_AnimEdMenuLabelsAlt,I,"576 bytes 5800-5A3F, a variant copy of the used block Gfx_0C_4D50_Mode12_State07_ToolsSlideIn (the Animation-editor menu labels): 23 of its 36 tiles are exact copies of tiles of 0C:4D50 (tiles 0-3, 5-15 and 20-27 of this span = tiles 0-3, 5-15 and 24-31 of the block), 4 tiles (16-19) are blank where the block has 8 tiles, tiles 4 and 28-35 differ (exact tile comparison over the whole ROM, 2026-10-18; no other copy of these tiles). Not read by any loader or in any organic run (AnimEd_LoadMenuTiles loads 5A40-5B3F, 5B80-5C7F and 6100-617F, nothing below 5A40); not identical to any block of the international ROM, whose labels are in English. The role of the variant is not known.",hand
 0C,5A40,Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1,C,"entries 0 (5A40 -> $8D50) and 1 (5AC0 -> $8DD0) of AnimEd_LoadMenuTiles_Tbl5DF1: 0x80 bytes each from bank $0C (AnimEd_LoadMenuTiles, 03:5DCE; copy site 03:5DED; index $D719); every byte is read in the organic runs (C)",hand
 0C,5B40,Gfx_0C_5B40_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 0C,5B60,Gfx_0C_5B60_AnimEd_ShowEntryValue,I,"far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call) | also entries 3 (5B80 -> $8ED0) and 4 (5C00 -> $8F50), 0x80 bytes each, of AnimEd_LoadMenuTiles_Tbl5DF1 (03:5DF1)",assets
@@ -3384,7 +3384,7 @@ bank,addr,name,conf,note,source
 0C,6560,Gfx_0C_6560_Mode12_State1A_ClearDialogOpen,I,"far pointer loaded by Mode12_State1A_ClearDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 880 from the nearby ld bc",assets
 0C,6730,Gfx_0C_6730_Mode12_State17_ExitDialogOpen,I,"far pointer loaded by Mode12_State17_ExitDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 896 from the nearby ld bc",assets
 0C,68D0,Gfx_0C_68D0_AnimEdKanaStrips,I,"kana strips of the Animation-editor dialogs (by eye); 68D0-6AB0 is inside the 0x380 bytes that Mode12_State17_ExitDialogOpen copies from 6730 (copy site 03:4F62), so the tiles are loaded",hand
-0C,6AB0,Gfx_0C_6AB0_AnimEdKanaStrips_Tail,?,"kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it | L3 check 2026-10-14: 6730 + 0x380 = 6AB0 is where the copy of Mode12_State17_ExitDialogOpen (03:4F62) ends and 6C30 where the SortDialog copy (03:5048) starts; no loader found between them; no organic read inside 6AB0-6C2F at all, forced reads only",hand
+0C,6C00,Gfx_0C_6C00_Mode12_State1D_SortDialogOpen_Aux,I,"3 tiles (48 B) in front of the block that Mode12_State1D_SortDialogOpen (03:503A, copy site 03:503F) copies from 6C30 to $8C70; they would be the ids C4-C6 of that set, which the dialog map 27:6D30 does not use (it uses C7-FB); no copy site covers them; identical in the international ROM; no other copy of these tiles in the ROM. The 336 bytes before them (6AB0-6BFF) are all $00 (padding): the ""kana strips like 68D0"" reading of the old label 0C:6AB0 was wrong, the real strips 68D0-6AAF are loaded with the 6730 + 0x380 block (checked 2026-10-18)",hand
 0C,6C30,Gfx_0C_6C30_Mode12_State1D_SortDialogOpen,I,"far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 880 from the nearby ld bc",assets
 0C,6FA0,Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen,I,"far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 656 from the nearby ld bc",assets
 0C,7800,Gfx_0C_7800_Mode09_State00_Init,I,"copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (assets/catalog_jp.csv)",assets
@@ -3419,7 +3419,7 @@ bank,addr,name,conf,note,source
 0D,6D00,Gfx_0D_6D00_Icon06_478F,C,"entry 4 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
 0D,6E00,Gfx_0D_6E00_Icon06_478F,C,"entry 5 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
 0D,6F00,Gfx_0D_6F00_Icon06_478F,C,"entry 6 of the {lo,hi,bank} table 06:478F, 256 bytes each (constant pitch)",assets
-0D,7000,Gfx_0D_7000_FillPatternTiles,?,"dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by a pattern number | L3 check 2026-10-14: no loader found; Mode16_State00_Init (06:44F1) loads 4000 / 4800 / 5000, Mode16_LoadPageTiles (06:4AF8) the four 0x280 strips 5300-5A80, the icon tables 6000-6F00 and the message strips 5D00; nothing indexes 7000-78FF; no organic read, forced reads only (the printer packet reader)",assets
+0D,7000,Gfx_0D_7000_FillPatternTiles,I,"dot, crosshatch and dither fill tiles plus a few glyph pieces (by eye); owner (review page, 2026-10-13, by eye): the span matches the TCRF ""Magic bank tile"" picture (a dither tile that occurs at many offsets of 0D:7000-765F, README 16.24, not a TCRF checklist item). No loader in either ROM (re-checked 2026-10-18: no immediate $7000-$78FF is used with a bank-$0D load, no pointer table reaches it, and the seven `ld hl,$7000` of the ROM load other banks); the loads next to it are 0D:4000 / 4800 / 5000 (Mode16_State00_Init), the four 0x280 strips 5300-5A80, the icon tables 6000-6F00, the message strips 5D00 and 0D:7900 -> $8900 (Mode0F_State05_ConfirmInit, 0x700 B); no organic read, forced reads only (the printer packet reader)",assets
 0D,7660,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,I,TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 of 16 unique); never on screen (README 16.24),fix
 0D,77E0,Gfx_0D_77E0_FillPatternTiles_Cont,I,continues the span of Gfx_0D_7000_FillPatternTiles (the label before the TCRF-unused block),fix
 0D,7900,Gfx_0D_7900_Mode0F_State05_ConfirmInit,I,copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (assets/catalog_jp.csv),assets
@@ -3533,7 +3533,7 @@ bank,addr,name,conf,note,source
 13,5880,Gfx_13_5880_Mode0F_State0A_EraseAll,I,"far pointer loaded by Mode0F_State0A_EraseAll (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5950,Gfx_13_5950_Mode0F_DrawCopyCount,I,"far pointer loaded by Mode0F_DrawCopyCount (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,5C80,Src_13_5C80_Tbl65CA_0,I,"target 0 of the {lo,hi,bank} table 09:65CA",assets
-13,5CA0,Unused_TCRF_AlbumHandGestures_Gfx,?,"candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF (23 of 32 informative tiles found: 13:5CA0-5CF0, 5DA0-5DF0, 5EA0-5EF0 as a 6 x 4 block, plus 5A40-5AB0, 5BC0-5BF0, 5AE0-5AF0); CONFLICT: these tiles are on screen for 22-26 frames in organic runs (README 16.24)",fix
+13,5CA0,Unused_TCRF_AlbumHandGestures_Gfx,?,"candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF (23 of 32 informative tiles found: 13:5CA0-5CF0, 5DA0-5DF0, 5EA0-5EF0 as a 6 x 4 block, plus 5A40-5AB0, 5BC0-5BF0, 5AE0-5AF0); CONFLICT: these tiles are on screen for 22-26 frames in organic runs (README 16.24) Re-checked 2026-10-18: the six tiles have no copy elsewhere in the ROM and lie inside the sheet 13:5800-67FF that the album loaders (PhotoPicker_Init 04:400A, copy site 04:403B; Mode0F_State01_ReInit; LinkPick_Substate0_Init; ...) copy whole to $8000 (ids $4A-$4F), so loading does not tell whether the tiles are drawn.",fix
 13,5D00,Gfx_13_5D00_Tbl65CA_0_Cont,I,continues the span of Src_13_5C80_Tbl65CA_0 (the label before the TCRF-unused block),fix
 13,6400,Src_13_6400_PhotoPicker_LoadPageThumbs,I,"far pointer loaded by LinkPick_LoadPageThumbs, PhotoPicker_LoadPageThumbs (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 13,6800,Gfx_13_6800_Icon04_44DC,C,"entry 0 of the {lo,hi,bank} table 04:44DC, 256 bytes each (constant pitch)",assets
@@ -3702,7 +3702,7 @@ bank,addr,name,conf,note,source
 1A,6C00,Gfx_1A_6C00_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 1A,7400,Gfx_1A_7400_Mode20_State00_MenuInit,I,copied to VRAM/WRAM by Mode20_State00_MenuInit (assets/catalog_jp.csv),assets
 1A,7600,Gfx_1A_7600_Album_ShowPageScreenB,I,"far pointer loaded by Album_LoadBorderScreen, Album_ShowPageScreenB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1792 from the nearby ld bc",assets
-1A,7C90,Unused_TCRF_PhotoOptionIcon_Candidate_Gfx,?,"exact pixel match of the TCRF ""photo option icon"" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play (65,535 frames in organic runs), so it is probably a displayed icon that looks like the TCRF one, not an unused one (README 16.24)",fix
+1A,7C90,Unused_TCRF_PhotoOptionIcon_Candidate_Gfx,?,"exact pixel match of the TCRF ""photo option icon"" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play (65,535 frames in organic runs), so it is probably a displayed icon that looks like the TCRF one, not an unused one (README 16.24) Re-checked 2026-10-18: the two tiles have no copy elsewhere in the ROM and lie inside 1A:7600-7CFF, the 0x700 B block that Album_LoadBorderScreen (04:7C28, copy site 04:7C4C) and Album_ShowPageScreenB (04:6E3D, copy site 04:6E61) copy to $8900 (so to $8F90 / $8FA0): they are loaded and shown by those screens (C for the load, the tracker for the frames).",fix
 1A,7CB0,Gfx_1A_7600_Album_ShowPageScreenB_Cont,I,continues Gfx_1A_7600_Album_ShowPageScreenB (after the TCRF icon candidate),fix
 1A,7D80,Unused_TCRF_PhotoOption_BCancel_Gfx,C,"TCRF unused graphic ""B CANCEL"" (circled B + the word CANCEL, 6 tiles): exact match of the TCRF image (2x upscale, 0 differing pixels of 384); never on screen in any replay and never read in an organic run (README 16.24)",fix
 1A,7E00,Gfx_1A_7E00_Unref,C,"tile data with no direct pointer in the code (unreferenced); classified from its content - see sym_unconclusive. Owner (review page, 2026-10-13): graphic, by eye.",fix
@@ -3842,8 +3842,8 @@ bank,addr,name,conf,note,source
 1F,43C2,Sfx1_Init_2A_ChooseC,I,channel-1 effect init handler of ids 2A (table $41FA),hand+auto
 1F,43CA,Sfx1_Step_2A_ChooseC,I,channel-1 effect step handler of ids 2A (table $4276),hand+auto
 1F,43DF,Sfx1_Data_43DF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,43E4,Sfx1_Init_24_SpaceFeverII,?,"channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no request for it was found in the code. Owner (review page, 2026-10-13, by ear): sfx1 24: used - Space fever probably; no request for it was found in the code, so ""no caller"" does not mean unused.",fix
-1F,43EC,Sfx1_Step_24_SpaceFeverII,?,channel-1 effect step handler of id 24 (owner: Space Fever II sound),fix
+1F,43E4,Sfx1_Init_24_SpaceFeverII,?,"channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no request for it was found in the code. Owner (review page, 2026-10-13, by ear): sfx1 24: used - Space fever probably; no request for it was found in the code, so ""no caller"" does not mean unused. Re-checked 2026-10-18 (hex id $24 = 36): no immediate request in either ROM (all 334 JP call sites of Snd_Sfx1 and the international ones load the same 40 ids, none is $24), the one computed request 05:7B11 is $20 + [$D9E5] (0..2) and the six (id, channel) tables of the table routine 00:2A4B (03:61FD, 03:7615, 05:554D, 05:781B, 06:7845, 09:733E) hold no (24, channel 1).",fix
+1F,43EC,Sfx1_Step_24_SpaceFeverII,?,"channel-1 effect step handler of id 24 (owner: Space Fever II sound) Re-checked 2026-10-18 (hex id $24 = 36): no immediate request in either ROM (all 334 JP call sites of Snd_Sfx1 and the international ones load the same 40 ids, none is $24), the one computed request 05:7B11 is $20 + [$D9E5] (0..2) and the six (id, channel) tables of the table routine 00:2A4B (03:61FD, 03:7615, 05:554D, 05:781B, 06:7845, 09:733E) hold no (24, channel 1).",fix
 1F,43F7,Sfx1_Data_43F7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4401,Sfx1_Init_1E_26_Choose,I,"channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: used - boss death in space fever; the name BossHit comes from the caller SpaceFever_BossHit (id 26); name kept, the sounds agree on Space Fever. Requested 12 times from frame 2799 in the Space Fever II key-log replay (organic; sf2_sounds.csv), so it is NOT 'only reached when forced'.",fix
 1F,4409,Sfx1_Step_26_BossHit,I,channel-1 effect step handler of ids 26 (table $4276),hand+auto
@@ -4152,12 +4152,12 @@ bank,addr,name,conf,note,source
 1F,5906,Song46_UserMapScrollOut_Pat5906,C,note pattern ($00 ends it),hand+auto
 1F,591D,Song46_UserMapScrollOut_Pat591D,C,note pattern ($00 ends it),hand+auto
 1F,5922,Song46_UserMapScrollOut_Pat5922,C,note pattern ($00 ends it),hand+auto
-1F,5929,Song2D_Hdr,C,header of song id 2D,hand+auto
+1F,5929,Song2D_Hdr,C,"header of song id 2D. Owner (review page, 2026-10-13, by ear): music 2D: Ball BGM (sure)",hand+auto
 1F,5934,Song2D_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,593A,Song2D_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,5940,Song2D_Pat5940,C,note pattern ($00 ends it),hand+auto
 1F,59C3,Song2D_Pat59C3,C,note pattern ($00 ends it),hand+auto
-1F,5A2A,Song19_Hdr,C,header of song ids 19 2A,hand+auto
+1F,5A2A,Song19_Hdr,C,"header of song ids 19 2A. Owner (review page, 2026-10-13, by ear): music 2A: Jambo Nintendo ! (sure)",hand+auto
 1F,5A35,Song19_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,5A3B,Song19_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,5A41,Song19_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4172,7 +4172,7 @@ bank,addr,name,conf,note,source
 1F,5AAF,Song45_EraseJingle_Pat5AAF,C,note pattern ($00 ends it),hand+auto
 1F,5AB1,Song45_EraseJingle_Pat5AB1,C,note pattern ($00 ends it),hand+auto
 1F,5AEA,Song45_EraseJingle_Pat5AEA,C,note pattern ($00 ends it),hand+auto
-1F,5B1F,Song30_Hdr,C,header of song id 30,hand+auto
+1F,5B1F,Song30_Hdr,C,"header of song id 30. Owner (review page, 2026-10-13, by ear): music 30: Who are you running from 2 / error message (sure)",hand+auto
 1F,5B2A,Song30_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,5B32,Song30_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,5B3A,Song30_Pat5B3A,C,note pattern ($00 ends it),hand+auto
@@ -4584,7 +4584,7 @@ bank,addr,name,conf,note,source
 1F,7475,Song24_Stamp_Pat7475,C,note pattern ($00 ends it),hand+auto
 1F,748C,Song24_Stamp_Pat748C,C,note pattern ($00 ends it),hand+auto
 1F,7490,Song24_Stamp_Pat7490,C,note pattern ($00 ends it),hand+auto
-1F,74A7,Song28_Hdr,C,header of song id 28,hand+auto
+1F,74A7,Song28_Hdr,C,"header of song id 28. Owner (review page, 2026-10-13, by ear): music 28: Who are you running from 1 / error message (sure)",hand+auto
 1F,74B2,Song28_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,74BA,Song28_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,74C2,Song08_TimerPrintOpt_Hdr,C,"header of song ids 08 0D 1A. Owner (review page, 2026-10-13, by ear): music 08: used - Printer waiting jingle during multiple print selection; kept: the name comes from the screens that call ids 08 / 0D / 1A.",fix
@@ -4685,7 +4685,7 @@ bank,addr,name,conf,note,source
 1F,7EA7,Song22_Pat7EA7,C,note pattern ($00 ends it),hand+auto
 1F,7EAB,Song22_Pat7EAB,C,note pattern ($00 ends it),hand+auto
 1F,7EDD,Song22_Pat7EDD,C,note pattern ($00 ends it),hand+auto
-1F,7EEE,Song1F_Hdr,C,header of song id 1F,hand+auto
+1F,7EEE,Song1F_Hdr,C,"header of song id 1F. Owner (review page, 2026-10-13, by ear): music 1F: From space Fever (likely)",hand+auto
 1F,7EF9,Song1F_Trk2List,C,pattern list of track 2 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7EFD,Song1F_Trk1List,C,pattern list of track 1 (word hi $00 = song end; $FFxx + word = loop),hand+auto
 1F,7EFF,Song1F_Trk3List,C,pattern list of track 3 (word hi $00 = song end; $FFxx + word = loop),hand+auto
@@ -4825,7 +4825,7 @@ bank,addr,name,conf,note,source
 23,7E80,Src_23_7E80_Tbl53A6_3,I,"target 3 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset",assets
 24,4000,Gfx_24_4000_CreditsGirlFrame01,C,"frame 1 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 24,4480,Map_24_4480_Mode20_State00_MenuInit,I,"far pointer loaded by Mode20_State00_MenuInit (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
-24,4500,Map_24_4480_Ball_MenuLoadRow,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
+24,4500,Map_24_4480_Ball_MenuLoadRow_Part4500,I,copied to VRAM/WRAM by Ball_MenuLoadRow (assets/catalog_jp.csv),assets
 24,46C0,Map_24_46C0_Ball_MenuLoadRow,I,"far pointer loaded by Ball_MenuLoadRow (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from the nearby ld bc",assets
 24,47C0,Map_24_47C0_Mode0D_State01_Hub,I,"far pointer loaded by Mode0D_State01_Hub (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from the nearby ld bc",assets
 24,4840,Map_24_4840_Mode0D_State00_Init,I,"copied to VRAM/WRAM by Mode0D_State00_Init, Mode0D_State02_OptionsMenu, Mode0D_State03_OptionA, Mode0D_State04_OptionB (assets/catalog_jp.csv)",assets
@@ -4882,7 +4882,7 @@ bank,addr,name,conf,note,source
 24,7860,Map_24_7860_PenMenu_Build,I,"far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from the nearby ld bc",assets
 24,7960,Map_24_7960_Shoot_RestoreViewScreen,I,"far pointer loaded by Shoot_DrawOptionPanel, Shoot_RestoreViewScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 704 from the nearby ld bc",assets
 24,7C20,Map_24_7C20_Mode12_State11_TestStart,I,"copied to VRAM/WRAM by Mode12_State11_TestStart, Mode13_State03_PlayPrepare, Mode09_State00_Init, Album_ShowPageScreen, Mode0A_State02_Setup (assets/catalog_jp.csv)",assets
-24,7EE0,Map_24_7C20_SaveDialog_Substate3_FullInit,I,copied to VRAM/WRAM by SaveDialog_Substate3_FullInit (assets/catalog_jp.csv),assets
+24,7EE0,Map_24_7C20_SaveDialog_Substate3_FullInit_Part7EE0,I,copied to VRAM/WRAM by SaveDialog_Substate3_FullInit (assets/catalog_jp.csv),assets
 25,4000,Gfx_25_4000_CreditsGirlFrame05,C,"frame 5 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets
 25,4480,Gfx_25_4480_Mode08_State14_CreditsPageB,I,"far pointer loaded by Mode08_State14_CreditsPageB (ld a,BANK; ld hl,ADDR; call banked copy/far call)",assets
 25,4500,Gfx_25_4480_CreditsGirlFrame00_Part4500,C,"frame 0 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13 records, 12 frames each), 0x500 bytes copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll",assets

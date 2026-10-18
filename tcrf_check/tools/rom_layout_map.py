@@ -127,11 +127,13 @@ typed = np.zeros(N, bool)
 for r in csv.DictReader(open(TYPES, encoding='utf-8')): typed[flat(int(r['bank'], 16), int(r['start'], 16)):flat(int(r['bank'], 16), int(r['end'], 16))] = True
 kind[~typed & ~is_code & (cls != ord('T')) & g['pad']] = KEY['PAD']
 # kind of the Src_* / Data_* blocks, from the evidence rows of assets/layout_kind_overrides_jp.csv (bank, start, end, kind, ev, label, basis); only bytes still UNCERTAIN are changed
+OVR = {}      # bytes that the evidence rows reclassify, per kind (the README quotes them; tools/check_repo_consistency.py compares)
 if os.path.exists(KINDS):
     for r in csv.DictReader(open(KINDS, encoding='utf-8')):
         o0, o1 = flat(int(r['bank'], 16), int(r['start'], 16)), flat(int(r['bank'], 16), int(r['end'], 16))
         seg = kind[o0:o1]; hit = (seg == KEY['UNC']) & ~is_code[o0:o1]; assert hit.any(), 'no uncertain byte left in %s' % r['label']
-        seg[hit] = KEY[r['kind']]
+        seg[hit] = KEY[r['kind']]; OVR[r['kind']] = OVR.get(r['kind'], 0) + int(hit.sum()); OVR['rows'] = OVR.get('rows', 0) + 1
+print('layout overrides', OVR.get('rows', 0), 'rows', {k: v for k, v in sorted(OVR.items()) if k != 'rows'}, 'bytes', sum(v for k, v in OVR.items() if k != 'rows'))
 _u = np.flatnonzero(kind == KEY['UNC'])
 if len(_u):
     _cut = np.flatnonzero(np.diff(_u) > 1) + 1

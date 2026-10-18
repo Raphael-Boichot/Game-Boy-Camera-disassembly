@@ -8,12 +8,12 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 2 | 4412 | a yes/no on the family name |
+| visually identified range | 1 | 2780 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 0 | 0 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 16 | 6246 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| content-classified span | 17 | 6294 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
-| hand name, unconfirmed | 6 | 1118 | a check of the guess |
+| hand name, unconfirmed | 4 | 158 | a check of the guess |
 | mode state | 102 | 5597 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 88 | 11689 | which visible effect each slot gives |
 | SFX tag | 95 | 2536 | the sound each id plays |
@@ -23,19 +23,19 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
 | dead code | 31 | 6196 | whether the code is truly dead (TCRF unused-content notes) |
 
-## visually identified range (2)
+## visually identified range (1)
 
 _Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 0D:7000 | `Gfx_0D_7000_FillPatternTiles` | 1632 | dot, crosshatch and dither fill tiles plus a few glyph pieces | dot, crosshatch and dither fill tiles plus a few glyph pieces (visual); no direct pointer, probably indexed by |
 | 14:4554 | `Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr` | 2780 | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only read |
 
-## content-classified span (16)
+## content-classified span (17)
 
-_Why doubtful:_ type confirmed by the owner (review page, by eye); role and consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
+_Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
+- bank 0C: `6C00` Mode12_State1D_SortDialogOpen_Aux (48 B)
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
 - bank 16: `7380` MainMenu_BallHeadAnim_F5_Unref (512 B), `7580` MainMenu_BallHeadAnim_F6_Unref (512 B), `7780` MainMenu_BallHeadAnim_F7_Unref (512 B), `7980` MainMenu_BallHeadAnim_F8_Unref (512 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
@@ -46,18 +46,16 @@ _Why doubtful:_ type confirmed by the owner (review page, by eye); role and cons
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## hand name, unconfirmed (6)
+## hand name, unconfirmed (4)
 
 _Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 0C:5800 | `Gfx_0C_5800_AnimEdMenuLabelsAlt` | 576 | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by an | 576 bytes 5800-5A3F of the second copy of the Animation-editor menu labels, not read by any loader or in any o |
-| 0C:6AB0 | `Gfx_0C_6AB0_AnimEdKanaStrips_Tail` | 384 | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no co | kana strips like 68D0 (by eye); 6AB0-6C30 lies after the copied 6730+0x380 block and no copy site covers it /  |
 | 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide  | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF ( |
 | 1A:7C90 | `Unused_TCRF_PhotoOptionIcon_Candidate_Gfx` | 32 | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON S | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play |
 | 1F:43E4 | `Sfx1_Init_24_SpaceFeverII` | 19 | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no con | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no r |
-| 1F:43EC | `Sfx1_Step_24_SpaceFeverII` | 11 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) | channel-1 effect step handler of id 24 (owner: Space Fever II sound) |
+| 1F:43EC | `Sfx1_Step_24_SpaceFeverII` | 11 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) Re-checked 2026-10-18 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) Re-checked 2026-10-18 (hex id $24 = 36):  |
 
 ## mode state (102)
 

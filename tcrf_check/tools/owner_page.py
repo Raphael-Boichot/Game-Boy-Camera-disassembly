@@ -2,7 +2,7 @@
 """Builds the owner-answer page of the L3 pass of 2026-10-14 (one self-contained HTML, answers saved through the artifact `db` capability, collection `answers`,
 one doc per item: {verdict, note, item, time}; the answers are then copied into disasm/owner_answers_jp.csv by hand / by a short script).
 What it asks: what needs ears or eyes and cannot be read from the code -- the sound tags (disasm/sym_unconclusive_jp.csv, group "SFX tag", merged per id), the
-SHOOT effect variants (06:60DB -> 0A:541A), the screens of the modes whose state names are generic, and six graphics (the remaining `?` spans and the two TCRF candidates).
+SHOOT effect variants (06:60DB -> 0A:541A), the screens of the modes whose state names are generic, and five graphics (the remaining `?` span, two `I` spans and the two TCRF candidates).
 Sound clips: MP3 recordings of every effect id made in BGB by sound_clips.py (tcrf_check/assets/sound_clips/: one MP3 per id and sound_clips_jp.csv; one run per channel, plus a second run with a longer window for the ids that were cut), embedded as base64 and played with WebAudio.
 usage: owner_page.py OUT.html [TCRF_IMAGE_DIR] [CLIP_DIR]     (reads disasm/sym_unconclusive_jp.csv, sym_names_jp.csv, the ROM, the two TCRF PNGs and CLIP_DIR/sound_clips_jp.csv + the MP3s)"""
 import sys, os, csv, re, json, base64, collections
@@ -87,10 +87,7 @@ pics = [
       clue='Dot, crosshatch and dither tiles plus a few glyph pieces. No loader indexes it, nothing reads it in normal play. Do you recognise these as the fill patterns of a tool (paint bucket, pen patterns, hot-spot fills) or as part of a screen?'),
  dict(key='gfx_0C_5800', title='0C:5800, 576 bytes', name='Gfx_0C_5800_AnimEdMenuLabelsAlt', cols=16, data=b64(rd(0x0C, 0x5800, 576)),
       ctx=b64(rd(0x0C, 0x5A40, 0x100)), ctxcap='0C:5A40, loaded by the Animation editor menu (known)',
-      clue='Looks like a second copy of the Animation editor menu labels (the strip below is the loaded one). Is it a different wording, a different language, or the same labels?'),
- dict(key='gfx_0C_6AB0', title='0C:6AB0, 384 bytes', name='Gfx_0C_6AB0_AnimEdKanaStrips_Tail', cols=16, data=b64(rd(0x0C, 0x6AB0, 0x180)),
-      ctx=b64(rd(0x0C, 0x68D0, 0x1E0)), ctxcap='0C:68D0, the kana strips that are loaded (known)',
-      clue='Kana strips like the ones loaded from 0C:68D0, but no loader reaches this tail. Do you see a kana row of the Animation editor that is not in the strip above?'),
+      clue='A second copy of the Animation editor menu labels (the strip below is the loaded one): 23 of its 36 tiles are exact copies of tiles of the loaded block, 4 are blank, the others differ. No loader reads it. Is it an older wording of the labels, or something you have seen in the editor?'),
  dict(key='gfx_14_4554', title='14:4550, tiles 85-258 of the unused stand-by screen', name='Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr', cols=16, data=b64(rd(0x14, 0x4550, 0xAE0)),
       clue='Second half of the tile set of the unused alternate stand-by screen of the image exchange (the first half is 14:4000, the map 23:5CC0). Does this look like a picture you have seen on the SEND / RECEIVE screen of any version of the game?'),
  dict(key='tcrf_13_5CA0', title='13:5A00-5FFF, candidate for the TCRF album hand gestures', name='Unused_TCRF_AlbumHandGestures_Gfx', cols=16, data=b64(rd(0x13, 0x5A00, 0x600)), ref=img('Game_Boy_Camera_Unused_Album_Hand_Gestures.png'), refcap='TCRF image',

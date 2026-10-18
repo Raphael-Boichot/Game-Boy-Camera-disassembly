@@ -13,6 +13,10 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Use **BGB** (not the Python core) for every screenshot or asset comparison: the core draws the VIEW-screen band and one stamp slot wrongly (README §15.8).
 * The two ROMs are different builds (44 % of the bytes differ, §16.1): the Japanese static trace and coverage numbers do not transfer. The main menu is mirrored
   (VIEW = Left on the Japanese ROM, Right on the international one).
+* **Before every commit run `python3 tools/check_repo_consistency.py --rom <pocketcamera_jp.gb> --roundtrip` and get 0 failures.** It compares every number the docs quote (labels per tag, doubtful rows and bytes, blocks and bytes per type,
+  renamed rows, really-unused totals, tier table, layout legend, open-assets sheet) with the file it comes from, diffs every generated file against a fresh run (`.sym`, doubts list, layout and reachability pictures,
+  per-bank CSV, bank pictures), checks that the `§` numbers and asset labels the docs quote exist, that the name of a label carries its own address, that maps are typed `data,32,Map`, and the md5 round trip. A failed line names the file or
+  sentence to fix; when the README starts to quote a new number, add its pattern to the checker (use `need=` so that a reworded sentence fails instead of passing silently) and test the pattern on the old text first.
 * Delivery: `git fetch origin`; `git merge-base --is-ancestor origin/main HEAD` (if the owner pushed, `git rebase origin/main` first); `git push origin <branch>:main`. One commit per batch,
   say in the answer where it was pushed. Do not push scratch branches the stop hook asks about. If a push is refused, fall back to `git format-patch --binary` files tested with
   `git am --keep-cr` on a clean `git clone -c core.autocrlf=false` of upstream main, and give PowerShell commands. Commit as `Claude <noreply@anthropic.com>` with the
@@ -25,14 +29,14 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
   `pocketcamera_jp.sym`, `jp_rom_reachability_map.png` (what the runs reached) and `jp_rom_layout_map.png` (what each byte is; both drawn by `tcrf_check/tools/rom_reach_map.py` / `rom_layout_map.py`, regenerate both when the coverage, witness, reach or label data change; the kind of the far-pointer-named `Src_*` / `Data_*` blocks comes from `assets/layout_kind_overrides_jp.csv`, add a row there when a new block is identified).
 * `disasm/`: `sym_names_jp.csv` + `sym_types_jp.csv` (the source of the symbol file), `sym_unconclusive_jp.{md,csv}` (doubtful names, regenerate with `tools/make_doubts.py`), `renamed_jp.csv` (every label change of the L3 pass),
   `owner_answers_jp.csv`, `charset_jp.csv`, `code_gaps.md`, `coverage_jp_v3.csv`, `sym_unconclusive_banks/` (pictures behind the doubtful rows).
-* `tools/`: the pipeline (`sym_build.py`, `sym_fix.py`, `make_doubts.py`, `rom_trace.py` + `extra_roots.json` + `rom_trace_labels.sym`, `rom_coverage.py`, `wram_db.py`, `ram_census.py`, `asset_catalog.py`, `sram_analyze.py`, renderers).
+* `tools/`: the pipeline (`check_repo_consistency.py`, `sym_build.py`, `sym_fix.py`, `make_doubts.py`, `rom_trace.py` + `extra_roots.json` + `rom_trace_labels.sym`, `rom_coverage.py`, `wram_db.py`, `ram_census.py`, `asset_catalog.py`, `sram_analyze.py`, renderers).
   `tcrf_check/tools/` holds the other scripts (BGB harness, TCRF checks, sensor, forcing); they import `sram_analyze` from `tools/`. One copy of each script only.
 * `coverage/` (core `coverage/src`, fuzzer and report tools, `results/`, `v8/`, see its README), `wram/` (WRAM / HRAM / trace), `link_protocol/` (cable sniff logs and their format), `cameras/` (the 14 real cameras' SRAM summary),
   `assets/` (catalog, reach and per-bank layout CSVs, layout kind evidence, bank atlas), `tcrf_check/` (checklist, `assets/` evidence, `tools/`, `work/`, `shots/`, `BGB_TEST_SHEET.md`), `captures/` (three emulator screens of the erase-all dialog),
   `Spriter_ressources_check/` (the owner's Spriters Resource sheets, used for matching: his data, leave it alone).
 * The symbol file is **generated**: edit `disasm/sym_names_jp.csv` / `sym_types_jp.csv` and run `tools/sym_build.py` (README §1.1.1); never edit `pocketcamera_jp.sym` by hand. mgbdis v3.0 reads `<rom basename>.sym` beside the ROM
-  (no `--sym` option); check every change with mgbdis + rgbasm 1.0.4 (md5 `fdcfe686cf4df461e870b6e53b2b5a8b`), plain and after `tools/sym_fix.py --tables`. Regenerate the doubts list after renames. When a count changes
-  (labels per tag, doubtful rows), fix it in README §1.1.1 / §1.3, `skills/gb-rom-disassembly/SKILL.md` and `HOWTO_NEW_ROM.md` too.
+  (no `--sym` option); check every change with mgbdis + rgbasm 1.0.4 (md5 `fdcfe686cf4df461e870b6e53b2b5a8b`), plain and after `tools/sym_fix.py --tables`. Regenerate the doubts list and the bank pictures (`tools/bank_pics.py`) after renames or retags. When a count changes,
+  the consistency checker lists every sentence of README, `skills/gb-rom-disassembly/SKILL.md` and `HOWTO_NEW_ROM.md` that must follow.
 * **Not in git, must be recreated or supplied:** the ROMs; BGB (a Windows binary run headless under Wine; `BGB_DIR` points to it; helpers `tcrf_check/tools/bgb_run.py`, `bgb_us_jp_job.py`, `guide_bgb_walk.py`,
   `bgb_corocoro_intl.py`); the save files (unlocking saves in `saves_unl/`, the real cameras' SRAM); the built core library (`coverage/build.sh`); the owner's bus-analyser sheets (`Search_for_sensor_at_boot.xlsx`,
   `Calibration_procedure.xlsx`, `Exposure_strategy_regular_camera_volts.xlsx`; decoded rows are in `tcrf_check/assets/sensor/*_rows.csv`); the M64282FP datasheet; the BGB state files.
@@ -51,10 +55,18 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
   A 1-tile or 2-tile exact match is weak: check the display evidence.
 * A load site `ld hl,TABLE; add hl,bc; ld a,[hl+]` before a banked copy is a local pointer table, not a far pointer. The auto labeller turns any executed 16-bit immediate equal to a ROM address into a label
   (`ld bc,$xxxx` before an OAM meta-sprite call is a position): read the code before trusting a label that cuts a table.
+* **A `?`, `_Aux` or `_Unref` label (or any "by eye" note) is a hypothesis: re-derive it before trusting it.** Exact tile match of every tile over the whole ROM and the other ROM, a loader scan (immediates with the bank, pointer tables,
+  `assets/copy_sites_jp.csv`), then the display tracker (it is value-matched: check that the tiles have no duplicate elsewhere). Three of the eight `?` labels changed this way (`0C:6AB0` "kana strips" was 336 B of `$00` and 3 tiles).
+* **Maps:** 18 rows of 32 bytes (0x240 B; 20 visible columns, 12 hidden), in chains 0x240 apart (`25:73A0 / 75E0 / 7820 / 7A60`, `26:6C00 / 6E40 / 7080 / 72C0`); the bank-27 album maps are 22-row copies that overlap on purpose. Check a start against the
+  neighbours and the hidden columns, and type the rows `data,32,Map` (`data,16,Gfx` is for tile sets). In `sym_types_jp.csv` the rows are applied in order and the LAST row wins. A seam search with a shuffled-neighbour control is evidence only for whole maps
+  and lower halves (an upper half does not recover true blocks).
+* **A label that carries an address carries its own** (`Gfx_BB_AAAA_Consumer`); a piece of a parent asset is `_Part<addr>` (own address) or `_Cont`. Exceptions live in the checker's `ODD_MAP_ROWS` / `GFX_ON_MAP` lists, with the reason.
+* **Generated files with hand-kept parts or frozen inputs:** `display_report.py` overwrites the hand tail of `really_unused.md` (restore it from git after every run); `open_assets.csv` is a frozen candidate list that `display_report.py` reads, so it is not
+  regenerated from the current doubts list (the README says so). Regenerating the layout / reachability pictures needs `--rom`.
 * Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
 
 ## Where things stand (pointers, not numbers)
-* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,701 / 1,534 / 8); 343 doubtful rows are listed with evidence
+* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,702 / 1,536 / 5); 341 doubtful rows are listed with evidence
   in `disasm/sym_unconclusive_jp.md`. L4 (RAM names in the source), L5 (committed buildable tree) are not done; L6 is partial (name / comment charset only, §16.27).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international ROM has no instrumented coverage run
   (`coverage/tools/coverage_run.py` needs a variant without the Japanese trace); behavioural parity was checked in BGB (§16.11, §16.12).
