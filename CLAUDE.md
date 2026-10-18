@@ -22,13 +22,13 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 
 ## What is in the repository, and what is not
 * In git, at the top: `README.md` (§1-18, appendix), `HOWTO_NEW_ROM.md` (playbook for the next ROM, levels L0-L6), `skills/gb-rom-disassembly/SKILL.md` (the same playbook as a skill, keep the two in step),
-  `pocketcamera_jp.sym`, `jp_rom_reachability_map.png` (what the runs reached) and `jp_rom_layout_map.png` (what each byte is; both drawn by `tcrf_check/tools/rom_reach_map.py` / `rom_layout_map.py`, regenerate both when the coverage, witness, reach or label data change).
+  `pocketcamera_jp.sym`, `jp_rom_reachability_map.png` (what the runs reached) and `jp_rom_layout_map.png` (what each byte is; both drawn by `tcrf_check/tools/rom_reach_map.py` / `rom_layout_map.py`, regenerate both when the coverage, witness, reach or label data change; the kind of the far-pointer-named `Src_*` / `Data_*` blocks comes from `assets/layout_kind_overrides_jp.csv`, add a row there when a new block is identified).
 * `disasm/`: `sym_names_jp.csv` + `sym_types_jp.csv` (the source of the symbol file), `sym_unconclusive_jp.{md,csv}` (doubtful names, regenerate with `tools/make_doubts.py`), `renamed_jp.csv` (every label change of the L3 pass),
   `owner_answers_jp.csv`, `charset_jp.csv`, `code_gaps.md`, `coverage_jp_v3.csv`, `sym_unconclusive_banks/` (pictures behind the doubtful rows).
 * `tools/`: the pipeline (`sym_build.py`, `sym_fix.py`, `make_doubts.py`, `rom_trace.py` + `extra_roots.json` + `rom_trace_labels.sym`, `rom_coverage.py`, `wram_db.py`, `ram_census.py`, `asset_catalog.py`, `sram_analyze.py`, renderers).
   `tcrf_check/tools/` holds the other scripts (BGB harness, TCRF checks, sensor, forcing); they import `sram_analyze` from `tools/`. One copy of each script only.
 * `coverage/` (core `coverage/src`, fuzzer and report tools, `results/`, `v8/`, see its README), `wram/` (WRAM / HRAM / trace), `link_protocol/` (cable sniff logs and their format), `cameras/` (the 14 real cameras' SRAM summary),
-  `assets/` (catalog, reach and per-bank layout CSVs, bank atlas), `tcrf_check/` (checklist, `assets/` evidence, `tools/`, `work/`, `shots/`, `BGB_TEST_SHEET.md`), `captures/` (three emulator screens of the erase-all dialog),
+  `assets/` (catalog, reach and per-bank layout CSVs, layout kind evidence, bank atlas), `tcrf_check/` (checklist, `assets/` evidence, `tools/`, `work/`, `shots/`, `BGB_TEST_SHEET.md`), `captures/` (three emulator screens of the erase-all dialog),
   `Spriter_ressources_check/` (the owner's Spriters Resource sheets, used for matching: his data, leave it alone).
 * The symbol file is **generated**: edit `disasm/sym_names_jp.csv` / `sym_types_jp.csv` and run `tools/sym_build.py` (README §1.1.1); never edit `pocketcamera_jp.sym` by hand. mgbdis v3.0 reads `<rom basename>.sym` beside the ROM
   (no `--sym` option); check every change with mgbdis + rgbasm 1.0.4 (md5 `fdcfe686cf4df461e870b6e53b2b5a8b`), plain and after `tools/sym_fix.py --tables`. Regenerate the doubts list after renames. When a count changes

@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """The whole JP ROM bank by bank, coloured by WHAT each byte is (README 'Current status', second map), with the tiles that nothing reaches outlined. The ROM is drawn as 2bpp tiles (64 banks of 32 x 32 tiles) exactly like rom_reach_map.py.
-usage: rom_layout_map.py OUT.png [--rom pocketcamera_jp.gb] [--csv assets/layout_by_bank_jp.csv] [--map ...] [--assets ...] [--witness ...] [--reach ...] [--unused ...]
+usage: rom_layout_map.py OUT.png [--rom pocketcamera_jp.gb] [--csv assets/layout_by_bank_jp.csv] [--map ...] [--assets ...] [--witness ...] [--reach ...] [--unused ...] [--kinds assets/layout_kind_overrides_jp.csv]
 Each ROM byte gets one category:
   code (class C / F / N of coverage/v8/report_v8/rom_map.csv = traced instructions): the function group of the label that owns the byte (rules below; 10 groups);
   data (everything else): tile sets (4 kinds), tile maps, sprite (OAM) layouts, sound data, other tables and text, UNCERTAIN data, padding.
 The owner of a byte is the nearest label at or before it in the same bank (disasm/sym_names_jp.csv).  The kind of a data label comes from its name (Gfx_ / Sheet_ / Kana_ / TileGap_ = tile set, Map_ / BgMap_ /
 *Border*_Map = tile map, Song / Sfx / Snd = sound, OamList / OamPtrTbl = sprite layouts, StampCat*_Gfx = stamps, WildFrame / Border *_Tiles = frames, AlbumB*_Tiles / _Thumb = stock photos, anything else
-inside code banks = tables), so the evidence behind a kind is the one of the label (disasm/sym_names_jp.csv, column conf).  UNCERTAIN = data whose kind or role is not settled: the labels tagged '?' in
-the symbol file (disasm/sym_unconclusive_jp.md lists them) and Src_* / Data_* (copied through a far pointer whose
-destination class is not known).  Padding = runs of >= 16 x 00 / FF that no typed range of disasm/sym_types_jp.csv covers (the fill between the assets) and the zero fill named Bank*_Padding / ZeroFill in the symbol file.
+inside code banks = tables), so the evidence behind a kind is the one of the label (disasm/sym_names_jp.csv, column conf).  A label tagged '?' (disasm/sym_unconclusive_jp.md) only says that the ROLE of the bytes is doubtful, not their kind: it keeps the kind its name
+gives (a Gfx_ block is a tile set whatever its role).  The kind of the Src_* / Data_* blocks (named after the far pointer that loads them, not after what they are) comes from assets/layout_kind_overrides_jp.csv,
+one row per block with the evidence (the code that copies it and where to, or how the bytes render).  UNCERTAIN = the bytes that stay unidentified after that: a '?' label whose name gives no kind, and any Src_* / Data_*
+block without a row.  Padding = runs of >= 16 x 00 / FF that no typed range of disasm/sym_types_jp.csv covers (the fill between the assets) and the zero fill named Bank*_Padding / ZeroFill in the symbol file.
 The outline marks tiles that contain bytes no run reached, with the classes of rom_reach_map.py (tcrf_check/tools/rom_reach_classes.py): black never-run code, red unused data, blue identified data the v8 run never read."""
 import sys, os, csv, re, collections
 import numpy as np
@@ -22,7 +23,8 @@ def opt(n, d):
 ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))
 ASSETS = opt('--assets', os.path.join(REPO, 'assets', 'asset_map_jp.csv')); WIT = opt('--witness', os.path.join(REPO, 'assets', 'witness_jp.csv'))
 REACH = opt('--reach', os.path.join(REPO, 'assets', 'reach_ranges_jp.csv'))
-UNUSED = opt('--unused', os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv')); CSVOUT = opt('--csv', None); OUT = a[0]
+UNUSED = opt('--unused', os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv')); CSVOUT = opt('--csv', None)
+KINDS = opt('--kinds', os.path.join(REPO, 'assets', 'layout_kind_overrides_jp.csv')); OUT = a[0]
 NAMES = os.path.join(REPO, 'disasm', 'sym_names_jp.csv'); TYPES = os.path.join(REPO, 'disasm', 'sym_types_jp.csv')
 
 g = RC.build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO)
@@ -51,7 +53,7 @@ CATS = [
  ('OAM',   'Sprite layouts (OAM lists and their pointer tables)',                                          (200, 165, 110)),
  ('SOUND', 'Sound data: songs, effect tables and parameters',                                              (255, 110, 100)),
  ('TBL',   'Other tables and text: jump / lookup tables, stamp masks, SGB packets, staff roll, parameters', (150, 168, 184)),
- ('UNC',   'UNCERTAIN: data whose kind is not settled',                                                    (255, 0, 200)),
+ ('UNC',   'UNCERTAIN: bytes not identified (kind or record format not settled)',                          (255, 0, 200)),
  ('PAD',   'Padding: runs of 00 / FF between the assets (not typed as data)',                                                           (214, 214, 214)),
 ]
 KEY = {k: i for i, (k, _, _) in enumerate(CATS)}
@@ -95,7 +97,7 @@ def data_kind(name):
     if p == 'StampCat': return 'T_STP' if name.endswith('_Gfx') else 'TBL'
     if p in ('WildFrame', 'Border') or name.startswith('Border'):
         if re.search(r'_Map$|Map$', name) and not name.endswith('SrcTbl'): return 'MAP'
-        return 'T_FRM' if re.search(r'(Tiles|TilesTail|LateralStrips)$', name) else 'TBL'
+        return 'T_FRM' if re.search(r'(Tiles(Part\d+|Tail)?|LateralStrips)$', name) else 'TBL'
     if p in ('Gfx', 'Sheet', 'Kana', 'TileGap', 'TileSet'): return 'T_UI'
     if p in ('Map', 'BgMap'): return 'MAP'
     if p == 'Sgb': return 'T_UI' if 'BorderTiles' in name else ('MAP' if 'BorderMap' in name else 'TBL')
@@ -109,7 +111,7 @@ l_code = np.zeros(L, np.uint8); l_data = np.zeros(L, np.uint8)
 for i, (o, r) in enumerate(labels):
     l_code[i] = KEY[code_group(r['name'])]
     k = data_kind(r['name'])
-    if r['conf'] == '?' and k != 'PAD': k = 'UNC'
+    if r['conf'] == '?' and k == 'TBL': k = 'UNC'                                          # role doubtful AND no kind in the name
     l_data[i] = KEY[k]
 idx = np.searchsorted(loff, np.arange(N), 'right') - 1
 ok = (idx >= 0) & ((loff[np.maximum(idx, 0)] >> 14) == (np.arange(N) >> 14))          # the owner must lie in the same bank
@@ -123,6 +125,16 @@ kind[cat == 3] = KEY['PAD']                                                     
 typed = np.zeros(N, bool)
 for r in csv.DictReader(open(TYPES, encoding='utf-8')): typed[flat(int(r['bank'], 16), int(r['start'], 16)):flat(int(r['bank'], 16), int(r['end'], 16))] = True
 kind[~typed & ~is_code & (cls != ord('T')) & g['pad']] = KEY['PAD']
+# kind of the Src_* / Data_* blocks, from the evidence rows of assets/layout_kind_overrides_jp.csv (bank, start, end, kind, ev, label, basis); only bytes still UNCERTAIN are changed
+if os.path.exists(KINDS):
+    for r in csv.DictReader(open(KINDS, encoding='utf-8')):
+        o0, o1 = flat(int(r['bank'], 16), int(r['start'], 16)), flat(int(r['bank'], 16), int(r['end'], 16))
+        seg = kind[o0:o1]; hit = (seg == KEY['UNC']) & ~is_code[o0:o1]; assert hit.any(), 'no uncertain byte left in %s' % r['label']
+        seg[hit] = KEY[r['kind']]
+_u = np.flatnonzero(kind == KEY['UNC'])
+if len(_u):
+    _cut = np.flatnonzero(np.diff(_u) > 1) + 1
+    for _s in np.split(_u, _cut): print('uncertain span %02X:%04X +%d' % (_s[0] // 0x4000, _s[0] % 0x4000 + (0x4000 if _s[0] >= 0x4000 else 0), len(_s)))
 
 # ---- marks: the bytes no run reached --------------------------------------------------------------------------------------------------------------------------------------------------------------
 MARKS = [('code that never ran (proven dead, evidence I; README 16.15, 16.21)', (0, 0, 0)),

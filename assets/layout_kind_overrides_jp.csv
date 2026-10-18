@@ -1,0 +1,51 @@
+bank,start,end,kind,ev,label,basis
+0C,5E60,5FA0,T_UI,I,Src_0C_5E60_AnimEd_CopyDigitTile,far pointer of AnimEd_CopyDigitTile: the bytes render as the digit glyph tiles 0-9
+13,5C80,5CA0,T_UI,I,Src_13_5C80_Tbl65CA_0,"target 0 of table 09:65CA (Run_PodiumChickTbl, {lo,hi,bank} stored in WRAM $D00E / $D013 / $D014 by the character placement code 09:65A2): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
+13,6400,6800,T_UI,I,Src_13_6400_PhotoPicker_LoadPageThumbs,"far pointer of PhotoPicker_LoadPageThumbs / LinkPick_LoadPageThumbs: renders as 2bpp tile pieces (picker frames, page numbers)"
+13,6CC0,6D00,T_UI,I,Src_13_6CC0_Tbl65CA_1,"target 1 of table 09:65CA (Run_PodiumChickTbl, {lo,hi,bank} stored in WRAM $D00E / $D013 / $D014 by the character placement code 09:65A2): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
+13,7440,7800,T_UI,I,Src_13_7440_Tbl65CA_2,"target 2 of table 09:65CA (Run_PodiumChickTbl, {lo,hi,bank} stored in WRAM $D00E / $D013 / $D014 by the character placement code 09:65A2): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
+14,5C78,6000,T_UI,I,Src_14_5C78_Tbl65FB_0,"target 0 of table 09:65FB (Run_PodiumMoleTbl, {lo,hi,bank} stored in WRAM $D017 / $D01C / $D01D by the character placement code 09:65D3): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
+14,6CB8,7000,T_UI,I,Src_14_6CB8_Tbl65FB_1,"target 1 of table 09:65FB (Run_PodiumMoleTbl, {lo,hi,bank} stored in WRAM $D017 / $D01C / $D01D by the character placement code 09:65D3): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
+14,7438,75E0,T_UI,I,Src_14_7438_Tbl65FB_2,"target 2 of table 09:65FB (Run_PodiumMoleTbl, {lo,hi,bank} stored in WRAM $D017 / $D01C / $D01D by the character placement code 09:65D3): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
+17,7900,7940,T_UI,I,Src_17_7900_Player_CopyDigitTile,far pointer of Player_CopyDigitTile: the bytes render as the digit glyph tiles 0-9
+19,7E60,7FE0,MAP,C,Src_19_7E60_Tbl53A6_4,target 4 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+1C,6D60,6DE0,T_UI,I,Data_1C_6D60_Mode1F_State07_QuitPanel,"loaded by Mode1F_State08_EditPagesSetup (copy sites of assets/catalog_jp.csv, to VRAM tile area and WRAM staging): renders as 2bpp panel tiles"
+1C,6E60,6F60,T_UI,I,Src_1C_6E60_Mode1F_State08_EditPagesSetup,"loaded by Mode1F_State08_EditPagesSetup (copy sites of assets/catalog_jp.csv, to VRAM tile area and WRAM staging): renders as 2bpp panel tiles"
+1C,6F60,7060,T_UI,I,Src_1C_6F60_Mode1F_State08_EditPagesSetup,"loaded by Mode1F_State08_EditPagesSetup (copy sites of assets/catalog_jp.csv, to VRAM tile area and WRAM staging): renders as 2bpp panel tiles"
+1C,7060,7260,T_UI,I,Src_1C_7060_Mode1F_State08_EditPagesSetup,"loaded by Mode1F_State08_EditPagesSetup (copy sites of assets/catalog_jp.csv, to VRAM tile area and WRAM staging): renders as 2bpp panel tiles"
+1D,7940,79A0,T_UI,C,Src_1D_7940_Tbl539D_5,target 5 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,79A0,7A00,T_UI,C,Src_1D_79A0_Tbl539D_0,target 0 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7A00,7A60,T_UI,C,Src_1D_7A00_Tbl539D_16,target 16 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7A60,7AC0,T_UI,C,Src_1D_7A60_Tbl539D_17,target 17 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7AC0,7B41,T_UI,C,Src_1D_7AC0_Tbl539D_23,target 23 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7B80,7C3A,T_UI,C,Src_1D_7B80_Tbl539D_29,target 29 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7C40,7D00,T_UI,C,Src_1D_7C40_Tbl539D_27,target 27 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7D00,7D60,T_UI,C,Src_1D_7D00_Tbl539D_33,target 33 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7D60,7DC0,T_UI,C,Src_1D_7D60_Tbl539D_19,target 19 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7DC0,7E20,T_UI,C,Src_1D_7DC0_Tbl539D_31,target 31 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7E20,7E80,T_UI,C,Src_1D_7E20_Tbl539D_21,target 21 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7E80,7EE0,T_UI,C,Src_1D_7E80_Tbl539D_18,target 18 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7EE0,7F40,T_UI,C,Src_1D_7EE0_Tbl539D_25,target 25 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+1D,7F40,7FC0,T_UI,C,Src_1D_7F40_Tbl539D_20,target 20 of the icon tables 04:539D / 04:53D0: tile data (6 tiles) to $8F00 / $8F60 by Stamp_LoadCategoryIcons (04:5922)
+20,6520,6524,T_UI,I,Src_20_6520_OwnerCard_DrawBloodLow,"far pointer of OwnerCard_DrawBloodLow, 4 bytes in front of the sheet at 20:6524: same tile data"
+20,6660,6680,T_UI,I,Src_20_6660_OwnerCard_LoadBirthNumberTiles,far pointer of OwnerCard_LoadBirthNumberTiles: renders as digit / symbol tiles
+21,5620,56C0,T_UI,I,Src_21_5620_CommentCard_DrawNibble,far pointer of CommentCard_DrawNibble: renders as the 10 digit tiles 0-9
+21,7BB0,7BC0,T_UI,C,Src_21_7BB0_BorderPicker_AnimateIcon,"frame 0 of the 5-frame icon animation (BorderPicker_AnimateIcon 08:4EBB): one 16-byte tile, the same kind as frames 1-4 at 21:7BC0"
+23,7E80,8000,MAP,C,Src_23_7E80_Tbl53A6_3,target 3 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+25,7EE0,8000,MAP,C,Src_25_7EE0_Tbl539D_40,target 40 of table 04:5403: Stamp_LoadCategoryIcons (04:5922) copies 0x120 bytes of it to $9C00 (BG map); rows of tile indices
+26,55C0,57C0,MAP,C,Src_26_55C0_Tbl53A6_0,target 0 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+26,5A60,5C40,MAP,C,Src_26_5A60_Tbl7CF9_7,target 7 of table 07:7CF9 (MainMenu_SlideC_Tbl0): map strips copied to the BG map; rows of tile indices
+27,54B0,5670,MAP,C,Src_27_54B0_Tbl7CF9_0,target 0 of table 07:7CF9 (MainMenu_SlideC_Tbl0): map strips copied to the BG map; rows of tile indices
+27,5670,5830,MAP,C,Src_27_5670_Tbl7CF9_2,target 2 of table 07:7CF9 (MainMenu_SlideC_Tbl0): map strips copied to the BG map; rows of tile indices
+27,5830,59F0,MAP,C,Src_27_5830_Tbl7CF9_1,target 1 of table 07:7CF9 (MainMenu_SlideC_Tbl0): map strips copied to the BG map; rows of tile indices
+27,5AB0,5BB0,MAP,C,Src_27_5AB0_DjPerf_Equaliser,"far pointer of DjPerf_Equaliser, copied to the BG map (copy site 05:434F); rows of tile indices"
+27,60F0,6270,MAP,C,Src_27_60F0_Tbl53A6_7,target 7 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+27,6270,63F0,MAP,C,Src_27_6270_Tbl53A6_6,target 6 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+27,63F0,6570,MAP,C,Src_27_63F0_Tbl53A6_1,target 1 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+27,6570,66F0,MAP,C,Src_27_6570_Tbl53A6_2,target 2 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+27,66F0,6AF0,MAP,C,Src_27_66F0_Tbl53A6_5,target 5 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
+27,6AF0,6C10,MAP,C,Src_27_6AF0_Tbl539D_38,target 38 of table 04:5403: Stamp_LoadCategoryIcons (04:5922) copies 0x120 bytes of it to $9C00 (BG map); rows of tile indices
+27,6C10,6D30,MAP,C,Src_27_6C10_Tbl539D_35,target 35 of table 04:5403: Stamp_LoadCategoryIcons (04:5922) copies 0x120 bytes of it to $9C00 (BG map); rows of tile indices
+27,6F70,7090,MAP,C,Src_27_6F70_Tbl539D_36,target 36 of table 04:5403: Stamp_LoadCategoryIcons (04:5922) copies 0x120 bytes of it to $9C00 (BG map); rows of tile indices
+27,72D0,73F0,MAP,C,Src_27_72D0_Tbl539D_34,target 34 of table 04:5403: Stamp_LoadCategoryIcons (04:5922) copies 0x120 bytes of it to $9C00 (BG map); rows of tile indices
+27,73F0,7510,MAP,C,Src_27_73F0_Tbl539D_37,target 37 of table 04:5403: Stamp_LoadCategoryIcons (04:5922) copies 0x120 bytes of it to $9C00 (BG map); rows of tile indices
