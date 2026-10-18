@@ -8,8 +8,10 @@ Verdict of a graphic span: the tiles are 'on screen' when a byte of the tile row
   TCRF         = a label Unused_TCRF_* (graphics the owner supplied from TCRF, located in the ROM)
   never shown  = no stable frame at all, and never read in an organic run
   forced only  = stable frames only in forced runs (no organic route found)
+An unused tile map is drawn right beside the tile set it uses: the column 'tileset' of unused_manual.csv names that set as a span (BB:AAAA-BBBB), or says
+'none: ...' / 'not found: ...' (then an empty box stands in its place).
 usage: display_report.py [--npz-dir DIR] [--stable N]"""
-import sys, os, csv, glob, json, collections, argparse
+import sys, os, re, csv, glob, json, collections, argparse
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 ap = argparse.ArgumentParser(); ap.add_argument('--npz-dir'); ap.add_argument('--stable', type=int, default=15); ap.add_argument('--out')
@@ -66,7 +68,7 @@ if os.path.exists(MAN):
         rows[:] = [r for r in rows if not (r['b'] == b and a <= r['a'] <= e)]
         nm0 = (names.get((b, a)) or {}).get('name') or (gone[0]['name'] if gone else 'Gfx_%02X_%04X' % (b, a))     # a span that starts inside a labelled block keeps the name of the open row it replaces
         rows.append(dict(bank=m['bank'], addr=m['start'].upper(), b=b, a=a, n=e - a + 1, name=nm0, kind=m['kind'], tcrf='', src='manual', note=m['note'],
-                         mtier=(m.get('tier') or 'no loader'), pic=(m.get('pic') or ''), drawn=(m.get('drawn') or '')))
+                         mtier=(m.get('tier') or 'no loader'), pic=(m.get('pic') or ''), drawn=(m.get('drawn') or ''), tileset=(m.get('tileset') or '')))
 for r in rows:
     o = off(r['b'], r['a']); r['v'] = verdict(o, r['n'])
     v = r['v']
@@ -165,15 +167,40 @@ def cell(r):
     cap = ['%s:%s  %d B%s' % (r['bank'], r['addr'], r['n'], ('  (tile map%s)' % drawn) if r['kind'] == 'Map' else '')] + wrap(short(r['name']).replace('Unused_TCRF_', 'TCRF ') + (' (?)' if r.get('conf') == '?' else ''), 34)[:3] + wrap(evidence(r), 34)[:4]
     return cap, img
 def section(rs, y0, title, sub):
-    big = [cell(r) + (r,) for r in rs if r['kind'] in ('Gfx', 'Banner', 'Map', 'TCRF')]
+    big = [cell(r) + (r,) for r in rs if r['kind'] in ('Gfx', 'Banner', 'Map', 'TCRF') and not r.get('pair')]
     ncol = [0] * COLN; cols_ = [[] for _ in range(COLN)]
     for cap, img, r in big:
         h = 16 * len(cap) + img.height + 18; c = min(range(COLN), key=lambda k: ncol[k]); cols_[c].append((cap, img, r)); ncol[c] += h
     return big, cols_, (max(ncol) if big else 0)
+# ---- each unused tile map beside the tile set it is drawn with
+SPAN = re.compile(r'^([0-9A-Fa-f]{2}):([0-9A-Fa-f]{4})-([0-9A-Fa-f]{4})$')
+PCAP = 34; PNOTE = 108
+pairs = []
+for m in rows:
+    ts = m.get('tileset') if m['kind'] == 'Map' else ''
+    if not ts: continue
+    sp = SPAN.match(ts); m['pair'] = True
+    if sp:
+        tb, ta, te = int(sp.group(1), 16), int(sp.group(2), 16), int(sp.group(3), 16)
+        trs = [r for r in rows if r['b'] == tb and ta <= r['a'] <= te]
+        for r in trs: r['pair'] = True
+        o = off(tb, ta); n = te - ta + 1; d = ROM[o:o + n]
+        tr = dict(b=tb, a=ta, n=n, tier=m['tier'], v=verdict(o, n), bank='%02X' % tb, addr='%04X' % ta)
+        tcap = ['%02X:%04X-%04X  %d B' % (tb, ta, te, n), 'tile set, %d tiles (%s)' % (n // 16, ' + '.join(r['addr'] for r in trs))] + wrap(evidence(tr), PCAP)[:4]
+        timg = tiles(d[:n // 16 * 16]); tnote = ' '.join(r['note'] for r in trs if r.get('note'))
+        pairs.append(dict(m=m, tcap=tcap, timg=timg, tnote=tnote, tspan=ts))
+    else:
+        pairs.append(dict(m=m, tcap=['no tile set'] + wrap(ts, PCAP)[:4], timg=None, tnote='', tspan=ts))
+for p in pairs:
+    m = p['m']; cap, img = cell(m)
+    cap[0] = '%s:%s  %d B  (tile map)' % (m['bank'], m['addr'], m['n']); p['mcap'] = cap; p['mimg'] = img
+    if p['timg'] is None: p['timg'] = Image.new('RGB', (img.width, max(img.height, 64)), (244, 244, 244)); p['empty'] = True
+    p['lines'] = wrap('Map ' + m['bank'] + ':' + m['addr'] + ': ' + m.get('note', ''), PNOTE) + ([''] + wrap('Tile set ' + p['tspan'] + ': ' + p['tnote'], PNOTE) if p['tnote'] else [])
+    p['h'] = 24 + max(16 * len(p['tcap']) + p['timg'].height, 16 * len(p['mcap']) + img.height, 16 * len(p['lines'])) + 22
+pairs_h = sum(p['h'] for p in pairs)
 by = collections.OrderedDict()
-for t, ttl, sub in (('no loader', 'Unused screens with no loader in either ROM: the alternate stand-by screen of the image exchange, the one-page main menu', 'teal = hand-listed from a code search and BGB (unused_manual.csv); the stand-by bytes were seen only as a thumbnail / value matches (README 14.4, 16.24 (3)); main menu: README 16.25'),
-                    ('TCRF', 'TCRF-documented unused graphics located in this ROM (sym labels Unused_TCRF_*)', 'purple = labelled from the images the owner supplied from TCRF; (?) = candidate (partial pixel match); ORGANIC = the tile was on screen in a run without state pokes'),
-                    ('never shown', 'Never on screen and never read in an organic run', 'red = no stable frame in 37,370 replayed menu states and the stamp-menu walks, and only the forced runs ever read it (graphics and tile maps)'),
+for t, ttl, sub in (('TCRF', 'TCRF-documented unused graphics located in this ROM (sym labels Unused_TCRF_*)', 'purple = labelled from the images the owner supplied from TCRF; (?) = candidate (partial pixel match); ORGANIC = the tile was on screen in a run without state pokes'),
+                    ('never shown', 'Never on screen and never read in an organic run', 'red = no stable frame in 37,370 replayed menu states and the stamp-menu walks, and only the forced runs ever read it (graphics; the two maps of this tier are in the first block, beside their tile set)'),
                     ('forced only', 'On screen only when state variables are forced', 'amber = shown by forced runs only; no organic route found, so probably not reachable on a real camera')):
     by[t] = ([r for r in rows if r['tier'] == t], ttl, sub)
 secs = []
@@ -191,13 +218,34 @@ for r in scraps:
     place.append((x, yy, capt, img, hexs)); x += w_ + 10; rowh = max(rowh, h_)
 scrap_h = yy + rowh + 10
 SOUND_ROWH = 15
-total = 70 + sum(60 + s[5] for s in secs) + 60 + scrap_h + 70 + SOUND_ROWH * (len(sounds) + 6) + 150
+total = 70 + 60 + pairs_h + sum(60 + s[5] for s in secs) + 60 + scrap_h + 70 + SOUND_ROWH * (len(sounds) + 6) + 150
 sheet = Image.new('RGB', (WIDTH, total), 'white'); dr_ = ImageDraw.Draw(sheet)
 nshown = sum(1 for r in rows if r['tier'] == 'shown')
 dr_.text((GAP, 8), 'REALLY unused assets, Game Boy Camera / Pocket Camera (Japan) Rev A', fill=(0, 0, 0), font=FONTH)
 dr_.text((GAP, 30), 'Menu states replayed (%s) in an emulator core that follows every ROM byte to the screen; %d spans checked (open assets + %d hand-listed), %d on screen.' % ('37,370 + stamp walks', sum(1 for r in rows if r['src'] in ('open', 'manual')), sum(1 for r in rows if r['src'] == 'manual'), nshown), fill=(60, 60, 60), font=FONT)
 dr_.text((GAP, 46), 'caption = bank:address, bytes, label, evidence; 2bpp tiles, 16 per row, x2 (tile maps: byte value as grey).', fill=(60, 60, 60), font=FONT)
 y = 70
+c = COL['no loader']; dr_.rectangle([GAP, y, WIDTH - GAP, y + 3], fill=c)
+dr_.text((GAP, y + 8), 'Unused tile maps, each beside the tile set it is drawn with  (%d maps, %d tile sets)' % (len(pairs), sum(1 for p in pairs if not p.get('empty'))), fill=c, font=FONTB)
+dr_.text((GAP, y + 26), 'left = tile set (2bpp, 16 per row, x2), middle = the map drawn through it in BGB (grey = byte values), right = notes; teal = no loader, red = never shown', fill=(90, 90, 90), font=FONT)
+yy = y + 50
+for p in pairs:
+    m = p['m']; c = COL[m['tier']]; img = p['mimg']
+    dr_.text((GAP, yy), '%s:%s  tile map  <-  %s' % (m['bank'], m['addr'], p['tspan'] if SPAN.match(p['tspan']) else p['tspan'].split(':', 1)[0]), fill=c, font=FONTB)
+    y2 = yy + 22
+    for li, line in enumerate(p['tcap']): dr_.text((GAP, y2 + 16 * li), line, fill=c if li == 0 else (80, 80, 80), font=FONTB if li == 0 else FONT)
+    ty = y2 + 16 * len(p['tcap'])
+    if p.get('empty'):
+        bx = [GAP, ty, GAP + p['timg'].width - 1, ty + p['timg'].height - 1]; dr_.rectangle(bx, fill=(244, 244, 244), outline=(150, 150, 150))
+        dr_.line([bx[0], bx[1], bx[2], bx[3]], fill=(200, 200, 200), width=1); dr_.line([bx[0], bx[3], bx[2], bx[1]], fill=(200, 200, 200), width=1)
+    else: sheet.paste(p['timg'], (GAP, ty)); dr_.rectangle([GAP - 1, ty - 1, GAP + p['timg'].width, ty + p['timg'].height], outline=c)
+    xx = GAP + CW
+    for li, line in enumerate(p['mcap']): dr_.text((xx, y2 + 16 * li), line, fill=c if li == 0 else (80, 80, 80), font=FONTB if li == 0 else FONT)
+    my = y2 + 16 * len(p['mcap'])
+    sheet.paste(img, (xx, my)); dr_.rectangle([xx - 1, my - 1, xx + img.width, my + img.height], outline=c)
+    for li, line in enumerate(p['lines']): dr_.text((GAP + 2 * CW, y2 + 16 * li), line, fill=(60, 60, 60), font=FONT)
+    yy += p['h']
+y += 60 + pairs_h
 for t, ttl, sub, big, cols_, h in secs:
     c = COL[t]; dr_.rectangle([GAP, y, WIDTH - GAP, y + 3], fill=c)
     dr_.text((GAP, y + 8), '%s  (%d)' % (ttl, len(big)), fill=c, font=FONTB); dr_.text((GAP, y + 26), sub, fill=(90, 90, 90), font=FONT)
@@ -228,4 +276,4 @@ yy += 8
 dr_.text((GAP, yy), 'Nothing was HEARD: the replays log the request mailboxes (ids), not the audio. The core is not a real Game Boy: exploration is large, not exhaustive.', fill=(160, 40, 40), font=FONT); yy += 16
 dr_.text((GAP, yy), 'Method and caveats: README 16.24.  Tools: gbcov_display.c, display_replay.py, display_stamps.py, display_report.py.  Data: really_unused.csv, really_unused_sounds.csv.', fill=(90, 90, 90), font=FONT)
 sheet = sheet.crop((0, 0, WIDTH, yy + 30)); sheet.save(OUT + '/really_unused.png')
-print({t: len(by[t][0]) for t in by}, 'scraps', len(scraps), 'sounds', len(sounds), 'size', sheet.size)
+print({t: len(by[t][0]) for t in by}, 'map/tile-set pairs', len(pairs), 'scraps', len(scraps), 'sounds', len(sounds), 'size', sheet.size)
