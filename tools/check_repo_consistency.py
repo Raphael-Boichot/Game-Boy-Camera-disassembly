@@ -28,6 +28,7 @@ What it checks (each line of the report is one check)
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
   printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
   seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
+  patternmatch tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -546,6 +547,28 @@ if SO:
                           tuple(float(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
     except KeyError as e:
         bad('seamoffsets', '%s lacks the variant %s' % (SO_FILE, e))
+
+# ------------------------------------------------------------------ 26:7080 pattern of repeated ids against every map window (README 16.25.2)
+PM_FILE = 'tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv'
+try:
+    PM = list(csv.DictReader(io.StringIO(rd(PM_FILE))))
+except Exception as e:
+    PM = []; bad('patternmatch', '%s does not load: %s' % (PM_FILE, e))
+if PM:
+    pm = {(r['target'], r['search_rom'], r['strides']): r for r in PM}
+    cp = [r for r in PM if r['counterpart_addr']]
+    if any(float(r['counterpart_jaccard']) != 1.0 for r in cp) or any(float(r['best_other_jaccard']) >= 0.20 for r in PM):
+        bad('patternmatch', '%s: a counterpart must score 1.000 and every other window stay below 0.20 (the README says no look-alike)' % PM_FILE)
+    else: ok('patternmatch', '%d runs, counterparts %s at 1.000, best other window %.3f' % (len(PM), '/'.join(r['counterpart_addr'] for r in cp), max(float(r['best_other_jaccard']) for r in PM)))
+    try:
+        j7 = pm[('26:7080', 'JP', '32')]; j7p = pm[('26:7080', 'JP', '20/22/24')]; u7 = pm[('26:7080', 'INTL', '20/22/24')]; u7c = pm[('26:7080', 'INTL', '32')]; m_ = pm[('25:7820', 'INTL', '32')]; cr = pm[('26:72C0', 'INTL', '32')]
+        quoted('pattern match', r'the best is ([\d.]+) in the Japanese ROM \(`23:44BF`, a flat fill; ([\d.]+) at the packed strides\) and ([\d.]+) in the international ROM \(`2F:642A` at stride 22\), apart from the map.s own counterpart `26:6E40` \(([\d.]+)\)',
+               lambda m: ((float(j7['best_other_jaccard']), float(j7p['best_other_jaccard']), float(u7['best_other_jaccard']), float(u7c['counterpart_jaccard'])), tuple(float(m.group(i)) for i in (1, 2, 3, 4))), docs=('README.md',), need=('README.md',))
+        quoted('pattern match', r'finds its counterpart `25:75E0` at ([\d.]+) and nothing else above ([\d.]+), the credits picture `26:72C0` has no copy in the international ROM \(best ([\d.]+)\)',
+               lambda m: ((float(m_['counterpart_jaccard']), float(m_['best_other_jaccard']), float(cr['best_other_jaccard'])), tuple(float(m.group(i)) for i in (1, 2, 3))), docs=('README.md',), need=('README.md',))
+        if m_['counterpart_addr'] != '25:75E0' or u7c['counterpart_addr'] != '26:6E40': bad('patternmatch', '%s: the counterparts must be 25:75E0 and 26:6E40' % PM_FILE)
+    except KeyError as e:
+        bad('patternmatch', '%s lacks the run %s' % (PM_FILE, e))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'

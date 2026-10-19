@@ -1,0 +1,8 @@
+target,search_rom,strides,best_other_addr,best_other_stride,best_other_jaccard,counterpart_addr,counterpart_jaccard
+26:7080,JP,32,23:44BF,32,0.154,,
+26:7080,JP,20/22/24,2F:642A,22,0.131,,
+26:7080,INTL,32,23:44BF,32,0.131,26:6E40,1.000
+26:7080,INTL,20/22/24,2F:642A,22,0.133,,
+25:7820,INTL,32,24:6E82,32,0.158,25:75E0,1.000
+26:72C0,JP,32,26:50E0,32,0.140,,
+26:72C0,INTL,32,25:4882,32,0.155,,
