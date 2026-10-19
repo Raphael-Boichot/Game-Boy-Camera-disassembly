@@ -55,7 +55,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Other BGB and core pitfalls (VRAM writes in PPU mode 3, hex logs, WAV offset, forcing, two-pass snapshots): `HOWTO_NEW_ROM.md` §6 and §7.
 * **TCRF pictures can be 2x enlargements:** reduce them before matching (`tcrf_check/tools/tcrf_exact_match.py`), allow palette folds and tile flips, and remember that ROM tile sheets are 16 tiles wide with rows 0x100 bytes apart.
   A 1-tile or 2-tile exact match is weak: check the display evidence.
-* A load site `ld hl,TABLE; add hl,bc; ld a,[hl+]` before a banked copy is a local pointer table, not a far pointer. The auto labeller turns any executed 16-bit immediate equal to a ROM address into a label
+* A load site `ld hl,TABLE; add hl,bc; ld a,[hl+]` before a banked copy is a local pointer table, not a far pointer; and a 3-byte record table is a far-pointer table only if its reader hands the three bytes to a banked copy (the podium records `09:65CA` / `09:65FB` are `{x; y; entry}`, not `{lo,hi,bank}`). The auto labeller turns any executed 16-bit immediate equal to a ROM address into a label
   (`ld bc,$xxxx` before an OAM meta-sprite call is a position): read the code before trusting a label that cuts a table.
 * **A `?`, `_Aux` or `_Unref` label (or any "by eye" note) is a hypothesis: re-derive it before trusting it.** Exact tile match of every tile over the whole ROM and the other ROM, a loader scan (immediates with the bank, pointer tables,
   `assets/copy_sites_jp.csv`), then the display tracker (it is value-matched: check that the tiles have no duplicate elsewhere). Three of the eight `?` labels changed this way (`0C:6AB0` "kana strips" was 336 B of `$00` and 3 tiles).
@@ -68,7 +68,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
 
 ## Where things stand (pointers, not numbers)
-* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,793 / 1,450 / 0); 249 doubtful rows are listed with evidence
+* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,237 names tagged C / I / ? (3,793 / 1,444 / 0); 249 doubtful rows are listed with evidence
   in `disasm/sym_unconclusive_jp.md`. L4 is done as defined by the how-to (788 RAM names in §2.13; the `MODE_*`, key-mask, hardware-flag and sound-id constants in §2.14; state numbers stay numbers), L5 (committed buildable tree) is not done; L6 is partial (name / comment charset only, §16.27).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international ROM has no instrumented coverage run
   (`coverage/tools/coverage_run.py` needs a variant without the Japanese trace); behavioural parity was checked in BGB (§16.11, §16.12).

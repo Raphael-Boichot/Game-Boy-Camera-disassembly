@@ -1,12 +1,6 @@
 bank,start,end,kind,ev,label,basis
 0C,5E60,5FA0,T_UI,I,Src_0C_5E60_AnimEd_CopyDigitTile,far pointer of AnimEd_CopyDigitTile: the bytes render as the digit glyph tiles 0-9
-13,5C80,5CA0,T_UI,I,Src_13_5C80_Tbl65CA_0,"target 0 of table 09:65CA (Run_PodiumChickTbl, {lo,hi,bank} stored in WRAM $D00E / $D013 / $D014 by the character placement code 09:65A2): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
 13,6400,6800,T_UI,I,Src_13_6400_PhotoPicker_LoadPageThumbs,"far pointer of PhotoPicker_LoadPageThumbs / LinkPick_LoadPageThumbs: renders as 2bpp tile pieces (picker frames, page numbers)"
-13,6CC0,6D00,T_UI,I,Src_13_6CC0_Tbl65CA_1,"target 1 of table 09:65CA (Run_PodiumChickTbl, {lo,hi,bank} stored in WRAM $D00E / $D013 / $D014 by the character placement code 09:65A2): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
-13,7440,7800,T_UI,I,Src_13_7440_Tbl65CA_2,"target 2 of table 09:65CA (Run_PodiumChickTbl, {lo,hi,bank} stored in WRAM $D00E / $D013 / $D014 by the character placement code 09:65A2): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
-14,5C78,6000,T_UI,I,Src_14_5C78_Tbl65FB_0,"target 0 of table 09:65FB (Run_PodiumMoleTbl, {lo,hi,bank} stored in WRAM $D017 / $D01C / $D01D by the character placement code 09:65D3): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
-14,6CB8,7000,T_UI,I,Src_14_6CB8_Tbl65FB_1,"target 1 of table 09:65FB (Run_PodiumMoleTbl, {lo,hi,bank} stored in WRAM $D017 / $D01C / $D01D by the character placement code 09:65D3): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
-14,7438,75E0,T_UI,I,Src_14_7438_Tbl65FB_2,"target 2 of table 09:65FB (Run_PodiumMoleTbl, {lo,hi,bank} stored in WRAM $D017 / $D01C / $D01D by the character placement code 09:65D3): rendered as 2bpp tiles, small character pictures of the RUN! RUN! RUN! podium"
 17,7900,7940,T_UI,I,Src_17_7900_Player_CopyDigitTile,far pointer of Player_CopyDigitTile: the bytes render as the digit glyph tiles 0-9
 19,7E60,7FE0,MAP,C,Src_19_7E60_Tbl53A6_4,target 4 of table 07:53A6: ViewMenu_AnimateBackground (07:5369) copies 0x180 bytes of the selected entry to $9840 (BG map); rows of tile indices
 1C,6D60,6DE0,T_UI,I,Data_1C_6D60_Mode1F_State07_QuitPanel,"loaded by Mode1F_State08_EditPagesSetup (copy sites of assets/catalog_jp.csv, to VRAM tile area and WRAM staging): renders as 2bpp panel tiles"

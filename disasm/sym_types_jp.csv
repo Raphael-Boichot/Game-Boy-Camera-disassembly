@@ -687,30 +687,25 @@ bank,start,end,type,width,note
 13,5800,5830,data,16,Gfx
 13,5830,5880,data,16,Gfx
 13,5880,5950,data,16,Gfx
-13,5950,5C80,data,16,Gfx
-13,5C80,6400,data,16,Gfx
+13,5950,5CA0,data,16,Gfx
+13,5D00,6400,data,16,Gfx
 13,6400,6800,data,16,Gfx
 13,6800,6900,data,16,Gfx
 13,6900,6A00,data,16,Gfx
 13,6A00,6B00,data,16,Gfx
 13,6B00,6C00,data,16,Gfx
-13,6C00,6CC0,data,16,Gfx
-13,6CC0,6D00,data,16,Gfx
+13,6C00,6D00,data,16,Gfx
 13,6D00,6E00,data,16,Gfx
 13,6E00,6F00,data,16,Gfx
-13,7000,7440,data,16,Gfx
-13,7440,7800,data,16,Gfx
+13,7000,7800,data,16,Gfx
 13,7800,8000,data,16,Gfx
 14,4000,4554,data,16,Gfx
 14,4554,5030,data,16,Gfx
-14,5800,5C78,data,16,Gfx
-14,5C78,6000,data,16,Gfx
+14,5800,6000,data,16,Gfx
 14,6000,6800,data,16,Gfx
-14,6800,6CB8,data,16,Gfx
-14,6CB8,7000,data,16,Gfx
+14,6800,7000,data,16,Gfx
 14,7000,7430,data,16,Gfx
-14,7430,7438,data,16,Gfx
-14,7438,75E0,data,16,Gfx
+14,7430,75E0,data,16,Gfx
 14,75E0,7600,data,16,Gfx
 14,7600,76B0,data,16,Gfx
 14,76B0,7A00,data,16,Gfx
@@ -1915,8 +1910,8 @@ bank,start,end,type,width,note
 08,656E,6F6E,data,40,Print_Layout3_FourPhotosRotated: 64 rows x 20 {tile; flags}
 08,6F6E,723E,data,40,Print_Layout4_InfoPage: 18 rows x 20 {tile; flags}
 08,74DC,74F1,data,3,Title_SceneTbl: 7 x {lo
-09,65CA,65D3,data,3,3 x {lo
-09,65FB,6604,data,3,3 x {lo
+09,65CA,65D3,data,3,Run_PodiumChickTbl: 3 x {x; y; animation entry}
+09,65FB,6604,data,3,Run_PodiumMoleTbl: 3 x {x; y; animation entry}
 09,7332,733E,data,3,ResultScreen_PictureTbl: 4 x {lo
 09,509C,50D0,data,4,13 x {lo
 09,5145,5155,data,4,4 x {lo
