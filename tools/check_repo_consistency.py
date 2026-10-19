@@ -29,6 +29,7 @@ What it checks (each line of the report is one check)
   printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
   seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
   patternmatch tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
+  handspan   (with --rom) the span 11:5800-693F has fewer different tiles (130 of 276, 95 blank) than the 245 ids of 26:7080 and its four natural layouts cost 0.7 per pixel or more; the README sentence of 16.25.2 that quotes them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -569,6 +570,21 @@ if PM:
         if m_['counterpart_addr'] != '25:75E0' or u7c['counterpart_addr'] != '26:6E40': bad('patternmatch', '%s: the counterparts must be 25:75E0 and 26:6E40' % PM_FILE)
     except KeyError as e:
         bad('patternmatch', '%s lacks the run %s' % (PM_FILE, e))
+
+# ------------------------------------------------------------------ 26:7080 against the tiles of the hand-newspaper span 11:5800 (README 16.25.2)
+if A.rom:
+    sys.path.insert(0, P('tcrf_check/tools'))
+    import map_vs_span_layouts as MVS
+    hn_ids, (hn_dist, hn_blank, hn_ff), hn_c = MVS.costs(open(A.rom, 'rb').read(), 0x26, 0x7080, 0x11, 0x5800, 276, 25, 512, 0)
+    hn_order = ['contiguous ascending', 'contiguous descending', 'slots ascending', 'slots descending']
+    hn_v = [round(float(hn_c[k][0]), 2) for k in hn_order]
+    if hn_dist >= hn_ids or min(hn_v) < 0.7: bad('handspan', 'the span 11:5800 has %d different tiles for %d different ids, best layout cost %.2f: the README says it cannot be the tile set' % (hn_dist, hn_ids, min(hn_v)))
+    else: ok('handspan', '11:5800-693F: 276 tiles, %d blank, %d different (the map has %d different ids); layouts cost %s per pixel' % (hn_blank, hn_dist, hn_ids, '/'.join('%.2f' % v for v in hn_v)))
+    quoted('hand span', r'the span holds 276 tiles of which (\d+) are blank and only (\d+) are different',
+           lambda m: ((hn_blank, hn_dist), (int(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
+    quoted('hand span', r'cost ([\d.]+), ([\d.]+), ([\d.]+) and ([\d.]+) per pixel, against about 0\.4 for a true set',
+           lambda m: (tuple(hn_v), tuple(float(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
+    quoted('hand span', r'a de-duplicated picture of (\d+) different ids needs', lambda m: ((hn_ids,), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'
