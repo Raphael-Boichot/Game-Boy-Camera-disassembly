@@ -1890,11 +1890,15 @@ bank,start,end,type,width,note
 00,2F3F,2FA5,data,3,Mode_Table: 34 x {lo
 04,44DC,44F1,data,3,PhotoPicker_IconTbl: 7 x {lo
 04,539D,5436,data,3,3 tables x 17 {lo
+04,5337,539D,data,6,Stamp_PageGfxTbl: 17 x 6 B {lo
+04,5436,548B,data,5,Stamp_IconSrcGfxTbl: 17 x 5 B {lo
+04,548B,54E0,data,5,Stamp_IconSrcMaskTbl: 17 x 5 B {lo
 05,62A3,62B2,data,3,5 x {lo
 06,46EF,46FE,data,3,5 x {lo
 06,4701,470A,data,3,3 x {lo
 06,478F,47A4,data,3,7 x {lo
 06,4B67,4B73,data,3,4 x {lo
+06,5D44,5D54,data,2,Mode18_LoadThumb_Tbl5D44: 8 VRAM destination words
 06,5D54,5D6C,data,3,8 x {lo
 07,4FF6,4FFF,data,3,3 x {lo
 07,5002,500B,data,3,3 x {lo

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """A small Game Boy picture renderer for checks and animations: background + 8 x 8 / 8 x 16 sprites from a VRAM dump, an OAM dump and the LCD registers (no window, no mid-frame changes), shades 0-3.
 render(vram, oam, lcdc, scx, scy, bgp, obp0, obp1) -> a 144 x 160 array of shades (0 = lightest).  Checked against BGB screenshots of the main menu (menu_screen_gif.py --check).
+render_split(..., line): the picture with the BG tile-data bit (LCDC bit 4) flipped from scanline `line` on, what STAT handler 1 of the ROM (00:0B43) does.
 Tile data: LCDC bit 4 = 1: ids 0-255 at $8000; 0: ids 0-127 at $9000 and 128-255 at $8800.  Sprites always use $8000.  Sprite priority: lower X wins, then lower OAM index; 10 sprites per line; OAM bit 7 = behind BG colours 1-3."""
 import numpy as np
 
@@ -46,3 +47,8 @@ def render(vram, oam, lcdc, scx, scy, bgp, obp0, obp1, bgmap=None):
                         done[sxx] = True
                         if not (fl & 0x80 and bgc[y, sxx]): line[sxx] = pal[pr[px]]
     return out
+
+def render_split(vram, oam, lcdc, line, scx, scy, bgp, obp0, obp1, bgmap=None):
+    """the same picture with LCDC bit 4 (BG tile data area) flipped for the scanlines >= `line`"""
+    top = render(vram, oam, lcdc, scx, scy, bgp, obp0, obp1, bgmap); bot = render(vram, oam, lcdc ^ 0x10, scx, scy, bgp, obp0, obp1, bgmap)
+    return np.vstack([top[:line], bot[line:]])

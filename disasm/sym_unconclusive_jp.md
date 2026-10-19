@@ -14,7 +14,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
-| mode state | 102 | 5585 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| mode state | 100 | 5545 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2528 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
@@ -38,7 +38,7 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## mode state (102)
+## mode state (100)
 
 _Why doubtful:_ state purpose read from the data it writes; screen function partly guessed. _To settle:_ play the screen in an emulator; match with the TCRF / Funtography screen name.
 
@@ -119,8 +119,6 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 06:5C84 | `Mode18_Pick2_DrawCursor_Tbl5C84` | 7 | state handler or helper of a screen mode | auto: 7 bytes, bytes; referenced by Mode18_Pick2_DrawCursor |
 | 06:5C8B | `Mode18_DrawArrows` | 185 | state handler or helper of a screen mode |  |
 | 06:5C9C | `Mode18_LoadAllThumbs` | 22 | state handler or helper of a screen mode |  |
-| 06:5D44 | `Mode18_LoadThumb_Tbl5D44` | 16 | state handler or helper of a screen mode | auto: 16 bytes, bytes; referenced by Mode18_LoadThumb |
-| 06:5D54 | `Mode18_LoadThumb_Tbl5D54` | 24 | state handler or helper of a screen mode | auto: 24 bytes, bytes; referenced by Mode18_LoadThumb |
 | 06:5D6C | `Mode18_DrawThumbFrame` | 126 | state handler or helper of a screen mode |  |
 | 06:5DD7 | `Mode18_LoadTileIndexed` | 15 | state handler or helper of a screen mode |  |
 | 07:4186 | `Mode0E_State01_Handshake_Tbl4186` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake |

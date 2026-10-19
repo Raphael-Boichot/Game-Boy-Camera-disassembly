@@ -1574,12 +1574,12 @@ bank,addr,name,conf,note,source
 04,52AB,EraseAnim_Fall,C,phase 2: gravity on the 16 sprites,hand+auto
 04,5307,EraseAnim_DrawParticles,C,writes 16 OAM entries from del_x / del_y at $D4xx (04:530A),hand+auto
 04,531A,EraseAnim_DrawOne,C,one OAM entry: y + 8,hand+auto
-04,5337,Stamp_PageGfxTbl,I,stamp page graphics base table (README 2.6),hand+auto
-04,539D,Stamp_LoadCategoryIcons_Gfx539D,I,"auto: 51 bytes, tile data; referenced by Stamp_LoadCategoryIcons",auto
-04,53D0,Stamp_LoadCategoryIcons_Gfx53D0,I,"auto: 51 bytes, tile data; referenced by Stamp_LoadCategoryIcons",auto
-04,5403,Stamp_ReloadTilemapIfDifferent_Map5403,I,"auto: 51 bytes, tile map; referenced by Stamp_LoadCategoryIcons, Stamp_ReloadTilemapIfDifferent",auto
-04,5436,Stamp_PrepareBuffers_Tbl5436,I,"auto: 85 bytes, bytes; referenced by Stamp_PrepareBuffers",auto
-04,548B,Stamp_PrepareBuffers_Gfx548B,I,"auto: 85 bytes, tile data; referenced by Stamp_PrepareBuffers",auto
+04,5337,Stamp_PageGfxTbl,C,"17 records x 6 B, one per stamp category ([$D63D] x 6): {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}. Stamp_LoadPageGfx (04:589E) steps the pointer by [$D63E] blocks and copies `blocks` consecutive blocks to VRAM $8A00 (categories 2 and 3 have code of their own: $190 + $190 B to $8A00 / $8510, $360 + $60 B). Decoded 2026-10-19; the sheets are the StampCat*_Gfx rows (README 2.6)",hand+auto
+04,539D,Stamp_CatIconSrcTbl1,C,"17 x {lo; hi; bank} by category ([$D63D] x 3): $60 B of icon tiles copied to VRAM $8F00 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows",hand+auto
+04,53D0,Stamp_CatIconSrcTbl2,C,"17 x {lo; hi; bank} by category: $60 B of icon tiles copied to VRAM $8F60 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows",hand+auto
+04,5403,Stamp_CatMapSrcTbl,C,"17 x {lo; hi; bank} by category: the $120 B BG map (9 rows) copied to VRAM $9C00 by Stamp_LoadCategoryIcons; read again by Stamp_ReloadTilemapIfDifferent; the pointers are the Src_*_Tbl539D_* rows",hand+auto
+04,5436,Stamp_IconSrcGfxTbl,C,"17 records x 5 B by category ([$D63D] x 5): {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; Stamp_CopyStampTiles (04:5A73) steps the pointer by [$D63F] stamps and copies one stamp to wIconSrcGfx ($C3C0) in Stamp_PrepareBuffers. Pointers = the StampCat*_Gfx rows. Decoded 2026-10-19",hand+auto
+04,548B,Stamp_IconSrcMaskTbl,C,"17 records x 5 B by category: {mask pointer lo; hi; bank; bytes per stamp lo; hi}: the 1bpp mask of the stamp, copied to wIconSrcMask ($C5A0) in Stamp_PrepareBuffers. Not tile data: records 0-3 and 16 point to the StampCat*_Mask rows, records 4-15 have bank $00 / $FF (no mask: Stamp_CopyStampTiles stops at 04:5A97-5A9B and the caller keeps the constant fill). Decoded 2026-10-19",hand+auto
 04,54E0,Stamp_BuildGraphicsLayer_Tbl54E0,I,"auto: 11 bytes, bytes; referenced by Stamp_BuildGraphicsLayer, Stamp_BuildMaskLayer",auto
 04,5502,Stamp_DrawPaletteCursor_PtrTbl5502,I,"auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor",auto
 04,5562,Stamp_DrawPaletteCursor_Tbl5562,I,"auto: 17 bytes, bytes; referenced by Stamp_DrawPaletteCursor",auto
@@ -2365,8 +2365,8 @@ bank,addr,name,conf,note,source
 06,5C8B,Mode18_DrawArrows,I,,hand+auto
 06,5C9C,Mode18_LoadAllThumbs,I,,hand+auto
 06,5CB2,Mode18_LoadThumb,C,,hand+auto
-06,5D44,Mode18_LoadThumb_Tbl5D44,I,"auto: 16 bytes, bytes; referenced by Mode18_LoadThumb",auto
-06,5D54,Mode18_LoadThumb_Tbl5D54,I,"auto: 24 bytes, bytes; referenced by Mode18_LoadThumb",auto
+06,5D44,Mode18_LoadThumb_Tbl5D44,C,"2 sets x 4 words ([$D5EA] x 8 + 2 x thumbnail): the VRAM destination of each thumbnail, $9200 $9300 $9400 $9500 / $9500 $8D00 $9600 $8E00; the sources are the records of Mode18_LoadThumb_Tbl5D54 (read 2026-10-19)",hand+auto
+06,5D54,Mode18_LoadThumb_Tbl5D54,C,"2 sets x 4 records {lo; hi; bank} (index [$D5EA] x 4 + thumbnail): $C8 B copied to the matching word of Mode18_LoadThumb_Tbl5D44: 11:7200 7300 7400 7500 / 11:7500 7D00 7600 7E00 (the Gfx_11_*_Icon06_5D54 rows)",hand+auto
 06,5D6C,Mode18_DrawThumbFrame,I,,hand+auto
 06,5DD7,Mode18_LoadTileIndexed,I,,hand+auto
 06,5DE6,Mode14_ShootLiveView,C,mode 14: live view and shutter,hand+auto
@@ -5160,7 +5160,7 @@ bank,addr,name,conf,note,source
 2A,6000,StampCat04_05_SmallKana_Gfx,C,"stamp categories 4 and 5 (same graphics, different mask fill): small kana, 245 items x $20 B (2 tiles)",fix
 2B,4000,StampCat03_CoroCoro_Gfx,C,"stamp category 3 (only if $D582 = 1): CoroCoro stamps in the Japanese ROM (Mario and Luigi in the international one), 10 items x $1E0 B (30 tiles)",fix
 2B,5800,StampCat03_Mask,C,"1bpp mask of stamp category 3 (10 items x $F0 B), record 3 of 04:548B",fix
-2C,4000,StampCat00_Face_Gfx,C,"stamp category 0: face parts (eyes, brows, noses, mouths), 63 items x $80 B (8 tiles 2bpp); tables Stamp_PageGfxTbl 04:5337 / Stamp_PrepareBuffers_Tbl5436, loaded by Stamp_LoadPageGfx 04:589E",fix
+2C,4000,StampCat00_Face_Gfx,C,"stamp category 0: face parts (eyes, brows, noses, mouths), 63 items x $80 B (8 tiles 2bpp); tables Stamp_PageGfxTbl 04:5337 / Stamp_IconSrcGfxTbl 04:5436, loaded by Stamp_LoadPageGfx 04:589E",fix
 2C,6000,StampCat02_Pokemon_Gfx,C,"stamp category 2: the 20 Pokemon stamps, 20 items x $190 B (25 tiles, 40x40 px); pages shown limited by $D642",fix
 2D,4000,StampCat01_Icons_Gfx,C,"stamp category 1: icons (wings, flowers, paw, dog, stars...), 45 items x $100 B (16 tiles 2bpp)",fix
 2D,7000,StampCat00_Mask,C,"1bpp mask of stamp category 0 (63 items x $40 B), copied by Stamp_PrepareBuffers (record 0 of 04:548B)",fix
