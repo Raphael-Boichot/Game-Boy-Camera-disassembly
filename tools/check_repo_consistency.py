@@ -25,6 +25,7 @@ What it checks (each line of the report is one check)
              the counts quoted in README 16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
   ram        disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
              wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
+  forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -458,6 +459,27 @@ if not RAM_BAD:
     quoted('ram tags', r'RAM names \(C ([\d,]+) / I ([\d,]+) / U ([\d,]+) / \? ([\d,]+)', lambda m: ((RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
     quoted('ram sites', r'resolves? every access of `wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+
+# ------------------------------------------------------------------ first readers of the forced-only data bytes (README 16.24)
+FR_FILE = 'tcrf_check/assets/unidentified/forced_first_readers.csv'
+try:
+    FR = list(csv.DictReader(io.StringIO(rd(FR_FILE))))
+except Exception as e:
+    FR = []; bad('forced', '%s does not load: %s' % (FR_FILE, e))
+if FR:
+    tmp = tempfile.mkdtemp(prefix='cons_f_')
+    r = subprocess.run([sys.executable, 'tcrf_check/tools/forced_first_readers.py', P('coverage/v8/merged_v8/cov.npz'), os.path.join(tmp, 'f.csv')], capture_output=True, text=True, cwd=ROOT)
+    if r.returncode != 0: bad('forced', 'forced_first_readers.py failed: %s' % r.stderr.strip()[-200:])
+    elif open(os.path.join(tmp, 'f.csv'), encoding='utf-8').read() != rd(FR_FILE): bad('forced', '%s is not what forced_first_readers.py writes from coverage/v8/merged_v8/cov.npz (run it)' % FR_FILE)
+    shutil.rmtree(tmp, ignore_errors=True)
+    FR_ALL = FR[-1]; FR_SP = FR[:-1]
+    FR_N = int(FR_ALL['read_forced_only']); FR_A = int(FR_ALL['reader1_bytes']); FR_B = int(FR_ALL['reader2_bytes'])
+    FR_PRN = sum(1 for x in FR_SP if x['reader1'] == '00:17E8')
+    if FR_ALL['reader1'] != '00:17E8' or FR_ALL['reader2'] != '00:0468': bad('forced', 'the two most frequent first readers are %s and %s, the README names 00:17E8 and 00:0468' % (FR_ALL['reader1'], FR_ALL['reader2']))
+    else: ok('forced', '%s: %d bytes read only in forced runs, first read by 00:17E8 %d / 00:0468 %d; %d of %d spans first read by 00:17E8; file fresh' % (FR_FILE, FR_N, FR_A, FR_B, FR_PRN, len(FR_SP)))
+    quoted('forced bytes', r'Of the ([\d,]+) ROM bytes that some run read, no organic run read and no run executed, `Prn_SendPacketByte` \(`00:17E8`.*?\) is the first reader of ([\d,]+) \(([\d.]+) %\) and `Mem_CopyFromBank` \(`00:0468`, the bank copy\) of ([\d,]+) \(([\d.]+) %\)',
+           lambda m: ((FR_N, FR_A, '%.1f' % (100 * FR_A / FR_N), FR_B, '%.1f' % (100 * FR_B / FR_N)), (num(m.group(1)), num(m.group(2)), m.group(3), num(m.group(4)), m.group(5))), docs=('README.md',), need=('README.md',))
+    quoted('forced spans', r'(\d+) of the (\d+) spans of `really_unused.csv` that have such bytes have `Prn_SendPacketByte` as their most frequent first reader', lambda m: ((FR_PRN, len(FR_SP)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'

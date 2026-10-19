@@ -1,0 +1,96 @@
+bank,addr,bytes,name,tier,read_any_run,read_organic,read_forced_only,reader1,reader1_routine,reader1_bytes,reader2,reader2_routine,reader2_bytes,reader3,reader3_routine,reader3_bytes
+0C,5800,832,Gfx_0C_5800_AnimEdMenuLabelsAlt,shown,832,256,576,00:0636,Vram_CopyFromBank,90,00:0639,Vram_CopyFromBank,89,00:0630,Vram_CopyFromBank,88
+0C,68D0,864,Gfx_0C_68D0_AnimEdKanaStrips,shown,864,480,384,00:17E8,Prn_SendPacketByte,117,00:0639,Vram_CopyFromBank,45,00:061D,Vram_CopyFromBank,45
+0C,7E20,352,Gfx_0C_7E20_Album_LoadNumeralTile_Aux,shown,352,320,32,00:17E8,Prn_SendPacketByte,31,00:0636,Vram_CopyFromBank,1,,,0
+0D,7000,1632,Gfx_0D_7000_FillPatternTiles,never shown,1632,0,1632,00:17E8,Prn_SendPacketByte,1254,00:0B1F,Vq_RunStream,206,00:0B02,Vq_RunStream,85
+10,7420,128,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,shown,128,96,32,00:061D,Vram_CopyFromBank,5,00:0620,Vram_CopyFromBank,5,00:0630,Vram_CopyFromBank,5
+10,78E8,8,TileGap_10_78E8,scrap,8,0,8,00:17E8,Prn_SendPacketByte,8,,,0,,,0
+10,7A08,8,TileGap_10_7A08,scrap,8,0,8,00:1647,Gfx_Copy16FromBank10,1,00:164A,Gfx_Copy16FromBank10,1,00:164D,Gfx_Copy16FromBank10,1
+10,7BC2,10,TileGap_10_7BC2,scrap,10,0,10,00:17E8,Prn_SendPacketByte,10,,,0,,,0
+10,7BE4,4,TileGap_10_7BE4,scrap,4,0,4,00:17E8,Prn_SendPacketByte,3,00:163E,Gfx_Copy16FromBank10,1,,,0
+15,5200,512,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,never shown,512,0,512,00:17E8,Prn_SendPacketByte,512,,,0,,,0
+15,5500,256,Gfx_15_5500_SlidePlay_ReadKeys_Aux,never shown,256,0,256,00:17E8,Prn_SendPacketByte,256,,,0,,,0
+18,7D80,256,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,never shown,256,0,256,00:17E8,Prn_SendPacketByte,256,,,0,,,0
+1A,4D80,128,Gfx_1A_4D80_DjPerf_DrawTempo_Aux,shown,128,32,96,00:061D,Vram_CopyFromBank,12,00:0620,Vram_CopyFromBank,12,00:0630,Vram_CopyFromBank,12
+1A,5160,3,TileGap_1A_5160,scrap,3,0,3,00:17E8,Prn_SendPacketByte,3,,,0,,,0
+1A,5182,90,Gfx_1A_5182_Unref,never shown,90,0,90,00:17E8,Prn_SendPacketByte,90,,,0,,,0
+1A,7E00,501,Gfx_1A_7E00_Unref,never shown,501,0,501,00:17E8,Prn_SendPacketByte,501,,,0,,,0
+1C,5620,2,TileGap_1C_5620,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+1C,5623,42,Data_1C_5623,scrap,42,0,42,00:17E8,Prn_SendPacketByte,42,,,0,,,0
+1C,564E,18,Data_1C_564E,scrap,18,0,18,00:17E8,Prn_SendPacketByte,18,,,0,,,0
+1C,5720,16,TileGap_1C_5720,scrap,16,0,16,00:17E8,Prn_SendPacketByte,16,,,0,,,0
+1C,5BC0,26,TileGap_1C_5BC0,scrap,26,0,26,00:17E8,Prn_SendPacketByte,26,,,0,,,0
+1C,5C20,64,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,never shown,64,0,64,00:17E8,Prn_SendPacketByte,64,,,0,,,0
+1C,5CC0,11,TileGap_1C_5CC0,scrap,11,0,11,00:17E8,Prn_SendPacketByte,11,,,0,,,0
+1C,5CD3,13,Data_1C_5CD3,scrap,13,0,13,00:17E8,Prn_SendPacketByte,13,,,0,,,0
+1C,5D20,39,TileGap_1C_5D20,scrap,39,0,39,00:17E8,Prn_SendPacketByte,39,,,0,,,0
+1C,5D48,24,Data_1C_5D48,scrap,24,0,24,00:17E8,Prn_SendPacketByte,24,,,0,,,0
+1D,7B41,63,Gfx_1D_7B41_Tbl539D_Aux,never shown,63,0,63,00:17E8,Prn_SendPacketByte,63,,,0,,,0
+1E,64C0,16,Data_1E_64C0,other,16,0,16,00:061D,Vram_CopyFromBank,2,00:0620,Vram_CopyFromBank,2,00:0630,Vram_CopyFromBank,2
+1E,64E0,144,Gfx_1E_64E0_Compose_DrawPhotoNumber_Aux,shown,144,96,48,00:17E8,Prn_SendPacketByte,9,00:061D,Vram_CopyFromBank,4,00:0620,Vram_CopyFromBank,4
+1E,6590,61,Gfx_1E_6590_Mode17_State00_Init_LowerHalves,shown,61,29,32,00:17E8,Prn_SendPacketByte,25,00:0670,Vram_CopyFromBank,2,00:0673,Vram_CopyFromBank,2
+1E,7D00,184,Gfx_1E_7D00_Unref,never shown,184,0,184,00:17E8,Prn_SendPacketByte,184,,,0,,,0
+21,4D00,896,Gfx_21_4D00_CommentCard_DrawPhotoNumber_Tens,shown,896,768,128,00:061D,Vram_CopyFromBank,20,00:0620,Vram_CopyFromBank,20,00:0630,Vram_CopyFromBank,20
+21,6AC7,177,Gfx_21_6AC7_Unref,never shown,177,0,177,00:17E8,Prn_SendPacketByte,119,00:0620,Vram_CopyFromBank,11,00:0630,Vram_CopyFromBank,10
+21,6B91,47,Gfx_21_6B91_Unref,never shown,47,0,47,00:17E8,Prn_SendPacketByte,14,00:061D,Vram_CopyFromBank,7,00:0620,Vram_CopyFromBank,6
+23,58E0,2,Data_23_58E0,scrap,2,0,2,00:0468,Mem_CopyFromBank,2,,,0,,,0
+23,5900,2,Data_23_5900,scrap,2,0,2,00:0468,Mem_CopyFromBank,1,00:17E8,Prn_SendPacketByte,1,,,0
+23,5920,2,Data_23_5920,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5940,2,Data_23_5940,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5960,2,Data_23_5960,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5980,2,Data_23_5980,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,59A0,2,Data_23_59A0,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,59C0,2,Data_23_59C0,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,59E0,2,Data_23_59E0,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5A00,2,Data_23_5A00,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5A20,2,Data_23_5A20,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5A40,2,Data_23_5A40,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5A60,2,Data_23_5A60,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5A80,2,Data_23_5A80,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5AA0,2,Data_23_5AA0,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5AC0,2,Data_23_5AC0,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5AE0,2,Data_23_5AE0,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,5F1C,8,Data_23_5F1C,scrap,8,0,8,00:17E8,Prn_SendPacketByte,8,,,0,,,0
+23,5F3C,8,Data_23_5F3C,scrap,8,0,8,00:17E8,Prn_SendPacketByte,8,,,0,,,0
+23,5F5C,8,Data_23_5F5C,scrap,8,0,8,00:17E8,Prn_SendPacketByte,8,,,0,,,0
+23,5F94,12,Data_23_5F94,scrap,12,0,12,00:17E8,Prn_SendPacketByte,12,,,0,,,0
+23,7180,608,Map_23_7180_CreditsGirlFrame12_Aux,shown,608,524,84,00:17E8,Prn_SendPacketByte,84,,,0,,,0
+23,7D54,12,Data_23_7D54,scrap,12,0,12,00:17E8,Prn_SendPacketByte,12,,,0,,,0
+24,6080,34,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,"read organically, never shown",34,2,32,00:17E8,Prn_SendPacketByte,32,,,0,,,0
+24,60B2,270,Gfx_24_60B2_Unref,shown,270,186,84,00:17E8,Prn_SendPacketByte,84,,,0,,,0
+24,6200,288,Map_24_6200_Mode01_State02_ApplyPageA_Aux,shown,288,204,84,00:17E8,Prn_SendPacketByte,84,,,0,,,0
+25,5834,12,Data_25_5834,scrap,12,0,12,00:289E,Img_CombineNibbleMap,6,00:28B4,Img_CombineNibbleMap,6,,,0
+26,7BC0,576,Map_26_7BC0_Parlor_Page2,shown,576,360,216,00:17E8,Prn_SendPacketByte,216,,,0,,,0
+0D,7660,384,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,TCRF,384,0,384,00:17E8,Prn_SendPacketByte,384,,,0,,,0
+10,7A80,32,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,TCRF,32,0,32,00:162F,Gfx_Copy16FromBank10,2,00:1632,Gfx_Copy16FromBank10,2,00:1635,Gfx_Copy16FromBank10,2
+10,7B80,32,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,TCRF,32,0,32,00:17E8,Prn_SendPacketByte,32,,,0,,,0
+11,5800,4416,Unused_TCRF_HandNewspaperFrames_Gfx,TCRF,4416,0,4416,00:17E8,Prn_SendPacketByte,4405,00:0633,Vram_CopyFromBank,3,00:0636,Vram_CopyFromBank,3
+1A,7D80,96,Unused_TCRF_PhotoOption_BCancel_Gfx,TCRF,96,0,96,00:17E8,Prn_SendPacketByte,96,,,0,,,0
+1E,6620,848,Unused_TCRF_CannotCombineSamePicture_Gfx,TCRF,837,0,837,00:17E8,Prn_SendPacketByte,833,00:0636,Vram_CopyFromBank,2,00:061D,Vram_CopyFromBank,1
+14,4000,1364,Gfx_14_4000_Mode0E_ExchangeAlt_Tiles,no loader,231,0,231,00:17E8,Prn_SendPacketByte,221,00:0468,Mem_CopyFromBank,4,00:0639,Vram_CopyFromBank,4
+23,5CC0,580,Map_23_5CC0_Mode0E_ExchangeAlt_Unref,no loader,580,0,580,00:17E8,Prn_SendPacketByte,580,,,0,,,0
+17,5500,4864,Gfx_17_5500_Unused_MainMenuTiles,no loader,4849,0,4849,00:0468,Mem_CopyFromBank,3415,00:17E8,Prn_SendPacketByte,1395,00:289E,Img_CombineNibbleMap,17
+25,7820,576,Map_25_7820_Unused_MainMenu,no loader,576,0,576,00:17E8,Prn_SendPacketByte,574,00:2163,Blit_ApplyPatchList,1,00:2168,Blit_ApplyPatchList,1
+24,6360,64,Map_24_6360_Mode16_OptionPage2_HeadRows,head rows,64,0,64,00:17E8,Prn_SendPacketByte,64,,,0,,,0
+25,7160,64,Map_25_7160_Mode16_OptionPage0_HeadRows,head rows,64,0,64,00:17E8,Prn_SendPacketByte,64,,,0,,,0
+25,75E0,576,Map_25_75E0_Unused_PhotoScreen,never shown,576,0,576,00:17E8,Prn_SendPacketByte,576,,,0,,,0
+26,7080,576,Map_26_7080_Unused_Picture,never shown,576,0,576,00:17E8,Prn_SendPacketByte,576,,,0,,,0
+10,74A3,157,Gfx_10_74A3_Unref,used (withdrawn),157,0,157,00:17E8,Prn_SendPacketByte,118,00:0639,Vram_CopyFromBank,7,00:061D,Vram_CopyFromBank,6
+10,7602,678,Gfx_10_7602_DjLetterGlyphStrip,used (withdrawn),678,0,678,00:17E8,Prn_SendPacketByte,213,00:1647,Gfx_Copy16FromBank10,29,00:164A,Gfx_Copy16FromBank10,29
+10,78B8,24,Gfx_10_78B8_DjPrintFont_Tiles2Bto2C,used (withdrawn),24,0,24,00:17E8,Prn_SendPacketByte,23,00:0B02,Vq_RunStream,1,,,0
+10,7908,238,Gfx_10_7908_DjPrintFont_Tiles30to3F,used (withdrawn),238,0,238,00:17E8,Prn_SendPacketByte,178,00:1647,Gfx_Copy16FromBank10,4,00:164A,Gfx_Copy16FromBank10,4
+10,7A24,92,Gfx_10_7A24_DjPrintFont_Tiles42to47,used (withdrawn),92,0,92,00:17E8,Prn_SendPacketByte,43,00:162F,Gfx_Copy16FromBank10,3,00:1632,Gfx_Copy16FromBank10,3
+10,7ADE,162,Gfx_10_7ADE_DjPrintFont_Tiles4Dto57,used (withdrawn),162,0,162,00:17E8,Prn_SendPacketByte,128,00:1659,Gfx_Copy16FromBank10,3,00:165C,Gfx_Copy16FromBank10,3
+10,7BF8,345,Gfx_10_7BF8_DjPrintFont_Tiles5Fto75,used (withdrawn),345,0,345,00:17E8,Prn_SendPacketByte,139,00:1659,Gfx_Copy16FromBank10,14,00:165C,Gfx_Copy16FromBank10,14
+10,7D52,366,Gfx_10_7D52_DjPrintFont_Tiles75to8B,used (withdrawn),366,0,366,00:17E8,Prn_SendPacketByte,178,00:1632,Gfx_Copy16FromBank10,12,00:1635,Gfx_Copy16FromBank10,12
+10,7F00,184,Gfx_10_7F00_DjPrintFont_Tiles90to9B,used (withdrawn),184,0,184,00:17E8,Prn_SendPacketByte,161,00:1632,Gfx_Copy16FromBank10,2,00:1635,Gfx_Copy16FromBank10,2
+16,7380,512,Gfx_16_7380_MainMenu_BallHeadAnim_F5_Unref,forced only,512,0,512,00:17E8,Prn_SendPacketByte,470,00:0468,Mem_CopyFromBank,42,,,0
+16,7580,512,Gfx_16_7580_MainMenu_BallHeadAnim_F6_Unref,forced only,512,0,512,00:0468,Mem_CopyFromBank,512,,,0,,,0
+16,7780,512,Gfx_16_7780_MainMenu_BallHeadAnim_F7_Unref,forced only,512,0,512,00:0468,Mem_CopyFromBank,512,,,0,,,0
+16,7980,512,Gfx_16_7980_MainMenu_BallHeadAnim_F8_Unref,forced only,512,0,512,00:0468,Mem_CopyFromBank,512,,,0,,,0
+23,58C0,2,Map_23_58C0_Mode0F_ConfirmFrameStrip_Unref,scrap,2,0,2,00:17E8,Prn_SendPacketByte,2,,,0,,,0
+23,7760,32,Map_23_7760_Kb_Page0_Press_ExtraRow,scrap,32,0,32,00:17E8,Prn_SendPacketByte,32,,,0,,,0
+24,4E40,32,Map_24_4E40_PenMenuSizePanel3_ExtraRow,scrap,32,0,32,00:17E8,Prn_SendPacketByte,16,00:061D,Vram_CopyFromBank,2,00:0620,Vram_CopyFromBank,2
+24,4F20,32,Map_24_4F20_PenMenuPatternPanel0_ExtraRow,scrap,32,0,32,00:17E8,Prn_SendPacketByte,27,00:204E,Blit_MaskPass_SrcA,3,00:204D,Blit_MaskPass_SrcA,2
+24,5F00,20,Map_24_5F00_Kb_Page1_PressSex_ExtraRows,scrap,20,0,20,00:17E8,Prn_SendPacketByte,20,,,0,,,0
+*,,1048576,whole ROM,,1004879,753876,147419,00:17E8,Prn_SendPacketByte,69258,00:0468,Mem_CopyFromBank,40994,00:0620,Vram_CopyFromBank,3758
