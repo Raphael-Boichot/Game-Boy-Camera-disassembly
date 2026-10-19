@@ -123,6 +123,7 @@ two ROMs are different builds that share the numbering of the modes and the flow
 | 17 | **Printing in BGB** — a printer helper for BGB (link protocol, status model), the print screens (single photo, the Start option = the 「Camera コメント」 card with its tag-field mapping, several photos, the TRIPY-H score), and the **BGB re-trace of the coverage run** (81 % of the core's blocks re-hit, SGB-only and APU-gated blocks, where the two disagree) |
 | 18 | **The sensor registers** — what the ROM sends to the M64282FP through the MAC-GBD, in datasheet names; boot, calibration and normal use traced against bus-analyser recordings of a real camera and against BGB (offset search, threshold scan, auto-exposure bands, dither keys), and what the datasheet gets wrong; the scan that finds no register or code path beyond the five registers and the matrix (18.11), the cell order of the dither matrix and two outside implementations (MAME, dither-pattern-gen) compared (18.12) |
 | Appendix | Tools |
+| Sources | **Public sources used since the start of the project** (separate section at the very end) |
 
 ---
 
@@ -4593,3 +4594,30 @@ The 34-entry mode table (`$00-$21`) with the role of every mode is in §2.3.
 Extra tool added with the Select+Start+Up work: `tools/render_state10.py ROM SAV OUT.png [scale]`
 (composes the erase-all confirmation background from ROM tiles and a real save's thumbnails).
 Emulator test scripts (PyBoy, MBC5 stand-in, patched copy only) are described in §8.
+
+---
+
+## Sources
+
+Every public source the project used since the start, in one place. None of them was taken as an authority over the ROM: what a source says and the ROM cannot confirm is tagged **I** or **?** in the sections quoted below, never **C**. A URL is given only where the repository recorded it; a source the owner attached as a file is marked "URL not recorded" and no address is guessed.
+
+| Source | What the project took from it | Where | How it reached the project |
+|---|---|---|---|
+| The Cutting Room Floor, page [Game Boy Camera](https://tcrf.net/index.php?title=Game_Boy_Camera&oldid=1968673) (revision 1968673) | the list of unused and hidden content that became the TCRF checklist and the `Unused_TCRF_*` labels; the pictures compared with the ROM | §15, §16.24, §16.29 | printed copy of 2026-09-27 supplied by the owner, read by OCR (the figures and names were checked against the ROM before use) |
+| The Cutting Room Floor, page [Game Boy Camera/Regional Differences](https://tcrf.net/index.php?title=Game_Boy_Camera/Regional_Differences&oldid=1846909) (revision 1846909) | the documented differences between the Japanese and international builds (only the Japanese side of that page is counted in the checklist) | §15 | printed copy of 2026-09-27 supplied by the owner, read by OCR |
+| Jonathan Traynor's blog post "Secrets of the Pocket Camera" (jofamo.com), Wayback Machine copy of 2025-09-27, 48 pages | the claims about the Album B stock pictures, BGM 04, the P.VOICE and the character table, each compared with the ROM and run in BGB; what the article takes from the guide book, the manual, nintendo.co.jp and Tanaka's tweets was not seen and is not used | §16.27 | PDF supplied by the owner on 2026-10-14; URL not recorded |
+| [GameFAQs, Game Boy Camera cheats](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) | the cheat and secret list, every line tried in BGB | §16.18 (also cited in §2, §15.4, §16.4, §16.6, §16.17, §17.6) | read on 2026-10-12 |
+| [Nintendo Wiki (Fandom), Totaka's Song](https://nintendo.fandom.com/wiki/Totaka%27s_Song) | the description of the tune on the "no blank frames" screen | §16.20 | fetched during the Totaka's Song check |
+| [cristofercruz/gb-camera-frames](https://github.com/cristofercruz/gb-camera-frames) (`gbc-fr.py`) | the frame and wild-frame layout constants (flat offsets, tile counts) checked against the ROM | §16.23 | shallow clone read for the constants |
+| [HerrZatacke/dither-pattern-gen](https://github.com/HerrZatacke/dither-pattern-gen) (MIT; read at `master` b153952, 2023-02-10) | the dither-matrix cell order, compared with the ROM and with MAME (a software model: **I** at best) | §18.12 | read for §18.12 |
+| MAME, `src/devices/bus/gameboy/camera.cpp` (BSD-3-Clause, header "Vas Crabb") | the MAC-GBD window and a simplified M64282FP model; its header gives the sensor as 128 x 123 pixels | §9, §18.12 | copy attached by the owner, revision not stated; URL not recorded |
+| Mitsubishi M64282FP datasheet, ver. 1.1E | register names and bit meanings, read against the owner's bus recordings; the datasheet section numbers quoted in the README are the datasheet's own | §18 (18.2, 18.8) | document read for §18; URL not recorded |
+| The Funtography guide (the US manual of the Game Boy Camera) | the menu names, the five flowcharts (USER, SHOOT, VIEW, PLAY, STUDIO), the build differences it reveals; printed page numbers are the guide's own | §16 (introduction, 16.4, 16.5, 16.11) | attached by the owner; URL not recorded |
+| The FunkyLizard map "Menu of Gamboy Camera" (fan-made, same five sections) | the second reading of the menu tree, compared with the guide's charts | §16.11 | attached by the owner on 2026-10-14 with a blog link; URL not recorded |
+| The Spriters Resource, 17 Game Boy Camera sheets (kept in `Spriter_ressources_check/`) | names and layouts of graphics, matched tile by tile against the ROM (`sheet_tile_match.py`); the sheet names in the `Sheet_*` labels | §1.1.1, §16.13 | files supplied by the owner; URL not recorded |
+| Pan Docs | the SGB border layout (4 bpp tiles, 32 x 28 map cells, palettes 4-5) and the meaning of bit 1 of `$A000` (open, §18) | §16.13, §18 | consulted as reference; URL not recorded |
+| [mgbdis](https://github.com/mattcurrie/mgbdis) v3.0 and rgbds v1.0.4 (`rgbasm`, `rgblink`, `rgbfix`) | the disassembler and the assembler of the byte-exact round trip | §1.1, §1.1.1, `HOWTO_NEW_ROM.md` | installed in the workspace; versions pinned in §1.1 |
+| BGB 1.5.x (run under Wine, headless) | the emulator behind every **C** tag marked "BGB": watchpoints, screenshots, the printer helper link | §16.6, §17 and the sections that cite it | attached by the owner; URL not recorded |
+| untoxa's gb-photo | only named, to identify the third-party save (`2022-03-05`) whose unused bytes hold its settings; not read as a source | §3.8 | identified from the save content; URL not recorded |
+
+Not public, so not listed above: the 33 real saves and the bus-analyser workbooks of a real camera are the owner's own data (§3, §11, §18); the ROMs themselves are not listed (md5 values in §1.1).
