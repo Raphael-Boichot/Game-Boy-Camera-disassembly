@@ -31,6 +31,7 @@ What it checks (each line of the report is one check)
   patternmatch tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
   handspan   (with --rom) the span 11:5800-693F has fewer different tiles (130 of 276, 95 blank) than the 245 ids of 26:7080 and its four natural layouts cost 0.7 per pixel or more; the README sentence of 16.25.2 that quotes them
   oamlist    (with --rom) no call of Oam_AddMeta_B01_4000 (00:24AF) has a literal id $A6-$BB, no organic run reads those 22 OAM lists ($BA = the hand flipping a newspaper), the README sentence of 16.24 that quotes the call and list counts
+  screengif  the whole-screen GIF of the page transitions of the main menu (README 16.24): 640 x 576, endless loop, the frame count and length the README quotes
   headsets   (with --rom) why the ball head animation is stored twice: the frames F0-F4 and F5-F9 differ only inside the ids $20-$2F (10 or 11 tiles of 16), set A meets the body strip 16:5580 (seam 47-48) and set B the strip 11:4000 (41-42), each twice worse on the other, F4 and F9 carry the collar tiles of their strip byte for byte; the README paragraph of 16.24 that quotes them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
@@ -633,6 +634,21 @@ if A.rom:
            lambda m: ((ol_s['calls'], ol_s['control_sites'], ol_s['control_ids'], ol_s['nolit'], ol_s['calls']), tuple(int(m.group(i)) for i in range(1, 6))), docs=('README.md',), need=('README.md',))
     if ol_org:
         quoted('oam list', r'\((\d+) of the (\d+) lists are unread in organic runs\)', lambda m: ((ol_org[0], 249), (int(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
+
+# ------------------------------------------------------------------ the main menu turning its page, the whole screen (README 16.24)
+SG = 'tcrf_check/assets/unidentified/main_menu_page_turn.gif'
+try:
+    from PIL import Image as _Im, ImageSequence as _Seq
+    _g = _Im.open(P(SG)); sg_n = sum(1 for _ in _Seq.Iterator(_g)); _g.seek(0)
+    sg_t = 0
+    for _i in range(sg_n): _g.seek(_i); sg_t += _g.info.get('duration', 0)
+    sg = (_g.size, sg_n, round(sg_t / 1000, 2), _g.info.get('loop'))
+    if sg[0] != (640, 576) or sg[3] != 0: bad('screengif', '%s is %s, loop %s: expected 640 x 576 (160 x 144 at 4x) and an endless loop' % (SG, sg[0], sg[3]))
+    else: ok('screengif', '%s: %d x %d, %d frames, %.2f s, loops' % (SG, sg[0][0], sg[0][1], sg[1], sg[2]))
+    quoted('page turn gif', r'(\d+) game frames in (\d+) GIF frames, ([\d.]+) s',
+           lambda m: ((sg[1], sg[2]), (int(m.group(2)), float(m.group(3)))), docs=('README.md',), need=('README.md',))
+except Exception as e:
+    bad('screengif', '%s does not load: %s' % (SG, e))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'
