@@ -11,6 +11,7 @@ Verdict of a graphic span: the tiles are 'on screen' when a byte of the tile row
 An unused tile map is drawn right beside the tile set it uses: the column 'tileset' of unused_manual.csv names that set as a span (BB:AAAA-BBBB), or says
 'none: ...' / 'not found: ...' (then an empty box stands in its place).  BB:AAAA-BBBB@XX is a USED tile set that only holds the ids from XX up (the rest of the ids of the map are
 dynamic photo tiles): the map is then composed from the ROM tiles, photo cells hatched (no emulator, palette E4).
+A forced-only Gfx row of unused_manual.csv whose column `drawn` reads `twin BB:AAAA` is drawn under that USED span of the same length (the ball head frames F5-F8 under their twins F0-F3).
 usage: display_report.py [--npz-dir DIR] [--stable N]"""
 import sys, os, re, csv, glob, json, collections, argparse
 import numpy as np
@@ -178,6 +179,11 @@ def cell(r):
     if r['tier'] == 'no loader' and r['kind'] == 'Map' and pic and os.path.exists(pic):
         im = Image.open(pic).convert('RGB'); img = im.resize((16 * 8 * SC, round(im.height * 16 * 8 * SC / im.width)), Image.NEAREST); drawn = r.get('drawn', '')
     cap = ['%s:%s  %d B%s' % (r['bank'], r['addr'], r['n'], ('  (tile map%s)' % drawn) if r['kind'] == 'Map' else '')] + wrap(short(r['name']).replace('Unused_TCRF_', 'TCRF ') + (' (?)' if r.get('conf') == '?' else ''), 34)[:3] + wrap(evidence(r), 34)[:4]
+    if r['tier'] == 'forced only' and r['kind'] == 'Gfx' and (r.get('drawn') or '').startswith('twin '):
+        # a span that duplicates a USED one with a few tiles redrawn (unused_manual.csv column `drawn` = `twin BB:AAAA`): the used twin is drawn above it, so the two read as a pair
+        tb, ta = [int(x, 16) for x in r['drawn'][5:].split(':')]; tw = ROM[off(tb, ta):off(tb, ta) + r['n']]; timg = tiles(tw[:len(tw) // 16 * 16])
+        both = Image.new('RGB', (img.width, timg.height + 6 + img.height), (255, 255, 255)); both.paste(timg, (0, 0)); both.paste(img, (0, timg.height + 6)); img = both
+        cap.insert(1, 'above: its used twin %02X:%04X' % (tb, ta))
     return cap, img
 def section(rs, y0, title, sub):
     big = [cell(r) + (r,) for r in rs if r['kind'] in ('Gfx', 'Banner', 'Map', 'TCRF') and not r.get('pair')]
@@ -231,12 +237,12 @@ pairs_h = sum(p['h'] for p in pairs)
 by = collections.OrderedDict()
 for t, ttl, sub in (('TCRF', 'TCRF-documented unused graphics located in this ROM (sym labels Unused_TCRF_*)', 'purple = labelled from the images the owner supplied from TCRF; (?) = candidate (partial pixel match); ORGANIC = the tile was on screen in a run without state pokes'),
                     ('never shown', 'Never on screen and never read in an organic run', 'red = no stable frame in 37,370 replayed menu states and the stamp-menu walks, and only the forced runs ever read it (graphics; the two maps of this tier are in the first block, beside their tile set)'),
-                    ('forced only', 'On screen only when state variables are forced', 'amber = shown by forced runs only; no organic route found, so probably not reachable on a real camera')):
+                    ('forced only', 'On screen only when state variables are forced', 'amber = shown by forced runs only; no organic route found, so probably not reachable on a real camera\nthe four frames are the second collar set of the main-menu ball head animation: each is drawn under its used twin F0-F3, the eye is the same, the collar fits the back body (README 16.24)')):
     by[t] = ([r for r in rows if r['tier'] == t], ttl, sub)
 secs = []
 y = 70
 for t, (rs, ttl, sub) in by.items():
-    big, cols_, h = section(rs, y, ttl, sub); secs.append((t, ttl, sub, big, cols_, h))
+    big, cols_, h = section(rs, y, ttl, sub); secs.append((t, ttl, sub, big, cols_, h + 12 * sub.count('\n')))
 scraps = [r for r in rows if r['tier'] == 'scrap']
 # scraps flow layout
 x = GAP; yy = 0; rowh = 0; place = []
@@ -278,8 +284,9 @@ for p in pairs:
 y += 60 + pairs_h
 for t, ttl, sub, big, cols_, h in secs:
     c = COL[t]; dr_.rectangle([GAP, y, WIDTH - GAP, y + 3], fill=c)
-    dr_.text((GAP, y + 8), '%s  (%d)' % (ttl, len(big)), fill=c, font=FONTB); dr_.text((GAP, y + 26), sub, fill=(90, 90, 90), font=FONT)
-    yy = y + 50
+    dr_.text((GAP, y + 8), '%s  (%d)' % (ttl, len(big)), fill=c, font=FONTB); dr_.text((GAP, y + 26), sub.split('\n')[0], fill=(90, 90, 90), font=FONT)
+    for k_, l_ in enumerate(sub.split('\n')[1:]): dr_.text((GAP, y + 39 + 11 * k_), l_, fill=(110, 110, 110), font=FONTS)
+    yy = y + 50 + 12 * sub.count('\n')
     for ci, col in enumerate(cols_):
         y2 = yy
         for cap, img, r in col:

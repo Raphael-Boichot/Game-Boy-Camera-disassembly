@@ -30,6 +30,8 @@ What it checks (each line of the report is one check)
   seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
   patternmatch tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
   handspan   (with --rom) the span 11:5800-693F has fewer different tiles (130 of 276, 95 blank) than the 245 ids of 26:7080 and its four natural layouts cost 0.7 per pixel or more; the README sentence of 16.25.2 that quotes them
+  oamlist    (with --rom) no call of Oam_AddMeta_B01_4000 (00:24AF) has a literal id $A6-$BB, no organic run reads those 22 OAM lists ($BA = the hand flipping a newspaper), the README sentence of 16.24 that quotes the call and list counts
+  headsets   (with --rom) why the ball head animation is stored twice: the frames F0-F4 and F5-F9 differ only inside the ids $20-$2F (10 or 11 tiles of 16), set A meets the body strip 16:5580 (seam 47-48) and set B the strip 11:4000 (41-42), each twice worse on the other, F4 and F9 carry the collar tiles of their strip byte for byte; the README paragraph of 16.24 that quotes them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -585,6 +587,52 @@ if A.rom:
     quoted('hand span', r'cost ([\d.]+), ([\d.]+), ([\d.]+) and ([\d.]+) per pixel, against about 0\.4 for a true set',
            lambda m: (tuple(hn_v), tuple(float(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
     quoted('hand span', r'a de-duplicated picture of (\d+) different ids needs', lambda m: ((hn_ids,), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
+
+# ------------------------------------------------------------------ the ball head animation is stored twice: two collars for two bodies (README 16.24)
+if A.rom:
+    sys.path.insert(0, P('tcrf_check/tools'))
+    import head_sets as HS
+    hs_rom = open(A.rom, 'rb').read()
+    hs_d = HS.pair_diffs(hs_rom)
+    hs_n = sorted({len(x) for x in hs_d})
+    hs_inside = all(0x20 <= 0x10 + t <= 0x2F for x in hs_d for t in x)
+    hs_a, hs_a_own = HS.vs_strip(hs_rom, 0x16, 0x5580)
+    hs_b, hs_b_own = HS.vs_strip(hs_rom, 0x11, 0x4000)
+    hs_fin = [HS.vs_strip(hs_rom, b_, a_) for n_, b_, a_ in HS.STRIPS[2:]]
+    hs_fin_seams = [r[2] for res_, own_ in hs_fin for r in res_]; hs_fin_own = sorted({own_ for res_, own_ in hs_fin})
+    sa5, sb5, sa4, sb4 = [r[2] for r in hs_a[:5]], [r[2] for r in hs_a[5:]], [r[2] for r in hs_b[:5]], [r[2] for r in hs_b[5:]]
+    hs_fits = max(sa5) <= hs_a_own + 2 and min(sb5) >= 1.5 * hs_a_own and max(sb4) <= hs_b_own + 2 and min(sa4) >= 1.5 * hs_b_own
+    if not hs_inside or not hs_fits or hs_a[4][1] != 8 or tuple(hs_b[9][:2]) != (8, 8) or hs_fin_own != [17] or min(hs_fin_seams) < 1.5 * 17:
+        bad('headsets', 'the two sets of the head animation no longer read as two collars for two bodies: all differences inside $20-$2F %s, seams A/5580 %s own %d, B/4000 %s own %d, F4 row 7 %d of 8, F9 %s of 16' % (hs_inside, sa5, hs_a_own, sb4, hs_b_own, hs_a[4][1], hs_b[9][0] + hs_b[9][1]))
+    else:
+        ok('headsets', 'F0-F4 / F5-F9 differ in %s of the 16 tiles $20-$2F only; seams: A on 16:5580 %d-%d (own %d) vs B %d-%d, B on 11:4000 %d-%d (own %d) vs A %d-%d; final body 11:4500 / 4A00 own %s, frames %d-%d'
+           % ('/'.join(map(str, hs_n)), min(sa5), max(sa5), hs_a_own, min(sb5), max(sb5), min(sb4), max(sb4), hs_b_own, min(sa4), max(sa4), hs_fin_own[0], min(hs_fin_seams), max(hs_fin_seams)))
+    quoted('head sets', r'differ only inside the ids `\$20-\$2F` \((\d+) or (\d+) of those 16 tiles',
+           lambda m: ((hs_n[0], hs_n[-1]), (int(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
+    quoted('head sets', r'costs (\d+)-(\d+) for the five frames of set A on `16:5580` \(the strip\'s own collar: (\d+)\) against (\d+)-(\d+) for set B, and (\d+)-(\d+) for set B on `11:4000` \(own collar: (\d+)\) against (\d+)-(\d+) for set A',
+           lambda m: ((min(sa5), max(sa5), hs_a_own, min(sb5), max(sb5), min(sb4), max(sb4), hs_b_own, min(sa4), max(sa4)), tuple(int(m.group(i)) for i in range(1, 11))), docs=('README.md',), need=('README.md',))
+    quoted('head sets', r'has a collar of its own \(seam (\d+)\) that fits neither set \((\d+)-(\d+)\)',
+           lambda m: ((hs_fin_own[0], min(hs_fin_seams), max(hs_fin_seams)), tuple(int(m.group(i)) for i in range(1, 4))), docs=('README.md',), need=('README.md',))
+    quoted('head sets', r'so ([\d,]+) B are stored twice and ([\d,]+) B of them are never read',
+           lambda m: ((5 * 512, 4 * 512), tuple(int(m.group(i).replace(',', '')) for i in (1, 2))), docs=('README.md',), need=('README.md',))
+
+# ------------------------------------------------------------------ nothing draws the OAM list $BA of the hand flipping a newspaper (README 16.24)
+if A.rom:
+    sys.path.insert(0, P('tcrf_check/tools'))
+    import oam_list_use as OL
+    ol_rom = open(A.rom, 'rb').read(); ol_ids = list(range(0xA6, 0xBC)); ol_s = OL.summary(ol_rom, ol_ids)
+    ol_cov = P('coverage/v8/merged_v8/cov.npz'); ol_org = None
+    if os.path.exists(ol_cov):
+        import numpy as _np
+        ol_org = OL.organic(_np.load(ol_cov), ol_rom, ol_ids)
+    if ol_s['asked'] or (ol_org and ol_org[1]):
+        bad('oamlist', 'a call of 00:24AF has a literal id %s in $A6-$BB, or an organic run reads one of those lists (%s): the README says nothing draws $BA' % (['%02X' % i for i in ol_s['asked']], ol_org))
+    else:
+        ok('oamlist', '%d calls of 00:24AF, none with a literal id $A6-$BB (the test finds %d sites for %d other ids, %d calls take the id from a table or RAM); %s' % (ol_s['calls'], ol_s['control_sites'], ol_s['control_ids'], ol_s['nolit'], ('organic reads of the 22 lists $A6-$BB: %d, lists unread in organic runs: %d of 249' % (ol_org[1], ol_org[0])) if ol_org else 'coverage file absent: organic part skipped'))
+    quoted('oam list', r'none of the (\d+) calls of `00:24AF` has `ld a, \$A6` to `\$BB` within 12 bytes before it, the same test finds (\d+) sites for (\d+) other ids, and (\d+) of the (\d+) calls take the id',
+           lambda m: ((ol_s['calls'], ol_s['control_sites'], ol_s['control_ids'], ol_s['nolit'], ol_s['calls']), tuple(int(m.group(i)) for i in range(1, 6))), docs=('README.md',), need=('README.md',))
+    if ol_org:
+        quoted('oam list', r'\((\d+) of the (\d+) lists are unread in organic runs\)', lambda m: ((ol_org[0], 249), (int(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'
