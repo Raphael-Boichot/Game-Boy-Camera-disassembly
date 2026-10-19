@@ -84,6 +84,7 @@ bank,addr,name,conf,note,source
 00,0D18,Pal_FadeIn,C,3 steps (2 frames each) from white to palette_target,hand+auto
 00,0D6D,Pal_FadeOut,C,3 steps down to 0,hand+auto
 00,0DA0,Map_SpiralWipeIn,I,draws a BG map (HL,hand+auto
+00,0DD4,Map_SpiralWipeIn_CellLoop,C,"per-cell loop top of the spiral wipe: writes one map byte through Vram_WriteByteSafe, waits a frame every 8th cell (branch target; code read 2026-10-19)",hand
 00,0E67,Map_SpiralWipeOut,I,fills the BG map with $FF in a spiral order (20x17),hand+auto
 00,0F06,Gfx_WipeTile,I,16-byte tile used by the wipes,hand+auto
 00,0F16,Prn_SerialIrq,C,serial interrupt body of the printer driver,hand+auto
@@ -129,7 +130,9 @@ bank,addr,name,conf,note,source
 00,188C,Prn_SendChecksumByte,C,,hand+auto
 00,18A3,Prn_SendTrailerByte,C,two dummy bytes after the checksum; reads device id,hand+auto
 00,18BD,Prn_ReceiveStatus,C,end of packet: stores the status byte and sets the engine state,hand+auto
+00,190A,Prn_ReceiveStatus_Ret,C,RET shared by the status-byte tail of Prn_SerialStep (taken when the abort flag DC3C is set) (branch target; code read 2026-10-19),hand
 00,190B,Prn_StopSerial_Dead,I,unreferenced,hand+auto
+00,190E,Prn_SerialStep_Exit,C,RET at 190E shared by the live sync-byte and packet-byte branches of Prn_SerialStep (the dead Prn_StopSerial_Dead bytes sit around it) (branch target; code read 2026-10-19),hand
 00,190F,Prn_StopSerial2_Dead,I,unreferenced,hand+auto
 00,1914,Prn_EngineStop,C,clears serial and state; status = $FF,hand+auto
 00,1927,Prn_ClearTxFlags,C,,hand+auto
@@ -139,6 +142,11 @@ bank,addr,name,conf,note,source
 00,19A2,Prn_Unused19A2,I,unreferenced,hand+auto
 00,19B2,Prn_SendPrint,C,queues the PRINT command; returns $F0 while busy,hand+auto
 00,19EB,Prn_SendData,C,queues a DATA packet (HL = band,hand+auto
+00,1A4B,Prn_SendData_QueueAndStart,C,"BC = length, HL = source: Prn_QueueData then Prn_StartTransmit (shared tail of the DATA packet cases) (branch target; code read 2026-10-19)",hand
+00,1A76,Prn_SendData_NextChunk,C,"next band chunk: last chunk when the counter DC3E = 1, else length $0280 or the table value at DBEC (branch target; code read 2026-10-19)",hand
+00,1AC0,Prn_SendData_QueueFromPtr,C,"reload HL from the data pointer DC1F:DC20 and queue (retry sends the same chunk, otherwise the pointer was advanced by $0280) (branch target; code read 2026-10-19)",hand
+00,1ACB,Prn_SendData_Abort,C,"status bit 4 (packet error): sets the abort flag DC3C, clears has-data DC2C and busy DC3B (branch target; code read 2026-10-19)",hand
+00,1ADB,Prn_SendData_RetBusy,C,RET with A = $F0 (printer engine busy) (branch target; code read 2026-10-19),hand
 00,1AEB,Prn_SendBreak_Dead,I,unreferenced,hand+auto
 00,1B1E,Prn_SendInquiry,C,queues the INQUIRY command (status poll),hand+auto
 00,1B46,Prn_QueuePacket,C,A = type,hand+auto
@@ -175,6 +183,7 @@ bank,addr,name,conf,note,source
 00,1FB2,Blit_MaskPass_SrcB,C,mask pass using source B as the explicit 1-bit mask,hand+auto
 00,2026,Blit_MaskPass_SrcA,C,mask pass deriving the mask from source A (OR of both planes),hand+auto
 00,209C,Blit_ImagePass,C,image pass (2-bit source A),hand+auto
+00,20B3,Blit_ImagePass_Loop,C,"loop top of the image pass: saves AF/HL, clears two bytes at DE, runs the next 8 lines (branch target; code read 2026-10-19)",hand
 00,213D,Blit_ApplyPatchList,C,applies the $C800 patch list to the tile buffer,hand+auto
 00,2170,Blit_TileRowPtrTbl,I,18 words: pointer to the VRAM address row of each tile row,hand+auto
 00,2194,Blit_TileAddrTbl,I,18 rows x 20 words: low/high byte of the VRAM address of each tile cell (2 bytes per entry),hand+auto
@@ -191,8 +200,13 @@ bank,addr,name,conf,note,source
 00,261B,Img_PairLookup,I,two bytes through the table at $37xx -> one 2-bit value (b + 2*c),hand+auto
 00,2631,Img_PackQuadBits,I,packs four rows of 2-bit values into BC after adding the dither offsets D / E,hand+auto
 00,2656,Img_ReduceTo64x56,C,photo -> 64x56 preview at $C000,hand+auto
+00,267A,Img_ReduceTo64x56_RowLoop,C,"row-group loop top of the 64x56 reducer (B = 2, C = 8 reloaded) (branch target; code read 2026-10-19)",hand
+00,267D,Img_ReduceTo64x56_ColLoop,C,"column loop top of the 64x56 reducer (C = 8 reloaded, B counts down) (branch target; code read 2026-10-19)",hand
 00,2734,Img_ReduceQuadrantTo4x4Tiles,C,quadrant -> 4x4 tile grid at $C000-$C0FF,hand+auto
+00,2758,Img_ReduceQuadrantTo4x4Tiles_RowLoop,C,"row-group loop top of the quadrant reducer (B = 2, C = 4 reloaded) (branch target; code read 2026-10-19)",hand
+00,275B,Img_ReduceQuadrantTo4x4Tiles_ColLoop,C,"column loop top of the quadrant reducer (C = 4 reloaded, B counts down) (branch target; code read 2026-10-19)",hand
 00,27F4,Img_ReduceHalfTo224Wide,I,2:1 reduction to $C000-$C1BF (6 callers in bank 06),hand+auto
+00,2818,Img_ReduceHalfTo224Wide_RowLoop,C,"row-group loop top of the half-size reducer (B = 2, C = 8) (branch target; code read 2026-10-19)",hand
 00,289C,Img_CombineNibbleMap,C,maps the nibbles of two bytes through the 16-entry table at 00:36F0 -> $D000 / $D001,hand+auto
 00,28D8,Img_QuantizeBlockRound,I,adds 2 and keeps 2-bit level planes of an 8x2 block,hand+auto
 00,2925,Img_QuantizeBlockDither,I,same with the dither offsets D / E,hand+auto
@@ -213,6 +227,7 @@ bank,addr,name,conf,note,source
 00,2C88,Link_Irq_BulkData,C,bulk transfer: stores each received byte at [DC48:DC49] + index,hand+auto
 00,2CC7,Link_Irq_HalfDone,C,end of one direction,hand+auto
 00,2CEF,Link_Irq_Abort,C,exchange refused or cancelled: reset,hand+auto
+00,2CF3,Link_Irq_Abort_ClearState,C,"A = 0 on both paths: clears the link state bytes DC43-DC5E and SB/SC, sets DC4C/DC4D = $FF, masks the serial and timer interrupts (IE and $F3), DC4E = 1, then Link_Irq_Exit (branch target; code read 2026-10-19)",hand
 00,2D35,Link_Irq_StartTimer,I,re-arms the timer for the next byte,hand+auto
 00,2D4B,Link_Irq_Exit,C,pops and reti,hand+auto
 00,2D50,Link_TimerIrq,C,timer interrupt: restarts the serial transfer as master,hand+auto
@@ -789,6 +804,14 @@ bank,addr,name,conf,note,source
 02,41F3,Sram_FormatSettingsBlocks_Tbl41F3,I,"auto: 90 bytes, bytes; referenced by Sram_FormatSettingsBlocks",auto
 02,424D,Sram_FormatVectorBlocks,C,writes an empty photo vector ($FF x $1E) with Magic and checksum (two copies),hand+auto
 02,4283,Sram_FormatOwnerBlocks,C,writes a blank owner block with Magic and checksum (two copies),hand+auto
+02,42B8,Sram_RepairTag_EchoToMain,C,"copies the echo tag block ($AF5C + DE) over the main one ($AF00 + DE), $5C bytes; taken when the echo checksum is good (branch target; code read 2026-10-19)",hand
+02,42C5,Sram_RepairTag_MainToEcho,C,"copies the main tag block ($AF00 + DE) over the echo ($AF5C + DE), $5C bytes; taken when the echo checksum fails (branch target; code read 2026-10-19)",hand
+02,42DA,Sram_RepairSettings_EchoToMain,C,copies the settings echo $B0D9 over $B000 ($D9 bytes) (branch target; code read 2026-10-19),hand
+02,42E2,Sram_RepairSettings_MainToEcho,C,copies the settings block $B000 over its echo $B0D9 ($D9 bytes) (branch target; code read 2026-10-19),hand
+02,42F1,Sram_RepairVector_EchoToMain,C,copies the vector echo $B1D7 over $B1B2 ($25 bytes) (branch target; code read 2026-10-19),hand
+02,42F9,Sram_RepairVector_MainToEcho,C,copies the photo vector $B1B2 over its echo $B1D7 ($25 bytes) (branch target; code read 2026-10-19),hand
+02,4308,Sram_RepairOwner_EchoToMain,C,copies the owner echo $AFD1 over $AFB8 ($19 bytes) (branch target; code read 2026-10-19),hand
+02,4310,Sram_RepairOwner_MainToEcho,C,copies the owner block $AFB8 over its echo $AFD1 ($19 bytes) (branch target; code read 2026-10-19),hand
 02,431F,Sram_Checksum,C,HL = data,hand+auto
 02,432F,Sram_WriteChecksum,C,computes the checksum of BC bytes at HL and stores (sum+$4E,hand+auto
 02,433B,Sram_ValidateTagSlot,C,validates the pair of tag blocks of one photo slot; repairs from the good copy or formats,hand+auto
@@ -820,6 +843,7 @@ bank,addr,name,conf,note,source
 02,49A8,Settings_Store_Far,C,writes animation list,hand+auto
 02,4A07,Settings_StoreAnimTranslated_Far,C,as 49A8 but translates the 47 animation entries photo number -> slot id,hand+auto
 02,4A6B,Dj_StoreTune_Far,C,packs the D.J. tune from $D93D.. into the settings block (B061..) of both copies,hand+auto
+02,4A7B,Dj_StoreTune_Far_TuneLoop,C,"per-tune loop top: packs duty / length, envelope, modulation, notes and stereo codes of one tune from the editor shadows into the SRAM image (branch target; code read 2026-10-19)",hand
 02,4B1E,Dj_PackDutyLength,I,packs duty (2 bits) and length (4 bits) into one byte,hand+auto
 02,4B2B,Dj_PackEnvelope,I,packs direction / period / initial volume,hand+auto
 02,4B40,Dj_PackModulation,I,packs modulation depth and flags,hand+auto
@@ -1267,6 +1291,7 @@ bank,addr,name,conf,note,source
 03,5649,AnimEd_CoroYield,C,saves the registers of the running context and resumes the next of three (rst 08 after the third),hand+auto
 03,568B,AnimEd_Decor_CtxEntryTbl,I,"3 words 5691 / 57BE / 5847 = entry points of AnimEd_Ctx0/1/2_Decor, the same values AnimEd_StartDecorations stores through split immediates; no reader of the table (read in forced runs only)",hand
 03,5691,AnimEd_Ctx0_Decor,I,context 0: draws the tool bar tiles,hand+auto
+03,56BE,AnimEd_Ctx0_Decor_RowLoop,C,"row loop top (3 rows) of the decor strip drawn by context 0: two map cells per row from the table at DE, then 16 columns with a sprite sweep (branch target; code read 2026-10-19)",hand
 03,57A6,AnimEd_Ctx0_Decor_Map57A6,I,"auto: 24 bytes, tile map; referenced by AnimEd_Ctx0_Decor",auto
 03,57BE,AnimEd_Ctx1_Decor,I,context 1: border animation (sprites and tiles),hand+auto
 03,5827,AnimEd_Ctx1_BorderSprite,I,,hand+auto
@@ -1279,6 +1304,7 @@ bank,addr,name,conf,note,source
 03,59AF,AnimEd_CoroYield_B,I,same switch as 5649 for the exit contexts,hand+auto
 03,59F1,AnimEd_Exit_CtxEntryTbl,I,"3 words 59F7 / 5A7A / 5B00 = entry points of AnimEd_ExitCtx0/1/2, the values AnimEd_StartExitTransition stores through split immediates; no reader of the table (read in forced runs only)",hand
 03,59F7,AnimEd_ExitCtx0,I,exit context 0,hand+auto
+03,59FC,AnimEd_ExitCtx0_RowLoop,C,row loop top (3 rows) of the exit sweep of context 0: blanks two cells per row ($FE) and sweeps 16 columns with a sprite (branch target; code read 2026-10-19),hand
 03,5A7A,AnimEd_ExitCtx1,I,exit context 1,hand+auto
 03,5AE0,AnimEd_ExitCtx1_Sprite,I,,hand+auto
 03,5AF8,AnimEd_ExitCtx1_Sprite_PtrTbl5AF8,I,"auto: 8 bytes, word table; referenced by AnimEd_ExitCtx1_Sprite",auto
@@ -1319,6 +1345,7 @@ bank,addr,name,conf,note,source
 03,611A,Mode13_State03_PlayPrepare,C,loads the animation list (far 02:4EE8),hand+auto
 03,61FD,Mode13_State00_Init_Tbl61FD,I,"auto: 64 bytes, bytes; referenced by Mode13_State00_Init, Mode13_State01_MusicSelect, Mode13_State03_PlayPrepare",auto
 03,623D,Mode13_State04_PlayRun,C,steps the entries at the animation speed,hand+auto
+03,62C8,Mode13_State04_PlayRun_Keys,C,"key poll of the playback: bit 1 of $FFA8 (B) goes to the next state, bit 3 (Start) toggles the pause flag $D7BD (branch target; code read 2026-10-19)",hand
 03,62DE,Mode13_State05_Exit,C,fades out and returns to state 0,hand+auto
 03,62F4,Mode13_State06_EndMessageSetup,C,selects result message 6,hand+auto
 03,6302,Mode13_State07_FarResultScreen,C,far call 09:7290 (shared result screen),hand+auto
@@ -1384,6 +1411,7 @@ bank,addr,name,conf,note,source
 03,6D5A,Mode1A_State07_PickJump,C,picks the JUMP target photo,hand+auto
 03,6DAD,Mode1A_State08_PickConfirm,I,A confirms with the button animation,hand+auto
 03,6E04,Mode1A_State09_ExitDialog,I,keep / discard dialog,hand+auto
+03,6E98,Mode1A_State09_ExitDialog_Cancel,C,bit 1 of $FFA2 (B): slides the dialog out and returns to state 3 (branch target; code read 2026-10-19),hand
 03,6EA4,HotSpotEd_DialogChoiceA,I,Left / Right toggles dialog_choice and swaps the dialog tiles,hand+auto
 03,6EE1,Mode1A_State0A_DeleteDialog,I,delete this hot spot? dialog,hand+auto
 03,6F3E,HotSpotEd_DialogChoiceB,I,same for the delete dialog,hand+auto
@@ -1393,6 +1421,7 @@ bank,addr,name,conf,note,source
 03,6FA6,Mode1A_State0E_FarSaveRoutine,C,far call 07:699C (save routine),hand+auto
 03,6FB1,Mode1A_State0F_SaveResult,C,back to browsing or exit,hand+auto
 03,6FC3,HotSpotEd_DrawSlots,C,draws the five hot-spot slot sprites (blinking when not selected),hand+auto
+03,6FCE,HotSpotEd_DrawSlots_SlotLoop,C,"per-slot loop top (B counts the slots, C the slot number): draws the slot icon when it is the cursor slot or its flag is set (branch target; code read 2026-10-19)",hand
 03,7040,HotSpotEd_SlotIconFlags,I,E = bit mask of the fields (sound / effect / jump) that are set,hand+auto
 03,7062,HotSpotEd_SlotXY,I,B / C = screen position of slot C,hand+auto
 03,7097,HotSpotEd_SlotAnimTbl,I,sprite animation lists per slot state,hand+auto
@@ -1423,6 +1452,7 @@ bank,addr,name,conf,note,source
 03,7479,HotSpotEd_ShowJump,C,shows the chosen jump target,hand+auto
 03,74A0,HotSpotEd_ShowNumber,I,two digit tiles from bank 1C,hand+auto
 03,74C7,HotSpotEd_CopyNumberTile,I,,hand+auto
+03,74DA,HotSpotEd_ShowEffect_CopyThumb,C,"copies the 64-byte effect thumbnail of the current slot ($5760 + 64 x effect id, bank $1C) to $8CF0 (branch target; code read 2026-10-19)",hand
 03,7505,HotSpotEd_ShowJumpThumb,I,thumbnail of the jump target,hand+auto
 03,7573,HotSpotEd_PickerScroll,C,scrolls the value picker while Up / Down is held; Z/NZ,hand+auto
 03,75B0,HotSpotEd_PickerScrollStep,I,,hand+auto
@@ -1638,6 +1668,7 @@ bank,addr,name,conf,note,source
 04,6911,Mode09_State01_SliderBrowse,C,photo number slider at the bottom; Left / Right moves it,hand+auto
 04,6972,Mode09_State02_PhotoArrows,C,photo with four blinking arrows: each direction opens an edit page,hand+auto
 04,6AC0,Mode09_State03_PageLeft,C,left page: choice A (Paint / Stamp),hand+auto
+04,6B11,Mode09_State03_PageLeft_SlideOut,C,"tail of the page-left key: clears the OAM shadow and slides the page with the 16-step table Tbl2FB5 (rSCX - table), then state 2 or the fade-out (branch target; code read 2026-10-19)",hand
 04,6B72,Mode09_State04_PageRight,C,right page: choice B (Frame / Comment),hand+auto
 04,6BF5,Mode09_State05_PageUp,C,up page: Print (mode 1C),hand+auto
 04,6C94,Mode09_State06_PageDown,C,down page: Delete (mode 0F with caller_code 1),hand+auto
@@ -1701,6 +1732,7 @@ bank,addr,name,conf,note,source
 04,7593,Mode0A_State03_SliderBrowse,C,,hand+auto
 04,7617,Mode0A_State04_PhotoArrows,C,,hand+auto
 04,7765,Mode0A_State05_PageLeft,C,,hand+auto
+04,77B6,Mode0A_State05_PageLeft_SlideOut,C,same tail as Mode09_State03_PageLeft_SlideOut in mode $0A (shares the table Tbl2FB5) (branch target; code read 2026-10-19),hand
 04,7817,AlbumPage_ReadChoiceA,C,Up / Down toggles choice_cursor_a with a blip,hand+auto
 04,7832,AlbumPage_DrawChoiceA,C,arrow sprite at the choice A position,hand+auto
 04,786F,AlbumPage_ChoiceAPosTbl,I,,hand+auto
@@ -1789,6 +1821,7 @@ bank,addr,name,conf,note,source
 05,4AF4,DjEd_ColumnVisible,I,tests whether a column is inside the scrolled window,hand+auto
 05,4B24,DjEd_DrawNoteMarker,I,,hand+auto
 05,4B36,DjEd_DrawNoteCursorBlink,C,blinking cursor on the note grid (blink table at 4B84),hand+auto
+05,4B4F,DjEd_DrawNoteCursor_BlinkTail,C,"shared tail of DjEd_DrawNoteMarker and DjEd_DrawNoteCursorBlink: frame from the blink table 4B84 by the phase $D893, +4 / +2 when A = D / E, Oam_AddMeta_B01_5D47, then advances the blink counter $D892 / phase $D893 (branch target; code read 2026-10-19)",hand
 05,4B84,DjEd_DrawNoteCursorBlink_Tbl4B84,I,"auto: 8 bytes, bytes; referenced by DjEd_DrawNoteCursorBlink",auto
 05,4B8C,DjEd_DrawNoteColumn,C,,hand+auto
 05,4BB2,DjEd_DrawNoteColumn_Tbl4BB2,I,"auto: 102 bytes, bytes; referenced by DjEd_DrawNoteColumn",auto
@@ -1817,14 +1850,22 @@ bank,addr,name,conf,note,source
 05,4F15,DjPerf_BounceOffset_Tbl4F15,I,"auto: 3 bytes, bytes; referenced by DjPerf_BounceOffset",auto
 05,4F18,DjPerf_PerformerScript,C,runs the performer animation script ids 0..8,hand+auto
 05,4F9E,DjPerf_PerformerScript_Tbl4F9E,I,"auto: 78 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,4FEC,DjPerf_PerformerScript_Id1,C,case 1 of the performer script dispatch (script id in $D897 = 1) (branch target; code read 2026-10-19),hand
 05,5006,DjPerf_PerformerScript_Tbl5006,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,500B,DjPerf_PerformerScript_Id2,C,case 2 of the performer script dispatch (script id in $D897 = 2) (branch target; code read 2026-10-19),hand
 05,5025,DjPerf_PerformerScript_Tbl5025,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,502A,DjPerf_PerformerScript_Id3,C,case 3 of the performer script dispatch (script id in $D897 = 3) (branch target; code read 2026-10-19),hand
 05,5044,DjPerf_PerformerScript_Tbl5044,I,"auto: 4 bytes, bytes; referenced by DjPerf_PerformerScript | 5 bytes 22 25 50 60 03 (the last one was cut off by a false label at 5048 = `ld bc,$5048` in Ball_DrawPauseText, a sprite position); the code of DjPerf_PerformerScript starts at 5049",auto
+05,5049,DjPerf_PerformerScript_Id4,C,case 4 of the performer script dispatch (script id in $D897 = 4) (branch target; code read 2026-10-19),hand
 05,5063,DjPerf_PerformerScript_Tbl5063,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,5068,DjPerf_PerformerScript_Id5,C,case 5 of the performer script dispatch (script id in $D897 = 5) (branch target; code read 2026-10-19),hand
 05,5082,DjPerf_PerformerScript_Tbl5082,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,5087,DjPerf_PerformerScript_Id6,C,case 6 of the performer script dispatch (script id in $D897 = 6): sets $D8B8 = 1 and runs the longer step with the $D8A6 counter (branch target; code read 2026-10-19),hand
 05,50D3,DjPerf_PerformerScript_Tbl50D3,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
 05,50D8,DjPerf_PerformerScript_Tbl50D8,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,50DD,DjPerf_PerformerScript_Id7,C,case 7 of the performer script dispatch (script id in $D897 = 7) (branch target; code read 2026-10-19),hand
 05,50FD,DjPerf_PerformerScript_Tbl50FD,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
+05,5102,DjPerf_PerformerScript_Id8,C,case 8 of the performer script dispatch (script id in $D897 = 8) (branch target; code read 2026-10-19),hand
 05,5120,DjPerf_PerformerScript_Tbl5120,I,"auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript",auto
 05,5125,DjPerf_UpdatePerformerTiles,C,performer sprite tile change at most every 4 frames,hand+auto
 05,5177,DjPerf_AnimateSpeakerBlink,I,,hand+auto
@@ -1846,6 +1887,10 @@ bank,addr,name,conf,note,source
 05,5381,DjPerf_AnimatorDraw_Tbl5381,I,"auto: 110 bytes, bytes; referenced by DjPerf_AnimatorDraw",auto
 05,53EF,DjPerf_Input,C,performance screen control: tempo / channels / level; Start; A; B; Left / Right pitch,hand+auto
 05,554D,DjPerf_Input_Tbl554D,I,"auto: 18 bytes, bytes; referenced by DjPerf_Input",auto
+05,559E,DjPerf_Input_Channel1Keys,C,selector $D8B3 = 1: Up / Down held ($FFA3 and $C0) step channel 1 ($D8B4) and redraw its state; restarts the performer script when idle (branch target; code read 2026-10-19),hand
+05,55C6,DjPerf_Input_Channel2Keys,C,selector $D8B3 = 2: Up / Down step channel 2 ($D8B5) (branch target; code read 2026-10-19),hand
+05,55EE,DjPerf_Input_Channel3Keys,C,selector $D8B3 = 3: Up / Down step channel 3 ($D8B6) (branch target; code read 2026-10-19),hand
+05,5616,DjPerf_Input_LevelKeys,C,"any other selector value: Up / Down step the level $D8B7 (DjEd_StepDownUp, 8 steps) and redraw the level digit (branch target; code read 2026-10-19)",hand
 05,5651,DjPerf_ChannelToggleKeys,I,,hand+auto
 05,567B,DjPerf_ChannelFade,C,fades the three channels in and out on each tick,hand+auto
 05,56AE,DjPerf_ChannelStep,C,one channel state machine (0 off .. 3 fading in),hand+auto
@@ -1869,6 +1914,7 @@ bank,addr,name,conf,note,source
 05,58F9,DjEd_DrawModDepthDigits,C,,hand+auto
 05,5913,DjEd_DrawModSpeedDigits,C,,hand+auto
 05,592D,DjEd_DrawLoopDigitsAndPrint,C,loop digits; during print also the printer loop (A / rows),hand+auto
+05,5959,DjPrint_Job,C,"the TRIPY-H score print job (reached by A on Start-held in the editor, 05:4758): DjPrint_BeginSerial, INIT, bands of 9 rows (DjPrint_RowDispatch, DjPrint_SendBand), PRINT, wait, repeated until row $27 or B; ends with DjPrint_EndSerial (branch target; code read 2026-10-19)",hand
 05,59C3,DjPrint_BeginSerial,C,enables the serial IRQ and the printer poll,hand+auto
 05,59D2,DjPrint_SendInitWait,C,Prn_SendInit until the answer is not $F0,hand+auto
 05,59E4,DjPrint_SendBand,C,one band of 40 rows,hand+auto
@@ -1905,6 +1951,7 @@ bank,addr,name,conf,note,source
 05,5BE8,DjPrintRow_NsNotes1,C,NOISE notes 4-7,hand+auto
 05,5BF3,DjPrintRow_NsNotes2,C,NOISE notes 8-11,hand+auto
 05,5BFE,DjPrintRow_NsNotes3,C,NOISE notes 12-15; followed by the shared note-row renderer,hand+auto
+05,5C09,DjPrintRow_NsNotes_Build,C,"shared tail of the five noise-step note rows (callers 5B8D-5BB9): copies the 20-byte template Tbl5C7E to $C480, then writes the notes of one 4-note group (branch target; code read 2026-10-19)",hand
 05,5C7E,DjPrintRow_NsNotes3_Tbl5C7E,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_NsNotes3",auto
 05,5C92,DjPrintRow_NsNotes3_Tbl5C92,I,"auto: 24 bytes, bytes; referenced by DjPrintRow_NsNotes3",auto
 05,5CAA,DjPrintRow_S1Duty,C,SOUND I duty and length line,hand+auto
@@ -1912,16 +1959,19 @@ bank,addr,name,conf,note,source
 05,5CE4,DjPrintRow_S1Duty_Tbl5CE4,I,"auto: 3 bytes, bytes; referenced by DjPrintRow_S1Duty",auto
 05,5CE7,DjPrintRow_S1Envelope,C,SOUND I envelope line,hand+auto
 05,5CFE,DjPrintRow_NsEnvelope,C,NOISE envelope line,hand+auto
+05,5D15,DjPrintRow_NsEnvelope_Build,C,"shared tail of the two envelope rows (callers 5CFB, 5D12): copies the template Tbl5D4A to $C480 and writes the step number, the dash and the envelope values (branch target; code read 2026-10-19)",hand
 05,5D4A,DjPrintRow_NsEnvelope_Tbl5D4A,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_NsEnvelope",auto
 05,5D5E,DjPrintRow_S2WavePattern,C,SOUND II wave pattern line,hand+auto
 05,5D7B,DjPrintRow_S2WavePattern_Tbl5D7B,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_S2WavePattern",auto
 05,5D8F,DjPrintRow_S1Modulation,C,SOUND I modulation line,hand+auto
 05,5DA1,DjPrintRow_S2Modulation,C,SOUND II modulation line,hand+auto
+05,5DB3,DjPrintRow_S2Modulation_Build,C,"shared tail of the two modulation rows (callers 5D9E, 5DB0): copies the template Tbl5DE8 to $C480, then the numbers with DjPrint_PutNumber2 / DjPrint_PutDash (branch target; code read 2026-10-19)",hand
 05,5DE8,DjPrintRow_S2Modulation_Tbl5DE8,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_S2Modulation",auto
 05,5DFC,DjPrintRow_S2Modulation_Tbl5DFC,I,"auto: 3 bytes, bytes; referenced by DjPrintRow_S2Modulation",auto
 05,5DFF,DjPrintRow_S1Loop,C,SOUND I loop length line,hand+auto
 05,5E07,DjPrintRow_S2Loop,C,SOUND II loop length line,hand+auto
 05,5E0F,DjPrintRow_NsLoop,C,NOISE loop length line,hand+auto
+05,5E17,DjPrintRow_NsLoop_Build,C,"shared tail of the three loop rows (callers 5E04, 5E0C, 5E14): template Tbl5E33 to $C480, step number, then DjPrint_RenderTextRow (branch target; code read 2026-10-19)",hand
 05,5E33,DjPrintRow_NsLoop_Tbl5E33,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_NsLoop",auto
 05,5E47,DjPrintRow_Tempo,C,tempo line,hand+auto
 05,5E64,DjPrintRow_Tempo_Tbl5E64,I,"auto: 20 bytes, bytes; referenced by DjPrintRow_Tempo",auto
@@ -1945,6 +1995,8 @@ bank,addr,name,conf,note,source
 05,6098,DjPrint_PutDigitOrBlank,I,,hand+auto
 05,60A5,DjPrint_PutNumber2,I,,hand+auto
 05,60BF,DjPrint_PutTempo,I,,hand+auto
+05,60EE,DjPrint_RenderTextRow,C,"HL = 20-character row of print glyph codes: expands it into the band at $C200 (space, digit, $4F/$9F, $F0+ cases); entry used by every DjPrintRow_* builder (branch target; code read 2026-10-19)",hand
+05,60F3,DjPrint_RenderTextRow_CharLoop,C,per-character loop top of DjPrint_RenderTextRow (B counts the 20 characters) (branch target; code read 2026-10-19),hand
 05,61A6,DjPrint_PutTempo_Tbl61A6,I,"auto: 32 bytes, bytes; referenced by DjPrint_PutTempo",auto
 05,61C6,DjTitle_LoadPerformerGfx,C,toggles the double buffer and loads the performer tiles,hand+auto
 05,6216,DjEd_LoadPerformerTiles8D80,C,,hand+auto
@@ -2058,6 +2110,7 @@ bank,addr,name,conf,note,source
 05,6F69,DjS2_WaveRedrawStart,C,D8F1 = 4,hand+auto
 05,6F6F,DjS2_WaveRedrawColumns,C,8 columns per frame,hand+auto
 05,6F92,DjS2_WaveGraphColumn,I,,hand+auto
+05,6FA7,DjS2_WaveGraphColumn_RowLoop,C,"per-row loop top of one wave-graph column (B counts down, bit 3 of B selects the compare direction) (branch target; code read 2026-10-19)",hand
 05,6FF2,DjS2_WaveGraphColumn_Tbl6FF2,I,"auto: 4 bytes, bytes; referenced by DjS2_WaveGraphColumn",auto
 05,6FF6,DjS2_WaveGraphColumn_Tbl6FF6,I,"auto: 4 bytes, bytes; referenced by DjS2_WaveGraphColumn",auto
 05,6FFA,DjS2_WaveGraphToVram,C,copies the wave graph to VRAM $9200 / $9300,hand+auto
@@ -2153,6 +2206,7 @@ bank,addr,name,conf,note,source
 05,7DB1,Ball_DrawHud,I,,hand+auto
 05,7DBA,Ball_FlipPalettes,I,game-over blink,hand+auto
 05,7DCC,Ball_DemoInput,C,autopilot,hand+auto
+05,7E83,Ball_DemoInput_SetHoldoff,C,sets wDemoInputHoldoff ($D9EA) = 1 and returns: the autopilot waits one more frame; shared by the cases where $D9D7 (ball player position) fits no move (branch target; code read 2026-10-19),hand
 05,7E89,Ball_StoreBest,C,best score compare and far store,hand+auto
 05,7EB5,Ball_LoadCharacterGfx,C,,hand+auto
 05,7F05,Ball_LoadGfx8D80,C,,hand+auto
@@ -2320,6 +2374,7 @@ bank,addr,name,conf,note,source
 06,5E04,Mode14_State00_Init,C,sets up the live view; the sensor and the options,hand+auto
 06,5F8B,Cam_SetGainContrast,C,A far call to bank 0A with gain and contrast row,hand+auto
 06,5F9E,Mode14_State01_LiveView,C,live view loop: brightness; contrast; shutter; options; timer,hand+auto
+06,60C8,Mode14_State01_LiveView_OptionKey,C,"bit 2 of $FFA8: sfx 6, draws the option panel and goes to state 4 (the options page) (branch target; code read 2026-10-19)",hand
 06,60DB,Shoot_CallVariantHandler_Tbl60DB,I,"auto: 88 bytes, bytes; referenced by Shoot_CallVariantHandler, Shoot_SetupCapture",auto
 06,6133,Shoot_BrightnessKeys,C,Up / Down changes the brightness set point,hand+auto
 06,615E,Shoot_ContrastKeys,C,Left / Right changes contrast / gain,hand+auto
@@ -2423,6 +2478,7 @@ bank,addr,name,conf,note,source
 07,4000,Mode0E_LinkTransfer,C,mode 0E: link-cable exchange (SEND / RECEIVE),hand+auto
 07,4004,Mode0E_StateTable,C,21 states,hand+auto
 07,402E,Mode0E_State00_Init,C,,hand+auto
+07,40EE,Mode0E_LeaveToLinkMenu,C,"shared abort / leave tail of mode $0E: waits one frame, Link_Stop until done, clears $DC44, mode $06 state 0 (link menu); jumped to by states 03, 0C-0D and 14 (branch target; code read 2026-10-19)",hand
 07,4108,Mode0E_State01_Handshake,C,Left / Right choice; hello; role negotiation,hand+auto
 07,4186,Mode0E_State01_Handshake_Tbl4186,I,"auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake",auto
 07,41C8,Unused_Mode0E_GotoState12,I,UNREFERENCED: state := $12,hand+auto
@@ -2762,6 +2818,7 @@ bank,addr,name,conf,note,source
 08,4587,Mode1C_DrawToggleArrow_Tbl4587,I,"auto: 6 bytes, bytes; referenced by Mode1C_DrawToggleArrow",auto
 08,458D,Mode1C_State07_Leave,C,A -> print job (state 8); B -> back,hand+auto
 08,45E0,Mode1C_State08_PrintJob,C,builds the print job and sends it,hand+auto
+08,46A3,Mode1C_State08_PrintJob_CommentCard,C,branch taken when $D806 bit 0 is set: the comment-card print job (08:46A3-4777; card layout routines in bank 9) (branch target; code read 2026-10-19),hand
 08,477F,Mode1C_State09_FadeToBorderPicker,C,,hand+auto
 08,4798,Mode1C_State0A_BorderPicker,C,far call 08:4DF2,hand+auto
 08,47A3,Mode1C_State0B_AfterBorder,C,far 02:48F7; then state 2 again,hand+auto
@@ -2892,6 +2949,7 @@ bank,addr,name,conf,note,source
 09,43F3,CommentEditor_CtrlGrid,C,A types the character under the cursor,hand+auto
 09,4414,CommentEditor_CtrlDelete,C,,hand+auto
 09,4439,CommentEditor_CtrlRight,C,cursor limit $1A,hand+auto
+09,443E,CommentEditor_StepCursorRight,C,"moves the text cursor $DA91 one place right (limit $1A, sfx $21); the second half of CommentEditor_CtrlRight, also reached after a character was typed (branch target; code read 2026-10-19)",hand
 09,4450,CommentEditor_CtrlLeft,C,,hand+auto
 09,4466,CommentEditor_DrawTextCursor,C,blinking sprite $7D,hand+auto
 09,4474,CommentEditor_DrawCaret,I,,hand+auto
@@ -2916,6 +2974,7 @@ bank,addr,name,conf,note,source
 09,4775,CommentCard_DrawPhotoNumber_Far,C,far,hand+auto
 09,479F,CommentCard_DrawDigitC,C,,hand+auto
 09,47B6,CommentCard_DrawOwnerName_Far,C,far: tag_owner_name,hand+auto
+09,47D1,CommentCard_DrawNumber_NonZero,C,taken when some byte of the number is non-zero: draws the B bytes at HL one after the other with CommentCard_DrawHalfByte (branch target; code read 2026-10-19),hand
 09,47D9,CommentCard_DrawHalfByte,I,,hand+auto
 09,47EC,CommentCard_DrawNibble,I,,hand+auto
 09,4802,Glyph_LoadFromCharCode,C,"character code to glyph (bank in C): copies 32 B from HL + (A - 1) x 32 to DE (HL = font base: $4000 = the 256-slot font, $6000 = the small-kana table); advances DE via Vram_CopyFromBankAuto",hand+auto
@@ -3002,8 +3061,10 @@ bank,addr,name,conf,note,source
 09,55AE,OwnerCard_DrawBloodType,C,table 09:55CD,hand+auto
 09,55CD,OwnerCard_DrawBloodType_Map55CD,I,"auto: 10 bytes, tile map; referenced by OwnerCard_DrawBloodType",auto
 09,55D7,OwnerCard_LoadBloodTiles,C,,hand+auto
+09,55FD,OwnerCard_LoadBirthNumberTiles_NonZero,C,non-zero number: loops B bytes at HL through OwnerCard_DrawBloodHigh (the all-zero case draws the placeholder) (branch target; code read 2026-10-19),hand
 09,5605,OwnerCard_DrawBloodHigh,I,,hand+auto
 09,5618,OwnerCard_DrawBloodLow,I,,hand+auto
+09,5632,OwnerCard_DrawNumber_NonZero,C,"non-zero number, shared by OwnerCard_DrawDigits (54A0) and OwnerCard_DrawBirthNumber (5555): loops B bytes at HL through OwnerCard_DrawBloodHighB (branch target; code read 2026-10-19)",hand
 09,563A,OwnerCard_DrawBloodHighB,I,,hand+auto
 09,564D,OwnerCard_DrawBloodLowB,I,,hand+auto
 09,566A,OwnerCard_DrawBloodLowB_Tbl566A,I,"auto: 11 bytes, bytes; referenced by OwnerCard_DrawBloodLowB",auto
@@ -3046,15 +3107,33 @@ bank,addr,name,conf,note,source
 09,5B81,Kb_NavigateHorizontal,C,"grid step left / right: A = column, D = step limits of the row (high nibble = left step, low nibble = right step); $FFA3 bit 5 (Left) subtracts the high nibble, bit 4 (Right) adds the low nibble; returns A (C)",hand+auto
 09,5B9D,Kb_Page0_Press,C,A on a key; handlers via table 09:5C0E,hand+auto
 09,5C0E,Kb_Page0_Press_PtrTbl5C0E,C,"3 pointers to Kb_GlyphListA / B / C (09:53D3, 53F5, 5417) indexed by the page $DA3D (0-2); Kb_Page0_Press passes the selected list to Kb_FindCharInList (C)",auto
+09,5C14,Kb_Page0_Press_CursorRight,C,keys $3E-$40 of the name page: name cursor $DA3B + 1 (sfx $21); at the ninth place the page changes (Kb_Page0_Press_ToPage1) (branch target; code read 2026-10-19),hand
+09,5C28,Kb_Page0_Press_CursorLeft,C,"keys $41-$43 of the name page: name cursor $DA3B - 1 (sfx 4), nothing at 0 (branch target; code read 2026-10-19)",hand
+09,5C39,Kb_Page0_Press_GlyphSetA,C,"keys $44-$46: glyph set A ($DA41 = 1, $DA3D = 0, Kb_LoadGlyphSetA, sfx $38) (branch target; code read 2026-10-19)",hand
+09,5C4D,Kb_Page0_Press_GlyphSetB,C,"keys $47-$49: glyph set B ($DA42 = 1, $DA3D = 1, Kb_LoadGlyphSetB, sfx $38) (branch target; code read 2026-10-19)",hand
+09,5C62,Kb_Page0_Press_GlyphSetC,C,"keys $4A-$4C: glyph set C ($DA43 = 1, $DA3D = 2, Kb_LoadGlyphSetC, sfx $38) (branch target; code read 2026-10-19)",hand
+09,5C77,Kb_Page0_Press_Dakuten,C,"key $30 with a kana set: HL = Kb_DakutenMapTbl, then Kb_ApplyMarkTable (branch target; code read 2026-10-19)",hand
 09,5C7D,Kb_DakutenMapTbl,C,"voiced-mark map of the key $30: records {first code, count, new first code} ended by $FF: 06/0F/33, 1A/05/42, 58/01/86, 5B/0F/88, 6F/05/97. Kb_Page0_Press jumps to 09:5C77 for the key $30, loads this table and, for the character before the cursor, adds (code - first) to the new first code when the code lies in a run (C). The run lengths 15, 5, 1, 15, 5 match the dakuten (voiced mark) of the k/s/t rows, the h row (to b) and u (to vu) in hiragana and katakana: ka = 06, ha = 1A, katakana u = 58, ka = 5B, ha = 6F (I, from the counts; the glyph shapes were not looked at)",hand
+09,5C8D,Kb_Page0_Press_Handakuten,C,"key $31 with a kana set: HL = Kb_HandakutenMapTbl, then Kb_ApplyMarkTable (branch target; code read 2026-10-19)",hand
 09,5C93,Kb_HandakutenMapTbl,C,"semi-voiced-mark map of the key $31: records {first code, count, new first code} ended by $FF: 1A/05/47 and 6F/05/9C, i.e. the 5 h-row codes of hiragana (ha = 1A) and of katakana (ha = 6F) to the p row; same routine as Kb_DakutenMapTbl (09:5C9A) (C; the kana reading is I)",hand
+09,5C9A,Kb_ApplyMarkTable,C,"HL = dakuten or handakuten map: looks for the last typed character (this place or the previous one) in the map ranges, replaces it, writes it with Kb_WriteNameChar and advances the cursor (branch target; code read 2026-10-19)",hand
+09,5CE0,Kb_Page0_Press_ToPage1,C,"keys $4D and up, or the cursor past the ninth place: loads the sex page (map 23:7620 to $98C0, tiles 20:64C0 to $8800), cursor 0, sfx $16, state + 1 (branch target; code read 2026-10-19)",hand
 09,5D24,Kb_Page1_PressSex,C,,hand+auto
+09,5D52,Kb_Page1_PressSex_ToPage0,C,"key 4 of the sex page: back to the name page (Kb_LoadGlyphSetA, map 23:74A0 to $98C0, key $41, sfx 4) (branch target; code read 2026-10-19)",hand
+09,5D7B,Kb_Page1_PressSex_ToPage2,C,"keys 3 and 5 and up of the sex page: loads the birth-date page (map 24:5DC0 to $98C0), key $0C when it was key 3, else 0 (branch target; code read 2026-10-19)",hand
 09,5DAD,Kb_Page2_PressBirthDate,C,,hand+auto
+09,5E12,Kb_Page2_PressBirthDate_CursorRight,C,keys $0C-$0E: date cursor $DA3B + 1 (sfx $21); past the eighth place goes to the blood-type page (branch target; code read 2026-10-19),hand
+09,5E25,Kb_Page2_PressBirthDate_CursorLeft,C,"key $0F: date cursor $DA3B - 1 (sfx 4), at 0 leaves the page (branch target; code read 2026-10-19)",hand
+09,5E5F,Kb_Page2_PressBirthDate_ToPage3,C,"keys $10 and up, or the cursor past the eighth place: loads the blood-type page (map 24:5F40 to $98C0) (branch target; code read 2026-10-19)",hand
 09,5E95,Kb_Page3_PressBloodType,C,,hand+auto
+09,5EC8,Kb_Page3_PressBloodType_Ret,C,RET: keys 6-10 of the blood-type page do nothing (branch target; code read 2026-10-19),hand
+09,5EC9,Kb_Page3_PressBloodType_ToPage2,C,"key $0B: back to the birth-date page (map 24:5DC0, key $0F, set 4, sfx 4) (branch target; code read 2026-10-19)",hand
+09,5EF1,Kb_Page3_PressBloodType_Confirm,C,"keys $0C and up: sfx $16, 10-frame wait, state + 1 (the owner form is done) (branch target; code read 2026-10-19)",hand
 09,5F03,Kb_BackspaceOnB,C,"B (newly pressed, $FFA2 bit 1) moves the name cursor $DA3B back by one unless it is 0: backspace without erasing (C)",hand+auto
 09,5F12,Kb_BlinkBackground,C,every 4th frame ($FFC8 & 3 = 0) xor $3C into the BGP shadow $FFB0: the blinking palette of the keyboard background (C),hand+auto
 09,5F1E,Kb_WriteNameChar,C,owner_name[kb_cursor],hand+auto
 09,5F4B,Boot_EraseAllPrompt_Far,C,Start+Select at power-on: A erases; B boots (README 16.18),hand+auto
+09,5FCC,Boot_EraseAllPrompt_Far_Validate,C,"end of the erase prompt (and the path without prompt): far-calls 02:442C Sram_ValidateAll_Far and 02:4466 Photo_RenumberVector, then Far_Call_Return (the source shows `CommentEditor_DrawTextCursor` for 02:4466 only because bank 9 has that name at the same address) (branch target; code read 2026-10-19)",hand
 09,5FE3,Mode21_RunRunRun,C,mode 21: RUN! RUN! RUN! (three runners; 12 hurdles),hand+auto
 09,5FE7,Mode21_StateTable,C,"15 states x 2 B (09:5FE7-6005); a false auto label at 6000 (from the ""ld hl,$6000"" of the owner-name glyph loaders, which points into bank 2A) was removed",hand+auto
 09,6005,Mode21_State00_Init,C,,hand+auto
@@ -3180,6 +3259,13 @@ bank,addr,name,conf,note,source
 09,737F,ResultScreen_LoadMessage,C,message table 09:739E; 3 bytes per entry,hand+auto
 09,739E,ResultScreen_MessageTbl,C,,hand+auto
 0A,4000,Cam_MainDispatch,I,from the previous .sym (camera / sensor code,hand+auto
+0A,40BA,Cam_MainDispatch_EnterBand1,C,"band 0 -> band 1 ($D587 = $D588, reg 1 = $D588 | $E0, exposure e = $0048, reg 7 = $D5C2, dither matrix rebuilt); README §10, e >= $0030 in band 0 (branch target; code read 2026-10-19)",hand
+0A,40EE,Cam_MainDispatch_Band1,C,"band 1 handler (reg 1 bit 7 set, $D587 = $D588): e < $0031 -> Cam_MainDispatch_EnterBand0, e >= $1200 -> band 2 with e = $0D80, else keep (branch target; code read 2026-10-19)",hand
+0A,4138,Cam_MainDispatch_EnterBand0,C,"band 1 -> band 0 (reg 1 = $D588 | $20, e = $001F, reg 7 = $D5C1) (branch target; code read 2026-10-19)",hand
+0A,416C,Cam_MainDispatch_Band2,C,"band 2 handler ($D587 = $D589, reg 1 $E4 / $E5): e >= $6000 -> band 3 (e = $3500), e < $0800 -> band 1 (e = $0B00) (branch target; code read 2026-10-19)",hand
+0A,41F7,Cam_MainDispatch_Band3,C,"band 3 handler ($D587 = 8, reg 1 $E8): e >= $C000 -> band 4 (e = $8500), e < $2800 -> band 2 (e = $4500) (branch target; code read 2026-10-19)",hand
+0A,4274,Cam_MainDispatch_Band4,C,"band 4 handler ($D587 = $0A, reg 1 $0A): saturates at $FFFF, e < $6000 -> band 3 (reg 1 $E8, e = $8C00) (branch target; code read 2026-10-19)",hand
+0A,42AD,Cam_MainDispatch_WriteExposure,C,common tail: copies the shadow exposure $D596 / $D597 to the sensor registers $A002 / $A003 (the five registers go out with the next capture start) (branch target; code read 2026-10-19),hand
 0A,42BA,Cam_BuildDitherMatrix,I,from the previous .sym (camera / sensor code,hand+auto
 0A,4306,Cam_Dither_RampB,I,from the previous .sym (camera / sensor code,hand+auto
 0A,440C,Cam_Dither_Flat,I,from the previous .sym (camera / sensor code,hand+auto
@@ -3218,7 +3304,11 @@ bank,addr,name,conf,note,source
 0A,55FD,Fx05_StretchV2x,C,"the middle band of the photo stretched to double height; reads x 0-127, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 05; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx05_Copy_A400toC000",hand+bgb
 0A,5651,Fx06_StretchH2x,C,"the middle columns of the photo stretched to double width; reads x 32-95, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 06; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx06_Copy_A140toC000",hand+bgb
 0A,5695,Fx07_Zoom2x,C,"the centre of the photo magnified x2 (both axes); reads x 32-95, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 07; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx07_Copy_A440toC000",hand+bgb
+0A,569F,Fx07_Zoom2x_PassTop,C,pass top of the zoom 2x loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19),hand
+0A,56A3,Fx07_Zoom2x_GroupTop,C,"group top of the zoom 2x loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,573C,Fx08_Reduce2xTile2x2,C,"the photo reduced to half size (every second pixel and row) and tiled 2 x 2; reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 08; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx08_Reduce79_A100toC000",hand+bgb
+0A,5748,Fx08_Reduce2xTile2x2_PassTop,C,pass top of the 2x reduction loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19),hand
+0A,574C,Fx08_Reduce2xTile2x2_GroupTop,C,"group top of the 2x reduction loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,583B,Fx09_Reduce2xQuadTL,C,"the photo reduced to half size (every second pixel and row) into the TL quadrant (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C000; then shared body 0A:6866 (b=$79 reduce table); slots 09; selected by the game (06:60DB); was Fx09_Reduce_A100_toward_C000",hand+bgb
 0A,5841,Fx0A_Reduce2xQuadTR,C,"the photo reduced to half size (every second pixel and row) into the TR quadrant (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C080; then shared body 0A:6866 (b=$79 reduce table); slots 0A; selected by the game (06:60DB); was Fx0A_Reduce_A100_toward_C080",hand+bgb
 0A,5847,Fx0B_Reduce2xQuadBL,C,"the photo reduced to half size (every second pixel and row) into the BL quadrant (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C700; then shared body 0A:6866 (b=$79 reduce table); slots 0B; selected by the game (06:60DB); was Fx0B_Reduce_A100_toward_C700",hand+bgb
@@ -3243,12 +3333,18 @@ bank,addr,name,conf,note,source
 0A,5ABB,Fx1E_Nop,C,single ret: slot 1E of the effect table,hand+auto
 0A,5ABC,Fx1F_Nop,C,single ret: slot 1F of the effect table,hand+auto
 0A,5ABD,Fx20_FlipH,C,"the photo flipped left-right; reads x 0-127, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 20; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx20_MirrorCopy_A100toC0F0",hand+bgb
+0A,5AC9,Fx20_FlipH_PassTop,C,pass top of the flip left-right loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19),hand
+0A,5ACD,Fx20_FlipH_GroupTop,C,"group top of the flip left-right loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,5B37,Fx23_MirrorBtoT_OnFlipH,C,"top half of the picture = bottom half of the photo flipped upside down; = slot 03 applied to the photo flipped left-right; reads x 0-127, y 56-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 23; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx23_Copy_A800toC7F0",hand+bgb
 0A,5B86,Fx24_MirrorTtoB_OnFlipH,C,"bottom half of the picture = top half of the photo flipped upside down; = slot 04 applied to the photo flipped left-right; reads x 0-127, y 0-55; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 24; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx24_Copy_A100toC0F0",hand+bgb
 0A,5BD5,Fx25_StretchV2x_OnFlipH,C,"the middle band of the photo stretched to double height; = slot 05 applied to the photo flipped left-right; reads x 0-127, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 25; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx25_MirrorCopy_A400toC0F0",hand+bgb
 0A,5C3A,Fx26_StretchH2x_OnFlipH,C,"the middle columns of the photo stretched to double width; = slot 06 applied to the photo flipped left-right; reads x 32-95, y 0-111; grey levels: identity except 36 px that follow the wrong table byte 0A:774D (14336 px); BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 26; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx26_Copy_A140toC0F0",hand+bgb
 0A,5C80,Fx27_Zoom2x_OnFlipH,C,"the centre of the photo magnified x2 (both axes); = slot 07 applied to the photo flipped left-right; reads x 32-95, y 24-79; grey levels: identity except 24 px that follow the wrong table byte 0A:774D (14336 px); BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 27; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx27_Copy_A440toC0F0",hand+bgb
+0A,5C8A,Fx27_Zoom2x_OnFlipH_PassTop,C,pass top of the zoom 2x on the flipped photo loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19),hand
+0A,5C8E,Fx27_Zoom2x_OnFlipH_GroupTop,C,"group top of the zoom 2x on the flipped photo loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,5D27,Fx28_Reduce2xTile2x2_FlipH,C,"the photo reduced to half size (every second pixel and row) and tiled 2 x 2; = slot 08 with its picture flipped left-right; reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 28; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx28_Reduce7A_A100toC070",hand+bgb
+0A,5D33,Fx28_Reduce2xTile2x2_FlipH_PassTop,C,pass top of the 2x reduction on the flipped photo loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19),hand
+0A,5D37,Fx28_Reduce2xTile2x2_FlipH_GroupTop,C,"group top of the 2x reduction on the flipped photo loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,5E28,Fx29_Reduce2xQuadTL_FlipH,C,"the photo reduced to half size (every second pixel and row) into the TL quadrant; = slot 09 with its picture flipped left-right inside the part of the buffer it writes (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C070; then shared body 0A:6906 (b=$79 reduce table); slots 29; selected by the game (06:60DB); was Fx29_Reduce_A100_toward_C070",hand+bgb
 0A,5E2E,Fx2A_Reduce2xQuadTR_FlipH,C,"the photo reduced to half size (every second pixel and row) into the TR quadrant; = slot 0A with its picture flipped left-right inside the part of the buffer it writes (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C0F0; then shared body 0A:6906 (b=$79 reduce table); slots 2A; selected by the game (06:60DB); was Fx2A_Reduce_A100_toward_C0F0",hand+bgb
 0A,5E34,Fx2B_Reduce2xQuadBL_FlipH,C,"the photo reduced to half size (every second pixel and row) into the BL quadrant; = slot 0B with its picture flipped left-right inside the part of the buffer it writes (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C770; then shared body 0A:6906 (b=$79 reduce table); slots 2B; selected by the game (06:60DB); was Fx2B_Reduce_A100_toward_C770",hand+bgb
@@ -3278,7 +3374,11 @@ bank,addr,name,conf,note,source
 0A,62B8,Fx45_StretchV2x_FlipV,C,"the middle band of the photo stretched to double height; = slot 05 with its picture flipped upside down; reads x 0-127, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 45; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx45_Copy_A400toCD0C",hand+bgb
 0A,6318,Fx46_StretchH2x_OnFlipV,C,"the middle columns of the photo stretched to double width; = slot 06 applied to the photo flipped upside down; reads x 32-95, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 46; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx46_Copy_A140toCD0E",hand+bgb
 0A,636A,Fx47_Zoom2x_FlipV,C,"the centre of the photo magnified x2 (both axes); = slot 07 with its picture flipped upside down; reads x 32-95, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 47; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx47_Copy_A440toCD0C",hand+bgb
+0A,6374,Fx47_Zoom2x_FlipV_PassTop,C,"pass top of the zoom 2x, flipped vertically loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19)",hand
+0A,6378,Fx47_Zoom2x_FlipV_GroupTop,C,"group top of the zoom 2x, flipped vertically loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,6411,Fx48_Reduce2xTile2x2_FlipV,C,"the photo reduced to half size (every second pixel and row) and tiled 2 x 2; = slot 08 with its picture flipped upside down; reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 48; scratch FF8A-FF8D loops; selected by the game (06:60DB); was Fx48_Reduce79_A100toC60E",hand+bgb
+0A,641D,Fx48_Reduce2xTile2x2_FlipV_PassTop,C,"pass top of the 2x reduction, flipped vertically loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19)",hand
+0A,6421,Fx48_Reduce2xTile2x2_FlipV_GroupTop,C,"group top of the 2x reduction, flipped vertically loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,6516,Fx49_Reduce2xQuadTL_FlipV,C,"the photo reduced to half size (every second pixel and row) into the TL quadrant; = slot 09 with its picture flipped upside down inside the part of the buffer it writes (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C60E; then shared body 0A:69AA (b=$79 reduce table); slots 49; selected by the game (06:60DB); was Fx49_Reduce_A100_toward_C60E",hand+bgb
 0A,651C,Fx4A_Reduce2xQuadTR_FlipV,C,"the photo reduced to half size (every second pixel and row) into the TR quadrant; = slot 0A with its picture flipped upside down inside the part of the buffer it writes (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C68E; then shared body 0A:69AA (b=$79 reduce table); slots 4A; selected by the game (06:60DB); was Fx4A_Reduce_A100_toward_C68E",hand+bgb
 0A,6522,Fx4B_Reduce2xQuadBL_FlipV,C,"the photo reduced to half size (every second pixel and row) into the BL quadrant; = slot 0B with its picture flipped upside down inside the part of the buffer it writes (56 of 224 tiles; the rest of the buffer is left alone); reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := CD0E; then shared body 0A:69AA (b=$79 reduce table); slots 4B; selected by the game (06:60DB); was Fx4B_Reduce_A100_toward_CD0E",hand+bgb
@@ -3303,8 +3403,14 @@ bank,addr,name,conf,note,source
 0A,6864,Fx5E_Nop,C,single ret: slot 5E of the effect table,hand+auto
 0A,6865,Fx5F_Nop,C,single ret: slot 5F of the effect table,hand+auto
 0A,6866,FxShared_ReduceBody_G0,C,"shared body of slots 09-0C (the stubs Fx09-Fx0C load DE with the destination quadrant): reduces the photo to half size (every second pixel and row, sx = 2x, sy = 2y) into the 64 x 56 pixel quadrant at DE; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce table",hand+bgb
+0A,686F,FxShared_ReduceBody_G0_PassTop,C,"pass top of the shared reduction body, group 0 loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19)",hand
+0A,6873,FxShared_ReduceBody_G0_GroupTop,C,"group top of the shared reduction body, group 0 loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,6906,FxShared_ReduceBody_G1,C,"shared body of slots 29-2C (the photo flipped left-right first): reduces the photo to half size (every second pixel and row, sx = -2x + 126 or -2x + 254, sy = 2y) into the 64 x 56 pixel quadrant at DE; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce table",hand+bgb
+0A,690F,FxShared_ReduceBody_G1_PassTop,C,"pass top of the shared reduction body, group 1 loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19)",hand
+0A,6913,FxShared_ReduceBody_G1_GroupTop,C,"group top of the shared reduction body, group 1 loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,69AA,FxShared_ReduceBody_G2,C,"shared body of slots 49-4C (the photo flipped upside down first): reduces the photo to half size (every second pixel and row, sx = 2x, sy = -2y + 110 or -2y + 222) into the 64 x 56 pixel quadrant at DE; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce table",hand+bgb
+0A,69B3,FxShared_ReduceBody_G2_PassTop,C,"pass top of the shared reduction body, group 2 loop: sets the row counter $FF8B = 8 and falls into _GroupTop; re-entered after a source / destination pointer step (branch target; code read 2026-10-19)",hand
+0A,69B7,FxShared_ReduceBody_G2_GroupTop,C,"group top of the shared reduction body, group 2 loop: sets the column counter $FF8D = 4, then reads the next tile rows through the lookup table (branch target; code read 2026-10-19)",hand
 0A,6A41,FxShared_ReduceBody_G2_OuterLoopTail,C,"outer-loop tail of FxShared_ReduceBody_G2 (0A:69AA), reached by the jr z at the end of its inner loop: ldh a,[$ff8a]; dec a; ret z (the reduction ends when the outer counter $FF8A reaches 0), else $FF8A := a, dec d, e += $A0, inc h, l := 0 and jp 0A:69B3. The old name Cam_BootHiddenCombo_Check was wrong: the boot key-combination test is Cam_BootSelfTest_Entry (0A:6A52). Code read 2026-10-18",hand
 0A,6A52,Cam_BootSelfTest_Entry,I,from the previous .sym (camera / sensor code,hand+auto
 0A,6A7B,Cam_FactoryDiag_AllButtonsExceptB,I,from the previous .sym (camera / sensor code,hand+auto
@@ -3911,6 +4017,7 @@ bank,addr,name,conf,note,source
 1F,47D9,Sfx1_Data_47D9,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,47EC,Sfx1_Init_09_MenuPageUp,I,channel-1 effect init handler of ids 09 (table $41FA),hand+auto
 1F,47F4,Sfx1_Step_09_MenuPageUp,I,channel-1 effect step handler of ids 09 (table $4276),hand+auto
+1F,4812,Sfx1_Step_09_Finish,C,"end of step 09 of the channel-1 effect: $DD78 = 4, then Sfx1_Stop (branch target; code read 2026-10-19)",hand
 1F,481A,Sfx1_Data_481A,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,481F,Sfx1_Init_14_HotSpot,I,"channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure)",fix
 1F,482C,Sfx1_Step_14_HotSpot,I,channel-1 effect step handler of id 14 (hot spot),fix
@@ -3926,6 +4033,7 @@ bank,addr,name,conf,note,source
 1F,4894,Sfx1_Init_07_MainMenuPick,I,channel-1 effect init handler of ids 07 (table $41FA),hand+auto
 1F,48A9,Sfx1_Data_48A9,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,48AE,Sfx1_Init_2C,C,channel-1 effect init handler of ids 2C (table $41FA),hand+auto
+1F,48DA,Sfx1_InitTail_ClearFlag,C,"shared tail of four channel-1 init routines (callers 4973, 49C3, 4A7B, 4AA2) after Snd_Sfx_Start: clears $DD08 and returns (branch target; code read 2026-10-19)",hand
 1F,48DF,Sfx1_Data_48DF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,48EC,Sfx1_Init_2D,C,channel-1 effect init handler of ids 2D (table $41FA),hand+auto
 1F,4904,Sfx1_Data_4904,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
@@ -3988,6 +4096,7 @@ bank,addr,name,conf,note,source
 1F,4D28,Sfx4_Init_05_EraseAnim,I,"channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used - player death in space fever ?; the name EraseAnim comes from the caller EraseAnim_Run; the owner hears a death sound, to be settled.",fix
 1F,4D3F,Sfx4_Init_06,C,channel-4 effect init handler of ids 06 (table $431A),hand+auto
 1F,4D47,Sfx4_Step_06,C,channel-4 effect step handler of ids 06 (table $433E),hand+auto
+1F,4D66,Sfx4_Step_06_LoadNR4x,C,"step 06 of the channel-4 effect when the table value is 0: $DD7D = 1, then Snd_Sfx_LoadNR4x with the data at $4D14 (branch target; code read 2026-10-19)",hand
 1F,4D72,Sfx4_Data_4D72,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
 1F,4D7A,Sfx4_Init_0B,C,channel-4 effect init handler of ids 0B (table $431A),hand+auto
 1F,4D82,Sfx4_Data_4D82,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
@@ -4048,6 +4157,7 @@ bank,addr,name,conf,note,source
 1F,507D,Sfx3_Init_02_ViewArcadeSelect,I,channel-3 effect init handler of ids 02 (table $42F2),hand+auto
 1F,508B,Sfx3_Data_508B,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
 1F,5090,Sfx3_Step_04,C,channel-3 effect step handler of ids 04 (table $4306),hand+auto
+1F,50A4,Sfx3_Step_04_WriteNR33,C,shared tail of step 04 of the channel-3 effect: writes A to NR33 and returns (branch target; code read 2026-10-19),hand
 1F,50AB,Sfx3_Init_04,C,"channel-3 effect init handler of ids 04 (table $42F2). Owner (review page, 2026-10-13, by ear): sfx3 04: unsure.",fix
 1F,50B9,Sfx3_Data_50B9,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
 1F,50BE,Sfx3_Step_01_ShootSelect,I,channel-3 effect step handler of ids 01 (table $4306),hand+auto

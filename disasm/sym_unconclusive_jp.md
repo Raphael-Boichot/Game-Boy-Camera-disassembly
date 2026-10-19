@@ -14,9 +14,9 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
-| mode state | 102 | 5597 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| mode state | 102 | 5585 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
-| SFX tag | 95 | 2536 | the sound each id plays |
+| SFX tag | 95 | 2528 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
 | main-menu slide | 2 | 24 | which transition each slide is |
@@ -55,7 +55,7 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 00:34F7 | `Mode1D_TvAnimTbl` | 30 | state handler or helper of a screen mode | 15 x {x |
 | 03:6C2D | `Mode1A_State04_PlaceOrDelete` | 105 | state handler or helper of a screen mode | A opens the sound picker |
 | 03:6DAD | `Mode1A_State08_PickConfirm` | 87 | state handler or helper of a screen mode | A confirms with the button animation |
-| 03:6E04 | `Mode1A_State09_ExitDialog` | 160 | state handler or helper of a screen mode | keep / discard dialog |
+| 03:6E04 | `Mode1A_State09_ExitDialog` | 148 | state handler or helper of a screen mode | keep / discard dialog |
 | 03:6EE1 | `Mode1A_State0A_DeleteDialog` | 93 | state handler or helper of a screen mode | delete this hot spot? dialog |
 | 04:5009 | `Mode0F_DrawCopyCount_Tbl5009` | 16 | state handler or helper of a screen mode | auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount |
 | 04:5044 | `Mode0F_EraseJingleTiles` | 91 | state handler or helper of a screen mode | plays sound $45 and builds four quadrant tiles of the erase animation |
@@ -194,7 +194,7 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:47B4 | `Sfx1_Init_06_0D_SliderStep` | 37 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 06 0D (table $41FA) |
 | 1F:47C0 | `Sfx1_Step_06_0D_SliderStep` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 06 0D (table $4276) |
 | 1F:47EC | `Sfx1_Init_09_MenuPageUp` | 46 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 09 (table $41FA) |
-| 1F:47F4 | `Sfx1_Step_09_MenuPageUp` | 38 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 09 (table $4276) |
+| 1F:47F4 | `Sfx1_Step_09_MenuPageUp` | 30 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 09 (table $4276) |
 | 1F:481F | `Sfx1_Init_14_HotSpot` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure) |
 | 1F:482C | `Sfx1_Step_14_HotSpot` | 19 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of id 14 (hot spot) |
 | 1F:4844 | `Sfx1_Init_15_HotSpot` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of id 15: hot-spot related (owner, by ear: sure) |

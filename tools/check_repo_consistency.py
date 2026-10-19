@@ -26,7 +26,7 @@ What it checks (each line of the report is one check)
   ram        disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
              wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
-  roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers)
+  roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
 Real exceptions (a Map type row that is not a multiple of 32 bytes, a Gfx label on a Map row, datasheet section numbers) are listed in ODD_MAP_ROWS, GFX_ON_MAP and EXTERNAL_REFS with the reason.
@@ -661,6 +661,16 @@ if A.roundtrip:
             d = os.path.join(tmp, variant)
             if variant == 'plain':
                 subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', d, '--overwrite'], capture_output=True, text=True)
+                # mgbdis' own labels left in the listing (README 1.1: L5 row): `jr_` targets are normal, a `Jump_` / `Call_` one is a jump / call target that still has no name
+                lab = collections.Counter()
+                for f in sorted(os.listdir(d)):
+                    if re.match(r'bank_[0-9a-f]+\.asm$', f):
+                        for line in open(os.path.join(d, f), encoding='utf-8'):
+                            m = re.match(r'^(jr|Jump|Call)_[0-9a-f]{3}_[0-9a-f]{4}::?\s*$', line)
+                            if m: lab[m.group(1)] += 1
+                ok('roundtrip', 'plain listing: %s `jr_` labels, %d `Jump_`, %d `Call_` (mgbdis\' own)' % (fmt(lab['jr']), lab['Jump'], lab['Call']))
+                quoted('auto labels', r"([\d,]+) `jr_` local labels are mgbdis' own \(normal for a disassembly\), (\d+) `Jump_` labels left and (\d+) `Call_`",
+                       lambda m: ((lab['jr'], lab['Jump'], lab['Call']), (num(m.group(1)), num(m.group(2)), num(m.group(3)))), docs=('README.md',), need=('README.md',))
             elif variant == 'fixed':
                 shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
                 subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
