@@ -95,12 +95,12 @@ Status tags: **C** code-traced (instructions cited as `bank:addr`), **I** inferr
 | `$D5EC` | 1 | `yesno_h` | u8 0/1 | 07:52E7-5304 (write via HL), 07:5260-5282, 07:531B, 07:5348, 07:5369 | Horizontal 2-way choice (left = 0, right = 1) of mode 2 (07:51AC): table `07:52E5` = ($0A, $0B): confirm with A goes to mode `$0A` (4:7488) or `$0B` (3:78E9); B / D5DF != A goes back to mode 0. Also writes `D679` from Up/Down | C |
 | `$D5ED` | 1 | `copy_photo_idx_a` | u8 | write 04:753F (mode $0A state 2); reads 04:754C, 04:759F, 04:75B1, 04:75F5, 04:77E7, 04:79D8, 04:7AAE, 04:7B44-7CF7 | Copy of D5D8 made at the init of mode $0A (04:7488); passed in `$FF9E` to the photo display `02:5110` and `02:4E31`. On 'A = yes' 04:77E7-77EA / 04:7AAE-7AB1 write D5D8 := D5ED, then D5DF := 1, D5D6 := 2, D5D7 := 0, mode := $0F, state := 5 (04:7AC8) = README §8 route to the erase viewer | C |
 | `$D5EE` | 1 | `photo_number_sel` | u8 0..29 | writers 04:6E9C, 04:6F4E (mode $09 slider), 04:7060 and 04:7107 (mode 1: `D561-1` or 0); reads 04:68D4-6F5C | 0-based photo number chosen with Left/Right in mode $09 (04:683F): `D67C = 2*D5EE` is the slider target, `D67D` steps toward it, `D5EE = D67D>>1` when it arrives; shown as `D5EE+1` in two digits (04:6F5C). Mode 1 presets it to the last photo (`D561-1`, 0 if empty) before entering mode 9. On 'A = yes' D5D8 := D5EE (04:6D0E-6D11, 04:6C6F-6C72) and, at 04:6D28, mode := $0F, state := 5 with D5D6 := 2, D5D7 := 0 (README §8 route) | C |
-| `$D5EF` | 1 | `reg_cursor_a` | u8 0..2 | 03:7A2F (vertical, Up/Down via `$FFA3`), 03:7987, 03:79E3, 03:7A63, 03:7A85 | 3-item vertical cursor of bank-3 mode 4 (03:7AA8); `03:7A5E` resets animation frame `D500` to 2 on a move. Which screen: ? (registration keyboard family) | I |
-| `$D5F0` | 1 | `reg_cursor_b` | u8 0..1 | 03:7BAB (Up/Right = dec, Down/Left = inc), 03:7B5B, 03:7BA2, 03:7BE5 | 2-item cursor of bank-3 mode 5 (03:7BFD); writes `$D7C0 = $20` on a move. Which screen: ? | I |
-| `$D5F1` | 1 | `reg_cursor_c` | u8 0..1 | 03:7DB1 (same scheme), 03:7C07, 03:7C71, 03:7CA4/7CBC, 03:7CDE | 2-item cursor of another bank-3 mode-5 state; `03:7D17` maps it to the next mode (a value >= $22 = 'not available' sound `$0B`, state decremented) | I |
-| `$D5F2` | 1 | `reg_cursor_d` | u8 | 03:769F-7745 (mode 6), 03:77E1, 03:783B, 03:7844-7873, 03:789C, 03:78C3 | Cursor-like index of bank-3 mode 6 (03:7695) / mode $0B region; read 6 times, written 3 times (03:7734, 03:773B, 03:7873). Range and screen not established | ? |
+| `$D5EF` | 1 | `show_menu_cursor` | u8 0..2 | 03:7A2F (vertical, Up/Down via `$FFA3`), 03:7987, 03:79E3, 03:7A63, 03:7A85 | Cursor of the SHOW menu (mode `$0B`: SLIDE SHOW / ANIMATION / HOT-SPOT, targets `$0D` / `$13` / `$0C`), 0..2: Up/Down via `$FFA3` move it with sound `$02`, `03:7A5E` resets animation frame `D500` to 2 on a move, state 2 turns it into the target mode. BGB: read in modes `$0B`, `$0C`, `$0D` and `$13` (the exit loop redraws the menu tiles), values 0-2. | C |
+| `$D5F0` | 1 | `doodle_menu_cursor` | u8 0..1 | 03:7BAB (Up/Right = dec, Down/Left = inc), 03:7B5B, 03:7BA2, 03:7BE5 | Cursor of the DOODLE menu (mode `$04`: STAMP / PAINT, targets `$11` / `$10`), 0..1: Up/Right = dec, Down/Left = inc (`03:7BAB`); a move writes `$D7C0 = $20` (`blink_hold`). BGB: mode `$04` only, values 0 and 1. | C |
+| `$D5F1` | 1 | `edit_menu_cursor` | u8 0..1 | 03:7DB1 (same scheme), 03:7C07, 03:7C71, 03:7CA4/7CBC, 03:7CDE | Cursor of the EDIT menu (mode `$05`: ALBUM / ANIMATION, targets `$0F` / `$12`), 0..1; `03:7D17` maps it to the next mode (a value >= $22 = 'not available' sound `$0B`, state decremented). BGB: mode `$05`, and `$0F` / `$12` during the exit loop, values 0 and 1. | C |
+| `$D5F2` | 1 | `link_menu_cursor` | u8 | 03:769F-7745 (mode 6), 03:77E1, 03:783B, 03:7844-7873, 03:789C, 03:78C3 | Cursor of the LINK menu (mode `$06`, headed ACCESS: PRINT / TRANSFER, targets `$1B` / `$0E`), 0..1, kept between visits: state 0 flips it with `xor 1` to load the deselected tile set and restores it (`03:7734`, `03:773B`), `LinkMenu_MoveCursor` toggles it (`03:7873`). BGB: modes `$06`, `$0E` and `$1B` (the exit loop), values 0 and 1. | C |
 | `$D5F3` | 1 | `copy_photo_idx_b` | u8 | write 08:4215, reads 08:4224, 08:4257, 08:460A, 08:4656, 08:46A7, 08:47A3, 08:4818 | Copy of D5D8 at the init of the bank-8 print screen (08:4149, 08:45E0, 08:47ED); passed in `$FF9E` to `02:4E31` | C |
-| `$D5F5` | 1 | `saved_dc52` | u8 | write 07:418D (`ld a,[$DC52]`), reads 07:413E-4231, 07:439C, 07:43DE, 07:4570, 07:4606, 07:470D, 07:48AA, 07:516A | Copy of `$DC52` taken in bank-7 state 1; when non-zero sets bit 7 of `$DC55` (07:4141-414C) and selects the 'store as new photo' branch of states 9 and 17 (README §3.3 `F12-F14`) | I |
+| `$D5F5` | 1 | `saved_dc52` | u8 | write 07:418D (`ld a,[$DC52]`), reads 07:413E-4231, 07:439C, 07:43DE, 07:4570, 07:4606, 07:470D, 07:48AA, 07:516A | Copy of `$DC52` taken in bank-7 state 1; when non-zero sets bit 7 of `$DC55` (07:4141-414C) and selects the 'store as new photo' branch of states 9 and 17 (README §3.3 `F12-F14`) BGB: mode `$0E`, values `$00` `$01`. | C |
 | `$D5F6` | 1 | `copy_photo_idx_c` | u8 | 04:4B4B (copy of D5D8), reads 04:4B4B-4BBF | Copy of D5D8 in Bank004_State05; passed in `$FF9E` to far calls `02:5110`, `02:4DD7`, `02:4E31` | C |
 | `$D5F7` | 1 | `copy_photo_idx_d` | u8 | 04:57D6 (only if `D800 == 0`), read 04:5D28 | Copy of D5D8; stored into `D671` at 04:5D28 | C |
 | `$D5F8` | 1 | `copy_photo_idx_e` | u8 | 03:6AD9 (write), reads 03:6AEA, 03:6F97 | Copy of D5D8 in bank 3 (03:6A19) | C |
@@ -325,10 +325,10 @@ Counts are of proven instructions only; accesses through `HL/DE` after a pointer
 | `$D5EC` | 5 | 0 | 1 | 07:6 | `yesno_h` |
 | `$D5ED` | 12 | 1 | 0 | 04:13 | `copy_photo_idx_a` |
 | `$D5EE` | 15 | 4 | 0 | 04:19 | `photo_number_sel` |
-| `$D5EF` | 5 | 1 | 0 | 03:6 | `reg_cursor_a` |
-| `$D5F0` | 4 | 1 | 0 | 03:5 | `reg_cursor_b` |
-| `$D5F1` | 4 | 1 | 0 | 03:5 | `reg_cursor_c` |
-| `$D5F2` | 6 | 3 | 0 | 03:9 | `reg_cursor_d` |
+| `$D5EF` | 5 | 1 | 0 | 03:6 | `show_menu_cursor` |
+| `$D5F0` | 4 | 1 | 0 | 03:5 | `doodle_menu_cursor` |
+| `$D5F1` | 4 | 1 | 0 | 03:5 | `edit_menu_cursor` |
+| `$D5F2` | 6 | 3 | 0 | 03:9 | `link_menu_cursor` |
 | `$D5F3` | 7 | 1 | 0 | 08:8 | `copy_photo_idx_b` |
 | `$D5F5` | 12 | 1 | 1 | 07:14 | `saved_dc52` |
 | `$D5F6` | 2 | 1 | 0 | 04:3 | `copy_photo_idx_c` |

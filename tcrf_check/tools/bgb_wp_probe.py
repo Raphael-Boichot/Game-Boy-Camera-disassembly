@@ -4,7 +4,7 @@
 BGB writes one line to debugmsg.txt for every watchpoint hit and goes on (the message is the last field of the -wp item), so a read, a write or an execution
 of a ROM byte can be proven or refuted on the real emulator: the counts below are the whole output.
 
-usage: bgb_wp_probe.py CORPUS ENTRY WATCHPOINTS OUTPREFIX [--rom ROM] [--saves DIR[:DIR...]] [--system 0] [--tail FRAMES]
+usage: bgb_wp_probe.py CORPUS ENTRY WATCHPOINTS OUTPREFIX [--rom ROM] [--saves DIR[:DIR...]] (default saves_unl:saves:saves_pseudo of the working root) [--system 0] [--tail FRAMES]
   CORPUS       corpus.jsonl of the replay search (entries with id, parent, actions, spec of the root; coverage_run/merged_corpus_v3/corpus.jsonl)
   ENTRY        id of the entry to replay (the lineage of root save + joypad actions is replayed from the boot)
   WATCHPOINTS  BGB -wp list, comma separated: ADDRESS[/VALUE][/drwxj][/MESSAGE] written as  BB:AAAA-BB:AAAA//r/NAME  (range, any value, read access, message NAME)
@@ -22,7 +22,7 @@ def opt(name, default=None):
         i = args.index(name); v = args[i + 1]; del args[i:i + 2]; return v
     return default
 rom = opt('--rom', os.path.join(os.path.dirname(os.path.dirname(HERE)), 'pocketcamera_jp.gb'))
-saves = opt('--saves', '/home/claude/gbcam_jp/saves_unl:/home/claude/gbcam_jp/saves').split(':')
+saves = opt('--saves', '/home/claude/gbcam_jp/saves_unl:/home/claude/gbcam_jp/saves:/home/claude/gbcam_jp/saves_pseudo').split(':')      # saves_pseudo: _zero.sav / _ff.sav = 128 KB of $00 / $FF, the roots of the corpus that start from an empty SRAM
 system = opt('--system', '0'); tail = int(opt('--tail', '60'))
 corpus, entry, wps, out = args[0], int(args[1]), args[2], args[3]
 mine = os.environ.get('BGB_DIR', '/home/claude/bgbp_wp')

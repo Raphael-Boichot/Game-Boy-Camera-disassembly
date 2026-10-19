@@ -1,0 +1,959 @@
+kind,name,addr,bank,pc,routine,class,hits,replays,mode_state,values,a_written
+R,wSlotTagComment,CF15,00,17E8,Prn_SendPacketByte,dyn,2790,6,1D:04,,
+R,wSlotTagComment,CF15,00,2CAA,Link_Irq_BulkData,dyn,60,2,0E:08 0E:10,,
+R,wSlotTagComment,CF15,02,4323,Sram_Checksum,dyn,420,3,14:03 0E:11,,
+R,wSlotTagComment,CF15,02,4326,Sram_Checksum,dyn,420,3,14:03 0E:11,,
+R,wSlotTagComment,CF15,02,46CD,Photo_SaveReceived_Far,dyn,30,1,0E:11,,
+R,wSlotTagComment,CF15,02,479A,Photo_SaveShot_Far,dyn,390,2,14:03,,
+R,wSlotTagComment,CF15,07,63E7,SpaceFever_MoveEnemy,dyn,1485,20,07:02 07:03,,
+R,wSlotTagComment,CF15,07,63F4,SpaceFever_MoveEnemy,dyn,1485,20,07:02 07:03,,
+R,wSlotTagComment,CF15,07,6400,SpaceFever_MoveEnemy,dyn,405,12,07:02 07:03,,
+R,wSlotTagComment,CF15,07,6410,SpaceFever_MoveEnemy,dyn,405,12,07:02 07:03,,
+W,wSlotTagComment,CF15,00,0440,Mem_Zero,init,9840,228,0F:0F 14:00 0E:04,,
+W,wSlotTagComment,CF15,00,0469,Mem_CopyFromBank,dyn,30,1,09:00,,
+W,wSlotTagComment,CF15,00,2C9F,Link_Irq_BulkData,dyn,60,2,0E:08 0E:10,,
+W,wSlotTagComment,CF15,00,3232,Mode1D_CopyDescriptors,dyn,637,6,1D:03,,
+W,wSlotTagComment,CF15,00,3235,Mode1D_CopyDescriptors,dyn,728,6,1D:03,,
+W,wSlotTagComment,CF15,00,3238,Mode1D_CopyDescriptors,dyn,728,6,1D:03,,
+W,wSlotTagComment,CF15,00,323B,Mode1D_CopyDescriptors,dyn,637,6,1D:03,,
+W,wSlotTagComment,CF15,00,32DC,Mode1D_FillBlank,dyn,14,2,1D:03,,
+W,wSlotTagComment,CF15,00,32DE,Mode1D_FillBlank,dyn,16,2,1D:03,,
+W,wSlotTagComment,CF15,00,32E0,Mode1D_FillBlank,dyn,16,2,1D:03,,
+W,wSlotTagComment,CF15,00,32E2,Mode1D_FillBlank,dyn,14,2,1D:03,,
+W,wSlotTagComment,CF15,02,47BE,Mem_ZeroShort,dyn,390,2,14:03,,
+W,wSlotTagComment,CF15,02,4CAC,Photo_LoadImage_Far,dyn,18300,115,09:01 11:02 09:00 0A:02 0F:05 1C:02 +11,,
+W,wSlotTagComment,CF15,07,6566,SpaceFever_DecodePath,dyn,88,12,07:02 07:03,,
+W,wSlotTagComment,CF15,07,6574,SpaceFever_DecodePath,dyn,1382,23,07:02 07:03,,
+R,wSlotTail,CFB8,00,17E8,Prn_SendPacketByte,dyn,6603,6,1D:04,,
+R,wSlotTail,CFB8,00,2CAA,Link_Irq_BulkData,dyn,142,2,0E:08 0E:10,,
+R,wSlotTail,CFB8,07,63E7,SpaceFever_MoveEnemy,dyn,1668,19,07:02 07:03,,
+R,wSlotTail,CFB8,07,63F4,SpaceFever_MoveEnemy,dyn,1668,19,07:02 07:03,,
+R,wSlotTail,CFB8,07,6400,SpaceFever_MoveEnemy,dyn,80,12,07:02 07:03,,
+R,wSlotTail,CFB8,07,6410,SpaceFever_MoveEnemy,dyn,80,12,07:02 07:03,,
+W,wSlotTail,CFB8,00,0440,Mem_Zero,init,23288,228,0F:0F 14:00 0E:04,,
+W,wSlotTail,CFB8,00,2C9F,Link_Irq_BulkData,dyn,142,2,0E:08 0E:10,,
+W,wSlotTail,CFB8,00,3232,Mode1D_CopyDescriptors,dyn,1638,6,1D:03,,
+W,wSlotTail,CFB8,00,3235,Mode1D_CopyDescriptors,dyn,1638,6,1D:03,,
+W,wSlotTail,CFB8,00,3238,Mode1D_CopyDescriptors,dyn,1638,6,1D:03,,
+W,wSlotTail,CFB8,00,323B,Mode1D_CopyDescriptors,dyn,1547,6,1D:03,,
+W,wSlotTail,CFB8,00,32DC,Mode1D_FillBlank,dyn,36,2,1D:03,,
+W,wSlotTail,CFB8,00,32DE,Mode1D_FillBlank,dyn,36,2,1D:03,,
+W,wSlotTail,CFB8,00,32E0,Mode1D_FillBlank,dyn,36,2,1D:03,,
+W,wSlotTail,CFB8,00,32E2,Mode1D_FillBlank,dyn,34,2,1D:03,,
+W,wSlotTail,CFB8,07,6566,SpaceFever_DecodePath,dyn,24,12,07:02,,
+W,wSlotTail,CFB8,07,6574,SpaceFever_DecodePath,dyn,2090,23,07:02,,
+R,wRunPlayerStepSize,D008,00,0630,Vram_CopyFromBank,other,2114,7,1F:05,50,
+R,wRunPlayerStepSize,D008,00,17E8,Prn_SendPacketByte,other,93,6,1D:04,FF 00 FE 01 0A 3F 54 55 7F B5 +17,
+R,wRunPlayerStepSize,D008,00,25CD,Img_ReduceToThumbnail,other,3364,3,14:03 10:09,00 02 05 07 03 0C 01 06 18 04 +27,
+R,wRunPlayerStepSize,D008,00,2637,Img_PackQuadBits,other,841,3,14:03 10:09,00 30 0B 0A 09 05 0D 07 10 01 +39,
+R,wRunPlayerStepSize,D008,00,269E,Img_ReduceTo64x56,other,1120,3,1E:01 1E:02 12:01,00 01 03 06 05 02 04,
+R,wRunPlayerStepSize,D008,00,277C,Img_ReduceQuadrantTo4x4Tiles,other,18432,19,17:01 17:00 17:03 17:04 17:05 17:06,00 01 03 02 05 06 04,
+R,wRunPlayerStepSize,D008,00,2900,Img_QuantizeBlockRound,other,9216,19,17:01 17:00 17:03 17:04 17:05 17:06,00 06 04 03 07 01 0C 08 02 05 +3,
+R,wRunPlayerStepSize,D008,00,2947,Img_QuantizeBlockDither,other,560,3,1E:01 1E:02 12:01,00 03 02 04 0C 05 0A 07 01 06 +3,
+R,wRunPlayerStepSize,D008,09,68A5,Run_PlayerSpeedFromCounter,S,3,2,21:06,03 01,
+R,wRunPlayerStepSize,D008,09,68AF,Run_PlayerSpeedFromCounter,S,367,3,21:06 21:07,00 03 02 01,
+W,wRunPlayerStepSize,D008,00,0440,Mem_Zero,init,228,228,0F:0F,0F,00
+W,wRunPlayerStepSize,D008,00,0469,Mem_CopyFromBank,other,2114,7,1F:05,50 00,64
+W,wRunPlayerStepSize,D008,00,25BE,Img_ReduceToThumbnail,other,841,3,14:03 10:09,00 30 0B 0A 09 05 0D 07 10 01 +39,00
+W,wRunPlayerStepSize,D008,00,25CE,Img_ReduceToThumbnail,other,3364,3,14:03 10:09,00 02 05 07 03 0C 01 06 18 04 +27,00 02 05 07 03 0C 01 06 0A 04 +39
+W,wRunPlayerStepSize,D008,00,268C,Img_ReduceTo64x56,other,560,3,1E:01 1E:02 12:01,00 03 02 0C 04 05 0A 07 01 06 +4,00
+W,wRunPlayerStepSize,D008,00,269F,Img_ReduceTo64x56,other,1120,3,1E:01 1E:02 12:01,00 01 03 06 05 02 04,00 01 03 02 05 06 04 0C 0A 07 +3
+W,wRunPlayerStepSize,D008,00,276A,Img_ReduceQuadrantTo4x4Tiles,other,9216,19,17:01 17:00 17:03 17:04 17:05 17:06,00 06 04 03 07 01 0C 08 02 05 +3,00
+W,wRunPlayerStepSize,D008,00,277D,Img_ReduceQuadrantTo4x4Tiles,other,18432,19,17:01 17:00 17:03 17:04 17:05 17:06,00 01 03 02 05 06 04,00 01 03 02 06 04 05 07 0C 08 +3
+W,wRunPlayerStepSize,D008,00,3232,Mode1D_CopyDescriptors,other,91,6,1D:03,00 FF FE 01 0A 3F 54 55 B5 7F +18,FF 00 FE 01 0A 3F 54 55 7F B5 +17
+W,wRunPlayerStepSize,D008,00,32DC,Mode1D_FillBlank,other,2,2,1D:03,00,00
+W,wRunPlayerStepSize,D008,05,5268,DjPerf_CopyEqualiserRow,other,2114,7,1F:05,64,50
+W,wRunPlayerStepSize,D008,09,66DB,Run_ClearRaceState,dyn,6,3,21:03,00 02,00
+W,wRunPlayerStepSize,D008,09,6786,Run_PlayerRun,S,2152,3,21:06 21:07,03 02 01 00,03 02 01
+W,wRunPlayerStepSize,D008,09,68AC,Run_PlayerSpeedFromCounter,S,3,2,21:06,03 01,02 00
+R,wRunChickAnimCounter,D015,00,17E8,Prn_SendPacketByte,other,93,6,1D:04,00 FF 01 80 C0 03 0C 7F 3C 40 +8,
+R,wRunChickAnimCounter,D015,00,2697,Img_ReduceTo64x56,other,1120,3,1E:01 1E:02 12:01,00 01 03 02 06 05 04,
+R,wRunChickAnimCounter,D015,00,2775,Img_ReduceQuadrantTo4x4Tiles,other,18432,19,17:01 17:00 17:03 17:04 17:05 17:06,00 03 01 05 02 04 06,
+R,wRunChickAnimCounter,D015,00,2835,Img_ReduceHalfTo224Wide,other,1924,4,17:01 17:0B,00 03 01 05 04 02 06,
+R,wRunChickAnimCounter,D015,00,290F,Img_QuantizeBlockRound,other,10177,19,17:01 17:00 17:03 17:04 17:0B 17:05 +1,00 07 06 03 05 0A 0C 08 0B 09 +3,
+R,wRunChickAnimCounter,D015,00,2955,Img_QuantizeBlockDither,other,560,3,1E:01 1E:02 12:01,00 03 04 09 02 08 0C 06 07 05 +3,
+R,wRunChickAnimCounter,D015,09,70C9,Run_DrawMeta,dyn,13186,3,21:06 21:0C 21:04 21:05 21:07 21:03 +1,01 02 03 04 05 06 07 08 09 0A +119,
+W,wRunChickAnimCounter,D015,00,0440,Mem_Zero,init,228,228,0F:0F,F0,00
+W,wRunChickAnimCounter,D015,00,268D,Img_ReduceTo64x56,other,560,3,1E:01 1E:02 12:01,00 03 04 09 02 08 0C 06 07 05 +4,00
+W,wRunChickAnimCounter,D015,00,2698,Img_ReduceTo64x56,other,1120,3,1E:01 1E:02 12:01,00 01 03 02 06 05 04,00 03 01 02 04 06 05 09 08 0C +3
+W,wRunChickAnimCounter,D015,00,276B,Img_ReduceQuadrantTo4x4Tiles,other,9216,19,17:01 17:00 17:03 17:04 17:05 17:06,00 07 06 03 05 0A 08 0C 0B 09 +3,00
+W,wRunChickAnimCounter,D015,00,2776,Img_ReduceQuadrantTo4x4Tiles,other,18432,19,17:01 17:00 17:03 17:04 17:05 17:06,00 03 01 05 02 04 06,00 03 05 06 02 04 01 07 0A 08 +3
+W,wRunChickAnimCounter,D015,00,282B,Img_ReduceHalfTo224Wide,other,962,4,17:01 17:0B,00 07 06 03 05 0C 08 04 09 02 +3,00
+W,wRunChickAnimCounter,D015,00,2836,Img_ReduceHalfTo224Wide,other,1924,4,17:01 17:0B,00 03 01 05 04 02 06,03 00 01 06 05 04 02 07 0C 08 +3
+W,wRunChickAnimCounter,D015,00,3235,Mode1D_CopyDescriptors,other,91,6,1D:03,00 01 FF 80 C0 03 0C 7F 0B 3C +8,00 FF 01 80 C0 03 0C 7F 3C 40 +8
+W,wRunChickAnimCounter,D015,00,32DE,Mode1D_FillBlank,other,2,2,1D:03,00,00
+W,wRunChickAnimCounter,D015,09,6282,Run_PlaceRunner1,S,6,3,21:04,01,00
+W,wRunChickAnimCounter,D015,09,631B,Mode21_State05_ReadySteadyGo,S,6,3,21:05,14,00
+W,wRunChickAnimCounter,D015,09,65C1,Run_DrawPodiumChick,S,6,3,21:0B,01 03 04,00
+W,wRunChickAnimCounter,D015,09,66DB,Run_ClearRaceState,dyn,6,3,21:03,00 02 12,00
+W,wRunChickAnimCounter,D015,09,70DD,Run_DrawMeta,dyn,13186,3,21:06 21:0C 21:04 21:05 21:07 21:03 +1,01 02 03 04 05 06 07 08 09 0A +119,01 02 03 04 05 06 07 08 09 0A +118
+R,wRunMoleAnimCounter,D01E,00,17E8,Prn_SendPacketByte,other,93,6,1D:04,00 FF FE AA EA 22 AC CC 02 01 +12,
+R,wRunMoleAnimCounter,D01E,00,26AD,Img_ReduceTo64x56,other,1120,3,1E:01 1E:02 12:01,00 01 03 02 05 06 04,
+R,wRunMoleAnimCounter,D01E,00,278B,Img_ReduceQuadrantTo4x4Tiles,other,18432,19,17:01 17:00 17:03 17:04 17:05 17:06,00 01 03 02 05 06 04,
+R,wRunMoleAnimCounter,D01E,00,28E2,Img_QuantizeBlockRound,other,9216,19,17:01 17:00 17:03 17:04 17:05 17:06,00 03 07 01 06 04 05 08 0C 09 +3,
+R,wRunMoleAnimCounter,D01E,00,292B,Img_QuantizeBlockDither,other,560,3,1E:01 1E:02 12:01,00 03 04 02 0C 07 08 0B 05 06 +3,
+R,wRunMoleAnimCounter,D01E,09,70C9,Run_DrawMeta,dyn,13186,3,21:06 21:0C 21:04 21:05 21:07 21:03 +1,01 02 03 04 05 06 07 08 09 0A +119,
+W,wRunMoleAnimCounter,D01E,00,0440,Mem_Zero,init,228,228,0F:0F,0F,00
+W,wRunMoleAnimCounter,D01E,00,268A,Img_ReduceTo64x56,other,560,3,1E:01 1E:02 12:01,00 03 04 02 0C 07 08 0B 05 06 +4,00
+W,wRunMoleAnimCounter,D01E,00,26AE,Img_ReduceTo64x56,other,1120,3,1E:01 1E:02 12:01,00 01 03 02 05 06 04,00 01 03 02 05 04 06 0C 07 08 +3
+W,wRunMoleAnimCounter,D01E,00,2768,Img_ReduceQuadrantTo4x4Tiles,other,9216,19,17:01 17:00 17:03 17:04 17:05 17:06,00 03 07 01 06 04 05 08 0C 09 +3,00
+W,wRunMoleAnimCounter,D01E,00,278C,Img_ReduceQuadrantTo4x4Tiles,other,18432,19,17:01 17:00 17:03 17:04 17:05 17:06,00 01 03 02 05 06 04,00 01 03 05 06 04 02 07 08 0C +3
+W,wRunMoleAnimCounter,D01E,00,3238,Mode1D_CopyDescriptors,other,91,6,1D:03,00 FE FF AA EA 22 AC 02 CC 01 +12,00 FF FE AA EA 22 AC CC 02 01 +12
+W,wRunMoleAnimCounter,D01E,00,32E0,Mode1D_FillBlank,other,2,2,1D:03,00,00
+W,wRunMoleAnimCounter,D01E,09,62A5,Run_PlaceRunner2,S,6,3,21:04,01,00
+W,wRunMoleAnimCounter,D01E,09,631E,Mode21_State05_ReadySteadyGo,S,6,3,21:05,34,00
+W,wRunMoleAnimCounter,D01E,09,65F2,Run_DrawPodiumMole,S,6,3,21:0B,01 03 04,00
+W,wRunMoleAnimCounter,D01E,09,66DB,Run_ClearRaceState,dyn,6,3,21:03,00 20 1C,00
+W,wRunMoleAnimCounter,D01E,09,70DD,Run_DrawMeta,dyn,13186,3,21:06 21:0C 21:04 21:05 21:07 21:03 +1,01 02 03 04 05 06 07 08 09 0A +119,01 02 03 04 05 06 07 08 09 0A +118
+R,wRunRaceExtra,D048,00,17E8,Prn_SendPacketByte,other,6975,6,1D:04,,
+R,wRunRaceExtra,D048,09,60B0,Mode21_State01_PickCharacter,S,2523,3,21:01,,
+R,wRunRaceExtra,D048,09,6241,Mode21_State04_Countdown,S,6,3,21:04,,
+R,wRunRaceExtra,D048,09,62F4,Mode21_State05_ReadySteadyGo,S,3,1,21:05,,
+R,wRunRaceExtra,D048,09,6303,Mode21_State05_ReadySteadyGo,S,6,3,21:05,,
+R,wRunRaceExtra,D048,09,666E,Mode21_State0C_ResultScreen,S,2447,3,21:0C,,
+R,wRunRaceExtra,D048,09,6675,Mode21_State0C_ResultScreen,S,743,3,21:0C,,
+R,wRunRaceExtra,D048,09,6688,Mode21_State0C_ResultScreen,S,1704,3,21:0C,,
+R,wRunRaceExtra,D048,09,66A5,Run_FlagLanded,S,2447,3,21:0C,,
+R,wRunRaceExtra,D048,09,66B4,Run_FlagLanded,ptr,13960,1,21:0C,,
+R,wRunRaceExtra,D048,09,6991,Run_UpdateChick,S,7245,3,21:06 21:07,,
+R,wRunRaceExtra,D048,09,69C6,Run_UpdateMole,S,7245,3,21:06 21:07,,
+R,wRunRaceExtra,D048,09,6A40,Run_FlagHoistKeys,S,2737,3,21:0C,,
+R,wRunRaceExtra,D048,09,6A54,Run_FlagHoistKeys,S,1974,3,21:0C,,
+R,wRunRaceExtra,D048,09,6A5E,Run_FlagHoistKeys,S,763,3,21:0C,,
+R,wRunRaceExtra,D048,09,6BBB,Run_FlagHeight,S,2737,3,21:0C,,
+R,wRunRaceExtra,D048,09,6BCB,Run_FlagHeight,ptr,1052,3,21:0C,,
+R,wRunRaceExtra,D048,09,6BF6,Run_ConfettiParticle,ptr,27370,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C2D,Run_ConfettiParticle,ptr,11536,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C34,Run_ConfettiParticle,ptr,11536,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C44,Run_ConfettiParticle,ptr,7341,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C49,Run_ConfettiParticle,ptr,7341,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C6F,Run_ConfettiParticle,ptr,27370,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C74,Run_ConfettiParticle,ptr,27370,3,21:0C,,
+R,wRunRaceExtra,D048,09,6C7B,Run_ConfettiRespawn,S,45,3,21:0C,,
+R,wRunRaceExtra,D048,09,6CA1,Run_Celebration,S,1158,1,21:0C,,
+R,wRunRaceExtra,D048,09,6D61,Run_DrawPlayer,S,13186,3,21:06 21:0C 21:04 21:05 21:07 21:03 +1,,
+R,wRunRaceExtra,D048,09,6FF0,Run_DrawFlag,S,2743,3,21:0C 21:0B,,
+R,wRunRaceExtra,D048,09,700A,Run_DrawCrown,S,1158,1,21:0C,,
+R,wRunRaceExtra,D048,09,7019,Run_DrawConfetti,S,12940,3,21:0C 21:0B,,
+R,wRunRaceExtra,D048,09,702C,Run_DrawConfetti,ptr,1294,3,21:0C 21:0B,,
+R,wRunRaceExtra,D048,09,7030,Run_DrawConfettiSprite,dyn,6470,3,21:0C 21:0B,,
+R,wRunRaceExtra,D048,09,7035,Run_DrawConfettiSprite,dyn,6470,3,21:0C 21:0B,,
+R,wRunRaceExtra,D048,09,70B6,Run_DrawMeta,dyn,11736,3,21:0C 21:01 21:0B,,
+R,wRunRaceExtra,D048,09,70C9,Run_DrawMeta,dyn,11736,3,21:0C 21:01 21:0B,,
+R,wRunRaceExtra,D048,09,70D4,Run_DrawMeta,dyn,1668,3,21:0C 21:01,,
+W,wRunRaceExtra,D048,00,0440,Mem_Zero,init,17100,228,0F:0F,,
+W,wRunRaceExtra,D048,00,3232,Mode1D_CopyDescriptors,other,1729,6,1D:03,,
+W,wRunRaceExtra,D048,00,3235,Mode1D_CopyDescriptors,other,1729,6,1D:03,,
+W,wRunRaceExtra,D048,00,3238,Mode1D_CopyDescriptors,other,1729,6,1D:03,,
+W,wRunRaceExtra,D048,00,323B,Mode1D_CopyDescriptors,other,1638,6,1D:03,,
+W,wRunRaceExtra,D048,00,32DC,Mode1D_FillBlank,other,38,2,1D:03,,
+W,wRunRaceExtra,D048,00,32DE,Mode1D_FillBlank,other,38,2,1D:03,,
+W,wRunRaceExtra,D048,00,32E0,Mode1D_FillBlank,other,38,2,1D:03,,
+W,wRunRaceExtra,D048,00,32E2,Mode1D_FillBlank,other,36,2,1D:03,,
+W,wRunRaceExtra,D048,09,601B,Mode21_State00_Init,S,6,3,21:00,,
+W,wRunRaceExtra,D048,09,603E,Mode21_PickCharacterTbl,S,6,3,21:00,,
+W,wRunRaceExtra,D048,09,610F,Mode21_PickCharacterKeys,S,6,3,21:01,,
+W,wRunRaceExtra,D048,09,6113,Mode21_PickCharacterKeys,S,6,3,21:01,,
+W,wRunRaceExtra,D048,09,613F,Mode21_PickCharacterKeys,S,12,3,21:01,,
+W,wRunRaceExtra,D048,09,6143,Mode21_PickCharacterKeys,S,12,3,21:01,,
+W,wRunRaceExtra,D048,09,61FC,Mode21_State03_RaceSetup,S,6,3,21:03,,
+W,wRunRaceExtra,D048,09,623B,Mode21_State04_Countdown,S,6,3,21:04,,
+W,wRunRaceExtra,D048,09,623E,Mode21_State04_Countdown,S,6,3,21:04,,
+W,wRunRaceExtra,D048,09,6245,Mode21_State04_Countdown,S,6,3,21:04,,
+W,wRunRaceExtra,D048,09,62E8,Mode21_State05_ReadySteadyGo,S,63,1,21:05,,
+W,wRunRaceExtra,D048,09,64D7,Mode21_State0B_ResultSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,650B,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,650E,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,6511,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,6514,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,6519,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,651E,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,6523,Run_PodiumSetup,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,653D,Run_PodiumSetup,S,1,1,21:0B,,
+W,wRunRaceExtra,D048,09,6605,Run_ConfettiInit,S,6,3,21:0B,,
+W,wRunRaceExtra,D048,09,6614,Run_ConfettiInit,ptr,60,3,21:0B,,
+W,wRunRaceExtra,D048,09,6622,Run_ConfettiInit,ptr,60,3,21:0B,,
+W,wRunRaceExtra,D048,09,6628,Run_ConfettiInit,ptr,60,3,21:0B,,
+W,wRunRaceExtra,D048,09,662B,Run_ConfettiInit,ptr,60,3,21:0B,,
+W,wRunRaceExtra,D048,09,663B,Run_ConfettiInit,ptr,60,3,21:0B,,
+W,wRunRaceExtra,D048,09,663D,Run_ConfettiInit,ptr,60,3,21:0B,,
+W,wRunRaceExtra,D048,09,6683,Mode21_State0C_ResultScreen,S,4,2,21:0C,,
+W,wRunRaceExtra,D048,09,6697,Mode21_State0C_ResultScreen,S,5,3,21:0C,,
+W,wRunRaceExtra,D048,09,67F3,Run_PlayerJump,S,12,1,21:06,,
+W,wRunRaceExtra,D048,09,6A4B,Run_FlagHoistKeys,S,2737,3,21:0C,,
+W,wRunRaceExtra,D048,09,6A5A,Run_FlagHoistKeys,S,966,3,21:0C,,
+W,wRunRaceExtra,D048,09,6A6A,Run_FlagHoistKeys,S,763,3,21:0C,,
+W,wRunRaceExtra,D048,09,6B4E,Run_MoveMoleX,S,3203,3,21:06 21:07,,
+W,wRunRaceExtra,D048,09,6BDD,Run_FlagHeight,S,1052,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C3D,Run_ConfettiParticle,ptr,5793,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C52,Run_ConfettiParticle,ptr,2962,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C6A,Run_ConfettiParticle,ptr,3160,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C75,Run_ConfettiParticle,ptr,27370,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C8D,Run_ConfettiRespawn,ptr,25,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C97,Run_ConfettiRespawn,ptr,25,3,21:0C,,
+W,wRunRaceExtra,D048,09,6C9E,Run_ConfettiRespawn,ptr,20,2,21:0C,,
+W,wRunRaceExtra,D048,09,6C9F,Run_ConfettiRespawn,ptr,20,2,21:0C,,
+W,wRunRaceExtra,D048,09,6CA9,Run_Celebration,S,12,1,21:0C,,
+W,wRunRaceExtra,D048,09,6CCA,Run_Celebration,S,12,1,21:0C,,
+W,wRunRaceExtra,D048,09,6CD7,Run_Celebration,S,522,1,21:0C,,
+W,wRunRaceExtra,D048,09,6CDD,Run_Celebration,S,624,1,21:0C,,
+W,wRunRaceExtra,D048,09,6D5E,Run_DrawPlayer,S,491,3,21:06 21:07,,
+W,wRunRaceExtra,D048,09,6D68,Run_DrawPlayer,S,2435,3,21:06 21:07,,
+W,wRunRaceExtra,D048,09,702C,Run_DrawConfetti,ptr,1294,3,21:0C 21:0B,,
+W,wRunRaceExtra,D048,09,70B9,Run_DrawMeta,dyn,11736,3,21:0C 21:01 21:0B,,
+W,wRunRaceExtra,D048,09,70D8,Run_DrawMeta,dyn,3080,3,21:0C 21:01,,
+W,wRunRaceExtra,D048,09,70DD,Run_DrawMeta,dyn,11736,3,21:0C 21:01 21:0B,,
+R,wRunRaceCounter,D04F,00,17E8,Prn_SendPacketByte,other,93,6,1D:04,FF 80 00 C0 03 E4 F0 F9 FB FC +1,
+R,wRunRaceCounter,D04F,09,6241,Mode21_State04_Countdown,S,6,3,21:04,00 01 02 03,
+R,wRunRaceCounter,D04F,09,6991,Run_UpdateChick,S,7245,3,21:06 21:07,01 04 02 03,
+W,wRunRaceCounter,D04F,00,0440,Mem_Zero,init,228,228,0F:0F,0F,00
+W,wRunRaceCounter,D04F,00,323B,Mode1D_CopyDescriptors,other,91,6,1D:03,FF 00 80 C0 03 E4 F0 F9 FB FC +1,FF 80 00 C0 03 E4 F0 F9 FB FC +1
+W,wRunRaceCounter,D04F,00,32E2,Mode1D_FillBlank,other,2,2,1D:03,FF,00
+W,wRunRaceCounter,D04F,09,6245,Mode21_State04_Countdown,S,6,3,21:04,00 01 02 03,01 02 03 04
+R,wRunPlayerLeads,D050,00,17E8,Prn_SendPacketByte,other,93,6,1D:04,FF 00 13 93 01 07 17 F9 67 7F +4,
+R,wRunPlayerLeads,D050,09,69C6,Run_UpdateMole,S,7245,3,21:06 21:07,00 01,
+W,wRunPlayerLeads,D050,00,0440,Mem_Zero,init,228,228,0F:0F,F0,00
+W,wRunPlayerLeads,D050,00,3232,Mode1D_CopyDescriptors,other,91,6,1D:03,FF 00 93 01 07 13 17 F9 67 7F +3,FF 13 93 01 07 00 17 F9 67 7F +4
+W,wRunPlayerLeads,D050,00,32DC,Mode1D_FillBlank,other,2,2,1D:03,83 FF,00
+W,wRunPlayerLeads,D050,09,623E,Mode21_State04_Countdown,S,6,3,21:04,00 01,00
+W,wRunPlayerLeads,D050,09,6B4E,Run_MoveMoleX,S,3203,3,21:06 21:07,01 00,01
+W,wUnusedD4A0,D4A0,00,0440,Mem_Zero,init,21888,228,0F:0F,,
+W,wUnusedD4A0,D4A0,00,24D6,Oam_AddMeta_Common,dyn,36,5,1A:04 0E:03,,
+W,wUnusedD4A0,D4A0,00,24DA,Oam_AddMeta_Common,dyn,36,5,1A:04 0E:03,,
+W,wUnusedD4A0,D4A0,00,24DD,Oam_AddMeta_Common,dyn,36,5,1A:04 0E:03,,
+W,wUnusedD4A0,D4A0,00,24E0,Oam_AddMeta_Common,dyn,36,5,1A:04 0E:03,,
+R,wSpriteAnimFrame,D500,03,4266,AnimEd_DrawSpeedHand,S,1039,9,12:03,,
+R,wSpriteAnimFrame,D500,03,4285,AnimEd_DrawSpeedHand,S,204,9,12:03,,
+R,wSpriteAnimFrame,D500,03,435D,AnimEd_DrawLoopHand,S,1029,4,12:04,,
+R,wSpriteAnimFrame,D500,03,437C,AnimEd_DrawLoopHand,S,200,4,12:04,,
+R,wSpriteAnimFrame,D500,03,44D4,AnimEd_ToolsMenuCursor,S,4008,21,12:08,,
+R,wSpriteAnimFrame,D500,03,46FF,AnimEd_DrawRangeArrow,ptr,7738,13,12:0B 12:0A,,
+R,wSpriteAnimFrame,D500,03,472F,AnimEd_StepRangeAnim,ptr,7751,13,12:0B 12:0A,,
+R,wSpriteAnimFrame,D500,03,474A,AnimEd_StepRangeAnim,ptr,1189,13,12:0B 12:0A,,
+R,wSpriteAnimFrame,D500,03,50C0,AnimEd_SortChoiceCursor,ptr,427,3,12:1E 12:1D 12:1F,,
+R,wSpriteAnimFrame,D500,03,50DA,AnimEd_SortChoiceCursor,S,42,3,12:1E 12:1D,,
+R,wSpriteAnimFrame,D500,03,50F1,AnimEd_SortChoiceCursor,S,385,3,12:1E 12:1D 12:1F,,
+R,wSpriteAnimFrame,D500,03,5243,AnimEd_DrawBorderHand,S,1763,7,12:20,,
+R,wSpriteAnimFrame,D500,03,5262,AnimEd_DrawBorderHand,S,352,7,12:20,,
+R,wSpriteAnimFrame,D500,03,53BA,AnimEd_DrawEntryCursor,S,27887,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+R,wSpriteAnimFrame,D500,03,53D3,AnimEd_DrawEntryCursor,S,5568,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+R,wSpriteAnimFrame,D500,03,542C,AnimEd_DrawHandSprite,S,16743,23,12:01 12:09 12:02,,
+R,wSpriteAnimFrame,D500,03,544E,AnimEd_DrawHandSprite,S,3345,23,12:01 12:09 12:02,,
+R,wSpriteAnimFrame,D500,03,64B3,HotSpot_DrawPointer,S,351,1,0C:03,,
+R,wSpriteAnimFrame,D500,03,64D1,HotSpot_DrawPointer,S,351,1,0C:03,,
+R,wSpriteAnimFrame,D500,03,6FF5,HotSpotEd_DrawSlots,ptr,36274,10,1A:03 1A:04,,
+R,wSpriteAnimFrame,D500,03,712F,HotSpotEd_DrawPointer,S,602,9,1A:03,,
+R,wSpriteAnimFrame,D500,03,714D,HotSpotEd_DrawPointer,S,602,9,1A:03,,
+R,wSpriteAnimFrame,D500,03,7174,HotSpotEd_DrawSlotPointer,S,5666,10,1A:03,,
+R,wSpriteAnimFrame,D500,03,7192,HotSpotEd_DrawSlotPointer,S,5666,10,1A:03,,
+R,wSpriteAnimFrame,D500,03,7774,LinkMenu_AnimateWindow,S,2749,12,06:01,,
+R,wSpriteAnimFrame,D500,03,7792,LinkMenu_AnimateWindow,S,324,12,06:01,,
+R,wSpriteAnimFrame,D500,03,79F0,ShowMenu_DrawCursor,S,1408,4,0B:01 13:00 0C:00 0D:00,,
+R,wSpriteAnimFrame,D500,03,7A0C,ShowMenu_DrawCursor,S,344,4,0B:01 13:00 0C:00 0D:00,,
+R,wSpriteAnimFrame,D500,03,7D23,EditMenu_AnimateIcons,ptr,50745,32,05:01 0F:00 12:00,,
+R,wSpriteAnimFrame,D500,04,728C,Parlor_AnimQueenTiles,S,38990,87,01:01,,
+R,wSpriteAnimFrame,D500,04,72B9,Parlor_AnimQueenTiles,S,2840,87,01:01,,
+R,wSpriteAnimFrame,D500,04,72E3,Parlor_AnimQueenSprite,S,38990,87,01:01,,
+R,wSpriteAnimFrame,D500,04,7310,Parlor_AnimQueenSprite,S,3534,87,01:01,,
+R,wSpriteAnimFrame,D500,04,7348,Parlor_AnimateB,S,50,24,01:04,,
+R,wSpriteAnimFrame,D500,04,7376,Parlor_AnimateC,S,6279,27,01:07,,
+R,wSpriteAnimFrame,D500,04,7395,Parlor_AnimateC,S,943,27,01:07,,
+R,wSpriteAnimFrame,D500,07,55C0,Mode07_State02_Play,S,14088,23,07:02,,
+R,wSpriteAnimFrame,D500,07,55E9,Mode07_State02_Play,S,11,11,07:02,,
+R,wSpriteAnimFrame,D500,07,5611,Mode07_State02_Play,S,23,12,07:02,,
+R,wSpriteAnimFrame,D500,07,562D,Mode07_State02_Play,S,14054,23,07:02 07:05 07:06 07:07,,
+R,wSpriteAnimFrame,D500,07,5771,SpaceFever_MovePlayer,S,14088,23,07:02,,
+R,wSpriteAnimFrame,D500,07,5794,SpaceFever_DrawPlayer,S,14088,23,07:02,,
+R,wSpriteAnimFrame,D500,07,57BD,SpaceFever_DrawPlayer,S,104,12,07:02,,
+R,wSpriteAnimFrame,D500,07,5AFA,SpaceFever_Wave0_CheckTargetHit,S,6067,23,07:02,,
+R,wSpriteAnimFrame,D500,07,5B07,SpaceFever_Wave0_CheckTargetHit,S,6061,23,07:02,,
+R,wSpriteAnimFrame,D500,07,5B14,SpaceFever_Wave0_CheckTargetHit,S,6054,23,07:02,,
+R,wSpriteAnimFrame,D500,07,6429,SpaceFever_DrawEnemies,ptr,37917,23,07:02 07:03,,
+R,wSpriteAnimFrame,D500,07,645F,SpaceFever_DrawEnemies,ptr,88,22,07:02,,
+R,wSpriteAnimFrame,D500,07,6617,SpaceFever_EnemyVsPlayer,S,14088,23,07:02 07:05 07:06 07:07,,
+R,wSpriteAnimFrame,D500,07,665A,SpaceFever_BulletVsPlayer,S,14088,23,07:02 07:05 07:06 07:07,,
+R,wSpriteAnimFrame,D500,08,4EBB,BorderPicker_AnimateIcon,S,2013,10,09:09 12:21 0A:0B 1C:0A,,
+R,wSpriteAnimFrame,D500,08,4EEC,BorderPicker_AnimateIcon,S,2013,10,09:09 12:21 0A:0B 1C:0A,,
+R,wSpriteAnimFrame,D500,08,5262,WildFramePicker_AnimateIcon,S,795,4,1C:0D,,
+R,wSpriteAnimFrame,D500,08,5293,WildFramePicker_AnimateIcon,S,795,4,1C:0D,,
+R,wSpriteAnimFrame,D500,08,7483,Title_StepAnimScript,S,51257,227,19:03 19:01 19:02,,
+R,wSpriteAnimFrame,D500,08,74A3,Title_StepAnimScript,S,9657,227,19:03 19:01,,
+W,wSpriteAnimFrame,D500,00,0440,Mem_Zero,init,3420,228,0F:0F,,
+W,wSpriteAnimFrame,D500,00,1011,Anim_ClearSlots,init,272,24,07:01 0C:02,,
+W,wSpriteAnimFrame,D500,00,1012,Anim_ClearSlots,init,238,24,07:01 0C:02,,
+W,wSpriteAnimFrame,D500,03,428E,AnimEd_DrawSpeedHand,S,204,9,12:03,,
+W,wSpriteAnimFrame,D500,03,42EF,Mode12_State04_ToggleLoop,S,3,3,12:04,,
+W,wSpriteAnimFrame,D500,03,4385,AnimEd_DrawLoopHand,S,200,4,12:04,,
+W,wSpriteAnimFrame,D500,03,43EC,Mode12_State07_ToolsSlideIn,S,29,21,12:07,,
+W,wSpriteAnimFrame,D500,03,4438,Mode12_State08_ToolsMenu,S,27,20,12:08,,
+W,wSpriteAnimFrame,D500,03,4461,Mode12_State08_ToolsMenu,S,27,20,12:08,,
+W,wSpriteAnimFrame,D500,03,45B7,Mode12_State0A_RangeAnim,S,13,13,12:0A,,
+W,wSpriteAnimFrame,D500,03,460E,Mode12_State0A_RangeAnim,S,13,13,12:0A,,
+W,wSpriteAnimFrame,D500,03,461A,Mode12_State0A_RangeAnim,S,13,13,12:0A,,
+W,wSpriteAnimFrame,D500,03,4651,Mode12_State0A_RangeAnim,S,234,13,12:0A,,
+W,wSpriteAnimFrame,D500,03,476A,AnimEd_StepRangeAnim,ptr,1189,13,12:0B 12:0A,,
+W,wSpriteAnimFrame,D500,03,497D,AnimEd_MoveRangeEnd,S,8,4,12:0B,,
+W,wSpriteAnimFrame,D500,03,49D3,AnimEd_RangeConfirmAnim,S,5,5,12:0B,,
+W,wSpriteAnimFrame,D500,03,4EFE,Mode12_State14_SaveDialogOpen,S,5,5,12:14,,
+W,wSpriteAnimFrame,D500,03,4F74,Mode12_State17_ExitDialogOpen,S,2,2,12:17,,
+W,wSpriteAnimFrame,D500,03,4FE7,Mode12_State1A_ClearDialogOpen,S,3,3,12:1A,,
+W,wSpriteAnimFrame,D500,03,506B,Mode12_State1D_SortDialogOpen,S,3,3,12:1D,,
+W,wSpriteAnimFrame,D500,03,50C3,AnimEd_SortChoiceCursor,ptr,4,2,12:1E,,
+W,wSpriteAnimFrame,D500,03,526B,AnimEd_DrawBorderHand,S,352,7,12:20,,
+W,wSpriteAnimFrame,D500,03,53DC,AnimEd_DrawEntryCursor,S,5568,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+W,wSpriteAnimFrame,D500,03,5457,AnimEd_DrawHandSprite,S,3345,23,12:01 12:09 12:02,,
+W,wSpriteAnimFrame,D500,03,561D,AnimEd_StartDecorations,S,28,23,12:00 12:1F 12:22 12:0F,,
+W,wSpriteAnimFrame,D500,03,5620,AnimEd_StartDecorations,S,28,23,12:00 12:1F 12:22 12:0F,,
+W,wSpriteAnimFrame,D500,03,5909,AnimEd_StartExitTransition,S,2,2,12:05 12:11,,
+W,wSpriteAnimFrame,D500,03,590C,AnimEd_StartExitTransition,S,2,2,12:05 12:11,,
+W,wSpriteAnimFrame,D500,03,5DA1,AnimEd_InitEditor,S,24,23,12:00 12:0F,,
+W,wSpriteAnimFrame,D500,03,5DA7,AnimEd_InitEditor,S,24,23,12:00 12:0F,,
+W,wSpriteAnimFrame,D500,03,5DAD,AnimEd_InitEditor,S,24,23,12:00 12:0F,,
+W,wSpriteAnimFrame,D500,03,6BFB,HotSpotEd_NewSpot,ptr,17,8,1A:03,,
+W,wSpriteAnimFrame,D500,03,6C90,Mode1A_State04_PlaceOrDelete,ptr,10,5,1A:04,,
+W,wSpriteAnimFrame,D500,03,701A,HotSpotEd_DrawSlots,ptr,5960,10,1A:03 1A:04,,
+W,wSpriteAnimFrame,D500,03,75E2,HotSpotEd_ClearAnim,ptr,144,10,1A:02 1A:04 1A:08,,
+W,wSpriteAnimFrame,D500,03,76BE,Mode06_State00_Init,S,20,12,06:00,,
+W,wSpriteAnimFrame,D500,03,7796,LinkMenu_AnimateWindow,S,338,12,06:01,,
+W,wSpriteAnimFrame,D500,03,7909,Mode0B_State00_Init,S,4,4,0B:00,,
+W,wSpriteAnimFrame,D500,03,7A15,ShowMenu_DrawCursor,S,348,4,0B:01 13:00 0C:00 0D:00,,
+W,wSpriteAnimFrame,D500,03,7A5E,ShowMenu_MoveCursor,S,4,3,0B:01,,
+W,wSpriteAnimFrame,D500,03,7C22,Mode05_State00_Init,ptr,640,32,05:00,,
+W,wSpriteAnimFrame,D500,03,7CE6,Mode05_State02_Dispatch,S,54,31,0F:00,,
+W,wSpriteAnimFrame,D500,03,7CED,Mode05_State02_Dispatch,S,24,24,12:00,,
+W,wSpriteAnimFrame,D500,03,7CF2,Mode05_State02_Dispatch,S,78,31,0F:00 12:00,,
+W,wSpriteAnimFrame,D500,03,7D62,EditMenu_AnimateIcons,ptr,50745,32,05:01 0F:00 12:00,,
+W,wSpriteAnimFrame,D500,03,7DE5,EditMenu_ResetIconAnim,S,80,32,05:00,,
+W,wSpriteAnimFrame,D500,03,7DE9,EditMenu_ResetIconAnim,S,80,32,05:00,,
+W,wSpriteAnimFrame,D500,03,7DF5,EditMenu_ResetIconAnim,S,24,24,05:01,,
+W,wSpriteAnimFrame,D500,03,7DF9,EditMenu_ResetIconAnim,S,24,24,05:01,,
+W,wSpriteAnimFrame,D500,04,72BD,Parlor_AnimQueenTiles,S,3334,87,01:01,,
+W,wSpriteAnimFrame,D500,04,7314,Parlor_AnimQueenSprite,S,4137,87,01:01,,
+W,wSpriteAnimFrame,D500,04,734D,Parlor_AnimateB,S,50,24,01:04,,
+W,wSpriteAnimFrame,D500,04,7399,Parlor_AnimateC,S,1226,27,01:07,,
+W,wSpriteAnimFrame,D500,04,7426,Parlor_LoadPage,S,261,89,01:00 01:06 01:03,,
+W,wSpriteAnimFrame,D500,04,742C,Parlor_LoadPage,S,261,89,01:00 01:06 01:03,,
+W,wSpriteAnimFrame,D500,04,7432,Parlor_LoadPage,S,261,89,01:00 01:06 01:03,,
+W,wSpriteAnimFrame,D500,07,5619,Mode07_State02_Play,S,12,12,07:02,,
+W,wSpriteAnimFrame,D500,07,57C1,SpaceFever_DrawPlayer,S,898,23,07:02,,
+W,wSpriteAnimFrame,D500,07,5A7B,SpaceFever_ResetEnemies,S,41,23,07:02,,
+W,wSpriteAnimFrame,D500,07,5A80,SpaceFever_ResetEnemies,S,41,23,07:02,,
+W,wSpriteAnimFrame,D500,07,5A85,SpaceFever_ResetEnemies,S,41,23,07:02,,
+W,wSpriteAnimFrame,D500,07,5ADB,SpaceFever_Wave0_ReapKilled,ptr,16,16,07:02,,
+W,wSpriteAnimFrame,D500,07,5CAA,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,,
+W,wSpriteAnimFrame,D500,07,5CAB,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,,
+W,wSpriteAnimFrame,D500,07,5CF6,SpaceFever_Wave1_ReapKilled,ptr,12,12,07:02,,
+W,wSpriteAnimFrame,D500,07,5E4E,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,,
+W,wSpriteAnimFrame,D500,07,5E4F,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,,
+W,wSpriteAnimFrame,D500,07,6461,SpaceFever_DrawEnemies,ptr,2292,23,07:02 07:03,,
+W,wSpriteAnimFrame,D500,08,4E12,BorderPicker_Substate0_Init,S,10,10,09:09 0A:0B 12:21 1C:0A,,
+W,wSpriteAnimFrame,D500,08,4E18,BorderPicker_Substate0_Init,S,10,10,09:09 0A:0B 12:21 1C:0A,,
+W,wSpriteAnimFrame,D500,08,4EF5,BorderPicker_AnimateIcon,S,2013,10,09:09 12:21 0A:0B 1C:0A,,
+W,wSpriteAnimFrame,D500,08,51B1,WildFramePicker_Substate0_Init,S,4,4,1C:0D,,
+W,wSpriteAnimFrame,D500,08,51B7,WildFramePicker_Substate0_Init,S,4,4,1C:0D,,
+W,wSpriteAnimFrame,D500,08,529C,WildFramePicker_AnimateIcon,S,795,4,1C:0D,,
+W,wSpriteAnimFrame,D500,08,7363,Mode19_State01_TitleFirst,S,227,227,19:01,,
+W,wSpriteAnimFrame,D500,08,73DB,Mode19_State02_TitleFromMenu,S,55,54,19:02,,
+W,wSpriteAnimFrame,D500,08,74A7,Title_StepAnimScript,S,10316,227,19:03 19:01,,
+R,wArrowAnimFrame,D50F,04,6AEF,Mode09_State03_PageLeft,ptr,7,7,09:03,00,
+R,wArrowAnimFrame,D50F,04,6B0A,Mode09_State03_PageLeft,S,84,7,09:03,01 02,
+R,wArrowAnimFrame,D50F,04,6BA0,Mode09_State04_PageRight,ptr,4,3,09:04,00,
+R,wArrowAnimFrame,D50F,04,6BBB,Mode09_State04_PageRight,S,48,3,09:04,01 02,
+R,wArrowAnimFrame,D50F,04,6C20,Mode09_State05_PageUp,ptr,1,1,09:05,00,
+R,wArrowAnimFrame,D50F,04,6C32,Mode09_State05_PageUp,S,12,1,09:05,01 02,
+R,wArrowAnimFrame,D50F,04,6CBF,Mode09_State06_PageDown,ptr,25,25,09:06,00,
+R,wArrowAnimFrame,D50F,04,6CD1,Mode09_State06_PageDown,S,300,25,09:06,01 02,
+R,wArrowAnimFrame,D50F,04,7841,AlbumPage_DrawChoiceA,S,926,9,0A:05 09:03,00 01,
+R,wArrowAnimFrame,D50F,04,7847,AlbumPage_DrawChoiceA,S,926,9,0A:05 09:03,00 01,
+R,wArrowAnimFrame,D50F,04,7860,AlbumPage_DrawChoiceA,ptr,7,7,09:03,01,
+R,wArrowAnimFrame,D50F,04,7865,AlbumPage_DrawChoiceA,S,926,9,0A:05 09:03,00 01 02,
+R,wArrowAnimFrame,D50F,04,78A7,Mode0A_State06_PageRight,ptr,4,4,0A:06,00,
+R,wArrowAnimFrame,D50F,04,78C2,Mode0A_State06_PageRight,S,48,4,0A:06,01 02,
+R,wArrowAnimFrame,D50F,04,7926,AlbumPage_DrawChoiceB,S,1720,43,0A:06 09:04,00 01,
+R,wArrowAnimFrame,D50F,04,792C,AlbumPage_DrawChoiceB,S,1720,43,0A:06 09:04,00 01,
+R,wArrowAnimFrame,D50F,04,7945,AlbumPage_DrawChoiceB,ptr,8,7,09:04 0A:06,01,
+R,wArrowAnimFrame,D50F,04,794A,AlbumPage_DrawChoiceB,S,1720,43,0A:06 09:04,00 01 02,
+R,wArrowAnimFrame,D50F,04,7989,Mode0A_State07_PageUp,ptr,13,13,0A:07,00,
+R,wArrowAnimFrame,D50F,04,799B,Mode0A_State07_PageUp,S,156,13,0A:07,01 02,
+R,wArrowAnimFrame,D50F,04,7A00,AlbumPage_DrawUp,S,4963,68,09:05 0A:07,00 01,
+R,wArrowAnimFrame,D50F,04,7A06,AlbumPage_DrawUp,S,4963,68,09:05 0A:07,00 01,
+R,wArrowAnimFrame,D50F,04,7A1F,AlbumPage_DrawUp,ptr,14,14,0A:07 09:05,01,
+R,wArrowAnimFrame,D50F,04,7A24,AlbumPage_DrawUp,S,4963,68,09:05 0A:07,00 01 02,
+R,wArrowAnimFrame,D50F,04,7A5F,Mode0A_State08_PageDown,ptr,7,7,0A:08,00,
+R,wArrowAnimFrame,D50F,04,7A71,Mode0A_State08_PageDown,S,84,7,0A:08,01 02,
+R,wArrowAnimFrame,D50F,04,7AD6,AlbumPage_DrawDown,S,2768,35,0A:08 09:06,00 01,
+R,wArrowAnimFrame,D50F,04,7ADC,AlbumPage_DrawDown,S,2768,35,0A:08 09:06,00 01,
+R,wArrowAnimFrame,D50F,04,7AF5,AlbumPage_DrawDown,ptr,32,32,09:06 0A:08,01,
+R,wArrowAnimFrame,D50F,04,7AFA,AlbumPage_DrawDown,S,2768,35,0A:08 09:06,00 01 02,
+R,wArrowAnimFrame,D50F,06,6873,Shoot_Options_DrawCursorB,S,322,3,14:06,00,
+R,wArrowAnimFrame,D50F,06,6898,Shoot_Options_DrawCursorB,S,322,3,14:06,00,
+R,wArrowAnimFrame,D50F,06,6979,Shoot_Options_DrawCursorC,S,152,1,14:07,00,
+R,wArrowAnimFrame,D50F,06,699E,Shoot_Options_DrawCursorC,S,152,1,14:07,00,
+R,wArrowAnimFrame,D50F,06,6ABC,Shoot_Options_DrawCursorD,S,41,1,14:08,00,
+R,wArrowAnimFrame,D50F,06,6AE1,Shoot_Options_DrawCursorD,S,41,1,14:08,00,
+R,wArrowAnimFrame,D50F,08,44B7,Mode1C_State06_OptionToggle,ptr,5,5,1C:06,00,
+R,wArrowAnimFrame,D50F,08,44C6,Mode1C_State06_OptionToggle,S,60,5,1C:06,01 02,
+R,wArrowAnimFrame,D50F,08,4554,Mode1C_DrawToggleArrow,S,466,6,1C:06,00 01,
+R,wArrowAnimFrame,D50F,08,4574,Mode1C_DrawToggleArrow,ptr,5,5,1C:06,01,
+R,wArrowAnimFrame,D50F,08,4579,Mode1C_DrawToggleArrow,S,466,6,1C:06,00 01 02,
+W,wArrowAnimFrame,D50F,00,0440,Mem_Zero,init,228,228,0F:0F,0F,00
+W,wArrowAnimFrame,D50F,00,1012,Anim_ClearSlots,init,34,24,07:01 0C:02,00,00
+W,wArrowAnimFrame,D50F,04,69C2,Mode09_State02_PhotoArrows,S,110,39,09:02,00 02,00
+W,wArrowAnimFrame,D50F,04,6AEF,Mode09_State03_PageLeft,ptr,7,7,09:03,00,01
+W,wArrowAnimFrame,D50F,04,6BA0,Mode09_State04_PageRight,ptr,4,3,09:04,00,01
+W,wArrowAnimFrame,D50F,04,6C20,Mode09_State05_PageUp,ptr,1,1,09:05,00,01
+W,wArrowAnimFrame,D50F,04,6CBF,Mode09_State06_PageDown,ptr,25,25,09:06,00,01
+W,wArrowAnimFrame,D50F,04,7667,Mode0A_State04_PhotoArrows,S,62,33,0A:04,00 02,00
+W,wArrowAnimFrame,D50F,04,7860,AlbumPage_DrawChoiceA,ptr,7,7,09:03,01,0B
+W,wArrowAnimFrame,D50F,04,78A7,Mode0A_State06_PageRight,ptr,4,4,0A:06,00,01
+W,wArrowAnimFrame,D50F,04,7945,AlbumPage_DrawChoiceB,ptr,8,7,09:04 0A:06,01,0B
+W,wArrowAnimFrame,D50F,04,7989,Mode0A_State07_PageUp,ptr,13,13,0A:07,00,01
+W,wArrowAnimFrame,D50F,04,7A1F,AlbumPage_DrawUp,ptr,14,14,0A:07 09:05,01,0B
+W,wArrowAnimFrame,D50F,04,7A5F,Mode0A_State08_PageDown,ptr,7,7,0A:08,00,01 41
+W,wArrowAnimFrame,D50F,04,7AF5,AlbumPage_DrawDown,ptr,32,32,09:06 0A:08,01,0B
+W,wArrowAnimFrame,D50F,06,658C,Mode14_State04_OptionsPage,S,6,4,14:04,00,00
+W,wArrowAnimFrame,D50F,08,4369,Mode1C_State04_OptionsMenu,S,9,8,1C:04,02 00,00
+W,wArrowAnimFrame,D50F,08,44B7,Mode1C_State06_OptionToggle,ptr,5,5,1C:06,00,01 03
+W,wArrowAnimFrame,D50F,08,4574,Mode1C_DrawToggleArrow,ptr,5,5,1C:06,01,0B
+R,wSpriteAnimTick,D510,03,427F,AnimEd_DrawSpeedHand,S,1039,9,12:03,,
+R,wSpriteAnimTick,D510,03,4295,AnimEd_DrawSpeedHand,S,1039,9,12:03,,
+R,wSpriteAnimTick,D510,03,4376,AnimEd_DrawLoopHand,S,1029,4,12:04,,
+R,wSpriteAnimTick,D510,03,438C,AnimEd_DrawLoopHand,S,1029,4,12:04,,
+R,wSpriteAnimTick,D510,03,4742,AnimEd_StepRangeAnim,ptr,7751,13,12:0B 12:0A,,
+R,wSpriteAnimTick,D510,03,4743,AnimEd_StepRangeAnim,ptr,7751,13,12:0B 12:0A,,
+R,wSpriteAnimTick,D510,03,4789,AnimEd_StepRangeAnim,ptr,7751,13,12:0B 12:0A,,
+R,wSpriteAnimTick,D510,03,4A3B,Mode12_State0C_LoopCount,S,1632,5,12:0C,,
+R,wSpriteAnimTick,D510,03,4AE8,AnimEd_DrawLoopCountSprite,S,848,5,12:0C,,
+R,wSpriteAnimTick,D510,03,4B94,Mode12_State0D_LoopApply,S,4,4,12:0D,,
+R,wSpriteAnimTick,D510,03,4DEC,Mode12_State12_TestRun,S,13,1,12:12,,
+R,wSpriteAnimTick,D510,03,50C8,AnimEd_SortChoiceCursor,S,427,3,12:1E 12:1D 12:1F,,
+R,wSpriteAnimTick,D510,03,525C,AnimEd_DrawBorderHand,S,1763,7,12:20,,
+R,wSpriteAnimTick,D510,03,5272,AnimEd_DrawBorderHand,S,1763,7,12:20,,
+R,wSpriteAnimTick,D510,03,53CD,AnimEd_DrawEntryCursor,S,27887,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+R,wSpriteAnimTick,D510,03,53E3,AnimEd_DrawEntryCursor,S,27887,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+R,wSpriteAnimTick,D510,03,5448,AnimEd_DrawHandSprite,S,16743,23,12:01 12:09 12:02,,
+R,wSpriteAnimTick,D510,03,545E,AnimEd_DrawHandSprite,S,16743,23,12:01 12:09 12:02,,
+R,wSpriteAnimTick,D510,03,64C3,HotSpot_DrawPointer,S,351,1,0C:03,,
+R,wSpriteAnimTick,D510,03,700A,HotSpotEd_DrawSlots,ptr,36274,10,1A:03 1A:04,,
+R,wSpriteAnimTick,D510,03,7031,HotSpotEd_DrawSlots,ptr,36274,10,1A:03 1A:04,,
+R,wSpriteAnimTick,D510,03,713F,HotSpotEd_DrawPointer,S,602,9,1A:03,,
+R,wSpriteAnimTick,D510,03,7184,HotSpotEd_DrawSlotPointer,S,5666,10,1A:03,,
+R,wSpriteAnimTick,D510,03,7783,LinkMenu_AnimateWindow,S,2749,12,06:01,,
+R,wSpriteAnimTick,D510,03,779C,LinkMenu_AnimateWindow,ptr,2749,12,06:01,,
+R,wSpriteAnimTick,D510,03,7A00,ShowMenu_DrawCursor,S,1408,4,0B:01 13:00 0C:00 0D:00,,
+R,wSpriteAnimTick,D510,03,7A1F,ShowMenu_DrawCursor,ptr,1408,4,0B:01 13:00 0C:00 0D:00,,
+R,wSpriteAnimTick,D510,03,7D28,EditMenu_AnimateIcons,ptr,50745,32,05:01 0F:00 12:00,,
+R,wSpriteAnimTick,D510,04,72AD,Parlor_AnimQueenTiles,S,38990,87,01:01,,
+R,wSpriteAnimTick,D510,04,7305,Parlor_AnimQueenSprite,S,38990,87,01:01,,
+R,wSpriteAnimTick,D510,04,7340,Parlor_AnimateB,S,1090,25,01:04,,
+R,wSpriteAnimTick,D510,04,738A,Parlor_AnimateC,S,6279,27,01:07,,
+R,wSpriteAnimTick,D510,07,57B1,SpaceFever_DrawPlayer,S,14088,23,07:02,,
+R,wSpriteAnimTick,D510,07,6450,SpaceFever_DrawEnemies,ptr,37917,23,07:02 07:03,,
+R,wSpriteAnimTick,D510,08,7497,Title_StepAnimScript,S,51256,227,19:03 19:01 19:02,,
+W,wSpriteAnimTick,D510,00,0440,Mem_Zero,init,3420,228,0F:0F,,
+W,wSpriteAnimTick,D510,00,1011,Anim_ClearSlots,init,272,24,07:01 0C:02,,
+W,wSpriteAnimTick,D510,00,1012,Anim_ClearSlots,init,238,24,07:01 0C:02,,
+W,wSpriteAnimTick,D510,03,4292,AnimEd_DrawSpeedHand,S,204,9,12:03,,
+W,wSpriteAnimTick,D510,03,4299,AnimEd_DrawSpeedHand,S,1039,9,12:03,,
+W,wSpriteAnimTick,D510,03,42F3,Mode12_State04_ToggleLoop,S,3,3,12:04,,
+W,wSpriteAnimTick,D510,03,4389,AnimEd_DrawLoopHand,S,200,4,12:04,,
+W,wSpriteAnimTick,D510,03,4390,AnimEd_DrawLoopHand,S,1029,4,12:04,,
+W,wSpriteAnimTick,D510,03,4464,Mode12_State08_ToolsMenu,S,27,20,12:08,,
+W,wSpriteAnimTick,D510,03,4586,Mode12_State09_RangeBrowse,S,13,13,12:09,,
+W,wSpriteAnimTick,D510,03,45BA,Mode12_State0A_RangeAnim,S,13,13,12:0A,,
+W,wSpriteAnimTick,D510,03,4611,Mode12_State0A_RangeAnim,S,13,13,12:0A,,
+W,wSpriteAnimTick,D510,03,461D,Mode12_State0A_RangeAnim,S,13,13,12:0A,,
+W,wSpriteAnimTick,D510,03,4654,Mode12_State0A_RangeAnim,S,234,13,12:0A,,
+W,wSpriteAnimTick,D510,03,4770,AnimEd_StepRangeAnim,ptr,1189,13,12:0B 12:0A,,
+W,wSpriteAnimTick,D510,03,4789,AnimEd_StepRangeAnim,ptr,7751,13,12:0B 12:0A,,
+W,wSpriteAnimTick,D510,03,4980,AnimEd_MoveRangeEnd,S,8,4,12:0B,,
+W,wSpriteAnimTick,D510,03,49D6,AnimEd_RangeConfirmAnim,S,5,5,12:0B,,
+W,wSpriteAnimTick,D510,03,4A62,Mode12_State0C_LoopCount,S,1632,5,12:0C,,
+W,wSpriteAnimTick,D510,03,4D3D,Mode12_State11_TestStart,S,1,1,12:11,,
+W,wSpriteAnimTick,D510,03,4E22,Mode12_State12_TestRun,S,13,1,12:12,,
+W,wSpriteAnimTick,D510,03,4F01,Mode12_State14_SaveDialogOpen,S,5,5,12:14,,
+W,wSpriteAnimTick,D510,03,4F77,Mode12_State17_ExitDialogOpen,S,2,2,12:17,,
+W,wSpriteAnimTick,D510,03,4FEA,Mode12_State1A_ClearDialogOpen,S,3,3,12:1A,,
+W,wSpriteAnimTick,D510,03,506E,Mode12_State1D_SortDialogOpen,S,3,3,12:1D,,
+W,wSpriteAnimTick,D510,03,50C5,AnimEd_SortChoiceCursor,S,4,2,12:1E,,
+W,wSpriteAnimTick,D510,03,50D0,AnimEd_SortChoiceCursor,S,42,3,12:1E 12:1D,,
+W,wSpriteAnimTick,D510,03,526F,AnimEd_DrawBorderHand,S,352,7,12:20,,
+W,wSpriteAnimTick,D510,03,5276,AnimEd_DrawBorderHand,S,1763,7,12:20,,
+W,wSpriteAnimTick,D510,03,53E0,AnimEd_DrawEntryCursor,S,5568,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+W,wSpriteAnimTick,D510,03,53E7,AnimEd_DrawEntryCursor,S,27887,23,12:01 12:0B 12:09 12:20 12:03 12:04 +2,,
+W,wSpriteAnimTick,D510,03,545B,AnimEd_DrawHandSprite,S,3345,23,12:01 12:09 12:02,,
+W,wSpriteAnimTick,D510,03,5462,AnimEd_DrawHandSprite,S,16743,23,12:01 12:09 12:02,,
+W,wSpriteAnimTick,D510,03,5615,AnimEd_StartDecorations,S,28,23,12:00 12:1F 12:22 12:0F,,
+W,wSpriteAnimTick,D510,03,5618,AnimEd_StartDecorations,S,28,23,12:00 12:1F 12:22 12:0F,,
+W,wSpriteAnimTick,D510,03,5902,AnimEd_StartExitTransition,S,2,2,12:05 12:11,,
+W,wSpriteAnimTick,D510,03,5905,AnimEd_StartExitTransition,S,2,2,12:05 12:11,,
+W,wSpriteAnimTick,D510,03,5D9E,AnimEd_InitEditor,S,24,23,12:00 12:0F,,
+W,wSpriteAnimTick,D510,03,5DA4,AnimEd_InitEditor,S,24,23,12:00 12:0F,,
+W,wSpriteAnimTick,D510,03,5DAA,AnimEd_InitEditor,S,24,23,12:00 12:0F,,
+W,wSpriteAnimTick,D510,03,6C00,HotSpotEd_NewSpot,ptr,17,8,1A:03,,
+W,wSpriteAnimTick,D510,03,701F,HotSpotEd_DrawSlots,ptr,5960,10,1A:03 1A:04,,
+W,wSpriteAnimTick,D510,03,7031,HotSpotEd_DrawSlots,ptr,36274,10,1A:03 1A:04,,
+W,wSpriteAnimTick,D510,03,75E3,HotSpotEd_ClearAnim,ptr,144,10,1A:02 1A:04 1A:08,,
+W,wSpriteAnimTick,D510,03,76C1,Mode06_State00_Init,S,20,12,06:00,,
+W,wSpriteAnimTick,D510,03,7789,LinkMenu_AnimateWindow,S,338,12,06:01,,
+W,wSpriteAnimTick,D510,03,779C,LinkMenu_AnimateWindow,ptr,2749,12,06:01,,
+W,wSpriteAnimTick,D510,03,790C,Mode0B_State00_Init,S,4,4,0B:00,,
+W,wSpriteAnimTick,D510,03,7A19,ShowMenu_DrawCursor,S,348,4,0B:01 13:00 0C:00 0D:00,,
+W,wSpriteAnimTick,D510,03,7A1F,ShowMenu_DrawCursor,ptr,1408,4,0B:01 13:00 0C:00 0D:00,,
+W,wSpriteAnimTick,D510,03,7CF6,Mode05_State02_Dispatch,S,78,31,0F:00 12:00,,
+W,wSpriteAnimTick,D510,03,7CF9,Mode05_State02_Dispatch,S,78,31,0F:00 12:00,,
+W,wSpriteAnimTick,D510,03,7CFC,Mode05_State02_Dispatch,S,78,31,0F:00 12:00,,
+W,wSpriteAnimTick,D510,03,7D67,EditMenu_AnimateIcons,ptr,50745,32,05:01 0F:00 12:00,,
+W,wSpriteAnimTick,D510,03,7DEC,EditMenu_ResetIconAnim,S,80,32,05:00,,
+W,wSpriteAnimTick,D510,03,7DEF,EditMenu_ResetIconAnim,S,80,32,05:00,,
+W,wSpriteAnimTick,D510,03,7DFC,EditMenu_ResetIconAnim,S,24,24,05:01,,
+W,wSpriteAnimTick,D510,03,7DFF,EditMenu_ResetIconAnim,S,24,24,05:01,,
+W,wSpriteAnimTick,D510,04,72C6,Parlor_AnimQueenTiles,S,38990,87,01:01,,
+W,wSpriteAnimTick,D510,04,731D,Parlor_AnimQueenSprite,S,38990,87,01:01,,
+W,wSpriteAnimTick,D510,04,736E,Parlor_AnimateB,S,1090,25,01:04,,
+W,wSpriteAnimTick,D510,04,739E,Parlor_AnimateC,S,6279,27,01:07,,
+W,wSpriteAnimTick,D510,04,7429,Parlor_LoadPage,S,261,89,01:00 01:06 01:03,,
+W,wSpriteAnimTick,D510,04,742F,Parlor_LoadPage,S,261,89,01:00 01:06 01:03,,
+W,wSpriteAnimTick,D510,07,561D,Mode07_State02_Play,S,12,12,07:02,,
+W,wSpriteAnimTick,D510,07,57C6,SpaceFever_DrawPlayer,S,14088,23,07:02,,
+W,wSpriteAnimTick,D510,07,5A6E,SpaceFever_ResetEnemies,ptr,41,23,07:02,,
+W,wSpriteAnimTick,D510,07,5A6F,SpaceFever_ResetEnemies,ptr,41,23,07:02,,
+W,wSpriteAnimTick,D510,07,5A70,SpaceFever_ResetEnemies,ptr,41,23,07:02,,
+W,wSpriteAnimTick,D510,07,5AE1,SpaceFever_Wave0_ReapKilled,ptr,16,16,07:02,,
+W,wSpriteAnimTick,D510,07,5C9B,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,,
+W,wSpriteAnimTick,D510,07,5C9C,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,,
+W,wSpriteAnimTick,D510,07,5CFC,SpaceFever_Wave1_ReapKilled,ptr,12,12,07:02,,
+W,wSpriteAnimTick,D510,07,5E3F,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,,
+W,wSpriteAnimTick,D510,07,5E40,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,,
+W,wSpriteAnimTick,D510,07,6468,SpaceFever_DrawEnemies,ptr,37917,23,07:02 07:03,,
+W,wSpriteAnimTick,D510,08,4E15,BorderPicker_Substate0_Init,S,10,10,09:09 0A:0B 12:21 1C:0A,,
+W,wSpriteAnimTick,D510,08,51B4,WildFramePicker_Substate0_Init,S,4,4,1C:0D,,
+W,wSpriteAnimTick,D510,08,7366,Mode19_State01_TitleFirst,S,227,227,19:01,,
+W,wSpriteAnimTick,D510,08,73DE,Mode19_State02_TitleFromMenu,S,55,54,19:02,,
+W,wSpriteAnimTick,D510,08,7450,Mode19_State03_TitleWait,S,825,70,19:03,,
+W,wSpriteAnimTick,D510,08,74AC,Title_StepAnimScript,S,51256,227,19:03 19:01 19:02,,
+R,wArrowAnimTick,D51F,04,7857,AlbumPage_DrawChoiceA,S,926,9,0A:05 09:03,00 01 02 03 04 05 06 07 08 09 +2,
+R,wArrowAnimTick,D51F,04,786D,AlbumPage_DrawChoiceA,ptr,84,7,09:03,00 01 02 03 04 05 06 07 08 09 +1,
+R,wArrowAnimTick,D51F,04,793C,AlbumPage_DrawChoiceB,S,1720,43,0A:06 09:04,00 01 02 03 04 05 06 07 08 09 +2,
+R,wArrowAnimTick,D51F,04,7952,AlbumPage_DrawChoiceB,ptr,96,7,09:04 0A:06,00 01 02 03 04 05 06 07 08 09 +1,
+R,wArrowAnimTick,D51F,04,7A16,AlbumPage_DrawUp,S,4963,68,09:05 0A:07,00 01 02 03 04 05 06 07 08 09 +2,
+R,wArrowAnimTick,D51F,04,7A2C,AlbumPage_DrawUp,ptr,168,14,0A:07 09:05,00 01 02 03 04 05 06 07 08 09 +1,
+R,wArrowAnimTick,D51F,04,7AEC,AlbumPage_DrawDown,S,2768,35,0A:08 09:06,00 01 02 03 04 05 06 07 08 09 +2,
+R,wArrowAnimTick,D51F,04,7B02,AlbumPage_DrawDown,ptr,384,32,09:06 0A:08,00 01 02 03 04 05 06 07 08 09 +1,
+R,wArrowAnimTick,D51F,06,688A,Shoot_Options_DrawCursorB,S,322,3,14:06,00,
+R,wArrowAnimTick,D51F,06,6990,Shoot_Options_DrawCursorC,S,152,1,14:07,00,
+R,wArrowAnimTick,D51F,06,6AD3,Shoot_Options_DrawCursorD,S,41,1,14:08,00,
+R,wArrowAnimTick,D51F,08,456B,Mode1C_DrawToggleArrow,S,466,6,1C:06,00 01 02 03 04 05 06 07 08 09 +2,
+R,wArrowAnimTick,D51F,08,4581,Mode1C_DrawToggleArrow,ptr,60,5,1C:06,00 01 02 03 04 05 06 07 08 09 +1,
+W,wArrowAnimTick,D51F,00,0440,Mem_Zero,init,228,228,0F:0F,0F,00
+W,wArrowAnimTick,D51F,00,1012,Anim_ClearSlots,init,34,24,07:01 0C:02,00,00
+W,wArrowAnimTick,D51F,04,69BF,Mode09_State02_PhotoArrows,S,110,39,09:02,00 01,00
+W,wArrowAnimTick,D51F,04,7664,Mode0A_State04_PhotoArrows,S,62,33,0A:04,00 01,00
+W,wArrowAnimTick,D51F,04,7862,AlbumPage_DrawChoiceA,S,7,7,09:03,0B,00
+W,wArrowAnimTick,D51F,04,786D,AlbumPage_DrawChoiceA,ptr,84,7,09:03,00 01 02 03 04 05 06 07 08 09 +1,01 02
+W,wArrowAnimTick,D51F,04,7947,AlbumPage_DrawChoiceB,S,8,7,09:04 0A:06,0B,00
+W,wArrowAnimTick,D51F,04,7952,AlbumPage_DrawChoiceB,ptr,96,7,09:04 0A:06,00 01 02 03 04 05 06 07 08 09 +1,01 02
+W,wArrowAnimTick,D51F,04,7A21,AlbumPage_DrawUp,S,14,14,0A:07 09:05,0B,00
+W,wArrowAnimTick,D51F,04,7A2C,AlbumPage_DrawUp,ptr,168,14,0A:07 09:05,00 01 02 03 04 05 06 07 08 09 +1,01 02
+W,wArrowAnimTick,D51F,04,7AF7,AlbumPage_DrawDown,S,32,32,09:06 0A:08,0B,00
+W,wArrowAnimTick,D51F,04,7B02,AlbumPage_DrawDown,ptr,384,32,09:06 0A:08,00 01 02 03 04 05 06 07 08 09 +1,01 02
+W,wArrowAnimTick,D51F,06,6589,Mode14_State04_OptionsPage,S,6,4,14:04,00,00
+W,wArrowAnimTick,D51F,08,4366,Mode1C_State04_OptionsMenu,S,9,8,1C:04,01 00,00
+W,wArrowAnimTick,D51F,08,4576,Mode1C_DrawToggleArrow,S,5,5,1C:06,0B,00
+W,wArrowAnimTick,D51F,08,4581,Mode1C_DrawToggleArrow,ptr,60,5,1C:06,00 01 02 03 04 05 06 07 08 09 +1,01 02
+W,wUnusedD522,D522,00,01BC,Boot_ColdStart,S,228,228,00:00,00,00
+W,wUnusedD522,D522,00,0440,Mem_Zero,init,228,228,0F:0F,F0,00
+R,wNeighborOrPageTarget,D5D9,04,4228,PhotoPicker_MoveCursor,ptr,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,01 09 C8 D0 13 08 0B 03 00 06 +4,
+R,wNeighborOrPageTarget,D5D9,04,422C,PhotoPicker_MoveCursor,ptr,66,33,11:01 0A:01,C8 D0,
+R,wNeighborOrPageTarget,D5D9,04,423E,PhotoPicker_MoveCursor,S,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,01 09 C8 D0 13 08 0B 03 00 06 +4,
+R,wNeighborOrPageTarget,D5D9,04,4561,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
+R,wNeighborOrPageTarget,D5D9,04,4576,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
+R,wNeighborOrPageTarget,D5D9,04,45B9,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
+R,wNeighborOrPageTarget,D5D9,04,45CF,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
+R,wNeighborOrPageTarget,D5D9,04,45E4,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
+R,wNeighborOrPageTarget,D5D9,04,4626,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
+R,wNeighborOrPageTarget,D5D9,04,4937,Mode0F_State03_Selected,ptr,8,5,0F:03 0F:0D,12 02 00 10 89,
+R,wNeighborOrPageTarget,D5D9,04,493E,Mode0F_State03_Selected,S,8,5,0F:03 0F:0D,12 02 00 10 89,
+W,wNeighborOrPageTarget,D5D9,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wNeighborOrPageTarget,D5D9,04,41E8,PhotoPicker_MoveCursor,S,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,00 01 09 C8 D0 08 0B 03 13 06 +4,01 09 C8 D0 13 08 0B 03 00 06 +4
+W,wNeighborOrPageTarget,D5D9,04,4992,Mode0F_TargetLeft,S,1,1,0F:03,12,89
+W,wNeighborOrPageTarget,D5D9,04,49B1,Mode0F_TargetRight,S,2,2,0F:03 0F:0D,02 12,00 10
+W,wNeighborOrPageTarget,D5D9,04,49D0,Mode0F_TargetDown,S,5,5,0F:03,13 00,12 02
+R,wOpt1Row,D5E4,06,4670,Mode16_State03_TrickLensesMenu,S,36,1,16:03,00,
+R,wOpt1Row,D5E4,06,468A,Mode16_State03_TrickLensesMenu,S,36,1,16:03,00,
+R,wOpt1Row,D5E4,06,4ABF,Mode16_StepRow,dyn,36,1,16:03,00,
+W,wOpt1Row,D5E4,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wOpt1Row,D5E4,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+R,wOpt2Row,D5E6,06,4715,Mode16_State04_MontageMenu,S,418,2,16:04,00,
+R,wOpt2Row,D5E6,06,472F,Mode16_State04_MontageMenu,S,418,2,16:04,00,
+R,wOpt2Row,D5E6,06,474E,Mode16_State04_MontageMenu,S,2,1,16:04,00,
+R,wOpt2Row,D5E6,06,4ABF,Mode16_StepRow,dyn,418,2,16:04,00,
+W,wOpt2Row,D5E6,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wOpt2Row,D5E6,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+R,wShowMenuCursor,D5EF,03,799F,Mode0B_State02_Dispatch,S,4,4,0B:02,01 00 02,
+R,wShowMenuCursor,D5EF,03,79E3,ShowMenu_DrawCursor,S,1408,4,0B:01 13:00 0C:00 0D:00,00 01 02,
+R,wShowMenuCursor,D5EF,03,7A32,ShowMenu_MoveCursor,S,1312,4,0B:01,00 01 02,
+R,wShowMenuCursor,D5EF,03,7A63,ShowMenu_LoadHighlightTiles,S,20,4,13:00 0B:00 0B:01 0C:00 0D:00,01 00 02,
+R,wShowMenuCursor,D5EF,03,7A86,ShowMenu_LoadNormalTiles,S,16,4,13:00 0B:01 0C:00 0D:00,01 00 02,
+W,wShowMenuCursor,D5EF,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wShowMenuCursor,D5EF,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wShowMenuCursor,D5EF,03,7A56,ShowMenu_MoveCursor,S,4,3,0B:01,00 01,01 02
+R,wDoodleMenuCursor,D5F0,03,7B5B,Mode04_State02_Dispatch,S,37,36,04:02,00 01,
+R,wDoodleMenuCursor,D5F0,03,7BA2,DoodleMenu_DrawCursor,S,20822,37,04:01,00 01,
+R,wDoodleMenuCursor,D5F0,03,7BAE,DoodleMenu_MoveCursor,S,20865,37,04:01,00 01,
+R,wDoodleMenuCursor,D5F0,03,7BE5,DoodleMenu_DrawBlinker,S,10600,36,04:01,00 01,
+W,wDoodleMenuCursor,D5F0,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wDoodleMenuCursor,D5F0,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wDoodleMenuCursor,D5F0,03,7BD7,DoodleMenu_MoveCursor,S,5,2,04:01,00 01,01 00
+R,wEditMenuCursor,D5F1,03,7C71,Mode05_State00_Init,S,80,32,05:00,00,
+R,wEditMenuCursor,D5F1,03,7CBC,Mode05_State02_Dispatch,S,78,31,05:02,00 01,
+R,wEditMenuCursor,D5F1,03,7CDE,Mode05_State02_Dispatch,S,78,31,0F:00 12:00,00 01,
+R,wEditMenuCursor,D5F1,03,7DB4,EditMenu_MoveCursor,S,13810,32,05:01,01 00,
+W,wEditMenuCursor,D5F1,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wEditMenuCursor,D5F1,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wEditMenuCursor,D5F1,03,7DDD,EditMenu_MoveCursor,S,24,24,05:01,00,01
+R,wLinkMenuCursor,D5F2,03,772E,Mode06_State00_Init,S,20,12,06:00,00 01,
+R,wLinkMenuCursor,D5F2,03,77E1,Mode06_State02_Dispatch,S,14,12,06:02,00 01,
+R,wLinkMenuCursor,D5F2,03,783B,LinkMenu_DrawCursor,S,3085,12,06:01 1B:00 0E:00,00 01,
+R,wLinkMenuCursor,D5F2,03,7847,LinkMenu_MoveCursor,S,2749,12,06:01,00 01,
+R,wLinkMenuCursor,D5F2,03,789C,LinkMenu_LoadTilesSelected,S,70,12,1B:00 06:00 0E:00 06:01,00 01,
+R,wLinkMenuCursor,D5F2,03,78C3,LinkMenu_LoadTilesDeselected,S,70,12,1B:00 06:00 0E:00 06:01,00 01,
+W,wLinkMenuCursor,D5F2,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wLinkMenuCursor,D5F2,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wLinkMenuCursor,D5F2,03,7734,Mode06_State00_Init,S,20,12,06:00,00 01,01 00
+W,wLinkMenuCursor,D5F2,03,773B,Mode06_State00_Init,S,20,12,06:00,01 00,00 01
+W,wLinkMenuCursor,D5F2,03,7873,LinkMenu_MoveCursor,S,8,6,06:01,00 01,01 00
+R,wSavedDc52,D5F5,07,40AB,Mode0E_State00_Init,S,4,4,0E:00,00,
+R,wSavedDc52,D5F5,07,413E,Mode0E_State01_Handshake,S,1,1,0E:01,00,
+R,wSavedDc52,D5F5,07,41CE,Link_AnimateLamps,S,2,2,0E:01,00 01,
+R,wSavedDc52,D5F5,07,420D,Link_DrawPressAText,S,252,4,0E:01,00,
+R,wSavedDc52,D5F5,07,4231,Link_AnimateStep3,S,80,2,0E:01,00 01,
+R,wSavedDc52,D5F5,07,4283,Link_ChooseSendReceive,ptr,1,1,0E:01,00,
+R,wSavedDc52,D5F5,07,439C,Mode0E_State02_MessageStrip,S,1,1,0E:02,00,
+R,wSavedDc52,D5F5,07,43DE,Mode0E_State04_PickDone,S,1,1,0E:04,00,
+R,wSavedDc52,D5F5,07,4570,Mode0E_State06_ExchangeSetup,S,1,1,0E:06,00,
+R,wSavedDc52,D5F5,07,4606,Mode0E_State09_ExchangeDoneA,S,1,1,0E:09,00,
+R,wSavedDc52,D5F5,07,470D,Mode0E_State0B_ExchangeBarsB,S,1,1,0E:0B,01,
+R,wSavedDc52,D5F5,07,48AA,Mode0E_State11_ExchangeDoneB,S,1,1,0E:11,01,
+R,wSavedDc52,D5F5,07,516A,LinkPick_RequestRemotePage,S,1,1,0E:03,00,
+W,wSavedDc52,D5F5,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSavedDc52,D5F5,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wSavedDc52,D5F5,07,418D,.code:1ca,S,2,2,0E:01,00,00 01
+R,wPhotoArgB3,D5FB,03,63FD,Mode0C_State02_Setup,S,1,1,0C:02,00,
+W,wPhotoArgB3,D5FB,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPhotoArgB3,D5FB,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wPhotoArgB3,D5FB,03,63D4,Mode0C_State02_Setup,S,1,1,0C:02,00,00
+W,wSaveDialogScratch,D66F,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSaveDialogScratch,D66F,07,69D8,SaveDialog_Substate0_Init,S,4,4,10:09 11:07 1A:0E,00,00
+W,wSaveDialogScratch,D66F,07,6A93,SaveDialog_Substate3_FullInit,S,1,1,10:09,00,00
+R,wAnimListGuard,D680,03,56EB,AnimEd_Ctx0_Decor,dyn,25,23,12:00 12:1F 12:22,00,
+W,wAnimListGuard,D680,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wAnimListGuard,D680,02,4EC1,Settings_LoadAnim_Far,S,1,1,0E:09,00,00
+W,wAnimListGuard,D680,02,4F00,Settings_LoadAnimTranslated_Far,S,25,25,12:00 13:03,00,00
+W,wAnimTimingGuardLo,D6B1,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wAnimTimingGuardLo,D6B1,02,4ED4,Settings_LoadAnim_Far,S,1,1,0E:09,00,FF
+W,wAnimTimingGuardLo,D6B1,02,4F13,Settings_LoadAnimTranslated_Far,S,25,25,12:00 13:03,00,FF
+W,wAnimTimingGuardLo,D6B1,03,5D7B,AnimEd_ClearAll,ptr,1,1,12:0F,FF,FF
+W,wAnimTimingGuardHi,D6E1,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wAnimTimingGuardHi,D6E1,02,4ED7,Settings_LoadAnim_Far,S,1,1,0E:09,00,FF
+W,wAnimTimingGuardHi,D6E1,02,4F16,Settings_LoadAnimTranslated_Far,S,25,25,12:00 13:03,00,FF
+W,wAnimTimingGuardHi,D6E1,03,5D85,AnimEd_ClearAll,dyn,1,1,12:0F,FF,FF
+W,wCtx0Pad,D6EF,00,0440,Mem_Zero,init,1368,228,00:00,,
+R,wPlayerMusic,D7BE,03,601F,Mode13_State00_Init,S,2,2,13:00,00,
+R,wPlayerMusic,D7BE,03,6025,Mode13_State00_Init,S,2,2,13:00,00,
+R,wPlayerMusic,D7BE,03,604C,Mode13_State01_MusicSelect,S,3,1,13:01,00 01 02,
+R,wPlayerMusic,D7BE,03,6058,Mode13_State01_MusicSelect,S,3,1,13:01,01 02 03,
+W,wPlayerMusic,D7BE,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPlayerMusic,D7BE,00,2EDA,Main_Entry,S,227,227,19:00,00,00
+W,wPlayerMusic,D7BE,03,6052,Mode13_State01_MusicSelect,S,3,1,13:01,00 01 02,01 02 03
+R,wSpriteXCounter,D7BF,03,7DA2,EditMenu_DrawBlinker,ptr,16915,32,05:01 0F:00 12:00,00 01 02 03 04 05 06 07 08 09 +246,
+R,wSpriteXCounter,D7BF,03,7DA8,EditMenu_DrawBlinker,ptr,8634,32,05:01 0F:00 12:00,27 28 29 37 38 39 47 48 49 57 +237,
+W,wSpriteXCounter,D7BF,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wSpriteXCounter,D7BF,03,7DA2,EditMenu_DrawBlinker,ptr,16915,32,05:01 0F:00 12:00,00 01 02 03 04 05 06 07 08 09 +246,01 02 03 FF 00 E9 EA
+W,wShootInitFlag,D7D7,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wShootInitFlag,D7D7,06,5F62,Mode14_State00_Init,S,99,72,14:00,00 01,01
+W,wMenuPageShadow,D7D8,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wMenuPageShadow,D7D8,04,6FCA,Mode01_State00_Intro,S,180,89,01:00,00 02,00
+W,wMenuPageShadow,D7D8,04,709A,Mode01_State03_IntroPageB,S,25,25,01:03,00 02,01
+W,wMenuPageShadow,D7D8,04,7141,Mode01_State06_IntroPageC,S,57,28,01:06,00 02 01,02
+R,wExtrasLaunchFlag,D800,03,7B3F,Mode04_State02_Dispatch,S,30,30,04:02,00,
+R,wExtrasLaunchFlag,D800,03,7B78,Mode04_State02_Dispatch,S,37,36,11:02 10:02,00,
+R,wExtrasLaunchFlag,D800,04,57CD,Mode11_State02_Setup,S,67,35,11:02,00,
+R,wExtrasLaunchFlag,D800,04,5CE7,Mode11_State05_Leave,S,64,32,11:05,00,
+R,wExtrasLaunchFlag,D800,04,6111,Mode10_State02_Setup,S,7,7,10:02,00,
+R,wExtrasLaunchFlag,D800,04,6378,Mode10_State07_Leave,S,1,1,10:07,00,
+R,wExtrasLaunchFlag,D800,07,6A43,SaveDialog_StoreEditedPhoto,S,1,1,10:09,00,
+W,wExtrasLaunchFlag,D800,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wExtrasLaunchFlag,D800,04,6B53,Mode09_State03_PageLeft,S,7,7,09:03,00,00
+W,wExtrasLaunchFlag,D800,07,77DA,Mode00_State08_Launch,S,301,205,01:00 02:00 04:00 03:00 05:00 07:00 +1,00,00
+R,wSweepPos16,D816,03,787D,LinkMenu_DrawSpark,ptr,3085,12,06:01 1B:00 0E:00,,
+R,wSweepPos16,D816,03,7881,LinkMenu_DrawSpark,ptr,3085,12,06:01 1B:00 0E:00,,
+R,wSweepPos16,D816,03,7888,LinkMenu_DrawSpark,ptr,1095,12,06:01 1B:00,,
+W,wSweepPos16,D816,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wSweepPos16,D816,03,7880,LinkMenu_DrawSpark,ptr,3085,12,06:01 1B:00 0E:00,,
+W,wSweepPos16,D816,03,7884,LinkMenu_DrawSpark,ptr,3085,12,06:01 1B:00 0E:00,,
+R,wShootRapidFlag,D818,07,57E4,SpaceFever_FireShots,S,12924,23,07:02,00,
+W,wShootRapidFlag,D818,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wShootRapidFlag,D818,07,5979,SpaceFever_ResetGame,S,33,23,07:01,00,00
+R,wShootWavePass,D85E,07,5A8B,SpaceFever_ResetEnemies,ptr,41,23,07:02,00 01,
+R,wShootWavePass,D85E,07,5A8C,SpaceFever_ResetEnemies,ptr,41,23,07:02,00 01,
+R,wShootWavePass,D85E,07,5CAF,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,01 00 02,
+R,wShootWavePass,D85E,07,5CB0,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,01 00 02,
+R,wShootWavePass,D85E,07,5E53,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,03 00,
+R,wShootWavePass,D85E,07,5E54,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,03 00,
+W,wShootWavePass,D85E,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wShootWavePass,D85E,07,5A29,SpaceFever_Wave0_Init,S,29,23,07:02,01 02,00
+W,wShootWavePass,D85E,07,5A8C,SpaceFever_ResetEnemies,ptr,41,23,07:02,00 01,00 01
+W,wShootWavePass,D85E,07,5B7A,SpaceFever_Wave1_Init,S,12,12,07:02,02,00
+W,wShootWavePass,D85E,07,5CB0,SpaceFever_Wave1_RandomBase,ptr,44,12,07:02 07:03,01 00 02,01 00 02
+W,wShootWavePass,D85E,07,5D63,SpaceFever_Wave2_Init,S,8,8,07:03,04,00
+W,wShootWavePass,D85E,07,5E54,SpaceFever_Wave2_RandomBase,ptr,15,8,07:03,03 00,03 00
+W,wShootWaveEnemies,D861,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wShootWaveEnemies,D861,07,5A22,SpaceFever_Wave0_Init,S,29,23,07:02,00 02,03
+W,wShootWaveEnemies,D861,07,5B73,SpaceFever_Wave1_Init,S,12,12,07:02,03,02
+W,wShootWaveEnemies,D861,07,5D5C,SpaceFever_Wave2_Init,S,8,8,07:03,02,02
+R,wSndNoteBlinkCounter,D892,05,4B74,DjEd_DrawNoteCursorBlink,S,16178,7,1F:09 1F:0B 1F:0A,01 02 03 04 05 06 07 08 09 0A +12,
+W,wSndNoteBlinkCounter,D892,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSndNoteBlinkCounter,D892,05,4B80,DjEd_DrawNoteCursorBlink,S,16178,7,1F:09 1F:0B 1F:0A,01 02 03 04 05 06 07 08 09 0A +12,01 02 03 04 05 06 07 08 09 0A +11
+R,wSndNoteBlinkPhase,D893,05,4B50,DjEd_DrawNoteCursorBlink,S,16178,7,1F:09 1F:0B 1F:0A,00 04 08 0C 10 14 18 1C 20 24 +246,
+R,wSndNoteBlinkPhase,D893,05,4B7D,DjEd_DrawNoteCursorBlink,ptr,2014,7,1F:09 1F:0B 1F:0A,00 01 02 03 04 05 06 07 08 09 +246,
+W,wSndNoteBlinkPhase,D893,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSndNoteBlinkPhase,D893,05,4B7D,DjEd_DrawNoteCursorBlink,ptr,2014,7,1F:09 1F:0B 1F:0A,00 01 02 03 04 05 06 07 08 09 +246,04 15 02 05
+R,wPerformerFrameGroup,D894,05,4F04,DjPerf_BounceOffset,S,2114,7,1F:05,02 00 01,
+W,wPerformerFrameGroup,D894,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPerformerFrameGroup,D894,05,4D59,DjPerf_Init,S,14,7,1F:04 1F:08,00,00
+W,wPerformerFrameGroup,D894,05,4EEA,DjPerf_StepBeatPhase,S,2114,7,1F:05,02 00 01,02 00 01
+R,wPerformerBeatPhase,D895,05,4ED6,DjPerf_StepBeatPhase,S,2114,7,1F:05,04 00 05 02 01,
+W,wPerformerBeatPhase,D895,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPerformerBeatPhase,D895,05,4D5C,DjPerf_Init,S,14,7,1F:04 1F:08,00,00
+W,wPerformerBeatPhase,D895,05,4ED3,DjPerf_StepBeatPhase,S,2016,7,1F:05,04 00 05 02 01,04 00 05 02 01
+R,wPerformerBounceCounter,D896,05,4EED,DjPerf_StepBeatPhase,S,2114,7,1F:05,01 04,
+R,wPerformerBounceCounter,D896,05,4F0E,DjPerf_BounceOffset,S,2114,7,1F:05,00 03,
+W,wPerformerBounceCounter,D896,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPerformerBounceCounter,D896,05,4D5F,DjPerf_Init,S,14,7,1F:04 1F:08,00,00
+W,wPerformerBounceCounter,D896,05,4EA8,DjPerf_StepBeatPhase,S,2114,7,1F:05,00 03,01 04
+W,wPerformerBounceCounter,D896,05,4EF1,DjPerf_StepBeatPhase,S,2114,7,1F:05,01 04,00 03
+R,wPerformerTilesTarget,D898,05,512F,DjPerf_UpdatePerformerTiles,S,2114,7,1F:05,E1 EB E0 F3 DF E2 E9 EF F1,
+R,wPerformerTilesTarget,D898,05,513C,DjPerf_UpdatePerformerTiles,S,336,7,1F:05,E0 E1 EB DF E2 E9 F1 F3 EF,
+W,wPerformerTilesTarget,D898,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerTilesTarget,D898,05,4D7F,DjPerf_Init,S,14,7,1F:04 1F:08,00 EB,DD
+W,wPerformerTilesTarget,D898,05,4F94,DjPerf_PerformerScript,S,1001,7,1F:05,EB F3 E9 EF F1 E2 DD,EB F3 E9 EF F1
+W,wPerformerTilesTarget,D898,05,5355,DjPerf_AnimatorDraw,S,1078,7,1F:05,E1 E0 DF E2 E9 EB EF F1,E1 E0 DF E2
+R,wPerformerTilesTarget2,D899,05,5140,DjPerf_UpdatePerformerTiles,S,336,7,1F:05,EA EC F0 F2 F4,
+W,wPerformerTilesTarget2,D899,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerTilesTarget2,D899,05,4D82,DjPerf_Init,S,14,7,1F:04 1F:08,00 F0,DD
+W,wPerformerTilesTarget2,D899,05,4F9A,DjPerf_PerformerScript,S,1001,7,1F:05,EC F2 F0 F4 EA DD,EC F2 F0 F4 EA
+R,wPerformerTilesShown,D89A,05,4E4D,DjPerf_UpdatePose,S,2114,7,1F:05,E1 EB E0 F3 E2 DF E9 F1 EF DD,
+R,wPerformerTilesShown,D89A,05,5132,DjPerf_UpdatePerformerTiles,ptr,2114,7,1F:05,E1 EB E0 F3 E2 DF E9 F1 EF DD,
+R,wPerformerTilesShown,D89A,05,514A,DjPerf_UpdatePerformerTiles,S,2114,7,1F:05,E1 EB E0 F3 E2 DF E9 F1 EF DD,
+R,wPerformerTilesShown,D89A,05,515A,DjPerf_UpdatePerformerTiles,S,1092,7,1F:05,E1 E0 E2 DF DD,
+R,wPerformerTilesShown,D89A,05,516A,DjPerf_UpdatePerformerTiles,S,1022,7,1F:05,EB F3 E9 F1 EF,
+W,wPerformerTilesShown,D89A,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerTilesShown,D89A,05,4D85,DjPerf_Init,S,14,7,1F:04 1F:08,00 EB,DD
+W,wPerformerTilesShown,D89A,05,513F,DjPerf_UpdatePerformerTiles,ptr,336,7,1F:05,E0 E1 DF E2 EB E9 F1 F3 EF DD,E0 E1 EB DF E2 E9 F1 F3 EF
+R,wPerformerTilesShown2,D89B,05,5170,DjPerf_UpdatePerformerTiles,S,1022,7,1F:05,F2 F4 EC F0 EA,
+W,wPerformerTilesShown2,D89B,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerTilesShown2,D89B,05,4D88,DjPerf_Init,S,14,7,1F:04 1F:08,00 F0,DD
+W,wPerformerTilesShown2,D89B,05,5143,DjPerf_UpdatePerformerTiles,S,336,7,1F:05,EA EC F2 F0 F4 DD,EA EC F0 F2 F4
+R,wPerformerUpdateFrames,D89C,05,5125,DjPerf_UpdatePerformerTiles,S,2114,7,1F:05,00 01 02 03 04 05 06 07 08 09 +12,
+R,wPerformerUpdateFrames,D89C,05,5135,DjPerf_UpdatePerformerTiles,S,469,7,1F:05,04 07 03 06 02 08 01 0F 16,
+W,wPerformerUpdateFrames,D89C,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerUpdateFrames,D89C,05,5129,DjPerf_UpdatePerformerTiles,S,2114,7,1F:05,00 01 02 03 04 05 06 07 08 09 +12,01 02 03 04 05 06 07 08 09 0A +12
+W,wPerformerUpdateFrames,D89C,05,5147,DjPerf_UpdatePerformerTiles,S,336,7,1F:05,04 07 06 08 0F 16,00
+R,wPerformerPose,D89D,05,4E84,DjPerf_ScrollPerformer,S,2114,7,1F:05,02 01 00,
+R,wPerformerPose,D89D,05,4E9D,DjPerf_StepBeatPhase,S,2114,7,1F:05,02 01 00,
+R,wPerformerPose,D89D,05,4EDC,DjPerf_StepBeatPhase,S,2114,7,1F:05,02 01 00,
+R,wPerformerPose,D89D,05,4F87,DjPerf_PerformerScript,ptr,1001,7,1F:05,01 02 00,
+W,wPerformerPose,D89D,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerPose,D89D,05,4D44,DjPerf_Init,S,14,7,1F:04 1F:08,00 02,01
+W,wPerformerPose,D89D,05,4E5E,DjPerf_UpdatePose,S,1071,7,1F:05,02 01 00,02
+W,wPerformerPose,D89D,05,4E64,DjPerf_UpdatePose,S,28,7,1F:05,01,01
+W,wPerformerPose,D89D,05,4E7C,DjPerf_UpdatePose,S,1015,7,1F:05,01 02 00,01 00 02
+R,wPerformerBeatAcc,D89E,05,4E6E,DjPerf_UpdatePose,ptr,1015,7,1F:05,03 02 04 01 00 06 07 05,
+W,wPerformerBeatAcc,D89E,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerBeatAcc,D89E,05,4E71,DjPerf_UpdatePose,ptr,1015,7,1F:05,03 02 04 01 00 06 07 05,03 02 04 01 00 06 07 05
+R,wAnimSlotTimer,D89F,05,535C,DjPerf_AnimatorDraw,ptr,7420,7,1F:05,,
+W,wAnimSlotTimer,D89F,00,0440,Mem_Zero,init,912,228,00:00,,
+W,wAnimSlotTimer,D89F,05,50A5,.code:4c,S,35,7,1F:05,,
+W,wAnimSlotTimer,D89F,05,537F,DjPerf_AnimatorDraw,ptr,7420,7,1F:05,,
+W,wAnimSlotTimer,D89F,05,549B,DjPerf_Input,S,35,7,1F:05,,
+R,wAnimSlotFrame,D8A3,05,508C,.code:4c,S,1113,7,1F:05,,
+R,wAnimSlotFrame,D8A3,05,5183,DjPerf_AnimateSpeakerBlink,S,917,7,1F:05,,
+R,wAnimSlotFrame,D8A3,05,519C,DjPerf_AnimateSpeakerBlink,S,1197,7,1F:05,,
+R,wAnimSlotFrame,D8A3,05,52FD,DjPerf_Animator,dyn,7420,7,1F:05,,
+R,wAnimSlotFrame,D8A3,05,5336,DjPerf_AnimatorDraw,ptr,7420,7,1F:05,,
+R,wAnimSlotFrame,D8A3,05,536C,DjPerf_AnimatorDraw,ptr,651,7,1F:05,,
+W,wAnimSlotFrame,D8A3,00,0440,Mem_Zero,init,912,228,00:00,,
+W,wAnimSlotFrame,D8A3,05,50A1,.code:4c,S,35,7,1F:05,,
+W,wAnimSlotFrame,D8A3,05,518D,DjPerf_AnimateSpeakerBlink,S,154,7,1F:05,,
+W,wAnimSlotFrame,D8A3,05,51A6,DjPerf_AnimateSpeakerBlink,S,154,7,1F:05,,
+W,wAnimSlotFrame,D8A3,05,5307,DjPerf_Animator,dyn,14,7,1F:05,,
+W,wAnimSlotFrame,D8A3,05,536E,DjPerf_AnimatorDraw,ptr,651,7,1F:05,,
+W,wAnimSlotFrame,D8A3,05,5372,DjPerf_AnimatorDraw,ptr,217,7,1F:05,,
+W,wAnimSlotFrame,D8A3,05,5497,DjPerf_Input,S,35,7,1F:05,,
+R,wAnimSlotX,D8A7,05,5346,DjPerf_AnimatorDraw,ptr,7420,7,1F:05,,
+W,wAnimSlotX,D8A7,00,0440,Mem_Zero,init,912,228,00:00,,
+W,wAnimSlotX,D8A7,05,5312,DjPerf_Animator,dyn,7420,7,1F:05,,
+R,wAnimSlotY,D8AB,05,534B,DjPerf_AnimatorDraw,ptr,7420,7,1F:05,,
+W,wAnimSlotY,D8AB,00,0440,Mem_Zero,init,912,228,00:00,,
+W,wAnimSlotY,D8AB,05,531B,DjPerf_Animator,dyn,7420,7,1F:05,,
+R,wAnimSlotDone,D8AF,05,5093,.code:4c,S,938,7,1F:05,,
+R,wAnimSlotDone,D8AF,05,50B9,.code:4c,S,210,7,1F:05,,
+W,wAnimSlotDone,D8AF,00,0440,Mem_Zero,init,912,228,00:00,,
+W,wAnimSlotDone,D8AF,05,50A8,.code:4c,S,35,7,1F:05,,
+W,wAnimSlotDone,D8AF,05,50C3,.code:4c,S,35,7,1F:05,,
+W,wAnimSlotDone,D8AF,05,5330,DjPerf_AnimatorDraw,ptr,7420,7,1F:05,,
+W,wAnimSlotDone,D8AF,05,5377,DjPerf_AnimatorDraw,ptr,217,7,1F:05,,
+R,wPerformerSpeakingIcon,D8B8,05,52D5,DjPerf_DrawSpeakingIcon,S,2114,7,1F:05,01 00,
+W,wPerformerSpeakingIcon,D8B8,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerformerSpeakingIcon,D8B8,05,4F19,DjPerf_PerformerScript,S,2114,7,1F:05,01 00,00
+W,wPerformerSpeakingIcon,D8B8,05,5089,.code:4c,S,1113,7,1F:05,00,01
+W,wPerformerSpeakingIcon,D8B8,05,5488,DjPerf_Input,S,154,7,1F:05,01 00,01
+W,wPerfChannelBlink,D8BA,00,0440,Mem_Zero,init,684,228,00:00,,
+R,wPerfTempoAtRelease,D8BD,05,52A0,DjPerf_DrawTempoNeedle,S,2114,7,1F:05,78,
+R,wPerfTempoAtRelease,D8BD,05,52B6,DjPerf_DrawTempoNeedle,S,2114,7,1F:05,78,
+W,wPerfTempoAtRelease,D8BD,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerfTempoAtRelease,D8BD,05,4D8E,DjPerf_Init,S,14,7,1F:04 1F:08,00 78,78
+R,wPerfLevelAtRelease,D8BE,05,52ED,DjPerf_DrawLevelSlider,S,2114,7,1F:05,00,
+W,wPerfLevelAtRelease,D8BE,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerfLevelAtRelease,D8BE,05,4D94,DjPerf_Init,S,14,7,1F:04 1F:08,00,00
+R,wPerfEqualiserPhase,D8BF,05,51DD,DjPerf_Equaliser,ptr,2114,7,1F:05,00 02 01 03,
+W,wPerfEqualiserPhase,D8BF,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPerfEqualiserPhase,D8BF,05,51E0,DjPerf_Equaliser,ptr,2114,7,1F:05,00 02 01 03,00 02 01 03
+R,wPerfPausedIcon,D8C1,05,5288,DjPerf_DrawPlayIcon,S,2114,7,1F:05,00,
+W,wPerfPausedIcon,D8C1,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPerfPausedIcon,D8C1,05,4D6E,DjPerf_Init,S,14,7,1F:04 1F:08,00,00
+W,wPerfPausedAtStart,D8C2,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPerfPausedAtStart,D8C2,05,4D71,DjPerf_Init,S,14,7,1F:04 1F:08,00,00
+W,wPerfStartHold,D8C3,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wUnusedD8CB,D8CB,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wUnusedD900,D900,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+R,wModRandPhase,D905,00,151C,DjSnd_ModulateSoundII,S,16000,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wModRandPhase,D905,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wModRandPhase,D905,00,154F,DjSnd_ModulateSoundII,S,14764,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wUnusedD908,D908,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wUnusedD90A,D90A,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+R,wRestCounters,D91B,00,116E,DjSnd_StepSoundI,S,618,7,1F:09 1F:0B 1F:0A 1F:05,,
+R,wRestCounters,D91B,00,12F5,DjSnd_StepNoise,S,153,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wRestCounters,D91B,00,0440,Mem_Zero,init,684,228,00:00,,
+W,wRestCounters,D91B,00,1182,DjSnd_StepSoundI,S,618,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wRestCounters,D91B,00,11CE,DjSnd_StepSoundI,S,1840,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wRestCounters,D91B,00,128A,DjSnd_StepSoundII,S,2458,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wRestCounters,D91B,00,1309,DjSnd_StepNoise,S,153,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wRestCounters,D91B,00,1346,DjSnd_StepNoise,S,2305,7,1F:09 1F:0B 1F:0A 1F:05,,
+W,wUnusedD91E,D91E,00,0440,Mem_Zero,init,3648,228,00:00,,
+W,wUiSfxRequest,D92E,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wUiSfxRequest,D92E,05,67A6,DjS1_Field09_NoteGrid,S,7,3,1F:09,05 00,04
+W,wUiSfxRequest,D92E,05,68C7,DjS1_Field0B_StereoEdit,S,7,3,1F:09,04,05
+W,wUiSfxRequest,D92E,05,72C7,DjNs_Field05_NoteGrid,S,6,2,1F:0B,05 00,04
+W,wUiSfxRequest,D92E,05,7421,DjNs_Field07_StereoEdit,S,6,2,1F:0B,04,05
+W,wUnusedD931,D931,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wUnusedD936,D936,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wUnusedD93A,D93A,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+R,wGfxDoubleBufferBit,D9D4,05,61C6,DjTitle_LoadPerformerGfx,S,7,7,1F:04,00,
+W,wGfxDoubleBufferBit,D9D4,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wGfxDoubleBufferBit,D9D4,05,61CC,DjTitle_LoadPerformerGfx,S,7,7,1F:04,00,01
+R,wLinkAnimTickA,D9FA,07,42D4,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+R,wLinkAnimTickA,D9FA,07,42EA,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wLinkAnimTickA,D9FA,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wLinkAnimTickA,D9FA,07,4044,Mode0E_State00_Init,S,4,4,0E:00,,
+W,wLinkAnimTickA,D9FA,07,4047,Mode0E_State00_Init,S,4,4,0E:00,,
+W,wLinkAnimTickA,D9FA,07,41DF,Link_AnimateLamps,S,1,1,0E:01,,
+W,wLinkAnimTickA,D9FA,07,41F1,Link_AnimateLamps,S,1,1,0E:01,,
+W,wLinkAnimTickA,D9FA,07,42E3,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wLinkAnimTickA,D9FA,07,42F9,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+R,wLinkAnimIdxA,D9FC,07,42D0,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+R,wLinkAnimIdxA,D9FC,07,42E6,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wLinkAnimIdxA,D9FC,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wLinkAnimIdxA,D9FC,07,4050,Mode0E_State00_Init,S,4,4,0E:00,,
+W,wLinkAnimIdxA,D9FC,07,4055,Mode0E_State00_Init,S,4,4,0E:00,,
+W,wLinkAnimIdxA,D9FC,07,41D6,Link_AnimateLamps,S,1,1,0E:01,,
+W,wLinkAnimIdxA,D9FC,07,41E8,Link_AnimateLamps,S,1,1,0E:01,,
+W,wLinkAnimIdxA,D9FC,07,42DF,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wLinkAnimIdxA,D9FC,07,42F5,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+R,wLinkAnimTickB,D9FE,07,4300,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+R,wLinkAnimTickB,D9FE,07,4316,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wLinkAnimTickB,D9FE,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wLinkAnimTickB,D9FE,07,404A,Mode0E_State00_Init,S,4,4,0E:00,,
+W,wLinkAnimTickB,D9FE,07,404D,Mode0E_State00_Init,S,4,4,0E:00,,
+W,wLinkAnimTickB,D9FE,07,41E2,Link_AnimateLamps,S,1,1,0E:01,,
+W,wLinkAnimTickB,D9FE,07,41F4,Link_AnimateLamps,S,1,1,0E:01,,
+W,wLinkAnimTickB,D9FE,07,430F,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wLinkAnimTickB,D9FE,07,4325,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
+W,wUnusedLinkBufXor,DA0D,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wUnusedDA14,DA14,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wTagOwnerId,DA5B,00,0440,Mem_Zero,init,912,228,00:00,,
+W,wTagOwnerId,DA5B,02,4E84,Photo_LoadTagFields_Far,ptr,12,3,09:0B 0A:0D 1C:08,,
+R,wTagCommentTail,DA8B,09,4627,CommentCard_DrawComment_Far,dyn,9,3,09:0C 0A:0E 1C:08,,
+W,wTagCommentTail,DA8B,00,0440,Mem_Zero,init,684,228,00:00,,
+W,wTagCommentTail,DA8B,02,4E84,Photo_LoadTagFields_Far,dyn,9,3,09:0B 0A:0D 1C:08,,
+R,wStatsSpare,DAA8,02,4BCD,Counters_Store_Far,dyn,276,28,14:03 1D:07 1F:00 00:00 20:00 21:00 +2,,
+W,wStatsSpare,DAA8,00,0440,Mem_Zero,init,684,228,00:00,,
+W,wStatsSpare,DAA8,02,504C,Counters_Load_Far,dyn,828,152,14:00 11:02 07:00 1C:02 18:01 1D:07 +11,,
+W,wPrinterPrevStatus,DBD0,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wPrinterPrevStatus,DBD0,00,18C6,Prn_ReceiveStatus,S,581,18,1D:07 1F:09 1D:04 1D:06 1D:02 1D:05 +2,,
+W,wPrinterPrevStatus,DBD0,00,18CD,Prn_ReceiveStatus,S,572,18,1D:07 1F:09 1D:04 1D:06 1D:02 1D:05 +2,,
+W,wUnusedDBD2,DBD2,00,0440,Mem_Zero,init,5928,228,00:00,,
+W,wPrinterLenTable,DBEC,00,0440,Mem_Zero,init,4104,228,00:00,,
+W,wPrinterDc0cTable,DBFE,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wPrnBandCompFlags,DC00,00,0440,Mem_Zero,init,1824,228,00:00,,
+R,wPrnCompEnable,DC0B,00,1A1B,Prn_SendData,S,133,8,1D:04 1F:09,00,
+W,wPrnCompEnable,DC0B,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPrnBandPtrCopy,DC21,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wPrnBandPtrCopy,DC21,00,1A0E,Prn_SendData,S,133,8,1D:04 1F:09,,
+W,wPrnBandPtrCopy,DC21,00,1A12,Prn_SendData,S,133,8,1D:04 1F:09,,
+W,wPrnIrqSeen,DC2A,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wPrnIrqSeen,DC2A,00,0F22,Prn_SerialIrq,S,91002,18,1D:04 1F:09 1D:07 1D:06 1D:02 1D:05 +2,01 00,01
+W,wPrnIrqSeen,DC2A,00,192B,Prn_ClearTxFlags,S,26,17,1D:02 1D:07 1F:09,01,00
+W,wPrnUnused39,DC39,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wPrnUnused3f,DC3F,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wLnkFlag55,DC5D,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wLnkFlag55,DC5D,00,2D14,Link_Irq_Abort,S,2,2,0E:08 0E:10,00,00
+W,wLnkFlag55,DC5D,00,2DAC,Link_Init,S,4,4,0E:01,00,00
+W,wUnusedDc5fDcff,DC5F,00,0440,Mem_Zero,init,36708,228,00:00,,
+W,wSndUnused00,DD00,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSndUnused00,DD00,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndUnused07,DD07,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSndUnused07,DD07,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndU09,DD09,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wSndU09,DD09,1F,52A3,Snd_StopSong,S,392,227,19:00 14:00 1A:02 07:02 1A:04 1F:04 +8,,
+W,wSndU09,DD09,1F,52A6,Snd_StopSong,S,392,227,19:00 14:00 1A:02 07:02 1A:04 1F:04 +8,,
+W,wSndU09,DD09,1F,5347,Snd_Init,init,456,228,00:00,,
+W,wSndUnused0b,DD0B,00,0440,Mem_Zero,init,456,228,00:00,,
+W,wSndUnused0b,DD0B,1F,5347,Snd_Init,init,456,228,00:00,,
+R,wSndFreeze,DD0D,1F,54A4,Snd_Op9D_SetInstrument,S,15743,227,03:01 19:03 19:01 00:01 01:01 01:00 +169,00,
+W,wSndFreeze,DD0D,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wSndFreeze,DD0D,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndU0e,DD0E,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wSndU0e,DD0E,1F,52A0,Snd_StopSong,S,392,227,19:00 14:00 1A:02 07:02 1A:04 1F:04 +8,00,00
+W,wSndU0e,DD0E,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndUnused0f,DD0F,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wSndUnused0f,DD0F,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndUnused52,DD52,00,0440,Mem_Zero,init,684,228,00:00,,
+W,wSndUnused52,DD52,1F,5347,Snd_Init,init,684,228,00:00,,
+W,wSndU55,DD55,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wSndU55,DD55,1F,5299,Snd_StopSong,S,392,227,19:00 14:00 1A:02 07:02 1A:04 1F:04 +8,00 01,01
+W,wSndU55,DD55,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndU55,DD55,1F,53B5,Snd_PanReset,S,2134,227,00:01 19:01 01:00 11:01 05:00 04:00 +74,01,01
+W,wSndUnused56,DD56,00,0440,Mem_Zero,init,1824,228,00:00,,
+W,wSndUnused56,DD56,1F,5347,Snd_Init,init,1824,228,00:00,,
+W,wSndU5e,DD5E,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wSndU5e,DD5E,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndU5e,DD5E,1F,5375,Snd_Tick_MusicHold,S,21097,7,1F:09 1F:0B 1F:0A 1F:05 1F:04 1F:08,00,00
+W,wSndUnused5f,DD5F,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wSndUnused5f,DD5F,1F,5347,Snd_Init,init,228,228,00:00,00,FF
+W,wSndUnused6a,DD6A,00,0440,Mem_Zero,init,1368,228,00:00,,
+W,wSndUnused6a,DD6A,1F,5347,Snd_Init,init,1368,228,00:00,,
+W,wSndUnused80,DD80,00,0440,Mem_Zero,init,29184,228,00:00,,
+W,wSndUnused80,DD80,1F,5347,Snd_Init,init,29184,228,00:00,,
+W,hPrevOrSign,FF8F,00,0440,Mem_Zero,init,228,228,00:00,FF,00
+R,hSarScratch,FF92,0A,4BAF,Cam_ORegister_SAR_Search,S,1589,227,00:00,00 FF,
+W,hSarScratch,FF92,00,0440,Mem_Zero,init,228,228,00:00,00,00
+W,hSarScratch,FF92,0A,4B70,Cam_ORegister_SAR_Search,S,2497,227,00:00,00 FF,00
+W,hSarScratch,FF92,0A,4B93,Cam_ORegister_SAR_Search,S,6129,227,00:00,FF 00,FF
+W,hStatSeenFlag,FFCA,00,0350,Irq_Stat_Exit,S,792993,227,19:03 09:01 11:04 11:01 14:01 09:02 +136,01 00,01
+W,hStatSeenFlag,FFCA,00,0440,Mem_Zero,init,228,228,00:00,00,00
+W,hCopyReqSrcDstCnt,FFCB,00,0440,Mem_Zero,init,1140,228,00:00,,
+R,hCopyReqFlag,FFD0,00,07EC,Irq_VBlank_CopyRequest,S,793018,228,19:03 19:00 01:01 09:01 00:01 11:04 +303,00,
+W,hCopyReqFlag,FFD0,00,01C3,Boot_ColdStart,S,228,228,00:00,00,00
+W,hCopyReqFlag,FFD0,00,0440,Mem_Zero,init,228,228,00:00,00,00

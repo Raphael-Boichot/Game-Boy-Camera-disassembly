@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """bgb_link.py (two real BGB instances, photo exchange of README section 14) with *logging watchpoints* on the receiver: the hits of every -wp item are counted in
 the debug-message file of that instance (BGB writes one line per hit and goes on).  The sender and the receiver get private BGB folders (debugmsg.txt is per folder).
-usage: bgb_link_wp.py ROM SAV_SENDER SAV_RECEIVER OUTPREFIX WATCHPOINTS [WAIT_FRAMES_AFTER_CONFIRM]
+usage: bgb_link_wp.py ROM SAV_SENDER SAV_RECEIVER OUTPREFIX WATCHPOINTS [WAIT_FRAMES_AFTER_CONFIRM]   (env WPS_SENDER: the same kind of list for the sender; the logs stay in /home/claude/bgbl_{sender,receiver}/debugmsg.txt)
   WATCHPOINTS  BGB -wp list of the receiver, e.g. '02:46E3//x/JP,02:46E6-02:46E8//r/T46E6' (ADDRESS[-ADDRESS]//drwx/NAME; see bgb_wp_probe.py)
 Example (L3 pass of 2026-10-14, saves link_protocol/saves/flow1_A_sender_before.sav and flow1_B_receiver_before.sav): the receiver executes the jp at 02:46E3 of
 Photo_SaveReceived_Far and never reads 02:46E6-46E8 (3 bytes 00 C0 00)."""
@@ -33,8 +33,8 @@ def start(role, sav, seq, extra):
            '-rom', rom, '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav', '-setting', 'DebugMsgFile=1'] + extra
     return subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 t0 = time.time()
-pa = start('sender', sa, SEND, ['-listen', '127.0.0.1:8765']); time.sleep(4)
-pb = start('receiver', sb, RECV, ['-connect', '127.0.0.1:8765', '-wp', WPS])
+pa = start('sender', sa, SEND, ['-listen', '127.0.0.1:8765'] + (['-wp', os.environ['WPS_SENDER']] if os.environ.get('WPS_SENDER') else [])); time.sleep(4)
+pb = start('receiver', sb, RECV, ['-connect', '127.0.0.1:8765', '-wp', WPS])      # (env WPS_SENDER = a -wp list for the sender too, see the line above)
 for p in (pa, pb):
     try: p.wait(timeout=600)
     except subprocess.TimeoutExpired: p.kill(); print('killed (timeout)')

@@ -66,19 +66,19 @@ d003,1,wRunPlayerRunCounter,09,C,"run counter (A presses), index of the jump / s
 d004,1,wRunPlayerTickStep,09,C,tick step passed to Run_DrawMeta
 d005,1,wRunPlayerJumpHeight,09,C,jump height
 d007,1,wRunPlayerAirIndex,09,C,index 0-31 of the air tables
-d008,1,wRunPlayerStepSize,09,I,step stored at every A press (table 09:67BE)
+d008,1,wRunPlayerStepSize,09,C,step stored at every A press (table 09:67BE)
 d009,1,wRunPlayerPose,09,C,pose / state (bit 7 ignored)
 d00a,1,wRunPlayerAnimCounter,09,C,animation counter
 d00e,2,wRunChickPos,09,C,"second runner (chick) position, 16 bit"
 d010,1,wRunChickSpeed,09,C,chick speed
 d012,1,wRunChickAnimStep,09,C,chick animation list step
 d014,1,wRunChickState,09,C,chick animation state
-d015,1,wRunChickAnimCounter,09,I,chick animation counter
+d015,1,wRunChickAnimCounter,09,C,chick animation counter
 d017,2,wRunMolePos,09,C,"third runner (mole) position, 16 bit"
 d019,1,wRunMoleSpeed,09,C,mole speed
 d01b,1,wRunMoleAnimStep,09,C,mole animation list step
 d01d,1,wRunMoleState,09,C,mole animation state
-d01e,1,wRunMoleAnimCounter,09,I,mole animation counter
+d01e,1,wRunMoleAnimCounter,09,C,mole animation counter
 d020,2,wRunCameraPos,09,C,"camera, 16 bit"
 d024,2,wRunRunner3Pos,09,C,"fourth runner position, 16 bit"
 d026,1,wRunRunner3Speed,09,C,fourth runner signed speed
@@ -91,8 +91,8 @@ d048,1,wRunFlagHeight,09,C,flag height 0-$74 (Run_FlagHeight)
 d049,1,wRunFlagLevel,09,C,flag level 0-6
 d04a,1,wRunFlagCounter,09,C,"flag counter, index of the flag tables"
 d04b,1,wRunFlagState,09,C,flag animation state
-d04f,1,wRunRaceCounter,09,I,race counter incremented at the end of the countdown
-d050,1,wRunPlayerLeads,09,I,set when the player leads by $A0
+d04f,1,wRunRaceCounter,09,C,race counter incremented at the end of the countdown
+d050,1,wRunPlayerLeads,09,C,set when the player leads by $A0
 d052,60,wRunConfetti,09,C,"10 confetti records of 6 bytes {x, dx, y, dy, frame, ...}"
 d080,56,wCollisionMask2,07;00:1668,C,[7] collision mask 2
 d200,20,wPrintAnimPacket,08,C,Print-animation packet buffer
@@ -163,12 +163,12 @@ d5eb,1,wOpt4Cursor,*,C,opt4_cursor
 d5ec,1,wYesnoH,*,C,yesno_h
 d5ed,1,wCopyPhotoIdxA,*,C,copy_photo_idx_a
 d5ee,1,wPhotoNumberSel,*,C,photo_number_sel
-d5ef,1,wRegCursorA,*,I,reg_cursor_a
-d5f0,1,wRegCursorB,*,I,reg_cursor_b
-d5f1,1,wRegCursorC,*,I,reg_cursor_c
-d5f2,1,wRegCursorD,*,?,reg_cursor_d
+d5ef,1,wShowMenuCursor,*,C,show_menu_cursor
+d5f0,1,wDoodleMenuCursor,*,C,doodle_menu_cursor
+d5f1,1,wEditMenuCursor,*,C,edit_menu_cursor
+d5f2,1,wLinkMenuCursor,*,C,link_menu_cursor
 d5f3,1,wCopyPhotoIdxB,*,C,copy_photo_idx_b
-d5f5,1,wSavedDc52,*,I,saved_dc52
+d5f5,1,wSavedDc52,*,C,saved_dc52
 d5f6,1,wCopyPhotoIdxC,*,C,copy_photo_idx_c
 d5f7,1,wCopyPhotoIdxD,*,C,copy_photo_idx_d
 d5f8,1,wCopyPhotoIdxE,*,C,copy_photo_idx_e
@@ -233,7 +233,7 @@ d67b,1,wSliderTimer,*,C,slider_timer
 d67c,1,wSliderTarget,*,C,slider_target
 d67d,1,wSliderPos,*,C,slider_pos
 d67e,1,wSliderRedraw,*,C,slider_redraw
-d680,1,wAnimListGuard,*,U,anim_list_guard
+d680,1,wAnimListGuard,*,C,anim_list_guard
 d681,47,wAnimList,*,C,anim_list[47]
 d6b0,1,wAnimLoopFlag,*,C,anim_loop_flag
 d6b1,1,wAnimTimingGuardLo,*,I,anim_timing_guard_lo
@@ -272,8 +272,8 @@ d75d,32,wSparkY,*,C,spark_y[16]
 d77d,32,wSparkVx,*,C,spark_vx[16]
 d79d,32,wSparkVy,*,C,spark_vy[16]
 d7bd,1,wPlayerPause,*,C,player_pause
-d7be,1,wPlayerMusic,*,I,player_music
-d7bf,1,wSpriteXCounter,*,I,sprite_x_counter
+d7be,1,wPlayerMusic,*,C,player_music
+d7bf,1,wSpriteXCounter,*,C,sprite_x_counter
 d7c0,1,wBlinkHold,*,C,blink_hold
 d7c1,1,wBorderNumber,*,C,border_number
 d7c2,2,wActorFrame,*,C,actor_frame[2]
@@ -334,7 +334,7 @@ d812,1,wPrintMarkerBlinkA,*,C,`print_marker_blink_a`
 d813,1,wPrintMarkerBlinkB,*,C,`print_marker_blink_b`
 d814,1,wPrintAbortFlag,*,C,`print_abort_flag`
 d815,1,wTitleSceneId,*,C,`title_scene_id`
-d816,2,wSweepPos16,*,I,`sweep_pos16`
+d816,2,wSweepPos16,*,C,`sweep_pos16`
 d818,1,wShootRapidFlag,*,U,`shoot_rapid_flag`
 d819,1,wShootPlayerX,*,C,`shoot_player_x`
 d81a,1,wShootFireCount,*,C,`shoot_fire_count`
@@ -355,10 +355,10 @@ d84a,3,wShootEnemyState,*,C,`shoot_enemy_state[3]`
 d84d,1,wShootBulletRr,*,C,`shoot_bullet_rr`
 d84e,8,wShootBulletX,*,C,`shoot_bullet_x[8]`
 d856,8,wShootBulletY,*,C,`shoot_bullet_y[8]`
-d85e,1,wShootWavePass,*,I,`shoot_wave_pass`
+d85e,1,wShootWavePass,*,C,`shoot_wave_pass`
 d85f,1,wShootFinishedMask,*,C,`shoot_finished_mask`
 d860,1,wShootStartDelay,*,C,`shoot_start_delay`
-d861,1,wShootWaveEnemies,*,?,`shoot_wave_enemies`
+d861,1,wShootWaveEnemies,*,U,`shoot_wave_enemies`
 d862,1,wShootWaveDone,*,C,`shoot_wave_done`
 d863,1,wShootWaveState,*,C,`shoot_wave_state`
 d864,1,wShootBulletPairToggle,*,C,`shoot_bullet_pair_toggle`
@@ -377,33 +377,33 @@ d88e,1,wShootRound,*,C,`shoot_round`
 d88f,1,wShootBossVariant,*,C,`shoot_boss_variant`
 d890,1,wMode20Caller,*,C,`mode20_caller`
 d891,1,wSndCursorPopFrames,*,C,cursor-sprite pop-in frame counter
-d892,1,wSndNoteBlinkCounter,*,I,note-cursor blink counter
-d893,1,wSndNoteBlinkPhase,*,I,note-cursor blink phase
-d894,1,wPerformerFrameGroup,*,I,performer animation: frame group
-d895,1,wPerformerBeatPhase,*,I,performer animation: beat phase (0..5)
+d892,1,wSndNoteBlinkCounter,*,C,note-cursor blink counter
+d893,1,wSndNoteBlinkPhase,*,C,note-cursor blink phase
+d894,1,wPerformerFrameGroup,*,C,performer animation: frame group
+d895,1,wPerformerBeatPhase,*,C,performer animation: beat phase (0..5)
 d896,1,wPerformerBounceCounter,*,I,performer animation: bounce counter
 d897,1,wPerformerScriptId,*,C,"performer animation script id (0 = idle, 1..8)"
-d898,1,wPerformerTilesTarget,*,I,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
-d899,1,wPerformerTilesTarget2,*,I,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
-d89a,1,wPerformerTilesShown,*,I,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
-d89b,1,wPerformerTilesShown2,*,I,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
-d89c,1,wPerformerUpdateFrames,*,I,frame counter for D898->D89A update (min 4 frames)
-d89d,1,wPerformerPose,*,I,pose (0..2)
-d89e,1,wPerformerBeatAcc,*,I,beat accumulator (&7)
-d89f,4,wAnimSlotTimer,*,I,animator slots: frame timers
-d8a3,4,wAnimSlotFrame,*,I,animator slots: frame index
-d8a7,4,wAnimSlotX,*,I,animator slots: sprite X
-d8ab,4,wAnimSlotY,*,I,animator slots: sprite Y
+d898,1,wPerformerTilesTarget,*,C,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
+d899,1,wPerformerTilesTarget2,*,C,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
+d89a,1,wPerformerTilesShown,*,C,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
+d89b,1,wPerformerTilesShown2,*,C,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
+d89c,1,wPerformerUpdateFrames,*,C,frame counter for D898->D89A update (min 4 frames)
+d89d,1,wPerformerPose,*,C,pose (0..2)
+d89e,1,wPerformerBeatAcc,*,C,beat accumulator (&7)
+d89f,4,wAnimSlotTimer,*,C,animator slots: frame timers
+d8a3,4,wAnimSlotFrame,*,C,animator slots: frame index
+d8a7,4,wAnimSlotX,*,C,animator slots: sprite X
+d8ab,4,wAnimSlotY,*,C,animator slots: sprite Y
 d8af,4,wAnimSlotDone,*,I,animator slots: finished flags (`$D8B2` = slot 3)
 d8b3,1,wPerfControlCursor,*,C,performance-screen control cursor 0..4
 d8b4,3,wPerfChannelState,*,C,channel states SOUND I / SOUND II / NOISE
 d8b7,1,wPerfLevel,*,C,performance-screen level 0..8 (control 4) = sound effect SE 1..9
-d8b8,1,wPerformerSpeakingIcon,*,I,"performer ""speaking"" icon flag"
+d8b8,1,wPerformerSpeakingIcon,*,C,"performer ""speaking"" icon flag"
 d8b9,1,wPerfNr51Mask,*,C,NR51 mask (channel enables)
 d8ba,3,wPerfChannelBlink,*,I,per-channel indicator blink toggle
 d8bd,1,wPerfTempoAtRelease,*,I,tempo value at last button release
 d8be,1,wPerfLevelAtRelease,*,I,level value at last button release
-d8bf,1,wPerfEqualiserPhase,*,I,equaliser animation phase (&3)
+d8bf,1,wPerfEqualiserPhase,*,C,equaliser animation phase (&3)
 d8c0,1,wPerfPaused,*,C,paused flag (bit 0)
 d8c1,1,wPerfPausedIcon,*,I,copy of D8C0 for the play/pause icon
 d8c2,1,wPerfPausedAtStart,*,I,D8C0 saved at Start press
@@ -452,13 +452,13 @@ d91b,3,wRestCounters,*,I,ticks since last note (rest counters) SOUND I / II / NO
 d91e,16,wUnusedD91E,*,U,(unreferenced block before the sound-effect request)
 d92e,1,wUiSfxRequest,*,U,UI sound-effect request (1..8) written by the editor
 d92f,2,wNr21Nr22Shadow,*,C,NR21 / NR22 shadows (SOUND I)
-d931,1,wUnusedD931,*,I,"(NR23 slot of the register-shadow array, unused)"
+d931,1,wUnusedD931,*,U,"(NR23 slot of the register-shadow array, unused)"
 d932,1,wNr24ControlShadow,*,C,NR24 control bits (SOUND I)
 d933,3,wNr30Nr32Shadow,*,C,NR30 / NR31 / NR32 shadows (SOUND II)
-d936,1,wUnusedD936,*,I,"(NR33 slot of the register-shadow array, unused)"
+d936,1,wUnusedD936,*,U,"(NR33 slot of the register-shadow array, unused)"
 d937,1,wNr34ControlShadow,*,C,NR34 control bits (SOUND II)
 d938,2,wNr41Nr42Shadow,*,C,NR41 / NR42 shadows (NOISE)
-d93a,1,wUnusedD93A,*,I,"(NR43 slot of the register-shadow array, unused)"
+d93a,1,wUnusedD93A,*,U,"(NR43 slot of the register-shadow array, unused)"
 d93b,1,wNr44ControlShadow,*,C,NR44 control bits (NOISE)
 d93c,1,wNr51PanShadow,*,C,NR51 pan shadow
 d93d,2,wSound1DutyLen,*,C,"**SOUND I**: duty (0..2), length index"
@@ -511,9 +511,9 @@ d9f6,1,wMenuAnimCTick,*,C,`menu_anim_c_tick`
 d9f7,1,wMenuAnimCPhase,*,C,`menu_anim_c_phase`
 d9f8,1,wPickCharacter21,*,C,`pick_character_21`
 d9f9,1,wPickGfxToggle21,*,C,`pick_gfx_toggle_21`
-d9fa,2,wLinkAnimTickA,*,I,`link_anim_tick_a[2]`
-d9fc,2,wLinkAnimIdxA,*,I,`link_anim_idx_a[2]`
-d9fe,2,wLinkAnimTickB,*,I,`link_anim_tick_b[2]`
+d9fa,2,wLinkAnimTickA,*,C,`link_anim_tick_a[2]`
+d9fc,2,wLinkAnimIdxA,*,C,`link_anim_idx_a[2]`
+d9fe,2,wLinkAnimTickB,*,C,`link_anim_tick_b[2]`
 da00,1,wLinkAnim2Frame,*,C,link_anim2_frame
 da01,1,wLinkAnim3Frame,*,C,link_anim3_frame
 da02,1,wLinkBarX,*,C,link_bar_x
@@ -524,12 +524,13 @@ da07,2,wLinkFlicker,*,C,link_flicker
 da09,1,wLinkPickCount,*,C,link_pick_count
 da0a,1,wLinkCancelLatch,*,C,link_cancel_latch
 da0b,2,wLinkTimeout,*,C,link_timeout
-da0d,2,wGapDa0d,*,?,gap_da0d
+da0d,1,wUnusedLinkBufXor,*,U,unused_link_buf_xor
+da0e,1,wUnusedLinkBufSum,*,U,unused_link_buf_sum
 da0f,1,wCopiesOfPhoto,*,C,copies_of_photo
 da10,2,wCopiedMarkerXy,*,C,copied_marker_xy
 da12,1,wCopiedMarkerTimer,*,C,copied_marker_timer
 da13,1,wLastPhotoSeen,*,C,last_photo_seen
-da14,2,wGapDa14,*,?,gap_da14
+da14,2,wUnusedDA14,*,U,unused_da14
 da16,1,wMenuItem,*,C,menu_item
 da17,1,wMenuUpCol,*,C,menu_up_col
 da18,1,wMenuSelUpper,*,C,menu_sel_upper
@@ -565,7 +566,7 @@ da6d,1,wTagCountA,*,C,tag_count_a
 da6e,1,wTagCountB,*,C,tag_count_b
 da6f,1,wTagCountTotal,*,C,tag_count_total
 da70,27,wTagComment,*,C,tag_comment
-da8b,3,wTagCommentTail,*,I,tag_comment_tail
+da8b,3,wTagCommentTail,*,C,tag_comment_tail
 da8e,1,wTagCopyFlag,*,C,tag_copy_flag
 da8f,2,wTagImageCheck,*,C,tag_image_check
 da91,1,wCmtCursor,*,C,cmt_cursor
@@ -613,7 +614,7 @@ dbcd,1,wDelVariant,*,C,del_variant
 dbce,1,wLinkSetupDone,*,C,link_setup_done
 dbcf,1,wResultMsgId,*,C,result_msg_id
 dbd0,2,wPrinterPrevStatus,*,U,printer_prev_status
-dbd2,26,wGapDbd2,*,?,gap_dbd2
+dbd2,26,wUnusedDBD2,*,U,unused_dbd2
 dbec,18,wPrinterLenTable,*,U,printer_len_table
 dbfe,2,wPrinterDc0cTable,*,U,printer_dc0c_table
 dc00,8,wPrnBandCompFlags,*,U,prn_band_comp_flags
@@ -722,7 +723,7 @@ ff8e,1,hDiffOrValue,*,C,diff_or_value
 ff8f,1,hPrevOrSign,*,I,prev_or_sign
 ff90,1,hDiff2,*,C,diff2
 ff91,1,hDiagPassFlag,*,C,diag_pass_flag
-ff92,1,hSarScratch,*,I,sar_scratch
+ff92,1,hSarScratch,*,C,sar_scratch
 ff9a,1,hOamCursor,*,C,oam_cursor
 ff9b,1,hRomBankShadow,*,C,rom_bank_shadow
 ff9d,1,hBankTmp,*,C,bank_tmp

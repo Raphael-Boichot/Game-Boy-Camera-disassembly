@@ -32,7 +32,7 @@ p = p[::-1]; sp = dict(C[p[0]]['spec']); seq = []
 for j in p[1:]:
     for a in C[j]['actions']: seq.append((names(a[0]), int(a[1]), int(a[2])))
 sav = None
-for d in ('saves_unl', 'saves', 'intl_saves'):
+for d in ('saves_unl', 'saves', 'intl_saves', 'saves_pseudo'):
     f = os.path.join(ROOT, d, (savover or sp['sav']) + '.sav')
     if os.path.exists(f): sav = f; break
 if cut: seq = seq[:int(cut)]                          # --cut N = keep only the first N actions of the lineage

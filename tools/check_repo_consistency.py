@@ -459,6 +459,38 @@ if not RAM_BAD:
     quoted('ram sites', r'resolves? every access of `wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
+# ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
+PR_DIR = 'tcrf_check/assets/wram_probe/'
+try:
+    PR_W = list(csv.DictReader(io.StringIO(rd(PR_DIR + 'watch.csv'))))
+    PR_N = list(csv.DictReader(io.StringIO(rd(PR_DIR + 'names.csv'))))
+    PR_S = list(csv.DictReader(io.StringIO(rd(PR_DIR + 'sites.csv'))))
+except Exception as e:
+    PR_W = PR_N = PR_S = []; bad('ram', 'the probe tables of %s do not load: %s' % (PR_DIR, e))
+if PR_N:
+    pr_bad = 0
+    ramrow = {r.name: r for r in RAM_ROWS}
+    for r in PR_N:
+        x = ramrow.get(r['name'])
+        if x is None: bad('ram', '%snames.csv: %s is not a name of ram_names_jp.csv' % (PR_DIR, r['name'])); pr_bad += 1; continue
+        if x.tag != r['tag']: bad('ram', '%snames.csv: %s has tag %s, ram_names_jp.csv says %s' % (PR_DIR, r['name'], r['tag'], x.tag)); pr_bad += 1
+        if x.addr != int(r['addr'], 16) or int(r['size']) != x.size: bad('ram', '%snames.csv: %s is at $%s size %s, ram_names_jp.csv says $%04X size %d' % (PR_DIR, r['name'], r['addr'], r['size'], x.addr, x.size)); pr_bad += 1
+    for s in PR_S:
+        if s['name'] not in ramrow: bad('ram', '%ssites.csv: %s is not a name of ram_names_jp.csv' % (PR_DIR, s['name'])); pr_bad += 1; break
+    pr_wt = collections.Counter(r['tag'] for r in PR_W)
+    pr_sc = collections.Counter(r['class'] for r in PR_S)
+    pr_mv = collections.Counter((r['tag_before'], r['tag']) for r in PR_N)
+    pr_to_c = {k: sum(v for (b, a), v in pr_mv.items() if a == 'C' and b == k) for k in 'I?U'}
+    pr_to_u = {k: sum(v for (b, a), v in pr_mv.items() if a == 'U' and b == k and b != a) for k in 'I?'}
+    if not pr_bad:
+        ok('ram', 'the BGB probe: %d watched ranges (I %d / U %d / ? %d), %d names with tag before and after (%d to C, %d to U, %d stay I, %d stay U), %d sites that fired, tags equal ram_names_jp.csv' % (
+            len(PR_W), pr_wt['I'], pr_wt['U'], pr_wt['?'], len(PR_N), sum(pr_to_c.values()), sum(pr_to_u.values()), pr_mv[('I', 'I')], pr_mv[('U', 'U')], len(PR_S)))
+    quoted('probe watch', r'\((\d+) `I`, (\d+) `U` and (\d+) `\?`: (\d+) ranges', lambda m: ((pr_wt['I'], pr_wt['U'], pr_wt['?'], len(PR_W)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+    quoted('probe sites', r'has the ([\d,]+) instruction sites that fired \(S (\d+) / ptr (\d+) / init (\d+) / dyn (\d+) / other (\d+)\)', lambda m: ((len(PR_S), pr_sc['S'], pr_sc['ptr'], pr_sc['init'], pr_sc['dyn'], pr_sc['other']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+    quoted('probe names', r'names\.csv` \((\d+) rows', lambda m: ((len(PR_N),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+    quoted('probe moves', r'(\d+) became `C` \((\d+) `I`, (\d+) `\?`, (\d+) `U`\), (\d+) became `U` \((\d+) `I`, (\d+) `\?`\), (\d+) stay `I` and (\d+) stay `U`',
+           lambda m: ((sum(pr_to_c.values()), pr_to_c['I'], pr_to_c['?'], pr_to_c['U'], sum(pr_to_u.values()), pr_to_u['I'], pr_to_u['?'], pr_mv[('I', 'I')], pr_mv[('U', 'U')]), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
+
 # ------------------------------------------------------------------ constants (L4, README 2.14)
 import const_names as CN
 CN_BAD = 0

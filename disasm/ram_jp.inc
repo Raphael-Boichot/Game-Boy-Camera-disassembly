@@ -67,19 +67,19 @@ DEF wRunPlayerRunCounter       EQU $d003 ; C 1  run counter (A presses), index o
 DEF wRunPlayerTickStep         EQU $d004 ; C 1  tick step passed to Run_DrawMeta
 DEF wRunPlayerJumpHeight       EQU $d005 ; C 1  jump height
 DEF wRunPlayerAirIndex         EQU $d007 ; C 1  index 0-31 of the air tables
-DEF wRunPlayerStepSize         EQU $d008 ; I 1  step stored at every A press (table 09:67BE)
+DEF wRunPlayerStepSize         EQU $d008 ; C 1  step stored at every A press (table 09:67BE)
 DEF wRunPlayerPose             EQU $d009 ; C 1  pose / state (bit 7 ignored)
 DEF wRunPlayerAnimCounter      EQU $d00a ; C 1  animation counter
 DEF wRunChickPos               EQU $d00e ; C 2  second runner (chick) position, 16 bit
 DEF wRunChickSpeed             EQU $d010 ; C 1  chick speed
 DEF wRunChickAnimStep          EQU $d012 ; C 1  chick animation list step
 DEF wRunChickState             EQU $d014 ; C 1  chick animation state
-DEF wRunChickAnimCounter       EQU $d015 ; I 1  chick animation counter
+DEF wRunChickAnimCounter       EQU $d015 ; C 1  chick animation counter
 DEF wRunMolePos                EQU $d017 ; C 2  third runner (mole) position, 16 bit
 DEF wRunMoleSpeed              EQU $d019 ; C 1  mole speed
 DEF wRunMoleAnimStep           EQU $d01b ; C 1  mole animation list step
 DEF wRunMoleState              EQU $d01d ; C 1  mole animation state
-DEF wRunMoleAnimCounter        EQU $d01e ; I 1  mole animation counter
+DEF wRunMoleAnimCounter        EQU $d01e ; C 1  mole animation counter
 DEF wRunCameraPos              EQU $d020 ; C 2  camera, 16 bit
 DEF wRunRunner3Pos             EQU $d024 ; C 2  fourth runner position, 16 bit
 DEF wRunRunner3Speed           EQU $d026 ; C 1  fourth runner signed speed
@@ -92,8 +92,8 @@ DEF wRunFlagHeight             EQU $d048 ; C 1  flag height 0-$74 (Run_FlagHeigh
 DEF wRunFlagLevel              EQU $d049 ; C 1  flag level 0-6
 DEF wRunFlagCounter            EQU $d04a ; C 1  flag counter, index of the flag tables
 DEF wRunFlagState              EQU $d04b ; C 1  flag animation state
-DEF wRunRaceCounter            EQU $d04f ; I 1  race counter incremented at the end of the countdown
-DEF wRunPlayerLeads            EQU $d050 ; I 1  set when the player leads by $A0
+DEF wRunRaceCounter            EQU $d04f ; C 1  race counter incremented at the end of the countdown
+DEF wRunPlayerLeads            EQU $d050 ; C 1  set when the player leads by $A0
 DEF wRunConfetti               EQU $d052 ; C 60  10 confetti records of 6 bytes {x, dx, y, dy, frame, ...}
 DEF wCollisionMask2            EQU $d080 ; C 56  [7] collision mask 2
 DEF wPrintAnimPacket           EQU $d200 ; C 20  Print-animation packet buffer
@@ -164,12 +164,12 @@ DEF wOpt4Cursor                EQU $d5eb ; C 1  opt4_cursor
 DEF wYesnoH                    EQU $d5ec ; C 1  yesno_h
 DEF wCopyPhotoIdxA             EQU $d5ed ; C 1  copy_photo_idx_a
 DEF wPhotoNumberSel            EQU $d5ee ; C 1  photo_number_sel
-DEF wRegCursorA                EQU $d5ef ; I 1  reg_cursor_a
-DEF wRegCursorB                EQU $d5f0 ; I 1  reg_cursor_b
-DEF wRegCursorC                EQU $d5f1 ; I 1  reg_cursor_c
-DEF wRegCursorD                EQU $d5f2 ; ? 1  reg_cursor_d
+DEF wShowMenuCursor            EQU $d5ef ; C 1  show_menu_cursor
+DEF wDoodleMenuCursor          EQU $d5f0 ; C 1  doodle_menu_cursor
+DEF wEditMenuCursor            EQU $d5f1 ; C 1  edit_menu_cursor
+DEF wLinkMenuCursor            EQU $d5f2 ; C 1  link_menu_cursor
 DEF wCopyPhotoIdxB             EQU $d5f3 ; C 1  copy_photo_idx_b
-DEF wSavedDc52                 EQU $d5f5 ; I 1  saved_dc52
+DEF wSavedDc52                 EQU $d5f5 ; C 1  saved_dc52
 DEF wCopyPhotoIdxC             EQU $d5f6 ; C 1  copy_photo_idx_c
 DEF wCopyPhotoIdxD             EQU $d5f7 ; C 1  copy_photo_idx_d
 DEF wCopyPhotoIdxE             EQU $d5f8 ; C 1  copy_photo_idx_e
@@ -234,7 +234,7 @@ DEF wSliderTimer               EQU $d67b ; C 1  slider_timer
 DEF wSliderTarget              EQU $d67c ; C 1  slider_target
 DEF wSliderPos                 EQU $d67d ; C 1  slider_pos
 DEF wSliderRedraw              EQU $d67e ; C 1  slider_redraw
-DEF wAnimListGuard             EQU $d680 ; U 1  anim_list_guard
+DEF wAnimListGuard             EQU $d680 ; C 1  anim_list_guard
 DEF wAnimList                  EQU $d681 ; C 47  anim_list[47]
 DEF wAnimLoopFlag              EQU $d6b0 ; C 1  anim_loop_flag
 DEF wAnimTimingGuardLo         EQU $d6b1 ; I 1  anim_timing_guard_lo
@@ -273,8 +273,8 @@ DEF wSparkY                    EQU $d75d ; C 32  spark_y[16]
 DEF wSparkVx                   EQU $d77d ; C 32  spark_vx[16]
 DEF wSparkVy                   EQU $d79d ; C 32  spark_vy[16]
 DEF wPlayerPause               EQU $d7bd ; C 1  player_pause
-DEF wPlayerMusic               EQU $d7be ; I 1  player_music
-DEF wSpriteXCounter            EQU $d7bf ; I 1  sprite_x_counter
+DEF wPlayerMusic               EQU $d7be ; C 1  player_music
+DEF wSpriteXCounter            EQU $d7bf ; C 1  sprite_x_counter
 DEF wBlinkHold                 EQU $d7c0 ; C 1  blink_hold
 DEF wBorderNumber              EQU $d7c1 ; C 1  border_number
 DEF wActorFrame                EQU $d7c2 ; C 2  actor_frame[2]
@@ -335,7 +335,7 @@ DEF wPrintMarkerBlinkA         EQU $d812 ; C 1  `print_marker_blink_a`
 DEF wPrintMarkerBlinkB         EQU $d813 ; C 1  `print_marker_blink_b`
 DEF wPrintAbortFlag            EQU $d814 ; C 1  `print_abort_flag`
 DEF wTitleSceneId              EQU $d815 ; C 1  `title_scene_id`
-DEF wSweepPos16                EQU $d816 ; I 2  `sweep_pos16`
+DEF wSweepPos16                EQU $d816 ; C 2  `sweep_pos16`
 DEF wShootRapidFlag            EQU $d818 ; U 1  `shoot_rapid_flag`
 DEF wShootPlayerX              EQU $d819 ; C 1  `shoot_player_x`
 DEF wShootFireCount            EQU $d81a ; C 1  `shoot_fire_count`
@@ -356,10 +356,10 @@ DEF wShootEnemyState           EQU $d84a ; C 3  `shoot_enemy_state[3]`
 DEF wShootBulletRr             EQU $d84d ; C 1  `shoot_bullet_rr`
 DEF wShootBulletX              EQU $d84e ; C 8  `shoot_bullet_x[8]`
 DEF wShootBulletY              EQU $d856 ; C 8  `shoot_bullet_y[8]`
-DEF wShootWavePass             EQU $d85e ; I 1  `shoot_wave_pass`
+DEF wShootWavePass             EQU $d85e ; C 1  `shoot_wave_pass`
 DEF wShootFinishedMask         EQU $d85f ; C 1  `shoot_finished_mask`
 DEF wShootStartDelay           EQU $d860 ; C 1  `shoot_start_delay`
-DEF wShootWaveEnemies          EQU $d861 ; ? 1  `shoot_wave_enemies`
+DEF wShootWaveEnemies          EQU $d861 ; U 1  `shoot_wave_enemies`
 DEF wShootWaveDone             EQU $d862 ; C 1  `shoot_wave_done`
 DEF wShootWaveState            EQU $d863 ; C 1  `shoot_wave_state`
 DEF wShootBulletPairToggle     EQU $d864 ; C 1  `shoot_bullet_pair_toggle`
@@ -378,33 +378,33 @@ DEF wShootRound                EQU $d88e ; C 1  `shoot_round`
 DEF wShootBossVariant          EQU $d88f ; C 1  `shoot_boss_variant`
 DEF wMode20Caller              EQU $d890 ; C 1  `mode20_caller`
 DEF wSndCursorPopFrames        EQU $d891 ; C 1  cursor-sprite pop-in frame counter
-DEF wSndNoteBlinkCounter       EQU $d892 ; I 1  note-cursor blink counter
-DEF wSndNoteBlinkPhase         EQU $d893 ; I 1  note-cursor blink phase
-DEF wPerformerFrameGroup       EQU $d894 ; I 1  performer animation: frame group
-DEF wPerformerBeatPhase        EQU $d895 ; I 1  performer animation: beat phase (0..5)
+DEF wSndNoteBlinkCounter       EQU $d892 ; C 1  note-cursor blink counter
+DEF wSndNoteBlinkPhase         EQU $d893 ; C 1  note-cursor blink phase
+DEF wPerformerFrameGroup       EQU $d894 ; C 1  performer animation: frame group
+DEF wPerformerBeatPhase        EQU $d895 ; C 1  performer animation: beat phase (0..5)
 DEF wPerformerBounceCounter    EQU $d896 ; I 1  performer animation: bounce counter
 DEF wPerformerScriptId         EQU $d897 ; C 1  performer animation script id (0 = idle, 1..8)
-DEF wPerformerTilesTarget      EQU $d898 ; I 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
-DEF wPerformerTilesTarget2     EQU $d899 ; I 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
-DEF wPerformerTilesShown       EQU $d89a ; I 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
-DEF wPerformerTilesShown2      EQU $d89b ; I 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
-DEF wPerformerUpdateFrames     EQU $d89c ; I 1  frame counter for D898->D89A update (min 4 frames)
-DEF wPerformerPose             EQU $d89d ; I 1  pose (0..2)
-DEF wPerformerBeatAcc          EQU $d89e ; I 1  beat accumulator (&7)
-DEF wAnimSlotTimer             EQU $d89f ; I 4  animator slots: frame timers
-DEF wAnimSlotFrame             EQU $d8a3 ; I 4  animator slots: frame index
-DEF wAnimSlotX                 EQU $d8a7 ; I 4  animator slots: sprite X
-DEF wAnimSlotY                 EQU $d8ab ; I 4  animator slots: sprite Y
+DEF wPerformerTilesTarget      EQU $d898 ; C 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
+DEF wPerformerTilesTarget2     EQU $d899 ; C 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
+DEF wPerformerTilesShown       EQU $d89a ; C 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
+DEF wPerformerTilesShown2      EQU $d89b ; C 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
+DEF wPerformerUpdateFrames     EQU $d89c ; C 1  frame counter for D898->D89A update (min 4 frames)
+DEF wPerformerPose             EQU $d89d ; C 1  pose (0..2)
+DEF wPerformerBeatAcc          EQU $d89e ; C 1  beat accumulator (&7)
+DEF wAnimSlotTimer             EQU $d89f ; C 4  animator slots: frame timers
+DEF wAnimSlotFrame             EQU $d8a3 ; C 4  animator slots: frame index
+DEF wAnimSlotX                 EQU $d8a7 ; C 4  animator slots: sprite X
+DEF wAnimSlotY                 EQU $d8ab ; C 4  animator slots: sprite Y
 DEF wAnimSlotDone              EQU $d8af ; I 4  animator slots: finished flags (`$D8B2` = slot 3)
 DEF wPerfControlCursor         EQU $d8b3 ; C 1  performance-screen control cursor 0..4
 DEF wPerfChannelState          EQU $d8b4 ; C 3  channel states SOUND I / SOUND II / NOISE
 DEF wPerfLevel                 EQU $d8b7 ; C 1  performance-screen level 0..8 (control 4) = sound effect SE 1..9
-DEF wPerformerSpeakingIcon     EQU $d8b8 ; I 1  performer "speaking" icon flag
+DEF wPerformerSpeakingIcon     EQU $d8b8 ; C 1  performer "speaking" icon flag
 DEF wPerfNr51Mask              EQU $d8b9 ; C 1  NR51 mask (channel enables)
 DEF wPerfChannelBlink          EQU $d8ba ; I 3  per-channel indicator blink toggle
 DEF wPerfTempoAtRelease        EQU $d8bd ; I 1  tempo value at last button release
 DEF wPerfLevelAtRelease        EQU $d8be ; I 1  level value at last button release
-DEF wPerfEqualiserPhase        EQU $d8bf ; I 1  equaliser animation phase (&3)
+DEF wPerfEqualiserPhase        EQU $d8bf ; C 1  equaliser animation phase (&3)
 DEF wPerfPaused                EQU $d8c0 ; C 1  paused flag (bit 0)
 DEF wPerfPausedIcon            EQU $d8c1 ; I 1  copy of D8C0 for the play/pause icon
 DEF wPerfPausedAtStart         EQU $d8c2 ; I 1  D8C0 saved at Start press
@@ -453,13 +453,13 @@ DEF wRestCounters              EQU $d91b ; I 3  ticks since last note (rest coun
 DEF wUnusedD91E                EQU $d91e ; U 16  (unreferenced block before the sound-effect request)
 DEF wUiSfxRequest              EQU $d92e ; U 1  UI sound-effect request (1..8) written by the editor
 DEF wNr21Nr22Shadow            EQU $d92f ; C 2  NR21 / NR22 shadows (SOUND I)
-DEF wUnusedD931                EQU $d931 ; I 1  (NR23 slot of the register-shadow array, unused)
+DEF wUnusedD931                EQU $d931 ; U 1  (NR23 slot of the register-shadow array, unused)
 DEF wNr24ControlShadow         EQU $d932 ; C 1  NR24 control bits (SOUND I)
 DEF wNr30Nr32Shadow            EQU $d933 ; C 3  NR30 / NR31 / NR32 shadows (SOUND II)
-DEF wUnusedD936                EQU $d936 ; I 1  (NR33 slot of the register-shadow array, unused)
+DEF wUnusedD936                EQU $d936 ; U 1  (NR33 slot of the register-shadow array, unused)
 DEF wNr34ControlShadow         EQU $d937 ; C 1  NR34 control bits (SOUND II)
 DEF wNr41Nr42Shadow            EQU $d938 ; C 2  NR41 / NR42 shadows (NOISE)
-DEF wUnusedD93A                EQU $d93a ; I 1  (NR43 slot of the register-shadow array, unused)
+DEF wUnusedD93A                EQU $d93a ; U 1  (NR43 slot of the register-shadow array, unused)
 DEF wNr44ControlShadow         EQU $d93b ; C 1  NR44 control bits (NOISE)
 DEF wNr51PanShadow             EQU $d93c ; C 1  NR51 pan shadow
 DEF wSound1DutyLen             EQU $d93d ; C 2  **SOUND I**: duty (0..2), length index
@@ -512,9 +512,9 @@ DEF wMenuAnimCTick             EQU $d9f6 ; C 1  `menu_anim_c_tick`
 DEF wMenuAnimCPhase            EQU $d9f7 ; C 1  `menu_anim_c_phase`
 DEF wPickCharacter21           EQU $d9f8 ; C 1  `pick_character_21`
 DEF wPickGfxToggle21           EQU $d9f9 ; C 1  `pick_gfx_toggle_21`
-DEF wLinkAnimTickA             EQU $d9fa ; I 2  `link_anim_tick_a[2]`
-DEF wLinkAnimIdxA              EQU $d9fc ; I 2  `link_anim_idx_a[2]`
-DEF wLinkAnimTickB             EQU $d9fe ; I 2  `link_anim_tick_b[2]`
+DEF wLinkAnimTickA             EQU $d9fa ; C 2  `link_anim_tick_a[2]`
+DEF wLinkAnimIdxA              EQU $d9fc ; C 2  `link_anim_idx_a[2]`
+DEF wLinkAnimTickB             EQU $d9fe ; C 2  `link_anim_tick_b[2]`
 DEF wLinkAnim2Frame            EQU $da00 ; C 1  link_anim2_frame
 DEF wLinkAnim3Frame            EQU $da01 ; C 1  link_anim3_frame
 DEF wLinkBarX                  EQU $da02 ; C 1  link_bar_x
@@ -525,12 +525,13 @@ DEF wLinkFlicker               EQU $da07 ; C 2  link_flicker
 DEF wLinkPickCount             EQU $da09 ; C 1  link_pick_count
 DEF wLinkCancelLatch           EQU $da0a ; C 1  link_cancel_latch
 DEF wLinkTimeout               EQU $da0b ; C 2  link_timeout
-DEF wGapDa0d                   EQU $da0d ; ? 2  gap_da0d
+DEF wUnusedLinkBufXor          EQU $da0d ; U 1  unused_link_buf_xor
+DEF wUnusedLinkBufSum          EQU $da0e ; U 1  unused_link_buf_sum
 DEF wCopiesOfPhoto             EQU $da0f ; C 1  copies_of_photo
 DEF wCopiedMarkerXy            EQU $da10 ; C 2  copied_marker_xy
 DEF wCopiedMarkerTimer         EQU $da12 ; C 1  copied_marker_timer
 DEF wLastPhotoSeen             EQU $da13 ; C 1  last_photo_seen
-DEF wGapDa14                   EQU $da14 ; ? 2  gap_da14
+DEF wUnusedDA14                EQU $da14 ; U 2  unused_da14
 DEF wMenuItem                  EQU $da16 ; C 1  menu_item
 DEF wMenuUpCol                 EQU $da17 ; C 1  menu_up_col
 DEF wMenuSelUpper              EQU $da18 ; C 1  menu_sel_upper
@@ -566,7 +567,7 @@ DEF wTagCountA                 EQU $da6d ; C 1  tag_count_a
 DEF wTagCountB                 EQU $da6e ; C 1  tag_count_b
 DEF wTagCountTotal             EQU $da6f ; C 1  tag_count_total
 DEF wTagComment                EQU $da70 ; C 27  tag_comment
-DEF wTagCommentTail            EQU $da8b ; I 3  tag_comment_tail
+DEF wTagCommentTail            EQU $da8b ; C 3  tag_comment_tail
 DEF wTagCopyFlag               EQU $da8e ; C 1  tag_copy_flag
 DEF wTagImageCheck             EQU $da8f ; C 2  tag_image_check
 DEF wCmtCursor                 EQU $da91 ; C 1  cmt_cursor
@@ -614,7 +615,7 @@ DEF wDelVariant                EQU $dbcd ; C 1  del_variant
 DEF wLinkSetupDone             EQU $dbce ; C 1  link_setup_done
 DEF wResultMsgId               EQU $dbcf ; C 1  result_msg_id
 DEF wPrinterPrevStatus         EQU $dbd0 ; U 2  printer_prev_status
-DEF wGapDbd2                   EQU $dbd2 ; ? 26  gap_dbd2
+DEF wUnusedDBD2                EQU $dbd2 ; U 26  unused_dbd2
 DEF wPrinterLenTable           EQU $dbec ; U 18  printer_len_table
 DEF wPrinterDc0cTable          EQU $dbfe ; U 2  printer_dc0c_table
 DEF wPrnBandCompFlags          EQU $dc00 ; U 8  prn_band_comp_flags
@@ -723,7 +724,7 @@ DEF hDiffOrValue               EQU $ff8e ; C 1  diff_or_value
 DEF hPrevOrSign                EQU $ff8f ; I 1  prev_or_sign
 DEF hDiff2                     EQU $ff90 ; C 1  diff2
 DEF hDiagPassFlag              EQU $ff91 ; C 1  diag_pass_flag
-DEF hSarScratch                EQU $ff92 ; I 1  sar_scratch
+DEF hSarScratch                EQU $ff92 ; C 1  sar_scratch
 DEF hOamCursor                 EQU $ff9a ; C 1  oam_cursor
 DEF hRomBankShadow             EQU $ff9b ; C 1  rom_bank_shadow
 DEF hBankTmp                   EQU $ff9d ; C 1  bank_tmp

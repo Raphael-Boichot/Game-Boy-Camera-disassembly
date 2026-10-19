@@ -2,7 +2,7 @@
 """Run a key sequence in the real BGB (Windows exe under wine, headless) and report the game's (mode,state), a screenshot and a few WRAM bytes.
 Library + CLI.  CLI: bgb_run.py ROM SAV OUTPREFIX 'Right:8:5,A:8:30,...' [--combo N] [--free F] [--br ADDR[,ADDR]]
 Sequence items are KEYS:hold:wait, KEYS joined with '+' (Right Left Up Down A B Select Start), frames at 59.7 Hz.
-Environment: BGB_DIR (the BGB folder), BGB_HF = the headless flags (default -hf; in the sandbox of 2026-10-11 a run with -demoplay and the printer link (-connect) hung at the link handshake with -hf,
+Environment: BGB_DIR (the BGB folder), BGB_WP (a -wp list: every run() then logs the hits of those watchpoints to BGB_DIR/debugmsg.txt), BGB_HF = the headless flags (default -hf; in the sandbox of 2026-10-11 a run with -demoplay and the printer link (-connect) hung at the link handshake with -hf,
 `BGB_HF=-headless` works: it is not run-fast, but a linked BGB runs at about 50-60 frames per second anyway).
 Joypad bits of the BGB demo byte: low nibble A=1 B=2 Select=4 Start=8, high nibble Right=$10 Left=$20 Up=$40 Down=$80 (checked on the camera)."""
 import sys, os, subprocess, struct, shutil
@@ -38,6 +38,10 @@ def run(rom, sav, prefix, seq, combo=0, free=400, br=None, timeout=900, extra=()
            '-rom', os.path.abspath(rom), '-demoplay', os.path.abspath(dem), '-stateonexit', os.path.abspath(sna), '-screenonexit', os.path.abspath(bmp)]
     if sav is not None: cmd += ['-loadbatt', os.path.abspath(sv)]
     if br: cmd += ['-br', br]
+    wp = os.environ.get('BGB_WP')
+    if wp:      # logging watchpoints for any runner (printer, link, replay): the hits go to $BGB_DIR/debugmsg.txt (README 2.13, tcrf_check/tools/wram_probe_scen.py)
+        cmd += ['-wp', wp, '-setting', 'DebugMsgFile=1']
+        if os.path.exists(os.path.join(BGB, 'debugmsg.txt')): os.remove(os.path.join(BGB, 'debugmsg.txt'))
     cmd += list(extra)
     env = dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix')
     r = subprocess.run(cmd, env=env, capture_output=True, timeout=timeout)
