@@ -36,7 +36,7 @@
   ],
   "text": [
    "Callers of the ids around it: 25 SpaceFever_Wave0_Init (07:5A2F), 26 SpaceFever_BossHit (07:675C), 27 SpaceFever_Wave0_Play (07:5ABF). 24: none; the ROM has 334 channel-1 request calls and none loads $24.",
-   "Handler: id table 1F:41FA -> 1F:43E4 (Sfx1_Init_24_SpaceFeverII), step handler 1F:43EC."
+   "Handler: id table 1F:41FA -> 1F:43E4 (Sfx1_Init_24_LoopTone), step handler 1F:43EC."
   ],
   "notes": [
    [

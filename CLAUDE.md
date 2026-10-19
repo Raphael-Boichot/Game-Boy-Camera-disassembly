@@ -68,7 +68,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
 
 ## Where things stand (pointers, not numbers)
-* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,790 / 1,448 / 5); 253 doubtful rows are listed with evidence
+* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,243 names tagged C / I / ? (3,793 / 1,450 / 0); 249 doubtful rows are listed with evidence
   in `disasm/sym_unconclusive_jp.md`. L4 is done as defined by the how-to (788 RAM names in §2.13; the `MODE_*`, key-mask, hardware-flag and sound-id constants in §2.14; state numbers stay numbers), L5 (committed buildable tree) is not done; L6 is partial (name / comment charset only, §16.27).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international ROM has no instrumented coverage run
   (`coverage/tools/coverage_run.py` needs a variant without the Japanese trace); behavioural parity was checked in BGB (§16.11, §16.12).

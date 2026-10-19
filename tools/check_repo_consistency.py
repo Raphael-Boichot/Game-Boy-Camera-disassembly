@@ -180,7 +180,7 @@ n += quoted('labels per tag', r'\*\*\?\*\* doubtful: ([\d,]+) / ([\d,]+) / (\d+)
 n += quoted('labels per tag', r'names C / I / \? [\d,]+ / [\d,]+ / \d+ -> ([\d,]+) / ([\d,]+) / (\d+)', lambda m: ((C, I, Q), tuple(num(m.group(i)) for i in (1, 2, 3))), need=('README.md',))
 n += quoted('labels per tag', r'(\d+) `\?` names \(none of them the placeholder `Data_BB_AAAA` any more\) and ([\d,]+) `I` names \| ([\d,]+) names: C ([\d,]+), I ([\d,]+), \? (\d+)',
             lambda m: ((Q, I, NL, C, I, Q), tuple(num(m.group(i)) for i in range(1, 7))), need=('README.md',))
-n += quoted('left `?`', r'What is left of the (\d+) `\?`', lambda m: ((Q,), (int(m.group(1)),)), need=('README.md',))
+n += quoted('left `?`', r'(?:What is left of the (\d+) `\?`|No name is tagged `\?`)', lambda m: ((Q,), (int(m.group(1) or 0),)), need=('README.md',))
 # doubts
 n += quoted('doubtful rows', r'\((\d+) rows: every `\?` name', lambda m: ((DROWS,), (int(m.group(1)),)), need=('README.md',))
 n += quoted('doubtful rows', r'doubtful rows \d+ -> (\d+)', lambda m: ((DROWS,), (int(m.group(1)),)), need=('README.md',))
@@ -199,7 +199,7 @@ if LINES:
                 lambda m: ((BLOCKS, BYTES['code'], BYTES['data'], BYTES['padding'], BYTES['text']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
 # TCRF labels
 n += quoted('TCRF labels', r'carries (\d+) `Unused_TCRF_\*` labels', lambda m: ((TCRF_LABELS,), (int(m.group(1)),)), need=('README.md',))
-n += quoted('left `?`', r'then the (\d+) `\?` and the (\d+) doubtful rows', lambda m: ((Q, DROWS), (int(m.group(1)), int(m.group(2)))), need=('README.md',))
+n += quoted('left `?`', r'then the (?:(\d+) `\?` and the )?(\d+) doubtful rows', lambda m: ((Q, DROWS), (int(m.group(1) or 0), int(m.group(2)))), need=('README.md',))
 n += quoted('L3 lessons', r'L3 pass of 2026-10-14: 169 `\?` -> (\d+), 610 doubtful rows -> (\d+),', lambda m: ((Q, DROWS), (int(m.group(1)), int(m.group(2)))), docs=('HOWTO_NEW_ROM.md',), need=('HOWTO_NEW_ROM.md',))
 if BYTES:
     PAD_BEFORE_L3 = 71681        # padding bytes before the L3 pass of 2026-10-14 (README history, commit a7d7e56)
@@ -301,8 +301,8 @@ if A.rom:
             tt = WIN.get((int(r2['bank'], 16), int(r2['addr'], 16)))
             if r2['conf'] == '?' and tt and tt[5] == 'Gfx': qsp.append(('%s:%s' % (r2['bank'].upper(), r2['addr'].upper()), tt[2] - int(r2['addr'], 16)))
         QB = sum(x[1] for x in qsp)
-        n += quoted('? graphic spans', r'the (\d+) graphic spans tagged `\?` \(([\d,]+) B: ([^)]*)\)',
-                    lambda m: ((len(qsp), QB, tuple(sorted(x[0] for x in qsp))), (int(m.group(1)), num(m.group(2)), tuple(sorted(re.findall(r'`([0-9A-F]{2}:[0-9A-F]{4})`', m.group(3)))))), docs=('README.md',), need=('README.md',))
+        n += quoted('? graphic spans', r'(?:the (\d+) graphic spans tagged `\?` \(([\d,]+) B: ([^)]*)\)|no graphic span is tagged `\?`)',
+                    lambda m: ((len(qsp), QB, tuple(sorted(x[0] for x in qsp))), (int(m.group(1) or 0), num(m.group(2) or '0'), tuple(sorted(re.findall(r'`([0-9A-F]{2}:[0-9A-F]{4})`', m.group(3) or ''))))), docs=('README.md',), need=('README.md',))
         n += quoted('? graphic spans', r'classified by evidence \(([\d,]+) B\)', lambda m: ((QB + OVB,), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
         ok('layout', 'picture and csv fresh; %d override rows reclassify %s B; `?` graphic spans %s (%s B)' % (OVN, fmt(OVB), [x[0] for x in qsp], fmt(QB)))
     shutil.rmtree(tmp, ignore_errors=True)

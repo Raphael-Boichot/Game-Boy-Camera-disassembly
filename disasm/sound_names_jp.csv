@@ -108,7 +108,7 @@ sfx1,20,SFX1_STEP_FAST,I,12,"direction keys on a counter or a two-way choice (lo
 sfx1,21,SFX1_STEP_VALUE,I,6,"direction keys stepping a photo or stock value, a toggle, a keyboard page",03:553D 03:5572 08:4540 09:4447 09:5C23
 sfx1,22,SFX1_DIRECTION_KEY,I,7,"direction keys in the animation tools menu, the print density and the comment editor",03:44BE 08:4462 09:4505 09:4516 09:4526
 sfx1,23,SFX1_BALL_POINT,C,1,BALL: a point is scored (Ball_AddPoint); same data as 2B,05:7D50 same:2B
-sfx1,24,,?,0,"no name: no caller, no list; owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II",owner:snd_sfx1_24 review:snd_sfx1_24
+sfx1,24,,?,0,"no name: no caller, no list; owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II; the handlers (Sfx1_Init_24_LoopTone, Sfx1_Step_24_LoopTone) make a falling tone of about 910 Hz that retriggers every 21 frames and never stops by itself (BGB, 45 s), which fits no named moment",owner:snd_sfx1_24 review:snd_sfx1_24
 sfx1,25,SFX1_SPACE_FEVER_START,C,1,Space Fever II: the game starts (SpaceFever_Wave0_Init),07:5A2F
 sfx1,26,SFX1_SPACE_FEVER_BOSS_DEATH,C,1,Space Fever II: the boss is destroyed (SpaceFever_BossHit); owner by ear: boss death; same data as 1E,07:675C same:1E owner:snd_sfx1_26
 sfx1,27,SFX1_SPACE_FEVER_WAVE0_END,I,1,"Space Fever II: the opening wave is over, wave state 2 follows (SpaceFever_Wave0_Play)",07:5ABF

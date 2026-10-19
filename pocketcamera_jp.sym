@@ -3701,7 +3701,7 @@
 1a:6c00 Gfx_1A_6C00_Mode20_State00_MenuInit
 1a:7400 Gfx_1A_7400_Mode20_State00_MenuInit
 1a:7600 Gfx_1A_7600_Album_ShowPageScreenB
-1a:7c90 Unused_TCRF_PhotoOptionIcon_Candidate_Gfx
+1a:7c90 Gfx_1A_7C90_Album_ShowPageScreenB_ArrowGlyph
 1a:7cb0 Gfx_1A_7600_Album_ShowPageScreenB_Cont
 1a:7d80 Unused_TCRF_PhotoOption_BCancel_Gfx
 1a:7e00 Gfx_1A_7E00_Unref
@@ -3841,8 +3841,8 @@
 1f:43c2 Sfx1_Init_2A_ChooseC
 1f:43ca Sfx1_Step_2A_ChooseC
 1f:43df Sfx1_Data_43DF
-1f:43e4 Sfx1_Init_24_SpaceFeverII
-1f:43ec Sfx1_Step_24_SpaceFeverII
+1f:43e4 Sfx1_Init_24_LoopTone
+1f:43ec Sfx1_Step_24_LoopTone
 1f:43f7 Sfx1_Data_43F7
 1f:4401 Sfx1_Init_1E_26_Choose
 1f:4409 Sfx1_Step_26_BossHit

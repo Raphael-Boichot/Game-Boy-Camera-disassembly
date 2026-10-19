@@ -70,9 +70,21 @@ if os.path.exists(MAN):
         nm0 = (names.get((b, a)) or {}).get('name') or (gone[0]['name'] if gone else 'Gfx_%02X_%04X' % (b, a))     # a span that starts inside a labelled block keeps the name of the open row it replaces
         rows.append(dict(bank=m['bank'], addr=m['start'].upper(), b=b, a=a, n=e - a + 1, name=nm0, kind=m['kind'], tcrf='', src='manual', note=m['note'],
                          mtier=(m.get('tier') or 'no loader'), pic=(m.get('pic') or ''), drawn=(m.get('drawn') or ''), tileset=(m.get('tileset') or '')))
+# Per-node maxima (display_node_max.py -> display_node_max.csv): the counters above are cumulative over a whole replay, so fifteen one-frame events in fifteen different nodes
+# (a screen being loaded over the VRAM or the OAM of the previous one) make a tile "stable".  For the spans that were measured per node, a span whose largest organic count in ONE node
+# is below STABLE is not on screen in organic runs: its organic count is the transitional maximum of one node, not the cumulative sum.
+NODEMAX = {}
+_nm = OUT + '/display_node_max.csv'
+if os.path.exists(_nm):
+    for r in csv.DictReader(open(_nm, encoding='utf-8')):
+        bb, rg = r['span'].split(':'); lo, hi = rg.split('-'); k = (int(bb, 16), int(lo, 16))
+        NODEMAX[k] = max(NODEMAX.get(k, 0), int(r['org_max_frames_one_node']))
 for r in rows:
     o = off(r['b'], r['a']); r['v'] = verdict(o, r['n'])
     v = r['v']
+    if (r['b'], r['a']) in NODEMAX and v['stable_org'] and NODEMAX[(r['b'], r['a'])] < STABLE:
+        r['note'] = 'cumulative organic count %d frames = the sum of events of at most %d frames in different nodes (display_node_max.csv)' % (v['maxfro'], NODEMAX[(r['b'], r['a'])])
+        v['stable_org'] = 0; v['maxfro'] = NODEMAX[(r['b'], r['a'])]
     if r['src'] == 'manual':
         r['tier'] = r['mtier']     # 'no loader' (default) or another tier named in unused_manual.csv, e.g. 'head rows' (two rows of a used map that its loader skips)
     elif r['kind'] == 'TCRF':

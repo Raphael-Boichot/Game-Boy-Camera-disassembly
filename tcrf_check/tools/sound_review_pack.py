@@ -112,7 +112,7 @@ for a in find_call(5, r'call Snd_PlayFromList'):
 
 TEXT = {
     ('sfx1', '24'): ['Callers of the ids around it: 25 SpaceFever_Wave0_Init (07:5A2F), 26 SpaceFever_BossHit (07:675C), 27 SpaceFever_Wave0_Play (07:5ABF). 24: none; the ROM has 334 channel-1 request calls and none loads $24.',
-                     'Handler: id table 1F:41FA -> 1F:43E4 (Sfx1_Init_24_SpaceFeverII), step handler 1F:43EC.'],
+                     'Handler: id table 1F:41FA -> 1F:43E4 (Sfx1_Init_24_LoopTone), step handler 1F:43EC.'],
     ('sfx3', '04'): ['Handler 1F:50AB. Channel-3 ids that are requested: 01 (Shoot item), 02 (menus), 03 (SpaceFever_BossHit), 08 and 09 (delete dialog); 05 and 06 only through lists (shutter sound options). 04: no caller, no list.'],
     ('sfx3', '07'): ['Handler 1F:4F72. Channel-3 ids that are requested: 01, 02, 03, 08, 09; 05 and 06 through lists. 07: no caller, no list.'],
     ('music', '48'): ['Handler 1F:7F1F (Song48_ErrorIncomplete_Hdr, named from your answer). Songs that the id lists hold: 03:61FD (slide-show), 05:781B (BALL: 2E, 2D), 09:733E (result: 28, 29, 30, 2A), 03:7615 (hot-spot editor). 48: none; no `ld a, $48` before `call Snd_Music`.'],

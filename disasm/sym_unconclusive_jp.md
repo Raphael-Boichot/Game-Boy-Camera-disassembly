@@ -8,12 +8,12 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
-| visually identified range | 1 | 2780 | a yes/no on the family name |
+| visually identified range | 0 | 0 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 0 | 0 | where each block ends (the length copied at run time) and what it is |
 | content-classified span | 17 | 6294 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
-| hand name, unconfirmed | 4 | 158 | a check of the guess |
+| hand name, unconfirmed | 0 | 0 | a check of the guess |
 | mode state | 102 | 5597 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2536 | the sound each id plays |
@@ -21,15 +21,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
 | main-menu slide | 2 | 24 | which transition each slide is |
 | arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
-| dead code | 31 | 6196 | whether the code is truly dead (TCRF unused-content notes) |
-
-## visually identified range (1)
-
-_Why doubtful:_ identified from the picture and the neighbouring assets only; no code reads it directly. _To settle:_ check against the Spriters Resource sheet or a VRAM view while the screen runs.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 14:4554 | `Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr` | 2780 | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t | tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only read |
+| dead code | 32 | 6292 | whether the code is truly dead (TCRF unused-content notes) |
 
 ## content-classified span (17)
 
@@ -45,17 +37,6 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 1E: `7D00` Unref (184 B)
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
-
-## hand name, unconfirmed (4)
-
-_Why doubtful:_ named from neighbours only. _To settle:_ emulator trace.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide  | candidate for the TCRF unused hand gestures: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00-5FFF ( |
-| 1A:7C90 | `Unused_TCRF_PhotoOptionIcon_Candidate_Gfx` | 32 | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON S | exact pixel match of the TCRF "photo option icon" (2 tiles, 16x8) but these tiles are ON SCREEN in normal play |
-| 1F:43E4 | `Sfx1_Init_24_SpaceFeverII` | 19 | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no con | channel-1 effect init handler of id 24: owner hears a Space Fever II sound (by ear, no confidence given); no r |
-| 1F:43EC | `Sfx1_Step_24_SpaceFeverII` | 11 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) Re-checked 2026-10-18 | channel-1 effect step handler of id 24 (owner: Space Fever II sound) Re-checked 2026-10-18 (hex id $24 = 36):  |
 
 ## mode state (102)
 
@@ -285,7 +266,7 @@ _Why doubtful:_ slide A/B split by code layout only. _To settle:_ watch the menu
 | 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7580, 7780, 7980, 7B80 (frames 6-9 of the camera ball head animation, forward; the secon |
 | 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7980, 7780, 7580, 7380 (frames 8, 7, 6, 5 of the camera ball head animation, backward).  |
 
-## dead code (31)
+## dead code (32)
 
 _Why doubtful:_ never executed in the static trace; purpose read from the instructions only. _To settle:_ TCRF note, or a debugger test with a forced jump.
 
@@ -310,6 +291,7 @@ _Why doubtful:_ never executed in the static trace; purpose read from the instru
 | 07:503D | `Unused_LinkPick_LoadPhotoIndexB` | 3 | code or data that no trace path and no table reaches (left over from earlier versions) | entry of arbitrary address (README 16.14) |
 | 0D:7660 | `Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx` | 384 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 o |
 | 11:5800 | `Unused_TCRF_HandNewspaperFrames_Gfx` | 4416 | code or data that no trace path and no table reaches (left over from earlier versions) | nine sprite frames of a hand flipping a newspaper (TCRF B16, Unused Graphic Bank 11): 25 tiles per frame in 51 |
+| 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused hand gestures, pixel match with doubts: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00 |
 | 15:4480 | `Unused_TCRF_JapaneseMenuTile_CircledX_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: the circled X tile of the Japanese main-menu bank (copy 1 of 3, same tile at 15:4500 and  |
 | 15:4500 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: circled X, copy 2 of 3 |
 | 15:4580 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: circled X, copy 3 of 3 |

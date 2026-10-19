@@ -583,3 +583,8 @@ bank,addr,old_name,new_name,old_conf,new_conf,reason
 03,69A3,HotSpotFx_PageFlipRamp,HotSpotFx_PageFlipRamp,I,C,code read 2026-10-18 (README 16.28)
 03,69E7,HotSpotFx_PageFlipTbl,Unused_HotSpotFx_PageFlipTbl,I,C,code read 2026-10-18 (README 16.28)
 03,69EF,HotSpotFx_Delay3,HotSpotFx_Delay3,I,C,code read 2026-10-18 (README 16.28)
+1F,43E4,Sfx1_Init_24_SpaceFeverII,Sfx1_Init_24_LoopTone,?,C,"what the handler does: one falling tone of about 910 Hz that retriggers every 21 frames and never stops (code + BGB, 45 s); the owner's Space Fever remark stays in the note (README 16.28)"
+1F,43EC,Sfx1_Step_24_SpaceFeverII,Sfx1_Step_24_LoopTone,?,C,"what the handler does: reloads the note every 21 frames and never calls Sfx1_Stop (code + BGB, 45 s) (README 16.28)"
+14,4554,Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr,Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr,?,I,160 distinct tile ids of map 23:5CC0 lie inside the span (ids 85-244); the screen itself is identified by eye (README 16.28)
+1A,7C90,Unused_TCRF_PhotoOptionIcon_Candidate_Gfx,Gfx_1A_7C90_Album_ShowPageScreenB_ArrowGlyph,?,C,"drawn on the Right page of the photo-option menu (mode 9 state 4), BGB, tcrf_check/tools/photo_option_icon_check.py (README 16.24)"
+13,5CA0,Unused_TCRF_AlbumHandGestures_Gfx,Unused_TCRF_AlbumHandGestures_Gfx,?,I,"loaded with the album sheet, never drawn in an organic run: BGB on the five sheet screens and the per-node display counts (README 16.24)"

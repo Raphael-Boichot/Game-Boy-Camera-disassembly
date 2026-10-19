@@ -92,7 +92,7 @@ pics = [
       clue='Second half of the tile set of the unused alternate stand-by screen of the image exchange (the first half is 14:4000, the map 23:5CC0). Does this look like a picture you have seen on the SEND / RECEIVE screen of any version of the game?'),
  dict(key='tcrf_13_5CA0', title='13:5A00-5FFF, candidate for the TCRF album hand gestures', name='Unused_TCRF_AlbumHandGestures_Gfx', cols=16, data=b64(rd(0x13, 0x5A00, 0x600)), ref=img('Game_Boy_Camera_Unused_Album_Hand_Gestures.png'), refcap='TCRF image',
       clue='The TCRF picture is a crop of this 16-tile-wide sheet (23 of 32 informative tiles found at 13:5CA0-5CF0, 5DA0-5DF0, 5EA0-5EF0 and 5A40-5AF0), but the tiles are on screen in normal play (22-26 frames). Is the TCRF hand gesture something you have seen in the album, or only on TCRF?'),
- dict(key='tcrf_1A_7C90', title='1A:7C80-7CBF, candidate for the TCRF photo option icon', name='Unused_TCRF_PhotoOptionIcon_Candidate_Gfx', cols=4, data=b64(rd(0x1A, 0x7C80, 0x40)), ref=img('Game_Boy_Camera_Unused_Photo_Option_Icon.png'), refcap='TCRF image',
+ dict(key='tcrf_1A_7C90', title='1A:7C80-7CBF, candidate for the TCRF photo option icon', name='Gfx_1A_7C90_Album_ShowPageScreenB_ArrowGlyph', cols=4, data=b64(rd(0x1A, 0x7C80, 0x40)), ref=img('Game_Boy_Camera_Unused_Photo_Option_Icon.png'), refcap='TCRF image',
       clue='Exact pixel match of the TCRF icon (2 tiles at 1A:7C90), but these tiles are on screen in normal play. Is this an icon you see in the photo option menu?'),
 ]
 # ---------------------------------------------------------------- sound clips: key '<channel>_<ID>' -> {b: base64 mp3, s: seconds, cut: only the start of a longer sound}
