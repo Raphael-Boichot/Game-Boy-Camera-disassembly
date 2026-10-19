@@ -26,6 +26,7 @@ What it checks (each line of the report is one check)
   ram        disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
              wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
+  printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -480,6 +481,42 @@ if FR:
     quoted('forced bytes', r'Of the ([\d,]+) ROM bytes that some run read, no organic run read and no run executed, `Prn_SendPacketByte` \(`00:17E8`.*?\) is the first reader of ([\d,]+) \(([\d.]+) %\) and `Mem_CopyFromBank` \(`00:0468`, the bank copy\) of ([\d,]+) \(([\d.]+) %\)',
            lambda m: ((FR_N, FR_A, '%.1f' % (100 * FR_A / FR_N), FR_B, '%.1f' % (100 * FR_B / FR_N)), (num(m.group(1)), num(m.group(2)), m.group(3), num(m.group(4)), m.group(5))), docs=('README.md',), need=('README.md',))
     quoted('forced spans', r'(\d+) of the (\d+) spans of `really_unused.csv` that have such bytes have `Prn_SendPacketByte` as their most frequent first reader', lambda m: ((FR_PRN, len(FR_SP)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
+
+# ------------------------------------------------------------------ 26:7080 and the printing of Album B (README 16.25.2)
+PW_FILE = 'tcrf_check/assets/unidentified/map_26_7080_print_watch.csv'
+try:
+    PW = list(csv.DictReader(io.StringIO(rd(PW_FILE))))
+except Exception as e:
+    PW = []; bad('printwatch', '%s does not load: %s' % (PW_FILE, e))
+if PW:
+    import numpy as np
+    zc = np.load(P('coverage/v8/merged_v8/cov.npz')); dr_ = zc['dr'] != 0; odr_ = zc['odr'] != 0
+    def span(bank, addr, n): o = bank * 0x4000 + addr - 0x4000; return slice(o, o + n)
+    AB = slice(0x0DA000, 0x0DA000 + 30 * 0x1000)
+    cov = (int(odr_[AB].sum()), AB.stop - AB.start, int(odr_[span(0x26, 0x7080, 576)].sum()), int(odr_[span(0x26, 0x4C80, 576)].sum()), int(odr_[span(0x26, 0x72C0, 576)].sum()))
+    if [r['scenario'] for r in PW] != ['print_single', 'print_card']: bad('printwatch', '%s: unexpected scenarios %s' % (PW_FILE, [r['scenario'] for r in PW]))
+    elif any(int(r['hits_26_7080_72BF']) != 0 for r in PW) or any(int(r[k]) <= 0 for r in PW for k in ('hits_26_4000_707F', 'hits_26_72C0_7FFF', 'hits_00_1B73_1B9F', 'printed_pages', 'printer_packets')):
+        bad('printwatch', '%s: the watch on 26:7080-72BF must have 0 hits and every control and the prints must be positive' % PW_FILE)
+    else: ok('printwatch', '2 prints (%s packets, %s pages), 0 reads of 26:7080-72BF, controls %s; Album B pictures read organically %s of %s B, 26:7080 %d, 26:4C80 %d, 26:72C0 %d' % (
+        '/'.join(r['printer_packets'] for r in PW), '/'.join(r['printed_pages'] for r in PW), '/'.join(r['hits_26_4000_707F'] for r in PW), fmt(cov[0]), fmt(cov[1]), cov[2], cov[3], cov[4]))
+    pk = [r['printer_packets'] for r in PW]; pg = [r['printed_pages'] for r in PW]
+    quoted('print watch', r'B01 alone \((\d+) page, (\d+) packets\) and B06, a bird on a branch, with its comment card \((\d+) pages, (\d+) packets;',
+           lambda m: ((int(pg[0]), int(pk[0]), int(pg[1]), int(pk[1])), tuple(int(m.group(i)) for i in (1, 2, 3, 4))), docs=('README.md',), need=('README.md',))
+    quoted('print watch', r'fired 0 times in both\*\*, the controls ([\d,]+) and ([\d,]+) times \(`26:4000-707F`\), (\d+) times \(`26:72C0-7FFF`\) and (\d+) and (\d+) times \(packets\)',
+           lambda m: ((int(PW[0]['hits_26_4000_707F']), int(PW[1]['hits_26_4000_707F']), int(PW[0]['hits_26_72C0_7FFF']), int(PW[0]['hits_00_1B73_1B9F']), int(PW[1]['hits_00_1B73_1B9F'])), (num(m.group(1)), num(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)))), docs=('README.md',), need=('README.md',))
+    quoted('print watch', r'are read in organic runs \(([\d,]+) of ([\d,]+) B\), `26:7080-72BF` is not \((\d+) of 576 B\), while its neighbours `26:4C80` and `26:72C0` are \((\d+) of 576 B each\)',
+           lambda m: (cov[:4], (num(m.group(1)), num(m.group(2)), int(m.group(3)), int(m.group(4)))), docs=('README.md',), need=('README.md',))
+    if A.rom:
+        romb = open(A.rom, 'rb').read(); trc = json.loads(rd('wram/trace_jp_v3.json'))['code']
+        cov_b = set()
+        for k_, L_ in trc.items():
+            b_ = int(k_[:2], 16); a_ = int(k_[3:], 16); o_ = a_ if b_ == 0 else b_ * 0x4000 + a_ - 0x4000; cov_b.update(range(o_, o_ + L_))
+        occ = [i for i in range(len(romb) - 1) if romb[i] == 0x80 and romb[i + 1] == 0x70]
+        touch = sum(1 for i in occ if i in cov_b or i + 1 in cov_b)
+        ok('printwatch', 'the byte pair 80 70 occurs %d times in the ROM, %d of them touch a proven instruction byte' % (len(occ), touch))
+        quoted('print watch', r'the byte pair `80 70` occurs (\d+) times in the ROM, never inside a proven instruction', lambda m: ((len(occ),), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
+        if touch: bad('printwatch', '%d occurrences of 80 70 touch a proven instruction, the README says never' % touch)
+    if cov[3] != 576 or cov[4] != 576: bad('printwatch', '26:4C80 / 26:72C0 organic reads are %d / %d of 576, the README says 576 each' % (cov[3], cov[4]))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'
