@@ -27,6 +27,7 @@ What it checks (each line of the report is one check)
              wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
   printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
+  seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -517,6 +518,34 @@ if PW:
         quoted('print watch', r'the byte pair `80 70` occurs (\d+) times in the ROM, never inside a proven instruction', lambda m: ((len(occ),), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
         if touch: bad('printwatch', '%d occurrences of 80 70 touch a proven instruction, the README says never' % touch)
     if cov[3] != 576 or cov[4] != 576: bad('printwatch', '26:4C80 / 26:72C0 organic reads are %d / %d of 576, the README says 576 each' % (cov[3], cov[4]))
+
+# ------------------------------------------------------------------ 26:7080 seam search at every byte offset (README 16.25.2)
+SO_FILE = 'tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv'
+try:
+    SO = list(csv.DictReader(io.StringIO(rd(SO_FILE))))
+except Exception as e:
+    SO = []; bad('seamoffsets', '%s does not load: %s' % (SO_FILE, e))
+if SO:
+    so = {(r['block'], r['ids'], r['order'], r['bpp']): r for r in SO}
+    rat = [float(r['best_cost']) / float(r['control_median']) for r in SO]
+    if len(SO) != 13: bad('seamoffsets', '%s has %d rows, the README says 13 variants' % (SO_FILE, len(SO)))
+    if any(abs(a - float(r['ratio_best_over_control_median'])) > 0.015 for a, r in zip(rat, SO)): bad('seamoffsets', '%s: a ratio column is not best_cost / control_median' % SO_FILE)
+    if min(rat) < 0.70: bad('seamoffsets', '%s: a variant has ratio %.2f, a fit would be 0.33-0.37, the README says none fits' % (SO_FILE, min(rat)))
+    else: ok('seamoffsets', '13 variants, best ratio %.2f (a true block gives 0.33-0.37), no fit; the README sentences of 16.25.2 that quote them' % min(rat))
+    def sv(k, col): return float(so[k][col])
+    try:
+        pd_ = ('picture', '24-DA', 'desc', '2'); wd_ = ('whole', '00-F5', 'desc', '2'); wa_ = ('whole', '00-F5', 'asc', '2'); wr_ = ('whole', '00-F5', 'rot', '2')
+        quoted('seam offsets', r'the best ratio of the best score to the median of the controls is ([\d.]+) \(picture `24-DA` descending, `2F:7FD2`: ([\d.]+) against ([\d.]+);',
+               lambda m: ((round(min(rat), 2), sv(pd_, 'best_cost'), sv(pd_, 'control_median')), tuple(float(m.group(i)) for i in (1, 2, 3))), docs=('README.md',), need=('README.md',))
+        quoted('seam offsets', r'the whole map reaches ([\d.]+) descending \(`30:40A2`, controls ([\d.]+)-([\d.]+)\) and ([\d.]+) ascending \(`30:41D1`\), the `\$8800` order ([\d.]+) \(controls ([\d.]+)-([\d.]+)\)',
+               lambda m: ((sv(wd_, 'best_cost'), round(sv(wd_, 'control_min'), 2), round(sv(wd_, 'control_max'), 2), sv(wa_, 'best_cost'), sv(wr_, 'best_cost'), round(sv(wr_, 'control_min'), 2), round(sv(wr_, 'control_max'), 2)),
+                         tuple(float(m.group(i)) for i in range(1, 8))), docs=('README.md',), need=('README.md',))
+        quoted('seam offsets', r'and 1bpp is at the level of its controls \(([\d.]+)-([\d.]+) against ([\d.]+)-([\d.]+)\)',
+               lambda m: ((min(sv(('whole', '00-F5', o, '1'), 'best_cost') for o in ('asc', 'desc')), max(sv(('whole', '00-F5', o, '1'), 'best_cost') for o in ('asc', 'desc')),
+                           min(sv(('whole', '00-F5', o, '1'), 'control_min') for o in ('asc', 'desc')), max(sv(('whole', '00-F5', o, '1'), 'control_max') for o in ('asc', 'desc'))),
+                          tuple(float(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
+    except KeyError as e:
+        bad('seamoffsets', '%s lacks the variant %s' % (SO_FILE, e))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'
