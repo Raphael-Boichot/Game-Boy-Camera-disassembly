@@ -15,44 +15,16 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Patch
 matplotlib.rcParams['text.parse_math'] = False                                      # '$A002' is an address, not a math delimiter
 
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sensor_meter_lib import meter_reads, where
 rom = open(sys.argv[1], 'rb').read(); out = sys.argv[2]
 def rd(a): return rom[0x0A * 0x4000 + a - 0x4000]
-
-def meter_reads():
-    """(loop, address) of every read of Cam_PopcountSampleLoop, from the ROM bytes (the 14 opcodes the routine uses)."""
-    de = 0xA320; hl = 0; ff8a = 0; a = 0; pc = 0x4FBD; z = False; log = []; loop = 1
-    while True:
-        op = rd(pc)
-        if op == 0x3e: a = rd(pc + 1); pc += 2
-        elif op == 0xe0: ff8a = a; pc += 2
-        elif op == 0xf0: a = ff8a; pc += 2
-        elif op == 0xcd: log.append((loop, de)); de = (de + 2) & 0xFFFF; pc += 3
-        elif op == 0x21: hl = rd(pc + 1) | rd(pc + 2) << 8; pc += 3
-        elif op == 0x19: hl = (hl + de) & 0xFFFF; pc += 1
-        elif op == 0x54: de = (hl & 0xFF00) | (de & 0xFF); pc += 1
-        elif op == 0x5d: de = (de & 0xFF00) | (hl & 0xFF); pc += 1
-        elif op == 0x3d: a = (a - 1) & 0xFF; z = (a == 0); pc += 1
-        elif op == 0x28:
-            o = rd(pc + 1); o = o - 256 if o > 127 else o; pc = pc + 2 + (o if z else 0)
-        elif op == 0x18:
-            o = rd(pc + 1); o = o - 256 if o > 127 else o; pc = pc + 2 + o
-        elif op == 0xcb: pc += 2
-        elif op == 0x11: de = rd(pc + 1) | rd(pc + 2) << 8; loop = 2; pc += 3
-        elif op == 0xc8:
-            if z: break
-            pc += 1
-        else: raise SystemExit('unexpected opcode %02x at %04x' % (op, pc))
-    return log
-
-def where(ad):
-    """(x, y) of the first pixel of the 8-pixel tile row that the byte at ad belongs to."""
-    o = ad - 0xA000; i = o // 16
-    return (i % 16) * 8, (i // 16) * 8 + (o % 16) // 2
 
 # the pixel test reads [DE], [DE+2], [DE+4], [DE+6] with DE = $FF8C:$FF8D; the callers set $A002 (0A:4724, 4956: boot, scans) or $A082 (0A:494B: Cam_FactoryMeasure1)
 assert bytes(rd(a) for a in range(0x4C30, 0x4C30 + 18)).hex() == '67afea0040f08c57f08d5f06000e041acb77', 'Cam_PixelTestHelper changed'   # ld h,a; xor a; ld [$4000],a; DE = [$FF8C:$FF8D]; b = 0; c = 4; ld a,[de]; bit 6,a
 TEST_A = [0xA002 + 2 * k for k in range(4)]; TEST_B = [0xA082 + 2 * k for k in range(4)]
-reads = meter_reads()
+reads = meter_reads(rom)
 assert len(reads) == 168 and sum(1 for l, _ in reads if l == 1) == 120
 
 BLUE1, BLUE2, MAG, ORA, RED = '#1b5e9e', '#7db4de', '#d01c8b', '#e66101', '#c0392b'
