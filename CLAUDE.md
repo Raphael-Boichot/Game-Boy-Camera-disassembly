@@ -23,6 +23,8 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
   trailers the harness gives (`Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>` and the session URL line).
 * Answers: plain text, a short summary of the outcome. Do not paste the URL of a published page (the app shows a card), do not describe the owner's images back to him, quote
   outside sources with at most one short sentence, and do not go around a site that the fetch tool blocks.
+* **The owner's pictures of himself:** a frame he supplied is a photo of him. Never copy, commit, embed or redraw it (figures included); keep only numbers derived from it (`tcrf_check/assets/sensor/frame_line_stats_owner.csv`, README §9).
+* **Scope (owner's instruction, 2026-10-20):** small tasks only for now, and L5 (the committed buildable tree) stays deferred until he says otherwise. Ask before starting anything large.
 
 ## What is in the repository, and what is not
 * In git, at the top: `README.md` (§1-18, appendix), `HOWTO_NEW_ROM.md` (playbook for the next ROM, levels L0-L6), `skills/gb-rom-disassembly/SKILL.md` (the same playbook as a skill, keep the two in step),
