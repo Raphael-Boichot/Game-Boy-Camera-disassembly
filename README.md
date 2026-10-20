@@ -2220,23 +2220,29 @@ exactly `$4c`. (3) With 0 photos (`$d561==0`) it silently returns.
 
 ## 9. Masked pixel lines (123–128)
 
-**What the code shows (C).** The auto-exposure metering never samples below **y=103** (§5, §10): it stops
-short of 123, so the metering does not touch the region of the masked lines.
+**Numbering.** The raw frame has 128 lines, y = 0-127 (tile rows 0-15, `$A000-$AFFF`, §18.3). "Lines 123-128" counts from 1 and is y = 122-127,
+the last six lines: bytes +4 to +15 of each of the 16 tiles of tile row 15, `$AF04-$AF0F`, `$AF14-$AF1F` ... `$AFF4-$AFFF` (flat `.sav` offsets `0x0F04-0x0FFF`). MAME's model has 123 sensor lines,
+y = 0-122, and never writes y = 123-127 (§18.12): the two ranges differ by the line y = 122 (?). The figure below puts these lines next to the pixels the code reads.
 
-**What the code cannot show.** That the masked rows read back a constant saturation voltage is a property
+**What the code shows (C).** The auto-exposure metering never samples below **y=103** (§5, §10), and the pixel test of the calibration reads only y = 1-4 of tiles 0 and 8 (§18.3):
+neither touches the masked lines.
+
+![The 128 x 128 raw frame by increasing SRAM address: the calibration pixels (A, B), the exposure metering reads, the shown area and the saturated lines 123-128](tcrf_check/assets/sensor/pixel_map_128x128.png)
+
+**What the code cannot show.** The owner observes that these rows read back a constant saturation voltage (the maximum the sensor can return); that is a property
 of the M64282FP silicon, not something the firmware does: the firmware stores whatever the sensor returns
-at those addresses (?). AntonioND's documentation only says *"the actual sensor image is 128×126 or so"*
+at those addresses (?, the observation is not checked in this repository). AntonioND's documentation only says *"the actual sensor image is 128×126 or so"*
 and defines a `GBCAM_SENSOR_EXTRA_LINES=8` margin in the emulator sample code, which is a software margin
 for the edge-enhancement convolution (neighbour pixels past the visible 112 rows), not necessarily the same
 thing as physically masked reference pixels. The header of MAME's `camera.cpp` calls the sensor "128*123
 pixel" and its model has 123 sensor lines (`SENSOR_HEIGHT`; §18.12): a second statement of the 123-line
-figure, not a measurement, and MAME never writes lines 123-127, so it does not say what the sensor puts
+figure, not a measurement, and MAME never writes y = 123-127, so it does not say what the sensor puts
 there (?).
 
 **What the software path does (C).** The raw 4096-byte (128×128) buffer format is preserved through to the
 saved photos: the ROM-baked Album B pictures are full 128×128 dumps, and the same `$1000`-byte copy size is
 used when the live `$A000` capture buffer is moved around in bank $006. Nothing crops or discards rows
-123-127; whatever the sensor returns there is stored like any other pixel data, and the album and print
+y = 122-127; whatever the sensor returns there is stored like any other pixel data, and the album and print
 screens only show 112 of the 128 rows. A datasheet pointer or probing data would be needed to say more
 (whether the game does anything conditional on that region): see §12.
 
@@ -2249,7 +2255,7 @@ last round. Clearing that up:
 
 ### A. The pixel test of the gain probe and the offset searches — 12 pixels in the first tile row, NOT the main metering
 
-`Cam_PixelTestHelper` (`0A:4C30`, called from the gain probe and from the offset search `Cam_ORegister_SAR_Search`) reads **four bytes** of the capture buffer at a fixed address (`[DE]`, `[DE+2]`, `[DE+4]`, `[DE+6]` with `DE = $A002` — tile 0, rows 1-4, plane 0 — or `$A082` in the factory routine) and counts the set bits in **columns 1-3 (bits 6-4)** of each byte: **12 pixels** (the test of bit 3 is jumped over at `0A:4C51`). It returns 1 when the count reaches 9 (8 in one pass of the threshold scan). The captures that feed it use a flat matrix, so it is a one-bit comparator read-out of the sensor, not photometry; these pixels lie in the first tile row of the frame buffer, the 8 lines above the 112-line photo (§18.3).
+`Cam_PixelTestHelper` (`0A:4C30`, called from the gain probe and from the offset search `Cam_ORegister_SAR_Search`) reads **four bytes** of the capture buffer at a fixed address (`[DE]`, `[DE+2]`, `[DE+4]`, `[DE+6]` with `DE = $A002` — tile 0, rows 1-4, plane 0 — or `$A082` in the factory routine) and counts the set bits in **columns 1-3 (bits 6-4)** of each byte: **12 pixels** (the test of bit 3 is jumped over at `0A:4C51`). It returns 1 when the count reaches 9 (8 in one pass of the threshold scan). The captures that feed it use a flat matrix, so it is a one-bit comparator read-out of the sensor, not photometry; these pixels lie in the first tile row of the frame buffer, the 8 lines above the 112-line photo (§18.3; the figure of §9 and §18.3 shows them next to the 168 metering reads).
 
 ### B. The continuous fine-adjustment loop — the real metering: 168 sparse tile-row reads, centre-weighted
 
@@ -2493,7 +2499,7 @@ Only what is still open; what was answered is in the sections named in the conte
 **Sensor and calibration** (§18.9)
 - What exactly the 12-byte calibration vector represents (a per-mode black-level reference, §18.5, I) and in which conditions the factory step is done.
 - Bit 1 of the `$03` written to `$A000` (P/M selector or status bit; a bus test would settle it); why the first test capture of the gain probe uses the matrix byte `$D5`; which SHOOT variants freeze the auto-exposure (`$D7E3 >= $13`); what the extra `print` sheet of the owner's workbooks recorded; the printing menus (no extra captures seen in BGB, the printer helper was not attached); the SRAM of the recorded unit, to compare with the vector implied by its threshold scans (§18.5).
-- The masked pixel lines (§9): a datasheet pointer or probing data is needed to settle the content of lines 123-127 (MAME's header says 128 x 123 pixels, §18.12: it supports the 123-line figure, not the content of those lines).
+- The masked pixel lines (§9): a datasheet pointer or probing data is needed to settle the content of lines 123-128, y = 122-127 (MAME's header says 128 x 123 pixels, §18.12: it supports the 123-line figure, not the content of those lines).
 
 **Other**
 - TCRF items that keep an open point (`tcrf_check/TCRF_CHECKLIST.md`, the 8 rows tagged `?`): B02, B03 (songs not checked by ear), B08 (the two placeholder tiles), B15 (what the printed icon means), B17 (the "and more"), C04 (the STAFF ROLL label), C17 (the exit-only menu), C18 (the third error face). B14, B18, C06, C12 and C16 are settled (§16.29).
@@ -4424,7 +4430,7 @@ e'   = e + (e >> s) if L >= 36 (too dark: lengthen),  e - (e >> s) if L < 36, sa
 
 * The setpoint is `L = 36`: with the default `D59A = 84` the loop is at rest when Σ is between 2,940 and 3,191. **BRIGHTNESS** is `D59A` itself (Up: −12 down to 12, Down: +12 up to 192); a smaller divisor means a larger L for the same picture, so Up makes the loop settle at a longer exposure (BGB: `D59A` 12 … 192 seen, every step of every dispatch reproduced by the formula).
 * **The correction table** (§10): the shifts run 2, 3, 3, 3, 4, … up to 9 at L = 34, then **16 (= no correction) for L = 35, 36, 37**, then 9 at L = 38, falling to 5-6 around L = 44-49, 4-5 for L = 50-79 and 3 from L = 80 on. The largest steps are therefore 25 % per frame (`e >> 2`, L = 0: a very bright picture) and 12.5 % (`e >> 3`, L ≥ 80: a very dark picture).
-* The calibration vector does not enter the loop at all (`L` is not compared with "target popcount values", `Cam_MainDispatch` does not count "dark pixels"); the only inputs are the sampled tile rows, `D59A`, the 16-bit exposure and the band.
+* The calibration vector does not enter the loop at all (`L` is not compared with "target popcount values", `Cam_MainDispatch` does not count "dark pixels"); the only inputs are the sampled tile rows, `D59A`, the 16-bit exposure and the band. The WRAM copy of the vector (`$D5B5-$D5C0`) is read only by `Cam_Calib_BootMeasureSeq`, the gain probe and the factory test, and their far stubs are called from the boot code only (`0A:7D04` from the `ld hl` at `0A:6A63`, `0A:7D10` from `0A:6A72`, `0A:7CE0` from `0A:6AF1`, all in the boot self-test `0A:6A52`; no caller of the stub `0A:7CE6`; C, scan of the ROM for the far-call pattern): the live loop reads only `$D5C1-$D5CA`, the offsets and Vref the boot found.
 
 **Bands.** The band is `(N, VH, G)` of reg 1: band 0 = (0, 01, 0), band 1 = (1, 11, G < 4), band 2 = (1, 11, 4 or 5), band 3 = (1, 11, 8), band 4 = (0, 00, 10). After the exposure update, only the thresholds of the current band are tested (all constants are in `sensor_exposure_check.py`); the band's V and O come from `$D5C1-$D5CA`, and on a switch the dither matrix is rebuilt:
 
@@ -4468,6 +4474,7 @@ The datasheet (ver. 1.1E, "preliminary") is a poor translation; these are the po
 * **Not on the bus, therefore not checked on the real unit:** the pixel-test result of each capture, the matrix, the level `L`, and V when it moves (it did not).
 * **Bit 1 of `$A000`** (18.2: a P/M selector set by the ROM according to Pan Docs and the data, a status bit written by the MAC-GBD according to the owner: open, a bus test is proposed in 18.2), the **purpose of `$D5` in the matrix of the first search of the gain probe** (the second capture uses `$80`), and why the search order is Above/Below around **zero** rather than around the previous result: ?
 * **The metering loop's sampling** (§10-B): sparse, centre-weighted (the sum of the first 120 reads is doubled) and, in every second iteration of its first loop, starting at an odd address (plane 1 read as plane 0). Read from the ROM and reproduced in BGB (C); whether the odd start is intended, and why the picture is metered this way, is not known (?).
+* **Are the test pixels reference pixels? (?)** The boot reads its 12 pixels in y = 1-4, lines the photo does not use (§18.3). If they are dark / saturated reference lines like the owner's lines 123-128 (§9), the boot offset search does not depend on the scene light and the reading of the vector as a black-level reference (§18.5, I) holds in any lighting. If they see the scene, the boot offsets also absorb the light of the moment: the boot test runs at the shortest exposure (`C = $0010`, 0.256 ms), which keeps that effect small (I), but this is not proven. Tests: compare the bytes `$A002-$A008` with `$AF04-$AFFF` in one saved frame, and record the five boot offsets of one unit with the lens covered and in bright light (BGB cannot, its picture is fake).
 * **Interpretations tagged I:** the gain probe as a unit-spread compensation, the vector as a black-level reference, the proxy modes of the boot searches, the dark/fixed-light condition of the factory step, `E = 2` as the proxy ratio.
 * **The `print` sheet** of two of the workbooks (identical in both): 859 register loads of N, VH, E, Z, I, C (ms), O, V, G (no raw bits), band 1 → 0 / 1 → 2 and back, O = `$29` / `$29` / `$2B` for bands 1, 0, 2 (different from the live recording's `$A3`, `$A2`, `$A5`, so another unit or another session). It obeys the live-view rule 859 / 859, so it is another live-view recording; I cannot tell from the data which action produced it (the "printing menus" were tried in BGB, 18.7, without any camera traffic).
 * **BGB limits:** its fake picture is not a sensor model (above), so BGB's live view only visits bands 1, 2 and 3 (reg 1 = `$E3`, `$E5`, `$E8`: the switches 1 ↔ 2 and 2 ↔ 3 are run by the ROM there), never band 0 or 4 and no 0 ↔ 1 or 3 ↔ 4 switch (those are validated on the two real recordings only), and its V / gain decisions differ from the real unit's (18.4).
@@ -4540,10 +4547,10 @@ Left to right: lens 8; lens 9 after 0, 1, 2 and 3 steps (ramp B); lens 9 at step
 * **Registers 4 and 5 only when N = 0.** MAME adds 2 x 256 cycles and updates P/M only `if (!m_n[0])` (its comment says "not clear", the code tests "clear"). In the recordings **one row = the eight registers as the sensor received them** (introduction of §18) and the 203 rows with N = 1 (56 calibration, 147 live) carry P/M/X = 01/00/01 like the others: if the workbooks are raw (the CSV cannot tell if a cell was filled down), the real MAC-GBD sends registers 4-6 also with N = 1 and MAME's model is a simplification (I). A test: the length of the sensor-bus frame, or of the busy bit, for N = 0 against N = 1 with the same exposure; the rows have no timestamps.
 * **Capture time.** MAME: `31,166 + 5 x 256 (+ 2 x 256 if N = 0) + 16 C` units of four 4.194304 MHz clocks (about 0.95 us), for example 32,702 for C = `$0010` and N = 1. The constant has no stated source and cannot be checked here (no timestamps) (?).
 * **Frame location.** MAME writes the result at RAM page 0 offset `$100` (`$A100`), `(128 x 123) / 8` tile-row pairs = 3,936 bytes, which is 352 bytes more than the 3,584-byte photo area `$A100-$AEFF`, and never writes `$A000-$A0FF`. The ROM's pixel test reads `$A002` and `$A082` (18.3, C), and on the real unit the offset searches answer to it (the O sequences differ from gain to gain, `sar_check_real.txt`), so the real MAC-GBD also fills the first tile row (I). MAME's offset is a simplification; where sensor line 0 lands in the 128-line frame of the real unit is not known (?).
-* **123 lines.** MAME's header "128*123 pixel" and `SENSOR_HEIGHT = 123`: a second statement of the figure of §9, no measurement of lines 123-127.
+* **123 lines.** MAME's header "128*123 pixel" and `SENSOR_HEIGHT = 123`: a second statement of the figure of §9, no measurement of the lines it never writes (y = 123-127).
 * **Not in this section, and not testable with the recordings:** MAME makes RAM unreadable (reads `$00`) and unwritable while a capture runs (the ROM polls bit 0 before it touches RAM at the 12 poll sites of 18.2; nothing contradicts it); registers answer to A6-A0 only; write-only registers read `$00` (the ROM reads only `$A000`); its TODOs say it does not know what the filters do at the image edge (it clamps the coordinates), whether a capture can be cancelled, or how the levels move during the sweep at start.
 
-**Verdict.** Nothing in either source contradicts a C statement of this section. The open points of 18.9 (bit 1 of `$A000`, the content of lines 123-127) are not settled, because both are models. Two things are new for the repository: the decoded cell order of the three dither writers (confirmed by the 1,024-cell rebuild) and the 2x2-block variant `$D59C = 2`, which the outside sources do not know.
+**Verdict.** Nothing in either source contradicts a C statement of this section. The open points of 18.9 (bit 1 of `$A000`, the content of lines 123-128, y = 122-127) are not settled, because both are models. Two things are new for the repository: the decoded cell order of the three dither writers (confirmed by the 1,024-cell rebuild) and the 2x2-block variant `$D59C = 2`, which the outside sources do not know.
 
 ## Appendix: tools
 
