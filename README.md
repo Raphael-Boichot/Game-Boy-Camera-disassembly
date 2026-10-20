@@ -4339,6 +4339,10 @@ Bus order of the eight registers in the workbooks: `001, 010, 011, 100, 101, 110
 
 **The pixel test `Cam_PixelTestHelper` (`0A:4C30`).** Looks at 12 pixels of the capture just taken, in the first tile row of the 128 × 128 frame (RAM bank 0 `$A000-$AFFF`; the 112-line photo is `$A100-$AEFF`, so these are among the 8 lines above it that the photo does not use; BGB confirms the frame location): the four bytes at `[DE], [DE+2], [DE+4], [DE+6]` with `DE = $A002` (tile 0, rows 1-4, plane 0), columns 1, 2, 3 (bits 6, 5, 4) of each byte; `DE = $A082` (tile 8) in `Cam_FactoryMeasure1`. It counts the set bits and returns **A = 1 when the count ≥ H** (H = 9 in the searches, 8 in the second scan of `Cam_ThresholdConverge`) else 0. Two details: it is **12 pixels, not 4 × 4** (the test of bit 3 is jumped over at `0A:4C51`, so only bits 6-4 count), and the pixel data it reads are the **MAC-GBD's 2-bit result for the flat matrix** (all cells equal), so the test asks "does this pixel's analog value sit below the flat threshold": a one-bit comparator read-out of the sensor signal.
 
+![The 128 x 128 raw frame by increasing SRAM address: the calibration pixels (A, B), the exposure metering reads, the shown area and the saturated lines 123-128](tcrf_check/assets/sensor/pixel_map_128x128.png)
+
+*Figure (C for the positions; `tcrf_check/tools/sensor_pixel_map.py`, the metering addresses come from the ROM bytes).* The 12 + 12 test pixels sit in lines 1-4 of tiles 0 and 8 (`$A002-$A008`, `$A082-$A088`), the 168 metering reads between lines 24 and 103, the photo is lines 8-119 (`$A100-$AEFF`). The saturated lines 123-128 (counted from 1, y 122-127 from 0, bytes +4 to +15 of the 16 tiles of tile row 15) are the owner's observation (§9, ?): neither the pixel test nor the metering reads them.
+
 **Offset/bias search `Cam_ORegister_SAR_Search` (`0A:4B6A`).** Finds, for the current N, VH, G, E, C, V and matrix, the offset O at which the pixel test flips (successive approximation, plus a coarse Vref step if O alone cannot reach):
 1. `reg0 = $BF` (Z = 10, O = **+1 V**); capture; pixel test. **Pass** (≥ 9 pixels still below the threshold even with the maximum lift): V += 1 (reg 7 low bits, up to 7) and repeat, then go to 3. **Fail:** go to 2.
 2. `reg0 = $9F` (O = **−1 V**); capture; test. **Fail** (still above the threshold with the lowest offset): V −= 1 (down to 1) and repeat. **Pass:** go to 3.
@@ -4543,6 +4547,7 @@ Left to right: lens 8; lens 9 after 0, 1, 2 and 3 steps (ramp B); lens 9 at step
 
 ## Appendix: tools
 
+- `tcrf_check/tools/sensor_pixel_map.py` — the figure of §18.3: calibration test pixels, exposure metering reads (addresses read from the ROM bytes), shown area and the saturated lines on the 128 x 128 raw frame
 - `tools/ram_census.py` — full WRAM/HRAM access census from an mgbdis disassembly
 - `tools/asset_catalog.py` — enumerates every banked graphics/tilemap copy call site
 - `tools/render_tiles.py`, `tools/render_album.py` — render raw 2bpp ROM data to PNG for visual matching
