@@ -1,0 +1,7 @@
+# sensor_meter_reads_bgb.py on the Japanese ROM (README 10-B): live view, 400 free frames, BGB logging read watchpoint on A000-AFFF
+metering reads: plane 0 (5093) 11256, plane 1 (509E) 11256, RAM banks seen [0]
+full MainDispatch passes in the log: 67; every one equals the executor list (same 168 addresses, same order, plane 1 = address + 1): True
+BGB list: x 16..112 (tile row starts), y 24..103
+centroid (x of the tile centre, y of the line): loop 1 x 69.63 y 63.53, loop 2 x 63.50 y 63.50, whole sum (loop 1 counted twice) x 68.61 y 63.53; frame centre x 63.5, y 63.5
+loop 1: 49 reads with the tile centre left of x 63.5, 71 right; tile columns [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] (the mirror of the range 2..14 about 63.5 is 1..13)
+odd-address reads: 60, of which 8 start at byte 15 of a tile (the second byte is then byte 0 of the next tile)

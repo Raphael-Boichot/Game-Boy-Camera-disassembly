@@ -7,32 +7,11 @@ usage: sensor_meter_geom.py ROM.gb                           prints the geometry
        sensor_meter_geom.py ROM.gb FRAME.bin [EVENTS.csv]    the sum of a 4096-byte frame buffer ($A000-$AFFF of RAM bank 0); with the BGB events of the same run
                                                              (sensor_bgb_log.py, marker Sum at 0A:4011) also the last sum the ROM itself computed"""
 import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sensor_meter_lib import meter_reads, where          # the executor (14 opcodes) lives there, shared with sensor_pixel_map.py and sensor_meter_reads_bgb.py
 rom = open(sys.argv[1], 'rb').read()
-def rd(a): return rom[0x0A * 0x4000 + a - 0x4000]
-de = 0xA320; hl = 0; ff8a = 0; a = 0; pc = 0x4FBD; z = False; log = []; loop = 1
-while True:
-    op = rd(pc)
-    if op == 0x3e: a = rd(pc + 1); pc += 2
-    elif op == 0xe0: ff8a = a; pc += 2
-    elif op == 0xf0: a = ff8a; pc += 2
-    elif op == 0xcd: log.append((loop, de)); de = (de + 2) & 0xFFFF; pc += 3
-    elif op == 0x21: hl = rd(pc + 1) | rd(pc + 2) << 8; pc += 3
-    elif op == 0x19: hl = (hl + de) & 0xFFFF; pc += 1
-    elif op == 0x54: de = (hl & 0xFF00) | (de & 0xFF); pc += 1
-    elif op == 0x5d: de = (de & 0xFF00) | (hl & 0xFF); pc += 1
-    elif op == 0x3d: a = (a - 1) & 0xFF; z = (a == 0); pc += 1
-    elif op == 0x28:
-        o = rd(pc + 1); o = o - 256 if o > 127 else o; pc = pc + 2 + (o if z else 0)
-    elif op == 0x18:
-        o = rd(pc + 1); o = o - 256 if o > 127 else o; pc = pc + 2 + o
-    elif op == 0xcb: pc += 2                       # sla c ; rl b  (doubles the sum of loop 1, between the two loops)
-    elif op == 0x11: de = rd(pc + 1) | rd(pc + 2) << 8; loop = 2; pc += 3
-    elif op == 0xc8:
-        if z: break
-        pc += 1
-    else: raise SystemExit('unexpected opcode %02x at %04x' % (op, pc))
-def where(ad):
-    o = ad - 0xA000; i = o // 16; return (i % 16) * 8, (i // 16) * 8 + (o % 16) // 2
+log = meter_reads(rom)
 for L in (1, 2):
     pts = [(ad, where(ad)) for lp, ad in log if lp == L]
     xs = [p[1][0] for p in pts]; ys = [p[1][1] for p in pts]
