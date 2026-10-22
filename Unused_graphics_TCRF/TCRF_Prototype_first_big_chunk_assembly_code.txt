@@ -1,0 +1,1016 @@
+	LD	(AKARUSA),A		;目標値をワークに
+	
+	LD	A,$00
+	LD	($4000),A		;ＲＡＭバンクの変更
+	
+	
+;-------------現在のチャージタイムの表示---------------
+
+	IFE	OOE
+
+	LD	A,(B_CNTR2)
+	LD	(TEST1),A
+	LD	A,(B_CNTR3)
+	LD	(TEST2),A
+
+	ENDIF
+	
+;-------------黒点数え（真ん中）-----------------------
+	IFE	ZENTAI
+	LD	BC,$00		;真ん中8×7キャラの１の数を数える
+				; 市松模様（448バイトをチェック）
+	LD	de,BUF_ADR+$340
+	CALL	LINE_CHECK
+	LD	de,BUF_ADR+$440
+	CALL	LINE_CHECK
+	LD	de,BUF_ADR+$540
+	CALL	LINE_CHECK
+	LD	de,BUF_ADR+$640
+	CALL	LINE_CHECK
+	LD	de,BUF_ADR+$740
+	CALL	LINE_CHECK
+	LD	de,BUF_ADR+$840
+	CALL	LINE_CHECK
+	LD	de,BUF_ADR+$940
+	CALL	LINE_CHECK
+	ENDIF
+
+;------------黒点数え（画面全体）----------------------
+	ifn	ZENTAI
+	LD	BC,$00
+	
+	LD	DE,BUF_ADR
+	CALL	SCREEN_CHECK
+
+	endif
+
+;********この時点で、BCに黒点の個数が入っている***********
+;********    BCのとりうる値は 0000～1500H      ***********
+
+_COUNT_END
+
+	LD	A,(AKARUSA)
+	LD	D,A		; AKARUSAが、黒点の数の目標値（0～A8）
+
+	SLA	C	; BCを3BIT左にシフト
+	RL	B		
+	SLA	C
+	RL	B
+	SLA	C	; 黒点の数の上位8BITがBレジスタに入る
+	RL	B	; Bの値は 0～A8
+
+
+;--------------------------------------------
+;   ここで現在の黒点の数と目標値を比較する
+;--------------------------------------------
+	LD	A,B
+	SUB	D	; B（黒点の数）からC（AKARUSA:目標値）を引く
+	JR	NC,_UP
+
+;===========================================
+; 現在の黒点の数が、目標値よりも少なかった時
+;  チャージタイムを短くする
+;===========================================
+_DOWN
+	CPL			; BIT反転
+	INC	A		; これで２の補数
+	LD	B,A
+	LD	(TEST),A
+;------------------------------------	
+	LD	A,(B_CNTR2)	;現在のチャージタイムをHL,DEに入れる
+	LD	H,A
+	LD	D,A
+	LD	A,(B_CNTR3)
+	LD	L,A
+	LD	E,A
+;------------------------------------
+	LD	A,B		; チャージタイム増加分の計算
+	LD	BC,CHG_TIME_TBL_D	;テーブルからシフトする回数を得る
+	ADD	A,C
+	LD	C,A
+	JR	NC,_NO_CARRY
+	INC	B
+_NO_CARRY
+	LD	A,(BC)		;ループカウンタ（シフトする回数）
+				;この数が、何分の1を引くかを決める
+;------------------------------------
+_DOWN_LP
+	CP	$00
+	JR	Z,_D_LP_E
+	SRL	D		;DEを右シフト
+	RR	E		;ループするごとに減少分が減る
+	DEC	A
+	JR	_DOWN_LP
+_D_LP_E
+
+;--------DEの2の補数の計算-----------
+	LD	A,D
+	CPL
+	LD	D,A
+	LD	A,E
+	CPL
+	LD	E,A
+	INC	DE
+;------------------------------------
+	ADD	HL,DE
+	JR	_SET
+
+
+
+;===========================================
+; 現在の黒点の数が、目標値よりも多かった時
+;  チャージタイムを長くする
+;===========================================
+_UP
+	LD	B,A		;引き算結果をBに入れる
+	LD	(TEST),A
+
+;------------------------------------
+	LD	A,(B_CNTR2)	;現在のチャージタイムを、HL,DEに入れる
+	LD	H,A
+	LD	D,A
+	LD	A,(B_CNTR3)
+	LD	L,A
+	LD	E,A
+;------------------------------------
+	LD	A,B		; チャージタイム増加分の計算
+
+;------------------------------------
+	CP	$00		;00なら変更の必要無し。戻る。
+	RET	Z
+;------------------------------------
+
+	LD	BC,CHG_TIME_TBL_U	;テーブルからシフトする回数を得る
+	ADD	A,C
+	LD	C,A
+	JR	NC,_NO_CARRY_U
+	INC	B
+_NO_CARRY_U
+	LD	A,(BC)		;ループカウンタ（シフトする回数）
+
+;------------------------------------
+_UP_LP	
+	CP	$00
+	JR	Z,_U_LP_E
+	SRL	D
+	RR	E
+	DEC	A
+	JR	_UP_LP
+_U_LP_E
+	ADD	HL,DE
+	JR	NC,_SET
+	LD	HL,$FFFF	; MAX値（FFFFH）超えた場合はMAXに
+;------------------------------------
+
+;======================================================
+;  実際にチャージタイムを変更する（チップへの転送も）
+;======================================================
+_SET
+	LD	A,H
+	LD	(B_CNTR2),A
+	LD	A,L
+	LD	(B_CNTR3),A
+
+	LD	DE,$FFDF		; 21Hより下は使えないので
+	ADD	HL,DE
+	JR	C,_SET_OK
+
+	LD	A,$00
+	LD	(B_CNTR2),A		; 強制的に21Hにする
+	LD	A,$21
+	LD	(B_CNTR3),A
+
+_SET_OK
+	LD	A,$10
+	LD	($4000),A		; RAM BANKの変更
+	
+	LD	A,(B_CNTR2)
+	LD	(CNTR2),A		;実際に変更する
+	LD	A,(B_CNTR3)
+	LD	(CNTR3),A
+
+	RET
+
+
+
+
+
+;=================================================
+; １の数を数えるサブルーチン １行分
+;=================================================
+LINE_CHECK
+	ld	a,$4
+	ld	(r0),a	; loop counter
+_lp
+	call	BIT_COUNT
+	inc	de
+	inc	de
+	
+	call	BIT_COUNT
+	inc	de
+	inc	de
+
+	call	BIT_COUNT
+	inc	de
+	inc	de
+
+	call	BIT_COUNT
+	inc	de
+	inc	de
+	
+	inc	de
+	inc	de
+	
+	call	BIT_COUNT
+	inc	de
+	inc	de
+
+	call	BIT_COUNT
+	inc	de
+	inc	de
+
+	call	BIT_COUNT
+	inc	de
+	inc	de
+
+	call	BIT_COUNT
+
+	ld	a,(r0)
+	dec	a
+	ret	z
+	ld	(r0),a
+	jr	_lp
+
+
+;************************************************
+;*   SCREEN_CHECK		画面全体	*
+;************************************************
+
+SCREEN_CHECK
+	ld	a,$1C
+	ld	(r0),a	; loop counter
+_lp
+	CALL	BIT_COUNT	;最初のキャラクタの1行目
+	LD	HL,$14		
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+
+	CALL	BIT_COUNT	;次のキャラクタの４行目
+	LD	HL,$14
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+	
+	CALL	BIT_COUNT	;次のキャラクタの７行目
+	LD	HL,$4
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+	
+	CALL	BIT_COUNT	;次のキャラクタの１行目
+	LD	HL,$14
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+	
+	CALL	BIT_COUNT
+	LD	HL,$14
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+	
+	CALL	BIT_COUNT
+	LD	HL,$4
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+	
+	CALL	BIT_COUNT
+	LD	HL,$14
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L
+	
+	CALL	BIT_COUNT
+	LD	HL,$4
+	ADD	HL,DE
+	LD	D,H
+	LD	E,L	
+	
+	ld	a,(r0)
+	dec	a
+	ret	z
+	ld	(r0),a
+	jr	_lp
+
+
+;==================================================
+; 色の濃度を計算する  色データ00､01､10､11を0,1,2,3
+;                     として足しあわせる。
+;	bc : bit counter
+;	de : チェックする画像データのアドレス
+;==================================================
+BIT_COUNT
+	LD	H,$3E		; テーブルのアドレス$3E00
+	LD	A,(DE)
+	INC	DE
+	LD	L,A
+	LD	L,(HL)
+	LD	H,$00
+	ADD	HL,BC
+	LD	B,H
+	LD	C,L
+	
+	LD	H,$3E
+	LD	A,(DE)
+	INC	DE
+	LD	L,A
+	LD	L,(HL)
+	SLA	L		; 1BIT左シフト
+	LD	H,$00
+	ADD	HL,BC
+	LD	B,H
+	LD	C,L
+
+	RET
+
+
+
+
+;//////////////////////////////////////////////////////////////////////
+;//////////////////////////////////////////////////////////////////////
+
+
+;*******************************************************
+;* SET DITH MATRIX                                     *
+;*     B : ディザパターン                              *
+;*     C : コントラスト                                *
+;*******************************************************
+SET_DITH_MATRIX
+;++++++コントラストからS0,S1,S2,W0,W1,W2を決定する+++++++
+	LD	HL,CONT_PATTERN
+	LD	DE,$6
+_LP0
+	DEC	C		;コントラスト１～２１Ｈ
+	JR	Z,_GET_PAT
+	ADD	HL,DE
+	JR	_LP0
+
+
+_GET_PAT
+	LD	DE,S0		; DEにS0のアドレスをセット
+	LD	A,(HLI)
+	LD	(DE),A
+	INC	DE
+	LD	A,(HLI)
+	LD	(DE),A
+	INC	DE
+	LD	A,(HLI)
+	LD	(DE),A
+	INC	DE
+	LD	A,(HLI)
+	LD	(DE),A
+	INC	DE
+	LD	A,(HLI)
+	LD	(DE),A
+	INC	DE
+	LD	A,(HLI)
+	LD	(DE),A
+
+;++++++ディザパターンの先頭アドレスをＨＬに入れる++++++++
+	LD	HL,NO_DITHER_PAT
+	LD	DE,$10
+	LD	A,B
+	OR	A
+	JR	Z,_LP_START
+_LP1
+	ADD	HL,DE
+	DEC	B
+	JR	NZ,_LP1
+
+;++++++閾値バッファに書き込んでいく+++++++++++
+_LP_START
+
+	LD	DE,B_TH000	; 書き込み先バッファ（４８バイト）の先頭
+
+	LD	A,$10
+	LD	(LOOP_COUNT),A
+_LP2
+	LD	A,(W0)
+	LD	C,A
+
+	LD	A,(HLI)
+	LD	B,A
+	XOR	A
+_LP21
+	DEC	C
+	JR	Z,_LP22
+	ADD	A,B
+	JR	_LP21
+_LP22
+	LD	B,A
+	LD	A,(S0)
+	ADD	A,B
+
+	LD	(DE),A
+	INC	DE
+	LD	A,(LOOP_COUNT)
+	DEC	A
+	LD	(LOOP_COUNT),A
+	JR	NZ,_LP2
+
+;------------------------------
+	LD	BC,$FFF0
+	ADD	HL,BC
+
+	LD	A,$10
+	LD	(LOOP_COUNT),A
+_LP3
+	LD	A,(W1)
+	LD	C,A
+
+	LD	A,(HLI)
+	LD	B,A
+	XOR	A
+_LP31
+	DEC	C
+	JR	Z,_LP32
+	ADD	A,B
+	JR	_LP31
+_LP32
+	LD	B,A
+	LD	A,(S1)
+	ADD	A,B
+
+	LD	(DE),A
+	INC	DE
+	LD	A,(LOOP_COUNT)
+	DEC	A
+	LD	(LOOP_COUNT),A
+	JR	NZ,_LP3
+
+;-------------------------------
+	LD	BC,$FFF0
+	ADD	HL,BC
+
+	LD	A,$10
+	LD	(LOOP_COUNT),A
+_LP4
+	LD	A,(W2)
+	LD	C,A
+
+	LD	A,(HLI)
+	LD	B,A
+	XOR	A
+_LP41
+	DEC	C
+	JR	Z,_LP42
+	ADD	A,B
+	JR	_LP41
+_LP42
+	LD	B,A
+	LD	A,(S2)
+	ADD	A,B
+
+	LD	(DE),A
+	INC	DE
+	LD	A,(LOOP_COUNT)
+	DEC	A
+	LD	(LOOP_COUNT),A
+	JR	NZ,_LP4
+
+
+;=======閾値をバッファから網膜チップに書き込む=========
+
+	C_RAMBK	$10
+
+	LD	HL,$A006
+	
+	LD	A,(B_TH000)
+	LD	(HLI),A
+	LD	A,(B_TH001)
+	LD	(HLI),A
+	LD	A,(B_TH002)
+	LD	(HLI),A
+	LD	A,(B_TH010)
+	LD	(HLI),A
+	LD	A,(B_TH011)
+	LD	(HLI),A
+	LD	A,(B_TH012)
+	LD	(HLI),A
+	LD	A,(B_TH020)
+	LD	(HLI),A
+	LD	A,(B_TH021)
+	LD	(HLI),A
+	LD	A,(B_TH022)
+	LD	(HLI),A
+	LD	A,(B_TH030)
+	LD	(HLI),A
+	LD	A,(B_TH031)
+	LD	(HLI),A
+	LD	A,(B_TH032)
+	LD	(HLI),A
+
+	LD	A,(B_TH100)
+	LD	(HLI),A
+	LD	A,(B_TH101)
+	LD	(HLI),A
+	LD	A,(B_TH102)
+	LD	(HLI),A
+	LD	A,(B_TH110)
+	LD	(HLI),A
+	LD	A,(B_TH111)
+	LD	(HLI),A
+	LD	A,(B_TH112)
+	LD	(HLI),A
+	LD	A,(B_TH120)
+	LD	(HLI),A
+	LD	A,(B_TH121)
+	LD	(HLI),A
+	LD	A,(B_TH122)
+	LD	(HLI),A
+	LD	A,(B_TH130)
+	LD	(HLI),A
+	LD	A,(B_TH131)
+	LD	(HLI),A
+	LD	A,(B_TH132)
+	LD	(HLI),A
+
+	LD	A,(B_TH200)
+	LD	(HLI),A
+	LD	A,(B_TH201)
+	LD	(HLI),A
+	LD	A,(B_TH202)
+	LD	(HLI),A
+	LD	A,(B_TH210)
+	LD	(HLI),A
+	LD	A,(B_TH211)
+	LD	(HLI),A
+	LD	A,(B_TH212)
+	LD	(HLI),A
+	LD	A,(B_TH220)
+	LD	(HLI),A
+	LD	A,(B_TH221)
+	LD	(HLI),A
+	LD	A,(B_TH222)
+	LD	(HLI),A
+	LD	A,(B_TH230)
+	LD	(HLI),A
+	LD	A,(B_TH231)
+	LD	(HLI),A
+	LD	A,(B_TH232)
+	LD	(HLI),A
+
+	LD	A,(B_TH300)
+	LD	(HLI),A
+	LD	A,(B_TH301)
+	LD	(HLI),A
+	LD	A,(B_TH302)
+	LD	(HLI),A
+	LD	A,(B_TH310)
+	LD	(HLI),A
+	LD	A,(B_TH311)
+	LD	(HLI),A
+	LD	A,(B_TH312)
+	LD	(HLI),A
+	LD	A,(B_TH320)
+	LD	(HLI),A
+	LD	A,(B_TH321)
+	LD	(HLI),A
+	LD	A,(B_TH322)
+	LD	(HLI),A
+	LD	A,(B_TH330)
+	LD	(HLI),A
+	LD	A,(B_TH331)
+	LD	(HLI),A
+	LD	A,(B_TH332)
+	LD	(HLI),A
+	
+	R_RAMBK
+
+	RET
+
+
+
+;=========================================================
+;  REGISTER_SETTING
+;
+;   人工網膜チップのレジスタの設定
+;
+;   Aレジスタ : 上位4ビット エッジの強さ ０～７
+;		下位4ビット モード 0:負画像
+;				   1:横エッジ強調
+;				   2:縦エッジ強調
+;				   3:二次元エッジ強調
+;				   4:横エッジ
+;				   5:縦エッジ
+;				   6:二次元エッジ
+;==========================================================
+REGISTER_SETTING
+	LD	B,A	;モードとエッジの強さ
+	
+	AND	$0F
+	CP	$00
+	JR	Z,_FUGAZOU
+	CP	$01
+	JR	Z,_YOKO_KYOUTYOU
+	CP	$02
+	JR	Z,_TATE_KYOUTYOU
+	CP	$03
+	JR	Z,_NIJIGEN_KYOUTYOU
+	CP	$04
+	JP	Z,_YOKO_EDGE
+	CP	$05
+	JP	Z,_TATE_EDGE
+	JP	_NIJIGEN_EDGE
+	RET
+
+;--------------負画像------------------
+_FUGAZOU
+	LD	A,$02
+	LD	(B_CNTR0),A
+	LD	A,$02
+	LD	(CNTR1),A
+	LD	(B_CNTR1),A
+	LD	A,$02
+	LD	(CNTR4),A
+	LD	(B_CNTR4),A
+;	LD	A,$80
+;	LD	(B_CNTR5),A
+	RET
+
+;-----------横エッジ強調--------------
+_YOKO_KYOUTYOU
+	LD	A,$02
+	LD	(B_CNTR0),A
+	LD	A,$22
+	LD	(B_CNTR1),A
+	LD	(CNTR1),A
+	
+	LD	A,B
+	AND	$F0
+	CP	$00
+	JR	Z,_EDGE_YOWAI1
+	CP	$10
+	JR	Z,_EDGE_YOWAI1
+	CP	$20
+	JR	Z,_EDGE_YOWAI1
+	ADD	A,$6
+	JR	_V_SET_YK
+_EDGE_YOWAI1
+	ADD	A,$03
+_V_SET_YK
+	LD	(CNTR4),A
+	LD	(B_CNTR4),A
+;	LD	A,$80
+;	LD	(B_CNTR5),A
+	
+	RET
+	
+;-----------縦エッジ強調--------------
+_TATE_KYOUTYOU
+	LD	A,$00
+	LD	(B_CNTR0),A
+	LD	A,$C2
+	LD	(CNTR1),A
+	LD	(B_CNTR1),A
+	
+	LD	A,B
+	AND	$F0
+	ADD	A,$03
+	LD	(CNTR4),A
+	LD	(B_CNTR4),A
+	RET
+	
+;---------二次元エッジ強調------------
+
+_NIJIGEN_KYOUTYOU
+	LD	A,$00
+	LD	(B_CNTR0),A
+	LD	A,$E2
+	LD	(B_CNTR1),A
+	LD	(CNTR1),A
+
+	LD	A,B
+	AND	$F0
+	CP	$00
+	JR	Z,_EDGE_YOWAI
+	CP	$10
+	JR	Z,_EDGE_YOWAI
+	CP	$20
+	JR	Z,_EDGE_YOWAI
+	CP	$30
+	JR	Z,_EDGE_TYUU
+	ADD	A,$6
+	JR	_V_SET
+_EDGE_YOWAI
+	ADD	A,$03
+	JR	_V_SET
+_EDGE_TYUU
+	ADD	A,$04
+	
+_V_SET
+	LD	(CNTR4),A
+	LD	(B_CNTR4),A
+;	LD	A,$80
+;	LD	(B_CNTR5),A
+	RET
+
+;--------------横エッジ-----------------
+_YOKO_EDGE
+
+	RET
+	
+;--------------縦エッジ-----------------
+_TATE_EDGE
+
+	RET
+	
+;------------二次元エッジ---------------
+_NIJIGEN_EDGE
+	LD	A,$00
+	LD	(B_CNTR0),A
+	LD	A,$E2
+	LD	(CNTR1),A
+	LD	(B_CNTR1),A
+	
+	LD	A,B
+	AND	$F0
+	ADD	A,$03
+	SET	7,A
+	LD	(CNTR4),A
+	LD	(B_CNTR4),A
+	
+	RET
+	
+
+;///////////////////////////////////////////////////////////////////
+;///////////////////////////////////////////////////////////////////
+
+
+;=====================================================
+;
+;   オフセット調整
+;
+;  閾値が変更されるので、この後ディザの設定をすること
+;=====================================================
+GET_OFFSET
+
+;-------------------------
+	LD	A,$10		; RAMBK $10
+	LD	($4000),A
+
+	LD	B,$70
+	LD	A,(B_MODE)
+	CP	$06
+	JR	NZ,_SET_TH
+
+	LD	B,$55		;閾値を55H(1V)に設定する
+_SET_TH
+	LD	HL,TH000
+	LD	DE,$30
+_TH_LOOP
+	LD	(HL),B
+	DEC	DE
+	LD	A,D
+	OR	E
+	JR	NZ,_TH_LOOP
+
+
+;--------------------------
+
+	XOR	A		;チャージタイムを0021Hに設定する
+	LD	(CNTR2),A
+	LD	A,$21
+	LD	(CNTR3),A
+
+;---------------------------
+
+	LD	A,(B_CNTR5)
+	AND	$C0
+	LD	B,$3F		;オフセットの初期値は3FH(+1FH)
+	OR	B
+	LD	(B_CNTR5),A
+	LD	(CNTR5),A
+
+
+;-------------------------------------
+
+
+	LD	A,$10
+	LD	($4000),A
+	
+	LD	A,(B_CNTR0)	;スタートビットを立てる
+	SET	0,A
+	LD	(CNTR0),A
+
+_POLL1				;画像取得ポーリング
+	LD	A,(CNTR0)
+	BIT	0,A
+	JR	NZ,_POLL1
+		
+	LD	A,(B_CNTR0)	;スタートビットを立てる
+	SET	0,A
+	LD	(CNTR0),A
+
+_POLL2				;画像取得ポーリング
+	LD	A,(CNTR0)
+	BIT	0,A
+	JR	NZ,_POLL2
+
+
+;-------------------------------------------------------
+_LOOP
+	LD	A,$10
+	LD	($4000),A
+	
+	LD	A,(B_CNTR0)	;スタートビットを立てる
+	SET	0,A
+	LD	(CNTR0),A
+
+_POLL				;画像取得ポーリング
+	LD	A,(CNTR0)
+	BIT	0,A
+	JR	NZ,_POLL
+
+	CALL	CHECK_BLACK	;黒レベルに到達したか？
+	OR	A		;Ａレジスタが１のとき終了
+	JR	NZ,_LOOP_END
+
+	CALL	OFFSET_DOWN	;オフセットを下げて繰り返し
+	OR	A		;Ａレジスタが１のとき終了
+	JR	Z,_LOOP
+
+;--------------------------------------------------------
+_LOOP_END
+
+	LD	A,(B_CNTR2)	;チャージタイムを元に戻す
+	LD	(CNTR2),A
+	LD	A,(B_CNTR3)
+	LD	(CNTR3),A
+
+	RET
+
+
+;=================
+;CHECK_BLACK
+;=================
+CHECK_BLACK
+	XOR	A
+	LD	($4000),A	;RAM BANK 0
+	
+;	LD	HL,$AD0A
+	LD	HL,$A770
+	LD	E,$10
+_LOOP
+	LD	A,(HLI)
+	CP	$FF
+	JR	NZ,_RET
+
+;	LD	A,(HLI)
+;	CP	$FF
+;	JR	NZ,_RET
+;	LD	A,L
+;	ADD	A,$0E
+;	LD	L,A
+
+	DEC	E
+	JR	NZ,_LOOP
+
+;---黒レベルがでた！
+	LD	A,$10
+	LD	($4000),A	;RAM BANK 10H
+	LD	A,$01		;黒レベルが出たよフラグセット！
+	RET
+
+;---黒レベルは出なかった。オフセットを下げて出直そう
+_RET
+	LD	A,$10
+	LD	($4000),A	;RAM BANK 10H
+	XOR	A
+	RET
+
+
+;=================
+;OFFSET_DOWN
+;=================
+OFFSET_DOWN
+	LD	A,(B_CNTR5)
+
+	BIT	5,A		;符号チェック
+	JR	Z,_MINUS
+
+;------------------------------
+_PLUS
+	AND	$3F		;下位6BITをみて
+	CP	$20
+	JR	Z,_PLUS_END	;現在＋０の時は・・・_PLUS_END
+	
+	DEC	A		;減らす
+;	SET	5,A		;符号ビットをたてる
+	LD	B,$00
+	JR	_DOWN_END
+	
+_PLUS_END			;-1にする
+	LD	A,$01
+	LD	B,$00
+	JR	_DOWN_END
+
+;------------------------------
+_MINUS
+	AND	$1F
+	CP	$1F
+	JR	NZ,_MINUS_DOWN
+	LD	B,$01		;終了フラグ
+	JR	_DOWN_END
+
+_MINUS_DOWN
+	INC	A		;へらす
+	LD	B,$00
+
+;-----------------------------
+_DOWN_END
+	LD	C,A
+	LD	A,(B_CNTR5)
+	AND	$C0
+	OR	C
+	LD	(B_CNTR5),A
+	LD	(CNTR5),A
+
+	LD	A,B		;一番下までいったかフラグ
+
+	
+	RET
+
+
+;///////////////////////////////////////////////////////////////////////
+;///////////////////////////////////////////////////////////////////////
+
+;=======================================================
+;
+;   TRANSFER_TO_BUF
+;
+;     画像をバッファに転送する
+;     Ａレジスタ : パレットとモード
+;=======================================================
+TRANSFER_TO_BUF
+
+	AND	$1F	; 下位５ＢＩＴがモード
+_TENSOU1
+	CP	13
+	JR	NZ,_TENSOU2
+	CALL	TENSOU_TATE
+	JP	_TENSOU_END
+
+_TENSOU2
+	CP	16
+	JR	NZ,_TENSOU3
+	CALL	TENSOU_YOKO
+	JP	_TENSOU_END
+
+_TENSOU3
+	CP	2
+	JR	NZ,_TENSOU4
+	CALL	MIRROR_MODE
+	JP	_TENSOU_END
+_TENSOU4
+	CP	8
+	JR	NZ,_TENSOU5
+	CALL	MABIKI_MODE
+	JP	_TENSOU_END
+_TENSOU5
+	CP	9
+	JR	NZ,_TENSOU6
+	CALL	MABIKI_MODE2
+	JP	_TENSOU_END
+_TENSOU6
+	CP	5
+	JR	NZ,_TENSOU7
+	CALL	TATE_NOBASI_MODE
+	JP	_TENSOU_END
+_TENSOU7
+	CP	6
+	JR	NZ,_TENSOU8
+	CALL	YOKO_NOBASI_MODE
+	JP	_TENSOU_END
+_TENSOU8
+	CP	7
+	JR	NZ,_TENSOU0
+	CALL	KAKUDAI_MODE
+	JP	_TENSOU_END
+_TENSOU0
+	XOR	A
+	LD	($4000),A
+	
+	LD	HL,$A100	
+	LD	DE,$D000
+	LD	B,$0E
+	CALL	DATA_MOV_F
+	JR	_TENSOU_END
+
+_TENSOU_END
+
+	RET
+
+;=====================
