@@ -88,7 +88,7 @@ DEF wCollisionMask1            EQU $d040 ; C 56  [7] collision mask 1
 DEF wRunStumbleCounter         EQU $d044 ; C 1  stumble counter, counts down
 DEF wRunFinishLineState        EQU $d045 ; C 1  finish line animation state
 DEF wRunRaceExtra              EQU $d048 ; I 75  race / result variables $D048-$D092 (flag, race counter, confetti, character pick)
-DEF wRunFlagHeight             EQU $d048 ; C 1  flag height 0-$74 (Run_FlagHeight)
+DEF wRunFlagY                  EQU $d048 ; C 1  flag y on the pole: $74 = foot (fanfare $40 when it lands there again); 2 = top (hoisted; 
 DEF wRunFlagLevel              EQU $d049 ; C 1  flag level 0-6
 DEF wRunFlagCounter            EQU $d04a ; C 1  flag counter, index of the flag tables
 DEF wRunFlagState              EQU $d04b ; C 1  flag animation state

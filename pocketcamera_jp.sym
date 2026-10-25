@@ -3164,7 +3164,7 @@
 09:65fb Run_PodiumMoleTbl
 09:6604 Run_ConfettiInit
 09:6642 Mode21_State0C_ResultScreen
-09:66a5 Run_FlagLanded
+09:66a5 Run_FlagUpConfettiDone
 09:66bb Mode21_State0D_Unused
 09:66bc Mode21_State0E_Leave
 09:66d2 Run_ClearRaceState

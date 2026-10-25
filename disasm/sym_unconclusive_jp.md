@@ -17,7 +17,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | mode state | 0 | 0 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2528 | the sound each id plays |
-| Run minigame | 1 | 22 | variable roles during play |
+| Run minigame | 0 | 0 | variable roles during play |
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
 | main-menu slide | 0 | 0 | which transition each slide is |
 | arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
@@ -143,14 +143,6 @@ _Why doubtful:_ tag chosen from the routine that triggers the id (key press, era
 | 1F:507D | `Sfx3_Init_02_ViewArcadeSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 02 (table $42F2) |
 | 1F:50BE | `Sfx3_Step_01_ShootSelect` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 01 (table $4306) |
 | 1F:50D7 | `Sfx3_Init_01_ShootSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 01 (table $42F2) |
-
-## Run minigame (1)
-
-_Why doubtful:_ role of several state variables guessed. _To settle:_ play the game with a watch on the named variables.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 09:66A5 | `Run_FlagLanded` | 22 | Run (marathon) mini-game routine or table | returns Z when the flag counter $D048 is 2 and the y byte (record + 2, from $D054, step 6) of all 10 confetti  |
 
 ## settled as unused, final I (36)
 

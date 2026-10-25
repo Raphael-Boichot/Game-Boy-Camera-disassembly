@@ -1,0 +1,37 @@
+BGB 2026-10-25, tcrf_check/tools/bgb_run_flag_wp.py 'race 1, A every 2nd, then A on the result screen' OUT (corpus path of entry 649 of
+coverage/v8/unlock_fuzz/f1_organic replayed from saves_unl/unl_CE10238211.sav, tools/make_unlocked_saves.py), end 21:0C, 5,115 frames.
+Watchpoints: RET = 09:66BA (ret of Run_FlagUpConfettiDone, ex Run_FlagLanded) with A, $D048, mode, state; CLAMP2 = 09:6BDB (Run_FlagHeight pins the flag at 2,
+noise request $11); CELEB = 09:6CA1 (Run_Celebration); CROWN = 09:7008 (Run_DrawCrown); CTL = writes of $D5CF.
+
+hits (message -> count):
+  RET 00 02 21 0C        2316
+  CROWN 02               2316
+  CELEB 02               1158
+  RET FF 02 21 0C        232
+  RET FE 02 21 0C        70
+  RET F6 02 21 0C        28
+  RET F7 02 21 0C        28
+  RET BE 02 21 0C        22
+  RET BF 02 21 0C        22
+  RET EF 02 21 0C        8
+  RET B6 02 21 0C        8
+  RET B7 02 21 0C        8
+  RET FC 02 21 0C        8
+  RET FD 02 21 0C        8
+  RET EE 02 21 0C        6
+  RET F4 02 21 0C        4
+  RET F5 02 21 0C        4
+  CLAMP2 03 06           2
+  RET 9E 02 21 0C        2
+  RET 9F 02 21 0C        2
+  RET AE 02 21 0C        2
+  RET AF 02 21 0C        2
+  RET DE 02 21 0C        2
+  RET DF 02 21 0C        2
+  RET F8 02 21 0C        2
+  RET F9 02 21 0C        2
+  RET FA 02 21 0C        2
+  RET FB 02 21 0C        2
+
+successive values of A at the ret (the OR of the confetti y bytes, until it is 0):
+  FF EF F6 F7 F6 F7 FE FF FE FF FE FF FE FF FE FF FE FF F6 F7 F6 F7 FE FF FE FF FE FF FE FF 9E 9F AE AF B6 B7 B6 B7 BE BF BE BF BE BF BE BF BE BF BE BF B6 B7 B6 B7 BE BF BE BF BE BF BE BF BE BF EE EF F6 F7 F6 F7 FE FF FE FF FE FF FE FF FE FF FE FF F6 F7 F6 F7 FE FF FE FF FE FF FE FF DE DF EE EF F6 F7 F6 F7 FE FF FE FF FE FF FE FF FE FF FE FF F6 F7 F6 F7 FE FF FE FF FE FF FE FF FE FF EE EF F4 F5 F6 F7 FC FD FE FF FC FD FE FF FC FD FE FF F4 F5 F6 F7 F8 F9 FA FB FC FD FE FF 00

@@ -87,7 +87,7 @@ d040,56,wCollisionMask1,07;00:1668,C,[7] collision mask 1
 d044,1,wRunStumbleCounter,09,C,"stumble counter, counts down"
 d045,1,wRunFinishLineState,09,C,finish line animation state
 d048,75,wRunRaceExtra,09,I,"race / result variables $D048-$D092 (flag, race counter, confetti, character pick)"
-d048,1,wRunFlagHeight,09,C,flag height 0-$74 (Run_FlagHeight)
+d048,1,wRunFlagY,09,C,flag y on the pole: $74 = foot (fanfare $40 when it lands there again); 2 = top (hoisted; Run_FlagHeight pins it there with noise request $11)
 d049,1,wRunFlagLevel,09,C,flag level 0-6
 d04a,1,wRunFlagCounter,09,C,"flag counter, index of the flag tables"
 d04b,1,wRunFlagState,09,C,flag animation state

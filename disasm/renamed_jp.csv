@@ -708,3 +708,4 @@ bank,addr,old_name,new_name,old_conf,new_conf,reason
 00,3249,Mode1D_InterleaveTileRows,Mode1D_InterleaveTileRows,I,C,"name kept, evidence upgraded (I -> C): ran only in mode 1D state 03 in a BGB print of layout 3 (panorama, row pick), 2026-10-25"
 11,5800,Unused_TCRF_HandNewspaperFrames_Gfx,Unused_TCRF_HandNewspaperFrames_Gfx,I,C,"name kept, evidence upgraded (I -> C): exact match with the TCRF picture and the owner's yes (2026-10-25)"
 13,5CA0,Unused_TCRF_AlbumHandGestures_Gfx,Unused_TCRF_AlbumHandGestures_Gfx,I,C,"name kept, evidence upgraded (I -> C): exact match with the TCRF picture and the owner's yes (2026-10-25)"
+09,66A5,Run_FlagLanded,Run_FlagUpConfettiDone,I,C,renamed from its code and a BGB race run: Z when the flag is hoisted to the top and all confetti has fallen off (the old reading had the flag axis backwards)

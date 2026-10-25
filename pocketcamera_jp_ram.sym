@@ -85,7 +85,7 @@
 00:D040 wCollisionMask1
 00:D044 wRunStumbleCounter
 00:D045 wRunFinishLineState
-00:D048 wRunFlagHeight
+00:D048 wRunFlagY
 00:D048 wRunRaceExtra
 00:D049 wRunFlagLevel
 00:D04A wRunFlagCounter
