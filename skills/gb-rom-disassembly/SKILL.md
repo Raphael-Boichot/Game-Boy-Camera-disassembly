@@ -19,7 +19,7 @@ Full version: `HOWTO_NEW_ROM.md` in the Game-Boy-Camera-disassembly repository (
 | L5 | committed, buildable, editable tree: split files, assets as INCBIN, md5 check in `make` | tree in git |
 | L6 | understanding: charset table, sibling ROMs, owner-validated names | owner answers file |
 
-Pocket Camera JP (measured 2026-10-14, README §1.3): L0-L2 done, L3 mostly (5,347 names: C 4,006 / I 1,341 / ? 0, 116 doubtful rows on 10,933 distinct bytes), L4 done (789 RAM names applied to 10,239 instructions; 1,066 operands, 62 mode-table bytes and 230 sound-list bytes read as `MODE_*`, key-mask, hardware-flag and `MUSIC_*` / `SFX*_*` sound-id constants; state numbers stay numbers), L5 not done, L6 partial. Do L0-L2 first, but start L4 and L5 as soon as L2 exists: they were left to the end.
+Pocket Camera JP (measured 2026-10-14, README §1.3): L0-L2 done, L3 mostly (5,347 names: C 4,010 / I 1,337 / ? 0, 112 doubtful rows on 10,591 distinct bytes), L4 done (789 RAM names applied to 10,239 instructions; 1,066 operands, 62 mode-table bytes and 230 sound-list bytes read as `MODE_*`, key-mask, hardware-flag and `MUSIC_*` / `SFX*_*` sound-id constants; state numbers stay numbers), L5 not done, L6 partial. Do L0-L2 first, but start L4 and L5 as soon as L2 exists: they were left to the end.
 
 ## Stages, in order
 

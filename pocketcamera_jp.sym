@@ -2500,7 +2500,7 @@
 07:46bc Mode0E_State0B_ExchangeBarsB
 07:472e Mode0E_State0C_ExchangeWaitB
 07:4759 Mode0E_State0D_PickSecond
-07:4831 Mode0E_State0E_AbortWait2
+07:4831 Mode0E_State0E_ConfirmSend
 07:486d Mode0E_State0F_Ready
 07:4876 Mode0E_State10_ExchangeWaitC
 07:48a1 Mode0E_State11_ExchangeDoneB

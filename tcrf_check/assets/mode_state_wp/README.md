@@ -30,12 +30,15 @@ prove the role written in the rest of the name (`DrawPanoramaHint`, `PickConfirm
 ## Result
 
 Every run's control watchpoint fired (13 to 100 writes of `$D5CF` per run), so a handler with no hit was not run. BGB prints the mode and state in hex.
-* 65 of the 70 handlers ran, **each only in the mode its name gives**; the 25 names that carry a state: 21 ran in exactly that state and no other, 4 were not reached.
-  No handler contradicts its name.
-* `Mode0E_State0C_ExchangeWaitB` ran only in the receiver-initiated exchanges (responder, both with a Japanese and an international initiator).
-* Not reached (5): the link-exchange states `Mode0E_State07_ExchangeBarsA`, `State0D_PickSecond`, `State0E_AbortWait2`, `State0F_Ready`: in every receiver-initiated
-  run the first thumbnail page (2,048 bytes) reaches the initiator after the game's 180-frame deadline (`wLnkHalfDone` = 1 at the end, message `$0C` already shown), the
-  same with `-hf` and at real speed with `-headless`, between two Japanese ROMs and across the two ROMs; the project's core sends it in about 130 frames. And `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
+* 69 of the 70 handlers ran, **each only in the mode its name gives**; all 25 names that carry a state ran in exactly that state and no other. No handler contradicts its name.
+* `Mode0E_State0C_ExchangeWaitB` ran in the receiver-initiated exchanges (responder, with a Japanese and with an international initiator). In every such run the first
+  thumbnail page (2,048 bytes) reaches the initiator after the game's 180-frame deadline (`wLnkHalfDone` = 1 at the end, message `$0C` already shown), with `-hf` and at
+  real speed with `-headless`, between two Japanese ROMs and across the two ROMs; the project's core sends it in about 130 frames.
+* **Forced run** (`linkrx_forced_*`, `forced: true` in `runs.jsonl`): the same exchange on a copy of the Japanese ROM whose `Link_TimeoutTick` never counts down
+  (`07:4ACE` `dec [hl]` -> `nop`, file offset `$1CACE`; md5 of the copy `190b1cae5209e00d7e0a001abf07fb90`). The exchange completes (initiator `03 04 07 08 09`, responder
+  `0A 0B 0C 0B 0D 0E 0F 10 11`) and `Mode0E_State07_ExchangeBarsA`, `State0D_PickSecond`, `State0E_AbortWait2` (now `State0E_ConfirmSend`: the sender's confirmation dialog,
+  A sends and B refuses with `$EF`) and `State0F_Ready` run, each in its own state. The csv keeps the names the runs logged.
+* Not reached (1): `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
   none of the print jobs of these runs (photo, card, two panoramas, D.J. score) issued such a command.
-* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 65 handlers that ran are tagged C in `disasm/sym_names_jp.csv`; the role in the rest of each name is still read from the code.
-
+* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 69 handlers that ran are tagged C in `disasm/sym_names_jp.csv`
+  (the four of the forced run say so in their note); the role in the rest of each name is still read from the code.
