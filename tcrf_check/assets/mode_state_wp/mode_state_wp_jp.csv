@@ -1,0 +1,71 @@
+bank,addr,name,kind,name_mode,name_state,screens,hits,runs,verdict
+00,31CF,Mode1D_SplitNibbles,execute,1D,,1D:03 x1840,1840,2,mode confirmed
+00,31DC,Mode1D_ByteToDE,execute,1D,,1D:03 x272,272,1,mode confirmed
+00,31E2,Mode1D_ReadSrcEntry,execute,1D,,1D:03 x2112,2112,2,mode confirmed
+00,31F2,Mode1D_ReadByteFromBank,execute,1D,,1D:03 x272,272,1,mode confirmed
+00,3249,Mode1D_InterleaveTileRows,execute,1D,,,0,0,not reached in these runs
+00,32DB,Mode1D_FillBlank,execute,1D,,1D:03 x224,224,1,mode confirmed
+00,34B3,Mode1D_DrawBusyIcon,execute,1D,,1D:06 x3 1D:07 x243,246,2,mode confirmed
+00,34C6,Mode1D_DrawTvAnimation,execute,1D,,1D:01 x30 1D:02 x60 1D:03 x46 1D:04 x2136 1D:05 x12,2284,11,mode confirmed
+00,34F7,Mode1D_TvAnimTbl,read,1D,,1D:01 x150 1D:02 x300 1D:03 x690 1D:04 x32040 1D:05 x180,33360,4,mode confirmed
+03,6C2D,Mode1A_State04_PlaceOrDelete,execute,1A,04,1A:04 x6412,6412,16,mode and state confirmed
+03,6DAD,Mode1A_State08_PickConfirm,execute,1A,08,1A:08 x1120,1120,5,mode and state confirmed
+03,6E04,Mode1A_State09_ExitDialog,execute,1A,09,1A:09 x1368,1368,2,mode and state confirmed
+03,6EE1,Mode1A_State0A_DeleteDialog,execute,1A,0A,1A:0A x252,252,1,mode and state confirmed
+04,5044,Mode0F_EraseJingleTiles,execute,0F,,0F:07 x18,18,9,mode confirmed
+04,509F,Mode0F_EraseTileTbl,read,0F,,0F:07 x144,144,1,mode confirmed
+04,50AF,Mode0F_CopyPieceToVram,execute,0F,,0F:07 x3806,3806,9,mode confirmed
+05,44A8,Mode1F_State06_SavePanel,execute,1F,06,1F:06 x5044,5044,2,mode and state confirmed
+05,44F8,Mode1F_State07_QuitPanel,execute,1F,07,1F:07 x4322,4322,1,mode and state confirmed
+06,4377,Mode15_DrawArrows,execute,15,,15:02 x3263 15:06 x1118 15:07 x1251,5632,16,mode confirmed
+06,439C,Mode15_DrawSecondsSprite,execute,15,,15:02 x6526 15:06 x2236,8762,16,mode confirmed
+06,43A6,Mode15_DrawOkSprite,execute,15,,15:03 x3162 15:07 x2502 15:08 x1248,6912,12,mode confirmed
+06,43AC,Mode15_DrawBlinkSprite,execute,15,,15:03 x1581 15:08 x624,2205,12,mode confirmed
+06,43F3,Mode15_DrawTwoDigitsInterval,execute,15,,15:05 x14,14,6,mode confirmed
+06,4422,Mode15_DrawIntervalText,execute,15,,15:05 x14 15:06 x4,18,6,mode confirmed
+06,4665,Mode16_State03_TrickLensesMenu,execute,16,03,16:03 x6460,6460,14,mode and state confirmed
+06,470A,Mode16_State04_MontageMenu,execute,16,04,16:04 x1914,1914,4,mode and state confirmed
+06,47A4,Mode16_State05_PanoramaMenu,execute,16,05,16:05 x22910,22910,13,mode and state confirmed
+06,480B,Mode16_DrawPanoramaHint,execute,16,,16:05 x11455,11455,13,mode confirmed
+06,4833,Mode16_DrawPanoramaToggles,execute,16,,16:05 x11455,11455,13,mode confirmed
+06,487A,Mode16_State06_GameFaceMenu,execute,16,06,16:06 x6704,6704,7,mode and state confirmed
+06,4AA3,Mode16_DrawIcon,execute,16,,16:03 x6460 16:04 x1914,8374,17,mode confirmed
+06,4AF8,Mode16_LoadPageTiles,execute,16,,16:00 x25 16:01 x14 16:02 x59,98,24,mode confirmed
+06,4B23,Mode16_LoadIconTiles,execute,16,,16:00 x100 16:01 x56 16:03 x10 16:04 x6,172,24,mode confirmed
+06,4B7C,Mode16_BuildList2,execute,16,,16:04 x8,8,4,mode confirmed
+06,4BD0,Mode16_BuildList4,execute,16,,16:01 x8 16:05 x26,34,13,mode confirmed
+06,4C24,Mode16_BuildList6,execute,16,,16:01 x8 16:06 x30,38,7,mode confirmed
+06,4C87,Mode16_DrawCaptionBlink,execute,16,,16:03 x3230 16:04 x957,4187,17,mode confirmed
+06,5ACE,Mode18_DrawPrintLabel,execute,18,,18:03 x56,56,3,mode confirmed
+06,5AD7,Mode18_DrawCancelLabel,execute,18,,18:03 x50,50,4,mode confirmed
+06,5B56,Mode18_Pick1_Left,execute,18,,18:01 x2096,2096,8,mode confirmed
+06,5B74,Mode18_Pick1_Right,execute,18,,18:01 x2096,2096,8,mode confirmed
+06,5BBF,Mode18_Pick2_Up,execute,18,,18:02 x13800,13800,3,mode confirmed
+06,5BDD,Mode18_Pick2_Down,execute,18,,18:02 x13800,13800,3,mode confirmed
+06,5BFF,Mode18_Pick1_DrawCursor,execute,18,,18:01 x1048,1048,8,mode confirmed
+06,5C45,Mode18_Pick2_DrawCursor,execute,18,,18:02 x6900,6900,3,mode confirmed
+06,5C8B,Mode18_DrawArrows,execute,18,,18:00 x28 18:01 x2096 18:02 x13800 18:03 x216,16140,9,mode confirmed
+06,5C9C,Mode18_LoadAllThumbs,execute,18,,18:00 x28,28,9,mode confirmed
+06,5D6C,Mode18_DrawThumbFrame,execute,18,,18:00 x28 18:01 x16,44,9,mode confirmed
+06,5DD7,Mode18_LoadTileIndexed,execute,18,,18:00 x30 18:01 x48,78,3,mode confirmed
+07,43D6,Mode0E_State04_PickDone,execute,0E,04,0E:04 x2,2,2,mode and state confirmed
+07,44BD,Mode0E_State05_AbortWait,execute,0E,05,0E:05 x624,624,2,mode and state confirmed
+07,44F4,Mode0E_State06_ExchangeSetup,execute,0E,06,0E:06 x4,4,2,mode and state confirmed
+07,4599,Mode0E_State07_ExchangeBarsA,execute,0E,07,,0,0,not reached in these runs
+07,45D2,Mode0E_State08_ExchangeWaitA,execute,0E,08,0E:08 x1640,1640,2,mode and state confirmed
+07,4645,Mode0E_State0A_ExchangeSetupB,execute,0E,0A,0E:0A x4,4,2,mode and state confirmed
+07,46BC,Mode0E_State0B_ExchangeBarsB,execute,0E,0B,0E:0B x2352,2352,2,mode and state confirmed
+07,472E,Mode0E_State0C_ExchangeWaitB,execute,0E,0C,,0,0,not reached in these runs
+07,4759,Mode0E_State0D_PickSecond,execute,0E,0D,,0,0,not reached in these runs
+07,4831,Mode0E_State0E_AbortWait2,execute,0E,0E,,0,0,not reached in these runs
+07,486D,Mode0E_State0F_Ready,execute,0E,0F,,0,0,not reached in these runs
+07,4876,Mode0E_State10_ExchangeWaitC,execute,0E,10,0E:10 x1640,1640,2,mode and state confirmed
+08,4291,Mode1C_State03_PrintMain,execute,1C,03,1C:03 x21106,21106,22,mode and state confirmed
+08,42E3,Mode1C_DrawJitterSprite,execute,1C,,1C:03 x10553,10553,22,mode confirmed
+08,4329,Mode1C_State04_OptionsMenu,execute,1C,04,1C:04 x5627,5627,13,mode and state confirmed
+08,4489,Mode1C_State06_OptionToggle,execute,1C,06,1C:06 x3256,3256,10,mode and state confirmed
+08,4508,Mode1C_LoadToggleTiles,execute,1C,,1C:06 x7,7,7,mode confirmed
+08,4545,Mode1C_DrawToggleArrow,execute,1C,,1C:06 x1712,1712,10,mode confirmed
+08,4583,Mode1C_ToggleArrowPosTbl,read,1C,,1C:06 x710,710,2,mode confirmed
+08,47ED,Mode1C_DrawPrintScreen,execute,1C,,1C:05 x4,4,2,mode confirmed
+08,484B,Mode1C_DrawOptionScreen,execute,1C,,1C:03 x30,30,13,mode confirmed
