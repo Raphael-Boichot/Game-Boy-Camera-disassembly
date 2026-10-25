@@ -4567,6 +4567,7 @@ Left to right: lens 8; lens 9 after 0, 1, 2 and 3 steps (ramp B); lens 9 at step
 - `tools/ram_census.py` — full WRAM/HRAM access census from an mgbdis disassembly
 - `tools/asset_catalog.py` — enumerates every banked graphics/tilemap copy call site
 - `tools/render_tiles.py`, `tools/render_album.py` — render raw 2bpp ROM data to PNG for visual matching
+- `tools/make_unlocked_saves.py` — the unlocking saves `unl_<camera>.sav` from the real cameras' saves: a port of the owner's `Data_injector.m` (Album B counters $99 in the settings block and its echo with both checksums, CoroCoro tag `56 56 53` at `$1FFD`; the Hello Kitty and calibration blocks only on request), byte-exact against `tcrf_check/assets/bgb_printer/print_features/unl_CE10238211_tagtest.sav` outside its own tag test; refuses a save whose settings block is invalid
 - `tools/sram_analyze.py` — SRAM analysis used for §3 and §11: `validity`, `classify` (fresh / clean / atypical, never-written-area check, boot-seed cycle), `calib`, `settings`, `f34`, `all`; also holds the checksum helpers and a re-implementation of the boot-seed generator (`seed_orbit`)
 - `tools/rom_trace.py` — recursive-descent tracer (proven code vs everything else); `--roots tools/extra_roots.json` adds the 134 hand-resolved roots (§1.2); `tools/rom_trace_labels.sym` is its symbol input (the 183 first-pass labels)
 - `tools/rom_coverage.py` — per-bank coverage (proven code / inline tables / referenced data / padding / unreferenced) from a trace; `disasm/coverage_jp_v3.csv` is its output
