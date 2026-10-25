@@ -100,7 +100,7 @@ ASK={'visually identified range':'a yes/no on the family name',
 'keyboard / glyph':'which glyph page each loader fills',
 'main-menu slide':'which transition each slide is',
 'arrow drawing':'which cursor / arrow each routine draws',
-'dead code':'for what is left (two TCRF graphics): the owner\'s check of the TCRF match'}
+'dead code':'whether the code or data is truly unused, or for a TCRF graphic the owner\'s check of the match'}
 L=[]
 L.append('# Unconclusive names of the Pocket Camera (Japan) Rev A symbol file\n')
 L.append('Generated from `sym_names_jp.csv` by `tools/make_doubts.py` (companion: `sym_unconclusive_jp.csv`, same rows with evidence and "what would settle it"). It lists every label whose name is a guess I could not settle from the code, the README, the WRAM map, TCRF, the Spriters Resource sheets or the bank pictures, plus the `I` (inferred) names in the groups below that deserve a second look. **Nothing here blocks the disassembly**: the `.sym` is complete (every ROM byte is typed and every routine or table has a name) and builds the exact ROM; the names below are the ones most likely to be renamed later.\n')

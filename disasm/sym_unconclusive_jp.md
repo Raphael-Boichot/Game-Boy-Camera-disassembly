@@ -21,7 +21,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
 | main-menu slide | 0 | 0 | which transition each slide is |
 | arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
-| dead code | 2 | 4512 | for what is left (two TCRF graphics): the owner's check of the TCRF match |
+| dead code | 0 | 0 | whether the code or data is truly unused, or for a TCRF graphic the owner's check of the match |
 
 Not counted above: 36 rows proven unused, whose tag is final (I for most: the verdict is that nothing uses them, so no run or screen can confirm it; C for the four ball-head frames) (`doubts_overrides_jp.csv`, status `final`); they are listed with the proof in the last section and in `sym_settled_unused_jp.csv`.
 
@@ -151,17 +151,6 @@ _Why doubtful:_ role of several state variables guessed. _To settle:_ play the g
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
 | 09:66A5 | `Run_FlagLanded` | 22 | Run (marathon) mini-game routine or table | returns Z when the flag counter $D048 is 2 and the y byte (record + 2, from $D054, step 6) of all 10 confetti  |
-
-## dead code (2)
-
-_Why doubtful:_ never drawn in organic runs; frames 0 1 3 7 8 equal the TCRF picture pixel for pixel, frames 2 4 5 6 differ by a few pixels; no owner answer yet. _To settle:_ the owner's yes / no on the TCRF match (frames 2, 4, 5, 6).
-
-- `13:5CA0` instead: _why_ loaded with the album sheet and never drawn (C), but the TCRF match is partial: 23 of 32 informative tiles found, owner answer 'partly'; _to settle_ the owner's eye on the 9 TCRF tiles not found in the ROM, or the TCRF picture at its original scale.
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 11:5800 | `Unused_TCRF_HandNewspaperFrames_Gfx` | 4416 | code or data that no trace path and no table reaches (left over from earlier versions) | nine sprite frames of a hand flipping a newspaper (TCRF B16, Unused Graphic Bank 11): 25 tiles per frame in 51 |
-| 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused hand gestures, pixel match with doubts: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00 |
 
 ## settled as unused, final I (36)
 

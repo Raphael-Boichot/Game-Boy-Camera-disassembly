@@ -706,3 +706,5 @@ bank,addr,old_name,new_name,old_conf,new_conf,reason
 07,44BD,Mode0E_State05_ConfirmSend,Mode0E_State05_InitiatorConfirmSend,C,C,"the two confirmation dialogs of mode 0E named after the camera that shows them (initiator / responder), so that their state constants differ"
 07,4831,Mode0E_State0E_ConfirmSend,Mode0E_State0E_ResponderConfirmSend,C,C,"the two confirmation dialogs of mode 0E named after the camera that shows them (initiator / responder), so that their state constants differ"
 00,3249,Mode1D_InterleaveTileRows,Mode1D_InterleaveTileRows,I,C,"name kept, evidence upgraded (I -> C): ran only in mode 1D state 03 in a BGB print of layout 3 (panorama, row pick), 2026-10-25"
+11,5800,Unused_TCRF_HandNewspaperFrames_Gfx,Unused_TCRF_HandNewspaperFrames_Gfx,I,C,"name kept, evidence upgraded (I -> C): exact match with the TCRF picture and the owner's yes (2026-10-25)"
+13,5CA0,Unused_TCRF_AlbumHandGestures_Gfx,Unused_TCRF_AlbumHandGestures_Gfx,I,C,"name kept, evidence upgraded (I -> C): exact match with the TCRF picture and the owner's yes (2026-10-25)"
