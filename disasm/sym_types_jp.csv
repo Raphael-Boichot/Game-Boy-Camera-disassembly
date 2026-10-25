@@ -103,7 +103,7 @@ bank,start,end,type,width,note
 04,44DC,44F1,data,16,
 04,464D,466B,data,2,
 04,4D09,4D1B,data,6,"9 {frame,duration} pairs by shape (I)"
-04,5009,5019,data,16,"8 {x,y} pairs by shape (I)"
+04,5009,5019,data,16,"Mode0F_CopiedMarkerPosTbl: 8 x {x; y}"
 04,509F,50AF,data,16,
 04,519D,51CD,data,16,
 04,51CD,520D,data,16,
@@ -245,7 +245,7 @@ bank,start,end,type,width,note
 06,4004,4018,data,2,10 state handlers
 06,4289,42A7,data,16,
 06,44DD,44F1,data,2,
-06,4603,4607,data,16,
+06,4603,4607,data,4,
 06,4659,465D,data,4,
 06,465D,4665,data,8,
 06,46D7,46DD,data,16,
@@ -257,7 +257,7 @@ bank,start,end,type,width,note
 06,4872,487A,data,8,
 06,491E,4924,data,6,
 06,4A9B,4AA3,data,8,
-06,4B17,4B23,data,16,
+06,4B17,4B23,data,3,"Mode16_PageTilesSrcTbl: 4 x {lo; hi; bank}"
 06,4B67,4B73,data,12,
 06,4B73,4B7B,data,2,
 06,4CA3,4CCB,data,2,
@@ -1894,8 +1894,7 @@ bank,start,end,type,width,note
 04,5436,548B,data,5,Stamp_IconSrcGfxTbl: 17 x 5 B {lo
 04,548B,54E0,data,5,Stamp_IconSrcMaskTbl: 17 x 5 B {lo
 05,62A3,62B2,data,3,5 x {lo
-06,46EF,46FE,data,3,5 x {lo
-06,4701,470A,data,3,3 x {lo
+06,46EF,470A,data,3,"Mode16_TrickLensIconSrcTbl: 9 x {lo; hi; bank}"
 06,478F,47A4,data,3,7 x {lo
 06,4B67,4B73,data,3,4 x {lo
 06,5D44,5D54,data,2,Mode18_LoadThumb_Tbl5D44: 8 VRAM destination words

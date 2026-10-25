@@ -14,7 +14,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
-| mode state | 100 | 5545 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| mode state | 70 | 5227 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2528 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
@@ -38,7 +38,7 @@ _Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not fou
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## mode state (100)
+## mode state (70)
 
 _Why doubtful:_ state purpose read from the data it writes; screen function partly guessed. _To settle:_ play the screen in an emulator; match with the TCRF / Funtography screen name.
 
@@ -57,50 +57,26 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 03:6DAD | `Mode1A_State08_PickConfirm` | 87 | state handler or helper of a screen mode | A confirms with the button animation |
 | 03:6E04 | `Mode1A_State09_ExitDialog` | 148 | state handler or helper of a screen mode | keep / discard dialog |
 | 03:6EE1 | `Mode1A_State0A_DeleteDialog` | 93 | state handler or helper of a screen mode | delete this hot spot? dialog |
-| 04:5009 | `Mode0F_DrawCopyCount_Tbl5009` | 16 | state handler or helper of a screen mode | auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount |
 | 04:5044 | `Mode0F_EraseJingleTiles` | 91 | state handler or helper of a screen mode | plays sound $45 and builds four quadrant tiles of the erase animation |
 | 04:509F | `Mode0F_EraseTileTbl` | 16 | state handler or helper of a screen mode | table read by 5044 |
 | 04:50AF | `Mode0F_CopyPieceToVram` | 238 | state handler or helper of a screen mode | copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800) |
-| 04:7023 | `Mode01_State01_MenuPageA_Tbl7023` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State01_MenuPageA |
-| 04:7084 | `Mode01_State02_ApplyPageA_Tbl7084` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State02_ApplyPageA |
-| 04:70DB | `Mode01_State04_MenuPageB_Tbl70DB` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State04_MenuPageB |
-| 04:712B | `Mode01_State05_ApplyPageB_Tbl712B` | 10 | state handler or helper of a screen mode | auto: 10 bytes, bytes; referenced by Mode01_State05_ApplyPageB |
-| 04:7182 | `Mode01_State07_MenuPageC_Tbl7182` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode01_State07_MenuPageC |
-| 04:71B1 | `Mode01_State08_ApplyPageC_Tbl71B1` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode01_State08_ApplyPageC |
-| 04:724F | `Mode01_State01_MenuPageA_Map724F` | 34 | state handler or helper of a screen mode | auto: 34 bytes, tile map; referenced by Mode01_State01_MenuPageA, Mode01_State04_MenuPageB |
-| 04:7271 | `Mode01_State07_MenuPageC_Tbl7271` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode01_State07_MenuPageC |
 | 05:44A8 | `Mode1F_State06_SavePanel` | 80 | state handler or helper of a screen mode | A: stores the tune (02:4A6B); slides the panel away |
 | 05:44F8 | `Mode1F_State07_QuitPanel` | 89 | state handler or helper of a screen mode | A: back to the title; B: back to the performance |
-| 06:4289 | `Mode15_State06_IntervalChoose_Gfx4289` | 30 | state handler or helper of a screen mode | auto: 30 bytes, tile data; referenced by Mode15_State06_IntervalChoose |
 | 06:4377 | `Mode15_DrawArrows` | 37 | state handler or helper of a screen mode | Left / Right arrow sprites |
 | 06:439C | `Mode15_DrawSecondsSprite` | 10 | state handler or helper of a screen mode |  |
 | 06:43A6 | `Mode15_DrawOkSprite` | 6 | state handler or helper of a screen mode |  |
 | 06:43AC | `Mode15_DrawBlinkSprite` | 16 | state handler or helper of a screen mode |  |
 | 06:43F3 | `Mode15_DrawTwoDigitsInterval` | 47 | state handler or helper of a screen mode |  |
 | 06:4422 | `Mode15_DrawIntervalText` | 154 | state handler or helper of a screen mode | interval text in tile writes |
-| 06:4603 | `Mode16_State01_Redraw_Gfx4603` | 4 | state handler or helper of a screen mode | auto: 4 bytes, tile data; referenced by Mode16_State01_Redraw |
-| 06:4659 | `Mode16_State02_MainMenu_Tbl4659` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode16_State02_MainMenu |
-| 06:465D | `Mode16_State02_MainMenu_Tbl465D` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode16_State02_MainMenu |
 | 06:4665 | `Mode16_State03_TrickLensesMenu` | 114 | state handler or helper of a screen mode | option 1 (opt1_row / opt1_value) |
-| 06:46D7 | `Mode16_State03_TrickLensesMenu_Gfx46D7` | 6 | state handler or helper of a screen mode | auto: 6 bytes, tile data; referenced by Mode16_State03_TrickLensesMenu |
-| 06:46DD | `Mode16_State03_TrickLensesMenu_Gfx46DD` | 18 | state handler or helper of a screen mode | auto: 18 bytes, tile data; referenced by Mode16_State03_TrickLensesMenu |
-| 06:46EF | `Mode16_State00_Init_Gfx46EF` | 15 | state handler or helper of a screen mode | auto: 27 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLense |
 | 06:470A | `Mode16_State04_MontageMenu` | 113 | state handler or helper of a screen mode | option 2 (opt2_row / opt2_value) |
-| 06:477B | `Mode16_State04_MontageMenu_Gfx477B` | 6 | state handler or helper of a screen mode | auto: 6 bytes, tile data; referenced by Mode16_State04_MontageMenu |
-| 06:4781 | `Mode16_State04_MontageMenu_Gfx4781` | 14 | state handler or helper of a screen mode | auto: 14 bytes, tile data; referenced by Mode16_State04_MontageMenu |
-| 06:478F | `Mode16_State00_Init_Gfx478F` | 21 | state handler or helper of a screen mode | auto: 21 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State04_MontageMen |
 | 06:47A4 | `Mode16_State05_PanoramaMenu` | 206 | state handler or helper of a screen mode | option 3 (two toggles) |
 | 06:480B | `Mode16_DrawPanoramaHint` | 40 | state handler or helper of a screen mode |  |
 | 06:4833 | `Mode16_DrawPanoramaToggles` | 63 | state handler or helper of a screen mode |  |
-| 06:4872 | `Mode16_State05_PanoramaMenu_Tbl4872` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode16_State05_PanoramaMenu |
 | 06:487A | `Mode16_State06_GameFaceMenu` | 164 | state handler or helper of a screen mode | option 4: game or Game Face editor |
-| 06:491E | `Mode16_State06_GameFaceMenu_Tbl491E` | 6 | state handler or helper of a screen mode | auto: 6 bytes, bytes; referenced by Mode16_State06_GameFaceMenu |
-| 06:4A9B | `Mode16_DrawCursorFromTable_Tbl4A9B` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode16_DrawCursorFromTable |
 | 06:4AA3 | `Mode16_DrawIcon` | 116 | state handler or helper of a screen mode |  |
 | 06:4AF8 | `Mode16_LoadPageTiles` | 31 | state handler or helper of a screen mode |  |
-| 06:4B17 | `Mode16_LoadPageTiles_Gfx4B17` | 12 | state handler or helper of a screen mode | auto: 12 bytes, tile data; referenced by Mode16_LoadPageTiles |
 | 06:4B23 | `Mode16_LoadIconTiles` | 68 | state handler or helper of a screen mode |  |
-| 06:4B67 | `Mode16_BuildOptionList_Map4B67` | 12 | state handler or helper of a screen mode | auto: 12 bytes, tile map; referenced by Mode16_BuildOptionList |
 | 06:4B7C | `Mode16_BuildList2` | 84 | state handler or helper of a screen mode | two rows |
 | 06:4BD0 | `Mode16_BuildList4` | 84 | state handler or helper of a screen mode | four rows |
 | 06:4C24 | `Mode16_BuildList6` | 99 | state handler or helper of a screen mode | six rows |
@@ -112,16 +88,11 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 06:5BBF | `Mode18_Pick2_Up` | 30 | state handler or helper of a screen mode |  |
 | 06:5BDD | `Mode18_Pick2_Down` | 34 | state handler or helper of a screen mode |  |
 | 06:5BFF | `Mode18_Pick1_DrawCursor` | 55 | state handler or helper of a screen mode |  |
-| 06:5C36 | `Mode18_Pick1_DrawCursor_Tbl5C36` | 8 | state handler or helper of a screen mode | auto: 8 bytes, bytes; referenced by Mode18_Pick1_DrawCursor |
-| 06:5C3E | `Mode18_Pick1_DrawCursor_Tbl5C3E` | 7 | state handler or helper of a screen mode | auto: 7 bytes, bytes; referenced by Mode18_Pick1_DrawCursor |
 | 06:5C45 | `Mode18_Pick2_DrawCursor` | 55 | state handler or helper of a screen mode |  |
-| 06:5C7C | `Mode18_Pick2_DrawCursor_PtrTbl5C7C` | 8 | state handler or helper of a screen mode | auto: 8 bytes, word table; referenced by Mode18_Pick2_DrawCursor |
-| 06:5C84 | `Mode18_Pick2_DrawCursor_Tbl5C84` | 7 | state handler or helper of a screen mode | auto: 7 bytes, bytes; referenced by Mode18_Pick2_DrawCursor |
 | 06:5C8B | `Mode18_DrawArrows` | 185 | state handler or helper of a screen mode |  |
 | 06:5C9C | `Mode18_LoadAllThumbs` | 22 | state handler or helper of a screen mode |  |
 | 06:5D6C | `Mode18_DrawThumbFrame` | 126 | state handler or helper of a screen mode |  |
 | 06:5DD7 | `Mode18_LoadTileIndexed` | 15 | state handler or helper of a screen mode |  |
-| 07:4186 | `Mode0E_State01_Handshake_Tbl4186` | 4 | state handler or helper of a screen mode | auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake |
 | 07:43D6 | `Mode0E_State04_PickDone` | 231 | state handler or helper of a screen mode | after the dialog: loads the chosen photo into the link buffer |
 | 07:44BD | `Mode0E_State05_AbortWait` | 55 | state handler or helper of a screen mode | jitter sprite; A leaves |
 | 07:44F4 | `Mode0E_State06_ExchangeSetup` | 165 | state handler or helper of a screen mode | bars and lamps for the exchange (first direction) |
@@ -141,7 +112,6 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 | 08:4508 | `Mode1C_LoadToggleTiles` | 36 | state handler or helper of a screen mode |  |
 | 08:4545 | `Mode1C_DrawToggleArrow` | 62 | state handler or helper of a screen mode |  |
 | 08:4583 | `Mode1C_ToggleArrowPosTbl` | 4 | state handler or helper of a screen mode |  |
-| 08:4587 | `Mode1C_DrawToggleArrow_Tbl4587` | 6 | state handler or helper of a screen mode | auto: 6 bytes, bytes; referenced by Mode1C_DrawToggleArrow |
 | 08:47ED | `Mode1C_DrawPrintScreen` | 94 | state handler or helper of a screen mode | tilemap 27:4472 and border tiles |
 | 08:484B | `Mode1C_DrawOptionScreen` | 60 | state handler or helper of a screen mode |  |
 

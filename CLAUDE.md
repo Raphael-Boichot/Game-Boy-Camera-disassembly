@@ -60,6 +60,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * `-screenonexit` in BGB saves only the 160 x 144 LCD; to see the Super Game Boy border run BGB with `SystemMode=2` in a visible window under Xvfb (`tcrf_check/tools/bgb_sgb_capture.sh`).
 * Long jobs in the background (`setsid nohup`); a foreground tool call over 120 s is killed. Never `pkill -f` a pattern that appears in your own command line (use the `[x]` trick or kill by PID).
 * Linked BGB runs (printer helper, `-connect`) stalled at the handshake with `-hf` in the sandbox: set `BGB_HF=-headless` (`bgb_run.py` reads it). `PRN_ERR=CMD:N:HEX` makes the helper answer a chosen status byte (§16.16).
+* mgbdis must be master after the v3.0 tag (commit 95d951a): v3.0 ignores the `.data` row width and `.padding`, and the round trip still passes while `sym_fix.py` rewrites almost no table (the checker's `sym_fix stats` line fails). The checker expects `/home/claude/tc/mgbdis` and `/home/claude/tc/rgbds`.
 * Other BGB and core pitfalls (VRAM writes in PPU mode 3, hex logs, WAV offset, forcing, two-pass snapshots): `HOWTO_NEW_ROM.md` §6 and §7.
 * **BGB, used efficiently (it is the judge: ask it, do not argue from the core or from reading alone).**
   * *One run answers a whole list.* `tcrf_check/tools/bgb_wp_probe.py CORPUS ENTRY WATCHPOINTS OUTPREFIX` replays a corpus entry with BGB **logging watchpoints** (`-wp`, comma separated, `ADDR[-ADDR]/VALUE/FLAGS/MESSAGE`, flags from `drwxj`, banked ROM addresses as `BB:AAAA`; `D5F0-D5F2//rw/CUR` for WRAM, `07:4C8D//x/ENTRY` for an execution). BGB writes the message to `debugmsg.txt` at every hit and keeps running, so the count per message proves or refutes a read, a write or an execution.
@@ -87,7 +88,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
 
 ## Where things stand (pointers, not numbers)
-* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,347 names tagged C / I / ? (3,911 / 1,436 / 0); 247 doubtful rows are listed with evidence
+* Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,347 names tagged C / I / ? (3,941 / 1,406 / 0); 217 doubtful rows are listed with evidence
   in `disasm/sym_unconclusive_jp.md`. L4 is done as defined by the how-to (789 RAM names in §2.13; the `MODE_*`, key-mask, hardware-flag and sound-id constants in §2.14; state numbers stay numbers), L5 (committed buildable tree) is not done; L6 is partial (name / comment charset only, §16.27).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international ROM has no instrumented coverage run
   (`coverage/tools/coverage_run.py` needs a variant without the Japanese trace); behavioural parity was checked in BGB (§16.11, §16.12).

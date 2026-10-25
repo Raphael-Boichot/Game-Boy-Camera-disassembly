@@ -1558,7 +1558,7 @@ bank,addr,name,conf,note,source
 04,4F18,Mode0F_State0E_CopyDo,C,copy the picked photo into a free slot (02:45A1),hand+auto
 04,4FA3,Mode0F_DrawBigCursor,C,cursor metasprite at (50,hand+auto
 04,4FAF,Mode0F_DrawCopyCount,C,two decimal digits of copies_of_photo as tile copies,hand+auto
-04,5009,Mode0F_DrawCopyCount_Tbl5009,I,"auto: 15 bytes, bytes; referenced by Mode0F_DrawCopyCount",auto
+04,5009,Mode0F_CopiedMarkerPosTbl,C,"8 x {x; y} of the copied-marker sprite (wCopiedMarkerXy): Mode0F_DrawCopyCount (04:4FF7) indexes it by (wPhotoIndex, +2 from photo 30) and 7, x 2; three rows x = $23 / $4B / $73, y = $0B / $33 / $5B, the first slot of the top row not used (read 2026-10-25)",hand+auto
 04,5019,Mode0F_DrawCopiedMarker,C,sprite showing that a copy was made; counts down copied_marker_timer,hand+auto
 04,5044,Mode0F_EraseJingleTiles,I,plays sound $45 and builds four quadrant tiles of the erase animation,hand+auto
 04,509F,Mode0F_EraseTileTbl,I,table read by 5044,hand+auto
@@ -1690,25 +1690,25 @@ bank,addr,name,conf,note,source
 04,6F9A,Mode01_StateTable,C,"12 states, rst $18 table of mode $01",hand+auto
 04,6FB2,Mode01_State00_Intro,C,"one chance in four to start on the second page, else page A with music 6",hand+auto
 04,6FF0,Mode01_State01_MenuPageA,C,"command menu, caption page A (""Welcome to my parlor!"")",hand+auto
-04,7023,Mode01_State01_MenuPageA_Tbl7023,I,"auto: 10 bytes, bytes; referenced by Mode01_State01_MenuPageA",auto
+04,7023,Parlor_PageA_CursorPosTbl,C,"5 x {y; x} of the cursor sprite $DC of parlor page A, indexed by wMode1CursorA: Parlor_DrawCursor (04:7279) loads C = y, B = x for Oam_AddMeta_B01_4000; items 0-2 (SHOOT / ITEMS / MAGIC) at x = $09, items 3-4 (CHECK / RUN) at x = $41 (read 2026-10-25)",hand+auto
 04,702D,Mode01_State02_ApplyPageA,C,spiral wipe then the chosen mode,hand+auto
-04,7084,Mode01_State02_ApplyPageA_Tbl7084,I,"auto: 10 bytes, bytes; referenced by Mode01_State02_ApplyPageA",auto
+04,7084,Parlor_PageA_TargetTbl,C,"5 x {mode; state} of parlor page A (SHOOT / ITEMS / MAGIC / CHECK / RUN): $15:00, $01:06, $16:00, $09:00, $01:09; Mode01_State02_ApplyPageA (04:706B) writes them to wMode / wState when the choice is A (also in const_tables_jp.csv) (read 2026-10-25)",hand+auto
 04,708E,Mode01_State03_IntroPageB,C,music 7,hand+auto
 04,70A8,Mode01_State04_MenuPageB,C,,hand+auto
-04,70DB,Mode01_State04_MenuPageB_Tbl70DB,I,"auto: 10 bytes, bytes; referenced by Mode01_State04_MenuPageB",auto
+04,70DB,Parlor_PageB_CursorPosTbl,C,"5 x {y; x} of the cursor sprite $DF of parlor page B (same bytes as Parlor_PageA_CursorPosTbl), read by Parlor_DrawCursor from Mode01_State04_MenuPageB (read 2026-10-25)",hand+auto
 04,70E5,Mode01_State05_ApplyPageB,C,,hand+auto
-04,712B,Mode01_State05_ApplyPageB_Tbl712B,I,"auto: 10 bytes, bytes; referenced by Mode01_State05_ApplyPageB",auto
+04,712B,Parlor_PageB_TargetTbl,C,"5 x {mode; state} of parlor page B, the same five targets as page A; Mode01_State05_ApplyPageB (04:7112) (read 2026-10-25)",hand+auto
 04,7135,Mode01_State06_IntroPageC,C,music $0E,hand+auto
 04,714F,Mode01_State07_MenuPageC,C,second cursor and table,hand+auto
-04,7182,Mode01_State07_MenuPageC_Tbl7182,I,"auto: 4 bytes, bytes; referenced by Mode01_State07_MenuPageC",auto
+04,7182,Parlor_PageC_CursorPosTbl,C,"2 x {y; x} of the cursor sprite $DF of parlor page C (the ITEMS sub-menu, cursor $D5E1): y = $6A / $79, x = $09; read by Parlor_DrawCursor from Mode01_State07_MenuPageC (read 2026-10-25)",hand+auto
 04,7186,Mode01_State08_ApplyPageC,C,,hand+auto
-04,71B1,Mode01_State08_ApplyPageC_Tbl71B1,I,"auto: 4 bytes, bytes; referenced by Mode01_State08_ApplyPageC",auto
+04,71B1,Parlor_PageC_TargetTbl,C,"2 x {mode; state} of the ITEMS sub-menu: $15:01 (self-timer, Mode15_State01_TimerInit) and $15:05 (interval, Mode15_State05_IntervalInit); Mode01_State08_ApplyPageC (04:71A4) (read 2026-10-25)",hand+auto
 04,71B5,Mode01_State09_RunInit,C,"RUN: picks the message 0E or, 30 % of the time, 04",hand+auto
 04,71D5,Mode01_State0A_RunResult,C,far call 09:7290 (result screen),hand+auto
 04,71E0,Mode01_State0B_RunEnd,C,,hand+auto
 04,720D,Parlor_MenuInput,C,Up / Down moves the cursor in a table of items,hand+auto
-04,724F,Mode01_State01_MenuPageA_Map724F,I,"auto: 34 bytes, tile map; referenced by Mode01_State01_MenuPageA, Mode01_State04_MenuPageB",auto
-04,7271,Mode01_State07_MenuPageC_Tbl7271,I,"auto: 8 bytes, bytes; referenced by Mode01_State07_MenuPageC",auto
+04,724F,Parlor_PageAB_NavTbl,C,"cursor graph of parlor pages A and B for Parlor_MenuInput (04:720D): 5 offset bytes (one per item, relative to the byte itself), then per item a list of {new-key mask; next item} ended by 0; Down / Right / Up / Left between SHOOT, ITEMS, MAGIC (left column) and CHECK, RUN (right column); 34 B, not a tile map (read 2026-10-25)",hand+auto
+04,7271,Parlor_PageC_NavTbl,C,"cursor graph of parlor page C for Parlor_MenuInput (same format as Parlor_PageAB_NavTbl): 2 items, Down 0 -> 1, Up 1 -> 0; 8 B (read 2026-10-25)",hand+auto
 04,7279,Parlor_DrawCursor,C,,hand+auto
 04,7285,Parlor_Animate,C,animates the queen tiles and sprite,hand+auto
 04,728C,Parlor_AnimQueenTiles,C,,hand+auto
@@ -2225,7 +2225,7 @@ bank,addr,name,conf,note,source
 06,4142,Mode15_State04_TimerApply,C,A: shoot_variant 1 (self-timer) to mode 14,hand+auto
 06,416A,Mode15_State05_IntervalInit,C,interval screen,hand+auto
 06,4222,Mode15_State06_IntervalChoose,C,interval index 0..$18,hand+auto
-06,4289,Mode15_State06_IntervalChoose_Gfx4289,I,"auto: 30 bytes, tile data; referenced by Mode15_State06_IntervalChoose",auto
+06,4289,Mode15_IntervalValueTbl,C,"30 numbers shown for the interval choice wIntervalIndex 0-29 (Mode15_StepValue limits B = 0, C = $1D): 0-15, 20-60 in steps of 5, then 5 / 10 / 15 / 30 / 60 from index $19 (drawn with the other unit sprite, I); index 0 draws a word instead of the number (Mode15_DrawIntervalText); read by Mode15_State06_IntervalChoose (06:423F); numbers, not tiles (read 2026-10-25)",hand+auto
 06,42A7,Mode15_State07_ShotsChoose,C,number of exposures (up to free photo slots),hand+auto
 06,4308,Mode15_State08_IntervalConfirm,C,,hand+auto
 06,434F,Mode15_State09_IntervalApply,C,A: shoot_variant 2 (interval) to mode 14,hand+auto
@@ -2241,37 +2241,37 @@ bank,addr,name,conf,note,source
 06,44DD,Mode16_StateTable,C,10 states,hand+auto
 06,44F1,Mode16_State00_Init,C,,hand+auto
 06,4574,Mode16_State01_Redraw,C,,hand+auto
-06,4603,Mode16_State01_Redraw_Gfx4603,I,"auto: 4 bytes, tile data; referenced by Mode16_State01_Redraw",auto
+06,4603,Mode16_RedrawStateTbl,C,"4 bytes: menu item (wOptMenuCursor) -> state that Mode16_State01_Redraw (06:45F7) resumes after rebuilding the screen: 03 TRICK LENSES, 04 MONTAGE, 05 PANORAMA, 06 GAME FACE (read 2026-10-25)",hand+auto
 06,4607,Mode16_State02_MainMenu,C,,hand+auto
-06,4659,Mode16_State02_MainMenu_Tbl4659,I,"auto: 4 bytes, bytes; referenced by Mode16_State02_MainMenu",auto
-06,465D,Mode16_State02_MainMenu_Tbl465D,I,"auto: 8 bytes, bytes; referenced by Mode16_State02_MainMenu",auto
+06,4659,Mode16_ItemStateTbl,C,"4 bytes: menu item -> state of its sub-screen when A is pressed (03-06), read by Mode16_State02_MainMenu (06:4631); a value of $22 or more would be refused with sound $0B, none is (read 2026-10-25)",hand+auto
+06,465D,Mode16_MenuCursorPosTbl,C,"4 x {y; x} of the cursor of the four MAGIC items: y = $4C / $5C / $6C / $7C, x = $30; Mode16_DrawCursorFromTable (06:4A70) from Mode16_State02_MainMenu (read 2026-10-25)",hand+auto
 06,4665,Mode16_State03_TrickLensesMenu,I,option 1 (opt1_row / opt1_value),hand+auto
-06,46D7,Mode16_State03_TrickLensesMenu_Gfx46D7,I,"auto: 6 bytes, tile data; referenced by Mode16_State03_TrickLensesMenu",auto
-06,46DD,Mode16_State03_TrickLensesMenu_Gfx46DD,I,"auto: 18 bytes, tile data; referenced by Mode16_State03_TrickLensesMenu",auto
-06,46EF,Mode16_State00_Init_Gfx46EF,I,"auto: 27 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State03_TrickLensesMenu",auto
+06,46D7,Mode16_TrickLensRowPosTbl,C,"3 x {y; x} of the row cursor of the TRICK LENSES sub-screen (y = $60 / $68 / $70, x = $37); only entry 0 is read because the row wOpt1Row never leaves 0 (Mode16_StepRow with C = 0) (read 2026-10-25)",hand+auto
+06,46DD,Mode16_TrickLensIconTbl,C,"9 x {OAM list id; OAM list id or $FF} drawn at (x, y) = ($60, $60) by Mode16_DrawIcon (06:4AA3) for wOpt1Value 0-8, $FF = no second list (read 2026-10-25)",hand+auto
+06,46EF,Mode16_TrickLensIconSrcTbl,C,9 x {lo; hi; bank} = 0D:6000 6100 6300 6200 6400 6500 6600 6700 6800 (the Gfx_0D_*_Icon06_46EF rows): Mode16_LoadIconTiles (06:4B23) copies $100 B of the entry wOpt1Value to $9300; one table of 27 B (read 2026-10-25),hand+auto
 06,470A,Mode16_State04_MontageMenu,I,option 2 (opt2_row / opt2_value),hand+auto
-06,477B,Mode16_State04_MontageMenu_Gfx477B,I,"auto: 6 bytes, tile data; referenced by Mode16_State04_MontageMenu",auto
-06,4781,Mode16_State04_MontageMenu_Gfx4781,I,"auto: 14 bytes, tile data; referenced by Mode16_State04_MontageMenu",auto
-06,478F,Mode16_State00_Init_Gfx478F,I,"auto: 21 bytes, tile data; referenced by Mode16_State00_Init, Mode16_State01_Redraw, Mode16_State04_MontageMenu",auto
+06,477B,Mode16_MontageRowPosTbl,C,"3 x {y; x} of the row cursor of the MONTAGE sub-screen (same bytes as Mode16_TrickLensRowPosTbl); only entry 0 is read, wOpt2Row never leaves 0 (read 2026-10-25)",hand+auto
+06,4781,Mode16_MontageIconTbl,C,7 x {OAM list id; OAM list id or $FF} drawn by Mode16_DrawIcon for wOpt2Value 0-6 (read 2026-10-25),hand+auto
+06,478F,Mode16_MontageIconSrcTbl,C,7 x {lo; hi; bank} = 0D:6900-6F00 (the Gfx_0D_*_Icon06_478F rows): Mode16_LoadIconTiles copies $100 B of the entry wOpt2Value to $9400 (read 2026-10-25),hand+auto
 06,47A4,Mode16_State05_PanoramaMenu,I,option 3 (two toggles),hand+auto
 06,480B,Mode16_DrawPanoramaHint,I,,hand+auto
 06,4833,Mode16_DrawPanoramaToggles,I,,hand+auto
-06,4872,Mode16_State05_PanoramaMenu_Tbl4872,I,"auto: 8 bytes, bytes; referenced by Mode16_State05_PanoramaMenu",auto
+06,4872,Mode16_PanoramaRowPosTbl,C,"4 x {y; x} of the row cursor of the PANORAMA sub-screen (y = $60 / $68 / $70 / $78, x = $37); Mode16_State05_PanoramaMenu (06:47C1) limits the row $D5E8 to 0-1, so entries 2-3 are not read by it (read 2026-10-25)",hand+auto
 06,487A,Mode16_State06_GameFaceMenu,I,option 4: game or Game Face editor,hand+auto
-06,491E,Mode16_State06_GameFaceMenu_Tbl491E,I,"auto: 6 bytes, bytes; referenced by Mode16_State06_GameFaceMenu",auto
+06,491E,Mode16_GameFaceRowPosTbl,C,"3 x {y; x} of the row cursor of the GAME FACE page; row 2 (the hidden third choice) is reachable only while Select is held (06:487A, README 16.15) (read 2026-10-25)",hand+auto
 06,4924,Mode16_State07_LeaveToMode01,C,,hand+auto
 06,4935,Mode16_State08_StartShoot,C,applies the options and goes to mode 14,hand+auto
 06,4A5F,Mode16_State09_ToPanoramaPrint,C,mode 18,hand+auto
 06,4A70,Mode16_DrawCursorFromTable,C,,hand+auto
-06,4A9B,Mode16_DrawCursorFromTable_Tbl4A9B,I,"auto: 8 bytes, bytes; referenced by Mode16_DrawCursorFromTable",auto
+06,4A9B,Mode16_CursorAnimTbl,C,"4 x {OAM list id; ticks} = $30, $31, $32, $31, 9 ticks each: the animated cursor of Mode16_DrawCursorFromTable, frame wCursorAnimFrame and 3, tick wCursorAnimTick (read 2026-10-25)",hand+auto
 06,4AA3,Mode16_DrawIcon,I,,hand+auto
 06,4ABC,Mode16_StepRow,C,Up / Down steps a row cursor (HL) up to C,hand+auto
 06,4ADA,Mode16_StepValue,C,Left / Right steps a value,hand+auto
 06,4AF8,Mode16_LoadPageTiles,I,,hand+auto
-06,4B17,Mode16_LoadPageTiles_Gfx4B17,I,"auto: 12 bytes, tile data; referenced by Mode16_LoadPageTiles",auto
+06,4B17,Mode16_PageTilesSrcTbl,C,4 x {lo; hi; bank} = 0D:5A80 5800 5580 5300 (the Gfx_0D_*_Strip06_4B17 rows): Mode16_LoadPageTiles (06:4AF8) copies $280 B of the entry wOptMenuCursor to $9000 (read 2026-10-25),hand+auto
 06,4B23,Mode16_LoadIconTiles,I,,hand+auto
 06,4B39,Mode16_BuildOptionList,C,jumps through the list builders,hand+auto
-06,4B67,Mode16_BuildOptionList_Map4B67,I,"auto: 12 bytes, tile map; referenced by Mode16_BuildOptionList",auto
+06,4B67,Mode16_OptionMapSrcTbl,C,"4 x {lo; hi; bank} = 25:71A0, 25:50C0, 24:63A0, 25:5360 (Map_*_Mode16_OptionPage0-3): Mode16_BuildOptionList (06:4B43) copies $200 B of the entry wOptMenuCursor to $9840; far pointers to maps, not a map (read 2026-10-25)",hand+auto
 06,4B73,Mode16_BuilderTbl,C,4 code pointers,hand+auto
 06,4B7B,Mode16_BuildList0,C,nothing to build,hand+auto
 06,4B7C,Mode16_BuildList2,I,two rows,hand+auto
@@ -2357,11 +2357,11 @@ bank,addr,name,conf,note,source
 06,5BBF,Mode18_Pick2_Up,I,,hand+auto
 06,5BDD,Mode18_Pick2_Down,I,,hand+auto
 06,5BFF,Mode18_Pick1_DrawCursor,I,,hand+auto
-06,5C36,Mode18_Pick1_DrawCursor_Tbl5C36,I,"auto: 8 bytes, bytes; referenced by Mode18_Pick1_DrawCursor",auto
-06,5C3E,Mode18_Pick1_DrawCursor_Tbl5C3E,I,"auto: 7 bytes, bytes; referenced by Mode18_Pick1_DrawCursor",auto
+06,5C36,Mode18_Pick1_SlotPosTbl,C,"4 x {y; x} of the slot cursor of the first panorama pick: one row, y = $18, x = $10 / $30 / $50 / $70, indexed by wSelSlot in Mode18_Pick1_DrawCursor (06:5C07) (read 2026-10-25)",hand+auto
+06,5C3E,Mode18_Pick1_CursorAnimTbl,C,"{OAM list id; ticks} x 3 = $54, $55, $56, 5 ticks each, then $FF (loop to frame 0): frame wSelCursorFrame, tick wSelCursorTick (06:5C16) (read 2026-10-25)",hand+auto
 06,5C45,Mode18_Pick2_DrawCursor,I,,hand+auto
-06,5C7C,Mode18_Pick2_DrawCursor_PtrTbl5C7C,I,"auto: 8 bytes, word table; referenced by Mode18_Pick2_DrawCursor",auto
-06,5C84,Mode18_Pick2_DrawCursor_Tbl5C84,I,"auto: 7 bytes, bytes; referenced by Mode18_Pick2_DrawCursor",auto
+06,5C7C,Mode18_Pick2_SlotPosTbl,C,"4 x {y; x} of the slot cursor of the second panorama pick: one column, x = $70, y = $18 / $34 / $50 / $6C, indexed by wSelSlot in Mode18_Pick2_DrawCursor (06:5C4D); byte pairs, not words (read 2026-10-25)",hand+auto
+06,5C84,Mode18_Pick2_CursorAnimTbl,C,"{OAM list id; ticks} x 3 = $57, $58, $59, 5 ticks each, then $FF (loop): read by Mode18_Pick2_DrawCursor (06:5C5C) (read 2026-10-25)",hand+auto
 06,5C8B,Mode18_DrawArrows,I,,hand+auto
 06,5C9C,Mode18_LoadAllThumbs,I,,hand+auto
 06,5CB2,Mode18_LoadThumb,C,,hand+auto
@@ -2480,7 +2480,7 @@ bank,addr,name,conf,note,source
 07,402E,Mode0E_State00_Init,C,,hand+auto
 07,40EE,Mode0E_LeaveToLinkMenu,C,"shared abort / leave tail of mode $0E: waits one frame, Link_Stop until done, clears $DC44, mode $06 state 0 (link menu); jumped to by states 03, 0C-0D and 14 (branch target; code read 2026-10-19)",hand
 07,4108,Mode0E_State01_Handshake,C,Left / Right choice; hello; role negotiation,hand+auto
-07,4186,Mode0E_State01_Handshake_Tbl4186,I,"auto: 4 bytes, bytes; referenced by Mode0E_State01_Handshake",auto
+07,4186,Mode0E_AbortReasonMsgTbl,C,"4 bytes: wLnkAbortReason 1-4 -> message id wResultMsgId of the result / error screen = $09, $09, $0A, $0B (album full; peer album full; peer has no photo; own album empty), then state $12; Mode0E_State01_Handshake (07:4178), README 14 (read 2026-10-25)",hand+auto
 07,41C8,Unused_Mode0E_GotoState12,I,UNREFERENCED: state := $12,hand+auto
 07,41CE,Link_AnimateLamps,I,,hand+auto
 07,41F8,Link_DrawPressAText,I,blinking text,hand+auto
@@ -2815,7 +2815,7 @@ bank,addr,name,conf,note,source
 08,452C,Mode1C_ReadToggleKeys,C,,hand+auto
 08,4545,Mode1C_DrawToggleArrow,I,,hand+auto
 08,4583,Mode1C_ToggleArrowPosTbl,I,,hand+auto
-08,4587,Mode1C_DrawToggleArrow_Tbl4587,I,"auto: 6 bytes, bytes; referenced by Mode1C_DrawToggleArrow",auto
+08,4587,Mode1C_ToggleArrowAnimTbl,C,"3 x {OAM list id; ticks}: frame 0 = $BC (resting, no tick), frame 1 = $BD for $0B ticks, frame 2 = $BD, $FF; frame wArrowAnimFrame, tick $D51F; Mode1C_DrawToggleArrow (08:4560); the A-press loop of Mode1C_State06_OptionToggle (08:44B4) runs frames 1 to 2 (read 2026-10-25)",hand+auto
 08,458D,Mode1C_State07_Leave,C,A -> print job (state 8); B -> back,hand+auto
 08,45E0,Mode1C_State08_PrintJob,C,builds the print job and sends it,hand+auto
 08,46A3,Mode1C_State08_PrintJob_CommentCard,C,branch taken when $D806 bit 0 is set: the comment-card print job (08:46A3-4777; card layout routines in bank 9) (branch target; code read 2026-10-19),hand
