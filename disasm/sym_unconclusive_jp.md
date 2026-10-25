@@ -4,13 +4,13 @@ Generated from `sym_names_jp.csv` by `tools/make_doubts.py` (companion: `sym_unc
 
 Reading the names: `Gfx_BB_AAAA_*` = 2bpp tile data, `Map_BB_AAAA_*` = tile map rows (32 bytes per row, 20 visible), `Src_BB_AAAA_*` = data loaded through a far pointer whose destination class is not known, `*_Aux` = same family as the neighbouring named asset (consumer not found), `*_Unref` = no neighbouring consumer at all, `Data_BB_AAAA` = small unread block.
 
-Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (every 2bpp tile of the bank, 32 tiles per row, row label = address of the first tile; grey = typed and named, orange = span listed in the groups "content-classified span" / "unknown data", blue = other `?` assets).
+Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (every 2bpp tile of the bank, 32 tiles per row, row label = address of the first tile; grey = typed and named, orange = unreferenced span (name ends `_Aux` / `_Unref`, listed in "content-classified span" unless settled as unused, as the four ball-head frames of bank 16 are), blue = other `?` assets).
 
 | group | rows | bytes (of the block) | what would help |
 |---|---|---|---|
 | visually identified range | 0 | 0 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 0 | 0 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 17 | 6294 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| content-classified span | 13 | 4246 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
@@ -19,17 +19,21 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | SFX tag | 95 | 2528 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
-| main-menu slide | 2 | 24 | which transition each slide is |
+| main-menu slide | 0 | 0 | which transition each slide is |
 | arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
-| dead code | 32 | 6292 | whether the code is truly dead (TCRF unused-content notes) |
+| dead code | 2 | 4512 | for what is left (two TCRF graphics): the owner's check of the TCRF match |
 
-## content-classified span (17)
+Not counted above: 36 rows proven unused, whose tag is final (I for most: the verdict is that nothing uses them, so no run or screen can confirm it; C for the four ball-head frames) (`doubts_overrides_jp.csv`, status `final`); they are listed with the proof in the last section and in `sym_settled_unused_jp.csv`.
 
-_Why doubtful:_ type chosen from the bytes (map rows vs tiles), consumer not found. _To settle:_ view the bank image, then find the reader with a breakpoint on the bank number write.
+## content-classified span (13)
+
+_Why doubtful:_ type confirmed by the owner (review page, by eye); role and consumer not found. _To settle:_ the role only: the owner naming the picture from the bank image, or a reader caught by a BGB read watchpoint on the span over the organic corpus.
+
+- `0C:6C00` instead: _why_ type chosen from the bytes (map rows vs tiles), consumer not found; _to settle_ view the bank image, then find the reader with a breakpoint on the bank number write.
+- `23:58C0` instead: _why_ type chosen from the bytes (map rows vs tiles), consumer not found; _to settle_ view the bank image, then find the reader with a breakpoint on the bank number write.
 
 - bank 0C: `6C00` Mode12_State1D_SortDialogOpen_Aux (48 B)
 - bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
-- bank 16: `7380` MainMenu_BallHeadAnim_F5_Unref (512 B), `7580` MainMenu_BallHeadAnim_F6_Unref (512 B), `7780` MainMenu_BallHeadAnim_F7_Unref (512 B), `7980` MainMenu_BallHeadAnim_F8_Unref (512 B)
 - bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
 - bank 1A: `5182` Unref (90 B), `7E00` Unref (501 B)
 - bank 1C: `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
@@ -225,50 +229,56 @@ _Why doubtful:_ role of several state variables guessed. _To settle:_ play the g
 |---|---|---|---|---|
 | 09:66A5 | `Run_FlagLanded` | 22 | Run (marathon) mini-game routine or table | returns Z when the flag counter $D048 is 2 and the y byte (record + 2, from $D054, step 6) of all 10 confetti  |
 
-## main-menu slide (2)
+## dead code (2)
 
-_Why doubtful:_ slide A/B split by code layout only. _To settle:_ watch the menu transition frame by frame.
+_Why doubtful:_ never drawn in organic runs; frames 0 1 3 7 8 equal the TCRF picture pixel for pixel, frames 2 4 5 6 differ by a few pixels; no owner answer yet. _To settle:_ the owner's yes / no on the TCRF match (frames 2, 4, 5, 6).
 
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7580, 7780, 7980, 7B80 (frames 6-9 of the camera ball head animation, forward; the secon |
-| 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | slide animation between main-menu pages | 4 x {lo,hi,bank} = 16:7980, 7780, 7580, 7380 (frames 8, 7, 6, 5 of the camera ball head animation, backward).  |
-
-## dead code (32)
-
-_Why doubtful:_ never executed in the static trace; purpose read from the instructions only. _To settle:_ TCRF note, or a debugger test with a forced jump.
+- `13:5CA0` instead: _why_ loaded with the album sheet and never drawn (C), but the TCRF match is partial: 23 of 32 informative tiles found, owner answer 'partly'; _to settle_ the owner's eye on the 9 TCRF tiles not found in the ROM, or the TCRF picture at its original scale.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 00:2E88 | `Unused_Str_MainPass` | 10 | code or data that no trace path and no table reaches (left over from earlier versions) | ASCII 'MAIN PASS',0 right after Delay_BC; no immediate load of its address in the trace |
-| 02:46E6 | `Unused_Photo_SaveReceived_Far_Stray46E6` | 3 | code or data that no trace path and no table reaches (left over from earlier versions) | 3 bytes 00 C0 00 between the jp of Photo_SaveReceived_Far (02:46E3) and Sram_ZeroTagBytes (02:46E9); read as c |
-| 04:4D09 | `Unused_Mode0F_State09_EraseOne_Tbl4D09` | 18 | code or data that no trace path and no table reaches (left over from earlier versions) | 18 bytes 05 0F 06 05 07 05 06 05 07 05 08 05 0B 05 0C 05 0E 14 right after the ret of Mode0F_State09_EraseOne; |
-| 04:6403 | `Unused_LoadTilemap24_7120` | 15 | code or data that no trace path and no table reaches (left over from earlier versions) | dead code: copies the tilemap 24:7120 to $9800 (UNREFERENCED, README 16.15) |
-| 04:6412 | `Unused_LoadTilemap25_4B00` | 15 | code or data that no trace path and no table reaches (left over from earlier versions) | dead code: copies the tilemap 25:4B00 to $9800 (UNREFERENCED, README 16.15) |
-| 04:7C9D | `Unused_Mode0A_PhotoStepWrap` | 55 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED: Left / Right steps copy_photo_idx_a with wrap in 0..29 / 30..59 |
-| 05:622D | `Unused_DjEd_LoadPerformerTiles9100` | 23 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 05:7F1C | `Unused_Ball_LoadGfx9100` | 23 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 05:7F33 | `Unused_Ball_LoadGfx9480` | 23 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 06:71CC | `Unused_Shoot_TimerKeys` | 66 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 07:41C8 | `Unused_Mode0E_GotoState12` | 6 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED: state := $12 |
-| 07:4A4D | `Unused_Link_DrawPhotoNumber` | 65 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 07:4BC3 | `Unused_Link_LoadTiles` | 26 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 07:4BDD | `Unused_Link_WriteHexByte` | 7 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 07:4BE4 | `Unused_Link_WriteHexNibble` | 6 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED |
-| 07:4BEA | `Unused_Link_SumSlotBuffer` | 30 | code or data that no trace path and no table reaches (left over from earlier versions) | UNREFERENCED: 16-bit sum of the $1000 byte buffer |
-| 07:503D | `Unused_LinkPick_LoadPhotoIndexB` | 3 | code or data that no trace path and no table reaches (left over from earlier versions) | entry of arbitrary address (README 16.14) |
-| 0D:7660 | `Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx` | 384 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: the four kanji 中 前 後 持 as one strip of 16 tiles; pixel match against the TCRF image (15 o |
 | 11:5800 | `Unused_TCRF_HandNewspaperFrames_Gfx` | 4416 | code or data that no trace path and no table reaches (left over from earlier versions) | nine sprite frames of a hand flipping a newspaper (TCRF B16, Unused Graphic Bank 11): 25 tiles per frame in 51 |
 | 13:5CA0 | `Unused_TCRF_AlbumHandGestures_Gfx` | 96 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused hand gestures, pixel match with doubts: the TCRF image is a crop of the 16-tile-wide sheet 13:5A00 |
-| 15:4480 | `Unused_TCRF_JapaneseMenuTile_CircledX_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: the circled X tile of the Japanese main-menu bank (copy 1 of 3, same tile at 15:4500 and  |
-| 15:4500 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: circled X, copy 2 of 3 |
-| 15:4580 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx` | 16 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: circled X, copy 3 of 3 |
-| 18:5A50 | `Unused_TCRF_MarginPrint_BFilmRoll_Gfx` | 96 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: film roll with a B for the margin-print option (6 tiles); loaded with the option screen b |
-| 18:5F90 | `Unused_TCRF_MarginPrint_OutlinedText_Gfx` | 192 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphic: outlined Japanese text of the margin-print option (12 tiles); never stably on screen (REA |
-| 1C:5920 | `Unused_TCRF_HotSpotEffectIcons_Extra_Gfx` | 512 | code or data that no trace path and no table reaches (left over from earlier versions) | TCRF unused graphics: the 8 extra hot-spot effect icons (32 tiles); on screen only in runs that force the effe |
-| 1F:46DD | `Unused_Sfx1_Init_46DD` | 8 | code or data that no trace path and no table reaches (left over from earlier versions) | channel-1 init handler in the id 20-23 series that no table lists (dead) |
-| 1F:4A61 | `Unused_Sfx1_Step_4A61` | 8 | code or data that no trace path and no table reaches (left over from earlier versions) | step handler that no table lists (effect $34 uses the generic step; dead) |
-| 1F:4FBC | `Unused_Snd_SetFreeze` | 6 | code or data that no trace path and no table reaches (left over from earlier versions) | sets $DD0D (snd_freeze) = 1; no caller |
-| 1F:53B9 | `Unused_Snd_SongPan_Load` | 46 | code or data that no trace path and no table reaches (left over from earlier versions) | loads a 6-byte record at $5856 + 6 * (song - 1) into $DD55..; no caller (UNREFERENCED; README 16.21) |
-| 1F:53E7 | `Unused_Snd_Pan_Step` | 40 | code or data that no trace path and no table reaches (left over from earlier versions) | steps a panning sequence (NR51) from the $DD55 record; no caller (UNREFERENCED) |
-| 1F:5743 | `Unused_Snd_Vib_Tail` | 46 | code or data that no trace path and no table reaches (left over from earlier versions) | dead tail after an unconditional jr in Snd_Trk_Vibrato; the bytes of a removed branch |
+
+## settled as unused, final I (36)
+
+_Why not doubtful:_ the name and the kind are not in question and no reader can exist; nothing more can be learnt about them.
+
+| address | name | bytes | group it left | proof |
+|---|---|---|---|---|
+| 16:7380 | `Gfx_16_7380_MainMenu_BallHeadAnim_F5_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl3, which no code loads; BGB (2026-10-14): the main-menu transitions read frames 0-4 only |
+| 16:7580 | `Gfx_16_7580_MainMenu_BallHeadAnim_F6_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl2 / Tbl3, which no code loads; BGB (2026-10-14): the transitions read frames 0-4 only |
+| 16:7780 | `Gfx_16_7780_MainMenu_BallHeadAnim_F7_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl2 / Tbl3, which no code loads; BGB (2026-10-14): the transitions read frames 0-4 only |
+| 16:7980 | `Gfx_16_7980_MainMenu_BallHeadAnim_F8_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl2 / Tbl3, which no code loads; BGB (2026-10-14): the transitions read frames 0-4 only |
+| 00:2E88 | `Unused_Str_MainPass` | 10 | dead code | no load of its address in the trace, which has 0 unresolved indirect jumps (README 1.3, L2) |
+| 02:46E6 | `Unused_Photo_SaveReceived_Far_Stray46E6` | 3 | dead code | no pointer targets it, 0 unresolved indirect jumps; BGB link exchange with logging watchpoints: 0 reads and 0 executions while the jp before it ran twice |
+| 04:4D09 | `Unused_Mode0F_State09_EraseOne_Tbl4D09` | 18 | dead code | no instruction loads an address in 04:4D09-4D1A, 0 unresolved indirect jumps; BGB replay of erase-one-photo: 0 reads, control watchpoint 12 hits |
+| 04:6403 | `Unused_LoadTilemap24_7120` | 15 | dead code | UNREFERENCED in assets/reach_components_jp.csv (no call / jp / jr / pointer word reaches it) and the trace has 0 unresolved indirect jumps |
+| 04:6412 | `Unused_LoadTilemap25_4B00` | 15 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 04:7C9D | `Unused_Mode0A_PhotoStepWrap` | 55 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 05:622D | `Unused_DjEd_LoadPerformerTiles9100` | 23 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 05:7F1C | `Unused_Ball_LoadGfx9100` | 23 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 05:7F33 | `Unused_Ball_LoadGfx9480` | 23 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 06:71CC | `Unused_Shoot_TimerKeys` | 66 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 07:41C8 | `Unused_Mode0E_GotoState12` | 6 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 07:4A4D | `Unused_Link_DrawPhotoNumber` | 65 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 07:4BC3 | `Unused_Link_LoadTiles` | 26 | dead code | UNREFERENCED in assets/reach_components_jp.csv (one component 07:4BC3-4BE9 with 07:4BDD and 07:4BE4) and the trace has 0 unresolved indirect jumps |
+| 07:4BDD | `Unused_Link_WriteHexByte` | 7 | dead code | part of the UNREFERENCED component 07:4BC3-4BE9 (assets/reach_components_jp.csv); called only from it |
+| 07:4BE4 | `Unused_Link_WriteHexNibble` | 6 | dead code | part of the UNREFERENCED component 07:4BC3-4BE9 (assets/reach_components_jp.csv); called only from it |
+| 07:4BEA | `Unused_Link_SumSlotBuffer` | 30 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 07:503D | `Unused_LinkPick_LoadPhotoIndexB` | 3 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 0D:7660 | `Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx` | 384 | dead code | never on screen in organic runs (README 16.24); TCRF match confirmed by the owner by eye (owner_answers_jp.csv) |
+| 15:4480 | `Unused_TCRF_JapaneseMenuTile_CircledX_Gfx` | 16 | dead code | on screen only in forced runs (README 16.24); TCRF match confirmed by the owner by eye |
+| 15:4500 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx` | 16 | dead code | never on screen in organic runs, on screen only in forced runs (README 16.24); TCRF match confirmed by the owner by eye |
+| 15:4580 | `Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx` | 16 | dead code | never on screen in organic runs, on screen only in forced runs (README 16.24); TCRF match confirmed by the owner by eye |
+| 18:5A50 | `Unused_TCRF_MarginPrint_BFilmRoll_Gfx` | 96 | dead code | loaded with the option screen, never stably on screen (README 16.24); TCRF match confirmed by the owner by eye |
+| 18:5F90 | `Unused_TCRF_MarginPrint_OutlinedText_Gfx` | 192 | dead code | never stably on screen (README 16.24); TCRF match confirmed by the owner by eye |
+| 1C:5920 | `Unused_TCRF_HotSpotEffectIcons_Extra_Gfx` | 512 | dead code | on screen only when the effect number is forced above 7 (README 16.8, 16.24); TCRF match confirmed by the owner by eye |
+| 1F:46DD | `Unused_Sfx1_Init_46DD` | 8 | dead code | UNREFERENCED in assets/reach_components_jp.csv; no sound-effect table lists it |
+| 1F:4A61 | `Unused_Sfx1_Step_4A61` | 8 | dead code | UNREFERENCED in assets/reach_components_jp.csv; no sound-effect table lists it |
+| 1F:4FBC | `Unused_Snd_SetFreeze` | 6 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 1F:53B9 | `Unused_Snd_SongPan_Load` | 46 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 1F:53E7 | `Unused_Snd_Pan_Step` | 40 | dead code | UNREFERENCED in assets/reach_components_jp.csv and the trace has 0 unresolved indirect jumps |
+| 1F:5743 | `Unused_Snd_Vib_Tail` | 46 | dead code | dead tail after an unconditional jr (UNREFERENCED in assets/reach_components_jp.csv) |
+| 07:7C33 | `MainMenu_SlideA_Tbl2` | 12 | main-menu slide | no ld de of its address in either ROM (only Tbl0 / Tbl1 are loaded, 07:7297-7782) and the step code adds no offset |
+| 07:7C3F | `MainMenu_SlideA_Tbl3` | 12 | main-menu slide | no ld de of its address in either ROM and the step code adds no offset |

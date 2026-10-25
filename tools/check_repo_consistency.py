@@ -9,7 +9,7 @@ What it checks (each line of the report is one check)
   names      sym_names_jp.csv: tags C / I / ?, duplicate names, a name that carries another address than its own (only `_Part<addr>` / `_Cont` may),
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
-  doubts     disasm/sym_unconclusive_jp.{md,csv} equal a fresh make_doubts.py run; rows and distinct bytes
+  doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
   renamed    disasm/renamed_jp.csv rows against the counts the README quotes
   quoted     every count that README.md, CLAUDE.md, skills/gb-rom-disassembly/SKILL.md and HOWTO_NEW_ROM.md quote (labels per tag, doubtful rows, distinct bytes,
              blocks, bytes per type, sym lines, really-unused totals, tier table, per-bank layout table, TCRF label count) against the files they come from
@@ -157,13 +157,15 @@ def union(rows):
         tot += cur[1] - cur[0]
     return tot
 DROWS = len(DR); DBYTES = union(DR)
+DS = list(csv.DictReader(io.StringIO(rd('disasm/sym_settled_unused_jp.csv'))))     # rows proven unused (doubts_overrides_jp.csv, status final): not doubtful
+DSET = len(DS)
 tmpd = tempfile.mkdtemp(prefix='cons_d_')
 r = subprocess.run([sys.executable, 'tools/make_doubts.py', 'disasm/sym_names_jp.csv', tmpd, 'pocketcamera_jp.sym'], capture_output=True, text=True)
 if r.returncode: bad('doubts', 'make_doubts.py failed: %s' % (r.stderr or r.stdout).strip()[-300:])
 else:
-    for f in ('sym_unconclusive_jp.csv', 'sym_unconclusive_jp.md'):
+    for f in ('sym_unconclusive_jp.csv', 'sym_unconclusive_jp.md', 'sym_settled_unused_jp.csv'):
         if open(os.path.join(tmpd, f), encoding='utf-8').read() != rd('disasm/' + f): bad('doubts', 'disasm/%s is stale: run tools/make_doubts.py' % f)
-    if not any(f.startswith('doubts') for f in FAIL): ok('doubts', '%d rows on %s distinct bytes' % (DROWS, fmt(DBYTES)))
+    if not any(f.startswith('doubts') for f in FAIL): ok('doubts', '%d rows on %s distinct bytes; %d settled as unused' % (DROWS, fmt(DBYTES), DSET))
 shutil.rmtree(tmpd, ignore_errors=True)
 if sum(1 for r in DR if r['conf'] == '?') != Q: bad('doubts', 'the doubts csv holds %d `?` rows, the names csv %d' % (sum(1 for r in DR if r['conf'] == '?'), Q))
 
@@ -198,6 +200,7 @@ n += quoted('doubtful rows', r'(\d+) doubtful rows on ([\d,]+) distinct bytes', 
 n += quoted('doubtful bytes', r'distinct doubtful bytes [\d,]+ -> ([\d,]+)', lambda m: ((DBYTES,), (num(m.group(1)),)), need=('README.md',))
 n += quoted('doubtful bytes', r'sit on ([\d,]+) distinct ROM bytes', lambda m: ((DBYTES,), (num(m.group(1)),)), need=('README.md',))
 n += quoted('doubtful rows', r'the (\d+) rows of `disasm/sym_unconclusive_jp.csv`', lambda m: ((DROWS,), (int(m.group(1)),)), need=('README.md',))
+n += quoted('settled rows', r'(\d+) rows proven unused are listed apart \(`disasm/sym_settled_unused_jp.csv`', lambda m: ((DSET,), (int(m.group(1)),)), need=('README.md',))
 # renamed
 n += quoted('renamed rows', r'\((\d+) rows against the start of the pass: (\d+) renames with old / new tag and the reason, (\d+) names kept with a better evidence tag, (\d+) labels removed, (\d+) new\)',
             lambda m: ((len(RN), RK['renamed'], RK['kept'], RK['removed'], RK['new']), tuple(int(m.group(i)) for i in range(1, 6))), need=('README.md',))
