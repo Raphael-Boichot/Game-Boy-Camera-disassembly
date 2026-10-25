@@ -14,7 +14,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
-| mode state | 70 | 5227 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| mode state | 6 | 531 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2528 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
@@ -42,82 +42,18 @@ _Why doubtful:_ type confirmed by the owner (review page, by eye); role and cons
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## mode state (70)
+## mode state (6)
 
 _Why doubtful:_ state purpose read from the data it writes; screen function partly guessed. _To settle:_ play the screen in an emulator; match with the TCRF / Funtography screen name.
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 00:31CF | `Mode1D_SplitNibbles` | 13 | state handler or helper of a screen mode | A -> D (high nibble) and E (low nibble << 4) |
-| 00:31DC | `Mode1D_ByteToDE` | 6 | state handler or helper of a screen mode | A -> DE |
-| 00:31E2 | `Mode1D_ReadSrcEntry` | 16 | state handler or helper of a screen mode | A and 3 selects a 4-byte entry of a source table; returns DE |
-| 00:31F2 | `Mode1D_ReadByteFromBank` | 34 | state handler or helper of a screen mode | reads [HL] of bank A into C |
 | 00:3249 | `Mode1D_InterleaveTileRows` | 146 | state handler or helper of a screen mode | interleaves bitplanes of a row of 8x8 tiles into the band buffer |
-| 00:32DB | `Mode1D_FillBlank` | 13 | state handler or helper of a screen mode | fills the band buffer with zero bytes |
-| 00:34B3 | `Mode1D_DrawBusyIcon` | 19 | state handler or helper of a screen mode | blinking sprite while printing |
-| 00:34C6 | `Mode1D_DrawTvAnimation` | 49 | state handler or helper of a screen mode | 15 sprite pieces of the TV animation |
-| 00:34F7 | `Mode1D_TvAnimTbl` | 30 | state handler or helper of a screen mode | 15 x {x |
-| 03:6C2D | `Mode1A_State04_PlaceOrDelete` | 105 | state handler or helper of a screen mode | A opens the sound picker |
-| 03:6DAD | `Mode1A_State08_PickConfirm` | 87 | state handler or helper of a screen mode | A confirms with the button animation |
-| 03:6E04 | `Mode1A_State09_ExitDialog` | 148 | state handler or helper of a screen mode | keep / discard dialog |
-| 03:6EE1 | `Mode1A_State0A_DeleteDialog` | 93 | state handler or helper of a screen mode | delete this hot spot? dialog |
-| 04:5044 | `Mode0F_EraseJingleTiles` | 91 | state handler or helper of a screen mode | plays sound $45 and builds four quadrant tiles of the erase animation |
-| 04:509F | `Mode0F_EraseTileTbl` | 16 | state handler or helper of a screen mode | table read by 5044 |
-| 04:50AF | `Mode0F_CopyPieceToVram` | 238 | state handler or helper of a screen mode | copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800) |
-| 05:44A8 | `Mode1F_State06_SavePanel` | 80 | state handler or helper of a screen mode | A: stores the tune (02:4A6B); slides the panel away |
-| 05:44F8 | `Mode1F_State07_QuitPanel` | 89 | state handler or helper of a screen mode | A: back to the title; B: back to the performance |
-| 06:4377 | `Mode15_DrawArrows` | 37 | state handler or helper of a screen mode | Left / Right arrow sprites |
-| 06:439C | `Mode15_DrawSecondsSprite` | 10 | state handler or helper of a screen mode |  |
-| 06:43A6 | `Mode15_DrawOkSprite` | 6 | state handler or helper of a screen mode |  |
-| 06:43AC | `Mode15_DrawBlinkSprite` | 16 | state handler or helper of a screen mode |  |
-| 06:43F3 | `Mode15_DrawTwoDigitsInterval` | 47 | state handler or helper of a screen mode |  |
-| 06:4422 | `Mode15_DrawIntervalText` | 154 | state handler or helper of a screen mode | interval text in tile writes |
-| 06:4665 | `Mode16_State03_TrickLensesMenu` | 114 | state handler or helper of a screen mode | option 1 (opt1_row / opt1_value) |
-| 06:470A | `Mode16_State04_MontageMenu` | 113 | state handler or helper of a screen mode | option 2 (opt2_row / opt2_value) |
-| 06:47A4 | `Mode16_State05_PanoramaMenu` | 206 | state handler or helper of a screen mode | option 3 (two toggles) |
-| 06:480B | `Mode16_DrawPanoramaHint` | 40 | state handler or helper of a screen mode |  |
-| 06:4833 | `Mode16_DrawPanoramaToggles` | 63 | state handler or helper of a screen mode |  |
-| 06:487A | `Mode16_State06_GameFaceMenu` | 164 | state handler or helper of a screen mode | option 4: game or Game Face editor |
-| 06:4AA3 | `Mode16_DrawIcon` | 116 | state handler or helper of a screen mode |  |
-| 06:4AF8 | `Mode16_LoadPageTiles` | 31 | state handler or helper of a screen mode |  |
-| 06:4B23 | `Mode16_LoadIconTiles` | 68 | state handler or helper of a screen mode |  |
-| 06:4B7C | `Mode16_BuildList2` | 84 | state handler or helper of a screen mode | two rows |
-| 06:4BD0 | `Mode16_BuildList4` | 84 | state handler or helper of a screen mode | four rows |
-| 06:4C24 | `Mode16_BuildList6` | 99 | state handler or helper of a screen mode | six rows |
-| 06:4C87 | `Mode16_DrawCaptionBlink` | 24 | state handler or helper of a screen mode |  |
-| 06:5ACE | `Mode18_DrawPrintLabel` | 9 | state handler or helper of a screen mode |  |
-| 06:5AD7 | `Mode18_DrawCancelLabel` | 9 | state handler or helper of a screen mode |  |
-| 06:5B56 | `Mode18_Pick1_Left` | 30 | state handler or helper of a screen mode |  |
-| 06:5B74 | `Mode18_Pick1_Right` | 34 | state handler or helper of a screen mode |  |
-| 06:5BBF | `Mode18_Pick2_Up` | 30 | state handler or helper of a screen mode |  |
-| 06:5BDD | `Mode18_Pick2_Down` | 34 | state handler or helper of a screen mode |  |
-| 06:5BFF | `Mode18_Pick1_DrawCursor` | 55 | state handler or helper of a screen mode |  |
-| 06:5C45 | `Mode18_Pick2_DrawCursor` | 55 | state handler or helper of a screen mode |  |
-| 06:5C8B | `Mode18_DrawArrows` | 185 | state handler or helper of a screen mode |  |
-| 06:5C9C | `Mode18_LoadAllThumbs` | 22 | state handler or helper of a screen mode |  |
-| 06:5D6C | `Mode18_DrawThumbFrame` | 126 | state handler or helper of a screen mode |  |
-| 06:5DD7 | `Mode18_LoadTileIndexed` | 15 | state handler or helper of a screen mode |  |
-| 07:43D6 | `Mode0E_State04_PickDone` | 231 | state handler or helper of a screen mode | after the dialog: loads the chosen photo into the link buffer |
-| 07:44BD | `Mode0E_State05_AbortWait` | 55 | state handler or helper of a screen mode | jitter sprite; A leaves |
-| 07:44F4 | `Mode0E_State06_ExchangeSetup` | 165 | state handler or helper of a screen mode | bars and lamps for the exchange (first direction) |
 | 07:4599 | `Mode0E_State07_ExchangeBarsA` | 57 | state handler or helper of a screen mode | progress bars; direction 1 |
-| 07:45D2 | `Mode0E_State08_ExchangeWaitA` | 43 | state handler or helper of a screen mode | bars; direction 0; watchdog |
-| 07:4645 | `Mode0E_State0A_ExchangeSetupB` | 119 | state handler or helper of a screen mode | second direction |
-| 07:46BC | `Mode0E_State0B_ExchangeBarsB` | 114 | state handler or helper of a screen mode |  |
 | 07:472E | `Mode0E_State0C_ExchangeWaitB` | 43 | state handler or helper of a screen mode |  |
 | 07:4759 | `Mode0E_State0D_PickSecond` | 216 | state handler or helper of a screen mode | clears the slot buffer and prepares the second photo |
 | 07:4831 | `Mode0E_State0E_AbortWait2` | 60 | state handler or helper of a screen mode |  |
 | 07:486D | `Mode0E_State0F_Ready` | 9 | state handler or helper of a screen mode | lnk_ready_tx := 1 |
-| 07:4876 | `Mode0E_State10_ExchangeWaitC` | 43 | state handler or helper of a screen mode |  |
-| 08:4291 | `Mode1C_State03_PrintMain` | 82 | state handler or helper of a screen mode | Select = option page; Start = toggle extra copy; A/B = leave |
-| 08:42E3 | `Mode1C_DrawJitterSprite` | 70 | state handler or helper of a screen mode | random 1-px jitter of sprite $79/$7A |
-| 08:4329 | `Mode1C_State04_OptionsMenu` | 184 | state handler or helper of a screen mode | Up -> density; Down -> second option; B/Select back |
-| 08:4489 | `Mode1C_State06_OptionToggle` | 127 | state handler or helper of a screen mode | Left/Right toggles D674; two tile variants |
-| 08:4508 | `Mode1C_LoadToggleTiles` | 36 | state handler or helper of a screen mode |  |
-| 08:4545 | `Mode1C_DrawToggleArrow` | 62 | state handler or helper of a screen mode |  |
-| 08:4583 | `Mode1C_ToggleArrowPosTbl` | 4 | state handler or helper of a screen mode |  |
-| 08:47ED | `Mode1C_DrawPrintScreen` | 94 | state handler or helper of a screen mode | tilemap 27:4472 and border tiles |
-| 08:484B | `Mode1C_DrawOptionScreen` | 60 | state handler or helper of a screen mode |  |
 
 ## SFX tag (95)
 

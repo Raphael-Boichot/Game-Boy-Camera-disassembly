@@ -255,13 +255,13 @@ bank,addr,name,conf,note,source
 00,30F9,Mode1D_ProgressTbl,C,per layout offsets then per page progress words,hand+auto
 00,3118,Mode1D_State03_BuildBand,C,copies the band descriptors of the layout and renders the band,hand+auto
 00,3161,Mode1D_RenderBand,C,renders one band of descriptors to $CF00,hand+auto
-00,31CF,Mode1D_SplitNibbles,I,A -> D (high nibble) and E (low nibble << 4),hand+auto
-00,31DC,Mode1D_ByteToDE,I,A -> DE,hand+auto
-00,31E2,Mode1D_ReadSrcEntry,I,A and 3 selects a 4-byte entry of a source table; returns DE,hand+auto
-00,31F2,Mode1D_ReadByteFromBank,I,reads [HL] of bank A into C,hand+auto
+00,31CF,Mode1D_SplitNibbles,C,A -> D (high nibble) and E (low nibble << 4); BGB watchpoint pass 2026-10-25: ran only in mode 1D (1840 hits in 2 runs: 1D:03 x1840; tcrf_check/assets/mode_state_wp/),hand+auto
+00,31DC,Mode1D_ByteToDE,C,A -> DE; BGB watchpoint pass 2026-10-25: ran only in mode 1D (272 hits in 1 runs: 1D:03 x272; tcrf_check/assets/mode_state_wp/),hand+auto
+00,31E2,Mode1D_ReadSrcEntry,C,A and 3 selects a 4-byte entry of a source table; returns DE; BGB watchpoint pass 2026-10-25: ran only in mode 1D (2112 hits in 2 runs: 1D:03 x2112; tcrf_check/assets/mode_state_wp/),hand+auto
+00,31F2,Mode1D_ReadByteFromBank,C,reads [HL] of bank A into C; BGB watchpoint pass 2026-10-25: ran only in mode 1D (272 hits in 1 runs: 1D:03 x272; tcrf_check/assets/mode_state_wp/),hand+auto
 00,3214,Mode1D_CopyDescriptors,C,copies C records of 4 bytes from bank A to DE,hand+auto
 00,3249,Mode1D_InterleaveTileRows,I,interleaves bitplanes of a row of 8x8 tiles into the band buffer,hand+auto
-00,32DB,Mode1D_FillBlank,I,fills the band buffer with zero bytes,hand+auto
+00,32DB,Mode1D_FillBlank,C,fills the band buffer with zero bytes; BGB watchpoint pass 2026-10-25: ran only in mode 1D (224 hits in 1 runs: 1D:03 x224; tcrf_check/assets/mode_state_wp/),hand+auto
 00,32E8,Mode1D_LayoutScriptPtrs,C,one word per layout type,hand+auto
 00,32F2,Mode1D_State04_SendBand,C,sends the DATA packet of the band,hand+auto
 00,3339,Mode1D_State05_SendPrint,C,sends the PRINT command with margin and palette,hand+auto
@@ -275,9 +275,9 @@ bank,addr,name,conf,note,source
 00,348D,Mode1D_State09_Cleanup,C,printer error clean-up,hand+auto
 00,34A5,Mode1D_State0A_ErrorScreen,C,far call 09:7290 (shared result / error screen),hand+auto
 00,34B0,Mode1D_State0B_Return,C,jp 3469,hand+auto
-00,34B3,Mode1D_DrawBusyIcon,I,blinking sprite while printing,hand+auto
-00,34C6,Mode1D_DrawTvAnimation,I,15 sprite pieces of the TV animation,hand+auto
-00,34F7,Mode1D_TvAnimTbl,I,15 x {x,hand+auto
+00,34B3,Mode1D_DrawBusyIcon,C,blinking sprite while printing; BGB watchpoint pass 2026-10-25: ran only in mode 1D (246 hits in 2 runs: 1D:06 x3 1D:07 x243; tcrf_check/assets/mode_state_wp/),hand+auto
+00,34C6,Mode1D_DrawTvAnimation,C,15 sprite pieces of the TV animation; BGB watchpoint pass 2026-10-25: ran only in mode 1D (2284 hits in 11 runs: 1D:01 x30 1D:02 x60 1D:03 x46 1D:04 x2136 1D:05 x12; tcrf_check/assets/mode_state_wp/),hand+auto
+00,34F7,Mode1D_TvAnimTbl,C,15 x {x; BGB watchpoint pass 2026-10-25: ran only in mode 1D (33360 hits in 4 runs: 1D:01 x150 1D:02 x300 1D:03 x690 1D:04 x32040 1D:05 x180; tcrf_check/assets/mode_state_wp/),hand+auto
 00,3515,Mode1D_AdvanceProgress,C,adds the page progress step and queues the progress-bar tile row (VRAM queue),hand+auto
 00,354D,Print_CountPrintedPhoto,C,far calls 02:503F then adds 1 to the printed-photos counter (BCD saturating) and far calls 02:4BB2,hand+auto
 00,356C,Bank00_ZeroFill,C,388 zero bytes (padding),hand+auto
@@ -1404,16 +1404,16 @@ bank,addr,name,conf,note,source
 03,6B23,Mode1A_State03_Browse,C,pointer / hot-spot slot selection; A edits or places a spot,hand+auto
 03,6BC1,HotSpotEd_NewSpot,C,initialises a new hot spot in the block (position 7,hand+auto
 03,6C0A,HotSpotEd_LoadSpotFields,C,copies sound / effect / jump of the selected spot to the edit variables,hand+auto
-03,6C2D,Mode1A_State04_PlaceOrDelete,I,A opens the sound picker,hand+auto
+03,6C2D,Mode1A_State04_PlaceOrDelete,C,A opens the sound picker; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 04 (6412 hits in 16 runs: 1A:04 x6412; tcrf_check/assets/mode_state_wp/),hand+auto
 03,6C96,Mode1A_State05_PickSound,C,picks the sound of the hot spot,hand+auto
 03,6CEB,HotSpotEd_StoreSpotFields,C,copies the edit variables back to the block; Z if the spot is not new,hand+auto
 03,6D0E,Mode1A_State06_PickEffect,C,picks the transition effect 0..7,hand+auto
 03,6D5A,Mode1A_State07_PickJump,C,picks the JUMP target photo,hand+auto
-03,6DAD,Mode1A_State08_PickConfirm,I,A confirms with the button animation,hand+auto
-03,6E04,Mode1A_State09_ExitDialog,I,keep / discard dialog,hand+auto
+03,6DAD,Mode1A_State08_PickConfirm,C,A confirms with the button animation; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 08 (1120 hits in 5 runs: 1A:08 x1120; tcrf_check/assets/mode_state_wp/),hand+auto
+03,6E04,Mode1A_State09_ExitDialog,C,keep / discard dialog; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 09 (1368 hits in 2 runs: 1A:09 x1368; tcrf_check/assets/mode_state_wp/),hand+auto
 03,6E98,Mode1A_State09_ExitDialog_Cancel,C,bit 1 of $FFA2 (B): slides the dialog out and returns to state 3 (branch target; code read 2026-10-19),hand
 03,6EA4,HotSpotEd_DialogChoiceA,I,Left / Right toggles dialog_choice and swaps the dialog tiles,hand+auto
-03,6EE1,Mode1A_State0A_DeleteDialog,I,delete this hot spot? dialog,hand+auto
+03,6EE1,Mode1A_State0A_DeleteDialog,C,delete this hot spot? dialog; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 0A (252 hits in 1 runs: 1A:0A x252; tcrf_check/assets/mode_state_wp/),hand+auto
 03,6F3E,HotSpotEd_DialogChoiceB,I,same for the delete dialog,hand+auto
 03,6F7B,Mode1A_State0B_Unused,C,ret,hand+auto
 03,6F7C,Mode1A_State0C_Exit,C,fades out and returns to state 0,hand+auto
@@ -1560,9 +1560,9 @@ bank,addr,name,conf,note,source
 04,4FAF,Mode0F_DrawCopyCount,C,two decimal digits of copies_of_photo as tile copies,hand+auto
 04,5009,Mode0F_CopiedMarkerPosTbl,C,"8 x {x; y} of the copied-marker sprite (wCopiedMarkerXy): Mode0F_DrawCopyCount (04:4FF7) indexes it by (wPhotoIndex, +2 from photo 30) and 7, x 2; three rows x = $23 / $4B / $73, y = $0B / $33 / $5B, the first slot of the top row not used (read 2026-10-25)",hand+auto
 04,5019,Mode0F_DrawCopiedMarker,C,sprite showing that a copy was made; counts down copied_marker_timer,hand+auto
-04,5044,Mode0F_EraseJingleTiles,I,plays sound $45 and builds four quadrant tiles of the erase animation,hand+auto
-04,509F,Mode0F_EraseTileTbl,I,table read by 5044,hand+auto
-04,50AF,Mode0F_CopyPieceToVram,I,copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800),hand+auto
+04,5044,Mode0F_EraseJingleTiles,C,plays sound $45 and builds four quadrant tiles of the erase animation; BGB watchpoint pass 2026-10-25: ran only in mode 0F (18 hits in 9 runs: 0F:07 x18; tcrf_check/assets/mode_state_wp/),hand+auto
+04,509F,Mode0F_EraseTileTbl,C,table read by 5044; BGB watchpoint pass 2026-10-25: ran only in mode 0F (144 hits in 1 runs: 0F:07 x144; tcrf_check/assets/mode_state_wp/),hand+auto
+04,50AF,Mode0F_CopyPieceToVram,C,copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800); BGB watchpoint pass 2026-10-25: ran only in mode 0F (3806 hits in 9 runs: 0F:07 x3806; tcrf_check/assets/mode_state_wp/),hand+auto
 04,50E5,Counters_IncErased,C,counters block: erased photos + 1 (BCD) and store,hand+auto
 04,5104,Mode0F_EraseOneAnimated,C,load the big thumbnail then run the erase animation (A = photo),hand+auto
 04,5121,EraseAnim_Run,C,photo shatters into 16 sprites that fly out and fall (del_* variables),hand+auto
@@ -1793,8 +1793,8 @@ bank,addr,name,conf,note,source
 05,434F,DjTitle_DrawFrame3,I,,hand+auto
 05,4365,Mode1F_State04_PerformanceSetup,C,performance screen: graphics; three channel indicators; tempo and level digits,hand+auto
 05,4419,Mode1F_State05_Performance,C,plays the tune; Select goes to the edit pages (state 08),hand+auto
-05,44A8,Mode1F_State06_SavePanel,I,A: stores the tune (02:4A6B); slides the panel away,hand+auto
-05,44F8,Mode1F_State07_QuitPanel,I,A: back to the title; B: back to the performance,hand+auto
+05,44A8,Mode1F_State06_SavePanel,C,A: stores the tune (02:4A6B); slides the panel away; BGB watchpoint pass 2026-10-25: ran only in mode 1F and state 06 (5044 hits in 2 runs: 1F:06 x5044; tcrf_check/assets/mode_state_wp/),hand+auto
+05,44F8,Mode1F_State07_QuitPanel,C,A: back to the title; B: back to the performance; BGB watchpoint pass 2026-10-25: ran only in mode 1F and state 07 (4322 hits in 1 runs: 1F:07 x4322; tcrf_check/assets/mode_state_wp/),hand+auto
 05,4551,Mode1F_State08_EditPagesSetup,C,builds the SOUND I / SOUND II / NOISE pages; wave graph and cursors,hand+auto
 05,46AD,DjEd_DrawPageTabs,C,page tab sprites $A5 / $A7,hand+auto
 05,46BE,Mode1F_State09_PageSound1,C,SOUND I page: field editor; redraw; page keys,hand+auto
@@ -2229,13 +2229,13 @@ bank,addr,name,conf,note,source
 06,42A7,Mode15_State07_ShotsChoose,C,number of exposures (up to free photo slots),hand+auto
 06,4308,Mode15_State08_IntervalConfirm,C,,hand+auto
 06,434F,Mode15_State09_IntervalApply,C,A: shoot_variant 2 (interval) to mode 14,hand+auto
-06,4377,Mode15_DrawArrows,I,Left / Right arrow sprites,hand+auto
-06,439C,Mode15_DrawSecondsSprite,I,,hand+auto
-06,43A6,Mode15_DrawOkSprite,I,,hand+auto
-06,43AC,Mode15_DrawBlinkSprite,I,,hand+auto
+06,4377,Mode15_DrawArrows,C,Left / Right arrow sprites; BGB watchpoint pass 2026-10-25: ran only in mode 15 (5632 hits in 16 runs: 15:02 x3263 15:06 x1118 15:07 x1251; tcrf_check/assets/mode_state_wp/),hand+auto
+06,439C,Mode15_DrawSecondsSprite,C,BGB watchpoint pass 2026-10-25: ran only in mode 15 (8762 hits in 16 runs: 15:02 x6526 15:06 x2236; tcrf_check/assets/mode_state_wp/),hand+auto
+06,43A6,Mode15_DrawOkSprite,C,BGB watchpoint pass 2026-10-25: ran only in mode 15 (6912 hits in 12 runs: 15:03 x3162 15:07 x2502 15:08 x1248; tcrf_check/assets/mode_state_wp/),hand+auto
+06,43AC,Mode15_DrawBlinkSprite,C,BGB watchpoint pass 2026-10-25: ran only in mode 15 (2205 hits in 12 runs: 15:03 x1581 15:08 x624; tcrf_check/assets/mode_state_wp/),hand+auto
 06,43BC,Mode15_DrawTwoDigits,C,A as two numeral tiles,hand+auto
-06,43F3,Mode15_DrawTwoDigitsInterval,I,,hand+auto
-06,4422,Mode15_DrawIntervalText,I,interval text in tile writes,hand+auto
+06,43F3,Mode15_DrawTwoDigitsInterval,C,BGB watchpoint pass 2026-10-25: ran only in mode 15 (14 hits in 6 runs: 15:05 x14; tcrf_check/assets/mode_state_wp/),hand+auto
+06,4422,Mode15_DrawIntervalText,C,interval text in tile writes; BGB watchpoint pass 2026-10-25: ran only in mode 15 (18 hits in 6 runs: 15:05 x14 15:06 x4; tcrf_check/assets/mode_state_wp/),hand+auto
 06,44BC,Mode15_StepValue,C,Left / Right (bit 5 / 4 of HL) steps A between B and C,hand+auto
 06,44D9,Mode16_ShutterbugMagic,C,mode 16: SHUTTERBUG menu (TRICK LENSES / MONTAGE / PANORAMA / GAME FACE),hand+auto
 06,44DD,Mode16_StateTable,C,10 states,hand+auto
@@ -2245,39 +2245,39 @@ bank,addr,name,conf,note,source
 06,4607,Mode16_State02_MainMenu,C,,hand+auto
 06,4659,Mode16_ItemStateTbl,C,"4 bytes: menu item -> state of its sub-screen when A is pressed (03-06), read by Mode16_State02_MainMenu (06:4631); a value of $22 or more would be refused with sound $0B, none is (read 2026-10-25)",hand+auto
 06,465D,Mode16_MenuCursorPosTbl,C,"4 x {y; x} of the cursor of the four MAGIC items: y = $4C / $5C / $6C / $7C, x = $30; Mode16_DrawCursorFromTable (06:4A70) from Mode16_State02_MainMenu (read 2026-10-25)",hand+auto
-06,4665,Mode16_State03_TrickLensesMenu,I,option 1 (opt1_row / opt1_value),hand+auto
+06,4665,Mode16_State03_TrickLensesMenu,C,option 1 (opt1_row / opt1_value); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 03 (6460 hits in 14 runs: 16:03 x6460; tcrf_check/assets/mode_state_wp/),hand+auto
 06,46D7,Mode16_TrickLensRowPosTbl,C,"3 x {y; x} of the row cursor of the TRICK LENSES sub-screen (y = $60 / $68 / $70, x = $37); only entry 0 is read because the row wOpt1Row never leaves 0 (Mode16_StepRow with C = 0) (read 2026-10-25)",hand+auto
 06,46DD,Mode16_TrickLensIconTbl,C,"9 x {OAM list id; OAM list id or $FF} drawn at (x, y) = ($60, $60) by Mode16_DrawIcon (06:4AA3) for wOpt1Value 0-8, $FF = no second list (read 2026-10-25)",hand+auto
 06,46EF,Mode16_TrickLensIconSrcTbl,C,9 x {lo; hi; bank} = 0D:6000 6100 6300 6200 6400 6500 6600 6700 6800 (the Gfx_0D_*_Icon06_46EF rows): Mode16_LoadIconTiles (06:4B23) copies $100 B of the entry wOpt1Value to $9300; one table of 27 B (read 2026-10-25),hand+auto
-06,470A,Mode16_State04_MontageMenu,I,option 2 (opt2_row / opt2_value),hand+auto
+06,470A,Mode16_State04_MontageMenu,C,option 2 (opt2_row / opt2_value); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 04 (1914 hits in 4 runs: 16:04 x1914; tcrf_check/assets/mode_state_wp/),hand+auto
 06,477B,Mode16_MontageRowPosTbl,C,"3 x {y; x} of the row cursor of the MONTAGE sub-screen (same bytes as Mode16_TrickLensRowPosTbl); only entry 0 is read, wOpt2Row never leaves 0 (read 2026-10-25)",hand+auto
 06,4781,Mode16_MontageIconTbl,C,7 x {OAM list id; OAM list id or $FF} drawn by Mode16_DrawIcon for wOpt2Value 0-6 (read 2026-10-25),hand+auto
 06,478F,Mode16_MontageIconSrcTbl,C,7 x {lo; hi; bank} = 0D:6900-6F00 (the Gfx_0D_*_Icon06_478F rows): Mode16_LoadIconTiles copies $100 B of the entry wOpt2Value to $9400 (read 2026-10-25),hand+auto
-06,47A4,Mode16_State05_PanoramaMenu,I,option 3 (two toggles),hand+auto
-06,480B,Mode16_DrawPanoramaHint,I,,hand+auto
-06,4833,Mode16_DrawPanoramaToggles,I,,hand+auto
+06,47A4,Mode16_State05_PanoramaMenu,C,option 3 (two toggles); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 05 (22910 hits in 13 runs: 16:05 x22910; tcrf_check/assets/mode_state_wp/),hand+auto
+06,480B,Mode16_DrawPanoramaHint,C,BGB watchpoint pass 2026-10-25: ran only in mode 16 (11455 hits in 13 runs: 16:05 x11455; tcrf_check/assets/mode_state_wp/),hand+auto
+06,4833,Mode16_DrawPanoramaToggles,C,BGB watchpoint pass 2026-10-25: ran only in mode 16 (11455 hits in 13 runs: 16:05 x11455; tcrf_check/assets/mode_state_wp/),hand+auto
 06,4872,Mode16_PanoramaRowPosTbl,C,"4 x {y; x} of the row cursor of the PANORAMA sub-screen (y = $60 / $68 / $70 / $78, x = $37); Mode16_State05_PanoramaMenu (06:47C1) limits the row $D5E8 to 0-1, so entries 2-3 are not read by it (read 2026-10-25)",hand+auto
-06,487A,Mode16_State06_GameFaceMenu,I,option 4: game or Game Face editor,hand+auto
+06,487A,Mode16_State06_GameFaceMenu,C,option 4: game or Game Face editor; BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 06 (6704 hits in 7 runs: 16:06 x6704; tcrf_check/assets/mode_state_wp/),hand+auto
 06,491E,Mode16_GameFaceRowPosTbl,C,"3 x {y; x} of the row cursor of the GAME FACE page; row 2 (the hidden third choice) is reachable only while Select is held (06:487A, README 16.15) (read 2026-10-25)",hand+auto
 06,4924,Mode16_State07_LeaveToMode01,C,,hand+auto
 06,4935,Mode16_State08_StartShoot,C,applies the options and goes to mode 14,hand+auto
 06,4A5F,Mode16_State09_ToPanoramaPrint,C,mode 18,hand+auto
 06,4A70,Mode16_DrawCursorFromTable,C,,hand+auto
 06,4A9B,Mode16_CursorAnimTbl,C,"4 x {OAM list id; ticks} = $30, $31, $32, $31, 9 ticks each: the animated cursor of Mode16_DrawCursorFromTable, frame wCursorAnimFrame and 3, tick wCursorAnimTick (read 2026-10-25)",hand+auto
-06,4AA3,Mode16_DrawIcon,I,,hand+auto
+06,4AA3,Mode16_DrawIcon,C,BGB watchpoint pass 2026-10-25: ran only in mode 16 (8374 hits in 17 runs: 16:03 x6460 16:04 x1914; tcrf_check/assets/mode_state_wp/),hand+auto
 06,4ABC,Mode16_StepRow,C,Up / Down steps a row cursor (HL) up to C,hand+auto
 06,4ADA,Mode16_StepValue,C,Left / Right steps a value,hand+auto
-06,4AF8,Mode16_LoadPageTiles,I,,hand+auto
+06,4AF8,Mode16_LoadPageTiles,C,BGB watchpoint pass 2026-10-25: ran only in mode 16 (98 hits in 24 runs: 16:00 x25 16:01 x14 16:02 x59; tcrf_check/assets/mode_state_wp/),hand+auto
 06,4B17,Mode16_PageTilesSrcTbl,C,4 x {lo; hi; bank} = 0D:5A80 5800 5580 5300 (the Gfx_0D_*_Strip06_4B17 rows): Mode16_LoadPageTiles (06:4AF8) copies $280 B of the entry wOptMenuCursor to $9000 (read 2026-10-25),hand+auto
-06,4B23,Mode16_LoadIconTiles,I,,hand+auto
+06,4B23,Mode16_LoadIconTiles,C,BGB watchpoint pass 2026-10-25: ran only in mode 16 (172 hits in 24 runs: 16:00 x100 16:01 x56 16:03 x10 16:04 x6; tcrf_check/assets/mode_state_wp/),hand+auto
 06,4B39,Mode16_BuildOptionList,C,jumps through the list builders,hand+auto
 06,4B67,Mode16_OptionMapSrcTbl,C,"4 x {lo; hi; bank} = 25:71A0, 25:50C0, 24:63A0, 25:5360 (Map_*_Mode16_OptionPage0-3): Mode16_BuildOptionList (06:4B43) copies $200 B of the entry wOptMenuCursor to $9840; far pointers to maps, not a map (read 2026-10-25)",hand+auto
 06,4B73,Mode16_BuilderTbl,C,4 code pointers,hand+auto
 06,4B7B,Mode16_BuildList0,C,nothing to build,hand+auto
-06,4B7C,Mode16_BuildList2,I,two rows,hand+auto
-06,4BD0,Mode16_BuildList4,I,four rows,hand+auto
-06,4C24,Mode16_BuildList6,I,six rows,hand+auto
-06,4C87,Mode16_DrawCaptionBlink,I,,hand+auto
+06,4B7C,Mode16_BuildList2,C,two rows; BGB watchpoint pass 2026-10-25: ran only in mode 16 (8 hits in 4 runs: 16:04 x8; tcrf_check/assets/mode_state_wp/),hand+auto
+06,4BD0,Mode16_BuildList4,C,four rows; BGB watchpoint pass 2026-10-25: ran only in mode 16 (34 hits in 13 runs: 16:01 x8 16:05 x26; tcrf_check/assets/mode_state_wp/),hand+auto
+06,4C24,Mode16_BuildList6,C,six rows; BGB watchpoint pass 2026-10-25: ran only in mode 16 (38 hits in 7 runs: 16:01 x8 16:06 x30; tcrf_check/assets/mode_state_wp/),hand+auto
+06,4C87,Mode16_DrawCaptionBlink,C,BGB watchpoint pass 2026-10-25: ran only in mode 16 (4187 hits in 17 runs: 16:03 x3230 16:04 x957; tcrf_check/assets/mode_state_wp/),hand+auto
 06,4C9F,Mode17_SplitFusion,C,mode 17: COMPOSE (SPLIT 4 pictures / FUSION 2 pictures),hand+auto
 06,4CA3,Mode17_StateTable,C,20 states,hand+auto
 06,4CCB,Mode17_State00_Init,C,,hand+auto
@@ -2347,28 +2347,28 @@ bank,addr,name,conf,note,source
 06,5A27,Mode18_State01_PickFirst,C,,hand+auto
 06,5A50,Mode18_State02_PickLast,C,,hand+auto
 06,5A78,Mode18_State03_PrintOrCancel,C,A prints the strip; B cancels,hand+auto
-06,5ACE,Mode18_DrawPrintLabel,I,,hand+auto
-06,5AD7,Mode18_DrawCancelLabel,I,,hand+auto
+06,5ACE,Mode18_DrawPrintLabel,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (56 hits in 3 runs: 18:03 x56; tcrf_check/assets/mode_state_wp/),hand+auto
+06,5AD7,Mode18_DrawCancelLabel,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (50 hits in 4 runs: 18:03 x50; tcrf_check/assets/mode_state_wp/),hand+auto
 06,5AE0,Mode18_StartPrint,C,fills print_src_table and calls the print job,hand+auto
 06,5B2D,Mode18_Pick1_Input,C,,hand+auto
-06,5B56,Mode18_Pick1_Left,I,,hand+auto
-06,5B74,Mode18_Pick1_Right,I,,hand+auto
+06,5B56,Mode18_Pick1_Left,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (2096 hits in 8 runs: 18:01 x2096; tcrf_check/assets/mode_state_wp/),hand+auto
+06,5B74,Mode18_Pick1_Right,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (2096 hits in 8 runs: 18:01 x2096; tcrf_check/assets/mode_state_wp/),hand+auto
 06,5B96,Mode18_Pick2_Input,C,,hand+auto
-06,5BBF,Mode18_Pick2_Up,I,,hand+auto
-06,5BDD,Mode18_Pick2_Down,I,,hand+auto
-06,5BFF,Mode18_Pick1_DrawCursor,I,,hand+auto
+06,5BBF,Mode18_Pick2_Up,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (13800 hits in 3 runs: 18:02 x13800; tcrf_check/assets/mode_state_wp/),hand+auto
+06,5BDD,Mode18_Pick2_Down,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (13800 hits in 3 runs: 18:02 x13800; tcrf_check/assets/mode_state_wp/),hand+auto
+06,5BFF,Mode18_Pick1_DrawCursor,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (1048 hits in 8 runs: 18:01 x1048; tcrf_check/assets/mode_state_wp/),hand+auto
 06,5C36,Mode18_Pick1_SlotPosTbl,C,"4 x {y; x} of the slot cursor of the first panorama pick: one row, y = $18, x = $10 / $30 / $50 / $70, indexed by wSelSlot in Mode18_Pick1_DrawCursor (06:5C07) (read 2026-10-25)",hand+auto
 06,5C3E,Mode18_Pick1_CursorAnimTbl,C,"{OAM list id; ticks} x 3 = $54, $55, $56, 5 ticks each, then $FF (loop to frame 0): frame wSelCursorFrame, tick wSelCursorTick (06:5C16) (read 2026-10-25)",hand+auto
-06,5C45,Mode18_Pick2_DrawCursor,I,,hand+auto
+06,5C45,Mode18_Pick2_DrawCursor,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (6900 hits in 3 runs: 18:02 x6900; tcrf_check/assets/mode_state_wp/),hand+auto
 06,5C7C,Mode18_Pick2_SlotPosTbl,C,"4 x {y; x} of the slot cursor of the second panorama pick: one column, x = $70, y = $18 / $34 / $50 / $6C, indexed by wSelSlot in Mode18_Pick2_DrawCursor (06:5C4D); byte pairs, not words (read 2026-10-25)",hand+auto
 06,5C84,Mode18_Pick2_CursorAnimTbl,C,"{OAM list id; ticks} x 3 = $57, $58, $59, 5 ticks each, then $FF (loop): read by Mode18_Pick2_DrawCursor (06:5C5C) (read 2026-10-25)",hand+auto
-06,5C8B,Mode18_DrawArrows,I,,hand+auto
-06,5C9C,Mode18_LoadAllThumbs,I,,hand+auto
+06,5C8B,Mode18_DrawArrows,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (16140 hits in 9 runs: 18:00 x28 18:01 x2096 18:02 x13800 18:03 x216; tcrf_check/assets/mode_state_wp/),hand+auto
+06,5C9C,Mode18_LoadAllThumbs,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (28 hits in 9 runs: 18:00 x28; tcrf_check/assets/mode_state_wp/),hand+auto
 06,5CB2,Mode18_LoadThumb,C,,hand+auto
 06,5D44,Mode18_LoadThumb_Tbl5D44,C,"2 sets x 4 words ([$D5EA] x 8 + 2 x thumbnail): the VRAM destination of each thumbnail, $9200 $9300 $9400 $9500 / $9500 $8D00 $9600 $8E00; the sources are the records of Mode18_LoadThumb_Tbl5D54 (read 2026-10-19)",hand+auto
 06,5D54,Mode18_LoadThumb_Tbl5D54,C,"2 sets x 4 records {lo; hi; bank} (index [$D5EA] x 4 + thumbnail): $C8 B copied to the matching word of Mode18_LoadThumb_Tbl5D44: 11:7200 7300 7400 7500 / 11:7500 7D00 7600 7E00 (the Gfx_11_*_Icon06_5D54 rows)",hand+auto
-06,5D6C,Mode18_DrawThumbFrame,I,,hand+auto
-06,5DD7,Mode18_LoadTileIndexed,I,,hand+auto
+06,5D6C,Mode18_DrawThumbFrame,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (44 hits in 9 runs: 18:00 x28 18:01 x16; tcrf_check/assets/mode_state_wp/),hand+auto
+06,5DD7,Mode18_LoadTileIndexed,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (78 hits in 3 runs: 18:00 x30 18:01 x48; tcrf_check/assets/mode_state_wp/),hand+auto
 06,5DE6,Mode14_ShootLiveView,C,mode 14: live view and shutter,hand+auto
 06,5DEA,Mode14_StateTable,C,13 states,hand+auto
 06,5E04,Mode14_State00_Init,C,sets up the live view; the sensor and the options,hand+auto
@@ -2491,19 +2491,19 @@ bank,addr,name,conf,note,source
 07,4354,Link_DrawAnimatorSlot_Tbl4354,I,"auto: 72 bytes, bytes; referenced by Link_DrawAnimatorSlot",auto
 07,439C,Mode0E_State02_MessageStrip,C,message strip A or B by role,hand+auto
 07,43CB,Mode0E_State03_PickPhoto,C,far call 07:4C08 (photo choose dialog),hand+auto
-07,43D6,Mode0E_State04_PickDone,I,after the dialog: loads the chosen photo into the link buffer,hand+auto
-07,44BD,Mode0E_State05_AbortWait,I,jitter sprite; A leaves,hand+auto
-07,44F4,Mode0E_State06_ExchangeSetup,I,bars and lamps for the exchange (first direction),hand+auto
+07,43D6,Mode0E_State04_PickDone,C,after the dialog: loads the chosen photo into the link buffer; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 04 (2 hits in 2 runs: 0E:04 x2; tcrf_check/assets/mode_state_wp/),hand+auto
+07,44BD,Mode0E_State05_AbortWait,C,jitter sprite; A leaves; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 05 (624 hits in 2 runs: 0E:05 x624; tcrf_check/assets/mode_state_wp/),hand+auto
+07,44F4,Mode0E_State06_ExchangeSetup,C,bars and lamps for the exchange (first direction); BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 06 (4 hits in 2 runs: 0E:06 x4; tcrf_check/assets/mode_state_wp/),hand+auto
 07,4599,Mode0E_State07_ExchangeBarsA,I,progress bars; direction 1,hand+auto
-07,45D2,Mode0E_State08_ExchangeWaitA,I,bars; direction 0; watchdog,hand+auto
+07,45D2,Mode0E_State08_ExchangeWaitA,C,bars; direction 0; watchdog; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 08 (1640 hits in 2 runs: 0E:08 x1640; tcrf_check/assets/mode_state_wp/),hand+auto
 07,45FD,Mode0E_State09_ExchangeDoneA,C,counts the transfer and shows the received picture,hand+auto
-07,4645,Mode0E_State0A_ExchangeSetupB,I,second direction,hand+auto
-07,46BC,Mode0E_State0B_ExchangeBarsB,I,,hand+auto
+07,4645,Mode0E_State0A_ExchangeSetupB,C,second direction; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 0A (4 hits in 2 runs: 0E:0A x4; tcrf_check/assets/mode_state_wp/),hand+auto
+07,46BC,Mode0E_State0B_ExchangeBarsB,C,BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 0B (2352 hits in 2 runs: 0E:0B x2352; tcrf_check/assets/mode_state_wp/),hand+auto
 07,472E,Mode0E_State0C_ExchangeWaitB,I,,hand+auto
 07,4759,Mode0E_State0D_PickSecond,I,clears the slot buffer and prepares the second photo,hand+auto
 07,4831,Mode0E_State0E_AbortWait2,I,,hand+auto
 07,486D,Mode0E_State0F_Ready,I,lnk_ready_tx := 1,hand+auto
-07,4876,Mode0E_State10_ExchangeWaitC,I,,hand+auto
+07,4876,Mode0E_State10_ExchangeWaitC,C,BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 10 (1640 hits in 2 runs: 0E:10 x1640; tcrf_check/assets/mode_state_wp/),hand+auto
 07,48A1,Mode0E_State11_ExchangeDoneB,C,counts the transfer and shows the received picture,hand+auto
 07,48E9,Mode0E_State12_ResultPrepare,C,,hand+auto
 07,48F8,Mode0E_State13_ResultScreen,C,far call 09:7290,hand+auto
@@ -2804,17 +2804,17 @@ bank,addr,name,conf,note,source
 08,411A,Mode1C_State00_Init,C,clears the print flags,hand+auto
 08,413E,Mode1C_State01_PickPhoto,C,far call 04:4000 (PhotoPicker_Far),hand+auto
 08,4149,Mode1C_State02_ShowPrintScreen,C,loads photo; border and layout; also re-entered from states 0B / 0E,hand+auto
-08,4291,Mode1C_State03_PrintMain,I,Select = option page; Start = toggle extra copy; A/B = leave,hand+auto
-08,42E3,Mode1C_DrawJitterSprite,I,random 1-px jitter of sprite $79/$7A,hand+auto
-08,4329,Mode1C_State04_OptionsMenu,I,Up -> density; Down -> second option; B/Select back,hand+auto
+08,4291,Mode1C_State03_PrintMain,C,Select = option page; Start = toggle extra copy; A/B = leave; BGB watchpoint pass 2026-10-25: ran only in mode 1C and state 03 (21106 hits in 22 runs: 1C:03 x21106; tcrf_check/assets/mode_state_wp/),hand+auto
+08,42E3,Mode1C_DrawJitterSprite,C,random 1-px jitter of sprite $79/$7A; BGB watchpoint pass 2026-10-25: ran only in mode 1C (10553 hits in 22 runs: 1C:03 x10553; tcrf_check/assets/mode_state_wp/),hand+auto
+08,4329,Mode1C_State04_OptionsMenu,C,Up -> density; Down -> second option; B/Select back; BGB watchpoint pass 2026-10-25: ran only in mode 1C and state 04 (5627 hits in 13 runs: 1C:04 x5627; tcrf_check/assets/mode_state_wp/),hand+auto
 08,43E1,Mode1C_State05_OptionDensity,C,Left/Right = print_intensity,hand+auto
 08,4441,Mode1C_ReadDensityKeys,C,cap $7F; sound $22,hand+auto
 08,4467,Mode1C_DrawDensityMarker,C,,hand+auto
-08,4489,Mode1C_State06_OptionToggle,I,Left/Right toggles D674; two tile variants,hand+auto
-08,4508,Mode1C_LoadToggleTiles,I,,hand+auto
+08,4489,Mode1C_State06_OptionToggle,C,Left/Right toggles D674; two tile variants; BGB watchpoint pass 2026-10-25: ran only in mode 1C and state 06 (3256 hits in 10 runs: 1C:06 x3256; tcrf_check/assets/mode_state_wp/),hand+auto
+08,4508,Mode1C_LoadToggleTiles,C,BGB watchpoint pass 2026-10-25: ran only in mode 1C (7 hits in 7 runs: 1C:06 x7; tcrf_check/assets/mode_state_wp/),hand+auto
 08,452C,Mode1C_ReadToggleKeys,C,,hand+auto
-08,4545,Mode1C_DrawToggleArrow,I,,hand+auto
-08,4583,Mode1C_ToggleArrowPosTbl,I,,hand+auto
+08,4545,Mode1C_DrawToggleArrow,C,BGB watchpoint pass 2026-10-25: ran only in mode 1C (1712 hits in 10 runs: 1C:06 x1712; tcrf_check/assets/mode_state_wp/),hand+auto
+08,4583,Mode1C_ToggleArrowPosTbl,C,BGB watchpoint pass 2026-10-25: ran only in mode 1C (710 hits in 2 runs: 1C:06 x710; tcrf_check/assets/mode_state_wp/),hand+auto
 08,4587,Mode1C_ToggleArrowAnimTbl,C,"3 x {OAM list id; ticks}: frame 0 = $BC (resting, no tick), frame 1 = $BD for $0B ticks, frame 2 = $BD, $FF; frame wArrowAnimFrame, tick $D51F; Mode1C_DrawToggleArrow (08:4560); the A-press loop of Mode1C_State06_OptionToggle (08:44B4) runs frames 1 to 2 (read 2026-10-25)",hand+auto
 08,458D,Mode1C_State07_Leave,C,A -> print job (state 8); B -> back,hand+auto
 08,45E0,Mode1C_State08_PrintJob,C,builds the print job and sends it,hand+auto
@@ -2825,8 +2825,8 @@ bank,addr,name,conf,note,source
 08,47BC,Mode1C_State0C_FadeToWildPicker,C,,hand+auto
 08,47D5,Mode1C_State0D_WildFramePicker,C,far call 08:5191,hand+auto
 08,47E0,Mode1C_State0E_AfterWildFrame,C,print_layout_flag := 1; then state 2,hand+auto
-08,47ED,Mode1C_DrawPrintScreen,I,tilemap 27:4472 and border tiles,hand+auto
-08,484B,Mode1C_DrawOptionScreen,I,,hand+auto
+08,47ED,Mode1C_DrawPrintScreen,C,tilemap 27:4472 and border tiles; BGB watchpoint pass 2026-10-25: ran only in mode 1C (4 hits in 2 runs: 1C:05 x4; tcrf_check/assets/mode_state_wp/),hand+auto
+08,484B,Mode1C_DrawOptionScreen,C,BGB watchpoint pass 2026-10-25: ran only in mode 1C (30 hits in 13 runs: 1C:03 x30; tcrf_check/assets/mode_state_wp/),hand+auto
 08,4887,Mode1E_PrintOption,C,mode 1E: multi-photo print (margin; selection bitmap; job),hand+auto
 08,488B,Mode1E_StateTable,C,6 states,hand+auto
 08,4897,Mode1E_State00_Init,C,,hand+auto

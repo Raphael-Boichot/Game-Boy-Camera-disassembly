@@ -32,5 +32,5 @@ Every run's control watchpoint fired (13 to 100 writes of `$D5CF` per run), so a
 * Not reached (6): the link-exchange states `Mode0E_State07_ExchangeBarsA`, `State0C_ExchangeWaitB`, `State0D_PickSecond`, `State0E_AbortWait2`, `State0F_Ready`
   (the recorded exchanges of `link_protocol/saves` take the other branches), and `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
   none of the print jobs of these runs (photo, card, two panoramas, D.J. score) issued such a command.
-* This places each handler in the screen flow (C); the role in the rest of each name is still read from the code, so the names keep their tag I until the owner decides.
+* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 64 handlers that ran are tagged C in `disasm/sym_names_jp.csv`; the role in the rest of each name is still read from the code.
 
