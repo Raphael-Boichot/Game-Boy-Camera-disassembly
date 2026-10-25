@@ -697,3 +697,4 @@ bank,addr,old_name,new_name,old_conf,new_conf,reason
 08,4583,Mode1C_ToggleArrowPosTbl,Mode1C_ToggleArrowPosTbl,I,C,"name kept, evidence upgraded (I -> C): BGB watchpoint pass 2026-10-25: ran only in mode 1C (710 hits in 2 runs: 1C:06 x710; tcrf_check/assets/mode_state_wp/)"
 08,47ED,Mode1C_DrawPrintScreen,Mode1C_DrawPrintScreen,I,C,"name kept, evidence upgraded (I -> C): BGB watchpoint pass 2026-10-25: ran only in mode 1C (4 hits in 2 runs: 1C:05 x4; tcrf_check/assets/mode_state_wp/)"
 08,484B,Mode1C_DrawOptionScreen,Mode1C_DrawOptionScreen,I,C,"name kept, evidence upgraded (I -> C): BGB watchpoint pass 2026-10-25: ran only in mode 1C (30 hits in 13 runs: 1C:03 x30; tcrf_check/assets/mode_state_wp/)"
+07,472E,Mode0E_State0C_ExchangeWaitB,Mode0E_State0C_ExchangeWaitB,I,C,"name kept, evidence upgraded (I -> C): ran only in mode 0E state 0C in the receiver-initiated BGB link exchanges of 2026-10-25"

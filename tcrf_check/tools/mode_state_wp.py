@@ -23,7 +23,8 @@ SAVES = [ROOT + '/saves', ROOT + '/saves_unl', ROOT + '/saves_pseudo']
 CORE = [(1, 'Right'), (2, 'Left'), (4, 'Up'), (8, 'Down'), (16, 'A'), (32, 'B'), (64, 'Select'), (128, 'Start')]
 NAME = dict(A='A', B='B', L='Left', R='Right', U='Up', D='Down', s='Select', S='Start')
 def names(k): return '+'.join(n for m, n in CORE if k & m) or '-'
-H = [r for r in csv.DictReader(open(REPO + '/disasm/sym_unconclusive_jp.csv', encoding='utf-8')) if r['group'] == 'mode state']
+H = [r for r in csv.DictReader(open(REPO + '/disasm/sym_unconclusive_jp.csv', encoding='utf-8')) if r['group'] == 'mode state']    # what the runs watch: the handlers still open
+PASS_CSV = REPO + '/tcrf_check/assets/mode_state_wp/mode_state_wp_jp.csv'      # the 70 handlers of the pass of 2026-10-25: the report keeps all of them as the doubtful list shrinks
 
 def watchlist(rows):
     w = []
@@ -177,7 +178,8 @@ def cmd_report(outcsv, dirs):
     w = csv.writer(open(outcsv, 'w', newline='', encoding='utf-8'), lineterminator='\n')
     w.writerow(['bank', 'addr', 'name', 'kind', 'name_mode', 'name_state', 'screens', 'hits', 'runs', 'verdict'])
     summ = collections.Counter()
-    for r in H:
+    rows = list(csv.DictReader(open(PASS_CSV, encoding='utf-8'))) if os.path.exists(PASS_CSV) else H
+    for r in rows:
         n = r['name']; m = n[4:6].upper(); st = re.match(r'Mode.._State([0-9A-F]{2})_', n); sc = seen.get(n, {})
         if not sc: v = 'not reached in these runs'
         else:
@@ -187,7 +189,7 @@ def cmd_report(outcsv, dirs):
                 states = {k.split(':')[1] for k in sc}
                 v = 'mode and state confirmed' if states == {st.group(1)} else 'mode confirmed, states %s, name says %s' % ('/'.join(sorted(states)), st.group(1))
             else: v = 'mode confirmed'
-        summ[v.split(',')[0]] += 1
+        summ[v] += 1
         w.writerow([r['bank'], r['addr'], n, 'read' if n.endswith('Tbl') else 'execute', m, st.group(1) if st else '',
                     ' '.join('%s x%d' % kv for kv in sorted(sc.items())), sum(sc.values()), len(runs.get(n, ())), v])
     print('runs', nrun, dict(summ))

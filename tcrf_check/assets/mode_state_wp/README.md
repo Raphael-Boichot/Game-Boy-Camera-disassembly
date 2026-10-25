@@ -18,7 +18,10 @@ link runs use BGB's automatic system choice, the D.J. runs the setting of `bgb_d
   with the printer helper on the link: the 4-photo job of mode `$18`.
 * `dj_*`: the D.J. editor route of `bgb_dj_print.py` with keys after the SOUND I page.
 * `link_sender`, `link_receiver`, `link2_sender`, `link2_receiver`: the two BGB instances of a photo exchange (`bgb_link_wp.py`, saves `link_protocol/saves/flow1_*_before.sav`
-  and `flow2_*_before.sav`).
+  and `flow2_*_before.sav`); both runs play the sender-initiated keys (the initiator chooses Left = send).
+* `linkrx_*`: receiver-initiated exchanges (the initiator chooses Right = receive and browses the peer's thumbnails; `bgb_link_rx.py`, flow-2 saves, `-headless`, `SystemMode=0`):
+  Japanese initiator and responder, Japanese initiator with the international ROM as responder, and the international ROM as initiator with a Japanese responder.
+  Each record carries the ROM, the role and `states_left` (the mode:state left at every write of `$D5CF`).
 
 What it shows and what it does not: a hit proves that the handler ran in that screen of the real emulator (C for the placement in the screen flow); it does not
 prove the role written in the rest of the name (`DrawPanoramaHint`, `PickConfirm`), which is read from the code. A handler that no scenario reached is
@@ -27,10 +30,12 @@ prove the role written in the rest of the name (`DrawPanoramaHint`, `PickConfirm
 ## Result
 
 Every run's control watchpoint fired (13 to 100 writes of `$D5CF` per run), so a handler with no hit was not run. BGB prints the mode and state in hex.
-* 64 of the 70 handlers ran, **each only in the mode its name gives**; the 25 names that carry a state: 20 ran in exactly that state and no other, 5 were not reached.
+* 65 of the 70 handlers ran, **each only in the mode its name gives**; the 25 names that carry a state: 21 ran in exactly that state and no other, 4 were not reached.
   No handler contradicts its name.
-* Not reached (6): the link-exchange states `Mode0E_State07_ExchangeBarsA`, `State0C_ExchangeWaitB`, `State0D_PickSecond`, `State0E_AbortWait2`, `State0F_Ready`
-  (the recorded exchanges of `link_protocol/saves` take the other branches), and `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
+* `Mode0E_State0C_ExchangeWaitB` ran only in the receiver-initiated exchanges (responder, both with a Japanese and an international initiator).
+* Not reached (5): the link-exchange states `Mode0E_State07_ExchangeBarsA`, `State0D_PickSecond`, `State0E_AbortWait2`, `State0F_Ready`: in every receiver-initiated
+  run the first thumbnail page (2,048 bytes) reaches the initiator after the game's 180-frame deadline (`wLnkHalfDone` = 1 at the end, message `$0C` already shown), the
+  same with `-hf` and at real speed with `-headless`, between two Japanese ROMs and across the two ROMs; the project's core sends it in about 130 frames. And `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
   none of the print jobs of these runs (photo, card, two panoramas, D.J. score) issued such a command.
-* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 64 handlers that ran are tagged C in `disasm/sym_names_jp.csv`; the role in the rest of each name is still read from the code.
+* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 65 handlers that ran are tagged C in `disasm/sym_names_jp.csv`; the role in the rest of each name is still read from the code.
 

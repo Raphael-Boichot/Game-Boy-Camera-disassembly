@@ -14,7 +14,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
-| mode state | 6 | 531 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
+| mode state | 5 | 488 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
 | SFX tag | 95 | 2528 | the sound each id plays |
 | Run minigame | 1 | 22 | variable roles during play |
@@ -42,7 +42,7 @@ _Why doubtful:_ type confirmed by the owner (review page, by eye); role and cons
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## mode state (6)
+## mode state (5)
 
 _Why doubtful:_ state purpose read from the data it writes; screen function partly guessed. _To settle:_ play the screen in an emulator; match with the TCRF / Funtography screen name.
 
@@ -50,7 +50,6 @@ _Why doubtful:_ state purpose read from the data it writes; screen function part
 |---|---|---|---|---|
 | 00:3249 | `Mode1D_InterleaveTileRows` | 146 | state handler or helper of a screen mode | interleaves bitplanes of a row of 8x8 tiles into the band buffer |
 | 07:4599 | `Mode0E_State07_ExchangeBarsA` | 57 | state handler or helper of a screen mode | progress bars; direction 1 |
-| 07:472E | `Mode0E_State0C_ExchangeWaitB` | 43 | state handler or helper of a screen mode |  |
 | 07:4759 | `Mode0E_State0D_PickSecond` | 216 | state handler or helper of a screen mode | clears the slot buffer and prepares the second photo |
 | 07:4831 | `Mode0E_State0E_AbortWait2` | 60 | state handler or helper of a screen mode |  |
 | 07:486D | `Mode0E_State0F_Ready` | 9 | state handler or helper of a screen mode | lnk_ready_tx := 1 |

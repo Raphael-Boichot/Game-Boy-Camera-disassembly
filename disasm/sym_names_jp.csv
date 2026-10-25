@@ -2499,7 +2499,7 @@ bank,addr,name,conf,note,source
 07,45FD,Mode0E_State09_ExchangeDoneA,C,counts the transfer and shows the received picture,hand+auto
 07,4645,Mode0E_State0A_ExchangeSetupB,C,second direction; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 0A (4 hits in 2 runs: 0E:0A x4; tcrf_check/assets/mode_state_wp/),hand+auto
 07,46BC,Mode0E_State0B_ExchangeBarsB,C,BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 0B (2352 hits in 2 runs: 0E:0B x2352; tcrf_check/assets/mode_state_wp/),hand+auto
-07,472E,Mode0E_State0C_ExchangeWaitB,I,,hand+auto
+07,472E,Mode0E_State0C_ExchangeWaitB,C,"receiver-initiated link exchange in BGB (tcrf_check/tools/bgb_link_rx.py, 2026-10-25): ran only in mode 0E and state 0C (720 hits in 2 runs, responder that sends, JP-JP and international initiator; tcrf_check/assets/mode_state_wp/): waits for wLnkHalfDone after a thumbnail page is armed, 180-frame deadline",hand+auto
 07,4759,Mode0E_State0D_PickSecond,I,clears the slot buffer and prepares the second photo,hand+auto
 07,4831,Mode0E_State0E_AbortWait2,I,,hand+auto
 07,486D,Mode0E_State0F_Ready,I,lnk_ready_tx := 1,hand+auto
