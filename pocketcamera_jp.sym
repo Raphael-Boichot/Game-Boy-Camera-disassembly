@@ -2491,7 +2491,7 @@
 07:439c Mode0E_State02_MessageStrip
 07:43cb Mode0E_State03_PickPhoto
 07:43d6 Mode0E_State04_PickDone
-07:44bd Mode0E_State05_AbortWait
+07:44bd Mode0E_State05_ConfirmSend
 07:44f4 Mode0E_State06_ExchangeSetup
 07:4599 Mode0E_State07_ExchangeBarsA
 07:45d2 Mode0E_State08_ExchangeWaitA

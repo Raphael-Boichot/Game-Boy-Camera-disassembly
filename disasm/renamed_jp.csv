@@ -702,3 +702,4 @@ bank,addr,old_name,new_name,old_conf,new_conf,reason
 07,4759,Mode0E_State0D_PickSecond,Mode0E_State0D_PickSecond,I,C,"name kept, evidence upgraded (I -> C): ran only in its state in the forced receiver-initiated BGB link exchange of 2026-10-25 (deadline disabled)"
 07,4831,Mode0E_State0E_AbortWait2,Mode0E_State0E_ConfirmSend,I,C,"renamed from its code and the forced BGB link run (I -> C): A in this dialog sends, B refuses ($EF)"
 07,486D,Mode0E_State0F_Ready,Mode0E_State0F_Ready,I,C,"name kept, evidence upgraded (I -> C): ran only in its state in the forced receiver-initiated BGB link exchange of 2026-10-25 (deadline disabled)"
+07,44BD,Mode0E_State05_AbortWait,Mode0E_State05_ConfirmSend,C,C,"renamed from its code and the BGB link runs: the initiator-sender confirmation dialog (A sends, B goes back to the photo choice), not an abort wait"

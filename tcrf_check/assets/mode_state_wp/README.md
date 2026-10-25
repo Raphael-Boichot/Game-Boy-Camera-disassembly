@@ -37,7 +37,7 @@ Every run's control watchpoint fired (13 to 100 writes of `$D5CF` per run), so a
 * **Forced run** (`linkrx_forced_*`, `forced: true` in `runs.jsonl`): the same exchange on a copy of the Japanese ROM whose `Link_TimeoutTick` never counts down
   (`07:4ACE` `dec [hl]` -> `nop`, file offset `$1CACE`; md5 of the copy `190b1cae5209e00d7e0a001abf07fb90`). The exchange completes (initiator `03 04 07 08 09`, responder
   `0A 0B 0C 0B 0D 0E 0F 10 11`) and `Mode0E_State07_ExchangeBarsA`, `State0D_PickSecond`, `State0E_AbortWait2` (now `State0E_ConfirmSend`: the sender's confirmation dialog,
-  A sends and B refuses with `$EF`) and `State0F_Ready` run, each in its own state. The csv keeps the names the runs logged.
+  A sends and B refuses with `$EF`) and `State0F_Ready` run, each in its own state. The csv keeps the names the runs logged. `Mode0E_State05_AbortWait` was renamed for the same reason (`Mode0E_State05_ConfirmSend`, the initiator-sender's dialog: in `link_*_sender` the A pressed in it led 05 -> 06 -> 08 -> 09).
 * Not reached (1): `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
   none of the print jobs of these runs (photo, card, two panoramas, D.J. score) issued such a command.
 * This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 69 handlers that ran are tagged C in `disasm/sym_names_jp.csv`
