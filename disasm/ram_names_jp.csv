@@ -100,9 +100,9 @@ d300,256,wVramQueue,*,C,VRAM write queue (ring buffer)
 d400,160,wOamShadow,*,C,OAM shadow buffer
 d4a0,96,wUnusedD4A0,*,U,(after the OAM shadow) free
 d500,15,wSpriteAnimFrame,*,I,sprite_anim_frame[15]
-d50f,1,wArrowAnimFrame,*,I,arrow_anim_frame
+d50f,1,wArrowAnimFrame,*,C,arrow_anim_frame
 d510,15,wSpriteAnimTick,*,I,sprite_anim_tick[15]
-d51f,1,wArrowAnimTick,*,I,arrow_anim_tick
+d51f,1,wArrowAnimTick,*,C,arrow_anim_tick
 d520,1,wVqWriteIdx,*,C,vq_write_idx
 d521,1,wVqReadIdx,*,C,vq_read_idx
 d522,1,wUnusedD522,*,U,unused_d522

@@ -721,10 +721,17 @@ import const_names as CN
 CN_BAD = 0
 try:
     C_ROWS = CN.load_names(P('disasm/const_names_jp.csv')); C_TYPES = CN.load_types(P('disasm/const_types_jp.csv')); C_TABS = CN.load_tables(P('disasm/const_tables_jp.csv'))
-    S_ROWS = CN.load_sounds(P('disasm/sound_names_jp.csv')); CN.check_unique(C_ROWS + S_ROWS)
+    S_ROWS = CN.load_sounds(P('disasm/sound_names_jp.csv')); ST_ROWS = CN.load_states(P('disasm/state_names_jp.csv')); CN.check_unique(C_ROWS + ST_ROWS + S_ROWS)
 except Exception as e:
-    C_ROWS = []; S_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
-CNAMER = CN.Namer(C_ROWS + S_ROWS)
+    C_ROWS = []; S_ROWS = []; ST_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
+CNAMER = CN.Namer(C_ROWS + ST_ROWS + S_ROWS)
+# state constants (README 2.14): disasm/state_names_jp.csv must be what tools/state_names.py makes from the state tables and the handler labels
+if A.rom:
+    r = subprocess.run([sys.executable, 'tools/state_names.py', '--rom', A.rom, '--check'], capture_output=True, text=True)
+    if r.returncode: bad('const', 'disasm/state_names_jp.csv is stale: run tools/state_names.py --rom ROM'); CN_BAD += 1
+for r in ST_ROWS:
+    if r.name in NAMESET or r.name in {x.name for x in RAM_ROWS}: bad('const', '%s is also a ROM label or a RAM name' % r.name); CN_BAD += 1
+ST_TAGS = collections.Counter(r.tag for r in ST_ROWS)
 C_TAGS = collections.Counter(r.tag for r in C_ROWS)
 RAM_IDS = {r.name for r in RAM_ROWS}
 def snake(x): return re.sub(r'(?<=[a-z0-9])(?=[A-Z])', '_', x).upper()
@@ -773,11 +780,12 @@ for t in C_TABS:
         if CROM:
             ad = t['addr'] + i; v = CROM[ad if t['bank'] == 0 else t['bank'] * 0x4000 + ad - 0x4000]
             if CNAMER.value(t['group'], v) is None: bad('const', 'const_tables_jp.csv %02X:%04X byte %d = $%02X is not a mode' % (key + (i, v))); CN_BAD += 1
-if not os.path.exists(P('disasm/const_jp.inc')) or open(P('disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS + S_ROWS):
-    bad('const', 'disasm/const_jp.inc is not what tools/const_names.py writes from disasm/const_names_jp.csv and disasm/sound_names_jp.csv (run it)'); CN_BAD += 1
+if not os.path.exists(P('disasm/const_jp.inc')) or open(P('disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS + ST_ROWS + S_ROWS):
+    bad('const', 'disasm/const_jp.inc is not what tools/const_names.py writes from disasm/const_names_jp.csv, state_names_jp.csv and sound_names_jp.csv (run it)'); CN_BAD += 1
 C_TYPED_VARS = sum(1 for v in C_TYPES if v not in C_CALLS)
 if not CN_BAD:
     ok('const', '%d names (C %d, I %d; %d modes, %d sound channels) + %d sound names, %d typed operands and %d typed call targets, %d tables (%d mode bytes, %d sound-list bytes); const_jp.inc is fresh' % (len(C_ROWS), C_TAGS['C'], C_TAGS['I'], len(C_MODES) - 2, 4, len(S_ROWS), C_TYPED_VARS, len(C_CALLS), len(C_TABS), C_MODE_BYTES, C_SND_BYTES))
+    quoted('state rows', r'state_names_jp\.csv` names ([\d,]+) states of ([\d,]+) modes \(C ([\d,]+) / I ([\d,]+)\)', lambda m: ((len(ST_ROWS), len({r.group for r in ST_ROWS}), ST_TAGS['C'], ST_TAGS['I']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
     quoted('const rows', r'const_names_jp\.csv` has ([\d,]+) constants \(C ([\d,]+) / I ([\d,]+)\)', lambda m: ((len(C_ROWS), C_TAGS['C'], C_TAGS['I']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
     quoted('const types', r'const_types_jp\.csv` types ([\d,]+) operands and ([\d,]+) call targets', lambda m: ((C_TYPED_VARS, len(C_CALLS)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
     quoted('const tables', r'const_tables_jp\.csv` lists ([\d,]+) byte tables \(([\d,]+) mode bytes and ([\d,]+) bytes of sound lists\)', lambda m: ((len(C_TABS), C_MODE_BYTES, C_SND_BYTES), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
@@ -912,6 +920,9 @@ if A.roundtrip:
                     groups = {g: st.get('const_' + g, 0) for g in ('mode', 'pad', 'lcdc', 'sc', 'p1', 'ie', 'music', 'sfx1', 'sfx3', 'sfx4')}
                     if raw or st.get('const_table_unnamed'): bad('roundtrip', 'const listing: %d typed stores keep a number (%s), %d table bytes unnamed' % (len(raw), raw[:3], st.get('const_table_unnamed', 0)))
                     else: ok('roundtrip', 'const: %s operands read as constants (%s), %d mode table bytes, %d sound list bytes (%d without a name)' % (fmt(sum(groups.values())), ', '.join('%s %d' % kv for kv in groups.items()), st.get('const_table', 0), st.get('const_sound_table', 0), st.get('const_sound_unnamed', 0)))
+                    ok('roundtrip', 'const: %d state stores and %d {mode, state} table bytes written as STATE_*, %d constant state stores left as numbers' % (st.get('const_state', 0), st.get('const_state_table', 0), st.get('const_state_unnamed', 0)))
+                    quoted('state operands', r'([\d,]+) constant stores of `wState` and ([\d,]+) state bytes of the \{mode, state\} tables read as `STATE_\*`; ([\d,]+) constant stores keep their number',
+                           lambda m: ((st.get('const_state', 0), st.get('const_state_table', 0), st.get('const_state_unnamed', 0)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
                     quoted('const operands', r'([\d,]+) operands read as constants \(([\d,]+) mode, ([\d,]+) key mask, ([\d,]+) LCDC, ([\d,]+) serial control, ([\d,]+) joypad select, ([\d,]+) interrupt enable, ([\d,]+) song id, ([\d,]+) channel-1 effect id, ([\d,]+) channel-3 effect id, ([\d,]+) channel-4 effect id\), ([\d,]+) bytes of mode tables and ([\d,]+) bytes of sound lists',
                            lambda m: ((sum(groups.values()), groups['mode'], groups['pad'], groups['lcdc'], groups['sc'], groups['p1'], groups['ie'], groups['music'], groups['sfx1'], groups['sfx3'], groups['sfx4'], st.get('const_table', 0), st.get('const_sound_table', 0)), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
                 if variant == 'ram': quoted('ram operands', r'([\d,]+) instructions use a RAM name \(([\d,]+) absolute loads and stores, ([\d,]+) `ldh`, ([\d,]+) address loads, ([\d,]+) `ld hl, rIE`\)', lambda m: ((tot, named['abs'], named['ldh'], named['ptr'], named['ie']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))

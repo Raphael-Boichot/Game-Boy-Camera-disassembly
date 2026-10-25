@@ -30,15 +30,16 @@ prove the role written in the rest of the name (`DrawPanoramaHint`, `PickConfirm
 ## Result
 
 Every run's control watchpoint fired (13 to 100 writes of `$D5CF` per run), so a handler with no hit was not run. BGB prints the mode and state in hex.
-* 69 of the 70 handlers ran, **each only in the mode its name gives**; all 25 names that carry a state ran in exactly that state and no other. No handler contradicts its name.
+* All 70 handlers ran, **each only in the mode its name gives**; all 25 names that carry a state ran in exactly that state and no other. No handler contradicts its name.
 * `Mode0E_State0C_ExchangeWaitB` ran in the receiver-initiated exchanges (responder, with a Japanese and with an international initiator). In every such run the first
   thumbnail page (2,048 bytes) reaches the initiator after the game's 180-frame deadline (`wLnkHalfDone` = 1 at the end, message `$0C` already shown), with `-hf` and at
   real speed with `-headless`, between two Japanese ROMs and across the two ROMs; the project's core sends it in about 130 frames.
 * **Forced run** (`linkrx_forced_*`, `forced: true` in `runs.jsonl`): the same exchange on a copy of the Japanese ROM whose `Link_TimeoutTick` never counts down
   (`07:4ACE` `dec [hl]` -> `nop`, file offset `$1CACE`; md5 of the copy `190b1cae5209e00d7e0a001abf07fb90`). The exchange completes (initiator `03 04 07 08 09`, responder
-  `0A 0B 0C 0B 0D 0E 0F 10 11`) and `Mode0E_State07_ExchangeBarsA`, `State0D_PickSecond`, `State0E_AbortWait2` (now `State0E_ConfirmSend`: the sender's confirmation dialog,
-  A sends and B refuses with `$EF`) and `State0F_Ready` run, each in its own state. The csv keeps the names the runs logged. `Mode0E_State05_AbortWait` was renamed for the same reason (`Mode0E_State05_ConfirmSend`, the initiator-sender's dialog: in `link_*_sender` the A pressed in it led 05 -> 06 -> 08 -> 09).
-* Not reached (1): `Mode1D_InterleaveTileRows` (`00:3249`), whose only caller `00:31B4` runs it when bit 4 of the print-layout command byte in B is set:
-  none of the print jobs of these runs (photo, card, two panoramas, D.J. score) issued such a command.
-* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 69 handlers that ran are tagged C in `disasm/sym_names_jp.csv`
+  `0A 0B 0C 0B 0D 0E 0F 10 11`) and `Mode0E_State07_ExchangeBarsA`, `State0D_PickSecond`, `State0E_AbortWait2` (now `State0E_ResponderConfirmSend`: the sender's confirmation dialog,
+  A sends and B refuses with `$EF`) and `State0F_Ready` run, each in its own state. The csv keeps the names the runs logged. `Mode0E_State05_AbortWait` was renamed for the same reason (`Mode0E_State05_InitiatorConfirmSend`, the initiator-sender's dialog: in `link_*_sender` the A pressed in it led 05 -> 06 -> 08 -> 09).
+* `Mode1D_InterleaveTileRows` (`00:3249`) runs only for descriptors whose flag byte has bit 4 (`00:31B4`); only `Print_Layout3_FourPhotosRotated` (`08:656E`, 252 such
+  descriptors) has them, the panorama print of the row pick (`wOpt3ToggleB` = 0). `print_pano1b` (corpus `01_fuzz_b` 1619, ends in `18:01`, then A presses with the printer
+  helper) printed 4 pages and ran it 1,792 times in `1D:03`. A first attempt hung on the printer link (the helper never answered after BGB's first two packets) and is not kept.
+* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 70 handlers are tagged C in `disasm/sym_names_jp.csv`
   (the four of the forced run say so in their note); the role in the rest of each name is still read from the code.

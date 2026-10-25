@@ -3,7 +3,7 @@ bank,addr,name,kind,name_mode,name_state,screens,hits,runs,verdict
 00,31DC,Mode1D_ByteToDE,execute,1D,,1D:03 x272,272,1,mode confirmed
 00,31E2,Mode1D_ReadSrcEntry,execute,1D,,1D:03 x2112,2112,2,mode confirmed
 00,31F2,Mode1D_ReadByteFromBank,execute,1D,,1D:03 x272,272,1,mode confirmed
-00,3249,Mode1D_InterleaveTileRows,execute,1D,,,0,0,not reached in these runs
+00,3249,Mode1D_InterleaveTileRows,execute,1D,,1D:03 x1792,1792,1,mode confirmed
 00,32DB,Mode1D_FillBlank,execute,1D,,1D:03 x224,224,1,mode confirmed
 00,34B3,Mode1D_DrawBusyIcon,execute,1D,,1D:06 x3 1D:07 x243,246,2,mode confirmed
 00,34C6,Mode1D_DrawTvAnimation,execute,1D,,1D:01 x30 1D:02 x60 1D:03 x46 1D:04 x2136 1D:05 x12,2284,11,mode confirmed

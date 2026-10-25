@@ -23,7 +23,8 @@ repairs the cases that can be told from the code (every decision uses the instru
                                                                            `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (wram/wram_access.csv)
                                                                            holds a pointer load (kind P) at that instruction and it is not listed in disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
                                                                            that happen to equal an address). The names are defined in disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
-  6. `--const` (L4, implies --ram): values of a group are written with their constant (disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
+  6. `--const` (L4, implies --ram): values of a group are written with their constant (also the states: `ld a, $08 / ld [wState], a` -> `ld a, STATE_0E_EXCHANGE_WAIT_A`, the group of the
+                                                                           mode of a constant `ld [wMode], a` just before, else of the routine `ModeNN_...` that holds the store; disasm/state_names_jp.csv) (disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
                                                                            `ld a, [wMode] / cp $01` -> `cp MODE_SHOOT_PARLOR`, `ldh a, [hKeysNew] / bit 0, a` -> `bit PADB_A, a`, `and $0f` -> `and PADF_BUTTONS`,
                                                                            `ld a, $43 / ldh [hLcdcShadow], a` -> `ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON`, and the bytes of the mode tables of disasm/const_tables_jp.csv
                                                                            (`db $1c, $1e` -> `db MODE_PRINT_PHOTO_PICKER, MODE_PRINT_OPTION`). Which operand holds which group is in disasm/const_types_jp.csv; the rewrite
@@ -147,7 +148,7 @@ if a.const:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import const_names
     ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'disasm', 'const_names_jp.csv')) + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'disasm', 'sound_names_jp.csv'))
+    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'disasm', 'const_names_jp.csv')) + const_names.load_states() + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'disasm', 'sound_names_jp.csv'))
     const_names.check_unique(C_ROWS)
     CONST = const_names.Namer(C_ROWS)
     C_TYPES = const_names.load_types(a.const_types or os.path.join(ROOT, 'disasm', 'const_types_jp.csv'))
@@ -163,9 +164,15 @@ if a.const:
             if lt == 'M': C_BYTES[t['bank']][t['addr'] + i] = t['group']
             elif lt == 'K': C_BYTES[t['bank']][t['addr'] + i] = const_names.SNDCH_GROUP.get(ROM[off(t['bank'], t['addr'] + i + 1)])     # a sound id: its id space is named by the channel byte that follows
             elif lt == 'C': C_BYTES[t['bank']][t['addr'] + i] = 'sndch'
+            elif lt == 'S' and i > 0 and t['layout'][(i - 1) % len(t['layout'])] == 'M':      # a state: its mode is the byte before it ({mode, state} tables)
+                C_BYTES[t['bank']][t['addr'] + i] = 'state_%02x' % ROM[off(t['bank'], t['addr'] + i - 1)]
         lab = byad.get((t['bank'], t['addr']))
         if lab and 'M' in t['layout']: C_TABLE_LABEL[lab] = t['group']
     C_CALL = re.compile(r'^call (?:(?:nz|z|c|nc), )?(\w+)$')
+    import bisect
+    C_LABS = collections.defaultdict(list)          # bank -> sorted [(address, label)]: the routine that holds an instruction (state stores)
+    for (b0, a0), nm0 in byad.items(): C_LABS[b0].append((a0, nm0))
+    for b0 in C_LABS: C_LABS[b0].sort()
     C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
     C_CPAND = re.compile(r'^(cp|and) \$([0-9a-f]{2})$'); C_BIT = re.compile(r'^bit ([0-7]), a$'); C_LDHL = re.compile(r'^ld a, \[hl\+?\]$')
     C_KEEP = re.compile(r'^(?:bit [0-7], a|cp \S.*|(?:jr|jp) (?:nz|z|nc|c), \S+|ret (?:nz|z|nc|c)|ld [bcdehl], a|ld \[[^\]]+\], a|ldh \[[^\]]+\], a|push af)$')
@@ -175,7 +182,7 @@ def const_code_pass(bank, out):
     P = []
     for i, l in enumerate(out):
         m = LINE.match(l)
-        if m: P.append({'i': i, 'ind': m.group(1), 'ins': m.group(2), 'pad': m.group(3), 'cm': m.group(4), 'by': [int(x[1:], 16) for x in m.group(6).split()], 'old': m.group(2)})
+        if m: P.append({'i': i, 'ind': m.group(1), 'ins': m.group(2), 'pad': m.group(3), 'cm': m.group(4), 'by': [int(x[1:], 16) for x in m.group(6).split()], 'old': m.group(2), 'ad': int(m.group(5), 16)})
     n = len(P)
     brk = [True] * n                                    # brk[k]: something that is not an instruction (a label, data) sits between P[k-1] and P[k]
     for k in range(1, n):
@@ -203,6 +210,24 @@ def const_code_pass(bank, out):
         m = C_LDA.match(t)
         if m and P[k]['by'][0] == 0x3E and k + 1 < n and not brk[k + 1]:
             ms = C_ST.match(P[k + 1]['ins']) or C_CALL.match(P[k + 1]['ins'])       # a store into a typed variable, or a call of a routine whose A is typed (Snd_Sfx1 ...)
+            if ms and ms.group(1) == 'wState':
+                # the state of which mode: a constant `ld a, imm / ld [wMode], a` just before on the same straight line (a handler that leaves its mode sets the new
+                # mode first), else the routine `ModeNN_...` that holds the store (README 2.14); otherwise the number stays
+                mode = None; j = k - 1
+                while j >= 1 and not brk[j + 1]:
+                    if C_ST.match(P[j]['ins']) and C_ST.match(P[j]['ins']).group(1) == 'wMode':
+                        if not brk[j] and P[j - 1]['by'][0] == 0x3E: mode = P[j - 1]['by'][1]
+                        break
+                    j -= 1
+                if mode is None:
+                    ad0 = P[k]['ad']; L0 = C_LABS.get(0 if ad0 < 0x4000 else bank, [])
+                    x = bisect.bisect_right(L0, (ad0, '\uffff')) - 1
+                    mm = re.match(r'^Mode([0-9A-F]{2})_', L0[x][1]) if x >= 0 else None
+                    if mm: mode = int(mm.group(1), 16)
+                nm = CONST.value('state_%02x' % mode, int(m.group(1), 16)) if mode is not None else None
+                if nm: put(k, 'ld a, ' + nm, 'state')
+                else: stats['const_state_unnamed'] += 1
+                continue
             if ms and ms.group(1) in C_TYPES:
                 nm = CONST.value(C_TYPES[ms.group(1)], int(m.group(1), 16))
                 if nm: put(k, 'ld a, ' + nm, C_TYPES[ms.group(1)])
@@ -305,9 +330,9 @@ for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
                     g = C_BYTES[bank].get(cur + j)
                     if g:
                         nm = CONST.value(g, int(x[1:], 16))
-                        snd = g != 'mode'
-                        if nm: new_items[j] = nm; stats['const_sound_table' if snd else 'const_table'] += 1
-                        else: stats['const_sound_unnamed' if snd else 'const_table_unnamed'] += 1
+                        kind = 'state_table' if g.startswith('state_') else 'table' if g == 'mode' else 'sound_table'
+                        if nm: new_items[j] = nm; stats['const_' + kind] += 1
+                        else: stats[{'state_table': 'const_state_table_unnamed', 'table': 'const_table_unnamed', 'sound_table': 'const_sound_unnamed'}[kind]] += 1
                 if new_items != items:
                     ind = line[:len(line) - len(line.lstrip())]
                     tab = next(((s0, e0) for s0, e0 in C_PAIRS.get(bank, ()) if s0 <= cur < e0), None)

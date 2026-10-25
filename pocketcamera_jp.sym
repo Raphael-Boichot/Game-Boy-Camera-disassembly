@@ -2491,7 +2491,7 @@
 07:439c Mode0E_State02_MessageStrip
 07:43cb Mode0E_State03_PickPhoto
 07:43d6 Mode0E_State04_PickDone
-07:44bd Mode0E_State05_ConfirmSend
+07:44bd Mode0E_State05_InitiatorConfirmSend
 07:44f4 Mode0E_State06_ExchangeSetup
 07:4599 Mode0E_State07_ExchangeBarsA
 07:45d2 Mode0E_State08_ExchangeWaitA
@@ -2500,7 +2500,7 @@
 07:46bc Mode0E_State0B_ExchangeBarsB
 07:472e Mode0E_State0C_ExchangeWaitB
 07:4759 Mode0E_State0D_PickSecond
-07:4831 Mode0E_State0E_ConfirmSend
+07:4831 Mode0E_State0E_ResponderConfirmSend
 07:486d Mode0E_State0F_Ready
 07:4876 Mode0E_State10_ExchangeWaitC
 07:48a1 Mode0E_State11_ExchangeDoneB

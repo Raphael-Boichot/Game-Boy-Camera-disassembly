@@ -101,9 +101,9 @@ DEF wVramQueue                 EQU $d300 ; C 256  VRAM write queue (ring buffer)
 DEF wOamShadow                 EQU $d400 ; C 160  OAM shadow buffer
 DEF wUnusedD4A0                EQU $d4a0 ; U 96  (after the OAM shadow) free
 DEF wSpriteAnimFrame           EQU $d500 ; I 15  sprite_anim_frame[15]
-DEF wArrowAnimFrame            EQU $d50f ; I 1  arrow_anim_frame
+DEF wArrowAnimFrame            EQU $d50f ; C 1  arrow_anim_frame
 DEF wSpriteAnimTick            EQU $d510 ; I 15  sprite_anim_tick[15]
-DEF wArrowAnimTick             EQU $d51f ; I 1  arrow_anim_tick
+DEF wArrowAnimTick             EQU $d51f ; C 1  arrow_anim_tick
 DEF wVqWriteIdx                EQU $d520 ; C 1  vq_write_idx
 DEF wVqReadIdx                 EQU $d521 ; C 1  vq_read_idx
 DEF wUnusedD522                EQU $d522 ; U 1  unused_d522
