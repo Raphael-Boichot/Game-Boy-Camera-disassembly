@@ -107,8 +107,7 @@ name_differs,00,311b,,Mode1D_StateTable,content differs: 24 of 24 bytes
 name_differs,00,315b,,Mode1D_State01_LoadScreen,routine differs: 2 of 32 JP instructions not paired as same code
 name_differs,00,33ea,,Mode1D_LayoutScriptPtrs,content differs: 6 of 10 bytes
 name_differs,00,348a,,Mode1D_State06_LoadWaitScreen,routine differs: 1 of 32 JP instructions not paired as same code
-name_differs,00,367b,,Bank00_ZeroFill,content differs: 270 of 388 bytes
-name_differs,00,36f0,,Img_NibbleMapTbl,moved: found by its own bytes (16) elsewhere in the bank
+name_differs,00,367b,,Bank00_ZeroFill,content differs: 271 of 388 bytes
 name_differs,01,4000,,OamPtrTbl_B01_4000,content differs: 108 of 498 bytes
 name_differs,01,51a5,,OamList_B01_4000_97,content differs: 17 of 57 bytes
 lost_name,01,51de,,JP OamList_B01_4000_98,byte deleted in this build
@@ -1252,7 +1251,6 @@ default_data,00,004b,0050,Vec_Stat+$3,5 bytes
 default_data,00,0053,0058,Vec_Timer+$3,5 bytes
 default_data,00,005b,0060,Vec_Serial+$3,5 bytes
 default_data,00,0104,0150,Vec_Joypad+$A4,76 bytes
-default_data,00,3800,4000,Blit_ShiftTbl+$0,2048 bytes
 default_data,01,5aea,5aee,OamList_B01_4000_E7+$5,4 bytes
 default_data,01,6ea0,6ea4,OamList_B01_5D2B_A7+$2,4 bytes
 default_data,02,4db7,4dd6,AlbumB_CheckGate+$B6,31 bytes
@@ -1264,7 +1262,6 @@ default_data,06,45fe,4601,Mode16_State01_Redraw+$8D,3 bytes
 default_data,06,4ae7,4b06,Mode16_StepValue+$1E,31 bytes
 default_data,07,48cb,4963,Mode0E_State14_Abort+$3,152 bytes
 default_data,07,7972,7984,MainMenu_DrawUpperItem0+$24,18 bytes
-default_data,08,48c1,48d1,Mode1C_DrawOptionScreen+$68,16 bytes
 default_data,09,54df,54e8,Kb_LoadGlyphSetB+$A,9 bytes
 default_data,09,5501,5503,Kb_GlyphListC+$B,2 bytes
 default_data,09,568d,56ac,OwnerCard_LoadBirthNumberTiles+$21,31 bytes
@@ -1275,10 +1272,6 @@ default_data,0c,6f82,6fa0,Gfx_0C_6C30_Mode12_State1D_SortDialogOpen+$352,30 byte
 default_data,0d,5fb0,5fb2,Gfx_0D_5D00_MsgStrip+$2B0,2 bytes
 default_data,0f,5c0f,5c5a,Gfx_0F_5A00_UserMap_LoadPlanetTiles+$20F,75 bytes
 default_data,10,7280,73d0,Gfx_10_5C00_Mode1F_State00_TitleInit+$1680,336 bytes
-default_data,12,4000,4010,,16 bytes
-default_data,12,42e9,4309,Gfx_12_4010_Mode06_State00_Init+$2D9,32 bytes
-default_data,12,4494,44b4,Gfx_12_4010_Mode06_State00_Init+$484,32 bytes
-default_data,12,45e0,4630,Gfx_12_4010_Mode06_State00_Init+$5D0,80 bytes
 default_data,14,5d21,5d31,Gfx_14_5800_Mode0D_State00_Init+$521,16 bytes
 default_data,15,7b00,7b0f,Gfx_15_7400_Mode0E_State06_ExchangeSetup+$700,15 bytes
 default_data,15,7b84,7be0,Gfx_15_7400_Mode0E_State06_ExchangeSetup+$784,92 bytes
@@ -1287,8 +1280,6 @@ default_data,1c,44a0,44b0,Gfx_1C_4241_Parlor_Page1+$25F,16 bytes
 default_data,1c,4e39,4eec,Sheet_MenusShootMenu_1C_4670+$7C9,179 bytes
 default_data,1c,4f00,4f60,Sheet_MenusShootMenu_1C_4670+$890,96 bytes
 default_data,1c,6294,62b4,Gfx_1C_5E60_Link_ShowScreenA+$434,32 bytes
-default_data,1c,69d2,6b10,Gfx_1C_6570_Link_ShowScreenA+$462,318 bytes
-default_data,1c,6c21,6cf1,Gfx_1C_6570_Link_ShowScreenA+$6B1,208 bytes
 default_data,1e,6980,69cc,Unused_TCRF_CannotCombineSamePicture_Gfx+$360,76 bytes
 default_data,1f,4879,487e,Sfx1_Init_18+$10,5 bytes
 default_data,20,66aa,66c0,Gfx_20_6680_OwnerCard_LoadBloodTiles+$2A,22 bytes
@@ -1297,17 +1288,11 @@ default_data,21,65ab,65c0,Gfx_21_6566_Parlor_Page2+$45,21 bytes
 default_data,25,71a8,71c8,Map_25_7160_Mode16_State00_Init+$48,32 bytes
 default_data,25,7dc0,7ff4,Src_25_7CA0_Tbl539D_40+$120,564 bytes
 default_data,26,5a0d,5a0e,Map_26_5A00_Mode1D_State06_LoadWaitScreen+$D,1 bytes
-default_data,26,7974,7981,Map_26_7740_Parlor_Page2+$234,13 bytes
-default_data,26,7993,7d40,Map_26_7740_Parlor_Page2+$253,941 bytes
+default_data,26,7974,7980,Map_26_7740_Parlor_Page2+$234,12 bytes
+default_data,26,7bc0,7d40,Gfx_26_7BC0_Album_LoadNumeralTileB+$0,384 bytes
 default_data,26,7dc0,7ff4,Gfx_26_7BC0_Album_LoadNumeralTileB+$200,564 bytes
-default_data,27,401c,4160,,324 bytes
-default_data,27,4170,4731,,1473 bytes
-default_data,27,4744,4850,,268 bytes
-default_data,27,4860,4a4f,,495 bytes
-default_data,27,4a60,4ad6,,118 bytes
-default_data,27,4ae6,4af0,,10 bytes
-default_data,27,4b00,4b90,,144 bytes
-default_data,27,5103,5263,Map_27_50B2_Mode17_State08_Split_Build+$51,352 bytes
+default_data,27,5103,5130,Map_27_50B2_Mode17_State08_Split_Build+$51,45 bytes
+default_data,27,5170,5263,Map_27_5130_Mode21_State01_PickCharacter+$40,243 bytes
 default_data,29,4000,4005,,5 bytes
 default_data,29,4019,4025,,12 bytes
 default_data,29,4040,408f,,79 bytes

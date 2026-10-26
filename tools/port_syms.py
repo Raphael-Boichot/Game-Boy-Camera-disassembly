@@ -16,7 +16,7 @@ Names
   * an upper-case 4-digit hex token of a name that equals the JP address of a label of the same bank, or of the bank written
     just before it (`B02_6E4B`, `25_73A0`), (its own, or the one it refers to) is rewritten to that label's new address; a token whose address does not map is left and listed; RAM / VRAM addresses ($8000+) are left.
 Types: each JP row is cut at the shifts of the byte map; deleted bytes are dropped; a piece keeps the row width only if its
-length is a multiple of it (else width 1); a padding piece that is not one repeated byte becomes data. A piece that falls on
+length is a multiple of it or it is the whole row (else width 1); a padding piece that is not one repeated byte becomes data. A piece that falls on
 traced code of the other build is dropped (code wins). Every `rst $18` table of the other build's trace is then typed with
 its own length (a row appended last, so it wins).
 Writes OUTDIR/sym_names_<suffix>.csv, OUTDIR/sym_types_<suffix>.csv and OUTDIR/port_report_<suffix>.csv (every JP name with
@@ -163,7 +163,7 @@ with open(os.path.join(a.outdir, 'port_report_%s.csv' % a.suffix), 'w', newline=
 trows = []
 for r in csv.reader(open(a.types, encoding='utf-8')):
     if not r or r[0] == 'bank' or r[0].startswith('#'): continue
-    b = int(r[0], 16); s = off(b, int(r[1], 16)); e = off(b, int(r[2], 16)); typ = r[3]; wd = int(r[4]) if r[4] else 0
+    b = int(r[0], 16); s = off(b, int(r[1], 16)); e = s + int(r[2], 16) - int(r[1], 16); typ = r[3]; wd = int(r[4]) if r[4] else 0     # end $4000 of bank 0 is not offset 0
     note = r[5] if len(r) > 5 else ''
     p = s
     while p < e:
@@ -171,7 +171,7 @@ for r in csv.reader(open(a.types, encoding='utf-8')):
         q = p
         while q + 1 < e and M[q + 1] == M[q] + 1 and M[q + 1] not in ucode: q += 1
         t0 = int(M[p]); n = q + 1 - p; tb, ta = loc(t0)
-        w2 = wd if (wd and n % wd == 0) else (1 if wd else 0)
+        w2 = wd if (wd and (n % wd == 0 or n == e - s)) else (1 if wd else 0)        # an unsplit row keeps its width
         ty = typ
         if ty == 'padding' and len(set(OT[t0:t0 + n])) != 1: ty = 'data'; w2 = 1
         trows.append(['%02x' % tb, '%04x' % ta, '%04x' % (ta + n), ty, str(w2) if w2 else '', ('JP %02X:%s ' % (b, r[1]) + note).strip()])

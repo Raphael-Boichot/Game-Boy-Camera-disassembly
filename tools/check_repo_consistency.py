@@ -163,6 +163,8 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
     n_ += quoted('port states', r'the state constants from the international tables and handler labels \((\d+):', lambda m: ((USTATES,), (int(m.group(1)),)), need=('README.md',))
     UACC = len(list(csv.DictReader(io.StringIO(rd(US + 'wram/wram_access_us.csv')))))
     n_ += quoted('port access', r'the access table \(([\d,]+) rows carried .*?plus (\d+) rows of `tools/wram_db.py`', lambda m: ((UACC,), (num(m.group(1)) + int(m.group(2)),)), need=('README.md',))
+    ULD = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_names_us_loaders.csv')))))
+    n_ += quoted('port loaders', r'the loader layer names the other (\d+) ', lambda m: ((ULD,), (int(m.group(1)),)), need=('README.md',))
     n_ += quoted('port sym', r'writes `roms/us_eu/gbcam_usa_eu.sym` \(([\d,]+) lines\)', lambda m: ((ULINES,), (num(m.group(1)),)), need=('README.md',))
     if not any(f.startswith('port') or f.startswith('quoted') for f in FAIL):
         ok('port', 'international: %s names (C %s / I %s), %s type rows, %s lost; %s instruction pairs; trace %s instructions, 0 unresolved; %d sentences checked'
@@ -170,7 +172,8 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
     if A.rom_us:
         tmp = tempfile.mkdtemp(prefix='cons_us_'); out = os.path.join(tmp, 'gbcam_usa_eu.sym')
         r = subprocess.run([sys.executable, 'tools/sym_build.py', A.rom_us, '--names', US + 'disasm/sym_names_us.csv', '--types', US + 'disasm/sym_types_us.csv',
-                            '--trace', US + 'port/trace_us.json', '--out', out, '--extra-names', US + 'disasm/sym_names_us_hand.csv'], capture_output=True, text=True)
+                            '--trace', US + 'port/trace_us.json', '--out', out, '--types', US + 'disasm/sym_types_us_loaders.csv',
+                            '--extra-names', US + 'disasm/sym_names_us_loaders.csv', '--extra-names', US + 'disasm/sym_names_us_hand.csv'], capture_output=True, text=True)
         if r.returncode: bad('port', 'sym_build.py failed on the international tables: %s' % (r.stderr or r.stdout).strip()[-300:])
         elif open(out).read() != rd(US + 'gbcam_usa_eu.sym'): bad('port', 'gbcam_usa_eu.sym is not what sym_build.py makes from the csv files: rebuild it')
         elif A.roundtrip:

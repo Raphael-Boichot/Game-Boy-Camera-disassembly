@@ -14,7 +14,8 @@ Method (per bank; a routine that moved to another bank is not followed, it shows
      byte differs) or deleted; every inserted or deleted byte costs 0.3, a shift change 8, entering a deletion 4. A changed block
      of the same size therefore stays mapped (same structure, other content). The map keeps the order of both ROMs: a lower
      shift is reached only through a deletion at least as long as the drop.
-  4. A deletion facing an insertion of the same length between the same mapped neighbours is mapped 1:1 (a replaced block).
+  4. The segment after a deletion slides back over it while the bytes agree (the edge of a deletion is arbitrary between
+     equal bytes); when the previous segment's last byte holds the target, a JP label start wins over a byte inside a block. A deletion facing an insertion of the same length between the same mapped neighbours is mapped 1:1 (a replaced block).
   5. Output: one row per segment of constant shift: bank, jp_start, jp_end, other_start, shift, same, wild, diff
      (byte counts) and, separately, the ranges of the other ROM that no JP byte maps to (inserted bytes).
   The map is checked to be strictly increasing (no two JP bytes on one byte of the other ROM, order kept).
@@ -79,7 +80,7 @@ def viterbi(b, shifts):
     shift k -> shift k' directly only if s_k' > s_k (bytes inserted in the other ROM); a lower shift is reached only through
     U_k, and U_k -> k' at p is allowed only if p + s_k' > e_k - 1 + s_k (the other ROM's addresses keep increasing)."""
     lo = b * 0x4000; jb = np.frombuffer(JP[lo:lo + 0x4000], np.uint8); ob = np.frombuffer(OT[lo:lo + 0x4000], np.uint8)
-    wb = wild[lo:lo + 0x4000]; n = 0x4000; K = len(shifts); INF = 1e9; S = np.array(shifts)
+    wb = wild[lo:lo + 0x4000]; n = 0x4000; K = len(shifts); INF = 1e9; S = np.array(shifts); lab_b = set(labels[b])
     C = np.full((n, K), INF, np.float64)
     for k, s in enumerate(shifts):
         p0 = max(0, -s); p1 = min(n, n - s)
@@ -115,6 +116,23 @@ def viterbi(b, shifts):
     m = np.full(n, -1, np.int32)
     for k, s in enumerate(shifts):
         sel = path == k; m[sel] = np.nonzero(sel)[0] + s
+    # the edges of a deletion are arbitrary when the bytes there are equal under two shifts: slide the mapped segment that follows a
+    # deletion back over it while the bytes agree and the other ROM's addresses stay increasing
+    p = 1
+    while p < n:
+        if m[p] >= 0 and m[p - 1] < 0:
+            s = m[p] - p; q = p - 1
+            prev = max([m[k] for k in range(max(0, q - 1), -1, -1) if m[k] >= 0][:1] or [-1])
+            while q >= 0 and m[q] < 0 and 0 <= q + s and (jb[q] == ob[q + s] or wb[q]):
+                if q + s > prev: m[q] = q + s; q -= 1; continue
+                # blocked by the previous segment's last byte on the same target: a JP label start wins over a byte inside a block
+                k = int(np.nonzero(m == q + s)[0][0]) if np.any(m == q + s) else -1
+                if k >= 0 and (base(b) + q) in lab_b and (base(b) + k) not in lab_b:
+                    m[k] = -1; m[q] = q + s; q -= 1
+                    prev = max([m[j] for j in range(q, -1, -1) if m[j] >= 0][:1] or [-1])
+                    continue
+                break
+        p += 1
     # a deletion facing an insertion of the same length between the same two mapped bytes is a replaced block: map it 1:1
     p = 0
     while p < n:

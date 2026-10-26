@@ -280,8 +280,8 @@ jp_bank,jp_addr,jp_name,new_loc,new_name,fate,why
 00,34f7,Mode1D_TvAnimTbl,00:3606,Mode1D_TvAnimTbl,data,
 00,3515,Mode1D_AdvanceProgress,00:3624,Mode1D_AdvanceProgress,code,
 00,354d,Print_CountPrintedPhoto,00:365c,Print_CountPrintedPhoto,code,
-00,356c,Bank00_ZeroFill,00:367b,Bank00_ZeroFill,data-differs,content differs: 270 of 388 bytes
-00,36f0,Img_NibbleMapTbl,00:36f0,Img_NibbleMapTbl,data-differs,moved: found by its own bytes (16) elsewhere in the bank
+00,356c,Bank00_ZeroFill,00:367b,Bank00_ZeroFill,data-differs,content differs: 271 of 388 bytes
+00,36f0,Img_NibbleMapTbl,00:36f0,Img_NibbleMapTbl,data,
 00,3700,Img_PairLookupTbl,00:3700,Img_PairLookupTbl,data,
 00,3800,Blit_ShiftTbl,00:3800,Blit_ShiftTbl,data,
 01,4000,OamPtrTbl_B01_4000,01:4000,OamPtrTbl_B01_4000,data-differs,content differs: 108 of 498 bytes

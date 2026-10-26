@@ -9,7 +9,8 @@ Steps (each writes into --dir; see each script's docstring):
   3. tools/rom_trace.py          static trace of the other ROM with that config (port/trace_<s>.json)
   4. tools/port_code_map.py      instruction pairs JP -> other (port/code_map_<s>.csv)
   5. tools/port_syms.py          names and type rows (disasm/sym_names_<s>.csv, disasm/sym_types_<s>.csv, port/port_report_<s>.csv)
-  6. tools/sym_build.py          the symbol file (<dir>/<sym>)
+  5b. tools/port_assets.py      names and type rows of the blocks this build's own copy calls load (disasm/sym_*_<s>_loaders.csv)
+  6. tools/sym_build.py          the symbol file (<dir>/<sym>): carried names < loader names < hand names
   7. tools/port_queue.py         hand-work queue (port/hand_queue_<s>.csv)
   7b. tools/wram_db.py + tools/port_l4.py (L4 tables: RAM names, access sites, constants) and tools/state_names.py (the state constants
       of this build's own state tables and handler labels)
@@ -42,7 +43,10 @@ os.replace(os.path.join(D, 'disasm', 'port_report_%s.csv' % S), os.path.join(P, 
 sym = os.path.join(D, a.sym)
 hand = os.path.join(D, 'disasm', 'sym_names_%s_hand.csv' % S)          # hand layer: kept across re-ports, applied last
 extra = ['--extra-names', hand] if os.path.exists(hand) else []
-run(py, 'tools/sym_build.py', a.other, '--names', os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), '--types', os.path.join(D, 'disasm', 'sym_types_%s.csv' % S), '--trace', trace, '--out', sym, '--report', *extra)
+ldn, ldt = os.path.join(D, 'disasm', 'sym_names_%s_loaders.csv' % S), os.path.join(D, 'disasm', 'sym_types_%s_loaders.csv' % S)
+run(py, 'tools/port_assets.py', a.other, trace, cmap, os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), *([hand] if extra else []), '--out-names', ldn, '--out-types', ldt)
+run(py, 'tools/sym_build.py', a.other, '--names', os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), '--types', os.path.join(D, 'disasm', 'sym_types_%s.csv' % S), '--types', ldt,
+    '--trace', trace, '--out', sym, '--report', '--extra-names', ldn, *extra)
 # L4: RAM access table of this build's own trace (added for the new code), the carried L4 tables, the state constants of this build's tables
 run(py, 'tools/wram_db.py', a.other, trace, os.path.join(P, 'rom_trace_labels.sym'), os.path.join(P, 'wram_fresh_%s' % S))
 run(py, 'tools/port_l4.py', a.jp, a.other, npy, cmap, D, '--suffix', S, '--fresh-access', os.path.join(P, 'wram_fresh_%s_access.csv' % S))
