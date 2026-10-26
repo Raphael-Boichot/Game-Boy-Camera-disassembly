@@ -11,12 +11,14 @@ Names
   * any other name goes through the byte map; it keeps its tag only if the bytes up to the next JP label are identical,
     otherwise I ("content differs: n of m bytes"). A name that lands inside an instruction of the other build's trace is
     not carried.
+  * a handler name of a JP `rst $18` table goes to the same entry of the other build's table when both tables have the same length.
   * a name not carried by the maps is searched by its own bytes in the same bank (see `recovery` below), tagged I if found.
   * an upper-case 4-digit hex token of a name that equals the JP address of a label of the same bank, or of the bank written
     just before it (`B02_6E4B`, `25_73A0`), (its own, or the one it refers to) is rewritten to that label's new address; a token whose address does not map is left and listed; RAM / VRAM addresses ($8000+) are left.
 Types: each JP row is cut at the shifts of the byte map; deleted bytes are dropped; a piece keeps the row width only if its
 length is a multiple of it (else width 1); a padding piece that is not one repeated byte becomes data. A piece that falls on
-traced code of the other build is dropped (code wins).
+traced code of the other build is dropped (code wins). Every `rst $18` table of the other build's trace is then typed with
+its own length (a row appended last, so it wins).
 Writes OUTDIR/sym_names_<suffix>.csv, OUTDIR/sym_types_<suffix>.csv and OUTDIR/port_report_<suffix>.csv (every JP name with
 its fate).
 """
@@ -85,6 +87,21 @@ for (b, ad) in keys:
             if tt < 0 or JP[o + i] != OT[tt]: d += 1
         newaddr[(b, ad)] = t
         fate[(b, ad)] = ('data', '' if d == 0 else 'content differs: %d of %d bytes' % (d, n))
+# state handlers follow the tables: when a JP `rst $18` table and the table of the other build at the same `rst $18` (paired by the
+# instruction map) have the same number of words, the name at JP entry i goes to the other build's entry i, if that is an
+# instruction start of its trace (a handler that gained or lost instructions at its head is placed right this way)
+JT = json.load(open(a.jptrace))['tables']; UTB = json.load(open(a.trace))['tables']; nfollow = 0
+for k, tg in JT.items():
+    b, t = (int(x, 16) for x in k.split(':')); rst = off(b, t - 1)
+    if rst not in CM: continue
+    u = CM[rst] + 1; ub, ua = loc(u); ut = UTB.get('%02x:%04x' % (ub, ua))
+    if not ut or len(ut) != len(tg): continue
+    for jt, ot in zip(tg, ut):
+        jk = (0 if jt < 0x4000 else b, jt); o2 = off(ub, ot)
+        if jk not in labels or o2 not in UI: continue
+        if newaddr.get(jk) != o2:
+            newaddr[jk] = o2; fate[jk] = ('code', 'placed by the state table %02X:%04X (entry of the same index)' % (ub, ua)); nfollow += 1
+print('handler names placed by their state table: %d' % nfollow)
 # recovery: a lost name whose own bytes (code: up to the next JP label, address operands masked, at most 32 bytes; data: up to
 # the next JP label, at most 32 bytes, at least 8) occur exactly once in the same bank of the other build, on a free spot
 # (an instruction start for code, outside every instruction for data, no carried label there) -> carried, tagged I
@@ -159,6 +176,11 @@ for r in csv.reader(open(a.types, encoding='utf-8')):
         if ty == 'padding' and len(set(OT[t0:t0 + n])) != 1: ty = 'data'; w2 = 1
         trows.append(['%02x' % tb, '%04x' % ta, '%04x' % (ta + n), ty, str(w2) if w2 else '', ('JP %02X:%s ' % (b, r[1]) + note).strip()])
         p = q + 1
+# the `rst $18` word tables of the other build's own trace, with their own length (the JP row can be shorter or longer):
+# appended last, so they win over the rows carried from the JP layout
+for k, tg in sorted(json.load(open(a.trace))['tables'].items()):
+    tb, ta = (int(x, 16) for x in k.split(':'))
+    if tg: trows.append(['%02x' % tb, '%04x' % ta, '%04x' % (ta + 2 * len(tg)), 'data', '2', 'rst $18 table of this build (%d words, from its trace)' % len(tg)])
 with open(os.path.join(a.outdir, 'sym_types_%s.csv' % a.suffix), 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f); w.writerow(['bank', 'start', 'end', 'type', 'width', 'note']); w.writerows(trows)
 c = collections.Counter(x[5] for x in rep)

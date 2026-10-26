@@ -1,0 +1,165 @@
+channel,id,name,tag,sites,desc,evidence
+music,01,MUSIC_TITLE,C,2,"title scene, first run and return from the menu (Mode19 states 01 and 02)",08:73B5 08:7439 same:1E
+music,02,MUSIC_CREDITS_PAGE_B,C,1,"USER section, credits page B (Mode08 state 14)",09:4F61
+music,03,MUSIC_CREDITS,C,1,"USER section, the credits (Mode08_CreditsReal)",09:4DD9
+music,04,MUSIC_SHUTTERBUG,C,3,SHUTTERBUG menu (Mode16 init and redraw) and the panorama print screen (Mode18 init),06:454B 06:45CE 06:5A03
+music,05,MUSIC_MAIN_MENU,C,1,main menu (Mode00 init),07:7246 list:03:61FD#20
+music,06,MUSIC_SHOOT_INTRO_A,C,1,"SHOOT parlor, intro page A (Mode01 state 00)",04:6FC5
+music,07,MUSIC_SHOOT_INTRO_B,C,1,"SHOOT parlor, intro page B (Mode01 state 03)",04:7094
+music,08,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_08,C,0,"same data as song 0D, requested by nothing; owner by ear (2026-10-18): waiting loop before / after the several-photo print mode (image selection menu)",same:0D same:1A owner:snd_music_08 owner:snd_music_08_review
+music,09,MUSIC_SHOW_MENU,C,1,SHOW menu: slide show / animation / hot-spot (Mode0B init),03:7953
+music,0A,MUSIC_DOODLE_MENU,C,1,Doodle menu: STAMP / PAINT (Mode04 init),03:7B10
+music,0B,MUSIC_EDIT_MENU,C,1,Edit menu: ALBUM / ANIMATION (Mode05 init),03:7C6A
+music,0C,MUSIC_LINK_MENU,C,1,LINK menu: PRINT / TRANSFER (Mode06 init),03:772A list:03:61FD#17
+music,0D,MUSIC_TIMER_PRINT_OPTIONS,C,3,waiting loop of the self-timer and interval setup (Mode15) and of the several-photo print options (Mode1E); same data as 08 and 1A,06:40AB 06:41EE 08:48F0 same:08 same:1A
+music,0E,MUSIC_SHOOT_INTRO_C,C,1,"SHOOT parlor, intro page C (Mode01 state 06)",04:713B
+music,0F,MUSIC_PHOTO_PICKER,C,4,"photo picker: delete / copy browse, album confirm, link photo pick (Mode0F, 07:4C7F)",04:4088 04:470F 04:47BA 07:4C7F
+music,10,MUSIC_SLIDESHOW_TUNE_31,C,0,in no code path: only the slide-show player list (#31) and the hot-spot sound list (#33),list:03:61FD#31 list:03:7615#33
+music,11,MUSIC_JINGLE,C,3,"short jingle: credits entry, factory-test buttons, first-boot ""store please wait""; also slide-show player list (#2) and hot-spot sound list (#34)",09:4D7C 0A:6AE6 0A:6BB5 list:03:61FD#2 list:03:7615#34 same:44
+music,12,MUSIC_SLIDESHOW_TUNE_03,C,0,in no code path: only the slide-show player list (#3),list:03:61FD#3
+music,13,MUSIC_SLIDESHOW_TUNE_04,C,0,in no code path: only the slide-show player list (#4),list:03:61FD#4
+music,14,MUSIC_SLIDESHOW_TUNE_05,C,0,in no code path: only the slide-show player list (#5),list:03:61FD#5
+music,15,MUSIC_SLIDESHOW_PLAY_ALIAS_15,C,0,same data as song 21; only the slide-show player list (#6),list:03:61FD#6 same:21
+music,16,MUSIC_FACTORY_DIAG,C,1,factory test: all buttons except B (Cam_FactoryDiag),0A:6B39
+music,17,MUSIC_SLIDESHOW_TUNE_08,C,0,in no code path: only the slide-show player list (#8),list:03:61FD#8
+music,18,MUSIC_SLIDESHOW_TUNE_09,C,0,in no code path: only the slide-show player list (#9),list:03:61FD#9
+music,19,MUSIC_JAMBO_NINTENDO_ALIAS_19,C,0,same data as song 2A; only the slide-show player list (#10),list:03:61FD#10 same:2A
+music,1A,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_1A,C,0,same data as song 0D; only the slide-show player list (#11),list:03:61FD#11 same:08 same:0D
+music,1B,MUSIC_SLIDESHOW_TUNE_12,C,0,in no code path: only the slide-show player list (#12),list:03:61FD#12
+music,1C,MUSIC_BEETHOVEN_5TH_INTRO,C,0,"same data as song 47; only the slide-show player list (#13); owner by ear (2026-10-18), on 47: Beethoven 5th symphony intro",list:03:61FD#13 same:47
+music,1D,MUSIC_SLIDESHOW_TUNE_14,C,0,in no code path: only the slide-show player list (#14),list:03:61FD#14
+music,1E,MUSIC_TITLE_ALIAS_1E,C,0,same data as song 01; only the slide-show player list (#15),list:03:61FD#15 same:01
+music,1F,MUSIC_SPACE_FEVER_1F,I,0,"no caller and no list; owner by ear: ""from Space Fever (likely)""",owner:snd_music_1F
+music,20,MUSIC_SLIDESHOW_INIT,C,1,slide-show hub (Mode0D init); also slide-show player list (#18),07:6BA6 list:03:61FD#18
+music,21,MUSIC_SLIDESHOW_PLAY,C,1,slide-show playback (Mode0D state 06),07:70C7 same:15
+music,22,MUSIC_SLIDESHOW_TUNE_01,C,0,in no code path: only the slide-show player list (#1),list:03:61FD#1
+music,23,MUSIC_ANIMATION_EDITOR,C,1,animation editor (Mode12 init); also slide-show player list (#19),03:4092 list:03:61FD#19
+music,24,MUSIC_STAMP,C,1,STAMP tool (Mode11 setup),04:5855
+music,25,MUSIC_PAINT,C,1,PAINT tool (Mode10 setup); also slide-show player list (#32),04:6181 list:03:61FD#32
+music,26,MUSIC_TRANSFER_SEND,C,1,"print engine transfer screen, send init (Mode1D state 02)",00:30C4
+music,27,MUSIC_TRANSFER_PRINT,C,1,print job: waiting jingle while the printer prints (Mode1D state 05); owner by ear (2026-10-13): jingle during the printer's busy time,00:337F owner:snd_music_27
+music,28,MUSIC_WHO_ARE_YOU_RUNNING_FROM_1,C,0,"shared result / error screen, tune 1 of 4; owner by ear: ""Who are you running from 1"" (sure)",list:09:733E#1 owner:snd_music_28
+music,29,MUSIC_TOTAKA_TUNE,C,1,"shared result / error screen, tune 2 of 4; also played by the factory test (all buttons except B)",0A:6B50 list:09:733E#2
+music,2A,MUSIC_JAMBO_NINTENDO,C,0,"shared result / error screen, tune 4 of 4; owner by ear: ""Jambo Nintendo !"" (sure)",list:09:733E#4 same:19 owner:snd_music_2A
+music,2B,MUSIC_BALL_GAME_OVER,C,1,BALL game over (Mode20 state 06),05:789B
+music,2C,MUSIC_BALL_MENU,C,1,BALL menu (Mode20 state 00),05:755E
+music,2D,MUSIC_BALL_BGM_2,C,0,"BALL in-game music, second pick of the list at 05:781B; owner by ear: ""Ball BGM"" (sure)",list:05:781B#2 owner:snd_music_2D
+music,2E,MUSIC_BALL_BGM_1,C,0,"BALL in-game music, first pick of the list at 05:781B; also slide-show player list (#21)",list:03:61FD#21 list:05:781B#1
+music,2F,MUSIC_DJ_TITLE,C,1,D.J. title (Mode1F state 00),05:4086
+music,30,MUSIC_WHO_ARE_YOU_RUNNING_FROM_2,C,0,"shared result / error screen, tune 3 of 4; owner by ear: ""Who are you running from 2"" (sure)",list:09:733E#3 owner:snd_music_30
+music,31,MUSIC_SPACE_FEVER_START,C,1,Space Fever II start (Mode07 state 01),07:557C
+music,32,MUSIC_SPACE_FEVER_MAIN,C,2,Space Fever II main theme: restarted when a boss is gone (SpaceFever_Boss_EndA); owner by ear: main theme during play,07:62EB 07:62F8 owner:snd_music_32
+music,33,MUSIC_SLIDESHOW_TUNE_23,C,0,in no code path: only the slide-show player list (#23),list:03:61FD#23
+music,34,MUSIC_USER_SCREENS,C,1,USER section (Mode08 init); also slide-show player list (#22),09:4944 list:03:61FD#22
+music,35,MUSIC_RECORD_HI_SCORE,C,2,record and hi-score screens (Mode08 states 0C and 0F),09:4C45 09:4CCB
+music,36,MUSIC_SPECIAL_MENU,C,1,Special menu (Mode03 init),07:5414
+music,37,MUSIC_COMPOSE,C,1,COMPOSE: split / fusion (Mode17 init); also slide-show player list (#24),06:4D70 list:03:61FD#24
+music,38,MUSIC_COMMENT_EDITOR,C,1,comment editor (CommentEditor_Sub0_Init); also slide-show player list (#25),09:4377 list:03:61FD#25
+music,39,MUSIC_VIEW_MENU,C,1,VIEW menu (Mode02 init),07:522C
+music,3A,MUSIC_ALBUM_VIEWER,C,4,"album viewer and print screen (Modes 09, 0A, 0F confirm, 1C); also slide-show player list (#26)",04:4B9C 04:6901 04:7583 08:4284 list:03:61FD#26
+music,3B,MUSIC_OWNER_CARD,C,2,owner card and its editor (Mode08 states 03 and 06); also slide-show player list (#27),09:4A52 09:4B73 list:03:61FD#27
+music,3C,MUSIC_RUN_PICK_CHARACTER,C,1,RUN! RUN! RUN!: pick a character (Mode21_PickCharacterTbl); also slide-show player list (#28),09:6099 list:03:61FD#28
+music,3D,MUSIC_RUN_COUNTDOWN,C,1,RUN! RUN! RUN!: countdown (Mode21 state 04),09:6236
+music,3E,MUSIC_RUN_READY_STEADY_GO,C,1,"RUN! RUN! RUN!: ready, steady, go (Mode21 state 05)",09:6346
+music,3F,MUSIC_RUN_RACE,C,2,"RUN! RUN! RUN!: the race (Mode21 state 06); also the first-boot ""store please wait"" screen",09:639A 0A:6BD7
+music,40,MUSIC_RUN_RESULT_SETUP,C,2,"RUN! RUN! RUN!: result setup and screen (Mode21 states 0B, 0C); also slide-show player list (#29)",09:64D2 09:667E list:03:61FD#29
+music,41,MUSIC_RUN_RESULT,C,1,RUN! RUN! RUN!: result screen (Mode21 state 0C); also slide-show player list (#7),09:6691 list:03:61FD#7
+music,42,MUSIC_SPACE_FEVER_BOSS,C,1,Space Fever II boss fight (SpaceFever_Boss_Init); also slide-show player list (#30),07:6127 list:03:61FD#30
+music,43,MUSIC_RUN_RACE_SCENE,C,1,RUN! RUN! RUN!: race scene init (Mode21 state 02); also slide-show player list (#16),09:61E3 list:03:61FD#16
+music,44,MUSIC_LINK_EXCHANGE_SETUP,C,2,"link exchange setup (Mode0E states 06 and 0A); same data as 11, owner by ear (2026-10-13): credits, short",07:455F 07:46B0 same:11 owner:snd_music_44
+music,45,MUSIC_ERASE_JINGLE,C,1,photo erase (Mode0F_EraseJingleTiles),04:5047
+music,46,MUSIC_USER_MAP_SCROLL_OUT,C,1,USER map scroll-out (UserMap_ScrollOut),09:52A2
+music,47,MUSIC_BEETHOVEN_5TH_INTRO_ALIAS_47,C,0,"same data as song 1C, requested by nothing; owner by ear (2026-10-18): Beethoven 5th symphony intro",same:1C owner:snd_music_47 owner:snd_music_47_review
+music,48,MUSIC_ERROR_MESSAGE_INCOMPLETE,I,0,"no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete",owner:snd_music_48
+music,FE,MUSIC_HOLD,C,1,"engine control: this frame runs effect 1 only, the song and effects 3 and 4 do not advance (Snd_Tick_MusicHold)",05:43EF
+music,FF,MUSIC_STOP,C,13,engine control: stop the song (Snd_RequestSong -> Snd_StopSong),03:6104 03:6416 03:6B17 03:75FB 03:7607
+sfx1,01,SFX1_KEY_LEFT_RIGHT,C,87,Left and Right in the shared key helper Snd_KeyBlips; many editors use it as their plain tick,00:2AAC 00:2AB7 03:4420 03:4429 03:48E7 list:03:7615#18
+sfx1,02,SFX1_KEY_UP_DOWN,C,49,Up and Down in Snd_KeyBlips,00:2AC2 00:2ACD 03:55FF 03:560F 03:7201 list:03:7615#19
+sfx1,03,SFX1_KEY_A,C,47,A in Snd_KeyBlips,00:2A96 03:4417 03:508D 03:606F 03:6B57 list:03:7615#20
+sfx1,04,SFX1_KEY_B,C,76,B in Snd_KeyBlips,00:2AA1 03:6078 03:776B 03:797E 03:7C9B
+sfx1,05,SFX1_KEY_START,C,8,Start in Snd_KeyBlips; BALL play and pause,00:2AD8 05:7842 05:7908 06:4130 06:433D
+sfx1,06,SFX1_KEY_SELECT,C,7,"Select in Snd_KeyBlips; Select in the album slider browse, the slide-show hub, the shoot option panel and the print screen",00:2AE3 03:43C2 04:694C 04:75F1 06:60CE same:0D
+sfx1,07,SFX1_MAIN_MENU_MOVE,C,12,"main menu, lower page: the cursor moves between the four items (Mode00 states 04-07)",07:74D1 07:74F9 07:7521 07:7579 07:75A1
+sfx1,08,SFX1_MAIN_MENU_PAGE_DOWN,C,1,main menu slides to the lower page (MainMenu_TransitionToLowerPage),07:7421 list:03:7615#13
+sfx1,09,SFX1_MAIN_MENU_PAGE_UP,C,1,main menu slides back to the upper page (MainMenu_TransitionToUpperPage),07:774F list:03:7615#14
+sfx1,0A,SFX1_MAIN_MENU_PAGE_TURN,C,2,both main-menu page transitions,07:73F2 07:7768
+sfx1,0B,SFX1_BEEP_REFUSED,C,11,"refused choice (mode target $FF, photo index past the last photo) and the self-timer beep",03:77F3 03:7CCE 04:481E 04:4834 04:4E91
+sfx1,0C,SFX1_SPACE_FEVER_ENEMY_KILL,C,3,Space Fever II: an enemy of waves 1-3 is shot (after SpaceFever_AddScore),07:5D0B 07:5EBA 07:60B7
+sfx1,0D,SFX1_SPACE_FEVER_BIG_ENEMY_KILL,C,1,Space Fever II: enemy 0 of wave 3 is shot (30 points instead of 5); same data as 06,07:60A4 same:06
+sfx1,0E,SFX1_CHOOSE_D,C,3,A in the SHOW menu and in the BALL menu; Space Fever II hit flash,03:7975 05:7583 07:589F
+sfx1,0F,SFX1_SPACE_FEVER_TARGET_KILL,C,1,Space Fever II opening wave: one of the three game targets is shot,07:5AF0
+sfx1,10,SFX1_TAG_DIGITS_JINGLE,C,2,plays the four digits of the tag check (Snd_PlayTagDigits); B in the BALL menu,00:171B 05:75A3
+sfx1,11,SFX1_CONFIRM,C,2,animation editor sort choice; Start on the print screen,03:50B5 08:42B8
+sfx1,12,SFX1_PANEL_OPEN,C,8,"a panel slides open (pen menu, palette, D.J. panel, dialogs: 8 sites); same data as 1D",03:5F51 03:72FC 03:7373 04:6018 04:66BF same:1D
+sfx1,13,SFX1_PANEL_CLOSE,C,9,a panel slides shut (same panels as 12),03:5F7A 03:733D 03:738E 04:6033 04:66E1
+sfx1,14,SFX1_HOTSPOT_SOUND_01,C,0,only the hot-spot sound list (#1); owner by ear: hot spot related (sure),list:03:7615#1 owner:snd_sfx1_14
+sfx1,15,SFX1_HOTSPOT_SOUND_02,C,0,only the hot-spot sound list (#2); owner by ear: hot spot related (sure),list:03:7615#2 owner:snd_sfx1_15
+sfx1,16,SFX1_OPTION_CHANGE,C,8,"A on a slide-show option, a key of the name keyboard or the animation loop count; RUN celebration (Run_Celebration)",03:4A78 07:6E00 07:6F12 09:5D1B 09:5DA4 list:03:7615#3
+sfx1,17,SFX1_HOTSPOT_SOUND_04,C,0,only the hot-spot sound list (#4),list:03:7615#4
+sfx1,18,SFX1_HOTSPOT_SOUND_05,C,0,only the hot-spot sound list (#5),list:03:7615#5
+sfx1,19,SFX1_COMPOSE_LAYOUT_KEY,C,1,COMPOSE layout keys (Compose_ReadLayoutKeys); same data as 3A; hot-spot sound list (#6),06:4E3B list:03:7615#6 same:3A
+sfx1,1A,SFX1_HOTSPOT_SOUND_07,C,0,only the hot-spot sound list (#7),list:03:7615#7
+sfx1,1B,SFX1_SPACE_FEVER_MENU_PICK_GAME,C,1,"Space Fever II first-wave menu: A on D.J. or BALL (Mode07_State04_TargetMenuB, then state 8)",07:56BC list:03:7615#8
+sfx1,1C,SFX1_HOTSPOT_SOUND_09,C,0,only the hot-spot sound list (#9),list:03:7615#9
+sfx1,1D,SFX1_PANEL_OPEN_ALIAS_1D,C,0,same data as 12; only the hot-spot sound list (#10),list:03:7615#10 same:12
+sfx1,1E,SFX1_CHOOSE,C,6,"A in the Special menu, animation range browse, split / fusion confirm, link handshake; same data as 26",03:455F 03:4590 06:5066 06:52C8 07:4193 list:03:7615#11 same:26
+sfx1,1F,SFX1_HOTSPOT_SOUND_12,C,0,only the hot-spot sound list (#12),list:03:7615#12
+sfx1,20,SFX1_STEP_FAST,C,12,"direction keys on a counter or a two-way choice (loop count, step keys, slide-show options, dialogs, keyboard)",03:4A45 03:4A57 03:5588 03:5594 03:6EBC
+sfx1,21,SFX1_STEP_VALUE,C,6,"direction keys stepping a photo or stock value, a toggle, a keyboard page",03:553D 03:5572 08:4540 09:4447 09:5C23
+sfx1,22,SFX1_DIRECTION_KEY,C,7,"direction keys in the animation tools menu, the print density and the comment editor",03:44BE 08:4462 09:4505 09:4516 09:4526
+sfx1,23,SFX1_BALL_POINT,C,1,BALL: a point is scored (Ball_AddPoint); same data as 2B,05:7D50 same:2B
+sfx1,24,SFX1_UNREQUESTED_24_FALLING_TONE,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II; the handlers (Sfx1_Init_24_LoopTone, Sfx1_Step_24_LoopTone) make a falling tone of about 910 Hz that retriggers every 21 frames and never stops by itself (BGB, 45 s), which fits no named moment",owner:snd_sfx1_24 owner:snd_sfx1_24_review
+sfx1,25,SFX1_SPACE_FEVER_START,C,1,Space Fever II: the game starts (SpaceFever_Wave0_Init),07:5A2F
+sfx1,26,SFX1_SPACE_FEVER_BOSS_DEATH,C,1,Space Fever II: the boss is destroyed (SpaceFever_BossHit); owner by ear: boss death; same data as 1E,07:675C same:1E owner:snd_sfx1_26
+sfx1,27,SFX1_SPACE_FEVER_WAVE0_END,C,1,"Space Fever II: the opening wave is over, wave state 2 follows (SpaceFever_Wave0_Play)",07:5ABF
+sfx1,28,SFX1_SHUTTER_SOUND_1,C,0,"first of the four shutter sounds (wShutterSound = 0, list at 06:7845); owner by ear: shutter sound (sure)",list:06:7845#1 owner:snd_sfx1_28
+sfx1,29,SFX1_CHOOSE_B,C,2,A in the LINK menu and in the Edit menu,03:7762 03:7C92
+sfx1,2A,SFX1_CHOOSE_C,C,2,A in the VIEW menu; B in the animation range browse,03:45AC 07:524E
+sfx1,2B,SFX1_BALL_POINT_ALIAS_2B,C,0,"same data as 23, requested by nothing",same:23
+sfx1,2C,SFX1_DJ_PERFORM_SE_1,C,0,"D.J. performance screen, sound effect 1 of 9 (list at 05:554D)",list:05:554D#1
+sfx1,2D,SFX1_DJ_PERFORM_SE_2,C,0,"D.J. performance screen, sound effect 2 of 9",list:05:554D#2
+sfx1,2E,SFX1_DJ_PERFORM_SE_3,C,0,"D.J. performance screen, sound effect 3 of 9; also hot-spot sound list (#15)",list:03:7615#15 list:05:554D#3
+sfx1,2F,SFX1_DJ_PERFORM_SE_4,C,0,"D.J. performance screen, sound effect 4 of 9 (list at 05:554D); owner by ear (2026-10-13): unsure",list:05:554D#4 owner:snd_sfx1_2F
+sfx1,30,SFX1_RUN_CELEBRATION,C,1,RUN! RUN! RUN!: celebration (Run_Celebration); also D.J. performance sound effect 5 of 9,09:6CB3 list:05:554D#5
+sfx1,31,SFX1_DJ_PERFORM_SE_6,C,0,"D.J. performance screen, sound effect 6 of 9",list:05:554D#6
+sfx1,32,SFX1_DJ_PERFORM_SE_7,C,0,"D.J. performance screen, sound effect 7 of 9",list:05:554D#7
+sfx1,33,SFX1_DJ_PERFORM_SE_8,C,0,"D.J. performance screen, sound effect 8 of 9",list:05:554D#8
+sfx1,34,SFX1_DJ_PERFORM_SE_9,C,0,"D.J. performance screen, sound effect 9 of 9",list:05:554D#9
+sfx1,35,SFX1_RUN_JUMP,C,1,RUN! RUN! RUN!: the player jumps (Run_PlayerJump); also hot-spot sound list (#16),09:67D5 list:03:7615#16
+sfx1,36,SFX1_PAGE_STEP,C,9,album and album-edit page turns (Left / Right / Up / Down pages); animation editor spark,03:5E1D 04:6AD0 04:6B82 04:6C02 04:6CA1
+sfx1,37,SFX1_COPY_BROWSE,C,1,photo copy browse (Mode0F_State0C_CopyBrowse),04:4EB7
+sfx1,38,SFX1_CURSOR_MOVE,C,19,cursor moves in menus and pickers (19 sites); Space Fever II boss timer; also hot-spot sound list (#17),03:48AC 04:62E9 04:62F9 05:40A1 05:417D list:03:7615#17
+sfx1,39,SFX1_MENU_CHOOSE,C,7,"A on an entry of the SHOOT parlor, the BALL menu, photo delete, layout choose, print selection",04:48E0 04:7011 04:70C9 04:7170 05:75D6
+sfx1,3A,SFX1_PICK_PHOTO,C,3,"photo picker choose, delete browse, link photo pick; same data as 19",04:40F6 04:483C 07:4D47 same:19
+sfx1,3B,SFX1_ERASE_ANIM,C,1,photo erase animation (EraseAnim_Run); the engine adds sfx4 06 when it ends,04:515C
+sfx1,3C,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE,C,1,"Space Fever II: B during play makes the ship explode (07:5623); stops the song and posts sfx4 02; 3D and 3E are the same data, heard by the owner as the player death jingle",07:5623 same:3D same:3E
+sfx1,3D,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3D,C,0,"same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in Space Fever II",same:3C same:3E owner:snd_sfx1_3D owner:snd_sfx1_3D_review
+sfx1,3E,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E,C,0,"same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in Space Fever II",same:3C same:3D owner:snd_sfx1_3E owner:snd_sfx1_3E_review
+sfx3,01,SFX3_MAIN_MENU_SHOOT,C,3,main menu: the cursor goes to SHOOT (Mode00_State01_Item0_Shoot); also hot-spot sound list (#21),07:7293 07:72B2 07:72D4 list:03:7615#21
+sfx3,02,SFX3_MAIN_MENU_VIEW_ARCADE,C,4,"main menu: Mode00 items VIEW and Arcade, return to the upper page; link exchange bars half done; also hot-spot sound list (#22)",07:45AE 07:731D 07:73A9 07:777E list:03:7615#22
+sfx3,03,SFX3_SPACE_FEVER_BOSS_HIT,C,1,Space Fever II: the boss is hit (SpaceFever_BossHit),07:6749
+sfx3,04,SFX3_UNREQUESTED_04,I,0,no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear (2026-10-13): unsure; no answer on 2026-10-18,owner:snd_sfx3_04
+sfx3,05,SFX3_SHUTTER_SOUND_3,C,0,third of the four shutter sounds (list at 06:7845); same data as 0A; also hot-spot sound list (#23),list:03:7615#23 list:06:7845#3 same:0A
+sfx3,06,SFX3_SHUTTER_SOUND_2,C,0,second of the four shutter sounds (list at 06:7845); also hot-spot sound list (#24),list:03:7615#24 list:06:7845#2
+sfx3,07,SFX3_UNREQUESTED_07,I,0,no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); no answer from the owner,
+sfx3,08,SFX3_DELETE_DIALOG_FIRST,C,1,hot-spot editor delete dialog: A on the first choice (Mode1A_State0A_DeleteDialog),03:6EF3
+sfx3,09,SFX3_DELETE_DIALOG_SECOND,C,1,hot-spot editor delete dialog: A on the second choice,03:6F2B
+sfx3,0A,SFX3_SHUTTER_SOUND_3_ALIAS_0A,C,0,"same data as 05, requested by nothing",same:05
+sfx4,01,SFX4_STAMP_COMMIT,C,1,STAMP: a stamp is put on the photo (Stamp_Commit),04:5FEF
+sfx4,02,SFX4_DEATH_NOISE,C,1,"posted by the engine right after the song stop of sfx1 3C, 3D and 3E",1F:4559
+sfx4,03,SFX4_SHUTTER_SOUND_4,C,1,fourth of the four shutter sounds (list at 06:7845); the engine also posts it when sfx1 26 ends,1F:4410 list:06:7845#4
+sfx4,04,SFX4_RUN_HURDLE_HIT,C,2,RUN! RUN! RUN!: the runner hits a hurdle (Run_HurdleCollision); the engine also posts it from 1F:4812,09:6A27 1F:4814
+sfx4,05,SFX4_ERASE_ANIM,C,1,"photo erase animation (EraseAnim_Run, with sfx1 3B); the owner confirmed the function on 2026-10-26: the photo erase sound, not a Space Fever II sound (his by-ear guess of 2026-10-13)",04:5165 owner:snd_sfx4_05 owner:snd_sfx4_05_function
+sfx4,06,SFX4_ERASE_ANIM_TAIL,C,1,posted by the engine when sfx1 3B (photo erase animation) ends,1F:438B
+sfx4,07,SFX4_SPACE_FEVER_FIRE_SHOTS,C,2,Space Fever II: the ship fires (SpaceFever_FireShots),07:5814 07:5835
+sfx4,08,SFX4_SPACE_FEVER_PLAYER_DEATH,C,2,"Space Fever II: the ship is hit by an enemy or a bullet (SpaceFever_PlayerDie, SpaceFever_PlayerDieB)",07:6655 07:6698
+sfx4,09,SFX4_HOTSPOT_SOUND_25,C,0,only the hot-spot sound list (#25),list:03:7615#25
+sfx4,0A,SFX4_LINK_CHOOSE,C,1,link menu: SEND / RECEIVE choice (Link_ChooseSendReceive); also hot-spot sound list (#26),07:4289 list:03:7615#26
+sfx4,0B,SFX4_HOTSPOT_SOUND_27,C,0,only the hot-spot sound list (#27),list:03:7615#27
+sfx4,0C,SFX4_HOTSPOT_SOUND_28,C,0,only the hot-spot sound list (#28),list:03:7615#28
+sfx4,0D,SFX4_HOTSPOT_SOUND_29,C,0,only the hot-spot sound list (#29),list:03:7615#29
+sfx4,0E,SFX4_HOTSPOT_SOUND_30,C,0,only the hot-spot sound list (#30),list:03:7615#30
+sfx4,0F,SFX4_HOTSPOT_SOUND_31,C,0,only the hot-spot sound list (#31),list:03:7615#31
+sfx4,10,SFX4_HOTSPOT_SOUND_32,C,0,only the hot-spot sound list (#32),list:03:7615#32
+sfx4,11,SFX4_RUN_FLAG_HEIGHT,C,1,RUN! RUN! RUN!: the flag is raised to the height of the race (Run_FlagHeight),09:6BD7
+sfx4,12,SFX4_MUSIC_SELECT,C,1,slide-show player: Select changes the tune (Mode13_State01_MusicSelect),03:6048

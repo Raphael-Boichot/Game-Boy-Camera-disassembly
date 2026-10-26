@@ -1,0 +1,41 @@
+group,value,name,tag,desc
+mode,00,MODE_MAIN_MENU,C,Main menu (two pages: SHOOT/VIEW/Arcade; Doodle/LINK/Special/Edit)
+mode,01,MODE_SHOOT_PARLOR,C,SHOOT parlor (RPG battle window)
+mode,02,MODE_VIEW_MENU,C,VIEW menu: Left/Right choice -> album grid (mode 0A) or slide-show menu (mode 0B)
+mode,03,MODE_SPECIAL_MENU,C,Special menu: vertical 2-way choice -> mode 1A or 17
+mode,04,MODE_DOODLE_MENU,C,STAMP / PAINT tool pick
+mode,05,MODE_EDIT_MENU,C,ALBUM / ANIMATION
+mode,06,MODE_LINK_MENU,C,ACCESS: PRINT / TRANSFER
+mode,07,MODE_ARCADE_SPACE_FEVER,C,Space Fever II (README 2.7)
+mode,08,MODE_USER_SCREENS,C,USER (owner name; record; hi-score; credits)
+mode,09,MODE_ALBUM_EDIT,C,Album viewer with the edit pages (the guide's Album: Paint / Stamp / Frame / Comment / Print / Delete)
+mode,0a,MODE_ALBUM_VIEW,C,VIEW album: pick a photo then browse with a slider and edit pages
+mode,0b,MODE_SHOW_MENU,C,SLIDE SHOW / ANIMATION / HOT-SPOT
+mode,0c,MODE_HOT_SPOT_VIEWER,C,Photo grid then the photo with the pointer hand
+mode,0d,MODE_SLIDE_SHOW,C,Slide-show hub; options and auto-play viewer
+mode,0e,MODE_LINK_TRANSFER,C,Link-cable exchange (SEND / RECEIVE)
+mode,0f,MODE_DELETE_PHOTO,C,Delete which photo? (also used for the Copy item of the Album editor: states 0C / 0E)
+mode,10,MODE_PAINT,C,PAINT tool
+mode,11,MODE_STAMP,C,STAMP tool
+mode,12,MODE_ANIMATION_EDITOR,C,Slide-show / animation editor (47-entry list)
+mode,13,MODE_ANIMATION_PLAYER,C,Plays the show
+mode,14,MODE_SHOOT_LIVE_VIEW,C,Live view and shutter
+mode,15,MODE_SELF_TIMER_INTERVAL,C,Self-timer (delay) and interval shooting
+mode,16,MODE_SHUTTERBUG_MAGIC,C,SHUTTERBUG menu (TRICK LENSES / MONTAGE / PANORAMA / GAME FACE)
+mode,17,MODE_SPLIT_FUSION,C,COMPOSE (SPLIT 4 pictures / FUSION 2 pictures)
+mode,18,MODE_PANORAMA_PRINT,C,PANORAMA print
+mode,19,MODE_TITLE_SCREENS,C,Copyright; title scene
+mode,1a,MODE_HOT_SPOT_EDITOR,C,Select photo / edit the five hot spots
+mode,1b,MODE_PRINT_MENU,C,Printer menu (Left = mode 1C; Right = mode 1E)
+mode,1c,MODE_PRINT_PHOTO_PICKER,C,Print one photo (picker; layout; density; border)
+mode,1d,MODE_PRINT_JOB,C,Print job state machine (the data transfer screen; TV with dancing figures); also called Transferring in the README
+mode,1e,MODE_PRINT_OPTION,C,Multi-photo print (margin; selection bitmap; job)
+mode,1f,MODE_DJ_EDITOR,C,D.J. (TRIPY-H) music editor
+mode,20,MODE_BALL,C,BALL
+mode,21,MODE_RUN_RUN_RUN,C,RUN! RUN! RUN! (three runners; 12 hurdles)
+mode,22,MODE_COUNT,I,"number of modes: the mode table `00:2F3F` has 34 entries; `cp $22 / jr c` accepts a table entry as a mode, anything above is refused"
+mode,ff,MODE_NONE,C,no target: the *_TargetModeTbl tables hold $FF for an item that leads nowhere (the caller stays in its state)
+sndch,01,SNDCH_SFX1,C,channel byte 1 of a sound list: the id goes to the request mailbox of effect 1 (Snd_PlayFromList 00:2A4B)
+sndch,02,SNDCH_MUSIC,C,channel byte 2: the id goes to the song mailbox
+sndch,03,SNDCH_SFX3,C,channel byte 3: the id goes to the request mailbox of effect 3
+sndch,04,SNDCH_SFX4,C,channel byte 4: the id goes to the request mailbox of effect 4

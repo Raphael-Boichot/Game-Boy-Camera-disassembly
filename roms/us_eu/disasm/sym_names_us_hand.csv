@@ -1,0 +1,9 @@
+bank,addr,name,conf,note,source
+09,4e9f,Mode08_State14_CreditsPageA2,I,"credits state $14, new in this build (the Japanese table has 25 states, this one 26): same shape as Mode08_State13_CreditsPageA (abort test, VRAM copies from other banks, two timed waits), so a second credits page shown between page A and page B; its content not checked in BGB",hand 2026-10-26 (port)
+09,4fbe,Mode08_State15_CreditsPageB,I,"credits state $15 (Japanese state $14, one later because of the new state $14); 25 of its 85 Japanese instructions do not pair as the same code (other copies)",hand 2026-10-26 (port)
+09,50c8,Mode08_State16_CreditsScroll,C,"credits state $16 (Japanese $15): staff roll via ScrollEngine_Step; the same code but `ld a, $25` at 09:5174 (Japanese $26)",hand 2026-10-26 (port)
+09,51c3,Mode08_State17_CreditsWaitA,C,"credits state $17 (Japanese $16): A -> state $19 (`ld a, $19 / ld [wState], a` at 09:51CD; Japanese $18)",hand 2026-10-26 (port)
+09,51d3,Mode08_State18_CreditsDancingMan,C,"credits state $18 (Japanese $17), same code",hand 2026-10-26 (port)
+09,527f,Mode08_State19_Leave,C,"credits state $19 (Japanese $18), same code",hand 2026-10-26 (port)
+09,5e5f,-,,,hand 2026-10-26 (port): the Japanese label Kb_Page2_PressBirthDate_ToPage3 (a branch target that loads the blood-type page) has no counterpart here: the key test at 09:5E5F jumps to Kb_Page2_PressBirthDate_ToSave
+09,5f0c,Kb_Page2_PressBirthDate_ToSave,C,"keys $10 and up on the birth-date page (`cp $10 / jp nc` at 09:5E5F): SFX1_OPTION_CHANGE, waits 10 frames, then state $0B (STATE_08_SAVE_OWNER): in this build the birth date is followed by saving the owner card, where the Japanese build loads the blood-type page (Kb_Page2_PressBirthDate_ToPage3); code read",hand 2026-10-26 (port)

@@ -1,0 +1,19 @@
+bank,addr,len,layout,group,note
+03,7864,2,M,mode,item -> mode of the LINK menu (ACCESS: PRINT / TRANSFER); the shared tail stores the entry in wMode
+03,7A1C,3,M,mode,item -> mode of the SHOW menu (SLIDE SHOW / ANIMATION / HOT-SPOT); $FF = refused
+03,7BCA,2,M,mode,item -> mode of the Doodle menu (STAMP / PAINT)
+03,7D53,2,M,mode,item -> mode of the Edit menu (ALBUM / ANIMATION)
+07,52A7,2,M,mode,item -> mode of the VIEW menu (album grid / slide-show menu); $FF = refused
+07,5457,2,M,mode,item -> mode of the Special menu (hot-spot editor / compose); $FF = refused
+07,781B,8,M,mode,main-menu item -> mode (README 2.3); $FF = refused
+08,40B1,2,M,mode,print-menu choice -> mode (single photo / several photos); $FF = refused
+00,3592,10,MS,mode,"print engine: caller code -> {mode, state} to return to (Mode1D_ReturnToCaller)"
+04,7030,10,MS,mode,"SHOOT parlor page A: choice -> {mode, state} (ld a,[hl+] into wMode, ld a,[hl] into wState)"
+04,70D7,10,MS,mode,"SHOOT parlor page B: choice -> {mode, state}"
+04,715D,4,MS,mode,"SHOOT parlor page C: choice -> {mode, state}"
+06,6B4E,44,MS,mode,"SHOOT live view: leave by variant -> {mode, state}"
+03,61F0,64,KC,sound,"slide-show player: the 32 songs of the music chooser (Snd_PlayFromList; the number on screen is the index + 1, Player_ShowMusicNumber)"
+06,7849,8,KC,sound,the four shutter sounds; wShutterSound (0-3) is the index (Shoot_PlayShutterSound)
+05,54F7,18,KC,sound,D.J. performance screen: sound effects 1 to 9 (DjPerf_Input)
+09,73A7,8,KC,sound,shared result / error screen: its four tunes (ResultScreen_Substate0_Init)
+05,77F2,4,KC,sound,"BALL: the two in-game songs (Mode20_State03_GameStart, Mode20_State07_Pause)"

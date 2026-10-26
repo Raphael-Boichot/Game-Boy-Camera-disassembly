@@ -11,7 +11,11 @@ Steps (each writes into --dir; see each script's docstring):
   5. tools/port_syms.py          names and type rows (disasm/sym_names_<s>.csv, disasm/sym_types_<s>.csv, port/port_report_<s>.csv)
   6. tools/sym_build.py          the symbol file (<dir>/<sym>)
   7. tools/port_queue.py         hand-work queue (port/hand_queue_<s>.csv)
-  8. with --mgbdis: mgbdis + rgbasm round trip, plain and after `sym_fix.py --tables`; prints the md5 (rgbds in PATH or RGBDS=)
+  7b. tools/wram_db.py + tools/port_l4.py (L4 tables: RAM names, access sites, constants) and tools/state_names.py (the state constants
+      of this build's own state tables and handler labels)
+  8. with --mgbdis: mgbdis + rgbasm round trip, plain, after `sym_fix.py --tables`, and after `--tables --const` with this build's L4 tables;
+     prints the md5 and the raw RAM operands left (rgbds in PATH or RGBDS=)
+Hand corrections of names go into disasm/sym_names_<s>_hand.csv (applied last by sym_build.py --extra-names and by state_names.py).
 Later edits go into disasm/sym_names_<s>.csv / sym_types_<s>.csv by hand (rerunning step 5 overwrites them).
 """
 import argparse, subprocess, sys, os, shutil, hashlib, csv, tempfile
@@ -36,7 +40,15 @@ run(py, 'tools/port_code_map.py', a.jp, a.other, 'roms/jp_rev_a/wram/trace_jp_v3
 run(py, 'tools/port_syms.py', a.jp, a.other, npy, cmap, trace, os.path.join(D, 'disasm'), '--suffix', S)
 os.replace(os.path.join(D, 'disasm', 'port_report_%s.csv' % S), os.path.join(P, 'port_report_%s.csv' % S))
 sym = os.path.join(D, a.sym)
-run(py, 'tools/sym_build.py', a.other, '--names', os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), '--types', os.path.join(D, 'disasm', 'sym_types_%s.csv' % S), '--trace', trace, '--out', sym, '--report')
+hand = os.path.join(D, 'disasm', 'sym_names_%s_hand.csv' % S)          # hand layer: kept across re-ports, applied last
+extra = ['--extra-names', hand] if os.path.exists(hand) else []
+run(py, 'tools/sym_build.py', a.other, '--names', os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), '--types', os.path.join(D, 'disasm', 'sym_types_%s.csv' % S), '--trace', trace, '--out', sym, '--report', *extra)
+# L4: RAM access table of this build's own trace (added for the new code), the carried L4 tables, the state constants of this build's tables
+run(py, 'tools/wram_db.py', a.other, trace, os.path.join(P, 'rom_trace_labels.sym'), os.path.join(P, 'wram_fresh_%s' % S))
+run(py, 'tools/port_l4.py', a.jp, a.other, npy, cmap, D, '--suffix', S, '--fresh-access', os.path.join(P, 'wram_fresh_%s_access.csv' % S))
+for f in ('wram_fresh_%s_access.csv' % S, 'wram_fresh_%s_summary.csv' % S): os.remove(os.path.join(P, f))
+run(py, 'tools/state_names.py', '--rom', a.other, '--names', os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), *extra, '--sym', sym,
+    '--shared', os.path.join(D, 'disasm', 'state_shared_%s.csv' % S), '--out', os.path.join(D, 'disasm', 'state_names_%s.csv' % S))
 run(py, 'tools/port_queue.py', a.other, trace, cmap, os.path.join(P, 'port_report_%s.csv' % S), sym, os.path.join(P, 'hand_queue_%s.csv' % S))
 if a.mgbdis:
     far = {}
@@ -47,10 +59,23 @@ if a.mgbdis:
     base = os.path.splitext(a.sym)[0]
     shutil.copy(a.other, os.path.join(work, base + '.gb')); shutil.copy(sym, os.path.join(work, a.sym))
     rgb = os.environ.get('RGBDS', '')
-    for tag, fix in (('plain', None), ('tables', ['--tables', '--far-helpers', helpers])):
+    dd = os.path.join(D, 'disasm', '%s_' + S + '.csv')
+    l4 = ['--const', '--ram-names', dd % 'ram_names', '--ram-access', os.path.join(D, 'wram', 'wram_access_%s.csv' % S), '--ram-exclude', dd % 'ram_exclude',
+          '--ram-highbyte', dd % 'ram_highbyte', '--const-names', dd % 'const_names', '--const-types', dd % 'const_types', '--const-tables', dd % 'const_tables',
+          '--const-sounds', dd % 'sound_names', '--state-names', dd % 'state_names', '--state-helpers', dd % 'state_helpers', '--text-tables', 'none']
+    def raw_ram(d):
+        import re, glob
+        w = h = 0
+        for fn in glob.glob(os.path.join(d, 'bank_*.asm')):
+            for l in open(fn, encoding='utf-8'):
+                if re.match(r'^\s+(?!db|dw)[a-z].*\$[cd][0-9a-f]{3}\b', l): w += 1
+                if re.match(r'^\s+ldh? .*\[\$ff[89a-f][0-9a-f]\]', l): h += 1
+        return w, h
+    for tag, fix in (('plain', None), ('tables', ['--tables', '--far-helpers', helpers]), ('const', ['--tables', '--far-helpers', helpers] + l4)):
         out = os.path.join(work, 'out_' + tag); shutil.rmtree(out, ignore_errors=True)
         subprocess.run([py, a.mgbdis, '--overwrite', '--print-hex', '--output-dir', out, os.path.join(work, base + '.gb')], check=True, capture_output=True)
         if fix: run(py, 'tools/sym_fix.py', out, '--rom', os.path.join(work, base + '.gb'), '--sym', os.path.join(work, a.sym), '--trace', trace, *fix)
+        if tag == 'const': print('L4 listing: %d raw WRAM operands and %d raw HRAM operands left' % raw_ram(out))
         env = dict(os.environ); env['PATH'] = (rgb + os.pathsep if rgb else '') + env['PATH']
         subprocess.run(['make'], cwd=out, env=env, check=True, capture_output=True)
         print('round trip %-6s md5 %s' % (tag, hashlib.md5(open(os.path.join(out, 'game.gb'), 'rb').read()).hexdigest()))

@@ -8,7 +8,7 @@ usage: tools/check_repo_consistency.py [--rom pocketcamera_jp.gb] [--roundtrip] 
 What it checks (each line of the report is one check)
   names      sym_names_jp.csv: tags C / I / ?, duplicate names, a name that carries another address than its own (only `_Part<addr>` / `_Cont` may),
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
-  port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled (md5)
+  port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
   renamed    roms/jp_rev_a/disasm/renamed_jp.csv rows against the counts the README quotes
@@ -157,6 +157,12 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
                  lambda m: ((sum(UC.values()), NJI, UC['same'], UC['operand'], UC['imm']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
     n_ += quoted('port trace', r'traces the international ROM itself: ([\d,]+) instructions \(([\d,]+) code bytes\), (\d+) far calls resolved',
                  lambda m: ((len(uins), sum(uins), len(UJ['far_ok'])), tuple(num(m.group(i)) for i in range(1, 4))), need=('README.md',))
+    UH = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_names_us_hand.csv')))))
+    n_ += quoted('port hand', r'Hand corrections live in `roms/us_eu/disasm/sym_names_us_hand.csv` \((\d+) rows', lambda m: ((UH,), (int(m.group(1)),)), need=('README.md',))
+    USTATES = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/state_names_us.csv')))))
+    n_ += quoted('port states', r'the state constants from the international tables and handler labels \((\d+):', lambda m: ((USTATES,), (int(m.group(1)),)), need=('README.md',))
+    UACC = len(list(csv.DictReader(io.StringIO(rd(US + 'wram/wram_access_us.csv')))))
+    n_ += quoted('port access', r'the access table \(([\d,]+) rows carried .*?plus (\d+) rows of `tools/wram_db.py`', lambda m: ((UACC,), (num(m.group(1)) + int(m.group(2)),)), need=('README.md',))
     n_ += quoted('port sym', r'writes `roms/us_eu/gbcam_usa_eu.sym` \(([\d,]+) lines\)', lambda m: ((ULINES,), (num(m.group(1)),)), need=('README.md',))
     if not any(f.startswith('port') or f.startswith('quoted') for f in FAIL):
         ok('port', 'international: %s names (C %s / I %s), %s type rows, %s lost; %s instruction pairs; trace %s instructions, 0 unresolved; %d sentences checked'
@@ -164,12 +170,16 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
     if A.rom_us:
         tmp = tempfile.mkdtemp(prefix='cons_us_'); out = os.path.join(tmp, 'gbcam_usa_eu.sym')
         r = subprocess.run([sys.executable, 'tools/sym_build.py', A.rom_us, '--names', US + 'disasm/sym_names_us.csv', '--types', US + 'disasm/sym_types_us.csv',
-                            '--trace', US + 'port/trace_us.json', '--out', out], capture_output=True, text=True)
+                            '--trace', US + 'port/trace_us.json', '--out', out, '--extra-names', US + 'disasm/sym_names_us_hand.csv'], capture_output=True, text=True)
         if r.returncode: bad('port', 'sym_build.py failed on the international tables: %s' % (r.stderr or r.stdout).strip()[-300:])
         elif open(out).read() != rd(US + 'gbcam_usa_eu.sym'): bad('port', 'gbcam_usa_eu.sym is not what sym_build.py makes from the csv files: rebuild it')
         elif A.roundtrip:
             shutil.copy(A.rom_us, os.path.join(tmp, 'gbcam_usa_eu.gb')); env = dict(os.environ); env['PATH'] = A.rgbds + os.pathsep + env['PATH']
-            for tag, fix in (('plain', None), ('tables', ['--tables', '--far-helpers', '0473,049C,061B,068D,0734,0950,0956'])):
+            D_ = US + 'disasm/%s_us.csv'; FH = ['--tables', '--far-helpers', '0473,049C,061B,068D,0734,0950,0956']
+            L4 = ['--const', '--ram-names', D_ % 'ram_names', '--ram-access', US + 'wram/wram_access_us.csv', '--ram-exclude', D_ % 'ram_exclude', '--ram-highbyte', D_ % 'ram_highbyte',
+                  '--const-names', D_ % 'const_names', '--const-types', D_ % 'const_types', '--const-tables', D_ % 'const_tables', '--const-sounds', D_ % 'sound_names',
+                  '--state-names', D_ % 'state_names', '--state-helpers', D_ % 'state_helpers', '--text-tables', 'none']
+            for tag, fix in (('plain', None), ('tables', FH), ('const', FH + L4)):
                 d = os.path.join(tmp, tag)
                 subprocess.run([sys.executable, A.mgbdis, '--overwrite', '--print-hex', '--output-dir', d, os.path.join(tmp, 'gbcam_usa_eu.gb')], capture_output=True)
                 if fix: subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--rom', os.path.join(tmp, 'gbcam_usa_eu.gb'), '--sym', out, '--trace', US + 'port/trace_us.json'] + fix, capture_output=True)

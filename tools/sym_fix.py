@@ -41,6 +41,8 @@ ap = argparse.ArgumentParser()
 ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
 ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
 ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of roms/jp_rev_a/disasm/ram_names_jp.csv and add roms/jp_rev_a/disasm/ram_jp.inc to the listing')
+ap.add_argument('--ram-highbyte', default=None); ap.add_argument('--state-helpers', default=None); ap.add_argument('--state-names', default=None)
+ap.add_argument('--text-tables', default=None, help="another build's text table csv, or 'none' (default: the Japanese tables with charmap_jp.inc)"); ap.add_argument('--charmap', default=None)
 ap.add_argument('--far-helpers', default=None, help='comma-separated hex bank-0 addresses of the banked helpers of another build (default: the Japanese 0450,0479,0586,05F8,069F,08BB,08C1)')
 ap.add_argument('--ram-names', default=None); ap.add_argument('--ram-access', default=None); ap.add_argument('--ram-exclude', default=None)
 ap.add_argument('--const', action='store_true', help='write the values of the constant groups (modes, key masks, LCDC / IE / SC / P1 flags) with their names; implies --ram')
@@ -143,7 +145,7 @@ if a.ram:
     for r in csv.DictReader(open(a.ram_exclude or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_exclude_jp.csv'), encoding='utf-8')):
         RAM_EXCL.add((int(r['bank'], 16), int(r['pc'], 16)))
     RAM_HIGH = {}                              # (bank, pc) -> name: `ld b|d|h, $xx` that loads the page of a 256-aligned RAM name (roms/jp_rev_a/disasm/ram_highbyte_jp.csv) -> `HIGH(name)`
-    _hb = os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_highbyte_jp.csv')
+    _hb = a.ram_highbyte or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_highbyte_jp.csv')
     if os.path.exists(_hb):
         _rn = {r.name: r for r in RAM_ROWS}
         for r in csv.DictReader(open(_hb, encoding='utf-8')):
@@ -157,7 +159,7 @@ if a.const:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import const_names
     ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'const_names_jp.csv')) + const_names.load_states() + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'sound_names_jp.csv'))
+    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'const_names_jp.csv')) + const_names.load_states(a.state_names) + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'sound_names_jp.csv'))
     const_names.check_unique(C_ROWS)
     CONST = const_names.Namer(C_ROWS)
     C_TYPES = const_names.load_types(a.const_types or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'const_types_jp.csv'))
@@ -183,7 +185,7 @@ if a.const:
     for (b0, a0), nm0 in byad.items(): C_LABS[b0].append((a0, nm0))
     for b0 in C_LABS: C_LABS[b0].sort()
     C_HELPER = {}                                    # helper routine -> the mode whose handlers alone call it (roms/jp_rev_a/disasm/state_helpers_jp.csv): the mode of a state store inside it
-    _hp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'jp_rev_a', 'disasm', 'state_helpers_jp.csv')
+    _hp = a.state_helpers or os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'jp_rev_a', 'disasm', 'state_helpers_jp.csv')
     if os.path.exists(_hp):
         for r0 in csv.DictReader(open(_hp, encoding='utf-8')): C_HELPER[r0['routine']] = int(r0['mode'], 16)
     C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
@@ -399,7 +401,7 @@ if CONST is not None:
         if 'const_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('ram_jp.inc bank_*.asm', 'ram_jp.inc const_jp.inc bank_*.asm'))
 if CONST is not None:                            # L6 text table: the tables of roms/jp_rev_a/disasm/text_tables_jp.csv written with the charmap of roms/jp_rev_a/disasm/charmap_jp.inc (tools/charmap_jp.py)
     _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    _cm = os.path.join(_root, 'roms', 'jp_rev_a', 'disasm', 'charmap_jp.inc'); _tt = os.path.join(_root, 'roms', 'jp_rev_a', 'disasm', 'text_tables_jp.csv')
+    _cm = a.charmap or os.path.join(_root, 'roms', 'jp_rev_a', 'disasm', 'charmap_jp.inc'); _tt = a.text_tables or os.path.join(_root, 'roms', 'jp_rev_a', 'disasm', 'text_tables_jp.csv')
     if os.path.exists(_cm) and os.path.exists(_tt):
         _chars = {}
         for l in open(_cm, encoding='utf-8'):

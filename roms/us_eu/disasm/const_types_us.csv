@@ -1,0 +1,24 @@
+variable,group,note
+wMode,mode,running mode (README 2.3)
+wMode20Caller,mode,"mode that started BALL: the way back (05:7954, 05:79E4 compare it with the SHUTTERBUG menu)"
+hKeysHeld,pad,"bit 7 Down .. bit 0 A, 1 = pressed (README 2.10)"
+hKeysNew,pad,same layout: newly pressed
+hKeysNewRepeat,pad,same layout: new press or auto-repeat
+hKeysReleased,pad,same layout: released this frame
+hKeysPrev,pad,same layout: previous frame
+hKeysHeldSticky,pad,same layout: held at any VBlank since the main loop last ran
+hKeysNewSticky,pad,same layout: sticky accumulation of hKeysNew
+hKeysRepeatSticky,pad,same layout: sticky accumulation of hKeysNewRepeat
+hLcdcShadow,lcdc,copied to rLCDC by the VBlank handler (00:02B4)
+rLCDC,lcdc,LCD control register
+rIE,ie,interrupt enable register
+rSC,sc,serial control register
+rP1,p1,joypad select lines
+Snd_Sfx1,sfx1,"call target: A = effect id of channel 1 (00:2A7C stores it in the request mailbox wSndSfx1)"
+Snd_Sfx3,sfx3,"call target: A = effect id of channel 3 (00:2A80, mailbox wSndSfx3)"
+Snd_Sfx4,sfx4,"call target: A = effect id of channel 4 (00:2A84, mailbox wSndSfx4)"
+Snd_Music,music,"call target: A = song id, MUSIC_STOP or MUSIC_HOLD (00:2A88, mailbox wSndMusicReq)"
+wSndSfx1,sfx1,request mailbox of channel 1 (the engine posts the follow-up effects of its own into wSndSfx4)
+wSndSfx3,sfx3,request mailbox of channel 3
+wSndSfx4,sfx4,request mailbox of channel 4 (the engine chains 06 / 03 / 02 / 04 into it)
+wSndMusicReq,music,song mailbox

@@ -27,9 +27,9 @@ new_code,03,4fa7,4faa,Mode12_State18_ExitDialogWait+$4,1 instructions
 new_code,03,4fab,4fbd,Mode12_State18_ExitDialogWait+$8,10 instructions
 new_code,03,593f,5941,AnimEd_StartExitTransition+$F,1 instructions
 new_code,03,5949,5955,AnimEd_StartExitTransition+$19,5 instructions
-new_code,03,605b,6063,Mode13_State00_Init+$75,3 instructions
-new_code,03,6065,606d,Mode13_State01_MusicSelect+$2,4 instructions
-new_code,03,6075,6083,Mode13_State01_MusicSelect+$12,8 instructions
+new_code,03,605b,6063,Mode13_State01_MusicSelect+$0,3 instructions
+new_code,03,6065,606d,Mode13_State01_MusicSelect+$A,4 instructions
+new_code,03,6075,6083,Mode13_State01_MusicSelect+$1A,8 instructions
 new_code,03,651d,651f,HotSpot_PlayJingle+$E,2 instructions
 new_code,03,6bb0,6bb7,Mode1A_State03_Browse+$98,4 instructions
 new_code,03,72f6,72fe,HotSpotEd_PickerSlideOut+$1,5 instructions
@@ -72,15 +72,15 @@ new_code,09,42ae,42b0,CommentEditor_Sub0_Init+$21,1 instructions
 new_code,09,4e2c,4e2e,Mode08_State13_CreditsPageA+$4A,1 instructions
 new_code,09,4e57,4e59,Mode08_State13_CreditsPageA+$75,1 instructions
 new_code,09,4e68,4f81,Mode08_State13_CreditsPageA+$86,116 instructions
-new_code,09,4f8c,4fbe,Mode08_State13_CreditsPageA+$1AA,22 instructions
-new_code,09,4fc5,4fe4,Mode08_State14_CreditsPageB+$7,18 instructions
-new_code,09,4fe7,5004,Mode08_State14_CreditsPageB+$29,14 instructions
-new_code,09,5007,500a,Mode08_State14_CreditsPageB+$49,1 instructions
-new_code,09,500e,5013,Mode08_State14_CreditsPageB+$50,3 instructions
-new_code,09,5017,501a,Mode08_State14_CreditsPageB+$59,2 instructions
-new_code,09,509d,50b0,Mode08_State14_CreditsPageB+$DF,12 instructions
-new_code,09,50b1,50b5,Mode08_State14_CreditsPageB+$F3,2 instructions
-new_code,09,50b9,50c4,Mode08_State14_CreditsPageB+$FB,6 instructions
+new_code,09,4f8c,4fbe,Mode08_State14_CreditsPageA2+$ED,22 instructions
+new_code,09,4fc5,4fe4,Mode08_State15_CreditsPageB+$7,18 instructions
+new_code,09,4fe7,5004,Mode08_State15_CreditsPageB+$29,14 instructions
+new_code,09,5007,500a,Mode08_State15_CreditsPageB+$49,1 instructions
+new_code,09,500e,5013,Mode08_State15_CreditsPageB+$50,3 instructions
+new_code,09,5017,501a,Mode08_State15_CreditsPageB+$59,2 instructions
+new_code,09,509d,50b0,Mode08_State15_CreditsPageB+$DF,12 instructions
+new_code,09,50b1,50b5,Mode08_State15_CreditsPageB+$F3,2 instructions
+new_code,09,50b9,50c4,Mode08_State15_CreditsPageB+$FB,6 instructions
 new_code,09,5922,592a,Kb_DrawCursor_Tbl5912+$10,4 instructions
 new_code,09,5935,5936,Kb_DrawCursor_Tbl5912+$23,1 instructions
 new_code,09,5c3a,5c3e,Kb_NavigateVertical+$8,3 instructions
@@ -89,7 +89,7 @@ new_code,09,5d19,5d21,Kb_Page0_Press_GlyphSetB+$15,4 instructions
 new_code,09,5e73,5e77,Kb_Page2_PressBirthDate+$1C,2 instructions
 new_code,09,5e8e,5e92,Kb_Page2_PressBirthDate+$37,2 instructions
 new_code,09,5ec5,5ec6,Kb_Page2_PressBirthDate_CursorRight+$5,1 instructions
-new_code,09,5f13,5f1e,Kb_Page2_PressBirthDate_CursorLeft+$41,4 instructions
+new_code,09,5f13,5f1e,Kb_Page2_PressBirthDate_ToSave+$7,4 instructions
 new_code,09,60a8,60ab,Mode21_State00_Init+$19,1 instructions
 new_code,09,6127,612d,Mode21_State01_PickCharacter+$3,2 instructions
 new_code,09,6167,6190,Mode21_State01_PickCharacter+$43,18 instructions
@@ -205,7 +205,7 @@ name_differs,03,5930,,AnimEd_StartExitTransition,routine differs: 6 of 68 JP ins
 name_differs,03,5a21,,AnimEd_Exit_CtxEntryTbl,content differs: 4 of 6 bytes
 name_differs,03,5fd4,,Mode13_StateTable,content differs: 10 of 18 bytes
 name_differs,03,5fe6,,Mode13_State00_Init,routine differs: 9 of 54 JP instructions not paired as same code
-name_differs,03,6063,,Mode13_State01_MusicSelect,routine differs: 3 of 37 JP instructions not paired as same code
+name_differs,03,605b,,Mode13_State01_MusicSelect,placed by the state table 03:5FD4 (entry of the same index)
 name_differs,03,60d1,,Player_CopyDigitTile,routine differs: 2 of 11 JP instructions not paired as same code
 name_differs,03,60e3,,Mode13_State02_Start,routine differs: 23 of 41 JP instructions not paired as same code
 name_differs,03,6307,,Mode0C_StateTable,content differs: 5 of 10 bytes
@@ -1265,7 +1265,6 @@ default_data,06,4ae7,4b06,Mode16_StepValue+$1E,31 bytes
 default_data,07,48cb,4963,Mode0E_State14_Abort+$3,152 bytes
 default_data,07,7972,7984,MainMenu_DrawUpperItem0+$24,18 bytes
 default_data,08,48c1,48d1,Mode1C_DrawOptionScreen+$68,16 bytes
-default_data,09,48bd,48bf,Mode08_StateTable+$32,2 bytes
 default_data,09,54df,54e8,Kb_LoadGlyphSetB+$A,9 bytes
 default_data,09,5501,5503,Kb_GlyphListC+$B,2 bytes
 default_data,09,568d,56ac,OwnerCard_LoadBirthNumberTiles+$21,31 bytes

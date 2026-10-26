@@ -1338,7 +1338,7 @@ jp_bank,jp_addr,jp_name,new_loc,new_name,fate,why
 03,5fa0,Mode13_AnimationPlayer,03:5fd0,Mode13_AnimationPlayer,code,
 03,5fa4,Mode13_StateTable,03:5fd4,Mode13_StateTable,data-differs,content differs: 10 of 18 bytes
 03,5fb6,Mode13_State00_Init,03:5fe6,Mode13_State00_Init,code-differs,routine differs: 9 of 54 JP instructions not paired as same code
-03,603f,Mode13_State01_MusicSelect,03:6063,Mode13_State01_MusicSelect,code-differs,routine differs: 3 of 37 JP instructions not paired as same code
+03,603f,Mode13_State01_MusicSelect,03:605b,Mode13_State01_MusicSelect,code-differs,placed by the state table 03:5FD4 (entry of the same index)
 03,6089,Player_ShowMusicNumber,03:60bc,Player_ShowMusicNumber,code,
 03,609e,Player_CopyDigitTile,03:60d1,Player_CopyDigitTile,code-differs,routine differs: 2 of 11 JP instructions not paired as same code
 03,60b4,Mode13_State02_Start,03:60e3,Mode13_State02_Start,code-differs,routine differs: 23 of 41 JP instructions not paired as same code

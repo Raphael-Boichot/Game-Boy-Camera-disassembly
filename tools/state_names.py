@@ -18,9 +18,13 @@ def snake(s):
     s = re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1_\2', s)
     return s.upper()
 
-def build(rom, names_csv, sym_path):
-    N = list(csv.DictReader(open(names_csv, encoding='utf-8')))
-    lab = {(int(r['bank'], 16), int(r['addr'], 16)): r for r in N}
+def build(rom, names_csv, sym_path, extra=(), shared=None):
+    lab = {}
+    for fn in [names_csv] + list(extra):                       # later files win (another build's hand layer)
+        for r in csv.DictReader(open(fn, encoding='utf-8')):
+            k = (int(r['bank'], 16), int(r['addr'], 16))
+            if r['name'] in ('-', ''): lab.pop(k, None)
+            else: lab[k] = r
     blk = {}
     for l in open(sym_path):
         p = l.split()
@@ -41,7 +45,7 @@ def build(rom, names_csv, sym_path):
             if not mh or int(mh.group(1), 16) != mode or int(mh.group(2), 16) != s: continue
             rows.append(dict(group='state_%02x' % mode, value='%02x' % s, name='STATE_%02X_%s' % (mode, snake(mh.group(3))), tag=h['conf'],
                              desc='%s (%02X:%04X)' % (h['name'], 0 if w < 0x4000 else b, w)))
-    sp = os.path.join(os.path.dirname(names_csv), 'state_shared_jp.csv')      # states whose handler is shared with another state: named by hand, with the reason
+    sp = shared or os.path.join(os.path.dirname(names_csv), 'state_shared_jp.csv')      # states whose handler is shared with another state: named by hand, with the reason
     if os.path.exists(sp):
         have = {(r['group'], r['value']) for r in rows}
         for x in csv.DictReader(open(sp, encoding='utf-8')):
@@ -68,8 +72,10 @@ if __name__ == '__main__':
     ap.add_argument('--sym', default=os.path.join(ROOT, 'roms', 'jp_rev_a', 'pocketcamera_jp.sym'))
     ap.add_argument('--out', default=os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'state_names_jp.csv'))
     ap.add_argument('--check', action='store_true')
+    ap.add_argument('--extra-names', action='append', default=[], help='more names csv files, applied after --names (later wins)')
+    ap.add_argument('--shared', default=None, help='the shared-state names (default: state_shared_jp.csv beside --names)')
     a = ap.parse_args()
-    t = text(build(open(a.rom, 'rb').read(), a.names, a.sym))
+    t = text(build(open(a.rom, 'rb').read(), a.names, a.sym, a.extra_names, a.shared))
     if a.check:
         sys.exit(0 if os.path.exists(a.out) and open(a.out, encoding='utf-8', newline='').read() == t else 1)
     open(a.out, 'w', encoding='utf-8', newline='\n').write(t)

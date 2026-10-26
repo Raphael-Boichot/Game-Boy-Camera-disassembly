@@ -1,0 +1,9 @@
+bank,pc,name,evidence
+00,0940,wOamShadow,"Oam_HideUnused: ld l, a (hOamCursor) / ld h, $D4: hl = wOamShadow + cursor, then stores through [hl]"
+00,0B24,wVramQueue,"Vq_Push: ld l, [wVqWriteIdx] / ld h, $D3: hl = slot of the ring buffer, then ld [hl], a"
+00,0B57,wVramQueue,"Vq_Process: ld l, [read index] / ld h, $D3: hl = slot of the ring buffer, then ld a, [hl]"
+00,25D0,wOamShadow,"Oam_AddMeta_Common: ld l, a (hOamCursor) / ld h, $D4, then writes the sprite bytes through [hl]"
+00,265D,wOamShadow,"Oam_AddMetaTile_B01_4000_Dead: ld l, a (hOamCursor) / ld h, $D4, then writes the sprite bytes through [hl]"
+02,45C3,wThumbnail,"ld d, $CE before Thumb_DrawCopyBadge, which loads E from Thumb_CopyBadgeTbl and changes [de]: de = a byte of wThumbnail"
+02,47FE,wThumbnail,"ld d, $CE before Thumb_DrawCopyBadge (same as 02:45C3)"
+04,530A,wOamShadow,"EraseAnim_DrawParticles: ld c, a (hOamCursor) / ld b, $D4: bc = wOamShadow + cursor for EraseAnim_DrawOne"

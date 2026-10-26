@@ -1,0 +1,2 @@
+routine,mode,tag,evidence
+Kb_Page2_PressBirthDate_ToSave,08,C,"keyboard helper of the owner editor (mode 08 states 07-0A): reached only from Kb_Page2_PressBirthDate (09:5E61 `jp nc`); stores state $0B; code read 2026-10-26"
