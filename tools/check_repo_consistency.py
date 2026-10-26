@@ -211,7 +211,7 @@ if LINES:
                 lambda m: ((BLOCKS, BYTES['code'], BYTES['data'], BYTES['padding'], BYTES['text']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
 # TCRF labels
 n += quoted('TCRF labels', r'carries (\d+) `Unused_TCRF_\*` labels', lambda m: ((TCRF_LABELS,), (int(m.group(1)),)), need=('README.md',))
-n += quoted('left `?`', r'then the (?:(\d+) `\?` and the )?(\d+) doubtful rows', lambda m: ((Q, DROWS), (int(m.group(1) or 0), int(m.group(2)))), need=('README.md',))
+n += quoted('left `?`', r'the doubtful list holds (\d+) `\?` names and (\d+) rows', lambda m: ((Q, DROWS), (int(m.group(1) or 0), int(m.group(2)))), need=('README.md',))
 n += quoted('L3 lessons', r'L3 pass of 2026-10-14: 169 `\?` -> (\d+), 610 doubtful rows -> (\d+),', lambda m: ((Q, DROWS), (int(m.group(1)), int(m.group(2)))), docs=('HOWTO_NEW_ROM.md',), need=('HOWTO_NEW_ROM.md',))
 if BYTES:
     PAD_BEFORE_L3 = 71681        # padding bytes before the L3 pass of 2026-10-14 (README history, commit a7d7e56)

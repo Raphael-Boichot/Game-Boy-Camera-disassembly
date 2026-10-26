@@ -77,7 +77,7 @@ settled.sort(key=lambda x:(x['group'],x['bank'],x['addr']))
 _sf=['bank','addr','name','conf','group','size','evidence','proof']
 w=csv.DictWriter(open(OUTDIR+'/sym_settled_unused_jp.csv','w',newline='',encoding='utf-8'),fieldnames=_sf,extrasaction='ignore'); w.writeheader(); w.writerows(settled)
 out.sort(key=lambda x:(x['group'],x['bank'],x['addr']))
-w=csv.DictWriter(open(OUTDIR+'/sym_unconclusive_jp.csv','w',newline='',encoding='utf-8'),fieldnames=list(out[0].keys())); w.writeheader(); w.writerows(out)
+w=csv.DictWriter(open(OUTDIR+'/sym_unconclusive_jp.csv','w',newline='',encoding='utf-8'),fieldnames=['bank','addr','name','conf','group','size','best_guess','evidence','why_doubtful','what_would_settle_it']); w.writeheader(); w.writerows(out)
 g=collections.Counter(x['group'] for x in out); sz=collections.defaultdict(int)
 for x in out:
     if x['size']!='': sz[x['group']]+=x['size']

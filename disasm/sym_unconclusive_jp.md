@@ -10,56 +10,45 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 |---|---|---|---|
 | visually identified range | 0 | 0 | a yes/no on the family name |
 | far-pointer asset, extent unknown | 0 | 0 | where each block ends (the length copied at run time) and what it is |
-| content-classified span | 13 | 4246 | what each span is: look at the bank image, or tell me the screen it belongs to |
+| content-classified span | 0 | 0 | what each span is: look at the bank image, or tell me the screen it belongs to |
 | unknown data (no reader found) | 0 | 0 | nothing urgent: small leftovers; a VRAM-viewer look would settle them |
 | auto-named table | 0 | 0 | what the table indexes |
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
 | mode state | 0 | 0 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
-| SFX tag | 1 | 1 | nothing from the owner: sounds are tagged by caller (2026-10-26) |
+| SFX tag | 0 | 0 | nothing from the owner: sounds are tagged by caller (2026-10-26) |
 | Run minigame | 0 | 0 | variable roles during play |
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
 | main-menu slide | 0 | 0 | which transition each slide is |
 | arrow drawing | 0 | 0 | which cursor / arrow each routine draws |
 | dead code | 0 | 0 | whether the code or data is truly unused, or for a TCRF graphic the owner's check of the match |
 
-Not counted above: 36 rows proven unused, whose tag is final (I for most: the verdict is that nothing uses them, so no run or screen can confirm it; C for the four ball-head frames) (`doubts_overrides_jp.csv`, status `final`); they are listed with the proof in the last section and in `sym_settled_unused_jp.csv`.
+Not counted above: 50 rows proven unused, whose tag is final (I for most: the verdict is that nothing uses them, so no run or screen can confirm it; C for the four ball-head frames) (`doubts_overrides_jp.csv`, status `final`); they are listed with the proof in the last section and in `sym_settled_unused_jp.csv`.
 
-## content-classified span (13)
-
-_Why doubtful:_ type confirmed by the owner (review page, by eye); role and consumer not found. _To settle:_ the role only: the owner naming the picture from the bank image, or a reader caught by a BGB read watchpoint on the span over the organic corpus.
-
-- `0C:6C00` instead: _why_ type chosen from the bytes (map rows vs tiles), consumer not found; _to settle_ view the bank image, then find the reader with a breakpoint on the bank number write.
-- `23:58C0` instead: _why_ type chosen from the bytes (map rows vs tiles), consumer not found; _to settle_ view the bank image, then find the reader with a breakpoint on the bank number write.
-
-- bank 0C: `6C00` Mode12_State1D_SortDialogOpen_Aux (48 B)
-- bank 15: `5200` MainMenu_DrawUpperItem2_Aux (512 B), `5500` SlidePlay_ReadKeys_Aux (256 B)
-- bank 18: `7D80` Mode0F_State04_LeaveSelected_Aux (256 B)
-- bank 1A: `5182` Unref (90 B), `7E00` Unref (501 B)
-- bank 1C: `5C20` Mode09_State02_PhotoArrows_Aux (64 B)
-- bank 1D: `7B41` Tbl539D_Aux (63 B)
-- bank 1E: `7D00` Unref (184 B)
-- bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
-- bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
-
-## SFX tag (1)
-
-_Why doubtful:_ no reader found. _To settle:_ a BGB read watchpoint on the byte; sounds themselves are tagged by function / caller, never by ear (owner rule 2026-10-26).
-
-| address | name | bytes | best guess | evidence |
-|---|---|---|---|---|
-| 1F:4362 | `Sfx1_Data_4362` | 1 | sound-engine label of bank 1F that is not the handler of a named id (the handlers carry the caller name of their id, C) | one byte $C9 before the first register block |
-
-## settled as unused, final I (36)
+## settled as unused, final I (50)
 
 _Why not doubtful:_ the name and the kind are not in question and no reader can exist; nothing more can be learnt about them.
 
 | address | name | bytes | group it left | proof |
 |---|---|---|---|---|
+| 1F:4362 | `Sfx1_Data_4362` | 1 | SFX tag | a lone $C9 (ret) after Sfx4_StepTbl: no jump, call or table word reaches it, and in the same BGB pass (206 organic replays) it was neither read nor executed: tcrf_check/assets/span_reads/span_reads.csv |
+| 0C:6C00 | `Gfx_0C_6C00_Mode12_State1D_SortDialogOpen_Aux` | 48 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 15:5200 | `Gfx_15_5200_MainMenu_DrawUpperItem2_Aux` | 512 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 15:5500 | `Gfx_15_5500_SlidePlay_ReadKeys_Aux` | 256 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
 | 16:7380 | `Gfx_16_7380_MainMenu_BallHeadAnim_F5_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl3, which no code loads; BGB (2026-10-14): the main-menu transitions read frames 0-4 only |
 | 16:7580 | `Gfx_16_7580_MainMenu_BallHeadAnim_F6_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl2 / Tbl3, which no code loads; BGB (2026-10-14): the transitions read frames 0-4 only |
 | 16:7780 | `Gfx_16_7780_MainMenu_BallHeadAnim_F7_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl2 / Tbl3, which no code loads; BGB (2026-10-14): the transitions read frames 0-4 only |
 | 16:7980 | `Gfx_16_7980_MainMenu_BallHeadAnim_F8_Unref` | 512 | content-classified span | listed only by MainMenu_SlideA_Tbl2 / Tbl3, which no code loads; BGB (2026-10-14): the transitions read frames 0-4 only |
+| 18:7D80 | `Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux` | 256 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 1A:5182 | `Gfx_1A_5182_Unref` | 90 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 1A:7E00 | `Gfx_1A_7E00_Unref` | 501 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 1C:5C20 | `Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux` | 64 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 1D:7B41 | `Gfx_1D_7B41_Tbl539D_Aux` | 63 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 1E:7D00 | `Gfx_1E_7D00_Unref` | 184 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 21:6AC7 | `Gfx_21_6AC7_Unref` | 177 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 21:6B91 | `Gfx_21_6B91_Unref` | 47 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 23:58C0 | `Map_23_58C0_Mode0F_ConfirmFrameStrip_Unref` | 1024 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
+| 23:5CC0 | `Map_23_5CC0_Mode0E_ExchangeAlt_Unref` | 1024 | content-classified span | no pointer to any of its bytes in the ROM (ld hl / de / bc or {lo,hi,bank}, 16-byte steps) and 0 reads in the BGB read-watchpoint pass of 2026-10-26 over the 206 organic replays (one per mode / state signature; control Mode_Table read in every replay, >= 285 times): tcrf_check/assets/span_reads/span_reads.csv, tcrf_check/tools/bgb_span_read_probe.py |
 | 00:2E88 | `Unused_Str_MainPass` | 10 | dead code | no load of its address in the trace, which has 0 unresolved indirect jumps (README 1.3, L2) |
 | 02:46E6 | `Unused_Photo_SaveReceived_Far_Stray46E6` | 3 | dead code | no pointer targets it, 0 unresolved indirect jumps; BGB link exchange with logging watchpoints: 0 reads and 0 executions while the jp before it ran twice |
 | 04:4D09 | `Unused_Mode0F_State09_EraseOne_Tbl4D09` | 18 | dead code | no instruction loads an address in 04:4D09-4D1A, 0 unresolved indirect jumps; BGB replay of erase-one-photo: 0 reads, control watchpoint 12 hits |
