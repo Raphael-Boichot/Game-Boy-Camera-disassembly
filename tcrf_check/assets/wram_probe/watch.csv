@@ -13,7 +13,7 @@ wArrowAnimFrame,D50F,1,I,PRW
 wSpriteAnimTick,D510,15,I,PRW
 wArrowAnimTick,D51F,1,I,PRW
 wUnusedD522,D522,1,U,W
-wNeighborOrPageTarget,D5D9,1,I,PRW
+wPickerCursorTarget,D5D9,1,I,PRW
 wOpt1Row,D5E4,1,U,PR
 wOpt2Row,D5E6,1,U,PR
 wRegCursorA,D5EF,1,I,RW
@@ -21,7 +21,7 @@ wRegCursorB,D5F0,1,I,RW
 wRegCursorC,D5F1,1,I,RW
 wRegCursorD,D5F2,1,?,RW
 wSavedDc52,D5F5,1,I,PRW
-wPhotoArgB3,D5FB,1,I,RW
+wHotSpotShownPhoto,D5FB,1,I,RW
 wSaveDialogScratch,D66F,1,U,W
 wAnimListGuard,D680,1,U,W
 wAnimTimingGuardLo,D6B1,1,I,PW
@@ -31,7 +31,7 @@ wPlayerMusic,D7BE,1,I,RW
 wSpriteXCounter,D7BF,1,I,P
 wShootInitFlag,D7D7,1,U,W
 wMenuPageShadow,D7D8,1,U,W
-wExtrasLaunchFlag,D800,1,I,PRW
+wDoodleFromShutterbug,D800,1,I,PRW
 wSweepPos16,D816,2,I,P
 wShootRapidFlag,D818,1,U,RW
 wShootWavePass,D85E,1,I,PW
@@ -72,7 +72,7 @@ wUiSfxRequest,D92E,1,U,RW
 wUnusedD931,D931,1,I,-
 wUnusedD936,D936,1,I,-
 wUnusedD93A,D93A,1,I,-
-wGfxDoubleBufferBit,D9D4,1,I,RW
+wDjTitlePerformerToggle,D9D4,1,I,RW
 wLinkAnimTickA,D9FA,2,I,RW
 wLinkAnimIdxA,D9FC,2,I,RW
 wLinkAnimTickB,D9FE,2,I,RW

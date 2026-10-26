@@ -99,7 +99,7 @@ state_0f,07,STATE_0F_CONFIRM_APPLY,C,Mode0F_State07_ConfirmApply (04:4C0B)
 state_0f,09,STATE_0F_ERASE_ONE,C,Mode0F_State09_EraseOne (04:4C8D)
 state_0f,0a,STATE_0F_ERASE_ALL,C,Mode0F_State0A_EraseAll (04:4D1B)
 state_0f,0c,STATE_0F_COPY_BROWSE,C,Mode0F_State0C_CopyBrowse (04:4E4B)
-state_0f,0d,STATE_0F_SELECTED_SECOND,I,"state 03's handler Mode0F_State03_Selected again (04:48B1, table entry 0D): Mode0F_PressA moves 03 -> 0D after the first pick (message strip 4, icon 1) and 0D -> 03 on A over a photo"
+state_0f,0d,STATE_0F_COPY_SELECTED,C,"the Selected view of the copy browser: runs state 03's handler Mode0F_State03_Selected (04:48B1, table entry 0D); Mode0F_State0C_CopyBrowse enters it with inc [wState] (04:4F12) and the handler leaves it with dec [wState] (04:4970) back to 0C, as 02 Browse <-> 03 Selected; Mode0F_PressA also sets it from 03"
 state_0f,0e,STATE_0F_COPY_DO,C,Mode0F_State0E_CopyDo (04:4F18)
 state_11,00,STATE_11_INIT,C,Mode11_State00_Init (04:570F)
 state_11,01,STATE_11_PICK_PHOTO,C,Mode11_State01_PickPhoto (04:5728)

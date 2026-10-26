@@ -89,7 +89,7 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 
 ## Where things stand (pointers, not numbers)
 * Disassembly levels L0-L6 and the measured counts: README §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,347 names tagged C / I / ? (4,108 / 1,239 / 0); 14 doubtful rows are listed with evidence
-  in `disasm/sym_unconclusive_jp.md`. L4 is done as defined by the how-to (789 RAM names in §2.13; the `MODE_*`, key-mask, hardware-flag and sound-id constants in §2.14; the state constants `STATE_NN_*` of the 34 modes), L5 (committed buildable tree) is not done; L6 is partial (name / comment charset only, §16.27).
+  in `disasm/sym_unconclusive_jp.md`. L4 is done as defined by the how-to (798 RAM names in §2.13; the `MODE_*`, key-mask, hardware-flag and sound-id constants in §2.14; the state constants `STATE_NN_*` of the 34 modes), L5 (committed buildable tree) is not done; L6 is partial (name / comment charset only, §16.27).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international ROM has no instrumented coverage run
   (`coverage/tools/coverage_run.py` needs a variant without the Japanese trace); behavioural parity was checked in BGB (§16.11, §16.12).
 * Sensor (§18, `tcrf_check/assets/sensor/`, `tcrf_check/tools/sensor_*.py`): register traffic, calibration, exposure, the dither matrix (§7, §18.12), checked against the owner's recordings. Open points: §18.9.

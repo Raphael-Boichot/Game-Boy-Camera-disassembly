@@ -43,7 +43,7 @@ da56,1,owner_gender_blood,"u8: bits 0-1 gender key (0..2), bits 2-4 blood-type k
 da57,2,owner_birth_year,2 bytes = 4 digit nibbles (digit+1),9,C,Birth year.
 da59,1,owner_birth_month,2 digit nibbles (digit+1),9,C,Birth month.
 da5a,1,owner_birth_day,2 digit nibbles (digit+1),9,C,Birth day.
-da5b,4,tag_owner_id,4 bytes (SRAM F00-F03),2,I (no reader found),"ID of the camera owner that took the photo. Only block-copied (02:4979, 02:4E7E, 02:4EA2); no proven instruction reads a byte of it."
+da5b,4,tag_owner_id,4 bytes (SRAM F00-F03),2,C,"ID of the camera owner that took the photo. Only block-copied (02:4979, 02:4E7E, 02:4EA2); no proven instruction reads a byte of it."
 da5f,9,tag_owner_name,9 chars (SRAM F04-F0C),9,C,Name of the owner of the camera that took the photo; drawn by 09:47B6 through HL.
 da68,1,tag_gender_blood,"u8 (SRAM F0D): bits 0-1 gender, bits 2-4 blood type",9,C,"Same layout as DA56. 09:463F takes bits 0-1 and picks a 64-byte picture from 09:56D0 (4 pictures, copied to VRAM $8B80); 09:465F takes bits 2-4 and picks one from 09:54E0 (8 pictures, to $9450)."
 da69,4,tag_birth,"4 bytes (SRAM F0E-F11): year (2 bytes), month, day",9,C,"Birth date of the camera owner; 09:4687 draws year (DA69, 2 bytes), month (DA6B), day (DA6C) with 09:46A5, which draws a placeholder when all bytes of the field are 0."

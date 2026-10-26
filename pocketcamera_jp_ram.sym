@@ -90,10 +90,19 @@
 00:D049 wRunFlagLevel
 00:D04A wRunFlagCounter
 00:D04B wRunFlagState
+00:D04C wRunUnusedD04C
+00:D04D wRunStartDash
+00:D04E wRunTopSpeedFxTimer
 00:D04F wRunRaceCounter
 00:D050 wRunPlayerLeads
+00:D051 wRunConfettiFlicker
 00:D052 wRunConfetti
 00:D080 wCollisionMask2
+00:D08E wRunCrownY
+00:D08F wRunCelebrationStep
+00:D090 wRunResultMusicOn
+00:D091 wRunPickPose
+00:D092 wRunPickAnimCounter
 00:D200 wPrintAnimPacket
 00:D300 wVramQueue
 00:D400 wOamShadow
@@ -143,7 +152,7 @@
 00:D5D6 wMsgStripSel
 00:D5D7 wIconSel
 00:D5D8 wPhotoIndex
-00:D5D9 wNeighborOrPageTarget
+00:D5D9 wPickerCursorTarget
 00:D5DA wCursorSpriteVar
 00:D5DB wStockNavAllowed
 00:D5DC wScrollWobblePhase
@@ -173,7 +182,7 @@
 00:D5F8 wCopyPhotoIdxE
 00:D5F9 wCopyPhotoIdxF
 00:D5FA wYesnoH8
-00:D5FB wPhotoArgB3
+00:D5FB wHotSpotShownPhoto
 00:D5FC wSlideshowIdx
 00:D5FD wChoice4Cursor
 00:D5FE wYesnoV7
@@ -318,7 +327,7 @@
 00:D7FD wSelCursorTick
 00:D7FE wSelCursorFrame
 00:D7FF wSelSlot
-00:D800 wExtrasLaunchFlag
+00:D800 wDoodleFromShutterbug
 00:D801 wPrintCustomMargin
 00:D802 wPrintMarginByte
 00:D803 wPrintJobIndex
@@ -478,7 +487,7 @@
 00:D9D1 wTempo
 00:D9D2 wSavedTunePresent
 00:D9D3 wStartPerformerSet
-00:D9D4 wGfxDoubleBufferBit
+00:D9D4 wDjTitlePerformerToggle
 00:D9D5 wStartTuneSource
 00:D9D6 wStartFactorySong
 00:D9D7 wBallPlayerPos

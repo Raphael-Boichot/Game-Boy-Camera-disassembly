@@ -46,7 +46,7 @@ ce00,256,wMotionPath,07,C,"[7] motion-path table (x,y pairs)"
 ce00,256,wThumbnail,*,C,Thumbnail (slot bytes E00-EFF)
 cf00,18,wSlotTagOwnerCopy,*,C,Tag: owner copy F00-F11
 cf12,3,wSlotTagRecvCounters,*,C,Tag: reception counters F12-F14
-cf15,30,wSlotTagComment,*,I,Tag: F15-F32 (comments + 3 zero bytes)
+cf15,30,wSlotTagComment,*,C,"Tag bytes F15-F32 of the photo in the slot buffer ($C000 = slot offset 0): the 27 comment cells F15-F2F and F30-F32; moved only with the whole slot (Photo_LoadImage_Far 02:4CAC copies it in, Photo_SaveShot_Far / Photo_SaveReceived_Far and Sram_Checksum read it, the link sends it); no code reads it as a field (the comment editor works on $DA70)"
 cf33,1,wSlotTagCopyFlag,*,C,Tag: copy flag F33
 cf34,2,wSlotTagImageCheck,*,C,Tag: photo checksum F34-F35
 cf36,30,wSlotTagHotspotFields,*,C,Tag: hotspot fields F36-F53
@@ -86,22 +86,31 @@ d02a,1,wRunBannerState,09,C,podium banner animation state
 d040,56,wCollisionMask1,07;00:1668,C,[7] collision mask 1
 d044,1,wRunStumbleCounter,09,C,"stumble counter, counts down"
 d045,1,wRunFinishLineState,09,C,finish line animation state
-d048,75,wRunRaceExtra,09,I,"race / result variables $D048-$D092 (flag, race counter, confetti, character pick)"
+d048,75,wRunRaceExtra,09,C,"group row of the race / result variables $D048-$D092; every byte that the code uses has its own row (flag, start, celebration, confetti, crown, character pick), so the listing never shows this name"
 d048,1,wRunFlagY,09,C,flag y on the pole: $74 = foot (fanfare $40 when it lands there again); 2 = top (hoisted; Run_FlagHeight pins it there with noise request $11)
 d049,1,wRunFlagLevel,09,C,flag level 0-6
 d04a,1,wRunFlagCounter,09,C,"flag counter, index of the flag tables"
 d04b,1,wRunFlagState,09,C,flag animation state
+d04c,1,wRunUnusedD04C,09,U,"cleared by Run_PodiumSetup, never read"
+d04d,1,wRunStartDash,09,C,"start reaction: a key before the GO window = $FF (locked), a key in the window (banner 7-8) = 1; at banner $0C a 1 gives the dash start (wRunPlayerRunCounter $33, step 3) (Mode21_State05_ReadySteadyGo)"
+d04e,1,wRunTopSpeedFxTimer,09,C,"frames left of the sprite $2C drawn with the player: 5 when pose $8A runs at speed level >= 4, -1 per frame (Run_DrawPlayer); cleared at the race setup and on a jump"
 d04f,1,wRunRaceCounter,09,C,race counter incremented at the end of the countdown
 d050,1,wRunPlayerLeads,09,C,set when the player leads by $A0
+d051,1,wRunConfettiFlicker,09,C,frame counter of Run_DrawConfetti: its bit 0 against the record number draws half of the 10 confetti on each frame; cleared by Run_ConfettiInit
 d052,60,wRunConfetti,09,C,"10 confetti records of 6 bytes {x, dx, y, dy, frame, ...}"
 d080,56,wCollisionMask2,07;00:1668,C,[7] collision mask 2
+d08e,1,wRunCrownY,09,C,"y offset of the crown sprite (Run_DrawCrown, meta $57): from Run_CelebrationPoseTbl during the celebration, then $0C / $0D by pose; $FC at the podium setup"
+d08f,1,wRunCelebrationStep,09,C,celebration step 0-$0C (Run_Celebration; step 1 requests SFX1_RUN_CELEBRATION); cleared by Run_PodiumSetup
+d090,1,wRunResultMusicOn,09,C,1 while MUSIC_RUN_RESULT plays on the result screen; when the flag is back at the foot the setup tune is requested again and it returns to 0 (Mode21_State0C_ResultScreen)
+d091,1,wRunPickPose,09,C,"pose of the character-pick sprite, {pose; counter} record of Run_DrawMeta (Run_DrawPickCharacterSprite); set from Mode21_PickCharacterTbl / Tbl3, $15 on B; the pick ends when pose & $7F >= $1A"
+d092,1,wRunPickAnimCounter,09,C,animation counter of the character-pick sprite (second byte of the record); cleared with each new pose
 d200,20,wPrintAnimPacket,08,C,Print-animation packet buffer
 d300,256,wVramQueue,*,C,VRAM write queue (ring buffer)
 d400,160,wOamShadow,*,C,OAM shadow buffer
 d4a0,96,wUnusedD4A0,*,U,(after the OAM shadow) free
-d500,15,wSpriteAnimFrame,*,I,sprite_anim_frame[15]
+d500,15,wSpriteAnimFrame,*,C,"frame index of sprite animators 0-14 (slot 15 = wArrowAnimFrame), paired with wSpriteAnimTick: the frame of an {OAM list; ticks} table, advanced when the tick reaches the duration (AnimEd_StepRangeAnim, HotSpotEd_NewSpot, HotSpot_DrawPointer, 156 sites in banks 0, 3, 4, 7, 8)"
 d50f,1,wArrowAnimFrame,*,C,arrow_anim_frame
-d510,15,wSpriteAnimTick,*,I,sprite_anim_tick[15]
+d510,15,wSpriteAnimTick,*,C,"tick counter of sprite animators 0-14 (slot 15 = wArrowAnimTick): incremented each frame, compared with the duration of the current frame, cleared when wSpriteAnimFrame advances (AnimEd_StepRangeAnim, HotSpotEd_DrawSlots_SlotLoop)"
 d51f,1,wArrowAnimTick,*,C,arrow_anim_tick
 d520,1,wVqWriteIdx,*,C,vq_write_idx
 d521,1,wVqReadIdx,*,C,vq_read_idx
@@ -144,7 +153,7 @@ d5d5,1,wPageIsStock,*,C,page_is_stock
 d5d6,1,wMsgStripSel,*,C,msg_strip_sel
 d5d7,1,wIconSel,*,C,icon_sel
 d5d8,1,wPhotoIndex,*,C,photo_index
-d5d9,1,wNeighborOrPageTarget,*,I,neighbor_or_page_target
+d5d9,1,wPickerCursorTarget,*,C,"photo picker cursor target, read from the neighbour table by PhotoPicker_MoveCursor / LinkPick_Navigate and Mode0F_TargetLeft / Right / Down ($FF = no move): bits 0-5 = photo index (>= $1E = icons), bit 7 = turn to the previous page first (PhotoPicker_PageTransitionPrev); the index goes to wPhotoIndex"
 d5da,1,wCursorSpriteVar,*,C,cursor_sprite_var
 d5db,1,wStockNavAllowed,*,C,stock_nav_allowed
 d5dc,1,wScrollWobblePhase,*,C,scroll_wobble_phase
@@ -174,7 +183,7 @@ d5f7,1,wCopyPhotoIdxD,*,C,copy_photo_idx_d
 d5f8,1,wCopyPhotoIdxE,*,C,copy_photo_idx_e
 d5f9,1,wCopyPhotoIdxF,*,C,copy_photo_idx_f
 d5fa,1,wYesnoH8,*,C,yesno_h8
-d5fb,1,wPhotoArgB3,*,I,photo_arg_b3
+d5fb,1,wHotSpotShownPhoto,*,C,"number of the photo shown by the hot-spot viewer (mode $0C): wPhotoIndex at setup, the target photo of a hot spot (HotSpot_LoadTargetPhoto), passed to Photo_LoadImage_Far 02:4C80 and Photo_LoadHotspotsTranslated_Far 02:4DD7 again after every effect"
 d5fc,1,wSlideshowIdx,*,C,slideshow_idx
 d5fd,1,wChoice4Cursor,*,C,choice4_cursor
 d5fe,1,wYesnoV7,*,C,yesno_v7
@@ -236,9 +245,9 @@ d67e,1,wSliderRedraw,*,C,slider_redraw
 d680,1,wAnimListGuard,*,C,anim_list_guard
 d681,47,wAnimList,*,C,anim_list[47]
 d6b0,1,wAnimLoopFlag,*,C,anim_loop_flag
-d6b1,1,wAnimTimingGuardLo,*,I,anim_timing_guard_lo
+d6b1,1,wAnimTimingGuardLo,*,C,$FF end marker before wAnimTiming (index 0 of the table that AnimEd_MoveRangeEnd reads 1-based: bit 6 of the entry); set to $FF by AnimEd_ClearAll and Settings_LoadAnim*_Far
 d6b2,47,wAnimTiming,*,C,anim_timing[47]
-d6e1,1,wAnimTimingGuardHi,*,I,anim_timing_guard_hi
+d6e1,1,wAnimTimingGuardHi,*,C,$FF end marker after the 47 bytes of wAnimTiming; set to $FF by AnimEd_ClearAll and Settings_LoadAnim*_Far
 d6e2,1,wAnimSpeed,*,C,anim_speed
 d6e3,1,wAnimBorder,*,C,anim_border
 d6e4,1,wCoroIndex,*,C,coro_index
@@ -319,7 +328,7 @@ d7f9,4,wCompose4Photos,*,C,compose4_photos[4]
 d7fd,1,wSelCursorTick,*,C,sel_cursor_tick
 d7fe,1,wSelCursorFrame,*,C,sel_cursor_frame
 d7ff,1,wSelSlot,*,C,sel_slot
-d800,1,wExtrasLaunchFlag,*,I,`extras_launch_flag` (return-to-mode-4 flag)
+d800,1,wDoodleFromShutterbug,*,C,"1 = the STAMP / PAINT menu (mode $04) was entered from the GAME FACE item of the SHUTTERBUG menu (Mode16_State06_GameFaceMenu): B leaves to SHUTTERBUG (STATE_16_REDRAW) instead of the main menu, PAINT / STAMP start without a photo and return to mode $04, the save dialog takes another target; cleared by the main menu launch and the album edit pages"
 d801,1,wPrintCustomMargin,*,C,`print_custom_margin`
 d802,1,wPrintMarginByte,*,C,`print_margin_byte`
 d803,1,wPrintJobIndex,*,C,`print_job_index`
@@ -381,7 +390,7 @@ d892,1,wSndNoteBlinkCounter,*,C,note-cursor blink counter
 d893,1,wSndNoteBlinkPhase,*,C,note-cursor blink phase
 d894,1,wPerformerFrameGroup,*,C,performer animation: frame group
 d895,1,wPerformerBeatPhase,*,C,performer animation: beat phase (0..5)
-d896,1,wPerformerBounceCounter,*,I,performer animation: bounce counter
+d896,1,wPerformerBounceCounter,*,C,"performer bounce height: set from DjPerf_StepBeatPhase_Tbl4EF5 by pose (1 / 4 / 1), -1 per beat step, added to the frame-group base by DjPerf_BounceOffset to give hScyBand1"
 d897,1,wPerformerScriptId,*,C,"performer animation script id (0 = idle, 1..8)"
 d898,1,wPerformerTilesTarget,*,C,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
 d899,1,wPerformerTilesTarget2,*,C,"performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2"
@@ -394,20 +403,20 @@ d89f,4,wAnimSlotTimer,*,C,animator slots: frame timers
 d8a3,4,wAnimSlotFrame,*,C,animator slots: frame index
 d8a7,4,wAnimSlotX,*,C,animator slots: sprite X
 d8ab,4,wAnimSlotY,*,C,animator slots: sprite Y
-d8af,4,wAnimSlotDone,*,I,animator slots: finished flags (`$D8B2` = slot 3)
+d8af,4,wAnimSlotDone,*,C,"animator slots 0-3: finished flags, cleared by DjPerf_AnimatorDraw every frame and set to 1 when the frame list of the slot wraps; the performer scripts poll slot 3 (`$D8B2`) to end the script"
 d8b3,1,wPerfControlCursor,*,C,performance-screen control cursor 0..4
 d8b4,3,wPerfChannelState,*,C,channel states SOUND I / SOUND II / NOISE
 d8b7,1,wPerfLevel,*,C,performance-screen level 0..8 (control 4) = sound effect SE 1..9
 d8b8,1,wPerformerSpeakingIcon,*,C,"performer ""speaking"" icon flag"
 d8b9,1,wPerfNr51Mask,*,C,NR51 mask (channel enables)
-d8ba,3,wPerfChannelBlink,*,I,per-channel indicator blink toggle
-d8bd,1,wPerfTempoAtRelease,*,I,tempo value at last button release
-d8be,1,wPerfLevelAtRelease,*,I,level value at last button release
+d8ba,3,wPerfChannelBlink,*,C,"blink toggle of the SOUND I / SOUND II / NOISE indicators (DjPerf_ToggleBlink from DjPerf_DrawChannel1-3State), cleared while paused"
+d8bd,1,wPerfTempoAtRelease,*,C,tempo shown by the needle (DjPerf_DrawTempoNeedle): wTempo copied when Up / Down is released and at DjPerf_Init
+d8be,1,wPerfLevelAtRelease,*,C,level shown by the slider (DjPerf_DrawLevelSlider): wPerfLevel copied when Up / Down is released and at DjPerf_Init
 d8bf,1,wPerfEqualiserPhase,*,C,equaliser animation phase (&3)
 d8c0,1,wPerfPaused,*,C,paused flag (bit 0)
-d8c1,1,wPerfPausedIcon,*,I,copy of D8C0 for the play/pause icon
-d8c2,1,wPerfPausedAtStart,*,I,D8C0 saved at Start press
-d8c3,1,wPerfStartHold,*,I,Start hold counter
+d8c1,1,wPerfPausedIcon,*,C,play / pause icon state read by DjPerf_DrawPlayIcon: wPerfPaused copied when performer script 7 ends
+d8c2,1,wPerfPausedAtStart,*,C,"wPerfPaused saved when Start is pressed (DjPerf_Input 05:54B3); on release, playback restarts only if it was not paused and the hold was short"
+d8c3,1,wPerfStartHold,*,C,"frames Start has been held on the performance screen (DjPerf_Input): cleared on press, +1 per held frame, compared with $1E on release"
 d8c4,1,wPerfStepIncrement,*,C,playback step increment (+1; `$FF` = backwards while Left is held)
 d8c5,1,wPerfPitchShift,*,C,"pitch shift (semitones, -12..+11), decays to 0"
 d8c6,1,wPerfPrintRow,*,C,print row counter (0..$27)
@@ -435,7 +444,7 @@ d900,1,wUnusedD900,*,U,(unused byte after the NOISE edit value)
 d901,1,wNoiseVolAtten,*,C,NOISE volume attenuation
 d902,2,wTempoAcc,*,C,tempo accumulator (16-bit)
 d904,1,wTickFlag,*,C,tick flag (set for one frame)
-d905,2,wModRandPhase,*,I,modulation random-phase memory: SOUND I / SOUND II
+d905,2,wModRandPhase,*,C,"random modulation of SOUND I / SOUND II: the last modulation phase byte; when its bit 6 differs from the current phase, the phase is saved and a new Rng_Next value is drawn (DjSnd_ModulateSoundI / II)"
 d907,1,wSound1ModBase,*,C,"SOUND I modulation base (per note, from table `1F:41BE`)"
 d908,1,wUnusedD908,*,U,(unused partner byte of `D907`)
 d909,1,wSound2ModBase,*,C,SOUND II modulation base
@@ -448,7 +457,7 @@ d913,2,wSound1FreqBase,*,C,SOUND I base frequency (from table `1F:4051`)
 d915,2,wSound2FreqBase,*,C,SOUND II base frequency
 d917,1,wNoiseNr43,*,C,"NOISE NR43 value (table `1F:4000[note-1]`, bit 3 = width flag from `D9C1+k` bit 4)"
 d918,3,wRestFlags,*,C,rest flags (1 = current step is a rest) SOUND I / II / NOISE
-d91b,3,wRestCounters,*,I,ticks since last note (rest counters) SOUND I / II / NOISE
+d91b,3,wRestCounters,*,C,"ticks of rest of SOUND I / SOUND II / NOISE since the last note (DjSnd_StepSoundI / II / DjSnd_StepNoise): +1 per empty step up to wLoopLengths / wNoiseGateLoop, then the channel is panned off in wNr51PanShadow; cleared by a note"
 d91e,16,wUnusedD91E,*,U,(unreferenced block before the sound-effect request)
 d92e,1,wUiSfxRequest,*,U,UI sound-effect request (1..8) written by the editor
 d92f,2,wNr21Nr22Shadow,*,C,NR21 / NR22 shadows (SOUND I)
@@ -479,7 +488,7 @@ d9c1,16,wNoiseStereoWidth,*,C,**NOISE** stereo code (bits 1-0) and width flag (b
 d9d1,1,wTempo,*,C,**tempo** (15..240)
 d9d2,1,wSavedTunePresent,*,C,"""saved tune present"" flag"
 d9d3,1,wStartPerformerSet,*,C,start menu: performer/character set (0..2)
-d9d4,1,wGfxDoubleBufferBit,*,I,alternating bit (graphics double-buffer)
+d9d4,1,wDjTitlePerformerToggle,*,C,"0 / 1 toggled by every DjTitle_LoadPerformerGfx; with performer set 2 and no Game Face it picks one of two graphics banks (DjTitle_PickGraphicsBank), so the two performers alternate"
 d9d5,1,wStartTuneSource,*,C,"start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved)"
 d9d6,1,wStartFactorySong,*,C,start menu 2: factory song number (0..3)
 d9d7,1,wBallPlayerPos,*,C,`ball_player_pos`
@@ -558,7 +567,7 @@ da56,1,wOwnerGenderBlood,*,C,owner_gender_blood
 da57,2,wOwnerBirthYear,*,C,owner_birth_year
 da59,1,wOwnerBirthMonth,*,C,owner_birth_month
 da5a,1,wOwnerBirthDay,*,C,owner_birth_day
-da5b,4,wTagOwnerId,*,I,tag_owner_id
+da5b,4,wTagOwnerId,*,C,"owner ID of the photo tag (slot bytes F00-F03), first 4 bytes of the $36-byte copy F00-F35 -> $DA5B that Photo_LoadTagFields_Far makes, same layout as wOwnerId; no code reads it (the name, gender and birth that follow are read)"
 da5f,9,wTagOwnerName,*,C,tag_owner_name
 da68,1,wTagGenderBlood,*,C,tag_gender_blood
 da69,4,wTagBirth,*,C,tag_birth
@@ -720,7 +729,7 @@ ff8b,1,hScratchB,*,C,scratch_b
 ff8c,1,hScratchC,*,C,scratch_c
 ff8d,1,hScratchD,*,C,scratch_d
 ff8e,1,hDiffOrValue,*,C,diff_or_value
-ff8f,1,hPrevOrSign,*,I,prev_or_sign
+ff8f,1,hPrevOrSign,*,C,"HRAM scratch of bank $0A: in Cam_ThresholdConverge / _Up the last passing value, averaged with hDiffOrValue for the next try; in Cam_FactoryTest the sign tile of hDiff2 ($24 when the reading is not below the reference, $25 below), drawn by Cam_FactoryDiag_AllButtonsExceptB"
 ff90,1,hDiff2,*,C,diff2
 ff91,1,hDiagPassFlag,*,C,diag_pass_flag
 ff92,1,hSarScratch,*,C,sar_scratch

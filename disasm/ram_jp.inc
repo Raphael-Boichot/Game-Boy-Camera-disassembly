@@ -47,7 +47,7 @@ DEF wMotionPath                EQU $ce00 ; C 256  [7] motion-path table (x,y pai
 DEF wThumbnail                 EQU $ce00 ; C 256  Thumbnail (slot bytes E00-EFF)
 DEF wSlotTagOwnerCopy          EQU $cf00 ; C 18  Tag: owner copy F00-F11
 DEF wSlotTagRecvCounters       EQU $cf12 ; C 3  Tag: reception counters F12-F14
-DEF wSlotTagComment            EQU $cf15 ; I 30  Tag: F15-F32 (comments + 3 zero bytes)
+DEF wSlotTagComment            EQU $cf15 ; C 30  Tag bytes F15-F32 of the photo in the slot buffer ($C000 = slot offset 0): the 27 comment 
 DEF wSlotTagCopyFlag           EQU $cf33 ; C 1  Tag: copy flag F33
 DEF wSlotTagImageCheck         EQU $cf34 ; C 2  Tag: photo checksum F34-F35
 DEF wSlotTagHotspotFields      EQU $cf36 ; C 30  Tag: hotspot fields F36-F53
@@ -87,22 +87,31 @@ DEF wRunBannerState            EQU $d02a ; C 1  podium banner animation state
 DEF wCollisionMask1            EQU $d040 ; C 56  [7] collision mask 1
 DEF wRunStumbleCounter         EQU $d044 ; C 1  stumble counter, counts down
 DEF wRunFinishLineState        EQU $d045 ; C 1  finish line animation state
-DEF wRunRaceExtra              EQU $d048 ; I 75  race / result variables $D048-$D092 (flag, race counter, confetti, character pick)
+DEF wRunRaceExtra              EQU $d048 ; C 75  group row of the race / result variables $D048-$D092; every byte that the code uses has it
 DEF wRunFlagY                  EQU $d048 ; C 1  flag y on the pole: $74 = foot (fanfare $40 when it lands there again); 2 = top (hoisted; 
 DEF wRunFlagLevel              EQU $d049 ; C 1  flag level 0-6
 DEF wRunFlagCounter            EQU $d04a ; C 1  flag counter, index of the flag tables
 DEF wRunFlagState              EQU $d04b ; C 1  flag animation state
+DEF wRunUnusedD04C             EQU $d04c ; U 1  cleared by Run_PodiumSetup, never read
+DEF wRunStartDash              EQU $d04d ; C 1  start reaction: a key before the GO window = $FF (locked), a key in the window (banner 7-8
+DEF wRunTopSpeedFxTimer        EQU $d04e ; C 1  frames left of the sprite $2C drawn with the player: 5 when pose $8A runs at speed level >
 DEF wRunRaceCounter            EQU $d04f ; C 1  race counter incremented at the end of the countdown
 DEF wRunPlayerLeads            EQU $d050 ; C 1  set when the player leads by $A0
+DEF wRunConfettiFlicker        EQU $d051 ; C 1  frame counter of Run_DrawConfetti: its bit 0 against the record number draws half of the 1
 DEF wRunConfetti               EQU $d052 ; C 60  10 confetti records of 6 bytes {x, dx, y, dy, frame, ...}
 DEF wCollisionMask2            EQU $d080 ; C 56  [7] collision mask 2
+DEF wRunCrownY                 EQU $d08e ; C 1  y offset of the crown sprite (Run_DrawCrown, meta $57): from Run_CelebrationPoseTbl during
+DEF wRunCelebrationStep        EQU $d08f ; C 1  celebration step 0-$0C (Run_Celebration; step 1 requests SFX1_RUN_CELEBRATION); cleared by
+DEF wRunResultMusicOn          EQU $d090 ; C 1  1 while MUSIC_RUN_RESULT plays on the result screen; when the flag is back at the foot the
+DEF wRunPickPose               EQU $d091 ; C 1  pose of the character-pick sprite, {pose; counter} record of Run_DrawMeta (Run_DrawPickCha
+DEF wRunPickAnimCounter        EQU $d092 ; C 1  animation counter of the character-pick sprite (second byte of the record); cleared with e
 DEF wPrintAnimPacket           EQU $d200 ; C 20  Print-animation packet buffer
 DEF wVramQueue                 EQU $d300 ; C 256  VRAM write queue (ring buffer)
 DEF wOamShadow                 EQU $d400 ; C 160  OAM shadow buffer
 DEF wUnusedD4A0                EQU $d4a0 ; U 96  (after the OAM shadow) free
-DEF wSpriteAnimFrame           EQU $d500 ; I 15  sprite_anim_frame[15]
+DEF wSpriteAnimFrame           EQU $d500 ; C 15  frame index of sprite animators 0-14 (slot 15 = wArrowAnimFrame), paired with wSpriteAnimT
 DEF wArrowAnimFrame            EQU $d50f ; C 1  arrow_anim_frame
-DEF wSpriteAnimTick            EQU $d510 ; I 15  sprite_anim_tick[15]
+DEF wSpriteAnimTick            EQU $d510 ; C 15  tick counter of sprite animators 0-14 (slot 15 = wArrowAnimTick): incremented each frame, 
 DEF wArrowAnimTick             EQU $d51f ; C 1  arrow_anim_tick
 DEF wVqWriteIdx                EQU $d520 ; C 1  vq_write_idx
 DEF wVqReadIdx                 EQU $d521 ; C 1  vq_read_idx
@@ -145,7 +154,7 @@ DEF wPageIsStock               EQU $d5d5 ; C 1  page_is_stock
 DEF wMsgStripSel               EQU $d5d6 ; C 1  msg_strip_sel
 DEF wIconSel                   EQU $d5d7 ; C 1  icon_sel
 DEF wPhotoIndex                EQU $d5d8 ; C 1  photo_index
-DEF wNeighborOrPageTarget      EQU $d5d9 ; I 1  neighbor_or_page_target
+DEF wPickerCursorTarget        EQU $d5d9 ; C 1  photo picker cursor target, read from the neighbour table by PhotoPicker_MoveCursor / Link
 DEF wCursorSpriteVar           EQU $d5da ; C 1  cursor_sprite_var
 DEF wStockNavAllowed           EQU $d5db ; C 1  stock_nav_allowed
 DEF wScrollWobblePhase         EQU $d5dc ; C 1  scroll_wobble_phase
@@ -175,7 +184,7 @@ DEF wCopyPhotoIdxD             EQU $d5f7 ; C 1  copy_photo_idx_d
 DEF wCopyPhotoIdxE             EQU $d5f8 ; C 1  copy_photo_idx_e
 DEF wCopyPhotoIdxF             EQU $d5f9 ; C 1  copy_photo_idx_f
 DEF wYesnoH8                   EQU $d5fa ; C 1  yesno_h8
-DEF wPhotoArgB3                EQU $d5fb ; I 1  photo_arg_b3
+DEF wHotSpotShownPhoto         EQU $d5fb ; C 1  number of the photo shown by the hot-spot viewer (mode $0C): wPhotoIndex at setup, the tar
 DEF wSlideshowIdx              EQU $d5fc ; C 1  slideshow_idx
 DEF wChoice4Cursor             EQU $d5fd ; C 1  choice4_cursor
 DEF wYesnoV7                   EQU $d5fe ; C 1  yesno_v7
@@ -237,9 +246,9 @@ DEF wSliderRedraw              EQU $d67e ; C 1  slider_redraw
 DEF wAnimListGuard             EQU $d680 ; C 1  anim_list_guard
 DEF wAnimList                  EQU $d681 ; C 47  anim_list[47]
 DEF wAnimLoopFlag              EQU $d6b0 ; C 1  anim_loop_flag
-DEF wAnimTimingGuardLo         EQU $d6b1 ; I 1  anim_timing_guard_lo
+DEF wAnimTimingGuardLo         EQU $d6b1 ; C 1  $FF end marker before wAnimTiming (index 0 of the table that AnimEd_MoveRangeEnd reads 1-b
 DEF wAnimTiming                EQU $d6b2 ; C 47  anim_timing[47]
-DEF wAnimTimingGuardHi         EQU $d6e1 ; I 1  anim_timing_guard_hi
+DEF wAnimTimingGuardHi         EQU $d6e1 ; C 1  $FF end marker after the 47 bytes of wAnimTiming; set to $FF by AnimEd_ClearAll and Settin
 DEF wAnimSpeed                 EQU $d6e2 ; C 1  anim_speed
 DEF wAnimBorder                EQU $d6e3 ; C 1  anim_border
 DEF wCoroIndex                 EQU $d6e4 ; C 1  coro_index
@@ -320,7 +329,7 @@ DEF wCompose4Photos            EQU $d7f9 ; C 4  compose4_photos[4]
 DEF wSelCursorTick             EQU $d7fd ; C 1  sel_cursor_tick
 DEF wSelCursorFrame            EQU $d7fe ; C 1  sel_cursor_frame
 DEF wSelSlot                   EQU $d7ff ; C 1  sel_slot
-DEF wExtrasLaunchFlag          EQU $d800 ; I 1  `extras_launch_flag` (return-to-mode-4 flag)
+DEF wDoodleFromShutterbug      EQU $d800 ; C 1  1 = the STAMP / PAINT menu (mode $04) was entered from the GAME FACE item of the SHUTTERBU
 DEF wPrintCustomMargin         EQU $d801 ; C 1  `print_custom_margin`
 DEF wPrintMarginByte           EQU $d802 ; C 1  `print_margin_byte`
 DEF wPrintJobIndex             EQU $d803 ; C 1  `print_job_index`
@@ -382,7 +391,7 @@ DEF wSndNoteBlinkCounter       EQU $d892 ; C 1  note-cursor blink counter
 DEF wSndNoteBlinkPhase         EQU $d893 ; C 1  note-cursor blink phase
 DEF wPerformerFrameGroup       EQU $d894 ; C 1  performer animation: frame group
 DEF wPerformerBeatPhase        EQU $d895 ; C 1  performer animation: beat phase (0..5)
-DEF wPerformerBounceCounter    EQU $d896 ; I 1  performer animation: bounce counter
+DEF wPerformerBounceCounter    EQU $d896 ; C 1  performer bounce height: set from DjPerf_StepBeatPhase_Tbl4EF5 by pose (1 / 4 / 1), -1 per
 DEF wPerformerScriptId         EQU $d897 ; C 1  performer animation script id (0 = idle, 1..8)
 DEF wPerformerTilesTarget      EQU $d898 ; C 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
 DEF wPerformerTilesTarget2     EQU $d899 ; C 1  performer sprite tiles: D898 target, D899 target2, D89A shown, D89B shown2
@@ -395,20 +404,20 @@ DEF wAnimSlotTimer             EQU $d89f ; C 4  animator slots: frame timers
 DEF wAnimSlotFrame             EQU $d8a3 ; C 4  animator slots: frame index
 DEF wAnimSlotX                 EQU $d8a7 ; C 4  animator slots: sprite X
 DEF wAnimSlotY                 EQU $d8ab ; C 4  animator slots: sprite Y
-DEF wAnimSlotDone              EQU $d8af ; I 4  animator slots: finished flags (`$D8B2` = slot 3)
+DEF wAnimSlotDone              EQU $d8af ; C 4  animator slots 0-3: finished flags, cleared by DjPerf_AnimatorDraw every frame and set to 
 DEF wPerfControlCursor         EQU $d8b3 ; C 1  performance-screen control cursor 0..4
 DEF wPerfChannelState          EQU $d8b4 ; C 3  channel states SOUND I / SOUND II / NOISE
 DEF wPerfLevel                 EQU $d8b7 ; C 1  performance-screen level 0..8 (control 4) = sound effect SE 1..9
 DEF wPerformerSpeakingIcon     EQU $d8b8 ; C 1  performer "speaking" icon flag
 DEF wPerfNr51Mask              EQU $d8b9 ; C 1  NR51 mask (channel enables)
-DEF wPerfChannelBlink          EQU $d8ba ; I 3  per-channel indicator blink toggle
-DEF wPerfTempoAtRelease        EQU $d8bd ; I 1  tempo value at last button release
-DEF wPerfLevelAtRelease        EQU $d8be ; I 1  level value at last button release
+DEF wPerfChannelBlink          EQU $d8ba ; C 3  blink toggle of the SOUND I / SOUND II / NOISE indicators (DjPerf_ToggleBlink from DjPerf_
+DEF wPerfTempoAtRelease        EQU $d8bd ; C 1  tempo shown by the needle (DjPerf_DrawTempoNeedle): wTempo copied when Up / Down is releas
+DEF wPerfLevelAtRelease        EQU $d8be ; C 1  level shown by the slider (DjPerf_DrawLevelSlider): wPerfLevel copied when Up / Down is re
 DEF wPerfEqualiserPhase        EQU $d8bf ; C 1  equaliser animation phase (&3)
 DEF wPerfPaused                EQU $d8c0 ; C 1  paused flag (bit 0)
-DEF wPerfPausedIcon            EQU $d8c1 ; I 1  copy of D8C0 for the play/pause icon
-DEF wPerfPausedAtStart         EQU $d8c2 ; I 1  D8C0 saved at Start press
-DEF wPerfStartHold             EQU $d8c3 ; I 1  Start hold counter
+DEF wPerfPausedIcon            EQU $d8c1 ; C 1  play / pause icon state read by DjPerf_DrawPlayIcon: wPerfPaused copied when performer scr
+DEF wPerfPausedAtStart         EQU $d8c2 ; C 1  wPerfPaused saved when Start is pressed (DjPerf_Input 05:54B3); on release, playback resta
+DEF wPerfStartHold             EQU $d8c3 ; C 1  frames Start has been held on the performance screen (DjPerf_Input): cleared on press, +1 
 DEF wPerfStepIncrement         EQU $d8c4 ; C 1  playback step increment (+1; `$FF` = backwards while Left is held)
 DEF wPerfPitchShift            EQU $d8c5 ; C 1  pitch shift (semitones, -12..+11), decays to 0
 DEF wPerfPrintRow              EQU $d8c6 ; C 1  print row counter (0..$27)
@@ -436,7 +445,7 @@ DEF wUnusedD900                EQU $d900 ; U 1  (unused byte after the NOISE edi
 DEF wNoiseVolAtten             EQU $d901 ; C 1  NOISE volume attenuation
 DEF wTempoAcc                  EQU $d902 ; C 2  tempo accumulator (16-bit)
 DEF wTickFlag                  EQU $d904 ; C 1  tick flag (set for one frame)
-DEF wModRandPhase              EQU $d905 ; I 2  modulation random-phase memory: SOUND I / SOUND II
+DEF wModRandPhase              EQU $d905 ; C 2  random modulation of SOUND I / SOUND II: the last modulation phase byte; when its bit 6 di
 DEF wSound1ModBase             EQU $d907 ; C 1  SOUND I modulation base (per note, from table `1F:41BE`)
 DEF wUnusedD908                EQU $d908 ; U 1  (unused partner byte of `D907`)
 DEF wSound2ModBase             EQU $d909 ; C 1  SOUND II modulation base
@@ -449,7 +458,7 @@ DEF wSound1FreqBase            EQU $d913 ; C 2  SOUND I base frequency (from tab
 DEF wSound2FreqBase            EQU $d915 ; C 2  SOUND II base frequency
 DEF wNoiseNr43                 EQU $d917 ; C 1  NOISE NR43 value (table `1F:4000[note-1]`, bit 3 = width flag from `D9C1+k` bit 4)
 DEF wRestFlags                 EQU $d918 ; C 3  rest flags (1 = current step is a rest) SOUND I / II / NOISE
-DEF wRestCounters              EQU $d91b ; I 3  ticks since last note (rest counters) SOUND I / II / NOISE
+DEF wRestCounters              EQU $d91b ; C 3  ticks of rest of SOUND I / SOUND II / NOISE since the last note (DjSnd_StepSoundI / II / D
 DEF wUnusedD91E                EQU $d91e ; U 16  (unreferenced block before the sound-effect request)
 DEF wUiSfxRequest              EQU $d92e ; U 1  UI sound-effect request (1..8) written by the editor
 DEF wNr21Nr22Shadow            EQU $d92f ; C 2  NR21 / NR22 shadows (SOUND I)
@@ -480,7 +489,7 @@ DEF wNoiseStereoWidth          EQU $d9c1 ; C 16  **NOISE** stereo code (bits 1-0
 DEF wTempo                     EQU $d9d1 ; C 1  **tempo** (15..240)
 DEF wSavedTunePresent          EQU $d9d2 ; C 1  "saved tune present" flag
 DEF wStartPerformerSet         EQU $d9d3 ; C 1  start menu: performer/character set (0..2)
-DEF wGfxDoubleBufferBit        EQU $d9d4 ; I 1  alternating bit (graphics double-buffer)
+DEF wDjTitlePerformerToggle    EQU $d9d4 ; C 1  0 / 1 toggled by every DjTitle_LoadPerformerGfx; with performer set 2 and no Game Face it 
 DEF wStartTuneSource           EQU $d9d5 ; C 1  start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved)
 DEF wStartFactorySong          EQU $d9d6 ; C 1  start menu 2: factory song number (0..3)
 DEF wBallPlayerPos             EQU $d9d7 ; C 1  `ball_player_pos`
@@ -559,7 +568,7 @@ DEF wOwnerGenderBlood          EQU $da56 ; C 1  owner_gender_blood
 DEF wOwnerBirthYear            EQU $da57 ; C 2  owner_birth_year
 DEF wOwnerBirthMonth           EQU $da59 ; C 1  owner_birth_month
 DEF wOwnerBirthDay             EQU $da5a ; C 1  owner_birth_day
-DEF wTagOwnerId                EQU $da5b ; I 4  tag_owner_id
+DEF wTagOwnerId                EQU $da5b ; C 4  owner ID of the photo tag (slot bytes F00-F03), first 4 bytes of the $36-byte copy F00-F35
 DEF wTagOwnerName              EQU $da5f ; C 9  tag_owner_name
 DEF wTagGenderBlood            EQU $da68 ; C 1  tag_gender_blood
 DEF wTagBirth                  EQU $da69 ; C 4  tag_birth
@@ -721,7 +730,7 @@ DEF hScratchB                  EQU $ff8b ; C 1  scratch_b
 DEF hScratchC                  EQU $ff8c ; C 1  scratch_c
 DEF hScratchD                  EQU $ff8d ; C 1  scratch_d
 DEF hDiffOrValue               EQU $ff8e ; C 1  diff_or_value
-DEF hPrevOrSign                EQU $ff8f ; I 1  prev_or_sign
+DEF hPrevOrSign                EQU $ff8f ; C 1  HRAM scratch of bank $0A: in Cam_ThresholdConverge / _Up the last passing value, averaged 
 DEF hDiff2                     EQU $ff90 ; C 1  diff2
 DEF hDiagPassFlag              EQU $ff91 ; C 1  diag_pass_flag
 DEF hSarScratch                EQU $ff92 ; C 1  sar_scratch

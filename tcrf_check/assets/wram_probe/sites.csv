@@ -563,22 +563,22 @@ W,wArrowAnimTick,D51F,08,4576,Mode1C_DrawToggleArrow,S,5,5,1C:06,0B,00
 W,wArrowAnimTick,D51F,08,4581,Mode1C_DrawToggleArrow,ptr,60,5,1C:06,00 01 02 03 04 05 06 07 08 09 +1,01 02
 W,wUnusedD522,D522,00,01BC,Boot_ColdStart,S,228,228,00:00,00,00
 W,wUnusedD522,D522,00,0440,Mem_Zero,init,228,228,0F:0F,F0,00
-R,wNeighborOrPageTarget,D5D9,04,4228,PhotoPicker_MoveCursor,ptr,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,01 09 C8 D0 13 08 0B 03 00 06 +4,
-R,wNeighborOrPageTarget,D5D9,04,422C,PhotoPicker_MoveCursor,ptr,66,33,11:01 0A:01,C8 D0,
-R,wNeighborOrPageTarget,D5D9,04,423E,PhotoPicker_MoveCursor,S,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,01 09 C8 D0 13 08 0B 03 00 06 +4,
-R,wNeighborOrPageTarget,D5D9,04,4561,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
-R,wNeighborOrPageTarget,D5D9,04,4576,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
-R,wNeighborOrPageTarget,D5D9,04,45B9,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
-R,wNeighborOrPageTarget,D5D9,04,45CF,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
-R,wNeighborOrPageTarget,D5D9,04,45E4,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
-R,wNeighborOrPageTarget,D5D9,04,4626,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
-R,wNeighborOrPageTarget,D5D9,04,4937,Mode0F_State03_Selected,ptr,8,5,0F:03 0F:0D,12 02 00 10 89,
-R,wNeighborOrPageTarget,D5D9,04,493E,Mode0F_State03_Selected,S,8,5,0F:03 0F:0D,12 02 00 10 89,
-W,wNeighborOrPageTarget,D5D9,00,0440,Mem_Zero,init,228,228,00:00,0F,00
-W,wNeighborOrPageTarget,D5D9,04,41E8,PhotoPicker_MoveCursor,S,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,00 01 09 C8 D0 08 0B 03 13 06 +4,01 09 C8 D0 13 08 0B 03 00 06 +4
-W,wNeighborOrPageTarget,D5D9,04,4992,Mode0F_TargetLeft,S,1,1,0F:03,12,89
-W,wNeighborOrPageTarget,D5D9,04,49B1,Mode0F_TargetRight,S,2,2,0F:03 0F:0D,02 12,00 10
-W,wNeighborOrPageTarget,D5D9,04,49D0,Mode0F_TargetDown,S,5,5,0F:03,13 00,12 02
+R,wPickerCursorTarget,D5D9,04,4228,PhotoPicker_MoveCursor,ptr,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,01 09 C8 D0 13 08 0B 03 00 06 +4,
+R,wPickerCursorTarget,D5D9,04,422C,PhotoPicker_MoveCursor,ptr,66,33,11:01 0A:01,C8 D0,
+R,wPickerCursorTarget,D5D9,04,423E,PhotoPicker_MoveCursor,S,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,01 09 C8 D0 13 08 0B 03 00 06 +4,
+R,wPickerCursorTarget,D5D9,04,4561,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
+R,wPickerCursorTarget,D5D9,04,4576,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
+R,wPickerCursorTarget,D5D9,04,45B9,PhotoPicker_PageTransitionNext,S,66,33,11:01 0A:01,C8 D0,
+R,wPickerCursorTarget,D5D9,04,45CF,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
+R,wPickerCursorTarget,D5D9,04,45E4,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
+R,wPickerCursorTarget,D5D9,04,4626,PhotoPicker_PageTransitionPrev,S,1,1,0F:03,89,
+R,wPickerCursorTarget,D5D9,04,4937,Mode0F_State03_Selected,ptr,8,5,0F:03 0F:0D,12 02 00 10 89,
+R,wPickerCursorTarget,D5D9,04,493E,Mode0F_State03_Selected,S,8,5,0F:03 0F:0D,12 02 00 10 89,
+W,wPickerCursorTarget,D5D9,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wPickerCursorTarget,D5D9,04,41E8,PhotoPicker_MoveCursor,S,286,52,11:01 0A:01 0F:02 0F:0C 0C:01 1C:01,00 01 09 C8 D0 08 0B 03 13 06 +4,01 09 C8 D0 13 08 0B 03 00 06 +4
+W,wPickerCursorTarget,D5D9,04,4992,Mode0F_TargetLeft,S,1,1,0F:03,12,89
+W,wPickerCursorTarget,D5D9,04,49B1,Mode0F_TargetRight,S,2,2,0F:03 0F:0D,02 12,00 10
+W,wPickerCursorTarget,D5D9,04,49D0,Mode0F_TargetDown,S,5,5,0F:03,13 00,12 02
 R,wOpt1Row,D5E4,06,4670,Mode16_State03_TrickLensesMenu,S,36,1,16:03,00,
 R,wOpt1Row,D5E4,06,468A,Mode16_State03_TrickLensesMenu,S,36,1,16:03,00,
 R,wOpt1Row,D5E4,06,4ABF,Mode16_StepRow,dyn,36,1,16:03,00,
@@ -639,10 +639,10 @@ R,wSavedDc52,D5F5,07,516A,LinkPick_RequestRemotePage,S,1,1,0E:03,00,
 W,wSavedDc52,D5F5,00,0440,Mem_Zero,init,228,228,00:00,F0,00
 W,wSavedDc52,D5F5,00,2EB5,Main_Entry,init,227,227,19:00,00,00
 W,wSavedDc52,D5F5,07,418D,.code:1ca,S,2,2,0E:01,00,00 01
-R,wPhotoArgB3,D5FB,03,63FD,Mode0C_State02_Setup,S,1,1,0C:02,00,
-W,wPhotoArgB3,D5FB,00,0440,Mem_Zero,init,228,228,00:00,0F,00
-W,wPhotoArgB3,D5FB,00,2EB5,Main_Entry,init,227,227,19:00,00,00
-W,wPhotoArgB3,D5FB,03,63D4,Mode0C_State02_Setup,S,1,1,0C:02,00,00
+R,wHotSpotShownPhoto,D5FB,03,63FD,Mode0C_State02_Setup,S,1,1,0C:02,00,
+W,wHotSpotShownPhoto,D5FB,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wHotSpotShownPhoto,D5FB,00,2EB5,Main_Entry,init,227,227,19:00,00,00
+W,wHotSpotShownPhoto,D5FB,03,63D4,Mode0C_State02_Setup,S,1,1,0C:02,00,00
 W,wSaveDialogScratch,D66F,00,0440,Mem_Zero,init,228,228,00:00,F0,00
 W,wSaveDialogScratch,D66F,07,69D8,SaveDialog_Substate0_Init,S,4,4,10:09 11:07 1A:0E,00,00
 W,wSaveDialogScratch,D66F,07,6A93,SaveDialog_Substate3_FullInit,S,1,1,10:09,00,00
@@ -676,16 +676,16 @@ W,wMenuPageShadow,D7D8,00,0440,Mem_Zero,init,228,228,00:00,0F,00
 W,wMenuPageShadow,D7D8,04,6FCA,Mode01_State00_Intro,S,180,89,01:00,00 02,00
 W,wMenuPageShadow,D7D8,04,709A,Mode01_State03_IntroPageB,S,25,25,01:03,00 02,01
 W,wMenuPageShadow,D7D8,04,7141,Mode01_State06_IntroPageC,S,57,28,01:06,00 02 01,02
-R,wExtrasLaunchFlag,D800,03,7B3F,Mode04_State02_Dispatch,S,30,30,04:02,00,
-R,wExtrasLaunchFlag,D800,03,7B78,Mode04_State02_Dispatch,S,37,36,11:02 10:02,00,
-R,wExtrasLaunchFlag,D800,04,57CD,Mode11_State02_Setup,S,67,35,11:02,00,
-R,wExtrasLaunchFlag,D800,04,5CE7,Mode11_State05_Leave,S,64,32,11:05,00,
-R,wExtrasLaunchFlag,D800,04,6111,Mode10_State02_Setup,S,7,7,10:02,00,
-R,wExtrasLaunchFlag,D800,04,6378,Mode10_State07_Leave,S,1,1,10:07,00,
-R,wExtrasLaunchFlag,D800,07,6A43,SaveDialog_StoreEditedPhoto,S,1,1,10:09,00,
-W,wExtrasLaunchFlag,D800,00,0440,Mem_Zero,init,228,228,00:00,F0,00
-W,wExtrasLaunchFlag,D800,04,6B53,Mode09_State03_PageLeft,S,7,7,09:03,00,00
-W,wExtrasLaunchFlag,D800,07,77DA,Mode00_State08_Launch,S,301,205,01:00 02:00 04:00 03:00 05:00 07:00 +1,00,00
+R,wDoodleFromShutterbug,D800,03,7B3F,Mode04_State02_Dispatch,S,30,30,04:02,00,
+R,wDoodleFromShutterbug,D800,03,7B78,Mode04_State02_Dispatch,S,37,36,11:02 10:02,00,
+R,wDoodleFromShutterbug,D800,04,57CD,Mode11_State02_Setup,S,67,35,11:02,00,
+R,wDoodleFromShutterbug,D800,04,5CE7,Mode11_State05_Leave,S,64,32,11:05,00,
+R,wDoodleFromShutterbug,D800,04,6111,Mode10_State02_Setup,S,7,7,10:02,00,
+R,wDoodleFromShutterbug,D800,04,6378,Mode10_State07_Leave,S,1,1,10:07,00,
+R,wDoodleFromShutterbug,D800,07,6A43,SaveDialog_StoreEditedPhoto,S,1,1,10:09,00,
+W,wDoodleFromShutterbug,D800,00,0440,Mem_Zero,init,228,228,00:00,F0,00
+W,wDoodleFromShutterbug,D800,04,6B53,Mode09_State03_PageLeft,S,7,7,09:03,00,00
+W,wDoodleFromShutterbug,D800,07,77DA,Mode00_State08_Launch,S,301,205,01:00 02:00 04:00 03:00 05:00 07:00 +1,00,00
 R,wSweepPos16,D816,03,787D,LinkMenu_DrawSpark,ptr,3085,12,06:01 1B:00 0E:00,,
 R,wSweepPos16,D816,03,7881,LinkMenu_DrawSpark,ptr,3085,12,06:01 1B:00 0E:00,,
 R,wSweepPos16,D816,03,7888,LinkMenu_DrawSpark,ptr,1095,12,06:01 1B:00,,
@@ -850,9 +850,9 @@ W,wUiSfxRequest,D92E,05,7421,DjNs_Field07_StereoEdit,S,6,2,1F:0B,04,05
 W,wUnusedD931,D931,00,0440,Mem_Zero,init,228,228,00:00,0F,00
 W,wUnusedD936,D936,00,0440,Mem_Zero,init,228,228,00:00,0F,00
 W,wUnusedD93A,D93A,00,0440,Mem_Zero,init,228,228,00:00,F0,00
-R,wGfxDoubleBufferBit,D9D4,05,61C6,DjTitle_LoadPerformerGfx,S,7,7,1F:04,00,
-W,wGfxDoubleBufferBit,D9D4,00,0440,Mem_Zero,init,228,228,00:00,0F,00
-W,wGfxDoubleBufferBit,D9D4,05,61CC,DjTitle_LoadPerformerGfx,S,7,7,1F:04,00,01
+R,wDjTitlePerformerToggle,D9D4,05,61C6,DjTitle_LoadPerformerGfx,S,7,7,1F:04,00,
+W,wDjTitlePerformerToggle,D9D4,00,0440,Mem_Zero,init,228,228,00:00,0F,00
+W,wDjTitlePerformerToggle,D9D4,05,61CC,DjTitle_LoadPerformerGfx,S,7,7,1F:04,00,01
 R,wLinkAnimTickA,D9FA,07,42D4,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
 R,wLinkAnimTickA,D9FA,07,42EA,Link_DrawAnimators,S,578,4,0E:01 0E:00,,
 W,wLinkAnimTickA,D9FA,00,0440,Mem_Zero,init,456,228,00:00,,

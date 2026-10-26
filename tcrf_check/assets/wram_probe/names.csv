@@ -1,19 +1,19 @@
 name,name_before,addr,size,tag_before,tag,verdict,R_hits,W_hits,init_hits,replays,modes,values_read,static_sites,static_never_fired,dyn_sites
-wSlotTagComment,wSlotTagComment,CF15,30,I,I,kept I (no BGB evidence),7890,23040,9840,143,07 09 0A 0C 0D 0E 0F 10 11 12 14 1A 1C 1D,,0,,R 00:17E8 R 00:2CAA R 02:4323 R 02:4326 R 02:46CD R 02:479A R 07:63E7 R 07:63F4 R 07:6400 R 07:6410 W 00:0469 W 00:2C9F W 00:3232 W 00:3235 W 00:3238 W 00:323B W 00:32DC W 00:32DE W 00:32E0 W 00:32E2 W 02:47BE W 02:4CAC W 07:6566 W 07:6574
+wSlotTagComment,wSlotTagComment,CF15,30,I,C,C by code reading 2026-10-26 (README 2.13),7890,23040,9840,143,07 09 0A 0C 0D 0E 0F 10 11 12 14 1A 1C 1D,,0,,R 00:17E8 R 00:2CAA R 02:4323 R 02:4326 R 02:46CD R 02:479A R 07:63E7 R 07:63F4 R 07:6400 R 07:6410 W 00:0469 W 00:2C9F W 00:3232 W 00:3235 W 00:3238 W 00:323B W 00:32DC W 00:32DE W 00:32E0 W 00:32E2 W 02:47BE W 02:4CAC W 07:6566 W 07:6574
 wSlotTail,wSlotTail,CFB8,71,U,U,kept U,10241,8859,23288,31,07 0E 1D,,0,,R 00:17E8 R 00:2CAA R 07:63E7 R 07:63F4 R 07:6400 R 07:6410 W 00:2C9F W 00:3232 W 00:3235 W 00:3238 W 00:323B W 00:32DC W 00:32DE W 00:32E0 W 00:32E2 W 07:6566 W 07:6574
 wRunPlayerStepSize,wRunPlayerStepSize,D008,1,I,C,promoted to C,370,2161,228,3,21,00 03 02 01,5,W09:6311,W 09:66DB
 wRunChickAnimCounter,wRunChickAnimCounter,D015,1,I,C,promoted to C,13186,13210,228,3,21,01 02 03 04 05 06 07 08 09 0A +119,3,,R 09:70C9 W 09:66DB W 09:70DD
 wRunMoleAnimCounter,wRunMoleAnimCounter,D01E,1,I,C,promoted to C,13186,13210,228,3,21,01 02 03 04 05 06 07 08 09 0A +119,3,,R 09:70C9 W 09:66DB W 09:70DD
-wRunRaceExtra,wRunRaceExtra,D048,75,I,I,kept I (no BGB evidence),238060,80609,17100,3,21,,57,W09:62FC W09:6557,R 09:7030 R 09:7035 R 09:70B6 R 09:70C9 R 09:70D4 W 09:70B9 W 09:70D8 W 09:70DD
+wRunRaceExtra,wRunRaceExtra,D048,75,I,C,C by code reading 2026-10-26 (README 2.13),238060,80609,17100,3,21,,57,W09:62FC W09:6557,R 09:7030 R 09:7035 R 09:70B6 R 09:70C9 R 09:70D4 W 09:70B9 W 09:70D8 W 09:70DD
 wRunRaceCounter,wRunRaceCounter,D04F,1,I,C,promoted to C,7251,6,228,3,21,01 04 02 03 00,3,,
 wRunPlayerLeads,wRunPlayerLeads,D050,1,I,C,promoted to C,7245,3209,228,3,21,00 01,3,,
 wUnusedD4A0,wUnusedD4A0,D4A0,96,U,U,kept U,0,144,21888,5,0E 1A,,0,,W 00:24D6 W 00:24DA W 00:24DD W 00:24E0
-wSpriteAnimFrame,wSpriteAnimFrame,D500,15,I,I,kept I (no BGB evidence),483727,96408,3930,227,01 05 06 07 09 0A 0B 0C 0D 0F 12 13 19 1A 1C,,125,R03:648C R07:563A R07:620F R07:622B R07:6258 R07:62D5 R07:6316 R07:6323 R07:66E9 W03:41C6 W03:4AB3 W03:6493 W07:6200 W07:623C W07:62FD W07:633A W07:6646 W07:6689,
+wSpriteAnimFrame,wSpriteAnimFrame,D500,15,I,C,C by code reading 2026-10-26 (README 2.13),483727,96408,3930,227,01 05 06 07 09 0A 0B 0C 0D 0F 12 13 19 1A 1C,,125,R03:648C R07:563A R07:620F R07:622B R07:6258 R07:62D5 R07:6316 R07:6323 R07:66E9 W03:41C6 W03:4AB3 W03:6493 W07:6200 W07:623C W07:62FD W07:633A W07:6646 W07:6689,
 wArrowAnimFrame,wArrowAnimFrame,D50F,1,I,C,C by hand 2026-10-25 (README 2.13): all 31 routines that touch it draw an arrow or option cursor; Mode1C_DrawToggleArrow ran 1357 times in BGB (1C:06),34017,319,262,76,09 0A 14 1C,00 01 02,48,R04:77AF R06:6743 R06:67A7 R06:67CC R06:6836 R06:6904 R06:6A44 R07:6E33 R07:6EA8 R07:6EAE R07:6ECC R07:6F45 R07:6FBF R07:6FC5 R07:6FE3 W07:6D9D,
-wSpriteAnimTick,wSpriteAnimTick,D510,15,I,I,kept I (no BGB evidence),449935,358219,3930,227,01 05 06 07 09 0A 0B 0C 0D 0F 12 13 19 1A 1C,,103,R03:4E0E R03:6256 R03:6278 R07:632D W03:41CA W03:4551 W03:4AB6 W03:6147 W03:628C W03:64CE W03:714A W03:718F W07:61F0 W07:6300 W07:6361 W07:664A W07:668D,
+wSpriteAnimTick,wSpriteAnimTick,D510,15,I,C,C by code reading 2026-10-26 (README 2.13),449935,358219,3930,227,01 05 06 07 09 0A 0B 0C 0D 0F 12 13 19 1A 1C,,103,R03:4E0E R03:6256 R03:6278 R07:632D W03:41CA W03:4551 W03:4AB6 W03:6147 W03:628C W03:64CE W03:714A W03:718F W07:61F0 W07:6300 W07:6361 W07:664A W07:668D,
 wArrowAnimTick,wArrowAnimTick,D51F,1,I,C,C by hand 2026-10-25 (README 2.13): all 31 routines that touch it draw an arrow or option cursor; Mode1C_DrawToggleArrow ran 1357 times in BGB (1C:06),12150,1045,262,76,09 0A 14 1C,00 01 02 03 04 05 06 07 08 09 +2,27,R06:67BE R07:6EBE R07:6FD5 W06:67C9 W06:6895 W06:699B W06:6ADE W07:6D9A W07:6EC9 W07:6FE0,
 wUnusedD522,wUnusedD522,D522,1,U,U,kept U,0,228,228,228,00,,2,W00:025C,
-wNeighborOrPageTarget,wNeighborOrPageTarget,D5D9,1,I,I,kept I (no BGB evidence),855,294,228,53,0A 0C 0F 11 1C,C8 D0 01 09 13 08 0B 03 00 06 +8,23,R04:41F6 R07:4E1A R07:506F R07:5084 R07:508A R07:50CD R07:50E3 R07:50F8 R07:513A R07:5140 W07:4DDB,
+wPickerCursorTarget,wPickerCursorTarget,D5D9,1,I,C,C by code reading 2026-10-26 (README 2.13),855,294,228,53,0A 0C 0F 11 1C,C8 D0 01 09 13 08 0B 03 00 06 +8,23,R04:41F6 R07:4E1A R07:506F R07:5084 R07:508A R07:50CD R07:50E3 R07:50F8 R07:513A R07:5140 W07:4DDB,
 wOpt1Row,wOpt1Row,D5E4,1,U,U,kept U,108,0,455,1,16,00,3,R06:46A9,R 06:4ABF
 wOpt2Row,wOpt2Row,D5E6,1,U,U,kept U,1256,0,455,2,16,00,3,,R 06:4ABF
 wShowMenuCursor,wRegCursorA,D5EF,1,I,C,promoted to C,2760,4,455,4,0B 0C 0D 13,00 01 02,6,,
@@ -21,17 +21,17 @@ wDoodleMenuCursor,wRegCursorB,D5F0,1,I,C,promoted to C,52324,5,455,37,04,00 01,5
 wEditMenuCursor,wRegCursorC,D5F1,1,I,C,promoted to C,14046,24,455,32,05 0F 12,01 00,5,,
 wLinkMenuCursor,wRegCursorD,D5F2,1,?,C,promoted to C,6008,48,455,12,06 0E 1B,00 01,9,,
 wSavedDc52,wSavedDc52,D5F5,1,I,C,promoted to C,347,2,455,4,0E,00 01,13,,
-wPhotoArgB3,wPhotoArgB3,D5FB,1,I,I,kept I (no BGB evidence),1,1,455,1,0C,00,8,R03:6460 R03:646D R03:6731 R03:676C R03:67AB W03:6534,
+wHotSpotShownPhoto,wHotSpotShownPhoto,D5FB,1,I,C,C by code reading 2026-10-26 (README 2.13),1,1,455,1,0C,00,8,R03:6460 R03:646D R03:6731 R03:676C R03:67AB W03:6534,
 wSaveDialogScratch,wSaveDialogScratch,D66F,1,U,U,kept U,0,5,228,4,10 11 1A,,2,,
 wAnimListGuard,wAnimListGuard,D680,1,U,C,promoted to C,25,26,228,26,0E 12 13,00,2,,R 03:56EB
-wAnimTimingGuardLo,wAnimTimingGuardLo,D6B1,1,I,I,kept I (no BGB evidence),0,27,228,26,0E 12 13,,2,,
-wAnimTimingGuardHi,wAnimTimingGuardHi,D6E1,1,I,I,kept I (no BGB evidence),0,27,228,26,0E 12 13,,2,,W 03:5D85
+wAnimTimingGuardLo,wAnimTimingGuardLo,D6B1,1,I,C,C by code reading 2026-10-26 (README 2.13),0,27,228,26,0E 12 13,,2,,
+wAnimTimingGuardHi,wAnimTimingGuardHi,D6E1,1,I,C,C by code reading 2026-10-26 (README 2.13),0,27,228,26,0E 12 13,,2,,W 03:5D85
 wCtx0Pad,wCtx0Pad,D6EF,6,U,U,kept U,0,0,1368,0,,,0,,
 wPlayerMusic,wPlayerMusic,D7BE,1,I,C,promoted to C,10,230,228,227,13 19,00 01 02 03,7,R03:61E6,
 wSpriteXCounter,wSpriteXCounter,D7BF,1,I,C,promoted to C,25549,16915,228,32,05 0F 12,27 28 29 37 38 39 47 48 49 57 +246,0,,
 wShootInitFlag,wShootInitFlag,D7D7,1,U,U,kept U,0,99,228,72,14,,1,,
 wMenuPageShadow,wMenuPageShadow,D7D8,1,U,U,kept U,0,262,228,90,01,,3,,
-wExtrasLaunchFlag,wExtrasLaunchFlag,D800,1,I,I,kept I (no BGB evidence),207,308,228,205,01 02 03 04 05 06 07 09 10 11,00,11,W04:77F8 W06:48EE,
+wDoodleFromShutterbug,wDoodleFromShutterbug,D800,1,I,C,C by code reading 2026-10-26 (README 2.13),207,308,228,205,01 02 03 04 05 06 07 09 10 11,00,11,W04:77F8 W06:48EE,
 wSweepPos16,wSweepPos16,D816,2,I,C,promoted to C,7265,6170,456,12,06 0E 1B,,0,,
 wShootRapidFlag,wShootRapidFlag,D818,1,U,U,kept U,12924,33,228,23,07,00,2,,
 wShootWavePass,wShootWavePass,D85E,1,I,C,promoted to C,200,149,228,23,07,00 01 02 03,5,W07:5F4D W07:611B,
@@ -40,7 +40,7 @@ wSndNoteBlinkCounter,wSndNoteBlinkCounter,D892,1,I,C,promoted to C,16178,16178,2
 wSndNoteBlinkPhase,wSndNoteBlinkPhase,D893,1,I,C,promoted to C,18192,2014,228,7,1F,00 04 08 0C 10 14 18 1C 20 24 +246,1,,
 wPerformerFrameGroup,wPerformerFrameGroup,D894,1,I,C,promoted to C,2114,2128,228,7,1F,02 00 01,4,W05:4EB4,
 wPerformerBeatPhase,wPerformerBeatPhase,D895,1,I,C,promoted to C,2114,2030,228,7,1F,04 00 05 02 01,3,,
-wPerformerBounceCounter,wPerformerBounceCounter,D896,1,I,I,kept I (no BGB evidence),4228,4242,228,7,1F,00 01 03 04,5,,
+wPerformerBounceCounter,wPerformerBounceCounter,D896,1,I,C,C by code reading 2026-10-26 (README 2.13),4228,4242,228,7,1F,00 01 03 04,5,,
 wPerformerTilesTarget,wPerformerTilesTarget,D898,1,I,C,promoted to C,2450,2093,228,7,1F,E1 EB E0 F3 DF E2 E9 EF F1,5,,
 wPerformerTilesTarget2,wPerformerTilesTarget2,D899,1,I,C,promoted to C,336,1015,228,7,1F,EA EC F0 F2 F4,3,,
 wPerformerTilesShown,wPerformerTilesShown,D89A,1,I,C,promoted to C,8456,350,228,7,1F,E1 EB E0 F3 E2 DF E9 F1 EF DD,5,,
@@ -52,34 +52,34 @@ wAnimSlotTimer,wAnimSlotTimer,D89F,4,I,C,promoted to C,7420,7490,912,7,1F,,10,W0
 wAnimSlotFrame,wAnimSlotFrame,D8A3,4,I,C,promoted to C,18718,1260,912,7,1F,,15,W05:54D3 W05:5518 W05:552D W05:5596 W05:55BE W05:55E6 W05:560E W05:5649,R 05:52FD W 05:5307
 wAnimSlotX,wAnimSlotX,D8A7,4,I,C,promoted to C,7420,7420,912,7,1F,,0,,W 05:5312
 wAnimSlotY,wAnimSlotY,D8AB,4,I,C,promoted to C,7420,7420,912,7,1F,,0,,W 05:531B
-wAnimSlotDone,wAnimSlotDone,D8AF,4,I,I,kept I (no BGB evidence),1148,7707,912,7,1F,,18,R05:4FEC R05:500B R05:502A R05:5049 R05:5068 R05:50DD R05:5102 W05:4FF6 W05:5015 W05:5034 W05:5053 W05:5072 W05:50E7 W05:510C,
+wAnimSlotDone,wAnimSlotDone,D8AF,4,I,C,C by code reading 2026-10-26 (README 2.13),1148,7707,912,7,1F,,18,R05:4FEC R05:500B R05:502A R05:5049 R05:5068 R05:50DD R05:5102 W05:4FF6 W05:5015 W05:5034 W05:5053 W05:5072 W05:50E7 W05:510C,
 wPerformerSpeakingIcon,wPerformerSpeakingIcon,D8B8,1,I,C,promoted to C,2114,3381,228,7,1F,01 00,4,,
-wPerfChannelBlink,wPerfChannelBlink,D8BA,3,I,I,kept I (no BGB evidence),0,0,684,0,,,3,W05:57A4 W05:57D0 W05:57FC,
-wPerfTempoAtRelease,wPerfTempoAtRelease,D8BD,1,I,I,kept I (no BGB evidence),4228,14,228,7,1F,78,3,,
-wPerfLevelAtRelease,wPerfLevelAtRelease,D8BE,1,I,I,kept I (no BGB evidence),2114,14,228,7,1F,00,2,,
+wPerfChannelBlink,wPerfChannelBlink,D8BA,3,I,C,C by code reading 2026-10-26 (README 2.13),0,0,684,0,,,3,W05:57A4 W05:57D0 W05:57FC,
+wPerfTempoAtRelease,wPerfTempoAtRelease,D8BD,1,I,C,C by code reading 2026-10-26 (README 2.13),4228,14,228,7,1F,78,3,,
+wPerfLevelAtRelease,wPerfLevelAtRelease,D8BE,1,I,C,C by code reading 2026-10-26 (README 2.13),2114,14,228,7,1F,00,2,,
 wPerfEqualiserPhase,wPerfEqualiserPhase,D8BF,1,I,C,promoted to C,2114,2114,228,7,1F,00 02 01 03,0,,
-wPerfPausedIcon,wPerfPausedIcon,D8C1,1,I,I,kept I (no BGB evidence),2114,14,228,7,1F,00,3,W05:50ED,
-wPerfPausedAtStart,wPerfPausedAtStart,D8C2,1,I,I,kept I (no BGB evidence),0,14,228,7,1F,,3,R05:54ED W05:54B3,
-wPerfStartHold,wPerfStartHold,D8C3,1,I,I,kept I (no BGB evidence),0,0,228,0,,,2,R05:54F3 W05:54AD,
+wPerfPausedIcon,wPerfPausedIcon,D8C1,1,I,C,C by code reading 2026-10-26 (README 2.13),2114,14,228,7,1F,00,3,W05:50ED,
+wPerfPausedAtStart,wPerfPausedAtStart,D8C2,1,I,C,C by code reading 2026-10-26 (README 2.13),0,14,228,7,1F,,3,R05:54ED W05:54B3,
+wPerfStartHold,wPerfStartHold,D8C3,1,I,C,C by code reading 2026-10-26 (README 2.13),0,0,228,0,,,2,R05:54F3 W05:54AD,
 wUnusedD8CB,wUnusedD8CB,D8CB,1,U,U,kept U,0,0,228,0,,,0,,
 wUnusedD900,wUnusedD900,D900,1,U,U,kept U,0,0,228,0,,,0,,
-wModRandPhase,wModRandPhase,D905,2,I,I,kept I (no BGB evidence),16000,14764,456,7,1F,,4,R00:14A0 W00:14D3,
+wModRandPhase,wModRandPhase,D905,2,I,C,C by code reading 2026-10-26 (README 2.13),16000,14764,456,7,1F,,4,R00:14A0 W00:14D3,
 wUnusedD908,wUnusedD908,D908,1,U,U,kept U,0,0,228,0,,,0,,
 wUnusedD90A,wUnusedD90A,D90A,1,U,U,kept U,0,0,228,0,,,0,,
-wRestCounters,wRestCounters,D91B,3,I,I,kept I (no BGB evidence),771,7374,684,7,1F,,9,R00:122A W00:123E,
+wRestCounters,wRestCounters,D91B,3,I,C,C by code reading 2026-10-26 (README 2.13),771,7374,684,7,1F,,9,R00:122A W00:123E,
 wUnusedD91E,wUnusedD91E,D91E,16,U,U,kept U,0,0,3648,0,,,0,,
 wUiSfxRequest,wUiSfxRequest,D92E,1,U,U,kept U,0,26,228,5,1F,,82,R00:10AC W00:10CC W05:48FD W05:490E W05:4938 W05:4949 W05:4973 W05:4984 W05:49A7 W05:49B5 W05:49C7 W05:49D5 W05:49E7 W05:49F5 W05:54A8 W05:62FC W05:6313 W05:63A1 W05:63B6 W05:63C6 W05:642D W05:643E W05:644E W05:64A4 W05:64B5 W05:64C5 W05:651B W05:652C W05:6540 W05:6596 W05:65AB W05:65BB W05:660E W05:661F W05:662F W05:6682 W05:6695 W05:6720 W05:6735 W05:6791 W05:67B6 W05:683E W05:69AC W05:69BC W05:69D3 W05:6B23 W05:6B38 W05:6B4C W05:6BA1 W05:6BB6 W05:6BC6 W05:6C1C W05:6C2D W05:6C3D W05:6C93 W05:6CA6 W05:6D34 W05:6D49 W05:6DA5 W05:6DBA W05:6DCA W05:6E52 W05:6EDB W05:706D W05:707D W05:70E4 W05:70F5 W05:7105 W05:715B W05:716C W05:717C W05:71D5 W05:71E5 W05:723E W05:7253 W05:72B2 W05:72D7 W05:736A,
 wUnusedD931,wUnusedD931,D931,1,I,U,moved to U (no read seen),0,0,228,0,,,0,,
 wUnusedD936,wUnusedD936,D936,1,I,U,moved to U (no read seen),0,0,228,0,,,0,,
 wUnusedD93A,wUnusedD93A,D93A,1,I,U,moved to U (no read seen),0,0,228,0,,,0,,
-wGfxDoubleBufferBit,wGfxDoubleBufferBit,D9D4,1,I,I,kept I (no BGB evidence),7,7,228,7,1F,00,3,R05:626A,
+wDjTitlePerformerToggle,wDjTitlePerformerToggle,D9D4,1,I,C,C by code reading 2026-10-26 (README 2.13),7,7,228,7,1F,00,3,R05:626A,
 wLinkAnimTickA,wLinkAnimTickA,D9FA,2,I,C,promoted to C,1156,1166,456,4,0E,,8,,
 wLinkAnimIdxA,wLinkAnimIdxA,D9FC,2,I,C,promoted to C,1156,1166,456,4,0E,,8,,
 wLinkAnimTickB,wLinkAnimTickB,D9FE,2,I,C,promoted to C,1156,1166,456,4,0E,,12,W07:429B W07:429E W07:42BB W07:42BE,
 wUnusedLinkBufXor,wGapDa0d,DA0D,1,?,U,moved to U (no read seen),0,0,456,0,,,4,R07:4BD4 R07:4BDA W07:4C00 W07:4C04,
 wUnusedLinkBufSum,wGapDa0d,DA0E,1,?,U,moved to U (no read seen),0,0,456,0,,,4,R07:4BD4 R07:4BDA W07:4C00 W07:4C04,
 wUnusedDA14,wGapDa14,DA14,2,?,U,moved to U (no read seen),0,0,456,0,,,0,,
-wTagOwnerId,wTagOwnerId,DA5B,4,I,I,kept I (no BGB evidence),0,12,912,3,09 0A 1C,,0,,
+wTagOwnerId,wTagOwnerId,DA5B,4,I,C,C by code reading 2026-10-26 (README 2.13),0,12,912,3,09 0A 1C,,0,,
 wTagCommentTail,wTagCommentTail,DA8B,3,I,C,promoted to C,9,9,684,3,09 0A 1C,,0,,R 09:4627 W 02:4E84
 wStatsSpare,wStatsSpare,DAA8,3,U,U,kept U,276,828,684,152,00 07 08 0E 11 14 18 1C 1D 1E 1F 20 21,,0,,R 02:4BCD W 02:504C
 wPrinterPrevStatus,wPrinterPrevStatus,DBD0,2,U,U,kept U,0,1153,456,18,1D 1F,,2,,
@@ -109,7 +109,7 @@ wSndUnused5f,wSndUnused5f,DD5F,1,U,U,kept U,0,0,456,0,,,0,,
 wSndUnused6a,wSndUnused6a,DD6A,6,U,U,kept U,0,0,2736,0,,,0,,
 wSndUnused80,wSndUnused80,DD80,128,U,U,kept U,0,0,58368,0,,,0,,
 wStackTop,wStackTop,DFFF,1,U,U,kept U,0,0,0,0,,,0,,
-hPrevOrSign,hPrevOrSign,FF8F,1,I,I,kept I (no BGB evidence),0,0,228,0,,,7,R0A:4ED5 R0A:4F4A R0A:6B19 W0A:45A0 W0A:45AB W0A:4EA0 W0A:4F15,
+hPrevOrSign,hPrevOrSign,FF8F,1,I,C,C by code reading 2026-10-26 (README 2.13),0,0,228,0,,,7,R0A:4ED5 R0A:4F4A R0A:6B19 W0A:45A0 W0A:45AB W0A:4EA0 W0A:4F15,
 hSarScratch,hSarScratch,FF92,1,I,C,promoted to C,1589,8626,228,227,00,00 FF,3,,
 hStatSeenFlag,hStatSeenFlag,FFCA,1,U,U,kept U,0,792993,228,227,00 01 02 06 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17 19 1A 1B 1C 1D 1F 20 21,,1,,
 hCopyReqSrcDstCnt,hCopyReqSrcDstCnt,FFCB,5,U,U,kept U,0,0,1140,0,,,13,R00:07D0 R00:07D8 R00:07F0 R00:07F3 R00:07F6 R00:07F9 R00:07FC W00:079A W00:079D W00:07A0 W00:07A3 W00:07A7 W00:07B4,
