@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""make_doubts.py [disasm/sym_names_jp.csv] [disasm]  ->  disasm/sym_unconclusive_jp.csv and .md: every `?` name plus the `I` names of the groups that deserve a second look
+"""make_doubts.py [roms/jp_rev_a/disasm/sym_names_jp.csv] [disasm]  ->  roms/jp_rev_a/disasm/sym_unconclusive_jp.csv and .md: every `?` name plus the `I` names of the groups that deserve a second look
 
 Per-row overrides: doubts_overrides_jp.csv beside the names csv (bank, addr, status, why, settle).  status `final` = proven unused, the tag stays I because
 nothing more can be learnt: the row leaves the open list and goes to sym_settled_unused_jp.csv and the last section of the md (not counted as doubtful).
 status `open` = the row stays, with its own why / settle text instead of the group's.  Every override must match a row the groups produce."""
 import csv, re, collections, os
 import sys
-NAMES=sys.argv[1] if len(sys.argv)>1 else 'disasm/sym_names_jp.csv'; OUTDIR=sys.argv[2] if len(sys.argv)>2 else 'disasm'
+NAMES=sys.argv[1] if len(sys.argv)>1 else 'roms/jp_rev_a/disasm/sym_names_jp.csv'; OUTDIR=sys.argv[2] if len(sys.argv)>2 else 'roms/jp_rev_a/disasm'
 rows=list(csv.DictReader(open(NAMES,encoding='utf-8')))
-SYM=sys.argv[3] if len(sys.argv)>3 else 'pocketcamera_jp.sym'
+SYM=sys.argv[3] if len(sys.argv)>3 else 'roms/jp_rev_a/pocketcamera_jp.sym'
 blk={}                        # (bank,addr) -> length of the block that starts there
 try:
     for l in open(SYM):

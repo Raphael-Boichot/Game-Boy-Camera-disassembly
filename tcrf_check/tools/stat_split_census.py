@@ -47,7 +47,7 @@ def capture(rom, corpus, out, worker=0, workers=1):
 def report(rom_path, out, csv_path):
     import bgb_run, gb_screen, menu_screen_gif as M
     mode_names = {}
-    for r in csv.DictReader(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'disasm', 'const_names_jp.csv'))):
+    for r in csv.DictReader(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'roms', 'jp_rev_a', 'disasm', 'const_names_jp.csv'))):
         if r['group'] == 'mode' and r['value'] != 'ff': mode_names[int(r['value'], 16)] = r['name']
     rows = {}
     for f in sorted(os.listdir(out)):                                       # one row per end screen; the registers come from the saved state

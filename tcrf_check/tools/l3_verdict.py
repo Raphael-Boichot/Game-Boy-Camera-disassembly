@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verdict of the L3 BGB pass (README 1.3): which inferred names were seen at work, in which screens, and whether that fits the name.
 
-usage: l3_verdict.py HITS(.csv.gz | .partial.jsonl) TARGETS.csv OUT.csv [--names disasm/sym_names_jp.csv]
+usage: l3_verdict.py HITS(.csv.gz | .partial.jsonl) TARGETS.csv OUT.csv [--names roms/jp_rev_a/disasm/sym_names_jp.csv]
 For every target: the replays and hits, the modes ($D5CE) and {mode:state} pairs it ran or was read in, the program counters of the readers (read targets), and a verdict:
   seen       executed / read in organic play, in a mode its name allows
   mode?      seen, but the name places it in a mode (`ModeNN_` prefix of the name or of a consumer in an asset name / note) that none of its hits has
@@ -14,7 +14,7 @@ a = sys.argv[1:]
 def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
-names = opt('--names', os.path.join(REPO, 'disasm', 'sym_names_jp.csv')); hitsf, tf, out = a[:3]
+names = opt('--names', os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv')); hitsf, tf, out = a[:3]
 T = list(csv.DictReader(open(tf, encoding='utf-8')))
 NOTE = {r['name']: r['note'] for r in csv.DictReader(open(names, encoding='utf-8'))}
 agg = collections.defaultdict(lambda: dict(rep=set(), hits=0, modes=collections.Counter(), states=collections.Counter(), pcs=collections.Counter()))

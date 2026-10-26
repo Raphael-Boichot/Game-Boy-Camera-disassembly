@@ -2,7 +2,7 @@
 """Post-process an mgbdis disassembly of Pocket Camera (Japan) Rev A so that the numbers mgbdis turns into labels read as numbers again.
 
   mgbdis --print-hex --output-dir disasm_out pocketcamera_jp.gb          # pocketcamera_jp.sym must sit beside the ROM
-  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace wram/trace_jp_v3.json] [--tables] [--ram] [--const] [--strip-hex]
+  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace roms/jp_rev_a/wram/trace_jp_v3.json] [--tables] [--ram] [--const] [--strip-hex]
   cd disasm_out && make && md5sum game.gb                                # must still be fdcfe686cf4df461e870b6e53b2b5a8b
 
 Why: mgbdis v3.0 prints a symbol for ANY 16-bit operand that equals the address of a label of the current bank (or of bank 0 below $4000),
@@ -18,19 +18,19 @@ repairs the cases that can be told from the code (every decision uses the instru
   4. `--tables`: a `.data:LEN:2` block (word table) is written as `dw Label` / `dw $xxxx` instead of `db $lo, $hi` (the label is used only when a
                                                                            label sits exactly at that address in bank 0 or in the table's own bank); a `.data:LEN:3` block of
                                                                            {lo,hi,bank} far pointers is written `dw Label` + `db BANK(Label)` for every row whose target has a label
-  5. `--ram` (L4): every instruction that uses a RAM address is written with the name of disasm/ram_names_jp.csv (tools/ram_names.py): `ld a, [$d5ce]` -> `ld a, [wMode]`,
+  5. `--ram` (L4): every instruction that uses a RAM address is written with the name of roms/jp_rev_a/disasm/ram_names_jp.csv (tools/ram_names.py): `ld a, [$d5ce]` -> `ld a, [wMode]`,
                                                                            `ldh [$ff9a], a` -> `ldh [hOamCursor], a`, `ld hl, $d52a` -> `ld hl, wRngTable`, an address inside a range -> `name + $off`; `ld hl, $ffff` before
-                                                                           `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (wram/wram_access.csv)
-                                                                           holds a pointer load (kind P) at that instruction and it is not listed in disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
-                                                                           that happen to equal an address). The names are defined in disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
+                                                                           `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (roms/jp_rev_a/wram/wram_access.csv)
+                                                                           holds a pointer load (kind P) at that instruction and it is not listed in roms/jp_rev_a/disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
+                                                                           that happen to equal an address). The names are defined in roms/jp_rev_a/disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
   6. `--const` (L4, implies --ram): values of a group are written with their constant (also the states: `ld a, $08 / ld [wState], a` -> `ld a, STATE_0E_EXCHANGE_WAIT_A`, the group of the
-                                                                           mode of a constant `ld [wMode], a` just before, else of the routine `ModeNN_...` that holds the store, else of the helper routine listed in disasm/state_helpers_jp.csv; disasm/state_names_jp.csv) (disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
+                                                                           mode of a constant `ld [wMode], a` just before, else of the routine `ModeNN_...` that holds the store, else of the helper routine listed in roms/jp_rev_a/disasm/state_helpers_jp.csv; roms/jp_rev_a/disasm/state_names_jp.csv) (roms/jp_rev_a/disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
                                                                            `ld a, [wMode] / cp $01` -> `cp MODE_SHOOT_PARLOR`, `ldh a, [hKeysNew] / bit 0, a` -> `bit PADB_A, a`, `and $0f` -> `and PADF_BUTTONS`,
-                                                                           `ld a, $43 / ldh [hLcdcShadow], a` -> `ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON`, and the bytes of the mode tables of disasm/const_tables_jp.csv
-                                                                           (`db $1c, $1e` -> `db MODE_PRINT_PHOTO_PICKER, MODE_PRINT_OPTION`). Which operand holds which group is in disasm/const_types_jp.csv; the rewrite
+                                                                           `ld a, $43 / ldh [hLcdcShadow], a` -> `ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON`, and the bytes of the mode tables of roms/jp_rev_a/disasm/const_tables_jp.csv
+                                                                           (`db $1c, $1e` -> `db MODE_PRINT_PHOTO_PICKER, MODE_PRINT_OPTION`). Which operand holds which group is in roms/jp_rev_a/disasm/const_types_jp.csv; the rewrite
                                                                            is made only on a straight line (no label between): a store right after `ld a, imm`, a compare / `bit` / `and` after a load of a typed variable (or of a
-                                                                           byte of a mode table) while A is untouched. disasm/const_jp.inc defines the names and is INCLUDEd by game.asm.
-                                                                           Sound ids (disasm/sound_names_jp.csv): `ld a, $0C / call Snd_Sfx1` -> `ld a, SFX1_SPACE_FEVER_ENEMY_KILL` (also `call nz, ...`, and a store into a request mailbox),
+                                                                           byte of a mode table) while A is untouched. roms/jp_rev_a/disasm/const_jp.inc defines the names and is INCLUDEd by game.asm.
+                                                                           Sound ids (roms/jp_rev_a/disasm/sound_names_jp.csv): `ld a, $0C / call Snd_Sfx1` -> `ld a, SFX1_SPACE_FEVER_ENEMY_KILL` (also `call nz, ...`, and a store into a request mailbox),
                                                                            the four id spaces being told apart by the call target (Snd_Music / Snd_Sfx1 / Snd_Sfx3 / Snd_Sfx4); the (id, channel) lists of Snd_PlayFromList
                                                                            (layout `KC` of const_tables_jp.csv) read `db SFX1_HOTSPOT_SOUND_01, SNDCH_SFX1`.
   Not repaired (kept as the label mgbdis chose): `ld hl|de, Label` that is really a number (e.g. `ld de, $4000` used as an offset), and
@@ -39,8 +39,8 @@ Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-ide
 import sys, os, re, json, argparse, collections, glob, csv, shutil
 ap = argparse.ArgumentParser()
 ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
-ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
-ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of disasm/ram_names_jp.csv and add disasm/ram_jp.inc to the listing')
+ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
+ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of roms/jp_rev_a/disasm/ram_names_jp.csv and add roms/jp_rev_a/disasm/ram_jp.inc to the listing')
 ap.add_argument('--ram-names', default=None); ap.add_argument('--ram-access', default=None); ap.add_argument('--ram-exclude', default=None)
 ap.add_argument('--const', action='store_true', help='write the values of the constant groups (modes, key masks, LCDC / IE / SC / P1 flags) with their names; implies --ram')
 ap.add_argument('--const-names', default=None); ap.add_argument('--const-types', default=None); ap.add_argument('--const-tables', default=None); ap.add_argument('--const-sounds', default=None)
@@ -131,17 +131,17 @@ if a.ram:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import ram_names
     ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    RAM_ROWS = ram_names.load(a.ram_names or os.path.join(ROOT, 'disasm', 'ram_names_jp.csv'))
+    RAM_ROWS = ram_names.load(a.ram_names or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_names_jp.csv'))
     RAMR = ram_names.Resolver(RAM_ROWS)
     RACC = collections.defaultdict(dict)       # (bank, pc) -> {addr: kind}, and the routine of the instruction
     RFUN = {}
-    for r in csv.DictReader(open(a.ram_access or os.path.join(ROOT, 'wram', 'wram_access.csv'), encoding='utf-8')):
+    for r in csv.DictReader(open(a.ram_access or os.path.join(ROOT, 'roms', 'jp_rev_a', 'wram', 'wram_access.csv'), encoding='utf-8')):
         k = (int(r['bank'], 16), int(r['pc'], 16)); RACC[k].setdefault(int(r['addr'], 16), set()).add(r['kind']); RFUN[k] = r['function']
     RAM_EXCL = set()
-    for r in csv.DictReader(open(a.ram_exclude or os.path.join(ROOT, 'disasm', 'ram_exclude_jp.csv'), encoding='utf-8')):
+    for r in csv.DictReader(open(a.ram_exclude or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_exclude_jp.csv'), encoding='utf-8')):
         RAM_EXCL.add((int(r['bank'], 16), int(r['pc'], 16)))
-    RAM_HIGH = {}                              # (bank, pc) -> name: `ld b|d|h, $xx` that loads the page of a 256-aligned RAM name (disasm/ram_highbyte_jp.csv) -> `HIGH(name)`
-    _hb = os.path.join(ROOT, 'disasm', 'ram_highbyte_jp.csv')
+    RAM_HIGH = {}                              # (bank, pc) -> name: `ld b|d|h, $xx` that loads the page of a 256-aligned RAM name (roms/jp_rev_a/disasm/ram_highbyte_jp.csv) -> `HIGH(name)`
+    _hb = os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_highbyte_jp.csv')
     if os.path.exists(_hb):
         _rn = {r.name: r for r in RAM_ROWS}
         for r in csv.DictReader(open(_hb, encoding='utf-8')):
@@ -155,11 +155,11 @@ if a.const:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import const_names
     ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'disasm', 'const_names_jp.csv')) + const_names.load_states() + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'disasm', 'sound_names_jp.csv'))
+    C_ROWS = const_names.load_names(a.const_names or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'const_names_jp.csv')) + const_names.load_states() + const_names.load_sounds(a.const_sounds or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'sound_names_jp.csv'))
     const_names.check_unique(C_ROWS)
     CONST = const_names.Namer(C_ROWS)
-    C_TYPES = const_names.load_types(a.const_types or os.path.join(ROOT, 'disasm', 'const_types_jp.csv'))
-    C_TABS = const_names.load_tables(a.const_tables or os.path.join(ROOT, 'disasm', 'const_tables_jp.csv'))
+    C_TYPES = const_names.load_types(a.const_types or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'const_types_jp.csv'))
+    C_TABS = const_names.load_tables(a.const_tables or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'const_tables_jp.csv'))
     C_INC = const_names.inc_text(C_ROWS)
     C_BYTES = collections.defaultdict(dict)        # bank -> {address: group} of the bytes of the typed tables that are values (layout letters M, K, C)
     C_TABLE_LABEL = {}                             # label of a mode table -> group
@@ -180,8 +180,8 @@ if a.const:
     C_LABS = collections.defaultdict(list)          # bank -> sorted [(address, label)]: the routine that holds an instruction (state stores)
     for (b0, a0), nm0 in byad.items(): C_LABS[b0].append((a0, nm0))
     for b0 in C_LABS: C_LABS[b0].sort()
-    C_HELPER = {}                                    # helper routine -> the mode whose handlers alone call it (disasm/state_helpers_jp.csv): the mode of a state store inside it
-    _hp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'disasm', 'state_helpers_jp.csv')
+    C_HELPER = {}                                    # helper routine -> the mode whose handlers alone call it (roms/jp_rev_a/disasm/state_helpers_jp.csv): the mode of a state store inside it
+    _hp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'jp_rev_a', 'disasm', 'state_helpers_jp.csv')
     if os.path.exists(_hp):
         for r0 in csv.DictReader(open(_hp, encoding='utf-8')): C_HELPER[r0['routine']] = int(r0['mode'], 16)
     C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
@@ -395,9 +395,9 @@ if CONST is not None:
     if os.path.exists(mk):
         mt = open(mk, encoding='utf-8').read()
         if 'const_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('ram_jp.inc bank_*.asm', 'ram_jp.inc const_jp.inc bank_*.asm'))
-if CONST is not None:                            # L6 text table: the tables of disasm/text_tables_jp.csv written with the charmap of disasm/charmap_jp.inc (tools/charmap_jp.py)
+if CONST is not None:                            # L6 text table: the tables of roms/jp_rev_a/disasm/text_tables_jp.csv written with the charmap of roms/jp_rev_a/disasm/charmap_jp.inc (tools/charmap_jp.py)
     _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    _cm = os.path.join(_root, 'disasm', 'charmap_jp.inc'); _tt = os.path.join(_root, 'disasm', 'text_tables_jp.csv')
+    _cm = os.path.join(_root, 'roms', 'jp_rev_a', 'disasm', 'charmap_jp.inc'); _tt = os.path.join(_root, 'roms', 'jp_rev_a', 'disasm', 'text_tables_jp.csv')
     if os.path.exists(_cm) and os.path.exists(_tt):
         _chars = {}
         for l in open(_cm, encoding='utf-8'):

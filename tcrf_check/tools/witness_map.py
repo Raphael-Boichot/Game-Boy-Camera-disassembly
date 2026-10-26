@@ -55,7 +55,7 @@ def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
 MAP = opt('--map', os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv')); ROM = opt('--rom', 'pocketcamera_jp.gb'); OUT = a[0]
-rom = open(ROM, 'rb').read(); trace = json.load(open(os.path.join(REPO, 'wram', 'trace_jp_v3.json')))
+rom = open(ROM, 'rb').read(); trace = json.load(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'wram', 'trace_jp_v3.json')))
 heads, members, code = B.blocks(rom, trace)
 N = 1 << 20
 def flat(b, ad): return ad if (b == 0 and ad < 0x4000) else b * 0x4000 + ad - 0x4000

@@ -1,6 +1,6 @@
 # BGB watchpoint pass over the mode-state handlers (2026-10-25)
 
-The 70 rows of the group "mode state" of `disasm/sym_unconclusive_jp.csv` (as they stood on 2026-10-25), checked in the real BGB with logging watchpoints:
+The 70 rows of the group "mode state" of `roms/jp_rev_a/disasm/sym_unconclusive_jp.csv` (as they stood on 2026-10-25), checked in the real BGB with logging watchpoints:
 an execution watchpoint on every handler (a read watchpoint over the three tables), whose message carries the game's mode and state, and a control
 watchpoint on every write of the state byte `$D5CF`. One replay then says in which screens each handler ran. Tool: `tcrf_check/tools/mode_state_wp.py`.
 
@@ -41,5 +41,5 @@ Every run's control watchpoint fired (13 to 100 writes of `$D5CF` per run), so a
 * `Mode1D_InterleaveTileRows` (`00:3249`) runs only for descriptors whose flag byte has bit 4 (`00:31B4`); only `Print_Layout3_FourPhotosRotated` (`08:656E`, 252 such
   descriptors) has them, the panorama print of the row pick (`wOpt3ToggleB` = 0). `print_pano1b` (corpus `01_fuzz_b` 1619, ends in `18:01`, then A presses with the printer
   helper) printed 4 pages and ran it 1,792 times in `1D:03`. A first attempt hung on the printer link (the helper never answered after BGB's first two packets) and is not kept.
-* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 70 handlers are tagged C in `disasm/sym_names_jp.csv`
+* This places each handler in the screen flow. The owner decided (2026-10-25) that this confirms the name: the 70 handlers are tagged C in `roms/jp_rev_a/disasm/sym_names_jp.csv`
   (the four of the forced run say so in their note); the role in the rest of each name is still read from the code.

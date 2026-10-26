@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Targets of the L3 BGB pass (README 1.3): every name of disasm/sym_names_jp.csv tagged I, with the watchpoint that would show it at work.
+"""Targets of the L3 BGB pass (README 1.3): every name of roms/jp_rev_a/disasm/sym_names_jp.csv tagged I, with the watchpoint that would show it at work.
 
-usage: l3_targets.py OUT.csv [--names disasm/sym_names_jp.csv] [--sym pocketcamera_jp.sym] [--tag I]
+usage: l3_targets.py OUT.csv [--names roms/jp_rev_a/disasm/sym_names_jp.csv] [--sym pocketcamera_jp.sym] [--tag I]
 A label inside a `.code` block of the symbol file gets an execute watchpoint on its first byte (kind x); any other label a read watchpoint on its bytes up to the
 next label or the end of its block (kind r).  OUT.csv: bank, addr, size, kind, name (input of bgb_span_read_probe.py --targets)."""
 import csv, sys, os, bisect
@@ -10,7 +10,7 @@ a = sys.argv[1:]
 def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
-names = opt('--names', os.path.join(REPO, 'disasm', 'sym_names_jp.csv')); sym = opt('--sym', os.path.join(REPO, 'pocketcamera_jp.sym')); tag = opt('--tag', 'I'); out = a[0]
+names = opt('--names', os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv')); sym = opt('--sym', os.path.join(REPO, 'roms', 'jp_rev_a', 'pocketcamera_jp.sym')); tag = opt('--tag', 'I'); out = a[0]
 blocks = {}                                   # bank -> sorted [(start, end, type)]
 for l in open(sym):
     p = l.split()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Summarise the BGB watchpoint log of wram_probe.py (README 2.13).
 
-usage: wram_probe_report.py PROBE.csv[,PROBE2.csv...] WATCH.csv SITES_OUT.csv NAMES_OUT.csv [--sym pocketcamera_jp.sym] [--access wram/wram_access.csv]
+usage: wram_probe_report.py PROBE.csv[,PROBE2.csv...] WATCH.csv SITES_OUT.csv NAMES_OUT.csv [--sym pocketcamera_jp.sym] [--access roms/jp_rev_a/wram/wram_access.csv]
   PROBE.csv   output of wram_probe.py: entry, sig, end, kind R|W, addr (start of the watched range), pc, mode, state, rombank, value, a, hits
   WATCH.csv   name, addr, size, tag, static (tcrf_check/tools/wram_probe_list.py)
 SITES_OUT   one row per (access kind, name, bank:pc): hits, replays, modes, values, class
@@ -21,7 +21,7 @@ def opt(n, d=None):
         i = args.index(n); v = args[i + 1]; del args[i:i + 2]; return v
     return d
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sym = opt('--sym', ROOT + '/pocketcamera_jp.sym'); acc = opt('--access', ROOT + '/wram/wram_access.csv')
+sym = opt('--sym', ROOT + '/roms/jp_rev_a/pocketcamera_jp.sym'); acc = opt('--access', ROOT + '/roms/jp_rev_a/wram/wram_access.csv')
 probe, watch, sites_out, names_out = args[:4]
 W = list(csv.DictReader(open(watch, encoding='utf-8')))
 ROWS = {r.name: r for r in RN.load()}

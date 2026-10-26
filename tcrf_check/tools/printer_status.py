@@ -26,14 +26,14 @@ def opt(n, d=None):
 corpus = opt('--corpus', 'unlock_runs/f1_organic/corpus.jsonl'); entry = int(opt('--entry', '289')); only = opt('--only'); scen = opt('--scenario', 'card'); FR = int(opt('--frames', '4100'))
 sweep = '--sweep' in a; grid = '--grid' in a; errors = '--errors' in a; a = [x for x in a if x not in ('--sweep', '--grid', '--errors')]; out = a[0]; os.makedirs(out, exist_ok=True)
 CMD = dict(init=1, print=2, data=4, inq=15); CN = {v: k for k, v in CMD.items()}
-# ---- never-run code that is still unwitnessed (class N of the v8 map minus assets/witness_jp.csv) and the first address of each component
+# ---- never-run code that is still unwitnessed (class N of the v8 map minus roms/jp_rev_a/assets/witness_jp.csv) and the first address of each component
 def flat(b, ad): return ad if (b == 0 and ad < 0x4000) else b * 0x4000 + ad - 0x4000
 N = np.zeros(1 << 20, bool)
 for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))):
     if r['class'] == 'N': o = flat(int(r['bank'], 16), int(r['start'], 16)); N[o:o + int(r['length'])] = True
-for r in csv.DictReader(open(os.path.join(REPO, 'assets', 'witness_jp.csv'))):
+for r in csv.DictReader(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'witness_jp.csv'))):
     b = int(r['bank'], 16); N[flat(b, int(r['start'], 16)):flat(b, int(r['end'], 16)) + 1] = False
-comps = [(r['first_addr'], int(r['bytes']), r['verdict']) for r in csv.DictReader(open(os.path.join(REPO, 'assets', 'reach_components_jp.csv')))]
+comps = [(r['first_addr'], int(r['bytes']), r['verdict']) for r in csv.DictReader(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'reach_components_jp.csv')))]
 def cflat(s): b, ad = s.split(':'); return flat(int(b, 16), int(ad, 16))
 # ---- scenario
 g.L.gb_printer_model(1)                                    # replies of the real printer traces (the stand-in's default replies 06 to PRINT and the Camera prints again and again)

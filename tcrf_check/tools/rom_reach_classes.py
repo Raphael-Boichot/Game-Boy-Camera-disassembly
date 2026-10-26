@@ -21,7 +21,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
         if j - i >= 16 and rb[i] in (0, 255): pad[i:j] = True
         i = j
     C = lambda ch: cls == ord(ch)
-    wit = np.zeros(N, bool)         # class N bytes that a later targeted run executed (assets/witness_jp.csv)
+    wit = np.zeros(N, bool)         # class N bytes that a later targeted run executed (roms/jp_rev_a/assets/witness_jp.csv)
     if WIT != 'none' and os.path.exists(WIT):
         for r in csv.DictReader(open(WIT)):
             b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
@@ -35,7 +35,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
             dead[o1:o2 + 1] = True
     dead &= C('N') & ~wit
     red = (C('N') & ~wit) | C('U'); forced = C('F') | C('r'); organic = C('C') | C('R') | C('T')
-    # bytes of the never-read data that assets/asset_map_jp.csv labels (padding stays padding)
+    # bytes of the never-read data that roms/jp_rev_a/assets/asset_map_jp.csv labels (padding stays padding)
     ident = np.zeros(N, bool)
     if ASSETS != 'none' and os.path.exists(ASSETS):
         for r in csv.DictReader(open(ASSETS)):
@@ -60,7 +60,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
     sgb &= C('U') & ~pad
     # the stamp pictures (sym labels StampCat*_Gfx, evidence C: README 16.24) that the v8 run never read but the stamp-menu walks of the display tracker put on screen in runs without state pokes
     stamp = np.zeros(N, bool)
-    NM = os.path.join(REPO, 'disasm', 'sym_names_jp.csv'); TY = os.path.join(REPO, 'disasm', 'sym_types_jp.csv'); DU = os.path.join(REPO, 'tcrf_check', 'assets', 'display_run', 'display_union.npz')
+    NM = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv'); TY = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_types_jp.csv'); DU = os.path.join(REPO, 'tcrf_check', 'assets', 'display_run', 'display_union.npz')
     if all(os.path.exists(f) for f in (NM, TY, DU)):
         ends = {}
         for r in csv.DictReader(open(TY, encoding='utf-8')): ends[(int(r['bank'], 16), int(r['start'], 16))] = int(r['end'], 16)      # the last row of a start wins (types_fix)

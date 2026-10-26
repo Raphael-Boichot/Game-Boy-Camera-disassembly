@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build pocketcamera_jp.sym (mgbdis v3 symbol file) for Pocket Camera (Japan) Rev A.
 
-  tools/sym_build.py ROM.gb [--names disasm/sym_names_jp.csv] [--types disasm/sym_types_jp.csv]
-                            [--trace wram/trace_jp_v3.json] [--out pocketcamera_jp.sym] [--report]
+  tools/sym_build.py ROM.gb [--names roms/jp_rev_a/disasm/sym_names_jp.csv] [--types roms/jp_rev_a/disasm/sym_types_jp.csv]
+                            [--trace roms/jp_rev_a/wram/trace_jp_v3.json] [--out pocketcamera_jp.sym] [--report]
 
 Inputs
   names csv  bank,addr,name,conf,note   (hex bank / addr; a later row for the same address wins; name `-` deletes the label)
@@ -18,12 +18,12 @@ Checks (the script aborts on any of them)
 """
 import sys, os, json, csv, argparse, collections
 ap = argparse.ArgumentParser()
-ap.add_argument('rom'); ap.add_argument('--names', default='disasm/sym_names_jp.csv'); ap.add_argument('--types', action='append', default=None)
-ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--out', default='pocketcamera_jp.sym')
+ap.add_argument('rom'); ap.add_argument('--names', default='roms/jp_rev_a/disasm/sym_names_jp.csv'); ap.add_argument('--types', action='append', default=None)
+ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json'); ap.add_argument('--out', default='roms/jp_rev_a/pocketcamera_jp.sym')
 ap.add_argument('--extra-names', action='append', default=[]); ap.add_argument('--report', action='store_true')
 ap.add_argument('--legacy', default=None, help='older .sym whose label lines are kept where the names csv has none')
 a = ap.parse_args()
-if not a.types: a.types = ['disasm/sym_types_jp.csv']
+if not a.types: a.types = ['roms/jp_rev_a/disasm/sym_types_jp.csv']
 ROM = open(a.rom, 'rb').read()
 assert len(ROM) == 0x100000, 'expected a 1 MiB ROM'
 T = json.load(open(a.trace))

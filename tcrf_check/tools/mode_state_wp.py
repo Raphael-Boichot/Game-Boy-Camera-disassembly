@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BGB watchpoint pass over the mode-state handlers of disasm/sym_unconclusive_jp.csv (group "mode state"; README 1.1.1, 2026-10-25).
+"""BGB watchpoint pass over the mode-state handlers of roms/jp_rev_a/disasm/sym_unconclusive_jp.csv (group "mode state"; README 1.1.1, 2026-10-25).
 
 Every handler gets a logging watchpoint (execution for code, read for the three tables) whose message carries the game's mode and state
 (`%(d5ce)%`, `%(d5cf)%`), plus a control watchpoint on every write of the state byte $D5CF; one replay then says in which screens each handler ran.
@@ -23,7 +23,7 @@ SAVES = [ROOT + '/saves', ROOT + '/saves_unl', ROOT + '/saves_pseudo']
 CORE = [(1, 'Right'), (2, 'Left'), (4, 'Up'), (8, 'Down'), (16, 'A'), (32, 'B'), (64, 'Select'), (128, 'Start')]
 NAME = dict(A='A', B='B', L='Left', R='Right', U='Up', D='Down', s='Select', S='Start')
 def names(k): return '+'.join(n for m, n in CORE if k & m) or '-'
-H = [r for r in csv.DictReader(open(REPO + '/disasm/sym_unconclusive_jp.csv', encoding='utf-8')) if r['group'] == 'mode state']    # what the runs watch: the handlers still open
+H = [r for r in csv.DictReader(open(REPO + '/roms/jp_rev_a/disasm/sym_unconclusive_jp.csv', encoding='utf-8')) if r['group'] == 'mode state']    # what the runs watch: the handlers still open
 PASS_CSV = REPO + '/tcrf_check/assets/mode_state_wp/mode_state_wp_jp.csv'      # the 70 handlers of the pass of 2026-10-25: the report keeps all of them as the doubtful list shrinks
 
 def watchlist(rows):

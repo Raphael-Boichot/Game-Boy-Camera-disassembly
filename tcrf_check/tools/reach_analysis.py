@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Sort the code that no run executed by what keeps it from running (README 16.15).
 usage: reach_analysis.py OUT_DIR [ROM] [--manual FILE]       (run from anywhere; ROM defaults to ./pocketcamera_jp.gb, the Japanese Rev A)
-Reads (all in the repository): coverage/v8/report_v8/rom_map.csv (byte classes of the v8 run), assets/witness_jp.csv (class N bytes that a later run executed:
-  16.14), wram/trace_jp_v3.json (static trace), tools/extra_roots.json (hand-resolved roots), wram/wram_*.csv (variable names),
-  assets/reach_manual_jp.csv (hand-written verdicts keyed by the first address of a component; may be missing)
+Reads (all in the repository): coverage/v8/report_v8/rom_map.csv (byte classes of the v8 run), roms/jp_rev_a/assets/witness_jp.csv (class N bytes that a later run executed:
+  16.14), roms/jp_rev_a/wram/trace_jp_v3.json (static trace), tools/extra_roots.json (hand-resolved roots), wram/wram_*.csv (variable names),
+  roms/jp_rev_a/assets/reach_manual_jp.csv (hand-written verdicts keyed by the first address of a component; may be missing)
 Writes: OUT_DIR/reach_components.csv (one row per never-run component), OUT_DIR/reach_ranges.csv (the byte runs of every component with its verdict: drawn by rom_reach_map.py), OUT_DIR/reach_summary.md, OUT_DIR/cov_with_witness.npz (intermediate)
 What it does:
  1. rebuilds the executed-byte arrays from the map (C, F = executed; N = not) and sets the witnessed bytes, then runs the component analysis of
@@ -23,10 +23,10 @@ a = sys.argv[1:]
 def opt(n, d=None):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
-MANUAL = opt('--manual', os.path.join(REPO, 'assets', 'reach_manual_jp.csv'))
+MANUAL = opt('--manual', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'reach_manual_jp.csv'))
 OUT = a[0]; ROM = a[1] if len(a) > 1 else 'pocketcamera_jp.gb'
 os.makedirs(OUT, exist_ok=True)
-MAP = os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'); WIT = os.path.join(REPO, 'assets', 'witness_jp.csv')
+MAP = os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'); WIT = os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'witness_jp.csv')
 GATING = os.path.join(REPO, 'coverage', 'tools', 'gating_branches.py')
 def flat(b, ad): return ad if (b == 0 and ad < 0x4000) else b * 0x4000 + ad - 0x4000
 # ---- 1. coverage arrays from the map + witnesses
@@ -41,8 +41,8 @@ for r in csv.DictReader(open(WIT)):
     b = int(r['bank'], 16); o1 = flat(b, int(r['start'], 16)); o2 = flat(b, int(r['end'], 16)); ex[o1:o2 + 1] = 1; wit += o2 - o1 + 1
 npz = os.path.join(OUT, 'cov_with_witness.npz'); np.savez(npz, ex=ex, oex=oex)
 # ---- component analysis (the code of gating_branches.py up to the sort of its table)
-os.environ.update(GBCAM_ROM=ROM, GBCAM_TRACE=os.path.join(REPO, 'wram', 'trace_jp_v3.json'), GBCAM_ROOTS=os.path.join(REPO, 'tools', 'extra_roots.json'),
-                  GBCAM_WRAM_DIR=os.path.join(REPO, 'wram'))
+os.environ.update(GBCAM_ROM=ROM, GBCAM_TRACE=os.path.join(REPO, 'roms', 'jp_rev_a', 'wram', 'trace_jp_v3.json'), GBCAM_ROOTS=os.path.join(REPO, 'tools', 'extra_roots.json'),
+                  GBCAM_WRAM_DIR=os.path.join(REPO, 'roms', 'jp_rev_a', 'wram'))
 src = open(GATING).read().split('rows.sort(')[0]
 G = {'__file__': GATING, '__name__': 'gating'}
 sys.argv = ['gating_branches.py', OUT, npz]
@@ -130,7 +130,7 @@ by = collections.defaultdict(lambda: [0, 0]); byc = collections.defaultdict(lamb
 for x in out: by[x[8]][0] += 1; by[x[8]][1] += int(x[4]); byc[(x[8], x[9])][0] += 1; byc[(x[8], x[9])][1] += int(x[4])
 tot = sum(int(x[4]) for x in out)
 with open(os.path.join(OUT, 'reach_summary.md'), 'w') as fh:
-    fh.write('# Never-run code by verdict\n\nWitnessed afterwards (assets/witness_jp.csv): %d bytes. Components left: %d, holding %d bytes of traced instructions.\n\n' % (wit, len(out), tot))
+    fh.write('# Never-run code by verdict\n\nWitnessed afterwards (roms/jp_rev_a/assets/witness_jp.csv): %d bytes. Components left: %d, holding %d bytes of traced instructions.\n\n' % (wit, len(out), tot))
     fh.write('| verdict | components | bytes |\n|---|---:|---:|\n')
     for k in sorted(by, key=lambda k: -by[k][1]): fh.write('| %s | %d | %d |\n' % (k, *by[k]))
     fh.write('\n(the effect-table check found %d call site(s) of 0A:7CFE and %d reachable index values)\n' % (len(callers), len(DOMAIN)))

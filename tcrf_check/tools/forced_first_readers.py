@@ -9,7 +9,7 @@ usage: forced_first_readers.py [COV.npz] [OUT.csv]
   OUT.csv  default tcrf_check/assets/unidentified/forced_first_readers.csv: one row per span of really_unused.csv that has bytes read in forced
            runs only (columns: span, bytes, bytes read in any run / organically / only in forced runs, how many of the forced-only bytes have each
            of the three most frequent first readers, as bank:pc and the routine that holds the instruction), and a last row `*` for the whole ROM.
-The routine of an address is the nearest label at or before it in the bank (disasm/sym_names_jp.csv)."""
+The routine of an address is the nearest label at or before it in the bank (roms/jp_rev_a/disasm/sym_names_jp.csv)."""
 import sys, os, csv, bisect, collections
 import numpy as np
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -19,7 +19,7 @@ z = np.load(cov)
 dr = z['dr'] != 0; odr = z['odr'] != 0; ex = z['ex'] != 0; rdr = z['rdr']
 forced = dr & ~odr & ~ex
 labels = collections.defaultdict(list)
-for r in csv.DictReader(open(os.path.join(ROOT, 'disasm/sym_names_jp.csv'), encoding='utf-8')):
+for r in csv.DictReader(open(os.path.join(ROOT, 'roms/jp_rev_a/disasm/sym_names_jp.csv'), encoding='utf-8')):
     labels[int(r['bank'], 16)].append((int(r['addr'], 16), r['name']))
 for b in labels: labels[b].sort()
 def routine(bank, pc):

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """The whole JP ROM bank by bank, coloured by WHAT each byte is (README 'Current status', second map), with the tiles that nothing reaches outlined. The ROM is drawn as 2bpp tiles (64 banks of 32 x 32 tiles) exactly like rom_reach_map.py.
-usage: rom_layout_map.py OUT.png [--rom pocketcamera_jp.gb] [--csv assets/layout_by_bank_jp.csv] [--map ...] [--assets ...] [--witness ...] [--reach ...] [--unused ...] [--kinds assets/layout_kind_overrides_jp.csv]
+usage: rom_layout_map.py OUT.png [--rom pocketcamera_jp.gb] [--csv roms/jp_rev_a/assets/layout_by_bank_jp.csv] [--map ...] [--assets ...] [--witness ...] [--reach ...] [--unused ...] [--kinds roms/jp_rev_a/assets/layout_kind_overrides_jp.csv]
 Each ROM byte gets one category:
   code (class C / F / N of coverage/v8/report_v8/rom_map.csv = traced instructions): the function group of the label that owns the byte (rules below; 10 groups);
   data (everything else): tile sets (4 kinds), tile maps, sprite (OAM) layouts, sound data, other tables and text, UNCERTAIN data, padding.
-The owner of a byte is the nearest label at or before it in the same bank (disasm/sym_names_jp.csv).  The kind of a data label comes from its name (Gfx_ / Sheet_ / Kana_ / TileGap_ / Font_ / DjPrintFont_ = tile set, Map_ / BgMap_ /
+The owner of a byte is the nearest label at or before it in the same bank (roms/jp_rev_a/disasm/sym_names_jp.csv).  The kind of a data label comes from its name (Gfx_ / Sheet_ / Kana_ / TileGap_ / Font_ / DjPrintFont_ = tile set, Map_ / BgMap_ /
 *Border*_Map = tile map, Song / Sfx / Snd = sound, OamList / OamPtrTbl = sprite layouts, StampCat*_Gfx = stamps, WildFrame / Border *_Tiles = frames, AlbumB*_Tiles / _Thumb = stock photos, anything else
-inside code banks = tables), so the evidence behind a kind is the one of the label (disasm/sym_names_jp.csv, column conf).  A label tagged '?' (disasm/sym_unconclusive_jp.md) only says that the ROLE of the bytes is doubtful, not their kind: it keeps the kind its name
-gives (a Gfx_ block is a tile set whatever its role).  The kind of the Src_* / Data_* blocks (named after the far pointer that loads them, not after what they are) comes from assets/layout_kind_overrides_jp.csv,
+inside code banks = tables), so the evidence behind a kind is the one of the label (roms/jp_rev_a/disasm/sym_names_jp.csv, column conf).  A label tagged '?' (roms/jp_rev_a/disasm/sym_unconclusive_jp.md) only says that the ROLE of the bytes is doubtful, not their kind: it keeps the kind its name
+gives (a Gfx_ block is a tile set whatever its role).  The kind of the Src_* / Data_* blocks (named after the far pointer that loads them, not after what they are) comes from roms/jp_rev_a/assets/layout_kind_overrides_jp.csv,
 one row per block with the evidence (the code that copies it and where to, or how the bytes render).  UNCERTAIN = the bytes that stay unidentified after that: a '?' label whose name gives no kind, and any Src_* / Data_*
-block without a row.  Padding = runs of >= 16 x 00 / FF that no typed range of disasm/sym_types_jp.csv covers (the fill between the assets) and the zero fill named Bank*_Padding / ZeroFill in the symbol file.
+block without a row.  Padding = runs of >= 16 x 00 / FF that no typed range of roms/jp_rev_a/disasm/sym_types_jp.csv covers (the fill between the assets) and the zero fill named Bank*_Padding / ZeroFill in the symbol file.
 The outline marks tiles that contain bytes no run reached, with the classes of rom_reach_map.py (tcrf_check/tools/rom_reach_classes.py): black never-run code, red unused data, blue identified data the v8 run never read.
 A magenta cross marks every PURE padding tile: a 16-byte tile (aligned like the tile grid) whose 16 bytes are all padding; shorter padding is not marked."""
 import sys, os, csv, re, collections
@@ -22,11 +22,11 @@ def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
 ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))
-ASSETS = opt('--assets', os.path.join(REPO, 'assets', 'asset_map_jp.csv')); WIT = opt('--witness', os.path.join(REPO, 'assets', 'witness_jp.csv'))
-REACH = opt('--reach', os.path.join(REPO, 'assets', 'reach_ranges_jp.csv'))
+ASSETS = opt('--assets', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'asset_map_jp.csv')); WIT = opt('--witness', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'witness_jp.csv'))
+REACH = opt('--reach', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'reach_ranges_jp.csv'))
 UNUSED = opt('--unused', os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv')); CSVOUT = opt('--csv', None)
-KINDS = opt('--kinds', os.path.join(REPO, 'assets', 'layout_kind_overrides_jp.csv')); OUT = a[0]
-NAMES = os.path.join(REPO, 'disasm', 'sym_names_jp.csv'); TYPES = os.path.join(REPO, 'disasm', 'sym_types_jp.csv')
+KINDS = opt('--kinds', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'layout_kind_overrides_jp.csv')); OUT = a[0]
+NAMES = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv'); TYPES = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_types_jp.csv')
 
 g = RC.build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO)
 N, cls, cat, pad = g['N'], g['cls'], g['cat'], g['pad']
@@ -122,11 +122,11 @@ kind = np.where(is_code, l_code[idx], l_data[idx]).astype(np.uint8)
 kind[~ok & is_code] = KEY['OTHER']; kind[~ok & ~is_code] = KEY['TBL']
 kind[cls == ord('T')] = KEY['TBL']                                                      # inline tables of the code
 kind[cat == 3] = KEY['PAD']                                                              # untouched padding (the muted red of the status map); the Bank*_Padding / ZeroFill labels are padding too, read or not
-# fill between the assets: bytes that no typed range of disasm/sym_types_jp.csv covers, that are not code and lie in a run of >= 16 x 00 / FF (a forced run may have read them)
+# fill between the assets: bytes that no typed range of roms/jp_rev_a/disasm/sym_types_jp.csv covers, that are not code and lie in a run of >= 16 x 00 / FF (a forced run may have read them)
 typed = np.zeros(N, bool)
 for r in csv.DictReader(open(TYPES, encoding='utf-8')): typed[flat(int(r['bank'], 16), int(r['start'], 16)):flat(int(r['bank'], 16), int(r['end'], 16))] = True
 kind[~typed & ~is_code & (cls != ord('T')) & g['pad']] = KEY['PAD']
-# kind of the Src_* / Data_* blocks, from the evidence rows of assets/layout_kind_overrides_jp.csv (bank, start, end, kind, ev, label, basis); only bytes still UNCERTAIN are changed
+# kind of the Src_* / Data_* blocks, from the evidence rows of roms/jp_rev_a/assets/layout_kind_overrides_jp.csv (bank, start, end, kind, ev, label, basis); only bytes still UNCERTAIN are changed
 OVR = {}      # bytes that the evidence rows reclassify, per kind (the README quotes them; tools/check_repo_consistency.py compares)
 if os.path.exists(KINDS):
     for r in csv.DictReader(open(KINDS, encoding='utf-8')):
@@ -238,7 +238,7 @@ pct = lambda x: '%.1f %%' % (100 * x / N)
 fmt = lambda x: format(int(x), ',')
 d.text((LEFT, 12), 'Pocket Camera (Japan) Rev A: what is in each of the 64 banks (the ROM drawn as 2bpp tiles, code, data and padding alike)', fill=INK, font=F1)
 d.text((LEFT, 56), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, like the reachability map above. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes);', fill=INK, font=F2)
-d.text((LEFT, 82), 'the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that no run reached. Kind evidence per label: disasm/sym_names_jp.csv (C / I / ?).', fill=INK, font=F2)
+d.text((LEFT, 82), 'the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that no run reached. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).', fill=INK, font=F2)
 def leg(x, y, i, w1=118, w2=70):
     k, tx, c = CATS[i]
     for s_ in range(4): d.rectangle([x + s_ * 11, y + 1, x + s_ * 11 + 10, y + 18], fill=i * 4 + s_)

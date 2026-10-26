@@ -4,7 +4,7 @@
 other D.J. states were never pressed.  Here the state key is (mode, state, $D8C5, $D8C8, $D8CC, $D8F3, $D8F6, $D8FA, $D8FD, $D985), every (state, key) is pressed once
 (key held 4 frames, then 30 frames released), states outside modes $1F / $20 are not expanded (B leaves the editor, Start prints).
 usage: dj_pages.py OUTDIR [ROUTE.json] [--cap N] [--coarse] [--cursor] [--hold] [--latch]      (run from the working root, as dj_fields.py)
-Prints, for each target (first address of a never-run component of bank 5, from assets/reach_components_jp.csv), whether it ran and the key path of the first state in which it did;
+Prints, for each target (first address of a never-run component of bank 5, from roms/jp_rev_a/assets/reach_components_jp.csv), whether it ran and the key path of the first state in which it did;
 writes OUTDIR/exec_ranges.csv (bytes executed beyond the replay of the route) and OUTDIR/paths.json."""
 import sys, os, json, csv, itertools
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -18,7 +18,7 @@ if '--cap' in sys.argv: a = [x for x in a if x != str(cap)]
 COARSE = '--coarse' in sys.argv      # state key = (mode, state, $D8C8, $D8F3, $D8FA, $D985) only: fewer states, so the search gets further for the same cap
 CURSOR = '--cursor' in sys.argv      # README 16.21: also key the states on the performance-screen cursor $D8B3 and the level $D8B7 (the first search keyed on neither, so a chord pressed with the cursor on item 4 was never tried)
 route = json.load(open(a[1] if len(a) > 1 else 'unlock_runs/dj_route.json'))
-COMP = os.environ.get('REACH_CSV', os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'assets', 'reach_components_jp.csv'))   # the targets of README 16.19 are the OPEN / EDGE bank-5 rows of the file BEFORE the 16.19 witnesses were added (git: the version of commit 991fc4e)
+COMP = os.environ.get('REACH_CSV', os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'roms', 'jp_rev_a', 'assets', 'reach_components_jp.csv'))   # the targets of README 16.19 are the OPEN / EDGE bank-5 rows of the file BEFORE the 16.19 witnesses were added (git: the version of commit 991fc4e)
 targets = [(r['first_addr'], int(r['bytes'])) for r in csv.DictReader(open(COMP)) if r['bank'] == '05' and r['verdict'] in ('OPEN', 'EDGE')]
 EX0 = np.zeros(len(g.cov_exec()), bool)
 C = lib.Corpus(route['corpus']); g.set_organic(1); C.replay(route['entry'])

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Who reads the doubtful ROM spans?  BGB read watchpoints on every row of disasm/sym_unconclusive_jp.csv (and an execute watchpoint on a row of one byte),
+"""Who reads the doubtful ROM spans?  BGB read watchpoints on every row of roms/jp_rev_a/disasm/sym_unconclusive_jp.csv (and an execute watchpoint on a row of one byte),
 over the cheapest organic replay of each (mode, state) signature, as tcrf_check/tools/wram_probe.py does for RAM (README 2.13).
 
-usage: bgb_span_read_probe.py OUT.csv CORPUS [--workers 2] [--entries ID,ID,...] [--rows disasm/sym_unconclusive_jp.csv] [--targets T.csv --chunk 400]
+usage: bgb_span_read_probe.py OUT.csv CORPUS [--workers 2] [--entries ID,ID,...] [--rows roms/jp_rev_a/disasm/sym_unconclusive_jp.csv] [--targets T.csv --chunk 400]
   --targets: any list bank, addr, size, kind (x / r), name (tcrf_check/tools/l3_targets.py); the watchpoints are split into runs of --chunk, each with its own control CTL<n>
 Every watchpoint logs `<tag>_<pc>_<mode>_<state>` (BGB stops before the instruction, so pc is the reader); the control `CTL` is a read watchpoint on Mode_Table
 (00:2F3F-2FA2), which the main loop reads every frame, so a span count of 0 in an entry whose CTL count is above 0 means "not read in that replay".
@@ -15,7 +15,7 @@ def opt(n, d=None):
     if n in args:
         i = args.index(n); v = args[i + 1]; del args[i:i + 2]; return v
     return d
-workers = int(opt('--workers', '2')); ents = opt('--entries'); rowsf = opt('--rows', os.path.join(REPO, 'disasm', 'sym_unconclusive_jp.csv'))
+workers = int(opt('--workers', '2')); ents = opt('--entries'); rowsf = opt('--rows', os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_unconclusive_jp.csv'))
 targets = opt('--targets'); chunk = int(opt('--chunk', '400'))
 out, corpus = args[:2]
 ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp'); ROM = os.environ.get('GBCAM_ROM', ROOT + '/pocketcamera_jp.gb')

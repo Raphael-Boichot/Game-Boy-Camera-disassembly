@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Whole JP ROM as 2bpp tiles (code and everything else), coloured by what the v8 coverage run reached.
 blue = executed or read by a run (dark: joypad + save only; light: only after a forced RAM / mode state), red = never executed nor read
-(including traced code that never ran), orange = never read but identified as asset data (assets/asset_map_jp.csv, evidence I or C per row),
+(including traced code that never ran), orange = never read but identified as asset data (roms/jp_rev_a/assets/asset_map_jp.csv, evidence I or C per row),
 green = code the v8 run never executed but a later targeted run did, and three kinds of data the v8 run never read: the data sent to the Super Game Boy (asset_map rows sgb_*, evidence C: README 16.13 (5)), the wild-frame lateral strips (shown to be used by the print path by the BGB blanking test, asset_map rows of type wild_frame_lateral with evidence C: README 16.13 (1)) and the stamp pictures (sym labels StampCat*_Gfx, evidence C) that the stamp-menu walks of the display tracker put on screen in runs without state pokes (README 16.24) (assets/witness_jp.csv: BGB in SGB mode, the hot-spot effect test, the APU-gated branch, the printer runs, the stamp mirror, the music-editor, RUN!, D.J. sound-effect, Space Fever II and erase-all runs, the link counters / $55 hello, the blank calibration, the D.J. pages, the editor copy badge, the Game Face editor, the COMPOSE pickers; README 16.14 / 16.15 / 16.18 / 16.19),
-purple = code that never ran and is proven dead (verdict UNREACHABLE or UNREFERENCED in assets/reach_ranges_jp.csv, from reach_analysis.py: README 16.15 / 16.21),
+purple = code that never ran and is proven dead (verdict UNREACHABLE or UNREFERENCED in roms/jp_rev_a/assets/reach_ranges_jp.csv, from reach_analysis.py: README 16.15 / 16.21),
 yellow = asset data that no replay ever put on screen in a run without state pokes, the REALLY unused assets of README 16.24 (tcrf_check/assets/unidentified/really_unused.csv: tiers 'no loader', 'never shown', 'forced only' and the TCRF-labelled spans never on screen in an organic run; it takes the bytes of those spans away from blue, light blue and orange),
 muted red = untouched padding (runs >= 16 of 00 / FF).
-usage: rom_reach_map.py OUT.png [--rom pocketcamera_jp.gb] [--map coverage/v8/report_v8/rom_map.csv] [--assets assets/asset_map_jp.csv | none] [--witness assets/witness_jp.csv | none] [--reach assets/reach_ranges_jp.csv | none] [--unused tcrf_check/assets/unidentified/really_unused.csv | none]
+usage: rom_reach_map.py OUT.png [--rom pocketcamera_jp.gb] [--map coverage/v8/report_v8/rom_map.csv] [--assets roms/jp_rev_a/assets/asset_map_jp.csv | none] [--witness roms/jp_rev_a/assets/witness_jp.csv | none] [--reach roms/jp_rev_a/assets/reach_ranges_jp.csv | none] [--unused tcrf_check/assets/unidentified/really_unused.csv | none]
 The ROM is not in the repository (md5 fdcfe686cf4df461e870b6e53b2b5a8b); the byte-class map is (written by coverage/tools/rom_map.py from the v8 merged coverage)."""
 import sys, os, csv
 import numpy as np
@@ -17,8 +17,8 @@ def opt(n, d):
     if n in a: i = a.index(n); v = a[i + 1]; del a[i:i + 2]; return v
     return d
 ROM = opt('--rom', 'pocketcamera_jp.gb'); MAP = opt('--map', os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))
-ASSETS = opt('--assets', os.path.join(REPO, 'assets', 'asset_map_jp.csv')); WIT = opt('--witness', os.path.join(REPO, 'assets', 'witness_jp.csv'))
-REACH = opt('--reach', os.path.join(REPO, 'assets', 'reach_ranges_jp.csv'))
+ASSETS = opt('--assets', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'asset_map_jp.csv')); WIT = opt('--witness', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'witness_jp.csv'))
+REACH = opt('--reach', os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'reach_ranges_jp.csv'))
 UNUSED = opt('--unused', os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv')); OUT = a[0]
 import rom_reach_classes as RC
 _g = RC.build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO)

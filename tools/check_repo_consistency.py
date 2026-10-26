@@ -10,21 +10,21 @@ What it checks (each line of the report is one check)
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
-  renamed    disasm/renamed_jp.csv rows against the counts the README quotes
+  renamed    roms/jp_rev_a/disasm/renamed_jp.csv rows against the counts the README quotes
   quoted     every count that README.md, CLAUDE.md, skills/gb-rom-disassembly/SKILL.md and HOWTO_NEW_ROM.md quote (labels per tag, doubtful rows, distinct bytes,
              blocks, bytes per type, sym lines, really-unused totals, tier table, per-bank layout table, TCRF label count) against the files they come from
-  layout     (needs --rom) jp_rom_layout_map.png and assets/layout_by_bank_jp.csv equal a fresh rom_layout_map.py run; the legend sentences of the README (bytes per kind, padding
+  layout     (needs --rom) jp_rom_layout_map.png and roms/jp_rev_a/assets/layout_by_bank_jp.csv equal a fresh rom_layout_map.py run; the legend sentences of the README (bytes per kind, padding
              tiles, never-run marks, the Src_* / Data_* evidence rows, the graphic spans tagged `?`) equal what the run prints
   sheet      the really_unused.md table rows are copied verbatim into the README; the README says the same total as the md; the hand-kept tail of the md is still there
   files      files that README.md links or shows (images, markdown links) exist; `§N.M` references point to a heading that exists (datasheet sections are listed in EXTERNAL_REFS)
   csvrows    "`file.csv` (N rows)" claims in the README
   docnames   every `Gfx_BB_AAAA_...` / `Map_` / `Src_` / `Data_` / `Sheet_` label quoted in README, CLAUDE.md, the skill and the HOWTO is a label of sym_names_jp.csv (or the start of one)
-  bankpics   (needs --rom) disasm/sym_unconclusive_banks/*.png equal a fresh tools/bank_pics.py run
+  bankpics   (needs --rom) roms/jp_rev_a/disasm/sym_unconclusive_banks/*.png equal a fresh tools/bank_pics.py run
   tcrf       tcrf_check/TCRF_CHECKLIST.md and .csv list the same ids
   effects    tcrf_check/assets/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
              the counts quoted in README 16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
-  ram        disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
-             wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
+  ram        roms/jp_rev_a/disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, roms/jp_rev_a/disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
+             roms/jp_rev_a/wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
   printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
   seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
@@ -60,7 +60,17 @@ def bad(name, msg): FAIL.append('%s: %s' % (name, msg)); print('FAIL  %-10s %s' 
 def warn(name, msg): WARN.append('%s: %s' % (name, msg)); print('warn  %-10s %s' % (name, msg))
 def skip(name, why): SKIP.append(name); print('skip  %-10s %s' % (name, why))
 
-README = rd('README.md'); CLAUDE = rd('CLAUDE.md'); SKILL = rd('skills/gb-rom-disassembly/SKILL.md'); HOWTO = rd('HOWTO_NEW_ROM.md')
+# README.md and the section files of docs/ are read as one document (the notes were one README until 2026-10-26); RDOCS keeps where each part starts
+RDOCS = [('README.md', rd('README.md'))] + [(os.path.join('docs', f), rd(os.path.join('docs', f))) for f in sorted(os.listdir(P('docs'))) if f.endswith('.md')]
+README = ''; RSTART = []
+for _f, _t in RDOCS: RSTART.append((len(README), _f)); README += _t + '\n'
+def rwhere(off):
+    '''file and line of an offset in the README + docs text'''
+    f0, s0 = 'README.md', 0
+    for st, f in RSTART:
+        if st <= off: f0, s0 = f, st
+    return '%s:%d' % (f0, README.count('\n', s0, off) + 1)
+CLAUDE = rd('CLAUDE.md'); SKILL = rd('skills/gb-rom-disassembly/SKILL.md'); HOWTO = rd('HOWTO_NEW_ROM.md')
 DOCS = {'README.md': README, 'CLAUDE.md': CLAUDE, 'SKILL.md': SKILL, 'HOWTO_NEW_ROM.md': HOWTO}
 def quoted(name, pattern, getter, docs=('README.md', 'CLAUDE.md', 'SKILL.md', 'HOWTO_NEW_ROM.md'), need=None):
     """every match of `pattern` in `docs` must give the numbers that getter(match) returns as (expected tuple, found tuple); `need` = docs that must match at least once"""
@@ -72,12 +82,12 @@ def quoted(name, pattern, getter, docs=('README.md', 'CLAUDE.md', 'SKILL.md', 'H
             n += 1
             exp, got = getter(m)
             if tuple(exp) != tuple(got):
-                line = DOCS[d].count('\n', 0, m.start()) + 1
-                bad('quoted', '%s:%d %s says %s, the files say %s' % (d, line, name, got, exp))
+                loc = rwhere(m.start()) if d == 'README.md' else '%s:%d' % (d, DOCS[d].count('\n', 0, m.start()) + 1)
+                bad('quoted', '%s %s says %s, the files say %s' % (loc, name, got, exp))
     return n
 
 # ------------------------------------------------------------------ names
-NAMES = list(csv.DictReader(io.StringIO(rd('disasm/sym_names_jp.csv'))))
+NAMES = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/sym_names_jp.csv'))))
 tags = collections.Counter(r['conf'] for r in NAMES); NL = len(NAMES)
 C, I, Q = tags['C'], tags['I'], tags['?']
 if set(tags) - {'C', 'I', '?'}: bad('names', 'unknown tags %s' % (set(tags) - {'C', 'I', '?'}))
@@ -105,7 +115,7 @@ GFX_ON_MAP = {  # Gfx labels that lie inside a Map type row
     (0x24, 0x6598): 'Mode17_State00_Init copies 8 bytes from the hidden columns 24-31 of the last row of the option-page map 24:63A0-65A0',
 }
 TYPES = []
-for l in rd('disasm/sym_types_jp.csv').split('\n'):
+for l in rd('roms/jp_rev_a/disasm/sym_types_jp.csv').split('\n'):
     if not l or l.startswith('bank'): continue
     p = l.split(','); TYPES.append((int(p[0], 16), int(p[1], 16), int(p[2], 16), p[3], p[4], p[5] if len(p) > 5 else ''))
 WIN = {}
@@ -130,7 +140,7 @@ if A.rom:
     r = subprocess.run([sys.executable, 'tools/sym_build.py', A.rom, '--out', out, '--report'], capture_output=True, text=True)
     if r.returncode: bad('sym', 'sym_build.py failed: %s' % (r.stderr or r.stdout).strip()[-300:])
     else:
-        fresh = open(out).read(); cur = rd('pocketcamera_jp.sym')
+        fresh = open(out).read(); cur = rd('roms/jp_rev_a/pocketcamera_jp.sym')
         if fresh != cur: bad('sym', 'pocketcamera_jp.sym is not what sym_build.py makes from the csv files: rebuild it')
         m = re.search(r'(\d+) labels \(\d+ from the legacy file\), (\d+) type rows, (\d+) lines', r.stdout); LINES = int(m.group(3)); BLOCKS = LINES - int(m.group(1))
         m = re.search(r'bytes by type: (\{.*\})', r.stdout); BYTES = eval(m.group(1))
@@ -141,7 +151,7 @@ else:
     skip('sym', 'no --rom: sym freshness and byte types not checked')
 
 # ------------------------------------------------------------------ doubts
-DR = list(csv.DictReader(io.StringIO(rd('disasm/sym_unconclusive_jp.csv'))))
+DR = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/sym_unconclusive_jp.csv'))))
 def union(rows):
     iv = collections.defaultdict(list)
     for r in rows:
@@ -157,20 +167,20 @@ def union(rows):
         tot += cur[1] - cur[0]
     return tot
 DROWS = len(DR); DBYTES = union(DR)
-DS = list(csv.DictReader(io.StringIO(rd('disasm/sym_settled_unused_jp.csv'))))     # rows proven unused (doubts_overrides_jp.csv, status final): not doubtful
+DS = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/sym_settled_unused_jp.csv'))))     # rows proven unused (doubts_overrides_jp.csv, status final): not doubtful
 DSET = len(DS)
 tmpd = tempfile.mkdtemp(prefix='cons_d_')
-r = subprocess.run([sys.executable, 'tools/make_doubts.py', 'disasm/sym_names_jp.csv', tmpd, 'pocketcamera_jp.sym'], capture_output=True, text=True)
+r = subprocess.run([sys.executable, 'tools/make_doubts.py', 'roms/jp_rev_a/disasm/sym_names_jp.csv', tmpd, 'roms/jp_rev_a/pocketcamera_jp.sym'], capture_output=True, text=True)
 if r.returncode: bad('doubts', 'make_doubts.py failed: %s' % (r.stderr or r.stdout).strip()[-300:])
 else:
     for f in ('sym_unconclusive_jp.csv', 'sym_unconclusive_jp.md', 'sym_settled_unused_jp.csv'):
-        if open(os.path.join(tmpd, f), encoding='utf-8').read() != rd('disasm/' + f): bad('doubts', 'disasm/%s is stale: run tools/make_doubts.py' % f)
+        if open(os.path.join(tmpd, f), encoding='utf-8').read() != rd('roms/jp_rev_a/disasm/' + f): bad('doubts', 'roms/jp_rev_a/disasm/%s is stale: run tools/make_doubts.py' % f)
     if not any(f.startswith('doubts') for f in FAIL): ok('doubts', '%d rows on %s distinct bytes; %d settled as unused' % (DROWS, fmt(DBYTES), DSET))
 shutil.rmtree(tmpd, ignore_errors=True)
 if sum(1 for r in DR if r['conf'] == '?') != Q: bad('doubts', 'the doubts csv holds %d `?` rows, the names csv %d' % (sum(1 for r in DR if r['conf'] == '?'), Q))
 
 # ------------------------------------------------------------------ renamed
-RN = list(csv.DictReader(io.StringIO(rd('disasm/renamed_jp.csv'))))
+RN = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/renamed_jp.csv'))))
 def rn_kind(r):
     if not r['old_name']: return 'new'
     if not r['new_name']: return 'removed'
@@ -199,8 +209,8 @@ n += quoted('doubtful rows', r'; (\d+) doubtful rows are listed', lambda m: ((DR
 n += quoted('doubtful rows', r'(\d+) doubtful rows on ([\d,]+) distinct bytes', lambda m: ((DROWS, DBYTES), (int(m.group(1)), num(m.group(2)))), need=('SKILL.md',))
 n += quoted('doubtful bytes', r'distinct doubtful bytes [\d,]+ -> ([\d,]+)', lambda m: ((DBYTES,), (num(m.group(1)),)), need=('README.md',))
 n += quoted('doubtful bytes', r'sit on ([\d,]+) distinct ROM bytes', lambda m: ((DBYTES,), (num(m.group(1)),)), need=('README.md',))
-n += quoted('doubtful rows', r'the (\d+) rows of `disasm/sym_unconclusive_jp.csv`', lambda m: ((DROWS,), (int(m.group(1)),)), need=('README.md',))
-n += quoted('settled rows', r'(\d+) rows proven unused are listed apart \(`disasm/sym_settled_unused_jp.csv`', lambda m: ((DSET,), (int(m.group(1)),)), need=('README.md',))
+n += quoted('doubtful rows', r'the (\d+) rows of `roms/jp_rev_a/disasm/sym_unconclusive_jp.csv`', lambda m: ((DROWS,), (int(m.group(1)),)), need=('README.md',))
+n += quoted('settled rows', r'(\d+) rows proven unused are listed apart \(`roms/jp_rev_a/disasm/sym_settled_unused_jp.csv`', lambda m: ((DSET,), (int(m.group(1)),)), need=('README.md',))
 # renamed
 n += quoted('renamed rows', r'\((\d+) rows against the start of the pass: (\d+) renames with old / new tag and the reason, (\d+) names kept with a better evidence tag, (\d+) labels removed, (\d+) new\)',
             lambda m: ((len(RN), RK['renamed'], RK['kept'], RK['removed'], RK['new']), tuple(int(m.group(i)) for i in range(1, 6))), need=('README.md',))
@@ -255,7 +265,7 @@ for label, ts in TIERS:
     for x in m:
         if (int(x.group(1)), num(x.group(2))) != (cnt, byt): bad('tiers', 'tier %r: README says %s spans, %s B; really_unused.csv has %d, %s' % (label, x.group(1), x.group(2), cnt, fmt(byt)))
 # per-bank layout table
-LB = list(csv.DictReader(io.StringIO(rd('assets/layout_by_bank_jp.csv'))))
+LB = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/assets/layout_by_bank_jp.csv'))))
 for r in LB:
     if r['bank'] == 'total':
         TOT_UNUSED = int(r['unused_data']); TOT_CODE = int(r['never_run_code']); TOT_IDENT = int(r['unread_identified_data'])
@@ -264,7 +274,7 @@ for r in LB:
         continue
     mm = re.search(r'^\| `\$%s` \|[^|]*\| ([\d,]*) \| ([\d,]*) \|' % r['bank'].upper(), README, re.M)
     if mm and (num(mm.group(1) or '0'), num(mm.group(2) or '0')) != (int(r['unused_data']), int(r['unread_identified_data'])):
-        bad('layout', 'README per-bank row $%s says unused %s / identified %s, assets/layout_by_bank_jp.csv has %s / %s' % (r['bank'], mm.group(1), mm.group(2), r['unused_data'], r['unread_identified_data']))
+        bad('layout', 'README per-bank row $%s says unused %s / identified %s, roms/jp_rev_a/assets/layout_by_bank_jp.csv has %s / %s' % (r['bank'], mm.group(1), mm.group(2), r['unused_data'], r['unread_identified_data']))
 # yellow bytes need the ROM (rom_reach_map.py)
 if A.rom:
     tmp = tempfile.mkdtemp(prefix='cons_y_')
@@ -276,7 +286,7 @@ if A.rom:
         n += quoted('yellow', r'really unused assets\*\* \(([\d,]+) B, [\d.]+ %, (\d+) spans', lambda m: ((YB, YS), (num(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
         n += quoted('yellow', r'(?:The yellow layer is|\d,\d{3} B of them are yellow|yellow bytes of the map at the top of this README:) ?([\d,]+) B', lambda m: ((YB,), (num(m.group(1)),)), docs=('README.md',))
         n += quoted('yellow', r'yellow takes ([\d,]+) B from orange, ([\d,]+) B from blue and ([\d,]+) B from light blue', lambda m: (tuple(int(m2.group(i)) for i in (1, 2, 3)), tuple(num(m.group(i)) for i in (1, 2, 3))), docs=('README.md',), need=('README.md',))
-        if cmp_png := os.path.join(ROOT, 'jp_rom_reachability_map.png'):
+        if cmp_png := os.path.join(ROOT, 'roms', 'jp_rev_a', 'jp_rom_reachability_map.png'):
             if open(cmp_png, 'rb').read() != open(os.path.join(tmp, 'x.png'), 'rb').read(): bad('yellow', 'jp_rom_reachability_map.png is stale: run tcrf_check/tools/rom_reach_map.py (and rom_layout_map.py)')
     shutil.rmtree(tmp, ignore_errors=True)
 else:
@@ -287,8 +297,8 @@ if A.rom:
     r = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', os.path.join(tmp, 'l.png'), '--rom', A.rom, '--csv', os.path.join(tmp, 'l.csv')], capture_output=True, text=True)
     if r.returncode: bad('layout', 'rom_layout_map.py failed: %s' % (r.stderr or r.stdout).strip()[-200:])
     else:
-        if open(os.path.join(tmp, 'l.png'), 'rb').read() != open(P('jp_rom_layout_map.png'), 'rb').read(): bad('layout', 'jp_rom_layout_map.png is stale: run tcrf_check/tools/rom_layout_map.py OUT.png --rom ROM')
-        if open(os.path.join(tmp, 'l.csv'), 'rb').read() != open(P('assets/layout_by_bank_jp.csv'), 'rb').read(): bad('layout', 'assets/layout_by_bank_jp.csv is stale: run rom_layout_map.py --csv assets/layout_by_bank_jp.csv')
+        if open(os.path.join(tmp, 'l.png'), 'rb').read() != open(P('roms/jp_rev_a/jp_rom_layout_map.png'), 'rb').read(): bad('layout', 'jp_rom_layout_map.png is stale: run tcrf_check/tools/rom_layout_map.py OUT.png --rom ROM')
+        if open(os.path.join(tmp, 'l.csv'), 'rb').read() != open(P('roms/jp_rev_a/assets/layout_by_bank_jp.csv'), 'rb').read(): bad('layout', 'roms/jp_rev_a/assets/layout_by_bank_jp.csv is stale: run rom_layout_map.py --csv roms/jp_rev_a/assets/layout_by_bank_jp.csv')
         K = {m.group(1): num(m.group(2)) for m in re.finditer(r'^([A-Z_]+)\s+([\d,]+)\s+[\d.]+ %', r.stdout, re.M)}
         tiles = K['T_UI'] + K['T_STP'] + K['T_FRM'] + K['T_PHO']
         mk = re.search(r'marks \[(\d+), (\d+), (\d+), (\d+)\]', r.stdout); pt = re.search(r'pure padding tiles (\d+) (\d+) B', r.stdout)
@@ -329,11 +339,12 @@ if not HAND_TAIL: bad('sheet', 'really_unused.md lost its hand-kept tail ("*With
 
 # ------------------------------------------------------------------ files and section references
 miss = []
-for m in re.finditer(r'!?\[[^\]]*\]\(([^)\s]+)\)', README):
-    t = m.group(1)
-    if t.startswith('http') or t.startswith('#'): continue
-    if not os.path.exists(P(t.lstrip('/'))): miss.append(t)
-for t in sorted(set(miss)): bad('files', 'README links %s, which does not exist' % t)
+for _f, _t in RDOCS:                       # a link is relative to the file that holds it
+    for m in re.finditer(r'!?\[[^\]]*\]\(([^)\s]+)\)', _t):
+        t = m.group(1).split('#')[0]
+        if not t or t.startswith('http'): continue
+        if not os.path.exists(P(os.path.normpath(os.path.join(os.path.dirname(_f), t.lstrip('/'))))): miss.append('%s -> %s' % (_f, m.group(1)))
+for t in sorted(set(miss)): bad('files', 'link %s, which does not exist' % t)
 heads = set()
 for m in re.finditer(r'^#{1,6} (\d+(?:\.\d+)*)[ .]', README, re.M): heads.add(m.group(1))
 refs = collections.Counter()
@@ -347,7 +358,7 @@ if not miss: ok('files', 'README links exist; %d distinct § references, %d with
 # `file.csv` (N rows)
 for m in re.finditer(r'`((?:[\w.\-]+/)*[\w.\-]+\.csv)` \(([\d,]+) rows', README):
     f = m.group(1)
-    cands = [f] + [os.path.join(d, f) for d in ('assets', 'disasm', 'tcrf_check/assets/unidentified')]
+    cands = [f] + [os.path.join(d, f) for d in ('roms/jp_rev_a/assets', 'roms/jp_rev_a/disasm', 'tcrf_check/assets/unidentified')]
     pth = next((c for c in cands if os.path.exists(P(c))), None)
     if not pth: warn('csvrows', '%s is quoted with %s rows but was not found' % (f, m.group(2))); continue
     rows = len(list(csv.reader(open(P(pth), encoding='utf-8')))) - 1
@@ -368,13 +379,13 @@ if not stale: ok('docnames', 'every asset label quoted in the docs exists')
 
 # bank pictures behind the doubtful rows (tools/bank_pics.py; the colours follow the tags, so a retag changes them)
 if A.rom:
-    bd = P('disasm/sym_unconclusive_banks'); bl = sorted(f[5:7] for f in os.listdir(bd) if re.match(r'bank_[0-9A-F]{2}\.png$', f))
+    bd = P('roms/jp_rev_a/disasm/sym_unconclusive_banks'); bl = sorted(f[5:7] for f in os.listdir(bd) if re.match(r'bank_[0-9A-F]{2}\.png$', f))
     tmp = tempfile.mkdtemp(prefix='cons_b_')
-    r = subprocess.run([sys.executable, 'tools/bank_pics.py', A.rom, 'disasm/sym_names_jp.csv', tmp] + bl, capture_output=True, text=True)
+    r = subprocess.run([sys.executable, 'tools/bank_pics.py', A.rom, 'roms/jp_rev_a/disasm/sym_names_jp.csv', tmp] + bl, capture_output=True, text=True)
     if r.returncode: bad('bankpics', 'bank_pics.py failed: %s' % (r.stderr or r.stdout).strip()[-200:])
     else:
         old = [b for b in bl if open(os.path.join(tmp, 'bank_%s.png' % b), 'rb').read() != open(os.path.join(bd, 'bank_%s.png' % b), 'rb').read()]
-        for b in old: bad('bankpics', 'disasm/sym_unconclusive_banks/bank_%s.png is stale: run tools/bank_pics.py ROM disasm/sym_names_jp.csv disasm/sym_unconclusive_banks %s' % (b, ' '.join(bl)))
+        for b in old: bad('bankpics', 'roms/jp_rev_a/disasm/sym_unconclusive_banks/bank_%s.png is stale: run tools/bank_pics.py ROM roms/jp_rev_a/disasm/sym_names_jp.csv roms/jp_rev_a/disasm/sym_unconclusive_banks %s' % (b, ' '.join(bl)))
         if not old: ok('bankpics', '%d bank pictures fresh' % len(bl))
     shutil.rmtree(tmp, ignore_errors=True)
 else:
@@ -427,9 +438,9 @@ sys.path.insert(0, P('tools'))
 import ram_names as RN
 RAM_BAD = 0
 try:
-    RAM_ROWS = RN.load(P('disasm/ram_names_jp.csv'))
+    RAM_ROWS = RN.load(P('roms/jp_rev_a/disasm/ram_names_jp.csv'))
 except Exception as e:
-    RAM_ROWS = []; bad('ram', 'disasm/ram_names_jp.csv does not load: %s' % e); RAM_BAD += 1
+    RAM_ROWS = []; bad('ram', 'roms/jp_rev_a/disasm/ram_names_jp.csv does not load: %s' % e); RAM_BAD += 1
 RAM_TAGS = collections.Counter(r.tag for r in RAM_ROWS)
 ROMNAMES = {r['name'] for r in NAMES}
 for r in RAM_ROWS:
@@ -440,15 +451,15 @@ for r in RAM_ROWS:
         bad('ram', '%s (%04X, %d bytes): the name must be w + PascalCase inside $C000-$DFFF or h + PascalCase inside $FF80-$FFFF' % (r.name, r.addr, r.size)); RAM_BAD += 1
     if r.name in ROMNAMES: bad('ram', '%s is also a ROM label' % r.name); RAM_BAD += 1
     if r.tag not in ('C', 'I', 'U', '?'): bad('ram', '%s: unknown tag %r' % (r.name, r.tag)); RAM_BAD += 1
-RAM_EXCL = list(csv.DictReader(io.StringIO(rd('disasm/ram_exclude_jp.csv'))))
-for fn, text in (('disasm/ram_jp.inc', RN.inc_text(RAM_ROWS)), ('pocketcamera_jp_ram.sym', RN.sym_text(RAM_ROWS))):
+RAM_EXCL = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/ram_exclude_jp.csv'))))
+for fn, text in (('roms/jp_rev_a/disasm/ram_jp.inc', RN.inc_text(RAM_ROWS)), ('roms/jp_rev_a/pocketcamera_jp_ram.sym', RN.sym_text(RAM_ROWS))):
     if not os.path.exists(P(fn)) or open(P(fn), encoding='utf-8', newline='').read() != text:
-        bad('ram', '%s is not what tools/ram_names.py writes from disasm/ram_names_jp.csv (run it)' % fn); RAM_BAD += 1
+        bad('ram', '%s is not what tools/ram_names.py writes from roms/jp_rev_a/disasm/ram_names_jp.csv (run it)' % fn); RAM_BAD += 1
 # every proven access gets exactly one name; the exclusions are pointer loads of numbers
 RES = RN.Resolver(RAM_ROWS)
 excl = {(int(r['bank'], 16), int(r['pc'], 16)): int(r['value'], 16) for r in RAM_EXCL}
 acc_sites = set(); acc_unnamed = collections.Counter(); acc_kinds = collections.Counter(); excl_seen = set(); named_rows = set()
-for r in csv.DictReader(io.StringIO(rd('wram/wram_access.csv'))):
+for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/wram/wram_access.csv'))):
     a = int(r['addr'], 16); key = (int(r['bank'], 16), int(r['pc'], 16))
     if r['kind'] == 'P' and excl.get(key) == a: excl_seen.add(key); continue
     if not (0xC000 <= a < 0xE000 or 0xFF80 <= a <= 0xFFFE): continue
@@ -456,7 +467,7 @@ for r in csv.DictReader(io.StringIO(rd('wram/wram_access.csv'))):
     except ValueError as e: bad('ram', str(e)); RAM_BAD += 1; continue
     if res is None: acc_unnamed[(key[0], a)] += 1; continue
     acc_sites.add(key + (a,)); acc_kinds[r['kind']] += 1; named_rows.add(res[0].name)
-for (b, a), n in sorted(acc_unnamed.items()): bad('ram', 'bank %02X address $%04X (%d accesses) has no name for that bank: add a row to disasm/ram_names_jp.csv or an exclusion' % (b, a, n)); RAM_BAD += 1
+for (b, a), n in sorted(acc_unnamed.items()): bad('ram', 'bank %02X address $%04X (%d accesses) has no name for that bank: add a row to roms/jp_rev_a/disasm/ram_names_jp.csv or an exclusion' % (b, a, n)); RAM_BAD += 1
 for k, v in excl.items():
     if k not in excl_seen: bad('ram', 'ram_exclude_jp.csv %02X:%04X $%04X is not a pointer load of the access table' % (k[0], k[1], v)); RAM_BAD += 1
 if not RAM_BAD:
@@ -464,7 +475,7 @@ if not RAM_BAD:
         len(RAM_ROWS), RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?'], sum(1 for r in RAM_ROWS if r.scope != '*'), len(acc_sites), len(excl)))
     quoted('ram rows', r'(?<![\w.])([\d,]+) RAM names', lambda m: ((len(RAM_ROWS),), (num(m.group(1)),)), docs=('README.md', 'CLAUDE.md', 'SKILL.md', 'HOWTO_NEW_ROM.md'), need=('README.md',))
     quoted('ram tags', r'RAM names \(C ([\d,]+) / I ([\d,]+) / U ([\d,]+) / \? ([\d,]+)', lambda m: ((RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
-    quoted('ram sites', r'resolves? every access of `wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+    quoted('ram sites', r'resolves? every access of `roms/jp_rev_a/wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ first readers of the forced-only data bytes (README 16.24)
@@ -513,7 +524,7 @@ if PW:
     quoted('print watch', r'are read in organic runs \(([\d,]+) of ([\d,]+) B\), `26:7080-72BF` is not \((\d+) of 576 B\), while its neighbours `26:4C80` and `26:72C0` are \((\d+) of 576 B each\)',
            lambda m: (cov[:4], (num(m.group(1)), num(m.group(2)), int(m.group(3)), int(m.group(4)))), docs=('README.md',), need=('README.md',))
     if A.rom:
-        romb = open(A.rom, 'rb').read(); trc = json.loads(rd('wram/trace_jp_v3.json'))['code']
+        romb = open(A.rom, 'rb').read(); trc = json.loads(rd('roms/jp_rev_a/wram/trace_jp_v3.json'))['code']
         cov_b = set()
         for k_, L_ in trc.items():
             b_ = int(k_[:2], 16); a_ = int(k_[3:], 16); o_ = a_ if b_ == 0 else b_ * 0x4000 + a_ - 0x4000; cov_b.update(range(o_, o_ + L_))
@@ -716,18 +727,18 @@ if PR_N:
 import const_names as CN
 CN_BAD = 0
 try:
-    C_ROWS = CN.load_names(P('disasm/const_names_jp.csv')); C_TYPES = CN.load_types(P('disasm/const_types_jp.csv')); C_TABS = CN.load_tables(P('disasm/const_tables_jp.csv'))
-    S_ROWS = CN.load_sounds(P('disasm/sound_names_jp.csv')); ST_ROWS = CN.load_states(P('disasm/state_names_jp.csv')); CN.check_unique(C_ROWS + ST_ROWS + S_ROWS)
+    C_ROWS = CN.load_names(P('roms/jp_rev_a/disasm/const_names_jp.csv')); C_TYPES = CN.load_types(P('roms/jp_rev_a/disasm/const_types_jp.csv')); C_TABS = CN.load_tables(P('roms/jp_rev_a/disasm/const_tables_jp.csv'))
+    S_ROWS = CN.load_sounds(P('roms/jp_rev_a/disasm/sound_names_jp.csv')); ST_ROWS = CN.load_states(P('roms/jp_rev_a/disasm/state_names_jp.csv')); CN.check_unique(C_ROWS + ST_ROWS + S_ROWS)
 except Exception as e:
     C_ROWS = []; S_ROWS = []; ST_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
 CNAMER = CN.Namer(C_ROWS + ST_ROWS + S_ROWS)
-# state constants (README 2.14): disasm/state_names_jp.csv must be what tools/state_names.py makes from the state tables and the handler labels
+# state constants (README 2.14): roms/jp_rev_a/disasm/state_names_jp.csv must be what tools/state_names.py makes from the state tables and the handler labels
 if A.rom:
     r = subprocess.run([sys.executable, 'tools/state_names.py', '--rom', A.rom, '--check'], capture_output=True, text=True)
-    if r.returncode: bad('const', 'disasm/state_names_jp.csv is stale: run tools/state_names.py --rom ROM'); CN_BAD += 1
-# text table (README 16.27): disasm/charmap_jp.inc must be what tools/charmap_jp.py makes from disasm/charset_jp.csv
+    if r.returncode: bad('const', 'roms/jp_rev_a/disasm/state_names_jp.csv is stale: run tools/state_names.py --rom ROM'); CN_BAD += 1
+# text table (README 16.27): roms/jp_rev_a/disasm/charmap_jp.inc must be what tools/charmap_jp.py makes from roms/jp_rev_a/disasm/charset_jp.csv
 r = subprocess.run([sys.executable, 'tools/charmap_jp.py', '--check'], capture_output=True, text=True)
-if r.returncode: bad('const', 'disasm/charmap_jp.inc is stale: run tools/charmap_jp.py'); CN_BAD += 1
+if r.returncode: bad('const', 'roms/jp_rev_a/disasm/charmap_jp.inc is stale: run tools/charmap_jp.py'); CN_BAD += 1
 for r in ST_ROWS:
     if r.name in NAMESET or r.name in {x.name for x in RAM_ROWS}: bad('const', '%s is also a ROM label or a RAM name' % r.name); CN_BAD += 1
 ST_TAGS = collections.Counter(r.tag for r in ST_ROWS)
@@ -779,8 +790,8 @@ for t in C_TABS:
         if CROM:
             ad = t['addr'] + i; v = CROM[ad if t['bank'] == 0 else t['bank'] * 0x4000 + ad - 0x4000]
             if CNAMER.value(t['group'], v) is None: bad('const', 'const_tables_jp.csv %02X:%04X byte %d = $%02X is not a mode' % (key + (i, v))); CN_BAD += 1
-if not os.path.exists(P('disasm/const_jp.inc')) or open(P('disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS + ST_ROWS + S_ROWS):
-    bad('const', 'disasm/const_jp.inc is not what tools/const_names.py writes from disasm/const_names_jp.csv, state_names_jp.csv and sound_names_jp.csv (run it)'); CN_BAD += 1
+if not os.path.exists(P('roms/jp_rev_a/disasm/const_jp.inc')) or open(P('roms/jp_rev_a/disasm/const_jp.inc'), encoding='utf-8', newline='').read() != CN.inc_text(C_ROWS + ST_ROWS + S_ROWS):
+    bad('const', 'roms/jp_rev_a/disasm/const_jp.inc is not what tools/const_names.py writes from roms/jp_rev_a/disasm/const_names_jp.csv, state_names_jp.csv and sound_names_jp.csv (run it)'); CN_BAD += 1
 C_TYPED_VARS = sum(1 for v in C_TYPES if v not in C_CALLS)
 if not CN_BAD:
     ok('const', '%d names (C %d, I %d; %d modes, %d sound channels) + %d sound names, %d typed operands and %d typed call targets, %d tables (%d mode bytes, %d sound-list bytes); const_jp.inc is fresh' % (len(C_ROWS), C_TAGS['C'], C_TAGS['I'], len(C_MODES) - 2, 4, len(S_ROWS), C_TYPED_VARS, len(C_CALLS), len(C_TABS), C_MODE_BYTES, C_SND_BYTES))
@@ -791,10 +802,10 @@ if not CN_BAD:
 
 # ------------------------------------------------------------------ sound names (L4, README 2.14 and 16.24)
 SND_BAD = 0
-SND_ROWS = list(csv.DictReader(io.StringIO(rd('disasm/sound_names_jp.csv'))))
+SND_ROWS = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/sound_names_jp.csv'))))
 SND_INV = {(r['channel'], r['id'].upper()): r for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/sound_inventory.csv')))}
 SND_UNUSED = {(r['channel'], r['id'].upper()) for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/really_unused_sounds.csv')))}
-SND_OWNER = {r['key'] for r in csv.DictReader(io.StringIO(rd('disasm/owner_answers_jp.csv')))}
+SND_OWNER = {r['key'] for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/owner_answers_jp.csv')))}
 SND_PREFIX = {'music': 'MUSIC_', 'sfx1': 'SFX1_', 'sfx3': 'SFX3_', 'sfx4': 'SFX4_'}
 SND_CONTROL = {('music', 'FE'), ('music', 'FF')}              # requests of the song mailbox that are engine commands, not songs
 SND_HELPER = {0x2A7C: 'sfx1', 0x2A80: 'sfx3', 0x2A84: 'sfx4', 0x2A88: 'music'}      # Snd_Sfx1 / Snd_Sfx3 / Snd_Sfx4 / Snd_Music (00:2A7C ...)
@@ -859,7 +870,7 @@ if A.roundtrip:
     elif not os.path.exists(A.mgbdis): skip('roundtrip', 'mgbdis not found at %s (--mgbdis)' % A.mgbdis)
     else:
         tmp = tempfile.mkdtemp(prefix='cons_rt_'); rom = os.path.join(tmp, 'in', 'pocketcamera_jp.gb'); os.makedirs(os.path.dirname(rom))
-        shutil.copy(A.rom, rom); shutil.copy(P('pocketcamera_jp.sym'), os.path.join(tmp, 'in', 'pocketcamera_jp.sym'))
+        shutil.copy(A.rom, rom); shutil.copy(P('roms/jp_rev_a/pocketcamera_jp.sym'), os.path.join(tmp, 'in', 'pocketcamera_jp.sym'))
         env = dict(os.environ); env['PATH'] = A.rgbds + ':' + env['PATH']
         want = 'fdcfe686cf4df461e870b6e53b2b5a8b'
         subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', os.path.join(tmp, 'hex'), '--overwrite', '--print-hex'], capture_output=True, text=True)    # sym_fix.py reads the `; $ADDR: $xx` comments
@@ -879,10 +890,10 @@ if A.roundtrip:
                        lambda m: ((lab['jr'], lab['Jump'], lab['Call']), (num(m.group(1)), num(m.group(2)), num(m.group(3)))), docs=('README.md',), need=('README.md',))
             elif variant == 'fixed':
                 shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
-                subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
+                subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'roms/jp_rev_a/pocketcamera_jp.sym', '--trace', 'roms/jp_rev_a/wram/trace_jp_v3.json'], capture_output=True, text=True)
             else:
                 shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
-                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--const' if variant == 'const' else '--ram', '--rom', A.rom, '--sym', 'pocketcamera_jp.sym', '--trace', 'wram/trace_jp_v3.json'], capture_output=True, text=True)
+                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--const' if variant == 'const' else '--ram', '--rom', A.rom, '--sym', 'roms/jp_rev_a/pocketcamera_jp.sym', '--trace', 'roms/jp_rev_a/wram/trace_jp_v3.json'], capture_output=True, text=True)
                 st = {k: int(v) for k, v in re.findall(r'(\w+)=(\d+)', sf.stdout.split('sym_fix:')[-1])}
                 if variant == 'const':
                     quoted('sym_fix stats', r'\((\d+) MBC writes, (\d+) byte counts and (\d+) sprite positions in `bc`, (\d+) far-pointer loads, ([\d,]+) \+ ([\d,]+) word-table rows as `dw`, (\d+) `\{lo,hi,bank\}` rows',

@@ -12,7 +12,7 @@ What is recorded per run: the bytes of the component that ran, whether the code 
 WRAM bytes that changed, and (mode, state) before and after.  Nothing is learned about what the code was FOR: a fragment run in the wrong state does what the state makes it do.
 
 Build the core:   cc -O2 -shared -fPIC -o libgbcov_display.so gbcov_display.c      Environment: GBCOV_LIB (that .so), GBCAM_ROOT (default /home/claude/gbcam_jp: saves, corpus).
-usage: dead_jump.py CACHE_DIR OUT.json [COMPONENT ...]     (no component = every UNREFERENCED one; names as in assets/reach_components_jp.csv, e.g. 04:7C9D)
+usage: dead_jump.py CACHE_DIR OUT.json [COMPONENT ...]     (no component = every UNREFERENCED one; names as in roms/jp_rev_a/assets/reach_components_jp.csv, e.g. 04:7C9D)
 """
 import sys, os, csv, json, pickle, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -23,9 +23,9 @@ REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
 CORPUS = os.path.join(os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp'), 'unlock_runs/f1_organic/corpus.jsonl')
 
 def components():
-    """{id: dict(bank, verdict, runs=[(start, end)], entry)} from assets/reach_ranges_jp.csv"""
+    """{id: dict(bank, verdict, runs=[(start, end)], entry)} from roms/jp_rev_a/assets/reach_ranges_jp.csv"""
     out = collections.OrderedDict()
-    for r in csv.DictReader(open(os.path.join(REPO, 'assets/reach_ranges_jp.csv'))):
+    for r in csv.DictReader(open(os.path.join(REPO, 'roms/jp_rev_a/assets/reach_ranges_jp.csv'))):
         c = out.setdefault(r['component'], dict(bank=int(r['bank'], 16), verdict=r['verdict'], runs=[]))
         c['runs'].append((int(r['start'], 16), int(r['end'], 16)))
     for c in out.values(): c['entry'] = min(s for s, e in c['runs']); c['size'] = sum(e - s + 1 for s, e in c['runs'])

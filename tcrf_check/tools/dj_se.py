@@ -20,7 +20,7 @@ for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'v8', 'report_v8', '
     cls[flat(int(r['bank'], 16), int(r['start'], 16)):][:int(r['length'])] = ord(r['class'])
 isN = cls == ord('N')
 WIT = np.zeros(N, bool)
-for r in csv.DictReader(open(os.path.join(REPO, 'assets', 'witness_jp.csv'))):
+for r in csv.DictReader(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'witness_jp.csv'))):
     s = flat(int(r['bank'], 16), int(r['start'], 16)); WIT[s:s + int(r['bytes'])] = True
 left = isN & ~WIT
 C = lib.Corpus(route['corpus']); g.set_organic(1); C.replay(route['entry'])

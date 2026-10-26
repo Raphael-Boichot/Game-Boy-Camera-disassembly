@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """State constants of Pocket Camera (Japan) Rev A: one group per mode (`state_0e` ...), named from the state tables.
 
-  tools/state_names.py [--rom pocketcamera_jp.gb] [--out disasm/state_names_jp.csv] [--check]
+  tools/state_names.py [--rom pocketcamera_jp.gb] [--out roms/jp_rev_a/disasm/state_names_jp.csv] [--check]
 
 For every mode the table `ModeNN_StateTable` (the `rst $18` word table of its state handlers; its length is the `.data` block of the symbol file) gives
 one handler per state number.  A state gets a name only when the label at its handler is `ModeNN_StateSS_Name` with the same mode NN and the same
 state SS: the constant is `STATE_NN_NAME` (CamelCase -> UPPER_SNAKE), with the tag of that label; a name that several states of one mode share
 takes the state number (`STATE_21_UNUSED_08`).  A state past the end of its table, a handler shared
-by several states or a handler without such a label stays a number, unless disasm/state_shared_jp.csv names it (mode, state, name, tag, desc).  Inputs: disasm/sym_names_jp.csv (labels and tags), pocketcamera_jp.sym (table
-lengths), the ROM (the words of the tables).  Output: group,value,name,tag,desc in the format of disasm/const_names_jp.csv, read by tools/const_names.py
+by several states or a handler without such a label stays a number, unless roms/jp_rev_a/disasm/state_shared_jp.csv names it (mode, state, name, tag, desc).  Inputs: roms/jp_rev_a/disasm/sym_names_jp.csv (labels and tags), pocketcamera_jp.sym (table
+lengths), the ROM (the words of the tables).  Output: group,value,name,tag,desc in the format of roms/jp_rev_a/disasm/const_names_jp.csv, read by tools/const_names.py
 (const_jp.inc) and tools/sym_fix.py --const.  Never edit the output by hand: rename the handler label and rerun this script."""
 import csv, os, re, sys, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
@@ -64,9 +64,9 @@ def text(rows):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--rom', default=os.path.join(ROOT, 'pocketcamera_jp.gb'))
-    ap.add_argument('--names', default=os.path.join(ROOT, 'disasm', 'sym_names_jp.csv'))
-    ap.add_argument('--sym', default=os.path.join(ROOT, 'pocketcamera_jp.sym'))
-    ap.add_argument('--out', default=os.path.join(ROOT, 'disasm', 'state_names_jp.csv'))
+    ap.add_argument('--names', default=os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv'))
+    ap.add_argument('--sym', default=os.path.join(ROOT, 'roms', 'jp_rev_a', 'pocketcamera_jp.sym'))
+    ap.add_argument('--out', default=os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'state_names_jp.csv'))
     ap.add_argument('--check', action='store_true')
     a = ap.parse_args()
     t = text(build(open(a.rom, 'rb').read(), a.names, a.sym))

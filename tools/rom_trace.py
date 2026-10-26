@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""[v2: adds --roots (hand-resolved indirect-flow roots, see disasm/code_gaps.md and tools/extra_roots.json) and four rules marked "TRY"; with no --roots argument it reproduces the first version exactly: 56,799 instructions, 14 unresolved]
+"""[v2: adds --roots (hand-resolved indirect-flow roots, see roms/jp_rev_a/disasm/code_gaps.md and tools/extra_roots.json) and four rules marked "TRY"; with no --roots argument it reproduces the first version exactly: 56,799 instructions, 14 unresolved]
 Static recursive-descent tracer for the Game Boy Camera / Pocket Camera ROM (SM83, MBC with ROM bank at $2000).
 
 Goal: separate *proven code* (reachable from the vectors, the boot entry, every code label of the .sym file and the
 state tables of the mode banks) from everything else, with an explicit list of what could NOT be resolved.
 
 usage: rom_trace.py <rom.gb> tools/rom_trace_labels.sym <out.json> [--roots tools/extra_roots.json]
-(<sym> must be the 183-label first-pass file tools/rom_trace_labels.sym: the tracer takes every name that does not start with `.data` as a code root, so the full pocketcamera_jp.sym, which names tables and tiles too, gives a different trace.  With --roots it writes wram/trace_jp_v3.json bit for bit.)
+(<sym> must be the 183-label first-pass file tools/rom_trace_labels.sym: the tracer takes every name that does not start with `.data` as a code root, so the full pocketcamera_jp.sym, which names tables and tiles too, gives a different trace.  With --roots it writes roms/jp_rev_a/wram/trace_jp_v3.json bit for bit.)
 
 Conventions that the tracer knows (all verified in the JP ROM):
   * bank 0 = $0000-$3FFF fixed, banks 1..63 at $4000-$7FFF; the ROM bank is written to $2000.

@@ -92,7 +92,7 @@ if __name__ == '__main__':
     for n, b, ad in STRIPS:
         res, own = vs_strip(rom, b, ad)
         print('strip %s: own collar seam %2d | frames F0-F9 [ids $20-27 equal, ids $28-2F equal, seam]: %s' % (n, own, ' '.join('F%d[%d,%d,%d]' % (j, *r) for j, r in enumerate(res))))
-    for r in csv.DictReader(open(os.path.join(ROOT, 'assets/copy_sites_jp.csv'))):
+    for r in csv.DictReader(open(os.path.join(ROOT, 'roms/jp_rev_a/assets/copy_sites_jp.csv'))):
         if r['src_bank'] == '16' and r['src'] in ('6980', '7180', '7B80'): print('copy site %s:%s %s loads 16:%s to %s' % (r['caller_bank'], r['call_addr'], r['caller_label'], r['src'], r['dst']))
     if '--png' in a: collar_png(rom, a[a.index('--png') + 1])
     if '--pairs' in a: pairs_png(rom, a[a.index('--pairs') + 1])

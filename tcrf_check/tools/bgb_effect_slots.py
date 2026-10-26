@@ -42,7 +42,7 @@ def static_map(rom, sym_path=None):
     tbl = rom[flat(6, 0x60DB):flat(6, 0x60DB) + 88]
     jt = rom[flat(0xA, 0x541A):flat(0xA, 0x541A) + 192]
     sym = {}
-    sp = sym_path or os.path.join(REPO, 'pocketcamera_jp.sym')
+    sp = sym_path or os.path.join(REPO, 'roms', 'jp_rev_a', 'pocketcamera_jp.sym')
     if os.path.exists(sp):
         for l in open(sp):
             m = re.match(r'0a:([0-9a-f]{4}) ([A-Za-z_]\w*)$', l.strip())

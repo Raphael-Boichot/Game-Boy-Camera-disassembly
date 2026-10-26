@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """TCRF "Print" (checklist C06): the printer ink-refill syringe of the Japanese ACCESS > PRINT menu is a Game Boy Printer in the international ROM.
 The screen is mode $1B state 00 (Mode1B_State00_Init, 08:400A): background tiles 18:6470 (2 KB, ids $00-$7F at $9000) and 18:6C70 (2 KB, ids $80-$FF at $8800),
-the map (20 x 18 cells, rows of 32 bytes) 25:7CA0 in the JP ROM (assets/copy_sites_jp.csv, Mode1B_State00_Init) and 25:7A60 in the international ROM (found by the render: it equals
+the map (20 x 18 cells, rows of 32 bytes) 25:7CA0 in the JP ROM (roms/jp_rev_a/assets/copy_sites_jp.csv, Mode1B_State00_Init) and 25:7A60 in the international ROM (found by the render: it equals
 the BGB capture); the icon is the 6 x 5 cells at map
 rows 9-13, columns 1-6.  The ROM address of a cell's tile is exact here (id x 16 from the two bases), not a value match.
 Writes the two background pictures (160 x 144, no sprites, BGP = identity) side by side with the icon cells boxed, and the cell table of both ROMs.

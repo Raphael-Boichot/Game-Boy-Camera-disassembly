@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ONE contact sheet (open_assets.png) of the asset rows still open in disasm/sym_unconclusive_jp.csv (groups: visually identified range,
+"""ONE contact sheet (open_assets.png) of the asset rows still open in roms/jp_rev_a/disasm/sym_unconclusive_jp.csv (groups: visually identified range,
 far-pointer asset, content-classified span, unknown data), rendered as 2bpp tiles straight from the ROM (not from the core's renderer),
 with the TCRF checklist ids that overlap each span.  Sections: graphic spans (2bpp), tile maps (byte value as grey), small unread data blocks (2bpp, hex under 16 B). usage: unidentified_sheets.py [ROM] [OUTDIR]"""
 import sys, os, csv, re, collections
@@ -16,7 +16,7 @@ for r in csv.DictReader(open(REPO + '/tcrf_check/TCRF_CHECKLIST.csv', encoding='
     for m in re.finditer(r'([0-9A-F]{2}):([0-9A-F]{4})-([0-9A-F]{4})', r['rom']):
         tc.append((r['id'], r['item'], int(m.group(1), 16), int(m.group(2), 16), int(m.group(3), 16)))
 rows = []
-for r in csv.DictReader(open(REPO + '/disasm/sym_unconclusive_jp.csv', encoding='utf-8')):
+for r in csv.DictReader(open(REPO + '/roms/jp_rev_a/disasm/sym_unconclusive_jp.csv', encoding='utf-8')):
     if r['group'] not in GROUPS: continue
     b = int(r['bank'], 16); a = int(r['addr'], 16); n = int(r['size'] or 0)
     if n <= 0: continue

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """REALLY unused assets: ONE picture (really_unused.png) + CSVs, from the display-tracking replays (README 16.24).
 Inputs : display_union.npz (disp, fr, fro, snd = union of display_replay.py / display_stamps.py runs; or --npz-dir DIR to build it from DIR/*.npz),
-         open_assets.csv (unidentified_sheets.py), sound_inventory.csv, disasm/sym_names_jp.csv + sym_types_jp.csv (the Unused_TCRF_* spans),
+         open_assets.csv (unidentified_sheets.py), sound_inventory.csv, roms/jp_rev_a/disasm/sym_names_jp.csv + sym_types_jp.csv (the Unused_TCRF_* spans),
          the coverage file (organic / forced ROM reads; COV env, default merged_v8/cov.npz), the ROM.
 Verdict of a graphic span: the tiles are 'on screen' when a byte of the tile row is fetched by the PPU model in >= STABLE (15) distinct frames
 (a screen being loaded flashes tiles for 1-3 frames; those do not count).  organic = no state poke in the lineage of the run.
@@ -50,9 +50,9 @@ for r in csv.DictReader(open(OUT + '/open_assets.csv', encoding='utf-8')):
     b = int(r['bank'], 16); a = int(r['addr'], 16); n = int(r['bytes']); k = r['name'].split('_')[0]
     rows.append(dict(bank=r['bank'], addr=r['addr'], b=b, a=a, n=n, name=r['name'], kind=k, tcrf=r['tcrf_ids'], src='open'))
 names = {}
-for r in csv.DictReader(open(REPO + '/disasm/sym_names_jp.csv', encoding='utf-8')): names[(int(r['bank'], 16), int(r['addr'], 16))] = r
+for r in csv.DictReader(open(REPO + '/roms/jp_rev_a/disasm/sym_names_jp.csv', encoding='utf-8')): names[(int(r['bank'], 16), int(r['addr'], 16))] = r
 types = {}
-for r in csv.DictReader(open(REPO + '/disasm/sym_types_jp.csv', encoding='utf-8')): types[(int(r['bank'], 16), int(r['start'], 16))] = int(r['end'], 16)
+for r in csv.DictReader(open(REPO + '/roms/jp_rev_a/disasm/sym_types_jp.csv', encoding='utf-8')): types[(int(r['bank'], 16), int(r['start'], 16))] = int(r['end'], 16)
 for r in rows:     # open_assets.csv is written by unidentified_sheets.py and can be older than the sym: the live label wins
     nm = names.get((r['b'], r['a']))
     if nm and nm['name'] != '-' and nm['name'] != r['name']: r['name'] = nm['name']; r['kind'] = nm['name'].split('_')[0]

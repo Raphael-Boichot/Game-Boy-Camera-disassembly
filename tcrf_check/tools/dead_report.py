@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """README 16.26: the result tables of the forced never-run code.  Reads the outputs of dead_jump.py (UNREFERENCED, jump), dead_flip.py (UNREACHABLE, gate flipped), the direct jumps into the pieces
-whose gate the flips never executed, dead_effects.py (effect table), and the BGB result files of bgb_dead_hook.py; writes assets/force_unref_jp.csv (48 rows) and assets/force_flip_jp.csv (73 rows).
+whose gate the flips never executed, dead_effects.py (effect table), and the BGB result files of bgb_dead_hook.py; writes roms/jp_rev_a/assets/force_unref_jp.csv (48 rows) and roms/jp_rev_a/assets/force_flip_jp.csv (73 rows).
 usage: dead_report.py DEAD_DIR BGB_DIR OUT_DIR [FORCED_DIR for bgb_cases_jp.csv]       (DEAD_DIR holds unref.json flip.json unreach_jump0.json unreach_jump1.json effects.json xorslots.json; BGB_DIR holds out3 out4 outF outU outE)"""
 import sys, os, re, json, csv, glob, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
 
 def sym():
     d = {}
-    for l in open(os.path.join(REPO, 'pocketcamera_jp.sym')):
+    for l in open(os.path.join(REPO, 'roms', 'jp_rev_a', 'pocketcamera_jp.sym')):
         m = re.match(r'^([0-9a-fA-F]{2}):([0-9a-fA-F]{4}) (\S+)', l)
         if m: d[(int(m.group(1), 16), int(m.group(2), 16))] = m.group(3)
     return d
@@ -94,7 +94,7 @@ def bgb_unref(bgb):
 
 def main():
     dead, bgb, out = sys.argv[1:4]; os.makedirs(out, exist_ok=True); S = sym()
-    comps = {r['first_addr']: r for r in csv.DictReader(open(os.path.join(REPO, 'assets', 'reach_components_jp.csv')))}
+    comps = {r['first_addr']: r for r in csv.DictReader(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'assets', 'reach_components_jp.csv')))}
     U = json.load(open(os.path.join(dead, 'unref.json'))); B = bgb_unref(bgb)
     T = json.load(open(os.path.join(dead, 'targeted.json'))); T_EXTRA = {}
     T_EXTRA['00:10AC'] = 'targeted core run ($D92E = 1..8, NR10-NR14 of channel 1): ' + '; '.join('%d: %s' % (n, ' '.join('%02X' % v for k, v in T['uieffect_%d' % n]['apu'])) for n in range(1, 9))

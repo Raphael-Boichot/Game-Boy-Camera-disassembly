@@ -1,0 +1,3 @@
+label,layout,end,evidence
+Kb_DakutenMapTbl,cnc,ff,"records {first char, count, voiced first char} read by Kb_ApplyMarkTable for key $30: か x15 -> が, は x5 -> ば, ウ x1 -> ヴ, カ x15 -> ガ, ハ x5 -> バ (code read; the codes follow roms/jp_rev_a/disasm/charset_jp.csv)"
+Kb_HandakutenMapTbl,cnc,ff,"records {first char, count, semi-voiced first char} read by Kb_ApplyMarkTable for key $31: は x5 -> ぱ, ハ x5 -> パ"

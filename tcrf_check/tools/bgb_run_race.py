@@ -20,7 +20,7 @@ CORE = [(1, 'Right'), (2, 'Left'), (4, 'Up'), (8, 'Down'), (16, 'A'), (32, 'B'),
 def names(k): return '+'.join(n for m, n in CORE if k & m) or '-'
 REPO = os.environ.get('REPO', '/home/claude/w/clone/Game-Boy-Camera-disassembly')
 rom = os.path.join(ROOT, 'pocketcamera_jp.gb'); romb = open(rom, 'rb').read()
-heads, members, code = B.blocks(romb, json.load(open(os.path.join(REPO, 'wram', 'trace_jp_v3.json'))))
+heads, members, code = B.blocks(romb, json.load(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'wram', 'trace_jp_v3.json'))))
 N = 1 << 20; cls = np.zeros(N, np.uint8)
 for r in csv.DictReader(open(os.path.join(REPO, 'coverage', 'v8', 'report_v8', 'rom_map.csv'))):
     cls[B.flat(int(r['bank'], 16), int(r['start'], 16)):][:int(r['length'])] = ord(r['class'])

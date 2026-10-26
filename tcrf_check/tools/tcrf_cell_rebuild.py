@@ -7,7 +7,7 @@ usage: tcrf_cell_rebuild.py ROM PICTURE.png OUT.png [--scale 2] [--box BB:AAAA:C
   A partial cell at the right or bottom edge is matched against the same part of the tiles (the first hit is used).  OUT shows the picture, the picture
   rebuilt from the found tiles and the pixels that differ; --box outlines a block of tiles of the rebuild (e.g. 13:5CA0:6:1, the label's six tiles, top-left).
   Prints one line per cell (x, y, ROM address or '--') and the number of pixels that differ.
-Example (2026-10-25): tcrf_cell_rebuild.py pocketcamera_jp.gb Unused_graphics_TCRF/Game_Boy_Camera_Unused_Album_Hand_Gestures.png
+Example (2026-10-25): tcrf_cell_rebuild.py pocketcamera_jp.gb source/Unused_graphics_TCRF/Game_Boy_Camera_Unused_Album_Hand_Gestures.png
   tcrf_check/assets/unidentified/13_5CA0_hand_gestures_check.png --box 13:5CA0:6:1  ->  31 cells + the left half of 13:5A50, all in 13:5A00-5FFF, 0 pixels differ."""
 import sys, collections
 import numpy as np

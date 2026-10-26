@@ -4,7 +4,7 @@ The rule (C): the glyph of code c is the 8x16 pair of 2bpp tiles at bank $2A:400
 code $00 is a blank cell and $87 is a blank glyph.  The reading of each glyph (which kana / letter it is) is by eye from the atlas (I); for the codes that occur in the 21 stock
 comments and names of Album B it is confirmed twice: the BGB comment screens match the bank-$2A glyphs pixel for pixel (bgb_albumb_comments.py) and the sentences read as
 sentences.
-usage: charset_jp.py ROM [--csv disasm/charset_jp.csv] [--atlas OUT.png]        (also a library: T = {code: char}, dec(bytes) -> str)"""
+usage: charset_jp.py ROM [--csv roms/jp_rev_a/disasm/charset_jp.csv] [--atlas OUT.png]        (also a library: T = {code: char}, dec(bytes) -> str)"""
 import sys, os, csv, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(HERE))
 

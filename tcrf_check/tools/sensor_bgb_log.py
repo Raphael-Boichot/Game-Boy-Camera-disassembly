@@ -98,4 +98,4 @@ if __name__ == '__main__':
             k, h, w = it.split(':'); bgb_seq.append((k, int(h), int(w)))
     r, lines = run(sav, out, name, combo, bgb_seq, free, tail, rom)
     events, caps = parse(lines); write_csv(out, name, events, caps)
-    print('rc', r['rc'], 'mode:state', r['mode'], r['state'], 'log lines', len(lines), 'captures', len(caps))
+    print('rc', r['rc'], 'mode:state', r['mode'], r['state'], 'log lines', len(lines), 'roms', 'jp_rev_a', 'captures', len(caps))
