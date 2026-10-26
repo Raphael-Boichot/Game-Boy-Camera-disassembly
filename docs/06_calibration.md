@@ -2,6 +2,8 @@
 
 ## 6. Calibration procedure (the `$04FF2`/`$11FF2` question)
 
+> **For an overview** of the whole mechanism (what the vector holds, how the boot and the live view use it, why it exists) read §19 first; this section is the SRAM side in detail.
+
 > **Note (SRAM rewrite, see §3.3 and §11.3)**: `$04FF2` and `$11FF2` are not a separate reserved "calibration area" — they are the
 > unused tail bytes of photo slots 3 and 16. The complete record is `1B 13` + the 12-byte vector + the 2 checksum bytes at
 > `$04FF0-$04FFF`, echoed (without `1B 13`) at `$11FF2-$11FFF`. `1B 13` (27 and 19) are factory-test tolerances that only the hidden
