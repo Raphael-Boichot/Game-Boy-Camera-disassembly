@@ -13,7 +13,7 @@ Only what is still open; what was answered is in the sections named in the conte
 **WRAM / HRAM** (the complete lists are in §2.12)
 - The visible effect of the SHOOT variants (`$D7E3` values 3-`$15`, the option cross `$D7E9-$D7EC`, the option screens `$D5E3-$D5EB`): dispatch, data flow and names are known (§16.2); the picture every effect slot writes is measured in BGB (§16.28); what is open is the match of the lens numbers 1-7 and the montage layouts with their on-screen icons.
 - The message texts behind `$DBCF`; the visible effect of the five-byte vectors `$DA44-$DA48`.
-- The meaning of the individual sound ids; whether the printer checksum-retry path that advances `$DC1F:20` by `$0280` is a ROM bug.
+- The meaning of the individual sound ids. (The printer checksum-retry path that advances `$DC1F:20` by `$0280` is explained by the printer's firmware, which reports a checksum error one packet late: §17.10.)
 
 **Disassembly** (§1.2)
 - The type and extent of the 56,947 non-padding bytes of the data banks that no run of §13 read (§13.5-§13.7). The index / pointer tables behind the six reader routines `04:58DE`, `04:5A9D`, `08:5400`, `08:5055`, `02:4CFF` and `06:5CFF` are decoded and typed (2026-10-19): those addresses are bank-selecting copy calls, the tables are the stamp tables of §2.6, `Border_SrcTbl` (`08:511F`), `WildFrame_PageSrcTbl` (`08:54C6`), `AlbumB_SlotTbl` (`02:5218`) and the thumbnail tables `Mode18_LoadThumb_Tbl5D44` / `Tbl5D54` (`06:5D44`, `06:5D54`).

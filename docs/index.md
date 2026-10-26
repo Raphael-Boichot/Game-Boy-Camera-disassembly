@@ -130,6 +130,7 @@ The project notes (formerly one README) are split into one file per section; the
 | 17.7 | &nbsp;&nbsp;[Coverage re-trace in BGB: how much of what my core saw does BGB reproduce?](17_printing.md#177-coverage-re-trace-in-bgb-how-much-of-what-my-core-saw-does-bgb-reproduce) | `17_printing.md` |
 | 17.8 | &nbsp;&nbsp;[The page layouts of the print job: the scripts at `08:552E-723D` and the progress packets at `08:54DE` (C)](17_printing.md#178-the-page-layouts-of-the-print-job-the-scripts-at-08552e-723d-and-the-progress-packets-at-0854de-c) | `17_printing.md` |
 | 17.9 | &nbsp;&nbsp;[Tools of this section and what is still open](17_printing.md#179-tools-of-this-section-and-what-is-still-open) | `17_printing.md` |
+| 17.10 | &nbsp;&nbsp;[What the printer's own firmware says (cross-check with the Game Boy Printer disassembly)](17_printing.md#1710-what-the-printers-own-firmware-says-cross-check-with-the-game-boy-printer-disassembly) | `17_printing.md` |
 | 18 | [The sensor registers: what the ROM sends, and what the camera does at boot, in calibration and in normal use](18_sensor_registers.md#18-the-sensor-registers-what-the-rom-sends-and-what-the-camera-does-at-boot-in-calibration-and-in-normal-use) | `18_sensor_registers.md` |
 | 18.1 | &nbsp;&nbsp;[The three phases in a few lines](18_sensor_registers.md#181-the-three-phases-in-a-few-lines) | `18_sensor_registers.md` |
 | 18.2 | &nbsp;&nbsp;[What the ROM writes, and the datasheet names](18_sensor_registers.md#182-what-the-rom-writes-and-the-datasheet-names) | `18_sensor_registers.md` |
