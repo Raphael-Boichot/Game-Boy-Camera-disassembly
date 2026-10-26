@@ -1,0 +1,1536 @@
+bank,site,kind,operand,value,target,expression,evidence,read
+00,00:0184,num,bc,$1FFF,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0240,num,bc,$2000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:08E8,num,de,$06D6,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0DB5,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0DCE,?,de,$0128,,,added to HL before the dereference: a bank-0 base or an offset,
+00,00:0DD1,num,bc,$0301,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0E78,num,bc,$1411,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:111C,ptr,hl,$4025,1F:4025,Snd_LengthTbl,C: dereferenced at 00:1129 (bank 1F mapped),yes
+00,00:1190,ptr,hl,$41BE,1F:41BE,Snd_ModBaseTbl,C: dereferenced at 00:1194 (bank 1F mapped); that instruction read the target block in the runs,yes
+00,00:119C,ptr,hl,$4051,1F:4051,Snd_FreqTbl + $18,"C: dereferenced at 00:11A0, in the routine whose read at 00:1194 hit bank 1F in the runs (no bank write between)",yes
+00,00:11F7,ptr,hl,$4025,1F:4025,Snd_LengthTbl,C: dereferenced at 00:11FB (bank 1F mapped),yes
+00,00:124C,ptr,hl,$41BE,1F:41BE,Snd_ModBaseTbl,C: dereferenced at 00:1250 (bank 1F mapped); that instruction read the target block in the runs,yes
+00,00:1258,ptr,hl,$4051,1F:4051,Snd_FreqTbl + $18,C: dereferenced at 00:125C (bank 1F mapped),yes
+00,00:12B4,ptr,hl,$4025,1F:4025,Snd_LengthTbl,C: dereferenced at 00:12B8 (bank 1F mapped),yes
+00,00:1317,ptr,hl,$4000,1F:4000,Snd_NoiseNR43Tbl,C: dereferenced at 00:131B (bank 1F mapped),yes
+00,00:1488,num,bc,$0D80,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1504,num,bc,$0D80,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1582,ptr,hl,$5BB0,27:5BB0,Mask_27_5BB0_Img_AndMaskTiles_Oval,C: dereferenced at 00:158A (bank 27 mapped); that instruction read the target block in the runs,yes
+00,00:1621,ptr,hl,$7600,10:7600,Gfx_10_7600_DjPrintFont_Tiles00to2A,C: dereferenced at 00:162F (bank 10 mapped); that instruction read the target block in the runs,yes
+00,00:1A48,?,bc,$0280,,,stored to wPrnDataLen for later use: not followed,
+00,00:1A7B,?,bc,$0280,,,stored to wPrnDataLen for later use: not followed,
+00,00:1CDE,num,de,$1B58,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1CEC,ptr,hl,$4010,0B:4010,Sgb_MltReqPackets + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+00,00:1D5E,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1DBA,ptr,hl,$69F6,0B:69F6,Sgb_DataSndPackets + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1DC8,ptr,hl,$6A06,0B:6A06,Sgb_DataSndPackets + $20,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1DD6,ptr,hl,$6A16,0B:6A16,Sgb_DataSndPackets + $30,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1DE4,ptr,hl,$6A26,0B:6A26,Sgb_DataSndPackets + $40,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1DF2,ptr,hl,$6A36,0B:6A36,Sgb_DataSndPackets + $50,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1E00,ptr,hl,$6A46,0B:6A46,Sgb_DataSndPackets + $60,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1E0E,ptr,hl,$6A56,0B:6A56,Sgb_DataSndPackets + $70,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1E94,ptr,hl,$6A76,0B:6A76,Sgb_MaskEnPackets + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+00,00:1F54,ptr,expr,$38,00:3800,HIGH(Blit_ShiftTbl),"C: Blit_PrepareMasks adds the x offset (b & 7) to $38 and stores the page in hBlitShiftPage: the 8 pages of Blit_ShiftTbl (00:3800-3FFF), read with the source byte as the low byte (code read 2026-10-26)",
+00,00:2478,ptr,hl,$6E4B,02:6E4B,OamPtrTbl_B02_6E4B,C: dereferenced at 00:24C7 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:2491,ptr,hl,$5272,02:5272,OamPtrTbl_B02_5272,C: dereferenced at 00:24C7 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:24AA,ptr,hl,$5D47,01:5D47,OamPtrTbl_B01_5D47,C: dereferenced at 00:24C7 (bank 01 mapped); that instruction read the target block in the runs,yes
+00,00:24C3,ptr,hl,$4000,01:4000,OamPtrTbl_B01_4000,C: dereferenced at 00:24C7 (bank 01 mapped); that instruction read the target block in the runs,yes
+00,00:2505,ptr,hl,$6E4B,02:6E4B,OamPtrTbl_B02_6E4B,C: dereferenced at 00:2554 (bank 02 mapped),yes
+00,00:251E,ptr,hl,$5272,02:5272,OamPtrTbl_B02_5272,C: dereferenced at 00:2554 (bank 02 mapped),yes
+00,00:2537,ptr,hl,$5D47,01:5D47,OamPtrTbl_B01_5D47,C: dereferenced at 00:2554 (bank 01 mapped),yes
+00,00:2550,ptr,hl,$4000,01:4000,OamPtrTbl_B01_4000,C: dereferenced at 00:2554 (bank 01 mapped),yes
+00,00:2622,ptr,h,$37,00:3700,HIGH(Img_PairLookupTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+00,00:2628,ptr,h,$37,00:3700,HIGH(Img_PairLookupTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+00,00:2A2D,ptr,call,$7FF6,1F:7FF6,Snd_InitEntry,C: call target with bank 1F written to the MBC just before,yes
+00,00:2A41,ptr,call,$7FF0,1F:7FF0,Snd_TickEntry,C: call target with bank 1F written to the MBC just before,yes
+00,00:3075,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:3083,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:3091,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:3341,?,de,$1003,,,overwritten before any use,
+00,00:33A4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:33B2,num,bc,$0650,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:33C0,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:34BF,num,bc,$2664,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:3541,ptr,hl,$54DE,08:54DE,Print_ProgressPackets,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+00,Blit_TileRowPtrTbl,ptr,dw,$21BC,00:21BC,Blit_TileAddrTbl + $28,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$21E4,00:21E4,Blit_TileAddrTbl + $50,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$220C,00:220C,Blit_TileAddrTbl + $78,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$2234,00:2234,Blit_TileAddrTbl + $A0,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$225C,00:225C,Blit_TileAddrTbl + $C8,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$2284,00:2284,Blit_TileAddrTbl + $F0,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$22AC,00:22AC,Blit_TileAddrTbl + $118,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$22D4,00:22D4,Blit_TileAddrTbl + $140,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$22FC,00:22FC,Blit_TileAddrTbl + $168,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$2324,00:2324,Blit_TileAddrTbl + $190,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$234C,00:234C,Blit_TileAddrTbl + $1B8,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$2374,00:2374,Blit_TileAddrTbl + $1E0,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$239C,00:239C,Blit_TileAddrTbl + $208,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$23C4,00:23C4,Blit_TileAddrTbl + $230,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$23EC,00:23EC,Blit_TileAddrTbl + $258,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$2414,00:2414,Blit_TileAddrTbl + $280,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Blit_TileRowPtrTbl,ptr,dw,$243C,00:243C,Blit_TileAddrTbl + $2A8,C: dereferenced at 00:1F0F; words below $4000 are bank 0 whatever is mapped (table loaded at 00:1EF9),yes
+00,Mode1D_LayoutScriptPtrs,ptr,dw,$552E,08:552E,Print_Layout0_Plain,C: word of a table loaded as a pointer at 00:3123 (dereferenced at 00:3231 (bank 08 mapped)),yes
+00,Mode1D_LayoutScriptPtrs,ptr,dw,$57FE,08:57FE,Print_Layout1_Framed,C: word of a table loaded as a pointer at 00:3123 (dereferenced at 00:3231 (bank 08 mapped)),yes
+00,Mode1D_LayoutScriptPtrs,ptr,dw,$5CAE,08:5CAE,Print_Layout2_FourPhotos,C: word of a table loaded as a pointer at 00:3123 (dereferenced at 00:3231 (bank 08 mapped)),yes
+00,Mode1D_LayoutScriptPtrs,ptr,dw,$656E,08:656E,Print_Layout3_FourPhotosRotated,C: word of a table loaded as a pointer at 00:3123 (dereferenced at 00:3231 (bank 08 mapped)),yes
+00,Mode1D_LayoutScriptPtrs,ptr,dw,$6F6E,08:6F6E,Print_Layout4_InfoPage,C: word of a table loaded as a pointer at 00:3123 (dereferenced at 00:3231 (bank 08 mapped)),yes
+00,Prn_SyncBytes,num,expr,Mode1D_State06_LoadWaitScreen,,$3388,"C: the two sync bytes $88 $33 that start every printer packet (sent by the packet sender, docs §17); the listing wrote the word as the label that happens to sit at 00:3388, and moving bank 0 then changed the bytes sent (relocation test 2026-10-26)",
+02,02:4123,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4499,?,bc,$1E00,,,overwritten before any use,
+02,02:45F7,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:46CA,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4720,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4797,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:47E1,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4818,num,bc,$0F00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4C48,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4CA8,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4CBE,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4CDE,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4CFC,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:4DC7,?,hl,$0F36,,,the walk ends without a use,
+02,02:4E21,?,hl,$0F36,,,the walk ends without a use,
+02,02:4E9E,?,hl,$0F00,,,the walk ends without a use,
+02,02:507E,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5129,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5137,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5145,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5156,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5164,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5172,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:5192,?,bc,$0500,,,overwritten before any use,
+02,02:519D,ptr,bc,$5000,36:5000,AlbumB_UnusedSlotB_Tiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+02,02:51B4,ptr,bc,$4000,36:4000,AlbumB_UnusedSlotA_Tiles,"C: handed with its bank in A to a banked copy, a far call or the far return; the listing had Sram_MagicString (bank 02), the wrong bank",yes
+02,02:51EC,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4072,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4080,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:43E1,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4AF9,num,bc,$1088,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4AFF,num,bc,$0C80,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4B56,?,de,$05A4,,,stored to the stack for later use: not followed,
+03,03:4BF0,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4C12,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4C4C,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4C6B,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4D81,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4D8A,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4D93,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4D9C,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4EA0,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4EAE,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4EE9,num,bc,$03E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4EF7,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4F04,ptr,de,$4F0E,03:4F0E,Mode12_State14_SaveDialogOpen_4F0E,C: dereferenced at 03:5F91 (bank 03 mapped),yes
+03,03:4F1C,ptr,de,$4F53,03:4F53,Mode12_State16_SaveDialogClose_4F53,C: dereferenced at 03:5F68 (bank 03 mapped),yes
+03,03:4F2A,num,bc,$0370,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4F38,num,bc,$01F0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4F5F,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4F6D,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4F7A,ptr,de,$4F84,03:4F84,Mode12_State17_ExitDialogOpen_4F84,C: dereferenced at 03:5F91 (bank 03 mapped),yes
+03,03:4F92,ptr,de,$4FC6,03:4FC6,Mode12_State19_ExitDialogClose_4FC6,C: dereferenced at 03:5F68 (bank 03 mapped),yes
+03,03:4FA0,num,bc,$0370,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4FAE,num,bc,$01F0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4FD2,num,bc,$0370,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4FE0,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:4FED,ptr,de,$4FF7,03:4FF7,Mode12_State1A_ClearDialogOpen_4FF7,C: dereferenced at 03:5F91 (bank 03 mapped),yes
+03,03:5005,ptr,de,$5039,03:5039,Mode12_State1C_ClearDialogClose_5039,C: dereferenced at 03:5F68 (bank 03 mapped),yes
+03,03:5013,num,bc,$0370,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5021,num,bc,$01F0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5045,num,bc,$0370,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5053,num,bc,$0290,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5061,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5115,num,bc,$0370,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5123,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5178,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:52C4,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:52D2,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5623,ptr,lo/hi,$5691,03:5691,AnimEd_Ctx0_Decor,I: low and high byte stored to wCtx0Ret / wCtx0Ret + 1; the value is exactly the address of AnimEd_Ctx0_Decor,yes
+03,03:562D,ptr,lo/hi,$57BE,03:57BE,AnimEd_Ctx1_Decor,I: low and high byte stored to wCtx1Ret / wCtx1Ret + 1; the value is exactly the address of AnimEd_Ctx1_Decor,yes
+03,03:5637,ptr,lo/hi,$5847,03:5847,AnimEd_Ctx2_Decor,I: low and high byte stored to wCtx2Ret / wCtx2Ret + 1; the value is exactly the address of AnimEd_Ctx2_Decor,yes
+03,03:57BE,num,bc,$1E0A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:581C,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5836,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5847,num,bc,$1E0A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:58C3,num,bc,$020D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:58EF,num,bc,$020D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:590F,ptr,lo/hi,$59F7,03:59F7,AnimEd_ExitCtx0,I: low and high byte stored to wCtx0Ret / wCtx0Ret + 1; the value is exactly the address of AnimEd_ExitCtx0,yes
+03,03:5919,ptr,lo/hi,$5A7A,03:5A7A,AnimEd_ExitCtx1,I: low and high byte stored to wCtx1Ret / wCtx1Ret + 1; the value is exactly the address of AnimEd_ExitCtx1,yes
+03,03:5923,ptr,lo/hi,$5B00,03:5B00,AnimEd_ExitCtx2,I: low and high byte stored to wCtx2Ret / wCtx2Ret + 1; the value is exactly the address of AnimEd_ExitCtx2,yes
+03,03:593B,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5943,num,bc,$020D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5A7A,num,bc,$1E0F,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5AEF,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5B00,num,bc,$1E0F,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5BA7,num,bc,$020D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5BBA,num,bc,$020D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5BC2,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5BE6,?,hl,$0E00,,,the walk ends without a use,
+03,03:5C26,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5C80,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5F34,ptr,hl,$5E60,0C:5E60,Src_0C_5E60_AnimEd_CopyDigitTile,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+03,03:5FD2,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5FE0,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5FEE,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:5FFC,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:60A7,ptr,hl,$7900,17:7900,Src_17_7900_Player_CopyDigitTile,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+03,03:6186,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:618F,?,bc,$0500,,,overwritten before any use,
+03,03:619B,?,bc,$0100,,,overwritten before any use,
+03,03:61A7,?,bc,$0800,,,overwritten before any use,
+03,03:637C,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:63A6,num,bc,$01F0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:63B4,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:63BD,?,bc,$01C0,,,overwritten before any use,
+03,03:63E9,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:63F7,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:662D,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:663B,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:66E4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:66F2,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:66FE,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6719,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6727,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6741,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6758,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6766,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:677C,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6797,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:67A5,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:67C0,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:67CE,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:67E9,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:67F7,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6820,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:682E,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:68A6,?,bc,$0301,,,the walk ends without a use,
+03,03:6901,num,bc,$4848,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6948,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6956,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:698E,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:699C,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6A8A,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6A98,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6AD0,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6B8B,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6B99,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6C61,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6C6F,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6CA8,num,bc,$1F78,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6D20,num,bc,$3F78,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6D6E,num,bc,$6778,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6E3B,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6E49,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6E68,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:6E76,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:72CD,?,bc,$0500,,,overwritten before any use,
+03,03:74CD,ptr,hl,$5660,1C:5660,Gfx_1C_5660_HotSpotEd_CopyNumberTile,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+03,03:74F5,ptr,hl,$5760,1C:5760,Gfx_1C_5760_HotSpotEd_ShowEffectIcon,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+03,03:7526,?,hl,$0E00,,,the walk ends without a use,
+03,03:76CC,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:76DA,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:76E8,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:76F6,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7704,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7838,num,bc,$4A36,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7917,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7925,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7933,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7941,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7A76,ptr,hl,$7D60,23:7D60,Map_23_7D60_ShowMenu_LoadHighlightTiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+03,03:7A99,ptr,hl,$7C00,23:7C00,Map_23_7C00_ShowMenu_LoadNormalTiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+03,03:7AD4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7AE2,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7AF0,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7AFE,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7B9F,num,bc,$5030,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7BEB,num,bc,$0341,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7C2E,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7C3C,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7C4A,num,bc,$0470,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7C58,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+03,03:7D19,?,bc,$0300,,,overwritten before any use,
+03,AnimEd_Ctx1_BorderSprite_PtrTbl583F,?,dw,$4342,,,no reader that loads it as a word found,
+03,AnimEd_Ctx1_BorderSprite_PtrTbl583F,?,dw,$4544,,,no reader that loads it as a word found,
+03,AnimEd_Ctx1_BorderSprite_PtrTbl583F,?,dw,$4645,,,no reader that loads it as a word found,
+03,AnimEd_Ctx1_BorderSprite_PtrTbl583F,?,dw,$4847,,,no reader that loads it as a word found,
+03,AnimEd_Ctx2_BorderSprite_PtrTbl58F8,?,dw,$4A49,,,no reader that loads it as a word found,
+03,AnimEd_Ctx2_BorderSprite_PtrTbl58F8,?,dw,$4C4B,,,no reader that loads it as a word found,
+03,AnimEd_Ctx2_BorderSprite_PtrTbl58F8,?,dw,$4D4D,,,no reader that loads it as a word found,
+03,AnimEd_Ctx2_BorderSprite_PtrTbl58F8,?,dw,$4F4E,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx1_Sprite_PtrTbl5AF8,?,dw,$4342,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx1_Sprite_PtrTbl5AF8,?,dw,$4544,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx1_Sprite_PtrTbl5AF8,?,dw,$4645,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx1_Sprite_PtrTbl5AF8,?,dw,$4847,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx2_Sprite_PtrTbl5BB0,?,dw,$4A49,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx2_Sprite_PtrTbl5BB0,?,dw,$4C4B,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx2_Sprite_PtrTbl5BB0,?,dw,$4D4D,,,no reader that loads it as a word found,
+03,AnimEd_ExitCtx2_Sprite_PtrTbl5BB0,?,dw,$4F4E,,,no reader that loads it as a word found,
+03,AnimEd_LoadMenuTiles_Tbl5DF1,ptr,record,$5A40,0C:5A40,Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 03:5DDE",yes
+03,AnimEd_LoadMenuTiles_Tbl5DF1,ptr,record,$5AC0,0C:5AC0,Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1 + $80,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 03:5DDE",yes
+03,AnimEd_LoadMenuTiles_Tbl5DF1,ptr,record,$6100,0C:6100,Gfx_0C_6020_AnimEd_Ctx0_Decor + $E0,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 03:5DDE",yes
+03,AnimEd_LoadMenuTiles_Tbl5DF1,ptr,record,$5B80,0C:5B80,Gfx_0C_5B60_AnimEd_ShowEntryValue + $20,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 03:5DDE",yes
+03,AnimEd_LoadMenuTiles_Tbl5DF1,ptr,record,$5C00,0C:5C00,Gfx_0C_5B60_AnimEd_ShowEntryValue + $A0,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 03:5DDE",yes
+04,04:402A,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4038,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4046,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:43BC,?,hl,$0E00,,,the walk ends without a use,
+04,04:43D0,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:43E5,?,hl,$0E00,,,the walk ends without a use,
+04,04:43EC,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4404,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4443,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4450,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4462,?,hl,$0E00,,,the walk ends without a use,
+04,04:4466,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:448C,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:44D5,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4502,ptr,hl,$5830,13:5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,04:4519,ptr,hl,$5800,13:5800,Gfx_13_5800_Mode0F_State00_Init,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,04:453A,ptr,hl,$5830,13:5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,04:4551,ptr,hl,$5800,13:5800,Gfx_13_5800_Mode0F_State00_Init,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,04:456F,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4585,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4594,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:45A3,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:45B2,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:45C7,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:45DD,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:45F2,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4601,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4610,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:461F,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4635,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:46B1,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:46BF,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:46CD,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:475C,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:476A,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4778,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4AC4,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4AD2,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4B34,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4B42,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4CC8,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4D29,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4D42,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4D50,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4DA9,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4DB7,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4F71,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4FA3,num,bc,$3032,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:50C4,num,hl,$7700,,,"C: written through at 00:062D: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+04,04:50D3,ptr,hl,$5000,36:5000,AlbumB_UnusedSlotB_Tiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,04:523B,?,bc,$1000,,,overwritten before any use,
+04,04:5251,?,de,$1000,,,the walk ends without a use,
+04,04:52CC,?,bc,$1000,,,overwritten before any use,
+04,04:52E9,?,bc,$1000,,,overwritten before any use,
+04,04:530C,?,de,$1000,,,overwritten before any use,
+04,04:5795,num,bc,$02A0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:57B1,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:57F7,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5805,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5813,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5897,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:58F0,num,bc,$0190,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5909,num,bc,$0360,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5966,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5A1D,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5A26,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5A2F,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5A5E,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5A6C,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5D56,num,bc,$02A0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5E70,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5E7E,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:60EF,num,bc,$01D0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:610B,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:613B,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6149,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6157,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:63F7,num,bc,$01D0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:640B,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:641A,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:670F,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6723,num,bc,$0430,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:673E,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6755,num,bc,$0430,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:688B,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6899,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:68C3,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:68CC,?,bc,$0140,,,the walk ends without a use,
+04,04:697F,num,bc,$5078,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6987,num,bc,$5018,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:698F,num,bc,$1848,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6DED,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6DFE,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6E0C,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6E36,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6E50,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6E5E,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6E7A,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6EF4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:6F89,ptr,hl,$7E00,0C:7E00,Gfx_0C_7E00_Album_LoadNumeralTile,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,04:7363,num,bc,$0160,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7383,num,bc,$1F12,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:73AB,num,bc,$3151,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:73B3,num,bc,$6251,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:752B,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7534,?,bc,$0140,,,the walk ends without a use,
+04,04:75CD,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7624,num,bc,$5078,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:762C,num,bc,$5018,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7634,num,bc,$1848,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:79FD,num,bc,$3910,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7AD3,num,bc,$3780,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7BCF,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7BE0,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7BEE,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7C3B,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7C49,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7C65,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7CAF,num,bc,$1E3B,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:7D2A,ptr,hl,$7E00,26:7E00,Gfx_26_7E00_Album_LoadNumeralTileB,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+04,Parlor_AnimQueenTiles_Tbl72CA,ptr,record,$6140,24:6140,Map_24_6140_Parlor_Page0_QueenFrameA,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:729A",yes
+04,Parlor_AnimQueenTiles_Tbl72CA,ptr,record,$6140,24:6140,Map_24_6140_Parlor_Page0_QueenFrameA,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:729A",yes
+04,Parlor_AnimateB_PtrTbl7372,ptr,dw,$7040,23:7040,Map_23_7040_Parlor_Page1,"C: word of a table loaded as a pointer at 04:7355 (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,Parlor_AnimateB_PtrTbl7372,ptr,dw,$7280,23:7280,Map_23_7280_Parlor_Page1_AltTopRows,"C: word of a table loaded as a pointer at 04:7355 (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,Parlor_PageTbl,ptr,dw,$743C,04:743C,Parlor_PageTbl + $6,C: word of a byte-typed table loaded as a pointer at 04:73F4 (dereferenced at 04:73FB (bank 04 mapped)); the words end where the first target begins,yes
+04,Parlor_PageTbl,ptr,dw,$744E,04:744E,Parlor_PageTbl + $18,C: word of a byte-typed table loaded as a pointer at 04:73F4 (dereferenced at 04:73FB (bank 04 mapped)); the words end where the first target begins,yes
+04,Parlor_PageTbl,ptr,dw,$7460,04:7460,Parlor_PageTbl + $2A,C: word of a byte-typed table loaded as a pointer at 04:73F4 (dereferenced at 04:73FB (bank 04 mapped)); the words end where the first target begins,yes
+04,Parlor_PageTbl,ptr,record,$6B00,1D:6B00,Gfx_1D_5D00_Mode20_State02_GameSetup + $E00,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn; the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$7300,1D:7300,Sheet_MenusShootMenu_1D_72A0 + $60,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn; the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$60A0,24:60A0,Map_24_60A0_Parlor_Page0,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn (the far pointer after the end byte); the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$4800,1C:4800,Sheet_MenusShootMenu_1C_4670 + $190,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn; the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$7040,23:7040,Map_23_7040_Parlor_Page1,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn (the far pointer after the end byte); the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$5A00,21:5A00,Gfx_21_5870_CommentCard_DrawCopyBadge_Far + $190,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn; the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$6200,21:6200,Sheet_MenusShootMenu_21_5FD0 + $230,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn; the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$6560,21:6560,Sheet_MenusShootMenu_21_5FD0 + $590,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn; the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,Parlor_PageTbl,ptr,record,$7BC0,26:7BC0,Map_26_7BC0_Parlor_Page2,"C: Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn (the far pointer after the end byte); the word was read by Parlor_PageTbl, the next byte is its bank",yes
+04,PenMenu_BuildPattern_PtrTbl67EF,ptr,dw,$4E60,24:4E60,Map_24_4E60_PenMenuPatternPanel0,"C: word of a table loaded as a pointer at 04:67C3 (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildPattern_PtrTbl67EF,ptr,dw,$4F40,24:4F40,Map_24_4F40_PenMenuPatternPanel1,"C: word of a table loaded as a pointer at 04:67C3 (handed with its bank in A to a banked copy, a far call or the far return)",no
+04,PenMenu_BuildPattern_PtrTbl67EF,ptr,dw,$5000,24:5000,Map_24_5000_PenMenuPatternPanel2,"C: word of a table loaded as a pointer at 04:67C3 (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildPattern_PtrTbl67EF,ptr,dw,$50C0,24:50C0,Map_24_50C0_PenMenuPatternPanel3,"C: word of a table loaded as a pointer at 04:67C3 (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSize_PtrTbl67A5,ptr,dw,$4B20,24:4B20,Map_24_4B20_PenMenuSizePanel0,"C: word of a table loaded as a pointer at 04:677A (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSize_PtrTbl67A5,ptr,dw,$4C00,24:4C00,Map_24_4C00_PenMenuSizePanel1,"C: word of a table loaded as a pointer at 04:677A (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSize_PtrTbl67A5,ptr,dw,$4CC0,24:4CC0,Map_24_4CC0_PenMenuSizePanel2,"C: word of a table loaded as a pointer at 04:677A (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSize_PtrTbl67A5,ptr,dw,$4D80,24:4D80,Map_24_4D80_PenMenuSizePanel3,"C: word of a table loaded as a pointer at 04:677A (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSpeed_PtrTbl6839,ptr,dw,$76C0,24:76C0,Map_24_76C0_PenMenuSpeedPanel0,"C: word of a table loaded as a pointer at 04:680D (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSpeed_PtrTbl6839,ptr,dw,$77A0,24:77A0,Map_24_77A0_PenMenuSpeedPanel1,"C: word of a table loaded as a pointer at 04:680D (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,PenMenu_BuildSpeed_PtrTbl6839,ptr,dw,$7800,24:7800,Map_24_7800_PenMenuSpeedPanel2,"C: word of a table loaded as a pointer at 04:680D (handed with its bank in A to a banked copy, a far call or the far return)",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4AD0,27:4AD0,TileSet_27_4AB0 + $20,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4AC0,27:4AC0,TileSet_27_4AB0 + $10,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4AB0,27:4AB0,TileSet_27_4AB0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4AE0,27:4AE0,TileSet_27_4AB0 + $30,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$7FE0,19:7FE0,Src_19_7E60_Tbl53A6_4 + $180,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B10,27:4B10,TileSet_27_4AB0 + $60,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B00,27:4B00,TileSet_27_4AB0 + $50,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4AF0,27:4AF0,TileSet_27_4AB0 + $40,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B20,27:4B20,TileSet_27_4AB0 + $70,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$7FE8,19:7FE8,Src_19_7E60_Tbl53A6_4 + $188,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B50,27:4B50,TileSet_27_4AB0 + $A0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B40,27:4B40,TileSet_27_4AB0 + $90,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4B30,27:4B30,TileSet_27_4AB0 + $80,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4B60,27:4B60,TileSet_27_4AB0 + $B0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$7FF0,19:7FF0,Src_19_7E60_Tbl53A6_4 + $190,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B90,27:4B90,TileSet_27_4AB0 + $E0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,Pen_Draw_Tbl6650,ptr,record,$4B80,27:4B80,TileSet_27_4AB0 + $D0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4B70,27:4B70,TileSet_27_4AB0 + $C0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$4BA0,27:4BA0,TileSet_27_4AB0 + $F0,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",no
+04,Pen_Draw_Tbl6650,ptr,record,$7FF8,19:7FF8,Src_19_7E60_Tbl53A6_4 + $198,"C: source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA; the word was read by 00:1EAA, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4000,0E:4000,Gfx_0E_4000_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4280,0E:4280,Gfx_0E_4280_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4500,0E:4500,Gfx_0E_4500_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4780,0E:4780,Gfx_0E_4780_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4A00,0E:4A00,Gfx_0E_4A00_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4C80,0E:4C80,Gfx_0E_4C80_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$4F00,0E:4F00,Gfx_0E_4F00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_4F00_MsgStrip; the word was read by 04:4482, the next byte is its bank",no
+04,PhotoPicker_MessageStripTbl,ptr,record,$5180,0E:5180,Gfx_0E_5180_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5180_MsgStrip; the word was read by 04:4482, the next byte is its bank",no
+04,PhotoPicker_MessageStripTbl,ptr,record,$5400,0E:5400,Gfx_0E_5400_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$5680,0E:5680,Gfx_0E_5680_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$5900,0E:5900,Gfx_0E_5900_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5900_MsgStrip; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$5B80,0E:5B80,Gfx_0E_5B80_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5B80_MsgStrip; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$5E00,0E:5E00,Gfx_0E_5E00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5E00_MsgStrip; the word was read by 04:4482, the next byte is its bank",yes
+04,PhotoPicker_MessageStripTbl,ptr,record,$5D00,0D:5D00,Gfx_0D_5D00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0D_5D00_MsgStrip; the word was read by 04:4482, the next byte is its bank",yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56BF,04:56BF,Stamp_Commit_Tbl569D + $22,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56E1,04:56E1,Stamp_Commit_Tbl569D + $44,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56E9,04:56E9,Stamp_Commit_Tbl569D + $4C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56F1,04:56F1,Stamp_Commit_Tbl569D + $54,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56C7,04:56C7,Stamp_Commit_Tbl569D + $2A,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56CC,04:56CC,Stamp_Commit_Tbl569D + $2F,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D4,04:56D4,Stamp_Commit_Tbl569D + $37,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D9,04:56D9,Stamp_Commit_Tbl569D + $3C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D4,04:56D4,Stamp_Commit_Tbl569D + $37,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D9,04:56D9,Stamp_Commit_Tbl569D + $3C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D4,04:56D4,Stamp_Commit_Tbl569D + $37,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D9,04:56D9,Stamp_Commit_Tbl569D + $3C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D4,04:56D4,Stamp_Commit_Tbl569D + $37,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D9,04:56D9,Stamp_Commit_Tbl569D + $3C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D4,04:56D4,Stamp_Commit_Tbl569D + $37,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D9,04:56D9,Stamp_Commit_Tbl569D + $3C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_Commit_Tbl569D,ptr,dw,$56D9,04:56D9,Stamp_Commit_Tbl569D + $3C,C: word of a byte-typed table loaded as a pointer at 04:600A (dereferenced at 00:1EAA (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5524,04:5524,Stamp_DrawPaletteCursor_PtrTbl5502 + $22,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5558,04:5558,Stamp_DrawPaletteCursor_PtrTbl5502 + $56,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$555E,04:555E,Stamp_DrawPaletteCursor_PtrTbl5502 + $5C,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$555E,04:555E,Stamp_DrawPaletteCursor_PtrTbl5502 + $5C,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5544,04:5544,Stamp_DrawPaletteCursor_PtrTbl5502 + $42,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5544,04:5544,Stamp_DrawPaletteCursor_PtrTbl5502 + $42,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,ptr,dw,$5530,04:5530,Stamp_DrawPaletteCursor_PtrTbl5502 + $2E,C: word of a table loaded as a pointer at 04:5B6E (dereferenced at 04:5B83 (bank 04 mapped)),yes
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5918,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5938,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5958,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7118,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7138,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7158,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B0E,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B26,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B3E,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B56,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B6E,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$720E,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7226,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$723E,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7256,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$726E,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B12,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B2A,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B42,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B5A,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$5B72,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7212,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$722A,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7242,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$725A,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$7272,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$6419,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$6439,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$6459,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$6021,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_DrawPaletteCursor_PtrTbl5502,num,dw,$6051,,,"C: data after the pointer words of the table (they end at +$22, where the first target begins)",
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,2C:4000,StampCat00_Face_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,2D:4000,StampCat01_Icons_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$6000,2C:6000,StampCat02_Pokemon_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,2B:4000,StampCat03_CoroCoro_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$6000,2A:6000,StampCat04_05_SmallKana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$6000,2A:6000,StampCat04_05_SmallKana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,2E:4000,StampCat06_07_Hiragana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,2E:4000,StampCat06_07_Hiragana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,30:4000,StampCat08_09_Katakana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$4000,30:4000,StampCat08_09_Katakana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$7000,2F:7000,StampCat10_11_Digits_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$7000,2F:7000,StampCat10_11_Digits_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$6000,30:6000,StampCat12_13_Latin_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$6000,30:6000,StampCat12_13_Latin_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$5800,2E:5800,StampCat14_15_Kanji_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$5800,2E:5800,StampCat14_15_Kanji_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcGfxTbl,ptr,record,$5800,2F:5800,StampCat16_Symbols_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcGfxTbl, the next byte is its bank",yes
+04,Stamp_IconSrcMaskTbl,ptr,record,$7000,2D:7000,StampCat00_Mask,"C: record of the table described by its label note: {mask pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcMaskTbl, the next byte is its bank",yes
+04,Stamp_IconSrcMaskTbl,ptr,record,$4000,2F:4000,StampCat01_Mask,"C: record of the table described by its label note: {mask pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcMaskTbl, the next byte is its bank",yes
+04,Stamp_IconSrcMaskTbl,ptr,record,$7000,2E:7000,StampCat02_Mask,"C: record of the table described by its label note: {mask pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcMaskTbl, the next byte is its bank",yes
+04,Stamp_IconSrcMaskTbl,ptr,record,$5800,2B:5800,StampCat03_Mask,"C: record of the table described by its label note: {mask pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcMaskTbl, the next byte is its bank",yes
+04,Stamp_IconSrcMaskTbl,ptr,record,$7000,30:7000,StampCat16_Mask,"C: record of the table described by its label note: {mask pointer lo; hi; bank; bytes per stamp lo; hi}; the word was read by Stamp_IconSrcMaskTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,2C:4000,StampCat00_Face_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,2D:4000,StampCat01_Icons_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$6000,2C:6000,StampCat02_Pokemon_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,2B:4000,StampCat03_CoroCoro_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$6000,2A:6000,StampCat04_05_SmallKana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$6000,2A:6000,StampCat04_05_SmallKana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,2E:4000,StampCat06_07_Hiragana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,2E:4000,StampCat06_07_Hiragana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,30:4000,StampCat08_09_Katakana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$4000,30:4000,StampCat08_09_Katakana_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$7000,2F:7000,StampCat10_11_Digits_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$7000,2F:7000,StampCat10_11_Digits_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$6000,30:6000,StampCat12_13_Latin_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$6000,30:6000,StampCat12_13_Latin_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$5800,2E:5800,StampCat14_15_Kanji_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$5800,2E:5800,StampCat14_15_Kanji_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PageGfxTbl,ptr,record,$5800,2F:5800,StampCat16_Symbols_Gfx,"C: record of the table described by its label note: {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}; the word was read by Stamp_PageGfxTbl, the next byte is its bank",yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55A6,04:55A6,Stamp_PaletteInput_Tbl5584 + $22,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55E6,04:55E6,Stamp_PaletteInput_Tbl5584 + $62,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55F2,04:55F2,Stamp_PaletteInput_Tbl5584 + $6E,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55F2,04:55F2,Stamp_PaletteInput_Tbl5584 + $6E,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+04,Stamp_PaletteInput_Tbl5584,ptr,dw,$55BE,04:55BE,Stamp_PaletteInput_Tbl5584 + $3A,C: word of a byte-typed table loaded as a pointer at 04:5BC0 (dereferenced at 04:5BE7 (bank 04 mapped)); the words end where the first target begins,yes
+05,05:4066,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4074,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4123,num,bc,$306C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4130,num,bc,$1359,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:414B,num,bc,$4559,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4167,num,bc,$348E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:41CB,num,bc,$4658,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:41D3,num,bc,$4E58,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:41E0,num,bc,$3E54,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:41F7,num,bc,$4E54,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:420F,num,bc,$306C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:421B,num,bc,$348E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4243,ptr,hl,$7400,10:7400,Gfx_10_7400_DjTitle_LoadNumeralTile,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+05,05:4303,num,bc,$306C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:431A,num,bc,$348E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4327,num,bc,$1E8D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:433E,num,bc,$428D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4356,num,bc,$4658,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:435E,num,bc,$4E58,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4395,num,bc,$0D80,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:43A3,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:43B1,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:447D,num,bc,$02A0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45AC,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45BA,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45C8,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45D6,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45E4,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45F2,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:46B5,num,bc,$7F0E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:46EB,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4707,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:47B8,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:47D4,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:484A,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4866,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:48B7,num,bc,$062F,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4C34,num,bc,$7886,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:528E,num,bc,$3D81,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5297,num,bc,$3F78,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:52DB,num,bc,$4871,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:52E4,num,bc,$5471,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5568,num,bc,$0FF0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5712,ptr,hl,$4D60,1A:4D60,Gfx_1A_4D60_DjPerf_DrawTempo,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+05,05:5727,ptr,hl,$4D60,1A:4D60,Gfx_1A_4D60_DjPerf_DrawTempo,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+05,05:573C,ptr,hl,$4D60,1A:4D60,Gfx_1A_4D60_DjPerf_DrawTempo,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+05,05:5818,ptr,hl,$4D60,1A:4D60,Gfx_1A_4D60_DjPerf_DrawTempo,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+05,05:58BE,num,bc,$2B30,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:58C7,num,bc,$3130,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:58D0,num,bc,$4030,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5901,num,bc,$6930,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:590A,num,bc,$6F30,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:591B,num,bc,$7B30,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5936,num,bc,$084A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:593F,num,bc,$0E4A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5FE0,num,bc,$0130,,,"C: written through at 05:5FE6: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+05,05:5FF3,num,bc,$0130,,,"C: written through at 05:5FF9: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+05,05:6036,?,de,$0140,,,added to HL before the dereference: a bank-0 base or an offset,
+05,05:6060,?,de,$0140,,,added to HL before the dereference: a bank-0 base or an offset,
+05,05:61E2,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:61F9,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:620F,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6226,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:623D,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6254,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:635C,num,bc,$051C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:63FC,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:647C,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6489,num,bc,$312C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:64F3,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6500,num,bc,$422C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:656E,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:657B,num,bc,$5A2A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:65E6,num,bc,$661C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:65F3,num,bc,$6E2C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:665A,num,bc,$661C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:66DB,num,bc,$661C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6753,num,bc,$0210,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:675F,num,bc,$0210,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6769,num,bc,$053D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6776,num,bc,$0E46,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:67F1,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:686F,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6906,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6958,num,bc,$5A2E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:697D,num,bc,$0B31,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6A30,num,bc,$051C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6A45,num,bc,$0B31,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6A4F,num,bc,$0B31,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6AEB,num,bc,$051C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6B08,num,bc,$051C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6B79,num,bc,$541C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6B86,num,bc,$5C2A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6BF4,num,bc,$661C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6C01,num,bc,$6E2C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6C6B,num,bc,$661C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6CEF,num,bc,$661C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6D67,num,bc,$0210,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6D73,num,bc,$0210,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6D7D,num,bc,$053D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6D8A,num,bc,$0E46,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6E05,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6E83,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6F1A,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:70B3,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7133,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7140,num,bc,$312C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:71AD,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:71BA,num,bc,$422C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7216,num,bc,$1C1C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7223,num,bc,$5A2A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7274,num,bc,$0210,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7280,num,bc,$0210,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:728A,num,bc,$053D,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7297,num,bc,$0E46,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7312,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:73BE,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7466,num,bc,$0557,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:751E,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:752C,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:753A,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7548,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:771F,num,bc,$1870,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:775E,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:776D,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:77A8,num,bc,$0D80,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:77B6,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:77C4,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7931,num,bc,$5048,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7981,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:798F,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7D64,num,bc,$020A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7ED1,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7EE8,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7EFE,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7F15,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7F2C,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7F43,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,DjPerf_Equaliser_PtrTbl5274,?,dw,$4140,,,no reader that loads it as a word found,
+05,DjPerf_Equaliser_PtrTbl5274,?,dw,$4342,,,no reader that loads it as a word found,
+05,DjPerf_Equaliser_PtrTbl5278,?,dw,$5150,,,no reader that loads it as a word found,
+05,DjPerf_Equaliser_PtrTbl5278,?,dw,$5352,,,no reader that loads it as a word found,
+05,DjPrintRow_S2WaveTitle_Tbl5EBE,?,dw,$4844,,,no reader that loads it as a word found,
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$5F00,0F:5F00,Gfx_0F_5F00_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6280,0F:6280,Gfx_0F_6280_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6600,0F:6600,Gfx_0F_6600_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6980,0F:6980,Gfx_0F_6980_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6D00,0F:6D00,Gfx_0F_6D00_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7080,0F:7080,Gfx_0F_7080_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7400,0F:7400,Gfx_0F_7400_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7780,0F:7780,Gfx_0F_7780_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6300,0E:6300,Gfx_0E_6300_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6680,0E:6680,Gfx_0E_6680_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6A00,0E:6A00,Gfx_0E_6A00_Head,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_6A00_Head; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$6D80,0E:6D80,Gfx_0E_6D80_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7100,0E:7100,Gfx_0E_7100_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7480,0E:7480,Gfx_0E_7480_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7800,0E:7800,Gfx_0E_7800_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$7B80,0E:7B80,Gfx_0E_7B80_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$4000,10:4000,Gfx_10_4000_Head,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_10_4000_Head; the word was read by 05:7F7C, the next byte is its bank",no
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$4380,10:4380,Gfx_10_4380_Head,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_10_4380_Head; the word was read by 05:7F7C, the next byte is its bank",no
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$4700,10:4700,Gfx_10_4700_Head,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_10_4700_Head; the word was read by 05:7F7C, the next byte is its bank",no
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$4A80,10:4A80,Gfx_10_4A80_Head,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_10_4A80_Head; the word was read by 05:7F7C, the next byte is its bank",no
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$4E00,10:4E00,Gfx_10_4E00_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$5180,10:5180,Gfx_10_5180_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$5500,10:5500,Gfx_10_5500_Head,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 05:7F7C, the next byte is its bank",yes
+05,Photo_FarGetAddress_Tbl7F86,ptr,record,$5880,10:5880,Gfx_10_5880_Head,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_10_5880_Head; the word was read by 05:7F7C, the next byte is its bank",no
+06,06:4045,num,bc,$0640,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4061,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:407D,num,bc,$01D0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4099,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:40C5,num,bc,$0119,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:40DB,num,bc,$6832,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4188,num,bc,$0640,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:41A4,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:41C0,num,bc,$01D0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:41DC,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4250,num,bc,$6822,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:42C6,num,bc,$405A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:43B3,num,bc,$506F,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:43D0,ptr,hl,$7180,20:7180,Gfx_20_7180_Mode15_DrawTwoDigits,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:43E6,ptr,hl,$7180,20:7180,Gfx_20_7180_Mode15_DrawTwoDigits,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:4403,ptr,hl,$70E0,20:70E0,Gfx_20_70E0_Mode15_DrawTwoDigitsInterval,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:4415,ptr,hl,$70E0,20:70E0,Gfx_20_70E0_Mode15_DrawTwoDigitsInterval,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:450F,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:451D,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:452B,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4539,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4592,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:45A0,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:45AE,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:45BC,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:46CB,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:476F,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:47FF,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4813,num,bc,$6860,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:481B,num,bc,$6868,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4824,num,bc,$6860,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:482C,num,bc,$6868,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:483A,num,bc,$6860,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4847,num,bc,$6868,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4869,num,bc,$3818,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4912,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:498E,num,bc,$0290,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:499C,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:49AA,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:49B8,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:49C6,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:49D4,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4AAA,num,bc,$6060,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4AB3,num,bc,$6060,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4B10,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4B32,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4B51,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4B82,ptr,hl,$51E7,25:51E7,Map_25_50C0_Mode16_OptionPage1 + $127,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:4BD6,ptr,hl,$6507,24:6507,Map_24_63A0_Mode16_OptionPage2 + $167,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:4C2A,ptr,hl,$5507,25:5507,Map_25_5360_Mode16_OptionPage3 + $1A7,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:4C8F,num,bc,$5760,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4C98,num,bc,$5760,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4CE9,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4CF7,num,bc,$0580,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4D2F,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4D3A,ptr,hl,$6598,1E:6598,Gfx_1E_6590_Mode17_State00_Init_LowerHalves + $8,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:4F6C,num,bc,$102A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4FA7,num,bc,$1052,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:508B,num,bc,$3878,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:50A2,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:50AB,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:50B4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:50C2,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:50DE,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5120,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:512E,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:513C,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5244,num,bc,$102A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:52ED,num,bc,$3878,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5304,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:530D,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5316,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5324,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5340,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5382,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5390,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:539E,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:54A0,?,hl,$0600,,,overwritten before any use,
+06,06:55A2,?,hl,$0680,,,overwritten before any use,
+06,06:56B9,ptr,hl,$64D0,1E:64D0,Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:56CE,ptr,hl,$64D0,1E:64D0,Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:56E3,ptr,hl,$64B0,1E:64B0,Gfx_1E_64B0_Compose_DrawPhotoNumber_AlbumLetter,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:5700,?,hl,$0E00,,,the walk ends without a use,
+06,06:578D,?,bc,$0E00,,,the walk ends without a use,
+06,06:57A9,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:57D7,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:57EF,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5886,?,hl,$0700,,,the walk ends without a use,
+06,06:588F,?,hl,$0780,,,the walk ends without a use,
+06,06:589D,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:58AB,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:58B9,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:590A,ptr,hl,$4800,17:4800,Gfx_17_4800_Compose_DrawFreeCount,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:5922,ptr,hl,$4800,17:4800,Gfx_17_4800_Compose_DrawFreeCount,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:59C1,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:59CF,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:59DD,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5ACE,num,bc,$1662,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5AD7,num,bc,$1673,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5AE6,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5C8B,num,bc,$7034,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5C93,num,bc,$706C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5CDB,?,hl,$0E00,,,the walk ends without a use,
+06,06:5DB8,ptr,hl,$7C20,11:7C20,Gfx_11_7800_Mode18_State00_Init + $420,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:5DC3,ptr,hl,$7C50,11:7C50,Gfx_11_7C40_Mode18_DrawThumbFrame + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:5DCD,ptr,hl,$7C50,11:7C50,Gfx_11_7C40_Mode18_DrawThumbFrame + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:5E5D,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5E66,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5E6F,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5E78,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5E86,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5E94,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5F12,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5F27,?,bc,$0140,,,overwritten before any use,
+06,06:5FC1,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5FCF,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5FDD,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:61AF,ptr,hl,$4800,17:4800,Gfx_17_4800_Compose_DrawFreeCount,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:61C7,ptr,hl,$4800,17:4800,Gfx_17_4800_Compose_DrawFreeCount,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+06,06:61E3,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:61F1,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:620D,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6220,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:622E,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:624D,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6282,?,bc,$0100,,,overwritten before any use,
+06,06:6323,num,bc,$0848,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:632C,num,bc,$4008,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:654F,num,bc,$5078,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6557,num,bc,$5018,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:655F,num,bc,$1848,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:65A7,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:65FE,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6655,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:66B0,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6947,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6955,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6963,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6A09,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6A17,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6A25,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6A8A,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6A98,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6AA6,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6B84,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6D4F,num,bc,$03C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6DA6,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6DC5,?,hl,$0C00,,,the walk ends without a use,
+06,06:6DCC,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:712E,ptr,hl,$4000,17:4000,Gfx_17_4000_Shoot_DrawDigitAt_Digits,"C: handed with its bank in A to a banked copy, a far call or the far return; the listing had Mode15_SelfTimerInterval (bank 06), the wrong bank",yes
+06,06:72A0,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:72A9,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:72B2,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:72BB,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:72C9,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:7347,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:7350,?,bc,$0140,,,overwritten before any use,
+06,Mode17_State03_Split_Pick1_PtrTbl4F8A,?,dw,$4A49,,,no reader that loads it as a word found,
+06,Mode17_State03_Split_Pick1_PtrTbl4F8A,?,dw,$4A4B,,,no reader that loads it as a word found,
+06,Mode17_State04_Split_Pick2_PtrTbl4FC5,?,dw,$4A49,,,no reader that loads it as a word found,
+06,Mode17_State04_Split_Pick2_PtrTbl4FC5,?,dw,$4A4B,,,no reader that loads it as a word found,
+06,Mode17_State05_Split_Pick3_PtrTbl5000,?,dw,$504F,,,no reader that loads it as a word found,
+06,Mode17_State05_Split_Pick3_PtrTbl5000,?,dw,$5051,,,no reader that loads it as a word found,
+06,Mode17_State06_Split_Pick4_PtrTbl503B,?,dw,$504F,,,no reader that loads it as a word found,
+06,Mode17_State06_Split_Pick4_PtrTbl503B,?,dw,$5051,,,no reader that loads it as a word found,
+06,Mode17_State0B_Fusion_Pick1_PtrTbl5262,?,dw,$4A49,,,no reader that loads it as a word found,
+06,Mode17_State0B_Fusion_Pick1_PtrTbl5262,?,dw,$4A4B,,,no reader that loads it as a word found,
+06,Mode17_State0C_Fusion_Pick2_PtrTbl529D,?,dw,$504F,,,no reader that loads it as a word found,
+06,Mode17_State0C_Fusion_Pick2_PtrTbl529D,?,dw,$5051,,,no reader that loads it as a word found,
+06,Mode18_Pick2_SlotPosTbl,num,dw,$7018,,,C: the reader at 06:5C4D takes the bytes apart,
+06,Mode18_Pick2_SlotPosTbl,num,dw,$7034,,,C: the reader at 06:5C4D takes the bytes apart,
+06,Mode18_Pick2_SlotPosTbl,num,dw,$7050,,,C: the reader at 06:5C4D takes the bytes apart,
+06,Mode18_Pick2_SlotPosTbl,num,dw,$706C,,,C: the reader at 06:5C4D takes the bytes apart,
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6E5E,06:6E5E,Shoot_LoadTimerScreen_Tbl6E32 + $2C,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6E6D,06:6E6D,Shoot_LoadTimerScreen_Tbl6E32 + $3B,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6E8A,06:6E8A,Shoot_LoadTimerScreen_Tbl6E32 + $58,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6EB5,06:6EB5,Shoot_LoadTimerScreen_Tbl6E32 + $83,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6ED2,06:6ED2,Shoot_LoadTimerScreen_Tbl6E32 + $A0,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6EEF,06:6EEF,Shoot_LoadTimerScreen_Tbl6E32 + $BD,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6F0C,06:6F0C,Shoot_LoadTimerScreen_Tbl6E32 + $DA,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6F29,06:6F29,Shoot_LoadTimerScreen_Tbl6E32 + $F7,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6F46,06:6F46,Shoot_LoadTimerScreen_Tbl6E32 + $114,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6F63,06:6F63,Shoot_LoadTimerScreen_Tbl6E32 + $131,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6F80,06:6F80,Shoot_LoadTimerScreen_Tbl6E32 + $14E,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6F9D,06:6F9D,Shoot_LoadTimerScreen_Tbl6E32 + $16B,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6FBA,06:6FBA,Shoot_LoadTimerScreen_Tbl6E32 + $188,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6FD7,06:6FD7,Shoot_LoadTimerScreen_Tbl6E32 + $1A5,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$6FF4,06:6FF4,Shoot_LoadTimerScreen_Tbl6E32 + $1C2,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$7011,06:7011,Shoot_LoadTimerScreen_Tbl6E32 + $1DF,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$702E,06:702E,Shoot_LoadTimerScreen_Tbl6E32 + $1FC,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$704B,06:704B,Shoot_LoadTimerScreen_Tbl6E32 + $219,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$7068,06:7068,Shoot_LoadTimerScreen_Tbl6E32 + $236,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$7085,06:7085,Shoot_LoadTimerScreen_Tbl6E32 + $253,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$7094,06:7094,Shoot_LoadTimerScreen_Tbl6E32 + $262,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+06,Shoot_LoadTimerScreen_Tbl6E32,ptr,dw,$70A3,06:70A3,Shoot_LoadTimerScreen_Tbl6E32 + $271,C: word of a table loaded as a pointer at 06:6E0E (dereferenced at 06:6E15 (bank 06 mapped); that instruction read the target block in the runs),yes
+07,07:406A,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4078,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4086,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4094,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:42D8,num,bc,$3353,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:42EE,num,bc,$6D52,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4304,num,bc,$3353,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:431A,num,bc,$6D52,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:43EC,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4417,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4425,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4433,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4441,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4515,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4523,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4531,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:453F,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:454D,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4666,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4674,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4682,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4690,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:469E,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4760,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:478B,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4799,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:47A7,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:47B5,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4913,num,bc,$358C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:491D,num,bc,$658C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4A66,ptr,hl,$4800,17:4800,Gfx_17_4800_Compose_DrawFreeCount,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:4A7E,ptr,hl,$4800,17:4800,Gfx_17_4800_Compose_DrawFreeCount,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:4B15,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4B23,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4B3F,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4B7A,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4B88,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4BA4,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4BCB,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4BED,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4C32,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4C40,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4C4E,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4F23,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4F34,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4F46,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4F65,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4F72,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4F7D,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4FA3,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4FEF,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5016,ptr,hl,$5830,13:5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:502D,ptr,hl,$5800,13:5800,Gfx_13_5800_Mode0F_State00_Init,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:5048,ptr,hl,$5830,13:5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:505F,ptr,hl,$5800,13:5800,Gfx_13_5800_Mode0F_State00_Init,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:507D,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5099,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:50A8,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:50B7,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:50C6,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:50DB,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:50F1,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5106,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5115,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5124,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5133,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:514F,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:51DC,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:51EA,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:51F8,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5206,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:539F,num,bc,$0180,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:53E6,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:53F4,num,bc,$0780,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5402,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5538,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5546,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5554,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5B3F,ptr,[abs],$5B8A,07:5B8A,SpaceFever_Wave1_Init_Tbl5B82 + $8,C: ROM byte read by its address (bank 07 mapped),yes
+07,07:5D28,ptr,[abs],$5D73,07:5D73,SpaceFever_Wave2_Init_Tbl5D6B + $8,C: ROM byte read by its address (bank 07 mapped),yes
+07,07:5F0B,ptr,[abs],$5F5D,07:5F5D,SpaceFever_Wave3_Init_Tbl5F55 + $8,C: ROM byte read by its address (bank 07 mapped),yes
+07,07:60D5,ptr,[abs],$6138,07:6138,SpaceFever_Boss_Init_Tbl6130 + $8,C: ROM byte read by its address (bank 07 mapped),yes
+07,07:64D0,?,bc,$0800,,,overwritten before any use,
+07,07:680F,ptr,hl,$6870,27:6870,Src_27_66F0_Tbl53A6_5 + $180,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:6825,ptr,hl,$6950,27:6950,Src_27_66F0_Tbl53A6_5 + $260,"C: handed with its bank in A to a banked copy, a far call or the far return; the listing had SpaceFever_CopyBossTiles (bank 07), the wrong bank",yes
+07,07:684F,ptr,hl,$69B0,27:69B0,Src_27_66F0_Tbl53A6_5 + $2C0,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:6865,ptr,hl,$6A90,27:6A90,Src_27_66F0_Tbl53A6_5 + $3A0,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:6871,num,bc,$040A,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:68CA,ptr,hl,$5649,25:5649,Map_25_55C0_Mode07_State00_Init + $89,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+07,07:69C3,num,bc,$04F0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:69D1,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A21,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A2F,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A3D,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A7E,num,bc,$04F0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A8C,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B53,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B61,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B6F,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B7D,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B92,?,bc,$0140,,,overwritten before any use,
+07,07:6D51,num,bc,$5010,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6D59,num,bc,$5080,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:706E,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:71FC,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:720A,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7218,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7226,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:722F,?,bc,$01C0,,,overwritten before any use,
+07,07:73A0,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:73CC,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:73F9,ptr,hl,$74A8,07:74A8,MainMenu_TransitionToLowerPage_74A8,C: dereferenced at 07:7C62 (bank 07 mapped),yes
+07,07:7428,ptr,hl,$74A8,07:74A8,MainMenu_TransitionToLowerPage_74A8,C: dereferenced at 07:7C62 (bank 07 mapped),yes
+07,07:7431,ptr,hl,$74A8,07:74A8,MainMenu_TransitionToLowerPage_74A8,C: dereferenced at 07:7CD1 (bank 07 mapped),yes
+07,07:7445,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7462,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:747F,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7498,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:74E1,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7509,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7531,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7589,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:75B1,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:75D9,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7632,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:765A,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7682,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:76DB,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7703,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:772B,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:781E,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:782D,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:783C,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7852,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7861,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7870,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:787E,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:788D,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:789B,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:78AF,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:78C4,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:78D7,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:78EA,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:78F9,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:793F,num,bc,$5081,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:795C,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:796F,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:797E,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:799F,num,bc,$5081,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:79BC,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:79CF,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:79DE,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7A24,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7A34,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7BE4,?,bc,$0400,,,the walk ends without a use,
+07,07:7C0A,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7C53,?,bc,$0400,,,the walk ends without a use,
+07,07:7C79,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:7CC2,?,bc,$0400,,,the walk ends without a use,
+07,07:7CE8,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4000,0E:4000,Gfx_0E_4000_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4280,0E:4280,Gfx_0E_4280_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_4280_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4500,0E:4500,Gfx_0E_4500_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4780,0E:4780,Gfx_0E_4780_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_4780_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4A00,0E:4A00,Gfx_0E_4A00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_4A00_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4C80,0E:4C80,Gfx_0E_4C80_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_4C80_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$4F00,0E:4F00,Gfx_0E_4F00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_4F00_MsgStrip; the word was read by 07:4F99, the next byte is its bank",no
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5180,0E:5180,Gfx_0E_5180_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5180_MsgStrip; the word was read by 07:4F99, the next byte is its bank",no
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5400,0E:5400,Gfx_0E_5400_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5400_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5680,0E:5680,Gfx_0E_5680_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5680_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5900,0E:5900,Gfx_0E_5900_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5B80,0E:5B80,Gfx_0E_5B80_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5B80_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5E00,0E:5E00,Gfx_0E_5E00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_5E00_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$5D00,0D:5D00,Gfx_0D_5D00_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0D_5D00_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,LinkPick_LoadMessageStrip_Gfx4FAA,ptr,record,$6080,0E:6080,Gfx_0E_6080_MsgStrip,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_0E_6080_MsgStrip; the word was read by 07:4F99, the next byte is its bank",yes
+07,MainMenu_DrawUpperItem2_Gfx7A43,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_DrawUpperItem2_Gfx7A43,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_DrawUpperItem2_Gfx7A43,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem3_AnimTbl,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem3_AnimTbl,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem3_AnimTbl,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem3_AnimTbl,ptr,record,$7B00,07:7B00,MainMenu_IconCallback3,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem3_AnimTbl,ptr,record,$7B05,07:7B05,MainMenu_IconCallback4,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem4_AnimTbl,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem4_AnimTbl,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem4_AnimTbl,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem4_AnimTbl,ptr,record,$7B00,07:7B00,MainMenu_IconCallback3,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem4_AnimTbl,ptr,record,$7B05,07:7B05,MainMenu_IconCallback4,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem5_AnimTbl,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem5_AnimTbl,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem5_AnimTbl,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem5_AnimTbl,ptr,record,$7B00,07:7B00,MainMenu_IconCallback3,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem5_AnimTbl,ptr,record,$7B05,07:7B05,MainMenu_IconCallback4,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem6_AnimTbl,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem6_AnimTbl,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem6_AnimTbl,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem6_AnimTbl,ptr,record,$7B00,07:7B00,MainMenu_IconCallback3,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_LowerItem6_AnimTbl,ptr,record,$7B05,07:7B05,MainMenu_IconCallback4,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_SlideB_Tbl0,ptr,record,$5A80,16:5A80,Gfx_16_5A80_MainMenu_IconStripB_F1,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl0,ptr,record,$5F80,16:5F80,Gfx_16_5F80_MainMenu_IconStripB_F2,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl0,ptr,record,$6480,16:6480,Gfx_16_6480_MainMenu_IconStripB_F3,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl0,ptr,record,$4000,11:4000,Gfx_11_4000_MainMenu_IconStripB_F4,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl1,ptr,record,$6480,16:6480,Gfx_16_6480_MainMenu_IconStripB_F3,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl1,ptr,record,$5F80,16:5F80,Gfx_16_5F80_MainMenu_IconStripB_F2,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl1,ptr,record,$5A80,16:5A80,Gfx_16_5A80_MainMenu_IconStripB_F1,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl1,ptr,record,$5580,16:5580,Gfx_16_5580_MainMenu_IconStripB_F0,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl2,ptr,record,$4500,11:4500,Gfx_11_4500_MainMenu_IconStripB_F5,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl2,ptr,record,$4500,11:4500,Gfx_11_4500_MainMenu_IconStripB_F5,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl2,ptr,record,$4A00,11:4A00,Gfx_11_4A00_MainMenu_IconStripB_F6,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl2,ptr,record,$4A00,11:4A00,Gfx_11_4A00_MainMenu_IconStripB_F6,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl3,ptr,record,$4500,11:4500,Gfx_11_4500_MainMenu_IconStripB_F5,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl3,ptr,record,$4500,11:4500,Gfx_11_4500_MainMenu_IconStripB_F5,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl3,ptr,record,$4000,11:4000,Gfx_11_4000_MainMenu_IconStripB_F4,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_SlideB_Tbl3,ptr,record,$4000,11:4000,Gfx_11_4000_MainMenu_IconStripB_F4,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 07:7C6F, the next byte is its bank",yes
+07,MainMenu_UpperItem0_AnimTbl,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_UpperItem0_AnimTbl,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_UpperItem0_AnimTbl,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_UpperItem1_AnimTbl,ptr,record,$7AF1,07:7AF1,MainMenu_IconCallback0,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_UpperItem1_AnimTbl,ptr,record,$7AF6,07:7AF6,MainMenu_IconCallback1,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,MainMenu_UpperItem1_AnimTbl,ptr,record,$7AFB,07:7AFB,MainMenu_IconCallback2,C: dereferenced at 07:792C (bank 07 mapped); the word was read by 07:7929,yes
+07,SlideHub_ActorLimitTbl,?,dw,$6010,,,no reader that loads it as a word found,
+07,ViewMenu_DrawCursor_PtrTbl5344,?,dw,$7577,,,no reader that loads it as a word found,
+07,ViewMenu_DrawCursor_PtrTbl5344,?,dw,$7578,,,no reader that loads it as a word found,
+08,08:4028,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4036,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4044,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4185,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:41F5,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:420A,?,bc,$0140,,,the walk ends without a use,
+08,08:4336,num,bc,$5078,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:433E,num,bc,$5018,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:46BF,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:46CD,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:473D,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4749,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:47F8,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4856,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4864,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4880,num,bc,$02C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:48C2,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:48D0,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:48DE,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4B50,num,bc,$1C40,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4B5A,num,bc,$5046,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4B96,ptr,hl,$7180,20:7180,Gfx_20_7180_Mode15_DrawTwoDigits,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+08,08:4BC9,?,bc,$0800,,,overwritten before any use,
+08,08:4CDE,?,hl,$0E00,,,the walk ends without a use,
+08,08:4D63,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4D94,ptr,hl,$5C70,18:5C70,Gfx_18_5C70_Mode1E_State00_Init,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+08,08:4DB0,num,bc,$5046,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4DE9,num,bc,$4F20,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4E23,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4E47,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4EC3,ptr,hl,$7BB0,21:7BB0,Src_21_7BB0_BorderPicker_AnimateIcon,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+08,08:4F00,num,bc,$5048,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4F0A,num,bc,$5048,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4F24,num,bc,$6259,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4F2E,num,bc,$5A59,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:4F3E,num,bc,$5048,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:5052,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:509A,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:50DF,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:51C2,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:51D0,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:51DE,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:526A,ptr,hl,$7BB0,21:7BB0,Src_21_7BB0_BorderPicker_AnimateIcon,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+08,08:52A0,num,bc,$5033,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:52BA,num,bc,$6A44,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:52C4,num,bc,$6244,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:52D4,num,bc,$5833,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:53D4,?,bc,$0640,,,the walk ends without a use,
+08,08:53DD,?,bc,$01C0,,,the walk ends without a use,
+08,08:53E6,?,bc,$0240,,,the walk ends without a use,
+08,08:53EF,?,bc,$05C0,,,the walk ends without a use,
+08,08:53F8,?,bc,$0180,,,the walk ends without a use,
+08,08:544F,?,hl,$03C0,,,the walk ends without a use,
+08,08:5456,num,bc,$0440,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:546A,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:5494,?,hl,$03C0,,,the walk ends without a use,
+08,08:549B,?,bc,$0440,,,the walk ends without a use,
+08,08:54AF,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:7271,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:7282,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:7290,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:72C9,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:72EB,?,bc,$0303,,,overwritten before any use,
+08,08:7379,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:7387,num,bc,$0180,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:7395,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:73F1,num,bc,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:73FF,num,bc,$0180,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:740D,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:74C9,num,bc,$0900,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:74D4,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,Print_DrawSelectionDigits_PtrTbl4C6F,?,dw,$5256,,,no reader that loads it as a word found,
+08,Print_DrawSelectionDigits_PtrTbl4C6F,?,dw,$5450,,,no reader that loads it as a word found,
+09,09:4037,ptr,hl,$4000,29:4000,Credits_ScrollRowTbl,"C: dereferenced at 00:172F (bank 29 mapped); that instruction read the target block in the runs; the listing had ScrollEngine_Step (bank 09), the wrong bank",yes
+09,09:42C9,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:42D7,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:42F3,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4301,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:446B,num,bc,$0178,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4617,ptr,hl,$4000,2A:4000,Sheet_MiscellaneousStampsJpn_2A_4000,C: font base handed to Glyph_LoadFromCharCode with the bank in C; the listing had ScrollEngine_Step (bank 09),yes
+09,09:462B,ptr,hl,$4000,2A:4000,Sheet_MiscellaneousStampsJpn_2A_4000,C: font base handed to Glyph_LoadFromCharCode with the bank in C; the listing had ScrollEngine_Step (bank 09),yes
+09,09:464D,ptr,hl,$56D0,21:56D0,Gfx_21_56D0_CommentCard_DrawGender_Far,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:4675,ptr,hl,$54E0,21:54E0,Gfx_21_54E0_CommentCard_DrawBlood_Far,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:46B6,ptr,hl,$56C0,21:56C0,Gfx_21_56C0_CommentCard_DrawNumber,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:46F9,ptr,hl,$5080,21:5080,Gfx_21_5080_CommentCard_DrawDigit,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:4709,ptr,hl,$53A0,21:53A0,Gfx_21_5080_CommentCard_DrawDigit + $320,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:4721,ptr,hl,$5120,21:5120,Gfx_21_5080_CommentCard_DrawDigit + $A0,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:472E,ptr,hl,$5260,21:5260,Gfx_21_5080_CommentCard_DrawDigit + $1E0,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:478F,ptr,hl,$4D00,21:4D00,Gfx_21_4D00_CommentCard_DrawPhotoNumber_Tens,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:4796,ptr,hl,$4E00,21:4E00,Gfx_21_4E00_CommentCard_DrawPhotoNumber_Ones,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:47C3,ptr,hl,$6000,2A:6000,StampCat04_05_SmallKana_Gfx,C: font base handed to Glyph_LoadFromCharCode with the bank in C,yes
+09,09:47F5,ptr,hl,$5620,21:5620,Src_21_5620_CommentCard_DrawNibble,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:486C,ptr,hl,$4000,2A:4000,Sheet_MiscellaneousStampsJpn_2A_4000,"C: handed with its bank in A to a banked copy, a far call or the far return; the listing had ScrollEngine_Step (bank 09), the wrong bank",yes
+09,09:48F4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4902,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4910,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:491E,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4927,?,bc,$01C0,,,overwritten before any use,
+09,09:49F7,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4A05,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4A13,num,bc,$0160,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4A21,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4A2A,?,bc,$01C0,,,overwritten before any use,
+09,09:4B2C,num,bc,$0580,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4B3A,num,bc,$0440,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4B56,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4B5F,?,bc,$01C0,,,overwritten before any use,
+09,09:4C06,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4C14,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4C22,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4C2B,?,bc,$01C0,,,overwritten before any use,
+09,09:4C8C,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4C9A,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4CA8,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4CB1,?,bc,$01C0,,,overwritten before any use,
+09,09:4D36,num,bc,$0470,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4D44,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4D4D,?,bc,$01C0,,,overwritten before any use,
+09,09:4DAB,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4DB9,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4DC7,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4E09,num,bc,$0160,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4E19,num,bc,$0160,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4E66,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4E74,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4E82,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4E90,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4F1D,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4F2B,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4F39,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4F42,?,bc,$0400,,,overwritten before any use,
+09,09:4F4D,num,bc,$5048,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:4FE9,ptr,hl,$509F,09:509F,Credits_ScrollFrameTbl + $3,C: dereferenced at 09:4FF1 (bank 09 mapped); that instruction read the target block in the runs,yes
+09,09:502D,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:503E,num,bc,$6048,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:506D,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:507B,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5089,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:50EA,ptr,hl,$5148,09:5148,Credits_NishimuraDanceFrameTbl + $3,C: dereferenced at 09:50F2 (bank 09 mapped); that instruction read the target block in the runs,yes
+09,09:5127,num,bc,$0470,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5176,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:51C6,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:51D9,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:51EC,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:51FB,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5208,num,bc,$7026,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5210,num,bc,$4C9C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:523A,num,bc,$4550,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5245,num,bc,$7049,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5252,num,bc,$6D6C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:52AA,num,bc,$01C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5439,ptr,hl,$4000,2A:4000,Sheet_MiscellaneousStampsJpn_2A_4000,"C: handed with its bank in A to a banked copy, a far call or the far return; the listing had ScrollEngine_Step (bank 09), the wrong bank",yes
+09,09:54C9,ptr,hl,$6000,2A:6000,StampCat04_05_SmallKana_Gfx,C: font base handed to Glyph_LoadFromCharCode with the bank in C,yes
+09,09:54E2,ptr,hl,$4000,2A:4000,Sheet_MiscellaneousStampsJpn_2A_4000,C: font base handed to Glyph_LoadFromCharCode with the bank in C; the listing had ScrollEngine_Step (bank 09),yes
+09,09:5518,ptr,hl,$64C0,20:64C0,Gfx_20_64C0_OwnerCard_LoadGenderTiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:559E,ptr,hl,$6660,20:6660,Src_20_6660_OwnerCard_LoadBirthNumberTiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:55ED,ptr,hl,$6680,20:6680,Gfx_20_6680_OwnerCard_LoadBloodTiles,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:5625,ptr,hl,$6520,20:6520,Src_20_6520_OwnerCard_DrawBloodLow,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:57D0,num,bc,$1D1B,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:584A,num,bc,$6874,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5864,num,bc,$6884,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5870,num,bc,$507C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5878,num,bc,$587C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5CE8,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5CF6,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5D5D,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5D83,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5E3F,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5E67,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5ED1,num,bc,$0140,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5F44,ptr,hl,$4000,2A:4000,Sheet_MiscellaneousStampsJpn_2A_4000,C: font base handed to Glyph_LoadFromCharCode with the bank in C; the listing had ScrollEngine_Step (bank 09),yes
+09,09:5F7D,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:5F8B,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6049,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6057,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6065,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6073,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6180,num,bc,$0580,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:618E,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:619C,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:61AA,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:646B,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6479,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6487,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6495,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:64A3,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6535,num,bc,$01B0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:654F,num,bc,$01B0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6BE1,num,bc,$0A00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:6F25,num,bc,$3640,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:706D,num,bc,$5685,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:7187,ptr,hl,$6E80,1B:6E80,Gfx_1B_6E80_Run_DrawTimerDigitB,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+09,09:71B0,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:71C7,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:71DE,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:71E8,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:71FF,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:7216,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:722E,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:7238,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:72C9,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:72D4,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:72DF,num,bc,$0500,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:72FB,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,09:7397,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+09,Credits_NishimuraDanceFrameTbl,ptr,record,$4500,22:4500,Gfx_22_4500_CreditsNishimuraDanceFrame00,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5120, the next byte is its bank",yes
+09,Credits_NishimuraDanceFrameTbl,ptr,record,$4970,22:4970,Gfx_22_4970_CreditsNishimuraDanceFrame01,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5120, the next byte is its bank",yes
+09,Credits_NishimuraDanceFrameTbl,ptr,record,$4000,27:4000,Gfx_27_4000_CreditsNishimuraDanceFrame02,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5120, the next byte is its bank",yes
+09,Credits_NishimuraDanceFrameTbl,ptr,record,$4970,22:4970,Gfx_22_4970_CreditsNishimuraDanceFrame01,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5120, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4480,25:4480,Gfx_25_4480_Mode08_State14_CreditsPageB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4000,24:4000,Gfx_24_4000_CreditsGirlFrame01,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$5240,22:5240,Gfx_22_4DE0_CreditsGirlFrame10 + $460,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4000,22:4000,Gfx_22_4000_CreditsGirlFrame03,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$7B00,17:7B00,Gfx_17_7B00_CreditsGirlFrame04,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4000,25:4000,Gfx_25_4000_CreditsGirlFrame05,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4000,26:4000,Gfx_26_4000_CreditsGirlFrame06,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$56A0,22:56A0,Gfx_22_5240_CreditsGirlFrame02_Part52E0 + $3C0,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$6F40,22:6F40,Gfx_22_6F40_CreditsGirlFrame08,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4000,23:4000,Gfx_23_4000_CreditsGirlFrame09,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$4DE0,22:4DE0,Gfx_22_4DE0_CreditsGirlFrame10,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$5B00,22:5B00,Gfx_22_56A0_CreditsGirlFrame07_Part5740 + $3C0,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollFrameTbl,ptr,record,$6C80,23:6C80,Gfx_23_6C80_CreditsGirlFrame12,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:5026, the next byte is its bank",yes
+09,Credits_ScrollSpriteTileTbl,?,dw,$5000,,,no reader that loads it as a word found,
+09,Kb_GlyphListA,?,dw,$4B04,,,no reader that loads it as a word found,
+09,Kb_GlyphListA,?,dw,$5005,,,no reader that loads it as a word found,
+09,Kb_GlyphListB,?,dw,$5524,,,no reader that loads it as a word found,
+09,Kb_GlyphListB,?,dw,$7901,,,no reader that loads it as a word found,
+09,Kb_GlyphListB,?,dw,$7A01,,,no reader that loads it as a word found,
+09,Kb_GlyphListB,?,dw,$7D08,,,no reader that loads it as a word found,
+09,Kb_GlyphListC,?,dw,$7B02,,,no reader that loads it as a word found,
+09,ResultScreen_MessageTbl,ptr,record,$4000,28:4000,Gfx_28_4000_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$4280,28:4280,Gfx_28_4280_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$4500,28:4500,Gfx_28_4500_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$4780,28:4780,Gfx_28_4780_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$4A00,28:4A00,Gfx_28_4A00_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$4C80,28:4C80,Gfx_28_4C80_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$4F00,28:4F00,Gfx_28_4F00_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$5180,28:5180,Gfx_28_5180_MsgStripB,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_28_5180_MsgStripB; the word was read by 09:738D, the next byte is its bank",no
+09,ResultScreen_MessageTbl,ptr,record,$5400,28:5400,Gfx_28_5400_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$5680,28:5680,Gfx_28_5680_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$5900,28:5900,Gfx_28_5900_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$5B80,28:5B80,Gfx_28_5B80_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$5E00,28:5E00,Gfx_28_5E00_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$5D00,0D:5D00,Gfx_0D_5D00_MsgStrip,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,ResultScreen_MessageTbl,ptr,record,$6080,28:6080,Gfx_28_6080_MsgStripB,"C: handed with its bank in A to a banked copy, a far call or the far return; the word was read by 09:738D, the next byte is its bank",yes
+09,UserMap_DrawCursor_PtrTbl529B,?,dw,$6F6F,,,no reader that loads it as a word found,
+09,UserMap_DrawCursor_PtrTbl529B,?,dw,$716F,,,no reader that loads it as a word found,
+0A,0A:45CF,num,lo/hi,$7F7E,,,I: two bytes stored to wCamCalibVector; no label at that address (data),
+0A,0A:5091,ptr,h,$73,0A:7300,HIGH(Cam_PopcountTable256),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+0A,0A:509C,ptr,h,$73,0A:7300,HIGH(Cam_PopcountTable256),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+0A,0A:54EC,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5534,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5665,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:566D,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:56A9,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:56B4,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:56C1,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:56CC,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:56E9,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:56F4,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5701,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:570C,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5742,ptr,b,$79,0A:7900,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5AC3,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5B4F,ptr,h,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+0A,0A:5B5A,ptr,h,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+0A,0A:5B9E,ptr,h,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+0A,0A:5BA9,ptr,h,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+0A,0A:5BDB,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5C4E,ptr,b,$77,0A:7700,HIGH(Cam_ZoomX2Mirror_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5C56,ptr,b,$78,0A:7800,HIGH(Cam_ZoomX2Mirror_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5C94,ptr,b,$77,0A:7700,HIGH(Cam_ZoomX2Mirror_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5C9F,ptr,b,$78,0A:7800,HIGH(Cam_ZoomX2Mirror_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5CAC,ptr,b,$77,0A:7700,HIGH(Cam_ZoomX2Mirror_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5CB7,ptr,b,$78,0A:7800,HIGH(Cam_ZoomX2Mirror_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5CD4,ptr,b,$77,0A:7700,HIGH(Cam_ZoomX2Mirror_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5CDF,ptr,b,$78,0A:7800,HIGH(Cam_ZoomX2Mirror_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5CEC,ptr,b,$77,0A:7700,HIGH(Cam_ZoomX2Mirror_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5CF7,ptr,b,$78,0A:7800,HIGH(Cam_ZoomX2Mirror_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5D2D,ptr,b,$7A,0A:7A00,HIGH(Cam_ReduceTbl_Hi),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5E46,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5E85,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5EC5,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5F02,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5F3F,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5F80,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:5FBF,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6000,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:603D,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:607A,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:60B7,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:60F4,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6131,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6171,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6221,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:626F,ptr,b,$74,0A:7400,HIGH(Cam_BitReverseTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:632C,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6334,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:633B,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6343,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:637E,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6389,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6396,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:63A1,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:63BE,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:63C9,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:63D6,ptr,b,$75,0A:7500,HIGH(Cam_ZoomX2_HiTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:63E1,ptr,b,$76,0A:7600,HIGH(Cam_ZoomX2_LoTbl),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6417,ptr,b,$79,0A:7900,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6869,ptr,b,$79,0A:7900,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6909,ptr,b,$7A,0A:7A00,HIGH(Cam_ReduceTbl_Hi),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:69AD,ptr,b,$79,0A:7900,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+0A,0A:6A9D,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+0A,0A:6AAB,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+0A,0A:6B95,num,bc,$0300,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+0A,0A:6BA3,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+1F,1F:43B2,ptr,hl,$4396,1F:4396,Sfx1_Data_4391 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:43D9,ptr,hl,$43BD,1F:43BD,Sfx1_Data_43B8 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4421,ptr,hl,$43FC,1F:43FC,Sfx1_Data_43F7 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:444C,ptr,hl,$442C,1F:442C,Sfx1_Data_4427 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:44B4,ptr,hl,$4494,1F:4494,Sfx1_Data_448F + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:44E8,ptr,hl,$44C5,1F:44C5,Sfx1_Data_44C0 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4518,ptr,hl,$450C,1F:450C,Sfx1_Data_4509 + $3,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4563,ptr,hl,$454F,1F:454F,Sfx1_Data_4549 + $6,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4597,ptr,bc,$457A,1F:457A,Sfx1_Data_4575 + $5,C: dereferenced at 1F:45A6 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:45DC,ptr,hl,$45BC,1F:45BC,Sfx1_Data_45B7 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4609,ptr,hl,$45ED,1F:45ED,Sfx1_Data_45E8 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4610,ptr,hl,$45F2,1F:45F2,Sfx1_Data_45E8 + $A,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4617,ptr,hl,$45ED,1F:45ED,Sfx1_Data_45E8 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:465A,ptr,hl,$4631,1F:4631,Sfx1_Data_4627 + $A,C: dereferenced at 1F:465E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:466A,ptr,hl,$462C,1F:462C,Sfx1_Data_4627 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4691,ptr,hl,$4675,1F:4675,Sfx1_Data_4670 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:47D3,ptr,hl,$47AF,1F:47AF,Sfx1_Data_47AA + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4800,ptr,hl,$47DE,1F:47DE,Sfx1_Data_47D9 + $5,C: dereferenced at 1F:4804 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4873,ptr,hl,$487E,1F:487E,Sfx1_Data_4879 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4889,ptr,hl,$487E,1F:487E,Sfx1_Data_4879 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:48B5,ptr,hl,$48E3,1F:48E3,Sfx1_Data_48DF + $4,C: dereferenced at 1F:48B9 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:48F2,ptr,hl,$48E7,1F:48E7,Sfx1_Data_48DF + $8,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:495E,ptr,hl,$4959,1F:4959,Sfx1_Data_4954 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:49BD,ptr,hl,$49B1,1F:49B1,Sfx1_Data_498E + $23,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4AD9,ptr,hl,$4ABD,1F:4ABD,Sfx1_Data_4AB8 + $5,C: dereferenced at 1F:4B83 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4B00,ptr,hl,$4AE4,1F:4AE4,Sfx1_Data_4ADF + $5,C: dereferenced at 1F:4B83 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4B29,ptr,hl,$4B0A,1F:4B0A,Sfx1_Data_4B05 + $5,C: dereferenced at 1F:4B83 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4B4F,ptr,hl,$4B33,1F:4B33,Sfx1_Data_4B2E + $5,C: dereferenced at 1F:4B83 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4B76,ptr,hl,$4B59,1F:4B59,Sfx1_Data_4B54 + $5,C: dereferenced at 1F:4B83 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4BBA,ptr,hl,$4B97,1F:4B97,Sfx1_Data_4B92 + $5,C: dereferenced at 1F:4BE6 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4BE2,ptr,hl,$4BC4,1F:4BC4,Sfx1_Data_4BBF + $5,C: dereferenced at 1F:4BE6 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4C1D,ptr,hl,$4BFC,1F:4BFC,Sfx1_Data_4BF7 + $5,C: dereferenced at 1F:4C21 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4C4F,ptr,hl,$4C2F,1F:4C2F,Sfx1_Data_4C2A + $5,C: dereferenced at 1F:4C53 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4C61,ptr,[abs],$4C5F,1F:4C5F,Sfx1_Data_4C5C + $3,C: ROM byte read by its address (bank 1F mapped),yes
+1F,1F:4C9F,ptr,hl,$4CB6,1F:4CB6,Sfx1_Data_4CB1 + $5,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4CA5,ptr,hl,$4CBB,1F:4CBB,Sfx1_Data_4CB1 + $A,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4CAB,ptr,hl,$4CC0,1F:4CC0,Sfx1_Data_4CB1 + $F,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4CE1,ptr,hl,$4CD3,1F:4CD3,Sfx1_Data_4CB1 + $22,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4CFB,ptr,hl,$4CD7,1F:4CD7,Sfx1_Data_4CB1 + $26,C: dereferenced at 1F:4CFF (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4D2F,ptr,hl,$4D24,1F:4D24,Sfx4_Data_4D07 + $1D,C: dereferenced at 1F:4D33 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4D36,ptr,hl,$4D14,1F:4D14,Sfx4_Data_4D07 + $D,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4D41,ptr,hl,$4D10,1F:4D10,Sfx4_Data_4D07 + $9,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4D6C,ptr,hl,$4D14,1F:4D14,Sfx4_Data_4D07 + $D,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4DA2,ptr,hl,$4D76,1F:4D76,Sfx4_Data_4D72 + $4,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4E03,ptr,hl,$4DC4,1F:4DC4,Sfx4_Data_4DC0 + $4,C: dereferenced at 1F:4E39 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4E33,ptr,hl,$4E0C,1F:4E0C,Sfx4_Data_4E08 + $4,C: dereferenced at 1F:4E39 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4E4B,ptr,hl,$4E45,1F:4E45,Sfx4_Data_4E41 + $4,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4E70,ptr,hl,$4E6A,1F:4E6A,Sfx4_Data_4E66 + $4,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4E99,ptr,hl,$4E93,1F:4E93,Sfx4_Data_4E8F + $4,C: dereferenced at 1F:525E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4F1C,ptr,hl,$4F04,1F:4F04,Sfx4_Data_4F00 + $4,C: dereferenced at 1F:4F20 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:4F75,ptr,[abs],$4F70,1F:4F70,Sfx4_Data_4F6D + $3,C: ROM byte read by its address (bank 1F mapped),yes
+1F,1F:4F7B,ptr,[abs],$4F71,1F:4F71,Sfx4_Data_4F6D + $4,C: ROM byte read by its address (bank 1F mapped),yes
+1F,1F:4FDC,ptr,hl,$4FC7,1F:4FC7,Sfx3_Data_4FC2 + $5,C: dereferenced at 1F:500E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:5006,ptr,hl,$4FEF,1F:4FEF,Sfx3_Data_4FEA + $5,C: dereferenced at 1F:500E (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,1F:546A,num,bc,$0410,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+1F,1F:563D,ptr,hl,$4037,1F:4037,Snd_LengthTbl + $12,C: dereferenced at 1F:5641 (bank 1F mapped); that instruction read the target block in the runs,yes
+1F,Snd_FreqTbl,num,dw,$0721,,,I: word of a table that is not read as pointers and holds 66 plain numbers of the same range; the listing had the label Vram_FillFFSafe,
+1F,Snd_FreqTbl,num,dw,$0744,,,I: word of a table that is not read as pointers and holds 66 plain numbers of the same range; the listing had the label Vram_WriteByteSafe,
+1F,Snd_FreqTbl,num,dw,$0762,,,I: word of a table that is not read as pointers and holds 66 plain numbers of the same range; the listing had the label Unused_Vram_AndByteSafe,
+1F,Snd_FreqTbl,num,dw,$0773,,,I: word of a table that is not read as pointers and holds 66 plain numbers of the same range; the listing had the label Unused_Vram_ReadByteSafe,

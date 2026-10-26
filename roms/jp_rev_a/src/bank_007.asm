@@ -1234,9 +1234,9 @@ jr_007_4a5c:
     swap c                                        ; $4A60
     sla c                                         ; $4A62
     rl b                                          ; $4A64
-    ld hl, $4800                                  ; $4A66
+    ld hl, Gfx_17_4800_Compose_DrawFreeCount      ; $4A66
     add hl, bc                                    ; $4A69
-    ld a, $17                                     ; $4A6A
+    ld a, BANK(Gfx_17_4800_Compose_DrawFreeCount) ; $4A6A
     ld de, $8720                                  ; $4A6C
     ld bc, $0020                                  ; $4A6F
     call Vram_CopyFromBank                        ; $4A72
@@ -1245,9 +1245,9 @@ jr_007_4a5c:
     swap c                                        ; $4A78
     sla c                                         ; $4A7A
     rl b                                          ; $4A7C
-    ld hl, $4800                                  ; $4A7E
+    ld hl, Gfx_17_4800_Compose_DrawFreeCount      ; $4A7E
     add hl, bc                                    ; $4A81
-    ld a, $17                                     ; $4A82
+    ld a, BANK(Gfx_17_4800_Compose_DrawFreeCount) ; $4A82
     ld de, $8700                                  ; $4A84
     ld bc, $0020                                  ; $4A87
     call Vram_CopyFromBank                        ; $4A8A
@@ -1922,9 +1922,21 @@ LinkPick_LoadMessageStrip::
 ; C: auto: 45 bytes, tile data; referenced by LinkPick_LoadMessageStrip. L3 pass 2026-10-26: read in BGB in the
 ; scenarios link_exchange 0E:03 (tcrf_check/assets/l3_names/scen_hits*.csv)
 LinkPick_LoadMessageStrip_Gfx4FAA::
-    db $00, $40, $0e, $80, $42, $0e, $00, $45, $0e, $80, $47, $0e, $00, $4a, $0e, $80
-    db $4c, $0e, $00, $4f, $0e, $80, $51, $0e, $00, $54, $0e, $80, $56, $0e, $00, $59
-    db $0e, $80, $5b, $0e, $00, $5e, $0e, $00, $5d, $0d, $80, $60, $0e
+    dwb Gfx_0E_4000_MsgStrip
+    dwb Gfx_0E_4280_MsgStrip
+    dwb Gfx_0E_4500_MsgStrip
+    dwb Gfx_0E_4780_MsgStrip
+    dwb Gfx_0E_4A00_MsgStrip
+    dwb Gfx_0E_4C80_MsgStrip
+    dwb Gfx_0E_4F00_MsgStrip
+    dwb Gfx_0E_5180_MsgStrip
+    dwb Gfx_0E_5400_MsgStrip
+    dwb Gfx_0E_5680_MsgStrip
+    dwb Gfx_0E_5900_MsgStrip
+    dwb Gfx_0E_5B80_MsgStrip
+    dwb Gfx_0E_5E00_MsgStrip
+    dwb Gfx_0D_5D00_MsgStrip
+    dwb Gfx_0E_6080_MsgStrip
 
 ; C
 LinkPick_LoadIcon::
@@ -1975,9 +1987,9 @@ LinkPick_PageTilesRight::
     sla a                                         ; $5011
     ld c, a                                       ; $5013
     ld b, $00                                     ; $5014
-    ld hl, $5830                                  ; $5016
+    ld hl, Gfx_13_5830_PhotoPicker_LoadPageTabsFor ; $5016
     add hl, bc                                    ; $5019
-    ld a, $13                                     ; $501A
+    ld a, BANK(Gfx_13_5830_PhotoPicker_LoadPageTabsFor) ; $501A
     ld de, $8df0                                  ; $501C
     ld bc, $0010                                  ; $501F
     call Vram_CopyFromBank                        ; $5022
@@ -1986,9 +1998,9 @@ LinkPick_PageTilesRight::
     srl a                                         ; $5028
     ld c, a                                       ; $502A
     ld b, $00                                     ; $502B
-    ld hl, $5800                                  ; $502D
+    ld hl, Gfx_13_5800_Mode0F_State00_Init        ; $502D
     add hl, bc                                    ; $5030
-    ld a, $13                                     ; $5031
+    ld a, BANK(Gfx_13_5800_Mode0F_State00_Init)   ; $5031
     ld de, $8de0                                  ; $5033
     ld bc, $0010                                  ; $5036
     call Vram_CopyFromBank                        ; $5039
@@ -2007,9 +2019,9 @@ LinkPick_PageTilesLeft::
     sla a                                         ; $5043
     ld c, a                                       ; $5045
     ld b, $00                                     ; $5046
-    ld hl, $5830                                  ; $5048
+    ld hl, Gfx_13_5830_PhotoPicker_LoadPageTabsFor ; $5048
     add hl, bc                                    ; $504B
-    ld a, $13                                     ; $504C
+    ld a, BANK(Gfx_13_5830_PhotoPicker_LoadPageTabsFor) ; $504C
     ld de, $8ed0                                  ; $504E
     ld bc, $0010                                  ; $5051
     call Vram_CopyFromBank                        ; $5054
@@ -2018,9 +2030,9 @@ LinkPick_PageTilesLeft::
     srl a                                         ; $505A
     ld c, a                                       ; $505C
     ld b, $00                                     ; $505D
-    ld hl, $5800                                  ; $505F
+    ld hl, Gfx_13_5800_Mode0F_State00_Init        ; $505F
     add hl, bc                                    ; $5062
-    ld a, $13                                     ; $5063
+    ld a, BANK(Gfx_13_5800_Mode0F_State00_Init)   ; $5063
     ld de, $8ec0                                  ; $5065
     ld bc, $0010                                  ; $5068
     call Vram_CopyFromBank                        ; $506B
@@ -3560,7 +3572,7 @@ SpaceFever_Wave1_Init::
     xor a                                         ; $5B38
     ld [wShootEnemyBaseY], a                      ; $5B39
     ld [wShootEnemyBaseY + $1], a                 ; $5B3C
-    ld a, [$5b8a]                                 ; $5B3F
+    ld a, [SpaceFever_Wave1_Init_Tbl5B82 + $8]    ; $5B3F
     ld [wShootPathEnd], a                         ; $5B42
     ld [wShootPathEnd + $1], a                    ; $5B45
     ld a, [wShootRound]                           ; $5B48
@@ -3734,7 +3746,7 @@ SpaceFever_Wave2_Init::
     xor a                                         ; $5D21
     ld [wShootEnemyBaseY], a                      ; $5D22
     ld [wShootEnemyBaseY + $1], a                 ; $5D25
-    ld a, [$5d73]                                 ; $5D28
+    ld a, [SpaceFever_Wave2_Init_Tbl5D6B + $8]    ; $5D28
     ld [wShootPathEnd], a                         ; $5D2B
     ld [wShootPathEnd + $1], a                    ; $5D2E
     ld a, [wShootRound]                           ; $5D31
@@ -3950,7 +3962,7 @@ SpaceFever_Wave3_Init::
     ld a, $08                                     ; $5F03
     ld [wShootEnemyBaseY + $1], a                 ; $5F05
     ld [wShootEnemyBaseY + $2], a                 ; $5F08
-    ld a, [$5f5d]                                 ; $5F0B
+    ld a, [SpaceFever_Wave3_Init_Tbl5F55 + $8]    ; $5F0B
     ld [wShootPathEnd], a                         ; $5F0E
     ld [wShootPathEnd + $1], a                    ; $5F11
     ld [wShootPathEnd + $2], a                    ; $5F14
@@ -4149,7 +4161,7 @@ SpaceFever_Wave3_Play_Tbl60C1::
 SpaceFever_Boss_Init::
     xor a                                         ; $60D1
     ld [wShootEnemyBaseX], a                      ; $60D2
-    ld a, [$6138]                                 ; $60D5
+    ld a, [SpaceFever_Boss_Init_Tbl6130 + $8]     ; $60D5
     ld [wShootPathEnd], a                         ; $60D8
     ld a, [wShootRound]                           ; $60DB
     ld c, a                                       ; $60DE
@@ -5333,16 +5345,16 @@ SpaceFever_LoadHudTiles::
 
 ; C
 SpaceFever_DrawGameOverHud::
-    ld a, $27                                     ; $680D
-    ld hl, $6870                                  ; $680F
+    ld a, BANK(Src_27_66F0_Tbl53A6_5)             ; $680D
+    ld hl, Src_27_66F0_Tbl53A6_5 + $180           ; $680F
     ld de, $9889                                  ; $6812
     ld b, $05                                     ; $6815
     call SpaceFever_CopyTextRows                  ; $6817
     ld de, wShootScoreBcd + $3                    ; $681A
     ld hl, $992a                                  ; $681D
     call SpaceFever_DrawScore                     ; $6820
-    ld a, $27                                     ; $6823
-    ld hl, SpaceFever_CopyBossTiles               ; $6825
+    ld a, BANK(Src_27_66F0_Tbl53A6_5)             ; $6823
+    ld hl, Src_27_66F0_Tbl53A6_5 + $260           ; $6825
     ld de, $9969                                  ; $6828
     ld b, $03                                     ; $682B
     call SpaceFever_CopyTextRows                  ; $682D
@@ -5353,16 +5365,16 @@ SpaceFever_DrawGameOverHud::
 SpaceFever_DrawBestHud::
     farcopy Vram_CopyFromBank, Sheet_MinigamesSpaceFeverIi_21_49FC_Part4C00, $9750, $0060 ; $6831
     farcopy Vram_CopyFromBank, Gfx_21_4C60_SpaceFever_DrawBestHud, $8850, $0060 ; $683F
-    ld a, $27                                     ; $684D
-    ld hl, $69b0                                  ; $684F
+    ld a, BANK(Src_27_66F0_Tbl53A6_5)             ; $684D
+    ld hl, Src_27_66F0_Tbl53A6_5 + $2C0           ; $684F
     ld de, $9889                                  ; $6852
     ld b, $05                                     ; $6855
     call SpaceFever_CopyTextRows                  ; $6857
     ld de, wBestShooter + $3                      ; $685A
     ld hl, $992a                                  ; $685D
     call SpaceFever_DrawScore                     ; $6860
-    ld a, $27                                     ; $6863
-    ld hl, $6a90                                  ; $6865
+    ld a, BANK(Src_27_66F0_Tbl53A6_5)             ; $6863
+    ld hl, Src_27_66F0_Tbl53A6_5 + $3A0           ; $6865
     ld de, $9969                                  ; $6868
     ld b, $03                                     ; $686B
     call SpaceFever_CopyTextRows                  ; $686D
@@ -5437,8 +5449,8 @@ SpaceFever_DigitTileTbl::
 
 ; C
 SpaceFever_DrawChoiceText::
-    ld a, $25                                     ; $68C8
-    ld hl, $5649                                  ; $68CA
+    ld a, BANK(Map_25_55C0_Mode07_State00_Init)   ; $68C8
+    ld hl, Map_25_55C0_Mode07_State00_Init + $89  ; $68CA
     ld de, $9889                                  ; $68CD
     ld b, $0a                                     ; $68D0
     call SpaceFever_CopyTextRows                  ; $68D2
@@ -7080,7 +7092,7 @@ jr_007_73e4:
 MainMenu_TransitionToLowerPage::
     play_sfx1 SFX1_MAIN_MENU_PAGE_TURN            ; $73EF
     ld de, MainMenu_SlideB_Tbl0                   ; $73F6
-    ld hl, $74a8                                  ; $73F9
+    ld hl, MainMenu_TransitionToLowerPage_74A8    ; $73F9
     call MainMenu_SlideB_Begin                    ; $73FC
     ld a, $03                                     ; $73FF
 
@@ -7104,10 +7116,10 @@ jr_007_7401:
     ldh [hScyShadow], a                           ; $741C
     play_sfx1 SFX1_MAIN_MENU_PAGE_DOWN            ; $741E
     ld de, MainMenu_SlideB_Tbl2                   ; $7425
-    ld hl, $74a8                                  ; $7428
+    ld hl, MainMenu_TransitionToLowerPage_74A8    ; $7428
     call MainMenu_SlideB_Begin                    ; $742B
     ld de, MainMenu_SlideC_Tbl0                   ; $742E
-    ld hl, $74a8                                  ; $7431
+    ld hl, MainMenu_TransitionToLowerPage_74A8    ; $7431
     call MainMenu_SlideC_Begin                    ; $7434
     ld a, [wMenuSelLower]                         ; $7437
     and a                                         ; $743A
@@ -7147,6 +7159,7 @@ jr_007_7490:
     ld a, $06                                     ; $749E
     ld [wMenuItem], a                             ; $74A0
     set_state STATE_00_ITEM6_EDIT                 ; $74A3
+MainMenu_TransitionToLowerPage_74A8:
     ret                                           ; $74A8
 
 
@@ -7733,8 +7746,12 @@ jr_007_7976:
 
 ; C
 MainMenu_UpperItem0_AnimTbl::
-    db $39, $3e, $29, $8d, $f1, $7a, $03, $08, $14, $64, $f6, $7a, $0d, $12, $5f, $7c
-    db $fb, $7a
+    db $39, $3e, $29, $8d
+    dw MainMenu_IconCallback0
+    db $03, $08, $14, $64
+    dw MainMenu_IconCallback1
+    db $0d, $12, $5f, $7c
+    dw MainMenu_IconCallback2
 
 ; C
 MainMenu_DrawUpperItem1::
@@ -7771,8 +7788,12 @@ jr_007_79d6:
 
 ; C
 MainMenu_UpperItem1_AnimTbl::
-    db $3e, $43, $29, $13, $f1, $7a, $08, $0d, $14, $3d, $f6, $7a, $12, $17, $5f, $24
-    db $fb, $7a
+    db $3e, $43, $29, $13
+    dw MainMenu_IconCallback0
+    db $08, $0d, $14, $3d
+    dw MainMenu_IconCallback1
+    db $12, $17, $5f, $24
+    dw MainMenu_IconCallback2
 
 ; C: phase counter D A2F mod $28
 MainMenu_DrawUpperItem2::
@@ -7822,8 +7843,12 @@ jr_007_7a3a:
 ; C: auto: 18 bytes, tile data; referenced by MainMenu_DrawUpperItem2. L3 pass 2026-10-26: read in BGB in 14 replay(s)
 ; of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
 MainMenu_DrawUpperItem2_Gfx7A43::
-    db $2d, $2f, $81, $50, $f1, $7a, $2f, $34, $5e, $2d, $f6, $7a, $34, $39, $5e, $73
-    db $fb, $7a
+    db $2d, $2f, $81, $50
+    dw MainMenu_IconCallback0
+    db $2f, $34, $5e, $2d
+    dw MainMenu_IconCallback1
+    db $34, $39, $5e, $73
+    dw MainMenu_IconCallback2
 
 ; C
 MainMenu_DrawLowerItem3::
@@ -7835,8 +7860,16 @@ MainMenu_DrawLowerItem3::
 
 ; C
 MainMenu_LowerItem3_AnimTbl::
-    db $00, $05, $57, $20, $f1, $7a, $21, $24, $50, $60, $f6, $7a, $24, $27, $5e, $50
-    db $fb, $7a, $2a, $2d, $38, $50, $00, $7b, $43, $4c, $3c, $1c, $05, $7b
+    db $00, $05, $57, $20
+    dw MainMenu_IconCallback0
+    db $21, $24, $50, $60
+    dw MainMenu_IconCallback1
+    db $24, $27, $5e, $50
+    dw MainMenu_IconCallback2
+    db $2a, $2d, $38, $50
+    dw MainMenu_IconCallback3
+    db $43, $4c, $3c, $1c
+    dw MainMenu_IconCallback4
 
 ; C
 MainMenu_DrawLowerItem4::
@@ -7848,8 +7881,16 @@ MainMenu_DrawLowerItem4::
 
 ; C
 MainMenu_LowerItem4_AnimTbl::
-    db $00, $05, $2f, $50, $f1, $7a, $21, $24, $50, $60, $f6, $7a, $24, $27, $5e, $50
-    db $fb, $7a, $27, $2a, $50, $45, $00, $7b, $43, $4c, $14, $4c, $05, $7b
+    db $00, $05, $2f, $50
+    dw MainMenu_IconCallback0
+    db $21, $24, $50, $60
+    dw MainMenu_IconCallback1
+    db $24, $27, $5e, $50
+    dw MainMenu_IconCallback2
+    db $27, $2a, $50, $45
+    dw MainMenu_IconCallback3
+    db $43, $4c, $14, $4c
+    dw MainMenu_IconCallback4
 
 ; C
 MainMenu_DrawLowerItem5::
@@ -7861,8 +7902,16 @@ MainMenu_DrawLowerItem5::
 
 ; C
 MainMenu_LowerItem5_AnimTbl::
-    db $00, $05, $57, $80, $f1, $7a, $24, $27, $5e, $50, $f6, $7a, $27, $2a, $50, $45
-    db $fb, $7a, $2a, $2d, $38, $50, $00, $7b, $43, $4c, $3c, $7c, $05, $7b
+    db $00, $05, $57, $80
+    dw MainMenu_IconCallback0
+    db $24, $27, $5e, $50
+    dw MainMenu_IconCallback1
+    db $27, $2a, $50, $45
+    dw MainMenu_IconCallback2
+    db $2a, $2d, $38, $50
+    dw MainMenu_IconCallback3
+    db $43, $4c, $3c, $7c
+    dw MainMenu_IconCallback4
 
 ; C
 MainMenu_DrawLowerItem6::
@@ -7874,8 +7923,16 @@ MainMenu_DrawLowerItem6::
 
 ; C
 MainMenu_LowerItem6_AnimTbl::
-    db $00, $05, $7f, $50, $f1, $7a, $21, $24, $50, $60, $f6, $7a, $27, $2a, $50, $45
-    db $fb, $7a, $2a, $2d, $38, $50, $00, $7b, $43, $4c, $64, $4c, $05, $7b
+    db $00, $05, $7f, $50
+    dw MainMenu_IconCallback0
+    db $21, $24, $50, $60
+    dw MainMenu_IconCallback1
+    db $27, $2a, $50, $45
+    dw MainMenu_IconCallback2
+    db $2a, $2d, $38, $50
+    dw MainMenu_IconCallback3
+    db $43, $4c, $64, $4c
+    dw MainMenu_IconCallback4
 
 ; C: animator callback (hand-decoded; README 2.0)
 MainMenu_IconCallback0::
@@ -8113,19 +8170,31 @@ MainMenu_SlideB_Step::
 ; C: 4 x {lo,hi,bank} = 16:5A80, 5F80, 6480, 11:4000 (0x500 bytes each, frames 1-4 of the 7-frame strip 16:5580-697F +
 ; 11:4000-4EFF, forward); used by the caller 07:73F6
 MainMenu_SlideB_Tbl0::
-    db $80, $5a, $16, $80, $5f, $16, $80, $64, $16, $00, $40, $11
+    dwb Gfx_16_5A80_MainMenu_IconStripB_F1
+    dwb Gfx_16_5F80_MainMenu_IconStripB_F2
+    dwb Gfx_16_6480_MainMenu_IconStripB_F3
+    dwb Gfx_11_4000_MainMenu_IconStripB_F4
 
 ; C: 4 x {lo,hi,bank} = 16:6480, 5F80, 5A80, 5580 (backward); used by the caller 07:776C
 MainMenu_SlideB_Tbl1::
-    db $80, $64, $16, $80, $5f, $16, $80, $5a, $16, $80, $55, $16
+    dwb Gfx_16_6480_MainMenu_IconStripB_F3
+    dwb Gfx_16_5F80_MainMenu_IconStripB_F2
+    dwb Gfx_16_5A80_MainMenu_IconStripB_F1
+    dwb Gfx_16_5580_MainMenu_IconStripB_F0
 
 ; C: 4 x {lo,hi,bank} = 11:4500, 4500, 4A00, 4A00 (each frame twice); used by the caller 07:7425
 MainMenu_SlideB_Tbl2::
-    db $00, $45, $11, $00, $45, $11, $00, $4a, $11, $00, $4a, $11
+    dwb Gfx_11_4500_MainMenu_IconStripB_F5
+    dwb Gfx_11_4500_MainMenu_IconStripB_F5
+    dwb Gfx_11_4A00_MainMenu_IconStripB_F6
+    dwb Gfx_11_4A00_MainMenu_IconStripB_F6
 
 ; C: 4 x {lo,hi,bank} = 11:4500, 4500, 4000, 4000 (each frame twice, backward); used by the caller 07:775C
 MainMenu_SlideB_Tbl3::
-    db $00, $45, $11, $00, $45, $11, $00, $40, $11, $00, $40, $11
+    dwb Gfx_11_4500_MainMenu_IconStripB_F5
+    dwb Gfx_11_4500_MainMenu_IconStripB_F5
+    dwb Gfx_11_4000_MainMenu_IconStripB_F4
+    dwb Gfx_11_4000_MainMenu_IconStripB_F4
 
 ; C: page transition C, entry: same loop (4 steps, records {lo,hi,bank}); callers load Tbl0 (07:742E) or Tbl1
 ; (07:7753)

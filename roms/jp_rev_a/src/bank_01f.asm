@@ -55,15 +55,15 @@ Snd_FreqTbl::
     dw $06f7
     dw $0706
     dw $0714
-    dw Vram_FillFFSafe
+    dw $0721
     dw $072d
     dw $0739
-    dw Vram_WriteByteSafe
+    dw $0744
     dw $074f
     dw $0759
-    dw Unused_Vram_AndByteSafe
+    dw $0762
     dw $076b
-    dw Unused_Vram_ReadByteSafe
+    dw $0773
     dw $077b
     dw $0783
     dw $078a
@@ -427,7 +427,7 @@ Sfx1_Step_28_Shutter::
     cp $02                                        ; $43AD
     jp z, Sfx1_Stop                               ; $43AF
 
-    ld hl, $4396                                  ; $43B2
+    ld hl, Sfx1_Data_4391 + $5                    ; $43B2
     jp Snd_Sfx_LoadNR1x                           ; $43B5
 
 
@@ -457,7 +457,7 @@ Sfx1_Step_2A_ChooseC::
     cp $02                                        ; $43D4
     jp z, Sfx1_Stop                               ; $43D6
 
-    ld hl, $43bd                                  ; $43D9
+    ld hl, Sfx1_Data_43B8 + $5                    ; $43D9
     jp Snd_Sfx_LoadNR1x                           ; $43DC
 
 
@@ -520,7 +520,7 @@ Sfx1_Step_26_SpaceFeverBossDeath::
 
 
 jr_01f_4421:
-    ld hl, $43fc                                  ; $4421
+    ld hl, Sfx1_Data_43F7 + $5                    ; $4421
     jp Snd_Sfx_LoadNR1x                           ; $4424
 
 
@@ -554,7 +554,7 @@ Sfx1_Step_25_SpaceFeverStart::
 
 
 jr_01f_444c:
-    ld hl, $442c                                  ; $444C
+    ld hl, Sfx1_Data_4427 + $5                    ; $444C
     jp Snd_Sfx_LoadNR1x                           ; $444F
 
 
@@ -640,7 +640,7 @@ Sfx1_Step_1A_1E_HotspotSound07_Choose::
     bit 0, a                                      ; $44B0
     jr nz, jr_01f_44ba                            ; $44B2
 
-    ld hl, $4494                                  ; $44B4
+    ld hl, Sfx1_Data_448F + $5                    ; $44B4
     jp Snd_Sfx_LoadNR1x                           ; $44B7
 
 
@@ -679,7 +679,7 @@ Sfx1_Step_03_KeyA::
     bit 0, a                                      ; $44E4
     jr z, jr_01f_44eb                             ; $44E6
 
-    ld hl, $44c5                                  ; $44E8
+    ld hl, Sfx1_Data_44C0 + $5                    ; $44E8
 
 jr_01f_44eb:
     jp Snd_Sfx_LoadNR1x                           ; $44EB
@@ -720,7 +720,7 @@ Sfx1_Init_1B_SpaceFeverMenuPickGame::
     ld a, $83                                     ; $4511
     ld [wSndSfx1 + $7], a                         ; $4513
     ld a, $0c                                     ; $4516
-    ld hl, $450c                                  ; $4518
+    ld hl, Sfx1_Data_4509 + $3                    ; $4518
     jp Snd_Sfx_Start                              ; $451B
 
 
@@ -775,7 +775,7 @@ Sfx1_Init_3C_3D_3E_SpaceFeverPlayerDeathJingle::
     ld a, $85                                     ; $455C
     ld [wSndSfx1 + $7], a                         ; $455E
     ld a, $14                                     ; $4561
-    ld hl, $454f                                  ; $4563
+    ld hl, Sfx1_Data_4549 + $6                    ; $4563
     jp Snd_Sfx_Start                              ; $4566
 
 
@@ -811,7 +811,7 @@ Sfx1_Step_17::
     ret nz                                        ; $4594
 
     ld a, $05                                     ; $4595
-    ld bc, $457a                                  ; $4597
+    ld bc, Sfx1_Data_4575 + $5                    ; $4597
 
 jr_01f_459a:
     ld [wSndSfx1 + $3], a                         ; $459A
@@ -862,7 +862,7 @@ Sfx1_Step_29_ChooseB::
     bit 0, a                                      ; $45D8
     jr nz, jr_01f_45e2                            ; $45DA
 
-    ld hl, $45bc                                  ; $45DC
+    ld hl, Sfx1_Data_45B7 + $5                    ; $45DC
     jp Snd_Sfx_LoadNR1x                           ; $45DF
 
 
@@ -895,15 +895,15 @@ Sfx1_Step_05_KeyStart::
     ld hl, wSndSfx1 + $4                          ; $4604
     inc [hl]                                      ; $4607
     ld a, [hl]                                    ; $4608
-    ld hl, $45ed                                  ; $4609
+    ld hl, Sfx1_Data_45E8 + $5                    ; $4609
     cp $01                                        ; $460C
     jr z, jr_01f_4624                             ; $460E
 
-    ld hl, $45f2                                  ; $4610
+    ld hl, Sfx1_Data_45E8 + $A                    ; $4610
     cp $02                                        ; $4613
     jr z, jr_01f_4624                             ; $4615
 
-    ld hl, $45ed                                  ; $4617
+    ld hl, Sfx1_Data_45E8 + $5                    ; $4617
     cp $03                                        ; $461A
     jr z, jr_01f_4624                             ; $461C
 
@@ -950,7 +950,7 @@ Sfx1_Step_0A_MainMenuPageTurn::
 
     ld c, a                                       ; $4657
     ld b, $00                                     ; $4658
-    ld hl, $4631                                  ; $465A
+    ld hl, Sfx1_Data_4627 + $A                    ; $465A
     add hl, bc                                    ; $465D
     ld a, [hl]                                    ; $465E
     and a                                         ; $465F
@@ -963,7 +963,7 @@ Sfx1_Step_0A_MainMenuPageTurn::
 
 
 jr_01f_466a:
-    ld hl, $462c                                  ; $466A
+    ld hl, Sfx1_Data_4627 + $5                    ; $466A
     jp Snd_Sfx_LoadNR1x                           ; $466D
 
 
@@ -993,7 +993,7 @@ Sfx1_Step_02_KeyUpDown::
     cp $02                                        ; $468C
     jp z, Sfx1_Stop                               ; $468E
 
-    ld hl, $4675                                  ; $4691
+    ld hl, Sfx1_Data_4670 + $5                    ; $4691
     jp Snd_Sfx_LoadNR1x                           ; $4694
 
 
@@ -1213,7 +1213,7 @@ Sfx1_Step_06_0D_KeySelect_SpaceFeverBigEnemyKill::
 
 
 jr_01f_47d3:
-    ld hl, $47af                                  ; $47D3
+    ld hl, Sfx1_Data_47AA + $5                    ; $47D3
     jp Snd_Sfx_LoadNR1x                           ; $47D6
 
 
@@ -1241,7 +1241,7 @@ Sfx1_Step_09_MainMenuPageUp::
     ld c, [hl]                                    ; $47FC
     inc [hl]                                      ; $47FD
     ld b, $00                                     ; $47FE
-    ld hl, $47de                                  ; $4800
+    ld hl, Sfx1_Data_47D9 + $5                    ; $4800
     add hl, bc                                    ; $4803
     ld a, [hl]                                    ; $4804
     and a                                         ; $4805
@@ -1343,7 +1343,7 @@ Sfx1_Init_18::
 ; ear).
 Sfx1_Init_12_1D_PanelOpen::
     ld a, $06                                     ; $4871
-    ld hl, $487e                                  ; $4873
+    ld hl, Sfx1_Data_4879 + $5                    ; $4873
     jp Snd_Sfx_Start                              ; $4876
 
 
@@ -1360,7 +1360,7 @@ Sfx1_Init_0C_SpaceFeverEnemyKill::
     ret z                                         ; $4886
 
     ld a, $07                                     ; $4887
-    ld hl, $487e                                  ; $4889
+    ld hl, Sfx1_Data_4879 + $5                    ; $4889
     jp Snd_Sfx_Start                              ; $488C
 
 
@@ -1393,7 +1393,7 @@ Sfx1_Init_2C::
     and $03                                       ; $48B0
     ld c, a                                       ; $48B2
     ld b, $00                                     ; $48B3
-    ld hl, $48e3                                  ; $48B5
+    ld hl, Sfx1_Data_48DF + $4                    ; $48B5
     add hl, bc                                    ; $48B8
     ld a, [hl]                                    ; $48B9
     ld hl, Sfx1_Data_48A9                         ; $48BA
@@ -1431,7 +1431,7 @@ Sfx1_Init_2D::
     ldh a, [rDIV]                                 ; $48EC
     add $03                                       ; $48EE
     and $0f                                       ; $48F0
-    ld hl, $48e7                                  ; $48F2
+    ld hl, Sfx1_Data_48DF + $8                    ; $48F2
     call Snd_Sfx_Start                            ; $48F5
     ldh a, [rDIV]                                 ; $48F8
     and $bf                                       ; $48FA
@@ -1502,7 +1502,7 @@ Sfx1_Data_4954::
 
 ; C: channel-1 effect init handler of ids 2E (table $41FA)
 Sfx1_Init_2E::
-    ld hl, $4959                                  ; $495E
+    ld hl, Sfx1_Data_4954 + $5                    ; $495E
     ld a, $13                                     ; $4961
     jp Snd_Sfx_Start                              ; $4963
 
@@ -1549,7 +1549,7 @@ Sfx1_Init_33::
     ld a, $85                                     ; $49B6
     ld [wSndSfx1 + $6], a                         ; $49B8
     ld a, $08                                     ; $49BB
-    ld hl, $49b1                                  ; $49BD
+    ld hl, Sfx1_Data_498E + $23                   ; $49BD
     call Snd_Sfx_Start                            ; $49C0
     jp Sfx1_InitTail_ClearFlag                    ; $49C3
 
@@ -1729,7 +1729,7 @@ Sfx1_Step_38_CursorMove::
     and a                                         ; $4AD7
     ret nz                                        ; $4AD8
 
-    ld hl, $4abd                                  ; $4AD9
+    ld hl, Sfx1_Data_4AB8 + $5                    ; $4AD9
     jp Sfx1_StepRegTable                          ; $4ADC
 
 
@@ -1756,7 +1756,7 @@ Sfx1_Step_37_CopyBrowse::
     and a                                         ; $4AFE
     ret nz                                        ; $4AFF
 
-    ld hl, $4ae4                                  ; $4B00
+    ld hl, Sfx1_Data_4ADF + $5                    ; $4B00
     jr Sfx1_StepRegTable                          ; $4B03
 
 ; C: inline data of the channel-1 handlers (register block / sequence)
@@ -1781,7 +1781,7 @@ Sfx1_Step_39_MenuChoose::
     and a                                         ; $4B27
     ret nz                                        ; $4B28
 
-    ld hl, $4b0a                                  ; $4B29
+    ld hl, Sfx1_Data_4B05 + $5                    ; $4B29
     jr Sfx1_StepRegTable                          ; $4B2C
 
 ; C: inline data of the channel-1 handlers (register block / sequence)
@@ -1807,7 +1807,7 @@ Sfx1_Step_36_PageStep::
     and a                                         ; $4B4D
     ret nz                                        ; $4B4E
 
-    ld hl, $4b33                                  ; $4B4F
+    ld hl, Sfx1_Data_4B2E + $5                    ; $4B4F
     jr Sfx1_StepRegTable                          ; $4B52
 
 ; C: inline data of the channel-1 handlers (register block / sequence)
@@ -1831,7 +1831,7 @@ Sfx1_Step_35_RunJump::
     and a                                         ; $4B74
     ret nz                                        ; $4B75
 
-    ld hl, $4b59                                  ; $4B76
+    ld hl, Sfx1_Data_4B54 + $5                    ; $4B76
 
 ; C: shared step: reads one byte of the table in HL at index $DD64 into NR12 until $00 (then Sfx1_Stop)
 Sfx1_StepRegTable::
@@ -1883,7 +1883,7 @@ Sfx1_Step_0F_SpaceFeverTargetKill::
     ld c, [hl]                                    ; $4BB6
     inc [hl]                                      ; $4BB7
     ld b, $00                                     ; $4BB8
-    ld hl, $4b97                                  ; $4BBA
+    ld hl, Sfx1_Data_4B92 + $5                    ; $4BBA
     jr jr_01f_4be5                                ; $4BBD
 
 ; C: inline data of the channel-1 handlers (register block / sequence)
@@ -1911,7 +1911,7 @@ Sfx1_Step_11_Confirm::
     ld c, [hl]                                    ; $4BDE
     inc [hl]                                      ; $4BDF
     ld b, $00                                     ; $4BE0
-    ld hl, $4bc4                                  ; $4BE2
+    ld hl, Sfx1_Data_4BBF + $5                    ; $4BE2
 
 jr_01f_4be5:
     add hl, bc                                    ; $4BE5
@@ -1959,7 +1959,7 @@ Sfx1_Step_13_PanelClose::
     ld c, [hl]                                    ; $4C19
     inc [hl]                                      ; $4C1A
     ld b, $00                                     ; $4C1B
-    ld hl, $4bfc                                  ; $4C1D
+    ld hl, Sfx1_Data_4BF7 + $5                    ; $4C1D
     add hl, bc                                    ; $4C20
     ld a, [hl]                                    ; $4C21
     and a                                         ; $4C22
@@ -1994,7 +1994,7 @@ Sfx1_Step_19_3A_ComposeLayoutKey_PickPhoto::
     ld c, [hl]                                    ; $4C4B
     inc [hl]                                      ; $4C4C
     ld b, $00                                     ; $4C4D
-    ld hl, $4c2f                                  ; $4C4F
+    ld hl, Sfx1_Data_4C2A + $5                    ; $4C4F
     add hl, bc                                    ; $4C52
     ld a, [hl]                                    ; $4C53
     and a                                         ; $4C54
@@ -2011,7 +2011,7 @@ Sfx1_Data_4C5C::
 ; (SFX1_MAIN_MENU_PAGE_DOWN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by
 ; ear).
 Sfx1_Init_08_MainMenuPageDown::
-    ld a, [$4c5f]                                 ; $4C61
+    ld a, [Sfx1_Data_4C5C + $3]                   ; $4C61
     ld hl, Sfx1_Data_4C5C                         ; $4C64
     ld [wSndSfx1 + $6], a                         ; $4C67
     ld a, $04                                     ; $4C6A
@@ -2058,17 +2058,17 @@ jr_01f_4c99:
 
 
 jr_01f_4c9f:
-    ld hl, $4cb6                                  ; $4C9F
+    ld hl, Sfx1_Data_4CB1 + $5                    ; $4C9F
     jp Snd_Sfx_LoadNR1x                           ; $4CA2
 
 
 jr_01f_4ca5:
-    ld hl, $4cbb                                  ; $4CA5
+    ld hl, Sfx1_Data_4CB1 + $A                    ; $4CA5
     jp Snd_Sfx_LoadNR1x                           ; $4CA8
 
 
 jr_01f_4cab:
-    ld hl, $4cc0                                  ; $4CAB
+    ld hl, Sfx1_Data_4CB1 + $F                    ; $4CAB
     jp Snd_Sfx_LoadNR1x                           ; $4CAE
 
 
@@ -2081,7 +2081,7 @@ Sfx1_Data_4CB1::
 ; C: channel-4 effect init handler of ids 09 (table $431A)
 Sfx4_Init_09::
     ld a, $02                                     ; $4CDF
-    ld hl, $4cd3                                  ; $4CE1
+    ld hl, Sfx1_Data_4CB1 + $22                   ; $4CE1
     jp Snd_Sfx_Start                              ; $4CE4
 
 
@@ -2100,7 +2100,7 @@ Sfx4_Step_09::
     ld c, a                                       ; $4CF7
     ld b, $00                                     ; $4CF8
     inc [hl]                                      ; $4CFA
-    ld hl, $4cd7                                  ; $4CFB
+    ld hl, Sfx1_Data_4CB1 + $26                   ; $4CFB
     add hl, bc                                    ; $4CFE
     ld a, [hl]                                    ; $4CFF
     ldh [rNR43], a                                ; $4D00
@@ -2123,11 +2123,11 @@ Sfx4_Init_05_EraseAnim::
     and $03                                       ; $4D2A
     ld c, a                                       ; $4D2C
     ld b, $00                                     ; $4D2D
-    ld hl, $4d24                                  ; $4D2F
+    ld hl, Sfx4_Data_4D07 + $1D                   ; $4D2F
     add hl, bc                                    ; $4D32
     ld c, [hl]                                    ; $4D33
     ld b, $00                                     ; $4D34
-    ld hl, $4d14                                  ; $4D36
+    ld hl, Sfx4_Data_4D07 + $D                    ; $4D36
     add hl, bc                                    ; $4D39
     ld a, $a0                                     ; $4D3A
     jp Snd_Sfx_Start                              ; $4D3C
@@ -2136,7 +2136,7 @@ Sfx4_Init_05_EraseAnim::
 ; C: channel-4 effect init handler of ids 06 (table $431A)
 Sfx4_Init_06::
     ld a, $13                                     ; $4D3F
-    ld hl, $4d10                                  ; $4D41
+    ld hl, Sfx4_Data_4D07 + $9                    ; $4D41
     jp Snd_Sfx_Start                              ; $4D44
 
 
@@ -2171,7 +2171,7 @@ Sfx4_Step_06_LoadNR4x::
     ld a, $01                                     ; $4D66
     ld hl, wSndSfx4 + $5                          ; $4D68
     ld [hl], a                                    ; $4D6B
-    ld hl, $4d14                                  ; $4D6C
+    ld hl, Sfx4_Data_4D07 + $D                    ; $4D6C
     jp Snd_Sfx_LoadNR4x                           ; $4D6F
 
 
@@ -2218,7 +2218,7 @@ Sfx4_Step_01_StampCommit::
 
 
 jr_01f_4da2:
-    ld hl, $4d76                                  ; $4DA2
+    ld hl, Sfx4_Data_4D72 + $4                    ; $4DA2
     jp Snd_Sfx_LoadNR4x                           ; $4DA5
 
 
@@ -2267,7 +2267,7 @@ Sfx4_Step_0E::
     ld hl, wSndSfx4 + $4                          ; $4DFE
     ld c, [hl]                                    ; $4E01
     inc [hl]                                      ; $4E02
-    ld hl, $4dc4                                  ; $4E03
+    ld hl, Sfx4_Data_4DC0 + $4                    ; $4E03
     jr jr_01f_4e36                                ; $4E06
 
 ; C: inline data of the channel-4 handlers (register block / sequence)
@@ -2295,7 +2295,7 @@ Sfx4_Step_07_SpaceFeverFireShots::
     ld hl, wSndSfx4 + $4                          ; $4E2E
     ld c, [hl]                                    ; $4E31
     inc [hl]                                      ; $4E32
-    ld hl, $4e0c                                  ; $4E33
+    ld hl, Sfx4_Data_4E08 + $4                    ; $4E33
 
 jr_01f_4e36:
     ld b, $00                                     ; $4E36
@@ -2316,7 +2316,7 @@ Sfx4_Data_4E41::
 ; sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).
 Sfx4_Init_0A_LinkChoose::
     ld a, $18                                     ; $4E49
-    ld hl, $4e45                                  ; $4E4B
+    ld hl, Sfx4_Data_4E41 + $4                    ; $4E4B
     jp Snd_Sfx_Start                              ; $4E4E
 
 
@@ -2348,7 +2348,7 @@ Sfx4_Data_4E66::
 ; sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).
 Sfx4_Init_12_MusicSelect::
     ld a, $03                                     ; $4E6E
-    ld hl, $4e6a                                  ; $4E70
+    ld hl, Sfx4_Data_4E66 + $4                    ; $4E70
     jp Snd_Sfx_Start                              ; $4E73
 
 
@@ -2384,7 +2384,7 @@ Sfx4_Data_4E8F::
 ; sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).
 Sfx4_Init_04_RunHurdleHit::
     ld a, $08                                     ; $4E97
-    ld hl, $4e93                                  ; $4E99
+    ld hl, Sfx4_Data_4E8F + $4                    ; $4E99
     jp Snd_Sfx_Start                              ; $4E9C
 
 
@@ -2490,7 +2490,7 @@ Sfx4_Init_03::
     and $07                                       ; $4F17
     ld c, a                                       ; $4F19
     ld b, $00                                     ; $4F1A
-    ld hl, $4f04                                  ; $4F1C
+    ld hl, Sfx4_Data_4F00 + $4                    ; $4F1C
 
 jr_01f_4f1f:
     add hl, bc                                    ; $4F1F
@@ -2561,9 +2561,9 @@ Sfx4_Data_4F6D::
 ; C: channel-3 effect init handler of ids 07 (table $42F2)
 Sfx3_Init_07::
     call Sfx3_Begin_Wave51AA                      ; $4F72
-    ld a, [$4f70]                                 ; $4F75
+    ld a, [Sfx4_Data_4F6D + $3]                   ; $4F75
     ld [wSndSfx3 + $5], a                         ; $4F78
-    ld a, [$4f71]                                 ; $4F7B
+    ld a, [Sfx4_Data_4F6D + $4]                   ; $4F7B
     and $0f                                       ; $4F7E
     ld [wSndSfx3 + $6], a                         ; $4F80
     ld hl, Sfx4_Data_4F6D                         ; $4F83
@@ -2638,7 +2638,7 @@ Sfx3_Step_09_DeleteDialogSecond::
     ld c, [hl]                                    ; $4FD8
     inc [hl]                                      ; $4FD9
     ld b, $00                                     ; $4FDA
-    ld hl, $4fc7                                  ; $4FDC
+    ld hl, Sfx3_Data_4FC2 + $5                    ; $4FDC
     jr jr_01f_5009                                ; $4FDF
 
 ; C: channel-3 effect init handler of ids 09 (table $42F2). Named after the caller of its id
@@ -2671,7 +2671,7 @@ Sfx3_Step_08_DeleteDialogFirst::
     ld c, [hl]                                    ; $5002
     inc [hl]                                      ; $5003
     ld b, $00                                     ; $5004
-    ld hl, $4fef                                  ; $5006
+    ld hl, Sfx3_Data_4FEA + $5                    ; $5006
 
 jr_01f_5009:
     add hl, bc                                    ; $5009
@@ -3978,7 +3978,7 @@ jr_01f_563a:
     ld c, l                                       ; $563C
 
 jr_01f_563d:
-    ld hl, $4037                                  ; $563D
+    ld hl, Snd_LengthTbl + $12                    ; $563D
     add hl, bc                                    ; $5640
     ld a, [hl+]                                   ; $5641
     ld [de], a                                    ; $5642

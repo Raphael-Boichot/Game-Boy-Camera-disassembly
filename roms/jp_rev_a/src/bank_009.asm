@@ -42,7 +42,7 @@ ScrollEngine_Sub1_FetchRow::
     push hl                                       ; $4030
     ld a, [wScrollSrcRow]                         ; $4031
     call ScrollEngine_RowToOffset                 ; $4034
-    ld hl, ScrollEngine_Step                      ; $4037
+    ld hl, Credits_ScrollRowTbl                   ; $4037
     add hl, bc                                    ; $403A
     ld a, $29                                     ; $403B
     pop de                                        ; $403D
@@ -1021,8 +1021,8 @@ CommentEditor_DrawChar::
 
 jr_009_4614:
     pop af                                        ; $4614
-    ld c, $2a                                     ; $4615
-    ld hl, ScrollEngine_Step                      ; $4617
+    ld c, BANK(Sheet_MiscellaneousStampsJpn_2A_4000) ; $4615
+    ld hl, Sheet_MiscellaneousStampsJpn_2A_4000   ; $4617
     call Glyph_LoadFromCharCode                   ; $461A
     ret                                           ; $461D
 
@@ -1037,8 +1037,8 @@ jr_009_4626:
     push bc                                       ; $4626
     ld a, [hl+]                                   ; $4627
     push hl                                       ; $4628
-    ld c, $2a                                     ; $4629
-    ld hl, ScrollEngine_Step                      ; $462B
+    ld c, BANK(Sheet_MiscellaneousStampsJpn_2A_4000) ; $4629
+    ld hl, Sheet_MiscellaneousStampsJpn_2A_4000   ; $462B
     call Glyph_LoadFromCharCode                   ; $462E
     bit 3, d                                      ; $4631
     jr z, jr_009_4637                             ; $4633
@@ -1063,9 +1063,9 @@ CommentCard_DrawGender_Far::
     ld b, $00                                     ; $4647
     sla c                                         ; $4649
     sla c                                         ; $464B
-    ld hl, $56d0                                  ; $464D
+    ld hl, Gfx_21_56D0_CommentCard_DrawGender_Far ; $464D
     add hl, bc                                    ; $4650
-    ld a, $21                                     ; $4651
+    ld a, BANK(Gfx_21_56D0_CommentCard_DrawGender_Far) ; $4651
     ld de, $8b80                                  ; $4653
     ld bc, $0040                                  ; $4656
     call Vram_CopyFromBankAuto                    ; $4659
@@ -1085,9 +1085,9 @@ CommentCard_DrawBlood_Far::
     rl b                                          ; $466F
     sla c                                         ; $4671
     rl b                                          ; $4673
-    ld hl, $54e0                                  ; $4675
+    ld hl, Gfx_21_54E0_CommentCard_DrawBlood_Far  ; $4675
     add hl, bc                                    ; $4678
-    ld a, $21                                     ; $4679
+    ld a, BANK(Gfx_21_54E0_CommentCard_DrawBlood_Far) ; $4679
     ld de, $9450                                  ; $467B
     ld bc, $0040                                  ; $467E
     call Vram_CopyFromBankAuto                    ; $4681
@@ -1130,8 +1130,8 @@ jr_009_46a8:
 
 jr_009_46b5:
     push bc                                       ; $46B5
-    ld hl, $56c0                                  ; $46B6
-    ld a, $21                                     ; $46B9
+    ld hl, Gfx_21_56C0_CommentCard_DrawNumber     ; $46B6
+    ld a, BANK(Gfx_21_56C0_CommentCard_DrawNumber) ; $46B9
     ld bc, $0010                                  ; $46BB
     call Vram_CopyFromBankAuto                    ; $46BE
     pop bc                                        ; $46C1
@@ -1178,9 +1178,9 @@ CommentCard_DrawDigit::
     swap a                                        ; $46F4
     ld c, a                                       ; $46F6
     ld b, $00                                     ; $46F7
-    ld hl, $5080                                  ; $46F9
+    ld hl, Gfx_21_5080_CommentCard_DrawDigit      ; $46F9
     add hl, bc                                    ; $46FC
-    ld a, $21                                     ; $46FD
+    ld a, BANK(Gfx_21_5080_CommentCard_DrawDigit) ; $46FD
     ld bc, $0010                                  ; $46FF
     call Vram_CopyFromBankAuto                    ; $4702
     ret                                           ; $4705
@@ -1189,7 +1189,7 @@ CommentCard_DrawDigit::
 ; C: far: tag_count_total
 CommentCard_DrawTotal_Far::
     ld de, $9390                                  ; $4706
-    ld hl, $53a0                                  ; $4709
+    ld hl, Gfx_21_5080_CommentCard_DrawDigit + $320 ; $4709
     ld a, [wTagCountTotal]                        ; $470C
     ld c, $00                                     ; $470F
 
@@ -1207,7 +1207,7 @@ jr_009_471a:
     and a                                         ; $471E
     jr nz, jr_009_4724                            ; $471F
 
-    ld hl, $5120                                  ; $4721
+    ld hl, Gfx_21_5080_CommentCard_DrawDigit + $A0 ; $4721
 
 jr_009_4724:
     ld a, c                                       ; $4724
@@ -1216,7 +1216,7 @@ jr_009_4724:
     and a                                         ; $472B
     jr nz, jr_009_4731                            ; $472C
 
-    ld hl, $5260                                  ; $472E
+    ld hl, Gfx_21_5080_CommentCard_DrawDigit + $1E0 ; $472E
 
 jr_009_4731:
     pop af                                        ; $4731
@@ -1233,7 +1233,7 @@ CommentCard_DrawDigitB::
     sla c                                         ; $473E
     rl b                                          ; $4740
     add hl, bc                                    ; $4742
-    ld a, $21                                     ; $4743
+    ld a, BANK(Gfx_21_5080_CommentCard_DrawDigit) ; $4743
     ld bc, $0020                                  ; $4745
     call Vram_CopyFromBankAuto                    ; $4748
     pop hl                                        ; $474B
@@ -1283,10 +1283,10 @@ jr_009_4784:
 jr_009_478d:
     push af                                       ; $478D
     ld a, c                                       ; $478E
-    ld hl, $4d00                                  ; $478F
+    ld hl, Gfx_21_4D00_CommentCard_DrawPhotoNumber_Tens ; $478F
     call CommentCard_DrawDigitC                   ; $4792
     pop af                                        ; $4795
-    ld hl, $4e00                                  ; $4796
+    ld hl, Gfx_21_4E00_CommentCard_DrawPhotoNumber_Ones ; $4796
     call CommentCard_DrawDigitC                   ; $4799
     jp Far_Call_Return                            ; $479C
 
@@ -1301,7 +1301,7 @@ CommentCard_DrawDigitC::
     sla c                                         ; $47A8
     rl b                                          ; $47AA
     add hl, bc                                    ; $47AC
-    ld a, $21                                     ; $47AD
+    ld a, BANK(Gfx_21_4D00_CommentCard_DrawPhotoNumber_Tens) ; $47AD
     ld bc, $0040                                  ; $47AF
     call Vram_CopyFromBankAuto                    ; $47B2
     ret                                           ; $47B5
@@ -1317,8 +1317,8 @@ jr_009_47be:
     push bc                                       ; $47BE
     ld a, [hl+]                                   ; $47BF
     push hl                                       ; $47C0
-    ld c, $2a                                     ; $47C1
-    ld hl, $6000                                  ; $47C3
+    ld c, BANK(StampCat04_05_SmallKana_Gfx)       ; $47C1
+    ld hl, StampCat04_05_SmallKana_Gfx            ; $47C3
     call Glyph_LoadFromCharCode                   ; $47C6
     pop hl                                        ; $47C9
     pop bc                                        ; $47CA
@@ -1368,9 +1368,9 @@ jr_009_47f0:
     swap a                                        ; $47F0
     ld c, a                                       ; $47F2
     ld b, $00                                     ; $47F3
-    ld hl, $5620                                  ; $47F5
+    ld hl, Src_21_5620_CommentCard_DrawNibble     ; $47F5
     add hl, bc                                    ; $47F8
-    ld a, $21                                     ; $47F9
+    ld a, BANK(Src_21_5620_CommentCard_DrawNibble) ; $47F9
     ld bc, $0010                                  ; $47FB
     call Vram_CopyFromBankAuto                    ; $47FE
     ret                                           ; $4801
@@ -1464,7 +1464,7 @@ jr_009_4862:
 CommentEditor_LoadGridPage::
     ld a, [wCmtGridRow]                           ; $4866
     ld bc, $00a0                                  ; $4869
-    ld hl, ScrollEngine_Step                      ; $486C
+    ld hl, Sheet_MiscellaneousStampsJpn_2A_4000   ; $486C
     and a                                         ; $486F
     jr z, jr_009_4876                             ; $4870
 
@@ -1474,7 +1474,7 @@ jr_009_4872:
     jr nz, jr_009_4872                            ; $4874
 
 jr_009_4876:
-    ld a, $2a                                     ; $4876
+    ld a, BANK(Sheet_MiscellaneousStampsJpn_2A_4000) ; $4876
     ld de, $8e60                                  ; $4878
     sla c                                         ; $487B
     rl b                                          ; $487D
@@ -2242,7 +2242,7 @@ Mode08_State15_CreditsScroll::
     sla a                                         ; $4FE4
     ld c, a                                       ; $4FE6
     ld b, $00                                     ; $4FE7
-    ld hl, $509f                                  ; $4FE9
+    ld hl, Credits_ScrollFrameTbl + $3            ; $4FE9
     add hl, bc                                    ; $4FEC
     ld a, [wCredFrameTimer]                       ; $4FED
     inc a                                         ; $4FF0
@@ -2339,19 +2339,35 @@ Credits_ScrollSpriteTileTbl::
 ; each, 12 frames per record); copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll; checked by running
 ; the real credits (core and BGB)
 Credits_ScrollFrameTbl::
-    db $80, $44, $25, $0c
-    db $00, $40, $24, $0c
-    db $40, $52, $22, $0c
-    db $00, $40, $22, $0c
-    db $00, $7b, $17, $0c
-    db $00, $40, $25, $0c
-    db $00, $40, $26, $0c
-    db $a0, $56, $22, $0c
-    db $40, $6f, $22, $0c
-    db $00, $40, $23, $0c
-    db $e0, $4d, $22, $0c
-    db $00, $5b, $22, $0c
-    db $80, $6c, $23, $0c
+    dwb Gfx_25_4480_Mode08_State14_CreditsPageB
+    db $0c
+    dwb Gfx_24_4000_CreditsGirlFrame01
+    db $0c
+    dw Gfx_22_4DE0_CreditsGirlFrame10 + $460
+    db BANK(Gfx_22_4DE0_CreditsGirlFrame10)
+    db $0c
+    dwb Gfx_22_4000_CreditsGirlFrame03
+    db $0c
+    dwb Gfx_17_7B00_CreditsGirlFrame04
+    db $0c
+    dwb Gfx_25_4000_CreditsGirlFrame05
+    db $0c
+    dwb Gfx_26_4000_CreditsGirlFrame06
+    db $0c
+    dw Gfx_22_5240_CreditsGirlFrame02_Part52E0 + $3C0
+    db BANK(Gfx_22_5240_CreditsGirlFrame02_Part52E0)
+    db $0c
+    dwb Gfx_22_6F40_CreditsGirlFrame08
+    db $0c
+    dwb Gfx_23_4000_CreditsGirlFrame09
+    db $0c
+    dwb Gfx_22_4DE0_CreditsGirlFrame10
+    db $0c
+    dw Gfx_22_56A0_CreditsGirlFrame07_Part5740 + $3C0
+    db BANK(Gfx_22_56A0_CreditsGirlFrame07_Part5740)
+    db $0c
+    dwb Gfx_23_6C80_CreditsGirlFrame12
+    db $0c
 
 ; C: A -> state $18
 Mode08_State16_CreditsWaitA::
@@ -2373,7 +2389,7 @@ Mode08_State17_CreditsDancingMan::
     sla a                                         ; $50E5
     ld c, a                                       ; $50E7
     ld b, $00                                     ; $50E8
-    ld hl, $5148                                  ; $50EA
+    ld hl, Credits_NishimuraDanceFrameTbl + $3    ; $50EA
     add hl, bc                                    ; $50ED
     ld a, [wCredFrameTimer]                       ; $50EE
     inc a                                         ; $50F1
@@ -2439,10 +2455,14 @@ jr_009_5138:
 ; COMPOSER; the 'Miyamoto' attribution found on the web is an error, owner) of the short credits (22:4500, 22:4970,
 ; 27:4000, 22:4970; 0x470 bytes each) used by ...
 Credits_NishimuraDanceFrameTbl::
-    db $00, $45, $22, $08
-    db $70, $49, $22, $08
-    db $00, $40, $27, $08
-    db $70, $49, $22, $08
+    dwb Gfx_22_4500_CreditsNishimuraDanceFrame00
+    db $08
+    dwb Gfx_22_4970_CreditsNishimuraDanceFrame01
+    db $08
+    dwb Gfx_27_4000_CreditsNishimuraDanceFrame02
+    db $08
+    dwb Gfx_22_4970_CreditsNishimuraDanceFrame01
+    db $08
 
 ; C
 Credits_NextDancingFrame::
@@ -2926,13 +2946,13 @@ jr_009_5433:
     ld a, [hl]                                    ; $5434
     push bc                                       ; $5435
     call Kb_GlyphOffset                           ; $5436
-    ld hl, ScrollEngine_Step                      ; $5439
+    ld hl, Sheet_MiscellaneousStampsJpn_2A_4000   ; $5439
     add hl, bc                                    ; $543C
     pop bc                                        ; $543D
     push bc                                       ; $543E
     ld a, c                                       ; $543F
     call Kb_GlyphOffset                           ; $5440
-    ld a, $2a                                     ; $5443
+    ld a, BANK(Sheet_MiscellaneousStampsJpn_2A_4000) ; $5443
     call Vram_CopyFromBank                        ; $5445
     pop bc                                        ; $5448
     pop hl                                        ; $5449
@@ -3063,8 +3083,8 @@ jr_009_54c4:
     push bc                                       ; $54C4
     ld a, [hl+]                                   ; $54C5
     push hl                                       ; $54C6
-    ld c, $2a                                     ; $54C7
-    ld hl, $6000                                  ; $54C9
+    ld c, BANK(StampCat04_05_SmallKana_Gfx)       ; $54C7
+    ld hl, StampCat04_05_SmallKana_Gfx            ; $54C9
     call Glyph_LoadFromCharCode                   ; $54CC
     pop hl                                        ; $54CF
     pop bc                                        ; $54D0
@@ -3084,8 +3104,8 @@ jr_009_54dd:
     push bc                                       ; $54DD
     ld a, [hl+]                                   ; $54DE
     push hl                                       ; $54DF
-    ld c, $2a                                     ; $54E0
-    ld hl, ScrollEngine_Step                      ; $54E2
+    ld c, BANK(Sheet_MiscellaneousStampsJpn_2A_4000) ; $54E0
+    ld hl, Sheet_MiscellaneousStampsJpn_2A_4000   ; $54E2
     call Glyph_LoadFromCharCode                   ; $54E5
     pop hl                                        ; $54E8
     pop bc                                        ; $54E9
@@ -3125,9 +3145,9 @@ OwnerCard_LoadGenderTiles::
     ld c, a                                       ; $5513
     ld b, $00                                     ; $5514
     sla c                                         ; $5516
-    ld hl, $64c0                                  ; $5518
+    ld hl, Gfx_20_64C0_OwnerCard_LoadGenderTiles  ; $5518
     add hl, bc                                    ; $551B
-    ld a, $20                                     ; $551C
+    ld a, BANK(Gfx_20_64C0_OwnerCard_LoadGenderTiles) ; $551C
     ld de, $96a0                                  ; $551E
     ld bc, $0020                                  ; $5521
     call Vram_CopyFromBank                        ; $5524
@@ -3224,8 +3244,8 @@ jr_009_5590:
 
 jr_009_559d:
     push bc                                       ; $559D
-    ld hl, $6660                                  ; $559E
-    ld a, $20                                     ; $55A1
+    ld hl, Src_20_6660_OwnerCard_LoadBirthNumberTiles ; $559E
+    ld a, BANK(Src_20_6660_OwnerCard_LoadBirthNumberTiles) ; $55A1
     ld bc, $0020                                  ; $55A3
     call Vram_CopyFromBank                        ; $55A6
     pop bc                                        ; $55A9
@@ -3273,9 +3293,9 @@ OwnerCard_LoadBloodTiles::
     rl b                                          ; $55E7
     sla c                                         ; $55E9
     rl b                                          ; $55EB
-    ld hl, $6680                                  ; $55ED
+    ld hl, Gfx_20_6680_OwnerCard_LoadBloodTiles   ; $55ED
     add hl, bc                                    ; $55F0
-    ld a, $20                                     ; $55F1
+    ld a, BANK(Gfx_20_6680_OwnerCard_LoadBloodTiles) ; $55F1
     ld de, $97c0                                  ; $55F3
     ld bc, $0040                                  ; $55F6
     call Vram_CopyFromBank                        ; $55F9
@@ -3322,9 +3342,9 @@ jr_009_561c:
     ld b, $00                                     ; $561F
     sla c                                         ; $5621
     rl b                                          ; $5623
-    ld hl, $6520                                  ; $5625
+    ld hl, Src_20_6520_OwnerCard_DrawBloodLow     ; $5625
     add hl, bc                                    ; $5628
-    ld a, $20                                     ; $5629
+    ld a, BANK(Src_20_6520_OwnerCard_DrawBloodLow) ; $5629
     ld bc, $0020                                  ; $562B
     call Vram_CopyFromBank                        ; $562E
     ret                                           ; $5631
@@ -4450,8 +4470,8 @@ Kb_WriteNameChar::
     ld d, h                                       ; $5F3F
     ld e, l                                       ; $5F40
     pop af                                        ; $5F41
-    ld c, $2a                                     ; $5F42
-    ld hl, ScrollEngine_Step                      ; $5F44
+    ld c, BANK(Sheet_MiscellaneousStampsJpn_2A_4000) ; $5F42
+    ld hl, Sheet_MiscellaneousStampsJpn_2A_4000   ; $5F44
     call Glyph_LoadFromCharCode                   ; $5F47
     ret                                           ; $5F4A
 
@@ -4460,7 +4480,7 @@ Kb_WriteNameChar::
 Boot_EraseAllPrompt_Far::
     push af                                       ; $5F4B
     ld a, $10                                     ; $5F4C
-    ld [$4000], a                                 ; $5F4E
+    ld [rRAMB], a                                 ; $5F4E
     ld hl, $a000                                  ; $5F51
 
 jr_009_5f54:
@@ -7042,9 +7062,9 @@ Run_DrawTimerDigitB::
     ld b, $00                                     ; $7181
     sla c                                         ; $7183
     rl b                                          ; $7185
-    ld hl, $6e80                                  ; $7187
+    ld hl, Gfx_1B_6E80_Run_DrawTimerDigitB        ; $7187
     add hl, bc                                    ; $718A
-    ld a, $1b                                     ; $718B
+    ld a, BANK(Gfx_1B_6E80_Run_DrawTimerDigitB)   ; $718B
     ld bc, $0020                                  ; $718D
     call Vram_CopyFromBank                        ; $7190
     ret                                           ; $7193
@@ -7346,9 +7366,21 @@ ResultScreen_LoadMessage::
 
 ; C
 ResultScreen_MessageTbl::
-    db $00, $40, $28, $80, $42, $28, $00, $45, $28, $80, $47, $28, $00, $4a, $28, $80
-    db $4c, $28, $00, $4f, $28, $80, $51, $28, $00, $54, $28, $80, $56, $28, $00, $59
-    db $28, $80, $5b, $28, $00, $5e, $28, $00, $5d, $0d, $80, $60, $28
+    dwb Gfx_28_4000_MsgStripB
+    dwb Gfx_28_4280_MsgStripB
+    dwb Gfx_28_4500_MsgStripB
+    dwb Gfx_28_4780_MsgStripB
+    dwb Gfx_28_4A00_MsgStripB
+    dwb Gfx_28_4C80_MsgStripB
+    dwb Gfx_28_4F00_MsgStripB
+    dwb Gfx_28_5180_MsgStripB
+    dwb Gfx_28_5400_MsgStripB
+    dwb Gfx_28_5680_MsgStripB
+    dwb Gfx_28_5900_MsgStripB
+    dwb Gfx_28_5B80_MsgStripB
+    dwb Gfx_28_5E00_MsgStripB
+    dwb Gfx_0D_5D00_MsgStrip
+    dwb Gfx_28_6080_MsgStripB
 
     ; padding
     ds $c35, $00

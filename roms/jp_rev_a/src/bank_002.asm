@@ -728,7 +728,7 @@ Sram_ValidateTagSlot::
     add $1f                                       ; $433D
     srl a                                         ; $433F
     inc a                                         ; $4341
-    ld [$4000], a                                 ; $4342
+    ld [rRAMB], a                                 ; $4342
     ld de, $0000                                  ; $4345
     rl d                                          ; $4348
     swap d                                        ; $434A
@@ -737,7 +737,7 @@ Sram_ValidateTagSlot::
 
     call Sram_FormatPhotoBank                     ; $4351
     xor a                                         ; $4354
-    ld [$4000], a                                 ; $4355
+    ld [rRAMB], a                                 ; $4355
     jp Sram_FreeSlotInVector                      ; $4358
 
 
@@ -752,7 +752,7 @@ jr_002_435b:
 
     call Sram_FormatPhotoBank                     ; $436C
     xor a                                         ; $436F
-    ld [$4000], a                                 ; $4370
+    ld [rRAMB], a                                 ; $4370
     jp Sram_FreeSlotInVector                      ; $4373
 
 
@@ -767,7 +767,7 @@ jr_002_4376:
 ; C: validates both copies of the settings block
 Sram_ValidateSettings::
     xor a                                         ; $4380
-    ld [$4000], a                                 ; $4381
+    ld [rRAMB], a                                 ; $4381
     call Sram_CheckSettingsMagic                  ; $4384
     jp nz, Sram_FormatSettingsBlocks              ; $4387
 
@@ -793,7 +793,7 @@ jr_002_439e:
 ; C: validates both copies of the photo vector
 Sram_ValidateVector::
     xor a                                         ; $43A8
-    ld [$4000], a                                 ; $43A9
+    ld [rRAMB], a                                 ; $43A9
     call Sram_CheckVectorMagic                    ; $43AC
     jp nz, Sram_FormatVectorBlocks                ; $43AF
 
@@ -819,7 +819,7 @@ jr_002_43c6:
 ; C: validates both copies of the owner block
 Sram_ValidateOwner::
     ld a, $01                                     ; $43D0
-    ld [$4000], a                                 ; $43D2
+    ld [rRAMB], a                                 ; $43D2
     call Sram_CheckOwnerMagic                     ; $43D5
     jp nz, Sram_FormatOwnerBlocks                 ; $43D8
 
@@ -845,7 +845,7 @@ jr_002_43ef:
 ; C: writes photo_vector_ram to both vector copies
 Sram_StorePhotoVector::
     xor a                                         ; $43F9
-    ld [$4000], a                                 ; $43FA
+    ld [rRAMB], a                                 ; $43FA
     ld de, $0000                                  ; $43FD
     call Sram_StorePhotoVectorCopy                ; $4400
     ld de, $0025                                  ; $4403
@@ -885,7 +885,7 @@ jr_002_4410:
 Sram_ValidateAll_Far::
     push af                                       ; $442C
     ld a, $0a                                     ; $442D
-    ld [$0000], a                                 ; $442F
+    ld [rRAMG], a                                 ; $442F
     pop af                                        ; $4432
     call Sram_ValidateOwner                       ; $4433
     call Sram_ValidateVector                      ; $4436
@@ -899,7 +899,7 @@ jr_002_443b:
     call Sram_ValidateSettings                    ; $4441
     push af                                       ; $4444
     xor a                                         ; $4445
-    ld [$0000], a                                 ; $4446
+    ld [rRAMG], a                                 ; $4446
     pop af                                        ; $4449
     jp Far_Call_Return                            ; $444A
 
@@ -934,10 +934,10 @@ jr_002_445e:
 Photo_RenumberVector::
     push af                                       ; $4466
     ld a, $0a                                     ; $4467
-    ld [$0000], a                                 ; $4469
+    ld [rRAMG], a                                 ; $4469
     pop af                                        ; $446C
     xor a                                         ; $446D
-    ld [$4000], a                                 ; $446E
+    ld [rRAMB], a                                 ; $446E
     ld hl, $b1b2                                  ; $4471
     ld de, wPhotoVectorRam                        ; $4474
     ld b, $1e                                     ; $4477
@@ -993,7 +993,7 @@ jr_002_44a5:
     ld [wPhotoCount], a                           ; $44A9
     push af                                       ; $44AC
     xor a                                         ; $44AD
-    ld [$0000], a                                 ; $44AE
+    ld [rRAMG], a                                 ; $44AE
     pop af                                        ; $44B1
     jp Far_Call_Return                            ; $44B2
 
@@ -1002,13 +1002,13 @@ jr_002_44a5:
 Sram_FormatAll_Far::
     push af                                       ; $44B5
     ld a, $0a                                     ; $44B6
-    ld [$0000], a                                 ; $44B8
+    ld [rRAMG], a                                 ; $44B8
     pop af                                        ; $44BB
     ld a, $01                                     ; $44BC
-    ld [$4000], a                                 ; $44BE
+    ld [rRAMB], a                                 ; $44BE
     call Sram_FormatOwnerBlocks                   ; $44C1
     xor a                                         ; $44C4
-    ld [$4000], a                                 ; $44C5
+    ld [rRAMB], a                                 ; $44C5
     call Sram_FormatVectorBlocks                  ; $44C8
     ld b, $1e                                     ; $44CB
 
@@ -1018,23 +1018,23 @@ jr_002_44cd:
     add $1f                                       ; $44CF
     srl a                                         ; $44D1
     inc a                                         ; $44D3
-    ld [$4000], a                                 ; $44D4
+    ld [rRAMB], a                                 ; $44D4
     ld de, $0000                                  ; $44D7
     rl d                                          ; $44DA
     swap d                                        ; $44DC
     call Sram_FormatPhotoBank                     ; $44DE
     xor a                                         ; $44E1
-    ld [$4000], a                                 ; $44E2
+    ld [rRAMB], a                                 ; $44E2
     call Sram_FreeSlotInVector                    ; $44E5
     dec b                                         ; $44E8
     jr nz, jr_002_44cd                            ; $44E9
 
     xor a                                         ; $44EB
-    ld [$4000], a                                 ; $44EC
+    ld [rRAMB], a                                 ; $44EC
     call Sram_FormatSettingsBlocks                ; $44EF
     push af                                       ; $44F2
     xor a                                         ; $44F3
-    ld [$0000], a                                 ; $44F4
+    ld [rRAMG], a                                 ; $44F4
     pop af                                        ; $44F7
     jp Far_Call_Return                            ; $44F8
 
@@ -1049,11 +1049,11 @@ Photo_Erase_Far::
 
     push af                                       ; $4508
     ld a, $0a                                     ; $4509
-    ld [$0000], a                                 ; $450B
+    ld [rRAMG], a                                 ; $450B
     pop af                                        ; $450E
     push af                                       ; $450F
     xor a                                         ; $4510
-    ld [$4000], a                                 ; $4511
+    ld [rRAMB], a                                 ; $4511
     pop af                                        ; $4514
     ld c, a                                       ; $4515
     ld b, $00                                     ; $4516
@@ -1063,7 +1063,7 @@ Photo_Erase_Far::
     call Sram_StorePhotoVector                    ; $451E
     push af                                       ; $4521
     xor a                                         ; $4522
-    ld [$0000], a                                 ; $4523
+    ld [rRAMG], a                                 ; $4523
     pop af                                        ; $4526
     jp Photo_RenumberVector                       ; $4527
 
@@ -1169,7 +1169,7 @@ Photo_SaveCopy_Far::
 
     push af                                       ; $45B9
     ld a, $0a                                     ; $45BA
-    ld [$0000], a                                 ; $45BC
+    ld [rRAMG], a                                 ; $45BC
     pop af                                        ; $45BF
     push bc                                       ; $45C0
     push hl                                       ; $45C1
@@ -1188,7 +1188,7 @@ Photo_SaveCopy_Far::
     pop af                                        ; $45E2
     srl a                                         ; $45E3
     inc a                                         ; $45E5
-    ld [$4000], a                                 ; $45E6
+    ld [rRAMB], a                                 ; $45E6
     ld de, $0000                                  ; $45E9
     rl d                                          ; $45EC
     swap d                                        ; $45EE
@@ -1242,7 +1242,7 @@ jr_002_4622:
     call Sram_StorePhotoVector                    ; $4623
     push af                                       ; $4626
     xor a                                         ; $4627
-    ld [$0000], a                                 ; $4628
+    ld [rRAMG], a                                 ; $4628
     pop af                                        ; $462B
     jp Photo_RenumberVector                       ; $462C
 
@@ -1266,7 +1266,7 @@ Photo_SaveReceived_Far::
 
     push af                                       ; $4650
     ld a, $0a                                     ; $4651
-    ld [$0000], a                                 ; $4653
+    ld [rRAMG], a                                 ; $4653
     pop af                                        ; $4656
     push hl                                       ; $4657
     push af                                       ; $4658
@@ -1345,7 +1345,7 @@ jr_002_469b:
     pop af                                        ; $46B5
     srl a                                         ; $46B6
     inc a                                         ; $46B8
-    ld [$4000], a                                 ; $46B9
+    ld [rRAMB], a                                 ; $46B9
     ld de, $0000                                  ; $46BC
     rl d                                          ; $46BF
     swap d                                        ; $46C1
@@ -1369,7 +1369,7 @@ jr_002_46cd:
     call Sram_StorePhotoVector                    ; $46DA
     push af                                       ; $46DD
     xor a                                         ; $46DE
-    ld [$0000], a                                 ; $46DF
+    ld [rRAMG], a                                 ; $46DF
     pop af                                        ; $46E2
     jp Photo_RenumberVector                       ; $46E3
 
@@ -1414,7 +1414,7 @@ Photo_SaveShot_Far::
 
     push af                                       ; $4714
     ld a, $0a                                     ; $4715
-    ld [$0000], a                                 ; $4717
+    ld [rRAMG], a                                 ; $4717
     pop af                                        ; $471A
     push hl                                       ; $471B
     push af                                       ; $471C
@@ -1477,7 +1477,7 @@ jr_002_4768:
     pop af                                        ; $4782
     srl a                                         ; $4783
     inc a                                         ; $4785
-    ld [$4000], a                                 ; $4786
+    ld [rRAMB], a                                 ; $4786
     ld de, $0000                                  ; $4789
     rl d                                          ; $478C
     swap d                                        ; $478E
@@ -1501,7 +1501,7 @@ jr_002_479a:
     call Sram_StorePhotoVector                    ; $47A7
     push af                                       ; $47AA
     xor a                                         ; $47AB
-    ld [$0000], a                                 ; $47AC
+    ld [rRAMG], a                                 ; $47AC
     pop af                                        ; $47AF
     jp Photo_RenumberVector                       ; $47B0
 
@@ -1551,7 +1551,7 @@ Photo_StoreImage_Far::
 
     push af                                       ; $47D6
     ld a, $0a                                     ; $47D7
-    ld [$0000], a                                 ; $47D9
+    ld [rRAMG], a                                 ; $47D9
     pop af                                        ; $47DC
     push af                                       ; $47DD
     ld hl, wThumbnail                             ; $47DE
@@ -1574,7 +1574,7 @@ jr_002_4803:
     pop af                                        ; $4803
     srl a                                         ; $4804
     inc a                                         ; $4806
-    ld [$4000], a                                 ; $4807
+    ld [rRAMB], a                                 ; $4807
     ld de, $0000                                  ; $480A
     rl d                                          ; $480D
     swap d                                        ; $480F
@@ -1595,7 +1595,7 @@ jr_002_481b:
     call Sram_StorePhotoVector                    ; $4823
     push af                                       ; $4826
     xor a                                         ; $4827
-    ld [$0000], a                                 ; $4828
+    ld [rRAMG], a                                 ; $4828
     pop af                                        ; $482B
     jp Far_Call_Return                            ; $482C
 
@@ -1618,11 +1618,11 @@ Photo_StoreHotspots_Far::
 
     push af                                       ; $4844
     ld a, $0a                                     ; $4845
-    ld [$0000], a                                 ; $4847
+    ld [rRAMG], a                                 ; $4847
     pop af                                        ; $484A
     srl a                                         ; $484B
     inc a                                         ; $484D
-    ld [$4000], a                                 ; $484E
+    ld [rRAMB], a                                 ; $484E
     ld de, $0000                                  ; $4851
     rl d                                          ; $4854
     swap d                                        ; $4856
@@ -1665,7 +1665,7 @@ jr_002_4880:
     call Sram_StorePhotoVector                    ; $4883
     push af                                       ; $4886
     xor a                                         ; $4887
-    ld [$0000], a                                 ; $4888
+    ld [rRAMG], a                                 ; $4888
     pop af                                        ; $488B
     jp Far_Call_Return                            ; $488C
 
@@ -1683,11 +1683,11 @@ Photo_StoreHotspotsTranslated_Far::
 
     push af                                       ; $48A1
     ld a, $0a                                     ; $48A2
-    ld [$0000], a                                 ; $48A4
+    ld [rRAMG], a                                 ; $48A4
     pop af                                        ; $48A7
     srl a                                         ; $48A8
     inc a                                         ; $48AA
-    ld [$4000], a                                 ; $48AB
+    ld [rRAMB], a                                 ; $48AB
     ld de, $0000                                  ; $48AE
     rl d                                          ; $48B1
     swap d                                        ; $48B3
@@ -1740,7 +1740,7 @@ jr_002_48e8:
     call Sram_StorePhotoVector                    ; $48EB
     push af                                       ; $48EE
     xor a                                         ; $48EF
-    ld [$0000], a                                 ; $48F0
+    ld [rRAMG], a                                 ; $48F0
     pop af                                        ; $48F3
     jp Far_Call_Return                            ; $48F4
 
@@ -1758,11 +1758,11 @@ Photo_StoreBorder_Far::
 
     push af                                       ; $4909
     ld a, $0a                                     ; $490A
-    ld [$0000], a                                 ; $490C
+    ld [rRAMG], a                                 ; $490C
     pop af                                        ; $490F
     srl a                                         ; $4910
     inc a                                         ; $4912
-    ld [$4000], a                                 ; $4913
+    ld [rRAMB], a                                 ; $4913
     ld de, $0000                                  ; $4916
     rl d                                          ; $4919
     swap d                                        ; $491B
@@ -1795,7 +1795,7 @@ jr_002_493c:
     call Sram_StorePhotoVector                    ; $493F
     push af                                       ; $4942
     xor a                                         ; $4943
-    ld [$0000], a                                 ; $4944
+    ld [rRAMG], a                                 ; $4944
     pop af                                        ; $4947
     jp Far_Call_Return                            ; $4948
 
@@ -1813,11 +1813,11 @@ Photo_StoreTagFields_Far::
 
     push af                                       ; $495D
     ld a, $0a                                     ; $495E
-    ld [$0000], a                                 ; $4960
+    ld [rRAMG], a                                 ; $4960
     pop af                                        ; $4963
     srl a                                         ; $4964
     inc a                                         ; $4966
-    ld [$4000], a                                 ; $4967
+    ld [rRAMB], a                                 ; $4967
     ld de, $0000                                  ; $496A
     rl d                                          ; $496D
     swap d                                        ; $496F
@@ -1860,7 +1860,7 @@ jr_002_4999:
     call Sram_StorePhotoVector                    ; $499C
     push af                                       ; $499F
     xor a                                         ; $49A0
-    ld [$0000], a                                 ; $49A1
+    ld [rRAMG], a                                 ; $49A1
     pop af                                        ; $49A4
     jp Far_Call_Return                            ; $49A5
 
@@ -1869,10 +1869,10 @@ jr_002_4999:
 Settings_Store_Far::
     push af                                       ; $49A8
     ld a, $0a                                     ; $49A9
-    ld [$0000], a                                 ; $49AB
+    ld [rRAMG], a                                 ; $49AB
     pop af                                        ; $49AE
     xor a                                         ; $49AF
-    ld [$4000], a                                 ; $49B0
+    ld [rRAMB], a                                 ; $49B0
     ld de, $0000                                  ; $49B3
     ld b, $02                                     ; $49B6
 
@@ -1932,7 +1932,7 @@ jr_002_49fb:
 
     push af                                       ; $49FE
     xor a                                         ; $49FF
-    ld [$0000], a                                 ; $4A00
+    ld [rRAMG], a                                 ; $4A00
     pop af                                        ; $4A03
     jp Far_Call_Return                            ; $4A04
 
@@ -1941,10 +1941,10 @@ jr_002_49fb:
 Settings_StoreAnimTranslated_Far::
     push af                                       ; $4A07
     ld a, $0a                                     ; $4A08
-    ld [$0000], a                                 ; $4A0A
+    ld [rRAMG], a                                 ; $4A0A
     pop af                                        ; $4A0D
     xor a                                         ; $4A0E
-    ld [$4000], a                                 ; $4A0F
+    ld [rRAMB], a                                 ; $4A0F
     ld de, $0000                                  ; $4A12
     ld b, $02                                     ; $4A15
 
@@ -2007,7 +2007,7 @@ jr_002_4a5f:
 
     push af                                       ; $4A62
     xor a                                         ; $4A63
-    ld [$0000], a                                 ; $4A64
+    ld [rRAMG], a                                 ; $4A64
     pop af                                        ; $4A67
     jp Far_Call_Return                            ; $4A68
 
@@ -2016,10 +2016,10 @@ jr_002_4a5f:
 Dj_StoreTune_Far::
     push af                                       ; $4A6B
     ld a, $0a                                     ; $4A6C
-    ld [$0000], a                                 ; $4A6E
+    ld [rRAMG], a                                 ; $4A6E
     pop af                                        ; $4A71
     xor a                                         ; $4A72
-    ld [$4000], a                                 ; $4A73
+    ld [rRAMB], a                                 ; $4A73
     ld de, $0000                                  ; $4A76
     ld b, $02                                     ; $4A79
 
@@ -2105,7 +2105,7 @@ jr_002_4b11:
 
     push af                                       ; $4B15
     xor a                                         ; $4B16
-    ld [$0000], a                                 ; $4B17
+    ld [rRAMG], a                                 ; $4B17
     pop af                                        ; $4B1A
     jp Far_Call_Return                            ; $4B1B
 
@@ -2274,10 +2274,10 @@ jr_002_4ba2:
 Counters_Store_Far::
     push af                                       ; $4BB2
     ld a, $0a                                     ; $4BB3
-    ld [$0000], a                                 ; $4BB5
+    ld [rRAMG], a                                 ; $4BB5
     pop af                                        ; $4BB8
     xor a                                         ; $4BB9
-    ld [$4000], a                                 ; $4BBA
+    ld [rRAMB], a                                 ; $4BBA
     ld de, $0000                                  ; $4BBD
     ld b, $02                                     ; $4BC0
 
@@ -2317,7 +2317,7 @@ jr_002_4be8:
 
     push af                                       ; $4BEB
     xor a                                         ; $4BEC
-    ld [$0000], a                                 ; $4BED
+    ld [rRAMG], a                                 ; $4BED
     pop af                                        ; $4BF0
     jp Far_Call_Return                            ; $4BF1
 
@@ -2326,10 +2326,10 @@ jr_002_4be8:
 Owner_Store_Far::
     push af                                       ; $4BF4
     ld a, $0a                                     ; $4BF5
-    ld [$0000], a                                 ; $4BF7
+    ld [rRAMG], a                                 ; $4BF7
     pop af                                        ; $4BFA
     ld a, $01                                     ; $4BFB
-    ld [$4000], a                                 ; $4BFD
+    ld [rRAMB], a                                 ; $4BFD
     ld de, $0000                                  ; $4C00
     ld b, $02                                     ; $4C03
 
@@ -2369,7 +2369,7 @@ jr_002_4c2b:
 
     push af                                       ; $4C2E
     xor a                                         ; $4C2F
-    ld [$0000], a                                 ; $4C30
+    ld [rRAMG], a                                 ; $4C30
     pop af                                        ; $4C33
     jp Far_Call_Return                            ; $4C34
 
@@ -2378,10 +2378,10 @@ jr_002_4c2b:
 GameFace_Store_Far::
     push af                                       ; $4C37
     ld a, $0a                                     ; $4C38
-    ld [$0000], a                                 ; $4C3A
+    ld [rRAMG], a                                 ; $4C3A
     pop af                                        ; $4C3D
     xor a                                         ; $4C3E
-    ld [$4000], a                                 ; $4C3F
+    ld [rRAMB], a                                 ; $4C3F
     ld hl, $b1fc                                  ; $4C42
     ld de, wPhotoImage                            ; $4C45
     ld bc, $0e00                                  ; $4C48
@@ -2424,7 +2424,7 @@ jr_002_4c74:
 
     push af                                       ; $4C77
     xor a                                         ; $4C78
-    ld [$0000], a                                 ; $4C79
+    ld [rRAMG], a                                 ; $4C79
     pop af                                        ; $4C7C
     jp Far_Call_Return                            ; $4C7D
 
@@ -2444,7 +2444,7 @@ Photo_LoadImage_Far::
     call Far_Call                                 ; $4C91
     srl a                                         ; $4C94
     inc a                                         ; $4C96
-    ld [$4000], a                                 ; $4C97
+    ld [rRAMB], a                                 ; $4C97
     ld de, $0000                                  ; $4C9A
     rl d                                          ; $4C9D
     swap d                                        ; $4C9F
@@ -2624,7 +2624,7 @@ Photo_LoadHotspots_Far::
     call Far_Call                                 ; $4D93
     srl a                                         ; $4D96
     inc a                                         ; $4D98
-    ld [$4000], a                                 ; $4D99
+    ld [rRAMB], a                                 ; $4D99
     ld de, $0000                                  ; $4D9C
     rl d                                          ; $4D9F
     swap d                                        ; $4DA1
@@ -2676,7 +2676,7 @@ Photo_LoadHotspotsTranslated_Far::
     call Far_Call                                 ; $4DE2
     srl a                                         ; $4DE5
     inc a                                         ; $4DE7
-    ld [$4000], a                                 ; $4DE8
+    ld [rRAMB], a                                 ; $4DE8
     ld de, $0000                                  ; $4DEB
     rl d                                          ; $4DEE
     swap d                                        ; $4DF0
@@ -2738,7 +2738,7 @@ Photo_LoadBorder_Far::
     call Far_Call                                 ; $4E3C
     srl a                                         ; $4E3F
     inc a                                         ; $4E41
-    ld [$4000], a                                 ; $4E42
+    ld [rRAMB], a                                 ; $4E42
     ld de, $0000                                  ; $4E45
     rl d                                          ; $4E48
     swap d                                        ; $4E4A
@@ -2766,7 +2766,7 @@ Photo_LoadTagFields_Far::
     call Far_Call                                 ; $4E6A
     srl a                                         ; $4E6D
     inc a                                         ; $4E6F
-    ld [$4000], a                                 ; $4E70
+    ld [rRAMB], a                                 ; $4E70
     ld de, $0000                                  ; $4E73
     rl d                                          ; $4E76
     swap d                                        ; $4E78
@@ -2810,7 +2810,7 @@ jr_002_4e8c:
 ; C: animation list / timing / speed / border from the settings block -> $D681..
 Settings_LoadAnim_Far::
     xor a                                         ; $4EAE
-    ld [$4000], a                                 ; $4EAF
+    ld [rRAMB], a                                 ; $4EAF
     ld hl, $b000                                  ; $4EB2
     ld de, wAnimList                              ; $4EB5
     ld c, $30                                     ; $4EB8
@@ -2849,7 +2849,7 @@ jr_002_4ecc:
 ; C: same with the list entries translated slot -> photo number
 Settings_LoadAnimTranslated_Far::
     xor a                                         ; $4EE8
-    ld [$4000], a                                 ; $4EE9
+    ld [rRAMB], a                                 ; $4EE9
     ld hl, $b000                                  ; $4EEC
     ld de, wAnimList                              ; $4EEF
     ld c, $2f                                     ; $4EF2
@@ -2898,7 +2898,7 @@ Dj_LoadTune_FromDE_Far::
 ; C: unpacks the D.J. tune from the settings block B061.. into $D93D..
 Dj_LoadTune_Far::
     xor a                                         ; $4F2B
-    ld [$4000], a                                 ; $4F2C
+    ld [rRAMB], a                                 ; $4F2C
     ld hl, $b061                                  ; $4F2F
 
 jr_002_4f32:
@@ -3117,7 +3117,7 @@ jr_002_5035:
 ; C: counters block B0BB.. -> DA96..
 Counters_Load_Far::
     xor a                                         ; $503F
-    ld [$4000], a                                 ; $5040
+    ld [rRAMB], a                                 ; $5040
     ld hl, $b0bb                                  ; $5043
     ld de, wCntTaken                              ; $5046
     ld c, $16                                     ; $5049
@@ -3135,7 +3135,7 @@ jr_002_504b:
 ; C: owner block AFB8.. -> owner_id DA49..
 Owner_Load_Far::
     ld a, $01                                     ; $5054
-    ld [$4000], a                                 ; $5056
+    ld [rRAMB], a                                 ; $5056
     ld hl, $afb8                                  ; $5059
     ld de, wOwnerId                               ; $505C
     ld c, $12                                     ; $505F
@@ -3153,7 +3153,7 @@ jr_002_5061:
 ; C: reads the Game Face flag B0D1 into gameface_present and loads the image to $C000
 GameFace_Load_Far::
     xor a                                         ; $506A
-    ld [$4000], a                                 ; $506B
+    ld [rRAMB], a                                 ; $506B
     ld a, [$b0d1]                                 ; $506E
     ld [wGamefacePresent], a                      ; $5071
     and a                                         ; $5074
@@ -3178,7 +3178,7 @@ jr_002_5081:
 ; C: loads the Game Face image in four 7x128 byte chunks
 GameFace_LoadTiles_Far::
     xor a                                         ; $508C
-    ld [$4000], a                                 ; $508D
+    ld [rRAMB], a                                 ; $508D
     ld a, [$b0d1]                                 ; $5090
     ld [wGamefacePresent], a                      ; $5093
     and a                                         ; $5096
@@ -3248,7 +3248,7 @@ jr_002_50d5:
 jr_002_50e5:
     srl a                                         ; $50E5
     inc a                                         ; $50E7
-    ld [$4000], a                                 ; $50E8
+    ld [rRAMB], a                                 ; $50E8
     ld de, $0000                                  ; $50EB
     rl d                                          ; $50EE
     swap d                                        ; $50F0
@@ -3351,8 +3351,8 @@ Photo_GetSramAddress_Far::
 
 
 jr_002_519d:
-    ld bc, $5000                                  ; $519D
-    ld a, $36                                     ; $51A0
+    ld bc, AlbumB_UnusedSlotB_Tiles               ; $519D
+    ld a, BANK(AlbumB_UnusedSlotB_Tiles)          ; $51A0
     jp Far_Call_Return                            ; $51A2
 
 
@@ -3367,8 +3367,8 @@ jr_002_51a5:
     call AlbumB_CheckGate                         ; $51AF
     jr nz, jr_002_51bc                            ; $51B2
 
-    ld bc, Sram_MagicString                       ; $51B4
-    ld a, $36                                     ; $51B7
+    ld bc, AlbumB_UnusedSlotA_Tiles               ; $51B4
+    ld a, BANK(AlbumB_UnusedSlotA_Tiles)          ; $51B7
     jp Far_Call_Return                            ; $51B9
 
 

@@ -382,9 +382,9 @@ DjTitle_LoadNumeralTile::
     ld b, $00                                     ; $423D
     sla c                                         ; $423F
     rl b                                          ; $4241
-    ld hl, $7400                                  ; $4243
+    ld hl, Gfx_10_7400_DjTitle_LoadNumeralTile    ; $4243
     add hl, bc                                    ; $4246
-    ld a, $10                                     ; $4247
+    ld a, BANK(Gfx_10_7400_DjTitle_LoadNumeralTile) ; $4247
     ld bc, $0020                                  ; $4249
     call Vram_CopyFromBank                        ; $424C
     ret                                           ; $424F
@@ -3514,9 +3514,9 @@ jr_005_570c:
     swap a                                        ; $570D
     ld c, a                                       ; $570F
     ld b, $00                                     ; $5710
-    ld hl, $4d60                                  ; $5712
+    ld hl, Gfx_1A_4D60_DjPerf_DrawTempo           ; $5712
     add hl, bc                                    ; $5715
-    ld a, $1a                                     ; $5716
+    ld a, BANK(Gfx_1A_4D60_DjPerf_DrawTempo)      ; $5716
     ld de, $8720                                  ; $5718
     ld bc, $0010                                  ; $571B
     call Vram_CopyFromBank                        ; $571E
@@ -3524,9 +3524,9 @@ jr_005_570c:
     push bc                                       ; $5722
     swap c                                        ; $5723
     ld b, $00                                     ; $5725
-    ld hl, $4d60                                  ; $5727
+    ld hl, Gfx_1A_4D60_DjPerf_DrawTempo           ; $5727
     add hl, bc                                    ; $572A
-    ld a, $1a                                     ; $572B
+    ld a, BANK(Gfx_1A_4D60_DjPerf_DrawTempo)      ; $572B
     ld de, $8710                                  ; $572D
     ld bc, $0010                                  ; $5730
     call Vram_CopyFromBank                        ; $5733
@@ -3534,9 +3534,9 @@ jr_005_570c:
     swap b                                        ; $5737
     ld c, b                                       ; $5739
     ld b, $00                                     ; $573A
-    ld hl, $4d60                                  ; $573C
+    ld hl, Gfx_1A_4D60_DjPerf_DrawTempo           ; $573C
     add hl, bc                                    ; $573F
-    ld a, $1a                                     ; $5740
+    ld a, BANK(Gfx_1A_4D60_DjPerf_DrawTempo)      ; $5740
     ld de, $8700                                  ; $5742
     ld bc, $0010                                  ; $5745
     call Vram_CopyFromBank                        ; $5748
@@ -3696,9 +3696,9 @@ DjPerf_DrawLevelDigit::
     swap a                                        ; $5813
     ld c, a                                       ; $5815
     ld b, $00                                     ; $5816
-    ld hl, $4d60                                  ; $5818
+    ld hl, Gfx_1A_4D60_DjPerf_DrawTempo           ; $5818
     add hl, bc                                    ; $581B
-    ld a, $1a                                     ; $581C
+    ld a, BANK(Gfx_1A_4D60_DjPerf_DrawTempo)      ; $581C
     ld de, $8730                                  ; $581E
     ld bc, $0010                                  ; $5821
     call Vram_CopyFromBank                        ; $5824
@@ -10221,11 +10221,31 @@ Photo_FarGetAddress::
 ; C: auto: 91 bytes, bytes; referenced by Photo_FarGetAddress. L3 pass 2026-10-26: read in BGB in 7 replay(s) of the
 ; organic corpus, modes 07 20 (tcrf_check/assets/l3_names/)
 Photo_FarGetAddress_Tbl7F86::
-    db $08, $13, $1e, $29, $34, $3f, $4a, $49, $00, $5f, $0f, $80, $62, $0f, $00, $66
-    db $0f, $80, $69, $0f, $00, $6d, $0f, $80, $70, $0f, $00, $74, $0f, $80, $77, $0f
-    db $00, $63, $0e, $80, $66, $0e, $00, $6a, $0e, $80, $6d, $0e, $00, $71, $0e, $80
-    db $74, $0e, $00, $78, $0e, $80, $7b, $0e, $00, $40, $10, $80, $43, $10, $00, $47
-    db $10, $80, $4a, $10, $00, $4e, $10, $80, $51, $10, $00, $55, $10, $80, $58, $10
+    db $08, $13, $1e, $29, $34, $3f, $4a, $49
+    dwb Gfx_0F_5F00_Head
+    dwb Gfx_0F_6280_Head
+    dwb Gfx_0F_6600_Head
+    dwb Gfx_0F_6980_Head
+    dwb Gfx_0F_6D00_Head
+    dwb Gfx_0F_7080_Head
+    dwb Gfx_0F_7400_Head
+    dwb Gfx_0F_7780_Head
+    dwb Gfx_0E_6300_Head
+    dwb Gfx_0E_6680_Head
+    dwb Gfx_0E_6A00_Head
+    dwb Gfx_0E_6D80_Head
+    dwb Gfx_0E_7100_Head
+    dwb Gfx_0E_7480_Head
+    dwb Gfx_0E_7800_Head
+    dwb Gfx_0E_7B80_Head
+    dwb Gfx_10_4000_Head
+    dwb Gfx_10_4380_Head
+    dwb Gfx_10_4700_Head
+    dwb Gfx_10_4A80_Head
+    dwb Gfx_10_4E00_Head
+    dwb Gfx_10_5180_Head
+    dwb Gfx_10_5500_Head
+    dwb Gfx_10_5880_Head
     db $00, $c0, $00, $80, $c3, $00, $00, $c7, $00, $80, $ca
 
     ; padding

@@ -200,11 +200,11 @@ jr_000_0167:
     ld bc, $1fff                                  ; $0184
     call Mem_Zero                                 ; $0187
     ld a, $00                                     ; $018A
-    ld [$0000], a                                 ; $018C
+    ld [rRAMG], a                                 ; $018C
     ld a, $01                                     ; $018F
-    ld [$2000], a                                 ; $0191
+    ld [rROMB0], a                                ; $0191
     ld a, $00                                     ; $0194
-    ld [$4000], a                                 ; $0196
+    ld [rRAMB], a                                 ; $0196
     ld a, $01                                     ; $0199
     ldh [hRomBankShadow], a                       ; $019B
     ld sp, wStackTop                              ; $019D
@@ -274,11 +274,11 @@ Boot_SoftReset::
     ld sp, hBootSp                                ; $0224
     call Lcd_Off                                  ; $0227
     ld a, $00                                     ; $022A
-    ld [$0000], a                                 ; $022C
+    ld [rRAMG], a                                 ; $022C
     ld a, $01                                     ; $022F
-    ld [$2000], a                                 ; $0231
+    ld [rROMB0], a                                ; $0231
     ld a, $00                                     ; $0234
-    ld [$4000], a                                 ; $0236
+    ld [rRAMB], a                                 ; $0236
     ld a, $01                                     ; $0239
     ldh [hRomBankShadow], a                       ; $023B
     ld hl, _RAM                                   ; $023D
@@ -400,7 +400,7 @@ Irq_VBlank::
     ldh [rBGP], a                                 ; $0306
     ldh [rOBP0], a                                ; $0308
     ldh [rOBP1], a                                ; $030A
-    ld [$0000], a                                 ; $030C
+    ld [rRAMG], a                                 ; $030C
     ldh [rSB], a                                  ; $030F
     ldh [rSC], a                                  ; $0311
     ldh [rIE], a                                  ; $0313
@@ -536,7 +536,7 @@ Call_InlineTable3::
     push af                                       ; $0398
     ld a, [hl]                                    ; $0399
     ldh [hRomBankShadow], a                       ; $039A
-    ld [$2000], a                                 ; $039C
+    ld [rROMB0], a                                ; $039C
     ld l, e                                       ; $039F
     ld h, d                                       ; $03A0
     ld de, Call_InlineTable3_Return               ; $03A1
@@ -548,7 +548,7 @@ Call_InlineTable3::
 Call_InlineTable3_Return::
     pop af                                        ; $03A6
     ldh [hRomBankShadow], a                       ; $03A7
-    ld [$2000], a                                 ; $03A9
+    ld [rROMB0], a                                ; $03A9
     ret                                           ; $03AC
 
 
@@ -752,12 +752,12 @@ Mem_CopyFromBank::
     push af                                       ; $0458
     ldh a, [hBankTmp]                             ; $0459
     ldh [hRomBankShadow], a                       ; $045B
-    ld [$2000], a                                 ; $045D
+    ld [rROMB0], a                                ; $045D
     scf                                           ; $0460
     jr jr_000_0467                                ; $0461
 
 jr_000_0463:
-    ld [$4000], a                                 ; $0463
+    ld [rRAMB], a                                 ; $0463
     and a                                         ; $0466
 
 jr_000_0467:
@@ -777,7 +777,7 @@ jr_000_0468:
 
     pop af                                        ; $0472
     ldh [hRomBankShadow], a                       ; $0473
-    ld [$2000], a                                 ; $0475
+    ld [rROMB0], a                                ; $0475
     ret                                           ; $0478
 
 
@@ -803,12 +803,12 @@ Border_CopyFrameAddTile_LcdOff::
     push af                                       ; $048E
     ldh a, [hBankTmp]                             ; $048F
     ldh [hRomBankShadow], a                       ; $0491
-    ld [$2000], a                                 ; $0493
+    ld [rROMB0], a                                ; $0493
     scf                                           ; $0496
     jr jr_000_049d                                ; $0497
 
 jr_000_0499:
-    ld [$4000], a                                 ; $0499
+    ld [rRAMB], a                                 ; $0499
     and a                                         ; $049C
 
 jr_000_049d:
@@ -898,7 +898,7 @@ jr_000_04e7:
 
     pop af                                        ; $04EC
     ldh [hRomBankShadow], a                       ; $04ED
-    ld [$2000], a                                 ; $04EF
+    ld [rROMB0], a                                ; $04EF
     ret                                           ; $04F2
 
 
@@ -912,12 +912,12 @@ Border_CopyFrameAddTile_Safe::
     push af                                       ; $04FB
     ldh a, [hBankTmp]                             ; $04FC
     ldh [hRomBankShadow], a                       ; $04FE
-    ld [$2000], a                                 ; $0500
+    ld [rROMB0], a                                ; $0500
     scf                                           ; $0503
     jr jr_000_050a                                ; $0504
 
 jr_000_0506:
-    ld [$4000], a                                 ; $0506
+    ld [rRAMB], a                                 ; $0506
     and a                                         ; $0509
 
 jr_000_050a:
@@ -1028,7 +1028,7 @@ jr_000_0570:
 
     pop af                                        ; $0578
     ldh [hRomBankShadow], a                       ; $0579
-    ld [$2000], a                                 ; $057B
+    ld [rROMB0], a                                ; $057B
     ret                                           ; $057E
 
 
@@ -1056,12 +1056,12 @@ Vram_CopyFromBank_4::
     push af                                       ; $058E
     ldh a, [hBankTmp]                             ; $058F
     ldh [hRomBankShadow], a                       ; $0591
-    ld [$2000], a                                 ; $0593
+    ld [rROMB0], a                                ; $0593
     scf                                           ; $0596
     jr jr_000_059d                                ; $0597
 
 jr_000_0599:
-    ld [$4000], a                                 ; $0599
+    ld [rRAMB], a                                 ; $0599
     and a                                         ; $059C
 
 jr_000_059d:
@@ -1124,7 +1124,7 @@ jr_000_05a4:
 
     pop af                                        ; $05D9
     ldh [hRomBankShadow], a                       ; $05DA
-    ld [$2000], a                                 ; $05DC
+    ld [rROMB0], a                                ; $05DC
     ret                                           ; $05DF
 
 
@@ -1147,7 +1147,7 @@ jr_000_05e3:
 
     pop af                                        ; $05F1
     ldh [hRomBankShadow], a                       ; $05F2
-    ld [$2000], a                                 ; $05F4
+    ld [rROMB0], a                                ; $05F4
     ret                                           ; $05F7
 
 
@@ -1161,12 +1161,12 @@ Vram_CopyFromBank::
     push af                                       ; $0600
     ldh a, [hBankTmp]                             ; $0601
     ldh [hRomBankShadow], a                       ; $0603
-    ld [$2000], a                                 ; $0605
+    ld [rROMB0], a                                ; $0605
     scf                                           ; $0608
     jr jr_000_060f                                ; $0609
 
 jr_000_060b:
-    ld [$4000], a                                 ; $060B
+    ld [rRAMB], a                                 ; $060B
     and a                                         ; $060E
 
 jr_000_060f:
@@ -1245,7 +1245,7 @@ jr_000_0626:
 
     pop af                                        ; $065A
     ldh [hRomBankShadow], a                       ; $065B
-    ld [$2000], a                                 ; $065D
+    ld [rROMB0], a                                ; $065D
     ret                                           ; $0660
 
 
@@ -1278,7 +1278,7 @@ jr_000_0664:
 
     pop af                                        ; $067C
     ldh [hRomBankShadow], a                       ; $067D
-    ld [$2000], a                                 ; $067F
+    ld [rROMB0], a                                ; $067F
     ret                                           ; $0682
 
 
@@ -1305,7 +1305,7 @@ jr_000_0686:
 
     pop af                                        ; $0698
     ldh [hRomBankShadow], a                       ; $0699
-    ld [$2000], a                                 ; $069B
+    ld [rROMB0], a                                ; $069B
     ret                                           ; $069E
 
 
@@ -1320,12 +1320,12 @@ Unused_Vram_CopyFromBank_8::
     push af                                       ; $06A7
     ldh a, [hBankTmp]                             ; $06A8
     ldh [hRomBankShadow], a                       ; $06AA
-    ld [$2000], a                                 ; $06AC
+    ld [rROMB0], a                                ; $06AC
     scf                                           ; $06AF
     jr jr_000_06b6                                ; $06B0
 
 jr_000_06b2:
-    ld [$4000], a                                 ; $06B2
+    ld [rRAMB], a                                 ; $06B2
     and a                                         ; $06B5
 
 jr_000_06b6:
@@ -1390,7 +1390,7 @@ jr_000_06d4:
 
     pop af                                        ; $06F8
     ldh [hRomBankShadow], a                       ; $06F9
-    ld [$2000], a                                 ; $06FB
+    ld [rROMB0], a                                ; $06FB
     ret                                           ; $06FE
 
 
@@ -1543,12 +1543,12 @@ Unused_Vram_CopyViaVBlank::
     push af                                       ; $0789
     ldh a, [hBankTmp]                             ; $078A
     ldh [hRomBankShadow], a                       ; $078C
-    ld [$2000], a                                 ; $078E
+    ld [rROMB0], a                                ; $078E
     scf                                           ; $0791
     jr jr_000_0798                                ; $0792
 
 jr_000_0794:
-    ld [$4000], a                                 ; $0794
+    ld [rRAMB], a                                 ; $0794
     and a                                         ; $0797
 
 jr_000_0798:
@@ -1627,7 +1627,7 @@ jr_000_07df:
 
     pop af                                        ; $07E5
     ldh [hRomBankShadow], a                       ; $07E6
-    ld [$2000], a                                 ; $07E8
+    ld [rROMB0], a                                ; $07E8
     ret                                           ; $07EB
 
 
@@ -1673,12 +1673,12 @@ Vram_FillViaVBlank::
     push af                                       ; $0814
     ldh a, [hBankTmp]                             ; $0815
     ldh [hRomBankShadow], a                       ; $0817
-    ld [$2000], a                                 ; $0819
+    ld [rROMB0], a                                ; $0819
     scf                                           ; $081C
     jr jr_000_0823                                ; $081D
 
 jr_000_081f:
-    ld [$4000], a                                 ; $081F
+    ld [rRAMB], a                                 ; $081F
     and a                                         ; $0822
 
 jr_000_0823:
@@ -1743,7 +1743,7 @@ jr_000_085b:
 
     pop af                                        ; $0861
     ldh [hRomBankShadow], a                       ; $0862
-    ld [$2000], a                                 ; $0864
+    ld [rROMB0], a                                ; $0864
     ret                                           ; $0867
 
 
@@ -1841,7 +1841,7 @@ jr_000_08b7:
 ; C: A = bank; jp HL
 Far_Jump::
     ldh [hRomBankShadow], a                       ; $08BB
-    ld [$2000], a                                 ; $08BD
+    ld [rROMB0], a                                ; $08BD
     jp hl                                         ; $08C0
 
 
@@ -1852,7 +1852,7 @@ Far_Call::
     push af                                       ; $08C5
     ldh a, [hBankTmp]                             ; $08C6
     ldh [hRomBankShadow], a                       ; $08C8
-    ld [$2000], a                                 ; $08CA
+    ld [rROMB0], a                                ; $08CA
     ldh a, [hFarcallAArg]                         ; $08CD
     jp hl                                         ; $08CF
 
@@ -1864,7 +1864,7 @@ Far_Call_Return::
     ld hl, sp+$05                                 ; $08D2
     ld a, [hl]                                    ; $08D4
     ldh [hRomBankShadow], a                       ; $08D5
-    ld [$2000], a                                 ; $08D7
+    ld [rROMB0], a                                ; $08D7
     pop hl                                        ; $08DA
     pop af                                        ; $08DB
     inc sp                                        ; $08DC
@@ -1938,7 +1938,7 @@ Rng_Init::
     ld a, [wRngModulus]                           ; $091A
     ld d, a                                       ; $091D
     ld a, $01                                     ; $091E
-    ld [$4000], a                                 ; $0920
+    ld [rRAMB], a                                 ; $0920
     ld a, [$afff]                                 ; $0923
 
 jr_000_0926:
@@ -1984,15 +1984,15 @@ jr_000_094b:
     call Rng_Refill                               ; $095B
     push af                                       ; $095E
     ld a, $0a                                     ; $095F
-    ld [$0000], a                                 ; $0961
+    ld [rRAMG], a                                 ; $0961
     pop af                                        ; $0964
     ld a, $01                                     ; $0965
-    ld [$4000], a                                 ; $0967
+    ld [rRAMB], a                                 ; $0967
     call Rng_Next                                 ; $096A
     ld [$afff], a                                 ; $096D
     push af                                       ; $0970
     xor a                                         ; $0971
-    ld [$0000], a                                 ; $0972
+    ld [rRAMG], a                                 ; $0972
     pop af                                        ; $0975
     ret                                           ; $0976
 
@@ -2214,12 +2214,12 @@ jr_000_0ac4:
     push af                                       ; $0ACF
     ld a, [hl]                                    ; $0AD0
     ldh [hRomBankShadow], a                       ; $0AD1
-    ld [$2000], a                                 ; $0AD3
+    ld [rROMB0], a                                ; $0AD3
     inc l                                         ; $0AD6
     call Vq_RunStream                             ; $0AD7
     pop af                                        ; $0ADA
     ldh [hRomBankShadow], a                       ; $0ADB
-    ld [$2000], a                                 ; $0ADD
+    ld [rROMB0], a                                ; $0ADD
     jr jr_000_0ac4                                ; $0AE0
 
 jr_000_0ae2:
@@ -2823,7 +2823,7 @@ Map_SpiralWipeIn::
     push af                                       ; $0DC6
     ldh a, [hBankTmp]                             ; $0DC7
     ldh [hRomBankShadow], a                       ; $0DC9
-    ld [$2000], a                                 ; $0DCB
+    ld [rROMB0], a                                ; $0DCB
     ld de, $0128                                  ; $0DCE
     ld bc, $0301                                  ; $0DD1
 
@@ -2960,7 +2960,7 @@ jr_000_0e5a:
     call Wait_Frames                              ; $0E5D
     pop af                                        ; $0E60
     ldh [hRomBankShadow], a                       ; $0E61
-    ld [$2000], a                                 ; $0E63
+    ld [rROMB0], a                                ; $0E63
     ret                                           ; $0E66
 
 
@@ -3434,7 +3434,7 @@ DjSnd_StepSoundI::
     push af                                       ; $1102
     ld a, $1f                                     ; $1103
     ldh [hRomBankShadow], a                       ; $1105
-    ld [$2000], a                                 ; $1107
+    ld [rROMB0], a                                ; $1107
     ld hl, wNr24ControlShadow                     ; $110A
     ld [hl], $c0                                  ; $110D
     ld a, [wSound1DutyLen + $1]                   ; $110F
@@ -3448,7 +3448,7 @@ jr_000_1118:
     dec a                                         ; $1118
     ld c, a                                       ; $1119
     ld b, $00                                     ; $111A
-    ld hl, $4025                                  ; $111C
+    ld hl, Snd_LengthTbl                          ; $111C
     add hl, bc                                    ; $111F
     ld a, [wSound1DutyLen]                        ; $1120
     swap a                                        ; $1123
@@ -3513,7 +3513,7 @@ jr_000_1181:
 jr_000_1185:
     pop af                                        ; $1185
     ldh [hRomBankShadow], a                       ; $1186
-    ld [$2000], a                                 ; $1188
+    ld [rROMB0], a                                ; $1188
     ret                                           ; $118B
 
 
@@ -3521,13 +3521,13 @@ jr_000_118c:
     dec a                                         ; $118C
     ld c, a                                       ; $118D
     ld b, $00                                     ; $118E
-    ld hl, $41be                                  ; $1190
+    ld hl, Snd_ModBaseTbl                         ; $1190
     add hl, bc                                    ; $1193
     ld a, [hl]                                    ; $1194
     ld [wSound1ModBase], a                        ; $1195
     sla c                                         ; $1198
     rl b                                          ; $119A
-    ld hl, $4051                                  ; $119C
+    ld hl, Snd_FreqTbl + $18                      ; $119C
     add hl, bc                                    ; $119F
     ld a, [hl+]                                   ; $11A0
     ld [wSound1FreqCur], a                        ; $11A1
@@ -3554,7 +3554,7 @@ jr_000_118c:
     ld [wRestCounters], a                         ; $11CE
     pop af                                        ; $11D1
     ldh [hRomBankShadow], a                       ; $11D2
-    ld [$2000], a                                 ; $11D4
+    ld [rROMB0], a                                ; $11D4
     ret                                           ; $11D7
 
 
@@ -3568,7 +3568,7 @@ DjSnd_StepSoundII::
     push af                                       ; $11DD
     ld a, $1f                                     ; $11DE
     ldh [hRomBankShadow], a                       ; $11E0
-    ld [$2000], a                                 ; $11E2
+    ld [rROMB0], a                                ; $11E2
     ld hl, wNr34ControlShadow                     ; $11E5
     ld [hl], $c0                                  ; $11E8
     ld a, [wSound2WaveLen + $1]                   ; $11EA
@@ -3582,7 +3582,7 @@ jr_000_11f3:
     dec a                                         ; $11F3
     ld c, a                                       ; $11F4
     ld b, $00                                     ; $11F5
-    ld hl, $4025                                  ; $11F7
+    ld hl, Snd_LengthTbl                          ; $11F7
     add hl, bc                                    ; $11FA
     ld a, [hl]                                    ; $11FB
     or $c0                                        ; $11FC
@@ -3627,7 +3627,7 @@ jr_000_123d:
 jr_000_1241:
     pop af                                        ; $1241
     ldh [hRomBankShadow], a                       ; $1242
-    ld [$2000], a                                 ; $1244
+    ld [rROMB0], a                                ; $1244
     ret                                           ; $1247
 
 
@@ -3635,13 +3635,13 @@ jr_000_1248:
     dec a                                         ; $1248
     ld c, a                                       ; $1249
     ld b, $00                                     ; $124A
-    ld hl, $41be                                  ; $124C
+    ld hl, Snd_ModBaseTbl                         ; $124C
     add hl, bc                                    ; $124F
     ld a, [hl]                                    ; $1250
     ld [wSound2ModBase], a                        ; $1251
     sla c                                         ; $1254
     rl b                                          ; $1256
-    ld hl, $4051                                  ; $1258
+    ld hl, Snd_FreqTbl + $18                      ; $1258
     add hl, bc                                    ; $125B
     ld a, [hl+]                                   ; $125C
     ld [wSound2FreqCur], a                        ; $125D
@@ -3668,7 +3668,7 @@ jr_000_1248:
     ld [wRestCounters + $1], a                    ; $128A
     pop af                                        ; $128D
     ldh [hRomBankShadow], a                       ; $128E
-    ld [$2000], a                                 ; $1290
+    ld [rROMB0], a                                ; $1290
     ret                                           ; $1293
 
 
@@ -3682,7 +3682,7 @@ DjSnd_StepNoise::
     push af                                       ; $1299
     ld a, $1f                                     ; $129A
     ldh [hRomBankShadow], a                       ; $129C
-    ld [$2000], a                                 ; $129E
+    ld [rROMB0], a                                ; $129E
     ld hl, wNr44ControlShadow                     ; $12A1
     ld a, $c0                                     ; $12A4
     ld [hl], a                                    ; $12A6
@@ -3697,7 +3697,7 @@ jr_000_12b0:
     dec a                                         ; $12B0
     ld c, a                                       ; $12B1
     ld b, $00                                     ; $12B2
-    ld hl, $4025                                  ; $12B4
+    ld hl, Snd_LengthTbl                          ; $12B4
     add hl, bc                                    ; $12B7
     ld a, [hl]                                    ; $12B8
     ld [wNr41Nr42Shadow], a                       ; $12B9
@@ -3752,7 +3752,7 @@ jr_000_1308:
 jr_000_130c:
     pop af                                        ; $130C
     ldh [hRomBankShadow], a                       ; $130D
-    ld [$2000], a                                 ; $130F
+    ld [rROMB0], a                                ; $130F
     ret                                           ; $1312
 
 
@@ -3760,7 +3760,7 @@ jr_000_1313:
     dec a                                         ; $1313
     ld c, a                                       ; $1314
     ld b, $00                                     ; $1315
-    ld hl, $4000                                  ; $1317
+    ld hl, Snd_NoiseNR43Tbl                       ; $1317
     add hl, bc                                    ; $131A
     ld a, [hl]                                    ; $131B
     ld [wNoiseNr43], a                            ; $131C
@@ -3789,7 +3789,7 @@ jr_000_1313:
     ld [wRestCounters + $2], a                    ; $1346
     pop af                                        ; $1349
     ldh [hRomBankShadow], a                       ; $134A
-    ld [$2000], a                                 ; $134C
+    ld [rROMB0], a                                ; $134C
     ret                                           ; $134F
 
 
@@ -4187,7 +4187,7 @@ Img_AndMaskTiles_Bank27::
     push af                                       ; $156B
     ld a, $27                                     ; $156C
     ldh [hRomBankShadow], a                       ; $156E
-    ld [$2000], a                                 ; $1570
+    ld [rROMB0], a                                ; $1570
     ld a, [wShootPhase]                           ; $1573
     sla a                                         ; $1576
     ld c, a                                       ; $1578
@@ -4197,7 +4197,7 @@ Img_AndMaskTiles_Bank27::
     ld e, [hl]                                    ; $157F
     inc hl                                        ; $1580
     ld d, [hl]                                    ; $1581
-    ld hl, $5bb0                                  ; $1582
+    ld hl, Mask_27_5BB0_Img_AndMaskTiles_Oval     ; $1582
     ld b, $07                                     ; $1585
 
 jr_000_1587:
@@ -4292,7 +4292,7 @@ jr_000_15db:
 
     pop af                                        ; $15DE
     ldh [hRomBankShadow], a                       ; $15DF
-    ld [$2000], a                                 ; $15E1
+    ld [rROMB0], a                                ; $15E1
     ret                                           ; $15E4
 
 
@@ -4354,13 +4354,13 @@ Gfx_Copy16FromBank10::
     pop af                                        ; $161D
     and $0f                                       ; $161E
     ld b, a                                       ; $1620
-    ld hl, $7600                                  ; $1621
+    ld hl, Gfx_10_7600_DjPrintFont_Tiles00to2A    ; $1621
     add hl, bc                                    ; $1624
     ldh a, [hRomBankShadow]                       ; $1625
     push af                                       ; $1627
     ld a, $10                                     ; $1628
     ldh [hRomBankShadow], a                       ; $162A
-    ld [$2000], a                                 ; $162C
+    ld [rROMB0], a                                ; $162C
     REPT 15                                       ; $162F
         ld a, [hl+]
         ld [de], a
@@ -4371,7 +4371,7 @@ Gfx_Copy16FromBank10::
     inc de                                        ; $165E
     pop af                                        ; $165F
     ldh [hRomBankShadow], a                       ; $1660
-    ld [$2000], a                                 ; $1662
+    ld [rROMB0], a                                ; $1662
     pop hl                                        ; $1665
     pop bc                                        ; $1666
     ret                                           ; $1667
@@ -4439,12 +4439,12 @@ Gfx_BuildCellMask::
     push af                                       ; $16CC
     ldh a, [hBankTmp]                             ; $16CD
     ldh [hRomBankShadow], a                       ; $16CF
-    ld [$2000], a                                 ; $16D1
+    ld [rROMB0], a                                ; $16D1
     scf                                           ; $16D4
     jr jr_000_16db                                ; $16D5
 
 jr_000_16d7:
-    ld [$4000], a                                 ; $16D7
+    ld [rRAMB], a                                 ; $16D7
     and a                                         ; $16DA
 
 jr_000_16db:
@@ -4471,7 +4471,7 @@ jr_000_16e1:
 
     pop af                                        ; $16ED
     ldh [hRomBankShadow], a                       ; $16EE
-    ld [$2000], a                                 ; $16F0
+    ld [rROMB0], a                                ; $16F0
     ret                                           ; $16F3
 
 
@@ -4506,7 +4506,7 @@ ScrollEngine_CopyRowRecords::
     push af                                       ; $1724
     ldh a, [hBankTmp]                             ; $1725
     ldh [hRomBankShadow], a                       ; $1727
-    ld [$2000], a                                 ; $1729
+    ld [rROMB0], a                                ; $1729
     ld bc, $0000                                  ; $172C
 
 jr_000_172f:
@@ -4572,7 +4572,7 @@ jr_000_1763:
 jr_000_1768:
     pop af                                        ; $1768
     ldh [hRomBankShadow], a                       ; $1769
-    ld [$2000], a                                 ; $176B
+    ld [rROMB0], a                                ; $176B
     ret                                           ; $176E
 
 
@@ -5321,7 +5321,7 @@ Prn_QueuePacket::
 
 ; C: $88 $33
 Prn_SyncBytes::
-    dw Mode1D_State06_LoadWaitScreen
+    dw $3388
 
 ; C: INITIALIZE packet
 Prn_PktInit::
@@ -5505,7 +5505,7 @@ Sgb_SendPacket::
     push af                                       ; $1C97
     ldh a, [hBankTmp]                             ; $1C98
     ldh [hRomBankShadow], a                       ; $1C9A
-    ld [$2000], a                                 ; $1C9C
+    ld [rROMB0], a                                ; $1C9C
     ld a, [hl]                                    ; $1C9F
     and $07                                       ; $1CA0
     jr z, jr_000_1cd7                             ; $1CA2
@@ -5558,7 +5558,7 @@ jr_000_1cbc:
 jr_000_1cd7:
     pop af                                        ; $1CD7
     ldh [hRomBankShadow], a                       ; $1CD8
-    ld [$2000], a                                 ; $1CDA
+    ld [rROMB0], a                                ; $1CDA
     ret                                           ; $1CDD
 
 
@@ -5580,8 +5580,8 @@ jr_000_1ce1:
 
 ; C: MLT_REQ probe; carry set when a Super Game Boy answers
 Sgb_Probe::
-    ld a, $0b                                     ; $1CEA
-    ld hl, $4010                                  ; $1CEC
+    ld a, BANK(Sgb_MltReqPackets)                 ; $1CEA
+    ld hl, Sgb_MltReqPackets + $10                ; $1CEC
     call Sgb_SendPacket                           ; $1CEF
     call Sgb_Delay                                ; $1CF2
     ldh a, [rP1]                                  ; $1CF5
@@ -5638,7 +5638,7 @@ Sgb_SendVramTransfer::
     push af                                       ; $1D49
     ldh a, [hBankTmp]                             ; $1D4A
     ldh [hRomBankShadow], a                       ; $1D4C
-    ld [$2000], a                                 ; $1D4E
+    ld [rROMB0], a                                ; $1D4E
     push af                                       ; $1D51
     push hl                                       ; $1D52
     ld a, $e4                                     ; $1D53
@@ -5681,7 +5681,7 @@ jr_000_1d70:
     ldh [rLCDC], a                                ; $1D94
     pop af                                        ; $1D96
     ldh [hRomBankShadow], a                       ; $1D97
-    ld [$2000], a                                 ; $1D99
+    ld [rROMB0], a                                ; $1D99
     ret                                           ; $1D9C
 
 
@@ -5699,38 +5699,38 @@ Sgb_SendInitSequence::
     call Sgb_SendPacket                           ; $1DAF
     ld bc, $0004                                  ; $1DB2
     call Delay_Frames_Busy                        ; $1DB5
-    ld a, $0b                                     ; $1DB8
-    ld hl, $69f6                                  ; $1DBA
+    ld a, BANK(Sgb_DataSndPackets)                ; $1DB8
+    ld hl, Sgb_DataSndPackets + $10               ; $1DBA
     call Sgb_SendPacket                           ; $1DBD
     ld bc, $0004                                  ; $1DC0
     call Delay_Frames_Busy                        ; $1DC3
-    ld a, $0b                                     ; $1DC6
-    ld hl, $6a06                                  ; $1DC8
+    ld a, BANK(Sgb_DataSndPackets)                ; $1DC6
+    ld hl, Sgb_DataSndPackets + $20               ; $1DC8
     call Sgb_SendPacket                           ; $1DCB
     ld bc, $0004                                  ; $1DCE
     call Delay_Frames_Busy                        ; $1DD1
-    ld a, $0b                                     ; $1DD4
-    ld hl, $6a16                                  ; $1DD6
+    ld a, BANK(Sgb_DataSndPackets)                ; $1DD4
+    ld hl, Sgb_DataSndPackets + $30               ; $1DD6
     call Sgb_SendPacket                           ; $1DD9
     ld bc, $0004                                  ; $1DDC
     call Delay_Frames_Busy                        ; $1DDF
-    ld a, $0b                                     ; $1DE2
-    ld hl, $6a26                                  ; $1DE4
+    ld a, BANK(Sgb_DataSndPackets)                ; $1DE2
+    ld hl, Sgb_DataSndPackets + $40               ; $1DE4
     call Sgb_SendPacket                           ; $1DE7
     ld bc, $0004                                  ; $1DEA
     call Delay_Frames_Busy                        ; $1DED
-    ld a, $0b                                     ; $1DF0
-    ld hl, $6a36                                  ; $1DF2
+    ld a, BANK(Sgb_DataSndPackets)                ; $1DF0
+    ld hl, Sgb_DataSndPackets + $50               ; $1DF2
     call Sgb_SendPacket                           ; $1DF5
     ld bc, $0004                                  ; $1DF8
     call Delay_Frames_Busy                        ; $1DFB
-    ld a, $0b                                     ; $1DFE
-    ld hl, $6a46                                  ; $1E00
+    ld a, BANK(Sgb_DataSndPackets)                ; $1DFE
+    ld hl, Sgb_DataSndPackets + $60               ; $1E00
     call Sgb_SendPacket                           ; $1E03
     ld bc, $0004                                  ; $1E06
     call Delay_Frames_Busy                        ; $1E09
-    ld a, $0b                                     ; $1E0C
-    ld hl, $6a56                                  ; $1E0E
+    ld a, BANK(Sgb_DataSndPackets)                ; $1E0C
+    ld hl, Sgb_DataSndPackets + $70               ; $1E0E
     call Sgb_SendPacket                           ; $1E11
     ld bc, $0004                                  ; $1E14
     call Delay_Frames_Busy                        ; $1E17
@@ -5797,8 +5797,8 @@ Sgb_MaskCancel::
     and a                                         ; $1E90
     ret z                                         ; $1E91
 
-    ld a, $0b                                     ; $1E92
-    ld hl, $6a76                                  ; $1E94
+    ld a, BANK(Sgb_MaskEnPackets)                 ; $1E92
+    ld hl, Sgb_MaskEnPackets + $10                ; $1E94
     call Sgb_SendPacket                           ; $1E97
     ld bc, $0004                                  ; $1E9A
     call Delay_Frames_Busy                        ; $1E9D
@@ -5945,7 +5945,7 @@ jr_000_1f39:
 Blit_PrepareMasks::
     ld a, b                                       ; $1F51
     and $07                                       ; $1F52
-    add $38                                       ; $1F54
+    add HIGH(Blit_ShiftTbl)                       ; $1F54
     ldh [hBlitShiftPage], a                       ; $1F56
     ld a, b                                       ; $1F58
     and $07                                       ; $1F59
@@ -6017,7 +6017,7 @@ Blit_MaskPass_SrcB::
     push af                                       ; $1FBA
     ldh a, [hBlitSrcB + $2]                       ; $1FBB
     ldh [hRomBankShadow], a                       ; $1FBD
-    ld [$2000], a                                 ; $1FBF
+    ld [rROMB0], a                                ; $1FBF
     ld de, wBlitFirstAndMask                      ; $1FC2
     ld b, $08                                     ; $1FC5
     ldh a, [hBlitRows]                            ; $1FC7
@@ -6100,7 +6100,7 @@ jr_000_201b:
 
     pop af                                        ; $201F
     ldh [hRomBankShadow], a                       ; $2020
-    ld [$2000], a                                 ; $2022
+    ld [rROMB0], a                                ; $2022
     ret                                           ; $2025
 
 
@@ -6114,7 +6114,7 @@ Blit_MaskPass_SrcA::
     push af                                       ; $202E
     ldh a, [hBlitSrcA + $2]                       ; $202F
     ldh [hRomBankShadow], a                       ; $2031
-    ld [$2000], a                                 ; $2033
+    ld [rROMB0], a                                ; $2033
     ld de, wBlitFirstAndMask                      ; $2036
     ld b, $08                                     ; $2039
     ldh a, [hBlitRows]                            ; $203B
@@ -6200,7 +6200,7 @@ jr_000_2091:
 
     pop af                                        ; $2095
     ldh [hRomBankShadow], a                       ; $2096
-    ld [$2000], a                                 ; $2098
+    ld [rROMB0], a                                ; $2098
     ret                                           ; $209B
 
 
@@ -6214,7 +6214,7 @@ Blit_ImagePass::
     push af                                       ; $20A4
     ldh a, [hBlitSrcA + $2]                       ; $20A5
     ldh [hRomBankShadow], a                       ; $20A7
-    ld [$2000], a                                 ; $20A9
+    ld [rROMB0], a                                ; $20A9
     ld de, wBlitFirstOrBytes                      ; $20AC
     ld b, $08                                     ; $20AF
     ldh a, [hBlitRows]                            ; $20B1
@@ -6335,7 +6335,7 @@ jr_000_2131:
 
     pop af                                        ; $2136
     ldh [hRomBankShadow], a                       ; $2137
-    ld [$2000], a                                 ; $2139
+    ld [rROMB0], a                                ; $2139
     ret                                           ; $213C
 
 
@@ -6396,23 +6396,23 @@ jr_000_215d:
 ; organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
 Blit_TileRowPtrTbl::
     dw Blit_TileAddrTbl
-    dw $21bc
-    dw $21e4
-    dw $220c
-    dw $2234
-    dw $225c
-    dw $2284
-    dw $22ac
-    dw $22d4
-    dw $22fc
-    dw $2324
-    dw $234c
-    dw $2374
-    dw $239c
-    dw $23c4
-    dw $23ec
-    dw $2414
-    dw $243c
+    dw Blit_TileAddrTbl + $28
+    dw Blit_TileAddrTbl + $50
+    dw Blit_TileAddrTbl + $78
+    dw Blit_TileAddrTbl + $A0
+    dw Blit_TileAddrTbl + $C8
+    dw Blit_TileAddrTbl + $F0
+    dw Blit_TileAddrTbl + $118
+    dw Blit_TileAddrTbl + $140
+    dw Blit_TileAddrTbl + $168
+    dw Blit_TileAddrTbl + $190
+    dw Blit_TileAddrTbl + $1B8
+    dw Blit_TileAddrTbl + $1E0
+    dw Blit_TileAddrTbl + $208
+    dw Blit_TileAddrTbl + $230
+    dw Blit_TileAddrTbl + $258
+    dw Blit_TileAddrTbl + $280
+    dw Blit_TileAddrTbl + $2A8
 
 ; C: 18 rows x 20 words: low/high byte of the VRAM address of each tile cell (2 bytes per entry). L3 pass 2026-10-26:
 ; read in BGB in 7 replay(s) of the organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
@@ -6431,8 +6431,8 @@ Oam_AddMeta_B02_6E4B::
     push af                                       ; $2470
     ld a, $02                                     ; $2471
     ldh [hRomBankShadow], a                       ; $2473
-    ld [$2000], a                                 ; $2475
-    ld hl, $6e4b                                  ; $2478
+    ld [rROMB0], a                                ; $2475
+    ld hl, OamPtrTbl_B02_6E4B                     ; $2478
     jr Oam_AddMeta_Common                         ; $247B
 
 ; C: same with the table 02:5272
@@ -6448,8 +6448,8 @@ Oam_AddMeta_B02_5272::
     push af                                       ; $2489
     ld a, $02                                     ; $248A
     ldh [hRomBankShadow], a                       ; $248C
-    ld [$2000], a                                 ; $248E
-    ld hl, $5272                                  ; $2491
+    ld [rROMB0], a                                ; $248E
+    ld hl, OamPtrTbl_B02_5272                     ; $2491
     jr Oam_AddMeta_Common                         ; $2494
 
 ; C: same with the table 01:5D47 (246 entries)
@@ -6465,8 +6465,8 @@ Oam_AddMeta_B01_5D47::
     push af                                       ; $24A2
     ld a, $01                                     ; $24A3
     ldh [hRomBankShadow], a                       ; $24A5
-    ld [$2000], a                                 ; $24A7
-    ld hl, $5d47                                  ; $24AA
+    ld [rROMB0], a                                ; $24A7
+    ld hl, OamPtrTbl_B01_5D47                     ; $24AA
     jr Oam_AddMeta_Common                         ; $24AD
 
 ; C: same with the table 01:4000 (249 entries)
@@ -6482,8 +6482,8 @@ Oam_AddMeta_B01_4000::
     push af                                       ; $24BB
     ld a, $01                                     ; $24BC
     ldh [hRomBankShadow], a                       ; $24BE
-    ld [$2000], a                                 ; $24C0
-    ld hl, $4000                                  ; $24C3
+    ld [rROMB0], a                                ; $24C0
+    ld hl, OamPtrTbl_B01_4000                     ; $24C3
 
 ; C: shared tail: copies 4-byte records (Y+C
 Oam_AddMeta_Common::
@@ -6521,7 +6521,7 @@ jr_000_24e4:
     ldh [hOamCursor], a                           ; $24E5
     pop af                                        ; $24E7
     ldh [hRomBankShadow], a                       ; $24E8
-    ld [$2000], a                                 ; $24EA
+    ld [rROMB0], a                                ; $24EA
     pop hl                                        ; $24ED
     pop de                                        ; $24EE
     pop bc                                        ; $24EF
@@ -6541,8 +6541,8 @@ Oam_AddMetaTile_B02_6E4B_Dead::
     push af                                       ; $24FD
     ld a, $02                                     ; $24FE
     ldh [hRomBankShadow], a                       ; $2500
-    ld [$2000], a                                 ; $2502
-    ld hl, $6e4b                                  ; $2505
+    ld [rROMB0], a                                ; $2502
+    ld hl, OamPtrTbl_B02_6E4B                     ; $2505
     jr jr_000_2553                                ; $2508
 
 ; C: variant that also adds B to the tile number (one caller 09:5046)
@@ -6558,8 +6558,8 @@ Oam_AddMetaTile_B02_5272::
     push af                                       ; $2516
     ld a, $02                                     ; $2517
     ldh [hRomBankShadow], a                       ; $2519
-    ld [$2000], a                                 ; $251B
-    ld hl, $5272                                  ; $251E
+    ld [rROMB0], a                                ; $251B
+    ld hl, OamPtrTbl_B02_5272                     ; $251E
     jr jr_000_2553                                ; $2521
 
 ; I: variant with tile offset; unreferenced
@@ -6575,8 +6575,8 @@ Oam_AddMetaTile_B01_5D47_Dead::
     push af                                       ; $252F
     ld a, $01                                     ; $2530
     ldh [hRomBankShadow], a                       ; $2532
-    ld [$2000], a                                 ; $2534
-    ld hl, $5d47                                  ; $2537
+    ld [rROMB0], a                                ; $2534
+    ld hl, OamPtrTbl_B01_5D47                     ; $2537
     jr jr_000_2553                                ; $253A
 
 ; I: variant with tile offset; unreferenced
@@ -6592,8 +6592,8 @@ Oam_AddMetaTile_B01_4000_Dead::
     push af                                       ; $2548
     ld a, $01                                     ; $2549
     ldh [hRomBankShadow], a                       ; $254B
-    ld [$2000], a                                 ; $254D
-    ld hl, $4000                                  ; $2550
+    ld [rROMB0], a                                ; $254D
+    ld hl, OamPtrTbl_B01_4000                     ; $2550
 
 jr_000_2553:
     add hl, de                                    ; $2553
@@ -6634,7 +6634,7 @@ jr_000_2576:
     ldh [hOamCursor], a                           ; $2577
     pop af                                        ; $2579
     ldh [hRomBankShadow], a                       ; $257A
-    ld [$2000], a                                 ; $257C
+    ld [rROMB0], a                                ; $257C
     pop hl                                        ; $257F
     pop de                                        ; $2580
     pop bc                                        ; $2581
@@ -6659,12 +6659,12 @@ Img_ReduceToThumbnail::
     push af                                       ; $2593
     ldh a, [hBankTmp]                             ; $2594
     ldh [hRomBankShadow], a                       ; $2596
-    ld [$2000], a                                 ; $2598
+    ld [rROMB0], a                                ; $2598
     scf                                           ; $259B
     jr jr_000_25a2                                ; $259C
 
 jr_000_259e:
-    ld [$4000], a                                 ; $259E
+    ld [rRAMB], a                                 ; $259E
     and a                                         ; $25A1
 
 jr_000_25a2:
@@ -6761,7 +6761,7 @@ jr_000_25c0:
 
     pop af                                        ; $2611
     ldh [hRomBankShadow], a                       ; $2612
-    ld [$2000], a                                 ; $2614
+    ld [rROMB0], a                                ; $2614
 
 jr_000_2617:
     pop hl                                        ; $2617
@@ -6779,12 +6779,12 @@ Img_PairLookup::
     ld a, [de]                                    ; $261F
     inc de                                        ; $2620
     ld l, a                                       ; $2621
-    ld h, $37                                     ; $2622
+    ld h, HIGH(Img_PairLookupTbl)                 ; $2622
     ld b, [hl]                                    ; $2624
     ld a, [de]                                    ; $2625
     inc de                                        ; $2626
     ld l, a                                       ; $2627
-    ld h, $37                                     ; $2628
+    ld h, HIGH(Img_PairLookupTbl)                 ; $2628
     ld a, [hl]                                    ; $262A
     sla a                                         ; $262B
     add b                                         ; $262D
@@ -6842,12 +6842,12 @@ Img_ReduceTo64x56::
     push af                                       ; $2666
     ldh a, [hBankTmp]                             ; $2667
     ldh [hRomBankShadow], a                       ; $2669
-    ld [$2000], a                                 ; $266B
+    ld [rROMB0], a                                ; $266B
     scf                                           ; $266E
     jr jr_000_2675                                ; $266F
 
 jr_000_2671:
-    ld [$4000], a                                 ; $2671
+    ld [rRAMB], a                                 ; $2671
     and a                                         ; $2674
 
 jr_000_2675:
@@ -6978,7 +6978,7 @@ jr_000_268e:
 
     pop af                                        ; $271B
     ldh [hRomBankShadow], a                       ; $271C
-    ld [$2000], a                                 ; $271E
+    ld [rROMB0], a                                ; $271E
 
 jr_000_2721:
     pop hl                                        ; $2721
@@ -6994,7 +6994,7 @@ jr_000_2726:
 
     pop af                                        ; $2729
     ldh [hRomBankShadow], a                       ; $272A
-    ld [$2000], a                                 ; $272C
+    ld [rROMB0], a                                ; $272C
 
 jr_000_272f:
     pop hl                                        ; $272F
@@ -7022,12 +7022,12 @@ Img_ReduceQuadrantTo4x4Tiles::
     push af                                       ; $2744
     ldh a, [hBankTmp]                             ; $2745
     ldh [hRomBankShadow], a                       ; $2747
-    ld [$2000], a                                 ; $2749
+    ld [rROMB0], a                                ; $2749
     scf                                           ; $274C
     jr jr_000_2753                                ; $274D
 
 jr_000_274f:
-    ld [$4000], a                                 ; $274F
+    ld [rRAMB], a                                 ; $274F
     and a                                         ; $2752
 
 jr_000_2753:
@@ -7154,7 +7154,7 @@ jr_000_27d3:
 
     pop af                                        ; $27EA
     ldh [hRomBankShadow], a                       ; $27EB
-    ld [$2000], a                                 ; $27ED
+    ld [rROMB0], a                                ; $27ED
 
 jr_000_27f0:
     pop hl                                        ; $27F0
@@ -7182,12 +7182,12 @@ Img_ReduceHalfTo224Wide::
     push af                                       ; $2804
     ldh a, [hBankTmp]                             ; $2805
     ldh [hRomBankShadow], a                       ; $2807
-    ld [$2000], a                                 ; $2809
+    ld [rROMB0], a                                ; $2809
     scf                                           ; $280C
     jr jr_000_2813                                ; $280D
 
 jr_000_280f:
-    ld [$4000], a                                 ; $280F
+    ld [rRAMB], a                                 ; $280F
     and a                                         ; $2812
 
 jr_000_2813:
@@ -7297,7 +7297,7 @@ jr_000_282c:
 
     pop af                                        ; $2892
     ldh [hRomBankShadow], a                       ; $2893
-    ld [$2000], a                                 ; $2895
+    ld [rROMB0], a                                ; $2895
 
 jr_000_2898:
     pop hl                                        ; $2898
@@ -7623,11 +7623,11 @@ Snd_Init_Tramp::
     push af                                       ; $2A25
     ld a, $1f                                     ; $2A26
     ldh [hRomBankShadow], a                       ; $2A28
-    ld [$2000], a                                 ; $2A2A
-    call $7ff6                                    ; $2A2D
+    ld [rROMB0], a                                ; $2A2A
+    call Snd_InitEntry                            ; $2A2D
     pop af                                        ; $2A30
     ldh [hRomBankShadow], a                       ; $2A31
-    ld [$2000], a                                 ; $2A33
+    ld [rROMB0], a                                ; $2A33
     ret                                           ; $2A36
 
 
@@ -7637,11 +7637,11 @@ Snd_Tick_Tramp::
     push af                                       ; $2A39
     ld a, $1f                                     ; $2A3A
     ldh [hRomBankShadow], a                       ; $2A3C
-    ld [$2000], a                                 ; $2A3E
-    call $7ff0                                    ; $2A41
+    ld [rROMB0], a                                ; $2A3E
+    call Snd_TickEntry                            ; $2A41
     pop af                                        ; $2A44
     ldh [hRomBankShadow], a                       ; $2A45
-    ld [$2000], a                                 ; $2A47
+    ld [rROMB0], a                                ; $2A47
     ret                                           ; $2A4A
 
 
@@ -8802,12 +8802,12 @@ Mode1D_ReadByteFromBank::
     push af                                       ; $31FA
     ldh a, [hBankTmp]                             ; $31FB
     ldh [hRomBankShadow], a                       ; $31FD
-    ld [$2000], a                                 ; $31FF
+    ld [rROMB0], a                                ; $31FF
     scf                                           ; $3202
     jr jr_000_3209                                ; $3203
 
 jr_000_3205:
-    ld [$4000], a                                 ; $3205
+    ld [rRAMB], a                                 ; $3205
     and a                                         ; $3208
 
 jr_000_3209:
@@ -8818,7 +8818,7 @@ jr_000_3209:
 
     pop af                                        ; $320D
     ldh [hRomBankShadow], a                       ; $320E
-    ld [$2000], a                                 ; $3210
+    ld [rROMB0], a                                ; $3210
     ret                                           ; $3213
 
 
@@ -8835,12 +8835,12 @@ Mode1D_CopyDescriptors::
     push af                                       ; $3221
     ldh a, [hBankTmp]                             ; $3222
     ldh [hRomBankShadow], a                       ; $3224
-    ld [$2000], a                                 ; $3226
+    ld [rROMB0], a                                ; $3226
     scf                                           ; $3229
     jr jr_000_3230                                ; $322A
 
 jr_000_322c:
-    ld [$4000], a                                 ; $322C
+    ld [rRAMB], a                                 ; $322C
     and a                                         ; $322F
 
 jr_000_3230:
@@ -8867,7 +8867,7 @@ jr_000_3231:
 
     pop af                                        ; $3242
     ldh [hRomBankShadow], a                       ; $3243
-    ld [$2000], a                                 ; $3245
+    ld [rROMB0], a                                ; $3245
     ret                                           ; $3248
 
 
@@ -8886,12 +8886,12 @@ Mode1D_InterleaveTileRows::
     push af                                       ; $3256
     ldh a, [hBankTmp]                             ; $3257
     ldh [hRomBankShadow], a                       ; $3259
-    ld [$2000], a                                 ; $325B
+    ld [rROMB0], a                                ; $325B
     scf                                           ; $325E
     jr jr_000_3265                                ; $325F
 
 jr_000_3261:
-    ld [$4000], a                                 ; $3261
+    ld [rRAMB], a                                 ; $3261
     and a                                         ; $3264
 
 jr_000_3265:
@@ -8979,7 +8979,7 @@ jr_000_32cf:
 
     pop af                                        ; $32D4
     ldh [hRomBankShadow], a                       ; $32D5
-    ld [$2000], a                                 ; $32D7
+    ld [rROMB0], a                                ; $32D7
     ret                                           ; $32DA
 
 
@@ -9005,11 +9005,11 @@ jr_000_32dc:
 
 ; C: one word per layout type
 Mode1D_LayoutScriptPtrs::
-    dw $552e
-    dw $57fe
-    dw $5cae
-    dw $656e
-    dw $6f6e
+    dw Print_Layout0_Plain
+    dw Print_Layout1_Framed
+    dw Print_Layout2_FourPhotos
+    dw Print_Layout3_FourPhotosRotated
+    dw Print_Layout4_InfoPage
 
 ; C: sends the DATA packet of the band
 Mode1D_State04_SendBand::
@@ -9374,11 +9374,11 @@ jr_000_3538:
     add c                                         ; $353D
     ld c, a                                       ; $353E
     ld b, $00                                     ; $353F
-    ld hl, $54de                                  ; $3541
+    ld hl, Print_ProgressPackets                  ; $3541
     add hl, bc                                    ; $3544
     ld b, h                                       ; $3545
     ld c, l                                       ; $3546
-    ld a, $08                                     ; $3547
+    ld a, BANK(Print_ProgressPackets)             ; $3547
     call Vq_Push                                  ; $3549
     ret                                           ; $354C
 
@@ -9407,9 +9407,11 @@ Img_NibbleMapTbl::
 ; C: 256 entries; index = pixel pair byte | the false labels at 3780 (ld bc,$3780 of AlbumPage_DrawDown = a sprite
 ; position) were removed: this table is the whole 3700-37FF
 Img_PairLookupTbl::
+    ASSERT LOW(Img_PairLookupTbl) == 0 ; read as a page: HIGH(Img_PairLookupTbl) with the index in the low byte
     INCBIN "data/bank_00/Img_PairLookupTbl.bin" ; $3700, 256 bytes
 ; C: 8 pages of 256 bytes: page k = source byte shifted for an x offset of k pixels (page 0 = identity) | 2,048 bytes
 ; = 8 pages of 256 (3800-3FFF); the labels that used to cut it at 3818, 3878, 3910, 3D81, 3E54 and 3F78 were sprite
 ; positions (`ld bc,$3818` etc. before Oam_AddMeta calls of ...
 Blit_ShiftTbl::
+    ASSERT LOW(Blit_ShiftTbl) == 0 ; read as a page: HIGH(Blit_ShiftTbl) with the index in the low byte
     INCBIN "data/bank_00/Blit_ShiftTbl.bin" ; $3800, 2048 bytes

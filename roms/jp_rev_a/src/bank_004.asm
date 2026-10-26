@@ -571,9 +571,20 @@ PhotoPicker_LoadMessageStrip::
 
 ; C: {addr
 PhotoPicker_MessageStripTbl::
-    db $00, $40, $0e, $80, $42, $0e, $00, $45, $0e, $80, $47, $0e, $00, $4a, $0e, $80
-    db $4c, $0e, $00, $4f, $0e, $80, $51, $0e, $00, $54, $0e, $80, $56, $0e, $00, $59
-    db $0e, $80, $5b, $0e, $00, $5e, $0e, $00, $5d, $0d
+    dwb Gfx_0E_4000_MsgStrip
+    dwb Gfx_0E_4280_MsgStrip
+    dwb Gfx_0E_4500_MsgStrip
+    dwb Gfx_0E_4780_MsgStrip
+    dwb Gfx_0E_4A00_MsgStrip
+    dwb Gfx_0E_4C80_MsgStrip
+    dwb Gfx_0E_4F00_MsgStrip
+    dwb Gfx_0E_5180_MsgStrip
+    dwb Gfx_0E_5400_MsgStrip
+    dwb Gfx_0E_5680_MsgStrip
+    dwb Gfx_0E_5900_MsgStrip
+    dwb Gfx_0E_5B80_MsgStrip
+    dwb Gfx_0E_5E00_MsgStrip
+    dwb Gfx_0D_5D00_MsgStrip
 
 ; C: icon tiles chosen by icon_sel
 PhotoPicker_LoadIcon::
@@ -628,9 +639,9 @@ jr_004_44fa:
     sla a                                         ; $44FD
     ld c, a                                       ; $44FF
     ld b, $00                                     ; $4500
-    ld hl, $5830                                  ; $4502
+    ld hl, Gfx_13_5830_PhotoPicker_LoadPageTabsFor ; $4502
     add hl, bc                                    ; $4505
-    ld a, $13                                     ; $4506
+    ld a, BANK(Gfx_13_5830_PhotoPicker_LoadPageTabsFor) ; $4506
     ld de, $8df0                                  ; $4508
     ld bc, $0010                                  ; $450B
     call Vram_CopyFromBank                        ; $450E
@@ -639,9 +650,9 @@ jr_004_44fa:
     srl a                                         ; $4514
     ld c, a                                       ; $4516
     ld b, $00                                     ; $4517
-    ld hl, $5800                                  ; $4519
+    ld hl, Gfx_13_5800_Mode0F_State00_Init        ; $4519
     add hl, bc                                    ; $451C
-    ld a, $13                                     ; $451D
+    ld a, BANK(Gfx_13_5800_Mode0F_State00_Init)   ; $451D
     ld de, $8de0                                  ; $451F
     ld bc, $0010                                  ; $4522
     call Vram_CopyFromBank                        ; $4525
@@ -667,9 +678,9 @@ jr_004_4532:
     sla a                                         ; $4535
     ld c, a                                       ; $4537
     ld b, $00                                     ; $4538
-    ld hl, $5830                                  ; $453A
+    ld hl, Gfx_13_5830_PhotoPicker_LoadPageTabsFor ; $453A
     add hl, bc                                    ; $453D
-    ld a, $13                                     ; $453E
+    ld a, BANK(Gfx_13_5830_PhotoPicker_LoadPageTabsFor) ; $453E
     ld de, $8ed0                                  ; $4540
     ld bc, $0010                                  ; $4543
     call Vram_CopyFromBank                        ; $4546
@@ -678,9 +689,9 @@ jr_004_4532:
     srl a                                         ; $454C
     ld c, a                                       ; $454E
     ld b, $00                                     ; $454F
-    ld hl, $5800                                  ; $4551
+    ld hl, Gfx_13_5800_Mode0F_State00_Init        ; $4551
     add hl, bc                                    ; $4554
-    ld a, $13                                     ; $4555
+    ld a, BANK(Gfx_13_5800_Mode0F_State00_Init)   ; $4555
     ld de, $8ec0                                  ; $4557
     ld bc, $0010                                  ; $455A
     call Vram_CopyFromBank                        ; $455D
@@ -2139,9 +2150,9 @@ jr_004_50c7:
     ld b, a                                       ; $50D0
     add hl, bc                                    ; $50D1
     push hl                                       ; $50D2
-    ld hl, $5000                                  ; $50D3
+    ld hl, AlbumB_UnusedSlotB_Tiles               ; $50D3
     add hl, bc                                    ; $50D6
-    ld a, $36                                     ; $50D7
+    ld a, BANK(AlbumB_UnusedSlotB_Tiles)          ; $50D7
     pop de                                        ; $50D9
     ld bc, $0010                                  ; $50DA
     call Vram_CopyFromBank                        ; $50DD
@@ -2532,23 +2543,40 @@ EraseAnim_DrawOne::
 ; Stamp_LoadPageGfx (04:589E) steps the pointer by [$D63E] blocks and copies `blocks` consecutive blocks to VRAM $8A00
 ; (categories 2 and 3 have code of their own: $190 + $190 B to $8A00 / ...
 Stamp_PageGfxTbl::
-    db $00, $40, $2c, $80, $01, $02
-    db $00, $40, $2d, $00, $03, $01
-    db $00, $60, $2c, $20, $03, $01
-    db $00, $40, $2b, $c0, $03, $01
-    db $00, $60, $2a, $a0, $00, $02
-    db $00, $60, $2a, $a0, $00, $02
-    db $00, $40, $2e, $40, $01, $02
-    db $00, $40, $2e, $40, $01, $02
-    db $00, $40, $30, $40, $01, $02
-    db $00, $40, $30, $40, $01, $02
-    db $00, $70, $2f, $40, $01, $02
-    db $00, $70, $2f, $40, $01, $02
-    db $00, $60, $30, $40, $01, $02
-    db $00, $60, $30, $40, $01, $02
-    db $00, $58, $2e, $40, $01, $02
-    db $00, $58, $2e, $40, $01, $02
-    db $00, $58, $2f, $40, $01, $02
+    dwb StampCat00_Face_Gfx
+    db $80, $01, $02
+    dwb StampCat01_Icons_Gfx
+    db $00, $03, $01
+    dwb StampCat02_Pokemon_Gfx
+    db $20, $03, $01
+    dwb StampCat03_CoroCoro_Gfx
+    db $c0, $03, $01
+    dwb StampCat04_05_SmallKana_Gfx
+    db $a0, $00, $02
+    dwb StampCat04_05_SmallKana_Gfx
+    db $a0, $00, $02
+    dwb StampCat06_07_Hiragana_Gfx
+    db $40, $01, $02
+    dwb StampCat06_07_Hiragana_Gfx
+    db $40, $01, $02
+    dwb StampCat08_09_Katakana_Gfx
+    db $40, $01, $02
+    dwb StampCat08_09_Katakana_Gfx
+    db $40, $01, $02
+    dwb StampCat10_11_Digits_Gfx
+    db $40, $01, $02
+    dwb StampCat10_11_Digits_Gfx
+    db $40, $01, $02
+    dwb StampCat12_13_Latin_Gfx
+    db $40, $01, $02
+    dwb StampCat12_13_Latin_Gfx
+    db $40, $01, $02
+    dwb StampCat14_15_Kanji_Gfx
+    db $40, $01, $02
+    dwb StampCat14_15_Kanji_Gfx
+    db $40, $01, $02
+    dwb StampCat16_Symbols_Gfx
+    db $40, $01, $02
 
 ; C: 17 x {lo; hi; bank} by category ([$D63D] x 3): $60 B of icon tiles copied to VRAM $8F00 by
 ; Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows
@@ -2617,45 +2645,58 @@ Stamp_CatMapSrcTbl::
 ; Stamp_CopyStampTiles (04:5A73) steps the pointer by [$D63F] stamps and copies one stamp to wIconSrcGfx ($C3C0) in
 ; Stamp_PrepareBuffers. Pointers = the StampCat*_Gfx rows. Decoded 2026-10-19
 Stamp_IconSrcGfxTbl::
-    db $00, $40, $2c, $80, $00
-    db $00, $40, $2d, $00, $01
-    db $00, $60, $2c, $90, $01
-    db $00, $40, $2b, $e0, $01
-    db $00, $60, $2a, $20, $00
-    db $00, $60, $2a, $20, $00
-    db $00, $40, $2e, $40, $00
-    db $00, $40, $2e, $40, $00
-    db $00, $40, $30, $40, $00
-    db $00, $40, $30, $40, $00
-    db $00, $70, $2f, $40, $00
-    db $00, $70, $2f, $40, $00
-    db $00, $60, $30, $40, $00
-    db $00, $60, $30, $40, $00
-    db $00, $58, $2e, $40, $00
-    db $00, $58, $2e, $40, $00
-    db $00, $58, $2f, $40, $00
+    dwb StampCat00_Face_Gfx
+    db $80, $00
+    dwb StampCat01_Icons_Gfx
+    db $00, $01
+    dwb StampCat02_Pokemon_Gfx
+    db $90, $01
+    dwb StampCat03_CoroCoro_Gfx
+    db $e0, $01
+    dwb StampCat04_05_SmallKana_Gfx
+    db $20, $00
+    dwb StampCat04_05_SmallKana_Gfx
+    db $20, $00
+    dwb StampCat06_07_Hiragana_Gfx
+    db $40, $00
+    dwb StampCat06_07_Hiragana_Gfx
+    db $40, $00
+    dwb StampCat08_09_Katakana_Gfx
+    db $40, $00
+    dwb StampCat08_09_Katakana_Gfx
+    db $40, $00
+    dwb StampCat10_11_Digits_Gfx
+    db $40, $00
+    dwb StampCat10_11_Digits_Gfx
+    db $40, $00
+    dwb StampCat12_13_Latin_Gfx
+    db $40, $00
+    dwb StampCat12_13_Latin_Gfx
+    db $40, $00
+    dwb StampCat14_15_Kanji_Gfx
+    db $40, $00
+    dwb StampCat14_15_Kanji_Gfx
+    db $40, $00
+    dwb StampCat16_Symbols_Gfx
+    db $40, $00
 
 ; C: 17 records x 5 B by category: {mask pointer lo; hi; bank; bytes per stamp lo; hi}: the 1bpp mask of the stamp,
 ; copied to wIconSrcMask ($C5A0) in Stamp_PrepareBuffers. Not tile data: records 0-3 and 16 point to the
 ; StampCat*_Mask rows, records 4-15 have bank $00 / $FF (no mask: Stamp_CopyStampTiles ...
 Stamp_IconSrcMaskTbl::
-    db $00, $70, $2d, $40, $00
-    db $00, $40, $2f, $80, $00
-    db $00, $70, $2e, $c8, $00
-    db $00, $58, $2b, $f0, $00
-    db $ff, $ff, $ff, $20, $00
-    db $00, $00, $00, $20, $00
-    db $ff, $ff, $ff, $20, $00
-    db $00, $00, $00, $20, $00
-    db $ff, $ff, $ff, $20, $00
-    db $00, $00, $00, $20, $00
-    db $ff, $ff, $ff, $20, $00
-    db $00, $00, $00, $20, $00
-    db $ff, $ff, $ff, $20, $00
-    db $00, $00, $00, $20, $00
-    db $ff, $ff, $ff, $20, $00
-    db $00, $00, $00, $20, $00
-    db $00, $70, $30, $20, $00
+    dwb StampCat00_Mask
+    db $40, $00
+    dwb StampCat01_Mask
+    db $80, $00
+    dwb StampCat02_Mask
+    db $c8, $00
+    dwb StampCat03_Mask
+    db $f0, $00, $ff, $ff, $ff, $20, $00, $00, $00, $00, $20, $00, $ff, $ff, $ff, $20
+    db $00, $00, $00, $00, $20, $00, $ff, $ff, $ff, $20, $00, $00, $00, $00, $20, $00
+    db $ff, $ff, $ff, $20, $00, $00, $00, $00, $20, $00, $ff, $ff, $ff, $20, $00, $00
+    db $00, $00, $20, $00, $ff, $ff, $ff, $20, $00, $00, $00, $00, $20, $00
+    dwb StampCat16_Mask
+    db $20, $00
 
 ; C: auto: 11 bytes, bytes; referenced by Stamp_BuildGraphicsLayer, Stamp_BuildMaskLayer. L3 pass 2026-10-26: read in
 ; BGB in 33 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
@@ -2668,23 +2709,23 @@ Stamp_BuildGraphicsLayer_Tbl54E0::
 ; C: auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s)
 ; of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
 Stamp_DrawPaletteCursor_PtrTbl5502::
-    dw $5524
-    dw $5558
-    dw $555e
-    dw $555e
-    dw $5544
-    dw $5544
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
-    dw $5530
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $22
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $56
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $5C
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $5C
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $42
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $42
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
+    dw Stamp_DrawPaletteCursor_PtrTbl5502 + $2E
     dw $5918
     dw $5938
     dw $5958
@@ -2732,14 +2773,29 @@ Main_Entry_Tbl5573::
 ; C: auto: 118 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the
 ; organic corpus, modes 11 19 (tcrf_check/assets/l3_names/)
 Stamp_PaletteInput_Tbl5584::
-    db $a6, $55, $e6, $55, $f2, $55, $f2, $55, $be, $55, $be, $55, $be, $55, $be, $55
-    db $be, $55, $be, $55, $be, $55, $be, $55, $be, $55, $be, $55, $be, $55, $be, $55
-    db $be, $55, $00, $04, $f5, $0c, $fc, $04, $f5, $0c, $fc, $03, $f5, $0c, $00, $04
-    db $f4, $0e, $fc, $04, $f4, $0e, $fc, $03, $f4, $0e, $00, $04, $ed, $14, $fc, $04
-    db $ed, $14, $fc, $04, $ed, $14, $fc, $04, $ed, $14, $fc, $03, $ed, $14, $00, $04
-    db $ec, $16, $fc, $04, $ec, $16, $fc, $04, $ec, $16, $fc, $04, $ec, $16, $fc, $03
-    db $ec, $16, $00, $04, $f5, $0e, $fc, $04, $f5, $0e, $fc, $03, $f5, $0e, $00, $04
-    db $f9, $0a, $fc, $03, $f9, $0a
+    dw Stamp_PaletteInput_Tbl5584 + $22
+    dw Stamp_PaletteInput_Tbl5584 + $62
+    dw Stamp_PaletteInput_Tbl5584 + $6E
+    dw Stamp_PaletteInput_Tbl5584 + $6E
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    dw Stamp_PaletteInput_Tbl5584 + $3A
+    db $00, $04, $f5, $0c, $fc, $04, $f5, $0c, $fc, $03, $f5, $0c, $00, $04, $f4, $0e
+    db $fc, $04, $f4, $0e, $fc, $03, $f4, $0e, $00, $04, $ed, $14, $fc, $04, $ed, $14
+    db $fc, $04, $ed, $14, $fc, $04, $ed, $14, $fc, $03, $ed, $14, $00, $04, $ec, $16
+    db $fc, $04, $ec, $16, $fc, $04, $ec, $16, $fc, $04, $ec, $16, $fc, $03, $ec, $16
+    db $00, $04, $f5, $0e, $fc, $04, $f5, $0e, $fc, $03, $f5, $0e, $00, $04, $f9, $0a
+    db $fc, $03, $f9, $0a
 
 ; C: auto: 17 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the
 ; organic corpus, modes 11 (tcrf_check/assets/l3_names/)
@@ -2826,12 +2882,27 @@ Stamp_MirrorBuffer_Gfx568C::
 ; C: auto: 92 bytes, bytes; referenced by Stamp_Commit. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic
 ; corpus, modes 11 (tcrf_check/assets/l3_names/)
 Stamp_Commit_Tbl569D::
-    db $bf, $56, $e1, $56, $e9, $56, $f1, $56, $c7, $56, $cc, $56, $d4, $56, $d9, $56
-    db $d4, $56, $d9, $56, $d4, $56, $d9, $56, $d4, $56, $d9, $56, $d4, $56, $d9, $56
-    db $d9, $56, $20, $10, $c0, $c3, $00, $a0, $c5, $00, $88, $10, $c0, $c3, $00, $08
-    db $10, $c0, $c3, $00, $a0, $c5, $00, $90, $10, $c0, $c3, $00, $10, $10, $c0, $c3
-    db $00, $a0, $c5, $00, $20, $20, $c0, $c3, $00, $a0, $c5, $00, $28, $28, $c0, $c3
-    db $00, $a0, $c5, $00, $28, $30, $c0, $c3, $00, $a0, $c5, $00
+    dw Stamp_Commit_Tbl569D + $22
+    dw Stamp_Commit_Tbl569D + $44
+    dw Stamp_Commit_Tbl569D + $4C
+    dw Stamp_Commit_Tbl569D + $54
+    dw Stamp_Commit_Tbl569D + $2A
+    dw Stamp_Commit_Tbl569D + $2F
+    dw Stamp_Commit_Tbl569D + $37
+    dw Stamp_Commit_Tbl569D + $3C
+    dw Stamp_Commit_Tbl569D + $37
+    dw Stamp_Commit_Tbl569D + $3C
+    dw Stamp_Commit_Tbl569D + $37
+    dw Stamp_Commit_Tbl569D + $3C
+    dw Stamp_Commit_Tbl569D + $37
+    dw Stamp_Commit_Tbl569D + $3C
+    dw Stamp_Commit_Tbl569D + $37
+    dw Stamp_Commit_Tbl569D + $3C
+    dw Stamp_Commit_Tbl569D + $3C
+    db $20, $10, $c0, $c3, $00, $a0, $c5, $00, $88, $10, $c0, $c3, $00, $08, $10, $c0
+    db $c3, $00, $a0, $c5, $00, $90, $10, $c0, $c3, $00, $10, $10, $c0, $c3, $00, $a0
+    db $c5, $00, $20, $20, $c0, $c3, $00, $a0, $c5, $00, $28, $28, $c0, $c3, $00, $a0
+    db $c5, $00, $28, $30, $c0, $c3, $00, $a0, $c5, $00
 
 ; C: mode 11: STAMP tool
 Mode11_Stamp::
@@ -5316,12 +5387,61 @@ Pen_Draw_Tbl6648::
 ; corpus, modes 10 (tcrf_check/assets/l3_names/)
 Pen_Draw_Tbl6650::
     db $10, $14, $18, $1c, $23, $27, $2b, $2f, $36, $3a, $3e, $42, $49, $4d, $51, $55
-    db $88, $08, $d0, $4a, $27, $88, $08, $c0, $4a, $27, $88, $08, $b0, $4a, $27, $08
-    db $08, $e0, $4a, $27, $e0, $7f, $19, $88, $08, $10, $4b, $27, $88, $08, $00, $4b
-    db $27, $88, $08, $f0, $4a, $27, $08, $08, $20, $4b, $27, $e8, $7f, $19, $88, $08
-    db $50, $4b, $27, $88, $08, $40, $4b, $27, $88, $08, $30, $4b, $27, $08, $08, $60
-    db $4b, $27, $f0, $7f, $19, $88, $08, $90, $4b, $27, $88, $08, $80, $4b, $27, $88
-    db $08, $70, $4b, $27, $08, $08, $a0, $4b, $27, $f8, $7f, $19
+    db $88, $08
+    dw TileSet_27_4AB0 + $20
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $10
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dwb TileSet_27_4AB0
+    db $08, $08
+    dw TileSet_27_4AB0 + $30
+    db BANK(TileSet_27_4AB0)
+    dw Src_19_7E60_Tbl53A6_4 + $180
+    db BANK(Src_19_7E60_Tbl53A6_4)
+    db $88, $08
+    dw TileSet_27_4AB0 + $60
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $50
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $40
+    db BANK(TileSet_27_4AB0)
+    db $08, $08
+    dw TileSet_27_4AB0 + $70
+    db BANK(TileSet_27_4AB0)
+    dw Src_19_7E60_Tbl53A6_4 + $188
+    db BANK(Src_19_7E60_Tbl53A6_4)
+    db $88, $08
+    dw TileSet_27_4AB0 + $A0
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $90
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $80
+    db BANK(TileSet_27_4AB0)
+    db $08, $08
+    dw TileSet_27_4AB0 + $B0
+    db BANK(TileSet_27_4AB0)
+    dw Src_19_7E60_Tbl53A6_4 + $190
+    db BANK(Src_19_7E60_Tbl53A6_4)
+    db $88, $08
+    dw TileSet_27_4AB0 + $E0
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $D0
+    db BANK(TileSet_27_4AB0)
+    db $88, $08
+    dw TileSet_27_4AB0 + $C0
+    db BANK(TileSet_27_4AB0)
+    db $08, $08
+    dw TileSet_27_4AB0 + $F0
+    db BANK(TileSet_27_4AB0)
+    dw Src_19_7E60_Tbl53A6_4 + $198
+    db BANK(Src_19_7E60_Tbl53A6_4)
 
 ; C: sound $12 and window slide
 PenMenu_SlideOpen::
@@ -5428,10 +5548,10 @@ PenMenu_BuildSize::
 ; C: auto: 8 bytes, word table; referenced by PenMenu_BuildSize. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
 ; organic corpus, modes 10 (tcrf_check/assets/l3_names/)
 PenMenu_BuildSize_PtrTbl67A5::
-    dw $4b20
-    dw $4c00
-    dw $4cc0
-    dw $4d80
+    dw Map_24_4B20_PenMenuSizePanel0
+    dw Map_24_4C00_PenMenuSizePanel1
+    dw Map_24_4CC0_PenMenuSizePanel2
+    dw Map_24_4D80_PenMenuSizePanel3
 
 ; C
 PenMenu_BuildPattern::
@@ -5460,10 +5580,10 @@ PenMenu_BuildPattern::
 ; C: auto: 8 bytes, word table; referenced by PenMenu_BuildPattern. L3 pass 2026-10-26: read in BGB in 2 replay(s) of
 ; the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
 PenMenu_BuildPattern_PtrTbl67EF::
-    dw $4e60
-    dw $4f40
-    dw $5000
-    dw $50c0
+    dw Map_24_4E60_PenMenuPatternPanel0
+    dw Map_24_4F40_PenMenuPatternPanel1
+    dw Map_24_5000_PenMenuPatternPanel2
+    dw Map_24_50C0_PenMenuPatternPanel3
 
 ; C
 PenMenu_BuildSpeed::
@@ -5492,9 +5612,9 @@ PenMenu_BuildSpeed::
 ; C: auto: 6 bytes, word table; referenced by PenMenu_BuildSpeed. L3 pass 2026-10-26: read in BGB in 1 replay(s) of
 ; the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
 PenMenu_BuildSpeed_PtrTbl6839::
-    dw $76c0
-    dw $77a0
-    dw $7800
+    dw Map_24_76C0_PenMenuSpeedPanel0
+    dw Map_24_77A0_PenMenuSpeedPanel1
+    dw Map_24_7800_PenMenuSpeedPanel2
 
 ; C: mode 09: album viewer with the edit pages (the guide's Album: Paint / Stamp / Frame / Comment / Print / Delete)
 Mode09_AlbumEdit::
@@ -6429,9 +6549,9 @@ Album_LoadNumeralTile::
     ld b, $00                                     ; $6F83
     sla c                                         ; $6F85
     rl b                                          ; $6F87
-    ld hl, $7e00                                  ; $6F89
+    ld hl, Gfx_0C_7E00_Album_LoadNumeralTile      ; $6F89
     add hl, bc                                    ; $6F8C
-    ld a, $0c                                     ; $6F8D
+    ld a, BANK(Gfx_0C_7E00_Album_LoadNumeralTile) ; $6F8D
     ld bc, $0020                                  ; $6F8F
     call Vram_CopyFromBank                        ; $6F92
     ret                                           ; $6F95
@@ -6928,13 +7048,10 @@ jr_004_72c5:
 ; C: 4-byte records {src lo, src hi, duration, flag}: 24:6140 for $10 ticks, 24:62E0 for $0E, ... flag $FF wraps the
 ; frame index; the record is read by Parlor_AnimQueenTiles (04:728C) with the frame index $D500 x 4; 6 records + end
 Parlor_AnimQueenTiles_Tbl72CA::
-    db $40, $61, $10, $00
-    db $e0, $62, $0e, $00
-    db $40, $61, $0e, $00
-    db $e0, $62, $0e, $00
-    db $40, $61, $0e, $00
-    db $e0, $62, $0e, $00
-    db $ff
+    dw Map_24_6140_Parlor_Page0_QueenFrameA
+    db $10, $00, $e0, $62, $0e, $00
+    dw Map_24_6140_Parlor_Page0_QueenFrameA
+    db $0e, $00, $e0, $62, $0e, $00, $40, $61, $0e, $00, $e0, $62, $0e, $00, $ff
 
 ; C
 Parlor_AnimQueenSprite::
@@ -7023,8 +7140,8 @@ jr_004_736e:
 ; C: word table: the two 11-row map pieces 23:7040 and 23:7280 copied by Parlor_AnimateB (04:7340), index $D500 xor 1
 ; every $14 frames
 Parlor_AnimateB_PtrTbl7372::
-    dw $7040
-    dw $7280
+    dw Map_23_7040_Parlor_Page1
+    dw Map_23_7280_Parlor_Page1_AltTopRows
 
 ; C: L3 pass 2026-10-26: executed in BGB in 27 replay(s) of the organic corpus, modes 01 (tcrf_check/assets/l3_names/)
 Parlor_AnimateC::
@@ -7165,11 +7282,31 @@ jr_004_7419:
 ; tail of each list is {lo,hi,bank} of the page map: page 0 -> 24:60A0, page 1 -> 23:7040, page 2 -> 26:7BC0 (C, read
 ; from the ROM)
 Parlor_PageTbl::
-    db $3c, $74, $4e, $74, $60, $74, $00, $6b, $1d, $00, $90, $00, $08, $00, $73, $1d
-    db $00, $88, $00, $08, $ff, $a0, $60, $24, $00, $40, $1c, $00, $90, $00, $08, $00
-    db $48, $1c, $00, $88, $00, $08, $ff, $40, $70, $23, $00, $5a, $21, $00, $90, $00
-    db $08, $00, $62, $21, $00, $88, $00, $08, $60, $65, $21, $f0, $8d, $10, $00, $ff
-    db $c0, $7b, $26
+    dw Parlor_PageTbl + $6
+    dw Parlor_PageTbl + $18
+    dw Parlor_PageTbl + $2A
+    dw Gfx_1D_5D00_Mode20_State02_GameSetup + $E00
+    db BANK(Gfx_1D_5D00_Mode20_State02_GameSetup)
+    db $00, $90, $00, $08
+    dw Sheet_MenusShootMenu_1D_72A0 + $60
+    db BANK(Sheet_MenusShootMenu_1D_72A0)
+    db $00, $88, $00, $08, $ff
+    dwb Map_24_60A0_Parlor_Page0
+    db $00, $40, $1c, $00, $90, $00, $08
+    dw Sheet_MenusShootMenu_1C_4670 + $190
+    db BANK(Sheet_MenusShootMenu_1C_4670)
+    db $00, $88, $00, $08, $ff
+    dwb Map_23_7040_Parlor_Page1
+    dw Gfx_21_5870_CommentCard_DrawCopyBadge_Far + $190
+    db BANK(Gfx_21_5870_CommentCard_DrawCopyBadge_Far)
+    db $00, $90, $00, $08
+    dw Sheet_MenusShootMenu_21_5FD0 + $230
+    db BANK(Sheet_MenusShootMenu_21_5FD0)
+    db $00, $88, $00, $08
+    dw Sheet_MenusShootMenu_21_5FD0 + $590
+    db BANK(Sheet_MenusShootMenu_21_5FD0)
+    db $f0, $8d, $10, $00, $ff
+    dwb Map_26_7BC0_Parlor_Page2
 
 ; C: spiral wipe in of the map saved in menu_map_ptr
 Parlor_SpiralWipeIn::
@@ -8373,9 +8510,9 @@ Album_LoadNumeralTileB::
     ld b, $00                                     ; $7D24
     sla c                                         ; $7D26
     rl b                                          ; $7D28
-    ld hl, $7e00                                  ; $7D2A
+    ld hl, Gfx_26_7E00_Album_LoadNumeralTileB     ; $7D2A
     add hl, bc                                    ; $7D2D
-    ld a, $26                                     ; $7D2E
+    ld a, BANK(Gfx_26_7E00_Album_LoadNumeralTileB) ; $7D2E
     ld bc, $0020                                  ; $7D30
     call Vram_CopyFromBank                        ; $7D33
     ret                                           ; $7D36

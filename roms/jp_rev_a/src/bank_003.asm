@@ -2228,9 +2228,10 @@ Mode12_State14_SaveDialogOpen::
     xor a                                         ; $4EFD
     ld [wSpriteAnimFrame + $b], a                 ; $4EFE
     ld [wSpriteAnimTick + $b], a                  ; $4F01
-    ld de, $4f0e                                  ; $4F04
+    ld de, Mode12_State14_SaveDialogOpen_4F0E     ; $4F04
     call AnimEd_WindowSlideOut                    ; $4F07
     next_state                                    ; $4F0A
+Mode12_State14_SaveDialogOpen_4F0E:
     ret                                           ; $4F0E
 
 
@@ -2247,7 +2248,7 @@ Mode12_State15_SaveDialogWait::
 
 ; C: A: far call 02:4A07 stores the animation list
 Mode12_State16_SaveDialogClose::
-    ld de, $4f53                                  ; $4F1C
+    ld de, Mode12_State16_SaveDialogClose_4F53    ; $4F1C
     call AnimEd_WindowSlideIn                     ; $4F1F
     farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $4F22
     farcopy Vram_CopyFromBank, Gfx_0C_4600_Mode12_State16_SaveDialogClose, $8600, $01f0 ; $4F30
@@ -2260,6 +2261,7 @@ Mode12_State16_SaveDialogClose::
 
 jr_003_4f4f:
     next_state                                    ; $4F4F
+Mode12_State16_SaveDialogClose_4F53:
     ret                                           ; $4F53
 
 
@@ -2271,9 +2273,10 @@ Mode12_State17_ExitDialogOpen::
     xor a                                         ; $4F73
     ld [wSpriteAnimFrame + $b], a                 ; $4F74
     ld [wSpriteAnimTick + $b], a                  ; $4F77
-    ld de, $4f84                                  ; $4F7A
+    ld de, Mode12_State17_ExitDialogOpen_4F84     ; $4F7A
     call AnimEd_WindowSlideOut                    ; $4F7D
     next_state                                    ; $4F80
+Mode12_State17_ExitDialogOpen_4F84:
     ret                                           ; $4F84
 
 
@@ -2290,7 +2293,7 @@ Mode12_State18_ExitDialogWait::
 
 ; C: A: leaves the editor (state 05); B: back to browsing
 Mode12_State19_ExitDialogClose::
-    ld de, $4fc6                                  ; $4F92
+    ld de, Mode12_State19_ExitDialogClose_4FC6    ; $4F92
     call AnimEd_WindowSlideIn                     ; $4F95
     farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $4F98
     farcopy Vram_CopyFromBank, Gfx_0C_4600_Mode12_State16_SaveDialogClose, $8600, $01f0 ; $4FA6
@@ -2304,6 +2307,7 @@ Mode12_State19_ExitDialogClose::
 
 jr_003_4fc1:
     set_state STATE_12_BROWSE                     ; $4FC1
+Mode12_State19_ExitDialogClose_4FC6:
     ret                                           ; $4FC6
 
 
@@ -2315,9 +2319,10 @@ Mode12_State1A_ClearDialogOpen::
     xor a                                         ; $4FE6
     ld [wSpriteAnimFrame + $c], a                 ; $4FE7
     ld [wSpriteAnimTick + $c], a                  ; $4FEA
-    ld de, $4ff7                                  ; $4FED
+    ld de, Mode12_State1A_ClearDialogOpen_4FF7    ; $4FED
     call AnimEd_WindowSlideOut                    ; $4FF0
     next_state                                    ; $4FF3
+Mode12_State1A_ClearDialogOpen_4FF7:
     ret                                           ; $4FF7
 
 
@@ -2334,7 +2339,7 @@ Mode12_State1B_ClearDialogWait::
 
 ; C: A: state 0F (clear all)
 Mode12_State1C_ClearDialogClose::
-    ld de, $5039                                  ; $5005
+    ld de, Mode12_State1C_ClearDialogClose_5039   ; $5005
     call AnimEd_WindowSlideIn                     ; $5008
     farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $500B
     farcopy Vram_CopyFromBank, Gfx_0C_4600_Mode12_State16_SaveDialogClose, $8600, $01f0 ; $5019
@@ -2348,6 +2353,7 @@ Mode12_State1C_ClearDialogClose::
 
 jr_003_5034:
     set_state STATE_12_BROWSE                     ; $5034
+Mode12_State1C_ClearDialogClose_5039:
     ret                                           ; $5039
 
 
@@ -3251,17 +3257,17 @@ AnimEd_StartDecorations::
     ld a, $02                                     ; $561B
     ld [wSpriteAnimFrame], a                      ; $561D
     ld [wSpriteAnimFrame + $1], a                 ; $5620
-    ld a, $91                                     ; $5623
+    ld a, LOW(AnimEd_Ctx0_Decor)                  ; $5623
     ld [wCtx0Ret], a                              ; $5625
-    ld a, $56                                     ; $5628
+    ld a, HIGH(AnimEd_Ctx0_Decor)                 ; $5628
     ld [wCtx0Ret + $1], a                         ; $562A
-    ld a, $be                                     ; $562D
+    ld a, LOW(AnimEd_Ctx1_Decor)                  ; $562D
     ld [wCtx1Ret], a                              ; $562F
-    ld a, $57                                     ; $5632
+    ld a, HIGH(AnimEd_Ctx1_Decor)                 ; $5632
     ld [wCtx1Ret + $1], a                         ; $5634
-    ld a, $47                                     ; $5637
+    ld a, LOW(AnimEd_Ctx2_Decor)                  ; $5637
     ld [wCtx2Ret], a                              ; $5639
-    ld a, $58                                     ; $563C
+    ld a, HIGH(AnimEd_Ctx2_Decor)                 ; $563C
     ld [wCtx2Ret + $1], a                         ; $563E
     xor a                                         ; $5641
     ld [wCoroIndex], a                            ; $5642
@@ -3716,17 +3722,17 @@ AnimEd_StartExitTransition::
     xor a                                         ; $5908
     ld [wSpriteAnimFrame], a                      ; $5909
     ld [wSpriteAnimFrame + $1], a                 ; $590C
-    ld a, $f7                                     ; $590F
+    ld a, LOW(AnimEd_ExitCtx0)                    ; $590F
     ld [wCtx0Ret], a                              ; $5911
-    ld a, $59                                     ; $5914
+    ld a, HIGH(AnimEd_ExitCtx0)                   ; $5914
     ld [wCtx0Ret + $1], a                         ; $5916
-    ld a, $7a                                     ; $5919
+    ld a, LOW(AnimEd_ExitCtx1)                    ; $5919
     ld [wCtx1Ret], a                              ; $591B
-    ld a, $5a                                     ; $591E
+    ld a, HIGH(AnimEd_ExitCtx1)                   ; $591E
     ld [wCtx1Ret + $1], a                         ; $5920
-    ld a, $00                                     ; $5923
+    ld a, LOW(AnimEd_ExitCtx2)                    ; $5923
     ld [wCtx2Ret], a                              ; $5925
-    ld a, $5b                                     ; $5928
+    ld a, HIGH(AnimEd_ExitCtx2)                   ; $5928
     ld [wCtx2Ret + $1], a                         ; $592A
     xor a                                         ; $592D
     ld [wCoroIndex], a                            ; $592E
@@ -4491,11 +4497,16 @@ AnimEd_LoadMenuTiles::
 ; 6100 -> $8E50, 5B80 -> $8ED0, 5C00 -> $8F50, 0x80 bytes each; AnimEd_LoadMenuTiles (03:5DCE) selects the record with
 ; $D719
 AnimEd_LoadMenuTiles_Tbl5DF1::
-    db $40, $5a, $50, $8d, $80, $00
-    db $c0, $5a, $d0, $8d, $80, $00
-    db $00, $61, $50, $8e, $80, $00
-    db $80, $5b, $d0, $8e, $80, $00
-    db $00, $5c, $50, $8f, $80, $00
+    dw Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1
+    db $50, $8d, $80, $00
+    dw Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1 + $80
+    db $d0, $8d, $80, $00
+    dw Gfx_0C_6020_AnimEd_Ctx0_Decor + $E0
+    db $50, $8e, $80, $00
+    dw Gfx_0C_5B60_AnimEd_ShowEntryValue + $20
+    db $d0, $8e, $80, $00
+    dw Gfx_0C_5B60_AnimEd_ShowEntryValue + $A0
+    db $50, $8f, $80, $00
 
 ; C: zeroes the 16 spark lifetimes
 AnimEd_ClearSparks::
@@ -4699,9 +4710,9 @@ AnimEd_CopyDigitTile::
     ld b, $00                                     ; $5F2E
     sla c                                         ; $5F30
     rl b                                          ; $5F32
-    ld hl, $5e60                                  ; $5F34
+    ld hl, Src_0C_5E60_AnimEd_CopyDigitTile       ; $5F34
     add hl, bc                                    ; $5F37
-    ld a, $0c                                     ; $5F38
+    ld a, BANK(Src_0C_5E60_AnimEd_CopyDigitTile)  ; $5F38
     ld bc, $0020                                  ; $5F3A
     call Vram_CopyFromBank                        ; $5F3D
     ret                                           ; $5F40
@@ -4924,9 +4935,9 @@ Player_CopyDigitTile::
     ld b, $00                                     ; $60A1
     sla c                                         ; $60A3
     rl b                                          ; $60A5
-    ld hl, $7900                                  ; $60A7
+    ld hl, Src_17_7900_Player_CopyDigitTile       ; $60A7
     add hl, bc                                    ; $60AA
-    ld a, $17                                     ; $60AB
+    ld a, BANK(Src_17_7900_Player_CopyDigitTile)  ; $60AB
     ld bc, $0020                                  ; $60AD
     call Vram_CopyFromBank                        ; $60B0
     ret                                           ; $60B3
@@ -8075,9 +8086,9 @@ HotSpotEd_CopyNumberTile::
     add b                                         ; $74C9
     ld c, a                                       ; $74CA
     ld b, $00                                     ; $74CB
-    ld hl, $5660                                  ; $74CD
+    ld hl, Gfx_1C_5660_HotSpotEd_CopyNumberTile   ; $74CD
     add hl, bc                                    ; $74D0
-    ld a, $1c                                     ; $74D1
+    ld a, BANK(Gfx_1C_5660_HotSpotEd_CopyNumberTile) ; $74D1
     ld bc, $0010                                  ; $74D3
     call Vram_CopyFromBank                        ; $74D6
     ret                                           ; $74D9
@@ -8102,9 +8113,9 @@ HotSpotEd_ShowEffect_CopyThumb::
     rl b                                          ; $74EF
     sla c                                         ; $74F1
     rl b                                          ; $74F3
-    ld hl, $5760                                  ; $74F5
+    ld hl, Gfx_1C_5760_HotSpotEd_ShowEffectIcon   ; $74F5
     add hl, bc                                    ; $74F8
-    ld a, $1c                                     ; $74F9
+    ld a, BANK(Gfx_1C_5760_HotSpotEd_ShowEffectIcon) ; $74F9
     ld de, $8cf0                                  ; $74FB
     ld bc, $0040                                  ; $74FE
     call Vram_CopyFromBank                        ; $7501
@@ -8929,9 +8940,9 @@ ShowMenu_LoadHighlightTiles::
     ld hl, $9900                                  ; $7A71
     add hl, bc                                    ; $7A74
     push hl                                       ; $7A75
-    ld hl, $7d60                                  ; $7A76
+    ld hl, Map_23_7D60_ShowMenu_LoadHighlightTiles ; $7A76
     add hl, bc                                    ; $7A79
-    ld a, $23                                     ; $7A7A
+    ld a, BANK(Map_23_7D60_ShowMenu_LoadHighlightTiles) ; $7A7A
     pop de                                        ; $7A7C
     ld bc, $0060                                  ; $7A7D
     call Vram_CopyFromBank                        ; $7A80
@@ -8954,9 +8965,9 @@ ShowMenu_LoadNormalTiles::
     ld hl, $9900                                  ; $7A94
     add hl, bc                                    ; $7A97
     push hl                                       ; $7A98
-    ld hl, $7c00                                  ; $7A99
+    ld hl, Map_23_7C00_ShowMenu_LoadNormalTiles   ; $7A99
     add hl, bc                                    ; $7A9C
-    ld a, $23                                     ; $7A9D
+    ld a, BANK(Map_23_7C00_ShowMenu_LoadNormalTiles) ; $7A9D
     pop de                                        ; $7A9F
     ld bc, $0060                                  ; $7AA0
     call Vram_CopyFromBank                        ; $7AA3

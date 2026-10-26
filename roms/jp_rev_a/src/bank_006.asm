@@ -498,9 +498,9 @@ jr_006_43c7:
     ld b, $00                                     ; $43CA
     sla c                                         ; $43CC
     rl b                                          ; $43CE
-    ld hl, $7180                                  ; $43D0
+    ld hl, Gfx_20_7180_Mode15_DrawTwoDigits       ; $43D0
     add hl, bc                                    ; $43D3
-    ld a, $20                                     ; $43D4
+    ld a, BANK(Gfx_20_7180_Mode15_DrawTwoDigits)  ; $43D4
     ld bc, $0020                                  ; $43D6
     call Vram_CopyFromBank                        ; $43D9
     pop af                                        ; $43DC
@@ -509,9 +509,9 @@ jr_006_43c7:
     ld b, $00                                     ; $43E0
     sla c                                         ; $43E2
     rl b                                          ; $43E4
-    ld hl, $7180                                  ; $43E6
+    ld hl, Gfx_20_7180_Mode15_DrawTwoDigits       ; $43E6
     add hl, bc                                    ; $43E9
-    ld a, $20                                     ; $43EA
+    ld a, BANK(Gfx_20_7180_Mode15_DrawTwoDigits)  ; $43EA
     ld bc, $0020                                  ; $43EC
     call Vram_CopyFromBank                        ; $43EF
     ret                                           ; $43F2
@@ -534,18 +534,18 @@ jr_006_43fe:
     push af                                       ; $43FE
     swap c                                        ; $43FF
     ld b, $00                                     ; $4401
-    ld hl, $70e0                                  ; $4403
+    ld hl, Gfx_20_70E0_Mode15_DrawTwoDigitsInterval ; $4403
     add hl, bc                                    ; $4406
-    ld a, $20                                     ; $4407
+    ld a, BANK(Gfx_20_70E0_Mode15_DrawTwoDigitsInterval) ; $4407
     ld bc, $0010                                  ; $4409
     call Vram_CopyFromBank                        ; $440C
     pop af                                        ; $440F
     ld c, a                                       ; $4410
     swap c                                        ; $4411
     ld b, $00                                     ; $4413
-    ld hl, $70e0                                  ; $4415
+    ld hl, Gfx_20_70E0_Mode15_DrawTwoDigitsInterval ; $4415
     add hl, bc                                    ; $4418
-    ld a, $20                                     ; $4419
+    ld a, BANK(Gfx_20_70E0_Mode15_DrawTwoDigitsInterval) ; $4419
     ld bc, $0010                                  ; $441B
     call Vram_CopyFromBank                        ; $441E
     ret                                           ; $4421
@@ -1541,7 +1541,7 @@ Mode16_BuildList0::
 Mode16_BuildList2::
     ld bc, $0002                                  ; $4B7C
     call Wait_Frames                              ; $4B7F
-    ld hl, $51e7                                  ; $4B82
+    ld hl, Map_25_50C0_Mode16_OptionPage1 + $127  ; $4B82
     ld de, $9947                                  ; $4B85
     ld b, $02                                     ; $4B88
 
@@ -1555,7 +1555,7 @@ jr_006_4b8f:
     push bc                                       ; $4B8F
     push de                                       ; $4B90
     push hl                                       ; $4B91
-    ld a, $25                                     ; $4B92
+    ld a, BANK(Map_25_50C0_Mode16_OptionPage1)    ; $4B92
     ld bc, $0008                                  ; $4B94
     call Vram_CopyFromBank                        ; $4B97
     pop hl                                        ; $4B9A
@@ -1605,7 +1605,7 @@ jr_006_4bbe:
 Mode16_BuildList4::
     ld bc, $0002                                  ; $4BD0
     call Wait_Frames                              ; $4BD3
-    ld hl, $6507                                  ; $4BD6
+    ld hl, Map_24_63A0_Mode16_OptionPage2 + $167  ; $4BD6
     ld de, $9987                                  ; $4BD9
     ld b, $04                                     ; $4BDC
 
@@ -1619,7 +1619,7 @@ jr_006_4be3:
     push bc                                       ; $4BE3
     push de                                       ; $4BE4
     push hl                                       ; $4BE5
-    ld a, $24                                     ; $4BE6
+    ld a, BANK(Map_24_63A0_Mode16_OptionPage2)    ; $4BE6
     ld bc, $0008                                  ; $4BE8
     call Vram_CopyFromBank                        ; $4BEB
     pop hl                                        ; $4BEE
@@ -1669,7 +1669,7 @@ jr_006_4c12:
 Mode16_BuildList6::
     ld bc, $0002                                  ; $4C24
     call Wait_Frames                              ; $4C27
-    ld hl, $5507                                  ; $4C2A
+    ld hl, Map_25_5360_Mode16_OptionPage3 + $1A7  ; $4C2A
     ld de, $99c7                                  ; $4C2D
     ld b, $06                                     ; $4C30
 
@@ -1683,7 +1683,7 @@ jr_006_4c37:
     push bc                                       ; $4C37
     push de                                       ; $4C38
     push hl                                       ; $4C39
-    ld a, $25                                     ; $4C3A
+    ld a, BANK(Map_25_5360_Mode16_OptionPage3)    ; $4C3A
     ld bc, $0008                                  ; $4C3C
     call Vram_CopyFromBank                        ; $4C3F
     pop hl                                        ; $4C42
@@ -1809,12 +1809,12 @@ Mode17_State00_Init::
     ld b, $04                                     ; $4D38
 
 jr_006_4d3a:
-    ld hl, $6598                                  ; $4D3A
+    ld hl, Gfx_1E_6590_Mode17_State00_Init_LowerHalves + $8 ; $4D3A
     ld c, $04                                     ; $4D3D
 
 jr_006_4d3f:
     push bc                                       ; $4D3F
-    ld a, $1e                                     ; $4D40
+    ld a, BANK(Gfx_1E_6590_Mode17_State00_Init_LowerHalves) ; $4D40
     ld bc, $0008                                  ; $4D42
     call Mem_CopyFromBank                         ; $4D45
     pop bc                                        ; $4D48
@@ -3074,9 +3074,9 @@ jr_006_56b3:
     swap a                                        ; $56B4
     ld c, a                                       ; $56B6
     ld b, $00                                     ; $56B7
-    ld hl, $64d0                                  ; $56B9
+    ld hl, Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits ; $56B9
     add hl, bc                                    ; $56BC
-    ld a, $1e                                     ; $56BD
+    ld a, BANK(Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits) ; $56BD
     ld de, $8060                                  ; $56BF
     ld bc, $0010                                  ; $56C2
     call Vram_CopyFromBank                        ; $56C5
@@ -3084,9 +3084,9 @@ jr_006_56b3:
     push bc                                       ; $56C9
     swap c                                        ; $56CA
     ld b, $00                                     ; $56CC
-    ld hl, $64d0                                  ; $56CE
+    ld hl, Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits ; $56CE
     add hl, bc                                    ; $56D1
-    ld a, $1e                                     ; $56D2
+    ld a, BANK(Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits) ; $56D2
     ld de, $8050                                  ; $56D4
     ld bc, $0010                                  ; $56D7
     call Vram_CopyFromBank                        ; $56DA
@@ -3094,9 +3094,9 @@ jr_006_56b3:
     swap b                                        ; $56DE
     ld c, b                                       ; $56E0
     ld b, $00                                     ; $56E1
-    ld hl, $64b0                                  ; $56E3
+    ld hl, Gfx_1E_64B0_Compose_DrawPhotoNumber_AlbumLetter ; $56E3
     add hl, bc                                    ; $56E6
-    ld a, $1e                                     ; $56E7
+    ld a, BANK(Gfx_1E_64B0_Compose_DrawPhotoNumber_AlbumLetter) ; $56E7
     ld de, $8030                                  ; $56E9
     ld bc, $0010                                  ; $56EC
     call Vram_CopyFromBank                        ; $56EF
@@ -3468,9 +3468,9 @@ jr_006_5900:
     swap c                                        ; $5904
     sla c                                         ; $5906
     rl b                                          ; $5908
-    ld hl, $4800                                  ; $590A
+    ld hl, Gfx_17_4800_Compose_DrawFreeCount      ; $590A
     add hl, bc                                    ; $590D
-    ld a, $17                                     ; $590E
+    ld a, BANK(Gfx_17_4800_Compose_DrawFreeCount) ; $590E
     ld de, $8720                                  ; $5910
     ld bc, $0020                                  ; $5913
     call Vram_CopyFromBank                        ; $5916
@@ -3479,9 +3479,9 @@ jr_006_5900:
     swap c                                        ; $591C
     sla c                                         ; $591E
     rl b                                          ; $5920
-    ld hl, $4800                                  ; $5922
+    ld hl, Gfx_17_4800_Compose_DrawFreeCount      ; $5922
     add hl, bc                                    ; $5925
-    ld a, $17                                     ; $5926
+    ld a, BANK(Gfx_17_4800_Compose_DrawFreeCount) ; $5926
     ld de, $8700                                  ; $5928
     ld bc, $0020                                  ; $592B
     call Vram_CopyFromBank                        ; $592E
@@ -4262,16 +4262,16 @@ jr_006_5db5:
     push af                                       ; $5DB5
     push bc                                       ; $5DB6
     ld a, b                                       ; $5DB7
-    ld hl, $7c20                                  ; $5DB8
+    ld hl, Gfx_11_7800_Mode18_State00_Init + $420 ; $5DB8
     ld de, $8c20                                  ; $5DBB
     call Mode18_LoadTileIndexed                   ; $5DBE
     pop bc                                        ; $5DC1
     ld a, c                                       ; $5DC2
-    ld hl, $7c50                                  ; $5DC3
+    ld hl, Gfx_11_7C40_Mode18_DrawThumbFrame + $10 ; $5DC3
     ld de, $8c50                                  ; $5DC6
     call Mode18_LoadTileIndexed                   ; $5DC9
     pop af                                        ; $5DCC
-    ld hl, $7c50                                  ; $5DCD
+    ld hl, Gfx_11_7C40_Mode18_DrawThumbFrame + $10 ; $5DCD
     call Mode18_LoadTileIndexed                   ; $5DD0
     pop hl                                        ; $5DD3
     pop bc                                        ; $5DD4
@@ -4286,7 +4286,7 @@ Mode18_LoadTileIndexed::
     ld c, a                                       ; $5DD9
     ld b, $00                                     ; $5DDA
     add hl, bc                                    ; $5DDC
-    ld a, $11                                     ; $5DDD
+    ld a, BANK(Gfx_11_7800_Mode18_State00_Init)   ; $5DDD
     ld bc, $0010                                  ; $5DDF
     call Vram_CopyFromBank                        ; $5DE2
     ret                                           ; $5DE5
@@ -4371,7 +4371,7 @@ jr_006_5e44:
     ld bc, $0800                                  ; $5E78
     call Mem_Zero                                 ; $5E7B
     ld a, $00                                     ; $5E7E
-    ld [$4000], a                                 ; $5E80
+    ld [rRAMB], a                                 ; $5E80
     ld hl, $a000                                  ; $5E83
     ld bc, $1000                                  ; $5E86
     call Mem_Zero                                 ; $5E89
@@ -4417,7 +4417,7 @@ jr_006_5e44:
     ld [wCamContrastRow], a                       ; $5F6C
     call Cam_SetGainContrast                      ; $5F6F
     ld a, $10                                     ; $5F72
-    ld [$4000], a                                 ; $5F74
+    ld [rRAMB], a                                 ; $5F74
     ld a, [wCamA000Shadow]                        ; $5F77
     set 0, a                                      ; $5F7A
     ld [$a000], a                                 ; $5F7C
@@ -4446,7 +4446,7 @@ Cam_SetGainContrast::
 Mode14_State01_LiveView::
     call Shoot_SetupCapture                       ; $5F9E
     ld a, $10                                     ; $5FA1
-    ld [$4000], a                                 ; $5FA3
+    ld [rRAMB], a                                 ; $5FA3
     ld a, [wCamA000Shadow]                        ; $5FA6
     set 0, a                                      ; $5FA9
     ld [$a000], a                                 ; $5FAB
@@ -4470,7 +4470,7 @@ Mode14_State01_LiveView::
     ld bc, $0500                                  ; $5FDD
     call Vram_CopyFromBank                        ; $5FE0
     ld a, $10                                     ; $5FE3
-    ld [$4000], a                                 ; $5FE5
+    ld [rRAMB], a                                 ; $5FE5
 
 jr_006_5fe8:
     ld hl, $a000                                  ; $5FE8
@@ -4713,9 +4713,9 @@ jr_006_61a5:
     swap c                                        ; $61A9
     sla c                                         ; $61AB
     rl b                                          ; $61AD
-    ld hl, $4800                                  ; $61AF
+    ld hl, Gfx_17_4800_Compose_DrawFreeCount      ; $61AF
     add hl, bc                                    ; $61B2
-    ld a, $17                                     ; $61B3
+    ld a, BANK(Gfx_17_4800_Compose_DrawFreeCount) ; $61B3
     ld de, $8720                                  ; $61B5
     ld bc, $0020                                  ; $61B8
     call Vram_CopyFromBank                        ; $61BB
@@ -4724,9 +4724,9 @@ jr_006_61a5:
     swap c                                        ; $61C1
     sla c                                         ; $61C3
     rl b                                          ; $61C5
-    ld hl, $4800                                  ; $61C7
+    ld hl, Gfx_17_4800_Compose_DrawFreeCount      ; $61C7
     add hl, bc                                    ; $61CA
-    ld a, $17                                     ; $61CB
+    ld a, BANK(Gfx_17_4800_Compose_DrawFreeCount) ; $61CB
     ld de, $8700                                  ; $61CD
     ld bc, $0020                                  ; $61D0
     call Vram_CopyFromBank                        ; $61D3
@@ -6440,28 +6440,28 @@ jr_006_6e15:
 ; words of the old reading, 4180 and A017, belong to the next bytes); the lists they point to run from 6E5E to 70B2
 ; (the labels at 7034 and 706C were `ld bc` sprite positions of ...
 Shoot_LoadTimerScreen_Tbl6E32::
-    dw $6e5e
-    dw $6e6d
-    dw $6e8a
-    dw $6eb5
-    dw $6ed2
-    dw $6eef
-    dw $6f0c
-    dw $6f29
-    dw $6f46
-    dw $6f63
-    dw $6f80
-    dw $6f9d
-    dw $6fba
-    dw $6fd7
-    dw $6ff4
-    dw $7011
-    dw $702e
-    dw $704b
-    dw $7068
-    dw $7085
-    dw $7094
-    dw $70a3
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $2C
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $3B
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $58
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $83
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $A0
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $BD
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $DA
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $F7
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $114
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $131
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $14E
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $16B
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $188
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $1A5
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $1C2
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $1DF
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $1FC
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $219
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $236
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $253
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $262
+    dw Shoot_LoadTimerScreen_Tbl6E32 + $271
 
     db $80, $41, $17, $a0, $89, $40, $00, $c0, $41, $17, $a0, $8a, $40, $00, $ff, $80
     db $41, $17, $a0, $89, $40, $00, $c0, $41, $17, $a0, $8a, $40, $00, $40, $41, $17
@@ -6590,9 +6590,9 @@ Shoot_DrawDigitAt::
     swap c                                        ; $7128
     sla c                                         ; $712A
     rl b                                          ; $712C
-    ld hl, Mode15_SelfTimerInterval               ; $712E
+    ld hl, Gfx_17_4000_Shoot_DrawDigitAt_Digits   ; $712E
     add hl, bc                                    ; $7131
-    ld a, $17                                     ; $7132
+    ld a, BANK(Gfx_17_4000_Shoot_DrawDigitAt_Digits) ; $7132
     ld bc, $0010                                  ; $7134
     push de                                       ; $7137
     call Shoot_CopyTileSafe                       ; $7138

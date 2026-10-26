@@ -1559,9 +1559,9 @@ Print_DrawDigitTiles::
     ld b, $00                                     ; $4B90
     sla c                                         ; $4B92
     rl b                                          ; $4B94
-    ld hl, $7180                                  ; $4B96
+    ld hl, Gfx_20_7180_Mode15_DrawTwoDigits       ; $4B96
     add hl, bc                                    ; $4B99
-    ld a, $20                                     ; $4B9A
+    ld a, BANK(Gfx_20_7180_Mode15_DrawTwoDigits)  ; $4B9A
     ld bc, $0020                                  ; $4B9C
     call Vram_CopyFromBank                        ; $4B9F
     ret                                           ; $4BA2
@@ -1966,9 +1966,9 @@ Print_LoadDigitTile::
     swap a                                        ; $4D8F
     ld c, a                                       ; $4D91
     ld b, $00                                     ; $4D92
-    ld hl, $5c70                                  ; $4D94
+    ld hl, Gfx_18_5C70_Mode1E_State00_Init        ; $4D94
     add hl, bc                                    ; $4D97
-    ld a, $18                                     ; $4D98
+    ld a, BANK(Gfx_18_5C70_Mode1E_State00_Init)   ; $4D98
     ld bc, $0010                                  ; $4D9A
     call Vram_CopyFromBank                        ; $4D9D
     ret                                           ; $4DA0
@@ -2144,9 +2144,9 @@ BorderPicker_AnimateIcon::
     swap a                                        ; $4EBE
     ld c, a                                       ; $4EC0
     ld b, $00                                     ; $4EC1
-    ld hl, $7bb0                                  ; $4EC3
+    ld hl, Src_21_7BB0_BorderPicker_AnimateIcon   ; $4EC3
     add hl, bc                                    ; $4EC6
-    ld a, $21                                     ; $4EC7
+    ld a, BANK(Src_21_7BB0_BorderPicker_AnimateIcon) ; $4EC7
     ld de, wPrintAnimPacket + $3                  ; $4EC9
     ld bc, $0010                                  ; $4ECC
     call Mem_CopyFromBank                         ; $4ECF
@@ -2675,9 +2675,9 @@ WildFramePicker_AnimateIcon::
     swap a                                        ; $5265
     ld c, a                                       ; $5267
     ld b, $00                                     ; $5268
-    ld hl, $7bb0                                  ; $526A
+    ld hl, Src_21_7BB0_BorderPicker_AnimateIcon   ; $526A
     add hl, bc                                    ; $526D
-    ld a, $21                                     ; $526E
+    ld a, BANK(Src_21_7BB0_BorderPicker_AnimateIcon) ; $526E
     ld de, wPrintAnimPacket + $3                  ; $5270
     ld bc, $0010                                  ; $5273
     call Mem_CopyFromBank                         ; $5276
@@ -3173,7 +3173,7 @@ jr_008_72db:
 ; C: SRAM $BFFD-$BFFF vs 56 56 53: carry when >= 2 bytes match
 Title_CheckCoroTag::
     ld a, $00                                     ; $72E0
-    ld [$4000], a                                 ; $72E2
+    ld [rRAMB], a                                 ; $72E2
     ld hl, $bffd                                  ; $72E5
     ld de, Title_CoroTagConst                     ; $72E8
     ld bc, $0303                                  ; $72EB
@@ -3197,7 +3197,7 @@ jr_008_72f3:
 
     push af                                       ; $72FC
     ld a, $0a                                     ; $72FD
-    ld [$0000], a                                 ; $72FF
+    ld [rRAMG], a                                 ; $72FF
     pop af                                        ; $7302
     ld hl, $bffd                                  ; $7303
     ld de, Title_CoroTagConst                     ; $7306
@@ -3212,7 +3212,7 @@ jr_008_730b:
 
     push af                                       ; $7311
     xor a                                         ; $7312
-    ld [$0000], a                                 ; $7313
+    ld [rRAMG], a                                 ; $7313
     pop af                                        ; $7316
     scf                                           ; $7317
     ret                                           ; $7318

@@ -941,7 +941,7 @@ if A.roundtrip:
         # L5: roms/jp_rev_a/src/ is what tools/make_source.py writes today, and it builds the ROM byte-exact (PNG -> 2bpp, rgbasm, rgblink, rgbfix)
         sys.path.insert(0, P('tools')); import make_source
         fresh = os.path.join(tmp, 'src')
-        ms = subprocess.run([sys.executable, 'tools/make_source.py', '--rom', A.rom, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fresh], capture_output=True, text=True)
+        ms = subprocess.run([sys.executable, 'tools/make_source.py', '--rom', A.rom, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fresh, '--report', os.path.join(tmp, 'rom_operands_jp.csv')], capture_output=True, text=True)
         if ms.returncode: bad('source', 'tools/make_source.py failed: %s' % (ms.stderr or ms.stdout)[-300:])
         else:
             m = re.search(r'(\d+) banks, (\d+) INCBIN files \((\d+) bytes, (\d+) tile blocks as PNG\), (\d+) label notes, (\d+) far pointers as labels \((\d+) left', ms.stdout)
@@ -956,6 +956,14 @@ if A.roundtrip:
                 hsrc = make_source.build(src, os.path.join(tmp, 'src_build.gb'), A.rgbds)
                 if hsrc != want: bad('source', 'roms/jp_rev_a/src/ builds md5 %s, expected %s' % (hsrc, want))
                 else: ok('source', 'roms/jp_rev_a/src/ fresh (%d files) and builds md5 %s: %s banks, %s INCBIN files (%s bytes, %s tile PNGs), %s label notes, %s far pointers as labels (%s left as numbers)' % ((len(walk(src)), hsrc) + m.groups()))
+                mo = re.search(r'ROM operands: (\d+) pointers as labels \((\d+) table words, (\d+) wrong-bank labels corrected\), (\d+) numbers \((\d+) listing labels back to numbers\), (\d+) undecided, (\d+) record words \((\d+) with their bank,[^)]*\), (\d+) labels added at code targets, (\d+) page-aligned tables', ms.stdout)
+                if not mo: bad('source', 'tools/make_source.py did not report the ROM operands')
+                elif open(os.path.join(tmp, 'rom_operands_jp.csv'), 'rb').read() != open(P('roms/jp_rev_a/disasm/rom_operands_jp.csv'), 'rb').read():
+                    bad('source', 'roms/jp_rev_a/disasm/rom_operands_jp.csv is not what tools/rom_operands.py writes; run `make source ROM=...`')
+                else:
+                    ok('source', 'ROM addresses in the code: %s pointers as labels (%s table words, %s wrong-bank labels corrected), %s numbers (%s listing labels back to numbers), %s undecided, %s record words (%s with their bank), %s labels at code targets, %s page-aligned tables; rom_operands_jp.csv fresh' % mo.groups())
+                    quoted('source operands', r'([\d,]+) pointers written as labels \(([\d,]+) of them table words\), ([\d,]+) numbers and ([\d,]+) undecided; ([\d,]+) pointer words inside data records \(([\d,]+) of them with their bank byte\), ([\d,]+) labels added at code targets and ([\d,]+) page-aligned tables',
+                           lambda mm: (tuple(int(mo.group(k)) for k in (1, 2, 4, 6, 7, 8, 9, 10)), tuple(num(g) for g in mm.groups())), docs=('README.md',), need=('README.md',))
                 mc = re.search(r'macros: farcopy (\d+), farcall (\d+), dwb (\d+), set_state (\d+), next_state (\d+), play_\* (\d+), ui_sfx (\d+), screen_off (\d+), stat_irq_off (\d+), screen_on (\d+), REPT (\d+) \((\d+) lines\)', ms.stdout)
                 ok('source', 'macros: farcopy %s, farcall %s, dwb %s, set_state %s, next_state %s, play_* %s, ui_sfx %s, screen_off %s, stat_irq_off %s, screen_on %s, REPT %s (%s lines)' % mc.groups())
                 quoted('source macros', r'`farcopy` \(([\d,]+)\), `farcall` \(([\d,]+)\), `dwb` \(([\d,]+)\), `set_state` \(([\d,]+)\), `next_state` \(([\d,]+)\), `play_sfx1` / `play_sfx3` / `play_sfx4` / `play_music` \(([\d,]+)\), `ui_sfx` \(([\d,]+)\), `screen_off` \(([\d,]+)\), `stat_irq_off` \(([\d,]+)\) and `screen_on` \(([\d,]+)\); ([\d,]+) unrolled copies are `REPT` blocks \(([\d,]+) lines\)',

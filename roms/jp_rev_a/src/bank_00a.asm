@@ -9,7 +9,7 @@ SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
 Cam_MainDispatch::
     ld [wCamBrightnessSetpoint], a                ; $4000
     ld a, $00                                     ; $4003
-    ld [$4000], a                                 ; $4005
+    ld [rRAMB], a                                 ; $4005
     ld bc, $0000                                  ; $4008
     ld de, $a320                                  ; $400B
     call Cam_PopcountSampleLoop                   ; $400E
@@ -104,7 +104,7 @@ jr_00a_406e:
 
 jr_00a_4076:
     ld a, $10                                     ; $4076
-    ld [$4000], a                                 ; $4078
+    ld [rRAMB], a                                 ; $4078
     ld a, h                                       ; $407B
     ld [wCamExposureShadow], a                    ; $407C
     ld a, l                                       ; $407F
@@ -400,7 +400,7 @@ Cam_MainDispatch_WriteExposure::
 ; corpus, modes 00 14 (tcrf_check/assets/l3_names/)
 Cam_BuildDitherMatrix::
     ld a, $10                                     ; $42BA
-    ld [$4000], a                                 ; $42BC
+    ld [rRAMB], a                                 ; $42BC
     ld a, [wCamGainCommitted]                     ; $42BF
     cp b                                          ; $42C2
     jr nz, jr_00a_42ca                            ; $42C3
@@ -823,7 +823,7 @@ Cam_FactoryTest::
     ldh [hScratchD], a                            ; $456B
     call Cam_FactoryMeasure2                      ; $456D
     ld a, $02                                     ; $4570
-    ld [$4000], a                                 ; $4572
+    ld [rRAMB], a                                 ; $4572
     ld a, [wCamCalibVector + $a]                  ; $4575
     ld b, a                                       ; $4578
     ld a, [$affc]                                 ; $4579
@@ -930,7 +930,7 @@ jr_00a_460b:
 ; C: checksum of the 12-byte vector at $AFF2 (sum+$0D; xor+$23); FF8A := 1 when valid
 Cam_Calib_ReadPrimaryCopy::
     ld a, $02                                     ; $460F
-    ld [$4000], a                                 ; $4611
+    ld [rRAMB], a                                 ; $4611
     ld hl, $aff2                                  ; $4614
     ld b, $00                                     ; $4617
     ld c, $00                                     ; $4619
@@ -975,7 +975,7 @@ jr_00a_4641:
 ; corpus, modes 00 (tcrf_check/assets/l3_names/)
 Cam_Calib_EchoCompare::
     ld a, $08                                     ; $4645
-    ld [$4000], a                                 ; $4647
+    ld [rRAMB], a                                 ; $4647
     ld hl, $bff2                                  ; $464A
     ld b, $00                                     ; $464D
     ld c, $00                                     ; $464F
@@ -1035,7 +1035,7 @@ jr_00a_467f:
     jr nz, jr_00a_469c                            ; $468D
 
     ld a, $02                                     ; $468F
-    ld [$4000], a                                 ; $4691
+    ld [rRAMB], a                                 ; $4691
     ld hl, $aff2                                  ; $4694
     call Cam_Calib_CopyFromSram                   ; $4697
     xor a                                         ; $469A
@@ -1051,11 +1051,11 @@ jr_00a_469c:
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)
 Cam_Calib_RepairPaths::
     ld a, $02                                     ; $469F
-    ld [$4000], a                                 ; $46A1
+    ld [rRAMB], a                                 ; $46A1
     ld hl, $aff2                                  ; $46A4
     call Cam_Calib_CopyFromSram                   ; $46A7
     ld a, $08                                     ; $46AA
-    ld [$4000], a                                 ; $46AC
+    ld [rRAMB], a                                 ; $46AC
     ld hl, $bff2                                  ; $46AF
     call Cam_Calib_CopyToSram                     ; $46B2
     xor a                                         ; $46B5
@@ -1064,11 +1064,11 @@ Cam_Calib_RepairPaths::
 
 jr_00a_46b7:
     ld a, $08                                     ; $46B7
-    ld [$4000], a                                 ; $46B9
+    ld [rRAMB], a                                 ; $46B9
     ld hl, $bff2                                  ; $46BC
     call Cam_Calib_CopyFromSram                   ; $46BF
     ld a, $02                                     ; $46C2
-    ld [$4000], a                                 ; $46C4
+    ld [rRAMB], a                                 ; $46C4
     ld hl, $aff2                                  ; $46C7
     call Cam_Calib_CopyToSram                     ; $46CA
     xor a                                         ; $46CD
@@ -1097,7 +1097,7 @@ jr_00a_46d4:
 ; C: writes the vector with SRAM enabled
 Cam_Calib_CopyToSram::
     ld a, $0a                                     ; $46E1
-    ld [$0000], a                                 ; $46E3
+    ld [rRAMG], a                                 ; $46E3
     ld de, wCamCalibVector                        ; $46E6
     ld b, $0c                                     ; $46E9
 
@@ -1113,7 +1113,7 @@ jr_00a_46eb:
     ldh a, [hScratchC]                            ; $46F4
     ld [hl], a                                    ; $46F6
     ld a, $00                                     ; $46F7
-    ld [$0000], a                                 ; $46F9
+    ld [rRAMG], a                                 ; $46F9
     ret                                           ; $46FC
 
 
@@ -1121,7 +1121,7 @@ jr_00a_46eb:
 ; corpus, modes 00 (tcrf_check/assets/l3_names/)
 Cam_Calib_Loader::
     ld a, $02                                     ; $46FD
-    ld [$4000], a                                 ; $46FF
+    ld [rRAMB], a                                 ; $46FF
     ld hl, $aff2                                  ; $4702
     ld b, $aa                                     ; $4705
     ld c, $0c                                     ; $4707
@@ -1135,7 +1135,7 @@ jr_00a_4709:
     jr nz, jr_00a_4709                            ; $470E
 
     ld a, $08                                     ; $4710
-    ld [$4000], a                                 ; $4712
+    ld [rRAMB], a                                 ; $4712
     ld hl, $bff2                                  ; $4715
     ld c, $0c                                     ; $4718
 
@@ -1160,7 +1160,7 @@ Cam_Calib_BootMeasureSeq::
     ldh [hScratchD], a                            ; $472A
     call Cam_ExposureBandSelect                   ; $472C
     ld a, $10                                     ; $472F
-    ld [$4000], a                                 ; $4731
+    ld [rRAMB], a                                 ; $4731
     ld a, [wCamBootMatrixRef]                     ; $4734
     ld b, a                                       ; $4737
     ld hl, $a006                                  ; $4738
@@ -1311,7 +1311,7 @@ jr_00a_482d:
 ; corpus, modes 00 (tcrf_check/assets/l3_names/)
 Cam_ExposureBandSelect::
     ld a, $10                                     ; $4859
-    ld [$4000], a                                 ; $485B
+    ld [rRAMB], a                                 ; $485B
     xor a                                         ; $485E
     ld [wCamGainSel], a                           ; $485F
 
@@ -1359,7 +1359,7 @@ jr_00a_48a8:
     jr nz, jr_00a_48a8                            ; $48AD
 
     ld a, $10                                     ; $48AF
-    ld [$4000], a                                 ; $48B1
+    ld [rRAMB], a                                 ; $48B1
     ld a, [wCamA000Shadow]                        ; $48B4
     set 0, a                                      ; $48B7
     ld [$a000], a                                 ; $48B9
@@ -1460,7 +1460,7 @@ Cam_FullCalibration::
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)
 Cam_FactoryMeasure1::
     ld a, $10                                     ; $4961
-    ld [$4000], a                                 ; $4963
+    ld [rRAMB], a                                 ; $4963
     ld b, $80                                     ; $4966
     ld hl, $a006                                  ; $4968
     ld de, $0030                                  ; $496B
@@ -1668,7 +1668,7 @@ jr_00a_496e:
 ; corpus, modes 00 (tcrf_check/assets/l3_names/)
 Cam_ORegister_SAR_Search::
     ld a, $10                                     ; $4B6A
-    ld [$4000], a                                 ; $4B6C
+    ld [rRAMB], a                                 ; $4B6C
     xor a                                         ; $4B6F
     ldh [hSarScratch], a                          ; $4B70
     ld a, $bf                                     ; $4B72
@@ -1802,7 +1802,7 @@ jr_00a_4c21:
 Cam_PixelTestHelper::
     ld h, a                                       ; $4C30
     xor a                                         ; $4C31
-    ld [$4000], a                                 ; $4C32
+    ld [rRAMB], a                                 ; $4C32
     ldh a, [hScratchC]                            ; $4C35
     ld d, a                                       ; $4C37
     ldh a, [hScratchD]                            ; $4C38
@@ -1849,14 +1849,14 @@ jr_00a_4c54:
     jr c, jr_00a_4c65                             ; $4C5B
 
     ld a, $10                                     ; $4C5D
-    ld [$4000], a                                 ; $4C5F
+    ld [rRAMB], a                                 ; $4C5F
     ld a, $01                                     ; $4C62
     ret                                           ; $4C64
 
 
 jr_00a_4c65:
     ld a, $10                                     ; $4C65
-    ld [$4000], a                                 ; $4C67
+    ld [rRAMB], a                                 ; $4C67
     xor a                                         ; $4C6A
     ret                                           ; $4C6B
 
@@ -1865,7 +1865,7 @@ jr_00a_4c65:
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)
 Cam_FactoryMeasure2::
     ld a, $10                                     ; $4C6C
-    ld [$4000], a                                 ; $4C6E
+    ld [rRAMB], a                                 ; $4C6E
     ld a, $02                                     ; $4C71
     ld [wCamA000Shadow], a                        ; $4C73
     ld a, $20                                     ; $4C76
@@ -2249,9 +2249,9 @@ jr_00a_4f45:
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)
 Cam_CommitVectorToSRAM::
     ld a, $0a                                     ; $4F58
-    ld [$0000], a                                 ; $4F5A
+    ld [rRAMG], a                                 ; $4F5A
     ld a, $02                                     ; $4F5D
-    ld [$4000], a                                 ; $4F5F
+    ld [rRAMB], a                                 ; $4F5F
     ld hl, $aff2                                  ; $4F62
     ld de, wCamCalibVector                        ; $4F65
     ld b, $00                                     ; $4F68
@@ -2281,7 +2281,7 @@ jr_00a_4f70:
     add $23                                       ; $4F87
     ld [hl], a                                    ; $4F89
     ld a, $08                                     ; $4F8A
-    ld [$4000], a                                 ; $4F8C
+    ld [rRAMB], a                                 ; $4F8C
     ld hl, $bff2                                  ; $4F8F
     ld de, wCamCalibVector                        ; $4F92
     ld b, $00                                     ; $4F95
@@ -2311,7 +2311,7 @@ jr_00a_4f9d:
     add $23                                       ; $4FB4
     ld [hl], a                                    ; $4FB6
     ld a, $00                                     ; $4FB7
-    ld [$0000], a                                 ; $4FB9
+    ld [rRAMG], a                                 ; $4FB9
     ret                                           ; $4FBC
 
 
@@ -2447,7 +2447,7 @@ jr_00a_5041:
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic
 ; corpus, modes 14 (tcrf_check/assets/l3_names/)
 Cam_PopcountSampleLoop_inner::
-    ld h, $73                                     ; $5091
+    ld h, HIGH(Cam_PopcountTable256)              ; $5091
     ld a, [de]                                    ; $5093
     inc de                                        ; $5094
     ld l, a                                       ; $5095
@@ -2456,7 +2456,7 @@ Cam_PopcountSampleLoop_inner::
     add hl, bc                                    ; $5099
     ld b, h                                       ; $509A
     ld c, l                                       ; $509B
-    ld h, $73                                     ; $509C
+    ld h, HIGH(Cam_PopcountTable256)              ; $509C
     ld a, [de]                                    ; $509E
     inc de                                        ; $509F
     ld l, a                                       ; $50A0
@@ -2474,7 +2474,7 @@ Cam_PopcountSampleLoop_inner::
 Cam_LiveInit::
     call Cam_ExposureBandSelect                   ; $50AA
     ld a, $10                                     ; $50AD
-    ld [$4000], a                                 ; $50AF
+    ld [rRAMB], a                                 ; $50AF
     ld a, $02                                     ; $50B2
     ld [wCamA000Shadow], a                        ; $50B4
     ld a, [wCamGainAlt]                           ; $50B7
@@ -2536,7 +2536,7 @@ Cam_DispatchEffect::
     ld l, b                                       ; $5413
     ld h, c                                       ; $5414
     xor a                                         ; $5415
-    ld [$4000], a                                 ; $5416
+    ld [rRAMB], a                                 ; $5416
     jp hl                                         ; $5419
 
 
@@ -2656,7 +2656,7 @@ Fx00_Copy::
 Fx01_MirrorRtoL::
     ld hl, $a180                                  ; $54E6
     ld de, wPhotoImage + $80                      ; $54E9
-    ld b, $74                                     ; $54EC
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $54EC
     ld a, $0e                                     ; $54EE
     ldh [hScratchA], a                            ; $54F0
 
@@ -2719,7 +2719,7 @@ jr_00a_5521:
 Fx02_MirrorLtoR::
     ld hl, $a100                                  ; $552E
     ld de, wPhotoImage                            ; $5531
-    ld b, $74                                     ; $5534
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5534
     ld a, $0e                                     ; $5536
     ldh [hScratchA], a                            ; $5538
 
@@ -2990,13 +2990,13 @@ jr_00a_565f:
 jr_00a_5663:
     ld a, [hl+]                                   ; $5663
     ld c, a                                       ; $5664
-    ld b, $75                                     ; $5665
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $5665
     ld a, [bc]                                    ; $5667
     ld [de], a                                    ; $5668
     ld a, e                                       ; $5669
     add $10                                       ; $566A
     ld e, a                                       ; $566C
-    ld b, $76                                     ; $566D
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $566D
     ld a, [bc]                                    ; $566F
     ld [de], a                                    ; $5670
     ld a, e                                       ; $5671
@@ -3052,7 +3052,7 @@ Fx07_Zoom2x_GroupTop::
 jr_00a_56a7:
     ld a, [hl+]                                   ; $56A7
     ld c, a                                       ; $56A8
-    ld b, $75                                     ; $56A9
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $56A9
     ld a, [bc]                                    ; $56AB
     ld [de], a                                    ; $56AC
     inc e                                         ; $56AD
@@ -3061,7 +3061,7 @@ jr_00a_56a7:
     ld a, e                                       ; $56B0
     add $0e                                       ; $56B1
     ld e, a                                       ; $56B3
-    ld b, $76                                     ; $56B4
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $56B4
     ld a, [bc]                                    ; $56B6
     ld [de], a                                    ; $56B7
     inc e                                         ; $56B8
@@ -3072,7 +3072,7 @@ jr_00a_56a7:
     ld e, a                                       ; $56BE
     ld a, [hl+]                                   ; $56BF
     ld c, a                                       ; $56C0
-    ld b, $75                                     ; $56C1
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $56C1
     ld a, [bc]                                    ; $56C3
     ld [de], a                                    ; $56C4
     inc e                                         ; $56C5
@@ -3081,7 +3081,7 @@ jr_00a_56a7:
     ld a, e                                       ; $56C8
     add $0e                                       ; $56C9
     ld e, a                                       ; $56CB
-    ld b, $76                                     ; $56CC
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $56CC
     ld a, [bc]                                    ; $56CE
     ld [de], a                                    ; $56CF
     inc e                                         ; $56D0
@@ -3105,7 +3105,7 @@ jr_00a_56a7:
 jr_00a_56e7:
     ld a, [hl+]                                   ; $56E7
     ld c, a                                       ; $56E8
-    ld b, $75                                     ; $56E9
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $56E9
     ld a, [bc]                                    ; $56EB
     ld [de], a                                    ; $56EC
     inc e                                         ; $56ED
@@ -3114,7 +3114,7 @@ jr_00a_56e7:
     ld a, e                                       ; $56F0
     add $0e                                       ; $56F1
     ld e, a                                       ; $56F3
-    ld b, $76                                     ; $56F4
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $56F4
     ld a, [bc]                                    ; $56F6
     ld [de], a                                    ; $56F7
     inc e                                         ; $56F8
@@ -3125,7 +3125,7 @@ jr_00a_56e7:
     ld e, a                                       ; $56FE
     ld a, [hl+]                                   ; $56FF
     ld c, a                                       ; $5700
-    ld b, $75                                     ; $5701
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $5701
     ld a, [bc]                                    ; $5703
     ld [de], a                                    ; $5704
     inc e                                         ; $5705
@@ -3134,7 +3134,7 @@ jr_00a_56e7:
     ld a, e                                       ; $5708
     add $0e                                       ; $5709
     ld e, a                                       ; $570B
-    ld b, $76                                     ; $570C
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $570C
     ld a, [bc]                                    ; $570E
     ld [de], a                                    ; $570F
     inc e                                         ; $5710
@@ -3179,7 +3179,7 @@ jr_00a_572d:
 Fx08_Reduce2xTile2x2::
     ld hl, $a100                                  ; $573C
     ld de, wPhotoImage                            ; $573F
-    ld b, $79                                     ; $5742
+    ld b, HIGH(Cam_ReduceTbl_Lo)                  ; $5742
     ld a, $07                                     ; $5744
     ldh [hScratchA], a                            ; $5746
 
@@ -3756,7 +3756,7 @@ Fx1F_Nop::
 Fx20_FlipH::
     ld hl, $a100                                  ; $5ABD
     ld de, wPhotoImage + $f0                      ; $5AC0
-    ld b, $74                                     ; $5AC3
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5AC3
     ld a, $0e                                     ; $5AC5
     ldh [hScratchA], a                            ; $5AC7
 
@@ -3893,7 +3893,7 @@ jr_00a_5b4c:
     ld a, [hl+]                                   ; $5B4C
     push hl                                       ; $5B4D
     ld l, a                                       ; $5B4E
-    ld h, $74                                     ; $5B4F
+    ld h, HIGH(Cam_BitReverseTbl)                 ; $5B4F
     ld a, [hl]                                    ; $5B51
     pop hl                                        ; $5B52
     ld [de], a                                    ; $5B53
@@ -3903,7 +3903,7 @@ jr_00a_5b4c:
     ld a, [hl+]                                   ; $5B57
     push hl                                       ; $5B58
     ld l, a                                       ; $5B59
-    ld h, $74                                     ; $5B5A
+    ld h, HIGH(Cam_BitReverseTbl)                 ; $5B5A
     ld a, [hl]                                    ; $5B5C
     pop hl                                        ; $5B5D
     ld [de], a                                    ; $5B5E
@@ -3961,7 +3961,7 @@ jr_00a_5b9b:
     ld a, [hl+]                                   ; $5B9B
     push hl                                       ; $5B9C
     ld l, a                                       ; $5B9D
-    ld h, $74                                     ; $5B9E
+    ld h, HIGH(Cam_BitReverseTbl)                 ; $5B9E
     ld a, [hl]                                    ; $5BA0
     pop hl                                        ; $5BA1
     ld [de], a                                    ; $5BA2
@@ -3971,7 +3971,7 @@ jr_00a_5b9b:
     ld a, [hl+]                                   ; $5BA6
     push hl                                       ; $5BA7
     ld l, a                                       ; $5BA8
-    ld h, $74                                     ; $5BA9
+    ld h, HIGH(Cam_BitReverseTbl)                 ; $5BA9
     ld a, [hl]                                    ; $5BAB
     pop hl                                        ; $5BAC
     ld [de], a                                    ; $5BAD
@@ -4013,7 +4013,7 @@ jr_00a_5bc7:
 Fx25_StretchV2x_OnFlipH::
     ld hl, $a400                                  ; $5BD5
     ld de, wPhotoImage + $f0                      ; $5BD8
-    ld b, $74                                     ; $5BDB
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5BDB
     ld a, $07                                     ; $5BDD
     ldh [hScratchA], a                            ; $5BDF
 
@@ -4118,13 +4118,13 @@ jr_00a_5c48:
 jr_00a_5c4c:
     ld a, [hl+]                                   ; $5C4C
     ld c, a                                       ; $5C4D
-    ld b, $77                                     ; $5C4E
+    ld b, HIGH(Cam_ZoomX2Mirror_HiTbl)            ; $5C4E
     ld a, [bc]                                    ; $5C50
     ld [de], a                                    ; $5C51
     ld a, e                                       ; $5C52
     sub $10                                       ; $5C53
     ld e, a                                       ; $5C55
-    ld b, $78                                     ; $5C56
+    ld b, HIGH(Cam_ZoomX2Mirror_LoTbl)            ; $5C56
     ld a, [bc]                                    ; $5C58
     ld [de], a                                    ; $5C59
     ld a, e                                       ; $5C5A
@@ -4181,7 +4181,7 @@ Fx27_Zoom2x_OnFlipH_GroupTop::
 jr_00a_5c92:
     ld a, [hl+]                                   ; $5C92
     ld c, a                                       ; $5C93
-    ld b, $77                                     ; $5C94
+    ld b, HIGH(Cam_ZoomX2Mirror_HiTbl)            ; $5C94
     ld a, [bc]                                    ; $5C96
     ld [de], a                                    ; $5C97
     inc e                                         ; $5C98
@@ -4190,7 +4190,7 @@ jr_00a_5c92:
     ld a, e                                       ; $5C9B
     sub $12                                       ; $5C9C
     ld e, a                                       ; $5C9E
-    ld b, $78                                     ; $5C9F
+    ld b, HIGH(Cam_ZoomX2Mirror_LoTbl)            ; $5C9F
     ld a, [bc]                                    ; $5CA1
     ld [de], a                                    ; $5CA2
     inc e                                         ; $5CA3
@@ -4201,7 +4201,7 @@ jr_00a_5c92:
     ld e, a                                       ; $5CA9
     ld a, [hl+]                                   ; $5CAA
     ld c, a                                       ; $5CAB
-    ld b, $77                                     ; $5CAC
+    ld b, HIGH(Cam_ZoomX2Mirror_HiTbl)            ; $5CAC
     ld a, [bc]                                    ; $5CAE
     ld [de], a                                    ; $5CAF
     inc e                                         ; $5CB0
@@ -4210,7 +4210,7 @@ jr_00a_5c92:
     ld a, e                                       ; $5CB3
     sub $12                                       ; $5CB4
     ld e, a                                       ; $5CB6
-    ld b, $78                                     ; $5CB7
+    ld b, HIGH(Cam_ZoomX2Mirror_LoTbl)            ; $5CB7
     ld a, [bc]                                    ; $5CB9
     ld [de], a                                    ; $5CBA
     inc e                                         ; $5CBB
@@ -4234,7 +4234,7 @@ jr_00a_5c92:
 jr_00a_5cd2:
     ld a, [hl+]                                   ; $5CD2
     ld c, a                                       ; $5CD3
-    ld b, $77                                     ; $5CD4
+    ld b, HIGH(Cam_ZoomX2Mirror_HiTbl)            ; $5CD4
     ld a, [bc]                                    ; $5CD6
     ld [de], a                                    ; $5CD7
     inc e                                         ; $5CD8
@@ -4243,7 +4243,7 @@ jr_00a_5cd2:
     ld a, e                                       ; $5CDB
     sub $12                                       ; $5CDC
     ld e, a                                       ; $5CDE
-    ld b, $78                                     ; $5CDF
+    ld b, HIGH(Cam_ZoomX2Mirror_LoTbl)            ; $5CDF
     ld a, [bc]                                    ; $5CE1
     ld [de], a                                    ; $5CE2
     inc e                                         ; $5CE3
@@ -4254,7 +4254,7 @@ jr_00a_5cd2:
     ld e, a                                       ; $5CE9
     ld a, [hl+]                                   ; $5CEA
     ld c, a                                       ; $5CEB
-    ld b, $77                                     ; $5CEC
+    ld b, HIGH(Cam_ZoomX2Mirror_HiTbl)            ; $5CEC
     ld a, [bc]                                    ; $5CEE
     ld [de], a                                    ; $5CEF
     inc e                                         ; $5CF0
@@ -4263,7 +4263,7 @@ jr_00a_5cd2:
     ld a, e                                       ; $5CF3
     sub $12                                       ; $5CF4
     ld e, a                                       ; $5CF6
-    ld b, $78                                     ; $5CF7
+    ld b, HIGH(Cam_ZoomX2Mirror_LoTbl)            ; $5CF7
     ld a, [bc]                                    ; $5CF9
     ld [de], a                                    ; $5CFA
     inc e                                         ; $5CFB
@@ -4308,7 +4308,7 @@ jr_00a_5d18:
 Fx28_Reduce2xTile2x2_FlipH::
     ld hl, $a100                                  ; $5D27
     ld de, wPhotoImage + $70                      ; $5D2A
-    ld b, $7a                                     ; $5D2D
+    ld b, HIGH(Cam_ReduceTbl_Hi)                  ; $5D2D
     ld a, $07                                     ; $5D2F
     ldh [hScratchA], a                            ; $5D31
 
@@ -4553,7 +4553,7 @@ Fx2C_Reduce2xQuadBR_FlipH::
 Fx2D_CopyLeftHalf_OnFlipH::
     ld hl, $a180                                  ; $5E40
     ld de, wPhotoImage + $70                      ; $5E43
-    ld b, $74                                     ; $5E46
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5E46
     ld a, $0e                                     ; $5E48
     ldh [hScratchA], a                            ; $5E4A
 
@@ -4609,7 +4609,7 @@ jr_00a_5e72:
 Fx2E_CopyRightHalf_OnFlipH::
     ld hl, $a100                                  ; $5E7F
     ld de, wPhotoImage + $f0                      ; $5E82
-    ld b, $74                                     ; $5E85
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5E85
     ld a, $0e                                     ; $5E87
     ldh [hScratchA], a                            ; $5E89
 
@@ -4665,7 +4665,7 @@ jr_00a_5eb1:
 Fx2F_CopyTopHalf_OnFlipH::
     ld hl, $a100                                  ; $5EBF
     ld de, wPhotoImage + $f0                      ; $5EC2
-    ld b, $74                                     ; $5EC5
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5EC5
     ld a, $07                                     ; $5EC7
     ldh [hScratchA], a                            ; $5EC9
 
@@ -4720,7 +4720,7 @@ jr_00a_5ef1:
 Fx30_CopyBottomHalf_OnFlipH::
     ld hl, $a800                                  ; $5EFC
     ld de, wPhotoImage + $7f0                     ; $5EFF
-    ld b, $74                                     ; $5F02
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5F02
     ld a, $07                                     ; $5F04
     ldh [hScratchA], a                            ; $5F06
 
@@ -4775,7 +4775,7 @@ jr_00a_5f2e:
 Fx31_CopyQuads_TR_BL_OnFlipH::
     ld hl, $a100                                  ; $5F39
     ld de, wPhotoImage + $f0                      ; $5F3C
-    ld b, $74                                     ; $5F3F
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5F3F
     ld a, $07                                     ; $5F41
     ldh [hScratchA], a                            ; $5F43
 
@@ -4828,7 +4828,7 @@ jr_00a_5f6b:
 jr_00a_5f7a:
     ld hl, $a880                                  ; $5F7A
     ld de, wPhotoImage + $770                     ; $5F7D
-    ld b, $74                                     ; $5F80
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5F80
     ld a, $07                                     ; $5F82
     ldh [hScratchA], a                            ; $5F84
 
@@ -4883,7 +4883,7 @@ jr_00a_5fac:
 Fx32_CopyQuads_TR_BL_BR_OnFlipH::
     ld hl, $a100                                  ; $5FB9
     ld de, wPhotoImage + $f0                      ; $5FBC
-    ld b, $74                                     ; $5FBF
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $5FBF
     ld a, $07                                     ; $5FC1
     ldh [hScratchA], a                            ; $5FC3
 
@@ -4936,7 +4936,7 @@ jr_00a_5feb:
 jr_00a_5ffa:
     ld hl, $a800                                  ; $5FFA
     ld de, wPhotoImage + $7f0                     ; $5FFD
-    ld b, $74                                     ; $6000
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $6000
     ld a, $07                                     ; $6002
     ldh [hScratchA], a                            ; $6004
 
@@ -4990,7 +4990,7 @@ jr_00a_602c:
 Fx33_CopyTop10Rows_OnFlipH::
     ld hl, $a100                                  ; $6037
     ld de, wPhotoImage + $f0                      ; $603A
-    ld b, $74                                     ; $603D
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $603D
     ld a, $0a                                     ; $603F
     ldh [hScratchA], a                            ; $6041
 
@@ -5045,7 +5045,7 @@ jr_00a_6069:
 Fx34_CopyBottom4Rows_OnFlipH::
     ld hl, $ab00                                  ; $6074
     ld de, wPhotoImage + $af0                     ; $6077
-    ld b, $74                                     ; $607A
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $607A
     ld a, $04                                     ; $607C
     ldh [hScratchA], a                            ; $607E
 
@@ -5099,7 +5099,7 @@ jr_00a_60a6:
 Fx35_CopyTop4Rows_OnFlipH::
     ld hl, $a100                                  ; $60B1
     ld de, wPhotoImage + $f0                      ; $60B4
-    ld b, $74                                     ; $60B7
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $60B7
     ld a, $04                                     ; $60B9
     ldh [hScratchA], a                            ; $60BB
 
@@ -5153,7 +5153,7 @@ jr_00a_60e3:
 Fx36_CopyBottom10Rows_OnFlipH::
     ld hl, $a500                                  ; $60EE
     ld de, wPhotoImage + $4f0                     ; $60F1
-    ld b, $74                                     ; $60F4
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $60F4
     ld a, $0a                                     ; $60F6
     ldh [hScratchA], a                            ; $60F8
 
@@ -5208,7 +5208,7 @@ jr_00a_6120:
 Fx37_CopyWindow_OnFlipH::
     ld hl, $a430                                  ; $612B
     ld de, wPhotoImage + $3c0                     ; $612E
-    ld b, $74                                     ; $6131
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $6131
     ld a, $08                                     ; $6133
     ldh [hScratchA], a                            ; $6135
 
@@ -5265,7 +5265,7 @@ jr_00a_615d:
 Fx38_CopyQuadBR_OnFlipH::
     ld hl, $a800                                  ; $616B
     ld de, wPhotoImage + $7f0                     ; $616E
-    ld b, $74                                     ; $6171
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $6171
     ld a, $07                                     ; $6173
     ldh [hScratchA], a                            ; $6175
 
@@ -5456,7 +5456,7 @@ jr_00a_620d:
 Fx41_MirrorRtoL_OnFlipV::
     ld hl, $a180                                  ; $621B
     ld de, wPhotoImage + $d8e                     ; $621E
-    ld b, $74                                     ; $6221
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $6221
     ld a, $0e                                     ; $6223
     ldh [hScratchA], a                            ; $6225
 
@@ -5524,7 +5524,7 @@ jr_00a_625c:
 Fx42_MirrorLtoR_OnFlipV::
     ld hl, $a100                                  ; $6269
     ld de, wPhotoImage + $d0e                     ; $626C
-    ld b, $74                                     ; $626F
+    ld b, HIGH(Cam_BitReverseTbl)                 ; $626F
     ld a, $0e                                     ; $6271
     ldh [hScratchA], a                            ; $6273
 
@@ -5692,25 +5692,25 @@ jr_00a_6326:
 jr_00a_632a:
     ld a, [hl+]                                   ; $632A
     ld c, a                                       ; $632B
-    ld b, $75                                     ; $632C
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $632C
     ld a, [bc]                                    ; $632E
     ld [de], a                                    ; $632F
     ld a, e                                       ; $6330
     add $10                                       ; $6331
     ld e, a                                       ; $6333
-    ld b, $76                                     ; $6334
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $6334
     ld a, [bc]                                    ; $6336
     ld [de], a                                    ; $6337
     inc e                                         ; $6338
     ld a, [hl+]                                   ; $6339
     ld c, a                                       ; $633A
-    ld b, $76                                     ; $633B
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $633B
     ld a, [bc]                                    ; $633D
     ld [de], a                                    ; $633E
     ld a, e                                       ; $633F
     sub $10                                       ; $6340
     ld e, a                                       ; $6342
-    ld b, $75                                     ; $6343
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $6343
     ld a, [bc]                                    ; $6345
     ld [de], a                                    ; $6346
     dec e                                         ; $6347
@@ -5766,7 +5766,7 @@ Fx47_Zoom2x_FlipV_GroupTop::
 jr_00a_637c:
     ld a, [hl+]                                   ; $637C
     ld c, a                                       ; $637D
-    ld b, $75                                     ; $637E
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $637E
     ld a, [bc]                                    ; $6380
     ld [de], a                                    ; $6381
     inc e                                         ; $6382
@@ -5775,7 +5775,7 @@ jr_00a_637c:
     ld a, e                                       ; $6385
     add $0e                                       ; $6386
     ld e, a                                       ; $6388
-    ld b, $76                                     ; $6389
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $6389
     ld a, [bc]                                    ; $638B
     ld [de], a                                    ; $638C
     inc e                                         ; $638D
@@ -5786,7 +5786,7 @@ jr_00a_637c:
     ld e, a                                       ; $6393
     ld a, [hl+]                                   ; $6394
     ld c, a                                       ; $6395
-    ld b, $75                                     ; $6396
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $6396
     ld a, [bc]                                    ; $6398
     ld [de], a                                    ; $6399
     inc e                                         ; $639A
@@ -5795,7 +5795,7 @@ jr_00a_637c:
     ld a, e                                       ; $639D
     add $0e                                       ; $639E
     ld e, a                                       ; $63A0
-    ld b, $76                                     ; $63A1
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $63A1
     ld a, [bc]                                    ; $63A3
     ld [de], a                                    ; $63A4
     inc e                                         ; $63A5
@@ -5819,7 +5819,7 @@ jr_00a_637c:
 jr_00a_63bc:
     ld a, [hl+]                                   ; $63BC
     ld c, a                                       ; $63BD
-    ld b, $75                                     ; $63BE
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $63BE
     ld a, [bc]                                    ; $63C0
     ld [de], a                                    ; $63C1
     inc e                                         ; $63C2
@@ -5828,7 +5828,7 @@ jr_00a_63bc:
     ld a, e                                       ; $63C5
     add $0e                                       ; $63C6
     ld e, a                                       ; $63C8
-    ld b, $76                                     ; $63C9
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $63C9
     ld a, [bc]                                    ; $63CB
     ld [de], a                                    ; $63CC
     inc e                                         ; $63CD
@@ -5839,7 +5839,7 @@ jr_00a_63bc:
     ld e, a                                       ; $63D3
     ld a, [hl+]                                   ; $63D4
     ld c, a                                       ; $63D5
-    ld b, $75                                     ; $63D6
+    ld b, HIGH(Cam_ZoomX2_HiTbl)                  ; $63D6
     ld a, [bc]                                    ; $63D8
     ld [de], a                                    ; $63D9
     inc e                                         ; $63DA
@@ -5848,7 +5848,7 @@ jr_00a_63bc:
     ld a, e                                       ; $63DD
     add $0e                                       ; $63DE
     ld e, a                                       ; $63E0
-    ld b, $76                                     ; $63E1
+    ld b, HIGH(Cam_ZoomX2_LoTbl)                  ; $63E1
     ld a, [bc]                                    ; $63E3
     ld [de], a                                    ; $63E4
     inc e                                         ; $63E5
@@ -5893,7 +5893,7 @@ jr_00a_6402:
 Fx48_Reduce2xTile2x2_FlipV::
     ld hl, $a100                                  ; $6411
     ld de, wPhotoImage + $60e                     ; $6414
-    ld b, $79                                     ; $6417
+    ld b, HIGH(Cam_ReduceTbl_Lo)                  ; $6417
     ld a, $07                                     ; $6419
     ldh [hScratchA], a                            ; $641B
 
@@ -6899,7 +6899,7 @@ Fx5F_Nop::
 ; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce ...
 FxShared_ReduceBody_G0::
     ld hl, $a100                                  ; $6866
-    ld b, $79                                     ; $6869
+    ld b, HIGH(Cam_ReduceTbl_Lo)                  ; $6869
     ld a, $07                                     ; $686B
     ldh [hScratchA], a                            ; $686D
 
@@ -7034,7 +7034,7 @@ jr_00a_68f5:
 ; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce table
 FxShared_ReduceBody_G1::
     ld hl, $a100                                  ; $6906
-    ld b, $7a                                     ; $6909
+    ld b, HIGH(Cam_ReduceTbl_Hi)                  ; $6909
     ld a, $07                                     ; $690B
     ldh [hScratchA], a                            ; $690D
 
@@ -7172,7 +7172,7 @@ jr_00a_6999:
 ; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce ...
 FxShared_ReduceBody_G2::
     ld hl, $a100                                  ; $69AA
-    ld b, $79                                     ; $69AD
+    ld b, HIGH(Cam_ReduceTbl_Lo)                  ; $69AD
     ld a, $07                                     ; $69AF
     ldh [hScratchA], a                            ; $69B1
 
@@ -7354,7 +7354,7 @@ Cam_FactoryDiag_AllButtonsExceptB::
     farcopy Mem_CopyFromBank, Gfx_24_57E0_Unused_Link_LoadTiles, $9000, $0300 ; $6A95
     farcopy Mem_CopyFromBank, Map_25_5840_Cam_FactoryDiag_AllButtonsExceptB, $9800, $0240 ; $6AA3
     ld a, $02                                     ; $6AB1
-    ld [$4000], a                                 ; $6AB3
+    ld [rRAMB], a                                 ; $6AB3
     ld hl, $982f                                  ; $6AB6
     ld a, [$aff0]                                 ; $6AB9
     call Cam_FactoryDiag_HexDigitWrite            ; $6ABC
@@ -7476,35 +7476,43 @@ Cam_FactoryDiag_StoreWaitScreen::
 ; C: table[i] = number of set bits of i (256 bytes, README 5); read with ld h,3 by Cam_PopcountSampleLoop_inner
 ; (0A:5091, 509C)
 Cam_PopcountTable256::
+    ASSERT LOW(Cam_PopcountTable256) == 0 ; read as a page: HIGH(Cam_PopcountTable256) with the index in the low byte
     INCBIN "data/bank_0a/Cam_PopcountTable256.bin" ; $7300, 256 bytes
 ; C: table[i] = bit-reversed byte i (horizontal mirror of 8 pixels); read with ld b,4 by the 20 MirrorCopy effect
 ; handlers (Fx01, Fx02, Fx20, Fx25, Fx2D-Fx38, Fx41, Fx42) and by Fx23 / Fx24
 Cam_BitReverseTbl::
+    ASSERT LOW(Cam_BitReverseTbl) == 0 ; read as a page: HIGH(Cam_BitReverseTbl) with the index in the low byte
     INCBIN "data/bank_0a/Cam_BitReverseTbl.bin" ; $7400, 256 bytes
 ; C: table[c] = high nibble of c with every bit doubled (4 pixels -> 8 pixels, 16 groups of 16 equal bytes); first
 ; output byte of Fx06 / Fx07 / Fx46 / Fx47 (ld b,5); Fx06 re-simulated byte for byte against the core (3,584 cells)
 Cam_ZoomX2_HiTbl::
+    ASSERT LOW(Cam_ZoomX2_HiTbl) == 0 ; read as a page: HIGH(Cam_ZoomX2_HiTbl) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ZoomX2_HiTbl.bin" ; $7500, 256 bytes
 ; C: table[c] = low nibble of c with every bit doubled (period 16); second output byte, 16 bytes further, of Fx06 /
 ; Fx07 / Fx46 / Fx47 (ld b,6)
 Cam_ZoomX2_LoTbl::
+    ASSERT LOW(Cam_ZoomX2_LoTbl) == 0 ; read as a page: HIGH(Cam_ZoomX2_LoTbl) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ZoomX2_LoTbl.bin" ; $7600, 256 bytes
 ; C: table[c] = high nibble of c, bits in reverse order, every bit doubled (16 groups of 16 bytes; byte 0A:774D is $C0
 ; where the pattern gives $0C, a single odd byte in the ROM); first output byte of the mirrored zoom Fx26 / Fx27 (ld
 ; b,7); Fx26 re-simulated byte for byte against the core
 Cam_ZoomX2Mirror_HiTbl::
+    ASSERT LOW(Cam_ZoomX2Mirror_HiTbl) == 0 ; read as a page: HIGH(Cam_ZoomX2Mirror_HiTbl) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ZoomX2Mirror_HiTbl.bin" ; $7700, 256 bytes
 ; C: table[c] = low nibble of c, bits in reverse order, every bit doubled (period 16); second output byte (16 bytes
 ; before) of Fx26 / Fx27 (ld b,8)
 Cam_ZoomX2Mirror_LoTbl::
+    ASSERT LOW(Cam_ZoomX2Mirror_LoTbl) == 0 ; read as a page: HIGH(Cam_ZoomX2Mirror_LoTbl) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ZoomX2Mirror_LoTbl.bin" ; $7800, 256 bytes
 ; C: bit decimation (every other bit pair). L3 pass 2026-10-26: not reached by the 206 BGB replays; read in the
 ; organic runs of the core emulator (coverage/results/merged_state/cov.npz, first read in mode 14)
 Cam_ReduceTbl_Lo::
+    ASSERT LOW(Cam_ReduceTbl_Lo) == 0 ; read as a page: HIGH(Cam_ReduceTbl_Lo) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ReduceTbl_Lo.bin" ; $7900, 256 bytes
 ; C: same as 7900 shifted by 2 bits. L3 pass 2026-10-26: not reached by the 206 BGB replays; read in the organic runs
 ; of the core emulator (coverage/results/merged_state/cov.npz, first read in mode 14)
 Cam_ReduceTbl_Hi::
+    ASSERT LOW(Cam_ReduceTbl_Hi) == 0 ; read as a page: HIGH(Cam_ReduceTbl_Hi) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ReduceTbl_Hi.bin" ; $7A00, 256 bytes
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 71 replay(s) of the organic
 ; corpus, modes 14 (tcrf_check/assets/l3_names/)

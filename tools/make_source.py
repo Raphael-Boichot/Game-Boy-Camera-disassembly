@@ -13,6 +13,7 @@ writes the word / far-pointer tables, the RAM names, the constants, the state na
 Everything in src/ is overwritten: edit the tables of roms/jp_rev_a/disasm/ and run this again, or edit src/ by hand and stop regenerating it.
 `--check` assembles the new tree with rgbasm / rgblink / rgbfix (rgbds 1.0.4 in PATH, or RGBDS=dir) and requires md5 fdcfe686cf4df461e870b6e53b2b5a8b.
 The Makefile at the top of the repository builds it: `make` (build/jp_rev_a/pocketcamera_jp.gb), `make check`, `make source ROM=... MGBDIS=...`."""
+import sys as _s; _s.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
 import argparse, csv, hashlib, os, re, shutil, subprocess, sys, tempfile, textwrap
 
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
@@ -200,12 +201,13 @@ SND = {'call Snd_Sfx1': 'play_sfx1', 'call Snd_Sfx3': 'play_sfx3', 'call Snd_Sfx
 FIXED = (('screen_off', ('call Pal_FadeOut', 'call Lcd_Off')), ('stat_irq_off', ('ld hl, hStatShadow', 'res 6, [hl]', 'ld hl, rIE', 'res 1, [hl]')),
          ('screen_on', ('call Oam_ClearShadow', 'call Pal_AllWhite', 'call Lcd_On')))
 UNROLL = ('ld a, [hl+]', 'ld [de], a', 'inc e')
+MBC = {'0000': 'rRAMG', '2000': 'rROMB0', '4000': 'rRAMB'}
 COPIERS = ('Mem_CopyFromBank', 'Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4')
 
 
 def use_macros(out):
     """Rewrite the five patterns of MACROS (on adjacent lines only, so no label can sit inside one); the first line's address comment stays."""
-    cnt = dict(farcopy=0, farcall=0, dwb=0, set_state=0, next_state=0, play=0, ui_sfx=0, screen_off=0, stat_irq_off=0, screen_on=0, rept=0, rept_lines=0)
+    cnt = dict(farcopy=0, farcall=0, dwb=0, set_state=0, next_state=0, play=0, ui_sfx=0, screen_off=0, stat_irq_off=0, screen_on=0, rept=0, rept_lines=0, mbc=0)
     def code(l): return l.split(';')[0].strip()
     def addr(l): m = re.search(r'; \$[0-9A-F]{4}', l); return m.group(0) if m else ''
     def put(text, l): return ('    ' + text).ljust(49) + ' ' + addr(l) if addr(l) else '    ' + text
@@ -239,6 +241,10 @@ def use_macros(out):
             if n >= 4:                                   # an unrolled copy: REPT, the address of its first byte and the length
                 R += [put('REPT %d' % n, L[i]), '        ld a, [hl+]', '        ld [de], a', '        inc e', '    ENDR' + ' ' * 41 + '; %d copies of 3 bytes' % n]
                 cnt['rept'] += 1; cnt['rept_lines'] += 3 * n; i += 3 * n; continue
+            mm = re.match(r'^(\s+ld \[)\$(0000|2000|4000)(\], a)(.*)$', L[i])
+            if mm:                                    # the MBC registers (hardware.inc): RAM enable, ROM bank, RAM bank / camera registers
+                R.append(put('ld [%s], a' % MBC[mm.group(2)], L[i]))
+                cnt['mbc'] += 1; i += 1; continue
             R.append(L[i]); i += 1
         open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(R))
     open(os.path.join(out, 'macros.inc'), 'w', encoding='utf-8', newline='\n').write(MACROS)
@@ -249,6 +255,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--rom', required=True); ap.add_argument('--mgbdis', default=os.environ.get('MGBDIS', '/home/claude/tc/mgbdis/mgbdis.py'))
     ap.add_argument('--out', default=os.path.join(JP, 'src')); ap.add_argument('--check', action='store_true'); ap.add_argument('--rgbds', default=os.environ.get('RGBDS'))
+    ap.add_argument('--report', default=os.path.join(JP, 'disasm', 'rom_operands_jp.csv'), help='the operand decisions (tools/rom_operands.py)')
     a = ap.parse_args()
     rom = open(a.rom, 'rb').read()
     if hashlib.md5(rom).hexdigest() != MD5: sys.exit('make_source: %s is not the Pocket Camera (Japan) (Rev A) ROM (md5 %s)' % (a.rom, MD5))
@@ -323,7 +330,10 @@ def main():
                 line = re.sub(r';\s*\$([0-9a-f]{4}):(?: \$[0-9a-f]{2})+\s*$', lambda mm: '; $' + mm.group(1).upper(), line)
                 outl.append(line.rstrip()); i += 1
             open(os.path.join(out, f), 'w', encoding='utf-8', newline='\n').write('\n'.join(outl).rstrip('\n') + '\n')
-        stats.update(far_labels(out)); stats.update(use_macros(out))
+        stats.update(far_labels(out))
+        import rom_operands
+        stats.setdefault('label_to_num', 0); stats.update(rom_operands.apply(out, os.path.join(JP, 'pocketcamera_jp.sym'), rom, os.path.join(REPO, 'coverage', 'results', 'merged_state', 'cov.npz'), a.report))
+        stats.update(use_macros(out))
         open(os.path.join(out, 'gfx.mk'), 'w', newline='\n').write('# Written by tools/make_source.py: one rule per tile PNG (width 16 tiles; -x = blank tiles at the end of the last row).\n'
                                                                   'GFX := %s\n\n%s\n' % (' '.join('$(BUILD)/' + g.split(':')[0][9:] for g in gfx), '\n\n'.join(gfx)))
         for inc in ('hardware.inc', 'ram_jp.inc', 'const_jp.inc', 'charmap_jp.inc'):
@@ -333,7 +343,7 @@ def main():
              '; The editable source tree (L5), written by tools/make_source.py; build it with `make` at the top of the repository.', ''] + [l for l in g if l.startswith('INCLUDE')]
         g.insert(g.index('INCLUDE "charmap_jp.inc"') + 1, 'INCLUDE "macros.inc"')
         open(os.path.join(out, 'game.asm'), 'w', encoding='utf-8', newline='\n').write('\n'.join(g) + '\n')
-        print('make_source: %(banks)d banks, %(incbin)d INCBIN files (%(incbin_bytes)d bytes, %(png)d tile blocks as PNG), %(notes)d label notes, %(far)d far pointers as labels (%(far_left)d left as numbers); macros: farcopy %(farcopy)d, farcall %(farcall)d, dwb %(dwb)d, set_state %(set_state)d, next_state %(next_state)d, play_* %(play)d, ui_sfx %(ui_sfx)d, screen_off %(screen_off)d, stat_irq_off %(stat_irq_off)d, screen_on %(screen_on)d, REPT %(rept)d (%(rept_lines)d lines) ->' % stats, os.path.relpath(out, REPO))
+        print('make_source: %(banks)d banks, %(incbin)d INCBIN files (%(incbin_bytes)d bytes, %(png)d tile blocks as PNG), %(notes)d label notes, %(far)d far pointers as labels (%(far_left)d left as numbers); ROM operands: %(ptr)d pointers as labels (%(ptr_table_words)d table words, %(wrong_bank)d wrong-bank labels corrected), %(num)d numbers (%(label_to_num)d listing labels back to numbers), %(undecided)d undecided, %(rec_words)d record words (%(rec_far)d with their bank, %(rec_stride)d unread records of the same tables; %(rec_outside)d outside plain byte blocks, %(rec_offset)d inside a block left as numbers, %(rec_out_of_table)d read past the end of their table), %(code_labels)d labels added at code targets, %(aligned)d page-aligned tables; macros: farcopy %(farcopy)d, farcall %(farcall)d, dwb %(dwb)d, set_state %(set_state)d, next_state %(next_state)d, play_* %(play)d, ui_sfx %(ui_sfx)d, screen_off %(screen_off)d, stat_irq_off %(stat_irq_off)d, screen_on %(screen_on)d, REPT %(rept)d (%(rept_lines)d lines); %(mbc)d MBC writes as rRAMG / rROMB0 / rRAMB ->' % stats, os.path.relpath(out, REPO))
         if a.check:
             md5 = build(out, os.path.join(tmp, 'check.gb'), a.rgbds)
             print('make_source: rebuilt md5', md5, 'OK' if md5 == MD5 else 'DIFFERS')
