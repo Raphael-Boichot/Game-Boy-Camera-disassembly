@@ -41,6 +41,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
 ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
 ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of roms/jp_rev_a/disasm/ram_names_jp.csv and add roms/jp_rev_a/disasm/ram_jp.inc to the listing')
+ap.add_argument('--far-helpers', default=None, help='comma-separated hex bank-0 addresses of the banked helpers of another build (default: the Japanese 0450,0479,0586,05F8,069F,08BB,08C1)')
 ap.add_argument('--ram-names', default=None); ap.add_argument('--ram-access', default=None); ap.add_argument('--ram-exclude', default=None)
 ap.add_argument('--const', action='store_true', help='write the values of the constant groups (modes, key masks, LCDC / IE / SC / P1 flags) with their names; implies --ram')
 ap.add_argument('--const-names', default=None); ap.add_argument('--const-types', default=None); ap.add_argument('--const-tables', default=None); ap.add_argument('--const-sounds', default=None)
@@ -57,6 +58,7 @@ for k, n in T['code'].items():
     if n > 0: code[int(b, 16)][int(ad, 16)] = n
 PREV = {(cb, ca + n): ca for cb, m in code.items() for ca, n in m.items()}
 FAR_HELPERS = {0x0450, 0x0479, 0x0586, 0x05F8, 0x069F, 0x08BB, 0x08C1}
+if a.far_helpers: FAR_HELPERS = {int(x, 16) for x in a.far_helpers.split(',')}          # another build: the same helpers at their own addresses
 # ---- symbols
 bynm = {}; byad = {}; words = []; trips = []     # (bank,start,end) of .data blocks of width 2 (word tables) and width 3 ({lo,hi,bank} far pointers)
 for l in open(sym_path):

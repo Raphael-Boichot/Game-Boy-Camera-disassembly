@@ -8,6 +8,7 @@ usage: tools/check_repo_consistency.py [--rom pocketcamera_jp.gb] [--roundtrip] 
 What it checks (each line of the report is one check)
   names      sym_names_jp.csv: tags C / I / ?, duplicate names, a name that carries another address than its own (only `_Part<addr>` / `_Cont` may),
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
+  port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
   renamed    roms/jp_rev_a/disasm/renamed_jp.csv rows against the counts the README quotes
@@ -42,12 +43,13 @@ Real exceptions (a Map type row that is not a multiple of 32 bytes, a Gfx label 
 
 Add a quoted number here when the README starts quoting a new one: the point of this file is that a change of a label, a type row or a span
 shows up as a failed line instead of as a stale sentence three weeks later.  Update the README / CLAUDE.md / SKILL.md first, then run this again."""
-import sys, os, re, csv, io, json, subprocess, tempfile, shutil, argparse, collections
+import sys, os, re, csv, io, json, subprocess, tempfile, shutil, argparse, collections, hashlib
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 ap = argparse.ArgumentParser()
 ap.add_argument('--rom'); ap.add_argument('--roundtrip', action='store_true'); ap.add_argument('--mgbdis', default='/home/claude/tc/mgbdis/mgbdis.py')
 ap.add_argument('--rgbds', default='/home/claude/tc/rgbds'); ap.add_argument('-q', action='store_true')
+ap.add_argument('--rom-us', default=None, help='the international ROM (gbcam_usa_eu.gb): rebuild roms/us_eu/gbcam_usa_eu.sym and round-trip it')
 A = ap.parse_args()
 os.chdir(ROOT)
 FAIL = []; WARN = []; SKIP = []
@@ -133,6 +135,50 @@ for t in TYPES:
 if not any('names' in f for f in FAIL): ok('names', '%s labels: C %s / I %s / ? %s' % (fmt(NL), fmt(C), fmt(I), fmt(Q)))
 TCRF_LABELS = sum(1 for r in NAMES if r['name'].startswith('Unused_TCRF_'))
 
+# ------------------------------------------------------------------ international port (README §1.5)
+US = 'roms/us_eu/'
+if os.path.exists(US + 'disasm/sym_names_us.csv'):
+    UN = list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_names_us.csv')))); ut = collections.Counter(r['conf'] for r in UN)
+    UT = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_types_us.csv')))))
+    UR = collections.Counter(r['fate'] for r in csv.DictReader(io.StringIO(rd(US + 'port/port_report_us.csv'))))
+    UQ = list(csv.DictReader(io.StringIO(rd(US + 'port/hand_queue_us.csv')))); uq = collections.Counter(r['kind'] for r in UQ)
+    uqi = sum(int(r['detail'].split()[0]) for r in UQ if r['kind'] == 'new_code'); uqb = sum(int(r['detail'].split()[0]) for r in UQ if r['kind'] == 'default_data')
+    UC = collections.Counter(r['kind'] for r in csv.DictReader(io.StringIO(rd(US + 'port/code_map_us.csv'))))
+    UJ = json.loads(rd(US + 'port/trace_us.json')); uins = [v for v in UJ['code'].values() if v > 0]
+    NJI = sum(1 for v in json.loads(rd('roms/jp_rev_a/wram/trace_jp_v3.json'))['code'].values() if v > 0)
+    ULINES = rd(US + 'gbcam_usa_eu.sym').count('\n')
+    if len({r['name'] for r in UN}) != len(UN): bad('port', 'duplicate name in sym_names_us.csv')
+    if UJ['unresolved']: bad('port', 'trace_us.json has %d unresolved sites' % len(UJ['unresolved']))
+    n_ = quoted('port names', r'The international symbol file carries ([\d,]+) names \(C ([\d,]+) / I ([\d,]+)\) and ([\d,]+) type rows; (\d+) Japanese names were not carried',
+                lambda m: ((len(UN), ut['C'], ut['I'], UT, UR['lost']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
+    n_ += quoted('port queue', r'(\d+) runs of new code \(([\d,]+) instructions.*?(\d+) lost names, ([\d,]+) names whose routine or content differs, and (\d+) data blocks \(([\d,]+) bytes',
+                 lambda m: ((uq['new_code'], uqi, uq['lost_name'], uq['name_differs'], uq['default_data'], uqb), tuple(num(m.group(i)) for i in range(1, 7))), need=('README.md',))
+    n_ += quoted('port pairs', r'([\d,]+) of the ([\d,]+) Japanese instructions pair with an international one \(([\d,]+) identical, ([\d,]+) with another address operand, (\d+) with another 8-bit operand\)',
+                 lambda m: ((sum(UC.values()), NJI, UC['same'], UC['operand'], UC['imm']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
+    n_ += quoted('port trace', r'traces the international ROM itself: ([\d,]+) instructions \(([\d,]+) code bytes\), (\d+) far calls resolved',
+                 lambda m: ((len(uins), sum(uins), len(UJ['far_ok'])), tuple(num(m.group(i)) for i in range(1, 4))), need=('README.md',))
+    n_ += quoted('port sym', r'writes `roms/us_eu/gbcam_usa_eu.sym` \(([\d,]+) lines\)', lambda m: ((ULINES,), (num(m.group(1)),)), need=('README.md',))
+    if not any(f.startswith('port') or f.startswith('quoted') for f in FAIL):
+        ok('port', 'international: %s names (C %s / I %s), %s type rows, %s lost; %s instruction pairs; trace %s instructions, 0 unresolved; %d sentences checked'
+           % (fmt(len(UN)), fmt(ut['C']), fmt(ut['I']), fmt(UT), UR['lost'], fmt(sum(UC.values())), fmt(len(uins)), n_))
+    if A.rom_us:
+        tmp = tempfile.mkdtemp(prefix='cons_us_'); out = os.path.join(tmp, 'gbcam_usa_eu.sym')
+        r = subprocess.run([sys.executable, 'tools/sym_build.py', A.rom_us, '--names', US + 'disasm/sym_names_us.csv', '--types', US + 'disasm/sym_types_us.csv',
+                            '--trace', US + 'port/trace_us.json', '--out', out], capture_output=True, text=True)
+        if r.returncode: bad('port', 'sym_build.py failed on the international tables: %s' % (r.stderr or r.stdout).strip()[-300:])
+        elif open(out).read() != rd(US + 'gbcam_usa_eu.sym'): bad('port', 'gbcam_usa_eu.sym is not what sym_build.py makes from the csv files: rebuild it')
+        elif A.roundtrip:
+            shutil.copy(A.rom_us, os.path.join(tmp, 'gbcam_usa_eu.gb')); env = dict(os.environ); env['PATH'] = A.rgbds + os.pathsep + env['PATH']
+            for tag, fix in (('plain', None), ('tables', ['--tables', '--far-helpers', '0473,049C,061B,068D,0734,0950,0956'])):
+                d = os.path.join(tmp, tag)
+                subprocess.run([sys.executable, A.mgbdis, '--overwrite', '--print-hex', '--output-dir', d, os.path.join(tmp, 'gbcam_usa_eu.gb')], capture_output=True)
+                if fix: subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--rom', os.path.join(tmp, 'gbcam_usa_eu.gb'), '--sym', out, '--trace', US + 'port/trace_us.json'] + fix, capture_output=True)
+                subprocess.run(['make'], cwd=d, env=env, capture_output=True)
+                g = os.path.join(d, 'game.gb'); md = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else 'no ROM built'
+                (ok if md == '42d2f65e2549be9d1d126a6828b5d1c1' else bad)('port', 'international round trip %s: md5 %s' % (tag, md))
+        shutil.rmtree(tmp, ignore_errors=True)
+else:
+    bad('port', 'roms/us_eu/disasm/sym_names_us.csv missing')
 # ------------------------------------------------------------------ sym + types (needs the ROM)
 LINES = BLOCKS = None; BYTES = {}
 if A.rom:

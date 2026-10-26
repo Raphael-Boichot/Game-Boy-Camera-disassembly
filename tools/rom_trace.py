@@ -5,7 +5,7 @@ Static recursive-descent tracer for the Game Boy Camera / Pocket Camera ROM (SM8
 Goal: separate *proven code* (reachable from the vectors, the boot entry, every code label of the .sym file and the
 state tables of the mode banks) from everything else, with an explicit list of what could NOT be resolved.
 
-usage: rom_trace.py <rom.gb> tools/rom_trace_labels.sym <out.json> [--roots tools/extra_roots.json]
+usage: rom_trace.py <rom.gb> tools/rom_trace_labels.sym <out.json> [--roots tools/extra_roots.json] [--config other_build.json]
 (<sym> must be the 183-label first-pass file tools/rom_trace_labels.sym: the tracer takes every name that does not start with `.data` as a code root, so the full pocketcamera_jp.sym, which names tables and tiles too, gives a different trace.  With --roots it writes roms/jp_rev_a/wram/trace_jp_v3.json bit for bit.)
 
 Conventions that the tracer knows (all verified in the JP ROM):
@@ -67,6 +67,32 @@ RESOLVED_JPHL = {
 }
 # TRY: `call $FF80` runs the OAM-DMA stub that 00:03E2 copies from 00:03F0 into HRAM
 RAM_IMAGES = {0xFF80: (0, 0x03F0)}
+# Addresses of the Japanese build. `--config FILE.json` replaces any of them for another build (tools/port_trace_config.py
+# writes the international one through the address map): keys farcall, farjump, modecall, modetable, irq_table, irq_table_n,
+# serial_table, bank0a_table (bank, addr), sound_tables [[addr, n], ...], sound_bank, callback_helpers {bank: {addr: op}},
+# resolved_jphl [[bank, addr, why], ...], ram_images {addr: [bank, addr]}.
+CFG = {'farcall': 0x08C1, 'farjump': 0x08BB, 'modecall': 0x038A, 'modetable': 0x2F3F, 'irq_table': 0x0357, 'irq_table_n': 8,
+       'serial_table': 0x0385, 'bank0a_table': (0x0A, 0x541A), 'sound_bank': 0x1F,
+       'sound_tables': [(0x41FA, 62), (0x4276, 62), (0x42F2, 10), (0x4306, 10), (0x431A, 18), (0x433E, 18)]}
+
+
+def load_config(path):
+    c = json.load(open(path))
+    for k in ('farcall', 'farjump', 'modecall', 'modetable', 'irq_table', 'irq_table_n', 'serial_table', 'sound_bank'):
+        if k in c: CFG[k] = c[k]
+    if 'bank0a_table' in c: CFG['bank0a_table'] = tuple(c['bank0a_table'])
+    if 'sound_tables' in c: CFG['sound_tables'] = [tuple(x) for x in c['sound_tables']]
+    if 'callback_helpers' in c:
+        CALLBACK_HELPERS.clear()
+        for b, d in c['callback_helpers'].items(): CALLBACK_HELPERS[int(b)] = {int(k): v for k, v in d.items()}
+    if 'resolved_jphl' in c:
+        RESOLVED_JPHL.clear()
+        for b, ad, why in c['resolved_jphl']: RESOLVED_JPHL[(b, ad)] = why
+    if 'ram_images' in c:
+        RAM_IMAGES.clear()
+        for k, v in c['ram_images'].items(): RAM_IMAGES[int(k)] = tuple(v)
+
+
 TRY_ON = [False]            # TRY: switched on by --roots; off = byte-identical to tools/rom_trace.py
 INVALID = {0xD3, 0xDB, 0xDD, 0xE3, 0xE4, 0xEB, 0xEC, 0xED, 0xF4, 0xFC, 0xFD}
 
@@ -223,7 +249,7 @@ def trace(rom, sym_code, extra_roots=(), extra_data=()):
                         unresolved.append((bank, pc, 'jp-hl', ''))
                 break
             elif op in (0xCD, 0xC4, 0xCC, 0xD4, 0xDC):        # call
-                if op == 0xCD and nn == 0x08C1:               # far call helper
+                if op == 0xCD and nn == CFG['farcall']:               # far call helper
                     a_val = hl_val = None
                     for (hp, hop, hv) in reversed(hist[:-1][-14:]):
                         if a_val is None and hop == 0x3E:
@@ -237,7 +263,7 @@ def trace(rom, sym_code, extra_roots=(), extra_data=()):
                         push(a_val if hl_val >= 0x4000 else 0, hl_val, 'far')
                     else:
                         unresolved.append((bank, pc, 'far-call', f'A={a_val} HL={hl_val}'))
-                elif op == 0xCD and nn == 0x08BB:             # one-way far jump: A = bank, HL = target, `jp hl` (never returns)
+                elif op == 0xCD and nn == CFG['farjump']:             # one-way far jump: A = bank, HL = target, `jp hl` (never returns)
                     a_val = hl_val = None
                     for (hp, hop, hv) in reversed(hist[:-1][-14:]):
                         if a_val is None and hop == 0x3E:
@@ -259,7 +285,7 @@ def trace(rom, sym_code, extra_roots=(), extra_data=()):
                             push(here if hv >= 0x4000 else 0, hv, 'callback')
                             break
                     push(tgt_bank(nn) or here, nn, 'call')
-                elif op == 0xCD and nn == 0x038A:              # inline 3-byte table (mode table) follows; never returns here
+                elif op == 0xCD and nn == CFG['modecall']:              # inline 3-byte table (mode table) follows; never returns here
                     ents, end = mode_table(rom, nxt)
                     for q in range(nxt, end):
                         code[(0, q)] = -1
@@ -347,8 +373,9 @@ def trace(rom, sym_code, extra_roots=(), extra_data=()):
     return code, entries, unresolved, far_ok, tables
 
 
-def mode_table(rom, start=0x2F3F):
+def mode_table(rom, start=None):
     """Mode table read by Call_000_2f39 through the inline-table helper $038A: 3-byte entries (addr lo, addr hi, bank)."""
+    if start is None: start = CFG['modetable']
     ents, a = [], start
     while True:
         w, b = rom.w(0, a), rom.b(0, a + 2)
@@ -366,28 +393,30 @@ def manual_roots(rom):
     ents, _ = mode_table(rom)
     roots += ents
     # bank 0 $0341-$034D: serial/timer dispatch, table of 8 words at $0357 (index*2, jp hl)
-    for i in range(8):
-        roots.append((0, rom.w(0, 0x0357 + 2 * i)))
+    for i in range(CFG['irq_table_n']):
+        roots.append((0, rom.w(0, CFG['irq_table'] + 2 * i)))
     # bank 0 $0368: serial IRQ, table at $0385 indexed by [$FFC6] (2 entries: $0F16, $2AE9)
-    roots += [(0, rom.w(0, 0x0385)), (0, rom.w(0, 0x0387))]
+    roots += [(0, rom.w(0, CFG['serial_table'])), (0, rom.w(0, CFG['serial_table'] + 2))]
     # bank $0A $5406: jp hl through a 16-bit table at $541A (variant of the standard pattern, index = A*2)
-    p, limit, n = 0x541A, 0x8000, 0
+    tb0a, p = CFG['bank0a_table']; limit, n = 0x8000, 0
     while p < limit and n < 32:
-        tv = rom.w(0x0A, p)
+        tv = rom.w(tb0a, p)
         if not (0x4000 <= tv < 0x8000):
             break
-        roots.append((0x0A, tv)); n += 1
+        roots.append((tb0a, tv)); n += 1
         if tv > p and tv < limit:
             limit = tv
         p += 2
     # bank $1F (sound driver): pointer tables indexed by A-1 through Call_01f_5266/$526A; counts from the `cp N` guards
-    for T, n in ((0x41FA, 62), (0x4276, 62), (0x42F2, 10), (0x4306, 10), (0x431A, 18), (0x433E, 18)):
+    for T, n in CFG['sound_tables']:
         for i in range(n):
-            roots.append((0x1F, rom.w(0x1F, T + 2 * i)))
+            roots.append((CFG['sound_bank'], rom.w(CFG['sound_bank'], T + 2 * i)))
     return roots
 
 
 def main():
+    if '--config' in sys.argv:
+        load_config(sys.argv[sys.argv.index('--config') + 1])
     rom = Rom(sys.argv[1])
     sym_code, sym_data = load_sym(sys.argv[2])
     roots = list(manual_roots(rom))
