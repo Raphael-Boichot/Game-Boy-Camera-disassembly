@@ -34,7 +34,16 @@ A **register set** below means one combination of reg 1 (mode and gain), reg 7 (
 
 ### 19.3 The measuring trick: 12 pixels and a flat matrix (C)
 
-To measure, the ROM fills the whole matrix with one value `t` (a *flat matrix*), so every pixel becomes 1 bit: below `t` or not. `Cam_PixelTestHelper` (`0A:4C30`) then looks at **12 pixels** of the top edge of the frame (tile 0, lines 1-4, columns 1-3; tile 8 in the factory routine), counts how many read "below", and answers **pass** when at least 9 of the 12 do (8 in one place). These 12 pixels are scene pixels at the very top of the frame, not shielded reference pixels (C for one frame, §18.9), and the measuring captures use the shortest exposures, so light has little effect (I) — except under a strong light (§19.6).
+To measure, the ROM fills the whole matrix with one value `t` (a *flat matrix*): all three thresholds of every cell are equal, so every pixel comes out either **black** (2-bit value 3: both plane bits set) or **white** (0). `Cam_PixelTestHelper` (`0A:4C30`) then counts the black pixels of a small fixed block and answers **pass** when there are at least `H` of them (`H` = 9; 8 in the second stage of the threshold scan).
+
+**The exact probing area (C, from the code).** The routine reads the four bytes `[DE]`, `[DE+2]`, `[DE+4]`, `[DE+6]` (plane 0 of four consecutive pixel rows of one tile; with a flat matrix plane 1 is the same) and counts bits 6, 5 and 4 of each (pixel columns 1, 2, 3; the test of bit 3, column 4, is jumped over at `0A:4C51`): **12 pixels, a 3 x 4 block**.
+
+| used by | `DE` | pixels of the 128 x 128 frame | where |
+|---|---|---|---|
+| the gain probe and the five boot searches, factory part 2 | `$A002` (tile 0) | x 1-3, y 1-4 | top-left corner, in the 8 lines above the photo (the photo is lines 8-119): never visible in a picture |
+| factory part 1 | `$A082` (tile 8) | x 65-67, y 1-4 | top centre, same hidden band |
+
+**The criterion in pixel values (C).** "Pass" = at least 9 of the 12 pixels are black at threshold `t`. Lowering the offset O darkens the output (after a pass the search raises O, after a fail it lowers it, 19.4; the prototype source says it in words, 19.9), so the offset search ends on **the highest O at which 9 of the 12 pixels still read black**: the fourth-lightest of the 12 pixels sits at threshold `t`. A few bright or noisy pixels (up to 3) do not change the result. These are scene pixels, not shielded reference pixels (C for one frame, §18.9); the very short exposures of the measuring captures (0.256 ms) stand in for darkness (I), except under a strong light (19.6).
 
 Three procedures are built from that one test:
 
@@ -109,6 +118,15 @@ It runs on the first boot of a camera whose vector is twelve `$AA` (`STORE PLEAS
 
 The **hidden factory test** runs parts 1 and 2 without storing, then compares bytes 10 and 11 with the stored ones: |difference| ≤ 27 and ≤ 19 (the tolerance bytes `1B 13`) shows "OK", else "NG" (§18.5).
 
+**What the two parts achieve (I, consistent with every C fact above).** Part 1 is a real dark-level calibration: in the dark, at each band's own exposure, it finds the offset that puts that register set's dark level, dark current at that exposure included, at the threshold `$80`. Part 2 then records, with those offsets but at 0.256 ms, at which threshold the same dark pixels sit: the vector byte is the short-exposure image of "true black for that register set". At every boot the camera can then re-find each band's dark-room offset in a fast 0.256 ms capture, in whatever light, by searching for the offset that puts the pixels back at the stored byte; only the sensor's drift since the factory is corrected. Camera 1's vector fits this: the bytes fall as the band's exposure x gain (and so its dark current) grows:
+
+| bytes | 0-3 | 4-7 | 8-9 | 10 | 11 |
+|---|---|---|---|---|---|
+| band exposure in part 1 | 0.768 ms | 36.9 ms | 131 ms | 205 ms | 524 ms (32 dB) |
+| camera 1 | `7E 7D 7D 80` | `7D 7C 7D 7B` | `7C 7B` | `79` | `6A` |
+
+If the prototype's "`$55` = 1 V" (19.9) gives the scale of the thresholds, `$80` is 1.5 V, the reference voltage V = 3 of every retail measuring and live capture, and the bytes `7E`-`79` sit 20-80 mV below it, `6A` about 0.25 V below (I).
+
 **It must run in the dark (C, §18.13).** Camera 2 recorded the factory calibration twice. In ordinary room light: 164 captures, offsets `$A9-$B1`, scans of 3-8 captures. Under a strong light source: 540 captures; from the 36.9 ms points on the searches must lower V (3 → 1) and end on offsets `$93-$9F`, and the scans take 15-94 captures. The long exposures of part 1 are meant for darkness; under light they measure the light, and the references stored would be wrong for good (I).
 
 ### 19.7 The auto-exposure in live view (C)
@@ -141,20 +159,31 @@ What the recordings show (§18.13):
 * **A spoiled vector makes the band switches jitter** (owner's observation, 2026-10-26: a camera whose vector was corrupted but had valid checksums; its SRAM was lost). This is what the mechanism predicts (I): a wrong reference gives one band a wrong offset, so the picture jumps at that band's boundary; if the jump is larger than the hysteresis margin, the next metering puts the exposure back across the boundary, and the loop flips between the two register sets near that light level.
 * **The prototype has none of it** (C): the `DEBAGAME` prototype uses one register set only (2-D edge 20 dB, offset `$8B` = −0.35 V), never changes band and steps the exposure coarsely (x 0.5 to x 2). The Hello Kitty ROM uses the retail mechanism unchanged.
 
-### 19.9 What is still open
+### 19.9 Before the retail code: the prototype's own sensor source (C for the code, I for the order of the versions)
+
+The prototype ROM (`roms/prototype_debagame/`) carries plain-text leftovers of the developers' source, with Japanese comments, in banks `$1E-$27` (§18.14). Its sensor driver measured the dark level differently:
+
+* **`GET_OFFSET`**: fill the matrix with `$55` (commented "threshold `$55` (1 V)"; `$80` for mode 6 in the version the prototype runs, `$70` in older copies), set the exposure ("charge time") to `$0021` (0.53 ms; `$0000`, the datasheet's optical black, in one older version), start the offset at `$3F` (+0.99 V) and **lower it one step per capture** (+31 … 0, −1 … −31): a linear search of up to 63 captures, where the retail successive approximation needs 8.
+* **`CHECK_BLACK`**: "black level reached" when **every pixel of the probe area is black** (all bytes `$FF`): one whole tile at `$A770` (64 pixels, x 56-63, y 56-63: the middle of the picture) in the version the prototype runs, one full line of 128 pixels at y = 109 (`$AD0A`) in an older one. The retail criterion is 9 of 12 pixels in a hidden corner.
+* **The auto-exposure** counts the black pixels of the middle 8 x 7 tiles (a checkerboard of 448 bytes), compares the count with a target (`AKARUSA`, "brightness"), changes the exposure by `e >> s` from tables (the retail scheme, 19.7) and refuses exposures below `$21` ("below `$21` is unusable"): the prototype recording of camera 1 never goes below `$0022` (§18.13).
+* **One register set**: the modes are set by name (negative image, horizontal / vertical / 2-D edge enhancement, edge extraction) with no gain or offset per band; the prototype recording runs one register set only.
+
+So the retail design kept the idea (an offset search against a flat threshold on dark pixels) and changed everything around it: a 12-pixel probe outside the picture, a tolerant 9-of-12 criterion, an 8-capture search, and one factory reference per register set, re-found at each boot.
+
+### 19.10 What is still open
 
 * The vector a calibration under strong light stores, and what the photos of a camera calibrated that way look like (a test: factory reset under a lamp, dump the save, photograph a dark and a grey scene).
 * A recording of the jitter itself (a test: write a vector with byte 10 moved far off, point the camera at a scene that keeps the exposure around 200-400 ms, record the bus: the band should flip between 2 and 3 with the shifted offset).
 * Whether light on the 12 top-edge test pixels shifts the boot offsets (record the five boot offsets with the lens covered and in bright light, §18.9).
 * Bit 1 of `$A000` and the `$D5` matrix of the gain probe's first capture (§18.9).
 
-### 19.10 Glossary
+### 19.11 Glossary
 
 | term | meaning here |
 |---|---|
 | MAC-GBD | the camera chip of the cartridge: mapper, SRAM, sensor interface and 2-bit quantiser |
 | matrix | the 48 thresholds (16 cells x 3) the MAC-GBD compares each pixel with; flat = all equal |
-| pixel test | 12 top-edge pixels compared with a flat matrix; pass = at least 9 read below |
+| pixel test | 12 pixels of the hidden top lines (x 1-3, y 1-4) compared with a flat matrix; pass = at least 9 read black |
 | O (offset), Z | reg 0: a voltage added to the pixel output (32 mV steps); Z = 10 in all live and search captures |
 | V (Vref) | reg 7: the output node bias, 0.5 V steps; 3 = 1.5 V in normal use |
 | G, N, VH, E | reg 1 / reg 7: gain, edge mode and edge ratio |

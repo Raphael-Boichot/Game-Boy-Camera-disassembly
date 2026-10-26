@@ -144,8 +144,9 @@ The project notes (formerly one README) are split into one file per section; the
 | 18.9 | &nbsp;&nbsp;[What was not established, and what the extra sheet is](18_sensor_registers.md#189-what-was-not-established-and-what-the-extra-sheet-is) | `18_sensor_registers.md` |
 | 18.10 | &nbsp;&nbsp;[Tools and data of this section](18_sensor_registers.md#1810-tools-and-data-of-this-section) | `18_sensor_registers.md` |
 | 18.11 | &nbsp;&nbsp;[Is there any trace of more MAC-GBD registers, or of code for an M64283FP? (scan: C; "none" only means none fou](18_sensor_registers.md#1811-is-there-any-trace-of-more-mac-gbd-registers-or-of-code-for-an-m64283fp-scan-c-none-only-means-none-found-by-these-scans) | `18_sensor_registers.md` |
-| 18.13 | &nbsp;&nbsp;[More recordings: a second camera, the Hello Kitty and prototype ROMs, a zeroed vector, a calibration under strong light (2026-10-26)](18_sensor_registers.md#1813-more-recordings-a-second-camera-the-hello-kitty-and-prototype-roms-a-zeroed-vector-a-calibration-under-strong-light-2026-10-26) | `18_sensor_registers.md` |
 | 18.12 | &nbsp;&nbsp;[Two outside implementations against this section: MAME `camera.cpp` and dither-pattern-gen (2026-10-18)](18_sensor_registers.md#1812-two-outside-implementations-against-this-section-mame-cameracpp-and-dither-pattern-gen-2026-10-18) | `18_sensor_registers.md` |
+| 18.13 | &nbsp;&nbsp;[More recordings: a second camera, the Hello Kitty and prototype ROMs, a zeroed vector, a calibration under strong light (2026-10-26)](18_sensor_registers.md#1813-more-recordings-a-second-camera-the-hello-kitty-and-prototype-roms-a-zeroed-vector-a-calibration-under-strong-light-2026-10-26) | `18_sensor_registers.md` |
+| 18.14 | &nbsp;&nbsp;[The prototype's sensor source, left as plain text in its ROM (2026-10-26)](18_sensor_registers.md#1814-the-prototypes-sensor-source-left-as-plain-text-in-its-rom-2026-10-26) | `18_sensor_registers.md` |
 | 19 | [How the camera drives its sensor: a guide to the registers, the offset search, the calibration vector and the auto-exposure](19_sensor_guide.md#19-how-the-camera-drives-its-sensor-a-guide-to-the-registers-the-offset-search-the-calibration-vector-and-the-auto-exposure) | `19_sensor_guide.md` |
 | 19.1 | &nbsp;&nbsp;[The chain: CPU, MAC-GBD, sensor](19_sensor_guide.md#191-the-chain-cpu-mac-gbd-sensor) | `19_sensor_guide.md` |
 | 19.2 | &nbsp;&nbsp;[The registers that matter](19_sensor_guide.md#192-the-registers-that-matter) | `19_sensor_guide.md` |
@@ -155,5 +156,6 @@ The project notes (formerly one README) are split into one file per section; the
 | 19.6 | &nbsp;&nbsp;[The factory calibration (C)](19_sensor_guide.md#196-the-factory-calibration-c) | `19_sensor_guide.md` |
 | 19.7 | &nbsp;&nbsp;[The auto-exposure in live view (C)](19_sensor_guide.md#197-the-auto-exposure-in-live-view-c) | `19_sensor_guide.md` |
 | 19.8 | &nbsp;&nbsp;[What the calibration is for: register sets that join without a jump (I, with real-camera evidence)](19_sensor_guide.md#198-what-the-calibration-is-for-register-sets-that-join-without-a-jump-i-with-real-camera-evidence) | `19_sensor_guide.md` |
-| 19.9 | &nbsp;&nbsp;[What is still open](19_sensor_guide.md#199-what-is-still-open) | `19_sensor_guide.md` |
-| 19.10 | &nbsp;&nbsp;[Glossary](19_sensor_guide.md#1910-glossary) | `19_sensor_guide.md` |
+| 19.9 | &nbsp;&nbsp;[Before the retail code: the prototype's own sensor source (C for the code, I for the order of the versions)](19_sensor_guide.md#199-before-the-retail-code-the-prototypes-own-sensor-source-c-for-the-code-i-for-the-order-of-the-versions) | `19_sensor_guide.md` |
+| 19.10 | &nbsp;&nbsp;[What is still open](19_sensor_guide.md#1910-what-is-still-open) | `19_sensor_guide.md` |
+| 19.11 | &nbsp;&nbsp;[Glossary](19_sensor_guide.md#1911-glossary) | `19_sensor_guide.md` |
