@@ -187,7 +187,7 @@ DEF SFX4_STAMP_COMMIT          EQU $01 ; C sfx4: STAMP: a stamp is put on the ph
 DEF SFX4_DEATH_NOISE           EQU $02 ; C sfx4: posted by the engine right after the song stop of sfx1 3C, 3D and 3E
 DEF SFX4_SHUTTER_SOUND_4       EQU $03 ; C sfx4: fourth of the four shutter sounds (list at 06:7845); the engine also posts it when sfx1 26
 DEF SFX4_RUN_HURDLE_HIT        EQU $04 ; C sfx4: RUN! RUN! RUN!: the runner hits a hurdle (Run_HurdleCollision); the engine also posts it f
-DEF SFX4_ERASE_ANIM            EQU $05 ; C sfx4: photo erase animation (EraseAnim_Run, with sfx1 3B); owner by ear (2026-10-13): player dea
+DEF SFX4_ERASE_ANIM            EQU $05 ; C sfx4: photo erase animation (EraseAnim_Run, with sfx1 3B); the owner confirmed the function on 2
 DEF SFX4_ERASE_ANIM_TAIL       EQU $06 ; C sfx4: posted by the engine when sfx1 3B (photo erase animation) ends
 DEF SFX4_SPACE_FEVER_FIRE_SHOTS EQU $07 ; C sfx4: Space Fever II: the ship fires (SpaceFever_FireShots)
 DEF SFX4_SPACE_FEVER_PLAYER_DEATH EQU $08 ; C sfx4: Space Fever II: the ship is hit by an enemy or a bullet (SpaceFever_PlayerDie, SpaceFever_

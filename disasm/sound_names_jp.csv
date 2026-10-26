@@ -149,7 +149,7 @@ sfx4,01,SFX4_STAMP_COMMIT,C,1,STAMP: a stamp is put on the photo (Stamp_Commit),
 sfx4,02,SFX4_DEATH_NOISE,C,1,"posted by the engine right after the song stop of sfx1 3C, 3D and 3E",1F:4559
 sfx4,03,SFX4_SHUTTER_SOUND_4,C,1,fourth of the four shutter sounds (list at 06:7845); the engine also posts it when sfx1 26 ends,1F:4410 list:06:7845#4
 sfx4,04,SFX4_RUN_HURDLE_HIT,C,2,RUN! RUN! RUN!: the runner hits a hurdle (Run_HurdleCollision); the engine also posts it from 1F:4812,09:6A27 1F:4814
-sfx4,05,SFX4_ERASE_ANIM,C,1,"photo erase animation (EraseAnim_Run, with sfx1 3B); owner by ear (2026-10-13): player death in Space Fever II (?)",04:5165 owner:snd_sfx4_05
+sfx4,05,SFX4_ERASE_ANIM,C,1,"photo erase animation (EraseAnim_Run, with sfx1 3B); the owner confirmed the function on 2026-10-26: the photo erase sound, not a Space Fever II sound (his by-ear guess of 2026-10-13)",04:5165 owner:snd_sfx4_05 owner:snd_sfx4_05_function
 sfx4,06,SFX4_ERASE_ANIM_TAIL,C,1,posted by the engine when sfx1 3B (photo erase animation) ends,1F:438B
 sfx4,07,SFX4_SPACE_FEVER_FIRE_SHOTS,C,2,Space Fever II: the ship fires (SpaceFever_FireShots),07:5814 07:5835
 sfx4,08,SFX4_SPACE_FEVER_PLAYER_DEATH,C,2,"Space Fever II: the ship is hit by an enemy or a bullet (SpaceFever_PlayerDie, SpaceFever_PlayerDieB)",07:6655 07:6698

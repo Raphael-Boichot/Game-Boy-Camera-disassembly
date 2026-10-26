@@ -4093,7 +4093,7 @@ bank,addr,name,conf,note,source
 1F,4CDF,Sfx4_Init_09,C,channel-4 effect init handler of ids 09 (table $431A),hand+auto
 1F,4CE7,Sfx4_Step_09,C,channel-4 effect step handler of ids 09 (table $433E),hand+auto
 1F,4D07,Sfx4_Data_4D07,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4D28,Sfx4_Init_05_EraseAnim,C,"channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used - player death in space fever ?; the name EraseAnim comes from the caller EraseAnim_Run; the owner hears a death sound, to be settled. Named after the caller of its id (SFX4_ERASE_ANIM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
+1F,4D28,Sfx4_Init_05_EraseAnim,C,"channel-4 effect init handler of ids 05 (table $431A). The name EraseAnim comes from the caller EraseAnim_Run (04:5165, the only request site); the owner confirmed it on 2026-10-26: the photo erase sound, not a Space Fever II one (his by-ear guess of 2026-10-13 withdrawn). Named after the caller of its id (SFX4_ERASE_ANIM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
 1F,4D3F,Sfx4_Init_06,C,channel-4 effect init handler of ids 06 (table $431A),hand+auto
 1F,4D47,Sfx4_Step_06,C,channel-4 effect step handler of ids 06 (table $433E),hand+auto
 1F,4D66,Sfx4_Step_06_LoadNR4x,C,"step 06 of the channel-4 effect when the table value is 0: $DD7D = 1, then Snd_Sfx_LoadNR4x with the data at $4D14 (branch target; code read 2026-10-19)",hand
