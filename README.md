@@ -10,7 +10,7 @@ The work is produced by AI (Claude), from reading the code and running it in emu
 
 | ROM | MD5 | Folder | Status |
 |---|---|---|---|
-| Pocket Camera (Japan) (Rev A) (SGB Enhanced) | `fdcfe686cf4df461e870b6e53b2b5a8b` | [`roms/jp_rev_a/`](roms/jp_rev_a/) | L0-L4 done, L5 next |
+| Pocket Camera (Japan) (Rev A) (SGB Enhanced) | `fdcfe686cf4df461e870b6e53b2b5a8b` | [`roms/jp_rev_a/`](roms/jp_rev_a/) | L0-L5 done |
 | Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | compared with JP (docs §16), not disassembled |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | not started |
 | Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | not started |
@@ -34,7 +34,15 @@ The ROMs are not in the repository (the owner's source pack is `source/Source_ma
 
 ## Building (Japanese Rev A)
 
-Tools: [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a) and rgbds 1.0.4. mgbdis reads `<rom basename>.sym` beside the ROM.
+From the source tree (rgbds 1.0.4 in `PATH`, or `RGBDS=/path/to/rgbds/`):
+
+```bash
+make check                       # build/jp_rev_a/pocketcamera_jp.gb, md5 fdcfe686cf4df461e870b6e53b2b5a8b
+```
+
+`roms/jp_rev_a/src/` holds 64 bank files, 886 `INCBIN` files (668,189 bytes; 491 tile blocks as PNG), 4,910 label notes, 837 far pointers written as labels (13 left as numbers) (docs §1.4). It is generated: `make source ROM=pocketcamera_jp.gb` rewrites it from the tables of `roms/jp_rev_a/disasm/` (and overwrites hand edits).
+
+The listing the tree comes from, by hand. Tools: [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a) and rgbds 1.0.4. mgbdis reads `<rom basename>.sym` beside the ROM.
 
 ```bash
 mkdir build && cp pocketcamera_jp.gb roms/jp_rev_a/pocketcamera_jp.sym build/
@@ -44,7 +52,7 @@ cd build/disasm && make          # rgbasm -> rgblink -> rgbfix
 md5sum game.gb                   # fdcfe686cf4df461e870b6e53b2b5a8b
 ```
 
-`sym_fix.py --const` writes the RAM names, the hardware, mode, state and sound constants and the character map into the listing (docs §1.1, §2.13, §2.14). After editing a table of `roms/jp_rev_a/disasm/`, rebuild the symbol file with `python3 tools/sym_build.py ROM` and run `python3 tools/check_repo_consistency.py --rom ROM --roundtrip` (0 failures, four byte-exact rebuilds).
+`sym_fix.py --const` writes the RAM names, the hardware, mode, state and sound constants and the character map into the listing (docs §1.1, §2.13, §2.14). After editing a table of `roms/jp_rev_a/disasm/`, rebuild the symbol file with `python3 tools/sym_build.py ROM` and run `python3 tools/check_repo_consistency.py --rom ROM --roundtrip` (0 failures, four byte-exact rebuilds plus the source tree), then `make source ROM=ROM`.
 
 ## Disassembly status (Japanese Rev A)
 
@@ -55,7 +63,7 @@ md5sum game.gb                   # fdcfe686cf4df461e870b6e53b2b5a8b
 | L2 code proven by a static trace and observed in emulators | done |
 | L3 every routine and asset named | done: no `?` name, no doubtful row; the `I` names are all proven unused |
 | L4 RAM names and constants in the source | done |
-| L5 buildable, editable source tree (committed `.asm`, split assets) | next |
+| L5 buildable, editable source tree (committed `.asm`, split assets) | done: `roms/jp_rev_a/src/`, `make check` |
 | L6 understanding | partial |
 
 Details and counts: [`docs/01_toolchain_and_status.md`](docs/01_toolchain_and_status.md) and [`roms/jp_rev_a/`](roms/jp_rev_a/). The overview of the findings (the ROM maps, what was settled): [`docs/00_overview.md`](docs/00_overview.md).

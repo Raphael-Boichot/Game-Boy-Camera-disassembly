@@ -11,6 +11,7 @@ The project notes (formerly one README) are split into one file per section; the
 | 1.1.1 | &nbsp;&nbsp;&nbsp;&nbsp;[The complete symbol file (`pocketcamera_jp.sym`, `disasm/sym_*_jp.csv`)](01_toolchain_and_status.md#111-the-complete-symbol-file-pocketcamera_jpsym-disasmsym__jpcsv) | `01_toolchain_and_status.md` |
 | 1.2 | &nbsp;&nbsp;[Disassembly status: what is proven, and what is lacking for a confident disassembly](01_toolchain_and_status.md#12-disassembly-status-what-is-proven-and-what-is-lacking-for-a-confident-disassembly) | `01_toolchain_and_status.md` |
 | 1.3 | &nbsp;&nbsp;[How far from a "full disassembly"? (measured 2026-10-14; the how-to for the next ROM is `HOWTO_NEW_ROM.md`)](01_toolchain_and_status.md#13-how-far-from-a-full-disassembly-measured-2026-10-14-the-how-to-for-the-next-rom-is-howto_new_rommd) | `01_toolchain_and_status.md` |
+| 1.4 | &nbsp;&nbsp;[The source tree (L5)](01_toolchain_and_status.md#14-the-source-tree-l5) | `01_toolchain_and_status.md` |
 | 2 | [WRAM / HRAM map (`$C000-$DFFF`, `$FE00-$FFFF`) — the consolidated, byte-level map](02_wram_hram_map.md#2-wram--hram-map-c000-dfff-fe00-ffff--the-consolidated-byte-level-map) | `02_wram_hram_map.md` |
 | 2.0 | &nbsp;&nbsp;[Conventions, method and legend](02_wram_hram_map.md#20-conventions-method-and-legend) | `02_wram_hram_map.md` |
 | 2.1 | &nbsp;&nbsp;[Whole-WRAM overview](02_wram_hram_map.md#21-whole-wram-overview) | `02_wram_hram_map.md` |

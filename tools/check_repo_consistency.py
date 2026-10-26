@@ -35,6 +35,7 @@ What it checks (each line of the report is one check)
   screengif  the whole-screen GIF of the page transitions of the main menu (README 16.24): 640 x 576, endless loop, the frame count and length the README quotes
   headsets   (with --rom) why the ball head animation is stored twice: the frames F0-F4 and F5-F9 differ only inside the ids $20-$2F (10 or 11 tiles of 16), set A meets the body strip 16:5580 (seam 47-48) and set B the strip 11:4000 (41-42), each twice worse on the other, F4 and F9 carry the collar tiles of their strip byte for byte; the README paragraph of 16.24 that quotes them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
+  source     (--roundtrip) roms/jp_rev_a/src/ is exactly what tools/make_source.py writes, and it builds the ROM byte-exact (PNG -> 2bpp, rgbasm, rgblink, rgbfix); the README sentence that quotes its counts
 
 Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
 Real exceptions (a Map type row that is not a multiple of 32 bytes, a Gfx label on a Map row, datasheet section numbers) are listed in ODD_MAP_ROWS, GFX_ON_MAP and EXTERNAL_REFS with the reason.
@@ -937,6 +938,26 @@ if A.roundtrip:
             g = os.path.join(d, 'game.gb'); h = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else None
             if h != want: bad('roundtrip', '%s round trip gives md5 %s, expected %s' % (variant, h, want))
             else: ok('roundtrip', '%s: md5 %s' % (variant, h))
+        # L5: roms/jp_rev_a/src/ is what tools/make_source.py writes today, and it builds the ROM byte-exact (PNG -> 2bpp, rgbasm, rgblink, rgbfix)
+        sys.path.insert(0, P('tools')); import make_source
+        fresh = os.path.join(tmp, 'src')
+        ms = subprocess.run([sys.executable, 'tools/make_source.py', '--rom', A.rom, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fresh], capture_output=True, text=True)
+        if ms.returncode: bad('source', 'tools/make_source.py failed: %s' % (ms.stderr or ms.stdout)[-300:])
+        else:
+            m = re.search(r'(\d+) banks, (\d+) INCBIN files \((\d+) bytes, (\d+) tile blocks as PNG\), (\d+) label notes, (\d+) far pointers as labels \((\d+) left', ms.stdout)
+            src = P('roms/jp_rev_a/src'); diff = []
+            def walk(r): return sorted(os.path.relpath(os.path.join(dp, f), r) for dp, _, fs in os.walk(r) for f in fs)
+            if not os.path.isdir(src): diff = ['src/ missing']
+            else:
+                a_, b_ = walk(fresh), walk(src)
+                diff = sorted(set(a_) ^ set(b_)) + [f for f in a_ if f in set(b_) and open(os.path.join(fresh, f), 'rb').read() != open(os.path.join(src, f), 'rb').read()]
+            if diff: bad('source', 'roms/jp_rev_a/src/ is not what tools/make_source.py writes (%d files differ: %s); run `make source ROM=...`' % (len(diff), diff[:4]))
+            else:
+                hsrc = make_source.build(src, os.path.join(tmp, 'src_build.gb'), A.rgbds)
+                if hsrc != want: bad('source', 'roms/jp_rev_a/src/ builds md5 %s, expected %s' % (hsrc, want))
+                else: ok('source', 'roms/jp_rev_a/src/ fresh (%d files) and builds md5 %s: %s banks, %s INCBIN files (%s bytes, %s tile PNGs), %s label notes, %s far pointers as labels (%s left as numbers)' % ((len(walk(src)), hsrc) + m.groups()))
+                quoted('source stats', r'(\d+) bank files, ([\d,]+) `INCBIN` files \(([\d,]+) bytes; ([\d,]+) tile blocks as PNG\), ([\d,]+) label notes, ([\d,]+) far pointers written as labels \((\d+) left as numbers\)',
+                       lambda mm: (tuple(int(g) for g in m.groups()), tuple(num(g) for g in mm.groups())), docs=('README.md',), need=('README.md',))
         shutil.rmtree(tmp, ignore_errors=True)
 
 print()
