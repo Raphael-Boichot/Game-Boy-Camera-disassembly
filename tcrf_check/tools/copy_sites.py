@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """List EVERY banked copy call of the disassembly, live or dead, with the source bank / address, destination and length when they are load-immediates just before the call.
 Unlike assets/catalog_jp.csv (asset_catalog.py: three helper names, 386 rows) this reads the helpers by their current names (Mem_CopyFromBank, Vram_CopyFromBank,
-Vram_CopyFromBankAuto, Vram_CopyFromBank_4, Vram_CopyFromBank_8) and keeps the sites whose registers are not all immediates (the value is then empty).
+Vram_CopyFromBankAuto, Vram_CopyFromBank_4, Unused_Vram_CopyFromBank_8) and keeps the sites whose registers are not all immediates (the value is then empty).
 usage: copy_sites.py DISASM_DIR OUT.csv      (DISASM_DIR = the mgbdis output with the sym applied, e.g. the `fixed` folder of tools/sym_fix.py; run from any directory)
 Result of 2026-10-13 on the Japanese ROM: 941 sites, 791 with all four values, 150 incomplete; 290 of the complete ones are not in catalog_jp.csv (README 16.25)."""
 import re, sys, glob, os, csv
 D, OUT = sys.argv[1], sys.argv[2]
-COPY = {'Mem_CopyFromBank', 'Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4', 'Vram_CopyFromBank_8'}
+COPY = {'Mem_CopyFromBank', 'Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4', 'Unused_Vram_CopyFromBank_8'}
 imm = lambda s: int(s.replace('$', ''), 16)
 rows = []
 for fn in sorted(glob.glob(os.path.join(D, 'bank_*.asm'))):

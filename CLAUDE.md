@@ -95,6 +95,6 @@ This file holds the rules and the layout. Numbers and findings live in `README.m
 * Sensor (§18, `tcrf_check/assets/sensor/`, `tcrf_check/tools/sensor_*.py`): register traffic, calibration, exposure, the dither matrix (§7, §18.12), checked against the owner's recordings. Open points: §18.9.
 * Link cable (§14, `link_protocol/`), printer (§16.16, §17), Album B and the unlock gates (§15, §16.18), stamps and CoroCoro (§16.8, §16.9, §16.12), credits and parlor (§16.22), really unused assets (§16.24, §16.25).
   The owner's answers are in `disasm/owner_answers_jp.csv`.
-* Never-run code is closed as far as keys, saves and WRAM / SRAM pokes go (§16.21, §16.26); the proven-dead pieces stay evidence I. Lessons for forcing: `HOWTO_NEW_ROM.md` §6.
+* Never-run code is closed as far as keys, saves and WRAM / SRAM pokes go (§16.21, §16.26); the proven-dead pieces stay evidence I; the 45 dead roots are assembled as code tagged unused, prefix `Unused_` (owner, 2026-10-26). Lessons for forcing: `HOWTO_NEW_ROM.md` §6.
 * Still open: §12 (SRAM and WRAM lists), §18.9 (sensor), §16.10 (sweep paths where BGB and the core disagree, link byte timing in BGB), §16.11 "what this walk does not prove", the other pages of the
   international stamp category 3, naming of the ~130 new code roots, texts other than the name / comment fields.

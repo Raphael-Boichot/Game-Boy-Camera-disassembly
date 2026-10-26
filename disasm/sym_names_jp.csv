@@ -23,8 +23,8 @@ bank,addr,name,conf,note,source
 00,03A6,Call_InlineTable3_Return,C,restores the bank,hand+auto
 00,03AD,Lcd_Off,C,waits for VBlank (LY=$91) then clears LCDC bit 7,hand+auto
 00,03CB,Lcd_On,C,,hand+auto
-00,03D4,Irq_DisableVBlank,I,unreferenced,hand+auto
-00,03DB,Irq_EnableVBlank,I,unreferenced,hand+auto
+00,03D4,Unused_Irq_DisableVBlank,I,"unreferenced. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
+00,03DB,Unused_Irq_EnableVBlank,I,"unreferenced. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,03E2,OamDma_InstallRoutine,C,copies 10 bytes from OamDma_RomImage to HRAM $FF80,hand+auto
 00,03F0,OamDma_RomImage,C,the code copied to HRAM: ld a,hand+auto
 00,03FA,Vram_WaitHBlank,C,waits STAT mode 0 then a short delay,hand+auto
@@ -37,17 +37,17 @@ bank,addr,name,conf,note,source
 00,0479,Vram_CopyFromBankAuto,C,LCD off: Mem_CopyFromBank; LCD on: Vram_CopyFromBank,hand+auto
 00,0486,Border_CopyFrameAddTile_LcdOff,C,"copies a 20-tile-wide screen map (HL source, bank in A or SRAM bit; DE = VRAM $98xx) adding C to every tile number, 32-tile row stride in VRAM; no STAT wait (LCD off); callers 08:5079 (border picker, C = $90)",hand
 00,04F3,Border_CopyFrameAddTile_Safe,C,same copy as Border_CopyFrameAddTile_LcdOff with STAT waits (LCD on); callers 08:50C1 and 08:50F2 (border picker),hand
-00,057F,Delay_Short,I,unreferenced,hand+auto
+00,057F,Unused_Delay_Short,I,"unreferenced. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,0586,Vram_CopyFromBank_4,C,"4 bytes per HBlank window. L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 07 10 20 (tcrf_check/assets/l3_names/)",hand+auto
 00,05F8,Vram_CopyFromBank,C,bank-aware VRAM copy during display: 6 bytes per HBlank window,hand+auto
-00,069F,Vram_CopyFromBank_8,I,unreferenced; 8 bytes per window with page-wrapping source,hand+auto
+00,069F,Unused_Vram_CopyFromBank_8,I,"unreferenced; 8 bytes per window with page-wrapping source. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,06FF,Vram_ClearSafe,C,zero BC bytes of VRAM at HL,hand+auto
 00,0721,Vram_FillFFSafe,C,fill BC bytes of VRAM with $FF,hand+auto
 00,0744,Vram_WriteByteSafe,C,A -> [HL] after an HBlank sync,hand+auto
-00,0751,Vram_OrByteSafe,I,unreferenced,hand+auto
-00,0762,Vram_AndByteSafe,I,unreferenced,hand+auto
-00,0773,Vram_ReadByteSafe,I,unreferenced,hand+auto
-00,0781,Vram_CopyViaVBlank,I,unreferenced; posts the word-copy request in chunks and waits for each,hand+auto
+00,0751,Unused_Vram_OrByteSafe,I,"unreferenced. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
+00,0762,Unused_Vram_AndByteSafe,I,"unreferenced. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
+00,0773,Unused_Vram_ReadByteSafe,I,"unreferenced. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
+00,0781,Unused_Vram_CopyViaVBlank,I,"unreferenced; posts the word-copy request in chunks and waits for each. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,07EC,Irq_VBlank_CopyRequest,C,executes the word-copy request at $FFCB-$FFCF,hand+auto
 00,080C,Vram_FillViaVBlank,C,posts the zero-fill request in chunks,hand+auto
 00,0868,Irq_VBlank_FillRequest,C,executes the zero-fill request at $FFD1-$FFD4,hand+auto
@@ -160,10 +160,10 @@ bank,addr,name,conf,note,source
 00,1BA4,Prn_QueuePrint,C,builds the PRINT body from sheets / margin / palette / intensity,hand+auto
 00,1BF4,Prn_AddToChecksumDE,C,DE += A,hand+auto
 00,1BFB,Prn_QueueData,C,,hand+auto
-00,1C2F,Prn_QueueBreak,C,,hand+auto
+00,1C2F,Unused_Prn_QueueBreak,C,"Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,1C3C,Prn_QueueInquiry,C,,hand+auto
 00,1C49,Prn_QueueDataEnd,C,,hand+auto
-00,1C56,Prn_Ret,C,,hand+auto
+00,1C56,Unused_Prn_Ret,C,"Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,1C57,Prn_StartTransmit,C,starts the queued packet and sends the first sync byte,hand+auto
 00,1C93,Sgb_SendPacket,C,A = bank; HL = packets (16 bytes each,hand+auto
 00,1CDE,Sgb_Delay,C,,hand+auto
@@ -237,7 +237,7 @@ bank,addr,name,conf,note,source
 00,2E0E,Link_QueueCommand,C,sends the command byte $40 + slot (or the $EF cancel),hand+auto
 00,2E41,Link_QueuePageRequest,C,sends the command byte $80 + slot,hand+auto
 00,2E68,Link_UpdateInfoByte,C,ORs own photo count / album-full bits into the info byte,hand+auto
-00,2E82,Delay_BC,C,dec bc until zero,hand+auto
+00,2E82,Unused_Delay_BC,C,"dec bc until zero. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 00,2E88,Unused_Str_MainPass,I,"ASCII 'MAIN PASS',0 right after Delay_BC; no immediate load of its address in the trace",fix
 00,2E92,Main_Entry,C,far-jumped from the reset code; runs the self-test,hand+auto
 00,2F2D,Main_Loop,C,mode dispatcher + OAM hide + sticky keys + wait vblank,hand+auto
@@ -3285,7 +3285,7 @@ bank,addr,name,conf,note,source
 0A,4B6A,Cam_ORegister_SAR_Search,C,"from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)",hand+auto
 0A,4BEC,Cam_ORegister_SAR_Tail,C,"from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)",hand+auto
 0A,4C30,Cam_PixelTestHelper,C,"from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)",hand+auto
-0A,4C53,Cam_FactoryMeasure2_Tail,I,tail piece: B vs H compare; result in A,hand+auto
+0A,4C53,Unused_Cam_FactoryMeasure2_Tail,I,"tail piece: B vs H compare; result in A. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 0A,4C6C,Cam_FactoryMeasure2,C,from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator (coverage/results/merged_state/cov.npz),hand+auto
 0A,4E44,Cam_ThresholdConverge,C,from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator (coverage/results/merged_state/cov.npz),hand+auto
 0A,4EE3,Cam_ThresholdConverge_Up,C,from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator (coverage/results/merged_state/cov.npz),hand+auto
@@ -3435,8 +3435,8 @@ bank,addr,name,conf,note,source
 0A,7C60,Cam_DitherRamp_ParamsB,C,"from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic corpus, modes 00 14 (tcrf_check/assets/l3_names/)",hand+auto
 0A,7CA0,Cam_DitherRamp_ParamsUnused,I,from the previous .sym (camera / sensor code,hand+auto
 0A,7CE0,Cam_FarStub_FactoryTest,C,from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator (coverage/results/merged_state/cov.npz),hand+auto
-0A,7CE6,Cam_FarStub_GainProbe,I,from the previous .sym (camera / sensor code,hand+auto
-0A,7CEC,Cam_FarStub_FactoryMeasure1,I,far stub; no caller found,hand+auto
+0A,7CE6,Unused_Cam_FarStub_GainProbe,I,"from the previous .sym (camera / sensor code. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
+0A,7CEC,Unused_Cam_FarStub_FactoryMeasure1,I,"far stub; no caller found. Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
 0A,7CF2,Cam_FarStub_BuildDitherMatrix,C,,hand+auto
 0A,7CF8,Cam_FarStub_MainDispatch,C,"from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)",hand+auto
 0A,7CFE,Cam_FarStub_DispatchEffect,C,far call target of 06:781F,hand+auto
