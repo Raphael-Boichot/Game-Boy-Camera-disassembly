@@ -254,9 +254,7 @@ jr_000_0167:
     call Rng_Init                                 ; $01FA
     xor a                                         ; $01FD
     ldh [hFarcallAArg], a                         ; $01FE
-    ld a, BANK(Boot_EraseAllPrompt_Far)           ; $0200
-    ld hl, Boot_EraseAllPrompt_Far                ; $0202
-    call Far_Call                                 ; $0205
+    farcall Boot_EraseAllPrompt_Far               ; $0200
     ld a, $00                                     ; $0208
     ld hl, Main_Entry                             ; $020A
     call Far_Jump                                 ; $020D
@@ -324,9 +322,7 @@ Boot_SoftReset::
     call Rng_Init                                 ; $028C
     ld a, $01                                     ; $028F
     ldh [hFarcallAArg], a                         ; $0291
-    ld a, BANK(Boot_EraseAllPrompt_Far)           ; $0293
-    ld hl, Boot_EraseAllPrompt_Far                ; $0295
-    call Far_Call                                 ; $0298
+    farcall Boot_EraseAllPrompt_Far               ; $0293
     ld a, $00                                     ; $029B
     ld hl, Main_Entry                             ; $029D
     call Far_Jump                                 ; $02A0
@@ -4336,9 +4332,7 @@ Vec_GetPhotoVectorByteFar::
     jr nz, jr_000_1611                            ; $1605
 
     ldh [hFarcallAArg], a                         ; $1607
-    ld a, BANK(Photo_FindSlot_Far)                ; $1609
-    ld hl, Photo_FindSlot_Far                     ; $160B
-    call Far_Call                                 ; $160E
+    farcall Photo_FindSlot_Far                    ; $1609
 
 jr_000_1611:
     pop hl                                        ; $1611
@@ -4429,26 +4423,20 @@ Sf2_BuildBossMasks::
     push af                                       ; $166B
     ld c, $02                                     ; $166C
     ldh [hFarcallAArg], a                         ; $166E
-    ld a, BANK(Photo_FarGetAddress)               ; $1670
-    ld hl, Photo_FarGetAddress                    ; $1672
-    call Far_Call                                 ; $1675
+    farcall Photo_FarGetAddress                   ; $1670
     ld de, wCollisionMask0                        ; $1678
     call Gfx_BuildCellMask                        ; $167B
     pop af                                        ; $167E
     push af                                       ; $167F
     ld c, $00                                     ; $1680
     ldh [hFarcallAArg], a                         ; $1682
-    ld a, BANK(Photo_FarGetAddress)               ; $1684
-    ld hl, Photo_FarGetAddress                    ; $1686
-    call Far_Call                                 ; $1689
+    farcall Photo_FarGetAddress                   ; $1684
     ld de, wCollisionMask1                        ; $168C
     call Gfx_BuildCellMask                        ; $168F
     pop af                                        ; $1692
     ld c, $01                                     ; $1693
     ldh [hFarcallAArg], a                         ; $1695
-    ld a, BANK(Photo_FarGetAddress)               ; $1697
-    ld hl, Photo_FarGetAddress                    ; $1699
-    call Far_Call                                 ; $169C
+    farcall Photo_FarGetAddress                   ; $1697
     ld de, wCollisionMask2                        ; $169F
     call Gfx_BuildCellMask                        ; $16A2
     ret                                           ; $16A5
@@ -8455,9 +8443,7 @@ Main_Entry::
     ld a, $04                                     ; $2E96
     ldh [hKeyRepeatPeriod], a                     ; $2E98
     ldh [hFarcallAArg], a                         ; $2E9A
-    ld a, BANK(Cam_BootSelfTest_Entry)            ; $2E9C
-    ld hl, Cam_BootSelfTest_Entry                 ; $2E9E
-    call Far_Call                                 ; $2EA1
+    farcall Cam_BootSelfTest_Entry                ; $2E9C
     ld a, MODE_TITLE_SCREENS                      ; $2EA4
     ld [wMode], a                                 ; $2EA6
     xor a                                         ; $2EA9
@@ -8509,11 +8495,7 @@ jr_000_2ec7:
     ld [wBurstPhotos + $1], a                     ; $2F02
     ld [wBurstPhotos + $2], a                     ; $2F05
     ld [wBurstPhotos + $3], a                     ; $2F08
-    ld a, BANK(Main_Entry_Tbl5573)                ; $2F0B
-    ld hl, Main_Entry_Tbl5573                     ; $2F0D
-    ld de, wCategoryPosA                          ; $2F10
-    ld bc, $0014                                  ; $2F13
-    call Mem_CopyFromBank                         ; $2F16
+    farcopy Mem_CopyFromBank, Main_Entry_Tbl5573, wCategoryPosA, $0014 ; $2F0B
     ld a, $03                                     ; $2F19
     ld [wPrintMarginLines], a                     ; $2F1B
     ld a, $01                                     ; $2F1E
@@ -8540,74 +8522,40 @@ Mode_Dispatch::
 
 ; C: 34 entries of {lo
 Mode_Table::
-    dw Mode00_MainMenu
-    db BANK(Mode00_MainMenu)
-    dw Mode01_ShootParlor
-    db BANK(Mode01_ShootParlor)
-    dw Mode02_ViewMenu
-    db BANK(Mode02_ViewMenu)
-    dw Mode03_SpecialMenu
-    db BANK(Mode03_SpecialMenu)
-    dw Mode04_DoodleMenu
-    db BANK(Mode04_DoodleMenu)
-    dw Mode05_EditMenu
-    db BANK(Mode05_EditMenu)
-    dw Mode06_LinkMenu
-    db BANK(Mode06_LinkMenu)
-    dw Mode07_ArcadeSpaceFever
-    db BANK(Mode07_ArcadeSpaceFever)
-    dw Mode08_UserScreens
-    db BANK(Mode08_UserScreens)
-    dw Mode09_AlbumEdit
-    db BANK(Mode09_AlbumEdit)
-    dw Mode0A_AlbumView
-    db BANK(Mode0A_AlbumView)
-    dw Mode0B_ShowMenu
-    db BANK(Mode0B_ShowMenu)
-    dw Mode0C_HotSpotViewer
-    db BANK(Mode0C_HotSpotViewer)
-    dw Mode0D_SlideShow
-    db BANK(Mode0D_SlideShow)
-    dw Mode0E_LinkTransfer
-    db BANK(Mode0E_LinkTransfer)
-    dw Mode0F_DeletePhoto
-    db BANK(Mode0F_DeletePhoto)
-    dw Mode10_Paint
-    db BANK(Mode10_Paint)
-    dw Mode11_Stamp
-    db BANK(Mode11_Stamp)
-    dw Mode12_AnimationEditor
-    db BANK(Mode12_AnimationEditor)
-    dw Mode13_AnimationPlayer
-    db BANK(Mode13_AnimationPlayer)
-    dw Mode14_ShootLiveView
-    db BANK(Mode14_ShootLiveView)
-    dw Mode15_SelfTimerInterval
-    db BANK(Mode15_SelfTimerInterval)
-    dw Mode16_ShutterbugMagic
-    db BANK(Mode16_ShutterbugMagic)
-    dw Mode17_SplitFusion
-    db BANK(Mode17_SplitFusion)
-    dw Mode18_PanoramaPrint
-    db BANK(Mode18_PanoramaPrint)
-    dw Mode19_TitleScreens
-    db BANK(Mode19_TitleScreens)
-    dw Mode1A_HotSpotEditor
-    db BANK(Mode1A_HotSpotEditor)
-    dw Mode1B_PrintMenu
-    db BANK(Mode1B_PrintMenu)
-    dw Mode1C_PrintPhotoPicker
-    db BANK(Mode1C_PrintPhotoPicker)
-    dw Mode1D_PrintJob
-    db BANK(Mode1D_PrintJob)
-    dw Mode1E_PrintOption
-    db BANK(Mode1E_PrintOption)
-    dw Mode1F_DjEditor
-    db BANK(Mode1F_DjEditor)
-    dw Mode20_Ball
-    db BANK(Mode20_Ball)
-    dw Mode21_RunRunRun
-    db BANK(Mode21_RunRunRun)
+    dwb Mode00_MainMenu
+    dwb Mode01_ShootParlor
+    dwb Mode02_ViewMenu
+    dwb Mode03_SpecialMenu
+    dwb Mode04_DoodleMenu
+    dwb Mode05_EditMenu
+    dwb Mode06_LinkMenu
+    dwb Mode07_ArcadeSpaceFever
+    dwb Mode08_UserScreens
+    dwb Mode09_AlbumEdit
+    dwb Mode0A_AlbumView
+    dwb Mode0B_ShowMenu
+    dwb Mode0C_HotSpotViewer
+    dwb Mode0D_SlideShow
+    dwb Mode0E_LinkTransfer
+    dwb Mode0F_DeletePhoto
+    dwb Mode10_Paint
+    dwb Mode11_Stamp
+    dwb Mode12_AnimationEditor
+    dwb Mode13_AnimationPlayer
+    dwb Mode14_ShootLiveView
+    dwb Mode15_SelfTimerInterval
+    dwb Mode16_ShutterbugMagic
+    dwb Mode17_SplitFusion
+    dwb Mode18_PanoramaPrint
+    dwb Mode19_TitleScreens
+    dwb Mode1A_HotSpotEditor
+    dwb Mode1B_PrintMenu
+    dwb Mode1C_PrintPhotoPicker
+    dwb Mode1D_PrintJob
+    dwb Mode1E_PrintOption
+    dwb Mode1F_DjEditor
+    dwb Mode20_Ball
+    dwb Mode21_RunRunRun
 
 ; C: 16 signed deltas added to scroll Y per frame for the popup slide (03:43EF). L3 pass 2026-10-26: read in BGB in 91
 ; replay(s) of the organic corpus, modes 09 0A 12 14 1C (tcrf_check/assets/l3_names/)
@@ -8665,8 +8613,7 @@ Mode1D_State00_Init::
     ldh [hSerialHandlerIndex], a                  ; $304D
     ld a, $01                                     ; $304F
     ld [wPrnPollEnable], a                        ; $3051
-    ld hl, wState                                 ; $3054
-    inc [hl]                                      ; $3057
+    next_state                                    ; $3054
     ret                                           ; $3058
 
 
@@ -8681,28 +8628,15 @@ Mode1D_State01_LoadScreen::
     xor a                                         ; $3068
     ldh [hScxShadow], a                           ; $3069
     ldh [hScyShadow], a                           ; $306B
-    ld a, BANK(Gfx_20_7500_Mode1D_State01_LoadScreen); $306D
-    ld hl, Gfx_20_7500_Mode1D_State01_LoadScreen  ; $306F
-    ld de, $9000                                  ; $3072
-    ld bc, $0800                                  ; $3075
-    call Mem_CopyFromBank                         ; $3078
-    ld a, BANK(Gfx_20_7D00_Mode1D_State01_LoadScreen); $307B
-    ld hl, Gfx_20_7D00_Mode1D_State01_LoadScreen  ; $307D
-    ld de, $8800                                  ; $3080
-    ld bc, $0400                                  ; $3083
-    call Mem_CopyFromBank                         ; $3086
-    ld a, BANK(Map_25_63E0_Mode1D_State01_LoadScreen); $3089
-    ld hl, Map_25_63E0_Mode1D_State01_LoadScreen  ; $308B
-    ld de, $9800                                  ; $308E
-    ld bc, $0240                                  ; $3091
-    call Mem_CopyFromBank                         ; $3094
+    farcopy Mem_CopyFromBank, Gfx_20_7500_Mode1D_State01_LoadScreen, $9000, $0800 ; $306D
+    farcopy Mem_CopyFromBank, Gfx_20_7D00_Mode1D_State01_LoadScreen, $8800, $0400 ; $307B
+    farcopy Mem_CopyFromBank, Map_25_63E0_Mode1D_State01_LoadScreen, $9800, $0240 ; $3089
     call Oam_ClearShadow                          ; $3097
     call Pal_AllWhite                             ; $309A
     call Lcd_On                                   ; $309D
     call Mode1D_DrawTvAnimation                   ; $30A0
     call Pal_FadeIn                               ; $30A3
-    ld hl, wState                                 ; $30A6
-    inc [hl]                                      ; $30A9
+    next_state                                    ; $30A6
     ret                                           ; $30AA
 
 
@@ -8730,8 +8664,7 @@ Mode1D_State02_SendInit::
     ld [wPrintProgressAcc], a                     ; $30CF
     ld [wPrintProgressAcc + $1], a                ; $30D2
     call Mode1D_LoadProgressStep                  ; $30D5
-    ld hl, wState                                 ; $30D8
-    inc [hl]                                      ; $30DB
+    next_state                                    ; $30D8
     ret                                           ; $30DC
 
 
@@ -8800,8 +8733,7 @@ Mode1D_State03_BuildBand::
     ld [wPrintLastBand], a                        ; $3159
 
 jr_000_315c:
-    ld hl, wState                                 ; $315C
-    inc [hl]                                      ; $315F
+    next_state                                    ; $315C
     ret                                           ; $3160
 
 
@@ -9191,8 +9123,7 @@ jr_000_3317:
     ld [wPrintLastPage], a                        ; $332C
 
 jr_000_332f:
-    ld hl, wState                                 ; $332F
-    inc [hl]                                      ; $3332
+    next_state                                    ; $332F
     ret                                           ; $3333
 
 
@@ -9251,8 +9182,7 @@ jr_000_3367:
     ld a, MUSIC_TRANSFER_PRINT                    ; $337D
     call Snd_Music                                ; $337F
     pop af                                        ; $3382
-    ld hl, wState                                 ; $3383
-    inc [hl]                                      ; $3386
+    next_state                                    ; $3383
     ret                                           ; $3387
 
 
@@ -9269,29 +9199,16 @@ jr_000_3391:
     jr nz, jr_000_3391                            ; $3397
 
     call Lcd_Off                                  ; $3399
-    ld a, BANK(Gfx_1B_7100_Mode1D_State06_LoadWaitScreen); $339C
-    ld hl, Gfx_1B_7100_Mode1D_State06_LoadWaitScreen; $339E
-    ld de, $9000                                  ; $33A1
-    ld bc, $0800                                  ; $33A4
-    call Mem_CopyFromBank                         ; $33A7
-    ld a, BANK(Gfx_1B_7900_Mode1D_State06_LoadWaitScreen); $33AA
-    ld hl, Gfx_1B_7900_Mode1D_State06_LoadWaitScreen; $33AC
-    ld de, $8800                                  ; $33AF
-    ld bc, $0650                                  ; $33B2
-    call Mem_CopyFromBank                         ; $33B5
-    ld a, BANK(Map_26_5C40_Mode1D_State06_LoadWaitScreen); $33B8
-    ld hl, Map_26_5C40_Mode1D_State06_LoadWaitScreen; $33BA
-    ld de, $9800                                  ; $33BD
-    ld bc, $0240                                  ; $33C0
-    call Mem_CopyFromBank                         ; $33C3
+    farcopy Mem_CopyFromBank, Gfx_1B_7100_Mode1D_State06_LoadWaitScreen, $9000, $0800 ; $339C
+    farcopy Mem_CopyFromBank, Gfx_1B_7900_Mode1D_State06_LoadWaitScreen, $8800, $0650 ; $33AA
+    farcopy Mem_CopyFromBank, Map_26_5C40_Mode1D_State06_LoadWaitScreen, $9800, $0240 ; $33B8
     call Lcd_On                                   ; $33C6
     ld a, $04                                     ; $33C9
     ld [wPrnPollCnt], a                           ; $33CB
     call Oam_ClearShadow                          ; $33CE
     call Mode1D_DrawBusyIcon                      ; $33D1
     call Pal_FadeIn                               ; $33D4
-    ld hl, wState                                 ; $33D7
-    inc [hl]                                      ; $33DA
+    next_state                                    ; $33D7
     ret                                           ; $33DB
 
 
@@ -9317,16 +9234,14 @@ Mode1D_State07_WaitPrinted::
     call Lcd_Off                                  ; $33F7
     xor a                                         ; $33FA
     ld [wPrintFirstPage], a                       ; $33FB
-    ld a, STATE_1D_LOAD_SCREEN                    ; $33FE
-    ld [wState], a                                ; $3400
+    set_state STATE_1D_LOAD_SCREEN                ; $33FE
     ret                                           ; $3403
 
 
 jr_000_3404:
     call Print_CountPrintedPhoto                  ; $3404
     call Prn_EngineStop                           ; $3407
-    ld hl, wState                                 ; $340A
-    inc [hl]                                      ; $340D
+    next_state                                    ; $340A
     ret                                           ; $340E
 
 
@@ -9372,8 +9287,7 @@ jr_000_343b:
     ld a, $01                                     ; $343E
     ld [wPrintAbortFlag], a                       ; $3440
     call Prn_EngineStop                           ; $3443
-    ld a, STATE_1D_CLEANUP                        ; $3446
-    ld [wState], a                                ; $3448
+    set_state STATE_1D_CLEANUP                    ; $3446
     ret                                           ; $344B
 
 
@@ -9382,8 +9296,7 @@ Mode1D_UserCancel::
     ld a, $01                                     ; $344C
     ld [wPrintAbortFlag], a                       ; $344E
     call Prn_EngineStop                           ; $3451
-    ld a, STATE_1D_EXIT                           ; $3454
-    ld [wState], a                                ; $3456
+    set_state STATE_1D_EXIT                       ; $3454
     ret                                           ; $3459
 
 
@@ -9427,17 +9340,14 @@ Mode1D_State09_Cleanup::
     ld [wPrnPollEnable], a                        ; $3499
     xor a                                         ; $349C
     ld [wSubstate], a                             ; $349D
-    ld hl, wState                                 ; $34A0
-    inc [hl]                                      ; $34A3
+    next_state                                    ; $34A0
     ret                                           ; $34A4
 
 
 ; C: far call 09:7290 (shared result / error screen)
 Mode1D_State0A_ErrorScreen::
     ldh [hFarcallAArg], a                         ; $34A5
-    ld a, BANK(ResultScreen_Far)                  ; $34A7
-    ld hl, ResultScreen_Far                       ; $34A9
-    call Far_Call                                 ; $34AC
+    farcall ResultScreen_Far                      ; $34A7
     ret                                           ; $34AF
 
 
@@ -9554,17 +9464,13 @@ jr_000_3538:
 ; C: far calls 02:503F then adds 1 to the printed-photos counter (BCD saturating) and far calls 02:4BB2
 Print_CountPrintedPhoto::
     ldh [hFarcallAArg], a                         ; $354D
-    ld a, BANK(Counters_Load_Far)                 ; $354F
-    ld hl, Counters_Load_Far                      ; $3551
-    call Far_Call                                 ; $3554
+    farcall Counters_Load_Far                     ; $354F
     ld a, $01                                     ; $3557
     ld hl, wCntPrinted                            ; $3559
     ld b, $02                                     ; $355C
     call Bcd_AddSaturate                          ; $355E
     ldh [hFarcallAArg], a                         ; $3561
-    ld a, BANK(Counters_Store_Far)                ; $3563
-    ld hl, Counters_Store_Far                     ; $3565
-    call Far_Call                                 ; $3568
+    farcall Counters_Store_Far                    ; $3563
     ret                                           ; $356B
 
 

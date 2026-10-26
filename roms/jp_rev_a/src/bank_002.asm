@@ -2466,11 +2466,7 @@ jr_002_4cab:
 
 
 jr_002_4cb6:
-    ld a, BANK(AlbumB_UnusedSlotB_Tiles)          ; $4CB6
-    ld hl, AlbumB_UnusedSlotB_Tiles               ; $4CB8
-    ld de, wPhotoImage                            ; $4CBB
-    ld bc, $0fb8                                  ; $4CBE
-    call Mem_CopyFromBank                         ; $4CC1
+    farcopy Mem_CopyFromBank, AlbumB_UnusedSlotB_Tiles, wPhotoImage, $0fb8 ; $4CB6
     jp Far_Call_Return                            ; $4CC4
 
 
@@ -3452,66 +3448,36 @@ jr_002_5208:
 ; C: 30 entries of 3 bytes {address lo; hi; bank}: the 30 pictures of album B (bank $36 $6000 ... bank $3D $7000; one
 ; per $1000)
 AlbumB_SlotTbl::
-    dw AlbumB_Photo01_Tiles
-    db BANK(AlbumB_Photo01_Tiles)
-    dw AlbumB_Photo02_Tiles
-    db BANK(AlbumB_Photo02_Tiles)
-    dw AlbumB_Photo03_Tiles
-    db BANK(AlbumB_Photo03_Tiles)
-    dw AlbumB_Photo04_Tiles
-    db BANK(AlbumB_Photo04_Tiles)
-    dw AlbumB_Photo05_Tiles
-    db BANK(AlbumB_Photo05_Tiles)
-    dw AlbumB_Photo06_Tiles
-    db BANK(AlbumB_Photo06_Tiles)
-    dw AlbumB_Photo07_Tiles
-    db BANK(AlbumB_Photo07_Tiles)
-    dw AlbumB_Photo08_Tiles
-    db BANK(AlbumB_Photo08_Tiles)
-    dw AlbumB_Photo09_Tiles
-    db BANK(AlbumB_Photo09_Tiles)
-    dw AlbumB_Photo10_Tiles
-    db BANK(AlbumB_Photo10_Tiles)
-    dw AlbumB_Photo11_Tiles
-    db BANK(AlbumB_Photo11_Tiles)
-    dw AlbumB_Photo12_Tiles
-    db BANK(AlbumB_Photo12_Tiles)
-    dw AlbumB_Photo13_Tiles
-    db BANK(AlbumB_Photo13_Tiles)
-    dw AlbumB_Photo14_Tiles
-    db BANK(AlbumB_Photo14_Tiles)
-    dw AlbumB_Photo15_Tiles
-    db BANK(AlbumB_Photo15_Tiles)
-    dw AlbumB_Photo16_Tiles
-    db BANK(AlbumB_Photo16_Tiles)
-    dw AlbumB_Photo17_Tiles
-    db BANK(AlbumB_Photo17_Tiles)
-    dw AlbumB_Photo18_Tiles
-    db BANK(AlbumB_Photo18_Tiles)
-    dw AlbumB_Photo19_Tiles
-    db BANK(AlbumB_Photo19_Tiles)
-    dw AlbumB_Photo20_Tiles
-    db BANK(AlbumB_Photo20_Tiles)
-    dw AlbumB_Photo21_Tiles
-    db BANK(AlbumB_Photo21_Tiles)
-    dw AlbumB_Photo22_Tiles
-    db BANK(AlbumB_Photo22_Tiles)
-    dw AlbumB_Photo23_Tiles
-    db BANK(AlbumB_Photo23_Tiles)
-    dw AlbumB_Photo24_Tiles
-    db BANK(AlbumB_Photo24_Tiles)
-    dw AlbumB_Photo25_Tiles
-    db BANK(AlbumB_Photo25_Tiles)
-    dw AlbumB_Photo26_Tiles
-    db BANK(AlbumB_Photo26_Tiles)
-    dw AlbumB_Photo27_Tiles
-    db BANK(AlbumB_Photo27_Tiles)
-    dw AlbumB_Photo28_Tiles
-    db BANK(AlbumB_Photo28_Tiles)
-    dw AlbumB_Photo29_Tiles
-    db BANK(AlbumB_Photo29_Tiles)
-    dw AlbumB_Photo30_Tiles
-    db BANK(AlbumB_Photo30_Tiles)
+    dwb AlbumB_Photo01_Tiles
+    dwb AlbumB_Photo02_Tiles
+    dwb AlbumB_Photo03_Tiles
+    dwb AlbumB_Photo04_Tiles
+    dwb AlbumB_Photo05_Tiles
+    dwb AlbumB_Photo06_Tiles
+    dwb AlbumB_Photo07_Tiles
+    dwb AlbumB_Photo08_Tiles
+    dwb AlbumB_Photo09_Tiles
+    dwb AlbumB_Photo10_Tiles
+    dwb AlbumB_Photo11_Tiles
+    dwb AlbumB_Photo12_Tiles
+    dwb AlbumB_Photo13_Tiles
+    dwb AlbumB_Photo14_Tiles
+    dwb AlbumB_Photo15_Tiles
+    dwb AlbumB_Photo16_Tiles
+    dwb AlbumB_Photo17_Tiles
+    dwb AlbumB_Photo18_Tiles
+    dwb AlbumB_Photo19_Tiles
+    dwb AlbumB_Photo20_Tiles
+    dwb AlbumB_Photo21_Tiles
+    dwb AlbumB_Photo22_Tiles
+    dwb AlbumB_Photo23_Tiles
+    dwb AlbumB_Photo24_Tiles
+    dwb AlbumB_Photo25_Tiles
+    dwb AlbumB_Photo26_Tiles
+    dwb AlbumB_Photo27_Tiles
+    dwb AlbumB_Photo28_Tiles
+    dwb AlbumB_Photo29_Tiles
+    dwb AlbumB_Photo30_Tiles
 
 ; C: 203 words: list number -> OAM record list (4-byte records Y X tile attr; ends with Y=$80); used by
 ; Oam_AddMeta_B02_5272 (00:247D)

@@ -101,6 +101,78 @@ def far_labels(out):
     return dict(far=done, far_left=left)
 
 
+MACROS = """; Macros of the Pocket Camera source tree, written by tools/make_source.py. Each one assembles to the same bytes as the lines it replaces.
+
+; farcopy ROUTINE, SOURCE, DEST, LENGTH: copy LENGTH bytes from SOURCE (any bank) to DEST with a banked copy routine
+; (Mem_CopyFromBank, Vram_CopyFromBank, Vram_CopyFromBankAuto, Vram_CopyFromBank_4)
+MACRO farcopy
+    ld a, BANK(\\2)
+    ld hl, \\2
+    ld de, \\3
+    ld bc, \\4
+    call \\1
+ENDM
+
+; farcall TARGET: call TARGET in its own bank through Far_Call
+MACRO farcall
+    ld a, BANK(\\1)
+    ld hl, \\1
+    call Far_Call
+ENDM
+
+; dwb LABEL: a 3-byte far pointer {lo, hi, bank}
+MACRO dwb
+    dw \\1
+    db BANK(\\1)
+ENDM
+
+; set_state STATE: the state of the current mode (leaves A = STATE)
+MACRO set_state
+    ld a, \\1
+    ld [wState], a
+ENDM
+
+; next_state: the next state of the current mode (leaves HL = wState)
+MACRO next_state
+    ld hl, wState
+    inc [hl]
+ENDM
+"""
+COPIERS = ('Mem_CopyFromBank', 'Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4')
+
+
+def use_macros(out):
+    """Rewrite the five patterns of MACROS (on adjacent lines only, so no label can sit inside one); the first line's address comment stays."""
+    cnt = dict(farcopy=0, farcall=0, dwb=0, set_state=0, next_state=0)
+    def code(l): return l.split(';')[0].strip()
+    def addr(l): m = re.search(r'; \$[0-9A-F]{4}', l); return m.group(0) if m else ''
+    def put(text, l): return ('    ' + text).ljust(49) + ' ' + addr(l) if addr(l) else '    ' + text
+    for f in sorted(os.listdir(out)):
+        if not re.match(r'bank_[0-9a-f]{3}\.asm$', f): continue
+        p = os.path.join(out, f); L = open(p, encoding='utf-8').read().split('\n'); R = []; i = 0
+        while i < len(L):
+            c = [code(x) for x in L[i:i + 5]] + [''] * 5
+            m = re.match(r'ld a, BANK\((\w+)\)$', c[0])
+            if m and c[1] == 'ld hl, ' + m.group(1):
+                x = m.group(1)
+                if c[2].startswith('ld de, ') and c[3].startswith('ld bc, ') and c[4].startswith('call ') and c[4][5:] in COPIERS:
+                    R.append(put('farcopy %s, %s, %s, %s' % (c[4][5:], x, c[2][7:], c[3][7:]), L[i])); cnt['farcopy'] += 1; i += 5; continue
+                if c[2] == 'call Far_Call':
+                    R.append(put('farcall ' + x, L[i])); cnt['farcall'] += 1; i += 3; continue
+            m = re.match(r'dw (\w+)$', c[0])
+            if m and c[1] == 'db BANK(%s)' % m.group(1):
+                R.append(put('dwb ' + m.group(1), L[i])); cnt['dwb'] += 1; i += 2; continue
+            m = re.match(r'ld a, (STATE_\w+)$', c[0])
+            if m and c[1] == 'ld [wState], a':
+                R.append(put('set_state ' + m.group(1), L[i])); cnt['set_state'] += 1; i += 2; continue
+            if c[0] == 'ld hl, wState' and c[1] == 'inc [hl]':
+                R.append(put('next_state', L[i])); cnt['next_state'] += 1; i += 2; continue
+            R.append(L[i]); i += 1
+        open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(R))
+    open(os.path.join(out, 'macros.inc'), 'w', encoding='utf-8', newline='\n').write(MACROS)
+    return cnt
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--rom', required=True); ap.add_argument('--mgbdis', default=os.environ.get('MGBDIS', '/home/claude/tc/mgbdis/mgbdis.py'))
@@ -179,7 +251,7 @@ def main():
                 line = re.sub(r';\s*\$([0-9a-f]{4}):(?: \$[0-9a-f]{2})+\s*$', lambda mm: '; $' + mm.group(1).upper(), line)
                 outl.append(line.rstrip()); i += 1
             open(os.path.join(out, f), 'w', encoding='utf-8', newline='\n').write('\n'.join(outl).rstrip('\n') + '\n')
-        stats.update(far_labels(out))
+        stats.update(far_labels(out)); stats.update(use_macros(out))
         open(os.path.join(out, 'gfx.mk'), 'w', newline='\n').write('# Written by tools/make_source.py: one rule per tile PNG (width 16 tiles; -x = blank tiles at the end of the last row).\n'
                                                                   'GFX := %s\n\n%s\n' % (' '.join('$(BUILD)/' + g.split(':')[0][9:] for g in gfx), '\n\n'.join(gfx)))
         for inc in ('hardware.inc', 'ram_jp.inc', 'const_jp.inc', 'charmap_jp.inc'):
@@ -187,8 +259,9 @@ def main():
         g = open(os.path.join(lst, 'game.asm'), encoding='utf-8').read().split('\n')
         g = ['; Pocket Camera (Japan) (Rev A) (SGB Enhanced), md5 %s.' % MD5,
              '; The editable source tree (L5), written by tools/make_source.py; build it with `make` at the top of the repository.', ''] + [l for l in g if l.startswith('INCLUDE')]
+        g.insert(g.index('INCLUDE "charmap_jp.inc"') + 1, 'INCLUDE "macros.inc"')
         open(os.path.join(out, 'game.asm'), 'w', encoding='utf-8', newline='\n').write('\n'.join(g) + '\n')
-        print('make_source: %(banks)d banks, %(incbin)d INCBIN files (%(incbin_bytes)d bytes, %(png)d tile blocks as PNG), %(notes)d label notes, %(far)d far pointers as labels (%(far_left)d left as numbers) ->' % stats, os.path.relpath(out, REPO))
+        print('make_source: %(banks)d banks, %(incbin)d INCBIN files (%(incbin_bytes)d bytes, %(png)d tile blocks as PNG), %(notes)d label notes, %(far)d far pointers as labels (%(far_left)d left as numbers); macros: farcopy %(farcopy)d, farcall %(farcall)d, dwb %(dwb)d, set_state %(set_state)d, next_state %(next_state)d ->' % stats, os.path.relpath(out, REPO))
         if a.check:
             md5 = build(out, os.path.join(tmp, 'check.gb'), a.rgbds)
             print('make_source: rebuilt md5', md5, 'OK' if md5 == MD5 else 'DIFFERS')

@@ -8416,16 +8416,8 @@ Cam_FactoryDiag_AllButtonsExceptB::
     xor a                                         ; $6A90
     ldh [hScxShadow], a                           ; $6A91
     ldh [hScyShadow], a                           ; $6A93
-    ld a, BANK(Gfx_24_57E0_Unused_Link_LoadTiles) ; $6A95
-    ld hl, Gfx_24_57E0_Unused_Link_LoadTiles      ; $6A97
-    ld de, $9000                                  ; $6A9A
-    ld bc, $0300                                  ; $6A9D
-    call Mem_CopyFromBank                         ; $6AA0
-    ld a, BANK(Map_25_5840_Cam_FactoryDiag_AllButtonsExceptB); $6AA3
-    ld hl, Map_25_5840_Cam_FactoryDiag_AllButtonsExceptB; $6AA5
-    ld de, $9800                                  ; $6AA8
-    ld bc, $0240                                  ; $6AAB
-    call Mem_CopyFromBank                         ; $6AAE
+    farcopy Mem_CopyFromBank, Gfx_24_57E0_Unused_Link_LoadTiles, $9000, $0300 ; $6A95
+    farcopy Mem_CopyFromBank, Map_25_5840_Cam_FactoryDiag_AllButtonsExceptB, $9800, $0240 ; $6AA3
     ld a, $02                                     ; $6AB1
     ld [$4000], a                                 ; $6AB3
     ld hl, $982f                                  ; $6AB6
@@ -8472,11 +8464,7 @@ Cam_FactoryDiag_AllButtonsExceptB::
     and a                                         ; $6B25
     jr nz, jr_00a_6b3f                            ; $6B26
 
-    ld a, BANK(Map_25_5A80_Cam_FactoryDiag_AllButtonsExceptB); $6B28
-    ld hl, Map_25_5A80_Cam_FactoryDiag_AllButtonsExceptB; $6B2A
-    ld de, $98a0                                  ; $6B2D
-    ld bc, $0020                                  ; $6B30
-    call Vram_CopyFromBank_4                      ; $6B33
+    farcopy Vram_CopyFromBank_4, Map_25_5A80_Cam_FactoryDiag_AllButtonsExceptB, $98a0, $0020 ; $6B28
     push af                                       ; $6B36
     ld a, MUSIC_FACTORY_DIAG                      ; $6B37
     call Snd_Music                                ; $6B39
@@ -8484,11 +8472,7 @@ Cam_FactoryDiag_AllButtonsExceptB::
     jr jr_00a_6b54                                ; $6B3D
 
 jr_00a_6b3f:
-    ld a, BANK(Map_25_5AA0_Cam_FactoryDiag_AllButtonsExceptB); $6B3F
-    ld hl, Map_25_5AA0_Cam_FactoryDiag_AllButtonsExceptB; $6B41
-    ld de, $98a0                                  ; $6B44
-    ld bc, $0020                                  ; $6B47
-    call Vram_CopyFromBank_4                      ; $6B4A
+    farcopy Vram_CopyFromBank_4, Map_25_5AA0_Cam_FactoryDiag_AllButtonsExceptB, $98a0, $0020 ; $6B3F
     push af                                       ; $6B4D
     ld a, MUSIC_TOTAKA_TUNE                       ; $6B4E
     call Snd_Music                                ; $6B50
@@ -8546,16 +8530,8 @@ Cam_FirstBoot_StorePleaseWait::
     xor a                                         ; $6B88
     ldh [hScxShadow], a                           ; $6B89
     ldh [hScyShadow], a                           ; $6B8B
-    ld a, BANK(Gfx_24_57E0_Unused_Link_LoadTiles) ; $6B8D
-    ld hl, Gfx_24_57E0_Unused_Link_LoadTiles      ; $6B8F
-    ld de, $9000                                  ; $6B92
-    ld bc, $0300                                  ; $6B95
-    call Mem_CopyFromBank                         ; $6B98
-    ld a, BANK(Map_25_5AC0_Cam_FirstBoot_StorePleaseWait); $6B9B
-    ld hl, Map_25_5AC0_Cam_FirstBoot_StorePleaseWait; $6B9D
-    ld de, $9800                                  ; $6BA0
-    ld bc, $0240                                  ; $6BA3
-    call Mem_CopyFromBank                         ; $6BA6
+    farcopy Mem_CopyFromBank, Gfx_24_57E0_Unused_Link_LoadTiles, $9000, $0300 ; $6B8D
+    farcopy Mem_CopyFromBank, Map_25_5AC0_Cam_FirstBoot_StorePleaseWait, $9800, $0240 ; $6B9B
     call Oam_ClearShadow                          ; $6BA9
     call Pal_AllWhite                             ; $6BAC
     call Lcd_On                                   ; $6BAF
@@ -8568,11 +8544,7 @@ Cam_FirstBoot_StorePleaseWait::
     ld a, $0a                                     ; $6BBE
     ld hl, Cam_FarStub_FullCalibration            ; $6BC0
     call Far_Call                                 ; $6BC3
-    ld a, BANK(Map_25_5D00_Cam_FirstBoot_StorePleaseWait); $6BC6
-    ld hl, Map_25_5D00_Cam_FirstBoot_StorePleaseWait; $6BC8
-    ld de, $9900                                  ; $6BCB
-    ld bc, $0020                                  ; $6BCE
-    call Vram_CopyFromBank_4                      ; $6BD1
+    farcopy Vram_CopyFromBank_4, Map_25_5D00_Cam_FirstBoot_StorePleaseWait, $9900, $0020 ; $6BC6
     push af                                       ; $6BD4
     ld a, MUSIC_RUN_RACE                          ; $6BD5
     call Snd_Music                                ; $6BD7

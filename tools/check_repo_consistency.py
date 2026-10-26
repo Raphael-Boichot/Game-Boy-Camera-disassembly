@@ -956,6 +956,10 @@ if A.roundtrip:
                 hsrc = make_source.build(src, os.path.join(tmp, 'src_build.gb'), A.rgbds)
                 if hsrc != want: bad('source', 'roms/jp_rev_a/src/ builds md5 %s, expected %s' % (hsrc, want))
                 else: ok('source', 'roms/jp_rev_a/src/ fresh (%d files) and builds md5 %s: %s banks, %s INCBIN files (%s bytes, %s tile PNGs), %s label notes, %s far pointers as labels (%s left as numbers)' % ((len(walk(src)), hsrc) + m.groups()))
+                mc = re.search(r'macros: farcopy (\d+), farcall (\d+), dwb (\d+), set_state (\d+), next_state (\d+)', ms.stdout)
+                ok('source', 'macros: farcopy %s, farcall %s, dwb %s, set_state %s, next_state %s' % mc.groups())
+                quoted('source macros', r'`farcopy` \(([\d,]+)\), `farcall` \(([\d,]+)\), `dwb` \(([\d,]+)\), `set_state` \(([\d,]+)\) and `next_state` \(([\d,]+)\)',
+                       lambda mm: (tuple(int(g) for g in mc.groups()), tuple(num(g) for g in mm.groups())), docs=('README.md',), need=('README.md',))
                 quoted('source stats', r'(\d+) bank files, ([\d,]+) `INCBIN` files \(([\d,]+) bytes; ([\d,]+) tile blocks as PNG\), ([\d,]+) label notes, ([\d,]+) far pointers written as labels \((\d+) left as numbers\)',
                        lambda mm: (tuple(int(g) for g in m.groups()), tuple(num(g) for g in mm.groups())), docs=('README.md',), need=('README.md',))
         shutil.rmtree(tmp, ignore_errors=True)

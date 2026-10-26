@@ -38,9 +38,7 @@ Mode1F_State00_TitleInit::
     ldh [hScxShadow], a                           ; $4030
     ldh [hScyShadow], a                           ; $4032
     ldh [hFarcallAArg], a                         ; $4034
-    ld a, BANK(GameFace_LoadTiles_Far)            ; $4036
-    ld hl, GameFace_LoadTiles_Far                 ; $4038
-    call Far_Call                                 ; $403B
+    farcall GameFace_LoadTiles_Far                ; $4036
     ld a, [wGamefacePresent]                      ; $403E
     and a                                         ; $4041
     jr z, jr_005_4049                             ; $4042
@@ -50,9 +48,7 @@ Mode1F_State00_TitleInit::
 
 jr_005_4049:
     ldh [hFarcallAArg], a                         ; $4049
-    ld a, BANK(Dj_LoadTune_Far)                   ; $404B
-    ld hl, Dj_LoadTune_Far                        ; $404D
-    call Far_Call                                 ; $4050
+    farcall Dj_LoadTune_Far                       ; $404B
     ld a, [wSavedTunePresent]                     ; $4053
     and a                                         ; $4056
     jr z, jr_005_405e                             ; $4057
@@ -61,16 +57,8 @@ jr_005_4049:
     ld [wStartTuneSource], a                      ; $405B
 
 jr_005_405e:
-    ld a, BANK(Gfx_10_5C00_Mode1F_State00_TitleInit); $405E
-    ld hl, Gfx_10_5C00_Mode1F_State00_TitleInit   ; $4060
-    ld de, $8000                                  ; $4063
-    ld bc, $1800                                  ; $4066
-    call Mem_CopyFromBank                         ; $4069
-    ld a, BANK(Map_26_6780_Mode1F_State00_TitleInit); $406C
-    ld hl, Map_26_6780_Mode1F_State00_TitleInit   ; $406E
-    ld de, $9800                                  ; $4071
-    ld bc, $0240                                  ; $4074
-    call Mem_CopyFromBank                         ; $4077
+    farcopy Mem_CopyFromBank, Gfx_10_5C00_Mode1F_State00_TitleInit, $8000, $1800 ; $405E
+    farcopy Mem_CopyFromBank, Map_26_6780_Mode1F_State00_TitleInit, $9800, $0240 ; $406C
     call Oam_ClearShadow                          ; $407A
     call Pal_AllWhite                             ; $407D
     call Lcd_On                                   ; $4080
@@ -79,8 +67,7 @@ jr_005_405e:
     call Snd_Music                                ; $4086
     pop af                                        ; $4089
     call Pal_FadeIn                               ; $408A
-    ld hl, wState                                 ; $408D
-    inc [hl]                                      ; $4090
+    next_state                                    ; $408D
     ret                                           ; $4091
 
 
@@ -101,8 +88,7 @@ Mode1F_State01_MenuSource::
     jr nz, jr_005_40b3                            ; $40A9
 
     call DjTitle_DrawSongNumber                   ; $40AB
-    ld hl, wState                                 ; $40AE
-    inc [hl]                                      ; $40B1
+    next_state                                    ; $40AE
     ret                                           ; $40B2
 
 
@@ -122,8 +108,7 @@ jr_005_40b3:
 
 
 jr_005_40c5:
-    ld a, STATE_1F_MENU_PERFORMER                 ; $40C5
-    ld [wState], a                                ; $40C7
+    set_state STATE_1F_MENU_PERFORMER             ; $40C5
     ret                                           ; $40CA
 
 
@@ -139,8 +124,7 @@ jr_005_40cb:
     call Lcd_Off                                  ; $40D8
     ld a, MODE_MAIN_MENU                          ; $40DB
     ld [wMode], a                                 ; $40DD
-    ld a, STATE_00_INIT                           ; $40E0
-    ld [wState], a                                ; $40E2
+    set_state STATE_00_INIT                       ; $40E0
     ret                                           ; $40E5
 
 
@@ -270,8 +254,7 @@ Mode1F_State02_MenuSong::
     ld a, SFX1_CURSOR_MOVE                        ; $417B
     call Snd_Sfx1                                 ; $417D
     pop af                                        ; $4180
-    ld hl, wState                                 ; $4181
-    inc [hl]                                      ; $4184
+    next_state                                    ; $4181
     ret                                           ; $4185
 
 
@@ -467,9 +450,7 @@ jr_005_4278:
 
 jr_005_4282:
     ldh [hFarcallAArg], a                         ; $4282
-    ld a, BANK(Dj_LoadTune_Far)                   ; $4284
-    ld hl, Dj_LoadTune_Far                        ; $4286
-    call Far_Call                                 ; $4289
+    farcall Dj_LoadTune_Far                       ; $4284
 
 jr_005_428c:
     xor a                                         ; $428C
@@ -485,8 +466,7 @@ jr_005_428c:
     ldh [rNR51], a                                ; $42A2
     ld a, $80                                     ; $42A4
     ldh [rNR52], a                                ; $42A6
-    ld hl, wState                                 ; $42A8
-    inc [hl]                                      ; $42AB
+    next_state                                    ; $42A8
     ret                                           ; $42AC
 
 
@@ -509,8 +489,7 @@ jr_005_42ad:
 
 
 jr_005_42c5:
-    ld a, STATE_1F_MENU_SOURCE                    ; $42C5
-    ld [wState], a                                ; $42C7
+    set_state STATE_1F_MENU_SOURCE                ; $42C5
     ret                                           ; $42CA
 
 
@@ -662,20 +641,10 @@ Mode1F_State04_PerformanceSetup::
     ld de, $8000                                  ; $4392
     ld bc, $0d80                                  ; $4395
     call Mem_CopyFromBank                         ; $4398
-    ld a, BANK(Map_27_59F0_Mode1F_State04_PerformanceSetup); $439B
-    ld hl, Map_27_59F0_Mode1F_State04_PerformanceSetup; $439D
-    ld de, $9e00                                  ; $43A0
-    ld bc, $01c0                                  ; $43A3
-    call Mem_CopyFromBank                         ; $43A6
-    ld a, BANK(Map_22_7B40_Mode1F_State04_PerformanceSetup); $43A9
-    ld hl, Map_22_7B40_Mode1F_State04_PerformanceSetup; $43AB
-    ld de, $9800                                  ; $43AE
-    ld bc, $0400                                  ; $43B1
-    call Mem_CopyFromBank                         ; $43B4
+    farcopy Mem_CopyFromBank, Map_27_59F0_Mode1F_State04_PerformanceSetup, $9e00, $01c0 ; $439B
+    farcopy Mem_CopyFromBank, Map_22_7B40_Mode1F_State04_PerformanceSetup, $9800, $0400 ; $43A9
     ldh [hFarcallAArg], a                         ; $43B7
-    ld a, BANK(GameFace_LoadTiles_Far)            ; $43B9
-    ld hl, GameFace_LoadTiles_Far                 ; $43BB
-    call Far_Call                                 ; $43BE
+    farcall GameFace_LoadTiles_Far                ; $43B9
     call DjTitle_LoadPerformerGfx                 ; $43C1
     call DjPerf_Init                              ; $43C4
     ld a, $0f                                     ; $43C7
@@ -713,8 +682,7 @@ Mode1F_State04_PerformanceSetup::
     ldh [rNR51], a                                ; $440E
     ld a, $80                                     ; $4410
     ldh [rNR52], a                                ; $4412
-    ld hl, wState                                 ; $4414
-    inc [hl]                                      ; $4417
+    next_state                                    ; $4414
     ret                                           ; $4418
 
 
@@ -735,8 +703,7 @@ Mode1F_State05_Performance::
     res 6, [hl]                                   ; $4437
     ld hl, rIE                                    ; $4439
     res 1, [hl]                                   ; $443C
-    ld a, STATE_1F_EDIT_PAGES_SETUP               ; $443E
-    ld [wState], a                                ; $4440
+    set_state STATE_1F_EDIT_PAGES_SETUP           ; $443E
     ret                                           ; $4443
 
 
@@ -759,8 +726,7 @@ jr_005_4444:
     ld a, MUSIC_STOP                              ; $4461
     call Snd_Music                                ; $4463
     pop af                                        ; $4466
-    ld a, STATE_1F_TITLE_INIT                     ; $4467
-    ld [wState], a                                ; $4469
+    set_state STATE_1F_TITLE_INIT                 ; $4467
     ret                                           ; $446C
 
 
@@ -768,16 +734,8 @@ jr_005_446d:
     call Oam_HideUnused                           ; $446D
     ld c, $03                                     ; $4470
     call DjEd_LoadPerformerTiles9480              ; $4472
-    ld a, BANK(Gfx_1A_4E00_Mode1F_State05_Performance); $4475
-    ld hl, Gfx_1A_4E00_Mode1F_State05_Performance ; $4477
-    ld de, $8d60                                  ; $447A
-    ld bc, $02a0                                  ; $447D
-    call Vram_CopyFromBank                        ; $4480
-    ld a, BANK(Map_27_5D70_Mode1F_State05_Performance); $4483
-    ld hl, Map_27_5D70_Mode1F_State05_Performance ; $4485
-    ld de, $9c00                                  ; $4488
-    ld bc, $00e0                                  ; $448B
-    call Vram_CopyFromBank                        ; $448E
+    farcopy Vram_CopyFromBank, Gfx_1A_4E00_Mode1F_State05_Performance, $8d60, $02a0 ; $4475
+    farcopy Vram_CopyFromBank, Map_27_5D70_Mode1F_State05_Performance, $9c00, $00e0 ; $4483
     rst Rst08_WaitVBlank                          ; $4491
     call DjEd_Tick                                ; $4492
     call DjPerf_NR51MaskAll                       ; $4495
@@ -801,9 +759,7 @@ Mode1F_State06_SavePanel::
     ret z                                         ; $44B3
 
     ldh [hFarcallAArg], a                         ; $44B4
-    ld a, BANK(Dj_StoreTune_Far)                  ; $44B6
-    ld hl, Dj_StoreTune_Far                       ; $44B8
-    call Far_Call                                 ; $44BB
+    farcall Dj_StoreTune_Far                      ; $44B6
 
 jr_005_44be:
     call Oam_HideUnused                           ; $44BE
@@ -811,22 +767,13 @@ jr_005_44be:
     call DjPerf_AnimateSprites                    ; $44C2
     call Oam_HideUnused                           ; $44C5
     call DjPanel_SlideIn                          ; $44C8
-    ld a, BANK(Gfx_1A_50A0_Mode1F_State06_SavePanel); $44CB
-    ld hl, Gfx_1A_50A0_Mode1F_State06_SavePanel   ; $44CD
-    ld de, $8f40                                  ; $44D0
-    ld bc, $00c0                                  ; $44D3
-    call Vram_CopyFromBank                        ; $44D6
-    ld a, BANK(Map_27_5E50_Mode1F_State06_SavePanel); $44D9
-    ld hl, Map_27_5E50_Mode1F_State06_SavePanel   ; $44DB
-    ld de, $9c00                                  ; $44DE
-    ld bc, $00e0                                  ; $44E1
-    call Vram_CopyFromBank                        ; $44E4
+    farcopy Vram_CopyFromBank, Gfx_1A_50A0_Mode1F_State06_SavePanel, $8f40, $00c0 ; $44CB
+    farcopy Vram_CopyFromBank, Map_27_5E50_Mode1F_State06_SavePanel, $9c00, $00e0 ; $44D9
     call DjPanel_SlideOut                         ; $44E7
     call Oam_ClearShadow                          ; $44EA
     call DjPerf_UpdatePerformerTiles              ; $44ED
     call DjPanel_WaitLine                         ; $44F0
-    ld hl, wState                                 ; $44F3
-    inc [hl]                                      ; $44F6
+    next_state                                    ; $44F3
     ret                                           ; $44F7
 
 
@@ -853,8 +800,7 @@ Mode1F_State07_QuitPanel::
     ld a, MUSIC_STOP                              ; $451F
     call Snd_Music                                ; $4521
     pop af                                        ; $4524
-    ld a, STATE_1F_TITLE_INIT                     ; $4525
-    ld [wState], a                                ; $4527
+    set_state STATE_1F_TITLE_INIT                 ; $4525
     ret                                           ; $452A
 
 
@@ -873,8 +819,7 @@ jr_005_452b:
     call DjEd_LoadPerformerTiles9480              ; $4542
     call DjPerf_NR51MaskFromChannels              ; $4545
     call DjPerf_AnimateSprites                    ; $4548
-    ld a, STATE_1F_PERFORMANCE                    ; $454B
-    ld [wState], a                                ; $454D
+    set_state STATE_1F_PERFORMANCE                ; $454B
     ret                                           ; $4550
 
 
@@ -915,65 +860,25 @@ Mode1F_State08_EditPagesSetup::
     ld [wNoiseFieldCursor + $2], a                ; $459C
     ld hl, wDirtyFlag                             ; $459F
     set 0, [hl]                                   ; $45A2
-    ld a, BANK(Data_1C_6D60_Mode1F_State07_QuitPanel); $45A4
-    ld hl, Data_1C_6D60_Mode1F_State07_QuitPanel  ; $45A6
-    ld de, $9000                                  ; $45A9
-    ld bc, $0500                                  ; $45AC
-    call Mem_CopyFromBank                         ; $45AF
-    ld a, BANK(Gfx_1C_7260_Mode1F_State08_EditPagesSetup); $45B2
-    ld hl, Gfx_1C_7260_Mode1F_State08_EditPagesSetup; $45B4
-    ld de, $8a00                                  ; $45B7
-    ld bc, $0600                                  ; $45BA
-    call Mem_CopyFromBank                         ; $45BD
-    ld a, BANK(Gfx_1C_7860_Mode1F_State08_EditPagesSetup); $45C0
-    ld hl, Gfx_1C_7860_Mode1F_State08_EditPagesSetup; $45C2
-    ld de, $8400                                  ; $45C5
-    ld bc, $0400                                  ; $45C8
-    call Mem_CopyFromBank                         ; $45CB
+    farcopy Mem_CopyFromBank, Data_1C_6D60_Mode1F_State07_QuitPanel, $9000, $0500 ; $45A4
+    farcopy Mem_CopyFromBank, Gfx_1C_7260_Mode1F_State08_EditPagesSetup, $8a00, $0600 ; $45B2
+    farcopy Mem_CopyFromBank, Gfx_1C_7860_Mode1F_State08_EditPagesSetup, $8400, $0400 ; $45C0
     ld a, $1d                                     ; $45CE
     ld hl, Gfx_1D_4000_Mode1F_State08_EditPagesSetup ; $45D0
     ld de, $9500                                  ; $45D3
     ld bc, $0300                                  ; $45D6
     call Mem_CopyFromBank                         ; $45D9
-    ld a, BANK(Gfx_1D_4300_Mode1F_State08_EditPagesSetup); $45DC
-    ld hl, Gfx_1D_4300_Mode1F_State08_EditPagesSetup; $45DE
-    ld de, $8800                                  ; $45E1
-    ld bc, $0200                                  ; $45E4
-    call Mem_CopyFromBank                         ; $45E7
-    ld a, BANK(Map_23_68C0_Mode1F_State08_EditPagesSetup); $45EA
-    ld hl, Map_23_68C0_Mode1F_State08_EditPagesSetup; $45EC
-    ld de, $9800                                  ; $45EF
-    ld bc, $02c0                                  ; $45F2
-    call Mem_CopyFromBank                         ; $45F5
-    ld a, BANK(Map_27_7990_Mode1F_State08_EditPagesSetup); $45F8
-    ld hl, Map_27_7990_Mode1F_State08_EditPagesSetup; $45FA
-    ld de, $9c00                                  ; $45FD
-    ld bc, $00c0                                  ; $4600
-    call Mem_CopyFromBank                         ; $4603
+    farcopy Mem_CopyFromBank, Gfx_1D_4300_Mode1F_State08_EditPagesSetup, $8800, $0200 ; $45DC
+    farcopy Mem_CopyFromBank, Map_23_68C0_Mode1F_State08_EditPagesSetup, $9800, $02c0 ; $45EA
+    farcopy Mem_CopyFromBank, Map_27_7990_Mode1F_State08_EditPagesSetup, $9c00, $00c0 ; $45F8
     ld hl, $9be0                                  ; $4606
     ld bc, $0020                                  ; $4609
     ld a, $ff                                     ; $460C
     call Mem_FillBc1                              ; $460E
-    ld a, BANK(Data_1C_6D60_Mode1F_State07_QuitPanel); $4611
-    ld hl, Data_1C_6D60_Mode1F_State07_QuitPanel  ; $4613
-    ld de, wLevelTileStaging                      ; $4616
-    ld bc, $0080                                  ; $4619
-    call Mem_CopyFromBank                         ; $461C
-    ld a, BANK(Src_1C_6E60_Mode1F_State08_EditPagesSetup); $461F
-    ld hl, Src_1C_6E60_Mode1F_State08_EditPagesSetup; $4621
-    ld de, wLevelTileStaging + $80                ; $4624
-    ld bc, $0080                                  ; $4627
-    call Mem_CopyFromBank                         ; $462A
-    ld a, BANK(Src_1C_6F60_Mode1F_State08_EditPagesSetup); $462D
-    ld hl, Src_1C_6F60_Mode1F_State08_EditPagesSetup; $462F
-    ld de, wLevelTileStaging + $100               ; $4632
-    ld bc, $0080                                  ; $4635
-    call Mem_CopyFromBank                         ; $4638
-    ld a, BANK(Src_1C_7060_Mode1F_State08_EditPagesSetup); $463B
-    ld hl, Src_1C_7060_Mode1F_State08_EditPagesSetup; $463D
-    ld de, wLevelTileStaging + $180               ; $4640
-    ld bc, $0080                                  ; $4643
-    call Mem_CopyFromBank                         ; $4646
+    farcopy Mem_CopyFromBank, Data_1C_6D60_Mode1F_State07_QuitPanel, wLevelTileStaging, $0080 ; $4611
+    farcopy Mem_CopyFromBank, Src_1C_6E60_Mode1F_State08_EditPagesSetup, wLevelTileStaging + $80, $0080 ; $461F
+    farcopy Mem_CopyFromBank, Src_1C_6F60_Mode1F_State08_EditPagesSetup, wLevelTileStaging + $100, $0080 ; $462D
+    farcopy Mem_CopyFromBank, Src_1C_7060_Mode1F_State08_EditPagesSetup, wLevelTileStaging + $180, $0080 ; $463B
     ld a, $04                                     ; $4649
     ld [wWaveGraphPhase], a                       ; $464B
     ld a, $63                                     ; $464E
@@ -1014,8 +919,7 @@ Mode1F_State08_EditPagesSetup::
     ld de, wSound1Notes                           ; $469F
     call DjEd_DrawNoteRow                         ; $46A2
     call Pal_FadeIn                               ; $46A5
-    ld hl, wState                                 ; $46A8
-    inc [hl]                                      ; $46AB
+    next_state                                    ; $46A8
     ret                                           ; $46AC
 
 
@@ -1047,21 +951,9 @@ Mode1F_State09_PageSound1::
     call DjEd_DrawPageTabs                        ; $46DA
     call DjS1_DrawModAndLoop                      ; $46DD
     call DjS2_DrawValueRow                        ; $46E0
-    ld a, BANK(Gfx_1D_4500_Mode1F_State09_PageSound1); $46E3
-    ld hl, Gfx_1D_4500_Mode1F_State09_PageSound1  ; $46E5
-    ld de, $9500                                  ; $46E8
-    ld bc, $0300                                  ; $46EB
-    call Vram_CopyFromBank                        ; $46EE
-    ld a, BANK(Map_23_6B00_Mode1F_State09_PageSound1); $46F1
-    ld hl, Map_23_6B00_Mode1F_State09_PageSound1  ; $46F3
-    ld de, $9840                                  ; $46F6
-    ld bc, $0080                                  ; $46F9
-    call Vram_CopyFromBank                        ; $46FC
-    ld a, BANK(Gfx_1D_4800_Mode1F_State09_PageSound1); $46FF
-    ld hl, Gfx_1D_4800_Mode1F_State09_PageSound1  ; $4701
-    ld de, $8800                                  ; $4704
-    ld bc, $0200                                  ; $4707
-    call Vram_CopyFromBank                        ; $470A
+    farcopy Vram_CopyFromBank, Gfx_1D_4500_Mode1F_State09_PageSound1, $9500, $0300 ; $46E3
+    farcopy Vram_CopyFromBank, Map_23_6B00_Mode1F_State09_PageSound1, $9840, $0080 ; $46F1
+    farcopy Vram_CopyFromBank, Gfx_1D_4800_Mode1F_State09_PageSound1, $8800, $0200 ; $46FF
     ld a, [wSound2WaveLen]                        ; $470D
     swap a                                        ; $4710
     sla a                                         ; $4712
@@ -1084,8 +976,7 @@ Mode1F_State09_PageSound1::
     ld [wSound2FieldCursor + $1], a               ; $4735
     ld de, wSound2Notes                           ; $4738
     call DjEd_DrawNoteRow                         ; $473B
-    ld a, STATE_1F_PAGE_SOUND2                    ; $473E
-    ld [wState], a                                ; $4740
+    set_state STATE_1F_PAGE_SOUND2                ; $473E
     ret                                           ; $4743
 
 
@@ -1093,8 +984,7 @@ jr_005_4744:
     bit 1, a                                      ; $4744
     jr z, jr_005_474e                             ; $4746
 
-    ld a, STATE_1F_RESTART                        ; $4748
-    ld [wState], a                                ; $474A
+    set_state STATE_1F_RESTART                    ; $4748
     ret                                           ; $474D
 
 
@@ -1149,26 +1039,10 @@ Mode1F_State0A_PageSound2::
     call DjEd_DrawPageTabs                        ; $4799
     call DjS2_DrawAllValues                       ; $479C
     call DjS2_WaveRedrawTick                      ; $479F
-    ld a, BANK(Map_23_6C00_Mode1F_State0A_PageSound2); $47A2
-    ld hl, Map_23_6C00_Mode1F_State0A_PageSound2  ; $47A4
-    ld de, $9840                                  ; $47A7
-    ld bc, $0080                                  ; $47AA
-    call Vram_CopyFromBank                        ; $47AD
-    ld a, BANK(Gfx_1D_4A00_Mode1F_State0A_PageSound2); $47B0
-    ld hl, Gfx_1D_4A00_Mode1F_State0A_PageSound2  ; $47B2
-    ld de, $9500                                  ; $47B5
-    ld bc, $0300                                  ; $47B8
-    call Vram_CopyFromBank                        ; $47BB
-    ld a, BANK(Map_23_6B80_Mode1F_State0A_PageSound2); $47BE
-    ld hl, Map_23_6B80_Mode1F_State0A_PageSound2  ; $47C0
-    ld de, $9840                                  ; $47C3
-    ld bc, $0080                                  ; $47C6
-    call Vram_CopyFromBank                        ; $47C9
-    ld a, BANK(Gfx_1D_4D00_Mode1F_State0A_PageSound2); $47CC
-    ld hl, Gfx_1D_4D00_Mode1F_State0A_PageSound2  ; $47CE
-    ld de, $8800                                  ; $47D1
-    ld bc, $0200                                  ; $47D4
-    call Vram_CopyFromBank                        ; $47D7
+    farcopy Vram_CopyFromBank, Map_23_6C00_Mode1F_State0A_PageSound2, $9840, $0080 ; $47A2
+    farcopy Vram_CopyFromBank, Gfx_1D_4A00_Mode1F_State0A_PageSound2, $9500, $0300 ; $47B0
+    farcopy Vram_CopyFromBank, Map_23_6B80_Mode1F_State0A_PageSound2, $9840, $0080 ; $47BE
+    farcopy Vram_CopyFromBank, Gfx_1D_4D00_Mode1F_State0A_PageSound2, $8800, $0200 ; $47CC
     call DjEd_DrawPageTabNoise                    ; $47DA
     ld a, [wNoiseEnvelope]                        ; $47DD
     ld hl, $9884                                  ; $47E0
@@ -1178,8 +1052,7 @@ Mode1F_State0A_PageSound2::
     ld [wNoiseFieldCursor + $1], a                ; $47EA
     ld de, wNoiseNotes                            ; $47ED
     call DjEd_DrawNoteRow                         ; $47F0
-    ld a, STATE_1F_PAGE_NOISE                     ; $47F3
-    ld [wState], a                                ; $47F5
+    set_state STATE_1F_PAGE_NOISE                 ; $47F3
     ret                                           ; $47F8
 
 
@@ -1187,8 +1060,7 @@ jr_005_47f9:
     bit 1, a                                      ; $47F9
     ret z                                         ; $47FB
 
-    ld a, STATE_1F_RESTART                        ; $47FC
-    ld [wState], a                                ; $47FE
+    set_state STATE_1F_RESTART                    ; $47FC
     ret                                           ; $4801
 
 
@@ -1233,16 +1105,8 @@ Mode1F_State0B_PageNoise::
     ld de, $9500                                  ; $4847
     ld bc, $0300                                  ; $484A
     call Vram_CopyFromBank                        ; $484D
-    ld a, BANK(Map_23_6900_Mode1F_State0B_PageNoise); $4850
-    ld hl, Map_23_6900_Mode1F_State0B_PageNoise   ; $4852
-    ld de, $9840                                  ; $4855
-    ld bc, $0080                                  ; $4858
-    call Vram_CopyFromBank                        ; $485B
-    ld a, BANK(Gfx_1D_4300_Mode1F_State08_EditPagesSetup); $485E
-    ld hl, Gfx_1D_4300_Mode1F_State08_EditPagesSetup; $4860
-    ld de, $8800                                  ; $4863
-    ld bc, $0200                                  ; $4866
-    call Vram_CopyFromBank                        ; $4869
+    farcopy Vram_CopyFromBank, Map_23_6900_Mode1F_State0B_PageNoise, $9840, $0080 ; $4850
+    farcopy Vram_CopyFromBank, Gfx_1D_4300_Mode1F_State08_EditPagesSetup, $8800, $0200 ; $485E
     ld a, [wSound1DutyLen]                        ; $486C
     swap a                                        ; $486F
     sla a                                         ; $4871
@@ -1269,8 +1133,7 @@ Mode1F_State0B_PageNoise::
     ld [wSound1FieldCursor + $1], a               ; $489F
     ld de, wSound1Notes                           ; $48A2
     call DjEd_DrawNoteRow                         ; $48A5
-    ld a, STATE_1F_PAGE_SOUND1                    ; $48A8
-    ld [wState], a                                ; $48AA
+    set_state STATE_1F_PAGE_SOUND1                ; $48A8
     ret                                           ; $48AD
 
 
@@ -1278,8 +1141,7 @@ jr_005_48ae:
     bit 1, a                                      ; $48AE
     ret z                                         ; $48B0
 
-    ld a, STATE_1F_RESTART                        ; $48B1
-    ld [wState], a                                ; $48B3
+    set_state STATE_1F_RESTART                    ; $48B1
     ret                                           ; $48B6
 
 
@@ -1310,8 +1172,7 @@ DjNs_FieldTbl::
 
 ; C: back to state 04 with a fade
 Mode1F_State0C_Restart::
-    ld a, STATE_1F_PERFORMANCE_SETUP              ; $48D4
-    ld [wState], a                                ; $48D6
+    set_state STATE_1F_PERFORMANCE_SETUP          ; $48D4
     call Pal_FadeOut                              ; $48D9
     call Lcd_Off                                  ; $48DC
     ld hl, hStatShadow                            ; $48DF
@@ -2700,8 +2561,7 @@ DjPerf_PerformerScript_Id8::
     xor a                                         ; $5108
     ld [wPerformerScriptId], a                    ; $5109
     ld [wAnimSlotDone + $3], a                    ; $510C
-    ld hl, wState                                 ; $510F
-    inc [hl]                                      ; $5112
+    next_state                                    ; $510F
     ret                                           ; $5113
 
 
@@ -2826,11 +2686,7 @@ DjPerf_AnimateSpeakerBlink_Tbl51BF::
 
 ; C: equaliser animation phase built in D000..D013
 DjPerf_Equaliser::
-    ld a, BANK(Src_27_5AB0_DjPerf_Equaliser)      ; $51C9
-    ld hl, Src_27_5AB0_DjPerf_Equaliser           ; $51CB
-    ld de, wBgRowBuffer                           ; $51CE
-    ld bc, $0014                                  ; $51D1
-    call Mem_CopyFromBank                         ; $51D4
+    farcopy Mem_CopyFromBank, Src_27_5AB0_DjPerf_Equaliser, wBgRowBuffer, $0014 ; $51C9
     ld a, [wTickFlag]                             ; $51D7
     ld hl, wPerfEqualiserPhase                    ; $51DA
     add [hl]                                      ; $51DD
@@ -5911,25 +5767,18 @@ DjEd_SetFieldCursor::
     call Mem_CopyFromBank                         ; $6292
     ld de, wSettingsPreset                        ; $6295
     ldh [hFarcallAArg], a                         ; $6298
-    ld a, BANK(Dj_LoadTune_FromDE_Far)            ; $629A
-    ld hl, Dj_LoadTune_FromDE_Far                 ; $629C
-    call Far_Call                                 ; $629F
+    farcall Dj_LoadTune_FromDE_Far                ; $629A
     ret                                           ; $62A2
 
 
 ; C: auto: 15 bytes, bytes; referenced by DjEd_SetFieldCursor. L3 pass 2026-10-26: not reached by the 206 BGB replays;
 ; read in the organic runs of the core emulator (coverage/results/merged_state/cov.npz, first read in mode 1F)
 DjEd_SetFieldCursor_Tbl62A3::
-    dw Map_29_6000_Map05_62A3
-    db BANK(Map_29_6000_Map05_62A3)
-    dw Map_29_6059_Map05_62A3
-    db BANK(Map_29_6059_Map05_62A3)
-    dw Map_29_6164_Map05_62A3
-    db BANK(Map_29_6164_Map05_62A3)
-    dw Map_29_610B_Map05_62A3
-    db BANK(Map_29_610B_Map05_62A3)
-    dw Map_29_60B2_Map05_62A3
-    db BANK(Map_29_60B2_Map05_62A3)
+    dwb Map_29_6000_Map05_62A3
+    dwb Map_29_6059_Map05_62A3
+    dwb Map_29_6164_Map05_62A3
+    dwb Map_29_610B_Map05_62A3
+    dwb Map_29_60B2_Map05_62A3
 
 ; C
 DjS1_DrawAllValues::
@@ -9072,9 +8921,7 @@ Mode20_State00_MenuInit::
     ldh [hScyShadow], a                           ; $74FC
     ld [wMenuRow], a                              ; $74FE
     ldh [hFarcallAArg], a                         ; $7501
-    ld a, BANK(GameFace_LoadTiles_Far)            ; $7503
-    ld hl, GameFace_LoadTiles_Far                 ; $7505
-    call Far_Call                                 ; $7508
+    farcall GameFace_LoadTiles_Far                ; $7503
     ld a, [wGamefacePresent]                      ; $750B
     and a                                         ; $750E
     jr z, jr_005_7516                             ; $750F
@@ -9083,26 +8930,10 @@ Mode20_State00_MenuInit::
     ld [wPickCharacter], a                        ; $7513
 
 jr_005_7516:
-    ld a, BANK(Gfx_1A_6400_Mode20_State00_MenuInit); $7516
-    ld hl, Gfx_1A_6400_Mode20_State00_MenuInit    ; $7518
-    ld de, $9000                                  ; $751B
-    ld bc, $0800                                  ; $751E
-    call Mem_CopyFromBank                         ; $7521
-    ld a, BANK(Gfx_1A_6C00_Mode20_State00_MenuInit); $7524
-    ld hl, Gfx_1A_6C00_Mode20_State00_MenuInit    ; $7526
-    ld de, $8800                                  ; $7529
-    ld bc, $0800                                  ; $752C
-    call Mem_CopyFromBank                         ; $752F
-    ld a, BANK(Gfx_1A_7400_Mode20_State00_MenuInit); $7532
-    ld hl, Gfx_1A_7400_Mode20_State00_MenuInit    ; $7534
-    ld de, $8000                                  ; $7537
-    ld bc, $0200                                  ; $753A
-    call Mem_CopyFromBank                         ; $753D
-    ld a, BANK(Map_24_4480_Mode20_State00_MenuInit); $7540
-    ld hl, Map_24_4480_Mode20_State00_MenuInit    ; $7542
-    ld de, $9800                                  ; $7545
-    ld bc, $0240                                  ; $7548
-    call Mem_CopyFromBank                         ; $754B
+    farcopy Mem_CopyFromBank, Gfx_1A_6400_Mode20_State00_MenuInit, $9000, $0800 ; $7516
+    farcopy Mem_CopyFromBank, Gfx_1A_6C00_Mode20_State00_MenuInit, $8800, $0800 ; $7524
+    farcopy Mem_CopyFromBank, Gfx_1A_7400_Mode20_State00_MenuInit, $8000, $0200 ; $7532
+    farcopy Mem_CopyFromBank, Map_24_4480_Mode20_State00_MenuInit, $9800, $0240 ; $7540
     call Oam_ClearShadow                          ; $754E
     call Pal_AllWhite                             ; $7551
     call Lcd_On                                   ; $7554
@@ -9113,8 +8944,7 @@ jr_005_7516:
     call Snd_Music                                ; $755E
     pop af                                        ; $7561
     call Pal_FadeIn                               ; $7562
-    ld hl, wState                                 ; $7565
-    inc [hl]                                      ; $7568
+    next_state                                    ; $7565
     ret                                           ; $7569
 
 
@@ -9140,8 +8970,7 @@ Mode20_State01_Menu::
     call Lcd_Off                                  ; $758F
     ld a, [wMode]                                 ; $7592
     ld [wMode20Caller], a                         ; $7595
-    ld hl, wState                                 ; $7598
-    inc [hl]                                      ; $759B
+    next_state                                    ; $7598
     ret                                           ; $759C
 
 
@@ -9159,8 +8988,7 @@ jr_005_759d:
     call Lcd_Off                                  ; $75AF
     ld a, MODE_MAIN_MENU                          ; $75B2
     ld [wMode], a                                 ; $75B4
-    ld a, STATE_00_INIT                           ; $75B7
-    ld [wState], a                                ; $75B9
+    set_state STATE_00_INIT                       ; $75B7
     ret                                           ; $75BC
 
 
@@ -9493,20 +9321,12 @@ Ball_MenuLoadRow::
     and a                                         ; $7753
     jr nz, jr_005_7765                            ; $7754
 
-    ld a, BANK(Map_24_4480_Ball_MenuLoadRow_Part4500); $7756
-    ld hl, Map_24_4480_Ball_MenuLoadRow_Part4500  ; $7758
-    ld de, $9880                                  ; $775B
-    ld bc, $0100                                  ; $775E
-    call Vram_CopyFromBank                        ; $7761
+    farcopy Vram_CopyFromBank, Map_24_4480_Ball_MenuLoadRow_Part4500, $9880, $0100 ; $7756
     ret                                           ; $7764
 
 
 jr_005_7765:
-    ld a, BANK(Map_24_46C0_Ball_MenuLoadRow)      ; $7765
-    ld hl, Map_24_46C0_Ball_MenuLoadRow           ; $7767
-    ld de, $9880                                  ; $776A
-    ld bc, $0100                                  ; $776D
-    call Vram_CopyFromBank                        ; $7770
+    farcopy Vram_CopyFromBank, Map_24_46C0_Ball_MenuLoadRow, $9880, $0100 ; $7765
     ret                                           ; $7773
 
 
@@ -9529,28 +9349,12 @@ Mode20_State02_GameSetup::
     ld a, $98                                     ; $7792
     ldh [hScyBand2], a                            ; $7794
     ldh [hFarcallAArg], a                         ; $7796
-    ld a, BANK(Counters_Load_Far)                 ; $7798
-    ld hl, Counters_Load_Far                      ; $779A
-    call Far_Call                                 ; $779D
-    ld a, BANK(Gfx_1D_5D00_Mode20_State02_GameSetup); $77A0
-    ld hl, Gfx_1D_5D00_Mode20_State02_GameSetup   ; $77A2
-    ld de, $8000                                  ; $77A5
-    ld bc, $0d80                                  ; $77A8
-    call Mem_CopyFromBank                         ; $77AB
-    ld a, BANK(Map_22_7740_Mode20_State02_GameSetup); $77AE
-    ld hl, Map_22_7740_Mode20_State02_GameSetup   ; $77B0
-    ld de, $9800                                  ; $77B3
-    ld bc, $0400                                  ; $77B6
-    call Mem_CopyFromBank                         ; $77B9
-    ld a, BANK(Map_22_5F40_Mode20_State02_GameSetup); $77BC
-    ld hl, Map_22_5F40_Mode20_State02_GameSetup   ; $77BE
-    ld de, $9c00                                  ; $77C1
-    ld bc, $0400                                  ; $77C4
-    call Mem_CopyFromBank                         ; $77C7
+    farcall Counters_Load_Far                     ; $7798
+    farcopy Mem_CopyFromBank, Gfx_1D_5D00_Mode20_State02_GameSetup, $8000, $0d80 ; $77A0
+    farcopy Mem_CopyFromBank, Map_22_7740_Mode20_State02_GameSetup, $9800, $0400 ; $77AE
+    farcopy Mem_CopyFromBank, Map_22_5F40_Mode20_State02_GameSetup, $9c00, $0400 ; $77BC
     ldh [hFarcallAArg], a                         ; $77CA
-    ld a, BANK(GameFace_LoadTiles_Far)            ; $77CC
-    ld hl, GameFace_LoadTiles_Far                 ; $77CE
-    call Far_Call                                 ; $77D1
+    farcall GameFace_LoadTiles_Far                ; $77CC
     call Ball_LoadCharacterGfx                    ; $77D4
     ld a, $27                                     ; $77D7
     ldh [hLycShadowSplit1], a                     ; $77D9
@@ -9565,8 +9369,7 @@ Mode20_State02_GameSetup::
     call Pal_AllWhite                             ; $77EE
     call Lcd_On                                   ; $77F1
     call Ball_DrawHud                             ; $77F4
-    ld hl, wState                                 ; $77F7
-    inc [hl]                                      ; $77FA
+    next_state                                    ; $77F7
     ret                                           ; $77FB
 
 
@@ -9581,8 +9384,7 @@ Mode20_State03_GameStart::
     ld c, $00                                     ; $780E
     call Ball_LoadGfx8D80                         ; $7810
     call Pal_FadeIn                               ; $7813
-    ld hl, wState                                 ; $7816
-    inc [hl]                                      ; $7819
+    next_state                                    ; $7816
     ret                                           ; $781A
 
 
@@ -9617,8 +9419,7 @@ Mode20_State04_Play::
     ld a, MUSIC_STOP                              ; $784D
     call Snd_Music                                ; $784F
     pop af                                        ; $7852
-    ld a, STATE_20_PAUSE                          ; $7853
-    ld [wState], a                                ; $7855
+    set_state STATE_20_PAUSE                      ; $7853
     ret                                           ; $7858
 
 
@@ -9640,8 +9441,7 @@ Mode20_State05_PlayDemo::
     and a                                         ; $787B
     ret z                                         ; $787C
 
-    ld a, STATE_20_GAME_START                     ; $787D
-    ld [wState], a                                ; $787F
+    set_state STATE_20_GAME_START                 ; $787D
     call Pal_FadeOut                              ; $7882
     ret                                           ; $7885
 
@@ -9687,8 +9487,7 @@ jr_005_78ae:
     res 6, [hl]                                   ; $78C2
     ld hl, rIE                                    ; $78C4
     res 1, [hl]                                   ; $78C7
-    ld a, STATE_20_RESULT_INIT                    ; $78C9
-    ld [wState], a                                ; $78CB
+    set_state STATE_20_RESULT_INIT                ; $78C9
     ret                                           ; $78CE
 
 
@@ -9706,8 +9505,7 @@ jr_005_78d2:
 
     ld c, $00                                     ; $78DB
     call Ball_LoadGfx8D80                         ; $78DD
-    ld a, STATE_20_PLAY_DEMO                      ; $78E0
-    ld [wState], a                                ; $78E2
+    set_state STATE_20_PLAY_DEMO                  ; $78E0
     call Ball_FlipPalettes                        ; $78E5
     call Ball_DrawHud                             ; $78E8
     call Ball_ResetGame                           ; $78EB
@@ -9737,8 +9535,7 @@ jr_005_7905:
     ld a, [wPickMusic]                            ; $7912
     ld hl, Mode20_State03_GameStart_Tbl781B       ; $7915
     call Snd_PlayFromList                         ; $7918
-    ld a, STATE_20_PLAY                           ; $791B
-    ld [wState], a                                ; $791D
+    set_state STATE_20_PLAY                       ; $791B
     ret                                           ; $7920
 
 
@@ -9750,8 +9547,7 @@ jr_005_7921:
     ld a, SFX1_KEY_B                              ; $7925
     call Snd_Sfx1                                 ; $7927
     pop af                                        ; $792A
-    ld a, STATE_20_LEAVE                          ; $792B
-    ld [wState], a                                ; $792D
+    set_state STATE_20_LEAVE                      ; $792B
     ret                                           ; $7930
 
 
@@ -9777,14 +9573,12 @@ Mode20_State08_Leave::
     jr nz, jr_005_795d                            ; $7952
 
     ld [wMode], a                                 ; $7954
-    ld a, STATE_20_MENU                           ; $7957
-    ld [wState], a                                ; $7959
+    set_state STATE_20_MENU                       ; $7957
     ret                                           ; $795C
 
 
 jr_005_795d:
-    ld a, STATE_20_MENU_INIT                      ; $795D
-    ld [wState], a                                ; $795F
+    set_state STATE_20_MENU_INIT                  ; $795D
     ret                                           ; $7962
 
 
@@ -9800,11 +9594,7 @@ Mode20_State09_ResultInit::
     xor a                                         ; $7974
     ldh [hScxShadow], a                           ; $7975
     ldh [hScyShadow], a                           ; $7977
-    ld a, BANK(Gfx_1B_5100_Mode20_State09_ResultInit); $7979
-    ld hl, Gfx_1B_5100_Mode20_State09_ResultInit  ; $797B
-    ld de, $8000                                  ; $797E
-    ld bc, $1000                                  ; $7981
-    call Mem_CopyFromBank                         ; $7984
+    farcopy Mem_CopyFromBank, Gfx_1B_5100_Mode20_State09_ResultInit, $8000, $1000 ; $7979
     ld a, $23                                     ; $7987
     ld hl, Map_23_4CC0_Mode20_State09_ResultInit  ; $7989
     ld de, $9800                                  ; $798C
@@ -9814,8 +9604,7 @@ Mode20_State09_ResultInit::
     call Pal_AllWhite                             ; $7998
     call Lcd_On                                   ; $799B
     call Pal_FadeIn                               ; $799E
-    ld hl, wState                                 ; $79A1
-    inc [hl]                                      ; $79A4
+    next_state                                    ; $79A1
     ret                                           ; $79A5
 
 
@@ -9833,8 +9622,7 @@ Mode20_State0A_ResultKeys::
     ld a, SFX1_KEY_A                              ; $79B3
     call Snd_Sfx1                                 ; $79B5
     pop af                                        ; $79B8
-    ld hl, wState                                 ; $79B9
-    inc [hl]                                      ; $79BC
+    next_state                                    ; $79B9
     ret                                           ; $79BD
 
 
@@ -9843,8 +9631,7 @@ jr_005_79be:
     ld a, SFX1_KEY_B                              ; $79BF
     call Snd_Sfx1                                 ; $79C1
     pop af                                        ; $79C4
-    ld hl, wState                                 ; $79C5
-    inc [hl]                                      ; $79C8
+    next_state                                    ; $79C5
     ret                                           ; $79C9
 
 
@@ -9856,8 +9643,7 @@ Mode20_State0B_ResultLeave::
     bit 0, a                                      ; $79D3
     jr z, jr_005_79dd                             ; $79D5
 
-    ld a, STATE_20_GAME_SETUP                     ; $79D7
-    ld [wState], a                                ; $79D9
+    set_state STATE_20_GAME_SETUP                 ; $79D7
     ret                                           ; $79DC
 
 
@@ -9867,13 +9653,11 @@ jr_005_79dd:
     jr nz, jr_005_79ee                            ; $79E2
 
     ld [wMode], a                                 ; $79E4
-    ld a, STATE_20_MENU                           ; $79E7
-    ld [wState], a                                ; $79E9
+    set_state STATE_20_MENU                       ; $79E7
     jr jr_005_79f3                                ; $79EC
 
 jr_005_79ee:
-    ld a, STATE_20_MENU_INIT                      ; $79EE
-    ld [wState], a                                ; $79F0
+    set_state STATE_20_MENU_INIT                  ; $79EE
 
 jr_005_79f3:
     ret                                           ; $79F3
@@ -10119,8 +9903,7 @@ jr_005_7b46:
 
 
 jr_005_7b4a:
-    ld a, STATE_20_GAME_OVER                      ; $7B4A
-    ld [wState], a                                ; $7B4C
+    set_state STATE_20_GAME_OVER                  ; $7B4A
     call Ball_StoreBest                           ; $7B4F
     ld a, $06                                     ; $7B52
     ld [wBallGameoverBlink], a                    ; $7B54

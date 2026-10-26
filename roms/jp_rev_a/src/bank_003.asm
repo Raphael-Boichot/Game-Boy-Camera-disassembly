@@ -69,11 +69,7 @@ Mode12_State00_Init::
     ld de, $8000                                  ; $406F
     ld bc, $1800                                  ; $4072
     call Mem_CopyFromBank                         ; $4075
-    ld a, BANK(Map_22_6B40_Mode12_State00_Init)   ; $4078
-    ld hl, Map_22_6B40_Mode12_State00_Init        ; $407A
-    ld de, $9800                                  ; $407D
-    ld bc, $0400                                  ; $4080
-    call Mem_CopyFromBank                         ; $4083
+    farcopy Mem_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $4078
     call Oam_ClearShadow                          ; $4086
     call Pal_AllWhite                             ; $4089
     call Lcd_On                                   ; $408C
@@ -82,9 +78,7 @@ Mode12_State00_Init::
     call Snd_Music                                ; $4092
     pop af                                        ; $4095
     ldh [hFarcallAArg], a                         ; $4096
-    ld a, BANK(Settings_LoadAnimTranslated_Far)   ; $4098
-    ld hl, Settings_LoadAnimTranslated_Far        ; $409A
-    call Far_Call                                 ; $409D
+    farcall Settings_LoadAnimTranslated_Far       ; $4098
     xor a                                         ; $40A0
     ld [wDirtyFlag], a                            ; $40A1
     call AnimEd_InitEditor                        ; $40A4
@@ -96,8 +90,7 @@ Mode12_State00_Init::
     call Pal_FadeIn                               ; $40B6
     call AnimEd_StartDecorations                  ; $40B9
     call AnimEd_DrawTimingMarkers                 ; $40BC
-    ld hl, wState                                 ; $40BF
-    inc [hl]                                      ; $40C2
+    next_state                                    ; $40BF
     ret                                           ; $40C3
 
 
@@ -115,24 +108,14 @@ Mode12_State01_Browse::
     and a                                         ; $40D5
     jr nz, jr_003_40fa                            ; $40D6
 
-    ld a, BANK(Gfx_0C_5DA0_Mode12_State01_Browse) ; $40D8
-    ld hl, Gfx_0C_5DA0_Mode12_State01_Browse      ; $40DA
-    ld de, $88c0                                  ; $40DD
-    ld bc, $0060                                  ; $40E0
-    call Vram_CopyFromBank                        ; $40E3
-    ld a, BANK(Gfx_0C_5D70_Mode12_State01_Browse) ; $40E6
-    ld hl, Gfx_0C_5D70_Mode12_State01_Browse      ; $40E8
-    ld de, $8950                                  ; $40EB
-    ld bc, $0030                                  ; $40EE
-    call Vram_CopyFromBank                        ; $40F1
-    ld a, STATE_12_EDIT_SPEED                     ; $40F4
-    ld [wState], a                                ; $40F6
+    farcopy Vram_CopyFromBank, Gfx_0C_5DA0_Mode12_State01_Browse, $88c0, $0060 ; $40D8
+    farcopy Vram_CopyFromBank, Gfx_0C_5D70_Mode12_State01_Browse, $8950, $0030 ; $40E6
+    set_state STATE_12_EDIT_SPEED                 ; $40F4
     ret                                           ; $40F9
 
 
 jr_003_40fa:
-    ld a, STATE_12_TOGGLE_LOOP                    ; $40FA
-    ld [wState], a                                ; $40FC
+    set_state STATE_12_TOGGLE_LOOP                ; $40FA
     ret                                           ; $40FF
 
 
@@ -162,8 +145,7 @@ jr_003_4100:
 jr_003_412a:
     ld hl, wCurEntryIndex                         ; $412A
     set 7, [hl]                                   ; $412D
-    ld a, STATE_12_ENTRY_RELEASED                 ; $412F
-    ld [wState], a                                ; $4131
+    set_state STATE_12_ENTRY_RELEASED             ; $412F
     ret                                           ; $4134
 
 
@@ -177,14 +159,12 @@ jr_003_4135:
     and a                                         ; $4141
     jr nz, jr_003_414a                            ; $4142
 
-    ld a, STATE_12_EXIT                           ; $4144
-    ld [wState], a                                ; $4146
+    set_state STATE_12_EXIT                       ; $4144
     ret                                           ; $4149
 
 
 jr_003_414a:
-    ld a, STATE_12_SAVE_DIALOG_OPEN               ; $414A
-    ld [wState], a                                ; $414C
+    set_state STATE_12_SAVE_DIALOG_OPEN           ; $414A
     ret                                           ; $414F
 
 
@@ -193,8 +173,7 @@ jr_003_4150:
     ret z                                         ; $4152
 
     call AnimEd_ClearSparks                       ; $4153
-    ld a, STATE_12_TOOLS_OPEN                     ; $4156
-    ld [wState], a                                ; $4158
+    set_state STATE_12_TOOLS_OPEN                 ; $4156
     ret                                           ; $415B
 
 
@@ -246,8 +225,7 @@ jr_003_4188:
     call AnimEd_SpawnSpark                        ; $41A1
     call AnimEd_ShowEntryValue                    ; $41A4
     call AnimEd_ShowEntryIndex                    ; $41A7
-    ld a, STATE_12_BROWSE                         ; $41AA
-    ld [wState], a                                ; $41AC
+    set_state STATE_12_BROWSE                     ; $41AA
     ld hl, wDirtyFlag                             ; $41AF
     set 0, [hl]                                   ; $41B2
     ret                                           ; $41B4
@@ -302,23 +280,17 @@ jr_003_41f5:
     bit PADB_DOWN, a                              ; $41F7
     jr z, jr_003_421b                             ; $41F9
 
-    ld a, BANK(Gfx_0C_48C0_Mode12_State0F_ClearAll); $41FB
-    ld hl, Gfx_0C_48C0_Mode12_State0F_ClearAll    ; $41FD
-    ld de, $88c0                                  ; $4200
-    ld bc, $00c0                                  ; $4203
-    call Vram_CopyFromBank                        ; $4206
+    farcopy Vram_CopyFromBank, Gfx_0C_48C0_Mode12_State0F_ClearAll, $88c0, $00c0 ; $41FB
     ld a, [wEditorRangeMode]                      ; $4209
     and a                                         ; $420C
     jr nz, jr_003_4215                            ; $420D
 
-    ld a, STATE_12_BROWSE                         ; $420F
-    ld [wState], a                                ; $4211
+    set_state STATE_12_BROWSE                     ; $420F
     ret                                           ; $4214
 
 
 jr_003_4215:
-    ld a, STATE_12_RANGE_BROWSE                   ; $4215
-    ld [wState], a                                ; $4217
+    set_state STATE_12_RANGE_BROWSE               ; $4215
     ret                                           ; $421A
 
 
@@ -327,8 +299,7 @@ jr_003_421b:
     jr z, jr_003_4228                             ; $421D
 
     call AnimEd_ClearSparks                       ; $421F
-    ld a, STATE_12_TOOLS_OPEN                     ; $4222
-    ld [wState], a                                ; $4224
+    set_state STATE_12_TOOLS_OPEN                 ; $4222
     ret                                           ; $4227
 
 
@@ -336,18 +307,9 @@ jr_003_4228:
     bit 6, a                                      ; $4228
     jr z, jr_003_424e                             ; $422A
 
-    ld a, BANK(Gfx_0C_4950_Mode12_State03_EditSpeed); $422C
-    ld hl, Gfx_0C_4950_Mode12_State03_EditSpeed   ; $422E
-    ld de, $8950                                  ; $4231
-    ld bc, $0030                                  ; $4234
-    call Vram_CopyFromBank                        ; $4237
-    ld a, BANK(Gfx_0C_5D40_Mode12_State22_BorderPickerReturn); $423A
-    ld hl, Gfx_0C_5D40_Mode12_State22_BorderPickerReturn; $423C
-    ld de, $8920                                  ; $423F
-    ld bc, $0030                                  ; $4242
-    call Vram_CopyFromBank                        ; $4245
-    ld a, STATE_12_BORDER_ROW                     ; $4248
-    ld [wState], a                                ; $424A
+    farcopy Vram_CopyFromBank, Gfx_0C_4950_Mode12_State03_EditSpeed, $8950, $0030 ; $422C
+    farcopy Vram_CopyFromBank, Gfx_0C_5D40_Mode12_State22_BorderPickerReturn, $8920, $0030 ; $423A
+    set_state STATE_12_BORDER_ROW                 ; $4248
     ret                                           ; $424D
 
 
@@ -360,14 +322,12 @@ jr_003_424e:
     and a                                         ; $4257
     jr nz, jr_003_4260                            ; $4258
 
-    ld a, STATE_12_EXIT                           ; $425A
-    ld [wState], a                                ; $425C
+    set_state STATE_12_EXIT                       ; $425A
     ret                                           ; $425F
 
 
 jr_003_4260:
-    ld a, STATE_12_SAVE_DIALOG_OPEN               ; $4260
-    ld [wState], a                                ; $4262
+    set_state STATE_12_SAVE_DIALOG_OPEN           ; $4260
     ret                                           ; $4265
 
 
@@ -431,19 +391,11 @@ Mode12_State04_ToggleLoop::
     and a                                         ; $42B7
     jr nz, jr_003_42ca                            ; $42B8
 
-    ld a, BANK(Gfx_0C_5FE0_Mode12_State04_ToggleLoop); $42BA
-    ld hl, Gfx_0C_5FE0_Mode12_State04_ToggleLoop  ; $42BC
-    ld de, $97c0                                  ; $42BF
-    ld bc, $0020                                  ; $42C2
-    call Vram_CopyFromBank                        ; $42C5
+    farcopy Vram_CopyFromBank, Gfx_0C_5FE0_Mode12_State04_ToggleLoop, $97c0, $0020 ; $42BA
     jr jr_003_42d8                                ; $42C8
 
 jr_003_42ca:
-    ld a, BANK(Gfx_0C_6000_Mode12_State04_ToggleLoop); $42CA
-    ld hl, Gfx_0C_6000_Mode12_State04_ToggleLoop  ; $42CC
-    ld de, $97c0                                  ; $42CF
-    ld bc, $0020                                  ; $42D2
-    call Vram_CopyFromBank                        ; $42D5
+    farcopy Vram_CopyFromBank, Gfx_0C_6000_Mode12_State04_ToggleLoop, $97c0, $0020 ; $42CA
 
 jr_003_42d8:
     rst Rst08_WaitVBlank                          ; $42D8
@@ -496,14 +448,12 @@ jr_003_430e:
     and a                                         ; $4329
     jr nz, jr_003_4332                            ; $432A
 
-    ld a, STATE_12_BROWSE                         ; $432C
-    ld [wState], a                                ; $432E
+    set_state STATE_12_BROWSE                     ; $432C
     ret                                           ; $4331
 
 
 jr_003_4332:
-    ld a, STATE_12_RANGE_BROWSE                   ; $4332
-    ld [wState], a                                ; $4334
+    set_state STATE_12_RANGE_BROWSE               ; $4332
     ret                                           ; $4337
 
 
@@ -512,8 +462,7 @@ jr_003_4338:
     jr z, jr_003_4345                             ; $433A
 
     call AnimEd_ClearSparks                       ; $433C
-    ld a, STATE_12_TOOLS_OPEN                     ; $433F
-    ld [wState], a                                ; $4341
+    set_state STATE_12_TOOLS_OPEN                 ; $433F
     ret                                           ; $4344
 
 
@@ -526,14 +475,12 @@ jr_003_4345:
     and a                                         ; $434E
     jr nz, jr_003_4357                            ; $434F
 
-    ld a, STATE_12_EXIT                           ; $4351
-    ld [wState], a                                ; $4353
+    set_state STATE_12_EXIT                       ; $4351
     ret                                           ; $4356
 
 
 jr_003_4357:
-    ld a, STATE_12_SAVE_DIALOG_OPEN               ; $4357
-    ld [wState], a                                ; $4359
+    set_state STATE_12_SAVE_DIALOG_OPEN           ; $4357
     ret                                           ; $435C
 
 
@@ -594,16 +541,14 @@ Mode12_State05_Exit::
 
     ld a, MODE_EDIT_MENU                          ; $43A9
     ld [wMode], a                                 ; $43AB
-    ld a, STATE_05_INIT                           ; $43AE
-    ld [wState], a                                ; $43B0
+    set_state STATE_05_INIT                       ; $43AE
     ret                                           ; $43B3
 
 
 jr_003_43b4:
     ld a, MODE_EDIT_MENU                          ; $43B4
     ld [wMode], a                                 ; $43B6
-    ld a, STATE_05_INIT                           ; $43B9
-    ld [wState], a                                ; $43BB
+    set_state STATE_05_INIT                       ; $43B9
     ret                                           ; $43BE
 
 
@@ -613,23 +558,14 @@ Mode12_State06_ToolsOpen::
     ld a, SFX1_KEY_SELECT                         ; $43C0
     call Snd_Sfx1                                 ; $43C2
     pop af                                        ; $43C5
-    ld a, BANK(Map_22_6DE0_Mode12_State06_ToolsOpen); $43C6
-    ld hl, Map_22_6DE0_Mode12_State06_ToolsOpen   ; $43C8
-    ld de, $9840                                  ; $43CB
-    ld bc, $0040                                  ; $43CE
-    call Vram_CopyFromBank                        ; $43D1
-    ld hl, wState                                 ; $43D4
-    inc [hl]                                      ; $43D7
+    farcopy Vram_CopyFromBank, Map_22_6DE0_Mode12_State06_ToolsOpen, $9840, $0040 ; $43C6
+    next_state                                    ; $43D4
     ret                                           ; $43D8
 
 
 ; C: slides the tools window in
 Mode12_State07_ToolsSlideIn::
-    ld a, BANK(Gfx_0C_4D50_Mode12_State07_ToolsSlideIn); $43D9
-    ld hl, Gfx_0C_4D50_Mode12_State07_ToolsSlideIn; $43DB
-    ld de, $8d50                                  ; $43DE
-    ld bc, $0280                                  ; $43E1
-    call Vram_CopyFromBank                        ; $43E4
+    farcopy Vram_CopyFromBank, Gfx_0C_4D50_Mode12_State07_ToolsSlideIn, $8d50, $0280 ; $43D9
     call Oam_ClearShadow                          ; $43E7
     ld a, $75                                     ; $43EA
     ld [wSpriteAnimFrame + $6], a                 ; $43EC
@@ -649,8 +585,7 @@ jr_003_43f4:
     dec b                                         ; $43FF
     jr nz, jr_003_43f4                            ; $4400
 
-    ld hl, wState                                 ; $4402
-    inc [hl]                                      ; $4405
+    next_state                                    ; $4402
     ret                                           ; $4406
 
 
@@ -712,22 +647,13 @@ jr_003_4452:
     xor a                                         ; $4460
     ld [wSpriteAnimFrame + $3], a                 ; $4461
     ld [wSpriteAnimTick + $3], a                  ; $4464
-    ld a, BANK(Map_1D_7FC0_Mode12_State08_ToolsMenu); $4467
-    ld hl, Map_1D_7FC0_Mode12_State08_ToolsMenu   ; $4469
-    ld de, $9840                                  ; $446C
-    ld bc, $0040                                  ; $446F
-    call Vram_CopyFromBank                        ; $4472
+    farcopy Vram_CopyFromBank, Map_1D_7FC0_Mode12_State08_ToolsMenu, $9840, $0040 ; $4467
     pop af                                        ; $4475
     bit 0, a                                      ; $4476
     jr nz, jr_003_448e                            ; $4478
 
-    ld a, BANK(Map_1D_7FC0_Mode12_State08_ToolsMenu); $447A
-    ld hl, Map_1D_7FC0_Mode12_State08_ToolsMenu   ; $447C
-    ld de, $9840                                  ; $447F
-    ld bc, $0040                                  ; $4482
-    call Vram_CopyFromBank                        ; $4485
-    ld a, STATE_12_BROWSE                         ; $4488
-    ld [wState], a                                ; $448A
+    farcopy Vram_CopyFromBank, Map_1D_7FC0_Mode12_State08_ToolsMenu, $9840, $0040 ; $447A
+    set_state STATE_12_BROWSE                     ; $4488
     ret                                           ; $448D
 
 
@@ -815,24 +741,14 @@ Mode12_State09_RangeBrowse::
     and a                                         ; $44F2
     jr nz, jr_003_4517                            ; $44F3
 
-    ld a, BANK(Gfx_0C_5DA0_Mode12_State01_Browse) ; $44F5
-    ld hl, Gfx_0C_5DA0_Mode12_State01_Browse      ; $44F7
-    ld de, $88c0                                  ; $44FA
-    ld bc, $0060                                  ; $44FD
-    call Vram_CopyFromBank                        ; $4500
-    ld a, BANK(Gfx_0C_5D70_Mode12_State01_Browse) ; $4503
-    ld hl, Gfx_0C_5D70_Mode12_State01_Browse      ; $4505
-    ld de, $8950                                  ; $4508
-    ld bc, $0030                                  ; $450B
-    call Vram_CopyFromBank                        ; $450E
-    ld a, STATE_12_EDIT_SPEED                     ; $4511
-    ld [wState], a                                ; $4513
+    farcopy Vram_CopyFromBank, Gfx_0C_5DA0_Mode12_State01_Browse, $88c0, $0060 ; $44F5
+    farcopy Vram_CopyFromBank, Gfx_0C_5D70_Mode12_State01_Browse, $8950, $0030 ; $4503
+    set_state STATE_12_EDIT_SPEED                 ; $4511
     ret                                           ; $4516
 
 
 jr_003_4517:
-    ld a, STATE_12_TOGGLE_LOOP                    ; $4517
-    ld [wState], a                                ; $4519
+    set_state STATE_12_TOGGLE_LOOP                ; $4517
     ret                                           ; $451C
 
 
@@ -887,8 +803,7 @@ jr_003_454f:
     ld a, SFX1_CHOOSE                             ; $455D
     call Snd_Sfx1                                 ; $455F
     pop af                                        ; $4562
-    ld a, STATE_12_RANGE_ANIM                     ; $4563
-    ld [wState], a                                ; $4565
+    set_state STATE_12_RANGE_ANIM                 ; $4563
     ret                                           ; $4568
 
 
@@ -922,8 +837,7 @@ jr_003_4584:
     ld a, SFX1_CHOOSE                             ; $458E
     call Snd_Sfx1                                 ; $4590
     pop af                                        ; $4593
-    ld a, STATE_12_RANGE_ANIM                     ; $4594
-    ld [wState], a                                ; $4596
+    set_state STATE_12_RANGE_ANIM                 ; $4594
     ret                                           ; $4599
 
 
@@ -932,8 +846,7 @@ jr_003_459a:
     bit PADB_SELECT, a                            ; $459C
     jr z, jr_003_45a6                             ; $459E
 
-    ld a, STATE_12_TOOLS_OPEN                     ; $45A0
-    ld [wState], a                                ; $45A2
+    set_state STATE_12_TOOLS_OPEN                 ; $45A0
     ret                                           ; $45A5
 
 
@@ -945,8 +858,7 @@ jr_003_45a6:
     ld a, SFX1_CHOOSE_C                           ; $45AA
     call Snd_Sfx1                                 ; $45AC
     pop af                                        ; $45AF
-    ld a, STATE_12_BROWSE                         ; $45B0
-    ld [wState], a                                ; $45B2
+    set_state STATE_12_BROWSE                     ; $45B0
     ret                                           ; $45B5
 
 
@@ -1122,8 +1034,7 @@ jr_003_468b:
     call AnimEd_StepRangeAnim                     ; $46E8
     call AnimEd_DrawRangeEndCursor                ; $46EB
     call AnimEd_DrawEntryCursor                   ; $46EE
-    ld hl, wState                                 ; $46F1
-    inc [hl]                                      ; $46F4
+    next_state                                    ; $46F1
     ret                                           ; $46F5
 
 
@@ -1317,8 +1228,7 @@ jr_003_4863:
     cp $ff                                        ; $486F
     jr nz, jr_003_4879                            ; $4871
 
-    ld a, STATE_12_LOOP_CLEAR                     ; $4873
-    ld [wState], a                                ; $4875
+    set_state STATE_12_LOOP_CLEAR                 ; $4873
     ret                                           ; $4878
 
 
@@ -1362,8 +1272,7 @@ jr_003_48a5:
     ld a, SFX1_CURSOR_MOVE                        ; $48AA
     call Snd_Sfx1                                 ; $48AC
     pop af                                        ; $48AF
-    ld hl, wState                                 ; $48B0
-    inc [hl]                                      ; $48B3
+    next_state                                    ; $48B0
     ret                                           ; $48B4
 
 
@@ -1372,8 +1281,7 @@ jr_003_48b5:
     ret z                                         ; $48B7
 
     call AnimEd_DrawTimingMarkers                 ; $48B8
-    ld a, STATE_12_RANGE_BROWSE                   ; $48BB
-    ld [wState], a                                ; $48BD
+    set_state STATE_12_RANGE_BROWSE               ; $48BB
     ret                                           ; $48C0
 
 
@@ -1690,8 +1598,7 @@ jr_003_4a6f:
     ld a, SFX1_OPTION_CHANGE                      ; $4A76
     call Snd_Sfx1                                 ; $4A78
     pop af                                        ; $4A7B
-    ld a, STATE_12_LOOP_APPLY                     ; $4A7C
-    ld [wState], a                                ; $4A7E
+    set_state STATE_12_LOOP_APPLY                 ; $4A7C
     ret                                           ; $4A81
 
 
@@ -1752,8 +1659,7 @@ jr_003_4aae:
     ld e, $a8                                     ; $4AD3
     ld a, [wRangeMovingEnd]                       ; $4AD5
     call AnimEd_PutGridTile                       ; $4AD8
-    ld a, STATE_12_RANGE_SELECT                   ; $4ADB
-    ld [wState], a                                ; $4ADD
+    set_state STATE_12_RANGE_SELECT               ; $4ADB
     ret                                           ; $4AE0
 
 
@@ -1925,8 +1831,7 @@ jr_003_4ba0:
 jr_003_4baa:
     set 6, e                                      ; $4BAA
     call AnimEd_SetTiming                         ; $4BAC
-    ld a, STATE_12_RANGE_BROWSE                   ; $4BAF
-    ld [wState], a                                ; $4BB1
+    set_state STATE_12_RANGE_BROWSE               ; $4BAF
     ld hl, wDirtyFlag                             ; $4BB4
     set 0, [hl]                                   ; $4BB7
     ret                                           ; $4BB9
@@ -1965,8 +1870,7 @@ jr_003_4bd4:
     ld [hl], a                                    ; $4BD9
 
 jr_003_4bda:
-    ld a, STATE_12_RANGE_BROWSE                   ; $4BDA
-    ld [wState], a                                ; $4BDC
+    set_state STATE_12_RANGE_BROWSE               ; $4BDA
     ld hl, wDirtyFlag                             ; $4BDF
     set 0, [hl]                                   ; $4BE2
     ret                                           ; $4BE4
@@ -1975,28 +1879,12 @@ jr_003_4bda:
 ; C: clears the whole list after the CLEAR dialog
 Mode12_State0F_ClearAll::
     call AnimEd_ClearAll                          ; $4BE5
-    ld a, BANK(Map_22_6B40_Mode12_State00_Init)   ; $4BE8
-    ld hl, Map_22_6B40_Mode12_State00_Init        ; $4BEA
-    ld de, $9800                                  ; $4BED
-    ld bc, $0400                                  ; $4BF0
-    call Vram_CopyFromBank                        ; $4BF3
+    farcopy Vram_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $4BE8
     call AnimEd_InitEditor                        ; $4BF6
     call AnimEd_DrawFrameSprites                  ; $4BF9
-    ld a, BANK(Gfx_0C_5500_Mode12_State0F_ClearAll); $4BFC
-    ld hl, Gfx_0C_5500_Mode12_State0F_ClearAll    ; $4BFE
-    ld de, $9500                                  ; $4C01
-    ld bc, $0060                                  ; $4C04
-    call Vram_CopyFromBank                        ; $4C07
-    ld a, BANK(Gfx_0C_5100_Mode12_State0F_ClearAll); $4C0A
-    ld hl, Gfx_0C_5100_Mode12_State0F_ClearAll    ; $4C0C
-    ld de, $9100                                  ; $4C0F
-    ld bc, $0380                                  ; $4C12
-    call Vram_CopyFromBank                        ; $4C15
-    ld a, BANK(Gfx_0C_48C0_Mode12_State0F_ClearAll); $4C18
-    ld hl, Gfx_0C_48C0_Mode12_State0F_ClearAll    ; $4C1A
-    ld de, $88c0                                  ; $4C1D
-    ld bc, $00c0                                  ; $4C20
-    call Vram_CopyFromBank                        ; $4C23
+    farcopy Vram_CopyFromBank, Gfx_0C_5500_Mode12_State0F_ClearAll, $9500, $0060 ; $4BFC
+    farcopy Vram_CopyFromBank, Gfx_0C_5100_Mode12_State0F_ClearAll, $9100, $0380 ; $4C0A
+    farcopy Vram_CopyFromBank, Gfx_0C_48C0_Mode12_State0F_ClearAll, $88c0, $00c0 ; $4C18
     call AnimEd_StartDecorations                  ; $4C26
     call AnimEd_DrawTimingMarkers                 ; $4C29
     call AnimEd_LoadEntryThumb                    ; $4C2C
@@ -2005,34 +1893,17 @@ Mode12_State0F_ClearAll::
     call AnimEd_ShowEntryIndex                    ; $4C35
     call AnimEd_ShowSpeed                         ; $4C38
     call AnimEd_ShowLoopFlag                      ; $4C3B
-    ld a, STATE_12_BROWSE                         ; $4C3E
-    ld [wState], a                                ; $4C40
+    set_state STATE_12_BROWSE                     ; $4C3E
     ret                                           ; $4C43
 
 
 ; C: PACK: reloads the screen and removes the blank entries
 Mode12_State10_Pack::
-    ld a, BANK(Map_22_6B40_Mode12_State00_Init)   ; $4C44
-    ld hl, Map_22_6B40_Mode12_State00_Init        ; $4C46
-    ld de, $9800                                  ; $4C49
-    ld bc, $0400                                  ; $4C4C
-    call Vram_CopyFromBank                        ; $4C4F
+    farcopy Vram_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $4C44
     call AnimEd_DrawFrameSprites                  ; $4C52
-    ld a, BANK(Gfx_0C_5500_Mode12_State0F_ClearAll); $4C55
-    ld hl, Gfx_0C_5500_Mode12_State0F_ClearAll    ; $4C57
-    ld de, $9500                                  ; $4C5A
-    ld bc, $0060                                  ; $4C5D
-    call Vram_CopyFromBank                        ; $4C60
-    ld a, BANK(Gfx_0C_5100_Mode12_State0F_ClearAll); $4C63
-    ld hl, Gfx_0C_5100_Mode12_State0F_ClearAll    ; $4C65
-    ld de, $9100                                  ; $4C68
-    ld bc, $0380                                  ; $4C6B
-    call Vram_CopyFromBank                        ; $4C6E
-    ld a, BANK(Gfx_0C_48C0_Mode12_State0F_ClearAll); $4C71
-    ld hl, Gfx_0C_48C0_Mode12_State0F_ClearAll    ; $4C73
-    ld de, $88c0                                  ; $4C76
-    ld bc, $00c0                                  ; $4C79
-    call Vram_CopyFromBank                        ; $4C7C
+    farcopy Vram_CopyFromBank, Gfx_0C_5500_Mode12_State0F_ClearAll, $9500, $0060 ; $4C55
+    farcopy Vram_CopyFromBank, Gfx_0C_5100_Mode12_State0F_ClearAll, $9100, $0380 ; $4C63
+    farcopy Vram_CopyFromBank, Gfx_0C_48C0_Mode12_State0F_ClearAll, $88c0, $00c0 ; $4C71
     ld hl, wAnimList                              ; $4C7F
     ld b, $2f                                     ; $4C82
 
@@ -2151,8 +2022,7 @@ jr_003_4ceb:
     call AnimEd_ShowEntryIndex                    ; $4D0B
     call AnimEd_ShowSpeed                         ; $4D0E
     call AnimEd_ShowLoopFlag                      ; $4D11
-    ld a, STATE_12_BROWSE                         ; $4D14
-    ld [wState], a                                ; $4D16
+    set_state STATE_12_BROWSE                     ; $4D14
     ret                                           ; $4D19
 
 
@@ -2173,8 +2043,7 @@ jr_003_4d29:
     dec b                                         ; $4D2E
     jr nz, jr_003_4d29                            ; $4D2F
 
-    ld a, STATE_12_BROWSE                         ; $4D31
-    ld [wState], a                                ; $4D33
+    set_state STATE_12_BROWSE                     ; $4D31
     ret                                           ; $4D36
 
 
@@ -2213,11 +2082,7 @@ jr_003_4d58:
     ld a, $10                                     ; $4D73
     ldh [hScxShadow], a                           ; $4D75
     ldh [hScyShadow], a                           ; $4D77
-    ld a, BANK(Map_24_7C20_Mode12_State11_TestStart); $4D79
-    ld hl, Map_24_7C20_Mode12_State11_TestStart   ; $4D7B
-    ld de, $9800                                  ; $4D7E
-    ld bc, $0400                                  ; $4D81
-    call Mem_CopyFromBank                         ; $4D84
+    farcopy Mem_CopyFromBank, Map_24_7C20_Mode12_State11_TestStart, $9800, $0400 ; $4D79
     ld hl, $8000                                  ; $4D87
     ld bc, $0500                                  ; $4D8A
     call Mem_Zero                                 ; $4D8D
@@ -2230,9 +2095,7 @@ jr_003_4d58:
     ld a, [wAnimBorder]                           ; $4DA2
     ld [wBorderNumber], a                         ; $4DA5
     ldh [hFarcallAArg], a                         ; $4DA8
-    ld a, BANK(Border_LoadMap_LcdOff)             ; $4DAA
-    ld hl, Border_LoadMap_LcdOff                  ; $4DAC
-    call Far_Call                                 ; $4DAF
+    farcall Border_LoadMap_LcdOff                 ; $4DAA
     ld a, $54                                     ; $4DB2
     ldh [hLycShadowSplit1], a                     ; $4DB4
     ldh [hSplit1Latch], a                         ; $4DB6
@@ -2247,8 +2110,7 @@ jr_003_4d58:
     call Lcd_On                                   ; $4DCC
     call Pal_FadeIn                               ; $4DCF
     call AnimEd_LoadEntryPhoto                    ; $4DD2
-    ld hl, wState                                 ; $4DD5
-    inc [hl]                                      ; $4DD8
+    next_state                                    ; $4DD5
     ret                                           ; $4DD9
 
 
@@ -2356,8 +2218,7 @@ jr_003_4e5e:
     bit PADB_B, a                                 ; $4E60
     ret z                                         ; $4E62
 
-    ld hl, wState                                 ; $4E63
-    inc [hl]                                      ; $4E66
+    next_state                                    ; $4E63
     ret                                           ; $4E67
 
 
@@ -2389,11 +2250,7 @@ Mode12_State13_TestEnd::
     ld de, $8000                                  ; $4E9D
     ld bc, $1800                                  ; $4EA0
     call Mem_CopyFromBank                         ; $4EA3
-    ld a, BANK(Map_22_6B40_Mode12_State00_Init)   ; $4EA6
-    ld hl, Map_22_6B40_Mode12_State00_Init        ; $4EA8
-    ld de, $9800                                  ; $4EAB
-    ld bc, $0400                                  ; $4EAE
-    call Mem_CopyFromBank                         ; $4EB1
+    farcopy Mem_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $4EA6
     call Oam_ClearShadow                          ; $4EB4
     call Pal_AllWhite                             ; $4EB7
     call Lcd_On                                   ; $4EBA
@@ -2406,31 +2263,21 @@ Mode12_State13_TestEnd::
     call Pal_FadeIn                               ; $4ECF
     call AnimEd_StartDecorations                  ; $4ED2
     call AnimEd_DrawTimingMarkers                 ; $4ED5
-    ld a, STATE_12_BROWSE                         ; $4ED8
-    ld [wState], a                                ; $4EDA
+    set_state STATE_12_BROWSE                     ; $4ED8
     ret                                           ; $4EDD
 
 
 ; C: SAVE? dialog slides in
 Mode12_State14_SaveDialogOpen::
     call Oam_ClearShadow                          ; $4EDE
-    ld a, BANK(Gfx_0C_6180_Mode12_State14_SaveDialogOpen); $4EE1
-    ld hl, Gfx_0C_6180_Mode12_State14_SaveDialogOpen; $4EE3
-    ld de, $8c00                                  ; $4EE6
-    ld bc, $03e0                                  ; $4EE9
-    call Vram_CopyFromBank                        ; $4EEC
-    ld a, BANK(Map_27_7510_Mode12_State14_SaveDialogOpen); $4EEF
-    ld hl, Map_27_7510_Mode12_State14_SaveDialogOpen; $4EF1
-    ld de, $9c00                                  ; $4EF4
-    ld bc, $0120                                  ; $4EF7
-    call Vram_CopyFromBank                        ; $4EFA
+    farcopy Vram_CopyFromBank, Gfx_0C_6180_Mode12_State14_SaveDialogOpen, $8c00, $03e0 ; $4EE1
+    farcopy Vram_CopyFromBank, Map_27_7510_Mode12_State14_SaveDialogOpen, $9c00, $0120 ; $4EEF
     xor a                                         ; $4EFD
     ld [wSpriteAnimFrame + $b], a                 ; $4EFE
     ld [wSpriteAnimTick + $b], a                  ; $4F01
     ld de, $4f0e                                  ; $4F04
     call AnimEd_WindowSlideOut                    ; $4F07
-    ld hl, wState                                 ; $4F0A
-    inc [hl]                                      ; $4F0D
+    next_state                                    ; $4F0A
     ret                                           ; $4F0E
 
 
@@ -2441,8 +2288,7 @@ Mode12_State15_SaveDialogWait::
     ret z                                         ; $4F13
 
     ld [wAbResult], a                             ; $4F14
-    ld hl, wState                                 ; $4F17
-    inc [hl]                                      ; $4F1A
+    next_state                                    ; $4F17
     ret                                           ; $4F1B
 
 
@@ -2450,51 +2296,31 @@ Mode12_State15_SaveDialogWait::
 Mode12_State16_SaveDialogClose::
     ld de, $4f53                                  ; $4F1C
     call AnimEd_WindowSlideIn                     ; $4F1F
-    ld a, BANK(Gfx_0C_4C60_Mode12_State16_SaveDialogClose); $4F22
-    ld hl, Gfx_0C_4C60_Mode12_State16_SaveDialogClose; $4F24
-    ld de, $8c60                                  ; $4F27
-    ld bc, $0370                                  ; $4F2A
-    call Vram_CopyFromBank                        ; $4F2D
-    ld a, BANK(Gfx_0C_4600_Mode12_State16_SaveDialogClose); $4F30
-    ld hl, Gfx_0C_4600_Mode12_State16_SaveDialogClose; $4F32
-    ld de, $8600                                  ; $4F35
-    ld bc, $01f0                                  ; $4F38
-    call Vram_CopyFromBank                        ; $4F3B
+    farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $4F22
+    farcopy Vram_CopyFromBank, Gfx_0C_4600_Mode12_State16_SaveDialogClose, $8600, $01f0 ; $4F30
     ld a, [wAbResult]                             ; $4F3E
     bit 0, a                                      ; $4F41
     jr z, jr_003_4f4f                             ; $4F43
 
     ldh [hFarcallAArg], a                         ; $4F45
-    ld a, BANK(Settings_StoreAnimTranslated_Far)  ; $4F47
-    ld hl, Settings_StoreAnimTranslated_Far       ; $4F49
-    call Far_Call                                 ; $4F4C
+    farcall Settings_StoreAnimTranslated_Far      ; $4F47
 
 jr_003_4f4f:
-    ld hl, wState                                 ; $4F4F
-    inc [hl]                                      ; $4F52
+    next_state                                    ; $4F4F
     ret                                           ; $4F53
 
 
 ; C: exit dialog slides in
 Mode12_State17_ExitDialogOpen::
     call Oam_ClearShadow                          ; $4F54
-    ld a, BANK(Gfx_0C_6730_Mode12_State17_ExitDialogOpen); $4F57
-    ld hl, Gfx_0C_6730_Mode12_State17_ExitDialogOpen; $4F59
-    ld de, $8c00                                  ; $4F5C
-    ld bc, $0380                                  ; $4F5F
-    call Vram_CopyFromBank                        ; $4F62
-    ld a, BANK(Map_27_6E50_Mode12_State17_ExitDialogOpen); $4F65
-    ld hl, Map_27_6E50_Mode12_State17_ExitDialogOpen; $4F67
-    ld de, $9c00                                  ; $4F6A
-    ld bc, $0120                                  ; $4F6D
-    call Vram_CopyFromBank                        ; $4F70
+    farcopy Vram_CopyFromBank, Gfx_0C_6730_Mode12_State17_ExitDialogOpen, $8c00, $0380 ; $4F57
+    farcopy Vram_CopyFromBank, Map_27_6E50_Mode12_State17_ExitDialogOpen, $9c00, $0120 ; $4F65
     xor a                                         ; $4F73
     ld [wSpriteAnimFrame + $b], a                 ; $4F74
     ld [wSpriteAnimTick + $b], a                  ; $4F77
     ld de, $4f84                                  ; $4F7A
     call AnimEd_WindowSlideOut                    ; $4F7D
-    ld hl, wState                                 ; $4F80
-    inc [hl]                                      ; $4F83
+    next_state                                    ; $4F80
     ret                                           ; $4F84
 
 
@@ -2505,8 +2331,7 @@ Mode12_State18_ExitDialogWait::
     ret z                                         ; $4F89
 
     ld [wAbResult], a                             ; $4F8A
-    ld hl, wState                                 ; $4F8D
-    inc [hl]                                      ; $4F90
+    next_state                                    ; $4F8D
     ret                                           ; $4F91
 
 
@@ -2514,51 +2339,32 @@ Mode12_State18_ExitDialogWait::
 Mode12_State19_ExitDialogClose::
     ld de, $4fc6                                  ; $4F92
     call AnimEd_WindowSlideIn                     ; $4F95
-    ld a, BANK(Gfx_0C_4C60_Mode12_State16_SaveDialogClose); $4F98
-    ld hl, Gfx_0C_4C60_Mode12_State16_SaveDialogClose; $4F9A
-    ld de, $8c60                                  ; $4F9D
-    ld bc, $0370                                  ; $4FA0
-    call Vram_CopyFromBank                        ; $4FA3
-    ld a, BANK(Gfx_0C_4600_Mode12_State16_SaveDialogClose); $4FA6
-    ld hl, Gfx_0C_4600_Mode12_State16_SaveDialogClose; $4FA8
-    ld de, $8600                                  ; $4FAB
-    ld bc, $01f0                                  ; $4FAE
-    call Vram_CopyFromBank                        ; $4FB1
+    farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $4F98
+    farcopy Vram_CopyFromBank, Gfx_0C_4600_Mode12_State16_SaveDialogClose, $8600, $01f0 ; $4FA6
     ld a, [wAbResult]                             ; $4FB4
     bit 0, a                                      ; $4FB7
     jr z, jr_003_4fc1                             ; $4FB9
 
-    ld a, STATE_12_EXIT                           ; $4FBB
-    ld [wState], a                                ; $4FBD
+    set_state STATE_12_EXIT                       ; $4FBB
     ret                                           ; $4FC0
 
 
 jr_003_4fc1:
-    ld a, STATE_12_BROWSE                         ; $4FC1
-    ld [wState], a                                ; $4FC3
+    set_state STATE_12_BROWSE                     ; $4FC1
     ret                                           ; $4FC6
 
 
 ; C: CLEAR dialog slides in
 Mode12_State1A_ClearDialogOpen::
     call Oam_ClearShadow                          ; $4FC7
-    ld a, BANK(Gfx_0C_6560_Mode12_State1A_ClearDialogOpen); $4FCA
-    ld hl, Gfx_0C_6560_Mode12_State1A_ClearDialogOpen; $4FCC
-    ld de, $8c00                                  ; $4FCF
-    ld bc, $0370                                  ; $4FD2
-    call Vram_CopyFromBank                        ; $4FD5
-    ld a, BANK(Map_27_7870_Mode12_State1A_ClearDialogOpen); $4FD8
-    ld hl, Map_27_7870_Mode12_State1A_ClearDialogOpen; $4FDA
-    ld de, $9c00                                  ; $4FDD
-    ld bc, $0120                                  ; $4FE0
-    call Vram_CopyFromBank                        ; $4FE3
+    farcopy Vram_CopyFromBank, Gfx_0C_6560_Mode12_State1A_ClearDialogOpen, $8c00, $0370 ; $4FCA
+    farcopy Vram_CopyFromBank, Map_27_7870_Mode12_State1A_ClearDialogOpen, $9c00, $0120 ; $4FD8
     xor a                                         ; $4FE6
     ld [wSpriteAnimFrame + $c], a                 ; $4FE7
     ld [wSpriteAnimTick + $c], a                  ; $4FEA
     ld de, $4ff7                                  ; $4FED
     call AnimEd_WindowSlideOut                    ; $4FF0
-    ld hl, wState                                 ; $4FF3
-    inc [hl]                                      ; $4FF6
+    next_state                                    ; $4FF3
     ret                                           ; $4FF7
 
 
@@ -2569,8 +2375,7 @@ Mode12_State1B_ClearDialogWait::
     ret z                                         ; $4FFC
 
     ld [wAbResult], a                             ; $4FFD
-    ld hl, wState                                 ; $5000
-    inc [hl]                                      ; $5003
+    next_state                                    ; $5000
     ret                                           ; $5004
 
 
@@ -2578,57 +2383,34 @@ Mode12_State1B_ClearDialogWait::
 Mode12_State1C_ClearDialogClose::
     ld de, $5039                                  ; $5005
     call AnimEd_WindowSlideIn                     ; $5008
-    ld a, BANK(Gfx_0C_4C60_Mode12_State16_SaveDialogClose); $500B
-    ld hl, Gfx_0C_4C60_Mode12_State16_SaveDialogClose; $500D
-    ld de, $8c60                                  ; $5010
-    ld bc, $0370                                  ; $5013
-    call Vram_CopyFromBank                        ; $5016
-    ld a, BANK(Gfx_0C_4600_Mode12_State16_SaveDialogClose); $5019
-    ld hl, Gfx_0C_4600_Mode12_State16_SaveDialogClose; $501B
-    ld de, $8600                                  ; $501E
-    ld bc, $01f0                                  ; $5021
-    call Vram_CopyFromBank                        ; $5024
+    farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $500B
+    farcopy Vram_CopyFromBank, Gfx_0C_4600_Mode12_State16_SaveDialogClose, $8600, $01f0 ; $5019
     ld a, [wAbResult]                             ; $5027
     bit 0, a                                      ; $502A
     jr z, jr_003_5034                             ; $502C
 
-    ld a, STATE_12_CLEAR_ALL                      ; $502E
-    ld [wState], a                                ; $5030
+    set_state STATE_12_CLEAR_ALL                  ; $502E
     ret                                           ; $5033
 
 
 jr_003_5034:
-    ld a, STATE_12_BROWSE                         ; $5034
-    ld [wState], a                                ; $5036
+    set_state STATE_12_BROWSE                     ; $5034
     ret                                           ; $5039
 
 
 ; C: SORT dialog (CANCEL / Normal / Shuffle) slides in
 Mode12_State1D_SortDialogOpen::
     call Oam_ClearShadow                          ; $503A
-    ld a, BANK(Gfx_0C_6C30_Mode12_State1D_SortDialogOpen); $503D
-    ld hl, Gfx_0C_6C30_Mode12_State1D_SortDialogOpen; $503F
-    ld de, $8c70                                  ; $5042
-    ld bc, $0370                                  ; $5045
-    call Vram_CopyFromBank                        ; $5048
-    ld a, BANK(Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen); $504B
-    ld hl, Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen; $504D
-    ld de, $8570                                  ; $5050
-    ld bc, $0290                                  ; $5053
-    call Vram_CopyFromBank                        ; $5056
-    ld a, BANK(Map_27_6D30_Mode12_State1D_SortDialogOpen); $5059
-    ld hl, Map_27_6D30_Mode12_State1D_SortDialogOpen; $505B
-    ld de, $9c00                                  ; $505E
-    ld bc, $0120                                  ; $5061
-    call Vram_CopyFromBank                        ; $5064
+    farcopy Vram_CopyFromBank, Gfx_0C_6C30_Mode12_State1D_SortDialogOpen, $8c70, $0370 ; $503D
+    farcopy Vram_CopyFromBank, Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen, $8570, $0290 ; $504B
+    farcopy Vram_CopyFromBank, Map_27_6D30_Mode12_State1D_SortDialogOpen, $9c00, $0120 ; $5059
     xor a                                         ; $5067
     ld [wAutofillMode], a                         ; $5068
     ld [wSpriteAnimFrame + $d], a                 ; $506B
     ld [wSpriteAnimTick + $d], a                  ; $506E
     ld de, AnimEd_SortChoiceCursor                ; $5071
     call AnimEd_WindowSlideOut                    ; $5074
-    ld hl, wState                                 ; $5077
-    inc [hl]                                      ; $507A
+    next_state                                    ; $5077
     ret                                           ; $507B
 
 
@@ -2648,8 +2430,7 @@ Mode12_State1E_SortDialogWait::
     call nz, Snd_Sfx1                             ; $508D
     pop af                                        ; $5090
     ld [wAbResult], a                             ; $5091
-    ld hl, wState                                 ; $5094
-    inc [hl]                                      ; $5097
+    next_state                                    ; $5094
     ret                                           ; $5098
 
 
@@ -2749,16 +2530,8 @@ AnimEd_SortChoiceCursor_Tbl5104::
 Mode12_State1F_SortDialogClose::
     ld de, AnimEd_SortChoiceCursor                ; $5107
     call AnimEd_WindowSlideIn                     ; $510A
-    ld a, BANK(Gfx_0C_4C60_Mode12_State16_SaveDialogClose); $510D
-    ld hl, Gfx_0C_4C60_Mode12_State16_SaveDialogClose; $510F
-    ld de, $8c60                                  ; $5112
-    ld bc, $0370                                  ; $5115
-    call Vram_CopyFromBank                        ; $5118
-    ld a, BANK(Gfx_0C_4500_Mode12_State1F_SortDialogClose); $511B
-    ld hl, Gfx_0C_4500_Mode12_State1F_SortDialogClose; $511D
-    ld de, $8500                                  ; $5120
-    ld bc, $0300                                  ; $5123
-    call Vram_CopyFromBank                        ; $5126
+    farcopy Vram_CopyFromBank, Gfx_0C_4C60_Mode12_State16_SaveDialogClose, $8c60, $0370 ; $510D
+    farcopy Vram_CopyFromBank, Gfx_0C_4500_Mode12_State1F_SortDialogClose, $8500, $0300 ; $511B
     ld a, [wAbResult]                             ; $5129
     bit 0, a                                      ; $512C
     jr z, jr_003_519b                             ; $512E
@@ -2808,11 +2581,7 @@ jr_003_5154:
     add hl, bc                                    ; $516B
     ld a, [hl]                                    ; $516C
     ld [wCurEntryValue], a                        ; $516D
-    ld a, BANK(Map_22_6B40_Mode12_State00_Init)   ; $5170
-    ld hl, Map_22_6B40_Mode12_State00_Init        ; $5172
-    ld de, $9800                                  ; $5175
-    ld bc, $0400                                  ; $5178
-    call Vram_CopyFromBank                        ; $517B
+    farcopy Vram_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $5170
     call AnimEd_StartDecorations                  ; $517E
     call AnimEd_DrawTimingMarkers                 ; $5181
     call AnimEd_LoadEntryThumb                    ; $5184
@@ -2825,8 +2594,7 @@ jr_003_5154:
     set 0, [hl]                                   ; $5199
 
 jr_003_519b:
-    ld a, STATE_12_BROWSE                         ; $519B
-    ld [wState], a                                ; $519D
+    set_state STATE_12_BROWSE                     ; $519B
     ret                                           ; $51A0
 
 
@@ -2886,8 +2654,7 @@ Mode12_State20_BorderRow::
     ld [wBorderNumber], a                         ; $51EF
     xor a                                         ; $51F2
     ld [wSubstate], a                             ; $51F3
-    ld hl, wState                                 ; $51F6
-    inc [hl]                                      ; $51F9
+    next_state                                    ; $51F6
     ret                                           ; $51FA
 
 
@@ -2895,18 +2662,9 @@ jr_003_51fb:
     bit 7, a                                      ; $51FB
     jr z, jr_003_5221                             ; $51FD
 
-    ld a, BANK(Gfx_0C_5D70_Mode12_State01_Browse) ; $51FF
-    ld hl, Gfx_0C_5D70_Mode12_State01_Browse      ; $5201
-    ld de, $8950                                  ; $5204
-    ld bc, $0030                                  ; $5207
-    call Vram_CopyFromBank                        ; $520A
-    ld a, BANK(Gfx_0C_4920_Mode12_State20_BorderRow); $520D
-    ld hl, Gfx_0C_4920_Mode12_State20_BorderRow   ; $520F
-    ld de, $8920                                  ; $5212
-    ld bc, $0030                                  ; $5215
-    call Vram_CopyFromBank                        ; $5218
-    ld a, STATE_12_EDIT_SPEED                     ; $521B
-    ld [wState], a                                ; $521D
+    farcopy Vram_CopyFromBank, Gfx_0C_5D70_Mode12_State01_Browse, $8950, $0030 ; $51FF
+    farcopy Vram_CopyFromBank, Gfx_0C_4920_Mode12_State20_BorderRow, $8920, $0030 ; $520D
+    set_state STATE_12_EDIT_SPEED                 ; $521B
     ret                                           ; $5220
 
 
@@ -2914,8 +2672,7 @@ jr_003_5221:
     bit 2, a                                      ; $5221
     jr z, jr_003_522b                             ; $5223
 
-    ld a, STATE_12_TOOLS_OPEN                     ; $5225
-    ld [wState], a                                ; $5227
+    set_state STATE_12_TOOLS_OPEN                 ; $5225
     ret                                           ; $522A
 
 
@@ -2928,14 +2685,12 @@ jr_003_522b:
     and a                                         ; $5234
     jr nz, jr_003_523d                            ; $5235
 
-    ld a, STATE_12_EXIT                           ; $5237
-    ld [wState], a                                ; $5239
+    set_state STATE_12_EXIT                       ; $5237
     ret                                           ; $523C
 
 
 jr_003_523d:
-    ld a, STATE_12_SAVE_DIALOG_OPEN               ; $523D
-    ld [wState], a                                ; $523F
+    set_state STATE_12_SAVE_DIALOG_OPEN           ; $523D
     ret                                           ; $5242
 
 
@@ -2989,9 +2744,7 @@ AnimEd_DrawBorderHand_Gfx527A::
 ; C: far call 08:4DF2
 Mode12_State21_FarBorderPicker::
     ldh [hFarcallAArg], a                         ; $5282
-    ld a, BANK(BorderPicker_Far)                  ; $5284
-    ld hl, BorderPicker_Far                       ; $5286
-    call Far_Call                                 ; $5289
+    farcall BorderPicker_Far                      ; $5284
     ret                                           ; $528C
 
 
@@ -3027,21 +2780,9 @@ jr_003_529c:
     ld de, $8000                                  ; $52C1
     ld bc, $1800                                  ; $52C4
     call Mem_CopyFromBank                         ; $52C7
-    ld a, BANK(Map_22_6B40_Mode12_State00_Init)   ; $52CA
-    ld hl, Map_22_6B40_Mode12_State00_Init        ; $52CC
-    ld de, $9800                                  ; $52CF
-    ld bc, $0400                                  ; $52D2
-    call Mem_CopyFromBank                         ; $52D5
-    ld a, BANK(Gfx_0C_5D40_Mode12_State22_BorderPickerReturn); $52D8
-    ld hl, Gfx_0C_5D40_Mode12_State22_BorderPickerReturn; $52DA
-    ld de, $8920                                  ; $52DD
-    ld bc, $0030                                  ; $52E0
-    call Mem_CopyFromBank                         ; $52E3
-    ld a, BANK(Gfx_0C_5DA0_Mode12_State01_Browse) ; $52E6
-    ld hl, Gfx_0C_5DA0_Mode12_State01_Browse      ; $52E8
-    ld de, $88c0                                  ; $52EB
-    ld bc, $0060                                  ; $52EE
-    call Mem_CopyFromBank                         ; $52F1
+    farcopy Mem_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $52CA
+    farcopy Mem_CopyFromBank, Gfx_0C_5D40_Mode12_State22_BorderPickerReturn, $8920, $0030 ; $52D8
+    farcopy Mem_CopyFromBank, Gfx_0C_5DA0_Mode12_State01_Browse, $88c0, $0060 ; $52E6
     call Oam_ClearShadow                          ; $52F4
     call Pal_AllWhite                             ; $52F7
     call Lcd_On                                   ; $52FA
@@ -3054,8 +2795,7 @@ jr_003_529c:
     call Pal_FadeIn                               ; $530F
     call AnimEd_StartDecorations                  ; $5312
     call AnimEd_DrawTimingMarkers                 ; $5315
-    ld a, STATE_12_BORDER_ROW                     ; $5318
-    ld [wState], a                                ; $531A
+    set_state STATE_12_BORDER_ROW                 ; $5318
     ret                                           ; $531D
 
 
@@ -3073,9 +2813,7 @@ AnimEd_LoadEntryPhoto::
 
 jr_003_532c:
     ldh [hFarcallAArg], a                         ; $532C
-    ld a, BANK(Photo_LoadToVram_Far)              ; $532E
-    ld hl, Photo_LoadToVram_Far                   ; $5330
-    call Far_Call                                 ; $5333
+    farcall Photo_LoadToVram_Far                  ; $532E
     ret                                           ; $5336
 
 
@@ -3679,16 +3417,8 @@ AnimEd_Ctx0_Decor::
     and a                                         ; $5694
     jr z, jr_003_56b3                             ; $5695
 
-    ld a, BANK(Gfx_0C_5CA0_AnimEd_Ctx0_Decor)     ; $5697
-    ld hl, Gfx_0C_5CA0_AnimEd_Ctx0_Decor          ; $5699
-    ld de, $97c0                                  ; $569C
-    ld bc, $0020                                  ; $569F
-    call Vram_CopyFromBank                        ; $56A2
-    ld a, BANK(Gfx_0C_5CC0_AnimEd_Ctx0_Decor)     ; $56A5
-    ld hl, Gfx_0C_5CC0_AnimEd_Ctx0_Decor          ; $56A7
-    ld de, $9770                                  ; $56AA
-    ld bc, $0010                                  ; $56AD
-    call Vram_CopyFromBank                        ; $56B0
+    farcopy Vram_CopyFromBank, Gfx_0C_5CA0_AnimEd_Ctx0_Decor, $97c0, $0020 ; $5697
+    farcopy Vram_CopyFromBank, Gfx_0C_5CC0_AnimEd_Ctx0_Decor, $9770, $0010 ; $56A5
 
 jr_003_56b3:
     ld hl, $9a53                                  ; $56B3
@@ -3827,11 +3557,7 @@ jr_003_5742:
     ld a, $5b                                     ; $578F
     ld hl, $99e2                                  ; $5791
     call Vram_WriteByteSafe                       ; $5794
-    ld a, BANK(Gfx_0C_6020_AnimEd_Ctx0_Decor)     ; $5797
-    ld hl, Gfx_0C_6020_AnimEd_Ctx0_Decor          ; $5799
-    ld de, $9500                                  ; $579C
-    ld bc, $0060                                  ; $579F
-    call Vram_CopyFromBank                        ; $57A2
+    farcopy Vram_CopyFromBank, Gfx_0C_6020_AnimEd_Ctx0_Decor, $9500, $0060 ; $5797
     ret                                           ; $57A5
 
 
@@ -4122,11 +3848,7 @@ AnimEd_StartExitTransition::
     ld a, $fe                                     ; $5995
     ld hl, $99e2                                  ; $5997
     call Vram_WriteByteSafe                       ; $599A
-    ld a, BANK(Gfx_0C_5500_Mode12_State0F_ClearAll); $599D
-    ld hl, Gfx_0C_5500_Mode12_State0F_ClearAll    ; $599F
-    ld de, $9500                                  ; $59A2
-    ld bc, $0060                                  ; $59A5
-    call Vram_CopyFromBank                        ; $59A8
+    farcopy Vram_CopyFromBank, Gfx_0C_5500_Mode12_State0F_ClearAll, $9500, $0060 ; $599D
     call AnimEd_ExitCtx0                          ; $59AB
     ret                                           ; $59AE
 
@@ -4536,9 +4258,7 @@ AnimEd_LoadEntryThumb::
 
 jr_003_5bdc:
     ldh [hFarcallAArg], a                         ; $5BDC
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5BDE
-    ld hl, Photo_GetSramAddress_Far               ; $5BE0
-    call Far_Call                                 ; $5BE3
+    farcall Photo_GetSramAddress_Far              ; $5BDE
     ld hl, $0e00                                  ; $5BE6
     add hl, bc                                    ; $5BE9
     ld de, $91a0                                  ; $5BEA
@@ -4588,11 +4308,7 @@ jr_003_5c14:
 
 
 jr_003_5c1e:
-    ld a, BANK(Gfx_0C_5100_Mode12_State0F_ClearAll); $5C1E
-    ld hl, Gfx_0C_5100_Mode12_State0F_ClearAll    ; $5C20
-    ld de, $9100                                  ; $5C23
-    ld bc, $0380                                  ; $5C26
-    call Vram_CopyFromBank                        ; $5C29
+    farcopy Vram_CopyFromBank, Gfx_0C_5100_Mode12_State0F_ClearAll, $9100, $0380 ; $5C1E
     ret                                           ; $5C2C
 
 
@@ -4625,9 +4341,7 @@ jr_003_5c3c:
 
 jr_003_5c4e:
     ldh [hFarcallAArg], a                         ; $5C4E
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5C50
-    ld hl, Photo_GetSramAddress_Far               ; $5C52
-    call Far_Call                                 ; $5C55
+    farcall Photo_GetSramAddress_Far              ; $5C50
     ld l, a                                       ; $5C58
     push hl                                       ; $5C59
     push bc                                       ; $5C5A
@@ -4682,16 +4396,8 @@ AnimEd_ShowEntryValue::
     ld de, $8aa0                                  ; $5CA6
     ld bc, $0040                                  ; $5CA9
     call Vram_CopyFromBank                        ; $5CAC
-    ld a, BANK(Gfx_0C_4FF0_AnimEd_ShowEntryValue) ; $5CAF
-    ld hl, Gfx_0C_4FF0_AnimEd_ShowEntryValue      ; $5CB1
-    ld de, $8be0                                  ; $5CB4
-    ld bc, $0010                                  ; $5CB7
-    call Vram_CopyFromBank                        ; $5CBA
-    ld a, BANK(Gfx_0C_4FF0_AnimEd_ShowEntryValue) ; $5CBD
-    ld hl, Gfx_0C_4FF0_AnimEd_ShowEntryValue      ; $5CBF
-    ld de, $8bf0                                  ; $5CC2
-    ld bc, $0010                                  ; $5CC5
-    call Vram_CopyFromBank                        ; $5CC8
+    farcopy Vram_CopyFromBank, Gfx_0C_4FF0_AnimEd_ShowEntryValue, $8be0, $0010 ; $5CAF
+    farcopy Vram_CopyFromBank, Gfx_0C_4FF0_AnimEd_ShowEntryValue, $8bf0, $0010 ; $5CBD
     ret                                           ; $5CCB
 
 
@@ -4707,20 +4413,12 @@ jr_003_5ccc:
     bit 7, a                                      ; $5CDE
     jr nz, jr_003_5cf1                            ; $5CE0
 
-    ld a, BANK(Gfx_0C_5B40_AnimEd_ShowEntryValue) ; $5CE2
-    ld hl, Gfx_0C_5B40_AnimEd_ShowEntryValue      ; $5CE4
-    ld de, $8be0                                  ; $5CE7
-    ld bc, $0020                                  ; $5CEA
-    call Vram_CopyFromBank                        ; $5CED
+    farcopy Vram_CopyFromBank, Gfx_0C_5B40_AnimEd_ShowEntryValue, $8be0, $0020 ; $5CE2
     ret                                           ; $5CF0
 
 
 jr_003_5cf1:
-    ld a, BANK(Gfx_0C_5B60_AnimEd_ShowEntryValue) ; $5CF1
-    ld hl, Gfx_0C_5B60_AnimEd_ShowEntryValue      ; $5CF3
-    ld de, $8be0                                  ; $5CF6
-    ld bc, $0020                                  ; $5CF9
-    call Vram_CopyFromBank                        ; $5CFC
+    farcopy Vram_CopyFromBank, Gfx_0C_5B60_AnimEd_ShowEntryValue, $8be0, $0020 ; $5CF1
     ret                                           ; $5CFF
 
 
@@ -4743,30 +4441,14 @@ AnimEd_ShowLoopFlag::
     and a                                         ; $5D16
     jr nz, jr_003_5d36                            ; $5D17
 
-    ld a, BANK(Gfx_0C_5C80_AnimEd_ShowLoopFlag)   ; $5D19
-    ld hl, Gfx_0C_5C80_AnimEd_ShowLoopFlag        ; $5D1B
-    ld de, $97c0                                  ; $5D1E
-    ld bc, $0020                                  ; $5D21
-    call Vram_CopyFromBank                        ; $5D24
-    ld a, BANK(Gfx_0C_5770_AnimEd_ShowLoopFlag)   ; $5D27
-    ld hl, Gfx_0C_5770_AnimEd_ShowLoopFlag        ; $5D29
-    ld de, $9770                                  ; $5D2C
-    ld bc, $0010                                  ; $5D2F
-    call Vram_CopyFromBank                        ; $5D32
+    farcopy Vram_CopyFromBank, Gfx_0C_5C80_AnimEd_ShowLoopFlag, $97c0, $0020 ; $5D19
+    farcopy Vram_CopyFromBank, Gfx_0C_5770_AnimEd_ShowLoopFlag, $9770, $0010 ; $5D27
     ret                                           ; $5D35
 
 
 jr_003_5d36:
-    ld a, BANK(Gfx_0C_5CA0_AnimEd_Ctx0_Decor)     ; $5D36
-    ld hl, Gfx_0C_5CA0_AnimEd_Ctx0_Decor          ; $5D38
-    ld de, $97c0                                  ; $5D3B
-    ld bc, $0020                                  ; $5D3E
-    call Vram_CopyFromBank                        ; $5D41
-    ld a, BANK(Gfx_0C_5CC0_AnimEd_Ctx0_Decor)     ; $5D44
-    ld hl, Gfx_0C_5CC0_AnimEd_Ctx0_Decor          ; $5D46
-    ld de, $9770                                  ; $5D49
-    ld bc, $0010                                  ; $5D4C
-    call Vram_CopyFromBank                        ; $5D4F
+    farcopy Vram_CopyFromBank, Gfx_0C_5CA0_AnimEd_Ctx0_Decor, $97c0, $0020 ; $5D36
+    farcopy Vram_CopyFromBank, Gfx_0C_5CC0_AnimEd_Ctx0_Decor, $9770, $0010 ; $5D44
     ret                                           ; $5D52
 
 
@@ -5227,26 +4909,10 @@ Mode13_State00_Init::
     xor a                                         ; $5FC5
     ldh [hScxShadow], a                           ; $5FC6
     ldh [hScyShadow], a                           ; $5FC8
-    ld a, BANK(Gfx_17_6800_Mode13_State00_Init)   ; $5FCA
-    ld hl, Gfx_17_6800_Mode13_State00_Init        ; $5FCC
-    ld de, $9000                                  ; $5FCF
-    ld bc, $0800                                  ; $5FD2
-    call Mem_CopyFromBank                         ; $5FD5
-    ld a, BANK(Gfx_17_7000_Mode13_State00_Init)   ; $5FD8
-    ld hl, Gfx_17_7000_Mode13_State00_Init        ; $5FDA
-    ld de, $8800                                  ; $5FDD
-    ld bc, $0800                                  ; $5FE0
-    call Mem_CopyFromBank                         ; $5FE3
-    ld a, BANK(Gfx_17_7800_Mode13_State00_Init)   ; $5FE6
-    ld hl, Gfx_17_7800_Mode13_State00_Init        ; $5FE8
-    ld de, $8000                                  ; $5FEB
-    ld bc, $0140                                  ; $5FEE
-    call Mem_CopyFromBank                         ; $5FF1
-    ld a, BANK(Map_23_48C0_Mode13_State00_Init)   ; $5FF4
-    ld hl, Map_23_48C0_Mode13_State00_Init        ; $5FF6
-    ld de, $9800                                  ; $5FF9
-    ld bc, $0240                                  ; $5FFC
-    call Mem_CopyFromBank                         ; $5FFF
+    farcopy Mem_CopyFromBank, Gfx_17_6800_Mode13_State00_Init, $9000, $0800 ; $5FCA
+    farcopy Mem_CopyFromBank, Gfx_17_7000_Mode13_State00_Init, $8800, $0800 ; $5FD8
+    farcopy Mem_CopyFromBank, Gfx_17_7800_Mode13_State00_Init, $8000, $0140 ; $5FE6
+    farcopy Mem_CopyFromBank, Map_23_48C0_Mode13_State00_Init, $9800, $0240 ; $5FF4
     ld a, $60                                     ; $6002
     ldh [hLycShadowSplit1], a                     ; $6004
     ldh [hSplit2Line], a                          ; $6006
@@ -5269,8 +4935,7 @@ Mode13_State00_Init::
     ldh [hKeyRepeatDelay], a                      ; $6033
     ld a, $08                                     ; $6035
     ldh [hKeyRepeatPeriod], a                     ; $6037
-    ld a, STATE_13_MUSIC_SELECT                   ; $6039
-    ld [wState], a                                ; $603B
+    set_state STATE_13_MUSIC_SELECT               ; $6039
     ret                                           ; $603E
 
 
@@ -5317,8 +4982,7 @@ jr_003_6062:
     ldh [hKeyRepeatDelay], a                      ; $607E
     ld a, $04                                     ; $6080
     ldh [hKeyRepeatPeriod], a                     ; $6082
-    ld hl, wState                                 ; $6084
-    inc [hl]                                      ; $6087
+    next_state                                    ; $6084
     ret                                           ; $6088
 
 
@@ -5373,24 +5037,15 @@ Mode13_State02_Start::
     res 1, [hl]                                   ; $60C9
     ld a, MODE_SHOW_MENU                          ; $60CB
     ld [wMode], a                                 ; $60CD
-    ld a, STATE_0B_INIT                           ; $60D0
-    ld [wState], a                                ; $60D2
+    set_state STATE_0B_INIT                       ; $60D0
     ret                                           ; $60D5
 
 
 jr_003_60d6:
-    ld a, BANK(Map_23_4B00_Mode13_State02_Start)  ; $60D6
-    ld hl, Map_23_4B00_Mode13_State02_Start       ; $60D8
-    ld de, $9920                                  ; $60DB
-    ld bc, $0060                                  ; $60DE
-    call Vram_CopyFromBank                        ; $60E1
+    farcopy Vram_CopyFromBank, Map_23_4B00_Mode13_State02_Start, $9920, $0060 ; $60D6
     ld bc, $001d                                  ; $60E4
     call Wait_Frames                              ; $60E7
-    ld a, BANK(Map_23_49E0_Mode13_State02_Start)  ; $60EA
-    ld hl, Map_23_49E0_Mode13_State02_Start       ; $60EC
-    ld de, $9920                                  ; $60EF
-    ld bc, $0060                                  ; $60F2
-    call Vram_CopyFromBank                        ; $60F5
+    farcopy Vram_CopyFromBank, Map_23_49E0_Mode13_State02_Start, $9920, $0060 ; $60EA
     ld bc, $001e                                  ; $60F8
     call Wait_Frames                              ; $60FB
     call Pal_FadeOut                              ; $60FE
@@ -5403,17 +5058,14 @@ jr_003_60d6:
     res 6, [hl]                                   ; $610E
     ld hl, rIE                                    ; $6110
     res 1, [hl]                                   ; $6113
-    ld hl, wState                                 ; $6115
-    inc [hl]                                      ; $6118
+    next_state                                    ; $6115
     ret                                           ; $6119
 
 
 ; C: loads the animation list (far 02:4EE8)
 Mode13_State03_PlayPrepare::
     ldh [hFarcallAArg], a                         ; $611A
-    ld a, BANK(Settings_LoadAnimTranslated_Far)   ; $611C
-    ld hl, Settings_LoadAnimTranslated_Far        ; $611E
-    call Far_Call                                 ; $6121
+    farcall Settings_LoadAnimTranslated_Far       ; $611C
     xor a                                         ; $6124
     ld [wPlayTick], a                             ; $6125
     ld [wPlayLoopCount], a                        ; $6128
@@ -5429,8 +5081,7 @@ jr_003_6133:
     dec b                                         ; $6138
     jr nz, jr_003_6133                            ; $6139
 
-    ld a, STATE_13_END_MESSAGE_SETUP              ; $613B
-    ld [wState], a                                ; $613D
+    set_state STATE_13_END_MESSAGE_SETUP          ; $613B
     ret                                           ; $6140
 
 
@@ -5468,11 +5119,7 @@ jr_003_6162:
     ldh [hScyShadow], a                           ; $6178
     xor a                                         ; $617A
     ld [wPlayerPause], a                          ; $617B
-    ld a, BANK(Map_24_7C20_Mode12_State11_TestStart); $617E
-    ld hl, Map_24_7C20_Mode12_State11_TestStart   ; $6180
-    ld de, $9800                                  ; $6183
-    ld bc, $0400                                  ; $6186
-    call Mem_CopyFromBank                         ; $6189
+    farcopy Mem_CopyFromBank, Map_24_7C20_Mode12_State11_TestStart, $9800, $0400 ; $617E
     ld hl, $8000                                  ; $618C
     ld bc, $0500                                  ; $618F
     ld de, $ffff                                  ; $6192
@@ -5488,9 +5135,7 @@ jr_003_6162:
     ld a, [wAnimBorder]                           ; $61B0
     ld [wBorderNumber], a                         ; $61B3
     ldh [hFarcallAArg], a                         ; $61B6
-    ld a, BANK(Border_LoadMap_LcdOff)             ; $61B8
-    ld hl, Border_LoadMap_LcdOff                  ; $61BA
-    call Far_Call                                 ; $61BD
+    farcall Border_LoadMap_LcdOff                 ; $61B8
     ld a, $54                                     ; $61C0
     ldh [hLycShadowSplit1], a                     ; $61C2
     ldh [hSplit2Line], a                          ; $61C4
@@ -5512,8 +5157,7 @@ jr_003_6162:
     ld bc, $000a                                  ; $61EF
     call Wait_Frames                              ; $61F2
     call AnimEd_LoadEntryPhoto                    ; $61F5
-    ld hl, wState                                 ; $61F8
-    inc [hl]                                      ; $61FB
+    next_state                                    ; $61F8
     ret                                           ; $61FC
 
 
@@ -5664,8 +5308,7 @@ Mode13_State04_PlayRun_Keys::
     bit PADB_B, a                                 ; $62CA
     jr z, jr_003_62d3                             ; $62CC
 
-    ld hl, wState                                 ; $62CE
-    inc [hl]                                      ; $62D1
+    next_state                                    ; $62CE
     ret                                           ; $62D2
 
 
@@ -5687,8 +5330,7 @@ Mode13_State05_Exit::
     res 6, [hl]                                   ; $62E7
     ld hl, rIE                                    ; $62E9
     res 1, [hl]                                   ; $62EC
-    ld a, STATE_13_INIT                           ; $62EE
-    ld [wState], a                                ; $62F0
+    set_state STATE_13_INIT                       ; $62EE
     ret                                           ; $62F3
 
 
@@ -5698,17 +5340,14 @@ Mode13_State06_EndMessageSetup::
     ld [wSubstate], a                             ; $62F5
     ld a, $06                                     ; $62F8
     ld [wResultMsgId], a                          ; $62FA
-    ld hl, wState                                 ; $62FD
-    inc [hl]                                      ; $6300
+    next_state                                    ; $62FD
     ret                                           ; $6301
 
 
 ; C: far call 09:7290 (shared result screen)
 Mode13_State07_FarResultScreen::
     ldh [hFarcallAArg], a                         ; $6302
-    ld a, BANK(ResultScreen_Far)                  ; $6304
-    ld hl, ResultScreen_Far                       ; $6306
-    call Far_Call                                 ; $6309
+    farcall ResultScreen_Far                      ; $6304
     ret                                           ; $630C
 
 
@@ -5739,8 +5378,7 @@ Mode0C_State00_Init::
     xor a                                         ; $6328
     ld [wSubstate], a                             ; $6329
     ld [wStockNavAllowed], a                      ; $632C
-    ld hl, wState                                 ; $632F
-    inc [hl]                                      ; $6332
+    next_state                                    ; $632F
     ret                                           ; $6333
 
 
@@ -5761,8 +5399,7 @@ Mode0C_State02_Setup::
 
     ld a, MODE_SHOW_MENU                          ; $6346
     ld [wMode], a                                 ; $6348
-    ld a, STATE_0B_INIT                           ; $634B
-    ld [wState], a                                ; $634D
+    set_state STATE_0B_INIT                       ; $634B
     ret                                           ; $6350
 
 
@@ -5782,31 +5419,11 @@ jr_003_6351:
     ld a, $07                                     ; $636C
     ld [wHsCursorY], a                            ; $636E
     call Anim_ClearSlots                          ; $6371
-    ld a, BANK(Gfx_1C_58A0_Mode0C_State02_Setup)  ; $6374
-    ld hl, Gfx_1C_58A0_Mode0C_State02_Setup       ; $6376
-    ld de, $8580                                  ; $6379
-    ld bc, $0280                                  ; $637C
-    call Mem_CopyFromBank                         ; $637F
-    ld a, BANK(Gfx_1C_5B60_Mode0C_State02_Setup)  ; $6382
-    ld hl, Gfx_1C_5B60_Mode0C_State02_Setup       ; $6384
-    ld de, $8660                                  ; $6387
-    ld bc, $0060                                  ; $638A
-    call Mem_CopyFromBank                         ; $638D
-    ld a, BANK(Gfx_1C_5C60_Mode0C_State02_Setup)  ; $6390
-    ld hl, Gfx_1C_5C60_Mode0C_State02_Setup       ; $6392
-    ld de, $8760                                  ; $6395
-    ld bc, $0060                                  ; $6398
-    call Mem_CopyFromBank                         ; $639B
-    ld a, BANK(Gfx_3F_7700_Mode0C_State02_Setup)  ; $639E
-    ld hl, Gfx_3F_7700_Mode0C_State02_Setup       ; $63A0
-    ld de, $8e00                                  ; $63A3
-    ld bc, $01f0                                  ; $63A6
-    call Mem_CopyFromBank                         ; $63A9
-    ld a, BANK(Map_3F_7D00_Mode0C_State02_Setup)  ; $63AC
-    ld hl, Map_3F_7D00_Mode0C_State02_Setup       ; $63AE
-    ld de, $9800                                  ; $63B1
-    ld bc, $0240                                  ; $63B4
-    call Mem_CopyFromBank                         ; $63B7
+    farcopy Mem_CopyFromBank, Gfx_1C_58A0_Mode0C_State02_Setup, $8580, $0280 ; $6374
+    farcopy Mem_CopyFromBank, Gfx_1C_5B60_Mode0C_State02_Setup, $8660, $0060 ; $6382
+    farcopy Mem_CopyFromBank, Gfx_1C_5C60_Mode0C_State02_Setup, $8760, $0060 ; $6390
+    farcopy Mem_CopyFromBank, Gfx_3F_7700_Mode0C_State02_Setup, $8e00, $01f0 ; $639E
+    farcopy Mem_CopyFromBank, Map_3F_7D00_Mode0C_State02_Setup, $9800, $0240 ; $63AC
     ld hl, $9a40                                  ; $63BA
     ld bc, $01c0                                  ; $63BD
     ld a, $ff                                     ; $63C0
@@ -5818,9 +5435,7 @@ jr_003_6351:
     ld a, [wPhotoIndex]                           ; $63D1
     ld [wHotSpotShownPhoto], a                    ; $63D4
     ldh [hFarcallAArg], a                         ; $63D7
-    ld a, BANK(Photo_LoadImage_Far)               ; $63D9
-    ld hl, Photo_LoadImage_Far                    ; $63DB
-    call Far_Call                                 ; $63DE
+    farcall Photo_LoadImage_Far                   ; $63D9
     ld a, $00                                     ; $63E1
     ld hl, wPhotoImage                            ; $63E3
     ld de, $9000                                  ; $63E6
@@ -5833,9 +5448,7 @@ jr_003_6351:
     call Mem_CopyFromBank                         ; $63FA
     ld a, [wHotSpotShownPhoto]                    ; $63FD
     ldh [hFarcallAArg], a                         ; $6400
-    ld a, BANK(Photo_LoadHotspotsTranslated_Far)  ; $6402
-    ld hl, Photo_LoadHotspotsTranslated_Far       ; $6404
-    call Far_Call                                 ; $6407
+    farcall Photo_LoadHotspotsTranslated_Far      ; $6402
     call Oam_ClearShadow                          ; $640A
     call Pal_AllWhite                             ; $640D
     call Lcd_On                                   ; $6410
@@ -5844,8 +5457,7 @@ jr_003_6351:
     call Snd_Music                                ; $6416
     pop af                                        ; $6419
     call Pal_FadeIn                               ; $641A
-    ld hl, wState                                 ; $641D
-    inc [hl]                                      ; $6420
+    next_state                                    ; $641D
     ret                                           ; $6421
 
 
@@ -5858,8 +5470,7 @@ Mode0C_State03_Browse::
     ret z                                         ; $642C
 
     ld [wAbResult], a                             ; $642D
-    ld hl, wState                                 ; $6430
-    inc [hl]                                      ; $6433
+    next_state                                    ; $6430
     ret                                           ; $6434
 
 
@@ -5876,8 +5487,7 @@ Mode0C_State04_Activate::
 
     ld e, $02                                     ; $6445
     call HotSpot_PointerAnimWait                  ; $6447
-    ld a, STATE_0C_BROWSE                         ; $644A
-    ld [wState], a                                ; $644C
+    set_state STATE_0C_BROWSE                     ; $644A
     ret                                           ; $644F
 
 
@@ -5890,20 +5500,16 @@ jr_003_6450:
     call HotSpot_RunEffect                        ; $645D
     ld a, [wHotSpotShownPhoto]                    ; $6460
     ldh [hFarcallAArg], a                         ; $6463
-    ld a, BANK(Photo_LoadHotspotsTranslated_Far)  ; $6465
-    ld hl, Photo_LoadHotspotsTranslated_Far       ; $6467
-    call Far_Call                                 ; $646A
+    farcall Photo_LoadHotspotsTranslated_Far      ; $6465
     ld a, [wHotSpotShownPhoto]                    ; $646D
-    ld a, STATE_0C_BROWSE                         ; $6470
-    ld [wState], a                                ; $6472
+    set_state STATE_0C_BROWSE                     ; $6470
     ret                                           ; $6475
 
 
 jr_003_6476:
     call Pal_FadeOut                              ; $6476
     call Lcd_Off                                  ; $6479
-    ld a, STATE_0C_INIT                           ; $647C
-    ld [wState], a                                ; $647E
+    set_state STATE_0C_INIT                       ; $647C
     ret                                           ; $6481
 
 
@@ -6065,9 +5671,7 @@ HotSpot_LoadTargetPhoto::
     push bc                                       ; $6533
     ld [wHotSpotShownPhoto], a                    ; $6534
     ldh [hFarcallAArg], a                         ; $6537
-    ld a, BANK(Photo_LoadImage_Far)               ; $6539
-    ld hl, Photo_LoadImage_Far                    ; $653B
-    call Far_Call                                 ; $653E
+    farcall Photo_LoadImage_Far                   ; $6539
     pop bc                                        ; $6541
     ret                                           ; $6542
 
@@ -6460,9 +6064,7 @@ jr_003_6701:
 
     ld a, [wHotSpotShownPhoto]                    ; $6731
     ldh [hFarcallAArg], a                         ; $6734
-    ld a, BANK(Photo_LoadImage_Far)               ; $6736
-    ld hl, Photo_LoadImage_Far                    ; $6738
-    call Far_Call                                 ; $673B
+    farcall Photo_LoadImage_Far                   ; $6736
     ld hl, wPhotoImage + $1                       ; $673E
     ld bc, $0700                                  ; $6741
 
@@ -6490,9 +6092,7 @@ jr_003_6744:
     call Vram_CopyFromBank                        ; $6769
     ld a, [wHotSpotShownPhoto]                    ; $676C
     ldh [hFarcallAArg], a                         ; $676F
-    ld a, BANK(Photo_LoadImage_Far)               ; $6771
-    ld hl, Photo_LoadImage_Far                    ; $6773
-    call Far_Call                                 ; $6776
+    farcall Photo_LoadImage_Far                   ; $6771
     ld hl, wPhotoImage + $1                       ; $6779
     ld bc, $0700                                  ; $677C
 
@@ -6525,9 +6125,7 @@ jr_003_677f:
     call Vram_CopyFromBank                        ; $67A8
     ld a, [wHotSpotShownPhoto]                    ; $67AB
     ldh [hFarcallAArg], a                         ; $67AE
-    ld a, BANK(Photo_LoadImage_Far)               ; $67B0
-    ld hl, Photo_LoadImage_Far                    ; $67B2
-    call Far_Call                                 ; $67B5
+    farcall Photo_LoadImage_Far                   ; $67B0
     ld a, $00                                     ; $67B8
     ld hl, wPhotoImage                            ; $67BA
     ld de, $9000                                  ; $67BD
@@ -7013,8 +6611,7 @@ Mode1A_State00_Init::
     xor a                                         ; $6A23
     ld [wSubstate], a                             ; $6A24
     ld [wStockNavAllowed], a                      ; $6A27
-    ld hl, wState                                 ; $6A2A
-    inc [hl]                                      ; $6A2D
+    next_state                                    ; $6A2A
     ret                                           ; $6A2E
 
 
@@ -7035,8 +6632,7 @@ Mode1A_State02_Setup::
 
     ld a, MODE_SPECIAL_MENU                       ; $6A41
     ld [wMode], a                                 ; $6A43
-    ld a, STATE_03_INIT                           ; $6A46
-    ld [wState], a                                ; $6A48
+    set_state STATE_03_INIT                       ; $6A46
     ret                                           ; $6A4B
 
 
@@ -7064,49 +6660,21 @@ jr_003_6a4c:
     call HotSpotEd_ClearAnim                      ; $6A7A
     ld a, $ff                                     ; $6A7D
     ld [wHsSelected], a                           ; $6A7F
-    ld a, BANK(Gfx_1C_4F60_Mode1A_State02_Setup)  ; $6A82
-    ld hl, Gfx_1C_4F60_Mode1A_State02_Setup       ; $6A84
-    ld de, $8900                                  ; $6A87
-    ld bc, $01c0                                  ; $6A8A
-    call Mem_CopyFromBank                         ; $6A8D
-    ld a, BANK(Gfx_1C_53A0_Mode1A_State02_Setup)  ; $6A90
-    ld hl, Gfx_1C_53A0_Mode1A_State02_Setup       ; $6A92
-    ld de, $8580                                  ; $6A95
-    ld bc, $0280                                  ; $6A98
-    call Mem_CopyFromBank                         ; $6A9B
-    ld a, BANK(Gfx_1C_5B80_Mode09_State02_PhotoArrows); $6A9E
-    ld hl, Gfx_1C_5B80_Mode09_State02_PhotoArrows ; $6AA0
-    ld de, $8680                                  ; $6AA3
-    ld bc, $0040                                  ; $6AA6
-    call Mem_CopyFromBank                         ; $6AA9
-    ld a, BANK(Gfx_1C_5C80_Mode09_State02_PhotoArrows); $6AAC
-    ld hl, Gfx_1C_5C80_Mode09_State02_PhotoArrows ; $6AAE
-    ld de, $8780                                  ; $6AB1
-    ld bc, $0040                                  ; $6AB4
-    call Mem_CopyFromBank                         ; $6AB7
-    ld a, BANK(Gfx_22_6AA0_Mode1A_State02_Setup)  ; $6ABA
-    ld hl, Gfx_22_6AA0_Mode1A_State02_Setup       ; $6ABC
-    ld de, $8ff0                                  ; $6ABF
-    ld bc, $0010                                  ; $6AC2
-    call Mem_CopyFromBank                         ; $6AC5
-    ld a, BANK(Map_24_6620_Mode1A_State02_Setup)  ; $6AC8
-    ld hl, Map_24_6620_Mode1A_State02_Setup       ; $6ACA
-    ld de, $9800                                  ; $6ACD
-    ld bc, $02c0                                  ; $6AD0
-    call Mem_CopyFromBank                         ; $6AD3
+    farcopy Mem_CopyFromBank, Gfx_1C_4F60_Mode1A_State02_Setup, $8900, $01c0 ; $6A82
+    farcopy Mem_CopyFromBank, Gfx_1C_53A0_Mode1A_State02_Setup, $8580, $0280 ; $6A90
+    farcopy Mem_CopyFromBank, Gfx_1C_5B80_Mode09_State02_PhotoArrows, $8680, $0040 ; $6A9E
+    farcopy Mem_CopyFromBank, Gfx_1C_5C80_Mode09_State02_PhotoArrows, $8780, $0040 ; $6AAC
+    farcopy Mem_CopyFromBank, Gfx_22_6AA0_Mode1A_State02_Setup, $8ff0, $0010 ; $6ABA
+    farcopy Mem_CopyFromBank, Map_24_6620_Mode1A_State02_Setup, $9800, $02c0 ; $6AC8
     ld a, [wPhotoIndex]                           ; $6AD6
     ld [wCopyPhotoIdxE], a                        ; $6AD9
     ldh [hFarcallAArg], a                         ; $6ADC
-    ld a, BANK(Photo_LoadToVram_Far)              ; $6ADE
-    ld hl, Photo_LoadToVram_Far                   ; $6AE0
-    call Far_Call                                 ; $6AE3
+    farcall Photo_LoadToVram_Far                  ; $6ADE
     xor a                                         ; $6AE6
     ld [wDirtyFlag], a                            ; $6AE7
     ld a, [wCopyPhotoIdxE]                        ; $6AEA
     ldh [hFarcallAArg], a                         ; $6AED
-    ld a, BANK(Photo_LoadHotspotsTranslated_Far)  ; $6AEF
-    ld hl, Photo_LoadHotspotsTranslated_Far       ; $6AF1
-    call Far_Call                                 ; $6AF4
+    farcall Photo_LoadHotspotsTranslated_Far      ; $6AEF
     ld a, $54                                     ; $6AF7
     ldh [hLycShadowSplit1], a                     ; $6AF9
     ldh [hSplit1Latch], a                         ; $6AFB
@@ -7124,8 +6692,7 @@ jr_003_6a4c:
     call Snd_Music                                ; $6B17
     pop af                                        ; $6B1A
     call Pal_FadeIn                               ; $6B1B
-    ld hl, wState                                 ; $6B1E
-    inc [hl]                                      ; $6B21
+    next_state                                    ; $6B1E
     ret                                           ; $6B22
 
 
@@ -7176,8 +6743,7 @@ jr_003_6b48:
     jr nz, jr_003_6b79                            ; $6B67
 
     call HotSpotEd_NewSpot                        ; $6B69
-    ld hl, wState                                 ; $6B6C
-    inc [hl]                                      ; $6B6F
+    next_state                                    ; $6B6C
     ret                                           ; $6B70
 
 
@@ -7196,22 +6762,13 @@ jr_003_6b79:
 
     call Oam_ClearShadow                          ; $6B7F
     rst Rst08_WaitVBlank                          ; $6B82
-    ld a, BANK(Gfx_26_4880_Mode1A_State03_Browse) ; $6B83
-    ld hl, Gfx_26_4880_Mode1A_State03_Browse      ; $6B85
-    ld de, $8b00                                  ; $6B88
-    ld bc, $0400                                  ; $6B8B
-    call Vram_CopyFromBank                        ; $6B8E
-    ld a, BANK(Map_27_7750_Mode1A_State03_Browse) ; $6B91
-    ld hl, Map_27_7750_Mode1A_State03_Browse      ; $6B93
-    ld de, $9c00                                  ; $6B96
-    ld bc, $0120                                  ; $6B99
-    call Vram_CopyFromBank                        ; $6B9C
+    farcopy Vram_CopyFromBank, Gfx_26_4880_Mode1A_State03_Browse, $8b00, $0400 ; $6B83
+    farcopy Vram_CopyFromBank, Map_27_7750_Mode1A_State03_Browse, $9c00, $0120 ; $6B91
     call HotSpotEd_LoadSpotFields                 ; $6B9F
     xor a                                         ; $6BA2
     ld [wDialogChoice], a                         ; $6BA3
     call HotSpotEd_DialogSlideIn                  ; $6BA6
-    ld a, STATE_1A_EXIT_DIALOG                    ; $6BA9
-    ld [wState], a                                ; $6BAB
+    set_state STATE_1A_EXIT_DIALOG                ; $6BA9
     ret                                           ; $6BAE
 
 
@@ -7220,14 +6777,12 @@ jr_003_6baf:
     and a                                         ; $6BB2
     jr z, jr_003_6bbb                             ; $6BB3
 
-    ld a, STATE_1A_SAVE_PREPARE                   ; $6BB5
-    ld [wState], a                                ; $6BB7
+    set_state STATE_1A_SAVE_PREPARE               ; $6BB5
     ret                                           ; $6BBA
 
 
 jr_003_6bbb:
-    ld a, STATE_1A_EXIT                           ; $6BBB
-    ld [wState], a                                ; $6BBD
+    set_state STATE_1A_EXIT                       ; $6BBB
     ret                                           ; $6BC0
 
 
@@ -7307,29 +6862,12 @@ Mode1A_State04_PlaceOrDelete::
 
     call Oam_ClearShadow                          ; $6C39
     rst Rst08_WaitVBlank                          ; $6C3C
-    ld a, BANK(Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete); $6C3D
-    ld hl, Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete; $6C3F
-    ld de, $8c30                                  ; $6C42
-    ld bc, $00c0                                  ; $6C45
-    call Vram_CopyFromBank                        ; $6C48
-    ld a, BANK(Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete); $6C4B
-    ld hl, Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete; $6C4D
-    ld de, $8da0                                  ; $6C50
-    ld bc, $0040                                  ; $6C53
-    call Vram_CopyFromBank                        ; $6C56
-    ld a, BANK(Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete); $6C59
-    ld hl, Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete; $6C5B
-    ld de, $8de0                                  ; $6C5E
-    ld bc, $0200                                  ; $6C61
-    call Vram_CopyFromBank                        ; $6C64
-    ld a, BANK(Map_0E_7F00_Mode1A_State04_PlaceOrDelete); $6C67
-    ld hl, Map_0E_7F00_Mode1A_State04_PlaceOrDelete; $6C69
-    ld de, $9c00                                  ; $6C6C
-    ld bc, $0120                                  ; $6C6F
-    call Vram_CopyFromBank                        ; $6C72
+    farcopy Vram_CopyFromBank, Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete, $8c30, $00c0 ; $6C3D
+    farcopy Vram_CopyFromBank, Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete, $8da0, $0040 ; $6C4B
+    farcopy Vram_CopyFromBank, Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete, $8de0, $0200 ; $6C59
+    farcopy Vram_CopyFromBank, Map_0E_7F00_Mode1A_State04_PlaceOrDelete, $9c00, $0120 ; $6C67
     call HotSpotEd_PickerSlideIn                  ; $6C75
-    ld hl, wState                                 ; $6C78
-    inc [hl]                                      ; $6C7B
+    next_state                                    ; $6C78
     ret                                           ; $6C7C
 
 
@@ -7380,8 +6918,7 @@ Mode1A_State05_PickSound::
     ld a, SFX1_KEY_LEFT_RIGHT                     ; $6CC6
     call Snd_Sfx1                                 ; $6CC8
     pop af                                        ; $6CCB
-    ld hl, wState                                 ; $6CCC
-    inc [hl]                                      ; $6CCF
+    next_state                                    ; $6CCC
     ret                                           ; $6CD0
 
 
@@ -7393,13 +6930,11 @@ jr_003_6cd1:
     call HotSpotEd_StoreSpotFields                ; $6CD6
     jr z, jr_003_6ce2                             ; $6CD9
 
-    ld a, STATE_1A_PLACE_OR_DELETE                ; $6CDB
-    ld [wState], a                                ; $6CDD
+    set_state STATE_1A_PLACE_OR_DELETE            ; $6CDB
     jr jr_003_6ce7                                ; $6CE0
 
 jr_003_6ce2:
-    ld a, STATE_1A_BROWSE                         ; $6CE2
-    ld [wState], a                                ; $6CE4
+    set_state STATE_1A_BROWSE                     ; $6CE2
 
 jr_003_6ce7:
     call HotSpotEd_PickerSlideOut                 ; $6CE7
@@ -7456,8 +6991,7 @@ Mode1A_State06_PickEffect::
     ld a, SFX1_KEY_LEFT_RIGHT                     ; $6D3E
     call Snd_Sfx1                                 ; $6D40
     pop af                                        ; $6D43
-    ld hl, wState                                 ; $6D44
-    inc [hl]                                      ; $6D47
+    next_state                                    ; $6D44
     ret                                           ; $6D48
 
 
@@ -7506,8 +7040,7 @@ Mode1A_State07_PickJump::
     pop af                                        ; $6D91
     ld a, $01                                     ; $6D92
     ld [wPickerButtonAnim], a                     ; $6D94
-    ld hl, wState                                 ; $6D97
-    inc [hl]                                      ; $6D9A
+    next_state                                    ; $6D97
     ret                                           ; $6D9B
 
 
@@ -7559,8 +7092,7 @@ jr_003_6dcc:
     jr nz, jr_003_6dcc                            ; $6DE4
 
     call HotSpotEd_PickerSlideOut                 ; $6DE6
-    ld a, STATE_1A_BROWSE                         ; $6DE9
-    ld [wState], a                                ; $6DEB
+    set_state STATE_1A_BROWSE                     ; $6DE9
     ret                                           ; $6DEE
 
 
@@ -7593,29 +7125,12 @@ Mode1A_State09_ExitDialog::
     jr nz, jr_003_6e5d                            ; $6E12
 
     call HotSpotEd_DialogSlideOut                 ; $6E14
-    ld a, BANK(Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete); $6E17
-    ld hl, Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete; $6E19
-    ld de, $8c30                                  ; $6E1C
-    ld bc, $00c0                                  ; $6E1F
-    call Vram_CopyFromBank                        ; $6E22
-    ld a, BANK(Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete); $6E25
-    ld hl, Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete; $6E27
-    ld de, $8da0                                  ; $6E2A
-    ld bc, $0040                                  ; $6E2D
-    call Vram_CopyFromBank                        ; $6E30
-    ld a, BANK(Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete); $6E33
-    ld hl, Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete; $6E35
-    ld de, $8de0                                  ; $6E38
-    ld bc, $0200                                  ; $6E3B
-    call Vram_CopyFromBank                        ; $6E3E
-    ld a, BANK(Map_0E_7F00_Mode1A_State04_PlaceOrDelete); $6E41
-    ld hl, Map_0E_7F00_Mode1A_State04_PlaceOrDelete; $6E43
-    ld de, $9c00                                  ; $6E46
-    ld bc, $0120                                  ; $6E49
-    call Vram_CopyFromBank                        ; $6E4C
+    farcopy Vram_CopyFromBank, Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete, $8c30, $00c0 ; $6E17
+    farcopy Vram_CopyFromBank, Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete, $8da0, $0040 ; $6E25
+    farcopy Vram_CopyFromBank, Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete, $8de0, $0200 ; $6E33
+    farcopy Vram_CopyFromBank, Map_0E_7F00_Mode1A_State04_PlaceOrDelete, $9c00, $0120 ; $6E41
     call HotSpotEd_PickerSlideIn                  ; $6E4F
-    ld a, STATE_1A_PICK_SOUND                     ; $6E52
-    ld [wState], a                                ; $6E54
+    set_state STATE_1A_PICK_SOUND                 ; $6E52
     ld a, $01                                     ; $6E57
     ld [wDirtyFlag], a                            ; $6E59
     ret                                           ; $6E5C
@@ -7623,26 +7138,13 @@ Mode1A_State09_ExitDialog::
 
 jr_003_6e5d:
     call HotSpotEd_DialogSlideOut                 ; $6E5D
-    ld a, BANK(Gfx_23_60C0_Mode1A_State09_ExitDialog); $6E60
-    ld hl, Gfx_23_60C0_Mode1A_State09_ExitDialog  ; $6E62
-    ld de, $8b00                                  ; $6E65
-    ld bc, $0400                                  ; $6E68
-    call Vram_CopyFromBank                        ; $6E6B
-    ld a, BANK(Map_27_7630_Mode1A_State09_ExitDialog); $6E6E
-    ld hl, Map_27_7630_Mode1A_State09_ExitDialog  ; $6E70
-    ld de, $9c00                                  ; $6E73
-    ld bc, $0120                                  ; $6E76
-    call Vram_CopyFromBank                        ; $6E79
-    ld a, BANK(Map_27_7710_Mode1A_State09_ExitDialog); $6E7C
-    ld hl, Map_27_7710_Mode1A_State09_ExitDialog  ; $6E7E
-    ld de, $9c80                                  ; $6E81
-    ld bc, $0040                                  ; $6E84
-    call Vram_CopyFromBank                        ; $6E87
+    farcopy Vram_CopyFromBank, Gfx_23_60C0_Mode1A_State09_ExitDialog, $8b00, $0400 ; $6E60
+    farcopy Vram_CopyFromBank, Map_27_7630_Mode1A_State09_ExitDialog, $9c00, $0120 ; $6E6E
+    farcopy Vram_CopyFromBank, Map_27_7710_Mode1A_State09_ExitDialog, $9c80, $0040 ; $6E7C
     ld a, $01                                     ; $6E8A
     ld [wDialogChoice], a                         ; $6E8C
     call HotSpotEd_DialogSlideIn                  ; $6E8F
-    ld a, STATE_1A_DELETE_DIALOG                  ; $6E92
-    ld [wState], a                                ; $6E94
+    set_state STATE_1A_DELETE_DIALOG              ; $6E92
     ret                                           ; $6E97
 
 
@@ -7652,8 +7154,7 @@ Mode1A_State09_ExitDialog_Cancel::
     ret z                                         ; $6E9A
 
     call HotSpotEd_DialogSlideOut                 ; $6E9B
-    ld a, STATE_1A_BROWSE                         ; $6E9E
-    ld [wState], a                                ; $6EA0
+    set_state STATE_1A_BROWSE                     ; $6E9E
     ret                                           ; $6EA3
 
 
@@ -7687,20 +7188,12 @@ jr_003_6eb3:
     and a                                         ; $6EC0
     jr nz, jr_003_6ed2                            ; $6EC1
 
-    ld a, BANK(Map_27_77D0_HotSpotEd_DialogChoiceA); $6EC3
-    ld hl, Map_27_77D0_HotSpotEd_DialogChoiceA    ; $6EC5
-    ld de, $9c80                                  ; $6EC8
-    ld bc, $0040                                  ; $6ECB
-    call Vram_CopyFromBank                        ; $6ECE
+    farcopy Vram_CopyFromBank, Map_27_77D0_HotSpotEd_DialogChoiceA, $9c80, $0040 ; $6EC3
     ret                                           ; $6ED1
 
 
 jr_003_6ed2:
-    ld a, BANK(Map_27_7830_HotSpotEd_DialogChoiceA); $6ED2
-    ld hl, Map_27_7830_HotSpotEd_DialogChoiceA    ; $6ED4
-    ld de, $9c80                                  ; $6ED7
-    ld bc, $0040                                  ; $6EDA
-    call Vram_CopyFromBank                        ; $6EDD
+    farcopy Vram_CopyFromBank, Map_27_7830_HotSpotEd_DialogChoiceA, $9c80, $0040 ; $6ED2
     ret                                           ; $6EE0
 
 
@@ -7733,8 +7226,7 @@ Mode1A_State0A_DeleteDialog::
     ld hl, wSpriteAnimFrame + $1                  ; $6F0C
     add hl, bc                                    ; $6F0F
     ld [hl], a                                    ; $6F10
-    ld a, STATE_1A_BROWSE                         ; $6F11
-    ld [wState], a                                ; $6F13
+    set_state STATE_1A_BROWSE                     ; $6F11
     ld a, $01                                     ; $6F16
     ld [wDirtyFlag], a                            ; $6F18
     ret                                           ; $6F1B
@@ -7745,8 +7237,7 @@ jr_003_6f1c:
     ret z                                         ; $6F1E
 
     call HotSpotEd_DialogSlideOut                 ; $6F1F
-    ld a, STATE_1A_BROWSE                         ; $6F22
-    ld [wState], a                                ; $6F24
+    set_state STATE_1A_BROWSE                     ; $6F22
     ret                                           ; $6F27
 
 
@@ -7758,8 +7249,7 @@ jr_003_6f28:
     ld bc, $000a                                  ; $6F2F
     call Wait_Frames                              ; $6F32
     call HotSpotEd_DialogSlideOut                 ; $6F35
-    ld a, STATE_1A_BROWSE                         ; $6F38
-    ld [wState], a                                ; $6F3A
+    set_state STATE_1A_BROWSE                     ; $6F38
     ret                                           ; $6F3D
 
 
@@ -7793,20 +7283,12 @@ jr_003_6f4d:
     and a                                         ; $6F5A
     jr nz, jr_003_6f6c                            ; $6F5B
 
-    ld a, BANK(Map_27_76B0_HotSpotEd_DialogChoiceB); $6F5D
-    ld hl, Map_27_76B0_HotSpotEd_DialogChoiceB    ; $6F5F
-    ld de, $9c80                                  ; $6F62
-    ld bc, $0040                                  ; $6F65
-    call Vram_CopyFromBank                        ; $6F68
+    farcopy Vram_CopyFromBank, Map_27_76B0_HotSpotEd_DialogChoiceB, $9c80, $0040 ; $6F5D
     ret                                           ; $6F6B
 
 
 jr_003_6f6c:
-    ld a, BANK(Map_27_7710_Mode1A_State09_ExitDialog); $6F6C
-    ld hl, Map_27_7710_Mode1A_State09_ExitDialog  ; $6F6E
-    ld de, $9c80                                  ; $6F71
-    ld bc, $0040                                  ; $6F74
-    call Vram_CopyFromBank                        ; $6F77
+    farcopy Vram_CopyFromBank, Map_27_7710_Mode1A_State09_ExitDialog, $9c80, $0040 ; $6F6C
     ret                                           ; $6F7A
 
 
@@ -7823,8 +7305,7 @@ Mode1A_State0C_Exit::
     res 6, [hl]                                   ; $6F85
     ld hl, rIE                                    ; $6F87
     res 1, [hl]                                   ; $6F8A
-    ld a, STATE_1A_INIT                           ; $6F8C
-    ld [wState], a                                ; $6F8E
+    set_state STATE_1A_INIT                       ; $6F8C
     ret                                           ; $6F91
 
 
@@ -7836,17 +7317,14 @@ Mode1A_State0D_SavePrepare::
     ld [wSaveTargetPhoto], a                      ; $6F9A
     xor a                                         ; $6F9D
     ld [wSubstate], a                             ; $6F9E
-    ld hl, wState                                 ; $6FA1
-    inc [hl]                                      ; $6FA4
+    next_state                                    ; $6FA1
     ret                                           ; $6FA5
 
 
 ; C: far call 07:699C (save routine)
 Mode1A_State0E_FarSaveRoutine::
     ldh [hFarcallAArg], a                         ; $6FA6
-    ld a, BANK(SaveDialog_Far)                    ; $6FA8
-    ld hl, SaveDialog_Far                         ; $6FAA
-    call Far_Call                                 ; $6FAD
+    farcall SaveDialog_Far                        ; $6FA8
     ret                                           ; $6FB0
 
 
@@ -7856,14 +7334,12 @@ Mode1A_State0F_SaveResult::
     and a                                         ; $6FB4
     jr nz, jr_003_6fbd                            ; $6FB5
 
-    ld a, STATE_1A_EXIT                           ; $6FB7
-    ld [wState], a                                ; $6FB9
+    set_state STATE_1A_EXIT                       ; $6FB7
     ret                                           ; $6FBC
 
 
 jr_003_6fbd:
-    ld a, STATE_1A_BROWSE                         ; $6FBD
-    ld [wState], a                                ; $6FBF
+    set_state STATE_1A_BROWSE                     ; $6FBD
     ret                                           ; $6FC2
 
 
@@ -8743,11 +8219,7 @@ HotSpotEd_ShowEffect::
 
 ; C: shows the chosen jump target
 HotSpotEd_ShowJump::
-    ld a, BANK(Gfx_1C_5710_HotSpotEd_ShowJump)    ; $7479
-    ld hl, Gfx_1C_5710_HotSpotEd_ShowJump         ; $747B
-    ld de, $8d70                                  ; $747E
-    ld bc, $0010                                  ; $7481
-    call Vram_CopyFromBank                        ; $7484
+    farcopy Vram_CopyFromBank, Gfx_1C_5710_HotSpotEd_ShowJump, $8d70, $0010 ; $7479
     ld de, $8d80                                  ; $7487
     ld a, [wHsSelected]                           ; $748A
     ld c, a                                       ; $748D
@@ -8865,9 +8337,7 @@ HotSpotEd_ShowJumpThumb::
 
 jr_003_751c:
     ldh [hFarcallAArg], a                         ; $751C
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $751E
-    ld hl, Photo_GetSramAddress_Far               ; $7520
-    call Far_Call                                 ; $7523
+    farcall Photo_GetSramAddress_Far              ; $751E
     ld hl, $0e00                                  ; $7526
     add hl, bc                                    ; $7529
     ld de, $8c30                                  ; $752A
@@ -8902,16 +8372,8 @@ jr_003_753a:
 
 
 jr_003_7556:
-    ld a, BANK(Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete); $7556
-    ld hl, Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete; $7558
-    ld de, $8c30                                  ; $755B
-    ld bc, $00c0                                  ; $755E
-    call Vram_CopyFromBank                        ; $7561
-    ld a, BANK(Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete); $7564
-    ld hl, Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete; $7566
-    ld de, $8da0                                  ; $7569
-    ld bc, $0040                                  ; $756C
-    call Vram_CopyFromBank                        ; $756F
+    farcopy Vram_CopyFromBank, Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete, $8c30, $00c0 ; $7556
+    farcopy Vram_CopyFromBank, Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete, $8da0, $0040 ; $7564
     ret                                           ; $7572
 
 
@@ -9171,26 +8633,10 @@ Mode06_State00_Init::
     ld de, $9000                                  ; $76C9
     ld bc, $0800                                  ; $76CC
     call Mem_CopyFromBank                         ; $76CF
-    ld a, BANK(Gfx_12_4800_Mode06_State00_Init)   ; $76D2
-    ld hl, Gfx_12_4800_Mode06_State00_Init        ; $76D4
-    ld de, $8800                                  ; $76D7
-    ld bc, $0800                                  ; $76DA
-    call Mem_CopyFromBank                         ; $76DD
-    ld a, BANK(Gfx_12_5000_Mode06_State00_Init)   ; $76E0
-    ld hl, Gfx_12_5000_Mode06_State00_Init        ; $76E2
-    ld de, $8000                                  ; $76E5
-    ld bc, $0800                                  ; $76E8
-    call Mem_CopyFromBank                         ; $76EB
-    ld a, BANK(Map_23_44C0_Mode06_State00_Init)   ; $76EE
-    ld hl, Map_23_44C0_Mode06_State00_Init        ; $76F0
-    ld de, $9800                                  ; $76F3
-    ld bc, $0400                                  ; $76F6
-    call Mem_CopyFromBank                         ; $76F9
-    ld a, BANK(Map_22_6340_Mode06_State00_Init)   ; $76FC
-    ld hl, Map_22_6340_Mode06_State00_Init        ; $76FE
-    ld de, $9c00                                  ; $7701
-    ld bc, $0400                                  ; $7704
-    call Mem_CopyFromBank                         ; $7707
+    farcopy Mem_CopyFromBank, Gfx_12_4800_Mode06_State00_Init, $8800, $0800 ; $76D2
+    farcopy Mem_CopyFromBank, Gfx_12_5000_Mode06_State00_Init, $8000, $0800 ; $76E0
+    farcopy Mem_CopyFromBank, Map_23_44C0_Mode06_State00_Init, $9800, $0400 ; $76EE
+    farcopy Mem_CopyFromBank, Map_22_6340_Mode06_State00_Init, $9c00, $0400 ; $76FC
     ld a, $50                                     ; $770A
     ldh [hLycShadowSplit1], a                     ; $770C
     ldh [hSplit2Line], a                          ; $770E
@@ -9216,8 +8662,7 @@ Mode06_State00_Init::
     ld [wLinkMenuCursor], a                       ; $773B
     call LinkMenu_LoadTilesSelected               ; $773E
     call Pal_FadeIn                               ; $7741
-    ld hl, wState                                 ; $7744
-    inc [hl]                                      ; $7747
+    next_state                                    ; $7744
     ret                                           ; $7748
 
 
@@ -9242,8 +8687,7 @@ Mode06_State01_Choose::
     ld a, SFX1_KEY_B                              ; $7769
     call nz, Snd_Sfx1                             ; $776B
     pop af                                        ; $776E
-    ld hl, wState                                 ; $776F
-    inc [hl]                                      ; $7772
+    next_state                                    ; $776F
     ret                                           ; $7773
 
 
@@ -9295,8 +8739,7 @@ Mode06_State02_Dispatch::
 
     ld a, MODE_MAIN_MENU                          ; $77C6
     ld [wMode], a                                 ; $77C8
-    ld a, STATE_00_INIT                           ; $77CB
-    ld [wState], a                                ; $77CD
+    set_state STATE_00_INIT                       ; $77CB
     call Pal_FadeOut                              ; $77D0
     call Lcd_Off                                  ; $77D3
     ld hl, hStatShadow                            ; $77D6
@@ -9459,19 +8902,11 @@ LinkMenu_LoadTilesSelected::
     and a                                         ; $789F
     jr nz, jr_003_78b2                            ; $78A0
 
-    ld a, BANK(Gfx_12_48B0_LinkMenu_LoadTilesSelected); $78A2
-    ld hl, Gfx_12_48B0_LinkMenu_LoadTilesSelected ; $78A4
-    ld de, $88b0                                  ; $78A7
-    ld bc, $00f0                                  ; $78AA
-    call Vram_CopyFromBank                        ; $78AD
+    farcopy Vram_CopyFromBank, Gfx_12_48B0_LinkMenu_LoadTilesSelected, $88b0, $00f0 ; $78A2
     jr jr_003_78c0                                ; $78B0
 
 jr_003_78b2:
-    ld a, BANK(Gfx_12_4B30_LinkMenu_LoadTilesSelected); $78B2
-    ld hl, Gfx_12_4B30_LinkMenu_LoadTilesSelected ; $78B4
-    ld de, $89a0                                  ; $78B7
-    ld bc, $00a0                                  ; $78BA
-    call Vram_CopyFromBank                        ; $78BD
+    farcopy Vram_CopyFromBank, Gfx_12_4B30_LinkMenu_LoadTilesSelected, $89a0, $00a0 ; $78B2
 
 jr_003_78c0:
     pop af                                        ; $78C0
@@ -9486,19 +8921,11 @@ LinkMenu_LoadTilesDeselected::
     and a                                         ; $78C6
     jr nz, jr_003_78d9                            ; $78C7
 
-    ld a, BANK(Gfx_12_4A40_LinkMenu_LoadTilesDeselected); $78C9
-    ld hl, Gfx_12_4A40_LinkMenu_LoadTilesDeselected; $78CB
-    ld de, $88b0                                  ; $78CE
-    ld bc, $00f0                                  ; $78D1
-    call Vram_CopyFromBank                        ; $78D4
+    farcopy Vram_CopyFromBank, Gfx_12_4A40_LinkMenu_LoadTilesDeselected, $88b0, $00f0 ; $78C9
     jr jr_003_78e7                                ; $78D7
 
 jr_003_78d9:
-    ld a, BANK(Gfx_12_49A0_LinkMenu_LoadTilesDeselected); $78D9
-    ld hl, Gfx_12_49A0_LinkMenu_LoadTilesDeselected; $78DB
-    ld de, $89a0                                  ; $78DE
-    ld bc, $00a0                                  ; $78E1
-    call Vram_CopyFromBank                        ; $78E4
+    farcopy Vram_CopyFromBank, Gfx_12_49A0_LinkMenu_LoadTilesDeselected, $89a0, $00a0 ; $78D9
 
 jr_003_78e7:
     pop af                                        ; $78E7
@@ -9535,21 +8962,9 @@ Mode0B_State00_Init::
     ld de, $9000                                  ; $7914
     ld bc, $0800                                  ; $7917
     call Mem_CopyFromBank                         ; $791A
-    ld a, BANK(Gfx_16_4800_Mode0B_State00_Init)   ; $791D
-    ld hl, Gfx_16_4800_Mode0B_State00_Init        ; $791F
-    ld de, $8800                                  ; $7922
-    ld bc, $0800                                  ; $7925
-    call Mem_CopyFromBank                         ; $7928
-    ld a, BANK(Gfx_16_5000_Mode0B_State00_Init)   ; $792B
-    ld hl, Gfx_16_5000_Mode0B_State00_Init        ; $792D
-    ld de, $8000                                  ; $7930
-    ld bc, $0800                                  ; $7933
-    call Mem_CopyFromBank                         ; $7936
-    ld a, BANK(Map_23_7B00_Mode0B_State00_Init)   ; $7939
-    ld hl, Map_23_7B00_Mode0B_State00_Init        ; $793B
-    ld de, $9800                                  ; $793E
-    ld bc, $0240                                  ; $7941
-    call Mem_CopyFromBank                         ; $7944
+    farcopy Mem_CopyFromBank, Gfx_16_4800_Mode0B_State00_Init, $8800, $0800 ; $791D
+    farcopy Mem_CopyFromBank, Gfx_16_5000_Mode0B_State00_Init, $8000, $0800 ; $792B
+    farcopy Mem_CopyFromBank, Map_23_7B00_Mode0B_State00_Init, $9800, $0240 ; $7939
     call Oam_ClearShadow                          ; $7947
     call Pal_AllWhite                             ; $794A
     call Lcd_On                                   ; $794D
@@ -9559,8 +8974,7 @@ Mode0B_State00_Init::
     pop af                                        ; $7956
     call Pal_FadeIn                               ; $7957
     call ShowMenu_LoadHighlightTiles              ; $795A
-    ld hl, wState                                 ; $795D
-    inc [hl]                                      ; $7960
+    next_state                                    ; $795D
     ret                                           ; $7961
 
 
@@ -9583,8 +8997,7 @@ Mode0B_State01_Choose::
     ld a, SFX1_KEY_B                              ; $797C
     call nz, Snd_Sfx1                             ; $797E
     pop af                                        ; $7981
-    ld hl, wState                                 ; $7982
-    inc [hl]                                      ; $7985
+    next_state                                    ; $7982
     ret                                           ; $7986
 
 
@@ -9596,8 +9009,7 @@ Mode0B_State02_Dispatch::
 
     ld a, MODE_VIEW_MENU                          ; $798E
     ld [wMode], a                                 ; $7990
-    ld a, STATE_02_INIT                           ; $7993
-    ld [wState], a                                ; $7995
+    set_state STATE_02_INIT                       ; $7993
     call Pal_FadeOut                              ; $7998
     call Lcd_Off                                  ; $799B
     ret                                           ; $799E
@@ -9827,26 +9239,10 @@ Mode04_State00_Init::
     ldh [hScyShadow], a                           ; $7AC6
     xor a                                         ; $7AC8
     ld [wBlinkHold], a                            ; $7AC9
-    ld a, BANK(Gfx_15_5700_Mode04_State00_Init)   ; $7ACC
-    ld hl, Gfx_15_5700_Mode04_State00_Init        ; $7ACE
-    ld de, $9000                                  ; $7AD1
-    ld bc, $0800                                  ; $7AD4
-    call Mem_CopyFromBank                         ; $7AD7
-    ld a, BANK(Gfx_15_5F00_Mode04_State00_Init)   ; $7ADA
-    ld hl, Gfx_15_5F00_Mode04_State00_Init        ; $7ADC
-    ld de, $8800                                  ; $7ADF
-    ld bc, $0800                                  ; $7AE2
-    call Mem_CopyFromBank                         ; $7AE5
-    ld a, BANK(Gfx_15_6700_Mode04_State00_Init)   ; $7AE8
-    ld hl, Gfx_15_6700_Mode04_State00_Init        ; $7AEA
-    ld de, $8000                                  ; $7AED
-    ld bc, $0800                                  ; $7AF0
-    call Mem_CopyFromBank                         ; $7AF3
-    ld a, BANK(Map_27_4870_Mode04_State00_Init)   ; $7AF6
-    ld hl, Map_27_4870_Mode04_State00_Init        ; $7AF8
-    ld de, $9800                                  ; $7AFB
-    ld bc, $0240                                  ; $7AFE
-    call Mem_CopyFromBank                         ; $7B01
+    farcopy Mem_CopyFromBank, Gfx_15_5700_Mode04_State00_Init, $9000, $0800 ; $7ACC
+    farcopy Mem_CopyFromBank, Gfx_15_5F00_Mode04_State00_Init, $8800, $0800 ; $7ADA
+    farcopy Mem_CopyFromBank, Gfx_15_6700_Mode04_State00_Init, $8000, $0800 ; $7AE8
+    farcopy Mem_CopyFromBank, Map_27_4870_Mode04_State00_Init, $9800, $0240 ; $7AF6
     call Oam_ClearShadow                          ; $7B04
     call Pal_AllWhite                             ; $7B07
     call Lcd_On                                   ; $7B0A
@@ -9855,8 +9251,7 @@ Mode04_State00_Init::
     call Snd_Music                                ; $7B10
     pop af                                        ; $7B13
     call Pal_FadeIn                               ; $7B14
-    ld hl, wState                                 ; $7B17
-    inc [hl]                                      ; $7B1A
+    next_state                                    ; $7B17
     ret                                           ; $7B1B
 
 
@@ -9870,8 +9265,7 @@ Mode04_State01_Choose::
     ret z                                         ; $7B29
 
     ld [wAbResult], a                             ; $7B2A
-    ld hl, wState                                 ; $7B2D
-    inc [hl]                                      ; $7B30
+    next_state                                    ; $7B2D
     ret                                           ; $7B31
 
 
@@ -9889,16 +9283,14 @@ Mode04_State02_Dispatch::
 
     ld a, MODE_MAIN_MENU                          ; $7B45
     ld [wMode], a                                 ; $7B47
-    ld a, STATE_00_INIT                           ; $7B4A
-    ld [wState], a                                ; $7B4C
+    set_state STATE_00_INIT                       ; $7B4A
     ret                                           ; $7B4F
 
 
 jr_003_7b50:
     ld a, MODE_SHUTTERBUG_MAGIC                   ; $7B50
     ld [wMode], a                                 ; $7B52
-    ld a, STATE_16_REDRAW                         ; $7B55
-    ld [wState], a                                ; $7B57
+    set_state STATE_16_REDRAW                     ; $7B55
     ret                                           ; $7B5A
 
 
@@ -9933,8 +9325,7 @@ jr_003_7b6f:
 jr_003_7b83:
     ld a, $01                                     ; $7B83
     ld [wAbResult], a                             ; $7B85
-    ld a, STATE_04_DISPATCH                       ; $7B88
-    ld [wState], a                                ; $7B8A
+    set_state STATE_04_DISPATCH                   ; $7B88
     ret                                           ; $7B8D
 
 
@@ -10067,21 +9458,9 @@ jr_003_7c22:
     ld de, $9000                                  ; $7C2B
     ld bc, $0800                                  ; $7C2E
     call Mem_CopyFromBank                         ; $7C31
-    ld a, BANK(Gfx_18_4800_Mode05_State00_Init)   ; $7C34
-    ld hl, Gfx_18_4800_Mode05_State00_Init        ; $7C36
-    ld de, $8800                                  ; $7C39
-    ld bc, $0800                                  ; $7C3C
-    call Mem_CopyFromBank                         ; $7C3F
-    ld a, BANK(Gfx_18_5000_Mode05_State00_Init)   ; $7C42
-    ld hl, Gfx_18_5000_Mode05_State00_Init        ; $7C44
-    ld de, $8000                                  ; $7C47
-    ld bc, $0470                                  ; $7C4A
-    call Mem_CopyFromBank                         ; $7C4D
-    ld a, BANK(Map_25_6F20_Mode05_State00_Init)   ; $7C50
-    ld hl, Map_25_6F20_Mode05_State00_Init        ; $7C52
-    ld de, $9800                                  ; $7C55
-    ld bc, $0240                                  ; $7C58
-    call Mem_CopyFromBank                         ; $7C5B
+    farcopy Mem_CopyFromBank, Gfx_18_4800_Mode05_State00_Init, $8800, $0800 ; $7C34
+    farcopy Mem_CopyFromBank, Gfx_18_5000_Mode05_State00_Init, $8000, $0470 ; $7C42
+    farcopy Mem_CopyFromBank, Map_25_6F20_Mode05_State00_Init, $9800, $0240 ; $7C50
     call Oam_ClearShadow                          ; $7C5E
     call Pal_AllWhite                             ; $7C61
     call Lcd_On                                   ; $7C64
@@ -10092,8 +9471,7 @@ jr_003_7c22:
     call Pal_FadeIn                               ; $7C6E
     ld a, [wEditMenuCursor]                       ; $7C71
     call EditMenu_ResetIconAnim                   ; $7C74
-    ld hl, wState                                 ; $7C77
-    inc [hl]                                      ; $7C7A
+    next_state                                    ; $7C77
     ret                                           ; $7C7B
 
 
@@ -10117,8 +9495,7 @@ Mode05_State01_Choose::
     ld a, SFX1_KEY_B                              ; $7C99
     call nz, Snd_Sfx1                             ; $7C9B
     pop af                                        ; $7C9E
-    ld hl, wState                                 ; $7C9F
-    inc [hl]                                      ; $7CA2
+    next_state                                    ; $7C9F
     ret                                           ; $7CA3
 
 
@@ -10130,8 +9507,7 @@ Mode05_State02_Dispatch::
 
     ld a, MODE_MAIN_MENU                          ; $7CAB
     ld [wMode], a                                 ; $7CAD
-    ld a, STATE_00_INIT                           ; $7CB0
-    ld [wState], a                                ; $7CB2
+    set_state STATE_00_INIT                       ; $7CB0
     call Pal_FadeOut                              ; $7CB5
     call Lcd_Off                                  ; $7CB8
     ret                                           ; $7CBB

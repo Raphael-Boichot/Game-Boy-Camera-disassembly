@@ -29,8 +29,7 @@ Mode15_State00_ReturnToShoot::
     ld [wShootVariant], a                         ; $4019
     ld a, MODE_SHOOT_LIVE_VIEW                    ; $401C
     ld [wMode], a                                 ; $401E
-    ld a, STATE_14_INIT                           ; $4021
-    ld [wState], a                                ; $4023
+    set_state STATE_14_INIT                       ; $4021
     ret                                           ; $4026
 
 
@@ -46,41 +45,13 @@ Mode15_State01_TimerInit::
     xor a                                         ; $4038
     ldh [hScxShadow], a                           ; $4039
     ldh [hScyShadow], a                           ; $403B
-    ld a, BANK(Gfx_20_6800_Mode15_State01_TimerInit); $403D
-    ld hl, Gfx_20_6800_Mode15_State01_TimerInit   ; $403F
-    ld de, $9000                                  ; $4042
-    ld bc, $0640                                  ; $4045
-    call Mem_CopyFromBank                         ; $4048
-    ld a, BANK(Gfx_20_6EC0_Mode15_State01_TimerInit); $404B
-    ld hl, Gfx_20_6EC0_Mode15_State01_TimerInit   ; $404D
-    ld de, $97a0                                  ; $4050
-    ld bc, $0060                                  ; $4053
-    call Mem_CopyFromBank                         ; $4056
-    ld a, BANK(Gfx_20_6F20_Mode15_State01_TimerInit); $4059
-    ld hl, Gfx_20_6F20_Mode15_State01_TimerInit   ; $405B
-    ld de, $8800                                  ; $405E
-    ld bc, $01c0                                  ; $4061
-    call Mem_CopyFromBank                         ; $4064
-    ld a, BANK(Gfx_20_74F0_Mode15_State01_TimerInit); $4067
-    ld hl, Gfx_20_74F0_Mode15_State01_TimerInit   ; $4069
-    ld de, $8ff0                                  ; $406C
-    ld bc, $0010                                  ; $406F
-    call Mem_CopyFromBank                         ; $4072
-    ld a, BANK(Gfx_20_72C0_Mode15_State01_TimerInit); $4075
-    ld hl, Gfx_20_72C0_Mode15_State01_TimerInit   ; $4077
-    ld de, $8500                                  ; $407A
-    ld bc, $01d0                                  ; $407D
-    call Mem_CopyFromBank                         ; $4080
-    ld a, BANK(Gfx_20_6E40_Mode15_State01_TimerInit); $4083
-    ld hl, Gfx_20_6E40_Mode15_State01_TimerInit   ; $4085
-    ld de, $9720                                  ; $4088
-    ld bc, $0080                                  ; $408B
-    call Mem_CopyFromBank                         ; $408E
-    ld a, BANK(Map_25_6620_Mode15_State01_TimerInit); $4091
-    ld hl, Map_25_6620_Mode15_State01_TimerInit   ; $4093
-    ld de, $9800                                  ; $4096
-    ld bc, $0240                                  ; $4099
-    call Mem_CopyFromBank                         ; $409C
+    farcopy Mem_CopyFromBank, Gfx_20_6800_Mode15_State01_TimerInit, $9000, $0640 ; $403D
+    farcopy Mem_CopyFromBank, Gfx_20_6EC0_Mode15_State01_TimerInit, $97a0, $0060 ; $404B
+    farcopy Mem_CopyFromBank, Gfx_20_6F20_Mode15_State01_TimerInit, $8800, $01c0 ; $4059
+    farcopy Mem_CopyFromBank, Gfx_20_74F0_Mode15_State01_TimerInit, $8ff0, $0010 ; $4067
+    farcopy Mem_CopyFromBank, Gfx_20_72C0_Mode15_State01_TimerInit, $8500, $01d0 ; $4075
+    farcopy Mem_CopyFromBank, Gfx_20_6E40_Mode15_State01_TimerInit, $9720, $0080 ; $4083
+    farcopy Mem_CopyFromBank, Map_25_6620_Mode15_State01_TimerInit, $9800, $0240 ; $4091
     call Oam_ClearShadow                          ; $409F
     call Pal_AllWhite                             ; $40A2
     call Lcd_On                                   ; $40A5
@@ -93,8 +64,7 @@ Mode15_State01_TimerInit::
     ld de, $9640                                  ; $40B4
     call Mode15_DrawTwoDigits                     ; $40B7
     call Pal_FadeIn                               ; $40BA
-    ld hl, wState                                 ; $40BD
-    inc [hl]                                      ; $40C0
+    next_state                                    ; $40BD
     ret                                           ; $40C1
 
 
@@ -131,14 +101,12 @@ jr_006_40db:
     bit 1, a                                      ; $40FB
     jr z, jr_006_4105                             ; $40FD
 
-    ld a, STATE_15_TIMER_APPLY                    ; $40FF
-    ld [wState], a                                ; $4101
+    set_state STATE_15_TIMER_APPLY                ; $40FF
     ret                                           ; $4104
 
 
 jr_006_4105:
-    ld hl, wState                                 ; $4105
-    inc [hl]                                      ; $4108
+    next_state                                    ; $4105
     ret                                           ; $4109
 
 
@@ -175,8 +143,7 @@ jr_006_412b:
     ld a, SFX1_KEY_B                              ; $4137
     call nz, Snd_Sfx1                             ; $4139
     pop af                                        ; $413C
-    ld hl, wState                                 ; $413D
-    inc [hl]                                      ; $4140
+    next_state                                    ; $413D
     ret                                           ; $4141
 
 
@@ -190,8 +157,7 @@ Mode15_State04_TimerApply::
 
     ld a, MODE_SHOOT_PARLOR                       ; $414F
     ld [wMode], a                                 ; $4151
-    ld a, STATE_01_INTRO_PAGE_C                   ; $4154
-    ld [wState], a                                ; $4156
+    set_state STATE_01_INTRO_PAGE_C               ; $4154
     ret                                           ; $4159
 
 
@@ -200,8 +166,7 @@ jr_006_415a:
     ld [wShootVariant], a                         ; $415C
     ld a, MODE_SHOOT_LIVE_VIEW                    ; $415F
     ld [wMode], a                                 ; $4161
-    ld a, STATE_14_INIT                           ; $4164
-    ld [wState], a                                ; $4166
+    set_state STATE_14_INIT                       ; $4164
     ret                                           ; $4169
 
 
@@ -217,41 +182,13 @@ Mode15_State05_IntervalInit::
     xor a                                         ; $417B
     ldh [hScxShadow], a                           ; $417C
     ldh [hScyShadow], a                           ; $417E
-    ld a, BANK(Gfx_20_6800_Mode15_State01_TimerInit); $4180
-    ld hl, Gfx_20_6800_Mode15_State01_TimerInit   ; $4182
-    ld de, $9000                                  ; $4185
-    ld bc, $0640                                  ; $4188
-    call Mem_CopyFromBank                         ; $418B
-    ld a, BANK(Gfx_20_6EC0_Mode15_State01_TimerInit); $418E
-    ld hl, Gfx_20_6EC0_Mode15_State01_TimerInit   ; $4190
-    ld de, $97a0                                  ; $4193
-    ld bc, $0060                                  ; $4196
-    call Mem_CopyFromBank                         ; $4199
-    ld a, BANK(Gfx_20_6F20_Mode15_State01_TimerInit); $419C
-    ld hl, Gfx_20_6F20_Mode15_State01_TimerInit   ; $419E
-    ld de, $8800                                  ; $41A1
-    ld bc, $01c0                                  ; $41A4
-    call Mem_CopyFromBank                         ; $41A7
-    ld a, BANK(Gfx_20_74F0_Mode15_State01_TimerInit); $41AA
-    ld hl, Gfx_20_74F0_Mode15_State01_TimerInit   ; $41AC
-    ld de, $8ff0                                  ; $41AF
-    ld bc, $0010                                  ; $41B2
-    call Mem_CopyFromBank                         ; $41B5
-    ld a, BANK(Gfx_20_72C0_Mode15_State01_TimerInit); $41B8
-    ld hl, Gfx_20_72C0_Mode15_State01_TimerInit   ; $41BA
-    ld de, $8500                                  ; $41BD
-    ld bc, $01d0                                  ; $41C0
-    call Mem_CopyFromBank                         ; $41C3
-    ld a, BANK(Gfx_20_6E40_Mode15_State01_TimerInit); $41C6
-    ld hl, Gfx_20_6E40_Mode15_State01_TimerInit   ; $41C8
-    ld de, $9720                                  ; $41CB
-    ld bc, $0080                                  ; $41CE
-    call Mem_CopyFromBank                         ; $41D1
-    ld a, BANK(Map_25_6AA0_Mode15_State05_IntervalInit); $41D4
-    ld hl, Map_25_6AA0_Mode15_State05_IntervalInit; $41D6
-    ld de, $9800                                  ; $41D9
-    ld bc, $0240                                  ; $41DC
-    call Mem_CopyFromBank                         ; $41DF
+    farcopy Mem_CopyFromBank, Gfx_20_6800_Mode15_State01_TimerInit, $9000, $0640 ; $4180
+    farcopy Mem_CopyFromBank, Gfx_20_6EC0_Mode15_State01_TimerInit, $97a0, $0060 ; $418E
+    farcopy Mem_CopyFromBank, Gfx_20_6F20_Mode15_State01_TimerInit, $8800, $01c0 ; $419C
+    farcopy Mem_CopyFromBank, Gfx_20_74F0_Mode15_State01_TimerInit, $8ff0, $0010 ; $41AA
+    farcopy Mem_CopyFromBank, Gfx_20_72C0_Mode15_State01_TimerInit, $8500, $01d0 ; $41B8
+    farcopy Mem_CopyFromBank, Gfx_20_6E40_Mode15_State01_TimerInit, $9720, $0080 ; $41C6
+    farcopy Mem_CopyFromBank, Map_25_6AA0_Mode15_State05_IntervalInit, $9800, $0240 ; $41D4
     call Oam_ClearShadow                          ; $41E2
     call Pal_AllWhite                             ; $41E5
     call Lcd_On                                   ; $41E8
@@ -276,8 +213,7 @@ Mode15_State05_IntervalInit::
     ld de, $9700                                  ; $4214
     call Mode15_DrawTwoDigitsInterval             ; $4217
     call Pal_FadeIn                               ; $421A
-    ld hl, wState                                 ; $421D
-    inc [hl]                                      ; $4220
+    next_state                                    ; $421D
     ret                                           ; $4221
 
 
@@ -336,14 +272,12 @@ jr_006_426f:
     bit 1, a                                      ; $427A
     jr z, jr_006_4284                             ; $427C
 
-    ld a, STATE_15_INTERVAL_APPLY                 ; $427E
-    ld [wState], a                                ; $4280
+    set_state STATE_15_INTERVAL_APPLY             ; $427E
     ret                                           ; $4283
 
 
 jr_006_4284:
-    ld hl, wState                                 ; $4284
-    inc [hl]                                      ; $4287
+    next_state                                    ; $4284
     ret                                           ; $4288
 
 
@@ -400,8 +334,7 @@ jr_006_42e5:
     bit 1, a                                      ; $42F0
     jr z, jr_006_42fa                             ; $42F2
 
-    ld a, STATE_15_INTERVAL_APPLY                 ; $42F4
-    ld [wState], a                                ; $42F6
+    set_state STATE_15_INTERVAL_APPLY             ; $42F4
     ret                                           ; $42F9
 
 
@@ -415,8 +348,7 @@ jr_006_42fa:
 
 
 jr_006_4303:
-    ld hl, wState                                 ; $4303
-    inc [hl]                                      ; $4306
+    next_state                                    ; $4303
     ret                                           ; $4307
 
 
@@ -464,8 +396,7 @@ jr_006_4338:
     ld a, SFX1_KEY_B                              ; $4344
     call nz, Snd_Sfx1                             ; $4346
     pop af                                        ; $4349
-    ld hl, wState                                 ; $434A
-    inc [hl]                                      ; $434D
+    next_state                                    ; $434A
     ret                                           ; $434E
 
 
@@ -479,8 +410,7 @@ Mode15_State09_IntervalApply::
 
     ld a, MODE_SHOOT_PARLOR                       ; $435C
     ld [wMode], a                                 ; $435E
-    ld a, STATE_01_INTRO_PAGE_C                   ; $4361
-    ld [wState], a                                ; $4363
+    set_state STATE_01_INTRO_PAGE_C               ; $4361
     ret                                           ; $4366
 
 
@@ -489,8 +419,7 @@ jr_006_4367:
     ld [wShootVariant], a                         ; $4369
     ld a, MODE_SHOOT_LIVE_VIEW                    ; $436C
     ld [wMode], a                                 ; $436E
-    ld a, STATE_14_INIT                           ; $4371
-    ld [wState], a                                ; $4373
+    set_state STATE_14_INIT                       ; $4371
     ret                                           ; $4376
 
 
@@ -774,21 +703,13 @@ Mode16_State00_Init::
     ld de, $9000                                  ; $450C
     ld bc, $0800                                  ; $450F
     call Mem_CopyFromBank                         ; $4512
-    ld a, BANK(Gfx_0D_4800_Mode16_State00_Init)   ; $4515
-    ld hl, Gfx_0D_4800_Mode16_State00_Init        ; $4517
-    ld de, $8800                                  ; $451A
-    ld bc, $0800                                  ; $451D
-    call Mem_CopyFromBank                         ; $4520
+    farcopy Mem_CopyFromBank, Gfx_0D_4800_Mode16_State00_Init, $8800, $0800 ; $4515
     ld a, $0d                                     ; $4523
     ld hl, Gfx_0D_5000_Mode16_State00_Init        ; $4525
     ld de, $8000                                  ; $4528
     ld bc, $0300                                  ; $452B
     call Mem_CopyFromBank                         ; $452E
-    ld a, BANK(Map_25_73A0_Mode16_State00_Init)   ; $4531
-    ld hl, Map_25_73A0_Mode16_State00_Init        ; $4533
-    ld de, $9800                                  ; $4536
-    ld bc, $0240                                  ; $4539
-    call Mem_CopyFromBank                         ; $453C
+    farcopy Mem_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $4531
     call Oam_ClearShadow                          ; $453F
     call Pal_AllWhite                             ; $4542
     call Lcd_On                                   ; $4545
@@ -807,8 +728,7 @@ Mode16_State00_Init::
     ld de, $9400                                  ; $4565
     call Mode16_LoadIconTiles                     ; $4568
     call Pal_FadeIn                               ; $456B
-    ld a, STATE_16_MAIN_MENU                      ; $456E
-    ld [wState], a                                ; $4570
+    set_state STATE_16_MAIN_MENU                  ; $456E
     ret                                           ; $4573
 
 
@@ -829,21 +749,13 @@ Mode16_State01_Redraw::
     ld de, $9000                                  ; $458F
     ld bc, $0800                                  ; $4592
     call Mem_CopyFromBank                         ; $4595
-    ld a, BANK(Gfx_0D_4800_Mode16_State00_Init)   ; $4598
-    ld hl, Gfx_0D_4800_Mode16_State00_Init        ; $459A
-    ld de, $8800                                  ; $459D
-    ld bc, $0800                                  ; $45A0
-    call Mem_CopyFromBank                         ; $45A3
+    farcopy Mem_CopyFromBank, Gfx_0D_4800_Mode16_State00_Init, $8800, $0800 ; $4598
     ld a, $0d                                     ; $45A6
     ld hl, Gfx_0D_5000_Mode16_State00_Init        ; $45A8
     ld de, $8000                                  ; $45AB
     ld bc, $0300                                  ; $45AE
     call Mem_CopyFromBank                         ; $45B1
-    ld a, BANK(Map_25_73A0_Mode16_State00_Init)   ; $45B4
-    ld hl, Map_25_73A0_Mode16_State00_Init        ; $45B6
-    ld de, $9800                                  ; $45B9
-    ld bc, $0240                                  ; $45BC
-    call Mem_CopyFromBank                         ; $45BF
+    farcopy Mem_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $45B4
     call Oam_ClearShadow                          ; $45C2
     call Pal_AllWhite                             ; $45C5
     call Lcd_On                                   ; $45C8
@@ -926,8 +838,7 @@ jr_006_4649:
     ld a, SFX1_KEY_B                              ; $464D
     call Snd_Sfx1                                 ; $464F
     pop af                                        ; $4652
-    ld a, STATE_16_LEAVE_TO_MODE01                ; $4653
-    ld [wState], a                                ; $4655
+    set_state STATE_16_LEAVE_TO_MODE01            ; $4653
     ret                                           ; $4658
 
 
@@ -979,8 +890,7 @@ jr_006_468a:
     and a                                         ; $46AC
     jr nz, jr_006_46b4                            ; $46AD
 
-    ld a, STATE_16_START_SHOOT                    ; $46AF
-    ld [wState], a                                ; $46B1
+    set_state STATE_16_START_SHOOT                ; $46AF
 
 jr_006_46b4:
     ret                                           ; $46B4
@@ -996,13 +906,8 @@ jr_006_46b5:
     pop af                                        ; $46BE
     call Oam_ClearShadow                          ; $46BF
     rst Rst08_WaitVBlank                          ; $46C2
-    ld a, BANK(Map_25_73A0_Mode16_State00_Init)   ; $46C3
-    ld hl, Map_25_73A0_Mode16_State00_Init        ; $46C5
-    ld de, $9800                                  ; $46C8
-    ld bc, $0240                                  ; $46CB
-    call Vram_CopyFromBank                        ; $46CE
-    ld a, STATE_16_MAIN_MENU                      ; $46D1
-    ld [wState], a                                ; $46D3
+    farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $46C3
+    set_state STATE_16_MAIN_MENU                  ; $46D1
     ret                                           ; $46D6
 
 
@@ -1020,24 +925,15 @@ Mode16_TrickLensIconTbl::
 ; C: 9 x {lo; hi; bank} = 0D:6000 6100 6300 6200 6400 6500 6600 6700 6800 (the Gfx_0D_*_Icon06_46EF rows):
 ; Mode16_LoadIconTiles (06:4B23) copies $100 B of the entry wOpt1Value to $9300; one table of 27 B (read 2026-10-25)
 Mode16_TrickLensIconSrcTbl::
-    dw Gfx_0D_6000_Icon06_46EF
-    db BANK(Gfx_0D_6000_Icon06_46EF)
-    dw Gfx_0D_6100_Icon06_46EF
-    db BANK(Gfx_0D_6100_Icon06_46EF)
-    dw Gfx_0D_6300_Icon06_46EF
-    db BANK(Gfx_0D_6300_Icon06_46EF)
-    dw Gfx_0D_6200_Icon06_46EF
-    db BANK(Gfx_0D_6200_Icon06_46EF)
-    dw Gfx_0D_6400_Icon06_46EF
-    db BANK(Gfx_0D_6400_Icon06_46EF)
-    dw Gfx_0D_6500_Icon06_46EF
-    db BANK(Gfx_0D_6500_Icon06_46EF)
-    dw Gfx_0D_6600_Icon06_46EF
-    db BANK(Gfx_0D_6600_Icon06_46EF)
-    dw Gfx_0D_6700_Icon06_46EF
-    db BANK(Gfx_0D_6700_Icon06_46EF)
-    dw Gfx_0D_6800_Icon06_46EF
-    db BANK(Gfx_0D_6800_Icon06_46EF)
+    dwb Gfx_0D_6000_Icon06_46EF
+    dwb Gfx_0D_6100_Icon06_46EF
+    dwb Gfx_0D_6300_Icon06_46EF
+    dwb Gfx_0D_6200_Icon06_46EF
+    dwb Gfx_0D_6400_Icon06_46EF
+    dwb Gfx_0D_6500_Icon06_46EF
+    dwb Gfx_0D_6600_Icon06_46EF
+    dwb Gfx_0D_6700_Icon06_46EF
+    dwb Gfx_0D_6800_Icon06_46EF
 
 ; C: option 2 (opt2_row / opt2_value); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 04 (1914 hits in
 ; 4 runs: 16:04 x1914; tcrf_check/assets/mode_state_wp/)
@@ -1077,8 +973,7 @@ jr_006_472f:
     and a                                         ; $4751
     ret nz                                        ; $4752
 
-    ld a, STATE_16_START_SHOOT                    ; $4753
-    ld [wState], a                                ; $4755
+    set_state STATE_16_START_SHOOT                ; $4753
     ret                                           ; $4758
 
 
@@ -1092,13 +987,8 @@ jr_006_4759:
     pop af                                        ; $4762
     call Oam_ClearShadow                          ; $4763
     rst Rst08_WaitVBlank                          ; $4766
-    ld a, BANK(Map_25_73A0_Mode16_State00_Init)   ; $4767
-    ld hl, Map_25_73A0_Mode16_State00_Init        ; $4769
-    ld de, $9800                                  ; $476C
-    ld bc, $0240                                  ; $476F
-    call Vram_CopyFromBank                        ; $4772
-    ld a, STATE_16_MAIN_MENU                      ; $4775
-    ld [wState], a                                ; $4777
+    farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $4767
+    set_state STATE_16_MAIN_MENU                  ; $4775
     ret                                           ; $477A
 
 
@@ -1114,20 +1004,13 @@ Mode16_MontageIconTbl::
 ; C: 7 x {lo; hi; bank} = 0D:6900-6F00 (the Gfx_0D_*_Icon06_478F rows): Mode16_LoadIconTiles copies $100 B of the
 ; entry wOpt2Value to $9400 (read 2026-10-25)
 Mode16_MontageIconSrcTbl::
-    dw Gfx_0D_6900_Icon06_478F
-    db BANK(Gfx_0D_6900_Icon06_478F)
-    dw Gfx_0D_6A00_Icon06_478F
-    db BANK(Gfx_0D_6A00_Icon06_478F)
-    dw Gfx_0D_6B00_Icon06_478F
-    db BANK(Gfx_0D_6B00_Icon06_478F)
-    dw Gfx_0D_6C00_Icon06_478F
-    db BANK(Gfx_0D_6C00_Icon06_478F)
-    dw Gfx_0D_6D00_Icon06_478F
-    db BANK(Gfx_0D_6D00_Icon06_478F)
-    dw Gfx_0D_6E00_Icon06_478F
-    db BANK(Gfx_0D_6E00_Icon06_478F)
-    dw Gfx_0D_6F00_Icon06_478F
-    db BANK(Gfx_0D_6F00_Icon06_478F)
+    dwb Gfx_0D_6900_Icon06_478F
+    dwb Gfx_0D_6A00_Icon06_478F
+    dwb Gfx_0D_6B00_Icon06_478F
+    dwb Gfx_0D_6C00_Icon06_478F
+    dwb Gfx_0D_6D00_Icon06_478F
+    dwb Gfx_0D_6E00_Icon06_478F
+    dwb Gfx_0D_6F00_Icon06_478F
 
 ; C: option 3 (two toggles); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 05 (22910 hits in 13 runs:
 ; 16:05 x22910; tcrf_check/assets/mode_state_wp/)
@@ -1159,14 +1042,12 @@ Mode16_State05_PanoramaMenu::
     and a                                         ; $47DA
     jr nz, jr_006_47e3                            ; $47DB
 
-    ld a, STATE_16_START_SHOOT                    ; $47DD
-    ld [wState], a                                ; $47DF
+    set_state STATE_16_START_SHOOT                ; $47DD
     ret                                           ; $47E2
 
 
 jr_006_47e3:
-    ld a, STATE_16_TO_PANORAMA_PRINT              ; $47E3
-    ld [wState], a                                ; $47E5
+    set_state STATE_16_TO_PANORAMA_PRINT          ; $47E3
     ret                                           ; $47E8
 
 
@@ -1180,13 +1061,8 @@ jr_006_47e9:
     pop af                                        ; $47F2
     call Oam_ClearShadow                          ; $47F3
     rst Rst08_WaitVBlank                          ; $47F6
-    ld a, BANK(Map_25_73A0_Mode16_State00_Init)   ; $47F7
-    ld hl, Map_25_73A0_Mode16_State00_Init        ; $47F9
-    ld de, $9800                                  ; $47FC
-    ld bc, $0240                                  ; $47FF
-    call Vram_CopyFromBank                        ; $4802
-    ld a, STATE_16_MAIN_MENU                      ; $4805
-    ld [wState], a                                ; $4807
+    farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $47F7
+    set_state STATE_16_MAIN_MENU                  ; $4805
     ret                                           ; $480A
 
 
@@ -1289,8 +1165,7 @@ jr_006_4887:
     and a                                         ; $48A3
     jr nz, jr_006_48ac                            ; $48A4
 
-    ld a, STATE_16_START_SHOOT                    ; $48A6
-    ld [wState], a                                ; $48A8
+    set_state STATE_16_START_SHOOT                ; $48A6
     ret                                           ; $48AB
 
 
@@ -1306,8 +1181,7 @@ jr_006_48ac:
     ld [wMode20Caller], a                         ; $48BD
     ld a, MODE_BALL                               ; $48C0
     ld [wMode], a                                 ; $48C2
-    ld a, STATE_20_GAME_SETUP                     ; $48C5
-    ld [wState], a                                ; $48C7
+    set_state STATE_20_GAME_SETUP                 ; $48C5
     ret                                           ; $48CA
 
 
@@ -1316,9 +1190,7 @@ jr_006_48cb:
     ret nz                                        ; $48CD
 
     ldh [hFarcallAArg], a                         ; $48CE
-    ld a, BANK(GameFace_Load_Far)                 ; $48D0
-    ld hl, GameFace_Load_Far                      ; $48D2
-    call Far_Call                                 ; $48D5
+    farcall GameFace_Load_Far                     ; $48D0
     ld a, [wGamefacePresent]                      ; $48D8
     and a                                         ; $48DB
     jr nz, jr_006_48e6                            ; $48DC
@@ -1337,8 +1209,7 @@ jr_006_48e6:
     ld [wDoodleFromShutterbug], a                 ; $48EE
     ld a, MODE_DOODLE_MENU                        ; $48F1
     ld [wMode], a                                 ; $48F3
-    ld a, STATE_04_INIT                           ; $48F6
-    ld [wState], a                                ; $48F8
+    set_state STATE_04_INIT                       ; $48F6
     ret                                           ; $48FB
 
 
@@ -1352,13 +1223,8 @@ jr_006_48fc:
     pop af                                        ; $4905
     call Oam_ClearShadow                          ; $4906
     rst Rst08_WaitVBlank                          ; $4909
-    ld a, BANK(Map_25_73A0_Mode16_State00_Init)   ; $490A
-    ld hl, Map_25_73A0_Mode16_State00_Init        ; $490C
-    ld de, $9800                                  ; $490F
-    ld bc, $0240                                  ; $4912
-    call Vram_CopyFromBank                        ; $4915
-    ld a, STATE_16_MAIN_MENU                      ; $4918
-    ld [wState], a                                ; $491A
+    farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $490A
+    set_state STATE_16_MAIN_MENU                  ; $4918
     ret                                           ; $491D
 
 
@@ -1371,8 +1237,7 @@ Mode16_GameFaceRowPosTbl::
 Mode16_State07_LeaveToMode01::
     ld a, MODE_SHOOT_PARLOR                       ; $4924
     ld [wMode], a                                 ; $4926
-    ld a, STATE_01_INTRO                          ; $4929
-    ld [wState], a                                ; $492B
+    set_state STATE_01_INTRO                      ; $4929
     call Pal_FadeOut                              ; $492E
     call Lcd_Off                                  ; $4931
     ret                                           ; $4934
@@ -1382,8 +1247,7 @@ Mode16_State07_LeaveToMode01::
 Mode16_State08_StartShoot::
     ld a, MODE_SHOOT_LIVE_VIEW                    ; $4935
     ld [wMode], a                                 ; $4937
-    ld a, STATE_14_INIT                           ; $493A
-    ld [wState], a                                ; $493C
+    set_state STATE_14_INIT                       ; $493A
     call Pal_FadeOut                              ; $493F
     call Lcd_Off                                  ; $4942
     ld a, [wOptMenuCursor]                        ; $4945
@@ -1420,30 +1284,16 @@ jr_006_496c:
     ret nz                                        ; $4971
 
     ldh [hFarcallAArg], a                         ; $4972
-    ld a, BANK(GameFace_Load_Far)                 ; $4974
-    ld hl, GameFace_Load_Far                      ; $4976
-    call Far_Call                                 ; $4979
+    farcall GameFace_Load_Far                     ; $4974
     ld a, [wGamefacePresent]                      ; $497C
     and a                                         ; $497F
     ret z                                         ; $4980
 
     ld a, $c6                                     ; $4981
     ld [wPaletteTarget + $2], a                   ; $4983
-    ld a, BANK(Gfx_23_50C0_Mode16_State08_StartShoot); $4986
-    ld hl, Gfx_23_50C0_Mode16_State08_StartShoot  ; $4988
-    ld de, $8900                                  ; $498B
-    ld bc, $0290                                  ; $498E
-    call Mem_CopyFromBank                         ; $4991
-    ld a, BANK(Gfx_23_5350_Mode16_State08_StartShoot); $4994
-    ld hl, Gfx_23_5350_Mode16_State08_StartShoot  ; $4996
-    ld de, $8600                                  ; $4999
-    ld bc, $0140                                  ; $499C
-    call Mem_CopyFromBank                         ; $499F
-    ld a, BANK(Map_26_6E40_Mode16_State08_StartShoot); $49A2
-    ld hl, Map_26_6E40_Mode16_State08_StartShoot  ; $49A4
-    ld de, $9800                                  ; $49A7
-    ld bc, $0240                                  ; $49AA
-    call Mem_CopyFromBank                         ; $49AD
+    farcopy Mem_CopyFromBank, Gfx_23_50C0_Mode16_State08_StartShoot, $8900, $0290 ; $4986
+    farcopy Mem_CopyFromBank, Gfx_23_5350_Mode16_State08_StartShoot, $8600, $0140 ; $4994
+    farcopy Mem_CopyFromBank, Map_26_6E40_Mode16_State08_StartShoot, $9800, $0240 ; $49A2
     ld a, $00                                     ; $49B0
     ld hl, wPhotoImage                            ; $49B2
     ld de, $9000                                  ; $49B5
@@ -1529,8 +1379,7 @@ jr_006_4a3f:
 
     ld a, MODE_SHUTTERBUG_MAGIC                   ; $4A54
     ld [wMode], a                                 ; $4A56
-    ld a, STATE_16_REDRAW                         ; $4A59
-    ld [wState], a                                ; $4A5B
+    set_state STATE_16_REDRAW                     ; $4A59
     ret                                           ; $4A5E
 
 
@@ -1538,8 +1387,7 @@ jr_006_4a3f:
 Mode16_State09_ToPanoramaPrint::
     ld a, MODE_PANORAMA_PRINT                     ; $4A5F
     ld [wMode], a                                 ; $4A61
-    ld a, STATE_18_INIT                           ; $4A64
-    ld [wState], a                                ; $4A66
+    set_state STATE_18_INIT                       ; $4A64
     call Pal_FadeOut                              ; $4A69
     call Lcd_Off                                  ; $4A6C
     ret                                           ; $4A6F
@@ -1697,14 +1545,10 @@ Mode16_LoadPageTiles::
 ; C: 4 x {lo; hi; bank} = 0D:5A80 5800 5580 5300 (the Gfx_0D_*_Strip06_4B17 rows): Mode16_LoadPageTiles (06:4AF8)
 ; copies $280 B of the entry wOptMenuCursor to $9000 (read 2026-10-25)
 Mode16_PageTilesSrcTbl::
-    dw Gfx_0D_5A80_Strip06_4B17
-    db BANK(Gfx_0D_5A80_Strip06_4B17)
-    dw Gfx_0D_5800_Strip06_4B17
-    db BANK(Gfx_0D_5800_Strip06_4B17)
-    dw Gfx_0D_5580_Strip06_4B17
-    db BANK(Gfx_0D_5580_Strip06_4B17)
-    dw Gfx_0D_5300_Strip06_4B17
-    db BANK(Gfx_0D_5300_Strip06_4B17)
+    dwb Gfx_0D_5A80_Strip06_4B17
+    dwb Gfx_0D_5800_Strip06_4B17
+    dwb Gfx_0D_5580_Strip06_4B17
+    dwb Gfx_0D_5300_Strip06_4B17
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 16 (172 hits in 24 runs: 16:00 x100 16:01 x56 16:03 x10 16:04
 ; x6; tcrf_check/assets/mode_state_wp/)
@@ -1762,14 +1606,10 @@ Mode16_BuildOptionList::
 ; C: 4 x {lo; hi; bank} = 25:71A0, 25:50C0, 24:63A0, 25:5360 (Map_*_Mode16_OptionPage0-3): Mode16_BuildOptionList
 ; (06:4B43) copies $200 B of the entry wOptMenuCursor to $9840; far pointers to maps, not a map (read 2026-10-25)
 Mode16_OptionMapSrcTbl::
-    dw Map_25_71A0_Mode16_OptionPage0
-    db BANK(Map_25_71A0_Mode16_OptionPage0)
-    dw Map_25_50C0_Mode16_OptionPage1
-    db BANK(Map_25_50C0_Mode16_OptionPage1)
-    dw Map_24_63A0_Mode16_OptionPage2
-    db BANK(Map_24_63A0_Mode16_OptionPage2)
-    dw Map_25_5360_Mode16_OptionPage3
-    db BANK(Map_25_5360_Mode16_OptionPage3)
+    dwb Map_25_71A0_Mode16_OptionPage0
+    dwb Map_25_50C0_Mode16_OptionPage1
+    dwb Map_24_63A0_Mode16_OptionPage2
+    dwb Map_25_5360_Mode16_OptionPage3
 
 ; C: 4 code pointers
 Mode16_BuilderTbl::
@@ -1843,11 +1683,7 @@ jr_006_4bbe:
     dec b                                         ; $4BBE
     jr nz, jr_006_4b8a                            ; $4BBF
 
-    ld a, BANK(Map_25_52C0_Mode16_BuildList2)     ; $4BC1
-    ld hl, Map_25_52C0_Mode16_BuildList2          ; $4BC3
-    ld de, $9980                                  ; $4BC6
-    ld bc, $0060                                  ; $4BC9
-    call Vram_CopyFromBank                        ; $4BCC
+    farcopy Vram_CopyFromBank, Map_25_52C0_Mode16_BuildList2, $9980, $0060 ; $4BC1
     ret                                           ; $4BCF
 
 
@@ -1911,11 +1747,7 @@ jr_006_4c12:
     dec b                                         ; $4C12
     jr nz, jr_006_4bde                            ; $4C13
 
-    ld a, BANK(Map_24_65A0_Mode16_BuildList4)     ; $4C15
-    ld hl, Map_24_65A0_Mode16_BuildList4          ; $4C17
-    ld de, $9980                                  ; $4C1A
-    ld bc, $0080                                  ; $4C1D
-    call Vram_CopyFromBank                        ; $4C20
+    farcopy Vram_CopyFromBank, Map_24_65A0_Mode16_BuildList4, $9980, $0080 ; $4C15
     ret                                           ; $4C23
 
 
@@ -1990,11 +1822,7 @@ jr_006_4c75:
     dec b                                         ; $4C75
     jr nz, jr_006_4c32                            ; $4C76
 
-    ld a, BANK(Map_25_5560_Mode16_BuildList6)     ; $4C78
-    ld hl, Map_25_5560_Mode16_BuildList6          ; $4C7A
-    ld de, $9980                                  ; $4C7D
-    ld bc, $0060                                  ; $4C80
-    call Vram_CopyFromBank                        ; $4C83
+    farcopy Vram_CopyFromBank, Map_25_5560_Mode16_BuildList6, $9980, $0060 ; $4C78
     ret                                           ; $4C86
 
 
@@ -2058,36 +1886,12 @@ Mode17_State00_Init::
     xor a                                         ; $4CDC
     ldh [hScxShadow], a                           ; $4CDD
     ldh [hScyShadow], a                           ; $4CDF
-    ld a, BANK(Gfx_1E_5C00_Mode17_State00_Init)   ; $4CE1
-    ld hl, Gfx_1E_5C00_Mode17_State00_Init        ; $4CE3
-    ld de, $9000                                  ; $4CE6
-    ld bc, $0300                                  ; $4CE9
-    call Mem_CopyFromBank                         ; $4CEC
-    ld a, BANK(Gfx_1E_5F00_Mode17_State00_Init)   ; $4CEF
-    ld hl, Gfx_1E_5F00_Mode17_State00_Init        ; $4CF1
-    ld de, $8a80                                  ; $4CF4
-    ld bc, $0580                                  ; $4CF7
-    call Mem_CopyFromBank                         ; $4CFA
-    ld a, BANK(Gfx_1E_6480_Mode17_State00_Init)   ; $4CFD
-    ld hl, Gfx_1E_6480_Mode17_State00_Init        ; $4CFF
-    ld de, $8000                                  ; $4D02
-    ld bc, $0030                                  ; $4D05
-    call Mem_CopyFromBank                         ; $4D08
-    ld a, BANK(Gfx_1E_6570_Mode17_State00_Init)   ; $4D0B
-    ld hl, Gfx_1E_6570_Mode17_State00_Init        ; $4D0D
-    ld de, $80f0                                  ; $4D10
-    ld bc, $0010                                  ; $4D13
-    call Mem_CopyFromBank                         ; $4D16
-    ld a, BANK(Gfx_1E_6580_Mode17_State00_Init)   ; $4D19
-    ld hl, Gfx_1E_6580_Mode17_State00_Init        ; $4D1B
-    ld de, $8040                                  ; $4D1E
-    ld bc, $0010                                  ; $4D21
-    call Mem_CopyFromBank                         ; $4D24
-    ld a, BANK(Map_24_68E0_Mode17_State00_Init)   ; $4D27
-    ld hl, Map_24_68E0_Mode17_State00_Init        ; $4D29
-    ld de, $9800                                  ; $4D2C
-    ld bc, $0240                                  ; $4D2F
-    call Mem_CopyFromBank                         ; $4D32
+    farcopy Mem_CopyFromBank, Gfx_1E_5C00_Mode17_State00_Init, $9000, $0300 ; $4CE1
+    farcopy Mem_CopyFromBank, Gfx_1E_5F00_Mode17_State00_Init, $8a80, $0580 ; $4CEF
+    farcopy Mem_CopyFromBank, Gfx_1E_6480_Mode17_State00_Init, $8000, $0030 ; $4CFD
+    farcopy Mem_CopyFromBank, Gfx_1E_6570_Mode17_State00_Init, $80f0, $0010 ; $4D0B
+    farcopy Mem_CopyFromBank, Gfx_1E_6580_Mode17_State00_Init, $8040, $0010 ; $4D19
+    farcopy Mem_CopyFromBank, Map_24_68E0_Mode17_State00_Init, $9800, $0240 ; $4D27
     ld de, $93c8                                  ; $4D35
     ld b, $04                                     ; $4D38
 
@@ -2140,8 +1944,7 @@ jr_006_4d61:
     pop af                                        ; $4D73
     call Compose_DrawLayoutPreview                ; $4D74
     call Pal_FadeIn                               ; $4D77
-    ld hl, wState                                 ; $4D7A
-    inc [hl]                                      ; $4D7D
+    next_state                                    ; $4D7A
     ret                                           ; $4D7E
 
 
@@ -2167,11 +1970,7 @@ Compose_DrawLayoutPreview::
     call Compose_LoadQuad1                        ; $4DAC
     call Compose_LoadQuad2                        ; $4DAF
     call Compose_LoadQuad3                        ; $4DB2
-    ld a, BANK(Map_24_6A20_Compose_DrawLayoutPreview); $4DB5
-    ld hl, Map_24_6A20_Compose_DrawLayoutPreview  ; $4DB7
-    ld de, $9940                                  ; $4DBA
-    ld bc, $0080                                  ; $4DBD
-    call Vram_CopyFromBank                        ; $4DC0
+    farcopy Vram_CopyFromBank, Map_24_6A20_Compose_DrawLayoutPreview, $9940, $0080 ; $4DB5
     ret                                           ; $4DC3
 
 
@@ -2184,11 +1983,7 @@ jr_006_4dc4:
     call Compose_LoadPhotoThumb                   ; $4DD3
     call Compose_LoadHalf0                        ; $4DD6
     call Compose_LoadHalf1                        ; $4DD9
-    ld a, BANK(Map_24_6B20_Compose_DrawLayoutPreview); $4DDC
-    ld hl, Map_24_6B20_Compose_DrawLayoutPreview  ; $4DDE
-    ld de, $9940                                  ; $4DE1
-    ld bc, $0080                                  ; $4DE4
-    call Vram_CopyFromBank                        ; $4DE7
+    farcopy Vram_CopyFromBank, Map_24_6B20_Compose_DrawLayoutPreview, $9940, $0080 ; $4DDC
     ret                                           ; $4DEA
 
 
@@ -2210,14 +2005,12 @@ Mode17_State01_LayoutChoose::
     and a                                         ; $4E05
     jr nz, jr_006_4e0e                            ; $4E06
 
-    ld a, STATE_17_SPLIT_CURSOR                   ; $4E08
-    ld [wState], a                                ; $4E0A
+    set_state STATE_17_SPLIT_CURSOR               ; $4E08
     ret                                           ; $4E0D
 
 
 jr_006_4e0e:
-    ld a, STATE_17_FUSION_CURSOR                  ; $4E0E
-    ld [wState], a                                ; $4E10
+    set_state STATE_17_FUSION_CURSOR              ; $4E0E
     ret                                           ; $4E13
 
 
@@ -2229,8 +2022,7 @@ jr_006_4e14:
     ld a, SFX1_KEY_B                              ; $4E18
     call Snd_Sfx1                                 ; $4E1A
     pop af                                        ; $4E1D
-    ld a, STATE_17_LEAVE                          ; $4E1E
-    ld [wState], a                                ; $4E20
+    set_state STATE_17_LEAVE                      ; $4E1E
     ret                                           ; $4E23
 
 
@@ -2307,8 +2099,7 @@ Mode17_State02_Split_Cursor::
     bit 0, a                                      ; $4E75
     jr z, jr_006_4e7f                             ; $4E77
 
-    ld a, STATE_17_SPLIT_CONFIRM                  ; $4E79
-    ld [wState], a                                ; $4E7B
+    set_state STATE_17_SPLIT_CONFIRM              ; $4E79
     ret                                           ; $4E7E
 
 
@@ -2325,8 +2116,7 @@ jr_006_4e7f:
     bit 0, a                                      ; $4E8F
     jr nz, jr_006_4e99                            ; $4E91
 
-    ld a, STATE_17_LAYOUT_CHOOSE                  ; $4E93
-    ld [wState], a                                ; $4E95
+    set_state STATE_17_LAYOUT_CHOOSE              ; $4E93
     ret                                           ; $4E98
 
 
@@ -2366,8 +2156,7 @@ jr_006_4ec9:
     ld a, SFX1_KEY_B                              ; $4ECD
     call Snd_Sfx1                                 ; $4ECF
     pop af                                        ; $4ED2
-    ld a, STATE_17_LEAVE                          ; $4ED3
-    ld [wState], a                                ; $4ED5
+    set_state STATE_17_LEAVE                      ; $4ED3
     ret                                           ; $4ED8
 
 
@@ -2493,8 +2282,7 @@ jr_006_4f6c:
     call Snd_Sfx1                                 ; $4F7D
     pop af                                        ; $4F80
     call Compose_LoadQuad0                        ; $4F81
-    ld a, STATE_17_SPLIT_CURSOR                   ; $4F84
-    ld [wState], a                                ; $4F86
+    set_state STATE_17_SPLIT_CURSOR               ; $4F84
     ret                                           ; $4F89
 
 
@@ -2531,8 +2319,7 @@ jr_006_4fa7:
     call Snd_Sfx1                                 ; $4FB8
     pop af                                        ; $4FBB
     call Compose_LoadQuad1                        ; $4FBC
-    ld a, STATE_17_SPLIT_CURSOR                   ; $4FBF
-    ld [wState], a                                ; $4FC1
+    set_state STATE_17_SPLIT_CURSOR               ; $4FBF
     ret                                           ; $4FC4
 
 
@@ -2569,8 +2356,7 @@ jr_006_4fe2:
     call Snd_Sfx1                                 ; $4FF3
     pop af                                        ; $4FF6
     call Compose_LoadQuad2                        ; $4FF7
-    ld a, STATE_17_SPLIT_CURSOR                   ; $4FFA
-    ld [wState], a                                ; $4FFC
+    set_state STATE_17_SPLIT_CURSOR               ; $4FFA
     ret                                           ; $4FFF
 
 
@@ -2607,8 +2393,7 @@ jr_006_501d:
     call Snd_Sfx1                                 ; $502E
     pop af                                        ; $5031
     call Compose_LoadQuad3                        ; $5032
-    ld a, STATE_17_SPLIT_CURSOR                   ; $5035
-    ld [wState], a                                ; $5037
+    set_state STATE_17_SPLIT_CURSOR               ; $5035
     ret                                           ; $503A
 
 
@@ -2630,8 +2415,7 @@ Mode17_State07_Split_Confirm::
     ld a, SFX1_KEY_UP_DOWN                        ; $504C
     call Snd_Sfx1                                 ; $504E
     pop af                                        ; $5051
-    ld a, STATE_17_SPLIT_CURSOR                   ; $5052
-    ld [wState], a                                ; $5054
+    set_state STATE_17_SPLIT_CURSOR               ; $5052
     ret                                           ; $5057
 
 
@@ -2647,14 +2431,12 @@ jr_006_5058:
     ld a, SFX1_CHOOSE                             ; $5064
     call Snd_Sfx1                                 ; $5066
     pop af                                        ; $5069
-    ld a, STATE_17_SPLIT_BUILD                    ; $506A
-    ld [wState], a                                ; $506C
+    set_state STATE_17_SPLIT_BUILD                ; $506A
     ret                                           ; $506F
 
 
 jr_006_5070:
-    ld a, STATE_17_RESULT_PREPARE                 ; $5070
-    ld [wState], a                                ; $5072
+    set_state STATE_17_RESULT_PREPARE             ; $5070
     ret                                           ; $5075
 
 
@@ -2666,8 +2448,7 @@ jr_006_5076:
     ld a, SFX1_KEY_B                              ; $507A
     call Snd_Sfx1                                 ; $507C
     pop af                                        ; $507F
-    ld a, STATE_17_LEAVE                          ; $5080
-    ld [wState], a                                ; $5082
+    set_state STATE_17_LEAVE                      ; $5080
     ret                                           ; $5085
 
 
@@ -2698,21 +2479,9 @@ Mode17_State08_Split_Build::
     ld hl, $9000                                  ; $50B1
     ld bc, $0800                                  ; $50B4
     call Mem_Zero                                 ; $50B7
-    ld a, BANK(Map_27_44B2_Mode17_State08_Split_Build); $50BA
-    ld hl, Map_27_44B2_Mode17_State08_Split_Build ; $50BC
-    ld de, $9800                                  ; $50BF
-    ld bc, $02c0                                  ; $50C2
-    call Mem_CopyFromBank                         ; $50C5
-    ld a, BANK(Gfx_17_4680_Mode0F_State05_ConfirmInit); $50C8
-    ld hl, Gfx_17_4680_Mode0F_State05_ConfirmInit ; $50CA
-    ld de, $8600                                  ; $50CD
-    ld bc, $0080                                  ; $50D0
-    call Mem_CopyFromBank                         ; $50D3
-    ld a, BANK(Gfx_17_4980_Mode17_State08_Split_Build); $50D6
-    ld hl, Gfx_17_4980_Mode17_State08_Split_Build ; $50D8
-    ld de, $8cc0                                  ; $50DB
-    ld bc, $0260                                  ; $50DE
-    call Mem_CopyFromBank                         ; $50E1
+    farcopy Mem_CopyFromBank, Map_27_44B2_Mode17_State08_Split_Build, $9800, $02c0 ; $50BA
+    farcopy Mem_CopyFromBank, Gfx_17_4680_Mode0F_State05_ConfirmInit, $8600, $0080 ; $50C8
+    farcopy Mem_CopyFromBank, Gfx_17_4980_Mode17_State08_Split_Build, $8cc0, $0260 ; $50D6
     ld a, $54                                     ; $50E4
     ldh [hLycShadowSplit1], a                     ; $50E6
     ldh [hSplit1Latch], a                         ; $50E8
@@ -2727,8 +2496,7 @@ Mode17_State08_Split_Build::
     call Pal_FadeIn                               ; $50FE
     call Compose_BuildSplit                       ; $5101
     call Compose_DrawFreeCount                    ; $5104
-    ld hl, wState                                 ; $5107
-    inc [hl]                                      ; $510A
+    next_state                                    ; $5107
     ret                                           ; $510B
 
 
@@ -2758,9 +2526,7 @@ Mode17_State09_Split_Result::
     ld bc, $0500                                  ; $513C
     call Vram_CopyFromBank_4                      ; $513F
     ldh [hFarcallAArg], a                         ; $5142
-    ld a, BANK(Photo_SaveShot_Far)                ; $5144
-    ld hl, Photo_SaveShot_Far                     ; $5146
-    call Far_Call                                 ; $5149
+    farcall Photo_SaveShot_Far                    ; $5144
     call Snd_PlayTagDigits                        ; $514C
     ld bc, $003c                                  ; $514F
     call Wait_Frames                              ; $5152
@@ -2776,8 +2542,7 @@ jr_006_5155:
     res 6, [hl]                                   ; $5165
     ld hl, rIE                                    ; $5167
     res 1, [hl]                                   ; $516A
-    ld a, STATE_17_INIT                           ; $516C
-    ld [wState], a                                ; $516E
+    set_state STATE_17_INIT                       ; $516C
     ret                                           ; $5171
 
 
@@ -2792,8 +2557,7 @@ Mode17_State0A_Fusion_Cursor::
     ld a, SFX1_KEY_UP_DOWN                        ; $517C
     call Snd_Sfx1                                 ; $517E
     pop af                                        ; $5181
-    ld a, STATE_17_FUSION_CONFIRM                 ; $5182
-    ld [wState], a                                ; $5184
+    set_state STATE_17_FUSION_CONFIRM             ; $5182
     ret                                           ; $5187
 
 
@@ -2806,8 +2570,7 @@ jr_006_5188:
     ld a, SFX1_KEY_UP_DOWN                        ; $518F
     call Snd_Sfx1                                 ; $5191
     pop af                                        ; $5194
-    ld a, STATE_17_LAYOUT_CHOOSE                  ; $5195
-    ld [wState], a                                ; $5197
+    set_state STATE_17_LAYOUT_CHOOSE              ; $5195
     ret                                           ; $519A
 
 
@@ -2847,8 +2610,7 @@ jr_006_51cb:
     ld a, SFX1_KEY_B                              ; $51CF
     call Snd_Sfx1                                 ; $51D1
     pop af                                        ; $51D4
-    ld a, STATE_17_LEAVE                          ; $51D5
-    ld [wState], a                                ; $51D7
+    set_state STATE_17_LEAVE                      ; $51D5
     ret                                           ; $51DA
 
 
@@ -2946,8 +2708,7 @@ jr_006_5244:
     call Snd_Sfx1                                 ; $5255
     pop af                                        ; $5258
     call Compose_LoadHalf0                        ; $5259
-    ld a, STATE_17_FUSION_CURSOR                  ; $525C
-    ld [wState], a                                ; $525E
+    set_state STATE_17_FUSION_CURSOR              ; $525C
     ret                                           ; $5261
 
 
@@ -2984,8 +2745,7 @@ jr_006_527f:
     call Snd_Sfx1                                 ; $5290
     pop af                                        ; $5293
     call Compose_LoadHalf1                        ; $5294
-    ld a, STATE_17_FUSION_CURSOR                  ; $5297
-    ld [wState], a                                ; $5299
+    set_state STATE_17_FUSION_CURSOR              ; $5297
     ret                                           ; $529C
 
 
@@ -3008,8 +2768,7 @@ Mode17_State0D_Fusion_Confirm::
     ld a, SFX1_KEY_UP_DOWN                        ; $52AE
     call Snd_Sfx1                                 ; $52B0
     pop af                                        ; $52B3
-    ld a, STATE_17_FUSION_CURSOR                  ; $52B4
-    ld [wState], a                                ; $52B6
+    set_state STATE_17_FUSION_CURSOR              ; $52B4
     ret                                           ; $52B9
 
 
@@ -3025,14 +2784,12 @@ jr_006_52ba:
     ld a, SFX1_CHOOSE                             ; $52C6
     call Snd_Sfx1                                 ; $52C8
     pop af                                        ; $52CB
-    ld a, STATE_17_FUSION_BUILD                   ; $52CC
-    ld [wState], a                                ; $52CE
+    set_state STATE_17_FUSION_BUILD               ; $52CC
     ret                                           ; $52D1
 
 
 jr_006_52d2:
-    ld a, STATE_17_RESULT_PREPARE                 ; $52D2
-    ld [wState], a                                ; $52D4
+    set_state STATE_17_RESULT_PREPARE             ; $52D2
     ret                                           ; $52D7
 
 
@@ -3044,8 +2801,7 @@ jr_006_52d8:
     ld a, SFX1_KEY_B                              ; $52DC
     call Snd_Sfx1                                 ; $52DE
     pop af                                        ; $52E1
-    ld a, STATE_17_LEAVE                          ; $52E2
-    ld [wState], a                                ; $52E4
+    set_state STATE_17_LEAVE                      ; $52E2
     ret                                           ; $52E7
 
 
@@ -3076,21 +2832,9 @@ Mode17_State0E_Fusion_Build::
     ld hl, $9000                                  ; $5313
     ld bc, $0800                                  ; $5316
     call Mem_Zero                                 ; $5319
-    ld a, BANK(Map_27_44B2_Mode17_State08_Split_Build); $531C
-    ld hl, Map_27_44B2_Mode17_State08_Split_Build ; $531E
-    ld de, $9800                                  ; $5321
-    ld bc, $02c0                                  ; $5324
-    call Mem_CopyFromBank                         ; $5327
-    ld a, BANK(Gfx_17_4680_Mode0F_State05_ConfirmInit); $532A
-    ld hl, Gfx_17_4680_Mode0F_State05_ConfirmInit ; $532C
-    ld de, $8600                                  ; $532F
-    ld bc, $0080                                  ; $5332
-    call Mem_CopyFromBank                         ; $5335
-    ld a, BANK(Gfx_17_4980_Mode17_State08_Split_Build); $5338
-    ld hl, Gfx_17_4980_Mode17_State08_Split_Build ; $533A
-    ld de, $8cc0                                  ; $533D
-    ld bc, $0260                                  ; $5340
-    call Mem_CopyFromBank                         ; $5343
+    farcopy Mem_CopyFromBank, Map_27_44B2_Mode17_State08_Split_Build, $9800, $02c0 ; $531C
+    farcopy Mem_CopyFromBank, Gfx_17_4680_Mode0F_State05_ConfirmInit, $8600, $0080 ; $532A
+    farcopy Mem_CopyFromBank, Gfx_17_4980_Mode17_State08_Split_Build, $8cc0, $0260 ; $5338
     ld a, $54                                     ; $5346
     ldh [hLycShadowSplit1], a                     ; $5348
     ldh [hSplit1Latch], a                         ; $534A
@@ -3105,8 +2849,7 @@ Mode17_State0E_Fusion_Build::
     call Pal_FadeIn                               ; $5360
     call Compose_BuildFusion                      ; $5363
     call Compose_DrawFreeCount                    ; $5366
-    ld hl, wState                                 ; $5369
-    inc [hl]                                      ; $536C
+    next_state                                    ; $5369
     ret                                           ; $536D
 
 
@@ -3136,9 +2879,7 @@ Mode17_State0F_Fusion_Result::
     ld bc, $0500                                  ; $539E
     call Vram_CopyFromBank_4                      ; $53A1
     ldh [hFarcallAArg], a                         ; $53A4
-    ld a, BANK(Photo_SaveShot_Far)                ; $53A6
-    ld hl, Photo_SaveShot_Far                     ; $53A8
-    call Far_Call                                 ; $53AB
+    farcall Photo_SaveShot_Far                    ; $53A6
     call Snd_PlayTagDigits                        ; $53AE
     ld bc, $003c                                  ; $53B1
     call Wait_Frames                              ; $53B4
@@ -3154,8 +2895,7 @@ jr_006_53b7:
     res 6, [hl]                                   ; $53C7
     ld hl, rIE                                    ; $53C9
     res 1, [hl]                                   ; $53CC
-    ld a, STATE_17_INIT                           ; $53CE
-    ld [wState], a                                ; $53D0
+    set_state STATE_17_INIT                       ; $53CE
     ret                                           ; $53D3
 
 
@@ -3163,8 +2903,7 @@ jr_006_53b7:
 Mode17_State10_Leave::
     ld a, MODE_SPECIAL_MENU                       ; $53D4
     ld [wMode], a                                 ; $53D6
-    ld a, STATE_03_INIT                           ; $53D9
-    ld [wState], a                                ; $53DB
+    set_state STATE_03_INIT                       ; $53D9
     call Pal_FadeOut                              ; $53DE
     call Lcd_Off                                  ; $53E1
     ret                                           ; $53E4
@@ -3182,24 +2921,20 @@ Mode17_State11_ResultPrepare::
     ld [wSubstate], a                             ; $53F6
     ld a, $09                                     ; $53F9
     ld [wResultMsgId], a                          ; $53FB
-    ld hl, wState                                 ; $53FE
-    inc [hl]                                      ; $5401
+    next_state                                    ; $53FE
     ret                                           ; $5402
 
 
 ; C: far call 09:7290
 Mode17_State12_ResultScreen::
     ldh [hFarcallAArg], a                         ; $5403
-    ld a, BANK(ResultScreen_Far)                  ; $5405
-    ld hl, ResultScreen_Far                       ; $5407
-    call Far_Call                                 ; $540A
+    farcall ResultScreen_Far                      ; $5405
     ret                                           ; $540D
 
 
 ; C
 Mode17_State13_Restart::
-    ld a, STATE_17_INIT                           ; $540E
-    ld [wState], a                                ; $5410
+    set_state STATE_17_INIT                       ; $540E
     ret                                           ; $5413
 
 
@@ -3207,9 +2942,7 @@ Mode17_State13_Restart::
 Compose_LoadQuad0::
     ld a, [wCompose4Photos]                       ; $5414
     ldh [hFarcallAArg], a                         ; $5417
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5419
-    ld hl, Photo_GetSramAddress_Far               ; $541B
-    call Far_Call                                 ; $541E
+    farcall Photo_GetSramAddress_Far              ; $5419
     ld l, a                                       ; $5421
     push hl                                       ; $5422
     push bc                                       ; $5423
@@ -3260,9 +2993,7 @@ Compose_LoadQuad0::
 Compose_LoadQuad1::
     ld a, [wCompose4Photos + $1]                  ; $5491
     ldh [hFarcallAArg], a                         ; $5494
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5496
-    ld hl, Photo_GetSramAddress_Far               ; $5498
-    call Far_Call                                 ; $549B
+    farcall Photo_GetSramAddress_Far              ; $5496
     ld l, a                                       ; $549E
     push hl                                       ; $549F
     ld hl, $0600                                  ; $54A0
@@ -3315,9 +3046,7 @@ Compose_LoadQuad1::
 Compose_LoadQuad2::
     ld a, [wCompose4Photos + $2]                  ; $5512
     ldh [hFarcallAArg], a                         ; $5515
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5517
-    ld hl, Photo_GetSramAddress_Far               ; $5519
-    call Far_Call                                 ; $551C
+    farcall Photo_GetSramAddress_Far              ; $5517
     ld l, a                                       ; $551F
     push hl                                       ; $5520
     ld hl, $0080                                  ; $5521
@@ -3370,9 +3099,7 @@ Compose_LoadQuad2::
 Compose_LoadQuad3::
     ld a, [wCompose4Photos + $3]                  ; $5593
     ldh [hFarcallAArg], a                         ; $5596
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5598
-    ld hl, Photo_GetSramAddress_Far               ; $559A
-    call Far_Call                                 ; $559D
+    farcall Photo_GetSramAddress_Far              ; $5598
     ld l, a                                       ; $55A0
     push hl                                       ; $55A1
     ld hl, $0680                                  ; $55A2
@@ -3425,9 +3152,7 @@ Compose_LoadQuad3::
 Compose_LoadHalf0::
     ld a, [wCompose2Photos]                       ; $5614
     ldh [hFarcallAArg], a                         ; $5617
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5619
-    ld hl, Photo_GetSramAddress_Far               ; $561B
-    call Far_Call                                 ; $561E
+    farcall Photo_GetSramAddress_Far              ; $5619
     ld l, a                                       ; $5621
     push hl                                       ; $5622
     push bc                                       ; $5623
@@ -3475,9 +3200,7 @@ Compose_WriteTilePair::
 Compose_LoadHalf1::
     ld a, [wCompose2Photos + $1]                  ; $5657
     ldh [hFarcallAArg], a                         ; $565A
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $565C
-    ld hl, Photo_GetSramAddress_Far               ; $565E
-    call Far_Call                                 ; $5661
+    farcall Photo_GetSramAddress_Far              ; $565C
     ld l, a                                       ; $5664
     push hl                                       ; $5665
     inc bc                                        ; $5666
@@ -3585,9 +3308,7 @@ jr_006_56b3:
 Compose_LoadPhotoThumb::
     push de                                       ; $56F4
     ldh [hFarcallAArg], a                         ; $56F5
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $56F7
-    ld hl, Photo_GetSramAddress_Far               ; $56F9
-    call Far_Call                                 ; $56FC
+    farcall Photo_GetSramAddress_Far              ; $56F7
     pop de                                        ; $56FF
     ld hl, $0e00                                  ; $5700
     add hl, bc                                    ; $5703
@@ -3744,9 +3465,7 @@ Compose_FusionReduceLeft::
     push hl                                       ; $57C3
     ld a, [wCompose2Photos]                       ; $57C4
     ldh [hFarcallAArg], a                         ; $57C7
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $57C9
-    ld hl, Photo_GetSramAddress_Far               ; $57CB
-    call Far_Call                                 ; $57CE
+    farcall Photo_GetSramAddress_Far              ; $57C9
     pop hl                                        ; $57D1
     push hl                                       ; $57D2
     add hl, bc                                    ; $57D3
@@ -3755,9 +3474,7 @@ Compose_FusionReduceLeft::
     call Mem_CopyFromBank                         ; $57DA
     ld a, [wCompose2Photos + $1]                  ; $57DD
     ldh [hFarcallAArg], a                         ; $57E0
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $57E2
-    ld hl, Photo_GetSramAddress_Far               ; $57E4
-    call Far_Call                                 ; $57E7
+    farcall Photo_GetSramAddress_Far              ; $57E2
     pop hl                                        ; $57EA
     add hl, bc                                    ; $57EB
     ld de, wBlendRows + $100                      ; $57EC
@@ -3900,9 +3617,7 @@ Compose_SplitQuadrant::
     add hl, de                                    ; $58C4
     push hl                                       ; $58C5
     ldh [hFarcallAArg], a                         ; $58C6
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $58C8
-    ld hl, Photo_GetSramAddress_Far               ; $58CA
-    call Far_Call                                 ; $58CD
+    farcall Photo_GetSramAddress_Far              ; $58C8
     pop de                                        ; $58D0
     pop hl                                        ; $58D1
     add hl, bc                                    ; $58D2
@@ -4058,30 +3773,14 @@ Mode18_State00_Init::
     ld [wSelCursorTick], a                        ; $59B0
     ld [wSelCursorFrame], a                       ; $59B3
     ld [wSelSlot], a                              ; $59B6
-    ld a, BANK(Gfx_11_7000_Mode18_State00_Init)   ; $59B9
-    ld hl, Gfx_11_7000_Mode18_State00_Init        ; $59BB
-    ld de, $9000                                  ; $59BE
-    ld bc, $0800                                  ; $59C1
-    call Mem_CopyFromBank                         ; $59C4
-    ld a, BANK(Gfx_11_7800_Mode18_State00_Init)   ; $59C7
-    ld hl, Gfx_11_7800_Mode18_State00_Init        ; $59C9
-    ld de, $8800                                  ; $59CC
-    ld bc, $0800                                  ; $59CF
-    call Mem_CopyFromBank                         ; $59D2
-    ld a, BANK(Map_16_7D80_Mode18_State00_Init)   ; $59D5
-    ld hl, Map_16_7D80_Mode18_State00_Init        ; $59D7
-    ld de, $9800                                  ; $59DA
-    ld bc, $0240                                  ; $59DD
-    call Mem_CopyFromBank                         ; $59E0
+    farcopy Mem_CopyFromBank, Gfx_11_7000_Mode18_State00_Init, $9000, $0800 ; $59B9
+    farcopy Mem_CopyFromBank, Gfx_11_7800_Mode18_State00_Init, $8800, $0800 ; $59C7
+    farcopy Mem_CopyFromBank, Map_16_7D80_Mode18_State00_Init, $9800, $0240 ; $59D5
     ld a, [wOpt3ToggleB]                          ; $59E3
     and a                                         ; $59E6
     jr z, jr_006_59f7                             ; $59E7
 
-    ld a, BANK(Map_16_7FC0_Mode18_State00_Init)   ; $59E9
-    ld hl, Map_16_7FC0_Mode18_State00_Init        ; $59EB
-    ld de, $9800                                  ; $59EE
-    ld bc, $0040                                  ; $59F1
-    call Mem_CopyFromBank                         ; $59F4
+    farcopy Mem_CopyFromBank, Map_16_7FC0_Mode18_State00_Init, $9800, $0040 ; $59E9
 
 jr_006_59f7:
     call Oam_ClearShadow                          ; $59F7
@@ -4100,14 +3799,12 @@ jr_006_59f7:
     and a                                         ; $5A19
     jr nz, jr_006_5a21                            ; $5A1A
 
-    ld hl, wState                                 ; $5A1C
-    inc [hl]                                      ; $5A1F
+    next_state                                    ; $5A1C
     ret                                           ; $5A20
 
 
 jr_006_5a21:
-    ld a, STATE_18_PICK_LAST                      ; $5A21
-    ld [wState], a                                ; $5A23
+    set_state STATE_18_PICK_LAST                  ; $5A21
     ret                                           ; $5A26
 
 
@@ -4131,8 +3828,7 @@ Mode18_State01_PickFirst::
     ld a, SFX1_KEY_B                              ; $5A44
     call nz, Snd_Sfx1                             ; $5A46
     pop af                                        ; $5A49
-    ld a, STATE_18_PRINT_OR_CANCEL                ; $5A4A
-    ld [wState], a                                ; $5A4C
+    set_state STATE_18_PRINT_OR_CANCEL            ; $5A4A
     ret                                           ; $5A4F
 
 
@@ -4156,8 +3852,7 @@ Mode18_State02_PickLast::
     ld a, SFX1_KEY_B                              ; $5A6D
     call nz, Snd_Sfx1                             ; $5A6F
     pop af                                        ; $5A72
-    ld hl, wState                                 ; $5A73
-    inc [hl]                                      ; $5A76
+    next_state                                    ; $5A73
     ret                                           ; $5A77
 
 
@@ -4186,8 +3881,7 @@ jr_006_5a81:
     call Mode18_StartPrint                        ; $5A9A
     ld a, MODE_PRINT_JOB                          ; $5A9D
     ld [wMode], a                                 ; $5A9F
-    ld a, STATE_1D_INIT                           ; $5AA2
-    ld [wState], a                                ; $5AA4
+    set_state STATE_1D_INIT                       ; $5AA2
     ret                                           ; $5AA7
 
 
@@ -4210,8 +3904,7 @@ jr_006_5aaa:
     call Lcd_Off                                  ; $5AC0
     ld a, MODE_SHUTTERBUG_MAGIC                   ; $5AC3
     ld [wMode], a                                 ; $5AC5
-    ld a, STATE_16_REDRAW                         ; $5AC8
-    ld [wState], a                                ; $5ACA
+    set_state STATE_16_REDRAW                     ; $5AC8
     ret                                           ; $5ACD
 
 
@@ -4249,9 +3942,7 @@ jr_006_5ae9:
     push de                                       ; $5AF2
     push hl                                       ; $5AF3
     ldh [hFarcallAArg], a                         ; $5AF4
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5AF6
-    ld hl, Photo_GetSramAddress_Far               ; $5AF8
-    call Far_Call                                 ; $5AFB
+    farcall Photo_GetSramAddress_Far              ; $5AF6
     pop hl                                        ; $5AFE
     pop de                                        ; $5AFF
 
@@ -4652,9 +4343,7 @@ Mode18_LoadThumb::
     jr z, jr_006_5ce1                             ; $5CCF
 
     ldh [hFarcallAArg], a                         ; $5CD1
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $5CD3
-    ld hl, Photo_GetSramAddress_Far               ; $5CD5
-    call Far_Call                                 ; $5CD8
+    farcall Photo_GetSramAddress_Far              ; $5CD3
     ld hl, $0e00                                  ; $5CDB
     add hl, bc                                    ; $5CDE
     jr jr_006_5cfb                                ; $5CDF
@@ -4760,22 +4449,14 @@ Mode18_LoadThumb_Tbl5D44::
 ; C: 2 sets x 4 records {lo; hi; bank} (index [$D5EA] x 4 + thumbnail): $C8 B copied to the matching word of
 ; Mode18_LoadThumb_Tbl5D44: 11:7200 7300 7400 7500 / 11:7500 7D00 7600 7E00 (the Gfx_11_*_Icon06_5D54 rows)
 Mode18_LoadThumb_Tbl5D54::
-    dw Gfx_11_7200_Icon06_5D54
-    db BANK(Gfx_11_7200_Icon06_5D54)
-    dw Gfx_11_7300_Icon06_5D54
-    db BANK(Gfx_11_7300_Icon06_5D54)
-    dw Gfx_11_7400_Icon06_5D54
-    db BANK(Gfx_11_7400_Icon06_5D54)
-    dw Gfx_11_7500_Icon06_5D54
-    db BANK(Gfx_11_7500_Icon06_5D54)
-    dw Gfx_11_7500_Icon06_5D54
-    db BANK(Gfx_11_7500_Icon06_5D54)
-    dw Gfx_11_7D00_Icon06_5D54
-    db BANK(Gfx_11_7D00_Icon06_5D54)
-    dw Gfx_11_7600_Icon06_5D54
-    db BANK(Gfx_11_7600_Icon06_5D54)
-    dw Gfx_11_7E00_Icon06_5D54
-    db BANK(Gfx_11_7E00_Icon06_5D54)
+    dwb Gfx_11_7200_Icon06_5D54
+    dwb Gfx_11_7300_Icon06_5D54
+    dwb Gfx_11_7400_Icon06_5D54
+    dwb Gfx_11_7500_Icon06_5D54
+    dwb Gfx_11_7500_Icon06_5D54
+    dwb Gfx_11_7D00_Icon06_5D54
+    dwb Gfx_11_7600_Icon06_5D54
+    dwb Gfx_11_7E00_Icon06_5D54
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (44 hits in 9 runs: 18:00 x28 18:01 x16;
 ; tcrf_check/assets/mode_state_wp/)
@@ -4786,21 +4467,9 @@ Mode18_DrawThumbFrame::
     cp $ff                                        ; $5D6F
     jr nz, jr_006_5da1                            ; $5D71
 
-    ld a, BANK(Gfx_11_7C40_Mode18_DrawThumbFrame) ; $5D73
-    ld hl, Gfx_11_7C40_Mode18_DrawThumbFrame      ; $5D75
-    ld de, $8c20                                  ; $5D78
-    ld bc, $0010                                  ; $5D7B
-    call Vram_CopyFromBank                        ; $5D7E
-    ld a, BANK(Gfx_11_7C40_Mode18_DrawThumbFrame) ; $5D81
-    ld hl, Gfx_11_7C40_Mode18_DrawThumbFrame      ; $5D83
-    ld de, $8c50                                  ; $5D86
-    ld bc, $0010                                  ; $5D89
-    call Vram_CopyFromBank                        ; $5D8C
-    ld a, BANK(Gfx_11_7C40_Mode18_DrawThumbFrame) ; $5D8F
-    ld hl, Gfx_11_7C40_Mode18_DrawThumbFrame      ; $5D91
-    ld de, $8c60                                  ; $5D94
-    ld bc, $0010                                  ; $5D97
-    call Vram_CopyFromBank                        ; $5D9A
+    farcopy Vram_CopyFromBank, Gfx_11_7C40_Mode18_DrawThumbFrame, $8c20, $0010 ; $5D73
+    farcopy Vram_CopyFromBank, Gfx_11_7C40_Mode18_DrawThumbFrame, $8c50, $0010 ; $5D81
+    farcopy Vram_CopyFromBank, Gfx_11_7C40_Mode18_DrawThumbFrame, $8c60, $0010 ; $5D8F
     pop hl                                        ; $5D9D
     pop bc                                        ; $5D9E
     pop af                                        ; $5D9F
@@ -4943,56 +4612,16 @@ jr_006_5e44:
     ld hl, $a000                                  ; $5E83
     ld bc, $1000                                  ; $5E86
     call Mem_Zero                                 ; $5E89
-    ld a, BANK(Gfx_17_4980_Mode17_State08_Split_Build); $5E8C
-    ld hl, Gfx_17_4980_Mode17_State08_Split_Build ; $5E8E
-    ld de, $8cc0                                  ; $5E91
-    ld bc, $0260                                  ; $5E94
-    call Mem_CopyFromBank                         ; $5E97
-    ld a, BANK(Gfx_17_5440_Mode14_State00_Init)   ; $5E9A
-    ld hl, Gfx_17_5440_Mode14_State00_Init        ; $5E9C
-    ld de, $8f20                                  ; $5E9F
-    ld bc, $00a0                                  ; $5EA2
-    call Mem_CopyFromBank                         ; $5EA5
-    ld a, BANK(Gfx_17_4940_Mode14_State00_Init)   ; $5EA8
-    ld hl, Gfx_17_4940_Mode14_State00_Init        ; $5EAA
-    ld de, $8fd0                                  ; $5EAD
-    ld bc, $0020                                  ; $5EB0
-    call Mem_CopyFromBank                         ; $5EB3
-    ld a, BANK(Gfx_17_4960_Mode14_State00_Init)   ; $5EB6
-    ld hl, Gfx_17_4960_Mode14_State00_Init        ; $5EB8
-    ld de, $86e0                                  ; $5EBB
-    ld bc, $0020                                  ; $5EBE
-    call Mem_CopyFromBank                         ; $5EC1
-    ld a, BANK(Gfx_17_4140_Mode14_State00_Init)   ; $5EC4
-    ld hl, Gfx_17_4140_Mode14_State00_Init        ; $5EC6
-    ld de, $8a00                                  ; $5EC9
-    ld bc, $0040                                  ; $5ECC
-    call Mem_CopyFromBank                         ; $5ECF
-    ld a, BANK(Gfx_17_4180_Mode14_State00_Init)   ; $5ED2
-    ld hl, Gfx_17_4180_Mode14_State00_Init        ; $5ED4
-    ld de, $8a40                                  ; $5ED7
-    ld bc, $0080                                  ; $5EDA
-    call Mem_CopyFromBank                         ; $5EDD
-    ld a, BANK(Gfx_17_4960_Mode14_State00_Init)   ; $5EE0
-    ld hl, Gfx_17_4960_Mode14_State00_Init        ; $5EE2
-    ld de, $86e0                                  ; $5EE5
-    ld bc, $0020                                  ; $5EE8
-    call Mem_CopyFromBank                         ; $5EEB
-    ld a, BANK(Gfx_17_4680_Mode0F_State05_ConfirmInit); $5EEE
-    ld hl, Gfx_17_4680_Mode0F_State05_ConfirmInit ; $5EF0
-    ld de, $8600                                  ; $5EF3
-    ld bc, $0080                                  ; $5EF6
-    call Mem_CopyFromBank                         ; $5EF9
-    ld a, BANK(Gfx_17_54E0_Mode14_State00_Init)   ; $5EFC
-    ld hl, Gfx_17_54E0_Mode14_State00_Init        ; $5EFE
-    ld de, $8740                                  ; $5F01
-    ld bc, $0020                                  ; $5F04
-    call Mem_CopyFromBank                         ; $5F07
-    ld a, BANK(Map_25_47C0_Mode14_State0C_Reinit) ; $5F0A
-    ld hl, Map_25_47C0_Mode14_State0C_Reinit      ; $5F0C
-    ld de, $9800                                  ; $5F0F
-    ld bc, $02c0                                  ; $5F12
-    call Mem_CopyFromBank                         ; $5F15
+    farcopy Mem_CopyFromBank, Gfx_17_4980_Mode17_State08_Split_Build, $8cc0, $0260 ; $5E8C
+    farcopy Mem_CopyFromBank, Gfx_17_5440_Mode14_State00_Init, $8f20, $00a0 ; $5E9A
+    farcopy Mem_CopyFromBank, Gfx_17_4940_Mode14_State00_Init, $8fd0, $0020 ; $5EA8
+    farcopy Mem_CopyFromBank, Gfx_17_4960_Mode14_State00_Init, $86e0, $0020 ; $5EB6
+    farcopy Mem_CopyFromBank, Gfx_17_4140_Mode14_State00_Init, $8a00, $0040 ; $5EC4
+    farcopy Mem_CopyFromBank, Gfx_17_4180_Mode14_State00_Init, $8a40, $0080 ; $5ED2
+    farcopy Mem_CopyFromBank, Gfx_17_4960_Mode14_State00_Init, $86e0, $0020 ; $5EE0
+    farcopy Mem_CopyFromBank, Gfx_17_4680_Mode0F_State05_ConfirmInit, $8600, $0080 ; $5EEE
+    farcopy Mem_CopyFromBank, Gfx_17_54E0_Mode14_State00_Init, $8740, $0020 ; $5EFC
+    farcopy Mem_CopyFromBank, Map_25_47C0_Mode14_State0C_Reinit, $9800, $02c0 ; $5F0A
     ld hl, $8ff0                                  ; $5F18
     ld bc, $0010                                  ; $5F1B
     ld de, $00ff                                  ; $5F1E
@@ -5040,8 +4669,7 @@ jr_006_5f82:
     bit 0, [hl]                                   ; $5F82
     jr nz, jr_006_5f82                            ; $5F84
 
-    ld hl, wState                                 ; $5F86
-    inc [hl]                                      ; $5F89
+    next_state                                    ; $5F86
     ret                                           ; $5F8A
 
 
@@ -5052,9 +4680,7 @@ Cam_SetGainContrast::
     ld a, [wCamGainSel]                           ; $5F8F
     ld b, a                                       ; $5F92
     ldh [hFarcallAArg], a                         ; $5F93
-    ld a, BANK(Cam_FarStub_BuildDitherMatrix)     ; $5F95
-    ld hl, Cam_FarStub_BuildDitherMatrix          ; $5F97
-    call Far_Call                                 ; $5F9A
+    farcall Cam_FarStub_BuildDitherMatrix         ; $5F95
     ret                                           ; $5F9D
 
 
@@ -5112,9 +4738,7 @@ jr_006_5fe8:
 jr_006_600f:
     ld a, [wCamBrightnessSetpoint]                ; $600F
     ldh [hFarcallAArg], a                         ; $6012
-    ld a, BANK(Cam_FarStub_MainDispatch)          ; $6014
-    ld hl, Cam_FarStub_MainDispatch               ; $6016
-    call Far_Call                                 ; $6019
+    farcall Cam_FarStub_MainDispatch              ; $6014
 
 jr_006_601c:
     call Shoot_SetCaptureMode                     ; $601C
@@ -5126,8 +4750,7 @@ jr_006_601c:
     ld a, SFX1_KEY_B                              ; $6026
     call Snd_Sfx1                                 ; $6028
     pop af                                        ; $602B
-    ld a, STATE_14_LEAVE_BY_VARIANT               ; $602C
-    ld [wState], a                                ; $602E
+    set_state STATE_14_LEAVE_BY_VARIANT           ; $602C
     ret                                           ; $6031
 
 
@@ -5151,14 +4774,12 @@ jr_006_6032:
     cp $02                                        ; $6050
     jr nz, jr_006_605a                            ; $6052
 
-    ld a, STATE_14_SHOT                           ; $6054
-    ld [wState], a                                ; $6056
+    set_state STATE_14_SHOT                       ; $6054
     ret                                           ; $6059
 
 
 jr_006_605a:
-    ld hl, wState                                 ; $605A
-    inc [hl]                                      ; $605D
+    next_state                                    ; $605A
     ret                                           ; $605E
 
 
@@ -5175,8 +4796,7 @@ jr_006_605f:
     cp $1e                                        ; $6070
     jr c, jr_006_607a                             ; $6072
 
-    ld a, STATE_14_RESULT_PREPARE                 ; $6074
-    ld [wState], a                                ; $6076
+    set_state STATE_14_RESULT_PREPARE             ; $6074
     ret                                           ; $6079
 
 
@@ -5187,8 +4807,7 @@ jr_006_607a:
 
     call Shoot_DrawShotsLeft                      ; $6080
     call Shoot_PlayShutterSound                   ; $6083
-    ld hl, wState                                 ; $6086
-    inc [hl]                                      ; $6089
+    next_state                                    ; $6086
     ret                                           ; $608A
 
 
@@ -5220,16 +4839,14 @@ jr_006_609e:
     ld [wTimerLastVbl], a                         ; $60AE
     call Shoot_DrawShotsLeft                      ; $60B1
     call Shoot_PlayShutterSound                   ; $60B4
-    ld a, STATE_14_SHOT                           ; $60B7
-    ld [wState], a                                ; $60B9
+    set_state STATE_14_SHOT                       ; $60B7
     ret                                           ; $60BC
 
 
 jr_006_60bd:
     call Shoot_DrawShotsLeft                      ; $60BD
     call Shoot_PlayShutterSound                   ; $60C0
-    ld hl, wState                                 ; $60C3
-    inc [hl]                                      ; $60C6
+    next_state                                    ; $60C3
     ret                                           ; $60C7
 
 
@@ -5244,8 +4861,7 @@ Mode14_State01_LiveView_OptionKey::
     call Snd_Sfx1                                 ; $60CE
     pop af                                        ; $60D1
     call Shoot_DrawOptionPanel                    ; $60D2
-    ld a, STATE_14_OPTIONS_PAGE                   ; $60D5
-    ld [wState], a                                ; $60D7
+    set_state STATE_14_OPTIONS_PAGE               ; $60D5
     ret                                           ; $60DA
 
 
@@ -5332,9 +4948,7 @@ jr_006_6183:
     ld a, [wCamGainSel]                           ; $6187
     ld b, a                                       ; $618A
     ldh [hFarcallAArg], a                         ; $618B
-    ld a, BANK(Cam_FarStub_BuildDitherMatrix)     ; $618D
-    ld hl, Cam_FarStub_BuildDitherMatrix          ; $618F
-    call Far_Call                                 ; $6192
+    farcall Cam_FarStub_BuildDitherMatrix         ; $618D
     ret                                           ; $6195
 
 
@@ -5383,26 +4997,10 @@ jr_006_61a5:
 Shoot_DrawOptionPanel::
     call Oam_ClearShadow                          ; $61D7
     rst Rst08_WaitVBlank                          ; $61DA
-    ld a, BANK(Map_24_7960_Shoot_RestoreViewScreen); $61DB
-    ld hl, Map_24_7960_Shoot_RestoreViewScreen    ; $61DD
-    ld de, $9800                                  ; $61E0
-    ld bc, $02c0                                  ; $61E3
-    call Vram_CopyFromBank                        ; $61E6
-    ld a, BANK(Gfx_17_4C00_Shoot_DrawOptionPanel) ; $61E9
-    ld hl, Gfx_17_4C00_Shoot_DrawOptionPanel      ; $61EB
-    ld de, $8900                                  ; $61EE
-    ld bc, $0400                                  ; $61F1
-    call Vram_CopyFromBank                        ; $61F4
-    ld a, BANK(Gfx_1C_5600_Album_ShowPageScreenB) ; $61F7
-    ld hl, Gfx_1C_5600_Album_ShowPageScreenB      ; $61F9
-    ld de, $87e0                                  ; $61FC
-    ld bc, $0020                                  ; $61FF
-    call Vram_CopyFromBank                        ; $6202
-    ld a, BANK(Map_24_6E60_Shoot_DrawOptionPanel) ; $6205
-    ld hl, Map_24_6E60_Shoot_DrawOptionPanel      ; $6207
-    ld de, $9800                                  ; $620A
-    ld bc, $02c0                                  ; $620D
-    call Vram_CopyFromBank                        ; $6210
+    farcopy Vram_CopyFromBank, Map_24_7960_Shoot_RestoreViewScreen, $9800, $02c0 ; $61DB
+    farcopy Vram_CopyFromBank, Gfx_17_4C00_Shoot_DrawOptionPanel, $8900, $0400 ; $61E9
+    farcopy Vram_CopyFromBank, Gfx_1C_5600_Album_ShowPageScreenB, $87e0, $0020 ; $61F7
+    farcopy Vram_CopyFromBank, Map_24_6E60_Shoot_DrawOptionPanel, $9800, $02c0 ; $6205
     ret                                           ; $6213
 
 
@@ -5410,27 +5008,11 @@ Shoot_DrawOptionPanel::
 Shoot_RestoreViewScreen::
     call Oam_ClearShadow                          ; $6214
     rst Rst08_WaitVBlank                          ; $6217
-    ld a, BANK(Map_24_7960_Shoot_RestoreViewScreen); $6218
-    ld hl, Map_24_7960_Shoot_RestoreViewScreen    ; $621A
-    ld de, $9800                                  ; $621D
-    ld bc, $02c0                                  ; $6220
-    call Vram_CopyFromBank                        ; $6223
-    ld a, BANK(Gfx_17_4980_Mode17_State08_Split_Build); $6226
-    ld hl, Gfx_17_4980_Mode17_State08_Split_Build ; $6228
-    ld de, $8cc0                                  ; $622B
-    ld bc, $0260                                  ; $622E
-    call Vram_CopyFromBank                        ; $6231
-    ld a, BANK(Gfx_17_5440_Mode14_State00_Init)   ; $6234
-    ld hl, Gfx_17_5440_Mode14_State00_Init        ; $6236
-    ld de, $8f20                                  ; $6239
-    ld bc, $00a0                                  ; $623C
-    call Vram_CopyFromBank                        ; $623F
+    farcopy Vram_CopyFromBank, Map_24_7960_Shoot_RestoreViewScreen, $9800, $02c0 ; $6218
+    farcopy Vram_CopyFromBank, Gfx_17_4980_Mode17_State08_Split_Build, $8cc0, $0260 ; $6226
+    farcopy Vram_CopyFromBank, Gfx_17_5440_Mode14_State00_Init, $8f20, $00a0 ; $6234
     call Shoot_ClearEffectTiles                   ; $6242
-    ld a, BANK(Map_25_47C0_Mode14_State0C_Reinit) ; $6245
-    ld hl, Map_25_47C0_Mode14_State0C_Reinit      ; $6247
-    ld de, $9800                                  ; $624A
-    ld bc, $02c0                                  ; $624D
-    call Vram_CopyFromBank                        ; $6250
+    farcopy Vram_CopyFromBank, Map_25_47C0_Mode14_State0C_Reinit, $9800, $02c0 ; $6245
     ret                                           ; $6253
 
 
@@ -5610,8 +5192,7 @@ jr_006_6362:
 
 jr_006_637f:
     call Shoot_LoadVariantScreen                  ; $637F
-    ld a, STATE_14_LIVE_VIEW                      ; $6382
-    ld [wState], a                                ; $6384
+    set_state STATE_14_LIVE_VIEW                  ; $6382
     ret                                           ; $6387
 
 
@@ -5628,9 +5209,7 @@ Mode14_State02_Shutter_JumpTbl6388::
 ; (coverage/results/merged_state/cov.npz)
 Shoot_ShutterVariant0::
     ldh [hFarcallAArg], a                         ; $6390
-    ld a, BANK(Photo_SaveShot_Far)                ; $6392
-    ld hl, Photo_SaveShot_Far                     ; $6394
-    call Far_Call                                 ; $6397
+    farcall Photo_SaveShot_Far                    ; $6392
     call Snd_PlayTagDigits                        ; $639A
     call Counters_IncTaken                        ; $639D
     ld a, [wShootVariant]                         ; $63A0
@@ -5645,8 +5224,7 @@ Shoot_ShutterVariant0::
 
 jr_006_63b3:
     call Shoot_LoadVariantScreen                  ; $63B3
-    ld a, STATE_14_LIVE_VIEW                      ; $63B6
-    ld [wState], a                                ; $63B8
+    set_state STATE_14_LIVE_VIEW                  ; $63B6
     ret                                           ; $63BB
 
 
@@ -5654,9 +5232,7 @@ jr_006_63b3:
 ; (coverage/results/merged_state/cov.npz)
 Shoot_ShutterVariant1::
     ldh [hFarcallAArg], a                         ; $63BC
-    ld a, BANK(Photo_SaveShot_Far)                ; $63BE
-    ld hl, Photo_SaveShot_Far                     ; $63C0
-    call Far_Call                                 ; $63C3
+    farcall Photo_SaveShot_Far                    ; $63BE
     call Snd_PlayTagDigits                        ; $63C6
     call Counters_IncTaken                        ; $63C9
     ld a, [wBurstCount]                           ; $63CC
@@ -5677,14 +5253,12 @@ Shoot_ShutterVariant1::
     and a                                         ; $63EB
     jr z, jr_006_63f4                             ; $63EC
 
-    ld a, STATE_14_LIVE_VIEW                      ; $63EE
-    ld [wState], a                                ; $63F0
+    set_state STATE_14_LIVE_VIEW                  ; $63EE
     ret                                           ; $63F3
 
 
 jr_006_63f4:
-    ld a, STATE_14_LEAVE_BY_VARIANT               ; $63F4
-    ld [wState], a                                ; $63F6
+    set_state STATE_14_LEAVE_BY_VARIANT           ; $63F4
     ret                                           ; $63F9
 
 
@@ -5692,9 +5266,7 @@ jr_006_63f4:
 ; (coverage/results/merged_state/cov.npz)
 Shoot_ShutterVariant2::
     ldh [hFarcallAArg], a                         ; $63FA
-    ld a, BANK(Photo_SaveShot_Far)                ; $63FC
-    ld hl, Photo_SaveShot_Far                     ; $63FE
-    call Far_Call                                 ; $6401
+    farcall Photo_SaveShot_Far                    ; $63FC
     call Snd_PlayTagDigits                        ; $6404
     call Counters_IncTaken                        ; $6407
     ld a, [wBurstCount]                           ; $640A
@@ -5715,14 +5287,12 @@ Shoot_ShutterVariant2::
     and a                                         ; $6429
     jr z, jr_006_6432                             ; $642A
 
-    ld a, STATE_14_LIVE_VIEW                      ; $642C
-    ld [wState], a                                ; $642E
+    set_state STATE_14_LIVE_VIEW                  ; $642C
     ret                                           ; $6431
 
 
 jr_006_6432:
-    ld a, STATE_14_LEAVE_BY_VARIANT               ; $6432
-    ld [wState], a                                ; $6434
+    set_state STATE_14_LEAVE_BY_VARIANT           ; $6432
     ret                                           ; $6437
 
 
@@ -5730,11 +5300,8 @@ jr_006_6432:
 ; (coverage/results/merged_state/cov.npz)
 Shoot_ShutterVariant3::
     ldh [hFarcallAArg], a                         ; $6438
-    ld a, BANK(GameFace_Store_Far)                ; $643A
-    ld hl, GameFace_Store_Far                     ; $643C
-    call Far_Call                                 ; $643F
-    ld a, STATE_14_LEAVE_BY_VARIANT               ; $6442
-    ld [wState], a                                ; $6444
+    farcall GameFace_Store_Far                    ; $643A
+    set_state STATE_14_LEAVE_BY_VARIANT           ; $6442
     ret                                           ; $6447
 
 
@@ -5811,9 +5378,7 @@ Mode14_State03_Shot::
     call Oam_ClearShadow                          ; $64BF
     rst Rst08_WaitVBlank                          ; $64C2
     ldh [hFarcallAArg], a                         ; $64C3
-    ld a, BANK(Photo_SaveShot_Far)                ; $64C5
-    ld hl, Photo_SaveShot_Far                     ; $64C7
-    call Far_Call                                 ; $64CA
+    farcall Photo_SaveShot_Far                    ; $64C5
     call Counters_IncTaken                        ; $64CD
     ld a, [wShootVariant]                         ; $64D0
     cp $02                                        ; $64D3
@@ -5852,8 +5417,7 @@ jr_006_64fb:
 
 jr_006_6507:
     call Shoot_LoadVariantScreen                  ; $6507
-    ld a, STATE_14_LIVE_VIEW                      ; $650A
-    ld [wState], a                                ; $650C
+    set_state STATE_14_LIVE_VIEW                  ; $650A
     ret                                           ; $650F
 
 
@@ -5919,8 +5483,7 @@ jr_006_656d:
     call Snd_Sfx1                                 ; $6576
     pop af                                        ; $6579
     call Shoot_RestoreViewScreen                  ; $657A
-    ld a, STATE_14_LIVE_VIEW                      ; $657D
-    ld [wState], a                                ; $657F
+    set_state STATE_14_LIVE_VIEW                  ; $657D
     ret                                           ; $6582
 
 
@@ -5941,21 +5504,9 @@ jr_006_6583:
     call Snd_Sfx1                                 ; $6598
     pop af                                        ; $659B
     call Oam_ClearShadow                          ; $659C
-    ld a, BANK(Gfx_17_5200_Mode14_State04_OptionsPage); $659F
-    ld hl, Gfx_17_5200_Mode14_State04_OptionsPage ; $65A1
-    ld de, $8d00                                  ; $65A4
-    ld bc, $0200                                  ; $65A7
-    call Vram_CopyFromBank                        ; $65AA
-    ld a, BANK(Gfx_1C_5BE0_Mode09_State02_PhotoArrows); $65AD
-    ld hl, Gfx_1C_5BE0_Mode09_State02_PhotoArrows ; $65AF
-    ld de, $8680                                  ; $65B2
-    ld bc, $0040                                  ; $65B5
-    call Vram_CopyFromBank                        ; $65B8
-    ld a, BANK(Gfx_1C_5CE0_Mode09_State02_PhotoArrows); $65BB
-    ld hl, Gfx_1C_5CE0_Mode09_State02_PhotoArrows ; $65BD
-    ld de, $8780                                  ; $65C0
-    ld bc, $0040                                  ; $65C3
-    call Vram_CopyFromBank                        ; $65C6
+    farcopy Vram_CopyFromBank, Gfx_17_5200_Mode14_State04_OptionsPage, $8d00, $0200 ; $659F
+    farcopy Vram_CopyFromBank, Gfx_1C_5BE0_Mode09_State02_PhotoArrows, $8680, $0040 ; $65AD
+    farcopy Vram_CopyFromBank, Gfx_1C_5CE0_Mode09_State02_PhotoArrows, $8780, $0040 ; $65BB
     ld a, [wShootRampSel]                         ; $65C9
     ld [wChoiceCursorA], a                        ; $65CC
     ld hl, Slide_ScyDeltaTbl                      ; $65CF
@@ -5974,8 +5525,7 @@ jr_006_65d4:
     dec b                                         ; $65DF
     jr nz, jr_006_65d4                            ; $65E0
 
-    ld a, STATE_14_OPTION_DITHER                  ; $65E2
-    ld [wState], a                                ; $65E4
+    set_state STATE_14_OPTION_DITHER              ; $65E2
     ret                                           ; $65E7
 
 
@@ -5988,21 +5538,9 @@ jr_006_65e8:
     call Snd_Sfx1                                 ; $65EF
     pop af                                        ; $65F2
     call Oam_ClearShadow                          ; $65F3
-    ld a, BANK(Gfx_17_5200_Mode14_State04_OptionsPage); $65F6
-    ld hl, Gfx_17_5200_Mode14_State04_OptionsPage ; $65F8
-    ld de, $8d00                                  ; $65FB
-    ld bc, $0200                                  ; $65FE
-    call Vram_CopyFromBank                        ; $6601
-    ld a, BANK(Gfx_1C_5BE0_Mode09_State02_PhotoArrows); $6604
-    ld hl, Gfx_1C_5BE0_Mode09_State02_PhotoArrows ; $6606
-    ld de, $8680                                  ; $6609
-    ld bc, $0040                                  ; $660C
-    call Vram_CopyFromBank                        ; $660F
-    ld a, BANK(Gfx_1C_5CE0_Mode09_State02_PhotoArrows); $6612
-    ld hl, Gfx_1C_5CE0_Mode09_State02_PhotoArrows ; $6614
-    ld de, $8780                                  ; $6617
-    ld bc, $0040                                  ; $661A
-    call Vram_CopyFromBank                        ; $661D
+    farcopy Vram_CopyFromBank, Gfx_17_5200_Mode14_State04_OptionsPage, $8d00, $0200 ; $65F6
+    farcopy Vram_CopyFromBank, Gfx_1C_5BE0_Mode09_State02_PhotoArrows, $8680, $0040 ; $6604
+    farcopy Vram_CopyFromBank, Gfx_1C_5CE0_Mode09_State02_PhotoArrows, $8780, $0040 ; $6612
     ld a, [wShutterSound]                         ; $6620
     ld [wChoiceCursorA], a                        ; $6623
     ld hl, Slide_ScyDeltaTbl                      ; $6626
@@ -6021,8 +5559,7 @@ jr_006_662b:
     dec b                                         ; $6636
     jr nz, jr_006_662b                            ; $6637
 
-    ld a, STATE_14_OPTION_SHUTTER_SOUND           ; $6639
-    ld [wState], a                                ; $663B
+    set_state STATE_14_OPTION_SHUTTER_SOUND       ; $6639
     ret                                           ; $663E
 
 
@@ -6040,16 +5577,8 @@ jr_006_663f:
     ld de, $8d00                                  ; $6652
     ld bc, $0200                                  ; $6655
     call Vram_CopyFromBank                        ; $6658
-    ld a, BANK(Gfx_1C_5B80_Mode09_State02_PhotoArrows); $665B
-    ld hl, Gfx_1C_5B80_Mode09_State02_PhotoArrows ; $665D
-    ld de, $8680                                  ; $6660
-    ld bc, $0040                                  ; $6663
-    call Vram_CopyFromBank                        ; $6666
-    ld a, BANK(Gfx_1C_5C80_Mode09_State02_PhotoArrows); $6669
-    ld hl, Gfx_1C_5C80_Mode09_State02_PhotoArrows ; $666B
-    ld de, $8780                                  ; $666E
-    ld bc, $0040                                  ; $6671
-    call Vram_CopyFromBank                        ; $6674
+    farcopy Vram_CopyFromBank, Gfx_1C_5B80_Mode09_State02_PhotoArrows, $8680, $0040 ; $665B
+    farcopy Vram_CopyFromBank, Gfx_1C_5C80_Mode09_State02_PhotoArrows, $8780, $0040 ; $6669
     ld a, [wShootCaptureSel]                      ; $6677
     ld [wChoiceCursorA], a                        ; $667A
     ld hl, Slide_ScyDeltaTbl                      ; $667D
@@ -6071,8 +5600,7 @@ jr_006_6682:
     dec b                                         ; $6692
     jr nz, jr_006_6682                            ; $6693
 
-    ld a, STATE_14_OPTION_PALETTE                 ; $6695
-    ld [wState], a                                ; $6697
+    set_state STATE_14_OPTION_PALETTE             ; $6695
     ret                                           ; $669A
 
 
@@ -6090,16 +5618,8 @@ jr_006_669b:
     ld de, $8d00                                  ; $66AD
     ld bc, $0200                                  ; $66B0
     call Vram_CopyFromBank                        ; $66B3
-    ld a, BANK(Gfx_1C_5B80_Mode09_State02_PhotoArrows); $66B6
-    ld hl, Gfx_1C_5B80_Mode09_State02_PhotoArrows ; $66B8
-    ld de, $8680                                  ; $66BB
-    ld bc, $0040                                  ; $66BE
-    call Vram_CopyFromBank                        ; $66C1
-    ld a, BANK(Gfx_1C_5C80_Mode09_State02_PhotoArrows); $66C4
-    ld hl, Gfx_1C_5C80_Mode09_State02_PhotoArrows ; $66C6
-    ld de, $8780                                  ; $66C9
-    ld bc, $0040                                  ; $66CC
-    call Vram_CopyFromBank                        ; $66CF
+    farcopy Vram_CopyFromBank, Gfx_1C_5B80_Mode09_State02_PhotoArrows, $8680, $0040 ; $66B6
+    farcopy Vram_CopyFromBank, Gfx_1C_5C80_Mode09_State02_PhotoArrows, $8780, $0040 ; $66C4
     ld a, [wShootEffectSel]                       ; $66D2
     ld [wChoiceCursorA], a                        ; $66D5
     ld hl, Slide_ScyDeltaTbl                      ; $66D8
@@ -6121,8 +5641,7 @@ jr_006_66dd:
     dec b                                         ; $66ED
     jr nz, jr_006_66dd                            ; $66EE
 
-    ld a, STATE_14_OPTION_FLIP_EFFECT             ; $66F0
-    ld [wState], a                                ; $66F2
+    set_state STATE_14_OPTION_FLIP_EFFECT         ; $66F0
     ret                                           ; $66F5
 
 
@@ -6159,15 +5678,13 @@ jr_006_6712:
     bit 0, a                                      ; $6721
     jr nz, jr_006_672b                            ; $6723
 
-    ld a, STATE_14_OPTIONS_PAGE                   ; $6725
-    ld [wState], a                                ; $6727
+    set_state STATE_14_OPTIONS_PAGE               ; $6725
     ret                                           ; $672A
 
 
 jr_006_672b:
     call Shoot_RestoreViewScreen                  ; $672B
-    ld a, STATE_14_LIVE_VIEW                      ; $672E
-    ld [wState], a                                ; $6730
+    set_state STATE_14_LIVE_VIEW                  ; $672E
     ret                                           ; $6733
 
 
@@ -6199,9 +5716,7 @@ jr_006_673c:
     ld a, [wCamGainSel]                           ; $675A
     ld b, a                                       ; $675D
     ldh [hFarcallAArg], a                         ; $675E
-    ld a, BANK(Cam_FarStub_BuildDitherMatrix)     ; $6760
-    ld hl, Cam_FarStub_BuildDitherMatrix          ; $6762
-    call Far_Call                                 ; $6765
+    farcall Cam_FarStub_BuildDitherMatrix         ; $6760
     ret                                           ; $6768
 
 
@@ -6346,15 +5861,13 @@ jr_006_6805:
     bit 0, a                                      ; $6814
     jr nz, jr_006_681e                            ; $6816
 
-    ld a, STATE_14_OPTIONS_PAGE                   ; $6818
-    ld [wState], a                                ; $681A
+    set_state STATE_14_OPTIONS_PAGE               ; $6818
     ret                                           ; $681D
 
 
 jr_006_681e:
     call Shoot_RestoreViewScreen                  ; $681E
-    ld a, STATE_14_LIVE_VIEW                      ; $6821
-    ld [wState], a                                ; $6823
+    set_state STATE_14_LIVE_VIEW                  ; $6821
     ret                                           ; $6826
 
 
@@ -6503,15 +6016,13 @@ jr_006_68ce:
     bit 0, a                                      ; $68E2
     jr nz, jr_006_68ec                            ; $68E4
 
-    ld a, STATE_14_OPTIONS_PAGE                   ; $68E6
-    ld [wState], a                                ; $68E8
+    set_state STATE_14_OPTIONS_PAGE               ; $68E6
     ret                                           ; $68EB
 
 
 jr_006_68ec:
     call Shoot_RestoreViewScreen                  ; $68EC
-    ld a, STATE_14_LIVE_VIEW                      ; $68EF
-    ld [wState], a                                ; $68F1
+    set_state STATE_14_LIVE_VIEW                  ; $68EF
     ret                                           ; $68F4
 
 
@@ -6680,8 +6191,7 @@ jr_006_69d0:
     bit 0, a                                      ; $69E4
     jr nz, jr_006_6a2c                            ; $69E6
 
-    ld a, STATE_14_OPTIONS_PAGE                   ; $69E8
-    ld [wState], a                                ; $69EA
+    set_state STATE_14_OPTIONS_PAGE               ; $69E8
     ld a, [wShootEffectSel]                       ; $69ED
     call Shoot_LoadEffectGfxA                     ; $69F0
     call Shoot_SetupCapture                       ; $69F3
@@ -6709,8 +6219,7 @@ jr_006_69d0:
 
 jr_006_6a2c:
     call Shoot_RestoreViewScreen                  ; $6A2C
-    ld a, STATE_14_LIVE_VIEW                      ; $6A2F
-    ld [wState], a                                ; $6A31
+    set_state STATE_14_LIVE_VIEW                  ; $6A2F
     ret                                           ; $6A34
 
 
@@ -6881,11 +6390,7 @@ Shoot_LoadBurstIcons::
     and a                                         ; $6B79
     jr nz, jr_006_6b8b                            ; $6B7A
 
-    ld a, BANK(Gfx_17_4700_Shoot_LoadBurstIcons)  ; $6B7C
-    ld hl, Gfx_17_4700_Shoot_LoadBurstIcons       ; $6B7E
-    ld de, $8500                                  ; $6B81
-    ld bc, $0100                                  ; $6B84
-    call Vram_CopyFromBankAuto                    ; $6B87
+    farcopy Vram_CopyFromBankAuto, Gfx_17_4700_Shoot_LoadBurstIcons, $8500, $0100 ; $6B7C
     ret                                           ; $6B8A
 
 
@@ -6893,16 +6398,8 @@ jr_006_6b8b:
     cp $01                                        ; $6B8B
     jr nz, jr_006_6bac                            ; $6B8D
 
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6B8F
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6B91
-    ld de, $8500                                  ; $6B94
-    ld bc, $0040                                  ; $6B97
-    call Vram_CopyFromBankAuto                    ; $6B9A
-    ld a, BANK(Gfx_17_4740_Shoot_LoadBurstIcons)  ; $6B9D
-    ld hl, Gfx_17_4740_Shoot_LoadBurstIcons       ; $6B9F
-    ld de, $8540                                  ; $6BA2
-    ld bc, $00c0                                  ; $6BA5
-    call Vram_CopyFromBankAuto                    ; $6BA8
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8500, $0040 ; $6B8F
+    farcopy Vram_CopyFromBankAuto, Gfx_17_4740_Shoot_LoadBurstIcons, $8540, $00c0 ; $6B9D
     ret                                           ; $6BAB
 
 
@@ -6910,21 +6407,9 @@ jr_006_6bac:
     cp $02                                        ; $6BAC
     jr nz, jr_006_6bdb                            ; $6BAE
 
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6BB0
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6BB2
-    ld de, $8500                                  ; $6BB5
-    ld bc, $0040                                  ; $6BB8
-    call Vram_CopyFromBankAuto                    ; $6BBB
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6BBE
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6BC0
-    ld de, $8540                                  ; $6BC3
-    ld bc, $0040                                  ; $6BC6
-    call Vram_CopyFromBankAuto                    ; $6BC9
-    ld a, BANK(Gfx_17_4780_Shoot_LoadBurstIcons)  ; $6BCC
-    ld hl, Gfx_17_4780_Shoot_LoadBurstIcons       ; $6BCE
-    ld de, $8580                                  ; $6BD1
-    ld bc, $0080                                  ; $6BD4
-    call Vram_CopyFromBankAuto                    ; $6BD7
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8500, $0040 ; $6BB0
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8540, $0040 ; $6BBE
+    farcopy Vram_CopyFromBankAuto, Gfx_17_4780_Shoot_LoadBurstIcons, $8580, $0080 ; $6BCC
     ret                                           ; $6BDA
 
 
@@ -6932,50 +6417,18 @@ jr_006_6bdb:
     cp $03                                        ; $6BDB
     jr nz, jr_006_6c18                            ; $6BDD
 
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6BDF
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6BE1
-    ld de, $8500                                  ; $6BE4
-    ld bc, $0040                                  ; $6BE7
-    call Vram_CopyFromBankAuto                    ; $6BEA
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6BED
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6BEF
-    ld de, $8540                                  ; $6BF2
-    ld bc, $0040                                  ; $6BF5
-    call Vram_CopyFromBankAuto                    ; $6BF8
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6BFB
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6BFD
-    ld de, $8580                                  ; $6C00
-    ld bc, $0040                                  ; $6C03
-    call Vram_CopyFromBankAuto                    ; $6C06
-    ld a, BANK(Gfx_17_47C0_Shoot_LoadBurstIcons)  ; $6C09
-    ld hl, Gfx_17_47C0_Shoot_LoadBurstIcons       ; $6C0B
-    ld de, $85c0                                  ; $6C0E
-    ld bc, $0040                                  ; $6C11
-    call Vram_CopyFromBankAuto                    ; $6C14
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8500, $0040 ; $6BDF
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8540, $0040 ; $6BED
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8580, $0040 ; $6BFB
+    farcopy Vram_CopyFromBankAuto, Gfx_17_47C0_Shoot_LoadBurstIcons, $85c0, $0040 ; $6C09
     ret                                           ; $6C17
 
 
 jr_006_6c18:
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6C18
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6C1A
-    ld de, $8500                                  ; $6C1D
-    ld bc, $0040                                  ; $6C20
-    call Vram_CopyFromBankAuto                    ; $6C23
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6C26
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6C28
-    ld de, $8540                                  ; $6C2B
-    ld bc, $0040                                  ; $6C2E
-    call Vram_CopyFromBankAuto                    ; $6C31
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6C34
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6C36
-    ld de, $8580                                  ; $6C39
-    ld bc, $0040                                  ; $6C3C
-    call Vram_CopyFromBankAuto                    ; $6C3F
-    ld a, BANK(Gfx_17_5400_Shoot_LoadBurstIcons)  ; $6C42
-    ld hl, Gfx_17_5400_Shoot_LoadBurstIcons       ; $6C44
-    ld de, $85c0                                  ; $6C47
-    ld bc, $0040                                  ; $6C4A
-    call Vram_CopyFromBankAuto                    ; $6C4D
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8500, $0040 ; $6C18
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8540, $0040 ; $6C26
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $8580, $0040 ; $6C34
+    farcopy Vram_CopyFromBankAuto, Gfx_17_5400_Shoot_LoadBurstIcons, $85c0, $0040 ; $6C42
     ret                                           ; $6C50
 
 
@@ -7188,9 +6641,7 @@ Shoot_LoadBurstPhoto::
     add hl, bc                                    ; $6DB9
     ld a, [hl]                                    ; $6DBA
     ldh [hFarcallAArg], a                         ; $6DBB
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $6DBD
-    ld hl, Photo_GetSramAddress_Far               ; $6DBF
-    call Far_Call                                 ; $6DC2
+    farcall Photo_GetSramAddress_Far              ; $6DBD
     ld hl, $0c00                                  ; $6DC5
     add hl, bc                                    ; $6DC8
     ld de, $8900                                  ; $6DC9
@@ -7211,9 +6662,7 @@ Shoot_LoadBurstPhotoB::
     add hl, bc                                    ; $6DDF
     ld a, [hl]                                    ; $6DE0
     ldh [hFarcallAArg], a                         ; $6DE1
-    ld a, BANK(Photo_GetSramAddress_Far)          ; $6DE3
-    ld hl, Photo_GetSramAddress_Far               ; $6DE5
-    call Far_Call                                 ; $6DE8
+    farcall Photo_GetSramAddress_Far              ; $6DE3
     ld hl, $00e0                                  ; $6DEB
     add hl, bc                                    ; $6DEE
     ld de, $8b00                                  ; $6DEF
@@ -7365,20 +6814,12 @@ Shoot_DrawTimerMinutes::
     and a                                         ; $70CD
     jr nz, jr_006_70e3                            ; $70CE
 
-    ld a, BANK(Gfx_17_4950_Shoot_DrawTimerMinutes); $70D0
-    ld hl, Gfx_17_4950_Shoot_DrawTimerMinutes     ; $70D2
-    ld de, $8a90                                  ; $70D5
-    ld bc, $0010                                  ; $70D8
-    call Vram_CopyFromBankAuto                    ; $70DB
+    farcopy Vram_CopyFromBankAuto, Gfx_17_4950_Shoot_DrawTimerMinutes, $8a90, $0010 ; $70D0
     ld a, [wTimerSeconds]                         ; $70DE
     jr jr_006_70f4                                ; $70E1
 
 jr_006_70e3:
-    ld a, BANK(Gfx_17_4BE0_Shoot_DrawTimerMinutes); $70E3
-    ld hl, Gfx_17_4BE0_Shoot_DrawTimerMinutes     ; $70E5
-    ld de, $8a90                                  ; $70E8
-    ld bc, $0010                                  ; $70EB
-    call Vram_CopyFromBankAuto                    ; $70EE
+    farcopy Vram_CopyFromBankAuto, Gfx_17_4BE0_Shoot_DrawTimerMinutes, $8a90, $0010 ; $70E3
     ld a, [wTimerMinutes]                         ; $70F1
 
 jr_006_70f4:
@@ -7682,17 +7123,14 @@ Mode14_State0A_ResultPrepare::
     ld [wSubstate], a                             ; $726A
     ld a, $0d                                     ; $726D
     ld [wResultMsgId], a                          ; $726F
-    ld hl, wState                                 ; $7272
-    inc [hl]                                      ; $7275
+    next_state                                    ; $7272
     ret                                           ; $7276
 
 
 ; C: far call 09:7290
 Mode14_State0B_ResultScreen::
     ldh [hFarcallAArg], a                         ; $7277
-    ld a, BANK(ResultScreen_Far)                  ; $7279
-    ld hl, ResultScreen_Far                       ; $727B
-    call Far_Call                                 ; $727E
+    farcall ResultScreen_Far                      ; $7279
     ret                                           ; $7281
 
 
@@ -7722,56 +7160,16 @@ Mode14_State0C_Reinit::
     ld hl, $9000                                  ; $72B8
     ld bc, $0800                                  ; $72BB
     call Mem_Zero                                 ; $72BE
-    ld a, BANK(Gfx_17_4980_Mode17_State08_Split_Build); $72C1
-    ld hl, Gfx_17_4980_Mode17_State08_Split_Build ; $72C3
-    ld de, $8cc0                                  ; $72C6
-    ld bc, $0260                                  ; $72C9
-    call Mem_CopyFromBank                         ; $72CC
-    ld a, BANK(Gfx_17_5440_Mode14_State00_Init)   ; $72CF
-    ld hl, Gfx_17_5440_Mode14_State00_Init        ; $72D1
-    ld de, $8f20                                  ; $72D4
-    ld bc, $00a0                                  ; $72D7
-    call Mem_CopyFromBank                         ; $72DA
-    ld a, BANK(Gfx_17_4940_Mode14_State00_Init)   ; $72DD
-    ld hl, Gfx_17_4940_Mode14_State00_Init        ; $72DF
-    ld de, $8fd0                                  ; $72E2
-    ld bc, $0020                                  ; $72E5
-    call Mem_CopyFromBank                         ; $72E8
-    ld a, BANK(Gfx_17_4960_Mode14_State00_Init)   ; $72EB
-    ld hl, Gfx_17_4960_Mode14_State00_Init        ; $72ED
-    ld de, $86e0                                  ; $72F0
-    ld bc, $0020                                  ; $72F3
-    call Mem_CopyFromBank                         ; $72F6
-    ld a, BANK(Gfx_17_4140_Mode14_State00_Init)   ; $72F9
-    ld hl, Gfx_17_4140_Mode14_State00_Init        ; $72FB
-    ld de, $8a00                                  ; $72FE
-    ld bc, $0040                                  ; $7301
-    call Mem_CopyFromBank                         ; $7304
-    ld a, BANK(Gfx_17_4180_Mode14_State00_Init)   ; $7307
-    ld hl, Gfx_17_4180_Mode14_State00_Init        ; $7309
-    ld de, $8a40                                  ; $730C
-    ld bc, $0080                                  ; $730F
-    call Mem_CopyFromBank                         ; $7312
-    ld a, BANK(Gfx_17_4960_Mode14_State00_Init)   ; $7315
-    ld hl, Gfx_17_4960_Mode14_State00_Init        ; $7317
-    ld de, $86e0                                  ; $731A
-    ld bc, $0020                                  ; $731D
-    call Mem_CopyFromBank                         ; $7320
-    ld a, BANK(Gfx_17_4680_Mode0F_State05_ConfirmInit); $7323
-    ld hl, Gfx_17_4680_Mode0F_State05_ConfirmInit ; $7325
-    ld de, $8600                                  ; $7328
-    ld bc, $0080                                  ; $732B
-    call Mem_CopyFromBank                         ; $732E
-    ld a, BANK(Gfx_17_54E0_Mode14_State00_Init)   ; $7331
-    ld hl, Gfx_17_54E0_Mode14_State00_Init        ; $7333
-    ld de, $8740                                  ; $7336
-    ld bc, $0020                                  ; $7339
-    call Mem_CopyFromBank                         ; $733C
-    ld a, BANK(Map_25_47C0_Mode14_State0C_Reinit) ; $733F
-    ld hl, Map_25_47C0_Mode14_State0C_Reinit      ; $7341
-    ld de, $9800                                  ; $7344
-    ld bc, $02c0                                  ; $7347
-    call Mem_CopyFromBank                         ; $734A
+    farcopy Mem_CopyFromBank, Gfx_17_4980_Mode17_State08_Split_Build, $8cc0, $0260 ; $72C1
+    farcopy Mem_CopyFromBank, Gfx_17_5440_Mode14_State00_Init, $8f20, $00a0 ; $72CF
+    farcopy Mem_CopyFromBank, Gfx_17_4940_Mode14_State00_Init, $8fd0, $0020 ; $72DD
+    farcopy Mem_CopyFromBank, Gfx_17_4960_Mode14_State00_Init, $86e0, $0020 ; $72EB
+    farcopy Mem_CopyFromBank, Gfx_17_4140_Mode14_State00_Init, $8a00, $0040 ; $72F9
+    farcopy Mem_CopyFromBank, Gfx_17_4180_Mode14_State00_Init, $8a40, $0080 ; $7307
+    farcopy Mem_CopyFromBank, Gfx_17_4960_Mode14_State00_Init, $86e0, $0020 ; $7315
+    farcopy Mem_CopyFromBank, Gfx_17_4680_Mode0F_State05_ConfirmInit, $8600, $0080 ; $7323
+    farcopy Mem_CopyFromBank, Gfx_17_54E0_Mode14_State00_Init, $8740, $0020 ; $7331
+    farcopy Mem_CopyFromBank, Map_25_47C0_Mode14_State0C_Reinit, $9800, $02c0 ; $733F
     ld hl, $9ac0                                  ; $734D
     ld bc, $0140                                  ; $7350
     ld a, $ff                                     ; $7353
@@ -7797,8 +7195,7 @@ Mode14_State0C_Reinit::
     pop af                                        ; $7384
     rst Rst08_WaitVBlank                          ; $7385
     call Pal_FadeIn                               ; $7386
-    ld a, STATE_14_LIVE_VIEW                      ; $7389
-    ld [wState], a                                ; $738B
+    set_state STATE_14_LIVE_VIEW                  ; $7389
     ret                                           ; $738E
 
 
@@ -8890,9 +8287,7 @@ jr_006_7804:
     ld a, [hl]                                    ; $7816
     or e                                          ; $7817
     ldh [hFarcallAArg], a                         ; $7818
-    ld a, BANK(Cam_FarStub_DispatchEffect)        ; $781A
-    ld hl, Cam_FarStub_DispatchEffect             ; $781C
-    call Far_Call                                 ; $781F
+    farcall Cam_FarStub_DispatchEffect            ; $781A
     ret                                           ; $7822
 
 
@@ -8903,9 +8298,7 @@ Counters_IncTaken::
     ld b, $02                                     ; $7828
     call Bcd_AddSaturate                          ; $782A
     ldh [hFarcallAArg], a                         ; $782D
-    ld a, BANK(Counters_Store_Far)                ; $782F
-    ld hl, Counters_Store_Far                     ; $7831
-    call Far_Call                                 ; $7834
+    farcall Counters_Store_Far                    ; $782F
     ret                                           ; $7837
 
 
