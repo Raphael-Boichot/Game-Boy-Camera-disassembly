@@ -1,0 +1,72 @@
+== cam1 Search_for_sensor_at_boot_Hello_Kitty: 58 rows
+   reg1/reg7: reg0 x count  00/05: 23 x2 9F x2 A0 x2 A2 x2 A3 x2 A4 x2 A8 x2 B0 x2 BF x2  20/03: 9F x1 A0 x1 A2 x1 A3 x1 A4 x1 A8 x1 B0 x1 BF x1  20/23: 9F x1 A0 x1 A2 x1 A3 x1 A4 x1 A8 x1 B0 x1 BF x1  24/23: 9F x1 A0 x1 A4 x1 A5 x1 A6 x1 A8 x1 B0 x1 BF x1  28/23: 9F x1 A0 x1 A8 x1 A9 x1 AA x1 AC x1 B0 x1 BF x1  0A/03: 9F x1 A0 x1 A4 x1 A5 x1 A6 x1 A8 x1 B0 x1 BF x1
+   band switches: 00->20 0010->0010; 0A->00 0010->0010; 20->24 0010->0010; 24->28 0010->0010; 28->0A 0010->0010
+== cam1 Exposure_strategy_Hello_Kitty: 153 rows
+   reg1/reg7: reg0 x count  20/03: A2 x45  E0/03: A3 x66  E4/03: A5 x20  E8/03: A9 x11  0A/03: A5 x11
+   band switches: 20->E0 002F->0048; E0->E4 1138->0D80; E4->E8 5F01->3500; E8->0A AC17->8500
+== cam1 Exposure_strategy_Debagame: 128 rows
+   reg1/reg7: reg0 x count  E4/03: 8B x128
+== cam1 00_save: 210 rows
+   reg1/reg7: reg0 x count  20/03: A2 x49  E0/03: A3 x94  E4/03: A5 x35  E8/03: AB x11  0A/03: A5 x21
+   band switches: 20->E0 002E->0048; E0->E4 1133->0D80; E4->E8 591B->3500; E8->0A AC17->8500
+== cam2 Boot: 58 rows
+   reg1/reg7: reg0 x count  00/05: 2D x2 9F x2 A0 x2 A8 x2 AC x2 AD x2 AE x2 B0 x2 BF x2  20/03: 9F x1 A0 x1 A8 x1 A9 x1 AA x1 AC x1 B0 x1 BF x1  20/23: 9F x1 A0 x1 A8 x1 A9 x1 AA x1 AC x1 B0 x1 BF x1  24/23: 9F x1 A0 x1 A8 x1 AA x1 AB x1 AC x1 B0 x1 BF x1  28/23: 9F x1 A0 x1 A8 x1 AC x1 AE x1 AF x1 B0 x1 BF x1  0A/03: 9F x1 A0 x1 A8 x1 A9 x1 AA x1 AC x1 B0 x1 BF x1
+   band switches: 00->20 0010->0010; 0A->00 0010->0010; 20->24 0010->0010; 24->28 0010->0010; 28->0A 0010->0010
+== cam2 Factory_reset: 164 rows
+   reg1 20 C 0030:   8 captures, reg7 03, last reg0 A9
+   reg1 21 C 0030:   8 captures, reg7 03, last reg0 A9
+   reg1 22 C 0030:   8 captures, reg7 03, last reg0 AB
+   reg1 23 C 0030:   8 captures, reg7 03, last reg0 AB
+   reg1 E0 C 0900:   8 captures, reg7 03, last reg0 AB
+   reg1 E1 C 0900:   8 captures, reg7 03, last reg0 AB
+   reg1 E2 C 0900:   8 captures, reg7 03, last reg0 AB
+   reg1 E3 C 0900:   8 captures, reg7 03, last reg0 AD
+   reg1 E4 C 2000:   8 captures, reg7 03, last reg0 AD
+   reg1 E5 C 2000:   8 captures, reg7 03, last reg0 AD
+   reg1 E8 C 3200:   8 captures, reg7 03, last reg0 B1
+   reg1 0A C 8000:   8 captures, reg7 03, last reg0 AB
+   reg1 20 C 0010:   3 captures, reg7 03, last reg0 A9
+   reg1 21 C 0010:   3 captures, reg7 03, last reg0 A9
+   reg1 22 C 0010:   5 captures, reg7 03, last reg0 AA
+   reg1 23 C 0010:   3 captures, reg7 03, last reg0 AA
+   reg1 20 C 0010:   3 captures, reg7 23, last reg0 AA
+   reg1 21 C 0010:   3 captures, reg7 23, last reg0 AB
+   reg1 22 C 0010:   4 captures, reg7 23, last reg0 AB
+   reg1 23 C 0010:   3 captures, reg7 23, last reg0 AC
+   reg1 24 C 0010:   5 captures, reg7 23, last reg0 AC
+   reg1 25 C 0010:   6 captures, reg7 23, last reg0 AD
+   reg1 28 C 0010:   8 captures, reg7 23, last reg0 B1
+   reg1 0A C 0010:  22 captures, reg7 03, last reg0 AA
+   band switches: 0A->20 8000->0010; 20->21 0010->0010; 20->21 0030->0030; 21->22 0010->0010; 21->22 0030->0030; 22->23 0010->0010; 22->23 0030->0030; 23->20 0010->0010; 23->24 0010->0010; 23->E0 0030->0900; 24->25 0010->0010; 25->28 0010->0010; 28->0A 0010->0010; E0->E1 0900->0900; E1->E2 0900->0900; E2->E3 0900->0900; E3->E4 0900->2000; E4->E5 2000->2000; E5->E8 2000->3200; E8->0A 3200->8000
+== cam2 Factory_reset_with_strong_light_source: 540 rows
+   reg1 20 C 0030:   8 captures, reg7 03, last reg0 A7
+   reg1 21 C 0030:   8 captures, reg7 03, last reg0 A7
+   reg1 22 C 0030:   8 captures, reg7 03, last reg0 A7
+   reg1 23 C 0030:   8 captures, reg7 03, last reg0 A7
+   reg1 E0 C 0900:   8 captures, reg7 03, last reg0 9B
+   reg1 E1 C 0900:   9 captures, reg7 02,03, last reg0 93
+   reg1 E2 C 0900:   9 captures, reg7 02,03, last reg0 99
+   reg1 E3 C 0900:   9 captures, reg7 01,02,03, last reg0 9F
+   reg1 E4 C 2000:   9 captures, reg7 01,02,03, last reg0 9F
+   reg1 E5 C 2000:   9 captures, reg7 01,02,03, last reg0 9F
+   reg1 E8 C 3200:   9 captures, reg7 01,02,03, last reg0 9F
+   reg1 0A C 8000:   9 captures, reg7 01,02,03, last reg0 9F
+   reg1 20 C 0010:   7 captures, reg7 03, last reg0 A7
+   reg1 21 C 0010:   8 captures, reg7 03, last reg0 A7
+   reg1 22 C 0010:   8 captures, reg7 03, last reg0 A7
+   reg1 23 C 0010:   9 captures, reg7 03, last reg0 A7
+   reg1 20 C 0010:  84 captures, reg7 23, last reg0 9C
+   reg1 21 C 0010:  94 captures, reg7 22, last reg0 93
+   reg1 22 C 0010:  71 captures, reg7 22, last reg0 9A
+   reg1 23 C 0010:  32 captures, reg7 21, last reg0 9F
+   reg1 24 C 0010:  15 captures, reg7 21, last reg0 9F
+   reg1 25 C 0010:  17 captures, reg7 21, last reg0 9F
+   reg1 28 C 0010:  51 captures, reg7 21, last reg0 9F
+   reg1 0A C 0010:  41 captures, reg7 01, last reg0 9F
+   band switches: 0A->20 8000->0010; 20->21 0010->0010; 20->21 0030->0030; 21->22 0010->0010; 21->22 0030->0030; 22->23 0010->0010; 22->23 0030->0030; 23->20 0010->0010; 23->24 0010->0010; 23->E0 0030->0900; 24->25 0010->0010; 25->28 0010->0010; 28->0A 0010->0010; E0->E1 0900->0900; E1->E2 0900->0900; E2->E3 0900->0900; E3->E4 0900->2000; E4->E5 2000->2000; E5->E8 2000->3200; E8->0A 3200->8000
+== cam2 Normal_use: 860 rows
+   reg1/reg7: reg0 x count  E0/03: A9 x683  20/03: A9 x131  E4/03: AB x46
+   band switches: 20->E0 002E->0048; 20->E0 002F->0048; E0->20 0032->001F; E0->20 0033->001F; E0->20 0036->001F; E0->E4 10BA->0D80; E0->E4 10FC->0D80; E0->E4 11F3->0D80; E4->E0 080D->0B00; E4->E0 0834->0B00; E4->E0 089B->0B00
+== cam2 Violent_exposure_change: 675 rows
+   reg1/reg7: reg0 x count  20/03: A9 x401  E0/03: A9 x132  E4/03: AB x50  E8/03: AF x32  0A/03: A7 x60
+   band switches: 0A->E8 6C00->8C00; 20->E0 002E->0048; E0->20 0031->001F; E0->20 0033->001F; E0->E4 10BA->0D80; E4->E0 0936->0B00; E4->E8 58D0->3500; E8->0A AC17->8500; E8->E4 2C4C->4500
