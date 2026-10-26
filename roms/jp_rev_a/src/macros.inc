@@ -34,3 +34,61 @@ MACRO next_state
     ld hl, wState
     inc [hl]
 ENDM
+
+; play_sfx1 / play_sfx3 / play_sfx4 / play_music ID: request a sound on that channel; A is kept
+MACRO play_sfx1
+    push af
+    ld a, \1
+    call Snd_Sfx1
+    pop af
+ENDM
+
+MACRO play_sfx3
+    push af
+    ld a, \1
+    call Snd_Sfx3
+    pop af
+ENDM
+
+MACRO play_sfx4
+    push af
+    ld a, \1
+    call Snd_Sfx4
+    pop af
+ENDM
+
+MACRO play_music
+    push af
+    ld a, \1
+    call Snd_Music
+    pop af
+ENDM
+
+; ui_sfx VALUE: post a request to wUiSfxRequest; A is kept
+MACRO ui_sfx
+    push af
+    ld a, \1
+    ld [wUiSfxRequest], a
+    pop af
+ENDM
+
+; screen_off: fade the palettes out, then switch the LCD off
+MACRO screen_off
+    call Pal_FadeOut
+    call Lcd_Off
+ENDM
+
+; stat_irq_off: clear the LY=LYC source (bit 6) in the STAT shadow and disable the STAT interrupt in IE (leaves HL = rIE)
+MACRO stat_irq_off
+    ld hl, hStatShadow
+    res 6, [hl]
+    ld hl, rIE
+    res 1, [hl]
+ENDM
+
+; screen_on: clear the sprite shadow, all-white palettes, LCD on
+MACRO screen_on
+    call Oam_ClearShadow
+    call Pal_AllWhite
+    call Lcd_On
+ENDM

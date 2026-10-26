@@ -2510,774 +2510,11 @@ Cam_LiveInit::
 
 ; C: copies 8 bytes per row; B tile rows from HL to DE
 Cam_CopyTileRows::
-    ld a, [hl+]                                   ; $5100
-    ld [de], a                                    ; $5101
-    inc e                                         ; $5102
-    ld a, [hl+]                                   ; $5103
-    ld [de], a                                    ; $5104
-    inc e                                         ; $5105
-    ld a, [hl+]                                   ; $5106
-    ld [de], a                                    ; $5107
-    inc e                                         ; $5108
-    ld a, [hl+]                                   ; $5109
-    ld [de], a                                    ; $510A
-    inc e                                         ; $510B
-    ld a, [hl+]                                   ; $510C
-    ld [de], a                                    ; $510D
-    inc e                                         ; $510E
-    ld a, [hl+]                                   ; $510F
-    ld [de], a                                    ; $5110
-    inc e                                         ; $5111
-    ld a, [hl+]                                   ; $5112
-    ld [de], a                                    ; $5113
-    inc e                                         ; $5114
-    ld a, [hl+]                                   ; $5115
-    ld [de], a                                    ; $5116
-    inc e                                         ; $5117
-    ld a, [hl+]                                   ; $5118
-    ld [de], a                                    ; $5119
-    inc e                                         ; $511A
-    ld a, [hl+]                                   ; $511B
-    ld [de], a                                    ; $511C
-    inc e                                         ; $511D
-    ld a, [hl+]                                   ; $511E
-    ld [de], a                                    ; $511F
-    inc e                                         ; $5120
-    ld a, [hl+]                                   ; $5121
-    ld [de], a                                    ; $5122
-    inc e                                         ; $5123
-    ld a, [hl+]                                   ; $5124
-    ld [de], a                                    ; $5125
-    inc e                                         ; $5126
-    ld a, [hl+]                                   ; $5127
-    ld [de], a                                    ; $5128
-    inc e                                         ; $5129
-    ld a, [hl+]                                   ; $512A
-    ld [de], a                                    ; $512B
-    inc e                                         ; $512C
-    ld a, [hl+]                                   ; $512D
-    ld [de], a                                    ; $512E
-    inc e                                         ; $512F
-    ld a, [hl+]                                   ; $5130
-    ld [de], a                                    ; $5131
-    inc e                                         ; $5132
-    ld a, [hl+]                                   ; $5133
-    ld [de], a                                    ; $5134
-    inc e                                         ; $5135
-    ld a, [hl+]                                   ; $5136
-    ld [de], a                                    ; $5137
-    inc e                                         ; $5138
-    ld a, [hl+]                                   ; $5139
-    ld [de], a                                    ; $513A
-    inc e                                         ; $513B
-    ld a, [hl+]                                   ; $513C
-    ld [de], a                                    ; $513D
-    inc e                                         ; $513E
-    ld a, [hl+]                                   ; $513F
-    ld [de], a                                    ; $5140
-    inc e                                         ; $5141
-    ld a, [hl+]                                   ; $5142
-    ld [de], a                                    ; $5143
-    inc e                                         ; $5144
-    ld a, [hl+]                                   ; $5145
-    ld [de], a                                    ; $5146
-    inc e                                         ; $5147
-    ld a, [hl+]                                   ; $5148
-    ld [de], a                                    ; $5149
-    inc e                                         ; $514A
-    ld a, [hl+]                                   ; $514B
-    ld [de], a                                    ; $514C
-    inc e                                         ; $514D
-    ld a, [hl+]                                   ; $514E
-    ld [de], a                                    ; $514F
-    inc e                                         ; $5150
-    ld a, [hl+]                                   ; $5151
-    ld [de], a                                    ; $5152
-    inc e                                         ; $5153
-    ld a, [hl+]                                   ; $5154
-    ld [de], a                                    ; $5155
-    inc e                                         ; $5156
-    ld a, [hl+]                                   ; $5157
-    ld [de], a                                    ; $5158
-    inc e                                         ; $5159
-    ld a, [hl+]                                   ; $515A
-    ld [de], a                                    ; $515B
-    inc e                                         ; $515C
-    ld a, [hl+]                                   ; $515D
-    ld [de], a                                    ; $515E
-    inc e                                         ; $515F
-    ld a, [hl+]                                   ; $5160
-    ld [de], a                                    ; $5161
-    inc e                                         ; $5162
-    ld a, [hl+]                                   ; $5163
-    ld [de], a                                    ; $5164
-    inc e                                         ; $5165
-    ld a, [hl+]                                   ; $5166
-    ld [de], a                                    ; $5167
-    inc e                                         ; $5168
-    ld a, [hl+]                                   ; $5169
-    ld [de], a                                    ; $516A
-    inc e                                         ; $516B
-    ld a, [hl+]                                   ; $516C
-    ld [de], a                                    ; $516D
-    inc e                                         ; $516E
-    ld a, [hl+]                                   ; $516F
-    ld [de], a                                    ; $5170
-    inc e                                         ; $5171
-    ld a, [hl+]                                   ; $5172
-    ld [de], a                                    ; $5173
-    inc e                                         ; $5174
-    ld a, [hl+]                                   ; $5175
-    ld [de], a                                    ; $5176
-    inc e                                         ; $5177
-    ld a, [hl+]                                   ; $5178
-    ld [de], a                                    ; $5179
-    inc e                                         ; $517A
-    ld a, [hl+]                                   ; $517B
-    ld [de], a                                    ; $517C
-    inc e                                         ; $517D
-    ld a, [hl+]                                   ; $517E
-    ld [de], a                                    ; $517F
-    inc e                                         ; $5180
-    ld a, [hl+]                                   ; $5181
-    ld [de], a                                    ; $5182
-    inc e                                         ; $5183
-    ld a, [hl+]                                   ; $5184
-    ld [de], a                                    ; $5185
-    inc e                                         ; $5186
-    ld a, [hl+]                                   ; $5187
-    ld [de], a                                    ; $5188
-    inc e                                         ; $5189
-    ld a, [hl+]                                   ; $518A
-    ld [de], a                                    ; $518B
-    inc e                                         ; $518C
-    ld a, [hl+]                                   ; $518D
-    ld [de], a                                    ; $518E
-    inc e                                         ; $518F
-    ld a, [hl+]                                   ; $5190
-    ld [de], a                                    ; $5191
-    inc e                                         ; $5192
-    ld a, [hl+]                                   ; $5193
-    ld [de], a                                    ; $5194
-    inc e                                         ; $5195
-    ld a, [hl+]                                   ; $5196
-    ld [de], a                                    ; $5197
-    inc e                                         ; $5198
-    ld a, [hl+]                                   ; $5199
-    ld [de], a                                    ; $519A
-    inc e                                         ; $519B
-    ld a, [hl+]                                   ; $519C
-    ld [de], a                                    ; $519D
-    inc e                                         ; $519E
-    ld a, [hl+]                                   ; $519F
-    ld [de], a                                    ; $51A0
-    inc e                                         ; $51A1
-    ld a, [hl+]                                   ; $51A2
-    ld [de], a                                    ; $51A3
-    inc e                                         ; $51A4
-    ld a, [hl+]                                   ; $51A5
-    ld [de], a                                    ; $51A6
-    inc e                                         ; $51A7
-    ld a, [hl+]                                   ; $51A8
-    ld [de], a                                    ; $51A9
-    inc e                                         ; $51AA
-    ld a, [hl+]                                   ; $51AB
-    ld [de], a                                    ; $51AC
-    inc e                                         ; $51AD
-    ld a, [hl+]                                   ; $51AE
-    ld [de], a                                    ; $51AF
-    inc e                                         ; $51B0
-    ld a, [hl+]                                   ; $51B1
-    ld [de], a                                    ; $51B2
-    inc e                                         ; $51B3
-    ld a, [hl+]                                   ; $51B4
-    ld [de], a                                    ; $51B5
-    inc e                                         ; $51B6
-    ld a, [hl+]                                   ; $51B7
-    ld [de], a                                    ; $51B8
-    inc e                                         ; $51B9
-    ld a, [hl+]                                   ; $51BA
-    ld [de], a                                    ; $51BB
-    inc e                                         ; $51BC
-    ld a, [hl+]                                   ; $51BD
-    ld [de], a                                    ; $51BE
-    inc e                                         ; $51BF
-    ld a, [hl+]                                   ; $51C0
-    ld [de], a                                    ; $51C1
-    inc e                                         ; $51C2
-    ld a, [hl+]                                   ; $51C3
-    ld [de], a                                    ; $51C4
-    inc e                                         ; $51C5
-    ld a, [hl+]                                   ; $51C6
-    ld [de], a                                    ; $51C7
-    inc e                                         ; $51C8
-    ld a, [hl+]                                   ; $51C9
-    ld [de], a                                    ; $51CA
-    inc e                                         ; $51CB
-    ld a, [hl+]                                   ; $51CC
-    ld [de], a                                    ; $51CD
-    inc e                                         ; $51CE
-    ld a, [hl+]                                   ; $51CF
-    ld [de], a                                    ; $51D0
-    inc e                                         ; $51D1
-    ld a, [hl+]                                   ; $51D2
-    ld [de], a                                    ; $51D3
-    inc e                                         ; $51D4
-    ld a, [hl+]                                   ; $51D5
-    ld [de], a                                    ; $51D6
-    inc e                                         ; $51D7
-    ld a, [hl+]                                   ; $51D8
-    ld [de], a                                    ; $51D9
-    inc e                                         ; $51DA
-    ld a, [hl+]                                   ; $51DB
-    ld [de], a                                    ; $51DC
-    inc e                                         ; $51DD
-    ld a, [hl+]                                   ; $51DE
-    ld [de], a                                    ; $51DF
-    inc e                                         ; $51E0
-    ld a, [hl+]                                   ; $51E1
-    ld [de], a                                    ; $51E2
-    inc e                                         ; $51E3
-    ld a, [hl+]                                   ; $51E4
-    ld [de], a                                    ; $51E5
-    inc e                                         ; $51E6
-    ld a, [hl+]                                   ; $51E7
-    ld [de], a                                    ; $51E8
-    inc e                                         ; $51E9
-    ld a, [hl+]                                   ; $51EA
-    ld [de], a                                    ; $51EB
-    inc e                                         ; $51EC
-    ld a, [hl+]                                   ; $51ED
-    ld [de], a                                    ; $51EE
-    inc e                                         ; $51EF
-    ld a, [hl+]                                   ; $51F0
-    ld [de], a                                    ; $51F1
-    inc e                                         ; $51F2
-    ld a, [hl+]                                   ; $51F3
-    ld [de], a                                    ; $51F4
-    inc e                                         ; $51F5
-    ld a, [hl+]                                   ; $51F6
-    ld [de], a                                    ; $51F7
-    inc e                                         ; $51F8
-    ld a, [hl+]                                   ; $51F9
-    ld [de], a                                    ; $51FA
-    inc e                                         ; $51FB
-    ld a, [hl+]                                   ; $51FC
-    ld [de], a                                    ; $51FD
-    inc e                                         ; $51FE
-    ld a, [hl+]                                   ; $51FF
-    ld [de], a                                    ; $5200
-    inc e                                         ; $5201
-    ld a, [hl+]                                   ; $5202
-    ld [de], a                                    ; $5203
-    inc e                                         ; $5204
-    ld a, [hl+]                                   ; $5205
-    ld [de], a                                    ; $5206
-    inc e                                         ; $5207
-    ld a, [hl+]                                   ; $5208
-    ld [de], a                                    ; $5209
-    inc e                                         ; $520A
-    ld a, [hl+]                                   ; $520B
-    ld [de], a                                    ; $520C
-    inc e                                         ; $520D
-    ld a, [hl+]                                   ; $520E
-    ld [de], a                                    ; $520F
-    inc e                                         ; $5210
-    ld a, [hl+]                                   ; $5211
-    ld [de], a                                    ; $5212
-    inc e                                         ; $5213
-    ld a, [hl+]                                   ; $5214
-    ld [de], a                                    ; $5215
-    inc e                                         ; $5216
-    ld a, [hl+]                                   ; $5217
-    ld [de], a                                    ; $5218
-    inc e                                         ; $5219
-    ld a, [hl+]                                   ; $521A
-    ld [de], a                                    ; $521B
-    inc e                                         ; $521C
-    ld a, [hl+]                                   ; $521D
-    ld [de], a                                    ; $521E
-    inc e                                         ; $521F
-    ld a, [hl+]                                   ; $5220
-    ld [de], a                                    ; $5221
-    inc e                                         ; $5222
-    ld a, [hl+]                                   ; $5223
-    ld [de], a                                    ; $5224
-    inc e                                         ; $5225
-    ld a, [hl+]                                   ; $5226
-    ld [de], a                                    ; $5227
-    inc e                                         ; $5228
-    ld a, [hl+]                                   ; $5229
-    ld [de], a                                    ; $522A
-    inc e                                         ; $522B
-    ld a, [hl+]                                   ; $522C
-    ld [de], a                                    ; $522D
-    inc e                                         ; $522E
-    ld a, [hl+]                                   ; $522F
-    ld [de], a                                    ; $5230
-    inc e                                         ; $5231
-    ld a, [hl+]                                   ; $5232
-    ld [de], a                                    ; $5233
-    inc e                                         ; $5234
-    ld a, [hl+]                                   ; $5235
-    ld [de], a                                    ; $5236
-    inc e                                         ; $5237
-    ld a, [hl+]                                   ; $5238
-    ld [de], a                                    ; $5239
-    inc e                                         ; $523A
-    ld a, [hl+]                                   ; $523B
-    ld [de], a                                    ; $523C
-    inc e                                         ; $523D
-    ld a, [hl+]                                   ; $523E
-    ld [de], a                                    ; $523F
-    inc e                                         ; $5240
-    ld a, [hl+]                                   ; $5241
-    ld [de], a                                    ; $5242
-    inc e                                         ; $5243
-    ld a, [hl+]                                   ; $5244
-    ld [de], a                                    ; $5245
-    inc e                                         ; $5246
-    ld a, [hl+]                                   ; $5247
-    ld [de], a                                    ; $5248
-    inc e                                         ; $5249
-    ld a, [hl+]                                   ; $524A
-    ld [de], a                                    ; $524B
-    inc e                                         ; $524C
-    ld a, [hl+]                                   ; $524D
-    ld [de], a                                    ; $524E
-    inc e                                         ; $524F
-    ld a, [hl+]                                   ; $5250
-    ld [de], a                                    ; $5251
-    inc e                                         ; $5252
-    ld a, [hl+]                                   ; $5253
-    ld [de], a                                    ; $5254
-    inc e                                         ; $5255
-    ld a, [hl+]                                   ; $5256
-    ld [de], a                                    ; $5257
-    inc e                                         ; $5258
-    ld a, [hl+]                                   ; $5259
-    ld [de], a                                    ; $525A
-    inc e                                         ; $525B
-    ld a, [hl+]                                   ; $525C
-    ld [de], a                                    ; $525D
-    inc e                                         ; $525E
-    ld a, [hl+]                                   ; $525F
-    ld [de], a                                    ; $5260
-    inc e                                         ; $5261
-    ld a, [hl+]                                   ; $5262
-    ld [de], a                                    ; $5263
-    inc e                                         ; $5264
-    ld a, [hl+]                                   ; $5265
-    ld [de], a                                    ; $5266
-    inc e                                         ; $5267
-    ld a, [hl+]                                   ; $5268
-    ld [de], a                                    ; $5269
-    inc e                                         ; $526A
-    ld a, [hl+]                                   ; $526B
-    ld [de], a                                    ; $526C
-    inc e                                         ; $526D
-    ld a, [hl+]                                   ; $526E
-    ld [de], a                                    ; $526F
-    inc e                                         ; $5270
-    ld a, [hl+]                                   ; $5271
-    ld [de], a                                    ; $5272
-    inc e                                         ; $5273
-    ld a, [hl+]                                   ; $5274
-    ld [de], a                                    ; $5275
-    inc e                                         ; $5276
-    ld a, [hl+]                                   ; $5277
-    ld [de], a                                    ; $5278
-    inc e                                         ; $5279
-    ld a, [hl+]                                   ; $527A
-    ld [de], a                                    ; $527B
-    inc e                                         ; $527C
-    ld a, [hl+]                                   ; $527D
-    ld [de], a                                    ; $527E
-    inc e                                         ; $527F
-    ld a, [hl+]                                   ; $5280
-    ld [de], a                                    ; $5281
-    inc e                                         ; $5282
-    ld a, [hl+]                                   ; $5283
-    ld [de], a                                    ; $5284
-    inc e                                         ; $5285
-    ld a, [hl+]                                   ; $5286
-    ld [de], a                                    ; $5287
-    inc e                                         ; $5288
-    ld a, [hl+]                                   ; $5289
-    ld [de], a                                    ; $528A
-    inc e                                         ; $528B
-    ld a, [hl+]                                   ; $528C
-    ld [de], a                                    ; $528D
-    inc e                                         ; $528E
-    ld a, [hl+]                                   ; $528F
-    ld [de], a                                    ; $5290
-    inc e                                         ; $5291
-    ld a, [hl+]                                   ; $5292
-    ld [de], a                                    ; $5293
-    inc e                                         ; $5294
-    ld a, [hl+]                                   ; $5295
-    ld [de], a                                    ; $5296
-    inc e                                         ; $5297
-    ld a, [hl+]                                   ; $5298
-    ld [de], a                                    ; $5299
-    inc e                                         ; $529A
-    ld a, [hl+]                                   ; $529B
-    ld [de], a                                    ; $529C
-    inc e                                         ; $529D
-    ld a, [hl+]                                   ; $529E
-    ld [de], a                                    ; $529F
-    inc e                                         ; $52A0
-    ld a, [hl+]                                   ; $52A1
-    ld [de], a                                    ; $52A2
-    inc e                                         ; $52A3
-    ld a, [hl+]                                   ; $52A4
-    ld [de], a                                    ; $52A5
-    inc e                                         ; $52A6
-    ld a, [hl+]                                   ; $52A7
-    ld [de], a                                    ; $52A8
-    inc e                                         ; $52A9
-    ld a, [hl+]                                   ; $52AA
-    ld [de], a                                    ; $52AB
-    inc e                                         ; $52AC
-    ld a, [hl+]                                   ; $52AD
-    ld [de], a                                    ; $52AE
-    inc e                                         ; $52AF
-    ld a, [hl+]                                   ; $52B0
-    ld [de], a                                    ; $52B1
-    inc e                                         ; $52B2
-    ld a, [hl+]                                   ; $52B3
-    ld [de], a                                    ; $52B4
-    inc e                                         ; $52B5
-    ld a, [hl+]                                   ; $52B6
-    ld [de], a                                    ; $52B7
-    inc e                                         ; $52B8
-    ld a, [hl+]                                   ; $52B9
-    ld [de], a                                    ; $52BA
-    inc e                                         ; $52BB
-    ld a, [hl+]                                   ; $52BC
-    ld [de], a                                    ; $52BD
-    inc e                                         ; $52BE
-    ld a, [hl+]                                   ; $52BF
-    ld [de], a                                    ; $52C0
-    inc e                                         ; $52C1
-    ld a, [hl+]                                   ; $52C2
-    ld [de], a                                    ; $52C3
-    inc e                                         ; $52C4
-    ld a, [hl+]                                   ; $52C5
-    ld [de], a                                    ; $52C6
-    inc e                                         ; $52C7
-    ld a, [hl+]                                   ; $52C8
-    ld [de], a                                    ; $52C9
-    inc e                                         ; $52CA
-    ld a, [hl+]                                   ; $52CB
-    ld [de], a                                    ; $52CC
-    inc e                                         ; $52CD
-    ld a, [hl+]                                   ; $52CE
-    ld [de], a                                    ; $52CF
-    inc e                                         ; $52D0
-    ld a, [hl+]                                   ; $52D1
-    ld [de], a                                    ; $52D2
-    inc e                                         ; $52D3
-    ld a, [hl+]                                   ; $52D4
-    ld [de], a                                    ; $52D5
-    inc e                                         ; $52D6
-    ld a, [hl+]                                   ; $52D7
-    ld [de], a                                    ; $52D8
-    inc e                                         ; $52D9
-    ld a, [hl+]                                   ; $52DA
-    ld [de], a                                    ; $52DB
-    inc e                                         ; $52DC
-    ld a, [hl+]                                   ; $52DD
-    ld [de], a                                    ; $52DE
-    inc e                                         ; $52DF
-    ld a, [hl+]                                   ; $52E0
-    ld [de], a                                    ; $52E1
-    inc e                                         ; $52E2
-    ld a, [hl+]                                   ; $52E3
-    ld [de], a                                    ; $52E4
-    inc e                                         ; $52E5
-    ld a, [hl+]                                   ; $52E6
-    ld [de], a                                    ; $52E7
-    inc e                                         ; $52E8
-    ld a, [hl+]                                   ; $52E9
-    ld [de], a                                    ; $52EA
-    inc e                                         ; $52EB
-    ld a, [hl+]                                   ; $52EC
-    ld [de], a                                    ; $52ED
-    inc e                                         ; $52EE
-    ld a, [hl+]                                   ; $52EF
-    ld [de], a                                    ; $52F0
-    inc e                                         ; $52F1
-    ld a, [hl+]                                   ; $52F2
-    ld [de], a                                    ; $52F3
-    inc e                                         ; $52F4
-    ld a, [hl+]                                   ; $52F5
-    ld [de], a                                    ; $52F6
-    inc e                                         ; $52F7
-    ld a, [hl+]                                   ; $52F8
-    ld [de], a                                    ; $52F9
-    inc e                                         ; $52FA
-    ld a, [hl+]                                   ; $52FB
-    ld [de], a                                    ; $52FC
-    inc e                                         ; $52FD
-    ld a, [hl+]                                   ; $52FE
-    ld [de], a                                    ; $52FF
-    inc e                                         ; $5300
-    ld a, [hl+]                                   ; $5301
-    ld [de], a                                    ; $5302
-    inc e                                         ; $5303
-    ld a, [hl+]                                   ; $5304
-    ld [de], a                                    ; $5305
-    inc e                                         ; $5306
-    ld a, [hl+]                                   ; $5307
-    ld [de], a                                    ; $5308
-    inc e                                         ; $5309
-    ld a, [hl+]                                   ; $530A
-    ld [de], a                                    ; $530B
-    inc e                                         ; $530C
-    ld a, [hl+]                                   ; $530D
-    ld [de], a                                    ; $530E
-    inc e                                         ; $530F
-    ld a, [hl+]                                   ; $5310
-    ld [de], a                                    ; $5311
-    inc e                                         ; $5312
-    ld a, [hl+]                                   ; $5313
-    ld [de], a                                    ; $5314
-    inc e                                         ; $5315
-    ld a, [hl+]                                   ; $5316
-    ld [de], a                                    ; $5317
-    inc e                                         ; $5318
-    ld a, [hl+]                                   ; $5319
-    ld [de], a                                    ; $531A
-    inc e                                         ; $531B
-    ld a, [hl+]                                   ; $531C
-    ld [de], a                                    ; $531D
-    inc e                                         ; $531E
-    ld a, [hl+]                                   ; $531F
-    ld [de], a                                    ; $5320
-    inc e                                         ; $5321
-    ld a, [hl+]                                   ; $5322
-    ld [de], a                                    ; $5323
-    inc e                                         ; $5324
-    ld a, [hl+]                                   ; $5325
-    ld [de], a                                    ; $5326
-    inc e                                         ; $5327
-    ld a, [hl+]                                   ; $5328
-    ld [de], a                                    ; $5329
-    inc e                                         ; $532A
-    ld a, [hl+]                                   ; $532B
-    ld [de], a                                    ; $532C
-    inc e                                         ; $532D
-    ld a, [hl+]                                   ; $532E
-    ld [de], a                                    ; $532F
-    inc e                                         ; $5330
-    ld a, [hl+]                                   ; $5331
-    ld [de], a                                    ; $5332
-    inc e                                         ; $5333
-    ld a, [hl+]                                   ; $5334
-    ld [de], a                                    ; $5335
-    inc e                                         ; $5336
-    ld a, [hl+]                                   ; $5337
-    ld [de], a                                    ; $5338
-    inc e                                         ; $5339
-    ld a, [hl+]                                   ; $533A
-    ld [de], a                                    ; $533B
-    inc e                                         ; $533C
-    ld a, [hl+]                                   ; $533D
-    ld [de], a                                    ; $533E
-    inc e                                         ; $533F
-    ld a, [hl+]                                   ; $5340
-    ld [de], a                                    ; $5341
-    inc e                                         ; $5342
-    ld a, [hl+]                                   ; $5343
-    ld [de], a                                    ; $5344
-    inc e                                         ; $5345
-    ld a, [hl+]                                   ; $5346
-    ld [de], a                                    ; $5347
-    inc e                                         ; $5348
-    ld a, [hl+]                                   ; $5349
-    ld [de], a                                    ; $534A
-    inc e                                         ; $534B
-    ld a, [hl+]                                   ; $534C
-    ld [de], a                                    ; $534D
-    inc e                                         ; $534E
-    ld a, [hl+]                                   ; $534F
-    ld [de], a                                    ; $5350
-    inc e                                         ; $5351
-    ld a, [hl+]                                   ; $5352
-    ld [de], a                                    ; $5353
-    inc e                                         ; $5354
-    ld a, [hl+]                                   ; $5355
-    ld [de], a                                    ; $5356
-    inc e                                         ; $5357
-    ld a, [hl+]                                   ; $5358
-    ld [de], a                                    ; $5359
-    inc e                                         ; $535A
-    ld a, [hl+]                                   ; $535B
-    ld [de], a                                    ; $535C
-    inc e                                         ; $535D
-    ld a, [hl+]                                   ; $535E
-    ld [de], a                                    ; $535F
-    inc e                                         ; $5360
-    ld a, [hl+]                                   ; $5361
-    ld [de], a                                    ; $5362
-    inc e                                         ; $5363
-    ld a, [hl+]                                   ; $5364
-    ld [de], a                                    ; $5365
-    inc e                                         ; $5366
-    ld a, [hl+]                                   ; $5367
-    ld [de], a                                    ; $5368
-    inc e                                         ; $5369
-    ld a, [hl+]                                   ; $536A
-    ld [de], a                                    ; $536B
-    inc e                                         ; $536C
-    ld a, [hl+]                                   ; $536D
-    ld [de], a                                    ; $536E
-    inc e                                         ; $536F
-    ld a, [hl+]                                   ; $5370
-    ld [de], a                                    ; $5371
-    inc e                                         ; $5372
-    ld a, [hl+]                                   ; $5373
-    ld [de], a                                    ; $5374
-    inc e                                         ; $5375
-    ld a, [hl+]                                   ; $5376
-    ld [de], a                                    ; $5377
-    inc e                                         ; $5378
-    ld a, [hl+]                                   ; $5379
-    ld [de], a                                    ; $537A
-    inc e                                         ; $537B
-    ld a, [hl+]                                   ; $537C
-    ld [de], a                                    ; $537D
-    inc e                                         ; $537E
-    ld a, [hl+]                                   ; $537F
-    ld [de], a                                    ; $5380
-    inc e                                         ; $5381
-    ld a, [hl+]                                   ; $5382
-    ld [de], a                                    ; $5383
-    inc e                                         ; $5384
-    ld a, [hl+]                                   ; $5385
-    ld [de], a                                    ; $5386
-    inc e                                         ; $5387
-    ld a, [hl+]                                   ; $5388
-    ld [de], a                                    ; $5389
-    inc e                                         ; $538A
-    ld a, [hl+]                                   ; $538B
-    ld [de], a                                    ; $538C
-    inc e                                         ; $538D
-    ld a, [hl+]                                   ; $538E
-    ld [de], a                                    ; $538F
-    inc e                                         ; $5390
-    ld a, [hl+]                                   ; $5391
-    ld [de], a                                    ; $5392
-    inc e                                         ; $5393
-    ld a, [hl+]                                   ; $5394
-    ld [de], a                                    ; $5395
-    inc e                                         ; $5396
-    ld a, [hl+]                                   ; $5397
-    ld [de], a                                    ; $5398
-    inc e                                         ; $5399
-    ld a, [hl+]                                   ; $539A
-    ld [de], a                                    ; $539B
-    inc e                                         ; $539C
-    ld a, [hl+]                                   ; $539D
-    ld [de], a                                    ; $539E
-    inc e                                         ; $539F
-    ld a, [hl+]                                   ; $53A0
-    ld [de], a                                    ; $53A1
-    inc e                                         ; $53A2
-    ld a, [hl+]                                   ; $53A3
-    ld [de], a                                    ; $53A4
-    inc e                                         ; $53A5
-    ld a, [hl+]                                   ; $53A6
-    ld [de], a                                    ; $53A7
-    inc e                                         ; $53A8
-    ld a, [hl+]                                   ; $53A9
-    ld [de], a                                    ; $53AA
-    inc e                                         ; $53AB
-    ld a, [hl+]                                   ; $53AC
-    ld [de], a                                    ; $53AD
-    inc e                                         ; $53AE
-    ld a, [hl+]                                   ; $53AF
-    ld [de], a                                    ; $53B0
-    inc e                                         ; $53B1
-    ld a, [hl+]                                   ; $53B2
-    ld [de], a                                    ; $53B3
-    inc e                                         ; $53B4
-    ld a, [hl+]                                   ; $53B5
-    ld [de], a                                    ; $53B6
-    inc e                                         ; $53B7
-    ld a, [hl+]                                   ; $53B8
-    ld [de], a                                    ; $53B9
-    inc e                                         ; $53BA
-    ld a, [hl+]                                   ; $53BB
-    ld [de], a                                    ; $53BC
-    inc e                                         ; $53BD
-    ld a, [hl+]                                   ; $53BE
-    ld [de], a                                    ; $53BF
-    inc e                                         ; $53C0
-    ld a, [hl+]                                   ; $53C1
-    ld [de], a                                    ; $53C2
-    inc e                                         ; $53C3
-    ld a, [hl+]                                   ; $53C4
-    ld [de], a                                    ; $53C5
-    inc e                                         ; $53C6
-    ld a, [hl+]                                   ; $53C7
-    ld [de], a                                    ; $53C8
-    inc e                                         ; $53C9
-    ld a, [hl+]                                   ; $53CA
-    ld [de], a                                    ; $53CB
-    inc e                                         ; $53CC
-    ld a, [hl+]                                   ; $53CD
-    ld [de], a                                    ; $53CE
-    inc e                                         ; $53CF
-    ld a, [hl+]                                   ; $53D0
-    ld [de], a                                    ; $53D1
-    inc e                                         ; $53D2
-    ld a, [hl+]                                   ; $53D3
-    ld [de], a                                    ; $53D4
-    inc e                                         ; $53D5
-    ld a, [hl+]                                   ; $53D6
-    ld [de], a                                    ; $53D7
-    inc e                                         ; $53D8
-    ld a, [hl+]                                   ; $53D9
-    ld [de], a                                    ; $53DA
-    inc e                                         ; $53DB
-    ld a, [hl+]                                   ; $53DC
-    ld [de], a                                    ; $53DD
-    inc e                                         ; $53DE
-    ld a, [hl+]                                   ; $53DF
-    ld [de], a                                    ; $53E0
-    inc e                                         ; $53E1
-    ld a, [hl+]                                   ; $53E2
-    ld [de], a                                    ; $53E3
-    inc e                                         ; $53E4
-    ld a, [hl+]                                   ; $53E5
-    ld [de], a                                    ; $53E6
-    inc e                                         ; $53E7
-    ld a, [hl+]                                   ; $53E8
-    ld [de], a                                    ; $53E9
-    inc e                                         ; $53EA
-    ld a, [hl+]                                   ; $53EB
-    ld [de], a                                    ; $53EC
-    inc e                                         ; $53ED
-    ld a, [hl+]                                   ; $53EE
-    ld [de], a                                    ; $53EF
-    inc e                                         ; $53F0
-    ld a, [hl+]                                   ; $53F1
-    ld [de], a                                    ; $53F2
-    inc e                                         ; $53F3
-    ld a, [hl+]                                   ; $53F4
-    ld [de], a                                    ; $53F5
-    inc e                                         ; $53F6
-    ld a, [hl+]                                   ; $53F7
-    ld [de], a                                    ; $53F8
-    inc e                                         ; $53F9
-    ld a, [hl+]                                   ; $53FA
-    ld [de], a                                    ; $53FB
-    inc e                                         ; $53FC
-    ld a, [hl+]                                   ; $53FD
-    ld [de], a                                    ; $53FE
-    inc e                                         ; $53FF
+    REPT 256                                      ; $5100
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 256 copies of 3 bytes
     inc d                                         ; $5400
     dec b                                         ; $5401
     jp nz, Cam_CopyTileRows                       ; $5402
@@ -4198,54 +3435,11 @@ jr_00a_585d:
     ldh [hScratchB], a                            ; $585F
 
 jr_00a_5861:
-    ld a, [hl+]                                   ; $5861
-    ld [de], a                                    ; $5862
-    inc e                                         ; $5863
-    ld a, [hl+]                                   ; $5864
-    ld [de], a                                    ; $5865
-    inc e                                         ; $5866
-    ld a, [hl+]                                   ; $5867
-    ld [de], a                                    ; $5868
-    inc e                                         ; $5869
-    ld a, [hl+]                                   ; $586A
-    ld [de], a                                    ; $586B
-    inc e                                         ; $586C
-    ld a, [hl+]                                   ; $586D
-    ld [de], a                                    ; $586E
-    inc e                                         ; $586F
-    ld a, [hl+]                                   ; $5870
-    ld [de], a                                    ; $5871
-    inc e                                         ; $5872
-    ld a, [hl+]                                   ; $5873
-    ld [de], a                                    ; $5874
-    inc e                                         ; $5875
-    ld a, [hl+]                                   ; $5876
-    ld [de], a                                    ; $5877
-    inc e                                         ; $5878
-    ld a, [hl+]                                   ; $5879
-    ld [de], a                                    ; $587A
-    inc e                                         ; $587B
-    ld a, [hl+]                                   ; $587C
-    ld [de], a                                    ; $587D
-    inc e                                         ; $587E
-    ld a, [hl+]                                   ; $587F
-    ld [de], a                                    ; $5880
-    inc e                                         ; $5881
-    ld a, [hl+]                                   ; $5882
-    ld [de], a                                    ; $5883
-    inc e                                         ; $5884
-    ld a, [hl+]                                   ; $5885
-    ld [de], a                                    ; $5886
-    inc e                                         ; $5887
-    ld a, [hl+]                                   ; $5888
-    ld [de], a                                    ; $5889
-    inc e                                         ; $588A
-    ld a, [hl+]                                   ; $588B
-    ld [de], a                                    ; $588C
-    inc e                                         ; $588D
-    ld a, [hl+]                                   ; $588E
-    ld [de], a                                    ; $588F
-    inc e                                         ; $5890
+    REPT 16                                       ; $5861
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     ldh a, [hScratchB]                            ; $5891
     dec a                                         ; $5893
     jr z, jr_00a_589a                             ; $5894
@@ -4281,54 +3475,11 @@ jr_00a_58b4:
     ldh [hScratchB], a                            ; $58B6
 
 jr_00a_58b8:
-    ld a, [hl+]                                   ; $58B8
-    ld [de], a                                    ; $58B9
-    inc e                                         ; $58BA
-    ld a, [hl+]                                   ; $58BB
-    ld [de], a                                    ; $58BC
-    inc e                                         ; $58BD
-    ld a, [hl+]                                   ; $58BE
-    ld [de], a                                    ; $58BF
-    inc e                                         ; $58C0
-    ld a, [hl+]                                   ; $58C1
-    ld [de], a                                    ; $58C2
-    inc e                                         ; $58C3
-    ld a, [hl+]                                   ; $58C4
-    ld [de], a                                    ; $58C5
-    inc e                                         ; $58C6
-    ld a, [hl+]                                   ; $58C7
-    ld [de], a                                    ; $58C8
-    inc e                                         ; $58C9
-    ld a, [hl+]                                   ; $58CA
-    ld [de], a                                    ; $58CB
-    inc e                                         ; $58CC
-    ld a, [hl+]                                   ; $58CD
-    ld [de], a                                    ; $58CE
-    inc e                                         ; $58CF
-    ld a, [hl+]                                   ; $58D0
-    ld [de], a                                    ; $58D1
-    inc e                                         ; $58D2
-    ld a, [hl+]                                   ; $58D3
-    ld [de], a                                    ; $58D4
-    inc e                                         ; $58D5
-    ld a, [hl+]                                   ; $58D6
-    ld [de], a                                    ; $58D7
-    inc e                                         ; $58D8
-    ld a, [hl+]                                   ; $58D9
-    ld [de], a                                    ; $58DA
-    inc e                                         ; $58DB
-    ld a, [hl+]                                   ; $58DC
-    ld [de], a                                    ; $58DD
-    inc e                                         ; $58DE
-    ld a, [hl+]                                   ; $58DF
-    ld [de], a                                    ; $58E0
-    inc e                                         ; $58E1
-    ld a, [hl+]                                   ; $58E2
-    ld [de], a                                    ; $58E3
-    inc e                                         ; $58E4
-    ld a, [hl+]                                   ; $58E5
-    ld [de], a                                    ; $58E6
-    inc e                                         ; $58E7
+    REPT 16                                       ; $58B8
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     ldh a, [hScratchB]                            ; $58E8
     dec a                                         ; $58EA
     jr z, jr_00a_58f1                             ; $58EB
@@ -4383,54 +3534,11 @@ jr_00a_5920:
     ld b, $08                                     ; $5920
 
 jr_00a_5922:
-    ld a, [hl+]                                   ; $5922
-    ld [de], a                                    ; $5923
-    inc e                                         ; $5924
-    ld a, [hl+]                                   ; $5925
-    ld [de], a                                    ; $5926
-    inc e                                         ; $5927
-    ld a, [hl+]                                   ; $5928
-    ld [de], a                                    ; $5929
-    inc e                                         ; $592A
-    ld a, [hl+]                                   ; $592B
-    ld [de], a                                    ; $592C
-    inc e                                         ; $592D
-    ld a, [hl+]                                   ; $592E
-    ld [de], a                                    ; $592F
-    inc e                                         ; $5930
-    ld a, [hl+]                                   ; $5931
-    ld [de], a                                    ; $5932
-    inc e                                         ; $5933
-    ld a, [hl+]                                   ; $5934
-    ld [de], a                                    ; $5935
-    inc e                                         ; $5936
-    ld a, [hl+]                                   ; $5937
-    ld [de], a                                    ; $5938
-    inc e                                         ; $5939
-    ld a, [hl+]                                   ; $593A
-    ld [de], a                                    ; $593B
-    inc e                                         ; $593C
-    ld a, [hl+]                                   ; $593D
-    ld [de], a                                    ; $593E
-    inc e                                         ; $593F
-    ld a, [hl+]                                   ; $5940
-    ld [de], a                                    ; $5941
-    inc e                                         ; $5942
-    ld a, [hl+]                                   ; $5943
-    ld [de], a                                    ; $5944
-    inc e                                         ; $5945
-    ld a, [hl+]                                   ; $5946
-    ld [de], a                                    ; $5947
-    inc e                                         ; $5948
-    ld a, [hl+]                                   ; $5949
-    ld [de], a                                    ; $594A
-    inc e                                         ; $594B
-    ld a, [hl+]                                   ; $594C
-    ld [de], a                                    ; $594D
-    inc e                                         ; $594E
-    ld a, [hl+]                                   ; $594F
-    ld [de], a                                    ; $5950
-    inc e                                         ; $5951
+    REPT 16                                       ; $5922
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     dec b                                         ; $5952
     jr nz, jr_00a_5922                            ; $5953
 
@@ -4450,54 +3558,11 @@ jr_00a_5962:
     ld b, $08                                     ; $5962
 
 jr_00a_5964:
-    ld a, [hl+]                                   ; $5964
-    ld [de], a                                    ; $5965
-    inc e                                         ; $5966
-    ld a, [hl+]                                   ; $5967
-    ld [de], a                                    ; $5968
-    inc e                                         ; $5969
-    ld a, [hl+]                                   ; $596A
-    ld [de], a                                    ; $596B
-    inc e                                         ; $596C
-    ld a, [hl+]                                   ; $596D
-    ld [de], a                                    ; $596E
-    inc e                                         ; $596F
-    ld a, [hl+]                                   ; $5970
-    ld [de], a                                    ; $5971
-    inc e                                         ; $5972
-    ld a, [hl+]                                   ; $5973
-    ld [de], a                                    ; $5974
-    inc e                                         ; $5975
-    ld a, [hl+]                                   ; $5976
-    ld [de], a                                    ; $5977
-    inc e                                         ; $5978
-    ld a, [hl+]                                   ; $5979
-    ld [de], a                                    ; $597A
-    inc e                                         ; $597B
-    ld a, [hl+]                                   ; $597C
-    ld [de], a                                    ; $597D
-    inc e                                         ; $597E
-    ld a, [hl+]                                   ; $597F
-    ld [de], a                                    ; $5980
-    inc e                                         ; $5981
-    ld a, [hl+]                                   ; $5982
-    ld [de], a                                    ; $5983
-    inc e                                         ; $5984
-    ld a, [hl+]                                   ; $5985
-    ld [de], a                                    ; $5986
-    inc e                                         ; $5987
-    ld a, [hl+]                                   ; $5988
-    ld [de], a                                    ; $5989
-    inc e                                         ; $598A
-    ld a, [hl+]                                   ; $598B
-    ld [de], a                                    ; $598C
-    inc e                                         ; $598D
-    ld a, [hl+]                                   ; $598E
-    ld [de], a                                    ; $598F
-    inc e                                         ; $5990
-    ld a, [hl+]                                   ; $5991
-    ld [de], a                                    ; $5992
-    inc e                                         ; $5993
+    REPT 16                                       ; $5964
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     dec b                                         ; $5994
     jr nz, jr_00a_5964                            ; $5995
 
@@ -4522,54 +3587,11 @@ jr_00a_59a9:
     ld b, $08                                     ; $59A9
 
 jr_00a_59ab:
-    ld a, [hl+]                                   ; $59AB
-    ld [de], a                                    ; $59AC
-    inc e                                         ; $59AD
-    ld a, [hl+]                                   ; $59AE
-    ld [de], a                                    ; $59AF
-    inc e                                         ; $59B0
-    ld a, [hl+]                                   ; $59B1
-    ld [de], a                                    ; $59B2
-    inc e                                         ; $59B3
-    ld a, [hl+]                                   ; $59B4
-    ld [de], a                                    ; $59B5
-    inc e                                         ; $59B6
-    ld a, [hl+]                                   ; $59B7
-    ld [de], a                                    ; $59B8
-    inc e                                         ; $59B9
-    ld a, [hl+]                                   ; $59BA
-    ld [de], a                                    ; $59BB
-    inc e                                         ; $59BC
-    ld a, [hl+]                                   ; $59BD
-    ld [de], a                                    ; $59BE
-    inc e                                         ; $59BF
-    ld a, [hl+]                                   ; $59C0
-    ld [de], a                                    ; $59C1
-    inc e                                         ; $59C2
-    ld a, [hl+]                                   ; $59C3
-    ld [de], a                                    ; $59C4
-    inc e                                         ; $59C5
-    ld a, [hl+]                                   ; $59C6
-    ld [de], a                                    ; $59C7
-    inc e                                         ; $59C8
-    ld a, [hl+]                                   ; $59C9
-    ld [de], a                                    ; $59CA
-    inc e                                         ; $59CB
-    ld a, [hl+]                                   ; $59CC
-    ld [de], a                                    ; $59CD
-    inc e                                         ; $59CE
-    ld a, [hl+]                                   ; $59CF
-    ld [de], a                                    ; $59D0
-    inc e                                         ; $59D1
-    ld a, [hl+]                                   ; $59D2
-    ld [de], a                                    ; $59D3
-    inc e                                         ; $59D4
-    ld a, [hl+]                                   ; $59D5
-    ld [de], a                                    ; $59D6
-    inc e                                         ; $59D7
-    ld a, [hl+]                                   ; $59D8
-    ld [de], a                                    ; $59D9
-    inc e                                         ; $59DA
+    REPT 16                                       ; $59AB
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     dec b                                         ; $59DB
     jr nz, jr_00a_59ab                            ; $59DC
 
@@ -4639,54 +3661,11 @@ jr_00a_5a23:
     ldh [hScratchB], a                            ; $5A25
 
 jr_00a_5a27:
-    ld a, [hl+]                                   ; $5A27
-    ld [de], a                                    ; $5A28
-    inc e                                         ; $5A29
-    ld a, [hl+]                                   ; $5A2A
-    ld [de], a                                    ; $5A2B
-    inc e                                         ; $5A2C
-    ld a, [hl+]                                   ; $5A2D
-    ld [de], a                                    ; $5A2E
-    inc e                                         ; $5A2F
-    ld a, [hl+]                                   ; $5A30
-    ld [de], a                                    ; $5A31
-    inc e                                         ; $5A32
-    ld a, [hl+]                                   ; $5A33
-    ld [de], a                                    ; $5A34
-    inc e                                         ; $5A35
-    ld a, [hl+]                                   ; $5A36
-    ld [de], a                                    ; $5A37
-    inc e                                         ; $5A38
-    ld a, [hl+]                                   ; $5A39
-    ld [de], a                                    ; $5A3A
-    inc e                                         ; $5A3B
-    ld a, [hl+]                                   ; $5A3C
-    ld [de], a                                    ; $5A3D
-    inc e                                         ; $5A3E
-    ld a, [hl+]                                   ; $5A3F
-    ld [de], a                                    ; $5A40
-    inc e                                         ; $5A41
-    ld a, [hl+]                                   ; $5A42
-    ld [de], a                                    ; $5A43
-    inc e                                         ; $5A44
-    ld a, [hl+]                                   ; $5A45
-    ld [de], a                                    ; $5A46
-    inc e                                         ; $5A47
-    ld a, [hl+]                                   ; $5A48
-    ld [de], a                                    ; $5A49
-    inc e                                         ; $5A4A
-    ld a, [hl+]                                   ; $5A4B
-    ld [de], a                                    ; $5A4C
-    inc e                                         ; $5A4D
-    ld a, [hl+]                                   ; $5A4E
-    ld [de], a                                    ; $5A4F
-    inc e                                         ; $5A50
-    ld a, [hl+]                                   ; $5A51
-    ld [de], a                                    ; $5A52
-    inc e                                         ; $5A53
-    ld a, [hl+]                                   ; $5A54
-    ld [de], a                                    ; $5A55
-    inc e                                         ; $5A56
+    REPT 16                                       ; $5A27
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     ldh a, [hScratchB]                            ; $5A57
     dec a                                         ; $5A59
     jr z, jr_00a_5a60                             ; $5A5A
@@ -4720,54 +3699,11 @@ jr_00a_5a78:
     ld b, $08                                     ; $5A78
 
 jr_00a_5a7a:
-    ld a, [hl+]                                   ; $5A7A
-    ld [de], a                                    ; $5A7B
-    inc e                                         ; $5A7C
-    ld a, [hl+]                                   ; $5A7D
-    ld [de], a                                    ; $5A7E
-    inc e                                         ; $5A7F
-    ld a, [hl+]                                   ; $5A80
-    ld [de], a                                    ; $5A81
-    inc e                                         ; $5A82
-    ld a, [hl+]                                   ; $5A83
-    ld [de], a                                    ; $5A84
-    inc e                                         ; $5A85
-    ld a, [hl+]                                   ; $5A86
-    ld [de], a                                    ; $5A87
-    inc e                                         ; $5A88
-    ld a, [hl+]                                   ; $5A89
-    ld [de], a                                    ; $5A8A
-    inc e                                         ; $5A8B
-    ld a, [hl+]                                   ; $5A8C
-    ld [de], a                                    ; $5A8D
-    inc e                                         ; $5A8E
-    ld a, [hl+]                                   ; $5A8F
-    ld [de], a                                    ; $5A90
-    inc e                                         ; $5A91
-    ld a, [hl+]                                   ; $5A92
-    ld [de], a                                    ; $5A93
-    inc e                                         ; $5A94
-    ld a, [hl+]                                   ; $5A95
-    ld [de], a                                    ; $5A96
-    inc e                                         ; $5A97
-    ld a, [hl+]                                   ; $5A98
-    ld [de], a                                    ; $5A99
-    inc e                                         ; $5A9A
-    ld a, [hl+]                                   ; $5A9B
-    ld [de], a                                    ; $5A9C
-    inc e                                         ; $5A9D
-    ld a, [hl+]                                   ; $5A9E
-    ld [de], a                                    ; $5A9F
-    inc e                                         ; $5AA0
-    ld a, [hl+]                                   ; $5AA1
-    ld [de], a                                    ; $5AA2
-    inc e                                         ; $5AA3
-    ld a, [hl+]                                   ; $5AA4
-    ld [de], a                                    ; $5AA5
-    inc e                                         ; $5AA6
-    ld a, [hl+]                                   ; $5AA7
-    ld [de], a                                    ; $5AA8
-    inc e                                         ; $5AA9
+    REPT 16                                       ; $5A7A
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 16 copies of 3 bytes
     dec b                                         ; $5AAA
     jr nz, jr_00a_5a7a                            ; $5AAB
 
@@ -8405,8 +7341,7 @@ Cam_BootSelfTest_Entry::
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)
 Cam_FactoryDiag_AllButtonsExceptB::
-    call Pal_FadeOut                              ; $6A7B
-    call Lcd_Off                                  ; $6A7E
+    screen_off                                    ; $6A7B
     ld a, LCDCF_WIN9C00 | LCDCF_BGON              ; $6A81
     ldh [hLcdcShadow], a                          ; $6A83
     ld a, $e4                                     ; $6A85
@@ -8432,13 +7367,8 @@ Cam_FactoryDiag_AllButtonsExceptB::
     ld hl, $9968                                  ; $6AD1
     ld a, [$affd]                                 ; $6AD4
     call Cam_FactoryDiag_HexDigitWrite            ; $6AD7
-    call Oam_ClearShadow                          ; $6ADA
-    call Pal_AllWhite                             ; $6ADD
-    call Lcd_On                                   ; $6AE0
-    push af                                       ; $6AE3
-    ld a, MUSIC_JINGLE                            ; $6AE4
-    call Snd_Music                                ; $6AE6
-    pop af                                        ; $6AE9
+    screen_on                                     ; $6ADA
+    play_music MUSIC_JINGLE                       ; $6AE3
     call Pal_FadeIn                               ; $6AEA
     ldh [hFarcallAArg], a                         ; $6AED
     ld a, $0a                                     ; $6AEF
@@ -8465,18 +7395,12 @@ Cam_FactoryDiag_AllButtonsExceptB::
     jr nz, jr_00a_6b3f                            ; $6B26
 
     farcopy Vram_CopyFromBank_4, Map_25_5A80_Cam_FactoryDiag_AllButtonsExceptB, $98a0, $0020 ; $6B28
-    push af                                       ; $6B36
-    ld a, MUSIC_FACTORY_DIAG                      ; $6B37
-    call Snd_Music                                ; $6B39
-    pop af                                        ; $6B3C
+    play_music MUSIC_FACTORY_DIAG                 ; $6B36
     jr jr_00a_6b54                                ; $6B3D
 
 jr_00a_6b3f:
     farcopy Vram_CopyFromBank_4, Map_25_5AA0_Cam_FactoryDiag_AllButtonsExceptB, $98a0, $0020 ; $6B3F
-    push af                                       ; $6B4D
-    ld a, MUSIC_TOTAKA_TUNE                       ; $6B4E
-    call Snd_Music                                ; $6B50
-    pop af                                        ; $6B53
+    play_music MUSIC_TOTAKA_TUNE                  ; $6B4D
 
 jr_00a_6b54:
     jr jr_00a_6b54                                ; $6B54
@@ -8519,8 +7443,7 @@ Cam_FactoryDiag_NibbleToTile_lo::
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)
 Cam_FirstBoot_StorePleaseWait::
-    call Pal_FadeOut                              ; $6B73
-    call Lcd_Off                                  ; $6B76
+    screen_off                                    ; $6B73
     ld a, LCDCF_WIN9C00 | LCDCF_BGON              ; $6B79
     ldh [hLcdcShadow], a                          ; $6B7B
     ld a, $e4                                     ; $6B7D
@@ -8532,23 +7455,15 @@ Cam_FirstBoot_StorePleaseWait::
     ldh [hScyShadow], a                           ; $6B8B
     farcopy Mem_CopyFromBank, Gfx_24_57E0_Unused_Link_LoadTiles, $9000, $0300 ; $6B8D
     farcopy Mem_CopyFromBank, Map_25_5AC0_Cam_FirstBoot_StorePleaseWait, $9800, $0240 ; $6B9B
-    call Oam_ClearShadow                          ; $6BA9
-    call Pal_AllWhite                             ; $6BAC
-    call Lcd_On                                   ; $6BAF
-    push af                                       ; $6BB2
-    ld a, MUSIC_JINGLE                            ; $6BB3
-    call Snd_Music                                ; $6BB5
-    pop af                                        ; $6BB8
+    screen_on                                     ; $6BA9
+    play_music MUSIC_JINGLE                       ; $6BB2
     call Pal_FadeIn                               ; $6BB9
     ldh [hFarcallAArg], a                         ; $6BBC
     ld a, $0a                                     ; $6BBE
     ld hl, Cam_FarStub_FullCalibration            ; $6BC0
     call Far_Call                                 ; $6BC3
     farcopy Vram_CopyFromBank_4, Map_25_5D00_Cam_FirstBoot_StorePleaseWait, $9900, $0020 ; $6BC6
-    push af                                       ; $6BD4
-    ld a, MUSIC_RUN_RACE                          ; $6BD5
-    call Snd_Music                                ; $6BD7
-    pop af                                        ; $6BDA
+    play_music MUSIC_RUN_RACE                     ; $6BD4
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in
 ; the organic runs of the core emulator (coverage/results/merged_state/cov.npz)

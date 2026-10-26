@@ -59,13 +59,8 @@ jr_005_4049:
 jr_005_405e:
     farcopy Mem_CopyFromBank, Gfx_10_5C00_Mode1F_State00_TitleInit, $8000, $1800 ; $405E
     farcopy Mem_CopyFromBank, Map_26_6780_Mode1F_State00_TitleInit, $9800, $0240 ; $406C
-    call Oam_ClearShadow                          ; $407A
-    call Pal_AllWhite                             ; $407D
-    call Lcd_On                                   ; $4080
-    push af                                       ; $4083
-    ld a, MUSIC_DJ_TITLE                          ; $4084
-    call Snd_Music                                ; $4086
-    pop af                                        ; $4089
+    screen_on                                     ; $407A
+    play_music MUSIC_DJ_TITLE                     ; $4083
     call Pal_FadeIn                               ; $408A
     next_state                                    ; $408D
     ret                                           ; $4091
@@ -79,10 +74,7 @@ Mode1F_State01_MenuSource::
     bit PADB_A, a                                 ; $409A
     jr z, jr_005_40cb                             ; $409C
 
-    push af                                       ; $409E
-    ld a, SFX1_CURSOR_MOVE                        ; $409F
-    call Snd_Sfx1                                 ; $40A1
-    pop af                                        ; $40A4
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $409E
     ld a, [wStartTuneSource]                      ; $40A5
     and a                                         ; $40A8
     jr nz, jr_005_40b3                            ; $40A9
@@ -100,10 +92,7 @@ jr_005_40b3:
     and a                                         ; $40BA
     jr nz, jr_005_40c5                            ; $40BB
 
-    push af                                       ; $40BD
-    ld a, SFX1_BEEP_REFUSED                       ; $40BE
-    call Snd_Sfx1                                 ; $40C0
-    pop af                                        ; $40C3
+    play_sfx1 SFX1_BEEP_REFUSED                   ; $40BD
     ret                                           ; $40C4
 
 
@@ -116,12 +105,8 @@ jr_005_40cb:
     bit 1, a                                      ; $40CB
     ret z                                         ; $40CD
 
-    push af                                       ; $40CE
-    ld a, SFX1_KEY_B                              ; $40CF
-    call Snd_Sfx1                                 ; $40D1
-    pop af                                        ; $40D4
-    call Pal_FadeOut                              ; $40D5
-    call Lcd_Off                                  ; $40D8
+    play_sfx1 SFX1_KEY_B                          ; $40CE
+    screen_off                                    ; $40D5
     ld a, MODE_MAIN_MENU                          ; $40DB
     ld [wMode], a                                 ; $40DD
     set_state STATE_00_INIT                       ; $40E0
@@ -153,10 +138,7 @@ jr_005_40f5:
 
 jr_005_40fc:
     ld [wStartTuneSource], a                      ; $40FC
-    push af                                       ; $40FF
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $4100
-    call Snd_Sfx1                                 ; $4102
-    pop af                                        ; $4105
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $40FF
     ret                                           ; $4106
 
 
@@ -250,10 +232,7 @@ Mode1F_State02_MenuSong::
     bit PADB_A, a                                 ; $4176
     jr z, jr_005_4186                             ; $4178
 
-    push af                                       ; $417A
-    ld a, SFX1_CURSOR_MOVE                        ; $417B
-    call Snd_Sfx1                                 ; $417D
-    pop af                                        ; $4180
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $417A
     next_state                                    ; $4181
     ret                                           ; $4185
 
@@ -262,10 +241,7 @@ jr_005_4186:
     bit 1, a                                      ; $4186
     ret z                                         ; $4188
 
-    push af                                       ; $4189
-    ld a, SFX1_KEY_B                              ; $418A
-    call Snd_Sfx1                                 ; $418C
-    pop af                                        ; $418F
+    play_sfx1 SFX1_KEY_B                          ; $4189
     ld hl, wState                                 ; $4190
     dec [hl]                                      ; $4193
     ret                                           ; $4194
@@ -296,10 +272,7 @@ jr_005_41a4:
 
 jr_005_41ab:
     ld [wStartFactorySong], a                     ; $41AB
-    push af                                       ; $41AE
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $41AF
-    call Snd_Sfx1                                 ; $41B1
-    pop af                                        ; $41B4
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $41AE
     call DjTitle_DrawSongNumber                   ; $41B5
     ret                                           ; $41B8
 
@@ -425,12 +398,8 @@ Mode1F_State03_MenuPerformer::
     bit PADB_A, a                                 ; $4258
     jr z, jr_005_42ad                             ; $425A
 
-    push af                                       ; $425C
-    ld a, SFX1_CURSOR_MOVE                        ; $425D
-    call Snd_Sfx1                                 ; $425F
-    pop af                                        ; $4262
-    call Pal_FadeOut                              ; $4263
-    call Lcd_Off                                  ; $4266
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $425C
+    screen_off                                    ; $4263
     ld a, [wStartTuneSource]                      ; $4269
     and a                                         ; $426C
     jr nz, jr_005_4278                            ; $426D
@@ -474,10 +443,7 @@ jr_005_42ad:
     bit 1, a                                      ; $42AD
     ret z                                         ; $42AF
 
-    push af                                       ; $42B0
-    ld a, SFX1_KEY_B                              ; $42B1
-    call Snd_Sfx1                                 ; $42B3
-    pop af                                        ; $42B6
+    play_sfx1 SFX1_KEY_B                          ; $42B0
     ld a, [wStartTuneSource]                      ; $42B7
     and a                                         ; $42BA
     jr nz, jr_005_42c5                            ; $42BB
@@ -518,10 +484,7 @@ jr_005_42da:
 
 jr_005_42e1:
     ld [wStartPerformerSet], a                    ; $42E1
-    push af                                       ; $42E4
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $42E5
-    call Snd_Sfx1                                 ; $42E7
-    pop af                                        ; $42EA
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $42E4
     ret                                           ; $42EB
 
 
@@ -656,18 +619,10 @@ Mode1F_State04_PerformanceSetup::
     set 1, [hl]                                   ; $43D5
     ld a, $06                                     ; $43D7
     ldh [hStatHandlerIndex], a                    ; $43D9
-    call Oam_ClearShadow                          ; $43DB
-    call Pal_AllWhite                             ; $43DE
-    call Lcd_On                                   ; $43E1
-    push af                                       ; $43E4
-    ld a, MUSIC_STOP                              ; $43E5
-    call Snd_Music                                ; $43E7
-    pop af                                        ; $43EA
+    screen_on                                     ; $43DB
+    play_music MUSIC_STOP                         ; $43E4
     rst Rst08_WaitVBlank                          ; $43EB
-    push af                                       ; $43EC
-    ld a, MUSIC_HOLD                              ; $43ED
-    call Snd_Music                                ; $43EF
-    pop af                                        ; $43F2
+    play_music MUSIC_HOLD                         ; $43EC
     call DjPerf_DrawTempo                         ; $43F3
     call DjPerf_DrawChannel1State                 ; $43F6
     call DjPerf_DrawChannel2State                 ; $43F9
@@ -697,12 +652,8 @@ Mode1F_State05_Performance::
     bit PADB_SELECT, a                            ; $442A
     jr z, jr_005_4444                             ; $442C
 
-    call Pal_FadeOut                              ; $442E
-    call Lcd_Off                                  ; $4431
-    ld hl, hStatShadow                            ; $4434
-    res 6, [hl]                                   ; $4437
-    ld hl, rIE                                    ; $4439
-    res 1, [hl]                                   ; $443C
+    screen_off                                    ; $442E
+    stat_irq_off                                  ; $4434
     set_state STATE_1F_EDIT_PAGES_SETUP           ; $443E
     ret                                           ; $4443
 
@@ -716,16 +667,9 @@ jr_005_4444:
     and a                                         ; $444D
     jr nz, jr_005_446d                            ; $444E
 
-    call Pal_FadeOut                              ; $4450
-    call Lcd_Off                                  ; $4453
-    ld hl, hStatShadow                            ; $4456
-    res 6, [hl]                                   ; $4459
-    ld hl, rIE                                    ; $445B
-    res 1, [hl]                                   ; $445E
-    push af                                       ; $4460
-    ld a, MUSIC_STOP                              ; $4461
-    call Snd_Music                                ; $4463
-    pop af                                        ; $4466
+    screen_off                                    ; $4450
+    stat_irq_off                                  ; $4456
+    play_music MUSIC_STOP                         ; $4460
     set_state STATE_1F_TITLE_INIT                 ; $4467
     ret                                           ; $446C
 
@@ -790,16 +734,9 @@ Mode1F_State07_QuitPanel::
     call DjPerf_AnimateSprites                    ; $4505
     call Oam_HideUnused                           ; $4508
     call DjPanel_SlideIn                          ; $450B
-    call Pal_FadeOut                              ; $450E
-    call Lcd_Off                                  ; $4511
-    ld hl, hStatShadow                            ; $4514
-    res 6, [hl]                                   ; $4517
-    ld hl, rIE                                    ; $4519
-    res 1, [hl]                                   ; $451C
-    push af                                       ; $451E
-    ld a, MUSIC_STOP                              ; $451F
-    call Snd_Music                                ; $4521
-    pop af                                        ; $4524
+    screen_off                                    ; $450E
+    stat_irq_off                                  ; $4514
+    play_music MUSIC_STOP                         ; $451E
     set_state STATE_1F_TITLE_INIT                 ; $4525
     ret                                           ; $452A
 
@@ -1173,12 +1110,8 @@ DjNs_FieldTbl::
 ; C: back to state 04 with a fade
 Mode1F_State0C_Restart::
     set_state STATE_1F_PERFORMANCE_SETUP          ; $48D4
-    call Pal_FadeOut                              ; $48D9
-    call Lcd_Off                                  ; $48DC
-    ld hl, hStatShadow                            ; $48DF
-    res 6, [hl]                                   ; $48E2
-    ld hl, rIE                                    ; $48E4
-    res 1, [hl]                                   ; $48E7
+    screen_off                                    ; $48D9
+    stat_irq_off                                  ; $48DF
     ret                                           ; $48E9
 
 
@@ -1195,10 +1128,7 @@ DjEd_StepValue_Right::
     cp b                                          ; $48F7
     jr z, jr_005_4913                             ; $48F8
 
-    push af                                       ; $48FA
-    ld a, $03                                     ; $48FB
-    ld [wUiSfxRequest], a                         ; $48FD
-    pop af                                        ; $4900
+    ui_sfx $03                                    ; $48FA
     dec a                                         ; $4901
     jr jr_005_4913                                ; $4902
 
@@ -1209,10 +1139,7 @@ jr_005_4904:
     cp c                                          ; $4908
     jr z, jr_005_4913                             ; $4909
 
-    push af                                       ; $490B
-    ld a, $02                                     ; $490C
-    ld [wUiSfxRequest], a                         ; $490E
-    pop af                                        ; $4911
+    ui_sfx $02                                    ; $490B
     inc a                                         ; $4912
 
 jr_005_4913:
@@ -1241,10 +1168,7 @@ DjEd_StepValue_Up::
     cp b                                          ; $4932
     jr z, jr_005_494e                             ; $4933
 
-    push af                                       ; $4935
-    ld a, $06                                     ; $4936
-    ld [wUiSfxRequest], a                         ; $4938
-    pop af                                        ; $493B
+    ui_sfx $06                                    ; $4935
     dec a                                         ; $493C
     jr jr_005_494e                                ; $493D
 
@@ -1255,10 +1179,7 @@ jr_005_493f:
     cp c                                          ; $4943
     jr z, jr_005_494e                             ; $4944
 
-    push af                                       ; $4946
-    ld a, $07                                     ; $4947
-    ld [wUiSfxRequest], a                         ; $4949
-    pop af                                        ; $494C
+    ui_sfx $07                                    ; $4946
     inc a                                         ; $494D
 
 jr_005_494e:
@@ -1287,10 +1208,7 @@ DjEd_StepValue_LeftRight::
     cp b                                          ; $496D
     jr z, jr_005_4989                             ; $496E
 
-    push af                                       ; $4970
-    ld a, $06                                     ; $4971
-    ld [wUiSfxRequest], a                         ; $4973
-    pop af                                        ; $4976
+    ui_sfx $06                                    ; $4970
     dec a                                         ; $4977
     jr jr_005_4989                                ; $4978
 
@@ -1301,10 +1219,7 @@ jr_005_497a:
     cp c                                          ; $497E
     jr z, jr_005_4989                             ; $497F
 
-    push af                                       ; $4981
-    ld a, $07                                     ; $4982
-    ld [wUiSfxRequest], a                         ; $4984
-    pop af                                        ; $4987
+    ui_sfx $07                                    ; $4981
     inc a                                         ; $4988
 
 jr_005_4989:
@@ -1329,10 +1244,7 @@ DjEd_StepLeftRight::
     cp b                                          ; $49A2
     ret z                                         ; $49A3
 
-    push af                                       ; $49A4
-    ld a, $08                                     ; $49A5
-    ld [wUiSfxRequest], a                         ; $49A7
-    pop af                                        ; $49AA
+    ui_sfx $08                                    ; $49A4
     dec a                                         ; $49AB
     ret                                           ; $49AC
 
@@ -1344,10 +1256,7 @@ jr_005_49ad:
     cp c                                          ; $49B0
     ret z                                         ; $49B1
 
-    push af                                       ; $49B2
-    ld a, $08                                     ; $49B3
-    ld [wUiSfxRequest], a                         ; $49B5
-    pop af                                        ; $49B8
+    ui_sfx $08                                    ; $49B2
     inc a                                         ; $49B9
     ret                                           ; $49BA
 
@@ -1361,10 +1270,7 @@ DjEd_StepUpDown::
     cp b                                          ; $49C2
     ret z                                         ; $49C3
 
-    push af                                       ; $49C4
-    ld a, $08                                     ; $49C5
-    ld [wUiSfxRequest], a                         ; $49C7
-    pop af                                        ; $49CA
+    ui_sfx $08                                    ; $49C4
     dec a                                         ; $49CB
     ret                                           ; $49CC
 
@@ -1376,10 +1282,7 @@ jr_005_49cd:
     cp c                                          ; $49D0
     ret z                                         ; $49D1
 
-    push af                                       ; $49D2
-    ld a, $08                                     ; $49D3
-    ld [wUiSfxRequest], a                         ; $49D5
-    pop af                                        ; $49D8
+    ui_sfx $08                                    ; $49D2
     inc a                                         ; $49D9
     ret                                           ; $49DA
 
@@ -1393,10 +1296,7 @@ DjEd_StepDownUp::
     cp b                                          ; $49E2
     ret z                                         ; $49E3
 
-    push af                                       ; $49E4
-    ld a, $08                                     ; $49E5
-    ld [wUiSfxRequest], a                         ; $49E7
-    pop af                                        ; $49EA
+    ui_sfx $08                                    ; $49E4
     dec a                                         ; $49EB
     ret                                           ; $49EC
 
@@ -1408,10 +1308,7 @@ jr_005_49ed:
     cp c                                          ; $49F0
     ret z                                         ; $49F1
 
-    push af                                       ; $49F2
-    ld a, $08                                     ; $49F3
-    ld [wUiSfxRequest], a                         ; $49F5
-    pop af                                        ; $49F8
+    ui_sfx $08                                    ; $49F2
     inc a                                         ; $49F9
     ret                                           ; $49FA
 
@@ -2777,18 +2674,11 @@ jr_005_5258:
 ; C: L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator
 ; (coverage/results/merged_state/cov.npz)
 DjPerf_CopyEqualiserRow::
-    ld a, [hl+]                                   ; $5267
-    ld [de], a                                    ; $5268
-    inc e                                         ; $5269
-    ld a, [hl+]                                   ; $526A
-    ld [de], a                                    ; $526B
-    inc e                                         ; $526C
-    ld a, [hl+]                                   ; $526D
-    ld [de], a                                    ; $526E
-    inc e                                         ; $526F
-    ld a, [hl+]                                   ; $5270
-    ld [de], a                                    ; $5271
-    inc e                                         ; $5272
+    REPT 4                                        ; $5267
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 4 copies of 3 bytes
     ret                                           ; $5273
 
 
@@ -3174,10 +3064,7 @@ jr_005_549f:
     bit PADB_START, a                             ; $54A1
     jr z, jr_005_54db                             ; $54A3
 
-    push af                                       ; $54A5
-    ld a, $04                                     ; $54A6
-    ld [wUiSfxRequest], a                         ; $54A8
-    pop af                                        ; $54AB
+    ui_sfx $04                                    ; $54A5
     xor a                                         ; $54AC
     ld [wPerfStartHold], a                        ; $54AD
     ld a, [wPerfPaused]                           ; $54B0
@@ -3859,10 +3746,7 @@ jr_005_584e:
 
 ; C: sound $12 and window slide
 DjPanel_SlideIn::
-    push af                                       ; $5853
-    ld a, SFX1_PANEL_OPEN                         ; $5854
-    call Snd_Sfx1                                 ; $5856
-    pop af                                        ; $5859
+    play_sfx1 SFX1_PANEL_OPEN                     ; $5853
     ld hl, Slide_WyDeltaTbl                       ; $585A
     ld b, $24                                     ; $585D
 
@@ -3885,10 +3769,7 @@ jr_005_585f:
 
 ; C: sound $13 and window slide back
 DjPanel_SlideOut::
-    push af                                       ; $5871
-    ld a, SFX1_PANEL_CLOSE                        ; $5872
-    call Snd_Sfx1                                 ; $5874
-    pop af                                        ; $5877
+    play_sfx1 SFX1_PANEL_CLOSE                    ; $5871
     ld hl, Slide_WyDeltaTbl                       ; $5878
     ld b, $24                                     ; $587B
 
@@ -5817,10 +5698,7 @@ DjS1_Field00_Duty::
     bit PADB_RIGHT, a                             ; $62F5
     jr z, jr_005_630d                             ; $62F7
 
-    push af                                       ; $62F9
-    ld a, $01                                     ; $62FA
-    ld [wUiSfxRequest], a                         ; $62FC
-    pop af                                        ; $62FF
+    ui_sfx $01                                    ; $62F9
     call DjS1_Field00_DrawMarker                  ; $6300
     ld a, $01                                     ; $6303
     ld [wSound1FieldCursor], a                    ; $6305
@@ -5833,10 +5711,7 @@ jr_005_630d:
     bit 7, a                                      ; $630D
     ret z                                         ; $630F
 
-    push af                                       ; $6310
-    ld a, $01                                     ; $6311
-    ld [wUiSfxRequest], a                         ; $6313
-    pop af                                        ; $6316
+    ui_sfx $01                                    ; $6310
     call DjS1_Field00_DrawMarker                  ; $6317
     ld a, [wSound1FieldCursor]                    ; $631A
     ld [wSound1FieldCursor + $2], a               ; $631D
@@ -5924,10 +5799,7 @@ DjS1_Field01_EnvDir::
     bit PADB_LEFT, a                              ; $639A
     jr z, jr_005_63af                             ; $639C
 
-    push af                                       ; $639E
-    ld a, $01                                     ; $639F
-    ld [wUiSfxRequest], a                         ; $63A1
-    pop af                                        ; $63A4
+    ui_sfx $01                                    ; $639E
     ld a, $00                                     ; $63A5
     ld [wSound1FieldCursor], a                    ; $63A7
     xor a                                         ; $63AA
@@ -5939,10 +5811,7 @@ jr_005_63af:
     bit 4, a                                      ; $63AF
     jr z, jr_005_63c0                             ; $63B1
 
-    push af                                       ; $63B3
-    ld a, $01                                     ; $63B4
-    ld [wUiSfxRequest], a                         ; $63B6
-    pop af                                        ; $63B9
+    ui_sfx $01                                    ; $63B3
     ld a, $02                                     ; $63BA
     ld [wSound1FieldCursor], a                    ; $63BC
     ret                                           ; $63BF
@@ -5952,10 +5821,7 @@ jr_005_63c0:
     bit 7, a                                      ; $63C0
     ret z                                         ; $63C2
 
-    push af                                       ; $63C3
-    ld a, $01                                     ; $63C4
-    ld [wUiSfxRequest], a                         ; $63C6
-    pop af                                        ; $63C9
+    ui_sfx $01                                    ; $63C3
     ld a, [wSound1FieldCursor]                    ; $63CA
     ld [wSound1FieldCursor + $2], a               ; $63CD
     ld a, $08                                     ; $63D0
@@ -6021,10 +5887,7 @@ DjS1_Field02_Volume::
     bit PADB_LEFT, a                              ; $6426
     jr z, jr_005_6437                             ; $6428
 
-    push af                                       ; $642A
-    ld a, $01                                     ; $642B
-    ld [wUiSfxRequest], a                         ; $642D
-    pop af                                        ; $6430
+    ui_sfx $01                                    ; $642A
     ld a, $01                                     ; $6431
     ld [wSound1FieldCursor], a                    ; $6433
     ret                                           ; $6436
@@ -6034,10 +5897,7 @@ jr_005_6437:
     bit 4, a                                      ; $6437
     jr z, jr_005_6448                             ; $6439
 
-    push af                                       ; $643B
-    ld a, $01                                     ; $643C
-    ld [wUiSfxRequest], a                         ; $643E
-    pop af                                        ; $6441
+    ui_sfx $01                                    ; $643B
     ld a, $03                                     ; $6442
     ld [wSound1FieldCursor], a                    ; $6444
     ret                                           ; $6447
@@ -6047,10 +5907,7 @@ jr_005_6448:
     bit 7, a                                      ; $6448
     ret z                                         ; $644A
 
-    push af                                       ; $644B
-    ld a, $01                                     ; $644C
-    ld [wUiSfxRequest], a                         ; $644E
-    pop af                                        ; $6451
+    ui_sfx $01                                    ; $644B
     ld a, [wSound1FieldCursor]                    ; $6452
     ld [wSound1FieldCursor + $2], a               ; $6455
     ld a, $08                                     ; $6458
@@ -6108,10 +5965,7 @@ DjS1_Field03_EnvPeriod::
     bit PADB_LEFT, a                              ; $649D
     jr z, jr_005_64ae                             ; $649F
 
-    push af                                       ; $64A1
-    ld a, $01                                     ; $64A2
-    ld [wUiSfxRequest], a                         ; $64A4
-    pop af                                        ; $64A7
+    ui_sfx $01                                    ; $64A1
     ld a, $02                                     ; $64A8
     ld [wSound1FieldCursor], a                    ; $64AA
     ret                                           ; $64AD
@@ -6121,10 +5975,7 @@ jr_005_64ae:
     bit 4, a                                      ; $64AE
     jr z, jr_005_64bf                             ; $64B0
 
-    push af                                       ; $64B2
-    ld a, $01                                     ; $64B3
-    ld [wUiSfxRequest], a                         ; $64B5
-    pop af                                        ; $64B8
+    ui_sfx $01                                    ; $64B2
     ld a, $04                                     ; $64B9
     ld [wSound1FieldCursor], a                    ; $64BB
     ret                                           ; $64BE
@@ -6134,10 +5985,7 @@ jr_005_64bf:
     bit 7, a                                      ; $64BF
     ret z                                         ; $64C1
 
-    push af                                       ; $64C2
-    ld a, $01                                     ; $64C3
-    ld [wUiSfxRequest], a                         ; $64C5
-    pop af                                        ; $64C8
+    ui_sfx $01                                    ; $64C2
     ld a, [wSound1FieldCursor]                    ; $64C9
     ld [wSound1FieldCursor + $2], a               ; $64CC
     ld a, $08                                     ; $64CF
@@ -6195,10 +6043,7 @@ DjS1_Field04_Length::
     bit PADB_LEFT, a                              ; $6514
     jr z, jr_005_6525                             ; $6516
 
-    push af                                       ; $6518
-    ld a, $01                                     ; $6519
-    ld [wUiSfxRequest], a                         ; $651B
-    pop af                                        ; $651E
+    ui_sfx $01                                    ; $6518
     ld a, $03                                     ; $651F
     ld [wSound1FieldCursor], a                    ; $6521
     ret                                           ; $6524
@@ -6208,10 +6053,7 @@ jr_005_6525:
     bit 4, a                                      ; $6525
     jr z, jr_005_653a                             ; $6527
 
-    push af                                       ; $6529
-    ld a, $01                                     ; $652A
-    ld [wUiSfxRequest], a                         ; $652C
-    pop af                                        ; $652F
+    ui_sfx $01                                    ; $6529
     ld a, $05                                     ; $6530
     ld [wSound1FieldCursor], a                    ; $6532
     xor a                                         ; $6535
@@ -6223,10 +6065,7 @@ jr_005_653a:
     bit 7, a                                      ; $653A
     ret z                                         ; $653C
 
-    push af                                       ; $653D
-    ld a, $01                                     ; $653E
-    ld [wUiSfxRequest], a                         ; $6540
-    pop af                                        ; $6543
+    ui_sfx $01                                    ; $653D
     ld a, [wSound1FieldCursor]                    ; $6544
     ld [wSound1FieldCursor + $2], a               ; $6547
     ld a, $08                                     ; $654A
@@ -6284,10 +6123,7 @@ DjS1_Field05_ModDepth::
     bit PADB_LEFT, a                              ; $658F
     jr z, jr_005_65a4                             ; $6591
 
-    push af                                       ; $6593
-    ld a, $01                                     ; $6594
-    ld [wUiSfxRequest], a                         ; $6596
-    pop af                                        ; $6599
+    ui_sfx $01                                    ; $6593
     ld a, $04                                     ; $659A
     ld [wSound1FieldCursor], a                    ; $659C
     xor a                                         ; $659F
@@ -6299,10 +6135,7 @@ jr_005_65a4:
     bit 4, a                                      ; $65A4
     jr z, jr_005_65b5                             ; $65A6
 
-    push af                                       ; $65A8
-    ld a, $01                                     ; $65A9
-    ld [wUiSfxRequest], a                         ; $65AB
-    pop af                                        ; $65AE
+    ui_sfx $01                                    ; $65A8
     ld a, $06                                     ; $65AF
     ld [wSound1FieldCursor], a                    ; $65B1
     ret                                           ; $65B4
@@ -6312,10 +6145,7 @@ jr_005_65b5:
     bit 7, a                                      ; $65B5
     ret z                                         ; $65B7
 
-    push af                                       ; $65B8
-    ld a, $01                                     ; $65B9
-    ld [wUiSfxRequest], a                         ; $65BB
-    pop af                                        ; $65BE
+    ui_sfx $01                                    ; $65B8
     ld a, [wSound1FieldCursor]                    ; $65BF
     ld [wSound1FieldCursor + $2], a               ; $65C2
     ld a, $08                                     ; $65C5
@@ -6369,10 +6199,7 @@ DjS1_Field06_ModSpeed::
     bit PADB_LEFT, a                              ; $6607
     jr z, jr_005_6618                             ; $6609
 
-    push af                                       ; $660B
-    ld a, $01                                     ; $660C
-    ld [wUiSfxRequest], a                         ; $660E
-    pop af                                        ; $6611
+    ui_sfx $01                                    ; $660B
     ld a, $05                                     ; $6612
     ld [wSound1FieldCursor], a                    ; $6614
     ret                                           ; $6617
@@ -6382,10 +6209,7 @@ jr_005_6618:
     bit 4, a                                      ; $6618
     jr z, jr_005_6629                             ; $661A
 
-    push af                                       ; $661C
-    ld a, $01                                     ; $661D
-    ld [wUiSfxRequest], a                         ; $661F
-    pop af                                        ; $6622
+    ui_sfx $01                                    ; $661C
     ld a, $07                                     ; $6623
     ld [wSound1FieldCursor], a                    ; $6625
     ret                                           ; $6628
@@ -6395,10 +6219,7 @@ jr_005_6629:
     bit 7, a                                      ; $6629
     ret z                                         ; $662B
 
-    push af                                       ; $662C
-    ld a, $01                                     ; $662D
-    ld [wUiSfxRequest], a                         ; $662F
-    pop af                                        ; $6632
+    ui_sfx $01                                    ; $662C
     ld a, [wSound1FieldCursor]                    ; $6633
     ld [wSound1FieldCursor + $2], a               ; $6636
     ld a, $08                                     ; $6639
@@ -6452,10 +6273,7 @@ DjS1_Field07_ModMode::
     bit PADB_LEFT, a                              ; $667B
     jr z, jr_005_668f                             ; $667D
 
-    push af                                       ; $667F
-    ld a, $01                                     ; $6680
-    ld [wUiSfxRequest], a                         ; $6682
-    pop af                                        ; $6685
+    ui_sfx $01                                    ; $667F
     call DjS1_Field07_DrawMarker                  ; $6686
     ld a, $06                                     ; $6689
     ld [wSound1FieldCursor], a                    ; $668B
@@ -6466,10 +6284,7 @@ jr_005_668f:
     bit 7, a                                      ; $668F
     ret z                                         ; $6691
 
-    push af                                       ; $6692
-    ld a, $01                                     ; $6693
-    ld [wUiSfxRequest], a                         ; $6695
-    pop af                                        ; $6698
+    ui_sfx $01                                    ; $6692
     call DjS1_Field07_DrawMarker                  ; $6699
     ld a, [wSound1FieldCursor]                    ; $669C
     ld [wSound1FieldCursor + $2], a               ; $669F
@@ -6553,10 +6368,7 @@ DjS1_Field08_LoopLength::
     bit PADB_UP, a                                ; $6719
     jr z, jr_005_672f                             ; $671B
 
-    push af                                       ; $671D
-    ld a, $01                                     ; $671E
-    ld [wUiSfxRequest], a                         ; $6720
-    pop af                                        ; $6723
+    ui_sfx $01                                    ; $671D
     ld a, [wSound1FieldCursor + $2]               ; $6724
     ld [wSound1FieldCursor], a                    ; $6727
     xor a                                         ; $672A
@@ -6568,10 +6380,7 @@ jr_005_672f:
     bit 7, a                                      ; $672F
     ret z                                         ; $6731
 
-    push af                                       ; $6732
-    ld a, $01                                     ; $6733
-    ld [wUiSfxRequest], a                         ; $6735
-    pop af                                        ; $6738
+    ui_sfx $01                                    ; $6732
     call DjEd_DrawLoopBar                         ; $6739
     ld a, $09                                     ; $673C
     ld [wSound1FieldCursor], a                    ; $673E
@@ -6628,10 +6437,7 @@ DjS1_Field09_NoteGrid::
     bit PADB_UP, a                                ; $678A
     jr z, jr_005_679f                             ; $678C
 
-    push af                                       ; $678E
-    ld a, $01                                     ; $678F
-    ld [wUiSfxRequest], a                         ; $6791
-    pop af                                        ; $6794
+    ui_sfx $01                                    ; $678E
     ld a, $08                                     ; $6795
     ld [wSound1FieldCursor], a                    ; $6797
     xor a                                         ; $679A
@@ -6643,10 +6449,7 @@ jr_005_679f:
     bit 3, a                                      ; $679F
     jr z, jr_005_67b0                             ; $67A1
 
-    push af                                       ; $67A3
-    ld a, $04                                     ; $67A4
-    ld [wUiSfxRequest], a                         ; $67A6
-    pop af                                        ; $67A9
+    ui_sfx $04                                    ; $67A3
     ld a, $0b                                     ; $67AA
     ld [wSound1FieldCursor], a                    ; $67AC
     ret                                           ; $67AF
@@ -6656,10 +6459,7 @@ jr_005_67b0:
     bit 0, a                                      ; $67B0
     ret z                                         ; $67B2
 
-    push af                                       ; $67B3
-    ld a, $04                                     ; $67B4
-    ld [wUiSfxRequest], a                         ; $67B6
-    pop af                                        ; $67B9
+    ui_sfx $04                                    ; $67B3
     ld a, $0a                                     ; $67BA
     ld [wSound1FieldCursor], a                    ; $67BC
     ret                                           ; $67BF
@@ -6740,10 +6540,7 @@ DjS1_Field0A_NoteEdit::
     bit PADB_A, a                                 ; $6838
     ret nz                                        ; $683A
 
-    push af                                       ; $683B
-    ld a, $05                                     ; $683C
-    ld [wUiSfxRequest], a                         ; $683E
-    pop af                                        ; $6841
+    ui_sfx $05                                    ; $683B
     call DjS1_Field0A_DrawMarker                  ; $6842
     ld a, $09                                     ; $6845
     ld [wSound1FieldCursor], a                    ; $6847
@@ -6828,10 +6625,7 @@ DjS1_Field0B_StereoEdit::
     bit PADB_START, a                             ; $68C1
     ret nz                                        ; $68C3
 
-    push af                                       ; $68C4
-    ld a, $05                                     ; $68C5
-    ld [wUiSfxRequest], a                         ; $68C7
-    pop af                                        ; $68CA
+    ui_sfx $05                                    ; $68C4
     ld a, $09                                     ; $68CB
     ld [wSound1FieldCursor], a                    ; $68CD
     ret                                           ; $68D0
@@ -6973,10 +6767,7 @@ DjS2_Field00_WavePattern::
     bit PADB_A, a                                 ; $69A5
     jr z, jr_005_69b9                             ; $69A7
 
-    push af                                       ; $69A9
-    ld a, $01                                     ; $69AA
-    ld [wUiSfxRequest], a                         ; $69AC
-    pop af                                        ; $69AF
+    ui_sfx $01                                    ; $69A9
     call DjS2_Field00_DrawMarker                  ; $69B0
     ld a, $01                                     ; $69B3
     ld [wSound2FieldCursor], a                    ; $69B5
@@ -6984,10 +6775,7 @@ DjS2_Field00_WavePattern::
 
 
 jr_005_69b9:
-    push af                                       ; $69B9
-    ld a, $01                                     ; $69BA
-    ld [wUiSfxRequest], a                         ; $69BC
-    pop af                                        ; $69BF
+    ui_sfx $01                                    ; $69B9
     call DjS2_Field00_DrawMarker                  ; $69C0
     ld a, $02                                     ; $69C3
     ld [wSound2FieldCursor], a                    ; $69C5
@@ -7000,10 +6788,7 @@ jr_005_69cd:
     bit 7, a                                      ; $69CD
     ret z                                         ; $69CF
 
-    push af                                       ; $69D0
-    ld a, $01                                     ; $69D1
-    ld [wUiSfxRequest], a                         ; $69D3
-    pop af                                        ; $69D6
+    ui_sfx $01                                    ; $69D0
     call DjS2_Field00_DrawMarker                  ; $69D7
     ld a, [wSound2FieldCursor]                    ; $69DA
     ld [wSound2FieldCursor + $2], a               ; $69DD
@@ -7217,10 +7002,7 @@ DjS2_Field02_Length::
     bit PADB_LEFT, a                              ; $6B1C
     jr z, jr_005_6b31                             ; $6B1E
 
-    push af                                       ; $6B20
-    ld a, $01                                     ; $6B21
-    ld [wUiSfxRequest], a                         ; $6B23
-    pop af                                        ; $6B26
+    ui_sfx $01                                    ; $6B20
     ld a, $00                                     ; $6B27
     ld [wSound2FieldCursor], a                    ; $6B29
     xor a                                         ; $6B2C
@@ -7232,10 +7014,7 @@ jr_005_6b31:
     bit 4, a                                      ; $6B31
     jr z, jr_005_6b46                             ; $6B33
 
-    push af                                       ; $6B35
-    ld a, $01                                     ; $6B36
-    ld [wUiSfxRequest], a                         ; $6B38
-    pop af                                        ; $6B3B
+    ui_sfx $01                                    ; $6B35
     ld a, $03                                     ; $6B3C
     ld [wSound2FieldCursor], a                    ; $6B3E
     xor a                                         ; $6B41
@@ -7247,10 +7026,7 @@ jr_005_6b46:
     bit 7, a                                      ; $6B46
     ret z                                         ; $6B48
 
-    push af                                       ; $6B49
-    ld a, $01                                     ; $6B4A
-    ld [wUiSfxRequest], a                         ; $6B4C
-    pop af                                        ; $6B4F
+    ui_sfx $01                                    ; $6B49
     ld a, [wSound2FieldCursor]                    ; $6B50
     ld [wSound2FieldCursor + $2], a               ; $6B53
     ld a, $06                                     ; $6B56
@@ -7306,10 +7082,7 @@ DjS2_Field03_ModDepth::
     bit PADB_LEFT, a                              ; $6B9A
     jr z, jr_005_6baf                             ; $6B9C
 
-    push af                                       ; $6B9E
-    ld a, $01                                     ; $6B9F
-    ld [wUiSfxRequest], a                         ; $6BA1
-    pop af                                        ; $6BA4
+    ui_sfx $01                                    ; $6B9E
     ld a, $02                                     ; $6BA5
     ld [wSound2FieldCursor], a                    ; $6BA7
     xor a                                         ; $6BAA
@@ -7321,10 +7094,7 @@ jr_005_6baf:
     bit 4, a                                      ; $6BAF
     jr z, jr_005_6bc0                             ; $6BB1
 
-    push af                                       ; $6BB3
-    ld a, $01                                     ; $6BB4
-    ld [wUiSfxRequest], a                         ; $6BB6
-    pop af                                        ; $6BB9
+    ui_sfx $01                                    ; $6BB3
     ld a, $04                                     ; $6BBA
     ld [wSound2FieldCursor], a                    ; $6BBC
     ret                                           ; $6BBF
@@ -7334,10 +7104,7 @@ jr_005_6bc0:
     bit 7, a                                      ; $6BC0
     ret z                                         ; $6BC2
 
-    push af                                       ; $6BC3
-    ld a, $01                                     ; $6BC4
-    ld [wUiSfxRequest], a                         ; $6BC6
-    pop af                                        ; $6BC9
+    ui_sfx $01                                    ; $6BC3
     ld a, [wSound2FieldCursor]                    ; $6BCA
     ld [wSound2FieldCursor + $2], a               ; $6BCD
     ld a, $06                                     ; $6BD0
@@ -7392,10 +7159,7 @@ DjS2_Field04_ModSpeed::
     bit PADB_LEFT, a                              ; $6C15
     jr z, jr_005_6c26                             ; $6C17
 
-    push af                                       ; $6C19
-    ld a, $01                                     ; $6C1A
-    ld [wUiSfxRequest], a                         ; $6C1C
-    pop af                                        ; $6C1F
+    ui_sfx $01                                    ; $6C19
     ld a, $03                                     ; $6C20
     ld [wSound2FieldCursor], a                    ; $6C22
     ret                                           ; $6C25
@@ -7405,10 +7169,7 @@ jr_005_6c26:
     bit 4, a                                      ; $6C26
     jr z, jr_005_6c37                             ; $6C28
 
-    push af                                       ; $6C2A
-    ld a, $01                                     ; $6C2B
-    ld [wUiSfxRequest], a                         ; $6C2D
-    pop af                                        ; $6C30
+    ui_sfx $01                                    ; $6C2A
     ld a, $05                                     ; $6C31
     ld [wSound2FieldCursor], a                    ; $6C33
     ret                                           ; $6C36
@@ -7418,10 +7179,7 @@ jr_005_6c37:
     bit 7, a                                      ; $6C37
     ret z                                         ; $6C39
 
-    push af                                       ; $6C3A
-    ld a, $01                                     ; $6C3B
-    ld [wUiSfxRequest], a                         ; $6C3D
-    pop af                                        ; $6C40
+    ui_sfx $01                                    ; $6C3A
     ld a, [wSound2FieldCursor]                    ; $6C41
     ld [wSound2FieldCursor + $2], a               ; $6C44
     ld a, $06                                     ; $6C47
@@ -7476,10 +7234,7 @@ DjS2_Field05_ModMode::
     bit PADB_LEFT, a                              ; $6C8C
     jr z, jr_005_6ca0                             ; $6C8E
 
-    push af                                       ; $6C90
-    ld a, $01                                     ; $6C91
-    ld [wUiSfxRequest], a                         ; $6C93
-    pop af                                        ; $6C96
+    ui_sfx $01                                    ; $6C90
     call DjS2_Field05_DrawMarker                  ; $6C97
     ld a, $04                                     ; $6C9A
     ld [wSound2FieldCursor], a                    ; $6C9C
@@ -7490,10 +7245,7 @@ jr_005_6ca0:
     bit 7, a                                      ; $6CA0
     ret z                                         ; $6CA2
 
-    push af                                       ; $6CA3
-    ld a, $01                                     ; $6CA4
-    ld [wUiSfxRequest], a                         ; $6CA6
-    pop af                                        ; $6CA9
+    ui_sfx $01                                    ; $6CA3
     call DjS2_Field05_DrawMarker                  ; $6CAA
     ld a, [wSound2FieldCursor]                    ; $6CAD
     ld [wSound2FieldCursor + $2], a               ; $6CB0
@@ -7578,10 +7330,7 @@ DjS2_Field06_LoopLength::
     bit PADB_UP, a                                ; $6D2D
     jr z, jr_005_6d43                             ; $6D2F
 
-    push af                                       ; $6D31
-    ld a, $01                                     ; $6D32
-    ld [wUiSfxRequest], a                         ; $6D34
-    pop af                                        ; $6D37
+    ui_sfx $01                                    ; $6D31
     ld a, [wSound2FieldCursor + $2]               ; $6D38
     ld [wSound2FieldCursor], a                    ; $6D3B
     xor a                                         ; $6D3E
@@ -7593,10 +7342,7 @@ jr_005_6d43:
     bit 7, a                                      ; $6D43
     ret z                                         ; $6D45
 
-    push af                                       ; $6D46
-    ld a, $01                                     ; $6D47
-    ld [wUiSfxRequest], a                         ; $6D49
-    pop af                                        ; $6D4C
+    ui_sfx $01                                    ; $6D46
     call DjEd_DrawLoopBar                         ; $6D4D
     ld a, $07                                     ; $6D50
     ld [wSound2FieldCursor], a                    ; $6D52
@@ -7653,10 +7399,7 @@ DjS2_Field07_NoteGrid::
     bit PADB_UP, a                                ; $6D9E
     jr z, jr_005_6db3                             ; $6DA0
 
-    push af                                       ; $6DA2
-    ld a, $01                                     ; $6DA3
-    ld [wUiSfxRequest], a                         ; $6DA5
-    pop af                                        ; $6DA8
+    ui_sfx $01                                    ; $6DA2
     ld a, $06                                     ; $6DA9
     ld [wSound2FieldCursor], a                    ; $6DAB
     xor a                                         ; $6DAE
@@ -7668,10 +7411,7 @@ jr_005_6db3:
     bit 3, a                                      ; $6DB3
     jr z, jr_005_6dc4                             ; $6DB5
 
-    push af                                       ; $6DB7
-    ld a, $04                                     ; $6DB8
-    ld [wUiSfxRequest], a                         ; $6DBA
-    pop af                                        ; $6DBD
+    ui_sfx $04                                    ; $6DB7
     ld a, $09                                     ; $6DBE
     ld [wSound2FieldCursor], a                    ; $6DC0
     ret                                           ; $6DC3
@@ -7681,10 +7421,7 @@ jr_005_6dc4:
     bit 0, a                                      ; $6DC4
     ret z                                         ; $6DC6
 
-    push af                                       ; $6DC7
-    ld a, $04                                     ; $6DC8
-    ld [wUiSfxRequest], a                         ; $6DCA
-    pop af                                        ; $6DCD
+    ui_sfx $04                                    ; $6DC7
     ld a, $08                                     ; $6DCE
     ld [wSound2FieldCursor], a                    ; $6DD0
     ret                                           ; $6DD3
@@ -7765,10 +7502,7 @@ DjS2_Field08_NoteEdit::
     bit PADB_A, a                                 ; $6E4C
     ret nz                                        ; $6E4E
 
-    push af                                       ; $6E4F
-    ld a, $05                                     ; $6E50
-    ld [wUiSfxRequest], a                         ; $6E52
-    pop af                                        ; $6E55
+    ui_sfx $05                                    ; $6E4F
     call DjS2_Field08_DrawMarker                  ; $6E56
     ld a, $07                                     ; $6E59
     ld [wSound2FieldCursor], a                    ; $6E5B
@@ -7853,10 +7587,7 @@ DjS2_Field09_StereoEdit::
     bit PADB_START, a                             ; $6ED5
     ret nz                                        ; $6ED7
 
-    push af                                       ; $6ED8
-    ld a, $05                                     ; $6ED9
-    ld [wUiSfxRequest], a                         ; $6EDB
-    pop af                                        ; $6EDE
+    ui_sfx $05                                    ; $6ED8
     ld a, $07                                     ; $6EDF
     ld [wSound2FieldCursor], a                    ; $6EE1
     ret                                           ; $6EE4
@@ -8141,10 +7872,7 @@ DjNs_Field00_EnvDir::
     bit PADB_RIGHT, a                             ; $7066
     jr z, jr_005_7077                             ; $7068
 
-    push af                                       ; $706A
-    ld a, $01                                     ; $706B
-    ld [wUiSfxRequest], a                         ; $706D
-    pop af                                        ; $7070
+    ui_sfx $01                                    ; $706A
     ld a, $01                                     ; $7071
     ld [wNoiseFieldCursor], a                     ; $7073
     ret                                           ; $7076
@@ -8154,10 +7882,7 @@ jr_005_7077:
     bit 7, a                                      ; $7077
     ret z                                         ; $7079
 
-    push af                                       ; $707A
-    ld a, $01                                     ; $707B
-    ld [wUiSfxRequest], a                         ; $707D
-    pop af                                        ; $7080
+    ui_sfx $01                                    ; $707A
     ld a, [wNoiseFieldCursor]                     ; $7081
     ld [wNoiseFieldCursor + $2], a                ; $7084
     ld a, $04                                     ; $7087
@@ -8223,10 +7948,7 @@ DjNs_Field01_Volume::
     bit PADB_LEFT, a                              ; $70DD
     jr z, jr_005_70ee                             ; $70DF
 
-    push af                                       ; $70E1
-    ld a, $01                                     ; $70E2
-    ld [wUiSfxRequest], a                         ; $70E4
-    pop af                                        ; $70E7
+    ui_sfx $01                                    ; $70E1
     ld a, $00                                     ; $70E8
     ld [wNoiseFieldCursor], a                     ; $70EA
     ret                                           ; $70ED
@@ -8236,10 +7958,7 @@ jr_005_70ee:
     bit 4, a                                      ; $70EE
     jr z, jr_005_70ff                             ; $70F0
 
-    push af                                       ; $70F2
-    ld a, $01                                     ; $70F3
-    ld [wUiSfxRequest], a                         ; $70F5
-    pop af                                        ; $70F8
+    ui_sfx $01                                    ; $70F2
     ld a, $02                                     ; $70F9
     ld [wNoiseFieldCursor], a                     ; $70FB
     ret                                           ; $70FE
@@ -8249,10 +7968,7 @@ jr_005_70ff:
     bit 7, a                                      ; $70FF
     ret z                                         ; $7101
 
-    push af                                       ; $7102
-    ld a, $01                                     ; $7103
-    ld [wUiSfxRequest], a                         ; $7105
-    pop af                                        ; $7108
+    ui_sfx $01                                    ; $7102
     ld a, [wNoiseFieldCursor]                     ; $7109
     ld [wNoiseFieldCursor + $2], a                ; $710C
     ld a, $04                                     ; $710F
@@ -8310,10 +8026,7 @@ DjNs_Field02_EnvPeriod::
     bit PADB_LEFT, a                              ; $7154
     jr z, jr_005_7165                             ; $7156
 
-    push af                                       ; $7158
-    ld a, $01                                     ; $7159
-    ld [wUiSfxRequest], a                         ; $715B
-    pop af                                        ; $715E
+    ui_sfx $01                                    ; $7158
     ld a, $01                                     ; $715F
     ld [wNoiseFieldCursor], a                     ; $7161
     ret                                           ; $7164
@@ -8323,10 +8036,7 @@ jr_005_7165:
     bit 4, a                                      ; $7165
     jr z, jr_005_7176                             ; $7167
 
-    push af                                       ; $7169
-    ld a, $01                                     ; $716A
-    ld [wUiSfxRequest], a                         ; $716C
-    pop af                                        ; $716F
+    ui_sfx $01                                    ; $7169
     ld a, $03                                     ; $7170
     ld [wNoiseFieldCursor], a                     ; $7172
     ret                                           ; $7175
@@ -8336,10 +8046,7 @@ jr_005_7176:
     bit 7, a                                      ; $7176
     ret z                                         ; $7178
 
-    push af                                       ; $7179
-    ld a, $01                                     ; $717A
-    ld [wUiSfxRequest], a                         ; $717C
-    pop af                                        ; $717F
+    ui_sfx $01                                    ; $7179
     ld a, [wNoiseFieldCursor]                     ; $7180
     ld [wNoiseFieldCursor + $2], a                ; $7183
     ld a, $04                                     ; $7186
@@ -8398,10 +8105,7 @@ DjNs_Field03_Gate::
     bit PADB_LEFT, a                              ; $71CE
     jr z, jr_005_71df                             ; $71D0
 
-    push af                                       ; $71D2
-    ld a, $01                                     ; $71D3
-    ld [wUiSfxRequest], a                         ; $71D5
-    pop af                                        ; $71D8
+    ui_sfx $01                                    ; $71D2
     ld a, $02                                     ; $71D9
     ld [wNoiseFieldCursor], a                     ; $71DB
     ret                                           ; $71DE
@@ -8411,10 +8115,7 @@ jr_005_71df:
     bit 7, a                                      ; $71DF
     ret z                                         ; $71E1
 
-    push af                                       ; $71E2
-    ld a, $01                                     ; $71E3
-    ld [wUiSfxRequest], a                         ; $71E5
-    pop af                                        ; $71E8
+    ui_sfx $01                                    ; $71E2
     ld a, [wNoiseFieldCursor]                     ; $71E9
     ld [wNoiseFieldCursor + $2], a                ; $71EC
     ld a, $04                                     ; $71EF
@@ -8473,10 +8174,7 @@ DjNs_Field04_LoopLength::
     bit PADB_UP, a                                ; $7237
     jr z, jr_005_724d                             ; $7239
 
-    push af                                       ; $723B
-    ld a, $01                                     ; $723C
-    ld [wUiSfxRequest], a                         ; $723E
-    pop af                                        ; $7241
+    ui_sfx $01                                    ; $723B
     ld a, [wNoiseFieldCursor + $2]                ; $7242
     ld [wNoiseFieldCursor], a                     ; $7245
     xor a                                         ; $7248
@@ -8488,10 +8186,7 @@ jr_005_724d:
     bit 7, a                                      ; $724D
     ret z                                         ; $724F
 
-    push af                                       ; $7250
-    ld a, $01                                     ; $7251
-    ld [wUiSfxRequest], a                         ; $7253
-    pop af                                        ; $7256
+    ui_sfx $01                                    ; $7250
     call DjEd_DrawLoopBar                         ; $7257
     call DjEd_DrawLoopBarNoise                    ; $725A
     ld a, $05                                     ; $725D
@@ -8549,10 +8244,7 @@ DjNs_Field05_NoteGrid::
     bit PADB_UP, a                                ; $72AB
     jr z, jr_005_72c0                             ; $72AD
 
-    push af                                       ; $72AF
-    ld a, $01                                     ; $72B0
-    ld [wUiSfxRequest], a                         ; $72B2
-    pop af                                        ; $72B5
+    ui_sfx $01                                    ; $72AF
     ld a, $04                                     ; $72B6
     ld [wNoiseFieldCursor], a                     ; $72B8
     xor a                                         ; $72BB
@@ -8564,10 +8256,7 @@ jr_005_72c0:
     bit 3, a                                      ; $72C0
     jr z, jr_005_72d1                             ; $72C2
 
-    push af                                       ; $72C4
-    ld a, $04                                     ; $72C5
-    ld [wUiSfxRequest], a                         ; $72C7
-    pop af                                        ; $72CA
+    ui_sfx $04                                    ; $72C4
     ld a, $07                                     ; $72CB
     ld [wNoiseFieldCursor], a                     ; $72CD
     ret                                           ; $72D0
@@ -8577,10 +8266,7 @@ jr_005_72d1:
     bit 0, a                                      ; $72D1
     ret z                                         ; $72D3
 
-    push af                                       ; $72D4
-    ld a, $04                                     ; $72D5
-    ld [wUiSfxRequest], a                         ; $72D7
-    pop af                                        ; $72DA
+    ui_sfx $04                                    ; $72D4
     ld a, $06                                     ; $72DB
     ld [wNoiseFieldCursor], a                     ; $72DD
     ret                                           ; $72E0
@@ -8665,10 +8351,7 @@ DjNs_Field06_NoteEdit::
     bit PADB_A, a                                 ; $7364
     ret nz                                        ; $7366
 
-    push af                                       ; $7367
-    ld a, $05                                     ; $7368
-    ld [wUiSfxRequest], a                         ; $736A
-    pop af                                        ; $736D
+    ui_sfx $05                                    ; $7367
     call DjNs_Field06_DrawMarker                  ; $736E
     ld a, $07                                     ; $7371
     ld [wNoiseFieldCursor], a                     ; $7373
@@ -8781,10 +8464,7 @@ DjNs_Field07_StereoEdit::
     bit PADB_START, a                             ; $741B
     ret nz                                        ; $741D
 
-    push af                                       ; $741E
-    ld a, $05                                     ; $741F
-    ld [wUiSfxRequest], a                         ; $7421
-    pop af                                        ; $7424
+    ui_sfx $05                                    ; $741E
     ld a, $05                                     ; $7425
     ld [wNoiseFieldCursor], a                     ; $7427
     ret                                           ; $742A
@@ -8934,15 +8614,10 @@ jr_005_7516:
     farcopy Mem_CopyFromBank, Gfx_1A_6C00_Mode20_State00_MenuInit, $8800, $0800 ; $7524
     farcopy Mem_CopyFromBank, Gfx_1A_7400_Mode20_State00_MenuInit, $8000, $0200 ; $7532
     farcopy Mem_CopyFromBank, Map_24_4480_Mode20_State00_MenuInit, $9800, $0240 ; $7540
-    call Oam_ClearShadow                          ; $754E
-    call Pal_AllWhite                             ; $7551
-    call Lcd_On                                   ; $7554
+    screen_on                                     ; $754E
     xor a                                         ; $7557
     call Ball_DrawMenuBall                        ; $7558
-    push af                                       ; $755B
-    ld a, MUSIC_BALL_MENU                         ; $755C
-    call Snd_Music                                ; $755E
-    pop af                                        ; $7561
+    play_music MUSIC_BALL_MENU                    ; $755B
     call Pal_FadeIn                               ; $7562
     next_state                                    ; $7565
     ret                                           ; $7569
@@ -8960,14 +8635,10 @@ Mode20_State01_Menu::
     bit PADB_A, a                                 ; $757C
     jr z, jr_005_759d                             ; $757E
 
-    push af                                       ; $7580
-    ld a, SFX1_CHOOSE_D                           ; $7581
-    call Snd_Sfx1                                 ; $7583
-    pop af                                        ; $7586
+    play_sfx1 SFX1_CHOOSE_D                       ; $7580
     ld a, $01                                     ; $7587
     call Ball_MenuBlinkSelection                  ; $7589
-    call Pal_FadeOut                              ; $758C
-    call Lcd_Off                                  ; $758F
+    screen_off                                    ; $758C
     ld a, [wMode]                                 ; $7592
     ld [wMode20Caller], a                         ; $7595
     next_state                                    ; $7598
@@ -8978,14 +8649,10 @@ jr_005_759d:
     bit 1, a                                      ; $759D
     ret z                                         ; $759F
 
-    push af                                       ; $75A0
-    ld a, SFX1_TAG_DIGITS_JINGLE                  ; $75A1
-    call Snd_Sfx1                                 ; $75A3
-    pop af                                        ; $75A6
+    play_sfx1 SFX1_TAG_DIGITS_JINGLE              ; $75A0
     ld a, $02                                     ; $75A7
     call Ball_MenuBlinkSelection                  ; $75A9
-    call Pal_FadeOut                              ; $75AC
-    call Lcd_Off                                  ; $75AF
+    screen_off                                    ; $75AC
     ld a, MODE_MAIN_MENU                          ; $75B2
     ld [wMode], a                                 ; $75B4
     set_state STATE_00_INIT                       ; $75B7
@@ -9013,10 +8680,7 @@ jr_005_75cc:
     jr z, jr_005_75dd                             ; $75D0
 
     ld [hl], a                                    ; $75D2
-    push af                                       ; $75D3
-    ld a, SFX1_MENU_CHOOSE                        ; $75D4
-    call Snd_Sfx1                                 ; $75D6
-    pop af                                        ; $75D9
+    play_sfx1 SFX1_MENU_CHOOSE                    ; $75D3
     call Ball_MenuLoadRow                         ; $75DA
 
 jr_005_75dd:
@@ -9049,10 +8713,7 @@ jr_005_75f5:
 
 jr_005_75fb:
     ld [hl], a                                    ; $75FB
-    push af                                       ; $75FC
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $75FD
-    call Snd_Sfx1                                 ; $75FF
-    pop af                                        ; $7602
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $75FC
     ret                                           ; $7603
 
 
@@ -9365,9 +9026,7 @@ Mode20_State02_GameSetup::
     set 1, [hl]                                   ; $77E5
     ld a, $05                                     ; $77E7
     ldh [hStatHandlerIndex], a                    ; $77E9
-    call Oam_ClearShadow                          ; $77EB
-    call Pal_AllWhite                             ; $77EE
-    call Lcd_On                                   ; $77F1
+    screen_on                                     ; $77EB
     call Ball_DrawHud                             ; $77F4
     next_state                                    ; $77F7
     ret                                           ; $77FB
@@ -9409,16 +9068,10 @@ Mode20_State04_Play::
     bit PADB_START, a                             ; $783C
     ret z                                         ; $783E
 
-    push af                                       ; $783F
-    ld a, SFX1_KEY_START                          ; $7840
-    call Snd_Sfx1                                 ; $7842
-    pop af                                        ; $7845
+    play_sfx1 SFX1_KEY_START                      ; $783F
     ld bc, $000a                                  ; $7846
     call Wait_Frames                              ; $7849
-    push af                                       ; $784C
-    ld a, MUSIC_STOP                              ; $784D
-    call Snd_Music                                ; $784F
-    pop af                                        ; $7852
+    play_music MUSIC_STOP                         ; $784C
     set_state STATE_20_PAUSE                      ; $7853
     ret                                           ; $7858
 
@@ -9456,10 +9109,7 @@ Mode20_State06_GameOver::
     call z, Ball_FlipPalettes                     ; $7893
     jr nz, jr_005_78a7                            ; $7896
 
-    push af                                       ; $7898
-    ld a, MUSIC_BALL_GAME_OVER                    ; $7899
-    call Snd_Music                                ; $789B
-    pop af                                        ; $789E
+    play_music MUSIC_BALL_GAME_OVER               ; $7898
     push af                                       ; $789F
     rst Rst08_WaitVBlank                          ; $78A0
     ld c, $03                                     ; $78A1
@@ -9481,12 +9131,8 @@ jr_005_78ae:
     and a                                         ; $78B6
     jr z, jr_005_78d2                             ; $78B7
 
-    call Pal_FadeOut                              ; $78B9
-    call Lcd_Off                                  ; $78BC
-    ld hl, hStatShadow                            ; $78BF
-    res 6, [hl]                                   ; $78C2
-    ld hl, rIE                                    ; $78C4
-    res 1, [hl]                                   ; $78C7
+    screen_off                                    ; $78B9
+    stat_irq_off                                  ; $78BF
     set_state STATE_20_RESULT_INIT                ; $78C9
     ret                                           ; $78CE
 
@@ -9526,10 +9172,7 @@ Mode20_State07_Pause::
     jr z, jr_005_7921                             ; $7903
 
 jr_005_7905:
-    push af                                       ; $7905
-    ld a, SFX1_KEY_START                          ; $7906
-    call Snd_Sfx1                                 ; $7908
-    pop af                                        ; $790B
+    play_sfx1 SFX1_KEY_START                      ; $7905
     ld bc, $000a                                  ; $790C
     call Wait_Frames                              ; $790F
     ld a, [wPickMusic]                            ; $7912
@@ -9543,10 +9186,7 @@ jr_005_7921:
     bit 1, a                                      ; $7921
     ret z                                         ; $7923
 
-    push af                                       ; $7924
-    ld a, SFX1_KEY_B                              ; $7925
-    call Snd_Sfx1                                 ; $7927
-    pop af                                        ; $792A
+    play_sfx1 SFX1_KEY_B                          ; $7924
     set_state STATE_20_LEAVE                      ; $792B
     ret                                           ; $7930
 
@@ -9562,12 +9202,8 @@ Ball_DrawPauseText::
 ; C
 Mode20_State08_Leave::
     call Ball_DrawHud                             ; $793A
-    call Pal_FadeOut                              ; $793D
-    call Lcd_Off                                  ; $7940
-    ld hl, hStatShadow                            ; $7943
-    res 6, [hl]                                   ; $7946
-    ld hl, rIE                                    ; $7948
-    res 1, [hl]                                   ; $794B
+    screen_off                                    ; $793D
+    stat_irq_off                                  ; $7943
     ld a, [wMode20Caller]                         ; $794D
     cp MODE_SHUTTERBUG_MAGIC                      ; $7950
     jr nz, jr_005_795d                            ; $7952
@@ -9600,9 +9236,7 @@ Mode20_State09_ResultInit::
     ld de, $9800                                  ; $798C
     ld bc, $0400                                  ; $798F
     call Mem_CopyFromBank                         ; $7992
-    call Oam_ClearShadow                          ; $7995
-    call Pal_AllWhite                             ; $7998
-    call Lcd_On                                   ; $799B
+    screen_on                                     ; $7995
     call Pal_FadeIn                               ; $799E
     next_state                                    ; $79A1
     ret                                           ; $79A5
@@ -9618,27 +9252,20 @@ Mode20_State0A_ResultKeys::
     bit 0, a                                      ; $79AE
     jr z, jr_005_79be                             ; $79B0
 
-    push af                                       ; $79B2
-    ld a, SFX1_KEY_A                              ; $79B3
-    call Snd_Sfx1                                 ; $79B5
-    pop af                                        ; $79B8
+    play_sfx1 SFX1_KEY_A                          ; $79B2
     next_state                                    ; $79B9
     ret                                           ; $79BD
 
 
 jr_005_79be:
-    push af                                       ; $79BE
-    ld a, SFX1_KEY_B                              ; $79BF
-    call Snd_Sfx1                                 ; $79C1
-    pop af                                        ; $79C4
+    play_sfx1 SFX1_KEY_B                          ; $79BE
     next_state                                    ; $79C5
     ret                                           ; $79C9
 
 
 ; C
 Mode20_State0B_ResultLeave::
-    call Pal_FadeOut                              ; $79CA
-    call Lcd_Off                                  ; $79CD
+    screen_off                                    ; $79CA
     ld a, [wAbResult]                             ; $79D0
     bit 0, a                                      ; $79D3
     jr z, jr_005_79dd                             ; $79D5
@@ -9701,10 +9328,7 @@ jr_005_7a36:
     and a                                         ; $7A36
     ret z                                         ; $7A37
 
-    push af                                       ; $7A38
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $7A39
-    call Snd_Sfx1                                 ; $7A3B
-    pop af                                        ; $7A3E
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $7A38
     dec a                                         ; $7A3F
     jr jr_005_7a54                                ; $7A40
 
@@ -9719,10 +9343,7 @@ jr_005_7a49:
     cp $02                                        ; $7A49
     ret z                                         ; $7A4B
 
-    push af                                       ; $7A4C
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $7A4D
-    call Snd_Sfx1                                 ; $7A4F
-    pop af                                        ; $7A52
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $7A4C
     inc a                                         ; $7A53
 
 jr_005_7a54:
@@ -10172,10 +9793,7 @@ jr_005_7d3e:
 
 ; C: sound $23 and +1 on the BCD score (saturating at 9999)
 Ball_AddPoint::
-    push af                                       ; $7D4D
-    ld a, SFX1_BALL_POINT                         ; $7D4E
-    call Snd_Sfx1                                 ; $7D50
-    pop af                                        ; $7D53
+    play_sfx1 SFX1_BALL_POINT                     ; $7D4D
     ld a, $01                                     ; $7D54
     ld hl, wBallScoreBcd                          ; $7D56
     ld b, $02                                     ; $7D59

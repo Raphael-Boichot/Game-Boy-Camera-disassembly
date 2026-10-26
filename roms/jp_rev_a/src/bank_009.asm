@@ -514,9 +514,7 @@ CommentEditor_Sub0_Init::
     farcopy Mem_CopyFromBank, Gfx_1B_5000_CommentEditor_Sub0_Init, $8000, $0030 ; $42DD
     farcopy Mem_CopyFromBank, Map_21_7CC0_CommentEditor_Sub0_Init, $9800, $0240 ; $42EB
     farcopy Mem_CopyFromBank, Map_21_7F00_CommentEditor_Sub0_Init, $9c00, $0100 ; $42F9
-    call Oam_ClearShadow                          ; $4307
-    call Pal_AllWhite                             ; $430A
-    call Lcd_On                                   ; $430D
+    screen_on                                     ; $4307
     ldh [hFarcallAArg], a                         ; $4310
     ld a, $09                                     ; $4312
     ld hl, CommentCard_UploadThumbnail_Far        ; $4314
@@ -557,10 +555,7 @@ CommentEditor_Sub0_Init::
     ld a, $09                                     ; $436C
     ld hl, CommentCard_DrawPhotoNumber_Far        ; $436E
     call Far_Call                                 ; $4371
-    push af                                       ; $4374
-    ld a, MUSIC_COMMENT_EDITOR                    ; $4375
-    call Snd_Music                                ; $4377
-    pop af                                        ; $437A
+    play_music MUSIC_COMMENT_EDITOR               ; $4374
     call Pal_FadeIn                               ; $437B
     ld hl, wSubstate                              ; $437E
     inc [hl]                                      ; $4381
@@ -612,8 +607,7 @@ CommentEditor_Sub2_Edit::
 
 ; C
 CommentEditor_Sub3_Exit::
-    call Pal_FadeOut                              ; $43CE
-    call Lcd_Off                                  ; $43D1
+    screen_off                                    ; $43CE
     next_state                                    ; $43D4
     jp Far_Call_Return                            ; $43D8
 
@@ -645,10 +639,7 @@ CommentEditor_CtrlGrid::
     bit PADB_A, a                                 ; $43F5
     ret z                                         ; $43F7
 
-    push af                                       ; $43F8
-    ld a, SFX1_KEY_A                              ; $43F9
-    call Snd_Sfx1                                 ; $43FB
-    pop af                                        ; $43FE
+    play_sfx1 SFX1_KEY_A                          ; $43F8
     ld a, [wCmtCursor]                            ; $43FF
     ld c, a                                       ; $4402
     ld b, $00                                     ; $4403
@@ -667,10 +658,7 @@ CommentEditor_CtrlDelete::
     bit PADB_A, a                                 ; $4416
     ret z                                         ; $4418
 
-    push af                                       ; $4419
-    ld a, SFX1_CURSOR_MOVE                        ; $441A
-    call Snd_Sfx1                                 ; $441C
-    pop af                                        ; $441F
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $4419
     ld a, [wCmtCursor]                            ; $4420
     ld c, a                                       ; $4423
     ld b, $00                                     ; $4424
@@ -701,10 +689,7 @@ CommentEditor_StepCursorRight::
     cp $1a                                        ; $4441
     ret z                                         ; $4443
 
-    push af                                       ; $4444
-    ld a, SFX1_STEP_VALUE                         ; $4445
-    call Snd_Sfx1                                 ; $4447
-    pop af                                        ; $444A
+    play_sfx1 SFX1_STEP_VALUE                     ; $4444
     inc a                                         ; $444B
     ld [wCmtCursor], a                            ; $444C
     ret                                           ; $444F
@@ -720,10 +705,7 @@ CommentEditor_CtrlLeft::
     and a                                         ; $4458
     ret z                                         ; $4459
 
-    push af                                       ; $445A
-    ld a, SFX1_KEY_B                              ; $445B
-    call Snd_Sfx1                                 ; $445D
-    pop af                                        ; $4460
+    play_sfx1 SFX1_KEY_B                          ; $445A
     dec a                                         ; $4461
     ld [wCmtCursor], a                            ; $4462
     ret                                           ; $4465
@@ -844,10 +826,7 @@ CommentEditor_ReadDirections::
     bit 5, b                                      ; $44FE
     jr z, jr_009_450c                             ; $4500
 
-    push af                                       ; $4502
-    ld a, SFX1_DIRECTION_KEY                      ; $4503
-    call Snd_Sfx1                                 ; $4505
-    pop af                                        ; $4508
+    play_sfx1 SFX1_DIRECTION_KEY                  ; $4502
     xor a                                         ; $4509
     jr jr_009_452b                                ; $450A
 
@@ -858,10 +837,7 @@ jr_009_450c:
     cp $01                                        ; $4510
     ret z                                         ; $4512
 
-    push af                                       ; $4513
-    ld a, SFX1_DIRECTION_KEY                      ; $4514
-    call Snd_Sfx1                                 ; $4516
-    pop af                                        ; $4519
+    play_sfx1 SFX1_DIRECTION_KEY                  ; $4513
     dec a                                         ; $451A
     jr jr_009_452b                                ; $451B
 
@@ -872,10 +848,7 @@ jr_009_451d:
     cp $03                                        ; $4520
     ret z                                         ; $4522
 
-    push af                                       ; $4523
-    ld a, SFX1_DIRECTION_KEY                      ; $4524
-    call Snd_Sfx1                                 ; $4526
-    pop af                                        ; $4529
+    play_sfx1 SFX1_DIRECTION_KEY                  ; $4523
     inc a                                         ; $452A
 
 jr_009_452b:
@@ -902,10 +875,7 @@ jr_009_453d:
     bit 4, b                                      ; $4541
     jr z, jr_009_4552                             ; $4543
 
-    push af                                       ; $4545
-    ld a, SFX1_DIRECTION_KEY                      ; $4546
-    call Snd_Sfx1                                 ; $4548
-    pop af                                        ; $454B
+    play_sfx1 SFX1_DIRECTION_KEY                  ; $4545
     ld a, $01                                     ; $454C
     ld [wCmtCtrl], a                              ; $454E
     ret                                           ; $4551
@@ -960,10 +930,7 @@ jr_009_4582:
     ret z                                         ; $4586
 
     ld [hl], a                                    ; $4587
-    push af                                       ; $4588
-    ld a, SFX1_DIRECTION_KEY                      ; $4589
-    call Snd_Sfx1                                 ; $458B
-    pop af                                        ; $458E
+    play_sfx1 SFX1_DIRECTION_KEY                  ; $4588
     ret                                           ; $458F
 
 
@@ -1433,10 +1400,7 @@ Glyph_LoadFromCharCode::
 
 ; C: sound $12; WY delta table
 CommentEditor_SlidePanelOut::
-    push af                                       ; $481C
-    ld a, SFX1_PANEL_OPEN                         ; $481D
-    call Snd_Sfx1                                 ; $481F
-    pop af                                        ; $4822
+    play_sfx1 SFX1_PANEL_OPEN                     ; $481C
     ld hl, Slide_WyDeltaTbl                       ; $4823
     ld b, $24                                     ; $4826
 
@@ -1467,10 +1431,7 @@ jr_009_483d:
 
 ; C: sound $13
 CommentEditor_SlidePanelIn::
-    push af                                       ; $4841
-    ld a, SFX1_PANEL_CLOSE                        ; $4842
-    call Snd_Sfx1                                 ; $4844
-    pop af                                        ; $4847
+    play_sfx1 SFX1_PANEL_CLOSE                    ; $4841
     ld hl, Slide_WyDeltaTbl                       ; $4848
     ld b, $24                                     ; $484B
 
@@ -1595,16 +1556,11 @@ jr_009_48d4:
     ld bc, $01c0                                  ; $4927
     ld a, $ff                                     ; $492A
     call Mem_FillBc1                              ; $492C
-    call Oam_ClearShadow                          ; $492F
-    call Pal_AllWhite                             ; $4932
-    call Lcd_On                                   ; $4935
+    screen_on                                     ; $492F
     ld a, [wChoice4Cursor]                        ; $4938
     call UserMap_LoadPlanetTiles                  ; $493B
     call Pal_FadeIn                               ; $493E
-    push af                                       ; $4941
-    ld a, MUSIC_USER_SCREENS                      ; $4942
-    call Snd_Music                                ; $4944
-    pop af                                        ; $4947
+    play_music MUSIC_USER_SCREENS                 ; $4941
     next_state                                    ; $4948
     ret                                           ; $494C
 
@@ -1655,8 +1611,7 @@ jr_009_4989:
 
 
 jr_009_4994:
-    call Pal_FadeOut                              ; $4994
-    call Lcd_Off                                  ; $4997
+    screen_off                                    ; $4994
     ld a, [wChoice4Cursor]                        ; $499A
     ld c, a                                       ; $499D
     ld b, $00                                     ; $499E
@@ -1723,13 +1678,8 @@ Mode08_State03_CardInit::
     set 1, [hl]                                   ; $4A40
     ld a, $01                                     ; $4A42
     ldh [hStatHandlerIndex], a                    ; $4A44
-    call Oam_ClearShadow                          ; $4A46
-    call Pal_AllWhite                             ; $4A49
-    call Lcd_On                                   ; $4A4C
-    push af                                       ; $4A4F
-    ld a, MUSIC_OWNER_CARD                        ; $4A50
-    call Snd_Music                                ; $4A52
-    pop af                                        ; $4A55
+    screen_on                                     ; $4A46
+    play_music MUSIC_OWNER_CARD                   ; $4A4F
     call OwnerCard_DrawOwnerId                    ; $4A56
     call OwnerCard_LoadNameGlyphs                 ; $4A59
     call OwnerCard_DrawGender                     ; $4A5C
@@ -1784,23 +1734,15 @@ Mode08_State05_CardLeave::
     bit 3, a                                      ; $4ACB
     jr z, jr_009_4ae4                             ; $4ACD
 
-    call Pal_FadeOut                              ; $4ACF
-    call Lcd_Off                                  ; $4AD2
-    ld hl, hStatShadow                            ; $4AD5
-    res 6, [hl]                                   ; $4AD8
-    ld hl, rIE                                    ; $4ADA
-    res 1, [hl]                                   ; $4ADD
+    screen_off                                    ; $4ACF
+    stat_irq_off                                  ; $4AD5
     next_state                                    ; $4ADF
     ret                                           ; $4AE3
 
 
 jr_009_4ae4:
-    call Pal_FadeOut                              ; $4AE4
-    call Lcd_Off                                  ; $4AE7
-    ld hl, hStatShadow                            ; $4AEA
-    res 6, [hl]                                   ; $4AED
-    ld hl, rIE                                    ; $4AEF
-    res 1, [hl]                                   ; $4AF2
+    screen_off                                    ; $4AE4
+    stat_irq_off                                  ; $4AEA
     set_state STATE_08_INIT                       ; $4AF4
     ret                                           ; $4AF9
 
@@ -1832,13 +1774,8 @@ Mode08_State06_EditorInit::
     ld bc, $01c0                                  ; $4B5F
     ld a, $ff                                     ; $4B62
     call Mem_FillBc1                              ; $4B64
-    call Oam_ClearShadow                          ; $4B67
-    call Pal_AllWhite                             ; $4B6A
-    call Lcd_On                                   ; $4B6D
-    push af                                       ; $4B70
-    ld a, MUSIC_OWNER_CARD                        ; $4B71
-    call Snd_Music                                ; $4B73
-    pop af                                        ; $4B76
+    screen_on                                     ; $4B67
+    play_music MUSIC_OWNER_CARD                   ; $4B70
     call Kb_LoadGlyphSetA                         ; $4B77
     call OwnerCard_LoadNameGlyphsB                ; $4B7A
     call OwnerCard_LoadGenderTiles                ; $4B7D
@@ -1889,8 +1826,7 @@ Mode08_State0A_EditBloodType::
 
 ; C: far 02:4BF4; then state 3
 Mode08_State0B_SaveOwner::
-    call Pal_FadeOut                              ; $4BC8
-    call Lcd_Off                                  ; $4BCB
+    screen_off                                    ; $4BC8
     ldh [hFarcallAArg], a                         ; $4BCE
     farcall Owner_Store_Far                       ; $4BD0
     set_state STATE_08_CARD_INIT                  ; $4BD8
@@ -1918,15 +1854,10 @@ Mode08_State0C_RecordInit::
     ld bc, $01c0                                  ; $4C2B
     ld a, $ff                                     ; $4C2E
     call Mem_FillBc1                              ; $4C30
-    call Oam_ClearShadow                          ; $4C33
-    call Pal_AllWhite                             ; $4C36
-    call Lcd_On                                   ; $4C39
+    screen_on                                     ; $4C33
     call Record_DrawCounters                      ; $4C3C
     call Pal_FadeIn                               ; $4C3F
-    push af                                       ; $4C42
-    ld a, MUSIC_RECORD_HI_SCORE                   ; $4C43
-    call Snd_Music                                ; $4C45
-    pop af                                        ; $4C48
+    play_music MUSIC_RECORD_HI_SCORE              ; $4C42
     next_state                                    ; $4C49
     ret                                           ; $4C4D
 
@@ -1943,8 +1874,7 @@ Mode08_State0D_RecordWait::
 
 ; C
 Mode08_State0E_RecordLeave::
-    call Pal_FadeOut                              ; $4C58
-    call Lcd_Off                                  ; $4C5B
+    screen_off                                    ; $4C58
     set_state STATE_08_INIT                       ; $4C5E
     ret                                           ; $4C63
 
@@ -1970,15 +1900,10 @@ Mode08_State0F_HiScoreInit::
     ld bc, $01c0                                  ; $4CB1
     ld a, $ff                                     ; $4CB4
     call Mem_FillBc1                              ; $4CB6
-    call Oam_ClearShadow                          ; $4CB9
-    call Pal_AllWhite                             ; $4CBC
-    call Lcd_On                                   ; $4CBF
+    screen_on                                     ; $4CB9
     call HiScore_DrawScores                       ; $4CC2
     call Pal_FadeIn                               ; $4CC5
-    push af                                       ; $4CC8
-    ld a, MUSIC_RECORD_HI_SCORE                   ; $4CC9
-    call Snd_Music                                ; $4CCB
-    pop af                                        ; $4CCE
+    play_music MUSIC_RECORD_HI_SCORE              ; $4CC8
     next_state                                    ; $4CCF
     ret                                           ; $4CD3
 
@@ -1995,16 +1920,14 @@ Mode08_State10_HiScoreWait::
 
 ; C
 Mode08_State11_HiScoreLeave::
-    call Pal_FadeOut                              ; $4CDE
-    call Lcd_Off                                  ; $4CE1
+    screen_off                                    ; $4CDE
     set_state STATE_08_INIT                       ; $4CE4
     ret                                           ; $4CE9
 
 
 ; C: fade out and state 0
 Mode08_CreditsAbort::
-    call Pal_FadeOut                              ; $4CEA
-    call Lcd_Off                                  ; $4CED
+    screen_off                                    ; $4CEA
     jr jr_009_4d0e                                ; $4CF0
 
 ; C: record >= $7799 chooses the real credits
@@ -2049,14 +1972,9 @@ jr_009_4d0e:
     ld bc, $0010                                  ; $4D64
     ld de, $0000                                  ; $4D67
     call Mem_FillWords                            ; $4D6A
-    call Oam_ClearShadow                          ; $4D6D
-    call Pal_AllWhite                             ; $4D70
-    call Lcd_On                                   ; $4D73
+    screen_on                                     ; $4D6D
     call Pal_FadeIn                               ; $4D76
-    push af                                       ; $4D79
-    ld a, MUSIC_JINGLE                            ; $4D7A
-    call Snd_Music                                ; $4D7C
-    pop af                                        ; $4D7F
+    play_music MUSIC_JINGLE                       ; $4D79
     set_state STATE_08_CREDITS_DANCING_MAN        ; $4D80
     ret                                           ; $4D85
 
@@ -2085,10 +2003,7 @@ Mode08_CreditsReal::
     call Pal_AllWhite                             ; $4DCD
     call Lcd_On                                   ; $4DD0
     call Pal_FadeIn                               ; $4DD3
-    push af                                       ; $4DD6
-    ld a, MUSIC_CREDITS                           ; $4DD7
-    call Snd_Music                                ; $4DD9
-    pop af                                        ; $4DDC
+    play_music MUSIC_CREDITS                      ; $4DD6
     next_state                                    ; $4DDD
     ret                                           ; $4DE1
 
@@ -2129,8 +2044,7 @@ jr_009_4e1f:
     cp $34                                        ; $4E26
     ret c                                         ; $4E28
 
-    call Pal_FadeOut                              ; $4E29
-    call Lcd_Off                                  ; $4E2C
+    screen_off                                    ; $4E29
     ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON ; $4E2F
     ldh [hLcdcShadow], a                          ; $4E31
     ld a, $e4                                     ; $4E33
@@ -2208,8 +2122,7 @@ jr_009_4eba:
     cp $43                                        ; $4EE5
     ret c                                         ; $4EE7
 
-    call Pal_FadeOut                              ; $4EE8
-    call Lcd_Off                                  ; $4EEB
+    screen_off                                    ; $4EE8
     ld a, LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $4EEE
     ldh [hLcdcShadow], a                          ; $4EF0
     ld a, $e1                                     ; $4EF2
@@ -2244,10 +2157,7 @@ jr_009_4eba:
     call Pal_AllWhite                             ; $4F55
     call Lcd_On                                   ; $4F58
     call Pal_FadeIn                               ; $4F5B
-    push af                                       ; $4F5E
-    ld a, MUSIC_CREDITS_PAGE_B                    ; $4F5F
-    call Snd_Music                                ; $4F61
-    pop af                                        ; $4F64
+    play_music MUSIC_CREDITS_PAGE_B               ; $4F5E
     next_state                                    ; $4F65
     ret                                           ; $4F69
 
@@ -2576,8 +2486,7 @@ Credits_NishimuraDanceMapTbl::
 
 ; C
 Mode08_State18_Leave::
-    call Pal_FadeOut                              ; $518C
-    call Lcd_Off                                  ; $518F
+    screen_off                                    ; $518C
     set_state STATE_08_INIT                       ; $5192
     ret                                           ; $5197
 
@@ -2611,10 +2520,7 @@ jr_009_51ae:
     ret z                                         ; $51B2
 
     ld [hl], a                                    ; $51B3
-    push af                                       ; $51B4
-    ld a, SFX1_CURSOR_MOVE                        ; $51B5
-    call Snd_Sfx1                                 ; $51B7
-    pop af                                        ; $51BA
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $51B4
 
 ; C
 UserMap_LoadPlanetTiles::
@@ -2749,10 +2655,7 @@ UserMap_DrawCursor_PtrTbl529B::
 
 ; C: music $46; SCY ramp
 UserMap_ScrollOut::
-    push af                                       ; $529F
-    ld a, MUSIC_USER_MAP_SCROLL_OUT               ; $52A0
-    call Snd_Music                                ; $52A2
-    pop af                                        ; $52A5
+    play_music MUSIC_USER_MAP_SCROLL_OUT          ; $529F
     call Oam_ClearShadow                          ; $52A6
     rst Rst08_WaitVBlank                          ; $52A9
     ld bc, $01c0                                  ; $52AA
@@ -3913,10 +3816,7 @@ Kb_NavigateGeneric::
     ret z                                         ; $5B65
 
     ld [hl], a                                    ; $5B66
-    push af                                       ; $5B67
-    ld a, SFX1_STEP_FAST                          ; $5B68
-    call Snd_Sfx1                                 ; $5B6A
-    pop af                                        ; $5B6D
+    play_sfx1 SFX1_STEP_FAST                      ; $5B67
     ret                                           ; $5B6E
 
 
@@ -4032,10 +3932,7 @@ jr_009_5bd7:
     pop af                                        ; $5BF7
     ld [hl], a                                    ; $5BF8
     call Kb_WriteNameChar                         ; $5BF9
-    push af                                       ; $5BFC
-    ld a, SFX1_KEY_A                              ; $5BFD
-    call Snd_Sfx1                                 ; $5BFF
-    pop af                                        ; $5C02
+    play_sfx1 SFX1_KEY_A                          ; $5BFC
     ld a, [wKbCursor]                             ; $5C03
     cp $08                                        ; $5C06
     ret z                                         ; $5C08
@@ -4061,10 +3958,7 @@ Kb_Page0_Press_CursorRight::
 
     inc a                                         ; $5C1C
     ld [wKbCursor], a                             ; $5C1D
-    push af                                       ; $5C20
-    ld a, SFX1_STEP_VALUE                         ; $5C21
-    call Snd_Sfx1                                 ; $5C23
-    pop af                                        ; $5C26
+    play_sfx1 SFX1_STEP_VALUE                     ; $5C20
     ret                                           ; $5C27
 
 
@@ -4076,10 +3970,7 @@ Kb_Page0_Press_CursorLeft::
 
     dec a                                         ; $5C2D
     ld [wKbCursor], a                             ; $5C2E
-    push af                                       ; $5C31
-    ld a, SFX1_KEY_B                              ; $5C32
-    call Snd_Sfx1                                 ; $5C34
-    pop af                                        ; $5C37
+    play_sfx1 SFX1_KEY_B                          ; $5C31
     ret                                           ; $5C38
 
 
@@ -4090,10 +3981,7 @@ Kb_Page0_Press_GlyphSetA::
     xor a                                         ; $5C3E
     ld [wKbPage], a                               ; $5C3F
     call Kb_LoadGlyphSetA                         ; $5C42
-    push af                                       ; $5C45
-    ld a, SFX1_CURSOR_MOVE                        ; $5C46
-    call Snd_Sfx1                                 ; $5C48
-    pop af                                        ; $5C4B
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $5C45
     ret                                           ; $5C4C
 
 
@@ -4104,10 +3992,7 @@ Kb_Page0_Press_GlyphSetB::
     ld a, $01                                     ; $5C52
     ld [wKbPage], a                               ; $5C54
     call Kb_LoadGlyphSetB                         ; $5C57
-    push af                                       ; $5C5A
-    ld a, SFX1_CURSOR_MOVE                        ; $5C5B
-    call Snd_Sfx1                                 ; $5C5D
-    pop af                                        ; $5C60
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $5C5A
     ret                                           ; $5C61
 
 
@@ -4118,10 +4003,7 @@ Kb_Page0_Press_GlyphSetC::
     ld a, $02                                     ; $5C67
     ld [wKbPage], a                               ; $5C69
     call Kb_LoadGlyphSetC                         ; $5C6C
-    push af                                       ; $5C6F
-    ld a, SFX1_CURSOR_MOVE                        ; $5C70
-    call Snd_Sfx1                                 ; $5C72
-    pop af                                        ; $5C75
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $5C6F
     ret                                           ; $5C76
 
 
@@ -4203,10 +4085,7 @@ jr_009_5cb5:
     ld a, c                                       ; $5CBF
     ld [wKbCursor], a                             ; $5CC0
     call Kb_WriteNameChar                         ; $5CC3
-    push af                                       ; $5CC6
-    ld a, SFX1_KEY_A                              ; $5CC7
-    call Snd_Sfx1                                 ; $5CC9
-    pop af                                        ; $5CCC
+    play_sfx1 SFX1_KEY_A                          ; $5CC6
     ld a, [wKbCursor]                             ; $5CCD
     cp $08                                        ; $5CD0
     ret z                                         ; $5CD2
@@ -4250,10 +4129,7 @@ jr_009_5d10:
     ld [wKbKey], a                                ; $5D10
     ld a, $03                                     ; $5D13
     ld [wKbPage], a                               ; $5D15
-    push af                                       ; $5D18
-    ld a, SFX1_OPTION_CHANGE                      ; $5D19
-    call Snd_Sfx1                                 ; $5D1B
-    pop af                                        ; $5D1E
+    play_sfx1 SFX1_OPTION_CHANGE                  ; $5D18
     next_state                                    ; $5D1F
     ret                                           ; $5D23
 
@@ -4280,10 +4156,7 @@ Kb_Page1_PressSex::
     or [hl]                                       ; $5D43
     ld [wOwnerGenderBlood], a                     ; $5D44
     call OwnerCard_LoadGenderTiles                ; $5D47
-    push af                                       ; $5D4A
-    ld a, SFX1_KEY_A                              ; $5D4B
-    call Snd_Sfx1                                 ; $5D4D
-    pop af                                        ; $5D50
+    play_sfx1 SFX1_KEY_A                          ; $5D4A
     ret                                           ; $5D51
 
 
@@ -4297,10 +4170,7 @@ Kb_Page1_PressSex_ToPage0::
     ld [wKbPage], a                               ; $5D67
     ld a, $41                                     ; $5D6A
     ld [wKbKey], a                                ; $5D6C
-    push af                                       ; $5D6F
-    ld a, SFX1_KEY_B                              ; $5D70
-    call Snd_Sfx1                                 ; $5D72
-    pop af                                        ; $5D75
+    play_sfx1 SFX1_KEY_B                          ; $5D6F
     ld hl, wState                                 ; $5D76
     dec [hl]                                      ; $5D79
     ret                                           ; $5D7A
@@ -4326,10 +4196,7 @@ jr_009_5d99:
     ld [wKbKey], a                                ; $5D99
     ld a, $04                                     ; $5D9C
     ld [wKbPage], a                               ; $5D9E
-    push af                                       ; $5DA1
-    ld a, SFX1_OPTION_CHANGE                      ; $5DA2
-    call Snd_Sfx1                                 ; $5DA4
-    pop af                                        ; $5DA7
+    play_sfx1 SFX1_OPTION_CHANGE                  ; $5DA1
     next_state                                    ; $5DA8
     ret                                           ; $5DAC
 
@@ -4395,10 +4262,7 @@ jr_009_5df8:
 
 jr_009_5dfd:
     call OwnerCard_LoadBirthTiles                 ; $5DFD
-    push af                                       ; $5E00
-    ld a, SFX1_KEY_A                              ; $5E01
-    call Snd_Sfx1                                 ; $5E03
-    pop af                                        ; $5E06
+    play_sfx1 SFX1_KEY_A                          ; $5E00
     ld a, [wKbCursor]                             ; $5E07
     cp $07                                        ; $5E0A
     ret z                                         ; $5E0C
@@ -4417,10 +4281,7 @@ Kb_Page2_PressBirthDate_CursorRight::
 
     inc a                                         ; $5E19
     ld [wKbCursor], a                             ; $5E1A
-    push af                                       ; $5E1D
-    ld a, SFX1_STEP_VALUE                         ; $5E1E
-    call Snd_Sfx1                                 ; $5E20
-    pop af                                        ; $5E23
+    play_sfx1 SFX1_STEP_VALUE                     ; $5E1D
     ret                                           ; $5E24
 
 
@@ -4432,10 +4293,7 @@ Kb_Page2_PressBirthDate_CursorLeft::
 
     dec a                                         ; $5E2B
     ld [wKbCursor], a                             ; $5E2C
-    push af                                       ; $5E2F
-    ld a, SFX1_KEY_B                              ; $5E30
-    call Snd_Sfx1                                 ; $5E32
-    pop af                                        ; $5E35
+    play_sfx1 SFX1_KEY_B                          ; $5E2F
     ret                                           ; $5E36
 
 
@@ -4447,10 +4305,7 @@ jr_009_5e37:
     ld [wKbKey], a                                ; $5E4B
     ld a, $03                                     ; $5E4E
     ld [wKbPage], a                               ; $5E50
-    push af                                       ; $5E53
-    ld a, SFX1_KEY_B                              ; $5E54
-    call Snd_Sfx1                                 ; $5E56
-    pop af                                        ; $5E59
+    play_sfx1 SFX1_KEY_B                          ; $5E53
     ld hl, wState                                 ; $5E5A
     dec [hl]                                      ; $5E5D
     ret                                           ; $5E5E
@@ -4479,10 +4334,7 @@ jr_009_5e81:
     ld [wKbKey], a                                ; $5E81
     ld a, $05                                     ; $5E84
     ld [wKbPage], a                               ; $5E86
-    push af                                       ; $5E89
-    ld a, SFX1_OPTION_CHANGE                      ; $5E8A
-    call Snd_Sfx1                                 ; $5E8C
-    pop af                                        ; $5E8F
+    play_sfx1 SFX1_OPTION_CHANGE                  ; $5E89
     next_state                                    ; $5E90
     ret                                           ; $5E94
 
@@ -4512,10 +4364,7 @@ Kb_Page3_PressBloodType::
     or c                                          ; $5EB9
     ld [wOwnerGenderBlood], a                     ; $5EBA
     call OwnerCard_LoadBloodTiles                 ; $5EBD
-    push af                                       ; $5EC0
-    ld a, SFX1_KEY_A                              ; $5EC1
-    call Snd_Sfx1                                 ; $5EC3
-    pop af                                        ; $5EC6
+    play_sfx1 SFX1_KEY_A                          ; $5EC0
     ret                                           ; $5EC7
 
 
@@ -4533,10 +4382,7 @@ Kb_Page3_PressBloodType_ToPage2::
     ld [wKbKey], a                                ; $5EDD
     ld a, $04                                     ; $5EE0
     ld [wKbPage], a                               ; $5EE2
-    push af                                       ; $5EE5
-    ld a, SFX1_KEY_B                              ; $5EE6
-    call Snd_Sfx1                                 ; $5EE8
-    pop af                                        ; $5EEB
+    play_sfx1 SFX1_KEY_B                          ; $5EE5
     ld hl, wState                                 ; $5EEC
     dec [hl]                                      ; $5EEF
     ret                                           ; $5EF0
@@ -4544,10 +4390,7 @@ Kb_Page3_PressBloodType_ToPage2::
 
 ; C: keys $0C and up: sfx $16, 10-frame wait, state + 1 (the owner form is done) (branch target; code read 2026-10-19)
 Kb_Page3_PressBloodType_Confirm::
-    push af                                       ; $5EF1
-    ld a, SFX1_OPTION_CHANGE                      ; $5EF2
-    call Snd_Sfx1                                 ; $5EF4
-    pop af                                        ; $5EF7
+    play_sfx1 SFX1_OPTION_CHANGE                  ; $5EF1
     ld bc, $000a                                  ; $5EF8
     call Wait_Frames                              ; $5EFB
     next_state                                    ; $5EFE
@@ -4666,8 +4509,7 @@ jr_009_5f9d:
     call Far_Call                                 ; $5FC3
 
 jr_009_5fc6:
-    call Pal_FadeOut                              ; $5FC6
-    call Lcd_Off                                  ; $5FC9
+    screen_off                                    ; $5FC6
 
 ; C: end of the erase prompt (and the path without prompt): far-calls 02:442C Sram_ValidateAll_Far and 02:4466
 ; Photo_RenumberVector, then Far_Call_Return (the source shows `CommentEditor_DrawTextCursor` for 02:4466 only because
@@ -4753,13 +4595,8 @@ Mode21_PickCharacterTbl::
     set 1, [hl]                                   ; $6087
     ld a, $01                                     ; $6089
     ldh [hStatHandlerIndex], a                    ; $608B
-    call Oam_ClearShadow                          ; $608D
-    call Pal_AllWhite                             ; $6090
-    call Lcd_On                                   ; $6093
-    push af                                       ; $6096
-    ld a, MUSIC_RUN_PICK_CHARACTER                ; $6097
-    call Snd_Music                                ; $6099
-    pop af                                        ; $609C
+    screen_on                                     ; $608D
+    play_music MUSIC_RUN_PICK_CHARACTER           ; $6096
     call Pal_FadeIn                               ; $609D
     next_state                                    ; $60A0
     ret                                           ; $60A4
@@ -4783,12 +4620,8 @@ Mode21_State01_PickCharacter::
     bit 0, a                                      ; $60BB
     jr z, jr_009_60d4                             ; $60BD
 
-    call Pal_FadeOut                              ; $60BF
-    call Lcd_Off                                  ; $60C2
-    ld hl, hStatShadow                            ; $60C5
-    res 6, [hl]                                   ; $60C8
-    ld hl, rIE                                    ; $60CA
-    res 1, [hl]                                   ; $60CD
+    screen_off                                    ; $60BF
+    stat_irq_off                                  ; $60C5
     next_state                                    ; $60CF
     ret                                           ; $60D3
 
@@ -4797,12 +4630,8 @@ jr_009_60d4:
     bit 1, a                                      ; $60D4
     ret z                                         ; $60D6
 
-    call Pal_FadeOut                              ; $60D7
-    call Lcd_Off                                  ; $60DA
-    ld hl, hStatShadow                            ; $60DD
-    res 6, [hl]                                   ; $60E0
-    ld hl, rIE                                    ; $60E2
-    res 1, [hl]                                   ; $60E5
+    screen_off                                    ; $60D7
+    stat_irq_off                                  ; $60DD
     ld a, MODE_MAIN_MENU                          ; $60E7
     ld [wMode], a                                 ; $60E9
     set_state STATE_00_INIT                       ; $60EC
@@ -4857,10 +4686,7 @@ jr_009_6126:
 
 jr_009_612d:
     ld [wPickCharacter21], a                      ; $612D
-    push af                                       ; $6130
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6131
-    call Snd_Sfx1                                 ; $6133
-    pop af                                        ; $6136
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6130
     ld c, a                                       ; $6137
     ld b, $00                                     ; $6138
     ld hl, Mode21_PickCharacterTbl3               ; $613A
@@ -4916,13 +4742,8 @@ Mode21_State02_RaceSceneInit::
     set 1, [hl]                                   ; $61D1
     ld a, $07                                     ; $61D3
     ldh [hStatHandlerIndex], a                    ; $61D5
-    call Oam_ClearShadow                          ; $61D7
-    call Pal_AllWhite                             ; $61DA
-    call Lcd_On                                   ; $61DD
-    push af                                       ; $61E0
-    ld a, MUSIC_RUN_RACE_SCENE                    ; $61E1
-    call Snd_Music                                ; $61E3
-    pop af                                        ; $61E6
+    screen_on                                     ; $61D7
+    play_music MUSIC_RUN_RACE_SCENE               ; $61E0
     call Pal_FadeIn                               ; $61E7
     next_state                                    ; $61EA
     ret                                           ; $61EE
@@ -4963,10 +4784,7 @@ Mode21_State04_Countdown::
     cp $0d                                        ; $6230
     ret nz                                        ; $6232
 
-    push af                                       ; $6233
-    ld a, MUSIC_RUN_COUNTDOWN                     ; $6234
-    call Snd_Music                                ; $6236
-    pop af                                        ; $6239
+    play_music MUSIC_RUN_COUNTDOWN                ; $6233
     xor a                                         ; $623A
     ld [wRunStartDash], a                         ; $623B
     ld [wRunPlayerLeads], a                       ; $623E
@@ -5138,10 +4956,7 @@ jr_009_6314:
     ld a, $07                                     ; $6330
     ld [wRunMoleState], a                         ; $6332
     farcopy Vram_CopyFromBank_4, Gfx_1B_6FC0_Mode21_State05_ReadySteadyGo, $81a0, $00a0 ; $6335
-    push af                                       ; $6343
-    ld a, MUSIC_RUN_READY_STEADY_GO               ; $6344
-    call Snd_Music                                ; $6346
-    pop af                                        ; $6349
+    play_music MUSIC_RUN_READY_STEADY_GO          ; $6343
     next_state                                    ; $634A
     ret                                           ; $634E
 
@@ -5180,10 +4995,7 @@ jr_009_638f:
     ret z                                         ; $6393
 
     call Run_CompareRecord                        ; $6394
-    push af                                       ; $6397
-    ld a, MUSIC_RUN_RACE                          ; $6398
-    call Snd_Music                                ; $639A
-    pop af                                        ; $639D
+    play_music MUSIC_RUN_RACE                     ; $6397
     next_state                                    ; $639E
     ret                                           ; $63A2
 
@@ -5258,12 +5070,8 @@ jr_009_640e:
     ld [wRunState + $1f], a                       ; $6416
 
 jr_009_6419:
-    call Pal_FadeOut                              ; $6419
-    call Lcd_Off                                  ; $641C
-    ld hl, hStatShadow                            ; $641F
-    res 6, [hl]                                   ; $6422
-    ld hl, rIE                                    ; $6424
-    res 1, [hl]                                   ; $6427
+    screen_off                                    ; $6419
+    stat_irq_off                                  ; $641F
     set_state STATE_21_RESULT_SETUP               ; $6429
     ret                                           ; $642E
 
@@ -5322,13 +5130,8 @@ Mode21_State0B_ResultSetup::
     set 1, [hl]                                   ; $64C0
     ld a, $03                                     ; $64C2
     ldh [hStatHandlerIndex], a                    ; $64C4
-    call Oam_ClearShadow                          ; $64C6
-    call Pal_AllWhite                             ; $64C9
-    call Lcd_On                                   ; $64CC
-    push af                                       ; $64CF
-    ld a, MUSIC_RUN_RESULT_SETUP                  ; $64D0
-    call Snd_Music                                ; $64D2
-    pop af                                        ; $64D5
+    screen_on                                     ; $64C6
+    play_music MUSIC_RUN_RESULT_SETUP             ; $64CF
     xor a                                         ; $64D6
     ld [wRunResultMusicOn], a                     ; $64D7
     call Run_DrawPlayer                           ; $64DA
@@ -5566,10 +5369,7 @@ Mode21_State0C_ResultScreen::
     and a                                         ; $6678
     jr z, jr_009_669a                             ; $6679
 
-    push af                                       ; $667B
-    ld a, MUSIC_RUN_RESULT_SETUP                  ; $667C
-    call Snd_Music                                ; $667E
-    pop af                                        ; $6681
+    play_music MUSIC_RUN_RESULT_SETUP             ; $667B
     xor a                                         ; $6682
     ld [wRunResultMusicOn], a                     ; $6683
     jr jr_009_669a                                ; $6686
@@ -5579,10 +5379,7 @@ jr_009_6688:
     and a                                         ; $668B
     jr nz, jr_009_669a                            ; $668C
 
-    push af                                       ; $668E
-    ld a, MUSIC_RUN_RESULT                        ; $668F
-    call Snd_Music                                ; $6691
-    pop af                                        ; $6694
+    play_music MUSIC_RUN_RESULT                   ; $668E
     ld a, $01                                     ; $6695
     ld [wRunResultMusicOn], a                     ; $6697
 
@@ -5625,12 +5422,8 @@ Mode21_State0D_Unused::
 
 ; C: state := 0
 Mode21_State0E_Leave::
-    call Pal_FadeOut                              ; $66BC
-    call Lcd_Off                                  ; $66BF
-    ld hl, hStatShadow                            ; $66C2
-    res 6, [hl]                                   ; $66C5
-    ld hl, rIE                                    ; $66C7
-    res 1, [hl]                                   ; $66CA
+    screen_off                                    ; $66BC
+    stat_irq_off                                  ; $66C2
     set_state STATE_21_INIT                       ; $66CC
     ret                                           ; $66D1
 
@@ -5751,10 +5544,7 @@ Run_PlayerJump::
     bit PADB_UP, a                                ; $67CF
     ret z                                         ; $67D1
 
-    push af                                       ; $67D2
-    ld a, SFX1_RUN_JUMP                           ; $67D3
-    call Snd_Sfx1                                 ; $67D5
-    pop af                                        ; $67D8
+    play_sfx1 SFX1_RUN_JUMP                       ; $67D2
     ld a, [wRunPlayerRunCounter]                  ; $67D9
     ld c, a                                       ; $67DC
     ld b, $00                                     ; $67DD
@@ -6082,10 +5872,7 @@ jr_009_6a12:
     cp $02                                        ; $6A20
     jr nc, jr_009_6a35                            ; $6A22
 
-    push af                                       ; $6A24
-    ld a, SFX4_RUN_HURDLE_HIT                     ; $6A25
-    call Snd_Sfx4                                 ; $6A27
-    pop af                                        ; $6A2A
+    play_sfx4 SFX4_RUN_HURDLE_HIT                 ; $6A24
     ld a, $02                                     ; $6A2B
     ld [hl+], a                                   ; $6A2D
     xor a                                         ; $6A2E
@@ -6354,10 +6141,7 @@ jr_009_6bc8:
     jr nc, jr_009_6bdd                            ; $6BD2
 
 jr_009_6bd4:
-    push af                                       ; $6BD4
-    ld a, SFX4_RUN_FLAG_HEIGHT                    ; $6BD5
-    call Snd_Sfx4                                 ; $6BD7
-    pop af                                        ; $6BDA
+    play_sfx4 SFX4_RUN_FLAG_HEIGHT                ; $6BD4
     ld a, $02                                     ; $6BDB
 
 jr_009_6bdd:
@@ -6533,19 +6317,13 @@ Run_Celebration::
     cp $01                                        ; $6CAC
     jr nz, jr_009_6cb7                            ; $6CAE
 
-    push af                                       ; $6CB0
-    ld a, SFX1_RUN_CELEBRATION                    ; $6CB1
-    call Snd_Sfx1                                 ; $6CB3
-    pop af                                        ; $6CB6
+    play_sfx1 SFX1_RUN_CELEBRATION                ; $6CB0
 
 jr_009_6cb7:
     cp $0c                                        ; $6CB7
     jr nz, jr_009_6cc2                            ; $6CB9
 
-    push af                                       ; $6CBB
-    ld a, SFX1_OPTION_CHANGE                      ; $6CBC
-    call Snd_Sfx1                                 ; $6CBE
-    pop af                                        ; $6CC1
+    play_sfx1 SFX1_OPTION_CHANGE                  ; $6CBB
 
 jr_009_6cc2:
     ld c, a                                       ; $6CC2
@@ -7481,9 +7259,7 @@ ResultScreen_Substate0_Init::
     set 1, [hl]                                   ; $7312
     ld a, $01                                     ; $7314
     ldh [hStatHandlerIndex], a                    ; $7316
-    call Oam_ClearShadow                          ; $7318
-    call Pal_AllWhite                             ; $731B
-    call Lcd_On                                   ; $731E
+    screen_on                                     ; $7318
     pop af                                        ; $7321
     ld hl, ResultScreen_Substate0_Init_Tbl733E    ; $7322
     call Snd_PlayFromList                         ; $7325
@@ -7539,12 +7315,8 @@ ResultScreen_Substate1_WaitKey::
 
 ; C
 ResultScreen_Substate2_Exit::
-    call Pal_FadeOut                              ; $7368
-    call Lcd_Off                                  ; $736B
-    ld hl, hStatShadow                            ; $736E
-    res 6, [hl]                                   ; $7371
-    ld hl, rIE                                    ; $7373
-    res 1, [hl]                                   ; $7376
+    screen_off                                    ; $7368
+    stat_irq_off                                  ; $736E
     next_state                                    ; $7378
     jp Far_Call_Return                            ; $737C
 

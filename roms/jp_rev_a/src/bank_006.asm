@@ -52,13 +52,8 @@ Mode15_State01_TimerInit::
     farcopy Mem_CopyFromBank, Gfx_20_72C0_Mode15_State01_TimerInit, $8500, $01d0 ; $4075
     farcopy Mem_CopyFromBank, Gfx_20_6E40_Mode15_State01_TimerInit, $9720, $0080 ; $4083
     farcopy Mem_CopyFromBank, Map_25_6620_Mode15_State01_TimerInit, $9800, $0240 ; $4091
-    call Oam_ClearShadow                          ; $409F
-    call Pal_AllWhite                             ; $40A2
-    call Lcd_On                                   ; $40A5
-    push af                                       ; $40A8
-    ld a, MUSIC_TIMER_PRINT_OPTIONS               ; $40A9
-    call Snd_Music                                ; $40AB
-    pop af                                        ; $40AE
+    screen_on                                     ; $409F
+    play_music MUSIC_TIMER_PRINT_OPTIONS          ; $40A8
     ld a, $05                                     ; $40AF
     ld [wSelftimerDelay], a                       ; $40B1
     ld de, $9640                                  ; $40B4
@@ -149,8 +144,7 @@ jr_006_412b:
 
 ; C: A: shoot_variant 1 (self-timer) to mode 14
 Mode15_State04_TimerApply::
-    call Pal_FadeOut                              ; $4142
-    call Lcd_Off                                  ; $4145
+    screen_off                                    ; $4142
     ld a, [wAbResult]                             ; $4148
     bit 0, a                                      ; $414B
     jr nz, jr_006_415a                            ; $414D
@@ -189,13 +183,8 @@ Mode15_State05_IntervalInit::
     farcopy Mem_CopyFromBank, Gfx_20_72C0_Mode15_State01_TimerInit, $8500, $01d0 ; $41B8
     farcopy Mem_CopyFromBank, Gfx_20_6E40_Mode15_State01_TimerInit, $9720, $0080 ; $41C6
     farcopy Mem_CopyFromBank, Map_25_6AA0_Mode15_State05_IntervalInit, $9800, $0240 ; $41D4
-    call Oam_ClearShadow                          ; $41E2
-    call Pal_AllWhite                             ; $41E5
-    call Lcd_On                                   ; $41E8
-    push af                                       ; $41EB
-    ld a, MUSIC_TIMER_PRINT_OPTIONS               ; $41EC
-    call Snd_Music                                ; $41EE
-    pop af                                        ; $41F1
+    screen_on                                     ; $41E2
+    play_music MUSIC_TIMER_PRINT_OPTIONS          ; $41EB
     ld a, $00                                     ; $41F2
     ld [wIntervalIndex], a                        ; $41F4
     ld de, $9680                                  ; $41F7
@@ -402,8 +391,7 @@ jr_006_4338:
 
 ; C: A: shoot_variant 2 (interval) to mode 14
 Mode15_State09_IntervalApply::
-    call Pal_FadeOut                              ; $434F
-    call Lcd_Off                                  ; $4352
+    screen_off                                    ; $434F
     ld a, [wAbResult]                             ; $4355
     bit 0, a                                      ; $4358
     jr nz, jr_006_4367                            ; $435A
@@ -645,10 +633,7 @@ Mode15_StepValue::
     cp b                                          ; $44C0
     ret z                                         ; $44C1
 
-    push af                                       ; $44C2
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $44C3
-    call Snd_Sfx1                                 ; $44C5
-    pop af                                        ; $44C8
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $44C2
     dec a                                         ; $44C9
     ret                                           ; $44CA
 
@@ -660,10 +645,7 @@ jr_006_44cb:
     cp c                                          ; $44CE
     ret z                                         ; $44CF
 
-    push af                                       ; $44D0
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $44D1
-    call Snd_Sfx1                                 ; $44D3
-    pop af                                        ; $44D6
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $44D0
     inc a                                         ; $44D7
     ret                                           ; $44D8
 
@@ -710,13 +692,8 @@ Mode16_State00_Init::
     ld bc, $0300                                  ; $452B
     call Mem_CopyFromBank                         ; $452E
     farcopy Mem_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $4531
-    call Oam_ClearShadow                          ; $453F
-    call Pal_AllWhite                             ; $4542
-    call Lcd_On                                   ; $4545
-    push af                                       ; $4548
-    ld a, MUSIC_SHUTTERBUG                        ; $4549
-    call Snd_Music                                ; $454B
-    pop af                                        ; $454E
+    screen_on                                     ; $453F
+    play_music MUSIC_SHUTTERBUG                   ; $4548
     rst Rst08_WaitVBlank                          ; $454F
     call Mode16_LoadPageTiles                     ; $4550
     ld a, [wOpt1Value]                            ; $4553
@@ -756,13 +733,8 @@ Mode16_State01_Redraw::
     ld bc, $0300                                  ; $45AE
     call Mem_CopyFromBank                         ; $45B1
     farcopy Mem_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $45B4
-    call Oam_ClearShadow                          ; $45C2
-    call Pal_AllWhite                             ; $45C5
-    call Lcd_On                                   ; $45C8
-    push af                                       ; $45CB
-    ld a, MUSIC_SHUTTERBUG                        ; $45CC
-    call Snd_Music                                ; $45CE
-    pop af                                        ; $45D1
+    screen_on                                     ; $45C2
+    play_music MUSIC_SHUTTERBUG                   ; $45CB
     rst Rst08_WaitVBlank                          ; $45D2
     call Mode16_LoadPageTiles                     ; $45D3
     ld a, [wOpt1Value]                            ; $45D6
@@ -803,10 +775,7 @@ Mode16_State02_MainMenu::
     bit PADB_A, a                                 ; $461D
     jr z, jr_006_4649                             ; $461F
 
-    push af                                       ; $4621
-    ld a, SFX1_KEY_A                              ; $4622
-    call Snd_Sfx1                                 ; $4624
-    pop af                                        ; $4627
+    play_sfx1 SFX1_KEY_A                          ; $4621
     call Oam_ClearShadow                          ; $4628
     ld a, [wOptMenuCursor]                        ; $462B
     ld c, a                                       ; $462E
@@ -817,10 +786,7 @@ Mode16_State02_MainMenu::
     cp $22                                        ; $4636
     jr c, jr_006_4642                             ; $4638
 
-    push af                                       ; $463A
-    ld a, SFX1_BEEP_REFUSED                       ; $463B
-    call Snd_Sfx1                                 ; $463D
-    pop af                                        ; $4640
+    play_sfx1 SFX1_BEEP_REFUSED                   ; $463A
     ret                                           ; $4641
 
 
@@ -834,10 +800,7 @@ jr_006_4649:
     bit 1, a                                      ; $4649
     ret z                                         ; $464B
 
-    push af                                       ; $464C
-    ld a, SFX1_KEY_B                              ; $464D
-    call Snd_Sfx1                                 ; $464F
-    pop af                                        ; $4652
+    play_sfx1 SFX1_KEY_B                          ; $464C
     set_state STATE_16_LEAVE_TO_MODE01            ; $4653
     ret                                           ; $4658
 
@@ -882,10 +845,7 @@ jr_006_468a:
     bit PADB_A, a                                 ; $469E
     jr z, jr_006_46b5                             ; $46A0
 
-    push af                                       ; $46A2
-    ld a, SFX1_KEY_A                              ; $46A3
-    call Snd_Sfx1                                 ; $46A5
-    pop af                                        ; $46A8
+    play_sfx1 SFX1_KEY_A                          ; $46A2
     ld a, [wOpt1Row]                              ; $46A9
     and a                                         ; $46AC
     jr nz, jr_006_46b4                            ; $46AD
@@ -900,10 +860,7 @@ jr_006_46b5:
     bit 1, a                                      ; $46B5
     ret z                                         ; $46B7
 
-    push af                                       ; $46B8
-    ld a, SFX1_KEY_B                              ; $46B9
-    call Snd_Sfx1                                 ; $46BB
-    pop af                                        ; $46BE
+    play_sfx1 SFX1_KEY_B                          ; $46B8
     call Oam_ClearShadow                          ; $46BF
     rst Rst08_WaitVBlank                          ; $46C2
     farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $46C3
@@ -965,10 +922,7 @@ jr_006_472f:
     bit PADB_A, a                                 ; $4743
     jr z, jr_006_4759                             ; $4745
 
-    push af                                       ; $4747
-    ld a, SFX1_KEY_A                              ; $4748
-    call Snd_Sfx1                                 ; $474A
-    pop af                                        ; $474D
+    play_sfx1 SFX1_KEY_A                          ; $4747
     ld a, [wOpt2Row]                              ; $474E
     and a                                         ; $4751
     ret nz                                        ; $4752
@@ -981,10 +935,7 @@ jr_006_4759:
     bit 1, a                                      ; $4759
     ret z                                         ; $475B
 
-    push af                                       ; $475C
-    ld a, SFX1_KEY_B                              ; $475D
-    call Snd_Sfx1                                 ; $475F
-    pop af                                        ; $4762
+    play_sfx1 SFX1_KEY_B                          ; $475C
     call Oam_ClearShadow                          ; $4763
     rst Rst08_WaitVBlank                          ; $4766
     farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $4767
@@ -1034,10 +985,7 @@ Mode16_State05_PanoramaMenu::
     bit PADB_A, a                                 ; $47CC
     jr z, jr_006_47e9                             ; $47CE
 
-    push af                                       ; $47D0
-    ld a, SFX1_KEY_A                              ; $47D1
-    call Snd_Sfx1                                 ; $47D3
-    pop af                                        ; $47D6
+    play_sfx1 SFX1_KEY_A                          ; $47D0
     ld a, [wOpt3Cursor]                           ; $47D7
     and a                                         ; $47DA
     jr nz, jr_006_47e3                            ; $47DB
@@ -1055,10 +1003,7 @@ jr_006_47e9:
     bit 1, a                                      ; $47E9
     ret z                                         ; $47EB
 
-    push af                                       ; $47EC
-    ld a, SFX1_KEY_B                              ; $47ED
-    call Snd_Sfx1                                 ; $47EF
-    pop af                                        ; $47F2
+    play_sfx1 SFX1_KEY_B                          ; $47EC
     call Oam_ClearShadow                          ; $47F3
     rst Rst08_WaitVBlank                          ; $47F6
     farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $47F7
@@ -1157,10 +1102,7 @@ jr_006_4887:
     bit PADB_A, a                                 ; $4895
     jr z, jr_006_48fc                             ; $4897
 
-    push af                                       ; $4899
-    ld a, SFX1_KEY_A                              ; $489A
-    call Snd_Sfx1                                 ; $489C
-    pop af                                        ; $489F
+    play_sfx1 SFX1_KEY_A                          ; $4899
     ld a, [wOpt4Cursor]                           ; $48A0
     and a                                         ; $48A3
     jr nz, jr_006_48ac                            ; $48A4
@@ -1173,8 +1115,7 @@ jr_006_48ac:
     cp $01                                        ; $48AC
     jr nz, jr_006_48cb                            ; $48AE
 
-    call Pal_FadeOut                              ; $48B0
-    call Lcd_Off                                  ; $48B3
+    screen_off                                    ; $48B0
     ld a, $02                                     ; $48B6
     ld [wPickCharacter], a                        ; $48B8
     ld a, MODE_SHUTTERBUG_MAGIC                   ; $48BB
@@ -1195,16 +1136,12 @@ jr_006_48cb:
     and a                                         ; $48DB
     jr nz, jr_006_48e6                            ; $48DC
 
-    push af                                       ; $48DE
-    ld a, SFX1_BEEP_REFUSED                       ; $48DF
-    call Snd_Sfx1                                 ; $48E1
-    pop af                                        ; $48E4
+    play_sfx1 SFX1_BEEP_REFUSED                   ; $48DE
     ret                                           ; $48E5
 
 
 jr_006_48e6:
-    call Pal_FadeOut                              ; $48E6
-    call Lcd_Off                                  ; $48E9
+    screen_off                                    ; $48E6
     ld a, $01                                     ; $48EC
     ld [wDoodleFromShutterbug], a                 ; $48EE
     ld a, MODE_DOODLE_MENU                        ; $48F1
@@ -1217,10 +1154,7 @@ jr_006_48fc:
     bit 1, a                                      ; $48FC
     ret z                                         ; $48FE
 
-    push af                                       ; $48FF
-    ld a, SFX1_KEY_B                              ; $4900
-    call Snd_Sfx1                                 ; $4902
-    pop af                                        ; $4905
+    play_sfx1 SFX1_KEY_B                          ; $48FF
     call Oam_ClearShadow                          ; $4906
     rst Rst08_WaitVBlank                          ; $4909
     farcopy Vram_CopyFromBank, Map_25_73A0_Mode16_State00_Init, $9800, $0240 ; $490A
@@ -1238,8 +1172,7 @@ Mode16_State07_LeaveToMode01::
     ld a, MODE_SHOOT_PARLOR                       ; $4924
     ld [wMode], a                                 ; $4926
     set_state STATE_01_INTRO                      ; $4929
-    call Pal_FadeOut                              ; $492E
-    call Lcd_Off                                  ; $4931
+    screen_off                                    ; $492E
     ret                                           ; $4934
 
 
@@ -1248,8 +1181,7 @@ Mode16_State08_StartShoot::
     ld a, MODE_SHOOT_LIVE_VIEW                    ; $4935
     ld [wMode], a                                 ; $4937
     set_state STATE_14_INIT                       ; $493A
-    call Pal_FadeOut                              ; $493F
-    call Lcd_Off                                  ; $4942
+    screen_off                                    ; $493F
     ld a, [wOptMenuCursor]                        ; $4945
     and a                                         ; $4948
     jr nz, jr_006_4952                            ; $4949
@@ -1318,9 +1250,7 @@ jr_006_496c:
     set 1, [hl]                                   ; $49E8
     ld a, $01                                     ; $49EA
     ldh [hStatHandlerIndex], a                    ; $49EC
-    call Oam_ClearShadow                          ; $49EE
-    call Pal_AllWhite                             ; $49F1
-    call Lcd_On                                   ; $49F4
+    screen_on                                     ; $49EE
     call Pal_FadeIn                               ; $49F7
 
 jr_006_49fa:
@@ -1353,26 +1283,16 @@ jr_006_4a0c:
     bit 0, a                                      ; $4A2B
     jr z, jr_006_4a38                             ; $4A2D
 
-    push af                                       ; $4A2F
-    ld a, SFX1_KEY_A                              ; $4A30
-    call Snd_Sfx1                                 ; $4A32
-    pop af                                        ; $4A35
+    play_sfx1 SFX1_KEY_A                          ; $4A2F
     jr jr_006_4a3f                                ; $4A36
 
 jr_006_4a38:
-    push af                                       ; $4A38
-    ld a, SFX1_KEY_B                              ; $4A39
-    call Snd_Sfx1                                 ; $4A3B
-    pop af                                        ; $4A3E
+    play_sfx1 SFX1_KEY_B                          ; $4A38
 
 jr_006_4a3f:
     push af                                       ; $4A3F
-    call Pal_FadeOut                              ; $4A40
-    call Lcd_Off                                  ; $4A43
-    ld hl, hStatShadow                            ; $4A46
-    res 6, [hl]                                   ; $4A49
-    ld hl, rIE                                    ; $4A4B
-    res 1, [hl]                                   ; $4A4E
+    screen_off                                    ; $4A40
+    stat_irq_off                                  ; $4A46
     pop af                                        ; $4A50
     bit 0, a                                      ; $4A51
     ret nz                                        ; $4A53
@@ -1388,8 +1308,7 @@ Mode16_State09_ToPanoramaPrint::
     ld a, MODE_PANORAMA_PRINT                     ; $4A5F
     ld [wMode], a                                 ; $4A61
     set_state STATE_18_INIT                       ; $4A64
-    call Pal_FadeOut                              ; $4A69
-    call Lcd_Off                                  ; $4A6C
+    screen_off                                    ; $4A69
     ret                                           ; $4A6F
 
 
@@ -1476,10 +1395,7 @@ jr_006_4acf:
     ret z                                         ; $4AD0
 
     ld [hl], a                                    ; $4AD1
-    push af                                       ; $4AD2
-    ld a, SFX1_KEY_UP_DOWN                        ; $4AD3
-    call Snd_Sfx1                                 ; $4AD5
-    pop af                                        ; $4AD8
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $4AD2
     ret                                           ; $4AD9
 
 
@@ -1511,10 +1427,7 @@ jr_006_4aed:
     ret z                                         ; $4AEE
 
     ld [hl], a                                    ; $4AEF
-    push af                                       ; $4AF0
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $4AF1
-    call Snd_Sfx1                                 ; $4AF3
-    pop af                                        ; $4AF6
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $4AF0
     ret                                           ; $4AF7
 
 
@@ -1935,13 +1848,8 @@ jr_006_4d61:
     dec b                                         ; $4D61
     jr nz, jr_006_4d3a                            ; $4D62
 
-    call Oam_ClearShadow                          ; $4D64
-    call Pal_AllWhite                             ; $4D67
-    call Lcd_On                                   ; $4D6A
-    push af                                       ; $4D6D
-    ld a, MUSIC_COMPOSE                           ; $4D6E
-    call Snd_Music                                ; $4D70
-    pop af                                        ; $4D73
+    screen_on                                     ; $4D64
+    play_music MUSIC_COMPOSE                      ; $4D6D
     call Compose_DrawLayoutPreview                ; $4D74
     call Pal_FadeIn                               ; $4D77
     next_state                                    ; $4D7A
@@ -1996,10 +1904,7 @@ Mode17_State01_LayoutChoose::
     and PADF_A | PADF_DOWN                        ; $4DF4
     jr z, jr_006_4e14                             ; $4DF6
 
-    push af                                       ; $4DF8
-    ld a, SFX1_MENU_CHOOSE                        ; $4DF9
-    call Snd_Sfx1                                 ; $4DFB
-    pop af                                        ; $4DFE
+    play_sfx1 SFX1_MENU_CHOOSE                    ; $4DF8
     call Compose_DrawLayoutPreview                ; $4DFF
     ld a, [wComposeLayout]                        ; $4E02
     and a                                         ; $4E05
@@ -2018,10 +1923,7 @@ jr_006_4e14:
     bit 1, b                                      ; $4E14
     ret z                                         ; $4E16
 
-    push af                                       ; $4E17
-    ld a, SFX1_KEY_B                              ; $4E18
-    call Snd_Sfx1                                 ; $4E1A
-    pop af                                        ; $4E1D
+    play_sfx1 SFX1_KEY_B                          ; $4E17
     set_state STATE_17_LEAVE                      ; $4E1E
     ret                                           ; $4E23
 
@@ -2047,10 +1949,7 @@ jr_006_4e32:
     ret z                                         ; $4E36
 
     ld [hl], a                                    ; $4E37
-    push af                                       ; $4E38
-    ld a, SFX1_COMPOSE_LAYOUT_KEY                 ; $4E39
-    call Snd_Sfx1                                 ; $4E3B
-    pop af                                        ; $4E3E
+    play_sfx1 SFX1_COMPOSE_LAYOUT_KEY             ; $4E38
     ret                                           ; $4E3F
 
 
@@ -2091,10 +1990,7 @@ Mode17_State02_Split_Cursor::
     bit PADB_DOWN, a                              ; $4E67
     jr z, jr_006_4e7f                             ; $4E69
 
-    push af                                       ; $4E6B
-    ld a, SFX1_KEY_UP_DOWN                        ; $4E6C
-    call Snd_Sfx1                                 ; $4E6E
-    pop af                                        ; $4E71
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $4E6B
     ld a, [wCompose4Cursor]                       ; $4E72
     bit 0, a                                      ; $4E75
     jr z, jr_006_4e7f                             ; $4E77
@@ -2108,10 +2004,7 @@ jr_006_4e7f:
     bit PADB_UP, a                                ; $4E81
     jr z, jr_006_4e99                             ; $4E83
 
-    push af                                       ; $4E85
-    ld a, SFX1_KEY_UP_DOWN                        ; $4E86
-    call Snd_Sfx1                                 ; $4E88
-    pop af                                        ; $4E8B
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $4E85
     ld a, [wCompose4Cursor]                       ; $4E8C
     bit 0, a                                      ; $4E8F
     jr nz, jr_006_4e99                            ; $4E91
@@ -2127,10 +2020,7 @@ jr_006_4e99:
     bit PADB_A, a                                 ; $4EA1
     jr z, jr_006_4ec9                             ; $4EA3
 
-    push af                                       ; $4EA5
-    ld a, SFX1_KEY_A                              ; $4EA6
-    call Snd_Sfx1                                 ; $4EA8
-    pop af                                        ; $4EAB
+    play_sfx1 SFX1_KEY_A                          ; $4EA5
     ld a, [wCompose4Cursor]                       ; $4EAC
     ld c, a                                       ; $4EAF
     ld b, $00                                     ; $4EB0
@@ -2152,10 +2042,7 @@ jr_006_4ec9:
     bit 1, a                                      ; $4EC9
     ret z                                         ; $4ECB
 
-    push af                                       ; $4ECC
-    ld a, SFX1_KEY_B                              ; $4ECD
-    call Snd_Sfx1                                 ; $4ECF
-    pop af                                        ; $4ED2
+    play_sfx1 SFX1_KEY_B                          ; $4ECC
     set_state STATE_17_LEAVE                      ; $4ED3
     ret                                           ; $4ED8
 
@@ -2176,10 +2063,7 @@ Compose_Split_ReadKeys::
     bit 1, a                                      ; $4EE7
     ret z                                         ; $4EE9
 
-    push af                                       ; $4EEA
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $4EEB
-    call Snd_Sfx1                                 ; $4EED
-    pop af                                        ; $4EF0
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $4EEA
     res 1, a                                      ; $4EF1
     jr jr_006_4f28                                ; $4EF3
 
@@ -2190,10 +2074,7 @@ jr_006_4ef5:
     bit 1, a                                      ; $4EF9
     ret nz                                        ; $4EFB
 
-    push af                                       ; $4EFC
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $4EFD
-    call Snd_Sfx1                                 ; $4EFF
-    pop af                                        ; $4F02
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $4EFC
     set 1, a                                      ; $4F03
     jr jr_006_4f28                                ; $4F05
 
@@ -2204,10 +2085,7 @@ jr_006_4f07:
     bit 0, a                                      ; $4F0B
     ret z                                         ; $4F0D
 
-    push af                                       ; $4F0E
-    ld a, SFX1_KEY_UP_DOWN                        ; $4F0F
-    call Snd_Sfx1                                 ; $4F11
-    pop af                                        ; $4F14
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $4F0E
     res 0, a                                      ; $4F15
     jr jr_006_4f28                                ; $4F17
 
@@ -2218,10 +2096,7 @@ jr_006_4f19:
     bit 0, a                                      ; $4F1C
     ret nz                                        ; $4F1E
 
-    push af                                       ; $4F1F
-    ld a, SFX1_KEY_UP_DOWN                        ; $4F20
-    call Snd_Sfx1                                 ; $4F22
-    pop af                                        ; $4F25
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $4F1F
     set 0, a                                      ; $4F26
 
 jr_006_4f28:
@@ -2277,10 +2152,7 @@ jr_006_4f6c:
     bit PADB_A, a                                 ; $4F77
     ret nz                                        ; $4F79
 
-    push af                                       ; $4F7A
-    ld a, SFX1_KEY_B                              ; $4F7B
-    call Snd_Sfx1                                 ; $4F7D
-    pop af                                        ; $4F80
+    play_sfx1 SFX1_KEY_B                          ; $4F7A
     call Compose_LoadQuad0                        ; $4F81
     set_state STATE_17_SPLIT_CURSOR               ; $4F84
     ret                                           ; $4F89
@@ -2314,10 +2186,7 @@ jr_006_4fa7:
     bit PADB_A, a                                 ; $4FB2
     ret nz                                        ; $4FB4
 
-    push af                                       ; $4FB5
-    ld a, SFX1_KEY_B                              ; $4FB6
-    call Snd_Sfx1                                 ; $4FB8
-    pop af                                        ; $4FBB
+    play_sfx1 SFX1_KEY_B                          ; $4FB5
     call Compose_LoadQuad1                        ; $4FBC
     set_state STATE_17_SPLIT_CURSOR               ; $4FBF
     ret                                           ; $4FC4
@@ -2351,10 +2220,7 @@ jr_006_4fe2:
     bit PADB_A, a                                 ; $4FED
     ret nz                                        ; $4FEF
 
-    push af                                       ; $4FF0
-    ld a, SFX1_KEY_B                              ; $4FF1
-    call Snd_Sfx1                                 ; $4FF3
-    pop af                                        ; $4FF6
+    play_sfx1 SFX1_KEY_B                          ; $4FF0
     call Compose_LoadQuad2                        ; $4FF7
     set_state STATE_17_SPLIT_CURSOR               ; $4FFA
     ret                                           ; $4FFF
@@ -2388,10 +2254,7 @@ jr_006_501d:
     bit PADB_A, a                                 ; $5028
     ret nz                                        ; $502A
 
-    push af                                       ; $502B
-    ld a, SFX1_KEY_B                              ; $502C
-    call Snd_Sfx1                                 ; $502E
-    pop af                                        ; $5031
+    play_sfx1 SFX1_KEY_B                          ; $502B
     call Compose_LoadQuad3                        ; $5032
     set_state STATE_17_SPLIT_CURSOR               ; $5035
     ret                                           ; $503A
@@ -2411,10 +2274,7 @@ Mode17_State07_Split_Confirm::
     bit PADB_UP, a                                ; $5047
     jr z, jr_006_5058                             ; $5049
 
-    push af                                       ; $504B
-    ld a, SFX1_KEY_UP_DOWN                        ; $504C
-    call Snd_Sfx1                                 ; $504E
-    pop af                                        ; $5051
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $504B
     set_state STATE_17_SPLIT_CURSOR               ; $5052
     ret                                           ; $5057
 
@@ -2427,10 +2287,7 @@ jr_006_5058:
     cp $1e                                        ; $505F
     jr nc, jr_006_5070                            ; $5061
 
-    push af                                       ; $5063
-    ld a, SFX1_CHOOSE                             ; $5064
-    call Snd_Sfx1                                 ; $5066
-    pop af                                        ; $5069
+    play_sfx1 SFX1_CHOOSE                         ; $5063
     set_state STATE_17_SPLIT_BUILD                ; $506A
     ret                                           ; $506F
 
@@ -2444,10 +2301,7 @@ jr_006_5076:
     bit 1, a                                      ; $5076
     ret z                                         ; $5078
 
-    push af                                       ; $5079
-    ld a, SFX1_KEY_B                              ; $507A
-    call Snd_Sfx1                                 ; $507C
-    pop af                                        ; $507F
+    play_sfx1 SFX1_KEY_B                          ; $5079
     set_state STATE_17_LEAVE                      ; $5080
     ret                                           ; $5085
 
@@ -2466,8 +2320,7 @@ Compose_Split_DrawMakeBlink::
 
 ; C: reduces the four pictures into the 2x2 composite
 Mode17_State08_Split_Build::
-    call Pal_FadeOut                              ; $5094
-    call Lcd_Off                                  ; $5097
+    screen_off                                    ; $5094
     ld a, $d2                                     ; $509A
     ld [wPaletteTarget + $2], a                   ; $509C
     ld hl, $8000                                  ; $509F
@@ -2532,16 +2385,9 @@ Mode17_State09_Split_Result::
     call Wait_Frames                              ; $5152
 
 jr_006_5155:
-    push af                                       ; $5155
-    ld a, SFX1_KEY_B                              ; $5156
-    call Snd_Sfx1                                 ; $5158
-    pop af                                        ; $515B
-    call Pal_FadeOut                              ; $515C
-    call Lcd_Off                                  ; $515F
-    ld hl, hStatShadow                            ; $5162
-    res 6, [hl]                                   ; $5165
-    ld hl, rIE                                    ; $5167
-    res 1, [hl]                                   ; $516A
+    play_sfx1 SFX1_KEY_B                          ; $5155
+    screen_off                                    ; $515C
+    stat_irq_off                                  ; $5162
     set_state STATE_17_INIT                       ; $516C
     ret                                           ; $5171
 
@@ -2553,10 +2399,7 @@ Mode17_State0A_Fusion_Cursor::
     bit PADB_DOWN, a                              ; $5177
     jr z, jr_006_5188                             ; $5179
 
-    push af                                       ; $517B
-    ld a, SFX1_KEY_UP_DOWN                        ; $517C
-    call Snd_Sfx1                                 ; $517E
-    pop af                                        ; $5181
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $517B
     set_state STATE_17_FUSION_CONFIRM             ; $5182
     ret                                           ; $5187
 
@@ -2566,10 +2409,7 @@ jr_006_5188:
     bit PADB_UP, a                                ; $518A
     jr z, jr_006_519b                             ; $518C
 
-    push af                                       ; $518E
-    ld a, SFX1_KEY_UP_DOWN                        ; $518F
-    call Snd_Sfx1                                 ; $5191
-    pop af                                        ; $5194
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $518E
     set_state STATE_17_LAYOUT_CHOOSE              ; $5195
     ret                                           ; $519A
 
@@ -2581,10 +2421,7 @@ jr_006_519b:
     bit PADB_A, a                                 ; $51A3
     jr z, jr_006_51cb                             ; $51A5
 
-    push af                                       ; $51A7
-    ld a, SFX1_KEY_A                              ; $51A8
-    call Snd_Sfx1                                 ; $51AA
-    pop af                                        ; $51AD
+    play_sfx1 SFX1_KEY_A                          ; $51A7
     ld a, [wCompose2Cursor]                       ; $51AE
     ld c, a                                       ; $51B1
     ld b, $00                                     ; $51B2
@@ -2606,10 +2443,7 @@ jr_006_51cb:
     bit 1, a                                      ; $51CB
     ret z                                         ; $51CD
 
-    push af                                       ; $51CE
-    ld a, SFX1_KEY_B                              ; $51CF
-    call Snd_Sfx1                                 ; $51D1
-    pop af                                        ; $51D4
+    play_sfx1 SFX1_KEY_B                          ; $51CE
     set_state STATE_17_LEAVE                      ; $51D5
     ret                                           ; $51DA
 
@@ -2630,10 +2464,7 @@ Compose_Fusion_ReadKeys::
     bit 0, a                                      ; $51E7
     ret z                                         ; $51E9
 
-    push af                                       ; $51EA
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $51EB
-    call Snd_Sfx1                                 ; $51ED
-    pop af                                        ; $51F0
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $51EA
     res 0, a                                      ; $51F1
     jr jr_006_5204                                ; $51F3
 
@@ -2644,10 +2475,7 @@ jr_006_51f5:
     bit 0, a                                      ; $51F8
     ret nz                                        ; $51FA
 
-    push af                                       ; $51FB
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $51FC
-    call Snd_Sfx1                                 ; $51FE
-    pop af                                        ; $5201
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $51FB
     set 0, a                                      ; $5202
 
 jr_006_5204:
@@ -2703,10 +2531,7 @@ jr_006_5244:
     bit PADB_A, a                                 ; $524F
     ret nz                                        ; $5251
 
-    push af                                       ; $5252
-    ld a, SFX1_KEY_B                              ; $5253
-    call Snd_Sfx1                                 ; $5255
-    pop af                                        ; $5258
+    play_sfx1 SFX1_KEY_B                          ; $5252
     call Compose_LoadHalf0                        ; $5259
     set_state STATE_17_FUSION_CURSOR              ; $525C
     ret                                           ; $5261
@@ -2740,10 +2565,7 @@ jr_006_527f:
     bit PADB_A, a                                 ; $528A
     ret nz                                        ; $528C
 
-    push af                                       ; $528D
-    ld a, SFX1_KEY_B                              ; $528E
-    call Snd_Sfx1                                 ; $5290
-    pop af                                        ; $5293
+    play_sfx1 SFX1_KEY_B                          ; $528D
     call Compose_LoadHalf1                        ; $5294
     set_state STATE_17_FUSION_CURSOR              ; $5297
     ret                                           ; $529C
@@ -2764,10 +2586,7 @@ Mode17_State0D_Fusion_Confirm::
     bit PADB_UP, a                                ; $52A9
     jr z, jr_006_52ba                             ; $52AB
 
-    push af                                       ; $52AD
-    ld a, SFX1_KEY_UP_DOWN                        ; $52AE
-    call Snd_Sfx1                                 ; $52B0
-    pop af                                        ; $52B3
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $52AD
     set_state STATE_17_FUSION_CURSOR              ; $52B4
     ret                                           ; $52B9
 
@@ -2780,10 +2599,7 @@ jr_006_52ba:
     cp $1e                                        ; $52C1
     jr nc, jr_006_52d2                            ; $52C3
 
-    push af                                       ; $52C5
-    ld a, SFX1_CHOOSE                             ; $52C6
-    call Snd_Sfx1                                 ; $52C8
-    pop af                                        ; $52CB
+    play_sfx1 SFX1_CHOOSE                         ; $52C5
     set_state STATE_17_FUSION_BUILD               ; $52CC
     ret                                           ; $52D1
 
@@ -2797,10 +2613,7 @@ jr_006_52d8:
     bit 1, a                                      ; $52D8
     ret z                                         ; $52DA
 
-    push af                                       ; $52DB
-    ld a, SFX1_KEY_B                              ; $52DC
-    call Snd_Sfx1                                 ; $52DE
-    pop af                                        ; $52E1
+    play_sfx1 SFX1_KEY_B                          ; $52DB
     set_state STATE_17_LEAVE                      ; $52E2
     ret                                           ; $52E7
 
@@ -2819,8 +2632,7 @@ Compose_Fusion_DrawMakeBlink::
 
 ; C
 Mode17_State0E_Fusion_Build::
-    call Pal_FadeOut                              ; $52F6
-    call Lcd_Off                                  ; $52F9
+    screen_off                                    ; $52F6
     ld a, $d2                                     ; $52FC
     ld [wPaletteTarget + $2], a                   ; $52FE
     ld hl, $8000                                  ; $5301
@@ -2885,16 +2697,9 @@ Mode17_State0F_Fusion_Result::
     call Wait_Frames                              ; $53B4
 
 jr_006_53b7:
-    push af                                       ; $53B7
-    ld a, SFX1_KEY_B                              ; $53B8
-    call Snd_Sfx1                                 ; $53BA
-    pop af                                        ; $53BD
-    call Pal_FadeOut                              ; $53BE
-    call Lcd_Off                                  ; $53C1
-    ld hl, hStatShadow                            ; $53C4
-    res 6, [hl]                                   ; $53C7
-    ld hl, rIE                                    ; $53C9
-    res 1, [hl]                                   ; $53CC
+    play_sfx1 SFX1_KEY_B                          ; $53B7
+    screen_off                                    ; $53BE
+    stat_irq_off                                  ; $53C4
     set_state STATE_17_INIT                       ; $53CE
     ret                                           ; $53D3
 
@@ -2904,19 +2709,14 @@ Mode17_State10_Leave::
     ld a, MODE_SPECIAL_MENU                       ; $53D4
     ld [wMode], a                                 ; $53D6
     set_state STATE_03_INIT                       ; $53D9
-    call Pal_FadeOut                              ; $53DE
-    call Lcd_Off                                  ; $53E1
+    screen_off                                    ; $53DE
     ret                                           ; $53E4
 
 
 ; C: message for the result screen
 Mode17_State11_ResultPrepare::
-    call Pal_FadeOut                              ; $53E5
-    call Lcd_Off                                  ; $53E8
-    ld hl, hStatShadow                            ; $53EB
-    res 6, [hl]                                   ; $53EE
-    ld hl, rIE                                    ; $53F0
-    res 1, [hl]                                   ; $53F3
+    screen_off                                    ; $53E5
+    stat_irq_off                                  ; $53EB
     xor a                                         ; $53F5
     ld [wSubstate], a                             ; $53F6
     ld a, $09                                     ; $53F9
@@ -3382,10 +3182,7 @@ Compose_StepPhoto::
     bit 6, [hl]                                   ; $575B
     jr z, jr_006_576b                             ; $575D
 
-    push af                                       ; $575F
-    ld a, SFX1_KEY_UP_DOWN                        ; $5760
-    call Snd_Sfx1                                 ; $5762
-    pop af                                        ; $5765
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $575F
     inc a                                         ; $5766
     cp c                                          ; $5767
     ret nz                                        ; $5768
@@ -3398,10 +3195,7 @@ jr_006_576b:
     bit 7, [hl]                                   ; $576B
     ret z                                         ; $576D
 
-    push af                                       ; $576E
-    ld a, SFX1_KEY_UP_DOWN                        ; $576F
-    call Snd_Sfx1                                 ; $5771
-    pop af                                        ; $5774
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $576E
     dec a                                         ; $5775
     bit 7, a                                      ; $5776
     ret z                                         ; $5778
@@ -3783,13 +3577,8 @@ Mode18_State00_Init::
     farcopy Mem_CopyFromBank, Map_16_7FC0_Mode18_State00_Init, $9800, $0040 ; $59E9
 
 jr_006_59f7:
-    call Oam_ClearShadow                          ; $59F7
-    call Pal_AllWhite                             ; $59FA
-    call Lcd_On                                   ; $59FD
-    push af                                       ; $5A00
-    ld a, MUSIC_SHUTTERBUG                        ; $5A01
-    call Snd_Music                                ; $5A03
-    pop af                                        ; $5A06
+    screen_on                                     ; $59F7
+    play_music MUSIC_SHUTTERBUG                   ; $5A00
     call Mode18_LoadAllThumbs                     ; $5A07
     ld a, [wBurstPhotos]                          ; $5A0A
     call Mode18_DrawThumbFrame                    ; $5A0D
@@ -3876,8 +3665,7 @@ jr_006_5a81:
     dec b                                         ; $5A91
     jr nz, jr_006_5a81                            ; $5A92
 
-    call Pal_FadeOut                              ; $5A94
-    call Lcd_Off                                  ; $5A97
+    screen_off                                    ; $5A94
     call Mode18_StartPrint                        ; $5A9A
     ld a, MODE_PRINT_JOB                          ; $5A9D
     ld [wMode], a                                 ; $5A9F
@@ -3900,8 +3688,7 @@ jr_006_5aaa:
     dec b                                         ; $5ABA
     jr nz, jr_006_5aaa                            ; $5ABB
 
-    call Pal_FadeOut                              ; $5ABD
-    call Lcd_Off                                  ; $5AC0
+    screen_off                                    ; $5ABD
     ld a, MODE_SHUTTERBUG_MAGIC                   ; $5AC3
     ld [wMode], a                                 ; $5AC5
     set_state STATE_16_REDRAW                     ; $5AC8
@@ -4023,10 +3810,7 @@ Mode18_Pick1_Left::
     and a                                         ; $5B5A
     ret z                                         ; $5B5B
 
-    push af                                       ; $5B5C
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $5B5D
-    call Snd_Sfx1                                 ; $5B5F
-    pop af                                        ; $5B62
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $5B5C
     dec a                                         ; $5B63
     ret                                           ; $5B64
 
@@ -4038,10 +3822,7 @@ jr_006_5b65:
     cp $03                                        ; $5B68
     ret z                                         ; $5B6A
 
-    push af                                       ; $5B6B
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $5B6C
-    call Snd_Sfx1                                 ; $5B6E
-    pop af                                        ; $5B71
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $5B6B
     inc a                                         ; $5B72
     ret                                           ; $5B73
 
@@ -4052,10 +3833,7 @@ Mode18_Pick1_Right::
     bit 7, b                                      ; $5B74
     jr z, jr_006_5b86                             ; $5B76
 
-    push af                                       ; $5B78
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $5B79
-    call Snd_Sfx1                                 ; $5B7B
-    pop af                                        ; $5B7E
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $5B78
     dec a                                         ; $5B7F
     cp $fe                                        ; $5B80
     ret nz                                        ; $5B82
@@ -4069,10 +3847,7 @@ jr_006_5b86:
     bit 6, b                                      ; $5B86
     ret z                                         ; $5B88
 
-    push af                                       ; $5B89
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $5B8A
-    call Snd_Sfx1                                 ; $5B8C
-    pop af                                        ; $5B8F
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $5B89
     inc a                                         ; $5B90
     cp c                                          ; $5B91
     ret nz                                        ; $5B92
@@ -4121,10 +3896,7 @@ Mode18_Pick2_Up::
     ret z                                         ; $5BC4
 
     dec a                                         ; $5BC5
-    push af                                       ; $5BC6
-    ld a, SFX1_KEY_UP_DOWN                        ; $5BC7
-    call Snd_Sfx1                                 ; $5BC9
-    pop af                                        ; $5BCC
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $5BC6
     ret                                           ; $5BCD
 
 
@@ -4136,10 +3908,7 @@ jr_006_5bce:
     ret z                                         ; $5BD3
 
     inc a                                         ; $5BD4
-    push af                                       ; $5BD5
-    ld a, SFX1_KEY_UP_DOWN                        ; $5BD6
-    call Snd_Sfx1                                 ; $5BD8
-    pop af                                        ; $5BDB
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $5BD5
     ret                                           ; $5BDC
 
 
@@ -4149,10 +3918,7 @@ Mode18_Pick2_Down::
     bit 5, b                                      ; $5BDD
     jr z, jr_006_5bef                             ; $5BDF
 
-    push af                                       ; $5BE1
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $5BE2
-    call Snd_Sfx1                                 ; $5BE4
-    pop af                                        ; $5BE7
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $5BE1
     dec a                                         ; $5BE8
     cp $fe                                        ; $5BE9
     ret nz                                        ; $5BEB
@@ -4166,10 +3932,7 @@ jr_006_5bef:
     bit 4, b                                      ; $5BEF
     ret z                                         ; $5BF1
 
-    push af                                       ; $5BF2
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $5BF3
-    call Snd_Sfx1                                 ; $5BF5
-    pop af                                        ; $5BF8
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $5BF2
     inc a                                         ; $5BF9
     cp c                                          ; $5BFA
     ret nz                                        ; $5BFB
@@ -4642,13 +4405,8 @@ jr_006_5e44:
     set 1, [hl]                                   ; $5F46
     ld a, $01                                     ; $5F48
     ldh [hStatHandlerIndex], a                    ; $5F4A
-    call Oam_ClearShadow                          ; $5F4C
-    call Pal_AllWhite                             ; $5F4F
-    call Lcd_On                                   ; $5F52
-    push af                                       ; $5F55
-    ld a, MUSIC_STOP                              ; $5F56
-    call Snd_Music                                ; $5F58
-    pop af                                        ; $5F5B
+    screen_on                                     ; $5F4C
+    play_music MUSIC_STOP                         ; $5F55
     rst Rst08_WaitVBlank                          ; $5F5C
     call Pal_FadeIn                               ; $5F5D
     ld a, $01                                     ; $5F60
@@ -4746,10 +4504,7 @@ jr_006_601c:
     bit PADB_B, a                                 ; $6021
     jr z, jr_006_6032                             ; $6023
 
-    push af                                       ; $6025
-    ld a, SFX1_KEY_B                              ; $6026
-    call Snd_Sfx1                                 ; $6028
-    pop af                                        ; $602B
+    play_sfx1 SFX1_KEY_B                          ; $6025
     set_state STATE_14_LEAVE_BY_VARIANT           ; $602C
     ret                                           ; $6031
 
@@ -4856,10 +4611,7 @@ Mode14_State01_LiveView_OptionKey::
     bit 2, a                                      ; $60C8
     ret z                                         ; $60CA
 
-    push af                                       ; $60CB
-    ld a, SFX1_KEY_SELECT                         ; $60CC
-    call Snd_Sfx1                                 ; $60CE
-    pop af                                        ; $60D1
+    play_sfx1 SFX1_KEY_SELECT                     ; $60CB
     call Shoot_DrawOptionPanel                    ; $60D2
     set_state STATE_14_OPTIONS_PAGE               ; $60D5
     ret                                           ; $60DA
@@ -4886,10 +4638,7 @@ Shoot_BrightnessKeys::
     cp $0c                                        ; $613D
     ret z                                         ; $613F
 
-    push af                                       ; $6140
-    ld a, SFX1_KEY_UP_DOWN                        ; $6141
-    call Snd_Sfx1                                 ; $6143
-    pop af                                        ; $6146
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $6140
     sub $0c                                       ; $6147
     jr jr_006_615a                                ; $6149
 
@@ -4900,10 +4649,7 @@ jr_006_614b:
     cp $c0                                        ; $614E
     ret z                                         ; $6150
 
-    push af                                       ; $6151
-    ld a, SFX1_KEY_UP_DOWN                        ; $6152
-    call Snd_Sfx1                                 ; $6154
-    pop af                                        ; $6157
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $6151
     add $0c                                       ; $6158
 
 jr_006_615a:
@@ -4922,10 +4668,7 @@ Shoot_ContrastKeys::
     cp $01                                        ; $6168
     ret z                                         ; $616A
 
-    push af                                       ; $616B
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $616C
-    call Snd_Sfx1                                 ; $616E
-    pop af                                        ; $6171
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $616B
     dec a                                         ; $6172
     jr jr_006_6183                                ; $6173
 
@@ -4936,10 +4679,7 @@ jr_006_6175:
     cp $10                                        ; $6178
     ret z                                         ; $617A
 
-    push af                                       ; $617B
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $617C
-    call Snd_Sfx1                                 ; $617E
-    pop af                                        ; $6181
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $617B
     inc a                                         ; $6182
 
 jr_006_6183:
@@ -5146,10 +4886,7 @@ Mode14_State02_Shutter::
     bit PADB_A, a                                 ; $633A
     jr z, jr_006_6362                             ; $633C
 
-    push af                                       ; $633E
-    ld a, SFX1_KEY_A                              ; $633F
-    call Snd_Sfx1                                 ; $6341
-    pop af                                        ; $6344
+    play_sfx1 SFX1_KEY_A                          ; $633E
     xor a                                         ; $6345
     ld [wShootPhase], a                           ; $6346
     call Oam_ClearShadow                          ; $6349
@@ -5176,10 +4913,7 @@ jr_006_6362:
     bit 1, a                                      ; $6362
     ret z                                         ; $6364
 
-    push af                                       ; $6365
-    ld a, SFX1_KEY_B                              ; $6366
-    call Snd_Sfx1                                 ; $6368
-    pop af                                        ; $636B
+    play_sfx1 SFX1_KEY_B                          ; $6365
     ld a, [wShootVariant]                         ; $636C
     cp $01                                        ; $636F
     jr nz, jr_006_637f                            ; $6371
@@ -5478,10 +5212,7 @@ jr_006_656d:
     and PADF_B | PADF_SELECT                      ; $656F
     jr z, jr_006_6583                             ; $6571
 
-    push af                                       ; $6573
-    ld a, SFX1_KEY_B                              ; $6574
-    call Snd_Sfx1                                 ; $6576
-    pop af                                        ; $6579
+    play_sfx1 SFX1_KEY_B                          ; $6573
     call Shoot_RestoreViewScreen                  ; $657A
     set_state STATE_14_LIVE_VIEW                  ; $657D
     ret                                           ; $6582
@@ -5499,10 +5230,7 @@ jr_006_6583:
     bit PADB_LEFT, a                              ; $6591
     jr z, jr_006_65e8                             ; $6593
 
-    push af                                       ; $6595
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6596
-    call Snd_Sfx1                                 ; $6598
-    pop af                                        ; $659B
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6595
     call Oam_ClearShadow                          ; $659C
     farcopy Vram_CopyFromBank, Gfx_17_5200_Mode14_State04_OptionsPage, $8d00, $0200 ; $659F
     farcopy Vram_CopyFromBank, Gfx_1C_5BE0_Mode09_State02_PhotoArrows, $8680, $0040 ; $65AD
@@ -5533,10 +5261,7 @@ jr_006_65e8:
     bit 4, a                                      ; $65E8
     jr z, jr_006_663f                             ; $65EA
 
-    push af                                       ; $65EC
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $65ED
-    call Snd_Sfx1                                 ; $65EF
-    pop af                                        ; $65F2
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $65EC
     call Oam_ClearShadow                          ; $65F3
     farcopy Vram_CopyFromBank, Gfx_17_5200_Mode14_State04_OptionsPage, $8d00, $0200 ; $65F6
     farcopy Vram_CopyFromBank, Gfx_1C_5BE0_Mode09_State02_PhotoArrows, $8680, $0040 ; $6604
@@ -5567,10 +5292,7 @@ jr_006_663f:
     bit 6, a                                      ; $663F
     jr z, jr_006_669b                             ; $6641
 
-    push af                                       ; $6643
-    ld a, SFX1_KEY_UP_DOWN                        ; $6644
-    call Snd_Sfx1                                 ; $6646
-    pop af                                        ; $6649
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $6643
     call Oam_ClearShadow                          ; $664A
     ld a, $17                                     ; $664D
     ld hl, Gfx_17_5000_Mode14_State04_OptionsPage ; $664F
@@ -5608,10 +5330,7 @@ jr_006_669b:
     bit 7, a                                      ; $669B
     ret z                                         ; $669D
 
-    push af                                       ; $669E
-    ld a, SFX1_KEY_UP_DOWN                        ; $669F
-    call Snd_Sfx1                                 ; $66A1
-    pop af                                        ; $66A4
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $669E
     call Oam_ClearShadow                          ; $66A5
     ld a, $17                                     ; $66A8
     ld hl, Gfx_17_5000_Mode14_State04_OptionsPage ; $66AA
@@ -6368,12 +6087,8 @@ Mode14_State09_LeaveByVariant::
     ld [wMode], a                                 ; $6B32
     ld a, [hl]                                    ; $6B35
     ld [wState], a                                ; $6B36
-    call Pal_FadeOut                              ; $6B39
-    call Lcd_Off                                  ; $6B3C
-    ld hl, hStatShadow                            ; $6B3F
-    res 6, [hl]                                   ; $6B42
-    ld hl, rIE                                    ; $6B44
-    res 1, [hl]                                   ; $6B47
+    screen_off                                    ; $6B39
+    stat_irq_off                                  ; $6B3F
     ret                                           ; $6B49
 
 
@@ -7025,10 +6740,7 @@ jr_006_71e4:
     and a                                         ; $71EE
     ret z                                         ; $71EF
 
-    push af                                       ; $71F0
-    ld a, SFX1_KEY_B                              ; $71F1
-    call Snd_Sfx1                                 ; $71F3
-    pop af                                        ; $71F6
+    play_sfx1 SFX1_KEY_B                          ; $71F0
     dec a                                         ; $71F7
     jr jr_006_7205                                ; $71F8
 
@@ -7077,10 +6789,7 @@ Shoot_TimerTick::
     cp $0f                                        ; $7229
     jr c, jr_006_7235                             ; $722B
 
-    push af                                       ; $722D
-    ld a, SFX1_BEEP_REFUSED                       ; $722E
-    call Snd_Sfx1                                 ; $7230
-    pop af                                        ; $7233
+    play_sfx1 SFX1_BEEP_REFUSED                   ; $722D
     xor a                                         ; $7234
 
 jr_006_7235:
@@ -7113,12 +6822,8 @@ jr_006_7235:
 
 ; C
 Mode14_State0A_ResultPrepare::
-    call Pal_FadeOut                              ; $7259
-    call Lcd_Off                                  ; $725C
-    ld hl, hStatShadow                            ; $725F
-    res 6, [hl]                                   ; $7262
-    ld hl, rIE                                    ; $7264
-    res 1, [hl]                                   ; $7267
+    screen_off                                    ; $7259
+    stat_irq_off                                  ; $725F
     xor a                                         ; $7269
     ld [wSubstate], a                             ; $726A
     ld a, $0d                                     ; $726D
@@ -7186,13 +6891,8 @@ Mode14_State0C_Reinit::
     set 1, [hl]                                   ; $736F
     ld a, $01                                     ; $7371
     ldh [hStatHandlerIndex], a                    ; $7373
-    call Oam_ClearShadow                          ; $7375
-    call Pal_AllWhite                             ; $7378
-    call Lcd_On                                   ; $737B
-    push af                                       ; $737E
-    ld a, MUSIC_STOP                              ; $737F
-    call Snd_Music                                ; $7381
-    pop af                                        ; $7384
+    screen_on                                     ; $7375
+    play_music MUSIC_STOP                         ; $737E
     rst Rst08_WaitVBlank                          ; $7385
     call Pal_FadeIn                               ; $7386
     set_state STATE_14_LIVE_VIEW                  ; $7389

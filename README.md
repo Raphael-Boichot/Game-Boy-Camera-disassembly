@@ -40,7 +40,7 @@ From the source tree (rgbds 1.0.4 in `PATH`, or `RGBDS=/path/to/rgbds/`):
 make check                       # build/jp_rev_a/pocketcamera_jp.gb, md5 fdcfe686cf4df461e870b6e53b2b5a8b
 ```
 
-`roms/jp_rev_a/src/` holds 64 bank files, 886 `INCBIN` files (668,189 bytes; 491 tile blocks as PNG), 4,910 label notes, 837 far pointers written as labels (13 left as numbers) (docs §1.4), and uses five macros (`macros.inc`). It is generated: `make source ROM=pocketcamera_jp.gb` rewrites it from the tables of `roms/jp_rev_a/disasm/` (and overwrites hand edits).
+`roms/jp_rev_a/src/` holds 64 bank files, 886 `INCBIN` files (668,189 bytes; 491 tile blocks as PNG), 4,910 label notes, 837 far pointers written as labels (13 left as numbers) (docs §1.4), and uses the macros of `macros.inc` (far copies and calls, far pointer rows, states, sound requests, screen on / off, `REPT`). It is generated: `make source ROM=pocketcamera_jp.gb` rewrites it from the tables of `roms/jp_rev_a/disasm/` (and overwrites hand edits).
 
 The listing the tree comes from, by hand. Tools: [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a) and rgbds 1.0.4. mgbdis reads `<rom basename>.sym` beside the ROM.
 

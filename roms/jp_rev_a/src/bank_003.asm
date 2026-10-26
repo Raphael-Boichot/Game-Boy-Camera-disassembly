@@ -70,13 +70,8 @@ Mode12_State00_Init::
     ld bc, $1800                                  ; $4072
     call Mem_CopyFromBank                         ; $4075
     farcopy Mem_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $4078
-    call Oam_ClearShadow                          ; $4086
-    call Pal_AllWhite                             ; $4089
-    call Lcd_On                                   ; $408C
-    push af                                       ; $408F
-    ld a, MUSIC_ANIMATION_EDITOR                  ; $4090
-    call Snd_Music                                ; $4092
-    pop af                                        ; $4095
+    screen_on                                     ; $4086
+    play_music MUSIC_ANIMATION_EDITOR             ; $408F
     ldh [hFarcallAArg], a                         ; $4096
     farcall Settings_LoadAnimTranslated_Far       ; $4098
     xor a                                         ; $40A0
@@ -554,10 +549,7 @@ jr_003_43b4:
 
 ; C: loads the tools window graphics
 Mode12_State06_ToolsOpen::
-    push af                                       ; $43BF
-    ld a, SFX1_KEY_SELECT                         ; $43C0
-    call Snd_Sfx1                                 ; $43C2
-    pop af                                        ; $43C5
+    play_sfx1 SFX1_KEY_SELECT                     ; $43BF
     farcopy Vram_CopyFromBank, Map_22_6DE0_Mode12_State06_ToolsOpen, $9840, $0040 ; $43C6
     next_state                                    ; $43D4
     ret                                           ; $43D8
@@ -697,10 +689,7 @@ jr_003_44b1:
 
 jr_003_44b8:
     ld [wEditorMenuOption], a                     ; $44B8
-    push af                                       ; $44BB
-    ld a, SFX1_DIRECTION_KEY                      ; $44BC
-    call Snd_Sfx1                                 ; $44BE
-    pop af                                        ; $44C1
+    play_sfx1 SFX1_DIRECTION_KEY                  ; $44BB
     ret                                           ; $44C2
 
 
@@ -799,10 +788,7 @@ jr_003_454f:
     ld [wRangeAnchor], a                          ; $4555
     xor a                                         ; $4558
     ld [wRangeDirection], a                       ; $4559
-    push af                                       ; $455C
-    ld a, SFX1_CHOOSE                             ; $455D
-    call Snd_Sfx1                                 ; $455F
-    pop af                                        ; $4562
+    play_sfx1 SFX1_CHOOSE                         ; $455C
     set_state STATE_12_RANGE_ANIM                 ; $4563
     ret                                           ; $4568
 
@@ -833,10 +819,7 @@ jr_003_4584:
     ld [wSpriteAnimTick + $9], a                  ; $4586
     ld a, c                                       ; $4589
     ld [wRangeAnchor], a                          ; $458A
-    push af                                       ; $458D
-    ld a, SFX1_CHOOSE                             ; $458E
-    call Snd_Sfx1                                 ; $4590
-    pop af                                        ; $4593
+    play_sfx1 SFX1_CHOOSE                         ; $458D
     set_state STATE_12_RANGE_ANIM                 ; $4594
     ret                                           ; $4599
 
@@ -854,10 +837,7 @@ jr_003_45a6:
     bit 1, a                                      ; $45A6
     ret z                                         ; $45A8
 
-    push af                                       ; $45A9
-    ld a, SFX1_CHOOSE_C                           ; $45AA
-    call Snd_Sfx1                                 ; $45AC
-    pop af                                        ; $45AF
+    play_sfx1 SFX1_CHOOSE_C                       ; $45A9
     set_state STATE_12_BROWSE                     ; $45B0
     ret                                           ; $45B5
 
@@ -1268,10 +1248,7 @@ jr_003_489b:
 jr_003_48a5:
     inc e                                         ; $48A5
     call AnimEd_PutGridTile                       ; $48A6
-    push af                                       ; $48A9
-    ld a, SFX1_CURSOR_MOVE                        ; $48AA
-    call Snd_Sfx1                                 ; $48AC
-    pop af                                        ; $48AF
+    play_sfx1 SFX1_CURSOR_MOVE                    ; $48A9
     next_state                                    ; $48B0
     ret                                           ; $48B4
 
@@ -1318,10 +1295,7 @@ AnimEd_MoveRangeEnd::
     and a                                         ; $48E2
     ret z                                         ; $48E3
 
-    push af                                       ; $48E4
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $48E5
-    call Snd_Sfx1                                 ; $48E7
-    pop af                                        ; $48EA
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $48E4
     ld hl, wRangeAnchor                           ; $48EB
     cp [hl]                                       ; $48EE
     jr z, jr_003_48f3                             ; $48EF
@@ -1347,10 +1321,7 @@ jr_003_4900:
     cp $2e                                        ; $4903
     ret z                                         ; $4905
 
-    push af                                       ; $4906
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $4907
-    call Snd_Sfx1                                 ; $4909
-    pop af                                        ; $490C
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $4906
     ld hl, wRangeAnchor                           ; $490D
     cp [hl]                                       ; $4910
     jr c, jr_003_491d                             ; $4911
@@ -1552,10 +1523,7 @@ Mode12_State0C_LoopCount::
     bit 7, b                                      ; $4A3E
     jr z, jr_003_4a50                             ; $4A40
 
-    push af                                       ; $4A42
-    ld a, SFX1_STEP_FAST                          ; $4A43
-    call Snd_Sfx1                                 ; $4A45
-    pop af                                        ; $4A48
+    play_sfx1 SFX1_STEP_FAST                      ; $4A42
     cp $02                                        ; $4A49
     jr nz, jr_003_4a4f                            ; $4A4B
 
@@ -1568,10 +1536,7 @@ jr_003_4a50:
     bit 6, b                                      ; $4A50
     jr z, jr_003_4a62                             ; $4A52
 
-    push af                                       ; $4A54
-    ld a, SFX1_STEP_FAST                          ; $4A55
-    call Snd_Sfx1                                 ; $4A57
-    pop af                                        ; $4A5A
+    play_sfx1 SFX1_STEP_FAST                      ; $4A54
     cp $32                                        ; $4A5B
     jr nz, jr_003_4a61                            ; $4A5D
 
@@ -1594,10 +1559,7 @@ jr_003_4a6f:
     bit PADB_A, a                                 ; $4A71
     jr z, jr_003_4a82                             ; $4A73
 
-    push af                                       ; $4A75
-    ld a, SFX1_OPTION_CHANGE                      ; $4A76
-    call Snd_Sfx1                                 ; $4A78
-    pop af                                        ; $4A7B
+    play_sfx1 SFX1_OPTION_CHANGE                  ; $4A75
     set_state STATE_12_LOOP_APPLY                 ; $4A7C
     ret                                           ; $4A81
 
@@ -2071,8 +2033,7 @@ jr_003_4d56:
 jr_003_4d58:
     ld [wPlayFlags], a                            ; $4D58
     call AnimEd_StartExitTransition               ; $4D5B
-    call Pal_FadeOut                              ; $4D5E
-    call Lcd_Off                                  ; $4D61
+    screen_off                                    ; $4D5E
     ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON ; $4D64
     ldh [hLcdcShadow], a                          ; $4D66
     ld a, $e4                                     ; $4D68
@@ -2105,9 +2066,7 @@ jr_003_4d58:
     set 1, [hl]                                   ; $4DC0
     ld a, $01                                     ; $4DC2
     ldh [hStatHandlerIndex], a                    ; $4DC4
-    call Oam_ClearShadow                          ; $4DC6
-    call Pal_AllWhite                             ; $4DC9
-    call Lcd_On                                   ; $4DCC
+    screen_on                                     ; $4DC6
     call Pal_FadeIn                               ; $4DCF
     call AnimEd_LoadEntryPhoto                    ; $4DD2
     next_state                                    ; $4DD5
@@ -2224,12 +2183,8 @@ jr_003_4e5e:
 
 ; C: TEST: returns to the editor screen
 Mode12_State13_TestEnd::
-    call Pal_FadeOut                              ; $4E68
-    call Lcd_Off                                  ; $4E6B
-    ld hl, hStatShadow                            ; $4E6E
-    res 6, [hl]                                   ; $4E71
-    ld hl, rIE                                    ; $4E73
-    res 1, [hl]                                   ; $4E76
+    screen_off                                    ; $4E68
+    stat_irq_off                                  ; $4E6E
     ld a, LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJON | LCDCF_BGON ; $4E78
     ldh [hLcdcShadow], a                          ; $4E7A
     ld a, $e4                                     ; $4E7C
@@ -2251,9 +2206,7 @@ Mode12_State13_TestEnd::
     ld bc, $1800                                  ; $4EA0
     call Mem_CopyFromBank                         ; $4EA3
     farcopy Mem_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $4EA6
-    call Oam_ClearShadow                          ; $4EB4
-    call Pal_AllWhite                             ; $4EB7
-    call Lcd_On                                   ; $4EBA
+    screen_on                                     ; $4EB4
     call AnimEd_InitEditor                        ; $4EBD
     call AnimEd_LoadEntryThumb                    ; $4EC0
     call AnimEd_ShowBorderDigits                  ; $4EC3
@@ -2459,10 +2412,7 @@ jr_003_50a8:
 
 jr_003_50af:
     ld [wAutofillMode], a                         ; $50AF
-    push af                                       ; $50B2
-    ld a, SFX1_CONFIRM                            ; $50B3
-    call Snd_Sfx1                                 ; $50B5
-    pop af                                        ; $50B8
+    play_sfx1 SFX1_CONFIRM                        ; $50B2
     ret                                           ; $50B9
 
 
@@ -2648,8 +2598,7 @@ Mode12_State20_BorderRow::
     bit PADB_A, a                                 ; $51E2
     jr z, jr_003_51fb                             ; $51E4
 
-    call Pal_FadeOut                              ; $51E6
-    call Lcd_Off                                  ; $51E9
+    screen_off                                    ; $51E6
     ld a, [wAnimBorder]                           ; $51EC
     ld [wBorderNumber], a                         ; $51EF
     xor a                                         ; $51F2
@@ -2783,9 +2732,7 @@ jr_003_529c:
     farcopy Mem_CopyFromBank, Map_22_6B40_Mode12_State00_Init, $9800, $0400 ; $52CA
     farcopy Mem_CopyFromBank, Gfx_0C_5D40_Mode12_State22_BorderPickerReturn, $8920, $0030 ; $52D8
     farcopy Mem_CopyFromBank, Gfx_0C_5DA0_Mode12_State01_Browse, $88c0, $0060 ; $52E6
-    call Oam_ClearShadow                          ; $52F4
-    call Pal_AllWhite                             ; $52F7
-    call Lcd_On                                   ; $52FA
+    screen_on                                     ; $52F4
     call AnimEd_LoadEntryThumb                    ; $52FD
     call AnimEd_ShowBorderDigits                  ; $5300
     call AnimEd_ShowEntryValue                    ; $5303
@@ -3124,10 +3071,7 @@ jr_003_5537:
     bit 6, b                                      ; $5537
     ret z                                         ; $5539
 
-    push af                                       ; $553A
-    ld a, SFX1_STEP_VALUE                         ; $553B
-    call Snd_Sfx1                                 ; $553D
-    pop af                                        ; $5540
+    play_sfx1 SFX1_STEP_VALUE                     ; $553A
     ld hl, wPhotoCount                            ; $5541
     cp [hl]                                       ; $5544
     jr c, jr_003_5549                             ; $5545
@@ -3171,10 +3115,7 @@ jr_003_5563:
     bit 7, b                                      ; $556C
     ret z                                         ; $556E
 
-    push af                                       ; $556F
-    ld a, SFX1_STEP_VALUE                         ; $5570
-    call Snd_Sfx1                                 ; $5572
-    pop af                                        ; $5575
+    play_sfx1 SFX1_STEP_VALUE                     ; $556F
     res 7, a                                      ; $5576
     ld hl, wPhotoCount                            ; $5578
     cp [hl]                                       ; $557B
@@ -3192,10 +3133,7 @@ AnimEd_ReadStepKeys::
     jr z, jr_003_558d                             ; $5582
 
     dec a                                         ; $5584
-    push af                                       ; $5585
-    ld a, SFX1_STEP_FAST                          ; $5586
-    call Snd_Sfx1                                 ; $5588
-    pop af                                        ; $558B
+    play_sfx1 SFX1_STEP_FAST                      ; $5585
     ret                                           ; $558C
 
 
@@ -3204,10 +3142,7 @@ jr_003_558d:
     ret z                                         ; $558F
 
     inc a                                         ; $5590
-    push af                                       ; $5591
-    ld a, SFX1_STEP_FAST                          ; $5592
-    call Snd_Sfx1                                 ; $5594
-    pop af                                        ; $5597
+    play_sfx1 SFX1_STEP_FAST                      ; $5591
     ret                                           ; $5598
 
 
@@ -3269,10 +3204,7 @@ AnimEd_CursorLeftRight::
     jr z, jr_003_55e7                             ; $55DC
 
     dec a                                         ; $55DE
-    push af                                       ; $55DF
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $55E0
-    call Snd_Sfx1                                 ; $55E2
-    pop af                                        ; $55E5
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $55DF
     ret                                           ; $55E6
 
 
@@ -3281,10 +3213,7 @@ jr_003_55e7:
     ret z                                         ; $55E9
 
     inc a                                         ; $55EA
-    push af                                       ; $55EB
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $55EC
-    call Snd_Sfx1                                 ; $55EE
-    pop af                                        ; $55F1
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $55EB
     ret                                           ; $55F2
 
 
@@ -3298,10 +3227,7 @@ AnimEd_CursorUpDown::
     ret z                                         ; $55F9
 
     sub $10                                       ; $55FA
-    push af                                       ; $55FC
-    ld a, SFX1_KEY_UP_DOWN                        ; $55FD
-    call Snd_Sfx1                                 ; $55FF
-    pop af                                        ; $5602
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $55FC
     ret                                           ; $5603
 
 
@@ -3313,10 +3239,7 @@ jr_003_5604:
     ret nc                                        ; $5609
 
     add $10                                       ; $560A
-    push af                                       ; $560C
-    ld a, SFX1_KEY_UP_DOWN                        ; $560D
-    call Snd_Sfx1                                 ; $560F
-    pop af                                        ; $5612
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $560C
     ret                                           ; $5613
 
 
@@ -4590,10 +4513,7 @@ jr_003_5e15:
 
 ; C: starts a spark sprite at the cursor (sound $36)
 AnimEd_SpawnSpark::
-    push af                                       ; $5E1A
-    ld a, SFX1_PAGE_STEP                          ; $5E1B
-    call Snd_Sfx1                                 ; $5E1D
-    pop af                                        ; $5E20
+    play_sfx1 SFX1_PAGE_STEP                      ; $5E1A
     ld a, [wSparkRingIdx]                         ; $5E21
     inc a                                         ; $5E24
     and $0f                                       ; $5E25
@@ -4804,10 +4724,7 @@ jr_003_5f46:
 ; C: moves the window up with the table 00:2FE5 and runs the contexts. L3 pass 2026-10-26: executed in BGB in 6
 ; replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
 AnimEd_WindowSlideIn::
-    push af                                       ; $5F4E
-    ld a, SFX1_PANEL_OPEN                         ; $5F4F
-    call Snd_Sfx1                                 ; $5F51
-    pop af                                        ; $5F54
+    play_sfx1 SFX1_PANEL_OPEN                     ; $5F4E
     ld hl, Slide_WyDeltaTbl                       ; $5F55
     ld b, $24                                     ; $5F58
 
@@ -4844,10 +4761,7 @@ AnimEd_WindowSlideIn_Resume::
 ; C: reverse slide. L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 12
 ; (tcrf_check/assets/l3_names/)
 AnimEd_WindowSlideOut::
-    push af                                       ; $5F77
-    ld a, SFX1_PANEL_CLOSE                        ; $5F78
-    call Snd_Sfx1                                 ; $5F7A
-    pop af                                        ; $5F7D
+    play_sfx1 SFX1_PANEL_CLOSE                    ; $5F77
     ld hl, Slide_WyDeltaTbl                       ; $5F7E
     ld b, $24                                     ; $5F81
 
@@ -4922,9 +4836,7 @@ Mode13_State00_Init::
     set 1, [hl]                                   ; $6010
     ld a, $01                                     ; $6012
     ldh [hStatHandlerIndex], a                    ; $6014
-    call Oam_ClearShadow                          ; $6016
-    call Pal_AllWhite                             ; $6019
-    call Lcd_On                                   ; $601C
+    screen_on                                     ; $6016
     ld a, [wPlayerMusic]                          ; $601F
     call Player_ShowMusicNumber                   ; $6022
     ld a, [wPlayerMusic]                          ; $6025
@@ -4947,10 +4859,7 @@ Mode13_State01_MusicSelect::
     bit PADB_SELECT, a                            ; $6041
     jr z, jr_003_6062                             ; $6043
 
-    push af                                       ; $6045
-    ld a, SFX4_MUSIC_SELECT                       ; $6046
-    call Snd_Sfx4                                 ; $6048
-    pop af                                        ; $604B
+    play_sfx4 SFX4_MUSIC_SELECT                   ; $6045
     ld a, [wPlayerMusic]                          ; $604C
     inc a                                         ; $604F
     and $1f                                       ; $6050
@@ -5029,12 +4938,8 @@ Mode13_State02_Start::
     bit 0, a                                      ; $60B7
     jr nz, jr_003_60d6                            ; $60B9
 
-    call Pal_FadeOut                              ; $60BB
-    call Lcd_Off                                  ; $60BE
-    ld hl, hStatShadow                            ; $60C1
-    res 6, [hl]                                   ; $60C4
-    ld hl, rIE                                    ; $60C6
-    res 1, [hl]                                   ; $60C9
+    screen_off                                    ; $60BB
+    stat_irq_off                                  ; $60C1
     ld a, MODE_SHOW_MENU                          ; $60CB
     ld [wMode], a                                 ; $60CD
     set_state STATE_0B_INIT                       ; $60D0
@@ -5049,15 +4954,9 @@ jr_003_60d6:
     ld bc, $001e                                  ; $60F8
     call Wait_Frames                              ; $60FB
     call Pal_FadeOut                              ; $60FE
-    push af                                       ; $6101
-    ld a, MUSIC_STOP                              ; $6102
-    call Snd_Music                                ; $6104
-    pop af                                        ; $6107
+    play_music MUSIC_STOP                         ; $6101
     call Lcd_Off                                  ; $6108
-    ld hl, hStatShadow                            ; $610B
-    res 6, [hl]                                   ; $610E
-    ld hl, rIE                                    ; $6110
-    res 1, [hl]                                   ; $6113
+    stat_irq_off                                  ; $610B
     next_state                                    ; $6115
     ret                                           ; $6119
 
@@ -5145,9 +5044,7 @@ jr_003_6162:
     set 1, [hl]                                   ; $61CE
     ld a, $01                                     ; $61D0
     ldh [hStatHandlerIndex], a                    ; $61D2
-    call Oam_ClearShadow                          ; $61D4
-    call Pal_AllWhite                             ; $61D7
-    call Lcd_On                                   ; $61DA
+    screen_on                                     ; $61D4
     call Pal_FadeIn                               ; $61DD
     ld bc, $0050                                  ; $61E0
     call Wait_Frames                              ; $61E3
@@ -5324,12 +5221,8 @@ jr_003_62d3:
 
 ; C: fades out and returns to state 0
 Mode13_State05_Exit::
-    call Pal_FadeOut                              ; $62DE
-    call Lcd_Off                                  ; $62E1
-    ld hl, hStatShadow                            ; $62E4
-    res 6, [hl]                                   ; $62E7
-    ld hl, rIE                                    ; $62E9
-    res 1, [hl]                                   ; $62EC
+    screen_off                                    ; $62DE
+    stat_irq_off                                  ; $62E4
     set_state STATE_13_INIT                       ; $62EE
     ret                                           ; $62F3
 
@@ -5449,13 +5342,8 @@ jr_003_6351:
     ld a, [wHotSpotShownPhoto]                    ; $63FD
     ldh [hFarcallAArg], a                         ; $6400
     farcall Photo_LoadHotspotsTranslated_Far      ; $6402
-    call Oam_ClearShadow                          ; $640A
-    call Pal_AllWhite                             ; $640D
-    call Lcd_On                                   ; $6410
-    push af                                       ; $6413
-    ld a, MUSIC_STOP                              ; $6414
-    call Snd_Music                                ; $6416
-    pop af                                        ; $6419
+    screen_on                                     ; $640A
+    play_music MUSIC_STOP                         ; $6413
     call Pal_FadeIn                               ; $641A
     next_state                                    ; $641D
     ret                                           ; $6421
@@ -5507,8 +5395,7 @@ jr_003_6450:
 
 
 jr_003_6476:
-    call Pal_FadeOut                              ; $6476
-    call Lcd_Off                                  ; $6479
+    screen_off                                    ; $6476
     set_state STATE_0C_INIT                       ; $647C
     ret                                           ; $6481
 
@@ -6684,13 +6571,8 @@ jr_003_6a4c:
     set 1, [hl]                                   ; $6B05
     ld a, $01                                     ; $6B07
     ldh [hStatHandlerIndex], a                    ; $6B09
-    call Oam_ClearShadow                          ; $6B0B
-    call Pal_AllWhite                             ; $6B0E
-    call Lcd_On                                   ; $6B11
-    push af                                       ; $6B14
-    ld a, MUSIC_STOP                              ; $6B15
-    call Snd_Music                                ; $6B17
-    pop af                                        ; $6B1A
+    screen_on                                     ; $6B0B
+    play_music MUSIC_STOP                         ; $6B14
     call Pal_FadeIn                               ; $6B1B
     next_state                                    ; $6B1E
     ret                                           ; $6B22
@@ -6730,10 +6612,7 @@ jr_003_6b48:
     bit PADB_A, a                                 ; $6B50
     jr z, jr_003_6b71                             ; $6B52
 
-    push af                                       ; $6B54
-    ld a, SFX1_KEY_A                              ; $6B55
-    call Snd_Sfx1                                 ; $6B57
-    pop af                                        ; $6B5A
+    play_sfx1 SFX1_KEY_A                          ; $6B54
     ld a, [wHsSelected]                           ; $6B5B
     ld c, a                                       ; $6B5E
     ld b, $00                                     ; $6B5F
@@ -6914,10 +6793,7 @@ Mode1A_State05_PickSound::
     and PADF_A | PADF_RIGHT                       ; $6CC1
     jr z, jr_003_6cd1                             ; $6CC3
 
-    push af                                       ; $6CC5
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6CC6
-    call Snd_Sfx1                                 ; $6CC8
-    pop af                                        ; $6CCB
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6CC5
     next_state                                    ; $6CCC
     ret                                           ; $6CD0
 
@@ -6987,10 +6863,7 @@ Mode1A_State06_PickEffect::
     and PADF_A | PADF_RIGHT                       ; $6D39
     jr z, jr_003_6d49                             ; $6D3B
 
-    push af                                       ; $6D3D
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6D3E
-    call Snd_Sfx1                                 ; $6D40
-    pop af                                        ; $6D43
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6D3D
     next_state                                    ; $6D44
     ret                                           ; $6D48
 
@@ -7000,10 +6873,7 @@ jr_003_6d49:
     and PADF_B | PADF_LEFT                        ; $6D4B
     ret z                                         ; $6D4D
 
-    push af                                       ; $6D4E
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6D4F
-    call Snd_Sfx1                                 ; $6D51
-    pop af                                        ; $6D54
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6D4E
     ld hl, wState                                 ; $6D55
     dec [hl]                                      ; $6D58
     ret                                           ; $6D59
@@ -7034,10 +6904,7 @@ Mode1A_State07_PickJump::
     and PADF_A | PADF_RIGHT                       ; $6D87
     jr z, jr_003_6d9c                             ; $6D89
 
-    push af                                       ; $6D8B
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6D8C
-    call Snd_Sfx1                                 ; $6D8E
-    pop af                                        ; $6D91
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6D8B
     ld a, $01                                     ; $6D92
     ld [wPickerButtonAnim], a                     ; $6D94
     next_state                                    ; $6D97
@@ -7049,10 +6916,7 @@ jr_003_6d9c:
     and PADF_B | PADF_LEFT                        ; $6D9E
     ret z                                         ; $6DA0
 
-    push af                                       ; $6DA1
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6DA2
-    call Snd_Sfx1                                 ; $6DA4
-    pop af                                        ; $6DA7
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6DA1
     ld hl, wState                                 ; $6DA8
     dec [hl]                                      ; $6DAB
     ret                                           ; $6DAC
@@ -7069,10 +6933,7 @@ Mode1A_State08_PickConfirm::
     bit PADB_A, a                                 ; $6DBB
     jr z, jr_003_6def                             ; $6DBD
 
-    push af                                       ; $6DBF
-    ld a, SFX1_KEY_A                              ; $6DC0
-    call Snd_Sfx1                                 ; $6DC2
-    pop af                                        ; $6DC5
+    play_sfx1 SFX1_KEY_A                          ; $6DBF
     call Oam_HideUnused                           ; $6DC6
     rst Rst08_WaitVBlank                          ; $6DC9
     ld b, $0c                                     ; $6DCA
@@ -7101,10 +6962,7 @@ jr_003_6def:
     and PADF_B | PADF_LEFT                        ; $6DF1
     ret z                                         ; $6DF3
 
-    push af                                       ; $6DF4
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $6DF5
-    call Snd_Sfx1                                 ; $6DF7
-    pop af                                        ; $6DFA
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $6DF4
     xor a                                         ; $6DFB
     ld [wPickerButtonAnim], a                     ; $6DFC
     ld hl, wState                                 ; $6DFF
@@ -7181,10 +7039,7 @@ jr_003_6eb3:
     ret z                                         ; $6EB7
 
     ld [hl], a                                    ; $6EB8
-    push af                                       ; $6EB9
-    ld a, SFX1_STEP_FAST                          ; $6EBA
-    call Snd_Sfx1                                 ; $6EBC
-    pop af                                        ; $6EBF
+    play_sfx1 SFX1_STEP_FAST                      ; $6EB9
     and a                                         ; $6EC0
     jr nz, jr_003_6ed2                            ; $6EC1
 
@@ -7209,10 +7064,7 @@ Mode1A_State0A_DeleteDialog::
     and a                                         ; $6EED
     jr nz, jr_003_6f28                            ; $6EEE
 
-    push af                                       ; $6EF0
-    ld a, SFX3_DELETE_DIALOG_FIRST                ; $6EF1
-    call Snd_Sfx3                                 ; $6EF3
-    pop af                                        ; $6EF6
+    play_sfx3 SFX3_DELETE_DIALOG_FIRST            ; $6EF0
     ld bc, $000a                                  ; $6EF7
     call Wait_Frames                              ; $6EFA
     call HotSpotEd_DialogSlideOut                 ; $6EFD
@@ -7242,10 +7094,7 @@ jr_003_6f1c:
 
 
 jr_003_6f28:
-    push af                                       ; $6F28
-    ld a, SFX3_DELETE_DIALOG_SECOND               ; $6F29
-    call Snd_Sfx3                                 ; $6F2B
-    pop af                                        ; $6F2E
+    play_sfx3 SFX3_DELETE_DIALOG_SECOND           ; $6F28
     ld bc, $000a                                  ; $6F2F
     call Wait_Frames                              ; $6F32
     call HotSpotEd_DialogSlideOut                 ; $6F35
@@ -7276,10 +7125,7 @@ jr_003_6f4d:
     ret z                                         ; $6F51
 
     ld [hl], a                                    ; $6F52
-    push af                                       ; $6F53
-    ld a, SFX1_STEP_FAST                          ; $6F54
-    call Snd_Sfx1                                 ; $6F56
-    pop af                                        ; $6F59
+    play_sfx1 SFX1_STEP_FAST                      ; $6F53
     and a                                         ; $6F5A
     jr nz, jr_003_6f6c                            ; $6F5B
 
@@ -7299,12 +7145,8 @@ Mode1A_State0B_Unused::
 
 ; C: fades out and returns to state 0
 Mode1A_State0C_Exit::
-    call Pal_FadeOut                              ; $6F7C
-    call Lcd_Off                                  ; $6F7F
-    ld hl, hStatShadow                            ; $6F82
-    res 6, [hl]                                   ; $6F85
-    ld hl, rIE                                    ; $6F87
-    res 1, [hl]                                   ; $6F8A
+    screen_off                                    ; $6F7C
+    stat_irq_off                                  ; $6F82
     set_state STATE_1A_INIT                       ; $6F8C
     ret                                           ; $6F91
 
@@ -7668,10 +7510,7 @@ HotSpotEd_PointerMoveX::
     and a                                         ; $71DD
     ret z                                         ; $71DE
 
-    push af                                       ; $71DF
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $71E0
-    call Snd_Sfx1                                 ; $71E2
-    pop af                                        ; $71E5
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $71DF
     dec a                                         ; $71E6
     ret                                           ; $71E7
 
@@ -7683,10 +7522,7 @@ jr_003_71e8:
     cp $0e                                        ; $71EB
     ret z                                         ; $71ED
 
-    push af                                       ; $71EE
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $71EF
-    call Snd_Sfx1                                 ; $71F1
-    pop af                                        ; $71F4
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $71EE
     inc a                                         ; $71F5
     ret                                           ; $71F6
 
@@ -7700,10 +7536,7 @@ HotSpotEd_PointerMoveY::
     ret z                                         ; $71FC
 
     dec a                                         ; $71FD
-    push af                                       ; $71FE
-    ld a, SFX1_KEY_UP_DOWN                        ; $71FF
-    call Snd_Sfx1                                 ; $7201
-    pop af                                        ; $7204
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $71FE
     ret                                           ; $7205
 
 
@@ -7714,19 +7547,13 @@ jr_003_7206:
     cp $0c                                        ; $7209
     jr z, jr_003_7216                             ; $720B
 
-    push af                                       ; $720D
-    ld a, SFX1_KEY_UP_DOWN                        ; $720E
-    call Snd_Sfx1                                 ; $7210
-    pop af                                        ; $7213
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $720D
     inc a                                         ; $7214
     ret                                           ; $7215
 
 
 jr_003_7216:
-    push af                                       ; $7216
-    ld a, SFX1_KEY_UP_DOWN                        ; $7217
-    call Snd_Sfx1                                 ; $7219
-    pop af                                        ; $721C
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7216
     push af                                       ; $721D
     ld a, $01                                     ; $721E
     ld [wHsCursorMode], a                         ; $7220
@@ -7764,10 +7591,7 @@ HotSpotEd_SlotMoveX::
     and a                                         ; $724C
     ret z                                         ; $724D
 
-    push af                                       ; $724E
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $724F
-    call Snd_Sfx1                                 ; $7251
-    pop af                                        ; $7254
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $724E
     dec a                                         ; $7255
     ret                                           ; $7256
 
@@ -7779,10 +7603,7 @@ jr_003_7257:
     cp $04                                        ; $725A
     ret z                                         ; $725C
 
-    push af                                       ; $725D
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $725E
-    call Snd_Sfx1                                 ; $7260
-    pop af                                        ; $7263
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $725D
     inc a                                         ; $7264
     ret                                           ; $7265
 
@@ -7792,10 +7613,7 @@ HotSpotEd_SlotMoveUp::
     bit 6, b                                      ; $7266
     ret z                                         ; $7268
 
-    push af                                       ; $7269
-    ld a, SFX1_KEY_UP_DOWN                        ; $726A
-    call Snd_Sfx1                                 ; $726C
-    pop af                                        ; $726F
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7269
     xor a                                         ; $7270
     ld [wHsCursorMode], a                         ; $7271
     ret                                           ; $7274
@@ -7829,10 +7647,7 @@ HotSpotEd_MoveSpotX::
     and a                                         ; $7295
     ret z                                         ; $7296
 
-    push af                                       ; $7297
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $7298
-    call Snd_Sfx1                                 ; $729A
-    pop af                                        ; $729D
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $7297
     dec a                                         ; $729E
     ret                                           ; $729F
 
@@ -7844,10 +7659,7 @@ jr_003_72a0:
     cp $0e                                        ; $72A3
     ret z                                         ; $72A5
 
-    push af                                       ; $72A6
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $72A7
-    call Snd_Sfx1                                 ; $72A9
-    pop af                                        ; $72AC
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $72A6
     inc a                                         ; $72AD
     ret                                           ; $72AE
 
@@ -7861,10 +7673,7 @@ HotSpotEd_MoveSpotY::
     ret z                                         ; $72B4
 
     dec a                                         ; $72B5
-    push af                                       ; $72B6
-    ld a, SFX1_KEY_UP_DOWN                        ; $72B7
-    call Snd_Sfx1                                 ; $72B9
-    pop af                                        ; $72BC
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $72B6
     ret                                           ; $72BD
 
 
@@ -7875,10 +7684,7 @@ jr_003_72be:
     cp $0c                                        ; $72C1
     ret z                                         ; $72C3
 
-    push af                                       ; $72C4
-    ld a, SFX1_KEY_UP_DOWN                        ; $72C5
-    call Snd_Sfx1                                 ; $72C7
-    pop af                                        ; $72CA
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $72C4
     inc a                                         ; $72CB
     ret                                           ; $72CC
 
@@ -7925,10 +7731,7 @@ jr_003_72f2:
 
 ; C: slides the picker window out (WY table 00:2FE5) keeping the icons drawn
 HotSpotEd_PickerSlideOut::
-    push af                                       ; $72F9
-    ld a, SFX1_PANEL_OPEN                         ; $72FA
-    call Snd_Sfx1                                 ; $72FC
-    pop af                                        ; $72FF
+    play_sfx1 SFX1_PANEL_OPEN                     ; $72F9
     ld hl, Slide_WyDeltaTbl                       ; $7300
     ld b, $24                                     ; $7303
 
@@ -7964,10 +7767,7 @@ HotSpotEd_PickerSlideIn::
     call HotSpotEd_ShowEffect                     ; $7333
     call HotSpotEd_ShowJump                       ; $7336
     rst Rst08_WaitVBlank                          ; $7339
-    push af                                       ; $733A
-    ld a, SFX1_PANEL_CLOSE                        ; $733B
-    call Snd_Sfx1                                 ; $733D
-    pop af                                        ; $7340
+    play_sfx1 SFX1_PANEL_CLOSE                    ; $733A
     ld hl, Slide_WyDeltaTbl                       ; $7341
     ld b, $24                                     ; $7344
 
@@ -7999,10 +7799,7 @@ jr_003_7346:
 ; C: slides a dialog out. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1A
 ; (tcrf_check/assets/l3_names/)
 HotSpotEd_DialogSlideOut::
-    push af                                       ; $7370
-    ld a, SFX1_PANEL_OPEN                         ; $7371
-    call Snd_Sfx1                                 ; $7373
-    pop af                                        ; $7376
+    play_sfx1 SFX1_PANEL_OPEN                     ; $7370
     ld hl, Slide_WyDeltaTbl                       ; $7377
     ld b, $24                                     ; $737A
 
@@ -8025,10 +7822,7 @@ jr_003_737c:
 ; C: slides a dialog in. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 1A
 ; (tcrf_check/assets/l3_names/)
 HotSpotEd_DialogSlideIn::
-    push af                                       ; $738B
-    ld a, SFX1_PANEL_CLOSE                        ; $738C
-    call Snd_Sfx1                                 ; $738E
-    pop af                                        ; $7391
+    play_sfx1 SFX1_PANEL_CLOSE                    ; $738B
     xor a                                         ; $7392
     ld hl, Slide_WyDeltaTbl                       ; $7393
     ld b, $24                                     ; $7396
@@ -8388,10 +8182,7 @@ HotSpotEd_PickerScroll::
     and a                                         ; $757F
     jr nz, jr_003_7589                            ; $7580
 
-    push af                                       ; $7582
-    ld a, SFX1_KEY_UP_DOWN                        ; $7583
-    call Snd_Sfx1                                 ; $7585
-    pop af                                        ; $7588
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7582
 
 jr_003_7589:
     ld a, [wPickerDir]                            ; $7589
@@ -8506,10 +8297,7 @@ HotSpotEd_PreviewSound::
     cp $ff                                        ; $75F4
     jr nz, jr_003_7600                            ; $75F6
 
-    push af                                       ; $75F8
-    ld a, MUSIC_STOP                              ; $75F9
-    call Snd_Music                                ; $75FB
-    pop af                                        ; $75FE
+    play_music MUSIC_STOP                         ; $75F8
     ret                                           ; $75FF
 
 
@@ -8517,10 +8305,7 @@ jr_003_7600:
     cp $20                                        ; $7600
     jr nc, jr_003_760e                            ; $7602
 
-    push af                                       ; $7604
-    ld a, MUSIC_STOP                              ; $7605
-    call Snd_Music                                ; $7607
-    pop af                                        ; $760A
+    play_music MUSIC_STOP                         ; $7604
     push af                                       ; $760B
     rst Rst08_WaitVBlank                          ; $760C
     pop af                                        ; $760D
@@ -8646,13 +8431,8 @@ Mode06_State00_Init::
     set 1, [hl]                                   ; $7718
     ld a, $04                                     ; $771A
     ldh [hStatHandlerIndex], a                    ; $771C
-    call Oam_ClearShadow                          ; $771E
-    call Pal_AllWhite                             ; $7721
-    call Lcd_On                                   ; $7724
-    push af                                       ; $7727
-    ld a, MUSIC_LINK_MENU                         ; $7728
-    call Snd_Music                                ; $772A
-    pop af                                        ; $772D
+    screen_on                                     ; $771E
+    play_music MUSIC_LINK_MENU                    ; $7727
     ld a, [wLinkMenuCursor]                       ; $772E
     push af                                       ; $7731
     xor $01                                       ; $7732
@@ -8740,12 +8520,8 @@ Mode06_State02_Dispatch::
     ld a, MODE_MAIN_MENU                          ; $77C6
     ld [wMode], a                                 ; $77C8
     set_state STATE_00_INIT                       ; $77CB
-    call Pal_FadeOut                              ; $77D0
-    call Lcd_Off                                  ; $77D3
-    ld hl, hStatShadow                            ; $77D6
-    res 6, [hl]                                   ; $77D9
-    ld hl, rIE                                    ; $77DB
-    res 1, [hl]                                   ; $77DE
+    screen_off                                    ; $77D0
+    stat_irq_off                                  ; $77D6
     ret                                           ; $77E0
 
 
@@ -8759,10 +8535,7 @@ jr_003_77e1:
     cp MODE_COUNT                                 ; $77EC
     jr c, jr_003_77fc                             ; $77EE
 
-    push af                                       ; $77F0
-    ld a, SFX1_BEEP_REFUSED                       ; $77F1
-    call Snd_Sfx1                                 ; $77F3
-    pop af                                        ; $77F6
+    play_sfx1 SFX1_BEEP_REFUSED                   ; $77F0
     ld hl, wState                                 ; $77F7
     dec [hl]                                      ; $77FA
     ret                                           ; $77FB
@@ -8798,12 +8571,8 @@ jr_003_7817:
     dec b                                         ; $7822
     jr nz, jr_003_7805                            ; $7823
 
-    call Pal_FadeOut                              ; $7825
-    call Lcd_Off                                  ; $7828
-    ld hl, hStatShadow                            ; $782B
-    res 6, [hl]                                   ; $782E
-    ld hl, rIE                                    ; $7830
-    res 1, [hl]                                   ; $7833
+    screen_off                                    ; $7825
+    stat_irq_off                                  ; $782B
     ret                                           ; $7835
 
 
@@ -8836,10 +8605,7 @@ jr_003_7852:
     and a                                         ; $7852
     ret z                                         ; $7853
 
-    push af                                       ; $7854
-    ld a, SFX1_KEY_UP_DOWN                        ; $7855
-    call Snd_Sfx1                                 ; $7857
-    pop af                                        ; $785A
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7854
     dec a                                         ; $785B
     jr jr_003_7870                                ; $785C
 
@@ -8854,10 +8620,7 @@ jr_003_7865:
     cp $01                                        ; $7865
     ret z                                         ; $7867
 
-    push af                                       ; $7868
-    ld a, SFX1_KEY_UP_DOWN                        ; $7869
-    call Snd_Sfx1                                 ; $786B
-    pop af                                        ; $786E
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7868
     inc a                                         ; $786F
 
 jr_003_7870:
@@ -8965,13 +8728,8 @@ Mode0B_State00_Init::
     farcopy Mem_CopyFromBank, Gfx_16_4800_Mode0B_State00_Init, $8800, $0800 ; $791D
     farcopy Mem_CopyFromBank, Gfx_16_5000_Mode0B_State00_Init, $8000, $0800 ; $792B
     farcopy Mem_CopyFromBank, Map_23_7B00_Mode0B_State00_Init, $9800, $0240 ; $7939
-    call Oam_ClearShadow                          ; $7947
-    call Pal_AllWhite                             ; $794A
-    call Lcd_On                                   ; $794D
-    push af                                       ; $7950
-    ld a, MUSIC_SHOW_MENU                         ; $7951
-    call Snd_Music                                ; $7953
-    pop af                                        ; $7956
+    screen_on                                     ; $7947
+    play_music MUSIC_SHOW_MENU                    ; $7950
     call Pal_FadeIn                               ; $7957
     call ShowMenu_LoadHighlightTiles              ; $795A
     next_state                                    ; $795D
@@ -9010,8 +8768,7 @@ Mode0B_State02_Dispatch::
     ld a, MODE_VIEW_MENU                          ; $798E
     ld [wMode], a                                 ; $7990
     set_state STATE_02_INIT                       ; $7993
-    call Pal_FadeOut                              ; $7998
-    call Lcd_Off                                  ; $799B
+    screen_off                                    ; $7998
     ret                                           ; $799E
 
 
@@ -9059,8 +8816,7 @@ jr_003_79ce:
     dec b                                         ; $79D6
     jr nz, jr_003_79bc                            ; $79D7
 
-    call Pal_FadeOut                              ; $79D9
-    call Lcd_Off                                  ; $79DC
+    screen_off                                    ; $79D9
     ret                                           ; $79DF
 
 
@@ -9135,10 +8891,7 @@ ShowMenu_MoveCursor::
     and a                                         ; $7A39
     ret z                                         ; $7A3A
 
-    push af                                       ; $7A3B
-    ld a, SFX1_KEY_UP_DOWN                        ; $7A3C
-    call Snd_Sfx1                                 ; $7A3E
-    pop af                                        ; $7A41
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7A3B
     dec a                                         ; $7A42
     jr jr_003_7a53                                ; $7A43
 
@@ -9149,10 +8902,7 @@ jr_003_7a45:
     cp $02                                        ; $7A48
     ret z                                         ; $7A4A
 
-    push af                                       ; $7A4B
-    ld a, SFX1_KEY_UP_DOWN                        ; $7A4C
-    call Snd_Sfx1                                 ; $7A4E
-    pop af                                        ; $7A51
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7A4B
     inc a                                         ; $7A52
 
 jr_003_7a53:
@@ -9243,13 +8993,8 @@ Mode04_State00_Init::
     farcopy Mem_CopyFromBank, Gfx_15_5F00_Mode04_State00_Init, $8800, $0800 ; $7ADA
     farcopy Mem_CopyFromBank, Gfx_15_6700_Mode04_State00_Init, $8000, $0800 ; $7AE8
     farcopy Mem_CopyFromBank, Map_27_4870_Mode04_State00_Init, $9800, $0240 ; $7AF6
-    call Oam_ClearShadow                          ; $7B04
-    call Pal_AllWhite                             ; $7B07
-    call Lcd_On                                   ; $7B0A
-    push af                                       ; $7B0D
-    ld a, MUSIC_DOODLE_MENU                       ; $7B0E
-    call Snd_Music                                ; $7B10
-    pop af                                        ; $7B13
+    screen_on                                     ; $7B04
+    play_music MUSIC_DOODLE_MENU                  ; $7B0D
     call Pal_FadeIn                               ; $7B14
     next_state                                    ; $7B17
     ret                                           ; $7B1B
@@ -9275,8 +9020,7 @@ Mode04_State02_Dispatch::
     bit 0, a                                      ; $7B35
     jr nz, jr_003_7b5b                            ; $7B37
 
-    call Pal_FadeOut                              ; $7B39
-    call Lcd_Off                                  ; $7B3C
+    screen_off                                    ; $7B39
     ld a, [wDoodleFromShutterbug]                 ; $7B3F
     and a                                         ; $7B42
     jr nz, jr_003_7b50                            ; $7B43
@@ -9311,8 +9055,7 @@ jr_003_7b5b:
 
 jr_003_7b6f:
     ld [wMode], a                                 ; $7B6F
-    call Pal_FadeOut                              ; $7B72
-    call Lcd_Off                                  ; $7B75
+    screen_off                                    ; $7B72
     ld a, [wDoodleFromShutterbug]                 ; $7B78
     and a                                         ; $7B7B
     jr nz, jr_003_7b83                            ; $7B7C
@@ -9368,10 +9111,7 @@ jr_003_7bb9:
     and a                                         ; $7BB9
     ret z                                         ; $7BBA
 
-    push af                                       ; $7BBB
-    ld a, SFX1_KEY_UP_DOWN                        ; $7BBC
-    call Snd_Sfx1                                 ; $7BBE
-    pop af                                        ; $7BC1
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7BBB
     dec a                                         ; $7BC2
     jr jr_003_7bd7                                ; $7BC3
 
@@ -9386,10 +9126,7 @@ jr_003_7bcc:
     cp $01                                        ; $7BCC
     ret z                                         ; $7BCE
 
-    push af                                       ; $7BCF
-    ld a, SFX1_KEY_UP_DOWN                        ; $7BD0
-    call Snd_Sfx1                                 ; $7BD2
-    pop af                                        ; $7BD5
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7BCF
     inc a                                         ; $7BD6
 
 jr_003_7bd7:
@@ -9461,13 +9198,8 @@ jr_003_7c22:
     farcopy Mem_CopyFromBank, Gfx_18_4800_Mode05_State00_Init, $8800, $0800 ; $7C34
     farcopy Mem_CopyFromBank, Gfx_18_5000_Mode05_State00_Init, $8000, $0470 ; $7C42
     farcopy Mem_CopyFromBank, Map_25_6F20_Mode05_State00_Init, $9800, $0240 ; $7C50
-    call Oam_ClearShadow                          ; $7C5E
-    call Pal_AllWhite                             ; $7C61
-    call Lcd_On                                   ; $7C64
-    push af                                       ; $7C67
-    ld a, MUSIC_EDIT_MENU                         ; $7C68
-    call Snd_Music                                ; $7C6A
-    pop af                                        ; $7C6D
+    screen_on                                     ; $7C5E
+    play_music MUSIC_EDIT_MENU                    ; $7C67
     call Pal_FadeIn                               ; $7C6E
     ld a, [wEditMenuCursor]                       ; $7C71
     call EditMenu_ResetIconAnim                   ; $7C74
@@ -9508,8 +9240,7 @@ Mode05_State02_Dispatch::
     ld a, MODE_MAIN_MENU                          ; $7CAB
     ld [wMode], a                                 ; $7CAD
     set_state STATE_00_INIT                       ; $7CB0
-    call Pal_FadeOut                              ; $7CB5
-    call Lcd_Off                                  ; $7CB8
+    screen_off                                    ; $7CB5
     ret                                           ; $7CBB
 
 
@@ -9523,10 +9254,7 @@ jr_003_7cbc:
     cp MODE_COUNT                                 ; $7CC7
     jr c, jr_003_7cd7                             ; $7CC9
 
-    push af                                       ; $7CCB
-    ld a, SFX1_BEEP_REFUSED                       ; $7CCC
-    call Snd_Sfx1                                 ; $7CCE
-    pop af                                        ; $7CD1
+    play_sfx1 SFX1_BEEP_REFUSED                   ; $7CCB
     ld hl, wState                                 ; $7CD2
     dec [hl]                                      ; $7CD5
     ret                                           ; $7CD6
@@ -9567,8 +9295,7 @@ jr_003_7d01:
     dec b                                         ; $7D0D
     jr nz, jr_003_7d01                            ; $7D0E
 
-    call Pal_FadeOut                              ; $7D10
-    call Lcd_Off                                  ; $7D13
+    screen_off                                    ; $7D10
     ret                                           ; $7D16
 
 
@@ -9693,10 +9420,7 @@ jr_003_7dbf:
     and a                                         ; $7DBF
     ret z                                         ; $7DC0
 
-    push af                                       ; $7DC1
-    ld a, SFX1_KEY_UP_DOWN                        ; $7DC2
-    call Snd_Sfx1                                 ; $7DC4
-    pop af                                        ; $7DC7
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7DC1
     dec a                                         ; $7DC8
     jr jr_003_7ddd                                ; $7DC9
 
@@ -9711,10 +9435,7 @@ jr_003_7dd2:
     cp $01                                        ; $7DD2
     ret z                                         ; $7DD4
 
-    push af                                       ; $7DD5
-    ld a, SFX1_KEY_UP_DOWN                        ; $7DD6
-    call Snd_Sfx1                                 ; $7DD8
-    pop af                                        ; $7DDB
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $7DD5
     inc a                                         ; $7DDC
 
 jr_003_7ddd:

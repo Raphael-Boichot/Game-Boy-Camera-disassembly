@@ -4361,51 +4361,11 @@ Gfx_Copy16FromBank10::
     ld a, $10                                     ; $1628
     ldh [hRomBankShadow], a                       ; $162A
     ld [$2000], a                                 ; $162C
-    ld a, [hl+]                                   ; $162F
-    ld [de], a                                    ; $1630
-    inc e                                         ; $1631
-    ld a, [hl+]                                   ; $1632
-    ld [de], a                                    ; $1633
-    inc e                                         ; $1634
-    ld a, [hl+]                                   ; $1635
-    ld [de], a                                    ; $1636
-    inc e                                         ; $1637
-    ld a, [hl+]                                   ; $1638
-    ld [de], a                                    ; $1639
-    inc e                                         ; $163A
-    ld a, [hl+]                                   ; $163B
-    ld [de], a                                    ; $163C
-    inc e                                         ; $163D
-    ld a, [hl+]                                   ; $163E
-    ld [de], a                                    ; $163F
-    inc e                                         ; $1640
-    ld a, [hl+]                                   ; $1641
-    ld [de], a                                    ; $1642
-    inc e                                         ; $1643
-    ld a, [hl+]                                   ; $1644
-    ld [de], a                                    ; $1645
-    inc e                                         ; $1646
-    ld a, [hl+]                                   ; $1647
-    ld [de], a                                    ; $1648
-    inc e                                         ; $1649
-    ld a, [hl+]                                   ; $164A
-    ld [de], a                                    ; $164B
-    inc e                                         ; $164C
-    ld a, [hl+]                                   ; $164D
-    ld [de], a                                    ; $164E
-    inc e                                         ; $164F
-    ld a, [hl+]                                   ; $1650
-    ld [de], a                                    ; $1651
-    inc e                                         ; $1652
-    ld a, [hl+]                                   ; $1653
-    ld [de], a                                    ; $1654
-    inc e                                         ; $1655
-    ld a, [hl+]                                   ; $1656
-    ld [de], a                                    ; $1657
-    inc e                                         ; $1658
-    ld a, [hl+]                                   ; $1659
-    ld [de], a                                    ; $165A
-    inc e                                         ; $165B
+    REPT 15                                       ; $162F
+        ld a, [hl+]
+        ld [de], a
+        inc e
+    ENDR                                         ; 15 copies of 3 bytes
     ld a, [hl+]                                   ; $165C
     ld [de], a                                    ; $165D
     inc de                                        ; $165E
@@ -4533,10 +4493,7 @@ Snd_PlayTagDigits::
     ld a, [wTagImageCheck + $1]                   ; $1710
     and $0f                                       ; $1713
     ld [wSndSfx10Digits + $2], a                  ; $1715
-    push af                                       ; $1718
-    ld a, SFX1_TAG_DIGITS_JINGLE                  ; $1719
-    call Snd_Sfx1                                 ; $171B
-    pop af                                        ; $171E
+    play_sfx1 SFX1_TAG_DIGITS_JINGLE              ; $1718
     ret                                           ; $171F
 
 
@@ -7769,73 +7726,49 @@ Snd_KeyBlips::
     bit PADB_A, a                                 ; $2A8F
     jr z, jr_000_2a9a                             ; $2A91
 
-    push af                                       ; $2A93
-    ld a, SFX1_KEY_A                              ; $2A94
-    call Snd_Sfx1                                 ; $2A96
-    pop af                                        ; $2A99
+    play_sfx1 SFX1_KEY_A                          ; $2A93
 
 jr_000_2a9a:
     bit 1, a                                      ; $2A9A
     jr z, jr_000_2aa5                             ; $2A9C
 
-    push af                                       ; $2A9E
-    ld a, SFX1_KEY_B                              ; $2A9F
-    call Snd_Sfx1                                 ; $2AA1
-    pop af                                        ; $2AA4
+    play_sfx1 SFX1_KEY_B                          ; $2A9E
 
 jr_000_2aa5:
     bit 5, a                                      ; $2AA5
     jr z, jr_000_2ab0                             ; $2AA7
 
-    push af                                       ; $2AA9
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $2AAA
-    call Snd_Sfx1                                 ; $2AAC
-    pop af                                        ; $2AAF
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $2AA9
 
 jr_000_2ab0:
     bit 4, a                                      ; $2AB0
     jr z, jr_000_2abb                             ; $2AB2
 
-    push af                                       ; $2AB4
-    ld a, SFX1_KEY_LEFT_RIGHT                     ; $2AB5
-    call Snd_Sfx1                                 ; $2AB7
-    pop af                                        ; $2ABA
+    play_sfx1 SFX1_KEY_LEFT_RIGHT                 ; $2AB4
 
 jr_000_2abb:
     bit 6, a                                      ; $2ABB
     jr z, jr_000_2ac6                             ; $2ABD
 
-    push af                                       ; $2ABF
-    ld a, SFX1_KEY_UP_DOWN                        ; $2AC0
-    call Snd_Sfx1                                 ; $2AC2
-    pop af                                        ; $2AC5
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $2ABF
 
 jr_000_2ac6:
     bit 7, a                                      ; $2AC6
     jr z, jr_000_2ad1                             ; $2AC8
 
-    push af                                       ; $2ACA
-    ld a, SFX1_KEY_UP_DOWN                        ; $2ACB
-    call Snd_Sfx1                                 ; $2ACD
-    pop af                                        ; $2AD0
+    play_sfx1 SFX1_KEY_UP_DOWN                    ; $2ACA
 
 jr_000_2ad1:
     bit 3, a                                      ; $2AD1
     jr z, jr_000_2adc                             ; $2AD3
 
-    push af                                       ; $2AD5
-    ld a, SFX1_KEY_START                          ; $2AD6
-    call Snd_Sfx1                                 ; $2AD8
-    pop af                                        ; $2ADB
+    play_sfx1 SFX1_KEY_START                      ; $2AD5
 
 jr_000_2adc:
     bit 2, a                                      ; $2ADC
     jr z, jr_000_2ae7                             ; $2ADE
 
-    push af                                       ; $2AE0
-    ld a, SFX1_KEY_SELECT                         ; $2AE1
-    call Snd_Sfx1                                 ; $2AE3
-    pop af                                        ; $2AE6
+    play_sfx1 SFX1_KEY_SELECT                     ; $2AE0
 
 jr_000_2ae7:
     pop af                                        ; $2AE7
@@ -8631,9 +8564,7 @@ Mode1D_State01_LoadScreen::
     farcopy Mem_CopyFromBank, Gfx_20_7500_Mode1D_State01_LoadScreen, $9000, $0800 ; $306D
     farcopy Mem_CopyFromBank, Gfx_20_7D00_Mode1D_State01_LoadScreen, $8800, $0400 ; $307B
     farcopy Mem_CopyFromBank, Map_25_63E0_Mode1D_State01_LoadScreen, $9800, $0240 ; $3089
-    call Oam_ClearShadow                          ; $3097
-    call Pal_AllWhite                             ; $309A
-    call Lcd_On                                   ; $309D
+    screen_on                                     ; $3097
     call Mode1D_DrawTvAnimation                   ; $30A0
     call Pal_FadeIn                               ; $30A3
     next_state                                    ; $30A6
@@ -8654,10 +8585,7 @@ Mode1D_State02_SendInit::
     cp $81                                        ; $30BC
     jp nz, Mode1D_Abort                           ; $30BE
 
-    push af                                       ; $30C1
-    ld a, MUSIC_TRANSFER_SEND                     ; $30C2
-    call Snd_Music                                ; $30C4
-    pop af                                        ; $30C7
+    play_music MUSIC_TRANSFER_SEND                ; $30C1
     xor a                                         ; $30C8
     ld [wPrintBandNo], a                          ; $30C9
     ld [wPrintLastBand], a                        ; $30CC
@@ -9178,10 +9106,7 @@ jr_000_3367:
     cp $f0                                        ; $3379
     ret z                                         ; $337B
 
-    push af                                       ; $337C
-    ld a, MUSIC_TRANSFER_PRINT                    ; $337D
-    call Snd_Music                                ; $337F
-    pop af                                        ; $3382
+    play_music MUSIC_TRANSFER_PRINT               ; $337C
     next_state                                    ; $3383
     ret                                           ; $3387
 
@@ -9230,8 +9155,7 @@ Mode1D_State07_WaitPrinted::
     and a                                         ; $33F1
     jr nz, jr_000_3404                            ; $33F2
 
-    call Pal_FadeOut                              ; $33F4
-    call Lcd_Off                                  ; $33F7
+    screen_off                                    ; $33F4
     xor a                                         ; $33FA
     ld [wPrintFirstPage], a                       ; $33FB
     set_state STATE_1D_LOAD_SCREEN                ; $33FE
@@ -9302,8 +9226,7 @@ Mode1D_UserCancel::
 
 ; C: fade out and return to the calling mode through 00:3483
 Mode1D_State08_Exit::
-    call Pal_FadeOut                              ; $345A
-    call Lcd_Off                                  ; $345D
+    screen_off                                    ; $345A
     ld hl, rIE                                    ; $3460
     res 3, [hl]                                   ; $3463
     xor a                                         ; $3465
@@ -9332,8 +9255,7 @@ Mode1D_ReturnTbl::
 
 ; C: printer error clean-up
 Mode1D_State09_Cleanup::
-    call Pal_FadeOut                              ; $348D
-    call Lcd_Off                                  ; $3490
+    screen_off                                    ; $348D
     ld hl, rIE                                    ; $3493
     res 3, [hl]                                   ; $3496
     xor a                                         ; $3498
