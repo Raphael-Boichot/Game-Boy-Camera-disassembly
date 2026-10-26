@@ -11,7 +11,7 @@ The work is produced by AI (Claude), from reading the code and running it in emu
 | ROM | MD5 | Folder | Status |
 |---|---|---|---|
 | Pocket Camera (Japan) (Rev A) (SGB Enhanced) | `fdcfe686cf4df461e870b6e53b2b5a8b` | [`roms/jp_rev_a/`](roms/jp_rev_a/) | L0-L5 done |
-| Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | symbol file and L4 tables ported from JP: L0-L1, L2 static, L3 partial, L4 (docs §1.5) |
+| Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | ported from JP: L0-L1, L2 static, L3 partial, L4, L5 (`make TREE=us_eu check`; docs §1.5) |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | not started |
 | Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | not started |
 | Pocket Camera Prototype (Japan) ("DEBAGAME") | `1d8097de3497db8b182bcd2a984b6063` | [`roms/prototype_debagame/`](roms/prototype_debagame/) | not started |
@@ -32,7 +32,11 @@ The ROMs are not in the repository (the owner's source pack is `source/Source_ma
 | [`HOWTO_NEW_ROM.md`](HOWTO_NEW_ROM.md), [`skills/`](skills/) | the playbook (levels L0-L6) for the next ROM |
 | [`CLAUDE.md`](CLAUDE.md) | working rules for the AI sessions |
 
-## Building (Japanese Rev A)
+## Building
+
+The international ROM: `make TREE=us_eu check` builds `build/us_eu/gbcam_usa_eu.gb` from `roms/us_eu/src/` (md5 `42d2f65e2549be9d1d126a6828b5d1c1`; docs §1.5).
+
+### Japanese Rev A
 
 From the source tree (rgbds 1.0.4 in `PATH`, or `RGBDS=/path/to/rgbds/`):
 

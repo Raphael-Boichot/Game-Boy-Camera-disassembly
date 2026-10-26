@@ -106,14 +106,14 @@ name_differs,00,3041,,Mode_Table,content differs: 33 of 102 bytes
 name_differs,00,311b,,Mode1D_StateTable,content differs: 24 of 24 bytes
 name_differs,00,315b,,Mode1D_State01_LoadScreen,routine differs: 2 of 32 JP instructions not paired as same code
 name_differs,00,33ea,,Mode1D_LayoutScriptPtrs,content differs: 6 of 10 bytes
-name_differs,00,348a,,Mode1D_State06_LoadWaitScreen,routine differs: 1 of 32 JP instructions not paired as same code
+name_differs,00,348a,,Mode1D_State06_LoadWaitScreen,placed by the word table Mode1D_StateTable (entry 6)
 name_differs,00,367b,,Bank00_ZeroFill,content differs: 271 of 388 bytes
 name_differs,01,4000,,OamPtrTbl_B01_4000,content differs: 108 of 498 bytes
 name_differs,01,51a5,,OamList_B01_4000_97,content differs: 17 of 57 bytes
-lost_name,01,51de,,JP OamList_B01_4000_98,byte deleted in this build
-lost_name,01,5223,,JP OamList_B01_4000_99,byte deleted in this build
-lost_name,01,5264,,JP OamList_B01_4000_9A,byte deleted in this build
-lost_name,01,52a9,,JP OamList_B01_4000_9B,byte deleted in this build
+name_differs,01,51de,,OamList_B01_4000_98,placed by the word table OamPtrTbl_B01_4000 (entry 152)
+name_differs,01,521b,,OamList_B01_4000_99,placed by the word table OamPtrTbl_B01_4000 (entry 153)
+name_differs,01,5254,,OamList_B01_4000_9A,placed by the word table OamPtrTbl_B01_4000 (entry 154)
+name_differs,01,5291,,OamList_B01_4000_9B,placed by the word table OamPtrTbl_B01_4000 (entry 155)
 name_differs,01,52ca,,OamList_B01_4000_9C,content differs: 17 of 61 bytes
 name_differs,01,5ae5,,OamList_B01_4000_E7,content differs: 2 of 17 bytes
 name_differs,01,5d2b,,OamPtrTbl_B01_5D2B,content differs: 302 of 492 bytes
@@ -124,7 +124,7 @@ name_differs,01,6645,,OamList_B01_5D2B_4E,content differs: 8 of 41 bytes
 name_differs,01,6e9e,,OamList_B01_5D2B_A7,content differs: 6 of 25 bytes
 name_differs,02,4c80,,Photo_LoadImage_Far,routine differs: 3 of 64 JP instructions not paired as same code
 name_differs,02,4d01,,AlbumB_CheckGate,routine differs: 18 of 62 JP instructions not paired as same code
-lost_name,02,4d80,,JP AlbumB_CheckGate_Tbl4D80,lands inside an instruction
+name_differs,02,4db7,,AlbumB_CheckGate_Tbl4DB7,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,02,51ca,,Photo_GetSramAddress_Far,routine differs: 3 of 43 JP instructions not paired as same code
 name_differs,02,52bd,,OamPtrTbl_B02_52BD,content differs: 272 of 406 bytes
 name_differs,02,5475,,OamList_B02_52BD_02,content differs: 4 of 9 bytes
@@ -144,18 +144,18 @@ name_differs,02,5742,,OamList_B02_52BD_27,content differs: 32 of 65 bytes
 name_differs,02,57ab,,OamList_B02_52BD_30,content differs: 1 of 5 bytes
 name_differs,02,57b0,,OamList_B02_52BD_31,content differs: 1 of 5 bytes
 name_differs,02,57b5,,OamList_B02_52BD_32,content differs: 2 of 5 bytes
-lost_name,02,576f,,JP OamList_B02_5272_33,byte deleted in this build
-lost_name,02,5778,,JP OamList_B02_5272_34,byte deleted in this build
-lost_name,02,5781,,JP OamList_B02_5272_35,byte deleted in this build
-lost_name,02,578a,,JP OamList_B02_5272_36,byte deleted in this build
-lost_name,02,5793,,JP OamList_B02_5272_37,byte deleted in this build
-lost_name,02,579c,,JP OamList_B02_5272_38,byte deleted in this build
-lost_name,02,57a5,,JP OamList_B02_5272_39,byte deleted in this build
-name_differs,02,57c5,,OamList_B02_52BD_3A,content differs: 12 of 13 bytes
-name_differs,02,57d2,,OamList_B02_52BD_3B,content differs: 8 of 9 bytes
-name_differs,02,57db,,OamList_B02_52BD_3C,content differs: 11 of 13 bytes
-name_differs,02,57e8,,OamList_B02_52BD_3D,content differs: 20 of 21 bytes
-name_differs,02,57fd,,OamList_B02_52BD_3E,content differs: 7 of 9 bytes
+name_differs,02,57ba,,OamList_B02_52BD_33,placed by the word table OamPtrTbl_B02_5272 (entry 51)
+name_differs,02,57c7,,OamList_B02_52BD_34,placed by the word table OamPtrTbl_B02_5272 (entry 52)
+name_differs,02,57d4,,OamList_B02_52BD_35,placed by the word table OamPtrTbl_B02_5272 (entry 53)
+name_differs,02,57d9,,OamList_B02_52BD_36,placed by the word table OamPtrTbl_B02_5272 (entry 54)
+name_differs,02,57de,,OamList_B02_52BD_37,placed by the word table OamPtrTbl_B02_5272 (entry 55)
+name_differs,02,57e3,,OamList_B02_52BD_38,placed by the word table OamPtrTbl_B02_5272 (entry 56)
+name_differs,02,57e8,,OamList_B02_52BD_39,placed by the word table OamPtrTbl_B02_5272 (entry 57)
+name_differs,02,57ed,,OamList_B02_52BD_3A,placed by the word table OamPtrTbl_B02_5272 (entry 58)
+name_differs,02,57f2,,OamList_B02_52BD_3B,placed by the word table OamPtrTbl_B02_5272 (entry 59)
+name_differs,02,57f7,,OamList_B02_52BD_3C,placed by the word table OamPtrTbl_B02_5272 (entry 60)
+name_differs,02,57fc,,OamList_B02_52BD_3D,placed by the word table OamPtrTbl_B02_5272 (entry 61)
+name_differs,02,5801,,OamList_B02_52BD_3E,placed by the word table OamPtrTbl_B02_5272 (entry 62)
 name_differs,02,5806,,OamList_B02_52BD_3F,content differs: 3 of 5 bytes
 name_differs,02,580b,,OamList_B02_52BD_40,content differs: 3 of 5 bytes
 name_differs,02,5810,,OamList_B02_52BD_41,content differs: 3 of 5 bytes
@@ -168,32 +168,135 @@ name_differs,02,58ae,,OamList_B02_52BD_47,content differs: 4 of 9 bytes
 name_differs,02,58b7,,OamList_B02_52BD_48,content differs: 4 of 9 bytes
 name_differs,02,5985,,OamList_B02_52BD_4E,content differs: 13 of 45 bytes
 name_differs,02,60ea,,OamList_B02_52BD_97,content differs: 18 of 25 bytes
-name_differs,02,6103,,OamList_B02_52BD_98,content differs: 22 of 25 bytes
-name_differs,02,611c,,OamList_B02_52BD_99,content differs: 23 of 25 bytes
-name_differs,02,620d,,OamList_B02_52BD_9A,content differs: 25 of 29 bytes
-name_differs,02,622a,,OamList_B02_52BD_9B,content differs: 27 of 29 bytes
-name_differs,02,6247,,OamList_B02_52BD_9C,content differs: 29 of 29 bytes
-name_differs,02,6264,,OamList_B02_52BD_9D,content differs: 34 of 45 bytes
-name_differs,02,6291,,OamList_B02_52BD_9E,content differs: 37 of 45 bytes
-name_differs,02,62be,,OamList_B02_52BD_9F,content differs: 31 of 45 bytes
+name_differs,02,6123,,OamList_B02_52BD_98,placed by the word table OamPtrTbl_B02_5272 (entry 152)
+name_differs,02,615c,,OamList_B02_52BD_99,placed by the word table OamPtrTbl_B02_5272 (entry 153)
+name_differs,02,6195,,OamList_B02_52BD_9A,placed by the word table OamPtrTbl_B02_5272 (entry 154)
+name_differs,02,61ce,,OamList_B02_52BD_9B,placed by the word table OamPtrTbl_B02_5272 (entry 155)
+name_differs,02,6207,,OamList_B02_52BD_9C,placed by the word table OamPtrTbl_B02_5272 (entry 156)
+name_differs,02,6240,,OamList_B02_52BD_9D,placed by the word table OamPtrTbl_B02_5272 (entry 157)
+name_differs,02,6279,,OamList_B02_52BD_9E,placed by the word table OamPtrTbl_B02_5272 (entry 158)
+name_differs,02,62b2,,OamList_B02_52BD_9F,placed by the word table OamPtrTbl_B02_5272 (entry 159)
 name_differs,02,6372,,OamList_B02_52BD_A3,content differs: 5 of 9 bytes
-lost_name,02,627c,,JP OamList_B02_5272_A4,byte deleted in this build
-lost_name,02,6281,,JP OamList_B02_5272_A5,byte deleted in this build
-lost_name,02,629a,,JP OamList_B02_5272_A6,byte deleted in this build
-name_differs,02,637e,,OamList_B02_52BD_A7,content differs: 23 of 25 bytes
-name_differs,02,6397,,OamList_B02_52BD_A8,content differs: 7 of 29 bytes
+name_differs,02,6377,,OamList_B02_52BD_A4,placed by the word table OamPtrTbl_B02_5272 (entry 164)
+name_differs,02,637c,,OamList_B02_52BD_A5,placed by the word table OamPtrTbl_B02_5272 (entry 165)
+name_differs,02,6381,,OamList_B02_52BD_A6,placed by the word table OamPtrTbl_B02_5272 (entry 166)
+name_differs,02,6386,,OamList_B02_52BD_A7,placed by the word table OamPtrTbl_B02_5272 (entry 167)
+name_differs,02,638b,,OamList_B02_52BD_A8,placed by the word table OamPtrTbl_B02_5272 (entry 168)
 name_differs,02,63b4,,OamList_B02_52BD_A9,content differs: 7 of 29 bytes
 name_differs,02,6df4,,OamList_B02_52BD_C5,content differs: 10 of 89 bytes
 name_differs,02,6f16,,OamPtrTbl_B02_6F16,content differs: 208 of 244 bytes
-name_differs,02,700a,,OamList_B02_6F16_00,content differs: 4 of 9 bytes
+name_differs,02,7006,,OamList_B02_6F16_00,placed by the word table OamPtrTbl_B02_6E4B (entry 0)
 name_differs,02,70a2,,OamList_B02_6F16_0C,content differs: 8 of 9 bytes
-lost_name,02,6fe4,,JP OamList_B02_6E4B_0D,byte deleted in this build
-lost_name,02,7001,,JP OamList_B02_6E4B_0E,byte deleted in this build
-lost_name,02,703a,,JP OamList_B02_6E4B_0F,byte deleted in this build
-lost_name,02,708f,,JP OamList_B02_6E4B_10,byte deleted in this build
-lost_name,02,70ec,,JP OamList_B02_6E4B_11,byte deleted in this build
-lost_name,02,7149,,JP OamList_B02_6E4B_12,byte deleted in this build
-name_differs,02,79c9,,Bank02_Padding_79C9,content differs: 7 of 1355 bytes
+name_differs,02,70ab,,OamList_B02_6F16_0D,placed by the word table OamPtrTbl_B02_6E4B (entry 13)
+name_differs,02,70b0,,OamList_B02_6F16_0E,placed by the word table OamPtrTbl_B02_6E4B (entry 14)
+name_differs,02,70b5,,OamList_B02_6F16_0F,placed by the word table OamPtrTbl_B02_6E4B (entry 15)
+name_differs,02,70ba,,OamList_B02_6F16_10,placed by the word table OamPtrTbl_B02_6E4B (entry 16)
+name_differs,02,70d7,,OamList_B02_6F16_11,placed by the word table OamPtrTbl_B02_6E4B (entry 17)
+name_differs,02,70ec,,OamList_B02_6F16_12,placed by the word table OamPtrTbl_B02_6E4B (entry 18)
+name_differs,02,70fd,,OamList_B02_6F16_13,placed by the word table OamPtrTbl_B02_6E4B (entry 19)
+name_differs,02,711a,,OamList_B02_6F16_14,placed by the word table OamPtrTbl_B02_6E4B (entry 20)
+name_differs,02,713b,,OamList_B02_6F16_15,placed by the word table OamPtrTbl_B02_6E4B (entry 21)
+name_differs,02,715c,,OamList_B02_6F16_16,placed by the word table OamPtrTbl_B02_6E4B (entry 22)
+name_differs,02,716d,,OamList_B02_6F16_17,placed by the word table OamPtrTbl_B02_6E4B (entry 23)
+name_differs,02,718a,,OamList_B02_6F16_18,placed by the word table OamPtrTbl_B02_6E4B (entry 24)
+name_differs,02,7193,,OamList_B02_6F16_19,placed by the word table OamPtrTbl_B02_6E4B (entry 25)
+name_differs,02,71a0,,OamList_B02_6F16_1A,placed by the word table OamPtrTbl_B02_6E4B (entry 26)
+name_differs,02,71a9,,OamList_B02_6F16_1B,placed by the word table OamPtrTbl_B02_6E4B (entry 27)
+name_differs,02,71b6,,OamList_B02_6F16_1C,placed by the word table OamPtrTbl_B02_6E4B (entry 28)
+name_differs,02,71c3,,OamList_B02_6F16_1D,placed by the word table OamPtrTbl_B02_6E4B (entry 29)
+name_differs,02,71d0,,OamList_B02_6F16_1E,placed by the word table OamPtrTbl_B02_6E4B (entry 30)
+name_differs,02,71dd,,OamList_B02_6F16_1F,placed by the word table OamPtrTbl_B02_6E4B (entry 31)
+name_differs,02,71ea,,OamList_B02_6F16_20,placed by the word table OamPtrTbl_B02_6E4B (entry 32)
+name_differs,02,720b,,OamList_B02_6F16_21,placed by the word table OamPtrTbl_B02_6E4B (entry 33)
+name_differs,02,722c,,OamList_B02_6F16_22,placed by the word table OamPtrTbl_B02_6E4B (entry 34)
+name_differs,02,724d,,OamList_B02_6F16_23,placed by the word table OamPtrTbl_B02_6E4B (entry 35)
+name_differs,02,7262,,OamList_B02_6F16_24,placed by the word table OamPtrTbl_B02_6E4B (entry 36)
+name_differs,02,7277,,OamList_B02_6F16_25,placed by the word table OamPtrTbl_B02_6E4B (entry 37)
+name_differs,02,728c,,OamList_B02_6F16_26,placed by the word table OamPtrTbl_B02_6E4B (entry 38)
+name_differs,02,72a1,,OamList_B02_6F16_27,placed by the word table OamPtrTbl_B02_6E4B (entry 39)
+name_differs,02,72b6,,OamList_B02_6F16_28,placed by the word table OamPtrTbl_B02_6E4B (entry 40)
+name_differs,02,72cb,,OamList_B02_6F16_29,placed by the word table OamPtrTbl_B02_6E4B (entry 41)
+name_differs,02,72d0,,OamList_B02_6F16_2A,placed by the word table OamPtrTbl_B02_6E4B (entry 42)
+name_differs,02,72ed,,OamList_B02_6F16_2B,placed by the word table OamPtrTbl_B02_6E4B (entry 43)
+name_differs,02,730a,,OamList_B02_6F16_2C,placed by the word table OamPtrTbl_B02_6E4B (entry 44)
+name_differs,02,7327,,OamList_B02_6F16_2D,placed by the word table OamPtrTbl_B02_6E4B (entry 45)
+name_differs,02,7330,,OamList_B02_6F16_2E,placed by the word table OamPtrTbl_B02_6E4B (entry 46)
+name_differs,02,7339,,OamList_B02_6F16_2F,placed by the word table OamPtrTbl_B02_6E4B (entry 47)
+name_differs,02,7342,,OamList_B02_6F16_30,placed by the word table OamPtrTbl_B02_6E4B (entry 48)
+name_differs,02,735b,,OamList_B02_6F16_31,placed by the word table OamPtrTbl_B02_6E4B (entry 49)
+name_differs,02,7370,,OamList_B02_6F16_32,placed by the word table OamPtrTbl_B02_6E4B (entry 50)
+name_differs,02,7395,,OamList_B02_6F16_33,placed by the word table OamPtrTbl_B02_6E4B (entry 51)
+name_differs,02,73ba,,OamList_B02_6F16_34,placed by the word table OamPtrTbl_B02_6E4B (entry 52)
+name_differs,02,73df,,OamList_B02_6F16_35,placed by the word table OamPtrTbl_B02_6E4B (entry 53)
+name_differs,02,7404,,OamList_B02_6F16_36,placed by the word table OamPtrTbl_B02_6E4B (entry 54)
+name_differs,02,7429,,OamList_B02_6F16_37,placed by the word table OamPtrTbl_B02_6E4B (entry 55)
+name_differs,02,744e,,OamList_B02_6F16_38,placed by the word table OamPtrTbl_B02_6E4B (entry 56)
+name_differs,02,7473,,OamList_B02_6F16_39,placed by the word table OamPtrTbl_B02_6E4B (entry 57)
+name_differs,02,7498,,OamList_B02_6F16_3A,placed by the word table OamPtrTbl_B02_6E4B (entry 58)
+name_differs,02,74ad,,OamList_B02_6F16_3B,placed by the word table OamPtrTbl_B02_6E4B (entry 59)
+name_differs,02,74c2,,OamList_B02_6F16_3C,placed by the word table OamPtrTbl_B02_6E4B (entry 60)
+name_differs,02,74d7,,OamList_B02_6F16_3D,placed by the word table OamPtrTbl_B02_6E4B (entry 61)
+name_differs,02,74ec,,OamList_B02_6F16_3E,placed by the word table OamPtrTbl_B02_6E4B (entry 62)
+name_differs,02,7501,,OamList_B02_6F16_3F,placed by the word table OamPtrTbl_B02_6E4B (entry 63)
+name_differs,02,7516,,OamList_B02_6F16_40,placed by the word table OamPtrTbl_B02_6E4B (entry 64)
+name_differs,02,752b,,OamList_B02_6F16_41,placed by the word table OamPtrTbl_B02_6E4B (entry 65)
+name_differs,02,7540,,OamList_B02_6F16_42,placed by the word table OamPtrTbl_B02_6E4B (entry 66)
+name_differs,02,7551,,OamList_B02_6F16_43,placed by the word table OamPtrTbl_B02_6E4B (entry 67)
+name_differs,02,7562,,OamList_B02_6F16_44,placed by the word table OamPtrTbl_B02_6E4B (entry 68)
+name_differs,02,7573,,OamList_B02_6F16_45,placed by the word table OamPtrTbl_B02_6E4B (entry 69)
+name_differs,02,7588,,OamList_B02_6F16_46,placed by the word table OamPtrTbl_B02_6E4B (entry 70)
+name_differs,02,758d,,OamList_B02_6F16_47,placed by the word table OamPtrTbl_B02_6E4B (entry 71)
+name_differs,02,7592,,OamList_B02_6F16_48,placed by the word table OamPtrTbl_B02_6E4B (entry 72)
+name_differs,02,7597,,OamList_B02_6F16_49,placed by the word table OamPtrTbl_B02_6E4B (entry 73)
+name_differs,02,759c,,OamList_B02_6F16_4A,placed by the word table OamPtrTbl_B02_6E4B (entry 74)
+name_differs,02,75a1,,OamList_B02_6F16_4B,placed by the word table OamPtrTbl_B02_6E4B (entry 75)
+name_differs,02,75a6,,OamList_B02_6F16_4C,placed by the word table OamPtrTbl_B02_6E4B (entry 76)
+name_differs,02,75ab,,OamList_B02_6F16_4D,placed by the word table OamPtrTbl_B02_6E4B (entry 77)
+name_differs,02,75b0,,OamList_B02_6F16_4E,placed by the word table OamPtrTbl_B02_6E4B (entry 78)
+name_differs,02,75b5,,OamList_B02_6F16_4F,placed by the word table OamPtrTbl_B02_6E4B (entry 79)
+name_differs,02,75ba,,OamList_B02_6F16_50,placed by the word table OamPtrTbl_B02_6E4B (entry 80)
+name_differs,02,75e3,,OamList_B02_6F16_51,placed by the word table OamPtrTbl_B02_6E4B (entry 81)
+name_differs,02,7614,,OamList_B02_6F16_52,placed by the word table OamPtrTbl_B02_6E4B (entry 82)
+name_differs,02,7641,,OamList_B02_6F16_53,placed by the word table OamPtrTbl_B02_6E4B (entry 83)
+name_differs,02,7666,,OamList_B02_6F16_54,placed by the word table OamPtrTbl_B02_6E4B (entry 84)
+name_differs,02,7677,,OamList_B02_6F16_55,placed by the word table OamPtrTbl_B02_6E4B (entry 85)
+name_differs,02,76d4,,OamList_B02_6F16_56,placed by the word table OamPtrTbl_B02_6E4B (entry 86)
+name_differs,02,7731,,OamList_B02_6F16_57,placed by the word table OamPtrTbl_B02_6E4B (entry 87)
+name_differs,02,7792,,OamList_B02_6F16_58,placed by the word table OamPtrTbl_B02_6E4B (entry 88)
+name_differs,02,77f3,,OamList_B02_6F16_59,placed by the word table OamPtrTbl_B02_6E4B (entry 89)
+name_differs,02,7850,,OamList_B02_6F16_5A,placed by the word table OamPtrTbl_B02_6E4B (entry 90)
+name_differs,02,78ad,,OamList_B02_6F16_5B,placed by the word table OamPtrTbl_B02_6E4B (entry 91)
+name_differs,02,78b2,,OamList_B02_6F16_5C,placed by the word table OamPtrTbl_B02_6E4B (entry 92)
+name_differs,02,78b7,,OamList_B02_6F16_5D,placed by the word table OamPtrTbl_B02_6E4B (entry 93)
+name_differs,02,78bc,,OamList_B02_6F16_5E,placed by the word table OamPtrTbl_B02_6E4B (entry 94)
+name_differs,02,78c1,,OamList_B02_6F16_5F,placed by the word table OamPtrTbl_B02_6E4B (entry 95)
+name_differs,02,78d6,,OamList_B02_6F16_60,placed by the word table OamPtrTbl_B02_6E4B (entry 96)
+name_differs,02,78eb,,OamList_B02_6F16_61,placed by the word table OamPtrTbl_B02_6E4B (entry 97)
+name_differs,02,7900,,OamList_B02_6F16_62,placed by the word table OamPtrTbl_B02_6E4B (entry 98)
+name_differs,02,7915,,OamList_B02_6F16_63,placed by the word table OamPtrTbl_B02_6E4B (entry 99)
+name_differs,02,791a,,OamList_B02_6F16_64,placed by the word table OamPtrTbl_B02_6E4B (entry 100)
+name_differs,02,791f,,OamList_B02_6F16_65,placed by the word table OamPtrTbl_B02_6E4B (entry 101)
+name_differs,02,7924,,OamList_B02_6F16_66,placed by the word table OamPtrTbl_B02_6E4B (entry 102)
+name_differs,02,7929,,OamList_B02_6F16_67,placed by the word table OamPtrTbl_B02_6E4B (entry 103)
+name_differs,02,792e,,OamList_B02_6F16_68,placed by the word table OamPtrTbl_B02_6E4B (entry 104)
+name_differs,02,7933,,OamList_B02_6F16_69,placed by the word table OamPtrTbl_B02_6E4B (entry 105)
+name_differs,02,7938,,OamList_B02_6F16_6A,placed by the word table OamPtrTbl_B02_6E4B (entry 106)
+name_differs,02,793d,,OamList_B02_6F16_6B,placed by the word table OamPtrTbl_B02_6E4B (entry 107)
+name_differs,02,7942,,OamList_B02_6F16_6C,placed by the word table OamPtrTbl_B02_6E4B (entry 108)
+name_differs,02,7947,,OamList_B02_6F16_6D,placed by the word table OamPtrTbl_B02_6E4B (entry 109)
+name_differs,02,794c,,OamList_B02_6F16_6E,placed by the word table OamPtrTbl_B02_6E4B (entry 110)
+name_differs,02,795d,,OamList_B02_6F16_6F,placed by the word table OamPtrTbl_B02_6E4B (entry 111)
+name_differs,02,796a,,OamList_B02_6F16_70,placed by the word table OamPtrTbl_B02_6E4B (entry 112)
+name_differs,02,7983,,OamList_B02_6F16_71,placed by the word table OamPtrTbl_B02_6E4B (entry 113)
+name_differs,02,798c,,OamList_B02_6F16_72,placed by the word table OamPtrTbl_B02_6E4B (entry 114)
+name_differs,02,7995,,OamList_B02_6F16_73,placed by the word table OamPtrTbl_B02_6E4B (entry 115)
+name_differs,02,79aa,,OamList_B02_6F16_74,placed by the word table OamPtrTbl_B02_6E4B (entry 116)
+name_differs,02,79b7,,OamList_B02_6F16_75,placed by the word table OamPtrTbl_B02_6E4B (entry 117)
+name_differs,02,79c4,,OamList_B02_6F16_76,placed by the word table OamPtrTbl_B02_6E4B (entry 118)
+name_differs,02,79c9,,OamList_B02_6F16_77,placed by the word table OamPtrTbl_B02_6E4B (entry 119)
+lost_name,02,7aa3,,JP OamList_B02_6E4B_78,same address as OamList_B02_6E4B_75 in this build (both point there)
+lost_name,02,7ab0,,JP OamList_B02_6E4B_79,same address as OamList_B02_6E4B_76 in this build (both point there)
+lost_name,02,7ab5,,JP Bank02_Padding_7AB5,same address as OamList_B02_6E4B_77 in this build (both point there)
 name_differs,03,4004,,Mode12_StateTable,content differs: 32 of 70 bytes
 name_differs,03,42a5,,Mode12_State04_ToggleLoop,routine differs: 1 of 83 JP instructions not paired as same code
 name_differs,03,4f1b,,Mode12_State15_SaveDialogWait,routine differs: 1 of 7 JP instructions not paired as same code
@@ -221,21 +324,21 @@ name_differs,03,7aee,,Mode04_State00_Init,routine differs: 1 of 43 JP instructio
 name_differs,03,7c3d,,Mode05_StateTable,content differs: 3 of 6 bytes
 name_differs,04,4bca,,Mode0F_DrawYesNoJitter,routine differs: 2 of 30 JP instructions not paired as same code
 name_differs,04,5337,,Stamp_PageGfxTbl,content differs: 25 of 102 bytes
-name_differs,04,5391,,Stamp_CatIconSrcTbl1,moved: found by its own bytes (32) elsewhere in the bank
-name_differs,04,53b2,,Stamp_CatIconSrcTbl2,content differs: 31 of 51 bytes
-name_differs,04,53e5,,Stamp_CatMapSrcTbl,content differs: 21 of 51 bytes
+name_differs,04,5391,,Stamp_CatIconSrcTbl1,placed by 1 paired reference(s) to it (the operand of the same instruction here)
+name_differs,04,53be,,Stamp_CatIconSrcTbl2,placed by 1 paired reference(s) to it (the operand of the same instruction here)
+name_differs,04,53eb,,Stamp_CatMapSrcTbl,placed by 3 paired reference(s) to it (the operand of the same instruction here)
 name_differs,04,5418,,Stamp_IconSrcGfxTbl,content differs: 17 of 85 bytes
-name_differs,04,546d,,Stamp_IconSrcMaskTbl,content differs: 38 of 85 bytes
-lost_name,04,54e0,,JP Stamp_BuildGraphicsLayer_Tbl54E0,byte deleted in this build
-name_differs,04,54c0,,Stamp_DrawPaletteCursor_PtrTbl54C0,content differs: 87 of 96 bytes
-name_differs,04,5520,,Stamp_DrawPaletteCursor_Tbl5520,content differs: 12 of 17 bytes
+name_differs,04,5463,,Stamp_IconSrcMaskTbl,placed by 1 paired reference(s) to it (the operand of the same instruction here)
+name_differs,04,54ae,,Stamp_BuildGraphicsLayer_Tbl54AE,placed by 2 paired reference(s) to it (the operand of the same instruction here)
+name_differs,04,54cc,,Stamp_DrawPaletteCursor_PtrTbl54CC,placed by 1 paired reference(s) to it (the operand of the same instruction here)
+name_differs,04,5528,,Stamp_DrawPaletteCursor_Tbl5528,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,04,5531,,Main_Entry_Tbl5531,content differs: 10 of 17 bytes
-name_differs,04,5542,,Stamp_PaletteInput_Tbl5542,content differs: 19 of 118 bytes
+name_differs,04,5546,,Stamp_PaletteInput_Tbl5546,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,04,55b8,,Stamp_PaletteInput_Tbl55B8,content differs: 16 of 17 bytes
-name_differs,04,55c3,,Stamp_PageStrideJmpTbl,content differs: 34 of 34 bytes
+name_differs,04,55c7,,Stamp_PageStrideJmpTbl,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,04,5633,,Stamp_PaletteCursorFnTbl,content differs: 8 of 17 bytes
-lost_name,04,568c,,JP Stamp_MirrorBuffer_Gfx568C,byte deleted in this build
-name_differs,04,5647,,Stamp_Commit_Tbl5647,content differs: 19 of 92 bytes
+name_differs,04,563c,,Stamp_MirrorBuffer_Gfx563C,placed by 3 paired reference(s) to it (the operand of the same instruction here)
+name_differs,04,564b,,Stamp_Commit_Tbl564B,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,04,56a7,,Mode11_StateTable,content differs: 16 of 18 bytes
 name_differs,04,5917,,Mode11_State03_Palette,routine differs: 1 of 87 JP instructions not paired as same code
 name_differs,04,5b4b,,Stamp_PaletteInput,routine differs: 6 of 86 JP instructions not paired as same code
@@ -300,7 +403,7 @@ lost_name,05,7f86,,JP Photo_FarGetAddress_Tbl7F86,byte deleted in this build
 name_differs,06,44dd,,Mode16_StateTable,content differs: 9 of 20 bytes
 name_differs,06,44f1,,Mode16_State00_Init,routine differs: 1 of 51 JP instructions not paired as same code
 name_differs,06,4571,,Mode16_State01_Redraw,routine differs: 1 of 57 JP instructions not paired as same code
-lost_name,06,4603,,JP Mode16_RedrawStateTbl,lands inside an instruction
+name_differs,06,45fd,,Mode16_RedrawStateTbl,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,06,4601,,Mode16_State02_MainMenu,routine differs: 1 of 40 JP instructions not paired as same code
 name_differs,06,46ce,,Mode16_TrickLensRowPosTbl,content differs: 3 of 6 bytes
 name_differs,06,46d4,,Mode16_TrickLensIconTbl,content differs: 15 of 18 bytes
@@ -360,7 +463,7 @@ name_differs,07,7277,,Mode00_State01_Item0_Shoot,routine differs: 1 of 64 JP ins
 name_differs,07,7301,,Mode00_State02_Item1_View,routine differs: 1 of 54 JP instructions not paired as same code
 name_differs,07,7372,,Mode00_State03_Item2_Arcade,routine differs: 2 of 68 JP instructions not paired as same code
 name_differs,07,794e,,MainMenu_DrawUpperItem0,routine differs: 17 of 32 JP instructions not paired as same code
-lost_name,07,7985,,JP MainMenu_UpperItem0_AnimTbl,byte deleted in this build
+name_differs,07,7972,,MainMenu_UpperItem0_AnimTbl,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,07,7984,,MainMenu_DrawUpperItem1,routine differs: 17 of 32 JP instructions not paired as same code
 name_differs,07,79a8,,MainMenu_UpperItem1_AnimTbl,content differs: 5 of 18 bytes
 name_differs,07,7a06,,MainMenu_DrawUpperItem2_Gfx7A06,content differs: 3 of 18 bytes
@@ -390,19 +493,21 @@ name_differs,09,49d5,,Mode08_State03_CardInit,routine differs: 1 of 63 JP instru
 name_differs,09,4afd,,Mode08_State06_EditorInit,routine differs: 1 of 57 JP instructions not paired as same code
 name_differs,09,4cf2,,Mode08_State12_CreditsEntry,routine differs: 1 of 57 JP instructions not paired as same code
 name_differs,09,4de2,,Mode08_State13_CreditsPageA,routine differs: 22 of 80 JP instructions not paired as same code
-name_differs,09,4fbe,,Mode08_State14_CreditsPageB,routine differs: 25 of 85 JP instructions not paired as same code
+name_differs,09,4e9f,,Mode08_State14_CreditsPageB,placed by the word table Mode08_StateTable (entry 20)
 lost_name,09,4f6a,,JP Credits_DrawJitterSprites,routine start not paired
 lost_name,09,4f85,,JP Credits_JitterPosTbl,lands inside an instruction
 lost_name,09,4f9d,,JP Credits_DrawAnimSprite,routine start not paired
 lost_name,09,4fc9,,JP Credits_AnimSpriteTbl,lands inside an instruction
-name_differs,09,50c8,,Mode08_State15_CreditsScroll,routine differs: 1 of 91 JP instructions not paired as same code
-name_differs,09,51c3,,Mode08_State16_CreditsWaitA,routine differs: 1 of 8 JP instructions not paired as same code
+name_differs,09,4fbe,,Mode08_State15_CreditsScroll,placed by the word table Mode08_StateTable (entry 21)
+name_differs,09,50c8,,Mode08_State16_CreditsWaitA,placed by the word table Mode08_StateTable (entry 22)
+name_differs,09,51c3,,Mode08_State17_CreditsDancingMan,placed by the word table Mode08_StateTable (entry 23)
 name_differs,09,5238,,Credits_NishimuraDanceFrameTbl,content differs: 1 of 16 bytes
 name_differs,09,5270,,Credits_NishimuraDanceMapTbl,content differs: 10 of 15 bytes
+name_differs,09,51d3,,Mode08_State18_Leave,placed by the word table Mode08_StateTable (entry 24)
 name_differs,09,54c6,,Kb_GlyphListA,content differs: 24 of 25 bytes
-name_differs,09,54e8,,Kb_GlyphListB,content differs: 21 of 25 bytes
+name_differs,09,54de,,Kb_GlyphListB,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 lost_name,09,540e,,JP Kb_LoadGlyphSetC,routine start not paired
-name_differs,09,54f6,,Kb_GlyphListC,moved: found by its own bytes (13) elsewhere in the bank
+name_differs,09,54f6,,Kb_GlyphListC,placed by the word table Kb_Page0_Press_PtrTbl5C0E (entry 2)
 lost_name,09,55ae,,JP OwnerCard_DrawBloodType,routine start not paired
 name_differs,09,5764,,Kb_Page0_Draw_Tbl5764,content differs: 6 of 160 bytes
 name_differs,09,5906,,Kb_DrawCursor_Tbl5906,content differs: 6 of 12 bytes
@@ -439,7 +544,7 @@ name_differs,09,7083,,Run_FlagSpriteTbl,content differs: 3 of 8 bytes
 name_differs,09,708b,,Run_DrawCrown,routine differs: 1 of 6 JP instructions not paired as same code
 name_differs,09,70cc,,Run_DrawConfettiSprite_AnimTbl70CC,content differs: 16 of 36 bytes
 lost_name,09,706d,,JP Run_DrawPickCharacterSprite,routine start not paired
-lost_name,09,707c,,JP Run_DrawPickCharacterSprite_Tbl707C,byte deleted in this build
+name_differs,09,7111,,Run_DrawPickCharacterSprite_Tbl7111,placed by 1 paired reference(s) to it (the operand of the same instruction here)
 name_differs,09,71ff,,Run_LoadCharacterGraphicsA,routine differs: 3 of 39 JP instructions not paired as same code
 name_differs,09,725a,,Run_LoadCharacterGraphicsB,routine differs: 1 of 9 JP instructions not paired as same code
 name_differs,09,7271,,Run_LoadCharacterGraphicsC,routine differs: 1 of 9 JP instructions not paired as same code
@@ -664,6 +769,7 @@ name_differs,1f,42f2,,Sfx3_InitTbl,content differs: 10 of 20 bytes
 name_differs,1f,4306,,Sfx3_StepTbl,content differs: 11 of 20 bytes
 name_differs,1f,431a,,Sfx4_InitTbl,content differs: 19 of 36 bytes
 name_differs,1f,433e,,Sfx4_StepTbl,content differs: 19 of 36 bytes
+name_differs,1f,487e,,Sfx1_Init_12_1D_PanelOpen,placed by the word table Sfx1_InitTbl (entry 28)
 name_differs,1f,4fcf,,Sfx3_Data_4FCF,content differs: 5 of 9 bytes
 name_differs,1f,4fd8,,Sfx3_Step_09_DeleteDialogSecond,routine differs: 2 of 14 JP instructions not paired as same code
 name_differs,1f,4ff7,,Sfx3_Data_4FF7,content differs: 6 of 11 bytes
@@ -1253,17 +1359,12 @@ default_data,00,005b,0060,Vec_Serial+$3,5 bytes
 default_data,00,0104,0150,Vec_Joypad+$A4,76 bytes
 default_data,01,5aea,5aee,OamList_B01_4000_E7+$5,4 bytes
 default_data,01,6ea0,6ea4,OamList_B01_5D2B_A7+$2,4 bytes
-default_data,02,4db7,4dd6,AlbumB_CheckGate+$B6,31 bytes
+default_data,02,4dbf,4dd6,AlbumB_CheckGate_Tbl4DB7+$8,23 bytes
 default_data,02,5987,599b,OamList_B02_52BD_4E+$2,20 bytes
-default_data,02,6125,61fd,OamList_B02_52BD_99+$9,216 bytes
-default_data,04,54a9,54b9,Stamp_IconSrcMaskTbl+$3C,16 bytes
+default_data,02,6125,61fd,OamList_B02_52BD_98+$2,216 bytes
 default_data,04,7d00,7d74,Album_LoadNumeralTileB+$33,116 bytes
-default_data,06,45fe,4601,Mode16_State01_Redraw+$8D,3 bytes
 default_data,06,4ae7,4b06,Mode16_StepValue+$1E,31 bytes
 default_data,07,48cb,4963,Mode0E_State14_Abort+$3,152 bytes
-default_data,07,7972,7984,MainMenu_DrawUpperItem0+$24,18 bytes
-default_data,09,54df,54e8,Kb_LoadGlyphSetB+$A,9 bytes
-default_data,09,5501,5503,Kb_GlyphListC+$B,2 bytes
 default_data,09,568d,56ac,OwnerCard_LoadBirthNumberTiles+$21,31 bytes
 default_data,09,5d21,5d27,Kb_Page0_Press_GlyphSetB+$1D,6 bytes
 default_data,09,5d37,5d3d,Kb_DakutenMapTbl+$10,6 bytes

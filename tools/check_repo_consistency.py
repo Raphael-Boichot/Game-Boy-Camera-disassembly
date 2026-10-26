@@ -189,6 +189,22 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
                 subprocess.run(['make'], cwd=d, env=env, capture_output=True)
                 g = os.path.join(d, 'game.gb'); md = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else 'no ROM built'
                 (ok if md == '42d2f65e2549be9d1d126a6828b5d1c1' else bad)('port', 'international round trip %s: md5 %s' % (tag, md))
+            # L5: roms/us_eu/src/ is what tools/make_source.py --tree us_eu writes today, and it builds the ROM byte-exact
+            fr = os.path.join(tmp, 'src_us'); rp = os.path.join(tmp, 'rom_operands_us.csv')
+            ms = subprocess.run([sys.executable, 'tools/make_source.py', '--tree', 'us_eu', '--rom', A.rom_us, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fr, '--report', rp, '--check'], capture_output=True, text=True)
+            if ms.returncode: bad('port', 'make_source.py --tree us_eu failed: %s' % (ms.stderr or ms.stdout)[-300:])
+            else:
+                def walk_(r): return sorted(os.path.relpath(os.path.join(dp, f), r) for dp, _, fs in os.walk(r) for f in fs)
+                srcu = US + 'src'
+                a_, b_ = (walk_(fr), walk_(srcu)) if os.path.isdir(srcu) else ([], ['missing'])
+                dif = sorted(set(a_) ^ set(b_)) + [f for f in a_ if f in set(b_) and open(os.path.join(fr, f), 'rb').read() != open(os.path.join(srcu, f), 'rb').read()]
+                if dif: bad('port', 'roms/us_eu/src/ is not what make_source.py --tree us_eu writes (%d files differ: %s)' % (len(dif), dif[:4]))
+                elif open(rp, 'rb').read() != rd(US + 'disasm/rom_operands_us.csv').encode('utf-8'): bad('port', 'roms/us_eu/disasm/rom_operands_us.csv is not fresh')
+                else:
+                    mu = re.search(r'(\d+) banks, (\d+) INCBIN files \((\d+) bytes, (\d+) tile blocks as PNG\), (\d+) label notes, (\d+) far pointers as labels \((\d+) left', ms.stdout)
+                    ok('port', 'roms/us_eu/src/ fresh (%d files), builds md5 42d2f65e2549be9d1d126a6828b5d1c1: %s banks, %s INCBIN files (%s bytes, %s tile PNGs), %s label notes, %s far pointers as labels (%s left)' % ((len(a_),) + mu.groups()))
+                    quoted('port tree', r'International tree: (\d+) bank files and ([\d,]+) `INCBIN` files \(([\d,]+) bytes; ([\d,]+) tile blocks as PNG\), ([\d,]+) label notes, ([\d,]+) far pointers written as labels \((\d+) left as numbers\)',
+                           lambda mm: (tuple(int(g) for g in mu.groups()), tuple(num(g) for g in mm.groups())), docs=('README.md',), need=('README.md',))
         shutil.rmtree(tmp, ignore_errors=True)
 else:
     bad('port', 'roms/us_eu/disasm/sym_names_us.csv missing')

@@ -37,6 +37,7 @@ C_BANK_CALLEES = ('Glyph_LoadFromCharCode',)
 DOC_TABLES = []      # filled by apply() from the label notes
 LISTS = (('Parlor_PageTbl', 3, 7, (0,), 0xFF, 'Parlor_LoadPage (04:73EF): records {src lo, hi, bank, dst lo, hi, len lo, hi} ended by $FF, then {lo, hi, bank} of the page map kept in wMenuMapPtr for Map_SpiralWipeIn'),)
 STRUCT_READERS = (((0x00, 0x1EAA), 'Blit_SpriteToBg', 8, (2, 5), 'source A / source B {lo, hi, bank} of a Blit_SpriteToBg descriptor (8 bytes, 5 when width bit 7 is set), copied by 00:1EAA'),)    # HL = source, C = its bank    # A = bank, BC = data pointer (a VRAM-queue stream)
+READER_SITES = {}     # (bank, JP pc) -> (bank, pc) of the STRUCT_READERS in another build (set by apply)
 COORD_CALLEES = ('Oam_AddMeta', 'Run_DrawMeta', 'HotSpotEd_DrawArrows')   # take a sprite position in BC (tools/sym_fix.py)
 
 
@@ -318,6 +319,7 @@ def record_pointers(banks, labels, addr, inbank, rom, rdr, dr, W, resolve, mappe
                     found.setdefault((bb, lab), {}).setdefault(n, (e, far, v, tb, '%02X:%04X' % (b, slo), r[3]))
     # records copied whole by a known reader (STRUCT_READERS): the runs of bytes it read, cut into records, far-pointer fields at fixed offsets
     for (rb_, rpc), rname, size, fields, why in STRUCT_READERS:
+        rb_, rpc = READER_SITES.get((rb_, rpc), (rb_, rpc))
         xs = np.nonzero(rd == tag(rb_, rpc))[0]
         runs = []
         for x in xs:
@@ -408,7 +410,11 @@ def record_pointers(banks, labels, addr, inbank, rom, rdr, dr, W, resolve, mappe
     return st
 
 
-def apply(out, sym, rom, cov=None, report=None):
+def apply(out, sym, rom, cov=None, report=None, names=None, manual_csv=None, reader_sites=None):
+    """names: the name csv files in layer order (default: disasm/sym_names_jp.csv beside the sym); manual_csv: the hand decisions
+    (default: disasm/rom_operands_manual_jp.csv beside the sym); reader_sites: {(bank, JP pc): (bank, pc)} for the STRUCT_READERS of another
+    build. Another build passes its own (tools/make_source.py --tree)."""
+    global READER_SITES; READER_SITES = dict(reader_sites or {})
     banks = parse(out)
     labels = {}; defined = {}
     for b, (f, L, items) in banks.items():
@@ -528,7 +534,11 @@ def apply(out, sym, rom, cov=None, report=None):
         mw = re.match(r'([0-9a-fA-F]{2}):([0-9a-fA-F]{4}) \.data:[0-9a-fA-F]+:([0-9a-fA-F]+)', l)
         if mw: width[(int(mw.group(1), 16), int(mw.group(2), 16))] = int(mw.group(3), 16)
     DOC_TABLES.clear()
-    for r_ in csv.DictReader(open(os.path.join(disasm, 'sym_names_jp.csv'), encoding='utf-8')):
+    _rows = []
+    for _fn in (names or [os.path.join(disasm, 'sym_names_jp.csv')]):
+        if os.path.exists(_fn): _rows += list(csv.DictReader(open(_fn, encoding='utf-8')))
+    for r_ in _rows:
+        if r_['name'] in ('-', ''): continue
         mb = re.search(r'\{([^}]*)\}', r_['note'])
         if not mb or r_['name'].startswith(('Gfx_', 'Map_', 'Src_')): continue
         fl = [x.strip() for x in re.split(r'[;,]', mb.group(1))]
@@ -536,7 +546,7 @@ def apply(out, sym, rom, cov=None, report=None):
         w_ = width.get((int(r_['bank'], 16), int(r_['addr'], 16)))
         if k_ is not None and w_ and w_ == len(fl) and w_ > 3: DOC_TABLES.append((r_['name'], w_, k_, '{%s}' % mb.group(1)))
     manual = {}
-    mpath = os.path.join(os.path.dirname(os.path.abspath(sym)), 'disasm', 'rom_operands_manual_jp.csv')
+    mpath = manual_csv or os.path.join(os.path.dirname(os.path.abspath(sym)), 'disasm', 'rom_operands_manual_jp.csv')
     if os.path.exists(mpath):
         for r_ in csv.DictReader(open(mpath, encoding='utf-8')): manual[(r_['site'], r_['value'])] = r_
     rows = []; edits = {}       # (bank, line) -> new text

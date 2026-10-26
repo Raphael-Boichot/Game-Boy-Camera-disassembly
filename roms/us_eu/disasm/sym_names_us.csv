@@ -265,7 +265,7 @@ bank,addr,name,conf,note,source
 00,33ea,Mode1D_LayoutScriptPtrs,I,one word per layout type,port JP 00:32E8; content differs: 6 of 10 bytes
 00,33f4,Mode1D_State04_SendBand,C,sends the DATA packet of the band,port JP 00:32F2
 00,343b,Mode1D_State05_SendPrint,C,sends the PRINT command with margin and palette,port JP 00:3339
-00,348a,Mode1D_State06_LoadWaitScreen,I,waits for the printer then loads the printing screen,port JP 00:3388; routine differs: 1 of 32 JP instructions not paired as same code
+00,348a,Mode1D_State06_LoadWaitScreen,C,waits for the printer then loads the printing screen,port JP 00:3388; placed by the word table Mode1D_StateTable (entry 6)
 00,34eb,Mode1D_State07_WaitPrinted,C,polls the status until the page is done,port JP 00:33DC
 00,351e,Mode1D_Abort,C,maps the printer status to the error message,port JP 00:340F
 00,355b,Mode1D_UserCancel,C,B pressed,port JP 00:344C
@@ -437,6 +437,10 @@ bank,addr,name,conf,note,source
 01,516b,OamList_B01_4000_95,C,OAM list 95 of the table 4000,port JP 01:516B
 01,5188,OamList_B01_4000_96,C,OAM list 96 of the table 4000,port JP 01:5188
 01,51a5,OamList_B01_4000_97,I,OAM list 97 of the table 4000,port JP 01:51A5; content differs: 17 of 57 bytes
+01,51de,OamList_B01_4000_98,I,OAM list 98 of the table 4000,port JP 01:51DE; placed by the word table OamPtrTbl_B01_4000 (entry 152)
+01,521b,OamList_B01_4000_99,I,OAM list 99 of the table 4000,port JP 01:5223; placed by the word table OamPtrTbl_B01_4000 (entry 153)
+01,5254,OamList_B01_4000_9A,I,OAM list 9A of the table 4000,port JP 01:5264; placed by the word table OamPtrTbl_B01_4000 (entry 154)
+01,5291,OamList_B01_4000_9B,I,OAM list 9B of the table 4000,port JP 01:52A9; placed by the word table OamPtrTbl_B01_4000 (entry 155)
 01,52ca,OamList_B01_4000_9C,I,OAM list 9C of the table 4000,port JP 01:52EA; content differs: 17 of 61 bytes
 01,5307,OamList_B01_4000_9D,C,OAM list 9D of the table 4000,port JP 01:5327
 01,5320,OamList_B01_4000_9E,C,OAM list 9E of the table 4000,port JP 01:5340
@@ -852,6 +856,7 @@ bank,addr,name,conf,note,source
 02,4c37,GameFace_Store_Far,C,stores the $E00-byte Game Face image at B1FC and sets the flag B0D1,port JP 02:4C37
 02,4c80,Photo_LoadImage_Far,I,A = photo number: copies its image to $C000; numbers >= $1E are built-in images from bank $36 / table 02:5218,port JP 02:4C80; routine differs: 3 of 64 JP instructions not paired as same code
 02,4d01,AlbumB_CheckGate,I,A = Album B photo id: tests the counter / score thresholds in a table; Z/NZ and the unlock bit mask,port JP 02:4D05; routine differs: 18 of 62 JP instructions not paired as same code
+02,4db7,AlbumB_CheckGate_Tbl4DB7,I,"auto: 8 bytes, bytes; referenced by AlbumB_CheckGate. L3 pass 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)",port JP 02:4D80; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 02,4dd7,Photo_LoadHotspots_Far,C,hot-spot block of a photo (30 bytes) -> $D643,port JP 02:4D88
 02,4e26,Photo_LoadHotspotsTranslated_Far,C,same,port JP 02:4DD7
 02,4e80,Photo_LoadBorder_Far,C,border number of a photo -> $D7C1 ($12 for built-in images),port JP 02:4E31
@@ -929,11 +934,18 @@ bank,addr,name,conf,note,source
 02,57ab,OamList_B02_52BD_30,I,OAM list 30 of the table 5272,port JP 02:5760; content differs: 1 of 5 bytes
 02,57b0,OamList_B02_52BD_31,I,OAM list 31 of the table 5272,port JP 02:5765; content differs: 1 of 5 bytes
 02,57b5,OamList_B02_52BD_32,I,OAM list 32 of the table 5272,port JP 02:576A; content differs: 2 of 5 bytes
-02,57c5,OamList_B02_52BD_3A,I,OAM list 3A of the table 5272,port JP 02:57B2; content differs: 12 of 13 bytes
-02,57d2,OamList_B02_52BD_3B,I,OAM list 3B of the table 5272,port JP 02:57BF; content differs: 8 of 9 bytes
-02,57db,OamList_B02_52BD_3C,I,OAM list 3C of the table 5272,port JP 02:57C8; content differs: 11 of 13 bytes
-02,57e8,OamList_B02_52BD_3D,I,OAM list 3D of the table 5272,port JP 02:57D5; content differs: 20 of 21 bytes
-02,57fd,OamList_B02_52BD_3E,I,OAM list 3E of the table 5272,port JP 02:57EA; content differs: 7 of 9 bytes
+02,57ba,OamList_B02_52BD_33,I,OAM list 33 of the table 5272,port JP 02:576F; placed by the word table OamPtrTbl_B02_5272 (entry 51)
+02,57c7,OamList_B02_52BD_34,I,OAM list 34 of the table 5272,port JP 02:5778; placed by the word table OamPtrTbl_B02_5272 (entry 52)
+02,57d4,OamList_B02_52BD_35,I,OAM list 35 of the table 5272,port JP 02:5781; placed by the word table OamPtrTbl_B02_5272 (entry 53)
+02,57d9,OamList_B02_52BD_36,I,OAM list 36 of the table 5272,port JP 02:578A; placed by the word table OamPtrTbl_B02_5272 (entry 54)
+02,57de,OamList_B02_52BD_37,I,OAM list 37 of the table 5272,port JP 02:5793; placed by the word table OamPtrTbl_B02_5272 (entry 55)
+02,57e3,OamList_B02_52BD_38,I,OAM list 38 of the table 5272,port JP 02:579C; placed by the word table OamPtrTbl_B02_5272 (entry 56)
+02,57e8,OamList_B02_52BD_39,I,OAM list 39 of the table 5272,port JP 02:57A5; placed by the word table OamPtrTbl_B02_5272 (entry 57)
+02,57ed,OamList_B02_52BD_3A,I,OAM list 3A of the table 5272,port JP 02:57B2; placed by the word table OamPtrTbl_B02_5272 (entry 58)
+02,57f2,OamList_B02_52BD_3B,I,OAM list 3B of the table 5272,port JP 02:57BF; placed by the word table OamPtrTbl_B02_5272 (entry 59)
+02,57f7,OamList_B02_52BD_3C,I,OAM list 3C of the table 5272,port JP 02:57C8; placed by the word table OamPtrTbl_B02_5272 (entry 60)
+02,57fc,OamList_B02_52BD_3D,I,OAM list 3D of the table 5272,port JP 02:57D5; placed by the word table OamPtrTbl_B02_5272 (entry 61)
+02,5801,OamList_B02_52BD_3E,I,OAM list 3E of the table 5272,port JP 02:57EA; placed by the word table OamPtrTbl_B02_5272 (entry 62)
 02,5806,OamList_B02_52BD_3F,I,OAM list 3F of the table 5272,port JP 02:57F3; content differs: 3 of 5 bytes
 02,580b,OamList_B02_52BD_40,I,OAM list 40 of the table 5272,port JP 02:57F8; content differs: 3 of 5 bytes
 02,5810,OamList_B02_52BD_41,I,OAM list 41 of the table 5272,port JP 02:57FD; content differs: 3 of 5 bytes
@@ -1023,20 +1035,23 @@ bank,addr,name,conf,note,source
 02,60b8,OamList_B02_52BD_95,C,OAM list 95 of the table 5272,port JP 02:6091
 02,60d1,OamList_B02_52BD_96,C,OAM list 96 of the table 5272,port JP 02:60AA
 02,60ea,OamList_B02_52BD_97,I,OAM list 97 of the table 5272,port JP 02:60C3; content differs: 18 of 25 bytes
-02,6103,OamList_B02_52BD_98,I,OAM list 98 of the table 5272,port JP 02:60DC; content differs: 22 of 25 bytes
-02,611c,OamList_B02_52BD_99,I,OAM list 99 of the table 5272,port JP 02:60F5; content differs: 23 of 25 bytes
-02,620d,OamList_B02_52BD_9A,I,OAM list 9A of the table 5272,port JP 02:610E; content differs: 25 of 29 bytes
-02,622a,OamList_B02_52BD_9B,I,OAM list 9B of the table 5272,port JP 02:612B; content differs: 27 of 29 bytes
-02,6247,OamList_B02_52BD_9C,I,OAM list 9C of the table 5272,port JP 02:6148; content differs: 29 of 29 bytes
-02,6264,OamList_B02_52BD_9D,I,OAM list 9D of the table 5272,port JP 02:6165; content differs: 34 of 45 bytes
-02,6291,OamList_B02_52BD_9E,I,OAM list 9E of the table 5272,port JP 02:6192; content differs: 37 of 45 bytes
-02,62be,OamList_B02_52BD_9F,I,OAM list 9F of the table 5272,port JP 02:61BF; content differs: 31 of 45 bytes
+02,6123,OamList_B02_52BD_98,I,OAM list 98 of the table 5272,port JP 02:60DC; placed by the word table OamPtrTbl_B02_5272 (entry 152)
+02,615c,OamList_B02_52BD_99,I,OAM list 99 of the table 5272,port JP 02:60F5; placed by the word table OamPtrTbl_B02_5272 (entry 153)
+02,6195,OamList_B02_52BD_9A,I,OAM list 9A of the table 5272,port JP 02:610E; placed by the word table OamPtrTbl_B02_5272 (entry 154)
+02,61ce,OamList_B02_52BD_9B,I,OAM list 9B of the table 5272,port JP 02:612B; placed by the word table OamPtrTbl_B02_5272 (entry 155)
+02,6207,OamList_B02_52BD_9C,I,OAM list 9C of the table 5272,port JP 02:6148; placed by the word table OamPtrTbl_B02_5272 (entry 156)
+02,6240,OamList_B02_52BD_9D,I,OAM list 9D of the table 5272,port JP 02:6165; placed by the word table OamPtrTbl_B02_5272 (entry 157)
+02,6279,OamList_B02_52BD_9E,I,OAM list 9E of the table 5272,port JP 02:6192; placed by the word table OamPtrTbl_B02_5272 (entry 158)
+02,62b2,OamList_B02_52BD_9F,I,OAM list 9F of the table 5272,port JP 02:61BF; placed by the word table OamPtrTbl_B02_5272 (entry 159)
 02,62eb,OamList_B02_52BD_A0,C,OAM list A0 of the table 5272,port JP 02:61EC
 02,6318,OamList_B02_52BD_A1,C,OAM list A1 of the table 5272,port JP 02:6219
 02,6345,OamList_B02_52BD_A2,C,OAM list A2 of the table 5272,port JP 02:6246
 02,6372,OamList_B02_52BD_A3,I,OAM list A3 of the table 5272,port JP 02:6273; content differs: 5 of 9 bytes
-02,637e,OamList_B02_52BD_A7,I,OAM list A7 of the table 5272,port JP 02:62B3; content differs: 23 of 25 bytes
-02,6397,OamList_B02_52BD_A8,I,OAM list A8 of the table 5272,port JP 02:62CC; content differs: 7 of 29 bytes
+02,6377,OamList_B02_52BD_A4,C,OAM list A4 of the table 5272,port JP 02:627C; placed by the word table OamPtrTbl_B02_5272 (entry 164)
+02,637c,OamList_B02_52BD_A5,I,OAM list A5 of the table 5272,port JP 02:6281; placed by the word table OamPtrTbl_B02_5272 (entry 165)
+02,6381,OamList_B02_52BD_A6,I,OAM list A6 of the table 5272,port JP 02:629A; placed by the word table OamPtrTbl_B02_5272 (entry 166)
+02,6386,OamList_B02_52BD_A7,I,OAM list A7 of the table 5272,port JP 02:62B3; placed by the word table OamPtrTbl_B02_5272 (entry 167)
+02,638b,OamList_B02_52BD_A8,I,OAM list A8 of the table 5272,port JP 02:62CC; placed by the word table OamPtrTbl_B02_5272 (entry 168)
 02,63b4,OamList_B02_52BD_A9,I,OAM list A9 of the table 5272,port JP 02:62E9; content differs: 7 of 29 bytes
 02,63d1,OamList_B02_52BD_AA,C,OAM list AA of the table 5272,port JP 02:6306
 02,644e,OamList_B02_52BD_AB,C,OAM list AB of the table 5272,port JP 02:6383
@@ -1072,7 +1087,7 @@ bank,addr,name,conf,note,source
 02,6eb8,OamList_B02_52BD_C9,C,OAM list C9 of the table 5272,port JP 02:6DED
 02,6f01,OamList_B02_52BD_CA,C,OAM list CA of the table 5272,port JP 02:6E36
 02,6f16,OamPtrTbl_B02_6F16,I,122 words: list number -> OAM record list (4-byte records Y X tile attr; ends with Y=$80); used by Oam_AddMeta_B02_6E4B (00:2464),port JP 02:6E4B; content differs: 208 of 244 bytes
-02,700a,OamList_B02_6F16_00,I,OAM list 00 of the table 6E4B,port JP 02:6F3F; content differs: 4 of 9 bytes
+02,7006,OamList_B02_6F16_00,C,OAM list 00 of the table 6E4B,port JP 02:6F3F; placed by the word table OamPtrTbl_B02_6E4B (entry 0)
 02,700f,OamList_B02_6F16_01,C,OAM list 01 of the table 6E4B,port JP 02:6F48
 02,7018,OamList_B02_6F16_02,C,OAM list 02 of the table 6E4B,port JP 02:6F51
 02,7029,OamList_B02_6F16_03,C,OAM list 03 of the table 6E4B,port JP 02:6F62
@@ -1085,110 +1100,113 @@ bank,addr,name,conf,note,source
 02,7080,OamList_B02_6F16_0A,C,OAM list 0A of the table 6E4B,port JP 02:6FB9
 02,7091,OamList_B02_6F16_0B,C,OAM list 0B of the table 6E4B,port JP 02:6FCA
 02,70a2,OamList_B02_6F16_0C,I,OAM list 0C of the table 6E4B,port JP 02:6FDB; content differs: 8 of 9 bytes
-02,70ba,OamList_B02_6F16_13,C,OAM list 13 of the table 6E4B,port JP 02:71A6
-02,70d7,OamList_B02_6F16_14,C,OAM list 14 of the table 6E4B,port JP 02:71C3
-02,70ec,OamList_B02_6F16_15,C,OAM list 15 of the table 6E4B,port JP 02:71D8
-02,70fd,OamList_B02_6F16_16,C,OAM list 16 of the table 6E4B,port JP 02:71E9
-02,711a,OamList_B02_6F16_17,C,OAM list 17 of the table 6E4B,port JP 02:7206
-02,713b,OamList_B02_6F16_18,C,OAM list 18 of the table 6E4B,port JP 02:7227
-02,715c,OamList_B02_6F16_19,C,OAM list 19 of the table 6E4B,port JP 02:7248
-02,716d,OamList_B02_6F16_1A,C,OAM list 1A of the table 6E4B,port JP 02:7259
-02,718a,OamList_B02_6F16_1B,C,OAM list 1B of the table 6E4B,port JP 02:7276
-02,7193,OamList_B02_6F16_1C,C,OAM list 1C of the table 6E4B,port JP 02:727F
-02,71a0,OamList_B02_6F16_1D,C,OAM list 1D of the table 6E4B,port JP 02:728C
-02,71a9,OamList_B02_6F16_1E,C,OAM list 1E of the table 6E4B,port JP 02:7295
-02,71b6,OamList_B02_6F16_1F,C,OAM list 1F of the table 6E4B,port JP 02:72A2
-02,71c3,OamList_B02_6F16_20,C,OAM list 20 of the table 6E4B,port JP 02:72AF
-02,71d0,OamList_B02_6F16_21,C,OAM list 21 of the table 6E4B,port JP 02:72BC
-02,71dd,OamList_B02_6F16_22,C,OAM list 22 of the table 6E4B,port JP 02:72C9
-02,71ea,OamList_B02_6F16_23,C,OAM list 23 of the table 6E4B,port JP 02:72D6
-02,720b,OamList_B02_6F16_24,C,OAM list 24 of the table 6E4B,port JP 02:72F7
-02,722c,OamList_B02_6F16_25,C,OAM list 25 of the table 6E4B,port JP 02:7318
-02,724d,OamList_B02_6F16_26,C,OAM list 26 of the table 6E4B,port JP 02:7339
-02,7262,OamList_B02_6F16_27,C,OAM list 27 of the table 6E4B,port JP 02:734E
-02,7277,OamList_B02_6F16_28,C,OAM list 28 of the table 6E4B,port JP 02:7363
-02,728c,OamList_B02_6F16_29,C,OAM list 29 of the table 6E4B,port JP 02:7378
-02,72a1,OamList_B02_6F16_2A,C,OAM list 2A of the table 6E4B,port JP 02:738D
-02,72b6,OamList_B02_6F16_2B,C,OAM list 2B of the table 6E4B,port JP 02:73A2
-02,72cb,OamList_B02_6F16_2C,C,OAM list 2C of the table 6E4B,port JP 02:73B7
-02,72d0,OamList_B02_6F16_2D,C,OAM list 2D of the table 6E4B,port JP 02:73BC
-02,72ed,OamList_B02_6F16_2E,C,OAM list 2E of the table 6E4B,port JP 02:73D9
-02,730a,OamList_B02_6F16_2F,C,OAM list 2F of the table 6E4B,port JP 02:73F6
-02,7327,OamList_B02_6F16_30,C,OAM list 30 of the table 6E4B,port JP 02:7413
-02,7330,OamList_B02_6F16_31,C,OAM list 31 of the table 6E4B,port JP 02:741C
-02,7339,OamList_B02_6F16_32,C,OAM list 32 of the table 6E4B,port JP 02:7425
-02,7342,OamList_B02_6F16_33,C,OAM list 33 of the table 6E4B,port JP 02:742E
-02,735b,OamList_B02_6F16_34,C,OAM list 34 of the table 6E4B,port JP 02:7447
-02,7370,OamList_B02_6F16_35,C,OAM list 35 of the table 6E4B,port JP 02:745C
-02,7395,OamList_B02_6F16_36,C,OAM list 36 of the table 6E4B,port JP 02:7481
-02,73ba,OamList_B02_6F16_37,C,OAM list 37 of the table 6E4B,port JP 02:74A6
-02,73df,OamList_B02_6F16_38,C,OAM list 38 of the table 6E4B,port JP 02:74CB
-02,7404,OamList_B02_6F16_39,C,OAM list 39 of the table 6E4B,port JP 02:74F0
-02,7429,OamList_B02_6F16_3A,C,OAM list 3A of the table 6E4B,port JP 02:7515
-02,744e,OamList_B02_6F16_3B,C,OAM list 3B of the table 6E4B,port JP 02:753A
-02,7473,OamList_B02_6F16_3C,C,OAM list 3C of the table 6E4B,port JP 02:755F
-02,7498,OamList_B02_6F16_3D,C,OAM list 3D of the table 6E4B,port JP 02:7584
-02,74ad,OamList_B02_6F16_3E,C,OAM list 3E of the table 6E4B,port JP 02:7599
-02,74c2,OamList_B02_6F16_3F,C,OAM list 3F of the table 6E4B,port JP 02:75AE
-02,74d7,OamList_B02_6F16_40,C,OAM list 40 of the table 6E4B,port JP 02:75C3
-02,74ec,OamList_B02_6F16_41,C,OAM list 41 of the table 6E4B,port JP 02:75D8
-02,7501,OamList_B02_6F16_42,C,OAM list 42 of the table 6E4B,port JP 02:75ED
-02,7516,OamList_B02_6F16_43,C,OAM list 43 of the table 6E4B,port JP 02:7602
-02,752b,OamList_B02_6F16_44,C,OAM list 44 of the table 6E4B,port JP 02:7617
-02,7540,OamList_B02_6F16_45,C,OAM list 45 of the table 6E4B,port JP 02:762C
-02,7551,OamList_B02_6F16_46,C,OAM list 46 of the table 6E4B,port JP 02:763D
-02,7562,OamList_B02_6F16_47,C,OAM list 47 of the table 6E4B,port JP 02:764E
-02,7573,OamList_B02_6F16_48,C,OAM list 48 of the table 6E4B,port JP 02:765F
-02,7588,OamList_B02_6F16_49,C,OAM list 49 of the table 6E4B,port JP 02:7674
-02,758d,OamList_B02_6F16_4A,C,OAM list 4A of the table 6E4B,port JP 02:7679
-02,7592,OamList_B02_6F16_4B,C,OAM list 4B of the table 6E4B,port JP 02:767E
-02,7597,OamList_B02_6F16_4C,C,OAM list 4C of the table 6E4B,port JP 02:7683
-02,759c,OamList_B02_6F16_4D,C,OAM list 4D of the table 6E4B,port JP 02:7688
-02,75a1,OamList_B02_6F16_4E,C,OAM list 4E of the table 6E4B,port JP 02:768D
-02,75a6,OamList_B02_6F16_4F,C,OAM list 4F of the table 6E4B,port JP 02:7692
-02,75ab,OamList_B02_6F16_50,C,OAM list 50 of the table 6E4B,port JP 02:7697
-02,75b0,OamList_B02_6F16_51,C,OAM list 51 of the table 6E4B,port JP 02:769C
-02,75b5,OamList_B02_6F16_52,C,OAM list 52 of the table 6E4B,port JP 02:76A1
-02,75ba,OamList_B02_6F16_53,C,OAM list 53 of the table 6E4B,port JP 02:76A6
-02,75e3,OamList_B02_6F16_54,C,OAM list 54 of the table 6E4B,port JP 02:76CF
-02,7614,OamList_B02_6F16_55,C,OAM list 55 of the table 6E4B,port JP 02:7700
-02,7641,OamList_B02_6F16_56,C,OAM list 56 of the table 6E4B,port JP 02:772D
-02,7666,OamList_B02_6F16_57,C,OAM list 57 of the table 6E4B,port JP 02:7752
-02,7677,OamList_B02_6F16_58,C,OAM list 58 of the table 6E4B,port JP 02:7763
-02,76d4,OamList_B02_6F16_59,C,OAM list 59 of the table 6E4B,port JP 02:77C0
-02,7731,OamList_B02_6F16_5A,C,OAM list 5A of the table 6E4B,port JP 02:781D
-02,7792,OamList_B02_6F16_5B,C,OAM list 5B of the table 6E4B,port JP 02:787E
-02,77f3,OamList_B02_6F16_5C,C,OAM list 5C of the table 6E4B,port JP 02:78DF
-02,7850,OamList_B02_6F16_5D,C,OAM list 5D of the table 6E4B,port JP 02:793C
-02,78ad,OamList_B02_6F16_5E,C,OAM list 5E of the table 6E4B,port JP 02:7999
-02,78b2,OamList_B02_6F16_5F,C,OAM list 5F of the table 6E4B,port JP 02:799E
-02,78b7,OamList_B02_6F16_60,C,OAM list 60 of the table 6E4B,port JP 02:79A3
-02,78bc,OamList_B02_6F16_61,C,OAM list 61 of the table 6E4B,port JP 02:79A8
-02,78c1,OamList_B02_6F16_62,C,OAM list 62 of the table 6E4B,port JP 02:79AD
-02,78d6,OamList_B02_6F16_63,C,OAM list 63 of the table 6E4B,port JP 02:79C2
-02,78eb,OamList_B02_6F16_64,C,OAM list 64 of the table 6E4B,port JP 02:79D7
-02,7900,OamList_B02_6F16_65,C,OAM list 65 of the table 6E4B,port JP 02:79EC
-02,7915,OamList_B02_6F16_66,C,OAM list 66 of the table 6E4B,port JP 02:7A01
-02,791a,OamList_B02_6F16_67,C,OAM list 67 of the table 6E4B,port JP 02:7A06
-02,791f,OamList_B02_6F16_68,C,OAM list 68 of the table 6E4B,port JP 02:7A0B
-02,7924,OamList_B02_6F16_69,C,OAM list 69 of the table 6E4B,port JP 02:7A10
-02,7929,OamList_B02_6F16_6A,C,OAM list 6A of the table 6E4B,port JP 02:7A15
-02,792e,OamList_B02_6F16_6B,C,OAM list 6B of the table 6E4B,port JP 02:7A1A
-02,7933,OamList_B02_6F16_6C,C,OAM list 6C of the table 6E4B,port JP 02:7A1F
-02,7938,OamList_B02_6F16_6D,C,OAM list 6D of the table 6E4B,port JP 02:7A24
-02,793d,OamList_B02_6F16_6E,C,OAM list 6E of the table 6E4B,port JP 02:7A29
-02,7942,OamList_B02_6F16_6F,C,OAM list 6F of the table 6E4B,port JP 02:7A2E
-02,7947,OamList_B02_6F16_70,C,OAM list 70 of the table 6E4B,port JP 02:7A33
-02,794c,OamList_B02_6F16_71,C,OAM list 71 of the table 6E4B,port JP 02:7A38
-02,795d,OamList_B02_6F16_72,C,OAM list 72 of the table 6E4B,port JP 02:7A49
-02,796a,OamList_B02_6F16_73,C,OAM list 73 of the table 6E4B,port JP 02:7A56
-02,7983,OamList_B02_6F16_74,C,OAM list 74 of the table 6E4B,port JP 02:7A6F
-02,798c,OamList_B02_6F16_75,C,OAM list 75 of the table 6E4B,port JP 02:7A78
-02,7995,OamList_B02_6F16_76,C,OAM list 76 of the table 6E4B,port JP 02:7A81
-02,79aa,OamList_B02_6F16_77,C,OAM list 77 of the table 6E4B,port JP 02:7A96
-02,79b7,OamList_B02_6F16_78,C,OAM list 78 of the table 6E4B,port JP 02:7AA3
-02,79c4,OamList_B02_6F16_79,C,OAM list 79 of the table 6E4B,port JP 02:7AB0
-02,79c9,Bank02_Padding_79C9,I,zero fill to the end of the bank,port JP 02:7AB5; content differs: 7 of 1355 bytes
+02,70ab,OamList_B02_6F16_0D,I,OAM list 0D of the table 6E4B,port JP 02:6FE4; placed by the word table OamPtrTbl_B02_6E4B (entry 13)
+02,70b0,OamList_B02_6F16_0E,I,OAM list 0E of the table 6E4B,port JP 02:7001; placed by the word table OamPtrTbl_B02_6E4B (entry 14)
+02,70b5,OamList_B02_6F16_0F,I,OAM list 0F of the table 6E4B,port JP 02:703A; placed by the word table OamPtrTbl_B02_6E4B (entry 15)
+02,70ba,OamList_B02_6F16_10,I,OAM list 10 of the table 6E4B,port JP 02:708F; placed by the word table OamPtrTbl_B02_6E4B (entry 16)
+02,70d7,OamList_B02_6F16_11,I,OAM list 11 of the table 6E4B,port JP 02:70EC; placed by the word table OamPtrTbl_B02_6E4B (entry 17)
+02,70ec,OamList_B02_6F16_12,I,OAM list 12 of the table 6E4B,port JP 02:7149; placed by the word table OamPtrTbl_B02_6E4B (entry 18)
+02,70fd,OamList_B02_6F16_13,I,OAM list 13 of the table 6E4B,port JP 02:71A6; placed by the word table OamPtrTbl_B02_6E4B (entry 19)
+02,711a,OamList_B02_6F16_14,I,OAM list 14 of the table 6E4B,port JP 02:71C3; placed by the word table OamPtrTbl_B02_6E4B (entry 20)
+02,713b,OamList_B02_6F16_15,I,OAM list 15 of the table 6E4B,port JP 02:71D8; placed by the word table OamPtrTbl_B02_6E4B (entry 21)
+02,715c,OamList_B02_6F16_16,I,OAM list 16 of the table 6E4B,port JP 02:71E9; placed by the word table OamPtrTbl_B02_6E4B (entry 22)
+02,716d,OamList_B02_6F16_17,I,OAM list 17 of the table 6E4B,port JP 02:7206; placed by the word table OamPtrTbl_B02_6E4B (entry 23)
+02,718a,OamList_B02_6F16_18,I,OAM list 18 of the table 6E4B,port JP 02:7227; placed by the word table OamPtrTbl_B02_6E4B (entry 24)
+02,7193,OamList_B02_6F16_19,I,OAM list 19 of the table 6E4B,port JP 02:7248; placed by the word table OamPtrTbl_B02_6E4B (entry 25)
+02,71a0,OamList_B02_6F16_1A,I,OAM list 1A of the table 6E4B,port JP 02:7259; placed by the word table OamPtrTbl_B02_6E4B (entry 26)
+02,71a9,OamList_B02_6F16_1B,I,OAM list 1B of the table 6E4B,port JP 02:7276; placed by the word table OamPtrTbl_B02_6E4B (entry 27)
+02,71b6,OamList_B02_6F16_1C,I,OAM list 1C of the table 6E4B,port JP 02:727F; placed by the word table OamPtrTbl_B02_6E4B (entry 28)
+02,71c3,OamList_B02_6F16_1D,I,OAM list 1D of the table 6E4B,port JP 02:728C; placed by the word table OamPtrTbl_B02_6E4B (entry 29)
+02,71d0,OamList_B02_6F16_1E,I,OAM list 1E of the table 6E4B,port JP 02:7295; placed by the word table OamPtrTbl_B02_6E4B (entry 30)
+02,71dd,OamList_B02_6F16_1F,I,OAM list 1F of the table 6E4B,port JP 02:72A2; placed by the word table OamPtrTbl_B02_6E4B (entry 31)
+02,71ea,OamList_B02_6F16_20,I,OAM list 20 of the table 6E4B,port JP 02:72AF; placed by the word table OamPtrTbl_B02_6E4B (entry 32)
+02,720b,OamList_B02_6F16_21,I,OAM list 21 of the table 6E4B,port JP 02:72BC; placed by the word table OamPtrTbl_B02_6E4B (entry 33)
+02,722c,OamList_B02_6F16_22,I,OAM list 22 of the table 6E4B,port JP 02:72C9; placed by the word table OamPtrTbl_B02_6E4B (entry 34)
+02,724d,OamList_B02_6F16_23,I,OAM list 23 of the table 6E4B,port JP 02:72D6; placed by the word table OamPtrTbl_B02_6E4B (entry 35)
+02,7262,OamList_B02_6F16_24,I,OAM list 24 of the table 6E4B,port JP 02:72F7; placed by the word table OamPtrTbl_B02_6E4B (entry 36)
+02,7277,OamList_B02_6F16_25,I,OAM list 25 of the table 6E4B,port JP 02:7318; placed by the word table OamPtrTbl_B02_6E4B (entry 37)
+02,728c,OamList_B02_6F16_26,I,OAM list 26 of the table 6E4B,port JP 02:7339; placed by the word table OamPtrTbl_B02_6E4B (entry 38)
+02,72a1,OamList_B02_6F16_27,I,OAM list 27 of the table 6E4B,port JP 02:734E; placed by the word table OamPtrTbl_B02_6E4B (entry 39)
+02,72b6,OamList_B02_6F16_28,I,OAM list 28 of the table 6E4B,port JP 02:7363; placed by the word table OamPtrTbl_B02_6E4B (entry 40)
+02,72cb,OamList_B02_6F16_29,I,OAM list 29 of the table 6E4B,port JP 02:7378; placed by the word table OamPtrTbl_B02_6E4B (entry 41)
+02,72d0,OamList_B02_6F16_2A,I,OAM list 2A of the table 6E4B,port JP 02:738D; placed by the word table OamPtrTbl_B02_6E4B (entry 42)
+02,72ed,OamList_B02_6F16_2B,I,OAM list 2B of the table 6E4B,port JP 02:73A2; placed by the word table OamPtrTbl_B02_6E4B (entry 43)
+02,730a,OamList_B02_6F16_2C,I,OAM list 2C of the table 6E4B,port JP 02:73B7; placed by the word table OamPtrTbl_B02_6E4B (entry 44)
+02,7327,OamList_B02_6F16_2D,I,OAM list 2D of the table 6E4B,port JP 02:73BC; placed by the word table OamPtrTbl_B02_6E4B (entry 45)
+02,7330,OamList_B02_6F16_2E,I,OAM list 2E of the table 6E4B,port JP 02:73D9; placed by the word table OamPtrTbl_B02_6E4B (entry 46)
+02,7339,OamList_B02_6F16_2F,I,OAM list 2F of the table 6E4B,port JP 02:73F6; placed by the word table OamPtrTbl_B02_6E4B (entry 47)
+02,7342,OamList_B02_6F16_30,I,OAM list 30 of the table 6E4B,port JP 02:7413; placed by the word table OamPtrTbl_B02_6E4B (entry 48)
+02,735b,OamList_B02_6F16_31,I,OAM list 31 of the table 6E4B,port JP 02:741C; placed by the word table OamPtrTbl_B02_6E4B (entry 49)
+02,7370,OamList_B02_6F16_32,I,OAM list 32 of the table 6E4B,port JP 02:7425; placed by the word table OamPtrTbl_B02_6E4B (entry 50)
+02,7395,OamList_B02_6F16_33,I,OAM list 33 of the table 6E4B,port JP 02:742E; placed by the word table OamPtrTbl_B02_6E4B (entry 51)
+02,73ba,OamList_B02_6F16_34,I,OAM list 34 of the table 6E4B,port JP 02:7447; placed by the word table OamPtrTbl_B02_6E4B (entry 52)
+02,73df,OamList_B02_6F16_35,I,OAM list 35 of the table 6E4B,port JP 02:745C; placed by the word table OamPtrTbl_B02_6E4B (entry 53)
+02,7404,OamList_B02_6F16_36,I,OAM list 36 of the table 6E4B,port JP 02:7481; placed by the word table OamPtrTbl_B02_6E4B (entry 54)
+02,7429,OamList_B02_6F16_37,I,OAM list 37 of the table 6E4B,port JP 02:74A6; placed by the word table OamPtrTbl_B02_6E4B (entry 55)
+02,744e,OamList_B02_6F16_38,I,OAM list 38 of the table 6E4B,port JP 02:74CB; placed by the word table OamPtrTbl_B02_6E4B (entry 56)
+02,7473,OamList_B02_6F16_39,I,OAM list 39 of the table 6E4B,port JP 02:74F0; placed by the word table OamPtrTbl_B02_6E4B (entry 57)
+02,7498,OamList_B02_6F16_3A,I,OAM list 3A of the table 6E4B,port JP 02:7515; placed by the word table OamPtrTbl_B02_6E4B (entry 58)
+02,74ad,OamList_B02_6F16_3B,I,OAM list 3B of the table 6E4B,port JP 02:753A; placed by the word table OamPtrTbl_B02_6E4B (entry 59)
+02,74c2,OamList_B02_6F16_3C,I,OAM list 3C of the table 6E4B,port JP 02:755F; placed by the word table OamPtrTbl_B02_6E4B (entry 60)
+02,74d7,OamList_B02_6F16_3D,I,OAM list 3D of the table 6E4B,port JP 02:7584; placed by the word table OamPtrTbl_B02_6E4B (entry 61)
+02,74ec,OamList_B02_6F16_3E,I,OAM list 3E of the table 6E4B,port JP 02:7599; placed by the word table OamPtrTbl_B02_6E4B (entry 62)
+02,7501,OamList_B02_6F16_3F,I,OAM list 3F of the table 6E4B,port JP 02:75AE; placed by the word table OamPtrTbl_B02_6E4B (entry 63)
+02,7516,OamList_B02_6F16_40,I,OAM list 40 of the table 6E4B,port JP 02:75C3; placed by the word table OamPtrTbl_B02_6E4B (entry 64)
+02,752b,OamList_B02_6F16_41,I,OAM list 41 of the table 6E4B,port JP 02:75D8; placed by the word table OamPtrTbl_B02_6E4B (entry 65)
+02,7540,OamList_B02_6F16_42,I,OAM list 42 of the table 6E4B,port JP 02:75ED; placed by the word table OamPtrTbl_B02_6E4B (entry 66)
+02,7551,OamList_B02_6F16_43,I,OAM list 43 of the table 6E4B,port JP 02:7602; placed by the word table OamPtrTbl_B02_6E4B (entry 67)
+02,7562,OamList_B02_6F16_44,I,OAM list 44 of the table 6E4B,port JP 02:7617; placed by the word table OamPtrTbl_B02_6E4B (entry 68)
+02,7573,OamList_B02_6F16_45,I,OAM list 45 of the table 6E4B,port JP 02:762C; placed by the word table OamPtrTbl_B02_6E4B (entry 69)
+02,7588,OamList_B02_6F16_46,I,OAM list 46 of the table 6E4B,port JP 02:763D; placed by the word table OamPtrTbl_B02_6E4B (entry 70)
+02,758d,OamList_B02_6F16_47,I,OAM list 47 of the table 6E4B,port JP 02:764E; placed by the word table OamPtrTbl_B02_6E4B (entry 71)
+02,7592,OamList_B02_6F16_48,I,OAM list 48 of the table 6E4B,port JP 02:765F; placed by the word table OamPtrTbl_B02_6E4B (entry 72)
+02,7597,OamList_B02_6F16_49,I,OAM list 49 of the table 6E4B,port JP 02:7674; placed by the word table OamPtrTbl_B02_6E4B (entry 73)
+02,759c,OamList_B02_6F16_4A,I,OAM list 4A of the table 6E4B,port JP 02:7679; placed by the word table OamPtrTbl_B02_6E4B (entry 74)
+02,75a1,OamList_B02_6F16_4B,I,OAM list 4B of the table 6E4B,port JP 02:767E; placed by the word table OamPtrTbl_B02_6E4B (entry 75)
+02,75a6,OamList_B02_6F16_4C,I,OAM list 4C of the table 6E4B,port JP 02:7683; placed by the word table OamPtrTbl_B02_6E4B (entry 76)
+02,75ab,OamList_B02_6F16_4D,I,OAM list 4D of the table 6E4B,port JP 02:7688; placed by the word table OamPtrTbl_B02_6E4B (entry 77)
+02,75b0,OamList_B02_6F16_4E,I,OAM list 4E of the table 6E4B,port JP 02:768D; placed by the word table OamPtrTbl_B02_6E4B (entry 78)
+02,75b5,OamList_B02_6F16_4F,I,OAM list 4F of the table 6E4B,port JP 02:7692; placed by the word table OamPtrTbl_B02_6E4B (entry 79)
+02,75ba,OamList_B02_6F16_50,I,OAM list 50 of the table 6E4B,port JP 02:7697; placed by the word table OamPtrTbl_B02_6E4B (entry 80)
+02,75e3,OamList_B02_6F16_51,I,OAM list 51 of the table 6E4B,port JP 02:769C; placed by the word table OamPtrTbl_B02_6E4B (entry 81)
+02,7614,OamList_B02_6F16_52,I,OAM list 52 of the table 6E4B,port JP 02:76A1; placed by the word table OamPtrTbl_B02_6E4B (entry 82)
+02,7641,OamList_B02_6F16_53,I,OAM list 53 of the table 6E4B,port JP 02:76A6; placed by the word table OamPtrTbl_B02_6E4B (entry 83)
+02,7666,OamList_B02_6F16_54,I,OAM list 54 of the table 6E4B,port JP 02:76CF; placed by the word table OamPtrTbl_B02_6E4B (entry 84)
+02,7677,OamList_B02_6F16_55,I,OAM list 55 of the table 6E4B,port JP 02:7700; placed by the word table OamPtrTbl_B02_6E4B (entry 85)
+02,76d4,OamList_B02_6F16_56,I,OAM list 56 of the table 6E4B,port JP 02:772D; placed by the word table OamPtrTbl_B02_6E4B (entry 86)
+02,7731,OamList_B02_6F16_57,I,OAM list 57 of the table 6E4B,port JP 02:7752; placed by the word table OamPtrTbl_B02_6E4B (entry 87)
+02,7792,OamList_B02_6F16_58,I,OAM list 58 of the table 6E4B,port JP 02:7763; placed by the word table OamPtrTbl_B02_6E4B (entry 88)
+02,77f3,OamList_B02_6F16_59,I,OAM list 59 of the table 6E4B,port JP 02:77C0; placed by the word table OamPtrTbl_B02_6E4B (entry 89)
+02,7850,OamList_B02_6F16_5A,I,OAM list 5A of the table 6E4B,port JP 02:781D; placed by the word table OamPtrTbl_B02_6E4B (entry 90)
+02,78ad,OamList_B02_6F16_5B,I,OAM list 5B of the table 6E4B,port JP 02:787E; placed by the word table OamPtrTbl_B02_6E4B (entry 91)
+02,78b2,OamList_B02_6F16_5C,I,OAM list 5C of the table 6E4B,port JP 02:78DF; placed by the word table OamPtrTbl_B02_6E4B (entry 92)
+02,78b7,OamList_B02_6F16_5D,I,OAM list 5D of the table 6E4B,port JP 02:793C; placed by the word table OamPtrTbl_B02_6E4B (entry 93)
+02,78bc,OamList_B02_6F16_5E,I,OAM list 5E of the table 6E4B,port JP 02:7999; placed by the word table OamPtrTbl_B02_6E4B (entry 94)
+02,78c1,OamList_B02_6F16_5F,I,OAM list 5F of the table 6E4B,port JP 02:799E; placed by the word table OamPtrTbl_B02_6E4B (entry 95)
+02,78d6,OamList_B02_6F16_60,I,OAM list 60 of the table 6E4B,port JP 02:79A3; placed by the word table OamPtrTbl_B02_6E4B (entry 96)
+02,78eb,OamList_B02_6F16_61,I,OAM list 61 of the table 6E4B,port JP 02:79A8; placed by the word table OamPtrTbl_B02_6E4B (entry 97)
+02,7900,OamList_B02_6F16_62,I,OAM list 62 of the table 6E4B,port JP 02:79AD; placed by the word table OamPtrTbl_B02_6E4B (entry 98)
+02,7915,OamList_B02_6F16_63,I,OAM list 63 of the table 6E4B,port JP 02:79C2; placed by the word table OamPtrTbl_B02_6E4B (entry 99)
+02,791a,OamList_B02_6F16_64,I,OAM list 64 of the table 6E4B,port JP 02:79D7; placed by the word table OamPtrTbl_B02_6E4B (entry 100)
+02,791f,OamList_B02_6F16_65,I,OAM list 65 of the table 6E4B,port JP 02:79EC; placed by the word table OamPtrTbl_B02_6E4B (entry 101)
+02,7924,OamList_B02_6F16_66,I,OAM list 66 of the table 6E4B,port JP 02:7A01; placed by the word table OamPtrTbl_B02_6E4B (entry 102)
+02,7929,OamList_B02_6F16_67,I,OAM list 67 of the table 6E4B,port JP 02:7A06; placed by the word table OamPtrTbl_B02_6E4B (entry 103)
+02,792e,OamList_B02_6F16_68,I,OAM list 68 of the table 6E4B,port JP 02:7A0B; placed by the word table OamPtrTbl_B02_6E4B (entry 104)
+02,7933,OamList_B02_6F16_69,I,OAM list 69 of the table 6E4B,port JP 02:7A10; placed by the word table OamPtrTbl_B02_6E4B (entry 105)
+02,7938,OamList_B02_6F16_6A,I,OAM list 6A of the table 6E4B,port JP 02:7A15; placed by the word table OamPtrTbl_B02_6E4B (entry 106)
+02,793d,OamList_B02_6F16_6B,I,OAM list 6B of the table 6E4B,port JP 02:7A1A; placed by the word table OamPtrTbl_B02_6E4B (entry 107)
+02,7942,OamList_B02_6F16_6C,I,OAM list 6C of the table 6E4B,port JP 02:7A1F; placed by the word table OamPtrTbl_B02_6E4B (entry 108)
+02,7947,OamList_B02_6F16_6D,I,OAM list 6D of the table 6E4B,port JP 02:7A24; placed by the word table OamPtrTbl_B02_6E4B (entry 109)
+02,794c,OamList_B02_6F16_6E,I,OAM list 6E of the table 6E4B,port JP 02:7A29; placed by the word table OamPtrTbl_B02_6E4B (entry 110)
+02,795d,OamList_B02_6F16_6F,I,OAM list 6F of the table 6E4B,port JP 02:7A2E; placed by the word table OamPtrTbl_B02_6E4B (entry 111)
+02,796a,OamList_B02_6F16_70,I,OAM list 70 of the table 6E4B,port JP 02:7A33; placed by the word table OamPtrTbl_B02_6E4B (entry 112)
+02,7983,OamList_B02_6F16_71,I,OAM list 71 of the table 6E4B,port JP 02:7A38; placed by the word table OamPtrTbl_B02_6E4B (entry 113)
+02,798c,OamList_B02_6F16_72,I,OAM list 72 of the table 6E4B,port JP 02:7A49; placed by the word table OamPtrTbl_B02_6E4B (entry 114)
+02,7995,OamList_B02_6F16_73,I,OAM list 73 of the table 6E4B,port JP 02:7A56; placed by the word table OamPtrTbl_B02_6E4B (entry 115)
+02,79aa,OamList_B02_6F16_74,I,OAM list 74 of the table 6E4B,port JP 02:7A6F; placed by the word table OamPtrTbl_B02_6E4B (entry 116)
+02,79b7,OamList_B02_6F16_75,I,OAM list 75 of the table 6E4B,port JP 02:7A78; placed by the word table OamPtrTbl_B02_6E4B (entry 117)
+02,79c4,OamList_B02_6F16_76,I,OAM list 76 of the table 6E4B,port JP 02:7A81; placed by the word table OamPtrTbl_B02_6E4B (entry 118)
+02,79c9,OamList_B02_6F16_77,I,OAM list 77 of the table 6E4B,port JP 02:7A96; placed by the word table OamPtrTbl_B02_6E4B (entry 119)
 03,4000,Mode12_AnimationEditor,C,slide-show / animation editor (47-entry list),port JP 03:4000
 03,4004,Mode12_StateTable,I,"35 states, rst $18 table of mode $12",port JP 03:4004; content differs: 32 of 70 bytes
 03,404a,Mode12_State00_Init,C,loads the editor graphics,port JP 03:404A
@@ -1317,7 +1335,7 @@ bank,addr,name,conf,note,source
 03,5fd0,Mode13_AnimationPlayer,C,plays the show,port JP 03:5FA0
 03,5fd4,Mode13_StateTable,I,"9 states, rst $18 table of mode $13",port JP 03:5FA4; content differs: 10 of 18 bytes
 03,5fe6,Mode13_State00_Init,I,loads the player graphics (bank 17),port JP 03:5FB6; routine differs: 9 of 54 JP instructions not paired as same code
-03,605b,Mode13_State01_MusicSelect,I,"Select cycles the music (0..31); the list is 03:61FD, its n-th entry = BGM n (I: the jofamo article calls the 4th entry, song $13, 'BGM 04'); only the international ROM requests song $13 outside this screen and the hot-spot picker (RUN title, BGB, README 16.27)",port JP 03:603F; placed by the state table 03:5FD4 (entry of the same index)
+03,605b,Mode13_State01_MusicSelect,C,"Select cycles the music (0..31); the list is 03:61FD, its n-th entry = BGM n (I: the jofamo article calls the 4th entry, song $13, 'BGM 04'); only the international ROM requests song $13 outside this screen and the hot-spot picker (RUN title, BGB, README 16.27)",port JP 03:603F; placed by the state table 03:5FD4 (entry of the same index)
 03,60bc,Player_ShowMusicNumber,C,two digit tiles of the music number. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator (coverage/results/merged_state/cov.npz),port JP 03:6089
 03,60d1,Player_CopyDigitTile,I,copies a digit glyph from bank 17 to VRAM. L3 pass 2026-10-26: not reached by the 206 BGB replays; executed in the organic runs of the core emulator (coverage/results/merged_state/cov.npz),port JP 03:609E; routine differs: 2 of 11 JP instructions not paired as same code
 03,60e3,Mode13_State02_Start,I,B returns to the show menu (mode 0B); A shows the start banner and fades out,port JP 03:60B4; routine differs: 23 of 41 JP instructions not paired as same code
@@ -1554,24 +1572,26 @@ bank,addr,name,conf,note,source
 04,5307,EraseAnim_DrawParticles,C,writes 16 OAM entries from del_x / del_y at $D4xx (04:530A),port JP 04:5307
 04,531a,EraseAnim_DrawOne,C,one OAM entry: y + 8,port JP 04:531A
 04,5337,Stamp_PageGfxTbl,I,"17 records x 6 B, one per stamp category ([$D63D] x 6): {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}. Stamp_LoadPageGfx (04:589E) steps the pointer by [$D63E] blocks and copies `blocks` consecutive blocks to VRAM $8A00 (categories 2 and 3 have code of their own: $190 + $190 B to $8A00 / $8510, $360 + $60 B). Decoded 2026-10-19; the sheets are the StampCat*_Gfx rows (README 2.6)",port JP 04:5337; content differs: 25 of 102 bytes
-04,5391,Stamp_CatIconSrcTbl1,I,17 x {lo; hi; bank} by category ([$D63D] x 3): $60 B of icon tiles copied to VRAM $8F00 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows,port JP 04:539D; moved: found by its own bytes (32) elsewhere in the bank
-04,53b2,Stamp_CatIconSrcTbl2,I,17 x {lo; hi; bank} by category: $60 B of icon tiles copied to VRAM $8F60 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows,port JP 04:53D0; content differs: 31 of 51 bytes
-04,53e5,Stamp_CatMapSrcTbl,I,17 x {lo; hi; bank} by category: the $120 B BG map (9 rows) copied to VRAM $9C00 by Stamp_LoadCategoryIcons; read again by Stamp_ReloadTilemapIfDifferent; the pointers are the Src_*_Tbl539D_* rows,port JP 04:5403; content differs: 21 of 51 bytes
+04,5391,Stamp_CatIconSrcTbl1,I,17 x {lo; hi; bank} by category ([$D63D] x 3): $60 B of icon tiles copied to VRAM $8F00 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows,port JP 04:539D; placed by 1 paired reference(s) to it (the operand of the same instruction here)
+04,53be,Stamp_CatIconSrcTbl2,I,17 x {lo; hi; bank} by category: $60 B of icon tiles copied to VRAM $8F60 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows,port JP 04:53D0; placed by 1 paired reference(s) to it (the operand of the same instruction here)
+04,53eb,Stamp_CatMapSrcTbl,I,17 x {lo; hi; bank} by category: the $120 B BG map (9 rows) copied to VRAM $9C00 by Stamp_LoadCategoryIcons; read again by Stamp_ReloadTilemapIfDifferent; the pointers are the Src_*_Tbl539D_* rows,port JP 04:5403; placed by 3 paired reference(s) to it (the operand of the same instruction here)
 04,5418,Stamp_IconSrcGfxTbl,I,17 records x 5 B by category ([$D63D] x 5): {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; Stamp_CopyStampTiles (04:5A73) steps the pointer by [$D63F] stamps and copies one stamp to wIconSrcGfx ($C3C0) in Stamp_PrepareBuffers. Pointers = the StampCat*_Gfx rows. Decoded 2026-10-19,port JP 04:5436; content differs: 17 of 85 bytes
-04,546d,Stamp_IconSrcMaskTbl,I,"17 records x 5 B by category: {mask pointer lo; hi; bank; bytes per stamp lo; hi}: the 1bpp mask of the stamp, copied to wIconSrcMask ($C5A0) in Stamp_PrepareBuffers. Not tile data: records 0-3 and 16 point to the StampCat*_Mask rows, records 4-15 have bank $00 / $FF (no mask: Stamp_CopyStampTiles stops at 04:5A97-5A9B and the caller keeps the constant fill). Decoded 2026-10-19",port JP 04:548B; content differs: 38 of 85 bytes
-04,54c0,Stamp_DrawPaletteCursor_PtrTbl54C0,I,"auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:5502; content differs: 87 of 96 bytes
-04,5520,Stamp_DrawPaletteCursor_Tbl5520,I,"auto: 17 bytes, bytes; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:5562; content differs: 12 of 17 bytes
+04,5463,Stamp_IconSrcMaskTbl,I,"17 records x 5 B by category: {mask pointer lo; hi; bank; bytes per stamp lo; hi}: the 1bpp mask of the stamp, copied to wIconSrcMask ($C5A0) in Stamp_PrepareBuffers. Not tile data: records 0-3 and 16 point to the StampCat*_Mask rows, records 4-15 have bank $00 / $FF (no mask: Stamp_CopyStampTiles stops at 04:5A97-5A9B and the caller keeps the constant fill). Decoded 2026-10-19",port JP 04:548B; placed by 1 paired reference(s) to it (the operand of the same instruction here)
+04,54ae,Stamp_BuildGraphicsLayer_Tbl54AE,I,"auto: 11 bytes, bytes; referenced by Stamp_BuildGraphicsLayer, Stamp_BuildMaskLayer. L3 pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:54E0; placed by 2 paired reference(s) to it (the operand of the same instruction here)
+04,54cc,Stamp_DrawPaletteCursor_PtrTbl54CC,I,"auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:5502; placed by 1 paired reference(s) to it (the operand of the same instruction here)
+04,5528,Stamp_DrawPaletteCursor_Tbl5528,I,"auto: 17 bytes, bytes; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:5562; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 04,5531,Main_Entry_Tbl5531,I,"auto: 17 bytes, bytes; referenced by Main_Entry. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 19 (tcrf_check/assets/l3_names/)",port JP 04:5573; content differs: 10 of 17 bytes
-04,5542,Stamp_PaletteInput_Tbl5542,I,"auto: 118 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 11 19 (tcrf_check/assets/l3_names/)",port JP 04:5584; content differs: 19 of 118 bytes
+04,5546,Stamp_PaletteInput_Tbl5546,I,"auto: 118 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 11 19 (tcrf_check/assets/l3_names/)",port JP 04:5584; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 04,55b8,Stamp_PaletteInput_Tbl55B8,I,"auto: 17 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:55FA; content differs: 16 of 17 bytes
-04,55c3,Stamp_PageStrideJmpTbl,I,17 code pointers (5634 / 562D / 563D) selected by category,port JP 04:560B; content differs: 34 of 34 bytes
+04,55c7,Stamp_PageStrideJmpTbl,I,17 code pointers (5634 / 562D / 563D) selected by category,port JP 04:560B; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 04,55e5,Stamp_PageTimes2,C,A = stamp_page * 2,port JP 04:562D
 04,55ec,Stamp_PageTimes3,C,A = stamp_page * 3,port JP 04:5634
 04,55f5,Stamp_PageTimes5,C,A = stamp_page * 5,port JP 04:563D
 04,5600,Stamp_PaletteCursorTbl,C,"17 {F0. L3 pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:5648
 04,5622,Stamp_PageCountTbl,C,"17 page counts per category. L3 pass 2026-10-26: not reached by the 206 BGB replays; read in the organic runs of the core emulator (coverage/results/merged_state/cov.npz, first read in mode 0F 11)",port JP 04:566A
 04,5633,Stamp_PaletteCursorFnTbl,I,"17 code pointers to 56BF / 56E1 / 56E9 / 56F1 / 56C7 / 56CC / 56D4 / 56D9 (OAM metasprite lists). L3 pass 2026-10-26: not reached by the 206 BGB replays; read in the organic runs of the core emulator (coverage/results/merged_state/cov.npz, first read in mode 0F 11)",port JP 04:567B; content differs: 8 of 17 bytes
-04,5647,Stamp_Commit_Tbl5647,I,"auto: 92 bytes, bytes; referenced by Stamp_Commit. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:569D; content differs: 19 of 92 bytes
+04,563c,Stamp_MirrorBuffer_Gfx563C,I,"auto: 17 bytes, tile data; referenced by Stamp_MirrorBuffer, Stamp_MirrorGfxBuffer, Stamp_MirrorMaskBuffer. L3 pass 2026-10-26: no organic run reached it (BGB replays, BGB scenarios, core organic runs); C from the code: table read by Stamp_MirrorBuffer / Stamp_MirrorGfxBuffer / Stamp_MirrorMaskBuffer (mirrored stamps)",port JP 04:568C; placed by 3 paired reference(s) to it (the operand of the same instruction here)
+04,564b,Stamp_Commit_Tbl564B,I,"auto: 92 bytes, bytes; referenced by Stamp_Commit. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)",port JP 04:569D; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 04,56a3,Mode11_Stamp,C,mode 11: STAMP tool,port JP 04:56F9
 04,56a7,Mode11_StateTable,I,"9 states, rst $18 table of mode $11",port JP 04:56FD; content differs: 16 of 18 bytes
 04,56b9,Mode11_State00_Init,C,,port JP 04:570F
@@ -2216,6 +2236,7 @@ bank,addr,name,conf,note,source
 06,44dd,Mode16_StateTable,I,10 states,port JP 06:44DD; content differs: 9 of 20 bytes
 06,44f1,Mode16_State00_Init,I,,port JP 06:44F1; routine differs: 1 of 51 JP instructions not paired as same code
 06,4571,Mode16_State01_Redraw,I,,port JP 06:4574; routine differs: 1 of 57 JP instructions not paired as same code
+06,45fd,Mode16_RedrawStateTbl,C,"4 bytes: menu item (wOptMenuCursor) -> state that Mode16_State01_Redraw (06:45F7) resumes after rebuilding the screen: 03 TRICK LENSES, 04 MONTAGE, 05 PANORAMA, 06 GAME FACE (read 2026-10-25)",port JP 06:4603; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 06,4601,Mode16_State02_MainMenu,I,,port JP 06:4607; routine differs: 1 of 40 JP instructions not paired as same code
 06,4650,Mode16_ItemStateTbl,C,"4 bytes: menu item -> state of its sub-screen when A is pressed (03-06), read by Mode16_State02_MainMenu (06:4631); a value of $22 or more would be refused with sound $0B, none is (read 2026-10-25)",port JP 06:4659
 06,4654,Mode16_MenuCursorPosTbl,C,"4 x {y; x} of the cursor of the four MAGIC items: y = $4C / $5C / $6C / $7C, x = $30; Mode16_DrawCursorFromTable (06:4A70) from Mode16_State02_MainMenu (read 2026-10-25)",port JP 06:465D
@@ -2724,6 +2745,7 @@ bank,addr,name,conf,note,source
 07,7917,MainMenu_StepIconAnimators,C,B animators of 6-byte entries at HL,port JP 07:7900
 07,7944,MainMenu_StepIconAnimators_Next,C,"loop tail. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)",port JP 07:792D
 07,794e,MainMenu_DrawUpperItem0,I,,port JP 07:7937; routine differs: 17 of 32 JP instructions not paired as same code
+07,7972,MainMenu_UpperItem0_AnimTbl,I,,port JP 07:7985; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 07,7984,MainMenu_DrawUpperItem1,I,,port JP 07:7997; routine differs: 17 of 32 JP instructions not paired as same code
 07,79a8,MainMenu_UpperItem1_AnimTbl,I,,port JP 07:79E5; content differs: 5 of 18 bytes
 07,79ba,MainMenu_DrawUpperItem2,C,phase counter D A2F mod $28,port JP 07:79F7
@@ -2977,16 +2999,16 @@ bank,addr,name,conf,note,source
 09,4cf2,Mode08_State12_CreditsEntry,I,record >= $7799 chooses the real credits,port JP 09:4CF2; routine differs: 1 of 57 JP instructions not paired as same code
 09,4d86,Mode08_CreditsReal,C,"L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)",port JP 09:4D86
 09,4de2,Mode08_State13_CreditsPageA,I,CLIP THIS. page,port JP 09:4DE2; routine differs: 22 of 80 JP instructions not paired as same code
-09,4fbe,Mode08_State14_CreditsPageB,I,,port JP 09:4EA4; routine differs: 25 of 85 JP instructions not paired as same code
-09,50c8,Mode08_State15_CreditsScroll,I,staff roll via ScrollEngine_Step,port JP 09:4FD5; routine differs: 1 of 91 JP instructions not paired as same code
+09,4e9f,Mode08_State14_CreditsPageB,C,,port JP 09:4EA4; placed by the word table Mode08_StateTable (entry 20)
+09,4fbe,Mode08_State15_CreditsScroll,C,staff roll via ScrollEngine_Step,port JP 09:4FD5; placed by the word table Mode08_StateTable (entry 21)
+09,50c8,Mode08_State16_CreditsWaitA,C,A -> state $18,port JP 09:50D0; placed by the word table Mode08_StateTable (entry 22)
 09,518d,Credits_ScrollSpriteTileTbl,C,"2 bytes: OAM tile-number offset of the dancer sprite, indexed by the buffer toggle $C005. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)",port JP 09:509A
 09,518f,Credits_ScrollFrameTbl,C,"13 records {lo,hi,bank,duration}: the staff-roll dancer frames (a dancing girl, not identified) (0x500 bytes each, 12 frames per record); copied alternately to $8000 / $8500 by Mode08_State15_CreditsScroll; checked by running the real credits (core and BGB)",port JP 09:509C
-09,51c3,Mode08_State16_CreditsWaitA,I,A -> state $18,port JP 09:50D0; routine differs: 1 of 8 JP instructions not paired as same code
-09,51d3,Mode08_State17_CreditsDancingMan,C,,port JP 09:50E0
+09,51c3,Mode08_State17_CreditsDancingMan,C,,port JP 09:50E0; placed by the word table Mode08_StateTable (entry 23)
+09,51d3,Mode08_State18_Leave,C,,port JP 09:518C; placed by the word table Mode08_StateTable (entry 24)
 09,5238,Credits_NishimuraDanceFrameTbl,I,"4 records {lo,hi,bank,duration=8}: frames of the dance of Kentaro Nishimura (credited CORDINATOR (sic) and SOUND COMPOSER; the 'Miyamoto' attribution found on the web is an error, owner) of the short credits (22:4500, 22:4970, 27:4000, 22:4970; 0x470 bytes each) used by Mode08_State17_CreditsDancingMan",port JP 09:5145; content differs: 1 of 16 bytes
 09,5248,Credits_NextDancingFrame,C,,port JP 09:5155
 09,5270,Credits_NishimuraDanceMapTbl,I,"5 records {lo,hi,bank}: BG maps of the Nishimura dance screen (26:5E80, 25:6860, 26:7500, 26:7740, 26:7980; 0x240 bytes each) cycled by Credits_NextDancingFrame",port JP 09:517D; content differs: 10 of 15 bytes
-09,527f,Mode08_State18_Leave,C,,port JP 09:518C
 09,528b,UserMap_ReadKeys,C,Left/Right moves choice4_cursor,port JP 09:5198
 09,52ae,UserMap_LoadPlanetTiles,C,,port JP 09:51BB
 09,52f5,UserMap_DrawSprites,C,,port JP 09:5202
@@ -3007,8 +3029,8 @@ bank,addr,name,conf,note,source
 09,54bd,Kb_LoadGlyphSetA,C,loads glyph list A (09:53D3) to $8800 with Kb_LoadGlyphList,port JP 09:53CA
 09,54c6,Kb_GlyphListA,I,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetA_Gfx53D3)",port JP 09:53D3; content differs: 24 of 25 bytes
 09,54d5,Kb_LoadGlyphSetB,C,loads glyph list B (09:53F5) to $8800 with Kb_LoadGlyphList,port JP 09:53EC
-09,54e8,Kb_GlyphListB,I,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetB_Gfx53F5)",port JP 09:53F5; content differs: 21 of 25 bytes
-09,54f6,Kb_GlyphListC,I,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetC_Gfx5417)",port JP 09:5417; moved: found by its own bytes (13) elsewhere in the bank
+09,54de,Kb_GlyphListB,I,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetB_Gfx53F5)",port JP 09:53F5; placed by 1 paired reference(s) to it (the operand of the same instruction here)
+09,54f6,Kb_GlyphListC,C,"glyph list read by Kb_LoadGlyphList: pairs (n, slot) = n glyphs from slot, ($80+n, slot) = n copies of slot, 0 ends; slots index the 32-byte glyphs at 2A:4000 (was Kb_LoadGlyphSetC_Gfx5417)",port JP 09:5417; placed by the word table Kb_Page0_Press_PtrTbl5C0E (entry 2)
 09,5503,Kb_LoadGlyphList,C,"list in HL: entry n,g = n glyphs from slot g; entry $80+n,g = n copies of slot g; 0 ends; each glyph = 32 B from 2A:$4000 + 32 x slot copied to DE; lists A / B / C at 09:53D3 / 53F5 / 5417",port JP 09:5424
 09,552f,Kb_GlyphOffset,C,BC = A x 32 (byte offset of glyph slot A),port JP 09:5450
 09,553e,Kb_FindCharInList,C,"A = key index ($DA3C), HL = one of the three glyph lists Kb_GlyphListA/B/C (pairs {n, slot}, $80+n = n copies of the slot, 0 ends): returns the character code of the key = slot + 1 (0 for the blank run, slot $FF); the only caller is Kb_Page0_Press (09:5BE9), which stores it in the name at $DA4D + $DA3B (C)",port JP 09:545F
@@ -3188,6 +3210,7 @@ bank,addr,name,conf,note,source
 09,7097,Run_DrawConfetti,C,,port JP 09:7014
 09,70b1,Run_DrawConfettiSprite,C,"draws one confetti piece: x = record x / 2, y = record y / 2 - $10, animation Run_DrawConfettiSprite_AnimTbl7049 with the frame and tick bytes of the record (Run_DrawMeta) (C)",port JP 09:702E
 09,70cc,Run_DrawConfettiSprite_AnimTbl70CC,I,"animation list {meta id, duration} (the pair 'FF, n' jumps to entry n): 49 04 4A 04 4B 04 4C 04 4D 04 4C 04 4B 04 4A 04 FF 00 / 4E 04 4F 04 50 04 51 04 52 04 51 04 50 04 4F 04 FF 09; passed in HL to Run_DrawMeta by Run_DrawConfettiSprite (09:702E). It was named UserMap_AnimateDecoSprites_Gfx7049 because `ld bc,$7049` in UserMap_AnimateDecoSprites is a sprite position, not a reference",port JP 09:7049; content differs: 16 of 36 bytes
+09,7111,Run_DrawPickCharacterSprite_Tbl7111,I,"animation lists of the character-pick sprite: 00 10 0C 02 0D 02 0E 02 0F 02 10 02 FF 05 / 00 10 0C 02 0D 02 0E 02 0F 02 11 02 FF 0C / 00 10 0C 02 0D 02 0E 02 0F 02 12 02 FF 13 / 0F 02 0E 02 0D 02 0C 02 00 10 00 08 FF 1A: animation list read by Run_DrawMeta / Run_SplitScreenLine: pairs {meta id, duration}, the pair $FF,n jumps to entry n (Run_DrawMeta adds the tick step it receives in A to the tick byte each call; the next entry is taken when the tick reaches the duration) (C)",port JP 09:707C; placed by 1 paired reference(s) to it (the operand of the same instruction here)
 09,711f,Run_DrawMeta,C,sprite list with flip: bc = origin; hl = list,port JP 09:70B4
 09,714c,Run_SplitScreenLine,C,"sets the LCD split parameters from the player's vertical offset C: $FFB6 (second split line) := $5A - C, $FFAF (first split line) := 8 (C < $17), $1F - C ($17 <= C < $1C), 3 ($1C <= C < $80) or 8 (C >= $80), and $FFBA (scroll Y of the band) := list value + C with the animation state in DE (same list format as Run_DrawMeta, entries {value, duration}) (C)",port JP 09:70E1
 09,7192,Run_OffscreenTest,C,"visibility test of a half-scale position (A = high byte, C = low byte): returns NC when the position is on screen (A = 0 and C < $B0, or A = $FF and C >= $B0), carry set when it is off screen; the callers draw only when NC (Run_DrawChick, Run_DrawMoleAndScene, Run_DrawRunner3, Run_DrawFinishLine, Run_DrawPlayer, which then forces the position to $A0 (player) or $C0 (chick, mole) when off screen) (C)",port JP 09:7127
@@ -3979,7 +4002,7 @@ bank,addr,name,conf,note,source
 1f,4851,Sfx1_Step_15_HotspotSound02,C,"channel-1 effect step handler of id 15 (hot spot). Named after the caller of its id (SFX1_HOTSPOT_SOUND_02, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",port JP 1F:4851
 1f,4864,Sfx1_Data_4864,C,inline data of the channel-1 handlers (register block / sequence),port JP 1F:4864
 1f,4869,Sfx1_Init_18,C,channel-1 effect init handler of ids 18 (table $41FA),port JP 1F:4869
-1f,487e,Sfx1_Init_12_1D_PanelOpen,C,"channel-1 effect init handler of ids 12 1D (table $41FA). Named after the caller of its ids (SFX1_PANEL_OPEN, SFX1_PANEL_OPEN_ALIAS_1D, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",port JP 1F:4871
+1f,487e,Sfx1_Init_12_1D_PanelOpen,C,"channel-1 effect init handler of ids 12 1D (table $41FA). Named after the caller of its ids (SFX1_PANEL_OPEN, SFX1_PANEL_OPEN_ALIAS_1D, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",port JP 1F:4871; placed by the word table Sfx1_InitTbl (entry 28)
 1f,4886,Sfx1_Data_4886,C,inline data of the channel-1 handlers (register block / sequence),port JP 1F:4879
 1f,4890,Sfx1_Init_0C_SpaceFeverEnemyKill,C,"channel-1 effect init handler of ids 0C (table $41FA). Named after the caller of its id (SFX1_SPACE_FEVER_ENEMY_KILL, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",port JP 1F:4883
 1f,489c,Sfx1_Data_489C,C,inline data of the channel-1 handlers (register block / sequence),port JP 1F:488F
