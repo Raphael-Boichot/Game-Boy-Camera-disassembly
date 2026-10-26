@@ -1,0 +1,2 @@
+mode,state,name,tag,desc
+0F,0D,STATE_0F_SELECTED_SECOND,I,"state 03's handler Mode0F_State03_Selected again (04:48B1, table entry 0D): Mode0F_PressA moves 03 -> 0D after the first pick (message strip 4, icon 1) and 0D -> 03 on A over a photo"

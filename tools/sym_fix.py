@@ -24,7 +24,7 @@ repairs the cases that can be told from the code (every decision uses the instru
                                                                            holds a pointer load (kind P) at that instruction and it is not listed in disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
                                                                            that happen to equal an address). The names are defined in disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
   6. `--const` (L4, implies --ram): values of a group are written with their constant (also the states: `ld a, $08 / ld [wState], a` -> `ld a, STATE_0E_EXCHANGE_WAIT_A`, the group of the
-                                                                           mode of a constant `ld [wMode], a` just before, else of the routine `ModeNN_...` that holds the store; disasm/state_names_jp.csv) (disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
+                                                                           mode of a constant `ld [wMode], a` just before, else of the routine `ModeNN_...` that holds the store, else of the helper routine listed in disasm/state_helpers_jp.csv; disasm/state_names_jp.csv) (disasm/const_names_jp.csv, tools/const_names.py): `ld a, $19 / ld [wMode], a` -> `ld a, MODE_TITLE_SCREENS`,
                                                                            `ld a, [wMode] / cp $01` -> `cp MODE_SHOOT_PARLOR`, `ldh a, [hKeysNew] / bit 0, a` -> `bit PADB_A, a`, `and $0f` -> `and PADF_BUTTONS`,
                                                                            `ld a, $43 / ldh [hLcdcShadow], a` -> `ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON`, and the bytes of the mode tables of disasm/const_tables_jp.csv
                                                                            (`db $1c, $1e` -> `db MODE_PRINT_PHOTO_PICKER, MODE_PRINT_OPTION`). Which operand holds which group is in disasm/const_types_jp.csv; the rewrite
@@ -140,6 +140,13 @@ if a.ram:
     RAM_EXCL = set()
     for r in csv.DictReader(open(a.ram_exclude or os.path.join(ROOT, 'disasm', 'ram_exclude_jp.csv'), encoding='utf-8')):
         RAM_EXCL.add((int(r['bank'], 16), int(r['pc'], 16)))
+    RAM_HIGH = {}                              # (bank, pc) -> name: `ld b|d|h, $xx` that loads the page of a 256-aligned RAM name (disasm/ram_highbyte_jp.csv) -> `HIGH(name)`
+    _hb = os.path.join(ROOT, 'disasm', 'ram_highbyte_jp.csv')
+    if os.path.exists(_hb):
+        _rn = {r.name: r for r in RAM_ROWS}
+        for r in csv.DictReader(open(_hb, encoding='utf-8')):
+            if r['name'] not in _rn: sys.exit('ram_highbyte_jp.csv: no RAM name %s' % r['name'])
+            RAM_HIGH[(int(r['bank'], 16), int(r['pc'], 16))] = _rn[r['name']]
     RAM_INC = ram_names.inc_text(RAM_ROWS)
     RAM_TOK = re.compile(r'\$[0-9a-f]{4}\b')
 # ---- L4: constants
@@ -173,6 +180,10 @@ if a.const:
     C_LABS = collections.defaultdict(list)          # bank -> sorted [(address, label)]: the routine that holds an instruction (state stores)
     for (b0, a0), nm0 in byad.items(): C_LABS[b0].append((a0, nm0))
     for b0 in C_LABS: C_LABS[b0].sort()
+    C_HELPER = {}                                    # helper routine -> the mode whose handlers alone call it (disasm/state_helpers_jp.csv): the mode of a state store inside it
+    _hp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'disasm', 'state_helpers_jp.csv')
+    if os.path.exists(_hp):
+        for r0 in csv.DictReader(open(_hp, encoding='utf-8')): C_HELPER[r0['routine']] = int(r0['mode'], 16)
     C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
     C_CPAND = re.compile(r'^(cp|and) \$([0-9a-f]{2})$'); C_BIT = re.compile(r'^bit ([0-7]), a$'); C_LDHL = re.compile(r'^ld a, \[hl\+?\]$')
     C_KEEP = re.compile(r'^(?:bit [0-7], a|cp \S.*|(?:jr|jp) (?:nz|z|nc|c), \S+|ret (?:nz|z|nc|c)|ld [bcdehl], a|ld \[[^\]]+\], a|ldh \[[^\]]+\], a|push af)$')
@@ -224,6 +235,7 @@ def const_code_pass(bank, out):
                     x = bisect.bisect_right(L0, (ad0, '\uffff')) - 1
                     mm = re.match(r'^Mode([0-9A-F]{2})_', L0[x][1]) if x >= 0 else None
                     if mm: mode = int(mm.group(1), 16)
+                    elif x >= 0 and L0[x][1] in C_HELPER: mode = C_HELPER[L0[x][1]]
                 nm = CONST.value('state_%02x' % mode, int(m.group(1), 16)) if mode is not None else None
                 if nm: put(k, 'ld a, ' + nm, 'state')
                 else: stats['const_state_unnamed'] += 1
@@ -248,6 +260,10 @@ def is_ram(v): return 0xC000 <= v < 0xE000 or 0xFF80 <= v <= 0xFFFE
 def ram_rewrite(bank, ad, by, ins, nxt):
     """new text of the instruction at bank:ad whose RAM operand is written as a name (None: leave it); nxt = text of the next instruction"""
     o = by[0]
+    if o in (0x06, 0x16, 0x26) and len(by) == 2 and (bank, ad) in RAM_HIGH:
+        r = RAM_HIGH[(bank, ad)]
+        if r.addr & 0xFF or r.addr >> 8 != by[1]: sys.exit('ram_highbyte_jp.csv: %02X:%04X loads $%02X, not the page of %s' % (bank, ad, by[1], r.name))
+        stats['ram_high'] += 1; return re.sub(r'\$[0-9a-f]{2}\b', 'HIGH(%s)' % r.name, ins, count=1)
     if o in (0xEA, 0xFA, 0x08) and len(by) == 3: v = by[1] | by[2] << 8; kind = 'ram_mem'
     elif o in (0xE0, 0xF0) and len(by) == 2: v = 0xFF00 + by[1]; kind = 'ram_ldh'
     elif o in (0x01, 0x11, 0x21, 0x31) and len(by) == 3: v = by[1] | by[2] << 8; kind = 'ram_ptr'

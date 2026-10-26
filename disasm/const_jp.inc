@@ -357,6 +357,7 @@ DEF STATE_0F_CONFIRM_APPLY     EQU $07 ; C state_0f: Mode0F_State07_ConfirmApply
 DEF STATE_0F_ERASE_ONE         EQU $09 ; C state_0f: Mode0F_State09_EraseOne (04:4C8D)
 DEF STATE_0F_ERASE_ALL         EQU $0a ; C state_0f: Mode0F_State0A_EraseAll (04:4D1B)
 DEF STATE_0F_COPY_BROWSE       EQU $0c ; C state_0f: Mode0F_State0C_CopyBrowse (04:4E4B)
+DEF STATE_0F_SELECTED_SECOND   EQU $0d ; I state_0f: state 03's handler Mode0F_State03_Selected again (04:48B1, table entry 0D): Mode0F_PressA 
 DEF STATE_0F_COPY_DO           EQU $0e ; C state_0f: Mode0F_State0E_CopyDo (04:4F18)
 DEF STATE_10_INIT              EQU $00 ; C state_10: Mode10_State00_Init (04:6065)
 DEF STATE_10_PICK_PHOTO        EQU $01 ; C state_10: Mode10_State01_PickPhoto (04:607E)

@@ -7,7 +7,7 @@ For every mode the table `ModeNN_StateTable` (the `rst $18` word table of its st
 one handler per state number.  A state gets a name only when the label at its handler is `ModeNN_StateSS_Name` with the same mode NN and the same
 state SS: the constant is `STATE_NN_NAME` (CamelCase -> UPPER_SNAKE), with the tag of that label; a name that several states of one mode share
 takes the state number (`STATE_21_UNUSED_08`).  A state past the end of its table, a handler shared
-by several states or a handler without such a label stays a number.  Inputs: disasm/sym_names_jp.csv (labels and tags), pocketcamera_jp.sym (table
+by several states or a handler without such a label stays a number, unless disasm/state_shared_jp.csv names it (mode, state, name, tag, desc).  Inputs: disasm/sym_names_jp.csv (labels and tags), pocketcamera_jp.sym (table
 lengths), the ROM (the words of the tables).  Output: group,value,name,tag,desc in the format of disasm/const_names_jp.csv, read by tools/const_names.py
 (const_jp.inc) and tools/sym_fix.py --const.  Never edit the output by hand: rename the handler label and rerun this script."""
 import csv, os, re, sys, argparse
@@ -41,6 +41,14 @@ def build(rom, names_csv, sym_path):
             if not mh or int(mh.group(1), 16) != mode or int(mh.group(2), 16) != s: continue
             rows.append(dict(group='state_%02x' % mode, value='%02x' % s, name='STATE_%02X_%s' % (mode, snake(mh.group(3))), tag=h['conf'],
                              desc='%s (%02X:%04X)' % (h['name'], 0 if w < 0x4000 else b, w)))
+    sp = os.path.join(os.path.dirname(names_csv), 'state_shared_jp.csv')      # states whose handler is shared with another state: named by hand, with the reason
+    if os.path.exists(sp):
+        have = {(r['group'], r['value']) for r in rows}
+        for x in csv.DictReader(open(sp, encoding='utf-8')):
+            k = ('state_%s' % x['mode'].lower(), x['state'].lower())
+            if k in have: raise SystemExit('state_shared_jp.csv: %s %s already has a name' % k)
+            pos = max([i + 1 for i, r in enumerate(rows) if r['group'] == k[0] and r['value'] < k[1]] or [len(rows)])
+            rows.insert(pos, dict(group=k[0], value=k[1], name=x['name'], tag=x['tag'], desc=x['desc']))
     cnt = {}
     for r in rows: cnt[r['name']] = cnt.get(r['name'], 0) + 1
     for r in rows:
