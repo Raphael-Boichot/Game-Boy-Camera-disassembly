@@ -228,10 +228,6 @@ n += quoted('open assets', r'`open_assets\.csv` \(all (\d+) rows', lambda m: ((O
 n += quoted('open assets', r'`open_assets\.csv` has (\d+) rows', lambda m: ((OA_ROWS,), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
 n += quoted('open assets', r'snapshot, (\d+) rows in the csv', lambda m: ((OA_ROWS,), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
 n += quoted('open assets', r'\((\d+) rows, ([\d,]+) B after §16\.25', lambda m: ((OA_ROWS, OA_BYTES), (int(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
-# the owner page asks about the pictures that are still doubtful: its count is quoted in the README
-OP = rd('tcrf_check/tools/owner_page.py'); OP_PICS = len(re.findall(r"^ dict\(key='(?:gfx|tcrf)_", OP, re.M))
-NUMW = {'five': 5, 'six': 6, 'four': 4, 'seven': 7}
-n += quoted('owner pictures', r'and (\w+) pictures \(`0D:7000`', lambda m: ((OP_PICS,), (NUMW.get(m.group(1), -1),)), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ really-unused totals, tiers, per-bank table
 RU = list(csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/really_unused.csv'))))
@@ -799,7 +795,6 @@ SND_ROWS = list(csv.DictReader(io.StringIO(rd('disasm/sound_names_jp.csv'))))
 SND_INV = {(r['channel'], r['id'].upper()): r for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/sound_inventory.csv')))}
 SND_UNUSED = {(r['channel'], r['id'].upper()) for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/really_unused_sounds.csv')))}
 SND_OWNER = {r['key'] for r in csv.DictReader(io.StringIO(rd('disasm/owner_answers_jp.csv')))}
-SND_REVIEW = {r['key'] for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/sound_review/answers_2026-10-18.csv')))}       # the answers of the review page, given in the chat
 SND_PREFIX = {'music': 'MUSIC_', 'sfx1': 'SFX1_', 'sfx3': 'SFX3_', 'sfx4': 'SFX4_'}
 SND_CONTROL = {('music', 'FE'), ('music', 'FF')}              # requests of the song mailbox that are engine commands, not songs
 SND_HELPER = {0x2A7C: 'sfx1', 0x2A80: 'sfx3', 0x2A84: 'sfx4', 0x2A88: 'music'}      # Snd_Sfx1 / Snd_Sfx3 / Snd_Sfx4 / Snd_Music (00:2A7C ...)
@@ -843,9 +838,6 @@ for r in SND_ROWS:
             continue
         if e.startswith('owner:'):
             if e[6:] not in SND_OWNER: bad('sound', '%s: %s is not a row of owner_answers_jp.csv' % (tag, e)); SND_BAD += 1
-            continue
-        if e.startswith('review:'):
-            if e[7:] not in SND_REVIEW: bad('sound', '%s: %s is not a row of sound_review/answers_2026-10-18.csv' % (tag, e)); SND_BAD += 1
             continue
         bad('sound', '%s: unknown evidence token %r' % (tag, e)); SND_BAD += 1
     if cited != ss[:5]: bad('sound', '%s: the evidence cites %s, the first request sites in the ROM are %s' % (tag, ['%02X:%04X' % c for c in cited], ['%02X:%04X' % c for c in ss[:5]])); SND_BAD += 1

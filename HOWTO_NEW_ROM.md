@@ -88,7 +88,7 @@ Order: own core with instrumentation first (fast, millions of frames), BGB secon
 ## 7. BGB pitfalls (all hit once)
 
 * BGB refuses VRAM writes in PPU mode 3 (161 of 256 bytes landed in one test); write when the LCD is off or in mode 0 / 1.
-* BGB logs numbers in hex. Its WAV runs on the emulated clock (`%TOTALCLKS%`, 2,097,152 per second) plus a constant offset (-0.47 s in all four runs of `tcrf_check/tools/sound_clips.py`, 98 requests over up to 267 s: 89 audible onsets within 10 ms of the logged NRx4 trigger, the other 9 early by 35-72 ms, no slope): find the offset once per run by content, do not count frames.
+* BGB logs numbers in hex. Its WAV runs on the emulated clock (`%TOTALCLKS%`, 2,097,152 per second) plus a constant offset (-0.47 s in all four runs of the Pocket Camera sound-clip recorder, 98 requests over up to 267 s: 89 audible onsets within 10 ms of the logged NRx4 trigger, the other 9 early by 35-72 ms, no slope): find the offset once per run by content, do not count frames.
 * BGB needs 3 more boot frames than the core.
 * Read register writes at the right pc (`1F:525F`), not the last write of the register: later engine writes overwrite what you wanted.
 * A sym parser that expects upper-case hex silently found nothing: the claim "no open asset is displayed" was wrong for that reason. Parse hex case-insensitively and test the parser on a known label.

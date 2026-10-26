@@ -6,7 +6,7 @@ music,04,MUSIC_SHUTTERBUG,C,3,SHUTTERBUG menu (Mode16 init and redraw) and the p
 music,05,MUSIC_MAIN_MENU,C,1,main menu (Mode00 init),07:7246 list:03:61FD#20
 music,06,MUSIC_SHOOT_INTRO_A,C,1,"SHOOT parlor, intro page A (Mode01 state 00)",04:6FC5
 music,07,MUSIC_SHOOT_INTRO_B,C,1,"SHOOT parlor, intro page B (Mode01 state 03)",04:7094
-music,08,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_08,C,0,"same data as song 0D, requested by nothing; owner by ear (2026-10-18): waiting loop before / after the several-photo print mode (image selection menu)",same:0D same:1A owner:snd_music_08 review:snd_music_08
+music,08,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_08,C,0,"same data as song 0D, requested by nothing; owner by ear (2026-10-18): waiting loop before / after the several-photo print mode (image selection menu)",same:0D same:1A owner:snd_music_08 owner:snd_music_08_review
 music,09,MUSIC_SHOW_MENU,C,1,SHOW menu: slide show / animation / hot-spot (Mode0B init),03:7953
 music,0A,MUSIC_DOODLE_MENU,C,1,Doodle menu: STAMP / PAINT (Mode04 init),03:7B10
 music,0B,MUSIC_EDIT_MENU,C,1,Edit menu: ALBUM / ANIMATION (Mode05 init),03:7C6A
@@ -69,7 +69,7 @@ music,43,MUSIC_RUN_RACE_SCENE,C,1,RUN! RUN! RUN!: race scene init (Mode21 state 
 music,44,MUSIC_LINK_EXCHANGE_SETUP,C,2,"link exchange setup (Mode0E states 06 and 0A); same data as 11, owner by ear (2026-10-13): credits, short",07:455F 07:46B0 same:11 owner:snd_music_44
 music,45,MUSIC_ERASE_JINGLE,C,1,photo erase (Mode0F_EraseJingleTiles),04:5047
 music,46,MUSIC_USER_MAP_SCROLL_OUT,C,1,USER map scroll-out (UserMap_ScrollOut),09:52A2
-music,47,MUSIC_BEETHOVEN_5TH_INTRO_ALIAS_47,C,0,"same data as song 1C, requested by nothing; owner by ear (2026-10-18): Beethoven 5th symphony intro",same:1C owner:snd_music_47 review:snd_music_47
+music,47,MUSIC_BEETHOVEN_5TH_INTRO_ALIAS_47,C,0,"same data as song 1C, requested by nothing; owner by ear (2026-10-18): Beethoven 5th symphony intro",same:1C owner:snd_music_47 owner:snd_music_47_review
 music,48,MUSIC_ERROR_MESSAGE_INCOMPLETE,I,0,"no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete",owner:snd_music_48
 music,FE,MUSIC_HOLD,C,1,"engine control: this frame runs effect 1 only, the song and effects 3 and 4 do not advance (Snd_Tick_MusicHold)",05:43EF
 music,FF,MUSIC_STOP,C,13,engine control: stop the song (Snd_RequestSong -> Snd_StopSong),03:6104 03:6416 03:6B17 03:75FB 03:7607
@@ -108,7 +108,7 @@ sfx1,20,SFX1_STEP_FAST,C,12,"direction keys on a counter or a two-way choice (lo
 sfx1,21,SFX1_STEP_VALUE,C,6,"direction keys stepping a photo or stock value, a toggle, a keyboard page",03:553D 03:5572 08:4540 09:4447 09:5C23
 sfx1,22,SFX1_DIRECTION_KEY,C,7,"direction keys in the animation tools menu, the print density and the comment editor",03:44BE 08:4462 09:4505 09:4516 09:4526
 sfx1,23,SFX1_BALL_POINT,C,1,BALL: a point is scored (Ball_AddPoint); same data as 2B,05:7D50 same:2B
-sfx1,24,SFX1_UNREQUESTED_24_FALLING_TONE,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II; the handlers (Sfx1_Init_24_LoopTone, Sfx1_Step_24_LoopTone) make a falling tone of about 910 Hz that retriggers every 21 frames and never stops by itself (BGB, 45 s), which fits no named moment",owner:snd_sfx1_24 review:snd_sfx1_24
+sfx1,24,SFX1_UNREQUESTED_24_FALLING_TONE,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II; the handlers (Sfx1_Init_24_LoopTone, Sfx1_Step_24_LoopTone) make a falling tone of about 910 Hz that retriggers every 21 frames and never stops by itself (BGB, 45 s), which fits no named moment",owner:snd_sfx1_24 owner:snd_sfx1_24_review
 sfx1,25,SFX1_SPACE_FEVER_START,C,1,Space Fever II: the game starts (SpaceFever_Wave0_Init),07:5A2F
 sfx1,26,SFX1_SPACE_FEVER_BOSS_DEATH,C,1,Space Fever II: the boss is destroyed (SpaceFever_BossHit); owner by ear: boss death; same data as 1E,07:675C same:1E owner:snd_sfx1_26
 sfx1,27,SFX1_SPACE_FEVER_WAVE0_END,C,1,"Space Fever II: the opening wave is over, wave state 2 follows (SpaceFever_Wave0_Play)",07:5ABF
@@ -133,8 +133,8 @@ sfx1,39,SFX1_MENU_CHOOSE,C,7,"A on an entry of the SHOOT parlor, the BALL menu, 
 sfx1,3A,SFX1_PICK_PHOTO,C,3,"photo picker choose, delete browse, link photo pick; same data as 19",04:40F6 04:483C 07:4D47 same:19
 sfx1,3B,SFX1_ERASE_ANIM,C,1,photo erase animation (EraseAnim_Run); the engine adds sfx4 06 when it ends,04:515C
 sfx1,3C,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE,C,1,"Space Fever II: B during play makes the ship explode (07:5623); stops the song and posts sfx4 02; 3D and 3E are the same data, heard by the owner as the player death jingle",07:5623 same:3D same:3E
-sfx1,3D,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3D,C,0,"same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in Space Fever II",same:3C same:3E owner:snd_sfx1_3D review:snd_sfx1_3D
-sfx1,3E,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E,C,0,"same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in Space Fever II",same:3C same:3D owner:snd_sfx1_3E review:snd_sfx1_3E
+sfx1,3D,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3D,C,0,"same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in Space Fever II",same:3C same:3E owner:snd_sfx1_3D owner:snd_sfx1_3D_review
+sfx1,3E,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E,C,0,"same data as 3C, requested by nothing; owner by ear (2026-10-18): player death jingle in Space Fever II",same:3C same:3D owner:snd_sfx1_3E owner:snd_sfx1_3E_review
 sfx3,01,SFX3_MAIN_MENU_SHOOT,C,3,main menu: the cursor goes to SHOOT (Mode00_State01_Item0_Shoot); also hot-spot sound list (#21),07:7293 07:72B2 07:72D4 list:03:7615#21
 sfx3,02,SFX3_MAIN_MENU_VIEW_ARCADE,C,4,"main menu: Mode00 items VIEW and Arcade, return to the upper page; link exchange bars half done; also hot-spot sound list (#22)",07:45AE 07:731D 07:73A9 07:777E list:03:7615#22
 sfx3,03,SFX3_SPACE_FEVER_BOSS_HIT,C,1,Space Fever II: the boss is hit (SpaceFever_BossHit),07:6749
