@@ -189,6 +189,17 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
                 subprocess.run(['make'], cwd=d, env=env, capture_output=True)
                 g = os.path.join(d, 'game.gb'); md = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else 'no ROM built'
                 (ok if md == '42d2f65e2549be9d1d126a6828b5d1c1' else bad)('port', 'international round trip %s: md5 %s' % (tag, md))
+            # the layout picture of the international ROM (README, after the Japanese one) is what rom_layout_map.py draws today
+            pu = os.path.join(tmp, 'us_map.png'); D_ = US + 'disasm/'
+            rr = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', pu, '--rom', A.rom_us, '--map', US + 'port/rom_map_us.csv', '--assets', 'none', '--witness', 'none',
+                                 '--reach', 'none', '--unused', 'none', '--kinds', US + 'assets/layout_kind_overrides_us.csv',
+                                 '--names', ','.join(D_ + f for f in ('sym_names_us.csv', 'sym_names_us_loaders.csv', 'sym_names_us_hand.csv')),
+                                 '--types', D_ + 'sym_types_us.csv,' + D_ + 'sym_types_us_loaders.csv', '--diff', US + 'port/diff_us.npz', '--csv', os.path.join(tmp, 'us_layout.csv'),
+                                 '--title', 'Game Boy Camera (USA, Europe): what is in each of the 64 banks, and what differs from the Japanese ROM (the ROM drawn as 2bpp tiles)'], capture_output=True, text=True)
+            if rr.returncode: bad('port', 'rom_layout_map.py failed on the international ROM: %s' % (rr.stderr or rr.stdout)[-300:])
+            elif open(pu, 'rb').read() != open(US + 'us_rom_layout_map.png', 'rb').read() or open(os.path.join(tmp, 'us_layout.csv'), 'rb').read() != open(US + 'assets/layout_by_bank_us.csv', 'rb').read():
+                bad('port', 'roms/us_eu/us_rom_layout_map.png or assets/layout_by_bank_us.csv is not what rom_layout_map.py draws: rerun tools/port_build.py')
+            else: ok('port', 'roms/us_eu/us_rom_layout_map.png fresh')
             # L5: roms/us_eu/src/ is what tools/make_source.py --tree us_eu writes today, and it builds the ROM byte-exact
             fr = os.path.join(tmp, 'src_us'); rp = os.path.join(tmp, 'rom_operands_us.csv')
             ms = subprocess.run([sys.executable, 'tools/make_source.py', '--tree', 'us_eu', '--rom', A.rom_us, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fr, '--report', rp, '--check'], capture_output=True, text=True)

@@ -6,6 +6,8 @@ The work is produced by AI (Claude), from reading the code and running it in emu
 
 ![What each byte of the Japanese ROM is: code by function, data by kind](roms/jp_rev_a/jp_rom_layout_map.png)
 
+![What each byte of the international ROM is, and what differs from the Japanese ROM](roms/us_eu/us_rom_layout_map.png)
+
 ## ROMs
 
 | ROM | MD5 | Folder | Status |

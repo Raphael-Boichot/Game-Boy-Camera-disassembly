@@ -11,6 +11,8 @@ Steps (each writes into --dir; see each script's docstring):
   5. tools/port_syms.py          names and type rows (disasm/sym_names_<s>.csv, disasm/sym_types_<s>.csv, port/port_report_<s>.csv)
   5b. tools/port_assets.py      names and type rows of the blocks this build's own copy calls load (disasm/sym_*_<s>_loaders.csv)
   6. tools/sym_build.py          the symbol file (<dir>/<sym>): carried names < loader names < hand names
+  7a. tools/port_diff_bytes.py, tools/port_layout_kinds.py, tcrf_check/tools/rom_layout_map.py: the picture <dir>/<s>_rom_layout_map.png
+      (kind of every byte, outline = what differs from the Japanese ROM) and layout_by_bank_<s>.csv
   7. tools/port_queue.py         hand-work queue (port/hand_queue_<s>.csv); tools/port_cov.py: the Japanese coverage through the maps (port/cov_<s>.npz)
   7b. tools/wram_db.py + tools/port_l4.py (L4 tables: RAM names, access sites, constants) and tools/state_names.py (the state constants
       of this build's own state tables and handler labels)
@@ -54,6 +56,15 @@ for f in ('wram_fresh_%s_access.csv' % S, 'wram_fresh_%s_summary.csv' % S): os.r
 run(py, 'tools/state_names.py', '--rom', a.other, '--names', os.path.join(D, 'disasm', 'sym_names_%s.csv' % S), *extra, '--sym', sym,
     '--shared', os.path.join(D, 'disasm', 'state_shared_%s.csv' % S), '--out', os.path.join(D, 'disasm', 'state_names_%s.csv' % S))
 run(py, 'tools/port_cov.py', npy, cmap, os.path.join(P, 'cov_%s.npz' % S))        # the Japanese runs through the maps, for rom_operands.py (L5)
+run(py, 'tools/port_diff_bytes.py', a.jp, a.other, npy, cmap, trace, os.path.join(P, 'diff_%s.npz' % S), '--rommap', os.path.join(P, 'rom_map_%s.csv' % S))
+os.makedirs(os.path.join(D, 'assets'), exist_ok=True)
+run(py, 'tools/port_layout_kinds.py', a.jp, a.other, os.path.join(P, 'port_report_%s.csv' % S), os.path.join(D, 'assets', 'layout_kind_overrides_%s.csv' % S))
+dd_ = os.path.join(D, 'disasm', '%s')
+run(py, 'tcrf_check/tools/rom_layout_map.py', os.path.join(D, '%s_rom_layout_map.png' % S), '--rom', a.other, '--map', os.path.join(P, 'rom_map_%s.csv' % S), '--assets', 'none',
+    '--witness', 'none', '--reach', 'none', '--unused', 'none', '--kinds', os.path.join(D, 'assets', 'layout_kind_overrides_%s.csv' % S),
+    '--names', ','.join(x for x in (dd_ % ('sym_names_%s.csv' % S), ldn, hand) if os.path.exists(x)), '--types', ','.join((dd_ % ('sym_types_%s.csv' % S), ldt)),
+    '--diff', os.path.join(P, 'diff_%s.npz' % S), '--csv', os.path.join(D, 'assets', 'layout_by_bank_%s.csv' % S),
+    '--title', 'Game Boy Camera (USA, Europe): what is in each of the 64 banks, and what differs from the Japanese ROM (the ROM drawn as 2bpp tiles)')
 run(py, 'tools/port_queue.py', a.other, trace, cmap, os.path.join(P, 'port_report_%s.csv' % S), sym, os.path.join(P, 'hand_queue_%s.csv' % S))
 if a.mgbdis:
     far = {}
