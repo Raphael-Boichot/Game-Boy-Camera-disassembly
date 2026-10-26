@@ -3930,81 +3930,81 @@ bank,addr,name,conf,note,source
 1F,433E,Sfx4_StepTbl,C,18 words: channel-4 effect step handlers,hand+auto
 1F,4362,Sfx1_Data_4362,I,one byte $C9 before the first register block,hand+auto
 1F,4363,Sfx1_Data_4363,C,inline register block of effect 04,hand+auto
-1F,4368,Sfx1_Init_04_KeyB,I,channel-1 effect init handler of ids 04 (table $41FA),hand+auto
+1F,4368,Sfx1_Init_04_KeyB,C,"channel-1 effect init handler of ids 04 (table $41FA). Named after the caller of its id (SFX1_KEY_B, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4370,Sfx1_IsRunning26,C,Z when the running channel-1 effect is $26; callers refuse to cut it,hand+auto
 1F,4377,Sfx1_Data_4377,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,437C,Sfx1_Init_3B_EraseAnim,I,channel-1 effect init handler of ids 3B (table $41FA),hand+auto
-1F,4384,Sfx1_Step_3B_EraseAnim,I,channel-1 effect step handler of ids 3B (table $4276),hand+auto
+1F,437C,Sfx1_Init_3B_EraseAnim,C,"channel-1 effect init handler of ids 3B (table $41FA). Named after the caller of its id (SFX1_ERASE_ANIM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4384,Sfx1_Step_3B_EraseAnim,C,"channel-1 effect step handler of ids 3B (table $4276). Named after the caller of its id (SFX1_ERASE_ANIM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4391,Sfx1_Data_4391,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,439B,Sfx1_Init_28_Shutter,C,"channel-1 effect init handler of id 28: the shutter sound (owner, by ear: sure)",fix
 1F,43A3,Sfx1_Step_28_Shutter,C,channel-1 effect step handler of id 28: the shutter sound,fix
 1F,43B8,Sfx1_Data_43B8,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,43C2,Sfx1_Init_2A_ChooseC,I,channel-1 effect init handler of ids 2A (table $41FA),hand+auto
-1F,43CA,Sfx1_Step_2A_ChooseC,I,channel-1 effect step handler of ids 2A (table $4276),hand+auto
+1F,43C2,Sfx1_Init_2A_ChooseC,C,"channel-1 effect init handler of ids 2A (table $41FA). Named after the caller of its id (SFX1_CHOOSE_C, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,43CA,Sfx1_Step_2A_ChooseC,C,"channel-1 effect step handler of ids 2A (table $4276). Named after the caller of its id (SFX1_CHOOSE_C, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,43DF,Sfx1_Data_43DF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,43E4,Sfx1_Init_24_LoopTone,C,"channel-1 effect init handler of id 24: loads one note (duty 50 %, constant volume $D, hardware sweep $3E down, start pitch $770 = about 910 Hz) and sets the step limit to 21 frames. Role read from the code and checked in BGB (a 45 s recording, 130 notes, no end): the step handler 1F:43EC reloads the same registers every 21 frames and never reaches Sfx1_Stop, so the tone repeats until another channel-1 request replaces it. No request of id $24 in either ROM (all 334 JP call sites of Snd_Sfx1 and the international ones load the same 40 ids, none is $24; the one computed request 05:7B11 is $20 + [$D9E5] (0..2); the six (id, channel) tables of 00:2A4B (03:61FD, 03:7615, 05:554D, 05:781B, 06:7845, 09:733E) hold no (24, channel 1)). Owner (review page, by ear): sfx1 24: ""used - Space fever probably"" (2026-10-13), ""Uncertain"" (2026-10-18).",fix
 1F,43EC,Sfx1_Step_24_LoopTone,C,"channel-1 effect step handler of id 24: every 21 frames it reloads the note of 1F:43DF into NR10-NR14 (a retrigger of the same falling tone) and does not call Sfx1_Stop, so the tone loops (BGB, 45 s). No request of id $24 in either ROM (all 334 JP call sites of Snd_Sfx1 and the international ones load the same 40 ids, none is $24; the one computed request 05:7B11 is $20 + [$D9E5] (0..2); the six (id, channel) tables of 00:2A4B (03:61FD, 03:7615, 05:554D, 05:781B, 06:7845, 09:733E) hold no (24, channel 1)). Owner (review page, by ear): sfx1 24: ""used - Space fever probably"" (2026-10-13), ""Uncertain"" (2026-10-18).",fix
 1F,43F7,Sfx1_Data_43F7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4401,Sfx1_Init_1E_26_Choose,I,"channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: used - boss death in space fever; the name BossHit comes from the caller SpaceFever_BossHit (id 26); name kept, the sounds agree on Space Fever. Requested 12 times from frame 2799 in the Space Fever II key-log replay (organic; sf2_sounds.csv), so it is NOT 'only reached when forced'.",fix
-1F,4409,Sfx1_Step_26_BossHit,I,channel-1 effect step handler of ids 26 (table $4276),hand+auto
+1F,4401,Sfx1_Init_1E_26_Choose_SpaceFeverBossDeath,C,"channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: used - boss death in space fever; the name BossHit comes from the caller SpaceFever_BossHit (id 26); name kept, the sounds agree on Space Fever. Requested 12 times from frame 2799 in the Space Fever II key-log replay (organic; sf2_sounds.csv), so it is NOT 'only reached when forced'. Named after the caller of its ids (SFX1_CHOOSE, SFX1_SPACE_FEVER_BOSS_DEATH, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
+1F,4409,Sfx1_Step_26_SpaceFeverBossDeath,C,"channel-1 effect step handler of ids 26 (table $4276). Named after the caller of its id (SFX1_SPACE_FEVER_BOSS_DEATH, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4427,Sfx1_Data_4427,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4431,Sfx1_Init_25_SpaceFeverStart,I,channel-1 effect init handler of ids 25 (table $41FA),hand+auto
-1F,4439,Sfx1_Step_25_SpaceFeverStart,I,channel-1 effect step handler of ids 25 (table $4276),hand+auto
+1F,4431,Sfx1_Init_25_SpaceFeverStart,C,"channel-1 effect init handler of ids 25 (table $41FA). Named after the caller of its id (SFX1_SPACE_FEVER_START, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4439,Sfx1_Step_25_SpaceFeverStart,C,"channel-1 effect step handler of ids 25 (table $4276). Named after the caller of its id (SFX1_SPACE_FEVER_START, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4452,Sfx1_Data_4452,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4457,Sfx1_Init_27_Shot,I,channel-1 effect init handler of ids 27 (table $41FA),hand+auto
+1F,4457,Sfx1_Init_27_SpaceFeverWave0End,C,"channel-1 effect init handler of ids 27 (table $41FA). Named after the caller of its id (SFX1_SPACE_FEVER_WAVE0_END, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,445F,Sfx1_Data_445F,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4464,Sfx1_Init_0E_Hit,I,channel-1 effect init handler of ids 0E (table $41FA),hand+auto
-1F,4475,Sfx1_Step_0E_Hit,I,channel-1 effect step handler of ids 0E (table $4276),hand+auto
+1F,4464,Sfx1_Init_0E_ChooseD,C,"channel-1 effect init handler of ids 0E (table $41FA). Named after the caller of its id (SFX1_CHOOSE_D, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4475,Sfx1_Step_0E_ChooseD,C,"channel-1 effect step handler of ids 0E (table $4276). Named after the caller of its id (SFX1_CHOOSE_D, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,448F,Sfx1_Data_448F,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4499,Sfx1_Init_1A,C,channel-1 effect init handler of ids 1A (table $41FA),hand+auto
-1F,44A1,Sfx1_Step_1A_1E_Choose,I,channel-1 effect step handler of ids 1A 1E (table $4276),hand+auto
+1F,44A1,Sfx1_Step_1A_1E_HotspotSound07_Choose,C,"channel-1 effect step handler of ids 1A 1E (table $4276). Named after the caller of its ids (SFX1_HOTSPOT_SOUND_07, SFX1_CHOOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,44C0,Sfx1_Data_44C0,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,44CA,Sfx1_Init_03_KeyA,I,channel-1 effect init handler of ids 03 (table $41FA),hand+auto
-1F,44D2,Sfx1_Step_03_KeyA,I,channel-1 effect step handler of ids 03 (table $4276),hand+auto
+1F,44CA,Sfx1_Init_03_KeyA,C,"channel-1 effect init handler of ids 03 (table $41FA). Named after the caller of its id (SFX1_KEY_A, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,44D2,Sfx1_Step_03_KeyA,C,"channel-1 effect step handler of ids 03 (table $4276). Named after the caller of its id (SFX1_KEY_A, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,44EE,Sfx1_Data_44EE,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,44F3,Sfx1_Init_0B_Select,I,channel-1 effect init handler of ids 0B (table $41FA),hand+auto
+1F,44F3,Sfx1_Init_0B_BeepRefused,C,"channel-1 effect init handler of ids 0B (table $41FA). Named after the caller of its id (SFX1_BEEP_REFUSED, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,44FC,Sfx1_Data_44FC,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4501,Sfx1_Init_1C,C,channel-1 effect init handler of ids 1C (table $41FA),hand+auto
 1F,4509,Sfx1_Data_4509,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4511,Sfx1_Init_1B_TargetMenu,I,channel-1 effect init handler of ids 1B (table $41FA),hand+auto
-1F,451E,Sfx1_Step_1B_TargetMenu,I,channel-1 effect step handler of ids 1B (table $4276),hand+auto
+1F,4511,Sfx1_Init_1B_SpaceFeverMenuPickGame,C,"channel-1 effect init handler of ids 1B (table $41FA). Named after the caller of its id (SFX1_SPACE_FEVER_MENU_PICK_GAME, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,451E,Sfx1_Step_1B_SpaceFeverMenuPickGame,C,"channel-1 effect step handler of ids 1B (table $4276). Named after the caller of its id (SFX1_SPACE_FEVER_MENU_PICK_GAME, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,452A,Sfx1_Data_452A,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4530,Sfx1_Init_16_OptionChange,I,channel-1 effect init handler of ids 16 (table $41FA),hand+auto
-1F,453D,Sfx1_Step_16_OptionChange,I,channel-1 effect step handler of ids 16 (table $4276),hand+auto
+1F,4530,Sfx1_Init_16_OptionChange,C,"channel-1 effect init handler of ids 16 (table $41FA). Named after the caller of its id (SFX1_OPTION_CHANGE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,453D,Sfx1_Step_16_OptionChange,C,"channel-1 effect step handler of ids 16 (table $4276). Named after the caller of its id (SFX1_OPTION_CHANGE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4549,Sfx1_Data_4549,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4554,Sfx1_Init_3C_3D_3E_StopMusic,I,"channel-1 effect init handler of ids 3C 3D 3E (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 3D: used - death in Ball or Space fever; ids 3D and 3E share this handler; owner for 3E: death in Ball or space fever (used).",fix
-1F,4569,Sfx1_Step_3C_3D_3E_Mode07Play,I,channel-1 effect step handler of ids 3C 3D 3E (table $4276),hand+auto
+1F,4554,Sfx1_Init_3C_3D_3E_SpaceFeverPlayerDeathJingle,C,"channel-1 effect init handler of ids 3C 3D 3E (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 3D: used - death in Ball or Space fever; ids 3D and 3E share this handler; owner for 3E: death in Ball or space fever (used). Named after the caller of its ids (SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE, SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3D, SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
+1F,4569,Sfx1_Step_3C_3D_3E_SpaceFeverPlayerDeathJingle,C,"channel-1 effect step handler of ids 3C 3D 3E (table $4276). Named after the caller of its ids (SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE, SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3D, SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4575,Sfx1_Data_4575,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4583,Sfx1_Init_17,C,channel-1 effect init handler of ids 17 (table $41FA),hand+auto
 1F,4590,Sfx1_Step_17,C,channel-1 effect step handler of ids 17 (table $4276),hand+auto
 1F,45B7,Sfx1_Data_45B7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,45C1,Sfx1_Init_29_ChooseB,I,channel-1 effect init handler of ids 29 (table $41FA),hand+auto
-1F,45C9,Sfx1_Step_29_ChooseB,I,channel-1 effect step handler of ids 29 (table $4276),hand+auto
+1F,45C1,Sfx1_Init_29_ChooseB,C,"channel-1 effect init handler of ids 29 (table $41FA). Named after the caller of its id (SFX1_CHOOSE_B, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,45C9,Sfx1_Step_29_ChooseB,C,"channel-1 effect step handler of ids 29 (table $4276). Named after the caller of its id (SFX1_CHOOSE_B, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,45E8,Sfx1_Data_45E8,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,45F7,Sfx1_Init_05_ModeEnter,I,channel-1 effect init handler of ids 05 (table $41FA),hand+auto
-1F,45FF,Sfx1_Step_05_ModeEnter,I,channel-1 effect step handler of ids 05 (table $4276),hand+auto
+1F,45F7,Sfx1_Init_05_KeyStart,C,"channel-1 effect init handler of ids 05 (table $41FA). Named after the caller of its id (SFX1_KEY_START, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,45FF,Sfx1_Step_05_KeyStart,C,"channel-1 effect step handler of ids 05 (table $4276). Named after the caller of its id (SFX1_KEY_START, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4627,Sfx1_Data_4627,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,463E,Sfx1_Init_0A_MenuPageTurn,I,channel-1 effect init handler of ids 0A (table $41FA),hand+auto
-1F,4646,Sfx1_Step_0A_MenuPageTurn,I,channel-1 effect step handler of ids 0A (table $4276),hand+auto
+1F,463E,Sfx1_Init_0A_MainMenuPageTurn,C,"channel-1 effect init handler of ids 0A (table $41FA). Named after the caller of its id (SFX1_MAIN_MENU_PAGE_TURN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4646,Sfx1_Step_0A_MainMenuPageTurn,C,"channel-1 effect step handler of ids 0A (table $4276). Named after the caller of its id (SFX1_MAIN_MENU_PAGE_TURN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4670,Sfx1_Data_4670,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,467A,Sfx1_Init_02_CursorMove,I,channel-1 effect init handler of ids 02 (table $41FA),hand+auto
-1F,4682,Sfx1_Step_02_CursorMove,I,channel-1 effect step handler of ids 02 (table $4276),hand+auto
+1F,467A,Sfx1_Init_02_KeyUpDown,C,"channel-1 effect init handler of ids 02 (table $41FA). Named after the caller of its id (SFX1_KEY_UP_DOWN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4682,Sfx1_Step_02_KeyUpDown,C,"channel-1 effect step handler of ids 02 (table $4276). Named after the caller of its id (SFX1_KEY_UP_DOWN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4697,Sfx1_Data_4697,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,469C,Sfx1_Init_20_StepFast,I,channel-1 effect init handler of ids 20 (table $41FA),hand+auto
+1F,469C,Sfx1_Init_20_StepFast,C,"channel-1 effect init handler of ids 20 (table $41FA). Named after the caller of its id (SFX1_STEP_FAST, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,46A4,Sfx1_Data_46A4,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,46A9,Sfx1_Init_21_StepValue,I,channel-1 effect init handler of ids 21 (table $41FA),hand+auto
+1F,46A9,Sfx1_Init_21_StepValue,C,"channel-1 effect init handler of ids 21 (table $41FA). Named after the caller of its id (SFX1_STEP_VALUE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,46B1,Sfx1_Data_46B1,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,46B6,Sfx1_Init_22_DirectionKey,I,channel-1 effect init handler of ids 22 (table $41FA),hand+auto
+1F,46B6,Sfx1_Init_22_DirectionKey,C,"channel-1 effect init handler of ids 22 (table $41FA). Named after the caller of its id (SFX1_DIRECTION_KEY, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,46BE,Sfx1_Data_46BE,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,46C3,Sfx1_Init_23_2B_BallPoint,I,channel-1 effect init handler of ids 23 2B (table $41FA),hand+auto
+1F,46C3,Sfx1_Init_23_2B_BallPoint,C,"channel-1 effect init handler of ids 23 2B (table $41FA). Named after the caller of its ids (SFX1_BALL_POINT, SFX1_BALL_POINT_ALIAS_2B, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,46CB,Sfx1_Data_46CB,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,46D0,Sfx1_Init_01_ValueTick,I,channel-1 effect init handler of ids 01 (table $41FA),hand+auto
+1F,46D0,Sfx1_Init_01_KeyLeftRight,C,"channel-1 effect init handler of ids 01 (table $41FA). Named after the caller of its id (SFX1_KEY_LEFT_RIGHT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,46D8,Sfx1_Data_46D8,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,46DD,Unused_Sfx1_Init_46DD,I,channel-1 init handler in the id 20-23 series that no table lists (dead),hand+auto
 1F,46E5,Sfx1_10_DigitRegs,C,16 jingle digit register blocks of 5 bytes,hand+auto
 1F,4735,Sfx1_10_DigitIdx,C,digit -> block offset,hand+auto
-1F,4745,Sfx1_Init_10_TagJingle,I,channel-1 effect init handler of ids 10 (table $41FA),hand+auto
-1F,474D,Sfx1_Step_10_TagJingle,I,channel-1 effect step handler of ids 10 (table $4276),hand+auto
+1F,4745,Sfx1_Init_10_TagDigitsJingle,C,"channel-1 effect init handler of ids 10 (table $41FA). Named after the caller of its id (SFX1_TAG_DIGITS_JINGLE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,474D,Sfx1_Step_10_TagDigitsJingle,C,"channel-1 effect step handler of ids 10 (table $4276). Named after the caller of its id (SFX1_TAG_DIGITS_JINGLE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4769,Sfx1_10_DigitPtr0,C,HL -> register block for the first jingle digit ($DD03),hand+auto
 1F,476C,Sfx1_10_DigitPtr,C,HL = $46E5 + $4735[digit at HL] : register block of one jingle digit,hand+auto
 1F,477B,Sfx1_Data_477B,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
@@ -4012,25 +4012,25 @@ bank,addr,name,conf,note,source
 1F,4791,Sfx1_Step_Generic,C,shared channel-1 step handler (ids 01 04 07 0B 0C 12 18 1C 1D 1F 20 21 22 23 27 2B 2C 2D 2E 34): Snd_Sfx_TickCounter until the limit; then the effect stops,hand+auto
 1F,4796,Sfx1_Stop,C,channel-1 effect ends: running id 0; NR10=0; NR12=$08; NR14=$80; busy flag off,hand+auto
 1F,47AA,Sfx1_Data_47AA,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,47B4,Sfx1_Init_06_0D_SliderStep,I,channel-1 effect init handler of ids 06 0D (table $41FA),hand+auto
-1F,47C0,Sfx1_Step_06_0D_SliderStep,I,channel-1 effect step handler of ids 06 0D (table $4276),hand+auto
+1F,47B4,Sfx1_Init_06_0D_KeySelect_SpaceFeverBigEnemyKill,C,"channel-1 effect init handler of ids 06 0D (table $41FA). Named after the caller of its ids (SFX1_KEY_SELECT, SFX1_SPACE_FEVER_BIG_ENEMY_KILL, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,47C0,Sfx1_Step_06_0D_KeySelect_SpaceFeverBigEnemyKill,C,"channel-1 effect step handler of ids 06 0D (table $4276). Named after the caller of its ids (SFX1_KEY_SELECT, SFX1_SPACE_FEVER_BIG_ENEMY_KILL, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,47D9,Sfx1_Data_47D9,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,47EC,Sfx1_Init_09_MenuPageUp,I,channel-1 effect init handler of ids 09 (table $41FA),hand+auto
-1F,47F4,Sfx1_Step_09_MenuPageUp,I,channel-1 effect step handler of ids 09 (table $4276),hand+auto
+1F,47EC,Sfx1_Init_09_MainMenuPageUp,C,"channel-1 effect init handler of ids 09 (table $41FA). Named after the caller of its id (SFX1_MAIN_MENU_PAGE_UP, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,47F4,Sfx1_Step_09_MainMenuPageUp,C,"channel-1 effect step handler of ids 09 (table $4276). Named after the caller of its id (SFX1_MAIN_MENU_PAGE_UP, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4812,Sfx1_Step_09_Finish,C,"end of step 09 of the channel-1 effect: $DD78 = 4, then Sfx1_Stop (branch target; code read 2026-10-19)",hand
 1F,481A,Sfx1_Data_481A,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,481F,Sfx1_Init_14_HotSpot,I,"channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure)",fix
-1F,482C,Sfx1_Step_14_HotSpot,I,channel-1 effect step handler of id 14 (hot spot),fix
+1F,481F,Sfx1_Init_14_HotspotSound01,C,"channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure). Named after the caller of its id (SFX1_HOTSPOT_SOUND_01, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
+1F,482C,Sfx1_Step_14_HotspotSound01,C,"channel-1 effect step handler of id 14 (hot spot). Named after the caller of its id (SFX1_HOTSPOT_SOUND_01, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
 1F,483F,Sfx1_Data_483F,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4844,Sfx1_Init_15_HotSpot,I,"channel-1 effect init handler of id 15: hot-spot related (owner, by ear: sure)",fix
-1F,4851,Sfx1_Step_15_HotSpot,I,channel-1 effect step handler of id 15 (hot spot),fix
+1F,4844,Sfx1_Init_15_HotspotSound02,C,"channel-1 effect init handler of id 15: hot-spot related (owner, by ear: sure). Named after the caller of its id (SFX1_HOTSPOT_SOUND_02, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
+1F,4851,Sfx1_Step_15_HotspotSound02,C,"channel-1 effect step handler of id 15 (hot spot). Named after the caller of its id (SFX1_HOTSPOT_SOUND_02, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
 1F,4864,Sfx1_Data_4864,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4869,Sfx1_Init_18,C,channel-1 effect init handler of ids 18 (table $41FA),hand+auto
-1F,4871,Sfx1_Init_12_1D_WindowSlideIn,I,channel-1 effect init handler of ids 12 1D (table $41FA),hand+auto
+1F,4871,Sfx1_Init_12_1D_PanelOpen,C,"channel-1 effect init handler of ids 12 1D (table $41FA). Named after the caller of its ids (SFX1_PANEL_OPEN, SFX1_PANEL_OPEN_ALIAS_1D, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4879,Sfx1_Data_4879,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4883,Sfx1_Init_0C_EnemyKill,I,channel-1 effect init handler of ids 0C (table $41FA),hand+auto
+1F,4883,Sfx1_Init_0C_SpaceFeverEnemyKill,C,"channel-1 effect init handler of ids 0C (table $41FA). Named after the caller of its id (SFX1_SPACE_FEVER_ENEMY_KILL, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,488F,Sfx1_Data_488F,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4894,Sfx1_Init_07_MainMenuPick,I,channel-1 effect init handler of ids 07 (table $41FA),hand+auto
+1F,4894,Sfx1_Init_07_MainMenuMove,C,"channel-1 effect init handler of ids 07 (table $41FA). Named after the caller of its id (SFX1_MAIN_MENU_MOVE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,48A9,Sfx1_Data_48A9,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,48AE,Sfx1_Init_2C,C,channel-1 effect init handler of ids 2C (table $41FA),hand+auto
 1F,48DA,Sfx1_InitTail_ClearFlag,C,"shared tail of four channel-1 init routines (callers 4973, 49C3, 4A7B, 4AA2) after Snd_Sfx_Start: clears $DD08 and returns (branch target; code read 2026-10-19)",hand
@@ -4053,55 +4053,55 @@ bank,addr,name,conf,note,source
 1F,4A44,Sfx1_Init_34_SeqStep,C,channel-1 effect init handler of ids 34 (table $41FA),hand+auto
 1F,4A61,Unused_Sfx1_Step_4A61,I,step handler that no table lists (effect $34 uses the generic step; dead),hand+auto
 1F,4A69,Sfx1_Data_4A69,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4A6E,Sfx1_Init_30_Celebration,I,channel-1 effect init handler of ids 30 (table $41FA),hand+auto
-1F,4A7E,Sfx1_Step_30_Celebration,I,channel-1 effect step handler of ids 30 (table $4276),hand+auto
+1F,4A6E,Sfx1_Init_30_RunCelebration,C,"channel-1 effect init handler of ids 30 (table $41FA). Named after the caller of its id (SFX1_RUN_CELEBRATION, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4A7E,Sfx1_Step_30_RunCelebration,C,"channel-1 effect step handler of ids 30 (table $4276). Named after the caller of its id (SFX1_RUN_CELEBRATION, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4A90,Sfx1_Data_4A90,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4A95,Sfx1_Init_31,C,channel-1 effect init handler of ids 31 (table $41FA),hand+auto
 1F,4AA5,Sfx1_Step_31,C,channel-1 effect step handler of ids 31 (table $4276),hand+auto
 1F,4AB8,Sfx1_Data_4AB8,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4AC7,Sfx1_Init_38_Move,I,channel-1 effect init handler of ids 38 (table $41FA),hand+auto
-1F,4AD4,Sfx1_Step_38_Move,I,channel-1 effect step handler of ids 38 (table $4276),hand+auto
+1F,4AC7,Sfx1_Init_38_CursorMove,C,"channel-1 effect init handler of ids 38 (table $41FA). Named after the caller of its id (SFX1_CURSOR_MOVE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4AD4,Sfx1_Step_38_CursorMove,C,"channel-1 effect step handler of ids 38 (table $4276). Named after the caller of its id (SFX1_CURSOR_MOVE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4ADF,Sfx1_Data_4ADF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4AEE,Sfx1_Init_37_CopyBrowse,I,channel-1 effect init handler of ids 37 (table $41FA),hand+auto
-1F,4AFB,Sfx1_Step_37_CopyBrowse,I,channel-1 effect step handler of ids 37 (table $4276),hand+auto
+1F,4AEE,Sfx1_Init_37_CopyBrowse,C,"channel-1 effect init handler of ids 37 (table $41FA). Named after the caller of its id (SFX1_COPY_BROWSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4AFB,Sfx1_Step_37_CopyBrowse,C,"channel-1 effect step handler of ids 37 (table $4276). Named after the caller of its id (SFX1_COPY_BROWSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4B05,Sfx1_Data_4B05,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4B17,Sfx1_Init_39_MenuChoose,I,channel-1 effect init handler of ids 39 (table $41FA),hand+auto
-1F,4B24,Sfx1_Step_39_MenuChoose,I,channel-1 effect step handler of ids 39 (table $4276),hand+auto
+1F,4B17,Sfx1_Init_39_MenuChoose,C,"channel-1 effect init handler of ids 39 (table $41FA). Named after the caller of its id (SFX1_MENU_CHOOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4B24,Sfx1_Step_39_MenuChoose,C,"channel-1 effect step handler of ids 39 (table $4276). Named after the caller of its id (SFX1_MENU_CHOOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4B2E,Sfx1_Data_4B2E,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4B3D,Sfx1_Init_36_PageStep,I,channel-1 effect init handler of ids 36 (table $41FA),hand+auto
-1F,4B4A,Sfx1_Step_36_PageStep,I,channel-1 effect step handler of ids 36 (table $4276),hand+auto
+1F,4B3D,Sfx1_Init_36_PageStep,C,"channel-1 effect init handler of ids 36 (table $41FA). Named after the caller of its id (SFX1_PAGE_STEP, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4B4A,Sfx1_Step_36_PageStep,C,"channel-1 effect step handler of ids 36 (table $4276). Named after the caller of its id (SFX1_PAGE_STEP, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4B54,Sfx1_Data_4B54,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4B64,Sfx1_Init_35_Jump,I,channel-1 effect init handler of ids 35 (table $41FA),hand+auto
-1F,4B71,Sfx1_Step_35_Jump,I,channel-1 effect step handler of ids 35 (table $4276),hand+auto
+1F,4B64,Sfx1_Init_35_RunJump,C,"channel-1 effect init handler of ids 35 (table $41FA). Named after the caller of its id (SFX1_RUN_JUMP, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4B71,Sfx1_Step_35_RunJump,C,"channel-1 effect step handler of ids 35 (table $4276). Named after the caller of its id (SFX1_RUN_JUMP, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4B79,Sfx1_StepRegTable,C,shared step: reads one byte of the table in HL at index $DD64 into NR12 until $00 (then Sfx1_Stop),hand+auto
 1F,4B92,Sfx1_Data_4B92,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4BA6,Sfx1_Init_0F_EnemyKillC,I,channel-1 effect init handler of ids 0F (table $41FA),hand+auto
-1F,4BAE,Sfx1_Step_0F_EnemyKillC,I,channel-1 effect step handler of ids 0F (table $4276),hand+auto
+1F,4BA6,Sfx1_Init_0F_SpaceFeverTargetKill,C,"channel-1 effect init handler of ids 0F (table $41FA). Named after the caller of its id (SFX1_SPACE_FEVER_TARGET_KILL, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4BAE,Sfx1_Step_0F_SpaceFeverTargetKill,C,"channel-1 effect step handler of ids 0F (table $4276). Named after the caller of its id (SFX1_SPACE_FEVER_TARGET_KILL, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4BBF,Sfx1_Data_4BBF,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4BCE,Sfx1_Init_11_Confirm,I,channel-1 effect init handler of ids 11 (table $41FA),hand+auto
-1F,4BD6,Sfx1_Step_11_Confirm,I,channel-1 effect step handler of ids 11 (table $4276),hand+auto
+1F,4BCE,Sfx1_Init_11_Confirm,C,"channel-1 effect init handler of ids 11 (table $41FA). Named after the caller of its id (SFX1_CONFIRM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4BD6,Sfx1_Step_11_Confirm,C,"channel-1 effect step handler of ids 11 (table $4276). Named after the caller of its id (SFX1_CONFIRM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4BF7,Sfx1_Data_4BF7,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4C09,Sfx1_Init_13_WindowSlideOut,I,channel-1 effect init handler of ids 13 (table $41FA),hand+auto
-1F,4C11,Sfx1_Step_13_WindowSlideOut,I,channel-1 effect step handler of ids 13 (table $4276),hand+auto
+1F,4C09,Sfx1_Init_13_PanelClose,C,"channel-1 effect init handler of ids 13 (table $41FA). Named after the caller of its id (SFX1_PANEL_CLOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4C11,Sfx1_Step_13_PanelClose,C,"channel-1 effect step handler of ids 13 (table $4276). Named after the caller of its id (SFX1_PANEL_CLOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4C2A,Sfx1_Data_4C2A,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4C3B,Sfx1_Init_19_3A_LayoutKey,I,channel-1 effect init handler of ids 19 3A (table $41FA),hand+auto
-1F,4C43,Sfx1_Step_19_3A_LayoutKey,I,channel-1 effect step handler of ids 19 3A (table $4276),hand+auto
+1F,4C3B,Sfx1_Init_19_3A_ComposeLayoutKey_PickPhoto,C,"channel-1 effect init handler of ids 19 3A (table $41FA). Named after the caller of its ids (SFX1_COMPOSE_LAYOUT_KEY, SFX1_PICK_PHOTO, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4C43,Sfx1_Step_19_3A_ComposeLayoutKey_PickPhoto,C,"channel-1 effect step handler of ids 19 3A (table $4276). Named after the caller of its ids (SFX1_COMPOSE_LAYOUT_KEY, SFX1_PICK_PHOTO, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4C5C,Sfx1_Data_4C5C,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
-1F,4C61,Sfx1_Init_08_MenuPageDown,I,channel-1 effect init handler of ids 08 (table $41FA),hand+auto
-1F,4C6F,Sfx1_Step_08_MenuPageDown,I,channel-1 effect step handler of ids 08 (table $4276),hand+auto
+1F,4C61,Sfx1_Init_08_MainMenuPageDown,C,"channel-1 effect init handler of ids 08 (table $41FA). Named after the caller of its id (SFX1_MAIN_MENU_PAGE_DOWN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4C6F,Sfx1_Step_08_MainMenuPageDown,C,"channel-1 effect step handler of ids 08 (table $4276). Named after the caller of its id (SFX1_MAIN_MENU_PAGE_DOWN, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4CB1,Sfx1_Data_4CB1,C,inline data of the channel-1 handlers (register block / sequence),hand+auto
 1F,4CDF,Sfx4_Init_09,C,channel-4 effect init handler of ids 09 (table $431A),hand+auto
 1F,4CE7,Sfx4_Step_09,C,channel-4 effect step handler of ids 09 (table $433E),hand+auto
 1F,4D07,Sfx4_Data_4D07,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4D28,Sfx4_Init_05_EraseAnim,I,"channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used - player death in space fever ?; the name EraseAnim comes from the caller EraseAnim_Run; the owner hears a death sound, to be settled.",fix
+1F,4D28,Sfx4_Init_05_EraseAnim,C,"channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used - player death in space fever ?; the name EraseAnim comes from the caller EraseAnim_Run; the owner hears a death sound, to be settled. Named after the caller of its id (SFX4_ERASE_ANIM, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",fix
 1F,4D3F,Sfx4_Init_06,C,channel-4 effect init handler of ids 06 (table $431A),hand+auto
 1F,4D47,Sfx4_Step_06,C,channel-4 effect step handler of ids 06 (table $433E),hand+auto
 1F,4D66,Sfx4_Step_06_LoadNR4x,C,"step 06 of the channel-4 effect when the table value is 0: $DD7D = 1, then Snd_Sfx_LoadNR4x with the data at $4D14 (branch target; code read 2026-10-19)",hand
 1F,4D72,Sfx4_Data_4D72,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
 1F,4D7A,Sfx4_Init_0B,C,channel-4 effect init handler of ids 0B (table $431A),hand+auto
 1F,4D82,Sfx4_Data_4D82,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4D86,Sfx4_Init_01_StampCommit,I,channel-4 effect init handler of ids 01 (table $431A),hand+auto
-1F,4D8E,Sfx4_Step_01_StampCommit,I,channel-4 effect step handler of ids 01 (table $433E),hand+auto
+1F,4D86,Sfx4_Init_01_StampCommit,C,"channel-4 effect init handler of ids 01 (table $431A). Named after the caller of its id (SFX4_STAMP_COMMIT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4D8E,Sfx4_Step_01_StampCommit,C,"channel-4 effect step handler of ids 01 (table $433E). Named after the caller of its id (SFX4_STAMP_COMMIT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4DA8,Sfx4_Data_4DA8,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
 1F,4DAC,Sfx4_Init_0D,C,channel-4 effect init handler of ids 0D (table $431A),hand+auto
 1F,4DB4,Sfx4_Data_4DB4,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
@@ -4110,22 +4110,22 @@ bank,addr,name,conf,note,source
 1F,4DF1,Sfx4_Init_0E,C,channel-4 effect init handler of ids 0E (table $431A),hand+auto
 1F,4DF9,Sfx4_Step_0E,C,channel-4 effect step handler of ids 0E (table $433E),hand+auto
 1F,4E08,Sfx4_Data_4E08,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4E21,Sfx4_Init_07_FireShots,I,channel-4 effect init handler of ids 07 (table $431A),hand+auto
-1F,4E29,Sfx4_Step_07_FireShots,I,channel-4 effect step handler of ids 07 (table $433E),hand+auto
+1F,4E21,Sfx4_Init_07_SpaceFeverFireShots,C,"channel-4 effect init handler of ids 07 (table $431A). Named after the caller of its id (SFX4_SPACE_FEVER_FIRE_SHOTS, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4E29,Sfx4_Step_07_SpaceFeverFireShots,C,"channel-4 effect step handler of ids 07 (table $433E). Named after the caller of its id (SFX4_SPACE_FEVER_FIRE_SHOTS, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4E41,Sfx4_Data_4E41,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4E49,Sfx4_Init_0A_LinkChoose,I,channel-4 effect init handler of ids 0A (table $431A),hand+auto
-1F,4E57,Sfx4_Step_0A_LinkChoose,I,channel-4 effect step handler of ids 0A (table $433E),hand+auto
+1F,4E49,Sfx4_Init_0A_LinkChoose,C,"channel-4 effect init handler of ids 0A (table $431A). Named after the caller of its id (SFX4_LINK_CHOOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4E57,Sfx4_Step_0A_LinkChoose,C,"channel-4 effect step handler of ids 0A (table $433E). Named after the caller of its id (SFX4_LINK_CHOOSE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4E66,Sfx4_Data_4E66,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4E6E,Sfx4_Init_12_MusicSelect,I,channel-4 effect init handler of ids 12 (table $431A),hand+auto
-1F,4E76,Sfx4_Step_12_MusicSelect,I,channel-4 effect step handler of ids 12 (table $433E),hand+auto
+1F,4E6E,Sfx4_Init_12_MusicSelect,C,"channel-4 effect init handler of ids 12 (table $431A). Named after the caller of its id (SFX4_MUSIC_SELECT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4E76,Sfx4_Step_12_MusicSelect,C,"channel-4 effect step handler of ids 12 (table $433E). Named after the caller of its id (SFX4_MUSIC_SELECT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4E8F,Sfx4_Data_4E8F,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4E97,Sfx4_Init_04_HurdleCollision,I,channel-4 effect init handler of ids 04 (table $431A),hand+auto
-1F,4E9F,Sfx4_Step_04_HurdleCollision,I,channel-4 effect step handler of ids 04 (table $433E),hand+auto
+1F,4E97,Sfx4_Init_04_RunHurdleHit,C,"channel-4 effect init handler of ids 04 (table $431A). Named after the caller of its id (SFX4_RUN_HURDLE_HIT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4E9F,Sfx4_Step_04_RunHurdleHit,C,"channel-4 effect step handler of ids 04 (table $433E). Named after the caller of its id (SFX4_RUN_HURDLE_HIT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4EB8,Sfx4_Data_4EB8,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4EBC,Sfx4_Init_11_FlagHeight,I,channel-4 effect init handler of ids 11 (table $431A),hand+auto
-1F,4EC4,Sfx4_Step_11_FlagHeight,I,channel-4 effect step handler of ids 11 (table $433E),hand+auto
+1F,4EBC,Sfx4_Init_11_RunFlagHeight,C,"channel-4 effect init handler of ids 11 (table $431A). Named after the caller of its id (SFX4_RUN_FLAG_HEIGHT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4EC4,Sfx4_Step_11_RunFlagHeight,C,"channel-4 effect step handler of ids 11 (table $433E). Named after the caller of its id (SFX4_RUN_FLAG_HEIGHT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4ED9,Sfx4_Data_4ED9,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
-1F,4EDD,Sfx4_Init_08_StopMusic,I,channel-4 effect init handler of ids 08 (table $431A),hand+auto
+1F,4EDD,Sfx4_Init_08_SpaceFeverPlayerDeath,C,"channel-4 effect init handler of ids 08 (table $431A). Named after the caller of its id (SFX4_SPACE_FEVER_PLAYER_DEATH, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4EE8,Sfx4_Data_4EE8,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
 1F,4EEC,Sfx4_Init_02,C,channel-4 effect init handler of ids 02 (table $431A),hand+auto
 1F,4EF4,Sfx4_Data_4EF4,C,inline data of the channel-4 handlers (register block / sequence),hand+auto
@@ -4144,24 +4144,24 @@ bank,addr,name,conf,note,source
 1F,4F98,Sfx3_Step_07,C,channel-3 effect step handler of ids 07 (table $4306),hand+auto
 1F,4FBC,Unused_Snd_SetFreeze,I,sets $DD0D (snd_freeze) = 1; no caller,hand+auto
 1F,4FC2,Sfx3_Data_4FC2,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
-1F,4FCB,Sfx3_Step_09_DeleteDialogB,I,channel-3 effect step handler of ids 09 (table $4306),hand+auto
-1F,4FE1,Sfx3_Init_09_DeleteDialogB,I,channel-3 effect init handler of ids 09 (table $42F2),hand+auto
+1F,4FCB,Sfx3_Step_09_DeleteDialogSecond,C,"channel-3 effect step handler of ids 09 (table $4306). Named after the caller of its id (SFX3_DELETE_DIALOG_SECOND, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,4FE1,Sfx3_Init_09_DeleteDialogSecond,C,"channel-3 effect init handler of ids 09 (table $42F2). Named after the caller of its id (SFX3_DELETE_DIALOG_SECOND, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,4FEA,Sfx3_Data_4FEA,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
-1F,4FF5,Sfx3_Step_08_DeleteDialogA,I,channel-3 effect step handler of ids 08 (table $4306),hand+auto
-1F,501E,Sfx3_Init_08_DeleteDialogA,I,channel-3 effect init handler of ids 08 (table $42F2),hand+auto
+1F,4FF5,Sfx3_Step_08_DeleteDialogFirst,C,"channel-3 effect step handler of ids 08 (table $4306). Named after the caller of its id (SFX3_DELETE_DIALOG_FIRST, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,501E,Sfx3_Init_08_DeleteDialogFirst,C,"channel-3 effect init handler of ids 08 (table $42F2). Named after the caller of its id (SFX3_DELETE_DIALOG_FIRST, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,5027,Sfx3_Data_5027,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
-1F,502C,Sfx3_Step_03_BossHit,I,channel-3 effect step handler of ids 03 (table $4306),hand+auto
-1F,5046,Sfx3_Init_03_BossHit,I,channel-3 effect init handler of ids 03 (table $42F2),hand+auto
+1F,502C,Sfx3_Step_03_SpaceFeverBossHit,C,"channel-3 effect step handler of ids 03 (table $4306). Named after the caller of its id (SFX3_SPACE_FEVER_BOSS_HIT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,5046,Sfx3_Init_03_SpaceFeverBossHit,C,"channel-3 effect init handler of ids 03 (table $42F2). Named after the caller of its id (SFX3_SPACE_FEVER_BOSS_HIT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,5054,Sfx3_Data_5054,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
-1F,5059,Sfx3_Step_02_ViewArcadeSelect,I,channel-3 effect step handler of ids 02 (table $4306),hand+auto
-1F,507D,Sfx3_Init_02_ViewArcadeSelect,I,channel-3 effect init handler of ids 02 (table $42F2),hand+auto
+1F,5059,Sfx3_Step_02_MainMenuViewArcade,C,"channel-3 effect step handler of ids 02 (table $4306). Named after the caller of its id (SFX3_MAIN_MENU_VIEW_ARCADE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,507D,Sfx3_Init_02_MainMenuViewArcade,C,"channel-3 effect init handler of ids 02 (table $42F2). Named after the caller of its id (SFX3_MAIN_MENU_VIEW_ARCADE, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,508B,Sfx3_Data_508B,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
 1F,5090,Sfx3_Step_04,C,channel-3 effect step handler of ids 04 (table $4306),hand+auto
 1F,50A4,Sfx3_Step_04_WriteNR33,C,shared tail of step 04 of the channel-3 effect: writes A to NR33 and returns (branch target; code read 2026-10-19),hand
 1F,50AB,Sfx3_Init_04,C,"channel-3 effect init handler of ids 04 (table $42F2). Owner (review page, 2026-10-13, by ear): sfx3 04: unsure.",fix
 1F,50B9,Sfx3_Data_50B9,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
-1F,50BE,Sfx3_Step_01_ShootSelect,I,channel-3 effect step handler of ids 01 (table $4306),hand+auto
-1F,50D7,Sfx3_Init_01_ShootSelect,I,channel-3 effect init handler of ids 01 (table $42F2),hand+auto
+1F,50BE,Sfx3_Step_01_MainMenuShoot,C,"channel-3 effect step handler of ids 01 (table $4306). Named after the caller of its id (SFX3_MAIN_MENU_SHOOT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
+1F,50D7,Sfx3_Init_01_MainMenuShoot,C,"channel-3 effect init handler of ids 01 (table $42F2). Named after the caller of its id (SFX3_MAIN_MENU_SHOOT, sound_names_jp.csv; owner rule 2026-10-26: sounds are tagged by function / caller, not by ear).",hand+auto
 1F,50E5,Sfx3_Data_50E5,C,inline data of the channel-3 handlers (register block / sequence),hand+auto
 1F,50EA,Sfx3_Step_05_0A,C,channel-3 effect step handler of ids 05 0A (table $4306),hand+auto
 1F,5102,Sfx3_Init_05_0A,C,channel-3 effect init handler of ids 05 0A (table $42F2),hand+auto

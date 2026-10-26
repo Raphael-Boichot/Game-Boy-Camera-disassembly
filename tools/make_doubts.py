@@ -23,7 +23,7 @@ for i,(b,a) in enumerate(_k):
     if i+1<len(_k) and _k[i+1][0]==b: e=_k[i+1][1]
     nxt[('%02X'%b,'%04X'%a)]=blk.get(('%02X'%b,'%04X'%a),e-a)
 G=[ # group, regex on name, best guess, why doubtful, what settles it
- ('SFX tag','^Sfx\\d','sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine','tag chosen from the routine that triggers the id (key press, erase, shutter...), not by listening','play the effect id in an emulator and compare with the tag'),
+ ('SFX tag','^Sfx\\d','sound-engine label of bank 1F that is not the handler of a named id (the handlers carry the caller name of their id, C)','no reader found','a BGB read watchpoint on the byte; sounds themselves are tagged by function / caller, never by ear (owner rule 2026-10-26)'),
  ('dead code','^Unused_','code or data that no trace path and no table reaches (left over from earlier versions)','never executed in the static trace; purpose read from the instructions only','TCRF note, or a debugger test with a forced jump'),
  ('effect slot','^(Fx\\w*|HotSpotFx\\w*|FxShared\\w*)','effect routine of the bank-0A effect table (96 slots, README 16.28) or helper of a bank-03 hot-spot effect','slot roles inferred from the first instructions, not from the visible screen effect','run each effect id in an emulator and look at the screen'),
  ('mode state','^Mode(01|0E|0F|15|16|18|1A|1C|1D|1F)_','state handler or helper of a screen mode','state purpose read from the data it writes; screen function partly guessed','play the screen in an emulator; match with the TCRF / Funtography screen name'),
@@ -95,7 +95,7 @@ ASK={'visually identified range':'a yes/no on the family name',
 'hand name, unconfirmed':'a check of the guess',
 'mode state':'the screen / state names seen in the real game (compare with TCRF or Funtography)',
 'effect slot':'which visible effect each slot gives',
-'SFX tag':'the sound each id plays',
+'SFX tag':'nothing from the owner: sounds are tagged by caller (2026-10-26)',
 'Run minigame':'variable roles during play',
 'keyboard / glyph':'which glyph page each loader fills',
 'main-menu slide':'which transition each slide is',

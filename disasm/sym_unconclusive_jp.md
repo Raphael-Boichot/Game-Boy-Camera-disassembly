@@ -16,7 +16,7 @@ Bank pictures of the unresolved data: `sym_unconclusive_banks/bank_BB.png` (ever
 | hand name, unconfirmed | 0 | 0 | a check of the guess |
 | mode state | 0 | 0 | the screen / state names seen in the real game (compare with TCRF or Funtography) |
 | effect slot | 0 | 0 | which visible effect each slot gives |
-| SFX tag | 95 | 2528 | the sound each id plays |
+| SFX tag | 1 | 1 | nothing from the owner: sounds are tagged by caller (2026-10-26) |
 | Run minigame | 0 | 0 | variable roles during play |
 | keyboard / glyph | 0 | 0 | which glyph page each loader fills |
 | main-menu slide | 0 | 0 | which transition each slide is |
@@ -42,107 +42,13 @@ _Why doubtful:_ type confirmed by the owner (review page, by eye); role and cons
 - bank 21: `6AC7` Unref (177 B), `6B91` Unref (47 B)
 - bank 23: `58C0` Mode0F_ConfirmFrameStrip_Unref (1024 B), `5CC0` Mode0E_ExchangeAlt_Unref (1024 B)
 
-## SFX tag (95)
+## SFX tag (1)
 
-_Why doubtful:_ tag chosen from the routine that triggers the id (key press, erase, shutter...), not by listening. _To settle:_ play the effect id in an emulator and compare with the tag.
+_Why doubtful:_ no reader found. _To settle:_ a BGB read watchpoint on the byte; sounds themselves are tagged by function / caller, never by ear (owner rule 2026-10-26).
 
 | address | name | bytes | best guess | evidence |
 |---|---|---|---|---|
-| 1F:4362 | `Sfx1_Data_4362` | 1 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | one byte $C9 before the first register block |
-| 1F:4368 | `Sfx1_Init_04_KeyB` | 15 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 04 (table $41FA) |
-| 1F:437C | `Sfx1_Init_3B_EraseAnim` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3B (table $41FA) |
-| 1F:4384 | `Sfx1_Step_3B_EraseAnim` | 13 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 3B (table $4276) |
-| 1F:43C2 | `Sfx1_Init_2A_ChooseC` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 2A (table $41FA) |
-| 1F:43CA | `Sfx1_Step_2A_ChooseC` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 2A (table $4276) |
-| 1F:4401 | `Sfx1_Init_1E_26_Choose` | 38 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1E 26 (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 26: us |
-| 1F:4409 | `Sfx1_Step_26_BossHit` | 30 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 26 (table $4276) |
-| 1F:4431 | `Sfx1_Init_25_SpaceFeverStart` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 25 (table $41FA) |
-| 1F:4439 | `Sfx1_Step_25_SpaceFeverStart` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 25 (table $4276) |
-| 1F:4457 | `Sfx1_Init_27_Shot` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 27 (table $41FA) |
-| 1F:4464 | `Sfx1_Init_0E_Hit` | 43 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0E (table $41FA) |
-| 1F:4475 | `Sfx1_Step_0E_Hit` | 26 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 0E (table $4276) |
-| 1F:44A1 | `Sfx1_Step_1A_1E_Choose` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 1A 1E (table $4276) |
-| 1F:44CA | `Sfx1_Init_03_KeyA` | 36 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 03 (table $41FA) |
-| 1F:44D2 | `Sfx1_Step_03_KeyA` | 28 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 03 (table $4276) |
-| 1F:44F3 | `Sfx1_Init_0B_Select` | 9 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0B (table $41FA) |
-| 1F:4511 | `Sfx1_Init_1B_TargetMenu` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 1B (table $41FA) |
-| 1F:451E | `Sfx1_Step_1B_TargetMenu` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 1B (table $4276) |
-| 1F:4530 | `Sfx1_Init_16_OptionChange` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 16 (table $41FA) |
-| 1F:453D | `Sfx1_Step_16_OptionChange` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 16 (table $4276) |
-| 1F:4554 | `Sfx1_Init_3C_3D_3E_StopMusic` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 3C 3D 3E (table $41FA). Owner (review page, 2026-10-13, by ear): sfx1 3D: |
-| 1F:4569 | `Sfx1_Step_3C_3D_3E_Mode07Play` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 3C 3D 3E (table $4276) |
-| 1F:45C1 | `Sfx1_Init_29_ChooseB` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 29 (table $41FA) |
-| 1F:45C9 | `Sfx1_Step_29_ChooseB` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 29 (table $4276) |
-| 1F:45F7 | `Sfx1_Init_05_ModeEnter` | 48 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 05 (table $41FA) |
-| 1F:45FF | `Sfx1_Step_05_ModeEnter` | 40 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 05 (table $4276) |
-| 1F:463E | `Sfx1_Init_0A_MenuPageTurn` | 50 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0A (table $41FA) |
-| 1F:4646 | `Sfx1_Step_0A_MenuPageTurn` | 42 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 0A (table $4276) |
-| 1F:467A | `Sfx1_Init_02_CursorMove` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 02 (table $41FA) |
-| 1F:4682 | `Sfx1_Step_02_CursorMove` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 02 (table $4276) |
-| 1F:469C | `Sfx1_Init_20_StepFast` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 20 (table $41FA) |
-| 1F:46A9 | `Sfx1_Init_21_StepValue` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 21 (table $41FA) |
-| 1F:46B6 | `Sfx1_Init_22_DirectionKey` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 22 (table $41FA) |
-| 1F:46C3 | `Sfx1_Init_23_2B_BallPoint` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 23 2B (table $41FA) |
-| 1F:46D0 | `Sfx1_Init_01_ValueTick` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 01 (table $41FA) |
-| 1F:4745 | `Sfx1_Init_10_TagJingle` | 54 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 10 (table $41FA) |
-| 1F:474D | `Sfx1_Step_10_TagJingle` | 28 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 10 (table $4276) |
-| 1F:47B4 | `Sfx1_Init_06_0D_SliderStep` | 37 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 06 0D (table $41FA) |
-| 1F:47C0 | `Sfx1_Step_06_0D_SliderStep` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 06 0D (table $4276) |
-| 1F:47EC | `Sfx1_Init_09_MenuPageUp` | 46 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 09 (table $41FA) |
-| 1F:47F4 | `Sfx1_Step_09_MenuPageUp` | 30 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 09 (table $4276) |
-| 1F:481F | `Sfx1_Init_14_HotSpot` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of id 14: hot-spot related (owner, by ear: sure) |
-| 1F:482C | `Sfx1_Step_14_HotSpot` | 19 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of id 14 (hot spot) |
-| 1F:4844 | `Sfx1_Init_15_HotSpot` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of id 15: hot-spot related (owner, by ear: sure) |
-| 1F:4851 | `Sfx1_Step_15_HotSpot` | 19 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of id 15 (hot spot) |
-| 1F:4871 | `Sfx1_Init_12_1D_WindowSlideIn` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 12 1D (table $41FA) |
-| 1F:4883 | `Sfx1_Init_0C_EnemyKill` | 12 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0C (table $41FA) |
-| 1F:4894 | `Sfx1_Init_07_MainMenuPick` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 07 (table $41FA) |
-| 1F:4A6E | `Sfx1_Init_30_Celebration` | 34 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 30 (table $41FA) |
-| 1F:4A7E | `Sfx1_Step_30_Celebration` | 18 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 30 (table $4276) |
-| 1F:4AC7 | `Sfx1_Init_38_Move` | 24 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 38 (table $41FA) |
-| 1F:4AD4 | `Sfx1_Step_38_Move` | 11 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 38 (table $4276) |
-| 1F:4AEE | `Sfx1_Init_37_CopyBrowse` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 37 (table $41FA) |
-| 1F:4AFB | `Sfx1_Step_37_CopyBrowse` | 10 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 37 (table $4276) |
-| 1F:4B17 | `Sfx1_Init_39_MenuChoose` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 39 (table $41FA) |
-| 1F:4B24 | `Sfx1_Step_39_MenuChoose` | 10 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 39 (table $4276) |
-| 1F:4B3D | `Sfx1_Init_36_PageStep` | 23 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 36 (table $41FA) |
-| 1F:4B4A | `Sfx1_Step_36_PageStep` | 10 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 36 (table $4276) |
-| 1F:4B64 | `Sfx1_Init_35_Jump` | 46 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 35 (table $41FA) |
-| 1F:4B71 | `Sfx1_Step_35_Jump` | 8 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 35 (table $4276) |
-| 1F:4BA6 | `Sfx1_Init_0F_EnemyKillC` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 0F (table $41FA) |
-| 1F:4BAE | `Sfx1_Step_0F_EnemyKillC` | 17 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 0F (table $4276) |
-| 1F:4BCE | `Sfx1_Init_11_Confirm` | 41 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 11 (table $41FA) |
-| 1F:4BD6 | `Sfx1_Step_11_Confirm` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 11 (table $4276) |
-| 1F:4C09 | `Sfx1_Init_13_WindowSlideOut` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 13 (table $41FA) |
-| 1F:4C11 | `Sfx1_Step_13_WindowSlideOut` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 13 (table $4276) |
-| 1F:4C3B | `Sfx1_Init_19_3A_LayoutKey` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 19 3A (table $41FA) |
-| 1F:4C43 | `Sfx1_Step_19_3A_LayoutKey` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 19 3A (table $4276) |
-| 1F:4C61 | `Sfx1_Init_08_MenuPageDown` | 80 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect init handler of ids 08 (table $41FA) |
-| 1F:4C6F | `Sfx1_Step_08_MenuPageDown` | 66 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-1 effect step handler of ids 08 (table $4276) |
-| 1F:4D28 | `Sfx4_Init_05_EraseAnim` | 74 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 05 (table $431A). Owner (review page, 2026-10-13, by ear): sfx4 05: used  |
-| 1F:4D86 | `Sfx4_Init_01_StampCommit` | 34 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 01 (table $431A) |
-| 1F:4D8E | `Sfx4_Step_01_StampCommit` | 26 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 01 (table $433E) |
-| 1F:4E21 | `Sfx4_Init_07_FireShots` | 32 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 07 (table $431A) |
-| 1F:4E29 | `Sfx4_Step_07_FireShots` | 24 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 07 (table $433E) |
-| 1F:4E49 | `Sfx4_Init_0A_LinkChoose` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 0A (table $431A) |
-| 1F:4E57 | `Sfx4_Step_0A_LinkChoose` | 15 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 0A (table $433E) |
-| 1F:4E6E | `Sfx4_Init_12_MusicSelect` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 12 (table $431A) |
-| 1F:4E76 | `Sfx4_Step_12_MusicSelect` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 12 (table $433E) |
-| 1F:4E97 | `Sfx4_Init_04_HurdleCollision` | 33 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 04 (table $431A) |
-| 1F:4E9F | `Sfx4_Step_04_HurdleCollision` | 25 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 04 (table $433E) |
-| 1F:4EBC | `Sfx4_Init_11_FlagHeight` | 29 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 11 (table $431A) |
-| 1F:4EC4 | `Sfx4_Step_11_FlagHeight` | 21 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect step handler of ids 11 (table $433E) |
-| 1F:4EDD | `Sfx4_Init_08_StopMusic` | 11 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-4 effect init handler of ids 08 (table $431A) |
-| 1F:4FCB | `Sfx3_Step_09_DeleteDialogB` | 31 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 09 (table $4306) |
-| 1F:4FE1 | `Sfx3_Init_09_DeleteDialogB` | 9 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 09 (table $42F2) |
-| 1F:4FF5 | `Sfx3_Step_08_DeleteDialogA` | 50 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 08 (table $4306) |
-| 1F:501E | `Sfx3_Init_08_DeleteDialogA` | 9 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 08 (table $42F2) |
-| 1F:502C | `Sfx3_Step_03_BossHit` | 40 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 03 (table $4306) |
-| 1F:5046 | `Sfx3_Init_03_BossHit` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 03 (table $42F2) |
-| 1F:5059 | `Sfx3_Step_02_ViewArcadeSelect` | 50 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 02 (table $4306) |
-| 1F:507D | `Sfx3_Init_02_ViewArcadeSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 02 (table $42F2) |
-| 1F:50BE | `Sfx3_Step_01_ShootSelect` | 39 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect step handler of ids 01 (table $4306) |
-| 1F:50D7 | `Sfx3_Init_01_ShootSelect` | 14 | sound-effect slot of the sound engine (bank 1F); the number is the effect id or a step of its state machine | channel-3 effect init handler of ids 01 (table $42F2) |
+| 1F:4362 | `Sfx1_Data_4362` | 1 | sound-engine label of bank 1F that is not the handler of a named id (the handlers carry the caller name of their id, C) | one byte $C9 before the first register block |
 
 ## settled as unused, final I (36)
 
