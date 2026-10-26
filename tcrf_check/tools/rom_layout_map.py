@@ -4,7 +4,7 @@ usage: rom_layout_map.py OUT.png [--rom pocketcamera_jp.gb] [--csv assets/layout
 Each ROM byte gets one category:
   code (class C / F / N of coverage/v8/report_v8/rom_map.csv = traced instructions): the function group of the label that owns the byte (rules below; 10 groups);
   data (everything else): tile sets (4 kinds), tile maps, sprite (OAM) layouts, sound data, other tables and text, UNCERTAIN data, padding.
-The owner of a byte is the nearest label at or before it in the same bank (disasm/sym_names_jp.csv).  The kind of a data label comes from its name (Gfx_ / Sheet_ / Kana_ / TileGap_ = tile set, Map_ / BgMap_ /
+The owner of a byte is the nearest label at or before it in the same bank (disasm/sym_names_jp.csv).  The kind of a data label comes from its name (Gfx_ / Sheet_ / Kana_ / TileGap_ / Font_ / DjPrintFont_ = tile set, Map_ / BgMap_ /
 *Border*_Map = tile map, Song / Sfx / Snd = sound, OamList / OamPtrTbl = sprite layouts, StampCat*_Gfx = stamps, WildFrame / Border *_Tiles = frames, AlbumB*_Tiles / _Thumb = stock photos, anything else
 inside code banks = tables), so the evidence behind a kind is the one of the label (disasm/sym_names_jp.csv, column conf).  A label tagged '?' (disasm/sym_unconclusive_jp.md) only says that the ROLE of the bytes is doubtful, not their kind: it keeps the kind its name
 gives (a Gfx_ block is a tile set whatever its role).  The kind of the Src_* / Data_* blocks (named after the far pointer that loads them, not after what they are) comes from assets/layout_kind_overrides_jp.csv,
@@ -99,7 +99,7 @@ def data_kind(name):
     if p in ('WildFrame', 'Border') or name.startswith('Border'):
         if re.search(r'_Map$|Map$', name) and not name.endswith('SrcTbl'): return 'MAP'
         return 'T_FRM' if re.search(r'(Tiles(Part\d+|Tail)?|LateralStrips)$', name) else 'TBL'
-    if p in ('Gfx', 'Sheet', 'Kana', 'TileGap', 'TileSet'): return 'T_UI'
+    if p in ('Gfx', 'Sheet', 'Kana', 'TileGap', 'TileSet', 'Font', 'DjPrintFont'): return 'T_UI'
     if p in ('Map', 'BgMap'): return 'MAP'
     if p == 'Sgb': return 'T_UI' if 'BorderTiles' in name else ('MAP' if 'BorderMap' in name else 'TBL')
     if p in ('Src', 'Data'): return 'UNC'

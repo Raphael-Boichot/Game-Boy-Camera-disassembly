@@ -13,7 +13,7 @@ Every scenario runs one of the existing BGB drivers with env BGB_WP = the watchp
   show_animation_music   the same ANIMATION route, then Select x3 in state $01 of mode $13 (music number, `wPlayerMusic`)
   dj_perf_start / dj_perf_start_noise   the editor (SOUND I / NOISE page), then Start taps and one 50-frame Start hold (play / stop, hold counter of the performer)
   err_card_inq80 / err_dj_dataFF   the printer answers an error status byte (PRN_ERR, README 16.16)
-usage: wram_probe_scen.py OUT.csv WATCH.csv [--only LABEL,LABEL] [--workers 2]
+usage: wram_probe_scen.py OUT.csv WATCH.csv [--only LABEL,LABEL] [--workers 2] [--wp-file WP.txt]  (with --wp-file, WATCH.csv is ignored and the kind column holds the raw message)
 Output columns as wram_probe.py (entry = the scenario label, `.sender` / `.receiver` for the link).  Environment: GBCAM_ROOT (default /home/claude/gbcam_jp); the drivers are run from
 GBCAM_ROOT/tools_repo (a symlink to tcrf_check/tools, so that their ROOT is the working root); BGB_HF=-headless (a linked BGB hangs at the handshake with -hf)."""
 import sys, os, csv, re, subprocess, collections, threading, queue, shutil
@@ -22,10 +22,10 @@ def opt(n, d=None):
     if n in args:
         i = args.index(n); v = args[i + 1]; del args[i:i + 2]; return v
     return d
-only = opt('--only'); workers = int(opt('--workers', '2')); out, watch = args[:2]
+only = opt('--only'); workers = int(opt('--workers', '2')); wpfile = opt('--wp-file'); out, watch = args[:2]
 ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp'); T = ROOT + '/tools_repo'; ROM = ROOT + '/pocketcamera_jp.gb'
 CORPUS = 'unlock_runs/f1_organic/corpus.jsonl'
-W = list(csv.DictReader(open(watch, encoding='utf-8')))
+W = list(csv.DictReader(open(watch, encoding='utf-8'))) if not wpfile else []
 def wps(rows):
     s = []
     for r in rows:
@@ -35,7 +35,7 @@ def wps(rows):
         v = '%%(%04x)%%' % lo if hi == lo else 'xx'
         s += ['%s//r/R%s_%s_xx' % (rng, m, v), '%s//w/W%s_%s_%%a%%' % (rng, m, v)]
     return ','.join(s)
-WP = wps(W)
+WP = wps(W) if not wpfile else open(wpfile).read().strip()        # --wp-file: a ready -wp list (ROM targets of tcrf_check/tools/l3_scen_wp.py); the rows then hold the raw message
 RACE = os.environ.get('GBCAM_REPO', '/home/claude/w/clone/Game-Boy-Camera-disassembly') + '/tcrf_check/assets/run_race/race_paths.json'
 RV = ['race 1, A every 2nd + Up before each hurdle', 'race 4, A every 16th frame', 'race 1, A every 2nd, then A on the result screen']
 CARD_INS = '13:' + ','.join(['Right:4:40'] * 5)
@@ -74,6 +74,7 @@ def add(label, end, cnt):
         for k in sorted(cnt):
             m = pat.match(k)
             if m: rows.append([label, '', end] + list(m.groups()) + [cnt[k]])
+            elif wpfile and re.match(r'^(CTL|T[0-9A-F]{3})_', k): rows.append([label, '', end, k, '', '', '', '', '', '', '', cnt[k]])
 def run(label):
     argv, env, port = SC[label]; o = '/tmp/wram_probe_scen/' + label; shutil.rmtree(o, ignore_errors=True); os.makedirs(o)
     e = dict(os.environ, BGB_WP=WP, BGB_HF='-headless', **env)

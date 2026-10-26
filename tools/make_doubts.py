@@ -32,6 +32,7 @@ G=[ # group, regex on name, best guess, why doubtful, what settles it
  ('main-menu slide','^MainMenu_Slide','slide animation between main-menu pages','slide A/B split by code layout only','watch the menu transition frame by frame'),
  ('Run minigame','^Run_','Run (marathon) mini-game routine or table','role of several state variables guessed','play the game with a watch on the named variables'),
  ('song','^Song','music data of the sound engine','titles come from the TCRF / music lists; which byte is the tempo or the loop point is unchecked','compare with the TCRF sound test'),
+ ('inferred','.','name inferred from the code or the loader','not seen at work in BGB or the core organic runs, and the code does not fix the role on its own (L3 pass 2026-10-26)','a BGB run that executes / reads it, or proof that nothing uses it'),
 ]
 out=[]
 def add(r,group,guess,why,settle):
@@ -86,8 +87,8 @@ print('banks with unresolved data:',' '.join(banks))
 print(len(out), 'open;', len(settled), 'settled as unused'); 
 for k,v in g.most_common(): print(k,v,sz.get(k,''))
 # ---------------------------------------------------------------- markdown
-ORDER=['visually identified range','far-pointer asset, extent unknown','content-classified span','unknown data (no reader found)','auto-named table','hand name, unconfirmed','mode state','effect slot','SFX tag','Run minigame','keyboard / glyph','main-menu slide','arrow drawing','dead code']
-ASK={'visually identified range':'a yes/no on the family name',
+ORDER=['inferred','visually identified range','far-pointer asset, extent unknown','content-classified span','unknown data (no reader found)','auto-named table','hand name, unconfirmed','mode state','effect slot','SFX tag','Run minigame','keyboard / glyph','main-menu slide','arrow drawing','dead code']
+ASK={'inferred':'nothing: a BGB run or a proof of non-use','visually identified range':'a yes/no on the family name',
 'far-pointer asset, extent unknown':'where each block ends (the length copied at run time) and what it is',
 'content-classified span':'what each span is: look at the bank image, or tell me the screen it belongs to',
 'unknown data (no reader found)':'nothing urgent: small leftovers; a VRAM-viewer look would settle them',

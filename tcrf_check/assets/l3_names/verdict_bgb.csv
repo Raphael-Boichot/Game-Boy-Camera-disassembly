@@ -1,0 +1,1240 @@
+bank,addr,name,kind,verdict,replays,hits,modes,states,readers,expected
+00,0367,Reti_Unused,x,never,0,0,,,,
+00,03D4,Irq_DisableVBlank,x,never,0,0,,,,
+00,03DB,Irq_EnableVBlank,x,never,0,0,,,,
+00,0406,Vram_WaitHBlankLine,x,seen,203,10400732,00 01 02 03 06 07 08 09 0A 0E 0F 10 11 12 14 15 16 17 18 19 1A 1B 1C 1E 20,19:03 14:01 00:01 19:01 01:01 03:01 09:01 00:02,,
+00,057F,Delay_Short,x,never,0,0,,,,
+00,0586,Vram_CopyFromBank_4,x,seen,8,802,07 10 20,07:04 20:03 10:09 20:06,,
+00,069F,Vram_CopyFromBank_8,x,never,0,0,,,,
+00,0751,Vram_OrByteSafe,x,never,0,0,,,,
+00,0762,Vram_AndByteSafe,x,never,0,0,,,,
+00,0773,Vram_ReadByteSafe,x,never,0,0,,,,
+00,0781,Vram_CopyViaVBlank,x,never,0,0,,,,
+00,0CF2,Joy_DpadBitToIndex,x,seen,2,1440,11,11:03,,
+00,0DA0,Map_SpiralWipeIn,x,seen,89,522,01,01:00 01:06 01:03,,
+00,0E67,Map_SpiralWipeOut,x,seen,85,504,01,01:02 01:08 01:05,,
+00,0F06,Gfx_WipeTile,r,seen,89,8208,01,01:00 01:02 01:06 01:08 01:03 01:05,061D 0620 0630 0633 0636 0639,
+00,10AC,Snd_UiEffect_Dead,x,never,0,0,,,,
+00,10D0,Snd_UiEffect_Table,r,never,0,0,,,,
+00,1350,DjSnd_StepNoise_Tbl1350,r,never,0,0,,,,
+00,13F1,DjSnd_WavePtrs,r,never,0,0,,,,
+00,13F7,DjSnd_WaveA,r,never,0,0,,,,
+00,1417,DjSnd_WaveB,r,never,0,0,,,,
+00,15ED,Vec_GetPhotoVectorByte,x,seen,55,2588,0F 12 1A,12:00 0F:05 1A:02,,
+00,1600,Vec_GetPhotoVectorByteFar,x,seen,2,376,12,12:16,,
+00,190B,Prn_StopSerial_Dead,x,never,0,0,,,,
+00,190F,Prn_StopSerial2_Dead,x,never,0,0,,,,
+00,19A2,Prn_Unused19A2,x,never,0,0,,,,
+00,1AEB,Prn_SendBreak_Dead,x,never,0,0,,,,
+00,1EDE,Blit_MaskTbl_Copy_Dead,r,never,0,0,,,,
+00,1EEE,Blit_MakePatchEntry,x,seen,7,992,10 11,11:04 10:03,,
+00,1F1A,Blit_BuildPatchList,x,seen,7,26,10 11,11:04 10:03,,
+00,1F51,Blit_PrepareMasks,x,seen,7,26,10 11,11:04 10:03,,
+00,1FA2,Blit_LeftMaskTbl,r,seen,7,13,10 11,11:04 10:03,1F62,
+00,1FAA,Blit_RightMaskTbl,r,seen,7,13,10 11,11:04 10:03,1F76,
+00,2170,Blit_TileRowPtrTbl,r,seen,7,992,10 11,11:04 10:03,1EFD 1EFE,
+00,2194,Blit_TileAddrTbl,r,seen,7,992,10 11,11:04 10:03,1F0F 1F13,
+00,24F1,Oam_AddMetaTile_B02_6E4B_Dead,x,never,0,0,,,,
+00,2523,Oam_AddMetaTile_B01_5D47_Dead,x,never,0,0,,,,
+00,253C,Oam_AddMetaTile_B01_4000_Dead,x,never,0,0,,,,
+00,261B,Img_PairLookup,x,seen,3,53832,10 14,14:03 10:09,,
+00,2631,Img_PackQuadBits,x,seen,3,3364,10 14,14:03 10:09,,
+00,27F4,Img_ReduceHalfTo224Wide,x,seen,4,18,17,17:01 17:0B,,
+00,28D8,Img_QuantizeBlockRound,x,seen,19,77574,17,17:01 17:00 17:03 17:04 17:0B 17:06 17:05,,
+00,2925,Img_QuantizeBlockDither,x,seen,2,896,12 1E,12:01 1E:01,,
+00,296F,Thumb_DrawFrame,x,seen,3,28,10 14,14:03 10:09,,
+00,2A23,Snd_Init_Tramp,x,seen,204,204,00,00:00,,
+00,2BC6,Link_Irq_Connected,x,never,0,0,,,,
+00,2D35,Link_Irq_StartTimer,x,never,0,0,,,,
+00,2E88,Unused_Str_MainPass,r,never,0,0,,,,
+00,2FA5,Slide_ScyDeltaTbl,r,seen,91,3763,09 0A 12 14 1C,09:02 0A:04 12:07 12:08 1C:04 14:04 1C:06,6A2F 6A6B 7710 43F8 6AAB 4456,
+00,2FB5,Mode09_State03_PageLeft_Tbl2FB5,r,seen,66,2553,09 0A 14,09:04 09:05 0A:07 09:06 0A:08 09:03 0A:06 14:06,6BCE 6C45 79AE 6CE4 7A84 6B1D,09
+00,2FE5,Slide_WyDeltaTbl,r,seen,25,2018,10 11 12 1A,1A:04 10:04 10:09 11:04 12:14 11:03 12:1D 12:1A,5F88 734A 7309 5F5F 6AF8 6040,
+00,3800,Blit_ShiftTbl,r,mode?,7,1488,10 11,11:04 10:03,20CB 20D9 1FE3 205A,16
+02,405E,Sram_CheckTagMagic,x,seen,203,12180,00,00:00,,
+02,4068,Sram_CompareMagicAt,x,seen,203,16320,00,00:00,,
+02,407A,Sram_CheckSettingsMagic,x,seen,203,406,00,00:00,,
+02,4084,Sram_CompareMagic,x,seen,203,544,00,00:00,,
+02,4093,Sram_CheckVectorMagic,x,seen,203,406,00,00:00,,
+02,409D,Sram_CompareMagic_B,x,seen,203,544,00,00:00,,
+02,40AC,Sram_CheckOwnerMagic,x,seen,203,406,00,00:00,,
+02,40B6,Sram_CompareMagic_C,x,seen,203,544,00,00:00,,
+02,41F3,Sram_FormatSettingsBlocks_Tbl41F3,r,seen,69,12420,00,00:00,41B8,
+02,452A,Photo_Erase_UnlinkAll_Far,x,never,0,0,,,,
+02,45A1,Photo_SaveCopy_Far,x,never,0,0,,,,
+02,46E6,Unused_Photo_SaveReceived_Far_Stray46E6,r,never,0,0,,,,
+02,46E9,Sram_ZeroTagBytes,x,never,0,0,,,,
+02,47B3,Photo_SaveShot_Far_Tbl47B3,r,seen,2,45,14,14:03,2586 2588 258C,
+02,47B6,Mem_CopyShort,x,seen,2,468,14,14:03,,
+02,47BD,Mem_ZeroShort,x,seen,2,52,14,14:03,,
+02,47C4,Photo_StoreImage_Far,x,seen,1,2,10,10:09,,
+02,482F,Photo_StoreImage_Far_Tbl482F,r,seen,1,3,10,10:09,2586 2588 258C,
+02,4B1E,Dj_PackDutyLength,x,never,0,0,,,,
+02,4B2B,Dj_PackEnvelope,x,never,0,0,,,,
+02,4B40,Dj_PackModulation,x,never,0,0,,,,
+02,4B5B,Dj_CopyNotes,x,never,0,0,,,,
+02,4B64,Dj_PackStereoCodes,x,never,0,0,,,,
+02,4B8B,Dj_PackWave,x,never,0,0,,,,
+02,4B9E,Dj_PackNoiseBits,x,never,0,0,,,,
+02,4D80,AlbumB_CheckGate_Tbl4D80,r,seen,6,21,18,18:01 18:03 18:00,4D7B,
+02,4F27,Dj_LoadTune_FromDE_Far,x,never,0,0,,,,
+02,4FB0,Dj_UnpackDutyLength,x,never,0,0,,,,
+02,4FBC,Dj_UnpackEnvelope,x,never,0,0,,,,
+02,4FCF,Dj_UnpackModulation,x,never,0,0,,,,
+02,4FE9,Dj_CopyNotesOut,x,never,0,0,,,,
+02,4FF2,Dj_UnpackStereoCodes,x,never,0,0,,,,
+02,5016,Dj_UnpackWave,x,never,0,0,,,,
+02,5028,Dj_UnpackNoiseBits,x,never,0,0,,,,
+02,50B8,GameFace_CopyChunk,x,never,0,0,,,,
+02,50CD,Album_LoadThumbPage_Far,x,never,0,0,,,,
+03,4266,AnimEd_DrawSpeedHand,x,seen,9,1039,12,12:03,,
+03,429D,AnimEd_DrawSpeedHand_Gfx429D,r,seen,9,2078,12,12:03,4272 4282,
+03,435D,AnimEd_DrawLoopHand,x,seen,4,1029,12,12:04,,
+03,4394,AnimEd_DrawLoopHand_Map4394,r,seen,4,2058,12,12:04,4369 4379,
+03,44C3,AnimEd_ToolsMenuCursor,x,seen,20,3907,12,12:08,,
+03,44DB,AnimEd_ToolsMenuCursor_Tbl44DB,r,seen,20,3907,12,12:08,44CD,
+03,45B6,Mode12_State0A_RangeAnim,x,seen,12,24,12,12:0A,,12
+03,46F6,AnimEd_DrawRangeArrow,x,seen,12,14456,12,12:0B 12:0A,,
+03,4720,AnimEd_StepRangeAnim,x,seen,12,14480,12,12:0B 12:0A,,
+03,478D,AnimEd_StepRangeAnim_Tbl478D,r,seen,12,91,12,12:0A 12:0B,473A 477C 4781,
+03,4790,AnimEd_DrawRangeArrow_Tbl4790,r,seen,12,18255,12,12:0B 12:0A,470C 473A 477C 4781 4752,
+03,48C1,AnimEd_DrawRangeEndCursor,x,seen,12,4644,12,12:0B 12:0A,,
+03,49D2,AnimEd_RangeConfirmAnim,x,seen,5,10,12,12:0B,,
+03,4AE1,AnimEd_DrawLoopCountSprite,x,seen,5,3264,12,12:0C,,
+03,50BA,AnimEd_SortChoiceCursor,x,seen,3,427,12,12:1E 12:1D 12:1F,,
+03,5101,AnimEd_SortChoiceCursor_Tbl5101,r,seen,3,42,12,12:1E 12:1D,50E4,
+03,5104,AnimEd_SortChoiceCursor_Tbl5104,r,seen,3,385,12,12:1E 12:1D 12:1F,50FB,
+03,5243,AnimEd_DrawBorderHand,x,seen,7,1763,12,12:20,,
+03,527A,AnimEd_DrawBorderHand_Gfx527A,r,seen,7,3526,12,12:20,524F 525F,
+03,53EB,AnimEd_DrawEntryCursor_Tbl53EB,r,seen,22,53228,12,12:01 12:0B 12:09 12:20 12:03 12:04 12:0A 12:02,53C7 53D0,
+03,53FD,AnimEd_DrawHandSprite,x,seen,22,15962,12,12:01 12:09 12:02,,
+03,5466,AnimEd_DrawHandSprite_Tbl5466,r,seen,22,31924,12,12:01 12:09 12:02,540B 540D,
+03,54C4,AnimEd_DrawHandSprite_Tbl54C4,r,seen,22,22658,12,12:01 12:02,5442 544B,
+03,54DC,AnimEd_DrawHandSprite_Tbl54DC,r,seen,19,9266,12,12:09,5442 544B,
+03,5580,AnimEd_ReadStepKeys,x,seen,20,1312,12,12:02,,
+03,55DA,AnimEd_CursorLeftRight,x,seen,22,30638,12,12:01 12:09,,
+03,55F3,AnimEd_CursorUpDown,x,seen,22,30630,12,12:01 12:09,,
+03,568B,AnimEd_Decor_CtxEntryTbl,r,never,0,0,,,,
+03,5691,AnimEd_Ctx0_Decor,x,seen,22,27,12,12:00 12:22 12:1F 12:0F,,
+03,57A6,AnimEd_Ctx0_Decor_Map57A6,r,seen,22,604,12,12:00 12:1F 12:22 12:0F,56C9 56D0 5727 572E,
+03,57BE,AnimEd_Ctx1_Decor,x,seen,22,54,12,12:00 12:22 12:1F 12:0F,,
+03,5827,AnimEd_Ctx1_BorderSprite,x,seen,22,2024,12,12:00 12:1F 12:22 12:0F,,
+03,583F,AnimEd_Ctx1_BorderSprite_PtrTbl583F,r,seen,22,1012,12,12:00 12:1F 12:22 12:0F,5835,
+03,5847,AnimEd_Ctx2_Decor,x,seen,22,54,12,12:00 12:22 12:1F 12:0F,,
+03,58CE,AnimEd_Ctx2_InRange,x,seen,22,3000,12,12:00 12:1F 12:22,,
+03,58E0,AnimEd_Ctx2_BorderSprite,x,seen,22,2024,12,12:00 12:1F 12:22 12:0F,,
+03,58F8,AnimEd_Ctx2_BorderSprite_PtrTbl58F8,r,seen,22,1012,12,12:00 12:1F 12:22 12:0F,58EE,
+03,5900,AnimEd_StartExitTransition,x,seen,2,4,12,12:05 12:11,,
+03,59AF,AnimEd_CoroYield_B,x,seen,2,450,12,12:11 12:05,,
+03,59F1,AnimEd_Exit_CtxEntryTbl,r,never,0,0,,,,
+03,59F7,AnimEd_ExitCtx0,x,seen,2,4,12,12:05 12:11,,
+03,5A7A,AnimEd_ExitCtx1,x,seen,2,4,12,12:05 12:11,,
+03,5AE0,AnimEd_ExitCtx1_Sprite,x,seen,2,150,12,12:11 12:05,,
+03,5AF8,AnimEd_ExitCtx1_Sprite_PtrTbl5AF8,r,seen,2,75,12,12:11 12:05,5AEE,
+03,5B00,AnimEd_ExitCtx2,x,seen,2,4,12,12:05 12:11,,
+03,5B86,AnimEd_ExitCtx2_InRange,x,seen,2,168,12,12:11 12:05,,
+03,5B98,AnimEd_ExitCtx2_Sprite,x,seen,2,150,12,12:11 12:05,,
+03,5BB0,AnimEd_ExitCtx2_Sprite_PtrTbl5BB0,r,seen,2,75,12,12:11 12:05,5BA6,
+03,5BB8,AnimEd_DrawFrameSprites,x,seen,1,2,12,12:0F,,
+03,5DCE,AnimEd_LoadMenuTiles,x,seen,22,51,12,12:08 12:00 12:22 12:0F,,
+03,5EEA,AnimEd_DrawSpark,x,seen,22,485216,12,12:01 12:20 12:03 12:04 12:02,,
+03,5F1B,AnimEd_DrawSpark_Tbl5F1B,r,seen,20,488,12,12:01 12:04,5F0C,
+03,5F2B,AnimEd_CopyDigitTile,x,seen,22,964,12,12:01 12:00 12:02 12:09 12:0B 12:0A 12:22 12:1F,,
+03,5F4E,AnimEd_WindowSlideIn,x,seen,6,14,12,12:16 12:1C 12:1F 12:19,,
+03,5F69,AnimEd_WindowSlideIn_Resume,x,seen,6,422,12,12:16 12:1F 12:1C 12:19,,
+03,5F77,AnimEd_WindowSlideOut,x,seen,10,24,12,12:14 12:1D 12:1A 12:17,,
+03,5F92,AnimEd_WindowSlideOut_Resume,x,seen,10,854,12,12:14 12:1D 12:1A 12:17,,
+03,6089,Player_ShowMusicNumber,x,never,0,0,,,,
+03,609E,Player_CopyDigitTile,x,never,0,0,,,,
+03,61FD,Mode13_State00_Init_Tbl61FD,r,never,0,0,,,,13
+03,6482,HotSpot_PointerAnimWait,x,never,0,0,,,,
+03,64DE,HotSpot_DrawPointer_Tbl64DE,r,never,0,0,,,,
+03,64FC,HotSpot_PointerMoveX,x,never,0,0,,,,
+03,650C,HotSpot_PointerMoveY,x,never,0,0,,,,
+03,651C,HotSpot_PlayJingle,x,never,0,0,,,,
+03,655B,HotSpot_RunEffect_Return,x,never,0,0,,,,
+03,657F,HotSpot_WaitFrame,x,never,0,0,,,,
+03,6587,HotSpot_CopyTile,x,never,0,0,,,,
+03,65B3,HotSpot_CopyTileFrom,x,never,0,0,,,,
+03,65E8,HotSpot_MoveTileInVram,x,never,0,0,,,,
+03,6EA4,HotSpotEd_DialogChoiceA,x,seen,2,331,1A,1A:09,,
+03,6F3E,HotSpotEd_DialogChoiceB,x,seen,1,43,1A,1A:0A,,
+03,7040,HotSpotEd_SlotIconFlags,x,seen,8,12764,1A,1A:04 1A:03,,
+03,7062,HotSpotEd_SlotXY,x,seen,10,72548,1A,1A:03 1A:04,,
+03,7097,HotSpotEd_SlotAnimTbl,r,seen,10,114782,1A,1A:03 1A:04,6FEE 6FFA 700C 7010,
+03,715A,HotSpotEd_DrawPointer_Tbl715A,r,seen,9,1204,1A,1A:03,713B 7142,
+03,719F,HotSpotEd_DrawSlotPointer_Tbl719F,r,seen,10,11332,1A,1A:03,7180 7187,
+03,71D9,HotSpotEd_PointerMoveX,x,seen,9,1186,1A,1A:03,,
+03,71F7,HotSpotEd_PointerMoveY,x,seen,9,1186,1A,1A:03,,
+03,7248,HotSpotEd_SlotMoveX,x,seen,10,11292,1A,1A:03,,
+03,7266,HotSpotEd_SlotMoveUp,x,seen,10,11292,1A,1A:03,,
+03,7291,HotSpotEd_MoveSpotX,x,seen,8,11854,1A,1A:04,,
+03,72AF,HotSpotEd_MoveSpotY,x,seen,8,11854,1A,1A:04,,
+03,7370,HotSpotEd_DialogSlideOut,x,seen,1,4,1A,1A:09 1A:0A,,
+03,738B,HotSpotEd_DialogSlideIn,x,seen,2,6,1A,1A:03 1A:09,,
+03,73A7,HotSpotEd_DrawSoundIcon,x,seen,6,5691,1A,1A:05 1A:06 1A:08 1A:04 1A:07,,
+03,73CB,HotSpotEd_DrawEffectIcon,x,seen,6,5691,1A,1A:05 1A:06 1A:08 1A:04 1A:07,,
+03,73E9,HotSpotEd_DrawJumpIcon,x,seen,6,5691,1A,1A:05 1A:06 1A:08 1A:04 1A:07,,
+03,7407,HotSpotEd_DrawButtonIcon,x,seen,6,11382,1A,1A:05 1A:06 1A:08 1A:04 1A:07,,
+03,74A0,HotSpotEd_ShowNumber,x,seen,5,198,1A,1A:06 1A:05,,
+03,74C7,HotSpotEd_CopyNumberTile,x,seen,5,396,1A,1A:06 1A:05,,
+03,7505,HotSpotEd_ShowJumpThumb,x,seen,6,10,1A,1A:04,,
+03,75B0,HotSpotEd_PickerScrollStep,x,seen,6,9054,1A,1A:05 1A:06 1A:07,,
+03,75D9,HotSpotEd_ClearAnim,x,seen,10,48,1A,1A:02 1A:04 1A:08,,
+03,7774,LinkMenu_AnimateWindow,x,seen,9,2041,06,06:01,,
+03,779E,LinkMenu_WindowAnimTbl,r,seen,9,4332,06,06:01,7780 7786 778D,
+03,7838,LinkMenu_DrawCursor,x,seen,9,4610,06 0E 1B,06:01 1B:00 0E:00,,
+03,787A,LinkMenu_DrawSpark,x,seen,9,4610,06 0E 1B,06:01 1B:00 0E:00,,
+03,789B,LinkMenu_LoadTilesSelected,x,seen,9,112,06 0E 1B,1B:00 06:00 06:01 0E:00,,
+03,78C2,LinkMenu_LoadTilesDeselected,x,seen,9,112,06 0E 1B,1B:00 06:00 06:01 0E:00,,
+03,79E3,ShowMenu_DrawCursor,x,never,0,0,,,,
+03,7A21,ShowMenu_DrawCursor_Tbl7A21,r,never,0,0,,,,
+03,7A24,ShowMenu_DrawCursor_Tbl7A24,r,never,0,0,,,,
+03,7A62,ShowMenu_LoadHighlightTiles,x,never,0,0,,,,
+03,7A85,ShowMenu_LoadNormalTiles,x,never,0,0,,,,
+03,7B90,DoodleMenu_DrawCursor,x,seen,35,19655,04,04:01,,
+03,7BE0,DoodleMenu_DrawBlinker,x,seen,35,19655,04,04:01,,
+03,7D19,EditMenu_AnimateIcons,x,seen,30,31106,05 0F 12,05:01 0F:00 12:00,,
+03,7D6E,EditMenu_AnimateIcons_Tbl7D6E,r,seen,30,93318,05 0F 12,05:01 0F:00 12:00,7D40 7D42,
+03,7D74,EditMenu_AnimateIcons_Tbl7D74,r,seen,30,162181,05 0F 12,05:01 0F:00 12:00,7D2D 7D33 7D4A 7D4E 7D56,
+03,7D9F,EditMenu_DrawBlinker,x,seen,30,31106,05 0F 12,05:01 0F:00 12:00,,
+03,7DE0,EditMenu_ResetIconAnim,x,seen,30,192,05,05:00 05:01,,
+04,415C,PhotoPicker_Wobble,x,seen,81,39016,0A 0F 11 1A 1C,11:01 0A:01 0F:03 0F:02 0F:0C 1A:01 1C:01 0F:0D,,
+04,417D,PhotoPicker_WobbleTbl,r,seen,81,38914,0A 0F 11 1A 1C,11:01 0A:01 0F:03 0F:02 0F:0C 1A:01 1C:01 0F:0D,4176 4179,
+04,41BD,PhotoPicker_CursorPosTbl,r,seen,81,69196,0A 0F 10 11 1A 1C,11:01 0A:01 0F:02 0F:0C 1A:01 1C:01 0F:04 0F:03,41B1 41B3,
+04,43D8,PhotoPicker_LoadBigThumb,x,seen,76,407,0A 0F 10 11 1A,11:01 0A:01 1A:01 0F:02 0F:03 10:01 0F:01,,
+04,43F3,PhotoPicker_ClearThumbSlot,x,seen,76,406,0A 0F 10 11 1A,11:01 0A:01 1A:01 0F:02 0F:03 10:01 0F:01,,
+04,44F1,PhotoPicker_LoadPageTabs,x,seen,81,460,0A 0F 10 11 1A 1C,11:01 0A:01 0F:00 1A:01 0F:02 1C:01 0F:0C 10:01,,
+04,44F4,PhotoPicker_LoadPageTabsFor,x,seen,81,1038,0A 0F 10 11 1A 1C,11:01 0A:01 0F:00 1A:01 0F:02 1C:01 0F:0C 0F:03,,
+04,4529,PhotoPicker_LoadPageTabs2,x,seen,1,1,0F,0F:03,,
+04,452C,PhotoPicker_LoadPageTabs2For,x,seen,29,118,0F 11,11:01 0F:03,,
+04,4561,PhotoPicker_PageTransitionNext,x,seen,29,58,11,11:01,,
+04,45CF,PhotoPicker_PageTransitionPrev,x,seen,1,1,0F,0F:03,,
+04,4D09,Unused_Mode0F_State09_EraseOne_Tbl4D09,r,never,0,0,,,,0F
+04,519D,EraseAnim_StartAngleTbl,r,never,0,0,,,,
+04,51CD,EraseAnim_Run_Tbl51CD,r,never,0,0,,,,
+04,54E0,Stamp_BuildGraphicsLayer_Tbl54E0,r,seen,33,264,11,11:02 11:03,5AB9 5ABB 5B07 5B09,
+04,5502,Stamp_DrawPaletteCursor_PtrTbl5502,r,seen,2,2880,11,11:03,5B72 5B73 5B83 5B85,
+04,5562,Stamp_DrawPaletteCursor_Tbl5562,r,seen,2,720,11,11:03,5B9B,
+04,5573,Main_Entry_Tbl5573,r,seen,203,3451,19,19:00,0468,
+04,5584,Stamp_PaletteInput_Tbl5584,r,seen,203,2052,11 19,11:03 19:00,5BC4 5BC5 0468 5BE7,
+04,55FA,Stamp_PaletteInput_Tbl55FA,r,seen,1,1,11,11:03,5C14,
+04,5648,Stamp_PaletteCursorTbl,r,seen,33,47384,11,11:04,5E22,
+04,566A,Stamp_PageCountTbl,r,never,0,0,,,,
+04,567B,Stamp_PaletteCursorFnTbl,r,never,0,0,,,,
+04,568C,Stamp_MirrorBuffer_Gfx568C,r,never,0,0,,,,
+04,569D,Stamp_Commit_Tbl569D,r,seen,3,70,11,11:04,1EAA 600E 600F,
+04,6354,PenMenu_CursorPosTbl,r,seen,3,1974,10,10:04,631C 6325 6327,
+04,6365,PenMenu_DrawCursor_Tbl6365,r,seen,3,658,10,10:04,633C,
+04,6403,Unused_LoadTilemap24_7120,x,never,0,0,,,,
+04,6412,Unused_LoadTilemap25_4B00,x,never,0,0,,,,
+04,644C,Pen_CursorSpriteTbl,r,seen,7,948,10,10:03,6439,
+04,657C,Pen_Update_Tbl657C,r,seen,5,942,10,10:03,6563,
+04,658C,Pen_Update_Tbl658C,r,seen,5,942,10,10:03,647B 647D,
+04,6648,Pen_Draw_Tbl6648,r,seen,4,12,10,10:03,6624 662C,
+04,6650,Pen_Draw_Tbl6650,r,seen,4,54,10,10:03,1EAA 6642,
+04,67A5,PenMenu_BuildSize_PtrTbl67A5,r,seen,4,12,10,10:03 10:04 10:05,677E 677F,
+04,67EF,PenMenu_BuildPattern_PtrTbl67EF,r,seen,2,6,10,10:04,67C7 67C8,
+04,6839,PenMenu_BuildSpeed_PtrTbl6839,r,seen,1,2,10,10:05,6811 6812,
+04,6E3D,Album_ShowPageScreenB,x,seen,41,156,09,09:01,,
+04,6EF4,Slider_DrawBar,x,seen,42,63498,09,09:01,,
+04,7321,Parlor_AnimQueenSprite_Tbl7321,r,seen,88,199157,01,01:01,72F3 72F5 72FC 72FE 7308 730C,
+04,7340,Parlor_AnimateB,x,seen,24,1075,01,01:04,,
+04,7376,Parlor_AnimateC,x,seen,27,6279,01,01:07,,
+04,73A2,Parlor_AnimateC_Tbl73A2,r,seen,27,13784,01,01:07,7382 738D 7391,
+04,73AB,Parlor_DrawPortraits,x,seen,88,716,01,01:00,,
+04,786F,AlbumPage_ChoiceAPosTbl,r,seen,9,1852,09 0A,0A:05 09:03,783E 7840,
+04,7873,AlbumPage_ArrowAnimTbl,r,seen,9,1852,09 0A,0A:05 09:03,7853 785A,
+04,7954,AlbumPage_DrawChoiceB_Tbl7954,r,seen,43,3440,09 0A,0A:06 09:04,7923 7925,
+04,7958,AlbumPage_DrawChoiceB_Tbl7958,r,seen,43,3440,09 0A,0A:06 09:04,7938 793F,
+04,7A2E,AlbumPage_DrawUp_Tbl7A2E,r,seen,63,9446,09 0A,09:05 0A:07,7A12 7A19,
+04,7B04,AlbumPage_DrawDown_Tbl7B04,r,seen,35,5536,09 0A,0A:08 09:06,7AE8 7AEF,
+04,7C9D,Unused_Mode0A_PhotoStepWrap,x,never,0,0,,,,0A
+05,4114,DjTitle_DrawSourceSprite,x,never,0,0,,,,
+05,4162,DjTitle_DrawPerformer,x,never,0,0,,,,
+05,41C9,DjTitle_DrawFrame2,x,never,0,0,,,,
+05,4208,DjTitle_DrawSourceSprite2,x,never,0,0,,,,
+05,4216,DjTitle_DrawPerformer2,x,never,0,0,,,,
+05,42FC,DjTitle_DrawSourceSprite3,x,never,0,0,,,,
+05,430A,DjTitle_DrawPerformerBlink,x,never,0,0,,,,
+05,434F,DjTitle_DrawFrame3,x,never,0,0,,,,
+05,48B7,DjEd_DrawPageTabNoise,x,never,0,0,,,,
+05,4AF4,DjEd_ColumnVisible,x,never,0,0,,,,
+05,4B24,DjEd_DrawNoteMarker,x,never,0,0,,,,
+05,4B84,DjEd_DrawNoteCursorBlink_Tbl4B84,r,never,0,0,,,,
+05,4BB2,DjEd_DrawNoteColumn_Tbl4BB2,r,never,0,0,,,,
+05,4C18,DjEd_DrawWidthFlag,x,never,0,0,,,,
+05,4C45,DjEd_DrawLoopBarNoise,x,never,0,0,,,,
+05,4C4E,DjEd_DrawNoteStepCursor_Tbl4C4E,r,never,0,0,,,,
+05,4C4F,DjEd_DrawNoteCursorBlink_Tbl4C4F,r,never,0,0,,,,
+05,4D3B,DjEd_DrawFieldCursor_Tbl4D3B,r,never,0,0,,,,
+05,4E20,DjPerf_AnimateControlCursor_Tbl4E20,r,never,0,0,,,,
+05,4E4D,DjPerf_UpdatePose,x,never,0,0,,,,
+05,4E80,DjPerf_UpdatePose_Tbl4E80,r,never,0,0,,,,
+05,4E84,DjPerf_ScrollPerformer,x,never,0,0,,,,
+05,4E97,DjPerf_ScrollPerformer_Tbl4E97,r,never,0,0,,,,
+05,4E9D,DjPerf_StepBeatPhase,x,never,0,0,,,,
+05,4EF5,DjPerf_StepBeatPhase_Tbl4EF5,r,never,0,0,,,,
+05,4EF8,DjPerf_StepBeatPhase_Tbl4EF8,r,never,0,0,,,,
+05,4F04,DjPerf_BounceOffset,x,never,0,0,,,,
+05,4F15,DjPerf_BounceOffset_Tbl4F15,r,never,0,0,,,,
+05,4F9E,DjPerf_PerformerScript_Tbl4F9E,r,never,0,0,,,,
+05,5006,DjPerf_PerformerScript_Tbl5006,r,never,0,0,,,,
+05,5025,DjPerf_PerformerScript_Tbl5025,r,never,0,0,,,,
+05,5044,DjPerf_PerformerScript_Tbl5044,r,never,0,0,,,,
+05,5063,DjPerf_PerformerScript_Tbl5063,r,never,0,0,,,,
+05,5082,DjPerf_PerformerScript_Tbl5082,r,never,0,0,,,,
+05,50D3,DjPerf_PerformerScript_Tbl50D3,r,never,0,0,,,,
+05,50D8,DjPerf_PerformerScript_Tbl50D8,r,never,0,0,,,,
+05,50FD,DjPerf_PerformerScript_Tbl50FD,r,never,0,0,,,,
+05,5120,DjPerf_PerformerScript_Tbl5120,r,never,0,0,,,,
+05,5177,DjPerf_AnimateSpeakerBlink,x,never,0,0,,,,
+05,51B5,DjPerf_AnimateSpeakerBlink_Tbl51B5,r,never,0,0,,,,
+05,51BF,DjPerf_AnimateSpeakerBlink_Tbl51BF,r,never,0,0,,,,
+05,5267,DjPerf_CopyEqualiserRow,x,never,0,0,,,,
+05,5274,DjPerf_Equaliser_PtrTbl5274,r,never,0,0,,,,
+05,5278,DjPerf_Equaliser_PtrTbl5278,r,never,0,0,,,,
+05,527C,DjPerf_Equaliser_Tbl527C,r,never,0,0,,,,
+05,5280,DjPerf_Equaliser_Tbl5280,r,never,0,0,,,,
+05,5284,DjPerf_Equaliser_Map5284,r,never,0,0,,,,
+05,52D5,DjPerf_DrawSpeakingIcon,x,never,0,0,,,,
+05,5381,DjPerf_AnimatorDraw_Tbl5381,r,never,0,0,,,,
+05,554D,DjPerf_Input_Tbl554D,r,never,0,0,,,,
+05,5651,DjPerf_ChannelToggleKeys,x,never,0,0,,,,
+05,574C,DjPerf_ToggleBlink,x,never,0,0,,,,
+05,576B,DjPerf_ToggleBlink_Tbl576B,r,never,0,0,,,,
+05,577A,DjPerf_Write2Tiles,x,never,0,0,,,,
+05,588F,DjPanel_WaitLine,x,never,0,0,,,,
+05,5AB5,DjPrintRow_Text0,x,never,0,0,,,,
+05,5ACF,DjPrintRow_Text1,x,never,0,0,,,,
+05,5AE9,DjPrintRow_Text2,x,never,0,0,,,,
+05,5AEF,DjPrintRow_Text2_Tbl5AEF,r,never,0,0,,,,
+05,5B03,DjPrintRow_Text3,x,never,0,0,,,,
+05,5B09,DjPrintRow_Text3_Tbl5B09,r,never,0,0,,,,
+05,5B1D,DjPrintRow_Text4,x,never,0,0,,,,
+05,5B23,DjPrintRow_Text4_Tbl5B23,r,never,0,0,,,,
+05,5B37,DjPrintRow_Text5,x,never,0,0,,,,
+05,5B3D,DjPrintRow_Text5_Tbl5B3D,r,never,0,0,,,,
+05,5B51,DjPrintRow_Text6,x,never,0,0,,,,
+05,5B6B,DjPrintRow_Text7,x,never,0,0,,,,
+05,5B71,DjPrintRow_Text7_Tbl5B71,r,never,0,0,,,,
+05,5C7E,DjPrintRow_NsNotes3_Tbl5C7E,r,never,0,0,,,,
+05,5C92,DjPrintRow_NsNotes3_Tbl5C92,r,never,0,0,,,,
+05,5CD0,DjPrintRow_S1Duty_Tbl5CD0,r,never,0,0,,,,
+05,5CE4,DjPrintRow_S1Duty_Tbl5CE4,r,never,0,0,,,,
+05,5D4A,DjPrintRow_NsEnvelope_Tbl5D4A,r,never,0,0,,,,
+05,5D7B,DjPrintRow_S2WavePattern_Tbl5D7B,r,never,0,0,,,,
+05,5DE8,DjPrintRow_S2Modulation_Tbl5DE8,r,never,0,0,,,,
+05,5DFC,DjPrintRow_S2Modulation_Tbl5DFC,r,never,0,0,,,,
+05,5E33,DjPrintRow_NsLoop_Tbl5E33,r,never,0,0,,,,
+05,5E64,DjPrintRow_Tempo_Tbl5E64,r,never,0,0,,,,
+05,5E78,DjPrintRow_S2WaveTitle,x,never,0,0,,,,
+05,5EAA,DjPrintRow_S2WaveTitle_Tbl5EAA,r,never,0,0,,,,
+05,5EBE,DjPrintRow_S2WaveTitle_Tbl5EBE,r,never,0,0,,,,
+05,5FD9,DjPrint_RulerLong,x,never,0,0,,,,
+05,5FEC,DjPrint_RulerShort,x,never,0,0,,,,
+05,5FFF,DjPrint_FillCol,x,never,0,0,,,,
+05,600D,DjPrint_FillRow,x,never,0,0,,,,
+05,601A,DjPrint_PlotBars4,x,never,0,0,,,,
+05,604D,DjPrint_PlotBars4B,x,never,0,0,,,,
+05,6080,DjPrint_OrC3,x,never,0,0,,,,
+05,6093,DjPrint_PutDash,x,never,0,0,,,,
+05,6098,DjPrint_PutDigitOrBlank,x,never,0,0,,,,
+05,60A5,DjPrint_PutNumber2,x,never,0,0,,,,
+05,60BF,DjPrint_PutTempo,x,never,0,0,,,,
+05,61A6,DjPrint_PutTempo_Tbl61A6,r,never,0,0,,,,
+05,622D,Unused_DjEd_LoadPerformerTiles9100,x,never,0,0,,,,
+05,6277,DjTitle_PickGraphicsBank_Tbl6277,r,never,0,0,,,,
+05,627A,DjEd_SetFieldCursor,x,never,0,0,,,,
+05,62A3,DjEd_SetFieldCursor_Tbl62A3,r,never,0,0,,,,
+05,637B,DjS1_Field00_DrawMarker,x,never,0,0,,,,
+05,66FA,DjS1_Field07_DrawMarker,x,never,0,0,,,,
+05,68AC,DjS1_Field0A_DrawMarker,x,never,0,0,,,,
+05,693F,DjS2_DrawValueRow,x,never,0,0,,,,
+05,6986,DjS2_DrawAllValues,x,never,0,0,,,,
+05,6B08,DjS2_Field01_DrawMarker,x,never,0,0,,,,
+05,6D0E,DjS2_Field05_DrawMarker,x,never,0,0,,,,
+05,6EC0,DjS2_Field08_DrawMarker,x,never,0,0,,,,
+05,6F92,DjS2_WaveGraphColumn,x,never,0,0,,,,
+05,6FF2,DjS2_WaveGraphColumn_Tbl6FF2,r,never,0,0,,,,
+05,6FF6,DjS2_WaveGraphColumn_Tbl6FF6,r,never,0,0,,,,
+05,7406,DjNs_Field06_DrawMarker,x,never,0,0,,,,
+05,7604,Ball_MenuDrawCursor,x,seen,5,34,20,20:01,,
+05,762B,Ball_MenuDrawCursor_Tbl762B,r,seen,5,68,20,20:01,761D 761F,
+05,7637,Ball_MenuAnimate,x,seen,5,68,20,20:01,,
+05,763E,Ball_MenuAnimB,x,seen,5,34,20,20:01,,
+05,7681,Ball_MenuAnimB_Tbl7681,r,seen,5,68,20,20:01,766F 7671,
+05,7687,Ball_MenuAnimB_Tbl7687,r,seen,5,34,20,20:01,767C,
+05,768B,Ball_MenuAnimC,x,seen,5,34,20,20:01,,
+05,76CE,Ball_MenuAnimC_Tbl76CE,r,seen,5,68,20,20:01,76BC 76BE,
+05,76D4,Ball_MenuAnimC_Tbl76D4,r,seen,5,34,20,20:01,76C9,
+05,76D8,Ball_MenuAnimA,x,seen,5,34,20,20:01,,
+05,770F,Ball_MenuAnimA_Tbl770F,r,seen,5,68,20,20:01,76FD 76FF,
+05,7713,Ball_MenuAnimA_Tbl7713,r,seen,5,34,20,20:01,770A,
+05,771F,Ball_DrawMenuBall,x,seen,6,272,20,20:01 20:00,,
+05,7728,Ball_MenuBlinkSelection,x,seen,4,4,20,20:01,,
+05,7750,Ball_MenuLoadRow,x,never,0,0,,,,
+05,781B,Mode20_State03_GameStart_Tbl781B,r,seen,4,8,20,20:03,2A53 2A62,20
+05,78F2,Mode20_State07_Pause,x,seen,1,106,20,20:07,,20
+05,7931,Ball_DrawPauseText,x,seen,1,106,20,20:07,,
+05,7A79,Ball_DrawPlayer_Tbl7A79,r,seen,4,5476,20,20:04 20:06 20:07,7A66 7A6A 7A70 7A74,
+05,7A85,Ball_ScrollBg,x,seen,4,1053,20,20:04 20:06,,
+05,7A98,Ball_ScrollBg_Tbl7A98,r,seen,4,2106,20,20:04 20:06,7A91 7A94,
+05,7A9E,Ball_PoseScroll,x,seen,4,1053,20,20:04 20:06,,
+05,7AB9,Ball_PoseScroll_Tbl7AB9,r,seen,4,1053,20,20:04 20:06,7AA8,
+05,7ABC,Ball_PoseScroll_Tbl7ABC,r,seen,4,1053,20,20:04 20:06,7AB5,
+05,7B6D,Ball_StepObjects_Tbl7B6D,r,seen,4,2106,20,20:04,7AFA 7B02,
+05,7B6F,Ball_StepObjects_Tbl7B6F,r,never,0,0,,,,
+05,7BD3,Ball_StepObjects_Tbl7BD3,r,seen,4,98,20,20:04,7B26 7B3A,
+05,7C23,Ball_DrawObjects_Tbl7C23,r,seen,4,2632,20,20:04 20:06,7BF9 7BFB,
+05,7C37,Ball_DrawObjects_Tbl7C37,r,seen,4,2632,20,20:04 20:06,7BF9 7BFB,
+05,7C4F,Ball_DrawObjects_Tbl7C4F,r,seen,4,2632,20,20:04 20:06,7BF9 7BFB,
+05,7DB1,Ball_DrawHud,x,seen,4,2754,20,20:04 20:06 20:07 20:02 20:03,,
+05,7DBA,Ball_FlipPalettes,x,seen,2,4,20,20:06,,
+05,7F1C,Unused_Ball_LoadGfx9100,x,never,0,0,,,,
+05,7F33,Unused_Ball_LoadGfx9480,x,never,0,0,,,,
+05,7F66,Ball_PickGfxBank_Tbl7F66,r,seen,4,10,20,20:02 20:03 20:06,7F63,
+05,7F86,Photo_FarGetAddress_Tbl7F86,r,seen,7,100,07 20,20:02 07:04 20:03 20:06,7F71 7F7C 7F7E 7F80,
+06,4E40,Compose_DrawLayoutBlink,x,seen,19,4963,17,17:01,,
+06,4E5C,Compose_DrawLayoutCursor_Tbl4E5C,r,seen,19,42033,17,17:02 17:01 17:0A 17:07 17:0D 17:03 17:04 17:06,4E53 4E55 4E57,
+06,4ED9,Mode17_State02_Split_Cursor_Tbl4ED9,r,seen,16,28,17,17:02,4EC4,17
+06,4F4B,Compose_Split_DrawCursor_Tbl4F4B,r,seen,18,19730,17,17:02,4F38 4F3A,
+06,4F8A,Mode17_State03_Split_Pick1_PtrTbl4F8A,r,seen,16,164,17,17:03,5788,17
+06,4FC5,Mode17_State04_Split_Pick2_PtrTbl4FC5,r,seen,2,12,17,17:04,5788,17
+06,5000,Mode17_State05_Split_Pick3_PtrTbl5000,r,seen,1,2,17,17:05,5788,17
+06,503B,Mode17_State06_Split_Pick4_PtrTbl503B,r,seen,1,8,17,17:06,5788,17
+06,5086,Compose_Split_DrawMakeBlink,x,seen,1,308,17,17:07,,
+06,51DB,Mode17_State0A_Fusion_Cursor_Tbl51DB,r,seen,1,1,17,17:0A,51C6,17
+06,5227,Compose_Fusion_DrawCursor_Tbl5227,r,seen,4,2086,17,17:0A,5214 5216,
+06,5262,Mode17_State0B_Fusion_Pick1_PtrTbl5262,r,seen,1,8,17,17:0B,5788,17
+06,529D,Mode17_State0C_Fusion_Pick2_PtrTbl529D,r,never,0,0,,,,17
+06,52E8,Compose_Fusion_DrawMakeBlink,x,seen,3,169,17,17:0D,,
+06,5648,Compose_WriteTilePair,x,seen,4,896,17,17:01,,
+06,568F,Compose_WriteTilePairB,x,seen,4,896,17,17:01,,
+06,577C,Compose_DrawPhotoCursor,x,seen,16,194,17,17:03 17:04 17:06 17:0B 17:05,,
+06,57B5,Compose_BuildFusion_Tbl57B5,r,never,0,0,,,,
+06,57C3,Compose_FusionReduceLeft,x,never,0,0,,,,
+06,57F6,Compose_FusionMerge,x,never,0,0,,,,
+06,58C0,Compose_SplitQuadrant,x,never,0,0,,,,
+06,58F1,Compose_DrawFreeCount,x,never,0,0,,,,
+06,5932,Compose_DrawJitter,x,never,0,0,,,,
+06,60DB,Shoot_CallVariantHandler_Tbl60DB,r,seen,71,4606,14,14:01 14:04,7816 73A1,
+06,61D7,Shoot_DrawOptionPanel,x,seen,5,10,14,14:01,,
+06,62C2,Shoot_DrawIconBits,x,seen,4,784,14,14:01,,
+06,62D5,Shoot_DrawVariantIcon_Tbl62D5,r,seen,4,360,14,14:01,62C7 62C9 62AB,
+06,6317,Shoot_DrawBurstIcon,x,seen,71,2301,14,14:01,,
+06,6388,Mode14_State02_Shutter_JumpTbl6388,r,never,0,0,,,,14
+06,6390,Shoot_ShutterVariant0,x,never,0,0,,,,
+06,63BC,Shoot_ShutterVariant1,x,never,0,0,,,,
+06,63FA,Shoot_ShutterVariant2,x,never,0,0,,,,
+06,6438,Shoot_ShutterVariant3,x,never,0,0,,,,
+06,6448,Shoot_DrawTimerJitter,x,seen,5,294,14,14:02,,
+06,6510,Shoot_DrawShotJitter,x,seen,2,15,14,14:03,,
+06,6734,Shoot_Options_RedrawArrowA,x,never,0,0,,,,
+06,6769,Shoot_Options_ReadKeysA,x,never,0,0,,,,
+06,6798,Shoot_Options_DrawCursorA,x,never,0,0,,,,
+06,67D6,Shoot_Options_DrawCursorA_Tbl67D6,r,never,0,0,,,,
+06,67DC,Shoot_Options_DrawCursorA_Tbl67DC,r,never,0,0,,,,
+06,6827,Shoot_Options_RedrawArrowB,x,never,0,0,,,,
+06,6847,Shoot_Options_ReadKeysB,x,seen,3,322,14,14:06,,
+06,6864,Shoot_Options_DrawCursorB,x,seen,3,322,14,14:06,,
+06,68A2,Shoot_Options_DrawCursorB_Tbl68A2,r,seen,3,644,14,14:06,6870 6872,
+06,68AC,Shoot_Options_DrawCursorB_Tbl68AC,r,seen,3,644,14,14:06,6883 688D,
+06,68F5,Shoot_Options_RedrawArrowC,x,never,0,0,,,,
+06,6915,Shoot_Options_ReadKeysC,x,seen,1,152,14,14:07,,
+06,696A,Shoot_Options_DrawCursorC,x,seen,1,152,14,14:07,,
+06,69A8,Shoot_Options_DrawCursorC_Gfx69A8,r,seen,1,304,14,14:07,6976 6978,
+06,69AE,Shoot_Options_DrawCursorC_Tbl69AE,r,seen,1,304,14,14:07,6989 6993,
+06,6A35,Shoot_Options_RedrawArrowD,x,never,0,0,,,,
+06,6A55,Shoot_Options_ReadKeysD,x,seen,1,41,14,14:08,,
+06,6AAD,Shoot_Options_DrawCursorD,x,seen,1,41,14,14:08,,
+06,6AEB,Shoot_Options_DrawCursorD_Gfx6AEB,r,seen,1,82,14,14:08,6AB9 6ABB,
+06,6B1F,Shoot_Options_DrawCursorD_Tbl6B1F,r,seen,1,82,14,14:08,6ACC 6AD6,
+06,6B4A,Mode14_State09_LeaveByVariant_Tbl6B4A,r,seen,62,174,01 14 15 16,14:09 01:09 15:09 16:09,6B31 6B35,14
+06,6C51,Shoot_LoadEffectGfx,x,seen,72,103,14,14:00 14:0C,,
+06,6C54,Shoot_LoadEffectGfxA,x,seen,72,208,14,14:00 14:0C 14:04,,
+06,6C74,Shoot_LoadEffectGfxA_Tbl6C74,r,seen,72,520,14,14:00 14:0C 14:04,6C64 6C67 6C6A 6C6D 6C70,
+06,6CEC,Shoot_ClearEffectTiles,x,seen,72,208,14,14:00 14:0C 14:04,,
+06,6D34,Shoot_ClearVram8900,x,seen,72,208,14,14:00 14:0C 14:04,,
+06,6D56,Shoot_ClearVram8900Small,x,seen,3,12,14,14:00 14:02,,
+06,6D8B,Shoot_ClearVram8B00,x,seen,72,1350,14,14:01 14:00 14:03 14:0C 14:04,,
+06,6DAD,Shoot_LoadBurstPhoto,x,never,0,0,,,,
+06,6DD3,Shoot_LoadBurstPhotoB,x,never,0,0,,,,
+06,6E32,Shoot_LoadTimerScreen_Tbl6E32,r,mode?,72,1362,14,14:01 14:00 14:03 14:0C 14:02 14:04,6E12 6E13,18
+06,70B2,Shoot_DrawPhotosLeft,x,seen,72,681,14,14:01 14:00 14:03 14:0C 14:02 14:04,,
+06,70CA,Shoot_DrawTimerMinutes,x,seen,21,618,14,14:01 14:00 14:03 14:04,,
+06,7106,Shoot_DrawShotsLeftTimer,x,seen,2,97,14,14:01 14:03 14:00 14:04,,
+06,711B,Shoot_DrawTwoDigitsAt,x,seen,72,2792,14,14:01 14:00 14:03 14:0C 14:04 14:02,,
+06,7125,Shoot_DrawDigitAt,x,seen,72,5584,14,14:01 14:00 14:03 14:0C 14:04 14:02,,
+06,7147,Shoot_CopyTileSafe,x,seen,72,11168,14,14:01 14:00 14:03 14:0C 14:04 14:02,,
+06,7199,Shoot_ResetTimer_Tbl7199,r,never,0,0,,,,
+06,719E,Shoot_SetCaptureMode,x,seen,71,2301,14,14:01,,
+06,71CC,Unused_Shoot_TimerKeys,x,never,0,0,,,,
+06,76C0,Shoot_FxMaskBlockBody,x,never,0,0,,,,
+06,7845,Shoot_PlayShutterSound_Tbl7845,r,seen,8,42,14,14:01,2A53 2A58,
+07,41C8,Unused_Mode0E_GotoState12,x,never,0,0,,,,0E
+07,41CE,Link_AnimateLamps,x,never,0,0,,,,
+07,41F8,Link_DrawPressAText,x,seen,2,60,0E,0E:01,,
+07,4231,Link_AnimateStep3,x,never,0,0,,,,
+07,4354,Link_DrawAnimatorSlot_Tbl4354,r,seen,2,750,0E,0E:01 0E:00,4335 433A 4341 4345 434F,
+07,4A4D,Unused_Link_DrawPhotoNumber,x,never,0,0,,,,
+07,4A8E,Link_DrawAbortJitter,x,never,0,0,,,,
+07,4AF9,Link_ShowScreenA,x,never,0,0,,,,
+07,4B5E,Link_ShowScreenB,x,never,0,0,,,,0E
+07,4BC3,Unused_Link_LoadTiles,x,never,0,0,,,,
+07,4BDD,Unused_Link_WriteHexByte,x,never,0,0,,,,
+07,4BE4,Unused_Link_WriteHexNibble,x,never,0,0,,,,
+07,4BEA,Unused_Link_SumSlotBuffer,x,never,0,0,,,,
+07,4DB0,LinkPick_DrawCursor_Tbl4DB0,r,never,0,0,,,,
+07,4E5D,LinkPick_Navigate_Tbl4E5D,r,never,0,0,,,,
+07,4F12,LinkPick_LoadThumbOfCursor,x,never,0,0,,,,
+07,4F2B,LinkPick_LoadBigThumb,x,never,0,0,,,,
+07,4F3B,LinkPick_ClearThumbSlot,x,never,0,0,,,,
+07,4FAA,LinkPick_LoadMessageStrip_Gfx4FAA,r,never,0,0,,,,
+07,4FF6,LinkPick_LoadIcon_Gfx4FF6,r,never,0,0,,,,
+07,500B,LinkPick_LoadPhotoIndex,x,never,0,0,,,,
+07,500E,LinkPick_PageTilesRight,x,never,0,0,,,,
+07,503D,Unused_LinkPick_LoadPhotoIndexB,x,never,0,0,,,,
+07,5040,LinkPick_PageTilesLeft,x,never,0,0,,,,
+07,5160,LinkPick_ThumbBufferAddress,x,never,0,0,,,,
+07,5340,ViewMenu_DrawCursor_Tbl5340,r,seen,35,16598,02,02:01,5327 5329,
+07,5344,ViewMenu_DrawCursor_PtrTbl5344,r,seen,35,8299,02,02:01,533B,
+07,5348,ViewMenu_DrawCursorOnce,x,seen,33,792,0A,0A:00,,
+07,5365,ViewMenu_DrawCursorOnce_Tbl5365,r,seen,33,1584,0A,0A:00,5354 5356,
+07,53A6,ViewMenu_AnimateBackground_Map53A6,r,seen,35,3222,02,02:01,5395 5397 5399,
+07,5650,Mode07_State03_TargetMenuA,x,seen,8,3772,07,07:03,,07
+07,5689,Mode07_State04_TargetMenuB,x,seen,11,3250,07,07:04,,07
+07,5749,SpaceFever_DrawChoiceCursor_Tbl5749,r,seen,12,3511,07,07:03 07:04,573C,
+07,57CA,SpaceFever_DrawPlayer_Tbl57CA,r,seen,13,25608,07,07:02,57A0 57B4 57B8 57BA,
+07,5A38,SpaceFever_Wave0_PathEnd,r,seen,13,19,07,07:02,59D8,
+07,5A39,SpaceFever_Wave0_Init_Tbl5A39,r,seen,13,9880,07,07:02,6573 655B 6565,
+07,5AC9,SpaceFever_Wave0_ReapKilled,x,seen,13,8036,07,07:02,,
+07,5B20,SpaceFever_Wave0_Play_Tbl5B20,r,seen,13,25566,07,07:02,642F 6452 6456 6458,
+07,5B82,SpaceFever_Wave1_Init_Tbl5B82,r,seen,12,24,07,07:02,5B3F 5B52,
+07,5B8B,SpaceFever_Wave1_Init_Tbl5B8B,r,seen,12,6324,07,07:02,6573 6565 655B,
+07,5CE4,SpaceFever_Wave1_ReapKilled,x,seen,12,16104,07,07:02 07:03,,
+07,5D15,SpaceFever_Wave1_Play_Tbl5D15,r,seen,12,34152,07,07:02 07:03,642F 6452 6456 6458,
+07,5D6B,SpaceFever_Wave2_Init_Tbl5D6B,r,seen,8,16,07,07:03,5D28 5D3B,
+07,5D74,SpaceFever_Wave2_Init_Tbl5D74,r,seen,8,3168,07,07:03,6573 655B 6565,
+07,5E93,SpaceFever_Wave2_ReapKilled,x,seen,8,3612,07,07:03,,
+07,5EC4,SpaceFever_Wave2_EnemyFire,x,seen,8,3612,07,07:03,,
+07,5EF3,SpaceFever_Wave2_Play_Tbl5EF3,r,seen,8,7628,07,07:03,642F 6452 6456 6458,
+07,5F55,SpaceFever_Wave3_Init_Tbl5F55,r,never,0,0,,,,
+07,5F5E,SpaceFever_Wave3_Init_Tbl5F5E,r,never,0,0,,,,
+07,6079,SpaceFever_Wave3_ReapKilled,x,never,0,0,,,,
+07,60C1,SpaceFever_Wave3_Play_Tbl60C1,r,never,0,0,,,,
+07,6130,SpaceFever_Boss_Init_Tbl6130,r,never,0,0,,,,
+07,6139,SpaceFever_Boss_Init_Tbl6139,r,never,0,0,,,,
+07,627B,SpaceFever_Boss_StartFinalPass,x,never,0,0,,,,
+07,6289,SpaceFever_Boss_EnemyFire,x,never,0,0,,,,
+07,62A9,SpaceFever_Boss_Play_Tbl62A9,r,never,0,0,,,,
+07,6379,SpaceFever_Boss_EndFrameLimitTbl,r,never,0,0,,,,
+07,641C,SpaceFever_MoveEnemy_Tbl641C,r,seen,12,114,07,07:02 07:03,63C3,
+07,64F7,SpaceFever_FireBulletAt,x,never,0,0,,,,
+07,6792,SpaceFever_BossHit_Tbl6792,r,never,0,0,,,,
+07,68B2,SpaceFever_DigitTileTbl,r,seen,13,1216,07,07:02 07:01 07:00,689C 689D,
+07,698F,SpaceFever_ClearVramBlock,x,seen,7,112,07,07:04,,
+07,6A76,SaveDialog_Substate3_FullInit,x,seen,1,2,10,10:09,,
+07,6AA3,SaveDialog_Substate4_WaitKey,x,seen,1,577,10,10:09,,
+07,6BB3,Mode0D_State00_Init_Gfx6BB3,r,never,0,0,,,,0D
+07,6C3C,SlideHub_ActorDurations,x,never,0,0,,,,
+07,6D40,SlideHub_ActorLimitTbl,r,never,0,0,,,,
+07,6D42,SlideHub_WalkActors_Tbl6D42,r,never,0,0,,,,
+07,6E7D,SlideOptA_ReadKeys,x,never,0,0,,,,
+07,6ED6,SlideOptA_ArrowPosTbl,r,never,0,0,,,,
+07,6EE0,SlideOptA_DrawValue,x,never,0,0,,,,
+07,6EFB,SlideOptA_ValuePosTbl,r,never,0,0,,,,
+07,6EFF,Mode0D_State04_OptionB,x,never,0,0,,,,0D
+07,6F94,SlideOptB_ReadKeys,x,never,0,0,,,,
+07,6FED,SlideOptB_ArrowPosTbl,r,never,0,0,,,,
+07,6FF7,SlideOptB_DrawValue,x,never,0,0,,,,
+07,7016,SlideOptB_ValuePosTbl,r,never,0,0,,,,
+07,7259,Mode00_State00_Init_Tbl7259,r,seen,203,355,00,00:00,7254,00
+07,7795,MainMenu_ReturnToUpperItem,x,seen,33,66,00,00:04,,
+07,780C,MainMenu_LoadIconTilesA,x,seen,203,355,00,00:00,,
+07,7843,MainMenu_LoadIconTilesB,x,seen,203,355,00,00:00,,
+07,7868,MainMenu_LoadBaseTiles,x,seen,203,710,00,00:00,,
+07,7885,MainMenu_LoadBackground,x,seen,203,710,00,00:00,,
+07,792D,MainMenu_StepIconAnimators_Next,x,seen,203,419676,00,00:01 00:04 00:06 00:02 00:03 00:05 00:07,,
+07,7A43,MainMenu_DrawUpperItem2_Gfx7A43,r,seen,14,63572,00,00:03,7906 7919 7922 7929 792A 790A,
+07,7C33,MainMenu_SlideA_Tbl2,r,never,0,0,,,,
+07,7C3F,MainMenu_SlideA_Tbl3,r,never,0,0,,,,
+08,4A38,Mode1E_State03_Page3Confirm,x,never,0,0,,,,1E
+08,4B50,Print_DrawPageArrow,x,seen,1,38,1E,1E:01 1E:02 1E:00,,
+08,4B5A,Print_DrawPageIcon,x,seen,1,38,1E,1E:01 1E:02 1E:00,,
+08,4B84,Print_CursorSpriteTbl,r,seen,1,33,1E,1E:01 1E:02,4B7A 4B7C 4B7F,
+08,4B8D,Print_DrawDigitTiles,x,seen,1,6,1E,1E:00,,
+08,4BFA,Print_DrawPageNumbers,x,seen,1,2,1E,1E:00,,
+08,4C12,Print_DrawSelectionDigits,x,seen,1,30,1E,1E:00,,
+08,4C67,Print_SelectMarkTbl,r,seen,1,30,1E,1E:00,4C3F,
+08,4C6F,Print_DrawSelectionDigits_PtrTbl4C6F,r,seen,1,30,1E,1E:00,4C59,
+08,4CC5,Print_ShiftMaskTbl,r,never,0,0,,,,
+08,4D6A,Print_LoadSelectedDigit,x,seen,1,2,1E,1E:00,,
+08,4D8F,Print_LoadDigitTile,x,seen,1,4,1E,1E:00,,
+08,4F75,BorderPicker_SlideToPrevious,x,seen,3,6,0A 12,12:21 0A:0B,,
+08,4FC4,BorderPicker_SlideTblA,r,seen,3,63,0A 12,12:21 0A:0B,4FA7 4FAC 4FB0,
+08,4FD9,BorderPicker_SlideToNext,x,never,0,0,,,,
+08,501F,BorderPicker_SlideTblB,r,never,0,0,,,,
+08,5229,Wild_FillBytes4,x,seen,2,288,1C,1C:0D,,
+08,5315,WildFramePicker_SlideRight,x,never,0,0,,,,
+08,5347,WildFramePicker_SlideTblA,r,never,0,0,,,,
+08,5365,WildFramePicker_SlideLeft,x,never,0,0,,,,
+08,5397,WildFramePicker_SlideTblB,r,never,0,0,,,,
+08,53B5,Wild_WaitLY39,x,never,0,0,,,,
+08,53FF,Wild_CopyBlockAdvance,x,seen,2,20,1C,1C:0D,,
+08,540D,WildFrame_LoadForPrintJob,x,seen,1,1,1C,1C:08,,
+08,543C,WildFrame_LoadForPrintScreen,x,seen,1,1,1C,1C:0E,,
+08,5473,Wild_MemCopyAdvance,x,seen,1,4,1C,1C:0E,,
+08,5481,WildFrame_LoadForOptionScreen,x,never,0,0,,,,
+08,54B8,Wild_VramCopyAdvance,x,never,0,0,,,,
+08,74DC,Title_SceneTbl,r,seen,205,28416,19,19:03 19:01 19:02,74BF 74C1 74C3,
+09,4474,CommentEditor_DrawCaret,x,never,0,0,,,,
+09,44DB,CommentEditor_DrawGridCursor_Tbl44DB,r,never,0,0,,,,
+09,47D9,CommentCard_DrawHalfByte,x,never,0,0,,,,
+09,47EC,CommentCard_DrawNibble,x,never,0,0,,,,
+09,49CB,Mode08_State02_PlanetOpen_Tbl49CB,r,seen,14,17,08,08:02,49A4,08
+09,4A7D,OwnerCard_BlinkTitle,x,seen,1,70,08,08:04,,
+09,4D86,Mode08_CreditsReal,x,seen,6,14,08,08:12,,08
+09,4F85,Credits_JitterPosTbl,r,seen,4,40152,08,08:14,4F73 4F78 4F7B,
+09,509A,Credits_ScrollSpriteTileTbl,r,seen,2,5169,08,08:15,503D,
+09,5269,UserMap_DecoLimitTbl,r,seen,15,20776,08,08:01,5228,
+09,529B,UserMap_DrawCursor_PtrTbl529B,r,seen,15,5194,08,08:01,528E,
+09,5308,Record_Delay8,x,seen,26,297052,08,08:00,,
+09,5509,OwnerCard_DrawGender_Map5509,r,seen,1,1,08,08:03,54FA,
+09,55CD,OwnerCard_DrawBloodType_Map55CD,r,seen,1,2,08,08:03,55BC 55C5,
+09,5605,OwnerCard_DrawBloodHigh,x,seen,1,8,08,08:09,,
+09,5618,OwnerCard_DrawBloodLow,x,seen,1,16,08,08:09,,
+09,563A,OwnerCard_DrawBloodHighB,x,seen,1,16,08,08:03,,
+09,564D,OwnerCard_DrawBloodLowB,x,seen,1,32,08,08:03,,
+09,566A,OwnerCard_DrawBloodLowB_Tbl566A,r,seen,1,16,08,08:03,565B,
+09,603C,Mode21_PickCharacterTbl,x,never,0,0,,,,21
+09,62C1,Mode21_State05_ReadySteadyGo,x,never,0,0,,,,21
+09,733E,ResultScreen_Substate0_Init_Tbl733E,r,seen,31,74,01 14 17 1D,01:0A 1D:0A 14:0B 17:12,2A53 2A62,
+0A,4000,Cam_MainDispatch,x,seen,71,2301,14,14:01,,
+0A,42BA,Cam_BuildDitherMatrix,x,seen,205,750,00 14,00:00 14:00 14:01,,
+0A,4306,Cam_Dither_RampB,x,never,0,0,,,,
+0A,440C,Cam_Dither_Flat,x,never,0,0,,,,
+0A,4427,Cam_Dither_RampA,x,seen,205,375,00 14,00:00 14:00 14:01,,
+0A,455A,Cam_FactoryTest,x,never,0,0,,,,
+0A,45C9,Cam_Calib_ValidityCheck,x,seen,205,410,00,00:00,,
+0A,4645,Cam_Calib_EchoCompare,x,seen,205,410,00,00:00,,
+0A,469F,Cam_Calib_RepairPaths,x,never,0,0,,,,
+0A,46FD,Cam_Calib_Loader,x,seen,205,410,00,00:00,,
+0A,4724,Cam_Calib_BootMeasureSeq,x,seen,205,410,00,00:00,,
+0A,4859,Cam_ExposureBandSelect,x,seen,205,820,00,00:00,,
+0A,4947,Cam_FullCalibration,x,never,0,0,,,,
+0A,4961,Cam_FactoryMeasure1,x,never,0,0,,,,
+0A,4B6A,Cam_ORegister_SAR_Search,x,seen,205,4510,00,00:00,,
+0A,4BEC,Cam_ORegister_SAR_Tail,x,seen,205,4510,00,00:00,,
+0A,4C30,Cam_PixelTestHelper,x,seen,205,45510,00,00:00,,
+0A,4C53,Cam_FactoryMeasure2_Tail,x,never,0,0,,,,
+0A,4C6C,Cam_FactoryMeasure2,x,never,0,0,,,,
+0A,4E44,Cam_ThresholdConverge,x,never,0,0,,,,
+0A,4EE3,Cam_ThresholdConverge_Up,x,never,0,0,,,,
+0A,4F58,Cam_CommitVectorToSRAM,x,never,0,0,,,,
+0A,4FBD,Cam_PopcountSampleLoop,x,seen,71,4602,14,14:01,,
+0A,5091,Cam_PopcountSampleLoop_inner,x,seen,71,773136,14,14:01,,
+0A,50AA,Cam_LiveInit,x,seen,205,410,00,00:00,,
+0A,6A52,Cam_BootSelfTest_Entry,x,seen,205,205,00,00:00,,
+0A,6A7B,Cam_FactoryDiag_AllButtonsExceptB,x,never,0,0,,,,
+0A,6B56,Cam_FactoryDiag_HexDigitWrite,x,never,0,0,,,,
+0A,6B61,Cam_FactoryDiag_NibbleToTile_hi,x,never,0,0,,,,
+0A,6B63,Cam_FactoryDiag_ByteToTiles,x,never,0,0,,,,
+0A,6B6E,Cam_FactoryDiag_NibbleToTile_lo,x,never,0,0,,,,
+0A,6B73,Cam_FirstBoot_StorePleaseWait,x,never,0,0,,,,
+0A,6BDB,Cam_FactoryDiag_StoreWaitScreen,x,never,0,0,,,,
+0A,7900,Cam_ReduceTbl_Lo,r,never,0,0,,,,
+0A,7A00,Cam_ReduceTbl_Hi,r,never,0,0,,,,
+0A,7B00,Cam_ExposureShiftTable,r,seen,71,2267,14,14:01,4037,
+0A,7BA0,Cam_ORegSAR_Table_Above,r,seen,205,6733,00,00:00,4C21,
+0A,7BE0,Cam_ORegSAR_Table_Below,r,seen,205,6797,00,00:00,4C21,
+0A,7C20,Cam_DitherRamp_ParamsA,r,seen,26,224,14,14:01 14:00,42EE 42F1 42F4 42F7,
+0A,7C60,Cam_DitherRamp_ParamsB,r,seen,205,1276,00 14,00:00 14:00 14:01,42EE 42F1 42F4 42F7,
+0A,7CA0,Cam_DitherRamp_ParamsUnused,r,never,0,0,,,,
+0A,7CE0,Cam_FarStub_FactoryTest,x,never,0,0,,,,
+0A,7CE6,Cam_FarStub_GainProbe,x,never,0,0,,,,
+0A,7CEC,Cam_FarStub_FactoryMeasure1,x,never,0,0,,,,
+0A,7CF8,Cam_FarStub_MainDispatch,x,seen,71,4602,14,14:01,,
+0A,7D04,Cam_FarStub_ValidityCheck,x,seen,205,410,00,00:00,,
+0A,7D0A,Cam_FarStub_FullCalibration,x,never,0,0,,,,
+0A,7D10,Cam_FarStub_LiveInit,x,seen,205,410,00,00:00,,
+0C,4000,Gfx_0C_4000_Mode12_State00_Init,r,seen,23,32000,12,12:00 12:22,0468,12
+0C,4500,Gfx_0C_4500_Mode12_State1F_SortDialogClose,r,seen,23,6912,12,12:00 12:22 12:1F,0468 061D 0620 0630 0633 0636,12
+0C,4600,Gfx_0C_4600_Mode12_State16_SaveDialogClose,r,seen,23,20112,12,12:00 12:22 12:1F 12:16 12:1C,0468 0636 0639 061D 0620 0630,12
+0C,48C0,Gfx_0C_48C0_Mode12_State0F_ClearAll,r,seen,23,2496,12,12:00 12:22 12:0F,0468 061D 0620 0630 0633 0636,12
+0C,4920,Gfx_0C_4920_Mode12_State20_BorderRow,r,seen,23,1248,12,12:00 12:22 12:0F,0468 061D 0620 0630 0633 0636,12
+0C,4950,Gfx_0C_4950_Mode12_State03_EditSpeed,r,seen,23,19984,12,12:00 12:22 12:03 12:0F,0468 061D 0620 0630 0633 0636,12
+0C,4C60,Gfx_0C_4C60_Mode12_State16_SaveDialogClose,r,seen,23,7200,12,12:00 12:16 12:22 12:1F 12:1C,0468 061D 0620 0630 0633 0636,12
+0C,4D50,Gfx_0C_4D50_Mode12_State07_ToolsSlideIn,r,seen,23,38560,12,12:07 12:00 12:22 12:16 12:1F 12:1C,0468 061D 0620 0630 0633 0636,12
+0C,4FF0,Gfx_0C_4FF0_AnimEd_ShowEntryValue,r,seen,23,11600,12,12:00 12:01 12:02 12:22 12:0A 12:0B 12:09 12:04,0468 061D 0620 0630 0633 0636,
+0C,5100,Gfx_0C_5100_Mode12_State0F_ClearAll,r,seen,23,128640,12,12:01 12:00 12:0A 12:0B 12:09 12:22 12:04 12:0F,0468 061D 0620 0630 0633 0636,12
+0C,5500,Gfx_0C_5500_Mode12_State0F_ClearAll,r,seen,23,15888,12,12:00 12:22 12:0F 12:05 12:11,0468 061D 0620 0630 0633 0636,12
+0C,5770,Gfx_0C_5770_AnimEd_ShowLoopFlag,r,seen,23,3616,12,12:00 12:22 12:1F,0468 061D 0620 0630 0633 0636,
+0C,5800,Gfx_0C_5800_AnimEdMenuLabelsAlt,r,never,0,0,,,,12
+0C,5B40,Gfx_0C_5B40_AnimEd_ShowEntryValue,r,seen,1,32,12,12:1F,061D 0620 0630 0633 0636 0639,
+0C,5B60,Gfx_0C_5B60_AnimEd_ShowEntryValue,r,seen,4,640,12,12:08 12:0F,061D 0620 0630 0633 0636 0639,
+0C,5C80,Gfx_0C_5C80_AnimEd_ShowLoopFlag,r,seen,1,32,12,12:1F,061D 0620 0630 0633 0636 0639,
+0C,5CA0,Gfx_0C_5CA0_AnimEd_Ctx0_Decor,r,seen,3,160,12,12:04 12:22,061D 0620 0630 0633 0636 0639,
+0C,5CC0,Gfx_0C_5CC0_AnimEd_Ctx0_Decor,r,seen,3,80,12,12:04 12:22,061D 0620 0630 0633 0636 0639,
+0C,5D40,Gfx_0C_5D40_Mode12_State22_BorderPickerReturn,r,seen,7,432,12,12:03 12:22,0468 061D 0620 0630 0633 0636,12
+0C,5D70,Gfx_0C_5D70_Mode12_State01_Browse,r,seen,9,432,12,12:09 12:01,061D 0620 0630 0633 0636 0639,12
+0C,5DA0,Gfx_0C_5DA0_Mode12_State01_Browse,r,seen,9,1056,12,12:09 12:01 12:22,0468 061D 0620 0630 0633 0636,12
+0C,5E60,Src_0C_5E60_AnimEd_CopyDigitTile,r,seen,23,16064,12,12:01 12:00 12:02 12:09 12:0A 12:0B 12:22 12:1F,061D 0620 0630 0633 0636 0639,
+0C,5FA0,Gfx_0C_5FA0_AnimEd_ShowEntryValue,r,seen,23,9600,12,12:01 12:02 12:00 12:0A 12:0B 12:09 12:04 12:22,061D 0620 0630 0633 0636 0639,
+0C,5FE0,Gfx_0C_5FE0_Mode12_State04_ToggleLoop,r,seen,3,96,12,12:04,061D 0620 0630 0633 0636 0639,12
+0C,6000,Gfx_0C_6000_Mode12_State04_ToggleLoop,r,never,0,0,,,,12
+0C,6020,Gfx_0C_6020_AnimEd_Ctx0_Decor,r,seen,23,2400,12,12:00 12:22 12:1F,061D 0620 0630 0633 0636 0639,
+0C,6180,Gfx_0C_6180_Mode12_State14_SaveDialogOpen,r,seen,5,4960,12,12:14,061D 0620 0630 0633 0636 0639,12
+0C,6560,Gfx_0C_6560_Mode12_State1A_ClearDialogOpen,r,seen,3,1392,12,12:1A,061D 0620 0630 0633 0636 0639,12
+0C,6730,Gfx_0C_6730_Mode12_State17_ExitDialogOpen,r,seen,5,2080,12,12:1A 12:17,0630 0633 0636 0639 061D 0620,12
+0C,68D0,Gfx_0C_68D0_AnimEdKanaStrips,r,seen,2,960,12,12:17,0630 0633 0636 0639 061D 0620,12
+0C,6C00,Gfx_0C_6C00_Mode12_State1D_SortDialogOpen_Aux,r,never,0,0,,,,12
+0C,6C30,Gfx_0C_6C30_Mode12_State1D_SortDialogOpen,r,seen,3,2550,12,12:1D,061D 0620 0630 0633 0636 0639,12
+0C,6FA0,Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen,r,seen,3,1968,12,12:1D,061D 0620 0630 0633 0636 0639,12
+0C,7800,Gfx_0C_7800_Mode09_State00_Init,r,seen,42,26624,09,09:00 09:02 09:0A,0468 061D 0620 0630 0633 0636,09
+0C,7900,Gfx_0C_7900_Album_LoadSliderScreen,r,seen,45,5184,09 0A,09:00 09:02 0A:04 09:0A,0468 061D 0620 0630 0633 0636,
+0C,7930,Gfx_0C_7930_Mode09_State00_Init,r,seen,75,14448,09 0A,09:00 09:02 0A:02 0A:04 09:0A 0A:0C,0468 061D 0620 0636 0639 0630,09 0A 0D
+0C,79A0,Gfx_0C_79A0_Mode0A_State02_Setup,r,seen,75,38704,09 0A,09:00 09:02 0A:04 09:0A 0A:02 0A:0C,0468 0636 0639 0630 0633 061D,0A
+0C,7B00,Gfx_0C_7B00_Mode09_State00_Init,r,seen,42,26624,09,09:00 09:02 09:0A,0468 061D 0620 0630 0633 0636,09
+0C,7C00,Gfx_0C_7C00_Album_LoadSliderScreen,r,seen,45,55296,09 0A,09:00 09:02 0A:04 09:0A,0468 0636 0639 061D 0620 0630,
+0C,7FD0,Gfx_0C_7FD0_Mode09_State00_Init,r,seen,42,4992,09,09:00 09:02 09:0A,0468 061D 0620 0630 0633 0636,09
+0D,4000,Gfx_0D_4000_Mode16_State00_Init,r,seen,13,67584,16,16:00 16:01,0468,16
+0D,4800,Gfx_0D_4800_Mode16_State00_Init,r,seen,13,67584,16,16:00 16:01,0468,16
+0D,5000,Gfx_0D_5000_Mode16_State00_Init,r,seen,13,25344,16,16:00 16:01,0468,16
+0D,7000,Gfx_0D_7000_FillPatternTiles,r,never,0,0,,,,0F 16
+0D,7660,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,r,never,0,0,,,,
+0D,77E0,Gfx_0D_77E0_FillPatternTiles_Cont,r,never,0,0,,,,
+0D,7900,Gfx_0D_7900_Mode0F_State05_ConfirmInit,r,seen,33,60928,0F,0F:05,0468,0F
+0E,7F00,Map_0E_7F00_Mode1A_State04_PlaceOrDelete,r,seen,6,2560,1A,1A:04,061D 0620 0630 0633 0636 0639,1A
+0F,4000,Gfx_0F_4000_Mode08_State00_Init,r,seen,15,36864,08,08:00,0468,08
+0F,4800,Gfx_0F_4800_Mode08_State00_Init,r,seen,15,36864,08,08:00,0468,08
+0F,5000,Gfx_0F_5000_Mode08_State00_Init,r,seen,15,23040,08,08:00,0468,08
+0F,5500,Gfx_0F_5500_UserMap_LoadPlanetTiles,r,seen,15,23040,08,08:00 08:01,0468 061D 0620 0630 0633 0636,
+0F,5A00,Gfx_0F_5A00_UserMap_LoadPlanetTiles,r,seen,8,4743,08,08:01,061D 0620 0630 0633 0636 0639,
+0F,5C80,Gfx_0F_5C80_UserMap_LoadPlanetTiles,r,seen,7,4800,08,08:01 08:00,061D 0620 0630 0633 0636 0639,
+0F,7B00,Gfx_0F_7B00_Boot_EraseAllPrompt_Far,r,seen,2,2560,00,00:00,0468,
+10,5C00,Gfx_10_5C00_Mode1F_State00_TitleInit,r,never,0,0,,,,1F
+10,78A8,TileGap_10_78A8,r,never,0,0,,,,
+10,78E8,TileGap_10_78E8,r,never,0,0,,,,
+10,7A08,TileGap_10_7A08,r,never,0,0,,,,
+10,7BC2,TileGap_10_7BC2,r,never,0,0,,,,
+10,7BE4,TileGap_10_7BE4,r,never,0,0,,,,
+10,7D51,TileGap_10_7D51,r,never,0,0,,,,
+11,4F00,Gfx_11_4F00_MainMenu_LoadBaseTiles,r,seen,203,556800,00,00:01 00:00,0468 061D 0620 0630 0633 0636,
+11,5000,Gfx_11_5000_MainMenu_DrawUpperItem1,r,seen,203,778752,00,00:01 00:00 00:02,0468 0636 0639 061D 0620 0630,
+11,5200,Gfx_11_5200_MainMenu_DrawUpperItem0,r,seen,203,878336,00,00:01,061D 0620 0630 0633 0636 0639,
+11,5300,Gfx_11_5300_MainMenu_DrawUpperItem1,r,seen,203,1029376,00,00:01 00:02,0636 0639 061D 0620 0630 0633,
+11,5400,Gfx_11_5400_MainMenuUpperItemFramesA,r,seen,77,151040,00,00:02,0636 0639 061D 0620 0630 0633,
+11,5500,Gfx_11_5500_MainMenu_DrawUpperItem0,r,seen,203,452608,00,00:01,061D 0620 0630 0633 0636 0639,
+11,5600,Gfx_11_5600_MainMenu_DrawUpperItem1,r,seen,203,613888,00,00:01 00:02,0636 0639 061D 0620 0630 0633,
+11,7000,Gfx_11_7000_Mode18_State00_Init,r,seen,9,6656,18,18:00,0468,18
+11,7700,Gfx_11_7000_Compose_DrawJitter_Part7700,r,seen,9,3328,18,18:00,0468,
+11,7800,Gfx_11_7800_Mode18_State00_Init,r,seen,9,14400,18,18:00 18:01,0468 061D 0620 0630 0633 0636,18
+11,7C40,Gfx_11_7C40_Mode18_DrawThumbFrame,r,seen,9,3632,18,18:00 18:01,0468 061D 0620 0630 0633 0636,18
+11,7F00,Gfx_11_7800_Compose_DrawJitter_Part7F00,r,seen,9,3328,18,18:00,0468,
+12,4000,Gfx_12_4000_Mode06_State00_Init,r,seen,9,34816,06,06:00,0468,06
+12,4800,Gfx_12_4800_Mode06_State00_Init,r,seen,9,2992,06,06:00,0468,06
+12,48B0,Gfx_12_48B0_LinkMenu_LoadTilesSelected,r,seen,9,14880,06 1B,06:00 1B:00 06:01,0468 061D 0620 0630 0633 0636,
+12,49A0,Gfx_12_49A0_LinkMenu_LoadTilesDeselected,r,seen,9,6560,06 0E,06:00 0E:00 06:01,0468 061D 0620 0630 0633 0636,
+12,4A40,Gfx_12_4A40_LinkMenu_LoadTilesDeselected,r,seen,9,11760,06 1B,1B:00 06:00 06:01,0468 061D 0620 0630 0633 0636,
+12,4B30,Gfx_12_4B30_LinkMenu_LoadTilesSelected,r,seen,9,22704,06 0E,06:00 0E:00 06:01,0468 061D 0620 0630 0633 0636,
+12,5000,Gfx_12_5000_Mode06_State00_Init,r,seen,9,34816,06,06:00,0468,06
+12,5800,Gfx_12_5800_Mode21_State00_Init,r,never,0,0,,,,21
+12,6000,Gfx_12_6000_Mode21_State00_Init,r,never,0,0,,,,21
+12,6800,Gfx_12_6800_Mode21_State00_Init,r,never,0,0,,,,21
+12,7000,Gfx_12_7000_Mode03_State00_Init,r,seen,23,116736,03,03:00,0468,03
+12,7800,Gfx_12_7800_Mode03_State00_Init,r,seen,23,109440,03,03:00,0468,03
+13,4000,Gfx_13_4000_Mode02_State00_Init,r,seen,35,108544,02,02:00,0468,02
+13,4800,Gfx_13_4800_Mode02_State00_Init,r,seen,35,108544,02,02:00,0468,02
+13,5000,Gfx_13_5000_Mode02_State00_Init,r,seen,35,108544,02,02:00,0468,02
+13,5800,Gfx_13_5800_Mode0F_State00_Init,r,seen,83,19888,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 0F:02 10:01 0F:01,0468 061D 0620 0630 0633 0636,0F
+13,5830,Gfx_13_5830_PhotoPicker_LoadPageTabsFor,r,seen,83,26640,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 10:01 0F:01 0F:02,0468 061D 0620 0630 0633 0636,
+13,5880,Gfx_13_5880_Mode0F_State0A_EraseAll,r,seen,83,43888,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 10:01 0F:01,0468,0F
+13,5950,Gfx_13_5950_Mode0F_DrawCopyCount,r,seen,83,178928,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 10:01 0F:01,0468,0F
+13,5D00,Gfx_13_5D00_Mode0F_State00_Init_Cont,r,seen,83,378112,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 10:01 0F:01,0468,0F
+13,6400,Src_13_6400_PhotoPicker_LoadPageThumbs,r,seen,83,226304,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 10:01 0F:01,0468 061D 0620 0630 0633 0636,
+13,7000,Gfx_13_7000_Mode08_CreditsReal,r,seen,6,14336,08,08:12,0468,08
+13,7800,Gfx_13_7800_Mode08_CreditsReal,r,seen,6,14336,08,08:12,0468,08
+14,4000,Gfx_14_4000_Mode0E_ExchangeAlt_Tiles,r,never,0,0,,,,0E
+14,4554,Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr,r,never,0,0,,,,0E
+14,5800,Gfx_14_5800_Mode0D_State00_Init,r,never,0,0,,,,0D
+14,6000,Gfx_14_6000_Mode0D_State00_Init,r,never,0,0,,,,0D
+14,6800,Gfx_14_6800_Mode0D_State00_Init,r,never,0,0,,,,0D
+14,7000,Gfx_14_7000_PenMenu_Build,r,seen,1,1072,10,10:05,061D 0620 0630 0633 0636 0639,
+14,7430,Gfx_14_7430_Mode10_State02_Setup,r,seen,7,3024,10,10:02,0468,10
+14,75E0,Gfx_14_75E0_PenMenu_Build,r,seen,7,512,10,10:02 10:03 10:04 10:05,0468 061D 0620 0630 0633 0636,
+14,7600,Gfx_14_7600_PenMenu_Build,r,seen,2,528,10,10:04,061D 0620 0630 0633 0636 0639,
+14,76B0,Sheet_MiscellaneousDoodleRips_14_76B0,r,seen,2,2544,10,10:04,0630 0633 0636 0639 061D 0620,
+14,7A00,Gfx_14_7A00_PenMenu_Build,r,seen,4,640,10,10:03 10:05,061D 0620 0630 0633 0636 0639,
+14,7A80,Sheet_MiscellaneousDoodleRips_14_7A80,r,seen,4,4720,10,10:03 10:05,0630 0633 0636 0639 061D 0620,
+14,7E30,Gfx_14_7E30_Mode10_State02_Setup,r,seen,7,1456,10,10:02,0468,10
+14,7F00,Gfx_14_7F00_Mode10_State02_Setup,r,seen,7,1120,10,10:02,0468,10
+15,4000,Gfx_15_4000_MainMenu_LoadBackground,r,seen,203,408960,00,00:00,0468,
+15,4480,Unused_TCRF_JapaneseMenuTile_CircledX_Gfx,r,seen,203,5680,00,00:00,0468,
+15,4490,Gfx_15_4490_MainMenu_LoadBackground_Cont,r,seen,203,39760,00,00:00,0468,
+15,4500,Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx,r,seen,203,5680,00,00:00,0468,
+15,4510,Gfx_15_4510_MainMenu_LoadBackground_Cont,r,seen,203,39760,00,00:00,0468,
+15,4580,Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx,r,seen,203,5680,00,00:00,0468,
+15,4590,Gfx_15_4590_MainMenu_LoadBackground_Cont,r,seen,203,39760,00,00:00,0468,
+15,4600,Gfx_15_4600_Mode00_State00_Init,r,seen,203,272640,00,00:00,0468,00
+15,4900,Gfx_15_4900_Mode00_State00_Init,r,seen,203,90880,00,00:00,0468,00
+15,4A00,Gfx_15_4A00_MainMenu_LoadBackground,r,seen,13,4608,00,00:04 00:00,0468 061D 0620 0630 0633 0636,00
+15,4B00,Gfx_15_4B00_MainMenu_LoadBackground,r,seen,26,10240,00,00:04 00:00 00:05,0468 061D 0620 0630 0633 0636,00
+15,4C00,Gfx_15_4C00_MainMenu_LoadBackground,r,seen,33,8448,00,00:04 00:06 00:05,061D 0620 0630 0633 0636 0639,00
+15,4D00,Gfx_15_4D00_MainMenu_LoadBackground,r,seen,72,35584,00,00:02 00:01 00:00 00:06 00:05,0468 061D 0620 0630 0633 0636,00
+15,4E00,Gfx_15_4E00_MainMenu_LoadBaseTiles,r,seen,203,311296,00,00:00 00:03,0468 061D 0620 0630 0633 0636,00
+15,5000,Gfx_15_5000_MainMenu_DrawUpperItem2,r,seen,14,122880,00,00:03,061D 0620 0630 0633 0636 0639,
+15,5400,Gfx_15_5400_Mode00_State00_Init,r,seen,203,90880,00,00:00,0468,00
+15,5600,Gfx_15_5600_Mode00_State00_Init,r,seen,203,90880,00,00:00,0468,00
+15,5700,Gfx_15_5700_Mode04_State00_Init,r,seen,37,139264,04,04:00,0468,04
+15,5F00,Gfx_15_5F00_Mode04_State00_Init,r,seen,37,139264,04,04:00,0468,04
+15,6700,Gfx_15_6700_Mode04_State00_Init,r,seen,37,87040,04,04:00,0468,04
+15,6C00,Gfx_15_6C00_Mode0E_State06_ExchangeSetup,r,mode?,37,52224,04,04:00,0468,0E
+15,6F00,Gfx_15_6C00_Mode0E_State06_ExchangeSetup_Part6F00,r,never,0,0,,,,0E
+15,7400,Gfx_15_7400_Mode0E_State06_ExchangeSetup,r,never,0,0,,,,0E
+15,7C00,Gfx_15_7C00_Mode0E_State06_ExchangeSetup,r,never,0,0,,,,0E
+16,4000,Gfx_16_4000_Mode0B_State00_Init,r,never,0,0,,,,0B
+16,4800,Gfx_16_4800_Mode0B_State00_Init,r,never,0,0,,,,0B
+16,5000,Gfx_16_5000_Mode0B_State00_Init,r,never,0,0,,,,0B
+16,7D80,Map_16_7D80_Mode18_State00_Init,r,seen,9,7488,18,18:00,0468,18
+16,7FC0,Map_16_7FC0_Mode18_State00_Init,r,seen,3,192,18,18:00,0468,18
+17,4140,Gfx_17_4140_Mode14_State00_Init,r,seen,72,46144,14,14:01 14:00 14:03 14:0C 14:04,0468 061D 0620 0630 0633 0636,14
+17,4180,Gfx_17_4180_Mode14_State00_Init,r,seen,72,100352,14,14:01 14:00 14:03 14:0C 14:02 14:04,0468 061D 0620 0630 0633 0636,14
+17,4680,Gfx_17_4680_Mode0F_State05_ConfirmInit,r,seen,88,2432,0F 14 1C,14:00 0F:05 1C:02 14:0C 1C:0E,0468,0E 0F 14 17 1C
+17,4690,Gfx_17_4680_Compose_Split_DrawMakeBlink_Part4690,r,mode?,80,1888,14 1C,14:00 1C:02 14:0C 1C:0E,0468,0E
+17,46A0,Gfx_17_46A0_Mode0F_State05_ConfirmInit,r,seen,88,11872,0F 14 1C,14:00 1C:02 0F:05 14:0C 1C:0E,0468,0F
+17,4700,Gfx_17_4700_Shoot_LoadBurstIcons,r,seen,72,6592,14,14:00 14:0C,0468,
+17,4740,Gfx_17_4740_Shoot_LoadBurstIcons,r,seen,72,6592,14,14:00 14:0C,0468,
+17,4780,Gfx_17_4780_Shoot_LoadBurstIcons,r,seen,72,6592,14,14:00 14:0C,0468,
+17,47C0,Gfx_17_47C0_Shoot_LoadBurstIcons,r,seen,72,6592,14,14:00 14:0C,0468,
+17,4800,Gfx_17_4800_Compose_DrawFreeCount,r,seen,7,576,14,14:01,061D 0620 0630 0633 0636 0639,
+17,4940,Gfx_17_4940_Mode14_State00_Init,r,seen,72,1648,14,14:00 14:0C,0468,14
+17,4950,Gfx_17_4950_Shoot_DrawTimerMinutes,r,mode?,72,11536,14,14:01 14:00 14:03 14:0C 14:04,0468 061D 0620 0630 0633 0636,0E
+17,4960,Gfx_17_4960_Mode14_State00_Init,r,seen,72,6592,14,14:00 14:0C,0468,14
+17,4980,Gfx_17_4980_Mode17_State08_Split_Build,r,seen,72,23296,14,14:00 14:0C 14:04,0468 061D 0620 0630 0633 0636,14 17
+17,4A60,Gfx_17_4A60_Mode0E_State04_PickDone,r,seen,80,27104,14 1C,14:00 14:0C 1C:02 14:04 1C:0E,0468 0630 0633 0636 0639 061D,0E 1C
+17,4B60,Gfx_17_4B60_Mode0E_State04_PickDone,r,seen,80,5712,14 1C,14:00 1C:02 14:0C 14:04 1C:0E,0468 061D 0620 0630 0633 0636,0E 1C
+17,4B90,Gfx_17_4B90_Mode0E_State04_PickDone,r,seen,80,9520,14 1C,14:00 1C:02 14:0C 14:04 1C:0E,0468 061D 0620 0630 0633 0636,0E 1C
+17,4BE0,Gfx_17_4BE0_Shoot_DrawTimerMinutes,r,never,0,0,,,,
+17,4C00,Gfx_17_4C00_Shoot_DrawOptionPanel,r,seen,5,5120,14,14:01,061D 0620 0630 0633 0636 0639,
+17,5000,Gfx_17_5000_Mode14_State04_OptionsPage,r,seen,2,1024,14,14:04,061D 0620 0630 0633 0636 0639,14
+17,5200,Gfx_17_5200_Mode14_State04_OptionsPage,r,seen,4,1024,14,14:04,061D 0620 0630 0633 0636 0639,14
+17,5400,Gfx_17_5400_Shoot_LoadBurstIcons,r,never,0,0,,,,
+17,5440,Gfx_17_5440_Mode14_State00_Init,r,seen,72,16640,14,14:00 14:0C 14:04,0468 061D 0620 0630 0633 0636,14
+17,54E0,Gfx_17_54E0_Mode14_State00_Init,r,seen,72,3296,14,14:00 14:0C,0468,14
+17,6800,Gfx_17_6800_Mode13_State00_Init,r,never,0,0,,,,13
+17,7000,Gfx_17_7000_Mode13_State00_Init,r,never,0,0,,,,13
+17,7800,Gfx_17_7800_Mode13_State00_Init,r,never,0,0,,,,13
+17,7900,Src_17_7900_Player_CopyDigitTile,r,never,0,0,,,,
+17,7940,Sheet_MenusAnimationTitle_17_6800_Part7940,r,never,0,0,,,,
+18,4000,Gfx_18_4000_Mode05_State00_Init,r,seen,32,163840,05,05:00,0468,05
+18,4800,Gfx_18_4800_Mode05_State00_Init,r,seen,32,163840,05,05:00,0468,05
+18,5000,Gfx_18_5000_Mode05_State00_Init,r,seen,32,90880,05,05:00,0468,05
+18,5470,Gfx_18_5470_Mode1E_State00_Init,r,seen,1,1504,1E,1E:00,0468,1E
+18,5A50,Unused_TCRF_MarginPrint_BFilmRoll_Gfx,r,seen,1,96,1E,1E:00,0468,
+18,5AB0,Gfx_18_5AB0_Mode1C_DrawOptionScreen_Cont,r,mode?,1,448,1E,1E:00,0468,1C
+18,5C70,Gfx_18_5C70_Mode1E_State00_Init,r,seen,1,832,1E,1E:00,0468 061D 0620 0630 0633 0636,1E
+18,5F90,Unused_TCRF_MarginPrint_OutlinedText_Gfx,r,seen,1,192,1E,1E:00,0468,
+18,6050,Gfx_18_6050_Mode1C_DrawOptionScreen_Cont,r,mode?,1,1056,1E,1E:00,0468,1C
+18,6470,Gfx_18_6470_Mode1B_State00_Init,r,seen,9,20480,1B,1B:00,0468,1B
+18,6C70,Gfx_18_6C70_Mode1B_State00_Init,r,seen,9,19360,1B,1B:00,0468,1B
+18,7400,Gfx_18_7400_Mode1C_State02_ShowPrintScreen,r,seen,18,3472,1B 1C,1C:02 1B:00 1C:03 1C:0E,0468 061D 0620 0630 0633 0636,1C
+18,7470,Gfx_18_7400_Mode1C_State02_ShowPrintScreen_Part7470,r,seen,9,24528,1C,1C:02 1C:03 1C:0E,0468 0636 0639 061D 0620 0630,1C
+18,7900,Gfx_18_7900_Mode1C_LoadToggleTiles,r,seen,1,192,1C,1C:06,061D 0620 0630 0633 0636 0639,1C
+18,79C0,Gfx_18_79C0_Mode1C_LoadToggleTiles,r,seen,2,384,1C,1C:06,061D 0620 0630 0633 0636 0639,1C
+18,7A80,Gfx_18_7A80_Mode1C_State02_ShowPrintScreen,r,seen,9,2048,1C,1C:02 1C:04 1C:0E,0468 061D 0620 0630 0633 0636,1C
+18,7B00,Gfx_18_7B00_Mode1C_State02_ShowPrintScreen,r,seen,9,2400,1C,1C:02 1C:0E,0468,1C
+18,7BA0,Gfx_18_7BA0_Mode0E_State04_PickDone,r,never,0,0,,,,0E
+18,7C40,Gfx_18_7C40_Mode0F_State05_ConfirmInit,r,seen,33,9792,0F,0F:05,0468,0F
+18,7D60,Gfx_18_7D60_Mode0F_State05_ConfirmInit,r,seen,33,1088,0F,0F:05,0468,0F
+18,7E80,Gfx_18_7E80_Mode0F_State05_ConfirmInit,r,seen,33,7616,0F,0F:05,0468,0F
+18,7F60,Gfx_18_7F60_Mode1C_State02_ShowPrintScreen,r,seen,9,1200,1C,1C:02 1C:0E,0468,1C
+19,4000,Gfx_19_4000_Mode0E_State00_Init,r,seen,2,4096,0E,0E:00,0468,0E
+19,4800,Gfx_19_4800_Mode0E_State00_Init,r,seen,2,4096,0E,0E:00,0468,0E
+19,5000,Gfx_19_5000_Mode0E_State00_Init,r,seen,2,1216,0E,0E:00,0468,0E
+19,5260,Gfx_19_5260_Mode08_State13_CreditsPageA,r,seen,6,10080,08 0E,08:13 0E:00,0468,08
+19,5800,Gfx_19_5260_Mode08_State13_CreditsPageA_Part5800,r,seen,4,3040,08,08:13,0468,08
+19,5A60,Gfx_19_5A60_Mode08_State13_CreditsPageA,r,seen,4,10240,08,08:13,0468,08
+19,6260,Gfx_19_6260_Mode08_State13_CreditsPageA,r,seen,4,2560,08,08:13,0468,08
+19,6460,Gfx_19_6460_Mode21_State0B_ResultSetup,r,never,0,0,,,,21
+19,6560,Gfx_19_6560_Mode21_State0B_ResultSetup,r,never,0,0,,,,21
+19,6D60,Gfx_19_6D60_Mode21_State0B_ResultSetup,r,never,0,0,,,,21
+19,7160,Gfx_19_7160_Run_PodiumSetup,r,never,0,0,,,,
+19,716D,TileGap_19_716D,r,never,0,0,,,,
+19,7171,Gfx_19_7160_Run_PodiumSetup_Part7171,r,never,0,0,,,,
+19,7206,TileGap_19_7206,r,never,0,0,,,,
+19,7207,Gfx_19_7160_Run_PodiumSetup_Part7207,r,never,0,0,,,,
+19,7310,Gfx_19_7310_Run_PodiumSetup,r,never,0,0,,,,
+19,7314,TileGap_19_7314,r,never,0,0,,,,
+19,7317,Gfx_19_7310_Run_PodiumSetup_Part7317,r,never,0,0,,,,
+19,7338,TileGap_19_7338,r,never,0,0,,,,
+19,7340,Gfx_19_7310_Run_PodiumSetup_Part7340,r,never,0,0,,,,
+19,7560,Gfx_19_7560_Mode0F_State0A_EraseAll,r,never,0,0,,,,0F
+19,77E0,Gfx_19_77E0_Mode0F_State0A_EraseAll,r,never,0,0,,,,0F
+19,7E60,Src_19_7E60_Tbl53A6_4,r,seen,34,55296,02,02:01,061D 0620 0630 0633 0636 0639,
+1A,4000,Gfx_1A_4000_Mode1F_State04_PerformanceSetup,r,never,0,0,,,,1F
+1A,4E00,Gfx_1A_4E00_Mode1F_State05_Performance,r,never,0,0,,,,1F
+1A,50A0,Gfx_1A_50A0_Mode1F_State06_SavePanel,r,never,0,0,,,,1F
+1A,5160,TileGap_1A_5160,r,never,0,0,,,,1F
+1A,5200,Gfx_1A_5200_Mode08_State03_CardInit,r,seen,1,2048,08,08:03,0468,08
+1A,5A00,Gfx_1A_5A00_Mode08_State03_CardInit,r,seen,1,2048,08,08:03,0468,08
+1A,6200,Gfx_1A_6200_Mode08_State03_CardInit,r,seen,1,352,08,08:03,0468,08
+1A,6400,Gfx_1A_6400_Mode20_State00_MenuInit,r,seen,6,12288,20,20:00,0468,20
+1A,6C00,Gfx_1A_6C00_Mode20_State00_MenuInit,r,seen,6,12288,20,20:00,0468,20
+1A,7400,Gfx_1A_7400_Mode20_State00_MenuInit,r,seen,6,3072,20,20:00,0468,20
+1A,7600,Gfx_1A_7600_Album_ShowPageScreenB,r,seen,71,191520,09 0A,09:01 0A:03,061D 0620 0630 0633 0636 0639,
+1A,7CB0,Gfx_1A_7600_Album_ShowPageScreenB_Cont,r,seen,71,7296,09 0A,09:01 0A:03,0630 0633 0636 0639 061D 0620,
+1B,4000,Gfx_1B_4000_Mode1C_State08_PrintJob,r,mode?,2,4096,09 0A,0A:0E 09:0C,0468,1C
+1B,4800,Gfx_1B_4800_Mode1C_State08_PrintJob,r,mode?,2,4096,09 0A,0A:0E 09:0C,0468,1C
+1B,5000,Gfx_1B_5000_CommentEditor_Sub0_Init,r,seen,2,96,09 0A,0A:0E 09:0C,0468,
+1B,5100,Gfx_1B_5100_Mode20_State09_ResultInit,r,seen,1,4096,20,20:09,0468,20
+1B,6100,Gfx_1B_6100_Mode21_State02_RaceSceneInit,r,never,0,0,,,,21
+1B,6680,Gfx_1B_6680_Mode21_State02_RaceSceneInit,r,never,0,0,,,,21
+1B,6FC0,Gfx_1B_6FC0_Mode21_State05_ReadySteadyGo,r,never,0,0,,,,21
+1B,7100,Gfx_1B_7100_Mode1D_State06_LoadWaitScreen,r,never,0,0,,,,1D
+1B,7900,Gfx_1B_7900_Mode1D_State06_LoadWaitScreen,r,never,0,0,,,,1D
+1C,4010,Sheet_MenusShootMenu_1C_4010,r,seen,24,13464,01,01:03,061D 0636 0639 0620 0630 0633,
+1C,4670,Sheet_MenusShootMenu_1C_4670,r,seen,24,47832,01,01:03,061D 0620 0630 0636 0639 0633,
+1C,4F60,Gfx_1C_4F60_Mode1A_State02_Setup,r,seen,24,11904,01 1A,1A:02 01:03,0468 0636 0639 061D 0620 0630,1A
+1C,5160,TileGap_1C_5160,r,never,0,0,,,,
+1C,51A0,Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete,r,seen,6,5120,1A,1A:04,061D 0620 0630 0633 0636 0639,1A
+1C,53A0,Gfx_1C_53A0_Mode1A_State02_Setup,r,seen,10,10944,1A,1A:02,0468,1A
+1C,5600,Gfx_1C_5600_Album_ShowPageScreenB,r,seen,76,4576,09 0A 14 1A 1C,09:01 0A:03 1A:02 1C:03 14:01,061D 0620 0630 0633 0636 0639,1C
+1C,5620,TileGap_1C_5620,r,never,0,0,,,,
+1C,570E,TileGap_1C_570E,r,never,0,0,,,,
+1C,5710,Gfx_1C_5710_HotSpotEd_ShowJump,r,seen,6,160,1A,1A:04,061D 0620 0630 0633 0636 0639,
+1C,5720,TileGap_1C_5720,r,never,0,0,,,,
+1C,5760,Gfx_1C_5760_HotSpotEd_ShowEffectIcon,r,never,0,0,,,,
+1C,58A0,Gfx_1C_58A0_Mode0C_State02_Setup,r,seen,33,8640,0F 1A,0F:05 1A:06,0468 061D 0620 0630 0633 0636,0C 0F
+1C,5920,Unused_TCRF_HotSpotEffectIcons_Extra_Gfx,r,seen,33,17408,0F,0F:05,0468,
+1C,5B20,Gfx_1C_5B20_Mode0C_State02_Setup_Cont,r,never,0,0,,,,0C
+1C,5B60,Gfx_1C_5B60_Mode0C_State02_Setup,r,seen,33,1088,0F,0F:05,0468,0C 0F
+1C,5B80,Gfx_1C_5B80_Mode09_State02_PhotoArrows,r,seen,66,10880,09 0A 0F 14 1A 1C,09:02 0A:04 0F:05 1A:02 1C:04 14:04,0468 061D 0620 0630 0633 0636,09 0A 14 1A 1C
+1C,5BC0,TileGap_1C_5BC0,r,never,0,0,,,,
+1C,5BE0,Gfx_1C_5BE0_Mode09_State02_PhotoArrows,r,seen,48,3840,09 0A 14,09:02 0A:04 14:04,061D 0620 0630 0633 0636 0639,09 0A 14
+1C,5C60,Gfx_1C_5C60_Mode0C_State02_Setup,r,seen,33,1088,0F,0F:05,0468,0C 0F
+1C,5C80,Gfx_1C_5C80_Mode09_State02_PhotoArrows,r,seen,66,10880,09 0A 0F 14 1A 1C,09:02 0A:04 0F:05 1A:02 1C:04 14:04,0468 061D 0620 0630 0633 0636,09 0A 14 1A 1C
+1C,5CC0,TileGap_1C_5CC0,r,never,0,0,,,,
+1C,5CE0,Gfx_1C_5CE0_Mode09_State02_PhotoArrows,r,seen,48,3840,09 0A 14,09:02 0A:04 14:04,061D 0620 0630 0633 0636 0639,09 0A 14
+1C,5D20,TileGap_1C_5D20,r,never,0,0,,,,
+1C,5D60,Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete,r,seen,6,3840,1A,1A:04,061D 0620 0630 0633 0636 0639,1A
+1C,5E20,Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete,r,seen,6,1280,1A,1A:04,061D 0620 0630 0633 0636 0639,1A
+1C,5E60,Gfx_1C_5E60_Link_ShowScreenA,r,never,0,0,,,,
+1C,6660,Gfx_1C_6660_Link_ShowScreenA,r,never,0,0,,,,
+1C,6D50,Gfx_1C_6D50_Link_ShowScreenB,r,never,0,0,,,,
+1C,6D60,Data_1C_6D60_Mode1F_State07_QuitPanel,r,never,0,0,,,,1F
+1C,6DE0,Gfx_1C_6D60_Mode1F_State07_QuitPanel_Part6DE0,r,never,0,0,,,,1F
+1C,6E60,Src_1C_6E60_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1C,6F60,Src_1C_6F60_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1C,7060,Src_1C_7060_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1C,7260,Gfx_1C_7260_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1C,7860,Gfx_1C_7860_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1C,7C60,Map_1C_7C60_Mode08_CreditsReal,r,seen,6,1120,08,08:12,0468,08
+1C,7D00,Map_1C_7D00_Mode08_State13_CreditsPageA,r,seen,6,52192,08,08:13 08:12,061D 0620 0630 0633 0636 0639,08
+1C,7EA0,Map_1C_7EA0_Mode08_State13_CreditsPageA,r,seen,5,49280,08,08:13,061D 0620 0630 0633 0636 0639,08
+1D,4000,Gfx_1D_4000_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1D,4300,Gfx_1D_4300_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+1D,4500,Gfx_1D_4500_Mode1F_State09_PageSound1,r,never,0,0,,,,1F
+1D,4800,Gfx_1D_4800_Mode1F_State09_PageSound1,r,never,0,0,,,,1F
+1D,4A00,Gfx_1D_4A00_Mode1F_State0A_PageSound2,r,never,0,0,,,,1F
+1D,4D00,Gfx_1D_4D00_Mode1F_State0A_PageSound2,r,never,0,0,,,,1F
+1D,5D00,Gfx_1D_5D00_Mode20_State02_GameSetup,r,seen,4,13824,20,20:02,0468,20
+1D,6B10,Sheet_MenusShootMenu_1D_6B10,r,seen,90,92853,01,01:00,061D 0636 0639 0620 0630 0633,
+1D,72A0,Sheet_MenusShootMenu_1D_72A0,r,seen,90,165253,01,01:00,061D 0630 0633 0636 0639 0620,
+1D,78E0,Sheet_MiscellaneousStampsJpn_1D_78E0,r,seen,90,17376,01,01:00,061D 0620 0630 0633 0636 0639,
+1D,7940,Src_1D_7940_Tbl539D_5,r,seen,90,17376,01,01:00,061D 0620 0630 0633 0636 0639,
+1D,79A0,Src_1D_79A0_Tbl539D_0,r,seen,90,17760,01 11,01:00 11:04,061D 0620 0630 0633 0636 0639,
+1D,7A00,Src_1D_7A00_Tbl539D_16,r,seen,90,17376,01,01:00,061D 0620 0630 0633 0636 0639,
+1D,7A60,Src_1D_7A60_Tbl539D_17,r,seen,90,17760,01 11,01:00 11:04,061D 0620 0630 0633 0636 0639,
+1D,7AC0,Src_1D_7AC0_Tbl539D_23,r,seen,90,11566,01,01:00,0636 0639 061D 0620 0630 0633,
+1D,7B80,Src_1D_7B80_Tbl539D_29,r,never,0,0,,,,
+1D,7C3A,Sheet_MiscellaneousStampsJpn_1D_7C3A,r,never,0,0,,,,
+1D,7C40,Src_1D_7C40_Tbl539D_27,r,never,0,0,,,,
+1D,7D00,Src_1D_7D00_Tbl539D_33,r,never,0,0,,,,
+1D,7D60,Src_1D_7D60_Tbl539D_19,r,never,0,0,,,,
+1D,7DC0,Src_1D_7DC0_Tbl539D_31,r,never,0,0,,,,
+1D,7E20,Src_1D_7E20_Tbl539D_21,r,never,0,0,,,,
+1D,7E80,Src_1D_7E80_Tbl539D_18,r,never,0,0,,,,
+1D,7EE0,Src_1D_7EE0_Tbl539D_25,r,never,0,0,,,,
+1D,7F40,Src_1D_7F40_Tbl539D_20,r,never,0,0,,,,
+1D,7FC0,Map_1D_7FC0_Mode12_State08_ToolsMenu,r,seen,20,1728,12,12:08,061D 0620 0630 0633 0636 0639,12
+1E,5C00,Gfx_1E_5C00_Mode17_State00_Init,r,seen,19,23808,17,17:00,0468,17
+1E,5F00,Gfx_1E_5F00_Mode17_State00_Init,r,seen,19,43648,17,17:00,0468,17
+1E,6480,Gfx_1E_6480_Mode17_State00_Init,r,seen,19,1488,17,17:00,0468,17
+1E,6570,Gfx_1E_6570_Mode17_State00_Init,r,seen,19,496,17,17:00,0468,17
+1E,6580,Gfx_1E_6580_Mode17_State00_Init,r,seen,19,496,17,17:00,0468,17
+1E,7800,Gfx_1E_7800_SaveDialog_Substate3_FullInit,r,seen,1,1232,10,10:09,061D 0620 0630 0633 0636 0639,
+1E,7E00,Map_1E_7E00_PhotoPicker_PageTransitionPrev,r,seen,31,32256,0F 11,11:01 0F:03,061D 0620 0630 0633 0636 0639,
+1F,40F1,Snd_Pad_40F1,r,seen,26,173,00 08,08:00 00:00,5657,
+1F,4362,Sfx1_Data_4362,r,never,0,0,,,,
+1F,46DD,Unused_Sfx1_Init_46DD,x,never,0,0,,,,
+1F,4A61,Unused_Sfx1_Step_4A61,x,never,0,0,,,,
+1F,4FBC,Unused_Snd_SetFreeze,x,never,0,0,,,,
+1F,53B9,Unused_Snd_SongPan_Load,x,never,0,0,,,,
+1F,53E7,Unused_Snd_Pan_Step,x,never,0,0,,,,
+1F,5743,Unused_Snd_Vib_Tail,x,never,0,0,,,,
+20,4000,Gfx_20_4000_Mode08_State14_CreditsPageB,r,seen,2,6144,08,08:14,0468,08
+20,4800,Gfx_20_4800_Mode08_State14_CreditsPageB,r,seen,2,4608,08,08:14,0468,08
+20,4E00,Gfx_20_4E00_Mode08_State0C_RecordInit,r,seen,3,10240,08,08:0C 08:0F,0468,08
+20,5600,Gfx_20_5600_Mode08_State0C_RecordInit,r,seen,3,6400,08,08:0C 08:0F,0468,08
+20,5B00,Gfx_20_5B00_Mode08_State06_EditorInit,r,seen,4,5632,08,08:06,0468,08
+20,6080,Gfx_20_6080_Mode08_State06_EditorInit,r,seen,4,4352,08,08:06,0468,08
+20,64C0,Gfx_20_64C0_OwnerCard_LoadGenderTiles,r,seen,4,224,08,08:06 08:07,061D 0620 0630 0633 0636 0639,
+20,6520,Src_20_6520_OwnerCard_DrawBloodLow,r,seen,3,32,08,08:09 08:07,061D 0620 0630 0633,
+20,6524,Sheet_MiscellaneousStampsJpn_20_6524,r,seen,3,1184,08,08:07 08:09,0636 0639 061D 0620 0630 0633,
+20,6660,Src_20_6660_OwnerCard_LoadBirthNumberTiles,r,seen,4,1376,08,08:06 08:09 08:07,0630 0633 061D 0620 0636 0639,
+20,6680,Gfx_20_6680_OwnerCard_LoadBloodTiles,r,seen,4,294,08,08:06 08:07,061D 0620 0630 0633 0636 0639,
+20,67C0,Gfx_20_67C0_Mode08_State06_EditorInit,r,seen,4,128,08,08:06,0468,08
+20,6800,Gfx_20_6800_Mode15_State01_TimerInit,r,seen,25,116800,15,15:01 15:05,0468,15
+20,6E40,Gfx_20_6E40_Mode15_State01_TimerInit,r,seen,25,9344,15,15:01 15:05,0468,15
+20,6EC0,Gfx_20_6EC0_Mode15_State01_TimerInit,r,seen,25,7008,15,15:01 15:05,0468,15
+20,6F20,Gfx_20_6F20_Mode15_State01_TimerInit,r,seen,25,32704,15,15:01 15:05,0468,15
+20,72C0,Gfx_20_72C0_Mode15_State01_TimerInit,r,seen,25,33872,15,15:01 15:05,0468,15
+20,74F0,Gfx_20_74F0_Mode15_State01_TimerInit,r,seen,25,1168,15,15:01 15:05,0468,15
+20,7500,Gfx_20_7500_Mode1D_State01_LoadScreen,r,seen,11,26624,1D,1D:01,0468,1D
+20,7D00,Gfx_20_7D00_Mode1D_State01_LoadScreen,r,seen,11,9984,1D,1D:01,0468,1D
+21,4000,Gfx_21_4000_Mode07_State00_Init,r,seen,13,29952,07,07:00,0468,07
+21,4750,Gfx_21_4750_SpaceFever_LoadHudTiles,r,seen,13,5024,07,07:00 07:01,0468 061D 0620 0630 0633 0636,
+21,4800,Gfx_21_4800_Mode07_State00_Init,r,seen,13,1280,07,07:00,0468,07
+21,4850,Gfx_21_4850_SpaceFever_LoadHudTiles,r,seen,13,17312,07,07:00 07:01,0468 061D 0620 0630 0633 0636,
+21,4C00,Sheet_MinigamesSpaceFeverIi_21_49FC_Part4C00,r,seen,11,1056,07,07:02,061D 0620 0630 0633 0636 0639,
+21,4C60,Gfx_21_4C60_SpaceFever_DrawBestHud,r,seen,11,1056,07,07:02,061D 0620 0630 0633 0636 0639,
+21,5080,Gfx_21_5080_CommentCard_DrawDigit,r,seen,2,256,09 0A,0A:0E 09:0C,061D 0620 0630 0633 0636 0639,
+21,54E0,Gfx_21_54E0_CommentCard_DrawBlood_Far,r,seen,2,128,09 0A,0A:0E 09:0C,061D 0620 0630 0633 0636 0639,
+21,5620,Src_21_5620_CommentCard_DrawNibble,r,never,0,0,,,,
+21,56C0,Gfx_21_56C0_CommentCard_DrawNumber,r,seen,2,256,09 0A,0A:0E 09:0C,061D 0620 0630 0633 0636 0639,
+21,56D0,Gfx_21_56D0_CommentCard_DrawGender_Far,r,seen,2,128,09 0A,0A:0E 09:0C,061D 0620 0630 0633 0636 0639,
+21,5790,Gfx_21_5790_CommentCard_DrawCopyBadge_Far,r,seen,2,448,09 0A,0A:0E 09:0C,061D 0620 0630 0633 0636 0639,
+21,5870,Gfx_21_5870_CommentCard_DrawCopyBadge_Far,r,never,0,0,,,,
+21,5A10,Sheet_MenusShootMenu_21_5A10,r,seen,28,31065,01,01:06,061D 0620 0630 0636 0639 0633,
+21,5FD0,Sheet_MenusShootMenu_21_5FD0,r,seen,28,77577,01,01:06,061D 0620 0630 0633 0636 0639,
+21,65C0,Gfx_21_65C0_SaveDialog_Substate0_Init,r,seen,32,66944,01 10 11 1A,01:06 10:09 11:07 1A:0E,061D 0620 0630 0633 0636 0639,
+21,6BC0,Gfx_21_6BC0_Mode19_State00_CopyrightScreens,r,seen,136,174080,19,19:00,061D 0620 0630 0633 0636 0639,19
+21,71C0,Gfx_21_71C0_Mode19_State00_CopyrightScreens,r,seen,205,314880,19,19:00,0468,19
+21,77C0,Gfx_21_77C0_BorderPicker_Substate0_Init,r,seen,12,12096,09 0A 12 1C,09:09 0A:0B 12:21 1C:0D 1C:0A,0468,
+21,7BB0,Src_21_7BB0_BorderPicker_AnimateIcon,r,seen,12,6944,09 0A 12 1C,09:09 12:21 0A:0B 1C:0A 1C:0D,0468,
+21,7CC0,Map_21_7CC0_CommentEditor_Sub0_Init,r,seen,2,1152,09 0A,0A:0E 09:0C,0468,
+21,7F00,Map_21_7F00_CommentEditor_Sub0_Init,r,seen,2,512,09 0A,0A:0E 09:0C,0468,
+22,5F40,Map_22_5F40_Mode20_State02_GameSetup,r,seen,5,6912,08 20,08:15 20:02,0630 0633 0636 0639 061D 0620,20
+22,6000,Map_22_5F40_Ball_MenuLoadRow_Part6000,r,seen,4,3328,20,20:02,0468,
+22,6340,Map_22_6340_Mode06_State00_Init,r,seen,9,17408,06,06:00,0468,06
+22,6740,Gfx_22_6740_Mode11_State02_Setup,r,seen,35,13936,11,11:02,0468,11
+22,6810,Gfx_22_6810_Mode11_State02_Setup,r,seen,35,42880,11,11:02,0468,11
+22,6A90,Gfx_22_6A90_Mode11_State04_Place,r,seen,35,1136,11,11:02 11:04,0468 061D 0620 0630 0633 0636,11
+22,6AA0,Gfx_22_6AA0_Mode1A_State02_Setup,r,seen,45,1424,11 1A,11:02 1A:02 11:04,0468 0636 0639 061D 0620 0630,1A
+22,6AB0,Gfx_22_6AB0_Mode11_State02_Setup,r,seen,35,1072,11,11:02,0468,11
+22,6B40,Map_22_6B40_Mode12_State00_Init,r,seen,23,18816,12,12:00 12:22 12:1F 12:0F,0468 061D 0620 0630 0633 0636,12
+22,6DE0,Map_22_6DE0_Mode12_State06_ToolsOpen,r,seen,23,11712,12,12:00 12:06 12:22 12:1F 12:0F,0468 061D 0620 0630 0633 0636,12
+22,7340,Map_22_7340_Mode21_State02_RaceSceneInit,r,mode?,1,8192,08,08:15,0636 0639 061D 0620 0630 0633,21
+22,7440,Map_22_7340_Mode21_PickCharacterKeys_Part7440,r,never,0,0,,,,21
+22,7740,Map_22_7740_Mode20_State02_GameSetup,r,seen,4,4096,20,20:02,0468,20
+22,7B40,Map_22_7B40_Mode1F_State04_PerformanceSetup,r,never,0,0,,,,1F
+23,44C0,Map_23_44C0_Mode06_State00_Init,r,seen,10,3136,06 08,08:15 06:00,0468 0636 0639 061D 0620 0630,06
+23,4500,Map_23_44C0_HotSpotEd_SoundList_Part4500,r,seen,9,16320,06,06:00,0468,
+23,48C0,Map_23_48C0_Mode13_State00_Init,r,never,0,0,,,,13
+23,49E0,Map_23_49E0_Mode13_State02_Start,r,never,0,0,,,,13
+23,4B00,Map_23_4B00_Mode13_State02_Start,r,never,0,0,,,,13
+23,4CC0,Map_23_4CC0_Mode20_State09_ResultInit,r,seen,1,1024,20,20:09,0468,20
+23,50C0,Gfx_23_50C0_Mode16_State08_StartShoot,r,never,0,0,,,,16
+23,5350,Gfx_23_5350_Mode16_State08_StartShoot,r,never,0,0,,,,16
+23,54C0,Map_23_54C0_Mode0F_State05_ConfirmInit,r,seen,33,34816,0F,0F:05,0468,0F
+23,58C0,Map_23_58C0_Mode0F_ConfirmFrameStrip_Unref,r,never,0,0,,,,0F
+23,60C0,Gfx_23_60C0_Mode1A_State09_ExitDialog,r,seen,1,946,1A,1A:09,061D 0620 0630 0633 0636 0639,1A
+23,64C0,Map_23_64C0_Mode03_State00_Init,r,seen,23,1824,03,03:00,0468,03
+23,64E0,Map_23_64E0_SpecialMenu_DrawCursor,r,seen,23,801344,03 1A,03:01 03:00 1A:00,061D 0620 0630 0633 0636 0639,
+23,6700,Map_23_6700_SpecialMenu_DrawCursor,r,seen,20,537824,03 17,03:01 17:00 03:00,061D 0620 0630 0633 0636 0639,
+23,67E0,Map_23_67E0_SpecialMenu_DrawCursor,r,seen,23,1300544,03 17 1A,03:01 17:00 1A:00,061D 0620 0630 0633 0636 0639,
+23,68C0,Map_23_68C0_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+23,6900,Map_23_6900_Mode1F_State0B_PageNoise,r,never,0,0,,,,1F
+23,6B00,Map_23_6B00_Mode1F_State09_PageSound1,r,never,0,0,,,,1F
+23,6B80,Map_23_6B80_Mode1F_State0A_PageSound2,r,never,0,0,,,,1F
+23,6C00,Map_23_6C00_Mode1F_State0A_PageSound2,r,never,0,0,,,,1F
+23,73E0,Map_23_73E0_Mode08_State06_EditorInit,r,seen,4,768,08,08:06,0468,08
+23,74A0,Map_23_74A0_Kb_Page1_PressSex,r,seen,4,1536,08,08:06,0468,
+23,7620,Map_23_7620_Kb_Page0_Press,r,seen,3,960,08,08:07,061D 0620 0630 0633 0636 0639,
+23,7760,Map_23_7760_Kb_Page0_Press_ExtraRow,r,never,0,0,,,,
+23,7780,Map_23_7780_Mode0E_State00_Init,r,seen,2,64,0E,0E:00,0468,0E
+23,77A0,Map_23_77A0_Mode0E_State00_Init,r,seen,2,7328,0E,0E:01 0E:00,0468 061D 0620 0630 0633 0636,0E
+23,79C0,Map_23_79C0_Mode0E_State00_Init,r,never,0,0,,,,0E
+23,7A60,Map_23_7A60_Link_DrawPressAText,r,seen,2,3680,0E,0E:01,061D 0620 0630 0633 0636 0639,
+23,7B00,Map_23_7B00_Mode0B_State00_Init,r,never,0,0,,,,0B
+23,7C00,Map_23_7C00_ShowMenu_LoadNormalTiles,r,never,0,0,,,,
+23,7D60,Map_23_7D60_ShowMenu_LoadHighlightTiles,r,never,0,0,,,,
+23,7E80,Src_23_7E80_Tbl53A6_3,r,seen,34,55296,02,02:01,061D 0620 0630 0633 0636 0639,
+24,4480,Map_24_4480_Mode20_State00_MenuInit,r,seen,8,5248,08 20,08:15 20:00,0468 061D 0620 0630 0633 0636,20
+24,4500,Map_24_4480_Ball_MenuLoadRow_Part4500,r,seen,6,2688,20,20:00,0468,
+24,46C0,Map_24_46C0_Ball_MenuLoadRow,r,never,0,0,,,,
+24,47C0,Map_24_47C0_Mode0D_State01_Hub,r,never,0,0,,,,0D
+24,4840,Map_24_4840_Mode0D_State00_Init,r,never,0,0,,,,0D
+24,4A40,Map_24_4A40_Mode0D_State02_OptionsMenu,r,never,0,0,,,,0D
+24,4A80,Map_24_4A80_Mode0D_State01_Hub,r,never,0,0,,,,0D
+24,4B00,Map_24_4B00_PenMenu_BuildSize,r,seen,4,288,10,10:03 10:04 10:05,061D 0620 0630 0633 0636 0639,
+24,4B20,Map_24_4B20_PenMenuSizePanel0,r,never,0,0,,,,
+24,4BE0,Map_24_4BE0_PenMenu_BuildSize,r,seen,4,288,10,10:03 10:04 10:05,061D 0620 0630 0633 0636 0639,
+24,4C00,Map_24_4C00_PenMenuSizePanel1,r,seen,4,1152,10,10:03 10:04 10:05,061D 0620 0630 0633 0636 0639,
+24,4CC0,Map_24_4CC0_PenMenuSizePanel2,r,never,0,0,,,,
+24,4D80,Map_24_4D80_PenMenuSizePanel3,r,never,0,0,,,,
+24,4E40,Map_24_4E40_PenMenuSizePanel3_ExtraRow,r,never,0,0,,,,
+24,4E60,Map_24_4E60_PenMenuPatternPanel0,r,seen,2,576,10,10:04,061D 0620 0630 0633 0636 0639,
+24,4F20,Map_24_4F20_PenMenuPatternPanel0_ExtraRow,r,never,0,0,,,,
+24,4F40,Map_24_4F40_PenMenuPatternPanel1,r,never,0,0,,,,
+24,5000,Map_24_5000_PenMenuPatternPanel2,r,never,0,0,,,,
+24,50C0,Map_24_50C0_PenMenuPatternPanel3,r,never,0,0,,,,
+24,5180,Map_24_5180_Mode0E_State06_ExchangeSetup,r,never,0,0,,,,0E
+24,53C0,Map_24_53C0_Mode0E_State06_ExchangeSetup,r,never,0,0,,,,0E
+24,54C0,Map_24_54C0_Mode0F_State00_Init,r,seen,83,13504,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 10:01 0F:01,0468,0F
+24,5500,Map_24_5500_PhotoPicker_PageTransitionPrev,r,seen,83,140288,0A 0F 10 11 1A 1C,11:01 0F:00 0A:01 1A:01 1C:01 0F:03 10:01 0F:01,0468 061D 0620 0630 0633 0636,
+24,57E0,Gfx_24_57E0_Unused_Link_LoadTiles,r,never,0,0,,,,
+24,58E0,Gfx_24_57E0_Cam_FactoryDiag_AllButtonsExceptB_Part58E0,r,never,0,0,,,,
+24,5AE0,Map_24_5AE0_Mode08_State03_CardInit,r,seen,1,4128,08,08:04 08:03,061D 0620 0630 0633 0636 0639,08
+24,5D00,Map_24_5D00_OwnerCard_BlinkTitle,r,seen,1,928,08,08:04 08:03,061D 0620 0630 0633 0636 0639,
+24,5D20,Map_24_5D20_OwnerCard_BlinkTitle,r,seen,1,4224,08,08:04,061D 0620 0630 0633 0636 0639,
+24,5DA0,Map_24_5DA0_OwnerCard_BlinkTitle,r,seen,1,1056,08,08:04,061D 0620 0630 0633 0636 0639,
+24,5DC0,Map_24_5DC0_Kb_Page1_PressSex,r,seen,2,640,08,08:08,061D 0620 0630 0633 0636 0639,
+24,5F00,Map_24_5F00_Kb_Page1_PressSex_ExtraRows,r,never,0,0,,,,
+24,5F40,Map_24_5F40_Kb_Page2_PressBirthDate,r,seen,1,320,08,08:09,061D 0620 0630 0633 0636 0639,
+24,6080,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,r,never,0,0,,,,
+24,61C0,Map_24_61C0_Mode01_State02_ApplyPageA,r,seen,89,18336,01,01:02 01:00,0DF5 0E39 061D 0620 0630 0633,01
+24,6320,Map_24_6320_Mode01_State00_Intro,r,seen,88,11456,01,01:00,061D 0620 0630 0633 0636 0639,01
+24,6598,Gfx_24_6598_Mode17_State00_Init,r,mode?,10,144,16,16:05 16:01,061D 0620 0630 0633 0636 0639,17
+24,65A0,Map_24_65A0_Mode16_BuildList4,r,seen,10,2304,16,16:05 16:01,061D 0620 0630 0633 0636 0639,16
+24,6620,Map_24_6620_Mode1A_State02_Setup,r,seen,10,12672,1A,1A:02,0468,1A
+24,68E0,Map_24_68E0_Mode17_State00_Init,r,seen,19,9920,17,17:00,0468,17
+24,6A20,Map_24_6A20_Compose_DrawLayoutPreview,r,seen,19,16256,17,17:00 17:01,0468 061D 0620 0630 0633 0636,
+24,6B20,Map_24_6B20_Compose_DrawLayoutPreview,r,seen,4,512,17,17:01,061D 0620 0630 0633 0636 0639,
+24,6BA0,Map_24_6BA0_Mode1C_State02_ShowPrintScreen,r,seen,9,14784,1C,1C:02 1C:03 1C:0E,0468 061D 0620 0630 0633 0636,1C
+24,6E60,Map_24_6E60_Shoot_DrawOptionPanel,r,seen,5,3520,14,14:01,061D 0620 0630 0633 0636 0639,
+24,7120,Map_24_7120_Mode10_State02_Setup,r,seen,7,4928,10,10:02,0468,10
+24,73E0,Map_24_73E0_Album_ShowPageScreenB,r,seen,71,78318,09 0A,09:01 0A:03,061D 0620 0630 0633 0636 0639,
+24,76A0,Map_24_76A0_PenMenu_BuildSpeed,r,seen,1,32,10,10:05,061D 0620 0630 0633 0636 0639,
+24,76C0,Map_24_76C0_PenMenuSpeedPanel0,r,never,0,0,,,,
+24,7720,Map_24_7720_PenMenu_BuildSpeed,r,seen,1,128,10,10:05,061D 0620 0630 0633 0636 0639,
+24,77A0,Map_24_77A0_PenMenuSpeedPanel1,r,seen,1,96,10,10:05,061D 0620 0630 0633 0636 0639,
+24,7800,Map_24_7800_PenMenuSpeedPanel2,r,never,0,0,,,,
+24,7860,Map_24_7860_PenMenu_Build,r,seen,4,2304,10,10:03 10:04 10:05,061D 0620 0630 0633 0636 0639,
+24,7960,Map_24_7960_Shoot_RestoreViewScreen,r,seen,5,3780,14,14:01 14:04,061D 0620 0630 0633 0636 0639,
+24,7C20,Map_24_7C20_Mode12_State11_TestStart,r,seen,76,101376,09 0A 12,09:00 0A:02 09:02 09:0A 0A:0C 12:11,0468 061D 0620 0630 0633 0636,09 0A 12 13
+24,7EE0,Map_24_7C20_SaveDialog_Substate3_FullInit_Part7EE0,r,seen,2,576,10 12,10:09 12:11,0468 061D 0620 0630 0633 0636,
+25,4480,Gfx_25_4480_Mode08_State14_CreditsPageB,r,seen,2,8832,08,08:15 08:14,061D 0620 0630 0633 0636 0639,08
+25,47C0,Map_25_47C0_Mode14_State0C_Reinit,r,seen,74,62272,08 14,14:00 08:15 14:0C 08:14 14:04,0468 0636 0639 061D 0620 0630,14
+25,4980,Map_25_47C0_Mode14_State00_Init_Part4980,r,seen,72,26624,14,14:00 14:0C 14:04,0468 0636 0639 061D 0620 0630,14
+25,4A80,Map_25_4A80_BlankRows,r,never,0,0,,,,
+25,4B00,BgMap_25_4B00,r,never,0,0,,,,
+25,4DC0,Map_25_4DC0_Mode11_State02_Setup,r,seen,35,47168,11,11:02,0468,11
+25,52C0,Map_25_52C0_Mode16_BuildList2,r,seen,2,288,16,16:04 16:01,061D 0620 0630 0633 0636 0639,16
+25,5560,Map_25_5560_Mode16_BuildList6,r,never,0,0,,,,16
+25,55C0,Map_25_55C0_Mode07_State00_Init,r,seen,13,3732,07,07:00 07:01 07:03 07:04,0468 061D 0620 0630 0633 0636,07
+25,5680,Map_25_5680_SpaceFever_Boss_EndB,r,seen,13,8784,07,07:00 07:01 07:03 07:04,0468 061D 0620 0630 0633 0636,
+25,5820,Map_25_5820_SpaceFever_Boss_EndB,r,never,0,0,,,,
+25,5840,Map_25_5840_Cam_FactoryDiag_AllButtonsExceptB,r,never,0,0,,,,
+25,5A80,Map_25_5A80_Cam_FactoryDiag_AllButtonsExceptB,r,never,0,0,,,,
+25,5AA0,Map_25_5AA0_Cam_FactoryDiag_AllButtonsExceptB,r,never,0,0,,,,
+25,5AC0,Map_25_5AC0_Cam_FirstBoot_StorePleaseWait,r,never,0,0,,,,
+25,5D00,Map_25_5D00_Cam_FirstBoot_StorePleaseWait,r,never,0,0,,,,
+25,5D20,Map_25_5D20_Mode08_State0F_HiScoreInit,r,seen,2,1152,08,08:0F,0468,08
+25,5F60,Map_25_5F60_Mode21_State00_Init,r,never,0,0,,,,21
+25,61A0,Map_25_61A0_Mode21_State02_RaceSceneInit,r,never,0,0,,,,21
+25,63E0,Map_25_63E0_Mode1D_State01_LoadScreen,r,seen,11,7488,1D,1D:01,0468,1D
+25,6620,Map_25_6620_Mode15_State01_TimerInit,r,seen,25,38592,15,15:01,0468,15
+25,6AA0,Map_25_6AA0_Mode15_State05_IntervalInit,r,seen,6,3456,15,15:05,0468,15
+25,6CE0,Map_25_6CE0_WildFramePicker_Substate0_Init,r,seen,2,2304,1C,1C:0D,0468,
+25,6F20,Map_25_6F20_Mode05_State00_Init,r,seen,32,46080,05,05:00,0468,05
+25,73A0,Map_25_73A0_Mode16_State00_Init,r,seen,13,20160,16,16:00 16:01 16:05,0468 061D 0620 0630 0633 0636,16
+25,75E0,Map_25_75E0_Unused_PhotoScreen,r,never,0,0,,,,
+25,7A60,Map_25_7A60_Boot_EraseAllPrompt_Far,r,seen,2,1152,00,00:00,0468,
+25,7CA0,Map_25_7CA0_Mode1B_State00_Init,r,seen,9,5760,1B,1B:00,0468,1B
+25,7EE0,Src_25_7EE0_Tbl539D_40,r,never,0,0,,,,
+26,4500,Map_26_4500_Unused_IconFrame,r,never,0,0,,,,
+26,4880,Gfx_26_4880_Mode1A_State03_Browse,r,seen,2,2048,1A,1A:03,061D 0620 0630 0633 0636 0639,1A
+26,4EC0,Map_26_4EC0_ResultScreen_Substate0_Init,r,seen,31,21312,01 14 17 1D,01:0A 1D:0A 14:0B 17:12,0468,
+26,5100,Map_26_5100_Mode08_State00_Init,r,seen,15,10368,08,08:00,0468,08
+26,5340,Map_26_5340_Link_ShowScreenA,r,never,0,0,,,,
+26,5580,Map_26_5580_Mode02_State00_Init,r,seen,35,3392,02,02:00,0468,02
+26,55C0,Src_26_55C0_Tbl53A6_0,r,seen,35,69376,02,02:01 02:00,0468 061D 0620 0630 0633 0636,
+26,57C0,Map_26_57C0_Mode1E_State00_Init,r,seen,36,7360,02 1E,02:00 1E:00,0468,1E
+26,5A00,Map_26_5A00_MainMenu_LoadBackground,r,seen,203,34080,00,00:00,0468,
+26,5A60,Src_26_5A60_Tbl7CF9_7,r,seen,203,186080,00,00:00 00:04 00:05,0468 061D 0620 0630 0633 0636,
+26,5C40,Map_26_5C40_Mode1D_State06_LoadWaitScreen,r,never,0,0,,,,1D
+26,60C0,Map_26_60C0_WildFrame_LoadForPrintScreen,r,seen,1,576,1C,1C:0E,0468,
+26,6300,Map_26_6300_Mode08_State0C_RecordInit,r,seen,3,1728,08,08:0C,0468,08
+26,6540,Map_26_6540_Link_ShowScreenB,r,never,0,0,,,,
+26,6780,Map_26_6780_Mode1F_State00_TitleInit,r,never,0,0,,,,1F
+26,69C0,Map_26_69C0_Mode19_State00_CopyrightScreens,r,seen,205,118080,19,19:00,0468,19
+26,6C00,Map_26_6C00_Mode21_State0B_ResultSetup,r,never,0,0,,,,21
+26,6E40,Map_26_6E40_Mode16_State08_StartShoot,r,never,0,0,,,,16
+26,7080,Map_26_7080_Unused_Picture,r,never,0,0,,,,
+26,72C0,Map_26_72C0_Mode08_State13_CreditsPageA,r,seen,4,2880,08,08:13,0468,08
+27,4470,Map_27_4470_Mode0D_State06_PlayInit,r,seen,71,306,09 0A,09:01 0A:03 09:02 0A:04,061D 0620,0A 0D
+27,4472,Map_27_4472_Mode1C_DrawOptionScreen,r,seen,71,10176,09 0A 1C,09:01 0A:03 09:02 1C:03 0A:04,0630 0633 0636 0639 061D 0620,1C
+27,44B2,Map_27_44B2_Mode17_State08_Split_Build,r,mode?,71,101442,09 0A 1C,09:01 0A:03 09:02 1C:03 0A:04,0636 0639 061D 0620 0630 0633,0E 17
+27,4730,Map_27_44B2_Compose_Split_DrawMakeBlink_Part4730,r,mode?,6,12,1C,1C:03,068C 068F,0E
+27,4772,Map_27_4772_BlankRows,r,never,0,0,,,,
+27,4870,Map_27_4870_Mode04_State00_Init,r,seen,37,39168,04,04:00,0468,04
+27,4AB0,TileSet_27_4AB0,r,seen,4,192,10,10:03,204D 204E 20C5 20CF,
+27,4CB0,Map_27_4CB0_PhotoPicker_PageTransitionPrev,r,seen,31,32256,0F 11,11:01 0F:03,061D 0620 0630 0633 0636 0639,
+27,4EB0,Map_27_4EB0_PhotoPicker_PageTransitionPrev,r,seen,31,32256,0F 11,11:01 0F:03,061D 0620 0630 0633 0636 0639,
+27,50B0,Map_27_50B0_PhotoPicker_PageTransitionPrev,r,seen,31,32256,0F 11,11:01 0F:03,061D 0620 0630 0633 0636 0639,
+27,52B0,Map_27_52B0_PhotoPicker_PageTransitionPrev,r,seen,31,32256,0F 11,11:01 0F:03,061D 0620 0630 0633 0636 0639,
+27,54B0,Src_27_54B0_Tbl7CF9_0,r,seen,72,62720,00,00:02 00:01 00:04 00:05,061D 0620 0630 0633 0636 0639,
+27,5670,Src_27_5670_Tbl7CF9_2,r,seen,72,62720,00,00:02 00:01 00:04 00:05,061D 0620 0630 0633 0636 0639,
+27,5830,Src_27_5830_Tbl7CF9_1,r,seen,72,62720,00,00:02 00:01 00:04 00:05,061D 0620 0630 0633 0636 0639,
+27,59F0,Map_27_59F0_Mode1F_State04_PerformanceSetup,r,never,0,0,,,,1F
+27,5AB0,Src_27_5AB0_DjPerf_Equaliser,r,never,0,0,,,,
+27,5D70,Map_27_5D70_Mode1F_State05_Performance,r,never,0,0,,,,1F
+27,5E50,Map_27_5E50_Mode1F_State06_SavePanel,r,never,0,0,,,,1F
+27,5F30,Map_27_5F30_MainMenu_LoadBackground,r,seen,72,68992,00,00:02 00:00 00:01,0468 061D 0620 0630 0633 0636,
+27,60F0,Src_27_60F0_Tbl53A6_7,r,seen,19,42624,02,02:01,061D 0620 0630 0633 0636 0639,
+27,6270,Src_27_6270_Tbl53A6_6,r,seen,19,49536,02,02:01,061D 0620 0630 0633 0636 0639,
+27,63F0,Src_27_63F0_Tbl53A6_1,r,seen,35,62592,02,02:01,061D 0620 0630 0633 0636 0639,
+27,6570,Src_27_6570_Tbl53A6_2,r,seen,34,55296,02,02:01,061D 0620 0630 0633 0636 0639,
+27,66F0,Src_27_66F0_Tbl53A6_5,r,seen,31,51056,02 07,02:01 07:02,061D 0620 0630 0633 0636 0639,
+27,6AF0,Src_27_6AF0_Tbl539D_38,r,never,0,0,,,,
+27,6C10,Src_27_6C10_Tbl539D_35,r,never,0,0,,,,
+27,6D30,Map_27_6D30_Mode12_State1D_SortDialogOpen,r,seen,3,732,12,12:1D,061D 0620 0630 0633 0636 0639,12
+27,6E50,Map_27_6E50_Mode12_State17_ExitDialogOpen,r,seen,2,488,12,12:17,061D 0620 0630 0633 0636 0639,12
+27,6F70,Src_27_6F70_Tbl539D_36,r,never,0,0,,,,
+27,7090,Map_27_7090_SaveDialog_Substate0_Init,r,seen,4,1152,10 11 1A,10:09 11:07 1A:0E,061D 0620 0630 0633 0636 0639,
+27,71B0,Map_27_71B0_Stamp_ReloadTilemapIfDifferent,r,never,0,0,,,,
+27,72D0,Src_27_72D0_Tbl539D_34,r,seen,2,1152,11,11:04,061D 0620 0630 0633 0636 0639,
+27,73F0,Src_27_73F0_Tbl539D_37,r,never,0,0,,,,
+27,7510,Map_27_7510_Mode12_State14_SaveDialogOpen,r,seen,5,1220,12,12:14,061D 0620 0630 0633 0636 0639,12
+27,7630,Map_27_7630_Mode1A_State09_ExitDialog,r,seen,1,128,1A,1A:09,061D 0620 0630 0633 0636 0639,1A
+27,76B0,Map_27_76B0_HotSpotEd_DialogChoiceB,r,seen,1,160,1A,1A:09 1A:0A,061D 0620 0630 0633 0636 0639,
+27,7710,Map_27_7710_Mode1A_State09_ExitDialog,r,seen,1,128,1A,1A:09,0630 0633 0636 0639 061D 0620,1A
+27,7750,Map_27_7750_Mode1A_State03_Browse,r,seen,2,256,1A,1A:03,061D 0620 0630 0633 0636 0639,1A
+27,77D0,Map_27_77D0_HotSpotEd_DialogChoiceA,r,seen,2,192,1A,1A:03,061D 0620 0630 0633 0636 0639,
+27,7830,Map_27_7830_HotSpotEd_DialogChoiceA,r,seen,2,192,1A,1A:03 1A:09,0630 0633 0636 0639 061D 0620,
+27,7870,Map_27_7870_Mode12_State1A_ClearDialogOpen,r,seen,3,732,12,12:1A,061D 0620 0630 0633 0636 0639,12
+27,7990,Map_27_7990_Mode1F_State08_EditPagesSetup,r,never,0,0,,,,1F
+29,4000,Credits_ScrollRowTbl,r,seen,2,5440,08,08:15,1749 174C 174F 1752 172F 1739,
+2A,4000,Sheet_MiscellaneousStampsJpn_2A_4000,r,seen,4,5056,08,08:06 08:07,061D 0620 0630 0633 0636 0639,
+2A,4504,Sheet_MiscellaneousStampsJpn_2A_4504,r,seen,4,1916,08,08:06,0636 061D 0620 0630 0633 0639,
+2A,4A6A,Sheet_MiscellaneousStampsJpn_2A_4A6A,r,seen,4,216,08,08:06,0636 0639 061D 0620 0630 0633,
+2A,5160,Kana_2A_5160,r,never,0,0,,,,
+2A,5180,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part5180,r,never,0,0,,,,
+2A,5280,Kana_2A_5280,r,never,0,0,,,,
+2A,52C0,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part52C0,r,never,0,0,,,,
+2A,5380,Kana_2A_5380,r,never,0,0,,,,
+2A,53C0,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part53C0,r,never,0,0,,,,
+2A,53E0,Kana_2A_53E0,r,never,0,0,,,,
+2A,53FA,Sheet_MiscellaneousStampsJpn_2A_4A6A_Part53FA,r,never,0,0,,,,
+2A,552A,Sheet_MiscellaneousStampsJpn_2A_552A,r,never,0,0,,,,
+2A,590A,Sheet_MiscellaneousStampsJpn_2A_590A,r,never,0,0,,,,
+2A,5A7A,Gfx_2A_5A7A_FontSlotsD3toD4_Blank,r,never,0,0,,,,
+2A,5A86,Sheet_MiscellaneousStampsJpn_2A_5A86,r,never,0,0,,,,
+2A,5DBE,Kana_2A_5DBE,r,never,0,0,,,,
+2A,5E62,Kana_2A_5E62,r,never,0,0,,,,
+2A,5E84,Kana_2A_5E84,r,never,0,0,,,,
+2A,5FFA,Sheet_MiscellaneousStampsJpn_2A_5FFA,r,seen,6,672,08 09 0A,08:06 0A:0E 09:0C,0630 0633 0636 0639 068C 068F,
+2F,57F5,Sheet_MiscellaneousStampsJpn_2F_57F5,r,never,0,0,,,,
+36,4000,AlbumB_UnusedSlotA_Tiles,r,never,0,0,,,,
+36,4E00,AlbumB_UnusedSlotA_Thumb,r,seen,6,3584,18,18:01 18:00,061D 0620 0630 0633 0636 0639,
+36,4F00,AlbumB_UnusedSlotA_Footer,r,never,0,0,,,,
+36,5000,AlbumB_UnusedSlotB_Tiles,r,seen,7,13600,09 0F 1E,0F:07 09:00 1E:01,0468 061D 0620 0630 0633 0636,
+36,5E00,AlbumB_UnusedSlotB_Thumb,r,seen,2,480,09 1E,09:00 1E:00,0468 061D 0620 0630 0633 0636,
+36,5F00,AlbumB_UnusedSlotB_Footer,r,seen,1,184,09,09:00,0468,
+3F,6A00,Gfx_3F_6A00_Mode19_State01_TitleFirst,r,seen,205,446208,19,19:01 19:02,0468 061D 0620 0630 0633 0636,19
+3F,7100,Gfx_3F_7100_Mode19_State01_TitleFirst,r,seen,205,95616,19,19:01 19:02,0468 061D 0620 0630 0633 0636,19
+3F,7280,Map_3F_7280_Mode19_State00_CopyrightScreens,r,seen,205,464896,19,19:00 19:01 19:02,0468 061D 0620 0630 0633 0636,19
+3F,7700,Gfx_3F_7700_Mode0C_State02_Setup,r,never,0,0,,,,0C
+3F,7D00,Map_3F_7D00_Mode0C_State02_Setup,r,never,0,0,,,,0C

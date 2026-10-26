@@ -4,10 +4,10 @@ bank,addr,bytes,name,tier,read_any_run,read_organic,read_forced_only,reader1,rea
 0C,7E20,352,Gfx_0C_7E20_Album_LoadNumeralTile_Aux,shown,352,320,32,00:17E8,Prn_SendPacketByte,31,00:0636,Vram_CopyFromBank,1,,,0
 0D,7000,1632,Gfx_0D_7000_FillPatternTiles,never shown,1632,0,1632,00:17E8,Prn_SendPacketByte,1254,00:0B1F,Vq_RunStream,206,00:0B02,Vq_RunStream,85
 10,7420,128,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,shown,128,96,32,00:061D,Vram_CopyFromBank,5,00:0620,Vram_CopyFromBank,5,00:0630,Vram_CopyFromBank,5
-10,78E8,8,TileGap_10_78E8,scrap,8,0,8,00:17E8,Prn_SendPacketByte,8,,,0,,,0
-10,7A08,8,TileGap_10_7A08,scrap,8,0,8,00:1647,Gfx_Copy16FromBank10,1,00:164A,Gfx_Copy16FromBank10,1,00:164D,Gfx_Copy16FromBank10,1
-10,7BC2,10,TileGap_10_7BC2,scrap,10,0,10,00:17E8,Prn_SendPacketByte,10,,,0,,,0
-10,7BE4,4,TileGap_10_7BE4,scrap,4,0,4,00:17E8,Prn_SendPacketByte,3,00:163E,Gfx_Copy16FromBank10,1,,,0
+10,78E8,8,DjPrintFont_10_78E8_Slots2Eto30,scrap,8,0,8,00:17E8,Prn_SendPacketByte,8,,,0,,,0
+10,7A08,8,DjPrintFont_10_7A08_Slots40to42,scrap,8,0,8,00:1647,Gfx_Copy16FromBank10,1,00:164A,Gfx_Copy16FromBank10,1,00:164D,Gfx_Copy16FromBank10,1
+10,7BC2,10,DjPrintFont_10_7BC2_Slots5Cto5E,scrap,10,0,10,00:17E8,Prn_SendPacketByte,10,,,0,,,0
+10,7BE4,4,DjPrintFont_10_7BE4_Slots5Eto5F,scrap,4,0,4,00:17E8,Prn_SendPacketByte,3,00:163E,Gfx_Copy16FromBank10,1,,,0
 15,5200,512,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,never shown,512,0,512,00:17E8,Prn_SendPacketByte,512,,,0,,,0
 15,5500,256,Gfx_15_5500_SlidePlay_ReadKeys_Aux,never shown,256,0,256,00:17E8,Prn_SendPacketByte,256,,,0,,,0
 18,7D80,256,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,never shown,256,0,256,00:17E8,Prn_SendPacketByte,256,,,0,,,0
