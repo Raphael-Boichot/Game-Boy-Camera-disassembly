@@ -729,6 +729,9 @@ CNAMER = CN.Namer(C_ROWS + ST_ROWS + S_ROWS)
 if A.rom:
     r = subprocess.run([sys.executable, 'tools/state_names.py', '--rom', A.rom, '--check'], capture_output=True, text=True)
     if r.returncode: bad('const', 'disasm/state_names_jp.csv is stale: run tools/state_names.py --rom ROM'); CN_BAD += 1
+# text table (README 16.27): disasm/charmap_jp.inc must be what tools/charmap_jp.py makes from disasm/charset_jp.csv
+r = subprocess.run([sys.executable, 'tools/charmap_jp.py', '--check'], capture_output=True, text=True)
+if r.returncode: bad('const', 'disasm/charmap_jp.inc is stale: run tools/charmap_jp.py'); CN_BAD += 1
 for r in ST_ROWS:
     if r.name in NAMESET or r.name in {x.name for x in RAM_ROWS}: bad('const', '%s is also a ROM label or a RAM name' % r.name); CN_BAD += 1
 ST_TAGS = collections.Counter(r.tag for r in ST_ROWS)

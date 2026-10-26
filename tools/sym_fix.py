@@ -36,7 +36,7 @@ repairs the cases that can be told from the code (every decision uses the instru
   Not repaired (kept as the label mgbdis chose): `ld hl|de, Label` that is really a number (e.g. `ld de, $4000` used as an offset), and
   `ld a, [Label]` reads of ROM bytes (3 of them, all real table reads).
 Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-identical; check with the md5 above."""
-import sys, os, re, json, argparse, collections, glob, csv
+import sys, os, re, json, argparse, collections, glob, csv, shutil
 ap = argparse.ArgumentParser()
 ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
 ap.add_argument('--trace', default='wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
@@ -395,4 +395,44 @@ if CONST is not None:
     if os.path.exists(mk):
         mt = open(mk, encoding='utf-8').read()
         if 'const_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('ram_jp.inc bank_*.asm', 'ram_jp.inc const_jp.inc bank_*.asm'))
+if CONST is not None:                            # L6 text table: the tables of disasm/text_tables_jp.csv written with the charmap of disasm/charmap_jp.inc (tools/charmap_jp.py)
+    _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _cm = os.path.join(_root, 'disasm', 'charmap_jp.inc'); _tt = os.path.join(_root, 'disasm', 'text_tables_jp.csv')
+    if os.path.exists(_cm) and os.path.exists(_tt):
+        _chars = {}
+        for l in open(_cm, encoding='utf-8'):
+            m = re.match(r'^CHARMAP "((?:[^"\\]|\\.)*)", \$([0-9A-F]{2})', l)
+            if m: _chars[int(m.group(2), 16)] = m.group(1)
+        _tabs = {r['label']: r for r in csv.DictReader(open(_tt, encoding='utf-8'))}
+        for fn in sorted(glob.glob(os.path.join(a.dir, 'bank_*.asm'))):
+            L = open(fn, encoding='utf-8').read().split('\n'); ch = False
+            for i, l in enumerate(L):
+                m = re.match(r'^(\w+)::\s*$', l)
+                if not m or m.group(1) not in _tabs or i + 1 >= len(L): continue
+                t = _tabs[m.group(1)]; md = re.match(r'^(\s+)db ((?:\$[0-9a-f]{2}(?:, )?)+)\s*$', L[i + 1])
+                if not md: sys.exit('sym_fix: %s is not followed by one db line' % t['label'])
+                by = [int(x[1:], 16) for x in md.group(2).split(', ')]; lay = t['layout']; end = int(t['end'], 16)
+                if by[-1] != end or (len(by) - 1) % len(lay): sys.exit('sym_fix: %s does not fit the layout %s' % (t['label'], lay))
+                rec = []
+                for k in range(0, len(by) - 1, len(lay)):
+                    f = []
+                    for c, v in zip(lay, by[k:k + len(lay)]):
+                        if c == 'c':
+                            if v not in _chars: sys.exit('sym_fix: %s: code $%02x has no character' % (t['label'], v))
+                            f.append('"%s"' % _chars[v])
+                        else: f.append('%d' % v)
+                    rec.append(md.group(1) + 'db ' + ', '.join(f))
+                L[i + 1] = md.group(1) + 'PUSHC kana\n' + '\n'.join(rec) + '\n' + md.group(1) + 'db $%02x\n' % end + md.group(1) + 'POPC'
+                stats['text_tables'] += 1; stats['text_records'] += len(rec); ch = True
+            if ch: open(fn, 'w', encoding='utf-8').write('\n'.join(L))
+        shutil.copy(_cm, os.path.join(a.dir, 'charmap_jp.inc'))
+        ga = os.path.join(a.dir, 'game.asm'); gt = open(ga, encoding='utf-8').read()
+        if 'charmap_jp.inc' not in gt:
+            gt2 = gt.replace('INCLUDE "const_jp.inc"\n', 'INCLUDE "const_jp.inc"\nINCLUDE "charmap_jp.inc"\n', 1)
+            if gt2 == gt: sys.exit('sym_fix: game.asm has no INCLUDE "const_jp.inc" line')
+            open(ga, 'w', encoding='utf-8', newline='\n').write(gt2)
+        mk = os.path.join(a.dir, 'Makefile')
+        if os.path.exists(mk):
+            mt = open(mk, encoding='utf-8').read()
+            if 'charmap_jp.inc' not in mt: open(mk, 'w', encoding='utf-8', newline='\n').write(mt.replace('const_jp.inc bank_*.asm', 'const_jp.inc charmap_jp.inc bank_*.asm'))
 print('sym_fix: ' + ', '.join('%s=%d' % kv for kv in sorted(stats.items())))
