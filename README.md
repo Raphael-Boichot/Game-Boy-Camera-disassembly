@@ -122,24 +122,73 @@ Details and counts: [`docs/01_toolchain_and_status.md`](docs/01_toolchain_and_st
 
 Every public source the project used since the start, in one place. None of them was taken as an authority over the ROM: what a source says and the ROM cannot confirm is tagged **I** or **?** in the sections quoted below, never **C**. The addresses were supplied by the owner on 2026-10-20 (the repository had recorded only some of them); a source with no address is marked "URL not recorded" and no address is guessed.
 
-| Source | What the project took from it | Where | How it reached the project |
-|---|---|---|---|
-| The Cutting Room Floor, page [Game Boy Camera](https://tcrf.net/Game_Boy_Camera), revision read: [1968673](https://tcrf.net/index.php?title=Game_Boy_Camera&oldid=1968673) | the list of unused and hidden content that became the TCRF checklist and the `Unused_TCRF_*` labels; the pictures compared with the ROM | §15, §16.24, §16.29 | printed copy of 2026-09-27 supplied by the owner, read by OCR (the figures and names were checked against the ROM before use) |
-| The Cutting Room Floor, page [Game Boy Camera/Regional Differences](https://tcrf.net/Game_Boy_Camera/Regional_Differences), revision read: [1846909](https://tcrf.net/index.php?title=Game_Boy_Camera/Regional_Differences&oldid=1846909) | the documented differences between the Japanese and international builds (only the Japanese side of that page is counted in the checklist) | §15 | printed copy of 2026-09-27 supplied by the owner, read by OCR |
-| Jonathan Traynor's blog post "Secrets of the Pocket Camera" (jofamo.com): [original address](https://www.jofamo.com/blog/secrets-of-the-pocket-camera) (the site is dead), read from the [Wayback Machine copy of 2025-09-27](https://web.archive.org/web/20250927101352/https://www.jofamo.com/blog/secrets-of-the-pocket-camera), 48 pages | the claims about the Album B stock pictures, BGM 04, the P.VOICE and the character table, each compared with the ROM and run in BGB; what the article takes from the guide book, the manual, nintendo.co.jp and Tanaka's tweets was not seen and is not used | §16.27 | PDF of the Wayback copy supplied by the owner on 2026-10-14 |
-| [GameFAQs, Game Boy Camera cheats](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) (the game's [FAQ list](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/faqs) was also given by the owner; the README cites no individual FAQ) | the cheat and secret list, every line tried in BGB | §16.18 (also cited in §2, §15.4, §16.4, §16.6, §16.17, §17.6) | read on 2026-10-12 |
-| [Nintendo Wiki (Fandom), Totaka's Song](https://nintendo.fandom.com/wiki/Totaka%27s_Song) | the description of the tune on the "no blank frames" screen | §16.20 | fetched during the Totaka's Song check |
-| [cristofercruz/gb-camera-frames](https://github.com/cristofercruz/gb-camera-frames) (`gbc-fr.py`) | the frame and wild-frame layout constants (flat offsets, tile counts) checked against the ROM | §16.23 | shallow clone read for the constants |
-| [HerrZatacke/dither-pattern-gen](https://github.com/HerrZatacke/dither-pattern-gen) (MIT; read at `master` b153952, 2023-02-10) | the dither-matrix cell order, compared with the ROM and with MAME (a software model: **I** at best) | §18.12 | read for §18.12 |
-| MAME, `src/devices/bus/gameboy/camera.cpp` (BSD-3-Clause, header "Vas Crabb") | the MAC-GBD window and a simplified M64282FP model; its header gives the sensor as 128 x 123 pixels | §9, §18.12 | copy attached by the owner, revision not stated; URL not recorded |
-| [Mitsubishi M64282FP datasheet](https://github.com/Raphael-Boichot/Mitsubishi-M64282FP-dashcam/blob/main/Docs%20and%20research/Bibliography/Mitsubishi%20Integrated%20Circuit%20M64282FP%20Image%20Sensor.pdf), ver. 1.1E (the bibliography of the owner's Mitsubishi-M64282FP-dashcam repository) | register names and bit meanings, read against the owner's bus recordings; the datasheet section numbers quoted in the README are the datasheet's own | §18 (18.2, 18.8) | document read for §18 |
-| The Funtography guide: the Internet Archive item [Nintendo Game Boy Camera Funtography Guide](https://archive.org/details/nintendofuntographyguide) (1998, described there as a Nintendo Power guide; this README calls it "the US manual") | the menu names, the five flowcharts (USER, SHOOT, VIEW, PLAY, STUDIO), the build differences it reveals; printed page numbers are the guide's own | §16 (introduction, 16.4, 16.5, 16.11) | attached by the owner; address supplied on 2026-10-20 |
-| [GameFAQs map "Game Boy Camera - Menu Guide"](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/map/63-menu-guide) by FunkyLizard (fan-made, same five sections; the picture itself is titled "Menu of Gamboy Camera") | the second reading of the menu tree, compared with the guide's charts | §16.11 | attached by the owner on 2026-10-14 with the blog link above |
-| [The Spriters Resource, Game Boy Camera](https://www.spriters-resource.com/game_boy_gbc/gameboycamera/): 16 sheets (17 files kept in `source/Spriter_ressources_check/`, one a byte-identical duplicate) | names and layouts of graphics, matched tile by tile against the ROM (`sheet_tile_match.py`); the sheet names in the `Sheet_*` labels | §1.1.1, §16.13 | files supplied by the owner |
-| Pan Docs: [Game Boy Camera](https://gbdev.io/pandocs/Gameboy_Camera.html) and the "SGB Border" page (address not recorded) | the `$A000` register (bits 1-2, the P/M bits of its sample code; the meaning of bit 1 stays open, §18) and the SGB border layout (4 bpp tiles, 32 x 28 map cells, palettes 4-5) | §16.13, §18 | consulted as reference |
-| [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a, after the v3.0 tag) and rgbds v1.0.4 (`rgbasm`, `rgblink`, `rgbfix`; rgbds address not recorded) | the disassembler and the assembler of the byte-exact round trip | §1.1, §1.1.1, `HOWTO_NEW_ROM.md` | installed in the workspace; versions pinned in §1.1 |
-| [BGB](https://bgb.bircd.org/) 1.5.x (run under Wine, headless) | the emulator behind every **C** tag marked "BGB": watchpoints, screenshots, the printer helper link | §16.6, §17 and the sections that cite it | attached by the owner |
-| [Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor), folders `Research on real camera 2024` and `Research on real Camera` | the owner's bus-analyser recordings of two real cameras (boot, calibration, a calibration under strong light, normal use, the Hello Kitty and prototype ROMs, a zeroed vector) and the saves before and after a calibration | §18.4-18.6, §18.13 | supplied by the owner on 2026-10-26; decoded by `tcrf_check/tools/sensor_more_recordings.py` |
-| [untoxa's gb-photo](https://github.com/untoxa/gb-photo) | only named, to identify the third-party save (`2022-03-05`) whose unused bytes hold its settings; not read as a source | §3.8 | identified from the save content |
+- The Cutting Room Floor, page [Game Boy Camera](https://tcrf.net/Game_Boy_Camera), revision read: [1968673](https://tcrf.net/index.php?title=Game_Boy_Camera&oldid=1968673)
+  - *What the project took from it:* the list of unused and hidden content that became the TCRF checklist and the `Unused_TCRF_*` labels; the pictures compared with the ROM
+  - *Where:* §15, §16.24, §16.29
+  - *How it reached the project:* printed copy of 2026-09-27 supplied by the owner, read by OCR (the figures and names were checked against the ROM before use)
+- The Cutting Room Floor, page [Game Boy Camera/Regional Differences](https://tcrf.net/Game_Boy_Camera/Regional_Differences), revision read: [1846909](https://tcrf.net/index.php?title=Game_Boy_Camera/Regional_Differences&oldid=1846909)
+  - *What the project took from it:* the documented differences between the Japanese and international builds (only the Japanese side of that page is counted in the checklist)
+  - *Where:* §15
+  - *How it reached the project:* printed copy of 2026-09-27 supplied by the owner, read by OCR
+- Jonathan Traynor's blog post "Secrets of the Pocket Camera" (jofamo.com): [original address](https://www.jofamo.com/blog/secrets-of-the-pocket-camera) (the site is dead), read from the [Wayback Machine copy of 2025-09-27](https://web.archive.org/web/20250927101352/https://www.jofamo.com/blog/secrets-of-the-pocket-camera), 48 pages
+  - *What the project took from it:* the claims about the Album B stock pictures, BGM 04, the P.VOICE and the character table, each compared with the ROM and run in BGB; what the article takes from the guide book, the manual, nintendo.co.jp and Tanaka's tweets was not seen and is not used
+  - *Where:* §16.27
+  - *How it reached the project:* PDF of the Wayback copy supplied by the owner on 2026-10-14
+- [GameFAQs, Game Boy Camera cheats](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) (the game's [FAQ list](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/faqs) was also given by the owner; the README cites no individual FAQ)
+  - *What the project took from it:* the cheat and secret list, every line tried in BGB
+  - *Where:* §16.18 (also cited in §2, §15.4, §16.4, §16.6, §16.17, §17.6)
+  - *How it reached the project:* read on 2026-10-12
+- [Nintendo Wiki (Fandom), Totaka's Song](https://nintendo.fandom.com/wiki/Totaka%27s_Song)
+  - *What the project took from it:* the description of the tune on the "no blank frames" screen
+  - *Where:* §16.20
+  - *How it reached the project:* fetched during the Totaka's Song check
+- [cristofercruz/gb-camera-frames](https://github.com/cristofercruz/gb-camera-frames) (`gbc-fr.py`)
+  - *What the project took from it:* the frame and wild-frame layout constants (flat offsets, tile counts) checked against the ROM
+  - *Where:* §16.23
+  - *How it reached the project:* shallow clone read for the constants
+- [HerrZatacke/dither-pattern-gen](https://github.com/HerrZatacke/dither-pattern-gen) (MIT; read at `master` b153952, 2023-02-10)
+  - *What the project took from it:* the dither-matrix cell order, compared with the ROM and with MAME (a software model: **I** at best)
+  - *Where:* §18.12
+  - *How it reached the project:* read for §18.12
+- MAME, `src/devices/bus/gameboy/camera.cpp` (BSD-3-Clause, header "Vas Crabb")
+  - *What the project took from it:* the MAC-GBD window and a simplified M64282FP model; its header gives the sensor as 128 x 123 pixels
+  - *Where:* §9, §18.12
+  - *How it reached the project:* copy attached by the owner, revision not stated; URL not recorded
+- [Mitsubishi M64282FP datasheet](https://github.com/Raphael-Boichot/Mitsubishi-M64282FP-dashcam/blob/main/Docs%20and%20research/Bibliography/Mitsubishi%20Integrated%20Circuit%20M64282FP%20Image%20Sensor.pdf), ver. 1.1E (the bibliography of the owner's Mitsubishi-M64282FP-dashcam repository)
+  - *What the project took from it:* register names and bit meanings, read against the owner's bus recordings; the datasheet section numbers quoted in the README are the datasheet's own
+  - *Where:* §18 (18.2, 18.8)
+  - *How it reached the project:* document read for §18
+- The Funtography guide: the Internet Archive item [Nintendo Game Boy Camera Funtography Guide](https://archive.org/details/nintendofuntographyguide) (1998, described there as a Nintendo Power guide; this README calls it "the US manual")
+  - *What the project took from it:* the menu names, the five flowcharts (USER, SHOOT, VIEW, PLAY, STUDIO), the build differences it reveals; printed page numbers are the guide's own
+  - *Where:* §16 (introduction, 16.4, 16.5, 16.11)
+  - *How it reached the project:* attached by the owner; address supplied on 2026-10-20
+- [GameFAQs map "Game Boy Camera - Menu Guide"](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/map/63-menu-guide) by FunkyLizard (fan-made, same five sections; the picture itself is titled "Menu of Gamboy Camera")
+  - *What the project took from it:* the second reading of the menu tree, compared with the guide's charts
+  - *Where:* §16.11
+  - *How it reached the project:* attached by the owner on 2026-10-14 with the blog link above
+- [The Spriters Resource, Game Boy Camera](https://www.spriters-resource.com/game_boy_gbc/gameboycamera/): 16 sheets (17 files kept in `source/Spriter_ressources_check/`, one a byte-identical duplicate)
+  - *What the project took from it:* names and layouts of graphics, matched tile by tile against the ROM (`sheet_tile_match.py`); the sheet names in the `Sheet_*` labels
+  - *Where:* §1.1.1, §16.13
+  - *How it reached the project:* files supplied by the owner
+- Pan Docs: [Game Boy Camera](https://gbdev.io/pandocs/Gameboy_Camera.html) and the "SGB Border" page (address not recorded)
+  - *What the project took from it:* the `$A000` register (bits 1-2, the P/M bits of its sample code; the meaning of bit 1 stays open, §18) and the SGB border layout (4 bpp tiles, 32 x 28 map cells, palettes 4-5)
+  - *Where:* §16.13, §18
+  - *How it reached the project:* consulted as reference
+- [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a, after the v3.0 tag) and rgbds v1.0.4 (`rgbasm`, `rgblink`, `rgbfix`; rgbds address not recorded)
+  - *What the project took from it:* the disassembler and the assembler of the byte-exact round trip
+  - *Where:* §1.1, §1.1.1, `HOWTO_NEW_ROM.md`
+  - *How it reached the project:* installed in the workspace; versions pinned in §1.1
+- [BGB](https://bgb.bircd.org/) 1.5.x (run under Wine, headless)
+  - *What the project took from it:* the emulator behind every **C** tag marked "BGB": watchpoints, screenshots, the printer helper link
+  - *Where:* §16.6, §17 and the sections that cite it
+  - *How it reached the project:* attached by the owner
+- [Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor), folders `Research on real camera 2024` and `Research on real Camera`
+  - *What the project took from it:* the owner's bus-analyser recordings of two real cameras (boot, calibration, a calibration under strong light, normal use, the Hello Kitty and prototype ROMs, a zeroed vector) and the saves before and after a calibration
+  - *Where:* §18.4-18.6, §18.13
+  - *How it reached the project:* supplied by the owner on 2026-10-26; decoded by `tcrf_check/tools/sensor_more_recordings.py`
+- [untoxa's gb-photo](https://github.com/untoxa/gb-photo)
+  - *What the project took from it:* only named, to identify the third-party save (`2022-03-05`) whose unused bytes hold its settings; not read as a source
+  - *Where:* §3.8
+  - *How it reached the project:* identified from the save content
 
 Not public, so not listed above: the 33 real saves are the owner's own data (§3, §11); the bus-analyser workbooks are public, in the sensor repository above; the ROMs themselves are not listed (md5 values in §1.1).
