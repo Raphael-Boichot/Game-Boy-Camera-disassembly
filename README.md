@@ -18,6 +18,10 @@ One map per ROM, in the same colours: what each byte is (code by function, data 
 
 ![The camera ball head turn of the main menu: the animation the game plays beside the unused twin set](tcrf_check/assets/unidentified/main_menu_head_turn_used_vs_unused.gif)
 
+*The hand flipping a newspaper* (TCRF B16, `11:5800-693F`): nine 40 x 40 sprite frames, arranged by the sprite list `$BA`, that no code draws. Animated from the ROM tiles at 4x in slot order (0 to 8 and back); the order and the speed are chosen here, since no code plays them (docs §16.24).
+
+![The unused hand flipping a newspaper, its nine frames animated from the ROM tiles](tcrf_check/assets/unidentified/11_5800_hand_newspaper.gif)
+
 **Game Boy Camera (USA, Europe)**: ported from the Japanese tables; outlines = what differs from the Japanese ROM.
 
 ![What each byte of the international ROM is, and what differs from the Japanese ROM](roms/us_eu/us_rom_layout_map.png)
