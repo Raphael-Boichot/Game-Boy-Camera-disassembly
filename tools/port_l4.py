@@ -17,7 +17,8 @@ the same address and 22 another one), so the addresses of the names do not chang
   * const_tables (bank, addr, len): the address goes through the byte map; carried only if the len bytes are identical
     in both ROMs (a mode table that changed must be typed again).
   * const_names, const_types, sound_names, state_names, state_helpers: keyed by value, variable or routine name: copied as they are
-    (state_helpers rows whose routine has no name in the other build are dropped; the rows of state_helpers_<s>_hand.csv are added).
+    (state_helpers rows whose routine has no name in the other build are dropped; the rows of state_helpers_<s>_hand.csv are added;
+    likewise const_tables_<s>_hand.csv is added to the carried constant tables).
 Writes OUTDIR/disasm/{ram_names,ram_exclude,ram_highbyte,const_tables}_<s>.csv, OUTDIR/wram/wram_access_<s>.csv and
 OUTDIR/port/port_l4_report_<s>.csv (every dropped row with the reason).
 """
@@ -107,8 +108,11 @@ for r in rows:
     if t < 0 or any(M[jo + i] != t + i for i in range(n)): rep.append(['const_tables', r['bank'] + ':' + r['addr'], '', 'table not mapped in one piece']); continue
     if JP[jo:jo + n] != OT[t:t + n]: rep.append(['const_tables', r['bank'] + ':' + r['addr'], '', 'bytes differ: type again']); continue
     r2 = dict(r); r2['addr'] = '%04X' % (t if t < 0x4000 else (t & 0x3FFF) + 0x4000); out.append(r2)
+CH = os.path.join(OD, 'const_tables_%s_hand.csv' % S)          # tables of this build typed by hand (kept across re-ports)
+nhand = 0
+if os.path.exists(CH): hr = rd(CH); out += hr; nhand = len(hr)
 wr(os.path.join(OD, 'const_tables_%s.csv' % S), out, list(rows[0].keys()))
-print('const_tables: %d of %d rows carried' % (len(out), len(rows)))
+print('const_tables: %d of %d rows carried, %d typed by hand' % (len(out) - nhand, len(rows), nhand))
 # ---------------------------------------------------------------- copied as they are
 for fn in ('const_names', 'const_types', 'sound_names', 'state_names'):
     shutil.copy(JD + fn + '_jp.csv', os.path.join(OD, '%s_%s.csv' % (fn, S)))

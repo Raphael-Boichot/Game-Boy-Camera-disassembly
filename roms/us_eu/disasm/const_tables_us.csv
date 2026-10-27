@@ -17,3 +17,4 @@ bank,addr,len,layout,group,note
 05,54F7,18,KC,sound,D.J. performance screen: sound effects 1 to 9 (DjPerf_Input)
 09,73A7,8,KC,sound,shared result / error screen: its four tunes (ResultScreen_Substate0_Init)
 05,77F2,4,KC,sound,"BALL: the two in-game songs (Mode20_State03_GameStart, Mode20_State07_Pause)"
+03,7643,128,KC,sound,"hot-spot sound list (JP 03:7615): 64 {id, channel} entries, the picker offers the first 34. Same as the Japanese list but entry $2E: song $2D (MUSIC_BALL_BGM_2) here, song $1E (MUSIC_TITLE_ALIAS_1E) in the Japanese ROM; that entry is past the 34 the picker reaches (code read 2026-10-27)"
