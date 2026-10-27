@@ -6,7 +6,8 @@
  2. main_menu_head_turn_set_B.gif: the second set of head frames, the one nothing plays (Tbl2 / Tbl3 of MainMenu_SlideA have no caller): F9 -> F5 -> F9 on the back body 11:4000 that its collar fits.
  3. main_menu_head_turn_used_vs_unused.gif: the two side by side on the same clock: left the head turn the game plays (F4 -> F0 -> F4 on the
     front body 16:5580, MainMenu_SlideA_Tbl1 then Tbl0), right the unused twin (F9 -> F5 -> F9 on the back body 11:4000, Tbl3 then Tbl2,
-    no caller); frame F(j) on the left is shown with F(j+5) on the right.
+    no caller); frame F(j) on the left is shown with F(j+5) on the right. A red line goes around the head tiles ($10-$2F, the block at
+    $9100) while the right side shows F5-F8, the four frames nothing reads (F9 is the resting head of the lower page, and the back body is used).
 The picture is the central column of the upper-page map 26:5A00 (8 x 14 tiles, 64 x 112 px, palette E4, white background), without the page's boxes, corner heads and text; the BG map is not changed
 by the transitions here (the game slides the page's map with the strips).  A step copies the whole block: the strip over the head for the body turn ($20-$6F over $10-$2F), the head over the strip for the head turn.
 usage: menu_head_gif.py ROM OUTDIR [--scale 4]"""
@@ -80,11 +81,21 @@ def used_vs_unused(rom, scale):
     for j, d in steps:
         L = picture(vram_head_over_strip(rom, front, F[j]), scale); Rt = picture(vram_head_over_strip(rom, back, F[j + 5]), scale)
         gap = 6 * scale; top = 22 * scale; w = L.width + Rt.width + gap
-        im = Image.new('P', (w, L.height + top), 0); im.putpalette(PAL)
+        im = Image.new('P', (w, L.height + top), 0); im.putpalette(PAL + [214, 20, 40])
         im.paste(L, (0, top)); im.paste(Rt, (L.width + gap, top))
         dr = ImageDraw.Draw(im)
+        if 5 <= j + 5 <= 8:                                   # an unused frame on the right: red line around its head tiles
+            cells = {(r, c) for r, row in HS.CM.items() for c, i in row.items()
+                     if 0x10 <= i < 0x30 and ROW0 <= r < ROW0 + ROWS and COL0 <= c < COL0 + COLS}
+            ox = L.width + gap; T8 = 8 * scale; lw = max(2, scale // 2)
+            X = lambda c: ox + (MARGIN + (c - COL0) * 8) * scale; Y = lambda r: top + (MARGIN + (r - ROW0) * 8) * scale
+            for r, c in cells:
+                if (r - 1, c) not in cells: dr.rectangle([X(c), Y(r) - lw, X(c) + T8, Y(r) - 1], fill=4)
+                if (r + 1, c) not in cells: dr.rectangle([X(c), Y(r) + T8, X(c) + T8, Y(r) + T8 + lw - 1], fill=4)
+                if (r, c - 1) not in cells: dr.rectangle([X(c) - lw, Y(r) - lw, X(c) - 1, Y(r) + T8 + lw - 1], fill=4)
+                if (r, c + 1) not in cells: dr.rectangle([X(c) + T8, Y(r) - lw, X(c) + T8 + lw - 1, Y(r) + T8 + lw - 1], fill=4)
         dr.line([(L.width + gap // 2, 2 * scale), (L.width + gap // 2, im.height - 2 * scale)], fill=1, width=max(1, scale // 2))
-        for x0, t1, t2 in ((0, 'USED', 'F%d (Tbl1 / Tbl0)' % j), (L.width + gap, 'UNUSED', 'F%d (Tbl3 / Tbl2)' % (j + 5))):
+        for x0, t1, t2 in ((0, 'USED', 'F%d (Tbl1 / Tbl0)' % j), (L.width + gap, 'UNUSED', 'F%d (Tbl3 / Tbl2)%s' % (j + 5, '  red: unused' if 5 <= j + 5 <= 8 else ''))):
             dr.text((x0 + 3 * scale, 2 * scale), t1, fill=3, font=f1); dr.text((x0 + 3 * scale, 10 * scale), t2, fill=2, font=f2)
         fr.append((im, d))
     return fr
