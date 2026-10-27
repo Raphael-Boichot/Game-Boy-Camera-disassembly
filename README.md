@@ -14,6 +14,10 @@ One map per ROM, in the same colours: what each byte is (code by function, data 
 
 ![The never-reached assets of the Japanese ROM](tcrf_check/assets/unidentified/really_unused.png)
 
+*The unused ball head animation*: left, the head turn the main menu plays (frames F4 to F0 and back, on the front body); right, the twin set of frames F9 to F5 and back that no code plays (`MainMenu_SlideA_Tbl2` / `Tbl3` have no caller; same heads, another collar, on the back body it fits). Drawn from the ROM tiles at 4x on the game's timing (docs §16.24).
+
+![The camera ball head turn of the main menu: the animation the game plays beside the unused twin set](tcrf_check/assets/unidentified/main_menu_head_turn_used_vs_unused.gif)
+
 **Game Boy Camera (USA, Europe)**: ported from the Japanese tables; outlines = what differs from the Japanese ROM.
 
 ![What each byte of the international ROM is, and what differs from the Japanese ROM](roms/us_eu/us_rom_layout_map.png)
