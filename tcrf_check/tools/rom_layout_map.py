@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The whole JP ROM bank by bank, coloured by WHAT each byte is (README 'Current status', second map), with the tiles that nothing reaches outlined. The ROM is drawn as 2bpp tiles (64 banks of 32 x 32 tiles) exactly like rom_reach_map.py.
+"""The whole JP ROM bank by bank, coloured by WHAT each byte is (README 'Current status', second map), with the tiles that nothing reaches outlined. The ROM is drawn as 2bpp tiles (64 banks of 16 x 64 tiles) exactly like rom_reach_map.py.
 usage: rom_layout_map.py OUT.png [--rom pocketcamera_jp.gb] [--csv roms/jp_rev_a/assets/layout_by_bank_jp.csv] [--map ...] [--assets ...] [--witness ...] [--reach ...] [--unused ...] [--kinds roms/jp_rev_a/assets/layout_kind_overrides_jp.csv]
 Each ROM byte gets one category:
   code (class C / F / N of coverage/v8/report_v8/rom_map.csv = traced instructions): the function group of the label that owns the byte (rules below; 10 groups);
@@ -33,6 +33,11 @@ NAMES = opt('--names', NAMES).split(','); TYPES = opt('--types', TYPES).split(',
 # a ROM whose work has not started, or has only started (roms/<rom>/<prefix>_rom_layout_map.png): --unclaimed colours every byte that no
 # label owns and no trace runs as NOT ANALYSED YET (instead of 'tables'), --outline none draws no outline, --note1 / --note2 replace the
 # two lines under the title; '--names none', '--types none' and '--map none' (every byte class R: no trace yet) are allowed
+# bank shape: --bank-tiles WxH (tiles; W x H = 1024, default 16x64, the format of the maps since 2026-10-27) and --bank-cols (banks per
+# picture row, default 16). 16 tiles is the width of the ROM's own tile sheets, so pictures stored in the ROM read as pictures; the
+# earlier square banks are --bank-tiles 32x32 --bank-cols 8
+BTW, BTH = (int(x) for x in opt('--bank-tiles', '16x64').split('x')); assert BTW * BTH == 1024, 'a bank is 1,024 tiles'
+BCOLS = int(opt('--bank-cols', '16')); BROWS = 64 // BCOLS
 UNCLAIMED = '--unclaimed' in a
 if UNCLAIMED: a.remove('--unclaimed')
 OUTLINE = opt('--outline', 'diff' if DIFF else 'reach'); NOTE1 = opt('--note1', None); NOTE2 = opt('--note2', None)
@@ -223,33 +228,34 @@ sh = np.zeros((len(t), 8, 8), np.uint8)
 for x in range(8): sh[:, :, x] = ((lo >> (7 - x)) & 1) | (((hi >> (7 - x)) & 1) << 1)
 pix = (rowkind[:, :, None] * 4 + sh).astype(np.uint8)
 banks = N // 0x4000
-per = pix.reshape(banks, 32, 32, 8, 8).transpose(0, 1, 3, 2, 4).reshape(banks, 256, 256)
-S = 2; GX, GY, LEFT = 12, 66, 40
+per = pix.reshape(banks, BTH, BTW, 8, 8).transpose(0, 1, 3, 2, 4).reshape(banks, 8 * BTH, 8 * BTW)
+S = 2; GX, GY, LEFT = 12, (66 if BTW >= 32 else 88), 40
+PW, PH = 8 * BTW * S, 8 * BTH * S                      # one bank in pixels
 TOP = 520
-W = LEFT + 8 * (256 * S + GX) + 10; H = TOP + 8 * (256 * S + GY) + 10
+W = max(LEFT + BCOLS * (PW + GX) + 10, 4242); H = TOP + BROWS * (PH + GY) + 10
 canvas = np.full((H, W), BG, np.uint8)
 for b in range(banks):
-    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY) + (GY - 6)
-    canvas[gy:gy + 256 * S, gx:gx + 256 * S] = np.kron(per[b], np.ones((S, S), np.uint8))
+    gx = LEFT + (b % BCOLS) * (PW + GX); gy = TOP + (b // BCOLS) * (PH + GY) + (GY - 6)
+    canvas[gy:gy + PH, gx:gx + PW] = np.kron(per[b], np.ones((S, S), np.uint8))
 # outline the tiles that no run reached: per tile the worst mark (never-run code > unused data > unread identified); padding is not outlined
-tilemark = np.full((banks, 32, 32), 255, np.uint8)
+tilemark = np.full((banks, BTH, BTW), 255, np.uint8)
 for b in range(banks):
-    m = mark[b * 0x4000:(b + 1) * 0x4000].reshape(32, 32, 16)
+    m = mark[b * 0x4000:(b + 1) * 0x4000].reshape(BTH, BTW, 16)
     for c_ in (2, 1, 0):
         has = (m == c_).any(2); tilemark[b][has] = c_
 LINEC = {0: INK, 1: RED, 2: BLUE}
 T = 8 * S
 for b in range(banks):
-    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY) + (GY - 6)
+    gx = LEFT + (b % BCOLS) * (PW + GX); gy = TOP + (b // BCOLS) * (PH + GY) + (GY - 6)
     M = tilemark[b]
-    for ty in range(32):
-        for tx in range(32):
+    for ty in range(BTH):
+        for tx in range(BTW):
             c_ = M[ty, tx]
             if c_ == 255: continue
             x0 = gx + tx * T; y0 = gy + ty * T; col = LINEC[int(c_)]
             for dx, dy, edge in ((-1, 0, 'L'), (1, 0, 'R'), (0, -1, 'T'), (0, 1, 'B')):
                 nx, ny = tx + dx, ty + dy
-                same = 0 <= nx < 32 and 0 <= ny < 32 and M[ny, nx] == c_
+                same = 0 <= nx < BTW and 0 <= ny < BTH and M[ny, nx] == c_
                 if same: continue
                 if edge == 'L': canvas[y0:y0 + T, x0:x0 + 2] = col
                 if edge == 'R': canvas[y0:y0 + T, x0 + T - 2:x0 + T] = col
@@ -258,9 +264,9 @@ for b in range(banks):
 img = Image.fromarray(canvas, 'P'); img.putpalette([v for c in pal for v in c] + [0] * (768 - 3 * len(pal)))
 d = ImageDraw.Draw(img)
 # magenta cross on every pure padding tile (all 16 bytes of the tile are padding)
-padtile = (kind.reshape(banks, 32, 32, 16) == KEY['PAD']).all(3); n_padtile = int(padtile.sum())
+padtile = (kind.reshape(banks, BTH, BTW, 16) == KEY['PAD']).all(3); n_padtile = int(padtile.sum())
 for b in range(banks):
-    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY) + (GY - 6)
+    gx = LEFT + (b % BCOLS) * (PW + GX); gy = TOP + (b // BCOLS) * (PH + GY) + (GY - 6)
     for ty, tx in zip(*np.nonzero(padtile[b])):
         x0 = gx + int(tx) * T; y0 = gy + int(ty) * T
         d.line([x0 + 1, y0 + 1, x0 + T - 2, y0 + T - 2], fill=CROSS, width=1); d.line([x0 + T - 2, y0 + 1, x0 + 1, y0 + T - 2], fill=CROSS, width=1)
@@ -269,10 +275,10 @@ fmt = lambda x: format(int(x), ',')
 d.text((LEFT, 12), TITLE or 'Pocket Camera (Japan) Rev A: what is in each of the 64 banks (the ROM drawn as 2bpp tiles, code, data and padding alike)', fill=INK, font=F1)
 if NOTE1 is not None:
     d.text((LEFT, 56), NOTE1, fill=INK, font=F2); d.text((LEFT, 82), NOTE2 or '', fill=INK, font=F2)
-elif not DIFF: d.text((LEFT, 56), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, like the reachability map above. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes);', fill=INK, font=F2)
+elif not DIFF: d.text((LEFT, 56), 'Each bank = %d x %d tiles = 16,384 bytes,' % (BTW, BTH) + ' banks $00..$3F left to right, top to bottom, like the reachability map above. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes);', fill=INK, font=F2)
 if NOTE1 is None and not DIFF: d.text((LEFT, 82), 'the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that no run reached. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).', fill=INK, font=F2)
 elif NOTE1 is None:
-    d.text((LEFT, 56), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, like the Japanese map above. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and', fill=INK, font=F2)
+    d.text((LEFT, 56), 'Each bank = %d x %d tiles = 16,384 bytes,' % (BTW, BTH) + ' banks $00..$3F left to right, top to bottom, like the Japanese map above. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and', fill=INK, font=F2)
     d.text((LEFT, 82), 'the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that differ from the Japanese ROM (docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.', fill=INK, font=F2)
 def leg(x, y, i, w1=118, w2=70):
     k, tx, c = CATS[i]
@@ -311,16 +317,21 @@ else:
     d.text((XC, yy + 28), 'Padding is %s B; %s B of it lie in whole tiles (crossed). No emulator run of this ROM: the code colour is its static trace.' % (fmt(tot_cat[KEY['PAD']]), fmt(16 * n_padtile)), fill=INK, font=F4)
     d.text((XC, yy + 52), 'Per bank, in the title: the two largest kinds (padding excluded) and the bytes that differ from the Japanese ROM.', fill=INK, font=F4)
 for b in range(banks):
-    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY)
+    gx = LEFT + (b % BCOLS) * (PW + GX); gy = TOP + (b // BCOLS) * (PH + GY)
     d.text((gx, gy + 2), '$%02X' % b, fill=INK, font=F3B)
     pb = per_bank[b].copy(); pb[KEY['PAD']] = 0
     top2 = [i for i in np.argsort(-pb, kind='stable')[:2] if pb[i] >= 0x4000 // 100]
-    x = gx + 52
-    for i in top2:
-        d.rectangle([x, gy + 5, x + 12, gy + 18], fill=CATS[i][2], outline=(60, 60, 60))
-        tx_ = '%s %d %%' % (SHORT[CATS[i][0]], round(100 * pb[i] / 0x4000)); d.text((x + 17, gy + 3), tx_, fill=INK, font=F5); x += 17 + int(d.textlength(tx_, font=F5)) + 14
-    parts = [(n, int(mk_bank[b][m])) for m, n in enumerate(['never-run code', 'unused data', 'unread, identified'] if not DIFF else ['new / changed code', '', 'changed data']) if mk_bank[b][m]]
-    if parts: d.text((gx, gy + 28), '   '.join('%s %s B' % (n, fmt(v)) for n, v in parts), fill=INK, font=F5)
+    x = gx + 52; yk = gy + 3
+    for n_, i in enumerate(top2):
+        if BTW < 32 and n_ == 1: x = gx + 52; yk = gy + 23                  # a narrow bank: one kind per line
+        d.rectangle([x, yk + 2, x + 12, yk + 15], fill=CATS[i][2], outline=(60, 60, 60))
+        tx_ = '%s %d %%' % (SHORT[CATS[i][0]], round(100 * pb[i] / 0x4000)); d.text((x + 17, yk), tx_, fill=INK, font=F5); x += 17 + int(d.textlength(tx_, font=F5)) + 14
+    if BTW < 32:
+        parts = [(n, int(mk_bank[b][m])) for m, n in enumerate(['dead', 'unused', 'unread'] if not DIFF else ['new code', '', 'changed']) if mk_bank[b][m]]
+        if parts: d.text((gx, gy + 45), '  '.join('%s %s' % (n, fmt(v)) for n, v in parts), fill=INK, font=F5)
+    else:
+        parts = [(n, int(mk_bank[b][m])) for m, n in enumerate(['never-run code', 'unused data', 'unread, identified'] if not DIFF else ['new / changed code', '', 'changed data']) if mk_bank[b][m]]
+        if parts: d.text((gx, gy + 28), '   '.join('%s %s B' % (n, fmt(v)) for n, v in parts), fill=INK, font=F5)
 img.save(OUT, optimize=True)
 print(img.size, os.path.getsize(OUT), 'bytes')
 for i, (k, tx, c) in enumerate(CATS): print('%-6s %9s  %5s  %s' % (k, fmt(tot_cat[i]), pct(tot_cat[i]), tx[:60]))

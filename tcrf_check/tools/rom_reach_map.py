@@ -41,13 +41,16 @@ FAM = [[(222, 234, 255), (150, 180, 240), (66, 106, 205), (8, 28, 112)],        
        [(255, 251, 205), (250, 232, 80), (222, 186, 0), (104, 84, 0)]]          # really unused asset data (never on screen in an organic run): purple
 BG, INK = 4 * len(FAM), 4 * len(FAM) + 1
 pal = [c for f in FAM for c in f] + [(255, 255, 255), (0, 0, 0)]
-banks = N // 0x4000; per = pix.reshape(banks, 32, 32, 8, 8).transpose(0, 1, 3, 2, 4).reshape(banks, 256, 256)
+# banks of 16 x 64 tiles (the width of the ROM's own tile sheets), 16 per row: the format of the maps since 2026-10-27 (rom_layout_map.py)
+BTW, BTH, BCOLS = 16, 64, 16
+banks = N // 0x4000; per = pix.reshape(banks, BTH, BTW, 8, 8).transpose(0, 1, 3, 2, 4).reshape(banks, 8 * BTH, 8 * BTW)
 S = 2; GX, GY, PADX, PADY, TOP, LEFT = 12, 34, 12, 34, 350, 40
-W = LEFT + 8 * (256 * S + GX) + 10; H = TOP + 8 * (256 * S + GY) + 10
+PW, PH = 8 * BTW * S, 8 * BTH * S
+W = max(LEFT + BCOLS * (PW + GX) + 10, 4242); H = TOP + (64 // BCOLS) * (PH + GY) + 10
 canvas = np.full((H, W), BG, np.uint8)
 for b in range(banks):
-    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY) + (GY - 6)
-    canvas[gy:gy + 256 * S, gx:gx + 256 * S] = np.kron(per[b], np.ones((S, S), np.uint8))
+    gx = LEFT + (b % BCOLS) * (PW + GX); gy = TOP + (b // BCOLS) * (PH + GY) + (GY - 6)
+    canvas[gy:gy + PH, gx:gx + PW] = np.kron(per[b], np.ones((S, S), np.uint8))
 img = Image.fromarray(canvas, 'P'); flat = [v for c in pal for v in c] + [0] * (768 - 3 * len(pal)); img.putpalette(flat)
 d = ImageDraw.Draw(img)
 def font(sz):
@@ -62,7 +65,7 @@ r_bright = n(red) - r_pad - n(ident | (unused & C('U'))) - r_dead - r_lat - r_st
 assert int(np.bincount(cat, minlength=8).sum()) == N
 assert int((np.bincount(cat, minlength=8)).sum()) == N
 d.text((LEFT, 12), 'Pocket Camera (Japan) Rev A: the whole ROM drawn as 2bpp tiles (code, data, padding), 64 banks of 16 KB', fill=INK, font=f1)
-d.text((LEFT, 58), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom. Coverage run v8: 238 M frames, 57,582 of 60,449 traced instructions executed.', fill=INK, font=f2)
+d.text((LEFT, 58), 'Each bank = 16 x 64 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom. Coverage run v8: 238 M frames, 57,582 of 60,449 traced instructions executed.', fill=INK, font=f2)
 items = [(0, 'blue: executed or read, by joypad + save only  (%s B, %.1f %%)' % (format(r_org, ','), 100 * r_org / tot)),
          (1, 'light blue: executed or read only after a forced RAM / mode state  (%s B, %.1f %%)' % (format(r_forc, ','), 100 * r_forc / tot)),
          (2, 'RED: never executed nor read, not identified  (%s B, %.1f %%): %s B code that never ran + %s B data' % (format(r_bright, ','), 100 * r_bright / tot, format(r_code - r_dead, ','), format(r_bright - (r_code - r_dead), ','))),
@@ -83,7 +86,7 @@ d.text((LEFT, y + 2), note, fill=INK, font=f3)
 assert y + 2 + 22 < TOP, 'legend overlaps the first bank row'
 if widest > W - 10: print('WARNING: a legend line is cut off (%d px of %d)' % (widest, W))
 for b in range(banks):
-    gx = LEFT + (b % 8) * (256 * S + GX); gy = TOP + (b // 8) * (256 * S + GY)
+    gx = LEFT + (b % BCOLS) * (PW + GX); gy = TOP + (b // BCOLS) * (PH + GY)
     d.text((gx, gy + 1), '$%02X' % b, fill=INK, font=f2)
 img.save(OUT, optimize=True)
 if ASSETS != 'none' and os.path.exists(ASSETS):

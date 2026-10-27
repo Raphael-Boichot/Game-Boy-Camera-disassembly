@@ -40,7 +40,7 @@ for k, (folder, pre, title, md5) in ROMS.items():
            '--assets', 'none', '--witness', 'none', '--reach', 'none', '--unused', 'none', '--kinds', 'none', '--unclaimed',
            '--names', ','.join(names) or 'none', '--types', ','.join(types) or 'none', '--csv', csv_,
            '--title', '%s: what is in each of the 64 banks (the ROM drawn as 2bpp tiles)%s' % (title, '' if started else ': NOT STARTED YET'),
-           '--note1', 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, in the colours of the Japanese map. The shade inside a colour is the tile pixel (2 bits).',
+           '--note1', 'Each bank = 16 x 64 tiles = 16,384 bytes (16 tiles wide like the ROM\'s own tile sheets), banks $00..$3F left to right, top to bottom, in the colours of the Japanese map. The shade inside a colour is the tile pixel (2 bits).',
            '--note2', ('Grey-blue: bytes that no name, type row or trace of this ROM explains yet. ' if True else '') +
                       ('Nothing is analysed for this ROM so far: only the padding is shown; the picture fills in as the work lands (roms/%s/).' % folder if not started else
                        'Names and types: roms/%s/disasm/; the code colour is what the trace of this ROM proves.' % folder)]
