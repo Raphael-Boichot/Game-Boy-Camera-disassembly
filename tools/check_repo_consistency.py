@@ -8,6 +8,7 @@ usage: tools/check_repo_consistency.py [--rom pocketcamera_jp.gb] [--roundtrip] 
 What it checks (each line of the report is one check)
   names      sym_names_jp.csv: tags C / I / ?, duplicate names, a name that carries another address than its own (only `_Part<addr>` / `_Cont` may),
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
+  maps       the layout maps of the Gold, Hello Kitty and prototype ROMs exist and the README shows them; with --rom-gold / --rom-kitty / --rom-proto they are redrawn and compared
   port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
@@ -49,6 +50,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 ap = argparse.ArgumentParser()
 ap.add_argument('--rom'); ap.add_argument('--roundtrip', action='store_true'); ap.add_argument('--mgbdis', default='/home/claude/tc/mgbdis/mgbdis.py')
 ap.add_argument('--rgbds', default='/home/claude/tc/rgbds'); ap.add_argument('-q', action='store_true')
+ap.add_argument('--rom-gold', default=None); ap.add_argument('--rom-kitty', default=None); ap.add_argument('--rom-proto', default=None)
 ap.add_argument('--rom-us', default=None, help='the international ROM (gbcam_usa_eu.gb): rebuild roms/us_eu/gbcam_usa_eu.sym and round-trip it')
 A = ap.parse_args()
 os.chdir(ROOT)
@@ -219,6 +221,22 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
         shutil.rmtree(tmp, ignore_errors=True)
 else:
     bad('port', 'roms/us_eu/disasm/sym_names_us.csv missing')
+# ------------------------------------------------------------------ the layout maps of the ROMs not done by a pipeline (README, tools/status_maps.py)
+_sm = [(k, f, p) for k, f, p in (('gold', 'gold', 'gold'), ('kitty', 'hello_kitty', 'kitty'), ('proto', 'prototype_debagame', 'proto'))]
+for k, folder, pre in _sm:
+    png = 'roms/%s/%s_rom_layout_map.png' % (folder, pre)
+    if not os.path.exists(png): bad('maps', '%s missing (tools/status_maps.py)' % png); continue
+    if ('roms/%s/%s_rom_layout_map.png' % (folder, pre)) not in README: bad('maps', 'README does not show %s' % png)
+    rom_ = getattr(A, 'rom_' + k)
+    if not rom_: continue
+    tmp_ = tempfile.mkdtemp(prefix='maps_')
+    r_ = subprocess.run([sys.executable, 'tools/status_maps.py', '--' + k, rom_, '--out-dir', tmp_], capture_output=True, text=True)
+    if r_.returncode: bad('maps', 'tools/status_maps.py failed for %s: %s' % (k, (r_.stderr or r_.stdout)[-300:]))
+    elif open(os.path.join(tmp_, '%s_rom_layout_map.png' % pre), 'rb').read() != open(png, 'rb').read() or \
+         open(os.path.join(tmp_, 'layout_by_bank_%s.csv' % pre), 'rb').read() != open('roms/%s/assets/layout_by_bank_%s.csv' % (folder, pre), 'rb').read():
+        bad('maps', '%s is not what tools/status_maps.py draws today: rerun it' % png)
+    else: ok('maps', '%s fresh' % png)
+    shutil.rmtree(tmp_, ignore_errors=True)
 # ------------------------------------------------------------------ sym + types (needs the ROM)
 LINES = BLOCKS = None; BYTES = {}
 if A.rom:

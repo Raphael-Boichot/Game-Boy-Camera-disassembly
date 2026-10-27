@@ -30,6 +30,19 @@ NAMES = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv'); TY
 # another build (roms/us_eu/us_rom_layout_map.png): its name layers and type files (comma lists, later wins), its title, and --diff = the
 # npz of tools/port_diff_bytes.py: the outline then marks what differs from the Japanese ROM instead of what no run reached (no run of that build)
 NAMES = opt('--names', NAMES).split(','); TYPES = opt('--types', TYPES).split(','); TITLE = opt('--title', None); DIFF = opt('--diff', None)
+# a ROM whose work has not started, or has only started (roms/<rom>/<prefix>_rom_layout_map.png): --unclaimed colours every byte that no
+# label owns and no trace runs as NOT ANALYSED YET (instead of 'tables'), --outline none draws no outline, --note1 / --note2 replace the
+# two lines under the title; '--names none', '--types none' and '--map none' (every byte class R: no trace yet) are allowed
+UNCLAIMED = '--unclaimed' in a
+if UNCLAIMED: a.remove('--unclaimed')
+OUTLINE = opt('--outline', 'diff' if DIFF else 'reach'); NOTE1 = opt('--note1', None); NOTE2 = opt('--note2', None)
+NAMES = [x for x in NAMES if x != 'none']; TYPES = [x for x in TYPES if x != 'none']
+if MAP == 'none':
+    import tempfile
+    MAP = os.path.join(tempfile.mkdtemp(prefix='layout_'), 'rom_map.csv')
+    with open(MAP, 'w') as _f:
+        _f.write('bank,start,length,class\n')
+        for _b in range(os.path.getsize(ROM) // 0x4000): _f.write('%02x,%04x,16384,R\n' % (_b, 0 if _b == 0 else 0x4000))
 
 g = RC.build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO)
 N, cls, cat, pad = g['N'], g['cls'], g['cat'], g['pad']
@@ -60,8 +73,10 @@ CATS = [
  ('UNC',   'UNCERTAIN: bytes not identified (kind or record format not settled)',                          (255, 0, 200)),
  ('PAD',   'Padding: runs of 00 / FF between the assets (not typed as data)',                                                           (214, 214, 214)),
 ]
-if DIFF:
+if DIFF or UNCLAIMED:
     _io = [k for k, _, _ in CATS].index('OTHER'); CATS[_io] = ('OTHER', 'Code with no function group', CATS[_io][2])
+if UNCLAIMED:
+    CATS.insert(len(CATS) - 1, ('NONE', 'NOT ANALYSED YET: no label, type row or trace says what these bytes are', (96, 112, 140)))
 KEY = {k: i for i, (k, _, _) in enumerate(CATS)}
 CODE_KEYS = [k for k, _, _ in CATS[:11]]
 
@@ -118,8 +133,8 @@ for _fn in NAMES:
         if r['name'] in ('-', ''): _lab.pop(_k, None)
         else: _lab[_k] = r
 labels = sorted(_lab.items(), key=lambda x: x[0])
-loff = np.array([o for o, _ in labels]); L = len(labels)
-l_code = np.zeros(L, np.uint8); l_data = np.zeros(L, np.uint8)
+loff = np.array([o for o, _ in labels] or [-1], np.int64); L = len(labels)
+l_code = np.zeros(max(L, 1), np.uint8); l_data = np.zeros(max(L, 1), np.uint8)
 for i, (o, r) in enumerate(labels):
     l_code[i] = KEY[code_group(r['name'])]
     k = data_kind(r['name'])
@@ -130,7 +145,7 @@ ok = (idx >= 0) & ((loff[np.maximum(idx, 0)] >> 14) == (np.arange(N) >> 14))    
 idx = np.where(ok, idx, 0)
 is_code = np.isin(cls, np.frombuffer(b'CFN', np.uint8))
 kind = np.where(is_code, l_code[idx], l_data[idx]).astype(np.uint8)
-kind[~ok & is_code] = KEY['OTHER']; kind[~ok & ~is_code] = KEY['TBL']
+kind[~ok & is_code] = KEY['OTHER']; kind[~ok & ~is_code] = KEY['NONE' if UNCLAIMED else 'TBL']
 kind[cls == ord('T')] = KEY['TBL']                                                      # inline tables of the code
 kind[cat == 3] = KEY['PAD']                                                              # untouched padding (the muted red of the status map); the Bank*_Padding / ZeroFill labels are padding too, read or not
 # fill between the assets: bytes that no typed range of roms/jp_rev_a/disasm/sym_types_jp.csv covers, that are not code and lie in a run of >= 16 x 00 / FF (a forced run may have read them)
@@ -158,7 +173,8 @@ MARKS = [('code that never ran (proven dead, evidence I; README 16.15, 16.21)', 
          ('untouched padding', (176, 176, 176))]
 mark = np.full(N, 255, np.uint8)
 mark[cat == 3] = 3; mark[cat == 4] = 2; mark[(cat == 7) | ((cat == 2) & ~is_code)] = 1; mark[(cat == 6) | ((cat == 2) & is_code)] = 0
-if DIFF:                                             # outline = difference from the Japanese ROM: 0 code new or changed (black), 2 data that differs (blue)
+if OUTLINE == 'none': mark = np.full(N, 255, np.uint8)
+elif DIFF:                                             # outline = difference from the Japanese ROM: 0 code new or changed (black), 2 data that differs (blue)
     _d = np.load(DIFF)['diff']; mark = np.full(N, 255, np.uint8); mark[_d == 1] = 0; mark[(_d == 2) & (kind != KEY['PAD'])] = 2
 
 big_unused = {}
@@ -187,7 +203,7 @@ def font(sz, bold=False):
 F1, F2, F3, F3B, F4, F4B, F5 = font(34, True), font(21), font(19), font(20, True), font(16), font(16, True), font(15)
 SHORT = {'SYS': 'system code', 'CAM': 'camera code', 'ALBUM': 'album code', 'EDIT': 'editor code', 'LINK': 'link code', 'PRINT': 'print code', 'GAME': 'game code', 'DJ': 'D.J. code',
          'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
-         'OAM': 'sprite layouts', 'SOUND': 'sound data', 'TBL': 'tables / text', 'UNC': 'UNCERTAIN', 'PAD': 'padding'}
+         'OAM': 'sprite layouts', 'SOUND': 'sound data', 'TBL': 'tables / text', 'UNC': 'UNCERTAIN', 'PAD': 'padding', 'NONE': 'not analysed'}
 def ramp(c):                      # 4 shades of one colour: 0 = lightest ... 3 = darkest (the 2 bits of a tile pixel)
     mix = lambda t, k: tuple(int(round(255 * (1 - k) + v * k)) if t == 'w' else int(round(v * k)) for v in c)
     return [mix('w', 0.14), mix('w', 0.55), tuple(c), mix('b', 0.38)]
@@ -251,11 +267,11 @@ for b in range(banks):
 pct = lambda x: '%.1f %%' % (100 * x / N)
 fmt = lambda x: format(int(x), ',')
 d.text((LEFT, 12), TITLE or 'Pocket Camera (Japan) Rev A: what is in each of the 64 banks (the ROM drawn as 2bpp tiles, code, data and padding alike)', fill=INK, font=F1)
-if DIFF:
-    d.rectangle([LEFT, 54, W - 10, 110], fill=BG)
-if not DIFF: d.text((LEFT, 56), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, like the reachability map above. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes);', fill=INK, font=F2)
-if not DIFF: d.text((LEFT, 82), 'the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that no run reached. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).', fill=INK, font=F2)
-else:
+if NOTE1 is not None:
+    d.text((LEFT, 56), NOTE1, fill=INK, font=F2); d.text((LEFT, 82), NOTE2 or '', fill=INK, font=F2)
+elif not DIFF: d.text((LEFT, 56), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, like the reachability map above. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes);', fill=INK, font=F2)
+if NOTE1 is None and not DIFF: d.text((LEFT, 82), 'the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that no run reached. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).', fill=INK, font=F2)
+elif NOTE1 is None:
     d.text((LEFT, 56), 'Each bank = 32 x 32 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, like the Japanese map above. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and', fill=INK, font=F2)
     d.text((LEFT, 82), 'the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that differ from the Japanese ROM (docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.', fill=INK, font=F2)
 def leg(x, y, i, w1=118, w2=70):
@@ -269,9 +285,10 @@ d.text((XA, LEG_TOP), 'CODE (traced instructions), by the function of the routin
 d.text((XB, LEG_TOP), 'DATA, by what the bytes are (identified even when no code calls them)', fill=INK, font=F3B)
 for i in range(11): leg(XA, LEG_TOP + 32 + i * 27, i)
 for j in range(11, len(CATS)): leg(XB, LEG_TOP + 32 + (j - 11) * 27, j)
-d.text((XC, LEG_TOP), 'OUTLINE: tiles that no run reached (16-byte tiles)' if not DIFF else 'OUTLINE: tiles that differ from the Japanese ROM (16-byte tiles)', fill=INK, font=F3B)
+d.text((XC, LEG_TOP), {'reach': 'OUTLINE: tiles that no run reached (16-byte tiles)', 'diff': 'OUTLINE: tiles that differ from the Japanese ROM (16-byte tiles)',
+                       'none': 'OUTLINE: none yet (no run and no comparison for this ROM)'}[OUTLINE], fill=INK, font=F3B)
 yy = LEG_TOP + 32
-for m, col in (((0, INK), (1, RED), (2, BLUE)) if not DIFF else ((0, INK), (2, BLUE))):
+for m, col in {'reach': ((0, INK), (1, RED), (2, BLUE)), 'diff': ((0, INK), (2, BLUE)), 'none': ()}[OUTLINE]:
     d.rectangle([XC, yy + 1, XC + 34, yy + 18], outline=col, width=3)
     s = fmt(mk_tot[m]) + ' B'; d.text((XC + 46 + 110 - d.textlength(s, font=F3), yy - 1), s, fill=INK, font=F3)
     d.text((XC + 46 + 130, yy - 1), (['never-run code, proven dead (evidence I; README 16.15, 16.21)', 'data that no run shows or reads: the REALLY unused assets (I; README 16.24)',
@@ -281,7 +298,11 @@ for m, col in (((0, INK), (1, RED), (2, BLUE)) if not DIFF else ((0, INK), (2, B
 d.rectangle([XC, yy + 1, XC + 34, yy + 18], fill=FAM[KEY['PAD']][1]); d.line([XC + 4, yy + 3, XC + 30, yy + 16], fill=CROSS, width=2); d.line([XC + 30, yy + 3, XC + 4, yy + 16], fill=CROSS, width=2)
 s = fmt(n_padtile) + ' tiles'; d.text((XC + 46 + 110 - d.textlength(s, font=F3), yy - 1), s, fill=INK, font=F3)
 d.text((XC + 46 + 130, yy - 1), 'CROSS: a pure padding tile (all 16 bytes are padding)', fill=INK, font=F3); yy += 27
-if not DIFF:
+if OUTLINE == 'none':
+    d.text((XC, yy + 4), 'Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.', fill=INK, font=F4)
+    d.text((XC, yy + 28), 'Padding is %s B (runs of 16+ x 00 / FF); %s B of it lie in whole tiles (crossed).' % (fmt(tot_cat[KEY['PAD']]), fmt(16 * n_padtile)), fill=INK, font=F4)
+    d.text((XC, yy + 52), 'Per bank, in the title: the two largest kinds (padding excluded).', fill=INK, font=F4)
+elif not DIFF:
     d.text((XC, yy + 4), 'Not outlined: everything that at least one run executed, read or showed, and padding.', fill=INK, font=F4)
     d.text((XC, yy + 28), 'Padding is %s B, of which %s B no run touched; %s B of it lie in whole tiles (crossed).' % (fmt(tot_cat[KEY['PAD']]), fmt(mk_tot[3]), fmt(16 * n_padtile)), fill=INK, font=F4)
     d.text((XC, yy + 52), 'Per bank, in the title: the two largest kinds (padding excluded) and the unreachable bytes.', fill=INK, font=F4)

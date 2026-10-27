@@ -4,9 +4,29 @@ Disassembly of the Game Boy Camera / Pocket Camera ROMs. The Japanese Rev A ROM 
 
 The work is produced by AI (Claude), from reading the code and running it in emulators (BGB and the project's own core), with the owner's checks and answers; findings tagged **C** were confirmed in code, in BGB or by the owner, **I** are inferred, **?** are open.
 
+One map per ROM, in the same colours: what each byte is (code by function, data by kind). Grey-blue is what is not analysed yet: it gives way to the colours as the work on a ROM lands.
+
+**Pocket Camera (Japan) (Rev A)**: outlines = what no emulator run reached.
+
 ![What each byte of the Japanese ROM is: code by function, data by kind](roms/jp_rev_a/jp_rom_layout_map.png)
 
+**Game Boy Camera (USA, Europe)**: ported from the Japanese tables; outlines = what differs from the Japanese ROM.
+
 ![What each byte of the international ROM is, and what differs from the Japanese ROM](roms/us_eu/us_rom_layout_map.png)
+
+**Game Boy Camera Gold (USA)**: not started.
+
+![What each byte of the Gold ROM is (not started yet)](roms/gold/gold_rom_layout_map.png)
+
+**Pocket Camera (Hello Kitty)** (prototype): not started.
+
+![What each byte of the Hello Kitty ROM is (not started yet)](roms/hello_kitty/kitty_rom_layout_map.png)
+
+**Pocket Camera Prototype (Japan) ("DEBAGAME")**: not started.
+
+![What each byte of the early prototype ROM is (not started yet)](roms/prototype_debagame/proto_rom_layout_map.png)
+
+The three last maps are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds: rerun it after any work on these ROMs.
 
 ## ROMs
 

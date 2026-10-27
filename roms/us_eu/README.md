@@ -2,6 +2,8 @@
 
 MD5 `42d2f65e2549be9d1d126a6828b5d1c1`. The international ROM: the same modes and states as the Japanese one in a different build (44.5 % of the bytes differ, mostly blocks moved by a fixed offset); the behavioural comparison with the Japanese ROM is in [`docs/16_menus_international_rom_bgb.md`](../../docs/16_menus_international_rom_bgb.md).
 
+![What each byte of the international ROM is, and what differs from the Japanese ROM](us_rom_layout_map.png)
+
 The symbol file is **ported from the Japanese tables** (method, counts and levels: [docs §1.5](../../docs/01_toolchain_and_status.md#15-the-international-rom-symbol-file-ported-from-the-japanese-one)):
 
 | File | What it is |
