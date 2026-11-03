@@ -63,6 +63,14 @@ def fmt(n): return '{:,}'.format(n)
 def ok(name, msg=''):
     if not A.q: print('ok    %-10s %s' % (name, msg))
 def bad(name, msg): FAIL.append('%s: %s' % (name, msg)); print('FAIL  %-10s %s' % (name, msg))
+def same_png(a, b):
+    """True when two pictures hold the same pixels. Compared decoded, not byte for byte: the PNG bytes change with the zlib / Pillow /
+    matplotlib versions of the machine that drew them (2026-11-03: a fresh container redrew every map pixel-identical, with other bytes)."""
+    from PIL import Image
+    import numpy as np
+    if not (os.path.exists(a) and os.path.exists(b)): return False
+    x, y = Image.open(a), Image.open(b)
+    return x.size == y.size and np.array_equal(np.asarray(x.convert('RGBA')), np.asarray(y.convert('RGBA')))
 def warn(name, msg): WARN.append('%s: %s' % (name, msg)); print('warn  %-10s %s' % (name, msg))
 def skip(name, why): SKIP.append(name); print('skip  %-10s %s' % (name, why))
 
@@ -200,7 +208,7 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
                                  '--types', D_ + 'sym_types_us.csv,' + D_ + 'sym_types_us_loaders.csv,' + D_ + 'sym_types_us_reads.csv,' + D_ + 'sym_types_us_hand.csv', '--diff', US + 'port/diff_us.npz', '--cov', US + 'port/cov_us.npz', '--csv', os.path.join(tmp, 'us_layout.csv'),
                                  '--outline', 'none', '--title', 'Game Boy Camera (USA, Europe): what is in each of the 64 banks (the ROM drawn as 2bpp tiles)'], capture_output=True, text=True)
             if rr.returncode: bad('port', 'rom_layout_map.py failed on the international ROM: %s' % (rr.stderr or rr.stdout)[-300:])
-            elif open(pu, 'rb').read() != open(US + 'us_rom_layout_map.png', 'rb').read() or open(os.path.join(tmp, 'us_layout.csv'), 'rb').read() != open(US + 'assets/layout_by_bank_us.csv', 'rb').read():
+            elif not same_png(pu, US + 'us_rom_layout_map.png') or open(os.path.join(tmp, 'us_layout.csv'), 'rb').read() != open(US + 'assets/layout_by_bank_us.csv', 'rb').read():
                 bad('port', 'roms/us_eu/us_rom_layout_map.png or assets/layout_by_bank_us.csv is not what rom_layout_map.py draws: rerun tools/port_build.py')
             else: ok('port', 'roms/us_eu/us_rom_layout_map.png fresh')
             # L5: roms/us_eu/src/ is what tools/make_source.py --tree us_eu writes today, and it builds the ROM byte-exact
@@ -258,7 +266,7 @@ for k, folder, pre in _sm:
     tmp_ = tempfile.mkdtemp(prefix='maps_')
     r_ = subprocess.run([sys.executable, 'tools/status_maps.py', '--' + k, rom_, '--out-dir', tmp_], capture_output=True, text=True)
     if r_.returncode: bad('maps', 'tools/status_maps.py failed for %s: %s' % (k, (r_.stderr or r_.stdout)[-300:]))
-    elif open(os.path.join(tmp_, '%s_rom_layout_map.png' % pre), 'rb').read() != open(png, 'rb').read() or \
+    elif not same_png(os.path.join(tmp_, '%s_rom_layout_map.png' % pre), png) or \
          open(os.path.join(tmp_, 'layout_by_bank_%s.csv' % pre), 'rb').read() != open('roms/%s/assets/layout_by_bank_%s.csv' % (folder, pre), 'rb').read():
         bad('maps', '%s is not what tools/status_maps.py draws today: rerun it' % png)
     else: ok('maps', '%s fresh' % png)
@@ -418,7 +426,7 @@ if A.rom:
         n += quoted('yellow', r'(?:The yellow layer is|\d,\d{3} B of them are yellow|yellow bytes of the map at the top of this README:) ?([\d,]+) B', lambda m: ((YB,), (num(m.group(1)),)), docs=('README.md',))
         n += quoted('yellow', r'yellow takes ([\d,]+) B from orange, ([\d,]+) B from blue and ([\d,]+) B from light blue', lambda m: (tuple(int(m2.group(i)) for i in (1, 2, 3)), tuple(num(m.group(i)) for i in (1, 2, 3))), docs=('README.md',), need=('README.md',))
         if cmp_png := os.path.join(ROOT, 'roms', 'jp_rev_a', 'jp_rom_reachability_map.png'):
-            if open(cmp_png, 'rb').read() != open(os.path.join(tmp, 'x.png'), 'rb').read(): bad('yellow', 'jp_rom_reachability_map.png is stale: run tcrf_check/tools/rom_reach_map.py (and rom_layout_map.py)')
+            if not same_png(cmp_png, os.path.join(tmp, 'x.png')): bad('yellow', 'jp_rom_reachability_map.png is stale: run tcrf_check/tools/rom_reach_map.py (and rom_layout_map.py)')
     shutil.rmtree(tmp, ignore_errors=True)
 else:
     skip('yellow', 'no --rom: yellow bytes and the reachability picture not checked')
@@ -428,7 +436,7 @@ if A.rom:
     r = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', os.path.join(tmp, 'l.png'), '--rom', A.rom, '--csv', os.path.join(tmp, 'l.csv')], capture_output=True, text=True)
     if r.returncode: bad('layout', 'rom_layout_map.py failed: %s' % (r.stderr or r.stdout).strip()[-200:])
     else:
-        if open(os.path.join(tmp, 'l.png'), 'rb').read() != open(P('roms/jp_rev_a/jp_rom_layout_map.png'), 'rb').read(): bad('layout', 'jp_rom_layout_map.png is stale: run tcrf_check/tools/rom_layout_map.py OUT.png --rom ROM')
+        if not same_png(os.path.join(tmp, 'l.png'), P('roms/jp_rev_a/jp_rom_layout_map.png')): bad('layout', 'jp_rom_layout_map.png is stale: run tcrf_check/tools/rom_layout_map.py OUT.png --rom ROM')
         if open(os.path.join(tmp, 'l.csv'), 'rb').read() != open(P('roms/jp_rev_a/assets/layout_by_bank_jp.csv'), 'rb').read(): bad('layout', 'roms/jp_rev_a/assets/layout_by_bank_jp.csv is stale: run rom_layout_map.py --csv roms/jp_rev_a/assets/layout_by_bank_jp.csv')
         K = {m.group(1): num(m.group(2)) for m in re.finditer(r'^([A-Z_]+)\s+([\d,]+)\s+[\d.]+ %', r.stdout, re.M)}
         tiles = K['T_UI'] + K['T_STP'] + K['T_FRM'] + K['T_PHO']
@@ -515,7 +523,7 @@ if A.rom:
     r = subprocess.run([sys.executable, 'tools/bank_pics.py', A.rom, 'roms/jp_rev_a/disasm/sym_names_jp.csv', tmp] + bl, capture_output=True, text=True)
     if r.returncode: bad('bankpics', 'bank_pics.py failed: %s' % (r.stderr or r.stdout).strip()[-200:])
     else:
-        old = [b for b in bl if open(os.path.join(tmp, 'bank_%s.png' % b), 'rb').read() != open(os.path.join(bd, 'bank_%s.png' % b), 'rb').read()]
+        old = [b for b in bl if not same_png(os.path.join(tmp, 'bank_%s.png' % b), os.path.join(bd, 'bank_%s.png' % b))]
         for b in old: bad('bankpics', 'roms/jp_rev_a/disasm/sym_unconclusive_banks/bank_%s.png is stale: run tools/bank_pics.py ROM roms/jp_rev_a/disasm/sym_names_jp.csv roms/jp_rev_a/disasm/sym_unconclusive_banks %s' % (b, ' '.join(bl)))
         if not old: ok('bankpics', '%d bank pictures fresh' % len(bl))
     shutil.rmtree(tmp, ignore_errors=True)

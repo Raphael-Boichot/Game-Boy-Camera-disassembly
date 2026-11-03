@@ -34,17 +34,24 @@ ln -sf "$ROMDIR/pocketcamera_jp.gb" "$ROMDIR/jp.gb"; ln -sf "$ROMDIR/gbcam_usa_e
 ln -sf "$ROMDIR/pocketcamera_kitty.gb" "$ROMDIR/kitty.gb"; ln -sf "$ROMDIR/pocketcamera_proto.gb" "$ROMDIR/proto.gb"
 # 3. Wine + BGB (screenshots, sound, watchpoint logs): apt package wine64 from the Ubuntu archive (reachable through the proxy)
 if [ "${1:-}" != "--no-wine" ]; then
-  if ! command -v wine >/dev/null; then
-    (apt-get update -q >/dev/null 2>&1; DEBIAN_FRONTEND=noninteractive apt-get install -y -q wine64 xvfb >/dev/null 2>&1) || echo "apt install failed"
-    [ -x /usr/bin/wine ] || { [ -x /usr/bin/wine64 ] && ln -sf /usr/bin/wine64 /usr/local/bin/wine; }
+  # bgb.exe is a 32-bit program (PE32): wine64 alone cannot start it (syswow64\ntdll.dll / kernel32.dll c0000135), so wine32:i386 is installed too (2026-11-03)
+  if ! command -v wine >/dev/null || ! dpkg -s wine32:i386 >/dev/null 2>&1; then
+    (dpkg --add-architecture i386; apt-get update -q >/dev/null 2>&1; DEBIAN_FRONTEND=noninteractive apt-get install -y -q wine64 wine32:i386 xvfb >/dev/null 2>&1) || echo "apt install failed"
   fi
   command -v wine >/dev/null && echo "wine: $(wine --version 2>/dev/null)" || echo "WINE MISSING"
+  # the harness (tcrf_check/tools/bgb_run.py) runs BGB in WINEPREFIX=/root/wineprefix; a prefix made before wine32 was installed has no syswow64 and must be remade
+  export WINEPREFIX=/root/wineprefix WINEDEBUG=-all
+  if [ -d "$WINEPREFIX" ] && [ ! -d "$WINEPREFIX/drive_c/windows/syswow64" ]; then rm -rf "$WINEPREFIX"; fi
+  [ -d "$WINEPREFIX/drive_c/windows/syswow64" ] || timeout 120 xvfb-run -a wineboot -i >/dev/null 2>&1
   mkdir -p "$BGB_DIR"; [ -f "$BGB_DIR/bgb.exe" ] || cp "$ROMDIR/bgb.exe" "$BGB_DIR/bgb.exe"
   [ -f "$BGB_DIR/bgb.ini" ] || { (cd "$BGB_DIR" && unzip -q -o -j "$REPO/source/Source_material/Source_material.zip" '*bgb.ini' 2>/dev/null) || true; }
   # the owner's ini has SystemMode=3 (automatic = Super Game Boy for this ROM): the harness expects plain Game Boy (0) unless a tool passes -setting SystemMode=N
   [ -f "$BGB_DIR/bgb.ini" ] && sed -i 's/^SystemMode=.*/SystemMode=0/' "$BGB_DIR/bgb.ini"
   [ -f "$BGB_DIR/bgb.ini" ] && echo "bgb: $BGB_DIR (bgb.exe md5 $(md5sum "$BGB_DIR/bgb.exe" | cut -c1-32))" || echo "BGB INI MISSING"
-  export WINEDEBUG=-all; timeout 60 xvfb-run -a wine "$BGB_DIR/bgb.exe" -hf -nowarn -nowriteini -rom "$ROMDIR/pocketcamera_jp.gb" -screenonexit /tmp/bgb_smoke.bmp -demoplay /dev/null >/dev/null 2>&1
-  [ -f /tmp/bgb_smoke.bmp ] && echo "bgb smoke run: ok" || echo "bgb smoke run: no screenshot (see SETUP.md, BGB section)"
+  # smoke test through the harness itself (a real demo file; -demoplay /dev/null gives no screenshot)
+  sm=$(mktemp -d); head -c 131072 /dev/zero > "$sm/zero.sav"; rm -f /tmp/bgb_smoke.bmp
+  (cd "$REPO" && BGB_DIR="$BGB_DIR" timeout 120 python3 tcrf_check/tools/bgb_run.py "$ROMDIR/pocketcamera_jp.gb" "$sm/zero.sav" "$sm/smoke" '-:1:0' >/dev/null 2>&1)
+  [ -f "$sm/smoke.bmp" ] && cp "$sm/smoke.bmp" /tmp/bgb_smoke.bmp
+  [ -f /tmp/bgb_smoke.bmp ] && echo "bgb smoke run: ok" || echo "bgb smoke run: no screenshot (check wine32:i386 and WINEPREFIX=/root/wineprefix, SETUP.md table)"
 fi
 echo "PATH hint: export PATH=$TC/rgbds:\$PATH BGB_DIR=$BGB_DIR WINEDEBUG=-all"
