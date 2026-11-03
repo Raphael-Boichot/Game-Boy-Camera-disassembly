@@ -1,0 +1,11 @@
+start 16:01 D581 0
+{'key': 'Right', 'state': '16:05', 'D5EB': 0, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': False, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+{'key': 'B', 'state': '16:02', 'D5EB': 0, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': False, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+{'key': 'Down', 'state': '16:02', 'D5EB': 0, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': False, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+{'key': 'A', 'state': '16:06', 'D5EB': 0, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': False, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+{'key': 'Down', 'state': '16:06', 'D5EB': 1, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': False, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+{'key': 'Select+Down', 'state': '16:06', 'D5EB': 2, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': False, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+{'key': 'A', 'state': '16:06', 'D5EB': 2, 'D581': 0, 'D800': 0, 'hits': {'06:48CB': True, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+after path: {'state': '16:06', 'D800': 0, 'D581': 0, 'C000_nonzero': 3224, 'hits': {'06:48CB': True, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}}
+final hits: {'06:48CB': True, '06:48E6': False, '06:48F6': False, '07:6A58': False, '02:4C37': False, '02:5078': False}
+executed beyond the replay: 14576 bytes in 265 ranges -> /home/claude/w/clone/Game-Boy-Camera-disassembly/tcrf_check/assets/easy_wins/gameface_edit/control_no_face/exec_ranges.csv

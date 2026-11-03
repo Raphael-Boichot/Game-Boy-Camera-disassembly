@@ -1,0 +1,11 @@
+34 state tables; 374 state slots; 10 never executed:
+  bank 04 state 10  04:4D1B Bank004_State10
+  bank 06 state 18  06:5403 
+  bank 06 state 19  06:540E 
+  bank 07 state  9  07:45FD Bank007_State09
+  bank 07 state 15  07:486D Bank007_State15
+  bank 07 state 17  07:48A1 Bank007_State17
+  bank 09 state  9  09:6435 
+  bank 09 state 11  09:6441 
+  bank 09 state 12  09:6642 
+  bank 09 state 13  09:66BB 

@@ -1,0 +1,4 @@
+loop 1: 120 reads of 2 bytes (8 pixels each), 60 at an odd address; tile x 16..119, y 24..103   (sum doubled afterwards)
+loop 2:  48 reads of 2 bytes (8 pixels each), 0 at an odd address; tile x 32..95, y 40..87
+sum = 2 x 1758 + 895 = 4411 ($113B)
+last sum computed by the ROM in BGB: 4411 ($113B) of 237 dispatches -> equal

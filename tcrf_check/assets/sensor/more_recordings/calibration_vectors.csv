@@ -1,0 +1,9 @@
+save,copy,tolerances,vector,checksums,checksums_valid
+Calibration_procedure.sav,bank 2,AA AA,AA AA AA AA AA AA AA AA AA AA AA AA,AA AA,no
+Calibration_procedure.sav,bank 8,AA AA,AA AA AA AA AA AA AA AA AA AA AA AA,AA AA,no
+Calibrated_Camera.sav,bank 2,AA AA,7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A,D0 10,yes
+Calibrated_Camera.sav,bank 8,AA AA,7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A,D0 10,yes
+00_save.sav,bank 2,AA AA,00 00 00 00 00 00 00 00 00 00 00 00,00 00,no
+00_save.sav,bank 8,AA AA,00 00 00 00 00 00 00 00 00 00 00 00,00 00,no
+FF_save.sav,bank 2,AA AA,FF FF FF FF FF FF FF FF FF FF FF FF,FF FF,no
+FF_save.sav,bank 8,AA AA,FF FF FF FF FF FF FF FF FF FF FF FF,FF FF,no

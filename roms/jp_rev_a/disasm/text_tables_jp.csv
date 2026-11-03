@@ -1,0 +1,6 @@
+label,layout,end,evidence
+Kb_DakutenMapTbl,cnc,ff,"records {first char, count, voiced first char} read by Kb_ApplyMarkTable for key $30: か x15 -> が, は x5 -> ば, ウ x1 -> ヴ, カ x15 -> ガ, ハ x5 -> バ (code read; the codes follow roms/jp_rev_a/disasm/charset_jp.csv)"
+Kb_HandakutenMapTbl,cnc,ff,"records {first char, count, semi-voiced first char} read by Kb_ApplyMarkTable for key $31: は x5 -> ぱ, ハ x5 -> パ"
+Kb_GlyphListA,ns,00,"keyboard page 1 (hiragana): pairs {n, slot} read by Kb_LoadGlyphList (n glyphs from the slot to VRAM; $80 | n = n copies of the slot) and Kb_FindCharInList (key index -> code = slot + 1); slot $FF is the blank key (code 0); written as `db n, 'char' - 1` (slot = code - 1, code read)"
+Kb_GlyphListB,ns,00,"keyboard page 2 (katakana), the same layout as Kb_GlyphListA (code read)"
+Kb_GlyphListC,ns,00,"keyboard page 3 (Latin: A-Z, a-z, _ ' , . ! ? and the heart), the same layout as Kb_GlyphListA (code read)"

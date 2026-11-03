@@ -1,0 +1,3 @@
+corpus entry 2422 save unl_CE10229233 combo 100 actions 12
+unlocking save  (unl_CE10229233): BGB mode:state 08:17   best_run $DAA6/$DAA7 = 99 99 (stored, nine's complement)
+ordinary save   (CE10229233): BGB mode:state 08:01   best_run $DAA6/$DAA7 = 93 77 (stored, nine's complement)

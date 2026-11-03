@@ -1,0 +1,21 @@
+save,vector,checksum_ok,echo_equal,rom_uses,probe_gain,band0_ref,band1_ref,band2_ref,band3_ref,band4_ref,step_0_1,step_1_2,step_2_3,step_3_4
+ROM default vector,7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A,True,True,reference,0,7E,7E,7D,7D,6A,+0,-1,+0,-19
+ROM default vector,7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A,True,True,reference,1,7F,7D,7D,7D,6A,-2,+0,+0,-19
+ROM default vector,7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A,True,True,reference,2,7F,7E,7E,7D,6A,-1,+0,-1,-19
+ROM default vector,7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A,True,True,reference,3,7F,7E,7E,7D,6A,-1,+0,-1,-19
+camera 1 (§18.13),7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A,True,True,reference,0,7E,7D,7C,79,6A,-1,-1,-3,-15
+camera 1 (§18.13),7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A,True,True,reference,1,7D,7C,7C,79,6A,-1,+0,-3,-15
+camera 1 (§18.13),7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A,True,True,reference,2,7D,7D,7B,79,6A,+0,-2,-2,-15
+camera 1 (§18.13),7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A,True,True,reference,3,80,7B,7B,79,6A,-5,+0,-2,-15
+CE10245109 dark,7E 7E 7E 7E 79 79 78 76 73 70 67 68,True,True,primary used,0,7E,79,73,67,68,-5,-6,-12,+1
+CE10245109 dark,7E 7E 7E 7E 79 79 78 76 73 70 67 68,True,True,primary used,1,7E,79,73,67,68,-5,-6,-12,+1
+CE10245109 dark,7E 7E 7E 7E 79 79 78 76 73 70 67 68,True,True,primary used,2,7E,78,70,67,68,-6,-8,-9,+1
+CE10245109 dark,7E 7E 7E 7E 79 79 78 76 73 70 67 68,True,True,primary used,3,7E,76,70,67,68,-8,-6,-9,+1
+CE10245109 intense light,27 2C 4E 5B 27 33 5D 6D 80 9A BD B3,True,True,primary used,0,27,27,80,BD,B3,+0,+89,+61,-10
+CE10245109 intense light,27 2C 4E 5B 27 33 5D 6D 80 9A BD B3,True,True,primary used,1,2C,33,80,BD,B3,+7,+77,+61,-10
+CE10245109 intense light,27 2C 4E 5B 27 33 5D 6D 80 9A BD B3,True,True,primary used,2,4E,5D,9A,BD,B3,+15,+61,+35,-10
+CE10245109 intense light,27 2C 4E 5B 27 33 5D 6D 80 9A BD B3,True,True,primary used,3,5B,6D,9A,BD,B3,+18,+45,+35,-10
+CE10245109 varying light,27 2B 4D 7D 77 74 5D 6D 66 49 BC B3,True,True,primary used,0,27,77,66,BC,B3,+80,-17,+86,-9
+CE10245109 varying light,27 2B 4D 7D 77 74 5D 6D 66 49 BC B3,True,True,primary used,1,2B,74,66,BC,B3,+73,-14,+86,-9
+CE10245109 varying light,27 2B 4D 7D 77 74 5D 6D 66 49 BC B3,True,True,primary used,2,4D,5D,49,BC,B3,+16,-20,+115,-9
+CE10245109 varying light,27 2B 4D 7D 77 74 5D 6D 66 49 BC B3,True,True,primary used,3,7D,6D,49,BC,B3,-16,-36,+115,-9

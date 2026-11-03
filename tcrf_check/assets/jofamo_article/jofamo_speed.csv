@@ -1,0 +1,5 @@
+screen,rom,what,count,values
+title,japanese,"D510 writes (Up held 60 frames, Down 60 frames)",538,00 01 02 03 04 05 06 FF
+view,japanese,"D679 changes (03 = Up, 07 = none, 0F = Down)",6,00@0.60s 07@23.28s 03@28.65s 07@29.65s 0F@32.18s 07@33.18s
+title,international,"D510 writes (Up held 60 frames, Down 60 frames)",594,00 01 02 03 04 05 FF
+view,international,"D679 changes (03 = Up, 07 = none, 0F = Down)",6,00@0.60s 07@23.30s 03@28.66s 07@29.67s 0F@32.19s 07@33.20s

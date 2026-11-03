@@ -1,0 +1,14 @@
+{
+ "f33": false,
+ "coarse": false,
+ "starts": [
+  {
+   "corpus_entry": 595,
+   "start": "10:07",
+   "02:47FE_after_keys": null,
+   "states": 5
+  }
+ ],
+ "save_back_call_07:6A4E_executed": true,
+ "02:47FE_executed": false
+}

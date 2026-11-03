@@ -1,0 +1,23 @@
+== boot 7 SAR groups
+   reg1=00 reg7=05 C=0010  captures BF 9F A0 B0 A8 A4 A2 A3 23 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   reg1=20 reg7=03 C=0010  captures BF 9F A0 B0 A8 A4 A2 A3 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   reg1=20 reg7=23 C=0010  captures BF 9F A0 B0 A8 A4 A2 A3 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   reg1=24 reg7=23 C=0010  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=28 reg7=23 C=0010  captures BF 9F A0 B0 A8 AC AA A9 -> table steps A0 B0 A8 AC AA A9  result in {A9 A8}
+   reg1=0A reg7=03 C=0010  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=00 reg7=05 C=0010  captures BF 9F A0 B0 A8 A4 A2 A3 23 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   35 / 35 table-driven steps are one of Above[O] / Below[O]
+== calibration 12 SAR groups
+   reg1=20 reg7=03 C=0030  captures BF 9F A0 B0 A8 A4 A2 A3 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   reg1=21 reg7=03 C=0030  captures BF 9F A0 B0 A8 A4 A2 A3 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   reg1=22 reg7=03 C=0030  captures BF 9F A0 B0 A8 A4 A2 A3 -> table steps A0 B0 A8 A4 A2 A3  result in {A3 A2}
+   reg1=23 reg7=03 C=0030  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=E0 reg7=03 C=0900  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=E1 reg7=03 C=0900  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=E2 reg7=03 C=0900  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=E3 reg7=03 C=0900  captures BF 9F A0 B0 A8 A4 A6 A5 -> table steps A0 B0 A8 A4 A6 A5  result in {A5 A4}
+   reg1=E4 reg7=03 C=2000  captures BF 9F A0 B0 A8 A4 A6 A7 -> table steps A0 B0 A8 A4 A6 A7  result in {A7 A6}
+   reg1=E5 reg7=03 C=2000  captures BF 9F A0 B0 A8 A4 A6 A7 -> table steps A0 B0 A8 A4 A6 A7  result in {A7 A6}
+   reg1=E8 reg7=03 C=3200  captures BF 9F A0 B0 A8 AC AA AB -> table steps A0 B0 A8 AC AA AB  result in {AB AA}
+   reg1=0A reg7=03 C=8000  captures BF 9F A0 B0 A8 A4 A6 A7 -> table steps A0 B0 A8 A4 A6 A7  result in {A7 A6}
+   60 / 60 table-driven steps are one of Above[O] / Below[O]

@@ -1,0 +1,21 @@
+variant,frames_to_end,place_of_player,time_shown_D029_D028,record_DAA7_DAA6,record_in_SRAM_10CC_10CB,settings_block_ok,B24_unlocked,credits_states_reached
+A every 2nd frame,1047,1,16:18,8381,8381,True,True,08:12 08:13 08:14 08:15 08:17 08:18
+A every 3rd frame,1067,1,16:49,8350,8350,True,True,08:12 08:13 08:14 08:15 08:17 08:18
+A every 4th frame,1142,1,17:68,8231,8231,True,True,08:12 08:13 08:14 08:15 08:17 08:18
+A every 5th frame,1180,1,18:37,8162,8162,True,False,08:12 08:13 08:14 08:15 08:17 08:18
+A every 6th frame,1219,1,18:98,8101,8101,True,False,08:12 08:13 08:14 08:15 08:17 08:18
+A every 7th frame,1262,1,19:73,8026,8026,True,False,08:12 08:13 08:14 08:15 08:17 08:18
+A every 8th frame,1334,2,20:85,7914,7914,True,False,08:12 08:13 08:14 08:15 08:17 08:18
+A every 9th frame,1410,2,22:11,7788,7788,True,False,08:12 08:17 08:18
+A every 10th frame,1456,2,22:91,7708,7708,True,False,08:12 08:17 08:18
+A every 11th frame,1587,2,24:86,7513,7513,True,False,08:12 08:17 08:18
+A every 12th frame,1608,2,25:38,7461,7461,True,False,08:12 08:17 08:18
+A every 13th frame,1674,2,26:23,7376,7376,True,False,08:12 08:17 08:18
+A every 14th frame,1723,2,27:05,7294,7294,True,False,08:12 08:17 08:18
+A every 2nd + Up before each hurdle,1021,1,15:48,8451,8451,True,True,08:12 08:13 08:14 08:15 08:17 08:18
+"fresh save (record 0000, 99:99)",,,,,0000,,False,08:12 08:17 08:18
+unlocking save (record 9999),,,,,9999,,True,08:12 08:13 08:14 08:15 08:17 08:18
+record $7799 (displayed 22:00),,,,,7799,,False,08:12 08:13 08:14 08:15 08:17 08:18
+record $7798 (displayed 22:01),,,,,7798,,False,08:12 08:17 08:18
+record $82FF (displayed 17:00),,,,,82FF,,True,08:12 08:13 08:14 08:15 08:17 08:18
+record $81FF (displayed 18:00),,,,,81FF,,False,08:12 08:13 08:14 08:15 08:17 08:18

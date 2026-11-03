@@ -1,0 +1,25 @@
+{
+ "experiment": "shoot_burst_clamp",
+ "doc": "SHOOT live view with the variant $D7E3 = 2 (corpus entry 779, 3 photos): when the countdown $D7E2 reaches 0 the next count is min(~$D561 + $1F, $D7E8) (06:64E1-64EE); with 3 photos it is 27 < $D7E8 = 30 and the clamp 06:64ED never runs, with $D561 (photo count) := 0 it is 30 = $D7E8: 06:64ED",
+ "entry": 779,
+ "start": "14:01",
+ "before": {
+  "D7E3": 2,
+  "D7E2": 27,
+  "D7E8": 30,
+  "D561": 3
+ },
+ "left_state_3": [
+  6,
+  "14:01"
+ ],
+ "after": {
+  "D7E2": 1,
+  "D7E8": 30
+ },
+ "hits": {
+  "06:64DD": true,
+  "06:64ED": true
+ },
+ "end": "14:01"
+}

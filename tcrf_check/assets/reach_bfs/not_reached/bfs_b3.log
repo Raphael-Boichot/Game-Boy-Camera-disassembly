@@ -1,0 +1,15 @@
+start states: ['04:01', '05:00', '05:01', '06:01', '0B:00', '0B:01', '0C:01', '0C:03', '12:00', '12:01', '12:03', '12:04', '12:05', '12:07', '12:08', '12:09', '12:0B', '12:0C', '12:0F', '12:12', '12:14', '12:15', '12:16', '12:18', '12:19', '12:1B', '12:1C', '12:1E', '12:1F', '12:20', '12:21', '12:22', '13:01', '13:02', '13:07', '1A:01', '1A:03', '1A:04', '1A:05', '1A:06', '1A:07', '1A:08', '1A:09', '1A:0A', '1A:0E']
+states expanded: 2896; found 0 of 12 targets
+03:6264  not reached
+03:629A  not reached
+03:6533  not reached
+03:4D4B  not reached
+03:6155  not reached
+03:4E50  not reached
+03:62BA  not reached
+03:79AE  not reached
+03:4B17  not reached
+03:552F  not reached
+03:555A  not reached
+03:6625  not reached
+executed beyond the replay: 34679 bytes in 511 ranges -> /tmp/claude-0/-home-claude/d280987c-d04f-542c-b2b0-9c89688a96f6/scratchpad/bfs_b3/exec_ranges.csv

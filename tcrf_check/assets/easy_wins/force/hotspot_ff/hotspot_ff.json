@@ -1,0 +1,8 @@
+{
+ "experiment": "hotspot_ff",
+ "doc": "hot spot 0 armed with effect $FF (jump table index 0 = 03:6625: copy $C000 / $C800 to VRAM) and no jump target",
+ "hits": {
+  "03:6625": true
+ },
+ "end": "0C:03"
+}

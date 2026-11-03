@@ -1,0 +1,13 @@
+routine,mode,tag,evidence
+PenMenu_Build,10,C,called only by PenMenu_Input and PenMenu_SlideClose; those only by Mode10_State03_Draw and Mode10_State04-06
+Ball_StepObjects,20,C,called only by Mode20_State04_Play and Mode20_State05_PlayDemo
+Shoot_ShutterVariant0,14,C,entry 0 of Mode14_State02_Shutter_JumpTbl6388 (the only reference)
+Shoot_ShutterVariant1,14,C,entry 1 of Mode14_State02_Shutter_JumpTbl6388 (the only reference)
+Shoot_ShutterVariant2,14,C,entry 2 of Mode14_State02_Shutter_JumpTbl6388 (the only reference)
+Shoot_ShutterVariant3,14,C,entry 3 of Mode14_State02_Shutter_JumpTbl6388 (the only reference)
+Unused_Mode0E_GotoState12,0E,I,no caller (dead code); bank 07 next to the mode-0E link handlers and the same store as LinkPick_RequestRemotePage
+LinkPick_RequestRemotePage,0E,C,called by LinkPick_PageTurnNext / Prev / Substate0_Init; LinkPick_Far (their dispatcher) is called far only by Mode0E_State03_PickPhoto
+SpaceFever_Wave0_CheckTargetHit,07,C,called only by SpaceFever_Wave0_Play (SpaceFever_WaveJumpTbl); its dispatcher SpaceFever_WaveStep only by Mode07_State02_Play and Mode07_State03_TargetMenuA
+MainMenu_TransitionToLowerPage,00,C,called only by Mode00_State01-03
+MainMenu_TransitionToUpperPage,00,C,called only by Mode00_State04-07
+MainMenu_ReturnToUpperItem,00,C,called only by MainMenu_TransitionToUpperPage

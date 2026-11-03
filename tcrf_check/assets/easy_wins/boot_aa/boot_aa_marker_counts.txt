@@ -1,0 +1,1 @@
+Counter({'PixelTest': 537, 'PixelTestResult': 537, 'LoaderLoop1': 12, 'LoaderLoop2End': 12, 'SAR': 12, 'ThresholdConverge': 12, 'BootPing1': 1, 'ValidityCheck': 1, 'CalibLoader': 1, 'LoaderBank8': 1, 'LoaderReturnFF': 1, 'CalibFarCall': 1, 'FullCalibration': 1, 'FactoryMeasure1': 1, 'FactoryMeasure2': 1, 'CommitVector': 1})

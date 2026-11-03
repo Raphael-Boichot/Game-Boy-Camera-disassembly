@@ -1,0 +1,1311 @@
+{
+ "00:00": {
+  "entry": 46,
+  "reached": "00:00",
+  "swaps": 0,
+  "sav": "Universal_unlocking_save",
+  "combo": 64
+ },
+ "00:01": {
+  "entry": 149,
+  "reached": "00:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 240
+ },
+ "00:02": {
+  "entry": 155,
+  "reached": "00:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 64
+ },
+ "00:03": {
+  "entry": 374,
+  "reached": "00:03",
+  "swaps": 0,
+  "sav": "CE10238211",
+  "combo": 16
+ },
+ "00:04": {
+  "entry": 150,
+  "reached": "00:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 240
+ },
+ "00:05": {
+  "entry": 362,
+  "reached": "00:05",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "00:06": {
+  "entry": 487,
+  "reached": "00:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "00:07": {
+  "entry": 927,
+  "reached": "00:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 240
+ },
+ "01:00": {
+  "entry": 146,
+  "reached": "01:00",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "01:01": {
+  "entry": 147,
+  "reached": "01:01",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "01:02": {
+  "entry": 247,
+  "reached": "14:00",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 64
+ },
+ "01:03": {
+  "entry": 163,
+  "reached": "01:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "01:04": {
+  "entry": 164,
+  "reached": "01:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "01:05": {
+  "entry": 180,
+  "reached": "01:09",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "01:06": {
+  "entry": 471,
+  "reached": "01:06",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "01:07": {
+  "entry": 260,
+  "reached": "01:07",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "01:08": {
+  "entry": 262,
+  "reached": "15:02",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "01:09": {
+  "entry": 310,
+  "reached": "01:0A",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "01:0A": {
+  "entry": 219,
+  "reached": "01:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "02:00": {
+  "entry": 226,
+  "reached": "02:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "02:01": {
+  "entry": 227,
+  "reached": "02:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "02:02": {
+  "entry": 401,
+  "reached": "00:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "03:00": {
+  "entry": 983,
+  "reached": "03:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "03:01": {
+  "entry": 488,
+  "reached": "03:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "04:00": {
+  "entry": 304,
+  "reached": "04:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "04:01": {
+  "entry": 305,
+  "reached": "04:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "05:00": {
+  "entry": 591,
+  "reached": "05:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "05:01": {
+  "entry": 546,
+  "reached": "05:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "06:00": {
+  "entry": 372,
+  "reached": "06:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "06:01": {
+  "entry": 373,
+  "reached": "06:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "07:00": {
+  "entry": 222,
+  "reached": "07:01",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 161
+ },
+ "07:02": {
+  "entry": 223,
+  "reached": "07:02",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 161
+ },
+ "07:03": {
+  "entry": 2462,
+  "reached": "07:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 161
+ },
+ "07:04": {
+  "entry": 815,
+  "reached": "07:04",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 161
+ },
+ "08:00": {
+  "entry": 173,
+  "reached": "08:00",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:01": {
+  "entry": 174,
+  "reached": "08:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:02": {
+  "entry": 209,
+  "reached": "00:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:03": {
+  "entry": 668,
+  "reached": "08:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 128
+ },
+ "08:04": {
+  "entry": 2265,
+  "reached": "08:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:05": {
+  "entry": 633,
+  "reached": "08:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:07": {
+  "entry": 175,
+  "reached": "08:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:08": {
+  "entry": 499,
+  "reached": "08:08",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:09": {
+  "entry": 505,
+  "reached": "08:09",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:0D": {
+  "entry": 215,
+  "reached": "08:0D",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "08:10": {
+  "entry": 1412,
+  "reached": "08:10",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "08:13": {
+  "entry": 1200,
+  "reached": "08:13",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "08:14": {
+  "entry": 1245,
+  "reached": "02:01",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "08:15": {
+  "entry": 1294,
+  "reached": "00:02",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "08:16": {
+  "entry": 1311,
+  "reached": "08:16",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "08:17": {
+  "entry": 1643,
+  "reached": "08:17",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "08:18": {
+  "entry": 448,
+  "reached": "08:18",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "09:00": {
+  "entry": 232,
+  "reached": "09:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "09:01": {
+  "entry": 233,
+  "reached": "09:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "09:02": {
+  "entry": 612,
+  "reached": "09:02",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "09:03": {
+  "entry": 620,
+  "reached": "09:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "09:04": {
+  "entry": 945,
+  "reached": "09:09",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "09:05": {
+  "entry": 613,
+  "reached": "09:05",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "09:06": {
+  "entry": 693,
+  "reached": "09:06",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "09:07": {
+  "entry": 292,
+  "reached": "01:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "09:09": {
+  "entry": 949,
+  "reached": "09:09",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "09:0C": {
+  "entry": 2473,
+  "reached": "09:0C",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "0A:01": {
+  "entry": 293,
+  "reached": "0A:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0A:02": {
+  "entry": 1138,
+  "reached": "0A:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0A:03": {
+  "entry": 1139,
+  "reached": "0A:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0B:00": {
+  "entry": 491,
+  "reached": "0B:00",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0B:01": {
+  "entry": 492,
+  "reached": "0B:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0C:01": {
+  "entry": 541,
+  "reached": "0C:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0D:01": {
+  "entry": 524,
+  "reached": "0D:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0D:02": {
+  "entry": 526,
+  "reached": "0D:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0D:03": {
+  "entry": 639,
+  "reached": "0D:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0D:04": {
+  "entry": 617,
+  "reached": "0D:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0D:0A": {
+  "entry": 552,
+  "reached": "0D:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0E:00": {
+  "entry": 426,
+  "reached": "0E:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0E:01": {
+  "entry": 468,
+  "reached": "0E:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "0F:00": {
+  "entry": 550,
+  "reached": "0F:00",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "0F:02": {
+  "entry": 556,
+  "reached": "0F:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "0F:03": {
+  "entry": 554,
+  "reached": "0F:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "0F:05": {
+  "entry": 709,
+  "reached": "0F:06",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "0F:06": {
+  "entry": 710,
+  "reached": "0F:06",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "0F:0C": {
+  "entry": 610,
+  "reached": "0F:0C",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "0F:0D": {
+  "entry": 574,
+  "reached": "0F:0D",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "10:01": {
+  "entry": 379,
+  "reached": "10:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "10:02": {
+  "entry": 1912,
+  "reached": "10:03",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "10:03": {
+  "entry": 650,
+  "reached": "10:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "10:04": {
+  "entry": 744,
+  "reached": "10:04",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "10:05": {
+  "entry": 1135,
+  "reached": "10:05",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "10:06": {
+  "entry": 1134,
+  "reached": "10:06",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "10:09": {
+  "entry": 942,
+  "reached": "10:09",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "11:01": {
+  "entry": 390,
+  "reached": "11:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "11:03": {
+  "entry": 674,
+  "reached": "11:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "11:04": {
+  "entry": 677,
+  "reached": "11:04",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "11:05": {
+  "entry": 774,
+  "reached": "09:01",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "11:07": {
+  "entry": 714,
+  "reached": "11:07",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "12:00": {
+  "entry": 638,
+  "reached": "12:00",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:01": {
+  "entry": 2393,
+  "reached": "12:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 20
+ },
+ "12:03": {
+  "entry": 756,
+  "reached": "12:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:04": {
+  "entry": 978,
+  "reached": "12:04",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:05": {
+  "entry": 738,
+  "reached": "05:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:08": {
+  "entry": 722,
+  "reached": "12:08",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:09": {
+  "entry": 809,
+  "reached": "12:09",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:0A": {
+  "entry": 1067,
+  "reached": "12:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:0B": {
+  "entry": 1068,
+  "reached": "12:0B",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:0C": {
+  "entry": 1106,
+  "reached": "12:0C",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:0D": {
+  "entry": 1263,
+  "reached": "12:09",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:14": {
+  "entry": 701,
+  "reached": "12:14",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:15": {
+  "entry": 703,
+  "reached": "12:15",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:18": {
+  "entry": 704,
+  "reached": "12:18",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:1A": {
+  "entry": 1199,
+  "reached": "12:1B",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:1B": {
+  "entry": 1204,
+  "reached": "12:1B",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:1C": {
+  "entry": 1217,
+  "reached": "12:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:1E": {
+  "entry": 1119,
+  "reached": "12:1E",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:20": {
+  "entry": 818,
+  "reached": "12:20",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:21": {
+  "entry": 831,
+  "reached": "12:21",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "12:22": {
+  "entry": 832,
+  "reached": "12:22",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 88
+ },
+ "13:01": {
+  "entry": 494,
+  "reached": "13:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "13:02": {
+  "entry": 495,
+  "reached": "13:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "13:07": {
+  "entry": 496,
+  "reached": "13:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "14:00": {
+  "entry": 274,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 4
+ },
+ "14:01": {
+  "entry": 213,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "14:02": {
+  "entry": 768,
+  "reached": "14:02",
+  "swaps": 0,
+  "sav": "_zero",
+  "combo": 100
+ },
+ "14:03": {
+  "entry": 564,
+  "reached": "14:03",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "14:04": {
+  "entry": 266,
+  "reached": "14:04",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:05": {
+  "entry": 298,
+  "reached": "14:05",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:06": {
+  "entry": 595,
+  "reached": "14:04",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:07": {
+  "entry": 265,
+  "reached": "14:07",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:08": {
+  "entry": 329,
+  "reached": "14:08",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:0A": {
+  "entry": 583,
+  "reached": "14:0B",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:0B": {
+  "entry": 182,
+  "reached": "14:0B",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "14:0C": {
+  "entry": 183,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "15:02": {
+  "entry": 263,
+  "reached": "15:02",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "15:03": {
+  "entry": 277,
+  "reached": "15:03",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "15:06": {
+  "entry": 391,
+  "reached": "15:06",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "15:07": {
+  "entry": 479,
+  "reached": "15:07",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "15:08": {
+  "entry": 480,
+  "reached": "15:08",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "15:09": {
+  "entry": 587,
+  "reached": "14:01",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "16:01": {
+  "entry": 561,
+  "reached": "16:03",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "16:02": {
+  "entry": 509,
+  "reached": "16:02",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "16:03": {
+  "entry": 510,
+  "reached": "16:03",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "16:04": {
+  "entry": 783,
+  "reached": "16:04",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "16:05": {
+  "entry": 656,
+  "reached": "16:05",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "16:06": {
+  "entry": 753,
+  "reached": "16:06",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "17:00": {
+  "entry": 922,
+  "reached": "17:00",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:01": {
+  "entry": 935,
+  "reached": "17:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:02": {
+  "entry": 936,
+  "reached": "17:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:06": {
+  "entry": 1208,
+  "reached": "17:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:07": {
+  "entry": 982,
+  "reached": "17:07",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:08": {
+  "entry": 1188,
+  "reached": "17:09",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:09": {
+  "entry": 1219,
+  "reached": "17:09",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:0A": {
+  "entry": 1014,
+  "reached": "17:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:0C": {
+  "entry": 2308,
+  "reached": "17:0A",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:0D": {
+  "entry": 1017,
+  "reached": "17:0D",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "17:0F": {
+  "entry": 1057,
+  "reached": "17:0F",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "18:01": {
+  "entry": 735,
+  "reached": "18:01",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "18:02": {
+  "entry": 769,
+  "reached": "18:02",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "19:00": {
+  "entry": 122,
+  "reached": "19:00",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 16
+ },
+ "19:01": {
+  "entry": 0,
+  "reached": "19:03",
+  "swaps": 0,
+  "sav": "CE10238211",
+  "combo": 0
+ },
+ "19:02": {
+  "entry": 157,
+  "reached": "19:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 64
+ },
+ "19:03": {
+  "entry": 2,
+  "reached": "19:03",
+  "swaps": 0,
+  "sav": "CE10238211",
+  "combo": 16
+ },
+ "19:04": {
+  "entry": 141,
+  "reached": "00:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "1A:00": {
+  "entry": 489,
+  "reached": "1A:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "1A:01": {
+  "entry": 886,
+  "reached": "1A:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 128
+ },
+ "1B:01": {
+  "entry": 383,
+  "reached": "1B:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "1C:00": {
+  "entry": 384,
+  "reached": "1C:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "1C:01": {
+  "entry": 385,
+  "reached": "1C:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "1C:02": {
+  "entry": 666,
+  "reached": "1C:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:03": {
+  "entry": 667,
+  "reached": "1C:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:04": {
+  "entry": 1335,
+  "reached": "1C:04",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:05": {
+  "entry": 1393,
+  "reached": "1C:05",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:06": {
+  "entry": 1337,
+  "reached": "1C:06",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:0A": {
+  "entry": 1338,
+  "reached": "1C:0A",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:0B": {
+  "entry": 1340,
+  "reached": "1C:03",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1C:0D": {
+  "entry": 1840,
+  "reached": "1C:0D",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1D:0A": {
+  "entry": 1243,
+  "reached": "1D:0A",
+  "swaps": 0,
+  "sav": "unl_hs_CE10238211",
+  "combo": 240
+ },
+ "1E:01": {
+  "entry": 800,
+  "reached": "1E:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "1E:02": {
+  "entry": 803,
+  "reached": "1E:02",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "1E:03": {
+  "entry": 804,
+  "reached": "1E:03",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "20:00": {
+  "entry": 1811,
+  "reached": "20:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "20:01": {
+  "entry": 1726,
+  "reached": "20:01",
+  "swaps": 0,
+  "sav": "_ff",
+  "combo": 50
+ },
+ "20:03": {
+  "entry": 852,
+  "reached": "20:04",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "20:04": {
+  "entry": 1771,
+  "reached": "20:04",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "20:06": {
+  "entry": 871,
+  "reached": "20:06",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "20:07": {
+  "entry": 898,
+  "reached": "20:07",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "20:0A": {
+  "entry": 872,
+  "reached": "20:0A",
+  "swaps": 0,
+  "sav": "GAMEBOYCAMERA_all_unlocked",
+  "combo": 161
+ },
+ "21:01": {
+  "entry": 1953,
+  "reached": "21:01",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 88
+ },
+ "21:04": {
+  "entry": 1974,
+  "reached": "21:04",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 88
+ },
+ "21:05": {
+  "entry": 1977,
+  "reached": "21:05",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 88
+ },
+ "21:06": {
+  "entry": 1986,
+  "reached": "21:06",
+  "swaps": 0,
+  "sav": "unl_CE10238211",
+  "combo": 88
+ }
+}

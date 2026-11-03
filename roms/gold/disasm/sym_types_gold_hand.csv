@@ -1,0 +1,128 @@
+bank,start,end,type,width,note
+38,4e00,4f00,data,16,AlbumB_Photo07 thumbnail (slot table 02:5263)
+38,4f00,5000,data,16,AlbumB_Photo07 footer
+38,5000,5e00,data,16,AlbumB_Photo08 picture
+38,5e00,5f00,data,16,AlbumB_Photo08 thumbnail
+38,5f00,6000,data,16,AlbumB_Photo08 footer
+38,6000,6e00,data,16,AlbumB_Photo09 picture
+38,6e00,6f00,data,16,AlbumB_Photo09 thumbnail
+38,6f00,7000,data,16,AlbumB_Photo09 footer
+38,7000,7e00,data,16,AlbumB_Photo10 picture
+38,7e00,7f00,data,16,AlbumB_Photo10 thumbnail
+38,7f00,8000,data,16,AlbumB_Photo10 footer
+39,4000,4e00,data,16,AlbumB_Photo11 picture
+39,6000,6e00,data,16,AlbumB_Photo13 picture
+39,6e00,6f00,data,16,AlbumB_Photo13 thumbnail
+39,6f00,7000,data,16,AlbumB_Photo13 footer
+39,7000,7e00,data,16,AlbumB_Photo14 picture
+39,7e00,7f00,data,16,AlbumB_Photo14 thumbnail
+39,7f00,8000,data,16,AlbumB_Photo14 footer
+04,7d00,7d74,data,3,StockFace_GfxTbl
+0f,5f00,6280,data,16,StockFace0 expression 0
+0f,6280,6600,data,16,StockFace0 expression 1
+0f,6600,6980,data,16,StockFace0 expression 2
+0f,6d00,7080,data,16,StockFace1 expression 0
+0f,7080,7400,data,16,StockFace1 expression 1
+0f,7400,7780,data,16,StockFace1 expression 2
+0e,6300,6680,data,16,StockFace2 expression 0
+0e,6680,6a00,data,16,StockFace2 expression 1
+0e,6a00,6d80,data,16,StockFace2 expression 2
+0e,7100,7480,data,16,StockFace3 expression 0
+0e,7480,7800,data,16,StockFace3 expression 1
+0e,7800,7b80,data,16,StockFace3 expression 2
+10,4000,4380,data,16,StockFace4 expression 0
+10,4380,4700,data,16,StockFace4 expression 1
+10,4700,4a80,data,16,StockFace4 expression 2
+10,4e00,5180,data,16,StockFace5 expression 0
+10,5180,5500,data,16,StockFace5 expression 1
+10,5500,5880,data,16,StockFace5 expression 2
+29,6000,6380,data,16,StockFace6 expression 0
+29,6380,6700,data,16,StockFace6 expression 1
+29,6700,6a80,data,16,StockFace6 expression 2
+29,6e00,7180,data,16,StockFace7 expression 0
+29,7180,7500,data,16,StockFace7 expression 1
+29,7500,7880,data,16,StockFace7 expression 2
+29,4000,5ac0,data,32,Credits_ScrollRowTbl (214 rows)
+29,5ac0,6000,data,32,Credits_ScrollRowTbl zero rows
+2a,6aa0,8000,data,16,StampCat04_05_LettersA_Gfx
+2b,4000,5800,data,16,StampCat03_ZeldaOoT_Gfx
+2b,5800,6800,data,16,StampCat02_ZeldaSmall_Mask
+2b,6800,7400,data,16,StampCat03_ZeldaOoT_Mask
+2b,7400,8000,data,16,StampCat14_Symbols_Mask
+2c,4000,6000,data,16,StampCat00_SmallFace_Gfx
+2c,6000,8000,data,16,StampCat02_ZeldaSmall_Gfx
+2d,4000,7000,data,16,StampCat01_BigStamps_Gfx
+2d,7000,8000,data,16,StampCat00_SmallFace_Mask
+2e,4000,6000,data,16,StampCat06_07_LettersB_Gfx
+2e,6000,8000,data,16,StampCat12_13_Kanji_Gfx
+2f,4000,5800,data,16,StampCat01_BigStamps_Mask
+2f,5800,8000,data,16,StampCat14_Symbols_Gfx
+30,4000,6000,data,16,StampCat10_11_LettersD_Gfx
+30,6000,8000,data,16,StampCat08_09_LettersC_Gfx
+25,7dc0,8000,data,32,Map_25_7DC0_OptionScreens
+26,7dc0,8000,data,32,Map_26_7DC0_MainMenuAndUserMap
+00,0104,0134,data,16,HeaderLogo
+0c,6f82,6fa0,data,16,"tail after Gfx_0C_6C30_Mode12_State1D_SortDialogOpen (30 B), typed as data; what it is is not known"
+0d,5fb0,5fb2,data,1,"tail after Gfx_0D_5D00_MsgStrip (2 B), typed as data; what it is is not known"
+19,41c0,41c1,data,1,"tail after Gfx_19_4000_Mode0E_State00_Init (1 B), typed as data; what it is is not known"
+19,77cc,77e0,data,16,"tail after Gfx_19_7560_Mode0F_State0A_EraseAll (20 B), typed as data; what it is is not known"
+1c,6294,62b4,data,16,"tail after Gfx_1C_5E60_Link_ShowScreenA (32 B), typed as data; what it is is not known"
+1e,6970,69cc,data,16,"tail after Unused_TCRF_CannotCombineSamePicture_Gfx (92 B), typed as data; what it is is not known"
+21,4cc1,4d00,data,16,"tail after Gfx_21_4C60_SpaceFever_DrawBestHud (63 B), typed as data; what it is is not known"
+21,5940,5950,data,16,"tail after Gfx_21_5870_CommentCard_DrawCopyBadge_Far (16 B), typed as data; what it is is not known"
+21,70c0,71c0,data,16,"tail after Gfx_21_6BC0_Mode19_State00_CopyrightScreens (256 B), typed as data; what it is is not known"
+24,5700,57e0,data,16,"tail after Map_24_5500_PhotoPicker_PageTransitionPrev (224 B), typed as data; what it is is not known"
+25,5800,5820,data,16,"tail after Map_25_5680_SpaceFever_Boss_EndB (32 B), typed as data; what it is is not known"
+26,5a0d,5a0e,data,1,"tail after Map_26_5A00_Mode1D_State06_LoadWaitScreen (1 B), typed as data; what it is is not known"
+27,7244,7270,data,16,"tail after Map_27_7150_Mode12_State1D_SortDialogOpen (44 B), typed as data; what it is is not known"
+27,7364,7390,data,16,"tail after Map_27_7270_Mode12_State17_ExitDialogOpen (44 B), typed as data; what it is is not known"
+2a,542e,5430,data,1,"tail after Gfx_2A_5401_FontSlotA0 (2 B), typed as data; what it is is not known"
+2a,544e,5452,data,1,"tail after Gfx_2A_5430_FontSlotA1 (4 B), typed as data; what it is is not known"
+2a,5464,5470,data,1,"tail after Gfx_2A_5452_FontSlotA2 (12 B), typed as data; what it is is not known"
+2a,547a,547c,data,1,"tail after Gfx_2A_5470_FontSlotA3 (2 B), typed as data; what it is is not known"
+2a,54a8,54b0,data,1,"tail after Gfx_2A_5492_FontSlotA4 (8 B), typed as data; what it is is not known"
+2a,54ba,54d0,data,16,"tail after Gfx_2A_54B0_FontSlotA5 (22 B), typed as data; what it is is not known"
+2a,54da,54f0,data,16,"tail after Gfx_2A_54D0_FontSlotA6 (22 B), typed as data; what it is is not known"
+2a,550a,5512,data,1,"tail after Gfx_2A_54F0_FontSlotA7 (8 B), typed as data; what it is is not known"
+2a,551a,552a,data,16,"tail after Gfx_2A_5512_FontSlotA8 (16 B), typed as data; what it is is not known"
+2a,5a68,5a7a,data,16,"tail after Gfx_2A_59FF_FontSlotsCFtoD3 (18 B), typed as data; what it is is not known"
+00,0134,0150,data,1,HeaderTitle and fields
+02,613c,6214,data,4,OamList_B02_613C
+02,4dd6,4ded,data,1,"tail after AlbumB_CheckGate_Tbl4DCE (23 B), as the international 02:4DBF; what it is is not known"
+02,599e,59b2,data,16,"tail after OamList_B02_52D4_4E (20 B), as the international 02:5987; what it is is not known"
+0f,6980,6d00,data,16,StockFace0 expression 3
+0f,7780,7b00,data,16,StockFace1 expression 3
+0e,6d80,7100,data,16,StockFace2 expression 3
+0e,7b80,7f00,data,16,StockFace3 expression 3
+10,4a80,4e00,data,16,StockFace4 expression 3
+10,5880,5c00,data,16,StockFace5 expression 3
+29,6a80,6e00,data,16,StockFace6 expression 3
+29,7880,7c00,data,16,StockFace7 expression 3
+01,7859,8000,data,16,"OamList_B01_7859_ZeroTail (zeros, read by runs: not padding)"
+15,7b84,7c00,data,16,like the neighbouring asset (T_UI)
+19,7fe0,8000,data,16,like the neighbouring asset (MAP)
+1c,4000,4010,data,16,like the neighbouring asset (T_UI)
+1c,4f00,4f60,data,16,like the neighbouring asset (T_UI)
+1e,6600,6620,data,16,like the neighbouring asset (T_UI)
+29,6b13,6e00,data,16,like the neighbouring asset (T_UI)
+29,7c00,7c59,data,1,D.J. preset tune 0 (89 bytes)
+29,7c59,7cb2,data,1,D.J. preset tune 1 (89 bytes)
+29,7d64,7dbd,data,1,D.J. preset tune 2 (89 bytes)
+29,7d0b,7d64,data,1,D.J. preset tune 3 (89 bytes)
+29,7cb2,7d0b,data,1,D.J. preset tune 4 (89 bytes)
+04,51cd,522d,data,1,EraseAnim_Run_Tbl51CD at its Japanese length (96 B)
+04,54ae,54d0,data,1,Stamp_BuildGraphicsLayer_Tbl54AE at its Japanese length (34 B)
+0a,7b00,7ba0,data,1,Cam_ExposureShiftTable at its Japanese length (160 B)
+1a,7cb0,7d80,data,16,Gfx_1A_7600_Album_ShowPageScreenB_Cont at its Japanese length (208 B)
+1e,6590,6620,data,16,Gfx_1E_6590_Mode17_State00_Init_LowerHalves at its Japanese length (144 B)
+21,6566,65c0,data,16,Gfx_21_6566_Parlor_Page2 at its Japanese length (90 B)
+24,7960,7c20,data,16,Map_24_7960_Shoot_RestoreViewScreen at its Japanese length (704 B)
+28,7790,7f90,data,16,Gfx_28_7790_CreditsEndingPlate_TilesB at its Japanese length (2048 B)
+04,5537,554b,data,1,Stamp_CategoryPosInitTbl
+00,0004,0008,data,1,Unused_Rst00_Tail
+00,0043,0048,data,1,zeros after the jp of Vec_VBlank
+00,004b,0050,data,1,zeros after the jp of Vec_Stat
+00,0053,0058,data,1,zeros after the jp of Vec_Timer
+00,005b,0060,data,1,zeros after the jp of Vec_Serial
+09,54de,54ed,data,1,"Kb_GlyphListB: 15 bytes of {n, slot} pairs ended by $00 (L6 2026-11-02); the 9 bytes after it are the dead Unused_Kb_LoadGlyphSetC"
+09,54f6,5503,data,1,"Kb_GlyphListC: 13 bytes of {n, slot} pairs ended by $00 (L6 2026-11-02)"

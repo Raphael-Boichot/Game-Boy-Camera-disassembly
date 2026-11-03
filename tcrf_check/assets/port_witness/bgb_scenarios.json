@@ -1,0 +1,654 @@
+[
+{
+"name": "intl_wild0",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild1",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild2",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild3",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,Right:4:60,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild4",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,Right:4:60,Right:4:60,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild5",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild6",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_wild7",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,Right:4:120,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:60,A:4:200,Select:4:200,Down:4:60,Right:4:60,A:4:200,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,A:4:200,A:4:200",
+"combo": 2,
+"tail": 1500,
+"printer": true
+},
+{
+"name": "intl_link_send0",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "B:12:60,Select:8:100,Up:8:60,A:8:150,Down:8:60,A:8:200,Left:8:40,A:8:400,A:8:200,A:8:1500",
+"tail": 300,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "B:12:60,Select:8:100,Up:8:60,A:8:150,Down:8:60,A:8:200"
+}
+},
+{
+"name": "intl_comment",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2500,
+"printer": true
+},
+{
+"name": "intl_comment_wild",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,Select:4:200,Down:4:100,Right:4:100,A:4:200,Right:4:100,Right:4:100,A:4:200,A:4:200",
+"tail": 2500,
+"printer": true
+},
+{
+"name": "intl_density_dark",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Select:4:200,Up:4:100,Right:4:100,Right:4:100,B:4:200,A:4:200",
+"tail": 2500,
+"printer": true
+},
+{
+"name": "intl_density_light",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Select:4:200,Up:4:100,Left:4:100,Left:4:100,B:4:200,A:4:200",
+"tail": 2500,
+"printer": true
+},
+{
+"name": "intl_multi3",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Up:4:100,A:4:200,-:1:60,Right:4:100,A:4:200,-:1:60,Down:4:100,A:4:200,Right:4:100,A:4:200,Right:4:100,A:4:200,Down:4:100,A:4:200",
+"tail": 4000,
+"printer": true
+},
+{
+"name": "intl_multi_feed",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Up:4:100,A:4:200,-:1:60,Right:4:100,A:4:200,-:1:60,Right:4:100,Right:4:100,Right:4:100,Right:4:100,Down:4:100,A:4:200,Right:4:100,Right:4:100,A:4:200,Down:4:100,A:4:200",
+"tail": 3000,
+"printer": true
+},
+{
+"name": "intl_multi_feed0",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Up:4:100,A:4:200,-:1:60,Right:4:100,A:4:200,-:1:60,Left:4:100,Left:4:100,Left:4:100,Left:4:100,Left:4:100,Down:4:100,A:4:200,Down:4:100,A:4:200",
+"tail": 3000,
+"printer": true
+},
+{
+"name": "intl_pick_1c01",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Up:4:100,A:4:200,-:1:60,A:4:200,-:1:100,A:4:200,-:1:100,A:4:200,-:1:100,A:4:200",
+"tail": 2500,
+"printer": true
+},
+{
+"name": "intl_noprinter",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 1500,
+"printer": false
+},
+{
+"name": "intl_err_data_01",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:01"
+},
+{
+"name": "intl_err_inq_01",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:01:60"
+},
+{
+"name": "intl_err_data_02",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:02"
+},
+{
+"name": "intl_err_inq_02",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:02:60"
+},
+{
+"name": "intl_err_data_04",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:04"
+},
+{
+"name": "intl_err_inq_04",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:04:60"
+},
+{
+"name": "intl_err_data_08",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:08"
+},
+{
+"name": "intl_err_inq_08",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:08:60"
+},
+{
+"name": "intl_err_data_10",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:10"
+},
+{
+"name": "intl_err_inq_10",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:10:60"
+},
+{
+"name": "intl_err_data_20",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:20"
+},
+{
+"name": "intl_err_inq_20",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:20:60"
+},
+{
+"name": "intl_err_data_40",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:40"
+},
+{
+"name": "intl_err_inq_40",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:40:60"
+},
+{
+"name": "intl_err_data_80",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "data:3:80"
+},
+{
+"name": "intl_err_inq_80",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "inq:2:80:60"
+},
+{
+"name": "intl_link_send",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Left:4:100,A:4:200,-:1:200,A:4:200,-:1:100,A:4:200,-:1:100,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Right:4:100,A:4:200,-:1:100"
+}
+},
+{
+"name": "gold_link_send",
+"rom": "gold",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Left:4:100,A:4:200,-:1:200,A:4:200,-:1:100,A:4:200,-:1:100,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "gold",
+"sav": "/root/work/port/wit/clean/clean_gold.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Right:4:100,A:4:200,-:1:100"
+}
+},
+{
+"name": "intl_link_to_gold",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Left:4:100,A:4:200,-:1:200,A:4:200,-:1:100,A:4:200,-:1:100,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "gold",
+"sav": "/root/work/port/wit/clean/clean_gold.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Right:4:100,A:4:200,-:1:100"
+}
+},
+{
+"name": "gold_link_to_intl",
+"rom": "gold",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Left:4:100,A:4:200,-:1:200,A:4:200,-:1:100,A:4:200,-:1:100,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:100,A:4:200,Down:4:100,A:4:200,-:1:100,Right:4:100,A:4:200,-:1:100"
+}
+},
+{
+"name": "intl_err_init_01",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:01"
+},
+{
+"name": "intl_err_init_02",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:02"
+},
+{
+"name": "intl_err_init_04",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:04"
+},
+{
+"name": "intl_err_init_08",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:08"
+},
+{
+"name": "intl_err_init_10",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:10"
+},
+{
+"name": "intl_err_init_20",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:20"
+},
+{
+"name": "intl_err_init_40",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:40"
+},
+{
+"name": "intl_err_init_80",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "init:1:80"
+},
+{
+"name": "intl_err_print_01",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:01"
+},
+{
+"name": "intl_err_print_02",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:02"
+},
+{
+"name": "intl_err_print_04",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:04"
+},
+{
+"name": "intl_err_print_08",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:08"
+},
+{
+"name": "intl_err_print_10",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:10"
+},
+{
+"name": "intl_err_print_20",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:20"
+},
+{
+"name": "intl_err_print_40",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:40"
+},
+{
+"name": "intl_err_print_80",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Right:4:100,A:4:200,A:4:200,A:4:200,A:4:200,Up:4:100,A:4:200,Start:4:200,-:1:60,A:4:200",
+"tail": 2000,
+"printer": true,
+"prn_err": "print:1:80"
+},
+{
+"name": "intl_link_page_a_full_L",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500"
+}
+},
+{
+"name": "intl_link_page_a_full_R",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500"
+}
+},
+{
+"name": "intl_link_page_a_clean_L",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500"
+}
+},
+{
+"name": "intl_link_page_a_clean_R",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:300,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Right:4:60,Down:4:60,Down:4:60,Down:4:60,A:4:200,-:1:200,A:4:200,-:1:200,A:4:200,-:1:1500"
+}
+},
+{
+"name": "intl_link_rx_init_150",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:600,Right:4:60,-:1:100,Right:4:60,-:1:100,Down:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,-:1:150,A:4:200,-:1:300"
+}
+},
+{
+"name": "intl_link_rx_init_full_150",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:600,Right:4:60,-:1:100,Right:4:60,-:1:100,Down:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,-:1:150,A:4:200,-:1:300"
+}
+},
+{
+"name": "intl_link_rx_init_400",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:600,Right:4:60,-:1:100,Right:4:60,-:1:100,Down:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,-:1:400,A:4:200,-:1:300"
+}
+},
+{
+"name": "intl_link_rx_init_full_400",
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:600,Right:4:60,-:1:100,Right:4:60,-:1:100,Down:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,-:1:400,A:4:200,-:1:300"
+}
+},
+{
+"name": "intl_link_rx2_same",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:400,A:4:200,-:1:400,Right:4:60,-:1:100,Right:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:100"
+}
+},
+{
+"name": "intl_link_rx2_late",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,-:1:100,A:4:200,-:1:400,A:4:200,-:1:400,Right:4:60,-:1:100,Right:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:100"
+}
+},
+{
+"name": "intl_link_rx2_swapkeys",
+"rom": "intl",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Left:4:60,A:4:200,-:1:400,A:4:200,-:1:400,Right:4:60,-:1:100,Right:4:60,-:1:100,A:4:200,-:1:300,A:4:200,-:1:300,A:4:200,-:1:1500",
+"tail": 600,
+"partner": {
+"rom": "intl",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "A:4:200,-:1:60,Select:4:200,-:1:60,Up:4:60,A:4:200,Down:4:60,A:4:200,-:1:100,Right:4:60,A:4:200,-:1:100"
+}
+},
+{
+"name": "intl_rx_patched_b1300_c1700",
+"rom": "/root/work/port/patch/intl_notimeout.gb",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "B:12:60,Select:8:100,Up:8:60,A:8:150,Down:8:60,A:8:200,Right:8:40,A:8:1300,A:8:300,-:1:2500",
+"tail": 600,
+"partner": {
+"rom": "/root/work/port/patch/intl_notimeout.gb",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "B:12:60,Select:8:100,Up:8:60,A:8:150,Down:8:60,A:8:200,-:1018:0,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84",
+"heads": "intl"
+},
+"heads": "intl"
+},
+{
+"name": "intl_rx_patched_b1300_c2900",
+"rom": "/root/work/port/patch/intl_notimeout.gb",
+"sav": "/root/work/port/wit/clean/clean_intl.sav",
+"seq": "B:12:60,Select:8:100,Up:8:60,A:8:150,Down:8:60,A:8:200,Right:8:40,A:8:1300,A:8:300,-:1:2500",
+"tail": 600,
+"partner": {
+"rom": "/root/work/port/patch/intl_notimeout.gb",
+"sav": "/root/work/port/saves_unl/unl_CE10001819.sav",
+"seq": "B:12:60,Select:8:100,Up:8:60,A:8:150,Down:8:60,A:8:200,-:2218:0,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84,A:6:84",
+"heads": "intl"
+},
+"heads": "intl"
+}
+]

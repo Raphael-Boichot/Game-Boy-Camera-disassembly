@@ -1,0 +1,31 @@
+{
+ "end": "20:04",
+ "score_BCD": "00000000",
+ "best_BCD": "00000025",
+ "round_D88E": 0,
+ "boss_variant_D88F": 0,
+ "wave_D863": 1,
+ "ship_died_D88D": 0,
+ "probe_hits": {
+  "07:6232": [
+   "boss final animation (timer 50)",
+   0
+  ],
+  "07:6276": [
+   "boss variant wraps 3 -> 0",
+   0
+  ],
+  "07:693A": [
+   "boss variant 2 graphics test",
+   0
+  ],
+  "07:6767": [
+   "boss destroyed, timer reset",
+   0
+  ],
+  "07:67BE": [
+   "best score flag set",
+   0
+  ]
+ }
+}

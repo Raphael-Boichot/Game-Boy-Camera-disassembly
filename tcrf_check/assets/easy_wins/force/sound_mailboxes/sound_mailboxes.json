@@ -1,0 +1,12 @@
+{
+ "experiment": "sound_mailboxes",
+ "doc": "sound engine (1F:52D8 / 52F8 / 5318): every request id 1..$48 poked into each mailbox $DD60 / $DD61 / $DD68 / $DD70 / $DD71 / $DD78 / $DD79 for 4 frames; looking for 1F:5234 (the channel-3 flush `ld hl,$dd3f` of the sound set-up 1F:520A) and 1F:522A (its default exit); both stay unreached: the wave-channel handlers (tables 1F:42F2 / 4306, code 4F72-5127) write NR30-34 themselves and never call 520A",
+ "trials": 504,
+ "hits": {
+  "1F:5234": false,
+  "1F:522A": false,
+  "1F:523C": true,
+  "1F:5259": true,
+  "1F:4F72": true
+ }
+}

@@ -1,0 +1,49 @@
+table,rom_address,used_when,row_C_D59B,a_D583,b_D584,c_D585,d_D586
+Cam_DitherRamp_ParamsA,0A:7C20,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",1,80,8F,D0,E6
+Cam_DitherRamp_ParamsA,0A:7C24,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",2,82,90,C8,E3
+Cam_DitherRamp_ParamsA,0A:7C28,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",3,84,90,C0,E0
+Cam_DitherRamp_ParamsA,0A:7C2C,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",4,85,91,B8,DD
+Cam_DitherRamp_ParamsA,0A:7C30,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",5,86,91,B1,DB
+Cam_DitherRamp_ParamsA,0A:7C34,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",6,87,92,AA,D8
+Cam_DitherRamp_ParamsA,0A:7C38,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",7,88,92,A5,D5
+Cam_DitherRamp_ParamsA,0A:7C3C,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",8,89,92,A2,D2
+Cam_DitherRamp_ParamsA,0A:7C40,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",9,8A,92,A1,C8
+Cam_DitherRamp_ParamsA,0A:7C44,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",10,8B,92,A0,BE
+Cam_DitherRamp_ParamsA,0A:7C48,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",11,8C,92,9E,B4
+Cam_DitherRamp_ParamsA,0A:7C4C,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",12,8D,92,9C,AC
+Cam_DitherRamp_ParamsA,0A:7C50,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",13,8E,92,9B,A5
+Cam_DitherRamp_ParamsA,0A:7C54,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",14,8F,92,99,A0
+Cam_DitherRamp_ParamsA,0A:7C58,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",15,90,92,97,9A
+Cam_DitherRamp_ParamsA,0A:7C5C,"D587 = D588 (bands 0, 1), D587 = 8 (band 3) and every other D587 (band 4)",16,92,92,92,92
+Cam_DitherRamp_ParamsB,0A:7C60,D587 = D589 (band 2: G = 4 or 5),1,80,94,DC,FF
+Cam_DitherRamp_ParamsB,0A:7C64,D587 = D589 (band 2: G = 4 or 5),2,82,95,D2,FF
+Cam_DitherRamp_ParamsB,0A:7C68,D587 = D589 (band 2: G = 4 or 5),3,84,96,CA,FF
+Cam_DitherRamp_ParamsB,0A:7C6C,D587 = D589 (band 2: G = 4 or 5),4,86,96,C4,FF
+Cam_DitherRamp_ParamsB,0A:7C70,D587 = D589 (band 2: G = 4 or 5),5,88,97,BE,FF
+Cam_DitherRamp_ParamsB,0A:7C74,D587 = D589 (band 2: G = 4 or 5),6,8A,97,B8,FF
+Cam_DitherRamp_ParamsB,0A:7C78,D587 = D589 (band 2: G = 4 or 5),7,8B,98,B2,F5
+Cam_DitherRamp_ParamsB,0A:7C7C,D587 = D589 (band 2: G = 4 or 5),8,8C,98,AC,EB
+Cam_DitherRamp_ParamsB,0A:7C80,D587 = D589 (band 2: G = 4 or 5),9,8D,98,AA,DD
+Cam_DitherRamp_ParamsB,0A:7C84,D587 = D589 (band 2: G = 4 or 5),10,8E,98,A8,D0
+Cam_DitherRamp_ParamsB,0A:7C88,D587 = D589 (band 2: G = 4 or 5),11,8F,98,A6,C4
+Cam_DitherRamp_ParamsB,0A:7C8C,D587 = D589 (band 2: G = 4 or 5),12,90,98,A4,BA
+Cam_DitherRamp_ParamsB,0A:7C90,D587 = D589 (band 2: G = 4 or 5),13,92,98,A1,B1
+Cam_DitherRamp_ParamsB,0A:7C94,D587 = D589 (band 2: G = 4 or 5),14,94,98,9D,A8
+Cam_DitherRamp_ParamsB,0A:7C98,D587 = D589 (band 2: G = 4 or 5),15,96,98,99,A0
+Cam_DitherRamp_ParamsB,0A:7C9C,D587 = D589 (band 2: G = 4 or 5),16,98,98,98,98
+Cam_DitherRamp_ParamsUnused,0A:7CA0,never referenced,1,87,98,B7,FF
+Cam_DitherRamp_ParamsUnused,0A:7CA4,never referenced,2,88,98,B6,FF
+Cam_DitherRamp_ParamsUnused,0A:7CA8,never referenced,3,89,97,B3,FF
+Cam_DitherRamp_ParamsUnused,0A:7CAC,never referenced,4,8A,97,B0,FA
+Cam_DitherRamp_ParamsUnused,0A:7CB0,never referenced,5,8B,97,AE,F0
+Cam_DitherRamp_ParamsUnused,0A:7CB4,never referenced,6,8C,96,AB,E6
+Cam_DitherRamp_ParamsUnused,0A:7CB8,never referenced,7,8D,96,AA,DC
+Cam_DitherRamp_ParamsUnused,0A:7CBC,never referenced,8,8E,96,A4,D4
+Cam_DitherRamp_ParamsUnused,0A:7CC0,never referenced,9,8F,96,A2,C8
+Cam_DitherRamp_ParamsUnused,0A:7CC4,never referenced,10,90,96,A0,BE
+Cam_DitherRamp_ParamsUnused,0A:7CC8,never referenced,11,91,96,9E,B4
+Cam_DitherRamp_ParamsUnused,0A:7CCC,never referenced,12,92,96,9C,AC
+Cam_DitherRamp_ParamsUnused,0A:7CD0,never referenced,13,93,96,9B,A5
+Cam_DitherRamp_ParamsUnused,0A:7CD4,never referenced,14,94,96,99,A0
+Cam_DitherRamp_ParamsUnused,0A:7CD8,never referenced,15,95,96,97,9A
+Cam_DitherRamp_ParamsUnused,0A:7CDC,never referenced,16,96,96,96,96

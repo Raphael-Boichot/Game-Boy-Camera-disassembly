@@ -1,0 +1,77 @@
+{"id": 324, "new": 4, "confirmed": 4, "missing": [], "unexpected": [], "lines": 8, "secs": 1.5, "notes": [], "core_end": "02:01", "bgb_end": "02:01"}
+{"id": 356, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 1.7, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 378, "new": 15, "confirmed": 0, "missing": ["07:57FE", "07:5806", "07:5817", "07:65AC", "07:65AF", "07:65CC", "07:66A9", "07:66AC", "07:66C9", "1F:4E21", "1F:4E29", "1F:4E2C", "1F:4E2E", "1F:4E36", "1F:4E3E"], "unexpected": [], "lines": 0, "secs": 2.6, "notes": [], "core_end": "07:02", "bgb_end": "0A:01"}
+{"id": 380, "new": 40, "confirmed": 0, "missing": ["07:5702", "07:5705", "07:5719", "07:571C", "07:571F", "07:5AD4", "07:5AEA", "07:5AED", "07:5AF3", "07:5B1A", "07:645F", "07:65BB", "07:65D8", "07:65DF", "07:6614", "09:5FE3", "09:6005", "09:6028", "09:6033", "09:604F", "09:605D", "09:606B", "09:6079", "09:6090", "09:6093", "09:6096", "09:609C", "09:60A0", "09:60A8", "09:60AB", "09:60B0", "09:706D", "09:707B", "09:70B4", "09:70C8", "09:70DB", "1F:4BA6", "1F:4BAE", "1F:4BB1", "1F:4BB3"], "unexpected": [], "lines": 0, "secs": 2.8, "notes": [], "core_end": "21:01", "bgb_end": "0A:01"}
+{"id": 396, "new": 30, "confirmed": 30, "missing": [], "unexpected": [], "lines": 1054, "secs": 2.5, "notes": [], "core_end": "16:02", "bgb_end": "16:02"}
+{"id": 398, "new": 18, "confirmed": 18, "missing": [], "unexpected": [], "lines": 8104, "secs": 3.3, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 444, "new": 8, "confirmed": 8, "missing": [], "unexpected": [], "lines": 16, "secs": 2.1, "notes": [], "core_end": "0B:01", "bgb_end": "0B:01"}
+{"id": 494, "new": 11, "confirmed": 0, "missing": ["09:60F2", "09:6117", "09:6121", "09:6126", "09:6129", "09:612C", "09:612D", "09:6136", "09:70CD", "09:70D4", "09:70D6"], "unexpected": [], "lines": 0, "secs": 2.4, "notes": [], "core_end": "21:01", "bgb_end": "0A:01"}
+{"id": 498, "new": 21, "confirmed": 0, "missing": ["09:622D", "09:6233", "09:6239", "09:6278", "09:627E", "09:62C1", "09:62C4", "09:62C7", "09:62CA", "09:62CD", "09:62D0", "09:62D3", "09:62D6", "09:62D9", "09:62E2", "09:62EC", "09:62F0", "09:6300", "09:6B0F", "09:6F25", "09:6F33"], "unexpected": [], "lines": 0, "secs": 2.7, "notes": [], "core_end": "21:05", "bgb_end": "02:01"}
+{"id": 502, "new": 8, "confirmed": 8, "missing": [], "unexpected": [], "lines": 8, "secs": 1.8, "notes": [], "core_end": "0D:07", "bgb_end": "0D:07"}
+{"id": 530, "new": 1, "confirmed": 0, "missing": ["09:62E6"], "unexpected": [], "lines": 0, "secs": 2.1, "notes": [], "core_end": "21:05", "bgb_end": "0A:01"}
+{"id": 532, "new": 1, "confirmed": 0, "missing": ["09:6EAC"], "unexpected": [], "lines": 0, "secs": 2.7, "notes": [], "core_end": "21:06", "bgb_end": "0A:01"}
+{"id": 534, "new": 3, "confirmed": 0, "missing": ["09:6767", "09:676C", "09:6A11"], "unexpected": [], "lines": 0, "secs": 3.1, "notes": [], "core_end": "21:06", "bgb_end": "0A:01"}
+{"id": 536, "new": 4, "confirmed": 0, "missing": ["09:6389", "09:66BC", "09:66BF", "09:66C2"], "unexpected": [], "lines": 0, "secs": 3.6, "notes": [], "core_end": "21:01", "bgb_end": "0A:01"}
+{"id": 542, "new": 13, "confirmed": 13, "missing": [], "unexpected": [], "lines": 2197, "secs": 2.7, "notes": [], "core_end": "0D:04", "bgb_end": "0D:04"}
+{"id": 580, "new": 4, "confirmed": 0, "missing": ["09:60D4", "09:60D7", "09:60DA", "09:60DD"], "unexpected": [], "lines": 0, "secs": 3.9, "notes": [], "core_end": "00:04", "bgb_end": "02:01"}
+{"id": 620, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 3.0, "notes": [], "core_end": "02:01", "bgb_end": "02:01"}
+{"id": 632, "new": 4, "confirmed": 4, "missing": [], "unexpected": [], "lines": 4, "secs": 2.5, "notes": [], "core_end": "0D:04", "bgb_end": "0D:04"}
+{"id": 688, "new": 1, "confirmed": 0, "missing": ["03:5C4A"], "unexpected": [], "lines": 0, "secs": 4.9, "notes": [], "core_end": "12:02", "bgb_end": "13:03"}
+{"id": 702, "new": 5, "confirmed": 5, "missing": [], "unexpected": [], "lines": 20, "secs": 2.8, "notes": [], "core_end": "14:05", "bgb_end": "14:01"}
+{"id": 758, "new": 2, "confirmed": 0, "missing": ["02:4CB6", "02:4CC4"], "unexpected": [], "lines": 0, "secs": 7.1, "notes": [], "core_end": "09:01", "bgb_end": "07:02"}
+{"id": 810, "new": 15, "confirmed": 15, "missing": [], "unexpected": [], "lines": 15, "secs": 2.1, "notes": [], "core_end": "13:03", "bgb_end": "13:04"}
+{"id": 814, "new": 4, "confirmed": 4, "missing": [], "unexpected": [], "lines": 4, "secs": 2.7, "notes": [], "core_end": "13:01", "bgb_end": "13:01"}
+{"id": 834, "new": 1, "confirmed": 0, "missing": ["04:71C7"], "unexpected": [], "lines": 0, "secs": 7.1, "notes": [], "core_end": "01:0A", "bgb_end": "01:0A"}
+{"id": 836, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 2.9, "notes": [], "core_end": "16:02", "bgb_end": "16:02"}
+{"id": 846, "new": 5, "confirmed": 5, "missing": [], "unexpected": [], "lines": 5, "secs": 2.6, "notes": [], "core_end": "16:02", "bgb_end": "16:02"}
+{"id": 932, "new": 7, "confirmed": 0, "missing": ["06:741F", "0A:58AA", "0A:58B4", "0A:58B8", "0A:58ED", "0A:58F1", "0A:58F5"], "unexpected": [], "lines": 0, "secs": 5.1, "notes": [], "core_end": "14:01", "bgb_end": "16:04"}
+{"id": 1030, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 1.9, "notes": [], "core_end": "21:01", "bgb_end": "21:01"}
+{"id": 1084, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 2.6, "notes": [], "core_end": "0D:04", "bgb_end": "0D:04"}
+{"id": 1344, "new": 6, "confirmed": 6, "missing": [], "unexpected": [], "lines": 6, "secs": 2.9, "notes": [], "core_end": "16:02", "bgb_end": "16:02"}
+{"id": 1346, "new": 25, "confirmed": 25, "missing": [], "unexpected": [], "lines": 4067, "secs": 3.9, "notes": [], "core_end": "14:00", "bgb_end": "14:00"}
+{"id": 1348, "new": 20, "confirmed": 20, "missing": [], "unexpected": [], "lines": 31735, "secs": 8.0, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 1360, "new": 49, "confirmed": 49, "missing": [], "unexpected": [], "lines": 3515, "secs": 6.1, "notes": [], "core_end": "20:04", "bgb_end": "20:04"}
+{"id": 1362, "new": 12, "confirmed": 12, "missing": [], "unexpected": [], "lines": 1036, "secs": 4.0, "notes": [], "core_end": "20:07", "bgb_end": "20:07"}
+{"id": 1370, "new": 1, "confirmed": 0, "missing": ["02:4459"], "unexpected": [], "lines": 0, "secs": 5.5, "notes": [], "core_end": "12:08", "bgb_end": "13:04"}
+{"id": 1380, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 2, "secs": 2.6, "notes": [], "core_end": "14:00", "bgb_end": "16:06"}
+{"id": 1390, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 3.8, "notes": [], "core_end": "16:06", "bgb_end": "16:06"}
+{"id": 1470, "new": 28, "confirmed": 28, "missing": [], "unexpected": [], "lines": 829, "secs": 5.1, "notes": [], "core_end": "16:04", "bgb_end": "16:04"}
+{"id": 1506, "new": 1, "confirmed": 0, "missing": ["09:684A"], "unexpected": [], "lines": 0, "secs": 2.8, "notes": [], "core_end": "21:06", "bgb_end": "02:01"}
+{"id": 1516, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 3.6, "notes": [], "core_end": "16:01", "bgb_end": "16:04"}
+{"id": 1520, "new": 19, "confirmed": 19, "missing": [], "unexpected": [], "lines": 1300, "secs": 5.8, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 1528, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 2, "secs": 2.6, "notes": [], "core_end": "07:03", "bgb_end": "07:02"}
+{"id": 1530, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 18, "secs": 4.7, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 1566, "new": 21, "confirmed": 21, "missing": [], "unexpected": [], "lines": 3417, "secs": 4.5, "notes": [], "core_end": "16:05", "bgb_end": "16:05"}
+{"id": 1602, "new": 4, "confirmed": 0, "missing": ["09:6B5A", "09:6B5C", "09:6B62", "09:6B67"], "unexpected": [], "lines": 0, "secs": 4.2, "notes": [], "core_end": "21:06", "bgb_end": "0A:01"}
+{"id": 1608, "new": 2, "confirmed": 0, "missing": ["03:5590", "03:5597"], "unexpected": [], "lines": 0, "secs": 8.9, "notes": [], "core_end": "12:01", "bgb_end": "13:04"}
+{"id": 1616, "new": 4, "confirmed": 4, "missing": [], "unexpected": [], "lines": 4, "secs": 3.3, "notes": [], "core_end": "18:00", "bgb_end": "18:01"}
+{"id": 1618, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 2, "secs": 3.0, "notes": [], "core_end": "18:00", "bgb_end": "18:01"}
+{"id": 1620, "new": 48, "confirmed": 48, "missing": [], "unexpected": [], "lines": 118, "secs": 3.8, "notes": [], "core_end": "16:05", "bgb_end": "16:05"}
+{"id": 1624, "new": 7, "confirmed": 7, "missing": [], "unexpected": [], "lines": 56, "secs": 1.6, "notes": [], "core_end": "00:02", "bgb_end": "00:01"}
+{"id": 1628, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 6, "secs": 3.7, "notes": [], "core_end": "18:01", "bgb_end": "18:01"}
+{"id": 1632, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 15, "secs": 6.8, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 1634, "new": 8, "confirmed": 8, "missing": [], "unexpected": [], "lines": 422, "secs": 8.2, "notes": [], "core_end": "14:02", "bgb_end": "14:02"}
+{"id": 1638, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 6, "secs": 4.5, "notes": [], "core_end": "18:01", "bgb_end": "18:01"}
+{"id": 1644, "new": 4, "confirmed": 4, "missing": [], "unexpected": [], "lines": 32, "secs": 3.9, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 1646, "new": 25, "confirmed": 25, "missing": [], "unexpected": [], "lines": 1307, "secs": 3.6, "notes": [], "core_end": "18:02", "bgb_end": "18:02"}
+{"id": 1648, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 3586, "secs": 7.7, "notes": [], "core_end": "14:02", "bgb_end": "16:06"}
+{"id": 1654, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 4, "secs": 3.7, "notes": [], "core_end": "18:02", "bgb_end": "18:02"}
+{"id": 1662, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 2, "secs": 3.8, "notes": [], "core_end": "18:02", "bgb_end": "18:02"}
+{"id": 1686, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 3, "secs": 3.6, "notes": [], "core_end": "18:01", "bgb_end": "18:01"}
+{"id": 1716, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 1, "secs": 10.3, "notes": [], "core_end": "14:05", "bgb_end": "14:05"}
+{"id": 1780, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 4, "secs": 14.1, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2026, "new": 12, "confirmed": 12, "missing": [], "unexpected": [], "lines": 78, "secs": 2.7, "notes": [], "core_end": "0D:01", "bgb_end": "0D:01"}
+{"id": 2110, "new": 2, "confirmed": 0, "missing": ["09:6D5C", "09:6D67"], "unexpected": [], "lines": 0, "secs": 4.4, "notes": [], "core_end": "21:06", "bgb_end": "0A:01"}
+{"id": 2136, "new": 8, "confirmed": 8, "missing": [], "unexpected": [], "lines": 9968, "secs": 3.5, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2140, "new": 1, "confirmed": 0, "missing": ["09:6940"], "unexpected": [], "lines": 0, "secs": 4.0, "notes": [], "core_end": "21:06", "bgb_end": "0A:01"}
+{"id": 2146, "new": 8, "confirmed": 8, "missing": [], "unexpected": [], "lines": 9353, "secs": 3.6, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2184, "new": 8, "confirmed": 8, "missing": [], "unexpected": [], "lines": 17248, "secs": 4.3, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2206, "new": 10, "confirmed": 10, "missing": [], "unexpected": [], "lines": 4802, "secs": 4.8, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2250, "new": 11, "confirmed": 11, "missing": [], "unexpected": [], "lines": 16836, "secs": 11.2, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2252, "new": 1, "confirmed": 1, "missing": [], "unexpected": [], "lines": 17, "secs": 14.3, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2294, "new": 2, "confirmed": 2, "missing": [], "unexpected": [], "lines": 2, "secs": 20.4, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2328, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 3, "secs": 4.0, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2386, "new": 10, "confirmed": 10, "missing": [], "unexpected": [], "lines": 1620, "secs": 4.9, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2428, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 48, "secs": 6.4, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2434, "new": 3, "confirmed": 3, "missing": [], "unexpected": [], "lines": 165, "secs": 8.6, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}
+{"id": 2486, "new": 7, "confirmed": 7, "missing": [], "unexpected": [], "lines": 474, "secs": 7.9, "notes": [], "core_end": "14:01", "bgb_end": "14:01"}

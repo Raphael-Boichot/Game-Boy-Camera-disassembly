@@ -1,0 +1,102 @@
+key,item,label_on_the_page,owner_answer,owner_confidence,time_utc
+ast_17_7B04,17:7B04,Gfx_17_7B04_Unref,Part of dancing girl in credits,guess,2026-10-13T11:44
+ast_17_7C7E,17:7C7E,Gfx_17_7C7E_Unref,Part of dancing girl in credits,guess,2026-10-13T11:44
+ast_17_7FC0,17:7FC0,Gfx_17_7FC0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:44
+ast_22_4298,22:4298,Gfx_22_4298_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_4342,22:4342,Gfx_22_4342_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_43C0,22:43C0,Gfx_22_43C0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_4A0C,22:4A0C,Gfx_22_4A0C_Unref,Miyamoto dance in credits (corrected 14:18: the dancer is Kentaro Nishimura),likely,2026-10-13T11:46
+ast_22_4DE6,22:4DE6,Gfx_22_4DE6_Unref,Part of dancing girl in credits,likely,2026-10-13T11:45
+ast_22_4ED0,22:4ED0,Gfx_22_4ED0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_51B6,22:51B6,Gfx_22_51B6_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_5200,22:5200,Gfx_22_5200_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_56A0,22:56A0,Gfx_22_56A0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_58F2,22:58F2,Gfx_22_58F2_Unref,Part of dancing girl in credits,likely,2026-10-13T11:46
+ast_22_5B1C,22:5B1C,Gfx_22_5B1C_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_5BBE,22:5BBE,Gfx_22_5BBE_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_5CA0,22:5CA0,Gfx_22_5CA0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_6FEE,22:6FEE,Gfx_22_6FEE_MiscellaneousFramesUsa_Aux,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_707E,22:707E,Gfx_22_707E_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_7160,22:7160,Gfx_22_7160_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_22_72E0,22:72E0,Gfx_22_72E0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_405C,23:405C,Gfx_23_405C_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_4480,23:4480,Gfx_23_4480_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_6C80,23:6C80,Gfx_23_6C80_Mode1F_State0A_PageSound2_Aux,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_23_6DC0,23:6DC0,Gfx_23_6DC0_Unref,Part of dancing girl in credits,likely,2026-10-13T11:47
+ast_24_441A,24:441A,Gfx_24_441A_Unref,Part of dancing girl in credits,likely,2026-10-13T11:48
+ast_25_401C,25:401C,Gfx_25_401C_Unref,Part of dancing girl in credits,likely,2026-10-13T11:49
+ast_26_4000,26:4000,Gfx_26_4000_Unref,Part of dancing girl in credits,likely,2026-10-13T11:50
+ast_26_4110,26:4110,Gfx_26_4110_Unref,Part of dancing girl in credits,likely,2026-10-13T11:50
+ast_27_4040,27:4040,Gfx_27_4040_Unref,miyamoto dance in credits (corrected: Kentaro Nishimura),likely,2026-10-13T11:50
+ast_27_40A0,27:40A0,Gfx_27_40A0_Unref,Miyamoto dance in credits (corrected: Kentaro Nishimura),,2026-10-13T11:51
+ast_28_731D,28:731D,Gfx_28_731D_MiscellaneousAlbumBPhotos_Aux,"end credits, last image",likely,2026-10-13T11:52
+ast_28_7C81,28:7C81,Gfx_28_7C81_MiscellaneousAlbumBPhotos_Aux,"end credits, last image",sure,2026-10-13T11:52
+snd_music_1F,music $1F,Song 1F,From space Fever,likely,2026-10-13T11:41
+snd_music_28,music $28,Song 28,Who are you running from 1 / error message,sure,2026-10-13T11:37
+snd_music_2A,music $2A,Song 2A,Jambo Nintendo !,sure,2026-10-13T11:38
+snd_music_2D,music $2D,Song 2D,Ball BGM,sure,2026-10-13T11:40
+snd_music_30,music $30,Song 30,Who are you running from 2 / error message,sure,2026-10-13T11:37
+snd_music_48,song $48,Song 48,"known: error message, incomplete",likely,2026-10-13T14:30
+snd_sfx1_14,channel-1 effect $14,Effect ch1 (pulse) 14,Hot spot related,sure,2026-10-13T11:41
+snd_sfx1_15,channel-1 effect $15,Effect ch1 (pulse) 15,Hot spot related,sure,2026-10-13T11:41
+snd_sfx1_24,channel-1 effect $24,Effect ch1 (pulse) 24,used: Space fever probably,,2026-10-13T14:30
+snd_sfx1_28,channel-1 effect $28,Effect ch1 (pulse) 28,Shutter sound,sure,2026-10-13T11:38
+ast_10_7F00,10:7F00,Gfx_10_7F00_Unref,graphic (by eye),,2026-10-13T14:23
+ast_15_5200,15:5200,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,graphic (by eye),,2026-10-13T14:23
+ast_15_5500,15:5500,Gfx_15_5500_SlidePlay_ReadKeys_Aux,graphic (by eye),,2026-10-13T14:23
+ast_18_7D80,18:7D80,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,graphic (by eye),,2026-10-13T14:23
+ast_1A_5182,1A:5182,Gfx_1A_5182_Unref,graphic (by eye),,2026-10-13T14:23
+tcrf_Album_Hand_Gestures,TCRF Album: unused hand gestures,13:5A00-5FFF (31 cells + half a tile; rebuilt picture differs by 0 pixels),"right (2026-10-25, after the exact rebuild; on 2026-10-13: partly, against a matcher that found 23 of 32 tiles)",,2026-10-25T20:55
+tcrf_CannotCombine,TCRF Cannot combine the same picture,1E:6600-697F (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:21
+tcrf_Hot_Spot_Graphical_Effects,TCRF Hot-spot effect icons (8 extra),1C:5920-5B1F (span only),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Japanese_Menu_Tile,TCRF Japanese menu tile (circled X),"15:4480 / 4500 / 4580 (candidate, 8x8 vs 14x14)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Magic_Bank_Tile,TCRF Magic bank tile,0D:7000-765F (candidate),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Magic_Bank_Tiles,TCRF Magic bank tiles,"0D:7870-7AB0 (partial, layout differs)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Margin_Print_B_Film_Roll,TCRF Margin print: B film roll,"18:5A50-5AAF (span, 4 of 24 tiles pixel-equal)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Margin_Print_Font,TCRF Margin print: font,"18:5F90-604F (span, 5 of 40 tiles pixel-equal)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_MiddleBeforeAfterHave,TCRF Kanji: middle / before / after / have,0D:7660 + 0D:7760 (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:21
+tcrf_Photo_Option_B_CANCEL,TCRF Photo option: B CANCEL,1A:7D80-7DDF (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:22
+tcrf_Photo_Option_Icon,TCRF Photo option: icon,"1A:7C90 / 7CA0 (candidate, on screen in normal play)","right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
+tcrf_Run_Run_Run_Star,TCRF RUN! RUN! RUN!: star,1B:618A (candidate),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
+tcrf_SOUND_Print_Modulation_Icon,TCRF SOUND print modulation icon,10:7A80 + 10:7B80 (exact),"right (the ROM span matches the TCRF picture, by eye)",,2026-10-13T14:23
+ast_10_74A3,10:74A3,Gfx_10_74A3_Unref,graphic (by eye),,2026-10-13T14:26
+ast_10_78B8,10:78B8,Data_10_78B8,graphic (by eye),,2026-10-13T14:26
+ast_10_78E8,10:78E8,Data_10_78E8,unsure,,2026-10-13T14:27
+ast_10_7A08,10:7A08,Data_10_7A08,unsure,,2026-10-13T14:27
+ast_10_7BC2,10:7BC2,Data_10_7BC2,unsure,,2026-10-13T14:27
+ast_10_7BE4,10:7BE4,Data_10_7BE4,unsure,,2026-10-13T14:27
+ast_17_5500,17:5500,Gfx_17_5500_ShootOptionLabelGlyphs,graphic (by eye),,2026-10-13T14:26
+ast_1A_5160,1A:5160,Data_1A_5160,unsure,,2026-10-13T14:27
+ast_1A_7E00,1A:7E00,Gfx_1A_7E00_Unref,graphic (by eye),,2026-10-13T14:24
+ast_1C_5620,1C:5620,Data_1C_5620,unsure,,2026-10-13T14:27
+ast_1C_5623,1C:5623,Data_1C_5623,unsure,,2026-10-13T14:27
+ast_1C_564E,1C:564E,Data_1C_564E,unsure,,2026-10-13T14:27
+ast_1C_5720,1C:5720,Data_1C_5720,unsure,,2026-10-13T14:27
+ast_1C_5BC0,1C:5BC0,Data_1C_5BC0,unsure,,2026-10-13T14:27
+ast_1C_5C20,1C:5C20,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,graphic (by eye),,2026-10-13T14:24
+ast_1D_7B41,1D:7B41,Gfx_1D_7B41_Tbl539D_Aux,graphic (by eye) - looks like an ennemy in Space fever,,2026-10-13T14:24
+ast_1E_7D00,1E:7D00,Gfx_1E_7D00_Unref,graphic (by eye),,2026-10-13T14:24
+ast_21_6AC7,21:6AC7,Gfx_21_6AC7_Unref,graphic (by eye),,2026-10-13T14:24
+ast_21_6B91,21:6B91,Data_21_6B91,graphic (by eye),,2026-10-13T14:28
+ast_23_5CC0,23:5CC0,Gfx_23_5CC0_LetterGlyphStrip,"map (tile indices, by eye)",,2026-10-13T14:26
+ast_25_7614,25:7614,Gfx_25_7614_Unref,"map (tile indices, by eye)",,2026-10-13T14:25
+ast_25_7814,25:7814,Gfx_25_7814_LetterGlyphStrip,"map (tile indices, by eye)",,2026-10-13T14:25
+snd_music_08,song $08,heard on the review page,used: Printer waiting jingle during multiple print selection,,2026-10-13T14:32
+snd_music_27,song $27,heard on the review page,used: jingle during waiting time when the game boy printer is busy printing,,2026-10-13T14:33
+snd_music_32,song $32,heard on the review page,used: Space fever main theme during gameplay,,2026-10-13T14:33
+snd_music_44,song $44,heard on the review page,"used: credits, short",,2026-10-13T14:34
+snd_music_47,song $47,heard on the review page,unused: classical music theme (mozart ?),,2026-10-13T14:31
+snd_sfx1_26,channel-1 effect $26,heard on the review page,used: boss death in space fever,,2026-10-13T14:34
+snd_sfx1_2F,channel-1 effect $2F,heard on the review page,unsure,,2026-10-13T14:31
+snd_sfx1_3D,channel-1 effect $3D,heard on the review page,used: death in Ball or Space fever,,2026-10-13T14:32
+snd_sfx1_3E,channel-1 effect $3E,heard on the review page,used: death in Ball or space fever,,2026-10-13T14:32
+snd_sfx3_04,channel-3 effect $04,heard on the review page,unsure,,2026-10-13T14:30
+snd_sfx4_05,channel-4 effect $05,heard on the review page,used: player death in space fever ?,,2026-10-13T14:35
+ast_16_7380_7980,"16:7380, 16:7580, 16:7780, 16:7980","Gfx_16_7380..7980_MainMenu_IconStripA_F5..F8_Unref (volunteered, not asked on the page)","assets for the camera ball head animation when you press up/down on the main camera menu (SHOOT, VIEW, PLAY)",,2026-10-14T10:50
+tcrf_Hand_Newspaper,TCRF Unused Graphic Bank 11: hand flipping a newspaper,11:5800-693F (nine frames of OAM list $BA),"right (2026-10-13 in the chat: ""11:5700 is exactly the TCRF image with the tiles reorganised""; confirmed 2026-10-25)",,2026-10-25T20:55
+snd_sfx4_05_function,channel-4 effect $05,"chat: the function found from the code (EraseAnim_Run, photo erase)","Sfx4 05 has the function you found, not a space fever one",sure,2026-10-26T05:59
+snd_sfx1_24_review,channel-1 effect $24,sound review page of 2026-10-18 (by ear; moved here from tcrf_check/assets/sound_review/ on 2026-10-26),Uncertain,,2026-10-18T20:04
+snd_sfx1_3D_review,channel-1 effect $3D,sound review page of 2026-10-18 (by ear; moved here from tcrf_check/assets/sound_review/ on 2026-10-26),Player death jingle in space fever,,2026-10-18T20:04
+snd_sfx1_3E_review,channel-1 effect $3E,sound review page of 2026-10-18 (by ear; moved here from tcrf_check/assets/sound_review/ on 2026-10-26),Player death jingle in space fever,,2026-10-18T20:04
+snd_music_08_review,song $08,sound review page of 2026-10-18 (by ear; moved here from tcrf_check/assets/sound_review/ on 2026-10-26),"Before / after batch printing mode (image selection menu), waiting loop music.",,2026-10-18T20:04
+snd_music_47_review,song $47,sound review page of 2026-10-18 (by ear; moved here from tcrf_check/assets/sound_review/ on 2026-10-26),Beethoven 5th symphony intro,,2026-10-18T20:04

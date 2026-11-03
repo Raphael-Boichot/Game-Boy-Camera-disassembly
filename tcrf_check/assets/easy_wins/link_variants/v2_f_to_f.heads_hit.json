@@ -1,0 +1,14 @@
+{
+ "hits": [
+  "00:2B25",
+  "02:462F",
+  "02:4660",
+  "02:4678",
+  "02:467C",
+  "07:4A24",
+  "07:4A3A",
+  "07:4A3E",
+  "07:4A42"
+ ],
+ "note": "marker addresses hit by either unit; an address that is not the head of a basic block of the static trace (02:4660, 07:4A24, 07:4A42) is only a probe and is skipped by witness_map.py (blocks.py)"
+}

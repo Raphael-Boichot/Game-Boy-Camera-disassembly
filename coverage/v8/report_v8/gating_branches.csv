@@ -1,0 +1,152 @@
+branch,instr,gated_side,gated_target,unexecuted_instrs_reachable,tested_variable,preceding_instructions,branch_executed_organically
+04:5E4B,ret nz,fallthrough,04:5E4C,254,,"ld [$d641],a",1
+00:1DA0,ret z,fallthrough,00:1DA1,130,$FFC3 sgb_present,"ldh a,[$ffc3] ; and a",1
+09:665C,"jr nz,$669a",fallthrough,09:665E,114,$D00D ([0] image-reducer accumulators+11),"call $6fee ; ld a,[$d00d] ; cp $01",0
+08:45F5,"jp nz,$46a3",taken,08:46A3,87,$D806 `print_extra_flag` (bit 0),"jr nz,$45f8 ; ld a,[$d806] ; bit 0,a",0
+00:1A79,"jr z,$1adc",fallthrough,00:1A7B,42,$DC27 prn_status,"jr z,$1ad2 ; ld a,[hl] ; cp $01",1
+09:64EB,"jr nz,$64f2",fallthrough,09:64ED,34,$D00D ([0] image-reducer accumulators+11),"call $6fee ; ld a,[$d00d] ; cp $01",0
+06:48AE,"jr nz,$48cb",taken,06:48CB,23,,cp $01,1
+00:05D5,"jr z,$05e0",taken,00:05E0,16,,"cp $04 ; jr nc,$05a1 ; cp $02",1
+05:517B,"jr z,$519c",fallthrough,05:517D,14,$FF26 NR52,"ldh a,[$ff26] ; bit 0,a",1
+0A:470B,"jr nz,$4724",fallthrough,0A:470D,13,,"ld c,$0c ; ld a,[hl+] ; cp b",1
+07:6230,"jr nz,$624b",fallthrough,07:6232,12,$D502 (sprite_anim_frame[15]+2),"call $6424 ; ld a,[$d502] ; cp $05",1
+03:6262,"jr z,$627b",fallthrough,03:6264,11,,"ld hl,$d6b2 ; add hl,bc ; bit 6,[hl]",1
+05:653C,ret z,fallthrough,05:653D,11,,"bit 7,a",0
+05:7178,ret z,fallthrough,05:7179,11,,"bit 7,a",0
+04:4863,"jr z,$4877",fallthrough,04:4865,10,$FFA2 keys_new,"jr nz,$4877 ; ldh a,[$ffa2] ; and $4c",0
+04:491D,ret z,fallthrough,04:491E,10,$FFA2 keys_new,"ret nz ; ldh a,[$ffa2] ; and $4c",0
+04:75C3,"jr z,$75dd",fallthrough,04:75C5,9,$D7C1 border_number,"pop bc ; ld a,[$d7c1] ; cp c",0
+05:542E,"jr nz,$5445",taken,05:5445,9,$FFA1 keys_held,"jr nz,$5467 ; ldh a,[$ffa1] ; bit 6,a",0
+05:5432,"jr nz,$5456",taken,05:5456,9,$FFA1 keys_held,"bit 6,a ; jr nz,$5445 ; bit 7,a",0
+05:6033,"jr c,$603e",taken,05:603E,9,,call $6080 ; pop hl ; cp $02,0
+09:6C57,"jr z,$6c6b",fallthrough,09:6C59,9,,"bit 7,a",0
+1F:492E,"jr z,$4940",taken,1F:4940,9,,"add hl,bc ; ld a,[hl] ; and a",0
+1F:49D9,"jr z,$49e3",taken,1F:49E3,9,,"add hl,bc ; ld a,[hl] ; cp $11",0
+00:080E,"jr nz,$081f",fallthrough,00:0810,8,,"bit 7,h",1
+00:1E91,ret z,fallthrough,00:1E92,8,$FFC4 sgb_mask_active,"call $08e8 ; ldh a,[$ffc4] ; and a",0
+00:258D,"jr nc,$259e",fallthrough,00:258F,8,,"ld d,a ; cp $a0 ; ld a,[hl]",1
+03:6532,ret z,fallthrough,03:6533,8,,"add hl,bc ; ld a,[hl] ; cp $ff",0
+05:496B,"jr z,$497a",fallthrough,05:496D,8,,"ret z ; ld hl,$ffa3 ; bit 5,[hl]",0
+05:49C0,"jr z,$49cd",fallthrough,05:49C2,8,,"ld hl,$ffa3 ; bit 6,[hl]",0
+05:69A7,"jr z,$69b9",fallthrough,05:69A9,8,$FFA1 keys_held,"jr nz,$69b9 ; ldh a,[$ffa1] ; bit 0,a",0
+05:6AF7,ret z,fallthrough,05:6AF8,8,$FFC8 frame_counter,"call $2496 ; ldh a,[$ffc8] ; bit 4,a",0
+00:1B23,"jr z,$1b30",fallthrough,00:1B25,7,$DC0D prn_state,"ld a,[$dc0d] ; cp $01",1
+03:6298,"jr z,$62ab",fallthrough,03:629A,7,,"ld hl,$d6b2 ; add hl,bc ; bit 7,[hl]",1
+05:497C,"jr z,$4989",fallthrough,05:497E,7,,"bit 4,[hl]",0
+05:661A,"jr z,$6629",fallthrough,05:661C,7,,"bit 4,a",0
+05:7156,"jr z,$7165",fallthrough,05:7158,7,$FFA2 keys_new,"call $71ad ; ldh a,[$ffa2] ; bit 5,a",0
+05:7167,"jr z,$7176",fallthrough,05:7169,7,,"bit 4,a",0
+09:652B,"jr nz,$6540",fallthrough,09:652D,7,$D016 ([7] collision mask 0 (silhouette of image A)+22),"ld [$d08e],a ; ld a,[$d016] ; cp $01",0
+09:6545,"jr nz,$655a",fallthrough,09:6547,7,$D01F ([7] collision mask 0 (silhouette of image A)+31),"ld a,[$d01f] ; cp $01",0
+00:06F4,"jr nz,$06ca",fallthrough,00:06F6,6,,"dec bc ; ld a,b ; or c",0
+00:1CFB,"jr nz,$1d38",taken,00:1D38,6,$FF00 P1/JOYP,"ldh a,[$ff00] ; and $03 ; cp $03",1
+00:1D29,"jr nz,$1d38",taken,00:1D38,6,$FF00 P1/JOYP,"ldh a,[$ff00] ; and $03 ; cp $03",1
+04:5D61,"jr nz,$5d72",fallthrough,04:5D63,6,$D640 stamp_return_state,"call $05f8 ; ld a,[$d640] ; cp $03",1
+05:5247,"jr z,$5258",fallthrough,05:5249,6,$FF26 NR52,"call $5267 ; ldh a,[$ff26] ; bit 0,a",1
+05:6AE0,ret z,fallthrough,05:6AE1,6,,pop hl ; pop bc ; cp [hl],0
+09:6C80,"jr z,$6c99",taken,09:6C99,6,$D048 ([7] collision mask 1+8),"ld a,[$d048] ; cp $02",0
+03:4D49,"jr z,$4d56",fallthrough,03:4D4B,5,,"ld hl,$d6b2 ; add hl,bc ; bit 7,[hl]",1
+03:6153,"jr z,$6160",fallthrough,03:6155,5,,"ld hl,$d6b2 ; add hl,bc ; bit 7,[hl]",1
+05:4B17,"jr nc,$4b1d",taken,05:4B1D,5,,"ld a,b ; sub $60 ; cp $90",0
+05:70A8,ret z,fallthrough,05:70A9,5,"$D9AC **NOISE** envelope: U/D, period (0..7), volume","call $4925 ; ld hl,$d9ac ; cp [hl]",0
+00:0860,ret nc,fallthrough,00:0861,4,,"or c ; jr nz,$0824 ; pop af",1
+00:16AC,"jr nz,$16b6",fallthrough,00:16AE,4,$D88F `shoot_boss_variant`,"push bc ; ld a,[$d88f] ; cp $02",1
+00:1A63,"jp nz,$1acb",taken,00:1ACB,4,$DC27 prn_status,"ld hl,$dc3e ; ld a,[$dc27] ; bit 4,a",1
+05:6099,"jr nz,$60a0",fallthrough,05:609B,4,,and a,0
+07:4A2B,"jr z,$4a34",fallthrough,07:4A2D,4,$CFFF Link buffer: gender/blood byte of the sender,"ld b,a ; ld a,[hl] ; bit 0,b",1
+07:4A38,"jr z,$4a41",fallthrough,07:4A3A,4,,"ld [hl+],a ; ld a,[hl] ; bit 1,b",1
+07:6938,"jr nz,$6942",fallthrough,07:693A,4,$D88F `shoot_boss_variant`,"push bc ; ld a,[$d88f] ; cp $02",1
+07:6A47,"jr nz,$6a58",taken,07:6A58,4,$D800 `extras_launch_flag` (return-to-mode-4 flag),"call $0586 ; ld a,[$d800] ; and a",1
+08:482A,"jr nz,$4835",fallthrough,08:482C,4,$D7C1 border_number,"call $08c1 ; ld a,[$d7c1] ; cp $12",1
+09:6BCC,"jr c,$6bd4",taken,09:6BD4,4,,"ld a,$74 ; ld hl,$d049 ; sub [hl]",0
+09:6BD0,"jr z,$6bd4",taken,09:6BD4,4,,"sub [hl] ; jr c,$6bd4 ; cp $02",0
+09:6BD2,"jr nc,$6bdd",fallthrough,09:6BD4,4,,"jr c,$6bd4 ; cp $02 ; jr z,$6bd4",0
+1F:5224,"jr z,$5234",taken,1F:5234,4,,"cp $65 ; jr z,$522c ; cp $75",1
+00:260F,"jr nc,$2617",fallthrough,00:2611,3,,"dec c ; jr nz,$25a7 ; pop af",1
+02:466B,"jr z,$4672",fallthrough,02:466D,3,$DA56 owner_gender_blood,"ld b,a ; ld a,[hl] ; bit 0,b",1
+03:4E4E,"jr nz,$4dec",fallthrough,03:4E50,3,,"cp $fe ; jr c,$4e55 ; dec b",1
+03:552D,"jr z,$5533",fallthrough,03:552F,3,,"call $5580 ; ld hl,$d561 ; bit 7,a",1
+03:5558,"jr nz,$555e",fallthrough,03:555A,3,,"call $5580 ; ld hl,$d562 ; cp $fe",1
+03:62B8,"jr nz,$6256",fallthrough,03:62BA,3,,"cp $fe ; jr c,$62bf ; dec b",1
+03:79AC,"jr nz,$79b3",fallthrough,03:79AE,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+04:4FB6,"jr c,$4fbd",fallthrough,04:4FB8,3,$DA0F copies_of_photo,"ld b,$00 ; ld a,[$da0f] ; cp $0a",1
+05:60D7,"jr z,$60e0",taken,05:60E0,3,,"push af ; ld a,b ; and a",0
+05:6869,ret z,fallthrough,05:686A,3,,call $499b ; pop hl ; cp [hl],0
+05:6E7D,ret z,fallthrough,05:6E7E,3,,call $499b ; pop hl ; cp [hl],0
+06:5239,"jr z,$5244",fallthrough,06:523B,3,$D7F7 compose2_photos[2],"ld hl,$d7f7 ; cp [hl] ; ld [hl],a",1
+06:5274,"jr z,$527f",fallthrough,06:5276,3,$D7F8 (compose2_photos[2]+1),"ld hl,$d7f8 ; cp [hl] ; ld [hl],a",1
+07:528F,"jr nz,$5296",fallthrough,07:5291,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+07:5471,"jr nz,$5478",fallthrough,07:5473,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+08:4093,"jr nz,$409a",fallthrough,08:4095,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+00:16C6,"jr nz,$16d7",taken,00:16D7,2,,"bit 7,h",1
+00:1B34,"jr z,$1b3a",fallthrough,00:1B36,2,$DC3B prn_tx_busy,"ld a,[$dc3b] ; and a",1
+00:1CD0,"jr z,$1cd7",fallthrough,00:1CD2,2,,"ld [c],a ; pop bc ; dec b",1
+00:2B02,"jr z,$2b20",taken,00:2B20,2,$FF01 SB (serial data),"cp $12 ; jr z,$2b25 ; cp $55",1
+02:47FC,"jr z,$4803",fallthrough,02:47FE,2,$CF33 Tag: copy flag F33,"call $296f ; ld a,[$cf33] ; and a",1
+03:4B15,"jr nc,$4b1b",fallthrough,03:4B17,2,,"sla a ; add a,b ; cp $10",1
+04:52E2,"jr nz,$52e9",fallthrough,04:52E4,2,,"jr nz,$52cf ; ld a,c ; and a",1
+05:5768,ret nc,fallthrough,05:5769,2,,"ld de,$576b ; add a,e ; ld e,a",1
+05:5998,"jr nz,$599f",fallthrough,05:599A,2,$D8C6 print row counter (0..$27),"jr nz,$597a ; ld a,[$d8c6] ; cp $27",0
+05:59FA,"jr z,$59fe",taken,05:59FE,2,,"cp $f0 ; jr z,$59e6 ; cp $ff",0
+05:5A13,"jr z,$5a19",fallthrough,05:5A15,2,,"or $30 ; res 0,[hl] ; bit 1,[hl]",0
+05:5A2D,"jr z,$5a31",taken,05:5A31,2,,cp $ff,0
+05:5A3F,"jr z,$5a47",taken,05:5A47,2,$DC27 prn_status,"rst $08 ; ld a,[$dc27] ; cp $ff",0
+05:64F0,ret z,fallthrough,05:64F1,2,"$D940 (**SOUND I** envelope: U/D, period (0..7), volume (0..15)+1)","call $48ea ; ld hl,$d940 ; cp [hl]",0
+05:7130,ret z,fallthrough,05:7131,2,"$D9AE (**NOISE** envelope: U/D, period (0..7), volume+2)","call $48ea ; ld hl,$d9ae ; cp [hl]",0
+05:71AA,ret z,fallthrough,05:71AB,2,"$D9AD (**NOISE** envelope: U/D, period (0..7), volume+1)","call $48ea ; ld hl,$d9ad ; cp [hl]",0
+05:7395,"jr z,$739b",fallthrough,05:7397,2,,call $499b ; pop hl ; cp [hl],0
+06:5768,ret nz,fallthrough,06:5769,2,,pop af ; inc a ; cp c,1
+09:5CAD,"jr z,$5cb1",fallthrough,09:5CAF,2,,"dec hl ; dec c ; bit 7,c",1
+09:63FC,"jr nz,$6403",fallthrough,09:63FE,2,$D00D ([0] image-reducer accumulators+11),"ret c ; ld a,[$d00d] ; and a",0
+09:6407,"jr nz,$640e",fallthrough,09:6409,2,$D016 ([7] collision mask 0 (silhouette of image A)+22),"ld a,[$d016] ; and a",0
+09:6412,"jr nz,$6419",fallthrough,09:6414,2,$D01F ([7] collision mask 0 (silhouette of image A)+31),"ld a,[$d01f] ; and a",0
+1F:4A4A,"jr z,$4a42",taken,1F:4A42,2,,"ld hl,$dd08 ; ld a,[hl] ; cp $18",0
+1F:5228,"jr z,$523c",fallthrough,1F:522A,2,,"cp $75 ; jr z,$5234 ; cp $7d",1
+00:1135,"jr nc,$1138",fallthrough,00:1137,1,"$D941 (**SOUND I** envelope: U/D, period (0..7), volume (0..15)+2)","ld c,a ; ld a,[$d941] ; sub c",1
+00:2967,"jr nc,$296a",fallthrough,00:2969,1,,"ld a,l ; add a,$0c ; ld l,a",1
+02:43E9,"jp z,$4308",fallthrough,02:43EC,1,,"jr z,$43ef ; ld hl,$afd1 ; call $4108",1
+02:487D,"jr nc,$4880",fallthrough,02:487F,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:48E5,"jr nc,$48e8",fallthrough,02:48E7,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:4939,"jr nc,$493c",fallthrough,02:493B,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:4996,"jr nc,$4999",fallthrough,02:4998,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:4C28,"jr nc,$4c2b",fallthrough,02:4C2A,1,,"ld a,e ; add a,$19 ; ld e,a",1
+03:41E6,"jr nz,$41e9",fallthrough,03:41E8,1,,ret z ; inc a ; cp $64,1
+03:4E1A,"jr nz,$4e21",taken,03:4E21,1,$D6B0 anim_loop_flag,"jr nz,$4e22 ; ld a,[$d6b0] ; and a",1
+03:5C11,"jr nc,$5c14",fallthrough,03:5C13,1,,"ld a,e ; add a,$08 ; ld e,a",1
+03:6284,"jr nz,$628b",taken,03:628B,1,$D6B0 anim_loop_flag,"jr nz,$628c ; ld a,[$d6b0] ; and a",1
+04:4E39,"jr nz,$4e3c",fallthrough,04:4E3B,1,,"ld a,$fe ; ld b,$2f ; bit 7,[hl]",0
+04:5AE4,"jr nc,$5ae7",fallthrough,04:5AE6,1,,"ld a,e ; add a,$10 ; ld e,a",1
+04:5B36,"jr nc,$5b39",fallthrough,04:5B38,1,,"ld a,e ; add a,$10 ; ld e,a",1
+04:5E44,"jr nz,$5e48",fallthrough,04:5E46,1,$D641 stamp_rotate_timer,"ret z ; ld a,[$d641] ; dec a",1
+05:530E,"jr nc,$5311",fallthrough,05:5310,1,,"ld a,e ; add a,$04 ; ld e,a",1
+05:5317,"jr nc,$531a",fallthrough,05:5319,1,,"ld a,e ; add a,$04 ; ld e,a",1
+05:5977,"jr nc,$597a",fallthrough,05:5979,1,$D8C6 print row counter (0..$27),"cpl ; add a,$28 ; cp $09",0
+05:6ACA,"jr z,$6acd",fallthrough,05:6ACC,1,"$D8D0 SOUND II wave-grid cursor (`$FF` = none, 0..31)","call $4960 ; ld hl,$d8d0 ; cp [hl]",0
+06:4BA1,"jr nc,$4ba4",fallthrough,06:4BA3,1,,"ld a,e ; add a,$20 ; ld e,a",1
+06:4BBB,"jr nc,$4bbe",fallthrough,06:4BBD,1,,"ld a,e ; sub $20 ; ld e,a",1
+06:4BF5,"jr nc,$4bf8",fallthrough,06:4BF7,1,,"ld a,e ; add a,$20 ; ld e,a",1
+06:4BFC,"jr nc,$4bff",fallthrough,06:4BFE,1,,"ld a,l ; add a,$20 ; ld l,a",1
+06:4C0F,"jr nc,$4c12",fallthrough,06:4C11,1,,"ld a,e ; sub $20 ; ld e,a",1
+06:4C50,"jr nc,$4c53",fallthrough,06:4C52,1,,"ld a,l ; add a,$20 ; ld l,a",1
+06:4C72,"jr nc,$4c75",fallthrough,06:4C74,1,,"ld a,e ; sub $20 ; ld e,a",1
+06:4D4D,"jr nc,$4d50",fallthrough,06:4D4F,1,,"ld a,l ; add a,$08 ; ld l,a",1
+06:4D54,"jr nc,$4d57",fallthrough,06:4D56,1,,"ld a,e ; add a,$08 ; ld e,a",1
+06:4D5E,"jr nc,$4d61",fallthrough,06:4D60,1,,"ld a,e ; add a,$c0 ; ld e,a",1
+06:5713,"jr nc,$5716",fallthrough,06:5715,1,,"ld a,e ; add a,$d0 ; ld e,a",1
+06:572A,"jr nc,$572d",fallthrough,06:572C,1,,"ld a,e ; add a,$10 ; ld e,a",1
+06:5741,"jr nc,$5744",fallthrough,06:5743,1,,"ld a,e ; add a,$10 ; ld e,a",1
+06:5D39,"jr nc,$5d3c",fallthrough,06:5D3B,1,,"ld a,l ; add a,$08 ; ld l,a",1
+06:64EB,"jr c,$64ee",fallthrough,06:64ED,1,$D561 photo_count,"add a,$1f ; ld hl,$d7e8 ; cp [hl]",1
+06:7527,"jr nz,$752a",fallthrough,06:7529,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:7588,"jr nz,$758b",fallthrough,06:758A,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:7643,"jr nz,$7646",fallthrough,06:7645,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:76B0,"jr nz,$76b3",fallthrough,06:76B2,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:7774,"jr nz,$7777",fallthrough,06:7776,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:77E1,"jr nz,$77e4",fallthrough,06:77E3,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+07:6274,"jr nz,$6277",fallthrough,07:6276,1,$D88F `shoot_boss_variant`,"ld a,[$d88f] ; inc a ; cp $03",0
+07:68A7,"jr nc,$68aa",fallthrough,07:68A9,1,,"ld a,l ; add a,$20 ; ld l,a",1
+07:7916,"jr nc,$7919",fallthrough,07:7918,1,,"ld a,e ; add a,$05 ; ld e,a",1
+07:791F,"jr nc,$7922",fallthrough,07:7921,1,,"ld a,e ; add a,$05 ; ld e,a",1
+08:4D09,"jr nc,$4d0c",fallthrough,08:4D0B,1,,"ld a,e ; add a,$08 ; ld e,a",1
+09:7271,"jr nz,$7266",fallthrough,09:7273,1,,dec de ; dec hl ; dec b,0
+0A:4034,"jr nc,$4037",fallthrough,0A:4036,1,$FF8A scratch_a,"ld bc,$7b00 ; add a,c ; ld c,a",1

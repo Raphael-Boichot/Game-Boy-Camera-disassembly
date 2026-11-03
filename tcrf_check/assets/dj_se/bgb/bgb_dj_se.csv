@@ -1,0 +1,4 @@
+scenario,bgb_end,D8B7_SE_minus_1,DD08,class_N_heads_hit
+"SE 4, one press, 1500 frames",1F:05,3,0,1F:4940 1F:4950
+"SE 8, one press, 1500 frames",1F:05,7,0,1F:49E3
+"SE 9, 26 presses",1F:05,8,2,1F:4A42

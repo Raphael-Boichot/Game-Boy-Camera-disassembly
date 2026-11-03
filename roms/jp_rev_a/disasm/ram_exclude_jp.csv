@@ -1,0 +1,13 @@
+bank,pc,value,reason
+00,0EB5,ffdf,"`ld de,$ffdf` is the offset -$21 added to HL (`add hl,de`): one tile row up and one column left; not the address of hBlitRows"
+00,0ED3,ffe1,"`ld de,$ffe1` is the offset -$1F added to HL (`add hl,de`); not an address"
+00,0EEC,ffe0,"`ld de,$ffe0` is the offset -$20 added to HL (`add hl,de`): one BG-map row up; not an address"
+03,6642,c0c0,"`ld de,$c0c0` loads two byte constants (D = E = $C0, tile-number bases), not an address"
+04,504B,c0c0,"`ld de,$c0c0` loads two byte constants (D = E = $C0, tile-number bases), not an address"
+05,6AC0,ff1f,"`ld bc,$ff1f` is a pair (B = $FF max, C = $1F min) for the value spinner DjEd_StepValue_LeftRight, not an address"
+07,696C,ff80,"`ld bc,$ff80` is the offset -$80 added to HL (`add hl,bc`), not the address of hOamDmaRoutine"
+0A,40A2,ffd0,"`ld de,$ffd0` is -$30 added to HL for a range test (`add hl,de` then `jp c`), not an address"
+0A,40AB,fff0,"`ld de,$fff0` is -$10 added to HL for a range test, not an address"
+0A,40EE,ffcf,"`ld de,$ffcf` is -$31 added to HL for a range test, not an address"
+0A,41F9,d800,"`ld de,$d800` is -$2800 added to HL for a range test (`add hl,de` then `jr nc`), not an address"
+1F,4FA4,fff3,"`ld bc,$fff3` is the offset -$0D added to HL (`add hl,bc`), not an address"

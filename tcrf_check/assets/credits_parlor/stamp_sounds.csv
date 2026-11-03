@@ -1,0 +1,12 @@
+channel,id,inventory_tag,static_callers,first_frame,mailbox_requests_seen,frames_running,game_states,keys
+music,0A,Doodle,Mode04_State00_Init,7938,14,28,04:00,B A Down+Right Up
+music,0F,PhotoPicker,LinkPick_Substate0_Init; Mode0F_State00_Init; Mode0F_State01_ReInit; PhotoPicker_Init,3700,167,2386,11:01,Up Down Left Right A
+music,24,Stamp,Mode11_State02_Setup,1,153,12486,11:04 11:03 11:07 11:02 11:06,A Up Left Down Right+A
+sfx1,01,ValueTick,AlbumPage_ReadChoiceA; AlbumPage_ReadChoiceB; AnimEd_CursorLeftRight; AnimEd_MoveRangeEnd,570,966,2170,11:03 11:01,Left Right Up Up+Left Down
+sfx1,02,CursorMove,AnimEd_CursorUpDown; Compose_Split_ReadKeys; Compose_StepPhoto; DoodleMenu_MoveCursor,1587,461,976,11:01 11:03,Up Down Down+Right Up+A Down+A
+sfx1,03,KeyA,CommentEditor_CtrlGrid; Kb_Page0_Press; Kb_Page1_PressSex; Kb_Page2_PressBirthDate,1596,31,76,11:03,Left Up+Left Left+A Right Down
+sfx1,04,KeyB,CommentEditor_CtrlLeft; Kb_Page0_Press; Kb_Page1_PressSex; Kb_Page2_PressBirthDate,7924,14,28,11:01,B
+sfx1,12,WindowSlideIn,AnimEd_WindowSlideIn; CommentEditor_SlidePanelOut; DjPanel_SlideIn; HotSpotEd_DialogSlideOut,683,469,1130,11:07 11:03,A Left+A Right+A Up+A B
+sfx1,13,WindowSlideOut,AnimEd_WindowSlideOut; CommentEditor_SlidePanelIn; DjPanel_SlideOut; HotSpotEd_DialogSlideIn,533,525,1303,11:04 11:07,Start B Down Right A
+sfx1,3A,LayoutKey,LinkPick_Substate1_Browse; Mode0F_State02_Browse; PhotoPicker_Choose,3732,153,306,11:01,A Right+A Left+A Down+A Up+A
+sfx4,01,StampCommit,Stamp_Commit,1,1709,4013,11:04 11:07,A Right+A Left+A Down+A Up+A

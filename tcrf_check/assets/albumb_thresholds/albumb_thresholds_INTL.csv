@@ -1,0 +1,16 @@
+condition,counters,below_bytes,at_bytes,routine_below,routine_at,album_below,album_at,agree
+shoot 60 photos,DA96/97,DA96=59 DA97=00,DA96=60 DA97=00,-,B17,-,B17,True
+delete 60 photos,DA98/99,DA98=59 DA99=00,DA98=60 DA99=00,-,B18,-,B18,True
+transfer 15 photos,DA9A/9B,DA9A=14 DA9B=00,DA9A=15 DA9B=00,-,B19,-,B19,True
+receive 5 photos from males,DA9E,DA9E=04,DA9E=05,-,B20,-,B20,True
+receive 5 photos from females,DA9F,DA9F=04,DA9F=05,-,B21,-,B21,True
+print 30 photos,DA9C/9D,DA9C=29 DA9D=00,DA9C=30 DA9D=00,-,B22,-,B22,True
+Space Fever II best 3000,DAA0-A3,DAA0=99 DAA1=29,DAA0=00 DAA1=30,-,B23,-,B23,True
+Space Fever II best 5000,DAA0-A3,DAA0=99 DAA1=49,DAA0=00 DAA1=50,B23,B23 B24,B23,B23 B24,True
+Space Fever II best 7000,DAA0-A3,DAA0=99 DAA1=69,DAA0=00 DAA1=70,B23 B24,B23 B24 B25,B23 B24,B23 B24 B25,True
+Ball best 500,DAA4/A5,DAA4=99 DAA5=04,DAA4=00 DAA5=05,-,B26,-,B26,True
+Ball best 700,DAA4/A5,DAA4=99 DAA5=06,DAA4=00 DAA5=07,B26,B26 B27,B26,B26 B27,True
+Ball best 1000,DAA4/A5,DAA4=99 DAA5=09,DAA4=00 DAA5=10,B26 B27,B26 B27 B28,B26 B27,B26 B27 B28,True
+RUN! RUN! RUN! best 17 s,DAA6/A7,DAA6=FF DAA7=81,DAA6=00 DAA7=82,-,B29,-,B29,True
+RUN! RUN! RUN! best 16 s,DAA6/A7,DAA6=FF DAA7=82,DAA6=00 DAA7=83,B29,B29 B30,B29,B29 B30,True
+transfer 5 photos (the number the page gives for B19),DA9A/9B,DA9A=05 DA9B=00,DA9A=05 DA9B=00,-,-,-,-,True

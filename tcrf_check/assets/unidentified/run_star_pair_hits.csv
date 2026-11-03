@@ -1,0 +1,7 @@
+block_address,alignment,position_in_8x16,neighbour_pixels
+1B:6180,aligned tile pair,"at (5,0)","right column [0, 0, 0, 3, 0, 3, 3], lower row [3, 3, 3, 0, 3, 3, 3]"
+1B:6182,the same star seen 1 row(s) lower: not a tile boundary,"at (4,0)","right column [0, 0, 0, 3, 0, 3, 3], lower row [3, 3, 3, 0, 3, 3, 3]"
+1B:6184,the same star seen 2 row(s) lower: not a tile boundary,"at (3,0)","right column [0, 0, 0, 3, 0, 3, 3], lower row [3, 3, 3, 0, 3, 3, 3]"
+1B:6186,the same star seen 3 row(s) lower: not a tile boundary,"at (2,0)","right column [0, 0, 0, 3, 0, 3, 3], lower row [3, 3, 3, 0, 3, 3, 3]"
+1B:6188,the same star seen 4 row(s) lower: not a tile boundary,"at (1,0)","right column [0, 0, 0, 3, 0, 3, 3], lower row [3, 3, 3, 0, 3, 3, 3]"
+1B:618A,the same star seen 5 row(s) lower: not a tile boundary,"at (0,0)","right column [0, 0, 0, 3, 0, 3, 3], lower row [3, 3, 3, 0, 3, 3, 3]"

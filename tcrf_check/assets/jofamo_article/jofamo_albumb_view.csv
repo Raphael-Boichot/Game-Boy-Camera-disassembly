@@ -1,0 +1,7 @@
+page,keys_after_the_page,bgb_mode_state,"D5D8_picture_index (30 = B01, 38 = B09)"
+p4,grid,0A:01,30
+p4,AA,0A:03,30
+p4,AA_RDA,0A:03,30
+p5,grid,0A:01,38
+p5,AA,0A:03,38
+p5,AA_RDA,0A:03,38

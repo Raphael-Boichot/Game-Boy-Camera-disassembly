@@ -1,0 +1,15 @@
+{
+ "hits": [
+  "06:523B",
+  "06:5276",
+  "06:5769"
+ ],
+ "counts_in_bgb_run": {
+  "06:523B": 4,
+  "06:5276": 1,
+  "06:5769": 1,
+  "06:5779": 1,
+  "06:5750": 106
+ },
+ "note": "logging breakpoints of tcrf_check/tools/bgb_compose.py (BGB, Japanese ROM, corpus entry 610 on the used save unl_PC10696894, then A held with Up / Down in the COMPOSE two-photo pickers); 06:5779 (Down wrap) and 06:5750 (the picker) are listed in counts_in_bgb_run only, they are not class N"
+}

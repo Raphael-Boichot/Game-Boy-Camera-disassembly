@@ -1,0 +1,4 @@
+sender   owner byte in = 1  hits: ReadSB x1, Hello55 x1, Hello12 x1
+         SRAM after: counters 10BF-10C4 = 010026000000  owner byte 2FC5 = 01  vector = [1, 2, 3, 4]  F12-F14 of slot 1/2 = 000000/000000  mode:state 0E:00
+receiver owner byte in = 1  hits: StoreReceived x1, CountersAddr x2, RecvMale_cap_test x2, RecvMale_inc x2, PeerByteRead x1, PeerMale_cap_test x1, PeerMale_add x1, PeerCountersDone x1, ReadSB x1
+         SRAM after: counters 10BF-10C4 = 010000000100  owner byte 2FC5 = 01  vector = [0]  F12-F14 of slot 1/2 = 010001/000000  mode:state 0E:00

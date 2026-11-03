@@ -1,0 +1,12 @@
+{
+ "experiment": "editor_d6e2_wrap",
+ "doc": "slide-show editor 12:03 (03:41B5): with A held, Down adds 1 to $D6E2 and wraps 100 to 0 (03:41E8); $D6E2 poked to 99 (the displayed value only reaches 99 after 90 presses from the 9 that the stored lineage shows)",
+ "start": "12:03",
+ "D6E2_before": 9,
+ "D6E2_after": 0,
+ "hits": {
+  "03:41E8": true,
+  "03:41DC": false
+ },
+ "end": "12:03"
+}

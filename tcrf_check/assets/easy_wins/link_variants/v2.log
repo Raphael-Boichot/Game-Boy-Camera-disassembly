@@ -1,0 +1,5 @@
+both exited after 198 s, rc 0 0
+sender   owner byte in = 2  hits: Hello12 x1
+         SRAM after: counters 10BF-10C4 = 010026000000  owner byte 2FC5 = 02  vector = [1, 2, 3, 4]  F12-F14 of slot 1/2 = 000000/000000  mode:state 0E:00
+receiver owner byte in = 2  hits: StoreReceived x1, CountersAddr x2, RecvFemale_cap_test x2, RecvFemale_inc x2, PeerByteRead x1, PeerFemale_cap_test x1, PeerFemale_add x1, PeerCountersDone x1
+         SRAM after: counters 10BF-10C4 = 010000000001  owner byte 2FC5 = 02  vector = [0]  F12-F14 of slot 1/2 = 000101/000000  mode:state 0E:00

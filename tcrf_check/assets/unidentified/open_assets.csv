@@ -1,0 +1,155 @@
+bank,addr,bytes,group,name,content,tcrf_ids,best_guess
+0C,5800,832,visually identified range,Gfx_0C_5800_AnimEdMenuLabelsAlt,mixed,,second copy of the Animation-editor menu labels (クリア ループ ここから テスト プレイ オール PHOTO MOVIE FRAME PLAY) at 4A00-5000; the bank
+0C,68D0,864,visually identified range,Gfx_0C_68D0_AnimEdKanaStrips,mixed,,"kana strips of the Animation-editor dialogs, same style as 6000-68CF"
+0C,7E20,352,content-classified span,Gfx_0C_7E20_Album_LoadNumeralTile_Aux,mixed,,2bpp tile data placed next to Album_LoadNumeralTile; function = same family as its neighbour
+0D,7000,1632,visually identified range,Gfx_0D_7000_FillPatternTiles,mixed,,"dot, crosshatch and dither fill tiles plus a few glyph pieces"
+0F,5800,122,content-classified span,Gfx_0F_5800_UserMap_LoadPlanetTiles_Aux,mixed,,2bpp tile data placed next to UserMap_LoadPlanetTiles; function = same family as its neighbour
+0F,5904,84,content-classified span,Gfx_0F_5904_Unref,mixed,,2bpp tile data with no neighbouring consumer
+0F,596C,6,unknown data (no reader found),Data_0F_596C,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+0F,5984,20,unknown data (no reader found),Data_0F_5984,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+10,7420,128,content-classified span,Gfx_10_7420_DjTitle_LoadNumeralTile_Aux,mixed,,2bpp tile data placed next to DjTitle_LoadNumeralTile; function = same family as its neighbour
+10,74A3,157,content-classified span,Gfx_10_74A3_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,7602,678,visually identified range,Gfx_10_7602_DjLetterGlyphStrip,mixed,,Latin letter / digit glyph strip
+10,78B8,24,content-classified span,Gfx_10_78B8_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,78E8,8,unknown data (no reader found),Data_10_78E8,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+10,7908,238,content-classified span,Gfx_10_7908_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,7A08,8,unknown data (no reader found),Data_10_7A08,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+10,7A24,92,content-classified span,Gfx_10_7A24_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,7ADE,162,content-classified span,Gfx_10_7ADE_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,7BC2,10,unknown data (no reader found),Data_10_7BC2,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+10,7BE4,4,unknown data (no reader found),Data_10_7BE4,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+10,7BF8,345,content-classified span,Gfx_10_7BF8_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,7D52,366,content-classified span,Gfx_10_7D52_Unref,mixed,,2bpp tile data with no neighbouring consumer
+10,7F00,184,content-classified span,Gfx_10_7F00_Unref,mixed,,2bpp tile data with no neighbouring consumer
+11,5400,256,visually identified range,Gfx_11_5400_MainMenuUpperItemFramesA,mixed,,gap inside the animation tiles of the main-menu upper item (neighbours Gfx_11_5300 / Gfx_11_5500 are loaded by MainMenu_
+14,4554,2780,visually identified range,Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr,mixed,,"tiles 85 (from its 5th byte) to 258 of the same unreferenced screen (tile set 14:4000, map 23:5CC0). Only reader seen: t"
+14,7A01,95,content-classified span,Gfx_14_7A01_PenMenu_Build_Aux,mixed,,2bpp tile data placed next to PenMenu_Build; function = same family as its neighbour
+15,5200,512,content-classified span,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,mixed,,2bpp tile data placed next to MainMenu_DrawUpperItem2; function = same family as its neighbour
+15,5500,256,content-classified span,Gfx_15_5500_SlidePlay_ReadKeys_Aux,mixed,,2bpp tile data placed next to SlidePlay_ReadKeys; function = same family as its neighbour
+17,4000,320,visually identified range,Gfx_17_4000_ShootMenuIconsA,mixed,,icon row of the SHOOT-menu tile bank
+17,4200,1152,visually identified range,Gfx_17_4200_ShootCounterIcons,mixed,,"digit / counter / clock icons (1 2 3 4, 1 2 2 1) of the SHOOT screens"
+17,4820,288,visually identified range,Gfx_17_4820_ShootMenuIconsB,mixed,,icon strip between Compose_DrawFreeCount and Mode14_State00_Init sets
+18,7D80,256,content-classified span,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,mixed,,2bpp tile data placed next to Mode0F_State04_LeaveSelected; function = same family as its neighbour
+1A,4D80,128,content-classified span,Gfx_1A_4D80_DjPerf_DrawTempo_Aux,mixed,,2bpp tile data placed next to DjPerf_DrawTempo; function = same family as its neighbour
+1A,5160,3,unknown data (no reader found),Data_1A_5160,all 00,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1A,5182,90,content-classified span,Gfx_1A_5182_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1A,7E00,501,content-classified span,Gfx_1A_7E00_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1B,6EA0,10,unknown data (no reader found),Data_1B_6EA0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1B,6EBA,176,content-classified span,Gfx_1B_6EBA_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1B,6F7C,68,content-classified span,Gfx_1B_6F7C_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1C,4241,607,content-classified span,Gfx_1C_4241_MenusShootMenu_Aux,mixed,,2bpp tile data placed next to MenusShootMenu; function = same family as its neighbour
+1C,44B0,448,content-classified span,Gfx_1C_44B0_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1C,5620,2,unknown data (no reader found),Data_1C_5620,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,5623,42,unknown data (no reader found),Data_1C_5623,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,564E,18,unknown data (no reader found),Data_1C_564E,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,5670,158,content-classified span,Gfx_1C_5670_HotSpotEd_CopyNumberTile_Aux,mixed,,2bpp tile data placed next to HotSpotEd_CopyNumberTile; function = same family as its neighbour
+1C,5720,16,unknown data (no reader found),Data_1C_5720,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,57A0,256,content-classified span,Gfx_1C_57A0_HotSpotEd_CopyNumberTile_Aux,mixed,B05,2bpp tile data placed next to HotSpotEd_CopyNumberTile; function = same family as its neighbour
+1C,5BC0,26,unknown data (no reader found),Data_1C_5BC0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,5C20,64,content-classified span,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,mixed,,2bpp tile data placed next to Mode09_State02_PhotoArrows; function = same family as its neighbour
+1C,5CC0,11,unknown data (no reader found),Data_1C_5CC0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,5CD3,13,unknown data (no reader found),Data_1C_5CD3,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,5D20,39,unknown data (no reader found),Data_1C_5D20,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1C,5D48,24,unknown data (no reader found),Data_1C_5D48,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1D,6D11,1315,content-classified span,Gfx_1D_6D11_MenusShootMenu_Aux,mixed,,2bpp tile data placed next to MenusShootMenu; function = same family as its neighbour
+1D,724E,82,content-classified span,Gfx_1D_724E_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1D,7631,341,content-classified span,Gfx_1D_7631_MenusShootMenu_Aux,mixed,,2bpp tile data placed next to MenusShootMenu; function = same family as its neighbour
+1D,7796,330,content-classified span,Gfx_1D_7796_Unref,mixed,,2bpp tile data with no neighbouring consumer
+1D,7B41,63,content-classified span,Gfx_1D_7B41_Tbl539D_Aux,mixed,,2bpp tile data placed next to Tbl539D; function = same family as its neighbour
+1E,64C0,16,unknown data (no reader found),Data_1E_64C0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+1E,64E0,144,content-classified span,Gfx_1E_64E0_Compose_DrawPhotoNumber_Aux,mixed,,2bpp tile data placed next to Compose_DrawPhotoNumber; function = same family as its neighbour
+1E,6590,61,content-classified span,Gfx_1E_6590_Mode16_DrawCaptionBlink_Aux,mixed,,2bpp tile data placed next to Mode16_DrawCaptionBlink; function = same family as its neighbour
+1E,7D00,184,content-classified span,Gfx_1E_7D00_Unref,mixed,,2bpp tile data with no neighbouring consumer
+20,64E0,64,content-classified span,Gfx_20_64E0_OwnerCard_LoadGenderTiles_Aux,mixed,,2bpp tile data placed next to OwnerCard_LoadGenderTiles; function = same family as its neighbour
+20,667D,3,unknown data (no reader found),Data_20_667D,all 00,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+20,66C0,256,content-classified span,Gfx_20_66C0_Unref,mixed,,2bpp tile data with no neighbouring consumer
+20,70F0,144,content-classified span,Gfx_20_70F0_Mode15_DrawTwoDigitsInterval_Aux,mixed,,2bpp tile data placed next to Mode15_DrawTwoDigitsInterval; function = same family as its neighbour
+20,71A0,288,content-classified span,Gfx_20_71A0_Mode15_DrawTwoDigits_Aux,mixed,,2bpp tile data placed next to Mode15_DrawTwoDigits; function = same family as its neighbour
+21,4D00,896,visually identified range,Gfx_21_4D00_SpaceFeverFont,mixed,,"large letter / digit glyph rows of the Space Fever II screens (SCORE, BEST, GAME OVER, CONGRATULATIONS lines; blue neigh"
+21,5C31,927,content-classified span,Gfx_21_5C31_MenusShootMenu_Aux,mixed,,2bpp tile data placed next to MenusShootMenu; function = same family as its neighbour
+21,6566,69,content-classified span,Gfx_21_6566_Unref,mixed,,2bpp tile data with no neighbouring consumer
+21,6AC7,177,content-classified span,Gfx_21_6AC7_Unref,mixed,,2bpp tile data with no neighbouring consumer
+21,6B91,47,content-classified span,Gfx_21_6B91_Unref,two values,,2bpp tile data with no neighbouring consumer
+21,7BC0,63,content-classified span,Gfx_21_7BC0_BorderPicker_AnimateIcon_Aux,mixed,,2bpp tile data placed next to BorderPicker_AnimateIcon; function = same family as its neighbour
+22,7F40,10,unknown data (no reader found),Data_22_7F40,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+22,7F61,5,unknown data (no reader found),Data_22_7F61,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+22,7F81,5,unknown data (no reader found),Data_22_7F81,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+22,7FA4,6,unknown data (no reader found),Data_22_7FA4,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+22,7FC4,6,unknown data (no reader found),Data_22_7FC4,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+22,7FE0,10,unknown data (no reader found),Data_22_7FE0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,58C0,2,unknown data (no reader found),Data_23_58C0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,58E0,2,unknown data (no reader found),Data_23_58E0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5900,2,unknown data (no reader found),Data_23_5900,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5920,2,unknown data (no reader found),Data_23_5920,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5940,2,unknown data (no reader found),Data_23_5940,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5960,2,unknown data (no reader found),Data_23_5960,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5980,2,unknown data (no reader found),Data_23_5980,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,59A0,2,unknown data (no reader found),Data_23_59A0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,59C0,2,unknown data (no reader found),Data_23_59C0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,59E0,2,unknown data (no reader found),Data_23_59E0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5A00,2,unknown data (no reader found),Data_23_5A00,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5A20,2,unknown data (no reader found),Data_23_5A20,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5A40,2,unknown data (no reader found),Data_23_5A40,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5A60,2,unknown data (no reader found),Data_23_5A60,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5A80,2,unknown data (no reader found),Data_23_5A80,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5AA0,2,unknown data (no reader found),Data_23_5AA0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5AC0,2,unknown data (no reader found),Data_23_5AC0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5AE0,2,unknown data (no reader found),Data_23_5AE0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5CC0,580,content-classified span,Map_23_5CC0_Mode0E_ExchangeAlt_Unref,mixed,,tile map data with no neighbouring consumer
+23,5F1C,8,unknown data (no reader found),Data_23_5F1C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5F3C,8,unknown data (no reader found),Data_23_5F3C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5F5C,8,unknown data (no reader found),Data_23_5F5C,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,5F94,12,unknown data (no reader found),Data_23_5F94,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,7180,608,content-classified span,Map_23_7180_CreditsGirlFrame12_Aux,mixed,,tile map data placed next to CreditsGirlFrame12; function = same family as its neighbour
+23,7760,32,unknown data (no reader found),Data_23_7760,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,7D54,12,unknown data (no reader found),Data_23_7D54,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+23,7DC0,192,content-classified span,Gfx_23_7DC0_ShowMenu_LoadHighlightTiles_Aux,mixed,,2bpp tile data placed next to ShowMenu_LoadHighlightTiles; function = same family as its neighbour
+24,4E40,32,unknown data (no reader found),Data_24_4E40,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+24,4F20,32,unknown data (no reader found),Data_24_4F20,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+24,5F00,20,unknown data (no reader found),Data_24_5F00,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+24,6080,34,unknown data (no reader found),Data_24_6080,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+24,60B2,270,content-classified span,Gfx_24_60B2_Unref,mixed,,2bpp tile data with no neighbouring consumer
+24,6200,288,content-classified span,Map_24_6200_Mode01_State02_ApplyPageA_Aux,mixed,,tile map data placed next to Mode01_State02_ApplyPageA; function = same family as its neighbour
+24,7780,32,unknown data (no reader found),Data_24_7780,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+24,78C0,66,content-classified span,Gfx_24_78C0_PenMenu_Build_Aux,mixed,,2bpp tile data placed next to PenMenu_Build; function = same family as its neighbour
+24,7913,77,content-classified span,Gfx_24_7913_Unref,mixed,,2bpp tile data with no neighbouring consumer
+25,5834,12,unknown data (no reader found),Data_25_5834,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+25,75F4,12,unknown data (no reader found),Data_25_75F4,all FF,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+26,7BC0,576,content-classified span,Map_26_7BC0_CreditsNishimuraDanceMap4_Aux,mixed,,tile map data placed next to CreditsNishimuraDanceMap4; function = same family as its neighbour
+26,7E20,352,content-classified span,Gfx_26_7E20_Album_LoadNumeralTileB_Aux,mixed,,2bpp tile data placed next to Album_LoadNumeralTileB; function = same family as its neighbour
+27,5BB0,22,unknown data (no reader found),Data_27_5BB0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5BD8,16,unknown data (no reader found),Data_27_5BD8,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5BF8,8,unknown data (no reader found),Data_27_5BF8,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5C20,8,unknown data (no reader found),Data_27_5C20,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5C38,8,unknown data (no reader found),Data_27_5C38,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5C60,8,unknown data (no reader found),Data_27_5C60,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5C78,8,unknown data (no reader found),Data_27_5C78,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5CA0,8,unknown data (no reader found),Data_27_5CA0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5CB8,8,unknown data (no reader found),Data_27_5CB8,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5CE0,8,unknown data (no reader found),Data_27_5CE0,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5CF8,8,unknown data (no reader found),Data_27_5CF8,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5D20,8,unknown data (no reader found),Data_27_5D20,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,5D40,31,unknown data (no reader found),Data_27_5D40,mixed,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,76F0,1,unknown data (no reader found),Data_27_76F0,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,7703,13,unknown data (no reader found),Data_27_7703,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,7810,1,unknown data (no reader found),Data_27_7810,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+27,7823,13,unknown data (no reader found),Data_27_7823,two values,,"small unread data block between assets (padding fragment, tile remainder or unused table)"
+2A,44D4,6,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_44D4_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,44F4,16,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_44F4_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,4A23,23,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_4A23_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,4A4E,12,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_4A4E_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,5401,25,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5401_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,5430,10,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5430_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,5452,8,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5452_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,5470,10,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5470_Gap,two values,,data loaded through a banked copy helper; length not stated at the load site
+2A,5492,2,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5492_Gap,two values,,data loaded through a banked copy helper; length not stated at the load site
+2A,54B0,10,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_54B0_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,54D0,10,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_54D0_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,54F0,10,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_54F0_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,5512,8,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5512_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,585B,31,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_585B_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,5898,22,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_5898_Gap,mixed,,data loaded through a banked copy helper; length not stated at the load site
+2A,58D6,6,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_58D6_Gap,two values,,data loaded through a banked copy helper; length not stated at the load site
+2A,58F6,4,"far-pointer asset, extent unknown",Sheet_MiscellaneousStampsJpn_2A_58F6_Gap,two values,,data loaded through a banked copy helper; length not stated at the load site
+2A,59FF,105,content-classified span,Gfx_2A_59FF_MiscellaneousStampsJpn_Aux,mixed,,2bpp tile data placed next to MiscellaneousStampsJpn; function = same family as its neighbour
+2A,5A7A,12,unknown data (no reader found),Data_2A_5A7A,all 00,,"small unread data block between assets (padding fragment, tile remainder or unused table)"

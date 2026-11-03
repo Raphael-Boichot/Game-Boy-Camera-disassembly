@@ -1,0 +1,3 @@
+/home/claude/sensor/Exposure_strategy_regular_camera_volts.xlsx  207 steps:  207 explained by the ROM rule (5 with one level L only), 0 not explained, band switches {(0, 1): 1, (1, 2): 1, (2, 3): 1, (3, 4): 1}
+/home/claude/sensor/Search_for_sensor_at_boot.xlsx:print  859 steps:  859 explained by the ROM rule (128 with one level L only), 0 not explained, band switches {(0, 1): 3, (1, 0): 3, (1, 2): 3, (2, 1): 3}
+/home/claude/sensor/Calibration_procedure.xlsx:print  859 steps:  859 explained by the ROM rule (128 with one level L only), 0 not explained, band switches {(0, 1): 3, (1, 0): 3, (1, 2): 3, (2, 1): 3}

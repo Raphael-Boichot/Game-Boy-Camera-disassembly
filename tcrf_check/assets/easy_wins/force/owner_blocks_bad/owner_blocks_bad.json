@@ -1,0 +1,18 @@
+{
+ "experiment": "owner_blocks_bad",
+ "doc": "boot with a valid save whose two copies of the bank-1 block at $AFB8 / $AFD1 (23 bytes + 2 checksum bytes each, magic at $AFCA / $AFE3 intact) both fail their checksum: 02:43D0 finds the magic, then neither copy valid -> 02:43EC `jp 02:4283` (format the save)",
+ "hits": {
+  "02:43EC": true,
+  "02:4283": true,
+  "02:4308": false,
+  "02:4310": false
+ },
+ "end": "19:03",
+ "hits_after": {
+  "02:43EC": true,
+  "02:4283": true,
+  "02:4308": false,
+  "02:4310": false
+ },
+ "photos_after": 30
+}

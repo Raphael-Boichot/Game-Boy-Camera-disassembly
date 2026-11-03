@@ -1,0 +1,132 @@
+jp_bank,jp_addr,bytes,jp_name,jp_tier,us_addr,us_status,us_bytes_read_any_run,us_bytes_read_organic
+0D,7000,1632,Gfx_0D_7000_FillPatternTiles,never shown,0D:7000,same address,1462,0
+0F,596C,6,Data_0F_596C,other,,absent,0,0
+0F,5984,20,Data_0F_5984,other,,absent,0,0
+10,78E8,8,DjPrintFont_10_78E8_Slots2Eto30,scrap,10:78E8,same address,8,0
+10,7A08,8,DjPrintFont_10_7A08_Slots40to42,scrap,10:7A08,same address,8,0
+10,7BC2,10,DjPrintFont_10_7BC2_Slots5Cto5E,scrap,10:7BC2,same address,10,0
+10,7BE4,4,DjPrintFont_10_7BE4_Slots5Eto5F,scrap,10:7BE4,same address,4,0
+15,5200,512,Gfx_15_5200_MainMenu_DrawUpperItem2_Aux,never shown,,absent,0,0
+15,5500,256,Gfx_15_5500_SlidePlay_ReadKeys_Aux,never shown,,absent,0,0
+18,7D80,256,Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux,never shown,18:7D80,same address,256,0
+1A,5160,3,TileGap_1A_5160,scrap,1A:5160,same address,0,0
+1A,5182,90,Gfx_1A_5182_Unref,never shown,1A:5182,same address,74,0
+1A,7E00,501,Gfx_1A_7E00_Unref,never shown,1A:7E00,same address,394,0
+1B,6EA0,10,Data_1B_6EA0,other,1B:6EA0,same address,10,0
+1C,5620,2,TileGap_1C_5620,scrap,1C:5620,same address,2,0
+1C,5623,42,Data_1C_5623,scrap,1C:5623,same address,41,0
+1C,564E,18,Data_1C_564E,scrap,1C:564E,same address,17,0
+1C,5720,16,TileGap_1C_5720,scrap,1C:5720,same address,16,0
+1C,5BC0,26,TileGap_1C_5BC0,scrap,1C:5BC0,same address,25,0
+1C,5C20,64,Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux,never shown,1C:5C20,same address,5,0
+1C,5CC0,11,TileGap_1C_5CC0,scrap,1C:5CC0,same address,11,0
+1C,5CD3,13,Data_1C_5CD3,scrap,1C:5CD3,same address,13,0
+1C,5D20,39,TileGap_1C_5D20,scrap,1C:5D20,same address,37,0
+1C,5D48,24,Data_1C_5D48,scrap,1C:5D48,same address,21,0
+1D,7B41,63,Gfx_1D_7B41_Tbl539D_Aux,never shown,,absent,0,0
+1E,64C0,16,Data_1E_64C0,other,1E:64C0,same address,16,0
+1E,7D00,184,Gfx_1E_7D00_Unref,never shown,1E:7D00,same address,175,0
+20,667D,3,Data_20_667D,other,20:667D,same address,3,3
+21,6AC7,177,Gfx_21_6AC7_Unref,never shown,21:6AC7,same address,98,0
+21,6B91,47,Gfx_21_6B91_Unref,never shown,0C:5000,small match elsewhere (coincidence possible),47,0
+22,7F40,10,Map_22_7F40_SpaceFever_LoadHudTiles,"read organically, never shown",22:7F40,same address,10,10
+22,7F61,5,Data_22_7F61,other,22:7F61,same address,5,5
+22,7F81,5,Data_22_7F81,other,22:7F81,same address,5,5
+22,7FA4,6,Data_22_7FA4,other,22:7FA4,same address,6,6
+22,7FC4,6,Data_22_7FC4,other,22:7FC4,same address,6,6
+22,7FE0,10,Data_22_7FE0,other,22:7FE0,same address,10,10
+23,58E0,2,Data_23_58E0,scrap,23:58E0,same address,2,0
+23,5900,2,Data_23_5900,scrap,23:5900,same address,2,0
+23,5920,2,Data_23_5920,scrap,23:5920,same address,2,0
+23,5940,2,Data_23_5940,scrap,23:5940,same address,2,0
+23,5960,2,Data_23_5960,scrap,23:5960,same address,2,0
+23,5980,2,Data_23_5980,scrap,23:5980,same address,2,0
+23,59A0,2,Data_23_59A0,scrap,23:59A0,same address,2,0
+23,59C0,2,Data_23_59C0,scrap,23:59C0,same address,2,0
+23,59E0,2,Data_23_59E0,scrap,23:59E0,same address,2,0
+23,5A00,2,Data_23_5A00,scrap,23:5A00,same address,2,0
+23,5A20,2,Data_23_5A20,scrap,23:5A20,same address,2,0
+23,5A40,2,Data_23_5A40,scrap,23:5A40,same address,2,0
+23,5A60,2,Data_23_5A60,scrap,23:5A60,same address,2,0
+23,5A80,2,Data_23_5A80,scrap,23:5A80,same address,2,0
+23,5AA0,2,Data_23_5AA0,scrap,23:5AA0,same address,2,0
+23,5AC0,2,Data_23_5AC0,scrap,23:5AC0,same address,2,0
+23,5AE0,2,Data_23_5AE0,scrap,23:5AE0,same address,2,0
+23,5F1C,8,Data_23_5F1C,scrap,23:5F1C,same address,8,0
+23,5F3C,8,Data_23_5F3C,scrap,23:5F3C,same address,8,0
+23,5F5C,8,Data_23_5F5C,scrap,23:5F5C,same address,8,0
+23,5F94,12,Data_23_5F94,scrap,23:5F94,same address,12,0
+23,7D54,12,Data_23_7D54,scrap,23:7D54,same address,12,0
+24,6080,34,Map_24_6080_Kb_Page2_PressBirthDate_ExtraRows,"read organically, never shown",24:6080,same address,34,2
+24,7780,32,Data_24_7780,other,24:7780,same address,32,0
+25,5834,12,Data_25_5834,scrap,25:5834,same address,0,0
+27,5BB0,22,Mask_27_5BB0_Img_AndMaskTiles_Oval,other,27:6210,small match elsewhere (coincidence possible),22,0
+27,5BD8,16,Data_27_5BD8,other,27:6238,small match elsewhere (coincidence possible),16,0
+27,5BF8,8,Data_27_5BF8,other,27:6258,small match elsewhere (coincidence possible),8,0
+27,5C20,8,Data_27_5C20,other,27:6280,small match elsewhere (coincidence possible),8,0
+27,5C38,8,Data_27_5C38,other,13:4860,small match elsewhere (coincidence possible),8,8
+27,5C60,8,Data_27_5C60,other,0A:75E0,small match elsewhere (coincidence possible),8,0
+27,5C78,8,Data_27_5C78,other,13:4860,small match elsewhere (coincidence possible),8,8
+27,5CA0,8,Data_27_5CA0,other,0A:75E0,small match elsewhere (coincidence possible),8,0
+27,5CB8,8,Data_27_5CB8,other,27:6318,small match elsewhere (coincidence possible),8,0
+27,5CE0,8,Data_27_5CE0,other,27:6340,small match elsewhere (coincidence possible),8,0
+27,5CF8,8,Data_27_5CF8,other,12:5CA4,small match elsewhere (coincidence possible),8,8
+27,5D20,8,Data_27_5D20,other,0D:4390,small match elsewhere (coincidence possible),8,0
+27,5D40,31,Data_27_5D40,other,27:63A0,small match elsewhere (coincidence possible),31,0
+27,76F0,1,Data_27_76F0,other,00:018C,small match elsewhere (coincidence possible),1,0
+27,7703,13,Data_27_7703,other,27:7A83,small match elsewhere (coincidence possible),13,0
+27,7810,1,Data_27_7810,other,00:02DF,small match elsewhere (coincidence possible),1,0
+27,7823,13,Data_27_7823,other,22:5F8D,small match elsewhere (coincidence possible),13,0
+2A,44D4,6,Gfx_2A_44D4_FontSlot26,"read organically, never shown",2A:44D4,same address,0,0
+2A,4A4E,12,Gfx_2A_4A4E_FontSlot52,"read organically, never shown",2A:4A4E,same address,0,0
+2A,5430,10,Gfx_2A_5430_FontSlotA1,"read organically, never shown",,absent,0,0
+2A,5452,8,Gfx_2A_5452_FontSlotA2,"read organically, never shown",,absent,0,0
+2A,5470,10,Gfx_2A_5470_FontSlotA3,"read organically, never shown",,absent,0,0
+2A,5492,2,Gfx_2A_5492_FontSlotA4,"read organically, never shown",05:5716,small match elsewhere (coincidence possible),2,0
+2A,54B0,10,Gfx_2A_54B0_FontSlotA5,"read organically, never shown",,absent,0,0
+2A,54D0,10,Gfx_2A_54D0_FontSlotA6,"read organically, never shown",,absent,0,0
+2A,54F0,10,Gfx_2A_54F0_FontSlotA7,"read organically, never shown",,absent,0,0
+2A,5512,8,Gfx_2A_5512_FontSlotA8,"read organically, never shown",20:650C,small match elsewhere (coincidence possible),8,0
+2A,58D6,6,Gfx_2A_58D6_FontSlotC6,"read organically, never shown",10:7908,small match elsewhere (coincidence possible),6,0
+2A,58F6,4,Gfx_2A_58F6_FontSlotC7,"read organically, never shown",09:68A7,small match elsewhere (coincidence possible),4,0
+2A,5A7A,12,Gfx_2A_5A7A_FontSlotsD3toD4_Blank,"read organically, never shown",2A:5A7A,same address,5,0
+0D,7660,384,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,TCRF,0D:7660,same address,367,0
+10,7A80,32,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,TCRF,10:7A80,same address,32,0
+10,7B80,32,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,TCRF,10:7B80,same address,32,0
+11,5800,4416,Unused_TCRF_HandNewspaperFrames_Gfx,TCRF,11:5800,same address,4171,0
+13,5CA0,96,Unused_TCRF_AlbumHandGestures_Gfx,TCRF,13:5CA0,same address,96,0
+15,4480,16,Unused_TCRF_JapaneseMenuTile_CircledX_Gfx,TCRF,15:49E0,small match elsewhere (coincidence possible),16,16
+15,4500,16,Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx,TCRF,15:49E0,small match elsewhere (coincidence possible),16,16
+15,4580,16,Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx,TCRF,15:49E0,small match elsewhere (coincidence possible),16,16
+18,5A50,96,Unused_TCRF_MarginPrint_BFilmRoll_Gfx,TCRF,18:5A50,same address,96,0
+18,5F90,192,Unused_TCRF_MarginPrint_OutlinedText_Gfx,TCRF,18:5F90,same address,192,0
+1A,7D80,96,Unused_TCRF_PhotoOption_BCancel_Gfx,TCRF,1A:7D80,same address,96,0
+1C,5920,512,Unused_TCRF_HotSpotEffectIcons_Extra_Gfx,TCRF,1C:5920,same address,512,0
+1E,6620,848,Unused_TCRF_CannotCombineSamePicture_Gfx,TCRF,1E:6620,same address,617,0
+14,4000,1364,Gfx_14_4000_Mode0E_ExchangeAlt_Tiles,no loader,14:4000,same address,244,0
+14,4554,2780,Gfx_14_4554_Mode0E_ExchangeAlt_StrayPtr,no loader,14:4554,same address,570,0
+23,5CC0,580,Map_23_5CC0_Mode0E_ExchangeAlt_Unref,no loader,23:5CC0,same address,580,0
+17,5500,4864,Gfx_17_5500_Unused_MainMenuTiles,no loader,17:5500,same address,3819,0
+25,7820,576,Map_25_7820_Unused_MainMenu,no loader,25:75E0,moved,534,0
+24,6360,64,Map_24_6360_Mode16_OptionPage2_HeadRows,head rows,25:6AA0,moved,55,0
+25,7160,64,Map_25_7160_Mode16_OptionPage0_HeadRows,head rows,25:6AA0,moved,55,0
+25,75E0,576,Map_25_75E0_Unused_PhotoScreen,never shown,25:73A0,moved,505,0
+26,7080,576,Map_26_7080_Unused_Picture,never shown,26:6E40,moved,576,0
+10,74A3,157,Gfx_10_74A3_Unref,used (withdrawn),10:74A3,same address,157,0
+10,7602,678,Gfx_10_7602_DjLetterGlyphStrip,used (withdrawn),10:7602,same address,678,0
+10,78B8,24,Gfx_10_78B8_DjPrintFont_Tiles2Bto2C,used (withdrawn),10:78B8,same address,24,0
+10,7908,238,Gfx_10_7908_DjPrintFont_Tiles30to3F,used (withdrawn),10:7908,same address,238,0
+10,7A24,92,Gfx_10_7A24_DjPrintFont_Tiles42to47,used (withdrawn),10:7A24,same address,92,0
+10,7ADE,162,Gfx_10_7ADE_DjPrintFont_Tiles4Dto57,used (withdrawn),10:7ADE,same address,162,0
+10,7BF8,345,Gfx_10_7BF8_DjPrintFont_Tiles5Fto75,used (withdrawn),10:7BF8,same address,345,0
+10,7D52,366,Gfx_10_7D52_DjPrintFont_Tiles75to8B,used (withdrawn),10:7D52,same address,366,0
+10,7F00,184,Gfx_10_7F00_DjPrintFont_Tiles90to9B,used (withdrawn),10:7F00,same address,184,0
+16,7380,512,Gfx_16_7380_MainMenu_BallHeadAnim_F5_Unref,forced only,16:7380,same address,512,0
+16,7580,512,Gfx_16_7580_MainMenu_BallHeadAnim_F6_Unref,forced only,16:7580,same address,512,0
+16,7780,512,Gfx_16_7780_MainMenu_BallHeadAnim_F7_Unref,forced only,16:7780,same address,512,0
+16,7980,512,Gfx_16_7980_MainMenu_BallHeadAnim_F8_Unref,forced only,16:7980,same address,512,0
+23,58C0,2,Map_23_58C0_Mode0F_ConfirmFrameStrip_Unref,scrap,23:58C0,same address,2,0
+23,7760,32,Map_23_7760_Kb_Page0_Press_ExtraRow,scrap,23:7760,same address,32,0
+24,4E40,32,Map_24_4E40_PenMenuSizePanel3_ExtraRow,scrap,24:4E40,same address,30,0
+24,4F20,32,Map_24_4F20_PenMenuPatternPanel0_ExtraRow,scrap,24:4F20,same address,32,0
+24,5F00,20,Map_24_5F00_Kb_Page1_PressSex_ExtraRows,scrap,24:5F00,same address,20,0

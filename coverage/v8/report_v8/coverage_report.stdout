@@ -1,0 +1,70 @@
+# Coverage report (merged from 1 checkpoint(s))
+
+Executed ROM bytes (opcode+operand): **112359**; ROM bytes read as data: **1004879**; RAM addresses executed: **18**
+
+Static trace: 60449 instruction starts, 117627 code bytes, 1256 table-word bytes.
+
+## 1. Traced instructions executed, per bank
+
+| bank | traced instr | executed (any) | % | organic (inputs only) | forced-state only | never | traced code bytes |
+|---|---|---|---|---|---|---|---|
+| 00 | 6800 | 6306 | 92.7 | 5724 (84.2%) | 582 | 494 | 11896 |
+| 02 | 2467 | 2456 | 99.6 | 2193 (88.9%) | 263 | 11 | 4520 |
+| 03 | 7324 | 6785 | 92.6 | 6557 (89.5%) | 228 | 539 | 14701 |
+| 04 | 6615 | 6256 | 94.6 | 5959 (90.1%) | 297 | 359 | 13474 |
+| 05 | 7233 | 6646 | 91.9 | 3628 (50.2%) | 3018 | 587 | 14798 |
+| 06 | 6466 | 6391 | 98.8 | 6327 (97.9%) | 64 | 75 | 12834 |
+| 07 | 6509 | 6372 | 97.9 | 6205 (95.3%) | 167 | 137 | 13639 |
+| 08 | 2758 | 2663 | 96.6 | 2641 (95.8%) | 22 | 95 | 5658 |
+| 09 | 5367 | 5177 | 96.5 | 4615 (86.0%) | 562 | 190 | 10971 |
+| 0A | 6778 | 6512 | 96.1 | 4382 (64.7%) | 2130 | 266 | 11091 |
+| 1F | 2132 | 2018 | 94.7 | 1777 (83.3%) | 241 | 114 | 4045 |
+| **all** | 60449 | 57582 | 95.3 | 50008 (82.7%) | 7574 | 2867 | |
+
+*organic* = reached by button input only from a real save (no memory pokes in the lineage); *forced-state only* = executed only after a run poked a RAM variable to satisfy/flip a logged exit condition or forced a mode (reachability not proven). Forced-state runs that left the known code were discarded, so the forced-state set contains no executed opcode outside the trace by construction.
+
+## 2. Organically executed opcodes NOT at a traced instruction start
+
+Total 0: 0 fall inside a traced instruction (mis-aligned entry / overlapping code), 0 are outside any traced code (tracer gaps).
+
+## 3. Static roots (extra_roots.json): executed or not
+
+75 roots executed (32 organically), 59 never executed.
+
+| root | executed | note |
+|---|---|---|
+| 00:0008 | yes (organic) | rst $08 vector body (wait for VBlank flag; falls through into rst $10 body); tracer only special-cases `rst $08` |
+| 00:0010 | yes (organic) | rst $10 vector body (HL = flag address; halt until ISR sets it) |
+| 00:0018 | yes (organic) | rst $18 vector body = jump-table dispatcher (pop hl; HL+2*A; jp hl) |
+| 00:0060 | forced-state only | joypad interrupt vector $60 = `jp $0389` (a reti); tracer lists only $40/$48/$50/$58 |
+| 00:0210 | yes (organic) | soft reset: VBlank ISR does `ld hl,$0210 ; push hl ; reti` at 00:031A when the reset key combo is held (a second copy of the boot sequence 0 |
+| 00:0367 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:0380 | yes (organic) | serial/joypad IRQ dispatcher: return address `ld hl,$0380; push hl` then `push bc; ret` into the [$FFC6] table (00:0368) |
+| 00:038A | yes (organic) | body of the inline mode-table dispatcher `call $038A` (special-cased by the tracer) |
+| 00:03A6 | yes (organic) | return address pushed by the $038A dispatcher (`ld de,$03a6; push de; jp hl`): restores ROM bank, ret |
+| 00:03D4 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:03DB | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:03F0 | forced-state only | OAM-DMA stub: 10-byte image copied by 00:03E2 into HRAM $FF80 and run by `call $FF80` (00:02A7); ROM address of the image |
+| 00:057F | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:069F | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:0751 | forced-state only | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:0762 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:0773 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:0781 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:08BB | yes (organic) | body of the one-way far jump helper `call $08BB` (special-cased) |
+| 00:08C1 | yes (organic) | body of the far-call helper `call $08C1` (special-cased) |
+| 00:10AC | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:190B | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:190F | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:19A2 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:1AEB | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:1C2F | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:1C56 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:24F1 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:2523 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:253C | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 00:2E82 | **no** | DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here |
+| 03:57BE | yes (organic) | cooperative task entry: PC stored as split immediates `ld a,$be ; ld [$d6fd],a ; ld a,$57 ; ld [$d6fe],a` (03:562D); resumed by the yield/sw |
+| 03:5847 | yes (organic) | cooperative task entry stored at $d70d/$d70e by 03:5637 (3rd task of the scene started at 03:5614) |
+| 03:5A7A | yes (organic) | cooperative task entry stored at $d6fd/$d6fe by 03:5919 (2nd task of the scene started at 03:5900; yield = 03:59AF) |
+| 03:5B00 | yes (organic) | cooperative task entry stored at $d70d/$d70e by 03:5923 (3rd task of the scene started at 03:5900) |

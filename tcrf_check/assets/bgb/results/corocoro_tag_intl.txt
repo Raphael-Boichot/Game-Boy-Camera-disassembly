@@ -1,0 +1,7 @@
+original tag bytes at $1FFD-$1FFF: aaaaaa (save CE10229233)
+no tag (as dumped)     -> $D582 = 1  $D562 = 1E  mode:state 19:03  SRAM tag after boot: aaaaaa
+56 56 53 (full tag)    -> $D582 = 1  $D562 = 1E  mode:state 19:03  SRAM tag after boot: 565653
+56 56 00 (2 of 3)      -> $D582 = 1  $D562 = 1E  mode:state 19:03  SRAM tag after boot: 565653
+00 56 53 (2 of 3)      -> $D582 = 1  $D562 = 1E  mode:state 19:03  SRAM tag after boot: 565653
+56 00 00 (1 of 3)      -> $D582 = 1  $D562 = 1E  mode:state 19:03  SRAM tag after boot: 560000
+00 00 00               -> $D582 = 1  $D562 = 1E  mode:state 19:03  SRAM tag after boot: 000000

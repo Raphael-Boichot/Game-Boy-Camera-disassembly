@@ -1,0 +1,3 @@
+baseline of the dj scenario (mode:state path, then the printer exchange: i = INIT, d = DATA, p = PRINT, q = INQUIRY, followed by the reply byte)
+path: 1F:09
+replies: i00 d00 d08 d08 d08 d08 q00 d00 d08 d08 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04 i00 d00 d08 d08 d08 d08 q00 d00 d08 d08 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04 i00 d00 d08 d08 d08 d08 q00 d00 d08 d08 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04 i00 d00 d08 d08 d08 d08 q00 d00 d08 d08 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04 i00 d00 d08 d08 d08 p08 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q06 q04

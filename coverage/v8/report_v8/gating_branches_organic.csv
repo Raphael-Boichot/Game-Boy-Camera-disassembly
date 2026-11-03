@@ -1,0 +1,316 @@
+branch,instr,gated_side,gated_target,unexecuted_instrs_reachable,tested_variable,preceding_instructions,branch_executed_organically
+04:5E4B,ret nz,fallthrough,04:5E4C,255,,"ld [$d641],a",1
+05:4757,ret z,fallthrough,05:4758,143,$FFA2 keys_new,"ret z ; ldh a,[$ffa2] ; bit 0,a",1
+00:1DA0,ret z,fallthrough,00:1DA1,130,$FFC3 sgb_present,"ldh a,[$ffc3] ; and a",1
+05:5539,"jr z,$555f",fallthrough,05:553B,121,$D8B3 performance-screen control cursor 0..4,"ld a,[$d8b3] ; and a",1
+08:45EA,"jr z,$45fe",fallthrough,08:45EC,92,$D803 `print_job_index`,"jr nz,$45f8 ; ld a,[$d803] ; and a",1
+03:6443,"jr c,$6450",taken,03:6450,52,,"ld hl,$d500 ; inc [hl] ; call $72cd",1
+05:540F,"jr z,$5477",fallthrough,05:5411,51,$FFA1 keys_held,"ldh a,[$ffa1] ; and $30",1
+05:4793,"jr z,$47f9",fallthrough,05:4795,44,$FFA2 keys_new,"call $1017 ; ldh a,[$ffa2] ; bit 2,a",1
+00:115F,"jr z,$1169",fallthrough,00:1161,42,,"add hl,bc ; ld a,[hl] ; and a",1
+00:121B,"jr z,$1225",fallthrough,00:121D,42,,"add hl,bc ; ld a,[hl] ; and a",1
+00:1A79,"jr z,$1adc",fallthrough,00:1A7B,42,$DC27 prn_status,"jr z,$1ad2 ; ld a,[hl] ; cp $01",1
+05:452D,ret z,fallthrough,05:452E,42,,"bit 1,a",1
+09:6393,ret z,fallthrough,09:6394,37,$D00D ([0] image-reducer accumulators+11),"ld a,[$d00d] ; and a",1
+07:6744,"jr nc,$6759",taken,07:6759,35,$D865 `shoot_boss_hits`,"inc [hl] ; ld a,[$d865] ; cp $32",1
+00:12EE,"jr nz,$1313",taken,00:1313,34,,"add hl,bc ; ld a,[hl] ; and a",1
+04:759A,"jr z,$75e8",fallthrough,04:759C,32,$D67E slider_redraw,"call $7c6c ; ld a,[$d67e] ; and a",1
+05:54F1,"jr nz,$5505",taken,05:5505,32,$D8C2 D8C0 saved at Start press,"jr z,$5520 ; ld a,[$d8c2] ; and a",1
+05:54F8,"jr nc,$5505",taken,05:5505,32,$D8C3 Start hold counter,"jr nz,$5505 ; ld a,[$d8c3] ; cp $1e",1
+05:48EF,ret z,fallthrough,05:48F0,30,,"ld hl,$ffa1 ; bit 0,[hl]",1
+05:4965,ret z,fallthrough,05:4966,30,,"ld hl,$ffa1 ; bit 0,[hl]",1
+05:67E4,ret z,fallthrough,05:67E5,30,$FFA2 keys_new,"add hl,bc ; ldh a,[$ffa2] ; bit 7,a",1
+05:6DF8,ret z,fallthrough,05:6DF9,30,$FFA2 keys_new,"add hl,bc ; ldh a,[$ffa2] ; bit 7,a",1
+05:56CB,"jr nz,$56d0",taken,05:56D0,26,$D8B9 NR51 mask (channel enables),"ld [$d8b9],a ; pop af ; cp $01",1
+07:57E8,"jr nz,$583a",taken,07:583A,26,$D818 `shoot_rapid_flag`,"ld a,[$d818] ; and a",1
+00:1A22,"jr z,$1a48",fallthrough,00:1A24,24,$DC0B prn_comp_enable,"ld a,[$dc0b] ; ld [$dc0c],a ; and a",1
+00:0AF9,"jr nz,$0b15",taken,00:0B15,23,,"ld a,[de] ; inc de ; bit 7,a",1
+06:48AE,"jr nz,$48cb",taken,06:48CB,23,,cp $01,1
+00:07EF,ret z,fallthrough,00:07F0,21,$FFD0 copy_req_flag,"ldh a,[$ffd0] ; and a",1
+00:149B,"jr z,$14e0",fallthrough,00:149D,21,"$D944 (**SOUND I** modulation: depth (0..99), speed (0..99), mode (0..2)+2)","ld [hl],a ; ld a,[$d944] ; and a",1
+00:1517,"jr z,$155c",fallthrough,00:1519,21,"$D989 (**SOUND II** modulation depth, speed, mode+2)","ld [hl],a ; ld a,[$d989] ; and a",1
+05:5097,"jr z,$50ad",fallthrough,05:5099,21,$D8B2 (animator slots: finished flags (`$D8B2` = slot 3)+3),"jr nc,$50b9 ; ld a,[$d8b2] ; and a",1
+06:6BDD,"jr nz,$6c18",taken,06:6C18,21,,cp $03,1
+0A:4EA7,"jr z,$4ed0",fallthrough,0A:4EA9,20,$FF8E diff_or_value,"ldh a,[$ff8e] ; dec a ; ldh [$ff8e],a",1
+02:4D8A,"jr nc,$4db5",taken,02:4DB5,19,,cp $1e,1
+02:4DD9,"jr nc,$4e0f",taken,02:4E0F,19,,cp $1e,1
+02:4E61,"jr nc,$4e8c",taken,02:4E8C,19,,cp $1e,1
+04:57D1,"jr nz,$57e5",taken,04:57E5,19,$D800 `extras_launch_flag` (return-to-mode-4 flag),"ld [$d63f],a ; ld a,[$d800] ; and a",1
+04:6115,"jr nz,$6129",taken,04:6129,19,$D800 `extras_launch_flag` (return-to-mode-4 flag),"call $0450 ; ld a,[$d800] ; and a",1
+00:05D5,"jr z,$05e0",taken,00:05E0,16,,"cp $04 ; jr nc,$05a1 ; cp $02",1
+05:4AFE,"jr c,$4b06",fallthrough,05:4B00,16,,"sub [hl] ; jr c,$4b06 ; cp $18",1
+00:105B,"jr nz,$1080",fallthrough,00:105D,15,$D919 (rest flags (1 = current step is a rest) SOUND I / II / NOISE+1),"jr z,$1080 ; ld a,[$d919] ; and a",1
+04:6E88,"jr z,$6ea9",fallthrough,04:6E8A,15,$D67C slider_target,"ld a,[$d67c] ; ld hl,$d67d ; cp [hl]",1
+09:54A0,"jp nz,$5632",fallthrough,09:54A3,15,,pop hl ; pop bc ; and a,1
+05:4F42,"jp z,$50dd",taken,05:50DD,14,,"cp $06 ; jp z,$5087 ; cp $07",1
+05:517B,"jr z,$519c",fallthrough,05:517D,14,$FF26 NR52,"ldh a,[$ff26] ; bit 0,a",1
+07:625D,ret c,fallthrough,07:625E,14,$D502 (sprite_anim_frame[15]+2),"call z,$627b ; ld a,[$d502] ; cp $14",1
+00:1E87,ret z,fallthrough,00:1E88,13,$FFC3 sgb_present,"ldh a,[$ffc3] ; and a",1
+04:485D,"jr nz,$4877",fallthrough,04:485F,13,$FFA1 keys_held,"ldh a,[$ffa1] ; cp $4c",1
+04:4918,ret nz,fallthrough,04:4919,13,$FFA1 keys_held,"ret nz ; ldh a,[$ffa1] ; cp $4c",1
+05:444E,"jr nz,$446d",fallthrough,05:4450,13,$D66D dirty_flag,"ret nz ; ld a,[$d66d] ; and a",1
+0A:470B,"jr nz,$4724",fallthrough,0A:470D,13,,"ld c,$0c ; ld a,[hl+] ; cp b",1
+05:4F29,"jp z,$500b",taken,05:500B,12,,"cp $01 ; jp z,$4fec ; cp $02",1
+05:4F2E,"jp z,$502a",taken,05:502A,12,,"cp $02 ; jp z,$500b ; cp $03",1
+05:4F33,"jp z,$5049",taken,05:5049,12,,"cp $03 ; jp z,$502a ; cp $04",1
+05:4F38,"jp z,$5068",taken,05:5068,12,,"cp $04 ; jp z,$5049 ; cp $05",1
+05:5091,"jr nc,$50b9",taken,05:50B9,12,$D8A6 (animator slots: frame index+3),"ld [$d8b8],a ; ld a,[$d8a6] ; cp $20",1
+07:6230,"jr nz,$624b",fallthrough,07:6232,12,$D502 (sprite_anim_frame[15]+2),"call $6424 ; ld a,[$d502] ; cp $05",1
+09:6AE7,ret c,fallthrough,09:6AE8,12,$D001 ([7] collision mask 0 (silhouette of image A)+1),"bit 7,a ; ret nz ; cp $14",1
+03:6262,"jr z,$627b",fallthrough,03:6264,11,,"ld hl,$d6b2 ; add hl,bc ; bit 6,[hl]",1
+07:66C6,"call c,$66d5",taken,07:66D5,11,,"sub [hl] ; add a,$03 ; cp $06",1
+00:1037,"jr nz,$1051",fallthrough,00:1039,10,$D918 rest flags (1 = current step is a rest) SOUND I / II / NOISE,"jr z,$1051 ; ld a,[$d918] ; and a",1
+05:6731,ret z,fallthrough,05:6732,10,,"bit 7,a",1
+05:6D45,ret z,fallthrough,05:6D46,10,,"bit 7,a",1
+06:576D,ret z,fallthrough,06:576E,10,,"bit 7,[hl]",1
+09:6FD2,ret c,fallthrough,09:6FD3,10,,sra a ; rr c ; call $7127,1
+04:47F7,"jr nz,$480b",fallthrough,04:47F9,9,$D5D6 msg_strip_sel,"call $419d ; ld a,[$d5d6] ; cp $0b",1
+05:56B0,"jr nz,$56c0",fallthrough,05:56B2,9,,"ld a,[de] ; and a",1
+05:671B,"jr z,$672f",fallthrough,05:671D,9,$FFA2 keys_new,"call $6769 ; ldh a,[$ffa2] ; bit 6,a",1
+05:6D2F,"jr z,$6d43",fallthrough,05:6D31,9,$FFA2 keys_new,"call $6d7d ; ldh a,[$ffa2] ; bit 6,a",1
+09:6B91,ret c,fallthrough,09:6B92,9,$D021 ([7] collision mask 0 (silhouette of image A)+33),"call $6ba5 ; ld a,[$d021] ; cp $14",1
+0A:48F9,"jr nz,$4913",fallthrough,0A:48FB,9,,cp $01,1
+0A:4915,"jr nz,$492f",fallthrough,0A:4917,9,,cp $02,1
+00:080E,"jr nz,$081f",fallthrough,00:0810,8,,"bit 7,h",1
+00:0AAA,ret nz,fallthrough,00:0AAB,8,$FF40 LCDC,"ld [$d520],a ; ldh a,[$ff40] ; bit 7,a",1
+00:0AFD,"jr nz,$0b0a",taken,00:0B0A,8,,"bit 7,a ; jr nz,$0b15 ; bit 6,a",1
+00:108A,"jr nz,$10a0",fallthrough,00:108C,8,$D91A (rest flags (1 = current step is a rest) SOUND I / II / NOISE+2),"jr z,$10a0 ; ld a,[$d91a] ; and a",1
+00:258D,"jr nc,$259e",fallthrough,00:258F,8,,"ld d,a ; cp $a0 ; ld a,[hl]",1
+04:4819,"jr c,$482b",fallthrough,04:481B,8,$D5D8 photo_index,"jr z,$4846 ; ld a,[$d5d8] ; cp $1e",1
+05:49A0,"jr z,$49ad",fallthrough,05:49A2,8,,"ld hl,$ffa3 ; bit 5,[hl]",1
+05:5750,"jr c,$575f",fallthrough,05:5752,8,,"ldh [$ff8a],a ; cp $02",1
+00:1B23,"jr z,$1b30",fallthrough,00:1B25,7,$DC0D prn_state,"ld a,[$dc0d] ; cp $01",1
+00:337B,ret z,fallthrough,00:337C,7,,"cp $ff ; jp z,$340f ; cp $f0",1
+03:6298,"jr z,$62ab",fallthrough,03:629A,7,,"ld hl,$d6b2 ; add hl,bc ; bit 7,[hl]",1
+03:77EE,"jr c,$77fc",fallthrough,03:77F0,7,,"add hl,de ; ld a,[hl] ; cp $22",1
+03:7CC9,"jr c,$7cd7",fallthrough,03:7CCB,7,,"add hl,de ; ld a,[hl] ; cp $22",1
+04:6553,"jr c,$6562",fallthrough,04:6555,7,,"push hl ; ld a,[de] ; cp $c0",1
+05:4178,"jr z,$4186",fallthrough,05:417A,7,$FFA2 keys_new,"call $41b9 ; ldh a,[$ffa2] ; bit 0,a",1
+05:4353,ret nz,fallthrough,05:4354,7,"$D9D5 start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved)","ld a,[$d9d5] ; and a",1
+05:4CC9,"jr z,$4cdb",fallthrough,05:4CCB,7,,"push hl ; ld a,[de] ; and a",1
+05:54CB,ret nz,fallthrough,05:54CC,7,"$D897 performer animation script id (0 = idle, 1..8)","call $57e3 ; ld a,[$d897] ; and a",1
+05:67A1,"jr z,$67b0",fallthrough,05:67A3,7,,"bit 3,a",1
+05:67B2,ret z,fallthrough,05:67B3,7,,"bit 0,a",1
+05:6DB5,"jr z,$6dc4",fallthrough,05:6DB7,7,,"bit 3,a",1
+05:6DC6,ret z,fallthrough,05:6DC7,7,,"bit 0,a",1
+07:77C3,"jr c,$77d3",fallthrough,07:77C5,7,,"add hl,de ; ld a,[hl] ; cp $22",1
+00:1CFB,"jr nz,$1d38",taken,00:1D38,6,$FF00 P1/JOYP,"ldh a,[$ff00] ; and $03 ; cp $03",1
+00:1D29,"jr nz,$1d38",taken,00:1D38,6,$FF00 P1/JOYP,"ldh a,[$ff00] ; and $03 ; cp $03",1
+00:3348,"jr z,$3356",fallthrough,00:334A,6,$D801 `print_custom_margin`,"ld de,$1003 ; ld a,[$d801] ; and a",1
+02:4CD4,"jr nz,$4ce7",fallthrough,02:4CD6,6,,"cp $18 ; jr nc,$4ce7 ; call $4d05",1
+03:4C9A,"jr z,$4ca5",fallthrough,03:4C9C,6,,"ld b,$2f ; ld a,[hl] ; and $c0",1
+04:5D61,"jr nz,$5d72",fallthrough,04:5D63,6,$D640 stamp_return_state,"call $05f8 ; ld a,[$d640] ; cp $03",1
+05:5247,"jr z,$5258",fallthrough,05:5249,6,$FF26 NR52,"ldh a,[$ff26] ; bit 0,a",1
+05:53FE,"jr z,$540b",fallthrough,05:5400,6,"$D8C5 pitch shift (semitones, -12..+11), decays to 0","jr nz,$540b ; ld a,[$d8c5] ; and a",1
+07:4F60,"jr c,$4f6d",fallthrough,07:4F62,6,,"cp [hl] ; jr c,$4f7a ; cp $1e",1
+09:4751,"jr z,$4764",fallthrough,09:4753,6,$DA8E tag_copy_flag,"ld a,[$da8e] ; and a",1
+00:1992,"jr z,$19ac",fallthrough,00:1994,5,,"bit 1,a ; jr nz,$19a0 ; bit 4,a",1
+02:4556,"jr z,$455f",fallthrough,02:4558,5,$FF8A scratch_a,"ld b,$05 ; ld a,[hl] ; and a",1
+03:4D49,"jr z,$4d56",fallthrough,03:4D4B,5,,"ld hl,$d6b2 ; add hl,bc ; bit 7,[hl]",1
+03:514A,"jr c,$5152",fallthrough,03:514C,5,,"ld b,a ; add a,c ; cp $30",1
+03:6153,"jr z,$6160",fallthrough,03:6155,5,,"ld hl,$d6b2 ; add hl,bc ; bit 7,[hl]",1
+03:7151,ret z,fallthrough,03:7152,5,$D500 sprite_anim_frame[15],"ld a,[$d500] ; and a",1
+03:7196,ret z,fallthrough,03:7197,5,$D500 sprite_anim_frame[15],"ld a,[$d500] ; and a",1
+03:7B43,"jr nz,$7b50",taken,03:7B50,5,$D800 `extras_launch_flag` (return-to-mode-4 flag),"call $03ad ; ld a,[$d800] ; and a",1
+03:7B7C,"jr nz,$7b83",taken,03:7B83,5,$D800 `extras_launch_flag` (return-to-mode-4 flag),"call $03ad ; ld a,[$d800] ; and a",1
+04:5CEB,"jr z,$5cf8",fallthrough,04:5CED,5,$D800 `extras_launch_flag` (return-to-mode-4 flag),"res 1,[hl] ; ld a,[$d800] ; and a",1
+04:61AB,"jr z,$61c0",fallthrough,04:61AD,5,$DA31 edge_dir,"jr nz,$61b8 ; ld a,[$da31] ; and a",1
+04:637C,"jr z,$6389",fallthrough,04:637E,5,$D800 `extras_launch_flag` (return-to-mode-4 flag),"res 1,[hl] ; ld a,[$d800] ; and a",1
+05:40BB,"jr nz,$40c5",fallthrough,05:40BD,5,"$D9D2 ""saved tune present"" flag","jr z,$40c5 ; ld a,[$d9d2] ; and a",1
+05:4DEA,"jr z,$4df6",taken,05:4DF6,5,$D8B3 performance-screen control cursor 0..4,"ld c,$00 ; ld a,[$d8b3] ; cp $01",1
+05:4DEE,"jr z,$4e01",taken,05:4E01,5,$D8B3 performance-screen control cursor 0..4,"cp $01 ; jr z,$4df6 ; cp $02",1
+05:4EC9,"jr z,$4ed6",fallthrough,05:4ECB,5,,"add hl,bc ; ld a,[hl] ; and a",1
+05:4F5D,"jr nz,$4f77",taken,05:4F77,5,,"add hl,bc ; ld a,[hl] ; and a",1
+05:4F71,"jr nz,$4f77",taken,05:4F77,5,,"add hl,bc ; ld a,[hl] ; and a",1
+06:4638,"jr c,$4642",fallthrough,06:463A,5,,"add hl,bc ; ld a,[hl] ; cp $22",1
+06:64D5,"jr nz,$64fb",taken,06:64FB,5,$D7E3 shoot_variant,"call $7823 ; ld a,[$d7e3] ; cp $02",1
+07:4742,"jr nz,$474f",fallthrough,07:4744,5,,"ld a,$07 ; ld hl,$4acb ; call $08c1",1
+09:6902,"jr nc,$690d",taken,09:690D,5,$D00B ([0] image-reducer accumulators+9),"ld a,[$d003] ; cp $2f ; ld a,[$d00b]",1
+09:6D73,"jr c,$6d7f",fallthrough,09:6D75,5,,call $2464 ; pop af ; cp $53,1
+00:0860,ret nc,fallthrough,00:0861,4,,"or c ; jr nz,$0824 ; pop af",1
+00:16AC,"jr nz,$16b6",fallthrough,00:16AE,4,$D88F `shoot_boss_variant`,"push bc ; ld a,[$d88f] ; cp $02",1
+00:1A63,"jp nz,$1acb",taken,00:1ACB,4,$DC27 prn_status,"ld hl,$dc3e ; ld a,[$dc27] ; bit 4,a",1
+03:7143,"jr nz,$714d",fallthrough,03:7145,4,$D510 sprite_anim_tick[15],"call $24af ; ld a,[$d510] ; cp [hl]",1
+03:7188,"jr nz,$7192",fallthrough,03:718A,4,$D510 sprite_anim_tick[15],"call $24af ; ld a,[$d510] ; cp [hl]",1
+04:5157,"jr nz,$5162",taken,04:5162,4,$DBCD del_variant,"jr nz,$514d ; ld a,[$dbcd] ; and a",1
+04:6564,"jr c,$656e",fallthrough,04:6566,4,,inc hl ; cp [hl],1
+05:426D,"jr nz,$4278",fallthrough,05:426F,4,"$D9D5 start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved)","call $03ad ; ld a,[$d9d5] ; and a",1
+05:427A,"jr nz,$4282",taken,05:4282,4,,cp $01,1
+05:42BB,"jr nz,$42c5",fallthrough,05:42BD,4,"$D9D5 start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved)","pop af ; ld a,[$d9d5] ; and a",1
+05:44B3,ret z,fallthrough,05:44B4,4,$FFA2 keys_new,"bit 1,a ; jr nz,$44be ; bit 0,a",1
+05:4DF2,"jr z,$4e0c",taken,05:4E0C,4,,"cp $02 ; jr z,$4e01 ; cp $03",1
+05:528C,"jr nz,$5297",taken,05:5297,4,$D8C1 copy of D8C0 for the play/pause icon,"ld a,[$d8c1] ; and a",1
+05:6261,"jr nz,$626d",fallthrough,05:6263,4,$D9D3 start menu: performer/character set (0..2),"push bc ; ld a,[$d9d3] ; cp $02",1
+05:787C,ret z,fallthrough,05:787D,4,,call $7c6b ; pop af ; and a,1
+07:4A2B,"jr z,$4a34",fallthrough,07:4A2D,4,$CFFF Link buffer: gender/blood byte of the sender,"ld b,a ; ld a,[hl] ; bit 0,b",1
+07:4A38,"jr z,$4a41",fallthrough,07:4A3A,4,,"ld [hl+],a ; ld a,[hl] ; bit 1,b",1
+07:6938,"jr nz,$6942",fallthrough,07:693A,4,$D88F `shoot_boss_variant`,"push bc ; ld a,[$d88f] ; cp $02",1
+07:6A47,"jr nz,$6a58",taken,07:6A58,4,$D800 `extras_launch_flag` (return-to-mode-4 flag),"call $0586 ; ld a,[$d800] ; and a",1
+08:482A,"jr nz,$4835",fallthrough,08:482C,4,$D7C1 border_number,"call $08c1 ; ld a,[$d7c1] ; cp $12",1
+09:6308,"jr nz,$6314",fallthrough,09:630A,4,$D04D ([7] collision mask 1+13),"ret nz ; ld a,[$d04d] ; cp $01",1
+1F:5224,"jr z,$5234",taken,1F:5234,4,,"cp $65 ; jr z,$522c ; cp $75",1
+00:1F8B,"jr nz,$1f9d",taken,00:1F9D,3,$FFDE blit_flag_stride,"ldh [$ffe1],a ; ldh a,[$ffde] ; and a",1
+00:260F,"jr nc,$2617",fallthrough,00:2611,3,,"dec c ; jr nz,$25a7 ; pop af",1
+02:466B,"jr z,$4672",fallthrough,02:466D,3,$DA56 owner_gender_blood,"ld b,a ; ld a,[hl] ; bit 0,b",1
+03:4E4E,"jr nz,$4dec",fallthrough,03:4E50,3,,"cp $fe ; jr c,$4e55 ; dec b",1
+03:552D,"jr z,$5533",fallthrough,03:552F,3,,"call $5580 ; ld hl,$d561 ; bit 7,a",1
+03:5558,"jr nz,$555e",fallthrough,03:555A,3,,"call $5580 ; ld hl,$d562 ; cp $fe",1
+03:62B8,"jr nz,$6256",fallthrough,03:62BA,3,,"cp $fe ; jr c,$62bf ; dec b",1
+03:79AC,"jr nz,$79b3",fallthrough,03:79AE,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+03:7B68,"jr c,$7b6f",fallthrough,03:7B6A,3,,"add hl,de ; ld a,[hl] ; cp $22",1
+04:4FB6,"jr c,$4fbd",fallthrough,04:4FB8,3,$DA0F copies_of_photo,"ld b,$00 ; ld a,[$da0f] ; cp $0a",1
+05:422A,"jr c,$4231",fallthrough,05:422C,3,$D9D6 start menu 2: factory song number (0..3),"inc a ; ld c,$00 ; cp $0a",1
+05:4A41,"jr z,$4a4a",fallthrough,05:4A43,3,$D8CC SOUND I playback step (0..D9AA-1),"inc [hl] ; ld a,[$d8cc] ; bit 7,a",1
+05:4A4F,"jr z,$4a58",fallthrough,05:4A51,3,$D8F6 SOUND II playback step,"ld a,[$d8f6] ; bit 7,a",1
+05:4A5D,"jr z,$4a66",fallthrough,05:4A5F,3,$D8FD NOISE playback step,"ld a,[$d8fd] ; bit 7,a",1
+05:4B09,"jr c,$4b0f",fallthrough,05:4B0B,3,,"ld a,b ; sub $18",1
+05:51A1,"jr c,$51a9",fallthrough,05:51A3,3,$D8A3 animator slots: frame index,"ld a,[$d8a3] ; cp $2e",1
+05:51FE,"jr z,$5209",fallthrough,05:5200,3,,"add hl,bc ; ld a,[hl] ; and a",1
+05:521B,"jr z,$5226",fallthrough,05:521D,3,,"add hl,bc ; ld a,[hl] ; and a",1
+05:5238,"jr z,$5243",fallthrough,05:523A,3,,"add hl,bc ; ld a,[hl] ; and a",1
+05:58FF,"jr z,$5909",fallthrough,05:5901,3,,"push af ; ld a,c ; and a",1
+05:5919,"jr z,$5923",fallthrough,05:591B,3,,"push af ; ld a,c ; and a",1
+06:4F9C,"jr z,$4fa7",fallthrough,06:4F9E,3,$D7FA (compose4_photos[4]+1),"ld hl,$d7fa ; cp [hl] ; ld [hl],a",1
+06:4FD7,"jr z,$4fe2",fallthrough,06:4FD9,3,$D7FB (compose4_photos[4]+2),"ld hl,$d7fb ; cp [hl] ; ld [hl],a",1
+06:5012,"jr z,$501d",fallthrough,06:5014,3,$D7FC (compose4_photos[4]+3),"ld hl,$d7fc ; cp [hl] ; ld [hl],a",1
+06:5239,"jr z,$5244",fallthrough,06:523B,3,$D7F7 compose2_photos[2],"ld hl,$d7f7 ; cp [hl] ; ld [hl],a",1
+06:5274,"jr z,$527f",fallthrough,06:5276,3,$D7F8 (compose2_photos[2]+1),"ld hl,$d7f8 ; cp [hl] ; ld [hl],a",1
+06:56AC,"jr c,$56b3",fallthrough,06:56AE,3,,inc a ; cp $0a,1
+07:528F,"jr nz,$5296",fallthrough,07:5291,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+07:5471,"jr nz,$5478",fallthrough,07:5473,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+07:6209,ret nz,fallthrough,07:620A,3,,"ld a,[hl] ; inc [hl] ; and a",1
+07:69B1,"jr c,$69bb",fallthrough,07:69B3,3,$D671 save_target_photo,"ld a,[$d671] ; cp $1e",1
+08:4093,"jr nz,$409a",fallthrough,08:4095,3,,"add hl,de ; ld a,[hl] ; cp $ff",1
+08:4BB3,"jr c,$4bba",fallthrough,08:4BB5,3,,"call $4bc6 ; ld c,$00 ; cp $0a",1
+08:4D7F,"jr c,$4d86",fallthrough,08:4D81,3,,"inc a ; ld c,$00 ; cp $0a",1
+08:52B0,"jr c,$52b7",fallthrough,08:52B2,3,$D5FF page_index_8,"inc a ; ld c,$00 ; cp $0a",1
+09:46EE,ret c,fallthrough,09:46EF,3,,"ld c,$00 ; cp $0a",1
+09:4713,"jr c,$471a",fallthrough,09:4715,3,$DA6F tag_count_total,"ld a,[$da6f] ; ld c,$00 ; cp $0a",1
+09:62F9,ret nz,fallthrough,09:62FA,3,$D04D ([7] collision mask 1+13),"ret z ; ld a,[$d04d] ; bit 7,a",1
+09:6906,ret nz,fallthrough,09:6907,3,$D00B ([0] image-reducer accumulators+9),"ld a,[$d00b] ; jr nc,$690d ; cp $09",1
+09:6D26,"jr nc,$6d2d",fallthrough,09:6D28,3,$D001 ([7] collision mask 0 (silhouette of image A)+1),sra a ; rr c ; call $7127,1
+09:715D,"jr nc,$7167",fallthrough,09:715F,3,,"adc a,[hl] ; daa ; ld [hl+],a",1
+00:015B,"jr nz,$0161",fallthrough,00:015D,2,$FF40 LCDC,"ldh [$ff0f],a ; ldh a,[$ff40] ; bit 7,a",1
+00:0488,"jr nz,$0499",taken,00:0499,2,,"bit 7,h",1
+00:04F5,"jr nz,$0506",taken,00:0506,2,,"bit 7,h",1
+00:0835,"jr nc,$083b",fallthrough,00:0837,2,,"jr nz,$083b ; ld a,c ; cp $40",1
+00:1113,"jr nz,$1118",fallthrough,00:1115,2,"$D93E (**SOUND I**: duty (0..2), length index+1)","ld [hl],$c0 ; ld a,[$d93e] ; and a",1
+00:11EE,"jr nz,$11f3",fallthrough,00:11F0,2,"$D986 (**SOUND II** wave pattern (0 square, 1 pseudo-random table, 2 user wave), length index+1)","ld [hl],$c0 ; ld a,[$d986] ; and a",1
+00:12AB,"jr nz,$12b0",fallthrough,00:12AD,2,"$D9AF **NOISE** gate (length index), loop length 1..16","ld [hl],a ; ld a,[$d9af] ; and a",1
+00:16C6,"jr nz,$16d7",taken,00:16D7,2,,"bit 7,h",1
+00:19D9,"jr nz,$19df",fallthrough,00:19DB,2,$DC0E prn_last_type,"ret nc ; ld a,[$dc0e] ; cp $02",1
+00:1B34,"jr z,$1b3a",fallthrough,00:1B36,2,$DC3B prn_tx_busy,"ld a,[$dc3b] ; and a",1
+00:1CD0,"jr z,$1cd7",fallthrough,00:1CD2,2,,"ld [c],a ; pop bc ; dec b",1
+00:2B02,"jr z,$2b20",taken,00:2B20,2,$FF01 SB (serial data),"cp $12 ; jr z,$2b25 ; cp $55",1
+00:31F4,"jr nz,$3205",taken,00:3205,2,,"bit 7,h",1
+00:3420,"jr z,$3426",fallthrough,00:3422,2,,"bit 6,a",1
+00:3428,"jr z,$342e",fallthrough,00:342A,2,,"bit 5,a",1
+02:47FC,"jr z,$4803",fallthrough,02:47FE,2,$CF33 Tag: copy flag F33,"call $296f ; ld a,[$cf33] ; and a",1
+03:41DA,"jr nz,$41e9",fallthrough,03:41DC,2,$D6E2 anim_speed,"jr z,$41e0 ; dec a ; cp $ff",1
+03:4B15,"jr nc,$4b1b",fallthrough,03:4B17,2,,"sla a ; add a,b ; cp $10",1
+03:4CE7,"jr z,$4ceb",fallthrough,03:4CE9,2,,and a,1
+03:5545,"jr c,$5549",fallthrough,03:5547,2,,"pop af ; ld hl,$d561 ; cp [hl]",1
+03:7516,"jr z,$751c",fallthrough,03:7518,2,,"cp $ff ; jr nc,$7556 ; bit 7,a",1
+04:467F,"jr c,$4685",fallthrough,04:4681,2,$D5D8 photo_index,"ld [$d5db],a ; ld a,[$d5d8] ; cp $1e",1
+04:47C7,"jr c,$47d6",taken,04:47D6,2,$D5D8 photo_index,"ld a,[$d5d8] ; call $440b ; call $463d",1
+04:487C,"jr c,$4880",fallthrough,04:487E,2,$D5D8 photo_index,"ld a,[$d5d8] ; cp $1e",1
+04:497E,"jr c,$4982",fallthrough,04:4980,2,$D5D8 photo_index,"pop af ; ld a,[$d5d8] ; cp $1e",1
+04:498C,"jr c,$4990",fallthrough,04:498E,2,,sub $08 ; or $01 ; cp $20,1
+04:49A5,"jr c,$49a9",fallthrough,04:49A7,2,$D5D8 photo_index,"pop af ; ld a,[$d5d8] ; cp $1e",1
+04:49AD,"jr c,$49b1",fallthrough,04:49AF,2,,and $f8 ; cp $20,1
+04:49C2,"jr c,$49c6",fallthrough,04:49C4,2,$D5D8 photo_index,"pop af ; ld a,[$d5d8] ; cp $1e",1
+04:49CC,"jr c,$49d0",fallthrough,04:49CE,2,,and $f8 ; or $02 ; cp $20,1
+04:4EDC,"jr c,$4ee0",fallthrough,04:4EDE,2,$D5D8 photo_index,"ld a,[$d5d8] ; cp $1e",1
+04:4FEC,"jr c,$4ff0",fallthrough,04:4FEE,2,$D5D8 photo_index,"call $05f8 ; ld a,[$d5d8] ; cp $1e",1
+04:52E2,"jr nz,$52e9",fallthrough,04:52E4,2,,"jr nz,$52cf ; ld a,c ; and a",1
+04:6F65,"jr c,$6f6a",fallthrough,04:6F67,2,$D5EE photo_number_sel,"inc a ; ld bc,$0000 ; cp $1f",1
+05:40F1,ret z,fallthrough,05:40F2,2,"$D9D5 start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved)","bit 5,b ; jr z,$40f5 ; and a",1
+05:41A0,ret z,fallthrough,05:41A1,2,$D9D6 start menu 2: factory song number (0..3),"bit 5,b ; jr z,$41a4 ; and a",1
+05:5768,ret nc,fallthrough,05:5769,2,,"ld de,$576b ; add a,e ; ld e,a",1
+05:578F,"jr nz,$5795",fallthrough,05:5791,2,$D8B4 channel states SOUND I / SOUND II / NOISE,"ld a,[$d8b4] ; and a",1
+05:57BB,"jr nz,$57c1",fallthrough,05:57BD,2,$D8B5 (channel states SOUND I / SOUND II / NOISE+1),"ld a,[$d8b5] ; and a",1
+05:57E7,"jr nz,$57ed",fallthrough,05:57E9,2,$D8B6 (channel states SOUND I / SOUND II / NOISE+2),"ld a,[$d8b6] ; and a",1
+06:56A4,"jr c,$56a9",fallthrough,06:56A6,2,,"push af ; ld bc,$0000 ; cp $1e",1
+06:5768,ret nz,fallthrough,06:5769,2,,pop af ; inc a ; cp c,1
+07:4C8B,"jr c,$4c91",fallthrough,07:4C8D,2,$D5D8 photo_index,"call $0d18 ; ld a,[$d5d8] ; cp $1e",1
+07:5AE6,"jr nc,$5aea",fallthrough,07:5AE8,2,,"ld [hl],$00 ; pop af ; ld a,$00",1
+07:5EB0,"jr nc,$5eb4",fallthrough,07:5EB2,2,,"ld [hl],$00 ; pop af ; ld a,$10",1
+07:60AD,"jr nc,$60b1",fallthrough,07:60AF,2,,"pop af ; ld a,$05",1
+09:5CAD,"jr z,$5cb1",fallthrough,09:5CAF,2,,"dec hl ; dec c ; bit 7,c",1
+09:70FB,"jr nc,$7101",fallthrough,09:70FD,2,,cp $80,1
+1F:5228,"jr z,$523c",fallthrough,1F:522A,2,,"cp $75 ; jr z,$5234 ; cp $7d",1
+00:04B3,"jr nc,$04b6",fallthrough,00:04B5,1,,"ld a,e ; add a,$0c ; ld e,a",1
+00:04CA,"jr nc,$04cd",fallthrough,00:04CC,1,,"ld a,e ; add a,$40 ; ld e,a",1
+00:052D,"jr nc,$0530",fallthrough,00:052F,1,,"ld a,e ; add a,$0c ; ld e,a",1
+00:0544,"jr nc,$0547",fallthrough,00:0546,1,,"ld a,e ; add a,$40 ; ld e,a",1
+00:1135,"jr nc,$1138",fallthrough,00:1137,1,"$D941 (**SOUND I** envelope: U/D, period (0..7), volume (0..15)+2)","ld c,a ; ld a,[$d941] ; sub c",1
+00:12C4,"jr nc,$12c7",fallthrough,00:12C6,1,"$D9AE (**NOISE** envelope: U/D, period (0..7), volume+2)","ld c,a ; ld a,[$d9ae] ; sub c",1
+00:13E8,"jr nc,$13eb",fallthrough,00:13EA,1,,"ld b,$20 ; ld a,[hl+] ; sub c",1
+00:2967,"jr nc,$296a",fallthrough,00:2969,1,,"ld a,l ; add a,$0c ; ld l,a",1
+00:3433,"jr z,$3439",taken,00:3439,1,$DC28 prn_dev_id,"ld a,[$dc28] ; cp $81",1
+02:43E9,"jp z,$4308",fallthrough,02:43EC,1,,"jr z,$43ef ; ld hl,$afd1 ; call $4108",1
+02:4607,"jr nc,$461f",taken,02:461F,1,,"pop bc ; ld a,c ; cp $1e",1
+02:487D,"jr nc,$4880",fallthrough,02:487F,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:48E5,"jr nc,$48e8",fallthrough,02:48E7,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:4939,"jr nc,$493c",fallthrough,02:493B,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:4996,"jr nc,$4999",fallthrough,02:4998,1,,"ld a,e ; add a,$5c ; ld e,a",1
+02:4C28,"jr nc,$4c2b",fallthrough,02:4C2A,1,,"ld a,e ; add a,$19 ; ld e,a",1
+03:41E6,"jr nz,$41e9",fallthrough,03:41E8,1,,ret z ; inc a ; cp $64,1
+03:4E1A,"jr nz,$4e21",taken,03:4E21,1,$D6B0 anim_loop_flag,"jr nz,$4e22 ; ld a,[$d6b0] ; and a",1
+03:5C11,"jr nc,$5c14",fallthrough,03:5C13,1,,"ld a,e ; add a,$08 ; ld e,a",1
+03:6284,"jr nz,$628b",taken,03:628B,1,$D6B0 anim_loop_flag,"jr nz,$628c ; ld a,[$d6b0] ; and a",1
+04:4097,"jr nz,$409c",fallthrough,04:4099,1,$D5DB stock_nav_allowed,"jr c,$409c ; ld a,[$d5db] ; and a",1
+04:5AE4,"jr nc,$5ae7",fallthrough,04:5AE6,1,,"ld a,e ; add a,$10 ; ld e,a",1
+04:5B36,"jr nc,$5b39",fallthrough,04:5B38,1,,"ld a,e ; add a,$10 ; ld e,a",1
+04:5E44,"jr nz,$5e48",fallthrough,04:5E46,1,$D641 stamp_rotate_timer,"ret z ; ld a,[$d641] ; dec a",1
+05:4B64,"jr z,$4b6d",taken,05:4B6D,1,,"cp d ; jr z,$4b69 ; cp e",1
+05:4BA3,"jr z,$4ba6",fallthrough,05:4BA5,1,,"inc hl ; push hl ; bit 0,e",1
+05:4F47,"jp z,$5102",fallthrough,05:4F4A,1,,"cp $07 ; jp z,$50dd ; cp $08",1
+05:5303,"jr c,$5309",fallthrough,05:5305,1,,"jr c,$5306 ; inc hl ; cp [hl]",1
+05:530E,"jr nc,$5311",fallthrough,05:5310,1,,"ld a,e ; add a,$04 ; ld e,a",1
+05:5317,"jr nc,$531a",fallthrough,05:5319,1,,"ld a,e ; add a,$04 ; ld e,a",1
+05:58E3,"jr nz,$58e7",fallthrough,05:58E5,1,,"push af ; ld bc,$582e ; and a",1
+05:695C,"jr nz,$6960",fallthrough,05:695E,1,"$D986 (**SOUND II** wave pattern (0 square, 1 pseudo-random table, 2 user wave), length index+1)","ld a,[$d986] ; ld bc,$5a2e ; and a",1
+06:4BA1,"jr nc,$4ba4",fallthrough,06:4BA3,1,,"ld a,e ; add a,$20 ; ld e,a",1
+06:4BBB,"jr nc,$4bbe",fallthrough,06:4BBD,1,,"ld a,e ; sub $20 ; ld e,a",1
+06:4BF5,"jr nc,$4bf8",fallthrough,06:4BF7,1,,"ld a,e ; add a,$20 ; ld e,a",1
+06:4BFC,"jr nc,$4bff",fallthrough,06:4BFE,1,,"ld a,l ; add a,$20 ; ld l,a",1
+06:4C0F,"jr nc,$4c12",fallthrough,06:4C11,1,,"ld a,e ; sub $20 ; ld e,a",1
+06:4C50,"jr nc,$4c53",fallthrough,06:4C52,1,,"ld a,l ; add a,$20 ; ld l,a",1
+06:4C72,"jr nc,$4c75",fallthrough,06:4C74,1,,"ld a,e ; sub $20 ; ld e,a",1
+06:4D4D,"jr nc,$4d50",fallthrough,06:4D4F,1,,"ld a,l ; add a,$08 ; ld l,a",1
+06:4D54,"jr nc,$4d57",fallthrough,06:4D56,1,,"ld a,e ; add a,$08 ; ld e,a",1
+06:4D5E,"jr nc,$4d61",fallthrough,06:4D60,1,,"ld a,e ; add a,$c0 ; ld e,a",1
+06:5713,"jr nc,$5716",fallthrough,06:5715,1,,"ld a,e ; add a,$d0 ; ld e,a",1
+06:572A,"jr nc,$572d",fallthrough,06:572C,1,,"ld a,e ; add a,$10 ; ld e,a",1
+06:5741,"jr nc,$5744",fallthrough,06:5743,1,,"ld a,e ; add a,$10 ; ld e,a",1
+06:5D06,"jr nc,$5d09",fallthrough,06:5D08,1,,"ld a,e ; add a,$08 ; ld e,a",1
+06:5D0D,"jr nc,$5d10",fallthrough,06:5D0F,1,,"ld a,l ; add a,$08 ; ld l,a",1
+06:5D1C,"jr nc,$5d1f",fallthrough,06:5D1E,1,,"ld a,e ; add a,$08 ; ld e,a",1
+06:5D23,"jr nc,$5d26",fallthrough,06:5D25,1,,"ld a,l ; add a,$08 ; ld l,a",1
+06:5D32,"jr nc,$5d35",fallthrough,06:5D34,1,,"ld a,e ; add a,$08 ; ld e,a",1
+06:5D39,"jr nc,$5d3c",fallthrough,06:5D3B,1,,"ld a,l ; add a,$08 ; ld l,a",1
+06:64EB,"jr c,$64ee",fallthrough,06:64ED,1,$D561 photo_count,"add a,$1f ; ld hl,$d7e8 ; cp [hl]",1
+06:7527,"jr nz,$752a",fallthrough,06:7529,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:7588,"jr nz,$758b",fallthrough,06:758A,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:7643,"jr nz,$7646",fallthrough,06:7645,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:76B0,"jr nz,$76b3",fallthrough,06:76B2,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:7774,"jr nz,$7777",fallthrough,06:7776,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+06:77E1,"jr nz,$77e4",fallthrough,06:77E3,1,,"xor [hl] ; ld [hl+],a ; inc l",1
+07:68A7,"jr nc,$68aa",fallthrough,07:68A9,1,,"ld a,l ; add a,$20 ; ld l,a",1
+07:7916,"jr nc,$7919",fallthrough,07:7918,1,,"ld a,e ; add a,$05 ; ld e,a",1
+07:791F,"jr nc,$7922",fallthrough,07:7921,1,,"ld a,e ; add a,$05 ; ld e,a",1
+08:4BDD,"jr z,$4be0",fallthrough,08:4BDF,1,,"jr z,$4bdb ; inc c ; bit 4,[hl]",1
+08:4BE2,"jr z,$4be5",fallthrough,08:4BE4,1,,"bit 3,[hl]",1
+08:4BE7,"jr z,$4bea",fallthrough,08:4BE9,1,,"bit 2,[hl]",1
+08:4BEC,"jr z,$4bef",fallthrough,08:4BEE,1,,"bit 1,[hl]",1
+08:4BF1,"jr z,$4bf4",fallthrough,08:4BF3,1,,"bit 0,[hl]",1
+08:4C01,"jr c,$4c05",fallthrough,08:4C03,1,$D810 `print_cursor`,"ld c,$00 ; ld a,[$d810] ; cp $1e",1
+08:4C16,"jr c,$4c1a",fallthrough,08:4C18,1,,"ldh [$ff8a],a ; cp $1e",1
+08:4D09,"jr nc,$4d0c",fallthrough,08:4D0B,1,,"ld a,e ; add a,$08 ; ld e,a",1
+08:4D76,"jr c,$4d7a",fallthrough,08:4D78,1,$D810 `print_cursor`,"ld [$d813],a ; ld a,[$d810] ; cp $1e",1
+09:477D,"jr c,$4781",fallthrough,09:477F,1,$DA95 cmt_photo_index,"ld de,$9540 ; ld a,[$da95] ; cp $1e",1
+09:6996,"jr nz,$699b",fallthrough,09:6998,1,$D04F ([7] collision mask 1+15),"ld hl,$69ab ; ld a,[$d04f] ; and $03",1
+0A:4034,"jr nc,$4037",fallthrough,0A:4036,1,$FF8A scratch_a,"ld bc,$7b00 ; add a,c ; ld c,a",1
+1F:4620,"jp z,$4796",fallthrough,1F:4623,1,,"cp $03 ; jr z,$4624 ; cp $04",1
+1F:47D0,"jr z,$4796",fallthrough,1F:47D2,1,,"cp $00 ; jr z,$47d3 ; cp $01",1

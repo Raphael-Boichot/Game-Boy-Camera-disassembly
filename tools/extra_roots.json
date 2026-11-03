@@ -1,0 +1,672 @@
+[
+[
+0,
+8,
+"rst $08 vector body (wait for VBlank flag; falls through into rst $10 body); tracer only special-cases `rst $08`"
+],
+[
+0,
+16,
+"rst $10 vector body (HL = flag address; halt until ISR sets it)"
+],
+[
+0,
+24,
+"rst $18 vector body = jump-table dispatcher (pop hl; HL+2*A; jp hl)"
+],
+[
+0,
+96,
+"joypad interrupt vector $60 = `jp $0389` (a reti); tracer lists only $40/$48/$50/$58"
+],
+[
+0,
+528,
+"soft reset: VBlank ISR does `ld hl,$0210 ; push hl ; reti` at 00:031A when the reset key combo is held (a second copy of the boot sequence 0150-020F)"
+],
+[
+0,
+871,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+896,
+"serial/joypad IRQ dispatcher: return address `ld hl,$0380; push hl` then `push bc; ret` into the [$FFC6] table (00:0368)"
+],
+[
+0,
+906,
+"body of the inline mode-table dispatcher `call $038A` (special-cased by the tracer)"
+],
+[
+0,
+934,
+"return address pushed by the $038A dispatcher (`ld de,$03a6; push de; jp hl`): restores ROM bank, ret"
+],
+[
+0,
+980,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+987,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+1008,
+"OAM-DMA stub: 10-byte image copied by 00:03E2 into HRAM $FF80 and run by `call $FF80` (00:02A7); ROM address of the image"
+],
+[
+0,
+1407,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+1695,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+1873,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+1890,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+1907,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+1921,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+2235,
+"body of the one-way far jump helper `call $08BB` (special-cased)"
+],
+[
+0,
+2241,
+"body of the far-call helper `call $08C1` (special-cased)"
+],
+[
+0,
+4268,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+6411,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+6415,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+6562,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+6891,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+7215,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+7254,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+9457,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+9507,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+9532,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+0,
+11906,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+3,
+22462,
+"cooperative task entry: PC stored as split immediates `ld a,$be ; ld [$d6fd],a ; ld a,$57 ; ld [$d6fe],a` (03:562D); resumed by the yield/switch routine 03:5649 via `pop ...; ret`"
+],
+[
+3,
+22599,
+"cooperative task entry stored at $d70d/$d70e by 03:5637 (3rd task of the scene started at 03:5614)"
+],
+[
+3,
+23162,
+"cooperative task entry stored at $d6fd/$d6fe by 03:5919 (2nd task of the scene started at 03:5900; yield = 03:59AF)"
+],
+[
+3,
+23296,
+"cooperative task entry stored at $d70d/$d70e by 03:5923 (3rd task of the scene started at 03:5900)"
+],
+[
+3,
+24425,
+"return address pushed before `jp hl` at 03:5F68 (per-step callback DE, 36 steps); loop body + tail jump to DE"
+],
+[
+3,
+24466,
+"return address pushed before `jp hl` at 03:5F91 (same helper, subtract variant)"
+],
+[
+3,
+25947,
+"return address pushed before the jump-table `jp hl` at 03:655A (`ld hl,$655b ; push hl`): `pop bc ; ret`"
+],
+[
+4,
+25603,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+4,
+25618,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+4,
+31901,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+5,
+25133,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+5,
+32540,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+5,
+32563,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+6,
+29132,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+7,
+16840,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+7,
+19021,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+7,
+19395,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+7,
+19434,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+7,
+20541,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+7,
+31021,
+"return address pushed before `jp hl` at 07:792C (helper $7900 loop continuation)"
+],
+[
+7,
+31473,
+"callback of the 6-byte-entry tables (7985,79E5,7A43,7A5E,7A85,7AAC,7AD3) walked by helper 07:7900 (`push bc; jp hl` at 07:792C)"
+],
+[
+7,
+31478,
+"callback of the 6-byte-entry tables (7985,79E5,7A43,7A5E,7A85,7AAC,7AD3) walked by helper 07:7900 (`push bc; jp hl` at 07:792C)"
+],
+[
+7,
+31483,
+"callback of the 6-byte-entry tables (7985,79E5,7A43,7A5E,7A85,7AAC,7AD3) walked by helper 07:7900 (`push bc; jp hl` at 07:792C)"
+],
+[
+7,
+31488,
+"callback of the 6-byte-entry tables (7985,79E5,7A43,7A5E,7A85,7AAC,7AD3) walked by helper 07:7900 (`push bc; jp hl` at 07:792C)"
+],
+[
+7,
+31493,
+"callback of the 6-byte-entry tables (7985,79E5,7A43,7A5E,7A85,7AAC,7AD3) walked by helper 07:7900 (`push bc; jp hl` at 07:792C)"
+],
+[
+7,
+31732,
+"return address pushed before `jp hl` at 07:7BF3 (frame-animation helper $7BDC: loads 4 tile blocks, then tail-jumps to the callback)"
+],
+[
+7,
+31843,
+"return address pushed before `jp hl` at 07:7C62 (animation helper $7C4B)"
+],
+[
+7,
+31954,
+"return address pushed before `jp hl` at 07:7CD1 (animation helper $7CBA)"
+],
+[
+7,
+32017,
+"frame-wait helper called by the three animation helpers (`call $7D11` from 7C10/7C80/7CEF), runs the pushed callback every VBlank"
+],
+[
+7,
+32040,
+"return address pushed before `jp hl` at 07:7D27 (callback invoked from the wait loop at $7D11)"
+],
+[
+9,
+27904,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+9,
+29213,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+10,
+19539,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+10,
+23229,
+"bank 0A `jp hl` at 5419 table $541A entry 32 (A=32: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+23351,
+"bank 0A `jp hl` at 5419 table $541A entry 35 (A=35: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+23430,
+"bank 0A `jp hl` at 5419 table $541A entry 36 (A=36: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+23509,
+"bank 0A `jp hl` at 5419 table $541A entry 37 (A=37: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+23610,
+"bank 0A `jp hl` at 5419 table $541A entry 38 (A=38: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+23680,
+"bank 0A `jp hl` at 5419 table $541A entry 39 (A=39: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+23847,
+"bank 0A `jp hl` at 5419 table $541A entry 40 (A=40: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24104,
+"bank 0A `jp hl` at 5419 table $541A entry 41 (A=41: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24110,
+"bank 0A `jp hl` at 5419 table $541A entry 42 (A=42: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24116,
+"bank 0A `jp hl` at 5419 table $541A entry 43 (A=43: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24122,
+"bank 0A `jp hl` at 5419 table $541A entry 44 (A=44: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24128,
+"bank 0A `jp hl` at 5419 table $541A entry 45 (A=45: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24191,
+"bank 0A `jp hl` at 5419 table $541A entry 46 (A=46: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24255,
+"bank 0A `jp hl` at 5419 table $541A entry 47 (A=47: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24316,
+"bank 0A `jp hl` at 5419 table $541A entry 48 (A=48: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24377,
+"bank 0A `jp hl` at 5419 table $541A entry 49 (A=49: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24505,
+"bank 0A `jp hl` at 5419 table $541A entry 50 (A=50: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24631,
+"bank 0A `jp hl` at 5419 table $541A entry 51 (A=51: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24692,
+"bank 0A `jp hl` at 5419 table $541A entry 52 (A=52: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24753,
+"bank 0A `jp hl` at 5419 table $541A entry 53 (A=53: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24814,
+"bank 0A `jp hl` at 5419 table $541A entry 54 (A=54: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24875,
+"bank 0A `jp hl` at 5419 table $541A entry 55 (A=55: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+24939,
+"bank 0A `jp hl` at 5419 table $541A entry 56 (A=56: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25003,
+"bank 0A `jp hl` at 5419 table $541A entry 57 (A=57: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25004,
+"bank 0A `jp hl` at 5419 table $541A entry 58 (A=58: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25005,
+"bank 0A `jp hl` at 5419 table $541A entry 59 (A=59: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25006,
+"bank 0A `jp hl` at 5419 table $541A entry 60 (A=60: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25007,
+"bank 0A `jp hl` at 5419 table $541A entry 61 (A=61: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25008,
+"bank 0A `jp hl` at 5419 table $541A entry 62 (A=62: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25009,
+"bank 0A `jp hl` at 5419 table $541A entry 63 (A=63: block 1 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25010,
+"bank 0A `jp hl` at 5419 table $541A entry 64 (A=64: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25115,
+"bank 0A `jp hl` at 5419 table $541A entry 65 (A=65: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25193,
+"bank 0A `jp hl` at 5419 table $541A entry 66 (A=66: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25272,
+"bank 0A `jp hl` at 5419 table $541A entry 69 (A=69: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25368,
+"bank 0A `jp hl` at 5419 table $541A entry 70 (A=70: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25450,
+"bank 0A `jp hl` at 5419 table $541A entry 71 (A=71: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25617,
+"bank 0A `jp hl` at 5419 table $541A entry 72 (A=72: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25878,
+"bank 0A `jp hl` at 5419 table $541A entry 73 (A=73: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25884,
+"bank 0A `jp hl` at 5419 table $541A entry 74 (A=74: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25890,
+"bank 0A `jp hl` at 5419 table $541A entry 75 (A=75: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25896,
+"bank 0A `jp hl` at 5419 table $541A entry 76 (A=76: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25902,
+"bank 0A `jp hl` at 5419 table $541A entry 77 (A=77: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+25962,
+"bank 0A `jp hl` at 5419 table $541A entry 78 (A=78: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26021,
+"bank 0A `jp hl` at 5419 table $541A entry 79 (A=79: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26078,
+"bank 0A `jp hl` at 5419 table $541A entry 80 (A=80: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26135,
+"bank 0A `jp hl` at 5419 table $541A entry 81 (A=81: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26255,
+"bank 0A `jp hl` at 5419 table $541A entry 82 (A=82: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26372,
+"bank 0A `jp hl` at 5419 table $541A entry 83 (A=83: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26429,
+"bank 0A `jp hl` at 5419 table $541A entry 84 (A=84: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26486,
+"bank 0A `jp hl` at 5419 table $541A entry 85 (A=85: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26543,
+"bank 0A `jp hl` at 5419 table $541A entry 86 (A=86: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26600,
+"bank 0A `jp hl` at 5419 table $541A entry 87 (A=87: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26660,
+"bank 0A `jp hl` at 5419 table $541A entry 88 (A=88: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26719,
+"bank 0A `jp hl` at 5419 table $541A entry 89 (A=89: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26720,
+"bank 0A `jp hl` at 5419 table $541A entry 90 (A=90: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26721,
+"bank 0A `jp hl` at 5419 table $541A entry 91 (A=91: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26722,
+"bank 0A `jp hl` at 5419 table $541A entry 92 (A=92: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26723,
+"bank 0A `jp hl` at 5419 table $541A entry 93 (A=93: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26724,
+"bank 0A `jp hl` at 5419 table $541A entry 94 (A=94: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+26725,
+"bank 0A `jp hl` at 5419 table $541A entry 95 (A=95: block 2 of 3, A = [bank6:$60DB+idx] | 0/$20/$40 via far call 06:781D -> 0A:7CFE -> 5406)"
+],
+[
+10,
+31974,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+10,
+31980,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+18141,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+19041,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+20412,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+21067,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+21433,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+21479,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+22339,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+],
+[
+31,
+32755,
+"DEAD-CODE (unreferenced): decodes cleanly to ret/jp, no call/jp/ld operand, table word or split-immediate points here"
+]
+]

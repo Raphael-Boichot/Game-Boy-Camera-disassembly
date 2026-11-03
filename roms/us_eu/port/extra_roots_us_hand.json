@@ -1,0 +1,10 @@
+[
+[6, 19175, "DEAD-CODE leftover: JP Mode16_LoadPageTiles (06:4AF8) reassembled at 06:4AE7, no reference in this build (port leftover scan 2026-10-31)"],
+[7, 18635, "DEAD-CODE leftover: JP Link_DrawLamps (07:4906) reassembled at 07:48CB; the international link screen draws progress bars instead; no reference"],
+[7, 18701, "DEAD-CODE leftover: JP Link_FlickerLamp3 (07:4948) reassembled at 07:490D; no reference"],
+[9, 22157, "DEAD-CODE leftover: JP OwnerCard_DrawBloodType (09:55AE) reassembled at 09:568D; the English owner card has no blood-type field; no reference"],
+[9, 23841, "DEAD-CODE leftover: JP Kb_Page0_Press_Dakuten (09:5C77) reassembled at 09:5D21 (ld hl, Kb_DakutenMapTbl / jp Kb_ApplyMarkTable); no reference"],
+[9, 23863, "DEAD-CODE leftover: JP Kb_Page0_Press_Handakuten (09:5C8D) reassembled at 09:5D37; no reference"],
+[9, 23876, "DEAD-CODE leftover: JP Kb_ApplyMarkTable (09:5C9A) reassembled at 09:5D44; no reference"],
+[9, 21741, "DEAD-CODE leftover: JP Kb_LoadGlyphSetC (09:540E) reassembled at 09:54ED inside the bytes of Kb_GlyphListB; the international keyboard has two glyph sets; no reference (L6 2026-11-02)"]
+]

@@ -1,0 +1,9 @@
+frame,event,score,live_best_BCD,mode_state
+10318,score reaches 100,100,0000,20:04
+26461,score reaches 300,300,0000,20:04
+37944,score reaches 500,500,0000,20:04
+47887,score reaches 700,700,0000,20:04
+62778,score reaches 1000,1000,0000,20:04
+67680,"end of the key log, game alive: yes",1100,0000,20:04
+67781,"ball lost, state 20:06",1100,1100,20:06
+68381,after 600 idle frames,1100,1100,20:06

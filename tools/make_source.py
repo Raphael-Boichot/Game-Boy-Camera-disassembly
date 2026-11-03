@@ -1,0 +1,456 @@
+#!/usr/bin/env python3
+"""Write the editable source tree of the Japanese Rev A ROM (L5): roms/jp_rev_a/src/.
+
+usage: python3 tools/make_source.py --rom pocketcamera_jp.gb [--mgbdis /path/to/mgbdis.py] [--out roms/jp_rev_a/src] [--check]
+       python3 tools/make_source.py --tree us_eu --rom gbcam_usa_eu.gb [--check]      (the international tree, roms/us_eu/src/, from the ported tables)
+       python3 tools/make_source.py --tree gold --rom gbcam_gold.gb [--check]         (the Gold tree, roms/gold/src/, the same way)
+
+Steps: mgbdis (master, `--print-hex`) disassembles the ROM with roms/jp_rev_a/pocketcamera_jp.sym beside a copy of it; tools/sym_fix.py --tables --const
+writes the word / far-pointer tables, the RAM names, the constants, the state names and the character map into the listing; this script then
+  * keeps one file per bank (`bank_000.asm` ... `bank_03f.asm`) and `game.asm`, which includes them after hardware.inc, ram_jp.inc, const_jp.inc and charmap_jp.inc;
+  * moves every graphics, map or font block, and every other block of plain `db` rows of at least BIG bytes, into its own file under `data/bank_BB/`
+    (`.2bpp` tiles, `.tilemap` tile maps, `.bin` anything else) and writes `INCBIN` in its place, after checking that the file holds exactly the ROM bytes;
+  * keeps the ROM address of every instruction as a comment (`; $4A0B`) and drops the raw opcode bytes;
+  * writes the tag and the note of every label of roms/jp_rev_a/disasm/sym_names_jp.csv above it (cut at NOTE characters; the CSV has the full text).
+Everything in src/ is overwritten: edit the tables of roms/jp_rev_a/disasm/ and run this again, or edit src/ by hand and stop regenerating it.
+`--check` assembles the new tree with rgbasm / rgblink / rgbfix (rgbds 1.0.4 in PATH, or RGBDS=dir) and requires md5 fdcfe686cf4df461e870b6e53b2b5a8b.
+The Makefile at the top of the repository builds it: `make` (build/jp_rev_a/pocketcamera_jp.gb), `make check`, `make source ROM=... MGBDIS=...`."""
+import sys as _s; _s.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
+import argparse, csv, hashlib, os, re, shutil, subprocess, sys, tempfile, textwrap
+
+HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
+JP = os.path.join(REPO, 'roms', 'jp_rev_a')
+MD5 = 'fdcfe686cf4df461e870b6e53b2b5a8b'
+_US = os.path.join(REPO, 'roms', 'us_eu'); _USD = os.path.join(_US, 'disasm')
+# one preset per tree (--tree): the international one is built from the tables ported from the Japanese ones (docs §1.5)
+TREES = {
+    'jp_rev_a': dict(dir=JP, rom='pocketcamera_jp.gb', sym=os.path.join(JP, 'pocketcamera_jp.sym'), trace=os.path.join(JP, 'wram', 'trace_jp_v3.json'),
+                     names=[os.path.join(JP, 'disasm', 'sym_names_jp.csv')], md5=MD5, title='Pocket Camera (Japan) (Rev A)', fix=[],
+                     cov=os.path.join(REPO, 'coverage', 'results', 'merged_state', 'cov.npz'), report=os.path.join(JP, 'disasm', 'rom_operands_jp.csv'),
+                     manual=None, readers={}),
+    'us_eu': dict(dir=_US, rom='gbcam_usa_eu.gb', sym=os.path.join(_US, 'gbcam_usa_eu.sym'), trace=os.path.join(_US, 'port', 'trace_us.json'),
+                  names=[os.path.join(_USD, 'sym_names_us.csv'), os.path.join(_USD, 'sym_names_us_loaders.csv'), os.path.join(_USD, 'sym_names_us_reads.csv'), os.path.join(_USD, 'sym_names_us_checked.csv'), os.path.join(_USD, 'sym_names_us_hand.csv')],
+                  md5='42d2f65e2549be9d1d126a6828b5d1c1', title='Game Boy Camera (USA, Europe)',
+                  fix=['--far-helpers', '0473,049C,061B,068D,0734,0950,0956', '--ram-names', os.path.join(_USD, 'ram_names_us.csv'),
+                       '--ram-access', os.path.join(_US, 'wram', 'wram_access_us.csv'), '--ram-exclude', os.path.join(_USD, 'ram_exclude_us.csv'),
+                       '--ram-highbyte', os.path.join(_USD, 'ram_highbyte_us.csv'), '--const-names', os.path.join(_USD, 'const_names_us.csv'),
+                       '--const-types', os.path.join(_USD, 'const_types_us.csv'), '--const-tables', os.path.join(_USD, 'const_tables_us.csv'),
+                       '--const-sounds', os.path.join(_USD, 'sound_names_us.csv'), '--state-names', os.path.join(_USD, 'state_names_us.csv'),
+                       '--state-helpers', os.path.join(_USD, 'state_helpers_us.csv'), '--text-tables', os.path.join(_USD, 'text_tables_us.csv'),
+                       '--charmap', os.path.join(_USD, 'charmap_us.inc') + ',' + os.path.join(JP, 'disasm', 'charmap_jp.inc')],
+                  cov=os.path.join(_US, 'port', 'cov_us.npz'), report=os.path.join(_USD, 'rom_operands_us.csv'),
+                  manual=os.path.join(_USD, 'rom_operands_manual_us.csv'), readers='port'),
+}
+_GO = os.path.join(REPO, 'roms', 'gold'); _GOD = os.path.join(_GO, 'disasm')     # the Gold edition: the same preset as the international one, on the Gold tables (L5, 2026-11-02)
+TREES['gold'] = dict(dir=_GO, rom='gbcam_gold.gb', sym=os.path.join(_GO, 'gbcam_gold.sym'), trace=os.path.join(_GO, 'port', 'trace_gold.json'),
+                     names=[os.path.join(_GOD, 'sym_names_gold%s.csv' % x) for x in ('', '_loaders', '_reads', '_checked', '_hand')],
+                     md5='b2999cfb6dacb439f501a71f30f91762', title='Game Boy Camera Gold (USA)',
+                     fix=['--far-helpers', '0473,049C,061B,068D,0734,0950,0956', '--ram-names', os.path.join(_GOD, 'ram_names_gold.csv'),
+                          '--ram-access', os.path.join(_GO, 'wram', 'wram_access_gold.csv'), '--ram-exclude', os.path.join(_GOD, 'ram_exclude_gold.csv'),
+                          '--ram-highbyte', os.path.join(_GOD, 'ram_highbyte_gold.csv'), '--const-names', os.path.join(_GOD, 'const_names_gold.csv'),
+                          '--const-types', os.path.join(_GOD, 'const_types_gold.csv'), '--const-tables', os.path.join(_GOD, 'const_tables_gold.csv'),
+                          '--const-sounds', os.path.join(_GOD, 'sound_names_gold.csv'), '--state-names', os.path.join(_GOD, 'state_names_gold.csv'),
+                          '--state-helpers', os.path.join(_GOD, 'state_helpers_gold.csv'), '--text-tables', os.path.join(_GOD, 'text_tables_gold.csv'),
+                          '--charmap', os.path.join(_GOD, 'charmap_gold.inc') + ',' + os.path.join(JP, 'disasm', 'charmap_jp.inc')],
+                     cov=os.path.join(_GO, 'port', 'cov_gold.npz'), report=os.path.join(_GOD, 'rom_operands_gold.csv'),
+                     manual=os.path.join(_GOD, 'rom_operands_manual_gold.csv'), readers='port', suffix='gold')
+TREES['us_eu']['suffix'] = 'us'
+T = TREES['jp_rev_a']
+BIG = 256          # a plain db block of this size or more goes to a .bin file even when it is not an asset
+NOTE = 300         # characters of a label note kept in the source
+TILES = ('Gfx_', 'Sheet_', 'Font_', 'Kana_', 'TileGap_', 'DjPrintFont_')
+MAPS = ('Map_', 'BgMap_')
+ASSET = TILES + MAPS + ('Src_',)
+
+
+def kind(name, size=16):
+    if size % 16 == 0 and (name.startswith(TILES) or (name.startswith('Unused_TCRF_') and name.endswith('_Gfx')) or name.endswith(('_Tiles', '_Gfx'))): return '2bpp'
+    if name.startswith(MAPS) or name.endswith('_Map'): return 'tilemap'
+    return 'bin'
+
+
+def run(cmd, **kw):
+    p = subprocess.run(cmd, capture_output=True, text=True, **kw)
+    if p.returncode: sys.exit('make_source: %s failed:\n%s' % (' '.join(cmd[:3]), (p.stderr or p.stdout)[-2000:]))
+    return p.stdout
+
+
+def gfx_shape(size):
+    """(width in tiles, tiles to trim from the last row) of the PNG of a tile block: 16 tiles wide like the ROM sheets."""
+    n = size // 16; w = min(16, n)
+    return w, (w - n % w) % w
+
+
+def gfx_list(src):
+    """[(png, 2bpp, trim)] read from src/gfx.mk."""
+    return re.findall(r'^\$\(BUILD\)/(\S+\.2bpp): \$\(SRC\)/(\S+\.png)\n\t\$\(RGBGFX\) -x (\d+)', open(os.path.join(src, 'gfx.mk')).read(), re.M)
+
+
+def build(src, rom_out, rgbds=None):
+    """What the Makefile does: PNG -> 2bpp (rgbgfx), assemble, link, fix; returns the md5."""
+    env = dict(os.environ)
+    if rgbds: env['PATH'] = rgbds + os.pathsep + env['PATH']
+    o = rom_out + '.o'; b = rom_out + '.d'
+    for out2, png, x in gfx_list(src):
+        os.makedirs(os.path.dirname(os.path.join(b, out2)), exist_ok=True)
+        run(['rgbgfx', '-x', x, '-o', os.path.join(b, out2), os.path.join(src, png)], env=env)
+    run(['rgbasm', '-I', b + os.sep, '-I', src + os.sep, '-o', o, os.path.join(src, 'game.asm')], env=env)
+    shutil.rmtree(b)
+    run(['rgblink', '-o', rom_out, o], env=env)
+    run(['rgbfix', '-v', '-p', '255', rom_out], env=env)
+    os.remove(o)
+    return hashlib.md5(open(rom_out, 'rb').read()).hexdigest()
+
+
+FAR = ('Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4', 'Mem_CopyFromBank', 'Far_Call', 'Sgb_SendPacket', 'Sgb_SendVramTransfer',
+       'SpaceFever_CopyTextRows')
+
+
+def far_labels(out):
+    """`ld a, $BB` + `ld hl, $XXXX` before a call to a routine of FAR (a = bank, hl = address): write `ld a, BANK(Label)` / `ld hl, Label`
+    when a label of the tree sits at BB:XXXX. Same bytes; the data or code can then move and the call follows it."""
+    files = sorted(f for f in os.listdir(out) if re.match(r'bank_[0-9a-f]{3}\.asm$', f))
+    defined = set()
+    for f in files:
+        defined.update(re.findall(r'^([A-Za-z_]\w*)::?\s*$', open(os.path.join(out, f), encoding='utf-8').read(), re.M))
+    at = {}
+    for l in open(T['sym'], encoding='utf-8'):
+        m = re.match(r'([0-9a-fA-F]{2}):([0-9a-fA-F]{4}) (\S+)', l)
+        if m and m.group(3) in defined: at.setdefault((int(m.group(1), 16), int(m.group(2), 16)), m.group(3))
+    done = left = 0
+    for f in files:
+        p = os.path.join(out, f); L = open(p, encoding='utf-8').read().split('\n'); ch = False
+        for i, l in enumerate(L):
+            m = re.match(r'(\s+ld a, )\$([0-9a-f]{2})(\s.*)?$', l)
+            if not m: continue
+            for k in range(1, 4):
+                if i + k >= len(L) or re.match(r'\s+ld a,', L[i + k]): break
+                m2 = re.match(r'(\s+ld hl, )\$([4-7][0-9a-f]{3})(\s.*)?$', L[i + k])
+                if not m2: continue
+                call = next((L[i + q] for q in range(k + 1, k + 5) if i + q < len(L) and re.search(r'\b(call|jp) ', L[i + q])), '')
+                if not any(re.search(r'\b(call|jp) %s\b' % x, call) for x in FAR): break
+                lab = at.get((int(m.group(2), 16), int(m2.group(2), 16)))
+                if not lab: left += 1; break
+                L[i] = (m.group(1) + 'BANK(%s)' % lab).ljust(50) + (m.group(3) or '').strip()
+                L[i + k] = (m2.group(1) + lab).ljust(50) + (m2.group(3) or '').strip()
+                L[i] = L[i].rstrip(); L[i + k] = L[i + k].rstrip(); done += 1; ch = True
+                break
+        if ch: open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(L))
+    return dict(far=done, far_left=left)
+
+
+MACROS = """; Macros of the Pocket Camera source tree, written by tools/make_source.py. Each one assembles to the same bytes as the lines it replaces.
+
+; farcopy ROUTINE, SOURCE, DEST, LENGTH: copy LENGTH bytes from SOURCE (any bank) to DEST with a banked copy routine
+; (Mem_CopyFromBank, Vram_CopyFromBank, Vram_CopyFromBankAuto, Vram_CopyFromBank_4)
+MACRO farcopy
+    ld a, BANK(\\2)
+    ld hl, \\2
+    ld de, \\3
+    ld bc, \\4
+    call \\1
+ENDM
+
+; farcall TARGET: call TARGET in its own bank through Far_Call
+MACRO farcall
+    ld a, BANK(\\1)
+    ld hl, \\1
+    call Far_Call
+ENDM
+
+; dwb LABEL: a 3-byte far pointer {lo, hi, bank}
+MACRO dwb
+    dw \\1
+    db BANK(\\1)
+ENDM
+
+; set_state STATE: the state of the current mode (leaves A = STATE)
+MACRO set_state
+    ld a, \\1
+    ld [wState], a
+ENDM
+
+; next_state: the next state of the current mode (leaves HL = wState)
+MACRO next_state
+    ld hl, wState
+    inc [hl]
+ENDM
+
+; play_sfx1 / play_sfx3 / play_sfx4 / play_music ID: request a sound on that channel; A is kept
+MACRO play_sfx1
+    push af
+    ld a, \\1
+    call Snd_Sfx1
+    pop af
+ENDM
+
+MACRO play_sfx3
+    push af
+    ld a, \\1
+    call Snd_Sfx3
+    pop af
+ENDM
+
+MACRO play_sfx4
+    push af
+    ld a, \\1
+    call Snd_Sfx4
+    pop af
+ENDM
+
+MACRO play_music
+    push af
+    ld a, \\1
+    call Snd_Music
+    pop af
+ENDM
+
+; ui_sfx VALUE: post a request to wUiSfxRequest; A is kept
+MACRO ui_sfx
+    push af
+    ld a, \\1
+    ld [wUiSfxRequest], a
+    pop af
+ENDM
+
+; screen_off: fade the palettes out, then switch the LCD off
+MACRO screen_off
+    call Pal_FadeOut
+    call Lcd_Off
+ENDM
+
+; stat_irq_off: clear the LY=LYC source (bit 6) in the STAT shadow and disable the STAT interrupt in IE (leaves HL = rIE)
+MACRO stat_irq_off
+    ld hl, hStatShadow
+    res 6, [hl]
+    ld hl, rIE
+    res 1, [hl]
+ENDM
+
+; screen_on: clear the sprite shadow, all-white palettes, LCD on
+MACRO screen_on
+    call Oam_ClearShadow
+    call Pal_AllWhite
+    call Lcd_On
+ENDM
+"""
+SND = {'call Snd_Sfx1': 'play_sfx1', 'call Snd_Sfx3': 'play_sfx3', 'call Snd_Sfx4': 'play_sfx4', 'call Snd_Music': 'play_music'}
+FIXED = (('screen_off', ('call Pal_FadeOut', 'call Lcd_Off')), ('stat_irq_off', ('ld hl, hStatShadow', 'res 6, [hl]', 'ld hl, rIE', 'res 1, [hl]')),
+         ('screen_on', ('call Oam_ClearShadow', 'call Pal_AllWhite', 'call Lcd_On')))
+UNROLL = ('ld a, [hl+]', 'ld [de], a', 'inc e')
+MBC = {'0000': 'rRAMG', '2000': 'rROMB0', '4000': 'rRAMB'}
+COPIERS = ('Mem_CopyFromBank', 'Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4')
+
+
+def jp_far_records(T):
+    """The {lo, hi, bank} records of the Japanese listing (its `dwb X` lines, and `dw X + n` / `db BANK(X)` pairs), at their place in this build:
+    {flat offset here: (JP flat offset, JP flat offset of the target)} through the byte map port/map_<s>.npy (JP flat -> flat here, -1 = no counterpart).
+    The Japanese tree is read as written (roms/jp_rev_a/src): every data block after a label is counted byte by byte from the label's address."""
+    import numpy as np
+    M = np.load(os.path.join(T['dir'], 'port', 'map_%s.npy' % T['suffix']))
+    jsym = {}
+    for l in open(os.path.join(JP, 'pocketcamera_jp.sym'), encoding='utf-8'):
+        p_ = l.split()
+        if len(p_) == 2 and ':' in p_[0]: jsym[p_[1]] = (int(p_[0][:2], 16), int(p_[0][3:], 16))
+    def flat(b, x): return x if b == 0 else b * 0x4000 + x - 0x4000
+    res = {}
+    for f in sorted(os.listdir(os.path.join(JP, 'src'))):
+        mb = re.match(r'bank_([0-9a-f]{3})\.asm$', f)
+        if not mb: continue
+        bank = int(mb.group(1), 16); o = None; L = open(os.path.join(JP, 'src', f), encoding='utf-8').read().split('\n'); i = 0
+        while i < len(L):
+            c = L[i].split(';')[0].strip(); ml = re.match(r'([A-Za-z_]\w*)::?$', c)
+            if ml: o = flat(bank, jsym[ml.group(1)][1]) if ml.group(1) in jsym else None; i += 1; continue
+            if o is None or not c: i += 1; continue
+            md = re.match(r'dwb (\w+)$', c); mw = re.match(r'dw (\w+)( \+ \$([0-9A-Fa-f]+))?$', c)
+            nx = L[i + 1].split(';')[0].strip() if i + 1 < len(L) else ''
+            tgt = None
+            if md and md.group(1) in jsym: tgt = jsym[md.group(1)]; n = 3
+            elif mw and mw.group(1) in jsym and nx == 'db BANK(%s)' % mw.group(1):
+                tgt = (jsym[mw.group(1)][0], jsym[mw.group(1)][1] + int(mw.group(3) or '0', 16)); n = 3; i += 1
+            if tgt:
+                here = int(M[o]); ht = int(M[flat(*tgt)])
+                if here >= 0 and all(int(M[o + d]) == here + d for d in (1, 2)): res[here] = (o, flat(*tgt), ht)
+                o += n; i += 1; continue
+            m2 = re.match(r'(db|dw|ds) (.*)$', c)
+            if not m2: o = None; i += 1; continue           # code or a macro: the block ends
+            ops = [x for x in m2.group(2).split(',') if x.strip()]
+            if m2.group(1) == 'ds' or any('"' in x for x in ops): o = None; i += 1; continue
+            o += len(ops) * (2 if m2.group(1) == 'dw' else 1); i += 1
+    return res
+
+
+SYMBANK = {}
+def use_macros(out, sym=None):
+    """Rewrite the five patterns of MACROS (on adjacent lines only, so no label can sit inside one); the first line's address comment stays."""
+    SYMBANK.clear()
+    for f in sorted(os.listdir(out)):                # the labels of the listing itself, by the bank file that defines them (bank 0 has no BANK())
+        mb = re.match(r'bank_([0-9a-f]{3})\.asm$', f)
+        if not mb or mb.group(1) == '000': continue
+        for l in open(os.path.join(out, f), encoding='utf-8'):
+            ml = re.match(r'([A-Za-z_][A-Za-z0-9_]*)::?', l)
+            if ml: SYMBANK[ml.group(1)] = int(mb.group(1), 16)
+    cnt = dict(farcopy=0, farcall=0, dwb=0, set_state=0, next_state=0, play=0, ui_sfx=0, screen_off=0, stat_irq_off=0, screen_on=0, rept=0, rept_lines=0, mbc=0)
+    def code(l): return l.split(';')[0].strip()
+    def addr(l): m = re.search(r'; \$[0-9A-F]{4}', l); return m.group(0) if m else ''
+    def put(text, l): return ('    ' + text).ljust(49) + ' ' + addr(l) if addr(l) else '    ' + text
+    for f in sorted(os.listdir(out)):
+        if not re.match(r'bank_[0-9a-f]{3}\.asm$', f): continue
+        p = os.path.join(out, f); L = open(p, encoding='utf-8').read().split('\n'); R = []; i = 0
+        while i < len(L):
+            c = [code(x) for x in L[i:i + 5]] + [''] * 5
+            m = re.match(r'ld a, BANK\((\w+)\)$', c[0])
+            mh = re.match(r'ld a, \$([0-9a-fA-F]{2})$', c[0]); mh2 = re.match(r'ld hl, (\w+)$', c[1])
+            if not m and mh and mh2 and SYMBANK.get(mh2.group(1)) == int(mh.group(1), 16):     # a bank number left as a number (no operand row): BANK() when it is the bank of the label loaded next
+                m = mh2
+            if m and c[1] == 'ld hl, ' + m.group(1):
+                x = m.group(1)
+                if c[2].startswith('ld de, ') and c[3].startswith('ld bc, ') and c[4].startswith('call ') and c[4][5:] in COPIERS:
+                    R.append(put('farcopy %s, %s, %s, %s' % (c[4][5:], x, c[2][7:], c[3][7:]), L[i])); cnt['farcopy'] += 1; i += 5; continue
+                if c[2] == 'call Far_Call':
+                    R.append(put('farcall ' + x, L[i])); cnt['farcall'] += 1; i += 3; continue
+            m = re.match(r'dw (\w+)$', c[0])
+            if m and c[1] == 'db BANK(%s)' % m.group(1):
+                R.append(put('dwb ' + m.group(1), L[i])); cnt['dwb'] += 1; i += 2; continue
+            m = re.match(r'ld a, (STATE_\w+)$', c[0])
+            if m and c[1] == 'ld [wState], a':
+                R.append(put('set_state ' + m.group(1), L[i])); cnt['set_state'] += 1; i += 2; continue
+            if c[0] == 'ld hl, wState' and c[1] == 'inc [hl]':
+                R.append(put('next_state', L[i])); cnt['next_state'] += 1; i += 2; continue
+            if c[0] == 'push af' and c[1].startswith('ld a, ') and c[3] == 'pop af' and (c[2] in SND or c[2] == 'ld [wUiSfxRequest], a'):
+                mac = SND.get(c[2], 'ui_sfx'); R.append(put('%s %s' % (mac, c[1][6:]), L[i])); cnt['ui_sfx' if mac == 'ui_sfx' else 'play'] += 1; i += 4; continue
+            hit = next((m_ for m_, seq in FIXED if tuple(c[:len(seq)]) == seq), None)
+            if hit:
+                R.append(put(hit, L[i])); cnt[hit] += 1; i += len(dict(FIXED)[hit]); continue
+            n = 0
+            while tuple(code(x) for x in L[i + 3 * n:i + 3 * n + 3]) == UNROLL: n += 1
+            if n >= 4:                                   # an unrolled copy: REPT, the address of its first byte and the length
+                R += [put('REPT %d' % n, L[i]), '        ld a, [hl+]', '        ld [de], a', '        inc e', '    ENDR' + ' ' * 41 + '; %d copies of 3 bytes' % n]
+                cnt['rept'] += 1; cnt['rept_lines'] += 3 * n; i += 3 * n; continue
+            mm = re.match(r'^(\s+ld \[)\$(0000|2000|4000)(\], a)(.*)$', L[i])
+            if mm:                                    # the MBC registers (hardware.inc): RAM enable, ROM bank, RAM bank / camera registers
+                R.append(put('ld [%s], a' % MBC[mm.group(2)], L[i]))
+                cnt['mbc'] += 1; i += 1; continue
+            R.append(L[i]); i += 1
+        open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(R))
+    open(os.path.join(out, 'macros.inc'), 'w', encoding='utf-8', newline='\n').write(MACROS)
+    return cnt
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--rom', required=True); ap.add_argument('--mgbdis', default=os.environ.get('MGBDIS', '/home/claude/tc/mgbdis/mgbdis.py'))
+    ap.add_argument('--tree', default='jp_rev_a', choices=sorted(TREES), help='which ROM: jp_rev_a (default), us_eu or gold (the tables ported from the Japanese ones)')
+    ap.add_argument('--out', default=None); ap.add_argument('--check', action='store_true'); ap.add_argument('--rgbds', default=os.environ.get('RGBDS'))
+    ap.add_argument('--report', default=None, help='the operand decisions (tools/rom_operands.py)')
+    a = ap.parse_args()
+    global T, MD5; T = TREES[a.tree]; MD5 = T['md5']
+    a.out = a.out or os.path.join(T['dir'], 'src'); a.report = a.report or T['report']
+    rom = open(a.rom, 'rb').read()
+    if hashlib.md5(rom).hexdigest() != MD5: sys.exit('make_source: %s is not the %s ROM (md5 %s)' % (a.rom, T['title'], MD5))
+    tmp = tempfile.mkdtemp(prefix='make_source_')
+    try:
+        os.makedirs(os.path.join(tmp, 'in'))
+        shutil.copy(a.rom, os.path.join(tmp, 'in', T['rom'])); shutil.copy(T['sym'], os.path.join(tmp, 'in'))
+        lst = os.path.join(tmp, 'lst')
+        run([sys.executable, a.mgbdis, os.path.join(tmp, 'in', T['rom']), '--output-dir', lst, '--overwrite', '--print-hex'])
+        run([sys.executable, os.path.join(HERE, 'sym_fix.py'), lst, '--tables', '--const', '--rom', a.rom,
+             '--sym', T['sym'], '--trace', T['trace']] + T['fix'], cwd=REPO)
+        names = {}; _at = {}
+        for fn in T['names']:                       # layers: a later file wins at the same address; `-` removes the label
+            if not os.path.exists(fn): continue
+            for r in csv.DictReader(open(fn, encoding='utf-8')):
+                k = (r['bank'].lower(), r['addr'].lower())
+                if k in _at: names.pop(_at.pop(k), None)
+                if r['name'] in ('-', ''): continue
+                names[r['name']] = r; _at[k] = r['name']
+        out = a.out
+        if os.path.isdir(out): shutil.rmtree(out)
+        os.makedirs(os.path.join(out, 'data'))
+        stats = dict(incbin=0, incbin_bytes=0, notes=0, banks=0, png=0); gfx = []
+        env = dict(os.environ)
+        if a.rgbds: env['PATH'] = a.rgbds + os.pathsep + env['PATH']
+        for f in sorted(os.listdir(lst)):
+            m = re.match(r'bank_([0-9a-f]{3})\.asm$', f)
+            if not m: continue
+            bank = int(m.group(1), 16); stats['banks'] += 1
+            L = open(os.path.join(lst, f), encoding='utf-8').read().split('\n')
+            _rel = os.path.relpath(T['dir'], REPO)
+            outl = ['; %s, bank $%02X. Written by tools/make_source.py from %s/%s and the tables of' % (T['title'], bank, _rel, os.path.basename(T['sym'])),
+                    '; %s/disasm/ (mgbdis + tools/sym_fix.py). The comment of a label is its tag (C / I / ?) and note; `; $XXXX` is the ROM address.' % _rel, '']
+            i = 0
+            while i < len(L):
+                line = L[i]
+                if i < 5 and line.startswith(';'): i += 1; continue          # mgbdis' banner
+                lm = re.match(r'^([A-Za-z_]\w*)::?\s*$', line)
+                if lm and not lm.group(1).startswith('jr_'):
+                    name = lm.group(1); r = names.get(name)
+                    if r and r['note'].strip():
+                        note = re.sub(r'\s+', ' ', r['note'].strip())
+                        if len(note) > NOTE: note = note[:NOTE].rsplit(' ', 1)[0] + ' ...'
+                        for w in textwrap.wrap('%s: %s' % (r['conf'], note), 116): outl.append('; ' + w)
+                        stats['notes'] += 1
+                    elif r: outl.append('; %s' % r['conf'])
+                    # a block of plain db rows up to the next label / section
+                    j = i + 1; nbytes = 0; ok = True
+                    while j < len(L) and not re.match(r'^([A-Za-z_]\w*):', L[j]) and not L[j].startswith('SECTION'):
+                        s = L[j].strip()
+                        if s.startswith('db '):
+                            ops = [x.strip() for x in s[3:].split(',')]
+                            if not all(re.match(r'^\$[0-9a-f]{2}$', x) for x in ops): ok = False; break
+                            nbytes += len(ops)
+                        elif s and not s.startswith(';'): ok = False; break
+                        j += 1
+                    if ok and r and nbytes and (name.startswith(ASSET) or kind(name) != 'bin' or nbytes >= BIG):
+                        ad = int(r['addr'], 16); off = ad if bank == 0 else bank * 0x4000 + ad - 0x4000
+                        blob = rom[off:off + nbytes]
+                        want = bytes(int(x.strip()[1:], 16) for s2 in L[i + 1:j] if s2.strip().startswith('db ') for x in s2.strip()[3:].split(','))
+                        if blob != want: sys.exit('make_source: %s: listing bytes differ from the ROM' % name)
+                        rel = 'data/bank_%02x/%s.%s' % (bank, name, kind(name, nbytes))
+                        os.makedirs(os.path.dirname(os.path.join(out, rel)), exist_ok=True)
+                        if kind(name, nbytes) == '2bpp':         # the source is a PNG; the .2bpp is built from it (gfx.mk)
+                            w, x = gfx_shape(nbytes); png = rel[:-5] + '.png'
+                            t2 = os.path.join(tmp, 't.2bpp'); open(t2, 'wb').write(blob)
+                            run(['rgbgfx', '-r', str(w), '-x', str(x), '-o', t2, os.path.join(out, png)], env=env)
+                            run(['rgbgfx', '-x', str(x), '-o', t2 + 'b', os.path.join(out, png)], env=env)
+                            if open(t2 + 'b', 'rb').read() != blob: sys.exit('make_source: %s: the PNG does not give the ROM bytes back' % name)
+                            gfx.append('$(BUILD)/%s: $(SRC)/%s\n\t$(RGBGFX) -x %d -o $@ $<' % (rel, png, x)); stats['png'] += 1
+                        else:
+                            open(os.path.join(out, rel), 'wb').write(blob)
+                        outl.append(line); outl.append('    INCBIN "%s" ; $%04X, %d bytes' % (rel, ad, nbytes))
+                        stats['incbin'] += 1; stats['incbin_bytes'] += nbytes
+                        i = j; continue
+                    outl.append(line); i += 1; continue
+                # keep the address, drop the opcode bytes
+                line = re.sub(r';\s*\$([0-9a-f]{4}):(?: \$[0-9a-f]{2})+\s*$', lambda mm: '; $' + mm.group(1).upper(), line)
+                outl.append(line.rstrip()); i += 1
+            open(os.path.join(out, f), 'w', encoding='utf-8', newline='\n').write('\n'.join(outl).rstrip('\n') + '\n')
+        stats.update(far_labels(out))
+        import rom_operands
+        readers = T['readers']
+        if readers == 'port':                      # the STRUCT_READERS sites of the Japanese build at their address in this one (instruction map)
+            cm = {(int(r['bank'], 16), int(r['jp'], 16)): (int(r['bank'], 16), int(r['other'], 16)) for r in csv.DictReader(open(os.path.join(T['dir'], 'port', 'code_map_%s.csv' % T['suffix'])))}
+            readers = {k: cm[(0 if k[1] < 0x4000 else k[0], k[1])] for k, *_ in rom_operands.STRUCT_READERS if (0 if k[1] < 0x4000 else k[0], k[1]) in cm}
+        ported = jp_far_records(T) if T['readers'] == 'port' else {}
+        stats.setdefault('label_to_num', 0); stats.update(rom_operands.apply(out, T['sym'], rom, T['cov'], a.report, names=T['names'], manual_csv=T['manual'], reader_sites=readers, ported_far=ported))
+        stats.update(use_macros(out, T['sym']))
+        open(os.path.join(out, 'gfx.mk'), 'w', newline='\n').write('# Written by tools/make_source.py: one rule per tile PNG (width 16 tiles; -x = blank tiles at the end of the last row).\n'
+                                                                  'GFX := %s\n\n%s\n' % (' '.join('$(BUILD)/' + g.split(':')[0][9:] for g in gfx), '\n\n'.join(gfx)))
+        for inc in ('hardware.inc', 'ram_jp.inc', 'const_jp.inc', 'charmap_us.inc', 'charmap_gold.inc', 'charmap_jp.inc'):
+            if os.path.exists(os.path.join(lst, inc)): shutil.copy(os.path.join(lst, inc), os.path.join(out, inc))
+        g = open(os.path.join(lst, 'game.asm'), encoding='utf-8').read().split('\n')
+        g = ['; %s (SGB Enhanced), md5 %s.' % (T['title'], MD5),
+             '; The editable source tree (L5), written by tools/make_source.py; build it with `make` at the top of the repository.', ''] + [l for l in g if l.startswith('INCLUDE')]
+        g.insert(max(i for i, l in enumerate(g) if re.match(r'INCLUDE "(const_jp|charmap_\w+)\.inc"', l)) + 1, 'INCLUDE "macros.inc"')
+        open(os.path.join(out, 'game.asm'), 'w', encoding='utf-8', newline='\n').write('\n'.join(g) + '\n')
+        print('make_source: %(banks)d banks, %(incbin)d INCBIN files (%(incbin_bytes)d bytes, %(png)d tile blocks as PNG), %(notes)d label notes, %(far)d far pointers as labels (%(far_left)d left as numbers); ROM operands: %(ptr)d pointers as labels (%(ptr_table_words)d table words, %(wrong_bank)d wrong-bank labels corrected), %(num)d numbers (%(label_to_num)d listing labels back to numbers), %(undecided)d undecided, %(rec_words)d record words (%(rec_far)d with their bank, %(rec_stride)d unread records of the same tables; %(rec_outside)d outside plain byte blocks, %(rec_offset)d inside a block left as numbers, %(rec_out_of_table)d read past the end of their table), %(code_labels)d labels added at code targets, %(aligned)d page-aligned tables; macros: farcopy %(farcopy)d, farcall %(farcall)d, dwb %(dwb)d, set_state %(set_state)d, next_state %(next_state)d, play_* %(play)d, ui_sfx %(ui_sfx)d, screen_off %(screen_off)d, stat_irq_off %(stat_irq_off)d, screen_on %(screen_on)d, REPT %(rept)d (%(rept_lines)d lines); %(mbc)d MBC writes as rRAMG / rROMB0 / rRAMB ->' % stats, os.path.relpath(out, REPO))
+        if a.check:
+            md5 = build(out, os.path.join(tmp, 'check.gb'), a.rgbds)
+            print('make_source: rebuilt md5', md5, 'OK' if md5 == MD5 else 'DIFFERS')
+            if md5 != MD5: sys.exit(1)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,38 @@
+run,event,site,mode,state,rom_bank,pc,count
+pvoice,RD,,,,1F,476C,104
+pvoice,RD,,,,1F,5600,233
+pvoice,S1 10,,,,07,2A7C,26
+pvoice,WR,,,,01,0440,4
+pvoice,WR,,,,07,16FB,26
+pvoice,WR,,,,07,1703,26
+pvoice,WR,,,,07,170D,26
+pvoice,WR,,,,07,1715,26
+pvoice,WR,,,,1F,5347,4
+pvoice,WR,,,,1F,541E,5
+pvoice,call,SlidePlay_ShowNext,$0D,$07,,,52
+pvoice,call,Snd_PlayTagDigits,$0D,$07,,,26
+shoot,RD,,,,1F,476C,4
+shoot,RD,,,,1F,5600,114
+shoot,S1 10,,,,06,2A7C,1
+shoot,WR,,,,01,0440,4
+shoot,WR,,,,06,16FB,1
+shoot,WR,,,,06,1703,1
+shoot,WR,,,,06,170D,1
+shoot,WR,,,,06,1715,1
+shoot,WR,,,,1F,5347,4
+shoot,WR,,,,1F,541E,3
+shoot,call,ShutterVariant0,$14,$02,,,2
+shoot,call,Snd_PlayTagDigits,$14,$02,,,1
+fusion,RD,,,,1F,476C,4
+fusion,RD,,,,1F,5600,431
+fusion,S1 10,,,,06,2A7C,1
+fusion,WR,,,,01,0440,4
+fusion,WR,,,,06,16FB,1
+fusion,WR,,,,06,1703,1
+fusion,WR,,,,06,170D,1
+fusion,WR,,,,06,1715,1
+fusion,WR,,,,1F,5347,4
+fusion,WR,,,,1F,541E,12
+fusion,WR,,,,1F,555F,1
+fusion,call,Fusion_Result,$17,$0F,,,2
+fusion,call,Snd_PlayTagDigits,$17,$0F,,,1

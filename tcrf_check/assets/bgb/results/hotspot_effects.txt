@@ -1,0 +1,18 @@
+viewer state 0C:03, pointer cell (D667,D668) = (8,7)
+effect  0: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  1: +30 fr core 0C:04 bgb 0C:04 same-pixels 0.93  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  2: +30 fr core 0C:04 bgb 0C:04 same-pixels 0.82  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  3: +30 fr core 0C:04 bgb 0C:04 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  4: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  5: +30 fr core 0C:04 bgb 0C:04 same-pixels 0.95  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  6: +30 fr core 0C:04 bgb 0C:04 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  7: +30 fr core 0C:04 bgb 0C:04 same-pixels 0.90  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  8: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect  9: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect 10: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect 11: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect 12: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect 13: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect 14: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+effect 15: +30 fr core 0C:03 bgb 0C:03 same-pixels 1.00  +90 fr core 0C:03 bgb 0C:03 same-pixels 1.00
+mean pixel agreement 0.9872802734375

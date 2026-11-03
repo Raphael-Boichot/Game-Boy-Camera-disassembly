@@ -1,0 +1,3 @@
+2026-10-08 10:04:57 corpus /mnt/user-data/outputs/coverage_run/worker7_a/corpus.jsonl entries 18785 roots 1162 kept 69 save GAMEBOYCAMERA_all_unlocked
+2026-10-08 10:06:58 ckpt 3477 replayed exec 53159 organic 53159 sigchg 1544
+2026-10-08 10:08:58 ckpt 6581 replayed exec 61216 organic 61216 sigchg 3372

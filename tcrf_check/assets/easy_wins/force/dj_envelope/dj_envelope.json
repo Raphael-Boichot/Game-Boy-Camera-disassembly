@@ -1,0 +1,47 @@
+{
+ "experiment": "dj_envelope",
+ "doc": "D.J. SOUND I page (1F:05): the envelope volume of the note about to be played is $D941 - $D8CF (00:1131-1138) and 00:1137 sets it to 0 when $D941 < $D8CF; $D8CF := $FF poked while A, Start and the arrows are pressed",
+ "start": "1F:05",
+ "trials": [
+  [
+   16,
+   "1F:05",
+   false
+  ],
+  [
+   128,
+   "1F:05",
+   false
+  ],
+  [
+   1,
+   "1F:05",
+   false
+  ],
+  [
+   4,
+   "1F:05",
+   false
+  ],
+  [
+   20,
+   "1F:05",
+   false
+  ],
+  [
+   17,
+   "1F:05",
+   false
+  ],
+  [
+   32,
+   "1F:05",
+   false
+  ]
+ ],
+ "hits": {
+  "00:1137": false,
+  "00:1100": true
+ },
+ "end": "1F:05"
+}

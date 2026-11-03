@@ -1,0 +1,47 @@
+2026-10-07 23:08:12 FRESH run; saves 16 combos 18
+2026-10-07 23:08:34 seeds 320 counters (5576, 34454, 10, 36)
+2026-10-07 23:08:35 checkpoint 0.1s {'exec_bytes': 5576, 'rom_data_bytes': 34454, 'ram_exec_addrs': 10, 'bank_select_sites': 36} entries 320 sigs 4
+2026-10-07 23:09:05 it 563 fr 239596  {'ex': 31943, 'dr': 233836, 'ram': 10, 'bsel': 162}  entries 721 sigs 69
+2026-10-07 23:09:35 it 1125 fr 486063  {'ex': 56493, 'dr': 310555, 'ram': 10, 'bsel': 200}  entries 1060 sigs 128
+2026-10-07 23:10:05 it 1662 fr 726376  {'ex': 65808, 'dr': 360525, 'ram': 10, 'bsel': 230}  entries 1328 sigs 166
+2026-10-07 23:10:35 it 2222 fr 973943  {'ex': 67354, 'dr': 378941, 'ram': 10, 'bsel': 233}  entries 1455 sigs 174
+2026-10-07 23:11:05 it 2785 fr 1224363  {'ex': 68828, 'dr': 411465, 'ram': 10, 'bsel': 239}  entries 1553 sigs 178
+2026-10-07 23:11:35 checkpoint 0.1s {'exec_bytes': 71264, 'rom_data_bytes': 424143, 'ram_exec_addrs': 10, 'bank_select_sites': 241} entries 1664 sigs 185
+2026-10-07 23:11:35 it 3392 fr 1476078  {'ex': 71264, 'dr': 424143, 'ram': 10, 'bsel': 241}  entries 1664 sigs 185
+2026-10-07 23:12:05 it 3992 fr 1733810  {'ex': 72831, 'dr': 428685, 'ram': 10, 'bsel': 241}  entries 1745 sigs 193
+2026-10-07 23:12:35 it 4602 fr 1990912  {'ex': 73210, 'dr': 429347, 'ram': 10, 'bsel': 242}  entries 1807 sigs 193
+2026-10-07 23:13:05 it 5212 fr 2241008  {'ex': 73336, 'dr': 434790, 'ram': 10, 'bsel': 243}  entries 1851 sigs 193
+2026-10-07 23:13:35 it 5752 fr 2484068  {'ex': 73371, 'dr': 435836, 'ram': 10, 'bsel': 245}  entries 1904 sigs 193
+2026-10-07 23:14:05 it 6303 fr 2730311  {'ex': 73720, 'dr': 440275, 'ram': 10, 'bsel': 245}  entries 1971 sigs 193
+2026-10-07 23:14:35 checkpoint 0.1s {'exec_bytes': 73734, 'rom_data_bytes': 451867, 'ram_exec_addrs': 10, 'bank_select_sites': 245} entries 2035 sigs 193
+2026-10-07 23:14:35 it 6906 fr 2982007  {'ex': 73734, 'dr': 451867, 'ram': 10, 'bsel': 245}  entries 2035 sigs 193
+2026-10-07 23:15:05 it 7463 fr 3237839  {'ex': 73749, 'dr': 454736, 'ram': 10, 'bsel': 246}  entries 2078 sigs 194
+2026-10-07 23:15:35 it 8042 fr 3498373  {'ex': 76301, 'dr': 476016, 'ram': 10, 'bsel': 255}  entries 2148 sigs 202
+2026-10-07 23:16:05 it 8617 fr 3752463  {'ex': 76676, 'dr': 478318, 'ram': 10, 'bsel': 256}  entries 2176 sigs 202
+2026-10-07 23:16:35 it 9200 fr 4009097  {'ex': 76998, 'dr': 484304, 'ram': 10, 'bsel': 258}  entries 2219 sigs 203
+2026-10-07 23:17:05 it 9797 fr 4263061  {'ex': 77689, 'dr': 493032, 'ram': 10, 'bsel': 260}  entries 2282 sigs 204
+2026-10-07 23:17:35 checkpoint 0.1s {'exec_bytes': 77712, 'rom_data_bytes': 495091, 'ram_exec_addrs': 10, 'bank_select_sites': 261} entries 2305 sigs 204
+2026-10-07 23:17:35 it 10368 fr 4513368  {'ex': 77712, 'dr': 495091, 'ram': 10, 'bsel': 261}  entries 2305 sigs 204
+2026-10-07 23:18:05 it 10958 fr 4767480  {'ex': 78133, 'dr': 511613, 'ram': 10, 'bsel': 266}  entries 2340 sigs 204
+2026-10-07 23:18:35 it 11526 fr 5011105  {'ex': 78151, 'dr': 516671, 'ram': 10, 'bsel': 267}  entries 2356 sigs 204
+2026-10-07 23:19:05 it 12111 fr 5260334  {'ex': 78211, 'dr': 525095, 'ram': 10, 'bsel': 267}  entries 2386 sigs 204
+2026-10-07 23:19:35 it 12669 fr 5503288  {'ex': 78569, 'dr': 534346, 'ram': 10, 'bsel': 267}  entries 2411 sigs 204
+2026-10-07 23:20:05 it 13218 fr 5746710  {'ex': 78775, 'dr': 534550, 'ram': 10, 'bsel': 267}  entries 2429 sigs 204
+2026-10-07 23:20:35 checkpoint 0.1s {'exec_bytes': 79035, 'rom_data_bytes': 534694, 'ram_exec_addrs': 10, 'bank_select_sites': 267} entries 2442 sigs 204
+2026-10-07 23:20:35 it 13791 fr 5993573  {'ex': 79035, 'dr': 534701, 'ram': 10, 'bsel': 267}  entries 2443 sigs 204
+2026-10-07 23:21:05 it 14354 fr 6250408  {'ex': 79336, 'dr': 534926, 'ram': 10, 'bsel': 267}  entries 2458 sigs 205
+2026-10-07 23:21:35 it 14944 fr 6503189  {'ex': 79461, 'dr': 535130, 'ram': 10, 'bsel': 267}  entries 2472 sigs 205
+2026-10-07 23:22:06 it 15486 fr 6748252  {'ex': 79536, 'dr': 535334, 'ram': 10, 'bsel': 267}  entries 2488 sigs 205
+2026-10-07 23:22:36 it 16073 fr 7002976  {'ex': 79726, 'dr': 536149, 'ram': 10, 'bsel': 267}  entries 2521 sigs 205
+2026-10-07 23:23:06 it 16628 fr 7247643  {'ex': 79948, 'dr': 536765, 'ram': 10, 'bsel': 267}  entries 2548 sigs 205
+2026-10-07 23:23:35 checkpoint 0.1s {'exec_bytes': 80070, 'rom_data_bytes': 536985, 'ram_exec_addrs': 10, 'bank_select_sites': 267} entries 2565 sigs 205
+2026-10-07 23:23:36 it 17154 fr 7486304  {'ex': 80078, 'dr': 536997, 'ram': 10, 'bsel': 267}  entries 2566 sigs 205
+2026-10-07 23:24:06 it 17746 fr 7743621  {'ex': 80231, 'dr': 538439, 'ram': 10, 'bsel': 267}  entries 2629 sigs 206
+2026-10-07 23:24:36 it 18335 fr 8003822  {'ex': 80428, 'dr': 539526, 'ram': 10, 'bsel': 267}  entries 2664 sigs 207
+2026-10-07 23:25:06 it 18938 fr 8259369  {'ex': 80437, 'dr': 539655, 'ram': 10, 'bsel': 267}  entries 2676 sigs 207
+2026-10-07 23:25:36 it 19493 fr 8516022  {'ex': 80591, 'dr': 540013, 'ram': 10, 'bsel': 267}  entries 2692 sigs 208
+2026-10-07 23:26:06 it 20086 fr 8776579  {'ex': 80591, 'dr': 540093, 'ram': 10, 'bsel': 267}  entries 2703 sigs 208
+2026-10-07 23:26:35 checkpoint 0.1s {'exec_bytes': 80844, 'rom_data_bytes': 541145, 'ram_exec_addrs': 10, 'bank_select_sites': 267} entries 2717 sigs 210
+2026-10-07 23:26:36 it 20664 fr 9031538  {'ex': 80844, 'dr': 541145, 'ram': 10, 'bsel': 267}  entries 2717 sigs 210
+2026-10-07 23:26:54 checkpoint 0.1s {'exec_bytes': 81048, 'rom_data_bytes': 546287, 'ram_exec_addrs': 10, 'bank_select_sites': 267} entries 2726 sigs 211
+2026-10-07 23:26:54 stopped

@@ -1,0 +1,6 @@
+label,layout,end,charmap,evidence
+Kb_GlyphListA,ns,00,intl,"keyboard list A (capitals): pairs {n, slot} read by Kb_LoadGlyphList (n glyphs from the slot to VRAM $8800; $80 | n = n copies of the slot) and Kb_FindCharInList (key index -> code = slot + 1); slot $FF is the blank key (code 0); the characters follow charset_gold.csv, slot = code - 1 (code read)"
+Kb_GlyphListB,ns,00,intl,"keyboard list B (small letters), the same layout as Kb_GlyphListA (code read)"
+Kb_GlyphListC,ns,00,kana,"leftover: the Japanese list C (Latin page: A-Z, a-z, _ ' , . ! ? and the heart), bytes equal to JP 09:5417; its codes are those of the Japanese set (charmap kana), so in this font they would draw other glyphs; its loader Unused_Kb_LoadGlyphSetC has no caller, the third entry of Kb_Page0_Press_PtrTbl5CC5 still points at it"
+Kb_DakutenMapTbl,cnc,ff,kana,"leftover: the Japanese voiced-mark map (bytes equal to JP 09:5C7D), read only by the dead Kb_ApplyMarkTable; its codes are those of the Japanese set (charmap kana): か x15 -> が, は x5 -> ば, ウ x1 -> ヴ, カ x15 -> ガ, ハ x5 -> バ"
+Kb_HandakutenMapTbl,cnc,ff,kana,"leftover: the Japanese semi-voiced-mark map (bytes equal to JP 09:5C93), read only by the dead Kb_ApplyMarkTable: は x5 -> ぱ, ハ x5 -> パ (charmap kana)"

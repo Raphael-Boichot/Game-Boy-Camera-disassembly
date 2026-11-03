@@ -1,0 +1,73 @@
+{
+ "05:497E": [
+  "Select",
+  "Up",
+  "Right+A"
+ ],
+ "05:496D": [
+  "Select",
+  "Up",
+  "Left+A"
+ ],
+ "05:69A9": [
+  "Select",
+  "Select",
+  "Up",
+  "Up",
+  "Right+A"
+ ],
+ "05:6AF8": [
+  "Select",
+  "Select",
+  "Up",
+  "Up",
+  "Right+A"
+ ],
+ "05:70A9": [
+  "Select",
+  "Select",
+  "Select",
+  "Up",
+  "Up",
+  "Up+A"
+ ],
+ "05:64F1": [
+  "Select",
+  "Up",
+  "Up",
+  "Right",
+  "Right",
+  "Right",
+  "Up+A"
+ ],
+ "05:7131": [
+  "Select",
+  "Select",
+  "Select",
+  "Up",
+  "Up",
+  "Right",
+  "Down+A"
+ ],
+ "05:71AB": [
+  "Select",
+  "Select",
+  "Select",
+  "Up",
+  "Up",
+  "Right",
+  "Right",
+  "Up+A"
+ ],
+ "05:7214": [
+  "Select",
+  "Select",
+  "Select",
+  "Up",
+  "Up",
+  "Right",
+  "Right",
+  "Right",
+  "Up+A"
+ ]
+}

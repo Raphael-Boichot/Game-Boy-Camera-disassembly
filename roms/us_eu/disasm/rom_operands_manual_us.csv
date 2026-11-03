@@ -1,0 +1,2 @@
+site,value,bank,bank_site,expr,evidence
+00:2056,$38,00,,HIGH(Blit_ShiftTbl),"C: Blit_PrepareMasks adds the x offset (b & 7) to $38 and stores the page in hBlitShiftPage: the 8 pages of Blit_ShiftTbl (00:3800-3FFF), read with the source byte as the low byte (code read 2026-10-26) Carried to the international build: the same instruction at 00:2056 (instruction map, identical bytes)."

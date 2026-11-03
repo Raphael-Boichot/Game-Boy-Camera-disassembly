@@ -1,0 +1,14 @@
+run,scenario,injected_cmd:nth:status,bgb_end,bgb_packets,core_end,core_packets,match,bgb_heads_of_interest,screen
+bc_d1_01,card,data:1:01,1C:03,70,1C:03,70,yes,00:1A7B 00:1AA8,
+bc_d1_12,card,data:1:12,1C:03,69,1C:03,69,yes,00:1ACB,
+bc_d1_10,card,data:1:10,1D:0A,2,1D:0A,2,yes,,error #02
+bc_d1_11,card,data:1:11,1D:0A,2,1D:0A,2,yes,,error #02
+bc_d1_F0,card,data:1:F0,1D:04,2,1D:04,2,yes,,"stuck: データ転送中, no error"
+bc_i5_10,card,inq:5:10,1D:06,17,1D:06,17,yes,,"stuck: blank screen, no error"
+bc_i12_12,card,inq:12:12,1D:0A,24,1D:0A,24,yes,,error #02
+bc_i12_20,card,inq:12:20,1D:0A,24,1D:0A,24,yes,,error #03
+bc_i12_40,card,inq:12:40,1D:0A,24,1D:0A,24,yes,,error #04
+bc_i12_80,card,inq:12:80,1D:0A,24,1D:0A,24,yes,,error #01
+dj_data_FF,dj,data:1:FF,1F:09,2,1F:09,2,yes,05:59FE,
+dj_inq_FF,dj,inq:2:FF,1F:09,14,1F:09,14,yes,05:5A21 05:5A39 05:5A47,
+dj_init_10,dj,init:1:10,1F:09,1,1F:09,1,yes,05:5A21 05:5A31,

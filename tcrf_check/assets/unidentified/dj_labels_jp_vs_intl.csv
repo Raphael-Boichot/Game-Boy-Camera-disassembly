@@ -1,0 +1,5 @@
+rom,text,what,objects_or_tiles,ids,tile_data
+JP,TRIPY-H,OBJ list $A7 of 01:5D47 at 01:6ED2,6,$47 $48 $49 $4A $4B $4C,1C:78D0-792F
+JP,FEQ.,BG ids $75 $76 $77 (row 3 cols 14-16),3,$75 $76 $77,1D:4750 / 4760 / 4770
+INTL,TRIPPY-H,OBJ list $A7 of 01:5D2B at 01:6E9E,7,$47 $48 $49 $4A $4B $4C $4D,1C:78D0-793F
+INTL,FRQ.,BG ids $75 $76 $77 (row 3 cols 14-16),3,$75 $76 $77,1D:4750 / 4760 / 4770

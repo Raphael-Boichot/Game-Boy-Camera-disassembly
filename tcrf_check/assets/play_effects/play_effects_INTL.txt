@@ -1,0 +1,5 @@
+INTL ROM, Album B routine, zeroed counters                                              unlocked: -
+INTL ROM, Album B routine, SF2 best from the played save (13710000)                     unlocked: B23 B24 B25
+INTL ROM, Album B routine, BALL best from the played save (0011)                        unlocked: B26 B27 B28
+INTL ROM, Album B routine, RUN! record of my fastest race (15:48, run_record.py: $8451) unlocked: B29 B30
+INTL ROM, Album B routine, both played scores                                           unlocked: B23 B24 B25 B26 B27 B28

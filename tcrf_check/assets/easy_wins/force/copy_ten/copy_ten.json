@@ -1,0 +1,66 @@
+{
+ "experiment": "copy_ten",
+ "doc": "album copy screen (mode $0F state 12, Edit > Album > Copy) on a save with 10 free slots (unl_CE10785322, 20 photos): ten A presses make ten copies, the copies counter $DA0F reaches 10 and 04:4FB8 splits it in tens and units (joypad only, no poke)",
+ "start": "0F:0C",
+ "log": [
+  [
+   "0F:0C",
+   21,
+   1
+  ],
+  [
+   "0F:0C",
+   22,
+   2
+  ],
+  [
+   "0F:0C",
+   23,
+   3
+  ],
+  [
+   "0F:0C",
+   24,
+   4
+  ],
+  [
+   "0F:0C",
+   25,
+   5
+  ],
+  [
+   "0F:0C",
+   26,
+   6
+  ],
+  [
+   "0F:0C",
+   27,
+   7
+  ],
+  [
+   "0F:0C",
+   28,
+   8
+  ],
+  [
+   "0F:0C",
+   29,
+   9
+  ],
+  [
+   "0F:0C",
+   30,
+   10
+  ],
+  [
+   "0F:0C",
+   30,
+   10
+  ]
+ ],
+ "hits": {
+  "04:4FB8": true
+ },
+ "end": "0F:0C"
+}

@@ -1,0 +1,41 @@
+bank,addr,name,conf,note,source
+01,5aea,Src_01_5AEA_EditMenu_DrawBlinker,C,read in the coverage run (4 of 4 bytes); call sites EditMenu_DrawBlinker x4; first-read mode:state 05:01 x4,reads 2026-11-01
+01,6ea0,Src_01_6EA0_DjEd_DrawPageTabs,C,"read in the coverage run (4 of 4 bytes); call sites DjEd_DrawPageTabs x3, Boot_SoftReset x1; first-read mode:state 1F:09 x3, 0B:01 x1",reads 2026-11-01
+04,521d,Src_04_521D_Mode1C_State01,C,"read in the coverage run (16 of 16 bytes); call sites Irq_VBlank x9, Mode10_State01_PickPhoto x4; first-read mode:state 1C:01 x10, 10:01 x3",reads 2026-11-01
+04,54b9,Src_04_54B9_Mode0F_State03,C,read in the coverage run (7 of 7 bytes); call sites Irq_VBlank x7; first-read mode:state 0F:03 x7,reads 2026-11-01
+0a,7b34,Src_0A_7B34_Mode14_State01,C,"read in the coverage run (108 of 108 bytes); call sites Irq_VBlank x42, Shoot_SetupCapture x35; first-read mode:state 14:01 x108",reads 2026-11-01
+0f,5c0f,Src_0F_5C0F_UserMap_LoadPlanetTiles,C,read in the coverage run (75 of 75 bytes); call sites UserMap_LoadPlanetTiles x75; first-read mode:state 08:01 x75,reads 2026-11-01
+10,7280,Src_10_7280_Mode1F_State00_TitleInit,C,read in the coverage run (336 of 336 bytes); call sites Mode1F_State00_TitleInit x336; first-read mode:state 1F:00 x336,reads 2026-11-01
+14,5d21,Src_14_5D21_Mode0D_State00,C,read in the coverage run (16 of 16 bytes); call sites Irq_VBlank x16; first-read mode:state 0D:00 x16,reads 2026-11-01
+15,7b00,Src_15_7B00_Mode0E_State0A_ExchangeSetupB,C,read in the coverage run (32 of 32 bytes); call sites Mode0E_State0A_ExchangeSetupB x32; first-read mode:state 0E:0A x32,reads 2026-11-01
+15,7b84,Src_15_7B84_Mode0E_State0A_ExchangeSetupB,C,read in the coverage run (92 of 92 bytes); call sites Mode0E_State0A_ExchangeSetupB x92; first-read mode:state 0E:0A x92,reads 2026-11-01
+1a,7cf0,Src_1A_7CF0_Mode09_State01,C,read in the coverage run (16 of 16 bytes); call sites Irq_VBlank x16; first-read mode:state 09:01 x16,reads 2026-11-01
+1c,44a0,Src_1C_44A0_Mode01_State03,C,read in the coverage run (16 of 16 bytes); call sites Irq_VBlank x16; first-read mode:state 01:03 x16,reads 2026-11-01
+1c,4e39,Src_1C_4E39_Mode01_State03,C,read in the coverage run (179 of 179 bytes); call sites Irq_VBlank x179; first-read mode:state 01:03 x179,reads 2026-11-01
+1c,4f00,Src_1C_4F00_Mode01_State03,C,read in the coverage run (96 of 96 bytes); call sites Irq_VBlank x96; first-read mode:state 01:03 x96,reads 2026-11-01
+1e,6600,Src_1E_6600_ResultScreen_Substate0_Init,C,read in the coverage run (32 of 32 bytes); call sites ResultScreen_Substate0_Init x14; first-read mode:state 13:07 x14,reads 2026-11-01
+1e,7cf0,Src_1E_7CF0_ResultScreen_Substate0_Init,C,read in the coverage run (16 of 16 bytes); call sites ResultScreen_Substate0_Init x16; first-read mode:state 13:07 x16,reads 2026-11-01
+1f,4879,Src_1F_4879_Mode11_State03,C,read in the coverage run (5 of 5 bytes); call sites Irq_VBlank x5; first-read mode:state 11:03 x5,reads 2026-11-01
+20,66aa,Src_20_66AA_DjPerf_Equaliser,C,read in the coverage run (22 of 22 bytes); call sites DjPerf_Equaliser x1; first-read mode:state 1F:05 x1,reads 2026-11-01
+21,6521,Src_21_6521_Mode01_State06,C,read in the coverage run (69 of 69 bytes); call sites Irq_VBlank x69; first-read mode:state 01:06 x69,reads 2026-11-01
+21,65ab,Src_21_65AB_Mode01_State06,C,read in the coverage run (21 of 21 bytes); call sites Irq_VBlank x21; first-read mode:state 01:06 x21,reads 2026-11-01
+24,768f,Src_24_768F_Mode09_State01,C,read in the coverage run (17 of 17 bytes); call sites Irq_VBlank x17; first-read mode:state 09:01 x17,reads 2026-11-01
+24,7bd6,Src_24_7BD6_Shoot_DrawOptionPanel,C,"read in the coverage run (74 of 74 bytes); call sites Shoot_DrawOptionPanel x46, Irq_VBlank x28; first-read mode:state 14:01 x74",reads 2026-11-01
+25,71a8,Src_25_71A8_Mode16_State03_TrickLensesMenu,C,read in the coverage run (32 of 32 bytes); call sites Mode16_State03_TrickLensesMenu x32; first-read mode:state 16:03 x32,reads 2026-11-01
+26,7974,Src_26_7974_Mode01_State06,C,"read in the coverage run (12 of 12 bytes); call sites Irq_VBlank x11, Mode04_State00_Init x1; first-read mode:state 01:06 x11, 04:00 x1",reads 2026-11-01
+27,5103,Src_27_5103_Mode21_State00_Init,C,read in the coverage run (45 of 45 bytes); call sites Mode21_State00_Init x45; first-read mode:state 21:00 x45,reads 2026-11-01
+27,5170,Src_27_5170_Mode21_State00_Init,C,read in the coverage run (243 of 243 bytes); call sites Mode21_State00_Init x243; first-read mode:state 21:00 x243,reads 2026-11-01
+27,713a,Src_27_713A_ViewMenu_AnimateBackground,C,read in the coverage run (22 of 22 bytes); call sites ViewMenu_AnimateBackground x8; first-read mode:state 02:01 x8,reads 2026-11-01
+27,7a24,Src_27_7A24_Mode12_State14_SaveDialogOpen,C,"read in the coverage run (44 of 44 bytes); call sites Mode12_State14_SaveDialogOpen x35, Irq_VBlank x8; first-read mode:state 12:14 x43, 21:01 x1",reads 2026-11-01
+27,7d84,Src_27_7D84_PhotoPicker_PageTransitionNext,C,"read in the coverage run (44 of 44 bytes); call sites PhotoPicker_PageTransitionNext x20, ViewMenu_AnimateBackground x7; first-read mode:state 1A:01 x20, 02:01 x7",reads 2026-11-01
+29,6aa4,Src_29_6AA4_Mode21_State0B,C,"read in the coverage run (60 of 60 bytes); call sites Irq_VBlank x48, Run_LoadCharacterGraphicsC x12; first-read mode:state 21:0B x60",reads 2026-11-01
+29,6b13,Src_29_6B13_Mode21_State0B,C,read in the coverage run (92 of 92 bytes); call sites Irq_VBlank x92; first-read mode:state 21:0B x92,reads 2026-11-01
+29,6b90,Src_29_6B90_Mode21_State0B,C,read in the coverage run (89 of 89 bytes); call sites Irq_VBlank x89; first-read mode:state 21:0B x89,reads 2026-11-01
+29,6c10,Src_29_6C10_Mode21_State0B,C,read in the coverage run (93 of 93 bytes); call sites Irq_VBlank x93; first-read mode:state 21:0B x93,reads 2026-11-01
+29,6c90,Src_29_6C90_Mode21_State0B,C,read in the coverage run (80 of 80 bytes); call sites Irq_VBlank x80; first-read mode:state 21:0B x80,reads 2026-11-01
+29,6d10,Src_29_6D10_Mode21_State0B,C,read in the coverage run (80 of 80 bytes); call sites Irq_VBlank x80; first-read mode:state 21:0B x80,reads 2026-11-01
+29,6da0,Src_29_6DA0_Mode21_State0B,C,"read in the coverage run (50 of 50 bytes); call sites Irq_VBlank x49, Main_Loop x1; first-read mode:state 21:0B x49, 05:FF x1",reads 2026-11-01
+29,7c52,Src_29_7C52_DjEd_SetFieldCursor,C,"read in the coverage run (363 of 363 bytes); call sites DjEd_SetFieldCursor x89, Run_LoadCharacterGraphicsA x35; first-read mode:state 1F:03 x89, 21:02 x35",reads 2026-11-01
+2a,587a,Src_2A_587A_Kb_LoadGlyphList,C,read in the coverage run (30 of 30 bytes); call sites Kb_LoadGlyphList x30; first-read mode:state 08:06 x30,reads 2026-11-01
+2a,58c2,Src_2A_58C2_Kb_LoadGlyphList,C,read in the coverage run (6 of 6 bytes); call sites Kb_LoadGlyphList x6; first-read mode:state 08:06 x6,reads 2026-11-01
+2a,58e4,Src_2A_58E4_Kb_LoadGlyphList,C,read in the coverage run (18 of 18 bytes); call sites Kb_LoadGlyphList x18; first-read mode:state 08:06 x18,reads 2026-11-01

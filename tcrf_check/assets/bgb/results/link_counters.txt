@@ -1,0 +1,6 @@
+BGB-to-BGB link run: counters 10BF-10C0 (transferred, BCD, little-endian pair) and 10C3-10C4 (received from male / female sender) before -> after
+run1       sender    ('10BF-10C0 0000', '10C3-10C4 0000') -> ('10BF-10C0 0100', '10C3-10C4 0000')
+run1       receiver  ('10BF-10C0 9999', '10C3-10C4 9999') -> ('10BF-10C0 9999', '10C3-10C4 9999')
+intl_run1  sender    ('10BF-10C0 0000', '10C3-10C4 0000') -> ('10BF-10C0 0100', '10C3-10C4 0000')
+intl_run1  receiver  ('10BF-10C0 9999', '10C3-10C4 9999') -> ('10BF-10C0 9999', '10C3-10C4 9999')
+(run1 = Japanese ROM, intl_run1 = international ROM; the receiver save already had every counter at the cap 99)

@@ -1,0 +1,32 @@
+root state 1F:05 ; 34 keys; targets 22
+depth 1: 8 states, frontier 7
+depth 2: 28 states, frontier 20
+depth 3: 118 states, frontier 90
+depth 4: 495 states, frontier 377
+depth 5: 1600 states, frontier 1105
+depth 6: 3817 states, frontier 2217
+depth 7: 4000 states, frontier 183
+states pressed: 4000 (depth 7) CAP
+05:5445   17 B  not reached
+05:5456   17 B  not reached
+05:69A9   16 B  RAN after Select Select Up Up Right+A
+05:6AF8   16 B  RAN after Select Select Up Up Right+A
+05:496D   13 B  RAN after Select Up Left+A
+05:497E   11 B  RAN after Select Up Right+A
+05:49C2   11 B  not reached
+05:6AE1   10 B  not reached
+05:70A9   10 B  RAN after Select Select Select Up Up Up+A
+05:4B1D    7 B  not reached
+05:686A    5 B  not reached
+05:6E7E    5 B  not reached
+05:60E0    4 B  not reached
+05:7397    4 B  not reached
+05:5769    2 B  not reached
+05:64F1    2 B  not reached
+05:7131    2 B  not reached
+05:71AB    2 B  not reached
+05:7214    2 B  not reached
+05:5310    1 B  not reached
+05:5319    1 B  not reached
+05:6ACC    1 B  not reached
+executed beyond the replay: 19937 bytes in 310 ranges -> /home/claude/w/dj_pages/exec_ranges.csv

@@ -1,0 +1,8 @@
+{
+ "experiment": "show_menu_ff",
+ "doc": "SHOW menu 0B:01: $D5EF (the chosen item, index into the 3-entry table 03:79E0) poked to 41 (ROM byte $FF) then A: 03:79AE (dec state)",
+ "hits": {
+  "03:79AE": true
+ },
+ "end": "0B:01"
+}

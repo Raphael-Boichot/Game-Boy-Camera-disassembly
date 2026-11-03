@@ -1,0 +1,15 @@
+source,message,picture,tune,count
+"core, 400 RUNs (run_parlor.py)",$04 nigete doushite,0 (1E:4E00) horned man,$28,57
+"core, 400 RUNs (run_parlor.py)",$04 nigete doushite,1 (1E:6A00) bald man,$29,22
+"core, 400 RUNs (run_parlor.py)",$04 nigete doushite,2 (1E:4000) ribbon woman,$30,41
+"core, 400 RUNs (run_parlor.py)",$08 orokamono,0 (1E:4E00) horned man,$28,17
+"core, 400 RUNs (run_parlor.py)",$08 orokamono,1 (1E:6A00) bald man,$29,2
+"core, 400 RUNs (run_parlor.py)",$08 orokamono,2 (1E:4000) ribbon woman,$30,7
+"core, 400 RUNs (run_parlor.py)",$0E equator plate,3 (1D:4F00) equator plate,$2A,280
+"BGB, 488 jobs, those that reached the result screen (bgb_jobs*.py)",$04 nigete doushite,0 (1E:4E00) horned man,$28,6
+"BGB, 488 jobs, those that reached the result screen (bgb_jobs*.py)",$04 nigete doushite,1 (1E:6A00) bald man,$29,4
+"BGB, 488 jobs, those that reached the result screen (bgb_jobs*.py)",$04 nigete doushite,2 (1E:4000) ribbon woman,$30,5
+"BGB, 488 jobs, those that reached the result screen (bgb_jobs*.py)",$08 orokamono,0 (1E:4E00) horned man,$28,12
+"BGB, 488 jobs, those that reached the result screen (bgb_jobs*.py)",$08 orokamono,2 (1E:4000) ribbon woman,$30,7
+"BGB, 488 jobs, those that reached the result screen (bgb_jobs*.py)",$0E equator plate,3 (1D:4F00) equator plate,$2A,32
+BGB (same jobs),$08 orokamono,1 (1E:6A00) bald man,$29,0

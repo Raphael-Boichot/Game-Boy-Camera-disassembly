@@ -1,0 +1,13 @@
+{
+ "experiment": "name_dakuten_blank",
+ "doc": "owner NAME keyboard (mode 8 state 7): the name is blank up to the cursor and A is pressed on the dakuten key (code $30 or $31, row 9 of the grid): the routine 09:5C9A walks back over blank characters, finds none and returns at 09:5CAF",
+ "start": "08:07",
+ "cell_before": 0,
+ "key_under_cursor": 48,
+ "page": 0,
+ "hits": {
+  "09:5C9A": true,
+  "09:5CAF": true
+ },
+ "end": "08:07"
+}

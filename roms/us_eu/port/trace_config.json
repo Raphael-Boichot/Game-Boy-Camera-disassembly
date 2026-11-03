@@ -1,0 +1,168 @@
+{
+ "farcall": 2390,
+ "farjump": 2384,
+ "modecall": 906,
+ "modetable": 12353,
+ "irq_table": 855,
+ "serial_table": 901,
+ "irq_table_n": 8,
+ "bank0a_table": [
+  10,
+  21530
+ ],
+ "sound_bank": 31,
+ "sound_tables": [
+  [
+   16890,
+   62
+  ],
+  [
+   17014,
+   62
+  ],
+  [
+   17138,
+   10
+  ],
+  [
+   17158,
+   10
+  ],
+  [
+   17178,
+   18
+  ],
+  [
+   17214,
+   18
+  ]
+ ],
+ "callback_helpers": {
+  "7": {
+   "31647": 33
+  }
+ },
+ "resolved_jphl": [
+  [
+   0,
+   38,
+   "JP 00:0026: rst $18 dispatcher body: inline word table after each rst $18 (handled by the rst $18 rule)"
+  ],
+  [
+   0,
+   933,
+   "JP 00:03A5: mode-table dispatcher body ($038A): 3-byte entries at $2F3F (mode_table())"
+  ],
+  [
+   0,
+   2389,
+   "JP 00:08C0: one-way far jump body ($08BB): both users load A=0, HL=$2E92"
+  ],
+  [
+   0,
+   2404,
+   "JP 00:08CF: far-call helper body ($08C1): every call site resolved through far_ok"
+  ],
+  [
+   3,
+   24486,
+   "JP 03:5F76: tail jump to DE = caller-supplied routine; same 7 DE values as 03:5F68 (all `ret`/50BA, already code)"
+  ],
+  [
+   3,
+   24527,
+   "JP 03:5F9F: tail jump to DE = caller-supplied routine; same 7 DE values as 03:5F91"
+  ],
+  [
+   3,
+   24472,
+   "JP 03:5F68: callback DE (7 distinct values 4F0E,4F53,4F84,4FC6,4FF7,5039,50BA), all already code; continuation 5F69 is a root"
+  ],
+  [
+   3,
+   24513,
+   "JP 03:5F91: callback DE (same 7 values); continuation 5F92 is a root"
+  ],
+  [
+   7,
+   31043,
+   "JP 07:792C: callback from the 6-byte tables at 7985,79E5,7A43,7A5E,7A85,7AAC,7AD3 -> 7AF1,7AF6,7AFB,7B00,7B05 (roots); continuation 792D is a root"
+  ],
+  [
+   7,
+   31670,
+   "JP 07:7BF3: callback HL of call $7BDC: 7937,7997,79F7,7794 (already code); continuation 7BF4 is a root"
+  ],
+  [
+   7,
+   31709,
+   "JP 07:7C1A: tail jump to HL of the $7BDC helper (same values as 7BF3)"
+  ],
+  [
+   7,
+   31781,
+   "JP 07:7C62: callback HL of call $7C4B: 74A8,7794 (already code); continuation 7C63 is a root"
+  ],
+  [
+   7,
+   31820,
+   "JP 07:7C89: tail jump to HL of the $7C4B helper (same values as 7C62)"
+  ],
+  [
+   7,
+   31892,
+   "JP 07:7CD1: callback HL of call $7CBA: 74A8,7794 (already code); continuation 7CD2 is a root"
+  ],
+  [
+   7,
+   31931,
+   "JP 07:7CF8: tail jump to HL of the $7CBA helper (same values as 7CD1)"
+  ],
+  [
+   7,
+   31978,
+   "JP 07:7D27: callback = HL pushed by $7BDC/$7C4B/$7CBA helpers (read from [sp+8]); same value sets as above"
+  ],
+  [
+   10,
+   21529,
+   "JP 0A:5419: 96-entry table at 541A indexed by A (0..95); all 92 distinct targets are roots in extra_roots.json"
+  ],
+  [
+   31,
+   21236,
+   "JP 1F:52E9: sound driver: table 42F2 (10 entries) roots in manual_roots"
+  ],
+  [
+   31,
+   21250,
+   "JP 1F:52F7: sound driver: table 4306 (10 entries)"
+  ],
+  [
+   31,
+   21268,
+   "JP 1F:5309: sound driver: table 41FA (62 entries)"
+  ],
+  [
+   31,
+   21282,
+   "JP 1F:5317: sound driver: table 4276 (62 entries)"
+  ],
+  [
+   31,
+   21300,
+   "JP 1F:5329: sound driver: table 431A (18 entries)"
+  ],
+  [
+   31,
+   21314,
+   "JP 1F:5337: sound driver: table 433E (18 entries)"
+  ]
+ ],
+ "ram_images": {
+  "65408": [
+   0,
+   1008
+  ]
+ }
+}

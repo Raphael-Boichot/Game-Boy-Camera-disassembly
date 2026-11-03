@@ -1,0 +1,28 @@
+bgb  title screen (19:03)       no key                               19:03 {"D500_script_index": 9, "D510_frame_counter": 1, "probe_hits": {"08:744E": 0, "08:7459": 0, "08:74AA": 33}}
+bgb  title screen (19:03)       Up held 36 frames                    19:03 {"D500_script_index": 2, "D510_frame_counter": 1, "probe_hits": {"08:744E": 9, "08:7459": 0, "08:74AA": 38}}
+bgb  title screen (19:03)       Down held 36 frames                  19:03 {"D500_script_index": 8, "D510_frame_counter": 1, "probe_hits": {"08:744E": 0, "08:7459": 12, "08:74AA": 32}}
+bgb  VIEW menu (02:01)          no key                               02:01 {"D679_period_mask": 7, "probe_hits": {"07:530D": 0, "07:5315": 30}}
+bgb  VIEW menu (02:01)          Up held 40 frames                    02:01 {"D679_period_mask": 7, "probe_hits": {"07:530D": 40, "07:5315": 30}}
+bgb  VIEW menu (02:01)          Down held 40 frames                  02:01 {"D679_period_mask": 7, "probe_hits": {"07:530D": 0, "07:5315": 70}}
+bgb  D.J. screen (1F:05)        A held 100 frames                    1F:05 {"D897_script": 0, "D8A6_timer": 32, "probe_hits": {"05:508C": 270, "05:50AD": 234, "05:509F": 6, "05:50B9": 36}}
+bgb  D.J. screen (1F:05)        A tapped (4 frames), 60 more         1F:05 {"D897_script": 0, "D8A6_timer": 32, "probe_hits": {"05:508C": 182, "05:50AD": 146, "05:509F": 6, "05:50B9": 36}}
+bgb  D.J. screen (1F:05)        A held 100 frames, released, 60 more 1F:05 {"D897_script": 0, "D8A6_timer": 32, "probe_hits": {"05:508C": 270, "05:50AD": 234, "05:509F": 6, "05:50B9": 36}}
+bgb  slide-show menu (0D:01)    Select                               0D:02 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Select                       0D:01 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Up                           0D:03 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Up, Left, A                  0D:01 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Up, Right, A                 0D:01 {"D7D2_bgm_option": 1, "D7D3_order_option": 1, "D674_bgm_choice": 1}
+bgb  slide-show menu (0D:01)    Select, Down                         0D:04 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Down, Left, A                0D:01 {"D7D2_bgm_option": 0, "D7D3_order_option": 0, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Down, Right, A               0D:01 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  slide-show menu (0D:01)    Select, Up, B                        0D:02 {"D7D2_bgm_option": 0, "D7D3_order_option": 1, "D674_bgm_choice": 0}
+bgb  boot with Start+Select     no key                               00:00 {"SRAM_md5": "75265da8", "photo_slot_0_first_8_bytes": "d5a9200057760000"}
+bgb  boot with Start+Select     B (cancel)                           19:03 {"SRAM_md5": "7ea24474", "photo_slot_0_first_8_bytes": "d5a9200057760000"}
+bgb  boot with Start+Select     A (erase)                            19:03 {"SRAM_md5": "1b2f69de", "photo_slot_0_first_8_bytes": "0000000000000000"}
+bgb  boot, no key (control)     no key                               00:01 {"SRAM_md5": "7ea24474", "photo_slot_0_first_8_bytes": "d5a9200057760000"}
+bgb  erase album (0F:03)        Select+Start+Up held 12 frames       0F:0A {"D561_photo_count": 30, "DBCD_erase_all_variant": 0}
+bgb  erase album (0F:03)        ... then B                           0F:02 {"D561_photo_count": 30, "DBCD_erase_all_variant": 0}
+bgb  erase album (0F:03)        ... then A                           0F:02 {"D561_photo_count": 0, "DBCD_erase_all_variant": 1}
+bgb  erase album (0F:03)        ... then B, then the chord again (state 0F:02) 0F:0A {"D561_photo_count": 30, "DBCD_erase_all_variant": 0}
+bgb  erase album (0F:03)        ... then B, the chord again, then A  0F:02 {"D561_photo_count": 0, "DBCD_erase_all_variant": 1}
+bgb  erase album (0F:03), control Select+Start held, no Up             0F:03 {"D561_photo_count": 30, "DBCD_erase_all_variant": 0}

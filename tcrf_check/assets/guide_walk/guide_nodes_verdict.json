@@ -1,0 +1,1002 @@
+{
+ "U00": {
+  "chart": "USER",
+  "label": "USER screen (Start): planet menu",
+  "path": "S",
+  "expected_jp": "08:01",
+  "bgb_jp": "08:01",
+  "bgb_us": "08:01"
+ },
+ "U01": {
+  "chart": "USER",
+  "label": "planet menu, 2nd planet (REPORT)",
+  "path": "S R",
+  "expected_jp": "08:01",
+  "bgb_jp": "08:01",
+  "bgb_us": "08:01"
+ },
+ "U02": {
+  "chart": "USER",
+  "label": "planet menu, 3rd planet (SCORE)",
+  "path": "S R R",
+  "expected_jp": "08:01",
+  "bgb_jp": "08:01",
+  "bgb_us": "08:01"
+ },
+ "U03": {
+  "chart": "USER",
+  "label": "planet menu, 4th planet (STAFF ROLL)",
+  "path": "S R R R",
+  "expected_jp": "08:01",
+  "bgb_jp": "08:01",
+  "bgb_us": "08:01"
+ },
+ "U10": {
+  "chart": "USER",
+  "label": "USER NAME (card: NAME & SEX / BIRTH DATE / USER ID)",
+  "path": "S A",
+  "expected_jp": "08:04",
+  "bgb_jp": "08:04",
+  "bgb_us": "08:04"
+ },
+ "U11": {
+  "chart": "USER",
+  "label": "NAME & SEX: name keyboard",
+  "path": "S A S",
+  "expected_jp": "08:07",
+  "bgb_jp": "08:07",
+  "bgb_us": "08:07"
+ },
+ "U12": {
+  "chart": "USER",
+  "label": "NAME & SEX: gender page",
+  "path": "S A S R R R R R R R R R R R R R D D D D A",
+  "expected_jp": "08:08",
+  "bgb_jp": "08:08",
+  "bgb_us": "08:08"
+ },
+ "U13": {
+  "chart": "USER",
+  "label": "BIRTH DATE: digits page",
+  "path": "S A S R R R R R R R R R R R R R D D D D A R R R A",
+  "expected_jp": "08:09",
+  "bgb_jp": "08:09",
+  "bgb_us": "08:09"
+ },
+ "U14": {
+  "chart": "USER",
+  "label": "BIRTH DATE: blood-type page",
+  "path": "S A S R R R R R R R R R R R R R D D D D A R R R A D A",
+  "expected_jp": "08:0A",
+  "bgb_jp": "08:0A",
+  "bgb_us": "08:04"
+ },
+ "U20": {
+  "chart": "USER",
+  "label": "RECORD (SHOTS / DELETED / TRANSFERS / RECEIVED / PRINTS)",
+  "path": "S R A",
+  "expected_jp": "08:0D",
+  "bgb_jp": "08:0D",
+  "bgb_us": "08:0D"
+ },
+ "U30": {
+  "chart": "USER",
+  "label": "HI-SCORE (SPACE FEVER II / BALL / RUN! RUN! RUN!)",
+  "path": "S R R A",
+  "expected_jp": "08:10",
+  "bgb_jp": "08:10",
+  "bgb_us": "08:10"
+ },
+ "U40": {
+  "chart": "USER",
+  "label": "CREDITS",
+  "path": "S R R R A",
+  "expected_jp": "08:13",
+  "bgb_jp": "08:13",
+  "bgb_us": "08:13"
+ },
+ "U41": {
+  "chart": "USER",
+  "label": "CREDITS (second page)",
+  "path": "S R R R A B",
+  "expected_jp": "08:17",
+  "bgb_jp": "08:17",
+  "bgb_us": "08:18"
+ },
+ "H00": {
+  "chart": "SHOOT",
+  "label": "SHOOT menu",
+  "path": "A",
+  "expected_jp": "01:01",
+  "bgb_jp": "01:04",
+  "bgb_us": "01:04"
+ },
+ "H10": {
+  "chart": "SHOOT",
+  "label": "SHOOT: live view (BRIGHTNESS / CONTRAST on the cross)",
+  "path": "A A",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H1U": {
+  "chart": "SHOOT",
+  "label": "live view: Up x4 (BRIGHTNESS)",
+  "path": "A A U U U U",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H1D": {
+  "chart": "SHOOT",
+  "label": "live view: Down x4 (BRIGHTNESS)",
+  "path": "A A D D D D",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H1L": {
+  "chart": "SHOOT",
+  "label": "live view: Left x4 (CONTRAST)",
+  "path": "A A L L L L",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H1R": {
+  "chart": "SHOOT",
+  "label": "live view: Right x4 (CONTRAST)",
+  "path": "A A R R R R",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H11": {
+  "chart": "SHOOT",
+  "label": "SHOOT: Select = option cross",
+  "path": "A A s",
+  "expected_jp": "14:04",
+  "bgb_jp": "14:04",
+  "bgb_us": "14:04"
+ },
+ "H12": {
+  "chart": "SHOOT",
+  "label": "option Left",
+  "path": "A A s L",
+  "expected_jp": "14:05",
+  "bgb_jp": "14:05",
+  "bgb_us": "14:05"
+ },
+ "H13": {
+  "chart": "SHOOT",
+  "label": "option Right",
+  "path": "A A s R",
+  "expected_jp": "14:06",
+  "bgb_jp": "14:06",
+  "bgb_us": "14:06"
+ },
+ "H14": {
+  "chart": "SHOOT",
+  "label": "option Up",
+  "path": "A A s U",
+  "expected_jp": "14:07",
+  "bgb_jp": "14:07",
+  "bgb_us": "14:07"
+ },
+ "H15": {
+  "chart": "SHOOT",
+  "label": "option Down",
+  "path": "A A s D",
+  "expected_jp": "14:08",
+  "bgb_jp": "14:08",
+  "bgb_us": "14:08"
+ },
+ "H16": {
+  "chart": "SHOOT",
+  "label": "SHUTTER pressed (save / cancel)",
+  "path": "A A A",
+  "expected_jp": "14:0B",
+  "bgb_jp": "14:0B",
+  "bgb_us": "14:0B"
+ },
+ "H17": {
+  "chart": "SHOOT",
+  "label": "SHUTTER with a free frame (one photo deleted first): save / cancel",
+  "path": "V A A A A D A A B B B B W A A A",
+  "expected_jp": "14:02",
+  "bgb_jp": "14:02",
+  "bgb_us": "14:02"
+ },
+ "H18": {
+  "chart": "SHOOT",
+  "label": "SHUTTER: A = save (きろく)",
+  "path": "V A A A A D A A B B B B W A A A A",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H19": {
+  "chart": "SHOOT",
+  "label": "SHUTTER: B = cancel (やめる)",
+  "path": "V A A A A D A A B B B B W A A A B",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H20": {
+  "chart": "SHOOT",
+  "label": "ITEMS: message",
+  "path": "A D A",
+  "expected_jp": "01:07",
+  "bgb_jp": "01:07",
+  "bgb_us": "01:07"
+ },
+ "H21": {
+  "chart": "SHOOT",
+  "label": "ITEMS: list (SELF-TIMER / TIME-LAPSE)",
+  "path": "A D A",
+  "expected_jp": "01:07",
+  "bgb_jp": "01:07",
+  "bgb_us": "01:07"
+ },
+ "H22": {
+  "chart": "SHOOT",
+  "label": "SELF-TIMER",
+  "path": "A D A A",
+  "expected_jp": "15:02",
+  "bgb_jp": "15:02",
+  "bgb_us": "15:02"
+ },
+ "H23": {
+  "chart": "SHOOT",
+  "label": "TIME-LAPSE",
+  "path": "A D A D A",
+  "expected_jp": "15:06",
+  "bgb_jp": "15:06",
+  "bgb_us": "15:06"
+ },
+ "H30": {
+  "chart": "SHOOT",
+  "label": "MAGIC: list",
+  "path": "A D D A",
+  "expected_jp": "16:02",
+  "bgb_jp": "16:02",
+  "bgb_us": "16:02"
+ },
+ "H31": {
+  "chart": "SHOOT",
+  "label": "TRICK LENSES",
+  "path": "A D D A A",
+  "expected_jp": "16:03",
+  "bgb_jp": "16:03",
+  "bgb_us": "16:03"
+ },
+ "H32": {
+  "chart": "SHOOT",
+  "label": "MONTAGE",
+  "path": "A D D A D A",
+  "expected_jp": "16:04",
+  "bgb_jp": "16:04",
+  "bgb_us": "16:04"
+ },
+ "H33": {
+  "chart": "SHOOT",
+  "label": "PANORAMA",
+  "path": "A D D A D D A",
+  "expected_jp": "16:05",
+  "bgb_jp": "16:05",
+  "bgb_us": "16:05"
+ },
+ "H34": {
+  "chart": "SHOOT",
+  "label": "GAME FACE",
+  "path": "A D D A D D D A",
+  "expected_jp": "16:06",
+  "bgb_jp": "16:06",
+  "bgb_us": "16:06"
+ },
+ "H35": {
+  "chart": "SHOOT",
+  "label": "PANORAMA: A = capture (live view)",
+  "path": "A D D A D D A A",
+  "expected_jp": "14:01",
+  "bgb_jp": "14:01",
+  "bgb_us": "14:01"
+ },
+ "H36": {
+  "chart": "SHOOT",
+  "label": "GAME FACE: SHOOT",
+  "path": "A D D A D D D A A",
+  "expected_jp": "14:00",
+  "bgb_jp": "14:00",
+  "bgb_us": "14:00"
+ },
+ "H37": {
+  "chart": "SHOOT",
+  "label": "GAME FACE: PLAY (plays BALL with the face)",
+  "path": "A D D A D D D A D A",
+  "expected_jp": "20:04",
+  "bgb_jp": "20:04",
+  "bgb_us": "20:04"
+ },
+ "H38": {
+  "chart": "SHOOT",
+  "label": "GAME FACE: 3rd item DOODLE (international ROM only; the Japanese page has two items)",
+  "path": "A D D A D D D A D D A",
+  "expected_jp": "20:04",
+  "bgb_jp": "20:04",
+  "bgb_us": "04:01"
+ },
+ "H40": {
+  "chart": "SHOOT",
+  "label": "CHECK",
+  "path": "A R A",
+  "expected_jp": "09:01",
+  "bgb_jp": "09:01",
+  "bgb_us": "09:01"
+ },
+ "H50": {
+  "chart": "SHOOT",
+  "label": "RUN",
+  "path": "A R D A",
+  "expected_jp": "01:0A",
+  "bgb_jp": "01:0A",
+  "bgb_us": "01:0A"
+ },
+ "V00": {
+  "chart": "VIEW",
+  "label": "VIEW menu (ALBUM / SHOW)",
+  "path": "V A",
+  "expected_jp": "02:01",
+  "bgb_jp": "02:01",
+  "bgb_us": "02:01"
+ },
+ "V10": {
+  "chart": "VIEW",
+  "label": "ALBUM: choose photo",
+  "path": "V A A",
+  "expected_jp": "0A:01",
+  "bgb_jp": "0A:01",
+  "bgb_us": "0A:01"
+ },
+ "V11": {
+  "chart": "VIEW",
+  "label": "ALBUM: photo",
+  "path": "V A A A",
+  "expected_jp": "0A:03",
+  "bgb_jp": "0A:03",
+  "bgb_us": "0A:03"
+ },
+ "V12": {
+  "chart": "VIEW",
+  "label": "ALBUM: photo menu (A)",
+  "path": "V A A A A",
+  "expected_jp": "0A:04",
+  "bgb_jp": "0A:04",
+  "bgb_us": "0A:04"
+ },
+ "V20": {
+  "chart": "VIEW",
+  "label": "PAINT icon (Left)",
+  "path": "V A A A A L",
+  "expected_jp": "0A:05",
+  "bgb_jp": "0A:05",
+  "bgb_us": "0A:05"
+ },
+ "V21": {
+  "chart": "VIEW",
+  "label": "PAINT: tool",
+  "path": "V A A A A L A",
+  "expected_jp": "10:03",
+  "bgb_jp": "10:03",
+  "bgb_us": "10:03"
+ },
+ "V22": {
+  "chart": "VIEW",
+  "label": "PAINT: Start = PEN / COLOR / SPEED",
+  "path": "V A A A A L A S",
+  "expected_jp": "10:04",
+  "bgb_jp": "10:04",
+  "bgb_us": "10:04"
+ },
+ "V30": {
+  "chart": "VIEW",
+  "label": "STAMP: tool",
+  "path": "V A A A A L D A",
+  "expected_jp": "11:04",
+  "bgb_jp": "11:04",
+  "bgb_us": "11:04"
+ },
+ "V31": {
+  "chart": "VIEW",
+  "label": "STAMP: Start = PIC / ABC / SYM",
+  "path": "V A A A A L D A S",
+  "expected_jp": "11:03",
+  "bgb_jp": "11:03",
+  "bgb_us": "11:03"
+ },
+ "V40": {
+  "chart": "VIEW",
+  "label": "FRAME icon (Right)",
+  "path": "V A A A A R",
+  "expected_jp": "0A:06",
+  "bgb_jp": "0A:06",
+  "bgb_us": "0A:06"
+ },
+ "V41": {
+  "chart": "VIEW",
+  "label": "FRAME: chooser",
+  "path": "V A A A A R A",
+  "expected_jp": "0A:0B",
+  "bgb_jp": "0A:0B",
+  "bgb_us": "0A:0B"
+ },
+ "V50": {
+  "chart": "VIEW",
+  "label": "COMMENT",
+  "path": "V A A A A R D A",
+  "expected_jp": "0A:0E",
+  "bgb_jp": "0A:0E",
+  "bgb_us": "0A:0E"
+ },
+ "V51": {
+  "chart": "VIEW",
+  "label": "COMMENT: Start = keyboard",
+  "path": "V A A A A R D A S",
+  "expected_jp": "0A:0E",
+  "bgb_jp": "0A:0E",
+  "bgb_us": "0A:0E"
+ },
+ "V60": {
+  "chart": "VIEW",
+  "label": "DELETE icon (Down)",
+  "path": "V A A A A D",
+  "expected_jp": "0A:08",
+  "bgb_jp": "0A:08",
+  "bgb_us": "0A:08"
+ },
+ "V61": {
+  "chart": "VIEW",
+  "label": "DELETE: confirm",
+  "path": "V A A A A D A",
+  "expected_jp": "0F:06",
+  "bgb_jp": "0F:06",
+  "bgb_us": "0F:06"
+ },
+ "V70": {
+  "chart": "VIEW",
+  "label": "PRINT icon (Up)",
+  "path": "V A A A A U",
+  "expected_jp": "0A:07",
+  "bgb_jp": "0A:07",
+  "bgb_us": "0A:07"
+ },
+ "V71": {
+  "chart": "VIEW",
+  "label": "PRINT: preview",
+  "path": "V A A A A U A",
+  "expected_jp": "1C:03",
+  "bgb_jp": "1C:03",
+  "bgb_us": "1C:03"
+ },
+ "V72": {
+  "chart": "VIEW",
+  "label": "PRINT: Select = EXPOSURE / FRAMES",
+  "path": "V A A A A U A s",
+  "expected_jp": "1C:04",
+  "bgb_jp": "1C:04",
+  "bgb_us": "1C:04"
+ },
+ "V73": {
+  "chart": "VIEW",
+  "label": "PRINT: Select, Up",
+  "path": "V A A A A U A s U",
+  "expected_jp": "1C:05",
+  "bgb_jp": "1C:05",
+  "bgb_us": "1C:05"
+ },
+ "V74": {
+  "chart": "VIEW",
+  "label": "PRINT: Select, Down",
+  "path": "V A A A A U A s D",
+  "expected_jp": "1C:06",
+  "bgb_jp": "1C:06",
+  "bgb_us": "1C:06"
+ },
+ "V75": {
+  "chart": "VIEW",
+  "label": "PRINT: Start (PRINT COMMENT)",
+  "path": "V A A A A U A S",
+  "expected_jp": "1C:03",
+  "bgb_jp": "1C:03",
+  "bgb_us": "1C:03"
+ },
+ "V80": {
+  "chart": "VIEW",
+  "label": "SHOW menu (SLIDE SHOW / ANIMATION / HOT-SPOT)",
+  "path": "V A R A",
+  "expected_jp": "0B:01",
+  "bgb_jp": "0B:01",
+  "bgb_us": "0B:01"
+ },
+ "V81": {
+  "chart": "VIEW",
+  "label": "SLIDE SHOW",
+  "path": "V A R A A",
+  "expected_jp": "0D:01",
+  "bgb_jp": "0D:01",
+  "bgb_us": "0D:01"
+ },
+ "V82": {
+  "chart": "VIEW",
+  "label": "SLIDE SHOW: Select = options",
+  "path": "V A R A A s",
+  "expected_jp": "0D:02",
+  "bgb_jp": "0D:02",
+  "bgb_us": "0D:02"
+ },
+ "V83": {
+  "chart": "VIEW",
+  "label": "SLIDE SHOW: option Up",
+  "path": "V A R A A s U",
+  "expected_jp": "0D:03",
+  "bgb_jp": "0D:03",
+  "bgb_us": "0D:03"
+ },
+ "V84": {
+  "chart": "VIEW",
+  "label": "SLIDE SHOW: option Down",
+  "path": "V A R A A s D",
+  "expected_jp": "0D:04",
+  "bgb_jp": "0D:04",
+  "bgb_us": "0D:04"
+ },
+ "V85": {
+  "chart": "VIEW",
+  "label": "SLIDE SHOW: ROLL IT (A)",
+  "path": "V A R A A A",
+  "expected_jp": "0D:07",
+  "bgb_jp": "0D:07",
+  "bgb_us": "0D:07"
+ },
+ "V86": {
+  "chart": "VIEW",
+  "label": "SLIDE SHOW: CUT (B) while it plays",
+  "path": "V A R A A A B",
+  "expected_jp": "0D:01",
+  "bgb_jp": "0D:01",
+  "bgb_us": "0D:01"
+ },
+ "V90": {
+  "chart": "VIEW",
+  "label": "ANIMATION (SHOW)",
+  "path": "V A R A D A",
+  "expected_jp": "13:01",
+  "bgb_jp": "13:01",
+  "bgb_us": "13:01"
+ },
+ "V91": {
+  "chart": "VIEW",
+  "label": "ANIMATION: playing",
+  "path": "V A R A D A A",
+  "expected_jp": "13:07",
+  "bgb_jp": "13:07",
+  "bgb_us": "13:07"
+ },
+ "VA0": {
+  "chart": "VIEW",
+  "label": "HOT-SPOT (choose photo)",
+  "path": "V A R A D D A",
+  "expected_jp": "0C:01",
+  "bgb_jp": "0C:01",
+  "bgb_us": "0C:01"
+ },
+ "VA1": {
+  "chart": "VIEW",
+  "label": "HOT-SPOT: photo with its hot spots",
+  "path": "V A R A D D A A",
+  "expected_jp": "0C:03",
+  "bgb_jp": "0C:03",
+  "bgb_us": "0C:03"
+ },
+ "P00": {
+  "chart": "PLAY",
+  "label": "SPACE FEVER II: intro",
+  "path": "D A",
+  "expected_jp": "07:02",
+  "bgb_jp": "07:02",
+  "bgb_us": "07:02"
+ },
+ "P01": {
+  "chart": "PLAY",
+  "label": "SPACE FEVER II: first wave",
+  "path": "D A",
+  "expected_jp": "07:02",
+  "bgb_jp": "07:02",
+  "bgb_us": "07:02"
+ },
+ "P02": {
+  "chart": "PLAY",
+  "label": "SPACE FEVER II: Start",
+  "path": "D A S",
+  "expected_jp": "07:04",
+  "bgb_jp": "07:04",
+  "bgb_us": "07:04"
+ },
+ "P10": {
+  "chart": "PLAY",
+  "label": "RUN! RUN! RUN! (shoot ?)",
+  "path": "D A A",
+  "expected_jp": "21:01",
+  "bgb_jp": "21:01",
+  "bgb_us": "21:01"
+ },
+ "P20": {
+  "chart": "PLAY",
+  "label": "BALL (shoot the BALL target)",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "20:04",
+  "bgb_us": "20:04"
+ },
+ "P30": {
+  "chart": "PLAY",
+  "label": "D.J.: shoot the D.J. target: COOL DATA title",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:01",
+  "bgb_us": "1F:01"
+ },
+ "P31": {
+  "chart": "PLAY",
+  "label": "D.J. title: Left",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:01",
+  "bgb_us": "1F:01"
+ },
+ "P32": {
+  "chart": "PLAY",
+  "label": "D.J. title: Right",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:01",
+  "bgb_us": "1F:01"
+ },
+ "P33": {
+  "chart": "PLAY",
+  "label": "D.J. title: A (default item) = confirm screen",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:03",
+  "bgb_us": "1F:03"
+ },
+ "P34": {
+  "chart": "PLAY",
+  "label": "D.J. title: Left, A = confirm screen",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:03",
+  "bgb_us": "1F:03"
+ },
+ "P35": {
+  "chart": "PLAY",
+  "label": "D.J. title: Right, A = confirm screen",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:03",
+  "bgb_us": "1F:03"
+ },
+ "P36": {
+  "chart": "PLAY",
+  "label": "D.J.: default item, A, A = performance screen",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:05",
+  "bgb_us": "1F:05"
+ },
+ "P37": {
+  "chart": "PLAY",
+  "label": "D.J.: Left item, A, A",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:05",
+  "bgb_us": "1F:05"
+ },
+ "P38": {
+  "chart": "PLAY",
+  "label": "D.J.: Right item, A, A",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:05",
+  "bgb_us": "1F:05"
+ },
+ "P39": {
+  "chart": "PLAY",
+  "label": "D.J.: default item, Select = SOUND I",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:09",
+  "bgb_us": "1F:09"
+ },
+ "P3A": {
+  "chart": "PLAY",
+  "label": "D.J.: Left item, Select = SOUND I",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:09",
+  "bgb_us": "1F:09"
+ },
+ "P3B": {
+  "chart": "PLAY",
+  "label": "D.J.: Right item, Select = SOUND I",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:09",
+  "bgb_us": "1F:09"
+ },
+ "P3C": {
+  "chart": "PLAY",
+  "label": "D.J.: Select x2 = SOUND II",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:0A",
+  "bgb_us": "1F:0A"
+ },
+ "P3D": {
+  "chart": "PLAY",
+  "label": "D.J.: Select x3 = NOISE",
+  "path": "",
+  "expected_jp": null,
+  "bgb_jp": "1F:0B",
+  "bgb_us": "1F:0B"
+ },
+ "T00": {
+  "chart": "STUDIO",
+  "label": "STUDIO page (Select)",
+  "path": "D s",
+  "expected_jp": "00:04",
+  "bgb_jp": "00:04",
+  "bgb_us": "00:04"
+ },
+ "T10": {
+  "chart": "STUDIO",
+  "label": "DOODLE",
+  "path": "D s A",
+  "expected_jp": "04:01",
+  "bgb_jp": "04:01",
+  "bgb_us": "04:01"
+ },
+ "T11": {
+  "chart": "STUDIO",
+  "label": "DOODLE: PAINT (choose photo)",
+  "path": "D s A D A",
+  "expected_jp": "10:01",
+  "bgb_jp": "10:01",
+  "bgb_us": "10:01"
+ },
+ "T12": {
+  "chart": "STUDIO",
+  "label": "DOODLE: PAINT tool",
+  "path": "D s A D A A",
+  "expected_jp": "10:03",
+  "bgb_jp": "10:03",
+  "bgb_us": "10:03"
+ },
+ "T13": {
+  "chart": "STUDIO",
+  "label": "DOODLE: PAINT, Start = PEN / COLOR / SPEED",
+  "path": "D s A D A A S",
+  "expected_jp": "10:04",
+  "bgb_jp": "10:04",
+  "bgb_us": "10:04"
+ },
+ "T14": {
+  "chart": "STUDIO",
+  "label": "DOODLE: STAMP (choose photo)",
+  "path": "D s A A",
+  "expected_jp": "11:01",
+  "bgb_jp": "11:01",
+  "bgb_us": "11:01"
+ },
+ "T15": {
+  "chart": "STUDIO",
+  "label": "DOODLE: STAMP tool",
+  "path": "D s A A A",
+  "expected_jp": "11:04",
+  "bgb_jp": "11:04",
+  "bgb_us": "11:04"
+ },
+ "T16": {
+  "chart": "STUDIO",
+  "label": "DOODLE: STAMP, Start = PIC / ABC / SYM",
+  "path": "D s A A A S",
+  "expected_jp": "11:03",
+  "bgb_jp": "11:03",
+  "bgb_us": "11:03"
+ },
+ "T20": {
+  "chart": "STUDIO",
+  "label": "LINK (menu)",
+  "path": "D s U A",
+  "expected_jp": "06:01",
+  "bgb_jp": "06:01",
+  "bgb_us": "06:01"
+ },
+ "T21": {
+  "chart": "STUDIO",
+  "label": "LINK: PRINT (menu PRINT / OPTION)",
+  "path": "D s U A A",
+  "expected_jp": "1B:01",
+  "bgb_jp": "1B:01",
+  "bgb_us": "1B:01"
+ },
+ "T22": {
+  "chart": "STUDIO",
+  "label": "LINK: PRINT: choose photo",
+  "path": "D s U A A A",
+  "expected_jp": "1C:01",
+  "bgb_jp": "1C:01",
+  "bgb_us": "1C:01"
+ },
+ "T23": {
+  "chart": "STUDIO",
+  "label": "LINK: PRINT: preview",
+  "path": "D s U A A A A",
+  "expected_jp": "1C:03",
+  "bgb_jp": "1C:03",
+  "bgb_us": "1C:03"
+ },
+ "T24": {
+  "chart": "STUDIO",
+  "label": "LINK: PRINT: OPTION",
+  "path": "D s U A A R A",
+  "expected_jp": "1E:01",
+  "bgb_jp": "1E:01",
+  "bgb_us": "1E:01"
+ },
+ "T25": {
+  "chart": "STUDIO",
+  "label": "LINK: PRINT: OPTION: A",
+  "path": "D s U A A R A A",
+  "expected_jp": "1E:02",
+  "bgb_jp": "1E:02",
+  "bgb_us": "1E:02"
+ },
+ "T26": {
+  "chart": "STUDIO",
+  "label": "LINK: TRANSFER (SEND / RECEIVE)",
+  "path": "D s U A D A",
+  "expected_jp": "0E:01",
+  "bgb_jp": "0E:01",
+  "bgb_us": "0E:01"
+ },
+ "T30": {
+  "chart": "STUDIO",
+  "label": "SPECIAL (menu)",
+  "path": "D s R A",
+  "expected_jp": "03:01",
+  "bgb_jp": "03:01",
+  "bgb_us": "03:01"
+ },
+ "T31": {
+  "chart": "STUDIO",
+  "label": "SPECIAL: HOT-SPOT (choose photo)",
+  "path": "D s R A A",
+  "expected_jp": "1A:01",
+  "bgb_jp": "1A:01",
+  "bgb_us": "1A:01"
+ },
+ "T32": {
+  "chart": "STUDIO",
+  "label": "HOT-SPOT editor: photo",
+  "path": "D s R A A A",
+  "expected_jp": "1A:03",
+  "bgb_jp": "1A:03",
+  "bgb_us": "1A:03"
+ },
+ "T33": {
+  "chart": "STUDIO",
+  "label": "HOT-SPOT editor: slot",
+  "path": "D s R A A A A",
+  "expected_jp": "1A:04",
+  "bgb_jp": "1A:04",
+  "bgb_us": "1A:04"
+ },
+ "T34": {
+  "chart": "STUDIO",
+  "label": "HOT-SPOT editor: SOUND",
+  "path": "D s R A A A A A",
+  "expected_jp": "1A:05",
+  "bgb_jp": "1A:05",
+  "bgb_us": "1A:05"
+ },
+ "T35": {
+  "chart": "STUDIO",
+  "label": "HOT-SPOT editor: EFFECT",
+  "path": "D s R A A A A A A",
+  "expected_jp": "1A:06",
+  "bgb_jp": "1A:06",
+  "bgb_us": "1A:06"
+ },
+ "T36": {
+  "chart": "STUDIO",
+  "label": "HOT-SPOT editor: JUMP",
+  "path": "D s R A A A A A A A",
+  "expected_jp": "1A:07",
+  "bgb_jp": "1A:07",
+  "bgb_us": "1A:07"
+ },
+ "T40": {
+  "chart": "STUDIO",
+  "label": "SPECIAL: COMPOSE (SPLIT / FUSION)",
+  "path": "D s R A D A",
+  "expected_jp": "17:01",
+  "bgb_jp": "17:01",
+  "bgb_us": "17:01"
+ },
+ "T41": {
+  "chart": "STUDIO",
+  "label": "COMPOSE: first item",
+  "path": "D s R A D A A",
+  "expected_jp": "17:02",
+  "bgb_jp": "17:02",
+  "bgb_us": "17:02"
+ },
+ "T42": {
+  "chart": "STUDIO",
+  "label": "COMPOSE: A",
+  "path": "D s R A D A A A",
+  "expected_jp": "17:02",
+  "bgb_jp": "17:02",
+  "bgb_us": "17:02"
+ },
+ "T50": {
+  "chart": "STUDIO",
+  "label": "EDIT (menu ALBUM / ANIMATION)",
+  "path": "D s D A",
+  "expected_jp": "05:01",
+  "bgb_jp": "05:01",
+  "bgb_us": "05:01"
+ },
+ "T51": {
+  "chart": "STUDIO",
+  "label": "EDIT: ALBUM",
+  "path": "D s D A A",
+  "expected_jp": "0F:03",
+  "bgb_jp": "0F:03",
+  "bgb_us": "0F:03"
+ },
+ "T52": {
+  "chart": "STUDIO",
+  "label": "EDIT: ALBUM: second function",
+  "path": "D s D A A A",
+  "expected_jp": "0F:0D",
+  "bgb_jp": "0F:0D",
+  "bgb_us": "0F:0D"
+ },
+ "T53": {
+  "chart": "STUDIO",
+  "label": "EDIT: ANIMATION",
+  "path": "D s D A D A",
+  "expected_jp": "12:01",
+  "bgb_jp": "12:01",
+  "bgb_us": "12:01"
+ },
+ "T54": {
+  "chart": "STUDIO",
+  "label": "EDIT: ANIMATION: editor",
+  "path": "D s D A D A A",
+  "expected_jp": "12:01",
+  "bgb_jp": "12:01",
+  "bgb_us": "12:01"
+ },
+ "T55": {
+  "chart": "STUDIO",
+  "label": "EDIT: ANIMATION: Select = tools",
+  "path": "D s D A D A A s",
+  "expected_jp": "12:08",
+  "bgb_jp": "12:08",
+  "bgb_us": "12:08"
+ }
+}

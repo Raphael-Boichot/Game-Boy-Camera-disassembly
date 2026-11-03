@@ -1,0 +1,1 @@
+flat 0x19E3F = 00 / bayer = 01 (original) / blocks = 02 (the byte after `3e` of `ld a,$01` in Mode14_State00_Init)

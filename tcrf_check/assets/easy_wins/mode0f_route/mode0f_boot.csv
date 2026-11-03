@@ -1,0 +1,19 @@
+run,frame,message
+cold boot,0,MEMZERO
+cold boot,0,MEMZERO
+cold boot,0,W561 00 01 0440
+cold boot,2,BOOTFAR 00
+cold boot,2,BOOTFAR 00
+cold boot,2,VALIDATE
+cold boot,2,VALIDATE
+cold boot,2,RENUMBER
+cold boot,2,RENUMBER
+cold boot,2,W561 1E 02 44A9
+soft reset,1258,W561 00 01 0440
+soft reset,1260,BOOTFAR 01
+soft reset,1260,BOOTFAR 01
+soft reset,1260,VALIDATE
+soft reset,1260,VALIDATE
+soft reset,1260,RENUMBER
+soft reset,1260,RENUMBER
+soft reset,1260,W561 1E 02 44A9
