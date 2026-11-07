@@ -277,9 +277,10 @@ for k, folder, pre in _sm:
 if A.rom_kitty:
     KD = 'roms/hello_kitty/'; tk = tempfile.mkdtemp(prefix='kitty_')
     def _run(*cmd): return subprocess.run([sys.executable] + list(cmd), capture_output=True, text=True)
-    r1 = _run('tools/kitty_trace.py', A.rom_kitty, os.path.join(tk, 't.json'), '--roots', KD + 'disasm/extra_roots_kitty.json', '--report', os.path.join(tk, 'u.md'))
+    OBS = sorted(glob.glob(KD + 'port/cov_kitty_*.npz')); obs = [x for f in OBS for x in ('--observed', f)]     # the runs (L2)
+    r1 = _run('tools/kitty_trace.py', A.rom_kitty, os.path.join(tk, 't.json'), '--roots', KD + 'disasm/extra_roots_kitty.json', '--report', os.path.join(tk, 'u.md'), *obs)
     r2 = _run('tools/kitty_types.py', A.rom_kitty, os.path.join(tk, 't.json'), '--types', os.path.join(tk, 'ty.csv'), '--sites', os.path.join(tk, 'cs.csv'),
-              '--rommap', os.path.join(tk, 'rm.csv'), '--names', os.path.join(tk, 'nm.csv')) if not r1.returncode else r1
+              '--rommap', os.path.join(tk, 'rm.csv'), '--names', os.path.join(tk, 'nm.csv'), *obs) if not r1.returncode else r1
     r3 = _run('tools/sym_build.py', A.rom_kitty, '--names', KD + 'disasm/sym_names_kitty.csv', '--types', KD + 'disasm/sym_types_kitty.csv',
               '--trace', KD + 'port/trace_kitty.json', '--out', os.path.join(tk, 'k.sym'), '--report') if not r2.returncode else r2
     if r3.returncode: bad('kitty', 'the Kitty pipeline failed: %s' % (r3.stderr or r3.stdout)[-300:])
@@ -293,8 +294,13 @@ if A.rom_kitty:
         m1 = re.search(r'kitty_trace: (\d+) instructions, (\d+) code bytes, (\d+) inline table bytes, (\d+) far calls resolved, (\d+) unresolved', r1.stdout)
         m3 = re.search(r'bytes by type: (\{.*\})', r3.stdout); m4 = re.search(r'still on the default typing \(\.data, 16 per row\): (\d+)', r3.stdout)
         BYK = eval(m3.group(1)); typed = BYK['data'] - int(m4.group(1))
+        m2 = re.search(r'observed: (\d+) of (\d+) code bytes executed', r2.stdout)
+        if m2:
+            mm = re.search(r'([\d,]+) of the [\d,]+ bytes of proven code ran', KR)
+            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the executed code bytes (need=N of the M bytes of proven code ran)')
+            elif int(mm.group(1).replace(',', '')) != int(m2.group(1)): bad('kitty', 'roms/hello_kitty/README.md: executed code bytes quoted %s, the runs give %s' % (mm.group(1), m2.group(1)))
         for what, val, pat in (('code bytes', int(m1.group(2)), r'([\d,]+) bytes of proven code'), ('unresolved', int(m1.group(5)), r'([\d,]+) indirect sites left unresolved'),
-                               ('padding', BYK['padding'], r'([\d,]+) bytes of padding'), ('typed data', typed, r'([\d,]+) bytes of data typed by a code-read reason'),
+                               ('padding', BYK['padding'], r'([\d,]+) bytes of padding'), ('typed data', typed, r'([\d,]+) bytes of data typed by a reason'),
                                ('default data', int(m4.group(1)), r'([\d,]+) bytes of data on the default typing')):
             mm = re.search(pat, KR)
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the %s (need=%r)' % (what, pat))

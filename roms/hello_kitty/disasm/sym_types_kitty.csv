@@ -1,4 +1,753 @@
 bank,start,end,type,width,note
+00,0000,0008,data,,"read in the core runs by 02:4E73, 0F:536F, 00:0008, 00:0010 ..."
+00,0024,002A,data,,"read in the core runs by 02:4E73, 0F:536F, 00:0008, 00:0010 ..."
+00,0468,049E,data,,read in the core runs by 00:042A
+00,052E,0535,data,,read in the core runs by 00:0512
+00,0B1F,0B21,data,,read in the core runs by 00:01D1
+00,0B2B,0B2D,data,,read in the core runs by 00:01D1
+00,0BF9,0C23,data,,"read in the core runs by 06:55F3, 00:0BBB, 06:560F"
+00,0D00,0D3F,data,,read in the core runs by 00:01A0
+00,0D5A,0D5D,data,,read in the core runs by 00:01A0
+00,1012,1038,data,,"read in the core runs by 00:1191, 00:03A2, 00:1115, 00:116C ..."
+00,1676,1680,data,,read in the core runs by 00:166F
+00,1785,1789,data,,read in the core runs by 00:01F2
+00,178C,1790,data,,read in the core runs by 00:01F2
+00,1796,179A,data,,read in the core runs by 00:01F2
+00,17B7,17BA,data,,"read in the core runs by 00:1AB7, 00:1680"
+00,17BD,17BF,data,,"read in the core runs by 00:1AB7, 00:1680"
+00,17DD,17E0,data,,read in the core runs by 00:1AB7
+00,1BF5,1C8C,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
+00,1CAB,1CB1,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
+00,1CBA,1D47,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
+00,1D5C,1D96,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
+00,1DAB,1E20,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
+00,1EC1,1EC9,data,,read in the core runs by 00:0194
+00,2243,2245,data,,read in the core runs by 00:0194
+00,2A7D,2A8F,data,,read in the core runs by 00:2A6A
+00,2AB6,2AB9,data,,read in the core runs by 00:25A1
+00,2E00,2E80,data,,read in the core runs by 00:021C
+00,3700,4000,data,,"read in the core runs by 00:2BE2, 00:2AEC, 00:264C, 00:2B6E"
+01,4700,4705,data,,"read in the core runs by 01:470A, 01:47D1"
+01,5000,502A,data,,"read in the core runs by 01:59F6, 01:5957, 01:5A05, 01:591E ..."
+01,5046,5068,data,,"read in the core runs by 01:59F6, 01:5030, 01:5998, 01:591E ..."
+01,5074,508A,data,,"read in the core runs by 01:59F6, 01:5030, 01:5998, 01:591E ..."
+01,50B8,50F2,data,,"read in the core runs by 00:22B6, 01:59F6, 01:5998, 01:5911 ..."
+01,510A,5165,data,,"read in the core runs by 01:59F6, 01:5957, 01:5A05, 01:58F7 ..."
+01,5240,5244,data,,read in the core runs by 01:5998
+01,5280,52B6,data,,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ..."
+01,533C,53C2,data,,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:5998 ..."
+01,5443,54A3,data,,"read in the core runs by 01:59F6, 01:5A05, 01:5911, 01:5957 ..."
+01,54FE,5576,data,,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ..."
+01,5589,558D,data,,read in the core runs by 01:5998
+01,55E8,5660,data,,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ..."
+01,5673,567A,data,,"read in the core runs by 01:5998, 00:22B6"
+01,56C7,56F0,data,,"read in the core runs by 01:59F6, 01:568C, 01:591E, 01:58E9 ..."
+01,5703,571C,data,,"read in the core runs by 01:59F6, 01:5998, 01:58F7, 01:5911 ..."
+01,5728,5736,data,,"read in the core runs by 01:59F6, 01:5998, 01:58F7, 01:5911 ..."
+01,5742,5750,data,,"read in the core runs by 01:59F6, 01:5998, 01:58F7, 01:5911 ..."
+01,576F,577D,data,,"read in the core runs by 01:59F6, 01:5998, 01:5911, 01:58F7"
+01,57B7,57C5,data,,"read in the core runs by 01:59F6, 01:5998, 01:5911, 01:58F7"
+01,57E4,5802,data,,"read in the core runs by 00:22B6, 01:59F6, 01:5998, 01:5911 ..."
+01,581E,58B2,data,,"read in the core runs by 01:59F6, 01:5998, 01:591E, 01:5911 ..."
+01,58B9,58BB,data,,"read in the core runs by 01:59F6, 01:5998, 01:591E, 01:5911 ..."
+01,6050,6410,data,,read in the core runs by 00:2397
+01,67D0,67D4,data,,read in the core runs by 01:733C
+01,687D,688F,data,,read in the core runs by 01:688F
+01,69AD,69B4,data,,read in the core runs by 00:0245
+01,69DD,6A18,data,,"read in the core runs by 01:6991, 01:72D5, 01:6A37, 01:7226"
+01,6A2B,6A30,data,,"read in the core runs by 01:72D5, 01:6A37, 01:7226"
+01,6A7C,6A83,data,,read in the core runs by 00:0245
+01,6A86,6A8D,data,,read in the core runs by 00:0245
+01,6A9E,6AA0,data,,read in the core runs by 00:1680
+01,6AB9,6ABC,data,,"read in the core runs by 00:02F9, 00:1AB7"
+01,6ABF,6ACA,data,,"read in the core runs by 00:02F9, 00:1AB7"
+01,6F63,6F66,data,,read in the core runs by 00:1AB7
+01,6FD0,6FD3,data,,read in the core runs by 00:1AB7
+01,70C7,70CA,data,,read in the core runs by 00:1AB7
+01,717C,717F,data,,read in the core runs by 00:1AB7
+01,7229,7230,data,,read in the core runs by 00:0245
+01,7233,723A,data,,read in the core runs by 00:0245
+01,7255,725C,data,,"read in the core runs by 00:02F9, 00:0245"
+01,7268,7273,data,,"read in the core runs by 00:02F9, 00:0245"
+01,769C,76E2,data,,read in the core runs by 00:0189
+02,4008,40BC,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4110,42E0,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,42F4,42FC,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4310,4334,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4358,4384,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4398,43AC,data,,"read in the core runs by 00:2127, 00:2136"
+02,43C4,4578,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,45C0,45E0,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,45F4,4614,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,46B4,4728,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,484C,4894,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,48A8,48EC,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,494C,4954,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,49B4,49BC,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4A14,4A1C,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4A34,4A54,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4A8A,4A92,data,,read in the core runs by 00:0194
+02,4C4F,4CF1,data,,"read in the core runs by 00:2087, 00:2127, 00:1F1E"
+02,4DB7,4DEB,data,,"read in the core runs by 02:4D44, 00:2127, 00:2087, 02:4D83 ..."
+02,4DF2,4E32,data,,"read in the core runs by 02:4D44, 00:2127, 00:2087, 02:4D83 ..."
+02,4E39,4E45,data,,"read in the core runs by 02:4D44, 00:2127, 00:2087, 02:4D83 ..."
+02,4F15,4F59,data,,"read in the core runs by 02:4E93, 02:4EDA, 00:2127, 02:4E73 ..."
+02,4F7A,4F92,data,,"read in the core runs by 00:1FCC, 02:4F59, 00:2127, 00:2087 ..."
+02,4F99,4FD8,data,,"read in the core runs by 00:1FCC, 02:4F59, 00:2127, 00:2087 ..."
+02,4FEB,4FF9,data,,read in the core runs by 02:4FD8
+02,5016,501C,data,,read in the core runs by 00:2087
+02,5032,5070,data,,"read in the core runs by 00:2087, 00:2127, 00:2009, 00:1F3A ..."
+02,508A,5099,data,,"read in the core runs by 00:2087, 02:5070, 00:2127, 00:1F1E"
+02,50C8,50CE,data,,read in the core runs by 00:2087
+02,51EC,51FC,data,,"read in the core runs by 00:2127, 00:1F16, 00:1F6D, 00:1F7F"
+02,521E,5232,data,,"read in the core runs by 00:2127, 00:204A, 00:1F16, 00:1F1E ..."
+02,5239,524D,data,,"read in the core runs by 00:2127, 00:204A, 00:1F16, 00:1F1E ..."
+02,5254,5268,data,,"read in the core runs by 00:2127, 00:204A, 00:1F16, 00:1F1E ..."
+02,526F,5283,data,,"read in the core runs by 00:2127, 00:204A, 00:1F16, 00:1F1E ..."
+02,528B,5291,data,,"read in the core runs by 00:2127, 00:204A, 00:1F16, 00:1F1E ..."
+02,52A6,52E7,data,,"read in the core runs by 00:2127, 00:1F10, 00:1F1E, 00:1F16 ..."
+02,530D,5315,data,,read in the core runs by 00:0194
+02,5387,538D,data,,read in the core runs by 00:2087
+02,539F,53BD,data,,"read in the core runs by 00:2127, 00:1F6D, 00:2087, 00:2136 ..."
+02,54E3,5643,data,,"read in the core runs by 00:2127, 00:1F10, 00:1F47, 02:542C ..."
+02,565E,5662,data,,"read in the core runs by 00:2127, 00:1F1E"
+02,5691,569E,data,,"read in the core runs by 00:2087, 00:1FCC, 00:2127, 00:1F1E ..."
+02,56A9,56DC,data,,"read in the core runs by 00:2087, 00:1FCC, 00:2127, 00:1F1E ..."
+02,5726,5730,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F1E"
+02,5736,573C,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F1E"
+02,584A,58AC,data,,"read in the core runs by 02:57F8, 02:57A5, 00:2127, 00:2087 ..."
+02,5900,5944,data,,"read in the core runs by 00:2087, 00:2127, 02:57A5, 02:57F8 ..."
+02,594D,5971,data,,"read in the core runs by 00:2087, 00:2127, 02:57A5, 02:57F8 ..."
+02,598B,59D6,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:2136"
+02,5A21,5AF1,data,,"read in the core runs by 00:1FCC, 00:2127, 02:4D44, 00:2087 ..."
+02,5AFF,5B0D,data,,"read in the core runs by 00:1FCC, 00:2127, 02:4D44, 00:2087 ..."
+02,5B35,5B51,data,,"read in the core runs by 02:5B0D, 00:2087"
+02,5B67,5B77,data,,"read in the core runs by 00:2087, 00:2127, 00:1F1E, 00:2136 ..."
+02,5B83,5BD9,data,,"read in the core runs by 00:2087, 00:2127, 00:1F1E, 00:2136 ..."
+02,5C2A,5CB3,data,,"read in the core runs by 00:2127, 00:2136, 00:2087, 00:1F16 ..."
+02,5CCE,5D73,data,,"read in the core runs by 00:1FCC, 00:2127, 02:5CB3, 00:1F1E ..."
+02,5D96,5E4F,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087"
+02,5E6B,5E93,data,,"read in the core runs by 00:2087, 00:2127, 00:1F1E, 00:1F7F"
+02,5EFE,5F16,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F1E"
+02,5F2E,5F3C,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E"
+02,5F6B,5F78,data,,read in the core runs by 00:2087
+02,5FF8,60C8,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1EBA"
+02,60DA,614A,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E ..."
+02,6155,615F,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E ..."
+02,616A,617C,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E ..."
+02,618A,6194,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E ..."
+02,61A2,61B4,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E ..."
+02,61CF,61E9,data,,"read in the core runs by 00:2127, 00:2087, 00:2136, 00:1F3A ..."
+02,61F2,61FE,data,,"read in the core runs by 00:2127, 00:2087, 00:2136, 00:1F3A ..."
+02,6209,6213,data,,"read in the core runs by 00:2127, 00:2087, 00:2136, 00:1F3A ..."
+02,621E,622E,data,,"read in the core runs by 00:2127, 00:2087, 00:2136, 00:1F3A ..."
+02,6246,62AA,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087"
+02,630C,636B,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F10"
+02,63B6,6474,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F10"
+02,648E,649C,data,,"read in the core runs by 00:2127, 00:2087, 00:2136"
+02,6518,657A,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:2136 ..."
+02,659A,6601,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F10 ..."
+02,6663,6A45,data,,"read in the core runs by 00:1FCC, 00:2127, 02:6601, 00:1EBA ..."
+02,6A59,6A65,data,,read in the core runs by 00:2087
+02,6AD4,6ADA,data,,read in the core runs by 00:2087
+02,6C3E,6C86,data,,"read in the core runs by 00:2127, 00:1F16, 00:2136, 00:2087 ..."
+02,6CDB,6D19,data,,"read in the core runs by 00:2127, 00:1F16, 00:2136, 00:1F1E ..."
+02,6DD0,6E06,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F7F ..."
+02,6E79,6E95,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F1E ..."
+02,6EFF,6F19,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F1E ..."
+02,6F1A,6F20,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F1E ..."
+02,6F2E,6F38,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F1E ..."
+02,6F60,6F9E,data,,"read in the core runs by 00:2127, 00:1F16, 00:2136, 00:2087 ..."
+02,7023,7029,data,,read in the core runs by 00:2087
+02,77EA,77EE,data,,"read in the core runs by 00:2127, 00:1F1E"
+02,781D,7853,data,,"read in the core runs by 02:77FA, 00:2087"
+02,7854,785A,data,,"read in the core runs by 02:77FA, 00:2087"
+02,7901,793B,data,,"read in the core runs by 00:2127, 00:2087, 00:1EBA, 00:1F16 ..."
+02,7953,7959,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 02:7999 ..."
+02,7962,7999,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 02:7999 ..."
+02,79B4,79BA,data,,read in the core runs by 00:2087
+02,79CD,79DD,data,,"read in the core runs by 00:2127, 00:2087, 00:1F65, 00:1F16"
+02,79EE,79F0,data,,read in the core runs by 00:2127
+02,7A35,7A7B,data,,"read in the core runs by 02:79F0, 02:79DD, 00:2087"
+02,7B22,7B53,data,,"read in the core runs by 00:2127, 00:2087, 00:1EBA, 00:1F16 ..."
+02,7B7B,7BB1,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F1E"
+02,7BC2,7BC8,data,,"read in the core runs by 00:2087, 00:2127"
+02,7BD1,7BD3,data,,"read in the core runs by 00:2087, 00:2127"
+02,7BD4,7BDA,data,,"read in the core runs by 00:2087, 00:2127"
+02,7C2A,7C36,data,,"read in the core runs by 00:2127, 00:2087, 00:2009, 00:1F3A ..."
+02,7C3F,7C5F,data,,"read in the core runs by 00:2127, 00:2087, 00:2009, 00:1F3A ..."
+02,7C68,7CAC,data,,"read in the core runs by 00:2127, 00:2087, 00:2009, 00:1F3A ..."
+02,7E38,7E58,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F1E"
+02,7EB2,7ED0,data,,"read in the core runs by 00:2127, 00:1F10, 00:2087"
+02,7F75,7F97,data,,"read in the core runs by 00:2127, 00:1F10, 00:2087"
+02,7FBA,7FC2,data,,"read in the core runs by 00:2127, 00:2136"
+03,4118,41AC,data,,read in the core runs by 00:21A7
+03,4240,44B4,data,,read in the core runs by 00:21A7
+03,452C,466C,data,,read in the core runs by 00:21A7
+03,4700,4898,data,,read in the core runs by 00:21A7
+03,48E0,49A8,data,,read in the core runs by 00:21A7
+03,49D0,5160,data,,read in the core runs by 00:21A7
+03,51C0,5208,data,,read in the core runs by 00:21A7
+03,5250,5280,data,,read in the core runs by 00:21A7
+03,52E0,52F0,data,,read in the core runs by 00:21A7
+03,5358,5BF0,data,,read in the core runs by 00:21A7
+03,5D3C,5D70,data,,read in the core runs by 00:21A7
+03,5DA4,6014,data,,read in the core runs by 00:21A7
+03,645C,6524,data,,read in the core runs by 00:21A7
+03,6E14,6EB8,data,,read in the core runs by 00:21A7
+03,6EE8,6FB4,data,,read in the core runs by 00:21A7
+03,7148,7188,data,,read in the core runs by 00:21A7
+03,72D0,72E4,data,,read in the core runs by 00:21A7
+03,73B0,73C4,data,,read in the core runs by 00:21A7
+03,7418,74A4,data,,read in the core runs by 00:21A7
+04,4000,4400,data,,"read in the core runs by 04:60D3, 04:5AFC, 04:5FB2, 04:6157"
+04,4600,4700,data,,"read in the core runs by 04:61C0, 04:622A"
+04,481E,4827,data,,read in the core runs by 04:4A73
+04,48F0,4901,data,,read in the core runs by 04:567F
+04,4938,4944,data,,read in the core runs by 04:4D2B
+04,497C,4980,data,,read in the core runs by 04:4D2B
+04,4A0D,4A0F,data,,read in the core runs by 04:49F8
+04,5E8A,5EBC,data,,read in the core runs by 04:5E73
+05,406A,406D,data,,"read in the core runs by 00:02F9, 00:1AB7"
+05,4073,407E,data,,"read in the core runs by 00:02F9, 00:1AB7"
+05,420D,4214,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,4217,421E,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,4221,4224,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,4227,4232,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,427C,4283,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,4286,428D,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,4290,4297,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,429A,429D,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,42A0,42AB,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,4376,4388,data,,read in the core runs by 00:0189
+05,439F,43A6,data,,read in the core runs by 00:0245
+05,43A9,43B0,data,,read in the core runs by 00:0245
+05,43E7,43EA,data,,"read in the core runs by 00:02F9, 00:1AB7"
+05,43ED,43F8,data,,"read in the core runs by 00:02F9, 00:1AB7"
+05,44B9,44C0,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,44C3,44CA,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,44CD,44D0,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,44D3,44DE,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,452B,4537,data,,read in the core runs by 00:0189
+05,4551,4558,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,455B,4562,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,456B,456E,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,4571,457C,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,457F,4581,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,4600,4602,data,,read in the core runs by 00:1680
+05,46C8,46CF,data,,read in the core runs by 00:0245
+05,46D2,46D9,data,,read in the core runs by 00:0245
+05,46F0,46F3,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,46F6,4701,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,4704,4706,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,4742,4744,data,,read in the core runs by 00:1680
+05,47D7,47E5,data,,read in the core runs by 00:0189
+05,49B4,49BB,data,,read in the core runs by 00:0245
+05,49BE,49C5,data,,read in the core runs by 00:0245
+05,49ED,49EF,data,,read in the core runs by 00:1680
+05,4A05,4A10,data,,read in the core runs by 00:02F9
+05,4A4B,4A4E,data,,read in the core runs by 00:1AB7
+05,4B35,4B3C,data,,"read in the core runs by 00:0245, 00:02F9, 00:1680"
+05,4B3F,4B46,data,,"read in the core runs by 00:0245, 00:02F9, 00:1680"
+05,4B49,4B50,data,,"read in the core runs by 00:0245, 00:02F9, 00:1680"
+05,4B53,4B5A,data,,"read in the core runs by 00:0245, 00:02F9, 00:1680"
+05,4B67,4B72,data,,"read in the core runs by 00:0245, 00:02F9, 00:1680"
+05,4B78,4B7A,data,,"read in the core runs by 00:0245, 00:02F9, 00:1680"
+05,4BCE,4BD4,data,,"read in the core runs by 00:0206, 00:01F2"
+05,4BD7,4BDB,data,,"read in the core runs by 00:0206, 00:01F2"
+05,4C1B,4C1E,data,,read in the core runs by 00:1AB7
+05,4C56,4C59,data,,"read in the core runs by 05:510D, 05:4A61, 00:1AB7"
+05,4C5F,4CAF,data,,"read in the core runs by 05:510D, 05:4A61, 00:1AB7"
+05,4CBA,4CBD,data,,"read in the core runs by 05:510D, 05:4A61, 00:1AB7"
+05,4CD9,4CDB,data,,"read in the core runs by 00:1AB7, 00:1680"
+05,4CEB,4CEE,data,,"read in the core runs by 00:1AB7, 00:1680"
+05,4D21,4DBE,data,,read in the core runs by 05:4DC1
+05,4E10,4EB0,data,,"read in the core runs by 05:4EB0, 05:4ED6, 05:4EE6, 05:4EF6"
+05,4F31,4F34,data,,read in the core runs by 00:1AB7
+05,4F65,4F68,data,,read in the core runs by 00:1AB7
+05,500F,5012,data,,read in the core runs by 00:1AB7
+05,5031,5033,data,,"read in the core runs by 00:1AB7, 00:1680"
+05,5036,5039,data,,"read in the core runs by 00:1AB7, 00:1680"
+05,50E6,50E9,data,,read in the core runs by 00:1AB7
+05,514F,5152,data,,read in the core runs by 00:1AB7
+05,5169,516C,data,,read in the core runs by 00:1AB7
+05,5183,5186,data,,read in the core runs by 00:1AB7
+05,51B2,51B5,data,,read in the core runs by 00:1AB7
+05,51DC,51DF,data,,read in the core runs by 00:1AB7
+05,52B6,5465,data,,"read in the core runs by 05:54B7, 05:5495, 05:5482, 00:0189"
+05,5559,555D,data,,read in the core runs by 00:01F2
+05,5560,5564,data,,read in the core runs by 00:01F2
+05,5567,556B,data,,read in the core runs by 00:01F2
+05,556E,5572,data,,read in the core runs by 00:01F2
+05,5A14,5E5A,data,,"read in the core runs by 05:5EC1, 05:58A2"
+05,5F86,5F96,data,,read in the core runs by 05:5F29
+05,5FE3,5FEA,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,5FED,5FF4,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,5FF7,5FFE,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,600E,6011,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6014,601F,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6022,6024,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6171,61F8,data,,"read in the core runs by 05:625D, 00:0189"
+05,6617,661E,data,,read in the core runs by 00:0245
+05,6621,6628,data,,read in the core runs by 00:0245
+05,6648,664F,data,,read in the core runs by 00:0245
+05,6652,6659,data,,read in the core runs by 00:0245
+05,6682,6685,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,6688,6693,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,6696,6698,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,68D7,6A7D,data,,"read in the core runs by 00:0906, 00:07AE, 00:0A4E, 00:08F2 ..."
+05,6AAD,6AB3,data,,"read in the core runs by 00:07AE, 00:07CE"
+05,6AC5,6B7F,data,,"read in the core runs by 00:07CE, 00:07AE"
+05,6BB1,6BB8,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6BBB,6BC2,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6BCC,6BCF,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6BD2,6BDD,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6BE0,6BE2,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,6F94,6F9B,data,,read in the core runs by 00:0245
+05,6F9E,6FA5,data,,read in the core runs by 00:0245
+05,6FB1,6FB8,data,,read in the core runs by 00:0245
+05,6FBD,6FC4,data,,read in the core runs by 00:0245
+05,7008,700B,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,700E,7019,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,701C,701E,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,70CA,70D1,data,,read in the core runs by 00:0245
+05,70D4,70DB,data,,read in the core runs by 00:0245
+05,70DE,70E5,data,,read in the core runs by 00:0245
+05,70EE,70F5,data,,read in the core runs by 00:0245
+05,70FA,7101,data,,read in the core runs by 00:0245
+05,7114,7117,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,711A,7125,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,7128,712A,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+05,7337,733E,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,7341,7348,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,734E,7351,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,7354,735F,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,7362,7364,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+05,7442,7449,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,744C,7453,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,7459,745C,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,745F,746A,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,74EE,74F6,data,,read in the core runs by 05:74CE
+05,751D,7524,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,7527,752E,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,7534,7537,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,753A,7545,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+05,75EE,7616,data,,read in the core runs by 00:0189
+06,430E,4359,data,,read in the core runs by 06:4561
+06,43FF,4477,data,,"read in the core runs by 06:4561, 06:4478"
+06,44E7,44EE,data,,read in the core runs by 00:0245
+06,4515,4518,data,,read in the core runs by 00:1AB7
+06,452B,4536,data,,read in the core runs by 00:02F9
+06,463C,4658,data,,"read in the core runs by 06:4658, 00:0189"
+06,4781,47C5,data,,"read in the core runs by 06:46EB, 06:4658, 06:4754"
+06,49D2,4B3D,data,,"read in the core runs by 06:487E, 06:4837"
+06,4B88,4BC6,data,,"read in the core runs by 06:4B6A, 06:4B3E"
+06,4E5D,4E60,data,,read in the core runs by 00:1AB7
+06,5091,5098,data,,read in the core runs by 00:0245
+06,509B,50A2,data,,read in the core runs by 00:0245
+06,50C6,50C9,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+06,50CC,50D7,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+06,50DA,50DC,data,,"read in the core runs by 00:02F9, 00:1AB7, 00:1680"
+06,5192,5194,data,,read in the core runs by 00:01D1
+06,51D3,51D5,data,,"read in the core runs by 06:511C, 00:01D1"
+06,51DA,51E0,data,,"read in the core runs by 06:511C, 00:01D1"
+06,525A,525D,data,,read in the core runs by 00:1AB7
+06,52E7,52EA,data,,"read in the core runs by 00:1AB7, 00:01D1"
+06,52ED,52EF,data,,"read in the core runs by 00:1AB7, 00:01D1"
+06,53D3,53D6,data,,read in the core runs by 00:1AB7
+06,545B,545D,data,,read in the core runs by 00:01D1
+06,54AE,54B0,data,,read in the core runs by 00:01D1
+06,5506,5508,data,,read in the core runs by 00:01D1
+06,5559,555B,data,,read in the core runs by 00:01D1
+06,55D1,55F3,data,,read in the core runs by 00:0189
+06,5629,5630,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5633,563A,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,563D,5644,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5654,5657,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,565A,5665,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5670,5672,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,580A,5812,data,,read in the core runs by 00:0189
+06,5CF6,5CFD,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5D00,5D07,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5D12,5D15,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5D18,5D23,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5D26,5D28,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680"
+06,5D97,5DD0,data,,"read in the core runs by 06:5FC0, 06:5FA8, 00:0189"
+06,5DFA,5E8E,data,,"read in the core runs by 06:5FC0, 06:5FA8"
+06,5EB8,5F55,data,,"read in the core runs by 06:5FC0, 06:5FA8"
+06,5F7F,5F93,data,,read in the core runs by 06:5F95
+06,61B2,61B9,data,,read in the core runs by 00:0245
+06,61BC,61C3,data,,read in the core runs by 00:0245
+06,61C6,61CD,data,,read in the core runs by 00:0245
+06,61E4,61E7,data,,"read in the core runs by 00:02F9, 00:1AB7"
+06,61EA,61F5,data,,"read in the core runs by 00:02F9, 00:1AB7"
+06,6323,6329,data,,read in the core runs by 00:0189
+07,41CE,4312,data,,read in the core runs by 07:43EE
+07,449C,44CC,data,,read in the core runs by 07:448F
+07,4501,4503,data,,read in the core runs by 07:44DC
+07,470B,470F,data,,read in the core runs by 07:46ED
+07,4812,4828,data,,"read in the core runs by 07:47BF, 07:4751"
+07,48A5,48AA,data,,read in the core runs by 07:4894
+07,48C4,48C7,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,48D7,48DE,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,48E1,48E8,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,48F2,48FD,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,496F,4972,data,,read in the core runs by 00:1AB7
+07,4983,498A,data,,"read in the core runs by 00:02F9, 00:0245"
+07,4994,499F,data,,"read in the core runs by 00:02F9, 00:0245"
+07,49CD,49D0,data,,read in the core runs by 00:1AB7
+07,49F0,49F3,data,,read in the core runs by 00:1AB7
+07,4A89,4A93,data,,"read in the core runs by 07:43EE, 00:0189"
+07,4A9F,4DEB,data,,"read in the core runs by 07:43EE, 00:0189"
+07,4E27,4E59,data,,"read in the core runs by 07:43EE, 07:4E59"
+07,4E70,4EF5,data,,"read in the core runs by 07:4F09, 07:4EF5"
+07,4F3A,4F48,data,,read in the core runs by 07:4F48
+07,4F7C,4F7F,data,,read in the core runs by 00:1AB7
+07,4F9E,4FA5,data,,read in the core runs by 00:0245
+07,4FBB,4FC6,data,,read in the core runs by 00:02F9
+07,502B,502E,data,,read in the core runs by 00:1AB7
+07,5097,50A5,data,,read in the core runs by 00:0194
+07,5101,5104,data,,read in the core runs by 00:1AB7
+07,514C,514F,data,,read in the core runs by 00:1AB7
+07,51ED,51F4,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,51F7,51FE,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,5201,5204,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,520A,5215,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
+07,52D4,52DA,data,,"read in the core runs by 00:0206, 00:01F2"
+07,52DD,52E1,data,,"read in the core runs by 00:0206, 00:01F2"
+07,541F,5439,data,,read in the core runs by 00:0189
+07,546A,546D,data,,read in the core runs by 00:1AB7
+07,550A,550D,data,,read in the core runs by 00:1AB7
+07,5528,552B,data,,read in the core runs by 00:1AB7
+07,5550,5553,data,,read in the core runs by 00:1AB7
+07,55FB,57DB,data,,read in the core runs by 07:55DE
+07,57FB,581B,data,,read in the core runs by 07:581B
+07,583B,585B,data,,read in the core runs by 07:5890
+07,58B1,58D1,data,,read in the core runs by 07:5906
+07,59AF,59BE,data,,read in the core runs by 07:5996
+07,5A1E,5A24,data,,"read in the core runs by 00:02F9, 00:0206"
+07,5A27,5A32,data,,"read in the core runs by 00:02F9, 00:0206"
+07,5A36,5A41,data,,"read in the core runs by 00:02F9, 00:0206"
+07,5A5F,5A6A,data,,read in the core runs by 00:02F9
+07,5AB8,5ABE,data,,"read in the core runs by 00:0245, 00:0194"
+07,5AC4,5ACA,data,,"read in the core runs by 00:0245, 00:0194"
+07,5ACD,5AD4,data,,"read in the core runs by 00:0245, 00:0194"
+07,5AD7,5ADE,data,,"read in the core runs by 00:0245, 00:0194"
+07,5AE1,5AE8,data,,"read in the core runs by 00:0245, 00:0194"
+07,5AEB,5AF2,data,,"read in the core runs by 00:0245, 00:0194"
+07,5AF5,5AFC,data,,"read in the core runs by 00:0245, 00:0194"
+07,5B1E,5B21,data,,read in the core runs by 00:1AB7
+07,5B7D,5B81,data,,read in the core runs by 00:0194
+07,5BB5,5BB8,data,,read in the core runs by 00:1AB7
+07,5CA5,5CA8,data,,"read in the core runs by 00:0194, 00:1AB7"
+07,5CAE,5CB2,data,,"read in the core runs by 00:0194, 00:1AB7"
+07,5D27,5D2A,data,,read in the core runs by 00:1AB7
+07,5E4B,5E63,data,,read in the core runs by 00:0189
+07,5F41,5F6D,data,,"read in the core runs by 07:5EAD, 07:5F6D, 07:5E8F"
+07,6076,6079,data,,read in the core runs by 00:1AB7
+07,60AE,60B5,data,,"read in the core runs by 00:0245, 00:02F9"
+07,60B8,60BF,data,,"read in the core runs by 00:0245, 00:02F9"
+07,60C9,60D4,data,,"read in the core runs by 00:0245, 00:02F9"
+07,6119,611C,data,,read in the core runs by 00:1AB7
+07,6133,613A,data,,read in the core runs by 00:0245
+07,613D,6144,data,,read in the core runs by 00:0245
+07,6156,6161,data,,read in the core runs by 00:02F9
+07,623A,6240,data,,read in the core runs by 07:61B3
+07,626F,627B,data,,read in the core runs by 07:6260
+07,62C6,6362,data,,"read in the core runs by 07:6580, 00:0189"
+07,637F,6395,data,,read in the core runs by 07:6580
+07,63EE,6406,data,,read in the core runs by 07:6580
+07,6423,6476,data,,read in the core runs by 07:6580
+07,6493,6504,data,,read in the core runs by 07:6580
+07,655C,657B,data,,read in the core runs by 07:6580
+07,668C,6726,data,,"read in the core runs by 07:667A, 07:6580"
+07,675E,6765,data,,read in the core runs by 00:0245
+07,677C,677F,data,,"read in the core runs by 00:02F9, 00:0245, 00:1AB7"
+07,678D,6794,data,,"read in the core runs by 00:02F9, 00:0245, 00:1AB7"
+07,6797,67A2,data,,"read in the core runs by 00:02F9, 00:0245, 00:1AB7"
+07,67C4,67CB,data,,"read in the core runs by 00:0245, 00:02F9"
+07,67CE,67D5,data,,"read in the core runs by 00:0245, 00:02F9"
+07,67D8,67E3,data,,"read in the core runs by 00:0245, 00:02F9"
+07,6871,6875,data,,read in the core runs by 00:0194
+07,6990,6994,data,,read in the core runs by 00:0194
+07,6A62,6A66,data,,read in the core runs by 00:0194
+07,6B21,6B25,data,,read in the core runs by 00:0194
+07,6BD4,6C16,data,,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7"
+07,6C1D,6C24,data,,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7"
+07,6C27,6C2E,data,,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7"
+07,6C3E,6C41,data,,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7"
+07,6C44,6C4F,data,,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7"
+07,6CD2,7623,data,,"read in the core runs by 07:4F09, 07:431F, 07:44EB, 07:4513 ..."
+08,4000,4020,data,,"read in the core runs by 08:6AB6, 08:6A9B"
+09,4000,7D40,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+09,7FC0,8000,data,,read in the core runs by 00:021C
+0A,4000,7D40,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+0B,4000,8000,data,,"read in the core runs by 00:067E, 00:066E, 00:021C"
+0C,4000,7860,data,,"read in the core runs by 00:067E, 00:066E, 00:021C, 00:06F3"
+0C,7920,79E0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:021C"
+0C,7A40,7A60,data,,read in the core runs by 00:021C
+0C,7AE0,7B00,data,,read in the core runs by 00:021C
+0C,7B40,7B50,data,,read in the core runs by 00:021C
+0C,7C40,7CE0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:021C"
+0C,7D00,7D80,data,,read in the core runs by 00:021C
+0C,7E20,7E40,data,,read in the core runs by 00:021C
+0C,7F80,8000,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4000,40C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4100,41C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4200,42C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4300,43C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4400,44C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4500,45C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4600,46C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4700,47C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4800,48C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4900,49C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4A00,4AC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4B00,4BC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4C00,4CC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4D00,4DC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4E00,4EC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,4F00,4FC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5000,50C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5100,51C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5200,52C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5300,53C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5400,54C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5D00,5DC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5E00,5EC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,5F00,5FC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,6400,6860,data,,read in the core runs by 00:021C
+0D,6900,69C0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,6A00,6AC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,6B00,6BC0,data,,"read in the core runs by 00:067E, 00:066E"
+0D,6C00,6EC0,data,,read in the core runs by 00:021C
+0D,6EE0,6FA0,data,,read in the core runs by 00:021C
+0D,6FC0,7000,data,,read in the core runs by 00:021C
+0D,7020,7220,data,,read in the core runs by 00:021C
+0D,7240,7280,data,,read in the core runs by 00:021C
+0D,72C0,72E0,data,,read in the core runs by 00:021C
+0D,7340,73A0,data,,read in the core runs by 00:021C
+0D,73C0,73E0,data,,read in the core runs by 00:021C
+0D,7460,7480,data,,read in the core runs by 00:021C
+0D,7500,7620,data,,read in the core runs by 00:021C
+0D,7640,7660,data,,read in the core runs by 00:021C
+0D,76A0,7700,data,,read in the core runs by 00:021C
+0D,7740,77C0,data,,read in the core runs by 00:021C
+0D,77E0,7820,data,,read in the core runs by 00:021C
+0D,7860,78A0,data,,read in the core runs by 00:021C
+0D,78C0,7900,data,,read in the core runs by 00:021C
+0D,7920,79A0,data,,read in the core runs by 00:021C
+0D,79C0,79E0,data,,read in the core runs by 00:021C
+0D,7A00,7A20,data,,read in the core runs by 00:021C
+0D,7A60,7A80,data,,read in the core runs by 00:021C
+0D,7AE0,7B60,data,,read in the core runs by 00:021C
+0D,7BA0,7BE0,data,,read in the core runs by 00:021C
+0D,7C00,7CC0,data,,read in the core runs by 00:021C
+0D,7CE0,7D60,data,,read in the core runs by 00:021C
+0D,7D80,7E60,data,,read in the core runs by 00:021C
+0D,7E80,7EA0,data,,read in the core runs by 00:021C
+0D,7EC0,8000,data,,read in the core runs by 00:021C
+0E,4000,8000,data,,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06F3"
+0F,4039,4152,data,,"read in the core runs by 0F:559D, 0F:5259, 0F:55B7"
+0F,416C,4331,data,,"read in the core runs by 0F:523A, 0F:552C, 0F:55B7"
+0F,435C,4366,data,,read in the core runs by 0F:522E
+0F,4383,438D,data,,read in the core runs by 0F:522E
+0F,43C2,43C7,data,,read in the core runs by 0F:522E
+0F,442A,442F,data,,read in the core runs by 0F:522E
+0F,445A,4464,data,,read in the core runs by 0F:522E
+0F,448B,4495,data,,read in the core runs by 0F:522E
+0F,44B9,44BE,data,,read in the core runs by 0F:522E
+0F,44F5,44FB,data,,read in the core runs by 0F:4562
+0F,4514,451F,data,,"read in the core runs by 0F:4562, 0F:522E"
+0F,453D,4548,data,,"read in the core runs by 0F:4562, 0F:522E"
+0F,457F,4589,data,,read in the core runs by 0F:522E
+0F,45B0,45BF,data,,read in the core runs by 0F:522E
+0F,4638,4642,data,,read in the core runs by 0F:522E
+0F,465F,4664,data,,read in the core runs by 0F:522E
+0F,4686,468B,data,,read in the core runs by 0F:522E
+0F,4693,4698,data,,read in the core runs by 0F:522E
+0F,46AD,46B2,data,,read in the core runs by 0F:522E
+0F,46CE,46D3,data,,read in the core runs by 0F:522E
+0F,46FD,46FE,data,,read in the core runs by 0F:4734
+0F,4772,477C,data,,read in the core runs by 0F:522E
+0F,47A1,47AD,data,,"read in the core runs by 0F:47BC, 0F:522E"
+0F,4853,4858,data,,read in the core runs by 0F:522E
+0F,4864,4869,data,,read in the core runs by 0F:522E
+0F,487E,4883,data,,read in the core runs by 0F:522E
+0F,48B4,48C1,data,,"read in the core runs by 0F:4883, 0F:522E"
+0F,48D9,48E3,data,,read in the core runs by 0F:48F0
+0F,4929,492E,data,,read in the core runs by 0F:522E
+0F,49D7,4A17,data,,"read in the core runs by 0F:522E, 0F:4A19"
+0F,4A3E,4A43,data,,read in the core runs by 0F:522E
+0F,4A65,4A6A,data,,read in the core runs by 0F:522E
+0F,4A8D,4A9C,data,,"read in the core runs by 0F:4B4E, 0F:522E"
+0F,4AB4,4AC3,data,,"read in the core runs by 0F:4B4E, 0F:522E"
+0F,4B03,4B12,data,,"read in the core runs by 0F:4B4E, 0F:522E"
+0F,4B29,4B39,data,,"read in the core runs by 0F:4B4E, 0F:522E"
+0F,4B94,4B9F,data,,"read in the core runs by 0F:4BBA, 0F:522E"
+0F,4BFF,4C10,data,,"read in the core runs by 0F:4C18, 0F:522E"
+0F,4C31,4C36,data,,"read in the core runs by 0F:522E, 0F:4C36"
+0F,4C86,4C9A,data,,read in the core runs by 0F:522E
+0F,4D47,4D4B,data,,read in the core runs by 0F:522E
+0F,4E16,4E1E,data,,read in the core runs by 0F:522E
+0F,4E3B,4E43,data,,read in the core runs by 0F:522E
+0F,4E64,4E6C,data,,read in the core runs by 0F:522E
+0F,4EBA,4EBE,data,,read in the core runs by 0F:522E
+0F,4EC6,4ECA,data,,read in the core runs by 0F:522E
+0F,4F94,4F9D,data,,"read in the core runs by 0F:522E, 0F:4FD9"
+0F,4FBC,4FC5,data,,"read in the core runs by 0F:522E, 0F:4FD9"
+0F,4FF7,4FFC,data,,read in the core runs by 0F:522E
+0F,5089,508E,data,,read in the core runs by 0F:522E
+0F,519A,51DA,data,,read in the core runs by 0F:5259
+0F,56D5,5705,data,,read in the core runs by 0F:5666
+0F,572F,57AE,data,,"read in the core runs by 0F:523A, 0F:543A, 0F:537A, 0F:536F ..."
+0F,57D9,5A11,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
+0F,5AA0,6791,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
+0F,6982,6BC4,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
+0F,6DF1,757C,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
+0F,75F7,7A96,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:5259, 0F:537A ..."
+0F,7AC7,7BB1,data,,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380"
+0F,7D71,7DE8,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
+0F,7E89,7EE0,data,,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380"
+10,4000,54A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+10,5500,55A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+10,5600,56A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+10,5700,57A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+10,5900,59A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+10,5B00,5BA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+10,5C00,5E40,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+10,5EE0,8000,data,,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3"
+11,4000,5EA0,data,,"read in the core runs by 00:067E, 00:066E, 00:0282, 00:06CA"
+11,5FE0,6000,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+12,40E0,4100,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+12,4120,4140,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+12,41C0,41E0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+12,4240,4260,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+12,5FE0,7EA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA, 00:0282"
+12,7FE0,8000,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+13,4000,7D74,data,,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3"
+13,7F00,7F23,data,,read in the core runs by 00:22B6
+13,7F40,7F63,data,,read in the core runs by 00:22B6
+13,7F80,7FA3,data,,read in the core runs by 00:22B6
+14,7000,7280,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+15,4000,7240,data,,"read in the core runs by 00:021C, 00:067E, 00:066E"
+15,7400,7640,data,,"read in the core runs by 00:067E, 00:066E"
+15,7800,7A40,data,,"read in the core runs by 00:067E, 00:066E"
+15,7C00,7E40,data,,"read in the core runs by 00:067E, 00:066E"
+16,5800,7000,data,,read in the core runs by 00:021C
+17,4000,7000,data,,read in the core runs by 00:021C
+18,4000,5180,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+19,4000,5180,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+19,5800,6980,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+19,7000,7280,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+19,7400,7680,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+19,7800,7A80,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+19,7C00,7E80,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1A,4000,5180,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+1A,5800,6980,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+1A,7000,7640,data,,"read in the core runs by 00:021C, 00:067E, 00:066E"
+1A,7800,7A40,data,,"read in the core runs by 00:067E, 00:066E"
+1A,7C00,7E40,data,,"read in the core runs by 00:067E, 00:066E"
+1B,4000,5180,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+1B,5800,58E0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,5900,59E0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,5A00,5AE0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,5B00,5BE0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,5C00,5CE0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,5D00,6840,data,,"read in the core runs by 00:067E, 00:066E"
+1B,6900,69A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1B,6A00,6AA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1B,6B00,6BA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1B,6C00,6CA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1B,6D00,6DA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1B,6E00,7040,data,,read in the core runs by 00:021C
+1B,7200,74A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,7600,7840,data,,read in the core runs by 00:021C
+1B,7A00,7CA0,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+1B,7EF0,7FE0,data,,"read in the core runs by 00:067E, 00:066E"
+1C,4000,57C0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+1C,5A40,5CC0,data,,read in the core runs by 00:021C
+1C,6BC0,7080,data,,"read in the core runs by 00:021C, 00:067E, 00:066E"
+1C,7240,7480,data,,"read in the core runs by 00:067E, 00:066E"
+1C,7640,7880,data,,"read in the core runs by 00:067E, 00:066E"
+1C,7A40,7C80,data,,"read in the core runs by 00:067E, 00:066E"
+1C,7E40,7FF4,data,,"read in the core runs by 00:0BDE, 00:067E, 00:066E, 00:2469 ..."
+1D,4000,5600,data,,read in the core runs by 00:021C
+1D,6B00,8000,data,,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06CA"
+1E,4000,8000,data,,"read in the core runs by 00:0B6B, 00:021C"
+1F,4000,7A40,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E"
+1F,7C00,7E40,data,,"read in the core runs by 00:067E, 00:066E"
+20,4000,7B80,data,,"read in the core runs by 00:0B6B, 00:021C, 00:067E, 00:066E"
+20,7C00,8000,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+21,4000,7A40,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E"
+21,7C00,7E40,data,,"read in the core runs by 00:067E, 00:066E"
+22,4000,78A0,data,,"read in the core runs by 00:067E, 00:021C, 00:0B6B, 00:066E ..."
+22,7A40,7FE0,data,,"read in the core runs by 00:067E, 00:066E, 00:0BDE, 00:06F3 ..."
+23,4000,5B50,data,,"read in the core runs by 00:0B6B, 00:021C"
+23,5F50,6190,data,,read in the core runs by 00:021C
+23,6350,6450,data,,read in the core runs by 00:021C
+23,6750,6C70,data,,read in the core runs by 00:021C
+23,6D50,7250,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+23,7350,7750,data,,read in the core runs by 00:021C
+23,7950,7C50,data,,"read in the core runs by 00:067E, 00:066E"
+23,7D50,8000,data,,"read in the core runs by 00:067E, 00:066E"
+24,4000,7400,data,,"read in the core runs by 00:0B6B, 00:021C"
+24,7E00,8000,data,,"read in the core runs by 00:067E, 00:066E"
+25,4000,7CC0,data,,"read in the core runs by 00:021C, 00:0B6B, 00:22B6, 00:067E ..."
+25,7D00,7F80,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+26,4000,7420,data,,"read in the core runs by 00:0B6B, 00:021C, 00:067E, 00:066E ..."
+26,75E0,7A60,data,,read in the core runs by 00:021C
+26,7C20,7FF4,data,,"read in the core runs by 00:0BDE, 00:22B6, 00:067E, 00:066E ..."
+27,4000,7000,data,,"read in the core runs by 00:0B6B, 00:021C"
+27,75E0,8000,data,,"read in the core runs by 00:067E, 00:066E, 00:06CA"
+28,4000,7FF4,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:2469 ..."
+29,4000,7FF4,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:0BDE ..."
+2A,4000,7FF4,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:0BDE ..."
+2B,4000,7FF4,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:0BDE ..."
+2C,4000,7AB0,data,,"read in the core runs by 00:067E, 00:066E, 00:0B6B, 00:06F3 ..."
+2C,7CD0,8000,data,,"read in the core runs by 00:067E, 00:066E"
+2D,4000,4E00,data,,read in the core runs by 00:0B6B
+2D,5C00,7A00,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:06F3"
+2D,7C20,8000,data,,"read in the core runs by 00:067E, 00:066E"
+2E,4000,7800,data,,read in the core runs by 00:0B6B
+2E,7C00,8000,data,,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3"
+2F,4000,4E00,data,,read in the core runs by 00:0B6B
+2F,5C00,61E0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
+2F,63E0,6A70,data,,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06CA"
+2F,6B70,8000,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA"
+30,4000,4E00,data,,read in the core runs by 00:0B6B
+30,5180,8000,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:06CA"
+31,4000,4380,data,,read in the core runs by 00:0B6B
+31,4700,4A80,data,,read in the core runs by 00:0B6B
+31,5C00,69B0,data,,"read in the core runs by 00:067E, 00:066E, 00:021C, 00:06F3"
+31,69F0,6C30,data,,read in the core runs by 00:021C
+31,6C50,79F0,data,,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06CA ..."
+31,7A70,7CB0,data,,read in the core runs by 00:021C
+31,7EF0,8000,data,,"read in the core runs by 00:0AD7, 00:0829, 00:0A9B, 00:08F2 ..."
+32,4000,7800,data,,read in the core runs by 00:0B6B
+32,7A40,7C80,data,,read in the core runs by 00:021C
+32,7EC0,8000,data,,"read in the core runs by 00:067E, 00:066E"
+33,4000,4E00,data,,read in the core runs by 00:0B6B
+33,5C00,6920,data,,read in the core runs by 00:021C
+33,6A00,6C40,data,,read in the core runs by 00:021C
+33,6E50,7110,data,,"read in the core runs by 00:067E, 00:22B6, 00:066E, 00:06CA"
+33,7210,7FE8,data,,"read in the core runs by 00:0906, 00:067E, 00:08F2, 00:0843 ..."
+34,4000,7FF8,data,,"read in the core runs by 00:0B6B, 00:0906, 00:0829, 00:08F2 ..."
+35,4000,7B30,data,,"read in the core runs by 00:0B6B, 00:0AD7, 00:0829, 00:0A9B ..."
+35,7BB8,7C40,data,,"read in the core runs by 00:0906, 00:08F2, 00:0829, 00:0843"
+35,7CC8,7DD8,data,,"read in the core runs by 00:0906, 00:0829, 00:0AD7, 00:08F2 ..."
+35,7E60,7EE8,data,,"read in the core runs by 00:0906, 00:08F2, 00:0829, 00:0843"
+35,7F70,8000,data,,"read in the core runs by 00:067E, 00:066E"
+36,4000,7DE0,data,,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:06F3"
+37,4000,7800,data,,read in the core runs by 00:0B6B
+38,4000,7800,data,,read in the core runs by 00:0B6B
+39,4000,7800,data,,read in the core runs by 00:0B6B
+3A,4000,7800,data,,read in the core runs by 00:0B6B
+3B,4000,7800,data,,read in the core runs by 00:0B6B
+3C,4000,7800,data,,read in the core runs by 00:0B6B
+3D,4000,7800,data,,"read in the core runs by 00:0B6B, 00:021C"
+3E,4000,7800,data,,"read in the core runs by 00:0B6B, 00:021C"
+3F,4000,5C00,data,,"read in the core runs by 00:021C, 00:0B6B"
 00,0B1F,0B21,data,2,inline arguments of the call at 00:0B1C
 00,0B2B,0B2D,data,2,inline arguments of the call at 00:0B28
 00,0B37,0B39,data,2,inline arguments of the call at 00:0B34
@@ -15,6 +764,9 @@ bank,start,end,type,width,note
 00,185E,1861,data,3,inline arguments of the call at 00:185B
 00,1864,1866,data,2,inline arguments of the call at 00:1861
 00,187E,1881,data,3,inline arguments of the call at 00:187B
+00,1EC1,1EC9,data,2,inline jump table (4 words; tools/kitty_trace.py)
+00,2243,224B,data,2,inline jump table (4 words; tools/kitty_trace.py)
+01,58B9,58C1,data,2,inline jump table (4 words; tools/kitty_trace.py)
 01,696C,6973,data,7,inline arguments of the call at 01:6969
 01,697D,6984,data,7,inline arguments of the call at 01:697A
 01,6989,6990,data,7,inline arguments of the call at 01:6986
@@ -41,6 +793,9 @@ bank,start,end,type,width,note
 01,72BC,72C6,data,10,inline arguments of the call at 01:72B9
 01,749D,74A7,data,10,inline arguments of the call at 01:749A
 01,769C,76F2,data,2,jump table read through $0189 at 01:7696 (43 records; tools/kitty_trace.py)
+02,4A8A,4A92,data,2,inline jump table (4 words; tools/kitty_trace.py)
+02,530D,5315,data,2,inline jump table (4 words; tools/kitty_trace.py)
+04,5E8A,5F4A,data,2,inline jump table (96 words; tools/kitty_trace.py)
 05,406A,406D,data,3,inline arguments of the call at 05:4067
 05,4073,407E,data,11,inline arguments of the call at 05:4070
 05,40E2,40E9,data,7,inline arguments of the call at 05:40DF
@@ -193,6 +948,7 @@ bank,start,end,type,width,note
 06,4515,4518,data,3,inline arguments of the call at 06:4512
 06,452B,4536,data,11,inline arguments of the call at 06:4528
 06,463C,4640,data,2,jump table read through $0189 at 06:4636 (2 records; tools/kitty_trace.py)
+06,4E5D,4E60,data,3,inline arguments of the call at 06:4E5A
 06,5091,5098,data,7,inline arguments of the call at 06:508E
 06,509B,50A2,data,7,inline arguments of the call at 06:5098
 06,50C6,50C9,data,3,inline arguments of the call at 06:50C3
@@ -272,6 +1028,7 @@ bank,start,end,type,width,note
 07,4180,4183,data,3,inline arguments of the call at 07:417D
 07,4186,4191,data,11,inline arguments of the call at 07:4183
 07,41CA,41CE,data,2,jump table read through $0189 at 07:41C4 (2 records; tools/kitty_trace.py)
+07,449C,44DC,data,2,inline jump table (32 words; tools/kitty_trace.py)
 07,48C4,48C7,data,3,inline arguments of the call at 07:48C1
 07,48D7,48DE,data,7,inline arguments of the call at 07:48D4
 07,48E1,48E8,data,7,inline arguments of the call at 07:48DE
@@ -396,6 +1153,12 @@ bank,start,end,type,width,note
 0D,6000,6400,data,,"wram data copied to C000 by 01:697A ($0245, 1024 bytes)"
 0D,6400,6860,data,,"wram data copied to C000 by 01:6986 ($0245, 1120 bytes)"
 0E,6800,8000,data,16,"Gfx: tiles copied to 8000 by 01:7226 ($0245, 6144 bytes)"
+0F,41C9,4245,data,2,inline jump table (62 words; tools/kitty_trace.py)
+0F,4245,42C1,data,2,inline jump table (62 words; tools/kitty_trace.py)
+0F,42C1,42D5,data,2,inline jump table (10 words; tools/kitty_trace.py)
+0F,42D5,42E9,data,2,inline jump table (10 words; tools/kitty_trace.py)
+0F,42E9,430D,data,2,inline jump table (18 words; tools/kitty_trace.py)
+0F,430D,4331,data,2,inline jump table (18 words; tools/kitty_trace.py)
 13,5F80,7780,data,16,"Gfx: tiles copied to 8000 by 07:675B ($0245, 6144 bytes)"
 13,7780,7B00,data,16,"Gfx: tiles copied to 8800 by 07:67C1 ($0245, 896 bytes)"
 13,7B00,7D40,data,32,"Map: tile map copied to 9800 by 07:60B5 ($0245, 576 bytes)"
@@ -428,6 +1191,7 @@ bank,start,end,type,width,note
 1D,4000,5600,data,16,"Gfx: tiles copied to 8000 by 07:48D4 ($0245, 5632 bytes)"
 1D,5600,6B00,data,16,"Gfx: tiles copied to 8000 by 06:6850 ($0245, 5376 bytes)"
 1D,6B00,7F40,data,16,"Gfx: tiles copied to 8000 by 06:61AF ($0245, 5184 bytes)"
+1D,7F40,7FE0,data,16,"Gfx: tiles copied to 8000 by 06:4F79 ($0726, 160 bytes)"
 1E,7800,8000,data,16,"Gfx: tiles copied to 9000 by 05:420A ($0245, 2048 bytes)"
 1E,7800,7C00,data,,"wram data copied to C000 by 01:71FE ($0245, 1024 bytes)"
 20,7800,7920,data,32,"Map: tile map copied to 9842 by 01:6BA1 ($0260, 288 bytes)"
@@ -452,6 +1216,7 @@ bank,start,end,type,width,note
 23,6350,6450,data,32,"Map: tile map copied to 9C00 by 05:661E ($0245, 256 bytes)"
 23,6750,6B50,data,32,"Map: tile map copied to 9800 by 05:5FEA ($0245, 1024 bytes)"
 23,6B50,6C70,data,32,"Map: tile map copied to 9C00 by 05:5FF4 ($0245, 288 bytes)"
+23,7150,7250,data,32,"Map: tile map copied to 9C00 by 05:54F5 ($0726, 256 bytes)"
 23,7350,7750,data,16,"Gfx: tiles copied to 8600 by 01:6A79 ($0245, 1024 bytes)"
 23,7450,7550,data,16,"Gfx: tiles copied to 8700 by 06:5630 ($0245, 256 bytes)"
 23,7530,7550,data,16,"Gfx: tiles copied to 8FE0 by 00:07A8 ($0726, 32 bytes)"
@@ -483,6 +1248,7 @@ bank,start,end,type,width,note
 2F,67B0,6970,data,32,"Map: tile map copied to 9800 by 01:7230 ($0245, 448 bytes)"
 2F,6970,69F0,data,32,"Map: tile map copied to 9C00 by 01:7252 ($0245, 128 bytes)"
 2F,6A70,6AF0,data,32,"Map: tile map copied to 9C00 by 01:7246 ($0245, 128 bytes)"
+30,7FA0,8000,data,16,"Gfx: tiles copied to 8000 by 06:4F68 ($0726, 96 bytes)"
 31,64F0,67F0,data,16,"Gfx: tiles copied to 8000 by 05:439C ($0245, 768 bytes)"
 31,6770,69B0,data,32,"Map: tile map copied to 9800 by 05:4214 ($0245, 576 bytes)"
 31,69F0,6C30,data,32,"Map: tile map copied to 9800 by 05:43A6 ($0245, 576 bytes)"

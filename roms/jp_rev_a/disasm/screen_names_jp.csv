@@ -1,0 +1,373 @@
+mode,state,name,tag
+1D,00,Print job state machine - init,C
+1D,01,Print job state machine - load screen,C
+1D,02,Print job state machine - send init,C
+1D,03,Print job state machine - build band,C
+1D,04,Print job state machine - send band,C
+1D,05,Print job state machine - send print,C
+1D,06,Print job state machine - load wait screen,C
+1D,07,Print job state machine - wait printed,C
+1D,08,Print job state machine - exit,C
+1D,09,Print job state machine - cleanup,C
+1D,0A,Print job state machine - error screen,C
+1D,0B,Print job state machine - return,C
+12,00,Slide-show / animation editor - init,C
+12,01,Slide-show / animation editor - browse,C
+12,02,Slide-show / animation editor - entry released,C
+12,03,Slide-show / animation editor - edit speed,C
+12,04,Slide-show / animation editor - toggle loop,C
+12,05,Slide-show / animation editor - exit,C
+12,06,Slide-show / animation editor - tools open,C
+12,07,Slide-show / animation editor - tools slide in,C
+12,08,Slide-show / animation editor - tools menu,C
+12,09,Slide-show / animation editor - range browse,C
+12,0A,Slide-show / animation editor - range anim,C
+12,0B,Slide-show / animation editor - range select,C
+12,0C,Slide-show / animation editor - loop count,C
+12,0D,Slide-show / animation editor - loop apply,C
+12,0E,Slide-show / animation editor - loop clear,C
+12,0F,Slide-show / animation editor - clear all,C
+12,10,Slide-show / animation editor - pack,C
+12,11,Slide-show / animation editor - test start,C
+12,12,Slide-show / animation editor - test run,C
+12,13,Slide-show / animation editor - test end,C
+12,14,Slide-show / animation editor - save dialog open,C
+12,15,Slide-show / animation editor - save dialog wait,C
+12,16,Slide-show / animation editor - save dialog close,C
+12,17,Slide-show / animation editor - exit dialog open,C
+12,18,Slide-show / animation editor - exit dialog wait,C
+12,19,Slide-show / animation editor - exit dialog close,C
+12,1A,Slide-show / animation editor - clear dialog open,C
+12,1B,Slide-show / animation editor - clear dialog wait,C
+12,1C,Slide-show / animation editor - clear dialog close,C
+12,1D,Slide-show / animation editor - sort dialog open,C
+12,1E,Slide-show / animation editor - sort dialog wait,C
+12,1F,Slide-show / animation editor - sort dialog close,C
+12,20,Slide-show / animation editor - border row,C
+12,21,Slide-show / animation editor - far border picker,C
+12,22,Slide-show / animation editor - border picker return,C
+13,00,Plays the show - init,C
+13,01,Plays the show - music select,C
+13,02,Plays the show - start,C
+13,03,Plays the show - play prepare,C
+13,04,Plays the show - play run,C
+13,05,Plays the show - exit,C
+13,06,Plays the show - end message setup,C
+13,07,Plays the show - far result screen,C
+13,08,Plays the show - restart,C
+0C,00,Photo grid then the photo with the pointer hand - init,C
+0C,01,Photo grid then the photo with the pointer hand - far photo picker,C
+0C,02,Photo grid then the photo with the pointer hand - setup,C
+0C,03,Photo grid then the photo with the pointer hand - browse,C
+0C,04,Photo grid then the photo with the pointer hand - activate,C
+1A,00,Select photo / edit the five hot spots - init,C
+1A,01,Select photo / edit the five hot spots - far photo picker,C
+1A,02,Select photo / edit the five hot spots - setup,C
+1A,03,Select photo / edit the five hot spots - browse,C
+1A,04,Select photo / edit the five hot spots - place or delete,C
+1A,05,Select photo / edit the five hot spots - pick sound,C
+1A,06,Select photo / edit the five hot spots - pick effect,C
+1A,07,Select photo / edit the five hot spots - pick jump,C
+1A,08,Select photo / edit the five hot spots - pick confirm,C
+1A,09,Select photo / edit the five hot spots - exit dialog,C
+1A,0A,Select photo / edit the five hot spots - delete dialog,C
+1A,0B,Select photo / edit the five hot spots - unused,C
+1A,0C,Select photo / edit the five hot spots - exit,C
+1A,0D,Select photo / edit the five hot spots - save prepare,C
+1A,0E,Select photo / edit the five hot spots - far save routine,C
+1A,0F,Select photo / edit the five hot spots - save result,C
+06,00,ACCESS - init,C
+06,01,ACCESS - choose,C
+06,02,ACCESS - dispatch,C
+0B,00,SLIDE SHOW / ANIMATION / HOT-SPOT - init,C
+0B,01,SLIDE SHOW / ANIMATION / HOT-SPOT - choose,C
+0B,02,SLIDE SHOW / ANIMATION / HOT-SPOT - dispatch,C
+04,00,STAMP / PAINT tool pick - init,C
+04,01,STAMP / PAINT tool pick - choose,C
+04,02,STAMP / PAINT tool pick - dispatch,C
+05,00,ALBUM / ANIMATION - init,C
+05,01,ALBUM / ANIMATION - choose,C
+05,02,ALBUM / ANIMATION - dispatch,C
+0F,00,Delete which photo? - init,C
+0F,01,Delete which photo? - re init,C
+0F,02,Delete which photo? - browse,C
+0F,03,Delete which photo? - selected,C
+0F,04,Delete which photo? - leave selected,C
+0F,05,Delete which photo? - confirm init,C
+0F,06,Delete which photo? - confirm choose,C
+0F,07,Delete which photo? - confirm apply,C
+0F,09,Delete which photo? - erase one,C
+0F,0A,Delete which photo? - erase all,C
+0F,0C,Delete which photo? - copy browse,C
+0F,0D,Delete which photo? - copy selected,C
+0F,0E,Delete which photo? - copy do,C
+11,00,STAMP tool - init,C
+11,01,STAMP tool - pick photo,C
+11,02,STAMP tool - setup,C
+11,03,STAMP tool - palette,C
+11,04,STAMP tool - place,C
+11,05,STAMP tool - leave,C
+11,06,STAMP tool - save init,C
+11,07,STAMP tool - save dialog,C
+11,08,STAMP tool - save result,C
+10,00,PAINT tool - init,C
+10,01,PAINT tool - pick photo,C
+10,02,PAINT tool - setup,C
+10,03,PAINT tool - draw,C
+10,04,PAINT tool - menu size,C
+10,05,PAINT tool - menu pattern,C
+10,06,PAINT tool - menu speed,C
+10,07,PAINT tool - leave,C
+10,08,PAINT tool - save init,C
+10,09,PAINT tool - save dialog,C
+10,0A,PAINT tool - save result,C
+09,00,Album viewer with the edit pages - init,C
+09,01,Album viewer with the edit pages - slider browse,C
+09,02,Album viewer with the edit pages - photo arrows,C
+09,03,Album viewer with the edit pages - page left,C
+09,04,Album viewer with the edit pages - page right,C
+09,05,Album viewer with the edit pages - page up,C
+09,06,Album viewer with the edit pages - page down,C
+09,07,Album viewer with the edit pages - leave to shoot,C
+09,08,Album viewer with the edit pages - frame init,C
+09,09,Album viewer with the edit pages - frame edit,C
+09,0A,Album viewer with the edit pages - frame save,C
+09,0B,Album viewer with the edit pages - comment init,C
+09,0C,Album viewer with the edit pages - comment edit,C
+09,0D,Album viewer with the edit pages - comment save,C
+01,00,SHOOT parlor - intro,C
+01,01,SHOOT parlor - menu page a,C
+01,02,SHOOT parlor - apply page a,C
+01,03,SHOOT parlor - intro page b,C
+01,04,SHOOT parlor - menu page b,C
+01,05,SHOOT parlor - apply page b,C
+01,06,SHOOT parlor - intro page c,C
+01,07,SHOOT parlor - menu page c,C
+01,08,SHOOT parlor - apply page c,C
+01,09,SHOOT parlor - run init,C
+01,0A,SHOOT parlor - run result,C
+01,0B,SHOOT parlor - run end,C
+0A,00,VIEW album - init,C
+0A,01,VIEW album - pick photo,C
+0A,02,VIEW album - setup,C
+0A,03,VIEW album - slider browse,C
+0A,04,VIEW album - photo arrows,C
+0A,05,VIEW album - page left,C
+0A,06,VIEW album - page right,C
+0A,07,VIEW album - page up,C
+0A,08,VIEW album - page down,C
+0A,09,VIEW album - leave,C
+0A,0A,VIEW album - frame init,C
+0A,0B,VIEW album - frame edit,C
+0A,0C,VIEW album - frame save,C
+0A,0D,VIEW album - comment init,C
+0A,0E,VIEW album - comment edit,C
+0A,0F,VIEW album - comment save,C
+1F,00,D.J. - title init,C
+1F,01,D.J. - menu source,C
+1F,02,D.J. - menu song,C
+1F,03,D.J. - menu performer,C
+1F,04,D.J. - performance setup,C
+1F,05,D.J. - performance,C
+1F,06,D.J. - save panel,C
+1F,07,D.J. - quit panel,C
+1F,08,D.J. - edit pages setup,C
+1F,09,D.J. - page sound1,C
+1F,0A,D.J. - page sound2,C
+1F,0B,D.J. - page noise,C
+1F,0C,D.J. - restart,C
+20,00,BALL - menu init,C
+20,01,BALL - menu,C
+20,02,BALL - game setup,C
+20,03,BALL - game start,C
+20,04,BALL - play,C
+20,05,BALL - play demo,C
+20,06,BALL - game over,C
+20,07,BALL - pause,C
+20,08,BALL - leave,C
+20,09,BALL - result init,C
+20,0A,BALL - result keys,C
+20,0B,BALL - result leave,C
+15,00,Self-timer - return to shoot,C
+15,01,Self-timer - timer init,C
+15,02,Self-timer - timer choose,C
+15,03,Self-timer - timer confirm,C
+15,04,Self-timer - timer apply,C
+15,05,Self-timer - interval init,C
+15,06,Self-timer - interval choose,C
+15,07,Self-timer - shots choose,C
+15,08,Self-timer - interval confirm,C
+15,09,Self-timer - interval apply,C
+16,00,SHUTTERBUG menu - init,C
+16,01,SHUTTERBUG menu - redraw,C
+16,02,SHUTTERBUG menu - main menu,C
+16,03,SHUTTERBUG menu - trick lenses menu,C
+16,04,SHUTTERBUG menu - montage menu,C
+16,05,SHUTTERBUG menu - panorama menu,C
+16,06,SHUTTERBUG menu - game face menu,C
+16,07,SHUTTERBUG menu - leave to mode01,C
+16,08,SHUTTERBUG menu - start shoot,C
+16,09,SHUTTERBUG menu - to panorama print,C
+17,00,COMPOSE - init,C
+17,01,COMPOSE - layout choose,C
+17,02,COMPOSE - split cursor,C
+17,03,COMPOSE - split pick1,C
+17,04,COMPOSE - split pick2,C
+17,05,COMPOSE - split pick3,C
+17,06,COMPOSE - split pick4,C
+17,07,COMPOSE - split confirm,C
+17,08,COMPOSE - split build,C
+17,09,COMPOSE - split result,C
+17,0A,COMPOSE - fusion cursor,C
+17,0B,COMPOSE - fusion pick1,C
+17,0C,COMPOSE - fusion pick2,C
+17,0D,COMPOSE - fusion confirm,C
+17,0E,COMPOSE - fusion build,C
+17,0F,COMPOSE - fusion result,C
+17,10,COMPOSE - leave,C
+17,11,COMPOSE - result prepare,C
+17,12,COMPOSE - result screen,C
+17,13,COMPOSE - restart,C
+18,00,PANORAMA print - init,C
+18,01,PANORAMA print - pick first,C
+18,02,PANORAMA print - pick last,C
+18,03,PANORAMA print - print or cancel,C
+14,00,Live view and shutter - init,C
+14,01,Live view and shutter - live view,C
+14,02,Live view and shutter - shutter,C
+14,03,Live view and shutter - shot,C
+14,04,Live view and shutter - options page,C
+14,05,Live view and shutter - option dither,C
+14,06,Live view and shutter - option shutter sound,C
+14,07,Live view and shutter - option palette,C
+14,08,Live view and shutter - option flip effect,C
+14,09,Live view and shutter - leave by variant,C
+14,0A,Live view and shutter - result prepare,C
+14,0B,Live view and shutter - result screen,C
+14,0C,Live view and shutter - reinit,C
+0E,00,Link-cable exchange - init,C
+0E,01,Link-cable exchange - handshake,C
+0E,02,Link-cable exchange - message strip,C
+0E,03,Link-cable exchange - pick photo,C
+0E,04,Link-cable exchange - pick done,C
+0E,05,Link-cable exchange - initiator confirm send,C
+0E,06,Link-cable exchange - exchange setup,C
+0E,07,Link-cable exchange - exchange bars a,C
+0E,08,Link-cable exchange - exchange wait a,C
+0E,09,Link-cable exchange - exchange done a,C
+0E,0A,Link-cable exchange - exchange setup b,C
+0E,0B,Link-cable exchange - exchange bars b,C
+0E,0C,Link-cable exchange - exchange wait b,C
+0E,0D,Link-cable exchange - pick second,C
+0E,0E,Link-cable exchange - responder confirm send,C
+0E,0F,Link-cable exchange - ready,C
+0E,10,Link-cable exchange - exchange wait c,C
+0E,11,Link-cable exchange - exchange done b,C
+0E,12,Link-cable exchange - result prepare,C
+0E,13,Link-cable exchange - result screen,C
+0E,14,Link-cable exchange - abort,C
+02,00,VIEW menu - init,C
+02,01,VIEW menu - choose,C
+02,02,VIEW menu - leave,C
+03,00,Special menu - init,C
+03,01,Special menu - choose,C
+03,02,Special menu - leave,C
+07,00,Space Fever II - init,C
+07,01,Space Fever II - start,C
+07,02,Space Fever II - play,C
+07,03,Space Fever II - target menu a,C
+07,04,Space Fever II - target menu b,C
+07,05,Space Fever II - goto dj,C
+07,06,Space Fever II - goto ball,C
+07,07,Space Fever II - goto run,C
+07,08,Space Fever II - leave,C
+0D,00,Slide-show hub; options and auto-play viewer - init,C
+0D,01,Slide-show hub; options and auto-play viewer - hub,C
+0D,02,Slide-show hub; options and auto-play viewer - options menu,C
+0D,03,Slide-show hub; options and auto-play viewer - option a,C
+0D,04,Slide-show hub; options and auto-play viewer - option b,C
+0D,05,Slide-show hub; options and auto-play viewer - fade out hub,C
+0D,06,Slide-show hub; options and auto-play viewer - play init,C
+0D,07,Slide-show hub; options and auto-play viewer - play,C
+0D,08,Slide-show hub; options and auto-play viewer - play exit,C
+0D,09,Slide-show hub; options and auto-play viewer - no photos message,C
+0D,0A,Slide-show hub; options and auto-play viewer - result screen,C
+0D,0B,Slide-show hub; options and auto-play viewer - restart,C
+00,00,Main menu - init,C
+00,01,Main menu - item0 shoot,C
+00,02,Main menu - item1 view,C
+00,03,Main menu - item2 arcade,C
+00,04,Main menu - item3 doodle,C
+00,05,Main menu - item4 link,C
+00,06,Main menu - item5 special,C
+00,07,Main menu - item6 edit,C
+00,08,Main menu - launch,C
+1B,00,Printer menu - init,C
+1B,01,Printer menu - choose,C
+1B,02,Printer menu - leave,C
+1C,00,Print one photo - init,C
+1C,01,Print one photo - pick photo,C
+1C,02,Print one photo - show print screen,C
+1C,03,Print one photo - print main,C
+1C,04,Print one photo - options menu,C
+1C,05,Print one photo - option density,C
+1C,06,Print one photo - option toggle,C
+1C,07,Print one photo - leave,C
+1C,08,Print one photo - print job,C
+1C,09,Print one photo - fade to border picker,C
+1C,0A,Print one photo - border picker,C
+1C,0B,Print one photo - after border,C
+1C,0C,Print one photo - fade to wild picker,C
+1C,0D,Print one photo - wild frame picker,C
+1C,0E,Print one photo - after wild frame,C
+1E,00,Multi-photo print - init,C
+1E,01,Multi-photo print - page1 margin,C
+1E,02,Multi-photo print - page2 select photos,C
+1E,03,Multi-photo print - page3 confirm,C
+1E,04,Multi-photo print - leave,C
+1E,05,Multi-photo print - print job,C
+19,00,Copyright; title scene - copyright screens,C
+19,01,Copyright; title scene - title first,C
+19,02,Copyright; title scene - title from menu,C
+19,03,Copyright; title scene - title wait,C
+19,04,Copyright; title scene - leave,C
+08,00,USER - init,C
+08,01,USER - planet map,C
+08,02,USER - planet open,C
+08,03,USER - card init,C
+08,04,USER - card show,C
+08,05,USER - card leave,C
+08,06,USER - editor init,C
+08,07,USER - edit name,C
+08,08,USER - edit sex,C
+08,09,USER - edit birth date,C
+08,0A,USER - edit blood type,C
+08,0B,USER - save owner,C
+08,0C,USER - record init,C
+08,0D,USER - record wait,C
+08,0E,USER - record leave,C
+08,0F,USER - hi score init,C
+08,10,USER - hi score wait,C
+08,11,USER - hi score leave,C
+08,12,USER - credits entry,C
+08,13,USER - credits page a,C
+08,14,USER - credits page b,C
+08,15,USER - credits scroll,C
+08,16,USER - credits wait a,C
+08,17,USER - credits dancing man,C
+08,18,USER - leave,C
+21,00,RUN! RUN! RUN! - init,C
+21,01,RUN! RUN! RUN! - pick character,C
+21,02,RUN! RUN! RUN! - race scene init,C
+21,03,RUN! RUN! RUN! - race setup,C
+21,04,RUN! RUN! RUN! - countdown,C
+21,05,RUN! RUN! RUN! - ready steady go,C
+21,06,RUN! RUN! RUN! - race loop,C
+21,07,RUN! RUN! RUN! - race end,C
+21,08,RUN! RUN! RUN! - unused 08,C
+21,09,RUN! RUN! RUN! - unused 09,C
+21,0A,RUN! RUN! RUN! - unused 0a,C
+21,0B,RUN! RUN! RUN! - result setup,C
+21,0C,RUN! RUN! RUN! - result screen,C
+21,0D,RUN! RUN! RUN! - unused 0d,C
+21,0E,RUN! RUN! RUN! - leave,C

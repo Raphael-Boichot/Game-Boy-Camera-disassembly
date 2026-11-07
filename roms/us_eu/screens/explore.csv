@@ -1,0 +1,68 @@
+mode,state,keys,frames,bgb_mode,bgb_state,same,picture,parent,key
+00,01,A,801,00,01,yes,screen_00_01.png,19:03,A
+00,02,A Right,899,00,02,yes,screen_00_02.png,00:01,Right
+00,03,A Down,899,00,03,yes,screen_00_03.png,00:01,Down
+00,04,A Select,899,00,04,yes,screen_00_04.png,00:01,Select
+00,05,A Select Up,997,00,05,yes,screen_00_05.png,00:04,Up
+00,06,A Select Right,997,00,06,yes,screen_00_06.png,00:04,Right
+00,07,A Select Down,997,00,07,yes,screen_00_07.png,00:04,Down
+01,07,A A Down A,1095,01,07,yes,screen_01_07.png,01:04,A
+01,0A,A A Right Down A,1193,01,0A,yes,screen_01_0A.png,01:04,A
+02,01,A Right A,997,02,01,yes,screen_02_01.png,00:02,A
+03,01,A Select Right A,1095,03,01,yes,screen_03_01.png,00:06,A
+04,01,A Select A,997,04,01,yes,screen_04_01.png,00:04,A
+05,01,A Select Down A,1095,05,01,yes,screen_05_01.png,00:07,A
+06,01,A Select Up A,1095,06,01,yes,screen_06_01.png,00:05,A
+07,01,A Down A,997,07,01,yes,screen_07_01.png,00:03,A
+07,02,A Down A A,1095,07,02,yes,screen_07_02.png,07:01,A
+07,03,A Down A A B A,1291,07,03,yes,screen_07_03.png,07:02,A
+07,04,A Down A A Start,1193,07,04,yes,screen_07_04.png,07:02,Start
+08,01,A Start,899,08,01,yes,screen_08_01.png,00:01,Start
+08,07,A Start A,997,08,07,yes,screen_08_07.png,08:01,A
+08,0D,A Start Right A,1095,08,0D,yes,screen_08_0D.png,08:01,A
+08,10,A Start Right Right A,1193,08,10,yes,screen_08_10.png,08:01,A
+08,13,A Start Right Right Right A,1291,08,13,yes,screen_08_13.png,08:01,A
+08,18,A Start Right Right Right A B,1389,08,18,yes,screen_08_18.png,08:13,B
+09,01,A A Right A,1095,09,01,yes,screen_09_01.png,01:04,A
+0A,01,A Right A A,1095,0A,01,yes,screen_0A_01.png,02:01,A
+0B,01,A Right A Right A,1193,0B,01,yes,screen_0B_01.png,02:01,A
+0D,01,A Right A Right A A,1291,0D,01,yes,screen_0D_01.png,0B:01,A
+0D,02,A Right A Right A A Select,1389,0D,02,yes,screen_0D_02.png,0D:01,Select
+0D,0A,A Right A Right A A A,1389,0D,0A,yes,screen_0D_0A.png,0D:01,A
+0E,01,A Select Up A Right A,1291,0E,01,yes,screen_0E_01.png,06:01,A
+0F,02,A Select Down A A Right,1291,0F,02,yes,screen_0F_02.png,0F:03,Right
+0F,03,A Select Down A A,1193,0F,03,yes,screen_0F_03.png,05:01,A
+0F,0C,A Select Down A A A Right,1389,0F,0C,yes,screen_0F_0C.png,0F:0D,Right
+0F,0D,A Select Down A A A,1291,0F,0D,yes,screen_0F_0D.png,0F:03,A
+10,01,A Select A Left A,1193,10,01,yes,screen_10_01.png,04:01,A
+11,01,A Select A A,1095,11,01,yes,screen_11_01.png,04:01,A
+12,00,A Select Down A Left A,1291,12,00,yes,screen_12_00.png,05:01,A
+12,01,A Select Down A Left A A,1389,12,01,yes,screen_12_01.png,12:00,A
+13,01,A Right A Right A Down A,1389,13,01,yes,screen_13_01.png,0B:01,A
+14,01,A A A,997,14,01,yes,screen_14_01.png,01:04,A
+14,02,A A A A,1095,14,02,yes,screen_14_02.png,14:01,A
+14,04,A A A Select,1095,14,04,yes,screen_14_04.png,14:01,Select
+14,05,A A A Select Left,1193,14,05,yes,screen_14_05.png,14:04,Left
+14,06,A A A Select Right,1193,14,06,yes,screen_14_06.png,14:04,Right
+14,07,A A A Select Up,1193,14,07,yes,screen_14_07.png,14:04,Up
+14,08,A A A Select Down,1193,14,08,yes,screen_14_08.png,14:04,Down
+15,02,A A Down A A,1193,15,02,yes,screen_15_02.png,01:07,A
+15,03,A A Down A A A,1291,15,03,yes,screen_15_03.png,15:02,A
+15,06,A A Down A Down A,1291,15,06,yes,screen_15_06.png,01:07,A
+15,07,A A Down A Down A A,1389,15,07,yes,screen_15_07.png,15:06,A
+16,02,A A Down Down A,1193,16,02,yes,screen_16_02.png,01:04,A
+16,03,A A Down Down A A,1291,16,03,yes,screen_16_03.png,16:02,A
+16,04,A A Down Down A Down A,1389,16,04,yes,screen_16_04.png,16:02,A
+17,01,A Select Right A Down A,1291,17,01,yes,screen_17_01.png,03:01,A
+17,02,A Select Right A Down A A,1389,17,02,yes,screen_17_02.png,17:01,A
+19,03,-,703,19,03,yes,screen_19_03.png,,
+1A,01,A Select Right A A,1193,1A,01,yes,screen_1A_01.png,03:01,A
+1B,01,A Select Up A A,1193,1B,01,yes,screen_1B_01.png,06:01,A
+1C,01,A Select Up A A A,1291,1C,01,yes,screen_1C_01.png,1B:01,A
+1E,01,A Select Up A A Right A,1389,1E,01,yes,screen_1E_01.png,1B:01,A
+1F,01,A Down A A Right A,1291,1F,01,yes,screen_1F_01.png,07:02,A
+1F,02,A Down A A Right A A,1389,1F,02,yes,screen_1F_02.png,1F:01,A
+20,01,A Down A A Left A,1291,20,01,yes,screen_20_01.png,07:02,A
+20,04,A Down A A Left A A,1389,20,04,yes,screen_20_04.png,20:01,A
+21,01,A Down A A A,1193,21,01,yes,screen_21_01.png,07:02,A
+21,04,A Down A A A A,1291,21,04,yes,screen_21_04.png,21:01,A

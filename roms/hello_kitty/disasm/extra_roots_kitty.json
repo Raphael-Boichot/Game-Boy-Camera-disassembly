@@ -1,5 +1,5 @@
 {
- "about": "Hand input of tools/kitty_trace.py for the Hello Kitty ROM. tables: length (records) of a jump table where the tracer's rule (stop at the lowest target seen) reads too far, with the reason; roots: code entries no static rule finds; resolved: unresolved sites read by hand (why).",
+ "about": "Hand input of tools/kitty_trace.py for the Hello Kitty ROM. tables: length (records) of a jump table where the tracer's rule (stop at the lowest target seen) reads too far, with the reason; jtables: indexed `jp hl` sites with their table and length; roots: code entries no static rule finds; resolved: unresolved sites read by hand (why).",
  "tables": {
   "06:463C": {
    "n": 2,
@@ -39,5 +39,118 @@
   }
  },
  "roots": [],
- "resolved": []
+ "resolved": [
+  {
+   "bank": "00",
+   "addr": "18C6",
+   "why": "00:18C6 is itself a setter (it passes the caller's DE to 00:18B8 and installs 00:18E7 through 00:18BF); its callers are checked as setter sites (00:192B passes 00:18F5)"
+  },
+  {
+   "bank": "00",
+   "addr": "2113",
+   "why": "object engine (slots of 23 bytes at $DAEE, copied to hFFC3-hFFD9 for the frame): calls the slot's per-frame routine hFFC7/C8, set by the object's own init and script routines in bank 2. Static values: none; the routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "00",
+   "addr": "212F",
+   "why": "object engine (slots of 23 bytes at $DAEE, copied to hFFC3-hFFD9 for the frame): calls a script command routine, the word read from the script (bit 15 clear) in bank 2. Static values: the scripts follow the descriptors (trace field `objects`); the routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "01",
+   "addr": "59E7",
+   "why": "second object engine in bank 1 (slots copied to hFFDA..): per-frame routine hFFDE/DF; routines taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "01",
+   "addr": "59FE",
+   "why": "second object engine in bank 1: script command routine (word from the script, bit 15 clear); routines taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "06",
+   "addr": "401A",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "06",
+   "addr": "4072",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "06",
+   "addr": "4078",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "06",
+   "addr": "5FE9",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "06",
+   "addr": "604C",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "07",
+   "addr": "6925",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "07",
+   "addr": "692C",
+   "why": "object creation ($205D) with DE = a descriptor returned by the far call just before (or read from a record): not a constant; the init routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "02",
+   "addr": "6605",
+   "why": "object script command (02:6601 / 02:6612): calls the word that follows the command in the script (`ld a,[hl+]; ld h,[hl]; ld l,a; call $0150`), then skips it; the routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "02",
+   "addr": "6616",
+   "why": "object script command (02:6601 / 02:6612): calls the word that follows the command in the script (`ld a,[hl+]; ld h,[hl]; ld l,a; call $0150`), then skips it; the routines are taken from the core runs (observed roots, L2)"
+  }
+ ],
+ "jtables": {
+  "04:5E89": {
+   "table": "04:5E8A",
+   "n": 96,
+   "why": "04:5E73: A*2 indexes the word table right after the `jp hl`; the table runs to the lowest target 5F4A (96 words), the count of the Japanese effect table 0A:541A"
+  },
+  "07:449B": {
+   "table": "07:449C",
+   "n": 32,
+   "why": "07:448F: A*2 indexes the word table right after the `jp hl`; the table runs to the lowest target 44DC (32 words)"
+  },
+  "0F:52B9": {
+   "table": "0F:42C1",
+   "n": 10,
+   "why": "sound driver: `and a / cp $0B` keep ids 1-10, $5236 does dec a, x2, add"
+  },
+  "0F:52C7": {
+   "table": "0F:42D5",
+   "n": 10,
+   "why": "sound driver: same bound cp $0B (ids 1-10), through $523A"
+  },
+  "0F:52D9": {
+   "table": "0F:41C9",
+   "n": 62,
+   "why": "sound driver: cp $3F keeps ids 1-62"
+  },
+  "0F:52E7": {
+   "table": "0F:4245",
+   "n": 62,
+   "why": "sound driver: cp $3F keeps ids 1-62"
+  },
+  "0F:52F9": {
+   "table": "0F:42E9",
+   "n": 18,
+   "why": "sound driver: cp $13 keeps ids 1-18"
+  },
+  "0F:5307": {
+   "table": "0F:430D",
+   "n": 18,
+   "why": "sound driver: cp $13 keeps ids 1-18"
+  }
+ }
 }

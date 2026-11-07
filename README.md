@@ -12,6 +12,10 @@ One map per ROM, in the same colours: what each byte is (code by function, data 
 
 ![What each byte of the Japanese ROM is: code by function, data by kind](roms/jp_rev_a/jp_rom_layout_map.png)
 
+*Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), named after the mode and state constants of `roms/jp_rev_a/disasm/screen_names_jp.csv` (generated from the L4 tables); key taps from an unlocked, freshly formatted save, 7 taps deep: the screens behind a printer, a link partner or a long game are not in it yet, and a box with no arrow is a screen whose parent screen BGB did not confirm. Drawn by `tools/screen_tree.py` from `roms/jp_rev_a/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
+
+![Screens (mode, state) reached in BGB](roms/jp_rev_a/jp_screen_tree.png)
+
 *Never-reached assets of the Japanese ROM*: the assets that no emulator replay put on screen in a run without state pokes (unused maps beside their tile sets, TCRF graphics, blocks never shown or shown only in forced runs, scraps, sounds never requested; docs §16.24, list in [`really_unused.md`](tcrf_check/assets/unidentified/really_unused.md)).
 
 ![The never-reached assets of the Japanese ROM](tcrf_check/assets/unidentified/really_unused.png)
@@ -39,6 +43,10 @@ One map per ROM, in the same colours: what each byte is (code by function, data 
 **Game Boy Camera (USA, Europe)**: ported from the Japanese tables.
 
 ![What each byte of the international ROM is](roms/us_eu/us_rom_layout_map.png)
+
+*Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), same method and limits as the Japanese tree (names: `roms/us_eu/disasm/screen_names_us.csv`); the Gold ROM, a copy of this program with other assets, has no tree of its own. Drawn by `tools/screen_tree.py` from `roms/us_eu/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
+
+![Screens (mode, state) reached in BGB](roms/us_eu/us_screen_tree.png)
 
 *Never-reached assets* (first pass, 2026-10-31, from about 55 minutes of the international coverage run (twice cut by a container restart; state kept on the branch `wip/intl-coverage-state`); table [`jp_never_reached_in_us.csv`](roms/us_eu/assets/jp_never_reached_in_us.csv)): of the 131 never-reached assets of the Japanese ROM (27,156 bytes), 90 are in this ROM byte for byte at the same address and 5 more elsewhere (in banks $25 and $26, which moved: the "DEBA GAME" menu map, the unused photo screen and picture, the option-page head rows). The leftovers survive here: the unused exchange stand-by screen, the "DEBA GAME" menu, the hand-and-newspaper frames, the ball-head frames F5-F8, the other TCRF graphics. None of these 95 blocks was read in an organic run of the international core (the only organic reads are 8 small blocks of 2 to 10 bytes, mostly the Space Fever II HUD bytes that the Japanese ROM also reads without showing them). 11 are not in this ROM: six slots of the Japanese font, two tile sets of bank $15 and three small blocks. The sheet below draws them from the international ROM's own bytes (each block checked against its Japanese source; the Gold ROM has the same bytes), with two Japanese blocks of the name font that the international keyboard cannot type; the unused exchange stand-by screen and the "DEBA GAME" menu are left out (they are in the Japanese picture above). Whether a block reaches the screen is still to be confirmed by international display replays (`tools/intl_jp_leftovers_sheet.py`).
 
@@ -71,9 +79,13 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets* (2026-11-02, from three one-hour coverage runs of the Gold ROM in the project's core: a fresh start, the unlocking saves and a third seed; `tools/never_reached_gold.py`): of the 131 never-reached assets of the Japanese ROM, 86 are in the Gold ROM (81 at the same address, 5 moved) and no organic Gold run read them, the same leftovers as in the international ROM ([`jp_never_reached_in_gold.csv`](roms/gold/assets/jp_never_reached_in_gold.csv)); 9 small blocks were read (the Space Fever II HUD bytes, as in the other builds, and the TCRF album hand gestures `13:5CA0`, which a larger tile copy of the album screen loads without showing them). The Gold edition's own content (18 blocks whose bytes differ from the international ROM: the Zelda stamps of banks $2B / $2C, the three Zelda pictures of album B with their thumbnails, the album B slot and gate tables, two icon sources) is a plain asset substitution: the same code loads it from the same places as the international stamps and album B pictures, so any player sees it. The automatic runs simply did not get there in normal play, in either build (the international run did not read the international stamps and album B pictures at these addresses either); they were read only by runs with forced states ([`gold_own_never_read.csv`](roms/gold/assets/gold_own_never_read.csv)). This is a limit of the runs, not unused content.
 
-**Pocket Camera (Hello Kitty)** (prototype): L0-L1 done (2026-11-07: intake, own tracer, every byte typed, byte-exact round trip with the symbol file; [`roms/hello_kitty/`](roms/hello_kitty/README.md)).
+**Pocket Camera (Hello Kitty)** (prototype): L0-L2 done (2026-11-07: intake, own tracer, every byte typed, byte-exact round trip with the symbol file, 0 unresolved indirect sites, code observed in the core and in BGB; [`roms/hello_kitty/`](roms/hello_kitty/README.md)).
 
 ![What each byte of the Hello Kitty ROM is](roms/hello_kitty/kitty_rom_layout_map.png)
+
+*Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), named in plain words in `roms/hello_kitty/disasm/screen_names_kitty.csv`; dashed boxes: screens reached by a boot condition (the calibration checks) or only by forcing the mode (evidence I). Drawn by `tools/screen_tree.py` from `roms/hello_kitty/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
+
+![Screens (mode, state) reached in BGB](roms/hello_kitty/kitty_screen_tree.png)
 
 *Never-reached assets*: not investigated yet (no emulator run of this ROM).
 
@@ -92,7 +104,7 @@ The three last maps are drawn by `python3 tools/status_maps.py --gold GOLD.gb --
 | Pocket Camera (Japan) (Rev A) (SGB Enhanced) | `fdcfe686cf4df461e870b6e53b2b5a8b` | [`roms/jp_rev_a/`](roms/jp_rev_a/) | L0-L5 done |
 | Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | ported from JP: L0-L1, L2 static, L3 (C 5,281 / I 130: I = unused, by evidence), L4, L5 (`make TREE=us_eu check`; docs §1.5), L6 character set and keyboard tables as text |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | ported (L0-L5; source tree `roms/gold/src/`; L6 character set) |
-| Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L1 (own trace, symbol file, round trip byte-exact) |
+| Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L2 (own trace, 0 unresolved, observed in the core and BGB; symbol file, round trip byte-exact) |
 | Pocket Camera Prototype (Japan) ("DEBAGAME") | `1d8097de3497db8b182bcd2a984b6063` | [`roms/prototype_debagame/`](roms/prototype_debagame/) | not started |
 
 The ROMs are not in the repository (md5 values in §1.1; the owner supplies them outside it).

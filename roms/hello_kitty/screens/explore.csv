@@ -1,0 +1,28 @@
+mode,state,keys,frames,bgb_mode,bgb_state,same,picture,parent,key
+00,08,-,703,00,08,yes,screen_00_08.png,,
+01,02,A,801,01,02,yes,screen_01_02.png,00:08,A
+01,05,A Start,899,01,05,yes,screen_01_05.png,01:02,Start
+02,01,A A,899,02,01,yes,screen_02_01.png,01:02,A
+02,06,A A A,997,02,06,yes,screen_02_06.png,02:01,A
+03,02,A Down A,997,03,02,yes,screen_03_02.png,01:02,A
+04,01,A Up A,997,04,01,yes,screen_04_01.png,01:02,A
+07,02,A Start Up A,1095,07,02,yes,screen_07_02.png,01:05,A
+0B,04,A Start A A,1095,0B,04,yes,screen_0B_04.png,0B:10,A
+0B,08,A Start A A A A A A A,1585,0B,08,yes,screen_0B_08.png,0B:10,A
+0B,10,A Start A,997,0B,10,yes,screen_0B_10.png,01:05,A
+0C,01,A Start Down A,1095,0C,01,yes,screen_0C_01.png,01:05,A
+0E,03,A Up A A A B,1291,0E,03,yes,screen_0E_03.png,0E:13,B
+0E,05,A Up A A,1095,0E,05,yes,screen_0E_05.png,04:01,A
+0E,07,A Up A Down A A,1291,0E,07,yes,screen_0E_07.png,0E:05,A
+0E,08,A Up A Down A A A,1389,0E,08,yes,screen_0E_08.png,0E:07,A
+0E,0A,A Up A Down A A A A A,1585,0E,0A,yes,screen_0E_0A.png,0E:08,A
+0E,13,A Up A A A,1193,0E,13,yes,screen_0E_13.png,0E:05,A
+0E,14,A Up A A A A,1291,0E,14,yes,screen_0E_14.png,0E:13,A
+0E,16,A Up A A A A A A,1487,0E,16,yes,screen_0E_16.png,0E:14,A
+10,02,A Up A A A A A A A,1585,10,02,yes,screen_10_02.png,0E:16,A
+11,07,A Up A Up A,1193,11,07,yes,screen_11_07.png,04:01,A
+11,0C,A Up A Up A A,1291,11,0C,yes,screen_11_0C.png,11:07,A
+12,01,A Up A Up A A A B Up A,1683,12,01,yes,screen_12_01.png,04:01,A
+12,04,A Up A Up A A A B Up A A,1781,12,04,yes,screen_12_04.png,12:01,A
+14,01,A A A Start,1095,14,01,yes,screen_14_01.png,02:06,Start
+1E,00,A Up A A A B A,1389,1E,00,yes,screen_1E_00.png,0E:03,A

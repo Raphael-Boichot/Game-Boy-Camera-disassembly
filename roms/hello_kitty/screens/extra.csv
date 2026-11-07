@@ -1,0 +1,17 @@
+mode,state,picture,how
+05,06,extra_05_06.png,forced (I): ModeTable slot $01 patched to mode $05
+06,03,extra_06_03.png,forced (I): ModeTable slot $01 patched to mode $06
+08,02,extra_08_02.png,forced (I): ModeTable slot $01 patched to mode $08
+09,05,extra_09_05.png,forced (I): ModeTable slot $01 patched to mode $09
+0A,01,extra_0A_01.png,forced (I): ModeTable slot $01 patched to mode $0A
+0D,01,extra_0D_01.png,every key but B held at power-on
+0D,02,extra_0D_02.png,every key but B held at power-on
+0D,04,extra_0D_04.png,boot with a blank SRAM ($AA)
+0D,05,extra_0D_05.png,boot with a blank SRAM ($AA)
+0F,05,extra_0F_05.png,forced (I): ModeTable slot $01 patched to mode $0F
+17,01,extra_17_01.png,forced (I): ModeTable slot $01 patched to mode $17
+18,01,extra_18_01.png,forced (I): ModeTable slot $01 patched to mode $18
+19,01,extra_19_01.png,forced (I): ModeTable slot $01 patched to mode $19
+1A,01,extra_1A_01.png,forced (I): ModeTable slot $01 patched to mode $1A
+1B,01,extra_1B_01.png,forced (I): ModeTable slot $01 patched to mode $1B
+1C,01,extra_1C_01.png,forced (I): ModeTable slot $01 patched to mode $1C

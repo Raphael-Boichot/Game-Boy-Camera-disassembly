@@ -7,6 +7,8 @@
 Writes (both generated, never edit them; hand rows go in sym_types_kitty_hand.csv, applied after these by sym_build.py):
   copy_sites_kitty.csv  every traced call of a copy routine with the constants found on the straight line before it
                         (bank, source, destination, length; '' = not a constant), the routine and the kind of destination
+  --observed COV.npz    (repeatable) bytes the core read as data and no other row types: one `data` row per run of read bytes (gaps of up
+                        to 16 unread bytes bridged; the reader routines are in the note), written first so that the code-read rows win
   --names FILE          one label per typed block start, named by kind and address only (Gfx_BB_AAAA tiles, Map_BB_AAAA
                         tile map, Data_BB_AAAA other copy source, JumpTable_BB_AAAA / FarJumpTable_BB_AAAA), tag C: the kind is
                         what the traced code does with the bytes (constant arguments of a copy routine, a dispatcher); no meaning yet (L3)
@@ -27,6 +29,7 @@ A source is in bank 0 when below $4000, else in the given bank (or the caller's 
 import sys, json, csv, argparse, collections, os
 ap = argparse.ArgumentParser()
 ap.add_argument('rom'); ap.add_argument('trace'); ap.add_argument('--types', required=True); ap.add_argument('--sites', required=True)
+ap.add_argument('--observed', action='append', default=[], help='cov.npz of tools/kitty_coverage.py: ROM bytes the core read as data, typed by their reader (L2)')
 ap.add_argument('--names', default=None, help='write the generated block labels (Gfx_ / Map_ / Data_ / JumpTable_ / FarJumpTable_ BB_AAAA, tag C) here')
 ap.add_argument('--rommap', default=None, help='byte classes of the trace (bank,start,length,class: C code, T inline table / arguments, R rest) for tools/status_maps.py')
 a = ap.parse_args()
@@ -92,6 +95,42 @@ with open(a.sites, 'w', newline='') as f:
 rows = []
 def add(b, s, e, typ, width, note):
     if e > s: rows.append([b, s, e, typ, width, note])
+obs_rows = []
+if a.observed:
+    import numpy as np
+    dr = None; rdr = None
+    for f in a.observed:
+        z = np.load(f); d_ = z['dread'] > 0; r_ = z['reader'].astype(np.uint64)
+        if dr is None: dr, rdr = d_.copy(), r_.copy()
+        else: rdr = np.where(rdr == 0, r_, rdr); dr |= d_
+    # the reader routine of an instruction = the nearest trace entry at or below it in its bank (unrolled copies read
+    # neighbouring bytes with different instructions of one routine)
+    import bisect
+    ents = collections.defaultdict(list)
+    for k in T['entries']: eb, ea = K(k); ents[eb].append(ea)
+    for eb in ents: ents[eb].sort()
+    def routine(v):
+        v = int(v) & 0x3FFFFF; rb, rp = v >> 16, v & 0xFFFF; rb = 0 if rp < 0x4000 else rb
+        L = ents.get(rb, []); i_ = bisect.bisect_right(L, rp) - 1
+        return (rb, L[i_]) if i_ >= 0 else (rb, rp)
+    rkey = {}
+    def rk(v): return rkey.get(v) or rkey.setdefault(v, routine(v))
+    # one block per run of read bytes, bridging gaps of up to 16 unread bytes; the note names up to 4 reader routines
+    i = 0; N = len(ROM); cur = None
+    for i in np.nonzero(dr)[0]:
+        i = int(i); b = i >> 14; ad = i if b == 0 else (i & 0x3FFF) + 0x4000
+        if cur and cur[0] == b and ad - cur[2] <= 16: cur[2] = ad + 1; cur[3][rk(int(rdr[i]))] += 1
+        else:
+            if cur: obs_rows.append(cur)
+            cur = [b, ad, ad + 1, collections.Counter({rk(int(rdr[i])): 1})]
+    if cur: obs_rows.append(cur)
+    exb = None
+    for f in a.observed:
+        e_ = np.load(f)['exec'] > 0; exb = e_ if exb is None else (exb | e_)
+    nexe = sum(1 for (b_, ad_), n_ in code.items() for i_ in range(n_) if exb[off(b_, ad_ + i_)])
+    print('observed: %d of %d code bytes executed in the runs (core, and BGB breakpoints on block heads), %d ROM bytes read as data in the core' % (nexe, sum(code.values()), int(dr.sum())))
+    obs_rows = [[b, s0, e0, 'data', '', 'read in the core runs by %s%s' % (', '.join('%02X:%04X' % r for r, _ in c.most_common(4)), ' ...' if len(c) > 4 else '')]
+                for b, s0, e0, c in obs_rows]
 for k, v in T['ctables'].items():
     b, s = K(k); rows and None
     add(b, s, s + v['width'] * len(v['records']), 'data', v['width'], 'jump table read through %s at %s (%d records; tools/kitty_trace.py)' % ('$01A0' if v['width'] == 3 else '$0189', v['site'], len(v['records'])))
@@ -118,6 +157,16 @@ out = []; dropped = 0
 for b, s, e, t, wd, note in sorted(rows, key=lambda r: (r[0], r[1], -r[2])):
     if any((b, i) in cbytes for i in range(s, e)): dropped += 1; continue
     out.append(['%02X' % b, '%04X' % s, '%04X' % e, t, wd, note])
+# observed rows: only the parts that no code byte holds (a read of an instruction byte is the code itself, or an inline table)
+obs_out = []
+for b, s, e, t, wd, note in obs_rows:
+    i = s
+    while i < e:
+        if (b, i) in cbytes: i += 1; continue
+        j = i
+        while j < e and (b, j) not in cbytes: j += 1
+        obs_out.append(['%02X' % b, '%04X' % i, '%04X' % j, t, wd, note]); i = j
+out = obs_out + out
 with open(a.types, 'w', newline='') as f:
     w = csv.writer(f); w.writerow(['bank', 'start', 'end', 'type', 'width', 'note']); w.writerows(out)
 c = collections.Counter(x['dst_kind'] or '?' for x in sites); full = sum(1 for x in sites if x['src_bank'] and x['src'] and x['len'])
@@ -138,7 +187,7 @@ if a.rommap:
 
 if a.names:
     lab = {}
-    for b, s_, e, t, wd, note in sorted(rows, key=lambda r: (r[0], r[1], -r[2])):
+    for b, s_, e, t, wd, note in sorted(rows + [[int(r[0], 16), int(r[1], 16), int(r[2], 16), r[3], r[4], r[5]] for r in obs_out], key=lambda r: (r[0], r[1], -r[2])):
         if any((b, i) in cbytes for i in range(s_, e)): continue
         kind = note.split(':')[0]
         nm = ('Gfx' if kind == 'Gfx' else 'Map' if kind == 'Map' else 'FarJumpTable' if note.startswith('jump table read through $01A0') else

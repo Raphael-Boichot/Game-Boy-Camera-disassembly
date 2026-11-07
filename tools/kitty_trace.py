@@ -32,6 +32,7 @@ import sys, json, argparse, collections
 
 ap = argparse.ArgumentParser()
 ap.add_argument('rom'); ap.add_argument('out'); ap.add_argument('--roots', default=None); ap.add_argument('--report', default=None)
+ap.add_argument('--observed', action='append', default=[], help='cov.npz of tools/kitty_coverage.py runs: instructions the core executed and the static trace did not reach become roots (L2)')
 a = ap.parse_args()
 ROM = open(a.rom, 'rb').read()
 FAR, FARA, FARJ, RET0, RET1, JT, JTI, FJT = 0x015B, 0x0165, 0x0155, 0x0173, 0x017A, 0x0189, 0x0194, 0x01A0
@@ -42,7 +43,12 @@ INLINE_ARGS = {(0, 0x01D1): 2, (0, 0x01DB): 4, (0, 0x01F2): 4, (0, 0x0206): 6, (
 # $1AB7's three bytes are a far callback {lo, hi, bank} stored in hFF97-99 and called through $015B at 00:1B75 (serial / timer path)
 FAR_CALLBACK_ARGS = {(0, 0x1AB7)}
 # routines that store a bank-0 callback given in DE (the LCDC-interrupt handler jumps to hFFA4/A5, refilled from hFFA6/A7)
-CALLBACK_SETTERS = {(0, 0x18B8): 'de', (0, 0x18BF): 'de'}
+CALLBACK_SETTERS = {(0, 0x18B8): 'de', (0, 0x18BF): 'de', (0, 0x18C6): 'de'}
+# object creation: $205A (BC = 0) / $205D (BC = parameter), DE = descriptor in bank 2: {word, word, init routine, script...};
+# $205D switches to bank 2, fills a 23-byte slot at $DAEE + 23 k and calls the init routine through $0151 (00:20C4). The script
+# words after the descriptor head are run by the per-frame object pass (00:20DF: $0150 / $0151 calls at 00:2113 / 00:212F),
+# not decoded here: their targets come from the emulator runs (L2).
+OBJECT_CREATE = {0x205A, 0x205D}
 
 LEN = [1] * 256
 for op in (0x01, 0x08, 0x11, 0x21, 0x31, 0xC2, 0xC3, 0xC4, 0xCA, 0xCC, 0xCD, 0xD2, 0xD4, 0xDA, 0xDC, 0xEA, 0xFA): LEN[op] = 3
@@ -83,6 +89,7 @@ pred = {}            # fall-through predecessor: (b, ad) -> (b, ad) of the instr
 entries = {}         # root -> why
 unresolved = []      # [kind, bank, addr, detail]
 ramcalls = []
+objects = {}         # object descriptor (bank 2) -> init routine
 edges = collections.defaultdict(set)   # root -> roots it pushes (calls, jumps, tables)
 owner = {}            # instruction -> root of the walk that decoded it
 cur_root = [None]
@@ -182,7 +189,13 @@ def step(b, ad):
         nxt = ad + n
         def fall(): pred[(bb, nxt)] = (bb, ad)
         if op == 0x18: push(bb, (nxt + (byte(bb, ad + 1) ^ 0x80) - 0x80) & 0xFFFF, 'jr'); return
-        if op in (0x20, 0x28, 0x30, 0x38): push(bb, (nxt + (byte(bb, ad + 1) ^ 0x80) - 0x80) & 0xFFFF, 'jr cc')
+        # a conditional jump right after the opposite conditional jump (jp z / jp nz, jr c / jr nc ...) always jumps: the path ends
+        CC_ = {0x20: 0, 0x28: 1, 0x30: 2, 0x38: 3, 0xC2: 0, 0xCA: 1, 0xD2: 2, 0xDA: 3}
+        pv = pred.get((bb, ad))
+        always = op in CC_ and pv is not None and byte(*pv) in CC_ and (CC_[byte(*pv)] ^ 1) == CC_[op] and (bb, ad) not in targets
+        if op in (0x20, 0x28, 0x30, 0x38):
+            push(bb, (nxt + (byte(bb, ad + 1) ^ 0x80) - 0x80) & 0xFFFF, 'jr cc')
+            if always: return
         elif op == 0xC3 or op in (0xC2, 0xCA, 0xD2, 0xDA):
             t = word(bb, ad + 1)
             if t in (RET0, RET1):
@@ -194,7 +207,7 @@ def step(b, ad):
             else:
                 push(bb, t, 'jp')
                 if (0 if t < 0x4000 else bb, t) in CALLBACK_SETTERS: callback(bb, ad, (0 if t < 0x4000 else bb, t))
-            if op == 0xC3: return
+            if op == 0xC3 or always: return
         elif op in (0xCD, 0xC4, 0xCC, 0xD4, 0xDC):
             t = word(bb, ad + 1)
             if t in (FAR, FARA):
@@ -217,6 +230,13 @@ def step(b, ad):
                 vh, p = scan_const(bb, ad, 'hl')
                 if vh is None: unresolved.append(['far_jumptable', bb, ad, 'HL unknown'])
                 else: resolutions.append([bb, ad, p]); const_table(bb, vh, 3, key(bb, ad))
+            elif t in OBJECT_CREATE:
+                vd, p = scan_const(bb, ad, 'de')
+                if vd is None: unresolved.append(['object_de', bb, ad, 'descriptor unknown'])
+                else:
+                    resolutions.append([bb, ad, p]); init = word(2, vd + 4)
+                    objects[key(2, vd)] = init; push(2, init, 'object init (descriptor %s, created at %s)' % (key(2, vd), key(bb, ad)))
+                    for k in range(vd, vd + 6): inline.setdefault((2, k), 'object %s' % key(2, vd))
             elif t in (CALLHL, CALLBC, CALLDE):
                 r = {CALLHL: 'hl', CALLBC: 'bc', CALLDE: 'de'}[t]
                 v, p = scan_const(bb, ad, 'hl') if r == 'hl' else (None, [])
@@ -253,12 +273,35 @@ roots = [(0, 0x0100, 'entry'), (0, 0x0040, 'vblank'), (0, 0x0048, 'lcdc'), (0, 0
 hand = json.load(open(a.roots)) if a.roots else {'roots': [], 'resolved': []}
 caps.update({k: v['n'] for k, v in hand.get('tables', {}).items()})
 for r in hand.get('roots', []): roots.append((int(r['bank'], 16), int(r['addr'], 16), 'hand: ' + r['why']))
+# hand-read indexed jump tables: site of the `jp hl` -> table and length (each with its reason in the extra roots file)
+for site, v in hand.get('jtables', {}).items():
+    sb, sa = int(site[:2], 16), int(site[3:], 16); tb, ta = int(v['table'][:2], 16), int(v['table'][3:], 16)
+    recs = [word(tb, ta + 2 * i) for i in range(v['n'])]
+    for k in range(ta, ta + 2 * v['n']): inline[(0 if ta < 0x4000 else tb, k)] = key(tb, ta)
+    tables[key(tb, ta)] = recs
+    for t in recs: roots.append((tb, t, 'hand table %s (jp hl at %s)' % (key(tb, ta), site)))
+hand_sites = {(int(s_[:2], 16), int(s_[3:], 16)) for s_ in hand.get('jtables', {})}
 for b, ad, why in roots: entries[(0 if ad < 0x4000 else b, ad)] = why; work.append((b, ad)); targets.add((0 if ad < 0x4000 else b, ad))
 # helper bodies end in `jp hl` / `ret` with register targets: they are resolved per call site, not reported
-helper_jphl = {(0, 0x01DA), (0, 0x032C), (0, 0x035D), (0, 0x1AC1), (0, 0x18DD), (0, 0x1B75), (0, 0x01AE), (0, 0x0150), (0, 0x015A), (0, 0x0164), (0, 0x0172), (0, 0x0193), (0, 0x019F), (0, 0x0023)}
+helper_jphl = {(0, 0x20C4), (0, 0x01DA), (0, 0x032C), (0, 0x035D), (0, 0x1AC1), (0, 0x18DD), (0, 0x1B75), (0, 0x01AE), (0, 0x0150), (0, 0x015A), (0, 0x0164), (0, 0x0172), (0, 0x0193), (0, 0x019F), (0, 0x0023)}
 while work: step(*work.popleft())
+# observed roots (L2): opcode bytes the core executed (exec == 1) that the static trace did not decode. They are taken in address
+# order, so only the entry of each run of new code becomes a root (the rest is decoded from it); each is marked `observed`.
+observed = {}
+if a.observed:
+    import numpy as np
+    ex = None
+    for f in a.observed:
+        e = np.load(f)['exec']; ex = (e == 1) if ex is None else (ex | (e == 1))
+    for o in np.nonzero(ex)[0]:
+        o = int(o); b = o >> 14; ad = o if b == 0 else (o & 0x3FFF) + 0x4000; bb = 0 if ad < 0x4000 else b
+        if (bb, ad) in code: continue
+        if any(code.get((bb, ad - k), 0) > k for k in (1, 2)): unresolved.append(['observed_inside', bb, ad, 'executed start inside a traced instruction']); continue
+        observed[key(bb, ad)] = 1; entries[(bb, ad)] = 'observed in the core runs'; targets.add((bb, ad)); cur_root[0] = None
+        work.append((bb, ad))
+        while work: step(*work.popleft())
 # resolved by hand: drop listed unresolved sites
-done = {(int(r['bank'], 16), int(r['addr'], 16)) for r in hand.get('resolved', [])}
+done = {(int(r['bank'], 16), int(r['addr'], 16)) for r in hand.get('resolved', [])} | hand_sites
 unresolved = [u for u in unresolved if (u[1], u[2]) not in helper_jphl and (u[1], u[2]) not in done]
 # recheck the constant scans against the final targets
 for bb, ad, path in resolutions:
@@ -318,12 +361,12 @@ uk = collections.Counter(u[0] for u in unresolved)
 nb = collections.Counter(b for (b, ad) in code)
 out = {'code': {key(b, ad): n for (b, ad), n in sorted(code.items())},
        'inline': {key(b, ad): t for (b, ad), t in sorted(inline.items())},
-       'unresolved': sorted(unresolved, key=lambda u: (u[1], u[2])), 'far_ok': far_ok, 'tables': tables, 'ctables': ctables, 'ramcalls': ramcalls, 'args': args, 'state_check': state_check,
+       'unresolved': sorted(unresolved, key=lambda u: (u[1], u[2])), 'far_ok': far_ok, 'tables': tables, 'ctables': ctables, 'ramcalls': ramcalls, 'args': args, 'objects': objects, 'observed_roots': sorted(observed), 'state_check': state_check,
        'entries': {key(b, ad): w for (b, ad), w in sorted(entries.items())}}
 json.dump(out, open(a.out, 'w'), indent=0)
 nbytes = sum(code.values())
-print('kitty_trace: %d instructions, %d code bytes, %d inline table bytes, %d far calls resolved, %d unresolved %s' % (
-    len(code), nbytes, len(inline), len(far_ok), len(unresolved), dict(uk)))
+print('kitty_trace: %d instructions, %d code bytes, %d inline table bytes, %d far calls resolved, %d unresolved %s, %d observed roots' % (
+    len(code), nbytes, len(inline), len(far_ok), len(unresolved), dict(uk), len(observed)))
 if a.report:
     with open(a.report, 'w') as f:
         f.write('# Kitty static trace: unresolved sites\n\nGenerated by `tools/kitty_trace.py`. %d instructions, %d code bytes, %d unresolved.\n\n| kind | site | detail |\n|---|---|---|\n' % (len(code), nbytes, len(unresolved)))
