@@ -71,9 +71,9 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets* (2026-11-02, from three one-hour coverage runs of the Gold ROM in the project's core: a fresh start, the unlocking saves and a third seed; `tools/never_reached_gold.py`): of the 131 never-reached assets of the Japanese ROM, 86 are in the Gold ROM (81 at the same address, 5 moved) and no organic Gold run read them, the same leftovers as in the international ROM ([`jp_never_reached_in_gold.csv`](roms/gold/assets/jp_never_reached_in_gold.csv)); 9 small blocks were read (the Space Fever II HUD bytes, as in the other builds, and the TCRF album hand gestures `13:5CA0`, which a larger tile copy of the album screen loads without showing them). The Gold edition's own content (18 blocks whose bytes differ from the international ROM: the Zelda stamps of banks $2B / $2C, the three Zelda pictures of album B with their thumbnails, the album B slot and gate tables, two icon sources) is a plain asset substitution: the same code loads it from the same places as the international stamps and album B pictures, so any player sees it. The automatic runs simply did not get there in normal play, in either build (the international run did not read the international stamps and album B pictures at these addresses either); they were read only by runs with forced states ([`gold_own_never_read.csv`](roms/gold/assets/gold_own_never_read.csv)). This is a limit of the runs, not unused content.
 
-**Pocket Camera (Hello Kitty)** (prototype): L0 done (2026-11-07: header, comparison with the four sibling ROMs, byte-exact round trip; [`roms/hello_kitty/`](roms/hello_kitty/README.md)).
+**Pocket Camera (Hello Kitty)** (prototype): L0-L1 done (2026-11-07: intake, own tracer, every byte typed, byte-exact round trip with the symbol file; [`roms/hello_kitty/`](roms/hello_kitty/README.md)).
 
-![What each byte of the Hello Kitty ROM is (no byte typed yet)](roms/hello_kitty/kitty_rom_layout_map.png)
+![What each byte of the Hello Kitty ROM is](roms/hello_kitty/kitty_rom_layout_map.png)
 
 *Never-reached assets*: not investigated yet (no emulator run of this ROM).
 
@@ -92,7 +92,7 @@ The three last maps are drawn by `python3 tools/status_maps.py --gold GOLD.gb --
 | Pocket Camera (Japan) (Rev A) (SGB Enhanced) | `fdcfe686cf4df461e870b6e53b2b5a8b` | [`roms/jp_rev_a/`](roms/jp_rev_a/) | L0-L5 done |
 | Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | ported from JP: L0-L1, L2 static, L3 (C 5,281 / I 130: I = unused, by evidence), L4, L5 (`make TREE=us_eu check`; docs §1.5), L6 character set and keyboard tables as text |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | ported (L0-L5; source tree `roms/gold/src/`; L6 character set) |
-| Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0 (intake, round trip byte-exact) |
+| Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L1 (own trace, symbol file, round trip byte-exact) |
 | Pocket Camera Prototype (Japan) ("DEBAGAME") | `1d8097de3497db8b182bcd2a984b6063` | [`roms/prototype_debagame/`](roms/prototype_debagame/) | not started |
 
 The ROMs are not in the repository (md5 values in §1.1; the owner supplies them outside it).

@@ -1,0 +1,150 @@
+bank,addr,name,conf,note,source
+00,0D00,ModeTable,C,"the 31 {lo, hi, bank} mode entries read by the main loop through $01A0 at 00:0CFD (hFF8D = mode)",kitty_types
+01,769C,JumpTable_01_769C,C,jump table read through $0189 at 01:7696 (43 records; tools/kitty_trace.py),kitty_types
+05,4376,JumpTable_05_4376,C,jump table read through $0189 at 05:4370 (9 records; tools/kitty_trace.py),kitty_types
+05,452B,JumpTable_05_452B,C,jump table read through $0189 at 05:4525 (6 records; tools/kitty_trace.py),kitty_types
+05,47D7,JumpTable_05_47D7,C,jump table read through $0189 at 05:47D1 (7 records; tools/kitty_trace.py),kitty_types
+05,52B6,JumpTable_05_52B6,C,jump table read through $0189 at 05:52B0 (15 records; tools/kitty_trace.py),kitty_types
+05,6171,JumpTable_05_6171,C,jump table read through $0189 at 05:616B (7 records; tools/kitty_trace.py),kitty_types
+05,75EE,JumpTable_05_75EE,C,jump table read through $0189 at 05:75E8 (20 records; tools/kitty_trace.py),kitty_types
+06,4054,JumpTable_06_4054,C,jump table read through $0189 at 06:404E (2 records; tools/kitty_trace.py),kitty_types
+06,40B2,JumpTable_06_40B2,C,jump table read through $0189 at 06:40AC (2 records; tools/kitty_trace.py),kitty_types
+06,4118,JumpTable_06_4118,C,jump table read through $0189 at 06:4112 (2 records; tools/kitty_trace.py),kitty_types
+06,4181,JumpTable_06_4181,C,jump table read through $0189 at 06:417B (2 records; tools/kitty_trace.py),kitty_types
+06,4209,JumpTable_06_4209,C,jump table read through $0189 at 06:4203 (2 records; tools/kitty_trace.py),kitty_types
+06,463C,JumpTable_06_463C,C,jump table read through $0189 at 06:4636 (2 records; tools/kitty_trace.py),kitty_types
+06,55D1,JumpTable_06_55D1,C,jump table read through $0189 at 06:55CB (17 records; tools/kitty_trace.py),kitty_types
+06,580A,JumpTable_06_580A,C,jump table read through $0189 at 06:5804 (4 records; tools/kitty_trace.py),kitty_types
+06,5D97,JumpTable_06_5D97,C,jump table read through $0189 at 06:5D91 (2 records; tools/kitty_trace.py),kitty_types
+06,6323,JumpTable_06_6323,C,jump table read through $0189 at 06:631D (5 records; tools/kitty_trace.py),kitty_types
+06,6727,JumpTable_06_6727,C,jump table read through $0189 at 06:6721 (6 records; tools/kitty_trace.py),kitty_types
+06,6CF7,JumpTable_06_6CF7,C,jump table read through $0189 at 06:6CF1 (17 records; tools/kitty_trace.py),kitty_types
+06,6DA1,JumpTable_06_6DA1,C,jump table read through $0189 at 06:6D9B (4 records; tools/kitty_trace.py),kitty_types
+07,4084,JumpTable_07_4084,C,jump table read through $0189 at 07:407E (2 records; tools/kitty_trace.py),kitty_types
+07,4142,JumpTable_07_4142,C,jump table read through $0189 at 07:413C (2 records; tools/kitty_trace.py),kitty_types
+07,41CA,JumpTable_07_41CA,C,jump table read through $0189 at 07:41C4 (2 records; tools/kitty_trace.py),kitty_types
+07,4A89,JumpTable_07_4A89,C,jump table read through $0189 at 07:4A83 (5 records; tools/kitty_trace.py),kitty_types
+07,4A9F,JumpTable_07_4A9F,C,jump table read through $0189 at 07:4A99 (2 records; tools/kitty_trace.py),kitty_types
+07,5097,JumpTable_07_5097,C,inline jump table (7 words; tools/kitty_trace.py),kitty_types
+07,541F,JumpTable_07_541F,C,jump table read through $0189 at 07:5419 (15 records; tools/kitty_trace.py),kitty_types
+07,5AB8,JumpTable_07_5AB8,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
+07,5AC4,JumpTable_07_5AC4,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
+07,5B7D,JumpTable_07_5B7D,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
+07,5CAE,JumpTable_07_5CAE,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
+07,5E4B,JumpTable_07_5E4B,C,jump table read through $0189 at 07:5E45 (16 records; tools/kitty_trace.py),kitty_types
+07,62C6,JumpTable_07_62C6,C,jump table read through $0189 at 07:62C0 (6 records; tools/kitty_trace.py),kitty_types
+07,6871,JumpTable_07_6871,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,6990,JumpTable_07_6990,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,6A62,JumpTable_07_6A62,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,6B21,JumpTable_07_6B21,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,6BD4,JumpTable_07_6BD4,C,jump table read through $0189 at 07:6BCE (33 records; tools/kitty_trace.py),kitty_types
+07,6CD2,JumpTable_07_6CD2,C,jump table read through $0189 at 07:6CCC (2 records; tools/kitty_trace.py),kitty_types
+0B,7F00,Data_0B_7F00,C,"wram data copied to CA00 by 01:69AA ($0245, 256 bytes)",kitty_types
+0C,7CE0,Data_0C_7CE0,C," data copied to  by 06:4BEF ($0726, 16 bytes)",kitty_types
+0D,4600,Gfx_0D_4600,C,"Gfx: tiles copied to 9380 by 05:6EEF ($0726, 192 bytes)",kitty_types
+0D,4700,Data_0D_4700,C," data copied to  by 05:6EFA ($0726, 192 bytes)",kitty_types
+0D,4800,Data_0D_4800,C," data copied to  by 05:6F05 ($0726, 192 bytes)",kitty_types
+0D,4900,Gfx_0D_4900,C,"Gfx: tiles copied to 84C0 by 05:6F13 ($0726, 192 bytes)",kitty_types
+0D,4A00,Data_0D_4A00,C," data copied to  by 05:6F1E ($0726, 192 bytes)",kitty_types
+0D,4B00,Data_0D_4B00,C," data copied to  by 05:6F29 ($0726, 192 bytes)",kitty_types
+0D,6000,Data_0D_6000,C,"wram data copied to C000 by 01:697A ($0245, 1024 bytes)",kitty_types
+0D,6400,Data_0D_6400,C,"wram data copied to C000 by 01:6986 ($0245, 1120 bytes)",kitty_types
+0E,6800,Gfx_0E_6800,C,"Gfx: tiles copied to 8000 by 01:7226 ($0245, 6144 bytes)",kitty_types
+13,5F80,Gfx_13_5F80,C,"Gfx: tiles copied to 8000 by 07:675B ($0245, 6144 bytes)",kitty_types
+13,7780,Gfx_13_7780,C,"Gfx: tiles copied to 8800 by 07:67C1 ($0245, 896 bytes)",kitty_types
+13,7B00,Map_13_7B00,C,"Map: tile map copied to 9800 by 07:60B5 ($0245, 576 bytes)",kitty_types
+14,4000,Gfx_14_4000,C,"Gfx: tiles copied to 8000 by 06:40CD ($0245, 6144 bytes)",kitty_types
+14,5800,Gfx_14_5800,C,"Gfx: tiles copied to 8000 by 06:4133 ($0245, 6144 bytes)",kitty_types
+15,4000,Gfx_15_4000,C,"Gfx: tiles copied to 8000 by 05:6F91 ($0245, 6144 bytes)",kitty_types
+15,44C0,Gfx_15_44C0,C,"Gfx: tiles copied to 84C0 by 05:6F5E ($0726, 192 bytes)",kitty_types
+15,4580,Data_15_4580,C," data copied to  by 05:6F69 ($0726, 192 bytes)",kitty_types
+15,4640,Data_15_4640,C," data copied to  by 05:6F74 ($0726, 192 bytes)",kitty_types
+15,5000,Gfx_15_5000,C,"Gfx: tiles copied to 9000 by 05:703F ($0726, 880 bytes)",kitty_types
+15,5380,Gfx_15_5380,C,"Gfx: tiles copied to 9380 by 05:6F3A ($0726, 192 bytes)",kitty_types
+15,5440,Data_15_5440,C," data copied to  by 05:6F45 ($0726, 192 bytes)",kitty_types
+15,5500,Data_15_5500,C," data copied to  by 05:6F50 ($0726, 192 bytes)",kitty_types
+15,5800,Gfx_15_5800,C,"Gfx: tiles copied to 8000 by 05:4279 ($0245, 6144 bytes)",kitty_types
+16,5800,Gfx_16_5800,C,"Gfx: tiles copied to 8000 by 07:6C1A ($0245, 6144 bytes)",kitty_types
+17,4000,Gfx_17_4000,C,"Gfx: tiles copied to 8000 by 06:508E ($0245, 6144 bytes)",kitty_types
+17,5800,Gfx_17_5800,C,"Gfx: tiles copied to 8000 by 05:454E ($0245, 6144 bytes)",kitty_types
+17,7000,Gfx_17_7000,C,"Gfx: tiles copied to 8000 by 06:65DF ($0245, 4096 bytes)",kitty_types
+17,7800,Data_17_7800,C," data copied to  by 06:611A ($0260, 256 bytes)",kitty_types
+18,5800,Gfx_18_5800,C,"Gfx: tiles copied to 8000 by 01:74B2 ($0726, 6144 bytes)",kitty_types
+1A,7000,Map_1A_7000,C,"Map: tile map copied to 9800 by 07:6C24 ($0245, 1024 bytes)",kitty_types
+1B,5800,Gfx_1B_5800,C,"Gfx: tiles copied to 8800 by 06:5291 ($0726, 224 bytes)",kitty_types
+1B,5900,Gfx_1B_5900,C,"Gfx: tiles copied to 8800 by 06:541F ($0726, 224 bytes)",kitty_types
+1B,5A00,Gfx_1B_5A00,C,"Gfx: tiles copied to 8800 by 06:54CA ($0726, 224 bytes)",kitty_types
+1B,5B00,Gfx_1B_5B00,C,"Gfx: tiles copied to 8800 by 06:5477 ($0726, 224 bytes)",kitty_types
+1B,5C00,Gfx_1B_5C00,C,"Gfx: tiles copied to 8800 by 06:5522 ($0726, 224 bytes)",kitty_types
+1B,6E00,Map_1B_6E00,C,"Map: tile map copied to 9800 by 07:678A ($0245, 576 bytes)",kitty_types
+1B,7600,Map_1B_7600,C,"Map: tile map copied to 9800 by 07:67CB ($0245, 576 bytes)",kitty_types
+1B,7EF0,Gfx_1B_7EF0,C,"Gfx: tiles copied to 8EF0 by 01:6E85 ($0726, 240 bytes)",kitty_types
+1D,4000,Gfx_1D_4000,C,"Gfx: tiles copied to 8000 by 07:48D4 ($0245, 5632 bytes)",kitty_types
+1D,5600,Gfx_1D_5600,C,"Gfx: tiles copied to 8000 by 06:6850 ($0245, 5376 bytes)",kitty_types
+1D,6B00,Gfx_1D_6B00,C,"Gfx: tiles copied to 8000 by 06:61AF ($0245, 5184 bytes)",kitty_types
+1E,7800,Gfx_1E_7800,C,"Gfx: tiles copied to 9000 by 05:420A ($0245, 2048 bytes)",kitty_types
+20,7800,Map_20_7800,C,"Map: tile map copied to 9842 by 01:6BA1 ($0260, 288 bytes)",kitty_types
+20,7860,Map_20_7860,C,"Map: tile map copied to 9842 by 01:6F14 ($0726, 64 bytes)",kitty_types
+20,7A60,Map_20_7A60,C,"Map: tile map copied to 9962 by 01:6BAF ($0260, 288 bytes)",kitty_types
+20,7C00,Map_20_7C00,C,"Map: tile map copied to 9882 by 01:6F06 ($0726, 448 bytes)",kitty_types
+22,5A40,Map_22_5A40,C,"Map: tile map copied to 9800 by 05:6FAE ($0245, 1024 bytes)",kitty_types
+22,5E40,Map_22_5E40,C,"Map: tile map copied to 9800 by 05:6FBA ($0245, 1024 bytes)",kitty_types
+22,6240,Map_22_6240,C,"Map: tile map copied to 9C00 by 05:6F9B ($0245, 1024 bytes)",kitty_types
+22,7240,Map_22_7240,C,"Map: tile map copied to 9800 by 06:5098 ($0245, 1024 bytes)",kitty_types
+22,7640,Map_22_7640,C,"Map: tile map copied to 9800 by 06:5275 ($0726, 352 bytes)",kitty_types
+22,77A0,Map_22_77A0,C,"Map: tile map copied to 9C00 by 06:5514 ($0726, 256 bytes)",kitty_types
+22,7A40,Map_22_7A40,C,"Map: tile map copied to 9C00 by 06:5283 ($0726, 256 bytes)",kitty_types
+22,7B40,Map_22_7B40,C,"Map: tile map copied to 9C00 by 06:5411 ($0726, 256 bytes)",kitty_types
+22,7C40,Map_22_7C40,C,"Map: tile map copied to 9C00 by 06:54BC ($0726, 256 bytes)",kitty_types
+22,7D40,Map_22_7D40,C,"Map: tile map copied to 9C00 by 06:5469 ($0726, 256 bytes)",kitty_types
+23,4E00,Gfx_23_4E00,C,"Gfx: tiles copied to 8000 by 07:60AB ($0245, 3408 bytes)",kitty_types
+23,5B50,Map_23_5B50,C,"Map: tile map copied to 9800 by 05:6639 ($0245, 576 bytes)",kitty_types
+23,5F50,Map_23_5F50,C,"Map: tile map copied to 9800 by 05:664F ($0245, 576 bytes)",kitty_types
+23,6350,Map_23_6350,C,"Map: tile map copied to 9C00 by 05:661E ($0245, 256 bytes)",kitty_types
+23,6750,Map_23_6750,C,"Map: tile map copied to 9800 by 05:5FEA ($0245, 1024 bytes)",kitty_types
+23,6B50,Map_23_6B50,C,"Map: tile map copied to 9C00 by 05:5FF4 ($0245, 288 bytes)",kitty_types
+23,7350,Gfx_23_7350,C,"Gfx: tiles copied to 8600 by 01:6A79 ($0245, 1024 bytes)",kitty_types
+23,7450,Gfx_23_7450,C,"Gfx: tiles copied to 8700 by 06:5630 ($0245, 256 bytes)",kitty_types
+23,7530,Gfx_23_7530,C,"Gfx: tiles copied to 8FE0 by 00:07A8 ($0726, 32 bytes)",kitty_types
+23,7950,Gfx_23_7950,C,"Gfx: tiles copied to 8C00 by 05:4CD3 ($0726, 768 bytes)",kitty_types
+24,6A00,Gfx_24_6A00,C,"Gfx: tiles copied to 8000 by 07:5ACA ($0245, 2048 bytes)",kitty_types
+24,6BC0,Gfx_24_6BC0,C,"Gfx: tiles copied to 81C0 by 07:5C9F ($0726, 48 bytes)",kitty_types
+24,7000,Gfx_24_7000,C,"Gfx: tiles copied to 81C0 by 07:5AD4 ($0245, 64 bytes)",kitty_types
+24,7200,Gfx_24_7200,C,"Gfx: tiles copied to 9600 by 07:5ADE ($0245, 512 bytes)",kitty_types
+24,7400,Gfx_24_7400,C,"Gfx: tiles copied to 8E00 by 05:40DF ($0245, 2560 bytes)",kitty_types
+25,5C00,Gfx_25_5C00,C,"Gfx: tiles copied to 8600 by 07:4F9B ($0245, 2560 bytes)",kitty_types
+25,63F0,Gfx_25_63F0,C,"Gfx: tiles copied to 8DF0 by 07:4FD6 ($0726, 528 bytes)",kitty_types
+25,6600,Gfx_25_6600,C,"Gfx: tiles copied to 8600 by 05:5FE0 ($0245, 2560 bytes)",kitty_types
+25,6800,Gfx_25_6800,C,"Gfx: tiles copied to 8800 by 05:6155 ($0726, 512 bytes)",kitty_types
+25,7000,Gfx_25_7000,C,"Gfx: tiles copied to 8F00 by 06:5CF3 ($0245, 2304 bytes)",kitty_types
+25,7900,Map_25_7900,C,"Map: tile map copied to 9800 by 07:48DE ($0245, 576 bytes)",kitty_types
+26,5C00,Data_26_5C00,C,"wram data copied to C400 by 01:6969 ($0245, 2304 bytes)",kitty_types
+26,6A00,Map_26_6A00,C,"Map: tile map copied to 9860 by 05:46EA ($0260, 384 bytes)",kitty_types
+26,71E0,Map_26_71E0,C,"Map: tile map copied to 9800 by 06:61B9 ($0245, 576 bytes)",kitty_types
+26,75E0,Map_26_75E0,C,"Map: tile map copied to 9C00 by 06:61C3 ($0245, 576 bytes)",kitty_types
+26,7820,Map_26_7820,C,"Map: tile map copied to 9800 by 07:5AF2 ($0245, 576 bytes)",kitty_types
+26,7840,Map_26_7840,C,"Map: tile map copied to 9820 by 07:5DE1 ($0726, 544 bytes)",kitty_types
+2C,78D0,Map_2C_78D0,C,"Map: tile map copied to 9800 by 06:6B13 ($0245, 1024 bytes)",kitty_types
+2D,7820,Map_2D_7820,C,"Map: tile map copied to 9800 by 06:40D7 ($0245, 1024 bytes)",kitty_types
+2E,7800,Map_2E_7800,C,"Map: tile map copied to 9800 by 06:413D ($0245, 1024 bytes)",kitty_types
+2E,7C00,Map_2E_7C00,C,"Map: tile map copied to 9800 by 05:4283 ($0245, 128 bytes)",kitty_types
+2E,7C80,Map_2E_7C80,C,"Map: tile map copied to 9880 by 05:42E9 ($0726, 448 bytes)",kitty_types
+2E,7E40,Map_2E_7E40,C,"Map: tile map copied to 9880 by 05:428D ($0245, 448 bytes)",kitty_types
+2F,67B0,Map_2F_67B0,C,"Map: tile map copied to 9800 by 01:7230 ($0245, 448 bytes)",kitty_types
+2F,6970,Map_2F_6970,C,"Map: tile map copied to 9C00 by 01:7252 ($0245, 128 bytes)",kitty_types
+2F,6A70,Map_2F_6A70,C,"Map: tile map copied to 9C00 by 01:7246 ($0245, 128 bytes)",kitty_types
+31,64F0,Gfx_31_64F0,C,"Gfx: tiles copied to 8000 by 05:439C ($0245, 768 bytes)",kitty_types
+31,6770,Map_31_6770,C,"Map: tile map copied to 9800 by 05:4214 ($0245, 576 bytes)",kitty_types
+31,69F0,Map_31_69F0,C,"Map: tile map copied to 9800 by 05:43A6 ($0245, 576 bytes)",kitty_types
+31,6C30,Map_31_6C30,C,"Map: tile map copied to 98A0 by 05:4459 ($0726, 32 bytes)",kitty_types
+31,6C50,Map_31_6C50,C,"Map: tile map copied to 98A0 by 05:4473 ($0726, 32 bytes)",kitty_types
+31,6EE0,Map_31_6EE0,C,"Map: tile map copied to 9800 by 06:5CFD ($0245, 608 bytes)",kitty_types
+31,7140,Map_31_7140,C,"Map: tile map copied to 9800 by 05:44C0 ($0245, 576 bytes)",kitty_types
+31,7380,Map_31_7380,C,"Map: tile map copied to 9900 by 05:4501 ($0726, 32 bytes)",kitty_types
+31,75F0,Map_31_75F0,C,"Map: tile map copied to 9800 by 01:6A83 ($0245, 1024 bytes)",kitty_types
+31,7830,Map_31_7830,C,"Map: tile map copied to 9800 by 05:40E9 ($0245, 576 bytes)",kitty_types
+31,7A70,Map_31_7A70,C,"Map: tile map copied to 9800 by 05:4558 ($0245, 576 bytes)",kitty_types
+32,7800,Map_32_7800,C,"Map: tile map copied to 9800 by 01:74C8 ($0726, 576 bytes)",kitty_types
+32,7A40,Map_32_7A40,C,"Map: tile map copied to 9800 by 06:563A ($0245, 576 bytes)",kitty_types
+32,7C80,Map_32_7C80,C,"Map: tile map copied to 9800 by 06:685A ($0245, 576 bytes)",kitty_types
+33,6A00,Map_33_6A00,C,"Map: tile map copied to 9800 by 06:44E4 ($0245, 576 bytes)",kitty_types

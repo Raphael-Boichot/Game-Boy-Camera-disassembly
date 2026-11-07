@@ -1,0 +1,43 @@
+{
+ "about": "Hand input of tools/kitty_trace.py for the Hello Kitty ROM. tables: length (records) of a jump table where the tracer's rule (stop at the lowest target seen) reads too far, with the reason; roots: code entries no static rule finds; resolved: unresolved sites read by hand (why).",
+ "tables": {
+  "06:463C": {
+   "n": 2,
+   "why": "mode $14: the 2-entry init / main pattern of the small modes; the third word 486C points at `ld [hl],a; sla a`, a mid-routine instruction, and the words after it are {word, pointer} records (486C 5D00 / 4880 5F40 ...) whose pointers land inside argument bytes and instructions"
+  },
+  "06:6727": {
+   "n": 6,
+   "why": "the next table (06:6CF7) starts its first entry at 6733 = 6727 + 6 x 2"
+  },
+  "07:5AB8": {
+   "n": 3,
+   "why": "07:5ABE is called directly (a routine): the inline table after the call $0194 holds 3 words"
+  },
+  "07:5E4B": {
+   "n": 16,
+   "why": "07:5E6B is a far-call target (from 07:6098): the table ends there, 16 words; the 17th word 5221 is the routine's first bytes"
+  },
+  "06:4209": {
+   "n": 2,
+   "why": "mode $19: the third word 4C0B points at a routine body that starts with `pop hl` (not the shape of a state handler); no constant state above 0 is set for this mode by the static scan"
+  },
+  "07:41CA": {
+   "n": 2,
+   "why": "mode $1C: the third word is 4000, the bank start; no constant state above 0 is set for this mode by the static scan (07:4000 stays code only if something else reaches it)"
+  },
+  "07:5AC4": {
+   "n": 3,
+   "why": "inline table after call $0194: the 4th word 45CD decodes to the invalid opcode D3"
+  },
+  "05:6171": {
+   "n": 7,
+   "why": "mode $05: words 0-6 point into mode 5's own code (5FC9-612F, 607A); the code of the mode stores states 2-6 only; words 7-12 point into other modes' code (4858, 4504-4540) and 6818"
+  },
+  "07:4A9F": {
+   "n": 2,
+   "why": "mode $13: words 0-1 are 4A93 (the routine just before the dispatcher); the third word 6A00 points inside the instruction `ld hl,$4E97` at 07:69FF"
+  }
+ },
+ "roots": [],
+ "resolved": []
+}

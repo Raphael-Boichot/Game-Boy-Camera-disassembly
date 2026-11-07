@@ -271,6 +271,45 @@ for k, folder, pre in _sm:
         bad('maps', '%s is not what tools/status_maps.py draws today: rerun it' % png)
     else: ok('maps', '%s fresh' % png)
     shutil.rmtree(tmp_, ignore_errors=True)
+# ------------------------------------------------------------------ Hello Kitty: trace, types, symbol file, round trip (needs --rom-kitty)
+# The generated files of roms/hello_kitty/ are rebuilt in a temporary folder and compared; the counts that its README quotes are
+# compared with the tools' output (need=: a reworded sentence fails instead of passing silently).
+if A.rom_kitty:
+    KD = 'roms/hello_kitty/'; tk = tempfile.mkdtemp(prefix='kitty_')
+    def _run(*cmd): return subprocess.run([sys.executable] + list(cmd), capture_output=True, text=True)
+    r1 = _run('tools/kitty_trace.py', A.rom_kitty, os.path.join(tk, 't.json'), '--roots', KD + 'disasm/extra_roots_kitty.json', '--report', os.path.join(tk, 'u.md'))
+    r2 = _run('tools/kitty_types.py', A.rom_kitty, os.path.join(tk, 't.json'), '--types', os.path.join(tk, 'ty.csv'), '--sites', os.path.join(tk, 'cs.csv'),
+              '--rommap', os.path.join(tk, 'rm.csv'), '--names', os.path.join(tk, 'nm.csv')) if not r1.returncode else r1
+    r3 = _run('tools/sym_build.py', A.rom_kitty, '--names', KD + 'disasm/sym_names_kitty.csv', '--types', KD + 'disasm/sym_types_kitty.csv',
+              '--trace', KD + 'port/trace_kitty.json', '--out', os.path.join(tk, 'k.sym'), '--report') if not r2.returncode else r2
+    if r3.returncode: bad('kitty', 'the Kitty pipeline failed: %s' % (r3.stderr or r3.stdout)[-300:])
+    else:
+        stale = [f for f, g in (('port/trace_kitty.json', 't.json'), ('port/trace_kitty_unresolved.md', 'u.md'), ('disasm/sym_types_kitty.csv', 'ty.csv'),
+                                ('assets/copy_sites_kitty.csv', 'cs.csv'), ('port/rom_map_kitty.csv', 'rm.csv'), ('disasm/sym_names_kitty.csv', 'nm.csv'),
+                                ('pocketcamera_kitty.sym', 'k.sym')) if open(KD + f, 'rb').read() != open(os.path.join(tk, g), 'rb').read()]
+        if stale: bad('kitty', 'not what the Kitty pipeline makes today (SETUP.md, Hello Kitty): %s' % ', '.join(stale))
+        else: ok('kitty', 'trace, types, copy sites, byte classes, names and pocketcamera_kitty.sym fresh')
+        KR = rd(KD + 'README.md')
+        m1 = re.search(r'kitty_trace: (\d+) instructions, (\d+) code bytes, (\d+) inline table bytes, (\d+) far calls resolved, (\d+) unresolved', r1.stdout)
+        m3 = re.search(r'bytes by type: (\{.*\})', r3.stdout); m4 = re.search(r'still on the default typing \(\.data, 16 per row\): (\d+)', r3.stdout)
+        BYK = eval(m3.group(1)); typed = BYK['data'] - int(m4.group(1))
+        for what, val, pat in (('code bytes', int(m1.group(2)), r'([\d,]+) bytes of proven code'), ('unresolved', int(m1.group(5)), r'([\d,]+) indirect sites left unresolved'),
+                               ('padding', BYK['padding'], r'([\d,]+) bytes of padding'), ('typed data', typed, r'([\d,]+) bytes of data typed by a code-read reason'),
+                               ('default data', int(m4.group(1)), r'([\d,]+) bytes of data on the default typing')):
+            mm = re.search(pat, KR)
+            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the %s (need=%r)' % (what, pat))
+            elif int(mm.group(1).replace(',', '')) != val: bad('kitty', 'roms/hello_kitty/README.md: %s quoted %s, the tools give %d' % (what, mm.group(1), val))
+        if A.roundtrip:
+            rt = tempfile.mkdtemp(prefix='kittyrt_'); shutil.copy(A.rom_kitty, os.path.join(rt, 'pocketcamera_kitty.gb')); shutil.copy(KD + 'pocketcamera_kitty.sym', rt)
+            r_ = subprocess.run([sys.executable, '/home/claude/tc/mgbdis/mgbdis.py', '--output-dir', os.path.join(rt, 'out'), os.path.join(rt, 'pocketcamera_kitty.gb')], capture_output=True, text=True)
+            env_ = dict(os.environ, PATH='/home/claude/tc/rgbds:' + os.environ.get('PATH', ''))
+            r_ = subprocess.run(['make'], cwd=os.path.join(rt, 'out'), capture_output=True, text=True, env=env_) if not r_.returncode else r_
+            gb = os.path.join(rt, 'out', 'game.gb')
+            md = hashlib.md5(open(gb, 'rb').read()).hexdigest() if os.path.exists(gb) else 'none'
+            if md != '0a323bddc4f0159cea76cf44ed0c1a3c': bad('kitty', 'round trip with pocketcamera_kitty.sym: md5 %s' % md)
+            else: ok('kitty', 'round trip with pocketcamera_kitty.sym: md5 %s' % md)
+            shutil.rmtree(rt, ignore_errors=True)
+    shutil.rmtree(tk, ignore_errors=True)
 # ------------------------------------------------------------------ sym + types (needs the ROM)
 LINES = BLOCKS = None; BYTES = {}
 if A.rom:

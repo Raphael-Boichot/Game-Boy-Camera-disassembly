@@ -1,0 +1,501 @@
+bank,start,end,type,width,note
+00,0B1F,0B21,data,2,inline arguments of the call at 00:0B1C
+00,0B2B,0B2D,data,2,inline arguments of the call at 00:0B28
+00,0B37,0B39,data,2,inline arguments of the call at 00:0B34
+00,0D00,0D5D,data,3,jump table read through $01A0 at 00:0CFA (31 records; tools/kitty_trace.py)
+00,1785,1789,data,4,inline arguments of the call at 00:1782
+00,178C,1790,data,4,inline arguments of the call at 00:1789
+00,1796,179A,data,4,inline arguments of the call at 00:1793
+00,17B7,17BA,data,3,inline arguments of the call at 00:17B4
+00,17BD,17BF,data,2,inline arguments of the call at 00:17BA
+00,17DD,17E0,data,3,inline arguments of the call at 00:17DA
+00,182C,1830,data,4,inline arguments of the call at 00:1829
+00,1833,1837,data,4,inline arguments of the call at 00:1830
+00,183D,1841,data,4,inline arguments of the call at 00:183A
+00,185E,1861,data,3,inline arguments of the call at 00:185B
+00,1864,1866,data,2,inline arguments of the call at 00:1861
+00,187E,1881,data,3,inline arguments of the call at 00:187B
+01,696C,6973,data,7,inline arguments of the call at 01:6969
+01,697D,6984,data,7,inline arguments of the call at 01:697A
+01,6989,6990,data,7,inline arguments of the call at 01:6986
+01,69AD,69B4,data,7,inline arguments of the call at 01:69AA
+01,6A7C,6A83,data,7,inline arguments of the call at 01:6A79
+01,6A86,6A8D,data,7,inline arguments of the call at 01:6A83
+01,6A9E,6AA0,data,2,inline arguments of the call at 01:6A9B
+01,6AB9,6ABC,data,3,inline arguments of the call at 01:6AB6
+01,6ABF,6ACA,data,11,inline arguments of the call at 01:6ABC
+01,6F63,6F66,data,3,inline arguments of the call at 01:6F60
+01,6FD0,6FD3,data,3,inline arguments of the call at 01:6FCD
+01,70C7,70CA,data,3,inline arguments of the call at 01:70C4
+01,717C,717F,data,3,inline arguments of the call at 01:7179
+01,7201,7208,data,7,inline arguments of the call at 01:71FE
+01,7229,7230,data,7,inline arguments of the call at 01:7226
+01,7233,723A,data,7,inline arguments of the call at 01:7230
+01,7249,7250,data,7,inline arguments of the call at 01:7246
+01,7255,725C,data,7,inline arguments of the call at 01:7252
+01,7268,7273,data,11,inline arguments of the call at 01:7265
+01,7286,728D,data,7,inline arguments of the call at 01:7283
+01,7290,7297,data,7,inline arguments of the call at 01:728D
+01,72A6,72AD,data,7,inline arguments of the call at 01:72A3
+01,72B2,72B9,data,7,inline arguments of the call at 01:72AF
+01,72BC,72C6,data,10,inline arguments of the call at 01:72B9
+01,749D,74A7,data,10,inline arguments of the call at 01:749A
+01,769C,76F2,data,2,jump table read through $0189 at 01:7696 (43 records; tools/kitty_trace.py)
+05,406A,406D,data,3,inline arguments of the call at 05:4067
+05,4073,407E,data,11,inline arguments of the call at 05:4070
+05,40E2,40E9,data,7,inline arguments of the call at 05:40DF
+05,40EC,40F3,data,7,inline arguments of the call at 05:40E9
+05,40F6,40F9,data,3,inline arguments of the call at 05:40F3
+05,40FC,4107,data,11,inline arguments of the call at 05:40F9
+05,420D,4214,data,7,inline arguments of the call at 05:420A
+05,4217,421E,data,7,inline arguments of the call at 05:4214
+05,4221,4224,data,3,inline arguments of the call at 05:421E
+05,4227,4232,data,11,inline arguments of the call at 05:4224
+05,427C,4283,data,7,inline arguments of the call at 05:4279
+05,4286,428D,data,7,inline arguments of the call at 05:4283
+05,4290,4297,data,7,inline arguments of the call at 05:428D
+05,429A,429D,data,3,inline arguments of the call at 05:4297
+05,42A0,42AB,data,11,inline arguments of the call at 05:429D
+05,4376,4388,data,2,jump table read through $0189 at 05:4370 (9 records; tools/kitty_trace.py)
+05,439F,43A6,data,7,inline arguments of the call at 05:439C
+05,43A9,43B0,data,7,inline arguments of the call at 05:43A6
+05,43E7,43EA,data,3,inline arguments of the call at 05:43E4
+05,43ED,43F8,data,11,inline arguments of the call at 05:43EA
+05,44B9,44C0,data,7,inline arguments of the call at 05:44B6
+05,44C3,44CA,data,7,inline arguments of the call at 05:44C0
+05,44CD,44D0,data,3,inline arguments of the call at 05:44CA
+05,44D3,44DE,data,11,inline arguments of the call at 05:44D0
+05,452B,4537,data,2,jump table read through $0189 at 05:4525 (6 records; tools/kitty_trace.py)
+05,4551,4558,data,7,inline arguments of the call at 05:454E
+05,455B,4562,data,7,inline arguments of the call at 05:4558
+05,456B,456E,data,3,inline arguments of the call at 05:4568
+05,4571,457C,data,11,inline arguments of the call at 05:456E
+05,457F,4581,data,2,inline arguments of the call at 05:457C
+05,4600,4602,data,2,inline arguments of the call at 05:45FD
+05,46C8,46CF,data,7,inline arguments of the call at 05:46C5
+05,46D2,46D9,data,7,inline arguments of the call at 05:46CF
+05,46F0,46F3,data,3,inline arguments of the call at 05:46ED
+05,46F6,4701,data,11,inline arguments of the call at 05:46F3
+05,4704,4706,data,2,inline arguments of the call at 05:4701
+05,4742,4744,data,2,inline arguments of the call at 05:473F
+05,47D7,47E5,data,2,jump table read through $0189 at 05:47D1 (7 records; tools/kitty_trace.py)
+05,49B4,49BB,data,7,inline arguments of the call at 05:49B1
+05,49BE,49C5,data,7,inline arguments of the call at 05:49BB
+05,49ED,49EF,data,2,inline arguments of the call at 05:49EA
+05,4A05,4A10,data,11,inline arguments of the call at 05:4A02
+05,4A4B,4A4E,data,3,inline arguments of the call at 05:4A48
+05,4B35,4B3C,data,7,inline arguments of the call at 05:4B32
+05,4B3F,4B46,data,7,inline arguments of the call at 05:4B3C
+05,4B49,4B50,data,7,inline arguments of the call at 05:4B46
+05,4B53,4B5A,data,7,inline arguments of the call at 05:4B50
+05,4B67,4B72,data,11,inline arguments of the call at 05:4B64
+05,4B78,4B7A,data,2,inline arguments of the call at 05:4B75
+05,4BCE,4BD4,data,6,inline arguments of the call at 05:4BCB
+05,4BD7,4BDB,data,4,inline arguments of the call at 05:4BD4
+05,4C1B,4C1E,data,3,inline arguments of the call at 05:4C18
+05,4C56,4C59,data,3,inline arguments of the call at 05:4C53
+05,4CBA,4CBD,data,3,inline arguments of the call at 05:4CB7
+05,4CD9,4CDB,data,2,inline arguments of the call at 05:4CD6
+05,4CEB,4CEE,data,3,inline arguments of the call at 05:4CE8
+05,4D19,4D1C,data,3,inline arguments of the call at 05:4D16
+05,4F31,4F34,data,3,inline arguments of the call at 05:4F2E
+05,4F65,4F68,data,3,inline arguments of the call at 05:4F62
+05,500F,5012,data,3,inline arguments of the call at 05:500C
+05,5031,5033,data,2,inline arguments of the call at 05:502E
+05,5036,5039,data,3,inline arguments of the call at 05:5033
+05,50E6,50E9,data,3,inline arguments of the call at 05:50E3
+05,514F,5152,data,3,inline arguments of the call at 05:514C
+05,5169,516C,data,3,inline arguments of the call at 05:5166
+05,5183,5186,data,3,inline arguments of the call at 05:5180
+05,51B2,51B5,data,3,inline arguments of the call at 05:51AF
+05,51DC,51DF,data,3,inline arguments of the call at 05:51D9
+05,5202,5205,data,3,inline arguments of the call at 05:51FF
+05,520F,521A,data,11,inline arguments of the call at 05:520C
+05,528A,528D,data,3,inline arguments of the call at 05:5287
+05,529F,52A2,data,3,inline arguments of the call at 05:529C
+05,52B6,52D4,data,2,jump table read through $0189 at 05:52B0 (15 records; tools/kitty_trace.py)
+05,5559,555D,data,4,inline arguments of the call at 05:5556
+05,5560,5564,data,4,inline arguments of the call at 05:555D
+05,5567,556B,data,4,inline arguments of the call at 05:5564
+05,556E,5572,data,4,inline arguments of the call at 05:556B
+05,5FE3,5FEA,data,7,inline arguments of the call at 05:5FE0
+05,5FED,5FF4,data,7,inline arguments of the call at 05:5FEA
+05,5FF7,5FFE,data,7,inline arguments of the call at 05:5FF4
+05,600E,6011,data,3,inline arguments of the call at 05:600B
+05,6014,601F,data,11,inline arguments of the call at 05:6011
+05,6022,6024,data,2,inline arguments of the call at 05:601F
+05,6171,617F,data,2,jump table read through $0189 at 05:616B (7 records; tools/kitty_trace.py)
+05,6617,661E,data,7,inline arguments of the call at 05:6614
+05,6621,6628,data,7,inline arguments of the call at 05:661E
+05,6632,6639,data,7,inline arguments of the call at 05:662F
+05,663C,6643,data,7,inline arguments of the call at 05:6639
+05,6648,664F,data,7,inline arguments of the call at 05:6645
+05,6652,6659,data,7,inline arguments of the call at 05:664F
+05,6682,6685,data,3,inline arguments of the call at 05:667F
+05,6688,6693,data,11,inline arguments of the call at 05:6685
+05,6696,6698,data,2,inline arguments of the call at 05:6693
+05,6BB1,6BB8,data,7,inline arguments of the call at 05:6BAE
+05,6BBB,6BC2,data,7,inline arguments of the call at 05:6BB8
+05,6BCC,6BCF,data,3,inline arguments of the call at 05:6BC9
+05,6BD2,6BDD,data,11,inline arguments of the call at 05:6BCF
+05,6BE0,6BE2,data,2,inline arguments of the call at 05:6BDD
+05,6F94,6F9B,data,7,inline arguments of the call at 05:6F91
+05,6F9E,6FA5,data,7,inline arguments of the call at 05:6F9B
+05,6FB1,6FB8,data,7,inline arguments of the call at 05:6FAE
+05,6FBD,6FC4,data,7,inline arguments of the call at 05:6FBA
+05,7008,700B,data,3,inline arguments of the call at 05:7005
+05,700E,7019,data,11,inline arguments of the call at 05:700B
+05,701C,701E,data,2,inline arguments of the call at 05:7019
+05,70CA,70D1,data,7,inline arguments of the call at 05:70C7
+05,70D4,70DB,data,7,inline arguments of the call at 05:70D1
+05,70DE,70E5,data,7,inline arguments of the call at 05:70DB
+05,70EE,70F5,data,7,inline arguments of the call at 05:70EB
+05,70FA,7101,data,7,inline arguments of the call at 05:70F7
+05,7114,7117,data,3,inline arguments of the call at 05:7111
+05,711A,7125,data,11,inline arguments of the call at 05:7117
+05,7128,712A,data,2,inline arguments of the call at 05:7125
+05,7337,733E,data,7,inline arguments of the call at 05:7334
+05,7341,7348,data,7,inline arguments of the call at 05:733E
+05,734E,7351,data,3,inline arguments of the call at 05:734B
+05,7354,735F,data,11,inline arguments of the call at 05:7351
+05,7362,7364,data,2,inline arguments of the call at 05:735F
+05,7442,7449,data,7,inline arguments of the call at 05:743F
+05,744C,7453,data,7,inline arguments of the call at 05:7449
+05,7459,745C,data,3,inline arguments of the call at 05:7456
+05,745F,746A,data,11,inline arguments of the call at 05:745C
+05,751D,7524,data,7,inline arguments of the call at 05:751A
+05,7527,752E,data,7,inline arguments of the call at 05:7524
+05,7534,7537,data,3,inline arguments of the call at 05:7531
+05,753A,7545,data,11,inline arguments of the call at 05:7537
+05,75EE,7616,data,2,jump table read through $0189 at 05:75E8 (20 records; tools/kitty_trace.py)
+06,4020,4023,data,3,inline arguments of the call at 06:401D
+06,4026,4031,data,11,inline arguments of the call at 06:4023
+06,4054,4058,data,2,jump table read through $0189 at 06:404E (2 records; tools/kitty_trace.py)
+06,407E,4081,data,3,inline arguments of the call at 06:407B
+06,4084,408F,data,11,inline arguments of the call at 06:4081
+06,40B2,40B6,data,2,jump table read through $0189 at 06:40AC (2 records; tools/kitty_trace.py)
+06,40D0,40D7,data,7,inline arguments of the call at 06:40CD
+06,40DA,40E1,data,7,inline arguments of the call at 06:40D7
+06,40E4,40E7,data,3,inline arguments of the call at 06:40E1
+06,40EA,40F5,data,11,inline arguments of the call at 06:40E7
+06,4118,411C,data,2,jump table read through $0189 at 06:4112 (2 records; tools/kitty_trace.py)
+06,4136,413D,data,7,inline arguments of the call at 06:4133
+06,4140,4147,data,7,inline arguments of the call at 06:413D
+06,414D,4150,data,3,inline arguments of the call at 06:414A
+06,4153,415E,data,11,inline arguments of the call at 06:4150
+06,4181,4185,data,2,jump table read through $0189 at 06:417B (2 records; tools/kitty_trace.py)
+06,419F,41A6,data,7,inline arguments of the call at 06:419C
+06,41A9,41B0,data,7,inline arguments of the call at 06:41A6
+06,41BF,41C2,data,3,inline arguments of the call at 06:41BC
+06,41C5,41D0,data,11,inline arguments of the call at 06:41C2
+06,4209,420D,data,2,jump table read through $0189 at 06:4203 (2 records; tools/kitty_trace.py)
+06,44E7,44EE,data,7,inline arguments of the call at 06:44E4
+06,4515,4518,data,3,inline arguments of the call at 06:4512
+06,452B,4536,data,11,inline arguments of the call at 06:4528
+06,463C,4640,data,2,jump table read through $0189 at 06:4636 (2 records; tools/kitty_trace.py)
+06,5091,5098,data,7,inline arguments of the call at 06:508E
+06,509B,50A2,data,7,inline arguments of the call at 06:5098
+06,50C6,50C9,data,3,inline arguments of the call at 06:50C3
+06,50CC,50D7,data,11,inline arguments of the call at 06:50C9
+06,50DA,50DC,data,2,inline arguments of the call at 06:50D7
+06,5192,5194,data,2,inline arguments of the call at 06:518F
+06,51D3,51D5,data,2,inline arguments of the call at 06:51D0
+06,525A,525D,data,3,inline arguments of the call at 06:5257
+06,52E7,52EA,data,3,inline arguments of the call at 06:52E4
+06,52ED,52EF,data,2,inline arguments of the call at 06:52EA
+06,53D3,53D6,data,3,inline arguments of the call at 06:53D0
+06,545B,545D,data,2,inline arguments of the call at 06:5458
+06,54AE,54B0,data,2,inline arguments of the call at 06:54AB
+06,5506,5508,data,2,inline arguments of the call at 06:5503
+06,5559,555B,data,2,inline arguments of the call at 06:5556
+06,55D1,55F3,data,2,jump table read through $0189 at 06:55CB (17 records; tools/kitty_trace.py)
+06,5629,5630,data,7,inline arguments of the call at 06:5626
+06,5633,563A,data,7,inline arguments of the call at 06:5630
+06,563D,5644,data,7,inline arguments of the call at 06:563A
+06,5654,5657,data,3,inline arguments of the call at 06:5651
+06,565A,5665,data,11,inline arguments of the call at 06:5657
+06,5670,5672,data,2,inline arguments of the call at 06:566D
+06,580A,5812,data,2,jump table read through $0189 at 06:5804 (4 records; tools/kitty_trace.py)
+06,5CF6,5CFD,data,7,inline arguments of the call at 06:5CF3
+06,5D00,5D07,data,7,inline arguments of the call at 06:5CFD
+06,5D12,5D15,data,3,inline arguments of the call at 06:5D0F
+06,5D18,5D23,data,11,inline arguments of the call at 06:5D15
+06,5D26,5D28,data,2,inline arguments of the call at 06:5D23
+06,5D97,5D9B,data,2,jump table read through $0189 at 06:5D91 (2 records; tools/kitty_trace.py)
+06,61B2,61B9,data,7,inline arguments of the call at 06:61AF
+06,61BC,61C3,data,7,inline arguments of the call at 06:61B9
+06,61C6,61CD,data,7,inline arguments of the call at 06:61C3
+06,61E4,61E7,data,3,inline arguments of the call at 06:61E1
+06,61EA,61F5,data,11,inline arguments of the call at 06:61E7
+06,6323,632D,data,2,jump table read through $0189 at 06:631D (5 records; tools/kitty_trace.py)
+06,65E2,65E9,data,7,inline arguments of the call at 06:65DF
+06,6605,6608,data,3,inline arguments of the call at 06:6602
+06,6628,6632,data,10,inline arguments of the call at 06:6625
+06,6727,6733,data,2,jump table read through $0189 at 06:6721 (6 records; tools/kitty_trace.py)
+06,6736,6738,data,2,inline arguments of the call at 06:6733
+06,677A,677E,data,4,inline arguments of the call at 06:6777
+06,6781,6788,data,7,inline arguments of the call at 06:677E
+06,678B,6792,data,7,inline arguments of the call at 06:6788
+06,6798,679B,data,3,inline arguments of the call at 06:6795
+06,679E,67A8,data,10,inline arguments of the call at 06:679B
+06,6853,685A,data,7,inline arguments of the call at 06:6850
+06,685D,6864,data,7,inline arguments of the call at 06:685A
+06,6871,6874,data,3,inline arguments of the call at 06:686E
+06,6877,6881,data,10,inline arguments of the call at 06:6874
+06,6A01,6A08,data,7,inline arguments of the call at 06:69FE
+06,6A0B,6A12,data,7,inline arguments of the call at 06:6A08
+06,6A1A,6A1D,data,3,inline arguments of the call at 06:6A17
+06,6A20,6A2A,data,10,inline arguments of the call at 06:6A1D
+06,6B05,6B09,data,4,inline arguments of the call at 06:6B02
+06,6B0C,6B13,data,7,inline arguments of the call at 06:6B09
+06,6B16,6B1D,data,7,inline arguments of the call at 06:6B13
+06,6B2C,6B2F,data,3,inline arguments of the call at 06:6B29
+06,6B83,6B8D,data,10,inline arguments of the call at 06:6B80
+06,6CF7,6D19,data,2,jump table read through $0189 at 06:6CF1 (17 records; tools/kitty_trace.py)
+06,6D28,6D2F,data,7,inline arguments of the call at 06:6D25
+06,6D36,6D39,data,3,inline arguments of the call at 06:6D33
+06,6D3C,6D47,data,11,inline arguments of the call at 06:6D39
+06,6D7C,6D87,data,11,inline arguments of the call at 06:6D79
+06,6DA1,6DA9,data,2,jump table read through $0189 at 06:6D9B (4 records; tools/kitty_trace.py)
+07,401A,4021,data,7,inline arguments of the call at 07:4017
+07,4024,402B,data,7,inline arguments of the call at 07:4021
+07,403A,403D,data,3,inline arguments of the call at 07:4037
+07,4040,404B,data,11,inline arguments of the call at 07:403D
+07,4084,4088,data,2,jump table read through $0189 at 07:407E (2 records; tools/kitty_trace.py)
+07,40A6,40AD,data,7,inline arguments of the call at 07:40A3
+07,40B0,40B7,data,7,inline arguments of the call at 07:40AD
+07,40BA,40BD,data,3,inline arguments of the call at 07:40B7
+07,40C0,40CB,data,11,inline arguments of the call at 07:40BD
+07,4142,4146,data,2,jump table read through $0189 at 07:413C (2 records; tools/kitty_trace.py)
+07,4160,4167,data,7,inline arguments of the call at 07:415D
+07,416A,4171,data,7,inline arguments of the call at 07:4167
+07,4180,4183,data,3,inline arguments of the call at 07:417D
+07,4186,4191,data,11,inline arguments of the call at 07:4183
+07,41CA,41CE,data,2,jump table read through $0189 at 07:41C4 (2 records; tools/kitty_trace.py)
+07,48C4,48C7,data,3,inline arguments of the call at 07:48C1
+07,48D7,48DE,data,7,inline arguments of the call at 07:48D4
+07,48E1,48E8,data,7,inline arguments of the call at 07:48DE
+07,48F2,48FD,data,11,inline arguments of the call at 07:48EF
+07,496F,4972,data,3,inline arguments of the call at 07:496C
+07,4983,498A,data,7,inline arguments of the call at 07:4980
+07,4994,499F,data,11,inline arguments of the call at 07:4991
+07,49CD,49D0,data,3,inline arguments of the call at 07:49CA
+07,49F0,49F3,data,3,inline arguments of the call at 07:49ED
+07,4A89,4A93,data,2,jump table read through $0189 at 07:4A83 (5 records; tools/kitty_trace.py)
+07,4A9F,4AA3,data,2,jump table read through $0189 at 07:4A99 (2 records; tools/kitty_trace.py)
+07,4F7C,4F7F,data,3,inline arguments of the call at 07:4F79
+07,4F9E,4FA5,data,7,inline arguments of the call at 07:4F9B
+07,4FBB,4FC6,data,11,inline arguments of the call at 07:4FB8
+07,502B,502E,data,3,inline arguments of the call at 07:5028
+07,5042,5045,data,3,inline arguments of the call at 07:503F
+07,5097,50A5,data,2,inline jump table (7 words; tools/kitty_trace.py)
+07,5101,5104,data,3,inline arguments of the call at 07:50FE
+07,514C,514F,data,3,inline arguments of the call at 07:5149
+07,5169,516C,data,3,inline arguments of the call at 07:5166
+07,51ED,51F4,data,7,inline arguments of the call at 07:51EA
+07,51F7,51FE,data,7,inline arguments of the call at 07:51F4
+07,5201,5204,data,3,inline arguments of the call at 07:51FE
+07,520A,5215,data,11,inline arguments of the call at 07:5207
+07,52D4,52DA,data,6,inline arguments of the call at 07:52D1
+07,52DD,52E1,data,4,inline arguments of the call at 07:52DA
+07,5366,5369,data,3,inline arguments of the call at 07:5363
+07,536C,5377,data,11,inline arguments of the call at 07:5369
+07,53EE,53F1,data,3,inline arguments of the call at 07:53EB
+07,5408,540B,data,3,inline arguments of the call at 07:5405
+07,541F,543D,data,2,jump table read through $0189 at 07:5419 (15 records; tools/kitty_trace.py)
+07,546A,546D,data,3,inline arguments of the call at 07:5467
+07,54AF,54B2,data,3,inline arguments of the call at 07:54AC
+07,54F0,54F3,data,3,inline arguments of the call at 07:54ED
+07,550A,550D,data,3,inline arguments of the call at 07:5507
+07,5528,552B,data,3,inline arguments of the call at 07:5525
+07,5550,5553,data,3,inline arguments of the call at 07:554D
+07,5A1E,5A24,data,6,inline arguments of the call at 07:5A1B
+07,5A27,5A32,data,11,inline arguments of the call at 07:5A24
+07,5A36,5A41,data,11,inline arguments of the call at 07:5A33
+07,5A5F,5A6A,data,11,inline arguments of the call at 07:5A5C
+07,5AA3,5AAE,data,11,inline arguments of the call at 07:5AA0
+07,5AB8,5ABE,data,2,inline jump table (3 words; tools/kitty_trace.py)
+07,5AC4,5ACA,data,2,inline jump table (3 words; tools/kitty_trace.py)
+07,5ACD,5AD4,data,7,inline arguments of the call at 07:5ACA
+07,5AD7,5ADE,data,7,inline arguments of the call at 07:5AD4
+07,5AE1,5AE8,data,7,inline arguments of the call at 07:5ADE
+07,5AEB,5AF2,data,7,inline arguments of the call at 07:5AE8
+07,5AF5,5AFC,data,7,inline arguments of the call at 07:5AF2
+07,5B1E,5B21,data,3,inline arguments of the call at 07:5B1B
+07,5B7D,5B83,data,2,inline jump table (3 words; tools/kitty_trace.py)
+07,5B8F,5B92,data,3,inline arguments of the call at 07:5B8C
+07,5BB5,5BB8,data,3,inline arguments of the call at 07:5BB2
+07,5BFB,5BFE,data,3,inline arguments of the call at 07:5BF8
+07,5CA5,5CA8,data,3,inline arguments of the call at 07:5CA2
+07,5CAE,5CB4,data,2,inline jump table (3 words; tools/kitty_trace.py)
+07,5D09,5D0C,data,3,inline arguments of the call at 07:5D06
+07,5D27,5D2A,data,3,inline arguments of the call at 07:5D24
+07,5E4B,5E6B,data,2,jump table read through $0189 at 07:5E45 (16 records; tools/kitty_trace.py)
+07,6076,6079,data,3,inline arguments of the call at 07:6073
+07,60AE,60B5,data,7,inline arguments of the call at 07:60AB
+07,60B8,60BF,data,7,inline arguments of the call at 07:60B5
+07,60C9,60D4,data,11,inline arguments of the call at 07:60C6
+07,6119,611C,data,3,inline arguments of the call at 07:6116
+07,6133,613A,data,7,inline arguments of the call at 07:6130
+07,613D,6144,data,7,inline arguments of the call at 07:613A
+07,6156,6161,data,11,inline arguments of the call at 07:6153
+07,62C6,62D2,data,2,jump table read through $0189 at 07:62C0 (6 records; tools/kitty_trace.py)
+07,675E,6765,data,7,inline arguments of the call at 07:675B
+07,677C,677F,data,3,inline arguments of the call at 07:6779
+07,678D,6794,data,7,inline arguments of the call at 07:678A
+07,6797,67A2,data,11,inline arguments of the call at 07:6794
+07,67C4,67CB,data,7,inline arguments of the call at 07:67C1
+07,67CE,67D5,data,7,inline arguments of the call at 07:67CB
+07,67D8,67E3,data,11,inline arguments of the call at 07:67D5
+07,6871,6875,data,2,inline jump table (2 words; tools/kitty_trace.py)
+07,6990,6994,data,2,inline jump table (2 words; tools/kitty_trace.py)
+07,6A62,6A66,data,2,inline jump table (2 words; tools/kitty_trace.py)
+07,6B21,6B25,data,2,inline jump table (2 words; tools/kitty_trace.py)
+07,6BD4,6C16,data,2,jump table read through $0189 at 07:6BCE (33 records; tools/kitty_trace.py)
+07,6C1D,6C24,data,7,inline arguments of the call at 07:6C1A
+07,6C27,6C2E,data,7,inline arguments of the call at 07:6C24
+07,6C3E,6C41,data,3,inline arguments of the call at 07:6C3B
+07,6C44,6C4F,data,11,inline arguments of the call at 07:6C41
+07,6CD2,6CD6,data,2,jump table read through $0189 at 07:6CCC (2 records; tools/kitty_trace.py)
+08,6B4F,6B51,data,2,inline arguments of the call at 08:6B4C
+08,6B5C,6B5F,data,3,inline arguments of the call at 08:6B59
+08,6B62,6B64,data,2,inline arguments of the call at 08:6B5F
+08,6B67,6B6A,data,3,inline arguments of the call at 08:6B64
+08,6B6D,6B6F,data,2,inline arguments of the call at 08:6B6A
+08,6B72,6B75,data,3,inline arguments of the call at 08:6B6F
+08,6B78,6B7A,data,2,inline arguments of the call at 08:6B75
+08,6B7D,6B80,data,3,inline arguments of the call at 08:6B7A
+08,6B83,6B85,data,2,inline arguments of the call at 08:6B80
+08,6B88,6B8B,data,3,inline arguments of the call at 08:6B85
+08,6B8E,6B90,data,2,inline arguments of the call at 08:6B8B
+08,6B93,6B96,data,3,inline arguments of the call at 08:6B90
+08,6B99,6B9B,data,2,inline arguments of the call at 08:6B96
+08,6B9E,6BA1,data,3,inline arguments of the call at 08:6B9B
+08,6BA4,6BA6,data,2,inline arguments of the call at 08:6BA1
+08,6BA9,6BAC,data,3,inline arguments of the call at 08:6BA6
+08,6BAF,6BB1,data,2,inline arguments of the call at 08:6BAC
+08,6BB4,6BB7,data,3,inline arguments of the call at 08:6BB1
+08,6BBA,6BBC,data,2,inline arguments of the call at 08:6BB7
+08,6BBF,6BC2,data,3,inline arguments of the call at 08:6BBC
+08,6BC5,6BC7,data,2,inline arguments of the call at 08:6BC2
+08,6BCA,6BCD,data,3,inline arguments of the call at 08:6BC7
+08,6BD0,6BD2,data,2,inline arguments of the call at 08:6BCD
+08,6BD5,6BD8,data,3,inline arguments of the call at 08:6BD2
+08,6BDB,6BDD,data,2,inline arguments of the call at 08:6BD8
+08,6BE0,6BE3,data,3,inline arguments of the call at 08:6BDD
+08,6BE6,6BE8,data,2,inline arguments of the call at 08:6BE3
+08,6BEB,6BEE,data,3,inline arguments of the call at 08:6BE8
+0B,7F00,8000,data,,"wram data copied to CA00 by 01:69AA ($0245, 256 bytes)"
+0C,7CE0,7CF0,data,," data copied to  by 06:4BEF ($0726, 16 bytes)"
+0D,4600,46C0,data,16,"Gfx: tiles copied to 9380 by 05:6EEF ($0726, 192 bytes)"
+0D,4700,47C0,data,," data copied to  by 05:6EFA ($0726, 192 bytes)"
+0D,4800,48C0,data,," data copied to  by 05:6F05 ($0726, 192 bytes)"
+0D,4900,49C0,data,16,"Gfx: tiles copied to 84C0 by 05:6F13 ($0726, 192 bytes)"
+0D,4A00,4AC0,data,," data copied to  by 05:6F1E ($0726, 192 bytes)"
+0D,4B00,4BC0,data,," data copied to  by 05:6F29 ($0726, 192 bytes)"
+0D,6000,6400,data,,"wram data copied to C000 by 01:697A ($0245, 1024 bytes)"
+0D,6400,6860,data,,"wram data copied to C000 by 01:6986 ($0245, 1120 bytes)"
+0E,6800,8000,data,16,"Gfx: tiles copied to 8000 by 01:7226 ($0245, 6144 bytes)"
+13,5F80,7780,data,16,"Gfx: tiles copied to 8000 by 07:675B ($0245, 6144 bytes)"
+13,7780,7B00,data,16,"Gfx: tiles copied to 8800 by 07:67C1 ($0245, 896 bytes)"
+13,7B00,7D40,data,32,"Map: tile map copied to 9800 by 07:60B5 ($0245, 576 bytes)"
+14,4000,5800,data,16,"Gfx: tiles copied to 8000 by 06:40CD ($0245, 6144 bytes)"
+14,5800,7000,data,16,"Gfx: tiles copied to 8000 by 06:4133 ($0245, 6144 bytes)"
+15,4000,5800,data,16,"Gfx: tiles copied to 8000 by 05:6F91 ($0245, 6144 bytes)"
+15,44C0,4580,data,16,"Gfx: tiles copied to 84C0 by 05:6F5E ($0726, 192 bytes)"
+15,4580,4640,data,," data copied to  by 05:6F69 ($0726, 192 bytes)"
+15,4640,4700,data,," data copied to  by 05:6F74 ($0726, 192 bytes)"
+15,5000,5370,data,16,"Gfx: tiles copied to 9000 by 05:703F ($0726, 880 bytes)"
+15,5380,5440,data,16,"Gfx: tiles copied to 9380 by 05:6F3A ($0726, 192 bytes)"
+15,5440,5500,data,," data copied to  by 05:6F45 ($0726, 192 bytes)"
+15,5500,55C0,data,," data copied to  by 05:6F50 ($0726, 192 bytes)"
+15,5800,7000,data,16,"Gfx: tiles copied to 8000 by 05:4279 ($0245, 6144 bytes)"
+16,5800,7000,data,16,"Gfx: tiles copied to 8000 by 07:6C1A ($0245, 6144 bytes)"
+17,4000,5800,data,16,"Gfx: tiles copied to 8000 by 06:508E ($0245, 6144 bytes)"
+17,5800,7000,data,16,"Gfx: tiles copied to 8000 by 05:454E ($0245, 6144 bytes)"
+17,7000,8000,data,16,"Gfx: tiles copied to 8000 by 06:65DF ($0245, 4096 bytes)"
+17,7800,7900,data,," data copied to  by 06:611A ($0260, 256 bytes)"
+18,5800,7000,data,16,"Gfx: tiles copied to 8000 by 01:74B2 ($0726, 6144 bytes)"
+1A,7000,7400,data,32,"Map: tile map copied to 9800 by 07:6C24 ($0245, 1024 bytes)"
+1B,5800,58E0,data,16,"Gfx: tiles copied to 8800 by 06:5291 ($0726, 224 bytes)"
+1B,5900,59E0,data,16,"Gfx: tiles copied to 8800 by 06:541F ($0726, 224 bytes)"
+1B,5A00,5AE0,data,16,"Gfx: tiles copied to 8800 by 06:54CA ($0726, 224 bytes)"
+1B,5B00,5BE0,data,16,"Gfx: tiles copied to 8800 by 06:5477 ($0726, 224 bytes)"
+1B,5C00,5CE0,data,16,"Gfx: tiles copied to 8800 by 06:5522 ($0726, 224 bytes)"
+1B,6E00,7040,data,32,"Map: tile map copied to 9800 by 07:678A ($0245, 576 bytes)"
+1B,7600,7840,data,32,"Map: tile map copied to 9800 by 07:67CB ($0245, 576 bytes)"
+1B,7EF0,7FE0,data,16,"Gfx: tiles copied to 8EF0 by 01:6E85 ($0726, 240 bytes)"
+1D,4000,5600,data,16,"Gfx: tiles copied to 8000 by 07:48D4 ($0245, 5632 bytes)"
+1D,5600,6B00,data,16,"Gfx: tiles copied to 8000 by 06:6850 ($0245, 5376 bytes)"
+1D,6B00,7F40,data,16,"Gfx: tiles copied to 8000 by 06:61AF ($0245, 5184 bytes)"
+1E,7800,8000,data,16,"Gfx: tiles copied to 9000 by 05:420A ($0245, 2048 bytes)"
+1E,7800,7C00,data,,"wram data copied to C000 by 01:71FE ($0245, 1024 bytes)"
+20,7800,7920,data,32,"Map: tile map copied to 9842 by 01:6BA1 ($0260, 288 bytes)"
+20,7860,78A0,data,32,"Map: tile map copied to 9842 by 01:6F14 ($0726, 64 bytes)"
+20,7A60,7B80,data,32,"Map: tile map copied to 9962 by 01:6BAF ($0260, 288 bytes)"
+20,7A60,7AA0,data,32,"Map: tile map copied to 9A42 by 01:6F22 ($0726, 64 bytes)"
+20,7C00,7DC0,data,32,"Map: tile map copied to 9882 by 01:6F06 ($0726, 448 bytes)"
+22,5A40,5E40,data,32,"Map: tile map copied to 9800 by 05:6FAE ($0245, 1024 bytes)"
+22,5E40,6240,data,32,"Map: tile map copied to 9800 by 05:6FBA ($0245, 1024 bytes)"
+22,6240,6640,data,32,"Map: tile map copied to 9C00 by 05:6F9B ($0245, 1024 bytes)"
+22,7240,7640,data,32,"Map: tile map copied to 9800 by 06:5098 ($0245, 1024 bytes)"
+22,7240,73A0,data,32,"Map: tile map copied to 9800 by 06:5134 ($0726, 352 bytes)"
+22,7640,77A0,data,32,"Map: tile map copied to 9800 by 06:5275 ($0726, 352 bytes)"
+22,77A0,78A0,data,32,"Map: tile map copied to 9C00 by 06:5514 ($0726, 256 bytes)"
+22,7A40,7B40,data,32,"Map: tile map copied to 9C00 by 06:5283 ($0726, 256 bytes)"
+22,7B40,7C40,data,32,"Map: tile map copied to 9C00 by 06:5411 ($0726, 256 bytes)"
+22,7C40,7D40,data,32,"Map: tile map copied to 9C00 by 06:54BC ($0726, 256 bytes)"
+22,7D40,7E40,data,32,"Map: tile map copied to 9C00 by 06:5469 ($0726, 256 bytes)"
+23,4E00,5B50,data,16,"Gfx: tiles copied to 8000 by 07:60AB ($0245, 3408 bytes)"
+23,5B50,5D90,data,32,"Map: tile map copied to 9800 by 05:6639 ($0245, 576 bytes)"
+23,5F50,6190,data,32,"Map: tile map copied to 9800 by 05:664F ($0245, 576 bytes)"
+23,6350,6450,data,32,"Map: tile map copied to 9C00 by 05:661E ($0245, 256 bytes)"
+23,6750,6B50,data,32,"Map: tile map copied to 9800 by 05:5FEA ($0245, 1024 bytes)"
+23,6B50,6C70,data,32,"Map: tile map copied to 9C00 by 05:5FF4 ($0245, 288 bytes)"
+23,7350,7750,data,16,"Gfx: tiles copied to 8600 by 01:6A79 ($0245, 1024 bytes)"
+23,7450,7550,data,16,"Gfx: tiles copied to 8700 by 06:5630 ($0245, 256 bytes)"
+23,7530,7550,data,16,"Gfx: tiles copied to 8FE0 by 00:07A8 ($0726, 32 bytes)"
+23,7950,7C50,data,16,"Gfx: tiles copied to 8C00 by 05:4CD3 ($0726, 768 bytes)"
+24,6A00,7200,data,16,"Gfx: tiles copied to 8000 by 07:5ACA ($0245, 2048 bytes)"
+24,6BC0,6BF0,data,16,"Gfx: tiles copied to 81C0 by 07:5C9F ($0726, 48 bytes)"
+24,7000,7040,data,16,"Gfx: tiles copied to 81C0 by 07:5AD4 ($0245, 64 bytes)"
+24,7200,7400,data,16,"Gfx: tiles copied to 9600 by 07:5ADE ($0245, 512 bytes)"
+24,7400,7E00,data,16,"Gfx: tiles copied to 8E00 by 05:40DF ($0245, 2560 bytes)"
+25,5C00,6600,data,16,"Gfx: tiles copied to 8600 by 07:4F9B ($0245, 2560 bytes)"
+25,5C00,6000,data,16,"Gfx: tiles copied to 8600 by 07:50FA ($0726, 1024 bytes)"
+25,63F0,6600,data,16,"Gfx: tiles copied to 8DF0 by 07:4FD6 ($0726, 528 bytes)"
+25,6600,7000,data,16,"Gfx: tiles copied to 8600 by 05:5FE0 ($0245, 2560 bytes)"
+25,6800,6A00,data,16,"Gfx: tiles copied to 8800 by 05:6155 ($0726, 512 bytes)"
+25,7000,7900,data,16,"Gfx: tiles copied to 8F00 by 06:5CF3 ($0245, 2304 bytes)"
+25,7900,7B40,data,32,"Map: tile map copied to 9800 by 07:48DE ($0245, 576 bytes)"
+26,5C00,6500,data,,"wram data copied to C400 by 01:6969 ($0245, 2304 bytes)"
+26,6A00,6B80,data,32,"Map: tile map copied to 9860 by 05:46EA ($0260, 384 bytes)"
+26,71E0,7420,data,32,"Map: tile map copied to 9800 by 06:61B9 ($0245, 576 bytes)"
+26,75E0,7820,data,32,"Map: tile map copied to 9C00 by 06:61C3 ($0245, 576 bytes)"
+26,7820,7A60,data,32,"Map: tile map copied to 9800 by 07:5AF2 ($0245, 576 bytes)"
+26,7840,7A60,data,32,"Map: tile map copied to 9820 by 07:5DE1 ($0726, 544 bytes)"
+2C,78D0,7CD0,data,32,"Map: tile map copied to 9800 by 06:6B13 ($0245, 1024 bytes)"
+2D,7820,7C20,data,32,"Map: tile map copied to 9800 by 06:40D7 ($0245, 1024 bytes)"
+2E,7800,7C00,data,32,"Map: tile map copied to 9800 by 06:413D ($0245, 1024 bytes)"
+2E,7C00,7C80,data,32,"Map: tile map copied to 9800 by 05:4283 ($0245, 128 bytes)"
+2E,7C80,7E40,data,32,"Map: tile map copied to 9880 by 05:42E9 ($0726, 448 bytes)"
+2E,7E40,8000,data,32,"Map: tile map copied to 9880 by 05:428D ($0245, 448 bytes)"
+2F,67B0,6970,data,32,"Map: tile map copied to 9800 by 01:7230 ($0245, 448 bytes)"
+2F,6970,69F0,data,32,"Map: tile map copied to 9C00 by 01:7252 ($0245, 128 bytes)"
+2F,6A70,6AF0,data,32,"Map: tile map copied to 9C00 by 01:7246 ($0245, 128 bytes)"
+31,64F0,67F0,data,16,"Gfx: tiles copied to 8000 by 05:439C ($0245, 768 bytes)"
+31,6770,69B0,data,32,"Map: tile map copied to 9800 by 05:4214 ($0245, 576 bytes)"
+31,69F0,6C30,data,32,"Map: tile map copied to 9800 by 05:43A6 ($0245, 576 bytes)"
+31,6C30,6C50,data,32,"Map: tile map copied to 98A0 by 05:4459 ($0726, 32 bytes)"
+31,6C50,6C70,data,32,"Map: tile map copied to 98A0 by 05:4473 ($0726, 32 bytes)"
+31,6EE0,7140,data,32,"Map: tile map copied to 9800 by 06:5CFD ($0245, 608 bytes)"
+31,7140,7380,data,32,"Map: tile map copied to 9800 by 05:44C0 ($0245, 576 bytes)"
+31,7380,73A0,data,32,"Map: tile map copied to 9900 by 05:4501 ($0726, 32 bytes)"
+31,75F0,79F0,data,32,"Map: tile map copied to 9800 by 01:6A83 ($0245, 1024 bytes)"
+31,75F0,7830,data,32,"Map: tile map copied to 9800 by 07:51F4 ($0245, 576 bytes)"
+31,7830,7A70,data,32,"Map: tile map copied to 9800 by 05:40E9 ($0245, 576 bytes)"
+31,7A70,7CB0,data,32,"Map: tile map copied to 9800 by 05:4558 ($0245, 576 bytes)"
+32,7800,7A40,data,32,"Map: tile map copied to 9800 by 01:74C8 ($0726, 576 bytes)"
+32,7A40,7C80,data,32,"Map: tile map copied to 9800 by 06:563A ($0245, 576 bytes)"
+32,7C80,7EC0,data,32,"Map: tile map copied to 9800 by 06:685A ($0245, 576 bytes)"
+33,6A00,6C40,data,32,"Map: tile map copied to 9800 by 06:44E4 ($0245, 576 bytes)"
