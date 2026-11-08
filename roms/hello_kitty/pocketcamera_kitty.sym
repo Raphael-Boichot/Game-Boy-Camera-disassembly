@@ -697,9 +697,9 @@
 06:40fe Mode17_State01
 06:410d Mode17_PrintError
 06:4118 Mode17_StateTable
-06:411c Mode18_State00
-06:4167 Mode18_State01
-06:4176 Mode18_PompompurinPicture
+06:411c Unused_Mode18_State00
+06:4167 Unused_Mode18_State01
+06:4176 Unused_Mode18_PompompurinPicture
 06:4181 Mode18_StateTable
 06:4185 Mode19_State00
 06:41ef Mode19_State01
@@ -1275,7 +1275,7 @@
 13:7f40 Data_13_7F40
 13:7f80 Data_13_7F80
 14:4000 Gfx_14_4000
-14:5800 Gfx_14_5800
+14:5800 Gfx_14_5800_PompompurinPicture
 14:7000 Data_14_7000
 15:4000 Data_15_4000
 15:44c0 Gfx_15_44C0
@@ -1408,7 +1408,7 @@
 2d:7820 Map_2D_7820
 2d:7c20 Data_2D_7C20
 2e:4000 Data_2E_4000
-2e:7800 Map_2E_7800
+2e:7800 Map_2E_7800_PompompurinPicture
 2e:7c00 Data_2E_7C00
 2e:7c80 Map_2E_7C80
 2e:7e40 Map_2E_7E40

@@ -698,9 +698,9 @@ bank,addr,name,conf,note,source
 06,40FE,Mode17_State01,C,handler of state $01 of mode $17 (word 1 of Mode17_StateTable),modes
 06,410D,Mode17_PrintError,I,ModeTable entry $17: forced BGB screen (print error),modes
 06,4118,Mode17_StateTable,C,"state table of mode $17, read by $0189 with hFF8E",modes
-06,411C,Mode18_State00,C,handler of state $00 of mode $18 (word 0 of Mode18_StateTable),modes
-06,4167,Mode18_State01,C,handler of state $01 of mode $18 (word 1 of Mode18_StateTable),modes
-06,4176,Mode18_PompompurinPicture,I,ModeTable entry $18: forced BGB screen (Pompompurin picture),modes
+06,411C,Unused_Mode18_State00,I,"state $00 of mode $18: loads Gfx_14_5800_PompompurinPicture and Map_2E_7800_PompompurinPicture, palette, then state $01 (06:415E, the only B = $18 of the ROM); unused: no code outside mode $18 sets mode $18 (all 195 mode-change calls checked) and the Play menu table 02:5AB7 has four items",hand 2026-11-08
+06,4167,Unused_Mode18_State01,I,"state $01 of mode $18: Select (new key bit 2) fades to mode $04 state $00, the Play menu; unused like 06:411C",hand 2026-11-08
+06,4176,Unused_Mode18_PompompurinPicture,I,"ModeTable entry $18 (the Pompompurin picture, BGB screen only when forced); unused: see 06:411C",hand 2026-11-08
 06,4181,Mode18_StateTable,C,"state table of mode $18, read by $0189 with hFF8E",modes
 06,4185,Mode19_State00,C,handler of state $00 of mode $19 (word 0 of Mode19_StateTable),modes
 06,41EF,Mode19_State01,C,handler of state $01 of mode $19 (word 1 of Mode19_StateTable),modes
@@ -1276,7 +1276,7 @@ bank,addr,name,conf,note,source
 13,7F40,Data_13_7F40,C,read in the core runs by 00:22B6,kitty_types
 13,7F80,Data_13_7F80,C,read in the core runs by 00:22B6,kitty_types
 14,4000,Gfx_14_4000,C,"Gfx: tiles copied to 8000 by 06:40CD ($0245, 6144 bytes)",kitty_types
-14,5800,Gfx_14_5800,C,"Gfx: tiles copied to 8000 by 06:4133 ($0245, 6144 bytes)",kitty_types
+14,5800,Gfx_14_5800_PompompurinPicture,C,"tiles of the Pompompurin picture copied to $8000 by Unused_Mode18_State00 (06:4133, 6,144 bytes); no other loader",hand 2026-11-08
 14,7000,Data_14_7000,C,"read in the core runs by 00:067E, 00:066E, 00:06F3",kitty_types
 15,4000,Data_15_4000,C,"read in the core runs by 00:021C, 00:067E, 00:066E",kitty_types
 15,44C0,Gfx_15_44C0,C,"Gfx: tiles copied to 84C0 by 05:6F5E ($0726, 192 bytes)",kitty_types
@@ -1409,7 +1409,7 @@ bank,addr,name,conf,note,source
 2D,7820,Map_2D_7820,C,"Map: tile map copied to 9800 by 06:40D7 ($0245, 1024 bytes)",kitty_types
 2D,7C20,Data_2D_7C20,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 2E,4000,Data_2E_4000,C,read in the core runs by 00:0B6B,kitty_types
-2E,7800,Map_2E_7800,C,"Map: tile map copied to 9800 by 06:413D ($0245, 1024 bytes)",kitty_types
+2E,7800,Map_2E_7800_PompompurinPicture,C,"map of the Pompompurin picture copied to $9800 by Unused_Mode18_State00 (06:413D, 1,024 bytes); no other loader",hand 2026-11-08
 2E,7C00,Data_2E_7C00,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3",kitty_types
 2E,7C80,Map_2E_7C80,C,"Map: tile map copied to 9880 by 05:42E9 ($0726, 448 bytes)",kitty_types
 2E,7E40,Map_2E_7E40,C,"Map: tile map copied to 9880 by 05:428D ($0245, 448 bytes)",kitty_types

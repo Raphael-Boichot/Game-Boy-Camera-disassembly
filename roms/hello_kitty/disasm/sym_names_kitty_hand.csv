@@ -116,3 +116,8 @@ bank,addr,name,conf,note,source
 05,6E5C,TakePhotos_DrawNumber,I,"A (0 taken as 1) as BCD (00:0C9A) with digit tiles of 0C:7840 into $87B0; mode $02 state $03",hand 2026-11-08
 05,6EE4,Album_LoadTilesBank0D,I,"five blocks of $C0 bytes from bank $0D ($4600-$4A00) into $9380 and $84C0; mode $03 state $00",hand 2026-11-08
 05,6F2F,Album_LoadTilesBank15,I,"five blocks of $C0 bytes from bank $15 ($5380-$5500, $44C0-$4580) into $9380 and $84C0; mode $03 state $03",hand 2026-11-08
+06,411C,Unused_Mode18_State00,I,"state $00 of mode $18: loads Gfx_14_5800_PompompurinPicture and Map_2E_7800_PompompurinPicture, palette, then state $01 (06:415E, the only B = $18 of the ROM); unused: no code outside mode $18 sets mode $18 (all 195 mode-change calls checked) and the Play menu table 02:5AB7 has four items",hand 2026-11-08
+06,4167,Unused_Mode18_State01,I,"state $01 of mode $18: Select (new key bit 2) fades to mode $04 state $00, the Play menu; unused like 06:411C",hand 2026-11-08
+06,4176,Unused_Mode18_PompompurinPicture,I,"ModeTable entry $18 (the Pompompurin picture, BGB screen only when forced); unused: see 06:411C",hand 2026-11-08
+14,5800,Gfx_14_5800_PompompurinPicture,C,"tiles of the Pompompurin picture copied to $8000 by Unused_Mode18_State00 (06:4133, 6,144 bytes); no other loader",hand 2026-11-08
+2E,7800,Map_2E_7800_PompompurinPicture,C,"map of the Pompompurin picture copied to $9800 by Unused_Mode18_State00 (06:413D, 1,024 bytes); no other loader",hand 2026-11-08

@@ -10,6 +10,8 @@
                 with 'forced' = seen only with a patched mode table: drawn in a box of their own, evidence I); a screen that is not a
                 (mode, state) of the mode table (the factory screens of the retail ROMs run before it) takes a word as mode and state
                 and its caption from `name`
+                a forced row with a `parent` (the screen the code says leads there) is drawn in the tree instead, panel and
+                arrow dashed in orange (evidence I); a `note` column adds a line under its screenshot
 --cancel CSV    tools/screen_cancel.py: B back to the panel it came from = a two-headed arrow; B elsewhere = a note under the screenshot
 --lr            left to right (power-on at the left), columns = steps from power-on, packed top-down; else graphviz top-down
 --names CSV     mode, state, name: the caption of each screenshot; the text before ':' of the first name titles the panel
@@ -61,12 +63,15 @@ for k in shots:
     for n in range(len(ks) - 1, -1, -1):
         q = bykeys.get(' '.join(ks[:n]))
         if q and q != k: parent[k] = (q, ' '.join(ks[n:])); break
+hyp = set(); xnote = {}
 for f in a.extra:
     for r in csv.DictReader(open(f)):
         k = (r['mode'], r['state'])
         if k in shots or k in forced: continue
         p = os.path.join(os.path.dirname(f), r['picture'])
-        if r.get('how', '').startswith('forced'): forced[k] = p; continue
+        if r.get('note'): xnote[k] = r['note']
+        if r.get('how', '').startswith('forced') and not r.get('parent'): forced[k] = p; continue
+        if r.get('how', '').startswith('forced'): hyp.add(k)        # reached only when forced, drawn where the code says it belongs: dashed
         shots[k] = p; how[k] = r.get('how', '')
         if r.get('name'): names.setdefault(k, r['name'])        # screens outside the mode table (boot gates) carry their own name
         if r.get('parent'): parent[k] = (tuple(r['parent'].split(':')), r.get('key', ''))
@@ -92,6 +97,7 @@ for k in sorted(shots):
 for k in sorted(shots): P[panel_of[k]]['cells'].append(k)
 for pid in list(P):
     if not P[pid]['cells']: del P[pid]
+    else: P[pid]['hyp'] = all(k in hyp for k in P[pid]['cells'])
 # ---- cell and panel geometry
 S = a.scale; IW, IH = 160 * S, 144 * S; Z = (1 if S == 1 else 1.4) * a.font
 FT, FP, FC, FK = font(int(26 * Z), True), font(int(14 * Z), True), font(int(11 * Z)), font(int(11 * Z), True)
@@ -130,7 +136,7 @@ for (x, y) in list(E):
     if (y, x) in E and (x, y) in E and list(P).index(x) < list(P).index(y):
         back[(x, y)] = ' / '.join(E.pop((y, x)))
 # ---- cancel edges (tools/screen_cancel.py): B from a screen back to the panel it came from = a two-headed arrow
-cancel_x = []; note = {}
+cancel_x = []; note = dict(xnote)
 for f in a.cancel:
     for r in csv.DictReader(open(f)):
         if r['ok'] != 'yes' or r['to'] == r['base'] or ':' not in r['to']: continue
@@ -145,7 +151,7 @@ for pid, p in P.items():
     p['fromh'] = max([len(came_from(k)) for k in p['cells']] + [0]) * LH + 4
     p['grid'] = (c, r); p['w'] = max(c * IW + (c + 1) * PADC, _M.textlength(p['title'], font=FP) + 24); p['h'] = TITH + r * (CAPH + IH + p['fromh']) + (r + 1) * 3
 M = 20; TOP = int(48 * Z) + int(26 * Z); INK = (40, 40, 40); EDGE = (70, 90, 130); LW = max(3, int(3 * Z)); AH = int(16 * Z)
-boxes = {}; draw_edges = []      # boxes: pid -> (x0, y0, w, h) in picture pixels; draw_edges: (points, label, two_heads, label_pos)
+boxes = {}; draw_edges = []; dashes = []      # boxes: pid -> (x0, y0, w, h) in picture pixels; draw_edges: (points, label, two_heads, label_pos)
 def bez(p0, p1, p2, p3, n=20):
     return [((1 - t) ** 3 * p0[0] + 3 * (1 - t) ** 2 * t * p1[0] + 3 * (1 - t) * t ** 2 * p2[0] + t ** 3 * p3[0],
              (1 - t) ** 3 * p0[1] + 3 * (1 - t) ** 2 * t * p1[1] + 3 * (1 - t) * t ** 2 * p2[1] + t ** 3 * p3[1]) for t in [i / n for i in range(n + 1)]]
@@ -214,7 +220,7 @@ if a.lr:
         if s_ == 'power': lab = P[d_]['how']
         elif (s_, d_) in E: lab = lab_of(s_, d_)
         else: lab = next(k for x_, y_, k in cancel_x if (x_, y_) == (s_, d_))
-        draw_edges.append((pts, lab, (s_, d_) in back, None))
+        draw_edges.append((pts, lab, (s_, d_) in back, None)); dashes.append(P.get(d_, {}).get('hyp', False))
 else:
     DPI = 72.0
     dot = ['digraph G {', 'rankdir=TB; nodesep=0.15; ranksep=%s; splines=true; newrank=true;' % (a.ranksep or 0.35), 'node [shape=box, fixedsize=true, label=""];',
@@ -243,7 +249,7 @@ else:
         for i in range(0, len(pts) - 3, 3): poly += bez(*pts[i:i + 4])
         has = len(rest) >= 5
         draw_edges.append(([(gx(x), gy(y)) for x, y in poly], rest[0] if has else '', (s_, d_) in back,
-                           (gx(float(rest[1]) * DPI), gy(float(rest[2]) * DPI)) if has else None))
+                           (gx(float(rest[1]) * DPI), gy(float(rest[2]) * DPI)) if has else None)); dashes.append(P.get(d_, {}).get('hyp', False))
 def label_at(pts, lab, lp):
     tw = _M.textlength(lab, font=FK)
     return (lp if lp else (pts[-1][0] - AH - tw / 2 - 8, pts[-1][1] - 13 * Z)), tw
@@ -282,14 +288,26 @@ import math
 def head(p_from, p_to):
     (x1, y1), (x2, y2) = p_from, p_to; ang = math.atan2(y2 - y1, x2 - x1)
     d.polygon([(x2, y2), (x2 - AH * math.cos(ang - 0.42), y2 - AH * math.sin(ang - 0.42)), (x2 - AH * math.cos(ang + 0.42), y2 - AH * math.sin(ang + 0.42))], fill=EDGE)
-for pts, lab, two, lp in draw_edges:
-    d.line(pts, fill=EDGE, width=LW, joint='curve'); head(pts[-3], pts[-1])
+HYP = (170, 100, 30)
+def dashed(pts, col, on=14, off=9):
+    run, draw_ = 0.0, True
+    for (x1, y1), (x2, y2) in zip(pts, pts[1:]):
+        L = math.hypot(x2 - x1, y2 - y1); t = 0.0
+        while t < L:
+            step = min((on if draw_ else off) - run, L - t)
+            if draw_: d.line([(x1 + (x2 - x1) * t / L, y1 + (y2 - y1) * t / L), (x1 + (x2 - x1) * (t + step) / L, y1 + (y2 - y1) * (t + step) / L)], fill=col, width=LW)
+            t += step; run += step
+            if run >= (on if draw_ else off): run = 0.0; draw_ = not draw_
+for (pts, lab, two, lp), dsh in zip(draw_edges, dashes):
+    if dsh: dashed(pts, HYP)
+    else: d.line(pts, fill=EDGE, width=LW, joint='curve')
+    EDGE_ = EDGE; head(pts[-3], pts[-1])
     if two: head(pts[2], pts[0])
-for pts, lab, two, lp in draw_edges:
+for (pts, lab, two, lp), dsh in zip(draw_edges, dashes):
     if not lab: continue
-    (lx, ly), tw = label_at(pts, lab, lp)
-    d.rounded_rectangle([lx - tw / 2 - 5, ly - 9 * Z, lx + tw / 2 + 5, ly + 9 * Z], radius=4, fill='white', outline=EDGE, width=2)
-    d.text((lx - tw / 2, ly - 8 * Z), lab, fill=EDGE, font=FK)
+    (lx, ly), tw = label_at(pts, lab, lp); c_ = HYP if dsh else EDGE
+    d.rounded_rectangle([lx - tw / 2 - 5, ly - 9 * Z, lx + tw / 2 + 5, ly + 9 * Z], radius=4, fill='white', outline=c_, width=2)
+    d.text((lx - tw / 2, ly - 8 * Z), lab, fill=c_, font=FK)
 def draw_cell(k, path, x, y, dashed=False):
     for i, l in enumerate(caption(k)): d.text((x, y + i * LH), l, fill=INK, font=FC)
     im = Image.open(path).convert('RGB').resize((IW, IH), Image.NEAREST)
@@ -298,8 +316,9 @@ def draw_cell(k, path, x, y, dashed=False):
     for i, l in enumerate(came_from(k)): d.text((x, y + CAPH + IH + 2 + i * LH), l, fill=(110, 110, 110), font=FC)
 for pid, p in P.items():
     x0, y0, w, h = boxes[pid]
-    col = (170, 100, 30) if p['row'] == 'boot' else (50, 90, 150)
-    d.rounded_rectangle([x0, y0, x0 + w, y0 + h], radius=8, outline=col, width=2, fill=(247, 249, 252))
+    col = (170, 100, 30) if p['row'] == 'boot' or p.get('hyp') else (50, 90, 150)
+    d.rounded_rectangle([x0, y0, x0 + w, y0 + h], radius=8, outline=None if p.get('hyp') else col, width=2, fill=(253, 248, 240) if p.get('hyp') else (247, 249, 252))
+    if p.get('hyp'): dashed([(x0, y0), (x0 + w, y0), (x0 + w, y0 + h), (x0, y0 + h), (x0, y0)], col, 10, 7)
     d.rounded_rectangle([x0, y0, x0 + w, y0 + TITH - 4], radius=8, fill=col)
     d.text((x0 + 6, y0 + 3 * Z), p['title'], fill='white', font=FP)
     c, r = p['grid']
