@@ -74,3 +74,45 @@ bank,addr,name,conf,note,source
 05,5F29,Stamp_SetShiftMasks,C,"for the x offset B & 7: the bit masks of 05:5F86 into $D9ED (and its complement $D9EE), $D9EA = $38 + (B & 7), the masks of 05:5F8E",hand 2026-11-08
 05,54D4,Stamp_LoadWindowMap,C,"$100 bytes of map from [$D9D0] (bank $23) into the window map $9C00 (Vram_CopyHBlankFar); mode $05",hand 2026-11-08
 05,54EA,Stamp_LoadWindowMapDefault,C,"$100 bytes of map from 23:7150 into the window map $9C00; mode $05",hand 2026-11-08
+05,4000,NameCard_MakeIdNumber,C,"when the 4 bytes $DADB-$DADE are all 0: fills them with 8 random digits (Rng_Next mod 10, + 1); first run on the name card, mode $0B state $01",hand 2026-11-08
+05,47E5,TakePhotos_SetPlaneMasks,I,"A x 5: five bytes of the $00 / $FF table 05:4802 into hFFAE-hFFB2, the masks of the plane-mapping loop that follows (05:4882, not traced); not run in the core",hand 2026-11-08
+05,4DC1,TakePhotos_LoadFrameTiles,I,"the tiles of frame [$D8FD] (record 05:4D21 + 8 x index: source, bank, length) into $8800, then a cursor object by A; first run in mode $02 state $01 (camera view)",hand 2026-11-08
+05,4EB0,TakePhotos_PlaceFrameObjects,I,"up to four objects (05:5F6B, 5F72, 5F79) at the positions of record 05:4E10 + 8 x [$D8FD] ($FF = none): the decorations of the frame",hand 2026-11-08
+05,4F07,TakePhotos_ResetFrameState,I,"$D8FF-$D902 = $FF, $D903-$D906 = 1, $D92D-$D92E = $41CE (a pointer)",hand 2026-11-08
+05,4F2E,TakePhotos_SetFrameCallback,C,Serial_SetFarCallback with 05:4F3F (inline argument),hand 2026-11-08
+05,4F3F,TakePhotos_FrameCallback,C,"the callback set by 05:4F2E: Bank05_FrameUpdate, the sound requests of the keys ($D8D9), ...; mode $02 state $01",hand 2026-11-08
+05,5018,TakePhotos_FrameCallback2,I,"another frame callback of the camera view: Bank05_FrameUpdate, then the keys ($D8D8 bit 3) and 00:1680",hand 2026-11-08
+05,50B7,TakePhotos_FrameCallback3,I,"a frame callback that stops while $D8D4 is set, then the keys and the frame index $D8FD ($08 = last)",hand 2026-11-08
+05,5465,Stamp_SelectCategory,I,"copies the 8-byte record 05:5425 + 8 x [$D996] into $D9C6 and the 16 bytes at [$D9CA] into $D9CE",hand 2026-11-08
+05,54F8,Stamp_LoadPageTiles,I,"tiles of stamp [$D998 + $D996] (00:0C25 multiply) from bank [$D9C8] into $8A00, length [$D9D2]",hand 2026-11-08
+05,552D,Stamp_LoadSmallTiles,I,"two blocks of $60 bytes from [$D9E2] and [$D9E4] (bank $0D) into $8600 and $8660",hand 2026-11-08
+05,5556,Stamp_LoadSelected,C,"clears the four stamp buffers (00:01F2 x4), loads graphics and mask (05:559C, 05:55E2), Stamp_ArrangeGfx, Stamp_ArrangeMaskInverted, Stamp_MirrorIfFlagged, then copies $C000 to $8A00 and $C1E0 to $8C00",hand 2026-11-08
+05,559C,Stamp_LoadGfx,C,"the graphics of stamp [$D998 + $D996] from bank [$D9C8], offset [$D9C6], into $C3C0 (Copy_FarDEtoHL)",hand 2026-11-08
+05,55E2,Stamp_LoadMask,I,"the mask of the same stamp into $C5A0 when $D9E0 is neither 0 nor $FF (read in part)",hand 2026-11-08
+05,583E,Stamp_CursorCallback,C,05:5844 then Far_Return,hand 2026-11-08
+05,5844,Stamp_CursorUpdate,I,"object callback: position from $D9A9-$D9AA; in step $D994 = 0 shows it (00:222C), = 2 reads the D-pad ($D8DA) to move it",hand 2026-11-08
+05,5E5A,Stamp_SetBlitArea,I,"$D9F1-$D9F5 from the stamp position and size ($D9AB-$D9AE) and the buffer $C3C0, before Stamp_BlitOnPhoto",hand 2026-11-08
+05,61F9,Cursor_Callback61FF,C,05:61FF then Far_Return,hand 2026-11-08
+05,61FF,Cursor_Update61FF,I,"object callback like Stamp_CursorUpdate with $D991: shows it in step $D994 = 0, moves it with the D-pad in step 2",hand 2026-11-08
+05,6499,Text_DrawBigCharAtCursor,C,"the 16x16 glyph of the character at the cursor ($DA67 + [$D98C]) into $9000 + 64 x cursor",hand 2026-11-08
+05,64D5,Digits_LowNibbleTileAddr,C,"DE = 0C:7B40 + 16 x (low nibble of $DA60[A]); $B gives 0",hand 2026-11-08
+05,64F2,Digits_HighNibbleTileAddr,C,"DE = 0C:7B40 + (high nibble of $DA60[A]) x 16; $B gives 0",hand 2026-11-08
+05,650D,Text_SmallGlyphAddrDA56,C,"DE = $4000 + 32 x ($DA56[A] - 1)",hand 2026-11-08
+05,6534,Digits_CopyDA60,C,"the 4 bytes $DA60 as 8 digit tiles of bank $0C into $8600 (into $C600 in mode $06, printing), then more at $84E0 / $C4E0",hand 2026-11-08
+05,674B,TakePhotos_DrawRowsLeftBg,I,"four 13-tile rows from the records at [$D386] into the BG map at $9842, $9862, $9A42, $9A62 (00:0ABA), and 2 tiles at $9887; mode $02 state $08",hand 2026-11-08
+05,679F,TakePhotos_DrawRowsRightBg,I,"the same at $984F, $986F, $9A4F, $9A6F and $988F",hand 2026-11-08
+05,6837,TakePhotos_DrawRowsLeftWin,I,"four 7-tile rows into the window map at $9C42, $9C62, $9E42, $9E62 (00:0ABE), and 2 tiles at $9C8D",hand 2026-11-08
+05,688B,TakePhotos_DrawRowsRightWin,I,"the same from $9C49",hand 2026-11-08
+05,6CCD,TakePhotos_StorePhoto,I,"Sram_ComputeImageChecksums, 00:2A8F, a free slot by 01:4D81 with A = $FF, then 01:4D9F, 01:4DE4, 01:4C2B; first run in mode $02 state $06 (photo taken)",hand 2026-11-08
+05,6CFF,Album_SlotOp6CFF,I,"01:4D81 with A = [$D933]; if no carry, 01:4C2B (bank-1 photo slot routines not named yet)",hand 2026-11-08
+05,6D18,Album_SlotOp6D18,I,"$D933 - 1 when equal to $D932, then 01:4D81, 01:4DCC, 01:4DE4, 01:49BD; mode $03 state $0D",hand 2026-11-08
+05,6D60,Album_StorePhoto6D60,I,"00:2A8F, a free slot by 01:4D81 with A = $FF, 01:4D9F, 01:4DE4, 01:4C2B (05:6CCD without the checksums); mode $03 state $11",hand 2026-11-08
+05,6D8A,NameCard_NameGlyphAddr,C,"DE = $6000 + 32 x A: an 8x16 glyph of bank $12",hand 2026-11-08
+05,6D96,NameCard_DrawName,C,"the 9 characters at $DADF as 8x16 glyphs of bank $12 into tiles $8A00; mode $03 state $00",hand 2026-11-08
+05,6DB9,NameCard_DigitGlyphAddr,C,"DE = $6E50 + 32 x A (bank $33)",hand 2026-11-08
+05,6DC5,NameCard_DrawBirthday,I,"the 4 BCD bytes at $DAE9 as digit glyphs of bank $33 into $8B60 (0 drawn as glyph $0A); the birthday of the ID card (I)",hand 2026-11-08
+05,6E0E,NameCard_DrawBloodType,I,"glyph ($DAE8 & 3) of 30:7FA0 into $8B20 (0 drawn as glyph 2); the blood type of the ID card (I)",hand 2026-11-08
+05,6E33,NameCard_DrawSex,I,"glyph (($DAE8 >> 2) & 7) of 1D:7F40 into $8B40 (0 drawn as glyph 4); the boy / girl field of the ID card (I)",hand 2026-11-08
+05,6E5C,TakePhotos_DrawNumber,I,"A (0 taken as 1) as BCD (00:0C9A) with digit tiles of 0C:7840 into $87B0; mode $02 state $03",hand 2026-11-08
+05,6EE4,Album_LoadTilesBank0D,I,"five blocks of $C0 bytes from bank $0D ($4600-$4A00) into $9380 and $84C0; mode $03 state $00",hand 2026-11-08
+05,6F2F,Album_LoadTilesBank15,I,"five blocks of $C0 bytes from bank $15 ($5380-$5500, $44C0-$4580) into $9380 and $84C0; mode $03 state $03",hand 2026-11-08

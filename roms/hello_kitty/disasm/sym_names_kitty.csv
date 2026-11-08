@@ -422,6 +422,7 @@ bank,addr,name,conf,note,source
 04,7383,FxShared_ReduceBody_G1_GroupTop,C,"same code as the Japanese FxShared_ReduceBody_G1_GroupTop (0A:6913, 151 bytes, masked match)",port_jp
 04,7427,FxShared_ReduceBody_G2_GroupTop,C,"same code as the Japanese FxShared_ReduceBody_G2_GroupTop (0A:69B7, 138 bytes, masked match)",port_jp
 04,74B1,FxShared_ReduceBody_G2_OuterLoopTail,C,"same code as the Japanese FxShared_ReduceBody_G2_OuterLoopTail (0A:6A41, 17 bytes, masked match)",port_jp
+05,4000,NameCard_MakeIdNumber,C,"when the 4 bytes $DADB-$DADE are all 0: fills them with 8 random digits (Rng_Next mod 10, + 1); first run on the name card, mode $0B state $01",hand 2026-11-08
 05,4053,Mode00_State00,C,handler of state $00 of mode $00 (word 0 of Mode00_StateTable),modes
 05,406A,Data_05_406A,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 05,4073,Data_05_4073,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
@@ -485,6 +486,7 @@ bank,addr,name,conf,note,source
 05,47B1,Mode01_State06,C,handler of state $06 of mode $01 (word 6 of Mode01_StateTable),modes
 05,47CC,Mode01_MainMenu,C,ModeTable entry $01: BGB screens 01:02 (Take / View / Play) and 01:05 (option menu),modes
 05,47D7,Mode01_StateTable,C,"state table of mode $01, read by $0189 with hFF8E",modes
+05,47E5,TakePhotos_SetPlaneMasks,I,"A x 5: five bytes of the $00 / $FF table 05:4802 into hFFAE-hFFB2, the masks of the plane-mapping loop that follows (05:4882, not traced); not run in the core",hand 2026-11-08
 05,498E,Mode02_State00,C,handler of state $00 of mode $02 (word 0 of Mode02_StateTable),modes
 05,49B4,Data_05_49B4,C,read in the core runs by 00:0245,kitty_types
 05,49BE,Data_05_49BE,C,read in the core runs by 00:0245,kitty_types
@@ -518,13 +520,20 @@ bank,addr,name,conf,note,source
 05,4CF4,Mode02_State0A,C,handler of state $0A of mode $02 (word 10 of Mode02_StateTable),modes
 05,4D10,Mode02_State0C,C,handler of state $0C of mode $02 (word 12 of Mode02_StateTable),modes
 05,4D21,Data_05_4D21,C,read in the core runs by 05:4DC1,kitty_types
+05,4DC1,TakePhotos_LoadFrameTiles,I,"the tiles of frame [$D8FD] (record 05:4D21 + 8 x index: source, bank, length) into $8800, then a cursor object by A; first run in mode $02 state $01 (camera view)",hand 2026-11-08
 05,4E10,Data_05_4E10,C,"read in the core runs by 05:4EB0, 05:4ED6, 05:4EE6, 05:4EF6",kitty_types
+05,4EB0,TakePhotos_PlaceFrameObjects,I,"up to four objects (05:5F6B, 5F72, 5F79) at the positions of record 05:4E10 + 8 x [$D8FD] ($FF = none): the decorations of the frame",hand 2026-11-08
+05,4F07,TakePhotos_ResetFrameState,I,"$D8FF-$D902 = $FF, $D903-$D906 = 1, $D92D-$D92E = $41CE (a pointer)",hand 2026-11-08
+05,4F2E,TakePhotos_SetFrameCallback,C,Serial_SetFarCallback with 05:4F3F (inline argument),hand 2026-11-08
 05,4F31,Data_05_4F31,C,read in the core runs by 00:1AB7,kitty_types
+05,4F3F,TakePhotos_FrameCallback,C,"the callback set by 05:4F2E: Bank05_FrameUpdate, the sound requests of the keys ($D8D9), ...; mode $02 state $01",hand 2026-11-08
 05,4F65,Data_05_4F65,C,read in the core runs by 00:1AB7,kitty_types
 05,5004,Mode02_State0B,C,handler of state $0B of mode $02 (word 11 of Mode02_StateTable),modes
 05,500F,Data_05_500F,C,read in the core runs by 00:1AB7,kitty_types
+05,5018,TakePhotos_FrameCallback2,I,"another frame callback of the camera view: Bank05_FrameUpdate, then the keys ($D8D8 bit 3) and 00:1680",hand 2026-11-08
 05,5031,Data_05_5031,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 05,5036,Data_05_5036,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
+05,50B7,TakePhotos_FrameCallback3,I,"a frame callback that stops while $D8D4 is set, then the keys and the frame index $D8FD ($08 = last)",hand 2026-11-08
 05,50E6,Data_05_50E6,C,read in the core runs by 00:1AB7,kitty_types
 05,514F,Data_05_514F,C,read in the core runs by 00:1AB7,kitty_types
 05,5169,Data_05_5169,C,read in the core runs by 00:1AB7,kitty_types
@@ -535,19 +544,28 @@ bank,addr,name,conf,note,source
 05,5244,Mode02_State0E,C,handler of state $0E of mode $02 (word 14 of Mode02_StateTable),modes
 05,52AB,Mode02_TakePhotos,C,ModeTable entry $02: BGB screens 02:01 (camera view) and 02:06 (photo taken),modes
 05,52B6,Mode02_StateTable,C,"state table of mode $02, read by $0189 with hFF8E",modes
+05,5465,Stamp_SelectCategory,I,copies the 8-byte record 05:5425 + 8 x [$D996] into $D9C6 and the 16 bytes at [$D9CA] into $D9CE,hand 2026-11-08
 05,54D4,Stamp_LoadWindowMap,C,$100 bytes of map from [$D9D0] (bank $23) into the window map $9C00 (Vram_CopyHBlankFar); mode $05,hand 2026-11-08
 05,54EA,Stamp_LoadWindowMapDefault,C,$100 bytes of map from 23:7150 into the window map $9C00; mode $05,hand 2026-11-08
+05,54F8,Stamp_LoadPageTiles,I,"tiles of stamp [$D998 + $D996] (00:0C25 multiply) from bank [$D9C8] into $8A00, length [$D9D2]",hand 2026-11-08
+05,552D,Stamp_LoadSmallTiles,I,two blocks of $60 bytes from [$D9E2] and [$D9E4] (bank $0D) into $8600 and $8660,hand 2026-11-08
+05,5556,Stamp_LoadSelected,C,"clears the four stamp buffers (00:01F2 x4), loads graphics and mask (05:559C, 05:55E2), Stamp_ArrangeGfx, Stamp_ArrangeMaskInverted, Stamp_MirrorIfFlagged, then copies $C000 to $8A00 and $C1E0 to $8C00",hand 2026-11-08
 05,5559,Data_05_5559,C,read in the core runs by 00:01F2,kitty_types
 05,5560,Data_05_5560,C,read in the core runs by 00:01F2,kitty_types
 05,5567,Data_05_5567,C,read in the core runs by 00:01F2,kitty_types
 05,556E,Data_05_556E,C,read in the core runs by 00:01F2,kitty_types
+05,559C,Stamp_LoadGfx,C,"the graphics of stamp [$D998 + $D996] from bank [$D9C8], offset [$D9C6], into $C3C0 (Copy_FarDEtoHL)",hand 2026-11-08
+05,55E2,Stamp_LoadMask,I,the mask of the same stamp into $C5A0 when $D9E0 is neither 0 nor $FF (read in part),hand 2026-11-08
 05,564E,Stamp_ArrangeGfx,C,"copies the stamp tiles of $C3C0 into the work buffer $C000, [$D9DA] x [$D9DB] tiles, rows interleaved; mode $05 (stamp window) setup",hand 2026-11-08
 05,5695,Stamp_ArrangeMaskInverted,C,"the same for the mask: $C5A0 into $C1E0, every byte complemented (cpl)",hand 2026-11-08
 05,56E0,Stamp_MirrorIfFlagged,C,"when $D9E1 bit 5 is set: mirrors the four stamp buffers $C000, $C1E0 (05:56FF), $C3C0 (05:5768) and $C5A0 (05:57D1)",hand 2026-11-08
 05,56FF,Stamp_MirrorGfx,C,horizontal mirror of a buffer [$D9DA] tiles wide: each byte bit-reversed and swapped with its mirror position,hand 2026-11-08
 05,5768,Stamp_MirrorSrcGfx,I,mirror of $C3C0 called beside 05:56FF by Stamp_MirrorIfFlagged (other row size; loop not read in full),hand 2026-11-08
 05,57D1,Stamp_MirrorSrcMask,I,mirror of $C5A0 called beside 05:56FF by Stamp_MirrorIfFlagged (other row size; loop not read in full),hand 2026-11-08
+05,583E,Stamp_CursorCallback,C,05:5844 then Far_Return,hand 2026-11-08
+05,5844,Stamp_CursorUpdate,I,"object callback: position from $D9A9-$D9AA; in step $D994 = 0 shows it (00:222C), = 2 reads the D-pad ($D8DA) to move it",hand 2026-11-08
 05,5A14,Data_05_5A14,C,"read in the core runs by 05:5EC1, 05:58A2",kitty_types
+05,5E5A,Stamp_SetBlitArea,I,"$D9F1-$D9F5 from the stamp position and size ($D9AB-$D9AE) and the buffer $C3C0, before Stamp_BlitOnPhoto",hand 2026-11-08
 05,5EA3,Stamp_BlitOnPhoto,C,"Blit_BuildPatchList, the shift masks (05:5F29), Blit_MaskPass_SrcA or _SrcB by $D9E1 bit 7, 00:2BB9, Blit_ApplyPatchList; first run in mode $05 state $06 (core)",hand 2026-11-08
 05,5EC1,Blit_MakePatchEntry,C,"same code as the Japanese Blit_MakePatchEntry (00:1EEE, 44 bytes, masked match)",port_jp
 05,5EED,Blit_BuildPatchList,I,edited copy of the Japanese Blit_BuildPatchList (00:1F1A): instruction sequence ratio 0.872 against 55 bytes,near_jp
@@ -569,6 +587,8 @@ bank,addr,name,conf,note,source
 05,612F,Mode05_State05,C,handler of state $05 of mode $05 (word 5 of Mode05_StateTable),modes
 05,6166,Mode05_StampWindow,I,ModeTable entry $05: forced BGB screen (stamp window); reached in the core runs,modes
 05,6171,Mode05_StateTable,C,"state table of mode $05, read by $0189 with hFF8E",modes
+05,61F9,Cursor_Callback61FF,C,05:61FF then Far_Return,hand 2026-11-08
+05,61FF,Cursor_Update61FF,I,"object callback like Stamp_CursorUpdate with $D991: shows it in step $D994 = 0, moves it with the D-pad in step 2",hand 2026-11-08
 05,63C8,Text_PutCharAtCursor,C,A into the text buffer $DA67 at the cursor $D98C,hand 2026-11-08
 05,63D6,Text_PutCharAt,C,A into the text buffer $DA67 at index C,hand 2026-11-08
 05,63E0,Text_CursorRight,C,"cursor $D98C + 1, at most $1A (27 characters)",hand 2026-11-08
@@ -577,6 +597,11 @@ bank,addr,name,conf,note,source
 05,6424,Text_BigGlyphAddr,C,DE = $4000 + 64 x A: a 16x16 glyph of bank $09 (Font16x16_Bank09),hand 2026-11-08
 05,643D,Text_CopyBigLine,C,"the 27 characters at $DA67 as 16x16 glyphs of bank $09 into $9000, or into $C000 in mode $06 (printing); Copy_FarDEtoHL",hand 2026-11-08
 05,646B,Text_CopyBigLineVram,C,05:643D through Vram_CopyHBlankFar,hand 2026-11-08
+05,6499,Text_DrawBigCharAtCursor,C,the 16x16 glyph of the character at the cursor ($DA67 + [$D98C]) into $9000 + 64 x cursor,hand 2026-11-08
+05,64D5,Digits_LowNibbleTileAddr,C,DE = 0C:7B40 + 16 x (low nibble of $DA60[A]); $B gives 0,hand 2026-11-08
+05,64F2,Digits_HighNibbleTileAddr,C,DE = 0C:7B40 + (high nibble of $DA60[A]) x 16; $B gives 0,hand 2026-11-08
+05,650D,Text_SmallGlyphAddrDA56,C,DE = $4000 + 32 x ($DA56[A] - 1),hand 2026-11-08
+05,6534,Digits_CopyDA60,C,"the 4 bytes $DA60 as 8 digit tiles of bank $0C into $8600 (into $C600 in mode $06, printing), then more at $84E0 / $C4E0",hand 2026-11-08
 05,65E0,Text_LoadBigGlyphPage,C,10 glyphs (640 B) of bank $09 from $4000 + $140 x [$D992] into tiles $8A00,hand 2026-11-08
 05,65FD,Mode03_State0A,C,handler of state $0A of mode $03 (word 10 of Mode03_StateTable),modes
 05,6617,Data_05_6617,C,read in the core runs by 00:0245,kitty_types
@@ -587,6 +612,10 @@ bank,addr,name,conf,note,source
 05,6688,Data_05_6688,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6696,Data_05_6696,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,66BD,Mode03_State0B,C,handler of state $0B of mode $03 (word 11 of Mode03_StateTable),modes
+05,674B,TakePhotos_DrawRowsLeftBg,I,"four 13-tile rows from the records at [$D386] into the BG map at $9842, $9862, $9A42, $9A62 (00:0ABA), and 2 tiles at $9887; mode $02 state $08",hand 2026-11-08
+05,679F,TakePhotos_DrawRowsRightBg,I,"the same at $984F, $986F, $9A4F, $9A6F and $988F",hand 2026-11-08
+05,6837,TakePhotos_DrawRowsLeftWin,I,"four 7-tile rows into the window map at $9C42, $9C62, $9E42, $9E62 (00:0ABE), and 2 tiles at $9C8D",hand 2026-11-08
+05,688B,TakePhotos_DrawRowsRightWin,I,the same from $9C49,hand 2026-11-08
 05,68D7,Data_05_68D7,C,"read in the core runs by 00:0906, 00:07AE, 00:0A4E, 00:08F2 ...",kitty_types
 05,6AAD,Data_05_6AAD,C,"read in the core runs by 00:07AE, 00:07CE",kitty_types
 05,6AC5,Data_05_6AC5,C,"read in the core runs by 00:07CE, 00:07AE",kitty_types
@@ -599,6 +628,19 @@ bank,addr,name,conf,note,source
 05,6C31,Mode03_State07,C,handler of state $07 of mode $03 (word 7 of Mode03_StateTable),modes
 05,6CA5,Mode03_State08,C,handler of state $08 of mode $03 (word 8 of Mode03_StateTable),modes
 05,6CB1,Mode03_State09,C,handler of state $09 of mode $03 (word 9 of Mode03_StateTable),modes
+05,6CCD,TakePhotos_StorePhoto,I,"Sram_ComputeImageChecksums, 00:2A8F, a free slot by 01:4D81 with A = $FF, then 01:4D9F, 01:4DE4, 01:4C2B; first run in mode $02 state $06 (photo taken)",hand 2026-11-08
+05,6CFF,Album_SlotOp6CFF,I,"01:4D81 with A = [$D933]; if no carry, 01:4C2B (bank-1 photo slot routines not named yet)",hand 2026-11-08
+05,6D18,Album_SlotOp6D18,I,"$D933 - 1 when equal to $D932, then 01:4D81, 01:4DCC, 01:4DE4, 01:49BD; mode $03 state $0D",hand 2026-11-08
+05,6D60,Album_StorePhoto6D60,I,"00:2A8F, a free slot by 01:4D81 with A = $FF, 01:4D9F, 01:4DE4, 01:4C2B (05:6CCD without the checksums); mode $03 state $11",hand 2026-11-08
+05,6D8A,NameCard_NameGlyphAddr,C,DE = $6000 + 32 x A: an 8x16 glyph of bank $12,hand 2026-11-08
+05,6D96,NameCard_DrawName,C,the 9 characters at $DADF as 8x16 glyphs of bank $12 into tiles $8A00; mode $03 state $00,hand 2026-11-08
+05,6DB9,NameCard_DigitGlyphAddr,C,DE = $6E50 + 32 x A (bank $33),hand 2026-11-08
+05,6DC5,NameCard_DrawBirthday,I,the 4 BCD bytes at $DAE9 as digit glyphs of bank $33 into $8B60 (0 drawn as glyph $0A); the birthday of the ID card (I),hand 2026-11-08
+05,6E0E,NameCard_DrawBloodType,I,glyph ($DAE8 & 3) of 30:7FA0 into $8B20 (0 drawn as glyph 2); the blood type of the ID card (I),hand 2026-11-08
+05,6E33,NameCard_DrawSex,I,glyph (($DAE8 >> 2) & 7) of 1D:7F40 into $8B40 (0 drawn as glyph 4); the boy / girl field of the ID card (I),hand 2026-11-08
+05,6E5C,TakePhotos_DrawNumber,I,A (0 taken as 1) as BCD (00:0C9A) with digit tiles of 0C:7840 into $87B0; mode $02 state $03,hand 2026-11-08
+05,6EE4,Album_LoadTilesBank0D,I,five blocks of $C0 bytes from bank $0D ($4600-$4A00) into $9380 and $84C0; mode $03 state $00,hand 2026-11-08
+05,6F2F,Album_LoadTilesBank15,I,"five blocks of $C0 bytes from bank $15 ($5380-$5500, $44C0-$4580) into $9380 and $84C0; mode $03 state $03",hand 2026-11-08
 05,6F7A,Mode03_State00,C,handler of state $00 of mode $03 (word 0 of Mode03_StateTable),modes
 05,6F94,Data_05_6F94,C,read in the core runs by 00:0245,kitty_types
 05,6F9E,Data_05_6F9E,C,read in the core runs by 00:0245,kitty_types
