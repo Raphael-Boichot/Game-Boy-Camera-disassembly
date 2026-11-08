@@ -527,6 +527,7 @@ if A.rom:
         n += quoted('yellow', r'yellow takes ([\d,]+) B from orange, ([\d,]+) B from blue and ([\d,]+) B from light blue', lambda m: (tuple(int(m2.group(i)) for i in (1, 2, 3)), tuple(num(m.group(i)) for i in (1, 2, 3))), docs=('README.md',), need=('README.md',))
         if cmp_png := os.path.join(ROOT, 'roms', 'jp_rev_a', 'jp_rom_reachability_map.png'):
             if not same_png(cmp_png, os.path.join(tmp, 'x.png')): bad('yellow', 'jp_rom_reachability_map.png is stale: run tcrf_check/tools/rom_reach_map.py (and rom_layout_map.py)')
+            else: ok('yellow', 'roms/jp_rev_a/jp_rom_reachability_map.png fresh')
     shutil.rmtree(tmp, ignore_errors=True)
 else:
     skip('yellow', 'no --rom: yellow bytes and the reachability picture not checked')
