@@ -359,6 +359,15 @@ if A.rom_kitty:
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the data kinds (need=N bytes of Data_ blocks given a kind, M left uncertain)')
             elif (int(mm.group(1).replace(',', '')), int(mm.group(2).replace(',', ''))) != (int(m6.group(1)), int(m6.group(2))):
                 bad('kitty', 'roms/hello_kitty/README.md: data kinds quoted %s, tools/kitty_layout_kinds.py gives %s / %s' % (mm.group(0), m6.group(1), m6.group(2)))
+        # the unused-asset table (hand-made, assets/unused_assets_kitty.csv): its counts quoted in the Kitty README, its picture present
+        _ua = list(csv.DictReader(open(KD + 'assets/unused_assets_kitty.csv', encoding='utf-8')))
+        _uv = collections.Counter(r['verdict'] for r in _ua)
+        mm = re.search(r'unused_assets_kitty\.csv\)\s+lists (\d+) items: (\d+) unused, (\d+) unused because only an unreachable mode loads them, (\d+) used but not read in the runs, (\d+) open', open(KD + 'README.md', encoding='utf-8').read())   # need= the unused-assets paragraph
+        want = (len(_ua), _uv['unused'], _uv['unused (unreachable mode)'], sum(v for k, v in _uv.items() if k.startswith('used')), _uv['open'])
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/unused_assets_kitty.csv (need=lists N items: a unused, b unused because only an unreachable mode loads them, c used but not read in the runs, d open)')
+        elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: unused assets quoted %s, the table gives %s' % (mm.groups(), want))
+        elif not os.path.exists(KD + 'assets/unused_assets_kitty.png'): bad('kitty', 'assets/unused_assets_kitty.png missing')
+        else: ok('kitty', 'unused-asset table and its README quote agree (%d items)' % len(_ua))
         # the doubts list (tools/kitty_doubts.py): fresh, and its counts quoted in the Kitty README
         r7 = _run('tools/kitty_doubts.py', '--check')
         if r7.returncode: bad('kitty', 'disasm/sym_unconclusive_kitty.{csv,md}: %s (rerun tools/kitty_doubts.py)' % (r7.stderr or r7.stdout).strip()[-300:])

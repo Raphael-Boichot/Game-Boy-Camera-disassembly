@@ -1,0 +1,21 @@
+item,bank,start,end,kind,verdict,tag,evidence
+1,11,6000,6E00,picture 128x112 (224 tiles),unused,I,record 0 of the 3-byte table 00:249D; Photo_LoadEmptyPicture / Photo_LoadEmptyThumb are its only readers and all 9 call sites pass A = 1 (11:7000); no other pointer to 11:6000 in the ROM (C); none of its tiles is read elsewhere (C)
+2,31,7CB0,7EF0,BG map 18 x 32 (main menu layout),unused,I,next map of the chain after the main menu map 31:7A70 (0x240 apart); no copy site and no pointer names it (C); drawn in BGB with the main menu tiles 17:5800 its border and background fit and the block of ids $42-$63 does not; seam search (tcrf_check/tools/tile_seam_offsets.py asc / desc / rot) finds no tile set in the ROM (best 0.38 per pixel against controls 0.44)
+3,18,7000,7C00,8x16 sprite text (96 tiles pairs),unused,I,the effect names 反転1-4 / 拡大1-3 / 分割1-4 / 2:3:2タイル / 連コマ5:2 / マド / ノーマル; after the print game tiles Gfx_18_5800 ($1800 read); no copy site and no pointer; none of its tiles is read elsewhere (C)
+4,1B,5180,5500,56 tiles (print frame 0 tail),unused,I,PrintFrame_LoadTiles copies $1180 bytes of each print frame (table 01:687D) and PrintFrame_LoadPart $500 from +$3C0 (C); the last $380 bytes of each $1500 frame block are never copied; vertical strips 2 tiles wide
+5,1A,5180,5500,56 tiles (print frame 1 tail),unused,I,as item 4
+6,1A,6980,6D00,56 tiles (print frame 2 tail),unused,I,as item 4
+7,19,6980,6D00,56 tiles (print frame 3 tail),unused,I,as item 4
+8,19,5180,5500,56 tiles (print frame 4 tail),unused,I,as item 4
+9,18,5180,5500,56 tiles (print frame 5 tail),unused,I,as item 4 (rotated text Hello Kitty)
+19,12,4000,5FE0,8x16 font (thin),unused,I,a second 8x16 font (kana / Latin / digits) in the first half of bank $12; the font the game draws is the bold one at 12:6000 (read); 4 tiles of the first half (12:40E0 / 4120 / 41C0 / 4240) are read in the runs and nothing else; no copy site and no pointer names 12:4000
+10,14,4000,5800,tiles of the mode $17 picture,unused (unreachable mode),I,loaded only by Mode17 state $00 (06:40CD); no code enters mode $17 (README)
+11,2D,7820,7C20,map of the mode $17 picture,unused (unreachable mode),I,loaded only by Mode17 state $00 (06:40D7)
+12,14,5800,7000,tiles of the Pompompurin picture,unused (unreachable mode),I,loaded only by Mode18 state $00 (06:4133)
+13,2E,7800,7C00,map of the Pompompurin picture,unused (unreachable mode),I,loaded only by Mode18 state $00 (06:413D)
+14,08,40D0,7216,Super Game Boy transfers,used (SGB only),C,the five Sgb_VramTransferInline sources 08:40D0 / 4146 / 41F6 / 5206 / 6216 ($1000 bytes each) cover the never-read bytes of bank $08 but 192 at 08:4020-40CF; the core has no SGB
+15,12,4240,5E44,8x16 font,used (partly),I,glyphs of the name / text font that no text of the runs used
+16,1C,5A40,6BA0,white-on-black message text,used,I,the texts of the message screen (mode $14); BGB showed several that the core runs did not
+17,27,7015,75E0,album info page text,used,I,read by the album page print (mode $06 states $15 / $1C) that the core runs did not reach; the BGB print showed the page
+18,0F,5A11,7E88,song and pattern data,open,?,songs and patterns not played in the runs; ids $23 / $24 / $2C are requested by code that the runs did not reach, id $05 by no constant request: to be settled with the sound roles (L4)
+20,31,4400,4E00,tiles of a credits page (PRODUCER),open,?,1081 bytes of the tile set 31:4000-53FF never read in the core runs while 31:4000-43FF and 31:4E00-53FF are; the staff-credits channel was not played to its end with a check of these tiles
