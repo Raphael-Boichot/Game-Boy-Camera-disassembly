@@ -398,3 +398,85 @@ bank,addr,name,conf,note,source
 01,6A37,PrintScript_NextState,C,"B = 6 (printing), C = the next byte of the script [$D93B]: the next state",hand 2026-11-08
 01,6A4C,PrintScript_SameState,C,"B = 6, C = the last byte read again",hand 2026-11-08
 01,47CC,Sram_CompareMagic,C,"Z when the 5 bytes at HL equal the Magic string Data_01_4700 (code read; called by Sram_VerifyPhotoInfo, Sram_VerifyVector, Sram_VerifyIdCard and Sram_CheckCountersMagic)",hand 2026-11-08
+08,6A92,Sgb_SendPacketInline,C,"inline {address, bank}: Sgb_SendPacket of that packet",hand 2026-11-08
+08,6AE4,Sgb_VramTransferInline,I,"inline {address, bank}: switches the bank, palette $E4, then the data through VRAM for a *_TRN packet (read in part)",hand 2026-11-08
+08,6B45,Sgb_InitDataSnd,C,"when $D8E3 (SGB found): the DATA_SND packets 08:4030, 08:4040, 08:4050 ... with delays (the standard SGB start-up packets)",hand 2026-11-08
+08,6BF1,Sgb_FreezeScreen,C,"when on an SGB and not frozen: MASK_EN 1 (08:40B0), $D8E4 = $FF",hand 2026-11-08
+08,6C13,Sgb_UnfreezeScreen,C,"when frozen: MASK_EN 0 (08:40C0), $D8E4 = 0",hand 2026-11-08
+08,6C3A,Sgb_Detect,C,"MLT_REQ 2 players (08:4010), then reads P1: two joypad ids mean a Super Game Boy",hand 2026-11-08
+04,5F56,Fx01_MirrorRtoL,C,"entry $01 of the effect table 04:5E8A, the same entry as the Japanese 0A:54E6 Fx01_MirrorRtoL (the two tables pair one to one); same code shape",hand 2026-11-08
+04,5F9E,Fx02_MirrorLtoR,C,"entry $02 of the effect table 04:5E8A, the same entry as the Japanese 0A:552E Fx02_MirrorLtoR (the two tables pair one to one); same code shape",hand 2026-11-08
+04,61AC,Fx08_Reduce2xTile2x2,C,"entry $08 of the effect table 04:5E8A, the same entry as the Japanese 0A:573C Fx08_Reduce2xTile2x2 (the two tables pair one to one); same code shape",hand 2026-11-08
+04,62AB,Fx09_Reduce2xQuadTL,C,"entry $09 of the effect table 04:5E8A, the same entry as the Japanese 0A:583B Fx09_Reduce2xQuadTL (the two tables pair one to one); same code shape",hand 2026-11-08
+04,62B1,Fx0A_Reduce2xQuadTR,C,"entry $0A of the effect table 04:5E8A, the same entry as the Japanese 0A:5841 Fx0A_Reduce2xQuadTR (the two tables pair one to one); same code shape",hand 2026-11-08
+04,62B7,Fx0B_Reduce2xQuadBL,C,"entry $0B of the effect table 04:5E8A, the same entry as the Japanese 0A:5847 Fx0B_Reduce2xQuadBL (the two tables pair one to one); same code shape",hand 2026-11-08
+04,62BD,Fx0C_Reduce2xQuadBR,C,"entry $0C of the effect table 04:5E8A, the same entry as the Japanese 0A:584D Fx0C_Reduce2xQuadBR (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6370,Fx0F_CopyTopHalf,C,"entry $0F of the effect table 04:5E8A, the same entry as the Japanese 0A:5900 Fx0F_CopyTopHalf (the two tables pair one to one); same code shape",hand 2026-11-08
+04,637C,Fx10_CopyBottomHalf,C,"entry $10 of the effect table 04:5E8A, the same entry as the Japanese 0A:590C Fx10_CopyBottomHalf (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6459,Fx13_CopyTop10Rows,C,"entry $13 of the effect table 04:5E8A, the same entry as the Japanese 0A:59E9 Fx13_CopyTop10Rows (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6465,Fx14_CopyBottom4Rows,C,"entry $14 of the effect table 04:5E8A, the same entry as the Japanese 0A:59F5 Fx14_CopyBottom4Rows (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6471,Fx15_CopyTop4Rows,C,"entry $15 of the effect table 04:5E8A, the same entry as the Japanese 0A:5A01 Fx15_CopyTop4Rows (the two tables pair one to one); same code shape",hand 2026-11-08
+04,647D,Fx16_CopyBottom10Rows,C,"entry $16 of the effect table 04:5E8A, the same entry as the Japanese 0A:5A0D Fx16_CopyBottom10Rows (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6526,Fx19_Nop,C,"entry $19 of the effect table 04:5E8A, the same entry as the Japanese 0A:5AB6 Fx19_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6527,Fx1A_Nop,C,"entry $1A of the effect table 04:5E8A, the same entry as the Japanese 0A:5AB7 Fx1A_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6528,Fx1B_Nop,C,"entry $1B of the effect table 04:5E8A, the same entry as the Japanese 0A:5AB8 Fx1B_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6529,Fx1C_Nop,C,"entry $1C of the effect table 04:5E8A, the same entry as the Japanese 0A:5AB9 Fx1C_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,652A,Fx1D_Nop,C,"entry $1D of the effect table 04:5E8A, the same entry as the Japanese 0A:5ABA Fx1D_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,652B,Fx1E_Nop,C,"entry $1E of the effect table 04:5E8A, the same entry as the Japanese 0A:5ABB Fx1E_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,652C,Fx1F_Nop,C,"entry $1F of the effect table 04:5E8A, the same entry as the Japanese 0A:5ABC Fx1F_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,652D,Fx20_FlipH,C,"entry $20 of the effect table 04:5E8A, the same entry as the Japanese 0A:5ABD Fx20_FlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,65A7,Fx23_MirrorBtoT_OnFlipH,C,"entry $23 of the effect table 04:5E8A, the same entry as the Japanese 0A:5B37 Fx23_MirrorBtoT_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,65F6,Fx24_MirrorTtoB_OnFlipH,C,"entry $24 of the effect table 04:5E8A, the same entry as the Japanese 0A:5B86 Fx24_MirrorTtoB_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6797,Fx28_Reduce2xTile2x2_FlipH,C,"entry $28 of the effect table 04:5E8A, the same entry as the Japanese 0A:5D27 Fx28_Reduce2xTile2x2_FlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6898,Fx29_Reduce2xQuadTL_FlipH,C,"entry $29 of the effect table 04:5E8A, the same entry as the Japanese 0A:5E28 Fx29_Reduce2xQuadTL_FlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,689E,Fx2A_Reduce2xQuadTR_FlipH,C,"entry $2A of the effect table 04:5E8A, the same entry as the Japanese 0A:5E2E Fx2A_Reduce2xQuadTR_FlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,68A4,Fx2B_Reduce2xQuadBL_FlipH,C,"entry $2B of the effect table 04:5E8A, the same entry as the Japanese 0A:5E34 Fx2B_Reduce2xQuadBL_FlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,68AA,Fx2C_Reduce2xQuadBR_FlipH,C,"entry $2C of the effect table 04:5E8A, the same entry as the Japanese 0A:5E3A Fx2C_Reduce2xQuadBR_FlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,68EF,Fx2E_CopyRightHalf_OnFlipH,C,"entry $2E of the effect table 04:5E8A, the same entry as the Japanese 0A:5E7F Fx2E_CopyRightHalf_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,692F,Fx2F_CopyTopHalf_OnFlipH,C,"entry $2F of the effect table 04:5E8A, the same entry as the Japanese 0A:5EBF Fx2F_CopyTopHalf_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,696C,Fx30_CopyBottomHalf_OnFlipH,C,"entry $30 of the effect table 04:5E8A, the same entry as the Japanese 0A:5EFC Fx30_CopyBottomHalf_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6AA7,Fx33_CopyTop10Rows_OnFlipH,C,"entry $33 of the effect table 04:5E8A, the same entry as the Japanese 0A:6037 Fx33_CopyTop10Rows_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6AE4,Fx34_CopyBottom4Rows_OnFlipH,C,"entry $34 of the effect table 04:5E8A, the same entry as the Japanese 0A:6074 Fx34_CopyBottom4Rows_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6B21,Fx35_CopyTop4Rows_OnFlipH,C,"entry $35 of the effect table 04:5E8A, the same entry as the Japanese 0A:60B1 Fx35_CopyTop4Rows_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6B5E,Fx36_CopyBottom10Rows_OnFlipH,C,"entry $36 of the effect table 04:5E8A, the same entry as the Japanese 0A:60EE Fx36_CopyBottom10Rows_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6BDB,Fx38_CopyQuadBR_OnFlipH,C,"entry $38 of the effect table 04:5E8A, the same entry as the Japanese 0A:616B Fx38_CopyQuadBR_OnFlipH (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6C1B,Fx39_Nop,C,"entry $39 of the effect table 04:5E8A, the same entry as the Japanese 0A:61AB Fx39_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6C1C,Fx3A_Nop,C,"entry $3A of the effect table 04:5E8A, the same entry as the Japanese 0A:61AC Fx3A_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6C1D,Fx3B_Nop,C,"entry $3B of the effect table 04:5E8A, the same entry as the Japanese 0A:61AD Fx3B_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6C1E,Fx3C_Nop,C,"entry $3C of the effect table 04:5E8A, the same entry as the Japanese 0A:61AE Fx3C_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6C1F,Fx3D_Nop,C,"entry $3D of the effect table 04:5E8A, the same entry as the Japanese 0A:61AF Fx3D_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6C20,Fx3E_Nop,C,"entry $3E of the effect table 04:5E8A, the same entry as the Japanese 0A:61B0 Fx3E_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6C21,Fx3F_Nop,C,"entry $3F of the effect table 04:5E8A, the same entry as the Japanese 0A:61B1 Fx3F_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,6E81,Fx48_Reduce2xTile2x2_FlipV,C,"entry $48 of the effect table 04:5E8A, the same entry as the Japanese 0A:6411 Fx48_Reduce2xTile2x2_FlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6F86,Fx49_Reduce2xQuadTL_FlipV,C,"entry $49 of the effect table 04:5E8A, the same entry as the Japanese 0A:6516 Fx49_Reduce2xQuadTL_FlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6F8C,Fx4A_Reduce2xQuadTR_FlipV,C,"entry $4A of the effect table 04:5E8A, the same entry as the Japanese 0A:651C Fx4A_Reduce2xQuadTR_FlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6F92,Fx4B_Reduce2xQuadBL_FlipV,C,"entry $4B of the effect table 04:5E8A, the same entry as the Japanese 0A:6522 Fx4B_Reduce2xQuadBL_FlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,6F98,Fx4C_Reduce2xQuadBR_FlipV,C,"entry $4C of the effect table 04:5E8A, the same entry as the Japanese 0A:6528 Fx4C_Reduce2xQuadBR_FlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,7015,Fx4F_CopyTopHalf_OnFlipV,C,"entry $4F of the effect table 04:5E8A, the same entry as the Japanese 0A:65A5 Fx4F_CopyTopHalf_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,704E,Fx50_CopyBottomHalf_OnFlipV,C,"entry $50 of the effect table 04:5E8A, the same entry as the Japanese 0A:65DE Fx50_CopyBottomHalf_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,7174,Fx53_CopyTop10Rows_OnFlipV,C,"entry $53 of the effect table 04:5E8A, the same entry as the Japanese 0A:6704 Fx53_CopyTop10Rows_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,71AD,Fx54_CopyBottom4Rows_OnFlipV,C,"entry $54 of the effect table 04:5E8A, the same entry as the Japanese 0A:673D Fx54_CopyBottom4Rows_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,71E6,Fx55_CopyTop4Rows_OnFlipV,C,"entry $55 of the effect table 04:5E8A, the same entry as the Japanese 0A:6776 Fx55_CopyTop4Rows_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,721F,Fx56_CopyBottom10Rows_OnFlipV,C,"entry $56 of the effect table 04:5E8A, the same entry as the Japanese 0A:67AF Fx56_CopyBottom10Rows_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,7294,Fx58_CopyQuadBR_OnFlipV,C,"entry $58 of the effect table 04:5E8A, the same entry as the Japanese 0A:6824 Fx58_CopyQuadBR_OnFlipV (the two tables pair one to one); same code shape",hand 2026-11-08
+04,72CF,Fx59_Nop,C,"entry $59 of the effect table 04:5E8A, the same entry as the Japanese 0A:685F Fx59_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,72D0,Fx5A_Nop,C,"entry $5A of the effect table 04:5E8A, the same entry as the Japanese 0A:6860 Fx5A_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,72D1,Fx5B_Nop,C,"entry $5B of the effect table 04:5E8A, the same entry as the Japanese 0A:6861 Fx5B_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,72D2,Fx5C_Nop,C,"entry $5C of the effect table 04:5E8A, the same entry as the Japanese 0A:6862 Fx5C_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,72D3,Fx5D_Nop,C,"entry $5D of the effect table 04:5E8A, the same entry as the Japanese 0A:6863 Fx5D_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,72D4,Fx5E_Nop,C,"entry $5E of the effect table 04:5E8A, the same entry as the Japanese 0A:6864 Fx5E_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,72D5,Fx5F_Nop,C,"entry $5F of the effect table 04:5E8A, the same entry as the Japanese 0A:6865 Fx5F_Nop (the two tables pair one to one); ret",hand 2026-11-08
+04,49E0,Cam_CalibSanityCheck_Measure_Far,C,far wrapper of Cam_CalibSanityCheck_Measure,hand 2026-11-08
+04,49F2,Cam_LoadRegisterSet_Far,C,far wrapper of 04:4CF8,hand 2026-11-08
+04,49F8,Cam_PopcountLevelByIndex,I,"level A - 1 of the table 04:4A07 ($0C, $18 ... $48) passed to 04:4A3E",hand 2026-11-08
+04,4A17,Cam_ApplyEffectOrFrame,C,"A bit 7 set: CameraFrame_RunType (bank 7, the camera frames); else Cam_DispatchEffect (the image effects)",hand 2026-11-08
+04,4A26,Cam_DispatchEffect_Far,C,far wrapper of Cam_DispatchEffect,hand 2026-11-08
+04,4A2C,Cam_Calib_ValidityCheck_Far,C,far wrapper of Cam_Calib_ValidityCheck (keeps the SRAM bank),hand 2026-11-08
+04,4A32,Cam_FullCalibration_Far,C,far wrapper of Cam_FullCalibration,hand 2026-11-08
+04,4A38,Cam_LiveInit_Far,C,far wrapper of Cam_LiveInit,hand 2026-11-08
+04,4A3E,Cam_PopcountLevel,I,"Cam_PopcountSampleLoop over the picture at $A320 (SRAM bank 0), then how many steps of A fit in the count (hFFB3, at most $9F)",hand 2026-11-08
+04,4CF8,Cam_LoadRegisterSet,I,"camera registers (bank $10): picks the 4-byte register set C of 04:4920 or 04:4960 by B against $DA09 / $DA0A",hand 2026-11-08
+04,5051,Cam_CalibVector_VerifyChecksum,C,"SRAM bank 2: checksum of the 12 bytes from $AFF2 (sum + $0D, xor + $23) compared with the two bytes after them",hand 2026-11-08
+04,55C6,Cam_ORegister_SAR_Search,I,"near copy of the Japanese Cam_ORegister_SAR_Search (0A:4B6A, instruction-sequence ratio 0.81)",hand 2026-11-08
+04,568E,Cam_CountBrightSamples,I,"SRAM bank 0: counts the bits 6-3 set over the samples at [hFFB5-hFFB6]",hand 2026-11-08
+04,5E73,Cam_DispatchEffect,C,"jumps to entry A of the effect table 04:5E8A with SRAM bank 0 (as the Japanese 0A:5406 Cam_DispatchEffect)",hand 2026-11-08
