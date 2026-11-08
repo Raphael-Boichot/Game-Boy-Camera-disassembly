@@ -13,4 +13,8 @@ MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`, 1 MiB, MBC: MAC-GBD (camera cartridge). 
 | `captures/` | three emulator screens of the erase-all dialog |
 | `jp_rom_layout_map.png`, `jp_rom_reachability_map.png` | what each byte is, and what the runs reached (drawn by `tcrf_check/tools/rom_layout_map.py` / `rom_reach_map.py`) |
 
+*What the runs reached* (`jp_rom_reachability_map.png`: executed or read, forced only, never reached; legend in the picture):
+
+![What the runs reached in the Japanese ROM](jp_rom_reachability_map.png)
+
 Status: L0-L5 done, L6 partial ([`../../docs/01_toolchain_and_status.md`](../../docs/01_toolchain_and_status.md)).

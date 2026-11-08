@@ -9,6 +9,7 @@ What it checks (each line of the report is one check)
   names      sym_names_jp.csv: tags C / I / ?, duplicate names, a name that carries another address than its own (only `_Part<addr>` / `_Cont` may),
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
   maps       the layout maps of the Gold, Hello Kitty and prototype ROMs exist and the README shows them; with --rom-gold / --rom-kitty / --rom-proto they are redrawn and compared
+  trees      the screen trees of the Japanese, international and Hello Kitty ROMs (tools/make_screen_trees.py) are redrawn and compared, and README.md shows them; the reachability maps are shown in the README of their ROM folder, not in README.md
   port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
@@ -255,6 +256,22 @@ for _t in ('jp_rev_a', 'us_eu', 'gold'):
 if _kb: bad('kinds', '%d copies whose destination contradicts the kind of the name: %s' % (len(_kb), '; '.join(sorted(set(_kb))[:6])))
 else: ok('kinds', 'every farcopy of a Gfx_ / Sheet_ / Font_ block goes to tile memory and of a Map_ / BgMap_ block to the BG map')
 
+# ------------------------------------------------------------------ the screen trees (tools/make_screen_trees.py), the reachability maps in the ROM folders
+_main = open(os.path.join(ROOT, 'README.md')).read()
+for _f in ('jp_rom_reachability_map.png', 'kitty_rom_reachability_map.png'):
+    if _f in _main: bad('maps', 'README.md shows %s: the reachability maps belong to the README of their ROM folder (owner, 2026-11-08)' % _f)
+for _d, _f in (('jp_rev_a', 'jp_rom_reachability_map.png'),):
+    if '](%s)' % _f not in open(os.path.join(ROOT, 'roms', _d, 'README.md')).read(): bad('maps', 'roms/%s/README.md does not show %s' % (_d, _f))
+_tt = tempfile.mkdtemp()
+_r = subprocess.run([sys.executable, 'tools/make_screen_trees.py', '--out-dir', _tt], capture_output=True, text=True, cwd=ROOT)
+if _r.returncode: bad('trees', 'tools/make_screen_trees.py failed: %s' % (_r.stderr or _r.stdout)[-300:])
+else:
+    for _d, _s in (('jp_rev_a', 'jp'), ('us_eu', 'us'), ('hello_kitty', 'kitty')):
+        _png = 'roms/%s/%s_screen_tree.png' % (_d, _s)
+        if _png not in _main: bad('trees', 'README.md does not show %s' % _png)
+        if not same_png(os.path.join(_tt, '%s_screen_tree.png' % _s), os.path.join(ROOT, _png)): bad('trees', '%s is not what tools/make_screen_trees.py draws today: rerun it' % _png)
+        else: ok('trees', '%s fresh' % _png)
+shutil.rmtree(_tt, ignore_errors=True)
 # ------------------------------------------------------------------ the layout maps of the ROMs not done by a pipeline (README, tools/status_maps.py)
 _sm = [(k, f, p) for k, f, p in (('gold', 'gold', 'gold'), ('kitty', 'hello_kitty', 'kitty'), ('proto', 'prototype_debagame', 'proto'))]
 for k, folder, pre in _sm:
@@ -344,7 +361,7 @@ if A.rom_kitty:
         m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)
         if r5.returncode or not m5: bad('kitty', 'tools/kitty_reach_map.py failed: %s' % (r5.stderr or r5.stdout)[-300:])
         else:
-            if 'roms/hello_kitty/kitty_rom_reachability_map.png' not in README: bad('maps', 'README does not show roms/hello_kitty/kitty_rom_reachability_map.png')
+            if '](kitty_rom_reachability_map.png)' not in open(KD + 'README.md').read(): bad('maps', 'roms/hello_kitty/README.md does not show kitty_rom_reachability_map.png')
             if not same_png(rp, KD + 'kitty_rom_reachability_map.png'): bad('kitty', 'kitty_rom_reachability_map.png is not what tools/kitty_reach_map.py draws today: rerun it')
             else: ok('kitty', 'kitty_rom_reachability_map.png fresh')
             KR = open(KD + 'README.md').read()

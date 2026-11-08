@@ -1,0 +1,4 @@
+panel,title,mode,states,row,how
+boot,Boot and title (mode $00),00,*,boot,no key held
+check,Quick factory check (mode $0D),0D,00 01 02,boot,every key but B held
+calib,Factory calibration (mode $0D),0D,03 04 05,boot,blank save or every key held

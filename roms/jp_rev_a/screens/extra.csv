@@ -1,0 +1,5 @@
+mode,state,picture,how,parent,key,name
+boot,cal1,boot_cal1.png,"blank calibration record at power-on (tcrf_check/tools/calib_screens_capture.py, BGB)",,,Factory calibration: STORE / PLEASE WAIT
+boot,cal2,boot_cal2.png,"blank calibration record at power-on (tcrf_check/tools/calib_screens_capture.py, BGB)",,,Factory calibration: STORE / END
+boot,chk1,boot_chk1.png,"every key but B held at power-on (tcrf_check/tools/calib_screens_capture.py, BGB)",,,"Calibration check: OK (BGB, blank record)"
+boot,chk2,boot_chk2.png,"every key but B held at power-on (tcrf_check/tools/calib_screens_capture.py, BGB)",,,"Calibration check: NG (BGB, record of an intense-light camera)"

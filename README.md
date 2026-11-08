@@ -8,11 +8,11 @@ The work is produced by AI (Claude), from reading the code and running it in emu
 
 One map per ROM, in the same colours: what each byte is (code by function, data by kind). Grey-blue is what is not analysed yet: it gives way to the colours as the work on a ROM lands.
 
-**Pocket Camera (Japan) (Rev A)**: outlines = what no emulator run reached.
+**Pocket Camera (Japan) (Rev A)**: outlines = what no emulator run reached (the full reachability map is in [`roms/jp_rev_a/`](roms/jp_rev_a/README.md)).
 
 ![What each byte of the Japanese ROM is: code by function, data by kind](roms/jp_rev_a/jp_rom_layout_map.png)
 
-*Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), named after the mode and state constants of `roms/jp_rev_a/disasm/screen_names_jp.csv` (generated from the L4 tables); key taps from an unlocked, freshly formatted save, 7 taps deep: the screens behind a printer, a link partner or a long game are not in it yet, and a box with no arrow is a screen whose parent screen BGB did not confirm. Drawn by `tools/screen_tree.py` from `roms/jp_rev_a/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
+*Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
 
 ![Screens (mode, state) reached in BGB](roms/jp_rev_a/jp_screen_tree.png)
 
@@ -44,7 +44,7 @@ One map per ROM, in the same colours: what each byte is (code by function, data 
 
 ![What each byte of the international ROM is](roms/us_eu/us_rom_layout_map.png)
 
-*Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), same method and limits as the Japanese tree (names: `roms/us_eu/disasm/screen_names_us.csv`); the Gold ROM, a copy of this program with other assets, has no tree of its own. Drawn by `tools/screen_tree.py` from `roms/us_eu/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
+*Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
 
 ![Screens (mode, state) reached in BGB](roms/us_eu/us_screen_tree.png)
 
@@ -83,11 +83,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 ![What each byte of the Hello Kitty ROM is](roms/hello_kitty/kitty_rom_layout_map.png)
 
-*What the runs reached* (2026-11-08): the same tiles coloured by the core and BGB runs: blue = executed or read, red = proven code that no run executed, grey-blue = data that no run read and nothing explains yet, orange = never read but explained by a loader or a table; drawn by `tools/kitty_reach_map.py` (counts: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), L2).
-
-![What the runs reached in the Hello Kitty ROM](roms/hello_kitty/kitty_rom_reachability_map.png)
-
-*Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), named in plain words in `roms/hello_kitty/disasm/screen_names_kitty.csv`; dashed boxes: screens reached by a boot condition (the calibration checks) or only by forcing the mode (evidence I). Drawn by `tools/screen_tree.py` from `roms/hello_kitty/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
+*Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
 
 ![Screens (mode, state) reached in BGB](roms/hello_kitty/kitty_screen_tree.png)
 

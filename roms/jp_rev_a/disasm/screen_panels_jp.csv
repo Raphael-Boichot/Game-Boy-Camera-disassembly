@@ -1,0 +1,4 @@
+panel,title,mode,states,row,how
+boot,Boot: copyright and title (mode $19),19,*,boot,no key held
+check,Calibration check (boot gate),boot,chk1 chk2,boot,every key but B held
+calib,Factory calibration (boot gate),boot,cal1 cal2,boot,blank record or every key held
