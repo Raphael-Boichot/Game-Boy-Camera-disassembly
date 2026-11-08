@@ -83,6 +83,10 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 ![What each byte of the Hello Kitty ROM is](roms/hello_kitty/kitty_rom_layout_map.png)
 
+*What the runs reached* (2026-11-08): the same tiles coloured by the core and BGB runs: blue = executed or read, red = proven code that no run executed, grey-blue = data that no run read and nothing explains yet, orange = never read but explained by a loader or a table; drawn by `tools/kitty_reach_map.py` (counts: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), L2).
+
+![What the runs reached in the Hello Kitty ROM](roms/hello_kitty/kitty_rom_reachability_map.png)
+
 *Screens reached in BGB* (2026-11-07): boot at the top, each arrow labelled with the key that leads to the next screen, dead ends at the bottom; each box is the BGB screenshot of one (mode, state), named in plain words in `roms/hello_kitty/disasm/screen_names_kitty.csv`; dashed boxes: screens reached by a boot condition (the calibration checks) or only by forcing the mode (evidence I). Drawn by `tools/screen_tree.py` from `roms/hello_kitty/screens/` (method: [`roms/hello_kitty/README.md`](roms/hello_kitty/README.md), Screens).
 
 ![Screens (mode, state) reached in BGB](roms/hello_kitty/kitty_screen_tree.png)

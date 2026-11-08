@@ -327,6 +327,20 @@ if A.rom_kitty:
             if md != '0a323bddc4f0159cea76cf44ed0c1a3c': bad('kitty', 'round trip with pocketcamera_kitty.sym: md5 %s' % md)
             else: ok('kitty', 'round trip with pocketcamera_kitty.sym: md5 %s' % md)
             shutil.rmtree(rt, ignore_errors=True)
+        # the reachability picture (tools/kitty_reach_map.py): redrawn and compared, its counts quoted in the Kitty README
+        rp = os.path.join(tk, 'reach.png'); r5 = _run('tools/kitty_reach_map.py', A.rom_kitty, rp)
+        m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)
+        if r5.returncode or not m5: bad('kitty', 'tools/kitty_reach_map.py failed: %s' % (r5.stderr or r5.stdout)[-300:])
+        else:
+            if 'roms/hello_kitty/kitty_rom_reachability_map.png' not in README: bad('maps', 'README does not show roms/hello_kitty/kitty_rom_reachability_map.png')
+            if not same_png(rp, KD + 'kitty_rom_reachability_map.png'): bad('kitty', 'kitty_rom_reachability_map.png is not what tools/kitty_reach_map.py draws today: rerun it')
+            else: ok('kitty', 'kitty_rom_reachability_map.png fresh')
+            KR = open(KD + 'README.md').read()
+            for what, pat, val in (('red bytes', r'([\d,]+) bytes of proven code never executed \(red', m5.group(2)), ('grey-blue bytes', r'([\d,]+) bytes of data never read and explained by nothing \(grey-blue', m5.group(3)),
+                                   ('orange bytes', r'([\d,]+) bytes never read but explained by a loader site or a table \(orange', m5.group(4)), ('blue bytes', r'([\d,]+) bytes executed or read \(blue', m5.group(1))):
+                mm = re.search(pat, KR)     # need= the sentence of the L2 section, What is still missing
+                if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the %s of the reachability map (need=%s)' % (what, pat))
+                elif int(mm.group(1).replace(',', '')) != int(val): bad('kitty', 'roms/hello_kitty/README.md: %s quoted %s, tools/kitty_reach_map.py gives %s' % (what, mm.group(1), val))
     shutil.rmtree(tk, ignore_errors=True)
 # ------------------------------------------------------------------ sym + types (needs the ROM)
 LINES = BLOCKS = None; BYTES = {}
