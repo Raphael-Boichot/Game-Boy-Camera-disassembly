@@ -356,6 +356,16 @@ if A.rom_kitty:
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the data kinds (need=N bytes of Data_ blocks given a kind, M left uncertain)')
             elif (int(mm.group(1).replace(',', '')), int(mm.group(2).replace(',', ''))) != (int(m6.group(1)), int(m6.group(2))):
                 bad('kitty', 'roms/hello_kitty/README.md: data kinds quoted %s, tools/kitty_layout_kinds.py gives %s / %s' % (mm.group(0), m6.group(1), m6.group(2)))
+        # the doubts list (tools/kitty_doubts.py): fresh, and its counts quoted in the Kitty README
+        r7 = _run('tools/kitty_doubts.py', '--check')
+        if r7.returncode: bad('kitty', 'disasm/sym_unconclusive_kitty.{csv,md}: %s (rerun tools/kitty_doubts.py)' % (r7.stderr or r7.stdout).strip()[-300:])
+        else:
+            ok('kitty', 'doubts list sym_unconclusive_kitty fresh')
+            _dg = collections.Counter(r['group'] for r in csv.DictReader(open(KD + 'disasm/sym_unconclusive_kitty.csv')))
+            mm = re.search(r'Doubts list \([^)]*\)\.\*\* (\d+) names: (\d+) in modes reached only by forcing, (\d+) in states the runs did not reach, (\d+) settled as unused', open(KD + 'README.md').read())   # need= the doubts bullet
+            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the doubts list (need=Doubts list (...).** N names: a in modes reached only by forcing, b in states the runs did not reach, c settled as unused)')
+            elif tuple(int(x) for x in mm.groups()) != (sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']):
+                bad('kitty', 'roms/hello_kitty/README.md: doubts quoted %s, the list gives %d / %d / %d / %d' % (mm.group(0)[-90:], sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']))
         # the reachability picture (tools/kitty_reach_map.py): redrawn and compared, its counts quoted in the Kitty README
         rp = os.path.join(tk, 'reach.png'); r5 = _run('tools/kitty_reach_map.py', A.rom_kitty, rp)
         m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)

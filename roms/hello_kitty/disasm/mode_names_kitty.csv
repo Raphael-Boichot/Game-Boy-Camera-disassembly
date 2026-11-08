@@ -4,7 +4,7 @@ mode,name,tag,evidence
 02,TakePhotos,C,BGB screens 02:01 (camera view) and 02:06 (photo taken)
 03,ViewAlbum,C,BGB screen 03:02 (album binder)
 04,PlayMenu,C,BGB screen 04:01 (scratch card / 15 puzzle / slide show / Strawberry Channel)
-05,StampWindow,I,forced BGB screen (stamp window); reached in the core runs
+05,StampWindow,C,forced BGB screen (stamp window); reached in the core runs (from the album)
 06,Printing,C,"BGB screens with the printer helper on the link (06:1F please wait, 06:21, 06:24 the fruit game); forced alone it shows an empty frame"
 07,Exchange,C,BGB screen 07:02 (give / receive)
 08,AlbumPhotoTrain,I,forced BGB screen (album pages drawn as a photo train)
@@ -14,7 +14,7 @@ mode,name,tag,evidence
 0C,RecordBook,C,BGB screen 0C:01 (photo counters and Kitts)
 0D,FactoryCheck,C,BGB screens 0D:01-02 (quick factory check) and 0D:04-05 (factory calibration); boot conditions
 0E,KittGamesHost,C,BGB screens 0E:03-16 (the host who asks for the Kitts of the scratch card and the 15 puzzle)
-0F,FifteenPuzzle,I,forced BGB screen (15 puzzle board); reached in the core runs
+0F,FifteenPuzzle,C,forced BGB screen (15 puzzle board); reached in the core runs (from the Play menu)
 10,ScratchCard,C,BGB screen 10:02 (scratch card board)
 11,StrawberryChannel,C,BGB screens 11:07 (photo story) and 11:0C (paused: print / keep / cancel)
 12,SlideShow,C,BGB screens 12:01 (settings) and 12:04 (playing)
