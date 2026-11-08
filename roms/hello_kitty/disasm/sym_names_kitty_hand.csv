@@ -48,3 +48,29 @@ bank,addr,name,conf,note,source
 01,57B7,RecordBook_VineReceived,C,vine script of the received counter (descriptor at 01:57C1),hand 2026-11-08
 01,57C5,RecordBook_GetPrintedX6,C,"hFFEA-EB += 6 x photos printed ($DACF-DAD0); BGB: 1 print shows 6 flowers",hand 2026-11-08
 01,57E4,RecordBook_VinePrinted,C,vine script of the printed counter (descriptor at 01:57EE),hand 2026-11-08
+05,4408,FactoryCheck_PutHexByte,C,"A as two hex digit tiles at [HL+] (the digit value is the tile id); called by Mode0D_State00",hand 2026-11-08
+05,4413,FactoryCheck_PutHexDigit,C,"one digit tile: ld [hl+],a",hand 2026-11-08
+05,4482,FactoryCheck_PutHexByteVram,C,"05:4408 through Vram_WriteByteSafe (screen on); called by Mode0D_State01",hand 2026-11-08
+05,448D,FactoryCheck_PutHexDigitVram,C,one digit tile through Vram_WriteByteSafe,hand 2026-11-08
+05,4A50,Bank05_FrameUpdate,C,"far-called at the start of bank-5 state handlers: Object_RunAll, then 00:21BE and 00:03D5",hand 2026-11-08
+05,63C8,Text_PutCharAtCursor,C,A into the text buffer $DA67 at the cursor $D98C,hand 2026-11-08
+05,63D6,Text_PutCharAt,C,A into the text buffer $DA67 at index C,hand 2026-11-08
+05,63E0,Text_CursorRight,C,"cursor $D98C + 1, at most $1A (27 characters)",hand 2026-11-08
+05,63EC,Text_SmallGlyphAddr,C,DE = $4000 + 32 x A: an 8x16 glyph of bank $12,hand 2026-11-08
+05,6401,Text_DrawSmallLine,C,"the 30 bytes at $DA67 as 8x16 glyphs of bank $12 into tiles $8100 (Vram_CopyHBlankFar)",hand 2026-11-08
+05,6424,Text_BigGlyphAddr,C,"DE = $4000 + 64 x A: a 16x16 glyph of bank $09 (Font16x16_Bank09)",hand 2026-11-08
+05,643D,Text_CopyBigLine,C,"the 27 characters at $DA67 as 16x16 glyphs of bank $09 into $9000, or into $C000 in mode $06 (printing); Copy_FarDEtoHL",hand 2026-11-08
+05,646B,Text_CopyBigLineVram,C,05:643D through Vram_CopyHBlankFar,hand 2026-11-08
+05,65E0,Text_LoadBigGlyphPage,C,"10 glyphs (640 B) of bank $09 from $4000 + $140 x [$D992] into tiles $8A00",hand 2026-11-08
+09,4000,Font16x16_Bank09,C,"the 16x16 font: 245 glyphs of 64 B (four tiles in reading order), hiragana first (rendered); read by 05:6424 and 05:65E0, in mode $03 states $0A-$0B in the core runs",hand 2026-11-08
+0A,4000,Font16x16_Bank0A,C,"copy of Font16x16_Bank09 except 222 bytes at $7D44-$7F31; read in mode $05 state $06 in the core runs",hand 2026-11-08
+05,564E,Stamp_ArrangeGfx,C,"copies the stamp tiles of $C3C0 into the work buffer $C000, [$D9DA] x [$D9DB] tiles, rows interleaved; mode $05 (stamp window) setup",hand 2026-11-08
+05,5695,Stamp_ArrangeMaskInverted,C,"the same for the mask: $C5A0 into $C1E0, every byte complemented (cpl)",hand 2026-11-08
+05,56E0,Stamp_MirrorIfFlagged,C,"when $D9E1 bit 5 is set: mirrors the four stamp buffers $C000, $C1E0 (05:56FF), $C3C0 (05:5768) and $C5A0 (05:57D1)",hand 2026-11-08
+05,56FF,Stamp_MirrorGfx,C,"horizontal mirror of a buffer [$D9DA] tiles wide: each byte bit-reversed and swapped with its mirror position",hand 2026-11-08
+05,5768,Stamp_MirrorSrcGfx,I,"mirror of $C3C0 called beside 05:56FF by Stamp_MirrorIfFlagged (other row size; loop not read in full)",hand 2026-11-08
+05,57D1,Stamp_MirrorSrcMask,I,"mirror of $C5A0 called beside 05:56FF by Stamp_MirrorIfFlagged (other row size; loop not read in full)",hand 2026-11-08
+05,5EA3,Stamp_BlitOnPhoto,C,"Blit_BuildPatchList, the shift masks (05:5F29), Blit_MaskPass_SrcA or _SrcB by $D9E1 bit 7, 00:2BB9, Blit_ApplyPatchList; first run in mode $05 state $06 (core)",hand 2026-11-08
+05,5F29,Stamp_SetShiftMasks,C,"for the x offset B & 7: the bit masks of 05:5F86 into $D9ED (and its complement $D9EE), $D9EA = $38 + (B & 7), the masks of 05:5F8E",hand 2026-11-08
+05,54D4,Stamp_LoadWindowMap,C,"$100 bytes of map from [$D9D0] (bank $23) into the window map $9C00 (Vram_CopyHBlankFar); mode $05",hand 2026-11-08
+05,54EA,Stamp_LoadWindowMapDefault,C,"$100 bytes of map from 23:7150 into the window map $9C00; mode $05",hand 2026-11-08

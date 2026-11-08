@@ -1,0 +1,1029 @@
+entry,first_screens,runs
+00:0008,00:05,run1 run2 run3p run4u
+00:0010,00:05,run1 run2 run3p run4u
+00:0040,00:05,run1 run2 run3p run4u
+00:0048,02:00 0B:0F,run1 run2 run3p run4u
+00:0058,06:1A 07:02,run1 run2 run3p run4u
+00:0100,00:05,run1 run2 run3p run4u
+00:0150,00:05,run1 run2 run3p run4u
+00:0151,00:05,run1 run2 run3p run4u
+00:015B,00:05,run1 run2 run3p run4u
+00:0165,00:05,run1 run2 run3p run4u
+00:0173,00:05,run1 run2 run3p run4u
+00:017A,00:05,run1 run2 run3p run4u
+00:0189,00:05,run1 run2 run3p run4u
+00:0194,01:02 1E:00,run1 run2 run3p run4u
+00:01A0,00:05,run1 run2 run3p run4u
+00:01B2,00:05,run1 run2 run3p run4u
+00:01BD,00:05,run1 run2 run3p run4u
+00:01C8,00:05,run1 run2 run3p run4u
+00:01D1,00:05,run1 run2 run3p run4u
+00:01F2,00:05,run1 run2 run3p run4u
+00:0206,02:06,run1 run2 run3p run4u
+00:021C,00:05,run1 run2 run3p run4u
+00:0232,00:05,run1 run2 run3p run4u
+00:023A,02:00,run1 run2 run3p run4u
+00:0245,00:05,run1 run2 run3p run4u
+00:0260,00:05,run1 run2 run3p run4u
+00:0276,14:01,run1 run2 run3p run4u
+00:02F9,00:05,run1 run2 run3p run4u
+00:0375,00:05,run1 run2 run3p run4u
+00:03A2,06:22,run3p
+00:03C1,01:00,run1 run2 run3p run4u
+00:03D5,00:05,run1 run2 run3p run4u
+00:03EA,00:05,run1 run2 run3p run4u
+00:040B,00:05,run1 run2 run3p run4u
+00:049E,00:05,run1 run2 run3p run4u
+00:04C5,00:05 00:07,run1 run2 run3p run4u
+00:0512,00:05 00:07,run1 run2 run3p run4u
+00:054C,00:05 00:07,run1 run2 run3p run4u
+00:056F,05:03,run1 run2 run3p run4u
+00:05E3,0B:01 0E:02,run1 run2 run3p run4u
+00:066E,00:05 00:07,run1 run2 run3p run4u
+00:0726,00:05 00:07,run1 run2 run3p run4u
+00:077D,02:00,run1 run2 run3p run4u
+00:07CE,02:00,run1 run2 run3p run4u
+00:0860,1E:00,run1 run2 run3p run4u
+00:08F2,02:00,run1 run2 run3p run4u
+00:0924,02:00,run1 run2 run3p run4u
+00:0939,02:00,run1 run2 run3p run4u
+00:0A4E,02:08,run1 run2 run3p run4u
+00:0A82,02:08,run1 run2 run3p run4u
+00:0ABA,02:08,run1 run2 run3p run4u
+00:0ABE,02:08,run1 run2 run3p run4u
+00:0AF9,02:00,run1 run2 run3p run4u
+00:0B02,1E:00,run1 run2 run3p run4u
+00:0B0D,02:06,run1 run2 run3p run4u
+00:0B16,00:05,run1 run2 run3p run4u
+00:0B22,00:05 1E:00,run1 run2 run3p run4u
+00:0B69,02:01,run1 run2 run3p run4u
+00:0B7B,02:01,run1 run2 run3p run4u
+00:0BBB,0A:03,run1 run2 run3p run4u
+00:0C23,02:00 0B:0F,run1 run2 run3p run4u
+00:0C25,02:00 0B:0F,run1 run2 run3p run4u
+00:0C9A,02:03 1E:00,run1 run2 run3p run4u
+00:0CB4,02:07 1E:00,run1 run2 run3p run4u
+00:0CD3,0E:08 0E:14 11:02,run1 run2 run3p run4u
+00:0D5D,00:05,run1 run2 run3p run4u
+00:0D63,06:1A,run1 run2 run3p run4u
+00:0D7A,1E:00,run1 run2 run3p run4u
+00:0DA1,00:05,run1 run2 run3p run4u
+00:0DB7,00:05,run1 run2 run3p run4u
+00:0DC1,00:05,run1 run2 run3p run4u
+00:0DE4,06:1A,run1 run2 run3p run4u
+00:0DFF,06:1B 1E:00,run1 run2 run3p run4u
+00:0E42,06:22,run3p
+00:0E7B,06:1F,run3p
+00:0FBF,06:1B,run3p
+00:1038,06:1A,run1 run2 run3p run4u
+00:1045,06:22,run3p
+00:1095,06:22,run3p
+00:109C,06:1F,run3p
+00:10DD,06:1B,run3p
+00:10EA,06:1F,run3p
+00:1134,06:1A,run1 run2 run3p run4u
+00:116C,06:1A,run1 run2 run3p run4u
+00:1191,06:1A,run1 run2 run3p run4u
+00:1231,06:1A,run1 run2 run3p run4u
+00:124A,06:1F,run3p
+00:1261,06:1F,run3p
+00:12C9,07:02,run1 run2 run3p run4u
+00:153F,07:02,run1 run2 run3p run4u
+00:15B8,1E:00,run1 run2 run3p run4u
+00:15CD,07:02,run1 run2 run3p run4u
+00:1648,07:02,run1 run2 run3p run4u
+00:1668,00:05,run1 run2 run3p run4u
+00:1680,00:05,run1 run2 run3p run4u
+00:168B,00:05,run1 run2 run3p run4u
+00:1717,00:05,run1 run2 run3p run4u
+00:18BF,1E:00,run1 run2 run3p run4u
+00:18EA,00:05,run1 run2 run3p run4u
+00:18F5,02:00 0B:0F,run1 run2 run3p run4u
+00:1918,02:00,run1 run2 run3p run4u
+00:192E,1E:00,run1 run2 run3p run4u
+00:195B,1E:00,run1 run2 run3p run4u
+00:1981,1E:00,run1 run2 run3p run4u
+00:198C,05:00,run1 run2 run3p run4u
+00:19B8,05:00,run1 run2 run3p run4u
+00:19DF,05:00,run1 run2 run3p run4u
+00:19EA,0A:00,run1 run2 run3p run4u
+00:1A16,0A:00,run1 run2 run3p run4u
+00:1A3C,0A:00,run1 run2 run3p run4u
+00:1A47,12:00,run1 run2 run3p run4u
+00:1A6A,12:00,run1 run2 run3p run4u
+00:1A75,06:07,run1 run2 run3p
+00:1A80,06:02,run1 run2 run3p
+00:1A8B,06:07,run1 run2 run3p
+00:1A96,03:00 0B:0F,run1 run2 run3p run4u
+00:1AA1,06:07,run1 run2 run3p
+00:1AAC,06:07,run1 run2 run3p
+00:1AB7,00:05,run1 run2 run3p run4u
+00:1AC2,00:05,run1 run2 run3p run4u
+00:1AC5,00:05,run1 run2 run3p run4u
+00:1C8C,1E:00,run1 run2 run3p run4u
+00:1C93,02:08,run1 run2 run3p run4u
+00:1C9F,02:08,run1 run2 run3p run4u
+00:1CB1,1E:00,run1 run2 run3p run4u
+00:1D47,12:00,run1 run2 run3p run4u
+00:1D4E,1E:00,run1 run2 run3p run4u
+00:1D96,12:00,run1 run2 run3p run4u
+00:1D9D,1E:00,run1 run2 run3p run4u
+00:1EBA,02:08,run1 run2 run3p run4u
+00:1EC9,02:08,run1 run2 run3p run4u
+00:1ED5,06:05,run1 run2 run3p
+00:1EDB,06:08 06:09,run1 run2 run3p
+00:1EE4,1E:00,run1 run2 run3p run4u
+00:1EEE,1E:00,run1 run2 run3p run4u
+00:1EF8,0E:13,run1 run2 run3p run4u
+00:1F02,00:05,run1 run2 run3p run4u
+00:1F09,1E:00,run1 run2 run3p run4u
+00:1F10,00:05,run1 run2 run3p run4u
+00:1F16,00:08,run1 run2 run3p run4u
+00:1F1E,00:05 00:08,run1 run2 run3p run4u
+00:1F25,0F:05,run1 run2 run3p run4u
+00:1F2A,0F:05,run1 run2 run3p run4u
+00:1F3A,1E:00,run1 run2 run3p run4u
+00:1F47,10:02,run1 run2 run3p run4u
+00:1F65,1E:00,run1 run2 run3p run4u
+00:1F6D,1E:00,run1 run2 run3p run4u
+00:1F75,1E:00,run1 run2 run3p run4u
+00:1F7F,02:01 0B:04,run1 run2 run3p run4u
+00:1F98,1E:00,run1 run2 run3p run4u
+00:1FA2,0B:04,run1 run2 run3p run4u
+00:1FCC,1E:00,run1 run2 run3p run4u
+00:2009,1E:00,run1 run2 run3p run4u
+00:204A,0F:05,run1 run2 run3p run4u
+00:205A,1E:00,run1 run2 run3p run4u
+00:20D4,00:05,run1 run2 run3p run4u
+00:20DA,00:05,run1 run2 run3p run4u
+00:20DF,00:05,run1 run2 run3p run4u
+00:2165,00:05,run1 run2 run3p run4u
+00:2170,00:05,run1 run2 run3p run4u
+00:217B,00:05,run1 run2 run3p run4u
+00:219C,00:05 00:08,run1 run2 run3p run4u
+00:21BE,00:05,run1 run2 run3p run4u
+00:2212,01:04 02:03 02:08,run1 run2 run3p run4u
+00:221C,01:04 1E:00,run1 run2 run3p run4u
+00:2225,02:06,run1 run2 run3p run4u
+00:222C,02:06,run1 run2 run3p run4u
+00:223C,01:02 1E:00,run1 run2 run3p run4u
+00:224B,01:02 1E:00,run1 run2 run3p run4u
+00:2263,12:01,run1 run2 run3p run4u
+00:2270,00:05,run1 run2 run3p run4u
+00:22A6,0C:01 10:02 11:02,run1 run2 run3p run4u
+00:22C7,06:1B,run3p
+00:2335,06:1B,run3p
+00:2342,06:1B,run3p
+00:2348,06:1B,run3p
+00:2358,06:1B,run3p
+00:237A,06:1B,run3p
+00:244E,06:1D,run3p
+00:24E0,03:00,run1 run2 run3p run4u
+00:25A1,02:06,run1 run2 run3p run4u
+00:264C,02:06,run1 run2 run3p run4u
+00:2662,02:06,run1 run2 run3p run4u
+00:29DB,02:06,run1 run2 run3p run4u
+00:2A65,03:11,run1 run2 run3p run4u
+00:2A8F,02:06,run1 run2 run3p run4u
+00:2AB9,05:06,run1 run2 run3p run4u
+00:2B38,05:06,run1 run2 run3p run4u
+00:2BB9,05:06,run1 run2 run3p run4u
+00:2C6B,00:05,run1 run2 run3p run4u
+00:2C7F,00:05,run1 run2 run3p run4u
+01:4705,00:05,run1 run2 run3p run4u
+01:4711,00:05,run1 run2 run3p run4u
+01:4721,00:05,run1 run2 run3p run4u
+01:4731,00:05,run1 run2 run3p run4u
+01:4740,02:06,run1 run2 run3p run4u
+01:475B,00:05,run1 run2 run3p run4u
+01:4771,02:06,run1 run2 run3p run4u
+01:47CC,00:05,run1 run2 run3p run4u
+01:47DB,00:05,run1 run2 run3p run4u
+01:47ED,00:05,run1 run2 run3p run4u
+01:4840,00:05,run1 run2 run3p run4u
+01:4887,00:05,run1 run2 run3p run4u
+01:48CE,00:05,run1 run2 run3p run4u
+01:49BD,00:05 03:0D,run1 run2 run3p run4u
+01:4A13,00:05,run1 run2 run3p
+01:4A60,00:05,run1 run2 run3p run4u
+01:4AA9,00:05,run1 run2 run3p
+01:4ADF,00:05,run1 run2 run3p run4u
+01:4B0A,03:04 12:02,run1 run2 run3p run4u
+01:4BB1,12:02,run1 run2 run3p run4u
+01:4BF0,0F:00,run4u
+01:4C2B,02:06,run1 run2 run3p run4u
+01:4C93,0B:0F,run1 run2 run3p run4u
+01:4CB2,0B:06,run1 run2 run3p run4u
+01:4D62,00:05,run1 run2 run3p run4u
+01:4D81,02:06,run1 run2 run3p run4u
+01:4D9F,02:06,run1 run2 run3p run4u
+01:4DCC,03:0D,run1 run2 run3p run4u
+01:4DE4,02:06,run1 run2 run3p run4u
+01:4E2E,00:05,run1 run2 run3p run4u
+01:4E4D,0B:06,run1 run2 run3p run4u
+01:4E97,00:05,run1 run2 run3p run4u
+01:4EB6,02:07,run1 run2 run3p run4u
+01:4EE8,03:00,run1 run2 run3p run4u
+01:5030,10:02,run1 run2 run3p run4u
+01:5068,0F:05,run1 run2 run3p run4u
+01:508A,0F:05,run1 run2 run3p run4u
+01:522A,0F:0A 0F:0B,run1 run2 run3p run4u
+01:5231,0F:0A 0F:0B,run1 run2 run3p run4u
+01:5238,0F:0A 0F:0B,run1 run3p run4u
+01:523F,0F:0A 0F:0B,run1 run2 run3p run4u
+01:5244,11:04 11:07,run1 run2 run3p run4u
+01:5434,1E:00,run1 run2 run3p run4u
+01:54A3,0A:03,run1 run2 run3p run4u
+01:54B3,0A:03,run1 run2 run3p run4u
+01:54BD,0A:03,run1 run2 run3p run4u
+01:54D7,0A:03,run1 run2 run3p run4u
+01:54EE,0A:01,run1 run2 run3p run4u
+01:5576,0A:03,run1 run2 run3p run4u
+01:558D,0A:03,run1 run2 run3p run4u
+01:559D,0A:03,run1 run2 run3p run4u
+01:55A7,0A:03,run1 run2 run3p run4u
+01:55C1,0A:03,run1 run2 run3p run4u
+01:55D8,0A:01,run1 run2 run3p run4u
+01:5660,0A:03,run1 run2 run3p run4u
+01:567A,1E:00,run1 run2 run3p run4u
+01:5686,0C:01,run1 run2 run3p run4u
+01:568C,0C:01,run1 run2 run3p
+01:5691,0C:01,run1 run2 run3p run4u
+01:56B1,0C:01,run1 run2 run3p
+01:56BD,0C:01,run1 run2 run3p
+01:571C,1E:00,run1 run2 run3p run4u
+01:5736,1E:00,run1 run2 run3p run4u
+01:5750,1E:00,run1 run2 run3p run4u
+01:577D,1E:00,run1 run2 run3p run4u
+01:57C5,1E:00,run1 run2 run3p run4u
+01:5802,1E:00,run1 run2 run3p run4u
+01:5809,03:0F,run1 run2 run3p run4u
+01:58B2,0C:01,run1 run2 run3p run4u
+01:58C1,0C:01,run1 run2 run3p run4u
+01:58DC,0C:01 10:02,run1 run2 run3p run4u
+01:58E9,1E:00,run1 run2 run3p run4u
+01:58F7,1E:00,run1 run2 run3p run4u
+01:58FC,03:0F 0F:0A 0F:0B,run1 run2 run3p run4u
+01:5901,0C:01 0F:0A,run1 run2 run3p run4u
+01:590C,1E:00,run1 run2 run3p run4u
+01:5911,1E:00,run1 run2 run3p run4u
+01:5919,1E:00,run1 run2 run3p run4u
+01:591E,1E:00,run1 run2 run3p run4u
+01:593A,0C:01,run1 run2 run3p run4u
+01:5942,0C:01,run1 run2 run3p run4u
+01:5957,10:02 1E:00,run1 run2 run3p run4u
+01:5969,10:02 11:02,run1 run2 run3p run4u
+01:596C,00:05,run1 run2 run3p run4u
+01:597E,1E:00,run1 run2 run3p run4u
+01:59C6,00:05,run1 run2 run3p run4u
+01:5A2B,1E:00,run1 run2 run3p run4u
+01:5A36,1E:00,run1 run2 run3p run4u
+01:684C,06:11,run1 run2 run3p
+01:688F,06:02,run1 run2 run3p
+01:68CE,06:06,run1 run2 run3p
+01:6991,06:16,run1 run2 run3p run4u
+01:6A37,06:1B,run3p
+01:6A4C,06:1B,run3p
+01:6A62,06:00,run1 run2 run3p
+01:6B1F,06:01,run1 run2 run3p
+01:6B7C,06:02,run1 run2 run3p
+01:6C2A,06:03,run1 run2 run3p
+01:6C8C,06:0E,run1 run2 run3p
+01:6CAB,06:05,run1 run2 run3p
+01:6CC8,06:04,run1 run2 run3p
+01:6D09,06:06,run1 run2 run3p
+01:6D69,06:07,run1 run2 run3p
+01:6D7C,06:09,run1 run2 run3p
+01:6D8E,06:08,run1 run2 run3p
+01:6DA0,06:0A,run1 run2 run3p
+01:6E08,06:0B,run1 run2 run3p
+01:6E70,06:0C,run1 run2 run3p
+01:6E93,06:0D 06:0F,run1 run2 run3p
+01:6EF3,06:03 06:06,run1 run2 run3p
+01:6F49,06:10,run1 run2 run3p
+01:6FB6,06:11,run1 run2 run3p
+01:70AD,06:14,run1 run2 run3p run4u
+01:7162,06:16,run1 run2 run3p run4u
+01:7226,06:14,run1 run2 run3p run4u
+01:72D5,06:1A,run1 run2 run3p run4u
+01:733C,06:1B,run3p
+01:739D,06:1D,run3p
+01:73D0,06:1F,run3p
+01:7410,06:20,run3p
+01:7419,06:21,run3p
+01:7430,06:22,run3p
+01:7691,06:14,run1 run2 run3p run4u
+02:4A54,02:06 1E:00,run1 run2 run3p run4u
+02:4A5A,02:06 1E:00,run1 run2 run3p run4u
+02:4A7F,02:06,run1 run2 run3p run4u
+02:4A92,02:06,run1 run2 run3p run4u
+02:4A9E,03:0D 03:11,run1 run2 run3p run4u
+02:4AA4,03:0D,run1 run2 run3p run4u
+02:4ABB,02:06,run1 run2 run3p run4u
+02:4ADB,05:03 1E:00,run1 run2 run3p run4u
+02:4AF0,05:03 1E:00,run1 run2 run3p run4u
+02:4B06,02:06,run1 run2 run3p run4u
+02:4B1C,02:06,run1 run2 run3p run4u
+02:4B3A,02:06,run1 run2 run3p run4u
+02:4B50,02:06,run1 run2 run3p run4u
+02:4B59,05:03 1E:00,run1 run2 run3p run4u
+02:4B62,05:03 1E:00,run1 run2 run3p run4u
+02:4B68,05:03 1E:00,run1 run2 run3p run4u
+02:4B77,05:03 1E:00,run1 run2 run3p run4u
+02:4B7D,05:03 1E:00,run1 run2 run3p run4u
+02:4B8C,02:06,run1 run2 run3p run4u
+02:4B92,02:06,run1 run2 run3p run4u
+02:4BA1,02:06,run1 run2 run3p run4u
+02:4BA7,02:06,run1 run2 run3p run4u
+02:4BB6,02:06,run1 run2 run3p run4u
+02:4BBC,02:06,run1 run2 run3p run4u
+02:4BCB,02:06,run1 run2 run3p run4u
+02:4BD1,02:06,run1 run2 run3p run4u
+02:4BE0,05:03 1E:00,run1 run2 run3p run4u
+02:4BE6,05:03 1E:00,run1 run2 run3p run4u
+02:4BF5,02:03,run1 run2 run3p run4u
+02:4C05,03:13,run1 run2 run3p run4u
+02:4C14,05:02 1E:00,run1 run2 run3p run4u
+02:4CFD,1E:00,run1 run2 run3p run4u
+02:4DB2,1E:00,run1 run2 run3p run4u
+02:4DEB,1E:00,run1 run2 run3p run4u
+02:4E32,01:05,run1 run2 run3p run4u
+02:4E45,1E:00,run1 run2 run3p run4u
+02:4F59,03:02,run1 run2 run3p run4u
+02:4F92,1E:00,run1 run2 run3p run4u
+02:4FD8,1E:00,run1 run2 run3p run4u
+02:4FF9,1E:00,run1 run2 run3p run4u
+02:500B,11:09,run1 run2 run3p run4u
+02:501C,11:04 11:07,run1 run2 run3p run4u
+02:5070,0F:0A 0F:0B,run1 run2 run3p run4u
+02:5099,0F:0A 0F:0B,run1 run2 run3p run4u
+02:50AB,0F:0A 0F:0B,run1 run2 run3p run4u
+02:50CE,1E:00,run1 run2 run3p run4u
+02:51AA,0F:05,run1 run2 run3p run4u
+02:51FC,1E:00,run1 run2 run3p run4u
+02:520D,0F:05,run1 run2 run3p run4u
+02:5232,0F:05,run1 run2 run3p run4u
+02:524D,0F:05,run1 run2 run3p run4u
+02:5268,0F:05,run1 run2 run3p run4u
+02:5283,0F:05,run1 run2 run3p run4u
+02:528A,0F:00 1E:00,run1 run2 run3p run4u
+02:5291,0F:05,run1 run2 run3p run4u
+02:52E7,0F:05,run1 run2 run3p run4u
+02:52F6,0F:05,run1 run2 run3p run4u
+02:5304,0F:05,run1 run2 run3p run4u
+02:5315,0F:05,run1 run2 run3p run4u
+02:5319,0F:05,run1 run2 run3p run4u
+02:531D,0F:05,run1 run2 run3p run4u
+02:5321,0F:05,run1 run2 run3p run4u
+02:5334,0F:05,run1 run2 run3p run4u
+02:5374,0F:06,run1 run2 run3p run4u
+02:537B,0F:00 1E:00,run1 run2 run3p run4u
+02:538D,0F:07,run1 run2 run3p run4u
+02:53DB,1E:00,run1 run2 run3p run4u
+02:5643,10:03,run1 run2 run3p run4u
+02:564A,1E:00,run1 run2 run3p run4u
+02:5662,1E:00,run1 run2 run3p run4u
+02:567C,10:02,run1 run2 run3p run4u
+02:569E,10:03,run1 run2 run3p run4u
+02:570F,0E:05,run1 run2 run3p run4u
+02:5730,0E:05,run1 run2 run3p run4u
+02:573C,0E:13,run1 run2 run3p run4u
+02:5749,0E:13,run1 run2 run3p run4u
+02:582F,0E:13,run1 run2 run3p run4u
+02:5944,0E:13,run1 run2 run3p run4u
+02:5971,0E:08 0E:14,run1 run2 run3p run4u
+02:5984,0E:02,run1 run2 run3p run4u
+02:5AF1,1E:00,run1 run2 run3p run4u
+02:5B0D,1E:00,run1 run2 run3p run4u
+02:5B51,00:05 00:08,run1 run2 run3p run4u
+02:5B77,1E:00,run1 run2 run3p run4u
+02:5B7E,00:05 00:08,run1 run2 run3p run4u
+02:5BD9,01:02 1E:00,run1 run2 run3p run4u
+02:5BED,1E:00,run1 run2 run3p run4u
+02:5BFE,01:05,run1 run2 run3p run4u
+02:5C0F,1E:00,run1 run2 run3p run4u
+02:5CB3,1E:00,run1 run2 run3p run4u
+02:5D73,01:05,run1 run2 run3p run4u
+02:5D7D,01:01,run1 run2 run3p run4u
+02:5D90,01:05,run1 run2 run3p run4u
+02:5E4F,02:01,run1 run2 run3p run4u
+02:5E94,02:01 02:0B,run1 run2 run3p run4u
+02:5ECB,02:01 02:0B,run1 run2 run3p run4u
+02:5ED9,02:0B,run1 run2 run3p run4u
+02:5EE7,02:01 02:0B,run1 run2 run3p run4u
+02:5F16,02:01 02:0B,run1 run2 run3p run4u
+02:5F3C,02:01,run1 run2 run3p run4u
+02:5F7F,02:08,run1 run2 run3p run4u
+02:5F85,02:08,run1 run2 run3p run4u
+02:5F94,02:08,run1 run2 run3p run4u
+02:5FA3,02:08,run1 run2 run3p run4u
+02:5FB2,02:08,run1 run2 run3p run4u
+02:5FBC,02:08,run1 run2 run3p run4u
+02:5FCB,02:08,run1 run2 run3p run4u
+02:5FDA,02:08,run1 run2 run3p run4u
+02:5FE9,02:08,run1 run2 run3p run4u
+02:60C8,1E:00,run1 run2 run3p run4u
+02:614A,1E:00,run1 run2 run3p run4u
+02:615F,1E:00,run1 run2 run3p run4u
+02:617C,1E:00,run1 run2 run3p run4u
+02:6194,1E:00,run1 run2 run3p run4u
+02:61B4,1E:00,run1 run2 run3p run4u
+02:61C0,1E:00,run1 run2 run3p run4u
+02:61E9,1E:00,run1 run2 run3p run4u
+02:61FE,1E:00,run1 run2 run3p run4u
+02:6213,1E:00,run1 run2 run3p run4u
+02:622E,03:03,run1 run2 run3p run4u
+02:6239,03:02,run1 run2 run3p run4u
+02:636B,03:03,run1 run2 run3p run4u
+02:637A,03:03,run1 run2 run3p run4u
+02:6474,03:05,run1 run2 run3p run4u
+02:647D,03:05,run1 run2 run3p run4u
+02:649C,1E:00,run1 run2 run3p
+02:64C9,1E:00,run1 run2 run3p
+02:64D3,06:05,run1 run2 run3p
+02:64DE,06:05,run1 run2 run3p
+02:64E5,06:05,run1 run2 run3p
+02:650F,06:05,run1 run2 run3p
+02:657A,06:08 06:09,run1 run2 run3p
+02:657B,06:08 06:09,run1 run2 run3p
+02:6582,06:08 06:09,run1 run2 run3p
+02:6591,06:08 06:09,run1 run2 run3p
+02:6601,06:07,run1 run2 run3p
+02:6612,06:07,run1 run2 run3p
+02:6623,06:07,run1 run2 run3p
+02:663E,06:07,run1 run2 run3p
+02:665A,06:04,run1 run2 run3p
+02:6A45,06:04 06:08,run1 run2 run3p
+02:6A65,1E:00,run1 run2 run3p run4u
+02:6A76,05:06 1E:06,run1 run2 run3p run4u
+02:6A9A,1E:00,run1 run2 run3p run4u
+02:6ACB,1E:00,run1 run2 run3p run4u
+02:6ADA,1E:00,run1 run2 run3p run4u
+02:6BEF,05:02 1E:00,run1 run2 run3p run4u
+02:6BFC,05:06 1E:06,run1 run2 run3p run4u
+02:6C0A,05:06,run1 run2 run3p run4u
+02:6C86,1E:00,run1 run2 run3p run4u
+02:6CC0,1E:00 1E:06,run1 run2 run3p run4u
+02:6CCD,05:06,run1 run2 run3p run4u
+02:6D19,05:06 1E:06,run1 run2 run3p run4u
+02:6D74,05:06,run1 run2 run3p run4u
+02:6E06,06:0D,run1 run2 run3p
+02:6E47,06:0D,run1 run2 run3p
+02:6E55,06:0D,run1 run2 run3p
+02:6E63,06:0D,run1 run2 run3p
+02:6F19,06:1B,run3p
+02:6F20,06:1B,run3p
+02:6F38,06:1B,run3p
+02:6F9E,06:1B,run3p
+02:6FA8,06:20,run3p
+02:6FC8,06:1B,run3p
+02:701E,06:1B,run3p
+02:77EE,1E:00,run1 run2 run3p run4u
+02:7853,03:0A,run1 run2 run3p run4u
+02:785A,03:0B,run1 run2 run3p run4u
+02:78AD,03:0B,run1 run2 run3p run4u
+02:793B,1E:00,run1 run2 run3p run4u
+02:7944,1E:00,run1 run2 run3p run4u
+02:7959,03:0A,run1 run2 run3p run4u
+02:7999,1E:00,run1 run2 run3p run4u
+02:79A4,1E:00,run1 run2 run3p run4u
+02:79AF,1E:00,run1 run2 run3p run4u
+02:79BA,1E:00,run1 run2 run3p run4u
+02:79C3,1E:00,run1 run2 run3p run4u
+02:79DD,0B:04,run1 run2 run3p run4u
+02:79F0,0B:04,run1 run2 run3p run4u
+02:7A7B,0B:04,run1 run2 run3p run4u
+02:7ACE,0B:04,run1 run2 run3p run4u
+02:7B53,0B:04,run1 run2 run3p run4u
+02:7B6E,0B:04,run1 run2 run3p run4u
+02:7BB1,1E:00,run1 run2 run3p run4u
+02:7BC8,1E:00,run1 run2 run3p run4u
+02:7BD3,1E:00,run1 run2 run3p run4u
+02:7BDA,1E:00,run1 run2 run3p run4u
+02:7C36,1E:00,run1 run2 run3p run4u
+02:7C5F,07:02,run1 run2 run3p run4u
+02:7E58,00:05,run1 run2 run3p run4u
+02:7E89,00:05,run1 run2 run3p run4u
+02:7EA2,00:05,run1 run2 run3p run4u
+02:7EEE,00:05 1E:00,run1 run2 run3p run4u
+02:7F23,00:05 1E:00,run1 run2 run3p run4u
+02:7F65,00:05 00:06,run1 run2 run3p run4u
+02:7FB9,00:05,run1 run2 run3p run4u
+02:7FC2,00:05,run1 run2 run3p run4u
+04:49F2,02:00,run1 run2 run3p run4u
+04:49F8,02:00,run1 run2 run3p run4u
+04:4A17,02:00,run1 run2 run3p run4u
+04:4A26,02:00,run1 run2 run3p run4u
+04:4A2C,00:05,run1 run2 run3p run4u
+04:4A38,00:05,run1 run2 run3p run4u
+04:4A3E,02:00,run1 run2 run3p run4u
+04:4CF8,00:05 1E:00,run1 run2 run3p run4u
+04:500B,00:05,run1 run2 run3p run4u
+04:5051,00:05,run1 run2 run3p run4u
+04:514D,00:05,run1 run2 run3p run4u
+04:52AF,00:05,run1 run2 run3p run4u
+04:55C6,00:05,run1 run2 run3p run4u
+04:568E,00:05,run1 run2 run3p run4u
+04:5A28,02:00,run1 run2 run3p run4u
+04:5AFC,02:00,run1 run2 run3p run4u
+04:5B15,00:05,run1 run2 run3p run4u
+04:5B6D,02:00,run1 run2 run3p run4u
+04:5E73,02:00,run1 run2 run3p run4u
+04:5F4A,02:00,run1 run2 run3p run4u
+04:5F56,02:01,run1 run2 run3p run4u
+04:5F9E,02:01,run1 run2 run3p run4u
+04:5FE7,02:01,run1 run2 run3p run4u
+04:602A,02:01,run1 run2 run3p run4u
+04:606D,02:01,run1 run2 run3p run4u
+04:60C1,02:01,run1 run2 run3p run4u
+04:6105,02:01,run1 run2 run3p run4u
+04:61AC,02:01,run1 run2 run3p run4u
+04:62C3,02:01,run1 run2 run3p run4u
+04:631A,02:01,run1 run2 run3p run4u
+04:6370,02:01,run1 run2 run3p run4u
+04:637C,02:01,run1 run2 run3p run4u
+04:6388,02:01,run1 run2 run3p run4u
+04:6411,02:01,run1 run2 run3p run4u
+04:64E0,02:01,run1 run2 run3p run4u
+05:4000,0B:01,run1 run2 run3p run4u
+05:4053,00:05,run1 run2 run3p run4u
+05:414C,00:05,run1 run2 run3p run4u
+05:41F6,00:05,run1 run2 run3p run4u
+05:4252,00:05,run1 run2 run3p run4u
+05:4265,00:05 00:06,run1 run2 run3p run4u
+05:42BB,00:05 00:07,run1 run2 run3p run4u
+05:4358,00:05 00:08,run1 run2 run3p run4u
+05:436B,00:05,run1 run2 run3p run4u
+05:4537,01:00,run1 run2 run3p run4u
+05:45E3,01:02,run1 run2 run3p run4u
+05:4657,01:02,run1 run2 run3p run4u
+05:46AE,01:03,run1 run2 run3p run4u
+05:472C,01:05,run1 run2 run3p run4u
+05:475E,01:05,run1 run2 run3p run4u
+05:47B1,01:06,run1 run2 run3p run4u
+05:47CC,01:00,run1 run2 run3p run4u
+05:498E,02:00,run1 run2 run3p run4u
+05:4A50,1E:00,run1 run2 run3p run4u
+05:4A61,02:00,run1 run2 run3p run4u
+05:4AEA,02:05,run1 run2 run3p run4u
+05:4B89,02:03,run1 run2 run3p run4u
+05:4BA1,02:06,run1 run2 run3p run4u
+05:4C52,02:01,run1 run2 run3p run4u
+05:4CAF,02:01 02:08,run1 run2 run3p run4u
+05:4CC3,02:09,run1 run2 run3p run4u
+05:4DC1,02:01,run1 run2 run3p run4u
+05:4EB0,02:01 02:05,run1 run2 run3p run4u
+05:4F07,02:01,run1 run2 run3p run4u
+05:4F2E,02:01,run1 run2 run3p run4u
+05:4F3F,02:01,run1 run2 run3p run4u
+05:5004,02:0B,run1 run2 run3p run4u
+05:5018,02:01,run1 run2 run3p run4u
+05:50B7,1E:00,run1 run2 run3p run4u
+05:52AB,02:00,run1 run2 run3p run4u
+05:5465,1E:00,run1 run2 run3p run4u
+05:54D4,05:06 1E:06,run1 run2 run3p run4u
+05:54EA,05:06 1E:06,run1 run2 run3p run4u
+05:54F8,05:06 1E:06,run1 run2 run3p run4u
+05:552D,05:06 1E:06,run1 run2 run3p run4u
+05:5556,1E:00,run1 run2 run3p run4u
+05:559C,1E:00,run1 run2 run3p run4u
+05:55E2,1E:00,run1 run2 run3p run4u
+05:564E,1E:00,run1 run2 run3p run4u
+05:5695,1E:00,run1 run2 run3p run4u
+05:56E0,1E:00,run1 run2 run3p run4u
+05:56FF,05:06,run1 run2 run3p run4u
+05:5768,05:06,run1 run2 run3p run4u
+05:57D1,05:06,run1 run2 run3p run4u
+05:583E,1E:00,run1 run2 run3p run4u
+05:5844,1E:00,run1 run2 run3p run4u
+05:5E5A,05:06,run1 run2 run3p run4u
+05:5EA3,05:06,run1 run2 run3p run4u
+05:5EC1,05:06,run1 run2 run3p run4u
+05:5EED,05:06,run1 run2 run3p run4u
+05:5F29,05:06,run1 run2 run3p run4u
+05:5F96,05:06,run1 run2 run3p run4u
+05:5FC9,05:00,run1 run2 run3p run4u
+05:607A,05:06,run1 run2 run3p run4u
+05:607B,05:02 1E:00,run1 run2 run3p run4u
+05:60B0,05:02,run1 run2 run3p run4u
+05:60C4,05:03,run1 run2 run3p run4u
+05:611B,05:04,run1 run2 run3p run4u
+05:612F,05:05,run1 run2 run3p run4u
+05:6166,05:00,run1 run2 run3p run4u
+05:61F9,1E:00,run1 run2 run3p run4u
+05:61FF,1E:00,run1 run2 run3p run4u
+05:63C8,03:0B,run1 run2 run3p run4u
+05:63D6,03:0B,run1 run2 run3p run4u
+05:63E0,03:0B,run1 run2 run3p run4u
+05:63EC,03:00,run1 run2 run3p run4u
+05:6401,03:00,run1 run2 run3p run4u
+05:6424,03:0A,run1 run2 run3p run4u
+05:643D,03:0A,run1 run2 run3p run4u
+05:646B,03:0B,run1 run2 run3p run4u
+05:6499,03:0B,run1 run2 run3p run4u
+05:64D5,03:0A,run1 run2 run3p run4u
+05:64F2,03:0A,run1 run2 run3p run4u
+05:650D,03:0A,run1 run2 run3p run4u
+05:6534,03:0A,run1 run2 run3p run4u
+05:65E0,03:0A,run1 run2 run3p run4u
+05:65FD,03:0A,run1 run2 run3p run4u
+05:66BD,03:0B,run1 run2 run3p run4u
+05:674B,02:08,run1 run2 run3p run4u
+05:679F,02:08,run1 run2 run3p run4u
+05:6837,02:08,run1 run2 run3p run4u
+05:688B,02:08,run1 run2 run3p run4u
+05:6B97,03:06,run1 run2 run3p run4u
+05:6C31,03:07,run1 run2 run3p run4u
+05:6CA5,03:08,run1 run2 run3p run4u
+05:6CB1,03:09,run1 run2 run3p run4u
+05:6CCD,02:06,run1 run2 run3p run4u
+05:6CFF,03:07 05:03 06:0A,run1 run2 run3p run4u
+05:6D18,03:0D,run1 run2 run3p run4u
+05:6D60,03:11,run1 run2 run3p run4u
+05:6D8A,03:00,run1 run2 run3p run4u
+05:6D96,03:00,run1 run2 run3p run4u
+05:6DB9,03:00,run1 run2 run3p run4u
+05:6DC5,03:00,run1 run2 run3p run4u
+05:6E0E,1E:00,run1 run2 run3p run4u
+05:6E33,1E:00,run1 run2 run3p run4u
+05:6E5C,02:03 1E:00,run1 run2 run3p run4u
+05:6EE4,03:00,run1 run2 run3p run4u
+05:6F2F,03:03,run1 run2 run3p run4u
+05:6F7A,03:00,run1 run2 run3p run4u
+05:70B0,03:01,run1 run2 run3p run4u
+05:71BC,03:02,run1 run2 run3p run4u
+05:7311,03:03,run1 run2 run3p run4u
+05:731D,03:04,run1 run2 run3p run4u
+05:73B0,03:05,run1 run2 run3p run4u
+05:7428,03:0C,run1 run2 run3p run4u
+05:74A1,03:0D,run1 run2 run3p run4u
+05:74CE,03:0F,run1 run2 run3p run4u
+05:74F6,03:0F,run1 run2 run3p run4u
+05:7503,03:10,run1 run2 run3p run4u
+05:7581,03:11,run1 run2 run3p run4u
+05:75C1,03:13,run1 run2 run3p run4u
+05:75D6,03:13,run1 run2 run3p run4u
+05:75E3,03:00,run1 run2 run3p run4u
+06:4478,14:00,run1 run2 run3p run4u
+06:453F,14:01,run1 run2 run3p run4u
+06:4631,14:00,run1 run2 run3p run4u
+06:4658,1E:00,run1 run2 run3p run4u
+06:469D,1E:00,run1 run2 run3p run4u
+06:46A3,1E:00,run1 run2 run3p run4u
+06:47C5,0B:04,run1 run2 run3p run4u
+06:47CB,0B:04,run1 run2 run3p run4u
+06:4B3E,1E:00,run1 run2 run3p run4u
+06:4BC7,0A:00,run1 run2 run3p run4u
+06:4BD3,0A:00,run1 run2 run3p run4u
+06:4C35,0B:0F,run1 run2 run3p run4u
+06:4C41,0B:0F,run1 run2 run3p run4u
+06:4C64,06:16,run1 run2 run3p run4u
+06:4C87,0B:08,run1 run2 run3p run4u
+06:4CAD,0B:0F,run1 run2 run3p run4u
+06:4CB9,0B:0F,run1 run2 run3p run4u
+06:4D02,06:16,run1 run2 run3p run4u
+06:4D4B,0B:0C,run1 run2 run3p run4u
+06:4D81,1E:00,run1 run2 run3p run4u
+06:4DA6,06:16,run1 run2 run3p run4u
+06:4DCB,1E:00,run1 run2 run3p run4u
+06:4DF4,06:16,run1 run2 run3p run4u
+06:4E1D,0B:05,run1 run2 run3p run4u
+06:4EFB,0B:0C,run1 run2 run3p run4u
+06:4F15,0B:0C,run1 run2 run3p run4u
+06:4F1C,0B:0C,run1 run2 run3p run4u
+06:4F23,0B:07,run1 run2 run3p run4u
+06:4F40,0B:0B,run1 run2 run3p run4u
+06:4F5D,0B:0E,run1 run2 run3p run4u
+06:4F6E,0B:09,run1 run2 run3p run4u
+06:4F7F,0B:04,run1 run2 run3p run4u
+06:4FC5,0B:04,run1 run2 run3p run4u
+06:5077,0B:0F,run1 run2 run3p run4u
+06:5105,0B:00,run1 run2 run3p run4u
+06:511C,0B:01,run1 run2 run3p run4u
+06:51E0,0B:02,run1 run2 run3p run4u
+06:5237,0B:04,run1 run2 run3p run4u
+06:5248,0B:04,run1 run2 run3p run4u
+06:526A,0B:03,run1 run2 run3p run4u
+06:52F0,0B:04,run1 run2 run3p run4u
+06:536E,0B:05,run1 run2 run3p run4u
+06:53D7,0B:06,run1 run2 run3p run4u
+06:53F5,0B:08,run1 run2 run3p run4u
+06:5406,0B:07,run1 run2 run3p run4u
+06:545E,0B:09,run1 run2 run3p run4u
+06:54B1,0B:0B,run1 run2 run3p run4u
+06:5509,0B:0E,run1 run2 run3p run4u
+06:555C,0B:0F,run1 run2 run3p run4u
+06:5585,0B:10,run1 run2 run3p run4u
+06:55C6,0B:0F,run1 run2 run3p run4u
+06:55F3,0A:00,run1 run2 run3p run4u
+06:560F,0A:00,run1 run2 run3p run4u
+06:56D5,0A:03,run1 run2 run3p run4u
+06:56D6,0A:01,run1 run2 run3p run4u
+06:5785,0A:02,run1 run2 run3p run4u
+06:57FF,0A:00,run1 run2 run3p run4u
+06:5812,0C:00 1E:00,run1 run2 run3p run4u
+06:583C,0C:00 1E:00,run1 run2 run3p run4u
+06:58CA,0C:00 1E:00,run1 run2 run3p run4u
+06:58F4,0C:00 1E:00,run1 run2 run3p run4u
+06:5922,0E:08 0E:14 11:00,run1 run2 run3p run4u
+06:594C,0E:08 0E:14 11:00,run1 run2 run3p run4u
+06:597A,0C:00 1E:00,run1 run2 run3p run4u
+06:5A1C,11:00,run1 run2 run3p run4u
+06:5A2B,0E:01,run1 run2 run3p run4u
+06:5A3A,0E:08 0E:14,run1 run2 run3p run4u
+06:5A49,02:06,run1 run2 run3p run4u
+06:5A67,03:0E,run1 run2 run3p run4u
+06:5B1B,02:07,run1 run2 run3p run4u
+06:5B3A,0E:08 0E:14,run1 run2 run3p run4u
+06:5B59,0E:08 0E:14 11:02,run1 run2 run3p run4u
+06:5CDC,0C:00,run1 run2 run3p run4u
+06:5D75,0C:01,run1 run2 run3p run4u
+06:5D8C,0C:00,run1 run2 run3p run4u
+06:5F95,02:03,run1 run2 run3p run4u
+06:6198,07:00,run1 run2 run3p run4u
+06:6235,07:02,run1 run2 run3p run4u
+06:6256,07:02,run1 run2 run3p run4u
+06:6318,07:00,run1 run2 run3p run4u
+07:4312,02:01,run1 run2 run3p run4u
+07:4336,02:01,run1 run2 run3p run4u
+07:4340,02:01,run1 run2 run3p run4u
+07:4364,02:01,run1 run2 run3p run4u
+07:436E,02:01,run1 run2 run3p run4u
+07:4392,02:01,run1 run2 run3p run4u
+07:439C,02:01,run1 run2 run3p run4u
+07:43C0,02:01,run1 run2 run3p run4u
+07:43CA,02:01,run1 run2 run3p run4u
+07:43D3,02:01,run1 run2 run3p run4u
+07:43DC,02:01,run1 run2 run3p run4u
+07:43E5,02:01,run1 run2 run3p run4u
+07:43EE,02:01,run1 run2 run3p run4u
+07:443B,02:01,run1 run2 run3p run4u
+07:4461,02:01,run1 run2 run3p run4u
+07:448F,02:01,run1 run2 run3p run4u
+07:44DC,02:01,run1 run2 run3p run4u
+07:4513,02:01,run1 run2 run3p run4u
+07:452E,02:01,run1 run2 run3p run4u
+07:453F,02:01,run1 run2 run3p run4u
+07:455A,02:01,run1 run2 run3p
+07:4567,02:01,run1 run2 run3p run4u
+07:4582,02:01,run1 run2 run3p run4u
+07:4593,02:01,run1 run2 run3p run4u
+07:45AE,02:01,run1 run2 run3p run4u
+07:45BB,02:01,run1 run2 run3p run4u
+07:45DC,02:01,run1 run2 run3p run4u
+07:45FD,02:01,run1 run2 run3p run4u
+07:4614,02:01,run1 run2 run3p run4u
+07:4621,02:01,run1 run2 run3p run4u
+07:4642,02:01,run1 run3p run4u
+07:4659,02:01,run3p run4u
+07:4670,02:01,run3p run4u
+07:467D,02:01,run1 run2 run3p run4u
+07:46A8,02:01,run1 run2 run4u
+07:46C9,02:01,run1 run2 run4u
+07:46E0,02:01,run2 run4u
+07:46ED,0F:00,run1 run2 run3p run4u
+07:471F,1E:00,run1 run2 run3p run4u
+07:4725,1E:00,run1 run2 run3p run4u
+07:4894,12:02,run1 run2 run3p run4u
+07:48AA,12:00,run1 run2 run3p run4u
+07:4923,12:01,run1 run2 run3p run4u
+07:4955,12:02,run1 run2 run3p run4u
+07:49D1,1E:00,run1 run2 run3p run4u
+07:49FE,12:02,run1 run2 run3p run4u
+07:4A60,12:04,run1 run2 run3p run4u
+07:4A7E,12:00,run1 run2 run3p run4u
+07:4E59,11:00,run1 run2 run3p run4u
+07:4EF5,11:00,run1 run2 run3p run4u
+07:4F09,11:00,run1 run2 run3p run4u
+07:4F48,11:02,run1 run2 run3p run4u
+07:4F62,11:00,run1 run2 run3p run4u
+07:5013,11:02,run1 run2 run3p run4u
+07:5056,11:02,run1 run2 run3p run4u
+07:5091,11:04 11:07,run1 run2 run3p run4u
+07:50A5,11:04 11:07,run1 run2 run3p run4u
+07:50AF,11:04,run1 run2 run3p run4u
+07:50B9,11:04,run1 run2 run3p run4u
+07:50C3,11:04,run1 run2 run3p run4u
+07:50CD,11:04,run1 run2 run3p run4u
+07:50D7,11:04,run1 run2 run3p run4u
+07:50E1,11:04,run1 run2 run3p run4u
+07:50EB,11:05,run1 run2 run3p run4u
+07:5109,11:04,run1 run2 run3p run4u
+07:517C,11:00,run1 run2 run3p run4u
+07:519C,11:00,run1 run2 run3p run4u
+07:519D,11:0B,run1 run2 run3p run4u
+07:5292,11:09,run1 run2 run3p run4u
+07:52AB,11:0C,run1 run2 run3p run4u
+07:5414,11:00,run1 run2 run3p run4u
+07:543D,11:02,run1 run2 run3p run4u
+07:5569,0F:00,run1 run2 run3p run4u
+07:5576,0F:0A 0F:0B,run1 run2 run3p run4u
+07:5586,0F:05,run1 run2 run3p run4u
+07:5595,0F:05,run1 run2 run3p run4u
+07:55AB,0F:05,run1 run2 run3p run4u
+07:55C1,0F:05,run1 run2 run3p run4u
+07:581B,0F:05,run1 run2 run3p run4u
+07:585B,1E:00,run1 run2 run3p run4u
+07:5864,0F:05,run1 run2 run3p run4u
+07:587E,1E:00,run1 run2 run3p run4u
+07:58A3,0F:05,run1 run2 run3p run4u
+07:58D1,0F:05,run1 run2 run3p run4u
+07:58DA,0F:05,run1 run2 run3p run4u
+07:58F4,0F:05,run1 run2 run3p run4u
+07:58FE,0F:05,run1 run2 run3p run4u
+07:5927,0F:01,run1 run2 run3p run4u
+07:593B,0F:01,run1 run2 run3p run4u
+07:596F,0F:01,run1 run2 run3p run4u
+07:5996,0F:05,run1 run2 run3p run4u
+07:59EF,0F:00,run1 run2 run3p run4u
+07:5A10,0F:01,run1 run2 run3p
+07:5A33,0F:00,run4u
+07:5A5C,0F:01,run4u
+07:5AB2,0F:00,run1 run2 run3p run4u
+07:5ABE,0F:01,run1 run2 run3p run4u
+07:5ACA,0F:00,run1 run2 run3p run4u
+07:5B04,0F:00,run1 run2 run3p run4u
+07:5B83,0F:00 1E:00,run1 run2 run3p run4u
+07:5B9B,0F:01,run1 run2 run3p run4u
+07:5C12,0F:05,run1 run2 run3p run4u
+07:5C29,0F:07,run1 run2 run3p run4u
+07:5C45,0F:07,run1 run2 run3p run4u
+07:5C51,0F:0A 0F:0B,run1 run2 run3p run4u
+07:5CB4,0F:0A,run1 run2 run3p
+07:5CBD,0F:0B,run4u
+07:5CCF,0F:0A 0F:0B,run1 run2 run3p run4u
+07:5D3C,0F:0A 0F:0B,run1 run2 run3p run4u
+07:5E40,0F:00,run1 run2 run3p run4u
+07:5E6B,10:00,run1 run2 run3p run4u
+07:5E78,1E:00,run1 run2 run3p run4u
+07:5E8F,10:00,run1 run2 run3p run4u
+07:5EF1,10:00,run1 run2 run3p run4u
+07:5F05,10:00,run1 run2 run3p run4u
+07:5F13,10:00,run1 run2 run3p run4u
+07:5F6D,10:00,run1 run2 run3p run4u
+07:5FC7,10:01,run1 run2 run3p run4u
+07:6012,1E:00,run1 run2 run3p run4u
+07:6034,10:03,run1 run2 run3p run4u
+07:605C,10:00,run1 run2 run3p run4u
+07:60FF,10:01,run1 run2 run3p run4u
+07:618C,10:02,run1 run2 run3p run4u
+07:61B3,10:03,run1 run2 run3p run4u
+07:6242,10:03,run1 run2 run3p run4u
+07:6251,10:03,run1 run2 run3p run4u
+07:6260,10:03,run1 run2 run3p run4u
+07:627B,10:04,run1 run2 run3p run4u
+07:62A6,10:05,run1 run2 run3p run4u
+07:62BB,10:00,run1 run2 run3p run4u
+07:657B,0E:03,run1 run2 run3p run4u
+07:6668,1E:00,run1 run2 run3p run4u
+07:6671,1E:00,run1 run2 run3p run4u
+07:667A,0E:03,run1 run2 run3p run4u
+07:6728,0E:01,run1 run2 run3p run4u
+07:6780,0E:00,run1 run2 run3p run4u
+07:67B7,0E:01,run1 run2 run3p run4u
+07:67F8,0E:02,run1 run2 run3p run4u
+07:6816,0E:03,run1 run2 run3p run4u
+07:6820,0E:05,run1 run2 run3p run4u
+07:682E,0E:05,run1 run2 run3p run4u
+07:684A,0E:07,run1 run2 run3p run4u
+07:6865,0E:07,run1 run2 run3p run4u
+07:6875,0E:08,run1 run2 run3p run4u
+07:68C3,0E:02,run1 run2 run3p run4u
+07:68D1,0E:08,run1 run2 run3p run4u
+07:68E2,0E:0A,run1 run2 run3p run4u
+07:6934,0E:0A,run1 run2 run3p run4u
+07:694A,0E:0B,run1 run2 run3p run4u
+07:6958,0E:17,run1 run2 run3p run4u
+07:6966,0E:11,run1 run2 run3p run4u
+07:6984,0E:11,run1 run2 run3p run4u
+07:6994,0E:02,run1 run2 run3p run4u
+07:699E,1E:00,run1 run2 run3p run4u
+07:6A3B,0E:13,run1 run2 run3p run4u
+07:6A56,0E:13,run1 run2 run3p run4u
+07:6A66,0E:14,run1 run2 run3p run4u
+07:6AB4,0E:02,run1 run2 run3p run4u
+07:6AC2,0E:14,run1 run2 run3p run4u
+07:6AD3,0E:16,run1 run2 run3p run4u
+07:6AE1,0E:16,run1 run2 run3p run4u
+07:6AF7,0E:20,run1 run2 run3p run4u
+07:6B15,0E:20,run1 run2 run3p run4u
+07:6B25,0E:02,run1 run2 run3p run4u
+07:6B2F,1E:00,run1 run2 run3p run4u
+07:6B38,0E:19,run1 run3p run4u
+07:6B46,0E:19,run1 run3p run4u
+07:6B80,0E:1A,run1 run4u
+07:6B91,0E:1E,run1 run2 run3p run4u
+07:6B9F,0E:1E,run1 run2 run3p run4u
+07:6BC9,0E:01,run1 run2 run3p run4u
+07:6C16,04:00,run1 run2 run3p run4u
+07:6C7B,04:01,run1 run2 run3p run4u
+07:6CC7,04:00,run1 run2 run3p run4u
+08:6A86,00:05,run1 run2 run3p run4u
+08:6A9B,00:05,run1 run2 run3p run4u
+08:6B45,00:05,run1 run2 run3p run4u
+08:6C13,00:05,run1 run2 run3p run4u
+08:6C3A,00:05,run1 run2 run3p run4u
+0F:4341,02:06,run1 run2 run3p run4u
+0F:4366,02:01,run1 run2 run3p run4u
+0F:436E,02:01,run1 run2 run3p run4u
+0F:438D,02:01,run1 run2 run3p run4u
+0F:4395,02:01,run1 run2 run3p run4u
+0F:43CC,07:02,run1 run2 run3p run4u
+0F:442F,0A:02,run1 run2 run3p run4u
+0F:4440,0A:02,run1 run2 run3p run4u
+0F:4464,1E:00,run1 run2 run3p run4u
+0F:446C,07:02,run1 run2 run3p run4u
+0F:4495,00:08,run1 run2 run3p run4u
+0F:449D,00:08,run1 run2 run3p run4u
+0F:44BE,02:09,run1 run2 run3p run4u
+0F:44FB,01:02,run1 run2 run3p run4u
+0F:4508,01:02,run1 run2 run3p run4u
+0F:451F,03:02,run1 run2 run3p run4u
+0F:4531,03:02,run1 run2 run3p run4u
+0F:454B,0A:02,run1 run2 run3p run4u
+0F:4558,0A:02,run1 run2 run3p run4u
+0F:4589,02:06,run1 run2 run3p run4u
+0F:4591,02:06,run1 run2 run3p run4u
+0F:45BF,1E:00,run1 run2 run3p run4u
+0F:45C7,1E:00,run1 run2 run3p run4u
+0F:4642,0B:04 0B:08 0F:05,run1 run2 run3p run4u
+0F:464A,0B:04 0B:08 0F:05,run1 run2 run3p run4u
+0F:4664,0B:04,run1 run2 run3p run4u
+0F:468B,03:03,run1 run2 run3p run4u
+0F:4698,0E:13 1E:00,run1 run2 run3p run4u
+0F:470D,10:05,run1 run2 run3p run4u
+0F:4715,10:05,run1 run2 run3p run4u
+0F:4731,10:05,run1 run2 run3p run4u
+0F:4734,10:05,run1 run2 run3p run4u
+0F:4759,01:05 02:09,run1 run2 run3p run4u
+0F:477C,02:06,run1 run2 run3p run4u
+0F:4788,02:06,run1 run2 run3p run4u
+0F:47B4,06:07,run1 run2 run3p
+0F:47BC,06:07,run1 run2 run3p
+0F:4846,02:0B,run1 run2 run3p run4u
+0F:4869,01:05,run1 run2 run3p run4u
+0F:4883,10:02,run1 run2 run3p run4u
+0F:48C1,10:02,run1 run2 run3p run4u
+0F:48E3,10:04,run1 run2 run3p run4u
+0F:48F0,10:04,run1 run2 run3p run4u
+0F:4A19,12:01,run1 run2 run3p run4u
+0F:4A43,0B:04,run1 run2 run3p run4u
+0F:4A53,0B:04,run1 run2 run3p run4u
+0F:4A6A,0B:04,run1 run2 run3p run4u
+0F:4A7A,0B:04,run1 run2 run3p run4u
+0F:4A9C,02:03,run1 run2 run3p run4u
+0F:4AA9,02:03,run1 run2 run3p run4u
+0F:4AC3,05:03 05:05,run1 run2 run3p run4u
+0F:4AD0,05:03 05:05,run1 run2 run3p run4u
+0F:4B12,02:01,run1 run2 run3p run4u
+0F:4B1F,02:01,run1 run2 run3p run4u
+0F:4B39,05:02,run1 run2 run3p run4u
+0F:4B46,05:02,run1 run2 run3p run4u
+0F:4BA3,1E:00,run1 run2 run3p run4u
+0F:4BAB,1E:00,run1 run2 run3p run4u
+0F:4C10,02:06 02:08,run1 run2 run3p run4u
+0F:4C18,02:06 02:08,run1 run2 run3p run4u
+0F:4C36,01:04,run1 run2 run3p run4u
+0F:4C44,01:05,run1 run2 run3p run4u
+0F:4D4F,05:06,run1 run2 run3p run4u
+0F:4E1E,03:0D,run1 run2 run3p run4u
+0F:4E2C,03:0D,run1 run2 run3p run4u
+0F:4E43,03:0B,run1 run2 run3p run4u
+0F:4E4B,03:0B,run1 run2 run3p run4u
+0F:4E6C,0B:08,run1 run2 run3p run4u
+0F:4E74,0B:08,run1 run2 run3p run4u
+0F:4EBE,03:02,run1 run2 run3p run4u
+0F:4ECA,03:0B,run1 run2 run3p run4u
+0F:4F28,03:02,run1 run2 run3p run4u
+0F:4F9D,1E:00,run1 run2 run3p run4u
+0F:4FB3,1E:00,run1 run2 run3p run4u
+0F:4FC5,01:06 1E:00,run1 run2 run3p run4u
+0F:4FEE,01:06 1E:00,run1 run2 run3p run4u
+0F:4FFC,06:21,run3p
+0F:5016,06:21,run3p
+0F:508E,06:05,run1 run2 run3p
+0F:50A7,06:05,run1 run2 run3p
+0F:5130,06:05,run1 run2 run3p
+0F:5140,06:21,run3p
+0F:5148,01:06 1E:00,run1 run2 run3p run4u
+0F:5150,1E:00,run1 run2 run3p run4u
+0F:5161,1E:00,run1 run2 run3p run4u
+0F:5236,00:08,run1 run2 run3p run4u
+0F:523A,00:05,run1 run2 run3p run4u
+0F:5249,00:08,run1 run2 run3p run4u
+0F:527C,00:05,run1 run2 run3p run4u
+0F:52A8,00:05,run1 run2 run3p run4u
+0F:52C8,00:05,run1 run2 run3p run4u
+0F:52E8,00:05,run1 run2 run3p run4u
+0F:5308,00:05,run1 run2 run3p run4u
+0F:5320,00:05,run1 run2 run3p run4u
+0F:5337,00:05,run1 run2 run3p run4u
+0F:536F,00:05,run1 run2 run3p run4u
+0F:537A,00:05,run1 run2 run3p run4u
+0F:5380,00:05,run1 run2 run3p run4u
+0F:5425,00:05,run1 run2 run3p run4u
+0F:5431,00:05,run1 run2 run3p run4u
+0F:543A,00:05,run1 run2 run3p run4u
+0F:5512,00:05,run1 run2 run3p run4u
+0F:5666,00:05 1E:00,run1 run2 run3p run4u
+0F:566F,00:05 1E:00,run1 run2 run3p run4u
