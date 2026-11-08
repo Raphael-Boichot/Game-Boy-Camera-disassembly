@@ -1,0 +1,14 @@
+{
+"jtables": {
+  "00:3821": {"table": "00:3822", "n": 32, "why": "00:380C `and $1F; sla a` masks the index to 0-31, then `ld hl,$3822; add hl,bc`, reads the word and `jp hl` at 00:3821: 32 words"}
+},
+"resolved": [
+  {"bank": "00", "addr": "06FC", "why": "ROM self-test (00:06F5-0726): D = 1..$3F, ld [$2000],a with A = D, then compares [$4000] and [$7FFF] with D; the banks are read as data, no code runs there"},
+  {"bank": "00", "addr": "073C", "why": "second pass of the same ROM self-test (00:0737-...), D = 1..$3F again: data reads only"},
+  {"bank": "00", "addr": "FFB6", "why": "call $FFB6 runs the OAM DMA stub copied at boot by 00:01A1-01AC from 00:0317 (10 bytes: ld a,$C0; ldh [$46],a; wait; ret) into HRAM $FFB6"},
+  {"bank": "00", "addr": "060C", "why": "call 00:0780 selects bank 2 (ld a,2; ld [$2000],a at 00:0789) to copy tiles and a map and does not restore: the context the caller carries is then wrong, but no banked call or jump follows anywhere (the trace resolves none), so no target depends on it"},
+  {"bank": "00", "addr": "09B3", "why": "same callee 00:0780 as 00:060C"},
+  {"bank": "00", "addr": "0DA7", "why": "same callee 00:0780 as 00:060C"},
+  {"bank": "00", "addr": "10A4", "why": "call 00:32E3 selects a bank without restoring it; as for 00:060C, no banked call or jump depends on the context"}
+]
+}

@@ -10,6 +10,9 @@ What it checks (each line of the report is one check)
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
   maps       the layout maps of the Gold, Hello Kitty and prototype ROMs exist and the README shows them; with --rom-gold / --rom-kitty / --rom-proto they are redrawn and compared
   trees      the screen trees of the Japanese, international and Hello Kitty ROMs (tools/make_screen_trees.py) are redrawn and compared, and README.md shows them; the reachability maps are shown in the README of their ROM folder, not in README.md
+  proto      roms/prototype_debagame (--rom-proto, the image as dumped): the symbol-table CSV, trace, types, copy sites, byte classes, names and
+             pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
+             and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix
   port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
@@ -381,6 +384,51 @@ if A.rom_kitty:
                 if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the %s of the reachability map (need=%s)' % (what, pat))
                 elif int(mm.group(1).replace(',', '')) != int(val): bad('kitty', 'roms/hello_kitty/README.md: %s quoted %s, tools/kitty_reach_map.py gives %s' % (what, mm.group(1), val))
     shutil.rmtree(tk, ignore_errors=True)
+# ------------------------------------------------------------------ the early prototype (image as dumped): L1 pipeline (SETUP.md, prototype)
+if A.rom_proto:
+    PD = 'roms/prototype_debagame/'; tp = tempfile.mkdtemp(prefix='proto_')
+    def _runp(*cmd): return subprocess.run([sys.executable] + list(cmd), capture_output=True, text=True)
+    j = lambda n: os.path.join(tp, n)
+    p0 = _runp('tools/proto_symtab.py', A.rom_proto, '--out', j('st.csv'))
+    p1 = _runp('tools/proto_trace.py', A.rom_proto, j('t.json'), '--roots', PD + 'disasm/extra_roots_proto.json', '--report', j('u.md')) if not p0.returncode else p0
+    p2 = _runp('tools/proto_types.py', A.rom_proto, j('t.json'), '--types', j('ty.csv'), '--sites', j('cs.csv'), '--rommap', j('rm.csv'),
+               '--names', j('na.csv'), '--symtab', j('st.csv')) if not p1.returncode else p1
+    p3 = _runp('tools/sym_build.py', A.rom_proto, '--names', j('na.csv'), '--types', j('ty.csv'), '--trace', j('t.json'),
+               '--out', j('p.sym'), '--report') if not p2.returncode else p2
+    if p3.returncode: bad('proto', 'the prototype pipeline failed: %s' % (p3.stderr or p3.stdout)[-300:])
+    else:
+        stale = [f for f, g in (('disasm/leftover_symtab_proto.csv', 'st.csv'), ('port/trace_proto.json', 't.json'), ('port/trace_proto_unresolved.md', 'u.md'),
+                                ('disasm/sym_types_proto.csv', 'ty.csv'), ('assets/copy_sites_proto.csv', 'cs.csv'), ('port/rom_map_proto.csv', 'rm.csv'),
+                                ('disasm/sym_names_proto.csv', 'na.csv'), ('pocketcamera_proto.sym', 'p.sym'))
+                 if not os.path.exists(PD + f) or open(PD + f, 'rb').read() != open(j(g), 'rb').read()]
+        if stale: bad('proto', 'not what the prototype pipeline makes today (SETUP.md, prototype): %s' % ', '.join(stale))
+        else: ok('proto', 'symbol tables, trace, types, copy sites, byte classes, names and pocketcamera_proto.sym fresh')
+        PR = rd(PD + 'README.md')
+        m1 = re.search(r'proto_trace: (\d+) instructions, (\d+) code bytes, (\d+) inline table bytes, (\d+) banked calls / jumps resolved, (\d+) unresolved', p1.stdout)
+        m2 = re.search(r'proto_types: .*?\((\d+) text bytes in (\d+) rows', p2.stdout)
+        m3 = re.search(r'bytes by type: (\{.*\})', p3.stdout); m4 = re.search(r'still on the default typing \(\.data, 16 per row\): (\d+)', p3.stdout)
+        BYP = eval(m3.group(1)); typedp = BYP['data'] - int(m4.group(1))
+        for what, val, pat in (('instructions', int(m1.group(1)), r'([\d,]+) instructions'), ('code bytes', int(m1.group(2)), r'([\d,]+) bytes of proven code'),
+                               ('unresolved', int(m1.group(5)), r'([\d,]+) indirect sites left unresolved'), ('padding', BYP['padding'], r'([\d,]+) bytes of padding'),
+                               ('text', BYP['text'], r'([\d,]+) bytes of leftover text'), ('text rows', int(m2.group(2)), r'leftover text in ([\d,]+) blocks'),
+                               ('typed data', typedp, r'([\d,]+) bytes of data typed by a reason'), ('default data', int(m4.group(1)), r'([\d,]+) bytes of data on the default typing')):
+            mm = re.search(pat, PR)     # need= the L1 section of roms/prototype_debagame/README.md
+            if not mm: bad('proto', 'roms/prototype_debagame/README.md no longer quotes the %s (need=%r)' % (what, pat))
+            elif int(mm.group(1).replace(',', '')) != val: bad('proto', 'roms/prototype_debagame/README.md: %s quoted %s, the tools give %d' % (what, mm.group(1), val))
+        if A.roundtrip:      # the image as dumped rebuilds only without rgbfix (its header was never fixed: prototype README, L0)
+            rt = tempfile.mkdtemp(prefix='protort_'); shutil.copy(A.rom_proto, os.path.join(rt, 'pocketcamera_proto.gb')); shutil.copy(PD + 'pocketcamera_proto.sym', rt)
+            r_ = subprocess.run([sys.executable, '/home/claude/tc/mgbdis/mgbdis.py', '--output-dir', os.path.join(rt, 'out'), os.path.join(rt, 'pocketcamera_proto.gb')], capture_output=True, text=True)
+            if not r_.returncode:
+                mk = os.path.join(rt, 'out', 'Makefile'); txt_ = open(mk).read().split('\n')
+                open(mk, 'w').write('\n'.join(l for l in txt_ if not l.strip().startswith('rgbfix')))
+            env_ = dict(os.environ, PATH='/home/claude/tc/rgbds:' + os.environ.get('PATH', ''))
+            r_ = subprocess.run(['make'], cwd=os.path.join(rt, 'out'), capture_output=True, text=True, env=env_) if not r_.returncode else r_
+            gb = os.path.join(rt, 'out', 'game.gb')
+            md = hashlib.md5(open(gb, 'rb').read()).hexdigest() if os.path.exists(gb) else 'none'
+            if md != '19b50a5f67ef4f0d015e7d813370756e': bad('proto', 'round trip with pocketcamera_proto.sym (no rgbfix): md5 %s' % md)
+            else: ok('proto', 'round trip with pocketcamera_proto.sym (no rgbfix): md5 %s' % md)
+            shutil.rmtree(rt, ignore_errors=True)
+    shutil.rmtree(tp, ignore_errors=True)
 # ------------------------------------------------------------------ sym + types (needs the ROM)
 LINES = BLOCKS = None; BYTES = {}
 if A.rom:

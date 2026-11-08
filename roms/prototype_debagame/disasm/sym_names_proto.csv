@@ -1,0 +1,24 @@
+bank,addr,name,conf,note,source
+00,0317,Data_00_0317,C,OAM DMA routine copied to HRAM $FFB6 at boot (00:01A1); called as $FFB6,proto_types
+00,04DF,Data_00_04DF,C,copied (wram) by 00:04DB,proto_types
+00,197D,Data_00_197D,C,copied (wram) by 00:12B8,proto_types
+00,1CFD,Data_00_1CFD,C,copied (wram) by 00:1BC3,proto_types
+00,1D15,Data_00_1D15,C,copied (wram) by 00:1C2D,proto_types
+00,1D25,Data_00_1D25,C,copied (wram) by 00:1C20,proto_types
+00,1D35,Data_00_1D35,C,copied (wram) by 00:1C04,proto_types
+00,1D49,Data_00_1D49,C,copied (wram) by 00:1C5B,proto_types
+00,3822,JumpTable_00_3822,C,word table of the jump at 00:3821 (index masked to 0-31 at 00:380C),proto_types
+01,4001,Gfx_01_4001,C,"Gfx: 2bpp tiles copied to VRAM by 00:04C3, 00:0560",proto_types
+01,5801,Map_01_5801,C,Map: tile-map rows copied to the BG map by 00:04CF,proto_types
+01,5A41,Map_01_5A41,C,Map: tile-map rows copied to the BG map by 00:056C,proto_types
+02,4001,Gfx_02_4001,C,"Gfx: 2bpp tiles copied to VRAM by 00:06C0, 00:0797, 00:094E, 00:0A85, 00:0D57, 00:19C9",proto_types
+02,5801,Map_02_5801,C,Map: tile-map rows copied to the BG map by 00:06CC,proto_types
+02,5A41,Map_02_5A41,C,Map: tile-map rows copied to the BG map by 00:07A3,proto_types
+02,5C81,Map_02_5C81,C,Map: tile-map rows copied to the BG map by 00:095A,proto_types
+02,5EC1,Map_02_5EC1,C,Map: tile-map rows copied to the BG map by 00:0A91,proto_types
+02,6101,Map_02_6101,C,Map: tile-map rows copied to the BG map by 00:0D63,proto_types
+02,6341,Map_02_6341,C,Map: tile-map rows copied to the BG map by 00:19D5,proto_types
+03,4001,Gfx_03_4001,C,"Gfx: 2bpp tiles copied to VRAM by 00:0EBF, 00:1D7D, 00:3217",proto_types
+03,5801,Map_03_5801,C,"Map: tile-map rows copied to the BG map by 00:0ECB, 00:1D89, 00:3223",proto_types
+03,5A41,Gfx_03_5A41,C,Gfx: 2bpp tiles copied to VRAM by 00:1291,proto_types
+03,7241,Map_03_7241,C,Map: tile-map rows copied to the BG map by 00:129D,proto_types
