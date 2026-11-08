@@ -368,6 +368,13 @@ if A.rom_kitty:
         elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: unused assets quoted %s, the table gives %s' % (mm.groups(), want))
         elif not os.path.exists(KD + 'assets/unused_assets_kitty.png'): bad('kitty', 'assets/unused_assets_kitty.png missing')
         else: ok('kitty', 'unused-asset table and its README quote agree (%d items)' % len(_ua))
+        # the never-read sprite layouts (tools/kitty_sprite_layouts.py): its counts quoted in the Kitty README
+        _sl = list(csv.DictReader(open(KD + 'assets/sprite_layouts_unread_kitty.csv', encoding='utf-8'))); _sc = collections.Counter(r['class'] for r in _sl)
+        mm = re.search(r'([\d,]+) layouts \(([\d,]+) bytes\) are never read in the runs.*?; (\d+) are named only by object scripts of bank `\$02` that no run started.*?, (\d+) by words that a run read.*?, (\d+) only from code, (\d+) by nothing', open(KD + 'README.md', encoding='utf-8').read(), re.S)   # need= the sprite-layout paragraph
+        want = (len(_sl), sum(int(r['bytes']) for r in _sl), _sc['unread-data-ref'], _sc['read-ref'], _sc['code-ref'], _sc['none'])
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/sprite_layouts_unread_kitty.csv (need=N layouts (B bytes) are never read in the runs ... a ... b ... c only from code, d by nothing)')
+        elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: sprite layouts quoted %s, the table gives %s' % (mm.groups(), want))
+        else: ok('kitty', 'never-read sprite layouts quoted as in the table (%d)' % len(_sl))
         # the doubts list (tools/kitty_doubts.py): fresh, and its counts quoted in the Kitty README
         r7 = _run('tools/kitty_doubts.py', '--check')
         if r7.returncode: bad('kitty', 'disasm/sym_unconclusive_kitty.{csv,md}: %s (rerun tools/kitty_doubts.py)' % (r7.stderr or r7.stdout).strip()[-300:])

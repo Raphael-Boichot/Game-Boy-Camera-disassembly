@@ -1,0 +1,155 @@
+layout,entries,bytes,class,words_equal_to_its_address
+03:4000,25,100,read-ref,00:0412x 00:0459x 00:17FFx 00:1B7Fx 00:1BC9x 00:1C59r 00:1D24r 00:1D86r 00:236Cx 00:2393x 00:23C8x 00:25C6x
+03:4064,25,100,none,
+03:40C8,10,40,read-ref,02:40CE 07:572Ar
+03:40F0,10,40,read-ref,00:0008r 00:0375x 02:40F6 03:58ADr 03:591Dr 03:5955r 03:598Dr 03:59C5r 03:59FDr 03:5A35r 03:6159r 03:6171r
+03:41AC,37,148,read-ref,02:401A 02:41B2r 02:504Dr
+03:44B4,30,120,unread-data-ref,02:404A
+03:466C,37,148,unread-data-ref,02:406A
+03:4898,18,72,none,
+03:49A8,10,40,unread-data-ref,02:40C2 02:53C3
+03:5160,4,16,read-ref,02:4336 05:53FBr
+03:5170,4,16,unread-data-ref,02:433A
+03:5180,4,16,read-ref,00:1C4Dr 02:433E 07:41DDr 07:420Dr 07:4255r 07:4291r 07:42CDr 07:42E5r 07:42FDr 07:4ABEr 07:4B1Er 07:4B2Ar
+03:5190,4,16,unread-data-ref,02:4342
+03:51A0,4,16,unread-data-ref,02:4346
+03:51B0,4,16,unread-data-ref,01:5100 01:51B8 02:434A
+03:5208,9,36,read-ref,02:4372 03:43CDr 03:6551 03:6735 03:6789 03:67D1
+03:522C,9,36,unread-data-ref,02:4376
+03:5280,6,24,read-ref,01:52B2r 02:4386 02:438E
+03:5298,6,24,unread-data-ref,02:438A
+03:52B0,6,24,unread-data-ref,02:439E
+03:52C8,6,24,unread-data-ref,02:43A2
+03:52F0,4,16,read-ref,02:43B6 03:6CF0 03:6D5C 06:55D9r
+03:5300,4,16,read-ref,01:6171r 01:64E1 02:43AE 02:43BE 05:4DB9r 05:5391r
+03:5310,18,72,read-ref,03:43C9r 05:4311x 05:6B31r
+03:5BF0,8,32,unread-data-ref,02:457A
+03:5C10,9,36,read-ref,02:457E 03:6109r 03:611Dr 03:653D 03:657D 03:65C5 03:6631 03:6661 03:66A9 03:6709 03:6721
+03:5C34,9,36,unread-data-ref,02:4582
+03:5C58,9,36,read-ref,00:3E16r 02:4586 02:458E 02:4596
+03:5C7C,8,32,unread-data-ref,02:458A 02:4592
+03:5C9C,8,32,read-ref,02:459E 04:4139r
+03:5CBC,8,32,unread-data-ref,02:45A2
+03:5CDC,8,32,read-ref,02:45A6 06:5D97r
+03:5CFC,8,32,unread-data-ref,02:45AA 02:45B2 02:45BA
+03:5D1C,8,32,unread-data-ref,02:45AE 02:45B6 03:69DD
+03:5D70,13,52,unread-data-ref,02:45C6
+03:60C4,1,4,read-ref,02:4672 05:6177r 07:56A2r
+03:60C8,1,4,read-ref,02:4676 02:60FCr 02:6102r 02:6108r 02:610Er 02:6134r 02:613Ar 02:6140r 02:6146r 07:5722r
+03:60CC,1,4,read-ref,02:467E 07:57A2r
+03:60D0,1,4,unread-data-ref,02:4682
+03:60D4,1,4,unread-data-ref,02:468A
+03:60D8,1,4,unread-data-ref,02:468E
+03:60DC,1,4,unread-data-ref,02:4696
+03:60E0,1,4,read-ref,02:469A 03:74A1r
+03:61E0,7,28,read-ref,00:39C1r 02:7650 02:7658 02:7694
+03:61FC,7,28,read-ref,02:7654 02:7698 03:4BF9r
+03:6218,7,28,unread-data-ref,02:7660 02:7668
+03:6234,7,28,unread-data-ref,02:7664
+03:6250,7,28,unread-data-ref,02:7604 02:7608 02:7624 02:7634 02:7678 02:76F5 02:7779
+03:626C,7,28,unread-data-ref,02:7628 02:7630 02:767C
+03:6288,7,28,unread-data-ref,02:762C 02:7680
+03:62A4,7,28,code-ref,02:7638 02:7640 05:72B6x
+03:62C0,7,28,unread-data-ref,02:763C
+03:62FC,8,32,read-ref,02:76B1 02:76BD 02:76C5 03:5129r 03:5A79r
+03:633C,8,32,unread-data-ref,02:7769
+03:635C,8,32,unread-data-ref,02:776D
+03:639C,8,32,unread-data-ref,02:777D 02:7785 02:778D
+03:63BC,8,32,unread-data-ref,02:7781 02:7789
+03:63DC,8,32,unread-data-ref,02:76D5 02:76DD
+03:641C,8,32,unread-data-ref,02:7701
+03:643C,8,32,unread-data-ref,02:7709
+03:6524,18,72,unread-data-ref,02:475A 02:4776
+03:656C,18,72,unread-data-ref,02:472A 02:473A
+03:65B4,18,72,unread-data-ref,02:472E 02:4736
+03:65FC,17,68,unread-data-ref,02:4732
+03:6640,18,72,read-ref,02:4742 02:4752 02:5DD1r 02:5E28r 05:5435r
+03:6688,18,72,unread-data-ref,02:4746 02:474E
+03:66D0,17,68,unread-data-ref,02:474A
+03:6714,18,72,unread-data-ref,02:4762
+03:675C,18,72,unread-data-ref,02:476A
+03:67A4,18,72,unread-data-ref,02:4772
+03:67EC,28,112,unread-data-ref,02:477E 02:7E12
+03:685C,28,112,read-ref,02:4786 02:5C2Br 02:7E16
+03:68CC,40,160,unread-data-ref,02:478A 02:7E25
+03:696C,24,96,unread-data-ref,02:4792 02:479A 04:5EEA
+03:69CC,24,96,unread-data-ref,02:4796
+03:6A2C,26,104,unread-data-ref,02:479E
+03:6A94,24,96,unread-data-ref,02:47A6 02:47AE
+03:6AF4,24,96,unread-data-ref,02:47AA
+03:6B54,26,104,unread-data-ref,02:47B2
+03:6BBC,4,16,unread-data-ref,02:47C2
+03:6BCC,4,16,code-ref,01:6C30x 01:6CBDx 01:6CDAx 01:6D0Fx 02:47BE 02:47C6
+03:6BDC,4,16,unread-data-ref,02:47BA
+03:6BEC,14,56,unread-data-ref,02:47CE 02:47DA
+03:6C24,14,56,unread-data-ref,02:47D6 02:47DE 02:47E6
+03:6C5C,2,8,read-ref,00:3CC5r 02:4812 02:6B16x
+03:6C64,2,8,read-ref,00:3D8Cr 02:4816
+03:6C6C,1,4,unread-data-ref,02:481A
+03:6C70,1,4,read-ref,02:481E 05:69E7r
+03:6C74,14,56,unread-data-ref,02:47EE 02:47F6 02:47FE 02:4806
+03:6CAC,14,56,read-ref,02:47F2 02:47FA 02:4802 02:480A 04:4135r
+03:6CE4,20,80,unread-data-ref,00:1E78 02:4832
+03:6D34,20,80,unread-data-ref,00:1E62 02:4846
+03:6D84,8,32,unread-data-ref,00:1E56 00:1E6C 02:4826 02:483A
+03:6DA4,12,48,unread-data-ref,00:1E5A 00:1E70 02:482A 02:483E
+03:6DD4,16,64,read-ref,00:1E5E 00:1E74 02:482E 02:4842 02:6DFCr
+03:6EB8,4,16,unread-data-ref,02:4896
+03:6EC8,4,16,unread-data-ref,02:489A 02:48A2
+03:6ED8,4,16,unread-data-ref,02:489E
+03:6FB4,5,20,unread-data-ref,02:48EE
+03:6FC8,2,8,read-ref,02:48F6 02:6F6Er 02:6F78r
+03:6FD0,4,16,unread-data-ref,02:48FE
+03:6FE0,6,24,unread-data-ref,02:4906
+03:6FF8,8,32,unread-data-ref,02:490E
+03:7018,10,40,unread-data-ref,02:4916
+03:7040,12,48,read-ref,01:53A0r 02:491E
+03:7070,14,56,read-ref,01:5298r 01:5370r 02:4926 06:4076x
+03:70A8,16,64,unread-data-ref,02:492E
+03:70E8,4,16,read-ref,02:4936 03:5FF1r
+03:70F8,8,32,read-ref,02:493E 03:453Dr 03:4985r 03:6911
+03:7118,12,48,unread-data-ref,02:4946
+03:7188,2,8,unread-data-ref,02:4956
+03:7190,4,16,read-ref,01:53E6r 02:495E 02:71D8r
+03:71A0,6,24,unread-data-ref,02:4966
+03:71B8,8,32,unread-data-ref,02:496E
+03:71D8,10,40,read-ref,02:4976 02:71E0r
+03:7200,12,48,read-ref,01:542A 01:61BFr 01:6203r 01:652F 02:497E 02:599Er 02:5A01 02:7316 03:4981r 03:60D5 07:5AE1r 07:5AEBr
+03:7230,14,56,unread-data-ref,02:4986
+03:7268,16,64,unread-data-ref,02:498E
+03:72A8,1,4,unread-data-ref,02:4996
+03:72AC,2,8,unread-data-ref,02:499E 02:72B6
+03:72B4,3,12,unread-data-ref,02:49A6
+03:72C0,4,16,unread-data-ref,02:49AE
+03:72E4,6,24,unread-data-ref,02:49BE
+03:72FC,7,28,unread-data-ref,02:49C6
+03:7318,8,32,unread-data-ref,02:49CE
+03:7338,2,8,unread-data-ref,02:49D6
+03:7340,4,16,unread-data-ref,02:49DE
+03:7350,6,24,read-ref,01:6A7Cr 01:6B3Ax 02:49E6 05:49B4r 05:4B35r 05:6BB1r 05:7337r 05:7442r 05:751Dr 06:419F 06:6781 06:6B0C
+03:7368,8,32,unread-data-ref,02:49EE
+03:7388,1,4,unread-data-ref,02:49F6
+03:738C,2,8,unread-data-ref,02:49FE
+03:7394,3,12,unread-data-ref,02:4A06
+03:73A0,4,16,read-ref,02:4A0E 05:6A05r
+03:73C4,6,24,unread-data-ref,02:4A1E
+03:73DC,7,28,unread-data-ref,02:4A26
+03:73F8,8,32,unread-data-ref,02:4A2E
+03:74A4,41,164,none,
+03:7548,41,164,read-ref,05:69F0r
+03:75EC,41,164,none,
+03:7690,41,164,none,
+03:7734,41,164,none,
+03:77D8,41,164,code-ref,00:16D4x
+03:787C,41,164,none,
+03:7920,41,164,code-ref,06:5862x 06:58BE 06:5E9C
+03:79C4,41,164,none,
+03:7A68,41,164,none,
+03:7B0C,41,164,none,
+03:7BB0,41,164,none,
+03:7C54,41,164,none,
+03:7CF8,41,164,unread-data-ref,03:68E1
+03:7D9C,41,164,none,
+03:7E40,41,164,read-ref,00:0BFCr 00:0C02r 00:0C08r 00:0C0Er 00:0C14r 00:0C1Ar 00:0C20r 00:1D25r 01:683Dx 01:69E6r 01:69ECr 01:69F2r
+03:7EE4,41,164,none,
+03:7F88,30,120,none,
