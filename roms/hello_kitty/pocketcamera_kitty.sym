@@ -383,7 +383,7 @@
 01:67d0 Data_01_67D0
 01:67d4 Number_DrawTwoDigits
 01:67f6 Number_DrawDigit
-01:680c PrintMenu_DrawCount
+01:680c PrintGame_DrawAppleCount
 01:6832 Number_DrawTallDigit
 01:684c PrintFrame_Select
 01:687d Data_01_687D
@@ -994,7 +994,7 @@
 05:47b1 Mode01_State06
 05:47cc Mode01_MainMenu
 05:47d7 Mode01_StateTable
-05:47e5 TakePhotos_SetPlaneMasks
+05:47e5 Unused_TakePhotos_SetPlaneMasks
 05:498e Mode02_State00
 05:49b4 Data_05_49B4
 05:49be Data_05_49BE
@@ -1026,7 +1026,7 @@
 05:4cd9 Data_05_4CD9
 05:4ceb Data_05_4CEB
 05:4cf4 Mode02_State0A
-05:4d10 Mode02_State0C
+05:4d10 Unused_Mode02_State0C
 05:4d21 Data_05_4D21
 05:4dc1 TakePhotos_LoadFrameTiles
 05:4e10 Data_05_4E10
@@ -1336,12 +1336,12 @@
 06:5f7f Data_06_5F7F
 06:5f95 KeyPrompt_LoadSounds
 06:5ff8 KeyPrompt_LoadSoundsB
-06:605b Unused_Link_SumSlotBuffer
+06:605b Link_SumSlotBuffer
 06:6079 Link_CountdownDA00
 06:6086 Counters_AddReceived
 06:60b8 Exchange_RequestPage
-06:6134 Gfx16_CopyByIndex
-06:6168 Tiles_Fill9000From1778
+06:6134 PhotoTrain_LoadPageMap
+06:6168 PhotoTrain_FillEmptyTiles
 06:6198 Mode07_State00
 06:61b2 Data_06_61B2
 06:61bc Data_06_61BC
@@ -1360,7 +1360,7 @@
 06:66c3 Mode08_State04
 06:66cf Mode08_State05
 06:66f4 Mode08_State03
-06:671c Mode08_AlbumPhotoTrain
+06:671c Mode08_ExchangePhotoTrain
 06:6727 Mode08_StateTable
 06:6733 Mode09_State00
 06:6749 Mode09_State01
@@ -1427,7 +1427,7 @@
 07:450b CameraFrame_Type28
 07:450d CameraFrame_Type29
 07:450f CameraFrame_Type30
-07:4511 CameraFrame_StubAfterTable
+07:4511 CameraFrame_Type31
 07:4513 CameraFrame_Type04
 07:452e CameraFrame_Type05
 07:453f CameraFrame_Type06
@@ -1521,8 +1521,8 @@
 07:541f Mode11_StateTable
 07:543d StrawberryCh_FrameCallbackA
 07:546a Data_07_546A
-07:5477 StrawberryCh_FrameCallbackB
-07:54b8 StrawberryCh_FrameCallbackC
+07:5477 StrawberryCh_LockedCallback
+07:54b8 StrawberryCh_LockedNoticeCallback
 07:550a Data_07_550A
 07:5528 Data_07_5528
 07:5550 Data_07_5550

@@ -3,26 +3,14 @@ bank,addr,group,why,settle
 06,40A7,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
 06,410D,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
 06,41FE,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
-06,671C,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
-06,6CEC,forced only,the mode table entry runs only when the mode byte hFF8D is forced; the linked BGB exchange did not reach it,a key path or a save that reaches the mode in BGB
 06,6D96,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
 07,4079,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
 07,4137,forced only,the mode table entry runs only when the mode byte hFF8D is forced; the printing fruit game itself runs in mode $06 state $1B,a key path or a save that reaches the mode in BGB
 07,41BF,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
 07,4A94,forced only,the mode table entry runs only when the mode byte hFF8D is forced,a key path or a save that reaches the mode in BGB
-06,5FF8,forced only,called only from mode $09 (state $0C),mode $09 reached in BGB
-06,60B8,forced only,called only from mode $08 (states $01 and $03),mode $08 reached in BGB
-06,6134,forced only,called only from mode $08 (state $00),mode $08 reached in BGB
-06,6168,forced only,called only from mode $08 (state $00),mode $08 reached in BGB
-06,69D5,forced only,called only from mode $09 (states $08 and $09),mode $09 reached in BGB
-06,6CBB,forced only,called only from mode $09 (states $06 and $0F),mode $09 reached in BGB
-01,680C,not run,called from printing (mode $06 state $23) only; the state was not reached in the core or BGB runs; the code fixes the drawing but not what the count is,a BGB print run that reaches mode $06 state $23 (watchpoint on $D94F)
-01,6941,not run,called from printing (mode $06 state $15) only; the state was not reached; which print uses the two sides is not known,a BGB print run that reaches mode $06 state $15
-01,6969,not run,called from printing (mode $06 states $15 and $1C) only; the states were not reached,a BGB print run that reaches mode $06 state $15 or $1C and a look at the printed picture
-05,47E5,not run,called from the camera (mode $02 state $0C) only; the state was not reached; the role of the masks comes from the loop that follows,a BGB run that reaches mode $02 state $0C
-07,4511,not run,a jr into CameraFrame_Type00to03 like the type stubs 07:4503-450F but one place after the end of the type table 07:449C; the words $4511 at 07:4104 / 07:44DA / 07:6C65 are not shown to be pointers to it,a read of the three words in their code (operand or pointer) or a BGB execution watchpoint
-07,5477,not run,set as the frame callback (ld de) by Strawberry Channel states that the runs did not reach (07:5042 / 07:5169 / 07:54F0),a BGB run of the Strawberry Channel that reaches those states
-07,54B8,not run,set as the frame callback by one Strawberry Channel state that the runs did not reach (07:54AF),a BGB run of the Strawberry Channel that reaches that state
+06,5FF8,not run,called only from mode $09 state $0C; the linked BGB exchange went through states $0A / $0E / $0F / $10 of the receiving unit and $01-$07 of the giving one, not $0C,a linked BGB exchange that completes
 06,411C,unused,mode $18: no constant mode change and no saved return mode leads to it (195 mode-change calls checked; README),final
 06,4167,unused,state $01 of mode $18 (unused like its mode),final
 06,4176,unused,the mode table entry of mode $18 (unused),final
+05,47E5,unused,called only by Mode02_State0C; nothing enters that state (byte search: no store of state $0C for mode $02 and no ModeState_Set / inline / saved return with (2; $0C)),final
+05,4D10,unused,state $0C of mode $02: nothing enters it (byte search: no store of state $0C for mode $02 and no ModeState_Set / inline / saved return with (2; $0C)),final

@@ -8,6 +8,7 @@ frames (or the --play pattern of held keys, repeated, to play the game shown whi
 on 127.0.0.1:8793; BGB writes the screen and state at the end, the helper the printed pages. Default path: take a photo
 (title A, Take A, shutter A) and print it (START on the photo-taken screen). Writes OUT_DIR/print_NNNNN.png (screen after N
 frames), modes.csv (frames, mode, state) and OUT_DIR/run_NNNNN/ (the helper's printer_log.json and page_NN.png).
+With BGB_WP set (a BGB -wp list, as tcrf_check/tools/bgb_run.py takes it) the run logs the watchpoint hits into run_NNNNN/debugmsg.txt.
 """
 import sys, os, csv, argparse, subprocess, shutil, time
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
@@ -19,7 +20,7 @@ ap.add_argument('--path', default='A A A Start'); ap.add_argument('--frames', de
 ap.add_argument('--play', default=None); ap.add_argument('--port', type=int, default=8793)
 a = ap.parse_args(); os.makedirs(a.out, exist_ok=True)
 BIT = dict(A=1, B=2, Select=4, Start=8, Right=0x10, Left=0x20, Up=0x40, Down=0x80)
-bgb = '/home/claude/bgbx_print'
+bgb = os.environ.get('KITTY_BGB_DIR', '/home/claude/bgbx_print')      # a second folder (and --port) lets two runs work at once
 if not os.path.exists(bgb): shutil.copytree('/home/claude/bgbx', bgb)
 pre = bytes(703) + b''.join(bytes([BIT[k]]) * 8 + bytes(90) for k in a.path.split())
 play = b''
@@ -27,6 +28,7 @@ if a.play:
     for item in a.play.split(','):
         k, n = item.split(':'); play += bytes([BIT[k]]) * int(n)
 rows = []
+if os.environ.get('BGB_WP') and os.path.exists(bgb + '/debugmsg.txt'): os.remove(bgb + '/debugmsg.txt')
 for n in [int(x) for x in a.frames.split(',')]:
     tail = (play * (n // max(len(play), 1) + 1))[:n] if play else bytes(n)
     d = os.path.join(a.out, 'run_%05d' % n); os.makedirs(d, exist_ok=True)
@@ -34,8 +36,9 @@ for n in [int(x) for x in a.frames.split(',')]:
     srv = PrinterServer(a.port, d).start(); time.sleep(1)
     subprocess.run(['xvfb-run', '-a', 'wine', bgb + '/bgb.exe', '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', bgb + '/bgb.ini', '-rom', os.path.abspath(a.rom),
                     '-demoplay', d + '/s.dem', '-screenonexit', d + '/s.bmp', '-stateonexit', d + '/s.sna', '-loadbatt', d + '/s.sav',
-                    '-connect', '127.0.0.1:%d' % a.port], env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
+                    '-connect', '127.0.0.1:%d' % a.port] + (['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1'] if os.environ.get('BGB_WP') else []), env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
     srv.stop()
+    if os.environ.get('BGB_WP') and os.path.exists(bgb + '/debugmsg.txt'): shutil.move(bgb + '/debugmsg.txt', d + '/debugmsg.txt')
     try: srv.write_log()
     except Exception: pass
     h = read_state(d + '/s.sna').get('HRAM', b'') if os.path.exists(d + '/s.sna') else b''

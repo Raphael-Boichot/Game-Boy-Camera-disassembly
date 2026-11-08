@@ -7,7 +7,7 @@ mode,04,UI,PlayMenu
 mode,05,EDIT,StampWindow
 mode,06,PRINT,Printing (with the fruit game while the printer works)
 mode,07,LINK,Exchange: give / receive
-mode,08,ALBUM,AlbumPhotoTrain
+mode,08,LINK,ExchangePhotoTrain: the photo to give, chosen on the photo train
 mode,09,LINK,ExchangeCommunicating
 mode,0A,UI,NameCard
 mode,0B,UI,NameCardEdit

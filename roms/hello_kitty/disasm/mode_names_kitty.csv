@@ -7,8 +7,8 @@ mode,name,tag,evidence
 05,StampWindow,C,forced BGB screen (stamp window); reached in the core runs (from the album)
 06,Printing,C,"BGB screens with the printer helper on the link (06:1F please wait, 06:21, 06:24 the fruit game); forced alone it shows an empty frame"
 07,Exchange,C,BGB screen 07:02 (give / receive)
-08,AlbumPhotoTrain,I,forced BGB screen (album pages drawn as a photo train)
-09,ExchangeCommunicating,I,forced BGB screen (communicating message)
+08,ExchangePhotoTrain,C,BGB linked exchange (two units): the giving unit chooses its photo on the photo train (states $00-$05)
+09,ExchangeCommunicating,C,BGB linked exchange (two units): giving states $01-$05, receiving states $08-$0E
 0A,NameCard,C,BGB screens 0A:01 (the finished card) and 0A:02 (change / print / cancel)
 0B,NameCardEdit,C,BGB screens 0B:04 / 08 / 0A / 0C / 0E / 10 (photos, name, blood type, birthday, boy or girl)
 0C,RecordBook,C,BGB screen 0C:01 (photo counters and Kitts)

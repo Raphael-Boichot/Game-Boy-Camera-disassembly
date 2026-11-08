@@ -8,12 +8,14 @@ mode,state,name,tag,evidence
 03,02,View photos: album,C,BGB screenshot (binder page with the side tools; reached by みる)
 04,01,Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel,C,BGB screenshot (スクラッチカード 15パズル スライドショー いちごチャンネル)
 05,06,Stamp window (stamps on a photo),I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+06,03,Printing: choose the print frame (Left / Right),C,BGB screenshot (the photo in one of six print frames; reached from the print icon of the album)
+06,0A,Printing: START photo and album page / A photo / B cancel,C,BGB screenshot (START プリント A プリント B やめる)
 06,1F,Printing: please wait (A spin / B cancel),C,BGB screenshot with the printer helper (まってね; A くるくる B やめる)
 06,21,Printing: the car drives off,C,BGB screenshot with the printer helper
 06,24,Printing: catch the falling fruits to earn Kitts,C,BGB screenshot with the printer helper kept busy (プリントちゅう; record and Kitts won at the top right)
 07,02,Exchange: give or receive,C,BGB screenshot (あげる <-> もらう)
-08,02,Album pages as a photo train,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-09,05,"Exchange: sending / receiving (""communicating"")",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+08,02,Exchange: pick the photo to give (photo train),C,BGB linked exchange (two units): the giving unit
+09,0A,Exchange: receiving (please wait),C,BGB linked exchange (two units): the receiving unit (ちょっとまってて)
 0A,01,Name card: the finished ID card (its three photos take turns),C,"BGB screenshot (ID number, NAME, BIRTHDAY, NAME CARD; the photo differs between frames)"
 0A,02,Name card: change / print / cancel,C,BGB screenshot (START へんこう A プリント B やめる)
 0B,04,Name card: choose a photo,C,BGB screenshot (three photo boxes, PAGE and END tabs)
@@ -41,10 +43,11 @@ mode,state,name,tag,evidence
 10,02,Scratch card board,C,BGB screenshot (SCRATCH CARD; six hidden spots and a hand pointer)
 10,04,Scratch card: spots scratched (prizes in Kitts),C,BGB screenshot (cherries 20 Kitt / bears 40 Kitt under the scratched spots)
 11,07,Strawberry Channel: story pictures (Left / Right turn the page),C,"BGB screenshots after 0-11 presses of Right: a photo story, dots at the bottom show the page"
+11,08,Strawberry Channel: too few Kitts (snow; A shows the price),C,BGB screenshot with 0 Kitts (このチャンネルは 50Kitt もっていれば みられるようになるよ)
 11,0C,Strawberry Channel: picture paused (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
 12,01,"Slide show settings (start, speed, order)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 12,04,Slide show playing,C,BGB screenshot (the stored photos one after another; BGB's test picture)
-14,01,Print error (no printer),C,BGB screenshot (プリントエラー #02)
+14,01,Print error (#01 to #04),C,BGB screenshots with the printer helper: #02 no answer or bit 4; #01 bit 7; #03 bit 5; #04 bit 6 (screens/print_errors.png)
 17,01,Print error,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 18,01,Pompompurin picture,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 19,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"

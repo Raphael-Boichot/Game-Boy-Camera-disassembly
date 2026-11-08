@@ -384,14 +384,14 @@ bank,addr,name,conf,note,source
 01,67D0,Data_01_67D0,C,read in the core runs by 01:733C,kitty_types
 01,67D4,Number_DrawTwoDigits,C,A as two BCD digits (00:0C9A) with the 8x8 digits of 0C:7C40 at DE (HBlank copy),hand 2026-11-08
 01,67F6,Number_DrawDigit,C,digit A of 0C:7C40 into HL,hand 2026-11-08
-01,680C,PrintMenu_DrawCount,I,[$D94F] as three tall digits (hundreds / tens / units) of 0C:7E40 into $8400,hand 2026-11-08
+01,680C,PrintGame_DrawAppleCount,C,"[$D94F], the apples caught in the printing game, as three tall digits (hundreds / tens / units) of 0C:7E40 into $8400; runs in mode $06 state $23, when the game starts while the printer works (BGB 2026-11-08, print with the printer helper on the link); state $23 also draws [$D94F] and [$DAD8] with Number_DrawTwoDigits and, when [$D951] is set, adds [$D94F] to the Kitts (Kitts_Add)",hand 2026-11-08
 01,6832,Number_DrawTallDigit,C,tall digit A of 0C:7E40 into HL,hand 2026-11-08
 01,684C,PrintFrame_Select,C,the 3-byte record [$D935] of 01:687D into $D386 / $D38A (the records read by TakePhotos_DrawRows*); runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
 01,687D,Data_01_687D,C,read in the core runs by 01:688F,kitty_types
 01,688F,PrintFrame_LoadTiles,C,tiles of the record A of 01:687D into $9000; runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
 01,68CE,PrintFrame_LoadPart,C,the record A of 01:687D + $3C0; runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
-01,6941,Print_SetFrameSide,I,by [$D933] odd or even: pointers $D3F4-$D3F6,hand 2026-11-08
-01,6969,Print_LoadFrameGfx,I,Copy_FarInline from 26:5C00 and from 0D:6000 or 0D:6400 by [$D933] parity,hand 2026-11-08
+01,6941,Print_SetFrameSide,C,"by [$D933] odd or even: the print stream pointer $D3F4-$D3F6; runs in mode $06 state $15 (BGB 2026-11-08: album print with START, the second page with the comment lines, the ID card fields and Kitty)",hand 2026-11-08
+01,6969,Print_LoadFrameGfx,C,Copy_FarInline from 26:5C00 and from 0D:6000 or 0D:6400 by [$D933] parity; runs in mode $06 states $15 and $1C (BGB 2026-11-08: album print with START),hand 2026-11-08
 01,6991,Print_LoadItemPicture,C,the pointer [$D98B] of 01:69DD: $230 bytes into $CBB0; runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
 01,69AD,Data_01_69AD,C,read in the core runs by 00:0245,kitty_types
 01,69DD,Data_01_69DD,C,"read in the core runs by 01:6991, 01:72D5, 01:6A37, 01:7226",kitty_types
@@ -995,7 +995,7 @@ bank,addr,name,conf,note,source
 05,47B1,Mode01_State06,C,handler of state $06 of mode $01 (word 6 of Mode01_StateTable),modes
 05,47CC,Mode01_MainMenu,C,ModeTable entry $01: BGB screens 01:02 (Take / View / Play) and 01:05 (option menu),modes
 05,47D7,Mode01_StateTable,C,"state table of mode $01, read by $0189 with hFF8E",modes
-05,47E5,TakePhotos_SetPlaneMasks,I,"A x 5: five bytes of the $00 / $FF table 05:4802 into hFFAE-hFFB2, the masks of the plane-mapping loop that follows (05:4882, not traced); not run in the core",hand 2026-11-08
+05,47E5,Unused_TakePhotos_SetPlaneMasks,I,"A x 5: five bytes of the $00 / $FF table 05:4802 into hFFAE-hFFB2, the masks of the plane-mapping loop that follows; called only by Mode02_State0C, a state nothing enters (no store of state $0C for mode $02, no ModeState_Set / inline / saved return with (2, $0C): byte search of the ROM)",hand 2026-11-08
 05,498E,Mode02_State00,C,handler of state $00 of mode $02 (word 0 of Mode02_StateTable),modes
 05,49B4,Data_05_49B4,C,read in the core runs by 00:0245,kitty_types
 05,49BE,Data_05_49BE,C,read in the core runs by 00:0245,kitty_types
@@ -1027,7 +1027,7 @@ bank,addr,name,conf,note,source
 05,4CD9,Data_05_4CD9,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 05,4CEB,Data_05_4CEB,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 05,4CF4,Mode02_State0A,C,handler of state $0A of mode $02 (word 10 of Mode02_StateTable),modes
-05,4D10,Mode02_State0C,C,handler of state $0C of mode $02 (word 12 of Mode02_StateTable),modes
+05,4D10,Unused_Mode02_State0C,I,"handler of state $0C of mode $02 (word 12 of Mode02_StateTable): nothing enters it (no store of state $0C for mode $02, no ModeState_Set / inline / saved return with (2, $0C): byte search of the ROM)",hand 2026-11-08
 05,4D21,Data_05_4D21,C,read in the core runs by 05:4DC1,kitty_types
 05,4DC1,TakePhotos_LoadFrameTiles,C,"the tiles of frame [$D8FD] (record 05:4D21 + 8 x index: source, bank, length) into $8800, then a cursor object by A; first run in mode $02 state $01 (camera view); runs on its screen (02:01) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
 05,4E10,Data_05_4E10,C,"read in the core runs by 05:4EB0, 05:4ED6, 05:4EE6, 05:4EF6",kitty_types
@@ -1337,12 +1337,12 @@ bank,addr,name,conf,note,source
 06,5F7F,Data_06_5F7F,C,read in the core runs by 06:5F95,kitty_types
 06,5F95,KeyPrompt_LoadSounds,C,the three key-prompt sound pairs $D8E6-$D8EB from record A of the pointer table 06:5F7F (read by KeyPrompt_*); runs in the camera (mode $02),hand 2026-11-08
 06,5FF8,KeyPrompt_LoadSoundsB,I,"the same code again, called from mode $09 (forced only); not run in the core",hand 2026-11-08
-06,605B,Unused_Link_SumSlotBuffer,C,"same code as the Japanese Unused_Link_SumSlotBuffer (07:4BEA, 30 bytes, masked match)",port_jp
+06,605B,Link_SumSlotBuffer,C,"same code as the Japanese Unused_Link_SumSlotBuffer (07:4BEA, 30 bytes); here it runs: mode $09 state $01 on the giving unit of the linked exchange (BGB 2026-11-08)",hand 2026-11-08
 06,6079,Link_CountdownDA00,C,$DA00-$DA01 - 1; Z when it reaches 0,hand 2026-11-08
 06,6086,Counters_AddReceived,C,"received boy $DAD1 and girl $DAD2 + 1 in BCD (at most 99) by the bits 0 / 1 of [$CFFF], counters loaded and saved",hand 2026-11-08
-06,60B8,Exchange_RequestPage,I,without a link ($D9FD = 0) loads by 01:4F25; else Link_QueuePageRequest A and waits at most $B4 frames (Link_CountdownDA00) for $DD4E,hand 2026-11-08
-06,6134,Gfx16_CopyByIndex,I,copies from the pointer of 06:6129 by A (bank $16) into HL,hand 2026-11-08
-06,6168,Tiles_Fill9000From1778,I,8 x the same 256 bytes of 17:7800 into $9000-$97FF,hand 2026-11-08
+06,60B8,Exchange_RequestPage,C,"runs in mode $08 state $01 in the linked exchange (BGB 2026-11-08, two units)",hand 2026-11-08
+06,6134,PhotoTrain_LoadPageMap,C,"the map of page A (pointer table 06:6129, bank $16) into HL ($9800 in mode $08 state $00); runs in the linked exchange (BGB 2026-11-08)",hand 2026-11-08
+06,6168,PhotoTrain_FillEmptyTiles,C,"8 x the same 256 bytes of 17:7800 (the empty-slot picture) into $9000-$97FF; mode $08 state $00, runs in the linked exchange (BGB 2026-11-08)",hand 2026-11-08
 06,6198,Mode07_State00,C,handler of state $00 of mode $07 (word 0 of Mode07_StateTable),modes
 06,61B2,Data_06_61B2,C,read in the core runs by 00:0245,kitty_types
 06,61BC,Data_06_61BC,C,read in the core runs by 00:0245,kitty_types
@@ -1361,7 +1361,7 @@ bank,addr,name,conf,note,source
 06,66C3,Mode08_State04,C,handler of state $04 of mode $08 (word 4 of Mode08_StateTable),modes
 06,66CF,Mode08_State05,C,handler of state $05 of mode $08 (word 5 of Mode08_StateTable),modes
 06,66F4,Mode08_State03,C,handler of state $03 of mode $08 (word 3 of Mode08_StateTable),modes
-06,671C,Mode08_AlbumPhotoTrain,I,ModeTable entry $08: forced BGB screen (album pages drawn as a photo train),modes
+06,671C,Mode08_ExchangePhotoTrain,C,ModeTable entry $08: BGB linked exchange (two units): the giving unit chooses its photo on the photo train (states $00-$05),modes
 06,6727,Mode08_StateTable,C,"state table of mode $08, read by $0189 with hFF8E",modes
 06,6733,Mode09_State00,C,handler of state $00 of mode $09 (word 0 of Mode09_StateTable),modes
 06,6749,Mode09_State01,C,handler of state $01 of mode $09 (word 1 of Mode09_StateTable),modes
@@ -1370,7 +1370,7 @@ bank,addr,name,conf,note,source
 06,68D2,Mode09_State04,C,handler of state $04 of mode $09 (word 4 of Mode09_StateTable),modes
 06,68FA,Mode09_State05,C,handler of state $05 of mode $09 (word 5 of Mode09_StateTable),modes
 06,691F,Mode09_State06,C,handler of state $06 of mode $09 (word 6 of Mode09_StateTable),modes
-06,69D5,Exchange_InitScreen,I,"screen off, objects and slots cleared, tiles 1D:5600 and map 32:7C80 loaded, $D9FE = 1 (not run in the core)",hand 2026-11-08
+06,69D5,Exchange_InitScreen,C,runs in mode $09 state $08 on the receiving unit of the linked exchange (BGB 2026-11-08),hand 2026-11-08
 06,6A4E,Mode09_State08,C,handler of state $08 of mode $09 (word 8 of Mode09_StateTable),modes
 06,6A59,Mode09_State0A,C,handler of state $0A of mode $09 (word 10 of Mode09_StateTable),modes
 06,6ABB,Mode09_State0B,C,handler of state $0B of mode $09 (word 11 of Mode09_StateTable),modes
@@ -1380,8 +1380,8 @@ bank,addr,name,conf,note,source
 06,6BD3,Mode09_State0E,C,handler of state $0E of mode $09 (word 14 of Mode09_StateTable),modes
 06,6BF8,Mode09_State0F,C,handler of state $0F of mode $09 (word 15 of Mode09_StateTable),modes
 06,6CAB,Mode09_State07,C,handler of state $07 of mode $09 (word 7 of Mode09_StateTable),modes
-06,6CBB,CardStats_IncDA64,I,"$DA64 / $DA65 + 1 (at most 99) by the bits 0 / 1 of $DAE8, then $DA66 + 1",hand 2026-11-08
-06,6CEC,Mode09_ExchangeCommunicating,I,ModeTable entry $09: forced BGB screen (communicating message),modes
+06,6CBB,CardStats_IncDA64,C,"$DA64 / $DA65 + 1 (at most 99) by the bits 0 / 1 of $DAE8, then $DA66 + 1; called by the receiving branch of mode $09 states $06 / $0F; the receiving unit of the linked BGB exchange (2026-11-08) ran state $0F and got the photo",hand 2026-11-08
+06,6CEC,Mode09_ExchangeCommunicating,C,ModeTable entry $09: BGB linked exchange (two units): giving states $01-$05,modes
 06,6CF7,Mode09_StateTable,C,"state table of mode $09, read by $0189 with hFF8E",modes
 06,6D19,Mode1D_State00,C,handler of state $00 of mode $1D (word 0 of Mode1D_StateTable),modes
 06,6D4D,Mode1D_State01,C,handler of state $01 of mode $1D (word 1 of Mode1D_StateTable),modes
@@ -1428,7 +1428,7 @@ bank,addr,name,conf,note,source
 07,450B,CameraFrame_Type28,C,frame type 28: jr back into CameraFrame_Type00to03 (not run in the core),hand 2026-11-08
 07,450D,CameraFrame_Type29,C,frame type 29: jr back into CameraFrame_Type00to03 (not run in the core),hand 2026-11-08
 07,450F,CameraFrame_Type30,C,frame type 30: jr back into CameraFrame_Type00to03 (not run in the core),hand 2026-11-08
-07,4511,CameraFrame_StubAfterTable,I,"jr into CameraFrame_Type00to03 like 07:4503-450F, but not in the table 07:449C",hand 2026-11-08
+07,4511,CameraFrame_Type31,C,entry 31 of the frame type table 07:449C (32 words): a jr into CameraFrame_Type00to03 like types 24-30; code read,hand 2026-11-08
 07,4513,CameraFrame_Type04,C,frame type 4 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number,hand 2026-11-08
 07,452E,CameraFrame_Type05,C,frame type 5 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number,hand 2026-11-08
 07,453F,CameraFrame_Type06,C,frame type 6 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number,hand 2026-11-08
@@ -1522,8 +1522,8 @@ bank,addr,name,conf,note,source
 07,541F,Mode11_StateTable,C,"state table of mode $11, read by $0189 with hFF8E",modes
 07,543D,StrawberryCh_FrameCallbackA,C,"00:1AC5, then the keys unless $D8E0 or $D8D4 is set (A, ...); mode $11 state $02; runs on its screen (11:02) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
 07,546A,Data_07_546A,C,read in the core runs by 00:1AB7,kitty_types
-07,5477,StrawberryCh_FrameCallbackB,I,the same with another key path (not run in the core),hand 2026-11-08
-07,54B8,StrawberryCh_FrameCallbackC,I,"the same, B first (not run in the core)",hand 2026-11-08
+07,5477,StrawberryCh_LockedCallback,C,frame callback of a channel the Kitts do not pay for (StrawberryCh_CheckAfford sets carry; mode $11 states $03 / $08): A shows the notice (StrawberryCh_LockedNoticeCallback); BGB 2026-11-08 with 0 Kitts: the snow screen,hand 2026-11-08
+07,54B8,StrawberryCh_LockedNoticeCallback,C,"frame callback while the notice is shown (""this channel can be watched with 50 Kitts""): a key goes back to StrawberryCh_LockedCallback; BGB 2026-11-08 with 0 Kitts",hand 2026-11-08
 07,550A,Data_07_550A,C,read in the core runs by 00:1AB7,kitty_types
 07,5528,Data_07_5528,C,read in the core runs by 00:1AB7,kitty_types
 07,5550,Data_07_5550,C,read in the core runs by 00:1AB7,kitty_types
