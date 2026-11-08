@@ -24,7 +24,9 @@ mode,state,keys,frames,bgb_mode,bgb_state,same,picture,parent,key
 0E,13,A Up A A A,1193,0E,13,yes,screen_0E_13.png,0E:05,A
 0E,14,A Up A A A A,1291,0E,14,yes,screen_0E_14.png,0E:13,A
 0E,16,A Up A A A A A A,1487,0E,16,yes,screen_0E_16.png,0E:14,A
+0E,20,A Up A A A A A A A B,1683,0E,20,yes,screen_0E_20.png,10:02,B
 10,02,A Up A A A A A A A,1585,10,02,yes,screen_10_02.png,0E:16,A
+10,04,A Up A A A A A A A A A Right Down A A,2173,10,04,yes,screen_10_04.png,10:02,A
 11,07,A Up A Up A,1193,11,07,yes,screen_11_07.png,04:01,A
 11,0C,A Up A Up A A,1291,11,0C,yes,screen_11_0C.png,11:07,A
 12,01,A Up A Up A A A B Up A,1683,12,01,yes,screen_12_01.png,04:01,A

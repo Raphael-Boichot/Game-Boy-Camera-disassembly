@@ -48,3 +48,5 @@ mode,state,name,tag,evidence
 1B,01,Printing: catch-the-apples game while the printer works,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1C,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1E,00,Screen fade between modes,C,BGB screenshot (screen fading out)
+0E,20,Scratch card: quit in the middle? (quit / continue),C,BGB screenshot (まだ とちゅうよ やめちゃう? やめる / つづける)
+10,04,Scratch card: spots scratched (prizes in Kitts),C,BGB screenshot (cherries 20 Kitt / bears 40 Kitt under the scratched spots)
