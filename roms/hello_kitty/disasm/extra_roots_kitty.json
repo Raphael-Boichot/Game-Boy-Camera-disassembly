@@ -109,6 +109,11 @@
    "bank": "02",
    "addr": "6616",
    "why": "object script command (02:6601 / 02:6612): calls the word that follows the command in the script (`ld a,[hl+]; ld h,[hl]; ld l,a; call $0150`), then skips it; the routines are taken from the core runs (observed roots, L2)"
+  },
+  {
+   "bank": "00",
+   "addr": "2035",
+   "why": "object script command {descriptor} (00:2030, a command of the table read by Object_RunAll, like ObjCmd_StartSlotScript): creates an object from the descriptor word that follows the command in the script; the descriptors are script data of bank 2, their init routines are taken from the core runs (observed roots, L2); first executed in the core replays of tools/kitty_core_paths.py"
   }
  ],
  "jtables": {

@@ -8,6 +8,7 @@ tile pixel), with the categories this ROM has evidence for so far:
   blue    executed or read in a run: the core runs (roms/hello_kitty/port/cov_kitty_runs.npz, exec or dread) or the BGB watchpoint
           runs (port/cov_kitty_bgb.npz, exec)
   RED     proven code (class C of port/rom_map_kitty.csv, the trace) that no run executed
+  PURPLE  executed or read only in the forced runs of port/forced_kitty.npz (tools/kitty_core_paths.py: ModeTable slot $01 patched)
   ORANGE  data never read but explained by a type row of disasm/sym_types_kitty.csv (a loader site, a table length) or an inline
           table of the trace (class T)
   GREY-BLUE data never read and explained by nothing yet (still on the default typing)
@@ -23,7 +24,9 @@ ROM = sys.argv[1]; OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(KD, 
 rom = np.frombuffer(open(ROM, 'rb').read(), np.uint8); N = len(rom)
 def off(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
 z = np.load(os.path.join(KD, 'port', 'cov_kitty_runs.npz')); zb = np.load(os.path.join(KD, 'port', 'cov_kitty_bgb.npz'))
-ex = (z['exec'] > 0) | (zb['exec'] > 0); rd = (z['dread'] > 0) | (zb['dread'] > 0); hit = ex | rd
+zp = np.load(os.path.join(KD, 'port', 'cov_kitty_paths.npz')); zf = np.load(os.path.join(KD, 'port', 'forced_kitty.npz'))
+ex = (z['exec'] > 0) | (zb['exec'] > 0) | (zp['exec'] > 0); rd = (z['dread'] > 0) | (zb['dread'] > 0) | (zp['dread'] > 0); hit = ex | rd
+forced = ((zf['exec'] > 0) | (zf['dread'] > 0)) & ~hit                # reached only with a patched ModeTable (tools/kitty_core_paths.py)
 code = np.zeros(N, bool); tab = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(KD, 'port', 'rom_map_kitty.csv'))):
     o = off(int(r['bank'], 16), int(r['start'], 16)); n = int(r['length'])
@@ -45,7 +48,8 @@ cat[nh & ~code & typed] = 4                                    # orange
 cat[nh & ~code & ~typed] = 9                                   # grey-blue
 cat[nh & ~code & ~typed & pad] = 3; cat[nh & ~code & ~typed & fill] = 8
 cat[nh & code] = 2                                             # red
-cats = [0, 2, 9, 4, 8, 3]
+cat[forced] = 5                                                # purple: only in forced runs
+cats = [0, 2, 9, 5, 4, 8, 3]
 RANK = np.zeros(10, int)
 for k, c in enumerate(reversed(cats)): RANK[c] = k
 BACK = np.zeros(len(cats), int)
@@ -58,6 +62,7 @@ FAM = {0: [(222, 234, 255), (150, 180, 240), (66, 106, 205), (8, 28, 112)],     
        2: [(255, 224, 224), (248, 150, 150), (222, 52, 52), (120, 0, 0)],         # code never run: red
        3: [(246, 238, 238), (226, 206, 206), (198, 168, 168), (150, 112, 112)],   # padding: muted red
        4: [(255, 240, 214), (252, 200, 120), (240, 140, 20), (140, 66, 0)],       # identified data never read: orange
+       5: [(240, 226, 250), (204, 168, 236), (150, 90, 200), (70, 20, 110)],      # only in forced runs: purple
        8: [(250, 246, 236), (240, 230, 210), (226, 210, 180), (196, 176, 140)],   # $FF fill: beige
        9: [(232, 236, 242), (190, 200, 216), (128, 144, 170), (60, 72, 96)]}      # data explained by nothing: grey-blue
 idx = {c: k for k, c in enumerate(sorted(FAM))}
@@ -75,16 +80,17 @@ def font(sz, bold=True):
     return ImageFont.load_default(size=sz)
 f1, f2, f3, fb = font(46), font(28, False), font(27, False), font(32)
 n = lambda m: int(m.sum())
-c_blue, c_red, c_grey, c_or, c_pad, c_fill = (n(cat == c) for c in (0, 2, 9, 4, 3, 8))
+c_blue, c_red, c_grey, c_or, c_pad, c_fill, c_forced = (n(cat == c) for c in (0, 2, 9, 4, 3, 8, 5))
 c_code = n(code); c_ran = n(code & ex)
 pc = lambda v: '%s B, %.1f %%' % (format(v, ','), 100 * v / N)
-items = [(0, 'blue: executed or read in a run (core runs with the unlocking save, the printer and the boot conditions; BGB watchpoint runs of the exchange)  (%s)' % pc(c_blue)),
+items = [(0, 'blue: executed or read in a run (core runs with the unlocking save, the printer and the boot conditions; BGB watchpoint runs of the exchange; the BGB key paths of the album print, the printer errors and the Strawberry Channel without Kitts replayed in the core)  (%s)' % pc(c_blue)),
+         (5, 'PURPLE: executed or read only with a patched mode table (the ten modes no key path reaches: the forced runs, evidence I for any use)  (%s)' % pc(c_forced)),
          (2, 'RED: proven code that no run executed  (%s): %s of the %s bytes of proven code ran' % (pc(c_red), format(c_ran, ','), format(c_code, ','))),
          (9, 'GREY-BLUE: data that no run read and nothing explains yet (no loader, no table, still on the default typing)  (%s)' % pc(c_grey)),
          (4, 'ORANGE: data that no run read, explained by a loader site, a table length or an inline table of the trace  (%s)' % pc(c_or)),
          (3, 'muted red: never-read runs of 16+ x $00, padding  (%s)' % pc(c_pad)),
          (8, 'beige: never-read runs of 16+ x $FF, fill  (%s)' % pc(c_fill))]
-note = 'Shade inside a colour = the tile pixel (2 bits), so graphics, text and code all stay visible. A 2-byte tile row takes the worst colour of its two bytes (red > grey-blue > orange > fill > padding > blue). No forced or proven-dead category yet: the screens seen only with a patched ModeTable are not in these runs, and no dead-code analysis has been made for this ROM.'
+note = 'Shade inside a colour = the tile pixel (2 bits), so graphics, text and code all stay visible. A 2-byte tile row takes the worst colour of its two bytes (red > grey-blue > orange > fill > padding > blue). Purple is not a way the game runs: it is what the unreachable modes would use.'
 _sc = ImageDraw.Draw(Image.new('L', (8, 8)))
 def wrap(text, fnt, maxw):
     out, line = [], ''
@@ -120,6 +126,6 @@ for b in range(banks):
     d.text((gx, gy + PADT), '$%02X' % b, fill=INK, font=fb)
 img.save(OUT, optimize=True)
 per_bank = [(b, n(cat[b * 0x4000:(b + 1) * 0x4000] == 2), n(cat[b * 0x4000:(b + 1) * 0x4000] == 9)) for b in range(banks)]
-print('kitty_reach: blue %d, red %d, grey-blue %d, orange %d, padding %d, fill %d bytes' % (c_blue, c_red, c_grey, c_or, c_pad, c_fill))
+print('kitty_reach: blue %d, red %d, grey-blue %d, orange %d, padding %d, fill %d, purple %d bytes' % (c_blue, c_red, c_grey, c_or, c_pad, c_fill, c_forced))
 print('most red (code never run):', ', '.join('$%02X %d' % (b, r) for b, r, _ in sorted(per_bank, key=lambda x: -x[1])[:8]))
 print('most grey-blue (data unexplained):', ', '.join('$%02X %d' % (b, g) for b, _, g in sorted(per_bank, key=lambda x: -x[2])[:8]))

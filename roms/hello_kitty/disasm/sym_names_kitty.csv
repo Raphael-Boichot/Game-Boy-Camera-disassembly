@@ -209,7 +209,9 @@ bank,addr,name,conf,note,source
 00,1F98,ObjCmd_JumpIfBits,C,"{address, mask, target}: jumps when [address] & mask is not 0",hand 2026-11-08
 00,1FA2,ObjCmd_JumpIfNoBits,C,"{address, mask, target}: jumps when [address] & mask is 0",hand 2026-11-08
 00,1FCC,ObjCmd_CopyAtLine20,C,"waits for line $20, then a copy from the record that follows; code read",hand 2026-11-08
+00,1FF8,ObjCmd_JumpRandom,C,"object script command {n, n words}: Rng_Scaled picks one of the n words and the script jumps there; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 00,2009,ObjCmd_JumpByByte,C,reads the byte at the address of the next word and jumps through the word table that follows,hand 2026-11-08
+00,2030,ObjCmd_CreateObject,C,"object script command {descriptor}: Object_Create with DE = the word that follows; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 00,204A,ObjCmd_StartSlotScript,C,ScriptSlots_Add with the next word,hand 2026-11-08
 00,205A,Object_Create,C,object creation with BC = 0; falls into Object_CreateWithParam,hand 2026-11-08
 00,205D,Object_CreateWithParam,C,DE = descriptor in bank 2; BC = parameter; fills a 23-byte slot at $DAEE,hand 2026-11-08
@@ -261,7 +263,7 @@ bank,addr,name,conf,note,source
 00,2C7F,Snd_Tick_Tramp,C,"calls Snd_Tick (0F:5337) in the sound bank: the effects of channels 1, 3 and 4 and the music, then the requests $D060-$D078 cleared; code read",hand 2026-11-08
 00,2E00,Data_00_2E00,C,read in the core runs by 00:021C,kitty_types
 00,3700,Data_00_3700,C,"read in the core runs by 00:2BE2, 00:2AEC, 00:264C, 00:2B6E",kitty_types
-01,4700,Data_01_4700,C,"read in the core runs by 01:470A, 01:47D1",kitty_types
+01,4700,Data_01_4700,C,read in the core runs by 01:47D1,kitty_types
 01,4705,Sram_WriteMagic,C,the 5 bytes of Data_01_4700 (the Magic string) at HL,hand 2026-11-08
 01,4711,Sram_Checksum,C,"HL = checksum of BC bytes at DE: L = sum, H = xor of the bytes",hand 2026-11-08
 01,4721,Sram_WriteChecksum,C,"Sram_Checksum, stored at HL as (L + $4E, H xor $54)",hand 2026-11-08
@@ -313,12 +315,11 @@ bank,addr,name,conf,note,source
 01,5231,Script_SaveCounterD97B,C,script callback: $D97B = hFFE9,hand 2026-11-08
 01,5238,Script_SetD97C,C,"script callback: $D97C = next byte, skip one",hand 2026-11-08
 01,523F,Script_Nop523F,C,ret,hand 2026-11-08
-01,5240,Data_01_5240,C,read in the core runs by 01:5998,kitty_types
+01,5240,Data_01_5240,C,"read in the core runs by 01:59F6, 01:5A05, 01:5911, 01:5998 ...",kitty_types
 01,5244,Script_ClearD8E0,C,script callback: $D8E0 = 0,hand 2026-11-08
-01,5280,Data_01_5280,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ...",kitty_types
-01,533C,Data_01_533C,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:5998 ...",kitty_types
+01,524A,Data_01_524A,C,"read in the core runs by 01:59F6, 01:5A05, 01:5911, 01:5998 ...",kitty_types
 01,5434,Menu_ScriptOnItemChange,C,when $D8F4 differs from hFFEA: hFFEA = $D8F4 and the script 01:5443 is started (00:2263); runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
-01,5443,Data_01_5443,C,"read in the core runs by 01:59F6, 01:5A05, 01:5911, 01:5957 ...",kitty_types
+01,5443,Data_01_5443,C,"read in the core runs by 01:59F6, 01:5A05, 01:5911, 01:5998 ...",kitty_types
 01,54A3,NameCard_ScriptFillD810,C,script callback: $34 bytes of $A8 at $D810,hand 2026-11-08
 01,54B3,NameCard_ScriptStepRight,C,script callback: $D800 + $20,hand 2026-11-08
 01,54BD,NameCard_ScriptStartRight,C,"script callback: $D800 = $40, hFFEA-hFFEB from NameCard_LoadBackgroundTiles with $D934: start of a page turn; runs on its screen in the core replays (port/entry_modes_kitty.csv)",hand 2026-11-08
@@ -392,10 +393,11 @@ bank,addr,name,conf,note,source
 01,68CE,PrintFrame_LoadPart,C,the record A of 01:687D + $3C0; runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
 01,6941,Print_SetFrameSide,C,"by [$D933] odd or even: the print stream pointer $D3F4-$D3F6; runs in mode $06 state $15 (BGB 2026-11-08: album print with START, the second page with the comment lines, the ID card fields and Kitty)",hand 2026-11-08
 01,6969,Print_LoadFrameGfx,C,Copy_FarInline from 26:5C00 and from 0D:6000 or 0D:6400 by [$D933] parity; runs in mode $06 states $15 and $1C (BGB 2026-11-08: album print with START),hand 2026-11-08
+01,696C,Data_01_696C,C,read in the core runs by 00:0245,kitty_types
+01,6989,Data_01_6989,C,read in the core runs by 00:0245,kitty_types
 01,6991,Print_LoadItemPicture,C,the pointer [$D98B] of 01:69DD: $230 bytes into $CBB0; runs on its screen in the core replays (port/entry_modes_kitty.csv),hand 2026-11-08
 01,69AD,Data_01_69AD,C,read in the core runs by 00:0245,kitty_types
-01,69DD,Data_01_69DD,C,"read in the core runs by 01:6991, 01:72D5, 01:6A37, 01:7226",kitty_types
-01,6A2B,Data_01_6A2B,C,"read in the core runs by 01:72D5, 01:6A37, 01:7226",kitty_types
+01,69DD,Data_01_69DD,C,"read in the core runs by 01:6991, 01:6A37, 01:72D5, 01:7226 ...",kitty_types
 01,6A37,PrintScript_NextState,C,"B = 6 (printing), C = the next byte of the script [$D93B]: the next state",hand 2026-11-08
 01,6A4C,PrintScript_SameState,C,"B = 6, C = the last byte read again",hand 2026-11-08
 01,6A62,Mode06_State00,C,handler of state $00 of mode $06 (word 0 of Mode06_StateTable),modes
@@ -431,12 +433,18 @@ bank,addr,name,conf,note,source
 01,7162,Mode06_State16,C,handler of state $16 of mode $06 (word 22 of Mode06_StateTable),modes
 01,717C,Data_01_717C,C,read in the core runs by 00:1AB7,kitty_types
 01,71CB,Mode06_State17,C,handler of state $17 of mode $06 (word 23 of Mode06_StateTable),modes
+01,7201,Data_01_7201,C,read in the core runs by 00:0245,kitty_types
 01,7226,Mode06_State18,C,handler of state $18 of mode $06 (word 24 of Mode06_StateTable),modes
 01,7229,Data_01_7229,C,read in the core runs by 00:0245,kitty_types
 01,7233,Data_01_7233,C,read in the core runs by 00:0245,kitty_types
 01,7255,Data_01_7255,C,"read in the core runs by 00:02F9, 00:0245",kitty_types
 01,7268,Data_01_7268,C,"read in the core runs by 00:02F9, 00:0245",kitty_types
 01,7283,Mode06_State19,C,handler of state $19 of mode $06 (word 25 of Mode06_StateTable),modes
+01,7286,Data_01_7286,C,"read in the core runs by 00:0245, 00:032D",kitty_types
+01,7290,Data_01_7290,C,"read in the core runs by 00:0245, 00:032D",kitty_types
+01,72A6,Data_01_72A6,C,"read in the core runs by 00:0245, 00:032D",kitty_types
+01,72B2,Data_01_72B2,C,"read in the core runs by 00:0245, 00:032D",kitty_types
+01,72BC,Data_01_72BC,C,"read in the core runs by 00:0245, 00:032D",kitty_types
 01,72D5,Mode06_State1A,C,handler of state $1A of mode $06 (word 26 of Mode06_StateTable),modes
 01,733C,Mode06_State1B,C,handler of state $1B of mode $06 (word 27 of Mode06_StateTable),modes
 01,7374,Mode06_State1C,C,handler of state $1C of mode $06 (word 28 of Mode06_StateTable),modes
@@ -447,6 +455,7 @@ bank,addr,name,conf,note,source
 01,7419,Mode06_State21,C,handler of state $21 of mode $06 (word 33 of Mode06_StateTable),modes
 01,7430,Mode06_State22,C,handler of state $22 of mode $06 (word 34 of Mode06_StateTable),modes
 01,746E,Mode06_State23,C,handler of state $23 of mode $06 (word 35 of Mode06_StateTable),modes
+01,749D,Data_01_749D,C,read in the core runs by 00:032D,kitty_types
 01,754B,Mode06_State24,C,handler of state $24 of mode $06 (word 36 of Mode06_StateTable),modes
 01,75A9,Mode06_State25,C,handler of state $25 of mode $06 (word 37 of Mode06_StateTable),modes
 01,75CF,Mode06_State26,C,handler of state $26 of mode $06 (word 38 of Mode06_StateTable),modes
@@ -463,7 +472,8 @@ bank,addr,name,conf,note,source
 02,43C4,Data_02_43C4,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,45C0,Data_02_45C0,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,45F4,Data_02_45F4,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
-02,46B4,Data_02_46B4,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
+02,4654,Data_02_4654,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
+02,46A0,Data_02_46A0,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,484C,Data_02_484C,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,48A8,Data_02_48A8,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,494C,Data_02_494C,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
@@ -703,14 +713,40 @@ bank,addr,name,conf,note,source
 02,6F20,Printing_ObjSpeedFromD939,C,hFFCB-hFFCC = $D939-$D93A (script callback),hand 2026-11-08
 02,6F2E,Data_02_6F2E,C,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:1F1E ...",kitty_types
 02,6F38,AppleGame_ObjKeys,C,"B ($D8D9 bit 1) stops the object (speed 0), ... (the falling-fruit game while printing); runs on its screen (06:1B) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
-02,6F60,Data_02_6F60,C,"read in the core runs by 00:2127, 00:1F16, 00:2136, 00:2087 ...",kitty_types
+02,6F60,Data_02_6F60,C,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:2136 ...",kitty_types
 02,6F9E,AppleGame_ObjSetD886,C,$D886 = $49 - hFFD2; runs on its screen (06:1B) in the core replays (port/entry_modes_kitty.csv); code read,hand 2026-11-08
 02,6FA8,AppleGame_ObjFruitKind,C,"by the frame hFFD2 ($C0, $C1, $C2 ...); runs on its screen (06:20) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
 02,6FC8,AppleGame_ObjCatch,C,A ($D8D9 bit 0): sound $03 on channel 2 ...; runs on its screen (06:1B) in the core replays (port/entry_modes_kitty.csv); code read,hand 2026-11-08
 02,701E,Obj_ClearD8E0_C,C,$D8E0 = 0,hand 2026-11-08
 02,7023,Data_02_7023,C,read in the core runs by 00:2087,kitty_types
+02,7029,PrintGame_ObjCheckLanded,C,"the falling fruit at the bottom (hFFD2 = $D0 / $D1): $D8E0 = 8, speed 0, callback cleared; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,7044,Data_02_7044,C,"read in the core runs by 00:2127, 00:2087, 00:1F3A, 00:1F1E ...",kitty_types
+02,70DE,PrintGame_ObjCheckCatch,C,"is the fruit within 8 pixels of Kitty ($D94D / $D94E); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,7104,PrintGame_AddGravity,C,"BC + $20 (the fall speed grows); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,710B,PrintGame_ClampSpeed,C,"BC kept between -$180 and +$180; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,7121,PrintGame_ObjFall,C,"per-frame fall: speed + gravity, clamped; at y $78 the fruit bounces (hFFD8 counts the bounces up to 3); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,7175,PrintGame_ObjRandomStart,C,"a random start: x = [$D94C] + rnd(0-$7F) + $10, y = $28 + rnd(0-$0F); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,7190,Data_02_7190,C,"read in the core runs by 00:2127, 00:2136, 00:1FCC, 00:2087 ...",kitty_types
+02,71EA,PrintGame_ObjEndIfNoneLeft,C,"Obj_End when no fruit is left ([$D950] = 0); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,71F2,Data_02_71F2,C,"read in the core runs by 00:2127, 00:2136, 00:1FCC, 00:2087 ...",kitty_types
+02,72D6,Data_02_72D6,C,"read in the core runs by 00:2127, 00:1FCC, 00:2136, 00:1F3A ...",kitty_types
+02,7345,Data_02_7345,C,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E",kitty_types
+02,734B,Obj_ScriptNop,C,"push hl / pop hl, carry set: a script command that does nothing; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,734F,Data_02_734F,C,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E",kitty_types
+02,7374,Obj_GetSpeed,C,"BC = hFFCB-hFFCC; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,737B,PrintGame_ClampX,C,"Kitty kept between x $08 and $98 (the fraction cleared at the edges); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,73A2,Obj_GetSpriteBC,C,"BC = hFFCD-hFFCE; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,73A9,Obj_SetSpriteBC,C,"hFFCD-hFFCE = BC; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,73C6,PrintGame_SpeedFromKeys,C,"Left / Right held ($D8D8 bits 5 / 4): the speed BC - 8 / + 8, kept in range; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,744D,PrintGame_SaveKittyPos,C,"Kitty position into $D94D / $D94E, and [$D94C] = x - $50 kept in 0-$5F (where the next fruit falls); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,74AB,PrintGame_ObjKitty,C,"Kitty: speed from the keys, x clamped, position saved; A ($D8D9 bit 0) jumps (sound $3A on channel 1, script 02:7686); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 02,75E5,Obj_SetD94D,C,"$D94D = $80, $D94E = $78 (not run in the core)",hand 2026-11-08
-02,77EA,Data_02_77EA,C,"read in the core runs by 00:2127, 00:1F1E",kitty_types
+02,75F0,Data_02_75F0,C,"read in the core runs by 00:2127, 00:2087, 00:1F1E, 00:2136 ...",kitty_types
+02,769E,Data_02_769E,C,"read in the core runs by 00:2127, 00:1FF8, 00:2136",kitty_types
+02,76CF,Data_02_76CF,C,"read in the core runs by 00:2127, 00:2136",kitty_types
+02,7725,Data_02_7725,C,"read in the core runs by 00:2127, 00:2136",kitty_types
+02,7793,PrintGame_ShowResult,C,"the apples caught [$D94F] against the record [$DAD8] (Counters_Load first): a new record, 50 or more, 30 or more, or less pick the message (02:7777 ...); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
+02,77DE,Data_02_77DE,C,"read in the core runs by 00:2127, 00:2087, 00:1F3A, 00:1F1E",kitty_types
 02,77EE,AlbumText_ObjCursor,C,"in step 2 ($D994) follows the text cursor $D98C, else hidden at y $A0; runs in the album text window (mode $03 state $0B)",hand 2026-11-08
 02,781D,Data_02_781D,C,"read in the core runs by 02:77FA, 00:2087",kitty_types
 02,7853,Obj_Ret7853,C,ret,hand 2026-11-08
@@ -776,6 +812,11 @@ bank,addr,name,conf,note,source
 03,5358,Data_03_5358,C,read in the core runs by 00:21A7,kitty_types
 03,5D3C,Data_03_5D3C,C,read in the core runs by 00:21A7,kitty_types
 03,5DA4,Data_03_5DA4,C,read in the core runs by 00:21A7,kitty_types
+03,60E4,Data_03_60E4,C,read in the core runs by 00:21A7,kitty_types
+03,62DC,Data_03_62DC,C,read in the core runs by 00:21A7,kitty_types
+03,631C,Data_03_631C,C,read in the core runs by 00:21A7,kitty_types
+03,637C,Data_03_637C,C,read in the core runs by 00:21A7,kitty_types
+03,63FC,Data_03_63FC,C,read in the core runs by 00:21A7,kitty_types
 03,645C,Data_03_645C,C,read in the core runs by 00:21A7,kitty_types
 03,6E14,Data_03_6E14,C,read in the core runs by 00:21A7,kitty_types
 03,6EE8,Data_03_6EE8,C,read in the core runs by 00:21A7,kitty_types
@@ -936,6 +977,10 @@ bank,addr,name,conf,note,source
 05,406A,Data_05_406A,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 05,4073,Data_05_4073,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 05,40CB,Mode00_State01,C,handler of state $01 of mode $00 (word 1 of Mode00_StateTable),modes
+05,40E2,Data_05_40E2,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+05,40EC,Data_05_40EC,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+05,40F6,Data_05_40F6,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+05,40FC,Data_05_40FC,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,4117,Mode00_State02,C,handler of state $02 of mode $00 (word 2 of Mode00_StateTable),modes
 05,414C,Mode00_State03,C,handler of state $03 of mode $00 (word 3 of Mode00_StateTable),modes
 05,41F6,Mode00_State04,C,handler of state $04 of mode $00 (word 4 of Mode00_StateTable),modes
@@ -1215,7 +1260,7 @@ bank,addr,name,conf,note,source
 06,41EF,Mode19_State01,C,handler of state $01 of mode $19 (word 1 of Mode19_StateTable),modes
 06,41FE,Mode19_EmptyFrame19,I,ModeTable entry $19: forced BGB screen (an empty photo frame),modes
 06,4209,Mode19_StateTable,C,"state table of mode $19, read by $0189 with hFF8E",modes
-06,430E,Data_06_430E,C,read in the core runs by 06:4561,kitty_types
+06,42CD,Data_06_42CD,C,read in the core runs by 06:4561,kitty_types
 06,43FF,Data_06_43FF,C,"read in the core runs by 06:4561, 06:4478",kitty_types
 06,4478,Mode14_State00,C,handler of state $00 of mode $14 (word 0 of Mode14_StateTable),modes
 06,44E7,Data_06_44E7,C,read in the core runs by 00:0245,kitty_types
@@ -1476,7 +1521,6 @@ bank,addr,name,conf,note,source
 07,4A93,Mode13_State00,C,handler of state $00 of mode $13 (word 0 of Mode13_StateTable),modes
 07,4A94,Mode13_BackToMainMenu13,I,ModeTable entry $13: forced: returns to mode 01 at once (no screen of its own),modes
 07,4A9F,Mode13_StateTable,C,"state table of mode $13, read by $0189 with hFF8E",modes
-07,4E27,Data_07_4E27,C,"read in the core runs by 07:43EE, 07:4E59",kitty_types
 07,4E59,StrawberryCh_SetCornerTable,C,$D92D-$D92E = word [$D92A] (the channel) of 07:4E4B: the corner pieces of the channel,hand 2026-11-08
 07,4E70,Data_07_4E70,C,"read in the core runs by 07:4F09, 07:4EF5",kitty_types
 07,4EF5,StrawberryCh_PickRandomPage,C,$D92B = Rng_Scaled of byte [$D92A] of 07:4EEE: a random story page of the channel,hand 2026-11-08
@@ -1489,6 +1533,7 @@ bank,addr,name,conf,note,source
 07,4FBB,Data_07_4FBB,C,read in the core runs by 00:02F9,kitty_types
 07,5013,Mode11_State01,C,handler of state $01 of mode $11 (word 1 of Mode11_StateTable),modes
 07,502B,Data_07_502B,C,read in the core runs by 00:1AB7,kitty_types
+07,5042,Data_07_5042,C,read in the core runs by 00:1AB7,kitty_types
 07,5056,Mode11_State02,C,handler of state $02 of mode $11 (word 2 of Mode11_StateTable),modes
 07,5074,Mode11_State03,C,handler of state $03 of mode $11 (word 3 of Mode11_StateTable),modes
 07,5091,StrawberryCh_StartMusic,C,jump table by channel [$D92A] to the 7 sound requests below,hand 2026-11-08
@@ -1504,6 +1549,7 @@ bank,addr,name,conf,note,source
 07,5101,Data_07_5101,C,read in the core runs by 00:1AB7,kitty_types
 07,5109,Mode11_State04,C,handler of state $04 of mode $11 (word 4 of Mode11_StateTable),modes
 07,514C,Data_07_514C,C,read in the core runs by 00:1AB7,kitty_types
+07,5169,Data_07_5169,C,read in the core runs by 00:1AB7,kitty_types
 07,517C,Mode11_State07,C,handler of state $07 of mode $11 (word 7 of Mode11_StateTable),modes
 07,519C,Mode11_State08,C,handler of state $08 of mode $11 (word 8 of Mode11_StateTable),modes
 07,519D,Mode11_State0B,C,handler of state $0B of mode $11 (word 11 of Mode11_StateTable),modes
@@ -1523,7 +1569,9 @@ bank,addr,name,conf,note,source
 07,543D,StrawberryCh_FrameCallbackA,C,"00:1AC5, then the keys unless $D8E0 or $D8D4 is set (A, ...); mode $11 state $02; runs on its screen (11:02) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
 07,546A,Data_07_546A,C,read in the core runs by 00:1AB7,kitty_types
 07,5477,StrawberryCh_LockedCallback,C,frame callback of a channel the Kitts do not pay for (StrawberryCh_CheckAfford sets carry; mode $11 states $03 / $08): A shows the notice (StrawberryCh_LockedNoticeCallback); BGB 2026-11-08 with 0 Kitts: the snow screen,hand 2026-11-08
+07,54AF,Data_07_54AF,C,read in the core runs by 00:1AB7,kitty_types
 07,54B8,StrawberryCh_LockedNoticeCallback,C,"frame callback while the notice is shown (""this channel can be watched with 50 Kitts""): a key goes back to StrawberryCh_LockedCallback; BGB 2026-11-08 with 0 Kitts",hand 2026-11-08
+07,54F0,Data_07_54F0,C,read in the core runs by 00:1AB7,kitty_types
 07,550A,Data_07_550A,C,read in the core runs by 00:1AB7,kitty_types
 07,5528,Data_07_5528,C,read in the core runs by 00:1AB7,kitty_types
 07,5550,Data_07_5550,C,read in the core runs by 00:1AB7,kitty_types
@@ -1717,10 +1765,9 @@ bank,addr,name,conf,note,source
 0C,7A40,Data_0C_7A40,C,read in the core runs by 00:021C,kitty_types
 0C,7AE0,Data_0C_7AE0,C,read in the core runs by 00:021C,kitty_types
 0C,7B40,Data_0C_7B40,C,read in the core runs by 00:021C,kitty_types
-0C,7C40,Data_0C_7C40,C,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:021C",kitty_types
+0C,7C40,Data_0C_7C40,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3",kitty_types
 0C,7CE0,Data_0C_7CE0,C," data copied to  by 06:4BEF ($0726, 16 bytes)",kitty_types
-0C,7D00,Data_0C_7D00,C,read in the core runs by 00:021C,kitty_types
-0C,7E20,Data_0C_7E20,C,read in the core runs by 00:021C,kitty_types
+0C,7E20,Data_0C_7E20,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06CA",kitty_types
 0C,7F80,Data_0C_7F80,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 0D,4000,Data_0D_4000,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 0D,4100,Data_0D_4100,C,"read in the core runs by 00:067E, 00:066E",kitty_types
@@ -1911,6 +1958,7 @@ bank,addr,name,conf,note,source
 0F,4B39,Sfx1_Init_35,C,Sfx1 init handler of the sound ids $35 (entries of Sfx1_InitTbl),hand 2026-11-08
 0F,4B46,Sfx1_Step_35,C,Sfx1 step handler of the sound ids $35 (entries of Sfx1_StepTbl),hand 2026-11-08
 0F,4B4E,Sfx1_StepRegTable,C,"same code as the Japanese Sfx1_StepRegTable (1F:4B79, 25 bytes, masked match)",port_jp
+0F,4B67,Data_0F_4B67,C,"read in the core runs by 0F:4BBA, 0F:522E",kitty_types
 0F,4B7B,Sfx1_Init_0F,C,Sfx1 init handler of the sound ids $0F (entries of Sfx1_InitTbl),hand 2026-11-08
 0F,4B83,Sfx1_Step_0F,C,Sfx1 step handler of the Kitty sound ids $0F; same code as the Japanese Sfx1_Step_0F_SpaceFeverTargetKill (its game role belongs to the Japanese ROM),hand 2026-11-08
 0F,4B94,Data_0F_4B94,C,"read in the core runs by 0F:4BBA, 0F:522E",kitty_types
@@ -2034,8 +2082,9 @@ bank,addr,name,conf,note,source
 0F,57D9,Data_0F_57D9,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380",kitty_types
 0F,5AA0,Data_0F_5AA0,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380",kitty_types
 0F,6982,Data_0F_6982,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380",kitty_types
-0F,6DF1,Data_0F_6DF1,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380",kitty_types
-0F,75F7,Data_0F_75F7,C,"read in the core runs by 0F:543A, 0F:536F, 0F:5259, 0F:537A ...",kitty_types
+0F,6C3F,Data_0F_6C3F,C,read in the core runs by 0F:543A,kitty_types
+0F,6CAD,Data_0F_6CAD,C,read in the core runs by 0F:543A,kitty_types
+0F,6DF1,Data_0F_6DF1,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5259 ...",kitty_types
 0F,7AC7,Data_0F_7AC7,C,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380",kitty_types
 0F,7D71,Data_0F_7D71,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380",kitty_types
 0F,7E89,Data_0F_7E89,C,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380",kitty_types
@@ -2048,12 +2097,12 @@ bank,addr,name,conf,note,source
 10,5C00,Data_10_5C00,C,"read in the core runs by 00:067E, 00:066E, 00:06F3, 00:06CA",kitty_types
 10,5EE0,Data_10_5EE0,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3",kitty_types
 11,4000,Data_11_4000,C,"read in the core runs by 00:067E, 00:066E, 00:0282, 00:06CA",kitty_types
-11,5FE0,Data_11_5FE0,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
+11,5FE0,Data_11_5FE0,C,read in the core runs by 00:021C,kitty_types
 12,40E0,Data_12_40E0,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
 12,4120,Data_12_4120,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
 12,41C0,Data_12_41C0,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
 12,4240,Data_12_4240,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
-12,5FE0,Data_12_5FE0,C,"read in the core runs by 00:067E, 00:066E, 00:06CA, 00:0282",kitty_types
+12,5FE0,Data_12_5FE0,C,"read in the core runs by 00:067E, 00:066E, 00:0282, 00:06CA",kitty_types
 12,7FE0,Data_12_7FE0,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
 13,4000,Data_13_4000,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3",kitty_types
 13,5F80,Gfx_13_5F80,C,"Gfx: tiles copied to 8000 by 07:675B ($0245, 6144 bytes)",kitty_types
@@ -2112,8 +2161,7 @@ bank,addr,name,conf,note,source
 1B,7600,Map_1B_7600,C,"Map: tile map copied to 9800 by 07:67CB ($0245, 576 bytes)",kitty_types
 1B,7A00,Data_1B_7A00,C,"read in the core runs by 00:067E, 00:066E, 00:06CA",kitty_types
 1B,7EF0,Gfx_1B_7EF0,C,"Gfx: tiles copied to 8EF0 by 01:6E85 ($0726, 240 bytes)",kitty_types
-1C,4000,Data_1C_4000,C,"read in the core runs by 00:067E, 00:066E, 00:06F3",kitty_types
-1C,5A40,Data_1C_5A40,C,read in the core runs by 00:021C,kitty_types
+1C,4000,Data_1C_4000,C,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06F3",kitty_types
 1C,6BC0,Data_1C_6BC0,C,"read in the core runs by 00:021C, 00:067E, 00:066E",kitty_types
 1C,7240,Data_1C_7240,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 1C,7640,Data_1C_7640,C,"read in the core runs by 00:067E, 00:066E",kitty_types
@@ -2159,13 +2207,12 @@ bank,addr,name,conf,note,source
 23,7530,Gfx_23_7530,C,"Gfx: tiles copied to 8FE0 by 00:07A8 ($0726, 32 bytes)",kitty_types
 23,7950,Gfx_23_7950,C,"Gfx: tiles copied to 8C00 by 05:4CD3 ($0726, 768 bytes)",kitty_types
 23,7D50,Data_23_7D50,C,"read in the core runs by 00:067E, 00:066E",kitty_types
-24,4000,Data_24_4000,C,"read in the core runs by 00:0B6B, 00:021C",kitty_types
+24,4000,Data_24_4000,C,"read in the core runs by 00:0B6B, 00:021C, 00:067E, 00:066E",kitty_types
 24,6A00,Gfx_24_6A00,C,"Gfx: tiles copied to 8000 by 07:5ACA ($0245, 2048 bytes)",kitty_types
 24,6BC0,Gfx_24_6BC0,C,"Gfx: tiles copied to 81C0 by 07:5C9F ($0726, 48 bytes)",kitty_types
 24,7000,Gfx_24_7000,C,"Gfx: tiles copied to 81C0 by 07:5AD4 ($0245, 64 bytes)",kitty_types
 24,7200,Gfx_24_7200,C,"Gfx: tiles copied to 9600 by 07:5ADE ($0245, 512 bytes)",kitty_types
 24,7400,Gfx_24_7400,C,"Gfx: tiles copied to 8E00 by 05:40DF ($0245, 2560 bytes)",kitty_types
-24,7E00,Data_24_7E00,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 25,4000,Data_25_4000,C,"read in the core runs by 00:021C, 00:0B6B, 00:22B6, 00:067E ...",kitty_types
 25,5C00,Gfx_25_5C00,C,"Gfx: tiles copied to 8600 by 07:4F9B ($0245, 2560 bytes)",kitty_types
 25,63F0,Gfx_25_63F0,C,"Gfx: tiles copied to 8DF0 by 07:4FD6 ($0726, 528 bytes)",kitty_types
@@ -2191,8 +2238,7 @@ bank,addr,name,conf,note,source
 2C,4000,Data_2C_4000,C,"read in the core runs by 00:067E, 00:066E, 00:0B6B, 00:06F3 ...",kitty_types
 2C,78D0,Map_2C_78D0,C,"Map: tile map copied to 9800 by 06:6B13 ($0245, 1024 bytes)",kitty_types
 2C,7CD0,Data_2C_7CD0,C,"read in the core runs by 00:067E, 00:066E",kitty_types
-2D,4000,Data_2D_4000,C,read in the core runs by 00:0B6B,kitty_types
-2D,5C00,Data_2D_5C00,C,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:06F3",kitty_types
+2D,4000,Data_2D_4000,C,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:06F3",kitty_types
 2D,7820,Map_2D_7820,C,"Map: tile map copied to 9800 by 06:40D7 ($0245, 1024 bytes)",kitty_types
 2D,7C20,Data_2D_7C20,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 2E,4000,Data_2E_4000,C,read in the core runs by 00:0B6B,kitty_types
@@ -2200,8 +2246,7 @@ bank,addr,name,conf,note,source
 2E,7C00,Data_2E_7C00,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06F3",kitty_types
 2E,7C80,Map_2E_7C80,C,"Map: tile map copied to 9880 by 05:42E9 ($0726, 448 bytes)",kitty_types
 2E,7E40,Map_2E_7E40,C,"Map: tile map copied to 9880 by 05:428D ($0245, 448 bytes)",kitty_types
-2F,4000,Data_2F_4000,C,read in the core runs by 00:0B6B,kitty_types
-2F,5C00,Data_2F_5C00,C,"read in the core runs by 00:067E, 00:066E, 00:06F3",kitty_types
+2F,4000,Data_2F_4000,C,"read in the core runs by 00:0B6B, 00:067E, 00:066E, 00:06F3",kitty_types
 2F,63E0,Data_2F_63E0,C,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06CA",kitty_types
 2F,67B0,Map_2F_67B0,C,"Map: tile map copied to 9800 by 01:7230 ($0245, 448 bytes)",kitty_types
 2F,6970,Map_2F_6970,C,"Map: tile map copied to 9C00 by 01:7252 ($0245, 128 bytes)",kitty_types
@@ -2212,12 +2257,12 @@ bank,addr,name,conf,note,source
 30,7FA0,Gfx_30_7FA0,C,"Gfx: tiles copied to 8000 by 06:4F68 ($0726, 96 bytes)",kitty_types
 31,4000,Data_31_4000,C,read in the core runs by 00:0B6B,kitty_types
 31,4700,Data_31_4700,C,read in the core runs by 00:0B6B,kitty_types
-31,5C00,Data_31_5C00,C,"read in the core runs by 00:067E, 00:066E, 00:021C, 00:06F3",kitty_types
+31,4E00,Data_31_4E00,C,"read in the core runs by 00:0B6B, 00:067E, 00:021C, 00:066E ...",kitty_types
 31,64F0,Gfx_31_64F0,C,"Gfx: tiles copied to 8000 by 05:439C ($0245, 768 bytes)",kitty_types
 31,6770,Map_31_6770,C,"Map: tile map copied to 9800 by 05:4214 ($0245, 576 bytes)",kitty_types
 31,69F0,Map_31_69F0,C,"Map: tile map copied to 9800 by 05:43A6 ($0245, 576 bytes)",kitty_types
 31,6C30,Map_31_6C30,C,"Map: tile map copied to 98A0 by 05:4459 ($0726, 32 bytes)",kitty_types
-31,6C50,Data_31_6C50,C,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06CA ...",kitty_types
+31,6C50,Data_31_6C50,C,"read in the core runs by 00:021C, 00:067E, 00:066E, 00:06CA ...",kitty_types
 31,6EE0,Map_31_6EE0,C,"Map: tile map copied to 9800 by 06:5CFD ($0245, 608 bytes)",kitty_types
 31,7140,Map_31_7140,C,"Map: tile map copied to 9800 by 05:44C0 ($0245, 576 bytes)",kitty_types
 31,7380,Map_31_7380,C,"Map: tile map copied to 9900 by 05:4501 ($0726, 32 bytes)",kitty_types
@@ -2225,15 +2270,14 @@ bank,addr,name,conf,note,source
 31,7830,Map_31_7830,C,"Map: tile map copied to 9800 by 05:40E9 ($0245, 576 bytes)",kitty_types
 31,7A70,Map_31_7A70,C,"Map: tile map copied to 9800 by 05:4558 ($0245, 576 bytes)",kitty_types
 31,7EF0,Data_31_7EF0,C,"read in the core runs by 00:0AD7, 00:0829, 00:0A9B, 00:08F2 ...",kitty_types
-32,4000,Data_32_4000,C,read in the core runs by 00:0B6B,kitty_types
+32,4000,Data_32_4000,C,"read in the core runs by 00:0B6B, 00:021C, 00:067E, 00:066E",kitty_types
 32,7800,Map_32_7800,C,"Map: tile map copied to 9800 by 01:74C8 ($0726, 576 bytes)",kitty_types
 32,7A40,Map_32_7A40,C,"Map: tile map copied to 9800 by 06:563A ($0245, 576 bytes)",kitty_types
 32,7C80,Map_32_7C80,C,"Map: tile map copied to 9800 by 06:685A ($0245, 576 bytes)",kitty_types
 32,7EC0,Data_32_7EC0,C,"read in the core runs by 00:067E, 00:066E",kitty_types
-33,4000,Data_33_4000,C,read in the core runs by 00:0B6B,kitty_types
-33,5C00,Data_33_5C00,C,read in the core runs by 00:021C,kitty_types
+33,4000,Data_33_4000,C,"read in the core runs by 00:0B6B, 00:021C",kitty_types
 33,6A00,Map_33_6A00,C,"Map: tile map copied to 9800 by 06:44E4 ($0245, 576 bytes)",kitty_types
-33,6E50,Data_33_6E50,C,"read in the core runs by 00:067E, 00:22B6, 00:066E, 00:06CA",kitty_types
+33,6E50,Data_33_6E50,C,"read in the core runs by 00:22B6, 00:067E, 00:066E, 00:06CA",kitty_types
 33,7210,Data_33_7210,C,"read in the core runs by 00:0906, 00:067E, 00:08F2, 00:0843 ...",kitty_types
 34,4000,Data_34_4000,C,"read in the core runs by 00:0B6B, 00:0906, 00:0829, 00:08F2 ...",kitty_types
 35,4000,Data_35_4000,C,"read in the core runs by 00:0B6B, 00:0AD7, 00:0829, 00:0A9B ...",kitty_types
@@ -2250,4 +2294,4 @@ bank,addr,name,conf,note,source
 3C,4000,Data_3C_4000,C,read in the core runs by 00:0B6B,kitty_types
 3D,4000,Data_3D_4000,C,"read in the core runs by 00:0B6B, 00:021C",kitty_types
 3E,4000,Data_3E_4000,C,"read in the core runs by 00:0B6B, 00:021C",kitty_types
-3F,4000,Data_3F_4000,C,"read in the core runs by 00:021C, 00:0B6B",kitty_types
+3F,4000,Data_3F_4000,C,"read in the core runs by 00:0B6B, 00:021C",kitty_types
