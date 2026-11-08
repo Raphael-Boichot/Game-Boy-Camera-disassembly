@@ -480,3 +480,142 @@ bank,addr,name,conf,note,source
 04,55C6,Cam_ORegister_SAR_Search,I,"near copy of the Japanese Cam_ORegister_SAR_Search (0A:4B6A, instruction-sequence ratio 0.81)",hand 2026-11-08
 04,568E,Cam_CountBrightSamples,I,"SRAM bank 0: counts the bits 6-3 set over the samples at [hFFB5-hFFB6]",hand 2026-11-08
 04,5E73,Cam_DispatchEffect,C,"jumps to entry A of the effect table 04:5E8A with SRAM bank 0 (as the Japanese 0A:5406 Cam_DispatchEffect)",hand 2026-11-08
+0F,41C9,Sfx1_InitTbl,C,"62 words: channel-1 effect init handlers by sound id 1..$3E (the same layout as the Japanese Sfx1_InitTbl of bank $1F)",hand 2026-11-08
+0F,4245,Sfx1_StepTbl,C,"62 words: channel-1 effect step handlers by sound id 1..$3E (the same layout as the Japanese Sfx1_StepTbl of bank $1F)",hand 2026-11-08
+0F,42C1,Sfx3_InitTbl,C,"10 words: channel-3 effect init handlers by sound id 1..$0A (the same layout as the Japanese Sfx3_InitTbl of bank $1F)",hand 2026-11-08
+0F,42D5,Sfx3_StepTbl,C,"10 words: channel-3 effect step handlers by sound id 1..$0A (the same layout as the Japanese Sfx3_StepTbl of bank $1F)",hand 2026-11-08
+0F,42E9,Sfx4_InitTbl,C,"18 words: channel-4 effect init handlers by sound id 1..$12 (the same layout as the Japanese Sfx4_InitTbl of bank $1F)",hand 2026-11-08
+0F,430D,Sfx4_StepTbl,C,"18 words: channel-4 effect step handlers by sound id 1..$12 (the same layout as the Japanese Sfx4_StepTbl of bank $1F)",hand 2026-11-08
+0F,4339,Sfx1_Init_04,C,"Sfx1 init handler of the sound ids $04 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4347,Sfx1_Init_3B,C,"Sfx1 init handler of the sound ids $3B (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4366,Sfx1_Init_28,C,"Sfx1 init handler of the sound ids $28 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,436E,Sfx1_Step_28,C,"Sfx1 step handler of the sound ids $28 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,438D,Sfx1_Init_2A,C,"Sfx1 init handler of the sound ids $2A (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4395,Sfx1_Step_2A,C,"Sfx1 step handler of the sound ids $2A (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,43AF,Sfx1_Init_24,C,"Sfx1 init handler of the sound ids $24 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,43B7,Sfx1_Step_24,C,"Sfx1 step handler of the sound ids $24 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,43CC,Sfx1_Init_1E_26,C,"Sfx1 init handler of the sound ids $1E, $26 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,43FC,Sfx1_Init_25,C,"Sfx1 init handler of the sound ids $25 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4422,Sfx1_Init_27,C,"Sfx1 init handler of the sound ids $27 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4464,Sfx1_Init_1A,C,"Sfx1 init handler of the sound ids $1A (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4495,Sfx1_Init_03,C,"Sfx1 init handler of the sound ids $03 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,44BE,Sfx1_Init_0B,C,"Sfx1 init handler of the sound ids $0B (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,44CC,Sfx1_Init_1C,C,"Sfx1 init handler of the sound ids $1C (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,44E9,Sfx1_Step_1B,C,"Sfx1 step handler of the sound ids $1B (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4508,Sfx1_Step_16,C,"Sfx1 step handler of the sound ids $16 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4589,Sfx1_Init_29,C,"Sfx1 init handler of the sound ids $29 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,45BF,Sfx1_Init_05,C,"Sfx1 init handler of the sound ids $05 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4606,Sfx1_Init_0A,C,"Sfx1 init handler of the sound ids $0A (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4642,Sfx1_Init_02,C,"Sfx1 init handler of the sound ids $02 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,464A,Sfx1_Step_02,C,"Sfx1 step handler of the sound ids $02 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4664,Sfx1_Init_20,C,"Sfx1 init handler of the sound ids $20 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4671,Sfx1_Init_21,C,"Sfx1 init handler of the sound ids $21 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,467E,Sfx1_Init_22,C,"Sfx1 init handler of the sound ids $22 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,468B,Sfx1_Init_23_2B,C,"Sfx1 init handler of the sound ids $23, $2B (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4698,Sfx1_Init_01,C,"Sfx1 init handler of the sound ids $01 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,470D,Sfx1_Init_10,C,"Sfx1 init handler of the sound ids $10 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4759,Sfx1_Step_Shared,C,"Sfx1 step handler of the sound ids $01, $04, $07, $0B, $0C, $12, $18, $1C, $1D, $1F, $20, $21, $22, $23, $27, $2B, $2C, $2D, $2E, $34 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,47B4,Sfx1_Init_09,C,"Sfx1 init handler of the sound ids $09 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,47E7,Sfx1_Init_14,C,"Sfx1 init handler of the sound ids $14 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,47F4,Sfx1_Step_14,C,"Sfx1 step handler of the sound ids $14 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,480C,Sfx1_Init_15,C,"Sfx1 init handler of the sound ids $15 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4819,Sfx1_Step_15,C,"Sfx1 step handler of the sound ids $15 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4831,Sfx1_Init_18,C,"Sfx1 init handler of the sound ids $18 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4839,Sfx1_Init_12,C,"Sfx1 init handler of the sound ids $12 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4846,Sfx1_Init_1D,C,"Sfx1 init handler of the sound ids $1D (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4933,Sfx1_Init_2E,C,"Sfx1 init handler of the sound ids $2E (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4940,Sfx1_Init_32,C,"Sfx1 init handler of the sound ids $32 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4A53,Sfx1_Step_30,C,"Sfx1 step handler of the sound ids $30 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4A7A,Sfx1_Step_31,C,"Sfx1 step handler of the sound ids $31 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4A9C,Sfx1_Init_38,C,"Sfx1 init handler of the sound ids $38 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4AA9,Sfx1_Step_38,C,"Sfx1 step handler of the sound ids $38 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4AD0,Sfx1_Step_37,C,"Sfx1 step handler of the sound ids $37 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4AEC,Sfx1_Init_39,C,"Sfx1 init handler of the sound ids $39 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4AF9,Sfx1_Step_39,C,"Sfx1 step handler of the sound ids $39 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4B12,Sfx1_Init_36,C,"Sfx1 init handler of the sound ids $36 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4B1F,Sfx1_Step_36,C,"Sfx1 step handler of the sound ids $36 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4B39,Sfx1_Init_35,C,"Sfx1 init handler of the sound ids $35 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4B46,Sfx1_Step_35,C,"Sfx1 step handler of the sound ids $35 (entries of Sfx1_StepTbl)",hand 2026-11-08
+0F,4B7B,Sfx1_Init_0F,C,"Sfx1 init handler of the sound ids $0F (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4BA3,Sfx1_Init_11,C,"Sfx1 init handler of the sound ids $11 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4BDE,Sfx1_Init_13,C,"Sfx1 init handler of the sound ids $13 (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4C10,Sfx1_Init_19_3A,C,"Sfx1 init handler of the sound ids $19, $3A (entries of Sfx1_InitTbl)",hand 2026-11-08
+0F,4CB4,Sfx4_Init_09,C,"Sfx4 init handler of the sound ids $09 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4D14,Sfx4_Init_06,C,"Sfx4 init handler of the sound ids $06 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4D4F,Sfx4_Init_0B,C,"Sfx4 init handler of the sound ids $0B (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4D5B,Sfx4_Init_01,C,"Sfx4 init handler of the sound ids $01 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4D81,Sfx4_Init_0D,C,"Sfx4 init handler of the sound ids $0D (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4D8D,Sfx4_Init_0F,C,"Sfx4 init handler of the sound ids $0F (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4DC6,Sfx4_Init_0E,C,"Sfx4 init handler of the sound ids $0E (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4DF6,Sfx4_Init_07,C,"Sfx4 init handler of the sound ids $07 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4E43,Sfx4_Init_12,C,"Sfx4 init handler of the sound ids $12 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4E4B,Sfx4_Step_12,C,"Sfx4 step handler of the sound ids $12 (entries of Sfx4_StepTbl)",hand 2026-11-08
+0F,4E6C,Sfx4_Init_04,C,"Sfx4 init handler of the sound ids $04 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4E74,Sfx4_Step_04,C,"Sfx4 step handler of the sound ids $04 (entries of Sfx4_StepTbl)",hand 2026-11-08
+0F,4E91,Sfx4_Init_11,C,"Sfx4 init handler of the sound ids $11 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4EB2,Sfx4_Init_08,C,"Sfx4 init handler of the sound ids $08 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4EBE,Sfx4_Init_02,C,"Sfx4 init handler of the sound ids $02 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4ECA,Sfx4_Init_0C,C,"Sfx4 init handler of the sound ids $0C (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4EFE,Sfx4_Init_10,C,"Sfx4 init handler of the sound ids $10 (entries of Sfx4_InitTbl)",hand 2026-11-08
+0F,4F28,Sfx4_Step_Shared,C,"Sfx4 step handler of the sound ids $02, $03, $05, $08, $0B, $0C, $0D, $0F (entries of Sfx4_StepTbl)",hand 2026-11-08
+0F,4FB3,Sfx3_Init_09,C,"Sfx3 init handler of the sound ids $09 (entries of Sfx3_InitTbl)",hand 2026-11-08
+0F,4FEE,Sfx3_Init_08,C,"Sfx3 init handler of the sound ids $08 (entries of Sfx3_InitTbl)",hand 2026-11-08
+0F,5130,Sfx3_Begin_Wave51CA,C,"Sfx3_Begin, then the wave pattern at 0F:51CA (as the Japanese Sfx3_Begin_Wave* of bank $1F)",hand 2026-11-08
+0F,5138,Sfx3_Begin_Wave518A,C,"Sfx3_Begin, then the wave pattern at 0F:518A (as the Japanese Sfx3_Begin_Wave* of bank $1F)",hand 2026-11-08
+0F,5140,Sfx3_Begin_Wave519A,C,"Sfx3_Begin, then the wave pattern at 0F:519A (as the Japanese Sfx3_Begin_Wave* of bank $1F)",hand 2026-11-08
+0F,5148,Sfx3_Begin_Wave51AA,C,"Sfx3_Begin, then the wave pattern at 0F:51AA (as the Japanese Sfx3_Begin_Wave* of bank $1F)",hand 2026-11-08
+0F,5150,Sfx3_Begin_Wave51BA,C,"Sfx3_Begin, then the wave pattern at 0F:51BA (as the Japanese Sfx3_Begin_Wave* of bank $1F)",hand 2026-11-08
+0F,5158,Sfx3_Begin_Wave517A,C,"Sfx3_Begin, then the wave pattern at 0F:517A (as the Japanese Sfx3_Begin_Wave* of bank $1F)",hand 2026-11-08
+0F,4341,Sfx1_Ret4341,C,"ret (bytes after it are data)",hand 2026-11-08
+0F,4731,Sfx1_Part4731,I,"entry inside a channel-1 handler: ld hl,$D003 ...",hand 2026-11-08
+0F,5236,Sfx3_Part5236,I,"entry inside a channel-3 handler: inc e, [$D051] = A ...",hand 2026-11-08
+0F,5308,Snd_Init,C,"NR52 = $80, NR50 = $77, NR51 = $FF, $D000-$D0FF cleared (the Japanese Snd_Init 1F:5338, ratio 0.83)",hand 2026-11-08
+0F,536F,Snd_Trk_LoadFirstPattern,C,"same code as the Japanese Snd_Trk_LoadFirstPattern (1F:540F)",hand 2026-11-08
+0F,537A,Snd_Copy2,C,"same code as the Japanese Snd_Copy2 (1F:541A): two bytes from [HL+] to [DE]",hand 2026-11-08
+0F,5431,Snd_Trk_PtrInc2,C,"same code as the Japanese Snd_Trk_PtrInc2 (1F:54D1)",hand 2026-11-08
+0F,543A,Snd_Trk_FetchByte,I,"B = the byte at the track pointer stored at HL (then the track command loop)",hand 2026-11-08
+0F,5666,Snd_Vib_Lookup,C,"same code as the Japanese Snd_Vib_Lookup (1F:5704)",hand 2026-11-08
+0F,566F,Snd_Trk_UpdateChannel,I,"reads the channel record at HL + 6 into $D051 and updates the hardware channel by $D050",hand 2026-11-08
+0F,434F,Sfx1_Step_3B,C,"Sfx1 step handler of the Kitty sound ids $3B; same code as the Japanese Sfx1_Step_3B_EraseAnim (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,43D4,Sfx1_Step_26,C,"Sfx1 step handler of the Kitty sound ids $26; same code as the Japanese Sfx1_Step_26_SpaceFeverBossDeath (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4404,Sfx1_Step_25,C,"Sfx1 step handler of the Kitty sound ids $25; same code as the Japanese Sfx1_Step_25_SpaceFeverStart (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,442F,Sfx1_Init_0E,C,"Sfx1 init handler of the Kitty sound ids $0E; same code as the Japanese Sfx1_Init_0E_ChooseD (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4440,Sfx1_Step_0E,C,"Sfx1 step handler of the Kitty sound ids $0E; same code as the Japanese Sfx1_Step_0E_ChooseD (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,446C,Sfx1_Step_1A_1E,C,"Sfx1 step handler of the Kitty sound ids $1A, $1E; same code as the Japanese Sfx1_Step_1A_1E_HotspotSound07_Choose (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,449D,Sfx1_Step_03,C,"Sfx1 step handler of the Kitty sound ids $03; same code as the Japanese Sfx1_Step_03_KeyA (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,44DC,Sfx1_Init_1B,C,"Sfx1 init handler of the Kitty sound ids $1B; same code as the Japanese Sfx1_Init_1B_SpaceFeverMenuPickGame (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,44FB,Sfx1_Init_16,C,"Sfx1 init handler of the Kitty sound ids $16; same code as the Japanese Sfx1_Init_16_OptionChange (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,451F,Sfx1_Init_3C_3D_3E,C,"Sfx1 init handler of the Kitty sound ids $3C, $3D, $3E; same code as the Japanese Sfx1_Init_3C_3D_3E_SpaceFeverPlayerDeathJingle (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4531,Sfx1_Step_3C_3D_3E,C,"Sfx1 step handler of the Kitty sound ids $3C, $3D, $3E; same code as the Japanese Sfx1_Step_3C_3D_3E_SpaceFeverPlayerDeathJingle (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4591,Sfx1_Step_29,C,"Sfx1 step handler of the Kitty sound ids $29; same code as the Japanese Sfx1_Step_29_ChooseB (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,45C7,Sfx1_Step_05,C,"Sfx1 step handler of the Kitty sound ids $05; same code as the Japanese Sfx1_Step_05_KeyStart (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,460E,Sfx1_Step_0A,C,"Sfx1 step handler of the Kitty sound ids $0A; same code as the Japanese Sfx1_Step_0A_MainMenuPageTurn (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4715,Sfx1_Step_10,C,"Sfx1 step handler of the Kitty sound ids $10; same code as the Japanese Sfx1_Step_10_TagDigitsJingle (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,477C,Sfx1_Init_06_0D,C,"Sfx1 init handler of the Kitty sound ids $06, $0D; same code as the Japanese Sfx1_Init_06_0D_KeySelect_SpaceFeverBigEnemyKill (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4788,Sfx1_Step_06_0D,C,"Sfx1 step handler of the Kitty sound ids $06, $0D; same code as the Japanese Sfx1_Step_06_0D_KeySelect_SpaceFeverBigEnemyKill (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,47BC,Sfx1_Step_09,C,"Sfx1 step handler of the Kitty sound ids $09; same code as the Japanese Sfx1_Step_09_MainMenuPageUp (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4858,Sfx1_Init_0C,C,"Sfx1 init handler of the Kitty sound ids $0C; same code as the Japanese Sfx1_Init_0C_SpaceFeverEnemyKill (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4869,Sfx1_Init_07,C,"Sfx1 init handler of the Kitty sound ids $07; same code as the Japanese Sfx1_Init_07_MainMenuMove (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4A19,Sfx1_Init_34,C,"Sfx1 init handler of the Kitty sound ids $34; same code as the Japanese Sfx1_Init_34_SeqStep (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4A43,Sfx1_Init_30,C,"Sfx1 init handler of the Kitty sound ids $30; same code as the Japanese Sfx1_Init_30_RunCelebration (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4AC3,Sfx1_Init_37,C,"Sfx1 init handler of the Kitty sound ids $37; same code as the Japanese Sfx1_Init_37_CopyBrowse (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4B83,Sfx1_Step_0F,C,"Sfx1 step handler of the Kitty sound ids $0F; same code as the Japanese Sfx1_Step_0F_SpaceFeverTargetKill (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4BAB,Sfx1_Step_11,C,"Sfx1 step handler of the Kitty sound ids $11; same code as the Japanese Sfx1_Step_11_Confirm (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4BE6,Sfx1_Step_13,C,"Sfx1 step handler of the Kitty sound ids $13; same code as the Japanese Sfx1_Step_13_PanelClose (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4C18,Sfx1_Step_19_3A,C,"Sfx1 step handler of the Kitty sound ids $19, $3A; same code as the Japanese Sfx1_Step_19_3A_ComposeLayoutKey_PickPhoto (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4C36,Sfx1_Init_08,C,"Sfx1 init handler of the Kitty sound ids $08; same code as the Japanese Sfx1_Init_08_MainMenuPageDown (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4C44,Sfx1_Step_08,C,"Sfx1 step handler of the Kitty sound ids $08; same code as the Japanese Sfx1_Step_08_MainMenuPageDown (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4CFD,Sfx4_Init_05,C,"Sfx4 init handler of the Kitty sound ids $05; same code as the Japanese Sfx4_Init_05_EraseAnim (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4D63,Sfx4_Step_01,C,"Sfx4 step handler of the Kitty sound ids $01; same code as the Japanese Sfx4_Step_01_StampCommit (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4DFE,Sfx4_Step_07,C,"Sfx4 step handler of the Kitty sound ids $07; same code as the Japanese Sfx4_Step_07_SpaceFeverFireShots (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4E1E,Sfx4_Init_0A,C,"Sfx4 init handler of the Kitty sound ids $0A; same code as the Japanese Sfx4_Init_0A_LinkChoose (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4E2C,Sfx4_Step_0A,C,"Sfx4 step handler of the Kitty sound ids $0A; same code as the Japanese Sfx4_Step_0A_LinkChoose (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4E99,Sfx4_Step_11,C,"Sfx4 step handler of the Kitty sound ids $11; same code as the Japanese Sfx4_Step_11_RunFlagHeight (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4F9D,Sfx3_Step_09,C,"Sfx3 step handler of the Kitty sound ids $09; same code as the Japanese Sfx3_Step_09_DeleteDialogSecond (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4FC5,Sfx3_Step_08,C,"Sfx3 step handler of the Kitty sound ids $08; same code as the Japanese Sfx3_Step_08_DeleteDialogFirst (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,4FFC,Sfx3_Step_03,C,"Sfx3 step handler of the Kitty sound ids $03; same code as the Japanese Sfx3_Step_03_SpaceFeverBossHit (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,5016,Sfx3_Init_03,C,"Sfx3 init handler of the Kitty sound ids $03; same code as the Japanese Sfx3_Init_03_SpaceFeverBossHit (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,5029,Sfx3_Step_02,C,"Sfx3 step handler of the Kitty sound ids $02; same code as the Japanese Sfx3_Step_02_MainMenuViewArcade (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,504D,Sfx3_Init_02,C,"Sfx3 init handler of the Kitty sound ids $02; same code as the Japanese Sfx3_Init_02_MainMenuViewArcade (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,508E,Sfx3_Step_01,C,"Sfx3 step handler of the Kitty sound ids $01; same code as the Japanese Sfx3_Step_01_MainMenuShoot (its game role belongs to the Japanese ROM)",hand 2026-11-08
+0F,50A7,Sfx3_Init_01,C,"Sfx3 init handler of the Kitty sound ids $01; same code as the Japanese Sfx3_Init_01_MainMenuShoot (its game role belongs to the Japanese ROM)",hand 2026-11-08
