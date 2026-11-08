@@ -19,7 +19,8 @@ Notes made before the work started (2026-11-01):
 | L0 | done (2026-11-07) | `intake/intake_roundtrip.txt`: mgbdis `95d951a` with no symbol file + rgbasm 1.0.4 rebuild md5 `0a323bddc4f0159cea76cf44ed0c1a3c` |
 | L1 | done (2026-11-07) | `pocketcamera_kitty.sym` types every byte (`tools/sym_build.py` finds no hole or overlap); mgbdis + rgbasm rebuild md5 `0a323bddc4f0159cea76cf44ed0c1a3c` with it (the checker's `kitty` lines) |
 | L2 | done (2026-11-07) | `port/trace_kitty_unresolved.md`: 0 unresolved; `port/cov_kitty_runs.npz` (core) and `port/cov_kitty_bgb.npz` (BGB); the screen tree below |
-| L3-L6 | not started | |
+| L3 | in progress (2026-11-08) | `disasm/sym_names_kitty.csv` (layers merged by `tools/kitty_names.py`), `disasm/match_jp_kitty.csv`, `disasm/similar_jp_kitty.csv` |
+| L4-L6 | not started | |
 
 ## L0: intake (2026-11-07)
 
@@ -48,7 +49,15 @@ The Kitty engine is not the Japanese one, so this ROM has its own tracer, `tools
 * **Not run yet.** 15,184 bytes of proven code never ran in any run; 4 modes (`$13`, `$15`, `$16`, `$1D`) draw no screen even when forced (the mode table patched in a copy of the ROM, evidence I), and 11 more show a screen only when forced (below). No code stores a constant mode `$13` or `$15`-`$1D` anywhere in the ROM (raw byte search of `ld b / ld a` + the mode setters); `$02:7EA2` sets the mode from an object's fields, so these may be reached through an object script.
 
 * **Name card (C, BGB).** The owner ID card is reached with keys only: take three photos, open Name in the option menu, pick the three photos (mode `$0B` state 4), type a name (state 8), then the blood type (state `$0A`), the birthday (state `$0C`) and boy / girl (state `$0E`); END shows the finished card (mode `$0A` state 1: ID number, name, birthday; its three photos take turns) and its menu (state 2: change, print, cancel). No new code ran on this path: the core runs had already executed it.
-* **Strawberry Channel (C, BGB).** From the unlocking save, channel 1 is a photo story: Left / Right turn the page (the dots at the bottom show which), with no change of mode or state and no new code; the pages after 0-11 presses of Right are in [`screens/strawberry_channel_pages.png`](screens/strawberry_channel_pages.png). How another channel is chosen is not found yet (Up / Down / Select / Start change only the byte `$D8DC` in the core, not the picture); it is an open point for L3.
+* **Strawberry Channel (C, BGB).** Left alone, a channel plays its animation in a loop (channel 1: Hello Kitty driving a little car; 2,400 frames watched, screenshots every 60 frames). Left / Right change the channel (the dots at the bottom; from the unlocking save: car, slide, seesaw, tree, swing, a picnic titled おそとで あそぼ, a spiral, then back to channel 1, [`screens/strawberry_channel_pages.png`](screens/strawberry_channel_pages.png)); Up / Down change only the byte `$D8DC` (a bar with arrows shows at the top left when a channel starts: probably the volume, I). No new code ran.
+
+## L3: names (in progress, 2026-11-08)
+
+* **Names.** 1,388 names (C 1,298 / I 88 / ? 2), merged from five layers by `tools/kitty_names.py`: 813 block labels by kind and address (L1), 307 mode and state names (`ModeMM_<Name>` from the BGB screens, `ModeMM_StateTable`, `ModeMM_StateSS`; the names of `disasm/mode_names_kitty.csv`, tagged I for the 15 modes seen only forced), 201 names ported from the Japanese ROM, 35 names of edited Japanese routines, 32 hand names of the bank-0 engine (`disasm/sym_names_kitty_hand.csv`).
+* **Same code as the Japanese ROM (C).** `tools/kitty_match_jp.py` searches every Japanese routine of 12+ bytes in the Kitty code with the build-dependent operands as wildcards (16-bit addresses, the HRAM byte of `ldh`): 230 of 1,891 are found, 204 at exactly one place. They are the **printer protocol** (`Prn_*`, bank 0), the **link cable** (`Link_*`, bank 0), the **sensor bank** (the Japanese bank `$0A` in Kitty bank `$04`: calibration copy and check, exposure bands, threshold convergence, dither ramps, the image effects `Fx*`), the **SRAM magic comparison** (`Sram_CompareMagic`, one Kitty routine for the three Japanese copies, tag ?), and **107 sound-effect routines** of the Japanese sound bank `$1F` in Kitty bank `$0F`. A port is tagged C from 16 bytes, I below.
+* **Edited copies (I).** `tools/kitty_similar_jp.py` compares the instruction sequences of the routines not found exactly: 52 near matches (ratio >= 0.85), among them the **factory calibration** (`Cam_FactoryMeasure1` / `Cam_FactoryMeasure2`, ratio 0.998 / 0.997), the **quick factory check** (`Cam_CalibSanityCheck_Measure`, 0.993), `Cam_CommitVectorToSRAM`, `Sram_ComputeImageChecksums`, `Sgb_SendPacket`, `Img_ReduceToThumbnail` and the flipped image effects.
+* **Owner's hypotheses so far.** Sensor, printer, link and SRAM code: the same routines as the Japanese ROM (C for the exact matches). Sound: the effect routines are shared; the music data is still to compare. Menus: no routine of the other Japanese banks matches (only banks `$00`, `$02`, `$07`, `$0A` and `$1F` have matches; the 31 Kitty modes have their own code).
+* **Next.** About 890 routine entries (call, table and observed entries) have no name yet; they are named by reading, bank by bank, menus first; then the doubts list.
 
 ### Screens (BGB)
 

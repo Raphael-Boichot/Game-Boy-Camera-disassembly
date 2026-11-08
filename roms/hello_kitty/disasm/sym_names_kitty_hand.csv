@@ -1,0 +1,33 @@
+bank,addr,name,conf,note,source
+00,0100,Entry,C,cartridge entry point: nop; jp $176A,hand 2026-11-08
+00,176A,Boot,C,the entry jumps here,hand 2026-11-08
+00,0150,Call_HL,C,jp hl: a call to $0150 calls the routine at HL,hand 2026-11-08
+00,0151,Call_BC,C,push bc; ret: calls the routine at BC,hand 2026-11-08
+00,0153,Call_DE,C,push de; ret: calls the routine at DE,hand 2026-11-08
+00,0155,Far_Jump,C,one-way far jump: A = bank (hFF8B and $2100); jp hl,hand 2026-11-08
+00,015B,Far_Call,C,far call: B = bank; pushes the caller's bank; the callee returns through jp $0173,hand 2026-11-08
+00,0165,Far_CallKeepA,C,far call keeping A through hFF8A: B = bank; HL = target,hand 2026-11-08
+00,0173,Far_Return,C,pops the caller's bank; switches back; ret,hand 2026-11-08
+00,017A,Far_ReturnSramBank,C,return restoring a bank read from the stack (SRAM routines),hand 2026-11-08
+00,0189,JumpTable_ByA,C,jump to word A of the table at HL,hand 2026-11-08
+00,0194,JumpTable_Inline,C,jump to word A of the table that follows the call,hand 2026-11-08
+00,01A0,FarJumpTable_ByA,C,far call of record A of the {lo; hi; bank} table at HL through $015B,hand 2026-11-08
+00,01B2,Mode_Set,C,mode = A (hFF8D),hand 2026-11-08
+00,01BD,State_Set,C,state = A (hFF8E),hand 2026-11-08
+00,01C8,ModeState_Set,C,mode = B; state = C,hand 2026-11-08
+00,01D1,ModeState_SetInline,C,mode and state from the two bytes after the call,hand 2026-11-08
+00,0206,Copy_Inline,C,copy with inline {source; destination; count} after the call,hand 2026-11-08
+00,021C,Copy_DEtoHL,C,copy BC bytes from DE to HL,hand 2026-11-08
+00,0245,Copy_FarInline,C,copy with inline {source; bank; destination; count} after the call,hand 2026-11-08
+00,0260,Copy_FarDEtoHL,C,copy BC bytes from DE in bank A to HL,hand 2026-11-08
+00,02F9,Lcd_SetupInline,C,11 inline bytes: LCDC; BGP; OBP0; OBP1; SCY; SCX; WY; WX; -; STAT; IE,hand 2026-11-08
+00,032D,Lcd_SetupInlineNoIE,C,10 inline bytes: the same without IE,hand 2026-11-08
+00,066E,Vram_CopyHBlank,C,copy BC bytes from DE to VRAM at HL in H-blank steps (current bank),hand 2026-11-08
+00,0726,Vram_CopyHBlankFar,C,the same from bank A,hand 2026-11-08
+00,0CF2,Main_Loop,C,calls the mode routine of ModeTable through $01A0 every frame,hand 2026-11-08
+00,18B8,Lcdc_SetCallbackNext,C,stores the LCDC-interrupt callback (DE) for the next frame (hFFA6/A7),hand 2026-11-08
+00,18BF,Lcdc_SetCallback,C,stores the LCDC-interrupt callback (DE) in hFFA4/A5,hand 2026-11-08
+00,1AB7,Serial_SetFarCallback,C,3 inline bytes: a far callback {lo; hi; bank} stored in hFF97-99,hand 2026-11-08
+00,205A,Object_Create,C,object creation with BC = 0; falls into Object_CreateWithParam,hand 2026-11-08
+00,205D,Object_CreateWithParam,C,DE = descriptor in bank 2; BC = parameter; fills a 23-byte slot at $DAEE,hand 2026-11-08
+00,20DF,Object_RunAll,I,the per-frame pass over the object slots (far-called from 00:1ACA; runs the slot routines at 00:2113 and 00:212F),hand 2026-11-08

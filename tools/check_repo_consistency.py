@@ -280,13 +280,19 @@ if A.rom_kitty:
     OBS = sorted(glob.glob(KD + 'port/cov_kitty_*.npz')); obs = [x for f in OBS for x in ('--observed', f)]     # the runs (L2)
     r1 = _run('tools/kitty_trace.py', A.rom_kitty, os.path.join(tk, 't.json'), '--roots', KD + 'disasm/extra_roots_kitty.json', '--report', os.path.join(tk, 'u.md'), *obs)
     r2 = _run('tools/kitty_types.py', A.rom_kitty, os.path.join(tk, 't.json'), '--types', os.path.join(tk, 'ty.csv'), '--sites', os.path.join(tk, 'cs.csv'),
-              '--rommap', os.path.join(tk, 'rm.csv'), '--names', os.path.join(tk, 'nm.csv'), *obs) if not r1.returncode else r1
+              '--rommap', os.path.join(tk, 'rm.csv'), '--names', os.path.join(tk, 'na.csv'), *obs) if not r1.returncode else r1
+    if not r2.returncode:      # L3 names: the match tables, then the merge of the layers
+        r2b = _run('tools/kitty_match_jp.py', A.rom, A.rom_kitty, os.path.join(tk, 'mj.csv'))
+        r2c = _run('tools/kitty_similar_jp.py', A.rom, A.rom_kitty, os.path.join(tk, 'sj.csv')) if not r2b.returncode else r2b
+        r2d = _run('tools/kitty_names.py', '--auto', os.path.join(tk, 'na.csv'), '--trace', os.path.join(tk, 't.json'), '--out', os.path.join(tk, 'nm.csv')) if not r2c.returncode else r2c
+        if r2d.returncode: r2 = r2d
     r3 = _run('tools/sym_build.py', A.rom_kitty, '--names', KD + 'disasm/sym_names_kitty.csv', '--types', KD + 'disasm/sym_types_kitty.csv',
               '--trace', KD + 'port/trace_kitty.json', '--out', os.path.join(tk, 'k.sym'), '--report') if not r2.returncode else r2
     if r3.returncode: bad('kitty', 'the Kitty pipeline failed: %s' % (r3.stderr or r3.stdout)[-300:])
     else:
         stale = [f for f, g in (('port/trace_kitty.json', 't.json'), ('port/trace_kitty_unresolved.md', 'u.md'), ('disasm/sym_types_kitty.csv', 'ty.csv'),
-                                ('assets/copy_sites_kitty.csv', 'cs.csv'), ('port/rom_map_kitty.csv', 'rm.csv'), ('disasm/sym_names_kitty.csv', 'nm.csv'),
+                                ('assets/copy_sites_kitty.csv', 'cs.csv'), ('port/rom_map_kitty.csv', 'rm.csv'), ('disasm/sym_names_kitty_auto.csv', 'na.csv'),
+                                ('disasm/match_jp_kitty.csv', 'mj.csv'), ('disasm/similar_jp_kitty.csv', 'sj.csv'), ('disasm/sym_names_kitty.csv', 'nm.csv'),
                                 ('pocketcamera_kitty.sym', 'k.sym')) if open(KD + f, 'rb').read() != open(os.path.join(tk, g), 'rb').read()]
         if stale: bad('kitty', 'not what the Kitty pipeline makes today (SETUP.md, Hello Kitty): %s' % ', '.join(stale))
         else: ok('kitty', 'trace, types, copy sites, byte classes, names and pocketcamera_kitty.sym fresh')
@@ -294,6 +300,12 @@ if A.rom_kitty:
         m1 = re.search(r'kitty_trace: (\d+) instructions, (\d+) code bytes, (\d+) inline table bytes, (\d+) far calls resolved, (\d+) unresolved', r1.stdout)
         m3 = re.search(r'bytes by type: (\{.*\})', r3.stdout); m4 = re.search(r'still on the default typing \(\.data, 16 per row\): (\d+)', r3.stdout)
         BYK = eval(m3.group(1)); typed = BYK['data'] - int(m4.group(1))
+        mn = re.search(r"kitty_names: (\d+) names, tags \{'C': (\d+), 'I': (\d+), '\?': (\d+)\}", r2d.stdout if 'r2d' in dir() else '')
+        if mn:
+            mm = re.search(r'([\d,]+) names \(C ([\d,]+) / I ([\d,]+) / \? ([\d,]+)\)', KR)
+            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the name count (need=N names (C a / I b / ? c))')
+            elif [int(x.replace(',', '')) for x in mm.groups()] != [int(x) for x in mn.groups()]:
+                bad('kitty', 'roms/hello_kitty/README.md: names quoted %s, tools/kitty_names.py gives %s' % (mm.group(0), mn.groups()))
         m2 = re.search(r'observed: (\d+) of (\d+) code bytes executed', r2.stdout)
         if m2:
             mm = re.search(r'([\d,]+) of the [\d,]+ bytes of proven code ran', KR)

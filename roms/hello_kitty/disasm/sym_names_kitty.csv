@@ -1,33 +1,130 @@
 bank,addr,name,conf,note,source
 00,0000,Data_00_0000,C,"read in the core runs by 02:4E73, 0F:536F, 00:0008, 00:0010 ...",kitty_types
 00,0024,Data_00_0024,C,"read in the core runs by 02:4E73, 0F:536F, 00:0008, 00:0010 ...",kitty_types
+00,0100,Entry,C,cartridge entry point: nop; jp $176A,hand 2026-11-08
+00,0150,Call_HL,C,jp hl: a call to $0150 calls the routine at HL,hand 2026-11-08
+00,0151,Call_BC,C,push bc; ret: calls the routine at BC,hand 2026-11-08
+00,0153,Call_DE,C,push de; ret: calls the routine at DE,hand 2026-11-08
+00,0155,Far_Jump,C,one-way far jump: A = bank (hFF8B and $2100); jp hl,hand 2026-11-08
+00,015B,Far_Call,C,far call: B = bank; pushes the caller's bank; the callee returns through jp $0173,hand 2026-11-08
+00,0165,Far_CallKeepA,C,far call keeping A through hFF8A: B = bank; HL = target,hand 2026-11-08
+00,0173,Far_Return,C,pops the caller's bank; switches back; ret,hand 2026-11-08
+00,017A,Far_ReturnSramBank,C,return restoring a bank read from the stack (SRAM routines),hand 2026-11-08
+00,0189,JumpTable_ByA,C,jump to word A of the table at HL,hand 2026-11-08
+00,0194,JumpTable_Inline,C,jump to word A of the table that follows the call,hand 2026-11-08
+00,01A0,FarJumpTable_ByA,C,far call of record A of the {lo; hi; bank} table at HL through $015B,hand 2026-11-08
+00,01B2,Mode_Set,C,mode = A (hFF8D),hand 2026-11-08
+00,01BD,State_Set,C,state = A (hFF8E),hand 2026-11-08
+00,01C8,ModeState_Set,C,mode = B; state = C,hand 2026-11-08
+00,01D1,ModeState_SetInline,C,mode and state from the two bytes after the call,hand 2026-11-08
+00,0206,Copy_Inline,C,copy with inline {source; destination; count} after the call,hand 2026-11-08
+00,021C,Copy_DEtoHL,C,copy BC bytes from DE to HL,hand 2026-11-08
+00,0245,Copy_FarInline,C,copy with inline {source; bank; destination; count} after the call,hand 2026-11-08
+00,0260,Copy_FarDEtoHL,C,copy BC bytes from DE in bank A to HL,hand 2026-11-08
+00,02F9,Lcd_SetupInline,C,11 inline bytes: LCDC; BGP; OBP0; OBP1; SCY; SCX; WY; WX; -; STAT; IE,hand 2026-11-08
+00,032D,Lcd_SetupInlineNoIE,C,10 inline bytes: the same without IE,hand 2026-11-08
+00,0364,Delay_Frames_Busy,C,"same code as the Japanese Delay_Frames_Busy (00:08E8, 17 bytes, exact match)",port_jp
+00,03EA,Rng_Next,C,"same code as the Japanese Rng_Next (00:08F9, 33 bytes, masked match)",port_jp
+00,040B,Rng_Init,C,"same code as the Japanese Rng_Init (00:091A, 93 bytes, masked match)",port_jp
 00,0468,Data_00_0468,C,read in the core runs by 00:042A,kitty_types
+00,049E,Rng_Refill,C,"same code as the Japanese Rng_Refill (00:09AD, 39 bytes, masked match)",port_jp
+00,04C5,Math_MulAL,C,"same code as the Japanese Math_MulAL (00:0F4F, 77 bytes, exact match)",port_jp
+00,0512,Rng_Scaled,C,"same code as the Japanese Rng_Scaled (00:09D4, 26 bytes, masked match)",port_jp
 00,052E,Data_00_052E,C,read in the core runs by 00:0512,kitty_types
+00,054C,Vram_WaitHBlankLine,C,"same code as the Japanese Vram_WaitHBlankLine (00:0406, 35 bytes, exact match)",port_jp
+00,066E,Vram_CopyHBlank,C,copy BC bytes from DE to VRAM at HL in H-blank steps (current bank),hand 2026-11-08
+00,0726,Vram_CopyHBlankFar,C,the same from bank A,hand 2026-11-08
+00,0AEC,Vram_WriteByteSafe,I,"same code as the Japanese Vram_WriteByteSafe (00:0744, 13 bytes, masked match)",port_jp
 00,0B1F,Data_00_0B1F,C,read in the core runs by 00:01D1,kitty_types
 00,0B2B,Data_00_0B2B,C,read in the core runs by 00:01D1,kitty_types
 00,0BF9,Data_00_0BF9,C,"read in the core runs by 06:55F3, 00:0BBB, 06:560F",kitty_types
+00,0CF2,Main_Loop,C,calls the mode routine of ModeTable through $01A0 every frame,hand 2026-11-08
 00,0D00,ModeTable,C,"the 31 {lo, hi, bank} mode entries read by the main loop through $01A0 at 00:0CFD (hFF8D = mode)",kitty_types
 00,0D5A,Data_00_0D5A,C,read in the core runs by 00:01A0,kitty_types
+00,0D5D,Mode1E_ScreenFade,C,ModeTable entry $1E: BGB screen 1E:00 (the screen fading between modes),modes
+00,0D63,Prn_SerialIrq,C,"same code as the Japanese Prn_SerialIrq (00:0F16, 23 bytes, masked match)",port_jp
+00,0D7A,Prn_VBlankPoll,C,"same code as the Japanese Prn_VBlankPoll (00:0F2D, 34 bytes, masked match)",port_jp
+00,0DA1,Prn_EngineStop,I,edited copy of the Japanese Prn_EngineStop (00:1914): instruction sequence ratio 0.947 against 19 bytes,near_jp
+00,0DC1,Prn_ResetPacketState,C,"same code as the Japanese Prn_ResetPacketState (00:1931, 35 bytes, masked match)",port_jp
+00,0DE4,Prn_SendInit,C,"same code as the Japanese Prn_SendInit (00:1954, 27 bytes, masked match)",port_jp
+00,0DFF,Prn_CheckTxDone,C,"same code as the Japanese Prn_CheckTxDone (00:196F, 51 bytes, masked match)",port_jp
+00,0E42,Prn_SendPrint,C,"same code as the Japanese Prn_SendPrint (00:19B2, 57 bytes, masked match)",port_jp
+00,0E7B,Prn_SendData,C,"same code as the Japanese Prn_SendData (00:19EB, 96 bytes, masked match)",port_jp
+00,0F6B,Prn_SendData_Abort,C,"same code as the Japanese Prn_SendData_Abort (00:1ACB, 16 bytes, masked match)",port_jp
+00,0FBF,Prn_SendInquiry,C,"same code as the Japanese Prn_SendInquiry (00:1B1E, 40 bytes, masked match)",port_jp
+00,0FE7,Prn_QueuePacket,C,"same code as the Japanese Prn_QueuePacket (00:1B46, 43 bytes, masked match)",port_jp
 00,1012,Data_00_1012,C,"read in the core runs by 00:1191, 00:03A2, 00:1115, 00:116C ...",kitty_types
+00,1038,Prn_QueueInit,I,"same code as the Japanese Prn_QueueInit (00:1B97, 13 bytes, masked match)",port_jp
+00,1045,Prn_QueuePrint,C,"same code as the Japanese Prn_QueuePrint (00:1BA4, 80 bytes, masked match)",port_jp
+00,109C,Prn_QueueData,C,"same code as the Japanese Prn_QueueData (00:1BFB, 52 bytes, masked match)",port_jp
+00,10DD,Prn_QueueInquiry,I,"same code as the Japanese Prn_QueueInquiry (00:1C3C, 13 bytes, masked match)",port_jp
+00,10EA,Prn_QueueDataEnd,I,"same code as the Japanese Prn_QueueDataEnd (00:1C49, 13 bytes, masked match)",port_jp
+00,10F8,Prn_StartTransmit,C,"same code as the Japanese Prn_StartTransmit (00:1C57, 60 bytes, masked match)",port_jp
+00,1134,Prn_SerialStep,I,edited copy of the Japanese Prn_SerialStep (00:176F): instruction sequence ratio 0.857 against 62 bytes,near_jp
+00,116C,Prn_SendSyncByte,C,"same code as the Japanese Prn_SendSyncByte (00:17AD, 37 bytes, masked match)",port_jp
+00,1191,Prn_SendPacketByte,I,edited copy of the Japanese Prn_SendPacketByte (00:17D2): instruction sequence ratio 0.988 against 161 bytes,near_jp
+00,124A,Prn_SendChecksumByte,C,"same code as the Japanese Prn_SendChecksumByte (00:188C, 23 bytes, masked match)",port_jp
+00,1261,Prn_SendTrailerByte,C,"same code as the Japanese Prn_SendTrailerByte (00:18A3, 26 bytes, masked match)",port_jp
+00,127B,Prn_ReceiveStatus,C,"same code as the Japanese Prn_ReceiveStatus (00:18BD, 77 bytes, masked match)",port_jp
+00,12C9,Link_SerialIrq,C,"same code as the Japanese Link_SerialIrq (00:2AE9, 81 bytes, masked match)",port_jp
+00,131A,Link_Irq_InfoStage,C,"same code as the Japanese Link_Irq_InfoStage (00:2B3A, 140 bytes, masked match)",port_jp
+00,13A6,Link_Irq_Connected,C,"same code as the Japanese Link_Irq_Connected (00:2BC6, 194 bytes, masked match)",port_jp
+00,1468,Link_Irq_BulkData,C,"same code as the Japanese Link_Irq_BulkData (00:2C88, 63 bytes, masked match)",port_jp
+00,14A7,Link_Irq_HalfDone,C,"same code as the Japanese Link_Irq_HalfDone (00:2CC7, 40 bytes, masked match)",port_jp
+00,14D3,Link_Irq_Abort_ClearState,C,"same code as the Japanese Link_Irq_Abort_ClearState (00:2CF3, 66 bytes, masked match)",port_jp
+00,1515,Link_Irq_StartTimer,C,"same code as the Japanese Link_Irq_StartTimer (00:2D35, 22 bytes, masked match)",port_jp
+00,1530,Link_TimerIrq,I,"same code as the Japanese Link_TimerIrq (00:2D50, 15 bytes, exact match)",port_jp
+00,153F,Link_Init,C,"same code as the Japanese Link_Init (00:2D5F, 121 bytes, masked match)",port_jp
+00,15B8,Link_Stop,C,"same code as the Japanese Link_Stop (00:2DD8, 21 bytes, masked match)",port_jp
+00,15CD,Link_SendHello29,C,"same code as the Japanese Link_SendHello29 (00:2DED, 33 bytes, masked match)",port_jp
+00,15EE,Link_QueueCommand,C,"same code as the Japanese Link_QueueCommand (00:2E0E, 51 bytes, masked match)",port_jp
+00,1621,Link_QueuePageRequest,C,"same code as the Japanese Link_QueuePageRequest (00:2E41, 39 bytes, masked match)",port_jp
+00,1648,Link_UpdateInfoByte,C,"same code as the Japanese Link_UpdateInfoByte (00:2E68, 26 bytes, masked match)",port_jp
+00,1668,OamDma_InstallRoutine,I,"same code as the Japanese OamDma_InstallRoutine (00:03E2, 14 bytes, masked match)",port_jp
 00,1676,Data_00_1676,C,read in the core runs by 00:166F,kitty_types
+00,176A,Boot,C,the entry jumps here,hand 2026-11-08
 00,1785,Data_00_1785,C,read in the core runs by 00:01F2,kitty_types
 00,178C,Data_00_178C,C,read in the core runs by 00:01F2,kitty_types
 00,1796,Data_00_1796,C,read in the core runs by 00:01F2,kitty_types
 00,17B7,Data_00_17B7,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 00,17BD,Data_00_17BD,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 00,17DD,Data_00_17DD,C,read in the core runs by 00:1AB7,kitty_types
+00,18B8,Lcdc_SetCallbackNext,C,stores the LCDC-interrupt callback (DE) for the next frame (hFFA6/A7),hand 2026-11-08
+00,18BF,Lcdc_SetCallback,C,stores the LCDC-interrupt callback (DE) in hFFA4/A5,hand 2026-11-08
+00,1AB7,Serial_SetFarCallback,C,3 inline bytes: a far callback {lo; hi; bank} stored in hFF97-99,hand 2026-11-08
 00,1BF5,Data_00_1BF5,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1CAB,Data_00_1CAB,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1CBA,Data_00_1CBA,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1D5C,Data_00_1D5C,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1DAB,Data_00_1DAB,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1EC1,JumpTable_00_1EC1,C,inline jump table (4 words; tools/kitty_trace.py),kitty_types
+00,205A,Object_Create,C,object creation with BC = 0; falls into Object_CreateWithParam,hand 2026-11-08
+00,205D,Object_CreateWithParam,C,DE = descriptor in bank 2; BC = parameter; fills a 23-byte slot at $DAEE,hand 2026-11-08
+00,20DF,Object_RunAll,I,the per-frame pass over the object slots (far-called from 00:1ACA; runs the slot routines at 00:2113 and 00:212F),hand 2026-11-08
 00,2243,JumpTable_00_2243,C,inline jump table (4 words; tools/kitty_trace.py),kitty_types
+00,22C7,Mode1D_RenderBand,C,"same code as the Japanese Mode1D_RenderBand (00:3161, 110 bytes, masked match)",port_jp
+00,2335,Mode1D_SplitNibbles,I,"same code as the Japanese Mode1D_SplitNibbles (00:31CF, 13 bytes, exact match)",port_jp
+00,2348,Mode1D_ReadSrcEntry,C,"same code as the Japanese Mode1D_ReadSrcEntry (00:31E2, 16 bytes, exact match)",port_jp
+00,2358,Mode1D_ReadByteFromBank,C,"same code as the Japanese Mode1D_ReadByteFromBank (00:31F2, 34 bytes, masked match)",port_jp
+00,237A,Mode1D_CopyDescriptors,C,"same code as the Japanese Mode1D_CopyDescriptors (00:3214, 53 bytes, masked match)",port_jp
+00,23AF,Mode1D_InterleaveTileRows,C,"same code as the Japanese Mode1D_InterleaveTileRows (00:3249, 146 bytes, masked match)",port_jp
+00,2441,Mode1D_FillBlank,I,"same code as the Japanese Mode1D_FillBlank (00:32DB, 13 bytes, exact match)",port_jp
+00,25A1,Img_ReduceToThumbnail,I,edited copy of the Japanese Img_ReduceToThumbnail (00:2583): instruction sequence ratio 0.949 against 152 bytes,near_jp
+00,264C,Img_PairLookup,C,"same code as the Japanese Img_PairLookup (00:261B, 22 bytes, exact match)",port_jp
+00,2662,Img_PackQuadBits,C,"same code as the Japanese Img_PackQuadBits (00:2631, 37 bytes, exact match)",port_jp
+00,29DB,Thumb_DrawFrame,C,"same code as the Japanese Thumb_DrawFrame (00:296F, 138 bytes, exact match)",port_jp
+00,2A65,Thumb_DrawCopyBadge,C,"same code as the Japanese Thumb_DrawCopyBadge (00:29F9, 24 bytes, masked match)",port_jp
 00,2A7D,Data_00_2A7D,C,read in the core runs by 00:2A6A,kitty_types
 00,2AB6,Data_00_2AB6,C,read in the core runs by 00:25A1,kitty_types
+00,2AB9,Blit_MaskPass_SrcB,I,edited copy of the Japanese Blit_MaskPass_SrcB (00:1FB2): instruction sequence ratio 0.867 against 116 bytes,near_jp
+00,2B38,Blit_MaskPass_SrcA,I,edited copy of the Japanese Blit_MaskPass_SrcA (00:2026): instruction sequence ratio 0.872 against 118 bytes,near_jp
+00,2C6B,Snd_Init_Tramp,?,edited copy of the Japanese Snd_Init_Tramp (00:2A23): instruction sequence ratio 0.909 against 20 bytes; also near Snd_Tick_Tramp,near_jp
 00,2E00,Data_00_2E00,C,read in the core runs by 00:021C,kitty_types
 00,3700,Data_00_3700,C,"read in the core runs by 00:2BE2, 00:2AEC, 00:264C, 00:2B6E",kitty_types
 01,4700,Data_01_4700,C,"read in the core runs by 01:470A, 01:47D1",kitty_types
+01,4771,Sram_ComputeImageChecksums,I,edited copy of the Japanese Sram_ComputeImageChecksums (02:4005): instruction sequence ratio 0.987 against 89 bytes,near_jp
+01,47CC,Sram_CompareMagic,?,"same code as the Japanese Sram_CompareMagic (02:4084, 15 bytes, masked match; the Japanese ROM also has Sram_CompareMagic_B, Sram_CompareMagic_C)",port_jp
+01,4D86,Photo_FindSlot_Far,C,"same code as the Japanese Photo_FindSlot_Far (02:444D, 25 bytes, masked match)",port_jp
 01,5000,Data_01_5000,C,"read in the core runs by 01:59F6, 01:5957, 01:5A05, 01:591E ...",kitty_types
 01,5046,Data_01_5046,C,"read in the core runs by 01:59F6, 01:5030, 01:5998, 01:591E ...",kitty_types
 01,5074,Data_01_5074,C,"read in the core runs by 01:59F6, 01:5030, 01:5998, 01:591E ...",kitty_types
@@ -56,20 +153,62 @@ bank,addr,name,conf,note,source
 01,69AD,Data_01_69AD,C,read in the core runs by 00:0245,kitty_types
 01,69DD,Data_01_69DD,C,"read in the core runs by 01:6991, 01:72D5, 01:6A37, 01:7226",kitty_types
 01,6A2B,Data_01_6A2B,C,"read in the core runs by 01:72D5, 01:6A37, 01:7226",kitty_types
+01,6A62,Mode06_State00,C,handler of state $00 of mode $06 (word 0 of Mode06_StateTable),modes
 01,6A7C,Data_01_6A7C,C,read in the core runs by 00:0245,kitty_types
 01,6A86,Data_01_6A86,C,read in the core runs by 00:0245,kitty_types
 01,6A9E,Data_01_6A9E,C,read in the core runs by 00:1680,kitty_types
 01,6AB9,Data_01_6AB9,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 01,6ABF,Data_01_6ABF,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
+01,6B1F,Mode06_State01,C,handler of state $01 of mode $06 (word 1 of Mode06_StateTable),modes
+01,6B7C,Mode06_State02,C,handler of state $02 of mode $06 (word 2 of Mode06_StateTable),modes
+01,6C2A,Mode06_State03,C,handler of state $03 of mode $06 (word 3 of Mode06_StateTable),modes
+01,6C8C,Mode06_State0E,C,handler of state $0E of mode $06 (word 14 of Mode06_StateTable),modes
+01,6CAB,Mode06_State05,C,handler of state $05 of mode $06 (word 5 of Mode06_StateTable),modes
+01,6CC8,Mode06_State04,C,handler of state $04 of mode $06 (word 4 of Mode06_StateTable),modes
+01,6D09,Mode06_State06,C,handler of state $06 of mode $06 (word 6 of Mode06_StateTable),modes
+01,6D69,Mode06_State07,C,handler of state $07 of mode $06 (word 7 of Mode06_StateTable),modes
+01,6D7C,Mode06_State09,C,handler of state $09 of mode $06 (word 9 of Mode06_StateTable),modes
+01,6D8E,Mode06_State08,C,handler of state $08 of mode $06 (word 8 of Mode06_StateTable),modes
+01,6DA0,Mode06_State0A,C,handler of state $0A of mode $06 (word 10 of Mode06_StateTable),modes
+01,6E08,Mode06_State0B,C,handler of state $0B of mode $06 (word 11 of Mode06_StateTable),modes
+01,6E70,Mode06_State0C,C,handler of state $0C of mode $06 (word 12 of Mode06_StateTable),modes
+01,6E93,Mode06_State0D,C,handler of state $0D of mode $06 (word 13 of Mode06_StateTable),modes
+01,6EF3,Mode06_State0F,C,handler of state $0F of mode $06 (word 15 of Mode06_StateTable),modes
+01,6F49,Mode06_State10,C,handler of state $10 of mode $06 (word 16 of Mode06_StateTable),modes
 01,6F63,Data_01_6F63,C,read in the core runs by 00:1AB7,kitty_types
+01,6FB6,Mode06_State11,C,handler of state $11 of mode $06 (word 17 of Mode06_StateTable),modes
 01,6FD0,Data_01_6FD0,C,read in the core runs by 00:1AB7,kitty_types
+01,701D,Mode06_State12,C,handler of state $12 of mode $06 (word 18 of Mode06_StateTable),modes
+01,705E,Mode06_State13,C,handler of state $13 of mode $06 (word 19 of Mode06_StateTable),modes
+01,70AD,Mode06_State14,C,handler of state $14 of mode $06 (word 20 of Mode06_StateTable),modes
 01,70C7,Data_01_70C7,C,read in the core runs by 00:1AB7,kitty_types
+01,7113,Mode06_State15,C,handler of state $15 of mode $06 (word 21 of Mode06_StateTable),modes
+01,7162,Mode06_State16,C,handler of state $16 of mode $06 (word 22 of Mode06_StateTable),modes
 01,717C,Data_01_717C,C,read in the core runs by 00:1AB7,kitty_types
+01,71CB,Mode06_State17,C,handler of state $17 of mode $06 (word 23 of Mode06_StateTable),modes
+01,7226,Mode06_State18,C,handler of state $18 of mode $06 (word 24 of Mode06_StateTable),modes
 01,7229,Data_01_7229,C,read in the core runs by 00:0245,kitty_types
 01,7233,Data_01_7233,C,read in the core runs by 00:0245,kitty_types
 01,7255,Data_01_7255,C,"read in the core runs by 00:02F9, 00:0245",kitty_types
 01,7268,Data_01_7268,C,"read in the core runs by 00:02F9, 00:0245",kitty_types
-01,769C,JumpTable_01_769C,C,jump table read through $0189 at 01:7696 (43 records; tools/kitty_trace.py),kitty_types
+01,7283,Mode06_State19,C,handler of state $19 of mode $06 (word 25 of Mode06_StateTable),modes
+01,72D5,Mode06_State1A,C,handler of state $1A of mode $06 (word 26 of Mode06_StateTable),modes
+01,733C,Mode06_State1B,C,handler of state $1B of mode $06 (word 27 of Mode06_StateTable),modes
+01,7374,Mode06_State1C,C,handler of state $1C of mode $06 (word 28 of Mode06_StateTable),modes
+01,739D,Mode06_State1D,C,handler of state $1D of mode $06 (word 29 of Mode06_StateTable),modes
+01,73B5,Mode06_State1E,C,handler of state $1E of mode $06 (word 30 of Mode06_StateTable),modes
+01,73D0,Mode06_State1F,C,handler of state $1F of mode $06 (word 31 of Mode06_StateTable),modes
+01,7410,Mode06_State20,C,handler of state $20 of mode $06 (word 32 of Mode06_StateTable),modes
+01,7419,Mode06_State21,C,handler of state $21 of mode $06 (word 33 of Mode06_StateTable),modes
+01,7430,Mode06_State22,C,handler of state $22 of mode $06 (word 34 of Mode06_StateTable),modes
+01,746E,Mode06_State23,C,handler of state $23 of mode $06 (word 35 of Mode06_StateTable),modes
+01,754B,Mode06_State24,C,handler of state $24 of mode $06 (word 36 of Mode06_StateTable),modes
+01,75A9,Mode06_State25,C,handler of state $25 of mode $06 (word 37 of Mode06_StateTable),modes
+01,75CF,Mode06_State26,C,handler of state $26 of mode $06 (word 38 of Mode06_StateTable),modes
+01,75F5,Mode06_State27,C,handler of state $27 of mode $06 (word 39 of Mode06_StateTable),modes
+01,7653,Mode06_State28,C,handler of state $28 of mode $06 (word 40 of Mode06_StateTable),modes
+01,7691,Mode06_ExchangeEmptyFrame,I,ModeTable entry $06: forced BGB screen (an empty photo frame); reached in the core runs next to the exchange (BGB replays end in mode 07),modes
+01,769C,Mode06_StateTable,C,"state table of mode $06, read by $0189 with hFF8E",modes
 02,4008,Data_02_4008,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,4110,Data_02_4110,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,42F4,Data_02_42F4,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
@@ -207,64 +346,166 @@ bank,addr,name,conf,note,source
 04,4938,Data_04_4938,C,read in the core runs by 04:4D2B,kitty_types
 04,497C,Data_04_497C,C,read in the core runs by 04:4D2B,kitty_types
 04,4A0D,Data_04_4A0D,C,read in the core runs by 04:49F8,kitty_types
+04,4AF8,Cam_MainDispatch_EnterBand1,C,"same code as the Japanese Cam_MainDispatch_EnterBand1 (0A:40BA, 52 bytes, masked match)",port_jp
+04,4B2C,Cam_MainDispatch_Band1,C,"same code as the Japanese Cam_MainDispatch_Band1 (0A:40EE, 74 bytes, masked match)",port_jp
+04,4B76,Cam_MainDispatch_EnterBand0,C,"same code as the Japanese Cam_MainDispatch_EnterBand0 (0A:4138, 52 bytes, masked match)",port_jp
+04,4BAA,Cam_MainDispatch_Band2,C,"same code as the Japanese Cam_MainDispatch_Band2 (0A:416C, 139 bytes, masked match)",port_jp
+04,4C35,Cam_MainDispatch_Band3,C,"same code as the Japanese Cam_MainDispatch_Band3 (0A:41F7, 125 bytes, masked match)",port_jp
+04,4CB2,Cam_MainDispatch_Band4,C,"same code as the Japanese Cam_MainDispatch_Band4 (0A:4274, 57 bytes, masked match)",port_jp
+04,4D46,Cam_Dither_RampB,C,"same code as the Japanese Cam_Dither_RampB (0A:4306, 262 bytes, masked match)",port_jp
+04,4E4C,Cam_Dither_Flat,C,"same code as the Japanese Cam_Dither_Flat (0A:440C, 27 bytes, masked match)",port_jp
+04,4E67,Cam_Dither_RampA,C,"same code as the Japanese Cam_Dither_RampA (0A:4427, 307 bytes, masked match)",port_jp
+04,4F9A,Cam_CalibSanityCheck_Measure,I,edited copy of the Japanese Cam_CalibSanityCheck_Measure (0A:455A): instruction sequence ratio 0.993 against 111 bytes,near_jp
+04,500B,Cam_Calib_ValidityCheck,C,"same code as the Japanese Cam_Calib_ValidityCheck (0A:45C9, 70 bytes, masked match)",port_jp
+04,511F,Cam_Calib_CopyFromSram,C,"same code as the Japanese Cam_Calib_CopyFromSram (0A:46CF, 18 bytes, masked match)",port_jp
+04,5131,Cam_Calib_CopyToSram,C,"same code as the Japanese Cam_Calib_CopyToSram (0A:46E1, 28 bytes, masked match)",port_jp
+04,514D,Cam_Calib_BootMeasureSeq,I,edited copy of the Japanese Cam_Calib_BootMeasureSeq (0A:4724): instruction sequence ratio 0.913 against 309 bytes,near_jp
+04,52AF,Cam_ExposureBandSelect,I,edited copy of the Japanese Cam_ExposureBandSelect (0A:4859): instruction sequence ratio 0.992 against 238 bytes,near_jp
+04,53A1,Cam_FullCalibration,C,"same code as the Japanese Cam_FullCalibration (0A:4947, 26 bytes, masked match)",port_jp
+04,53BB,Cam_FactoryMeasure1,I,edited copy of the Japanese Cam_FactoryMeasure1 (0A:4961): instruction sequence ratio 0.998 against 521 bytes,near_jp
+04,564A,Cam_ORegister_SAR_Tail,C,"same code as the Japanese Cam_ORegister_SAR_Tail (0A:4BEC, 68 bytes, masked match)",port_jp
+04,56D1,Cam_FactoryMeasure2,I,edited copy of the Japanese Cam_FactoryMeasure2 (0A:4C6C): instruction sequence ratio 0.997 against 472 bytes,near_jp
+04,58AB,Cam_ThresholdConverge,C,"same code as the Japanese Cam_ThresholdConverge (0A:4E44, 159 bytes, masked match)",port_jp
+04,594A,Cam_ThresholdConverge_Up,C,"same code as the Japanese Cam_ThresholdConverge_Up (0A:4EE3, 117 bytes, masked match)",port_jp
+04,59BF,Cam_CommitVectorToSRAM,I,edited copy of the Japanese Cam_CommitVectorToSRAM (0A:4F58): instruction sequence ratio 0.986 against 101 bytes,near_jp
+04,5A28,Cam_PopcountSampleLoop,C,"same code as the Japanese Cam_PopcountSampleLoop (0A:4FBD, 212 bytes, masked match)",port_jp
+04,5AFC,Cam_PopcountSampleLoop_inner,I,edited copy of the Japanese Cam_PopcountSampleLoop_inner (0A:5091): instruction sequence ratio 0.917 against 25 bytes,near_jp
+04,5B15,Cam_LiveInit,I,edited copy of the Japanese Cam_LiveInit (0A:50AA): instruction sequence ratio 0.964 against 86 bytes,near_jp
+04,5B6D,Cam_CopyTileRows,C,"same code as the Japanese Cam_CopyTileRows (0A:5100, 774 bytes, masked match)",port_jp
 04,5E8A,JumpTable_04_5E8A,C,inline jump table (96 words; tools/kitty_trace.py),kitty_types
+04,5F4A,Fx00_Copy,I,"same code as the Japanese Fx00_Copy (0A:54DA, 12 bytes, masked match)",port_jp
+04,5FE7,Fx03_MirrorBtoT,C,"same code as the Japanese Fx03_MirrorBtoT (0A:5577, 67 bytes, masked match)",port_jp
+04,602A,Fx04_MirrorTtoB,C,"same code as the Japanese Fx04_MirrorTtoB (0A:55BA, 67 bytes, masked match)",port_jp
+04,606D,Fx05_StretchV2x,C,"same code as the Japanese Fx05_StretchV2x (0A:55FD, 84 bytes, masked match)",port_jp
+04,60C1,Fx06_StretchH2x,I,edited copy of the Japanese Fx06_StretchH2x (0A:5651): instruction sequence ratio 0.961 against 68 bytes,near_jp
+04,6105,Fx07_Zoom2x_GroupTop,I,edited copy of the Japanese Fx07_Zoom2x_GroupTop (0A:56A3): instruction sequence ratio 0.914 against 153 bytes,near_jp
+04,61BC,Fx08_Reduce2xTile2x2_GroupTop,C,"same code as the Japanese Fx08_Reduce2xTile2x2_GroupTop (0A:574C, 239 bytes, masked match)",port_jp
+04,62C3,Fx0D_CopyLeftHalf,C,"same code as the Japanese Fx0D_CopyLeftHalf (0A:5853, 87 bytes, masked match)",port_jp
+04,631A,Fx0E_CopyRightHalf,C,"same code as the Japanese Fx0E_CopyRightHalf (0A:58AA, 86 bytes, masked match)",port_jp
+04,6388,Fx11_CopyQuads_TR_BL,C,"same code as the Japanese Fx11_CopyQuads_TR_BL (0A:5918, 137 bytes, exact match)",port_jp
+04,6411,Fx12_CopyQuads_TR_BL_BR,C,"same code as the Japanese Fx12_CopyQuads_TR_BL_BR (0A:59A1, 72 bytes, masked match)",port_jp
+04,6489,Fx17_CopyWindow,C,"same code as the Japanese Fx17_CopyWindow (0A:5A19, 87 bytes, masked match)",port_jp
+04,64E0,Fx18_CopyQuadBR,C,"same code as the Japanese Fx18_CopyQuadBR (0A:5A70, 70 bytes, exact match)",port_jp
+04,653D,Fx20_FlipH_GroupTop,C,"same code as the Japanese Fx20_FlipH_GroupTop (0A:5ACD, 106 bytes, masked match)",port_jp
+04,6645,Fx25_StretchV2x_OnFlipH,I,edited copy of the Japanese Fx25_StretchV2x_OnFlipH (0A:5BD5): instruction sequence ratio 0.988 against 101 bytes,near_jp
+04,66AA,Fx26_StretchH2x_OnFlipH,I,edited copy of the Japanese Fx26_StretchH2x_OnFlipH (0A:5C3A): instruction sequence ratio 0.962 against 70 bytes,near_jp
+04,66F0,Fx27_Zoom2x_OnFlipH_GroupTop,I,edited copy of the Japanese Fx27_Zoom2x_OnFlipH_GroupTop (0A:5C8E): instruction sequence ratio 0.914 against 153 bytes,near_jp
+04,67A7,Fx28_Reduce2xTile2x2_FlipH_GroupTop,C,"same code as the Japanese Fx28_Reduce2xTile2x2_FlipH_GroupTop (0A:5D37, 241 bytes, masked match)",port_jp
+04,68B0,Fx2D_CopyLeftHalf_OnFlipH,I,edited copy of the Japanese Fx2D_CopyLeftHalf_OnFlipH (0A:5E40): instruction sequence ratio 0.978 against 63 bytes,near_jp
+04,69A9,Fx31_CopyQuads_TR_BL_OnFlipH,I,edited copy of the Japanese Fx31_CopyQuads_TR_BL_OnFlipH (0A:5F39): instruction sequence ratio 0.978 against 128 bytes,near_jp
+04,6A29,Fx32_CopyQuads_TR_BL_BR_OnFlipH,I,edited copy of the Japanese Fx32_CopyQuads_TR_BL_BR_OnFlipH (0A:5FB9): instruction sequence ratio 0.978 against 126 bytes,near_jp
+04,6B9B,Fx37_CopyWindow_OnFlipH,I,edited copy of the Japanese Fx37_CopyWindow_OnFlipH (0A:612B): instruction sequence ratio 0.979 against 64 bytes,near_jp
+04,6C22,Fx40_FlipV,C,"same code as the Japanese Fx40_FlipV (0A:61B2, 105 bytes, masked match)",port_jp
+04,6C8B,Fx41_MirrorRtoL_OnFlipV,I,edited copy of the Japanese Fx41_MirrorRtoL_OnFlipV (0A:621B): instruction sequence ratio 0.984 against 78 bytes,near_jp
+04,6CD9,Fx42_MirrorLtoR_OnFlipV,I,edited copy of the Japanese Fx42_MirrorLtoR_OnFlipV (0A:6269): instruction sequence ratio 0.984 against 79 bytes,near_jp
+04,6D28,Fx45_StretchV2x_FlipV,C,"same code as the Japanese Fx45_StretchV2x_FlipV (0A:62B8, 96 bytes, masked match)",port_jp
+04,6D88,Fx46_StretchH2x_OnFlipV,I,edited copy of the Japanese Fx46_StretchH2x_OnFlipV (0A:6318): instruction sequence ratio 0.938 against 82 bytes,near_jp
+04,6DDA,Fx47_Zoom2x_FlipV_GroupTop,I,edited copy of the Japanese Fx47_Zoom2x_FlipV_GroupTop (0A:6378): instruction sequence ratio 0.914 against 153 bytes,near_jp
+04,6E91,Fx48_Reduce2xTile2x2_FlipV_GroupTop,C,"same code as the Japanese Fx48_Reduce2xTile2x2_FlipV_GroupTop (0A:6421, 245 bytes, masked match)",port_jp
+04,6F9E,Fx4D_CopyLeftHalf_OnFlipV,C,"same code as the Japanese Fx4D_CopyLeftHalf_OnFlipV (0A:652E, 60 bytes, masked match)",port_jp
+04,6FDA,Fx4E_CopyRightHalf_OnFlipV,C,"same code as the Japanese Fx4E_CopyRightHalf_OnFlipV (0A:656A, 59 bytes, masked match)",port_jp
+04,7087,Fx51_CopyQuads_TR_BL_OnFlipV,C,"same code as the Japanese Fx51_CopyQuads_TR_BL_OnFlipV (0A:6617, 120 bytes, masked match)",port_jp
+04,70FF,Fx52_CopyQuads_TR_BL_BR_OnFlipV,C,"same code as the Japanese Fx52_CopyQuads_TR_BL_BR_OnFlipV (0A:668F, 117 bytes, masked match)",port_jp
+04,7258,Fx57_CopyWindow_OnFlipV,C,"same code as the Japanese Fx57_CopyWindow_OnFlipV (0A:67E8, 60 bytes, masked match)",port_jp
+04,72E3,FxShared_ReduceBody_G0_GroupTop,C,"same code as the Japanese FxShared_ReduceBody_G0_GroupTop (0A:6873, 147 bytes, masked match)",port_jp
+04,7383,FxShared_ReduceBody_G1_GroupTop,C,"same code as the Japanese FxShared_ReduceBody_G1_GroupTop (0A:6913, 151 bytes, masked match)",port_jp
+04,7427,FxShared_ReduceBody_G2_GroupTop,C,"same code as the Japanese FxShared_ReduceBody_G2_GroupTop (0A:69B7, 138 bytes, masked match)",port_jp
+04,74B1,FxShared_ReduceBody_G2_OuterLoopTail,C,"same code as the Japanese FxShared_ReduceBody_G2_OuterLoopTail (0A:6A41, 17 bytes, masked match)",port_jp
+05,4053,Mode00_State00,C,handler of state $00 of mode $00 (word 0 of Mode00_StateTable),modes
 05,406A,Data_05_406A,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 05,4073,Data_05_4073,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
+05,40CB,Mode00_State01,C,handler of state $01 of mode $00 (word 1 of Mode00_StateTable),modes
+05,4117,Mode00_State02,C,handler of state $02 of mode $00 (word 2 of Mode00_StateTable),modes
+05,414C,Mode00_State03,C,handler of state $03 of mode $00 (word 3 of Mode00_StateTable),modes
+05,41F6,Mode00_State04,C,handler of state $04 of mode $00 (word 4 of Mode00_StateTable),modes
 05,420D,Data_05_420D,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,4217,Data_05_4217,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,4221,Data_05_4221,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,4227,Data_05_4227,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+05,4252,Mode00_State05,C,handler of state $05 of mode $00 (word 5 of Mode00_StateTable),modes
+05,4265,Mode00_State06,C,handler of state $06 of mode $00 (word 6 of Mode00_StateTable),modes
 05,427C,Data_05_427C,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,4286,Data_05_4286,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,4290,Data_05_4290,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,429A,Data_05_429A,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,42A0,Data_05_42A0,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
-05,4376,JumpTable_05_4376,C,jump table read through $0189 at 05:4370 (9 records; tools/kitty_trace.py),kitty_types
+05,42BB,Mode00_State07,C,handler of state $07 of mode $00 (word 7 of Mode00_StateTable),modes
+05,4358,Mode00_State08,C,handler of state $08 of mode $00 (word 8 of Mode00_StateTable),modes
+05,436B,Mode00_BootAndTitle,C,ModeTable entry $00: BGB screens 00:05 (copyright) and 00:08 (title),modes
+05,4376,Mode00_StateTable,C,"state table of mode $00, read by $0189 with hFF8E",modes
+05,4388,Mode0D_State00,C,handler of state $00 of mode $0D (word 0 of Mode0D_StateTable),modes
 05,439F,Data_05_439F,C,read in the core runs by 00:0245,kitty_types
 05,43A9,Data_05_43A9,C,read in the core runs by 00:0245,kitty_types
 05,43E7,Data_05_43E7,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 05,43ED,Data_05_43ED,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
+05,4415,Mode0D_State01,C,handler of state $01 of mode $0D (word 1 of Mode0D_StateTable),modes
+05,4492,Mode0D_State02,C,handler of state $02 of mode $0D (word 2 of Mode0D_StateTable),modes
+05,44A2,Mode0D_State03,C,handler of state $03 of mode $0D (word 3 of Mode0D_StateTable),modes
 05,44B9,Data_05_44B9,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,44C3,Data_05_44C3,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,44CD,Data_05_44CD,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,44D3,Data_05_44D3,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
-05,452B,JumpTable_05_452B,C,jump table read through $0189 at 05:4525 (6 records; tools/kitty_trace.py),kitty_types
+05,44EE,Mode0D_State04,C,handler of state $04 of mode $0D (word 4 of Mode0D_StateTable),modes
+05,4510,Mode0D_State05,C,handler of state $05 of mode $0D (word 5 of Mode0D_StateTable),modes
+05,4520,Mode0D_FactoryCheck,C,ModeTable entry $0D: BGB screens 0D:01-02 (quick factory check) and 0D:04-05 (factory calibration); boot conditions,modes
+05,452B,Mode0D_StateTable,C,"state table of mode $0D, read by $0189 with hFF8E",modes
+05,4537,Mode01_State00,C,handler of state $00 of mode $01 (word 0 of Mode01_StateTable),modes
 05,4551,Data_05_4551,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,455B,Data_05_455B,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,456B,Data_05_456B,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,4571,Data_05_4571,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,457F,Data_05_457F,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,45E3,Mode01_State01,C,handler of state $01 of mode $01 (word 1 of Mode01_StateTable),modes
 05,4600,Data_05_4600,C,read in the core runs by 00:1680,kitty_types
+05,4657,Mode01_State02,C,handler of state $02 of mode $01 (word 2 of Mode01_StateTable),modes
+05,46AE,Mode01_State03,C,handler of state $03 of mode $01 (word 3 of Mode01_StateTable),modes
 05,46C8,Data_05_46C8,C,read in the core runs by 00:0245,kitty_types
 05,46D2,Data_05_46D2,C,read in the core runs by 00:0245,kitty_types
 05,46F0,Data_05_46F0,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,46F6,Data_05_46F6,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,4704,Data_05_4704,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,472C,Mode01_State04,C,handler of state $04 of mode $01 (word 4 of Mode01_StateTable),modes
 05,4742,Data_05_4742,C,read in the core runs by 00:1680,kitty_types
-05,47D7,JumpTable_05_47D7,C,jump table read through $0189 at 05:47D1 (7 records; tools/kitty_trace.py),kitty_types
+05,475E,Mode01_State05,C,handler of state $05 of mode $01 (word 5 of Mode01_StateTable),modes
+05,47B1,Mode01_State06,C,handler of state $06 of mode $01 (word 6 of Mode01_StateTable),modes
+05,47CC,Mode01_MainMenu,C,ModeTable entry $01: BGB screens 01:02 (Take / View / Play) and 01:05 (option menu),modes
+05,47D7,Mode01_StateTable,C,"state table of mode $01, read by $0189 with hFF8E",modes
+05,498E,Mode02_State00,C,handler of state $00 of mode $02 (word 0 of Mode02_StateTable),modes
 05,49B4,Data_05_49B4,C,read in the core runs by 00:0245,kitty_types
 05,49BE,Data_05_49BE,C,read in the core runs by 00:0245,kitty_types
 05,49ED,Data_05_49ED,C,read in the core runs by 00:1680,kitty_types
 05,4A05,Data_05_4A05,C,read in the core runs by 00:02F9,kitty_types
 05,4A4B,Data_05_4A4B,C,read in the core runs by 00:1AB7,kitty_types
+05,4A4F,Mode02_State02,C,handler of state $02 of mode $02 (word 2 of Mode02_StateTable),modes
+05,4A61,Mode02_State01,C,handler of state $01 of mode $02 (word 1 of Mode02_StateTable),modes
+05,4AEA,Mode02_State05,C,handler of state $05 of mode $02 (word 5 of Mode02_StateTable),modes
+05,4B1B,Mode02_State04,C,handler of state $04 of mode $02 (word 4 of Mode02_StateTable),modes
 05,4B35,Data_05_4B35,C,"read in the core runs by 00:0245, 00:02F9, 00:1680",kitty_types
 05,4B3F,Data_05_4B3F,C,"read in the core runs by 00:0245, 00:02F9, 00:1680",kitty_types
 05,4B49,Data_05_4B49,C,"read in the core runs by 00:0245, 00:02F9, 00:1680",kitty_types
 05,4B53,Data_05_4B53,C,"read in the core runs by 00:0245, 00:02F9, 00:1680",kitty_types
 05,4B67,Data_05_4B67,C,"read in the core runs by 00:0245, 00:02F9, 00:1680",kitty_types
 05,4B78,Data_05_4B78,C,"read in the core runs by 00:0245, 00:02F9, 00:1680",kitty_types
+05,4B89,Mode02_State03,C,handler of state $03 of mode $02 (word 3 of Mode02_StateTable),modes
+05,4BA1,Mode02_State06,C,handler of state $06 of mode $02 (word 6 of Mode02_StateTable),modes
 05,4BCE,Data_05_4BCE,C,"read in the core runs by 00:0206, 00:01F2",kitty_types
 05,4BD7,Data_05_4BD7,C,"read in the core runs by 00:0206, 00:01F2",kitty_types
 05,4C1B,Data_05_4C1B,C,read in the core runs by 00:1AB7,kitty_types
+05,4C52,Mode02_State07,C,handler of state $07 of mode $02 (word 7 of Mode02_StateTable),modes
 05,4C56,Data_05_4C56,C,"read in the core runs by 05:510D, 05:4A61, 00:1AB7",kitty_types
 05,4C5F,Data_05_4C5F,C,"read in the core runs by 05:510D, 05:4A61, 00:1AB7",kitty_types
+05,4CAF,Mode02_State08,C,handler of state $08 of mode $02 (word 8 of Mode02_StateTable),modes
 05,4CBA,Data_05_4CBA,C,"read in the core runs by 05:510D, 05:4A61, 00:1AB7",kitty_types
+05,4CC3,Mode02_State09,C,handler of state $09 of mode $02 (word 9 of Mode02_StateTable),modes
 05,4CD9,Data_05_4CD9,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 05,4CEB,Data_05_4CEB,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
+05,4CF4,Mode02_State0A,C,handler of state $0A of mode $02 (word 10 of Mode02_StateTable),modes
+05,4D10,Mode02_State0C,C,handler of state $0C of mode $02 (word 12 of Mode02_StateTable),modes
 05,4D21,Data_05_4D21,C,read in the core runs by 05:4DC1,kitty_types
 05,4E10,Data_05_4E10,C,"read in the core runs by 05:4EB0, 05:4ED6, 05:4EE6, 05:4EF6",kitty_types
 05,4F31,Data_05_4F31,C,read in the core runs by 00:1AB7,kitty_types
 05,4F65,Data_05_4F65,C,read in the core runs by 00:1AB7,kitty_types
+05,5004,Mode02_State0B,C,handler of state $0B of mode $02 (word 11 of Mode02_StateTable),modes
 05,500F,Data_05_500F,C,read in the core runs by 00:1AB7,kitty_types
 05,5031,Data_05_5031,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 05,5036,Data_05_5036,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
@@ -274,20 +515,35 @@ bank,addr,name,conf,note,source
 05,5183,Data_05_5183,C,read in the core runs by 00:1AB7,kitty_types
 05,51B2,Data_05_51B2,C,read in the core runs by 00:1AB7,kitty_types
 05,51DC,Data_05_51DC,C,read in the core runs by 00:1AB7,kitty_types
-05,52B6,Data_05_52B6,C,"read in the core runs by 05:54B7, 05:5495, 05:5482, 00:0189",kitty_types
+05,51E5,Mode02_State0D,C,handler of state $0D of mode $02 (word 13 of Mode02_StateTable),modes
+05,5244,Mode02_State0E,C,handler of state $0E of mode $02 (word 14 of Mode02_StateTable),modes
+05,52AB,Mode02_TakePhotos,C,ModeTable entry $02: BGB screens 02:01 (camera view) and 02:06 (photo taken),modes
+05,52B6,Mode02_StateTable,C,"state table of mode $02, read by $0189 with hFF8E",modes
 05,5559,Data_05_5559,C,read in the core runs by 00:01F2,kitty_types
 05,5560,Data_05_5560,C,read in the core runs by 00:01F2,kitty_types
 05,5567,Data_05_5567,C,read in the core runs by 00:01F2,kitty_types
 05,556E,Data_05_556E,C,read in the core runs by 00:01F2,kitty_types
 05,5A14,Data_05_5A14,C,"read in the core runs by 05:5EC1, 05:58A2",kitty_types
+05,5EC1,Blit_MakePatchEntry,C,"same code as the Japanese Blit_MakePatchEntry (00:1EEE, 44 bytes, masked match)",port_jp
+05,5EED,Blit_BuildPatchList,I,edited copy of the Japanese Blit_BuildPatchList (00:1F1A): instruction sequence ratio 0.872 against 55 bytes,near_jp
 05,5F86,Data_05_5F86,C,read in the core runs by 05:5F29,kitty_types
+05,5F96,Blit_ApplyPatchList,C,"same code as the Japanese Blit_ApplyPatchList (00:213D, 51 bytes, exact match)",port_jp
+05,5FC9,Mode05_State00,C,handler of state $00 of mode $05 (word 0 of Mode05_StateTable),modes
 05,5FE3,Data_05_5FE3,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,5FED,Data_05_5FED,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,5FF7,Data_05_5FF7,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,600E,Data_05_600E,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6014,Data_05_6014,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6022,Data_05_6022,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
-05,6171,Data_05_6171,C,"read in the core runs by 05:625D, 00:0189",kitty_types
+05,607A,Mode05_State06,C,handler of state $06 of mode $05 (word 6 of Mode05_StateTable),modes
+05,607B,Mode05_State01,C,handler of state $01 of mode $05 (word 1 of Mode05_StateTable),modes
+05,60B0,Mode05_State02,C,handler of state $02 of mode $05 (word 2 of Mode05_StateTable),modes
+05,60C4,Mode05_State03,C,handler of state $03 of mode $05 (word 3 of Mode05_StateTable),modes
+05,611B,Mode05_State04,C,handler of state $04 of mode $05 (word 4 of Mode05_StateTable),modes
+05,612F,Mode05_State05,C,handler of state $05 of mode $05 (word 5 of Mode05_StateTable),modes
+05,6166,Mode05_StampWindow,I,ModeTable entry $05: forced BGB screen (stamp window); reached in the core runs,modes
+05,6171,Mode05_StateTable,C,"state table of mode $05, read by $0189 with hFF8E",modes
+05,65FD,Mode03_State0A,C,handler of state $0A of mode $03 (word 10 of Mode03_StateTable),modes
 05,6617,Data_05_6617,C,read in the core runs by 00:0245,kitty_types
 05,6621,Data_05_6621,C,read in the core runs by 00:0245,kitty_types
 05,6648,Data_05_6648,C,read in the core runs by 00:0245,kitty_types
@@ -295,14 +551,20 @@ bank,addr,name,conf,note,source
 05,6682,Data_05_6682,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6688,Data_05_6688,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6696,Data_05_6696,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,66BD,Mode03_State0B,C,handler of state $0B of mode $03 (word 11 of Mode03_StateTable),modes
 05,68D7,Data_05_68D7,C,"read in the core runs by 00:0906, 00:07AE, 00:0A4E, 00:08F2 ...",kitty_types
 05,6AAD,Data_05_6AAD,C,"read in the core runs by 00:07AE, 00:07CE",kitty_types
 05,6AC5,Data_05_6AC5,C,"read in the core runs by 00:07CE, 00:07AE",kitty_types
+05,6B97,Mode03_State06,C,handler of state $06 of mode $03 (word 6 of Mode03_StateTable),modes
 05,6BB1,Data_05_6BB1,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6BBB,Data_05_6BBB,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6BCC,Data_05_6BCC,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6BD2,Data_05_6BD2,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,6BE0,Data_05_6BE0,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,6C31,Mode03_State07,C,handler of state $07 of mode $03 (word 7 of Mode03_StateTable),modes
+05,6CA5,Mode03_State08,C,handler of state $08 of mode $03 (word 8 of Mode03_StateTable),modes
+05,6CB1,Mode03_State09,C,handler of state $09 of mode $03 (word 9 of Mode03_StateTable),modes
+05,6F7A,Mode03_State00,C,handler of state $00 of mode $03 (word 0 of Mode03_StateTable),modes
 05,6F94,Data_05_6F94,C,read in the core runs by 00:0245,kitty_types
 05,6F9E,Data_05_6F9E,C,read in the core runs by 00:0245,kitty_types
 05,6FB1,Data_05_6FB1,C,read in the core runs by 00:0245,kitty_types
@@ -310,6 +572,7 @@ bank,addr,name,conf,note,source
 05,7008,Data_05_7008,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,700E,Data_05_700E,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,701C,Data_05_701C,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,70B0,Mode03_State01,C,handler of state $01 of mode $03 (word 1 of Mode03_StateTable),modes
 05,70CA,Data_05_70CA,C,read in the core runs by 00:0245,kitty_types
 05,70D4,Data_05_70D4,C,read in the core runs by 00:0245,kitty_types
 05,70DE,Data_05_70DE,C,read in the core runs by 00:0245,kitty_types
@@ -318,32 +581,63 @@ bank,addr,name,conf,note,source
 05,7114,Data_05_7114,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,711A,Data_05_711A,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,7128,Data_05_7128,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,71BC,Mode03_State02,C,handler of state $02 of mode $03 (word 2 of Mode03_StateTable),modes
+05,7311,Mode03_State03,C,handler of state $03 of mode $03 (word 3 of Mode03_StateTable),modes
+05,731D,Mode03_State04,C,handler of state $04 of mode $03 (word 4 of Mode03_StateTable),modes
 05,7337,Data_05_7337,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,7341,Data_05_7341,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,734E,Data_05_734E,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,7354,Data_05_7354,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 05,7362,Data_05_7362,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
+05,73B0,Mode03_State05,C,handler of state $05 of mode $03 (word 5 of Mode03_StateTable),modes
+05,7428,Mode03_State0C,C,handler of state $0C of mode $03 (word 12 of Mode03_StateTable),modes
 05,7442,Data_05_7442,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,744C,Data_05_744C,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,7459,Data_05_7459,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,745F,Data_05_745F,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+05,74A1,Mode03_State0D,C,handler of state $0D of mode $03 (word 13 of Mode03_StateTable),modes
+05,74CE,Mode03_State0E,C,handler of state $0E of mode $03 (word 14 of Mode03_StateTable),modes
 05,74EE,Data_05_74EE,C,read in the core runs by 05:74CE,kitty_types
+05,74F6,Mode03_State0F,C,handler of state $0F of mode $03 (word 15 of Mode03_StateTable),modes
+05,7503,Mode03_State10,C,handler of state $10 of mode $03 (word 16 of Mode03_StateTable),modes
 05,751D,Data_05_751D,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,7527,Data_05_7527,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,7534,Data_05_7534,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 05,753A,Data_05_753A,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
-05,75EE,JumpTable_05_75EE,C,jump table read through $0189 at 05:75E8 (20 records; tools/kitty_trace.py),kitty_types
-06,4054,JumpTable_06_4054,C,jump table read through $0189 at 06:404E (2 records; tools/kitty_trace.py),kitty_types
-06,40B2,JumpTable_06_40B2,C,jump table read through $0189 at 06:40AC (2 records; tools/kitty_trace.py),kitty_types
-06,4118,JumpTable_06_4118,C,jump table read through $0189 at 06:4112 (2 records; tools/kitty_trace.py),kitty_types
-06,4181,JumpTable_06_4181,C,jump table read through $0189 at 06:417B (2 records; tools/kitty_trace.py),kitty_types
-06,4209,JumpTable_06_4209,C,jump table read through $0189 at 06:4203 (2 records; tools/kitty_trace.py),kitty_types
+05,7581,Mode03_State11,C,handler of state $11 of mode $03 (word 17 of Mode03_StateTable),modes
+05,75C1,Mode03_State12,C,handler of state $12 of mode $03 (word 18 of Mode03_StateTable),modes
+05,75D6,Mode03_State13,C,handler of state $13 of mode $03 (word 19 of Mode03_StateTable),modes
+05,75E3,Mode03_ViewAlbum,C,ModeTable entry $03: BGB screen 03:02 (album binder),modes
+05,75EE,Mode03_StateTable,C,"state table of mode $03, read by $0189 with hFF8E",modes
+06,4000,Mode15_State00,C,handler of state $00 of mode $15 (word 0 of Mode15_StateTable),modes
+06,403A,Mode15_State01,C,handler of state $01 of mode $15 (word 1 of Mode15_StateTable),modes
+06,4049,Mode15_FadeOut15,I,ModeTable entry $15: forced: goes to the fade (mode 1E) at once,modes
+06,4054,Mode15_StateTable,C,"state table of mode $15, read by $0189 with hFF8E",modes
+06,4058,Mode16_State00,C,handler of state $00 of mode $16 (word 0 of Mode16_StateTable),modes
+06,4098,Mode16_State01,C,handler of state $01 of mode $16 (word 1 of Mode16_StateTable),modes
+06,40A7,Mode16_FadeOut16,I,ModeTable entry $16: forced: goes to the fade (mode 1E) at once,modes
+06,40B2,Mode16_StateTable,C,"state table of mode $16, read by $0189 with hFF8E",modes
+06,40B6,Mode17_State00,C,handler of state $00 of mode $17 (word 0 of Mode17_StateTable),modes
+06,40FE,Mode17_State01,C,handler of state $01 of mode $17 (word 1 of Mode17_StateTable),modes
+06,410D,Mode17_PrintError,I,ModeTable entry $17: forced BGB screen (print error),modes
+06,4118,Mode17_StateTable,C,"state table of mode $17, read by $0189 with hFF8E",modes
+06,411C,Mode18_State00,C,handler of state $00 of mode $18 (word 0 of Mode18_StateTable),modes
+06,4167,Mode18_State01,C,handler of state $01 of mode $18 (word 1 of Mode18_StateTable),modes
+06,4176,Mode18_PompompurinPicture,I,ModeTable entry $18: forced BGB screen (Pompompurin picture),modes
+06,4181,Mode18_StateTable,C,"state table of mode $18, read by $0189 with hFF8E",modes
+06,4185,Mode19_State00,C,handler of state $00 of mode $19 (word 0 of Mode19_StateTable),modes
+06,41EF,Mode19_State01,C,handler of state $01 of mode $19 (word 1 of Mode19_StateTable),modes
+06,41FE,Mode19_EmptyFrame19,I,ModeTable entry $19: forced BGB screen (an empty photo frame),modes
+06,4209,Mode19_StateTable,C,"state table of mode $19, read by $0189 with hFF8E",modes
 06,430E,Data_06_430E,C,read in the core runs by 06:4561,kitty_types
 06,43FF,Data_06_43FF,C,"read in the core runs by 06:4561, 06:4478",kitty_types
+06,4478,Mode14_State00,C,handler of state $00 of mode $14 (word 0 of Mode14_StateTable),modes
 06,44E7,Data_06_44E7,C,read in the core runs by 00:0245,kitty_types
 06,4515,Data_06_4515,C,read in the core runs by 00:1AB7,kitty_types
 06,452B,Data_06_452B,C,read in the core runs by 00:02F9,kitty_types
-06,463C,Data_06_463C,C,"read in the core runs by 06:4658, 00:0189",kitty_types
+06,453F,Mode14_State01,C,handler of state $01 of mode $14 (word 1 of Mode14_StateTable),modes
+06,4631,Mode14_MessageScreen,C,ModeTable entry $14: BGB screen 14:01 (print error; the same screen says there is no photo to give),modes
+06,463C,Mode14_StateTable,C,"state table of mode $14, read by $0189 with hFF8E",modes
 06,4781,Data_06_4781,C,"read in the core runs by 06:46EB, 06:4658, 06:4754",kitty_types
 06,49D2,Data_06_49D2,C,"read in the core runs by 06:487E, 06:4837",kitty_types
 06,4B88,Data_06_4B88,C,"read in the core runs by 06:4B6A, 06:4B3E",kitty_types
@@ -353,80 +647,171 @@ bank,addr,name,conf,note,source
 06,50C6,Data_06_50C6,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,50CC,Data_06_50CC,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,50DA,Data_06_50DA,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
+06,5105,Mode0B_State00,C,handler of state $00 of mode $0B (word 0 of Mode0B_StateTable),modes
+06,511C,Mode0B_State01,C,handler of state $01 of mode $0B (word 1 of Mode0B_StateTable),modes
 06,5192,Data_06_5192,C,read in the core runs by 00:01D1,kitty_types
 06,51D3,Data_06_51D3,C,"read in the core runs by 06:511C, 00:01D1",kitty_types
 06,51DA,Data_06_51DA,C,"read in the core runs by 06:511C, 00:01D1",kitty_types
+06,51E0,Mode0B_State02,C,handler of state $02 of mode $0B (word 2 of Mode0B_StateTable),modes
 06,525A,Data_06_525A,C,read in the core runs by 00:1AB7,kitty_types
+06,526A,Mode0B_State03,C,handler of state $03 of mode $0B (word 3 of Mode0B_StateTable),modes
 06,52E7,Data_06_52E7,C,"read in the core runs by 00:1AB7, 00:01D1",kitty_types
 06,52ED,Data_06_52ED,C,"read in the core runs by 00:1AB7, 00:01D1",kitty_types
+06,52F0,Mode0B_State04,C,handler of state $04 of mode $0B (word 4 of Mode0B_StateTable),modes
+06,536E,Mode0B_State05,C,handler of state $05 of mode $0B (word 5 of Mode0B_StateTable),modes
 06,53D3,Data_06_53D3,C,read in the core runs by 00:1AB7,kitty_types
+06,53D7,Mode0B_State06,C,handler of state $06 of mode $0B (word 6 of Mode0B_StateTable),modes
+06,53F5,Mode0B_State08,C,handler of state $08 of mode $0B (word 8 of Mode0B_StateTable),modes
+06,5406,Mode0B_State07,C,handler of state $07 of mode $0B (word 7 of Mode0B_StateTable),modes
 06,545B,Data_06_545B,C,read in the core runs by 00:01D1,kitty_types
+06,545E,Mode0B_State09,C,handler of state $09 of mode $0B (word 9 of Mode0B_StateTable),modes
 06,54AE,Data_06_54AE,C,read in the core runs by 00:01D1,kitty_types
+06,54B1,Mode0B_State0B,C,handler of state $0B of mode $0B (word 11 of Mode0B_StateTable),modes
 06,5506,Data_06_5506,C,read in the core runs by 00:01D1,kitty_types
+06,5509,Mode0B_State0D,C,handler of state $0D of mode $0B (word 13 of Mode0B_StateTable),modes
 06,5559,Data_06_5559,C,read in the core runs by 00:01D1,kitty_types
-06,55D1,JumpTable_06_55D1,C,jump table read through $0189 at 06:55CB (17 records; tools/kitty_trace.py),kitty_types
+06,555C,Mode0B_State0F,C,handler of state $0F of mode $0B (word 15 of Mode0B_StateTable),modes
+06,5585,Mode0B_State10,C,handler of state $10 of mode $0B (word 16 of Mode0B_StateTable),modes
+06,55C6,Mode0B_NameCardEdit,C,ModeTable entry $0B: BGB screens 0B:04 / 08 / 0A / 0C / 0E / 10 (photos,modes
+06,55D1,Mode0B_StateTable,C,"state table of mode $0B, read by $0189 with hFF8E",modes
+06,560F,Mode0A_State00,C,handler of state $00 of mode $0A (word 0 of Mode0A_StateTable),modes
 06,5629,Data_06_5629,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5633,Data_06_5633,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,563D,Data_06_563D,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5654,Data_06_5654,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,565A,Data_06_565A,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5670,Data_06_5670,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
-06,580A,JumpTable_06_580A,C,jump table read through $0189 at 06:5804 (4 records; tools/kitty_trace.py),kitty_types
+06,56D5,Mode0A_State03,C,handler of state $03 of mode $0A (word 3 of Mode0A_StateTable),modes
+06,56D6,Mode0A_State01,C,handler of state $01 of mode $0A (word 1 of Mode0A_StateTable),modes
+06,5785,Mode0A_State02,C,handler of state $02 of mode $0A (word 2 of Mode0A_StateTable),modes
+06,57FF,Mode0A_NameCard,C,ModeTable entry $0A: BGB screens 0A:01 (the finished card) and 0A:02 (change / print / cancel),modes
+06,580A,Mode0A_StateTable,C,"state table of mode $0A, read by $0189 with hFF8E",modes
+06,5CDC,Mode0C_State00,C,handler of state $00 of mode $0C (word 0 of Mode0C_StateTable),modes
 06,5CF6,Data_06_5CF6,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5D00,Data_06_5D00,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5D12,Data_06_5D12,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5D18,Data_06_5D18,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5D26,Data_06_5D26,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
-06,5D97,Data_06_5D97,C,"read in the core runs by 06:5FC0, 06:5FA8, 00:0189",kitty_types
+06,5D75,Mode0C_State01,C,handler of state $01 of mode $0C (word 1 of Mode0C_StateTable),modes
+06,5D8C,Mode0C_RecordBook,C,ModeTable entry $0C: BGB screen 0C:01 (photo counters and Kitts),modes
+06,5D97,Mode0C_StateTable,C,"state table of mode $0C, read by $0189 with hFF8E",modes
 06,5DFA,Data_06_5DFA,C,"read in the core runs by 06:5FC0, 06:5FA8",kitty_types
 06,5EB8,Data_06_5EB8,C,"read in the core runs by 06:5FC0, 06:5FA8",kitty_types
 06,5F7F,Data_06_5F7F,C,read in the core runs by 06:5F95,kitty_types
+06,605B,Unused_Link_SumSlotBuffer,C,"same code as the Japanese Unused_Link_SumSlotBuffer (07:4BEA, 30 bytes, masked match)",port_jp
+06,6198,Mode07_State00,C,handler of state $00 of mode $07 (word 0 of Mode07_StateTable),modes
 06,61B2,Data_06_61B2,C,read in the core runs by 00:0245,kitty_types
 06,61BC,Data_06_61BC,C,read in the core runs by 00:0245,kitty_types
 06,61C6,Data_06_61C6,C,read in the core runs by 00:0245,kitty_types
 06,61E4,Data_06_61E4,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
 06,61EA,Data_06_61EA,C,"read in the core runs by 00:02F9, 00:1AB7",kitty_types
-06,6323,JumpTable_06_6323,C,jump table read through $0189 at 06:631D (5 records; tools/kitty_trace.py),kitty_types
-06,6727,JumpTable_06_6727,C,jump table read through $0189 at 06:6721 (6 records; tools/kitty_trace.py),kitty_types
-06,6CF7,JumpTable_06_6CF7,C,jump table read through $0189 at 06:6CF1 (17 records; tools/kitty_trace.py),kitty_types
-06,6DA1,JumpTable_06_6DA1,C,jump table read through $0189 at 06:6D9B (4 records; tools/kitty_trace.py),kitty_types
-07,4084,JumpTable_07_4084,C,jump table read through $0189 at 07:407E (2 records; tools/kitty_trace.py),kitty_types
-07,4142,JumpTable_07_4142,C,jump table read through $0189 at 07:413C (2 records; tools/kitty_trace.py),kitty_types
-07,41CA,JumpTable_07_41CA,C,jump table read through $0189 at 07:41C4 (2 records; tools/kitty_trace.py),kitty_types
+06,6235,Mode07_State01,C,handler of state $01 of mode $07 (word 1 of Mode07_StateTable),modes
+06,6256,Mode07_State02,C,handler of state $02 of mode $07 (word 2 of Mode07_StateTable),modes
+06,62ED,Mode07_State03,C,handler of state $03 of mode $07 (word 3 of Mode07_StateTable),modes
+06,62F9,Mode07_State04,C,handler of state $04 of mode $07 (word 4 of Mode07_StateTable),modes
+06,6318,Mode07_Exchange,C,ModeTable entry $07: BGB screen 07:02 (give / receive),modes
+06,6323,Mode07_StateTable,C,"state table of mode $07, read by $0189 with hFF8E",modes
+06,65B6,Mode08_State00,C,handler of state $00 of mode $08 (word 0 of Mode08_StateTable),modes
+06,6644,Mode08_State01,C,handler of state $01 of mode $08 (word 1 of Mode08_StateTable),modes
+06,667A,Mode08_State02,C,handler of state $02 of mode $08 (word 2 of Mode08_StateTable),modes
+06,66C3,Mode08_State04,C,handler of state $04 of mode $08 (word 4 of Mode08_StateTable),modes
+06,66CF,Mode08_State05,C,handler of state $05 of mode $08 (word 5 of Mode08_StateTable),modes
+06,66F4,Mode08_State03,C,handler of state $03 of mode $08 (word 3 of Mode08_StateTable),modes
+06,671C,Mode08_AlbumPhotoTrain,I,ModeTable entry $08: forced BGB screen (album pages drawn as a photo train),modes
+06,6727,Mode08_StateTable,C,"state table of mode $08, read by $0189 with hFF8E",modes
+06,6733,Mode09_State00,C,handler of state $00 of mode $09 (word 0 of Mode09_StateTable),modes
+06,6749,Mode09_State01,C,handler of state $01 of mode $09 (word 1 of Mode09_StateTable),modes
+06,6808,Mode09_State02,C,handler of state $02 of mode $09 (word 2 of Mode09_StateTable),modes
+06,6827,Mode09_State03,C,handler of state $03 of mode $09 (word 3 of Mode09_StateTable),modes
+06,68D2,Mode09_State04,C,handler of state $04 of mode $09 (word 4 of Mode09_StateTable),modes
+06,68FA,Mode09_State05,C,handler of state $05 of mode $09 (word 5 of Mode09_StateTable),modes
+06,691F,Mode09_State06,C,handler of state $06 of mode $09 (word 6 of Mode09_StateTable),modes
+06,6A4E,Mode09_State08,C,handler of state $08 of mode $09 (word 8 of Mode09_StateTable),modes
+06,6A59,Mode09_State0A,C,handler of state $0A of mode $09 (word 10 of Mode09_StateTable),modes
+06,6ABB,Mode09_State0B,C,handler of state $0B of mode $09 (word 11 of Mode09_StateTable),modes
+06,6AD4,Mode09_State0C,C,handler of state $0C of mode $09 (word 12 of Mode09_StateTable),modes
+06,6B9F,Mode09_State0D,C,handler of state $0D of mode $09 (word 13 of Mode09_StateTable),modes
+06,6BC3,Mode09_State09,C,handler of state $09 of mode $09 (word 9 of Mode09_StateTable),modes
+06,6BD3,Mode09_State0E,C,handler of state $0E of mode $09 (word 14 of Mode09_StateTable),modes
+06,6BF8,Mode09_State0F,C,handler of state $0F of mode $09 (word 15 of Mode09_StateTable),modes
+06,6CAB,Mode09_State07,C,handler of state $07 of mode $09 (word 7 of Mode09_StateTable),modes
+06,6CEC,Mode09_ExchangeCommunicating,I,ModeTable entry $09: forced BGB screen (communicating message),modes
+06,6CF7,Mode09_StateTable,C,"state table of mode $09, read by $0189 with hFF8E",modes
+06,6D19,Mode1D_State00,C,handler of state $00 of mode $1D (word 0 of Mode1D_StateTable),modes
+06,6D4D,Mode1D_State01,C,handler of state $01 of mode $1D (word 1 of Mode1D_StateTable),modes
+06,6D61,Mode1D_State02,C,handler of state $02 of mode $1D (word 2 of Mode1D_StateTable),modes
+06,6D8D,Mode1D_State03,C,handler of state $03 of mode $1D (word 3 of Mode1D_StateTable),modes
+06,6D96,Mode1D_BackToMainMenu1D,I,ModeTable entry $1D: forced: returns to mode 01 at once (no screen of its own),modes
+06,6DA1,Mode1D_StateTable,C,"state table of mode $1D, read by $0189 with hFF8E",modes
+07,4000,Mode1A_State00,C,handler of state $00 of mode $1A (word 0 of Mode1A_StateTable),modes
+07,406A,Mode1A_State01,C,handler of state $01 of mode $1A (word 1 of Mode1A_StateTable),modes
+07,4079,Mode1A_EmptyFrame1A,I,ModeTable entry $1A: forced BGB screen (an empty photo frame),modes
+07,4084,Mode1A_StateTable,C,"state table of mode $1A, read by $0189 with hFF8E",modes
+07,4088,Mode1B_State00,C,handler of state $00 of mode $1B (word 0 of Mode1B_StateTable),modes
+07,4118,Mode1B_State01,C,handler of state $01 of mode $1B (word 1 of Mode1B_StateTable),modes
+07,4137,Mode1B_PrintingAppleGame,I,ModeTable entry $1B: forced BGB screen (printing: catch the apples while the printer works),modes
+07,4142,Mode1B_StateTable,C,"state table of mode $1B, read by $0189 with hFF8E",modes
+07,4146,Mode1C_State00,C,handler of state $00 of mode $1C (word 0 of Mode1C_StateTable),modes
+07,41B0,Mode1C_State01,C,handler of state $01 of mode $1C (word 1 of Mode1C_StateTable),modes
+07,41BF,Mode1C_EmptyFrame1C,I,ModeTable entry $1C: forced BGB screen (an empty photo frame),modes
+07,41CA,Mode1C_StateTable,C,"state table of mode $1C, read by $0189 with hFF8E",modes
 07,41CE,Data_07_41CE,C,read in the core runs by 07:43EE,kitty_types
 07,449C,JumpTable_07_449C,C,inline jump table (32 words; tools/kitty_trace.py),kitty_types
 07,4501,Data_07_4501,C,read in the core runs by 07:44DC,kitty_types
 07,470B,Data_07_470B,C,read in the core runs by 07:46ED,kitty_types
 07,4812,Data_07_4812,C,"read in the core runs by 07:47BF, 07:4751",kitty_types
 07,48A5,Data_07_48A5,C,read in the core runs by 07:4894,kitty_types
+07,48AA,Mode12_State00,C,handler of state $00 of mode $12 (word 0 of Mode12_StateTable),modes
 07,48C4,Data_07_48C4,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,48D7,Data_07_48D7,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,48E1,Data_07_48E1,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,48F2,Data_07_48F2,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+07,4923,Mode12_State01,C,handler of state $01 of mode $12 (word 1 of Mode12_StateTable),modes
+07,4955,Mode12_State02,C,handler of state $02 of mode $12 (word 2 of Mode12_StateTable),modes
 07,496F,Data_07_496F,C,read in the core runs by 00:1AB7,kitty_types
 07,4983,Data_07_4983,C,"read in the core runs by 00:02F9, 00:0245",kitty_types
 07,4994,Data_07_4994,C,"read in the core runs by 00:02F9, 00:0245",kitty_types
 07,49CD,Data_07_49CD,C,read in the core runs by 00:1AB7,kitty_types
 07,49F0,Data_07_49F0,C,read in the core runs by 00:1AB7,kitty_types
-07,4A89,JumpTable_07_4A89,C,jump table read through $0189 at 07:4A83 (5 records; tools/kitty_trace.py),kitty_types
-07,4A9F,Data_07_4A9F,C,"read in the core runs by 07:43EE, 00:0189",kitty_types
+07,49FE,Mode12_State03,C,handler of state $03 of mode $12 (word 3 of Mode12_StateTable),modes
+07,4A60,Mode12_State04,C,handler of state $04 of mode $12 (word 4 of Mode12_StateTable),modes
+07,4A7E,Mode12_SlideShow,C,ModeTable entry $12: BGB screens 12:01 (settings) and 12:04 (playing),modes
+07,4A89,Mode12_StateTable,C,"state table of mode $12, read by $0189 with hFF8E",modes
+07,4A93,Mode13_State00,C,handler of state $00 of mode $13 (word 0 of Mode13_StateTable),modes
+07,4A94,Mode13_BackToMainMenu13,I,ModeTable entry $13: forced: returns to mode 01 at once (no screen of its own),modes
+07,4A9F,Mode13_StateTable,C,"state table of mode $13, read by $0189 with hFF8E",modes
 07,4E27,Data_07_4E27,C,"read in the core runs by 07:43EE, 07:4E59",kitty_types
 07,4E70,Data_07_4E70,C,"read in the core runs by 07:4F09, 07:4EF5",kitty_types
 07,4F3A,Data_07_4F3A,C,read in the core runs by 07:4F48,kitty_types
+07,4F62,Mode11_State00,C,handler of state $00 of mode $11 (word 0 of Mode11_StateTable),modes
 07,4F7C,Data_07_4F7C,C,read in the core runs by 00:1AB7,kitty_types
 07,4F9E,Data_07_4F9E,C,read in the core runs by 00:0245,kitty_types
 07,4FBB,Data_07_4FBB,C,read in the core runs by 00:02F9,kitty_types
+07,5013,Mode11_State01,C,handler of state $01 of mode $11 (word 1 of Mode11_StateTable),modes
 07,502B,Data_07_502B,C,read in the core runs by 00:1AB7,kitty_types
+07,5056,Mode11_State02,C,handler of state $02 of mode $11 (word 2 of Mode11_StateTable),modes
+07,5074,Mode11_State03,C,handler of state $03 of mode $11 (word 3 of Mode11_StateTable),modes
 07,5097,JumpTable_07_5097,C,inline jump table (7 words; tools/kitty_trace.py),kitty_types
+07,50EB,Mode11_State05,C,handler of state $05 of mode $11 (word 5 of Mode11_StateTable),modes
 07,5101,Data_07_5101,C,read in the core runs by 00:1AB7,kitty_types
+07,5109,Mode11_State04,C,handler of state $04 of mode $11 (word 4 of Mode11_StateTable),modes
 07,514C,Data_07_514C,C,read in the core runs by 00:1AB7,kitty_types
+07,517C,Mode11_State07,C,handler of state $07 of mode $11 (word 7 of Mode11_StateTable),modes
+07,519C,Mode11_State08,C,handler of state $08 of mode $11 (word 8 of Mode11_StateTable),modes
+07,519D,Mode11_State0B,C,handler of state $0B of mode $11 (word 11 of Mode11_StateTable),modes
+07,51CE,Mode11_State0A,C,handler of state $0A of mode $11 (word 10 of Mode11_StateTable),modes
 07,51ED,Data_07_51ED,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,51F7,Data_07_51F7,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,5201,Data_07_5201,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,520A,Data_07_520A,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7",kitty_types
+07,5292,Mode11_State09,C,handler of state $09 of mode $11 (word 9 of Mode11_StateTable),modes
+07,52AB,Mode11_State0C,C,handler of state $0C of mode $11 (word 12 of Mode11_StateTable),modes
 07,52D4,Data_07_52D4,C,"read in the core runs by 00:0206, 00:01F2",kitty_types
 07,52DD,Data_07_52DD,C,"read in the core runs by 00:0206, 00:01F2",kitty_types
-07,541F,JumpTable_07_541F,C,jump table read through $0189 at 07:5419 (15 records; tools/kitty_trace.py),kitty_types
+07,5349,Mode11_State0D,C,handler of state $0D of mode $11 (word 13 of Mode11_StateTable),modes
+07,53A8,Mode11_State0E,C,handler of state $0E of mode $11 (word 14 of Mode11_StateTable),modes
+07,5414,Mode11_StrawberryChannel,C,ModeTable entry $11: BGB screens 11:07 (photo story) and 11:0C (paused: print / keep / cancel),modes
+07,541F,Mode11_StateTable,C,"state table of mode $11, read by $0189 with hFF8E",modes
 07,546A,Data_07_546A,C,read in the core runs by 00:1AB7,kitty_types
 07,550A,Data_07_550A,C,read in the core runs by 00:1AB7,kitty_types
 07,5528,Data_07_5528,C,read in the core runs by 00:1AB7,kitty_types
@@ -436,10 +821,13 @@ bank,addr,name,conf,note,source
 07,583B,Data_07_583B,C,read in the core runs by 07:5890,kitty_types
 07,58B1,Data_07_58B1,C,read in the core runs by 07:5906,kitty_types
 07,59AF,Data_07_59AF,C,read in the core runs by 07:5996,kitty_types
+07,59EF,Mode0F_State02,C,handler of state $02 of mode $0F (word 2 of Mode0F_StateTable),modes
 07,5A1E,Data_07_5A1E,C,"read in the core runs by 00:02F9, 00:0206",kitty_types
 07,5A27,Data_07_5A27,C,"read in the core runs by 00:02F9, 00:0206",kitty_types
+07,5A33,Mode0F_State03,C,handler of state $03 of mode $0F (word 3 of Mode0F_StateTable),modes
 07,5A36,Data_07_5A36,C,"read in the core runs by 00:02F9, 00:0206",kitty_types
 07,5A5F,Data_07_5A5F,C,read in the core runs by 00:02F9,kitty_types
+07,5A7E,Mode0F_State04,C,handler of state $04 of mode $0F (word 4 of Mode0F_StateTable),modes
 07,5AB8,JumpTable_07_5AB8,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
 07,5AC4,JumpTable_07_5AC4,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
 07,5ACD,Data_07_5ACD,C,"read in the core runs by 00:0245, 00:0194",kitty_types
@@ -447,25 +835,44 @@ bank,addr,name,conf,note,source
 07,5AE1,Data_07_5AE1,C,"read in the core runs by 00:0245, 00:0194",kitty_types
 07,5AEB,Data_07_5AEB,C,"read in the core runs by 00:0245, 00:0194",kitty_types
 07,5AF5,Data_07_5AF5,C,"read in the core runs by 00:0245, 00:0194",kitty_types
+07,5B04,Mode0F_State00,C,handler of state $00 of mode $0F (word 0 of Mode0F_StateTable),modes
 07,5B1E,Data_07_5B1E,C,read in the core runs by 00:1AB7,kitty_types
 07,5B7D,JumpTable_07_5B7D,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
+07,5B9B,Mode0F_State01,C,handler of state $01 of mode $0F (word 1 of Mode0F_StateTable),modes
 07,5BB5,Data_07_5BB5,C,read in the core runs by 00:1AB7,kitty_types
+07,5C12,Mode0F_State05,C,handler of state $05 of mode $0F (word 5 of Mode0F_StateTable),modes
+07,5C29,Mode0F_State06,C,handler of state $06 of mode $0F (word 6 of Mode0F_StateTable),modes
+07,5C45,Mode0F_State07,C,handler of state $07 of mode $0F (word 7 of Mode0F_StateTable),modes
+07,5C51,Mode0F_State08,C,handler of state $08 of mode $0F (word 8 of Mode0F_StateTable),modes
 07,5CA5,Data_07_5CA5,C,"read in the core runs by 00:0194, 00:1AB7",kitty_types
 07,5CAE,JumpTable_07_5CAE,C,inline jump table (3 words; tools/kitty_trace.py),kitty_types
 07,5D27,Data_07_5D27,C,read in the core runs by 00:1AB7,kitty_types
-07,5E4B,JumpTable_07_5E4B,C,jump table read through $0189 at 07:5E45 (16 records; tools/kitty_trace.py),kitty_types
+07,5D3C,Mode0F_State0A,C,handler of state $0A of mode $0F (word 10 of Mode0F_StateTable),modes
+07,5D3D,Mode0F_State0C,C,handler of state $0C of mode $0F (word 12 of Mode0F_StateTable),modes
+07,5D9D,Mode0F_State0D,C,handler of state $0D of mode $0F (word 13 of Mode0F_StateTable),modes
+07,5DF5,Mode0F_State0E,C,handler of state $0E of mode $0F (word 14 of Mode0F_StateTable),modes
+07,5E04,Mode0F_State0F,C,handler of state $0F of mode $0F (word 15 of Mode0F_StateTable),modes
+07,5E40,Mode0F_FifteenPuzzle,I,ModeTable entry $0F: forced BGB screen (15 puzzle board); reached in the core runs,modes
+07,5E4B,Mode0F_StateTable,C,"state table of mode $0F, read by $0189 with hFF8E",modes
 07,5F41,Data_07_5F41,C,"read in the core runs by 07:5EAD, 07:5F6D, 07:5E8F",kitty_types
+07,605C,Mode10_State00,C,handler of state $00 of mode $10 (word 0 of Mode10_StateTable),modes
 07,6076,Data_07_6076,C,read in the core runs by 00:1AB7,kitty_types
 07,60AE,Data_07_60AE,C,"read in the core runs by 00:0245, 00:02F9",kitty_types
 07,60B8,Data_07_60B8,C,"read in the core runs by 00:0245, 00:02F9",kitty_types
 07,60C9,Data_07_60C9,C,"read in the core runs by 00:0245, 00:02F9",kitty_types
+07,60FF,Mode10_State01,C,handler of state $01 of mode $10 (word 1 of Mode10_StateTable),modes
 07,6119,Data_07_6119,C,read in the core runs by 00:1AB7,kitty_types
 07,6133,Data_07_6133,C,read in the core runs by 00:0245,kitty_types
 07,613D,Data_07_613D,C,read in the core runs by 00:0245,kitty_types
 07,6156,Data_07_6156,C,read in the core runs by 00:02F9,kitty_types
+07,618C,Mode10_State02,C,handler of state $02 of mode $10 (word 2 of Mode10_StateTable),modes
+07,61B3,Mode10_State03,C,handler of state $03 of mode $10 (word 3 of Mode10_StateTable),modes
 07,623A,Data_07_623A,C,read in the core runs by 07:61B3,kitty_types
 07,626F,Data_07_626F,C,read in the core runs by 07:6260,kitty_types
-07,62C6,Data_07_62C6,C,"read in the core runs by 07:6580, 00:0189",kitty_types
+07,627B,Mode10_State04,C,handler of state $04 of mode $10 (word 4 of Mode10_StateTable),modes
+07,62A6,Mode10_State05,C,handler of state $05 of mode $10 (word 5 of Mode10_StateTable),modes
+07,62BB,Mode10_ScratchCard,C,ModeTable entry $10: BGB screen 10:02 (scratch card board),modes
+07,62C6,Mode10_StateTable,C,"state table of mode $10, read by $0189 with hFF8E",modes
 07,637F,Data_07_637F,C,read in the core runs by 07:6580,kitty_types
 07,63EE,Data_07_63EE,C,read in the core runs by 07:6580,kitty_types
 07,6423,Data_07_6423,C,read in the core runs by 07:6580,kitty_types
@@ -474,22 +881,58 @@ bank,addr,name,conf,note,source
 07,668C,Data_07_668C,C,"read in the core runs by 07:667A, 07:6580",kitty_types
 07,675E,Data_07_675E,C,read in the core runs by 00:0245,kitty_types
 07,677C,Data_07_677C,C,"read in the core runs by 00:02F9, 00:0245, 00:1AB7",kitty_types
+07,6780,Mode0E_State00,C,handler of state $00 of mode $0E (word 0 of Mode0E_StateTable),modes
 07,678D,Data_07_678D,C,"read in the core runs by 00:02F9, 00:0245, 00:1AB7",kitty_types
 07,6797,Data_07_6797,C,"read in the core runs by 00:02F9, 00:0245, 00:1AB7",kitty_types
+07,67B7,Mode0E_State01,C,handler of state $01 of mode $0E (word 1 of Mode0E_StateTable),modes
 07,67C4,Data_07_67C4,C,"read in the core runs by 00:0245, 00:02F9",kitty_types
 07,67CE,Data_07_67CE,C,"read in the core runs by 00:0245, 00:02F9",kitty_types
 07,67D8,Data_07_67D8,C,"read in the core runs by 00:0245, 00:02F9",kitty_types
+07,67F8,Mode0E_State02,C,handler of state $02 of mode $0E (word 2 of Mode0E_StateTable),modes
+07,6816,Mode0E_State03,C,handler of state $03 of mode $0E (word 3 of Mode0E_StateTable),modes
+07,6820,Mode0E_State04,C,handler of state $04 of mode $0E (word 4 of Mode0E_StateTable),modes
+07,682E,Mode0E_State05,C,handler of state $05 of mode $0E (word 5 of Mode0E_StateTable),modes
+07,684A,Mode0E_State06,C,handler of state $06 of mode $0E (word 6 of Mode0E_StateTable),modes
+07,6865,Mode0E_State07,C,handler of state $07 of mode $0E (word 7 of Mode0E_StateTable),modes
 07,6871,JumpTable_07_6871,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,68D1,Mode0E_State08,C,handler of state $08 of mode $0E (word 8 of Mode0E_StateTable),modes
+07,68E2,Mode0E_State09,C,handler of state $09 of mode $0E (word 9 of Mode0E_StateTable),modes
+07,6934,Mode0E_State0A,C,handler of state $0A of mode $0E (word 10 of Mode0E_StateTable),modes
+07,694A,Mode0E_State0B,C,handler of state $0B of mode $0E (word 11 of Mode0E_StateTable),modes
+07,6958,Mode0E_State0C,C,handler of state $0C of mode $0E (word 12 of Mode0E_StateTable),modes
+07,6966,Mode0E_State10,C,handler of state $10 of mode $0E (word 16 of Mode0E_StateTable),modes
+07,6984,Mode0E_State11,C,handler of state $11 of mode $0E (word 17 of Mode0E_StateTable),modes
 07,6990,JumpTable_07_6990,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,69A7,Mode0E_State0D,C,handler of state $0D of mode $0E (word 13 of Mode0E_StateTable),modes
+07,69B5,Mode0E_State0E,C,handler of state $0E of mode $0E (word 14 of Mode0E_StateTable),modes
+07,69EF,Mode0E_State0F,C,handler of state $0F of mode $0E (word 15 of Mode0E_StateTable),modes
+07,6A3B,Mode0E_State12,C,handler of state $12 of mode $0E (word 18 of Mode0E_StateTable),modes
+07,6A56,Mode0E_State13,C,handler of state $13 of mode $0E (word 19 of Mode0E_StateTable),modes
 07,6A62,JumpTable_07_6A62,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
+07,6AC2,Mode0E_State14,C,handler of state $14 of mode $0E (word 20 of Mode0E_StateTable),modes
+07,6AD3,Mode0E_State15,C,handler of state $15 of mode $0E (word 21 of Mode0E_StateTable),modes
+07,6AE1,Mode0E_State16,C,handler of state $16 of mode $0E (word 22 of Mode0E_StateTable),modes
+07,6AF7,Mode0E_State1F,C,handler of state $1F of mode $0E (word 31 of Mode0E_StateTable),modes
+07,6B15,Mode0E_State20,C,handler of state $20 of mode $0E (word 32 of Mode0E_StateTable),modes
 07,6B21,JumpTable_07_6B21,C,inline jump table (2 words; tools/kitty_trace.py),kitty_types
-07,6BD4,JumpTable_07_6BD4,C,jump table read through $0189 at 07:6BCE (33 records; tools/kitty_trace.py),kitty_types
+07,6B38,Mode0E_State18,C,handler of state $18 of mode $0E (word 24 of Mode0E_StateTable),modes
+07,6B46,Mode0E_State19,C,handler of state $19 of mode $0E (word 25 of Mode0E_StateTable),modes
+07,6B80,Mode0E_State1A,C,handler of state $1A of mode $0E (word 26 of Mode0E_StateTable),modes
+07,6B91,Mode0E_State1D,C,handler of state $1D of mode $0E (word 29 of Mode0E_StateTable),modes
+07,6B9F,Mode0E_State1E,C,handler of state $1E of mode $0E (word 30 of Mode0E_StateTable),modes
+07,6BC9,Mode0E_KittGamesHost,C,ModeTable entry $0E: BGB screens 0E:03-16 (the host who asks for the Kitts of the scratch card and the 15 puzzle),modes
+07,6BD4,Mode0E_StateTable,C,"state table of mode $0E, read by $0189 with hFF8E",modes
+07,6C16,Mode04_State00,C,handler of state $00 of mode $04 (word 0 of Mode04_StateTable),modes
 07,6C1D,Data_07_6C1D,C,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,6C27,Data_07_6C27,C,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,6C3E,Data_07_6C3E,C,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7",kitty_types
 07,6C44,Data_07_6C44,C,"read in the core runs by 00:0189, 00:0245, 00:02F9, 00:1AB7",kitty_types
-07,6CD2,Data_07_6CD2,C,"read in the core runs by 07:4F09, 07:431F, 07:44EB, 07:4513 ...",kitty_types
+07,6C7B,Mode04_State01,C,handler of state $01 of mode $04 (word 1 of Mode04_StateTable),modes
+07,6CC7,Mode04_PlayMenu,C,ModeTable entry $04: BGB screen 04:01 (scratch card / 15 puzzle / slide show / Strawberry Channel),modes
+07,6CD2,Mode04_StateTable,C,"state table of mode $04, read by $0189 with hFF8E",modes
 08,4000,Data_08_4000,C,"read in the core runs by 08:6AB6, 08:6A9B",kitty_types
+08,6A86,Sgb_Delay,I,"same code as the Japanese Sgb_Delay (00:1CDE, 12 bytes, exact match)",port_jp
+08,6A9B,Sgb_SendPacket,I,edited copy of the Japanese Sgb_SendPacket (00:1C93): instruction sequence ratio 0.964 against 75 bytes,near_jp
 09,4000,Data_09_4000,C,"read in the core runs by 00:067E, 00:066E, 00:06F3",kitty_types
 09,7FC0,Data_09_7FC0,C,read in the core runs by 00:021C,kitty_types
 0A,4000,Data_0A_4000,C,"read in the core runs by 00:067E, 00:066E, 00:06F3",kitty_types
@@ -571,18 +1014,34 @@ bank,addr,name,conf,note,source
 0F,42D5,JumpTable_0F_42D5,C,inline jump table (10 words; tools/kitty_trace.py),kitty_types
 0F,42E9,JumpTable_0F_42E9,C,inline jump table (18 words; tools/kitty_trace.py),kitty_types
 0F,430D,JumpTable_0F_430D,C,inline jump table (18 words; tools/kitty_trace.py),kitty_types
+0F,434F,Sfx1_Step_3B_EraseAnim,I,"same code as the Japanese Sfx1_Step_3B_EraseAnim (1F:4384, 13 bytes, masked match)",port_jp
 0F,435C,Data_0F_435C,C,read in the core runs by 0F:522E,kitty_types
 0F,4383,Data_0F_4383,C,read in the core runs by 0F:522E,kitty_types
 0F,43C2,Data_0F_43C2,C,read in the core runs by 0F:522E,kitty_types
+0F,43D4,Sfx1_Step_26_SpaceFeverBossDeath,C,"same code as the Japanese Sfx1_Step_26_SpaceFeverBossDeath (1F:4409, 30 bytes, masked match)",port_jp
+0F,4404,Sfx1_Step_25_SpaceFeverStart,C,"same code as the Japanese Sfx1_Step_25_SpaceFeverStart (1F:4439, 25 bytes, masked match)",port_jp
 0F,442A,Data_0F_442A,C,read in the core runs by 0F:522E,kitty_types
+0F,442F,Sfx1_Init_0E_ChooseD,C,"same code as the Japanese Sfx1_Init_0E_ChooseD (1F:4464, 17 bytes, masked match)",port_jp
+0F,4440,Sfx1_Step_0E_ChooseD,C,"same code as the Japanese Sfx1_Step_0E_ChooseD (1F:4475, 26 bytes, masked match)",port_jp
 0F,445A,Data_0F_445A,C,read in the core runs by 0F:522E,kitty_types
+0F,446C,Sfx1_Step_1A_1E_HotspotSound07_Choose,C,"same code as the Japanese Sfx1_Step_1A_1E_HotspotSound07_Choose (1F:44A1, 31 bytes, masked match)",port_jp
 0F,448B,Data_0F_448B,C,read in the core runs by 0F:522E,kitty_types
+0F,449D,Sfx1_Step_03_KeyA,C,"same code as the Japanese Sfx1_Step_03_KeyA (1F:44D2, 28 bytes, masked match)",port_jp
 0F,44B9,Data_0F_44B9,C,read in the core runs by 0F:522E,kitty_types
+0F,44DC,Sfx1_Init_1B_SpaceFeverMenuPickGame,I,"same code as the Japanese Sfx1_Init_1B_SpaceFeverMenuPickGame (1F:4511, 13 bytes, masked match)",port_jp
 0F,44F5,Data_0F_44F5,C,read in the core runs by 0F:4562,kitty_types
+0F,44FB,Sfx1_Init_16_OptionChange,I,"same code as the Japanese Sfx1_Init_16_OptionChange (1F:4530, 13 bytes, masked match)",port_jp
 0F,4514,Data_0F_4514,C,"read in the core runs by 0F:4562, 0F:522E",kitty_types
+0F,451F,Sfx1_Init_3C_3D_3E_SpaceFeverPlayerDeathJingle,I,edited copy of the Japanese Sfx1_Init_3C_3D_3E_SpaceFeverPlayerDeathJingle (1F:4554): instruction sequence ratio 0.952 against 21 bytes,near_jp
+0F,4531,Sfx1_Step_3C_3D_3E_SpaceFeverPlayerDeathJingle,I,"same code as the Japanese Sfx1_Step_3C_3D_3E_SpaceFeverPlayerDeathJingle (1F:4569, 12 bytes, masked match)",port_jp
 0F,453D,Data_0F_453D,C,"read in the core runs by 0F:4562, 0F:522E",kitty_types
+0F,454B,Sfx1_Init_17,I,"same code as the Japanese Sfx1_Init_17 (1F:4583, 13 bytes, masked match)",port_jp
+0F,4558,Sfx1_Step_17,C,"same code as the Japanese Sfx1_Step_17 (1F:4590, 39 bytes, masked match)",port_jp
 0F,457F,Data_0F_457F,C,read in the core runs by 0F:522E,kitty_types
+0F,4591,Sfx1_Step_29_ChooseB,C,"same code as the Japanese Sfx1_Step_29_ChooseB (1F:45C9, 31 bytes, masked match)",port_jp
 0F,45B0,Data_0F_45B0,C,read in the core runs by 0F:522E,kitty_types
+0F,45C7,Sfx1_Step_05_KeyStart,C,"same code as the Japanese Sfx1_Step_05_KeyStart (1F:45FF, 40 bytes, masked match)",port_jp
+0F,460E,Sfx1_Step_0A_MainMenuPageTurn,C,"same code as the Japanese Sfx1_Step_0A_MainMenuPageTurn (1F:4646, 42 bytes, masked match)",port_jp
 0F,4638,Data_0F_4638,C,read in the core runs by 0F:522E,kitty_types
 0F,465F,Data_0F_465F,C,read in the core runs by 0F:522E,kitty_types
 0F,4686,Data_0F_4686,C,read in the core runs by 0F:522E,kitty_types
@@ -590,36 +1049,122 @@ bank,addr,name,conf,note,source
 0F,46AD,Data_0F_46AD,C,read in the core runs by 0F:522E,kitty_types
 0F,46CE,Data_0F_46CE,C,read in the core runs by 0F:522E,kitty_types
 0F,46FD,Data_0F_46FD,C,read in the core runs by 0F:4734,kitty_types
+0F,4715,Sfx1_Step_10_TagDigitsJingle,C,"same code as the Japanese Sfx1_Step_10_TagDigitsJingle (1F:474D, 28 bytes, masked match)",port_jp
+0F,4734,Sfx1_10_DigitPtr,I,"same code as the Japanese Sfx1_10_DigitPtr (1F:476C, 15 bytes, masked match)",port_jp
+0F,4748,Sfx1_Init_1F,C,"same code as the Japanese Sfx1_Init_1F (1F:4780, 17 bytes, masked match)",port_jp
+0F,475E,Sfx1_Stop,C,"same code as the Japanese Sfx1_Stop (1F:4796, 20 bytes, masked match)",port_jp
 0F,4772,Data_0F_4772,C,read in the core runs by 0F:522E,kitty_types
+0F,477C,Sfx1_Init_06_0D_KeySelect_SpaceFeverBigEnemyKill,I,"same code as the Japanese Sfx1_Init_06_0D_KeySelect_SpaceFeverBigEnemyKill (1F:47B4, 12 bytes, masked match)",port_jp
+0F,4788,Sfx1_Step_06_0D_KeySelect_SpaceFeverBigEnemyKill,C,"same code as the Japanese Sfx1_Step_06_0D_KeySelect_SpaceFeverBigEnemyKill (1F:47C0, 25 bytes, masked match)",port_jp
 0F,47A1,Data_0F_47A1,C,"read in the core runs by 0F:47BC, 0F:522E",kitty_types
+0F,47BC,Sfx1_Step_09_MainMenuPageUp,C,"same code as the Japanese Sfx1_Step_09_MainMenuPageUp (1F:47F4, 30 bytes, masked match)",port_jp
 0F,4853,Data_0F_4853,C,read in the core runs by 0F:522E,kitty_types
+0F,4858,Sfx1_Init_0C_SpaceFeverEnemyKill,I,"same code as the Japanese Sfx1_Init_0C_SpaceFeverEnemyKill (1F:4883, 12 bytes, masked match)",port_jp
 0F,4864,Data_0F_4864,C,read in the core runs by 0F:522E,kitty_types
+0F,4869,Sfx1_Init_07_MainMenuMove,C,"same code as the Japanese Sfx1_Init_07_MainMenuMove (1F:4894, 21 bytes, masked match)",port_jp
 0F,487E,Data_0F_487E,C,read in the core runs by 0F:522E,kitty_types
+0F,4883,Sfx1_Init_2C,C,"same code as the Japanese Sfx1_Init_2C (1F:48AE, 44 bytes, masked match)",port_jp
 0F,48B4,Data_0F_48B4,C,"read in the core runs by 0F:4883, 0F:522E",kitty_types
+0F,48C1,Sfx1_Init_2D,C,"same code as the Japanese Sfx1_Init_2D (1F:48EC, 24 bytes, masked match)",port_jp
 0F,48D9,Data_0F_48D9,C,read in the core runs by 0F:48F0,kitty_types
+0F,48E3,Sfx1_Init_2F,I,"same code as the Japanese Sfx1_Init_2F (1F:490E, 13 bytes, masked match)",port_jp
+0F,48F0,Sfx1_Step_2F,C,"same code as the Japanese Sfx1_Step_2F (1F:491B, 57 bytes, masked match)",port_jp
 0F,4929,Data_0F_4929,C,read in the core runs by 0F:522E,kitty_types
+0F,494B,Sfx1_Step_32,C,"same code as the Japanese Sfx1_Step_32 (1F:4976, 24 bytes, masked match)",port_jp
+0F,498B,Sfx1_Init_33,C,"same code as the Japanese Sfx1_Init_33 (1F:49B6, 16 bytes, masked match)",port_jp
+0F,499B,Sfx1_Step_33,C,"same code as the Japanese Sfx1_Step_33 (1F:49C6, 45 bytes, masked match)",port_jp
 0F,49D7,Data_0F_49D7,C,"read in the core runs by 0F:522E, 0F:4A19",kitty_types
+0F,4A19,Sfx1_Init_34_SeqStep,C,"same code as the Japanese Sfx1_Init_34_SeqStep (1F:4A44, 29 bytes, masked match)",port_jp
 0F,4A3E,Data_0F_4A3E,C,read in the core runs by 0F:522E,kitty_types
+0F,4A43,Sfx1_Init_30_RunCelebration,C,"same code as the Japanese Sfx1_Init_30_RunCelebration (1F:4A6E, 16 bytes, masked match)",port_jp
 0F,4A65,Data_0F_4A65,C,read in the core runs by 0F:522E,kitty_types
+0F,4A6A,Sfx1_Init_31,C,"same code as the Japanese Sfx1_Init_31 (1F:4A95, 16 bytes, masked match)",port_jp
 0F,4A8D,Data_0F_4A8D,C,"read in the core runs by 0F:4B4E, 0F:522E",kitty_types
 0F,4AB4,Data_0F_4AB4,C,"read in the core runs by 0F:4B4E, 0F:522E",kitty_types
+0F,4AC3,Sfx1_Init_37_CopyBrowse,I,"same code as the Japanese Sfx1_Init_37_CopyBrowse (1F:4AEE, 13 bytes, masked match)",port_jp
 0F,4B03,Data_0F_4B03,C,"read in the core runs by 0F:4B4E, 0F:522E",kitty_types
 0F,4B29,Data_0F_4B29,C,"read in the core runs by 0F:4B4E, 0F:522E",kitty_types
+0F,4B4E,Sfx1_StepRegTable,C,"same code as the Japanese Sfx1_StepRegTable (1F:4B79, 25 bytes, masked match)",port_jp
+0F,4B83,Sfx1_Step_0F_SpaceFeverTargetKill,C,"same code as the Japanese Sfx1_Step_0F_SpaceFeverTargetKill (1F:4BAE, 17 bytes, masked match)",port_jp
 0F,4B94,Data_0F_4B94,C,"read in the core runs by 0F:4BBA, 0F:522E",kitty_types
+0F,4BAB,Sfx1_Step_11_Confirm,C,"same code as the Japanese Sfx1_Step_11_Confirm (1F:4BD6, 33 bytes, masked match)",port_jp
+0F,4BE6,Sfx1_Step_13_PanelClose,C,"same code as the Japanese Sfx1_Step_13_PanelClose (1F:4C11, 25 bytes, masked match)",port_jp
 0F,4BFF,Data_0F_4BFF,C,"read in the core runs by 0F:4C18, 0F:522E",kitty_types
+0F,4C18,Sfx1_Step_19_3A_ComposeLayoutKey_PickPhoto,C,"same code as the Japanese Sfx1_Step_19_3A_ComposeLayoutKey_PickPhoto (1F:4C43, 25 bytes, masked match)",port_jp
 0F,4C31,Data_0F_4C31,C,"read in the core runs by 0F:522E, 0F:4C36",kitty_types
+0F,4C36,Sfx1_Init_08_MainMenuPageDown,I,"same code as the Japanese Sfx1_Init_08_MainMenuPageDown (1F:4C61, 14 bytes, masked match)",port_jp
+0F,4C44,Sfx1_Step_08_MainMenuPageDown,C,"same code as the Japanese Sfx1_Step_08_MainMenuPageDown (1F:4C6F, 66 bytes, masked match)",port_jp
 0F,4C86,Data_0F_4C86,C,read in the core runs by 0F:522E,kitty_types
+0F,4CBC,Sfx4_Step_09,C,"same code as the Japanese Sfx4_Step_09 (1F:4CE7, 32 bytes, masked match)",port_jp
+0F,4CFD,Sfx4_Init_05_EraseAnim,C,"same code as the Japanese Sfx4_Init_05_EraseAnim (1F:4D28, 23 bytes, masked match)",port_jp
+0F,4D1C,Sfx4_Step_06,C,"same code as the Japanese Sfx4_Step_06 (1F:4D47, 31 bytes, masked match)",port_jp
+0F,4D3B,Sfx4_Step_06_LoadNR4x,I,"same code as the Japanese Sfx4_Step_06_LoadNR4x (1F:4D66, 12 bytes, masked match)",port_jp
 0F,4D47,Data_0F_4D47,C,read in the core runs by 0F:522E,kitty_types
+0F,4D63,Sfx4_Step_01_StampCommit,C,"same code as the Japanese Sfx4_Step_01_StampCommit (1F:4D8E, 26 bytes, masked match)",port_jp
+0F,4DCE,Sfx4_Step_0E,I,"same code as the Japanese Sfx4_Step_0E (1F:4DF9, 15 bytes, masked match)",port_jp
+0F,4DFE,Sfx4_Step_07_SpaceFeverFireShots,C,"same code as the Japanese Sfx4_Step_07_SpaceFeverFireShots (1F:4E29, 24 bytes, masked match)",port_jp
 0F,4E16,Data_0F_4E16,C,read in the core runs by 0F:522E,kitty_types
+0F,4E1E,Sfx4_Init_0A_LinkChoose,I,"same code as the Japanese Sfx4_Init_0A_LinkChoose (1F:4E49, 14 bytes, masked match)",port_jp
+0F,4E2C,Sfx4_Step_0A_LinkChoose,I,"same code as the Japanese Sfx4_Step_0A_LinkChoose (1F:4E57, 15 bytes, masked match)",port_jp
 0F,4E3B,Data_0F_4E3B,C,read in the core runs by 0F:522E,kitty_types
 0F,4E64,Data_0F_4E64,C,read in the core runs by 0F:522E,kitty_types
+0F,4E99,Sfx4_Step_11_RunFlagHeight,C,"same code as the Japanese Sfx4_Step_11_RunFlagHeight (1F:4EC4, 21 bytes, masked match)",port_jp
 0F,4EBA,Data_0F_4EBA,C,read in the core runs by 0F:522E,kitty_types
 0F,4EC6,Data_0F_4EC6,C,read in the core runs by 0F:522E,kitty_types
+0F,4EDF,Sfx4_Init_03,C,"same code as the Japanese Sfx4_Init_03 (1F:4F0D, 27 bytes, masked match)",port_jp
+0F,4F06,Sfx4_Step_10,C,"same code as the Japanese Sfx4_Step_10 (1F:4F34, 25 bytes, masked match)",port_jp
+0F,4F2D,Sfx4_Stop,C,"same code as the Japanese Sfx4_Stop (1F:4F5B, 18 bytes, masked match)",port_jp
+0F,4F44,Sfx3_Init_07,C,"same code as the Japanese Sfx3_Init_07 (1F:4F72, 23 bytes, masked match)",port_jp
+0F,4F5B,Sfx3_StepAdvance,I,"same code as the Japanese Sfx3_StepAdvance (1F:4F89, 15 bytes, masked match)",port_jp
+0F,4F6A,Sfx3_Step_07,C,"same code as the Japanese Sfx3_Step_07 (1F:4F98, 36 bytes, masked match)",port_jp
 0F,4F94,Data_0F_4F94,C,"read in the core runs by 0F:522E, 0F:4FD9",kitty_types
+0F,4F9D,Sfx3_Step_09_DeleteDialogSecond,I,edited copy of the Japanese Sfx3_Step_09_DeleteDialogSecond (1F:4FCB): instruction sequence ratio 0.938 against 22 bytes,near_jp
 0F,4FBC,Data_0F_4FBC,C,"read in the core runs by 0F:522E, 0F:4FD9",kitty_types
+0F,4FC5,Sfx3_Step_08_DeleteDialogFirst,I,edited copy of the Japanese Sfx3_Step_08_DeleteDialogFirst (1F:4FF5): instruction sequence ratio 0.967 against 41 bytes,near_jp
 0F,4FF7,Data_0F_4FF7,C,read in the core runs by 0F:522E,kitty_types
+0F,4FFC,Sfx3_Step_03_SpaceFeverBossHit,C,"same code as the Japanese Sfx3_Step_03_SpaceFeverBossHit (1F:502C, 26 bytes, masked match)",port_jp
+0F,5016,Sfx3_Init_03_SpaceFeverBossHit,I,"same code as the Japanese Sfx3_Init_03_SpaceFeverBossHit (1F:5046, 14 bytes, masked match)",port_jp
+0F,5029,Sfx3_Step_02_MainMenuViewArcade,C,"same code as the Japanese Sfx3_Step_02_MainMenuViewArcade (1F:5059, 36 bytes, masked match)",port_jp
+0F,504D,Sfx3_Init_02_MainMenuViewArcade,I,"same code as the Japanese Sfx3_Init_02_MainMenuViewArcade (1F:507D, 14 bytes, masked match)",port_jp
+0F,5060,Sfx3_Step_04,C,"same code as the Japanese Sfx3_Step_04 (1F:5090, 20 bytes, masked match)",port_jp
+0F,507B,Sfx3_Init_04,I,"same code as the Japanese Sfx3_Init_04 (1F:50AB, 14 bytes, masked match)",port_jp
 0F,5089,Data_0F_5089,C,read in the core runs by 0F:522E,kitty_types
+0F,508E,Sfx3_Step_01_MainMenuShoot,C,"same code as the Japanese Sfx3_Step_01_MainMenuShoot (1F:50BE, 25 bytes, masked match)",port_jp
+0F,50A7,Sfx3_Init_01_MainMenuShoot,I,"same code as the Japanese Sfx3_Init_01_MainMenuShoot (1F:50D7, 14 bytes, masked match)",port_jp
+0F,50BA,Sfx3_Step_05_0A,C,"same code as the Japanese Sfx3_Step_05_0A (1F:50EA, 24 bytes, masked match)",port_jp
+0F,50D2,Sfx3_Init_05_0A,I,"same code as the Japanese Sfx3_Init_05_0A (1F:5102, 14 bytes, masked match)",port_jp
+0F,50E5,Sfx3_Init_06,C,"same code as the Japanese Sfx3_Init_06 (1F:5115, 18 bytes, masked match)",port_jp
+0F,50F7,Sfx3_Step_06,C,"same code as the Japanese Sfx3_Step_06 (1F:5127, 36 bytes, masked match)",port_jp
+0F,511B,Sfx3_Stop,C,"same code as the Japanese Sfx3_Stop (1F:514B, 21 bytes, masked match)",port_jp
+0F,5161,Sfx3_Begin,C,"same code as the Japanese Sfx3_Begin (1F:5191, 25 bytes, masked match)",port_jp
 0F,519A,Data_0F_519A,C,read in the core runs by 0F:5259,kitty_types
+0F,51DA,Snd_Sfx_Start,C,"same code as the Japanese Snd_Sfx_Start (1F:520A, 58 bytes, masked match)",port_jp
+0F,523A,Snd_Sfx_Lookup,I,"same code as the Japanese Snd_Sfx_Lookup (1F:526A, 15 bytes, exact match)",port_jp
+0F,5249,Snd_Sfx_TickCounter,I,"same code as the Japanese Snd_Sfx_TickCounter (1F:5279, 13 bytes, exact match)",port_jp
+0F,5256,Snd_LoadWaveRam,I,"same code as the Japanese Snd_LoadWaveRam (1F:5286, 13 bytes, exact match)",port_jp
+0F,5263,Snd_StopSong,C,"same code as the Japanese Snd_StopSong (1F:5293, 25 bytes, masked match)",port_jp
+0F,527C,Snd_SilenceChannels,C,"same code as the Japanese Snd_SilenceChannels (1F:52AC, 44 bytes, masked match)",port_jp
+0F,52A8,Snd_RunSfx3,C,"same code as the Japanese Snd_RunSfx3 (1F:52D8, 32 bytes, masked match)",port_jp
+0F,52C8,Snd_RunSfx1,C,"same code as the Japanese Snd_RunSfx1 (1F:52F8, 32 bytes, masked match)",port_jp
+0F,52E8,Snd_RunSfx4,C,"same code as the Japanese Snd_RunSfx4 (1F:5318, 32 bytes, masked match)",port_jp
+0F,5320,Snd_RequestSong,I,edited copy of the Japanese Snd_RequestSong (1F:5356): instruction sequence ratio 0.929 against 23 bytes,near_jp
+0F,5337,Snd_Tick,C,"same code as the Japanese Snd_Tick (1F:537D, 20 bytes, masked match)",port_jp
+0F,534B,Snd_Tick_RunMusic,C,"same code as the Japanese Snd_Tick_RunMusic (1F:5391, 21 bytes, masked match)",port_jp
+0F,5380,Snd_SongInit,C,"same code as the Japanese Snd_SongInit (1F:5420, 99 bytes, masked match)",port_jp
+0F,53E3,Snd_Op9D_LoadWaveTrk3,I,"same code as the Japanese Snd_Op9D_LoadWaveTrk3 (1F:5483, 12 bytes, masked match)",port_jp
+0F,53EF,Snd_Op9D_SetInstrument,C,"same code as the Japanese Snd_Op9D_SetInstrument (1F:548F, 54 bytes, masked match)",port_jp
+0F,5425,Snd_Trk_PtrInc,I,"same code as the Japanese Snd_Trk_PtrInc (1F:54C5, 12 bytes, exact match)",port_jp
+0F,5444,Snd_Trk_Sustain,C,"same code as the Japanese Snd_Trk_Sustain (1F:54E4, 44 bytes, masked match)",port_jp
+0F,5475,Snd_Op00_EndPattern,C,"same code as the Japanese Snd_Op00_EndPattern (1F:5515, 27 bytes, masked match)",port_jp
+0F,5490,Snd_Op00_LoopList,C,"same code as the Japanese Snd_Op00_LoopList (1F:5530, 23 bytes, masked match)",port_jp
+0F,54B0,Snd_Op9E_SetDurTable,C,"same code as the Japanese Snd_Op9E_SetDurTable (1F:5550, 20 bytes, masked match)",port_jp
+0F,54C4,Snd_Op9F_SetTranspose,I,"same code as the Japanese Snd_Op9F_SetTranspose (1F:5564, 14 bytes, masked match)",port_jp
+0F,54D2,Snd_Op9B_RepeatBegin,C,"same code as the Japanese Snd_Op9B_RepeatBegin (1F:5572, 36 bytes, masked match)",port_jp
+0F,54F6,Snd_Op9C_RepeatEnd,C,"same code as the Japanese Snd_Op9C_RepeatEnd (1F:5596, 28 bytes, exact match)",port_jp
+0F,5512,Snd_MusicTick,I,"same code as the Japanese Snd_MusicTick (1F:55B2, 14 bytes, masked match)",port_jp
+0F,552C,Snd_Trk_FetchOp,C,"same code as the Japanese Snd_Trk_FetchOp (1F:55CC, 65 bytes, masked match)",port_jp
+0F,556D,Snd_Trk_NoteOn,C,"same code as the Japanese Snd_Trk_NoteOn (1F:560D, 66 bytes, masked match)",port_jp
+0F,5641,Snd_Trk_Next,C,"same code as the Japanese Snd_Trk_Next (1F:56DF, 37 bytes, masked match)",port_jp
 0F,56D5,Data_0F_56D5,C,read in the core runs by 0F:5666,kitty_types
 0F,572F,Data_0F_572F,C,"read in the core runs by 0F:523A, 0F:543A, 0F:537A, 0F:536F ...",kitty_types
 0F,57D9,Data_0F_57D9,C,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380",kitty_types
