@@ -13,7 +13,7 @@ item,bank,start,end,kind,verdict,tag,evidence
 11,2D,7820,7C20,map of the mode $17 picture,unused (unreachable mode),I,loaded only by Mode17 state $00 (06:40D7)
 12,14,5800,7000,tiles of the Pompompurin picture,unused (unreachable mode),I,loaded only by Mode18 state $00 (06:4133)
 13,2E,7800,7C00,map of the Pompompurin picture,unused (unreachable mode),I,loaded only by Mode18 state $00 (06:413D)
-14,08,40D0,7216,Super Game Boy transfers,used (SGB only),C,the five Sgb_VramTransferInline sources 08:40D0 / 4146 / 41F6 / 5206 / 6216 ($1000 bytes each) cover the never-read bytes of bank $08 but 192 at 08:4020-40CF; the core has no SGB
+14,08,40D0,7216,Super Game Boy transfers,used (SGB only),C,the five Sgb_VramTransferInline sources 08:40D0 / 4146 / 41F6 / 5206 / 6216 ($1000 bytes each) cover the never-read bytes of bank $08 but 192 at 08:4020-40CF (packet data); BGB as a Super Game Boy (SystemMode=2; 2026-11-08): read watchpoints on the five sources and on 08:4020 all hit (Sgb_SendPacket 08:6AA5 / 6AB8 and Mem_Copy) and Sgb_VramTransferInline ran 10 times; the core has no SGB
 15,12,4240,5E44,8x16 font,used (partly),I,glyphs of the name / text font that no text of the runs used
 16,1C,5A40,6BA0,white-on-black message text,used,I,the texts of the message screen (mode $14); BGB showed several that the core runs did not
 17,27,7015,75E0,album info page text,used,I,read by the album page print (mode $06 states $15 / $1C) that the core runs did not reach; the BGB print showed the page
