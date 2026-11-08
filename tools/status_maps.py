@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
 ROMS = {   # option: (folder, prefix, title, md5)
     'gold':  ('gold', 'gold', 'Game Boy Camera Gold (USA)', 'b2999cfb6dacb439f501a71f30f91762'),
     'kitty': ('hello_kitty', 'kitty', 'Pocket Camera (Hello Kitty) (prototype)', '0a323bddc4f0159cea76cf44ed0c1a3c'),
-    'proto': ('prototype_debagame', 'proto', 'Pocket Camera Prototype (Japan) ("DEBAGAME")', '1d8097de3497db8b182bcd2a984b6063'),
+    'proto': ('prototype_debagame', 'proto', 'Pocket Camera Prototype (Japan) ("DEBAGAME")', '19b50a5f67ef4f0d015e7d813370756e'),   # as dumped, not the BGB copy
 }
 ap = argparse.ArgumentParser()
 for k in ROMS: ap.add_argument('--' + k)
