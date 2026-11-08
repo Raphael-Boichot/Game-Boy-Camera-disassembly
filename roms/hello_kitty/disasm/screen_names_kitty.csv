@@ -7,8 +7,18 @@ mode,state,name,tag,evidence
 02,06,Take photos: photo taken (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
 03,02,View photos: album,C,BGB screenshot (binder page with the side tools; reached by みる)
 04,01,Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel,C,BGB screenshot (スクラッチカード 15パズル スライドショー いちごチャンネル)
+05,06,Stamp window (stamps on a photo),I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+06,03,Exchange screen: empty frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 07,02,Exchange: give or receive,C,BGB screenshot (あげる <-> もらう)
+08,02,Album pages as a photo train,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+09,05,"Exchange: sending / receiving (""communicating"")",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+0A,01,Name card: the finished ID card (its three photos take turns),C,"BGB screenshot (ID number, NAME, BIRTHDAY, NAME CARD; the photo differs between frames)"
+0A,02,Name card: change / print / cancel,C,BGB screenshot (START へんこう A プリント B やめる)
 0B,04,Name card: choose a photo,C,BGB screenshot (three photo boxes, PAGE and END tabs)
+0B,08,Name card: type your name,C,BGB screenshot (kana keyboard; NAME tab; END)
+0B,0A,Name card: choose the blood type,C,BGB screenshot (BLOOD: A B O AB ?)
+0B,0C,Name card: type the birthday,C,"BGB screenshot (BIRTH: digits 0-9, arrow, END)"
+0B,0E,Name card: choose boy or girl,C,BGB screenshot (SEX: male / female / ?)
 0B,10,Name card: take your photo,C,BGB screenshot (あなたのしゃしんを とってね; birthday and blood type fields)
 0C,01,Record book: photo counters and Kitts,C,BGB screenshot (taken / thrown away / exchanged / received / printed; Kitt total)
 0D,01,Quick factory check: please wait,C,BGB screenshot (CHECK / PLEASE WAIT; every key but B held at power-on)
@@ -19,28 +29,22 @@ mode,state,name,tag,evidence
 0E,05,Scratch card: welcome,C,BGB screenshot (ようこそ キャシーの スクラッチカード へ)
 0E,07,15 puzzle: 25 Kitts a play - play?,C,BGB screenshot (いっかい 25Kitt だよ あそんでみる? はい / いいえ)
 0E,08,15 puzzle: paying the Kitts,C,BGB screenshot (Kitt coin shown)
+0E,0A,15 puzzle: choose a drawing or a photo,C,BGB screenshot (どれであそぶ? イラスト / しゃしん)
 0E,13,Scratch card: 10 Kitts a card - try?,C,BGB screenshot (いちまい 10Kitt よ やってみる? はい / いいえ)
 0E,14,Scratch card: paying the Kitts,C,BGB screenshot (Kitt coin shown)
-11,07,Strawberry Channel: channel 1,C,BGB screenshot (TV frame 1ch)
-11,0C,Strawberry Channel: picture paused (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
-14,01,Print error (no printer),C,BGB screenshot (プリントエラー #02)
-1E,00,Screen fade between modes,C,BGB screenshot (screen fading out)
-05,06,Stamp window (stamps on a photo),I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-06,03,Exchange screen: empty frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-08,02,Album pages as a photo train,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-09,05,"Exchange: sending / receiving (""communicating"")",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-0A,01,"Name card (ID, name, birthday)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+0E,16,Scratch card: scratch two spots to find a pair,C,BGB screenshot (2かしょえらんで おなじものを そろえてね)
 0F,05,15 puzzle board,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 10,02,Scratch card board,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+10,02,Scratch card board,C,BGB screenshot (SCRATCH CARD; six hidden spots and a hand pointer)
+11,07,Strawberry Channel: story pictures (Left / Right turn the page),C,"BGB screenshots after 0-11 presses of Right: a photo story, dots at the bottom show the page"
+11,0C,Strawberry Channel: picture paused (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
 12,01,"Slide show settings (start, speed, order)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+12,04,Slide show playing,C,BGB screenshot (the stored photos one after another; BGB's test picture)
+14,01,Print error (no printer),C,BGB screenshot (プリントエラー #02)
 17,01,Print error,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 18,01,Pompompurin picture,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 19,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1A,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1B,01,Printing: catch-the-apples game while the printer works,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1C,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-0B,08,Name card: type your name,C,BGB screenshot (kana keyboard; NAME tab; END)
-0E,0A,15 puzzle: choose a drawing or a photo,C,BGB screenshot (どれであそぶ? イラスト / しゃしん)
-0E,16,Scratch card: scratch two spots to find a pair,C,BGB screenshot (2かしょえらんで おなじものを そろえてね)
-10,02,Scratch card board,C,BGB screenshot (SCRATCH CARD; six hidden spots and a hand pointer)
-12,04,Slide show playing,C,BGB screenshot (the stored photos one after another; BGB's test picture)
+1E,00,Screen fade between modes,C,BGB screenshot (screen fading out)

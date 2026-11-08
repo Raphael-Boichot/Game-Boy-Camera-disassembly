@@ -3,7 +3,6 @@ mode,state,picture,how
 06,03,extra_06_03.png,forced (I): ModeTable slot $01 patched to mode $06
 08,02,extra_08_02.png,forced (I): ModeTable slot $01 patched to mode $08
 09,05,extra_09_05.png,forced (I): ModeTable slot $01 patched to mode $09
-0A,01,extra_0A_01.png,forced (I): ModeTable slot $01 patched to mode $0A
 0D,01,extra_0D_01.png,every key but B held at power-on
 0D,02,extra_0D_02.png,every key but B held at power-on
 0D,04,extra_0D_04.png,boot with a blank SRAM ($AA)

@@ -19,6 +19,19 @@ for d in a.explore:
         if r['same'] != 'yes' or k in rows: continue
         pic = 'screen_%s_%s.png' % k; shutil.copy(os.path.join(d, r['picture']), os.path.join(a.out, pic))
         r = {c: r.get(c, '') for c in cols}; r['picture'] = pic; rows[k] = r
+# a branch exploration (--prefix) gives its first screen no parent: take the (mode, state) of any row, in any folder, whose key
+# path is the longest prefix of this one (the screen before; the edge is labelled with the keys after it)
+bykeys = {}
+for d in a.explore:
+    for r in csv.DictReader(open(os.path.join(d, 'explore.csv'))):
+        if r['same'] == 'yes': bykeys.setdefault(r['keys'], (r['mode'], r['state']))
+for k, r in rows.items():
+    if not r['parent'] and r['keys'] not in ('-', ''):
+        ks = r['keys'].split()
+        for j in range(len(ks) - 1, -1, -1):      # the longest recorded prefix; the edge then carries the keys after it
+            pk = ' '.join(ks[:j]) or '-'
+            if pk in bykeys and bykeys[pk] != k:
+                r['parent'] = '%s:%s' % bykeys[pk]; r['key'] = ' '.join(ks[j:]) if len(ks) - j <= 4 else '%s ... (%d keys)' % (' '.join(ks[j:j + 3]), len(ks) - j); break
 with open(os.path.join(a.out, 'explore.csv'), 'w', newline='') as f:
     w = csv.DictWriter(f, cols); w.writeheader(); w.writerows(rows[k] for k in sorted(rows))
 ex = {}

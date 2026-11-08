@@ -7,8 +7,13 @@ mode,state,keys,frames,bgb_mode,bgb_state,same,picture,parent,key
 03,02,A Down A,997,03,02,yes,screen_03_02.png,01:02,A
 04,01,A Up A,997,04,01,yes,screen_04_01.png,01:02,A
 07,02,A Start Up A,1095,07,02,yes,screen_07_02.png,01:05,A
+0A,01,A A A A A A A A B Start A A A A A A A A Down Right Right Right Right Right A A A A A A A A A Down Up A A Right A Down A Right A A A A,5211,0A,01,yes,screen_0A_01.png,0B:0E,A
+0A,02,A A A A A A A A B Start A A A A A A A A Down Right Right Right Right Right A A A A A A A A A Down Up A A Right A Down A Right A A A A A,5309,0A,02,yes,screen_0A_02.png,0A:01,A
 0B,04,A Start A A,1095,0B,04,yes,screen_0B_04.png,0B:10,A
 0B,08,A Start A A A A A A A,1585,0B,08,yes,screen_0B_08.png,0B:10,A
+0B,0A,A A A A A A A A B Start A A A A A A A A Down Right Right Right Right Right A A,3251,0B,0A,yes,screen_0B_0A.png,0B:08,A Down Right ... (9 keys)
+0B,0C,A A A A A A A A B Start A A A A A A A A Down Right Right Right Right Right A A A A A,3545,0B,0C,yes,screen_0B_0C.png,0B:10,A
+0B,0E,A A A A A A A A B Start A A A A A A A A Down Right Right Right Right Right A A A A A A A A A Down Up A A Right A Down A Right A A,5015,0B,0E,yes,screen_0B_0E.png,0B:0C,A A A ... (15 keys)
 0B,10,A Start A,997,0B,10,yes,screen_0B_10.png,01:05,A
 0C,01,A Start Down A,1095,0C,01,yes,screen_0C_01.png,01:05,A
 0E,03,A Up A A A B,1291,0E,03,yes,screen_0E_03.png,0E:13,B
