@@ -715,10 +715,41 @@ bank,addr,name,conf,note,source
 06,453F,Mode14_State01,C,handler of state $01 of mode $14 (word 1 of Mode14_StateTable),modes
 06,4631,Mode14_MessageScreen,C,ModeTable entry $14: BGB screen 14:01 (print error; the same screen says there is no photo to give),modes
 06,463C,Mode14_StateTable,C,"state table of mode $14, read by $0189 with hFF8E",modes
+06,4658,Menu06_CursorPlace,I,"the item record [$D8F4] (8 bytes at hFFD1-hFFD3) gives the cursor position hFFD2 / hFFD4, then a 4-byte record of 06:4640 by item",hand 2026-11-08
+06,469D,Menu06_CursorCallback,C,06:46A3 then Far_Return,hand 2026-11-08
+06,46A3,Menu06_CursorUpdate,C,"menu cursor object: the D-pad picks the next item from the 8-byte item records (as the Play menu cursor 02:4CFD), A ($D8D9 bit 0) selects",hand 2026-11-08
 06,4781,Data_06_4781,C,"read in the core runs by 06:46EB, 06:4658, 06:4754",kitty_types
+06,47C5,NameCardEdit_PhotoCursorCallback,C,06:47CB then Far_Return,hand 2026-11-08
+06,47CB,NameCardEdit_PhotoCursorUpdate,I,"object callback in the photo choice of the name card (mode $0B state $04): position from [$DC5E] and $D984, steps by $D994",hand 2026-11-08
 06,49D2,Data_06_49D2,C,"read in the core runs by 06:487E, 06:4837",kitty_types
+06,4B3E,Obj_KeyMaskStep,I,"object callback: for step [$D97D] takes {frame, key mask} from 06:4B87 and ANDs the mask into the keys $D8D8",hand 2026-11-08
 06,4B88,Data_06_4B88,C,"read in the core runs by 06:4B6A, 06:4B3E",kitty_types
+06,4BC7,Digit_TileAddr7C40,C,DE = $7C40 + 16 x A (the digit tiles of bank $0C),hand 2026-11-08
+06,4BD3,IdCard_DrawIdNumber,C,"the 8 digits of the ID number $DADB-$DADE into tiles $8AF0, or 8 blank tiles (0C:7CE0) while it is 0; mode $0A",hand 2026-11-08
+06,4C35,IdCard_NameGlyphAddr,C,DE = $4000 + 32 x A: an 8x16 glyph of bank $11,hand 2026-11-08
+06,4C41,IdCard_DrawName,C,the 9 characters at $DADF as 8x16 glyphs of bank $11 into tiles $8DE0 (Vram_CopyHBlankFar),hand 2026-11-08
+06,4C64,IdCard_DrawNameToPrintBuf,C,"the same into the print buffer $CDE0 (Copy_FarDEtoHL); first run while printing, mode $06 state $16",hand 2026-11-08
+06,4C87,IdCard_DrawNameChar,C,the character [$D97F] of the name into its tile $8DE0 + 32 x [$D97F] while it is typed,hand 2026-11-08
+06,4CAD,IdCard_DigitGlyphAddr,C,DE = $6E50 + 32 x A (digit glyphs of bank $33),hand 2026-11-08
+06,4CB9,IdCard_DrawBirthday,I,the 4 BCD bytes at $DAE9 as digit glyphs of bank $33 into tiles $8F00 (0 drawn as glyph $0A); the birthday (I),hand 2026-11-08
+06,4D02,IdCard_DrawBirthdayToPrintBuf,I,the same into the print buffer $CF00; mode $06 state $16,hand 2026-11-08
+06,4D4B,IdCard_DrawBirthdayDigit,I,the digit [$D97F] of $DAE9 while it is typed (mode $0B state $0C),hand 2026-11-08
+06,4D81,IdCard_DrawBloodType,I,glyph ($DAE8 & 3) of 30:7FA0 into $8B70 (0 drawn as glyph 2); the blood type (I),hand 2026-11-08
+06,4DA6,IdCard_DrawBloodTypeToPrintBuf,I,the same into the print buffer $CB70,hand 2026-11-08
+06,4DCB,IdCard_DrawSex,I,glyph (($DAE8 >> 2) & 7) of 1D:7F40 into $8B90 (0 drawn as glyph 4); boy / girl (I),hand 2026-11-08
+06,4DF4,IdCard_DrawSexToPrintBuf,I,the same into the print buffer $CB90,hand 2026-11-08
+06,4E1D,NameCardEdit_FieldAction,I,dispatch on the field being edited [$D97E] (0-4) and the position [$D97F]; mode $0B state $05,hand 2026-11-08
 06,4E5D,Data_06_4E5D,C,read in the core runs by 00:1AB7,kitty_types
+06,4EFB,IdCard_ZeroDigitsToBlank,C,"in the 8 bytes from $DAE9 every 0 nibble becomes $B (the blank digit), by 06:4F15 / 06:4F1C",hand 2026-11-08
+06,4F15,Digit_HighZeroToBlank,C,[HL] high nibble = $B,hand 2026-11-08
+06,4F1C,Digit_LowZeroToBlank,C,[HL] low nibble = $B,hand 2026-11-08
+06,4F23,NameCardEdit_LoadKanaPage,C,10 glyphs (320 B) of bank $12 from $6000 + $A0 x [$D982] into tiles $8000,hand 2026-11-08
+06,4F40,NameCardEdit_LoadDigitPage,C,10 glyphs of bank $33 from $6E50 + $A0 x [$D982] into tiles $8000,hand 2026-11-08
+06,4F5D,NameCardEdit_LoadBloodGlyphs,C,3 glyphs of 30:7FA0 into $8000,hand 2026-11-08
+06,4F6E,NameCardEdit_LoadSexGlyphs,C,5 glyphs of 1D:7F40 into $8000,hand 2026-11-08
+06,4F7F,NameCardEdit_LoadFieldGlyphs,C,"the glyph page of field [$D97E]: kana (06:4F23), digits (06:4F40), blood type (06:4F5D), boy / girl (06:4F6E)",hand 2026-11-08
+06,4FC5,NameCardEdit_ShrinkPhoto,I,"reads SRAM bank 0 from $A030, packs pairs of pixels (2:1) into $C000 (7 x 2 x 5 tiles); the photo of the card (mode $0B state $04)",hand 2026-11-08
+06,5077,NameCardEdit_RedrawScreen,I,"screen off, clears the objects and script slots, loads the tiles and maps of the editor again; first run in mode $0B state $0F",hand 2026-11-08
 06,5091,Data_06_5091,C,read in the core runs by 00:0245,kitty_types
 06,509B,Data_06_509B,C,read in the core runs by 00:0245,kitty_types
 06,50C6,Data_06_50C6,C,"read in the core runs by 00:02F9, 00:1AB7, 00:1680",kitty_types
@@ -730,6 +761,8 @@ bank,addr,name,conf,note,source
 06,51D3,Data_06_51D3,C,"read in the core runs by 06:511C, 00:01D1",kitty_types
 06,51DA,Data_06_51DA,C,"read in the core runs by 06:511C, 00:01D1",kitty_types
 06,51E0,Mode0B_State02,C,handler of state $02 of mode $0B (word 2 of Mode0B_StateTable),modes
+06,5237,Bank06_FrameUpdate,C,"Object_RunAll, 00:21BE, 00:03D5, Far_Return (as Bank05_FrameUpdate)",hand 2026-11-08
+06,5248,Bank06_FrameCallback,I,Bank06_FrameUpdate then a callback change when $D8E0 bit 0 is set,hand 2026-11-08
 06,525A,Data_06_525A,C,read in the core runs by 00:1AB7,kitty_types
 06,526A,Mode0B_State03,C,handler of state $03 of mode $0B (word 3 of Mode0B_StateTable),modes
 06,52E7,Data_06_52E7,C,"read in the core runs by 00:1AB7, 00:01D1",kitty_types
@@ -751,6 +784,7 @@ bank,addr,name,conf,note,source
 06,5585,Mode0B_State10,C,handler of state $10 of mode $0B (word 16 of Mode0B_StateTable),modes
 06,55C6,Mode0B_NameCardEdit,C,ModeTable entry $0B: BGB screens 0B:04 / 08 / 0A / 0C / 0E / 10 (photos,modes
 06,55D1,Mode0B_StateTable,C,"state table of mode $0B, read by $0189 with hFF8E",modes
+06,55F3,NameCard_LoadBackgroundTiles,I,"$680 bytes of tiles into $9000 from the 6-byte record A of 00:0BF9 (address, bank); mode $0A state $00",hand 2026-11-08
 06,560F,Mode0A_State00,C,handler of state $00 of mode $0A (word 0 of Mode0A_StateTable),modes
 06,5629,Data_06_5629,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5633,Data_06_5633,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
@@ -763,6 +797,23 @@ bank,addr,name,conf,note,source
 06,5785,Mode0A_State02,C,handler of state $02 of mode $0A (word 2 of Mode0A_StateTable),modes
 06,57FF,Mode0A_NameCard,C,ModeTable entry $0A: BGB screens 0A:01 (the finished card) and 0A:02 (change / print / cancel),modes
 06,580A,Mode0A_StateTable,C,"state table of mode $0A, read by $0189 with hFF8E",modes
+06,5812,Bcd_DrawNumberTall,C,"C bytes of BCD from [HL] downwards as 8x16 digits of 0C:7D00 into DE, leading zeros blank ($D938 = a non-zero digit seen); screen off",hand 2026-11-08
+06,583C,Bcd_DrawDigitTall,C,one digit of 06:5812,hand 2026-11-08
+06,58CA,Bcd_DrawNumber,C,the same with 8x8 digits of 0C:7C40 (Copy_FarDEtoHL; screen off),hand 2026-11-08
+06,58F4,Bcd_DrawDigit,C,one digit of 06:58CA,hand 2026-11-08
+06,5922,Bcd_DrawNumberVram,C,the same through Vram_CopyHBlankFar (screen on),hand 2026-11-08
+06,594C,Bcd_DrawDigitVram,C,one digit of 06:5922,hand 2026-11-08
+06,597A,RecordBook_DrawCounters,C,"the counters as tall digits: taken $DAC9 into $9300, thrown away into $9380, exchanged into $9400, received into $9480, ...; mode $0C",hand 2026-11-08
+06,5A1C,Kitts_DrawAt8F20,C,the Kitts ($DAD3-$DAD5) by Bcd_DrawNumberVram into $8F20,hand 2026-11-08
+06,5A2B,Kitts_DrawAt9420,C,the Kitts by Bcd_DrawNumber into $9420 (screen off),hand 2026-11-08
+06,5A3A,Kitts_DrawAt9420Vram,C,the Kitts by Bcd_DrawNumberVram into $9420,hand 2026-11-08
+06,5A49,Counters_AddTaken,C,"counters loaded (01:4E97), photos taken $DAC9 + 1 in BCD ($0CB4), saved (01:4EB6); first run in mode $02 state $06",hand 2026-11-08
+06,5A67,Counters_AddErased,C,the same for photos thrown away $DACB (mode $03 state $0E),hand 2026-11-08
+06,5A85,Counters_AddExchanged,C,the same for photos exchanged $DACD,hand 2026-11-08
+06,5ADF,Counters_AddPrinted,C,the same for photos printed $DACF,hand 2026-11-08
+06,5B1B,Kitts_Add,C,"the Kitts $DAD3 (3 bytes BCD) + DE ($0CB4), saved; carry returned",hand 2026-11-08
+06,5B3A,Kitts_Subtract,I,"the Kitts - DE by 00:0CD3 (the BCD subtraction beside $0CB4), saved; carry returned",hand 2026-11-08
+06,5B59,Kitts_CheckAfford,I,"a copy of the Kitts in $D949 minus DE (00:0CD3), nothing saved: the carry says whether DE Kitts can be paid",hand 2026-11-08
 06,5CDC,Mode0C_State00,C,handler of state $00 of mode $0C (word 0 of Mode0C_StateTable),modes
 06,5CF6,Data_06_5CF6,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
 06,5D00,Data_06_5D00,C,"read in the core runs by 00:0245, 00:02F9, 00:1AB7, 00:1680",kitty_types
@@ -775,7 +826,14 @@ bank,addr,name,conf,note,source
 06,5DFA,Data_06_5DFA,C,"read in the core runs by 06:5FC0, 06:5FA8",kitty_types
 06,5EB8,Data_06_5EB8,C,"read in the core runs by 06:5FC0, 06:5FA8",kitty_types
 06,5F7F,Data_06_5F7F,C,read in the core runs by 06:5F95,kitty_types
+06,5F95,D8E6_LoadFromTable5F7F,I,"three pairs {byte, byte - 1} from the record A of the pointer table 06:5F7F into $D8E6, hFF9A = 1; mode $02 state $03",hand 2026-11-08
+06,5FF8,D8E6_LoadFromTable5F7F_B,I,the same code again (not run in the core),hand 2026-11-08
 06,605B,Unused_Link_SumSlotBuffer,C,"same code as the Japanese Unused_Link_SumSlotBuffer (07:4BEA, 30 bytes, masked match)",port_jp
+06,6079,Link_CountdownDA00,C,$DA00-$DA01 - 1; Z when it reaches 0,hand 2026-11-08
+06,6086,Counters_AddReceived,C,"received boy $DAD1 and girl $DAD2 + 1 in BCD (at most 99) by the bits 0 / 1 of [$CFFF], counters loaded and saved",hand 2026-11-08
+06,60B8,Exchange_RequestPage,I,without a link ($D9FD = 0) loads by 01:4F25; else Link_QueuePageRequest A and waits at most $B4 frames (Link_CountdownDA00) for $DD4E,hand 2026-11-08
+06,6134,Gfx16_CopyByIndex,I,copies from the pointer of 06:6129 by A (bank $16) into HL,hand 2026-11-08
+06,6168,Tiles_Fill9000From1778,I,8 x the same 256 bytes of 17:7800 into $9000-$97FF,hand 2026-11-08
 06,6198,Mode07_State00,C,handler of state $00 of mode $07 (word 0 of Mode07_StateTable),modes
 06,61B2,Data_06_61B2,C,read in the core runs by 00:0245,kitty_types
 06,61BC,Data_06_61BC,C,read in the core runs by 00:0245,kitty_types
@@ -803,6 +861,7 @@ bank,addr,name,conf,note,source
 06,68D2,Mode09_State04,C,handler of state $04 of mode $09 (word 4 of Mode09_StateTable),modes
 06,68FA,Mode09_State05,C,handler of state $05 of mode $09 (word 5 of Mode09_StateTable),modes
 06,691F,Mode09_State06,C,handler of state $06 of mode $09 (word 6 of Mode09_StateTable),modes
+06,69D5,Exchange_InitScreen,I,"screen off, objects and slots cleared, tiles 1D:5600 and map 32:7C80 loaded, $D9FE = 1 (not run in the core)",hand 2026-11-08
 06,6A4E,Mode09_State08,C,handler of state $08 of mode $09 (word 8 of Mode09_StateTable),modes
 06,6A59,Mode09_State0A,C,handler of state $0A of mode $09 (word 10 of Mode09_StateTable),modes
 06,6ABB,Mode09_State0B,C,handler of state $0B of mode $09 (word 11 of Mode09_StateTable),modes
@@ -812,6 +871,7 @@ bank,addr,name,conf,note,source
 06,6BD3,Mode09_State0E,C,handler of state $0E of mode $09 (word 14 of Mode09_StateTable),modes
 06,6BF8,Mode09_State0F,C,handler of state $0F of mode $09 (word 15 of Mode09_StateTable),modes
 06,6CAB,Mode09_State07,C,handler of state $07 of mode $09 (word 7 of Mode09_StateTable),modes
+06,6CBB,CardStats_IncDA64,I,"$DA64 / $DA65 + 1 (at most 99) by the bits 0 / 1 of $DAE8, then $DA66 + 1",hand 2026-11-08
 06,6CEC,Mode09_ExchangeCommunicating,I,ModeTable entry $09: forced BGB screen (communicating message),modes
 06,6CF7,Mode09_StateTable,C,"state table of mode $09, read by $0189 with hFF8E",modes
 06,6D19,Mode1D_State00,C,handler of state $00 of mode $1D (word 0 of Mode1D_StateTable),modes
