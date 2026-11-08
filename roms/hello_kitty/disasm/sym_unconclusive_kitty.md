@@ -8,7 +8,7 @@ The code of every row is read: what each routine does is in the evidence column;
 
 | address | name | evidence | why doubtful | what would settle it |
 |---|---|---|---|---|
-| 06:5FF8 | `KeyPrompt_LoadSoundsB` | the same code again, called from mode $09 (forced only); not run in the core | called only from mode $09 state $0C; the linked BGB exchange went through states $0A / $0E / $0F / $10 of the receiving unit and $01-$07 of the giving one |  not $0C |
+| 06:5FF8 | `KeyPrompt_LoadSoundsB` | the same code again, called from mode $09 (forced only); not run in the core | called only from mode $09 state $0C; Mode09_State0A enters $0C when the unit chose "give" ($D9FD = 0) and the partner sends a command with bit 6 of $DD58 set; in the linked BGB runs the giving unit either led (mode $08; then it never enters $0A) or followed and got a bit-7 command (states $0A / $0B; the leading receiver stopped in mode $08 with the "no photo" message) | a linked BGB exchange in which the leading unit sends the bit-6 command |
 
 ## unused (14)
 
