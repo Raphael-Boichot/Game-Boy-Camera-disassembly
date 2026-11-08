@@ -138,15 +138,26 @@ bank,addr,name,conf,note,source
 01,5589,Data_01_5589,C,read in the core runs by 01:5998,kitty_types
 01,55E8,Data_01_55E8,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ...",kitty_types
 01,5673,Data_01_5673,C,"read in the core runs by 01:5998, 00:22B6",kitty_types
-01,56C7,Data_01_56C7,C,"read in the core runs by 01:59F6, 01:568C, 01:591E, 01:58E9 ...",kitty_types
+01,5691,RecordBook_CountHundreds,C,"flowers of the first kind: the hundreds of the 4-digit BCD count in hFFEA-EB, 0-19, 20 from 2,000 on; 0 skips the kind",hand 2026-11-08
+01,56B1,RecordBook_CountTens,C,flowers of the second kind: the tens digit of hFFEA,hand 2026-11-08
+01,56BD,RecordBook_CountUnits,C,flowers of the third kind: the units digit of hFFEA,hand 2026-11-08
+01,56C7,RecordBook_FlowerScript,C,"slot script shared by the 5 vines: waits, then grows the hundreds, tens and units flowers one by one",hand 2026-11-08
 01,5703,Data_01_5703,C,"read in the core runs by 01:59F6, 01:5998, 01:58F7, 01:5911 ...",kitty_types
-01,5728,Data_01_5728,C,"read in the core runs by 01:59F6, 01:5998, 01:58F7, 01:5911 ...",kitty_types
-01,5742,Data_01_5742,C,"read in the core runs by 01:59F6, 01:5998, 01:58F7, 01:5911 ...",kitty_types
-01,576F,Data_01_576F,C,"read in the core runs by 01:59F6, 01:5998, 01:5911, 01:58F7",kitty_types
-01,57B7,Data_01_57B7,C,"read in the core runs by 01:59F6, 01:5998, 01:5911, 01:58F7",kitty_types
-01,57E4,Data_01_57E4,C,"read in the core runs by 00:22B6, 01:59F6, 01:5998, 01:5911 ...",kitty_types
+01,571C,RecordBook_GetTaken,C,hFFEA-EB = photos taken ($DAC9-DACA = SRAM $1000-$1001),hand 2026-11-08
+01,5728,RecordBook_VineTaken,C,vine script of the taken counter (descriptor at 01:5732),hand 2026-11-08
+01,5736,RecordBook_GetErased,C,hFFEA-EB = photos thrown away ($DACB-DACC = SRAM $1002-$1003),hand 2026-11-08
+01,5742,RecordBook_VineErased,C,vine script of the thrown-away counter (descriptor at 01:574C),hand 2026-11-08
+01,5750,RecordBook_GetExchangedX11,C,"hFFEA-EB += 11 x photos exchanged ($DACD-DACE, BCD adds through $0CB4); BGB: 1 exchange shows 2 flowers (1 ten, 1 unit)",hand 2026-11-08
+01,576F,RecordBook_VineExchanged,C,vine script of the exchanged counter (descriptor at 01:5779),hand 2026-11-08
+01,577D,RecordBook_GetReceivedX11,C,hFFEA-EB = 11 x (boys $DAD1 + girls $DAD2 received); BGB: 1 received shows 2 flowers,hand 2026-11-08
+01,57B7,RecordBook_VineReceived,C,vine script of the received counter (descriptor at 01:57C1),hand 2026-11-08
+01,57C5,RecordBook_GetPrintedX6,C,hFFEA-EB += 6 x photos printed ($DACF-DAD0); BGB: 1 print shows 6 flowers,hand 2026-11-08
+01,57E4,RecordBook_VinePrinted,C,vine script of the printed counter (descriptor at 01:57EE),hand 2026-11-08
 01,581E,Data_01_581E,C,"read in the core runs by 01:59F6, 01:5998, 01:591E, 01:5911 ...",kitty_types
 01,58B9,JumpTable_01_58B9,C,inline jump table (4 words; tools/kitty_trace.py),kitty_types
+01,596C,ScriptSlots_Clear,C,empties the 6 script slots of 20 bytes at $DC67 (the record book calls it on entry: BGB writes 01:5975/5976 at every visit),hand 2026-11-08
+01,597E,ScriptSlots_Add,C,"DE = {script; per-frame routine}: fills the first free slot of $DC67, script pointer at offsets 2-3",hand 2026-11-08
+01,59C6,ScriptSlots_Run,C,runs one step of each busy slot of $DC67 (far called from banks 0 and 7),hand 2026-11-08
 01,6050,Data_01_6050,C,read in the core runs by 00:2397,kitty_types
 01,67D0,Data_01_67D0,C,read in the core runs by 01:733C,kitty_types
 01,687D,Data_01_687D,C,read in the core runs by 01:688F,kitty_types
