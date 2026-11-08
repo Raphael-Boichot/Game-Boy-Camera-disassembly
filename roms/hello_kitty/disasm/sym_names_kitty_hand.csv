@@ -619,3 +619,202 @@ bank,addr,name,conf,note,source
 0F,504D,Sfx3_Init_02,C,"Sfx3 init handler of the Kitty sound ids $02; same code as the Japanese Sfx3_Init_02_MainMenuViewArcade (its game role belongs to the Japanese ROM)",hand 2026-11-08
 0F,508E,Sfx3_Step_01,C,"Sfx3 step handler of the Kitty sound ids $01; same code as the Japanese Sfx3_Step_01_MainMenuShoot (its game role belongs to the Japanese ROM)",hand 2026-11-08
 0F,50A7,Sfx3_Init_01,C,"Sfx3 init handler of the Kitty sound ids $01; same code as the Japanese Sfx3_Init_01_MainMenuShoot (its game role belongs to the Japanese ROM)",hand 2026-11-08
+02,4A54,Obj_CopyD4ToD7,C,"hFFD7 = hFFD4 (script command)",hand 2026-11-08
+02,4A5A,Obj_AdvanceFrame30,C,"hFFCD-hFFCE + $30: the next animation frame of the object",hand 2026-11-08
+02,4A7F,KeyPrompt_Accept,C,"stores the key, takes {sound id, channel} at HL ($D8E6 ...) and posts the sound on channel 0-3, then waits 15 frames (02:4ABB)",hand 2026-11-08
+02,4A92,KeyPrompt_SoundCh0,C,"channel 0 of KeyPrompt_Accept: sound into $D060",hand 2026-11-08
+02,4A98,KeyPrompt_SoundCh1,C,"channel 1 of KeyPrompt_Accept: sound into $D068",hand 2026-11-08
+02,4A9E,KeyPrompt_SoundCh2,C,"channel 2 of KeyPrompt_Accept: sound into $D070",hand 2026-11-08
+02,4AA4,KeyPrompt_SoundCh3,C,"channel 3 of KeyPrompt_Accept: sound into $D078",hand 2026-11-08
+02,4ABB,KeyPrompt_Wait,C,"hFFD8 - 1; at 0 the key into $D8DF and the object ends (00:2212)",hand 2026-11-08
+02,4ADB,KeyPrompt_Keys4ADB,C,"key check of a button prompt: A accepts with the sound of $D8E6, B ends",hand 2026-11-08
+02,4AF0,KeyPrompt_Keys4AF0,C,"key check of a button prompt: B accepts with the sound of $D8E8, A ends",hand 2026-11-08
+02,4B06,KeyPrompt_Keys4B06,C,"key check of a button prompt: A accepts ($D8E6), B or Start end",hand 2026-11-08
+02,4B1C,KeyPrompt_Keys4B1C,C,"key check of a button prompt: B accepts ($D8E8), A or Start end",hand 2026-11-08
+02,4B3A,KeyPrompt_Keys4B3A,C,"key check of a button prompt: Start accepts ($D8EA), A or B end",hand 2026-11-08
+02,4B50,KeyPrompt_Keys4B50,C,"key check of a button prompt: A, B or Start end",hand 2026-11-08
+02,4B59,KeyPrompt_Keys4B59,C,"key check of a button prompt: A or B end",hand 2026-11-08
+02,4B62,KeyPrompt_StartA,C,"sets the object callback to 02:4B68 (00:2225)",hand 2026-11-08
+02,4B68,KeyPrompt_TickA,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4B77,KeyPrompt_StartB,C,"sets the object callback to 02:4B7D (00:2225)",hand 2026-11-08
+02,4B7D,KeyPrompt_TickB,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4B8C,KeyPrompt_StartC,C,"sets the object callback to 02:4B92 (00:2225)",hand 2026-11-08
+02,4B92,KeyPrompt_TickC,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4BA1,KeyPrompt_StartD,C,"sets the object callback to 02:4BA7 (00:2225)",hand 2026-11-08
+02,4BA7,KeyPrompt_TickD,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4BB6,KeyPrompt_StartE,C,"sets the object callback to 02:4BBC (00:2225)",hand 2026-11-08
+02,4BBC,KeyPrompt_TickE,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4BCB,KeyPrompt_StartF,C,"sets the object callback to 02:4BD1 (00:2225)",hand 2026-11-08
+02,4BD1,KeyPrompt_TickF,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4BE0,KeyPrompt_StartG,C,"sets the object callback to 02:4BE6 (00:2225)",hand 2026-11-08
+02,4BE6,KeyPrompt_TickG,C,"button prompt frame: ends when $D8E1 bit 0 is set, next animation frame, then its key check",hand 2026-11-08
+02,4BF5,Obj_DrawPhotoCountPlus1,C,"TakePhotos_DrawNumber with [$D932] + 1 (script callback)",hand 2026-11-08
+02,4C05,Obj_DrawPhotoCount,C,"TakePhotos_DrawNumber with [$D932] (script callback)",hand 2026-11-08
+02,4C14,Obj_DrawPhotoIndex,C,"TakePhotos_DrawNumber with [$D933] (script callback)",hand 2026-11-08
+02,4CFD,PlayMenu_CursorUpdate,C,"menu cursor object of the Play menu: D-pad through the 8-byte item records (table 02:5AB7), A copies the target mode and state into hFF95-hFF96 and sets $D8E0 = 1",hand 2026-11-08
+02,4DB2,Obj_ClearD8E0,C,"$D8E0 = 0",hand 2026-11-08
+02,4DEB,MainMenu_CursorTick,I,"02:5BED then PlayMenu_CursorUpdate (a menu cursor that Start ends)",hand 2026-11-08
+02,4E32,MainMenu_CursorTickB,I,"02:5BFE then PlayMenu_CursorUpdate (a menu cursor that B ends)",hand 2026-11-08
+02,4E45,Menu_CursorUpdateNoStart,I,"menu cursor like PlayMenu_CursorUpdate, ignored while Start is held",hand 2026-11-08
+02,4F59,Menu_ItemPosition,I,"the 4-byte record [$D8F4] of 02:4F7A into the object (script callback)",hand 2026-11-08
+02,4F92,Obj_SetD8E0One,C,"$D8E0 = 1 (script callback)",hand 2026-11-08
+02,4FD8,StrawberryCh_DotPosition,I,"hFFD2 = the x of channel [$D92A] (02:4FEB): the dot under the channel",hand 2026-11-08
+02,4FF9,StrawberryCh_DotTick,I,"StrawberryCh_DotPosition; hidden ($C0) while $D92C is set",hand 2026-11-08
+02,500B,StrawberryCh_DotHidden,I,"waits for $D92C = 0, then back to 02:4FF9",hand 2026-11-08
+02,501C,StrawberryCh_HintTick,I,"hFFD8 - 1 ends it; a key ($D8D9 & $33) ends it early",hand 2026-11-08
+02,5070,Puzzle15_ObjFrameByD97C,C,"hFFD2 = byte [$D97C] of 02:507E",hand 2026-11-08
+02,5099,Puzzle15_ObjWaitMove,I,"waits for $D975 bit 0, then 02:50AB",hand 2026-11-08
+02,50AB,Puzzle15_ObjMoving,I,"while $D975 bit 0 is clear counts hFFD8 down, then back to 02:5099",hand 2026-11-08
+02,50CE,Puzzle15_ObjTick,I,"ends when $D8E0 bit 2 is set; animates on hFF9D bit 3",hand 2026-11-08
+02,51AA,Puzzle15_ObjArrived,I,"compares the object position with Puzzle15_ScreenPosPrev (script callback)",hand 2026-11-08
+02,51FC,Puzzle15_ObjToCell,C,"$D975 bit 0 cleared, Puzzle15_CursorToCell (script callback)",hand 2026-11-08
+02,520D,Puzzle15_ObjDrawCell,C,"$D975 bit 0 set, Puzzle15_DrawCell (script callback)",hand 2026-11-08
+02,5232,Puzzle15_ObjSetCC_D978,C,"hFFCC = $D978 (script callback)",hand 2026-11-08
+02,524D,Puzzle15_ObjSetCC_D977,C,"hFFCC = $D977 (script callback)",hand 2026-11-08
+02,5268,Puzzle15_ObjSetCE_D978,C,"hFFCE = $D978 (script callback)",hand 2026-11-08
+02,5283,Puzzle15_ObjSetCE_D977,C,"hFFCE = $D977 (script callback)",hand 2026-11-08
+02,528A,Puzzle15_ObjRet528A,C,"ret",hand 2026-11-08
+02,5291,Puzzle15_ShuffleTick,I,"every 8 frames sound $02 on channel 0 and the next shuffle move",hand 2026-11-08
+02,52E7,Puzzle15_ShuffleStartScript,C,"ScriptSlots_Add with the script 02:5074 (script callback)",hand 2026-11-08
+02,52F6,Puzzle15_ShuffleScriptedKey,C,"Puzzle15_ScriptedKey with hFFD8 (script callback)",hand 2026-11-08
+02,5304,Puzzle15_ShuffleRandomDir,C,"a random direction (Rng_Next & 3) other than the last one ($D976) into $D8D9",hand 2026-11-08
+02,5315,Puzzle15_ShuffleDirUp,C,"direction $40 of 02:5304",hand 2026-11-08
+02,5319,Puzzle15_ShuffleDirDown,C,"direction $80 of 02:5304",hand 2026-11-08
+02,531D,Puzzle15_ShuffleDirLeft,C,"direction $20 of 02:5304",hand 2026-11-08
+02,5321,Puzzle15_ShuffleDirRight,C,"direction $10 of 02:5304",hand 2026-11-08
+02,5334,Puzzle15_ShuffleCheckDir,I,"tests whether the direction in A can move the empty cell",hand 2026-11-08
+02,5374,Obj_SetD8E0Four,C,"$D8E0 = 4 (script callback)",hand 2026-11-08
+02,537B,Puzzle15_ShuffleInit,C,"hFFD8 = Rng_Next & 3, $D979 = 0",hand 2026-11-08
+02,538D,Puzzle15_ObjEndAtCA,C,"when hFFD2 reaches $CA: $D8E0 = 1 and the object stops",hand 2026-11-08
+02,53DB,Menu_CursorUpdate53DB,I,"menu cursor like PlayMenu_CursorUpdate (another menu)",hand 2026-11-08
+02,5643,Obj_SetD8E0Four_B,C,"$D8E0 = 4 (script callback)",hand 2026-11-08
+02,564A,Scratch_ObjPlace,I,"position from the record at [$DC5E] - 8",hand 2026-11-08
+02,5662,Scratch_ObjTick,I,"waits for $D8E0 bit 0, then a $6C-frame countdown (02:567C)",hand 2026-11-08
+02,567C,Scratch_ObjCountdown,I,"hFFD8 - 1; at 0 $D8E0 = 0 and back to 02:5662",hand 2026-11-08
+02,569E,Scratch_ObjEndCountdown,I,"hFFD8 - 1; at 0 $D8E0 = 8",hand 2026-11-08
+02,570F,KittHost_ObjBlink,I,"blinks on hFF9D bit 3 ($C0 = hidden)",hand 2026-11-08
+02,5730,KittHost_ObjSaveD2,C,"hFFD8 = hFFD2 (script callback)",hand 2026-11-08
+02,573C,KittHost_ObjCountdown,C,"hFFD8 - 1; at 0 $D8E0 = 1 and the object ends",hand 2026-11-08
+02,5749,KittHost_YesNoCursor,I,"menu cursor like PlayMenu_CursorUpdate (the yes / no choice of the Kitt games)",hand 2026-11-08
+02,582F,KittHost_ItemRecord,I,"the item record [$D8F4] of the table at hFFD1-hFFD3",hand 2026-11-08
+02,5944,KittHost_ObjEndOnD8E0Bit2,C,"ends when $D8E0 bit 2 is set",hand 2026-11-08
+02,5971,KittHost_ObjShowKitts,I,"sound $05, then Kitts_DrawAt9420Vram (script callback)",hand 2026-11-08
+02,5984,Obj_SetD8E0One_B,C,"$D8E0 = 1 (script callback)",hand 2026-11-08
+02,5AF1,Menu_ObjFollowItem,I,"restarts the object script 02:5AFF when $D8F4 changes",hand 2026-11-08
+02,5B0D,Menu_ObjItemRecord,I,"hFFD8 = $D8F4 and the 4-byte record of that item",hand 2026-11-08
+02,5B51,Title_ObjKeys,I,"A or Start ($D8D9 & 9): sound $03 and the next step of the title",hand 2026-11-08
+02,5B77,Obj_SetD8E0Four_C,C,"$D8E0 = 4 (script callback)",hand 2026-11-08
+02,5B7E,Obj_ClearD8E0_B,C,"$D8E0 = 0",hand 2026-11-08
+02,5BD9,Menu_ObjSkipIfSameItem,I,"skips two script bytes when $D8F4 equals hFFD8",hand 2026-11-08
+02,5BED,Menu_EndOnStart,C,"ends the object on Start ($D8D9 bit 3) unless $D8D4 is set",hand 2026-11-08
+02,5BFE,Menu_EndOnB,C,"ends the object on B ($D8D9 bit 1) unless $D8D4 is set",hand 2026-11-08
+02,5C0F,MainMenu_ObjTick,I,"Menu_EndOnStart, then follows the selected item",hand 2026-11-08
+02,5CB3,MainMenu_ObjTickB,I,"Menu_EndOnStart, then follows the selected item",hand 2026-11-08
+02,5D73,Obj_BlockKeys,C,"$D8D4 = 1, $D8E0 = 0",hand 2026-11-08
+02,5D7D,MainMenu_PickMode01,C,"hFF95-hFF96 = mode $01 state $01, $D8E0 = 1",hand 2026-11-08
+02,5D90,Obj_UnblockKeys,C,"$D8D4 = 0 (script callback)",hand 2026-11-08
+02,5E4F,TakePhotos_ObjCursor,I,"an object of the camera view that moves to y $48 and reads the keys",hand 2026-11-08
+02,5E94,TakePhotos_ObjPosDelta,I,"ends unless Start is held; the distance to the target position",hand 2026-11-08
+02,5ECB,TakePhotos_ObjMoveA,I,"moves while the distance is not 0 (script 02:5F08)",hand 2026-11-08
+02,5ED9,TakePhotos_ObjMoveB,I,"moves once the distance is 0 (script 02:5F00)",hand 2026-11-08
+02,5EE7,TakePhotos_ObjPosFromDA1E,I,"position from [$DA1E] - 1 (00:0C25)",hand 2026-11-08
+02,5F16,TakePhotos_ObjPosFromDA1F,I,"ends unless Start is held; position from [$DA1F] - 1 x $666",hand 2026-11-08
+02,5F3C,TakePhotos_FrameCursorTick,I,"ends at frame $08 ($D8FD); follows $D8FE / $D8FC",hand 2026-11-08
+02,5F7F,FramePick_UnhideWindow,C,"$D8D3 bit 7 cleared",hand 2026-11-08
+02,5F85,FramePick_Prev,C,"$D931 - 1, wrapping to $18: 25 frames (script callback)",hand 2026-11-08
+02,5F94,FramePick_Next,C,"$D931 + 1, wrapping to 0 (script callback)",hand 2026-11-08
+02,5FA3,FramePick_DrawLeftBg,C,"TakePhotos_DrawRowsLeftBg with $D931 (script callback)",hand 2026-11-08
+02,5FB2,FramePick_Load,I,"00:077D with $D931 (script callback)",hand 2026-11-08
+02,5FBC,FramePick_DrawRightBg,C,"TakePhotos_DrawRowsRightBg with $D931 (script callback)",hand 2026-11-08
+02,5FCB,FramePick_DrawLeftWin,C,"TakePhotos_DrawRowsLeftWin with $D931 (script callback)",hand 2026-11-08
+02,5FDA,FramePick_DrawRightWin,C,"TakePhotos_DrawRowsRightWin with $D931 (script callback)",hand 2026-11-08
+02,5FE9,FramePick_LoadAndHide,I,"00:07CE with $D931, $D8D3 bit 7 set (script callback)",hand 2026-11-08
+02,60C8,Obj_Timeout78,I,"hFFD8 + 1; ends at $78 frames or on a key",hand 2026-11-08
+02,614A,Album_Arrow614A,I,"album arrow object: restarts its script when $D933 is not 0",hand 2026-11-08
+02,615F,Album_Arrow615F,I,"album arrow object: restarts its script when $D933 is 0",hand 2026-11-08
+02,617C,Album_Arrow617C,I,"album arrow object: restarts its script when $D933 differs from $D932",hand 2026-11-08
+02,6194,Album_Arrow6194,I,"album arrow object: restarts its script when $D933 equals $D932",hand 2026-11-08
+02,61FE,Album_Arrow61FE,I,"album arrow object: restarts its script when $D933 is not 0 (second arrow)",hand 2026-11-08
+02,6213,Album_Arrow6213,I,"album arrow object: restarts its script when $D933 is 0 (second arrow)",hand 2026-11-08
+02,61B4,Album_ObjOnLeftRight,C,"restarts the script 02:61CF on Left / Right ($D8DA & $30)",hand 2026-11-08
+02,61C0,Album_ObjDrawIndex,C,"TakePhotos_DrawNumber with [$D933] (script callback)",hand 2026-11-08
+02,61E9,Album_ObjEndOnKey,C,"ends on any held key ($D8DA)",hand 2026-11-08
+02,622E,Obj_BlockKeysHideWindow,C,"$D8D4 = 1, $D8D3 bit 7 cleared",hand 2026-11-08
+02,6239,Obj_UnblockKeysShowWindow,C,"$D8D4 = 0, $D8D3 bit 7 set (script callback)",hand 2026-11-08
+02,636B,Album_ObjDrawIndexB,C,"TakePhotos_DrawNumber with [$D933] (script callback)",hand 2026-11-08
+02,637A,Album_ObjLoadSlot,I,"Photo_FindSlotA with [$D933], then a photo load (script callback)",hand 2026-11-08
+02,6474,Album_ObjEndOnLeftRight,C,"ends on Left / Right",hand 2026-11-08
+02,647D,Album_ObjFollowDAA6,I,"follows $DAA6 into $D936 and redraws (00:0924)",hand 2026-11-08
+02,649C,Album_ObjKeys,I,"A or Start ($D8D9 & 9) unless $D8D4 is set",hand 2026-11-08
+02,64C9,Obj_ShowBgClearD8E0,C,"$D8D3 bit 6 cleared, $D8E0 = 0",hand 2026-11-08
+02,64D3,Printing_ObjToState05,C,"state 5, $D8E0 = 2 (script callback)",hand 2026-11-08
+02,64DE,Printing_ObjCall1918,I,"00:1918 (script callback)",hand 2026-11-08
+02,64E5,Printing_ObjPhotoToVram,C,"$C000 into tiles $9000 ($800) and $C800 into $8000 (script callback)",hand 2026-11-08
+02,650F,Obj_SetD8D3Bit6,C,"$D8D3 bit 6 set (script callback)",hand 2026-11-08
+02,657A,Obj_Ret657A,C,"ret",hand 2026-11-08
+02,657B,Printing_ObjCall1A80,I,"00:1A80 (script callback)",hand 2026-11-08
+02,6582,Printing_ObjFrameTiles,C,"PrintFrame_LoadTiles with [$D935] (script callback)",hand 2026-11-08
+02,6591,Obj_ClearD8D3Bit6,C,"$D8D3 bit 6 cleared (script callback)",hand 2026-11-08
+02,6601,Obj_CallClearD882Bit4,C,"calls the word at HL, then $D882 bit 4 cleared (script callback)",hand 2026-11-08
+02,6612,Obj_CallSetD882Bit4,C,"calls the word at HL, then $D882 bit 4 set (script callback)",hand 2026-11-08
+02,6623,PrintFrame_Next,C,"$D935 + 1, wrapping at 6 (script callback)",hand 2026-11-08
+02,663E,PrintFrame_Prev,C,"$D935 - 1, wrapping to 5 (script callback)",hand 2026-11-08
+02,665A,Obj_SetD8D3Bit7,C,"$D8D3 bit 7 set (script callback)",hand 2026-11-08
+02,6A45,PrintFrame_Show,I,"$D8D3 bit 7 cleared, 00:1A80, PrintFrame_LoadTiles with [$D935]",hand 2026-11-08
+02,6A65,Stamp_ObjLoadSelected,C,"Stamp_LoadSelected, $D993 bit 1 cleared (script callback)",hand 2026-11-08
+02,6A76,Stamp_ObjSelectCategory,C,"Stamp_SelectCategory and Stamp_LoadWindowMapDefault (script callback)",hand 2026-11-08
+02,6A9A,Stamp_ObjCursorCallback,C,"Stamp_CursorCallback",hand 2026-11-08
+02,6ACB,Stamp_ObjSelectCategoryB,C,"Stamp_SelectCategory",hand 2026-11-08
+02,6ADA,Stamp_ObjPlaceOnStart,I,"Start ($D8D9 bit 3): copies the stamp choice $D996-$D997 into $D9AF ...",hand 2026-11-08
+02,6BEF,Stamp_ObjWaitState06,C,"moves on to 02:6ADA once the state hFF8E is 6",hand 2026-11-08
+02,6BFC,Stamp_ObjStep0,C,"restarts the script 02:6C4A when $D994 is 0",hand 2026-11-08
+02,6C0A,Stamp_ObjClampX,I,"keeps the stamp x inside the photo ($D9AD)",hand 2026-11-08
+02,6C86,Stamp_ObjStepNot0,C,"restarts the script 02:6D05 when $D994 is not 0",hand 2026-11-08
+02,6CC0,Stamp_ObjAtState06,C,"restarts the script 02:6CF3 when the state is 6",hand 2026-11-08
+02,6CCD,Stamp_ObjStep0B,C,"restarts the script 02:6CE3 when $D994 is 0",hand 2026-11-08
+02,6D19,Stamp_ObjSlideIn,I,"$D882 bit 2 cleared, $D994 = 1, slides in until y $F0",hand 2026-11-08
+02,6D74,Stamp_ObjSlideOut,I,"$D994 = 3, slides until y $38",hand 2026-11-08
+02,6E06,Printing_ObjPosDelta,I,"the distance between the object position and its target",hand 2026-11-08
+02,6E47,Printing_ObjMoveA,I,"moves while the distance is not 0 (script 02:6E7F)",hand 2026-11-08
+02,6E55,Printing_ObjMoveB,I,"moves once the distance is 0 (script 02:6E87)",hand 2026-11-08
+02,6E63,Printing_ObjPosFromDAD6,I,"y = [$DAD6] x $CC + $18",hand 2026-11-08
+02,6F19,Obj_Ret6F19,C,"ret",hand 2026-11-08
+02,6F20,Printing_ObjSpeedFromD939,C,"hFFCB-hFFCC = $D939-$D93A (script callback)",hand 2026-11-08
+02,6F38,AppleGame_ObjKeys,I,"B ($D8D9 bit 1) stops the object (speed 0), ... (the falling-fruit game while printing)",hand 2026-11-08
+02,6F9E,AppleGame_ObjSetD886,I,"$D886 = $49 - hFFD2",hand 2026-11-08
+02,6FA8,AppleGame_ObjFruitKind,I,"by the frame hFFD2 ($C0, $C1, $C2 ...)",hand 2026-11-08
+02,6FC8,AppleGame_ObjCatch,I,"A ($D8D9 bit 0): sound $03 on channel 2 ...",hand 2026-11-08
+02,701E,Obj_ClearD8E0_C,C,"$D8E0 = 0",hand 2026-11-08
+02,75E5,Obj_SetD94D,C,"$D94D = $80, $D94E = $78 (not run in the core)",hand 2026-11-08
+02,77EE,AlbumText_ObjCursor,I,"in step 2 ($D994) follows the text cursor $D98C, else hidden at y $A0",hand 2026-11-08
+02,7853,Obj_Ret7853,C,"ret",hand 2026-11-08
+02,785A,AlbumText_ObjSlideIn,I,"$D994 = 1, slides in until y $F0",hand 2026-11-08
+02,78AD,AlbumText_ObjSlideOut,I,"$D994 = 3, slides until y $38",hand 2026-11-08
+02,793B,AlbumText_ObjCursorCallback,C,"Cursor_Callback61FF",hand 2026-11-08
+02,7944,AlbumText_ObjPosFromD990,C,"hFFD2 / hFFD4 = $D990 / $D991, HL = 02:4858 (script callback)",hand 2026-11-08
+02,7959,AlbumText_ObjLoadGlyphPage,C,"Text_LoadBigGlyphPage",hand 2026-11-08
+02,7999,Obj_SetD98B,C,"$D98B = the next byte, skip one (script callback)",hand 2026-11-08
+02,79A4,Obj_EndOnA,C,"ends on A ($D8D9 bit 0)",hand 2026-11-08
+02,79AF,Obj_ClearD98B,C,"$D98B = 0",hand 2026-11-08
+02,79BA,NameCard_ObjCursorCallback,C,"Menu06_CursorCallback",hand 2026-11-08
+02,79C3,NameCard_ObjCursorPlace,C,"Menu06_CursorPlace (script callback)",hand 2026-11-08
+02,79DD,NameCardEdit_ObjFieldPos,I,"the position of field [$D97E] from 02:7A6B",hand 2026-11-08
+02,79F0,NameCardEdit_ObjFieldTick,I,"ends at step 0 ($D994); else follows field [$D97E]",hand 2026-11-08
+02,7A7B,NameCardEdit_ObjSlideIn,I,"$D994 = 1, slides in until y $F0",hand 2026-11-08
+02,7ACE,NameCardEdit_ObjSlideOut,I,"$D994 = 3, slides until y $38",hand 2026-11-08
+02,7B53,NameCardEdit_ObjPhotoCursor,C,"NameCardEdit_PhotoCursorCallback",hand 2026-11-08
+02,7B6E,NameCardEdit_ObjLoadField,C,"$D8E0 = 0, NameCardEdit_LoadFieldGlyphs",hand 2026-11-08
+02,7BB1,Obj_EndOnD8E0Bit0,C,"when $D8E0 bit 0 is set: hidden and the script 02:7FC0",hand 2026-11-08
+02,7BC8,Obj_KeyMaskStepCallback,C,"Obj_KeyMaskStep",hand 2026-11-08
+02,7BD3,Obj_Ret7BD3,C,"ret",hand 2026-11-08
+02,7BDA,Exchange_ObjFollowD9FD,I,"next frame; follows $D9FD (the exchange direction)",hand 2026-11-08
+02,7C36,Obj_ClearD882Bit3,C,"$D882 bit 3 cleared (script callback)",hand 2026-11-08
+02,7C5F,Obj_SetD882Bit3,C,"$D882 bit 3 set (script callback)",hand 2026-11-08
+02,7E58,Fade_StepPalettesA,I,"steps the palettes $D88C-$D88F toward $D883 (3 palettes)",hand 2026-11-08
+02,7E89,Fade_StartOut,I,"$D8D4 = 1 (keys blocked), the palette targets $D88F-$D892 cleared",hand 2026-11-08
+02,7EEE,Fade_StepPalettesB,I,"the same palette step for the other direction",hand 2026-11-08
+02,7F23,Fade_StartIn,I,"$D8D4 = 1, the palette targets from $D883 & $33",hand 2026-11-08
+02,7F65,Fade_End,C,"$D8D4 = 0, mode hFF8D = hFFD4 and state hFF8E = hFFD2 of the fade object (script callback)",hand 2026-11-08
+02,7FB9,Obj_NullCallback,C,"ret: the callback of objects that do nothing each frame",hand 2026-11-08
+02,7FC2,Objects_ClearAll,C,"00:20D4, then the 16 object slots at $DAEE cleared (23 bytes each); called by every screen set-up",hand 2026-11-08
+02,7EA2,Fade_SetModeFromObject,C,"the fade object at its end: mode hFF8D = hFFD4 and state hFF8E = hFFD2 (its parameters from $0B16 / $0B22); the only way a fade changes the mode",hand 2026-11-08
