@@ -5,7 +5,7 @@ mode,name,tag,evidence
 03,ViewAlbum,C,BGB screen 03:02 (album binder)
 04,PlayMenu,C,BGB screen 04:01 (scratch card / 15 puzzle / slide show / Strawberry Channel)
 05,StampWindow,I,forced BGB screen (stamp window); reached in the core runs
-06,ExchangeEmptyFrame,I,forced BGB screen (an empty photo frame); reached in the core runs next to the exchange (BGB replays end in mode 07)
+06,Printing,C,"BGB screens with the printer helper on the link (06:1F please wait, 06:21, 06:24 the fruit game); forced alone it shows an empty frame"
 07,Exchange,C,BGB screen 07:02 (give / receive)
 08,AlbumPhotoTrain,I,forced BGB screen (album pages drawn as a photo train)
 09,ExchangeCommunicating,I,forced BGB screen (communicating message)

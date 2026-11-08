@@ -8,7 +8,9 @@ mode,state,name,tag,evidence
 03,02,View photos: album,C,BGB screenshot (binder page with the side tools; reached by みる)
 04,01,Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel,C,BGB screenshot (スクラッチカード 15パズル スライドショー いちごチャンネル)
 05,06,Stamp window (stamps on a photo),I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
-06,03,Exchange screen: empty frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+06,1F,Printing: please wait (A spin / B cancel),C,BGB screenshot with the printer helper (まってね; A くるくる B やめる)
+06,21,Printing: the car drives off,C,BGB screenshot with the printer helper
+06,24,Printing: catch the falling fruits to earn Kitts,C,BGB screenshot with the printer helper kept busy (プリントちゅう; record and Kitts won at the top right)
 07,02,Exchange: give or receive,C,BGB screenshot (あげる <-> もらう)
 08,02,Album pages as a photo train,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 09,05,"Exchange: sending / receiving (""communicating"")",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
@@ -33,9 +35,11 @@ mode,state,name,tag,evidence
 0E,13,Scratch card: 10 Kitts a card - try?,C,BGB screenshot (いちまい 10Kitt よ やってみる? はい / いいえ)
 0E,14,Scratch card: paying the Kitts,C,BGB screenshot (Kitt coin shown)
 0E,16,Scratch card: scratch two spots to find a pair,C,BGB screenshot (2かしょえらんで おなじものを そろえてね)
+0E,20,Scratch card: quit in the middle? (quit / continue),C,BGB screenshot (まだ とちゅうよ やめちゃう? やめる / つづける)
 0F,05,15 puzzle board,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 10,02,Scratch card board,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 10,02,Scratch card board,C,BGB screenshot (SCRATCH CARD; six hidden spots and a hand pointer)
+10,04,Scratch card: spots scratched (prizes in Kitts),C,BGB screenshot (cherries 20 Kitt / bears 40 Kitt under the scratched spots)
 11,07,Strawberry Channel: story pictures (Left / Right turn the page),C,"BGB screenshots after 0-11 presses of Right: a photo story, dots at the bottom show the page"
 11,0C,Strawberry Channel: picture paused (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
 12,01,"Slide show settings (start, speed, order)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
@@ -48,5 +52,3 @@ mode,state,name,tag,evidence
 1B,01,Printing: catch-the-apples game while the printer works,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1C,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1E,00,Screen fade between modes,C,BGB screenshot (screen fading out)
-0E,20,Scratch card: quit in the middle? (quit / continue),C,BGB screenshot (まだ とちゅうよ やめちゃう? やめる / つづける)
-10,04,Scratch card: spots scratched (prizes in Kitts),C,BGB screenshot (cherries 20 Kitt / bears 40 Kitt under the scratched spots)

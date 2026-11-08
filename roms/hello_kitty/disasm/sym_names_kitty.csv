@@ -207,7 +207,7 @@ bank,addr,name,conf,note,source
 01,75CF,Mode06_State26,C,handler of state $26 of mode $06 (word 38 of Mode06_StateTable),modes
 01,75F5,Mode06_State27,C,handler of state $27 of mode $06 (word 39 of Mode06_StateTable),modes
 01,7653,Mode06_State28,C,handler of state $28 of mode $06 (word 40 of Mode06_StateTable),modes
-01,7691,Mode06_ExchangeEmptyFrame,I,ModeTable entry $06: forced BGB screen (an empty photo frame); reached in the core runs next to the exchange (BGB replays end in mode 07),modes
+01,7691,Mode06_Printing,C,"ModeTable entry $06: BGB screens with the printer helper on the link (06:1F please wait, 06:21, 06:24 the fruit game); forced alone it shows an empty frame",modes
 01,769C,Mode06_StateTable,C,"state table of mode $06, read by $0189 with hFF8E",modes
 02,4008,Data_02_4008,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types
 02,4110,Data_02_4110,C,"read in the core runs by 00:2127, 00:2136, 00:1F1E",kitty_types

@@ -206,7 +206,7 @@
 01:75cf Mode06_State26
 01:75f5 Mode06_State27
 01:7653 Mode06_State28
-01:7691 Mode06_ExchangeEmptyFrame
+01:7691 Mode06_Printing
 01:769c Mode06_StateTable
 02:4008 Data_02_4008
 02:4110 Data_02_4110

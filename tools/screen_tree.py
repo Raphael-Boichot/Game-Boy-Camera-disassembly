@@ -7,8 +7,9 @@
 --explore DIR   a folder of tools/kitty_bgb_explore.py: explore.csv (mode, state, keys, bgb_mode, bgb_state, same, picture, parent,
                 key) and the pictures. Only rows where BGB ended in the (mode, state) the core found are drawn (same = yes); the
                 first folder that gives a (mode, state) wins. An edge parent -> child is labelled with the key that led there.
---extra CSV     more screens without a key path (mode, state, picture, how), e.g. boot scenarios or forced runs; drawn with a
-                dashed border and the `how` text, linked from the boot node with a dashed edge.
+--extra CSV     more screens without a plain key path (mode, state, picture, how[, parent, key]): boot scenarios, runs with a printer,
+                forced runs; drawn with a dashed border and the `how` text, linked by a dashed edge from `parent` (else from the boot
+                node), labelled `key` (else 'boot condition'); forced screens (how starts with 'forced') go in the box at the bottom.
 --names CSV     mode, state, name: the screen's name under its picture (state `*` = every state of the mode)
 --modes N       modes $00..N-1 exist (the mode table): the ones with no screen are listed in a box at the bottom, NOT REACHED
 Graphviz `dot` draws it (rankdir TB). The picture is the evidence: a screen counts as reached only when BGB shows it.
@@ -36,7 +37,7 @@ for f in a.extra:
     for r in csv.DictReader(open(f)):
         k = (r['mode'], r['state'])
         if k in nodes or k in extra: continue
-        extra[k] = (os.path.join(os.path.dirname(f), r['picture']), r.get('how', ''))
+        extra[k] = (os.path.join(os.path.dirname(f), r['picture']), r.get('how', ''), tuple(r['parent'].split(':')) if r.get('parent') else None, r.get('key', ''))
 seen_e = set(); E = []
 for p, c, key in edges:
     if p in nodes and (p, c) not in seen_e and p != c: seen_e.add((p, c)); E.append((p, c, key))
@@ -60,12 +61,15 @@ def node(k, path, dashed=False, how=''):
         '<TR><TD>%s</TD></TR>' % html.escape(n) if n else '', '<TR><TD><I>%s</I></TD></TR>' % html.escape(how) if how else '')
     dot.append('"%s:%s" [label=%s];' % (k[0], k[1], lab))
 for k, p in sorted(nodes.items()): node(k, p)
-for k, (p, how) in sorted(extra.items()): node(k, p, True, how)
+for k, (p, how, _, _) in sorted(extra.items()): node(k, p, True, how)
 for p, c, key in E: dot.append('"%s:%s" -> "%s:%s" [label="%s"];' % (p[0], p[1], c[0], c[1], key))
 boot_x = sorted(k for k in extra if not extra[k][1].startswith('forced'))
 forced_x = sorted(k for k in extra if extra[k][1].startswith('forced'))
 if root:
-    for k in boot_x: dot.append('"%s:%s" -> "%s:%s" [style=dashed, color="#aa5500", label="boot condition"];' % (root[0], root[1], k[0], k[1]))
+    for k in boot_x:
+        par, key = extra[k][2], extra[k][3]
+        src = par if par and (par in nodes or par in extra) else root
+        dot.append('"%s:%s" -> "%s:%s" [style=dashed, color="#aa5500", label="%s"];' % (src[0], src[1], k[0], k[1], key or 'boot condition'))
     dot.append('{rank=source; "%s:%s";}' % root)
 # forced-only screens: a grid of 6 per row in a box at the bottom (invisible edges stack the rows under the tree)
 if forced_x:
