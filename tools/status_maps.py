@@ -46,6 +46,8 @@ for k, (folder, pre, title, md5) in ROMS.items():
                       ('Nothing is analysed for this ROM so far: only the padding is shown; the picture fills in as the work lands (roms/%s/).' % folder if not started else
                        'Names and types: roms/%s/disasm/; the code colour is what the trace of this ROM proves.' % folder)]
     if os.path.exists(diff): cmd += ['--diff', diff]
+    grp = E('assets', 'layout_groups_%s.csv' % pre)
+    if os.path.exists(grp): cmd += ['--groups', grp]     # the ROM's own modes and name prefixes for the code colours
     covf = E('port', 'cov_%s.npz' % pre)
     if os.path.exists(covf): cmd += ['--cov', covf]      # the Japanese runs carried by the port: read bytes are never padding or fill
     cmd += ['--outline', 'none']      # no outline (owner 2026-11-01): what differs from the Japanese ROM goes to a text summary

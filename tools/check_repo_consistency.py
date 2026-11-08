@@ -327,6 +327,18 @@ if A.rom_kitty:
             if md != '0a323bddc4f0159cea76cf44ed0c1a3c': bad('kitty', 'round trip with pocketcamera_kitty.sym: md5 %s' % md)
             else: ok('kitty', 'round trip with pocketcamera_kitty.sym: md5 %s' % md)
             shutil.rmtree(rt, ignore_errors=True)
+        # the data kinds of the layout map (tools/kitty_layout_kinds.py): regenerated and compared, its counts quoted in the Kitty README
+        r6 = _run('tools/kitty_layout_kinds.py', A.rom_kitty, '--out', os.path.join(tk, 'kinds.csv'))
+        m6 = re.search(r'kitty_layout_kinds: \d+ rows, (\d+) bytes of Data_ blocks given a kind .*?; (\d+) bytes of Data_ blocks left', r6.stdout)
+        if r6.returncode or not m6: bad('kitty', 'tools/kitty_layout_kinds.py failed: %s' % (r6.stderr or r6.stdout)[-300:])
+        else:
+            if open(os.path.join(tk, 'kinds.csv'), 'rb').read() != open(KD + 'assets/layout_kind_overrides_kitty.csv', 'rb').read():
+                bad('kitty', 'assets/layout_kind_overrides_kitty.csv is not what tools/kitty_layout_kinds.py makes today: rerun it, then tools/status_maps.py --kitty')
+            else: ok('kitty', 'layout_kind_overrides_kitty.csv fresh')
+            mm = re.search(r'([\d,]+) bytes of Data_ blocks given a kind, ([\d,]+) left uncertain', open(KD + 'README.md').read())   # need= the L3 bullet, Data kinds of the layout map
+            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the data kinds (need=N bytes of Data_ blocks given a kind, M left uncertain)')
+            elif (int(mm.group(1).replace(',', '')), int(mm.group(2).replace(',', ''))) != (int(m6.group(1)), int(m6.group(2))):
+                bad('kitty', 'roms/hello_kitty/README.md: data kinds quoted %s, tools/kitty_layout_kinds.py gives %s / %s' % (mm.group(0), m6.group(1), m6.group(2)))
         # the reachability picture (tools/kitty_reach_map.py): redrawn and compared, its counts quoted in the Kitty README
         rp = os.path.join(tk, 'reach.png'); r5 = _run('tools/kitty_reach_map.py', A.rom_kitty, rp)
         m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)

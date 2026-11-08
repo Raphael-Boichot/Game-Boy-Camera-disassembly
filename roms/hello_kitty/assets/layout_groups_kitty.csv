@@ -1,0 +1,57 @@
+what,key,group,text
+mode,00,UI,BootAndTitle: copyright and title
+mode,01,UI,MainMenu: Take / View / Play and the option menu
+mode,02,CAM,TakePhotos: camera view
+mode,03,ALBUM,ViewAlbum
+mode,04,UI,PlayMenu
+mode,05,EDIT,StampWindow
+mode,06,PRINT,Printing (with the fruit game while the printer works)
+mode,07,LINK,Exchange: give / receive
+mode,08,ALBUM,AlbumPhotoTrain
+mode,09,LINK,ExchangeCommunicating
+mode,0A,UI,NameCard
+mode,0B,UI,NameCardEdit
+mode,0C,UI,RecordBook
+mode,0D,CAM,FactoryCheck: quick factory check and factory calibration of the sensor
+mode,0E,GAME,KittGamesHost
+mode,0F,GAME,FifteenPuzzle
+mode,10,GAME,ScratchCard
+mode,11,UI,StrawberryChannel
+mode,12,ALBUM,SlideShow
+mode,13,UI,BackToMainMenu13
+mode,14,UI,MessageScreen
+mode,15,UI,FadeOut15
+mode,16,UI,FadeOut16
+mode,17,PRINT,PrintError
+mode,18,UI,PompompurinPicture
+mode,19,UI,EmptyFrame19
+mode,1A,UI,EmptyFrame1A
+mode,1B,GAME,PrintingAppleGame
+mode,1C,UI,EmptyFrame1C
+mode,1D,UI,BackToMainMenu1D
+mode,1E,UI,ScreenFade
+prefix,ScriptSlots,SYS,the script slots of $DC67 (bank 1)
+prefix,Object,SYS,the object engine (bank 0)
+prefix,Copy,SYS,copy routines (bank 0)
+prefix,Serial,SYS,serial callback
+prefix,Lcd,SYS,LCD setup
+prefix,Lcdc,SYS,LCDC callbacks
+prefix,FarJumpTable,SYS,far jump table
+prefix,JumpTable,SYS,jump tables
+prefix,Entry,SYS,cartridge entry
+prefix,ModeState,SYS,mode and state setters
+prefix,ModeTable,SYS,the mode table
+prefix,State,SYS,state setters
+prefix,RecordBook,UI,the record book
+legend,CAM,,"Camera, sensor (factory check and calibration), image processing, effects"
+legend,ALBUM,,"Album, photo train, slide show"
+legend,EDIT,,Stamp window
+legend,LINK,,"Link cable: photo exchange"
+legend,PRINT,,"Printer, print screens, print error"
+legend,GAME,,"Kitt games: scratch card, 15 puzzle, their host, the printing apple game"
+legend,DJ,,(no D.J. in this ROM)
+legend,UI,,"Menus, title, name card, record book, Strawberry Channel, messages, fades"
+legend,OTHER,,Code with no function group yet (owned by an automatic label)
+legend,OAM,,"Object data: descriptors, scripts and sprite layouts first read by the object engine (evidence I)"
+legend,T_UI,,"Tile sets: screens, menus, fonts, sprites, channel pictures (seen in VRAM tile memory in the core replays, or copied there from a constant source)"
+legend,MAP,,"Tile maps (background layouts; seen in a BG map in the core replays, or copied there from a constant source)"

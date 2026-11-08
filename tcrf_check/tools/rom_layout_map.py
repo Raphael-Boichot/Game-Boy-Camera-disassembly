@@ -122,9 +122,18 @@ for grp, names in [
  ('UI',    'MainMenu Title Credits UserMap OwnerCard ScrollEngine SpecialMenu')]:
     for nm in names.split(): PREFIX_GROUP[nm] = grp
 def prefix(name): return re.split(r'[_0-9]', name)[0] or name[:6]
+# another build with its own modes (roms/hello_kitty/assets/layout_groups_kitty.csv): --groups CSV (what, key, group, text): rows 'mode' replace the
+# Japanese mode groups, rows 'prefix' add name prefixes, rows 'legend' replace the legend text of a group
+GROUPS = opt('--groups', None)
+if GROUPS and GROUPS != 'none':
+    MODE_GROUP = {}
+    for r in csv.DictReader(open(GROUPS, encoding='utf-8')):
+        if r['what'] == 'mode': MODE_GROUP[r['key'].upper()] = r['group']
+        elif r['what'] == 'prefix': PREFIX_GROUP[r['key']] = r['group']
+        elif r['what'] == 'legend': CATS[KEY[r['key']]] = (r['key'], r['text'], CATS[KEY[r['key']]][2])
 def code_group(name):
     m = re.match(r'Mode([0-9A-F]{2})', name)
-    if m: return MODE_GROUP[m.group(1)]
+    if m and m.group(1) in MODE_GROUP: return MODE_GROUP[m.group(1)]
     if name.startswith('Unused_'): return code_group(name[7:])
     return PREFIX_GROUP.get(prefix(name), 'OTHER')
 
