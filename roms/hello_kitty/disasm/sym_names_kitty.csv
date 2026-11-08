@@ -122,22 +122,82 @@ bank,addr,name,conf,note,source
 00,2E00,Data_00_2E00,C,read in the core runs by 00:021C,kitty_types
 00,3700,Data_00_3700,C,"read in the core runs by 00:2BE2, 00:2AEC, 00:264C, 00:2B6E",kitty_types
 01,4700,Data_01_4700,C,"read in the core runs by 01:470A, 01:47D1",kitty_types
+01,4705,Sram_WriteMagic,C,the 5 bytes of Data_01_4700 (the Magic string) at HL,hand 2026-11-08
+01,4711,Sram_Checksum,C,"HL = checksum of BC bytes at DE: L = sum, H = xor of the bytes",hand 2026-11-08
+01,4721,Sram_WriteChecksum,C,"Sram_Checksum, stored at HL as (L + $4E, H xor $54)",hand 2026-11-08
+01,4731,Sram_PhotoSlotAddr,C,"photo slot A: HL = $A000 or $B000 (A & 1), A = SRAM bank A / 2 + 1",hand 2026-11-08
+01,4740,Photo_RenumberVector,C,"renumbers the order numbers of the 30-slot table $DAA9 so that they run 0, 1, 2 ... in the same order",hand 2026-11-08
+01,475B,Photo_CountUsed,C,$D932 = number of slots of $DAA9 that are not $FF,hand 2026-11-08
 01,4771,Sram_ComputeImageChecksums,I,edited copy of the Japanese Sram_ComputeImageChecksums (02:4005): instruction sequence ratio 0.987 against 89 bytes,near_jp
-01,47CC,Sram_CompareMagic,?,"same code as the Japanese Sram_CompareMagic (02:4084, 15 bytes, masked match; the Japanese ROM also has Sram_CompareMagic_B, Sram_CompareMagic_C)",port_jp
+01,47CC,Sram_CompareMagic,C,"Z when the 5 bytes at HL equal the Magic string Data_01_4700 (code read; called by Sram_VerifyPhotoInfo, Sram_VerifyVector, Sram_VerifyIdCard and Sram_CheckCountersMagic)",hand 2026-11-08
+01,47DB,Sram_VerifyChecksum,C,"Z when the checksum stored at HL (+$4E, xor $54) matches Sram_Checksum of BC bytes at DE",hand 2026-11-08
+01,47ED,Sram_VerifyPhotoInfo,C,photo slot A: Magic at +$F55 and checksum at +$F5A of the $5A bytes at +$F00; carry when bad,hand 2026-11-08
+01,4840,Sram_VerifyVector,C,bank 0: Magic at $B1D0 and checksum at $B1D5 of the $23 bytes from $B1B2 (the slot table); carry when bad,hand 2026-11-08
+01,4887,Sram_VerifyIdCard,C,bank 1: Magic at $AFCA and checksum at $AFCF of the $17 bytes from $AFB8 (the ID card record); carry when bad,hand 2026-11-08
+01,48CE,Sram_CheckCountersMagic,C,bank 0: the Magic at $B012 after the counters $B000-$B011; no checksum on the counters,hand 2026-11-08
+01,4907,Sram_Format,C,"clears every SRAM bank with 00:023A (bank 0 $B000-$BFFF, bank 1, bank 2 except $AFF0-$AFFF, banks 3 and up); not run on a valid save",hand 2026-11-08
+01,49BD,Sram_WritePhotoInfo,C,"photo slot A: Magic at +$F55, checksum at +$F5A of the $5A bytes at +$F00, the $5C bytes copied to the echo +$F5C",hand 2026-11-08
+01,4A13,Sram_FormatVector,C,"bank 0: the slot table $B1B2 cleared (30 bytes), Magic, checksum, echo at $B1D7",hand 2026-11-08
+01,4A60,Sram_FormatIdCard,C,"bank 1: the ID card record $AFB8 cleared ($12 bytes), Magic, checksum, echo at $AFD1",hand 2026-11-08
+01,4AA9,Sram_FormatCounters,C,bank 0: the counters $B000-$B011 cleared and the Magic written at $B012,hand 2026-11-08
+01,4ADF,Sram_ClearB1FC,I,bank 0: $690 bytes from $B1FC cleared (the block that 01:4C93 loads into $C230),hand 2026-11-08
+01,4B0A,Photo_LoadToBufferAndVram,C,"photo slot A: $F00 bytes into $C000, then $800 into tiles $9000 and $600 into $8000 (HBlank copy), its $55 bytes of information into $DA52",hand 2026-11-08
+01,4B61,Photo_LoadToVram,C,photo slot A straight into tiles $9000 / $8000 and its information into $DA52,hand 2026-11-08
+01,4BB1,Photo_LoadToBuffer,C,photo slot A: $F00 bytes into $C000 and its information into $DA52,hand 2026-11-08
+01,4BF0,Photo_LoadTiles8800,C,photo slot A: $E00 bytes into tiles $8800 and into $C000,hand 2026-11-08
+01,4C2B,Photo_Store,C,"photo slot A: $C000 ($F00 bytes) and the information $DA52 ($55 bytes) into SRAM, Magic, checksum and echo",hand 2026-11-08
+01,4C93,Sram_LoadB1FC,I,bank 0: $690 bytes from $B1FC into $C230,hand 2026-11-08
+01,4CB2,Sram_StoreB1FC,I,bank 0: $690 bytes from $C230 into $B1FC,hand 2026-11-08
+01,4D62,Sram_LoadVector,C,bank 0: the slot table $B1B2 (30 bytes) into $DAA9,hand 2026-11-08
+01,4D81,Photo_FindSlotA,C,"A = $FF goes to Photo_FindSlot_Far, else A - 1 first",hand 2026-11-08
 01,4D86,Photo_FindSlot_Far,C,"same code as the Japanese Photo_FindSlot_Far (02:444D, 25 bytes, masked match)",port_jp
+01,4D9F,Photo_AddToVector,C,"slot A of $DAA9 gets the next order number, then Photo_RenumberVector and Photo_CountUsed",hand 2026-11-08
+01,4DCC,Photo_RemoveFromVector,C,"slot A of $DAA9 = $FF, then Photo_RenumberVector and Photo_CountUsed",hand 2026-11-08
+01,4DE4,Sram_StoreVector,C,"bank 0: $DAA9 (30 bytes) into $B1B2, Magic, checksum, echo",hand 2026-11-08
+01,4E2E,Sram_LoadIdCard,C,bank 1: the ID card record $AFB8 ($12 bytes) into $DADB,hand 2026-11-08
+01,4E4D,Sram_StoreIdCard,C,"bank 1: $DADB ($12 bytes) into $AFB8, Magic, checksum, echo",hand 2026-11-08
+01,4E97,Counters_Load,C,bank 0: the counters $B000 ($12 bytes) into $DAC9,hand 2026-11-08
+01,4EB6,Counters_Store,C,bank 0: $DAC9 ($12 bytes) into $B000 and the Magic at $B012,hand 2026-11-08
+01,4EE8,Photo_LoadThumbToVram,I,"photo slot A decoded by 00:24E0 into $C000, $380 bytes into tiles $9000, its information into $DA52",hand 2026-11-08
+01,4F25,Photo_LoadWithFrame,I,decodes 17:7800 (00:02B1) and the photo slot A (00:0293) into the buffer at $C000,hand 2026-11-08
+01,4F6F,Photo_LoadToVramScreenOff,C,as Photo_LoadToBufferAndVram with Copy_DEtoHL (screen off),hand 2026-11-08
 01,5000,Data_01_5000,C,"read in the core runs by 01:59F6, 01:5957, 01:5A05, 01:591E ...",kitty_types
+01,5030,Puzzle15_ScriptSetPtrByItem,C,script callback: hFFE3-hFFE4 = word [$D8F4] of 01:5046,hand 2026-11-08
 01,5046,Data_01_5046,C,"read in the core runs by 01:59F6, 01:5030, 01:5998, 01:591E ...",kitty_types
+01,5068,Puzzle15_ScriptSetMapPtr,C,script callback: Puzzle15_SetMapPtr,hand 2026-11-08
 01,5074,Data_01_5074,C,"read in the core runs by 01:59F6, 01:5030, 01:5998, 01:591E ...",kitty_types
+01,508A,Puzzle15_ScriptSetMapPtrPrev,I,script callback: Puzzle15_SetMapPtrPrev and the cell of Puzzle15_CellAddrPrev,hand 2026-11-08
 01,50B8,Data_01_50B8,C,"read in the core runs by 00:22B6, 01:59F6, 01:5998, 01:5911 ...",kitty_types
 01,510A,Data_01_510A,C,"read in the core runs by 01:59F6, 01:5957, 01:5A05, 01:58F7 ...",kitty_types
+01,522A,Script_LoadCounterD97B,C,script callback: hFFE9 = $D97B,hand 2026-11-08
+01,5231,Script_SaveCounterD97B,C,script callback: $D97B = hFFE9,hand 2026-11-08
+01,5238,Script_SetD97C,C,"script callback: $D97C = next byte, skip one",hand 2026-11-08
+01,523F,Script_Nop523F,C,ret,hand 2026-11-08
 01,5240,Data_01_5240,C,read in the core runs by 01:5998,kitty_types
+01,5244,Script_ClearD8E0,C,script callback: $D8E0 = 0,hand 2026-11-08
 01,5280,Data_01_5280,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ...",kitty_types
 01,533C,Data_01_533C,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:5998 ...",kitty_types
+01,5434,Menu_ScriptOnItemChange,I,when $D8F4 differs from hFFEA: hFFEA = $D8F4 and the script 01:5443 is started (00:2263),hand 2026-11-08
 01,5443,Data_01_5443,C,"read in the core runs by 01:59F6, 01:5A05, 01:5911, 01:5957 ...",kitty_types
+01,54A3,NameCard_ScriptFillD810,C,script callback: $34 bytes of $A8 at $D810,hand 2026-11-08
+01,54B3,NameCard_ScriptStepRight,C,script callback: $D800 + $20,hand 2026-11-08
+01,54BD,NameCard_ScriptStartRight,I,"script callback: $D800 = $40, hFFEA-hFFEB from NameCard_LoadBackgroundTiles with $D934: start of a page turn",hand 2026-11-08
+01,54D7,NameCard_ScriptDrawStep,I,"script callback: $D800 + $20, then 00:0BBB with [$D800] + $A0 and the address in hFFEA",hand 2026-11-08
+01,54EE,NameCard_ScriptEndTurn,C,"script callback: $D800 = 0, ModeState_Set $0A / $01",hand 2026-11-08
 01,54FE,Data_01_54FE,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ...",kitty_types
+01,5576,NameCard_ScriptNop5576,C,ret (code after it not traced),hand 2026-11-08
 01,5589,Data_01_5589,C,read in the core runs by 01:5998,kitty_types
+01,558D,NameCard_ScriptFillD810_B,C,the same as 01:54A3,hand 2026-11-08
+01,559D,NameCard_ScriptStepLeft,C,script callback: $D800 - $20,hand 2026-11-08
+01,55A7,NameCard_ScriptStartLeft,I,as 01:54BD with $D800 = $C0,hand 2026-11-08
+01,55C1,NameCard_ScriptDrawStepLeft,I,as 01:54D7 subtracting,hand 2026-11-08
+01,55D8,NameCard_ScriptEndTurn_B,C,the same as 01:54EE,hand 2026-11-08
 01,55E8,Data_01_55E8,C,"read in the core runs by 01:59F6, 01:5911, 01:5A05, 01:591E ...",kitty_types
+01,5660,NameCard_ScriptNop5660,C,ret (code after it not traced),hand 2026-11-08
 01,5673,Data_01_5673,C,"read in the core runs by 01:5998, 00:22B6",kitty_types
+01,567A,RecordBook_VineFrame,C,per-frame routine of a vine slot: ends the slot (hFFDA-hFFDB = 0) when hFFEC reaches $14,hand 2026-11-08
+01,5686,RecordBook_CountSetLoop,C,"tail of the count routines: hFFE9 = A (the loop count), skips the jump word",hand 2026-11-08
+01,568C,RecordBook_CountNone,C,tail of the count routines: jumps to the word (none of this kind),hand 2026-11-08
 01,5691,RecordBook_CountHundreds,C,"flowers of the first kind: the hundreds of the 4-digit BCD count in hFFEA-EB, 0-19, 20 from 2,000 on; 0 skips the kind",hand 2026-11-08
 01,56B1,RecordBook_CountTens,C,flowers of the second kind: the tens digit of hFFEA,hand 2026-11-08
 01,56BD,RecordBook_CountUnits,C,flowers of the third kind: the units digit of hFFEA,hand 2026-11-08
@@ -153,17 +213,51 @@ bank,addr,name,conf,note,source
 01,57B7,RecordBook_VineReceived,C,vine script of the received counter (descriptor at 01:57C1),hand 2026-11-08
 01,57C5,RecordBook_GetPrintedX6,C,hFFEA-EB += 6 x photos printed ($DACF-DAD0); BGB: 1 print shows 6 flowers,hand 2026-11-08
 01,57E4,RecordBook_VinePrinted,C,vine script of the printed counter (descriptor at 01:57EE),hand 2026-11-08
+01,5802,ScriptCmd_SetD8E0FF,C,$D8E0 = $FF,hand 2026-11-08
+01,5809,ScriptCmd_AddE3,C,hFFE3-hFFE4 + the next word,hand 2026-11-08
 01,581E,Data_01_581E,C,"read in the core runs by 01:59F6, 01:5998, 01:591E, 01:5911 ...",kitty_types
+01,58B2,ScriptCmd_Sound,C,"{id, channel 0-3}: the sound id into $D060 / $D068 / $D070 / $D078",hand 2026-11-08
 01,58B9,JumpTable_01_58B9,C,inline jump table (4 words; tools/kitty_trace.py),kitty_types
+01,58C1,ScriptCmd_SoundCh0,C,channel 0 of ScriptCmd_Sound: $D060,hand 2026-11-08
+01,58C7,ScriptCmd_SoundCh1,C,channel 1 of ScriptCmd_Sound: $D068,hand 2026-11-08
+01,58CD,ScriptCmd_SoundCh2,C,channel 2 of ScriptCmd_Sound: $D070,hand 2026-11-08
+01,58D3,ScriptCmd_SoundCh3,C,channel 3 of ScriptCmd_Sound: $D078,hand 2026-11-08
+01,58DC,ScriptCmd_End,C,"hFFDA-hFFDB = 0 (the slot is free), stops",hand 2026-11-08
+01,58E9,ScriptCmd_Wait,C,"BC = the next word (frames to wait), stops for this frame",hand 2026-11-08
+01,58F7,ScriptCmd_Jump,C,HL = the next word,hand 2026-11-08
+01,58FC,ScriptCmd_SetLoop,C,hFFE9 = the next byte,hand 2026-11-08
+01,5901,ScriptCmd_Loop,C,hFFE9 - 1; jumps to the next word while not 0,hand 2026-11-08
+01,590C,ScriptCmd_SetE8,C,hFFE8 = the next byte,hand 2026-11-08
+01,5911,ScriptCmd_SetE3,C,hFFE3-hFFE4 = the next word,hand 2026-11-08
+01,5919,ScriptCmd_SetE5,C,hFFE5 = the next byte,hand 2026-11-08
+01,591E,ScriptCmd_SetE1,C,hFFE1-hFFE2 = the next word,hand 2026-11-08
+01,593A,ScriptCmd_AddEC,C,hFFEC + the next byte,hand 2026-11-08
+01,5942,ScriptCmd_AddE3_B,C,hFFE3-hFFE4 + the next word (as 01:5809),hand 2026-11-08
+01,5957,ScriptCmd_JumpByByte,C,reads the byte at the address of the next word and jumps through the word table that follows,hand 2026-11-08
+01,5969,ScriptCmd_Ret5969,C,ret,hand 2026-11-08
 01,596C,ScriptSlots_Clear,C,empties the 6 script slots of 20 bytes at $DC67 (the record book calls it on entry: BGB writes 01:5975/5976 at every visit),hand 2026-11-08
 01,597E,ScriptSlots_Add,C,"DE = {script; per-frame routine}: fills the first free slot of $DC67, script pointer at offsets 2-3",hand 2026-11-08
 01,59C6,ScriptSlots_Run,C,runs one step of each busy slot of $DC67 (far called from banks 0 and 7),hand 2026-11-08
+01,5A2B,ScriptSlot_LoadToHram,C,20 bytes at HL into hFFDA-hFFED,hand 2026-11-08
+01,5A36,ScriptSlot_SaveFromHram,C,hFFDA-hFFED into the 20 bytes at HL,hand 2026-11-08
 01,6050,Data_01_6050,C,read in the core runs by 00:2397,kitty_types
 01,67D0,Data_01_67D0,C,read in the core runs by 01:733C,kitty_types
+01,67D4,Number_DrawTwoDigits,C,A as two BCD digits (00:0C9A) with the 8x8 digits of 0C:7C40 at DE (HBlank copy),hand 2026-11-08
+01,67F6,Number_DrawDigit,C,digit A of 0C:7C40 into HL,hand 2026-11-08
+01,680C,PrintMenu_DrawCount,I,[$D94F] as two tall digits of 0C:7E40 into $8400,hand 2026-11-08
+01,6832,Number_DrawTallDigit,C,tall digit A of 0C:7E40 into HL,hand 2026-11-08
+01,684C,PrintFrame_Select,I,the 3-byte record [$D935] of 01:687D into $D386 / $D38A (the records read by TakePhotos_DrawRows*),hand 2026-11-08
 01,687D,Data_01_687D,C,read in the core runs by 01:688F,kitty_types
+01,688F,PrintFrame_LoadTiles,I,tiles of the record A of 01:687D into $9000,hand 2026-11-08
+01,68CE,PrintFrame_LoadPart,I,the record A of 01:687D + $3C0,hand 2026-11-08
+01,6941,Print_SetFrameSide,I,by [$D933] odd or even: pointers $D3F4-$D3F6,hand 2026-11-08
+01,6969,Print_LoadFrameGfx,I,Copy_FarInline from 26:5C00 and from 0D:6000 or 0D:6400 by [$D933] parity,hand 2026-11-08
+01,6991,Print_LoadItemPicture,I,the pointer [$D98B] of 01:69DD: $230 bytes into $CBB0,hand 2026-11-08
 01,69AD,Data_01_69AD,C,read in the core runs by 00:0245,kitty_types
 01,69DD,Data_01_69DD,C,"read in the core runs by 01:6991, 01:72D5, 01:6A37, 01:7226",kitty_types
 01,6A2B,Data_01_6A2B,C,"read in the core runs by 01:72D5, 01:6A37, 01:7226",kitty_types
+01,6A37,PrintScript_NextState,C,"B = 6 (printing), C = the next byte of the script [$D93B]: the next state",hand 2026-11-08
+01,6A4C,PrintScript_SameState,C,"B = 6, C = the last byte read again",hand 2026-11-08
 01,6A62,Mode06_State00,C,handler of state $00 of mode $06 (word 0 of Mode06_StateTable),modes
 01,6A7C,Data_01_6A7C,C,read in the core runs by 00:0245,kitty_types
 01,6A86,Data_01_6A86,C,read in the core runs by 00:0245,kitty_types
