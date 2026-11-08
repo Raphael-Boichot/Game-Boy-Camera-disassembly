@@ -818,3 +818,144 @@ bank,addr,name,conf,note,source
 02,7FB9,Obj_NullCallback,C,"ret: the callback of objects that do nothing each frame",hand 2026-11-08
 02,7FC2,Objects_ClearAll,C,"00:20D4, then the 16 object slots at $DAEE cleared (23 bytes each); called by every screen set-up",hand 2026-11-08
 02,7EA2,Fade_SetModeFromObject,C,"the fade object at its end: mode hFF8D = hFFD4 and state hFF8E = hFFD2 (its parameters from $0B16 / $0B22); the only way a fade changes the mode",hand 2026-11-08
+00,0008,Rst08_WaitVBlank,C,"rst $08: with the screen on, halts until the VBlank flag hFF9C is set (same code as the Japanese Rst08_WaitVBlank)",hand 2026-11-08
+00,0010,Rst10_WaitFlagSet,C,"rst $10: clears [HL] and halts until it is set again",hand 2026-11-08
+00,0018,Rst18_JumpTable,C,"rst $18: jumps to word A of the inline table after the call",hand 2026-11-08
+00,0040,Vec_VBlank,C,"interrupt vector: jp 00:1AE0",hand 2026-11-08
+00,0048,Vec_Stat,C,"interrupt vector: jp 00:18D3",hand 2026-11-08
+00,0050,Vec_Timer,C,"interrupt vector: jp Link_TimerIrq",hand 2026-11-08
+00,0058,Vec_Serial,C,"interrupt vector: jp 00:1BDA",hand 2026-11-08
+00,0060,Vec_Joypad,C,"interrupt vector: jp 00:1BF4",hand 2026-11-08
+00,01F2,Mem_ZeroInline,C,"inline {address, length}: that many bytes set to 0",hand 2026-11-08
+00,0232,Mem_FillByte,C,"BC bytes of E at HL",hand 2026-11-08
+00,023A,Mem_FillWord,C,"BC bytes of the pattern E, D at HL (used by Sram_Format with DE = 0)",hand 2026-11-08
+00,0276,Copy_FarInverted,C,"bank A: BC bytes from DE to HL, each complemented (xor $FF)",hand 2026-11-08
+00,0293,Copy_Unrolled,I,"unrolled copy of $20 groups of bytes from DE to HL",hand 2026-11-08
+00,02B1,Copy_FarUnrolled,I,"Copy_Unrolled from bank A",hand 2026-11-08
+00,035E,Delay_Inline,C,"inline word BC: Delay_Frames_Busy with that count",hand 2026-11-08
+00,0375,Lcd_Off,C,"with the screen on: STAT interrupts off, waits for line $91, LCDC off",hand 2026-11-08
+00,03A2,Mem_Copy,C,"BC bytes from HL to DE",hand 2026-11-08
+00,03C1,Oam_ClearShadow,C,"every OAM entry of the shadow $D600 hidden (y = $F0)",hand 2026-11-08
+00,03D5,Oam_HideUnused,C,"the OAM shadow entries from [$D880] on hidden (y = $F0)",hand 2026-11-08
+00,056F,Vram_CopyBytesSafe,I,"copies from DE to HL during HBlank (Vram_WaitHBlankLine, then mode 0/1)",hand 2026-11-08
+00,05E3,Vram_CopyBytesSafeB,I,"the same with another count",hand 2026-11-08
+00,077D,FrameRec_LoadTiles,I,"frame A: the 6-byte record A of 05:69E7 (bank 5) and its tiles (frames $2C and $2F have their own path); FramePick_Load",hand 2026-11-08
+00,07CE,FrameRec_LoadMap,I,"frame A: the map of record A of 05:69E7",hand 2026-11-08
+00,0860,FrameRec_SetRowRecords,I,"frame A: the row records of record A of 05:69E7 into $D386 (read by TakePhotos_DrawRows*)",hand 2026-11-08
+00,08F2,Map_WritePairsPlusA0Safe,I,"byte pairs from DE plus $A0 written at HL during HBlank",hand 2026-11-08
+00,0924,FrameRec_LoadDefault,I,"one tile of 23:7530 into $8FE0, then the map of frame $2F",hand 2026-11-08
+00,0939,FrameRec_LoadTilesAndMap,C,"FrameRec_LoadTiles then FrameRec_LoadMap with the same A",hand 2026-11-08
+00,0942,FrameRec_LoadTilesScreenOff,I,"FrameRec_LoadTiles with plain copies (screen off)",hand 2026-11-08
+00,0993,FrameRec_LoadMapScreenOff,I,"FrameRec_LoadMap with plain copies (screen off)",hand 2026-11-08
+00,0A0D,Map_WritePairsPlusA0,I,"08F2 with plain writes (screen off)",hand 2026-11-08
+00,0A30,FrameRec_LoadDefaultScreenOff,I,"FrameRec_LoadDefault with plain copies",hand 2026-11-08
+00,0A4E,FrameRec_SetRowRecordsScreenOff,I,"FrameRec_SetRowRecords (screen off variant)",hand 2026-11-08
+00,0A82,MapRows_Copy14,C,"14-byte rows from the records of [$D386] (bank [$D388]) into the map at HL",hand 2026-11-08
+00,0ABA,MapRows_Copy7,C,"7-byte rows from the records of [$D386] into the map at HL",hand 2026-11-08
+00,0ABE,MapRows_Copy13,C,"13-byte rows from the records of [$D386] into the map at HL",hand 2026-11-08
+00,0AF9,Mode_SaveReturnD8F2,C,"$D8F2-$D8F3 = B, C (a mode and state to return to)",hand 2026-11-08
+00,0B02,Message_Show,C,"$D8EC = A, then a fade to mode $14 state $00 (the message screen)",hand 2026-11-08
+00,0B0D,Mode_SaveReturnD93D,C,"$D93D-$D93E = B, C (a mode and state to return to)",hand 2026-11-08
+00,0B16,Fade_GoTo,C,"fade object 02:7ECA with the parameters B (mode) and C (state), then mode $1E (the fade screen); Fade_SetModeFromObject sets B / C at its end",hand 2026-11-08
+00,0B22,Fade_GoToB,C,"the same with the fade object 02:7F91",hand 2026-11-08
+00,0B2E,Fade_GoToC,C,"the same with the fade object 02:7EE8 (not run in the core)",hand 2026-11-08
+00,0B69,Copy_Unrolled_B,I,"unrolled copy like 00:0293",hand 2026-11-08
+00,0B7B,Copy_PictureHalfRows,C,"bank A: seven blocks of $80 bytes from DE to HL, $100 apart (half-width picture rows into a 16-tile-wide buffer)",hand 2026-11-08
+00,0BBB,Map_CopyColumnToD810,I,"a column of the map record at HL (bank, offset A / 8) into $D810",hand 2026-11-08
+00,0C23,Mul_8x8,C,"HL = A x C (B = 0)",hand 2026-11-08
+00,0C25,Mul_8x16,C,"HL = A x BC (shift and add)",hand 2026-11-08
+00,0C9A,Bin_ToBcd,C,"A to BCD: B = hundreds, C = tens and units",hand 2026-11-08
+00,0CB4,Bcd_Add,C,"C bytes of BCD at HL + DE (daa), low byte first; carry out",hand 2026-11-08
+00,0CD3,Bcd_Sub,C,"C bytes of BCD at HL - DE (daa), low byte first; carry when negative",hand 2026-11-08
+00,0DB7,Prn_ClearTxFlags,C,"same code as the Japanese Prn_ClearTxFlags (00:1927)",hand 2026-11-08
+00,1095,Prn_AddToChecksumDE,C,"same code as the Japanese Prn_AddToChecksumDE (00:1BF4)",hand 2026-11-08
+00,1231,Prn_RestoreHeaderPtr,C,"same code as the Japanese Prn_RestoreHeaderPtr (00:1873)",hand 2026-11-08
+00,1680,Keys_SetRepeatInline,C,"inline 2 bytes: the key repeat delays $D8D6-$D8D7",hand 2026-11-08
+00,168B,Joy_Read,C,"reads the joypad (P1) into $D8D8, the old keys into $D8DB, new keys and repeats",hand 2026-11-08
+00,1717,VramQueue_Run,I,"runs the queue of copies at $D700 (records: address, bank, ...)",hand 2026-11-08
+00,18E7,Stat_Idle,C,"STAT callback that does nothing (jp 00:18DE)",hand 2026-11-08
+00,18EA,Stat_SetIdle,C,"$D88A = $FF and the STAT callback 00:18E7",hand 2026-11-08
+00,18F5,Stat_TileToggle,C,"STAT callback: from line hFFA8 switches the tile data area at a line (same code as the Japanese Stat_01_TileDataToggle)",hand 2026-11-08
+00,1918,Stat_SetTileToggleAt4F,C,"line $4F, callback Stat_TileToggle",hand 2026-11-08
+00,1923,Stat_SetTileToggleAt4F_B,C,"the same through 00:18C6",hand 2026-11-08
+00,192E,Stat_TileToggleB,C,"STAT callback like Stat_TileToggle (another register pattern)",hand 2026-11-08
+00,198C,Stat_TileToggleC,C,"STAT callback like Stat_TileToggle (another register pattern)",hand 2026-11-08
+00,19EA,Stat_TileToggleD,C,"STAT callback like Stat_TileToggle (another register pattern)",hand 2026-11-08
+00,1A47,Stat_TileToggleE,C,"STAT callback like Stat_TileToggle (another register pattern)",hand 2026-11-08
+00,195B,Stat_TileToggleAt7F,C,"STAT callback: the switch at line $7F",hand 2026-11-08
+00,19B8,Stat_TileToggleAt4F,C,"STAT callback: the switch at line $4F",hand 2026-11-08
+00,1A16,Stat_TileToggleAt6F,C,"STAT callback: the switch at line $6F",hand 2026-11-08
+00,1981,Stat_SetTileToggleBAt4F,C,"line $4F, callback Stat_TileToggleB",hand 2026-11-08
+00,19DF,Stat_SetTileToggleCAt1F,C,"line $1F, callback Stat_TileToggleC",hand 2026-11-08
+00,1A3C,Stat_SetTileToggleDAt07,C,"line $07, callback Stat_TileToggleD",hand 2026-11-08
+00,1A6A,Stat_SetTileToggleEAt4F,C,"line $4F, callback Stat_TileToggleE",hand 2026-11-08
+00,1A75,Stat_SetTileToggleAt17,C,"line $17, callback Stat_TileToggle",hand 2026-11-08
+00,1A80,Stat_SetTileToggleAt27,C,"line $27, callback Stat_TileToggle",hand 2026-11-08
+00,1A8B,Stat_SetTileToggleAt37,C,"line $37, callback Stat_TileToggle",hand 2026-11-08
+00,1A96,Stat_SetTileToggleAt47,C,"line $47, callback Stat_TileToggle",hand 2026-11-08
+00,1AA1,Stat_SetTileToggleAt57,C,"line $57, callback Stat_TileToggle",hand 2026-11-08
+00,1AAC,Stat_SetTileToggleAt67,C,"line $67, callback Stat_TileToggle",hand 2026-11-08
+00,1AC2,Far_ReturnJump,C,"jp Far_Return",hand 2026-11-08
+00,1AC5,Frame_UpdateAll,C,"Object_RunAll, ScriptSlots_Run, Objects_DrawAll, Oam_HideUnused",hand 2026-11-08
+00,1C8C,Script_SetD8E0FF,C,"$D8E0 = $FF (script callback)",hand 2026-11-08
+00,1C93,Script_ClearD882Bit3Wait,C,"$D882 bit 3 cleared, waits 1 frame",hand 2026-11-08
+00,1C9F,Script_SetD882Bit3Wait,C,"$D882 bit 3 set, waits 1 frame",hand 2026-11-08
+00,1CB1,Obj_Menu07Cursor,C,"Menu07_CursorCallback",hand 2026-11-08
+00,1D47,SlideShow_ObjSaveD907,C,"hFFD8 = $D907 (script callback)",hand 2026-11-08
+00,1D4E,SlideShow_ObjFollowD907,C,"restarts the script 00:1CD4 when $D907 changes",hand 2026-11-08
+00,1D96,SlideShow_ObjSaveD908,C,"hFFD8 = $D908 (script callback)",hand 2026-11-08
+00,1D9D,SlideShow_ObjFollowD908,C,"restarts the script 00:1D62 when $D908 changes",hand 2026-11-08
+00,1EBA,ObjCmd_Sound,C,"{id, channel 0-3}: the sound into $D060 / $D068 / $D070 / $D078",hand 2026-11-08
+00,1EC9,ObjCmd_SoundCh0,C,"channel 0 of ObjCmd_Sound: $D060",hand 2026-11-08
+00,1ECF,ObjCmd_SoundCh1,C,"channel 1 of ObjCmd_Sound: $D068",hand 2026-11-08
+00,1ED5,ObjCmd_SoundCh2,C,"channel 2 of ObjCmd_Sound: $D070",hand 2026-11-08
+00,1EDB,ObjCmd_SoundCh3,C,"channel 3 of ObjCmd_Sound: $D078",hand 2026-11-08
+00,1EE4,ObjCmd_SetDC61,C,"$DC61-$DC62 = the next word",hand 2026-11-08
+00,1EEE,ObjCmd_SetDC63,C,"$DC63-$DC64 = the next word",hand 2026-11-08
+00,1EF8,ObjCmd_SetDC65,C,"$DC65-$DC66 = the next word",hand 2026-11-08
+00,1F02,ObjCmd_End,C,"hFFC3-hFFC4 = 0 (the slot is free), stops",hand 2026-11-08
+00,1F09,ObjCmd_Halt,C,"stays on this command ($7FFF frames, HL back by 2)",hand 2026-11-08
+00,1F10,ObjCmd_Wait,C,"BC = the next word (frames to wait)",hand 2026-11-08
+00,1F16,ObjCmd_SetCallback,C,"hFFC7-hFFC8 = the next word (the per-frame callback)",hand 2026-11-08
+00,1F1E,ObjCmd_Jump,C,"HL = the next word",hand 2026-11-08
+00,1F25,ObjCmd_SetLoop,C,"hFFD7 = the next byte",hand 2026-11-08
+00,1F2A,ObjCmd_Loop,C,"hFFD7 - 1; jumps to the next word while not 0",hand 2026-11-08
+00,1F3A,ObjCmd_SetPos,C,"hFFD2 / hFFD4 = the next two bytes, fractions hFFD1 / hFFD3 = 0",hand 2026-11-08
+00,1F47,ObjCmd_SetPosRel,C,"hFFD2 / hFFD4 = hFFD8 / hFFD9 + the next two bytes",hand 2026-11-08
+00,1F65,ObjCmd_SetFrac,C,"hFFD1 / hFFD3 = the next two bytes",hand 2026-11-08
+00,1F6D,ObjCmd_SetSpeed,C,"hFFCB-hFFCC = the next word (speed)",hand 2026-11-08
+00,1F75,ObjCmd_SetD8,C,"hFFD8 = the next byte",hand 2026-11-08
+00,1F7F,ObjCmd_SetSprite,C,"hFFCD-hFFCE = the next word (the sprite layout)",hand 2026-11-08
+00,1F98,ObjCmd_JumpIfBits,C,"{address, mask, target}: jumps when [address] & mask is not 0",hand 2026-11-08
+00,1FA2,ObjCmd_JumpIfNoBits,C,"{address, mask, target}: jumps when [address] & mask is 0",hand 2026-11-08
+00,1FCC,ObjCmd_CopyAtLine20,I,"waits for line $20, then a copy from the record that follows",hand 2026-11-08
+00,2009,ObjCmd_JumpByByte,C,"reads the byte at the address of the next word and jumps through the word table that follows",hand 2026-11-08
+00,204A,ObjCmd_StartSlotScript,C,"ScriptSlots_Add with the next word",hand 2026-11-08
+00,20D4,Objects_Freeze,C,"$DC60 = $FF (Object_RunAll does nothing)",hand 2026-11-08
+00,20DA,Objects_Unfreeze,C,"$DC60 = 0",hand 2026-11-08
+00,2165,Obj_LoadSlotToHram,C,"the 23 bytes of the slot at HL into hFFC3-hFFD9",hand 2026-11-08
+00,2170,Obj_SaveSlotFromHram,C,"hFFC3-hFFD9 into the 23 bytes at HL",hand 2026-11-08
+00,217B,Obj_ApplySpeed,C,"position (hFFD1-hFFD4) + speed (hFFCB-hFFCC)",hand 2026-11-08
+00,219C,Obj_DrawSprite,C,"bank A: the OAM entries of the sprite layout at HL at the object position, into the OAM shadow from [$D880]",hand 2026-11-08
+00,21BE,Objects_DrawAll,I,"draws the sprite of every visible slot of $DAEE (each frame after Object_RunAll)",hand 2026-11-08
+00,2212,Obj_End,C,"Obj_ClearCallback and the end script 02:7FC0",hand 2026-11-08
+00,221C,Obj_ClearCallback,C,"hFFC7-hFFC8 = Obj_NullCallback",hand 2026-11-08
+00,2225,Obj_SetCallback,C,"hFFC7-hFFC8 = DE",hand 2026-11-08
+00,222C,Obj_HideSprite,C,"hFFCF-hFFD0 = 0",hand 2026-11-08
+00,223C,Obj_Sound,C,"{id, channel 0-3} at HL: the sound into $D060 / $D068 / $D070 / $D078",hand 2026-11-08
+00,224B,Obj_SoundCh0,C,"channel 0 of Obj_Sound: $D060",hand 2026-11-08
+00,2251,Obj_SoundCh1,C,"channel 1 of Obj_Sound: $D068",hand 2026-11-08
+00,2257,Obj_SoundCh2,C,"channel 2 of Obj_Sound: $D070",hand 2026-11-08
+00,225D,Obj_SoundCh3,C,"channel 3 of Obj_Sound: $D078",hand 2026-11-08
+00,2263,ScriptSlot_StartScript,C,"the slot script hFFDC-hFFDD = DE, hFFE1 = 0, hFFE0 = 1",hand 2026-11-08
+00,2270,ScriptSlots_Tick,I,"goes over the 6 script slots of $DC67",hand 2026-11-08
+00,22A6,Map_ScrollColumns,I,"bank A, B columns: hFF9E = B, hFF9F = $20 - B, ...",hand 2026-11-08
+00,2342,Obj_AToDE,C,"DE = A",hand 2026-11-08
+00,244E,Print_StreamFromD3F4,I,"reads from the pointer [$D3F4] in bank [$D3F6] (the print data stream)",hand 2026-11-08
+00,24A6,Rec3_Load24A6,I,"record A of 3 bytes (address, bank) loaded",hand 2026-11-08
+00,24E0,Img_ExpandThumb,I,"expands a stored picture into the buffer at HL ($C000) (7 x 2 x 8 loops)",hand 2026-11-08
+00,256F,Rec3_Load256F,I,"record A of 3 bytes (address, bank) loaded",hand 2026-11-08
+00,2A8F,Photo_MakeThumbnail,I,"$CE00 cleared, Img_ReduceToThumbnail of the picture into $CE00, ...",hand 2026-11-08
+00,2BB9,Stamp_BlitFromD9F3,I,"reads the stamp source [$D9F3] in bank [$D9F5] (part of Stamp_BlitOnPhoto)",hand 2026-11-08
+00,2C7F,Snd_Tick_Tramp,I,"calls 0F:5337 in the sound bank (the per-frame step of the driver, as the Japanese Snd_Tick_Tramp)",hand 2026-11-08
+00,2C6B,Snd_Init_Tramp,C,"calls Snd_Init (0F:5308) in the sound bank",hand 2026-11-08
