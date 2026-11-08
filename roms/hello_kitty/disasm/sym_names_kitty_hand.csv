@@ -181,3 +181,125 @@ bank,addr,name,conf,note,source
 06,6168,Tiles_Fill9000From1778,I,8 x the same 256 bytes of 17:7800 into $9000-$97FF,hand 2026-11-08
 06,69D5,Exchange_InitScreen,I,"screen off, objects and slots cleared, tiles 1D:5600 and map 32:7C80 loaded, $D9FE = 1 (not run in the core)",hand 2026-11-08
 06,6CBB,CardStats_IncDA64,I,"$DA64 / $DA65 + 1 (at most 99) by the bits 0 / 1 of $DAE8, then $DA66 + 1",hand 2026-11-08
+07,4312,FrameAnim_StepA,C,"animation channel A of the camera frame: timer $D903 - 1; at 0 the index $D8FF + 1 and the next 5-byte keyframe (DE + 5 x index) gives the new timer, $FF loops to 0; HL = the keyframe",hand 2026-11-08
+07,4336,FrameAnim_KeyAddrA,C,"HL = DE + 5 x [$D8FF]",hand 2026-11-08
+07,4340,FrameAnim_StepB,C,"animation channel B of the camera frame: timer $D904 - 1; at 0 the index $D900 + 1 and the next 5-byte keyframe (DE + 5 x index) gives the new timer, $FF loops to 0; HL = the keyframe",hand 2026-11-08
+07,4364,FrameAnim_KeyAddrB,C,"HL = DE + 5 x [$D900]",hand 2026-11-08
+07,436E,FrameAnim_StepC,C,"animation channel C of the camera frame: timer $D905 - 1; at 0 the index $D901 + 1 and the next 5-byte keyframe (DE + 5 x index) gives the new timer, $FF loops to 0; HL = the keyframe",hand 2026-11-08
+07,4392,FrameAnim_KeyAddrC,C,"HL = DE + 5 x [$D901]",hand 2026-11-08
+07,439C,FrameAnim_StepD,C,"animation channel D of the camera frame: timer $D906 - 1; at 0 the index $D902 + 1 and the next 5-byte keyframe (DE + 5 x index) gives the new timer, $FF loops to 0; HL = the keyframe",hand 2026-11-08
+07,43C0,FrameAnim_KeyAddrD,C,"HL = DE + 5 x [$D902]",hand 2026-11-08
+07,43CA,FrameCorner_DrawTopLeft,C,"FrameCorner_Draw at $C000 of the photo buffer",hand 2026-11-08
+07,43D3,FrameCorner_DrawTopRight,C,"FrameCorner_Draw at $C080 of the photo buffer",hand 2026-11-08
+07,43DC,FrameCorner_DrawBottomLeft,C,"FrameCorner_Draw at $C700 of the photo buffer",hand 2026-11-08
+07,43E5,FrameCorner_DrawBottomRight,C,"FrameCorner_Draw at $C780 of the photo buffer",hand 2026-11-08
+07,43EE,FrameCorner_Draw,C,"piece A at HL: $FC-$FF fill the corner with shade 0-3 (07:4461), else the 3-byte record A of [$D92D] (address, bank) drawn by 00:0B7B",hand 2026-11-08
+07,443B,Fill_PatternRow,C,"8 x 16 bytes of the 2-byte pattern DE at HL",hand 2026-11-08
+07,4461,Fill_CornerBlock,C,"seven Fill_PatternRow, $80 bytes apart",hand 2026-11-08
+07,448F,CameraFrame_RunType,C,"jump table 07:449C of 31 handlers by A (the frame type)",hand 2026-11-08
+07,44DC,CameraFrame_Type00to03,C,"frame types 0-3: steps channel A over the keyframes of 07:4501 by [$D92F], draws the four corners",hand 2026-11-08
+07,4513,CameraFrame_Type04,C,"frame type 4 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,452E,CameraFrame_Type05,C,"frame type 5 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,453F,CameraFrame_Type06,C,"frame type 6 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,455A,CameraFrame_Type07,C,"frame type 7 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4567,CameraFrame_Type08,C,"frame type 8 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4582,CameraFrame_Type09,C,"frame type 9 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4593,CameraFrame_Type10,C,"frame type 10 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,45AE,CameraFrame_Type11,C,"frame type 11 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,45BB,CameraFrame_Type12,C,"frame type 12 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,45DC,CameraFrame_Type13,C,"frame type 13 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,45FD,CameraFrame_Type14,C,"frame type 14 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4614,CameraFrame_Type15,C,"frame type 15 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4621,CameraFrame_Type16,C,"frame type 16 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4642,CameraFrame_Type17,C,"frame type 17 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4659,CameraFrame_Type18,C,"frame type 18 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4670,CameraFrame_Type19,C,"frame type 19 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,467D,CameraFrame_Type20,C,"frame type 20 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,46A8,CameraFrame_Type21,C,"frame type 21 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,46C9,CameraFrame_Type22,C,"frame type 22 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,46E0,CameraFrame_Type23,C,"frame type 23 of CameraFrame_RunType: steps one or two animation channels over a keyframe table of bank 7 and draws corners; some call 04:4A26 with an effect number",hand 2026-11-08
+07,4503,CameraFrame_Type24,C,"frame type 24: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,4505,CameraFrame_Type25,C,"frame type 25: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,4507,CameraFrame_Type26,C,"frame type 26: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,4509,CameraFrame_Type27,C,"frame type 27: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,450B,CameraFrame_Type28,C,"frame type 28: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,450D,CameraFrame_Type29,C,"frame type 29: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,450F,CameraFrame_Type30,C,"frame type 30: jr back into CameraFrame_Type00to03 (not run in the core)",hand 2026-11-08
+07,4511,CameraFrame_StubAfterTable,I,"jr into CameraFrame_Type00to03 like 07:4503-450F, but not in the table 07:449C",hand 2026-11-08
+07,46ED,FrameCorner_DrawSet,C,"the four corner pieces of record A (4 bytes) of 07:470B; first run in the 15 puzzle",hand 2026-11-08
+07,471F,Menu07_CursorCallback,C,"07:4725 then Far_Return",hand 2026-11-08
+07,4725,Menu07_CursorUpdate,C,"menu cursor object: the D-pad picks the next item from the 8-byte item records, A selects (as 02:4CFD)",hand 2026-11-08
+07,4894,SlideShow_SetInterval,I,"$D927 = byte [$D907] of 07:48A5; slide show settings (mode $12 state $02)",hand 2026-11-08
+07,49D1,SlideShow_FrameCallback,I,"00:1AC5 then B (sound $1A) leaves; frame callback set during the fade into the slide show",hand 2026-11-08
+07,4E59,StrawberryCh_SetCornerTable,C,"$D92D-$D92E = word [$D92A] (the channel) of 07:4E4B: the corner pieces of the channel",hand 2026-11-08
+07,4EF5,StrawberryCh_PickRandomPage,C,"$D92B = Rng_Scaled of byte [$D92A] of 07:4EEE: a random story page of the channel",hand 2026-11-08
+07,4F09,StrawberryCh_PageAddr,C,"HL = word [$D92B] of the page table of channel [$D92A] (07:4EE0)",hand 2026-11-08
+07,4F48,StrawberryCh_CheckAfford,C,"Kitts_CheckAfford with the price of channel [$D92A] (word of 07:4F3A)",hand 2026-11-08
+07,5091,StrawberryCh_StartMusic,C,"jump table by channel [$D92A] to the 7 sound requests below",hand 2026-11-08
+07,50A5,StrawberryCh_Music0,C,"channel 0: sound $0C into the request $D068",hand 2026-11-08
+07,50AF,StrawberryCh_Music1,C,"channel 1: sound $0A into the request $D068",hand 2026-11-08
+07,50B9,StrawberryCh_Music2,C,"channel 2: sound $09 into the request $D068",hand 2026-11-08
+07,50C3,StrawberryCh_Music3,C,"channel 3: sound $0B into the request $D068",hand 2026-11-08
+07,50CD,StrawberryCh_Music4,C,"channel 4: sound $08 into the request $D068",hand 2026-11-08
+07,50D7,StrawberryCh_Music5,C,"channel 5: sound $22 into the request $D068",hand 2026-11-08
+07,50E1,StrawberryCh_Music6,C,"channel 6: sound $0F into the request $D068",hand 2026-11-08
+07,543D,StrawberryCh_FrameCallbackA,I,"00:1AC5, then the keys unless $D8E0 or $D8D4 is set (A, ...); mode $11 state $02",hand 2026-11-08
+07,5477,StrawberryCh_FrameCallbackB,I,"the same with another key path (not run in the core)",hand 2026-11-08
+07,54B8,StrawberryCh_FrameCallbackC,I,"the same, B first (not run in the core)",hand 2026-11-08
+07,5569,Puzzle15_ResetBoard,C,"the 16 cells $D960-$D96F = 0, 1, ... 15 (solved)",hand 2026-11-08
+07,5576,Puzzle15_IsSolved,C,"Z when $D960-$D96F hold 0 ... 15 in order",hand 2026-11-08
+07,5586,Puzzle15_SavePos,C,"$D972-$D973 = $D970-$D971 (x, y of the empty cell)",hand 2026-11-08
+07,5595,Puzzle15_CellAddr,C,"HL = $D960 + x + 4 y of $D970-$D971",hand 2026-11-08
+07,55AB,Puzzle15_CellAddrPrev,C,"HL = $D960 + x + 4 y of $D972-$D973",hand 2026-11-08
+07,55C1,Puzzle15_DrawCell,I,"the piece of the cell at the cursor (value x 32 into 07:55FB) drawn into the map",hand 2026-11-08
+07,581B,Puzzle15_PosRecord,C,"HL = 07:57FB + 2 x + 8 y of $D970-$D971",hand 2026-11-08
+07,585B,Puzzle15_ScreenPosAddr,C,"HL = 07:583B + 2 x + 8 y of $D970-$D971",hand 2026-11-08
+07,5864,Puzzle15_ScreenPosAddrPrev,C,"the same of $D972-$D973",hand 2026-11-08
+07,587E,Puzzle15_CursorToCell,C,"hFFD2 / hFFD4 (object position) from Puzzle15_ScreenPosAddr",hand 2026-11-08
+07,58A3,Puzzle15_ScreenPosPrev,C,"BC from Puzzle15_ScreenPosAddrPrev",hand 2026-11-08
+07,58D1,Puzzle15_MapAddr,C,"HL = 07:58B1 + 2 x + 8 y of $D970-$D971",hand 2026-11-08
+07,58DA,Puzzle15_MapAddrPrev,C,"the same of $D972-$D973",hand 2026-11-08
+07,58F4,Puzzle15_SetMapPtr,C,"hFFE3-hFFE4 from Puzzle15_MapAddr",hand 2026-11-08
+07,58FE,Puzzle15_SetMapPtrPrev,C,"hFFE3-hFFE4 from Puzzle15_MapAddrPrev",hand 2026-11-08
+07,5927,Puzzle15_CopyPiece,C,"4 rows of 4 bytes from bank $26 at DE into the map at HL (rows $20 apart)",hand 2026-11-08
+07,593B,Puzzle15_DrawBoard,C,"the tiles of each cell value (7C20 + 32 x value) for the 16 cells of $D960",hand 2026-11-08
+07,596F,Puzzle15_EmptyCellMapAddr,I,"the map address of the empty cell from 07:58B1 by $D970-$D971",hand 2026-11-08
+07,5996,Puzzle15_ScriptedKey,C,"the next key of the shuffle script 07:59AF + 16 x A + [$D979] written into $D8D9 (new keys), $D979 + 1: the board is shuffled by played moves",hand 2026-11-08
+07,5A10,Puzzle15_LoadPicture,I,"FrameCorner_DrawSet with $D97A, then copies; mode $0F state $01",hand 2026-11-08
+07,5A5C,Puzzle15_InitScreen,I,"Lcd_SetupInline and the screen set-up of the 15 puzzle",hand 2026-11-08
+07,5AB2,Puzzle15_DispatchA,I,"jump by $D974 (inline table)",hand 2026-11-08
+07,5ABE,Puzzle15_DispatchB,I,"jump by $D974 (inline table)",hand 2026-11-08
+07,5ACA,Puzzle15_LoadGfx,I,"Copy_FarInline of the puzzle graphics",hand 2026-11-08
+07,5B83,Puzzle15_FadeToState05,C,"ei, fade to mode $0F state $05 ($0B16)",hand 2026-11-08
+07,5B8C,Puzzle15_FadeToState0C,C,"frame callback 07:5BDB, fade to mode $0F state $0C",hand 2026-11-08
+07,5BDB,Puzzle15_FrameCallback,C,"Object_RunAll, ScriptSlots_Run, 00:21BE, 00:03D5, then a callback change when $D8E0 bit 2 is set",hand 2026-11-08
+07,5CB4,Puzzle15_SetState0A,C,"ModeState_Set $0F / $0A",hand 2026-11-08
+07,5CBD,Puzzle15_SetState0B,C,"ModeState_Set $0F / $0B",hand 2026-11-08
+07,5CC6,Puzzle15_SetState0C,C,"ModeState_Set $0F / $0C",hand 2026-11-08
+07,5CCF,Puzzle15_FrameCallback2,I,"Object_RunAll, ScriptSlots_Run, 00:21BE, 00:03D5, then the keys unless $D8D4 is set",hand 2026-11-08
+07,5E6B,Scratch_ClearSpots,C,"the 6 spots $D952-$D957 = 0",hand 2026-11-08
+07,5E78,Scratch_HasPrize3,I,"looks for a spot whose low nibble is 3",hand 2026-11-08
+07,5E8F,Scratch_DealSpots,I,"counters loaded, a random prize from the table of 07:5F05 into $D959, then free spots by 07:5EF1",hand 2026-11-08
+07,5EF1,Scratch_PickFreeSpot,C,"a random spot (Rng_Scaled 6) of $D952 that is still 0",hand 2026-11-08
+07,5F05,Scratch_PrizeTable,C,"HL = 07:5F41, or 07:5F21 when $DADA is not 0",hand 2026-11-08
+07,5F13,Scratch_PrizeTableB,C,"HL = 07:5F51, or 07:5F31 when $DADA is not 0",hand 2026-11-08
+07,5F6D,Scratch_PickCardArt,C,"one of two card pictures at random ($D95B), $230 bytes of bank $33 into $8F40",hand 2026-11-08
+07,5FC7,Scratch_ReloadCardArt,C,"the card picture $D95B again into $8F40",hand 2026-11-08
+07,6012,Scratch_FirstMarkedSpot,C,"the first spot with bit 7 set into $D8F4",hand 2026-11-08
+07,6034,Scratch_DrawSpots,I,"for spot 5 down to 0: the prize (low nibble) into $D95F and its drawing",hand 2026-11-08
+07,6242,Scratch_FindMarkedFwd,C,"B = index of the first spot of $D952 with bit 7 set (NZ), searching up",hand 2026-11-08
+07,6251,Scratch_FindMarkedBack,C,"the same searching down from $D957",hand 2026-11-08
+07,6260,Scratch_PrizeWord,C,"BC = word (A & $F) of 07:626F",hand 2026-11-08
+07,657B,KittHost_TextStep,I,"when hFF9D bit 0 is clear: the text of entry [$D946] of the pointer table [$D944]",hand 2026-11-08
+07,6668,KittHost_SetTextPtr,C,"$D941-$D942 = DE",hand 2026-11-08
+07,6671,KittHost_SetTablePtr,C,"$D944-$D945 = DE",hand 2026-11-08
+07,667A,KittHost_NextTextByte,C,"A = byte [$D943] of the text [$D941], $D943 + 1",hand 2026-11-08
+07,6728,KittHost_InitScreen,I,"screen off, objects and slots cleared, $D8E0 / $D946 / $D947 = 0, ...; mode $0E state $01",hand 2026-11-08
+07,6875,KittHost_PayPuzzle,C,"Kitts_CheckAfford $0025, then Kitts_Subtract $0025 (25 Kitts, the 15 puzzle)",hand 2026-11-08
+07,68C3,KittHost_Text1C,C,"$D943 = $1C, state 2",hand 2026-11-08
+07,6994,KittHost_Text1C_B,C,"$D943 = $1C, state 2",hand 2026-11-08
+07,699E,KittHost_StartPuzzle,C,"fade to mode $0F state $01 (the 15 puzzle)",hand 2026-11-08
+07,6A66,KittHost_PayScratch,C,"Kitts_CheckAfford $0010, then Kitts_Subtract $0010 (10 Kitts, the scratch card)",hand 2026-11-08
+07,6AB4,KittHost_Text10,C,"$D943 = $10, state 2",hand 2026-11-08
+07,6B25,KittHost_Text10_B,C,"$D943 = $10, state 2",hand 2026-11-08
+07,6B2F,KittHost_StartScratch,C,"fade to mode $10 state $01 (the scratch card)",hand 2026-11-08
