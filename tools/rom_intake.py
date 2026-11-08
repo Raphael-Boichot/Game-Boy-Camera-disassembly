@@ -6,6 +6,9 @@
 The Hello Kitty run (2026-11-07):
   tools/rom_intake.py $R/pocketcamera_kitty.gb --out roms/hello_kitty/intake --ref jp=$R/pocketcamera_jp.gb --ref proto=$R/pocketcamera_proto.gb \
       --ref us=$R/gbcam_usa_eu.gb --ref gold=$R/gbcam_gold.gb --exclusive jp,us --exclusive jp,proto
+The prototype run (2026-11-08, image as dumped):
+  tools/rom_intake.py $R/pocketcamera_proto.gb --out roms/prototype_debagame/intake --ref jp=$R/pocketcamera_jp.gb --ref us=$R/gbcam_usa_eu.gb \
+      --ref gold=$R/gbcam_gold.gb --ref kitty=$R/pocketcamera_kitty.gb --exclusive jp,kitty --no-rgbfix
 
 Writes into DIR:
   intake_header.csv   field, offset, raw bytes, value (the cartridge header $0100-$014F, checksums recomputed)
@@ -14,7 +17,8 @@ Writes into DIR:
                       shared_<ref>  bytes of the bank covered by a 16-byte window that occurs anywhere in the reference ROM
                                     (windows made of one repeated byte are ignored), i.e. content shared at any address
                       best_<ref>    the reference bank that holds most of those windows, and how many bytes it covers
-  intake_roundtrip.txt the mgbdis + rgbasm round trip with no symbol file (md5 of the rebuilt ROM)
+  intake_roundtrip.txt the mgbdis + rgbasm round trip with no symbol file (md5 of the rebuilt ROM); --no-rgbfix links without
+                      rgbfix, for an image whose header was never fixed (the prototype as dumped: global checksum 0, ROM size 256 KB)
 Prints a summary. The numbers are counts of bytes, recomputed from the files each run: quote them from the CSV.
 """
 import argparse, csv, hashlib, os, shutil, subprocess, sys, tempfile, collections
@@ -24,6 +28,7 @@ ap.add_argument('rom'); ap.add_argument('--out', required=True)
 ap.add_argument('--ref', action='append', default=[], help='NAME=PATH of a sibling ROM')
 ap.add_argument('--mgbdis', default='/home/claude/tc/mgbdis/mgbdis.py')
 ap.add_argument('--no-roundtrip', action='store_true')
+ap.add_argument('--no-rgbfix', action='store_true', help='link only: drop the rgbfix step of the mgbdis Makefile (a header left unfixed by the developers, e.g. the prototype as dumped)')
 ap.add_argument('--exclusive', action='append', default=[], help='A,B: also count the bytes shared with reference A and not with B, and the reverse')
 a = ap.parse_args()
 rom = open(a.rom, 'rb').read(); os.makedirs(a.out, exist_ok=True)
@@ -117,10 +122,14 @@ for c in cols:
 if not a.no_roundtrip:
     tmp = tempfile.mkdtemp(); base = os.path.join(tmp, 'rom.gb'); shutil.copy(a.rom, base)
     r = subprocess.run([sys.executable, a.mgbdis, '--output-dir', os.path.join(tmp, 'out'), base], capture_output=True, text=True)
+    if a.no_rgbfix and not r.returncode:   # rgbfix -v -p 255 rewrites the checksums and the ROM-size byte: an image whose header
+        mk = os.path.join(tmp, 'out', 'Makefile')   # was never fixed (global checksum 0) rebuilds byte-exact only without it
+        lines = open(mk).read().split('\n'); open(mk, 'w').write('\n'.join(l for l in lines if not l.strip().startswith('rgbfix')))
     r2 = subprocess.run(['make'], cwd=os.path.join(tmp, 'out'), capture_output=True, text=True) if not r.returncode else r
     built = os.path.join(tmp, 'out', 'game.gb')
     md5 = hashlib.md5(open(built, 'rb').read()).hexdigest() if os.path.exists(built) else 'no ROM built'
-    txt = 'mgbdis %s (no symbol file) + rgbasm %s: rebuilt md5 %s, original %s: %s\n' % (
+    txt = 'mgbdis %s (no symbol file) + rgbasm %s' + (' + rgblink, no rgbfix' if a.no_rgbfix else '') + ': rebuilt md5 %s, original %s: %s\n'
+    txt = txt % (
         subprocess.run(['git', '-C', os.path.dirname(a.mgbdis), 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip() or '?',
         subprocess.run(['rgbasm', '--version'], capture_output=True, text=True).stdout.strip(), md5, hashlib.md5(rom).hexdigest(),
         'byte-exact' if md5 == hashlib.md5(rom).hexdigest() else 'DIFFERENT')

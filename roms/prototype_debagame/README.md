@@ -6,7 +6,15 @@ MD5 `19b50a5f67ef4f0d015e7d813370756e` as dumped (`1d8097de3497db8b182bcd2a984b6
 
 The map above is drawn by `tools/status_maps.py` (grey-blue = not analysed yet; it fills in as names, types and a trace are added here; per-bank counts in `assets/layout_by_bank_proto.csv`).
 
-Not started: this folder will hold the symbol file and the tables of this ROM, built with the tools of the repository and the playbook [`HOWTO_NEW_ROM.md`](../../HOWTO_NEW_ROM.md). The ROM is not in the repository (supplied by the owner outside it).
+This folder will hold the symbol file and the tables of this ROM, built with the tools of the repository and the playbook [`HOWTO_NEW_ROM.md`](../../HOWTO_NEW_ROM.md). The ROM is not in the repository (supplied by the owner outside it).
+
+| Level | Status | Evidence |
+|---|---|---|
+| L0 | done (2026-11-08) | `intake/intake_roundtrip.txt`: mgbdis `95d951a` with no symbol file + rgbasm / rgblink 1.0.4 rebuild md5 `19b50a5f67ef4f0d015e7d813370756e`, **without rgbfix** |
+| L1-L6 | not started | |
+
+* **Round trip (C).** The standard mgbdis Makefile ends with `rgbfix -v -p 255`, which rebuilds the image as dumped with four header bytes changed: the ROM-size byte `$0148` (`$03` -> `$05`, the size of the padded file) and the three checksum bytes (`$014D` `$4C` -> `$4A`, `$014E-$014F` `$0000` -> `$6145`). The header bytes are data in the listing, so linking without rgbfix gives the image as dumped byte for byte (`tools/rom_intake.py --no-rgbfix`). The BGB copy rebuilds byte-exact with the standard Makefile (rgbfix leaves its already correct header unchanged). Any later build of this ROM (L1 checks, an L5 tree) must skip rgbfix too.
+* **Intake (C, `intake/intake_banks.csv`, `intake_header.csv`).** Command in `tools/rom_intake.py`; references: the Japanese, international, Gold and Hello Kitty ROMs. Of the 1,048,576 bytes, 348,519 are padding (runs of 16 or more equal `$00` / `$FF`); 177,724 are covered by a 16-byte window that also occurs somewhere in the Japanese ROM, 161,081 in the Hello Kitty ROM. Shared content is not shared code: much of the prototype is leftover text and copies of its own banks (the section on the source text above and the symbol tables below), and a 16-byte window can be a tile or a table.
 
 ## Two images: as dumped, and patched for BGB
 

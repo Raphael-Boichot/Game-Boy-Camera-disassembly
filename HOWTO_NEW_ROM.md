@@ -93,7 +93,7 @@ Order: own core with instrumentation first (fast, millions of frames), BGB secon
 * Read register writes at the right pc (`1F:525F`), not the last write of the register: later engine writes overwrite what you wanted.
 * A sym parser that expects upper-case hex silently found nothing: the claim "no open asset is displayed" was wrong for that reason. Parse hex case-insensitively and test the parser on a known label.
 * `pkill -f PATTERN` kills your own shell if PATTERN is in its command line: kill by PID.
-* A dump can come with a header-patched copy that an emulator accepts (the early prototype: MBC1 / 256 KB / no RAM as dumped, six header bytes patched for BGB). Byte-compare the two first, disassemble the image as dumped, and give the patched copy to the emulator only.
+* A dump can come with a header-patched copy that an emulator accepts (the early prototype: MBC1 / 256 KB / no RAM as dumped, six header bytes patched for BGB). Byte-compare the two first, disassemble the image as dumped, and give the patched copy to the emulator only. An image whose header was never fixed rebuilds byte-exact only when linked without rgbfix: `rgbfix -v -p 255` (the mgbdis Makefile) rewrites the checksums and the ROM-size byte (`tools/rom_intake.py --no-rgbfix`).
 * Pictures from the core are not evidence of a screen (VIEW band, one stamp slot wrong): take BGB screenshots.
 
 ## 8. Evidence discipline (what kept the README honest)
