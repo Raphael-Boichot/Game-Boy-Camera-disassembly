@@ -12,7 +12,8 @@ What it checks (each line of the report is one check)
   trees      the screen trees of the Japanese, international and Hello Kitty ROMs (tools/make_screen_trees.py) are redrawn and compared, and README.md shows them; the reachability maps are shown in the README of their ROM folder, not in README.md
   proto      roms/prototype_debagame (--rom-proto, the image as dumped): the symbol-table CSV, trace, types, copy sites, byte classes, names and
              pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
-             and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix
+             and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: port/observed_proto.md equals a fresh
+             tools/proto_observed.py run on port/cov_proto_runs.npz, and the run / BGB-replay counts its README quotes match
   port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
@@ -438,6 +439,22 @@ if A.rom_proto:
             mm = re.search(pat, PR)     # need= the L1 section of roms/prototype_debagame/README.md
             if not mm: bad('proto', 'roms/prototype_debagame/README.md no longer quotes the %s (need=%r)' % (what, pat))
             elif int(mm.group(1).replace(',', '')) != val: bad('proto', 'roms/prototype_debagame/README.md: %s quoted %s, the tools give %d' % (what, mm.group(1), val))
+        # L2: the union of the core runs against the trace (tools/proto_observed.py), and the BGB replays (tools/proto_bgb_replay.py)
+        p4 = _runp('tools/proto_observed.py', A.rom_proto, PD + 'port/trace_proto.json', PD + 'port/cov_proto_runs.npz', '--report', j('ob.md'))
+        if p4.returncode: bad('proto', 'tools/proto_observed.py failed: %s' % (p4.stderr or p4.stdout)[-300:])
+        else:
+            if open(PD + 'port/observed_proto.md', 'rb').read() != open(j('ob.md'), 'rb').read(): bad('proto', 'port/observed_proto.md is not what tools/proto_observed.py writes today')
+            else: ok('proto', 'observed_proto.md fresh')
+            mo = re.search(r'proto_observed: (\d+) of (\d+) instructions ran, (\d+) of (\d+) code bytes, (\d+) executed bytes outside the trace', p4.stdout)
+            bg = list(csv.DictReader(open(PD + 'port/bgb_game_seq_proto.csv')))
+            for what, val, pat in (('instructions run', int(mo.group(1)), r'([\d,]+) of the [\d,]+ traced instructions ran'),
+                                   ('code bytes run', int(mo.group(3)), r'([\d,]+) of the [\d,]+ bytes of proven code;'),
+                                   ('bytes outside the trace', int(mo.group(5)), r'([\d,]+) executed bytes lie outside the trace'),
+                                   ('BGB replays matching', sum(1 for r in bg if r['match'] == 'yes'), r'([\d,]+) of [\d,]+ replays end on'),
+                                   ('BGB replays', len(bg), r'[\d,]+ of ([\d,]+) replays end on')):
+                mm = re.search(pat, PR)     # need= the L2 section of roms/prototype_debagame/README.md
+                if not mm: bad('proto', 'roms/prototype_debagame/README.md no longer quotes the %s (need=%r)' % (what, pat))
+                elif int(mm.group(1).replace(',', '')) != val: bad('proto', 'roms/prototype_debagame/README.md: %s quoted %s, the files give %d' % (what, mm.group(1), val))
         if A.roundtrip:      # the image as dumped rebuilds only without rgbfix (its header was never fixed: prototype README, L0)
             rt = tempfile.mkdtemp(prefix='protort_'); shutil.copy(A.rom_proto, os.path.join(rt, 'pocketcamera_proto.gb')); shutil.copy(PD + 'pocketcamera_proto.sym', rt)
             r_ = subprocess.run([sys.executable, '/home/claude/tc/mgbdis/mgbdis.py', '--output-dir', os.path.join(rt, 'out'), os.path.join(rt, 'pocketcamera_proto.gb')], capture_output=True, text=True)
