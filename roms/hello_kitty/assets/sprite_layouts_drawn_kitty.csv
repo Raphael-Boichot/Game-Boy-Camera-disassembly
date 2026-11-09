@@ -1,0 +1,155 @@
+layout,screen,how
+03:4000,0E:13,neighbour
+03:4064,0E:13,neighbour
+03:40C8,0E:13,neighbour
+03:40F0,0E:13,neighbour
+03:41AC,0E:13,neighbour
+03:44B4,0E:0A,neighbour
+03:466C,0E:0A,neighbour
+03:4898,0A:01,best fit
+03:49A8,10:02,neighbour
+03:5160,03:02,neighbour
+03:5170,03:02,neighbour
+03:5180,03:02,neighbour
+03:5190,03:02,neighbour
+03:51A0,03:02,neighbour
+03:51B0,03:02,neighbour
+03:5208,02:01,neighbour
+03:522C,02:01,neighbour
+03:5280,02:01,neighbour
+03:5298,02:01,neighbour
+03:52B0,02:01,neighbour
+03:52C8,02:01,neighbour
+03:52F0,02:01,neighbour
+03:5300,02:01,neighbour
+03:5310,02:01,neighbour
+03:5BF0,02:06,neighbour
+03:5C10,02:06,neighbour
+03:5C34,02:06,neighbour
+03:5C58,02:06,neighbour
+03:5C7C,02:06,neighbour
+03:5C9C,02:06,neighbour
+03:5CBC,02:06,neighbour
+03:5CDC,02:06,neighbour
+03:5CFC,02:06,neighbour
+03:5D1C,02:06,neighbour
+03:5D70,02:06,best fit
+03:60C4,07:02,neighbour
+03:60C8,07:02,neighbour
+03:60CC,07:02,neighbour
+03:60D0,07:02,neighbour
+03:60D4,07:02,neighbour
+03:60D8,07:02,neighbour
+03:60DC,07:02,neighbour
+03:60E0,07:02,neighbour
+03:61E0,07:02,neighbour
+03:61FC,07:02,neighbour
+03:6218,07:02,neighbour
+03:6234,07:02,neighbour
+03:6250,07:02,neighbour
+03:626C,07:02,neighbour
+03:6288,07:02,neighbour
+03:62A4,07:02,neighbour
+03:62C0,07:02,neighbour
+03:62FC,07:02,neighbour
+03:633C,07:02,neighbour
+03:635C,07:02,neighbour
+03:639C,07:02,neighbour
+03:63BC,07:02,neighbour
+03:63DC,07:02,neighbour
+03:641C,07:02,neighbour
+03:643C,07:02,neighbour
+03:6524,07:02,neighbour
+03:656C,07:02,neighbour
+03:65B4,07:02,neighbour
+03:65FC,07:02,neighbour
+03:6640,07:02,neighbour
+03:6688,07:02,neighbour
+03:66D0,07:02,neighbour
+03:6714,07:02,neighbour
+03:675C,07:02,neighbour
+03:67A4,07:02,neighbour
+03:67EC,07:02,neighbour
+03:685C,07:02,neighbour
+03:68CC,07:02,neighbour
+03:696C,07:02,neighbour
+03:69CC,07:02,neighbour
+03:6A2C,07:02,neighbour
+03:6A94,07:02,neighbour
+03:6AF4,07:02,neighbour
+03:6B54,07:02,neighbour
+03:6BBC,07:02,neighbour
+03:6BCC,07:02,neighbour
+03:6BDC,07:02,neighbour
+03:6BEC,07:02,neighbour
+03:6C24,07:02,neighbour
+03:6C5C,07:02,neighbour
+03:6C64,07:02,neighbour
+03:6C6C,07:02,neighbour
+03:6C70,07:02,neighbour
+03:6C74,07:02,neighbour
+03:6CAC,07:02,neighbour
+03:6CE4,07:02,neighbour
+03:6D34,07:02,neighbour
+03:6D84,07:02,neighbour
+03:6DA4,07:02,neighbour
+03:6DD4,07:02,neighbour
+03:6EB8,0B:10,neighbour
+03:6EC8,0B:10,neighbour
+03:6ED8,0B:10,neighbour
+03:6FB4,0B:04,neighbour
+03:6FC8,0B:04,neighbour
+03:6FD0,0B:04,neighbour
+03:6FE0,0B:04,neighbour
+03:6FF8,0B:04,neighbour
+03:7018,0B:04,neighbour
+03:7040,0B:04,neighbour
+03:7070,0B:04,neighbour
+03:70A8,0B:04,neighbour
+03:70E8,0B:04,neighbour
+03:70F8,0B:04,neighbour
+03:7118,0B:04,neighbour
+03:7188,02:06,neighbour
+03:7190,02:06,neighbour
+03:71A0,02:06,neighbour
+03:71B8,02:06,neighbour
+03:71D8,02:06,neighbour
+03:7200,02:06,neighbour
+03:7230,02:06,neighbour
+03:7268,02:06,neighbour
+03:72A8,02:06,neighbour
+03:72AC,02:06,neighbour
+03:72B4,02:06,neighbour
+03:72C0,02:06,neighbour
+03:72E4,02:06,neighbour
+03:72FC,02:06,neighbour
+03:7318,02:06,neighbour
+03:7338,02:06,neighbour
+03:7340,02:06,neighbour
+03:7350,02:06,neighbour
+03:7368,02:06,neighbour
+03:7388,02:06,neighbour
+03:738C,02:06,neighbour
+03:7394,02:06,neighbour
+03:73A0,02:06,neighbour
+03:73C4,02:06,neighbour
+03:73DC,02:06,neighbour
+03:73F8,02:06,neighbour
+03:74A4,00:08,best fit
+03:7548,00:08,best fit
+03:75EC,00:08,best fit
+03:7690,00:08,best fit
+03:7734,00:08,best fit
+03:77D8,00:08,best fit
+03:787C,00:08,best fit
+03:7920,00:08,best fit
+03:79C4,00:08,best fit
+03:7A68,00:08,best fit
+03:7B0C,00:08,best fit
+03:7BB0,00:08,best fit
+03:7C54,00:08,best fit
+03:7CF8,00:08,best fit
+03:7D9C,00:08,best fit
+03:7E40,00:08,best fit
+03:7EE4,00:08,best fit
+03:7F88,00:08,best fit
