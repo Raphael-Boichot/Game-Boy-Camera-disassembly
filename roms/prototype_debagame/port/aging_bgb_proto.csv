@@ -1,0 +1,3 @@
+scenario,keys_after_boot,game_seq,count,error_flag,error_bank,error_expected,error_read,bank_00,bank_01,bank_02,bank_03,bank_04,bank_05,bank_06,bank_07,bank_08,bank_09,bank_10,bank_11,bank_12,bank_13,bank_14,bank_15
+aging_protected,A A Down Down A Down Down A,07,0000,FF,00,55,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+aging_after_protect_off,A Down Down A Down A B Up Up A Down Down A Down Down A,07,0007,00,00,00,00,55,55,55,55,55,55,55,5A,5A,5A,5A,5A,5A,5A,5A,5A

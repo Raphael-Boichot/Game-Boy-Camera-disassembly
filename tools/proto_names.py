@@ -61,7 +61,8 @@ for ad, rs in sorted(byaddr.items()):
           max(int(x['bytes']) for x in order[1][1]) == max(int(x['bytes']) for x in rr)
     ln = max(int(x['bytes']) for x in rr)
     conf = '?' if tie else ('C' if ln >= a.min_port else 'I')
-    note = 'developers\' name: same code as %s in the old build of table %s (%s bytes, %s match)' % (
+    what = 'the same bytes as the data label' if rr[0]['kind'] == 'data' else 'same code as'
+    note = 'developers\' name: %s %s in the old build of table %s (%s bytes, %s match)' % (what, 
         nm, ' and '.join('%s at old %s' % (x['table'], x['old_addr']) for x in sorted(rr, key=lambda x: x['table'])), ln, rr[0]['kind'])
     if len(order) > 1: note += '; other names on this address: ' + ', '.join(o[0] for o in order[1:])
     put(0, int(ad, 16), nm, conf, note, 'port_old')

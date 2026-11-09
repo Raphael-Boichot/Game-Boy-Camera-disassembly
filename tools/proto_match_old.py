@@ -13,7 +13,10 @@ build-dependent operands are masked: the 16-bit operand of every 3-byte instruct
 The pattern is cut at the first byte that cannot be decoded (an invalid opcode) or at the end of the bank. It is then searched in
 the code of this build (bank $00, starting on a traced instruction, every byte inside the traced code): `hits` is the number of
 places. One row per (table, label): table, name, old_addr, bytes (pattern length), hits, new_addr (when hits == 1), kind
-(exact: the masked bytes are equal and so are the operands; masked: equal only with the operands masked).
+(exact: the masked bytes are equal and so are the operands; masked: equal only with the operands masked; data: see below).
+Data labels: a label whose code pattern is found nowhere (hits 0) is tried as data: its old bytes from the label to the next label
+(at most 256, at least 4, not all one value) are searched unmasked in the bytes of this build's bank $00 that are not traced code;
+a unique place gives a row of kind `data` (the dither order patterns, the contrast rows, the screen texts ...).
 """
 import sys, csv, json, collections
 ROM = open(sys.argv[1], 'rb').read(); rows = list(csv.DictReader(open(sys.argv[2]))); T = json.load(open(sys.argv[3])); out = sys.argv[4]
@@ -63,6 +66,11 @@ for t, ob in OLD.items():
         kind = ''
         if len(h) == 1:
             kind = 'exact' if NEW[h[0]:h[0] + len(pat)] == old[v:v + len(pat)] else 'masked'
+        if not h:      # try the label as data
+            d = old[v:min(nxt, v + 256, 0x4000)]
+            if len(d) >= 4 and len(set(d)) > 1:
+                hd = [s for s in range(0x150, 0x4000 - len(d) + 1) if NEW[s:s + len(d)] == d and not any(incode[s:s + len(d)])]
+                if hd: pat, h, kind = d, hd, ('data' if len(hd) == 1 else '')
         res.append([t, nm, '%04X' % v, len(pat), len(h), '%04X' % h[0] if len(h) == 1 else '', kind])
 with open(out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['table', 'name', 'old_addr', 'bytes', 'hits', 'new_addr', 'kind']); w.writerows(res)

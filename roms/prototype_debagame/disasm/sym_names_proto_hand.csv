@@ -8,18 +8,17 @@ bank,addr,name,conf,note,source
 00,045A,MenFade_Start,I,"writes 1 to $C0A1, MEN_FADE_F in both old symbol tables (same address)",hand
 00,06A4,BankTest_InitScreen,I,"LCDCOFF, VRAM_CLR, DMACLR, then falls into CB2 (bank 2 selected for the BANK screen); called once",hand
 00,0C50,Aging_FillSram,C,"for SRAM bank D: writes the pattern B,B,C,C over $A000-$BFFF (ld [$4000],d; ld [hl+],a ...); called by SRAM_AGING four times",hand
-00,0F70,Seq06_MovieMain,I,GAME_SEQ $06 handler of MAIN_SUB (C); Movie from MAKE_MOVIE 00:0E9F and the live picture BGB shows in that sequence (I),hand
+00,0F70,Seq06_MovieMain,C,"GAME_SEQ $06 handler of MAIN_SUB; MOVIE TEST in BGB (menu entry 4 -> GAME_SEQ $06, port/menu_paths_proto.csv)",hand
 00,11AC,Obj_PutHexDigits,I,"writes OAM entries from $C02C: Y $10, X $30, then the high nibble of A, and so on: the two nibbles of A as sprites",hand
-00,12FC,Seq09_ConfigMain,I,GAME_SEQ $09 handler of MAIN_SUB (C); Config from MAKE_CONFIG 00:1275 and the sensor settings screen BGB shows (I),hand
+00,12FC,Seq09_ConfigMain,C,"GAME_SEQ $09 handler of MAIN_SUB; the settings screen in BGB (Start on MOVIE TEST -> GAME_SEQ $09, port/menu_paths_proto.csv)",hand
 00,1528,Config_PutItem,I,"dispatch on R0 ($FF88) to the PUT_ routines of the settings screen (PUT_DITH_PAT, PUT_MODE ...)",hand
 00,163A,Stub_Ret_163A,C,"a lone ret (the byte before PUT_MODE), called twice",hand
 00,16AC,Config_PutC0FDFlag,I,"prints one of two texts ($1911 table, step $1C) chosen by bit 7 of $C0FD",hand
 00,175D,Config_PutHexC0F9,C,writes the two nibbles of $C0F9 as tiles $80+n to BG $9946 / $9966,hand
-00,1DDD,Seq0D_GalleryMain,I,GAME_SEQ $0D handler of MAIN_SUB (C); Gallery from MAKE_GALLERY 00:1D61 (I),hand
+00,1DDD,Seq0D_GalleryMain,C,"GAME_SEQ $0D handler of MAIN_SUB; GALLERY in BGB (menu entry 5 -> GAME_SEQ $0D, port/menu_paths_proto.csv)",hand
 00,1EF6,OamDma_Run,C,call $FFB6 (the OAM DMA stub Data_00_0317 copied to HRAM); ret,hand
 00,2EF5,Copy_Pages,C,"unrolled copy: B pages of 256 bytes from HL to DE (ld a,[hl+]; ld [de],a; inc e; ... inc d; dec b; jp nz)",hand
 00,32E3,Akarusa_Apply,I,"stores A in $C164 (AKARUSA in table $2A), returns when the mode in $C0F2 is 6, else selects SRAM bank 0 and ROM bank 4 (ld [$4000],0; ld [$2000],4) and goes on; not read further",hand
-00,342E,Dither_AddLookup,I,h = $41: looks a byte at [DE] up in a 256-byte table at $4100 of the mapped bank and adds it to BC (eight calls from SCREEN_CHECK),hand
 00,35BD,ParaSet_ByMode,I,dispatch on the low nibble of A (cp 0..n) to per-mode register settings; called by PARA_SET and the settings screen,hand
 00,3732,Sensor_FillDitherFlat,C,"SRAM bank $10 (camera registers): writes $80, or $55 when the mode in $C0F2 is 6, to the 48 dither registers from $A006",hand
 00,380C,ImageCopy_Dispatch,C,"A (BUNKATU_MODE $C167, from GET_A_IMMAGE 00:10A7) and $1F, x2: jp through JumpTable_00_3822 to one of 32 SRAM-to-WRAM copies",hand
@@ -55,3 +54,12 @@ bank,addr,name,conf,note,source
 00,2ABD,ImageCopy_Mode29_None,C,entry 29 of JumpTable_00_3822: a lone ret (no copy),hand
 00,2ABE,ImageCopy_Mode30_None,C,entry 30 of JumpTable_00_3822: a lone ret (no copy),hand
 00,2ABF,ImageCopy_Mode31_None,C,entry 31 of JumpTable_00_3822: a lone ret (no copy),hand
+00,3C9A,NO_DITHER_PAT,I,"dither order pattern 0 of SET_DITH_MATRIX (table base $3C9A, 16 bytes of $08: no dither); the old table $2A has NO_DITHER_PAT 16 bytes before BAYER_PAT, as here, but an all-$08 pattern is too plain to match by its bytes",hand
+00,3862,CONTRAST_ROWS,C,"SET_DITH_MATRIX (00:3447) takes row C (1-131, the CONTRAST value $C165) of this table, 6 bytes per row (three bases, three widths; docs §18.14): $3862-$3B73",hand
+00,342E,BIT_COUNT,I,"adds popcount(byte) + 2 x popcount(next byte) through the table at 04:4100 into BC, eight times per call from SCREEN_CHECK: the dark pixels of 2bpp rows (C); BIT_COUNT is the routine the source text left in the ROM describes for this (docs §18.14), so the name is I",hand
+00,17E9,MODE0,I,"tile rows printed by PUT_MODE (00:163B): 5 entries of $18 bytes (two rows of 12 tiles), one per camera mode (C); the old table $2A names the same kind of table MODE0, next to EDGE0 / VREF0 / ZERO0 / REV0, which match by their bytes (its own bytes changed)",hand
+04,4100,BitCount_Table,C,"256-byte popcount table (entry n = number of 1 bits of n), read by BIT_COUNT (00:3433, 00:343E) in the L2 runs",hand
+04,4200,BitReverse_Table,C,"256-byte bit-reversal table ($01 -> $80, $02 -> $40 ...), read by ImageCopy_Mode01 in the L2 runs (a mirrored picture: I)",hand
+04,4300,Zoom_TableA,I,"256-byte table (0 for n < $10, then 3, 12 ... by ranges), read by ImageCopy_Mode06 with BitDouble_Table in the L2 runs; role not decoded",hand
+04,4400,BitDouble_Table,C,"256-byte table that doubles each bit of a nibble ($01 -> $03, $02 -> $0C ...: 4 pixels -> 8), read by ImageCopy_Mode06 in the L2 runs (a 2x zoom: I)",hand
+04,4500,HalfBits_Table,I,"256-byte table keeping every other bit (00 00 01 01 00 00 01 01 02 02 03 03 ...), read by ImageCopy_Mode08 in the L2 runs (a reduction: I)",hand
