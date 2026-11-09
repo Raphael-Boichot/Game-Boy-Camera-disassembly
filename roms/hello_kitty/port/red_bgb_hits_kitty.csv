@@ -71,4 +71,10 @@ link_a_giver,CONTROL,,10424
 link_a_receiver,CONTROL,,10424
 link_b_giver,CONTROL,,10424
 link_b_receiver,CONTROL,,10424
+print_a_inq10,CONTROL,,10878
+print_a_inq20,CONTROL,,11550
+print_a_inq80,CONTROL,,10878
+print_d_initFF,CONTROL,,10878
+print_d_inq10,CONTROL,,10878
+print_d_inq20,CONTROL,,14337
 sgb,CONTROL,,2472
