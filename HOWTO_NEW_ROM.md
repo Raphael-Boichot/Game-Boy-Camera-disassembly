@@ -67,7 +67,7 @@ roms/<folder>/
     rom_operands_<tag>.csv, rom_operands_manual_<tag>.csv                        L5
     match_<ref>_<tag>.csv, similar_<ref>_<tag>.csv                               names found in another ROM
   trace/                            L2: what the code is and what ran
-    trace_<tag>.json                the current static trace (one file; older traces stay in git history)
+    trace_<tag>.json                the current static trace (older traces leave the tree unless notes still cite them: then trace_<tag>_v1.json)
     trace_<tag>_unresolved.md       the indirect sites left (0 when L2 is proven)
     extra_roots_<tag>.json          hand-resolved roots (+ extra_roots_<tag>_hand.json when a tool writes the first)
     trace_config_<tag>.json, rom_trace_labels_<tag>.sym                          tracer inputs, when the tracer needs them
@@ -109,7 +109,7 @@ Rules:
 
 | ROM | moves and renames |
 |---|---|
-| jp | `wram/trace_jp_v3.json` -> `trace/trace_jp.json` (the first trace `wram/trace_jp.json` leaves the tree); `tools/extra_roots.json` -> `trace/extra_roots_jp.json`; `tools/rom_trace_labels.sym` -> `trace/rom_trace_labels_jp.sym`; `coverage/v8/report_v8/merged_cov.npz` and `rom_map.csv` copied to `trace/cov_jp_runs.npz` and `trace/rom_map_jp.csv`; `disasm/coverage_jp_v3.csv` -> `trace/`; `wram/wram_access.csv`, `wram_summary.csv` and the region files take the tag; `intake/` made with `tools/rom_intake.py` |
+| jp | done 2026-11-09: `trace/` holds `trace_jp.json` (the v3 trace), `trace_jp_v1.json` (the first trace, kept because the WRAM region notes cite it), `extra_roots_jp.json`, `rom_trace_labels_jp.sym`, `coverage_jp.csv` (static per-bank coverage) and copies of the v8 merge (`cov_jp_runs.npz`, `rom_map_jp.csv`; the originals stay in `coverage/v8/report_v8/`); the WRAM files carry the tag; `intake/` made with `tools/rom_intake.py` |
 | us | ROM and symbol file `gbcam_usa_eu` -> `gbcam_us`; `port/trace_us.json`, `trace_config.json`, `extra_roots*.json`, `rom_trace_labels.sym`, `cov_us_runs.npz`, `cov_us_witness.npz`, `rom_map_us.csv` -> `trace/` with the tag; `port/cov_us.npz` -> `port/cov_jp_in_us.npz`; today's generated `disasm/sym_{names,types}_us.csv` (the `port` layer) and the `loaders`, `reads`, `checked`, `hand` layers -> `disasm/layers/`, the merged table becomes `disasm/sym_names_us.csv` / `sym_types_us.csv`; `port/l3_open_us.csv` -> `disasm/sym_unconclusive_us.csv`; `src/const_jp.inc` -> `const_us.inc`, `src/ram_jp.inc` -> `ram_us.inc`; `assets/jp_never_reached_in_us.csv` -> `assets/never_reached_us.csv`; `intake/` made |
 | gold | as us (tag `gold`); a doubts list made; `assets/gold_own_never_read.csv` kept beside `never_reached_gold.csv` |
 | kitty | `port/` -> `trace/` (nothing in it is a port); `disasm/extra_roots_kitty.json` -> `trace/`; `disasm/sym_names_kitty_{auto,hand}.csv` -> `disasm/layers/`; `assets/unused_assets_kitty.csv` -> `assets/never_reached_kitty.csv` |
@@ -131,7 +131,7 @@ Never edit the `.sym` by hand. Keep two layered tables and a builder (`tools/sym
 
 * `disasm/sym_names_<rom>.csv`: `bank,addr,name,conf,note,source`. For the reference ROM this is the edited table; for any other ROM it is merged from `disasm/layers/` in the fixed layer order of section 0.1 (`port` < `auto` < `loaders` < `reads` < `checked` < `hand`). Name `-` deletes a label.
 * `disasm/sym_types_<rom>.csv`: `bank,start,end,type,width,note`.
-* the trace file (`trace/trace_<tag>.json`, instruction starts and lengths; the Japanese one is still `roms/jp_rev_a/wram/trace_jp_v3.json` until the migration of section 0.1).
+* the trace file (`trace/trace_<tag>.json`, instruction starts and lengths).
 * The builder makes every contiguous run of proven instructions a `.code` block, every other byte data (fill runs of 16+ bytes = padding), then the types table carves its ranges out. It **aborts** on a duplicate name, a label inside an instruction, a hole or overlap, a non-uniform padding block. These checks caught real mistakes, keep them.
 
 Naming: `Module_Verb` PascalCase (`Album_DrawPage`); assets carry type, bank, address, consumer (`Gfx_17_5500_...` 2bpp tiles, `Map_24_4B20_...` tile map rows, `Src_BB_AAAA_...` far-pointer source of unknown class, `Sheet_..._BB_AAAA`, `*_Part<addr>` continuation). Every name has a tag **C** (code read, emulator or BGB confirmed) / **I** (inferred from caller, neighbour, table) / **?** (doubt). `tools/make_doubts.py` regenerates the doubts list after every rename.
@@ -140,14 +140,14 @@ Naming: `Module_Verb` PascalCase (`Album_DrawPage`); assets carry type, bank, ad
 
 ## 3. Stage B: the static tracer (`tools/rom_trace.py`)
 
-Recursive descent from: the vectors and the entry point, every code label, the mode / state tables, then **hand roots** (`tools/extra_roots.json`, each with a reason). Order of work that paid off:
+Recursive descent from: the vectors and the entry point, every code label, the mode / state tables, then **hand roots** (`roms/jp_rev_a/trace/extra_roots_jp.json`, each with a reason). Order of work that paid off:
 
 1. Find the engine's *helpers* before anything else: banked call (`call $08C1`, A = bank, HL = target), one-way far jump, banked copy to RAM / VRAM (`$0450`, `$0586`...), the `rst` tables (`rst $18` = jump table, words inline), wait loops (`rst $08`, `rst $10`). Teach the tracer each helper once: that resolved 276 far calls.
 2. Run it, list the **unresolved indirect jumps** (`jp hl`, computed `call`), resolve each by hand (table idiom, split immediates `ld a,lo; ld [var],a; ...`, cooperative task entries, callbacks stored in RAM), add roots, repeat until **0**. Do not stop at "few".
 3. Consistency checks: no overlapping instructions, every callback ends in `ret`/`jp`, no invalid opcode on a proven path.
 4. Known trap: an inline `rst` table read one word too long swallows the first instruction of the next handler (`05:48C4`): bytes were right, labelling wrong. Cap table length by the lowest target seen.
 5. Separate **reachable** from **live**: 45 roots decode cleanly but nothing calls them. Keep them as "dead roots", never as code that runs.
-6. Give the tracer only the first-pass labels (`tools/rom_trace_labels.sym`, 183 names), not the finished symbol file: it takes every name that does not start with `.data` as a code root, so a file that also names tables and tiles gives a different (wrong) trace.
+6. Give the tracer only the first-pass labels (`roms/jp_rev_a/trace/rom_trace_labels_jp.sym`, 183 names), not the finished symbol file: it takes every name that does not start with `.data` as a code root, so a file that also names tables and tiles gives a different (wrong) trace.
 
 `tools/rom_coverage.py` then says per bank: proven code, inline tables, referenced data, padding, unreferenced. The "unreferenced" bytes inside code banks are the hand-work list; a bank-0 `ld hl,nn` with nn >= `$4000` is credited to every bank, so treat that number as an upper bound.
 
@@ -217,4 +217,4 @@ Order: own core with instrumentation first (fast, millions of frames), BGB secon
 
 ## 10. Files to copy from this repository
 
-`tools/sym_build.py`, `tools/sym_fix.py`, `tools/rom_trace.py` (+ `tools/extra_roots.json` as a template), `tools/rom_coverage.py`, `tools/wram_db.py`, `tools/ram_census.py`, `tools/ram_names.py` (+ the two CSVs it reads), `tools/const_names.py` (+ its four CSVs), `tools/asset_catalog.py`, `tools/make_doubts.py`, `tools/check_repo_consistency.py` (adapt its patterns to the new docs), `tools/bank_pics.py`, `tools/render_tiles.py`, `tcrf_check/tools/bank_sheet.py`; `coverage/src/gbcov.c` + `gbcov.py` (core), `coverage/tools/coverage_run.py`, `replay_corpus.py`; `tcrf_check/tools/bgb_run.py`, `bgbgrab.py`, `bgb_dead_hook.py`, `gbcov_display.c`, `dead_jump.py`, `dead_flip.py`. Paths and constants inside them are specific to the Japanese Pocket Camera (the far-call helper addresses, the bank list, `GBCAM_*` environment variables): read each header before use.
+`tools/sym_build.py`, `tools/sym_fix.py`, `tools/rom_trace.py` (+ `roms/jp_rev_a/trace/extra_roots_jp.json` as a template), `tools/rom_coverage.py`, `tools/wram_db.py`, `tools/ram_census.py`, `tools/ram_names.py` (+ the two CSVs it reads), `tools/const_names.py` (+ its four CSVs), `tools/asset_catalog.py`, `tools/make_doubts.py`, `tools/check_repo_consistency.py` (adapt its patterns to the new docs), `tools/bank_pics.py`, `tools/render_tiles.py`, `tcrf_check/tools/bank_sheet.py`; `coverage/src/gbcov.c` + `gbcov.py` (core), `coverage/tools/coverage_run.py`, `replay_corpus.py`; `tcrf_check/tools/bgb_run.py`, `bgbgrab.py`, `bgb_dead_hook.py`, `gbcov_display.c`, `dead_jump.py`, `dead_flip.py`. Paths and constants inside them are specific to the Japanese Pocket Camera (the far-call helper addresses, the bank list, `GBCAM_*` environment variables): read each header before use.

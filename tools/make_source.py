@@ -24,7 +24,7 @@ MD5 = 'fdcfe686cf4df461e870b6e53b2b5a8b'
 _US = os.path.join(REPO, 'roms', 'us_eu'); _USD = os.path.join(_US, 'disasm')
 # one preset per tree (--tree): the international one is built from the tables ported from the Japanese ones (docs §1.5)
 TREES = {
-    'jp_rev_a': dict(dir=JP, rom='pocketcamera_jp.gb', sym=os.path.join(JP, 'pocketcamera_jp.sym'), trace=os.path.join(JP, 'wram', 'trace_jp_v3.json'),
+    'jp_rev_a': dict(dir=JP, rom='pocketcamera_jp.gb', sym=os.path.join(JP, 'pocketcamera_jp.sym'), trace=os.path.join(JP, 'trace', 'trace_jp.json'),
                      names=[os.path.join(JP, 'disasm', 'sym_names_jp.csv')], md5=MD5, title='Pocket Camera (Japan) (Rev A)', fix=[],
                      cov=os.path.join(REPO, 'coverage', 'results', 'merged_state', 'cov.npz'), report=os.path.join(JP, 'disasm', 'rom_operands_jp.csv'),
                      manual=None, readers={}),

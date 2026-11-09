@@ -7,7 +7,7 @@ import gbcov as g
 import render2 as R
 ROM = os.environ.get('GBCAM_ROM', os.path.join(ROOT, 'pocketcamera_jp.gb'))
 g.load_rom(ROM)
-TRACE = os.path.join(ROOT, 'package', 'wram', 'trace_jp_v3.json')
+TRACE = os.path.join(ROOT, 'package', 'trace', 'trace_jp.json')
 def load_known():
     t = json.load(open(TRACE)); K = np.zeros(g.ROMSZ, np.uint8)
     for k, n in t['code'].items():

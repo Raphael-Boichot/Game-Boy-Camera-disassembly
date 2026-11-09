@@ -2,12 +2,12 @@
 """Build pocketcamera_jp.sym (mgbdis v3 symbol file) for Pocket Camera (Japan) Rev A.
 
   tools/sym_build.py ROM.gb [--names roms/jp_rev_a/disasm/sym_names_jp.csv] [--types roms/jp_rev_a/disasm/sym_types_jp.csv]
-                            [--trace roms/jp_rev_a/wram/trace_jp_v3.json] [--out pocketcamera_jp.sym] [--report]
+                            [--trace roms/jp_rev_a/trace/trace_jp.json] [--out pocketcamera_jp.sym] [--report]
 
 Inputs
   names csv  bank,addr,name,conf,note   (hex bank / addr; a later row for the same address wins; name `-` deletes the label)
   types csv  bank,start,end,type,width,note   (hex; [start,end) ; type = data | text | padding | code | image)
-  trace      wram/trace_jp_v3.json: `code` = {"BB:AAAA": instruction length} of every instruction proven by the static trace
+  trace      trace/trace_jp.json: `code` = {"BB:AAAA": instruction length} of every instruction proven by the static trace
 Segmentation
   1. every contiguous run of proven instructions is a `.code` block (not inside 00:0000-014F: mgbdis' default vectors and header block stay)
   2. every other byte is data: a run of 16 or more $00 bytes (or 4+ at the end of a bank) is `.padding`, the rest `.data` ($FF runs included: $FF is never padding, owner 2026-10-31)
@@ -19,7 +19,7 @@ Checks (the script aborts on any of them)
 import sys, os, json, csv, argparse, collections
 ap = argparse.ArgumentParser()
 ap.add_argument('rom'); ap.add_argument('--names', default='roms/jp_rev_a/disasm/sym_names_jp.csv'); ap.add_argument('--types', action='append', default=None)
-ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json'); ap.add_argument('--out', default='roms/jp_rev_a/pocketcamera_jp.sym')
+ap.add_argument('--trace', default='roms/jp_rev_a/trace/trace_jp.json'); ap.add_argument('--out', default='roms/jp_rev_a/pocketcamera_jp.sym')
 ap.add_argument('--extra-names', action='append', default=[]); ap.add_argument('--report', action='store_true')
 ap.add_argument('--legacy', default=None, help='older .sym whose label lines are kept where the names csv has none')
 a = ap.parse_args()

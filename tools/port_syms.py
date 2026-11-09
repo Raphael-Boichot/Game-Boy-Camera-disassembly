@@ -31,7 +31,7 @@ for x in ('jp', 'other', 'map', 'codemap', 'trace', 'outdir'): ap.add_argument(x
 ap.add_argument('--suffix', default='us')
 ap.add_argument('--names', default='roms/jp_rev_a/disasm/sym_names_jp.csv')
 ap.add_argument('--types', default='roms/jp_rev_a/disasm/sym_types_jp.csv')
-ap.add_argument('--jptrace', default='roms/jp_rev_a/wram/trace_jp_v3.json')
+ap.add_argument('--jptrace', default='roms/jp_rev_a/trace/trace_jp.json')
 a = ap.parse_args()
 JP = open(a.jp, 'rb').read(); OT = open(a.other, 'rb').read(); M = np.load(a.map)
 def off(b, ad): return ad if ad < 0x4000 else b * 0x4000 + ad - 0x4000

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Carry the Japanese tracer inputs to another build through the address map of tools/port_map.py.
 
-  tools/port_trace_config.py JP.gb OTHER.gb MAP.npy OUTDIR [--roots tools/extra_roots.json] [--labels tools/rom_trace_labels.sym]
+  tools/port_trace_config.py JP.gb OTHER.gb MAP.npy OUTDIR [--roots roms/jp_rev_a/trace/extra_roots_jp.json] [--labels roms/jp_rev_a/trace/rom_trace_labels_jp.sym]
 
 Writes OUTDIR/trace_config.json (the CFG addresses of tools/rom_trace.py, the callback helpers, the hand-resolved `jp hl`
 sites and the HRAM image), OUTDIR/extra_roots.json and OUTDIR/rom_trace_labels.sym, and prints every input that does not
@@ -15,7 +15,7 @@ import rom_trace as RT
 
 ap = argparse.ArgumentParser()
 ap.add_argument('jp'); ap.add_argument('other'); ap.add_argument('map'); ap.add_argument('outdir')
-ap.add_argument('--roots', default='tools/extra_roots.json'); ap.add_argument('--labels', default='tools/rom_trace_labels.sym')
+ap.add_argument('--roots', default='roms/jp_rev_a/trace/extra_roots_jp.json'); ap.add_argument('--labels', default='roms/jp_rev_a/trace/rom_trace_labels_jp.sym')
 a = ap.parse_args()
 JP = open(a.jp, 'rb').read(); OT = open(a.other, 'rb').read(); M = np.load(a.map)
 def off(b, ad): return ad if ad < 0x4000 else b * 0x4000 + ad - 0x4000

@@ -2,7 +2,7 @@
 """Sort the code that no run executed by what keeps it from running (README 16.15).
 usage: reach_analysis.py OUT_DIR [ROM] [--manual FILE]       (run from anywhere; ROM defaults to ./pocketcamera_jp.gb, the Japanese Rev A)
 Reads (all in the repository): coverage/v8/report_v8/rom_map.csv (byte classes of the v8 run), roms/jp_rev_a/assets/witness_jp.csv (class N bytes that a later run executed:
-  16.14), roms/jp_rev_a/wram/trace_jp_v3.json (static trace), tools/extra_roots.json (hand-resolved roots), wram/wram_*.csv (variable names),
+  16.14), roms/jp_rev_a/trace/trace_jp.json (static trace), roms/jp_rev_a/trace/extra_roots_jp.json (hand-resolved roots), wram/wram_*.csv (variable names),
   roms/jp_rev_a/assets/reach_manual_jp.csv (hand-written verdicts keyed by the first address of a component; may be missing)
 Writes: OUT_DIR/reach_components.csv (one row per never-run component), OUT_DIR/reach_ranges.csv (the byte runs of every component with its verdict: drawn by rom_reach_map.py), OUT_DIR/reach_summary.md, OUT_DIR/cov_with_witness.npz (intermediate)
 What it does:
@@ -41,7 +41,7 @@ for r in csv.DictReader(open(WIT)):
     b = int(r['bank'], 16); o1 = flat(b, int(r['start'], 16)); o2 = flat(b, int(r['end'], 16)); ex[o1:o2 + 1] = 1; wit += o2 - o1 + 1
 npz = os.path.join(OUT, 'cov_with_witness.npz'); np.savez(npz, ex=ex, oex=oex)
 # ---- component analysis (the code of gating_branches.py up to the sort of its table)
-os.environ.update(GBCAM_ROM=ROM, GBCAM_TRACE=os.path.join(REPO, 'roms', 'jp_rev_a', 'wram', 'trace_jp_v3.json'), GBCAM_ROOTS=os.path.join(REPO, 'tools', 'extra_roots.json'),
+os.environ.update(GBCAM_ROM=ROM, GBCAM_TRACE=os.path.join(REPO, 'roms', 'jp_rev_a', 'trace', 'trace_jp.json'), GBCAM_ROOTS=os.path.join(REPO, 'roms', 'jp_rev_a', 'trace', 'extra_roots_jp.json'),
                   GBCAM_WRAM_DIR=os.path.join(REPO, 'roms', 'jp_rev_a', 'wram'))
 src = open(GATING).read().split('rows.sort(')[0]
 G = {'__file__': GATING, '__name__': 'gating'}

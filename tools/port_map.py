@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Address map from the Japanese ROM (Pocket Camera Rev A) to a sibling build (Game Boy Camera USA/Europe).
 
-  tools/port_map.py JP.gb OTHER.gb [--trace roms/jp_rev_a/wram/trace_jp_v3.json] [--types roms/jp_rev_a/disasm/sym_types_jp.csv]
+  tools/port_map.py JP.gb OTHER.gb [--trace roms/jp_rev_a/trace/trace_jp.json] [--types roms/jp_rev_a/disasm/sym_types_jp.csv]
                     [--labels roms/jp_rev_a/pocketcamera_jp.sym] [--out roms/us_eu/port/map_segments_us.csv]
 
 Method (per bank; a routine that moved to another bank is not followed, it shows as deleted + inserted):
@@ -25,7 +25,7 @@ import numpy as np
 
 ap = argparse.ArgumentParser()
 ap.add_argument('jp'); ap.add_argument('other')
-ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json')
+ap.add_argument('--trace', default='roms/jp_rev_a/trace/trace_jp.json')
 ap.add_argument('--types', default='roms/jp_rev_a/disasm/sym_types_jp.csv')
 ap.add_argument('--labels', default='roms/jp_rev_a/pocketcamera_jp.sym')
 ap.add_argument('--out', default='roms/us_eu/port/map_segments_us.csv')

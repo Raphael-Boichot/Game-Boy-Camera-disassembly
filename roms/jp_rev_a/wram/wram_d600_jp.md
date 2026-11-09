@@ -1,6 +1,6 @@
 # WRAM $D600-$D7FF map
 
-**Coverage.** All 165 addresses of this range that appear in `wram_summary.csv` lie inside a table row below (arrays and tables are one row with a size; the per-address access counts and the row that covers each address are in the appendix). Status of the 165 addresses (= status of the covering row): **C 156**, **I 4**, **U 5**, **? 0**. Twelve of the C addresses (`$D60D`, `$D641`, `$D642`, `$D675`, `$D7D2`, `$D7E3`, `$D7E4`, `$D7E9`, `$D7EB`, `$D7EE-$D7F1`) are code-traced as to data flow but keep an open sub-question about what the value *looks like on screen* or what an inferred step does; they are collected under "Still inconclusive". Rows are in address order; section titles name the bank(s) that use the sub-range.
+**Coverage.** All 165 addresses of this range that appear in `wram_summary_jp.csv` lie inside a table row below (arrays and tables are one row with a size; the per-address access counts and the row that covers each address are in the appendix). Status of the 165 addresses (= status of the covering row): **C 156**, **I 4**, **U 5**, **? 0**. Twelve of the C addresses (`$D60D`, `$D641`, `$D642`, `$D675`, `$D7D2`, `$D7E3`, `$D7E4`, `$D7E9`, `$D7EB`, `$D7EE-$D7F1`) are code-traced as to data flow but keep an open sub-question about what the value *looks like on screen* or what an inferred step does; they are collected under "Still inconclusive". Rows are in address order; section titles name the bank(s) that use the sub-range.
 
 ## Overlay structure
 
@@ -241,7 +241,7 @@ Only one *mode bank* is active at a time (`$D5CE` = mode, `$D5CF` = state, both 
 * **Write-only / dead**: `$D680` (cleared with the list, never read), `$D66F` (written 0 at dialog init, never read), `$D6EF`-style padding of the context slots (never touched), `$D7D7` (written once per SHOOT entry, never read), `$D7D8` (three writes, no reader), mode `$0A`'s test of `$D67E` (nothing sets it), `$D640` (always 4, so the `cp 3` branch at 04:5D5F is dead), `$D60E` (constant `$38`, the other 56 entries of table 04:658C are unused).
 * **Bank 8's use of `$D7C1`** (border picker in the print screens, 08:4EF9-50F6) was only skimmed: reads / writes were located but the print border semantics (which values are printable) were not traced.
 
-## Appendix: every address of the range present in `wram_summary.csv` (165)
+## Appendix: every address of the range present in `wram_summary_jp.csv` (165)
 
 Columns: address, covering row (name, start address), status of that row, reads / writes / pointer loads from the summary, banks. All 165 are inside a table row above; the access counts only include code the tracer proved (see README §2.0), so reads through HL/DE/BC are under the base address of the table.
 

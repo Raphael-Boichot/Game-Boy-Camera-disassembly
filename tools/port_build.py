@@ -45,7 +45,7 @@ if os.path.exists(hroots):
 trace = os.path.join(P, 'trace_%s.json' % S)
 run(py, 'tools/rom_trace.py', a.other, os.path.join(P, 'rom_trace_labels.sym'), trace, '--roots', os.path.join(P, 'extra_roots.json'), '--config', os.path.join(P, 'trace_config.json'))
 cmap = os.path.join(P, 'code_map_%s.csv' % S)
-run(py, 'tools/port_code_map.py', a.jp, a.other, 'roms/jp_rev_a/wram/trace_jp_v3.json', trace, cmap)
+run(py, 'tools/port_code_map.py', a.jp, a.other, 'roms/jp_rev_a/trace/trace_jp.json', trace, cmap)
 run(py, 'tools/port_syms.py', a.jp, a.other, npy, cmap, trace, os.path.join(D, 'disasm'), '--suffix', S)
 os.replace(os.path.join(D, 'disasm', 'port_report_%s.csv' % S), os.path.join(P, 'port_report_%s.csv' % S))
 sym = os.path.join(D, a.sym)

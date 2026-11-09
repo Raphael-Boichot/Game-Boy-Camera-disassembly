@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Basic blocks of the statically traced code (package/wram/trace_jp_v3.json) for the BGB re-trace.
+"""Basic blocks of the statically traced code (package/trace/trace_jp.json) for the BGB re-trace.
 A block head is: a root / entry of the trace, a jump / call / rst target, or the instruction after any jump, call, ret, rst.
 blocks() -> (heads, members): heads = sorted list of (bank, addr); members[(bank, addr)] = list of (bank, addr, length) of the instructions
 that execute whenever the head executes (straight-line run up to the next head or a terminator).
@@ -7,7 +7,7 @@ usage: blocks.py [ROM]   -> prints counts and checks them against merged_v8/cov.
 import sys, os, json
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROM = os.environ.get('GBCAM_ROM', os.path.join(ROOT, 'pocketcamera_jp.gb'))
-TRACE = os.path.join(ROOT, 'package', 'wram', 'trace_jp_v3.json')
+TRACE = os.path.join(ROOT, 'package', 'trace', 'trace_jp.json')
 COND_JP = {0xC2, 0xCA, 0xD2, 0xDA}; COND_CALL = {0xC4, 0xCC, 0xD4, 0xDC}; COND_JR = {0x20, 0x28, 0x30, 0x38}
 COND_RET = {0xC0, 0xC8, 0xD0, 0xD8}; RST = {0xC7, 0xCF, 0xD7, 0xDF, 0xE7, 0xEF, 0xF7, 0xFF}
 # instructions the coverage run executed without executing the head of their static block: entered by `ret` to a pushed address (retaddr_rule / pushret_rule of the tracer)

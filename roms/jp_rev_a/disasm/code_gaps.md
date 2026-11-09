@@ -3,18 +3,18 @@
 Pocket Camera (Japan) Rev A, md5 `fdcfe686cf4df461e870b6e53b2b5a8b`.  Report behind README §1.2.  The runtime counterpart (what executes, what never does) is README §13 and `coverage/`.
 
 Files:
-* `tools/rom_trace.py` -- the tracer.  Without `--roots` it gives the first trace (56,799 instructions, 14 `unresolved`).  With `--roots` it switches on four rules (see A) and the 23-entry `RESOLVED_JPHL` table.  Its symbol input is `tools/rom_trace_labels.sym` (183 first-pass labels).
-* `tools/extra_roots.json` -- 134 roots `[[bank, addr, reason], ...]`: 89 live (reachable by a mechanism the tracer lacks) + 45 whose reason starts with `DEAD-CODE (unreferenced)`.
-* `roms/jp_rev_a/wram/trace_jp_v3.json` -- trace with all 134 roots.  `roms/jp_rev_a/disasm/coverage_jp_v3.csv` -- `tools/rom_coverage.py` on it.
-* Reproduce: `python3 -I tools/rom_trace.py pocketcamera_jp.gb tools/rom_trace_labels.sym roms/jp_rev_a/wram/trace_jp_v3.json --roots tools/extra_roots.json` (checked: `code` and `unresolved` identical to the committed file).
+* `tools/rom_trace.py` -- the tracer.  Without `--roots` it gives the first trace (56,799 instructions, 14 `unresolved`).  With `--roots` it switches on four rules (see A) and the 23-entry `RESOLVED_JPHL` table.  Its symbol input is `roms/jp_rev_a/trace/rom_trace_labels_jp.sym` (183 first-pass labels).
+* `roms/jp_rev_a/trace/extra_roots_jp.json` -- 134 roots `[[bank, addr, reason], ...]`: 89 live (reachable by a mechanism the tracer lacks) + 45 whose reason starts with `DEAD-CODE (unreferenced)`.
+* `roms/jp_rev_a/trace/trace_jp.json` -- trace with all 134 roots.  `roms/jp_rev_a/trace/coverage_jp.csv` -- `tools/rom_coverage.py` on it.
+* Reproduce: `python3 -I tools/rom_trace.py pocketcamera_jp.gb roms/jp_rev_a/trace/rom_trace_labels_jp.sym roms/jp_rev_a/trace/trace_jp.json --roots roms/jp_rev_a/trace/extra_roots_jp.json` (checked: `code` and `unresolved` identical to the committed file).
 
 ## 0. Result
 
 | | proven instructions | proven code bytes (banks 00,02-0A,1F) | `unresolved` | unreferenced bytes in code banks |
 |---|---|---|---|---|
-| baseline `trace_jp.json` | 56,799 | 111,808 | 14 | 3,710 |
+| baseline `trace_jp_v1.json` | 56,799 | 111,808 | 14 | 3,710 |
 | + 89 live roots + rules | 59,866 | 116,613 | 0 | |
-| + 45 dead-code roots (`trace_jp_v3.json`) | 60,449 | 117,627 | 0 | 2,400 |
+| + 45 dead-code roots (`trace_jp.json`) | 60,449 | 117,627 | 0 | 2,400 |
 
 Gain from the live roots/rules, measured one category at a time: tracer rules + the 23-entry `RESOLVED_JPHL` table alone +214 instr (this alone clears the 14 `unresolved`), bank-0 helper bodies +62, bank 3 +298, bank 7 +48, **bank 0A jump table +2,444** (96 entries, tracer capped it at 32; 60 new targets), total +3,067 (parts overlap by 1).  The dead-code roots add 583 instr / 1,014 B that no path reaches: they are "decodes cleanly, nobody calls it", not "proven live".  Keep that distinction when counting.
 
@@ -66,4 +66,4 @@ What is left unreferenced in code banks after v3 (2,400 B, none of it unknown co
 `00:24AF` (A = list number, table `01:4000`) and `00:2496` (table `01:5D47`) select ROM bank 1, read a word pointer indexed by `2*A`, and copy 4-byte records
 (Y + C, X + B, tile, attribute) to the OAM shadow (`$D400 + [FF9A]`) until a record starts with `$80`. `00:2464` (table `02:6E4B`) and `00:247D` (table `02:5272`) are the same adder for bank 2.
 Parsing both bank-1 tables: 249 + 246 lists, 3,247 records, 14,473 bytes (`$4000-$7888`) with no gap, then 1,911 zero bytes (`$7889-$7FFF`).
-In `coverage_jp_v3.csv` bank 01 therefore reads "13,719 referenced / 2,665 unreferenced" only because the coverage tool sees just the two table base addresses.
+In `coverage_jp.csv` bank 01 therefore reads "13,719 referenced / 2,665 unreferenced" only because the coverage tool sees just the two table base addresses.

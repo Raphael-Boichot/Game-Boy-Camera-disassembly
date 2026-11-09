@@ -6,7 +6,7 @@
  * component = connected group of never-executed traced instructions (jr/jp/call/fallthrough edges). Each is classified:
      GATED  (>=1 executed conditional branch leads in)      -> the condition just never became true in the run
      TABLE  (entered only by an indirect-dispatch table entry: rst18 / jump table / mode table / far)  -> entry never selected
-     DEAD   (only DEAD-CODE roots from tools/extra_roots.json lead in)                              -> unreferenced code
+     DEAD   (only DEAD-CODE roots from roms/jp_rev_a/trace/extra_roots_jp.json lead in)                              -> unreferenced code
      ORPHAN (anything else)
 Usage: gating_branches.py OUTDIR merged_cov.npz      (env GBCAM_ROM, GBCAM_TRACE, GBCAM_ROOTS, GBCAM_WRAM_DIR)"""
 import sys as _s, os as _o

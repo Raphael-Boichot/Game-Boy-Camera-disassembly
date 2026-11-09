@@ -68,7 +68,7 @@ wr(os.path.join(OD, 'ram_names_%s.csv' % S), out, list(rows[0].keys()))
 print('ram_names: %d rows, scope tokens %s' % (len(out), dict(nt)))
 # ---------------------------------------------------------------- wram_access
 W16 = {0x01, 0x11, 0x21, 0x31, 0x08, 0xEA, 0xFA}
-rows = rd('roms/jp_rev_a/wram/wram_access.csv'); out = []; c = collections.Counter()
+rows = rd('roms/jp_rev_a/wram/wram_access_jp.csv'); out = []; c = collections.Counter()
 for r in rows:
     b = int(r['bank'], 16); pc = int(r['pc'], 16); t = cmap(b, pc)
     if t is None: c['unpaired'] += 1; continue

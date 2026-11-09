@@ -1,12 +1,12 @@
 """Helpers for the display-tracking core: save loading (saves/, saves_unl/, synthetic _ff / _zero), key actions (act), corpus paths and replay (Corpus).
-GBCAM_ROOT = working root with saves/, saves_unl/, package/wram/trace_jp_v3.json (README 16.15).  Used by display_stamps.py (README 16.24)."""
+GBCAM_ROOT = working root with saves/, saves_unl/, package/trace/trace_jp.json (README 16.15).  Used by display_stamps.py (README 16.24)."""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 import gbcov_display as g
 ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')
 g.load_rom(os.environ.get('GBCAM_ROM', ROOT + '/pocketcamera_jp.gb'))
-t = json.load(open(ROOT + '/package/wram/trace_jp_v3.json')); K=np.zeros(1<<20,np.uint8)
+t = json.load(open(ROOT + '/package/trace/trace_jp.json')); K=np.zeros(1<<20,np.uint8)
 for k,n in t['code'].items():
     if n>0:
         b,a=k.split(':'); b=int(b,16); a=int(a,16); K[a if b==0 and a<0x4000 else b*0x4000+a-0x4000]=1

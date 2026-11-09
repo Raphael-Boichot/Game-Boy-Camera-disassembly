@@ -1,6 +1,6 @@
 # HRAM / OAM / I/O map `$FE00-$FFFF`
 
-**Coverage.** All 129 addresses of `$FE00-$FFFF` that appear in `wram_summary.csv` lie inside a row below (HRAM is listed contiguously `$FF80-$FFFE`; never-referenced gaps are explicit `U` rows; `$FFFF` = IE is added from my own scan since the summary has no row for it). Status of the 129 summary addresses: **C 116**, **I 3**, **U 10**, **? 0**. The access table cannot see `ldh [c],a`, `ld hl,$FFxx ; (hl)` and `inc [hl]` accesses; those were found by reading the code (IE bit changes via `ld hl,$ffff`, FFAC bit 6, `ld [hl+],a` shadow loads, wave RAM, FF46) and are marked as such. False-positive P rows (`ld de,$ffd0 ; add hl,de` style 16-bit negative constants): FF80@07:696C, FF1F@05:6AC0, FFCF/FFD0@0A:40EE/40A2, FFDF/FFE0/FFE1@00:0EB5/0EEC/0ED3, FFF0@0A:40AB, FFF3@1F:4FA4. Evidence: only instructions in the proven set of `trace_jp.json`; where I used ROM bytes the tracer does not reach (the HRAM DMA routine, the far-call helpers `$08BB/$08C1/$08D0`, the dead copy setter `$0781`) it is said explicitly.
+**Coverage.** All 129 addresses of `$FE00-$FFFF` that appear in `wram_summary_jp.csv` lie inside a row below (HRAM is listed contiguously `$FF80-$FFFE`; never-referenced gaps are explicit `U` rows; `$FFFF` = IE is added from my own scan since the summary has no row for it). Status of the 129 summary addresses: **C 116**, **I 3**, **U 10**, **? 0**. The access table cannot see `ldh [c],a`, `ld hl,$FFxx ; (hl)` and `inc [hl]` accesses; those were found by reading the code (IE bit changes via `ld hl,$ffff`, FFAC bit 6, `ld [hl+],a` shadow loads, wave RAM, FF46) and are marked as such. False-positive P rows (`ld de,$ffd0 ; add hl,de` style 16-bit negative constants): FF80@07:696C, FF1F@05:6AC0, FFCF/FFD0@0A:40EE/40A2, FFDF/FFE0/FFE1@00:0EB5/0EEC/0ED3, FFF0@0A:40AB, FFF3@1F:4FA4. Evidence: only instructions in the proven set of `trace_jp_v1.json`; where I used ROM bytes the tracer does not reach (the HRAM DMA routine, the far-call helpers `$08BB/$08C1/$08D0`, the dead copy setter `$0781`) it is said explicitly.
 
 ## Key findings
 
@@ -14,12 +14,12 @@
 
 | Address | Size | Name | Type/format | Used by (bank:function) | Meaning, values, init | Status |
 |---|---|---|---|---|---|---|
-| `$FE00-$FE9F` | 160 | `oam` | hardware OAM, 40 x 4 bytes (Y,X,tile,attr) | no proven instruction (0 rows in wram_summary.csv); DMA only: routine at HRAM FF80 called from 00:02A7 | Written only by OAM DMA from the shadow page $D400-$D49F (source page byte $D4 in the HRAM routine, ROM $03F0+1). The shadow is filled by the sprite adders 00:2496/24AF/250A (bank 1 and 2 sprite lists, 4-byte entries terminated by Y=$80) and 04:5307, cursor FF9A; unused entries are set to Y=$F0 (00:0895/08A4). Never read or written by CPU code. | **C** |
+| `$FE00-$FE9F` | 160 | `oam` | hardware OAM, 40 x 4 bytes (Y,X,tile,attr) | no proven instruction (0 rows in wram_summary_jp.csv); DMA only: routine at HRAM FF80 called from 00:02A7 | Written only by OAM DMA from the shadow page $D400-$D49F (source page byte $D4 in the HRAM routine, ROM $03F0+1). The shadow is filled by the sprite adders 00:2496/24AF/250A (bank 1 and 2 sprite lists, 4-byte entries terminated by Y=$80) and 04:5307, cursor FF9A; unused entries are set to Y=$F0 (00:0895/08A4). Never read or written by CPU code. | **C** |
 | `$FEA0-$FEFF` | 96 | `prohibited` | not usable area | no access | No proven reference (0 rows). | **U** |
 
 ## I/O registers, FF00-FF7F and IE
 
-Constants come from `wram_access.csv` (`const_written`) plus the code read. `FF03, FF08-FF0E, FF15, FF27-FF2F, FF4C-FF7F` (including the CGB-only registers) have no proven access.
+Constants come from `wram_access_jp.csv` (`const_written`) plus the code read. `FF03, FF08-FF0E, FF15, FF27-FF2F, FF4C-FF7F` (including the CGB-only registers) have no proven access.
 
 | Address | Size | Name | Type/format | Used by (bank:function) | Meaning, values, init | Status |
 |---|---|---|---|---|---|---|

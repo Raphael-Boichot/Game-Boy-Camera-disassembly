@@ -34,7 +34,7 @@ What it checks (each line of the report is one check)
   effects    tcrf_check/assets/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
              the counts quoted in README 16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
   ram        roms/jp_rev_a/disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, roms/jp_rev_a/disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
-             roms/jp_rev_a/wram/wram_access.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
+             roms/jp_rev_a/wram/wram_access_jp.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
   printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
   seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
@@ -164,7 +164,7 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
     uqi = sum(int(r['detail'].split()[0]) for r in UQ if r['kind'] == 'new_code'); uqb = sum(int(r['detail'].split()[0]) for r in UQ if r['kind'] == 'default_data')
     UC = collections.Counter(r['kind'] for r in csv.DictReader(io.StringIO(rd(US + 'port/code_map_us.csv'))))
     UJ = json.loads(rd(US + 'port/trace_us.json')); uins = [v for v in UJ['code'].values() if v > 0]
-    NJI = sum(1 for v in json.loads(rd('roms/jp_rev_a/wram/trace_jp_v3.json'))['code'].values() if v > 0)
+    NJI = sum(1 for v in json.loads(rd('roms/jp_rev_a/trace/trace_jp.json'))['code'].values() if v > 0)
     ULINES = rd(US + 'gbcam_usa_eu.sym').count('\n')
     if len({r['name'] for r in UN}) != len(UN): bad('port', 'duplicate name in sym_names_us.csv')
     if UJ['unresolved']: bad('port', 'trace_us.json has %d unresolved sites' % len(UJ['unresolved']))
@@ -825,7 +825,7 @@ for fn, text in (('roms/jp_rev_a/disasm/ram_jp.inc', RN.inc_text(RAM_ROWS)), ('r
 RES = RN.Resolver(RAM_ROWS)
 excl = {(int(r['bank'], 16), int(r['pc'], 16)): int(r['value'], 16) for r in RAM_EXCL}
 acc_sites = set(); acc_unnamed = collections.Counter(); acc_kinds = collections.Counter(); excl_seen = set(); named_rows = set()
-for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/wram/wram_access.csv'))):
+for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/wram/wram_access_jp.csv'))):
     a = int(r['addr'], 16); key = (int(r['bank'], 16), int(r['pc'], 16))
     if r['kind'] == 'P' and excl.get(key) == a: excl_seen.add(key); continue
     if not (0xC000 <= a < 0xE000 or 0xFF80 <= a <= 0xFFFE): continue
@@ -841,7 +841,7 @@ if not RAM_BAD:
         len(RAM_ROWS), RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?'], sum(1 for r in RAM_ROWS if r.scope != '*'), len(acc_sites), len(excl)))
     quoted('ram rows', r'(?<![\w.])([\d,]+) RAM names', lambda m: ((len(RAM_ROWS),), (num(m.group(1)),)), docs=('README.md', 'CLAUDE.md', 'SKILL.md', 'HOWTO_NEW_ROM.md'), need=('README.md',))
     quoted('ram tags', r'RAM names \(C ([\d,]+) / I ([\d,]+) / U ([\d,]+) / \? ([\d,]+)', lambda m: ((RAM_TAGS['C'], RAM_TAGS['I'], RAM_TAGS['U'], RAM_TAGS['?']), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
-    quoted('ram sites', r'resolves? every access of `roms/jp_rev_a/wram/wram_access.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
+    quoted('ram sites', r'resolves? every access of `roms/jp_rev_a/wram/wram_access_jp.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ first readers of the forced-only data bytes (README 16.24)
@@ -890,7 +890,7 @@ if PW:
     quoted('print watch', r'are read in organic runs \(([\d,]+) of ([\d,]+) B\), `26:7080-72BF` is not \((\d+) of 576 B\), while its neighbours `26:4C80` and `26:72C0` are \((\d+) of 576 B each\)',
            lambda m: (cov[:4], (num(m.group(1)), num(m.group(2)), int(m.group(3)), int(m.group(4)))), docs=('README.md',), need=('README.md',))
     if A.rom:
-        romb = open(A.rom, 'rb').read(); trc = json.loads(rd('roms/jp_rev_a/wram/trace_jp_v3.json'))['code']
+        romb = open(A.rom, 'rb').read(); trc = json.loads(rd('roms/jp_rev_a/trace/trace_jp.json'))['code']
         cov_b = set()
         for k_, L_ in trc.items():
             b_ = int(k_[:2], 16); a_ = int(k_[3:], 16); o_ = a_ if b_ == 0 else b_ * 0x4000 + a_ - 0x4000; cov_b.update(range(o_, o_ + L_))
@@ -1256,10 +1256,10 @@ if A.roundtrip:
                        lambda m: ((lab['jr'], lab['Jump'], lab['Call']), (num(m.group(1)), num(m.group(2)), num(m.group(3)))), docs=('README.md',), need=('README.md',))
             elif variant == 'fixed':
                 shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
-                subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'roms/jp_rev_a/pocketcamera_jp.sym', '--trace', 'roms/jp_rev_a/wram/trace_jp_v3.json'], capture_output=True, text=True)
+                subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--rom', A.rom, '--sym', 'roms/jp_rev_a/pocketcamera_jp.sym', '--trace', 'roms/jp_rev_a/trace/trace_jp.json'], capture_output=True, text=True)
             else:
                 shutil.copytree(os.path.join(tmp, 'hex'), d); [os.remove(os.path.join(d, f)) for f in os.listdir(d) if f.endswith('.o') or f == 'game.gb']
-                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--const' if variant == 'const' else '--ram', '--rom', A.rom, '--sym', 'roms/jp_rev_a/pocketcamera_jp.sym', '--trace', 'roms/jp_rev_a/wram/trace_jp_v3.json'], capture_output=True, text=True)
+                sf = subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--tables', '--const' if variant == 'const' else '--ram', '--rom', A.rom, '--sym', 'roms/jp_rev_a/pocketcamera_jp.sym', '--trace', 'roms/jp_rev_a/trace/trace_jp.json'], capture_output=True, text=True)
                 st = {k: int(v) for k, v in re.findall(r'(\w+)=(\d+)', sf.stdout.split('sym_fix:')[-1])}
                 if variant == 'const':
                     quoted('sym_fix stats', r'\((\d+) MBC writes, (\d+) byte counts and (\d+) sprite positions in `bc`, (\d+) far-pointer loads, ([\d,]+) \+ ([\d,]+) word-table rows as `dw`, (\d+) `\{lo,hi,bank\}` rows',

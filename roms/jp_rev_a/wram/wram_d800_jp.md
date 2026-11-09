@@ -1,6 +1,6 @@
 ## WRAM `$D800-$D9FF` (region `d800`)
 
-*Status: complete pass on the v2 tables. Coverage: all 274 addresses of this range that appear in `roms/jp_rev_a/wram/wram_summary.csv` have a row: 224 code-traced (C), 47 inferred (I), 2 unused/dead (U: `D818`, `D92E`), 1 inconclusive (?: `D861`). The remaining 238 bytes of the 512-byte page never appear in the summary; they are covered by rows too (C/I/U: array members reached by indexed addressing, padding slots), so the page has no undocumented byte. Rows are in address order; each overlay has its own paragraph.*
+*Status: complete pass on the v2 tables. Coverage: all 274 addresses of this range that appear in `roms/jp_rev_a/wram/wram_summary_jp.csv` have a row: 224 code-traced (C), 47 inferred (I), 2 unused/dead (U: `D818`, `D92E`), 1 inconclusive (?: `D861`). The remaining 238 bytes of the 512-byte page never appear in the summary; they are covered by rows too (C/I/U: array members reached by indexed addressing, padding slots), so the page has no undocumented byte. Rows are in address order; each overlay has its own paragraph.*
 
 ### 0. What this page really is
 
@@ -23,8 +23,8 @@ The previous README read `$D890-$D9F8` as "three parallel 3-byte cursor structur
 
 ### Method and evidence
 
-* Every claim cites `bank:address` of instructions that I read in a linear-sweep listing of the bank (mgbdis output; not kept) and that belong to the proven-code set (`trace_jp.json` key `code`). "C" rows are code-traced; "I" rows name a role inferred from the data flow; "U" rows are dead/unused in the proven code; "?" rows are inconclusive.
-* The tracer's built-in mode table stops at mode `$1D`; the traces used here add the roots `8:4887`, `5:4000`, `5:74CC`, `9:5FE3` (tools/extra_roots.json). The access tables now contain exactly the same 274 addresses for this range as a separate re-trace with those roots (checked: no address on either side only), so the numbers below use these tables.
+* Every claim cites `bank:address` of instructions that I read in a linear-sweep listing of the bank (mgbdis output; not kept) and that belong to the proven-code set (`trace_jp_v1.json` key `code`). "C" rows are code-traced; "I" rows name a role inferred from the data flow; "U" rows are dead/unused in the proven code; "?" rows are inconclusive.
+* The tracer's built-in mode table stops at mode `$1D`; the traces used here add the roots `8:4887`, `5:4000`, `5:74CC`, `9:5FE3` (roms/jp_rev_a/trace/extra_roots_jp.json). The access tables now contain exactly the same 274 addresses for this range as a separate re-trace with those roots (checked: no address on either side only), so the numbers below use these tables.
 * Unresolved data-driven callbacks of that trace (bank 3 `$5F68/$5F91`, bank 7 `$792C/$7BF3/$7C62/$7CD1`, `call $FF80`) could touch variables of this page without being visible in the access table; nothing in the code read here suggests they do.
 * Names in the "Name" column are mine; sweep labels such as `Call_000_1017` are not names.
 
@@ -224,7 +224,7 @@ The README §3.2 block is **217 bytes = 215 data bytes `$1000-$10D6` + 2 checksu
 
 | SRAM offset (flat) | Size | WRAM image | Format in WRAM | Moved by |
 |---|---|---|---|---|
-| `$1000-$105E` | 47 | `$D681-$D6E3` (animation list, not this page) | see `wram_d600.md` | other region |
+| `$1000-$105E` | 47 | `$D681-$D6E3` (animation list, not this page) | see `wram_d600_jp.md` | other region |
 | `$1061` | 1 | `$D93D` duty (bits 5-4), `$D93E` length index (bits 3-0) | 1 byte per field | unpack `2:4F32`, pack `2:4A81` |
 | `$1062` | 1 | `$D93F` U/D (bit 7), `$D940` period (bits 6-4), `$D941` volume (bits 3-0) | 1 byte per field | `2:4F38` / `2:4A87` |
 | `$1063-$1064` | 2 | `$D942` depth, `$D943` speed (low 7 bits), `$D944` mode (bit 7 of `$1063` = bit 0, bit 7 of `$1064` = bit 1) | | `2:4F3E` / `2:4A8D` |

@@ -2,7 +2,7 @@
 """Post-process an mgbdis disassembly of Pocket Camera (Japan) Rev A so that the numbers mgbdis turns into labels read as numbers again.
 
   mgbdis --print-hex --output-dir disasm_out pocketcamera_jp.gb          # pocketcamera_jp.sym must sit beside the ROM
-  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace roms/jp_rev_a/wram/trace_jp_v3.json] [--tables] [--ram] [--const] [--strip-hex]
+  tools/sym_fix.py disasm_out [--rom pocketcamera_jp.gb] [--sym pocketcamera_jp.sym] [--trace roms/jp_rev_a/trace/trace_jp.json] [--tables] [--ram] [--const] [--strip-hex]
   cd disasm_out && make && md5sum game.gb                                # must still be fdcfe686cf4df461e870b6e53b2b5a8b
 
 Why: mgbdis v3.0 prints a symbol for ANY 16-bit operand that equals the address of a label of the current bank (or of bank 0 below $4000),
@@ -20,7 +20,7 @@ repairs the cases that can be told from the code (every decision uses the instru
                                                                            {lo,hi,bank} far pointers is written `dw Label` + `db BANK(Label)` for every row whose target has a label
   5. `--ram` (L4): every instruction that uses a RAM address is written with the name of roms/jp_rev_a/disasm/ram_names_jp.csv (tools/ram_names.py): `ld a, [$d5ce]` -> `ld a, [wMode]`,
                                                                            `ldh [$ff9a], a` -> `ldh [hOamCursor], a`, `ld hl, $d52a` -> `ld hl, wRngTable`, an address inside a range -> `name + $off`; `ld hl, $ffff` before
-                                                                           `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (roms/jp_rev_a/wram/wram_access.csv)
+                                                                           `set|res n, [hl]` -> `ld hl, rIE`. A `mem` / `ldh` operand is always an address; a 16-bit immediate only when the access table (roms/jp_rev_a/wram/wram_access_jp.csv)
                                                                            holds a pointer load (kind P) at that instruction and it is not listed in roms/jp_rev_a/disasm/ram_exclude_jp.csv (byte counts, offsets, coordinate pairs
                                                                            that happen to equal an address). The names are defined in roms/jp_rev_a/disasm/ram_jp.inc, which is copied to the listing and INCLUDEd by game.asm.
   6. `--const` (L4, implies --ram): values of a group are written with their constant (also the states: `ld a, $08 / ld [wState], a` -> `ld a, STATE_0E_EXCHANGE_WAIT_A`, the group of the
@@ -39,7 +39,7 @@ Stats are printed. Every rewrite keeps the operand value, so the ROM is byte-ide
 import sys, os, re, json, argparse, collections, glob, csv, shutil
 ap = argparse.ArgumentParser()
 ap.add_argument('dir'); ap.add_argument('--rom', default=None); ap.add_argument('--sym', default=None)
-ap.add_argument('--trace', default='roms/jp_rev_a/wram/trace_jp_v3.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
+ap.add_argument('--trace', default='roms/jp_rev_a/trace/trace_jp.json'); ap.add_argument('--tables', '--words', dest='tables', action='store_true'); ap.add_argument('--strip-hex', action='store_true')
 ap.add_argument('--ram', action='store_true', help='write RAM operands with the names of roms/jp_rev_a/disasm/ram_names_jp.csv and add roms/jp_rev_a/disasm/ram_jp.inc to the listing')
 ap.add_argument('--ram-highbyte', default=None); ap.add_argument('--state-helpers', default=None); ap.add_argument('--state-names', default=None)
 ap.add_argument('--text-tables', default=None, help="another build's text table csv, or 'none' (default: the Japanese tables with charmap_jp.inc)"); ap.add_argument('--charmap', default=None)
@@ -139,7 +139,7 @@ if a.ram:
     RAMR = ram_names.Resolver(RAM_ROWS)
     RACC = collections.defaultdict(dict)       # (bank, pc) -> {addr: kind}, and the routine of the instruction
     RFUN = {}
-    for r in csv.DictReader(open(a.ram_access or os.path.join(ROOT, 'roms', 'jp_rev_a', 'wram', 'wram_access.csv'), encoding='utf-8')):
+    for r in csv.DictReader(open(a.ram_access or os.path.join(ROOT, 'roms', 'jp_rev_a', 'wram', 'wram_access_jp.csv'), encoding='utf-8')):
         k = (int(r['bank'], 16), int(r['pc'], 16)); RACC[k].setdefault(int(r['addr'], 16), set()).add(r['kind']); RFUN[k] = r['function']
     RAM_EXCL = set()
     for r in csv.DictReader(open(a.ram_exclude or os.path.join(ROOT, 'roms', 'jp_rev_a', 'disasm', 'ram_exclude_jp.csv'), encoding='utf-8')):

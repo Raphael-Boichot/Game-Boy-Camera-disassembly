@@ -1,13 +1,13 @@
 # WRAM `$C000-$D4FF` and `$DE00-$DFFF` (region `lowwram`)
 
-JP Rev A (`pocketcamera_jp.gb`). Every claim cites `bank:addr` of **proven code** (`roms/jp_rev_a/wram/trace_jp.json`, key `code`). Region = `$C000-$D4FF` and `$DE00-$DFFF` (`$D500-$DDFF` is described in the other region files). Status tags: **C** code-traced, **I** inferred, **U** unused, **?** inconclusive.
+JP Rev A (`pocketcamera_jp.gb`). Every claim cites `bank:addr` of **proven code** (`roms/jp_rev_a/trace/trace_jp_v1.json`, key `code`). Region = `$C000-$D4FF` and `$DE00-$DFFF` (`$D500-$DDFF` is described in the other region files). Status tags: **C** code-traced, **I** inferred, **U** unused, **?** inconclusive.
 
 **How to read this region.**
 * `$C000-$CFFF` (4096 bytes) is *one big overlay area*. Its base meaning is the **photo-slot work buffer**: a RAM image of the first `$FB8` bytes of one album slot (photo `$C000-$CDFF`, thumbnail `$CE00-$CEFF`, tag `$CF00-$CF5B`, tag echo `$CF5C-$CFB7`). The same 4096 bytes are the **link-cable exchange buffer** (RX and TX base = `$C000`, `$1000` bytes). In nearly every mode it is also the staging copy from which the picture is uploaded to VRAM (or into which it is read back from VRAM); once uploaded, the WRAM copy is free and several banks reuse parts of it as tile/graphics/text scratch (section 3).
 * `$D000-$D0BF` is small scratch (image-reduction accumulators, bank-7 collision masks, a bank-5 BG-row buffer). `$D200` is the print-animation packet, `$D300` the VBlank VRAM write queue, `$D400-$D49F` the **OAM shadow** (DMA source page `$D4`). `$DE00-$DFFE` is the stack.
 * There is no `$C000-$D4FF` byte that is *never* touched by proven code except those listed as **U**.
 
-**Evidence note (what the access table misses).** `wram_access.csv` records only accesses through absolute operands. Accesses made through a base register whose *high byte is a constant* (`ld h,$D3`, `ld h,$D4`, `ld b,$D4`, `ld d,$CE`) do not appear. I scanned every proven `ld h/d/b,imm`: hits are `00:0A8F`, `00:0AC2` (-> `$D3`, VRAM queue), `00:08AB`, `00:24CE`, `00:255B`, `04:530A` (-> `$D4`, OAM shadow), `02:45C3`, `02:47FE` (-> `$CE`, thumbnail). `ld de,$C0C0` at `03:6642` and `04:504B` is a pair of byte constants (D=E=`$C0`, tile-number bases) and **not** an address (false positive).
+**Evidence note (what the access table misses).** `wram_access_jp.csv` records only accesses through absolute operands. Accesses made through a base register whose *high byte is a constant* (`ld h,$D3`, `ld h,$D4`, `ld b,$D4`, `ld d,$CE`) do not appear. I scanned every proven `ld h/d/b,imm`: hits are `00:0A8F`, `00:0AC2` (-> `$D3`, VRAM queue), `00:08AB`, `00:24CE`, `00:255B`, `04:530A` (-> `$D4`, OAM shadow), `02:45C3`, `02:47FE` (-> `$CE`, thumbnail). `ld de,$C0C0` at `03:6642` and `04:504B` is a pair of byte constants (D=E=`$C0`, tile-number bases) and **not** an address (false positive).
 
 **Answers to the open points of the first-round map** (details in the tables):
 1. `$C000-$C0FF` is *not one object*: in the photo screens it is the first tile row of the 128x112-px photo (`$C000-$C0FF` = 16 tiles of the top row); in bank 6 `$C000-$C0FF` is also the output of the 2:1 reducers `00:2734` / `00:27F4` (thumbnail grid) and in bank 9 states 18-23 it holds animation scalars. Its ~290 accesses are mostly `ld hl/de,$C000` = *base of the whole photo/link buffer*.
@@ -155,7 +155,7 @@ Rows with the same start address are *different views of the same bytes* (the la
 
 ## Incidental / single-use addresses
 
-Addresses present in `wram_summary.csv` that are not the start of a row above. Each lies inside the row(s) named (the objects are reached through a base register, so only the base or a few constants show up as absolute operands). Counts are the summary's reads / writes / `ld rr,nn` pointer loads.
+Addresses present in `wram_summary_jp.csv` that are not the start of a row above. Each lies inside the row(s) named (the objects are reached through a base register, so only the base or a few constants show up as absolute operands). Counts are the summary's reads / writes / `ld rr,nn` pointer loads.
 
 | Address | R / W / P | Banks | Inside row(s) |
 |---|---|---|---|
@@ -203,5 +203,5 @@ Addresses present in `wram_summary.csv` that are not the start of a row above. E
 
 ## Coverage
 
-90 addresses of `wram_summary.csv` fall in the region: 49 are the start address of a table row, 41 are listed in the incidental table above; status of the most specific row covering each: C=89, I=0, ?=0, U=1, uncovered=0. Of these, 3 lie in a row that carries an open sub-question (tag `?` in its status: `$C100`, `$C60E`, `$CD0E`) -- see "Still inconclusive".
+90 addresses of `wram_summary_jp.csv` fall in the region: 49 are the start address of a table row, 41 are listed in the incidental table above; status of the most specific row covering each: C=89, I=0, ?=0, U=1, uncovered=0. Of these, 3 lie in a row that carries an open sub-question (tag `?` in its status: `$C100`, `$C60E`, `$CD0E`) -- see "Still inconclusive".
 

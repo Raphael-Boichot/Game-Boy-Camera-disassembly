@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Summarise the BGB watchpoint log of wram_probe.py (README 2.13).
 
-usage: wram_probe_report.py PROBE.csv[,PROBE2.csv...] WATCH.csv SITES_OUT.csv NAMES_OUT.csv [--sym pocketcamera_jp.sym] [--access roms/jp_rev_a/wram/wram_access.csv]
+usage: wram_probe_report.py PROBE.csv[,PROBE2.csv...] WATCH.csv SITES_OUT.csv NAMES_OUT.csv [--sym pocketcamera_jp.sym] [--access roms/jp_rev_a/wram/wram_access_jp.csv]
   PROBE.csv   output of wram_probe.py: entry, sig, end, kind R|W, addr (start of the watched range), pc, mode, state, rombank, value, a, hits
   WATCH.csv   name, addr, size, tag, static (tcrf_check/tools/wram_probe_list.py)
 SITES_OUT   one row per (access kind, name, bank:pc): hits, replays, modes, values, class
-              S    the instruction is a proven access site of wram_access.csv (R/W row of that name at that bank:pc)
+              S    the instruction is a proven access site of wram_access_jp.csv (R/W row of that name at that bank:pc)
               other the byte belongs to another view of the overlay area $C000-$D4FF at that instruction (the scope of this name, README 2.13, does not cover the bank / routine): not a use of this name
               ptr  the routine that holds the instruction also loads the address as a pointer (P row), so a pointer-based access is expected there
               init the start-up initialisation of bank 0 (the routines in INIT: the memory clear `Mem_Zero`, the fill loops, `Boot_ColdStart`, the clears of `Main_Entry`, the sound-RAM clear `Snd_Init`, the animation-slot clear `Anim_ClearSlots`): baseline writes, not uses of the game
@@ -21,7 +21,7 @@ def opt(n, d=None):
         i = args.index(n); v = args[i + 1]; del args[i:i + 2]; return v
     return d
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sym = opt('--sym', ROOT + '/roms/jp_rev_a/pocketcamera_jp.sym'); acc = opt('--access', ROOT + '/roms/jp_rev_a/wram/wram_access.csv')
+sym = opt('--sym', ROOT + '/roms/jp_rev_a/pocketcamera_jp.sym'); acc = opt('--access', ROOT + '/roms/jp_rev_a/wram/wram_access_jp.csv')
 probe, watch, sites_out, names_out = args[:4]
 W = list(csv.DictReader(open(watch, encoding='utf-8')))
 ROWS = {r.name: r for r in RN.load()}

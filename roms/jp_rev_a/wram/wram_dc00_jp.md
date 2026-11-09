@@ -1,6 +1,6 @@
 ## WRAM `$DC00-$DDFF` (region `dc00`)
 
-*Status: full pass on the v2 tables. Coverage: 137 addresses of `$DC00-$DDFF` appear in `roms/jp_rev_a/wram/wram_summary.csv`; **all 137** have a row (C 125, I 0, U 12, ? 0). All 512 bytes of the range are covered by rows (178 bytes C, 0 I, 334 U, 0 ?). The stack `$DE00-$DFFF` belongs to another region; note however that the sound init clears `$DD00-$DEFF` (see `$DD00`).*
+*Status: full pass on the v2 tables. Coverage: 137 addresses of `$DC00-$DDFF` appear in `roms/jp_rev_a/wram/wram_summary_jp.csv`; **all 137** have a row (C 125, I 0, U 12, ? 0). All 512 bytes of the range are covered by rows (178 bytes C, 0 I, 334 U, 0 ?). The stack `$DE00-$DFFF` belongs to another region; note however that the sound init clears `$DD00-$DEFF` (see `$DD00`).*
 
 ### 0. What this range really is
 
@@ -14,11 +14,11 @@ The range is **three unrelated subsystems plus unused space**. The previous READ
 | `$DD00-$DD7F` | **Sound driver state** (bank `$1F`): song header copy, 4 music track blocks, SFX channel blocks, request mailboxes | bank `$1F` `$5293-$5730` plus `$41FA-$57C6` tables; requests posted from bank 0 `$2A4B/$2A7C/$2A80/$2A84/$2A88` (421 + 81 + 10 + 10 + 10 proven call sites) | C |
 | `$DD80-$DDFF` | unused (but cleared by the sound init) | - | U |
 
-(The print-job variables of the print *menus* are in `$D800-$D814` and `$DB4D-$DB6D`: see `wram_d800.md` / the `DA00` file. The music *editor* variables are in `$D890-$D9D6`; no proven bank-0 instruction other than the mailbox helpers `00:2A4B-2A88` and `00:16F4` touches `$DD00-$DD7F`, so the bank-0 editor player `$1017-$1560` drives the APU on its own: I, see "Still inconclusive".)
+(The print-job variables of the print *menus* are in `$D800-$D814` and `$DB4D-$DB6D`: see `wram_d800_jp.md` / the `DA00` file. The music *editor* variables are in `$D890-$D9D6`; no proven bank-0 instruction other than the mailbox helpers `00:2A4B-2A88` and `00:16F4` touches `$DD00-$DD7F`, so the bank-0 editor player `$1017-$1560` drives the APU on its own: I, see "Still inconclusive".)
 
 ### Method and evidence
 
-* Every claim cites `bank:address` of instructions that belong to the proven-code set (`trace_jp.json` key `code`), read through a private disassembler over exactly that set (`not proven` lines are never used). Accesses made through HL/DE/BC are not in the access table; for those I read the code and cite the instruction.
+* Every claim cites `bank:address` of instructions that belong to the proven-code set (`trace_jp_v1.json` key `code`), read through a private disassembler over exactly that set (`not proven` lines are never used). Accesses made through HL/DE/BC are not in the access table; for those I read the code and cite the instruction.
 * `C` = writer(s) and reader(s) read and role evident; `I` = inferred (what from is said); `U` = unused/dead (only written, only read, or only touched from unreachable code); `?` = inconclusive (facts given).
 * Names are mine and describe the role; sweep labels are not used as evidence.
 * The previous claims listed in the task were each re-derived; the verdicts are in "Corrections to the previous README".
@@ -29,7 +29,7 @@ The range is **three unrelated subsystems plus unused space**. The previous READ
 
 **Packet layout (code-traced).** Every packet is `88 33`, command, compression flag, 2-byte length, data, 2-byte checksum, then two dummy bytes during which the printer returns its device id (`$81`, `DC28`) and the status byte (`DC27`). The driver walks the sections with `DC0F/DC10/DC11/DC12/DC25/DC26` and tracks the state in `DC0D` (0 none or error, 1 idle, 2/3/5/6 packet of that type in flight, 7 waiting for the status byte). Internal packet types in `DC2B`: 1 INIT, 2 PRINT, 3 DATA header, 5 INQUIRY, 6 end-of-data (empty DATA). **No packet of type 4 (BREAK) is ever queued**; a BREAK packet exists in the code at `00:1B87` but nothing references it.
 
-**One print band.** The `$0280`-byte data section (`DC17` is always `$0280`: 640 bytes = 2 tile rows of 20 tiles) is sent from the pointer in `DC1B/DC1F`; the PRINT packet is built by `00:1BA4` in the 12-byte buffer `DC2D` (`02 00 04 00` copied from ROM `$1B7B`, then `DC31` = `[DC08]` sheets (always 1), `DC32` = `[DC09]` margin byte (high nibble = blank lines before, low nibble = after; computed by `00:3339` from `D801/D802` of the print menu, see `wram_d800.md`), `DC33` = `[DC0A]` palette (constant `$E4`), `DC34` = `[DAAB]` print intensity (SRAM `10D0`), `DC35:36` checksum, `DC37:38` dummy bytes).
+**One print band.** The `$0280`-byte data section (`DC17` is always `$0280`: 640 bytes = 2 tile rows of 20 tiles) is sent from the pointer in `DC1B/DC1F`; the PRINT packet is built by `00:1BA4` in the 12-byte buffer `DC2D` (`02 00 04 00` copied from ROM `$1B7B`, then `DC31` = `[DC08]` sheets (always 1), `DC32` = `[DC09]` margin byte (high nibble = blank lines before, low nibble = after; computed by `00:3339` from `D801/D802` of the print menu, see `wram_d800_jp.md`), `DC33` = `[DC0A]` palette (constant `$E4`), `DC34` = `[DAAB]` print intensity (SRAM `10D0`), `DC35:36` checksum, `DC37:38` dummy bytes).
 
 **Dead code.** The variable-length/compressed-band path of `00:19EB` (`[DC0B]` is never non-zero, `$DBEC-$DC07` is never written), plus `DC21`, `DC2A`, `DC39-DC3A`, `DC3F`: never read or never written in proven code (rows say which).
 
@@ -157,7 +157,7 @@ The range is **three unrelated subsystems plus unused space**. The previous READ
 
 | Address | Size | Name | Type/format | Used by (bank:function) | Meaning, values, init | Status |
 |---|---|---|---|---|---|---|
-| `$DC5F-$DCFF` | 161 | `unused_dc5f_dcff` | - | no proven instruction touches any byte of `$DC5F-$DCFF` (none is in `wram_summary.csv`) | 161 bytes, zero after the boot/soft-reset clear (`00:0181`). Not part of the printer, link or sound state. | **U** |
+| `$DC5F-$DCFF` | 161 | `unused_dc5f_dcff` | - | no proven instruction touches any byte of `$DC5F-$DCFF` (none is in `wram_summary_jp.csv`) | 161 bytes, zero after the boot/soft-reset clear (`00:0181`). Not part of the printer, link or sound state. | **U** |
 
 #### 4.4 `$DD00-$DD7F` sound driver
 
@@ -201,7 +201,7 @@ The range is **three unrelated subsystems plus unused space**. The previous READ
 
 ### 5. Incidental / single-use list and coverage index
 
-Every address of `$DC00-$DDFF` that appears in `roms/jp_rev_a/wram/wram_summary.csv` is listed below with its access counts (`R`eads, `W`rites, `P`ointer loads from the summary) and the row that explains it. All other addresses of the range have no proven access at all; they are covered by the unused rows.
+Every address of `$DC00-$DDFF` that appears in `roms/jp_rev_a/wram/wram_summary_jp.csv` is listed below with its access counts (`R`eads, `W`rites, `P`ointer loads from the summary) and the row that explains it. All other addresses of the range have no proven access at all; they are covered by the unused rows.
 
 ```
 DC08  R  1 W  2 P  0  banks 00:2 05:1              -> prn_sheets (C)

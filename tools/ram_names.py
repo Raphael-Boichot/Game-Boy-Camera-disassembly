@@ -12,7 +12,7 @@ Derived, never edited by hand:
 
 Columns of the table: addr (hex), size (bytes), name, scope, tag (C / I / U / ?), desc (the row of the map).
 Prefixes: `w` WRAM, `h` HRAM. A name is used as `name` at its first byte and as `name + $off` inside the range.
-scope: which instructions may use the row. `*` every bank, `BB` one bank, `BB:AAAA` one routine (the `function` column of roms/jp_rev_a/wram/wram_access.csv), a routine label
+scope: which instructions may use the row. `*` every bank, `BB` one bank, `BB:AAAA` one routine (the `function` column of roms/jp_rev_a/wram/wram_access_jp.csv), a routine label
 (`Bank005_State08`) or `BB@AAAA` one instruction; several separated by `;`. Rows of the overlay area $C000-$D4FF (one address, several buffers: README section 2) carry the
 scope of the routines that use that view. For one site the most specific scope wins (instruction, routine, bank, `*`), then the narrowest range."""
 import csv, os, re, sys, argparse

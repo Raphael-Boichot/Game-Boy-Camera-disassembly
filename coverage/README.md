@@ -31,5 +31,5 @@ python3 tools/coverage_run.py --hours 1 --state /tmp/mystate         # a fresh f
 ```
 
 Definitions: **organic** = joypad input and an SRAM image only; **forced** = a RAM variable was written from outside or the mode byte was set. The core models the CPU, interrupts, timers, LCD timing (no rendering), joypad, serial with a minimal printer and the Pocket Camera mapper with a synthetic sensor image; it has no link partner, SGB or sound and has **not** been compared cycle-exactly with BGB or hardware.
-The static trace it is compared against is `../wram/trace_jp_v3.json` (from `../tools/rom_trace.py --roots ../tools/extra_roots.json`).
+The static trace it is compared against is `../roms/jp_rev_a/trace/trace_jp.json` (from `../tools/rom_trace.py --roots ../roms/jp_rev_a/trace/extra_roots_jp.json`).
 Results and caveats: README section 13.

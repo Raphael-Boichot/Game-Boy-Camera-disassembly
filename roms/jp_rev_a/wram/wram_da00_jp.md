@@ -1,6 +1,6 @@
 ## WRAM `$DA00-$DBFF` (region `da00`)
 
-*Status: first complete pass on the v2 tables. Coverage: all 129 addresses of this range that appear in `roms/jp_rev_a/wram/wram_summary.csv` are covered by one of the 102 rows below (129 of 129); the bytes that never appear in the summary are listed at the end. Tags C/I/U/? as in README §2.0; "unproven code" means code that is not in `roms/jp_rev_a/wram/trace_jp.json`.*
+*Status: first complete pass on the v2 tables. Coverage: all 129 addresses of this range that appear in `roms/jp_rev_a/wram/wram_summary_jp.csv` are covered by one of the 102 rows below (129 of 129); the bytes that never appear in the summary are listed at the end. Tags C/I/U/? as in README §2.0; "unproven code" means code that is not in `roms/jp_rev_a/trace/trace_jp_v1.json`.*
 
 
 ### 0. What this range really is
@@ -28,7 +28,7 @@ Where the previous README spoke of a "bank-007 frame/stamp picker" (`$DA00-$DA42
 
 ### Method and evidence
 
-Every row's "Used by" column is generated mechanically from `roms/jp_rev_a/wram/wram_access.csv` (proven instructions only: W/R/P with `bank:pc`); accesses through HL/DE/BC are not in that table, so for arrays and buffers the roles were read from the code around the P rows and are named in the Meaning column. The routines were disassembled from the ROM bytes with a private SM83 disassembler that marks instructions outside the proven set (`trace_jp.json` `code`) as data. Where I had to decode bytes that are **not** in the proven set (the bank 7 menu callbacks `7:7AF1-7B43` and the transition helpers `7:7BF4-7D30`, reached only through `jp hl`), I say so in the row and tag the status I. The OAM byte order (Y, X) used to name X/Y coordinates was checked in the sprite helper `0:247D-24E4` (`C` is added to the first OAM byte, `B` to the second). Bank numbers are shown with two hex digits when auto-generated; hand-written citations use the bank number as written in the code.
+Every row's "Used by" column is generated mechanically from `roms/jp_rev_a/wram/wram_access_jp.csv` (proven instructions only: W/R/P with `bank:pc`); accesses through HL/DE/BC are not in that table, so for arrays and buffers the roles were read from the code around the P rows and are named in the Meaning column. The routines were disassembled from the ROM bytes with a private SM83 disassembler that marks instructions outside the proven set (`trace_jp_v1.json` `code`) as data. Where I had to decode bytes that are **not** in the proven set (the bank 7 menu callbacks `7:7AF1-7B43` and the transition helpers `7:7BF4-7D30`, reached only through `jp hl`), I say so in the row and tag the status I. The OAM byte order (Y, X) used to name X/Y coordinates was checked in the sprite helper `0:247D-24E4` (`C` is added to the first OAM byte, `B` to the second). Bank numbers are shown with two hex digits when auto-generated; hand-written citations use the bank number as written in the code.
 
 
 ### 1. `$DA00-$DA0C` and `$DBCE`: bank 7 mode `$0E` (link-cable exchange, `07:4000`)
@@ -68,7 +68,7 @@ Every row's "Used by" column is generated mechanically from `roms/jp_rev_a/wram/
 
 **Overlay of bank 7 mode `$00`** (main menu: an upper page with items 0-2 and a lower page with items 3-6). `DA16` (current item) is cleared together with `DA17/DA18` at the start of the main loop (`00:2EE9/2EEC/2EEF`), so every return to the main loop starts on item 0. A press of A/B/Start stores the pressed bits in `D5DF` (`07:7269`) and `07:77AF` branches: A (bit 0) -> mode `[07:7804 + DA16]` with state 0 (table `01 02 07 04 06 03 05 FF`, i.e. items 0..6 -> modes `$01` 04:6F96, `$02` 07:51AC, `$07` 07:54ED, `$04` 03:7AA8, `$06` 03:7695, `$03` 07:53BE, `$05` 03:7BFD by the mode table (README §2.3); `FF` is refused with sound `$0B` and the state is restored from `DA30`), B (bit 1) -> mode `$19` state 2, otherwise (Start) -> mode `$08` state 0 (owner registration/statistics, section 5). Select (bit 2) calls `07:73EF` (shake + transition) and `07:774C` returns to the page remembered in `DA18`/`DA19`.
 
-**Icon animators (`DA1A-DA2D`)**: five slots of the same kind as the link animators. `07:7900` is called with HL = a table of 6-byte entries `frame_lo, frame_hi, Y, X, callback` (upper page: `07:7985`/`07:79E5`, 3 entries; the lower page uses 5 entries, calls at `07:7A3F-7ACF`). For slot *i* it clamps the frame `DA1F+i` into `[frame_lo, frame_hi)` (looping to `frame_lo`), copies `Y` into `DA24+i` and `X` into `DA29+i`, then jumps to the callback (`jp hl` at `07:792C`). The five callbacks `07:7AF1/7AF6/7AFB/7B00/7B05` (`ld de,i` then the common code `07:7B08`) draw sprite `[07:7B44 + 2*frame]` at (B = `DA29+i`, C = `DA24+i`) with `00:247D` and step tick `DA1A+i` against the duration in the next table byte, then the frame (`FF` = loop target). **These callbacks are reached only through `jp hl` and are not in the proven set of `trace_jp.json`; I decoded them by hand from the ROM bytes (`07:7AF1-7B43`, byte-exact), so their writes are tagged I.** The same applies to `07:7BF4-7D30` (transition helpers, `DA2E`).
+**Icon animators (`DA1A-DA2D`)**: five slots of the same kind as the link animators. `07:7900` is called with HL = a table of 6-byte entries `frame_lo, frame_hi, Y, X, callback` (upper page: `07:7985`/`07:79E5`, 3 entries; the lower page uses 5 entries, calls at `07:7A3F-7ACF`). For slot *i* it clamps the frame `DA1F+i` into `[frame_lo, frame_hi)` (looping to `frame_lo`), copies `Y` into `DA24+i` and `X` into `DA29+i`, then jumps to the callback (`jp hl` at `07:792C`). The five callbacks `07:7AF1/7AF6/7AFB/7B00/7B05` (`ld de,i` then the common code `07:7B08`) draw sprite `[07:7B44 + 2*frame]` at (B = `DA29+i`, C = `DA24+i`) with `00:247D` and step tick `DA1A+i` against the duration in the next table byte, then the frame (`FF` = loop target). **These callbacks are reached only through `jp hl` and are not in the proven set of `trace_jp_v1.json`; I decoded them by hand from the ROM bytes (`07:7AF1-7B43`, byte-exact), so their writes are tagged I.** The same applies to `07:7BF4-7D30` (transition helpers, `DA2E`).
 
 | Address | Size | Name | Type/format | Used by (bank:function) | Meaning, values, init | Status |
 |---|---|---|---|---|---|---|
@@ -243,7 +243,7 @@ Written or read only by the printer serial routines of bank 0.
 
 ### 15. Bytes of the page with no proven access
 
-These ranges never appear in `wram_summary.csv` and no row above covers them. No proven instruction reads or writes them; an access through HL/DE/BC or a block copy cannot be excluded, so they are **not** claimed to be unused.
+These ranges never appear in `wram_summary_jp.csv` and no row above covers them. No proven instruction reads or writes them; an access through HL/DE/BC or a block copy cannot be excluded, so they are **not** claimed to be unused.
 
 | Address | Size | Name | Type/format | Used by (bank:function) | Meaning, values, init | Status |
 |---|---|---|---|---|---|---|
@@ -259,7 +259,7 @@ These ranges never appear in `wram_summary.csv` and no row above covers them. No
 3. `$DA49-$DA5A` owner buffer is 18 bytes (consistent with README §3.3), and `$DA5B-$DA90` is `$36` bytes = tag offsets `F00-F35`; `F15-F2F` is the 27-cell comment (`$DA70-$DA8A`), `F30-F32` = `$DA8B-$DA8D`.
 4. `$DA96-$DAAB` is the 22-byte shadow of SRAM `$10BB-$10D0` (README §3 already says so), **not** part of the sound pack/unpack (`2:4A6B` / `2:4F2B` handle `$D93D-$D9D2` <-> SRAM `$B061-$B0BA`), as the first-round map had assumed. New: it also decides which of the eight bonus pictures of album B (slots `$2E-$35`) are unlocked (`2:4D05`, thresholds in section 10).
 5. `$DAA0-$DB80` "UI scratch": actually the game records (`$DAA0-$DAA7`), the bank 4 delete effect (`$DAAC-$DB4C`) and the print source tables and state (`$DB4D-$DB6F`, band descriptors `$DB70-$DBBF`).
-6. `$D803` (print job index, see `wram_d800.md`) is only a pass/job counter; the flag that actually selects the plain (0) or framed (1) layout is `$DBCB` itself, written by the mode-`$1C`/`$1E` states (`8:412B`, `8:47B6`, `8:47E7`) and by bank 4 (`4:6C80`, `4:79E9`).
+6. `$D803` (print job index, see `wram_d800_jp.md`) is only a pass/job counter; the flag that actually selects the plain (0) or framed (1) layout is `$DBCB` itself, written by the mode-`$1C`/`$1E` states (`8:412B`, `8:47B6`, `8:47E7`) and by bank 4 (`4:6C80`, `4:79E9`).
 7. `$DBCF` is the message id of the shared result/error screen `9:7290` (written from banks 0, 3, 4, 6, 7), not only a result code.
 8. `$DC00-$DC5E` "sound engine": the `$DC2D` block is the printer packet (`$DC08` = 1, `$DC09` margin, `$DC0A` = `$E4`, `$DC34` = print density `DAAB`).
 9. `$CFFF` is not an alias of `$DA56` (already corrected in `wram_lowwram`); it is the exchange byte carrying the sender's `DA56` during the link exchange (`7:4409`, `7:477D`, `7:4A17`).
@@ -278,7 +278,7 @@ These ranges never appear in `wram_summary.csv` and no row above covers them. No
 * Exact meaning of `DA32`'s state 3 (edge-push exit target) in bank 4 pen/stamp.
 * Length of the table at `$DBFE` (runs into `$DC00`) and `$DBEC` (18 is the distance to `$DBFE`).
 
-### Access-count index (every `$DA00-$DBFF` address of `wram_summary.csv`)
+### Access-count index (every `$DA00-$DBFF` address of `wram_summary_jp.csv`)
 
 R = proven reads, W = proven writes, P = `ld rr,nn` pointer loads of that address (array/buffer bases); `row` = the table row (section) that explains it. This is the list used for the mechanical coverage check.
 
@@ -417,4 +417,4 @@ R = proven reads, W = proven writes, P = `ld rr,nn` pointer loads of that addres
 
 ### Update after the v3 trace (callbacks proven live)
 
-The bank 7 callbacks `07:7AF1-7B43` and the transition helpers `07:7BF4-7D30` are reached through the 6-byte-entry tables at `07:7985-7AD3` and are rooted by `tools/extra_roots.json`. The accesses of `$DA1A`, `$DA1F`, `$DA24`, `$DA29` and `$DA2E` are therefore on proven-live code; their status is raised from I to C (the on-screen meaning remains an inference).
+The bank 7 callbacks `07:7AF1-7B43` and the transition helpers `07:7BF4-7D30` are reached through the 6-byte-entry tables at `07:7985-7AD3` and are rooted by `roms/jp_rev_a/trace/extra_roots_jp.json`. The accesses of `$DA1A`, `$DA1F`, `$DA24`, `$DA29` and `$DA2E` are therefore on proven-live code; their status is raised from I to C (the on-screen meaning remains an inference).
