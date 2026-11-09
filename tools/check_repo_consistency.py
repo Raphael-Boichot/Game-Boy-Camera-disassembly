@@ -745,6 +745,28 @@ for _f, _t in (('jp_rev_a', 'jp'), ('us_eu', 'us'), ('gold', 'gold'), ('hello_ki
             if _q is not None and _n not in _q: bad('status', '%s: placeholder names quoted %s, sym_names_%s.csv has %d' % (_doc, _q, _t, _n))
         if not re.search(r'\b%s placeholder' % _n, README): bad('status', 'README.md does not quote the %d placeholder names of %s' % (_n, _t))
 if len(FAIL) == _nf: ok('status', 'L3 status words agree with the placeholder names of every ROM')
+# ------------------------------------------------------------------ the level of each ROM: its README, ROADMAP.md and the summary of README.md agree
+_LV = ('L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6'); _nf2 = len(FAIL)
+def _levels(text, start=None):
+    out = {}
+    if start: text = text[text.index(start):]
+    for m in re.finditer(r'^\| (L\d)(?:-(L\d))? \| (done|partial|not started)\b', text, re.M):
+        a_, b_ = int(m.group(1)[1]), int((m.group(2) or m.group(1))[1])
+        for k in range(a_, b_ + 1): out.setdefault('L%d' % k, m.group(3))
+        if b_ < a_: pass
+    return out
+_RM = rd('ROADMAP.md'); _RD = rd('README.md')
+for _f, _title in (('jp_rev_a', 'Pocket Camera (Japan) (Rev A)'), ('us_eu', 'Game Boy Camera (USA, Europe)'), ('gold', 'Game Boy Camera Gold (USA)'),
+                   ('hello_kitty', 'Pocket Camera (Hello Kitty)'), ('prototype_debagame', 'Pocket Camera Prototype (Japan) ("DEBAGAME")')):
+    _own = _levels(rd('roms/%s/README.md' % _f))
+    _sec = _RM.split('\n## ')
+    _road = next((_levels(x) for x in _sec if x.startswith(_title)), {})
+    _m = re.search(r'^\| %s \| ([^\n]+)\|$' % re.escape(_title), _RD, re.M)
+    _sum = dict(zip(_LV, [c.strip() for c in _m.group(1).split('|')])) if _m else {}
+    for _l in _LV:
+        _v = {_own.get(_l), _road.get(_l), _sum.get(_l)}
+        if len(_v) != 1 or None in _v: bad('levels', '%s %s: README of the ROM says %s, ROADMAP.md %s, README.md summary %s' % (_f, _l, _own.get(_l), _road.get(_l), _sum.get(_l)))
+if len(FAIL) == _nf2: ok('levels', 'the levels of the five ROMs agree in their READMEs, ROADMAP.md and the README.md summary')
 # ------------------------------------------------------------------ files and section references
 miss = []
 for _f, _t in RDOCS:                       # a link is relative to the file that holds it

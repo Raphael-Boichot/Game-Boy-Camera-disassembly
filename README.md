@@ -2,6 +2,16 @@
 
 # Game Boy Camera disassembly - the definitive version
 
+**Levels** (`HOWTO_NEW_ROM.md` section 0; what is left for each level, and in which order: [`ROADMAP.md`](ROADMAP.md)):
+
+| ROM | L0 | L1 | L2 | L3 | L4 | L5 | L6 |
+|---|---|---|---|---|---|---|---|
+| Pocket Camera (Japan) (Rev A) | done | done | done | done | done | done | partial |
+| Game Boy Camera (USA, Europe) | done | done | done | done | done | done | partial |
+| Game Boy Camera Gold (USA) | done | done | done | done | done | done | partial |
+| Pocket Camera (Hello Kitty) | done | done | done | partial | not started | not started | not started |
+| Pocket Camera Prototype (Japan) ("DEBAGAME") | done | done | done | partial | not started | not started | not started |
+
 **The purpose of this project is not to make alternative Game Boy Camera roms as best open source alternatives yet exist, but to understand finely a piece of video game history and reveal definitively all the possible secrets buried into the code.**
 
 This project so proposes a disassembly of the Game Boy Camera / Pocket Camera ROMs. The Japanese Rev A ROM is disassembled first; the international, Gold, Hello Kitty and prototype ROMs follow with the same tools. Work in progress, stay tuned.
@@ -134,6 +144,7 @@ The ROMs are not in the repository (md5 values in §1.1; the owner supplies them
 | [`coverage/`](coverage/) | the project's own emulator core, fuzzer and coverage results |
 | [`link_protocol/`](link_protocol/) | Game Link Cable captures between two emulated cameras |
 | [`source/`](source/) | the owner's material: source pack, Spriters Resource sheets, TCRF pages and pictures, the cameras' SRAM summary |
+| [`ROADMAP.md`](ROADMAP.md) | what is left for each level of each ROM, and the order of the work |
 | [`HOWTO_NEW_ROM.md`](HOWTO_NEW_ROM.md), [`skills/`](skills/) | the playbook (levels L0-L6) for the next ROM |
 | [`CLAUDE.md`](CLAUDE.md) | working rules for the AI sessions |
 
