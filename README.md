@@ -1,3 +1,5 @@
+# WORK IN PROGRESS
+
 # Game Boy Camera disassembly - the definitive version
 
 **The purpose of this project is not to make alternative Game Boy Camera roms as best open source alternatives yet exist, but to understand finely a piece of video game history and reveal definitively all the possible secrets buried into the code.**
