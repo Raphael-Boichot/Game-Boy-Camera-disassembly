@@ -43,6 +43,56 @@ prefix,ModeState,SYS,mode and state setters
 prefix,ModeTable,SYS,the mode table
 prefix,State,SYS,state setters
 prefix,RecordBook,UI,the record book
+prefix,Puzzle,GAME,the 15 puzzle
+prefix,Puzzle15,GAME,the 15 puzzle
+prefix,KittHost,GAME,the Kitt games host
+prefix,Scratch,GAME,the scratch card
+prefix,AppleGame,GAME,the printing apple game
+prefix,PrintGame,GAME,the printing apple game
+prefix,TakePhotos,CAM,camera view
+prefix,CameraFrame,CAM,camera frames (31 types)
+prefix,FrameAnim,CAM,camera frame animation channels
+prefix,FrameCorner,CAM,camera frame corner pictures
+prefix,FramePick,CAM,camera frame picker
+prefix,FactoryCheck,CAM,factory check of the sensor
+prefix,AlbumText,ALBUM,album texts
+prefix,SlideShow,ALBUM,slide show
+prefix,PhotoTrain,ALBUM,the photo train
+prefix,PrintFrame,PRINT,print frames
+prefix,Printing,PRINT,printing screens
+prefix,PrintScript,PRINT,print scripts
+prefix,Exchange,LINK,photo exchange
+prefix,NameCard,UI,name card
+prefix,NameCardEdit,UI,name card editor
+prefix,IdCard,UI,name card number
+prefix,CardStats,UI,name card counters
+prefix,KeyPrompt,UI,button prompts
+prefix,Menu,UI,menus
+prefix,PlayMenu,UI,Play menu
+prefix,StrawberryCh,UI,Strawberry Channel
+prefix,Message,UI,messages
+prefix,Fade,UI,screen fades
+prefix,Cursor,UI,cursors
+prefix,FrameRec,SYS,screen records (tiles, map, rows)
+prefix,Obj,SYS,the object engine
+prefix,Objects,SYS,the object engine
+prefix,ObjCmd,SYS,object script commands
+prefix,Text,SYS,text drawing
+prefix,Frame,SYS,per-frame update
+prefix,Digits,SYS,digit drawing
+prefix,Digit,SYS,digit drawing
+prefix,Number,SYS,number drawing
+prefix,ScriptCmd,SYS,script commands
+prefix,Script,SYS,scripts
+prefix,ScriptSlot,SYS,script slots
+prefix,MapRows,SYS,map rows
+prefix,Fill,SYS,fills
+prefix,VramQueue,SYS,VRAM queue
+prefix,Photos,SYS,photo storage
+prefix,Bin,SYS,arithmetic
+prefix,Mul,SYS,arithmetic
+prefix,Keys,SYS,joypad
+prefix,Kitts,SYS,the Kitts counter
 legend,CAM,,"Camera, sensor (factory check and calibration), image processing, effects"
 legend,ALBUM,,"Album, photo train, slide show"
 legend,EDIT,,Stamp window
@@ -51,7 +101,8 @@ legend,PRINT,,"Printer, print screens, print error"
 legend,GAME,,"Kitt games: scratch card, 15 puzzle, their host, the printing apple game"
 legend,DJ,,(no D.J. in this ROM)
 legend,UI,,"Menus, title, name card, record book, Strawberry Channel, messages, fades"
-legend,OTHER,,Code with no function group yet (owned by an automatic label)
+legend,OTHER,,Code with no function group
 legend,OAM,,"Object data: descriptors, scripts and sprite layouts first read by the object engine (evidence I)"
 legend,T_UI,,"Tile sets: screens, menus, fonts, sprites, channel pictures (seen in VRAM tile memory in the core replays, or copied there from a constant source)"
 legend,MAP,,"Tile maps (background layouts; seen in a BG map in the core replays, or copied there from a constant source)"
+legend,T_FRM,,"Tile sets: print frames and photo borders (the six print frames, the camera-frame pictures)"

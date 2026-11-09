@@ -170,7 +170,10 @@ labels = sorted(_lab.items(), key=lambda x: x[0])
 loff = np.array([o for o, _ in labels] or [-1], np.int64); L = len(labels)
 l_code = np.zeros(max(L, 1), np.uint8); l_data = np.zeros(max(L, 1), np.uint8)
 for i, (o, r) in enumerate(labels):
-    l_code[i] = KEY[code_group(r['name'])]
+    _g = code_group(r['name'])
+    if GROUPS and GROUPS != 'none' and _g == 'OTHER' and re.match(r'(Data|Src)_', r['name']) and i and (labels[i - 1][0] >> 14) == (o >> 14):
+        l_code[i] = l_code[i - 1]      # --groups: code under an automatic data label follows inline parameters (Copy_FarInline ...): the routine before it owns it
+    else: l_code[i] = KEY[_g]
     k = data_kind(r['name'])
     if r['conf'] == '?' and k == 'TBL': k = 'UNC'                                          # role doubtful AND no kind in the name
     l_data[i] = KEY[k]

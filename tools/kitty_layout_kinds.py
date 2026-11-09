@@ -4,7 +4,12 @@
   tools/kitty_layout_kinds.py KITTY_ROM [--track roms/hello_kitty/port/display_kitty.npz] [--out roms/hello_kitty/assets/layout_kind_overrides_kitty.csv]
 
 The automatic labels of the data blocks (Data_BB_AAAA) carry no kind, so tcrf_check/tools/rom_layout_map.py draws them UNCERTAIN. This
-script gives a kind to the bytes of those blocks from four kinds of evidence, the first that applies wins:
+script gives a kind to the bytes of those blocks from five kinds of evidence, the first that applies wins:
+  0 role, C: the Japanese kinds where a loader of this ROM proves the role of the asset (code read, the runs and BGB show the loader at work):
+    T_FRM the six print frames (blocks of $1500 named by the table 01:687D that PrintFrame_LoadTiles reads) and the 108 camera-frame
+          pictures ($380 each, named by the table 07:41CE that FrameCorner_Draw reads);
+    the Super Game Boy transfers of bank $08 (Sgb_VramTransferInline: a 16-byte packet, then the data): CHR_TRN data T_UI (border
+          tiles), PCT_TRN data MAP (border map, $800) and PALT (its palettes), PAL_TRN data PALT, ATTR_TRN data and the packets TBL
   1 tiles / map, C: the bytes are a 16-byte window seen in VRAM tile memory / in a BG map row while the core corpora were replayed
     (tools/kitty_display_track.py, value-matched; only windows of 3+ distinct values that a run read)
   2 tiles / map, C: a copy routine called with a constant source copies them to tile memory / to a BG map (assets/copy_sites_kitty.csv)
@@ -43,9 +48,29 @@ if rom is not None:          # runs of 16+ x $00 / $FF: the layout map draws the
         while j < N and rom[j] == rom[i]: j += 1
         if j - i >= 16 and rom[i] in (0, 0xFF): isdata[i:j] = False
         i = j
-KIND = np.zeros(N, np.uint8); EV = np.zeros(N, np.uint8)        # kinds 1 T_UI, 2 MAP, 3 SOUND, 4 OAM; evidence rule 1-4
+KIND = np.zeros(N, np.uint8); EV = np.zeros(N, np.uint8)        # kinds 1 T_UI, 2 MAP, 3 SOUND, 4 OAM, 5 T_FRM, 6 PALT, 7 TBL; evidence rule 0-4 (EV 5 = rule 0)
 def put(m, k, ev):
     m = m & isdata & (KIND == 0); KIND[m] = k; EV[m] = ev
+R = bytes(open(a.rom, 'rb').read())
+role = np.zeros(N, np.uint8); rolewhy = {}
+def mark(o, n, k, why): role[o:o + n] = k; rolewhy[k] = rolewhy.get(k, []) + [why]
+t0 = off(1, 0x687D)                      # print frames: {lo, hi, bank} x 6 read by PrintFrame_LoadTiles / PrintFrame_LoadPart
+for i in range(6):
+    lo_, hi_, bk = R[t0 + 3 * i:t0 + 3 * i + 3]; role[off(bk, hi_ << 8 | lo_):off(bk, hi_ << 8 | lo_) + 0x1500] = 5
+t1 = off(7, 0x41CE); i = 0                # camera-frame pictures: {lo, hi, bank} records read by FrameCorner_Draw, $380 bytes each
+while True:
+    lo_, hi_, bk = R[t1 + 3 * i:t1 + 3 * i + 3]
+    if not (0x40 <= hi_ < 0x80 and 0x20 <= bk < 0x40 and lo_ in (0, 0x80)): break
+    role[off(bk, hi_ << 8 | lo_):off(bk, hi_ << 8 | lo_) + 0x380] = 5; i += 1
+assert i == 108, i
+for src, nxt in ((0x40D0, 0x4146), (0x4146, 0x41F6), (0x41F6, 0x5206), (0x5206, 0x6216), (0x6216, 0x6A86)):   # the five transfers of bank $08 (next = next packet or code)
+    o = off(8, src); cmd = R[o] >> 3; role[o:o + 16] = 7
+    if cmd == 0x13: role[o + 16:off(8, nxt)] = 1                                  # CHR_TRN: border tiles
+    elif cmd == 0x14: role[o + 16:o + 16 + 0x800] = 2; role[o + 16 + 0x800:off(8, nxt)] = 6     # PCT_TRN: border map, then palettes
+    elif cmd == 0x0B: role[o + 16:off(8, nxt)] = 6                                 # PAL_TRN
+    elif cmd == 0x15: role[o + 16:off(8, nxt)] = 7                                 # ATTR_TRN
+    else: raise SystemExit('unexpected SGB packet %02X at 08:%04X' % (R[o], src))
+for k in (5, 6, 7, 1, 2): put(role == k, k, 5)
 t = np.load(a.track); put(t['tiles'] > 0, 1, 1); put(t['map'] > 0, 2, 1)
 cs = np.zeros(N, np.uint8)
 for r in csv.DictReader(open(os.path.join(KD, 'assets', 'copy_sites_kitty.csv'))):
@@ -56,9 +81,10 @@ rd = np.load(os.path.join(KD, 'port', 'cov_kitty_runs.npz'))['reader'].astype(np
 rb = (rd >> 16) & 0xFF; pc = rd & 0xFFFF
 put((rd != 0) & (rb == 0x0F) & (pc >= 0x4000), 3, 3)
 put((rd != 0) & (pc >= 0x1F00) & (pc < 0x2243), 4, 4)
-KN = {1: 'T_UI', 2: 'MAP', 3: 'SOUND', 4: 'OAM'}
+KN = {1: 'T_UI', 2: 'MAP', 3: 'SOUND', 4: 'OAM', 5: 'T_FRM', 6: 'PALT', 7: 'TBL'}
 EVT = {1: ('C', 'seen in VRAM %s while the core corpora were replayed (tools/kitty_display_track.py)'), 2: ('C', 'copied to %s by a copy routine with a constant source (assets/copy_sites_kitty.csv)'),
-       3: ('C', 'first read by the sound driver (bank $0F) in the core runs'), 4: ('I', 'first read by the object engine (00:1F00-00:2242) in the core runs')}
+       3: ('C', 'first read by the sound driver (bank $0F) in the core runs'), 4: ('I', 'first read by the object engine (00:1F00-00:2242) in the core runs'),
+       5: ('C', 'role from its loader: print frame (table 01:687D), camera-frame picture (table 07:41CE) or Super Game Boy transfer (bank $08)')}
 rows = []; tot = collections.Counter()
 nz = np.flatnonzero(KIND)
 if len(nz):
@@ -72,6 +98,6 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'kind', 'ev', 'label', 'basis']); w.writerows(rows)
 by_kind = collections.Counter()
 for (k, ev), v in tot.items(): by_kind[k] += v
-print('kitty_layout_kinds: %d rows, %d bytes of Data_ blocks given a kind (T_UI %d, MAP %d, SOUND %d, OAM %d); %d bytes of Data_ blocks left' % (
-    len(rows), sum(tot.values()), by_kind['T_UI'], by_kind['MAP'], by_kind['SOUND'], by_kind['OAM'], int((isdata & (KIND == 0)).sum())))
+print('kitty_layout_kinds: %d rows, %d bytes of Data_ blocks given a kind (T_UI %d, MAP %d, SOUND %d, OAM %d, T_FRM %d, PALT %d, TBL %d); %d bytes of Data_ blocks left' % (
+    len(rows), sum(tot.values()), by_kind['T_UI'], by_kind['MAP'], by_kind['SOUND'], by_kind['OAM'], by_kind['T_FRM'], by_kind['PALT'], by_kind['TBL'], int((isdata & (KIND == 0)).sum())))
 print('by evidence rule:', {('%s/%d' % k): v for k, v in sorted(tot.items())})

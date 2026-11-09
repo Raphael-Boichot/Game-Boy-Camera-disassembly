@@ -89,13 +89,13 @@ c_blue, c_red, c_grey, c_or, c_pad, c_fill, c_forced = (n(cat == c) for c in (0,
 c_code = n(code); c_ran = n(code & ex)
 pc = lambda v: '%s B, %.1f %%' % (format(v, ','), 100 * v / N)
 items = [(0, 'blue: executed or read in a run (core runs with the unlocking save, the printer and the boot conditions; BGB watchpoint runs of the exchange; the BGB key paths of the album print, the printer errors and the Strawberry Channel without Kitts replayed in the core)  (%s)' % pc(c_blue)),
-         (5, 'PURPLE: executed or read only with a patched mode table (the ten modes no key path reaches: the forced runs, evidence I for any use)  (%s)' % pc(c_forced)),
+         (5, 'PURPLE: executed or read only in forced runs (a patched mode table for the ten modes no key path reaches, one sensor gate inverted, each picture effect forced; evidence I for any use)  (%s)' % pc(c_forced)),
          (2, 'RED: proven code that no run executed  (%s): %s of the %s bytes of proven code ran' % (pc(c_red), format(c_ran, ','), format(c_code, ','))),
          (9, 'GREY-BLUE: data that no run read and nothing explains yet (no loader, no table, still on the default typing)  (%s)' % pc(c_grey)),
          (4, 'ORANGE: data that no run read, explained by a loader site, a table length or an inline table of the trace  (%s)' % pc(c_or)),
          (3, 'muted red: never-read runs of 16+ x $00, padding  (%s)' % pc(c_pad)),
          (8, 'beige: never-read runs of 16+ x $FF, fill  (%s)' % pc(c_fill))]
-note = 'Shade inside a colour = the tile pixel (2 bits), so graphics, text and code all stay visible. A 2-byte tile row takes the worst colour of its two bytes (red > grey-blue > orange > fill > padding > blue). Purple is not a way the game runs: it is what the unreachable modes would use.'
+note = 'Shade inside a colour = the tile pixel (2 bits), so graphics, text and code all stay visible. A 2-byte tile row takes the worst colour of its two bytes (red > grey-blue > orange > fill > padding > blue). Purple is not a way the game runs: it is what the unreachable modes, the inverted gates and the never-selected effects would run.'
 _sc = ImageDraw.Draw(Image.new('L', (8, 8)))
 def wrap(text, fnt, maxw):
     out, line = [], ''
