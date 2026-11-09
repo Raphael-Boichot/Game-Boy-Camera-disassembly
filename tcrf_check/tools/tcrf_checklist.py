@@ -1,23 +1,30 @@
 #!/usr/bin/env python3
 """Build the TCRF documented-content checklist for the Japanese Pocket Camera ROM.
 Coverage columns are computed from the merged coverage file (organic = joypad + SRAM only, forced = snapshot/poke runs).
-usage: tcrf_checklist.py COV.npz OUT.md OUT.csv
+usage: tcrf_checklist.py COV.npz OUT.md OUT.csv [PROTO_COV.npz]
+Group D (TCRF "Proto:Game Boy Camera", the early prototype "Debagame Tester: Second Impact", roms/prototype_debagame) uses PROTO_COV
+(default roms/prototype_debagame/port/cov_proto_runs.npz, the union of the prototype's core runs: joypad and SRAM only, so every touched
+byte counts as organic); its ranges are offsets of the prototype image as dumped.
 Evidence tags: C = code/data-traced or seen on a screenshot of the ROM, I = inferred (visual / structural match),
 ? = inconclusive or not located (never guessed).
 The 'TCRF says' column paraphrases the OCR of the TCRF PDFs supplied by the user (tcrf/t1-*.txt, t2-*.txt)."""
 import sys, os, csv, numpy as np
 from collections import Counter
 z = np.load(sys.argv[1]); ex = z['ex'] != 0; oex = z['oex'] != 0; dr = z['dr'] != 0; odr = z['odr'] != 0
+_pz = np.load(sys.argv[4] if len(sys.argv) > 4 else os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'roms', 'prototype_debagame', 'port', 'cov_proto_runs.npz'))
+PEX = _pz['exec'] != 0; PDR = _pz['dread'] != 0
+PROTO = set()       # ids of group D: coverage from the prototype runs
 def fo(bank, a): return bank * 0x4000 + (a - 0x4000) if bank else a
 def R(bank, a, b): return (fo(bank, a), fo(bank, b) + 1)           # inclusive end
 def Rl(bank, a, n): return (fo(bank, a), fo(bank, a) + n)
 def FO(o, n): return (o, o + n)
-def cov(ranges, kind):
+def cov(ranges, kind, proto=False):
+    ex_, oex_, dr_, odr_ = (PEX, PEX, PDR, PDR) if proto else (ex, oex, dr, odr)
     t = o = n = t2 = 0
     for a, b in ranges:
-        seg = slice(a, b); n += b - a; t2 += (dr[seg] | ex[seg]).sum()
-        if kind == 'code': t += (ex[seg]).sum(); o += (oex[seg]).sum()
-        else: t += (dr[seg] | ex[seg]).sum(); o += (odr[seg] | oex[seg]).sum()
+        seg = slice(a, b); n += b - a; t2 += (dr_[seg] | ex_[seg]).sum()
+        if kind == 'code': t += (ex_[seg]).sum(); o += (oex_[seg]).sum()
+        else: t += (dr_[seg] | ex_[seg]).sum(); o += (odr_[seg] | oex_[seg]).sum()
     if n == 0: return 'n/a', 0, 0, 0, 0
     pt, po = 100.0 * t / n, 100.0 * o / n
     st = 'organic' if po >= 90 else ('mostly organic' if po >= 50 else ('partly organic' if po >= 10 else ('forced-only' if pt >= 50 else ('partly touched (forced)' if pt >= 5 else 'never touched'))))
@@ -104,9 +111,42 @@ add('C17', GC, 'Hot-spot on Album B pictures: only the exit menu', 'GameShark 01
 add('C18', GC, 'Error faces', 'Two of the three faces changed in intl.', [], 'data', 'atlas 09:0C', 'LOCATED (2026-11-02): the result / error screen (09:7290) shows one of three faces at random, ResultScreen_PictureTbl entries 0-2 (1E:4E00, 1E:6A00, 1E:4000; entry 3, the Equator picture 1D:4F00, is forced for RUN!). Drawn from the ROM bytes through the screen map in both ROMs: picture 0 (JP: a man with curled horns of hair, intl: a face with a star on the forehead) and picture 1 (JP: a bald man with face paint, intl: a smiling man with a bowl cut) changed, picture 2 (a woman with ribbons and face paint) is byte-equal: it is the third face.', 'C', 'assets/unused/result_faces_jp_vs_intl.png')
 add('C19', GC, 'Credits intro animation (JP: dancer; intl: scenes from Sheriff)', 'Changed for the international versions', [], 'code', 'atlas 08:17', 'JP shows a dancer (credits_normal_dancer.png). A comparison with the international ROM is not possible here.', 'C', 'shots/credits_normal_dancer.png')
 add('C20', GC, 'Super Game Boy border (Pocket Camera logo)', 'Logo changed accordingly', [R(0x0B, 0x4000, 0x7FFF)], 'data', 'screenshot', 'SGB data bank 0B, sent by the packet code 00:1D38-1EA0 (PAL_SET 4020, PAL_TRN 40A6, CHR_TRN 4156 and 5166, PCT_TRN 6176; each carries 4 KB that overlaps its neighbours). The border rebuilt from these bytes (4bpp tiles, 32 x 32 map, palettes 4-5) is pixel-identical (34,304 of 34,304 border pixels) to BGB running the ROM as a Super Game Boy and to the community sheet Super Game Boy Borders (lower picture: Pocket Camera logo). The international ROM has the same packets at the same bank-0B addresses and the Game Boy Camera logo (identical to BGB and to the sheet\'s upper picture). The game window is drawn with PAL_TRN palette 16 (BGB: its 4 colours). The tail my core never read is part of these transfers, which only run when the Super Game Boy is detected. Layout: roms/jp_rev_a/assets/asset_map_jp.csv, tool tcrf_check/tools/sgb_border_check.py (C, README 16.13).', 'C', 'assets/never_read/sgb_border_jp_rom_vs_bgb.png')
+# =========================================================================== D
+GD = 'D. TCRF "Proto:Game Boy Camera": the early prototype (Debagame Tester: Second Impact, roms/prototype_debagame)'
+def addp(iid, item, tcrf, rng, kind, meth, ver, tag, asset=''): PROTO.add(iid); add(iid, GD, item, tcrf, rng, kind, meth, ver, tag, asset)
+P_ = 'roms/prototype_debagame/'
+addp('D01', 'Title screen "Debagame Tester: Second Impact" Ver10.24', 'A cartridge for testing the Game Boy Camera hardware; "Debagame" means "peeping tom", likely also a pun on "debug"',
+     [R(0, 0x04BA, 0x05B4)], 'code', 'BGB screenshot (BGB copy) + code (GAME_TITL)', 'EXECUTED: GAME_SEQ $01; the title map is TITLE1 (01:5801), any of A / B / Select / Start leaves (not a direction). The C:\\DEBAGAME paths of the leftover DOS environment carry the same name.', 'C', P_ + 'proto_game_seq_screens.png')
+addp('D02', 'Main menu: six options', 'SRAM TEST, BANK TEST, PROTECT TEST, MOVIE TEST, GALLERY, COM', [R(0, 0x05B5, 0x06A3)], 'code', 'BGB menu paths (tools/proto_bgb_scenarios.py)',
+     'EXECUTED: the six entries lead to GAME_SEQ $04, $03, $0A, $06, $0D, $0B (port/menu_paths_proto.csv). The menu map is MENU1 (01:5A41). No key is read at boot: no hidden menu reached by keys (41 power-on holds in the core); A+B+Select+Start restarts at any time.', 'C', P_ + 'port/menu_paths_proto.csv')
+addp('D03', 'SRAM TEST: VERIFY, WRITE, AGING, DUMP', 'AGING offers DECREMENT, 00,00,FF,FF, 55,55,AA,AA, ALL 00, ALL FF; DUMP: Left / Right bank 00-0F, Up / Down scroll',
+     [R(0, 0x0780, 0x0B40), R(0, 0x0D3B, 0x0E9E)], 'code', 'code + BGB (aging_bgb_proto.csv, aging_patterns_bgb_proto.csv)',
+     'EXECUTED. The five patterns are the data PAT_DEC / PAT_0F / PAT_5A / PAT_00 / PAT_FF. Neither WRITE nor AGING enables SRAM writes: on a protected cartridge AGING stops at the first byte (BGB: ERROR 00:A000 55->00); after PROTECT TEST > OFF it runs (BGB: COUNT 0007, no error). So the aging data are generated on board, no flasher needed. Pattern switch: hold B on AGING (keys are read once per cycle), choose on DATA SELECT, A. The DUMP keys are as TCRF says (not re-checked in BGB).', 'C', P_ + 'port/aging_patterns_bgb_proto.csv')
+addp('D04', 'SRAM AGING cycle and error report', '(TCRF lists the patterns only)', [R(0, 0x0B41, 0x0CF7)], 'code', 'code + BGB',
+     'Each cycle writes the pattern to all 16 SRAM banks, reads it back, adds 1 to COUNT ($C0DA), then fills the SRAM with $5A; the first wrong byte stops it and shows bank, address, expected and read values (AGING_ERROR). Entering AGING clears COUNT.', 'C', P_ + 'port/aging_bgb_proto.csv')
+addp('D05', 'BANK TEST: 8M OK, 4M NG', 'The bank screen shows 8M OK and 4M NG', [R(0, 0x06A4, 0x077F)], 'code', 'code + BGB screenshot',
+     'EXECUTED (GAME_SEQ $03). BANK_TEST selects banks $01-$3F and compares $4000 and $7FFF with the bank number (every bank of the ROM starts and ends with it); TEST4M expects the number AND $1F, i.e. banks $20-$3F repeating $00-$1F as on a 4-Mbit ROM. On this 8-Mbit cartridge 8M OK / 4M NG is the right answer, not a fault.', 'C', P_ + 'proto_game_seq_screens.png')
+addp('D06', 'PROTECT TEST: PROTECT, OFF, ON', 'Needs investigation: what is this protecting? It does not seem to be the photo data', [R(0, 0x19AD, 0x1B34)], 'code', 'code + BGB',
+     'ANSWERED: the whole SRAM. OFF_TEST writes $0A to $0000 (SRAM writes on), ON_TEST writes $00 (off), PICT_SAVE_GO brackets each picture save with the same two writes; PROT_TEST inverts the first and last byte of each bank and reports whether the write took (OK = protected). BGB: AGING fails before OFF and runs after it.', 'C', P_ + 'port/aging_bgb_proto.csv')
+addp('D07', 'MOVIE TEST controls', 'A snap and save (slot 00-29), B cancel, Left / Right offset 01-83, Select trick lens modes 00-1F, Start settings', [R(0, 0x0E9F, 0x1274)], 'code', 'code + BGB menu paths',
+     'EXECUTED (GAME_SEQ $06). As TCRF says, plus: Left / Right is CONTRAST ($C165), from which SET_DITH_MATRIX rebuilds the 48 sensor thresholds (TCRF\'s "offset"); Up / Down (not in TCRF) move AKARUSA ($C164), the brightness target of the exposure loop, $00-$A8; B first clears bit 0 of the trick-lens mode when it is set. Start -> GAME_SEQ $09, A held -> $0C in BGB.', 'C', P_ + 'README.md')
+addp('D08', 'Settings: dither 1-11 or OFF, MODE, EDGE, palette; VREF, zero point, GAIN, offset, CHG for reference', 'Dither strength 1-11 or OFF; five camera modes; EDGE 50-500 %; palette 0-5; VREF, zero point and GAIN cannot be selected',
+     [R(0, 0x1275, 0x19AC)], 'code', 'code (SET_DITH_MATRIX, REGISTER_SETTING) + names of the old symbol table',
+     'EXECUTED (GAME_SEQ $09). The dither setting picks one of 12 order patterns at 00:3C9A (NO_DITHER_PAT, BAYER_PAT, HARF_PAT, SCREW_PAT, SCREW2_PAT, TYUUKAN_PAT, CONCENT_PAT and five test shapes), combined with one of 131 contrast rows (CONTRAST_ROWS 00:3862); the retail program has three order variants. The selectable / fixed status of each line is TCRF\'s (not re-checked).', 'C', P_ + 'README.md')
+addp('D09', 'GALLERY', 'Up / Down scroll photos 00-29; photos cannot be deleted, only overwritten from MOVIE TEST', [R(0, 0x1D61, 0x1EF5)], 'code', 'code + BGB menu paths',
+     'EXECUTED (GAME_SEQ $0D). Up / Down held step every frame; B held goes back to the menu after moving the photo number on by one; no delete code.', 'C', P_ + 'README.md')
+addp('D10', 'COM link test', 'With two Testers connected, A on either makes the number count 00-FF in a loop on both screens', [R(0, 0x31FB, 0x32E2), R(0, 0x034B, 0x038B)], 'code', 'code + two linked BGB instances (tools/proto_bgb_link.py)',
+     'EXECUTED in linked BGB: the first byte received sets the role (idle $FE -> master, $00 -> follower), then each unit shows the byte received and sends it back plus one, the master clocking one transfer per frame: both count, as TCRF says. Nothing more is exchanged. Both units must already be on COM: with the partner on the menu, the unit that pressed A becomes a follower and stays on 00.', 'C', P_ + 'README.md')
+addp('D11', 'Unused graphics: fourteen full-size pictures (ten photos of a Nintendo employee, four drawings of a face)', 'Found throughout the ROM data', [R(4, 0x4E01, 0x7FFF), R(5, 0x4001, 0x7FFF), R(6, 0x4001, 0x7FFF)], 'data', 'old symbol tables (banked labels)',
+     'NOT LOCATED pixel by pixel (the photos are of a real person: not rendered here). Candidates: the labels HOI_0 / HOI_U / HOI_D / HOI_L / HOI_R, KAO_1-3 and FACE5-8 that both old symbol tables give in banks $04-$06 (blocks of $E00 bytes, the size of a 128 x 112 picture); this build neither copies nor reads them (L2 runs), and in this build 04:4100-45FF holds lookup tables instead.', '?', '')
+addp('D12', 'Unused graphics: editor UI (LP, SEQ, LPE, EDIT, A + ... CHANGE)', 'UI elements for some sort of editor', [Rl(3, 0x76C1, 0x400), Rl(3, 0x7AC1, 0x400)], 'data', 'old symbol tables',
+     'NOT LOCATED pixel by pixel. Candidates: BG_EDIT (03:76C1) and BG_EDITW (03:7AC1), labels of both old builds, never read by this build.', '?', '')
+addp('D13', 'Unused graphics: "Debagame Tester NEO" logo; arrow-on-a-string cursor', 'An alternate, probably earlier, title logo; probably an earlier menu cursor', [], 'data', '-', 'NOT LOCATED (not searched yet).', '?', '')
+addp('D14', 'Source code: two big commented chunks', 'Large chunks of commented source code are found throughout the ROM', [], 'data', 'byte typing (tools/proto_types.py) + docs §18.14',
+     'LOCATED: 181,351 bytes of leftover text in 53 blocks typed .text in pocketcamera_proto.sym (assembly source with Japanese comments, assembler listings); the two TCRF chunks are copies of these (docs §18.14). Two binary symbol tables of older builds also survive (banks $2A and $35) and gave most of the names.', 'C', P_ + 'disasm/leftover_symtab_proto.csv')
 rows = []
 for (iid, g, item, tc, rng, kind, meth, ver, tag, asset) in I:
-    st, n, pt, po, pr = cov(rng, kind) if rng else ('n/a', 0, 0, 0, 0)
+    st, n, pt, po, pr = cov(rng, kind, iid in PROTO) if rng else ('n/a', 0, 0, 0, 0)
     asset = ' '.join(os.path.normpath(t) for t in asset.split())
     rows.append(dict(id=iid, group=g, item=item, tcrf=tc, rom=ROMTXT.get(iid) or (loc(rng) if rng else '-'), bytes=n, coverage=st, touched_pct='%.0f' % pt if n else '', organic_pct='%.0f' % po if n else '', exec_or_read_pct='%.0f' % pr if n else '', kind=kind, method=meth, verdict=ver, tag=tag, asset=asset))
 CELL_OVR = {'B11': {'coverage': 'forced-only (B CANCEL)', 'organic_pct': '0'}}   # hand-set cells the range arithmetic cannot give
@@ -114,12 +154,13 @@ for r in rows: r.update(CELL_OVR.get(r['id'], {}))
 with open(sys.argv[3], 'w', newline='', encoding='utf-8') as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator='\n'); w.writeheader(); [w.writerow(r) for r in rows]
 with open(sys.argv[2], 'w', encoding='utf-8', newline='\n') as f:
-    f.write('# TCRF documented content, checked against the Japanese Pocket Camera ROM (md5 fdcfe686cf4df461e870b6e53b2b5a8b)\n\n')
+    f.write('# TCRF documented content, checked against the Japanese Pocket Camera ROM (md5 fdcfe686cf4df461e870b6e53b2b5a8b) and, in group D, the early prototype (md5 19b50a5f67ef4f0d015e7d813370756e as dumped)\n\n')
     f.write('AI slop, do not trust until human validation.\n\n')
     f.write('* **TCRF says** paraphrases the OCR of the TCRF PDFs you supplied (`tcrf/t1-*.txt`, `t2-*.txt`).\n')
     f.write('* **Coverage** comes from the merged run v8 (`coverage/v8/merged_v8/cov.npz`): *touched* = executed (code) or read (data) in any run, *organic* = in runs driven by the joypad and an SRAM image only. "forced-only" / "never touched" describe MY runs, not the console.\n')
     f.write('* **Tags**: C = code/data traced or seen on a screenshot of the ROM; I = inferred (visual or structural match); ? = inconclusive or not located (never guessed).\n')
     f.write('* Asset paths are relative to `tcrf_check/`; `atlas MM:SS` names the screen by its mode and state (the per-mode contact sheets that first showed them were removed on 2026-10-26; a BGB run of that state shows the screen).\n')
+    f.write('* **Group D** checks the TCRF page *Proto:Game Boy Camera* (the owner\'s copy `source/Unused_graphics_TCRF/TCRF_Prototype.pdf`) against the early prototype, `roms/prototype_debagame/README.md`: its ROM locations are bank:address of that image, its coverage comes from the prototype\'s own core runs (`roms/prototype_debagame/port/cov_proto_runs.npz`, joypad and SRAM only, so touched = organic), and its BGB evidence used the header-patched copy.\n')
     cur = None
     for r in rows:
         if r['group'] != cur:

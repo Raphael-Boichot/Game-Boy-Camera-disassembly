@@ -3,6 +3,8 @@
 ## 15. TCRF and unlock cross-check: what the unlocking saves reach, the documented-content checklist, code that "never ran"
 
 *Why this section exists.* The owner asked (a) to confirm findings in BGB where possible and (b) to re-run with an unlocking save so that no code is called garbage that is really the credits, the CoroCoro content or a TCRF-documented asset, and (c) to retrieve every known asset. (b) and (c) are done with the emulator of §13, using joypad input and an SRAM image only unless a line says "poke". (a) was **not possible when this section was written** (BGB was not available then) and was done afterwards: the findings marked "BGB-confirmed" below were reproduced in BGB (§16.6); everything else in §15 is core-only.
+**The early prototype (2026-11-09).** Group D of the checklist (D01-D14) checks the TCRF page *Proto:Game Boy Camera* against the prototype ROM (`roms/prototype_debagame/README.md`), with the prototype's own coverage and BGB runs: 11 rows C, 3 open (the unused pictures, the editor UI, the NEO logo and the arrow cursor are not located pixel by pixel).
+
 Evidence tags as before: **C** code or data traced, or seen on an emulator screenshot of the ROM; **I** inferred; **?** inconclusive or not located (never guessed). The item-by-item table is `tcrf_check/TCRF_CHECKLIST.md` (`.csv` next to it); this section gives the findings behind it.
 
 ### 15.1 Method
