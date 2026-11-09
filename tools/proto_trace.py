@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Static recursive-descent tracer for the early prototype (Pocket Camera Prototype (Japan), "DEBAGAME"): its own engine.
 
-  tools/proto_trace.py PROTO.gb OUT.json [--roots roms/prototype_debagame/disasm/extra_roots_proto.json] [--report OUT.md]
+  tools/proto_trace.py PROTO.gb OUT.json [--roots roms/prototype_debagame/trace/extra_roots_proto.json] [--report OUT.md]
 
 PROTO.gb is the image as dumped (md5 19b50a5f67ef4f0d015e7d813370756e, owner's rule 2026-11-08). Goal (HOWTO_NEW_ROM.md Stage B):
 separate proven code from everything else, with an explicit list of what is not resolved. A byte is code only if it lies on a

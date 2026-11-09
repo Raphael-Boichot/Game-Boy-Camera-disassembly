@@ -17,7 +17,7 @@ Rules, in this order (C when one holds); names that describe the picture itself 
   loader   a Gfx_/Map_/Src_ name whose routine part (a label on traced code; descriptive tails such as FontSlotA1 claim no loader) is one of its readers here (static) or reads at least 90 % of its read bytes (coverage)
   relabel  a Gfx_/Map_ block named after a routine, that is read here by one other routine only (static, or >= 90 % of the read bytes in the coverage, interrupt /
            main loop / boot excluded): renamed Gfx_BB_AAAA_<that routine> (C), the Japanese name kept in the note
-The rest stay I and are listed (with their readers here and in Japan) in <TREE>/port/l3_open_<s>.csv.
+The rest stay I and are listed (with their readers here and in Japan) in <TREE>/disasm/sym_unconclusive_<s>.csv.
 """
 import sys, csv, re, glob, bisect, collections, os
 import numpy as np
@@ -27,7 +27,7 @@ D = T + '/disasm/'
 def flat(b, a): return a if b == 0 else b * 0x4000 + a - 0x4000
 names = {}
 for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-    p = D + 'sym_names_%s%s.csv' % (S, suf)
+    p = D + 'layers/sym_names_%s%s.csv' % (S, suf or '_port')
     if not os.path.exists(p): continue
     for r in csv.DictReader(open(p, encoding='utf-8')):
         if re.search(r'checked[456]: ', r.get('source', '')): continue        # passes 4-6 decide from the same base (run 4, then 5)
@@ -80,10 +80,10 @@ def cov_readers(o, e):
             if COPIER.match(l) and site2[x]: l = lab(site2[x])
             c[l] += 1
     return c
-ROM = open(os.environ.get('PORT_ROM', {'us': '/root/work/roms/gbcam_usa_eu.gb', 'gold': '/root/work/roms/gbcam_gold.gb'}[S]), 'rb').read()
+ROM = open(os.environ.get('PORT_ROM', {'us': '/root/work/roms/gbcam_us.gb', 'gold': '/root/work/roms/gbcam_gold.gb'}[S]), 'rb').read()
 taken = {r['name'] for r in names.values()}
 import json
-_tr = json.load(open('%s/port/trace_%s.json' % (T, S)))['code']
+_tr = json.load(open('%s/trace/trace_%s.json' % (T, S)))['code']
 CODE = set()
 for k_, n_ in _tr.items():
     if n_ > 0: b_, a_ = k_.split(':'); CODE.add(flat(int(b_, 16), int(a_, 16)))
@@ -135,10 +135,10 @@ for (b, a), r in sorted(names.items()):
         opn.append(['%02X' % b, '%04X' % a, n, ' '.join(sorted(ru)), ' '.join(sorted(rj)), ' '.join('%s=%d' % kv for kv in cv.most_common(3)), (r.get('note') or '')[:120]])
 print(dict(cnt))
 if not dry:
-    p_ = D + 'sym_names_%s_checked.csv' % S; keep_ = [l for l in open(p_, encoding='utf-8') if 'checked4: ' not in l]       # rerunnable: earlier pass-4 rows are replaced
+    p_ = D + 'layers/sym_names_%s_checked.csv' % S; keep_ = [l for l in open(p_, encoding='utf-8') if 'checked4: ' not in l]       # rerunnable: earlier pass-4 rows are replaced
     open(p_, 'w', encoding='utf-8').write(''.join(keep_))
     with open(p_, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
-    with open('%s/port/l3_open_%s.csv' % (T, S), 'w', newline='', encoding='utf-8') as fh:
+    with open('%s/disasm/sym_unconclusive_%s.csv' % (T, S), 'w', newline='', encoding='utf-8') as fh:
         w = csv.writer(fh, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'readers_here', 'readers_jp', 'coverage_readers', 'note']); w.writerows(opn)
 else:
     for x in out:

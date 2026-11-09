@@ -18,7 +18,7 @@ def flat(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
 TAG = 'evidence 2026-11-02'
 names = {}
 for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-    p = D + 'sym_names_%s%s.csv' % (S, suf)
+    p = D + 'layers/sym_names_%s%s.csv' % (S, suf or '_port')
     if not os.path.exists(p): continue
     for r in csv.DictReader(open(p, encoding='utf-8')):
         if r.get('source', '').startswith(TAG): continue
@@ -31,7 +31,7 @@ jpname = {r['name']: r for r in JP.values()}
 M = np.load('%s/port/map_%s.npy' % (T, S)); idx = np.nonzero(M >= 0)[0]; INV = dict(zip(M[idx].tolist(), idx.tolist()))     # flat here -> flat JP
 KW = re.compile(r'(^Unused_|_Dead$|_Dead_|_Unref|^TileGap_|_ExtraRows?$|_HeadRows$|_BlankRows$|_FillRows|_Fill$|_ZeroTail$|ZeroFill_)')
 PAD = re.compile(r'^(Bank[0-9A-F]{2}_ZeroFill$|.*_Padding)')
-ROM = open(os.environ.get('ROM_' + S.upper(), {'us': '/root/work/roms/gbcam_usa_eu.gb', 'gold': '/root/work/roms/gbcam_gold.gb'}[S]), 'rb').read(); JR = open(os.environ.get('ROM_JP', '/root/work/roms/pocketcamera_jp.gb'), 'rb').read()
+ROM = open(os.environ.get('ROM_' + S.upper(), {'us': '/root/work/roms/gbcam_us.gb', 'gold': '/root/work/roms/gbcam_gold.gb'}[S]), 'rb').read(); JR = open(os.environ.get('ROM_JP', '/root/work/roms/pocketcamera_jp.gb'), 'rb').read()
 out = []; cnt = {}
 for (b, ad), r in sorted(names.items()):
     n = r['name']; o = flat(b, ad); why = None
@@ -46,6 +46,6 @@ print('%s: %d names to I' % (T, len(out)), {k[:24]: v for k, v in cnt.items() if
 if dry:
     for x in out[:40]: print('  ', x[0] + ':' + x[1], x[2])
 else:
-    p = D + 'sym_names_%s_hand.csv' % S; keep = [l for l in open(p, encoding='utf-8') if (',' + TAG) not in l and not l.rstrip().endswith(TAG)]
+    p = D + 'layers/sym_names_%s_hand.csv' % S; keep = [l for l in open(p, encoding='utf-8') if (',' + TAG) not in l and not l.rstrip().endswith(TAG)]
     open(p, 'w', encoding='utf-8').write(''.join(keep))
     with open(p, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)

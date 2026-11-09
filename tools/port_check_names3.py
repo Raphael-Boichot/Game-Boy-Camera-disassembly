@@ -22,7 +22,7 @@ J = open(sys.argv[1], 'rb').read(); U = open(sys.argv[2], 'rb').read(); D = sys.
 P = D.replace('/disasm/', '/port/')
 def flat(b, ad): return ad if b == 0 or ad < 0x4000 else b * 0x4000 + ad - 0x4000
 names = {}
-for f in ['sym_names_%s.csv', 'sym_names_%s_loaders.csv', 'sym_names_%s_reads.csv', 'sym_names_%s_checked.csv', 'sym_names_%s_hand.csv']:
+for f in ['layers/sym_names_%s_port.csv', 'layers/sym_names_%s_loaders.csv', 'layers/sym_names_%s_reads.csv', 'layers/sym_names_%s_checked.csv', 'layers/sym_names_%s_hand.csv']:
     try: rows = list(csv.DictReader(open(D + f % S, encoding='utf-8')))
     except FileNotFoundError: continue
     for r in rows:
@@ -107,5 +107,5 @@ for k, r in names.items():
     if why:
         cnt[why[0]] += 1
         out.append(['%02x' % k[0], '%04x' % k[1], n, 'C', (r['note'] + '; ' if r['note'] else '') + why[1], 'checked: ' + r['source']])
-with open(D + 'sym_names_%s_checked.csv' % S, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
+with open(D + 'layers/sym_names_%s_checked.csv' % S, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
 print('third pass:', dict(cnt))

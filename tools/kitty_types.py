@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """L1 typing of the Hello Kitty ROM from its trace: tables, inline arguments and the sources of the copy routines.
 
-  tools/kitty_types.py ROM roms/hello_kitty/port/trace_kitty.json --types roms/hello_kitty/disasm/sym_types_kitty.csv \
+  tools/kitty_types.py ROM roms/hello_kitty/trace/trace_kitty.json --types roms/hello_kitty/disasm/sym_types_kitty.csv \
                        --sites roms/hello_kitty/assets/copy_sites_kitty.csv
 
 Writes (both generated, never edit them; hand rows go in sym_types_kitty_hand.csv, applied after these by sym_build.py):

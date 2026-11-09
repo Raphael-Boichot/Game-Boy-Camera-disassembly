@@ -1,0 +1,17 @@
+field,offset,raw,value
+md5,,,b2999cfb6dacb439f501a71f30f91762
+size,,,1048576 bytes = 64 banks of 16 KiB
+entry,0100,00 C3 50 01,
+logo_ok,0104,,True
+title,0134,47 41 4D 45 42 4F 59 43 41 4D 45 52 41 20 47 00,GAMEBOYCAMERA G
+cgb_flag,0143,00,
+new_licensee,0144,30 31,01
+sgb_flag,0146,03,SGB functions
+cart_type,0147,FC,POCKET CAMERA (MAC-GBD)
+rom_size,0148,05,1024 KiB
+ram_size,0149,04,128 KiB
+dest,014A,01,overseas
+old_licensee,014B,33,
+version,014C,00,
+header_checksum,014D,36,ok
+global_checksum,014E,1E 90,ok

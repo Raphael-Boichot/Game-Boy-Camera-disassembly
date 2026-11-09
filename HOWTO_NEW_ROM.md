@@ -105,15 +105,15 @@ Rules:
 
 **The ROM's README**, in this order: title and md5, with one line on what the ROM is; the Levels table (`Level | Status | Evidence`, status words as in section 0); the maps (layout, reachability, screen tree); the files (one table, paths as above); differences from the Japanese ROM; notes by level. The top-level README gives each ROM the same blocks in the same order: title and status line, layout map, reachability map, screen tree, never-reached assets, other findings.
 
-**Migration of the existing folders** (steps 2-3 of the consistency audit of 2026-11-09; this table is removed when they are done):
+**Migration of the existing folders** (steps 2-3 of the consistency audit of 2026-11-09; what is left goes to step 6, then this table is removed):
 
 | ROM | moves and renames |
 |---|---|
 | jp | done 2026-11-09: `trace/` holds `trace_jp.json` (the v3 trace), `trace_jp_v1.json` (the first trace, kept because the WRAM region notes cite it), `extra_roots_jp.json`, `rom_trace_labels_jp.sym`, `coverage_jp.csv` (static per-bank coverage) and copies of the v8 merge (`cov_jp_runs.npz`, `rom_map_jp.csv`; the originals stay in `coverage/v8/report_v8/`); the WRAM files carry the tag; `intake/` made with `tools/rom_intake.py` |
-| us | ROM and symbol file `gbcam_usa_eu` -> `gbcam_us`; `port/trace_us.json`, `trace_config.json`, `extra_roots*.json`, `rom_trace_labels.sym`, `cov_us_runs.npz`, `cov_us_witness.npz`, `rom_map_us.csv` -> `trace/` with the tag; `port/cov_us.npz` -> `port/cov_jp_in_us.npz`; today's generated `disasm/sym_{names,types}_us.csv` (the `port` layer) and the `loaders`, `reads`, `checked`, `hand` layers -> `disasm/layers/`, the merged table becomes `disasm/sym_names_us.csv` / `sym_types_us.csv`; `port/l3_open_us.csv` -> `disasm/sym_unconclusive_us.csv`; `src/const_jp.inc` -> `const_us.inc`, `src/ram_jp.inc` -> `ram_us.inc`; `assets/jp_never_reached_in_us.csv` -> `assets/never_reached_us.csv`; `intake/` made |
-| gold | as us (tag `gold`); a doubts list made; `assets/gold_own_never_read.csv` kept beside `never_reached_gold.csv` |
-| kitty | `port/` -> `trace/` (nothing in it is a port); `disasm/extra_roots_kitty.json` -> `trace/`; `disasm/sym_names_kitty_{auto,hand}.csv` -> `disasm/layers/`; `assets/unused_assets_kitty.csv` -> `assets/never_reached_kitty.csv` |
-| proto | `port/` -> `trace/`; `disasm/extra_roots_proto.json` -> `trace/`; `disasm/sym_names_proto_{auto,hand}.csv` -> `disasm/layers/`; `disasm/sym_unconclusive_proto.csv` made beside the `.md` |
+| us | done 2026-11-09: ROM and symbol file `gbcam_us`; trace, tracer inputs, runs and byte map in `trace/`; `port/cov_jp_in_us.npz`; the five name layers in `disasm/layers/`, merged into `disasm/sym_names_us.csv` / `sym_types_us.csv` by `tools/merge_name_layers.py`; `disasm/sym_unconclusive_us.csv` (the former `port/l3_open_us.csv`); `src/const_us.inc`, `src/ram_us.inc`; `assets/never_reached_us.csv`; `intake/` |
+| gold | done 2026-11-09, as us; left for step 6: a doubts list `disasm/sym_unconclusive_gold.csv` (none exists yet); `assets/gold_own_never_read.csv` kept beside `never_reached_gold.csv` |
+| kitty | done 2026-11-09: `port/` -> `trace/`; `extra_roots_kitty.json` in `trace/`; the auto and hand layers in `disasm/layers/` (merged by `tools/kitty_names.py`); `assets/never_reached_kitty.csv` / `.png` |
+| proto | done 2026-11-09: `port/` -> `trace/`; `extra_roots_proto.json` in `trace/`; the auto and hand layers in `disasm/layers/` (merged by `tools/proto_names.py`); left for step 6: `disasm/sym_unconclusive_proto.csv` beside the `.md` |
 
 ## 1. Intake (before any tool)
 

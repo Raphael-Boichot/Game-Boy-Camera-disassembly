@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Hello Kitty ROM: the key paths found in BGB, replayed in the core for data-read coverage (evidence for the unused-asset pass).
 
-  tools/kitty_core_paths.py ROM [--out roms/hello_kitty/port/cov_kitty_paths.npz] [--forced-out roms/hello_kitty/port/forced_kitty.npz]
-                            [--report roms/hello_kitty/port/paths_kitty.csv]
+  tools/kitty_core_paths.py ROM [--out roms/hello_kitty/trace/cov_kitty_paths.npz] [--forced-out roms/hello_kitty/trace/forced_kitty.npz]
+                            [--report roms/hello_kitty/trace/paths_kitty.csv]
 
 BGB with read watchpoints over hundreds of ROM ranges runs far too slowly for runs of thousands of frames, so the BGB scenarios of
 2026-11-08 (README: album print with the six print frames, the printer errors, the Strawberry Channel without Kitts) are replayed
@@ -23,8 +23,8 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE);
 sys.path.insert(0, os.path.join(REPO, 'coverage', 'src'))
 import numpy as np, gbcov as G
 ap = argparse.ArgumentParser(); ap.add_argument('rom')
-ap.add_argument('--out', default=os.path.join(KD, 'port', 'cov_kitty_paths.npz')); ap.add_argument('--forced-out', default=os.path.join(KD, 'port', 'forced_kitty.npz'))
-ap.add_argument('--report', default=os.path.join(KD, 'port', 'paths_kitty.csv')); a = ap.parse_args()
+ap.add_argument('--out', default=os.path.join(KD, 'trace', 'cov_kitty_paths.npz')); ap.add_argument('--forced-out', default=os.path.join(KD, 'trace', 'forced_kitty.npz'))
+ap.add_argument('--report', default=os.path.join(KD, 'trace', 'paths_kitty.csv')); a = ap.parse_args()
 ALB = 'photo: - - Down A Down Down A'                      # main menu -> album -> third icon (print): mode $06 state $03
 PATHS = [  # name, save, path, free frames, printer injections
     ('album_print_start', 'kitts', ALB + ' Right A Start', 4000, []),

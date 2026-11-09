@@ -4,8 +4,8 @@
   tools/kitty_entry_modes.py CORPUS_DIR OUT.csv [SAVE.sav]      (a folder of tools/kitty_coverage.py; 'printer' in its name attaches the printer)
 
 Replays the corpus in the core (each entry from its parent's snapshot) with the conditions of the run (the start save, Kitts 999,999) and,
-at every frame, notes the routine entries of port/trace_kitty.json (not local jr / jp targets) executed for the first time, with the mode
-hFF8D and state hFF8E of that frame. Merge the runs with --merge OUT.csv IN.csv ...: roms/hello_kitty/port/entry_modes_kitty.csv (entry,
+at every frame, notes the routine entries of trace/trace_kitty.json (not local jr / jp targets) executed for the first time, with the mode
+hFF8D and state hFF8E of that frame. Merge the runs with --merge OUT.csv IN.csv ...: roms/hello_kitty/trace/entry_modes_kitty.csv (entry,
 first screens, next screens, runs). Mode $1E (the screen fade) runs the set-up of the next screen: next_screens gives, for an entry first
 run in mode $1E, the (mode, state) the fade ended on in that replay (the screen the set-up was for); for other entries it repeats the first screen.
 """
@@ -22,7 +22,7 @@ if sys.argv[1] == '--merge':
     sys.exit()
 import numpy as np, gbcov as G
 rom = os.environ.get('KITTY_ROM', '/root/work/roms/pocketcamera_kitty.gb'); d = sys.argv[1]; out = sys.argv[2]; save = sys.argv[3] if len(sys.argv) > 3 else None
-T = json.load(open(os.path.join(REPO, 'roms', 'hello_kitty', 'port', 'trace_kitty.json')))
+T = json.load(open(os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'trace_kitty.json')))
 def off(k): b, a = int(k[:2], 16), int(k[3:], 16); return a if b == 0 else b * 0x4000 + a - 0x4000
 ents = sorted(k for k, w in T['entries'].items() if w not in ('jr', 'jr cc', 'jp'))
 offs = np.array([off(k) for k in ents])

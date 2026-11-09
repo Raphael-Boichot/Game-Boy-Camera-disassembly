@@ -19,7 +19,7 @@ T, S, ROMF = args[0].rstrip('/'), args[1], args[2]; R = open(ROMF, 'rb').read();
 def flat(b, a): return a if b == 0 else b * 0x4000 + a - 0x4000
 names = {}
 for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-    p = D + 'sym_names_%s%s.csv' % (S, suf)
+    p = D + 'layers/sym_names_%s%s.csv' % (S, suf or '_port')
     if not os.path.exists(p): continue
     for r in csv.DictReader(open(p, encoding='utf-8')):
         if re.search(r'checked[56]: ', r.get('source', '')): continue       # pass 4's decisions stand (run after it)
@@ -30,7 +30,7 @@ byname = {r['name']: k for k, r in names.items()}
 labs = sorted((flat(*k), r['name']) for k, r in names.items()); keys = [x for x, _ in labs]
 def owner(o): i = bisect.bisect_right(keys, o) - 1; return labs[i][1]
 copaddr = {byname[n][1] for n in byname if re.match(r'(Mem_Copy|Vram_Copy|Vram_Fill|Mem_Fill|Lcd_Copy|Tiles_Copy|Copy)', n) and byname[n][0] == 0}
-tr = json.load(open('%s/port/trace_%s.json' % (T, S)))['code']
+tr = json.load(open('%s/trace/trace_%s.json' % (T, S)))['code']
 bybank = collections.defaultdict(list)
 for k, n in tr.items():
     if n > 0: b, a = k.split(':'); bybank[int(b, 16)].append((int(a, 16), n))
@@ -93,6 +93,6 @@ print(dict(cnt), '| copy extents found:', len(ext))
 if dry:
     for x in out: print('  ', x[0] + ':' + x[1], x[2], '|', x[4][-140:])
 else:
-    p = D + 'sym_names_%s_checked.csv' % S; keep = [l for l in open(p, encoding='utf-8') if 'checked5: ' not in l]
+    p = D + 'layers/sym_names_%s_checked.csv' % S; keep = [l for l in open(p, encoding='utf-8') if 'checked5: ' not in l]
     open(p, 'w', encoding='utf-8').write(''.join(keep))
     with open(p, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """BGB confirmation of the CoroCoro tag check (08:72E0): boot an ordinary save whose SRAM $1FFD-$1FFF holds a given 3-byte tag and report
 $D582 (CoroCoro flag), the tag bytes after the boot (rewritten by the routine) and mode:state; screenshot at the end of the boot sequence.
-usage: [GBCAM_ROM=roms/gbcam_usa_eu.gb] bgb_corocoro.py OUTDIR [FRAMES]   (default ROM: pocketcamera_jp.gb, run from the project root)"""
+usage: [GBCAM_ROM=roms/gbcam_us.gb] bgb_corocoro.py OUTDIR [FRAMES]   (default ROM: pocketcamera_jp.gb, run from the project root)"""
 import sys, os, shutil
 out = sys.argv[1]; frames = int(sys.argv[2]) if len(sys.argv) > 2 else 500
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

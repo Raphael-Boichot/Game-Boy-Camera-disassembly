@@ -1,4 +1,4 @@
-; Game Boy Camera (USA, Europe), bank $39. Written by tools/make_source.py from roms/us_eu/gbcam_usa_eu.sym and the tables of
+; Game Boy Camera (USA, Europe), bank $39. Written by tools/make_source.py from roms/us_eu/gbcam_us.sym and the tables of
 ; roms/us_eu/disasm/ (mgbdis + tools/sym_fix.py). The comment of a label is its tag (C / I / ?) and note; `; $XXXX` is the ROM address.
 
 

@@ -4,7 +4,7 @@
   tools/proto_names.py [--min-port 16] [--auto AUTO.csv] [--match MATCH.csv] [--symtab SYMTAB.csv] [--trace TRACE.json] [--out OUT.csv] [--doubts OUT.md]
 
 Layers, lowest first (a later layer replaces the name at the same address; a name `-` deletes):
-  1. auto   disasm/sym_names_proto_auto.csv (tools/proto_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, tag C
+  1. auto   disasm/layers/sym_names_proto_auto.csv (tools/proto_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, tag C
   2. assets the banked labels of the two leftover symbol tables (disasm/leftover_symtab_proto.csv, kind label, value $4000-$7FFF,
             byte2 = the bank): all 31 have the same bank and address in both tables. Named as the Japanese ROM names its assets, the
             developers' name as suffix (owner, 2026-11-09): Gfx_BB_AAAA_NAME / Map_BB_AAAA_NAME, tag C, when this build copies a typed
@@ -21,7 +21,7 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
             address with the longer pattern; an address given several names keeps the name both tables give, else the one with the
             longest pattern, and is tagged ? when two names tie. Tag C at --min-port bytes or more, I below. The note gives the table,
             the old address, the length and the match kind.
-  4. hand   disasm/sym_names_proto_hand.csv (every row with its reason)
+  4. hand   disasm/layers/sym_names_proto_hand.csv (every row with its reason)
 Checks: one name per address and one address per name (a clash aborts), valid rgbasm labels, every routine entry of the trace
 (call targets, jump-table entries, vectors, the entry) named. --doubts writes the doubts list: every name not tagged C, with its note.
 Prints `proto_names: N names, tags {...}; routine entries R, unnamed U`.
@@ -29,9 +29,9 @@ Prints `proto_names: N names, tags {...}; routine entries R, unnamed U`.
 import csv, json, re, sys, argparse, collections
 D = 'roms/prototype_debagame/'
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
-ap.add_argument('--auto', default=D + 'disasm/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
-ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--trace', default=D + 'port/trace_proto.json')
-ap.add_argument('--hand', default=D + 'disasm/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
+ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
+ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
+ap.add_argument('--hand', default=D + 'disasm/layers/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
 ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
 a = ap.parse_args()

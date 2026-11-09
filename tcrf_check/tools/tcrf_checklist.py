@@ -3,7 +3,7 @@
 Coverage columns are computed from the merged coverage file (organic = joypad + SRAM only, forced = snapshot/poke runs).
 usage: tcrf_checklist.py COV.npz OUT.md OUT.csv [PROTO_COV.npz]
 Group D (TCRF "Proto:Game Boy Camera", the early prototype "Debagame Tester: Second Impact", roms/prototype_debagame) uses PROTO_COV
-(default roms/prototype_debagame/port/cov_proto_runs.npz, the union of the prototype's core runs: joypad and SRAM only, so every touched
+(default roms/prototype_debagame/trace/cov_proto_runs.npz, the union of the prototype's core runs: joypad and SRAM only, so every touched
 byte counts as organic); its ranges are offsets of the prototype image as dumped.
 Evidence tags: C = code/data-traced or seen on a screenshot of the ROM, I = inferred (visual / structural match),
 ? = inconclusive or not located (never guessed).
@@ -11,7 +11,7 @@ The 'TCRF says' column paraphrases the OCR of the TCRF PDFs supplied by the user
 import sys, os, csv, numpy as np
 from collections import Counter
 z = np.load(sys.argv[1]); ex = z['ex'] != 0; oex = z['oex'] != 0; dr = z['dr'] != 0; odr = z['odr'] != 0
-_pz = np.load(sys.argv[4] if len(sys.argv) > 4 else os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'roms', 'prototype_debagame', 'port', 'cov_proto_runs.npz'))
+_pz = np.load(sys.argv[4] if len(sys.argv) > 4 else os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
 PEX = _pz['exec'] != 0; PDR = _pz['dread'] != 0
 PROTO = set()       # ids of group D: coverage from the prototype runs
 def fo(bank, a): return bank * 0x4000 + (a - 0x4000) if bank else a
@@ -118,16 +118,16 @@ P_ = 'roms/prototype_debagame/'
 addp('D01', 'Title screen "Debagame Tester: Second Impact" Ver10.24', 'A cartridge for testing the Game Boy Camera hardware; "Debagame" means "peeping tom", likely also a pun on "debug"',
      [R(0, 0x04BA, 0x05B4)], 'code', 'BGB screenshot (BGB copy) + code (GAME_TITL)', 'EXECUTED: GAME_SEQ $01; the title map is TITLE1 (01:5801), any of A / B / Select / Start leaves (not a direction). The C:\\DEBAGAME paths of the leftover DOS environment carry the same name.', 'C', P_ + 'proto_game_seq_screens.png')
 addp('D02', 'Main menu: six options', 'SRAM TEST, BANK TEST, PROTECT TEST, MOVIE TEST, GALLERY, COM', [R(0, 0x05B5, 0x06A3)], 'code', 'BGB menu paths (tools/proto_bgb_scenarios.py)',
-     'EXECUTED: the six entries lead to GAME_SEQ $04, $03, $0A, $06, $0D, $0B (port/menu_paths_proto.csv). The menu map is MENU1 (01:5A41). No key is read at boot: no hidden menu reached by keys (41 power-on holds in the core); A+B+Select+Start restarts at any time.', 'C', P_ + 'port/menu_paths_proto.csv')
+     'EXECUTED: the six entries lead to GAME_SEQ $04, $03, $0A, $06, $0D, $0B (trace/menu_paths_proto.csv). The menu map is MENU1 (01:5A41). No key is read at boot: no hidden menu reached by keys (41 power-on holds in the core); A+B+Select+Start restarts at any time.', 'C', P_ + 'trace/menu_paths_proto.csv')
 addp('D03', 'SRAM TEST: VERIFY, WRITE, AGING, DUMP', 'AGING offers DECREMENT, 00,00,FF,FF, 55,55,AA,AA, ALL 00, ALL FF; DUMP: Left / Right bank 00-0F, Up / Down scroll',
      [R(0, 0x0780, 0x0B40), R(0, 0x0D3B, 0x0E9E)], 'code', 'code + BGB (aging_bgb_proto.csv, aging_patterns_bgb_proto.csv)',
-     'EXECUTED. The five patterns are the data PAT_DEC / PAT_0F / PAT_5A / PAT_00 / PAT_FF. Neither WRITE nor AGING enables SRAM writes: on a protected cartridge AGING stops at the first byte (BGB: ERROR 00:A000 55->00); after PROTECT TEST > OFF it runs (BGB: COUNT 0007, no error). So the aging data are generated on board, no flasher needed. Pattern switch: hold B on AGING (keys are read once per cycle), choose on DATA SELECT, A. The DUMP keys are as TCRF says (not re-checked in BGB).', 'C', P_ + 'port/aging_patterns_bgb_proto.csv')
+     'EXECUTED. The five patterns are the data PAT_DEC / PAT_0F / PAT_5A / PAT_00 / PAT_FF. Neither WRITE nor AGING enables SRAM writes: on a protected cartridge AGING stops at the first byte (BGB: ERROR 00:A000 55->00); after PROTECT TEST > OFF it runs (BGB: COUNT 0007, no error). So the aging data are generated on board, no flasher needed. Pattern switch: hold B on AGING (keys are read once per cycle), choose on DATA SELECT, A. The DUMP keys are as TCRF says (not re-checked in BGB).', 'C', P_ + 'trace/aging_patterns_bgb_proto.csv')
 addp('D04', 'SRAM AGING cycle and error report', '(TCRF lists the patterns only)', [R(0, 0x0B41, 0x0CF7)], 'code', 'code + BGB',
-     'Each cycle writes the pattern to all 16 SRAM banks, reads it back, adds 1 to COUNT ($C0DA), then fills the SRAM with $5A; the first wrong byte stops it and shows bank, address, expected and read values (AGING_ERROR). Entering AGING clears COUNT.', 'C', P_ + 'port/aging_bgb_proto.csv')
+     'Each cycle writes the pattern to all 16 SRAM banks, reads it back, adds 1 to COUNT ($C0DA), then fills the SRAM with $5A; the first wrong byte stops it and shows bank, address, expected and read values (AGING_ERROR). Entering AGING clears COUNT.', 'C', P_ + 'trace/aging_bgb_proto.csv')
 addp('D05', 'BANK TEST: 8M OK, 4M NG', 'The bank screen shows 8M OK and 4M NG', [R(0, 0x06A4, 0x077F)], 'code', 'code + BGB screenshot',
      'EXECUTED (GAME_SEQ $03). BANK_TEST selects banks $01-$3F and compares $4000 and $7FFF with the bank number (every bank of the ROM starts and ends with it); TEST4M expects the number AND $1F, i.e. banks $20-$3F repeating $00-$1F as on a 4-Mbit ROM. On this 8-Mbit cartridge 8M OK / 4M NG is the right answer, not a fault.', 'C', P_ + 'proto_game_seq_screens.png')
 addp('D06', 'PROTECT TEST: PROTECT, OFF, ON', 'Needs investigation: what is this protecting? It does not seem to be the photo data', [R(0, 0x19AD, 0x1B34)], 'code', 'code + BGB',
-     'ANSWERED: the whole SRAM. OFF_TEST writes $0A to $0000 (SRAM writes on), ON_TEST writes $00 (off), PICT_SAVE_GO brackets each picture save with the same two writes; PROT_TEST inverts the first and last byte of each bank and reports whether the write took (OK = protected). BGB: AGING fails before OFF and runs after it.', 'C', P_ + 'port/aging_bgb_proto.csv')
+     'ANSWERED: the whole SRAM. OFF_TEST writes $0A to $0000 (SRAM writes on), ON_TEST writes $00 (off), PICT_SAVE_GO brackets each picture save with the same two writes; PROT_TEST inverts the first and last byte of each bank and reports whether the write took (OK = protected). BGB: AGING fails before OFF and runs after it.', 'C', P_ + 'trace/aging_bgb_proto.csv')
 addp('D07', 'MOVIE TEST controls', 'A snap and save (slot 00-29), B cancel, Left / Right offset 01-83, Select trick lens modes 00-1F, Start settings', [R(0, 0x0E9F, 0x1274)], 'code', 'code + BGB menu paths',
      'EXECUTED (GAME_SEQ $06). As TCRF says, plus: Left / Right is CONTRAST ($C165), from which SET_DITH_MATRIX rebuilds the 48 sensor thresholds (TCRF\'s "offset"); Up / Down (not in TCRF) move AKARUSA ($C164), the brightness target of the exposure loop, $00-$A8; B first clears bit 0 of the trick-lens mode when it is set. Start -> GAME_SEQ $09, A held -> $0C in BGB.', 'C', P_ + 'README.md')
 addp('D08', 'Settings: dither 1-11 or OFF, MODE, EDGE, palette; VREF, zero point, GAIN, offset, CHG for reference', 'Dither strength 1-11 or OFF; five camera modes; EDGE 50-500 %; palette 0-5; VREF, zero point and GAIN cannot be selected',
@@ -160,7 +160,7 @@ with open(sys.argv[2], 'w', encoding='utf-8', newline='\n') as f:
     f.write('* **Coverage** comes from the merged run v8 (`coverage/v8/merged_v8/cov.npz`): *touched* = executed (code) or read (data) in any run, *organic* = in runs driven by the joypad and an SRAM image only. "forced-only" / "never touched" describe MY runs, not the console.\n')
     f.write('* **Tags**: C = code/data traced or seen on a screenshot of the ROM; I = inferred (visual or structural match); ? = inconclusive or not located (never guessed).\n')
     f.write('* Asset paths are relative to `tcrf_check/`; `atlas MM:SS` names the screen by its mode and state (the per-mode contact sheets that first showed them were removed on 2026-10-26; a BGB run of that state shows the screen).\n')
-    f.write('* **Group D** checks the TCRF page *Proto:Game Boy Camera* (the owner\'s copy `source/Unused_graphics_TCRF/TCRF_Prototype.pdf`) against the early prototype, `roms/prototype_debagame/README.md`: its ROM locations are bank:address of that image, its coverage comes from the prototype\'s own core runs (`roms/prototype_debagame/port/cov_proto_runs.npz`, joypad and SRAM only, so touched = organic), and its BGB evidence used the header-patched copy.\n')
+    f.write('* **Group D** checks the TCRF page *Proto:Game Boy Camera* (the owner\'s copy `source/Unused_graphics_TCRF/TCRF_Prototype.pdf`) against the early prototype, `roms/prototype_debagame/README.md`: its ROM locations are bank:address of that image, its coverage comes from the prototype\'s own core runs (`roms/prototype_debagame/trace/cov_proto_runs.npz`, joypad and SRAM only, so touched = organic), and its BGB evidence used the header-patched copy.\n')
     cur = None
     for r in rows:
         if r['group'] != cur:

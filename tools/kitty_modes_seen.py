@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Hello Kitty ROM: every (mode, state) the core runs reached, with a key history that reaches it (L2). Writes
-roms/hello_kitty/port/modes_seen_kitty.csv (mode, state, run, frames, keys, check).
+roms/hello_kitty/trace/modes_seen_kitty.csv (mode, state, run, frames, keys, check).
 
   tools/kitty_modes_seen.py ROM RUN_DIR[,printer][,save=SAVE] ...
 
@@ -60,6 +60,6 @@ for m in sorted(best):         # the candidates (6 shortest) replayed from a col
             if (G.peek(0xFF8D), G.peek(0xFF8E)) == m: cut = j + 1; break
         if cut: rows.append(['%02X' % m[0], '%02X' % m[1], run, cut, k[:cut].hex(), 'end']); break
     else: run, n, k = best[m][0]; rows.append(['%02X' % m[0], '%02X' % m[1], run, n, k[:n].hex(), 'differs'])
-with open(os.path.join(REPO, 'roms', 'hello_kitty', 'port', 'modes_seen_kitty.csv'), 'w', newline='') as f:
+with open(os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'modes_seen_kitty.csv'), 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['mode', 'state', 'run', 'frames', 'keys', 'check']); w.writerows(rows)
 print('kitty_modes_seen: %d pairs, %d end on their pair when replayed from a cold boot' % (len(rows), sum(r[5] == 'end' for r in rows)))

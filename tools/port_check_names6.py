@@ -18,7 +18,7 @@ T, S, QS = args[0].rstrip('/'), args[1], args[2:]; D = T + '/disasm/'
 def flat(b, a): return a if b == 0 else b * 0x4000 + a - 0x4000
 names = {}
 for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-    p = D + 'sym_names_%s%s.csv' % (S, suf)
+    p = D + 'layers/sym_names_%s%s.csv' % (S, suf or '_port')
     if not os.path.exists(p): continue
     for r in csv.DictReader(open(p, encoding='utf-8')):
         if 'checked6: ' in r.get('source', ''): continue
@@ -40,7 +40,7 @@ def origin(o):
         v = int(q[j][o])
         if v and not HELPER.search(lab(v)): return lab(v)
     return None
-tr = __import__('json').load(open('%s/port/trace_%s.json' % (T, S)))['code']
+tr = __import__('json').load(open('%s/trace/trace_%s.json' % (T, S)))['code']
 code = {flat(int(k[:2], 16), int(k[3:], 16)) for k, n in tr.items() if n > 0}
 ROUTINES = {r['name'] for k, r in names.items() if flat(*k) in code}
 taken_labels = {r['name'] for r in names.values()}
@@ -71,6 +71,6 @@ if dry:
     for x in out: print('  ', x[0] + ':' + x[1], x[2], '|', x[4][-150:])
     for x in left: print('   left', x)
 else:
-    p = D + 'sym_names_%s_checked.csv' % S; keep = [l for l in open(p, encoding='utf-8') if 'checked6: ' not in l]
+    p = D + 'layers/sym_names_%s_checked.csv' % S; keep = [l for l in open(p, encoding='utf-8') if 'checked6: ' not in l]
     open(p, 'w', encoding='utf-8').write(''.join(keep))
     with open(p, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)

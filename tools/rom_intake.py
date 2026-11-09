@@ -5,9 +5,9 @@
 
 The Hello Kitty run (2026-11-07):
   tools/rom_intake.py $R/pocketcamera_kitty.gb --out roms/hello_kitty/intake --ref jp=$R/pocketcamera_jp.gb --ref proto=$R/pocketcamera_proto.gb \
-      --ref us=$R/gbcam_usa_eu.gb --ref gold=$R/gbcam_gold.gb --exclusive jp,us --exclusive jp,proto
+      --ref us=$R/gbcam_us.gb --ref gold=$R/gbcam_gold.gb --exclusive jp,us --exclusive jp,proto
 The prototype run (2026-11-08, image as dumped):
-  tools/rom_intake.py $R/pocketcamera_proto.gb --out roms/prototype_debagame/intake --ref jp=$R/pocketcamera_jp.gb --ref us=$R/gbcam_usa_eu.gb \
+  tools/rom_intake.py $R/pocketcamera_proto.gb --out roms/prototype_debagame/intake --ref jp=$R/pocketcamera_jp.gb --ref us=$R/gbcam_us.gb \
       --ref gold=$R/gbcam_gold.gb --ref kitty=$R/pocketcamera_kitty.gb --exclusive jp,kitty --no-rgbfix
 
 Writes into DIR:

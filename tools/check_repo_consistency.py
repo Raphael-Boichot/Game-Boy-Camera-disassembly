@@ -12,8 +12,8 @@ What it checks (each line of the report is one check)
   trees      the screen trees of the Japanese, international, Hello Kitty and prototype ROMs (tools/make_screen_trees.py) are redrawn and compared, and README.md shows them; the reachability maps are shown in the README of their ROM folder, not in README.md
   proto      roms/prototype_debagame (--rom-proto, the image as dumped): the symbol-table CSV, trace, types, copy sites, byte classes, names and
              pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
-             and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: port/observed_proto.md equals a fresh
-             tools/proto_observed.py run on port/cov_proto_runs.npz, the coverage map proto_rom_reachability_map.png equals a fresh
+             and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: trace/observed_proto.md equals a fresh
+             tools/proto_observed.py run on trace/cov_proto_runs.npz, the coverage map proto_rom_reachability_map.png equals a fresh
              tools/proto_reach_map.py drawing, and the run / BGB-replay counts its README quotes match; L3: the
              old-build matches, the merged names and the doubts list equal a fresh tools/proto_{match_old,names}.py run, every
              routine entry is named, and the README's name count matches
@@ -60,7 +60,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('--rom'); ap.add_argument('--roundtrip', action='store_true'); ap.add_argument('--mgbdis', default='/home/claude/tc/mgbdis/mgbdis.py')
 ap.add_argument('--rgbds', default='/home/claude/tc/rgbds'); ap.add_argument('-q', action='store_true')
 ap.add_argument('--rom-gold', default=None); ap.add_argument('--rom-kitty', default=None); ap.add_argument('--rom-proto', default=None)
-ap.add_argument('--rom-us', default=None, help='the international ROM (gbcam_usa_eu.gb): rebuild roms/us_eu/gbcam_usa_eu.sym and round-trip it')
+ap.add_argument('--rom-us', default=None, help='the international ROM (gbcam_us.gb): rebuild roms/us_eu/gbcam_us.sym and round-trip it')
 A = ap.parse_args()
 os.chdir(ROOT)
 FAIL = []; WARN = []; SKIP = []
@@ -156,64 +156,69 @@ TCRF_LABELS = sum(1 for r in NAMES if r['name'].startswith('Unused_TCRF_'))
 
 # ------------------------------------------------------------------ international port (README §1.5)
 US = 'roms/us_eu/'
+# the final name and type tables of the ported builds are the merge of their layers (HOWTO section 0.1, rule 2)
+for _t in ('us', 'gold'):
+    _m = subprocess.run([sys.executable, 'tools/merge_name_layers.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('layers', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 if os.path.exists(US + 'disasm/sym_names_us.csv'):
     UN = list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_names_us.csv')))); ut = collections.Counter(r['conf'] for r in UN)
     UT = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_types_us.csv')))))
+    UPN = list(csv.DictReader(io.StringIO(rd(US + 'disasm/layers/sym_names_us_port.csv')))); upt = collections.Counter(r['conf'] for r in UPN)    # the port layer (what port_syms.py carried)
+    UPT = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/layers/sym_types_us_port.csv')))))
     UR = collections.Counter(r['fate'] for r in csv.DictReader(io.StringIO(rd(US + 'port/port_report_us.csv'))))
     UQ = list(csv.DictReader(io.StringIO(rd(US + 'port/hand_queue_us.csv')))); uq = collections.Counter(r['kind'] for r in UQ)
     uqi = sum(int(r['detail'].split()[0]) for r in UQ if r['kind'] == 'new_code'); uqb = sum(int(r['detail'].split()[0]) for r in UQ if r['kind'] == 'default_data')
     UC = collections.Counter(r['kind'] for r in csv.DictReader(io.StringIO(rd(US + 'port/code_map_us.csv'))))
-    UJ = json.loads(rd(US + 'port/trace_us.json')); uins = [v for v in UJ['code'].values() if v > 0]
+    UJ = json.loads(rd(US + 'trace/trace_us.json')); uins = [v for v in UJ['code'].values() if v > 0]
     NJI = sum(1 for v in json.loads(rd('roms/jp_rev_a/trace/trace_jp.json'))['code'].values() if v > 0)
-    ULINES = rd(US + 'gbcam_usa_eu.sym').count('\n')
+    ULINES = rd(US + 'gbcam_us.sym').count('\n')
     if len({r['name'] for r in UN}) != len(UN): bad('port', 'duplicate name in sym_names_us.csv')
     if UJ['unresolved']: bad('port', 'trace_us.json has %d unresolved sites' % len(UJ['unresolved']))
-    n_ = quoted('port names', r'The international symbol file carries ([\d,]+) names \(C ([\d,]+) / I ([\d,]+)\) and ([\d,]+) type rows; (\d+) Japanese names were not carried',
-                lambda m: ((len(UN), ut['C'], ut['I'], UT, UR['lost']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
+    n_ = quoted('port names', r'The port layer carries ([\d,]+) names \(C ([\d,]+) / I ([\d,]+)\) and ([\d,]+) type rows; (\d+) Japanese names were not carried',
+                lambda m: ((len(UPN), upt['C'], upt['I'], UPT, UR['lost']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
     n_ += quoted('port queue', r'(\d+) runs of new code \(([\d,]+) instructions.*?(\d+) lost names, ([\d,]+) names whose routine or content differs, and (\d+) data blocks \(([\d,]+) bytes',
                  lambda m: ((uq['new_code'], uqi, uq['lost_name'], uq['name_differs'], uq['default_data'], uqb), tuple(num(m.group(i)) for i in range(1, 7))), need=('README.md',))
     n_ += quoted('port pairs', r'([\d,]+) of the ([\d,]+) Japanese instructions pair with an international one \(([\d,]+) identical, ([\d,]+) with another address operand, (\d+) with another 8-bit operand\)',
                  lambda m: ((sum(UC.values()), NJI, UC['same'], UC['operand'], UC['imm']), tuple(num(m.group(i)) for i in range(1, 6))), need=('README.md',))
     n_ += quoted('port trace', r'traces the international ROM itself: ([\d,]+) instructions \(([\d,]+) code bytes\), (\d+) far calls resolved',
                  lambda m: ((len(uins), sum(uins), len(UJ['far_ok'])), tuple(num(m.group(i)) for i in range(1, 4))), need=('README.md',))
-    UH = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_names_us_hand.csv')))))
-    n_ += quoted('port hand', r'Hand corrections live in `roms/us_eu/disasm/sym_names_us_hand.csv` \((\d+) rows', lambda m: ((UH,), (int(m.group(1)),)), need=('README.md',))
+    UH = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/layers/sym_names_us_hand.csv')))))
+    n_ += quoted('port hand', r'Hand corrections live in `roms/us_eu/disasm/layers/sym_names_us_hand.csv` \((\d+) rows', lambda m: ((UH,), (int(m.group(1)),)), need=('README.md',))
     USTATES = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/state_names_us.csv')))))
     n_ += quoted('port states', r'the state constants from the international tables and handler labels \((\d+):', lambda m: ((USTATES,), (int(m.group(1)),)), need=('README.md',))
     UACC = len(list(csv.DictReader(io.StringIO(rd(US + 'wram/wram_access_us.csv')))))
     n_ += quoted('port access', r'the access table \(([\d,]+) rows carried .*?plus (\d+) rows of `tools/wram_db.py`', lambda m: ((UACC,), (num(m.group(1)) + int(m.group(2)),)), need=('README.md',))
-    ULD = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/sym_names_us_loaders.csv')))))
+    ULD = len(list(csv.DictReader(io.StringIO(rd(US + 'disasm/layers/sym_names_us_loaders.csv')))))
     n_ += quoted('port loaders', r'the loader layer names the other (\d+) ', lambda m: ((ULD,), (int(m.group(1)),)), need=('README.md',))
-    n_ += quoted('port sym', r'writes `roms/us_eu/gbcam_usa_eu.sym` \(([\d,]+) lines\)', lambda m: ((ULINES,), (num(m.group(1)),)), need=('README.md',))
+    n_ += quoted('port sym', r'writes `roms/us_eu/gbcam_us.sym` \(([\d,]+) lines\)', lambda m: ((ULINES,), (num(m.group(1)),)), need=('README.md',))
     if not any(f.startswith('port') or f.startswith('quoted') for f in FAIL):
         ok('port', 'international: %s names (C %s / I %s), %s type rows, %s lost; %s instruction pairs; trace %s instructions, 0 unresolved; %d sentences checked'
            % (fmt(len(UN)), fmt(ut['C']), fmt(ut['I']), fmt(UT), UR['lost'], fmt(sum(UC.values())), fmt(len(uins)), n_))
     if A.rom_us:
-        tmp = tempfile.mkdtemp(prefix='cons_us_'); out = os.path.join(tmp, 'gbcam_usa_eu.sym')
+        tmp = tempfile.mkdtemp(prefix='cons_us_'); out = os.path.join(tmp, 'gbcam_us.sym')
         r = subprocess.run([sys.executable, 'tools/sym_build.py', A.rom_us, '--names', US + 'disasm/sym_names_us.csv', '--types', US + 'disasm/sym_types_us.csv',
-                            '--trace', US + 'port/trace_us.json', '--out', out, '--types', US + 'disasm/sym_types_us_loaders.csv', '--types', US + 'disasm/sym_types_us_reads.csv', '--types', US + 'disasm/sym_types_us_hand.csv',
-                            '--extra-names', US + 'disasm/sym_names_us_loaders.csv', '--extra-names', US + 'disasm/sym_names_us_reads.csv', '--extra-names', US + 'disasm/sym_names_us_checked.csv', '--extra-names', US + 'disasm/sym_names_us_hand.csv'], capture_output=True, text=True)
+                            '--trace', US + 'trace/trace_us.json', '--out', out], capture_output=True, text=True)
         if r.returncode: bad('port', 'sym_build.py failed on the international tables: %s' % (r.stderr or r.stdout).strip()[-300:])
-        elif open(out).read() != rd(US + 'gbcam_usa_eu.sym'): bad('port', 'gbcam_usa_eu.sym is not what sym_build.py makes from the csv files: rebuild it')
+        elif open(out).read() != rd(US + 'gbcam_us.sym'): bad('port', 'gbcam_us.sym is not what sym_build.py makes from the csv files: rebuild it')
         elif A.roundtrip:
-            shutil.copy(A.rom_us, os.path.join(tmp, 'gbcam_usa_eu.gb')); env = dict(os.environ); env['PATH'] = A.rgbds + os.pathsep + env['PATH']
+            shutil.copy(A.rom_us, os.path.join(tmp, 'gbcam_us.gb')); env = dict(os.environ); env['PATH'] = A.rgbds + os.pathsep + env['PATH']
             D_ = US + 'disasm/%s_us.csv'; FH = ['--tables', '--far-helpers', '0473,049C,061B,068D,0734,0950,0956']
             L4 = ['--const', '--ram-names', D_ % 'ram_names', '--ram-access', US + 'wram/wram_access_us.csv', '--ram-exclude', D_ % 'ram_exclude', '--ram-highbyte', D_ % 'ram_highbyte',
                   '--const-names', D_ % 'const_names', '--const-types', D_ % 'const_types', '--const-tables', D_ % 'const_tables', '--const-sounds', D_ % 'sound_names',
                   '--state-names', D_ % 'state_names', '--state-helpers', D_ % 'state_helpers', '--text-tables', 'none']
             for tag, fix in (('plain', None), ('tables', FH), ('const', FH + L4)):
                 d = os.path.join(tmp, tag)
-                subprocess.run([sys.executable, A.mgbdis, '--overwrite', '--print-hex', '--output-dir', d, os.path.join(tmp, 'gbcam_usa_eu.gb')], capture_output=True)
-                if fix: subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--rom', os.path.join(tmp, 'gbcam_usa_eu.gb'), '--sym', out, '--trace', US + 'port/trace_us.json'] + fix, capture_output=True)
+                subprocess.run([sys.executable, A.mgbdis, '--overwrite', '--print-hex', '--output-dir', d, os.path.join(tmp, 'gbcam_us.gb')], capture_output=True)
+                if fix: subprocess.run([sys.executable, 'tools/sym_fix.py', d, '--rom', os.path.join(tmp, 'gbcam_us.gb'), '--sym', out, '--trace', US + 'trace/trace_us.json'] + fix, capture_output=True)
                 subprocess.run(['make'], cwd=d, env=env, capture_output=True)
                 g = os.path.join(d, 'game.gb'); md = hashlib.md5(open(g, 'rb').read()).hexdigest() if os.path.exists(g) else 'no ROM built'
                 (ok if md == '42d2f65e2549be9d1d126a6828b5d1c1' else bad)('port', 'international round trip %s: md5 %s' % (tag, md))
             # the layout picture of the international ROM (README, after the Japanese one) is what rom_layout_map.py draws today
             pu = os.path.join(tmp, 'us_map.png'); D_ = US + 'disasm/'
-            rr = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', pu, '--rom', A.rom_us, '--map', US + 'port/rom_map_us.csv', '--assets', 'none', '--witness', 'none',
+            rr = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', pu, '--rom', A.rom_us, '--map', US + 'trace/rom_map_us.csv', '--assets', 'none', '--witness', 'none',
                                  '--reach', 'none', '--unused', 'none', '--kinds', US + 'assets/layout_kind_overrides_us.csv',
-                                 '--names', ','.join(D_ + f for f in ('sym_names_us.csv', 'sym_names_us_loaders.csv', 'sym_names_us_reads.csv', 'sym_names_us_checked.csv', 'sym_names_us_hand.csv')),
-                                 '--types', D_ + 'sym_types_us.csv,' + D_ + 'sym_types_us_loaders.csv,' + D_ + 'sym_types_us_reads.csv,' + D_ + 'sym_types_us_hand.csv', '--diff', US + 'port/diff_us.npz', '--cov', US + 'port/cov_us.npz', '--csv', os.path.join(tmp, 'us_layout.csv'),
+                                 '--names', D_ + 'sym_names_us.csv',
+                                 '--types', D_ + 'sym_types_us.csv', '--diff', US + 'port/diff_us.npz', '--cov', US + 'port/cov_jp_in_us.npz', '--csv', os.path.join(tmp, 'us_layout.csv'),
                                  '--outline', 'none', '--title', 'Game Boy Camera (USA, Europe): what is in each of the 64 banks (the ROM drawn as 2bpp tiles)'], capture_output=True, text=True)
             if rr.returncode: bad('port', 'rom_layout_map.py failed on the international ROM: %s' % (rr.stderr or rr.stdout)[-300:])
             elif not same_png(pu, US + 'us_rom_layout_map.png') or open(os.path.join(tmp, 'us_layout.csv'), 'rb').read() != open(US + 'assets/layout_by_bank_us.csv', 'rb').read():
@@ -301,8 +306,8 @@ for k, folder, pre in _sm:
 if A.rom_kitty:
     KD = 'roms/hello_kitty/'; tk = tempfile.mkdtemp(prefix='kitty_')
     def _run(*cmd): return subprocess.run([sys.executable] + list(cmd), capture_output=True, text=True)
-    OBS = sorted(glob.glob(KD + 'port/cov_kitty_*.npz')); obs = [x for f in OBS for x in ('--observed', f)]     # the runs (L2)
-    r1 = _run('tools/kitty_trace.py', A.rom_kitty, os.path.join(tk, 't.json'), '--roots', KD + 'disasm/extra_roots_kitty.json', '--report', os.path.join(tk, 'u.md'), *obs)
+    OBS = sorted(glob.glob(KD + 'trace/cov_kitty_*.npz')); obs = [x for f in OBS for x in ('--observed', f)]     # the runs (L2)
+    r1 = _run('tools/kitty_trace.py', A.rom_kitty, os.path.join(tk, 't.json'), '--roots', KD + 'trace/extra_roots_kitty.json', '--report', os.path.join(tk, 'u.md'), *obs)
     r2 = _run('tools/kitty_types.py', A.rom_kitty, os.path.join(tk, 't.json'), '--types', os.path.join(tk, 'ty.csv'), '--sites', os.path.join(tk, 'cs.csv'),
               '--rommap', os.path.join(tk, 'rm.csv'), '--names', os.path.join(tk, 'na.csv'), *obs) if not r1.returncode else r1
     if not r2.returncode:      # L3 names: the match tables, then the merge of the layers
@@ -311,11 +316,11 @@ if A.rom_kitty:
         r2d = _run('tools/kitty_names.py', '--auto', os.path.join(tk, 'na.csv'), '--trace', os.path.join(tk, 't.json'), '--out', os.path.join(tk, 'nm.csv')) if not r2c.returncode else r2c
         if r2d.returncode: r2 = r2d
     r3 = _run('tools/sym_build.py', A.rom_kitty, '--names', KD + 'disasm/sym_names_kitty.csv', '--types', KD + 'disasm/sym_types_kitty.csv',
-              '--trace', KD + 'port/trace_kitty.json', '--out', os.path.join(tk, 'k.sym'), '--report') if not r2.returncode else r2
+              '--trace', KD + 'trace/trace_kitty.json', '--out', os.path.join(tk, 'k.sym'), '--report') if not r2.returncode else r2
     if r3.returncode: bad('kitty', 'the Kitty pipeline failed: %s' % (r3.stderr or r3.stdout)[-300:])
     else:
-        stale = [f for f, g in (('port/trace_kitty.json', 't.json'), ('port/trace_kitty_unresolved.md', 'u.md'), ('disasm/sym_types_kitty.csv', 'ty.csv'),
-                                ('assets/copy_sites_kitty.csv', 'cs.csv'), ('port/rom_map_kitty.csv', 'rm.csv'), ('disasm/sym_names_kitty_auto.csv', 'na.csv'),
+        stale = [f for f, g in (('trace/trace_kitty.json', 't.json'), ('trace/trace_kitty_unresolved.md', 'u.md'), ('disasm/sym_types_kitty.csv', 'ty.csv'),
+                                ('assets/copy_sites_kitty.csv', 'cs.csv'), ('trace/rom_map_kitty.csv', 'rm.csv'), ('disasm/layers/sym_names_kitty_auto.csv', 'na.csv'),
                                 ('disasm/match_jp_kitty.csv', 'mj.csv'), ('disasm/similar_jp_kitty.csv', 'sj.csv'), ('disasm/sym_names_kitty.csv', 'nm.csv'),
                                 ('pocketcamera_kitty.sym', 'k.sym')) if open(KD + f, 'rb').read() != open(os.path.join(tk, g), 'rb').read()]
         if stale: bad('kitty', 'not what the Kitty pipeline makes today (SETUP.md, Hello Kitty): %s' % ', '.join(stale))
@@ -363,14 +368,14 @@ if A.rom_kitty:
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the data kinds (need=N bytes of Data_ blocks given a kind, M left uncertain)')
             elif (int(mm.group(1).replace(',', '')), int(mm.group(2).replace(',', ''))) != (int(m6.group(1)), int(m6.group(2))):
                 bad('kitty', 'roms/hello_kitty/README.md: data kinds quoted %s, tools/kitty_layout_kinds.py gives %s / %s' % (mm.group(0), m6.group(1), m6.group(2)))
-        # the unused-asset table (hand-made, assets/unused_assets_kitty.csv): its counts quoted in the Kitty README, its picture present
-        _ua = list(csv.DictReader(open(KD + 'assets/unused_assets_kitty.csv', encoding='utf-8')))
+        # the unused-asset table (hand-made, assets/never_reached_kitty.csv): its counts quoted in the Kitty README, its picture present
+        _ua = list(csv.DictReader(open(KD + 'assets/never_reached_kitty.csv', encoding='utf-8')))
         _uv = collections.Counter(r['verdict'] for r in _ua)
-        mm = re.search(r'unused_assets_kitty\.csv\)\s+lists (\d+) items: (\d+) unused, (\d+) unused because only an unreachable mode loads them, (\d+) used but not read in the runs, (\d+) open', open(KD + 'README.md', encoding='utf-8').read())   # need= the unused-assets paragraph
+        mm = re.search(r'never_reached_kitty\.csv\)\s+lists (\d+) items: (\d+) unused, (\d+) unused because only an unreachable mode loads them, (\d+) used but not read in the runs, (\d+) open', open(KD + 'README.md', encoding='utf-8').read())   # need= the unused-assets paragraph
         want = (len(_ua), _uv['unused'], _uv['unused (unreachable mode)'], sum(v for k, v in _uv.items() if k.startswith('used')), _uv['open'])
-        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/unused_assets_kitty.csv (need=lists N items: a unused, b unused because only an unreachable mode loads them, c used but not read in the runs, d open)')
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/never_reached_kitty.csv (need=lists N items: a unused, b unused because only an unreachable mode loads them, c used but not read in the runs, d open)')
         elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: unused assets quoted %s, the table gives %s' % (mm.groups(), want))
-        elif not os.path.exists(KD + 'assets/unused_assets_kitty.png'): bad('kitty', 'assets/unused_assets_kitty.png missing')
+        elif not os.path.exists(KD + 'assets/never_reached_kitty.png'): bad('kitty', 'assets/never_reached_kitty.png missing')
         else: ok('kitty', 'unused-asset table and its README quote agree (%d items)' % len(_ua))
         # the never-read sprite layouts (tools/kitty_sprite_layouts.py): its counts quoted in the Kitty README
         _sl = list(csv.DictReader(open(KD + 'assets/sprite_layouts_unread_kitty.csv', encoding='utf-8'))); _sc = collections.Counter(r['class'] for r in _sl)
@@ -380,19 +385,19 @@ if A.rom_kitty:
         elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: sprite layouts quoted %s, the table gives %s' % (mm.groups(), want))
         else: ok('kitty', 'never-read sprite layouts quoted as in the table (%d)' % len(_sl))
         # the screens the core runs reach (tools/kitty_modes_seen.py): the counts quoted in the Kitty README
-        _ms = list(csv.DictReader(open(KD + 'port/modes_seen_kitty.csv'))); want = (len(_ms), sum(r['check'] == 'end' for r in _ms), sum(r['check'] != 'end' for r in _ms))
+        _ms = list(csv.DictReader(open(KD + 'trace/modes_seen_kitty.csv'))); want = (len(_ms), sum(r['check'] == 'end' for r in _ms), sum(r['check'] != 'end' for r in _ms))
         mm = re.search(r'modes_seen_kitty\.csv\)?, written by `tools/kitty_modes_seen\.py` from the four corpora: (\d+) \(mode, state\) pairs.*?; (\d+) of them end on their pair when replayed from a cold boot in the core, (\d+) ', open(KD + 'README.md', encoding='utf-8').read())   # need= the screens-reached bullet
-        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes port/modes_seen_kitty.csv (need=written by `tools/kitty_modes_seen.py` from the four corpora: N (mode, state) pairs ...; a of them end on their pair when replayed from a cold boot in the core, b ...)')
-        elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: screens reached quoted %s, port/modes_seen_kitty.csv gives %s' % (mm.groups(), want))
-        elif any(not r['keys'] or len(r['keys']) != 2 * int(r['frames']) for r in _ms): bad('kitty', 'port/modes_seen_kitty.csv: a row whose key history does not have one byte per frame')
-        else: ok('kitty', 'screens reached quoted as in port/modes_seen_kitty.csv (%d pairs)' % want[0])
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes trace/modes_seen_kitty.csv (need=written by `tools/kitty_modes_seen.py` from the four corpora: N (mode, state) pairs ...; a of them end on their pair when replayed from a cold boot in the core, b ...)')
+        elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: screens reached quoted %s, trace/modes_seen_kitty.csv gives %s' % (mm.groups(), want))
+        elif any(not r['keys'] or len(r['keys']) != 2 * int(r['frames']) for r in _ms): bad('kitty', 'trace/modes_seen_kitty.csv: a row whose key history does not have one byte per frame')
+        else: ok('kitty', 'screens reached quoted as in trace/modes_seen_kitty.csv (%d pairs)' % want[0])
         # the never-run code (tools/kitty_red_classes.py, tools/kitty_gates.py): the classes quoted in the Kitty README
-        _rc = list(csv.DictReader(open(KD + 'port/red_classes_kitty.csv', encoding='utf-8'))); _ng = len(list(csv.DictReader(open(KD + 'port/gates_kitty.csv'))))
+        _rc = list(csv.DictReader(open(KD + 'trace/red_classes_kitty.csv', encoding='utf-8'))); _ng = len(list(csv.DictReader(open(KD + 'trace/gates_kitty.csv'))))
         _cl = ['effect', 'gate', 'forced-mode', 'not-run']; want = tuple([sum(int(r['red_bytes']) for r in _rc), _ng] + [sum(int(r[c]) for r in _rc) for c in _cl])
         mm = re.search(r'never-run code \(.*?\.\*\* ([\d,]+) bytes of the trace never ran.*?lists the (\d+) executed conditional branches.*?\* ([\d,]+) bytes, effect:.*?\* ([\d,]+) bytes, gate:.*?\* ([\d,]+) bytes, forced-mode:.*?\* ([\d,]+) bytes, not-run:', open(KD + 'README.md', encoding='utf-8').read(), re.S)   # need= the never-run paragraph
-        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes port/red_classes_kitty.csv (need=never-run code (...).** N bytes of the trace never ran ... lists the G executed conditional branches ... * a bytes, effect: ... * b bytes, gate: ... * c bytes, forced-mode: ... * d bytes, not-run:)')
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes trace/red_classes_kitty.csv (need=never-run code (...).** N bytes of the trace never ran ... lists the G executed conditional branches ... * a bytes, effect: ... * b bytes, gate: ... * c bytes, forced-mode: ... * d bytes, not-run:)')
         elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: never-run code quoted %s, the tables give %s' % (mm.groups(), want))
-        else: ok('kitty', 'never-run code classes quoted as in port/red_classes_kitty.csv (%d bytes)' % want[0])
+        else: ok('kitty', 'never-run code classes quoted as in trace/red_classes_kitty.csv (%d bytes)' % want[0])
         # the doubts list (tools/kitty_doubts.py): fresh, and its counts quoted in the Kitty README
         r7 = _run('tools/kitty_doubts.py', '--check')
         if r7.returncode: bad('kitty', 'disasm/sym_unconclusive_kitty.{csv,md}: %s (rerun tools/kitty_doubts.py)' % (r7.stderr or r7.stdout).strip()[-300:])
@@ -424,7 +429,7 @@ if A.rom_proto:
     def _runp(*cmd): return subprocess.run([sys.executable] + list(cmd), capture_output=True, text=True)
     j = lambda n: os.path.join(tp, n)
     p0 = _runp('tools/proto_symtab.py', A.rom_proto, '--out', j('st.csv'))
-    p1 = _runp('tools/proto_trace.py', A.rom_proto, j('t.json'), '--roots', PD + 'disasm/extra_roots_proto.json', '--report', j('u.md')) if not p0.returncode else p0
+    p1 = _runp('tools/proto_trace.py', A.rom_proto, j('t.json'), '--roots', PD + 'trace/extra_roots_proto.json', '--report', j('u.md')) if not p0.returncode else p0
     p2 = _runp('tools/proto_types.py', A.rom_proto, j('t.json'), '--types', j('ty.csv'), '--sites', j('cs.csv'), '--rommap', j('rm.csv'),
                '--names', j('na.csv'), '--symtab', j('st.csv')) if not p1.returncode else p1
     p2b = _runp('tools/proto_match_old.py', A.rom_proto, j('st.csv'), j('t.json'), j('mo.csv')) if not p2.returncode else p2      # L3
@@ -435,9 +440,9 @@ if A.rom_proto:
                '--out', j('p.sym'), '--report') if not p2.returncode else p2
     if p3.returncode: bad('proto', 'the prototype pipeline failed: %s' % (p3.stderr or p3.stdout)[-300:])
     else:
-        stale = [f for f, g in (('disasm/leftover_symtab_proto.csv', 'st.csv'), ('port/trace_proto.json', 't.json'), ('port/trace_proto_unresolved.md', 'u.md'),
-                                ('disasm/sym_types_proto.csv', 'ty.csv'), ('assets/copy_sites_proto.csv', 'cs.csv'), ('port/rom_map_proto.csv', 'rm.csv'),
-                                ('disasm/sym_names_proto_auto.csv', 'na.csv'), ('disasm/match_old_proto.csv', 'mo.csv'),
+        stale = [f for f, g in (('disasm/leftover_symtab_proto.csv', 'st.csv'), ('trace/trace_proto.json', 't.json'), ('trace/trace_proto_unresolved.md', 'u.md'),
+                                ('disasm/sym_types_proto.csv', 'ty.csv'), ('assets/copy_sites_proto.csv', 'cs.csv'), ('trace/rom_map_proto.csv', 'rm.csv'),
+                                ('disasm/layers/sym_names_proto_auto.csv', 'na.csv'), ('disasm/match_old_proto.csv', 'mo.csv'),
                                 ('disasm/sym_names_proto.csv', 'nm.csv'), ('disasm/sym_unconclusive_proto.md', 'dq.md'), ('pocketcamera_proto.sym', 'p.sym'))
                  if not os.path.exists(PD + f) or open(PD + f, 'rb').read() != open(j(g), 'rb').read()]
         if stale: bad('proto', 'not what the prototype pipeline makes today (SETUP.md, prototype): %s' % ', '.join(stale))
@@ -463,10 +468,10 @@ if A.rom_proto:
             if not mm: bad('proto', 'roms/prototype_debagame/README.md no longer quotes the %s (need=%r)' % (what, pat))
             elif int(mm.group(1).replace(',', '')) != val: bad('proto', 'roms/prototype_debagame/README.md: %s quoted %s, the tools give %d' % (what, mm.group(1), val))
         # L2: the union of the core runs against the trace (tools/proto_observed.py), and the BGB replays (tools/proto_bgb_replay.py)
-        p4 = _runp('tools/proto_observed.py', A.rom_proto, PD + 'port/trace_proto.json', PD + 'port/cov_proto_runs.npz', '--report', j('ob.md'))
+        p4 = _runp('tools/proto_observed.py', A.rom_proto, PD + 'trace/trace_proto.json', PD + 'trace/cov_proto_runs.npz', '--report', j('ob.md'))
         if p4.returncode: bad('proto', 'tools/proto_observed.py failed: %s' % (p4.stderr or p4.stdout)[-300:])
         else:
-            if open(PD + 'port/observed_proto.md', 'rb').read() != open(j('ob.md'), 'rb').read(): bad('proto', 'port/observed_proto.md is not what tools/proto_observed.py writes today')
+            if open(PD + 'trace/observed_proto.md', 'rb').read() != open(j('ob.md'), 'rb').read(): bad('proto', 'trace/observed_proto.md is not what tools/proto_observed.py writes today')
             else: ok('proto', 'observed_proto.md fresh')
             p5 = _runp('tools/proto_reach_map.py', A.rom_proto, j('reach.png'))      # the coverage map, shown in roms/prototype_debagame/README.md
             if p5.returncode: bad('proto', 'tools/proto_reach_map.py failed: %s' % (p5.stderr or p5.stdout)[-300:])
@@ -474,7 +479,7 @@ if A.rom_proto:
             elif '](proto_rom_reachability_map.png)' not in PR: bad('proto', 'roms/prototype_debagame/README.md does not show proto_rom_reachability_map.png')
             else: ok('proto', 'proto_rom_reachability_map.png fresh and shown')
             mo = re.search(r'proto_observed: (\d+) of (\d+) instructions ran, (\d+) of (\d+) code bytes, (\d+) executed bytes outside the trace', p4.stdout)
-            bg = list(csv.DictReader(open(PD + 'port/bgb_game_seq_proto.csv')))
+            bg = list(csv.DictReader(open(PD + 'trace/bgb_game_seq_proto.csv')))
             for what, val, pat in (('instructions run', int(mo.group(1)), r'([\d,]+) of the [\d,]+ traced instructions ran'),
                                    ('code bytes run', int(mo.group(3)), r'([\d,]+) of the [\d,]+ bytes of proven code;'),
                                    ('bytes outside the trace', int(mo.group(5)), r'([\d,]+) executed bytes lie outside the trace'),

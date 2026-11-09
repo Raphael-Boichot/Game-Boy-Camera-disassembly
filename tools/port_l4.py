@@ -39,8 +39,8 @@ for r in csv.DictReader(open(a.codemap)):
 def cmap(b, ad):
     if ad < 0x4000: b = 0
     return CM.get((b, ad))
-names = {r['name'] for r in csv.DictReader(open(a.names or os.path.join(OD, 'sym_names_%s.csv' % S), encoding='utf-8'))}
-HAND = os.path.join(OD, 'sym_names_%s_hand.csv' % S)
+names = {r['name'] for r in csv.DictReader(open(a.names or os.path.join(OD, 'layers', 'sym_names_%s_port.csv' % S), encoding='utf-8'))}
+HAND = os.path.join(OD, 'layers', 'sym_names_%s_hand.csv' % S)
 if os.path.exists(HAND): names |= {r['name'] for r in csv.DictReader(open(HAND, encoding='utf-8')) if r['name'] not in ('-', '')}
 rep = []
 def rd(p): return list(csv.DictReader(open(p, encoding='utf-8')))

@@ -2,7 +2,7 @@
 """BGB scenarios of the early prototype (the BGB copy, blank SRAM): which keys lead to which GAME_SEQ, and the SRAM aging test with and
 without the write protection switched off.
 
-  tools/proto_bgb_scenarios.py PROTO_BGB.gb OUT_DIR [--paths roms/prototype_debagame/port/menu_paths_proto.csv] [--aging roms/prototype_debagame/port/aging_bgb_proto.csv]
+  tools/proto_bgb_scenarios.py PROTO_BGB.gb OUT_DIR [--paths roms/prototype_debagame/trace/menu_paths_proto.csv] [--aging roms/prototype_debagame/trace/aging_bgb_proto.csv]
 
 PROTO_BGB.gb is the header-patched copy (md5 1d8097de...; BGB only). Each scenario is one BGB run from 128 KiB of $00 (keys in the
 format of tcrf_check/tools/bgb_run.py, after the 250-frame boot hold and 400 free frames, then 200 free frames); the end state gives
@@ -19,7 +19,7 @@ import sys, os, csv, argparse, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tcrf_check', 'tools'))
 import bgb_run as B
 from PIL import Image
-D = 'roms/prototype_debagame/port/'
+D = 'roms/prototype_debagame/trace/'
 ap = argparse.ArgumentParser(); ap.add_argument('rom'); ap.add_argument('out')
 ap.add_argument('--paths', default=D + 'menu_paths_proto.csv'); ap.add_argument('--aging', default=D + 'aging_bgb_proto.csv')
 ap.add_argument('--patterns', default=D + 'aging_patterns_bgb_proto.csv'); ap.add_argument('--only-patterns', action='store_true'); a = ap.parse_args()

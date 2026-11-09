@@ -3,7 +3,7 @@
 
   tools/port_never_run.py TREE SUFFIX OUT.csv COV.npz [COV.npz ...] [--rom ROM]
 
-TREE is roms/<folder>; the code is the build's static trace (port/trace_<s>.json); executed = the union of the COV files (`ex`).
+TREE is roms/<folder>; the code is the build's static trace (trace/trace_<s>.json); executed = the union of the COV files (`ex`).
 Each never-run byte is classed through the port's instruction map (port/code_map_<s>.csv) against the Japanese ROM:
   JP_DEAD     the paired Japanese byte is proven dead in Japan (roms/jp_rev_a/assets/reach_ranges_jp.csv: UNREFERENCED / UNREACHABLE)
   JP_RAN      the paired Japanese byte ran in Japan (coverage/v8/merged_v8/cov.npz or a witness of roms/jp_rev_a/assets/witness_jp.csv):
@@ -21,7 +21,7 @@ if '--rom' in args: i = args.index('--rom'); ROM = args[i + 1]; del args[i:i + 2
 T, S, OUT = args[0].rstrip('/'), args[1], args[2]; COVS = args[3:]
 def flat(b, a): return a if b == 0 or a < 0x4000 else b * 0x4000 + a - 0x4000
 N = 1 << 20; code = np.zeros(N, bool)
-for k, n in json.load(open('%s/port/trace_%s.json' % (T, S)))['code'].items():
+for k, n in json.load(open('%s/trace/trace_%s.json' % (T, S)))['code'].items():
     b, a = k.split(':')
     if n > 0: o = flat(int(b, 16), int(a, 16)); code[o:o + n] = True
 ex = np.zeros(N, bool)
@@ -39,12 +39,12 @@ for r in csv.DictReader(open('%s/port/code_map_%s.csv' % (T, S), encoding='utf-8
 starts = sorted(pair); 
 names = {}
 import glob, os
-for f in sorted(glob.glob('%s/disasm/sym_names_%s*.csv' % (T, S))):
-    if f.endswith(('_hand.csv',)): continue
+for f in ['%s/disasm/layers/sym_names_%s_%s.csv' % (T, S, l) for l in ('checked', 'loaders', 'port', 'reads')]:     # the order of the former sorted glob (port = the old sym_names_<s>.csv, read after checked and loaders)
+    if not os.path.exists(f): continue
     for r in csv.DictReader(open(f, encoding='utf-8')):
         o = flat(int(r['bank'], 16), int(r['addr'], 16))
         if r['name'] != '-': names[o] = r['name']
-hand = '%s/disasm/sym_names_%s_hand.csv' % (T, S)
+hand = '%s/disasm/layers/sym_names_%s_hand.csv' % (T, S)
 if os.path.exists(hand):
     for r in csv.DictReader(open(hand, encoding='utf-8')):
         o = flat(int(r['bank'], 16), int(r['addr'], 16))
@@ -65,7 +65,7 @@ def cls(o):
 kind = {}
 for r in csv.DictReader(open('%s/port/code_map_%s.csv' % (T, S), encoding='utf-8')):
     kind[flat(int(r['bank'], 16), int(r['other'], 16))] = r['kind']
-tr = json.load(open('%s/port/trace_%s.json' % (T, S)))
+tr = json.load(open('%s/trace/trace_%s.json' % (T, S)))
 ins = {}
 for k, n in tr['code'].items():
     if n > 0: b_, a_ = k.split(':'); ins[flat(int(b_, 16), int(a_, 16))] = (int(b_, 16), int(a_, 16), n)

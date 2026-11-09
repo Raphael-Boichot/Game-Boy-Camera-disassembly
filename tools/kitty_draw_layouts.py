@@ -6,7 +6,7 @@ unused-asset pass). Writes assets/sprite_layouts_unread_kitty.png and assets/spr
 
 A layout is drawn as Obj_DrawSprite does: entries {dy, dx, tile, attributes} (X / Y flip from bits 5 / 6), 8 x 16 objects when LCDC bit 2
 is set on that screen, colour 0 transparent. The screen: the screens on which the read layouts just before and after it in bank $03 are
-first read (port/layout_screens_kitty.csv, tools/kitty_layout_screens.py) when BGB VRAM of that screen exists (port/vram_screens_kitty.npz,
+first read (trace/layout_screens_kitty.csv, tools/kitty_layout_screens.py) when BGB VRAM of that screen exists (trace/vram_screens_kitty.npz,
 tools/kitty_vram_screens.py), the one whose tiles are all non-blank with the smallest seam break between side-by-side objects ("neighbour");
 otherwise the best such fit over every screen ("best fit"). Evidence I: the right tile set is a guess; a layout that draws as a picture or as
 text is a strong hint, one that draws as noise had the wrong tiles.
@@ -16,7 +16,7 @@ from PIL import Image,ImageDraw
 import os
 REPO=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); KD=os.path.join(REPO,'roms','hello_kitty')
 d=open(os.environ.get('KITTY_ROM','/root/work/roms/pocketcamera_kitty.gb'),'rb').read()
-V=np.load(os.path.join(KD,'port','vram_screens_kitty.npz'))
+V=np.load(os.path.join(KD,'trace','vram_screens_kitty.npz'))
 SCR=sorted(k for k in V.files if not k.startswith(('lcdc_','oam_')))
 def entries(a):
     o=3*0x4000+a-0x4000; E=[]
@@ -71,7 +71,7 @@ def fit(a,s):
 
 import csv,bisect,collections
 from PIL import ImageFont
-S={int(r['layout'][3:],16):r['next_screens'].split() for r in csv.DictReader(open(os.path.join(KD,'port','layout_screens_kitty.csv')))}
+S={int(r['layout'][3:],16):r['next_screens'].split() for r in csv.DictReader(open(os.path.join(KD,'trace','layout_screens_kitty.csv')))}
 K=sorted(S)
 R=list(csv.DictReader(open(os.path.join(KD,'assets','sprite_layouts_unread_kitty.csv'))))
 assign={}

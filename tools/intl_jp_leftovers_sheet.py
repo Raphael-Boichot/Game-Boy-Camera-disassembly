@@ -4,7 +4,7 @@
   tools/intl_jp_leftovers_sheet.py JP.gb INTL.gb OUT.png
 
 Drawn from the international ROM's own bytes (2bpp tiles, 16 per row, x2, grey palette; the two tile maps as byte values in grey; the font as its
-8 x 16 glyph cells).  Every block is checked byte for byte against the Japanese block it comes from (roms/us_eu/assets/jp_never_reached_in_us.csv:
+8 x 16 glyph cells).  Every block is checked byte for byte against the Japanese block it comes from (roms/us_eu/assets/never_reached_us.csv:
 the never-reached assets of the Japanese ROM found again in this one).  Left out: the exchange stand-by screen and the "DEBA GAME" menu (shown in the
 Japanese section of the README), the D.J. printer font (used: printed, not shown) and the small scraps."""
 import sys, os

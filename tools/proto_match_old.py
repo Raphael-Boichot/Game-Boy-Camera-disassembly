@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Find the routines of the two older builds (leftover symbol tables) in the prototype's code: the developers' names for L3.
 
-  tools/proto_match_old.py PROTO.gb roms/prototype_debagame/disasm/leftover_symtab_proto.csv roms/prototype_debagame/port/trace_proto.json OUT.csv
+  tools/proto_match_old.py PROTO.gb roms/prototype_debagame/disasm/leftover_symtab_proto.csv roms/prototype_debagame/trace/trace_proto.json OUT.csv
 
 The two leftover symbol tables (tools/proto_symtab.py) are the symbol lists of two older builds, and the ROM also holds the bank-0
 code of those builds as leftovers: table $2A fits bank $2C (57 % of its bank-0 code labels at or above $0150 are a `call` / `jp`

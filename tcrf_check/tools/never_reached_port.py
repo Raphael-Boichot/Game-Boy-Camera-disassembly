@@ -2,9 +2,9 @@
 """Where the never-reached assets of the Japanese ROM (tcrf_check/assets/unidentified/really_unused.csv, tiers other than shown) are in the international ROM
 (same address / found elsewhere / absent) and how many of their bytes the international coverage run read (any run / organic runs only).
 Inputs: the two ROMs (/root/work/roms), the coverage state cov.npz of coverage/tools/coverage_run.py (path below). Output: a csv, then
-roms/us_eu/assets/jp_never_reached_in_us.csv is written from it (columns renamed; blocks under 64 bytes found elsewhere marked as possible coincidences)."""
+roms/us_eu/assets/never_reached_us.csv is written from it (columns renamed; blocks under 64 bytes found elsewhere marked as possible coincidences)."""
 import csv,numpy as np,collections
-J=open('/root/work/roms/pocketcamera_jp.gb','rb').read(); U=open('/root/work/roms/gbcam_usa_eu.gb','rb').read()
+J=open('/root/work/roms/pocketcamera_jp.gb','rb').read(); U=open('/root/work/roms/gbcam_us.gb','rb').read()
 z=np.load('/root/work/port/covus/long_a/cov.npz'); dr=z['dr']>0; odr=z['odr']>0
 def off(b,a): return b*0x4000+a-(0x4000 if b else 0)
 rows=list(csv.DictReader(open('/root/work/repo/tcrf_check/assets/unidentified/really_unused.csv',encoding='utf-8')))

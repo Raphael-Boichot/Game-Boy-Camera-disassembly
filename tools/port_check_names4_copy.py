@@ -13,7 +13,7 @@ def flat(b, a): return a if b == 0 else b * 0x4000 + a - 0x4000
 def merged(tree, s, skip4):
     names = {}
     for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-        p = '%s/disasm/sym_names_%s%s.csv' % (tree, s, suf)
+        p = '%s/disasm/layers/sym_names_%s%s.csv' % (tree, s, suf or '_port')
         if not os.path.exists(p): continue
         for r in csv.DictReader(open(p, encoding='utf-8')):
             if skip4 and 'checked4 (copied' in r.get('source', ''): continue
@@ -36,7 +36,7 @@ for (b, a), r in sorted(gn.items()):
     fo = flat(fb, fa)
     if G[o:e] != U[fo:fo + (e - o)]: continue
     out.append(['%02x' % b, '%04x' % a, fr['name'], 'C', fr['note'] + '; bytes equal to %s %02X:%04X' % (FT.split('/')[-1], fb, fa), 'checked4 (copied from %s): %s' % (FT, r.get('source', ''))])
-p = '%s/disasm/sym_names_%s_checked.csv' % (T, S); keep = [l for l in open(p, encoding='utf-8') if 'checked4 (copied' not in l]
+p = '%s/disasm/layers/sym_names_%s_checked.csv' % (T, S); keep = [l for l in open(p, encoding='utf-8') if 'checked4 (copied' not in l]
 open(p, 'w', encoding='utf-8').write(''.join(keep))
 with open(p, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
 print(len(out), 'names carried to', T)

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Hello Kitty ROM: the gates of the never-run code (step 7). Writes roms/hello_kitty/port/gates_kitty.csv.
+"""Hello Kitty ROM: the gates of the never-run code (step 7). Writes roms/hello_kitty/trace/gates_kitty.csv.
 
   tools/kitty_gates.py [ROM]
 
-Every instruction of the trace (port/trace_kitty.json) that ran in an observed run (port/cov_kitty_*.npz) and can go two ways
+Every instruction of the trace (trace/trace_kitty.json) that ran in an observed run (port/cov_kitty_*.npz) and can go two ways
 (jr / jp / call / ret with a condition) is a gate when one of its two ways never ran: the never-run way leads into red code (code that no
 run executed). Per gate: site (bank:address), the routine it is in, the instruction, the way that never ran (taken / fall-through), the
 first never-run address, the red bytes reached from there through never-run code only (straight-line runs and the static jumps, calls
@@ -14,13 +14,13 @@ import os, sys, csv, json, glob, bisect, collections
 import numpy as np
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); KD = os.path.join(REPO, 'roms', 'hello_kitty')
 ROM = open(sys.argv[1] if len(sys.argv) > 1 else '/root/work/roms/pocketcamera_kitty.gb', 'rb').read(); N = len(ROM)
-T = json.load(open(os.path.join(KD, 'port', 'trace_kitty.json')))
+T = json.load(open(os.path.join(KD, 'trace', 'trace_kitty.json')))
 def off(b, a): return a if a < 0x4000 else b * 0x4000 + a - 0x4000
 ins = {}
 for k, n in T['code'].items():
     b, a = int(k[:2], 16), int(k[3:], 16); ins[off(b, a)] = (b, a, n)
 ex = np.zeros(N, bool)
-for f in sorted(glob.glob(os.path.join(KD, 'port', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'port', 'wp_exec_kitty.npz')): ex |= np.load(f)['exec'][:N] > 0
+for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['exec'][:N] > 0
 code = np.zeros(N, bool)
 for o, (b, a, n) in ins.items(): code[o:o + n] = True
 red = code & ~ex
@@ -69,6 +69,6 @@ for o in starts:
             tb = t // 0x4000; ta = t % 0x4000 + (0x4000 if tb else 0)
             rows.append(['%02X:%04X' % (b, a), routine(o), COND[op], way, '%02X:%04X' % (tb, ta), tot, test])
 rows.sort(key=lambda r: -r[5])
-with open(os.path.join(KD, 'port', 'gates_kitty.csv'), 'w', newline='') as f:
+with open(os.path.join(KD, 'trace', 'gates_kitty.csv'), 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['site', 'routine', 'branch', 'never_run_way', 'first_red', 'red_bytes_opened', 'test_before']); w.writerows(rows)
 print('kitty_gates: %d red bytes, %d gates' % (int(red.sum()), len(rows)))

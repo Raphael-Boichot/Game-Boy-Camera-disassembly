@@ -5,7 +5,7 @@ import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 W, O = sys.argv[1:3]; os.makedirs(O, exist_ok=True)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-jp = open(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'rb').read(); us = open(os.path.join(ROOT, 'roms', 'gbcam_usa_eu.gb'), 'rb').read()
+jp = open(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'rb').read(); us = open(os.path.join(ROOT, 'roms', 'gbcam_us.gb'), 'rb').read()
 BG = (60, 60, 100); YEL = (255, 255, 0); WHITE = (255, 255, 255)
 def font(sz):
     for f in ('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc', '/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'):

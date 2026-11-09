@@ -5,9 +5,9 @@
 
 PROTO.gb is the image as dumped (md5 19b50a5f...). Same drawing as tools/kitty_reach_map.py and the Japanese
 tcrf_check/tools/rom_reach_map.py (8 banks per row, each bank 16 x 64 tiles, the shade inside a colour is the tile pixel):
-  blue      executed or read in a run: the core runs of tools/proto_coverage.py (roms/prototype_debagame/port/cov_proto_runs.npz,
+  blue      executed or read in a run: the core runs of tools/proto_coverage.py (roms/prototype_debagame/trace/cov_proto_runs.npz,
             exec or dread; blank SRAM and the owner's save)
-  RED       proven code (class C of port/rom_map_proto.csv, the trace) that no run executed (port/observed_proto.md lists the blocks)
+  RED       proven code (class C of trace/rom_map_proto.csv, the trace) that no run executed (trace/observed_proto.md lists the blocks)
   ORANGE    data never read but explained by a type row of disasm/sym_types_proto.csv (copy sources, leftover text, the old symbol
             tables, the bank-number bytes, the header) or an inline table of the trace (class T)
   GREY-BLUE data never read and explained by nothing yet (still on the default typing)
@@ -22,11 +22,11 @@ HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE);
 ROM = sys.argv[1]; OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(KD, 'proto_rom_reachability_map.png')
 rom = np.frombuffer(open(ROM, 'rb').read(), np.uint8); N = len(rom)
 def off(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
-z = np.load(os.path.join(KD, 'port', 'cov_proto_runs.npz'))
+z = np.load(os.path.join(KD, 'trace', 'cov_proto_runs.npz'))
 ex = z['exec'] > 0; rd = z['dread'] > 0; hit = ex | rd
 forced = np.zeros(N, bool)
 code = np.zeros(N, bool); tab = np.zeros(N, bool)
-for r in csv.DictReader(open(os.path.join(KD, 'port', 'rom_map_proto.csv'))):
+for r in csv.DictReader(open(os.path.join(KD, 'trace', 'rom_map_proto.csv'))):
     o = off(int(r['bank'], 16), int(r['start'], 16)); n = int(r['length'])
     if r['class'] == 'C': code[o:o + n] = True
     elif r['class'] == 'T': tab[o:o + n] = True
@@ -82,7 +82,7 @@ c_blue, c_red, c_grey, c_or, c_pad, c_fill, c_forced = (n(cat == c) for c in (0,
 c_code = n(code); c_ran = n(code & ex)
 pc = lambda v: '%s B, %.1f %%' % (format(v, ','), 100 * v / N)
 items = [(0, 'blue: executed or read in a run (the core runs of tools/proto_coverage.py on the image as dumped: blank SRAM and the owner\'s save)  (%s)' % pc(c_blue)),
-         (2, 'RED: proven code that no run executed  (%s): %s of the %s bytes of proven code ran (the timer interrupt, the self-test error paths, the link code: port/observed_proto.md)' % (pc(c_red), format(c_ran, ','), format(c_code, ','))),
+         (2, 'RED: proven code that no run executed  (%s): %s of the %s bytes of proven code ran (the timer interrupt, the self-test error paths, the link code: trace/observed_proto.md)' % (pc(c_red), format(c_ran, ','), format(c_code, ','))),
          (9, 'GREY-BLUE: data that no run read and nothing explains yet (still on the default typing: mostly the leftover banks)  (%s)' % pc(c_grey)),
          (4, 'ORANGE: data that no run read, explained by a type row (leftover text, old symbol tables, copy sources, bank numbers, header) or an inline table  (%s)' % pc(c_or)),
          (3, 'muted red: never-read runs of 16+ x $00, padding  (%s)' % pc(c_pad)),

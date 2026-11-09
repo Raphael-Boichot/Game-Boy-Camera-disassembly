@@ -5,7 +5,7 @@ GBCAM_ROM = the Gold ROM: a fresh run, a run on the unlocking saves and a third 
   tools/never_reached_gold.py JP.gb INTL.gb GOLD.gb OUTDIR COV.npz [COV.npz ...]
 
 Two tables (OUTDIR):
-  jp_never_reached_in_gold.csv   the never-reached assets of the Japanese ROM (tcrf_check/assets/unidentified/really_unused.csv, tiers other than shown) found in the
+  never_reached_gold.csv   the never-reached assets of the Japanese ROM (tcrf_check/assets/unidentified/really_unused.csv, tiers other than shown) found in the
                                  Gold ROM (same address / moved / absent) and how many of their bytes the Gold runs read (any run / organic runs only)
   gold_own_never_read.csv        the data blocks of the Gold ROM whose bytes differ from the international ROM at the same address (the Gold edition's own content) and
                                  that no organic Gold run read; plus the counts of those that were read
@@ -30,12 +30,12 @@ for r in rows:
     rd = int(dr[f:f + n].sum()) if f >= 0 else 0; ro = int(odr[f:f + n].sum()) if f >= 0 else 0
     outA.append(dict(jp_bank=r['bank'], jp_addr=r['addr'], bytes=n, jp_name=r['name'], jp_tier=r['tier'], gold_addr=loc(f) if f >= 0 else '', gold_status=st,
                      gold_bytes_read_any_run=rd, gold_bytes_read_organic=ro))
-with open(os.path.join(OUT, 'jp_never_reached_in_gold.csv'), 'w', newline='', encoding='utf-8') as fh:
+with open(os.path.join(OUT, 'never_reached_gold.csv'), 'w', newline='', encoding='utf-8') as fh:
     w = csv.DictWriter(fh, fieldnames=list(outA[0].keys()), lineterminator='\n'); w.writeheader(); w.writerows(outA)
 # ---- B: the Gold edition's own data blocks (bytes differ from the international ROM), read or not
 names = {}
 for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-    p = os.path.join(ROOT, 'roms', 'gold', 'disasm', 'sym_names_gold%s.csv' % suf)
+    p = os.path.join(ROOT, 'roms', 'gold', 'disasm', 'layers', 'sym_names_gold%s.csv' % (suf or '_port'))
     if not os.path.exists(p): continue
     for r in csv.DictReader(open(p, encoding='utf-8')):
         k = off(int(r['bank'], 16), int(r['addr'], 16))
@@ -43,7 +43,7 @@ for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
         else: names[k] = r['name']
 starts = sorted(names); code = set()
 import json
-for k, n in json.load(open(os.path.join(ROOT, 'roms', 'gold', 'port', 'trace_gold.json')))['code'].items():
+for k, n in json.load(open(os.path.join(ROOT, 'roms', 'gold', 'trace', 'trace_gold.json')))['code'].items():
     if n > 0: b, a = k.split(':'); o = off(int(b, 16), int(a, 16)); code.update(range(o, o + n))
 KINDS = ('Gfx_', 'Map_', 'Sheet_', 'StampCat', 'AlbumB', 'Font_', 'Src_', 'Data_', 'Unused_', 'BgMap_', 'WildFrame', 'Border', 'Song', 'Sfx')
 outB = []; cnt = collections.Counter()

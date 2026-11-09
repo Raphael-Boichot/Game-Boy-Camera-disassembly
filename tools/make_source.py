@@ -2,12 +2,12 @@
 """Write the editable source tree of the Japanese Rev A ROM (L5): roms/jp_rev_a/src/.
 
 usage: python3 tools/make_source.py --rom pocketcamera_jp.gb [--mgbdis /path/to/mgbdis.py] [--out roms/jp_rev_a/src] [--check]
-       python3 tools/make_source.py --tree us_eu --rom gbcam_usa_eu.gb [--check]      (the international tree, roms/us_eu/src/, from the ported tables)
+       python3 tools/make_source.py --tree us_eu --rom gbcam_us.gb [--check]      (the international tree, roms/us_eu/src/, from the ported tables)
        python3 tools/make_source.py --tree gold --rom gbcam_gold.gb [--check]         (the Gold tree, roms/gold/src/, the same way)
 
 Steps: mgbdis (master, `--print-hex`) disassembles the ROM with roms/jp_rev_a/pocketcamera_jp.sym beside a copy of it; tools/sym_fix.py --tables --const
 writes the word / far-pointer tables, the RAM names, the constants, the state names and the character map into the listing; this script then
-  * keeps one file per bank (`bank_000.asm` ... `bank_03f.asm`) and `game.asm`, which includes them after hardware.inc, ram_jp.inc, const_jp.inc and charmap_jp.inc;
+  * keeps one file per bank (`bank_000.asm` ... `bank_03f.asm`) and `game.asm`, which includes them after hardware.inc, ram_<tag>.inc, const_<tag>.inc and the character maps;
   * moves every graphics, map or font block, and every other block of plain `db` rows of at least BIG bytes, into its own file under `data/bank_BB/`
     (`.2bpp` tiles, `.tilemap` tile maps, `.bin` anything else) and writes `INCBIN` in its place, after checking that the file holds exactly the ROM bytes;
   * keeps the ROM address of every instruction as a comment (`; $4A0B`) and drops the raw opcode bytes;
@@ -28,8 +28,8 @@ TREES = {
                      names=[os.path.join(JP, 'disasm', 'sym_names_jp.csv')], md5=MD5, title='Pocket Camera (Japan) (Rev A)', fix=[],
                      cov=os.path.join(REPO, 'coverage', 'results', 'merged_state', 'cov.npz'), report=os.path.join(JP, 'disasm', 'rom_operands_jp.csv'),
                      manual=None, readers={}),
-    'us_eu': dict(dir=_US, rom='gbcam_usa_eu.gb', sym=os.path.join(_US, 'gbcam_usa_eu.sym'), trace=os.path.join(_US, 'port', 'trace_us.json'),
-                  names=[os.path.join(_USD, 'sym_names_us.csv'), os.path.join(_USD, 'sym_names_us_loaders.csv'), os.path.join(_USD, 'sym_names_us_reads.csv'), os.path.join(_USD, 'sym_names_us_checked.csv'), os.path.join(_USD, 'sym_names_us_hand.csv')],
+    'us_eu': dict(dir=_US, rom='gbcam_us.gb', sym=os.path.join(_US, 'gbcam_us.sym'), trace=os.path.join(_US, 'trace', 'trace_us.json'),
+                  names=[os.path.join(_USD, 'sym_names_us.csv')],
                   md5='42d2f65e2549be9d1d126a6828b5d1c1', title='Game Boy Camera (USA, Europe)',
                   fix=['--far-helpers', '0473,049C,061B,068D,0734,0950,0956', '--ram-names', os.path.join(_USD, 'ram_names_us.csv'),
                        '--ram-access', os.path.join(_US, 'wram', 'wram_access_us.csv'), '--ram-exclude', os.path.join(_USD, 'ram_exclude_us.csv'),
@@ -38,12 +38,12 @@ TREES = {
                        '--const-sounds', os.path.join(_USD, 'sound_names_us.csv'), '--state-names', os.path.join(_USD, 'state_names_us.csv'),
                        '--state-helpers', os.path.join(_USD, 'state_helpers_us.csv'), '--text-tables', os.path.join(_USD, 'text_tables_us.csv'),
                        '--charmap', os.path.join(_USD, 'charmap_us.inc') + ',' + os.path.join(JP, 'disasm', 'charmap_jp.inc')],
-                  cov=os.path.join(_US, 'port', 'cov_us.npz'), report=os.path.join(_USD, 'rom_operands_us.csv'),
+                  cov=os.path.join(_US, 'port', 'cov_jp_in_us.npz'), report=os.path.join(_USD, 'rom_operands_us.csv'),
                   manual=os.path.join(_USD, 'rom_operands_manual_us.csv'), readers='port'),
 }
 _GO = os.path.join(REPO, 'roms', 'gold'); _GOD = os.path.join(_GO, 'disasm')     # the Gold edition: the same preset as the international one, on the Gold tables (L5, 2026-11-02)
-TREES['gold'] = dict(dir=_GO, rom='gbcam_gold.gb', sym=os.path.join(_GO, 'gbcam_gold.sym'), trace=os.path.join(_GO, 'port', 'trace_gold.json'),
-                     names=[os.path.join(_GOD, 'sym_names_gold%s.csv' % x) for x in ('', '_loaders', '_reads', '_checked', '_hand')],
+TREES['gold'] = dict(dir=_GO, rom='gbcam_gold.gb', sym=os.path.join(_GO, 'gbcam_gold.sym'), trace=os.path.join(_GO, 'trace', 'trace_gold.json'),
+                     names=[os.path.join(_GOD, 'sym_names_gold.csv')],
                      md5='b2999cfb6dacb439f501a71f30f91762', title='Game Boy Camera Gold (USA)',
                      fix=['--far-helpers', '0473,049C,061B,068D,0734,0950,0956', '--ram-names', os.path.join(_GOD, 'ram_names_gold.csv'),
                           '--ram-access', os.path.join(_GO, 'wram', 'wram_access_gold.csv'), '--ram-exclude', os.path.join(_GOD, 'ram_exclude_gold.csv'),
@@ -52,7 +52,7 @@ TREES['gold'] = dict(dir=_GO, rom='gbcam_gold.gb', sym=os.path.join(_GO, 'gbcam_
                           '--const-sounds', os.path.join(_GOD, 'sound_names_gold.csv'), '--state-names', os.path.join(_GOD, 'state_names_gold.csv'),
                           '--state-helpers', os.path.join(_GOD, 'state_helpers_gold.csv'), '--text-tables', os.path.join(_GOD, 'text_tables_gold.csv'),
                           '--charmap', os.path.join(_GOD, 'charmap_gold.inc') + ',' + os.path.join(JP, 'disasm', 'charmap_jp.inc')],
-                     cov=os.path.join(_GO, 'port', 'cov_gold.npz'), report=os.path.join(_GOD, 'rom_operands_gold.csv'),
+                     cov=os.path.join(_GO, 'port', 'cov_jp_in_gold.npz'), report=os.path.join(_GOD, 'rom_operands_gold.csv'),
                      manual=os.path.join(_GOD, 'rom_operands_manual_gold.csv'), readers='port', suffix='gold')
 TREES['us_eu']['suffix'] = 'us'
 T = TREES['jp_rev_a']
@@ -436,12 +436,15 @@ def main():
         stats.update(use_macros(out, T['sym']))
         open(os.path.join(out, 'gfx.mk'), 'w', newline='\n').write('# Written by tools/make_source.py: one rule per tile PNG (width 16 tiles; -x = blank tiles at the end of the last row).\n'
                                                                   'GFX := %s\n\n%s\n' % (' '.join('$(BUILD)/' + g.split(':')[0][9:] for g in gfx), '\n\n'.join(gfx)))
+        tag = T.get('suffix', 'jp')                 # the tree's own RAM and constant includes carry its tag (HOWTO section 0.1); charmap_jp.inc stays the Japanese one
+        ren = {'ram_jp.inc': 'ram_%s.inc' % tag, 'const_jp.inc': 'const_%s.inc' % tag}
         for inc in ('hardware.inc', 'ram_jp.inc', 'const_jp.inc', 'charmap_us.inc', 'charmap_gold.inc', 'charmap_jp.inc'):
-            if os.path.exists(os.path.join(lst, inc)): shutil.copy(os.path.join(lst, inc), os.path.join(out, inc))
+            if os.path.exists(os.path.join(lst, inc)): shutil.copy(os.path.join(lst, inc), os.path.join(out, ren.get(inc, inc)))
         g = open(os.path.join(lst, 'game.asm'), encoding='utf-8').read().split('\n')
+        g = [re.sub(r'INCLUDE "(ram_jp|const_jp)\.inc"', lambda m: 'INCLUDE "%s"' % ren[m.group(1) + '.inc'], l) for l in g]
         g = ['; %s (SGB Enhanced), md5 %s.' % (T['title'], MD5),
              '; The editable source tree (L5), written by tools/make_source.py; build it with `make` at the top of the repository.', ''] + [l for l in g if l.startswith('INCLUDE')]
-        g.insert(max(i for i, l in enumerate(g) if re.match(r'INCLUDE "(const_jp|charmap_\w+)\.inc"', l)) + 1, 'INCLUDE "macros.inc"')
+        g.insert(max(i for i, l in enumerate(g) if re.match(r'INCLUDE "(const_\w+|charmap_\w+)\.inc"', l)) + 1, 'INCLUDE "macros.inc"')
         open(os.path.join(out, 'game.asm'), 'w', encoding='utf-8', newline='\n').write('\n'.join(g) + '\n')
         print('make_source: %(banks)d banks, %(incbin)d INCBIN files (%(incbin_bytes)d bytes, %(png)d tile blocks as PNG), %(notes)d label notes, %(far)d far pointers as labels (%(far_left)d left as numbers); ROM operands: %(ptr)d pointers as labels (%(ptr_table_words)d table words, %(wrong_bank)d wrong-bank labels corrected), %(num)d numbers (%(label_to_num)d listing labels back to numbers), %(undecided)d undecided, %(rec_words)d record words (%(rec_far)d with their bank, %(rec_stride)d unread records of the same tables; %(rec_outside)d outside plain byte blocks, %(rec_offset)d inside a block left as numbers, %(rec_out_of_table)d read past the end of their table), %(code_labels)d labels added at code targets, %(aligned)d page-aligned tables; macros: farcopy %(farcopy)d, farcall %(farcall)d, dwb %(dwb)d, set_state %(set_state)d, next_state %(next_state)d, play_* %(play)d, ui_sfx %(ui_sfx)d, screen_off %(screen_off)d, stat_irq_off %(stat_irq_off)d, screen_on %(screen_on)d, REPT %(rept)d (%(rept_lines)d lines); %(mbc)d MBC writes as rRAMG / rROMB0 / rRAMB ->' % stats, os.path.relpath(out, REPO))
         if a.check:

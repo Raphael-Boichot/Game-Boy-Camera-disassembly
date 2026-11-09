@@ -2,8 +2,8 @@
 ; The editable source tree (L5), written by tools/make_source.py; build it with `make` at the top of the repository.
 
 INCLUDE "hardware.inc"
-INCLUDE "ram_jp.inc"
-INCLUDE "const_jp.inc"
+INCLUDE "ram_gold.inc"
+INCLUDE "const_gold.inc"
 INCLUDE "charmap_gold.inc"
 INCLUDE "charmap_jp.inc"
 INCLUDE "macros.inc"

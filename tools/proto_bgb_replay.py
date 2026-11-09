@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Replay core coverage runs of the early prototype in BGB (the judge) and check each GAME_SEQ value there.
 
-  tools/proto_bgb_replay.py PROTO_BGB.gb COV_DIR [COV_DIR ...] --out OUT_DIR [--save NAME=SAVE.sav ...] [--csv roms/prototype_debagame/port/bgb_game_seq_proto.csv]
+  tools/proto_bgb_replay.py PROTO_BGB.gb COV_DIR [COV_DIR ...] --out OUT_DIR [--save NAME=SAVE.sav ...] [--csv roms/prototype_debagame/trace/bgb_game_seq_proto.csv]
 
 PROTO_BGB.gb is the header-patched BGB copy (md5 1d8097de3497db8b182bcd2a984b6063; owner's rule 2026-11-08: BGB only, BGB
 refuses the image as dumped). COV_DIR is an output folder of tools/proto_coverage.py (modes.csv); its start save is given by --save

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """L1 typing of the early prototype (image as dumped) from its trace: tables, copy sources, self-test bytes, leftover text and symbol tables.
 
-  tools/proto_types.py PROTO.gb roms/prototype_debagame/port/trace_proto.json --types roms/prototype_debagame/disasm/sym_types_proto.csv \
-        --sites roms/prototype_debagame/assets/copy_sites_proto.csv --rommap roms/prototype_debagame/port/rom_map_proto.csv \
+  tools/proto_types.py PROTO.gb roms/prototype_debagame/trace/trace_proto.json --types roms/prototype_debagame/disasm/sym_types_proto.csv \
+        --sites roms/prototype_debagame/assets/copy_sites_proto.csv --rommap roms/prototype_debagame/trace/rom_map_proto.csv \
         --names roms/prototype_debagame/disasm/sym_names_proto.csv --symtab roms/prototype_debagame/disasm/leftover_symtab_proto.csv
 
 All outputs are generated (never edit them; hand rows go in disasm/sym_types_proto_hand.csv, applied after these by sym_build.py).

@@ -19,7 +19,7 @@ os.environ['BGB_DIR'] = D
 import bgb_run; bgb_run.BGB = D
 import guide_nodes as G
 JP = os.environ.get('GBCAM_ROM', '/home/claude/gbcam_jp/pocketcamera_jp.gb')
-US = os.environ.get('GBCAM_ROM_INTL', '/home/claude/gbcam_jp/roms/gbcam_usa_eu.gb')
+US = os.environ.get('GBCAM_ROM_INTL', '/home/claude/gbcam_jp/roms/gbcam_us.gb')
 SAV = os.environ.get('GBCAM_SAV', '/home/claude/gbcam_jp/saves_unl/GAMEBOYCAMERA_all_unlocked.sav')
 out = os.path.abspath(sys.argv[1]); album = os.path.abspath(sys.argv[2]); what = sys.argv[3:] or ['bgm', 'pvoice', 'shoot', 'speed', 'bview']
 os.makedirs(out, exist_ok=True)

@@ -15,10 +15,10 @@ import numpy as np
 import os
 d=open(os.environ.get('KITTY_ROM','/root/work/roms/pocketcamera_kitty.gb'),'rb').read()
 def off(b,a): return a if b==0 else b*0x4000+a-0x4000
-z=np.load('roms/hello_kitty/port/cov_kitty_runs.npz'); p=np.load('roms/hello_kitty/port/cov_kitty_paths.npz'); bg=np.load('roms/hello_kitty/port/cov_kitty_bgb.npz')
+z=np.load('roms/hello_kitty/trace/cov_kitty_runs.npz'); p=np.load('roms/hello_kitty/trace/cov_kitty_paths.npz'); bg=np.load('roms/hello_kitty/trace/cov_kitty_bgb.npz')
 rd=(z['dread']>0)|(p['dread']>0)|(bg['dread']>0)
-T=json.load(open('roms/hello_kitty/port/trace_kitty.json')); code=set()
-for r in csv.DictReader(open('roms/hello_kitty/port/rom_map_kitty.csv')):
+T=json.load(open('roms/hello_kitty/trace/trace_kitty.json')); code=set()
+for r in csv.DictReader(open('roms/hello_kitty/trace/rom_map_kitty.csv')):
     if r['class']=='C':
         o=off(int(r['bank'],16),int(r['start'],16)); code.update(range(o,o+int(r['length'])))
 B=3; o3=off(B,0x4000)

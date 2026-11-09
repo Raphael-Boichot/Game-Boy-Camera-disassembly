@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Replay the key sequence that reaches JP (mode,state) on the ROM given by GBCAM_ROM and save the final screen.
-usage: GBCAM_ROM=roms/gbcam_usa_eu.gb intl_replay.py CORPUS OUTDIR MODE:STATE [MODE:STATE ...]
+usage: GBCAM_ROM=roms/gbcam_us.gb intl_replay.py CORPUS OUTDIR MODE:STATE [MODE:STATE ...]
 Prints the key sequence as button names and the (mode,state) reached on that ROM (the inputs are the JP ones)."""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

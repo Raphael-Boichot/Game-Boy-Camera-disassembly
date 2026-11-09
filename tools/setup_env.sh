@@ -17,7 +17,7 @@ if [ ! -f "$TC/mgbdis/mgbdis.py" ]; then git clone -q https://github.com/mattcur
 (cd "$TC/mgbdis" && git checkout -q 95d951a) && echo "mgbdis: $(cd "$TC/mgbdis" && git log --oneline -1)"
 # 2. ROMs: from the session attachments (/mnt/user-data) or a folder given as ROM_SRC (e.g. the project files fetched with the Projects tool);
 #    no Game Boy Camera ROM is in the repository (owner, 2026-11-03).  BGB still comes from the owner's pack.
-declare -A MD5=([pocketcamera_jp.gb]=fdcfe686cf4df461e870b6e53b2b5a8b [gbcam_usa_eu.gb]=42d2f65e2549be9d1d126a6828b5d1c1 [gbcam_gold.gb]=b2999cfb6dacb439f501a71f30f91762
+declare -A MD5=([pocketcamera_jp.gb]=fdcfe686cf4df461e870b6e53b2b5a8b [gbcam_us.gb]=42d2f65e2549be9d1d126a6828b5d1c1 [gbcam_gold.gb]=b2999cfb6dacb439f501a71f30f91762
                 [pocketcamera_kitty.gb]=0a323bddc4f0159cea76cf44ed0c1a3c [pocketcamera_proto.gb]=19b50a5f67ef4f0d015e7d813370756e
                 [pocketcamera_proto_bgb.gb]=1d8097de3497db8b182bcd2a984b6063)
 # the prototype twice (owner, 2026-11-08): pocketcamera_proto.gb is the image as dumped (attachment GBD-IMPACT8M.gb) and is the one the
@@ -33,9 +33,6 @@ if [ $need = 1 ]; then
   rm -rf "$tmp"
 fi
 for n in "${!MD5[@]}"; do [ "$(md5sum "$ROMDIR/$n" 2>/dev/null | cut -d' ' -f1)" = "${MD5[$n]}" ] && echo "rom ok: $n" || echo "ROM MISSING: $n"; done
-# legacy names some tools default to
-ln -sf "$ROMDIR/pocketcamera_jp.gb" "$ROMDIR/jp.gb"; ln -sf "$ROMDIR/gbcam_usa_eu.gb" "$ROMDIR/intl.gb"; ln -sf "$ROMDIR/gbcam_gold.gb" "$ROMDIR/gold.gb"
-ln -sf "$ROMDIR/pocketcamera_kitty.gb" "$ROMDIR/kitty.gb"; ln -sf "$ROMDIR/pocketcamera_proto.gb" "$ROMDIR/proto.gb"; ln -sf "$ROMDIR/pocketcamera_proto_bgb.gb" "$ROMDIR/proto_bgb.gb"
 # 3. Wine + BGB (screenshots, sound, watchpoint logs): apt package wine64 from the Ubuntu archive (reachable through the proxy)
 if [ "${1:-}" != "--no-wine" ]; then
   # bgb.exe is a 32-bit program (PE32): wine64 alone cannot start it (syswow64\ntdll.dll / kernel32.dll c0000135), so wine32:i386 is installed too (2026-11-03)

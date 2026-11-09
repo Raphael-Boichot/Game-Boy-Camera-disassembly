@@ -1,4 +1,4 @@
-; Game Boy Camera (USA, Europe), bank $07. Written by tools/make_source.py from roms/us_eu/gbcam_usa_eu.sym and the tables of
+; Game Boy Camera (USA, Europe), bank $07. Written by tools/make_source.py from roms/us_eu/gbcam_us.sym and the tables of
 ; roms/us_eu/disasm/ (mgbdis + tools/sym_fix.py). The comment of a label is its tag (C / I / ?) and note; `; $XXXX` is the ROM address.
 
 
@@ -7741,6 +7741,9 @@ MainMenu_StepIconAnimators_Next::
     ret                                           ; $794D
 
 
+; C: draws the upper icon of main-menu item 1 (VIEW): called by Mode00_State02_Item1_View; at the Japanese address of
+; MainMenu_DrawUpperItem0, swapped because SHOOT and VIEW swapped places on the international main menu (owner
+; 2026-11-02: the name follows the item); twin of MainMenu_DrawUpperItem0 ...
 MainMenu_DrawUpperItem1::
     ld hl, MainMenu_UpperItem1_AnimTbl            ; $794E
     ld b, $03                                     ; $7951
@@ -7770,6 +7773,8 @@ jr_007_7971:
     ret                                           ; $7971
 
 
+; C: animation table of MainMenu_DrawUpperItem1 (VIEW), which reads it; swapped with the item-0 table like the
+; routines
 MainMenu_UpperItem1_AnimTbl::
     db $39, $3e, $24, $7a, $b4, $7a, $03, $08, $14, $64, $b9, $7a, $0d, $12, $5f, $7c
     db $be, $7a

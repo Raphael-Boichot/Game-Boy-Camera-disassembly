@@ -12,7 +12,7 @@ def opt(n, d=None):
     return d
 workers = int(opt('--workers', '2')); only = opt('--only'); only = set(only.split(',')) if only else None; romsel = opt('--rom')
 out = os.path.abspath(a[0]); os.makedirs(out, exist_ok=True)
-ROMS = dict(jp=(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'L'), us=(os.path.join(ROOT, 'roms', 'gbcam_usa_eu.gb'), 'R'))
+ROMS = dict(jp=(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'L'), us=(os.path.join(ROOT, 'roms', 'gbcam_us.gb'), 'R'))
 SAV = os.path.join(ROOT, 'saves_unl', 'unl_CE10238211.sav')
 NAME = dict(A='A', B='B', L='Left', R='Right', U='Up', D='Down', s='Select', S='Start')
 def K(t): return (NAME[t], 4, 60 if t in 'LRUD' else 200)

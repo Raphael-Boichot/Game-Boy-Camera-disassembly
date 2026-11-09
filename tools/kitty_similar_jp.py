@@ -42,7 +42,7 @@ for b, s, n in code_jp:
 labels = collections.defaultdict(list); nm = {}
 for r in csv.DictReader(open(os.path.join(REPO, 'roms/jp_rev_a/disasm/sym_names_jp.csv'))):
     b, ad = int(r['bank'], 16), int(r['addr'], 16); labels[b].append(ad); nm[(b, ad)] = r['name']
-T = json.load(open(os.path.join(REPO, 'roms/hello_kitty/port/trace_kitty.json')))
+T = json.load(open(os.path.join(REPO, 'roms/hello_kitty/trace/trace_kitty.json')))
 ent = collections.defaultdict(list)
 for k, w in T['entries'].items():
     if w in ('jr', 'jr cc', 'jp'): continue      # local branch targets do not start a routine

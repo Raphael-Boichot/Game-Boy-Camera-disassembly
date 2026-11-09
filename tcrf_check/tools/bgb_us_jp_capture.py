@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); ROO
 sys.path.insert(0, HERE)
 import bgb_us_jp_job as J
 out = os.path.abspath(sys.argv[1]); os.makedirs(out, exist_ok=True); stages = sys.argv[2:]
-ROMS = dict(jp=(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'Left'), us=(os.path.join(ROOT, 'roms', 'gbcam_usa_eu.gb'), 'Right'))
+ROMS = dict(jp=(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'Left'), us=(os.path.join(ROOT, 'roms', 'gbcam_us.gb'), 'Right'))
 SAV = os.path.join(ROOT, 'saves_unl', 'unl_CE10238211.sav')
 def K(k, h=4, w=60): return (k, h, w)
 def view(lr): return [K('A', 4, 120), K(lr, 4, 60), K('A', 4, 250)]                       # -> 02:01 VIEW menu

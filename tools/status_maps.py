@@ -7,9 +7,9 @@ Each ROM given is drawn by tcrf_check/tools/rom_layout_map.py into roms/<folder>
 roms/<folder>/assets/layout_by_bank_<prefix>.csv), with --unclaimed: every byte that no label owns and no trace runs is
 NOT ANALYSED YET (grey-blue), padding (runs of 16+ x 00 / FF) is shown as padding. The inputs are read when they exist, so the
 picture fills in by itself as the work lands, with no change to this script:
-  roms/<folder>/disasm/sym_names_<prefix>.csv (and _hand), roms/<folder>/disasm/sym_types_<prefix>.csv  names and type rows
-  roms/<folder>/port/rom_map_<prefix>.csv                                                              byte classes of a trace
-  roms/<folder>/port/diff_<prefix>.npz                                                                 per-bank difference counts (csv)
+  roms/<folder>/disasm/sym_names_<prefix>.csv, roms/<folder>/disasm/sym_types_<prefix>.csv            the final names and type rows
+  roms/<folder>/trace/rom_map_<prefix>.csv                                                             byte classes of a trace
+  roms/<folder>/port/diff_<prefix>.npz, port/cov_jp_in_<prefix>.npz                                    a ported build: per-bank differences, the Japanese runs
 The Japanese picture (roms/jp_rev_a/jp_rom_layout_map.png) and the international one (roms/us_eu/us_rom_layout_map.png) are drawn by
 their own pipelines (tcrf_check/tools/rom_layout_map.py defaults; tools/port_build.py).
 """
@@ -30,10 +30,10 @@ for k, (folder, pre, title, md5) in ROMS.items():
     if not rom: continue
     if hashlib.md5(open(rom, 'rb').read()).hexdigest() != md5: sys.exit('%s: md5 is not %s' % (rom, md5))
     D = os.path.join(REPO, 'roms', folder); E = lambda *p: os.path.join(D, *p)
-    names = [f for f in (E('disasm', 'sym_names_%s.csv' % pre), E('disasm', 'sym_names_%s_loaders.csv' % pre), E('disasm', 'sym_names_%s_reads.csv' % pre), E('disasm', 'sym_names_%s_checked.csv' % pre), E('disasm', 'sym_names_%s_hand.csv' % pre)) if os.path.exists(f)]
-    types = [f for f in (E('disasm', 'sym_types_%s.csv' % pre), E('disasm', 'sym_types_%s_loaders.csv' % pre), E('disasm', 'sym_types_%s_reads.csv' % pre), E('disasm', 'sym_types_%s_hand.csv' % pre)) if os.path.exists(f)]
+    names = [f for f in (E('disasm', 'sym_names_%s.csv' % pre),) if os.path.exists(f)]       # the final tables (HOWTO section 0.1: the layers are merged into them)
+    types = [f for f in (E('disasm', 'sym_types_%s.csv' % pre),) if os.path.exists(f)]
     kinds = E('assets', 'layout_kind_overrides_%s.csv' % pre)
-    rmap = E('port', 'rom_map_%s.csv' % pre); diff = E('port', 'diff_%s.npz' % pre)
+    rmap = E('trace', 'rom_map_%s.csv' % pre); diff = E('port', 'diff_%s.npz' % pre)
     started = bool(names or os.path.exists(rmap))
     out = a.out_dir or D; os.makedirs(os.path.join(out, 'assets') if not a.out_dir else out, exist_ok=True)
     png = os.path.join(out, '%s_rom_layout_map.png' % pre); csv_ = os.path.join(out, 'assets', 'layout_by_bank_%s.csv' % pre) if not a.out_dir else os.path.join(out, 'layout_by_bank_%s.csv' % pre)
@@ -48,7 +48,7 @@ for k, (folder, pre, title, md5) in ROMS.items():
     if os.path.exists(diff): cmd += ['--diff', diff]
     grp = E('assets', 'layout_groups_%s.csv' % pre)
     if os.path.exists(grp): cmd += ['--groups', grp]     # the ROM's own modes and name prefixes for the code colours
-    covf = E('port', 'cov_%s.npz' % pre)
+    covf = E('port', 'cov_jp_in_%s.npz' % pre)
     if os.path.exists(covf): cmd += ['--cov', covf]      # the Japanese runs carried by the port: read bytes are never padding or fill
     cmd += ['--outline', 'none']      # no outline (owner 2026-11-01): what differs from the Japanese ROM goes to a text summary
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=REPO)

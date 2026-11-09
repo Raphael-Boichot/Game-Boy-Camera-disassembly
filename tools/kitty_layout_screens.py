@@ -20,7 +20,7 @@ if sys.argv[1] == '--merge':
     sys.exit()
 import numpy as np, gbcov as G
 rom = os.environ.get('KITTY_ROM', '/root/work/roms/pocketcamera_kitty.gb'); d = sys.argv[1]; out = sys.argv[2]; save = sys.argv[3] if len(sys.argv) > 3 else None
-T = json.load(open(os.path.join(REPO, 'roms', 'hello_kitty', 'port', 'trace_kitty.json')))
+T = json.load(open(os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'trace_kitty.json')))
 def off(k): b, a = int(k[:2], 16), int(k[3:], 16); return a if b == 0 else b * 0x4000 + a - 0x4000
 romb = open(rom, 'rb').read(); o3 = 3 * 0x4000; ents = []; a = 0x4000
 while a < 0x8000 - 3:

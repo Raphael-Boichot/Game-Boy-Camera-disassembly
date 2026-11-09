@@ -5,7 +5,7 @@ import sys,os
 sys.path.insert(0,'/root/work/repo/tcrf_check/tools'); import bgb_run
 os.environ.setdefault('BGB_DIR','/home/claude/bgbx')
 SAV='/root/work/repo/tcrf_check/assets/bgb_printer/print_features/unl_CE10238211_tagtest.sav'
-rom={'us':'/root/work/roms/gbcam_usa_eu.gb','jp':'/root/work/roms/pocketcamera_jp.gb'}
+rom={'us':'/root/work/roms/gbcam_us.gb','jp':'/root/work/roms/pocketcamera_jp.gb'}
 base=[('A',4,200),('Start',4,200),('Right',4,60),('Right',4,60),('Right',4,60),('A',4,0)]
 for r in sys.argv[1].split(','):
   for w in [int(x) for x in sys.argv[2].split(',')]:

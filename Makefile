@@ -1,6 +1,6 @@
 # Build from an editable source tree (L5): roms/jp_rev_a/src/ (default) or, with TREE=us_eu, roms/us_eu/src/ (the international ROM), with TREE=gold, roms/gold/src/ (the Gold edition).
 # Needs rgbds 1.0.4 (rgbasm, rgblink, rgbfix, rgbgfx) in PATH, or RGBDS=/path/to/rgbds/ (with the trailing slash).
-#   make [TREE=us_eu]         build/jp_rev_a/pocketcamera_jp.gb (build/us_eu/gbcam_usa_eu.gb)
+#   make [TREE=us_eu]         build/jp_rev_a/pocketcamera_jp.gb (build/us_eu/gbcam_us.gb)
 #   make check [TREE=us_eu]   ... and compare its md5 with the original ROM
 #   make source ROM=pocketcamera_jp.gb [TREE=us_eu] [MGBDIS=/path/to/mgbdis.py]
 #                             regenerate the tree from the symbol tables - OVERWRITES hand edits in src/
@@ -15,7 +15,7 @@ SRC     := roms/$(TREE)/src
 BUILD   := build/$(TREE)
 ifeq ($(TREE),us_eu)
 ROM_MD5 := 42d2f65e2549be9d1d126a6828b5d1c1
-NAME    := gbcam_usa_eu
+NAME    := gbcam_us
 else ifeq ($(TREE),gold)
 ROM_MD5 := b2999cfb6dacb439f501a71f30f91762
 NAME    := gbcam_gold

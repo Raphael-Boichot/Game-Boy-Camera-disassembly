@@ -19,7 +19,7 @@ J = open(a.jp, 'rb').read(); U = open(a.other, 'rb').read(); M = np.load(a.map);
 skip = {int(x, 16) for x in a.skip_banks.split(',') if x}
 def flat(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
 names = {}
-for f in ['sym_names_%s.csv', 'sym_names_%s_loaders.csv', 'sym_names_%s_reads.csv', 'sym_names_%s_checked.csv', 'sym_names_%s_hand.csv']:
+for f in ['layers/sym_names_%s_port.csv', 'layers/sym_names_%s_loaders.csv', 'layers/sym_names_%s_reads.csv', 'layers/sym_names_%s_checked.csv', 'layers/sym_names_%s_hand.csv']:
     try: rows = list(csv.DictReader(open(D + f % S, encoding='utf-8')))
     except FileNotFoundError: continue
     for r in rows:
@@ -36,7 +36,7 @@ def lab(v):
     v = int(v) & 0x7FFFFFFF; b, ad = v >> 16, v & 0xFFFF; o = flat(b if ad >= 0x4000 else 0, ad); i = bisect.bisect_right(keys, o) - 1; return labs[i][1]
 ldn = collections.defaultdict(set)
 try:
-    for r in csv.DictReader(open(D + 'sym_names_%s_loaders.csv' % S, encoding='utf-8')):
+    for r in csv.DictReader(open(D + 'layers/sym_names_%s_loaders.csv' % S, encoding='utf-8')):
         ldn[(int(r['bank'], 16), int(r['addr'], 16))] |= set(re.findall(r'[A-Za-z0-9_]+', r['note']))
 except FileNotFoundError: pass
 out = []; cnt = collections.Counter()
@@ -63,5 +63,5 @@ for (b, ad), r in names.items():
     if why:
         cnt[why[0]] += 1
         out.append(['%02x' % b, '%04x' % ad, r['name'], 'C', (r['note'] + '; ' if r['note'] else '') + why[1], 'checked: ' + r['source']])
-with open(D + 'sym_names_%s_checked.csv' % S, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
+with open(D + 'layers/sym_names_%s_checked.csv' % S, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
 print('second pass:', dict(cnt))

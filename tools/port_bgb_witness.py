@@ -17,8 +17,8 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); TT = os.path.join(ROOT, 'tcrf_check', 'tools')
 sys.path.insert(0, TT)
 import blocks as B, bgb_run
-ROMS = dict(intl=os.environ.get('ROM_US', '/root/work/roms/gbcam_usa_eu.gb'), gold=os.environ.get('ROM_GOLD', '/root/work/roms/gbcam_gold.gb'))
-TREES = dict(us_eu=('roms/us_eu/port/trace_us.json', 'roms/us_eu/port/cov_us_runs.npz', 'intl'), gold=('roms/gold/port/trace_gold.json', 'roms/gold/port/cov_gold_runs.npz', 'gold'))
+ROMS = dict(intl=os.environ.get('ROM_US', '/root/work/roms/gbcam_us.gb'), gold=os.environ.get('ROM_GOLD', '/root/work/roms/gbcam_gold.gb'))
+TREES = dict(us_eu=('roms/us_eu/trace/trace_us.json', 'roms/us_eu/trace/cov_us_runs.npz', 'intl'), gold=('roms/gold/trace/trace_gold.json', 'roms/gold/trace/cov_gold_runs.npz', 'gold'))
 
 RK = dict(intl='us_eu', gold='gold'); _NEVER = {}
 def never_br(rk):

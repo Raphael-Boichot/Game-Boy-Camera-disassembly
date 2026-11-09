@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
-"""Hello Kitty ROM: what the never-run code is (step 7). Writes port/red_bgb_hits_kitty.csv (with --hits), port/wp_exec_kitty.npz and
-port/red_classes_kitty.csv.
+"""Hello Kitty ROM: what the never-run code is (step 7). Writes trace/red_bgb_hits_kitty.csv (with --hits), trace/wp_exec_kitty.npz and
+trace/red_classes_kitty.csv.
 
   tools/kitty_red_classes.py [ROM] [--hits RUN=FILE ...]
 
 --hits reads BGB watchpoint logs (debugmsg.txt lines "R<bb><aaaa> <mode>:<state>", or the name,hits csv of kitty_bgb_link.py) of
 runs made with the watch lists of the never-run entries (gate targets and trace entries); RUN is a label (sgb, link_giver, print_inq20,
-...). The table port/red_bgb_hits_kitty.csv keeps (run, point, screen, hits); without --hits the table is read back.
+...). The table trace/red_bgb_hits_kitty.csv keeps (run, point, screen, hits); without --hits the table is read back.
 A point that BGB executed credits its straight-line block (up to and including the first jump, call, return or conditional branch)
-as observed: port/wp_exec_kitty.npz (exec, evidence C). The other red bytes are classed:
-  effect      run only by a picture effect that table 05:4C5F never selects, forced in port/forced_effects_kitty.npz
-  gate        run when one sensor-bank gate is inverted, port/forced_gates_kitty.npz
-  forced-mode run only in modes reached by patching the mode table, port/forced_kitty.npz
+as observed: trace/wp_exec_kitty.npz (exec, evidence C). The other red bytes are classed:
+  effect      run only by a picture effect that table 05:4C5F never selects, forced in trace/forced_effects_kitty.npz
+  gate        run when one sensor-bank gate is inverted, trace/forced_gates_kitty.npz
+  forced-mode run only in modes reached by patching the mode table, trace/forced_kitty.npz
   not-run     run by none of these
-Per routine: red bytes per class (port/red_classes_kitty.csv). Forced classes are evidence I: a forced run is not a way the game runs.
+Per routine: red bytes per class (trace/red_classes_kitty.csv). Forced classes are evidence I: a forced run is not a way the game runs.
 """
 import os, sys, csv, json, glob, bisect, collections
 import numpy as np
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); KD = os.path.join(REPO, 'roms', 'hello_kitty'); P = os.path.join(KD, 'port')
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); KD = os.path.join(REPO, 'roms', 'hello_kitty'); P = os.path.join(KD, 'trace')
 args = sys.argv[1:]; hits_in = []
 if '--hits' in args:
     i = args.index('--hits'); hits_in = [x for x in args[i + 1:] if '=' in x]; args = args[:i]

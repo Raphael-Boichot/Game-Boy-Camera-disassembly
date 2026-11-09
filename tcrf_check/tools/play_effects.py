@@ -3,7 +3,7 @@
 are copied byte for byte into an unlocking save whose counters were zeroed (settings block checksum and echo recomputed), and
   (1) the Album B unlock routine of the ROM (02:4D05 Japanese / 02:4D01 international) is called for every picture index (as albumb_thresholds.py): which pictures are unlocked by the played scores;
   (2) the Japanese ROM only: the route to the RUN! RUN! RUN! race loop (corpus entry 649, the third target of the first-wave menu) is replayed with that save and with the zeroed save.
-usage: [MIRROR=1] [GBCAM_ROM=intl.gb] play_effects.py JP|INTL SF2_AFTER.sav BALL_AFTER.sav OUTFILE       (run from the working root; MIRROR=1 for the international ROM: its main menu is mirrored)
+usage: [MIRROR=1] [GBCAM_ROM=gbcam_us.gb] play_effects.py JP|INTL SF2_AFTER.sav BALL_AFTER.sav OUTFILE       (run from the working root; MIRROR=1 for the international ROM: its main menu is mirrored)
 Writes OUTFILE (text)."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

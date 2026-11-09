@@ -8,7 +8,7 @@ Japanese routines: every label of roms/jp_rev_a/disasm/sym_names_jp.csv that sta
 Each is decoded into instructions and turned into a pattern where the operands that depend on the build are wildcards:
 16-bit addresses (call / jp / ld rr,nn / ld [nn],a / ld a,[nn] / ld [nn],sp) and the HRAM byte of ldh (the two builds keep
 their variables at other addresses); every opcode, every 8-bit immediate and every jr offset must be equal. The pattern is
-searched at every instruction start of the Kitty trace (roms/hello_kitty/port/trace_kitty.json).
+searched at every instruction start of the Kitty trace (roms/hello_kitty/trace/trace_kitty.json).
 OUT.csv: jp_bank, jp_addr, jp_name, jp_tag, bytes, instructions, kitty (BB:AAAA list of the matches, '' if none), hits,
 kind: `exact` (the Kitty bytes are equal, operands included), `masked` (equal with the operands above as wildcards).
 A match is evidence C that the code is the same routine (the name can be ported); several hits or a very short routine are
@@ -37,7 +37,7 @@ labels = collections.defaultdict(list); info = {}
 for r in csv.DictReader(open(os.path.join(REPO, 'roms/jp_rev_a/disasm/sym_names_jp.csv'))):
     b, ad = int(r['bank'], 16), int(r['addr'], 16); labels[b].append(ad); info[(b, ad)] = (r['name'], r['conf'])
 for b in labels: labels[b] = sorted(set(labels[b]))
-T = json.load(open(os.path.join(REPO, 'roms/hello_kitty/port/trace_kitty.json')))
+T = json.load(open(os.path.join(REPO, 'roms/hello_kitty/trace/trace_kitty.json')))
 kstarts = sorted((int(k[:2], 16), int(k[3:], 16)) for k, n in T['code'].items() if n > 0)
 KS = {off(b, ad): (b, ad) for b, ad in kstarts}
 rows = []; nmatch = 0

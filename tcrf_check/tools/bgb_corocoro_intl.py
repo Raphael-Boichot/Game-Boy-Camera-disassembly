@@ -6,7 +6,7 @@ import sys, os, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); ROOT = os.path.dirname(HERE)
 import bgb_us_jp_job as J
 out = os.path.abspath(sys.argv[1]); os.makedirs(out, exist_ok=True)
-ROMS = dict(jp=(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'Left'), us=(os.path.join(ROOT, 'roms', 'gbcam_usa_eu.gb'), 'Right'))
+ROMS = dict(jp=(os.path.join(ROOT, 'pocketcamera_jp.gb'), 'Left'), us=(os.path.join(ROOT, 'roms', 'gbcam_us.gb'), 'Right'))
 SAV = os.path.join(ROOT, 'saves_unl', 'unl_CE10238211.sav')          # unlocking save; it already carries the tag 56 56 53 at 01FFD-01FFF
 b = bytearray(open(SAV, 'rb').read()); assert bytes(b[0x1FFD:0x2000]) == b'\x56\x56\x53'
 b[0x1FFD:0x2000] = b'\xAA\xAA\xAA'; NOTAG = os.path.join(out, 'unl_notag.sav'); open(NOTAG, 'wb').write(bytes(b))

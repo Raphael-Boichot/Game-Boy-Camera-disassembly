@@ -19,7 +19,7 @@ T, S, COVS = args[0].rstrip('/'), args[1], args[2:]; D = T + '/disasm/'
 def flat(b, a): return a if b == 0 else b * 0x4000 + a - 0x4000
 names = {}
 for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
-    p = D + 'sym_names_%s%s.csv' % (S, suf)
+    p = D + 'layers/sym_names_%s%s.csv' % (S, suf or '_port')
     if not os.path.exists(p): continue
     for r in csv.DictReader(open(p, encoding='utf-8')):
         if 'checked7: ' in r.get('source', ''): continue
@@ -27,7 +27,7 @@ for suf in ('', '_loaders', '_reads', '_checked', '_hand'):
         if r['name'] == '-': names.pop(k, None)
         else: names[k] = r
 labs = sorted((flat(*k), r['name']) for k, r in names.items()); keys = [x for x, _ in labs]
-tr = json.load(open('%s/port/trace_%s.json' % (T, S)))['code']
+tr = json.load(open('%s/trace/trace_%s.json' % (T, S)))['code']
 code = {flat(int(k[:2], 16), int(k[3:], 16)) for k, n in tr.items() if n > 0}
 ROUT = {r['name'] for k, r in names.items() if flat(*k) in code}
 def lab(v):
@@ -69,6 +69,6 @@ print(dict(cnt))
 if dry:
     for x in out: print('  ', x[0] + ':' + x[1], x[2], '|', x[4][-160:])
 else:
-    p = D + 'sym_names_%s_checked.csv' % S; keep = [l for l in open(p, encoding='utf-8') if 'checked7: ' not in l]
+    p = D + 'layers/sym_names_%s_checked.csv' % S; keep = [l for l in open(p, encoding='utf-8') if 'checked7: ' not in l]
     open(p, 'w', encoding='utf-8').write(''.join(keep))
     with open(p, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)

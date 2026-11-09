@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Hello Kitty ROM: the BGB VRAM ($8000-$97FF), LCDC and OAM at the end of every screen of roms/hello_kitty/screens/explore.csv (replayed
-from a cold boot with the same demo timing as the explorer, two BGB workers). Writes roms/hello_kitty/port/vram_screens_kitty.npz: one array per
+from a cold boot with the same demo timing as the explorer, two BGB workers). Writes roms/hello_kitty/trace/vram_screens_kitty.npz: one array per
 screen MM_SS (VRAM), lcdc_MM_SS, oam_MM_SS. Used by tools/kitty_draw_layouts.py."""
 import sys,os,csv,subprocess,shutil,concurrent.futures,queue
 import numpy as np
@@ -32,5 +32,5 @@ out={}
 with concurrent.futures.ThreadPoolExecutor(2) as ex:
     for name,ms,v,l,oam in ex.map(lambda j: run(*j), jobs):
         out[name]=(ms,v,l,oam); print(name,ms,'LCDC %02X'%l,flush=True)
-np.savez_compressed(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'roms','hello_kitty','port','vram_screens_kitty.npz'),**{k.replace(':','_'):v[1] for k,v in out.items()},**{'lcdc_'+k.replace(':','_'):np.array([v[2]]) for k,v in out.items()},**{'oam_'+k.replace(':','_'):v[3] for k,v in out.items()})
+np.savez_compressed(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),'roms','hello_kitty','trace','vram_screens_kitty.npz'),**{k.replace(':','_'):v[1] for k,v in out.items()},**{'lcdc_'+k.replace(':','_'):np.array([v[2]]) for k,v in out.items()},**{'oam_'+k.replace(':','_'):v[3] for k,v in out.items()})
 print('saved',len(out))

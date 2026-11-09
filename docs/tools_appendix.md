@@ -63,7 +63,7 @@ Extra tool added with the Select+Start+Up work: `tools/render_state10.py ROM SAV
 Emulator test scripts (PyBoy, MBC5 stand-in, patched copy only) are described in §8.
 
 Tools added for the international and Gold ports that the sections above do not list (2026-11-02):
-* `tcrf_check/tools/never_reached_port.py`: where the never-reached Japanese assets are in the international ROM and how much the international runs read of them (writes `roms/us_eu/assets/jp_never_reached_in_us.csv`); `tools/never_reached_gold.py` does the same for the Gold ROM, plus the Gold edition's own blocks.
+* `tcrf_check/tools/never_reached_port.py`: where the never-reached Japanese assets are in the international ROM and how much the international runs read of them (writes `roms/us_eu/assets/never_reached_us.csv`); `tools/never_reached_gold.py` does the same for the Gold ROM, plus the Gold edition's own blocks.
 * `tcrf_check/tools/wild_frame_unused.py ROM [OUT.png]`: the unused 8th wild frame of the international and Gold ROMs (`tcrf_check/assets/hidden/wild_frame_smw_unused.png`).
 * `tools/port_check_names6.py`: L3 pass 6 (picture / map blocks placed by the routine that queued them on the interrupt's copy queue); it found nothing to change and is kept to rerun.
 * `tcrf_check/tools/damaged_hunt.py`: the variant of `coverage/tools/damaged_saves.py` that also records the joypad sequence of each damaged-save boot.

@@ -3,7 +3,7 @@
 
 Input: the end-of-run files of two BGB-to-BGB exchanges (tcrf_check/tools/bgb_link.py, README 14), one per ROM, e.g.
   bgb_link.py pocketcamera_jp.gb link_protocol/saves/flow1_A_sender_before.sav link_protocol/saves/flow1_B_receiver_before.sav OUT/jp 450
-  bgb_link.py gbcam_usa_eu.gb    (the same two saves)                                                                          OUT/intl 250
+  bgb_link.py gbcam_us.gb    (the same two saves)                                                                          OUT/intl 250
 (WAIT 100-450 frames after the confirm = states $08 / $10; each run writes OUT/jp_sender.sna / .bmp ...).  For each sender state file the tool compares BGB's VRAM with the ROM
 sources that Mode0E_State06_ExchangeSetup copies (bank $15 $6C00 / $7400 / $7C00 to $9000 / $8800 / $8000, bank $24 $5180 to $9800, bank $24 $53C0 to $9C00; the international ROM's second map is at 22:6340) and with the
 unreferenced set 14:4000 (tiles) / 23:5CC0 (map), and draws the two BGB screenshots next to the unreferenced screen.

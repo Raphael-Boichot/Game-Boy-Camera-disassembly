@@ -4,7 +4,7 @@
   tools/kitty_names.py [--min-port 16] [--auto AUTO.csv] [--trace TRACE.json] [--out OUT.csv]
 
 Layers, lowest first (a later layer replaces the name at the same address; a name `-` deletes):
-  1. auto   disasm/sym_names_kitty_auto.csv (tools/kitty_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, ModeTable
+  1. auto   disasm/layers/sym_names_kitty_auto.csv (tools/kitty_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, ModeTable
   2. port   disasm/match_jp_kitty.csv (tools/kitty_match_jp.py): the name of a Japanese routine whose code is found at exactly one
             place of the Kitty code with only the build-dependent operands masked (16-bit addresses, the HRAM byte of ldh). Tag C
             when the routine is at least --min-port bytes long, I below; when several Japanese names fall on one Kitty address
@@ -15,13 +15,13 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
   3. modes  disasm/mode_names_kitty.csv (mode, name, tag, evidence) and the trace's ModeTable / state tables: the mode entry
             ModeMM_<Name>, its state table ModeMM_StateTable, each state handler ModeMM_StateSS (a handler shared by several states
             gets the first); the tag of the mode name, C for the state handlers (read from the trace's tables).
-  4. hand   disasm/sym_names_kitty_hand.csv
+  4. hand   disasm/layers/sym_names_kitty_hand.csv
 Checks: one name per address, one address per name (a clash aborts), names are valid rgbasm labels.
 """
 import csv, json, re, sys, argparse, collections
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
-ap.add_argument('--auto', default='roms/hello_kitty/disasm/sym_names_kitty_auto.csv'); ap.add_argument('--out', default='roms/hello_kitty/disasm/sym_names_kitty.csv')
-ap.add_argument('--trace', default='roms/hello_kitty/port/trace_kitty.json'); a = ap.parse_args()
+ap.add_argument('--auto', default='roms/hello_kitty/disasm/layers/sym_names_kitty_auto.csv'); ap.add_argument('--out', default='roms/hello_kitty/disasm/sym_names_kitty.csv')
+ap.add_argument('--trace', default='roms/hello_kitty/trace/trace_kitty.json'); a = ap.parse_args()
 D = 'roms/hello_kitty/disasm/'
 names = {}   # (bank, addr) -> [name, conf, note, source]
 def put(b, ad, nm, conf, note, src):
@@ -71,7 +71,7 @@ for i, rec in enumerate(modes):
         if (sb, sa) in seen: continue
         seen.add((sb, sa))
         put(sb, sa, 'Mode%s_State%02X' % (m, s), 'C', 'handler of state $%02X of mode $%s (word %d of Mode%s_StateTable)' % (s, m, s, m), 'modes')
-for r in csv.DictReader(open(D + 'sym_names_kitty_hand.csv')): put(int(r['bank'], 16), int(r['addr'], 16), r['name'], r['conf'], r['note'], r['source'])
+for r in csv.DictReader(open(D + 'layers/sym_names_kitty_hand.csv')): put(int(r['bank'], 16), int(r['addr'], 16), r['name'], r['conf'], r['note'], r['source'])
 # checks
 bad = [nm for nm, *_ in names.values() if not re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', nm)]
 dup = [n for n, c in collections.Counter(v[0] for v in names.values()).items() if c > 1]

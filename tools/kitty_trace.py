@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Static recursive-descent tracer for the Pocket Camera (Hello Kitty) ROM (its own engine: tools/rom_trace.py is for the Japanese one).
 
-  tools/kitty_trace.py ROM OUT.json [--roots roms/hello_kitty/disasm/extra_roots_kitty.json] [--report OUT.md]
+  tools/kitty_trace.py ROM OUT.json [--roots roms/hello_kitty/trace/extra_roots_kitty.json] [--report OUT.md]
 
 Goal (HOWTO_NEW_ROM.md Stage B): separate proven code from everything else, with an explicit list of what is not resolved.
 A byte is code only if it lies on a decoded path from a root.
