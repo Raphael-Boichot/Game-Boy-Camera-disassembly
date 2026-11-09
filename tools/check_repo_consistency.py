@@ -14,7 +14,7 @@ What it checks (each line of the report is one check)
              pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
              and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: trace/observed_proto.md equals a fresh
              tools/proto_observed.py run on trace/cov_proto_runs.npz, the coverage map proto_rom_reachability_map.png equals a fresh
-             tools/proto_reach_map.py drawing, and the run / BGB-replay counts its README quotes match; L3: the
+             tools/reach_map.py --tag proto drawing, and the run / BGB-replay counts its README quotes match; L3: the
              old-build matches, the merged names and the doubts list equal a fresh tools/proto_{match_old,names}.py run, every
              routine entry is named, and the README's name count matches
   port       roms/us_eu (docs §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
@@ -408,20 +408,20 @@ if A.rom_kitty:
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the doubts list (need=Doubts list (...).** N names: a in modes reached only by forcing, b in states the runs did not reach, c settled as unused)')
             elif tuple(int(x) for x in mm.groups()) != (sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']):
                 bad('kitty', 'roms/hello_kitty/README.md: doubts quoted %s, the list gives %d / %d / %d / %d' % (mm.group(0)[-90:], sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']))
-        # the reachability picture (tools/kitty_reach_map.py): redrawn and compared, its counts quoted in the Kitty README
-        rp = os.path.join(tk, 'reach.png'); r5 = _run('tools/kitty_reach_map.py', A.rom_kitty, rp)
+        # the reachability picture (tools/reach_map.py --tag kitty): redrawn and compared, its counts quoted in the Kitty README
+        rp = os.path.join(tk, 'reach.png'); r5 = _run('tools/reach_map.py', '--tag', 'kitty', A.rom_kitty, rp)
         m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)
-        if r5.returncode or not m5: bad('kitty', 'tools/kitty_reach_map.py failed: %s' % (r5.stderr or r5.stdout)[-300:])
+        if r5.returncode or not m5: bad('kitty', 'tools/reach_map.py --tag kitty failed: %s' % (r5.stderr or r5.stdout)[-300:])
         else:
             if '](kitty_rom_reachability_map.png)' not in open(KD + 'README.md').read(): bad('maps', 'roms/hello_kitty/README.md does not show kitty_rom_reachability_map.png')
-            if not same_png(rp, KD + 'kitty_rom_reachability_map.png'): bad('kitty', 'kitty_rom_reachability_map.png is not what tools/kitty_reach_map.py draws today: rerun it')
+            if not same_png(rp, KD + 'kitty_rom_reachability_map.png'): bad('kitty', 'kitty_rom_reachability_map.png is not what tools/reach_map.py --tag kitty draws today: rerun it')
             else: ok('kitty', 'kitty_rom_reachability_map.png fresh')
             KR = open(KD + 'README.md').read()
             for what, pat, val in (('red bytes', r'([\d,]+) bytes of proven code never executed \(red', m5.group(2)), ('grey-blue bytes', r'([\d,]+) bytes of data never read and explained by nothing \(grey-blue', m5.group(3)),
                                    ('orange bytes', r'([\d,]+) bytes never read but explained by a loader site or a table \(orange', m5.group(4)), ('blue bytes', r'([\d,]+) bytes executed or read \(blue', m5.group(1))):
                 mm = re.search(pat, KR)     # need= the sentence of the L2 section, What is still missing
                 if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the %s of the reachability map (need=%s)' % (what, pat))
-                elif int(mm.group(1).replace(',', '')) != int(val): bad('kitty', 'roms/hello_kitty/README.md: %s quoted %s, tools/kitty_reach_map.py gives %s' % (what, mm.group(1), val))
+                elif int(mm.group(1).replace(',', '')) != int(val): bad('kitty', 'roms/hello_kitty/README.md: %s quoted %s, tools/reach_map.py --tag kitty gives %s' % (what, mm.group(1), val))
     shutil.rmtree(tk, ignore_errors=True)
 # ------------------------------------------------------------------ the early prototype (image as dumped): L1 pipeline (SETUP.md, prototype)
 if A.rom_proto:
@@ -473,9 +473,9 @@ if A.rom_proto:
         else:
             if open(PD + 'trace/observed_proto.md', 'rb').read() != open(j('ob.md'), 'rb').read(): bad('proto', 'trace/observed_proto.md is not what tools/proto_observed.py writes today')
             else: ok('proto', 'observed_proto.md fresh')
-            p5 = _runp('tools/proto_reach_map.py', A.rom_proto, j('reach.png'))      # the coverage map, shown in roms/prototype_debagame/README.md
-            if p5.returncode: bad('proto', 'tools/proto_reach_map.py failed: %s' % (p5.stderr or p5.stdout)[-300:])
-            elif not same_png(j('reach.png'), PD + 'proto_rom_reachability_map.png'): bad('proto', 'proto_rom_reachability_map.png is not what tools/proto_reach_map.py draws today: rerun it')
+            p5 = _runp('tools/reach_map.py', '--tag', 'proto', A.rom_proto, j('reach.png'))      # the coverage map, shown in roms/prototype_debagame/README.md
+            if p5.returncode: bad('proto', 'tools/reach_map.py --tag proto failed: %s' % (p5.stderr or p5.stdout)[-300:])
+            elif not same_png(j('reach.png'), PD + 'proto_rom_reachability_map.png'): bad('proto', 'proto_rom_reachability_map.png is not what tools/reach_map.py --tag proto draws today: rerun it')
             elif '](proto_rom_reachability_map.png)' not in PR: bad('proto', 'roms/prototype_debagame/README.md does not show proto_rom_reachability_map.png')
             else: ok('proto', 'proto_rom_reachability_map.png fresh and shown')
             mo = re.search(r'proto_observed: (\d+) of (\d+) instructions ran, (\d+) of (\d+) code bytes, (\d+) executed bytes outside the trace', p4.stdout)
@@ -708,6 +708,16 @@ if not miss: ok('sheet', '%d rows of really_unused.md are in the README verbatim
 HAND_TAIL = [l for l in md if l.startswith('*Withdrawn after the L3 pass')]
 if not HAND_TAIL: bad('sheet', 'really_unused.md lost its hand-kept tail ("*Withdrawn after the L3 pass...*"): display_report.py overwrites it, restore it from git')
 
+# ------------------------------------------------------------------ reachability maps of the ported builds (tools/reach_map.py, the legend of the Japanese map)
+for _t, _f, _r in (('us', 'us_eu', A.rom_us), ('gold', 'gold', A.rom_gold)):
+    if not _r: continue
+    _tmp = tempfile.mkdtemp(prefix='reach_'); _p = os.path.join(_tmp, 'r.png')
+    _m = subprocess.run([sys.executable, 'tools/reach_map.py', '--tag', _t, _r, _p], capture_output=True, text=True)
+    if _m.returncode: bad('maps', 'tools/reach_map.py --tag %s failed: %s' % (_t, (_m.stderr or _m.stdout)[-300:]))
+    elif not same_png(_p, 'roms/%s/%s_rom_reachability_map.png' % (_f, _t)): bad('maps', 'roms/%s/%s_rom_reachability_map.png is not what tools/reach_map.py --tag %s draws today: rerun it' % (_f, _t, _t))
+    elif '](%s_rom_reachability_map.png)' % _t not in rd('roms/%s/README.md' % _f): bad('maps', 'roms/%s/README.md does not show %s_rom_reachability_map.png' % (_f, _t))
+    else: ok('maps', 'roms/%s/%s_rom_reachability_map.png fresh and shown' % (_f, _t))
+    shutil.rmtree(_tmp, ignore_errors=True)
 # ------------------------------------------------------------------ status words (HOWTO_NEW_ROM.md section 0): L3 is `done` only with no placeholder name
 _PH = re.compile(r'^(Data|Code|Gfx|Map|Src|JumpTable|Unk)_[0-9A-F]{2}_[0-9A-F]{4}$'); _nf = len(FAIL)
 for _f, _t in (('jp_rev_a', 'jp'), ('us_eu', 'us'), ('gold', 'gold'), ('hello_kitty', 'kitty'), ('prototype_debagame', 'proto')):

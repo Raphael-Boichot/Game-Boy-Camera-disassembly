@@ -8,7 +8,7 @@ This project so proposes a disassembly of the Game Boy Camera / Pocket Camera RO
 
 The work is produced by AI (Claude), from reading the code and running it in emulators (BGB and the project's own core), with the owner's checks and answers; findings tagged **C** were confirmed in code, in BGB or by the owner, **I** are inferred, **?** are open.
 
-One map per ROM, in the same colours: what each byte is (code by function, data by kind). Grey-blue is what is not analysed yet: it gives way to the colours as the work on a ROM lands.
+Two maps per ROM, each in one legend for every ROM: the layout map, what each byte is (code by function, data by kind; grey-blue is what is not analysed yet: it gives way to the colours as the work on a ROM lands), and the reachability map, what the runs reached (the colours of the Japanese map, `tools/reach_draw.py`). The layout maps are shown below, the reachability maps in each ROM's folder.
 
 **Pocket Camera (Japan) (Rev A)**: outlines = what no emulator run reached (the full reachability map is in [`roms/jp_rev_a/`](roms/jp_rev_a/README.md)).
 
@@ -46,6 +46,8 @@ One map per ROM, in the same colours: what each byte is (code by function, data 
 
 ![What each byte of the international ROM is](roms/us_eu/us_rom_layout_map.png)
 
+*What the runs reached*: the reachability map is in [`roms/us_eu/`](roms/us_eu/README.md), in the legend of the Japanese map.
+
 *Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
 
 ![Screens (mode, state) reached in BGB](roms/us_eu/us_screen_tree.png)
@@ -79,11 +81,15 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 ![What each byte of the Gold ROM is](roms/gold/gold_rom_layout_map.png)
 
+*What the runs reached*: the reachability map is in [`roms/gold/`](roms/gold/README.md), in the legend of the Japanese map.
+
 *Never-reached assets* (2026-11-02, from three one-hour coverage runs of the Gold ROM in the project's core: a fresh start, the unlocking saves and a third seed; `tools/never_reached_gold.py`): of the 131 never-reached assets of the Japanese ROM, 86 are in the Gold ROM (81 at the same address, 5 moved) and no organic Gold run read them, the same leftovers as in the international ROM ([`never_reached_gold.csv`](roms/gold/assets/never_reached_gold.csv)); 9 small blocks were read (the Space Fever II HUD bytes, as in the other builds, and the TCRF album hand gestures `13:5CA0`, which a larger tile copy of the album screen loads without showing them). The Gold edition's own content (18 blocks whose bytes differ from the international ROM: the Zelda stamps of banks $2B / $2C, the three Zelda pictures of album B with their thumbnails, the album B slot and gate tables, two icon sources) is a plain asset substitution: the same code loads it from the same places as the international stamps and album B pictures, so any player sees it. The automatic runs simply did not get there in normal play, in either build (the international run did not read the international stamps and album B pictures at these addresses either); they were read only by runs with forced states ([`gold_own_never_read.csv`](roms/gold/assets/gold_own_never_read.csv)). This is a limit of the runs, not unused content.
 
 **Pocket Camera (Hello Kitty)** (prototype): L0-L2 done (2026-11-07: intake, own tracer, every byte typed, byte-exact round trip with the symbol file, 0 unresolved indirect sites, code observed in the core and in BGB); L3 partial (2026-11-08: every routine entry named, 2,296 names of which 15 are not C, a doubts list, an unused-asset pass; 822 data labels are still placeholders such as `Data_BB_AAAA`; [`roms/hello_kitty/`](roms/hello_kitty/README.md)); L4-L6 not started.
 
 ![What each byte of the Hello Kitty ROM is](roms/hello_kitty/kitty_rom_layout_map.png)
+
+*What the runs reached*: the reachability map is in [`roms/hello_kitty/`](roms/hello_kitty/README.md), in the legend of the Japanese map.
 
 *Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
 
@@ -93,15 +99,17 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 **Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L2 done, L3 partial (every routine named; 111 data labels are still placeholders), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
 
+![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
+
+*What the runs reached*: the reachability map is in [`roms/prototype_debagame/`](roms/prototype_debagame/README.md), in the legend of the Japanese map.
+
 *Screens reached in BGB* (2026-11-09; the BGB copy of the ROM, blank SRAM): power-on at the left, each column one step further; the prototype has no (mode, state) pair, so each panel is one value of its screen variable `GAME_SEQ` (`$C0A0`) and `$00` is the screen as reached; `$01` marks two screens that need a condition: AGING running after PROTECT TEST > OFF (without it the SRAM is write-protected and AGING stops at the first byte) and COM counting with a second unit linked (two BGB instances). A two-headed arrow means B leads back (B held: the AGING screen reads the keys once per cycle). Captured by `tools/proto_bgb_screens.py`, drawn by `tools/make_screen_trees.py`; the checker redraws it.
 
 ![Screens (GAME_SEQ) reached in BGB](roms/prototype_debagame/proto_screen_tree.png)
 
-![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
-
 *Never-reached assets*: not investigated yet.
 
-The three last maps are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds: rerun it after any work on these ROMs.
+The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds, and every reachability map but the Japanese one by `python3 tools/reach_map.py --tag TAG ROM`: rerun them after any work on these ROMs.
 
 ## ROMs
 

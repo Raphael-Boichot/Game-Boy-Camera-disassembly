@@ -16,6 +16,10 @@ MD5 `b2999cfb6dacb439f501a71f30f91762`. The international ROM with modified asse
 
 ![What each byte of the Gold ROM is](gold_rom_layout_map.png)
 
+*What the runs reached* (`gold_rom_reachability_map.png`, drawn by `tools/reach_map.py --tag gold` in the legend of the Japanese map: blue executed or read in a run, green not run here but the same code as a Japanese routine that ran, purple proven dead or unused, red proven code nothing explains, yellow the Japanese never-reached assets that no run here read, orange data never read but typed):
+
+![What the runs reached in the Gold ROM](gold_rom_reachability_map.png)
+
 The map above is drawn by `tools/status_maps.py` (grey-blue = not analysed yet; it fills in as names, types and a trace are added here; per-bank counts in `assets/layout_by_bank_gold.csv`).
 
 Ported 2026-10-31 with `tools/port_build.py` from the Japanese symbol file (the international procedure, SETUP.md): `gbcam_gold.sym`; the names and type rows in `disasm/sym_names_gold.csv` / `sym_types_gold.csv` (C 5,280 / I 130), merged by `tools/merge_name_layers.py --tag gold` from the layers of `disasm/layers/` (port < loaders < reads < checked < hand; edit the hand layer); the trace, its inputs and the runs in `trace/`; the byte map and the port reports in `port/`; the L0 intake in `intake/`. The hand layers (`disasm/layers/*_hand.csv`, `trace/extra_roots_gold_hand.json`) were copied from the international folder after a byte check (0 differences at those addresses). Three round trips byte-exact (md5 `b2999cfb6dacb439f501a71f30f91762`).

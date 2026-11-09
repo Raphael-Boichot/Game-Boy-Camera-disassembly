@@ -16,6 +16,10 @@ MD5 `42d2f65e2549be9d1d126a6828b5d1c1`. The international ROM: the same modes an
 
 ![What each byte of the international ROM is](us_rom_layout_map.png)
 
+*What the runs reached* (`us_rom_reachability_map.png`, drawn by `tools/reach_map.py --tag us` in the legend of the Japanese map: blue executed or read in a run, green not run here but the same code as a Japanese routine that ran, purple proven dead or unused, red proven code nothing explains, yellow the Japanese never-reached assets that no run here read, orange data never read but typed):
+
+![What the runs reached in the international ROM](us_rom_reachability_map.png)
+
 The symbol file is **ported from the Japanese tables** (method, counts and levels: [docs §1.5](../../docs/01_toolchain_and_status.md#15-the-international-rom-symbol-file-ported-from-the-japanese-one)):
 
 | File | What it is |
