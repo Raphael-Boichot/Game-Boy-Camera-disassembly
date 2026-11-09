@@ -9,7 +9,8 @@ or reads ROM bytes never seen before; each step restores a random entry and play
 taps of the 8 keys, holds, and chords of two keys). Writes to OUT_DIR, every few minutes and at the end:
   cov.npz      exec (1 per ROM byte executed as an instruction byte), dread (1 per ROM byte read as data),
                reader (the PC + bank of the first instruction that read each data byte: bank << 16 | pc)
-  modes.csv    every (mode hFF8D, state hFF8E) pair seen at the end of a frame, with the first corpus entry that reached it
+  modes.csv    every (mode hFF8D, state hFF8E) pair seen after an input, with the number of frames and the exact key history (hex,
+               core mask, from a cold boot, the 250 boot frames included) that first reached it: replayable as it is
   corpus.jsonl the input history of each corpus entry (replayable: frames of key bytes from a cold boot, in the core's mask:
                direction keys in the low nibble, buttons high; a BGB demo byte has the nibbles swapped)
 The core is not the judge for pictures (CLAUDE.md): screenshots come from BGB (tcrf_check/tools/bgb_run.py).
@@ -33,16 +34,17 @@ KEYS = [1, 2, 4, 8, 0x10, 0x20, 0x40, 0x80]
 def score(): return int((G.cov_exec() > 0).sum()) + int((G.cov_dread() > 0).sum())
 G.run(250)
 corpus = [(G.snapshot(), [0] * 250)]; modes = {}
-def note_mode(i):
+def note_mode(h):
     k = (G.peek(0xFF8D), G.peek(0xFF8E))
-    if k not in modes: modes[k] = i
+    if k not in modes: modes[k] = list(h)
+note_mode([0] * 250)
 best = score(); t0 = time.time(); last_dump = t0; steps = 0
 def dump():
     ex = G.cov_exec().copy(); dr = G.cov_dread().copy(); rd = G.cov_reader().copy()
     np.savez_compressed(os.path.join(a.out, 'cov.npz'), exec=ex, dread=dr, reader=rd)
     with open(os.path.join(a.out, 'modes.csv'), 'w', newline='') as f:
-        w = csv.writer(f); w.writerow(['mode', 'state', 'corpus_entry'])
-        for (m, s), i in sorted(modes.items()): w.writerow(['%02X' % m, '%02X' % s, i])
+        w = csv.writer(f, lineterminator='\n'); w.writerow(['mode', 'state', 'frames', 'keys'])
+        for (m, s), h in sorted(modes.items()): w.writerow(['%02X' % m, '%02X' % s, len(h), ''.join('%02x' % k for k in h)])
     with open(os.path.join(a.out, 'corpus.jsonl'), 'w') as f:
         for i, (_, h) in enumerate(corpus): f.write(json.dumps({'i': i, 'frames': len(h), 'keys': ''.join('%02x' % k for k in h)}) + '\n')
     print('%5.1f min  steps %d  corpus %d  exec %d  dread %d  modes %d' % ((time.time() - t0) / 60, steps, len(corpus), int((ex > 0).sum()), int((dr > 0).sum()), len(modes)), flush=True)
@@ -54,7 +56,7 @@ while time.time() - t0 < a.minutes * 60:
         if r < 0.6: k = rnd.choice(KEYS); hold = rnd.randint(2, 8); wait = rnd.randint(10, 80)
         elif r < 0.8: k = rnd.choice(KEYS); hold = rnd.randint(20, 120); wait = rnd.randint(5, 40)
         else: k = rnd.choice(KEYS) | rnd.choice(KEYS); hold = rnd.randint(2, 30); wait = rnd.randint(10, 60)
-        G.keys(k); G.run(hold); G.keys(0); G.run(wait); h += [k] * hold + [0] * wait; note_mode(len(corpus))
+        G.keys(k); G.run(hold); G.keys(0); G.run(wait); h += [k] * hold + [0] * wait; note_mode(h)
     s = score(); steps += 1
     if s > best: best = s; corpus.append((G.snapshot(), h))
     if time.time() - last_dump > 180: dump(); last_dump = time.time()

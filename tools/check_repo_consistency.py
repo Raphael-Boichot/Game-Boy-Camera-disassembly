@@ -378,6 +378,13 @@ if A.rom_kitty:
         if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/sprite_layouts_unread_kitty.csv (need=N layouts (B bytes) are never read in the runs ... a ... b ... c only from code, d by nothing)')
         elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: sprite layouts quoted %s, the table gives %s' % (mm.groups(), want))
         else: ok('kitty', 'never-read sprite layouts quoted as in the table (%d)' % len(_sl))
+        # the screens the core runs reach (tools/kitty_modes_seen.py): the counts quoted in the Kitty README
+        _ms = list(csv.DictReader(open(KD + 'port/modes_seen_kitty.csv'))); want = (len(_ms), sum(r['check'] == 'end' for r in _ms), sum(r['check'] != 'end' for r in _ms))
+        mm = re.search(r'modes_seen_kitty\.csv\)?, written by `tools/kitty_modes_seen\.py` from the four corpora: (\d+) \(mode, state\) pairs.*?; (\d+) of them end on their pair when replayed from a cold boot in the core, (\d+) ', open(KD + 'README.md', encoding='utf-8').read())   # need= the screens-reached bullet
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes port/modes_seen_kitty.csv (need=written by `tools/kitty_modes_seen.py` from the four corpora: N (mode, state) pairs ...; a of them end on their pair when replayed from a cold boot in the core, b ...)')
+        elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: screens reached quoted %s, port/modes_seen_kitty.csv gives %s' % (mm.groups(), want))
+        elif any(not r['keys'] or len(r['keys']) != 2 * int(r['frames']) for r in _ms): bad('kitty', 'port/modes_seen_kitty.csv: a row whose key history does not have one byte per frame')
+        else: ok('kitty', 'screens reached quoted as in port/modes_seen_kitty.csv (%d pairs)' % want[0])
         # the never-run code (tools/kitty_red_classes.py, tools/kitty_gates.py): the classes quoted in the Kitty README
         _rc = list(csv.DictReader(open(KD + 'port/red_classes_kitty.csv', encoding='utf-8'))); _ng = len(list(csv.DictReader(open(KD + 'port/gates_kitty.csv'))))
         _cl = ['effect', 'gate', 'forced-mode', 'not-run']; want = tuple([sum(int(r['red_bytes']) for r in _rc), _ng] + [sum(int(r[c]) for r in _rc) for c in _cl])
