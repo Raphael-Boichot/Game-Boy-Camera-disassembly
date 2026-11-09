@@ -59,7 +59,7 @@ roms/<folder>/
     layers/                         layers merged into the two files above (none for jp)
       sym_names_<tag>_<layer>.csv, sym_types_<tag>_<layer>.csv
     sym_unconclusive_<tag>.csv/.md  the doubts list (every ROM from L3; no doubt = a file with its header only)
-    sym_settled_unused_<tag>.csv, renamed_<tag>.csv, owner_answers_<tag>.csv   when they exist
+    sym_settled_unused_<tag>.csv    the names whose I tag is final (proven unused); renamed_<tag>.csv, owner_answers_<tag>.csv when they exist
     ram_names_<tag>.csv, ram_exclude_<tag>.csv, ram_highbyte_<tag>.csv          L4
     const_names_<tag>.csv, const_types_<tag>.csv, const_tables_<tag>.csv, sound_names_<tag>.csv,
     state_names_<tag>.csv, state_helpers_<tag>.csv, state_shared_<tag>.csv      L4
@@ -84,8 +84,10 @@ roms/<folder>/
     wram_summary_<tag>.csv          per address
     wram_<region>_<tag>.md/.csv     region notes (jp: all regions; other ROMs: where they differ from jp)
   sram/                             SRAM
-    sram_map_<tag>.csv              flat offset, length, name, tag C/I/?, evidence (the routine that reads / writes it)
-    sram_map_<tag>.md               the readable map (jp: from docs/03; other ROMs: differences from jp)
+    INDEX.md                        what the folder holds, the access counts, and what differs from jp
+    sram_map_<tag>.csv              flat range, RAM bank, block, field, tag C/I/?, the routines that write / read it (jp: the hand table, with
+                                    docs §3 as its readable text; a ported build: carried from jp by tools/sram_map.py)
+    sram_access_<tag>.csv           every proven SRAM access site (tools/sram_db.py)
   assets/
     layout_by_bank_<tag>.csv, layout_kind_overrides_<tag>.csv, copy_sites_<tag>.csv
     never_reached_<tag>.csv         assets that no organic run put on screen (one format for every ROM)
@@ -105,15 +107,7 @@ Rules:
 
 **The ROM's README**, in this order: title and md5, with one line on what the ROM is; the Levels table (`Level | Status | Evidence`, status words as in section 0); the maps (layout, reachability, screen tree); the files (one table, paths as above); differences from the Japanese ROM; notes by level. The top-level README gives each ROM the same blocks in the same order: title and status line, layout map, reachability map, screen tree, never-reached assets, other findings.
 
-**Migration of the existing folders** (steps 2-3 of the consistency audit of 2026-11-09; what is left goes to step 6, then this table is removed):
-
-| ROM | moves and renames |
-|---|---|
-| jp | done 2026-11-09: `trace/` holds `trace_jp.json` (the v3 trace), `trace_jp_v1.json` (the first trace, kept because the WRAM region notes cite it), `extra_roots_jp.json`, `rom_trace_labels_jp.sym`, `coverage_jp.csv` (static per-bank coverage) and copies of the v8 merge (`cov_jp_runs.npz`, `rom_map_jp.csv`; the originals stay in `coverage/v8/report_v8/`); the WRAM files carry the tag; `intake/` made with `tools/rom_intake.py` |
-| us | done 2026-11-09: ROM and symbol file `gbcam_us`; trace, tracer inputs, runs and byte map in `trace/`; `port/cov_jp_in_us.npz`; the five name layers in `disasm/layers/`, merged into `disasm/sym_names_us.csv` / `sym_types_us.csv` by `tools/merge_name_layers.py`; `disasm/sym_unconclusive_us.csv` (the former `port/l3_open_us.csv`); `src/const_us.inc`, `src/ram_us.inc`; `assets/never_reached_us.csv`; `intake/` |
-| gold | done 2026-11-09, as us; left for step 6: a doubts list `disasm/sym_unconclusive_gold.csv` (none exists yet); `assets/gold_own_never_read.csv` kept beside `never_reached_gold.csv` |
-| kitty | done 2026-11-09: `port/` -> `trace/`; `extra_roots_kitty.json` in `trace/`; the auto and hand layers in `disasm/layers/` (merged by `tools/kitty_names.py`); `assets/never_reached_kitty.csv` / `.png` |
-| proto | done 2026-11-09: `port/` -> `trace/`; `extra_roots_proto.json` in `trace/`; the auto and hand layers in `disasm/layers/` (merged by `tools/proto_names.py`); left for step 6: `disasm/sym_unconclusive_proto.csv` beside the `.md` |
+The existing folders were moved onto this layout on 2026-11-09 (steps 2-3 of the consistency audit; the commits of that day list each move). In a ported build every name tagged I is final (a claim that something is unused, dead or never loaded) and goes to `disasm/sym_settled_unused_<tag>.csv`, as in the Japanese folder; the doubts list keeps the `?` names (`tools/port_settled.py`).
 
 ## 1. Intake (before any tool)
 

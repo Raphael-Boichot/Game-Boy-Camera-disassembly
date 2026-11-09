@@ -173,7 +173,7 @@ They are traced from hand roots and assembled as code tagged unused (the Japanes
 
 The Gold ROM takes the same decisions where the block's bytes are equal in the two ROMs: 181 names. Gold has no generated listing yet, so the rules cannot run on it directly.
 
-The names now stand at **C 5,274 / I 137 (international)** and **C 5,249 / I 161 (Gold)**. The 127 international names the rules leave open are listed with their readers in `roms/us_eu/disasm/sym_unconclusive_us.csv`:
+The names now stand at **C 5,274 / I 137 (international)** and **C 5,249 / I 161 (Gold)**. The 127 international names the rules leave open are listed with their readers in `port/l3_open_us.csv` at the time (today every international I name is in `roms/us_eu/disasm/sym_settled_unused_us.csv`, written by `tools/port_settled.py`):
 * 40 names that describe the picture itself (fonts, glyph slots, sprite sheets, tile gaps, wild frames), to be checked by eye;
 * 29 blocks that only the VBlank copy queue reads, so the routine that queued them is not recorded;
 * 27 other picture blocks with several readers;
@@ -230,7 +230,7 @@ Code and table names, read one by one:
 
 Gold takes the same decisions where the bytes are equal.
 
-The names stand at **C 5,343 / I 68 (international)** and **C 5,317 / I 93 (Gold)**. The open international names are in `roms/us_eu/disasm/sym_unconclusive_us.csv`:
+The names stand at **C 5,343 / I 68 (international)** and **C 5,317 / I 93 (Gold)**. The open international names are in `port/l3_open_us.csv` at the time (today every international I name is in `roms/us_eu/disasm/sym_settled_unused_us.csv`, written by `tools/port_settled.py`):
 * 48 picture and map blocks, mostly loaded through the VBlank copy queue or by several routines, so neither the listing nor the coverage names one loader;
 * 11 code and table names;
 * 9 byte-equal tile gaps.
@@ -256,7 +256,7 @@ What changed:
   * The other five and `1D:7C3A` are read only in the VBlank interrupt and by the printer packet sender in forced states, so they keep their names (I).
 * **Confirmed (C):** `MainMenu_SlideA_Tbl2` / `3` (no `ld de` loads them here either) and the song `$0E` pattern.
 
-The names stand at **C 5,351 / I 57 (international)** and **C 5,325 / I 82 (Gold)**. The open international names are in `roms/us_eu/disasm/sym_unconclusive_us.csv`:
+The names stand at **C 5,351 / I 57 (international)** and **C 5,325 / I 82 (Gold)**. The open international names are in `port/l3_open_us.csv` at the time (today every international I name is in `roms/us_eu/disasm/sym_settled_unused_us.csv`, written by `tools/port_settled.py`):
 * 48 picture and map blocks with several readers;
 * 6 tile gaps and blocks without a loader;
 * 3 others: `Bank00_ZeroFill`, the zero tail of bank 01, the one-byte `Sfx1_Data_4362`.
@@ -282,9 +282,9 @@ Five pass decisions now win over older hand rows that had kept them at I.
 
 **The fill-pattern tiles `0D:7000-78FF`, by eye (C).** They are byte-equal to the Japanese block (`tcrf_check/assets/l3_by_eye/fill_0D_7000_jp_vs_intl.png`): 80 grey dot-fill tiles, 37 cross-hatch tiles, a crosshair and three tiles of Japanese glyph pieces, so the name holds. They have no loader here either. `Shoot_LoadTimerScreen`, which the coverage replay records as their reader, copies only from bank $17 in all 82 records of its table `06:6E36`, so those reads come from forced states.
 
-**Names: C 5,281 / I 130 (international), C 5,280 / I 130 (Gold)** (2026-11-02: the last 22 shared names settled from their bytes, the code and the neighbouring copies, and 25 Gold names that still carried an older name given the international name of the same block; then the tags follow the evidence, as in the Japanese listing (`tools/port_evidence_tags.py`): every name whose claim is that something is unused, dead, unreferenced or never loaded, or whose Japanese counterpart is I, is I, because that claim rests on the absence of evidence; the international I names are listed in `roms/us_eu/disasm/sym_unconclusive_us.csv`).
+**Names: C 5,281 / I 130 (international), C 5,280 / I 130 (Gold)** (2026-11-02: the last 22 shared names settled from their bytes, the code and the neighbouring copies, and 25 Gold names that still carried an older name given the international name of the same block; then the tags follow the evidence, as in the Japanese listing (`tools/port_evidence_tags.py`): every name whose claim is that something is unused, dead, unreferenced or never loaded, or whose Japanese counterpart is I, is I, because that claim rests on the absence of evidence; the international I names are listed in `roms/us_eu/disasm/sym_settled_unused_us.csv`).
 
-The 22 international names left (`roms/us_eu/disasm/sym_unconclusive_us.csv`):
+The 22 international names left (`port/l3_open_us.csv` at the time (today every international I name is in `roms/us_eu/disasm/sym_settled_unused_us.csv`, written by `tools/port_settled.py`)):
 * 12 maps and tiles whose only reads come from routines unrelated to their content (`Parlor_AnimQueenTiles` reading pen-menu map rows, `Link_DrawPressAText` reading keyboard rows), which look like reads through computed addresses rather than loads;
 * the alternate exchange stand-by tiles `14:4000` (no loader in either ROM, §16.24);
 * the six tile gaps;
@@ -341,4 +341,4 @@ The first three are joypad only.
 
 **The 45 `NEW` bytes left, in both ROMs:** the ROM-bank branch and the 2-byte remainder of `Vram_CopyFromBank4_Padded` (`00:05AD-05BB`, `05FC-0619`). Its nine callers (the hot-spot effects in bank 03) all pass a source at `$8000` or above (SRAM `wPhotoImage`, VRAM `$9000`) and a count of `$10`, `$600` or `$800`, a multiple of 4. So these bytes cannot run from any shipped caller (C, code read): they are the general-purpose part of a routine that this build only calls one way.
 
-Levels for this ROM (2026-11-01): L0 and L1 done (every byte typed and of a settled kind: 0 untyped bytes in the port queue, 0 uncertain bytes on the map; the same for the Gold ROM); L2 done (static; observed 97.1 %, 1,987 B credited by equivalence, every JP_RAN byte executed (the last one on a patched copy, forced), 45 B unreachable from the shipped callers, above); L3 done (C 5,281 / I 130 by evidence: the I names are the unused, dead or never-loaded ones, listed in `roms/us_eu/disasm/sym_unconclusive_us.csv`); L4 done as for the Japanese ROM (names and constants applied in the listing by `sym_fix.py --const`); L5 done (a buildable, generated tree; the Gold edition has its own tree `roms/gold/src/` since 2026-11-02, `make TREE=gold check`), relocation not tested. Of the data names whose bytes differ, few blocks occur unchanged elsewhere in the international ROM: the rest are new pictures (English text in graphics), to be typed from the international loaders and tables, not from the Japanese layout.
+Levels for this ROM (2026-11-01): L0 and L1 done (every byte typed and of a settled kind: 0 untyped bytes in the port queue, 0 uncertain bytes on the map; the same for the Gold ROM); L2 done (static; observed 97.1 %, 1,987 B credited by equivalence, every JP_RAN byte executed (the last one on a patched copy, forced), 45 B unreachable from the shipped callers, above); L3 done (C 5,281 / I 130 by evidence: the I names are the unused, dead or never-loaded ones, listed in `roms/us_eu/disasm/sym_settled_unused_us.csv`); L4 done as for the Japanese ROM (names and constants applied in the listing by `sym_fix.py --const`); L5 done (a buildable, generated tree; the Gold edition has its own tree `roms/gold/src/` since 2026-11-02, `make TREE=gold check`), relocation not tested. Of the data names whose bytes differ, few blocks occur unchanged elsewhere in the international ROM: the rest are new pictures (English text in graphics), to be typed from the international loaders and tables, not from the Japanese layout.

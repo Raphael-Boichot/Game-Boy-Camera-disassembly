@@ -156,6 +156,19 @@ TCRF_LABELS = sum(1 for r in NAMES if r['name'].startswith('Unused_TCRF_'))
 
 # ------------------------------------------------------------------ international port (docs §1.5)
 US = 'roms/us_eu/'
+# the SRAM access tables (tools/sram_db.py) and the SRAM maps (tools/sram_map.py: the Japanese hand table checked, the ported ones carried)
+for _t, _f, _r, _sym in (('jp', 'jp_rev_a', A.rom, 'pocketcamera_jp.sym'), ('us', 'us_eu', A.rom_us, 'gbcam_us.sym'), ('gold', 'gold', A.rom_gold, 'gbcam_gold.sym')):
+    if _r:
+        _tmp = tempfile.mkdtemp(prefix='sram_'); _o = os.path.join(_tmp, 'a.csv')
+        _m = subprocess.run([sys.executable, 'tools/sram_db.py', _r, 'roms/%s/trace/trace_%s.json' % (_f, _t), 'roms/%s/%s' % (_f, _sym), _o], capture_output=True, text=True, cwd=ROOT)
+        if _m.returncode or open(_o, encoding='utf-8').read() != rd('roms/%s/sram/sram_access_%s.csv' % (_f, _t)): bad('sram', 'roms/%s/sram/sram_access_%s.csv is not what tools/sram_db.py writes today: rerun it' % (_f, _t))
+        shutil.rmtree(_tmp, ignore_errors=True)
+    _m = subprocess.run([sys.executable, 'tools/sram_map.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('sram', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
+# the settled-unused and doubts lists of the ported builds are what tools/port_settled.py makes from their final names
+for _t in ('us', 'gold'):
+    _m = subprocess.run([sys.executable, 'tools/port_settled.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('settled', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 # the final name and type tables of the ported builds are the merge of their layers (HOWTO section 0.1, rule 2)
 for _t in ('us', 'gold'):
     _m = subprocess.run([sys.executable, 'tools/merge_name_layers.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
@@ -443,7 +456,7 @@ if A.rom_proto:
         stale = [f for f, g in (('disasm/leftover_symtab_proto.csv', 'st.csv'), ('trace/trace_proto.json', 't.json'), ('trace/trace_proto_unresolved.md', 'u.md'),
                                 ('disasm/sym_types_proto.csv', 'ty.csv'), ('assets/copy_sites_proto.csv', 'cs.csv'), ('trace/rom_map_proto.csv', 'rm.csv'),
                                 ('disasm/layers/sym_names_proto_auto.csv', 'na.csv'), ('disasm/match_old_proto.csv', 'mo.csv'),
-                                ('disasm/sym_names_proto.csv', 'nm.csv'), ('disasm/sym_unconclusive_proto.md', 'dq.md'), ('pocketcamera_proto.sym', 'p.sym'))
+                                ('disasm/sym_names_proto.csv', 'nm.csv'), ('disasm/sym_unconclusive_proto.md', 'dq.md'), ('disasm/sym_unconclusive_proto.csv', 'dq.csv'), ('pocketcamera_proto.sym', 'p.sym'))
                  if not os.path.exists(PD + f) or open(PD + f, 'rb').read() != open(j(g), 'rb').read()]
         if stale: bad('proto', 'not what the prototype pipeline makes today (SETUP.md, prototype): %s' % ', '.join(stale))
         else: ok('proto', 'symbol tables, trace, types, copy sites, byte classes, old-build matches, names, doubts list and pocketcamera_proto.sym fresh')

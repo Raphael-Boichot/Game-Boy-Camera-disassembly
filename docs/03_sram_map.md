@@ -2,6 +2,8 @@
 
 ## 3. SRAM structure (128 KB) — the consolidated, byte-level map
 
+The same map as a table, with the routines that touch each field and the access sites of the code: `roms/jp_rev_a/sram/` (`sram_map_jp.csv`, `sram_access_jp.csv`; carried to the international and Gold ROMs, whose access sites all pair with the Japanese ones, in `roms/us_eu/sram/` and `roms/gold/sram/`). Edit the table with this section.
+
 This section merges **Raphaël Boichot's
 *Inject-pictures* map** (the starting point) with what the Pocket Camera (JP) Rev A code actually
 does, and with a byte-by-byte comparison of **33 real saves** (evidence in §11).

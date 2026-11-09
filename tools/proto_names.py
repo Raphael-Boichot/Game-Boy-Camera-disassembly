@@ -23,10 +23,10 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
             the old address, the length and the match kind.
   4. hand   disasm/layers/sym_names_proto_hand.csv (every row with its reason)
 Checks: one name per address and one address per name (a clash aborts), valid rgbasm labels, every routine entry of the trace
-(call targets, jump-table entries, vectors, the entry) named. --doubts writes the doubts list: every name not tagged C, with its note.
+(call targets, jump-table entries, vectors, the entry) named. --doubts writes the doubts list: every name not tagged C, with its note (OUT.md, and the same rows as OUT.csv beside it).
 Prints `proto_names: N names, tags {...}; routine entries R, unnamed U`.
 """
-import csv, json, re, sys, argparse, collections
+import csv, json, os, re, sys, argparse, collections
 D = 'roms/prototype_debagame/'
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
 ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
@@ -148,6 +148,9 @@ with open(a.doubts, 'w') as f:
             'Every name below is a hypothesis until the code or an emulator confirms it.\n\n| address | name | tag | source | reason |\n|---|---|---|---|---|\n' % (
                 len(names), tags['C'], tags['I'], tags['?']))
     for (b, ad), (nm, c, note, src) in doubt: f.write('| %02X:%04X | %s | %s | %s | %s |\n' % (b, ad, nm, c, src, note.replace('|', '/')))
+with open(os.path.splitext(a.doubts)[0] + '.csv', 'w', newline='') as f:      # the same list as a table (HOWTO_NEW_ROM.md section 0.1: sym_unconclusive_<tag>.csv/.md)
+    w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'source', 'evidence'])
+    for (b, ad), (nm, c, note, src) in doubt: w.writerow(['%02X' % b, '%04X' % ad, nm, c, src, note])
 print('proto_names: %d names, tags %s; routine entries %d, unnamed %d%s' % (len(names), dict(sorted(tags.items())), len(ent), len(unnamed),
       (' (' + ' '.join('%04X' % t for t in unnamed) + ')') if unnamed else ''))
 src = collections.Counter(v[3] for v in names.values()); print('by source:', dict(sorted(src.items())))

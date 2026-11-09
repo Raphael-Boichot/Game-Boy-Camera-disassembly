@@ -23,6 +23,7 @@ MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`, 1 MiB, MBC: MAC-GBD (camera cartridge). 
 | `intake/` | L0: the header, the per-bank comparison with the four other ROMs and the no-symbol round trip (`tools/rom_intake.py`) |
 | `trace/` | L2: the static trace `trace_jp.json` (60,449 instructions, 0 unresolved) and its inputs (`extra_roots_jp.json`, `rom_trace_labels_jp.sym`), the first trace `trace_jp_v1.json` that the WRAM notes cite, the static per-bank coverage `coverage_jp.csv`, and the merged coverage of the runs `cov_jp_runs.npz` / `rom_map_jp.csv` (copies of `coverage/v8/report_v8/`) |
 | `wram/` | the WRAM / HRAM map by region and the access tables (`wram_access_jp.csv`, `wram_summary_jp.csv`) |
+| `sram/` | the cartridge RAM map as a table (`sram_map_jp.csv`, 71 rows, from docs §3) and the SRAM access sites of the code (`sram_access_jp.csv`) |
 | `assets/` | asset catalog, per-bank layout, reach and witness tables, layout kind evidence, bank atlas |
 | `captures/` | three emulator screens of the erase-all dialog |
 | `jp_rom_layout_map.png`, `jp_rom_reachability_map.png` | what each byte is, and what the runs reached (drawn by `tcrf_check/tools/rom_layout_map.py` / `rom_reach_map.py`) |

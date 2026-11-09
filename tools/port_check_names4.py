@@ -17,7 +17,7 @@ Rules, in this order (C when one holds); names that describe the picture itself 
   loader   a Gfx_/Map_/Src_ name whose routine part (a label on traced code; descriptive tails such as FontSlotA1 claim no loader) is one of its readers here (static) or reads at least 90 % of its read bytes (coverage)
   relabel  a Gfx_/Map_ block named after a routine, that is read here by one other routine only (static, or >= 90 % of the read bytes in the coverage, interrupt /
            main loop / boot excluded): renamed Gfx_BB_AAAA_<that routine> (C), the Japanese name kept in the note
-The rest stay I and are listed (with their readers here and in Japan) in <TREE>/disasm/sym_unconclusive_<s>.csv.
+The rest stay I; tools/port_settled.py lists them in <TREE>/disasm/sym_settled_unused_<s>.csv.
 """
 import sys, csv, re, glob, bisect, collections, os
 import numpy as np
@@ -138,8 +138,7 @@ if not dry:
     p_ = D + 'layers/sym_names_%s_checked.csv' % S; keep_ = [l for l in open(p_, encoding='utf-8') if 'checked4: ' not in l]       # rerunnable: earlier pass-4 rows are replaced
     open(p_, 'w', encoding='utf-8').write(''.join(keep_))
     with open(p_, 'a', newline='', encoding='utf-8') as fh: csv.writer(fh, lineterminator='\n').writerows(out)
-    with open('%s/disasm/sym_unconclusive_%s.csv' % (T, S), 'w', newline='', encoding='utf-8') as fh:
-        w = csv.writer(fh, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'readers_here', 'readers_jp', 'coverage_readers', 'note']); w.writerows(opn)
+    # the names left at I are listed by tools/port_settled.py (disasm/sym_settled_unused_<s>.csv), from the final names table
 else:
     for x in out:
         m_ = re.search(r'L3 (\w+): (.*)$', x[4]); print('  %s:%s %-8s %s | %s' % (x[0], x[1], m_.group(1), x[2], m_.group(2)[:170]))
