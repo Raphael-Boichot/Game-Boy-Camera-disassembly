@@ -91,7 +91,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets*: not investigated yet (no emulator run of this ROM).
 
-**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L2 (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
+**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
 
 ![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
 
@@ -107,7 +107,7 @@ The three last maps are drawn by `python3 tools/status_maps.py --gold GOLD.gb --
 | Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | ported from JP: L0-L1, L2 static, L3 (C 5,281 / I 130: I = unused, by evidence), L4, L5 (`make TREE=us_eu check`; docs §1.5), L6 character set and keyboard tables as text |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | ported (L0-L5; source tree `roms/gold/src/`; L6 character set) |
 | Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L3 (own trace, 0 unresolved, observed in the core and BGB; symbol file, round trip byte-exact; every routine named) |
-| Pocket Camera Prototype (Japan) ("DEBAGAME") | `19b50a5f67ef4f0d015e7d813370756e` as dumped (`1d8097de3497db8b182bcd2a984b6063`: the header-patched copy for BGB) | [`roms/prototype_debagame/`](roms/prototype_debagame/) | L0-L2 (own trace, 0 unresolved, all code in bank $00; symbol file, round trip byte-exact without rgbfix; 97 % of the code run, 13 screens confirmed in BGB) |
+| Pocket Camera Prototype (Japan) ("DEBAGAME") | `19b50a5f67ef4f0d015e7d813370756e` as dumped (`1d8097de3497db8b182bcd2a984b6063`: the header-patched copy for BGB) | [`roms/prototype_debagame/`](roms/prototype_debagame/) | L0-L3 (own trace, 0 unresolved, all code in bank $00; symbol file, round trip byte-exact without rgbfix; 97 % of the code run, 13 screens confirmed in BGB; every routine named, mostly with the developers' names from two older builds) |
 
 The ROMs are not in the repository (md5 values in §1.1; the owner supplies them outside it).
 

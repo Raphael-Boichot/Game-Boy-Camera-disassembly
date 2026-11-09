@@ -1,24 +1,188 @@
 bank,addr,name,conf,note,source
+00,0040,Vec_VBlank,C,interrupt vector $40: jp VBLANK handler 00:01E3,hand
+00,0048,Vec_LcdStat,C,interrupt vector $48: jp HBLK 00:1250,hand
+00,0050,Vec_Timer,C,interrupt vector $50: jp TIMER_INT 00:1266 (never enabled by a constant write to IE: observed_proto.md),hand
+00,0058,Vec_Serial,C,interrupt vector $58: jp SIO_INT 00:034B,hand
+00,0100,Entry,C,cartridge entry point: nop; jp $0150,hand
+00,01FE,MAIN_SUB,C,"developers' name: same code as MAIN_SUB in the old build of table 2A at old 0204 and 35 at old 0204 (124 bytes, masked match)",port_old
+00,027A,VBLANK_SUB,C,"developers' name: same code as VBLANK_SUB in the old build of table 2A at old 0280 and 35 at old 0280 (63 bytes, masked match)",port_old
+00,02B9,DATA_MOV,I,"developers' name: same code as DATA_MOV in the old build of table 2A at old 02BF and 35 at old 02BF (9 bytes, exact match)",port_old
+00,02C2,DMACLR,I,"developers' name: same code as DMACLR in the old build of table 2A at old 02C8 and 35 at old 05CF (11 bytes, exact match)",port_old
+00,02CD,LCDCOFF,C,"developers' name: same code as LCDCOFF in the old build of table 2A at old 02D3 and 35 at old 05DA (25 bytes, exact match)",port_old
+00,02E6,INKEY,C,"developers' name: same code as INKEY in the old build of table 2A at old 02EC and 35 at old 05F3 (49 bytes, exact match)",port_old
 00,0317,Data_00_0317,C,OAM DMA routine copied to HRAM $FFB6 at boot (00:01A1); called as $FFB6,proto_types
+00,033B,VRAM_CLR,C,"developers' name: same code as VRAM_CLR in the old build of table 2A at old 0341 and 35 at old 0648 (16 bytes, exact match)",port_old
+00,034B,SIO_INT,C,"developers' name: same code as SIO_INT in the old build of table 2A at old 0351 (65 bytes, masked match)",port_old
+00,038C,GAME_INIT,C,"developers' name: same code as GAME_INIT in the old build of table 2A at old 0392 and 35 at old 0658 (31 bytes, masked match)",port_old
+00,0413,OBJP_DEF_SET,I,"developers' name: same code as OBJP_DEF_SET in the old build of table 2A at old 0419 and 35 at old 0713 (13 bytes, exact match)",port_old
+00,0420,Bgp_SetDefault,C,"ld a,$E4; ldh [rBGP],a; ldh [BGPW $FFAE],a: the default palette and its shadow",hand
+00,0422,BGP_SET,I,"developers' name: same code as BGP_SET in the old build of table 2A at old 0428 and 35 at old 0722 (5 bytes, exact match)",port_old
+00,042E,SCYX_SET0,I,"developers' name: same code as SCYX_SET0 in the old build of table 2A at old 0434 and 35 at old 072E (15 bytes, exact match)",port_old
+00,045A,MenFade_Start,I,"writes 1 to $C0A1, MEN_FADE_F in both old symbol tables (same address)",hand
+00,0460,MEN_FADE,C,"developers' name: same code as MEN_FADE in the old build of table 2A at old 0466 and 35 at old 0760 (54 bytes, masked match)",port_old
+00,0496,MEN_FADE_END,I,"developers' name: same code as MEN_FADE_END in the old build of table 2A at old 049C and 35 at old 0796 (10 bytes, exact match)",port_old
+00,04A0,MEN_FADE_DEC,C,"developers' name: same code as MEN_FADE_DEC in the old build of table 2A at old 04A6 and 35 at old 07A0 (26 bytes, exact match)",port_old
+00,04BA,TITL_GAMEN,C,"developers' name: same code as TITL_GAMEN in the old build of table 2A at old 04C0 and 35 at old 07BA (37 bytes, masked match)",port_old
 00,04DF,Data_00_04DF,C,copied (wram) by 00:04DB,proto_types
+00,04EF,GAME_TITL,C,"developers' name: same code as GAME_TITL in the old build of table 2A at old 04F5 and 35 at old 07EF (84 bytes, masked match)",port_old
+00,0544,MAKE_MENU,C,"developers' name: same code as MAKE_MENU in the old build of table 2A at old 054A and 35 at old 0844 (43 bytes, masked match)",port_old
+00,056F,WANKO,C,"developers' name: same code as WANKO in the old build of table 2A at old 0575 and 35 at old 086F (58 bytes, masked match)",port_old
+00,05A9,MKMENU_END,I,"developers' name: same code as MKMENU_END in the old build of table 2A at old 05AF and 35 at old 08A9 (12 bytes, exact match)",port_old
+00,05B5,MAIN_MENU,C,"developers' name: same code as MAIN_MENU in the old build of table 2A at old 05BB and 35 at old 08B5 (166 bytes, masked match)",port_old
+00,065B,DOG_ANIME,C,"developers' name: same code as DOG_ANIME in the old build of table 2A at old 0661 and 35 at old 095B (70 bytes, exact match)",port_old
+00,06A4,BankTest_InitScreen,I,"LCDCOFF, VRAM_CLR, DMACLR, then falls into CB2 (bank 2 selected for the BANK screen); called once",hand
+00,06AD,CB2,C,"developers' name: same code as CB2 in the old build of table 2A at old 06B3 and 35 at old 09AD (53 bytes, masked match)",port_old
+00,06E2,BANK_TEST,C,"developers' name: same code as BANK_TEST in the old build of table 2A at old 06E8 and 35 at old 09E2 (85 bytes, masked match)",port_old
+00,0737,TEST4M,C,"developers' name: same code as TEST4M in the old build of table 2A at old 073D and 35 at old 0A37 (72 bytes, masked match)",port_old
+00,0780,MK_SRAM_MENU,C,"developers' name: same code as MK_SRAM_MENU in the old build of table 2A at old 0786 and 35 at old 0A80 (105 bytes, masked match)",port_old
+00,07E9,SRAM_MENU,C,"developers' name: same code as SRAM_MENU in the old build of table 2A at old 07EF and 35 at old 0AE9 (122 bytes, masked match)",port_old
+00,0863,VB_SRAM_MENU,C,"developers' name: same code as VB_SRAM_MENU in the old build of table 2A at old 0869 and 35 at old 0B63 (78 bytes, exact match)",port_old
+00,08B2,SRAM_VERIFY,C,"developers' name: same code as SRAM_VERIFY in the old build of table 2A at old 08B8 and 35 at old 0BB2 (72 bytes, exact match)",port_old
+00,08FA,SRAM_WRITE,C,"developers' name: same code as SRAM_WRITE in the old build of table 2A at old 0900 and 35 at old 0BFA (56 bytes, exact match)",port_old
+00,0932,MK_SRAM_DATA,C,"developers' name: same code as MK_SRAM_DATA in the old build of table 2A at old 0938 and 35 at old 0C32 (93 bytes, masked match)",port_old
+00,098F,SRAM_DATA_SEL,C,"developers' name: same code as SRAM_DATA_SEL in the old build of table 2A at old 0995 and 35 at old 0C8F (86 bytes, masked match)",port_old
+00,09E5,KAO_ANIME,C,"developers' name: same code as KAO_ANIME in the old build of table 2A at old 09EB and 35 at old 0CE5 (132 bytes, exact match)",port_old
+00,0A69,MK_SRAM_AGING,C,"developers' name: same code as MK_SRAM_AGING in the old build of table 2A at old 0A6F and 35 at old 0D69 (95 bytes, masked match)",port_old
+00,0AC8,PAT_SET,I,"developers' name: same code as PAT_SET in the old build of table 2A at old 0ACE and 35 at old 0DC8 (10 bytes, exact match)",port_old
+00,0AD2,PAT_END,C,"developers' name: same code as PAT_END in the old build of table 2A at old 0AD8 and 35 at old 0DD2 (56 bytes, masked match)",port_old
+00,0B41,SRAM_AGING,C,"developers' name: same code as SRAM_AGING in the old build of table 2A at old 0B47 and 35 at old 0E41 (148 bytes, masked match)",port_old
+00,0BD5,AGE_DEC,C,"developers' name: same code as AGE_DEC in the old build of table 2A at old 0BDB and 35 at old 0ED5 (123 bytes, masked match)",port_old
+00,0C50,Aging_FillSram,C,"for SRAM bank D: writes the pattern B,B,C,C over $A000-$BFFF (ld [$4000],d; ld [hl+],a ...); called by SRAM_AGING four times",hand
+00,0CC1,AGING_ERROR,C,"developers' name: same code as AGING_ERROR in the old build of table 2A at old 0CC7 and 35 at old 0FC1 (55 bytes, masked match)",port_old
+00,0CF8,PUT_BYTE,C,"developers' name: same code as PUT_BYTE in the old build of table 2A at old 0CFE and 35 at old 0FF8 (19 bytes, exact match)",port_old
+00,0D0B,VB_SRAM_AGING,C,"developers' name: same code as VB_SRAM_AGING in the old build of table 2A at old 0D11 and 35 at old 100B (48 bytes, exact match)",port_old
+00,0D3B,MK_SRAM_DUMP,C,"developers' name: same code as MK_SRAM_DUMP in the old build of table 2A at old 0D41 and 35 at old 103B (71 bytes, masked match)",port_old
+00,0D82,SRAM_DUMP,C,"developers' name: same code as SRAM_DUMP in the old build of table 2A at old 0D88 and 35 at old 1082 (167 bytes, masked match)",port_old
+00,0E29,PUT_BYTE2,C,"developers' name: same code as PUT_BYTE2 in the old build of table 2A at old 0E2F and 35 at old 1129 (19 bytes, exact match)",port_old
+00,0E3C,PUT_BYTE3,C,"developers' name: same code as PUT_BYTE3 in the old build of table 2A at old 0E42 and 35 at old 113C (19 bytes, exact match)",port_old
+00,0E4F,DUMP_1MEN,C,"developers' name: same code as DUMP_1MEN in the old build of table 2A at old 0E55 and 35 at old 114F (80 bytes, masked match)",port_old
+00,0E9F,MAKE_MOVIE,C,"developers' name: same code as MAKE_MOVIE in the old build of table 2A at old 0EA5 (107 bytes, masked match)",port_old
+00,0F0A,PARA_SET,C,"developers' name: same code as PARA_SET in the old build of table 2A at old 0F10 (102 bytes, masked match)",port_old
+00,0F70,Seq06_MovieMain,I,GAME_SEQ $06 handler of MAIN_SUB (C); Movie from MAKE_MOVIE 00:0E9F and the live picture BGB shows in that sequence (I),hand
+00,1094,GET_A_IMMAGE,C,"developers' name: same code as GET_A_IMMAGE in the old build of table 2A at old 109A (49 bytes, masked match)",port_old
+00,10C5,CHANGE_PALETTE,C,"developers' name: same code as CHANGE_PALETTE in the old build of table 2A at old 10CB (97 bytes, exact match)",port_old
+00,1149,AKARUSA_HYOUJI,C,"developers' name: same code as AKARUSA_HYOUJI in the old build of table 2A at old 114F (31 bytes, exact match)",port_old
+00,1168,CONTRAST_HYOUJI,C,"developers' name: same code as CONTRAST_HYOUJI in the old build of table 2A at old 116E (34 bytes, exact match)",port_old
+00,118A,BUNKATU_HYOUJI,C,"developers' name: same code as BUNKATU_HYOUJI in the old build of table 2A at old 1190 (34 bytes, exact match)",port_old
+00,11AC,Obj_PutHexDigits,I,"writes OAM entries from $C02C: Y $10, X $30, then the high nibble of A, and so on: the two nibbles of A as sprites",hand
+00,1208,H_BLANK_TX,C,"developers' name: same code as H_BLANK_TX in the old build of table 2A at old 120E and 35 at old 1857 (72 bytes, exact match)",port_old
+00,1250,HBLK,I,"developers' name: same code as HBLK in the old build of table 2A at old 1256 and 35 at old 189F (14 bytes, exact match)",port_old
+00,125E,WAIT_DONE_VBLNK,I,"developers' name: same code as WAIT_DONE_VBLNK in the old build of table 2A at old 1264 and 35 at old 18AD (8 bytes, masked match)",port_old
+00,1266,TIMER_INT,I,"developers' name: same code as TIMER_INT in the old build of table 2A at old 126C and 35 at old 18B5 (5 bytes, exact match)",port_old
+00,126B,VB_MOVIE,I,"developers' name: same code as VB_MOVIE in the old build of table 2A at old 1271 and 35 at old 18BA (10 bytes, exact match)",port_old
+00,1275,MAKE_CONFIG,C,"developers' name: same code as MAKE_CONFIG in the old build of table 2A at old 127B (135 bytes, masked match)",port_old
+00,12FC,Seq09_ConfigMain,I,GAME_SEQ $09 handler of MAIN_SUB (C); Config from MAKE_CONFIG 00:1275 and the sensor settings screen BGB shows (I),hand
+00,1528,Config_PutItem,I,"dispatch on R0 ($FF88) to the PUT_ routines of the settings screen (PUT_DITH_PAT, PUT_MODE ...)",hand
+00,158D,CONF_SET_OBJ,C,"developers' name: same code as CONF_SET_OBJ in the old build of table 2A at old 1569 (173 bytes, masked match)",port_old
+00,163A,Stub_Ret_163A,C,"a lone ret (the byte before PUT_MODE), called twice",hand
+00,163B,PUT_MODE,C,"developers' name: same code as PUT_MODE in the old build of table 2A at old 1617 (37 bytes, masked match)",port_old
+00,1660,PUT_EDGE,C,"developers' name: same code as PUT_EDGE in the old build of table 2A at old 163C (39 bytes, masked match)",port_old
+00,1687,PUT_VREF,C,"developers' name: same code as PUT_VREF in the old build of table 2A at old 1663 (37 bytes, masked match)",port_old
+00,16AC,Config_PutC0FDFlag,I,"prints one of two texts ($1911 table, step $1C) chosen by bit 7 of $C0FD",hand
+00,16D8,PUT_PALETTE,I,"developers' name: same code as PUT_PALETTE in the old build of table 2A at old 16AA (14 bytes, exact match)",port_old
+00,16E6,PUT_CHG_T,C,"developers' name: same code as PUT_CHG_T in the old build of table 2A at old 16B8 and 35 at old 1F60 (65 bytes, exact match)",port_old
+00,1727,PUT_OFS,C,"developers' name: same code as PUT_OFS in the old build of table 2A at old 16F9 and 35 at old 1FA1 (54 bytes, exact match)",port_old
+00,175D,Config_PutHexC0F9,C,writes the two nibbles of $C0F9 as tiles $80+n to BG $9946 / $9966,hand
+00,177E,PUT_DITH_PAT,C,"developers' name: same code as PUT_DITH_PAT in the old build of table 2A at old 1750 and 35 at old 1FF8 (35 bytes, masked match); other names on this address: PUT_REV, PUT_ZERO",port_old
 00,197D,Data_00_197D,C,copied (wram) by 00:12B8,proto_types
+00,19AD,MK_PROTECT,C,"developers' name: same code as MK_PROTECT in the old build of table 2A at old 197F and 35 at old 257B (96 bytes, masked match)",port_old
+00,1A0D,PROTECT_TEST,C,"developers' name: same code as PROTECT_TEST in the old build of table 2A at old 19DF and 35 at old 25DB (112 bytes, masked match)",port_old
+00,1A7D,PROT_TEST,C,"developers' name: same code as PROT_TEST in the old build of table 2A at old 1A4F and 35 at old 264B (58 bytes, exact match)",port_old
+00,1AB7,OFF_TEST,C,"developers' name: same code as OFF_TEST in the old build of table 2A at old 1A89 and 35 at old 2685 (63 bytes, exact match)",port_old
+00,1AF6,ON_TEST,C,"developers' name: same code as ON_TEST in the old build of table 2A at old 1AC8 and 35 at old 26C4 (63 bytes, exact match)",port_old
+00,1B35,VB_PROTECT,C,"developers' name: same code as VB_PROTECT in the old build of table 2A at old 1B07 and 35 at old 2703 (125 bytes, exact match)",port_old
+00,1BB2,MK_PIC_SAVE,C,"developers' name: same code as MK_PIC_SAVE in the old build of table 2A at old 1B84 and 35 at old 2780 (24 bytes, masked match)",port_old
+00,1BCA,PIC_SAVE,C,"developers' name: same code as PIC_SAVE in the old build of table 2A at old 1B9C and 35 at old 2798 (220 bytes, masked match)",port_old
+00,1CA6,PICT_SAVE_GO,C,"developers' name: same code as PICT_SAVE_GO in the old build of table 2A at old 1C78 and 35 at old 2874 (38 bytes, masked match)",port_old
+00,1CCC,PUT_BYTE_OBJ2,C,"developers' name: same code as PUT_BYTE_OBJ2 in the old build of table 2A at old 1C9E and 35 at old 289A (49 bytes, exact match)",port_old
 00,1CFD,Data_00_1CFD,C,copied (wram) by 00:1BC3,proto_types
 00,1D15,Data_00_1D15,C,copied (wram) by 00:1C2D,proto_types
 00,1D25,Data_00_1D25,C,copied (wram) by 00:1C20,proto_types
 00,1D35,Data_00_1D35,C,copied (wram) by 00:1C04,proto_types
 00,1D49,Data_00_1D49,C,copied (wram) by 00:1C5B,proto_types
+00,1D61,MAKE_GALLERY,C,"developers' name: same code as MAKE_GALLERY in the old build of table 2A at old 1D33 and 35 at old 292F (124 bytes, masked match)",port_old
+00,1DDD,Seq0D_GalleryMain,I,GAME_SEQ $0D handler of MAIN_SUB (C); Gallery from MAKE_GALLERY 00:1D61 (I),hand
+00,1E5D,PUT_PICTURE,I,"developers' name: same code as PUT_PICTURE in the old build of table 2A at old 1E32 and 35 at old 2A2E (15 bytes, masked match)",port_old
+00,1E6D,H_BLANK_TX2,C,"developers' name: same code as H_BLANK_TX2 in the old build of table 2A at old 1E42 and 35 at old 2A3E (84 bytes, masked match)",port_old
+00,1EC1,GALLERY_OBJ_SET,C,"developers' name: same code as GALLERY_OBJ_SET in the old build of table 2A at old 1E96 and 35 at old 2A92 (53 bytes, exact match)",port_old
+00,1EF6,OamDma_Run,C,call $FFB6 (the OAM DMA stub Data_00_0317 copied to HRAM); ret,hand
+00,1FF2,ImageCopy_Mode00,C,entry 0 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,1FFE,ImageCopy_Mode01,C,entry 1 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,20DE,ImageCopy_Mode02,C,entry 2 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,21C0,ImageCopy_Mode03,C,entry 3 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,224B,ImageCopy_Mode04,C,entry 4 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,22D6,ImageCopy_Mode05,C,entry 5 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,235E,ImageCopy_Mode06,C,entry 6 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,24A0,ImageCopy_Mode07,C,entry 7 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2645,ImageCopy_Mode08,C,entry 8 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2942,ImageCopy_Mode09,C,entry 9 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2948,ImageCopy_Mode10,C,entry 10 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,294E,ImageCopy_Mode11,C,entry 11 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2954,ImageCopy_Mode12,C,entry 12 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,295A,ImageCopy_Mode13,C,entry 13 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,29B3,ImageCopy_Mode14,C,entry 14 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A0B,ImageCopy_Mode15,C,entry 15 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A17,ImageCopy_Mode16,C,entry 16 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A23,ImageCopy_Mode17,C,entry 17 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A29,ImageCopy_Mode18,C,entry 18 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A2F,ImageCopy_Mode19,C,entry 19 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A3B,ImageCopy_Mode20,C,entry 20 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A47,ImageCopy_Mode21,C,entry 21 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A53,ImageCopy_Mode22,C,entry 22 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A5F,ImageCopy_Mode23,C,entry 23 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2AB8,ImageCopy_Mode24_None,C,entry 24 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2AB9,ImageCopy_Mode25_None,C,entry 25 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2ABA,ImageCopy_Mode26_None,C,entry 26 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2ABB,ImageCopy_Mode27_None,C,entry 27 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2ABC,ImageCopy_Mode28_None,C,entry 28 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2ABD,ImageCopy_Mode29_None,C,entry 29 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2ABE,ImageCopy_Mode30_None,C,entry 30 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2ABF,ImageCopy_Mode31_None,C,entry 31 of JumpTable_00_3822: a lone ret (no copy),hand
+00,2EF5,Copy_Pages,C,"unrolled copy: B pages of 256 bytes from HL to DE (ld a,[hl+]; ld [de],a; inc e; ... inc d; dec b; jp nz)",hand
+00,31FB,MAKE_EMI,C,"developers' name: same code as MAKE_EMI in the old build of table 2A at old 29ED (115 bytes, masked match)",port_old
+00,326E,EMI_MAIN,C,"developers' name: same code as EMI_MAIN in the old build of table 2A at old 2A60 (39 bytes, masked match)",port_old
+00,3295,N_TU_SIN,C,"developers' name: same code as N_TU_SIN in the old build of table 2A at old 2A87 (19 bytes, masked match)",port_old
+00,32A8,N_KEY_INPUT,C,"developers' name: same code as N_KEY_INPUT in the old build of table 2A at old 2A9A (16 bytes, exact match)",port_old
+00,32B8,N_OBJ_HYOUJI,I,"developers' name: same code as N_OBJ_HYOUJI in the old build of table 2A at old 2AAA (14 bytes, exact match)",port_old
+00,32C6,N_OBJ_HYOUJI2,C,"developers' name: same code as N_OBJ_HYOUJI2 in the old build of table 2A at old 2AB8 (29 bytes, exact match)",port_old
+00,32E3,Akarusa_Apply,I,"stores A in $C164 (AKARUSA in table $2A), returns when the mode in $C0F2 is 6, else selects SRAM bank 0 and ROM bank 4 (ld [$4000],0; ld [$2000],4) and goes on; not read further",hand
+00,33DA,SCREEN_CHECK,C,"developers' name: same code as SCREEN_CHECK in the old build of table 2A at old 314B (84 bytes, masked match)",port_old
+00,342E,Dither_AddLookup,I,h = $41: looks a byte at [DE] up in a 256-byte table at $4100 of the mapped bank and adds it to BC (eight calls from SCREEN_CHECK),hand
+00,3447,SET_DITH_MATRIX,C,"developers' name: same code as SET_DITH_MATRIX in the old build of table 2A at old 31B8 (374 bytes, masked match)",port_old
+00,35BD,ParaSet_ByMode,I,dispatch on the low nibble of A (cp 0..n) to per-mode register settings; called by PARA_SET and the settings screen,hand
+00,3732,Sensor_FillDitherFlat,C,"SRAM bank $10 (camera registers): writes $80, or $55 when the mode in $C0F2 is 6, to the 48 dither registers from $A006",hand
+00,37B8,CHECK_BLACK,C,"developers' name: same code as CHECK_BLACK in the old build of table 2A at old 3478 (32 bytes, exact match)",port_old
+00,37D8,OFFSET_DOWN,C,"developers' name: same code as OFFSET_DOWN in the old build of table 2A at old 3498 (52 bytes, exact match)",port_old
+00,380C,ImageCopy_Dispatch,C,"A (BUNKATU_MODE $C167, from GET_A_IMMAGE 00:10A7) and $1F, x2: jp through JumpTable_00_3822 to one of 32 SRAM-to-WRAM copies",hand
 00,3822,JumpTable_00_3822,C,word table of the jump at 00:3821 (index masked to 0-31 at 00:380C),proto_types
-01,4001,Gfx_01_4001,C,"Gfx: 2bpp tiles copied to VRAM by 00:04C3, 00:0560",proto_types
-01,5801,Map_01_5801,C,Map: tile-map rows copied to the BG map by 00:04CF,proto_types
-01,5A41,Map_01_5A41,C,Map: tile-map rows copied to the BG map by 00:056C,proto_types
-02,4001,Gfx_02_4001,C,"Gfx: 2bpp tiles copied to VRAM by 00:06C0, 00:0797, 00:094E, 00:0A85, 00:0D57, 00:19C9",proto_types
-02,5801,Map_02_5801,C,Map: tile-map rows copied to the BG map by 00:06CC,proto_types
-02,5A41,Map_02_5A41,C,Map: tile-map rows copied to the BG map by 00:07A3,proto_types
-02,5C81,Map_02_5C81,C,Map: tile-map rows copied to the BG map by 00:095A,proto_types
-02,5EC1,Map_02_5EC1,C,Map: tile-map rows copied to the BG map by 00:0A91,proto_types
-02,6101,Map_02_6101,C,Map: tile-map rows copied to the BG map by 00:0D63,proto_types
-02,6341,Map_02_6341,C,Map: tile-map rows copied to the BG map by 00:19D5,proto_types
-03,4001,Gfx_03_4001,C,"Gfx: 2bpp tiles copied to VRAM by 00:0EBF, 00:1D7D, 00:3217",proto_types
-03,5801,Map_03_5801,C,"Map: tile-map rows copied to the BG map by 00:0ECB, 00:1D89, 00:3223",proto_types
-03,5A41,Gfx_03_5A41,C,Gfx: 2bpp tiles copied to VRAM by 00:1291,proto_types
-03,7241,Map_03_7241,C,Map: tile-map rows copied to the BG map by 00:129D,proto_types
+01,4001,FNTOOE1,C,FNTOOE1 in both old symbol tables (same bank and address); this build copies a block here (Gfx_01_4001),symtab_asset
+01,5801,TITLE1,C,TITLE1 in both old symbol tables (same bank and address); this build copies a block here (Map_01_5801),symtab_asset
+01,5A41,MENU1,C,MENU1 in both old symbol tables (same bank and address); this build copies a block here (Map_01_5A41),symtab_asset
+01,5C81,SIMO,I,SIMO in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+02,4001,FNTOOE2,C,FNTOOE2 in both old symbol tables (same bank and address); this build copies a block here (Gfx_02_4001),symtab_asset
+02,5801,BG_BANK,C,BG_BANK in both old symbol tables (same bank and address); this build copies a block here (Map_02_5801),symtab_asset
+02,5A41,BGSRAM1,C,BGSRAM1 in both old symbol tables (same bank and address); this build copies a block here (Map_02_5A41),symtab_asset
+02,5C81,BGSRAM2,C,BGSRAM2 in both old symbol tables (same bank and address); this build copies a block here (Map_02_5C81),symtab_asset
+02,5EC1,BGSRAM3,C,BGSRAM3 in both old symbol tables (same bank and address); this build copies a block here (Map_02_5EC1),symtab_asset
+02,6101,BG_DUMP,C,BG_DUMP in both old symbol tables (same bank and address); this build copies a block here (Map_02_6101),symtab_asset
+02,6341,BGPROTEC,C,BGPROTEC in both old symbol tables (same bank and address); this build copies a block here (Map_02_6341),symtab_asset
+02,6581,PROGRAM,I,PROGRAM in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+03,4001,FNTOOE3,C,FNTOOE3 in both old symbol tables (same bank and address); this build copies a block here (Gfx_03_4001),symtab_asset
+03,5801,BG_MOVIE,C,BG_MOVIE in both old symbol tables (same bank and address); this build copies a block here (Map_03_5801),symtab_asset
+03,5A41,CONF2,C,CONF2 in both old symbol tables (same bank and address); this build copies a block here (Gfx_03_5A41),symtab_asset
+03,7241,BG_CONF,C,BG_CONF in both old symbol tables (same bank and address); this build copies a block here (Map_03_7241),symtab_asset
+03,7481,BG_F_SCR,I,BG_F_SCR in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+03,76C1,BG_EDIT,I,BG_EDIT in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+03,7AC1,BG_EDITW,I,BG_EDITW in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+04,4001,HOI_0,I,HOI_0 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+04,4E01,KAO_1,I,KAO_1 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+04,5C01,KAO_2,I,KAO_2 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+04,6A01,KAO_3,I,KAO_3 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+05,4001,HOI_U,I,HOI_U in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+05,4E01,HOI_D,I,HOI_D in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+05,5C01,HOI_L,I,HOI_L in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+05,6A01,HOI_R,I,HOI_R in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+06,4001,FACE5,I,FACE5 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+06,4E01,FACE6,I,FACE6 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+06,5C01,FACE7,I,FACE7 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset
+06,6A01,FACE8,I,FACE8 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs),symtab_asset

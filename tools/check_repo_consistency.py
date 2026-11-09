@@ -13,7 +13,9 @@ What it checks (each line of the report is one check)
   proto      roms/prototype_debagame (--rom-proto, the image as dumped): the symbol-table CSV, trace, types, copy sites, byte classes, names and
              pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
              and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: port/observed_proto.md equals a fresh
-             tools/proto_observed.py run on port/cov_proto_runs.npz, and the run / BGB-replay counts its README quotes match
+             tools/proto_observed.py run on port/cov_proto_runs.npz, and the run / BGB-replay counts its README quotes match; L3: the
+             old-build matches, the merged names and the doubts list equal a fresh tools/proto_{match_old,names}.py run, every
+             routine entry is named, and the README's name count matches
   port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
@@ -417,16 +419,29 @@ if A.rom_proto:
     p1 = _runp('tools/proto_trace.py', A.rom_proto, j('t.json'), '--roots', PD + 'disasm/extra_roots_proto.json', '--report', j('u.md')) if not p0.returncode else p0
     p2 = _runp('tools/proto_types.py', A.rom_proto, j('t.json'), '--types', j('ty.csv'), '--sites', j('cs.csv'), '--rommap', j('rm.csv'),
                '--names', j('na.csv'), '--symtab', j('st.csv')) if not p1.returncode else p1
-    p3 = _runp('tools/sym_build.py', A.rom_proto, '--names', j('na.csv'), '--types', j('ty.csv'), '--trace', j('t.json'),
+    p2b = _runp('tools/proto_match_old.py', A.rom_proto, j('st.csv'), j('t.json'), j('mo.csv')) if not p2.returncode else p2      # L3
+    p2c = _runp('tools/proto_names.py', '--auto', j('na.csv'), '--match', j('mo.csv'), '--symtab', j('st.csv'), '--trace', j('t.json'),
+                '--rom', A.rom_proto, '--out', j('nm.csv'), '--doubts', j('dq.md')) if not p2b.returncode else p2b
+    if p2c.returncode: p2 = p2c
+    p3 = _runp('tools/sym_build.py', A.rom_proto, '--names', j('nm.csv'), '--types', j('ty.csv'), '--trace', j('t.json'),
                '--out', j('p.sym'), '--report') if not p2.returncode else p2
     if p3.returncode: bad('proto', 'the prototype pipeline failed: %s' % (p3.stderr or p3.stdout)[-300:])
     else:
         stale = [f for f, g in (('disasm/leftover_symtab_proto.csv', 'st.csv'), ('port/trace_proto.json', 't.json'), ('port/trace_proto_unresolved.md', 'u.md'),
                                 ('disasm/sym_types_proto.csv', 'ty.csv'), ('assets/copy_sites_proto.csv', 'cs.csv'), ('port/rom_map_proto.csv', 'rm.csv'),
-                                ('disasm/sym_names_proto.csv', 'na.csv'), ('pocketcamera_proto.sym', 'p.sym'))
+                                ('disasm/sym_names_proto_auto.csv', 'na.csv'), ('disasm/match_old_proto.csv', 'mo.csv'),
+                                ('disasm/sym_names_proto.csv', 'nm.csv'), ('disasm/sym_unconclusive_proto.md', 'dq.md'), ('pocketcamera_proto.sym', 'p.sym'))
                  if not os.path.exists(PD + f) or open(PD + f, 'rb').read() != open(j(g), 'rb').read()]
         if stale: bad('proto', 'not what the prototype pipeline makes today (SETUP.md, prototype): %s' % ', '.join(stale))
-        else: ok('proto', 'symbol tables, trace, types, copy sites, byte classes, names and pocketcamera_proto.sym fresh')
+        else: ok('proto', 'symbol tables, trace, types, copy sites, byte classes, old-build matches, names, doubts list and pocketcamera_proto.sym fresh')
+        mn = re.search(r"proto_names: (\d+) names, tags \{([^}]*)\}; routine entries (\d+), unnamed (\d+)", p2c.stdout)
+        tg = dict((k.strip(" '"), int(v)) for k, v in (x.split(':') for x in mn.group(2).split(','))) if mn else {}
+        mm = re.search(r'([\d,]+) names \(C ([\d,]+) / I ([\d,]+) / \? ([\d,]+)\)', rd(PD + 'README.md'))
+        if not mn: bad('proto', 'tools/proto_names.py printed no summary')
+        elif not mm: bad('proto', 'roms/prototype_debagame/README.md no longer quotes the name count (need=N names (C a / I b / ? c))')
+        elif [int(x.replace(',', '')) for x in mm.groups()] != [int(mn.group(1)), tg.get('C', 0), tg.get('I', 0), tg.get('?', 0)]:
+            bad('proto', 'roms/prototype_debagame/README.md: names quoted %s, tools/proto_names.py gives %s' % (mm.group(0), mn.group(0)))
+        if mn and int(mn.group(4)): bad('proto', 'routine entries left unnamed: %s' % mn.group(0))
         PR = rd(PD + 'README.md')
         m1 = re.search(r'proto_trace: (\d+) instructions, (\d+) code bytes, (\d+) inline table bytes, (\d+) banked calls / jumps resolved, (\d+) unresolved', p1.stdout)
         m2 = re.search(r'proto_types: .*?\((\d+) text bytes in (\d+) rows', p2.stdout)
