@@ -93,6 +93,10 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 **Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
 
+*Screens reached in BGB* (2026-11-09; the BGB copy of the ROM, blank SRAM): power-on at the left, each column one step further; the prototype has no (mode, state) pair, so each panel is one value of its screen variable `GAME_SEQ` (`$C0A0`) and `$00` is the screen as reached; `$01` marks two screens that need a condition: AGING running after PROTECT TEST > OFF (without it the SRAM is write-protected and AGING stops at the first byte) and COM counting with a second unit linked (two BGB instances). A two-headed arrow means B leads back (B held: the AGING screen reads the keys once per cycle). Captured by `tools/proto_bgb_screens.py`, drawn by `tools/make_screen_trees.py`; the checker redraws it.
+
+![Screens (GAME_SEQ) reached in BGB](roms/prototype_debagame/proto_screen_tree.png)
+
 ![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
 
 *Never-reached assets*: not investigated yet.

@@ -1,0 +1,16 @@
+mode,state,name,tag,evidence
+01,00,Title: Debagame Tester,C,BGB screenshot (TITLE1 map)
+02,00,Menu: six tests,C,BGB screenshot (MENU1 map)
+04,00,SRAM TEST: four tests,C,BGB screenshot; WRITE runs in place
+05,00,DATA SELECT: aging patterns,C,BGB screenshot; Up / Down choose and A starts AGING
+07,00,"AGING: SRAM protected, ERROR",C,BGB screenshot (ERROR 00:A000 55->00) from blank SRAM without PROTECT OFF
+07,01,"AGING: after PROTECT OFF, runs",C,BGB screenshot (COUNT going up and no error)
+08,00,DUMP: SRAM bank 00,C,BGB screenshot
+03,00,BANK TEST: 8M OK / 4M NG,C,BGB screenshot; 4M NG is the right answer on an 8-Mbit ROM (TEST4M)
+0A,00,PROTECT TEST: write protection,C,BGB screenshot; OFF writes $0A to $0000
+06,00,MOVIE TEST: live picture,C,BGB screenshot
+09,00,Settings: sensor registers,C,BGB screenshot (Start on MOVIE TEST)
+0C,00,Picture save: save? slot,C,BGB screenshot (A held on MOVIE TEST)
+0D,00,GALLERY: photo 00,C,BGB screenshot (blank SRAM)
+0B,00,COM: waiting,C,BGB screenshot (no partner)
+0B,01,"COM: linked, counting",C,two linked BGB instances (tools/proto_bgb_link.py)

@@ -1,0 +1,14 @@
+mode,state,keys,frames,bgb_mode,bgb_state,same,picture,parent,key
+01,00,-,740,01,00,yes,screen_01_00.png,,
+02,00,A,834,02,00,yes,screen_02_00.png,01:00,A
+04,00,A A,958,04,00,yes,screen_04_00.png,02:00,A (SRAM TEST)
+05,00,A A Down Down A,1130,05,00,yes,screen_05_00.png,04:00,Down Down A (AGING)
+07,00,A A Down Down A A,1374,07,00,yes,screen_07_00.png,05:00,A (pattern)
+08,00,A A Down Down Down A,1154,08,00,yes,screen_08_00.png,04:00,Down x3 A (DUMP)
+03,00,A Down A,982,03,00,yes,screen_03_00.png,02:00,Down A (BANK TEST)
+0A,00,A Down Down A,1006,0A,00,yes,screen_0A_00.png,02:00,Down x2 A (PROTECT TEST)
+06,00,A Down Down Down A,1030,06,00,yes,screen_06_00.png,02:00,Down x3 A (MOVIE TEST)
+09,00,A Down Down Down A Start,1154,09,00,yes,screen_09_00.png,06:00,Start
+0C,00,A Down Down Down A A,1180,0C,00,yes,screen_0C_00.png,06:00,A held
+0D,00,A Down Down Down Down A,1054,0D,00,yes,screen_0D_00.png,02:00,Down x4 A (GALLERY)
+0B,00,A Down Down Down Down Down A,1078,0B,00,yes,screen_0B_00.png,02:00,Down x5 A (COM)

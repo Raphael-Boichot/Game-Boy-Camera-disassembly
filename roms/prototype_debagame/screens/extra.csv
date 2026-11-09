@@ -1,0 +1,3 @@
+mode,state,picture,how,parent,key,note
+07,01,extra_07_01.png,"PROTECT TEST > OFF first (SRAM writes enabled), then the same path",05:00,A after PROTECT OFF,
+0B,01,extra_0B_01.png,"a second unit linked on COM (two BGB instances, tools/proto_bgb_link.py)",0B:00,"A, partner on COM",master; both units count

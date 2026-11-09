@@ -1,0 +1,2 @@
+panel,title,mode,states,row,how
+boot,Title screen (GAME_SEQ $01),01,*,boot,no key held

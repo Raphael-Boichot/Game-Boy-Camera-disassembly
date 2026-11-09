@@ -40,6 +40,8 @@ Runs (SETUP.md, prototype L2): the project's core (`tools/proto_coverage.py`, no
 
 ![The screens of GAME_SEQ $01-$0D, BGB](proto_game_seq_screens.png)
 
+The screen tree (which keys lead where, B back, the AGING and COM conditions) is in the main README: [`proto_screen_tree.png`](proto_screen_tree.png).
+
 ## L3: names (2026-11-09)
 
 The names come in four layers, merged by `tools/proto_names.py` into `disasm/sym_names_proto.csv`: 218 names (C 166 / I 52 / ? 0). All 131 routine entries of the trace (94 `call` targets, the 32 entries of `JumpTable_00_3822`, the five vectors and the entry) are named; the mgbdis labels `Call_000_xxxx` are gone from the listing.

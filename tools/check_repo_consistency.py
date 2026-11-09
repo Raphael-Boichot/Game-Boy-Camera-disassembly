@@ -9,7 +9,7 @@ What it checks (each line of the report is one check)
   names      sym_names_jp.csv: tags C / I / ?, duplicate names, a name that carries another address than its own (only `_Part<addr>` / `_Cont` may),
              a `Map_*` label on a `Gfx` type row (and `Gfx_*` on a `Map` row; the type rows are applied in order, the last row wins, as in sym_build.py)
   maps       the layout maps of the Gold, Hello Kitty and prototype ROMs exist and the README shows them; with --rom-gold / --rom-kitty / --rom-proto they are redrawn and compared
-  trees      the screen trees of the Japanese, international and Hello Kitty ROMs (tools/make_screen_trees.py) are redrawn and compared, and README.md shows them; the reachability maps are shown in the README of their ROM folder, not in README.md
+  trees      the screen trees of the Japanese, international, Hello Kitty and prototype ROMs (tools/make_screen_trees.py) are redrawn and compared, and README.md shows them; the reachability maps are shown in the README of their ROM folder, not in README.md
   proto      roms/prototype_debagame (--rom-proto, the image as dumped): the symbol-table CSV, trace, types, copy sites, byte classes, names and
              pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
              and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: port/observed_proto.md equals a fresh
@@ -272,7 +272,7 @@ _tt = tempfile.mkdtemp()
 _r = subprocess.run([sys.executable, 'tools/make_screen_trees.py', '--out-dir', _tt], capture_output=True, text=True, cwd=ROOT)
 if _r.returncode: bad('trees', 'tools/make_screen_trees.py failed: %s' % (_r.stderr or _r.stdout)[-300:])
 else:
-    for _d, _s in (('jp_rev_a', 'jp'), ('us_eu', 'us'), ('hello_kitty', 'kitty')):
+    for _d, _s in (('jp_rev_a', 'jp'), ('us_eu', 'us'), ('hello_kitty', 'kitty'), ('prototype_debagame', 'proto')):
         _png = 'roms/%s/%s_screen_tree.png' % (_d, _s)
         if _png not in _main: bad('trees', 'README.md does not show %s' % _png)
         if not same_png(os.path.join(_tt, '%s_screen_tree.png' % _s), os.path.join(ROOT, _png)): bad('trees', '%s is not what tools/make_screen_trees.py draws today: rerun it' % _png)
