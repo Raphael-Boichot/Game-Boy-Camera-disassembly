@@ -63,3 +63,6 @@ bank,addr,name,conf,note,source
 04,4300,Zoom_TableA,I,"256-byte table (0 for n < $10, then 3, 12 ... by ranges), read by ImageCopy_Mode06 with BitDouble_Table in the L2 runs; role not decoded",hand
 04,4400,BitDouble_Table,C,"256-byte table that doubles each bit of a nibble ($01 -> $03, $02 -> $0C ...: 4 pixels -> 8), read by ImageCopy_Mode06 in the L2 runs (a 2x zoom: I)",hand
 04,4500,HalfBits_Table,I,"256-byte table keeping every other bit (00 00 01 01 00 00 01 01 02 02 03 03 ...), read by ImageCopy_Mode08 in the L2 runs (a reduction: I)",hand
+00,0150,RESET,C,"the boot code: Entry (00:0100), rst $00, rst $08 and the A+B+Select+Start reset (00:01C7) jump here; RESET at $0150 in both old symbol tables (the Japanese ROM calls its own Boot_ColdStart)",hand
+00,2AC0,ImageCopy_Common2AC0,C,shared tail of the image-copy modes 9-12 (each sets DE and jumps here: jp $2AC0),hand
+00,2C4B,ImageCopy_Common2C4B,C,shared tail of the image-copy modes 17 and 18 (each sets DE and jumps here: jp $2C4B),hand

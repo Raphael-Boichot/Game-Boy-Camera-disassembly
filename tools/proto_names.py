@@ -6,9 +6,16 @@
 Layers, lowest first (a later layer replaces the name at the same address; a name `-` deletes):
   1. auto   disasm/sym_names_proto_auto.csv (tools/proto_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, tag C
   2. assets the banked labels of the two leftover symbol tables (disasm/leftover_symtab_proto.csv, kind label, value $4000-$7FFF,
-            byte2 = the bank): all 31 have the same bank and address in both tables. Tag C when this build copies a typed block that
-            starts there (layer 1 holds a name at that address; the old kind is kept in the note), I otherwise (an asset of the old
-            builds that this build neither copies nor reads in the L2 runs).
+            byte2 = the bank): all 31 have the same bank and address in both tables. Named as the Japanese ROM names its assets, the
+            developers' name as suffix (owner, 2026-11-09): Gfx_BB_AAAA_NAME / Map_BB_AAAA_NAME, tag C, when this build copies a typed
+            block that starts there (layer 1 holds Gfx_ / Map_ at that address); Data_BB_AAAA_NAME, tag I, otherwise (an asset of the
+            old builds that this build neither copies nor reads in the L2 runs: kind not settled).
+  5. gaps   after the layers: Data_BB_AAAA, tag C, at the start of every run of bytes that no type row, traced instruction or inline
+            table covers and that is not padding (16+ equal $00 / $FF), when no name stands there: the Japanese convention for a block
+            whose kind is not settled, so that the label before it does not claim it (tcrf_check/tools/rom_layout_map.py: Data_ = UNCERTAIN);
+            only where the label before it in the bank is not already such a gap label (padding between two gaps needs no new label).
+  6. parts  <routine>_Part<AAAA>, tag C, at the first traced instruction after a non-code label (a gap label on a never-traced byte
+            inside a routine): the code keeps its routine's name and colour.
   3. port   disasm/match_old_proto.csv (tools/proto_match_old.py): the developers' name of an old-build routine whose code is found
             at exactly one place of this build (operands masked). A name found at several addresses (one per table) keeps the
             address with the longer pattern; an address given several names keeps the name both tables give, else the one with the
@@ -25,6 +32,7 @@ ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=
 ap.add_argument('--auto', default=D + 'disasm/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
 ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--trace', default=D + 'port/trace_proto.json')
 ap.add_argument('--hand', default=D + 'disasm/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
+ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
 a = ap.parse_args()
 names = {}
@@ -38,9 +46,10 @@ lab = collections.defaultdict(set)
 for r in csv.DictReader(open(a.symtab)):
     if r['kind'] == 'label' and r['space'] == 'ROMX': lab[(r['name'], int(r['byte2']), int(r['value'], 16))].add(r['table'])
 for (nm, b, v), tabs in sorted(lab.items(), key=lambda k: (k[0][1], k[0][2])):
-    old = names.get((b, v))
-    if old: put(b, v, nm, 'C', '%s in both old symbol tables (same bank and address); this build copies a block here (%s)' % (nm, old[0]), 'symtab_asset')
-    else: put(b, v, nm, 'I', '%s in %s old symbol table%s at this bank and address; this build neither copies nor reads it (L2 runs)' % (
+    old = names.get((b, v))     # Japanese naming (owner, 2026-11-09): the block's kind prefix and own address, the developers' name as suffix
+    if old and re.match(r'(Gfx|Map)_[0-9A-F]{2}_[0-9A-F]{4}$', old[0]):
+        put(b, v, '%s_%s' % (old[0], nm), 'C', '%s in both old symbol tables (same bank and address); this build copies the block here: %s' % (nm, old[2]), 'symtab_asset')
+    else: put(b, v, 'Data_%02X_%04X_%s' % (b, v, nm), 'I', '%s in %s old symbol table%s at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled' % (
         nm, 'both' if len(tabs) == 2 else 'one', 's' if len(tabs) == 2 else ''), 'symtab_asset')
 # 3. port from the old builds
 rows = [r for r in csv.DictReader(open(a.match)) if r['hits'] == '1']
@@ -68,6 +77,52 @@ for ad, rs in sorted(byaddr.items()):
     put(0, int(ad, 16), nm, conf, note, 'port_old')
 # 4. hand
 for r in csv.DictReader(open(a.hand)): put(int(r['bank'], 16), int(r['addr'], 16), r['name'], r['conf'], r['note'], r['source'])
+# 5. gaps: unidentified bytes get a Data_ label at their start
+ROMB = open(a.rom, 'rb').read(); TR = json.load(open(a.trace))
+cov_ = bytearray(len(ROMB))
+for k, n in TR['code'].items():
+    o = int(k[3:], 16) if k.startswith('00:') else int(k[:2], 16) * 0x4000 + int(k[3:], 16) - 0x4000
+    for i in range(n): cov_[o + i] = 1
+for k in TR['inline']:
+    o = int(k[3:], 16) if k.startswith('00:') else int(k[:2], 16) * 0x4000 + int(k[3:], 16) - 0x4000
+    cov_[o] = 1
+for r in csv.DictReader(open(a.types)):
+    b = int(r['bank'], 16); s0, e0 = int(r['start'], 16), int(r['end'], 16)
+    for ad in range(s0, e0): cov_[ad if b == 0 else b * 0x4000 + ad - 0x4000] = 1
+i = 0
+while i < len(ROMB):                                   # padding: 16+ equal $00 / $FF
+    j = i
+    while j < len(ROMB) and ROMB[j] == ROMB[i] and (j - i) < 0x4000 and (j >> 14) == (i >> 14): j += 1
+    if ROMB[i] in (0, 0xFF) and j - i >= 16:
+        for k in range(i, j): cov_[k] = 1
+    i = j
+import bisect
+ngap = 0
+byb = collections.defaultdict(list)
+for (b, ad) in names: byb[b].append(ad)
+for b in byb: byb[b].sort()
+for o in range(len(ROMB)):
+    if not cov_[o] and (o == 0 or cov_[o - 1] or (o & 0x3FFF) == 0):
+        b = o >> 14; ad = o if b == 0 else 0x4000 + (o & 0x3FFF)
+        if (b, ad) in names: continue
+        lst = byb[b]; i_ = bisect.bisect_right(lst, ad) - 1
+        if i_ < 0 or names[(b, lst[i_])][3] == 'gap': continue      # nothing before it in the bank, or a gap label already owns it
+        put(b, ad, 'Data_%02X_%04X' % (b, ad), 'C', 'start of bytes that nothing identifies yet (no type row, trace or name): kind not settled', 'gap'); ngap += 1
+        bisect.insort(lst, ad)
+# 6. code after a data label: a <routine>_Part<AAAA> label (the Japanese convention for a piece of a parent block) at the first traced
+#    instruction that a non-code label would own, so that the code keeps the name and the colour of its routine
+codeat = set()
+for k in TR['code']: codeat.add((int(k[:2], 16) if not k.startswith('00:') else 0, int(k[3:], 16)))
+npart = 0
+for b in sorted(byb):
+    lst = sorted(ad for (bb, ad) in names if bb == b); prevcode = None; owner = None
+    for ad in sorted(set(lst) | {ad for (bb, ad) in codeat if bb == b}):
+        if (b, ad) in names:
+            owner = (b, ad)
+            if (b, ad) in codeat: prevcode = names[(b, ad)][0]
+        elif (b, ad) in codeat and owner is not None and owner not in codeat and prevcode:
+            base = re.sub(r'_Part[0-9A-F]{4}$', '', prevcode)
+            put(b, ad, '%s_Part%04X' % (base, ad), 'C', 'continuation of %s after a data label or a never-traced byte' % base, 'part'); owner = (b, ad); prevcode = names[(b, ad)][0]; npart += 1
 # checks
 LABEL = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
 seen = {}

@@ -9,6 +9,7 @@ All outputs are generated (never edit them; hand rows go in disasm/sym_types_pro
   copy_sites_proto.csv  every traced call of a copy routine with the constants found on the straight line before it
                         (bank, source, destination, length; '' = not a constant), the routine and the kind of destination
   sym_types_proto.csv   bank,start,end,type,width,note rows, in this order (a later row wins in sym_build.py):
+     0. data   the cartridge header 00:0104-014F (no label: it belongs to Entry, as in the Japanese ROM)
      1. text   runs of 32 or more bytes that are printable ASCII (with tab, CR, LF) or Shift-JIS pairs (lead $81-$9F / $E0-$EF, trail
                $40-$7E / $80-$FC), lie outside the code, tables and copy sources, hold at least one CR LF line end and at least 8
                distinct byte values: the developers' leftover text (source lines, assembler listings). Typed by the bytes only.
@@ -20,8 +21,9 @@ All outputs are generated (never edit them; hand rows go in disasm/sym_types_pro
      5. data   the OAM DMA stub 00:0317-0320, copied to HRAM $FFB6 at boot by 00:01A1 (it runs from HRAM, never from ROM).
      6. copy sources with a constant bank, source and length: 2bpp tiles (`data,16`, note `Gfx: ...`) when the destination is
         $8000-$97FF, tile-map rows (`data,32`, note `Map: ...`) when it is $9800-$9FFF, plain `data` otherwise.
-  --names    one label per typed block of kinds 4-6, named by kind and address (JumpTable_BB_AAAA, Gfx_BB_AAAA, Map_BB_AAAA, Data_BB_AAAA),
-             tag C: the kind is what the traced code does with the bytes; no meaning yet (L3). The OAM stub is Data_00_0317.
+  --names    one label per typed block, with the Japanese ROM's prefixes (owner, 2026-11-09): Text_BB_AAAA (kind 1), OldSymbolTable_BB_AAAA (2),
+             BankNumber_BB_4000 / _7FFF (3), JumpTable_BB_AAAA (4), Data_00_0317 (5), Gfx_BB_AAAA / Map_BB_AAAA / Data_BB_AAAA (6); tag C:
+             the kind is what the bytes are or what the traced code does with them. tools/proto_names.py adds the developers' names as suffixes.
   --rommap   the byte classes of the trace (bank,start,length,class: C code, T inline table, R the rest) for tools/status_maps.py.
 Copy routines (bank 0, read in the listing 2026-11-08):
   $02B9  HL = source, DE = destination, BC = byte count, in the bank mapped at the call (`ld a,[hl+]; ld [de],a; inc de; dec bc`)
@@ -115,6 +117,8 @@ rows = []; names = []
 def add(b, s, e, typ, width, note):
     if e > s: rows.append(['%02X' % b, '%04X' % s, '%04X' % e, typ, '' if width is None else str(width), note])
 
+# 0. the cartridge header (Nintendo logo, title, codes, checksums), read by the boot ROM and never by the program
+add(0, 0x0104, 0x0150, 'data', None, 'cartridge header: Nintendo logo, title, codes, checksums (as dumped: MBC1, 256 KB, no RAM, global checksum 0)')
 # 1. leftover text
 def textlen(i):
     """length of the text unit at file offset i (1 ASCII, 2 Shift-JIS pair), 0 if not text"""
@@ -133,6 +137,8 @@ for b in range(64):
             j += L
         if j - i >= 32 and b'\r\n' in ROM[i:j] and len(set(ROM[i:j])) >= 8:
             s_ = lo + (i - off(b, lo)); add(b, s_, s_ + (j - i), 'text', None, 'leftover text (ASCII / Shift-JIS bytes, not read by the traced code)'); ntext += j - i
+            t0 = s_ + 1 if (s_ == 0x4000 and b and byte(b, 0x4000) == b and byte(b, 0x7FFF) == b) else s_     # the bank-number byte wins (row 3)
+            names.append([b, t0, 'Text_%02X_%04X' % (b, t0), 'C', 'leftover text block, %d bytes (typed .text by its bytes: not read by the traced code)' % (s_ + (j - i) - t0)])
         i = j + 1 if j == i else j
 
 # 2. the leftover symbol tables
@@ -142,12 +148,14 @@ for r in csv.DictReader(open(a.symtab)):
 for t, recs in sorted(tabs.items()):
     s_, e_ = min(x[0] for x in recs), max(x[1] for x in recs); b = s_ >> 14
     add(b, 0x4000 + (s_ & 0x3FFF), 0x4000 + (e_ - 1 & 0x3FFF) + 1, 'data', None, 'leftover linker symbol table of an older build, %d records (disasm/leftover_symtab_proto.csv)' % len(recs))
+    names.append([b, 0x4000 + (s_ & 0x3FFF), 'OldSymbolTable_%02X_%04X' % (b, 0x4000 + (s_ & 0x3FFF)), 'C', 'binary symbol table of an older build, %d records (tools/proto_symtab.py)' % len(recs)])
 
 # 3. bank-number bytes read by the ROM self-test
 nself = 0
 for b in range(1, 64):
     if byte(b, 0x4000) == b and byte(b, 0x7FFF) == b:
-        add(b, 0x4000, 0x4001, 'data', None, 'bank number, compared by the ROM self-test 00:06F5'); add(b, 0x7FFF, 0x8000, 'data', None, 'bank number, compared by the ROM self-test 00:06F5'); nself += 1
+        add(b, 0x4000, 0x4001, 'data', None, 'bank number, compared by the ROM self-test 00:06F5'); add(b, 0x7FFF, 0x8000, 'data', None, 'bank number, compared by the ROM self-test 00:06F5')
+        names.append([b, 0x4000, 'BankNumber_%02X_4000' % b, 'C', 'the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)']); names.append([b, 0x7FFF, 'BankNumber_%02X_7FFF' % b, 'C', 'the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)']); nself += 1
 
 # 4. word tables of the trace
 for tk, recs in sorted(T['tables'].items()):

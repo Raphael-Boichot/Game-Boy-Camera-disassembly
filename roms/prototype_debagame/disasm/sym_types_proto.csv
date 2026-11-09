@@ -1,4 +1,5 @@
 bank,start,end,type,width,note
+00,0104,0150,data,,"cartridge header: Nintendo logo, title, codes, checksums (as dumped: MBC1, 256 KB, no RAM, global checksum 0)"
 0C,4001,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 0C,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 0D,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"

@@ -13,7 +13,8 @@ What it checks (each line of the report is one check)
   proto      roms/prototype_debagame (--rom-proto, the image as dumped): the symbol-table CSV, trace, types, copy sites, byte classes, names and
              pocketcamera_proto.sym equal a fresh run of tools/proto_{symtab,trace,types}.py + sym_build.py, the counts its README quotes match,
              and with --roundtrip the .sym rebuilds md5 19b50a5f... linked without rgbfix; L2: port/observed_proto.md equals a fresh
-             tools/proto_observed.py run on port/cov_proto_runs.npz, and the run / BGB-replay counts its README quotes match; L3: the
+             tools/proto_observed.py run on port/cov_proto_runs.npz, the coverage map proto_rom_reachability_map.png equals a fresh
+             tools/proto_reach_map.py drawing, and the run / BGB-replay counts its README quotes match; L3: the
              old-build matches, the merged names and the doubts list equal a fresh tools/proto_{match_old,names}.py run, every
              routine entry is named, and the README's name count matches
   port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
@@ -428,7 +429,7 @@ if A.rom_proto:
                '--names', j('na.csv'), '--symtab', j('st.csv')) if not p1.returncode else p1
     p2b = _runp('tools/proto_match_old.py', A.rom_proto, j('st.csv'), j('t.json'), j('mo.csv')) if not p2.returncode else p2      # L3
     p2c = _runp('tools/proto_names.py', '--auto', j('na.csv'), '--match', j('mo.csv'), '--symtab', j('st.csv'), '--trace', j('t.json'),
-                '--rom', A.rom_proto, '--out', j('nm.csv'), '--doubts', j('dq.md')) if not p2b.returncode else p2b
+                '--types', j('ty.csv'), '--rom', A.rom_proto, '--out', j('nm.csv'), '--doubts', j('dq.md')) if not p2b.returncode else p2b
     if p2c.returncode: p2 = p2c
     p3 = _runp('tools/sym_build.py', A.rom_proto, '--names', j('nm.csv'), '--types', j('ty.csv'), '--trace', j('t.json'),
                '--out', j('p.sym'), '--report') if not p2.returncode else p2
@@ -467,6 +468,11 @@ if A.rom_proto:
         else:
             if open(PD + 'port/observed_proto.md', 'rb').read() != open(j('ob.md'), 'rb').read(): bad('proto', 'port/observed_proto.md is not what tools/proto_observed.py writes today')
             else: ok('proto', 'observed_proto.md fresh')
+            p5 = _runp('tools/proto_reach_map.py', A.rom_proto, j('reach.png'))      # the coverage map, shown in roms/prototype_debagame/README.md
+            if p5.returncode: bad('proto', 'tools/proto_reach_map.py failed: %s' % (p5.stderr or p5.stdout)[-300:])
+            elif not same_png(j('reach.png'), PD + 'proto_rom_reachability_map.png'): bad('proto', 'proto_rom_reachability_map.png is not what tools/proto_reach_map.py draws today: rerun it')
+            elif '](proto_rom_reachability_map.png)' not in PR: bad('proto', 'roms/prototype_debagame/README.md does not show proto_rom_reachability_map.png')
+            else: ok('proto', 'proto_rom_reachability_map.png fresh and shown')
             mo = re.search(r'proto_observed: (\d+) of (\d+) instructions ran, (\d+) of (\d+) code bytes, (\d+) executed bytes outside the trace', p4.stdout)
             bg = list(csv.DictReader(open(PD + 'port/bgb_game_seq_proto.csv')))
             for what, val, pat in (('instructions run', int(mo.group(1)), r'([\d,]+) of the [\d,]+ traced instructions ran'),
