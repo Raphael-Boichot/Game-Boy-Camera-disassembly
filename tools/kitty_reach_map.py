@@ -6,9 +6,10 @@
 Same drawing as the Japanese tcrf_check/tools/rom_reach_map.py (8 banks per row, each bank 16 x 64 tiles, the shade inside a colour is the
 tile pixel), with the categories this ROM has evidence for so far:
   blue    executed or read in a run: the core runs (roms/hello_kitty/port/cov_kitty_runs.npz, exec or dread) or the BGB watchpoint
-          runs (port/cov_kitty_bgb.npz, exec)
+          runs (port/cov_kitty_bgb.npz, exec), the blocks that the BGB watchpoint runs of step 7 executed (port/wp_exec_kitty.npz)
   RED     proven code (class C of port/rom_map_kitty.csv, the trace) that no run executed
-  PURPLE  executed or read only in the forced runs of port/forced_kitty.npz (tools/kitty_core_paths.py: ModeTable slot $01 patched)
+  PURPLE  executed or read only in the forced runs of port/forced_*.npz (kitty_core_paths.py: ModeTable slot $01 patched;
+          kitty_force_gates.py: one sensor-bank gate inverted; kitty_force_effects.py: every picture effect)
   ORANGE  data never read but explained by a type row of disasm/sym_types_kitty.csv (a loader site, a table length) or an inline
           table of the trace (class T)
   GREY-BLUE data never read and explained by nothing yet (still on the default typing)
@@ -17,6 +18,7 @@ A 2-byte tile row takes the worst category of its two bytes (red > grey-blue > o
 Prints one line `kitty_reach: ...` with the byte counts that roms/hello_kitty/README.md quotes (the checker compares both).
 """
 import sys, os, csv
+import glob
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); KD = os.path.join(REPO, 'roms', 'hello_kitty')
@@ -24,9 +26,12 @@ ROM = sys.argv[1]; OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(KD, 
 rom = np.frombuffer(open(ROM, 'rb').read(), np.uint8); N = len(rom)
 def off(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
 z = np.load(os.path.join(KD, 'port', 'cov_kitty_runs.npz')); zb = np.load(os.path.join(KD, 'port', 'cov_kitty_bgb.npz'))
-zp = np.load(os.path.join(KD, 'port', 'cov_kitty_paths.npz')); zf = np.load(os.path.join(KD, 'port', 'forced_kitty.npz'))
-ex = (z['exec'] > 0) | (zb['exec'] > 0) | (zp['exec'] > 0); rd = (z['dread'] > 0) | (zb['dread'] > 0) | (zp['dread'] > 0); hit = ex | rd
-forced = ((zf['exec'] > 0) | (zf['dread'] > 0)) & ~hit                # reached only with a patched ModeTable (tools/kitty_core_paths.py)
+zp = np.load(os.path.join(KD, 'port', 'cov_kitty_paths.npz')); zw = np.load(os.path.join(KD, 'port', 'wp_exec_kitty.npz'))
+ex = (z['exec'] > 0) | (zb['exec'] > 0) | (zp['exec'] > 0) | (zw['exec'] > 0); rd = (z['dread'] > 0) | (zb['dread'] > 0) | (zp['dread'] > 0); hit = ex | rd
+forced = np.zeros(N, bool)   # reached only in forced runs: patched ModeTable (kitty_core_paths.py), inverted gates, forced effects (step 7)
+for f in sorted(glob.glob(os.path.join(KD, 'port', 'forced_*.npz'))):
+    zf = np.load(f); forced |= (zf['exec'][:N] > 0) | (zf['dread'][:N] > 0)
+forced &= ~hit
 code = np.zeros(N, bool); tab = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(KD, 'port', 'rom_map_kitty.csv'))):
     o = off(int(r['bank'], 16), int(r['start'], 16)); n = int(r['length'])

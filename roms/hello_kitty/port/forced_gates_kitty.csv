@@ -1,0 +1,22 @@
+site,routine,branch,first_red,site_ran,red_bytes_run,end
+04:4D43,Cam_LoadRegisterSet,jp z,04:4D46,yes,262,02:01
+04:4ADD,Cam_PopcountLevel,jp nz,04:4B2C,no,0,02:01
+04:4ACE,Cam_PopcountLevel,jp z,04:4C35,no,0,02:01
+04:50AD,Cam_CalibVector_VerifyChecksum,jr nz,04:50AF,yes,6,02:01
+04:58D2,Cam_ThresholdConverge,jp z,04:58D5,no,0,02:01
+04:50C1,Cam_CalibVector_VerifyChecksum,jr z,04:50C3,yes,76,02:01
+04:4BB0,Cam_MainDispatch_Band2,jr nc,04:4BF7,yes,78,02:01
+04:4BB8,Cam_MainDispatch_Band2,jp nc,04:4BBB,yes,82,02:01
+04:4AD3,Cam_PopcountLevel,jp z,04:4CB2,no,0,02:01
+04:4AE4,Cam_PopcountLevel,jp c,04:4AF8,no,0,02:01
+04:4D3E,Cam_LoadRegisterSet,jp z,04:4E4C,yes,27,02:01
+04:5337,Cam_ExposureBandSelect,jr nz,04:5339,yes,24,02:01
+04:5353,Cam_ExposureBandSelect,jr nz,04:5355,yes,24,02:01
+04:536F,Cam_ExposureBandSelect,jr nz,04:5371,yes,24,02:01
+04:4FF6,Cam_CalibSanityCheck_Measure,jr c,04:4FF8,no,0,02:01
+04:5075,Cam_CalibVector_VerifyChecksum,jr nz,04:5077,yes,6,02:01
+04:4FBF,Cam_CalibSanityCheck_Measure,jr c,04:4FC1,no,0,02:01
+04:4FDB,Cam_CalibSanityCheck_Measure,jr c,04:4FDD,no,0,02:01
+04:4A94,Cam_PopcountLevel,jr c,04:4A98,yes,142,02:01
+04:4D18,Cam_LoadRegisterSet,jr nz,04:4D1A,yes,5,02:01
+04:4A70,Cam_PopcountLevel,jr nc,04:4A72,yes,1,02:01

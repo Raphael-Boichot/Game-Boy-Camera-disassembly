@@ -375,6 +375,13 @@ if A.rom_kitty:
         if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/sprite_layouts_unread_kitty.csv (need=N layouts (B bytes) are never read in the runs ... a ... b ... c only from code, d by nothing)')
         elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: sprite layouts quoted %s, the table gives %s' % (mm.groups(), want))
         else: ok('kitty', 'never-read sprite layouts quoted as in the table (%d)' % len(_sl))
+        # the never-run code (tools/kitty_red_classes.py, tools/kitty_gates.py): the classes quoted in the Kitty README
+        _rc = list(csv.DictReader(open(KD + 'port/red_classes_kitty.csv', encoding='utf-8'))); _ng = len(list(csv.DictReader(open(KD + 'port/gates_kitty.csv'))))
+        _cl = ['effect', 'gate', 'forced-mode', 'not-run']; want = tuple([sum(int(r['red_bytes']) for r in _rc), _ng] + [sum(int(r[c]) for r in _rc) for c in _cl])
+        mm = re.search(r'never-run code \(.*?\.\*\* ([\d,]+) bytes of the trace never ran.*?lists the (\d+) executed conditional branches.*?\* ([\d,]+) bytes, effect:.*?\* ([\d,]+) bytes, gate:.*?\* ([\d,]+) bytes, forced-mode:.*?\* ([\d,]+) bytes, not-run:', open(KD + 'README.md', encoding='utf-8').read(), re.S)   # need= the never-run paragraph
+        if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes port/red_classes_kitty.csv (need=never-run code (...).** N bytes of the trace never ran ... lists the G executed conditional branches ... * a bytes, effect: ... * b bytes, gate: ... * c bytes, forced-mode: ... * d bytes, not-run:)')
+        elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: never-run code quoted %s, the tables give %s' % (mm.groups(), want))
+        else: ok('kitty', 'never-run code classes quoted as in port/red_classes_kitty.csv (%d bytes)' % want[0])
         # the doubts list (tools/kitty_doubts.py): fresh, and its counts quoted in the Kitty README
         r7 = _run('tools/kitty_doubts.py', '--check')
         if r7.returncode: bad('kitty', 'disasm/sym_unconclusive_kitty.{csv,md}: %s (rerun tools/kitty_doubts.py)' % (r7.stderr or r7.stdout).strip()[-300:])

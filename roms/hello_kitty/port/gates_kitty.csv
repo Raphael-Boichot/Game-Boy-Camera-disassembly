@@ -1,0 +1,183 @@
+site,routine,branch,never_run_way,first_red,red_bytes_opened,test_before
+00:13AA,Link_Irq_Connected,jp z,fall-through,00:13AD,293,a7
+04:4D43,Cam_LoadRegisterSet,jp z,fall-through,04:4D46,262,fe 01
+00:13AA,Link_Irq_Connected,jp z,taken,00:1468,173,a7
+00:2316,Mode1D_RenderBand,jr z,fall-through,00:2318,153,cb 60
+00:1341,Link_Irq_InfoStage,jr z,taken,00:1362,138,e6 80
+06:60BD,Exchange_RequestPage,jr nz,taken,06:60CB,133,a7
+04:4ADD,Cam_PopcountLevel,jp nz,taken,04:4B2C,126,cb 7f
+04:4ACE,Cam_PopcountLevel,jp z,taken,04:4C35,125,fe 08
+00:1348,Link_Irq_InfoStage,jr z,fall-through,00:134A,120,e6 3f
+04:50AD,Cam_CalibVector_VerifyChecksum,jr nz,fall-through,04:50AF,120,b8
+04:58D2,Cam_ThresholdConverge,jp z,fall-through,04:58D5,117,a7
+06:6923,Mode09_State06,jr nz,taken,06:696F,102,a7
+06:6BFC,Mode09_State0F,jr nz,taken,06:6C48,99,a7
+06:6923,Mode09_State06,jr nz,fall-through,06:6925,82,a7
+06:6BFC,Mode09_State0F,jr nz,fall-through,06:6BFE,82,a7
+00:0F18,Prn_SendData,jp z,fall-through,00:0F1B,80,3e f0
+00:1348,Link_Irq_InfoStage,jr z,taken,00:135A,78,e6 3f
+04:50C1,Cam_CalibVector_VerifyChecksum,jr z,fall-through,04:50C3,76,a7
+00:1767,VramQueue_Run,jr nz,taken,00:171C,71,bd
+02:6386,Album_ObjLoadSlot,jr c,taken,02:63A1,71,cd 65 01
+05:6BF5,Data_05_6BE0,jr c,taken,05:6C0A,68,cd 65 01
+05:7377,Data_05_7362,jr c,taken,05:738C,68,cd 65 01
+05:73F1,Mode03_State05,jr c,taken,05:73FD,68,cd 65 01
+07:4A36,Mode12_State03,jr c,taken,07:4A42,68,cd 65 01
+00:060E,Vram_FillSafe,jr z,fall-through,00:0610,64,3d
+05:6037,Data_05_6022,jr c,taken,05:6043,63,cd 65 01
+05:704C,Data_05_701C,jr c,taken,05:7060,63,cd 65 01
+05:7158,Data_05_7128,jr c,taken,05:716C,63,cd 65 01
+04:4BB0,Cam_MainDispatch_Band2,jr nc,taken,04:4BF7,62,19
+04:4BB8,Cam_MainDispatch_Band2,jp nc,fall-through,04:4BBB,60,19
+06:667F,Mode08_State02,jr z,taken,06:6689,58,cb 57
+04:4AD3,Cam_PopcountLevel,jp z,taken,04:4CB2,57,fe 0a
+04:4AE4,Cam_PopcountLevel,jp c,taken,04:4AF8,52,19
+00:15F2,Link_QueueCommand,ret z,fall-through,00:15F3,46,a7
+06:6A63,Mode09_State0A,jr z,fall-through,06:6A65,45,cb 7f
+06:6A63,Mode09_State0A,jr z,taken,06:6A8A,41,cb 7f
+06:6CC5,CardStats_IncDA64,jr z,fall-through,06:6CC7,37,cb 40
+00:0EB2,Prn_SendData,jr z,fall-through,00:0EB4,36,a7
+00:06B1,Vram_CopyHBlank,jr z,taken,00:0706,32,3d
+06:6CC5,CardStats_IncDA64,jr z,taken,06:6CCC,32,cb 40
+06:66D4,Mode08_State05,jr z,fall-through,06:66D6,29,cb 47
+00:1B5D,Frame_UpdateAll,jp z,taken,00:1810,28,fe 0f
+08:6BF5,Sgb_FreezeScreen,jr z,fall-through,08:6BF7,28,a7
+04:4D3E,Cam_LoadRegisterSet,jp z,taken,04:4E4C,27,fe 00
+05:444C,Mode0D_State01,jr nz,fall-through,05:444E,26,a7
+07:6880,KittHost_PayPuzzle,jr c,taken,07:68A9,26,cd 5b 01
+07:6A71,KittHost_PayScratch,jr c,taken,07:6A9A,26,cd 5b 01
+04:5337,Cam_ExposureBandSelect,jr nz,fall-through,04:5339,24,b7
+04:5353,Cam_ExposureBandSelect,jr nz,fall-through,04:5355,24,fe 01
+04:536F,Cam_ExposureBandSelect,jr nz,fall-through,04:5371,24,fe 02
+06:4BDF,IdCard_DrawIdNumber,jr nz,fall-through,06:4BE1,24,a7
+06:62FE,Mode07_State04,jr z,fall-through,06:6300,23,cb 57
+02:715C,PrintGame_ObjFall,jr nc,fall-through,02:715E,22,cd de 70
+05:5045,Data_05_5036,jr z,fall-through,05:5047,22,cb 77
+06:65CA,Mode08_State00,jr nz,fall-through,06:65CC,22,cb 7e
+06:6762,Mode09_State01,jr nz,fall-through,06:6764,22,cb 7e
+06:683B,Mode09_State03,jr nz,fall-through,06:683D,22,cb 7e
+06:69E9,Exchange_InitScreen,jr nz,fall-through,06:69EB,22,cb 7e
+07:65A3,KittHost_TextStep,jp z,taken,07:65C2,21,fe fe
+07:68F3,Mode0E_State09,jr z,taken,07:690C,21,fe 05
+02:73DD,PrintGame_SpeedFromKeys,jr z,fall-through,02:73DF,20,cb 67
+0F:553B,Snd_Trk_FetchOp,jp z,taken,0F:54B0,20,fe 9e
+01:5699,RecordBook_CountHundreds,jr c,taken,01:569F,18,fe 20
+02:77A4,PrintGame_ShowResult,jr nc,fall-through,02:77A6,18,be
+01:6946,Print_SetFrameSide,jr nz,fall-through,01:6948,17,e6 01
+00:06A5,Vram_CopyHBlank,jr z,taken,00:06B4,16,3d
+02:70F0,PrintGame_ObjCheckCatch,jr c,fall-through,02:70F2,16,b8
+06:680D,Mode09_State02,jr z,taken,06:6817,16,cb 47
+00:25AB,Img_ReduceToThumbnail,jr nc,fall-through,00:25AD,15,7e
+00:060B,Vram_FillSafe,jr z,taken,00:061A,14,3d
+02:74BC,PrintGame_ObjKitty,jr z,fall-through,02:74BE,14,cb 47
+04:4FF6,Cam_CalibSanityCheck_Measure,jr c,fall-through,04:4FF8,14,90
+04:5075,Cam_CalibVector_VerifyChecksum,jr nz,fall-through,04:5077,14,b8
+00:0E22,Prn_CheckTxDone,jr z,fall-through,00:0E24,12,cb 67
+06:60BD,Exchange_RequestPage,jr nz,fall-through,06:60BF,12,a7
+0F:558F,Snd_Trk_NoteOn,jr z,fall-through,0F:5591,12,a7
+00:0FC4,Prn_SendInquiry,jr z,fall-through,00:0FC6,11,fe 01
+02:737F,PrintGame_ClampX,jr nc,fall-through,02:7381,11,fe 08
+02:738E,PrintGame_ClampX,jr c,fall-through,02:7390,11,fe 98
+02:73CB,PrintGame_SpeedFromKeys,jr z,fall-through,02:73CD,11,cb 6f
+0F:56A3,Snd_Trk_UpdateChannel,jr z,fall-through,0F:56A5,11,fe 01
+00:2636,Img_ReduceToThumbnail,jr nc,fall-through,00:2638,10,f1
+06:590C,Bcd_DrawDigit,jr nz,fall-through,06:590E,10,b0
+07:5CFD,Puzzle15_FrameCallback2,jr nz,fall-through,07:5CFF,10,cd 5b 01
+07:6BB2,Mode0E_State1E,jr z,taken,07:6BBE,10,e6 07
+00:207C,Object_CreateWithParam,jr nz,fall-through,00:207E,9,05
+00:21E5,Objects_DrawAll,jr z,fall-through,00:21E7,9,cb 46
+02:73EC,PrintGame_SpeedFromKeys,jr z,fall-through,02:73EE,9,cb 78
+04:4FBF,Cam_CalibSanityCheck_Measure,jr c,fall-through,04:4FC1,9,b8
+04:4FDB,Cam_CalibSanityCheck_Measure,jr c,fall-through,04:4FDD,9,b8
+06:606E,Link_SumSlotBuffer,jr nz,fall-through,06:6070,9,23
+0F:5540,Snd_Trk_FetchOp,jp z,taken,0F:54C4,9,fe 9f
+05:4497,Mode0D_State02,jr z,fall-through,05:4499,8,cb 47
+05:4515,Mode0D_State05,jr z,fall-through,05:4517,8,cb 47
+05:4BAE,Mode02_State06,jr nz,fall-through,05:4BB0,8,fe 1e
+05:4EEC,TakePhotos_PlaceFrameObjects,jr z,fall-through,05:4EEE,8,fe ff
+05:4EFC,TakePhotos_PlaceFrameObjects,jr z,fall-through,05:4EFE,8,fe ff
+06:667F,Mode08_State02,jr z,fall-through,06:6681,8,cb 57
+06:680D,Mode09_State02,jr z,fall-through,06:680F,8,cb 47
+06:6CB0,Mode09_State07,jr nz,fall-through,06:6CB2,8,fe f0
+07:43F6,FrameCorner_Draw,jp z,taken,07:4423,8,fe fd
+07:43FB,FrameCorner_Draw,jp z,taken,07:442B,8,fe fe
+07:4400,FrameCorner_Draw,jp z,taken,07:4433,8,fe ff
+07:52B8,Mode11_State0C,jr nz,fall-through,07:52BA,8,fe 1e
+0F:51F4,Snd_Sfx_Start,jr z,taken,0F:5204,8,fe 75
+00:0EF3,Prn_SendData,jp nz,taken,00:0F6B,7,cb 67
+02:74CE,PrintGame_ObjKitty,jr z,fall-through,02:74D0,7,b1
+02:74DC,PrintGame_ObjKitty,jr z,fall-through,02:74DE,7,cb 4f
+07:5277,Data_07_520A,jr c,taken,07:5283,7,cd 5b 01
+07:65AD,KittHost_TextStep,jp z,taken,07:65EE,7,fe fb
+00:036D,Delay_Frames_Busy,jr nz,fall-through,00:036F,6,b3
+02:5EDE,TakePhotos_ObjMoveB,jr nz,fall-through,02:5EE0,6,b4
+02:745F,PrintGame_SaveKittyPos,jr nc,taken,02:746A,6,fe 60
+05:5F6C,Stamp_SetShiftMasks,jr nz,taken,05:5F80,6,e6 40
+05:7228,Mode03_State02,jp z,taken,05:7263,6,fe 1e
+05:758D,Mode03_State11,jp z,taken,05:75AB,6,fe 1e
+07:557B,Puzzle15_IsSolved,jr nz,fall-through,07:557D,6,be
+07:60E3,Data_07_60C9,jr nc,fall-through,07:60E5,6,cd 5b 01
+07:6170,Data_07_6156,jr nc,fall-through,07:6172,6,cd 5b 01
+00:12E2,Link_SerialIrq,jr z,taken,00:1300,5,fe 55
+00:2326,Mode1D_RenderBand,jr z,fall-through,00:2328,5,cb 58
+01:6CCD,Mode06_State04,jr z,fall-through,01:6CCF,5,cb 76
+02:745B,PrintGame_SaveKittyPos,jr c,taken,02:7465,5,d6 50
+04:4A94,Cam_PopcountLevel,jr c,taken,04:4A98,5,19
+04:4D18,Cam_LoadRegisterSet,jr nz,fall-through,04:4D1A,5,b8
+05:6080,Mode05_State01,jr nz,taken,05:60AB,5,cb 4f
+05:6087,Mode05_State01,jr z,taken,05:60AB,5,cb 4f
+05:6472,Text_CopyBigLineVram,jr nz,fall-through,05:6474,5,fe 06
+07:59FC,Mode0F_State02,jr nz,fall-through,07:59FE,5,fe 05
+08:6AD6,Sgb_SendPacket,jr z,fall-through,08:6AD8,5,05
+00:0FD5,Prn_SendInquiry,jr z,fall-through,00:0FD7,4,a7
+00:235A,Mode1D_ReadByteFromBank,jr nz,taken,00:236B,4,cb 7c
+01:5992,ScriptSlots_Add,jr nz,fall-through,01:5994,4,05
+02:6485,Album_ObjFollowDAA6,jr z,fall-through,02:6487,4,be
+02:7113,PrintGame_ClampSpeed,ret c,fall-through,02:7114,4,09
+06:6080,Link_CountdownDA00,jr nz,fall-through,06:6082,4,fe ff
+07:49AA,Data_07_4994,jr c,taken,07:49BC,4,cd 65 01
+07:5E82,Scratch_HasPrize3,jr z,taken,07:5E8B,4,fe 03
+07:5F09,Scratch_PrizeTable,jr nz,taken,07:5F0F,4,a7
+07:5F17,Scratch_PrizeTableB,jr nz,taken,07:5F0F,4,a7
+07:6287,Mode10_State04,jr nz,fall-through,07:6289,4,fe 01
+00:0418,Rng_Init,jr c,fall-through,00:041A,3,ba
+00:20E3,Object_RunAll,jr z,fall-through,00:20E5,3,a7
+01:56B7,RecordBook_CountTens,jp z,fall-through,01:56BA,3,e6 0f
+01:6978,Data_01_696C,jr nz,fall-through,01:697A,3,e6 01
+01:7244,Data_01_7233,jr z,fall-through,01:7246,3,a7
+01:72A1,Data_01_7290,jr z,taken,01:72AF,3,a7
+02:713E,PrintGame_ObjFall,jr nc,taken,02:7153,3,fe 03
+05:662D,Data_05_6621,jr nz,fall-through,05:662F,3,e6 01
+06:4E37,NameCardEdit_FieldAction,jp z,fall-through,06:4E3A,3,fe 04
+06:4E4B,NameCardEdit_FieldAction,jr z,fall-through,06:4E4D,3,fe 02
+06:6080,Link_CountdownDA00,jr nz,taken,06:6083,3,fe ff
+08:6BF5,Sgb_FreezeScreen,jr z,taken,08:6C10,3,a7
+00:0E1A,Prn_CheckTxDone,jr nz,taken,00:0E30,2,cb 47
+00:0E1E,Prn_CheckTxDone,jr nz,taken,00:0E30,2,cb 4f
+00:15D6,Link_SendHello29,jr z,fall-through,00:15D8,2,a7
+00:1650,Link_UpdateInfoByte,jr z,fall-through,00:1652,2,a7
+02:5342,Puzzle15_ShuffleCheckDir,jr nz,fall-through,02:5344,2,cb 7f
+05:4F9A,Data_05_4F65,jr nz,fall-through,05:4F9C,2,fe ff
+05:4FD2,Data_05_4F65,jr nz,fall-through,05:4FD4,2,fe 14
+05:6E67,Photo_DrawNumber,jr nz,fall-through,05:6E69,2,fe 31
+06:4D63,IdCard_DrawBirthdayDigit,jr nz,fall-through,06:4D65,2,fe ff
+06:4E00,IdCard_DrawSexToPrintBuf,jr nz,fall-through,06:4E02,2,fe ff
+0F:51F8,Snd_Sfx_Start,jr z,fall-through,0F:51FA,2,fe 7d
+00:02AE,Copy_Unrolled,jr nz,fall-through,00:02B0,1,0d
+00:0CA2,Bin_ToBcd,jr nc,taken,00:0C9F,1,d6 64
+02:6CD2,Stamp_ObjStep0B,jr nz,taken,02:6CDA,1,fe 00
+02:73FD,PrintGame_SpeedFromKeys,jr nc,fall-through,02:73FF,1,44
+04:4A70,Cam_PopcountLevel,jr nc,fall-through,04:4A72,1,4f
+05:42C2,Mode00_State07,jp nz,taken,05:4357,1,a7
+05:567E,Stamp_ArrangeGfx,jr nc,fall-through,05:5680,1,5f
+05:56C9,Stamp_ArrangeMaskInverted,jr nc,fall-through,05:56CB,1,5f
+05:6301,AlbumText_CursorUpdate,jr z,fall-through,05:6303,1,fe 0d
+05:64E4,Digits_LowNibbleTileAddr,jr nz,fall-through,05:64E6,1,fe b0
+05:64FF,Digits_HighNibbleTileAddr,jr nz,fall-through,05:6501,1,fe b0
+06:494F,NameCardEdit_PhotoCursorUpdate,jr z,fall-through,06:4951,1,fe 30
+06:537B,Mode0B_State05,jr z,fall-through,06:537D,1,fe 02
+06:62FE,Mode07_State04,jr z,taken,06:6317,1,cb 57
+06:66D4,Mode08_State05,jr z,taken,06:66F3,1,cb 47
+06:6CB0,Mode09_State07,jr nz,taken,06:6CBA,1,fe f0
+0F:45E8,Sfx1_Step_05,jp z,fall-through,0F:45EB,1,fe 04
+0F:4798,Sfx1_Step_06_0D,jr z,fall-through,0F:479A,1,fe 01
