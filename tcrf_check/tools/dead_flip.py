@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Force the UNREACHABLE components (README 16.26): flip the conditional branch that leads into the component and play on.
+"""Force the UNREACHABLE components (docs §16.26): flip the conditional branch that leads into the component and play on.
 
-An UNREACHABLE component is code inside a live routine that a branch could enter but no value of any variable makes it do (README 16.21).  Here the gate is found from the
+An UNREACHABLE component is code inside a live routine that a branch could enter but no value of any variable makes it do (docs §16.21).  Here the gate is found from the
 listing (a `jr / jp / call cc` whose target is the component's first byte, or a conditional branch / `ret cc` right in front of it, so that the component is the fall-through),
 `gb_force_flip` makes the core decide the other way at that ROM offset, and the game is run from each base state (the cheapest corpus entry of every mode) under a few key
 sequences.  Reported per component: whether the gate was executed (flips counted), whether the component ran, and what differs from the unforced control run (WRAM, VRAM with the

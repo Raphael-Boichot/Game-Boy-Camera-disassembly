@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pictures and clips of README 16.26 from the BGB runs of bgb_dead_hook.py: tile sheets of the tile sets that the dead loaders write (the ROM span, and the VRAM that BGB held after the forced call), the map 25:4B00
+"""Pictures and clips of docs §16.26 from the BGB runs of bgb_dead_hook.py: tile sheets of the tile sets that the dead loaders write (the ROM span, and the VRAM that BGB held after the forced call), the map 25:4B00
 drawn over the tile set of every game mode, the contact sheet of the flipped-gate runs, and the sound clips (WAV from BGB -> short MP3, with a padding of 60 ms before and 250 ms after the burst).
 usage: dead_sheets.py ROM BGB_OUT_DIR(out3) SURVEY_DIR FLIP_DIR UIEFFECT_DIR SFX_DIR OUT_DIR"""
 import sys, os, glob, json, subprocess, wave

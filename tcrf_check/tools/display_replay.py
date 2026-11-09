@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay a coverage corpus (JSONL of root specs and key-action nodes, see lib.Corpus) depth-first in the display-tracking core (gbcov_display.c, README 16.24),
+"""Replay a coverage corpus (JSONL of root specs and key-action nodes, see lib.Corpus) depth-first in the display-tracking core (gbcov_display.c, docs §16.24),
 restoring the parent's snapshot for every child, and accumulate which ROM bytes reach the screen (disp, disp_fr, disp_fro), which sound ids are requested / started (snd)
 and the first node that did it.  Nodes marked tainted (state pokes somewhere in the lineage) run with the organic flag off.
 usage: display_replay.py CORPUS.jsonl OUT.npz [maxnodes]          (GBCAM_ROOT = the working root with saves/, saves_unl/ and package/trace/trace_jp.json; build libgbcov_display.so first)"""

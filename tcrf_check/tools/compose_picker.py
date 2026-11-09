@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Core run (joypad only, a used save) of the photo pickers of the two-photo COMPOSE layout: 06:523B, 06:5276, 06:5769 (README 16.19; the BGB replay is bgb_compose.py).
+"""Core run (joypad only, a used save) of the photo pickers of the two-photo COMPOSE layout: 06:523B, 06:5276, 06:5769 (docs §16.19; the BGB replay is bgb_compose.py).
 usage: compose_picker.py OUTDIR [ENTRY]      (run from the working root; ENTRY = corpus entry in 17:0A, default 610 = save unl_PC10696894)
 The picker changes the photo only while A is held: hold A (17:0A -> 17:0B), then A+Up (+1), A+Down, A+Down (wrap to the last), A+Up (wrap to 0); release A; Right; hold A (17:0C), A+Up; release.
 --tap  the control: tap A (4 frames) and every single key in the picker: nothing changes (the picker is left as soon as A is released).

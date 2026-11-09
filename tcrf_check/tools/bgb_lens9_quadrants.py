@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BGB: Trick Lens 9 (D7E3 = $0B) shows four half-size pictures, one per quadrant (README 18.12).
+"""BGB: Trick Lens 9 (D7E3 = $0B) shows four half-size pictures, one per quadrant (docs §18.12).
 usage: bgb_lens9_quadrants.py OUTDIR      (env GBCAM_ROM / GBCAM_SAV as in bgb_dither_variants.py)
 The plain shot's `Mode15_State00_ReturnToShoot` (06:4000, `xor a ; ld [$D7E3],a`) is patched to `ld a,$0B ; ld [$D7E3],a` (the later `ld a,0 ; ld [$D5CF],a` becomes `xor a ; ld [$D5CF],a` to keep the length; the rest of the ROM is untouched) so that the plain SHOOT item starts the live view with D7E3 = $0B.  Then A is pressed 0-3 times: in the live view of $0B / $0F / $15 an A press below the last phase only steps `$D7E4` (06:71E4), the last one takes the shot.
 Dither: the default of mode $14 for $0B is $D59C = 2 (ramp B); the copy `ramp_A` patches that default to 1, `flat` to 0.

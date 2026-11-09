@@ -2,15 +2,15 @@
 """Seam search for a de-duplicated tile map over EVERY BYTE OFFSET of the ROM, in four layouts that tile_seam_search.py does not try.
 tile_seam_search.py only looks at 16-aligned offsets and puts tile id i at S + 16 (i - LO).  This tool also takes
   asc   tile id v at S + t (v - LO)            (t = 16 bytes for 2bpp, 8 for 1bpp; S may be ANY byte offset, assets such as 1A:5182 start at odd addresses)
-  desc  tile id v at S + t (HI - v)            (ids numbered in descending raster order, README 16.25.2)
+  desc  tile id v at S + t (HI - v)            (ids numbered in descending raster order, docs §16.25.2)
   rot   tile id v at S + t ((v - $80) & $FF)   (the $8800 signed-id addressing of the LCDC tile-data bit: ids 80-FF first, then 00-7F; 2bpp, whole map only)
 For each variant the score of an offset is the sum of absolute pixel differences over the seams of the map (right column of a cell against the left column of its
 right neighbour, bottom row against the top row of the cell below; every distinct pair of ids once) divided by 8 x the number of seams.  An offset only counts when
 >= 97 % of the used tiles are different from each other (a de-duplicated set has no repeated tile; flat or constant data would score 0 otherwise).  The control shuffles
-the ids of the map (5 seeds) and takes the best score under the same filter: a true set must be far below it.  Reference (README 16.25.2): the true blocks of the two
+the ids of the map (5 seeds) and takes the best score under the same filter: a true set must be far below it.  Reference (docs §16.25.2): the true blocks of the two
 known maps give a ratio best/control of 0.33-0.37 with tile_seam_search.py.
 usage:  tile_seam_offsets.py ROM BANK:ADDR --ids LO-HI [--desc | --rot] [--bpp 1|2] [--shuffle N] [--top K] [--sym FILE.sym]
-        tile_seam_offsets.py ROM BANK:ADDR --all OUT.csv        (the 13 variants of README 16.25.2, one CSV row each, 3-5 minutes)
+        tile_seam_offsets.py ROM BANK:ADDR --all OUT.csv        (the 13 variants of docs §16.25.2, one CSV row each, 3-5 minutes)
         tile_seam_offsets.py ROM BANK:ADDR --render OUT.png [d|r]BANK:ADDR[/LO-HI][|label] ...   (draw the map with the tile set at those places, 2x)"""
 import sys, csv
 import numpy as np

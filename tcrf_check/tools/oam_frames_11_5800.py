@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the nine frames of the asset 11:5700 (label Gfx_11_5700_MainMenuIconAnimFrames) as sprites, straight from the ROM.  README 16.24 / checklist B16.
+"""Draw the nine frames of the asset 11:5700 (label Gfx_11_5700_MainMenuIconAnimFrames) as sprites, straight from the ROM.  docs §16.24 / checklist B16.
 
 A frame is 25 tiles (5 x 5 sprites, 40 x 40 px) in a 512-byte slot: slot j sits at 11:5800 + 0x200 * j (j = 0..8, the last one is cut at 11:693F).
 The arrangement is the OAM list $BA of bank 01 (01:5504, entries (Y, X, tile, attr) from bottom-right to top-left, tiles $50..$68, attr $10):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BALL (mode $20, the juggling game "顔ボル") played with the joypad only up to a score above 1,000 (README 16.18).
+"""BALL (mode $20, the juggling game "顔ボル") played with the joypad only up to a score above 1,000 (docs §16.18).
 The player's face stands at one of three places `$D9D7` = 0 / 1 / 2 (Left or B = one place to the left, Right or A = one place to the right, one step per key press); three balls fly between the places
 (phase counters `$D9DB`, `$D9DC`, `$D9DD`, one of them advances at each tick, `$D9E5` = whose turn); the face catches a ball when it stands at the right place at the right phase (+1 point, `$D9E6/7`, packed BCD);
 a ball that is not caught ends the game (state 6).  The ROM contains its own autopilot for this game: state 5 (`05:7859`, a demo) calls `05:7DCC-7E88`, which clears the key variable `$FFA2` and writes a Right (`$10`)

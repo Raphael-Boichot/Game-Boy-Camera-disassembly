@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Runtime check of RAM names in the real BGB: logging watchpoints (read and write) on every range of a watch list, over the cheapest organic replay of each (mode, state) signature.  README 2.13.
+"""Runtime check of RAM names in the real BGB: logging watchpoints (read and write) on every range of a watch list, over the cheapest organic replay of each (mode, state) signature.  docs §2.13.
 
 For each corpus entry the script runs tcrf_check/tools/bgb_wp_probe.py (BGB under wine, headless: one line per watchpoint hit in debugmsg.txt, the run goes on) with a read and a write
 watchpoint on every range of the watch list.  The message of a watchpoint is `R|W<ADDR>_<pc>_<mode>_<state>_<rombank>_<value>_<A>` with BGB's own expressions (`%pc%`, `%(d5ce)%`, `%(d5cf)%`, `%rombank%`),
@@ -9,8 +9,8 @@ The output has one CSV row per distinct (entry, access, range, pc, mode, state, 
 entry that stops right after the boot (the first entry of the list is such a control, 0 key actions) are the baseline: a count above it is an access of the game.
 usage: wram_probe.py OUT.csv WATCH.csv CORPUS [--workers 2] [--entries ID,ID,...] [--chunk 60]
   WATCH.csv   name,addr,size,... (tcrf_check/tools/wram_probe_list.py)
-  CORPUS      corpus.jsonl of the replay search; without --entries the cheapest untainted entry of every (mode, state) signature is replayed (README 16.15)
-Environment: GBCAM_ROOT (working root of README 16.15), GBCAM_ROM; each worker uses its own copy of the BGB folder (BGB_DIR = /home/claude/bgbp_wp_wN)."""
+  CORPUS      corpus.jsonl of the replay search; without --entries the cheapest untainted entry of every (mode, state) signature is replayed (docs §16.15)
+Environment: GBCAM_ROOT (working root of docs §16.15), GBCAM_ROM; each worker uses its own copy of the BGB folder (BGB_DIR = /home/claude/bgbp_wp_wN)."""
 import sys, os, csv, json, subprocess, collections, concurrent.futures as cf, re
 HERE = os.path.dirname(os.path.abspath(__file__))
 args = sys.argv[1:]

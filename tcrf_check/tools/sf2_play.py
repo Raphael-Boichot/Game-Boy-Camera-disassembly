@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Space Fever II played with the joypad only: waves 1-3, boss, rounds 1-7, score above 7,000 (README 16.18).
+"""Space Fever II played with the joypad only: waves 1-3, boss, rounds 1-7, score above 7,000 (docs §16.18).
 usage: sf2_play.py search OUTDIR [GOAL_BCD]   a heuristic bot (aims at the lowest ship with a lead, fires when the three shot slots are free, dodges bullets and ships) plays from the start of the shooter;
                                               when the ship dies the core goes back to an earlier snapshot and the next frames are perturbed with random moves until it survives (the final key log is a plain
                                               joypad sequence; the game is deterministic, a replay of the log gives the same game). GOAL_BCD = score to reach as BCD (default 7000)

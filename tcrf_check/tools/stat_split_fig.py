@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The picture of README 16.2 'The STAT split': one BGB state of a screen with handler 1 drawn three ways at 2x: the tiles through the tile-data bit of the top part only (what you see without the flip), the BGB picture (the flip from line 85),
+"""The picture of docs §16.2 'The STAT split': one BGB state of a screen with handler 1 drawn three ways at 2x: the tiles through the tile-data bit of the top part only (what you see without the flip), the BGB picture (the flip from line 85),
 and the ids of the visible map (rows 0-17, 20 columns) with the cells that read the second window marked.
 usage: stat_split_fig.py STATE.sna BGB.bmp OUT.png [--line 85]"""
 import sys, os

@@ -8,7 +8,7 @@ What it does (the ROM and the save files are never modified; work happens in a t
   * replaces the two sensor-wait loops `cb 46 20 fc` ... (bit 0,[$A000] ; jr nz,-4) of the boot by nops;
   * hooks Cam_Calib_ValidityCheck (bank $0A, $45C9) and enables SRAM reads there (PyBoy returns $FF while RAM is disabled);
   * prints the result of the check (A = 0: a record was accepted, $FF: default vector used), $FF8A and the WRAM vector $D5B5-$D5C0.
-Expected (README section 11.9): a camera with the record at $AFF2 returns 0 and its own vector; a camera with the record 6 bytes
+Expected (docs §11.9): a camera with the record at $AFF2 returns 0 and its own vector; a camera with the record 6 bytes
 lower returns $FF and the fixed default vector 7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A.
 """
 import sys, os, re, shutil, tempfile

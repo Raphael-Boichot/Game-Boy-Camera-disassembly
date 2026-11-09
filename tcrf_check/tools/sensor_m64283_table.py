@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Parse the 'Examples of Image Capture Modes' table (section 13) of the Mitsubishi M64283FP datasheet
-(a DIFFERENT sensor from the M64282FP of the Game Boy Camera; used only as a cross-check, README 18.8).
+(a DIFFERENT sensor from the M64282FP of the Game Boy Camera; used only as a cross-check, docs §18.8).
 
 Usage:  pdftotext -layout M64283FP.pdf m64283.txt ; python3 -I tools/sensor_m64283_table.py m64283.txt [out.csv]
 Columns of the table are the register addresses 000, 001, 010+011 (= C1C0), 100, 101, 110, 111 of M64283FP section 12.3:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Two real BGB instances (Windows exe under wine, headless) joined by the link cable for a RECEIVER-initiated photo exchange (README 14.3: the initiator
+"""Two real BGB instances (Windows exe under wine, headless) joined by the link cable for a RECEIVER-initiated photo exchange (docs §14.3: the initiator
 chooses Right = receive, browses the peer's thumbnails, asks for one photo with A, the responder confirms with A in its dialog; flow 2 of link_protocol).
 The two instances may run different ROMs (Japanese / international: the link screen is not mirrored, only the main menu is), each with its own -wp list.
 

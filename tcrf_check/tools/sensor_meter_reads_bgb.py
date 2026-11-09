@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Check, in BGB, which bytes of the raw frame (RAM bank 0, $A000-$AFFF) the exposure metering Cam_PopcountSampleLoop (0A:4FBD) really reads (README 10-B, 18.3).
+"""Check, in BGB, which bytes of the raw frame (RAM bank 0, $A000-$AFFF) the exposure metering Cam_PopcountSampleLoop (0A:4FBD) really reads (docs §10-B, 18.3).
 A logging read watchpoint on $A000-$AFFF writes PC, DE, ROM bank and RAM bank at every read; the helper at 0A:5091 reads the plane 0 byte at PC 5093 and the plane 1 byte at PC 509E
 (address in DE, BGB stops before the instruction runs), so the log gives the address of every read of the metering, with no executor in between.
 The log of one MainDispatch (the 168 helper calls between two Sum markers) is compared with the address list that sensor_meter_lib.meter_reads() derives from the ROM bytes.
 usage: sensor_meter_reads_bgb.py OUTDIR --sav SAV [--rom ROM]     -> OUTDIR/meter.log, OUTDIR/meter_reads.csv (loop, address, x, y), prints the verdict
        sensor_meter_reads_bgb.py OUTDIR --from-log OUTDIR/meter.log [--rom ROM]     the same analysis of a log kept from an earlier run (the log is about 20 MB: not in the repository)
-BGB's sensor picture is fake (README 18.9): the addresses read do not depend on it (the loops have fixed bounds), the values read do."""
+BGB's sensor picture is fake (docs §18.9): the addresses read do not depend on it (the loops have fixed bounds), the values read do."""
 import sys, os, csv, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 import sensor_bgb_log as S

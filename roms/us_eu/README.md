@@ -2,6 +2,18 @@
 
 MD5 `42d2f65e2549be9d1d126a6828b5d1c1`. The international ROM: the same modes and states as the Japanese one in a different build (44.5 % of the bytes differ, mostly blocks moved by a fixed offset); the behavioural comparison with the Japanese ROM is in [`docs/16_menus_international_rom_bgb.md`](../../docs/16_menus_international_rom_bgb.md).
 
+## Levels
+
+| Level | Status | Evidence |
+|---|---|---|
+| L0 | done | `intake/intake_roundtrip.txt`: mgbdis `95d951a` with no symbol file + rgbasm 1.0.4 rebuild md5 `42d2f65e2549be9d1d126a6828b5d1c1` |
+| L1 | done | `gbcam_us.sym` types every byte; 0 untyped bytes in the port queue (docs §1.5) |
+| L2 | done | `trace/trace_us.json`, 0 unresolved; observed in the core runs `trace/cov_us_runs.npz` and the witness runs (`port/never_run_us.csv`; docs §1.5) |
+| L3 | done | `disasm/sym_names_us.csv`: C 5,281 / I 130 (the I names are the unused, dead or never-loaded ones) |
+| L4 | done | `disasm/ram_names_us.csv` and the constant tables, applied by `tools/sym_fix.py --const` |
+| L5 | done | `src/`, `make TREE=us_eu check` |
+| L6 | partial | the character set and the keyboard tables as text (`disasm/charset_us.csv`, `disasm/text_tables_us.csv`) |
+
 ![What each byte of the international ROM is](us_rom_layout_map.png)
 
 The symbol file is **ported from the Japanese tables** (method, counts and levels: [docs §1.5](../../docs/01_toolchain_and_status.md#15-the-international-rom-symbol-file-ported-from-the-japanese-one)):

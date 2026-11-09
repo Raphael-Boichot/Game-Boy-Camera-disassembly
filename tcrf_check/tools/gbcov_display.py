@@ -1,4 +1,4 @@
-"""gbcov_display: ctypes wrapper of gbcov_display.c = the package coverage core (coverage/src/gbcov.c) plus DISPLAY TRACKING (README 16.24).
+"""gbcov_display: ctypes wrapper of gbcov_display.c = the package coverage core (coverage/src/gbcov.c) plus DISPLAY TRACKING (docs §16.24).
 Build:  cc -O2 -shared -fPIC -o libgbcov_display.so gbcov_display.c   (next to this file, or point GBCOV_LIB at it).
 What the instrumentation adds to the core (everything is global, not part of snapshots, except the taint arrays, which are):
   * source taint: every VRAM / WRAM / HRAM byte remembers the ROM offset it was copied from (a ring of the last 8 tainted reads is matched by value
@@ -133,7 +133,7 @@ def snd_pcb(): return _arr(L.gb_snd_pcb_ptr(), 8 * 256, C.c_uint32).reshape(8, 2
 def snd_new(): return L.gb_snd_new()
 def snd_clear(): L.gb_snd_clear()
 
-# ---- forcing (README 16.26): jump the PC, flip a conditional branch, stop at a PC; read the state struct ----
+# ---- forcing (docs §16.26): jump the PC, flip a conditional branch, stop at a PC; read the state struct ----
 L.gb_force_flip.argtypes = [C.c_uint32, C.c_int]; L.gb_force_hits.argtypes = [C.c_uint32]; L.gb_force_hits.restype = C.c_uint32
 L.gb_jump.argtypes = [C.c_uint16, C.c_uint8, C.c_uint16]; L.gb_set_stop.argtypes = [C.c_int32]; L.gb_stop_hit.restype = C.c_int
 L.gb_get_regs.argtypes = [C.c_void_p]; L.gb_set_regs.argtypes = [C.c_void_p]

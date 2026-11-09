@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Is there an end to BALL and Space Fever II?  (README 16.18, "Is there an end?")
+"""Is there an end to BALL and Space Fever II?  (docs §16.18, "Is there an end?")
 Three checks, all in my core, none needs BGB:
   1. the saturating BCD add `00:0F9C` that both games use for the score is CALLED directly (A = amount, HL = number, B = bytes; the program counter is set to the routine and
      a return address pointing at a `jr $-2` in unused WRAM is pushed, as in albumb_thresholds.py) with B = 2 (BALL, `$D9E6/7`) and B = 4 (Space Fever II, `$D868-$D86B`) at and

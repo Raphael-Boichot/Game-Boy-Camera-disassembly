@@ -1,6 +1,6 @@
 """SHOOT parlor (mode $01): choose RUN (にげる) over and over; log the shared result screen 09:7290 (picture, message id $DBCF, tune), the parlor page and its music."""
 import sys, os, json, random
-ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of README 16.15 (core, tools/lib.py, the ROM)
+ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of docs §16.15 (core, tools/lib.py, the ROM)
 BGBX = os.environ.get('BGB_DIR', '/home/claude/bgbx')
 os.chdir(ROOT); sys.path.insert(0, 'tools')
 import numpy as np

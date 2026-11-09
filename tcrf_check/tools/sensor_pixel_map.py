@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Figure for README 18.3 / 9 / 10: where the pixels the sensor code reads sit in the 128 x 128 raw frame (RAM bank 0 $A000-$AFFF, 2 bpp, 16 x 16 tiles of 16 bytes),
+"""Figure for docs §18.3 / 9 / 10: where the pixels the sensor code reads sit in the 128 x 128 raw frame (RAM bank 0 $A000-$AFFF, 2 bpp, 16 x 16 tiles of 16 bytes),
 drawn top to bottom by increasing SRAM address.
   calibration pixel test  Cam_PixelTestHelper 0A:4C30: bytes [DE], [DE+2], [DE+4], [DE+6], bits 6-4 (columns 1-3);  DE = $A002 (boot searches, threshold scans, fast calibration sanity check)
                           and DE = $A082 (Cam_FactoryMeasure1, the 12 offset searches of the factory calibration)        -> 12 pixels each, lines 1-4 of tile 0 and of tile 8
   exposure metering       Cam_PopcountSampleLoop 0A:4FBD: 120 reads (loop 1, sum doubled) + 48 reads (loop 2); one read = 2 bytes = one 8-pixel tile row; the addresses are
                           taken from the ROM bytes by the same tiny executor as sensor_meter_geom.py (nothing is transcribed by hand)
   shown area              the 128 x 112 photo = lines 8-119 = $A100-$AEFF (3,584 bytes); lines 0-7 ($A000-$A0FF) and 120-127 ($AF00-$AFFF) are not part of it
-  saturated lines         lines 123-128 counted from 1 (y 122-127 counted from 0): measured on one frame supplied by the owner (README 9, frame_line_stats.py), drawn as asked
+  saturated lines         lines 123-128 counted from 1 (y 122-127 counted from 0): measured on one frame supplied by the owner (docs §9, frame_line_stats.py), drawn as asked
 usage: sensor_pixel_map.py ROM.gb OUT.png"""
 import sys
 import matplotlib
@@ -71,7 +71,7 @@ hs = [Patch(fc=MAG, ec='black', label='A  calibration pixel test, 12 pixels (til
       Patch(fc=BLUE2, label='exposure metering, loop 2: 48 reads of\n8 pixels, sum x 1'),
       Patch(fc='#eaf2fb', ec='#2a4d75', lw=1.6, label='shown area: the photo, lines 8-119'),
       Patch(fc='#e9e9e9', ec='#999999', label='not shown: lines 0-7 and 120-127'),
-      Patch(fc='#fbe0dc', ec=RED, hatch='////', label='saturated lines 123-128 (measured on one\nowner frame, README 9)')]
+      Patch(fc='#fbe0dc', ec=RED, hatch='////', label='saturated lines 123-128 (measured on one\nowner frame, docs §9)')]
 axl.legend(handles=hs, loc='upper left', fontsize=7.7, frameon=False, labelspacing=0.7, handlelength=2.0, handleheight=1.15)
 
 axz = fig.add_axes([0.755, 0.31, 0.185, 0.28]); axz.set_xlim(0, 8); axz.set_ylim(8, 0); axz.set_aspect('equal')
@@ -87,7 +87,7 @@ fig.text(0.848, 0.292, 'bytes $A002 $A004 $A006 $A008 = plane 0 of lines 1-4,\nb
 notes = ('Saturated lines, bytes (flat offset = address - $A000): lines 123-128 counted\nfrom 1 are y 122-127 counted from 0, i.e. bytes +4 to +15 of each of the 16 tiles of\ntile row 15 ($AF04-$AF0F, $AF14-$AF1F ... $AFF4-$AFFF = $0F04 ... $0FFF in a .sav).\n'
          'Neither the pixel test (lines 1-4) nor the metering (lines 24-103) reads them.\n'
          'Metering: 60 of the 120 loop-1 reads start at an odd address and straddle two\nrows (drawn at the row of the first byte).\n'
-         'Evidence: positions of A, B and the metering are C (ROM bytes, 0A:4C30 and\n0A:4FBD-5090, tool sensor_pixel_map.py); the saturation of lines 123-128 is C for one\nowner frame (README 9).')
+         'Evidence: positions of A, B and the metering are C (ROM bytes, 0A:4C30 and\n0A:4FBD-5090, tool sensor_pixel_map.py); the saturation of lines 123-128 is C for one\nowner frame (docs §9).')
 fig.text(0.715, 0.205, notes, ha='left', va='top', fontsize=7.0, linespacing=1.35)
 fig.savefig(out, dpi=150, facecolor='white')
 n1 = sum(1 for l, _ in reads if l == 1); ys = [where(ad)[1] for _, ad in reads]

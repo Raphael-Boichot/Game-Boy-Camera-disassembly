@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""REALLY unused assets: ONE picture (really_unused.png) + CSVs, from the display-tracking replays (README 16.24).
+"""REALLY unused assets: ONE picture (really_unused.png) + CSVs, from the display-tracking replays (docs §16.24).
 Inputs : display_union.npz (disp, fr, fro, snd = union of display_replay.py / display_stamps.py runs; or --npz-dir DIR to build it from DIR/*.npz),
          open_assets.csv (unidentified_sheets.py), sound_inventory.csv, roms/jp_rev_a/disasm/sym_names_jp.csv + sym_types_jp.csv (the Unused_TCRF_* spans),
          the coverage file (organic / forced ROM reads; COV env, default merged_v8/cov.npz), the ROM.
@@ -60,7 +60,7 @@ for (b, a), r in sorted(names.items()):
     if r['name'].startswith('Unused_TCRF_'):
         e = types.get((b, a), a + 16)
         rows.append(dict(bank='%02X' % b, addr='%04X' % a, b=b, a=a, n=e - a, name=r['name'], kind='TCRF', tcrf='', src='tcrf', conf=r['conf']))
-# spans listed by hand (unused_manual.csv): a code search and BGB say that no ROM code loads them, whatever the tracker saw (README 16.24 (3));
+# spans listed by hand (unused_manual.csv): a code search and BGB say that no ROM code loads them, whatever the tracker saw (docs §16.24 (3));
 # they replace the open rows they overlap, and a span that is not an open asset in the sym is added
 MAN = OUT + '/unused_manual.csv'
 if os.path.exists(MAN):
@@ -161,7 +161,7 @@ def evidence(r):
     if v['read_org'] == 0 and v['stable'] == 0: return 'never on screen; read only in forced runs' if v['read'] else 'never read'
     if v['stable'] == 0: return 'never stably on screen (%d flash tiles)' % v['flash']
     return 'on screen %s frames (%d of %d tiles stable)' % (fm, v['stable'], v['tiles'])
-# ---- the same list as a Markdown table (pasted into README 16.24): spans never on screen in a run without state pokes
+# ---- the same list as a Markdown table (pasted into docs §16.24): spans never on screen in a run without state pokes
 TIER_TXT = {'no loader': 'no loader (hand-listed)', 'never shown': 'never shown', 'forced only': 'forced runs only', 'TCRF': 'TCRF label'}
 UNUSED_TIERS = ('no loader', 'never shown', 'forced only')
 sel = [r for r in rows if r['tier'] in UNUSED_TIERS or (r['tier'] == 'TCRF' and r['v']['stable_org'] == 0)]
@@ -237,7 +237,7 @@ pairs_h = sum(p['h'] for p in pairs)
 by = collections.OrderedDict()
 for t, ttl, sub in (('TCRF', 'TCRF-documented unused graphics located in this ROM (sym labels Unused_TCRF_*)', 'purple = labelled from the images the owner supplied from TCRF; (?) = candidate (partial pixel match); ORGANIC = the tile was on screen in a run without state pokes'),
                     ('never shown', 'Never on screen and never read in an organic run', 'red = no stable frame in 37,370 replayed menu states and the stamp-menu walks, and only the forced runs ever read it (graphics; the two maps of this tier are in the first block, beside their tile set)'),
-                    ('forced only', 'On screen only when state variables are forced', 'amber = shown by forced runs only; no organic route found, so probably not reachable on a real camera\nthe four frames are the second collar set of the main-menu ball head animation: each is drawn under its used twin F0-F3, the eye is the same, the collar fits the back body (README 16.24)')):
+                    ('forced only', 'On screen only when state variables are forced', 'amber = shown by forced runs only; no organic route found, so probably not reachable on a real camera\nthe four frames are the second collar set of the main-menu ball head animation: each is drawn under its used twin F0-F3, the eye is the same, the collar fits the back body (docs §16.24)')):
     by[t] = ([r for r in rows if r['tier'] == t], ttl, sub)
 secs = []
 y = 70
@@ -311,6 +311,6 @@ for s in sounds:
     dr_.text((GAP, yy), line, fill=(0, 0, 0) if s['tier'][0] in 'AC' else (90, 90, 90), font=FONT); yy += SOUND_ROWH
 yy += 8
 dr_.text((GAP, yy), 'Nothing was HEARD: the replays log the request mailboxes (ids), not the audio. The core is not a real Game Boy: exploration is large, not exhaustive.', fill=(160, 40, 40), font=FONT); yy += 16
-dr_.text((GAP, yy), 'Method and caveats: README 16.24.  Tools: gbcov_display.c, display_replay.py, display_stamps.py, display_report.py.  Data: really_unused.csv, really_unused_sounds.csv.', fill=(90, 90, 90), font=FONT)
+dr_.text((GAP, yy), 'Method and caveats: docs §16.24.  Tools: gbcov_display.c, display_replay.py, display_stamps.py, display_report.py.  Data: really_unused.csv, really_unused_sounds.csv.', fill=(90, 90, 90), font=FONT)
 sheet = sheet.crop((0, 0, WIDTH, yy + 30)); sheet.save(OUT + '/really_unused.png')
 print({t: len(by[t][0]) for t in by}, 'map/tile-set pairs', len(pairs), 'scraps', len(scraps), 'sounds', len(sounds), 'size', sheet.size)

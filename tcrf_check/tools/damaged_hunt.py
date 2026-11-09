@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Boot damaged copies of the real saves (flipped bytes in the settings / vector / calibration blocks and their echoes, in photo-slot tails, and random bytes)
-to exercise the SRAM self-repair paths (README section 3.6).  The only input is the SRAM image and the joypad (no RAM pokes) -> counted as organic.
+to exercise the SRAM self-repair paths (docs §3.6).  The only input is the SRAM image and the joypad (no RAM pokes) -> counted as organic.
 Usage: damaged_saves.py OUT [--n 300] [--taps 60]  -> OUT/cov.npz, OUT/log.txt, OUT/variants.jsonl (every variant is reproducible: base save, list of (offset, xor))"""
 import sys as _s, os as _o
 _s.path.insert(0, _o.path.join(_o.path.dirname(_o.path.abspath(__file__)), '..', 'src'))
@@ -21,7 +21,7 @@ for k, n in t['code'].items():
     if n > 0: b, ad = k.split(':'); KNOWN[flat(int(b, 16), int(ad, 16))] = 1
 g.set_known(KNOWN)
 SAVES = {os.path.basename(p)[:-4]: open(p, 'rb').read() for p in sorted(glob.glob(os.path.join(paths.SAVES, '*.sav')))}
-# damage regions (SRAM flat offsets, README section 3): (name, start, length)
+# damage regions (SRAM flat offsets, docs §3): (name, start, length)
 REG = [('settings', 0x1000, 0xD9), ('settings_echo', 0x10D9, 0xD9), ('vector', 0x11B2, 37), ('vector_echo', 0x11D7, 37), ('calib', 0x4FF2, 14), ('calib_echo', 0x11FF2, 14),
        ('owner_magic', 0x4FCA, 2), ('owner_magic2', 0x4FE3, 2), ('gameface_tail', 0x1FF0, 12)]
 for s in range(30): REG.append(('slot%02d_tail' % (s + 1), 0x2000 + s * 0x1000 + 0xFE0, 32))

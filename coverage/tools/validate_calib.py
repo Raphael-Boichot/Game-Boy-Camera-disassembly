@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cross-check of the custom core against the documented calibration-record rule (README section 6 / 3.6): boot every real save for 200 frames and compare the
+"""Cross-check of the custom core against the documented calibration-record rule (docs §6 / 3.6): boot every real save for 200 frames and compare the
 12-byte vector the ROM leaves in WRAM $D5B5-$D5C0 with the vector predicted from the SRAM image by the rule
    primary ($04FF2, checksum (sum+$0D, xor+$23)) valid and echo ($11FF2) equal or bad -> primary;  primary bad and echo valid -> echo;  both valid but different or both bad -> default vector."""
 import sys as _s, os as _o

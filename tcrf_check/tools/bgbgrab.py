@@ -1,6 +1,6 @@
 """BGB helpers: replay a corpus entry in the real BGB, append keys, return screenshot + VRAM/OAM/WRAM from the state file."""
 import sys, os, shutil, json
-ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of README 16.15 (core, tools/lib.py, the ROM)
+ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of docs §16.15 (core, tools/lib.py, the ROM)
 BGBX = os.environ.get('BGB_DIR', '/home/claude/bgbx')
 os.chdir(ROOT); sys.path.insert(0, 'tools')
 os.environ.setdefault('BGB_DIR', BGBX)

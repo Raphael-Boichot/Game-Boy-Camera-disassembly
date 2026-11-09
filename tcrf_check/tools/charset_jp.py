@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Character table of the Japanese Pocket Camera text fields (photo name F04-F0C, comment F15-F2F, the 30-character comment card) - README 16.27.
+"""Character table of the Japanese Pocket Camera text fields (photo name F04-F0C, comment F15-F2F, the 30-character comment card) - docs §16.27.
 The rule (C): the glyph of code c is the 8x16 pair of 2bpp tiles at bank $2A:4000 + (c-1)*32 (flat 0xA8000 + (c-1)*32), drawn by Glyph_LoadFromCharCode (09:4802);
 code $00 is a blank cell and $87 is a blank glyph.  The reading of each glyph (which kana / letter it is) is by eye from the atlas (I); for the codes that occur in the 21 stock
 comments and names of Album B it is confirmed twice: the BGB comment screens match the bank-$2A glyphs pixel for pixel (bgb_albumb_comments.py) and the sentences read as

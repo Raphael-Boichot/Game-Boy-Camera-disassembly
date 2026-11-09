@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the effect blit stubs of bank 6 (06:73F7-7477) in the minimal SM83 simulator sm83sim.py and report which of the six one-byte carry steps 06:7529, 758A, 7645, 76B2, 7776, 77E3 execute (README 16.21).
+"""Run the effect blit stubs of bank 6 (06:73F7-7477) in the minimal SM83 simulator sm83sim.py and report which of the six one-byte carry steps 06:7529, 758A, 7645, 76B2, 7776, 77E3 execute (docs §16.21).
 usage: sim_blit.py [ROM]      (ROM defaults to ./pocketcamera_jp.gb, the Japanese Rev A; no WRAM state is needed: the stubs are entered at their first byte with a sentinel return address)
 The mask bytes $DA40-$DA5F that gate the blits (06:7527, 7588, 7643, 76B0, 7774, 77E1) are filled with $FF, $55, $01, $A5 and with the real-looking masks; the result lists the gates that ran and the carry steps that ran (none)."""
 import sys, os

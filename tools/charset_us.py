@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Character table of the international (and Gold) name / comment fields (L6 text table; the Japanese one is roms/jp_rev_a/disasm/charset_jp.csv, README 16.27).
+"""Character table of the international (and Gold) name / comment fields (L6 text table; the Japanese one is roms/jp_rev_a/disasm/charset_jp.csv, docs §16.27).
 
   tools/charset_us.py JP.gb ROM.gb OUT.csv [--check]
 

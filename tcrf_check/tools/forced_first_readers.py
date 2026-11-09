@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Who is the first reader of the bytes that only forced runs read? (README 16.24)
+"""Who is the first reader of the bytes that only forced runs read? (docs §16.24)
 
 usage: forced_first_readers.py [COV.npz] [OUT.csv]
   COV.npz  default coverage/v8/merged_v8/cov.npz: `dr` (ROM byte read in any run), `odr` (in an organic run: no RAM poke, no mode poke), `ex` (executed in any

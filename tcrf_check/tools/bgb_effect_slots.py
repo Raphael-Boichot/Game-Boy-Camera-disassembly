@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Run the SHOOT image-effect slots of bank $0A (jump table 0A:541A, 96 entries, dispatcher Cam_DispatchEffect 0A:5406) in the real BGB on test photos and read off what every
-slot does to the work buffer (README 16.28).
+slot does to the work buffer (docs §16.28).
 
 How the game calls a slot: Shoot_SetupCapture (06:77F5) takes the byte 06:60DB[4 * $D7E3 + $D7E4] (SHOOT variant, phase), ORs $20 / $40 when $D7EB = 1 / 2 and far-calls
 0A:7CFE with it; the routine reads the 128 x 112 photo (16 x 14 tiles, 2bpp, 3,584 bytes) at SRAM bank 0 $A100 and writes the work buffer in WRAM $C000.

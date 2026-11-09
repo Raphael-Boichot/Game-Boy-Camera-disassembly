@@ -1,6 +1,6 @@
 """Tile provenance: which ROM spans hold the tiles that sit in a VRAM dump (BGB state)."""
 import sys, os, collections, csv, bisect
-ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of README 16.15 (core, tools/lib.py, the ROM)
+ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of docs §16.15 (core, tools/lib.py, the ROM)
 BGBX = os.environ.get('BGB_DIR', '/home/claude/bgbx')
 import numpy as np
 ROM = open(ROOT + '/pocketcamera_jp.gb', 'rb').read()

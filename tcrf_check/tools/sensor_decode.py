@@ -4,7 +4,7 @@
 The workbooks (Sheet1) hold one row per capture; columns M..BX (index 12..75) are the 64 raw register bits in the order the sensor receives them:
 register 1 (001), 2 (010), 3 (011), 4 (100 = P), 5 (101 = M), 6 (110 = X), 7 (111), 0 (000).  Trailing all-zero rows are padding.
 usage: sensor_decode.py BOOT.xlsx CALIB.xlsx LIVE.xlsx OUTDIR     -> OUTDIR/{boot,calibration,live}_rows.csv, *_groups.csv  and a text report on stdout
-Group rules (README section 18):  a successive-approximation (SAR) group starts at the row with reg0 = $BF (O = +1 V, Z = 10) after a change of reg1 / C / reg7,
+Group rules (docs §18):  a successive-approximation (SAR) group starts at the row with reg0 = $BF (O = +1 V, Z = 10) after a change of reg1 / C / reg7,
 and lasts until the next such row;  the factory threshold loops (ThresholdConverge) are runs of identical rows."""
 import sys, os, csv
 

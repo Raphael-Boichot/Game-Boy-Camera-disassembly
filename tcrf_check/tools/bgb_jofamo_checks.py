@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BGB checks of four claims of the jofamo.com article "Secrets of the Pocket Camera" (README 16.27).  Everything is read from the real BGB: write watchpoints (-wp) log the writes of a WRAM
+"""BGB checks of four claims of the jofamo.com article "Secrets of the Pocket Camera" (docs §16.27).  Everything is read from the real BGB: write watchpoints (-wp) log the writes of a WRAM
 byte with the cycle count (2,097,152 per second) into debugmsg.txt.
 usage: bgb_jofamo_checks.py OUTDIR ALBUM21.sram [bgm] [pvoice] [shoot] [speed] [bview]        (default: all five; the 21-copy album is stage2.sram of bgb_albumb_comments.py)
 env: GBCAM_ROM (Japanese ROM), GBCAM_ROM_INTL (international ROM), GBCAM_SAV (all unlocked, 0 photos); BGB directory /home/claude/bgbq1 (copy of /home/claude/bgbx)

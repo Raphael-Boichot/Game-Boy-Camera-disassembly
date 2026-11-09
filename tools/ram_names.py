@@ -3,7 +3,7 @@
 
   tools/ram_names.py [--names roms/jp_rev_a/disasm/ram_names_jp.csv] [--inc roms/jp_rev_a/disasm/ram_jp.inc] [--sym pocketcamera_jp_ram.sym] [--check]
 
-Source of truth: roms/jp_rev_a/disasm/ram_names_jp.csv (one row per named byte range; the byte-level map and the evidence behind every row are in wram/ and README section 2).
+Source of truth: roms/jp_rev_a/disasm/ram_names_jp.csv (one row per named byte range; the byte-level map and the evidence behind every row are in wram/ and docs §2).
 Derived, never edited by hand:
   roms/jp_rev_a/disasm/ram_jp.inc          `DEF wMode EQU $d5ce` lines (INCLUDEd by game.asm after hardware.inc; the names starting with `_` come from hardware.inc itself)
   pocketcamera_jp_ram.sym    the same names as `00:D5CE wMode` for BGB / no$gba (append it to a copy of pocketcamera_jp.sym; mgbdis must NOT read it, it would
@@ -13,7 +13,7 @@ Derived, never edited by hand:
 Columns of the table: addr (hex), size (bytes), name, scope, tag (C / I / U / ?), desc (the row of the map).
 Prefixes: `w` WRAM, `h` HRAM. A name is used as `name` at its first byte and as `name + $off` inside the range.
 scope: which instructions may use the row. `*` every bank, `BB` one bank, `BB:AAAA` one routine (the `function` column of roms/jp_rev_a/wram/wram_access_jp.csv), a routine label
-(`Bank005_State08`) or `BB@AAAA` one instruction; several separated by `;`. Rows of the overlay area $C000-$D4FF (one address, several buffers: README section 2) carry the
+(`Bank005_State08`) or `BB@AAAA` one instruction; several separated by `;`. Rows of the overlay area $C000-$D4FF (one address, several buffers: docs §2) carry the
 scope of the routines that use that view. For one site the most specific scope wins (instruction, routine, bank, `*`), then the narrowest range."""
 import csv, os, re, sys, argparse
 

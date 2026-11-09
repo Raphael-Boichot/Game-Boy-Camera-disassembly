@@ -1,6 +1,6 @@
 """Write assets/asset_map_jp.csv: the never-read data bytes of the Japanese ROM (class U of the byte-class map, padding excluded) grouped into labelled ranges.
 usage: asset_map_build.py OUT.csv [--rom pocketcamera_jp.gb] [--map coverage/v8/report_v8/rom_map.csv]
-The hand-written rows carry the readings (README 16.13); the tile-set gaps and the bank $2A glyph runs are taken from the class map.
+The hand-written rows carry the readings (docs §16.13); the tile-set gaps and the bank $2A glyph runs are taken from the class map.
 The evidence tag of a row is C only where an emulator or BGB test backs it, else I."""
 import csv, sys, os, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -17,7 +17,7 @@ def add(b, s, e, typ, desc, ctx, ev, sheet=''):
     rows.append([b'%02X' % b if False else '%02X' % b, '%04X' % s, '%04X' % e, typ, desc, ctx, ev, sheet])
 
 # --- SGB data, bank $0B. The sender 00:1D38-1EA0 (international ROM: 00:1DEC-1F9E, same bank-$0B addresses) sends these blocks; sgb_border_check.py decodes
-# them and rebuilds the border (JP and international, pixel-identical to BGB in SGB mode and to the community sheet: README 16.13). The three transfers that
+# them and rebuilds the border (JP and international, pixel-identical to BGB in SGB mode and to the community sheet: docs §16.13). The three transfers that
 # carry data (PAL_TRN, ATTR_TRN, CHR_TRN, PCT_TRN: $1000 bytes after the 16-byte packet) overlap each other.
 SND = 'sender 00:1D38-1EA0'
 add(0x0B, 0x4000, 0x401F, 'sgb_packet', 'MLT_REQ packets: $89 $00 (1 player, 4000) and $89 $01 (2 players, 4010); the multi-player probe 00:1CEA-1D43 sends them to detect the SGB', SND, 'C')
@@ -56,17 +56,17 @@ for b in (0x10, 0x17, 0x19, 0x1A, 0x1C, 0x1E):
     for s, e in auto_runs(b):
         add(b, s, e, 'tile_set_gap', 'bytes of a 2bpp tile block that no copy reads (organic readers on both sides)', 'tile blocks loaded by 00:17E8', 'I')
 # --- bank $14: text/banner tiles
-add(0x14, 0x4000, 0x4553, 'alt_exchange_screen_tiles', 'tiles 0-84 of the unused alternate stand-by screen of the image exchange (tile set 14:4000-502F, tile map 23:5CC0; tracked as a de-duplicated tile list, so a raster reading looks like strips of different widths); the thumbnail reducer 00:289C reads 14:4554 onward only through a stray pointer, never as tiles', 'no loader in either ROM (BGB + code search; README 14.4 / 16.24 (3))', 'I')
-# --- tilemaps, banks $24-$27 (README 16.25). The four option-page maps of mode $16 are loaded by Mode16_BuildOptionList (06:4B39) from the table at 06:4B67
+add(0x14, 0x4000, 0x4553, 'alt_exchange_screen_tiles', 'tiles 0-84 of the unused alternate stand-by screen of the image exchange (tile set 14:4000-502F, tile map 23:5CC0; tracked as a de-duplicated tile list, so a raster reading looks like strips of different widths); the thumbnail reducer 00:289C reads 14:4554 onward only through a stray pointer, never as tiles', 'no loader in either ROM (BGB + code search; docs §14.4 / 16.24 (3))', 'I')
+# --- tilemaps, banks $24-$27 (docs §16.25). The four option-page maps of mode $16 are loaded by Mode16_BuildOptionList (06:4B39) from the table at 06:4B67
 # (entry 0 25:71A0, 1 25:50C0, 2 24:63A0, 3 25:5360, 0x200 bytes each, to $9840 = row 2): the two rows in front of each block (ramp 00-27, the photo strip) are never copied.
-HEAD = 'rows 0-1 (tile ramp 00-27, $FF fill) of the option-page map of mode $16 whose rows 2-17 are %s: Mode16_BuildOptionList copies %s to $9840 (row 2), so these two rows are never loaded (README 16.25)'
+HEAD = 'rows 0-1 (tile ramp 00-27, $FF fill) of the option-page map of mode $16 whose rows 2-17 are %s: Mode16_BuildOptionList copies %s to $9840 (row 2), so these two rows are never loaded (docs §16.25)'
 add(0x24, 0x6360, 0x639F, 'bg_tilemap', HEAD % ('24:63A0 (page 2)', '24:63A0'), 'Mode16_BuildOptionList 06:4B39, table 06:4B67 entry 2', 'I')
 add(0x25, 0x7160, 0x719F, 'bg_tilemap', HEAD % ('25:71A0 (page 0)', '25:71A0'), 'Mode16_BuildOptionList 06:4B39, table 06:4B67 entry 0', 'I')
 add(0x25, 0x5080, 0x50BF, 'bg_tilemap', HEAD % ('25:50C0 (page 1)', '25:50C0'), 'Mode16_BuildOptionList 06:4B39, table 06:4B67 entry 1', 'I')
 add(0x25, 0x5320, 0x535F, 'bg_tilemap', HEAD % ('25:5360 (page 3)', '25:5360'), 'Mode16_BuildOptionList 06:4B39, table 06:4B67 entry 3', 'I')
 add(0x25, 0x4A80, 0x4AFF, 'bg_tilemap', 'four blank rows ($FE) between the 22-row map copied from 25:47C0 and the map at 25:4B00; filler, not copied', 'neighbours 25:47C0 (copied) and 25:4B00', 'I')
 add(0x25, 0x4B00, 0x4DBF, 'bg_tilemap', '22-row map (0x2C0 bytes): 16x14 photo-area ramp (00-8F, 00-4F) with icon blocks (A0-DF) and two icon rows below; its only loader is the never-executed Unused_LoadTilemap25_4B00 (04:6412, 0x2C0 bytes to $9800), next to Unused_LoadTilemap24_7120 (04:6403) whose map 24:7120 is the same layout without the icons', 'dead code 04:6412', 'I')
-add(0x26, 0x4500, 0x487F, 'bg_tilemap', '18-row map (0x240 bytes): 16x14 photo-area ramp (00-8F, 00-4F) with icon columns (A0-A7, B8-E5, F2-FC, 90-9B) and icon blocks in rows 14-17, then $FF fill; no copy site and no table entry reaches it (README 16.25)', 'no loader found', 'I')
+add(0x26, 0x4500, 0x487F, 'bg_tilemap', '18-row map (0x240 bytes): 16x14 photo-area ramp (00-8F, 00-4F) with icon columns (A0-A7, B8-E5, F2-FC, 90-9B) and icon blocks in rows 14-17, then $FF fill; no copy site and no table entry reaches it (docs §16.25)', 'no loader found', 'I')
 add(0x27, 0x4772, 0x486F, 'bg_tilemap', 'eight blank rows ($FD) after the 22-row map copied from 27:44B2 and before the map copied from 27:4870; filler, not an asset', 'neighbours 27:44B2 and 27:4870', 'I')
 add(0x27, 0x4AB0, 0x4CAF, 'tile_data', 'small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs; it starts after the last row of the map copied from 27:4870 (0x240 bytes, 4870-4AAF)', 'unknown', 'I')
 # --- Japanese alphabet glyphs

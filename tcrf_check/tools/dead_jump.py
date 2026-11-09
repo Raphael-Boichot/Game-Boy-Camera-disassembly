@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Force the never-executed code of the ROM in the display-tracking core (README 16.26).
+"""Force the never-executed code of the ROM in the display-tracking core (docs §16.26).
 
 Two kinds of forcing, both on a state taken from a normal run (the cheapest corpus entry of every game mode, run on to the idle point of the main loop):
   * JUMP   (UNREFERENCED components = routines that nothing calls): the PC is set to the entry of the component, a return address (the idle PC of the main loop) is pushed,

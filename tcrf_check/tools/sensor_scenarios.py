@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the sensor-register scenarios of README section 18 in BGB (sensor_bgb_log.py) and store the logs under OUTDIR/<scenario>/.
+"""Run the sensor-register scenarios of docs §18 in BGB (sensor_bgb_log.py) and store the logs under OUTDIR/<scenario>/.
 usage: sensor_scenarios.py OUTDIR --rom ROM --sav SAV [--workers 2] [--only a,b,c]
 Key paths are those of guide_nodes.py (main menu -> SHOOT ...); the first 'A' passes the title screen (as in guide_bgb_walk.py)."""
 import sys, os, json, shutil, multiprocessing

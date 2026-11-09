@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Which cell of the MAC-GBD threshold matrix ($A006-$A035) gets which level: decoded from the three writers of Cam_BuildDitherMatrix (README 18.12).
+"""Which cell of the MAC-GBD threshold matrix ($A006-$A035) gets which level: decoded from the three writers of Cam_BuildDitherMatrix (docs §18.12).
 usage: sensor_matrix_order.py ROM [--csv OUT.csv] [--example A B C D] [--reference reference/patterns.mjs]
 The matrix is 16 cells x 3 bytes; cell n = (addr-$A006)//3, byte k = (addr-$A006)%3 (so the bytes of a cell are consecutive).  The cell geometry (n = 4*row + col, row = y&3, col = x&3 of the
 sensor pixel; pixel8 < t0 -> 3, < t1 -> 2, < t2 -> 1, else 0) is MAME's, not the ROM's (I): the ROM only writes the 48 bytes.  What is read here from the ROM bytes (C):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The hidden-feature ("secret") lines of the GameFAQs cheats page tried with the keys only, in my core and in the real BGB (README 16.18):
+"""The hidden-feature ("secret") lines of the GameFAQs cheats page tried with the keys only, in my core and in the real BGB (docs §16.18):
 title screen Up / Down (animation speed), VIEW menu Up / Down (speed of the face-in-face animation), D.J. screen: hold A (scratch), slide-show menu: Select reveals the BGM and shuffle options,
 boot with Start + Select held (erase-the-game prompt), erase-album shortcut Select + Start + Up ("erase ALL photos?", A / B).
 Every scenario starts from a corpus entry (joypad-only path from a boot, no RAM poke) or from a boot with a boot-time key combination, presses keys, and reads a few WRAM / SRAM bytes at the end.
@@ -39,7 +39,7 @@ ERASE = dict(D561_photo_count=R(0xD561), DBCD_erase_all_variant=R(0xDBCD))
 add('erase album (0F:03)', 'Select+Start+Up held 12 frames', ('entry', 656), [('-', 120, 0), ('Select+Start+Up', 12, 60)], ERASE, 'page: Select+Start+Up, A confirms, B cancels')
 add('erase album (0F:03)', '... then B', ('entry', 656), [('-', 120, 0), ('Select+Start+Up', 12, 60), ('B', 4, 200)], ERASE)
 add('erase album (0F:03)', '... then A', ('entry', 656), [('-', 120, 0), ('Select+Start+Up', 12, 60), ('A', 4, 1500)], ERASE)
-add('erase album (0F:03)', '... then B, then the chord again (state 0F:02)', ('entry', 656), [('-', 120, 0), ('Select+Start+Up', 12, 60), ('B', 4, 200), ('Select+Start+Up', 12, 60)], ERASE, 'the second copy of the shortcut, 04:4859-4876 (README 8)')
+add('erase album (0F:03)', '... then B, then the chord again (state 0F:02)', ('entry', 656), [('-', 120, 0), ('Select+Start+Up', 12, 60), ('B', 4, 200), ('Select+Start+Up', 12, 60)], ERASE, 'the second copy of the shortcut, 04:4859-4876 (docs §8)')
 add('erase album (0F:03)', '... then B, the chord again, then A', ('entry', 656), [('-', 120, 0), ('Select+Start+Up', 12, 60), ('B', 4, 200), ('Select+Start+Up', 12, 60), ('A', 4, 1500)], ERASE)
 add('erase album (0F:03), control', 'Select+Start held, no Up', ('entry', 656), [('-', 120, 0), ('Select+Start', 12, 60)], ERASE)
 def path_actions(C, entry):

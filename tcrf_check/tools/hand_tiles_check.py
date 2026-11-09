@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Are the six tiles at 13:5CA0-5CF0 (the TCRF "unused album hand gestures", label Unused_TCRF_AlbumHandGestures_Gfx) ever DRAWN?  README 16.24 / checklist B06, B13.
+"""Are the six tiles at 13:5CA0-5CF0 (the TCRF "unused album hand gestures", label Unused_TCRF_AlbumHandGestures_Gfx) ever DRAWN?  docs §16.24 / checklist B06, B13.
 
 The album loaders (PhotoPicker_Init 04:400A, Mode0F_State01_ReInit, LinkPick_Substate0_Init, ...) copy the whole sheet 13:5800-67FF to VRAM $8000, so the six tiles sit in the VRAM slots
 $4A-$4F whenever one of those screens is up (loading is C).  Loading does not say whether anything draws them, so this script replays the cheapest organic corpus entry of a list of
@@ -7,7 +7,7 @@ $4A-$4F whenever one of those screens is up (loading is C).  Loading does not sa
   - the VRAM slots that hold the 16 bytes of one of the six ROM tiles ("loaded");
   - the OBJ entries of OAM and the BG / window map cells that use one of those slots ("drawn"; an 8 x 8 or 8 x 16 OBJ is split, the BG tile base follows LCDC bit 4);
   - for every OBJ entry, the ROM address inside the sheet 13:5800-67FF of the tile it shows (so one sees which tiles the hand sprite really uses).
-usage: hand_tiles_check.py OUT.csv [BGB_DIR] [MODE,STATE ...]      (GBCAM_ROOT = the working root of README 16.15, GBCAM_ROM; BGB_DIR is copied if it does not exist)
+usage: hand_tiles_check.py OUT.csv [BGB_DIR] [MODE,STATE ...]      (GBCAM_ROOT = the working root of docs §16.15, GBCAM_ROM; BGB_DIR is copied if it does not exist)
 default screens: the five (mode, state) that load the sheet in the organic corpus (15,2) (15,3) (15,12) (15,13) (16,1)."""
 import sys, os, csv, json
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Boot BGB with the fast calibration sanity check combo ($FD held at boot) and mark the verdict of the test (0A:6B23-6B54, README 16.20): OK (0A:6B28 / 6B36, tune $16) or NG (0A:6B3F / 6B4E,
+"""Boot BGB with the fast calibration sanity check combo ($FD held at boot) and mark the verdict of the test (0A:6B23-6B54, docs §16.20): OK (0A:6B28 / 6B36, tune $16) or NG (0A:6B3F / 6B4E,
 tune $29), then the endless loop 0A:6B54.  BGB's fake sensor is not a sensor model, so the verdict says what BGB's constant image gives, not what a camera gives.
 usage: bgb_calib_sanity_check.py [FREE_FRAMES]      (run from the working root; needs saves_unl/unl_CE10238211.sav and pocketcamera_jp.gb; stop the run by hand once the Hang marker repeats)"""
 import sys, os, collections

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Find the tile block that a de-duplicated picture map was made for: for every 16-byte offset S of the ROM, tile id i is taken from S + 16 i and the edges of
 neighbouring cells of the map are compared (right column of the left tile with the left column of the right one, bottom row with top row); the block whose
-seams are the smoothest AND whose used tiles are all different (a de-duplicated set has no repeated tile) wins.  Control (README 16.25): the credits picture
+seams are the smoothest AND whose used tiles are all different (a de-duplicated set has no repeated tile) wins.  Control (docs §16.25): the credits picture
 26:72C0 gives 19:5260 (0.42 per pixel) against 0.655 for the next block; 25:7820 gives 17:5500 (0.427 against 0.713).  26:7080 returns nothing convincing (best 0.80 per pixel, ratio 0.69; halves 0.52 / 0.57).
 --ids LO-HI[,LO-HI...] (hex) searches each id range as a block of its own (tile of id i at S + 16 (i - LO)), counting only the seams whose two ends are in the range:
 use it for a tile set that is split (ids 00-7F / 80-FF loaded from two places) or when part of the ids belong to another list.  Every candidate then also gets a control:
 the same seams with the ids of the neighbours shuffled; a true block has a cost far below its control (ratio 0.33-0.37 for the credits picture 00-7F and the unused menu 00-7F,
 0.46 or more for the next block there), a smooth or flat region has a ratio near 1 whatever the map.  The ranges are ranked by that ratio.  The upper halves are a weak test: for the
 credits picture 80-FF and the unused menu 80-E9 the true block is not ranked first (wrong blocks reach 0.40 and 0.49), so only a negative lower half (00-7F) or whole map is evidence.
---1bpp reads the ROM as 8-byte one-plane tiles (README 16.25.2: no 1bpp block fits 26:7080 either).
+--1bpp reads the ROM as 8-byte one-plane tiles (docs §16.25.2: no 1bpp block fits 26:7080 either).
 usage: tile_seam_search.py ROM BANK:ADDR [first_col=0 [cols=20 [rows=18 [width=32]]]] [--ids 00-7F,80-FF] [--1bpp]      e.g.  tile_seam_search.py pocketcamera_jp.gb 25:7820"""
 import sys
 import numpy as np

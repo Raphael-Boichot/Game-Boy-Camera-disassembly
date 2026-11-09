@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Decode a song of the sound driver (bank $1F) into note names (README 16.20).
+"""Decode a song of the sound driver (bank $1F) into note names (docs §16.20).
 usage: song_decode.py ROM TABLE ID[,ID...]      TABLE = 57C6 (Japanese ROM) or 57D1 (international ROM); ID in hex, 1-based (the table has 72 words)
 Format read from the driver: the song word points at an 11-byte header: transposition (signed), duration-table pointer, four playlist pointers (0 = unused track).
 A playlist is a list of stream pointers; a high byte $FF is a jump (the next word is the target), a high byte $00 ends the song.

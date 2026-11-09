@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Targeted forcing of the dead sound code in the display-tracking core (README 16.26): the generic sweep of dead_jump.py calls a routine with the registers of the idle point; the sound routines need
+"""Targeted forcing of the dead sound code in the display-tracking core (docs §16.26): the generic sweep of dead_jump.py calls a routine with the registers of the idle point; the sound routines need
 their input (a request byte, the channel pointer DE) so they are called here with it.  Reports the writes to the sound registers and the mailboxes.
   * Snd_UiEffect_Dead (00:10AC) with $D92E = 1..8: writes NR10-NR14 of channel 1 from the table at 00:10D0
   * Unused_Sfx1_Init_46DD (1F:46DD) with DE = $DD62 (what Snd_RunSfx1 leaves in DE for an init routine): Snd_Sfx_Start loads NR10-NR14 from Sfx1_Data_46D8

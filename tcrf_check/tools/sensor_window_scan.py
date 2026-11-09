@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Does any code of the ROM use more of the MAC-GBD / sensor register window than the five sensor registers and the matrix? (README 18.11)
+"""Does any code of the ROM use more of the MAC-GBD / sensor register window than the five sensor registers and the matrix? (docs §18.11)
 
 Reads an mgbdis disassembly (bank_NNN.asm, the form used by copy_sites.py) and the byte-class map of the coverage run and reports
   1. every instruction operand in $A000-$A0FF (the camera registers are $A000-$A035 with RAM bank $10 selected; $A100 and up is the photo SRAM): which addresses, how many sites, in which execution class

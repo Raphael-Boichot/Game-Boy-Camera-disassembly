@@ -1,4 +1,4 @@
-"""The read addresses of Cam_PopcountSampleLoop (0A:4FBD-5090, README 10-B), taken from the ROM bytes with a tiny executor that knows only the 14 opcodes the routine uses
+"""The read addresses of Cam_PopcountSampleLoop (0A:4FBD-5090, docs §10-B), taken from the ROM bytes with a tiny executor that knows only the 14 opcodes the routine uses
 (the same executor as sensor_meter_geom.py).  Used by sensor_pixel_map.py (the figure) and sensor_meter_reads_bgb.py (the check against BGB's own read log)."""
 def meter_reads(rom):
     """(loop, address) of every read of the routine, in order: loop 1 = 120 reads, loop 2 = 48 reads; one read = 2 bytes (plane 0 at the address, plane 1 at address + 1)."""

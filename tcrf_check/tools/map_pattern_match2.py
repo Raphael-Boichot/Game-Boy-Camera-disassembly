@@ -6,7 +6,7 @@
 For the target (cols x rows cells, 20 x 18 by default) E_t = the set of cell pairs with the same id; for a window E_w is the same set read at p + stride * row + col, the score is the
 Jaccard index |E_t & E_w| / |E_t | E_w| (1.00 = the same pattern up to a renumbering; a flat fill window has a huge E_w and scores low, a window that repeats other tiles in other places scores low).
 usage: map_pattern_match2.py TARGET_ROM BANK:ADDR SEARCH_ROM [--strides 20,22,24,32] [--cols 20] [--rows 18] [--top 6]   (the target's own bytes are skipped when SEARCH_ROM is TARGET_ROM)
- e.g. map_pattern_match2.py pocketcamera_jp.gb 26:7080 gbcam_us.gb --strides 32   ->  26:6E40 (its counterpart) 1.000, nothing else above 0.13 (README 16.25.2); about 2 minutes per stride and ROM"""
+ e.g. map_pattern_match2.py pocketcamera_jp.gb 26:7080 gbcam_us.gb --strides 32   ->  26:6E40 (its counterpart) 1.000, nothing else above 0.13 (docs §16.25.2); about 2 minutes per stride and ROM"""
 import sys
 import numpy as np
 

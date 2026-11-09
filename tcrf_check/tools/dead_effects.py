@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Force the camera-effect handlers that the index table 06:60DB never selects (README 16.26): the 22 UNREACHABLE components of the TABLE group.
+"""Force the camera-effect handlers that the index table 06:60DB never selects (docs §16.26): the 22 UNREACHABLE components of the TABLE group.
 The effect dispatcher Cam_DispatchEffect (0A:5406) takes the handler number in A and jumps through Cam_EffectJumpTbl (0A:541A).  The game only produces the numbers that the 88-byte table 06:60DB gives, OR 0 / $20 / $40;
 here every number 0..$5F is called, with the same pattern in SRAM $A000-$BFFF (the image buffers), and the bytes that the handler writes to WRAM are compared with those of the live handlers
 (identical destination bytes = the same function; a prefix = the same function over fewer rows).  The 06:73AF slots (second consumer, XOR passes over $C000..) are called the same way.

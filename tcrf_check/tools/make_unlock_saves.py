@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Make 'unlocking' variants of the real saves: all counters / scores at their maximum BCD value (10BB-10CC = 99), the CoroCoro tag 56 56 53 at 01FFD-01FFF
-(01FFC = AA as in the Universal_unlocking_save of the user's repo), settings block checksum and its echo recomputed (README section 3.1).
-Unlock conditions (README section 3 / 10): album B counters (bank2 $4D05), CoroCoro flag D582 (bank 8 $72E0), Run!Run!Run! (mode $21), stamp category 3.
+(01FFC = AA as in the Universal_unlocking_save of the user's repo), settings block checksum and its echo recomputed (docs §3.1).
+Unlock conditions (docs §3 / 10): album B counters (bank2 $4D05), CoroCoro flag D582 (bank 8 $72E0), Run!Run!Run! (mode $21), stamp category 3.
 Usage: make_unlock_saves.py SAVDIR OUTDIR"""
 import sys, os, glob
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'tools'))

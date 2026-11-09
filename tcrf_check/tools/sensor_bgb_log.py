@@ -4,7 +4,7 @@ and the entry of the sensor routines of bank $0A, then turn the log into one row
 
 BGB emulates the MAC-GBD with a fake sensor (a fixed picture, whatever the registers say): what is checked here is the *code path* (which registers are written,
 in which order, with which constant), not the pixel-dependent results.  The ROM registers are A001 = sensor reg 1 (N VH G), A002 = C1 (exposure high byte),
-A003 = C0 (low byte, 16 us), A004 = reg 7 (E3-E0 I V2-V0), A005 = reg 0 (Z1 Z0 O5-O0); P, M, X (sensor registers 4-6) are added by the MAC-GBD (README section 18).
+A003 = C0 (low byte, 16 us), A004 = reg 7 (E3-E0 I V2-V0), A005 = reg 0 (Z1 Z0 O5-O0); P, M, X (sensor registers 4-6) are added by the MAC-GBD (docs §18).
 
 usage: sensor_bgb_log.py OUTDIR --sav SAV [--rom ROM] [--combo HEX] [--keys 'A:4:200,Left:4:60'] [--free N] [--tail N] [--name NAME]
   --combo : joypad byte held during the 250 boot frames (BGB demo layout: A=1 B=2 Select=4 Start=8 Right=$10 Left=$20 Up=$40 Down=$80; $FD = all but B = the fast calibration sanity check)
@@ -17,7 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 ROOT = os.path.dirname(os.path.dirname(HERE)) if os.path.isdir(os.path.join(os.path.dirname(os.path.dirname(HERE)), 'tcrf_check')) else os.path.dirname(HERE)
 BGB_SRC = os.environ.get('BGB_SRC', '/home/claude/bgbx')
 
-MARKERS = [  # (bank:addr, name, extra expressions) - bank $0A sensor routines (README section 18)
+MARKERS = [  # (bank:addr, name, extra expressions) - bank $0A sensor routines (docs §18)
     ('0A:7D04', 'BootPing1', ''), ('0A:7D0A', 'CalibFarCall', ''), ('0A:7D10', 'BootPing2', ''),
     ('0A:45C9', 'ValidityCheck', ''), ('0A:46FD', 'CalibLoader', ''), ('0A:4724', 'BootMeasureSeq', ''), ('0A:4859', 'ExposureBandSelect', ''),
     ('0A:4947', 'FullCalibration', ''), ('0A:4961', 'FactoryMeasure1', ''), ('0A:4C6C', 'FactoryMeasure2', ''), ('0A:4E44', 'ThresholdConverge', 'ff8e=%(FF8E)%'),

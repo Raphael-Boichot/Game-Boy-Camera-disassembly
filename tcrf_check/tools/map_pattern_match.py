@@ -3,7 +3,7 @@
 For the target (cols x rows cells of the map at BANK:ADDR, starting at column first_col) the set A of neighbouring cell pairs (right, below) that hold the same id is taken;
 for every ROM offset p the same pairs are read at p + 32 row + col, and the Jaccard index of the two sets of equal neighbours (A, and all the equal neighbours of the
 window B) is printed: 1.00 = the same pattern, flat fills and padding give a large B and a low index.  The map itself and its own rows (+-2) are skipped.
-Result (README 16.25.2): 26:7080 has no look-alike in the Japanese or the international ROM (best 0.41, a flat fill).
+Result (docs §16.25.2): 26:7080 has no look-alike in the Japanese or the international ROM (best 0.41, a flat fill).
 usage: map_pattern_match.py ROM BANK:ADDR [first_col=0 [cols=20 [rows=18]]]"""
 import sys
 import numpy as np

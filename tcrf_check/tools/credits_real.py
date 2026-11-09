@@ -1,7 +1,7 @@
 """Run the real credits (unlocking save) from the entry to the end, per-frame log of mode:state and the sound variables, screenshots at every state change and every 45 frames,
 and the set of ROM bytes organically read since the credits entry (org_dread)."""
 import sys, os, json
-ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of README 16.15 (core, tools/lib.py, the ROM)
+ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of docs §16.15 (core, tools/lib.py, the ROM)
 BGBX = os.environ.get('BGB_DIR', '/home/claude/bgbx')
 os.chdir(ROOT); sys.path.insert(0, 'tools')
 import numpy as np

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Targets of the L3 BGB pass (README 1.3): every name of roms/jp_rev_a/disasm/sym_names_jp.csv tagged I, with the watchpoint that would show it at work.
+"""Targets of the L3 BGB pass (docs §1.3): every name of roms/jp_rev_a/disasm/sym_names_jp.csv tagged I, with the watchpoint that would show it at work.
 
 usage: l3_targets.py OUT.csv [--names roms/jp_rev_a/disasm/sym_names_jp.csv] [--sym pocketcamera_jp.sym] [--tag I]
 A label inside a `.code` block of the symbol file gets an execute watchpoint on its first byte (kind x); any other label a read watchpoint on its bytes up to the

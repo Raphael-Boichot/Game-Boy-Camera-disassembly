@@ -107,7 +107,7 @@ CODE_KEYS = [k for k, _, _ in CATS[:11]]
 # ---- function group of a code label ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 MODE_GROUP = {'00': 'UI', '01': 'CAM', '02': 'ALBUM', '03': 'UI', '04': 'EDIT', '05': 'EDIT', '06': 'LINK', '07': 'GAME', '08': 'UI', '09': 'ALBUM', '0A': 'ALBUM', '0B': 'ALBUM', '0C': 'ALBUM',
               '0D': 'ALBUM', '0E': 'LINK', '0F': 'ALBUM', '10': 'EDIT', '11': 'EDIT', '12': 'EDIT', '13': 'EDIT', '14': 'CAM', '15': 'CAM', '16': 'CAM', '17': 'CAM', '18': 'CAM', '19': 'UI',
-              '1A': 'EDIT', '1B': 'PRINT', '1C': 'PRINT', '1D': 'PRINT', '1E': 'PRINT', '1F': 'DJ', '20': 'GAME', '21': 'GAME'}      # modes: README 16.2
+              '1A': 'EDIT', '1B': 'PRINT', '1C': 'PRINT', '1D': 'PRINT', '1E': 'PRINT', '1F': 'DJ', '20': 'GAME', '21': 'GAME'}      # modes: docs §16.2
 PREFIX_GROUP = {}
 for grp, names in [
  ('SYS',   'Boot Vec Irq Vram Blit Oam OamDma Mem Math Rng Stat Main Delay Far Joy Vq Pal Wait Bcd Anim Lcd Reti Rst Call Glyph Bank Slide Record Sgb Sram Photo Settings Counters Owner GameFace AlbumB Mode Map Gfx'),
@@ -209,9 +209,9 @@ if len(_u):
     for _s in np.split(_u, _cut): print('uncertain span %02X:%04X +%d' % (_s[0] // 0x4000, _s[0] % 0x4000 + (0x4000 if _s[0] >= 0x4000 else 0), len(_s)))
 
 # ---- marks: the bytes no run reached --------------------------------------------------------------------------------------------------------------------------------------------------------------
-MARKS = [('code that never ran (proven dead, evidence I; README 16.15, 16.21)', (0, 0, 0)),
-         ('data that no run shows or reads: the REALLY unused assets (evidence I; README 16.24)', (214, 20, 40)),
-         ('data never read by the v8 run, identified (evidence I; README 16.13); whether the game uses it is not shown', (245, 160, 0)),
+MARKS = [('code that never ran (proven dead, evidence I; docs §16.15, 16.21)', (0, 0, 0)),
+         ('data that no run shows or reads: the REALLY unused assets (evidence I; docs §16.24)', (214, 20, 40)),
+         ('data never read by the v8 run, identified (evidence I; docs §16.13); whether the game uses it is not shown', (245, 160, 0)),
          ('untouched padding', (176, 176, 176))]
 mark = np.full(N, 255, np.uint8)
 mark[cat == 3] = 3; mark[cat == 4] = 2; mark[(cat == 7) | ((cat == 2) & ~is_code)] = 1; mark[(cat == 6) | ((cat == 2) & is_code)] = 0
@@ -301,8 +301,8 @@ LG.append(('head', 'DATA, by what the bytes are (identified even when no code ca
 for j in range(11, len(CATS)): LG.append(('cat', j, fmt(tot_cat[j]) + ' B  ' + pct(tot_cat[j]), CATS[j][1]))
 LG.append(('head', {'reach': 'OUTLINE: tiles that no run reached (16-byte tiles)', 'diff': 'OUTLINE: tiles that differ from the Japanese ROM (16-byte tiles)',
                     'none': 'OUTLINE: none yet (no run and no comparison for this ROM)'}[OUTLINE]))
-MTXT = {'reach': {0: 'never-run code, proven dead (evidence I; README 16.15, 16.21)', 1: 'data that no run shows or reads: the REALLY unused assets (I; README 16.24)',
-                  2: 'identified data the v8 run never read (I; README 16.13)'},
+MTXT = {'reach': {0: 'never-run code, proven dead (evidence I; docs §16.15, 16.21)', 1: 'data that no run shows or reads: the REALLY unused assets (I; docs §16.24)',
+                  2: 'identified data the v8 run never read (I; docs §16.13)'},
         'diff': {0: 'code new or changed in this build (no JP instruction pairs with it as the same code)', 2: 'data that differs from the Japanese bytes (new pictures, English text, moved tables)'},
         'none': {}}[OUTLINE]
 for m, col in ((0, INK), (1, RED), (2, BLUE)):

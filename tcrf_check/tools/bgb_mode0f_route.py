@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Photo count $D561 and mode $0F (README 8, 12, 16.31): who computes $D561 at boot, and by which menu route the game enters mode $0F.  Real BGB, logging watchpoints (-wp).
+"""Photo count $D561 and mode $0F (docs §8, 12, 16.31): who computes $D561 at boot, and by which menu route the game enters mode $0F.  Real BGB, logging watchpoints (-wp).
   boot   a cold boot (the root entry of the corpus, no key) and a soft reset (a main-menu entry, then A+B+Start+Select held):
          writes of $D561 (value, ROM bank, address of the instruction), the execution of 09:5F4B (Boot_EraseAllPrompt_Far; message carries $FF9E: 0 = cold start from 00:0202, 1 = soft reset from 00:0295),
          02:442C (Sram_ValidateAll_Far) and 02:4466 (Photo_RenumberVector), and the call into Mem_Zero at 00:0187 (the WRAM clear of the cold start, which also zeroes $D561).

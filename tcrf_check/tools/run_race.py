@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""RUN! RUN! RUN! (mode $21, bank 9) played to the end in my core with the joypad only: who finishes first, and which code runs (README 16.15, 16.17).
+"""RUN! RUN! RUN! (mode $21, bank 9) played to the end in my core with the joypad only: who finishes first, and which code runs (docs §16.15, 16.17).
 usage: run_race.py OUTDIR [CORPUS] [ENTRY]     (run from the working root; default corpus unlock_runs/f1_organic/corpus.jsonl, entry 649 = state 21:06, the race loop of race 1)
 Corpus entry 649 = save unl_CE10238211 (unlocking save) + 9 key groups from the boot menu (no RAM poke, not tainted): Space Fever II first wave, shoot the RUN! ship, character pick, start.
-Rules read in bank 9 (README 16.17): A = one running step, Up = jump (09:67C5; B held in the air raises the jump 09:6830), 24 px hurdles stop the runner for 5 frames when he is on the ground (09:69EF).
+Rules read in bank 9 (docs §16.17): A = one running step, Up = jump (09:67C5; B held in the air raises the jump 09:6830), 24 px hurdles stop the runner for 5 frames when he is on the ground (09:69EF).
 Runner 1 and 2 are not driven by keys: in steady state runner 1 does 3 px/frame, runner 2 does 4 (5 once the player has led by $A0, $D050); every 4th race since power-on ($D04F and 3 = 0, the counter
 is incremented at the end of state 04 and never cleared) runner 1 uses the faster table (5 px/frame) and beats runner 2.
 A runner finishes at x = $1400; the race ends (state 0B) once runner 0 is beyond $1580 and at least two runners have finished (09:63E1-63F7); a runner that has not finished gets place 3 (09:63FE, 6409, 6414).

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Which screens of the Japanese ROM use the STAT interrupt, and what the tile-data flip of STAT handler 1 (00:0B43) does to the picture (README 16.2, section "The STAT split").
+"""Which screens of the Japanese ROM use the STAT interrupt, and what the tile-data flip of STAT handler 1 (00:0B43) does to the picture (docs §16.2, section "The STAT split").
 `capture` replays, in BGB, the cheapest entry of the organic corpus for every (mode, state) signature it holds, and saves the state, the LCD picture and the interrupt registers at the end of the replay
 (HRAM FFC5 = handler index, FFAF / FFB5 = split line, FFAB = LCDC shadow, FFAC bit 6 = STAT interrupt wanted, IE bit 1 = STAT interrupt enabled).
 `report` classifies the end screens: the split runs only where FFAC bit 6 and IE bit 1 are set, whatever FFC5 says; for the screens with handler 1 it renders the state with gb_screen.py without and with the flip at every

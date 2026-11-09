@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """List every traced instruction of the Japanese ROM that writes or reads a camera register ($A000-$A005, `ld [$A00n],a` / `ld a,[$A000]`) with the datasheet name of the
-register and, when the previous instruction loads an immediate, the value (README section 18.2).  The busy-bit polls through HL (`ld hl,$A000 ; bit 0,[hl]`) are listed too; the other
+register and, when the previous instruction loads an immediate, the value (docs §18.2).  The busy-bit polls through HL (`ld hl,$A000 ; bit 0,[hl]`) are listed too; the other
 `ld hl,$A000` of the ROM (banks 2, 6) copy or clear the image in RAM bank 0 and are not camera-register accesses.
 usage: sensor_sites.py ROM.gb TRACE.json SYM OUT.csv       (TRACE.json = roms/jp_rev_a/trace/trace_jp.json, SYM = pocketcamera_jp.sym)"""
 import sys, json, csv, collections

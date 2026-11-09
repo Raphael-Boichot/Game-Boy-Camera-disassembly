@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Why the main-menu camera ball head animation is stored twice (README 16.24, 16.25.2): frames F0-F4 (16:6980 + $200 j) and F5-F9 (16:7380 + $200 (j - 5)), 32 tiles each, copied to VRAM $9100 (ids $10-$2F).
+"""Why the main-menu camera ball head animation is stored twice (docs §16.24, 16.25.2): frames F0-F4 (16:6980 + $200 j) and F5-F9 (16:7380 + $200 (j - 5)), 32 tiles each, copied to VRAM $9100 (ids $10-$2F).
 The head block ($9100-$92FF) and the 80-tile body strip ($9200-$96FF, ids $20-$6F: 16:5580 / 5A80 / 5F80 / 6480 and 11:4000 / 4500 / 4A00, `MainMenu_LoadIconTilesB`, `MainMenu_SlideB_Step`) share the ids $20-$2F:
 the lower row of the ball and the collar (BG rows 6 and 7 of the head).  LoadIconTilesB runs first, LoadIconTilesA (F0 / F4 / F9 by [$DA16]) second, so the head frame overwrites the first 16 tiles of the strip.
 Prints (1) per pair F(j) / F(j+5) the tile ids that differ (everything above the collar is the same: the eye was drawn once and the collar twice), (2) for each body strip how many of the 8 + 8 collar tiles of

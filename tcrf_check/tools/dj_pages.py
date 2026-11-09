@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Breadth-first key search over EVERY state of the D.J. (music editor) modes $1F / $20 in my core, joypad only (no RAM poke), with all eight keys and the two-key chords
-(README 16.15 / 16.19).  dj_fields.py (16.15) tapped only Right, Left, Up, Down, A and Select on the three pages SOUND I / SOUND II / NOISE; B, Start, the chords and the
+(docs §16.15 / 16.19).  dj_fields.py (16.15) tapped only Right, Left, Up, Down, A and Select on the three pages SOUND I / SOUND II / NOISE; B, Start, the chords and the
 other D.J. states were never pressed.  Here the state key is (mode, state, $D8C5, $D8C8, $D8CC, $D8F3, $D8F6, $D8FA, $D8FD, $D985), every (state, key) is pressed once
 (key held 4 frames, then 30 frames released), states outside modes $1F / $20 are not expanded (B leaves the editor, Start prints).
 usage: dj_pages.py OUTDIR [ROUTE.json] [--cap N] [--coarse] [--cursor] [--hold] [--latch]      (run from the working root, as dj_fields.py)
@@ -16,21 +16,21 @@ out = a[0]; os.makedirs(out, exist_ok=True)
 cap = int(sys.argv[sys.argv.index('--cap') + 1]) if '--cap' in sys.argv else 6000
 if '--cap' in sys.argv: a = [x for x in a if x != str(cap)]
 COARSE = '--coarse' in sys.argv      # state key = (mode, state, $D8C8, $D8F3, $D8FA, $D985) only: fewer states, so the search gets further for the same cap
-CURSOR = '--cursor' in sys.argv      # README 16.21: also key the states on the performance-screen cursor $D8B3 and the level $D8B7 (the first search keyed on neither, so a chord pressed with the cursor on item 4 was never tried)
+CURSOR = '--cursor' in sys.argv      # docs §16.21: also key the states on the performance-screen cursor $D8B3 and the level $D8B7 (the first search keyed on neither, so a chord pressed with the cursor on item 4 was never tried)
 route = json.load(open(a[1] if len(a) > 1 else 'unlock_runs/dj_route.json'))
-COMP = os.environ.get('REACH_CSV', os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'roms', 'jp_rev_a', 'assets', 'reach_components_jp.csv'))   # the targets of README 16.19 are the OPEN / EDGE bank-5 rows of the file BEFORE the 16.19 witnesses were added (git: the version of commit 991fc4e)
+COMP = os.environ.get('REACH_CSV', os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'roms', 'jp_rev_a', 'assets', 'reach_components_jp.csv'))   # the targets of docs §16.19 are the OPEN / EDGE bank-5 rows of the file BEFORE the 16.19 witnesses were added (git: the version of commit 991fc4e)
 targets = [(r['first_addr'], int(r['bytes'])) for r in csv.DictReader(open(COMP)) if r['bank'] == '05' and r['verdict'] in ('OPEN', 'EDGE')]
 EX0 = np.zeros(len(g.cov_exec()), bool)
 C = lib.Corpus(route['corpus']); g.set_organic(1); C.replay(route['entry'])
 for k in route['shoot']: g.keys(k); g.run(1)
 g.keys(0); g.run(route['after_shoot_idle'])
-LATCH = '--latch' in sys.argv         # README 16.21: A (or B) can be KEPT held between key presses (the SOUND II grid of 05:6A82 is edited only while A stays held: 05:6A92-6A96 leaves the grid when A is released); the held key is part of the state
+LATCH = '--latch' in sys.argv         # docs §16.21: A (or B) can be KEPT held between key presses (the SOUND II grid of 05:6A82 is edited only while A stays held: 05:6A92-6A96 leaves the grid when A is released); the held key is part of the state
 def tap(k, hold=4, wait=30, latch=0):
     if isinstance(k, tuple): g.keys(k[0]); g.run(10); k = k[0] | k[1]          # --hold: the first key is held for 10 frames, then the direction is added
     g.keys(latch | k); g.run(hold); g.keys(latch); g.run(wait)
 SING = [(g.RIGHT, 'Right'), (g.LEFT, 'Left'), (g.UP, 'Up'), (g.DOWN, 'Down'), (g.A, 'A'), (g.B, 'B'), (g.SELECT, 'Select'), (g.START, 'Start')]
 KEYS = list(SING)
-HOLD = '--hold' in sys.argv and not LATCH           # README 16.21: instead of the simultaneous two-key chords, the direction is pressed while A (or B) is ALREADY held (the steppers 05:4960 / 48EA read the held A in $FFA1 and the new direction in $FFA3)
+HOLD = '--hold' in sys.argv and not LATCH           # docs §16.21: instead of the simultaneous two-key chords, the direction is pressed while A (or B) is ALREADY held (the steppers 05:4960 / 48EA read the held A in $FFA1 and the new direction in $FFA3)
 if LATCH:
     KEYS += [(('latch', g.A), 'A kept held'), (('latch', g.B), 'B kept held'), (('latch', 0), 'release')]
 elif HOLD:

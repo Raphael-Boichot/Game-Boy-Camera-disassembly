@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Printer status injection in my core: what the Camera does when the printer answers with an error status (README 16.16).
+"""Printer status injection in my core: what the Camera does when the printer answers with an error status (docs §16.16).
 usage: printer_status.py OUTDIR [--corpus FILE] [--entry N] [--scenario card|dj] [--frames N] [--sweep | --grid | --errors] [--only CMD:NTH:STATUS[:COUNT],...]      (run from the working root; needs GBCAM_CORE and GBCAM_REPO, see below)
 The core needs the status-injection API (gb_printer_inject, gb_printer_log; coverage/src/gbcov.c): build it somewhere and set GBCAM_CORE=<dir with gbcov.py and libgbcov.so>; GBCAM_REPO=<this repository>.
-Scenario card (default) = the comment-card print of README 17.4, the same keys as the BGB run: corpus entry 289 (unlocking save), five extra Right taps after the 13th action, Start (the print
+Scenario card (default) = the comment-card print of docs §17.4, the same keys as the BGB run: corpus entry 289 (unlocking save), five extra Right taps after the 13th action, Start (the print
 options), A (print), then 4,100 frames; the printer stand-in is attached from the boot and answers like the BGB helper (real-trace model: PRINT 08, 18 INQUIRY polls 06, two 04, then 00).  Scenario dj = the TRIPY-H score print of 17.6 (route file unlock_runs/dj_route.json or --route).
 Each variant restores the snapshot taken just before the last A, clears the executed-byte array
 and replaces the reply of the chosen packet(s) by the given status byte:  CMD = init | print | data | inq, NTH = 1-based packet number of that command, STATUS = hex byte, COUNT = packets in a row.
@@ -44,7 +44,7 @@ if scen == 'card':
     seq = seq[:13] + [(g.RIGHT, 4, 40)] * 5 + seq[13:] + [(g.START, 4, 40)]
     for x in seq: lib.act(x)
     def trigger(): g.keys(g.A); g.run(4); g.keys(0)
-else:                                                       # D.J. score print (README 17.6): the route of dj_route.json, Select to SOUND I, then Start (8 frames), Start+A (4), Start (4)
+else:                                                       # D.J. score print (docs §17.6): the route of dj_route.json, Select to SOUND I, then Start (8 frames), Start+A (4), Start (4)
     route = json.load(open(opt('--route', 'unlock_runs/dj_route.json')))
     Cp = lib.Corpus(route['corpus']); p = Cp.path(route['entry']); sp = dict(Cp.E[p[0]]['spec'])
     lib.boot(lib.SAV(sp['sav']), combo=sp['combo'], printer=1, free=sp['free'])

@@ -12,15 +12,15 @@ Blocks (file offsets; Data_injector.m uses 1-based Matlab indices, converted her
                tcrf_check/assets/bgb_printer/print_features/unl_CE10238211_tagtest.sav) differs from coverage/saves/CE10238211.sav in exactly
                these bytes, apart from the owner / photo fields of its own tag test at $19F00-$19FB7.
   --hello-kitty  the Hello Kitty Pocket Camera animation unlock of Data_injector.m: 23 bytes at $1000-$1016 (13 x $99, 60 00 00 00 00, "Magic"),
-               main copy only ("no echo on this one").  On every other camera $1000-$102E is the slide-show list (README 16.19), so this
+               main copy only ("no echo on this one").  On every other camera $1000-$102E is the slide-show list (docs §16.19), so this
                block overwrites it: use it for the Hello Kitty ROM only.
   --calibrate  the "triggers sensor calibration" block: the 14 bytes $4FF2-$4FFF and $11FF2-$11FFF (SRAM banks 2 and 8, $AFF2 / $BFF2) set to $AA,
-               which Cam_Calib_Loader (0A:46FD) reads as "no calibration": the next boot recalibrates the sensor (README 18).  Not unlocking.
+               which Cam_Calib_Loader (0A:46FD) reads as "no calibration": the next boot recalibrates the sensor (docs §18).  Not unlocking.
 The blocks Data_injector.m leaves commented out (unerase all images, camera id 66666666, a comment on the first image) are not ported.
 
 checksum.m adjusts the stored sum / xor by the difference of each changed byte, which is right only if the stored checksum was valid: this
 script checks both copies first (they hold for the 13 live saves of coverage/saves; CE10000843, the dead-battery save of
-README 12, has no valid block) and refuses an invalid save unless --force, then recomputes both checksums from scratch after writing."""
+docs §12, has no valid block) and refuses an invalid save unless --force, then recomputes both checksums from scratch after writing."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from sram_analyze import blk_ok                 # the protected-block check ('Magic' + sum + $4E / xor ^ $54), one copy only

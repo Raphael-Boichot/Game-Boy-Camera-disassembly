@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run in my core (joypad only, a save file edit and no RAM poke) the repeat-range code of the slide show (README 16.19).
+"""Run in my core (joypad only, a save file edit and no RAM poke) the repeat-range code of the slide show (docs §16.19).
 The slide-show list is SRAM $1000-$102E (47 entries, $FE = empty, $FF = end), the repeat flag $102F (0 / $FF) and the timing / loop markers SRAM $1030-$105E (47 bytes: 0 none, range start $80+t,
 interior t, end $40+t, t = number of plays 1..50).  The unlocking saves hold an empty list and no marker, so the player (mode $13, 03:5FA0) never met one: its marker code
 03:6155 (start marker on the first entry), 03:6264 (end marker: replay the range or leave it), 03:629A (start marker met after a range ended) and the editor-preview copy 03:4D4B (start marker on the first entry) never ran.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Reproduce the three BGB-to-BGB link runs of README 16.19 (BGB under Wine, headless; the ROM and the BGB directory are not in git).
+# Reproduce the three BGB-to-BGB link runs of docs §16.19 (BGB under Wine, headless; the ROM and the BGB directory are not in git).
 # Run from the working root (the folder that holds pocketcamera_jp.gb); T = tcrf_check/tools, L = link_protocol/saves of this repository.
 T=${T:-tcrf_check/tools}; L=${L:-link_protocol/saves}; R=${R:-pocketcamera_jp.gb}; OUT=${OUT:-/tmp/linkv}; mkdir -p $OUT
 # V1: sender and receiver both owner male ($2FC5 = 01), receiver counters F12-F14 / 10C3-10C4 cleared;  V2: both female (02)

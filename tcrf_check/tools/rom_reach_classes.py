@@ -3,7 +3,7 @@
 build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO) -> dict of boolean byte masks (flat ROM offsets) and cat, the category of each byte:
 0 organic (blue), 1 forced only (light blue), 2 never executed nor read and not identified (red), 3 untouched padding, 4 never read but identified as asset data (orange),
 5 never run by v8 but run / read by a later targeted run (green), 6 never run and proven dead (purple), 7 really unused asset data (yellow).
-Definitions and sources: the docstring of rom_reach_map.py and README 16.13-16.15, 16.24."""
+Definitions and sources: the docstring of rom_reach_map.py and docs §16.13-16.15, 16.24."""
 import os, csv
 import numpy as np
 
@@ -41,7 +41,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
         for r in csv.DictReader(open(ASSETS)):
             b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
             ident[o1:o2 + 1] = True
-    # the wild-frame lateral strips are NOT unknown data any more: blanking them in BGB changes exactly the lateral tiles of the print (README 16.13 (1), C on frames 02, 03, 05, 06, 07, 08);
+    # the wild-frame lateral strips are NOT unknown data any more: blanking them in BGB changes exactly the lateral tiles of the print (docs §16.13 (1), C on frames 02, 03, 05, 06, 07, 08);
     # they are never read by the v8 core runs, so they get the colour of 'never run by v8, shown to be used by a later targeted run'. Their $FF runs (frames 05, 06, 08) are used too, not padding.
     lat = np.zeros(N, bool)
     if ASSETS != 'none' and os.path.exists(ASSETS):
@@ -50,7 +50,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
             b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
             lat[o1:o2 + 1] = True
     lat &= C('U')
-    # the data sent to the Super Game Boy (asset_map rows sgb_*, evidence C): the border that BGB shows in SGB mode equals the one rebuilt from these bytes (README 16.13 (5))
+    # the data sent to the Super Game Boy (asset_map rows sgb_*, evidence C): the border that BGB shows in SGB mode equals the one rebuilt from these bytes (docs §16.13 (5))
     sgb = np.zeros(N, bool)
     if ASSETS != 'none' and os.path.exists(ASSETS):
         for r in csv.DictReader(open(ASSETS)):
@@ -58,7 +58,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
             b = int(r['bank'], 16); o1 = b * 0x4000 + (int(r['start'], 16) - 0x4000 if b else int(r['start'], 16)); o2 = b * 0x4000 + (int(r['end'], 16) - 0x4000 if b else int(r['end'], 16))
             sgb[o1:o2 + 1] = True
     sgb &= C('U') & ~pad
-    # the stamp pictures (sym labels StampCat*_Gfx, evidence C: README 16.24) that the v8 run never read but the stamp-menu walks of the display tracker put on screen in runs without state pokes
+    # the stamp pictures (sym labels StampCat*_Gfx, evidence C: docs §16.24) that the v8 run never read but the stamp-menu walks of the display tracker put on screen in runs without state pokes
     stamp = np.zeros(N, bool)
     NM = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_names_jp.csv'); TY = os.path.join(REPO, 'roms', 'jp_rev_a', 'disasm', 'sym_types_jp.csv'); DU = os.path.join(REPO, 'tcrf_check', 'assets', 'display_run', 'display_union.npz')
     if all(os.path.exists(f) for f in (NM, TY, DU)):
@@ -71,7 +71,7 @@ def build(ROM, MAP, ASSETS, WIT, REACH, UNUSED, REPO):
         stamp &= tile_on
     stamp &= C('U') & ~pad
     ident &= C('U') & ~pad & ~lat & ~stamp & ~sgb
-    # the really unused assets of README 16.24 (display tracking + hand-listed spans): data only, padding stays padding
+    # the really unused assets of docs §16.24 (display tracking + hand-listed spans): data only, padding stays padding
     unused = np.zeros(N, bool); n_unused_spans = 0; n_unused_tcrf = 0
     if UNUSED != 'none' and os.path.exists(UNUSED):
         for r in csv.DictReader(open(UNUSED, encoding='utf-8')):

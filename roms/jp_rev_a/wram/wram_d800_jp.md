@@ -132,7 +132,7 @@ Hardware mapping (proved by the writes in `0:1017-1560`): **SOUND I -> hardware 
 | `$D8AF` | 4 | animator slots: finished flags (`$D8B2` = slot 3) | byte x4 | 5:532A (sets 1/0), 5:4F18 (reads D8B2) |  | I |
 | `$D8B3` | 1 | performance-screen control cursor 0..4 | byte | 5:53EF (`5:5467` via 499B BC=$0004) | 0 tempo, 1 SOUND I on/off, 2 SOUND II, 3 NOISE, 4 level (`D8B7`) | C |
 | `$D8B4` | 3 | channel states SOUND I / SOUND II / NOISE | byte x3 (0 off, 1 on, 2 fading out, 3 fading in) | 5:56AE (state machine), 5:5651 (Up/Down edits), 0:1017 (tests !=0 before writing NR2x/NR3x/NR4x) | `$D8B4` SOUND I, `$D8B5` SOUND II, `$D8B6` NOISE | C |
-| `$D8B7` | 1 | performance-screen level 0..8 (control 4) = sound effect SE 1..9 | byte | 5:547D,5616,580F,4D42 | drives a digit tile (5:580F), a slider sprite (5:52ED via D8BE) and animation 5, and is the SE selector: `05:547D` reads it when A is newly pressed and posts `[05:554D + 2*D8B7]` (= `$2C` + SE - 1) on the channel-1 mailbox `$DD60` (README 16.18; the earlier text said no reader in the sound engine) | C |
+| `$D8B7` | 1 | performance-screen level 0..8 (control 4) = sound effect SE 1..9 | byte | 5:547D,5616,580F,4D42 | drives a digit tile (5:580F), a slider sprite (5:52ED via D8BE) and animation 5, and is the SE selector: `05:547D` reads it when A is newly pressed and posts `[05:554D + 2*D8B7]` (= `$2C` + SE - 1) on the channel-1 mailbox `$DD60` (docs §16.18; the earlier text said no reader in the sound engine) | C |
 | `$D8B8` | 1 | performer "speaking" icon flag | byte | W 5:4F18 (=0), 5:5087/5488 (=1); R 5:52D5 | selects sprite position of the icon `$D2` Used by: W 5:4F18 (=0), 5:5087/5488 (=1); R 5:52D5. BGB: mode `$1F`, values `$01` `$00`. | C |
 | `$D8B9` | 1 | NR51 mask (channel enables) | byte | W 5:56AE,582E,5828 (=$11),4D55 (=$FF); R 0:10A5 (`NR51 = (D93C\|$11) & D8B9`) | bits 1/5 SOUND I, 2/6 SOUND II, 3/7 NOISE, 0/4 always set | C |
 | `$D8BA` | 3 | per-channel indicator blink toggle | byte x3 | 5:574C via 578B/57B7/57E3 | flips every call while the channel state is >=2; cleared while paused | I |
@@ -187,13 +187,13 @@ Hardware mapping (proved by the writes in `0:1017-1560`): **SOUND I -> hardware 
 | `$D91E` | 16 | (unreferenced block before the sound-effect request) | byte x16 | no access in the proven code | 16 bytes between the rest counters `D91B-D91D` and `D92E`; possibly the spare area of the dead sound-effect path (`0:10AC`, `D92E`), never referenced. | U |
 | `$D92E` | 1 | UI sound-effect request (1..8) written by the editor | byte | W x80 in bank 5 (e.g. 1 = cursor move, 4/5 = select, 8 = value change); **sole reader `0:10AC` is not called from anywhere in the ROM** (no `call/jp $10AC`, no table word) | dead in this ROM: the table at `0:10D0` would load NR10-NR14 | U |
 | `$D92F` | 2 | NR21 / NR22 shadows (SOUND I) | byte x2 | W 0:112A,114C; R 0:103A.. | NR21 = duty<<6 \| `1F:4025[D93E-1]`, NR22 = (D941-D8CF)<<4 \| (D93F^1)<<3 \| D940 | C |
-| `$D931` | 1 | (NR23 slot of the register-shadow array, unused) | byte | no access | The shadows `D92F-D932` follow the register order NR21, NR22, NR23, NR24; the SOUND I frequency lives in `D90F`, so the NR23 slot is never used. Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of README §2.13): the slot is unused. | U |
+| `$D931` | 1 | (NR23 slot of the register-shadow array, unused) | byte | no access | The shadows `D92F-D932` follow the register order NR21, NR22, NR23, NR24; the SOUND I frequency lives in `D90F`, so the NR23 slot is never used. Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of docs §2.13): the slot is unused. | U |
 | `$D932` | 1 | NR24 control bits (SOUND I) | byte | W 0:110D (=$C0, res 6 if length 0) |  | C |
 | `$D933` | 3 | NR30 / NR31 / NR32 shadows (SOUND II) | byte x3 | W 0:1201 ($80), 11FE ($C0 \| `1F:4025[D986-1]`), 1208 ($20) |  | C |
-| `$D936` | 1 | (NR33 slot of the register-shadow array, unused) | byte | no access | Same for SOUND II (`D933-D937` = NR30, NR31, NR32, NR33, NR34; frequency in `D911`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of README §2.13): the slot is unused. | U |
+| `$D936` | 1 | (NR33 slot of the register-shadow array, unused) | byte | no access | Same for SOUND II (`D933-D937` = NR30, NR31, NR32, NR33, NR34; frequency in `D911`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of docs §2.13): the slot is unused. | U |
 | `$D937` | 1 | NR34 control bits (SOUND II) | byte | W 0:11E8 (=$C0) |  | C |
 | `$D938` | 2 | NR41 / NR42 shadows (NOISE) | byte x2 | W 0:12B9, 12DB |  | C |
-| `$D93A` | 1 | (NR43 slot of the register-shadow array, unused) | byte | no access | Same for NOISE (`D938-D93B` = NR41, NR42, NR43, NR44; the NR43 value is `D917`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of README §2.13): the slot is unused. | U |
+| `$D93A` | 1 | (NR43 slot of the register-shadow array, unused) | byte | no access | Same for NOISE (`D938-D93B` = NR41, NR42, NR43, NR44; the NR43 value is `D917`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of docs §2.13): the slot is unused. | U |
 | `$D93B` | 1 | NR44 control bits (NOISE) | byte | W 0:12A4 |  | C |
 | `$D93C` | 1 | NR51 pan shadow | byte | 0:10A0 (`NR51 = (D93C \| $11) & D8B9`), per-channel pan from tables `0:11D8`, `0:1294`, `0:1350` |  | C |
 | `$D93D` | 2 | **SOUND I**: duty (0..2), length index | byte x2 | W 2:4F32 (unpack), 5:6358; R 0:1120,110F, 2:4A81 (pack) | SRAM `1061`: bits 5-4 = duty, bits 3-0 = length index (0 = no length counter) | C |
@@ -218,9 +218,9 @@ Hardware mapping (proved by the writes in `0:1017-1560`): **SOUND I -> hardware 
 | `$D9D5` | 1 | start menu 1: source of the tune (0 = 4 factory songs, 1 = blank, 2 = saved) | byte | clear `0:2EE0`; W 5:405B (=2 if `$D9D2`), 5:40FC; R 5:40A5,4269,4412 | `5:4269`: 0 -> factory preset `1+D9D6`, 1 -> preset 0 (blank), 2 -> unpack SRAM (`2:4F2B`) | C |
 | `$D9D6` | 1 | start menu 2: factory song number (0..3) | byte | clear `0:2EE3`; W 5:41AB; R 5:4195,426F,41DA.. | presets table at `5:62A3`: 5 entries (3 bytes) -> 89-byte packed blocks in bank `$29` | C |
 
-#### 3.1 SRAM settings block <-> WRAM (README §3.2 offsets; no flat 217-byte image exists)
+#### 3.1 SRAM settings block <-> WRAM (docs §3.2 offsets; no flat 217-byte image exists)
 
-The README §3.2 block is **217 bytes = 215 data bytes `$1000-$10D6` + 2 checksum bytes, echoed at +`$D9`**: the writer `2:4BB2-4BF1` saves two copies (`DE = 0` and `DE = $D9`, `B = 2`) and calls the checksum routine `2:432F` with `HL = $B000 + DE`, `BC = $00D7`. Bank 2 never moves it as one block: each part has its own WRAM image.
+The docs §3.2 block is **217 bytes = 215 data bytes `$1000-$10D6` + 2 checksum bytes, echoed at +`$D9`**: the writer `2:4BB2-4BF1` saves two copies (`DE = 0` and `DE = $D9`, `B = 2`) and calls the checksum routine `2:432F` with `HL = $B000 + DE`, `BC = $00D7`. Bank 2 never moves it as one block: each part has its own WRAM image.
 
 | SRAM offset (flat) | Size | WRAM image | Format in WRAM | Moved by |
 |---|---|---|---|---|
@@ -312,7 +312,7 @@ README (`$D800-$D835` section and the `$D890-$D9F8` / `$D9D1-$D9F1` rows of the 
 ### Still inconclusive
 
 * **`$D861`** (`7:5A22`, `5B73`, `5D5C`, `5F46`, `6114`): written at every wave init with 3, 2, 2, 3, 1 and never read in proven code (`?`).
-* **`$D806` bit 0, second print job** (`8:46A3-4777`): it draws a page from banks `$1B/$09` (nine bank-9 layout routines `9:45B0 ... 9:4706`) and prints it with margin `$13`; that page is the 「Camera コメント」 card (printed in BGB with a printer helper, README §17.4).
+* **`$D806` bit 0, second print job** (`8:46A3-4777`): it draws a page from banks `$1B/$09` (nine bank-9 layout routines `9:45B0 ... 9:4706`) and prints it with margin `$13`; that page is the 「Camera コメント」 card (printed in BGB with a printer helper, docs §17.4).
 * **`$D800`**: launched-from-extras flag; the exact on-screen option that sets it (`6:487A` option 2) and the screens it changes were not identified by label (`I`).
 * **`$D816:$D817`**: sweep counter in bank 3 (`3:787A`), caller mode not identified (address-only attribution, `I`); no reset found.
 * **`$D805`**: the load routine `0:2656` and the `2:517B` slot-pointer call were not read in depth; behaviour described from the callers.

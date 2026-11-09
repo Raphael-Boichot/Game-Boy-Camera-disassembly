@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""F34-F35 (the photo's checksum bytes): which screens call 00:16F4 (Snd_PlayTagDigits) and who reads the four nibbles it leaves in $DD03-$DD06 (README 3, 12, 16.27, 16.30).
+"""F34-F35 (the photo's checksum bytes): which screens call 00:16F4 (Snd_PlayTagDigits) and who reads the four nibbles it leaves in $DD03-$DD06 (docs §3, 12, 16.27, 16.30).
 Real BGB, logging watchpoints (-wp; the message goes to debugmsg.txt and the game runs on):
   execution of 00:16F4 and of its six call sites 06:514C, 06:53AE, 06:639A, 06:63C6, 06:6404, 07:717B   -> 'X name mode state'   (mode $D5CE, state $D5CF at that moment)
   every READ of $DD03-$DD06                                                                              -> 'RD pc bank'          (an instruction that reads a nibble: the sound driver, or a display routine?)
   every WRITE of $DD03-$DD06                                                                             -> 'WR pc bank'
   every write of the sfx-1 mailbox $DD60                                                                 -> 'S1 value bank pc'   (the table keeps value $10 = the P.VOICE request only)
-Runs (key paths of bgb_jofamo_checks.py, README 16.27):
+Runs (key paths of bgb_jofamo_checks.py, docs §16.27):
   pvoice  slide show > Select > P.VOICE option > A (the 21-picture copy album of bgb_albumb_comments.py, stage2.sram), the slide show runs on its own
   shoot   SHOOT, live view, shutter, save, shutter, save (all-unlocked save, no photos)
   fusion  FORCED: the joypad lineage of corpus entry 610 (COMPOSE, FUSION layout, mode $17 state $0A; bgb_compose.py) on its own save (30 photos), in a copy of the ROM whose album-full test of state

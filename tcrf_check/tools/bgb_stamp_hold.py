@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """BGB confirmation of the stamp tool's hold-A mirror (04:5E4C): reach the placement state of mode $11 with a joypad-only path,
 then hold A for N frames and dump the four stamp work buffers ($C000,$C1E0,$C3C0,$C5A0; 480 bytes each) from the BGB state.
-Expected (core, README 15.4): unchanged up to 179 frames, mirrored after 180..279, original again from 280 (period 2).
+Expected (core, docs §15.4): unchanged up to 179 frames, mirrored after 180..279, original again from 280 (period 2).
 usage: bgb_stamp_hold.py ROM OUTDIR [N ...]"""
 import sys, os, hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

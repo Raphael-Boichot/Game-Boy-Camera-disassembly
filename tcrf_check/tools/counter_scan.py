@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Which joypad-only corpus paths change the Album B counters of the settings block ($DA96-$DAA7 = SRAM $10BB-$10CC)? (README 16.18; the unlock conditions of the GameFAQs cheats page)
+"""Which joypad-only corpus paths change the Album B counters of the settings block ($DA96-$DAA7 = SRAM $10BB-$10CC)? (docs §16.18; the unlock conditions of the GameFAQs cheats page)
 Every entry of the corpus is replayed (joypad and save only, no RAM poke; the entries marked tainted are skipped) from the save of its root with the 18 counter bytes set to zero
 (settings block checksum and echo recomputed); the counters are read at the end from WRAM $DA96 and from SRAM $10BB. Writes OUTDIR/counter_scan.csv (entry, end mode:state, the counters that are not zero) and prints one line per distinct set of non-zero counters.
 usage: counter_scan.py CORPUS OUTDIR [FIRST LAST]      (run from the working root; GBCAM_CORE as for the other core tools)"""

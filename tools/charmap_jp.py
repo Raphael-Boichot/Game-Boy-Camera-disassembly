@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Character map of the Japanese name / comment charset for rgbasm (README 16.27, L6 text table).
+"""Character map of the Japanese name / comment charset for rgbasm (docs §16.27, L6 text table).
 
   tools/charmap_jp.py [--csv roms/jp_rev_a/disasm/charset_jp.csv] [--out roms/jp_rev_a/disasm/charmap_jp.inc] [--check]
 

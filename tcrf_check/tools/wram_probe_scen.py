@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""Second pass of the WRAM probe (README 2.13): the same read / write watchpoints as wram_probe.py in the scenarios that a single replay cannot reach, because they need a partner on the link cable.
+"""Second pass of the WRAM probe (docs §2.13): the same read / write watchpoints as wram_probe.py in the scenarios that a single replay cannot reach, because they need a partner on the link cable.
 
 Every scenario runs one of the existing BGB drivers with env BGB_WP = the watchpoint list (bgb_run.run adds `-wp` and `DebugMsgFile=1`), then counts the lines of the debug-message file of every BGB instance:
-  link_exchange       two real BGB instances joined with -listen / -connect, photo exchange of mode $0E (bgb_link_wp.py, README 14); sender and receiver are logged
-  print_single_1C     one photo, mode $1C -> $1D, Game Boy Printer helper on the link (bgb_print_run.py, README 17.3)
-  print_card_1C       the same with the comment card (Start option, README 17.4)
-  print_batch_1E      three photos marked in the multi-print screen, mode $1E (README 17.5); the route is the first 10 key actions of corpus entry 289 (main menu of the unlocked save, which has photos), Select, Up, A (LINK menu), A (print menu), Right, A; the all-zero root of the entries that reach mode $1E in the core has an empty album, and its path drifts in BGB
+  link_exchange       two real BGB instances joined with -listen / -connect, photo exchange of mode $0E (bgb_link_wp.py, docs §14); sender and receiver are logged
+  print_single_1C     one photo, mode $1C -> $1D, Game Boy Printer helper on the link (bgb_print_run.py, docs §17.3)
+  print_card_1C       the same with the comment card (Start option, docs §17.4)
+  print_batch_1E      three photos marked in the multi-print screen, mode $1E (docs §17.5); the route is the first 10 key actions of corpus entry 289 (main menu of the unlocked save, which has photos), Select, Up, A (LINK menu), A (print menu), Right, A; the all-zero root of the entries that reach mode $1E in the core has an empty album, and its path drifts in BGB
   print_wild_0 / _7   one photo with wild frame 01 / 08 (bgb_print_wild.py)
   show_hotspot / show_slideshow / show_animation   VIEW menu (entry 207) -> Right, A -> SHOW menu (mode $0B) -> HOT-SPOT $0C / SLIDE SHOW $0D / ANIMATION $13, no printer (the replays of the organic corpus end in the album instead)
-  dj_print            TRIPY-H score print, mode $1F (bgb_dj_print.py, README 17.6); dj_print_noise = the NOISE page; dj_editor / dj_editor_sound2 = the editor without the print (SOUND I / SOUND II page)
-  run_race_fast / _slow / _result   RUN! RUN! RUN! (mode $21) races of README 16.17 (bgb_run_race.py): race 1 with A every 2nd frame, race 4 with A every 16th frame, race 1 and A on the result screen
+  dj_print            TRIPY-H score print, mode $1F (bgb_dj_print.py, docs §17.6); dj_print_noise = the NOISE page; dj_editor / dj_editor_sound2 = the editor without the print (SOUND I / SOUND II page)
+  run_race_fast / _slow / _result   RUN! RUN! RUN! (mode $21) races of docs §16.17 (bgb_run_race.py): race 1 with A every 2nd frame, race 4 with A every 16th frame, race 1 and A on the result screen
   show_animation_music   the same ANIMATION route, then Select x3 in state $01 of mode $13 (music number, `wPlayerMusic`)
   dj_perf_start / dj_perf_start_noise   the editor (SOUND I / NOISE page), then Start taps and one 50-frame Start hold (play / stop, hold counter of the performer)
-  err_card_inq80 / err_dj_dataFF   the printer answers an error status byte (PRN_ERR, README 16.16)
+  err_card_inq80 / err_dj_dataFF   the printer answers an error status byte (PRN_ERR, docs §16.16)
 usage: wram_probe_scen.py OUT.csv WATCH.csv [--only LABEL,LABEL] [--workers 2] [--wp-file WP.txt]  (with --wp-file, WATCH.csv is ignored and the kind column holds the raw message)
 Output columns as wram_probe.py (entry = the scenario label, `.sender` / `.receiver` for the link).  Environment: GBCAM_ROOT (default /home/claude/gbcam_jp); the drivers are run from
 GBCAM_ROOT/tools_repo (a symlink to tcrf_check/tools, so that their ROOT is the working root); BGB_HF=-headless (a linked BGB hangs at the handshake with -hf)."""

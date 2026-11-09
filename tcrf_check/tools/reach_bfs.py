@@ -6,7 +6,7 @@ usage: reach_bfs.py OUTDIR MODES TARGETS [--depth N] [--cap N] [--corpus FILE] [
   --wram   WRAM ranges (hex, inclusive) hashed into the state key together with (mode, state); default D5D0-D5FF
 Each tap = the key held 4 frames, then 30 frames of release.  A state is (mode, state, bytes of the WRAM ranges); it is expanded once.  Joypad only (organic), no RAM poke.
 Prints, per target, the start entry and the key path; writes OUTDIR/exec_ranges.csv (everything executed by the search) and OUTDIR/reach_bfs.json (paths).
-README 16.15 gives the paths found for the MAGIC menu."""
+docs §16.15 gives the paths found for the MAGIC menu."""
 import sys, os, json, hashlib
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g

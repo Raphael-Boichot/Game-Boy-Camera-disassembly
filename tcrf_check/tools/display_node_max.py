@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""How many frames is a ROM span on screen in ONE node of a replay?  README 16.24 (the six tiles at 13:5CA0).
+"""How many frames is a ROM span on screen in ONE node of a replay?  docs §16.24 (the six tiles at 13:5CA0).
 
 display_replay.py (and display_union.npz built from it) keeps one cumulative counter per ROM byte over a whole corpus: 15 frames anywhere in the replay make a tile "stable", so fifteen
 one-frame events in fifteen different nodes look like a tile that is on screen.  This script replays a corpus the same way (depth first, the parent's snapshot restored for every

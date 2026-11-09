@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Make copies of the real saves in which the first used photo slots carry enabled hotspots (slot bytes F36-F53: flags, X, Y, sound, effect, jump), with the
-tag block checksum and its echo recomputed (README section 3.3).  Purpose: the hotspot viewer (mode $0C) only runs the effect handlers (table 03:655D) when
+tag block checksum and its echo recomputed (docs §3.3).  Purpose: the hotspot viewer (mode $0C) only runs the effect handlers (table 03:655D) when
 a photo has an enabled hotspot; none of the real saves has one.   Usage: make_hotspot_saves.py SAVDIR OUTDIR"""
 import sys as _s, os as _o
 _s.path.insert(0, _o.path.join(_o.path.dirname(_o.path.abspath(__file__)), '..', 'src'))

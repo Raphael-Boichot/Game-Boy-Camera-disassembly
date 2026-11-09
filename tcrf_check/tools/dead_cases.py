@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the case list of bgb_dead_hook.py (README 16.26) from the core's base states: for every case the corpus entry that leads to the game mode, the (mode, state) it is in, and the values of
+"""Build the case list of bgb_dead_hook.py (docs §16.26) from the core's base states: for every case the corpus entry that leads to the game mode, the (mode, state) it is in, and the values of
 AF BC DE HL at the point where dead_jump.py jumped (the core's idle point), so that BGB calls the routine with the same registers.
 usage: dead_cases.py CACHE_DIR OUT.json [--survey | --flips FLIP.json | --effects]   (environment as dead_jump.py; --survey = the map loader 04:6412 in every base mode; --flips = one case per flipped gate of dead_flip.py that ran)
 A case = {name, bank, entry, mode (decimal game mode of the base state), key (joypad bit set in all the game's joypad bytes for the call, or null), note}."""
@@ -28,7 +28,7 @@ for _n in range(1, 9):
     SOUND.append(dict(name='uieffect_%d' % _n, mode=16, bank=0, entry=0x10AC, note='Snd_UiEffect_Dead with $D92E = %d' % _n, pre=[(0xD92E, _n)], call_stage2=True, mailbox=[(0xDD68, 0xFF)], stage2=60, clip_s=1,
                       after=150, nocontrol=True, watch=[['FF10', 'NR10'], ['FF11', 'NR11'], ['FF12', 'NR12'], ['FF13', 'NR13'], ['FF14', 'NR14']]))
 
-# the camera-effect handlers (README 16.26): Cam_DispatchEffect (0A:5406) takes the handler number in A; seven WRAM bytes of the destination are poked with $5A first
+# the camera-effect handlers (docs §16.26): Cam_DispatchEffect (0A:5406) takes the handler number in A; seven WRAM bytes of the destination are poked with $5A first
 # ($C000 row 0, $C0FF, $C3FF row 3, $C400 row 4, $C9FF row 9, $CA00 row 10, $CDFF row 13), so that a handler that copies only some of the rows leaves the marker in the others
 EFFECT_MARK = [(0xC000, 0x5A), (0xC0FF, 0x5A), (0xC3FF, 0x5A), (0xC400, 0x5A), (0xC9FF, 0x5A), (0xCA00, 0x5A), (0xCDFF, 0x5A)]
 EFFECT_IDX = (0x00, 0x13, 0x15, 0x20, 0x33, 0x35, 0x40, 0x53, 0x04, 0x19)

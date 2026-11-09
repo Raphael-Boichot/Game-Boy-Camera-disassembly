@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Where the two tiles at 1A:7C90 / 1A:7CA0 (the TCRF "photo option icon", 16 x 8 px) are drawn, on the real BGB.  README 16.24 / checklist B11.
+"""Where the two tiles at 1A:7C90 / 1A:7CA0 (the TCRF "photo option icon", 16 x 8 px) are drawn, on the real BGB.  docs §16.24 / checklist B11.
 
 The album photo-option menu is mode $09: state 2 shows the photo with four arrows and the labels of the four directions; Right goes to state 4, the page of the two choices
 (frame / comment), which scrolls the background to SCX = 32.  Album_ShowPageScreenB (04:6E3D) copies 1A:7600-7CFF to $8900 and the map 24:73E0 to $9800; the map puts the two
@@ -7,7 +7,7 @@ tiles ($F9, $FA = $8F90, $8FA0) at cells (22, 8) and (23, 8), which are outside 
 The script replays the cheapest organic corpus entry of (mode 9, state 2) in BGB (tcrf_check/tools/bgbgrab.py), presses Right, reads BGB's state file, finds the VRAM tiles
 whose 16 bytes equal the two ROM tiles, finds the BG map cells that use them, checks that the cells are inside the visible 160 x 144 area and writes a PNG (the BGB frame, the
 icon boxed, 6x, cropped to the column of choice icons at the right edge so that no photo of the save is in the picture).
-usage: photo_option_icon_check.py OUT.png [BGB_DIR]      (GBCAM_ROOT = the working root of README 16.15, GBCAM_ROM; BGB_DIR is copied if it does not exist)"""
+usage: photo_option_icon_check.py OUT.png [BGB_DIR]      (GBCAM_ROOT = the working root of docs §16.15, GBCAM_ROM; BGB_DIR is copied if it does not exist)"""
 import sys, os
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 out = sys.argv[1]; bgbdir = sys.argv[2] if len(sys.argv) > 2 else '/home/claude/bgbq5'

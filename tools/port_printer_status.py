@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Every printer status the Camera can receive, injected in the project's core, for the international and Gold ROMs (counterpart of the Japanese
-tcrf_check/tools/printer_status.py, README 16.16).  The printer stand-in of the core answers like the real-trace model (gb_printer_model(1)); a variant
+tcrf_check/tools/printer_status.py, docs §16.16).  The printer stand-in of the core answers like the real-trace model (gb_printer_model(1)); a variant
 restores the snapshot taken just before the print key, replaces the status byte of chosen packets (gb_printer_inject: command, n-th packet, status, packets in a row)
 and runs FRAMES frames.
 Scenarios (joypad routes found in the core on the international ROM, the same on Gold):

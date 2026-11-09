@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The auto-exposure metering of the live view (README sections 10 and 18.6): the exact read addresses of Cam_PopcountSampleLoop (0A:4FBD-5090), taken from the ROM
+"""The auto-exposure metering of the live view (docs §10 and 18.6): the exact read addresses of Cam_PopcountSampleLoop (0A:4FBD-5090), taken from the ROM
 bytes with a tiny executor that knows only the 14 opcodes the routine uses (so nothing is transcribed by hand), and the sum it produces.
 Loop 1 = 120 reads, then the running sum is doubled (sla c / rl b at 0A:5036), loop 2 = 48 reads; one read = 2 bytes = plane 0 then plane 1 of one 8-pixel tile row,
 added as popcount(plane 0) + 2 * popcount(plane 1) (helper 0A:5091, table 0A:7300).  60 of the 120 reads of loop 1 start at an odd address.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay, on the events logged in BGB by sensor_bgb_log.py, the three steps of the live-view exposure loop of Cam_MainDispatch (bank $0A, README section 18.6):
+"""Replay, on the events logged in BGB by sensor_bgb_log.py, the three steps of the live-view exposure loop of Cam_MainDispatch (bank $0A, docs §18.6):
    Level   (0A:402D)  level L = FF8A, with the setpoint divisor D59A, the contrast D59B and the active gain index D587 as they are then,
    ShiftLoaded (0A:403A)  the shift s = FF8B read from the table at 0A:7B00, with the current 16-bit exposure D596:D597,
    ExposureNew (0A:4076)  the new exposure HL = e + (e >> s) (L >= 36) or e - (e >> s) (L < 36), saturating at $FFFF.

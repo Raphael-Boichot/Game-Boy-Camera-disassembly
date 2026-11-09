@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BGB: copy the stock pictures B01-B21 into the A album with EDIT > ALBUM > COPY, then open the Comment screen of each copy in VIEW > ALBUM (README 16.27).
+"""BGB: copy the stock pictures B01-B21 into the A album with EDIT > ALBUM > COPY, then open the Comment screen of each copy in VIEW > ALBUM (docs §16.27).
 usage: bgb_albumb_comments.py OUTDIR      (run from anywhere; env GBCAM_ROM = the Japanese ROM, GBCAM_SAV = a save with all unlocked and 0 photos; BGB directories /home/claude/bgbq0, bgbq1 copied from /home/claude/bgbx)
 Stage 1 copies B01-B08 (page 1), stage 2 B09-B21 (pages 2-3), both with the Japanese main-menu key paths of guide_nodes ('D s D A A A' = EDIT > ALBUM > the copy grid);
 every A-album slot is then compared with the ROM slot Bnn (3,584 photo bytes, name F04-F0C and comment F15-F2F: equal) - stage 3 opens the Comment screen of copy n (mode 0A:0E, `$D5D8` = n-1)

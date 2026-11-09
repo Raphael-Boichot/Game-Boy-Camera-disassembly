@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verdict of the L3 BGB pass (README 1.3): which inferred names were seen at work, in which screens, and whether that fits the name.
+"""Verdict of the L3 BGB pass (docs §1.3): which inferred names were seen at work, in which screens, and whether that fits the name.
 
 usage: l3_verdict.py HITS(.csv.gz | .partial.jsonl) TARGETS.csv OUT.csv [--names roms/jp_rev_a/disasm/sym_names_jp.csv]
 For every target: the replays and hits, the modes ($D5CE) and {mode:state} pairs it ran or was read in, the program counters of the readers (read targets), and a verdict:

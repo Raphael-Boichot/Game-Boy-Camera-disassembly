@@ -1,5 +1,5 @@
 """Walk every category and every scroll position of the stamp tool (mode $11, palette state 3) with the display-tracking core, once with an ordinary save
-and once with the CoroCoro-tag save (so that category 3 and all ten Pokemon pages exist), by real key presses.  Output: OUT/stamps_<label>.npz (README 16.24).
+and once with the CoroCoro-tag save (so that category 3 and all ten Pokemon pages exist), by real key presses.  Output: OUT/stamps_<label>.npz (docs §16.24).
 usage: display_stamps.py OUTDIR [CORPUS]"""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

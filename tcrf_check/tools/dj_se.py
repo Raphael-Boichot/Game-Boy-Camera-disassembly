@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""D.J. performance screen (mode $1F state 5): the nine sound effects "SE 1..9" played with the A key, joypad only (README 16.18).
+"""D.J. performance screen (mode $1F state 5): the nine sound effects "SE 1..9" played with the A key, joypad only (docs §16.18).
 usage: dj_se.py OUTDIR [ROUTE.json]       (run from the working root; default route unlock_runs/dj_route.json, a copy is tcrf_check/assets/bgb_retrace/dj_route.json)
 Route: corpus entry 197 (save _ff) = Space Fever II, Right held and A pulsed shoot the D.J. ship -> 1F:05 (the performance screen).  On it Right moves the control cursor `$D8B3`
 (0 tempo, 1 SOUND I, 2 SOUND II, 3 NOISE, 4 level = the SE number `$D8B7` 0..8), Up / Down change the level at control 4, A plays: `05:5477-5483` requests the id `[05:554D + 2*$D8B7]`

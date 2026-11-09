@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The names and comments of the stock pictures of Album B (Japanese ROM), README 16.27.
+"""The names and comments of the stock pictures of Album B (Japanese ROM), docs §16.27.
 Each of the 30 stock slots (0xDA000 + i*0x1000, same layout as an SRAM slot) carries a name (F04-F0C, 9 cells) and a comment (F15-F2F, 27 cells = 3 lines of 9) that the game shows
 only after the picture has been COPYed into the A album (the Comment screen of VIEW > ALBUM, mode 0A:0E).  B01-B21 have both, B22-B30 are empty.
 usage: albumb_comments.py ROM OUT.csv [--check DIR]

@@ -39,7 +39,7 @@ def run(rom, sav, prefix, seq, combo=0, free=400, br=None, timeout=900, extra=()
     if sav is not None: cmd += ['-loadbatt', os.path.abspath(sv)]
     if br: cmd += ['-br', br]
     wp = os.environ.get('BGB_WP')
-    if wp:      # logging watchpoints for any runner (printer, link, replay): the hits go to $BGB_DIR/debugmsg.txt (README 2.13, tcrf_check/tools/wram_probe_scen.py)
+    if wp:      # logging watchpoints for any runner (printer, link, replay): the hits go to $BGB_DIR/debugmsg.txt (docs §2.13, tcrf_check/tools/wram_probe_scen.py)
         cmd += ['-wp', wp, '-setting', 'DebugMsgFile=1']
         if os.path.exists(os.path.join(BGB, 'debugmsg.txt')): os.remove(os.path.join(BGB, 'debugmsg.txt'))
     cmd += list(extra)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild a TCRF picture from ROM tiles, cell by cell, and draw picture / rebuild / difference (README 16.24, checklist B06 / B13).
+"""Rebuild a TCRF picture from ROM tiles, cell by cell, and draw picture / rebuild / difference (docs §16.24, checklist B06 / B13).
 
 usage: tcrf_cell_rebuild.py ROM PICTURE.png OUT.png [--scale 2] [--box BB:AAAA:COLS:ROWS]
   The picture is reduced by --scale (TCRF pictures are often 2x enlargements), its grey levels are mapped to colours 0-3 (lightest = 0), and every

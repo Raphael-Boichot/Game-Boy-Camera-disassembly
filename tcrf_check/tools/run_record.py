@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RUN! RUN! RUN! finish time -> record -> the three gates that read it (README 16.18, the "Unlockables" list of the GameFAQs cheats page), played in my core with the joypad only.
+"""RUN! RUN! RUN! finish time -> record -> the three gates that read it (docs §16.18, the "Unlockables" list of the GameFAQs cheats page), played in my core with the joypad only.
 A save is built from an unlocking save with the 18 counter bytes SRAM $10BB-$10CC zeroed (so the record is stored 0000 = displayed 99:99 and nothing is unlocked; checksum and echo recomputed).
 For each variant the race loop of race 1 (corpus entry 649, state 21:06) is played with A every k-th frame (k = 2 ... 14) and with A every 2nd + Up before each hurdle; the player's finish time is the
 timer $D028/$D029 when state 0B ends, the record $DAA7:$DAA6 (nine's complement, 09:7261-7283) is written to the save RAM by 02:4BB2. The SRAM after the race is then used as the save of a fresh boot and

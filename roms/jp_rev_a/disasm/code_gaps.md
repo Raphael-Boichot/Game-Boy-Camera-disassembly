@@ -1,6 +1,6 @@
 # Code side of the Japanese Pocket Camera disassembly: indirect flow, dead code, unreferenced regions
 
-Pocket Camera (Japan) Rev A, md5 `fdcfe686cf4df461e870b6e53b2b5a8b`.  Report behind README §1.2.  The runtime counterpart (what executes, what never does) is README §13 and `coverage/`.
+Pocket Camera (Japan) Rev A, md5 `fdcfe686cf4df461e870b6e53b2b5a8b`.  Report behind docs §1.2.  The runtime counterpart (what executes, what never does) is docs §13 and `coverage/`.
 
 Files:
 * `tools/rom_trace.py` -- the tracer.  Without `--roots` it gives the first trace (56,799 instructions, 14 `unresolved`).  With `--roots` it switches on four rules (see A) and the 23-entry `RESOLVED_JPHL` table.  Its symbol input is `roms/jp_rev_a/trace/rom_trace_labels_jp.sym` (183 first-pass labels).

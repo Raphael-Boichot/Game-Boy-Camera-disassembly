@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The whole main-menu screen turning its page, frame by frame as the game draws it (README 16.24): a 160 x 144 GIF at a pixel-perfect 4x, looping.
+"""The whole main-menu screen turning its page, frame by frame as the game draws it (docs §16.24): a 160 x 144 GIF at a pixel-perfect 4x, looping.
 The loop is what two presses of Select do on the Japanese ROM: upper page at rest -> the head turns (MainMenu_SlideA_Tbl0, frames F1-F4) -> the body strips and the shake (MainMenu_SlideB_Tbl0 / Tbl2) -> the map of the
 lower page (MainMenu_SlideC_Tbl0) -> lower page at rest -> back (SlideC_Tbl1, SlideB_Tbl3 / Tbl1) -> the head turns back (MainMenu_SlideA_Tbl1, F3-F0) -> upper page at rest.
 Two modes:

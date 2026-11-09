@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RUN! RUN! RUN! races of run_race.py replayed in the real BGB (README 16.17): the key bytes of a variant (race_paths.json, run-length coded, core key bits) are appended to the joypad-only path
+"""RUN! RUN! RUN! races of run_race.py replayed in the real BGB (docs §16.17): the key bytes of a variant (race_paths.json, run-length coded, core key bits) are appended to the joypad-only path
 that reaches the race loop of race 1 (corpus entry 649); BGB logs the block heads of the never-run code (class N of the v8 map) of banks 9 and 1F that it executes, and the end state
 (mode:state, places $D00D $D016 $D01F, race counter $D04F) is read from the BGB state file written on exit.
 usage: bgb_run_race.py OUTDIR RACE_PATHS.json [VARIANT ...]     (run from the working root; ROM pocketcamera_jp.gb; default variants = the ones listed in DEFAULT)

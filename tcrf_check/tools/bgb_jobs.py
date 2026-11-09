@@ -1,5 +1,5 @@
 import sys, os, json, time
-ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of README 16.15 (core, tools/lib.py, the ROM)
+ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of docs §16.15 (core, tools/lib.py, the ROM)
 BGBX = os.environ.get('BGB_DIR', '/home/claude/bgbx')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bgbgrab as B

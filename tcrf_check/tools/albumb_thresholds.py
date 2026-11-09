@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Album B unlock thresholds tested one counter at a time in my core (README 16.18, the "Unlockables" list of the GameFAQs cheats page).
+"""Album B unlock thresholds tested one counter at a time in my core (docs §16.18, the "Unlockables" list of the GameFAQs cheats page).
 For every condition of the unlock routine (Japanese 02:4D05: 8 conditions; international 02:4D0D: 14) a save file is built from an unlocking save by zeroing the 18 counter bytes
 SRAM $10BB-$10CC (= WRAM $DA96-$DAA7) and writing ONE counter just below the threshold and then AT the threshold (settings block checksum and its echo recomputed, so the game accepts
 the save: no RAM poke). Each save is booted, the album grid is reached with a joypad-only path of the corpus (mode $0A state 1) and Right is pressed through all pages; the pages

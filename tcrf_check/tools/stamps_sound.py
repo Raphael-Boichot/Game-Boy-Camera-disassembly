@@ -1,6 +1,6 @@
 """Stamp tool (mode $11) explored with random key sequences in the core (unlocking save): every sound the game asks for, with the state, category, page and key."""
 import sys, os, json, random, collections
-ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of README 16.15 (core, tools/lib.py, the ROM)
+ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')   # the working root of docs §16.15 (core, tools/lib.py, the ROM)
 BGBX = os.environ.get('BGB_DIR', '/home/claude/bgbx')
 os.chdir(ROOT); sys.path.insert(0, 'tools')
 import lib; from lib import g

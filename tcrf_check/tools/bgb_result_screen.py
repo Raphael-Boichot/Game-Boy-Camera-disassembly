@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Replay in BGB the corpus path to mode:state 14:0B (shutter with the album full: "フィルムに空きが必要です。" / "no blank frames.") and log every write of the music
-and SFX mailboxes ($DD68 / $DD60, README 16.20): which tune the shared result screen 09:7290 asks for.
+and SFX mailboxes ($DD68 / $DD60, docs §16.20): which tune the shared result screen 09:7290 asks for.
 usage: bgb_result_screen.py ROM OUTDIR TAG      (run from the working root; BGB_DIR = a private copy of the BGB folder, debugmsg.txt is written next to the exe)
 Writes OUTDIR/TAG.{dem,sna,bmp}, OUTDIR/TAG_debugmsg.txt; prints the last music requests (the last "SND68 xx" is the tune: $28 / $29 / $30 / $2A)."""
 import sys, os, shutil

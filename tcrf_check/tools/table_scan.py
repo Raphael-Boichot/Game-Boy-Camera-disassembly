@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Is there an untagged pointer table that points at the still-open (untagged) asset spans?  README §16.24, "Tables that point at the open assets".
+"""Is there an untagged pointer table that points at the still-open (untagged) asset spans?  docs §16.24, "Tables that point at the open assets".
 
 Targets: the exact start of each of the 162 rows of tcrf_check/assets/unidentified/open_assets.csv (35,549 B).
 Search domain: bytes typed `data` in pocketcamera_jp.sym, banks 00-28, NOT covered by an asset label (Map_/Gfx_/Photo/Sgb/Src_/Unused_TCRF/Sheet/OamList/

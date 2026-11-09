@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Two real BGB instances (wine, headless) joined with -listen / -connect on localhost and driven by demo files (BGB runs both instances with the exact same
-timing in this mode).  Runs the photo exchange of README section 14: both cameras go LINK > こうかん > あげる/もらう screen (mode $0E); the initiator (sender) picks
+timing in this mode).  Runs the photo exchange of docs §14: both cameras go LINK > こうかん > あげる/もらう screen (mode $0E); the initiator (sender) picks
 Left = send, presses A, picks photo 0 and confirms; the other unit just waits.  Dumps both SRAMs/WRAMs at the end.
 usage: bgb_link.py ROM SAV_SENDER SAV_RECEIVER OUTPREFIX [WAIT_FRAMES_AFTER_CONFIRM]"""
 import sys, os, subprocess, time, shutil, struct

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Run in my core (joypad only, a save file edit and no RAM poke) the code behind the hidden third choice of the Game Face page, 06:48E6-48FB, and what it leads to (README 16.19).
+"""Run in my core (joypad only, a save file edit and no RAM poke) the code behind the hidden third choice of the Game Face page, 06:48E6-48FB, and what it leads to (docs §16.19).
 On the page 16:06 (MAGIC -> GAME FACE) Select+Down moves the cursor to item 2 and A on it runs 06:48CB: far call 02:506A (copies SRAM $B0D1 to $D581 and, when it is set, the Game Face
 image $B1FC-$BFFB to $C000), then `ld a,[$D581] ; and a ; jr nz,$48E6`.  With a Game Face stored the 22 B at 06:48E6 run: `$D800 := 1` (the extras / Game Face launch flag), mode 4, state 0.
 The save-back of the editor (07:6A43) then takes 07:6A58 (`call 02:4C37`, the Game Face writer) instead of 07:6A4E (`call 02:47C4`, the photo writer).
 usage: gameface_edit.py OUTDIR [--no-face] [--face-from SAVNAME] [--depth N] [--cap N]      (run from the working root; corpus unlock_runs/f1_organic/corpus.jsonl entry 2186 = MAGIC menu 16:01)
   Entry 2186 starts from the blank save `_ff` (all $FF), which the game formats at boot: a file patched before the boot would be formatted again, so the SRAM is edited in the core once the game
-  sits at the MAGIC menu, before the first key.  The edit is what a Game Face leaves in the SRAM (README 3.2): both settings copies ($1000 and $10D9, 0xD7 data bytes + 2 checksum bytes) get the flag
+  sits at the MAGIC menu, before the first key.  The edit is what a Game Face leaves in the SRAM (docs §3.2): both settings copies ($1000 and $10D9, 0xD7 data bytes + 2 checksum bytes) get the flag
   $10D1 / $11AA = 1, and the 3584 B of the image of slot 1 of the save --face-from (default unl_CE10238211, a real unlocking save with photos; slot bytes 000-DFF) are copied to $11FC-$1FFB.
   The game reads $B0D1 and the image afresh when A is pressed (02:506A), so this is the same as a save file that held a Game Face.  --no-face leaves the SRAM as the game formatted it (control).
   --chords  the BFS also presses the 26 two-key chords (the corpus reaches the pen-tool exit with A+B and A+Select);  --wait N  frames released after each key (default 30)

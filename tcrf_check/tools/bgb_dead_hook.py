@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Confirm in BGB what dead_jump.py / dead_flip.py found in the core (README 16.26): call a never-executed routine of the Japanese ROM from the main thread of the real game.
+"""Confirm in BGB what dead_jump.py / dead_flip.py found in the core (docs §16.26): call a never-executed routine of the Japanese ROM from the main thread of the real game.
 
 BGB cannot set the PC, so the ROM is patched (the patch is the experiment, not a hidden feature of the game): the `call Joy_ClearSticky` of Main_Loop (00:2F33, `CD 82 0A`) becomes
 `call $3600` and a hook is put in the bank-0 padding at $3600.  The hook calls Joy_ClearSticky, then, once the game has been in the (mode, state) of the case for DELAY frames in a row

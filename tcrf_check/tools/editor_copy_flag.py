@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Run in my core (joypad only, no RAM poke) the editor save-back branch 02:47FE-4802 (README 16.19).
+"""Run in my core (joypad only, no RAM poke) the editor save-back branch 02:47FE-4802 (docs §16.19).
 02:47C4 (the save-back of an edited photo, called from 07:6A4E) draws the "copy" badge on the thumbnail it writes (02:47F8-4800: `ld a,[$CF33] ; and a ; jr z ; ld d,$CE ; call $29F9`) only
-when [$CF33] is non-zero.  $C000-$CFB7 is the work buffer that holds a RAM image of the album slot being viewed or edited (README 2.4), so [$CF33] is the copy flag F33 of THAT photo:
+when [$CF33] is non-zero.  $C000-$CFB7 is the work buffer that holds a RAM image of the album slot being viewed or edited (docs §2.4), so [$CF33] is the copy flag F33 of THAT photo:
 the branch runs when an album Copy (a photo with F33 = 1) is edited and saved.  The unlocking save and the corpus have F33 = 0 everywhere, so no earlier run took it.
 usage: editor_copy_flag.py OUTDIR [--f33] [--sav FILE] [--modes 09,10,11] [--starts 10:07,...] [--coarse] [--depth N] [--cap N]   (run from the working root; corpus unlock_runs/f1_organic/corpus.jsonl)
   every distinct (mode, state) of the corpus entries in --modes (or exactly the ones in --starts) is a start state.  Each start is replayed STEP BY STEP on the save (each recorded action

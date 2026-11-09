@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Press every key at every field of the three music-editor pages (SOUND I 1F:09, SOUND II 1F:0A, NOISE 1F:0B) in my core, joypad only (no RAM poke),
-and dump the bytes executed beyond the replay of the route (README 16.15).
+and dump the bytes executed beyond the replay of the route (docs §16.15).
 usage: dj_fields.py OUTDIR [ROUTE.json]      (run from the working root: unlock_runs/f1_organic/corpus.jsonl and unlock_runs/dj_route.json from dj_route.py;
                                               a copy of the route is tcrf_check/assets/bgb_retrace/dj_route.json)
 Route: corpus entry 197 (save _ff) = Space Fever II, Right held and A pulsed shoot the D.J. ship -> 1F:05, Select -> 1F:09.  From there a breadth-first search over single

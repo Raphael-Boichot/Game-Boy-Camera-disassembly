@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""D.J. sound effects SE 4, SE 8 and SE 9 (26 presses) replayed in BGB (README 16.18): the route of dj_se.py (keys only), the block heads of the never-run code of bank 1F logged.
+"""D.J. sound effects SE 4, SE 8 and SE 9 (26 presses) replayed in BGB (docs §16.18): the route of dj_se.py (keys only), the block heads of the never-run code of bank 1F logged.
 usage: bgb_dj_se.py OUTDIR            (run from the working root; ROM pocketcamera_jp.gb, private BGB directories /home/claude/bgbs<K> copied from /home/claude/bgbx, the 3 runs in parallel)
 Writes OUTDIR/<n>.heads_hit.json and OUTDIR/bgb_dj_se.csv (scenario, end mode:state, `$D8B7` (SE-1), `$DD08`, class-N heads hit)."""
 import sys, os, json, csv, collections, shutil, subprocess

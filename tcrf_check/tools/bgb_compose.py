@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""BGB replay of the photo pickers of the two-photo COMPOSE layout (mode $17, d600 = 1; README 16.19).
+"""BGB replay of the photo pickers of the two-photo COMPOSE layout (mode $17, d600 = 1; docs §16.19).
 In state 17:0A A opens the picker of the selected picture (state 17:0B for picture 1, 17:0C for picture 2); the picker (06:5750) changes the photo only WHILE A STAYS HELD (06:524D: `ldh a,[$ffa1] ; bit 0,a ; ret nz`,
 A released = confirm and back to 17:0A): Up = +1 (wraps at $1E + [$D562] to 0: 06:5769), Down = -1 (wraps from 0 to the last one: 06:5779).  A changed photo number runs 06:523B (picture 1) / 06:5276 (picture 2).
-A tap of A (the key searches of README 16.15 used taps and the eight single keys) leaves the picker at once, which is why the three pieces never ran.
+A tap of A (the key searches of docs §16.15 used taps and the eight single keys) leaves the picker at once, which is why the three pieces never ran.
 usage: bgb_compose.py CORPUS ENTRY ROM OUTDIR [--shot]      (run from the working root; ENTRY = a corpus entry sitting in 17:0A on a used save: 610 = unl_PC10696894, 30 photos)
   replays the joypad lineage of ENTRY in BGB, then: hold A (picker 1), Up (+1: 06:523B), Down, Down (wrap to the last photo: 06:5779), Up (wrap to 0: 06:5769), release A, Right, hold A (picker 2), Up (06:5276), release.
   Logging breakpoints (BGB writes the address to debugmsg.txt and goes on) on 06:523B, 06:5276, 06:5769, 06:5779, 06:5750; the counts and the end state go to OUTDIR/bgb_compose.json.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""README 16.26: the result tables of the forced never-run code.  Reads the outputs of dead_jump.py (UNREFERENCED, jump), dead_flip.py (UNREACHABLE, gate flipped), the direct jumps into the pieces
+"""docs §16.26: the result tables of the forced never-run code.  Reads the outputs of dead_jump.py (UNREFERENCED, jump), dead_flip.py (UNREACHABLE, gate flipped), the direct jumps into the pieces
 whose gate the flips never executed, dead_effects.py (effect table), and the BGB result files of bgb_dead_hook.py; writes roms/jp_rev_a/assets/force_unref_jp.csv (48 rows) and roms/jp_rev_a/assets/force_flip_jp.csv (73 rows).
 usage: dead_report.py DEAD_DIR BGB_DIR OUT_DIR [FORCED_DIR for bgb_cases_jp.csv]       (DEAD_DIR holds unref.json flip.json unreach_jump0.json unreach_jump1.json effects.json xorslots.json; BGB_DIR holds out3 out4 outF outU outE)"""
 import sys, os, re, json, csv, glob, collections

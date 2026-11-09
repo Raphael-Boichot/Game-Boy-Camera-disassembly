@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The camera of the main menu turning, drawn from the ROM tiles (README 16.24): GIFs at a pixel-perfect 4x.
+"""The camera of the main menu turning, drawn from the ROM tiles (docs §16.24): GIFs at a pixel-perfect 4x.
  1. main_menu_camera_turn.gif: the BODY turns with the head fixed (the page transition: the seven body strips 16:5580, 5A80, 5F80, 6480, 11:4000, 4500, 4A00 are copied over VRAM $9200-$96FF in the order of
     MainMenu_SlideB_Tbl0 / Tbl2 forward and Tbl3 / Tbl1 back, head frame F4 at $9100), then the HEAD turns with the body fixed (the frames F4 -> F0 -> F4, Tbl1 / Tbl0 of MainMenu_SlideA, each copied over
     VRAM $9100-$92FF on the body strip 16:5580).  Every step lasts 4 frames of the game (67 ms, GIF delay 7 cs), the rests 1 s.

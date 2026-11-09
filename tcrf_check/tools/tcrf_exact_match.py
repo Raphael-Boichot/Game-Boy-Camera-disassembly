@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TCRF image -> ROM, exact, scale-aware (README 16.24). usage: GBCAM_ROM=rom.gb TCRF_DIR=dir tcrf_exact_match.py [image.png ...]  (a PNG of the TCRF zip is often a 2x enlargement: reduce it first). Palette hypotheses = monotone surjections colour(0..3) -> grey level (shaded renders fold colours),
+"""TCRF image -> ROM, exact, scale-aware (docs §16.24). usage: GBCAM_ROM=rom.gb TCRF_DIR=dir tcrf_exact_match.py [image.png ...]  (a PNG of the TCRF zip is often a 2x enlargement: reduce it first). Palette hypotheses = monotone surjections colour(0..3) -> grey level (shaded renders fold colours),
 tile flips H/V/HV, ALL byte offsets (data spans may start at odd addresses), sub-tile crops with wildcard padding, window clustering of per-tile hits."""
 import sys, glob, itertools, collections
 import numpy as np

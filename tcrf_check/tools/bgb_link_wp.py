@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""bgb_link.py (two real BGB instances, photo exchange of README section 14) with *logging watchpoints* on the receiver: the hits of every -wp item are counted in
+"""bgb_link.py (two real BGB instances, photo exchange of docs §14) with *logging watchpoints* on the receiver: the hits of every -wp item are counted in
 the debug-message file of that instance (BGB writes one line per hit and goes on).  The sender and the receiver get private BGB folders (debugmsg.txt is per folder).
 usage: bgb_link_wp.py ROM SAV_SENDER SAV_RECEIVER OUTPREFIX WATCHPOINTS [WAIT_FRAMES_AFTER_CONFIRM]   (env WPS_SENDER: the same kind of list for the sender; the logs stay in /home/claude/bgbl_{sender,receiver}/debugmsg.txt)
   WATCHPOINTS  BGB -wp list of the receiver, e.g. '02:46E3//x/JP,02:46E6-02:46E8//r/T46E6' (ADDRESS[-ADDRESS]//drwx/NAME; see bgb_wp_probe.py)

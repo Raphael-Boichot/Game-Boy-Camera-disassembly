@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Log every read and write of $A000 (the MAC-GBD control byte) in BGB during a normal boot and count the values (README section 18.2, "$A000 bits").
+"""Log every read and write of $A000 (the MAC-GBD control byte) in BGB during a normal boot and count the values (docs §18.2, "$A000 bits").
 The ROM writes $D594 | 1 = $03 at each capture start and polls bit 0 only; this shows what BGB's MAC-GBD returns: $03 while busy, $02 when idle (bit 1 stays as written).
 usage: sensor_a000_reads.py OUTDIR --sav SAV [--rom ROM]       -> OUTDIR/boot.log, prints the counts (also in assets/sensor/a000_reads_boot.txt)"""
 import sys, os, collections

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""What the saves written by real play do (README 16.18): the best-score bytes that sf2_play.py / ball_play.py left in the SRAM (SF2 best 7113, BALL best 1100: `sf2_after.sav`, `ball_after.sav`)
+"""What the saves written by real play do (docs §16.18): the best-score bytes that sf2_play.py / ball_play.py left in the SRAM (SF2 best 7113, BALL best 1100: `sf2_after.sav`, `ball_after.sav`)
 are copied byte for byte into an unlocking save whose counters were zeroed (settings block checksum and echo recomputed), and
   (1) the Album B unlock routine of the ROM (02:4D05 Japanese / 02:4D01 international) is called for every picture index (as albumb_thresholds.py): which pictures are unlocked by the played scores;
   (2) the Japanese ROM only: the route to the RUN! RUN! RUN! race loop (corpus entry 649, the third target of the first-wave menu) is replayed with that save and with the zeroed save.

@@ -17,7 +17,7 @@ What it checks (each line of the report is one check)
              tools/proto_reach_map.py drawing, and the run / BGB-replay counts its README quotes match; L3: the
              old-build matches, the merged names and the doubts list equal a fresh tools/proto_{match_old,names}.py run, every
              routine entry is named, and the README's name count matches
-  port       roms/us_eu (README §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
+  port       roms/us_eu (docs §1.5): counts quoted for the ported international symbol file; with --rom-us the .sym is rebuilt and, with --roundtrip, assembled plain, after --tables and after --const (md5)
   sym        pocketcamera_jp.sym equals a fresh sym_build.py run (needs the ROM); block / label / line counts
   doubts     disasm/sym_unconclusive_jp.{md,csv} and sym_settled_unused_jp.csv equal a fresh make_doubts.py run; rows, distinct bytes, rows settled as unused
   renamed    roms/jp_rev_a/disasm/renamed_jp.csv rows against the counts the README quotes
@@ -32,8 +32,8 @@ What it checks (each line of the report is one check)
   bankpics   (needs --rom) roms/jp_rev_a/disasm/sym_unconclusive_banks/*.png equal a fresh tools/bank_pics.py run
   tcrf       tcrf_check/TCRF_CHECKLIST.md and .csv list the same ids
   effects    tcrf_check/assets/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
-             the counts quoted in README 16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
-  ram        roms/jp_rev_a/disasm/ram_names_jp.csv (the RAM names, README 2.13): identifiers and prefixes, no clash with a ROM label, roms/jp_rev_a/disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
+             the counts quoted in docs §16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
+  ram        roms/jp_rev_a/disasm/ram_names_jp.csv (the RAM names, docs §2.13): identifiers and prefixes, no clash with a ROM label, roms/jp_rev_a/disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
              roms/jp_rev_a/wram/wram_access_jp.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
   forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
   printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
@@ -41,8 +41,8 @@ What it checks (each line of the report is one check)
   patternmatch tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
   handspan   (with --rom) the span 11:5800-693F has fewer different tiles (130 of 276, 95 blank) than the 245 ids of 26:7080 and its four natural layouts cost 0.7 per pixel or more; the README sentence of 16.25.2 that quotes them
   oamlist    (with --rom) no call of Oam_AddMeta_B01_4000 (00:24AF) has a literal id $A6-$BB, no organic run reads those 22 OAM lists ($BA = the hand flipping a newspaper), the README sentence of 16.24 that quotes the call and list counts
-  statsplit  what STAT handler 1 splits (README 2, interrupt map): the census table of the screens that run the split, the ROM sites that turn the interrupt on and off, the README sentences that quote them
-  screengif  the whole-screen GIF of the page transitions of the main menu (README 16.24): 640 x 576, endless loop, the frame count and length the README quotes
+  statsplit  what STAT handler 1 splits (docs §2, interrupt map): the census table of the screens that run the split, the ROM sites that turn the interrupt on and off, the README sentences that quote them
+  screengif  the whole-screen GIF of the page transitions of the main menu (docs §16.24): 640 x 576, endless loop, the frame count and length the README quotes
   headsets   (with --rom) why the ball head animation is stored twice: the frames F0-F4 and F5-F9 differ only inside the ids $20-$2F (10 or 11 tiles of 16), set A meets the body strip 16:5580 (seam 47-48) and set B the strip 11:4000 (41-42), each twice worse on the other, F4 and F9 carry the collar tiles of their strip byte for byte; the README paragraph of 16.24 that quotes them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
   kinds      in the three source trees, a block named as tiles (Gfx_ / Sheet_ / Font_) is not copied by `farcopy` to the BG map ($9800-$9FFF), and a block named as a map (Map_ / BgMap_) is not copied below $9800 (the layout maps take the kind from the name: 2026-11-02, bank $20)
@@ -154,7 +154,7 @@ for t in TYPES:
 if not any('names' in f for f in FAIL): ok('names', '%s labels: C %s / I %s / ? %s' % (fmt(NL), fmt(C), fmt(I), fmt(Q)))
 TCRF_LABELS = sum(1 for r in NAMES if r['name'].startswith('Unused_TCRF_'))
 
-# ------------------------------------------------------------------ international port (README §1.5)
+# ------------------------------------------------------------------ international port (docs §1.5)
 US = 'roms/us_eu/'
 # the final name and type tables of the ported builds are the merge of their layers (HOWTO section 0.1, rule 2)
 for _t in ('us', 'gold'):
@@ -708,6 +708,20 @@ if not miss: ok('sheet', '%d rows of really_unused.md are in the README verbatim
 HAND_TAIL = [l for l in md if l.startswith('*Withdrawn after the L3 pass')]
 if not HAND_TAIL: bad('sheet', 'really_unused.md lost its hand-kept tail ("*Withdrawn after the L3 pass...*"): display_report.py overwrites it, restore it from git')
 
+# ------------------------------------------------------------------ status words (HOWTO_NEW_ROM.md section 0): L3 is `done` only with no placeholder name
+_PH = re.compile(r'^(Data|Code|Gfx|Map|Src|JumpTable|Unk)_[0-9A-F]{2}_[0-9A-F]{4}$'); _nf = len(FAIL)
+for _f, _t in (('jp_rev_a', 'jp'), ('us_eu', 'us'), ('gold', 'gold'), ('hello_kitty', 'kitty'), ('prototype_debagame', 'proto')):
+    _n = sum(1 for r in csv.DictReader(io.StringIO(rd('roms/%s/disasm/sym_names_%s.csv' % (_f, _t)))) if _PH.match(r['name']))
+    _rd = rd('roms/%s/README.md' % _f)
+    _l3 = re.search(r'^\| L3 \| (done|partial|not started)', _rd, re.M)
+    if not _l3: bad('status', 'roms/%s/README.md has no Levels row for L3' % _f); continue
+    if _n and _l3.group(1) == 'done': bad('status', 'roms/%s/README.md says L3 done, but %d names are placeholders' % (_f, _n))
+    elif _n:
+        for _doc in ('roms/%s/README.md' % _f, 'README.md'):
+            _q = [int(x.replace(',', '')) for x in re.findall(r'([\d,]+) placeholder (?:data )?names', rd(_doc))] if _doc != 'README.md' else None
+            if _q is not None and _n not in _q: bad('status', '%s: placeholder names quoted %s, sym_names_%s.csv has %d' % (_doc, _q, _t, _n))
+        if not re.search(r'\b%s placeholder' % _n, README): bad('status', 'README.md does not quote the %d placeholder names of %s' % (_n, _t))
+if len(FAIL) == _nf: ok('status', 'L3 status words agree with the placeholder names of every ROM')
 # ------------------------------------------------------------------ files and section references
 miss = []
 for _f, _t in RDOCS:                       # a link is relative to the file that holds it
@@ -762,7 +776,7 @@ if A.rom:
 else:
     skip('bankpics', 'no --rom: bank pictures not checked')
 
-# ------------------------------------------------------------------ the 96 effect slots (README 16.28)
+# ------------------------------------------------------------------ the 96 effect slots (docs §16.28)
 EF_CSV = 'tcrf_check/assets/effect_slots/effect_slots_bgb.csv'
 EF = list(csv.DictReader(io.StringIO(rd(EF_CSV))))
 NAME_AT = {(r['bank'].upper(), r['addr'].upper()): r['name'] for r in NAMES}
@@ -793,9 +807,9 @@ else:
                             ('flip picture', r'\*\*(\d+) flip the finished picture instead', ('picture flipped',)),
                             ('never selected', r'The (\d+) slots the game never selects \((\d+) lone `ret`, (\d+) copies\)', ('never selected', 'lone rets', 'never selected, writing'))):
         m = re.search(pat, sec)
-        if not m: bad('effects', 'README 16.28: no sentence matches %r (reword it or fix the checker)' % desc); ef_bad += 1; continue
+        if not m: bad('effects', 'docs §16.28: no sentence matches %r (reword it or fix the checker)' % desc); ef_bad += 1; continue
         exp = tuple(facts[k] for k in keys); got = tuple(int(g) for g in m.groups())
-        if exp != got: bad('effects', 'README 16.28 %s: says %s, %s says %s %s' % (desc, got, EF_CSV, keys, exp)); ef_bad += 1
+        if exp != got: bad('effects', 'docs §16.28 %s: says %s, %s says %s %s' % (desc, got, EF_CSV, keys, exp)); ef_bad += 1
     if facts['identity'] + facts['identity except table byte'] != facts['slots that write']: bad('effects', 'a writing slot is neither an identity nor the table-byte case'); ef_bad += 1
 cited = set()
 for r in NAMES:
@@ -804,7 +818,7 @@ for f in sorted(cited):
     if not os.path.exists(P(f)): bad('effects', 'a label note cites %s, which does not exist' % f); ef_bad += 1
 if not ef_bad: ok('effects', '96 slots, %s; %d tcrf_check files cited by label notes exist' % (', '.join('%s %d' % (k, v) for k, v in facts.items()), len(cited)))
 
-# ------------------------------------------------------------------ RAM names (L4, README 2.13)
+# ------------------------------------------------------------------ RAM names (L4, docs §2.13)
 sys.path.insert(0, P('tools'))
 import ram_names as RN
 RAM_BAD = 0
@@ -849,7 +863,7 @@ if not RAM_BAD:
     quoted('ram sites', r'resolves? every access of `roms/jp_rev_a/wram/wram_access_jp.csv` \(([\d,]+) instruction sites\)', lambda m: ((len(acc_sites),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ first readers of the forced-only data bytes (README 16.24)
+# ------------------------------------------------------------------ first readers of the forced-only data bytes (docs §16.24)
 FR_FILE = 'tcrf_check/assets/unidentified/forced_first_readers.csv'
 try:
     FR = list(csv.DictReader(io.StringIO(rd(FR_FILE))))
@@ -870,7 +884,7 @@ if FR:
            lambda m: ((FR_N, FR_A, '%.1f' % (100 * FR_A / FR_N), FR_B, '%.1f' % (100 * FR_B / FR_N)), (num(m.group(1)), num(m.group(2)), m.group(3), num(m.group(4)), m.group(5))), docs=('README.md',), need=('README.md',))
     quoted('forced spans', r'(\d+) of the (\d+) spans of `really_unused.csv` that have such bytes have `Prn_SendPacketByte` as their most frequent first reader', lambda m: ((FR_PRN, len(FR_SP)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ 26:7080 and the printing of Album B (README 16.25.2)
+# ------------------------------------------------------------------ 26:7080 and the printing of Album B (docs §16.25.2)
 PW_FILE = 'tcrf_check/assets/unidentified/map_26_7080_print_watch.csv'
 try:
     PW = list(csv.DictReader(io.StringIO(rd(PW_FILE))))
@@ -906,7 +920,7 @@ if PW:
         if touch: bad('printwatch', '%d occurrences of 80 70 touch a proven instruction, the README says never' % touch)
     if cov[3] != 576 or cov[4] != 576: bad('printwatch', '26:4C80 / 26:72C0 organic reads are %d / %d of 576, the README says 576 each' % (cov[3], cov[4]))
 
-# ------------------------------------------------------------------ 26:7080 seam search at every byte offset (README 16.25.2)
+# ------------------------------------------------------------------ 26:7080 seam search at every byte offset (docs §16.25.2)
 SO_FILE = 'tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv'
 try:
     SO = list(csv.DictReader(io.StringIO(rd(SO_FILE))))
@@ -934,7 +948,7 @@ if SO:
     except KeyError as e:
         bad('seamoffsets', '%s lacks the variant %s' % (SO_FILE, e))
 
-# ------------------------------------------------------------------ 26:7080 pattern of repeated ids against every map window (README 16.25.2)
+# ------------------------------------------------------------------ 26:7080 pattern of repeated ids against every map window (docs §16.25.2)
 PM_FILE = 'tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv'
 try:
     PM = list(csv.DictReader(io.StringIO(rd(PM_FILE))))
@@ -956,7 +970,7 @@ if PM:
     except KeyError as e:
         bad('patternmatch', '%s lacks the run %s' % (PM_FILE, e))
 
-# ------------------------------------------------------------------ 26:7080 against the tiles of the hand-newspaper span 11:5800 (README 16.25.2)
+# ------------------------------------------------------------------ 26:7080 against the tiles of the hand-newspaper span 11:5800 (docs §16.25.2)
 if A.rom:
     sys.path.insert(0, P('tcrf_check/tools'))
     import map_vs_span_layouts as MVS
@@ -971,7 +985,7 @@ if A.rom:
            lambda m: (tuple(hn_v), tuple(float(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
     quoted('hand span', r'a de-duplicated picture of (\d+) different ids needs', lambda m: ((hn_ids,), (int(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ the ball head animation is stored twice: two collars for two bodies (README 16.24)
+# ------------------------------------------------------------------ the ball head animation is stored twice: two collars for two bodies (docs §16.24)
 if A.rom:
     sys.path.insert(0, P('tcrf_check/tools'))
     import head_sets as HS
@@ -999,7 +1013,7 @@ if A.rom:
     quoted('head sets', r'so ([\d,]+) B are stored twice and ([\d,]+) B of them are never read',
            lambda m: ((5 * 512, 4 * 512), tuple(int(m.group(i).replace(',', '')) for i in (1, 2))), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ nothing draws the OAM list $BA of the hand flipping a newspaper (README 16.24)
+# ------------------------------------------------------------------ nothing draws the OAM list $BA of the hand flipping a newspaper (docs §16.24)
 if A.rom:
     sys.path.insert(0, P('tcrf_check/tools'))
     import oam_list_use as OL
@@ -1017,7 +1031,7 @@ if A.rom:
     if ol_org:
         quoted('oam list', r'\((\d+) of the (\d+) lists are unread in organic runs\)', lambda m: ((ol_org[0], 249), (int(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ the main menu turning its page, the whole screen (README 16.24)
+# ------------------------------------------------------------------ the main menu turning its page, the whole screen (docs §16.24)
 SG = 'tcrf_check/assets/unidentified/main_menu_page_turn.gif'
 try:
     from PIL import Image as _Im, ImageSequence as _Seq
@@ -1032,7 +1046,7 @@ try:
 except Exception as e:
     bad('screengif', '%s does not load: %s' % (SG, e))
 
-# ------------------------------------------------------------------ what STAT handler 1 splits (README 2, interrupt map)
+# ------------------------------------------------------------------ what STAT handler 1 splits (docs §2, interrupt map)
 SS = 'tcrf_check/assets/unidentified/stat_split_census.csv'
 try:
     ss_rows = list(csv.DictReader(io.StringIO(rd(SS))))
@@ -1062,7 +1076,7 @@ try:
 except Exception as e:
     bad('statsplit', '%s does not load or does not parse: %s' % (SS, e))
 
-# ------------------------------------------------------------------ RAM runtime check (BGB, README 2.13)
+# ------------------------------------------------------------------ RAM runtime check (BGB, docs §2.13)
 PR_DIR = 'tcrf_check/assets/wram_probe/'
 try:
     PR_W = list(csv.DictReader(io.StringIO(rd(PR_DIR + 'watch.csv'))))
@@ -1094,7 +1108,7 @@ if PR_N:
     quoted('probe moves', r'(\d+) became `C` \((\d+) `I`, (\d+) `\?`, (\d+) `U`\), (\d+) became `U` \((\d+) `I`, (\d+) `\?`\), (\d+) stay `I` and (\d+) stay `U`',
            lambda m: ((sum(pr_to_c.values()), pr_to_c['I'], pr_to_c['?'], pr_to_c['U'], sum(pr_to_u.values()), pr_to_u['I'], pr_to_u['?'], pr_mv[('I', 'I')], pr_mv[('U', 'U')]), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ constants (L4, README 2.14)
+# ------------------------------------------------------------------ constants (L4, docs §2.14)
 import const_names as CN
 CN_BAD = 0
 try:
@@ -1103,11 +1117,11 @@ try:
 except Exception as e:
     C_ROWS = []; S_ROWS = []; ST_ROWS = []; C_TYPES = {}; C_TABS = []; bad('const', 'the constant tables do not load: %s' % e); CN_BAD += 1
 CNAMER = CN.Namer(C_ROWS + ST_ROWS + S_ROWS)
-# state constants (README 2.14): roms/jp_rev_a/disasm/state_names_jp.csv must be what tools/state_names.py makes from the state tables and the handler labels
+# state constants (docs §2.14): roms/jp_rev_a/disasm/state_names_jp.csv must be what tools/state_names.py makes from the state tables and the handler labels
 if A.rom:
     r = subprocess.run([sys.executable, 'tools/state_names.py', '--rom', A.rom, '--check'], capture_output=True, text=True)
     if r.returncode: bad('const', 'roms/jp_rev_a/disasm/state_names_jp.csv is stale: run tools/state_names.py --rom ROM'); CN_BAD += 1
-# text table (README 16.27): roms/jp_rev_a/disasm/charmap_jp.inc must be what tools/charmap_jp.py makes from roms/jp_rev_a/disasm/charset_jp.csv
+# text table (docs §16.27): roms/jp_rev_a/disasm/charmap_jp.inc must be what tools/charmap_jp.py makes from roms/jp_rev_a/disasm/charset_jp.csv
 r = subprocess.run([sys.executable, 'tools/charmap_jp.py', '--check'], capture_output=True, text=True)
 if r.returncode: bad('const', 'roms/jp_rev_a/disasm/charmap_jp.inc is stale: run tools/charmap_jp.py'); CN_BAD += 1
 for r in ST_ROWS:
@@ -1171,7 +1185,7 @@ if not CN_BAD:
     quoted('const types', r'const_types_jp\.csv` types ([\d,]+) operands and ([\d,]+) call targets', lambda m: ((C_TYPED_VARS, len(C_CALLS)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
     quoted('const tables', r'const_tables_jp\.csv` lists ([\d,]+) byte tables \(([\d,]+) mode bytes and ([\d,]+) bytes of sound lists\)', lambda m: ((len(C_TABS), C_MODE_BYTES, C_SND_BYTES), tuple(num(g) for g in m.groups())), docs=('README.md',), need=('README.md',))
 
-# ------------------------------------------------------------------ sound names (L4, README 2.14 and 16.24)
+# ------------------------------------------------------------------ sound names (L4, docs §2.14 and 16.24)
 SND_BAD = 0
 SND_ROWS = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/sound_names_jp.csv'))))
 SND_INV = {(r['channel'], r['id'].upper()): r for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/sound_inventory.csv')))}
@@ -1249,7 +1263,7 @@ if A.roundtrip:
             d = os.path.join(tmp, variant)
             if variant == 'plain':
                 subprocess.run([sys.executable, A.mgbdis, rom, '--output-dir', d, '--overwrite'], capture_output=True, text=True)
-                # mgbdis' own labels left in the listing (README 1.1: L5 row): `jr_` targets are normal, a `Jump_` / `Call_` one is a jump / call target that still has no name
+                # mgbdis' own labels left in the listing (docs §1.1: L5 row): `jr_` targets are normal, a `Jump_` / `Call_` one is a jump / call target that still has no name
                 lab = collections.Counter()
                 for f in sorted(os.listdir(d)):
                     if re.match(r'bank_[0-9a-f]+\.asm$', f):

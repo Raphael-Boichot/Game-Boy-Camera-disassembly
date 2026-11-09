@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the two figures of README section 18 from the decoded recordings (assets/sensor/*_rows.csv):
+"""Draw the two figures of docs §18 from the decoded recordings (assets/sensor/*_rows.csv):
    live_exposure_bands.png : exposure time of every register load of the normal-use recording on a log axis, coloured by band, with the ROM's band-switch thresholds
    sar_traces.png          : the offset register O (signed, in steps of 32 mV) of every capture of the boot and calibration recordings: one successive-approximation search per column group
 usage: sensor_plots.py ASSET_DIR      (reads ASSET_DIR/{boot,calibration,live}_rows.csv, writes the two PNG files there)"""
@@ -30,7 +30,7 @@ def main(d):
     ax.set_yscale('log'); ax.set_xlabel('register load number (normal-use recording)'); ax.set_ylabel('exposure time C (ms), log scale')
     for e, t in ((0x30, '0.768 ms: datasheet minimum for vertical / 2-D edge modes'), (0x1200, 'band 1 -> 2 at $1200'), (0x6000, 'band 2 -> 3 at $6000'), (0xC000, 'band 3 -> 4 at $C000')):
         ax.axhline(e * 0.016, color='#888', lw=0.7, ls=':'); ax.text(1, e * 0.016 * 1.06, t, ha='left', va='bottom', fontsize=7, color='#555')
-    ax.legend(fontsize=7, loc='lower right'); ax.set_title('Auto-exposure of the real camera: five gain / mode bands (README 18.7)')
+    ax.legend(fontsize=7, loc='lower right'); ax.set_title('Auto-exposure of the real camera: five gain / mode bands (docs §18.7)')
     fig.tight_layout(); fig.savefig(os.path.join(d, 'live_exposure_bands.png'), dpi=140); plt.close(fig)
 
     fig, axs = plt.subplots(2, 1, figsize=(10, 6.2))

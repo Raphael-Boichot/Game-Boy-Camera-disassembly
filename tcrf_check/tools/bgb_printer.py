@@ -12,7 +12,7 @@ SHADES = (255, 170, 85, 0)
 PRINT_POLLS = int(os.environ.get('PRN_POLLS', '20'))      # INQUIRY polls answered 06 after a PRINT (a real printer needs about 140 for a photo)
 # PRN_ERR = 'CMD:N:STATUS[:COUNT],...'  injects a status byte instead of the modelled reply: CMD = init | data | print | inq, N = 1-based number of that command's packet
 # in the run, STATUS = hex byte (e.g. 10), COUNT = how many consecutive packets of that command get it (default 1).  With bit 0 (checksum error) or bit 4 (packet error)
-# set, a DATA packet is dropped (not added to the page), as a real printer discards a packet it flagged.  README 16.16.
+# set, a DATA packet is dropped (not added to the page), as a real printer discards a packet it flagged.  docs §16.16.
 CMDS = dict(init=0x01, print=0x02, data=0x04, inq=0x0F)
 def parse_err(s):
     out = []

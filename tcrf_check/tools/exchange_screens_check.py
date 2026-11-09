@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""BGB check of the image-exchange screen (mode $0E, states 06-10): what is in VRAM, and is the unreferenced 14:4000 / 23:5CC0 set ever loaded?  README 14 and 16.24 "(3)".
+"""BGB check of the image-exchange screen (mode $0E, states 06-10): what is in VRAM, and is the unreferenced 14:4000 / 23:5CC0 set ever loaded?  docs §14 and 16.24 "(3)".
 
-Input: the end-of-run files of two BGB-to-BGB exchanges (tcrf_check/tools/bgb_link.py, README 14), one per ROM, e.g.
+Input: the end-of-run files of two BGB-to-BGB exchanges (tcrf_check/tools/bgb_link.py, docs §14), one per ROM, e.g.
   bgb_link.py pocketcamera_jp.gb link_protocol/saves/flow1_A_sender_before.sav link_protocol/saves/flow1_B_receiver_before.sav OUT/jp 450
   bgb_link.py gbcam_us.gb    (the same two saves)                                                                          OUT/intl 250
 (WAIT 100-450 frames after the confirm = states $08 / $10; each run writes OUT/jp_sender.sna / .bmp ...).  For each sender state file the tool compares BGB's VRAM with the ROM

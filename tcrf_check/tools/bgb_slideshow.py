@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BGB replay of the slide-show repeat markers (README 16.19) on the save written by slideshow_markers.py --loop --out-sav (list = photos 0..5, markers $82 $02 $42 $81 $41, repeat flag $FF).
+"""BGB replay of the slide-show repeat markers (docs §16.19) on the save written by slideshow_markers.py --loop --out-sav (list = photos 0..5, markers $82 $02 $42 $81 $41, repeat flag $FF).
 usage: bgb_slideshow.py ROM SAV OUTDIR [--preview]      (the save is NOT in git: `slideshow_markers.py OUT --loop --out-sav FILE` rebuilds it from unl_CE10238211)
   Keys as the guide walk (guide_bgb_walk.py: A at the title, then direction taps held 4 frames and 60 released, other keys 200 released; boot with B held):
   player   (default)  Left (VIEW), A (VIEW menu), Right, A (SHOW menu), Down (ANIMATION), A (13:01), A (start the show), then 1500 frames: logging breakpoints (BGB writes the address to

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Experiment of README 16.25.4: what does the shipped main-menu code do when the UNUSED one-page main menu (map 25:7820, tiles 17:5500) is on screen instead of the shipped picture?
+"""Experiment of docs §16.25.4: what does the shipped main-menu code do when the UNUSED one-page main menu (map 25:7820, tiles 17:5500) is on screen instead of the shipped picture?
 
 A copy of the Japanese ROM is patched in two places: the `call Pal_AllWhite` of Mode00_State00_Init (07:723A, `CD 10 0D`) becomes `CD 00 36`, and a hook in the bank-0 padding at $3600 copies
 17:5500 (tiles 0-127 to $9000, 128-255 to $8800: the game's LCDC has bit 4 = 0, so BG tile ids are signed from $9000) and the map 25:7820 (18 rows of 32; the picture is in columns 0-19, the 12 hidden columns are `$29`,

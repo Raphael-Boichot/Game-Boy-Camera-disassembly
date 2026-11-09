@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the unused alternate link-exchange stand-by screen (mode $0E) from the tile set 14:4000-502F and its tile map 23:5CC0.  README 16.24 "(3) The small holes", 14.4.
+"""Draw the unused alternate link-exchange stand-by screen (mode $0E) from the tile set 14:4000-502F and its tile map 23:5CC0.  docs §16.24 "(3) The small holes", 14.4.
 
 23:5CC0-5F03 (580 bytes) is a BG tile map: 18 rows x 32 columns (576 bytes) + 4 trailing $16 bytes.  Its tile ids index the 259 tiles at 14:4000
 directly (id = (address - 14:4000) / 16, checked on the picture: the seams of every neighbouring tile pair match).  Columns 0-19 are the visible screen;
@@ -7,7 +7,7 @@ columns 20-27 are $0F (grey) and 28-31 are $16 (white).  The tile set is a de-du
 ($F4 = a solid black tile, the first tile of the picture, then $F3, $F2, ... for every new tile, repeats such as $F4, $0F, $16, $ED reuse their id),
 which is why a reading of 14:4000-502F as raster strips (width 16, 17, 10 ...) found only fragments.  Ids 245-255 (and the 3 tiles after them, which no
 8-bit id can reach) are not used by this map: 14:4F50-502F, the 14-tile "heading row" of outlined kanji.
-Not a console capture: a direct draw of ROM bytes with a 4-grey palette; no code loads this map (README 16.24).
+Not a console capture: a direct draw of ROM bytes with a 4-grey palette; no code loads this map (docs §16.24).
 usage: map_23_5CC0_screen.py [ROM] [out.png]   (default ROM /home/claude/gbcam_jp/pocketcamera_jp.gb, env GBCAM_ROM, GBCAM_REPO)
 """
 import sys, os

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""BGB-to-BGB photo exchange (as bgb_link.py, README 14 / 16.6) with the owner gender byte and the received-from counters set by hand, and a marker (a breakpoint that only
-logs) on the never-run pieces that depend on them (README 16.19):
+"""BGB-to-BGB photo exchange (as bgb_link.py, docs §14 / 16.6) with the owner gender byte and the received-from counters set by hand, and a marker (a breakpoint that only
+logs) on the never-run pieces that depend on them (docs §16.19):
   02:466D  F12 +1 when the RECEIVER's own owner byte DA56 has bit 0 (male)         07:4A2D-4A33  peer byte $CFFF bit 0 (male sender): BCD counter +1 (cap 99)
   02:4678  the same for bit 1 (female), already run                                07:4A3A-4A40  peer byte bit 1 (female sender): BCD counter +1
 The saves are edited in SRAM only (owner byte at flat 2FC5 / 2FDE with its block checksum, counters 10BB-10CC cleared with the settings-block checksums): no RAM poke.
-env RECV_ROM = a different ROM for the receiver unit (README 16.19: the partner with SB = $55 at link set-up, byte 0x2D65 of the ROM changed from $12 to $55, so that the initiator reads $55 after its hello $29 and runs 00:2B20)
+env RECV_ROM = a different ROM for the receiver unit (docs §16.19: the partner with SB = $55 at link set-up, byte 0x2D65 of the ROM changed from $12 to $55, so that the initiator reads $55 after its hello $29 and runs 00:2B20)
 usage: bgb_link_variants.py OUTDIR ROM SENDER.sav RECEIVER.sav NAME SENDER_GENDER RECEIVER_GENDER   (gender byte: 0 = ?, 1 = male, 2 = female; the receiver counters are cleared)
 output: OUTDIR/NAME_{sender,receiver}.{sna,bmp,sav,dem}, NAME_markers.txt (marker hits per unit), and the SRAM counters before / after"""
 import sys, os, subprocess, time, shutil, struct, collections

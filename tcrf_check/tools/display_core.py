@@ -1,5 +1,5 @@
 """Helpers for the display-tracking core: save loading (saves/, saves_unl/, synthetic _ff / _zero), key actions (act), corpus paths and replay (Corpus).
-GBCAM_ROOT = working root with saves/, saves_unl/, package/trace/trace_jp.json (README 16.15).  Used by display_stamps.py (README 16.24)."""
+GBCAM_ROOT = working root with saves/, saves_unl/, package/trace/trace_jp.json (docs §16.15).  Used by display_stamps.py (docs §16.24)."""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np

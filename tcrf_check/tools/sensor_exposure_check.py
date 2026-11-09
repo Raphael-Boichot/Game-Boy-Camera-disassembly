@@ -2,7 +2,7 @@
 """Replay the auto-exposure law and the five-band state machine of Cam_MainDispatch (bank $0A, $4000-$42B9) on recorded live-view exposures and say
 how many frame-to-frame steps the ROM's rule explains.
 
-Rule (README section 18.5, read from the ROM):  level L = (sum of the 2-bit pixel values of the sampled bytes) / [D59A]  (0..159, never observed here: it is the unknown),
+Rule (docs §18.5, read from the ROM):  level L = (sum of the 2-bit pixel values of the sampled bytes) / [D59A]  (0..159, never observed here: it is the unknown),
   d = e >> SH[L]   (SH = table at 0A:7B00, 160 bytes; SH = 16 means 0),   e' = e + d (saturating at $FFFF) if L >= 36, else e - d,
   then the band tests:   band 2: e' < $0800 -> band 1 with e = $0B00;   e' >= $6000 -> band 3 with e = $3500
                          band 3: e' < $2800 -> band 2 with e = $4500;   e' >= $C000 -> band 4 with e = $8500

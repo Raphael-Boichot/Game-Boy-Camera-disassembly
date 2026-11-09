@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""BGB: the SHOOT live view with each of the three dither variants D59C = 0 / 1 / 2 (README 18.12).
+"""BGB: the SHOOT live view with each of the three dither variants D59C = 0 / 1 / 2 (docs §18.12).
 usage: bgb_dither_variants.py OUTDIR      (env GBCAM_ROM = the Japanese ROM, GBCAM_SAV = a valid save; BGB directory /home/claude/bgbq0 copied from /home/claude/bgbx)
 The Japanese ROM has the three variants as: D59C = D7EA = 1 when mode $14 starts (06:5E3E), 2 for the trick lenses $0A / $0B and the Game Face ($15).  To see all three on the plain shot
-(D7E3 = 0) the immediate of `ld a,$01` at 06:5E3F (flat 0x19E3F) is patched to 0, 1 (the original) and 2 in three copies of the ROM (the other bytes are untouched); the picture is BGB's fake sensor (README 18.9),
+(D7E3 = 0) the immediate of `ld a,$01` at 06:5E3F (flat 0x19E3F) is patched to 0, 1 (the original) and 2 in three copies of the ROM (the other bytes are untouched); the picture is BGB's fake sensor (docs §18.9),
 so this shows how the ROM's matrix is applied by BGB, not what a real scene looks like.  Writes OUTDIR/{flat,bayer,blocks}.png (160x144 BGB screenshots), OUTDIR/montage.png, OUTDIR/patched_rom_bytes.txt."""
 import sys, os, shutil
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)

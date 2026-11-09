@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""BGB: copy the stock pictures B01-B08 into the A album with EDIT > ALBUM > COPY and keep the resulting save (stage 1 of bgb_albumb_comments.py, README 16.27).
+"""BGB: copy the stock pictures B01-B08 into the A album with EDIT > ALBUM > COPY and keep the resulting save (stage 1 of bgb_albumb_comments.py, docs §16.27).
 usage: bgb_albumb_copy_stage1.py OUTDIR [--swap A:B]      (env GBCAM_ROM = the Japanese ROM, GBCAM_SAV = a save with all unlocked and 0 photos; BGB folder /home/claude/bgbq0, copied from /home/claude/bgbx)
 Writes OUTDIR/copy/stage1.sram (the 128 KB save after the copy: slots 0-7 hold B01-B08, 8 photos) and, with --swap A:B, OUTDIR/copy/stage1_swap_A_B.sram (the 0x1000-byte slots A and B
 exchanged: slot contents carry their own tag block and checksum, the photo vector stays valid; used to make another picture the first one of the print screen).
-Used for the print watch of README 16.25.2 (`26:7080` is not read while a copied B picture and its comment card are printed): put the save into GBCAM_ROOT/saves_pseudo/ and run
+Used for the print watch of docs §16.25.2 (`26:7080` is not read while a copied B picture and its comment card are printed): put the save into GBCAM_ROOT/saves_pseudo/ and run
   BGB_HF=-headless BGB_WP='26:7080-26:72BF//r/T7080,26:4000-26:707F//r/B26LO,26:72C0-26:7FFF//r/B26HI,1B73-1B9F//r/CTLPKT' \\
   bgb_print_run.py unlock_runs/f1_organic/corpus.jsonl 289 ROM OUT --seq A:4:100 --tail 4000 --port 8830 --sav NAME            (one photo)
   ... --seq Start:4:40,A:4:100 ...                                                                                            (photo + comment card)

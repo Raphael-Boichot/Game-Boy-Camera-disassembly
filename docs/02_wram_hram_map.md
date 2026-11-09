@@ -7,7 +7,7 @@
 ### 2.0 Conventions, method and legend
 
 * **Source of truth.** Every row comes from the instructions that a **recursive-descent tracer** (`tools/rom_trace.py`) proves reachable
-  (56,799 instructions on proven paths, starting from the reset/interrupt vectors, the main loop `00:2E92`, the 34-entry mode table, every
+  (56,799 instructions on proven paths in the first trace, `roms/jp_rev_a/trace/trace_jp_v1.json`, which the region files cite; the current trace has 60,449, see the re-check bullet below; starting from the reset/interrupt vectors, the main loop `00:2E92`, the 34-entry mode table, every
   `rst $18` state table and the hand-labelled entries of the `.sym` file). `tools/wram_db.py` turns them into an access table: every `ld`/`ldh`
   that touches `$C000-$DFFF` or `$FE00-$FFFE` as **R**ead, **W**rite or **P**ointer load (`ld rr,ADDR`, i.e. the address is the base of an array or
   buffer). **1,135 distinct addresses** are touched (1,153 with the extended trace, see the re-check bullet below). A linear sweep of the ROM (what `mgbdis` prints) was *not* used as evidence: data decoded as
@@ -29,7 +29,7 @@
   The bank-0 ones are the soft-reset path (`00:0210-028F`, already described in §2.2) and the bank-7 ones are the menu callbacks `07:7AF1-7B43` / `07:7BF4-7D30`, so the five rows `$DA1A $DA1F $DA24 $DA29 $DA2E` moved from I to C.
   `roms/jp_rev_a/wram/wram_access_jp.csv` and `wram_summary_jp.csv` are the extended-trace tables; the per-row counts quoted in the region files come from the first trace and are therefore low by those amounts.
 * **Where the full evidence is.** The tables below condense each row to about 150 characters. The un-condensed rows (with `bank:pc` of every key instruction), the per-region write-ups and the raw access tables are in
-  `roms/jp_rev_a/wram/` of the package: `wram_<region>.md` / `.csv` (7 regions), `wram_access_jp.csv`, `wram_summary_jp.csv`; the first trace they cite is `roms/jp_rev_a/trace/trace_jp_v1.json`.
+  `roms/jp_rev_a/wram/`: `wram_<region>.md` / `.csv` (7 regions), `wram_access_jp.csv`, `wram_summary_jp.csv`; the first trace they cite is `roms/jp_rev_a/trace/trace_jp_v1.json`.
 
 **Coverage of the accessed addresses** (mechanically checked on the extended table, 1,153 addresses: every address of `wram_summary_jp.csv` lies inside at least one row; rows of a few bytes with a size cover arrays and buffers):
 
@@ -242,7 +242,7 @@ Bank 5 is therefore a **mode bank** (`$1F`, `$20`).
 
 **Camera chain (bank 0A): how the 12-byte vector is used.** (1) Factory sweep `Cam_FactoryMeasure1` fills `$D59D-$D5B4` (12 REG4-bit results, 12 O-register results); `Cam_FactoryMeasure2` turns them into the 12-byte vector `$D5B5-$D5C0`, which `Cam_CommitVectorToSRAM` writes to SRAM (`$AFF2` bank 2 and `$BFF2` bank 8). (2) At normal start `Cam_Calib_ValidityCheck` loads the vector from SRAM, or the default `7E 7F 7F 7F 7E 7D 7E 7E 7D 7E 7D 6A`, into `$D5B5-$D5C0`. (3) Unless both SRAM copies are blank (`Cam_Calib_Loader`, §6), `Cam_Calib_BootMeasureSeq` (`0a:4724`) first calls `Cam_ExposureBandSelect` (`0a:4859`), which tries gains 0, 1, 2 (`$D587`), stores the winner in `$D588`, sets `$D589` (4 or 5) and copies three vector bytes into `$D5CB-$D5CD`; it then fills the sensor array `$A006-$A035` with each of five reference levels (`$D5CB`, `$D5CC`, `$D5CD`, `$D5BF`, `$D5C0`) in turn, runs the register search `0a:4B6A` and records REG4 & 7 in `$D5C1-$D5C5` and REG5 & $7F in `$D5C6-$D5CA`. (4) `Cam_MainDispatch` (auto-exposure step; A = `$D59A`) reads `$D5C1-$D5CA` and `$D587-$D589` per band, builds the dither matrix with `Cam_BuildDitherMatrix` (`$D583-$D586` from `0a:7C20`/`0a:7C60`) and updates `$D596/$D597` from the shift table `0a:7B00`.
 
-**Photo-index family.** `$D5D8` is the album's current photo index (0..29, `$1E+n` stock pictures when `$D5DB` != 0). Bank-local copies: `$D5ED` (mode `$0A`), `$D5EE` (mode `$09` slider), `$D5F3` (print, bank 8), `$D5F6` (04 State05), `$D5F7`, `$D5F9` (via `$D671`), `$D5F8` (bank 3), `$D5FB` (bank 3), `$D5FC` (bank 7 random/slideshow). They are passed in `$FF9E` to bank-2 routines (`$5110` draw, `$4DD7`, `$4E31`, `$4C80`, `$4E5F`). Modes `$09` and `$0A` on 'A = yes' write `D5D8 := D5ED/D5EE`, `D5DF := 1`, `D5D6 := 2`, `D5D7 := 0`, `D5CE := $0F`, `D5CF := 5` (`04:6D28`, `04:7AC8`): this confirms the README §8 route into the erase viewer. `D5D6`/`D5D7` choose the prompt strip (`$8800`, 40 tiles) and the icon (`$8B00`, 16 tiles) of those pickers.
+**Photo-index family.** `$D5D8` is the album's current photo index (0..29, `$1E+n` stock pictures when `$D5DB` != 0). Bank-local copies: `$D5ED` (mode `$0A`), `$D5EE` (mode `$09` slider), `$D5F3` (print, bank 8), `$D5F6` (04 State05), `$D5F7`, `$D5F9` (via `$D671`), `$D5F8` (bank 3), `$D5FB` (bank 3), `$D5FC` (bank 7 random/slideshow). They are passed in `$FF9E` to bank-2 routines (`$5110` draw, `$4DD7`, `$4E31`, `$4C80`, `$4E5F`). Modes `$09` and `$0A` on 'A = yes' write `D5D8 := D5ED/D5EE`, `D5DF := 1`, `D5D6 := 2`, `D5D7 := 0`, `D5CE := $0F`, `D5CF := 5` (`04:6D28`, `04:7AC8`): this confirms the docs §8 route into the erase viewer. `D5D6`/`D5D7` choose the prompt strip (`$8800`, 40 tiles) and the icon (`$8B00`, 16 tiles) of those pickers.
 
 **`$D5D0` sub-states.** Seven dispatchers read it with `rst $18`: `04:4000` (3 sub-states `$400A` build/draw, `$40CF` browse, `$410D` confirm/exit), `07:4C08` (3), `07:699C` (4), `08:4DF2` (3), `08:5191` (3), `09:4281` (4), `09:7290` (3). Banks 3 and 6 only write 0 to it (`03:51F3`, `03:62F5`, `03:6329`, `03:6A24`, `03:6F9E`, `06:53F6`, `06:726A`).
 
@@ -274,7 +274,7 @@ Bank 5 is therefore a **mode bank** (`$1F`, `$20`).
 | `$D561` | 1 | photo_count | u8 0..30 | 2,3,4,6,7 | Number of used slots = entries != $FF in `$D563` … | C |
 | `$D562` | 1 | stock_picture_count | u8 ($18 or $1E) | 8 (writer); 3,4,6 (readers) | Number of built-in 'stock' pictures that may be browsed after the user's photos: indices `$1E+n` are valid for n < d562 (04:41F6-4202); wrap size of … | C |
 | `$D563-$D580` | 30 | photo_vector_ram[30] | u8[30], slot -> rank | 2 (+0:15ED, 3,4) | RAM copy of the SRAM state vector (flat `$011B2-$011CF`, bank 0 `$B1B2`, 30 bytes + Magic + checksum, echo at `$011D7`) renumbered to a dense 0..n-1 … | C |
-| `$D581` | 1 | gameface_present | u8 0/1 | 2 (writer); 0,5,6,7 (readers) | Copy of settings byte SRAM `$B0D1` (flat `$010D1`, Game Face present flag; README §3.4), taken before the Game Face image is copied to `$C000` … | C |
+| `$D581` | 1 | gameface_present | u8 0/1 | 2 (writer); 0,5,6,7 (readers) | Copy of settings byte SRAM `$B0D1` (flat `$010D1`, Game Face present flag; docs §3.4), taken before the Game Face image is copied to `$C000` … | C |
 | `$D582` | 1 | coro_flag | u8 0/1 | 8 (writer); 4,8 (readers) | 1 when at least 2 of the 3 bytes SRAM bank 0 `$BFFD-$BFFF` equal the ROM constant `56 56 53` (08:7319; the same routine then rewrites the 3 bytes … | C |
 | `$D583-$D586` | 4 | dither_params[4] | u8[4] | 0A | 4-byte row copied from table `0a:7C20` (if B == d588, or B == 8, or default) or `0a:7C60` (if B == d589); row = register C - 1 (4 bytes per row; C = … | C |
 | `$D587` | 1 | cam_gain_sel | u8 | 6,0A (8,0: consts) | Active REG1 gain selector: 0,1,2 during the coarse search (0a:485F, 48CE), forced to `$08` / `$0A` for the special band captures (0a:417F, 420A … | C |
@@ -289,7 +289,7 @@ Bank 5 is therefore a **mode bank** (`$1F`, `$20`).
 | `$D59B` | 1 | cam_contrast_row | u8 (1-based row) | 6,0A | CONTRAST setting 1..16, default 8 (key handler `06:615E`): row index (register C) passed to Cam_BuildDitherMatrix; row = C-1 in the 4-byte table … | C |
 | `$D59C` | 1 | cam_dither_mode | u8 | 6,0A | Dither variant: 0 = flat fill (jp `0a:440C`, the same three bytes in all 16 cells), 1 = ramp A (jp `0a:4427`; set when the live view is entered … | C |
 | `$D59D-$D5B4` | 24 | cam_factory_vo[24] | u8[24] = $D59D-$D5B4 | 0A | Results of the 12 `Cam_FactoryMeasure1` offset searches: `$D59D-$D5A8` = V (sensor register 7 bits 2-0), `$D5A9-$D5B4` = O (register 0 & `$7F`), one pair per … | C |
-| `$D5B5-$D5C0` | 12 | cam_calib_vector[12] | u8[12] | 0A | Working copy of the 12-byte calibration vector (SRAM flat `$04FF2-$04FFD` and `$11FF2-$11FFD`, README §3.8) = the 12 results of the factory threshold scans … | C |
+| `$D5B5-$D5C0` | 12 | cam_calib_vector[12] | u8[12] | 0A | Working copy of the 12-byte calibration vector (SRAM flat `$04FF2-$04FFD` and `$11FF2-$11FFD`, docs §3.8) = the 12 results of the factory threshold scans … | C |
 | `$D5C1-$D5C5` | 5 | cam_boot_v[5] | u8[5] (values 0..7) | 0A | V = `$D598 & 7` (sensor register 7 bits 2-0) found by boot offset search n = 1..5, one entry per live band 0..4 (the searches use the matrix bytes D5CB, D5CC … | C |
 | `$D5C6-$D5CA` | 5 | cam_boot_o[5] | u8[5] (values 0..$7F) | 0A | O = `$D599 & $7F` (the 6-bit offset of sensor register 0; the live registers use `$80 \| O`) found by the same 5 boot searches, one per live band 0..4 … | C |
 | `$D5CB-$D5CD` | 3 | cam_boot_matrix_ref[3] | u8[3] | 0A | Flat matrix bytes of boot offset searches 1-3 (the black-level reference of that mode, I), copied from the vector by winning gain: `d5cb`/`d5cc`/`d5cd` <- … | C |
@@ -552,7 +552,7 @@ The three 3-byte cursors of `$D890-$D9F8` are the *field cursors of the three ch
 
 **SRAM settings block <-> WRAM (sound editor).**
 
-The README §3.2 block is **217 bytes = 215 data bytes `$1000-$10D6` + 2 checksum bytes, echoed at +`$D9`**: the writer `2:4BB2-4BF1` saves two copies (`DE = 0` and `DE = $D9`, `B = 2`) and calls the checksum routine `2:432F` with `HL = $B000 + DE`, `BC = $00D7`. Bank 2 never moves it as one block: each part has its own WRAM image.
+The docs §3.2 block is **217 bytes = 215 data bytes `$1000-$10D6` + 2 checksum bytes, echoed at +`$D9`**: the writer `2:4BB2-4BF1` saves two copies (`DE = 0` and `DE = $D9`, `B = 2`) and calls the checksum routine `2:432F` with `HL = $B000 + DE`, `BC = $00D7`. Bank 2 never moves it as one block: each part has its own WRAM image.
 
 | SRAM offset (flat) | Size | WRAM image | Format in WRAM | Moved by |
 |---|---|---|---|---|
@@ -717,10 +717,10 @@ So `$1061-$10BA` (90 bytes) is unpacked into the 150 bytes `$D93D-$D9D2`. The ba
 | `$D931` | 1 | (NR23 slot of the register-shadow array, unused) | byte | 0 | The shadows `D92F-D932` follow the register order NR21, NR22, NR23, NR24; the SOUND I frequency lives in `D90F`, so the NR23 slot is never used … | U |
 | `$D932` | 1 | NR24 control bits (SOUND I) | byte | 0 | Used by: W 0:110D (=$C0, res 6 if length 0) | C |
 | `$D933-$D935` | 3 | NR30 / NR31 / NR32 shadows (SOUND II) | byte x3 | 0 | Used by: W 0:1201 ($80), 11FE ($C0 \| `1F:4025[D986-1]`), 1208 ($20) | C |
-| `$D936` | 1 | (NR33 slot of the register-shadow array, unused) | byte | 0 | Same for SOUND II (`D933-D937` = NR30, NR31, NR32, NR33, NR34; frequency in `D911`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of README §2.13): the slot is unused. Used by: no access | U |
+| `$D936` | 1 | (NR33 slot of the register-shadow array, unused) | byte | 0 | Same for SOUND II (`D933-D937` = NR30, NR31, NR32, NR33, NR34; frequency in `D911`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of docs §2.13): the slot is unused. Used by: no access | U |
 | `$D937` | 1 | NR34 control bits (SOUND II) | byte | 0 | Used by: W 0:11E8 (=$C0) | C |
 | `$D938-$D939` | 2 | NR41 / NR42 shadows (NOISE) | byte x2 | 0 | Used by: W 0:12B9, 12DB | C |
-| `$D93A` | 1 | (NR43 slot of the register-shadow array, unused) | byte | 0 | Same for NOISE (`D938-D93B` = NR41, NR42, NR43, NR44; the NR43 value is `D917`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of README §2.13): the slot is unused. Used by: no access | U |
+| `$D93A` | 1 | (NR43 slot of the register-shadow array, unused) | byte | 0 | Same for NOISE (`D938-D93B` = NR41, NR42, NR43, NR44; the NR43 value is `D917`). Used by: no access. No access in the access table, none in BGB (the D.J. editor and Trippy-H print scenarios of docs §2.13): the slot is unused. Used by: no access | U |
 | `$D93B` | 1 | NR44 control bits (NOISE) | byte | 0 | Used by: W 0:12A4 | C |
 | `$D93C` | 1 | NR51 pan shadow | byte | 0 | Used by: 0:10A0 (`NR51 = (D93C \| $11) & D8B9`), per-channel pan from tables `0:11D8`, `0:1294`, `0:1350` | C |
 | `$D93D-$D93E` | 2 | **SOUND I**: duty (0..2), length index | byte x2 | 5,2,0 | SRAM `1061`: bits 5-4 = duty, bits 3-0 = length index (0 = no length counter) Used by: W 2:4F32 (unpack), 5:6358; R 0:1120,110F, 2:4A81 (pack) | C |
@@ -805,10 +805,10 @@ The range is **not one structure**: it is a stack of unrelated overlays plus two
 
 | Address | Size | Name | Type/format | Used by (bank:function) | Meaning, values, init | Status |
 |---|---|---|---|---|---|---|
-| `$DA0D` | 1 | `unused_link_buf_xor` | unknown | no proven access | XOR of the 4,096 bytes `$C000-$CFFF`, written by `Unused_Link_SumSlotBuffer` (`07:4C00`) and shown as hex by `Unused_Link_LoadTiles` (`07:4BDA`); neither routine has a caller. No access in BGB (every replay and scenario of README §2.13). | U |
-| `$DA0E` | 1 | `unused_link_buf_sum` | unknown | no proven access | Sum (mod 256) of the same 4,096 bytes, written by `Unused_Link_SumSlotBuffer` (`07:4C04`) and shown as hex by `Unused_Link_LoadTiles` (`07:4BD4`); neither routine has a caller. No access in BGB (every replay and scenario of README §2.13). | U |
-| `$DA14-$DA15` | 2 | `unused_da14` | unknown | no proven access | Between the copy-screen variables and the main-menu variables (`DA16-`). No access in the access table, none in BGB (every replay and scenario of README §2.13); `DA16-DA18` are cleared one by one at `00:2EE9-2EEF`, which does not include these two. | U |
-| `$DBD2-$DBEB` | 26 | `unused_dbd2` | unknown | no proven access | After the two write-only printer status bytes (`DBD0/DBD1`) and before the `DBEC` table (which ends at `DBFD`, so the gap is not part of it). No access in the access table, none in BGB (every replay and the printer scenarios of README §2.13). | U |
+| `$DA0D` | 1 | `unused_link_buf_xor` | unknown | no proven access | XOR of the 4,096 bytes `$C000-$CFFF`, written by `Unused_Link_SumSlotBuffer` (`07:4C00`) and shown as hex by `Unused_Link_LoadTiles` (`07:4BDA`); neither routine has a caller. No access in BGB (every replay and scenario of docs §2.13). | U |
+| `$DA0E` | 1 | `unused_link_buf_sum` | unknown | no proven access | Sum (mod 256) of the same 4,096 bytes, written by `Unused_Link_SumSlotBuffer` (`07:4C04`) and shown as hex by `Unused_Link_LoadTiles` (`07:4BD4`); neither routine has a caller. No access in BGB (every replay and scenario of docs §2.13). | U |
+| `$DA14-$DA15` | 2 | `unused_da14` | unknown | no proven access | Between the copy-screen variables and the main-menu variables (`DA16-`). No access in the access table, none in BGB (every replay and scenario of docs §2.13); `DA16-DA18` are cleared one by one at `00:2EE9-2EEF`, which does not include these two. | U |
+| `$DBD2-$DBEB` | 26 | `unused_dbd2` | unknown | no proven access | After the two write-only printer status bytes (`DBD0/DBD1`) and before the `DBEC` table (which ends at `DBFD`, so the gap is not part of it). No access in the access table, none in BGB (every replay and the printer scenarios of docs §2.13). | U |
 
 <details><summary><b>Object table (102 rows; meaning condensed, full evidence in <code>wram/wram_da00_jp.md</code>)</b></summary>
 
@@ -867,7 +867,7 @@ The range is **not one structure**: it is a stack of unrelated overlays plus two
 | `$DA6F` | 1 | tag_count_total | u8 0..99 (SRAM F14) | 9 | Bumped on every reception (02:467E-4684); drawn by 09:4706. | C (flow); I (name) |
 | `$DA70-$DA8A` | 27 | tag_comment | 27 x u8 (SRAM F15-F2F), chars = grid code + 1, 0 = blank | 9 | Comment text, 27 editable cells (cursor DA91 is limited to $1A); drawn by 09:461E (B = $1E: it draws 30 cells, the last three are the next row) … | C |
 | `$DA8B-$DA8D` | 3 | tag_comment_tail | 3 x u8 (SRAM F30-F32) | 9 | Three bytes after the 27 comment cells (SRAM F30-F32): loaded with the tag by `02:4E84` and drawn with the cells by the comment drawing routine `09:461E` (30 … | C |
-| `$DA8E` | 1 | tag_copy_flag | u8 (SRAM F33) | 9 | Read by 09:471B/4728 (digit tile set of the counters) and 09:474D (chooses tile data $5870 vs $5790 for VRAM $92B0), i.e. it changes how the card is … | C (readers); I (meaning taken from README §3.3) |
+| `$DA8E` | 1 | tag_copy_flag | u8 (SRAM F33) | 9 | Read by 09:471B/4728 (digit tile set of the counters) and 09:474D (chooses tile data $5870 vs $5790 for VRAM $92B0), i.e. it changes how the card is … | C (readers); I (meaning taken from docs §3.3) |
 | `$DA8F-$DA90` | 2 | tag_image_check | 2 x u8 (SRAM F34, F35) | 0,2 | Two 8-bit checksums of the 3584-byte image $C000-$CDFF: DA8F = additive sum (02:4005-402E, add a,[hl] over $E00 bytes), DA90 = XOR (02:4031-405A) … | C |
 | `$DA91` | 1 | cmt_cursor | u8 0..26 | 9 | Position of the text cursor in the comment (limit $1A, 09:4435-4462); 8 reads / 4 writes in 09:42A6-4474, 09:45EB/45F7. | C |
 | `$DA92` | 1 | cmt_grid_cell | u8 | 9 | Cell of the character grid under the cursor (grid of 5 columns: 09:4409, 09:44A3, 09:4531, 09:4558, 09:4582). | C (use); I (5 columns) |
@@ -1263,7 +1263,7 @@ The 217-byte settings block has **no flat image in WRAM**: bank 2 moves it field
 - **`$D5EA`** (second toggle of the bank-6 option screen, also read at `06:599A-5CE1`), the on-screen meaning of `D5E3-D5EB` choices, and `D5FF` (6/8-page screen of bank 8): known only mechanically.
 - **`$D5D9`** page-flip encoding (low bits), **`$D5FB`** (bank 3), **`$D5FC`** which screen (bank 7 `07:7037/7138`).
 - **`$D5D6` / `$D5D7` bank-7 tables** (`07:4F8B`, `07:4FD7`) not decoded.
-- **`$D5F5`**: README §3.3 attributes states 9/17 to a link-cable receive path; the WRAM copy itself (`$DC52`) is another region's.
+- **`$D5F5`**: docs §3.3 attributes states 9/17 to a link-cable receive path; the WRAM copy itself (`$DC52`) is another region's.
 
 **`$D600-$D7FF`**
 
@@ -1271,7 +1271,7 @@ The 217-byte settings block has **no flat image in WRAM**: bank 2 moves it field
 * **`$D7EE-$D7F1`** is shown by mode `$18` before any 4-shot sequence has written it; no initialisation to `$FF` was found, so after boot it reads as photo 0 (the table says "zero at boot"). Whether mode `$18` is reachable without a prior sequence was not checked.
 * **`$D60D` brush patterns** and **`$D642`** (category-2 page count depends on owner-profile byte `$DAA5`, shown by 09:5390 as a number): what they look like / what the profile byte is, not determined.
 * **Bank 4 mode `$09` Right sub-menu (`$D675`)**: the two far-called sub-programs 08:4DF2 and 09:4281 were not analysed.
-* **Bank 7 mode `$0D`**: the in-game name and what the two wandering sprites are are unverified. Settled since (README §16.27, BGB): this is the SLIDE SHOW; `$D7D2` = 0 is the BGM, `$D7D2` = 1 is the **P.VOICE** (the four nibbles `$DD03-$DD06` = the photo's checksum bytes `F34/F35`, spoken with sfx1 `$10`); `$D7D3` (random / in order) is by data flow only.
+* **Bank 7 mode `$0D`**: the in-game name and what the two wandering sprites are are unverified. Settled since (docs §16.27, BGB): this is the SLIDE SHOW; `$D7D2` = 0 is the BGM, `$D7D2` = 1 is the **P.VOICE** (the four nibbles `$DD03-$DD06` = the photo's checksum bytes `F34/F35`, spoken with sfx1 `$10`); `$D7D3` (random / in order) is by data flow only.
 * **`$D6B1`, `$D6E1`** (sentinel `$FF` bytes around the timing array) are status I: consistent use, no instruction states the purpose. BGB wrote them (27 times, modes `$0E`, `$12`, `$13`) and never read them: the two scan loops that would end on them did not run.
 * **Write-only / dead**: `$D66F` (written 0 at dialog init, never read), `$D6EF`-style padding of the context slots (never touched), `$D7D7` (written once per SHOOT entry, never read), `$D7D8` (three writes, no reader), mode `$0A`'s test of `$D67E` (nothing sets it), `$D640` (always 4, so the `cp 3` branch at 04:5D5F is dead), `$D60E` (constant `$38`, the other 56 entries of table 04:658C are unused).
 * **Bank 8's use of `$D7C1`** (border picker in the print screens, 08:4EF9-50F6) was only skimmed: reads / writes were located but the print border semantics (which values are printable) were not traced.

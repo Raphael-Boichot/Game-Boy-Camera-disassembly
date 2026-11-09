@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Who reads the doubtful ROM spans?  BGB read watchpoints on every row of roms/jp_rev_a/disasm/sym_unconclusive_jp.csv (and an execute watchpoint on a row of one byte),
-over the cheapest organic replay of each (mode, state) signature, as tcrf_check/tools/wram_probe.py does for RAM (README 2.13).
+over the cheapest organic replay of each (mode, state) signature, as tcrf_check/tools/wram_probe.py does for RAM (docs §2.13).
 
 usage: bgb_span_read_probe.py OUT.csv CORPUS [--workers 2] [--entries ID,ID,...] [--rows roms/jp_rev_a/disasm/sym_unconclusive_jp.csv] [--targets T.csv --chunk 400]
   --targets: any list bank, addr, size, kind (x / r), name (tcrf_check/tools/l3_targets.py); the watchpoints are split into runs of --chunk, each with its own control CTL<n>

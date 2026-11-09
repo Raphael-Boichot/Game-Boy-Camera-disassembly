@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""The other bus-analyser recordings of the owner's sensor repository (README §18.13), decoded and summarised.
+"""The other bus-analyser recordings of the owner's sensor repository (docs §18.13), decoded and summarised.
 
 Source: github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor, folders `Research on real camera 2024`
 (camera 1: the unit of §18.4-18.6, plus the Hello Kitty ROM, the prototype ROM and a zeroed calibration vector) and `Research on real Camera`

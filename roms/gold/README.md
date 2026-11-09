@@ -2,6 +2,18 @@
 
 MD5 `b2999cfb6dacb439f501a71f30f91762`. The international ROM with modified assets.
 
+## Levels
+
+| Level | Status | Evidence |
+|---|---|---|
+| L0 | done | `intake/intake_roundtrip.txt`: mgbdis `95d951a` with no symbol file + rgbasm 1.0.4 rebuild md5 `b2999cfb6dacb439f501a71f30f91762` |
+| L1 | done | `gbcam_gold.sym` types every byte; 0 untyped bytes in the port queue (docs §1.5) |
+| L2 | done | `trace/trace_gold.json`, 0 unresolved; observed in the core runs `trace/cov_gold_runs.npz` and the witness runs (`port/never_run_gold.csv`; docs §1.5) |
+| L3 | done | `disasm/sym_names_gold.csv`: C 5,280 / I 130 (the I names are the unused, dead or never-loaded ones) |
+| L4 | done | `disasm/ram_names_gold.csv` and the constant tables, applied by `tools/sym_fix.py --const` |
+| L5 | done | `src/`, `make TREE=gold check` |
+| L6 | partial | the character set, shared with the international ROM (`disasm/charset_gold.csv`) |
+
 ![What each byte of the Gold ROM is](gold_rom_layout_map.png)
 
 The map above is drawn by `tools/status_maps.py` (grey-blue = not analysed yet; it fills in as names, types and a trace are added here; per-bank counts in `assets/layout_by_bank_gold.csv`).

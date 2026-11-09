@@ -227,7 +227,7 @@ def const_code_pass(bank, out):
             ms = C_ST.match(P[k + 1]['ins']) or C_CALL.match(P[k + 1]['ins'])       # a store into a typed variable, or a call of a routine whose A is typed (Snd_Sfx1 ...)
             if ms and ms.group(1) == 'wState':
                 # the state of which mode: a constant `ld a, imm / ld [wMode], a` just before on the same straight line (a handler that leaves its mode sets the new
-                # mode first), else the routine `ModeNN_...` that holds the store (README 2.14); otherwise the number stays
+                # mode first), else the routine `ModeNN_...` that holds the store (docs §2.14); otherwise the number stays
                 mode = None; j = k - 1
                 while j >= 1 and not brk[j + 1]:
                     if C_ST.match(P[j]['ins']) and C_ST.match(P[j]['ins']).group(1) == 'wMode':

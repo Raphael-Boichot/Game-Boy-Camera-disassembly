@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cam_ThresholdConverge (0A:4E44) cost check, README section 18.6.
+"""Cam_ThresholdConverge (0A:4E44) cost check, docs §18.6.
 
 The routine fills the 48-byte matrix with one flat threshold t, starting at $80, takes a capture and tests the 12 sampled pixels, then moves t by one per capture
 until the 'count >= 9' test (then the 'count >= 8' test) changes its answer.  It returns about the mean of the two crossing thresholds, which is stored as one byte

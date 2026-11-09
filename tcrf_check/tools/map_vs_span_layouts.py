@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Could a tile map be drawn with the tiles of a given ROM span?  Two checks for the span, whatever the layout it uses:
- (1) a de-duplicated map (every id a different tile, README 16.25.2) needs at least as many DIFFERENT tile contents as it has ids: counts the different, blank (all $00) and all-$FF tiles of the span;
- (2) the seam cost (README 16.25.2: sum of absolute pixel differences over the neighbouring cells, per pixel; a true set about 0.4, shuffled ids 1.0-1.3 on blank-rich data) of the natural layouts:
+ (1) a de-duplicated map (every id a different tile, docs §16.25.2) needs at least as many DIFFERENT tile contents as it has ids: counts the different, blank (all $00) and all-$FF tiles of the span;
+ (2) the seam cost (docs §16.25.2: sum of absolute pixel differences over the neighbouring cells, per pixel; a true set about 0.4, shuffled ids 1.0-1.3 on blank-rich data) of the natural layouts:
      contiguous ascending (id v at S + 16 v), contiguous descending (id v at S + 16 (HI - v)), and slots of PER tiles every STRIDE bytes (the sprite frames of 11:5800: 25 tiles every $200), both orders.
 usage: map_vs_span_layouts.py ROM MAPBANK:ADDR SPANBANK:ADDR TILES [PER STRIDE] [--shuffle N]    e.g.  map_vs_span_layouts.py pocketcamera_jp.gb 26:7080 11:5800 276 25 512 --shuffle 100
-Result (README 16.25.2): the hand-newspaper span 11:5800-693F (276 tiles, 130 different, 95 blank) cannot be the tile set of 26:7080 (245 different ids); the six layouts cost 0.76-1.10 per pixel."""
+Result (docs §16.25.2): the hand-newspaper span 11:5800-693F (276 tiles, 130 different, 95 blank) cannot be the tile set of 26:7080 (245 different ids); the six layouts cost 0.76-1.10 per pixel."""
 import sys, os
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

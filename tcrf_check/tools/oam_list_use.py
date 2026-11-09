@@ -3,7 +3,7 @@
 For every list id asked (default `$A6-$BB`, the ids that no organic run asks for) this prints the list (address, sprites, tiles), whether its pointer entry and its bytes were READ in any run / in an organic run
 (coverage file cov.npz: `dr` / `odr`), the instruction that read them first (`rdr`), and how many of the `call $24AF` sites of the ROM (bytes CD AF 24) have a `ld a, id` (3E id) in the 12 bytes before them.
 That last test is a literal-id test: it finds an id written next to the call, not an id taken from a table or a RAM byte (`id sources` = calls that have no literal id).
-usage: oam_list_use.py ROM COV.npz [ID[-ID] ...]   e.g. oam_list_use.py pocketcamera_jp.gb coverage/v8/merged_v8/cov.npz BA   (README 16.24: the hand flipping a newspaper, list $BA)"""
+usage: oam_list_use.py ROM COV.npz [ID[-ID] ...]   e.g. oam_list_use.py pocketcamera_jp.gb coverage/v8/merged_v8/cov.npz BA   (docs §16.24: the hand flipping a newspaper, list $BA)"""
 import sys
 import numpy as np
 CALL = bytes([0xCD, 0xAF, 0x24]); NLIST = 249

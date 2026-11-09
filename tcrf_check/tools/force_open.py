@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the OPEN / gated never-run pieces in my core with the WRAM or SRAM value that gates them poked (README 16.21).
+"""Run the OPEN / gated never-run pieces in my core with the WRAM or SRAM value that gates them poked (docs §16.21).
 usage: force_open.py EXPERIMENT OUTDIR [--list]      (run from the working root; corpus unlock_runs/f1_organic/corpus.jsonl, saves in saves_unl/)
 One process per experiment (the core's executed-byte array is cumulative); every experiment replays a corpus entry to a state, pokes WRAM / SRAM like a save or a game state could hold it,
 presses keys like a player and tests the target addresses; OUTDIR/<experiment>.json = what was done and which targets ran, OUTDIR/exec_ranges.csv = every byte executed in the process
@@ -223,8 +223,8 @@ def sf2_keys():
     here = os.path.dirname(os.path.abspath(__file__))
     for c in (os.environ.get('SF2_KEYS'), os.path.join(here, '..', 'assets', 'sf2', 'sf2_keys.json'), os.path.join(here, '..', 'tcrf_check', 'assets', 'sf2', 'sf2_keys.json')):
         if c and os.path.exists(c): K = json.load(open(c)); return [k for k, n in K['keys'] for _ in range(n)]
-    raise SystemExit('sf2_keys.json not found (README 16.18; set SF2_KEYS)')
-@exp('sf2_gameface', 'Space Fever II, key log of README 16.18 from corpus entry 197 (the blank `_ff` save): when the wave state $D863 reaches 6-8 poke $D88F := 2 (third boss) and $D581 := 1 (a Game Face is stored: SRAM $B0D1 bit 0); the boss set-up 07:60E1 then asks 00:16A6 for the graphics group 6 whose pointers are WRAM $C000 / $C380 / $C700: 00:1668 -> 00:16C4 takes its `bit 7,h` branch 00:16D7')
+    raise SystemExit('sf2_keys.json not found (docs §16.18; set SF2_KEYS)')
+@exp('sf2_gameface', 'Space Fever II, key log of docs §16.18 from corpus entry 197 (the blank `_ff` save): when the wave state $D863 reaches 6-8 poke $D88F := 2 (third boss) and $D581 := 1 (a Game Face is stored: SRAM $B0D1 bit 0); the boss set-up 07:60E1 then asks 00:16A6 for the graphics group 6 whose pointers are WRAM $C000 / $C380 / $C700: 00:1668 -> 00:16C4 takes its `bit 7,h` branch 00:16D7')
 def sf2_gameface(r):
     tg = T('00:16D7', '00:16AE', '07:693A', '07:60E1'); KEYS = sf2_keys()
     C = lib.Corpus(CORPUS); g.set_organic(1); C.replay(197); poked = None
@@ -245,7 +245,7 @@ def sound_mailboxes(r):
 
 # ---------------------------------------------------------------- bank 0: printer engine (a print job in the core, printer stand-in attached)
 def start_card_print():
-    """README 17.4 / printer_status.py 'card' scenario: the comment-card print of corpus entry 289 up to the print key; returns the function that presses it"""
+    """docs §17.4 / printer_status.py 'card' scenario: the comment-card print of corpus entry 289 up to the print key; returns the function that presses it"""
     g.L.gb_printer_model(1)
     Cp = lib.Corpus(CORPUS); p = Cp.path(289); sp = dict(Cp.E[p[0]]['spec']); g.set_organic(1)
     lib.boot(lib.SAV(sp['sav']), combo=sp['combo'], printer=1, free=sp['free'])
@@ -257,7 +257,7 @@ def dc0b_tables():
     With the tables left at zero the DATA packet of the poked print has a length of 0 = 65536 bytes and never ends"""
     for i in range(9): g.poke(0xDBEC + 2 * i, 0x80); g.poke(0xDBEC + 2 * i + 1, 0x02)
     for i in range(13): g.poke(0xDBFE + i, 0)
-@exp('printer_dc0b', 'printer engine, comment-card print (README 17.4) with the compression switch $DC0B (read at 00:1A1B / 1A7E, written nowhere in the ROM) poked to 1 from the A press and the size / flag tables $DBEC / $DBFE filled (9 x $0280, 0): the per-band data path 00:1A24-1A47 and the DATA-packet wait 00:1A51-1A5B')
+@exp('printer_dc0b', 'printer engine, comment-card print (docs §17.4) with the compression switch $DC0B (read at 00:1A1B / 1A7E, written nowhere in the ROM) poked to 1 from the A press and the size / flag tables $DBEC / $DBFE filled (9 x $0280, 0): the per-band data path 00:1A24-1A47 and the DATA-packet wait 00:1A51-1A5B')
 def printer_dc0b(r):
     tg = T('00:1A24', '00:1A5B', '00:1A87', '00:1A48', '00:1AA8', '00:1B25', '00:1B36'); start_card_print(); r['start'] = st()
     g.keys(g.A); g.run(4); g.keys(0); path = [st()]
@@ -361,7 +361,7 @@ def erase_all_list(r):
     orig = lib.SAV; patched = patch_save(fn)
     lib.SAV = lambda name: patched if name == 'unl_CE10238211' else orig(name)
     C = lib.Corpus(CORPUS); r['trials'] = []; ex = g.cov_exec()
-    for sig in ((0x0F, 2), (0x0F, 3)):                  # the erase album: Select + Start + Up shows the "erase ALL photos?" confirmation (README 8), A = YES
+    for sig in ((0x0F, 2), (0x0F, 3)):                  # the erase album: Select + Start + Up shows the "erase ALL photos?" confirmation (docs §8), A = YES
         i = C.best(sig)
         if i is None: continue
         g.set_organic(1); C.replay(i); g.run(30); r['start_%02X_%02X' % sig] = [i, st()]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BGB watchpoint pass over the mode-state handlers of roms/jp_rev_a/disasm/sym_unconclusive_jp.csv (group "mode state"; README 1.1.1, 2026-10-25).
+"""BGB watchpoint pass over the mode-state handlers of roms/jp_rev_a/disasm/sym_unconclusive_jp.csv (group "mode state"; docs §1.1.1, 2026-10-25).
 
 Every handler gets a logging watchpoint (execution for code, read for the three tables) whose message carries the game's mode and state
 (`%(d5ce)%`, `%(d5cf)%`), plus a control watchpoint on every write of the state byte $D5CF; one replay then says in which screens each handler ran.
@@ -138,7 +138,7 @@ def cmd_partner(out, only):
     for label, f, eid, keys in (('print_pano1', '01_fuzz_a.jsonl.gz', 899, [('A', 4, 300)]),                    # corpus entry ending in 18:03 (first pick, a row); its pick ended with B, so state 03 cancels (the cancel case)
                                 ('print_pano2', '01_fuzz_b.jsonl.gz', 1646, [('A', 4, 120)] * 6 + [('A', 4, 300)]),   # (state 03 prints only when the pick ended with A: wAbResult)
                                 ('print_pano1b', '01_fuzz_b.jsonl.gz', 1619, [('A', 4, 120)] * 6 + [('A', 4, 300)])):  # entry ending in 18:01 (first pick), then A presses   # entry ending in 18:02 (second pick, a column), then A presses
-        if not want(label): continue                  # the 4-photo job of mode $18 prints with layout 2 or 3 ($DB6D = ($D5EA xor 1) + 2, README 17.8): layout 3 sets flag bit 4 (Mode1D_InterleaveTileRows)
+        if not want(label): continue                  # the 4-photo job of mode $18 prints with layout 2 or 3 ($DB6D = ($D5EA xor 1) + 2, docs §17.8): layout 3 sets flag bit 4 (Mode1D_InterleaveTileRows)
         d = folder('bgbp_' + label); os.environ.update(BGB_DIR=d, BGB_WP=WP, BGB_HF='-headless')
         import bgb_run; bgb_run.BGB = d
         from bgb_printer import PrinterServer
