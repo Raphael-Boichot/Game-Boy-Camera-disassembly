@@ -32,6 +32,7 @@ The symbol file is **ported from the Japanese tables** (method, counts and level
 | `disasm/layers/sym_{names,types}_us_loaders.csv` | layer 2: blocks loaded by this build's own copy calls where no carried name sits (`tools/port_assets.py`) |
 | `disasm/layers/sym_{names,types}_us_reads.csv`, `sym_names_us_checked.csv` | layers 3-4: blocks placed by their readers (`tools/port_reads.py`), carried names confirmed from this build's evidence (`tools/port_check_names*.py`) |
 | `disasm/layers/sym_{names,types}_us_hand.csv` | layer 5: hand corrections and new names of this build, applied last (kept across re-ports): edit this one, then rerun `tools/merge_name_layers.py --tag us` |
+| `wram/` | the WRAM / HRAM access table, its summary and `INDEX.md`: the layout is the Japanese one, the sites that differ by routine (`tools/port_wram_index.py`) |
 | `sram/` | the SRAM map carried from the Japanese one (every SRAM access site of this build pairs with a Japanese site at the same address) and the access sites (`tools/sram_map.py`, `tools/sram_db.py`) |
 | `intake/` | L0: the header, the per-bank comparison with the other ROMs and the no-symbol round trip (`tools/rom_intake.py`) |
 | `disasm/ram_names_us.csv`, `ram_exclude_us.csv`, `ram_highbyte_us.csv`, `const_*_us.csv`, `sound_names_us.csv`, `state_names_us.csv`, `state_helpers_us.csv` (+ `_hand`), `state_shared_us.csv`, `wram/wram_access_us.csv` | the L4 tables of this build (`tools/port_l4.py`, `tools/state_names.py`) |

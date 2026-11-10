@@ -10,7 +10,8 @@ has no evidence for stays empty:
               trace/wp_exec_<tag>.npz (blocks the BGB watchpoint runs executed); arrays exec / ex and dread / dr
   light blue  executed or read only in a forced run: trace/forced_*.npz
   GREEN       (ported builds) never run here but the same code as a Japanese routine that ran: class JP_EQUIV of port/never_run_<tag>.csv
-  PURPLE      (ported builds) never run and proven dead or unused: classes JP_DEAD and UNUSED of port/never_run_<tag>.csv
+  PURPLE      (ported builds) never run and proven dead, unused or unreachable: classes JP_DEAD, UNUSED and UNREACHABLE of
+              port/never_run_<tag>.csv
   RED         proven code (class C of trace/rom_map_<tag>.csv) that no run executed and nothing above explains (a code byte that a
               run only read, never executed, is red too)
   YELLOW      asset data that no organic run read and that the ROM's never-reached table calls unused (assets/never_reached_<tag>.csv:
@@ -62,7 +63,7 @@ if os.path.exists(nr):
     for r in csv.DictReader(open(nr)):
         b = int(r['bank'], 16); o1, o2 = off(b, int(r['start'], 16)), off(b, int(r['end'], 16)) + 1
         if r['class'] == 'JP_EQUIV': green[o1:o2] = True
-        elif r['class'] in ('JP_DEAD', 'UNUSED'): dead[o1:o2] = True
+        elif r['class'] in ('JP_DEAD', 'UNUSED', 'UNREACHABLE'): dead[o1:o2] = True
 unused = np.zeros(N, bool)
 nrc = os.path.join(D, 'assets', 'never_reached_%s.csv' % T)
 if os.path.exists(nrc):

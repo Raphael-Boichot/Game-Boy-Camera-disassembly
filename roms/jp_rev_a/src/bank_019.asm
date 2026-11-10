@@ -230,4 +230,27 @@ Gfx_19_77E0_Mode0F_State0A_EraseAll::
 ; C: target 4 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
 ; 2026-10-26: read in BGB in 34 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
 Src_19_7E60_Tbl53A6_4::
-    INCBIN "data/bank_19/Src_19_7E60_Tbl53A6_4.bin" ; $7E60, 416 bytes
+    INCBIN "data/bank_19/Src_19_7E60_Tbl53A6_4.bin" ; $7E60, 384 bytes
+; C: the 8 x 8 1-bit mask of the large pen, pattern 0: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FE0, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask0::
+    db $7f, $ff, $ff, $ff, $ff, $ff, $ff, $ff
+
+; C: the 8 x 8 1-bit mask of the large pen, pattern 1: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FE8, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask1::
+    db $3f, $3f, $ff, $ff, $ff, $ff, $ff, $ff
+
+; C: the 8 x 8 1-bit mask of the large pen, pattern 2: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FF0, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask2::
+    db $8f, $07, $07, $07, $8f, $ff, $ff, $ff
+
+; C: the 8 x 8 1-bit mask of the large pen, pattern 3: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FF8, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask3::
+    db $c3, $81, $00, $00, $00, $00, $81, $c3

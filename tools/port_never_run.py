@@ -12,6 +12,8 @@ Each never-run byte is classed through the port's instruction map (port/code_map
               (jump / call / jr source, fall-through) is paired the same way: credited by equivalence, the Japanese run is the witness (not executed in this build)
   NEW         no paired Japanese instruction (new or changed code of this build)
   UNUSED      the owner label is Unused_* in this build (code with no reference here: the Japanese leftovers of docs 1.5 and the dead roots)
+  UNREACHABLE a range of TREE/port/unreachable_<s>.csv (bank,start,end,evidence: code proven by reading its callers to be unreachable from
+              every shipped caller, hand table); it overrides NEW
 Runs of bytes are grouped by class and by the label that owns them; OUT gets one row per run.
 """
 import sys, csv, json, bisect, collections
@@ -84,12 +86,19 @@ if rom:
     for o, (b_, a_, n) in ins.items():
         if not ex[o] and cls(o) == 'JP_RAN' and kind.get(o) in ('same', 'operand') and all(kind.get(p) in ('same', 'operand') for p in preds[o]):
             equiv[o:o + n] = True
+unreach = np.zeros(N, bool)                 # hand table: code proven unreachable from every shipped caller
+_uf = '%s/port/unreachable_%s.csv' % (T, S)
+import os
+if os.path.exists(_uf):
+    for r in csv.DictReader(open(_uf, encoding='utf-8')):
+        b = int(r['bank'], 16); unreach[flat(b, int(r['start'], 16)):flat(b, int(r['end'], 16)) + 1] = True
 idx = np.flatnonzero(code & ~ex); rows = []; tot = collections.Counter()
 cur = None
 for o in idx:
     i = bisect.bisect_right(keys, o) - 1; owner = L[i][1] if i >= 0 else ''
     c = 'UNUSED' if owner.startswith('Unused_') else cls(int(o))
     if c == 'JP_RAN' and equiv[o]: c = 'JP_EQUIV'
+    if c == 'NEW' and unreach[o]: c = 'UNREACHABLE'
     tot[c] += 1
     if cur and cur[1] == o and cur[2] == c and cur[3] == owner: cur[1] = o + 1
     else:

@@ -7,12 +7,12 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | Level | Status | Left to do |
 |---|---|---|
 | L0 | done | - |
-| L1 | done | 32 bytes of uncertain data kind left on the layout map (`assets/layout_by_bank_jp.csv`, column `UNC`): settle them. |
+| L1 | done | - (2026-11-10: the last 32 uncertain bytes, `19:7FE0-7FFF`, are the four masks of the large pen, `Pen_LargeMask0`-`3`; 0 uncertain bytes) |
 | L2 | done | Nothing that a run can prove: the 45 dead roots and the 1,192 never-run bytes, all classified, stay evidence I (docs §16.21, §16.26). |
 | L3 | done | - |
 | L4 | done | - |
 | L5 | done | - |
-| L6 | partial | 1. Refresh the "what is lacking" list of `docs/01` §1.2 (written 2026-10-14, stale: it says, for example, that the international ROM has no symbol file). 2. The open questions of `docs/12`: the F34-F35 checksum mismatches, who writes `1B 13`, the meaning of the sound ids, the sensor items. 3. Owner validation of names (`disasm/owner_answers_jp.csv`). 4. **One source for the three retail builds** (Japanese, international, Gold) with build switches instead of three generated trees: the largest L6 item, shared with the international and Gold ROMs. |
+| L6 | partial | 1. The record format of the 1,713 data bytes still on the default typing (`docs/01` §1.2, refreshed 2026-11-10). 2. The open questions of `docs/12`: the F34-F35 checksum mismatches, who writes `1B 13`, the meaning of the sound ids, the sensor items. 3. Owner validation of names (`disasm/owner_answers_jp.csv`). 4. **One source for the three retail builds** (Japanese, international, Gold) with build switches instead of three generated trees: the largest L6 item, shared with the international and Gold ROMs. |
 
 ## Game Boy Camera (USA, Europe)
 
@@ -20,9 +20,9 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 |---|---|---|
 | L0 | done | - |
 | L1 | done | - |
-| L2 | done | 54 red bytes on the reachability map: 45 are the documented unreachable remainder of bank `$00` (docs §1.5); classify the 9 of bank `$09`. |
+| L2 | done | - (2026-11-10: 0 red bytes; the 45 B of bank `$00` are `UNREACHABLE`, `port/unreachable_us.csv`, and `09:54ED` is `Unused_Kb_LoadGlyphSetC`) |
 | L3 | done | - |
-| L4 | done | WRAM: only the access table exists. Write `wram/wram_summary_us.csv` and a `wram/INDEX.md` saying that the layout is the Japanese one, or where it differs (HOWTO section 0.1, rule 5). |
+| L4 | done | - (2026-11-10: `wram/wram_summary_us.csv` and `wram/INDEX.md`: the layout is the Japanese one, 98.8 % of the access sites pair as in Japan) |
 | L5 | done | - |
 | L6 | partial | 1. Display replays to confirm whether the Japanese leftover blocks ever reach the screen (README, never-reached assets). 2. The shared retail source (see the Japanese ROM). |
 
@@ -32,9 +32,9 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 |---|---|---|
 | L0 | done | - |
 | L1 | done | - |
-| L2 | done | The same 54 red bytes as the international ROM: classify the 9 of bank `$09`. |
+| L2 | done | - (2026-11-10: 0 red bytes, as the international ROM) |
 | L3 | done | - |
-| L4 | done | The same WRAM summary and `wram/INDEX.md` as the international ROM. |
+| L4 | done | - (2026-11-10: `wram/wram_summary_gold.csv` and `wram/INDEX.md`, as the international ROM) |
 | L5 | done | - |
 | L6 | partial | 1. Targeted runs that show its own assets (the Zelda stamps and the album B pictures, read so far only in forced runs; `assets/gold_own_never_read.csv`). 2. The shared retail source. |
 
@@ -64,7 +64,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 
 ## Order of work, across ROMs
 
-1. **Quick consistency** (under a session): refresh `docs/01` §1.2; classify the 9 red bytes of bank `$09` (international, Gold); the international and Gold WRAM summaries; the 32 uncertain Japanese bytes.
+1. ~~**Quick consistency**~~ done 2026-11-10: `docs/01` §1.2 refreshed; 0 red bytes on the international and Gold maps; their WRAM summaries and `INDEX.md`; the 32 uncertain Japanese bytes named.
 2. **The owner's naming rule for the prototype's leftover bytes**, then the prototype's L3 (small; closes one ROM's L3).
 3. **Hello Kitty L3**: the data kinds, then the 822 placeholder names (the largest naming job, about 3-4 sessions).
 4. **L2 red classification of Hello Kitty and the prototype** (7,607 and 398 bytes; easier once the L3 names exist).

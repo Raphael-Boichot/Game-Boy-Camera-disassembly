@@ -2,6 +2,7 @@
 """Build the WRAM/HRAM access database from the *proven* code (rom_trace.py output) of the Pocket Camera ROM.
 
 usage: wram_db.py <rom.gb> <trace.json> <sym> <out_prefix>
+       wram_db.py --summary-from ACCESS.csv OUT_summary.csv   (the summary of an existing access table, e.g. a ported build's)
 writes   <out_prefix>_access.csv   one line per instruction touching $C000-$DFFF / $FF80-$FFFE / $FF00-$FF7F (I/O)
          <out_prefix>_summary.csv  one line per address: reads, writes, pointer loads, banks, functions, written constants
 
@@ -16,7 +17,35 @@ from rom_trace import Rom, load_sym
 CONST_OPS = {0x3E: 'imm'}
 
 
+def summary(rows, path):
+    """the per-address summary of access rows (addr, kind, bank, pc, function, value), as written by main()"""
+    st = collections.defaultdict(lambda: dict(R=0, W=0, P=0, banks=collections.Counter(), funcs=collections.Counter(), vals=collections.Counter()))
+    for addr, kind, b, a, fn, val in rows:
+        s = st[addr]
+        s['W' if kind == 'W2' else kind] += 1
+        s['banks'][f'{b:02x}'] += 1
+        if fn:
+            s['funcs'][fn] += 1
+        if val is not None:
+            s['vals'][f'{val:02x}'] += 1
+    with open(path, 'w', newline='') as f:
+        w = csv.writer(f, lineterminator='\n')         # the committed tables use LF
+        w.writerow(['addr', 'region', 'reads', 'writes', 'ptr_loads', 'banks', 'top_functions', 'written_consts'])
+        for addr in sorted(st):
+            s = st[addr]
+            reg = 'HRAM' if 0xFF80 <= addr else ('OAM/IO' if addr >= 0xFE00 else 'WRAM')
+            w.writerow([f'{addr:04x}', reg, s['R'], s['W'], s['P'],
+                        ' '.join(f'{k}:{v}' for k, v in sorted(s['banks'].items())),
+                        ' '.join(f'{k}:{v}' for k, v in s['funcs'].most_common(4)),
+                        ' '.join(f'{k}:{v}' for k, v in s['vals'].most_common(6))])
+    return len(st)
+
+
 def main():
+    if sys.argv[1] == '--summary-from':     # wram_db.py --summary-from ACCESS.csv OUT_summary.csv: the summary of a committed access table
+        rows = [(int(r['addr'], 16), r['kind'], int(r['bank'], 16), int(r['pc'], 16), r['function'], int(r['const_written'], 16) if r['const_written'] else None)
+                for r in csv.DictReader(open(sys.argv[2], encoding='utf-8'))]
+        print('summary of', len(rows), 'accesses:', summary(rows, sys.argv[3]), 'distinct addresses'); return
     rom = Rom(sys.argv[1])
     tr = json.load(open(sys.argv[2]))
     sym_code, sym_data = load_sym(sys.argv[3])
@@ -94,26 +123,8 @@ def main():
         for addr, kind, b, a, fn, val in rows:
             w.writerow([f'{addr:04x}', kind, f'{b:02x}', f'{a:04x}', fn, '' if val is None else f'{val:02x}'])
 
-    st = collections.defaultdict(lambda: dict(R=0, W=0, P=0, banks=collections.Counter(), funcs=collections.Counter(), vals=collections.Counter()))
-    for addr, kind, b, a, fn, val in rows:
-        s = st[addr]
-        s['W' if kind == 'W2' else kind] += 1
-        s['banks'][f'{b:02x}'] += 1
-        if fn:
-            s['funcs'][fn] += 1
-        if val is not None:
-            s['vals'][f'{val:02x}'] += 1
-    with open(prefix + '_summary.csv', 'w', newline='') as f:
-        w = csv.writer(f)
-        w.writerow(['addr', 'region', 'reads', 'writes', 'ptr_loads', 'banks', 'top_functions', 'written_consts'])
-        for addr in sorted(st):
-            s = st[addr]
-            reg = 'HRAM' if 0xFF80 <= addr else ('OAM/IO' if addr >= 0xFE00 else 'WRAM')
-            w.writerow([f'{addr:04x}', reg, s['R'], s['W'], s['P'],
-                        ' '.join(f'{k}:{v}' for k, v in sorted(s['banks'].items())),
-                        ' '.join(f'{k}:{v}' for k, v in s['funcs'].most_common(4)),
-                        ' '.join(f'{k}:{v}' for k, v in s['vals'].most_common(6))])
-    print('accesses', len(rows), 'distinct addresses', len(st))
+    n = summary(rows, prefix + '_summary.csv')
+    print('accesses', len(rows), 'distinct addresses', n)
 
 
 if __name__ == '__main__':

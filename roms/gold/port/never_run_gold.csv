@@ -7,8 +7,8 @@ bank,start,end,bytes,class,owner
 00,04D8,04D8,1,JP_EQUIV,Border_CopyFrameAddTile_LcdOff
 00,04EF,04EF,1,JP_EQUIV,Border_CopyFrameAddTile_LcdOff
 00,05A2,05A8,7,UNUSED,Unused_Delay_Short
-00,05AD,05BB,15,NEW,Vram_CopyFromBank4_Padded
-00,05FC,0619,30,NEW,Vram_CopyFromBank4_Padded
+00,05AD,05BB,15,UNREACHABLE,Vram_CopyFromBank4_Padded
+00,05FC,0619,30,UNREACHABLE,Vram_CopyFromBank4_Padded
 00,061A,061A,1,JP_DEAD,Vram_CopyFromBank4_Padded
 00,0675,067E,10,JP_DEAD,Vram_CopyFromBank_4
 00,067F,0685,7,JP_EQUIV,Vram_CopyFromBank_4
@@ -241,6 +241,7 @@ bank,start,end,bytes,class,owner
 09,46F3,46F7,5,JP_EQUIV,CommentCard_DivMod10
 09,4719,471D,5,JP_EQUIV,CommentCard_DrawTotal_Far
 09,4757,4767,17,JP_EQUIV,CommentCard_DrawCopyBadge_Far
+09,54ED,54F5,9,UNUSED,Unused_Kb_LoadGlyphSetC
 09,568D,56AB,31,UNUSED,Unused_OwnerCard_DrawBloodType
 09,5D21,5D26,6,UNUSED,Unused_Kb_Page0_Press_Dakuten
 09,5D37,5D3C,6,UNUSED,Unused_Kb_Page0_Press_Handakuten

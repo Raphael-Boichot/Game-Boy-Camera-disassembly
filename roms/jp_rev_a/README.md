@@ -9,7 +9,7 @@ MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`, 1 MiB, MBC: MAC-GBD (camera cartridge). 
 | L0 | done | `intake/intake_roundtrip.txt`: mgbdis `95d951a` with no symbol file + rgbasm 1.0.4 rebuild md5 `fdcfe686cf4df461e870b6e53b2b5a8b` |
 | L1 | done | `pocketcamera_jp.sym` types every byte (`tools/sym_build.py` finds no hole or overlap) |
 | L2 | done | `trace/trace_jp.json`: 60,449 instructions, 0 unresolved; observed: `trace/cov_jp_runs.npz` (95.3 % executed), the never-run bytes classified (docs §16.21, §16.26) |
-| L3 | done | `disasm/sym_names_jp.csv`: 5,345 names, C 5,258 / I 87 (the I names all proven unused: `disasm/sym_settled_unused_jp.csv`), 0 doubts (`disasm/sym_unconclusive_jp.csv`) |
+| L3 | done | `disasm/sym_names_jp.csv`: 5,349 names, C 5,262 / I 87 (the I names all proven unused: `disasm/sym_settled_unused_jp.csv`), 0 doubts (`disasm/sym_unconclusive_jp.csv`) |
 | L4 | done | `disasm/ram_names_jp.csv`, the constant tables; `wram/` |
 | L5 | done | `src/`, `make check` |
 | L6 | partial | the name / comment character set (`disasm/charset_jp.csv`); docs §1.3 |

@@ -3786,6 +3786,10 @@
 19:7560 Gfx_19_7560_Mode0F_State0A_EraseAll
 19:77e0 Gfx_19_77E0_Mode0F_State0A_EraseAll
 19:7e60 Src_19_7E60_Tbl53A6_4
+19:7fe0 Pen_LargeMask0
+19:7fe8 Pen_LargeMask1
+19:7ff0 Pen_LargeMask2
+19:7ff8 Pen_LargeMask3
 1a:4000 Gfx_1A_4000_Mode1F_State04_PerformanceSetup
 1a:4d60 Gfx_1A_4D60_DjPerf_DrawTempo
 1a:4e00 Gfx_1A_4E00_Mode1F_State05_Performance
@@ -6617,7 +6621,8 @@
 19:77cc .data:14
 19:77e0 .data:5eb:10
 19:7dcb .padding:95
-19:7e60 .data:1a0:10
+19:7e60 .data:180:10
+19:7fe0 .data:20:8
 1a:4000 .data:d60:10
 1a:4d60 .data:a0:10
 1a:4e00 .data:2a0:10

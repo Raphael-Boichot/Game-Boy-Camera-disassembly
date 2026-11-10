@@ -825,7 +825,8 @@ bank,start,end,type,width,note
 19,7340,74C0,data,16,Gfx
 19,7560,77CC,data,16,Gfx
 19,77E0,7DCB,data,16,Gfx
-19,7E60,8000,data,16,Data
+19,7E60,7FE0,data,16,Data
+19,7FE0,8000,data,8,Data
 1A,4000,4D60,data,16,Gfx
 1A,4D60,4E00,data,16,Gfx
 1A,4E00,50A0,data,16,Gfx

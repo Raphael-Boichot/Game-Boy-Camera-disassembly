@@ -1,0 +1,3 @@
+bank,start,end,evidence
+00,05AD,05BB,"code read (docs §1.5): the ROM-bank branch and the 2-byte remainder of Vram_CopyFromBank4_Padded; its nine callers (the hot-spot effects of bank 03) all pass a source at $8000 or above (SRAM wPhotoImage; VRAM $9000) and a count of $10; $600 or $800 (a multiple of 4); so no shipped caller enters these bytes"
+00,05FC,0619,"code read (docs §1.5): the ROM-bank branch and the 2-byte remainder of Vram_CopyFromBank4_Padded; its nine callers (the hot-spot effects of bank 03) all pass a source at $8000 or above (SRAM wPhotoImage; VRAM $9000) and a count of $10; $600 or $800 (a multiple of 4); so no shipped caller enters these bytes"

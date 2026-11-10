@@ -91,7 +91,7 @@ This file holds the rules and the layout. Numbers and findings live in `docs/` (
 * Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
 
 ## Where things stand (pointers, not numbers)
-* Disassembly levels L0-L6 and the measured counts: docs §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,345 names tagged C / I / ? (5,258 / 87 / 0); 0 doubtful rows are listed with evidence
+* Disassembly levels L0-L6 and the measured counts: docs §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,349 names tagged C / I / ? (5,262 / 87 / 0); 0 doubtful rows are listed with evidence
   in `roms/jp_rev_a/disasm/sym_unconclusive_jp.md`. L4 is done as defined by the how-to (798 RAM names in §2.13; the `MODE_*`, key-mask, hardware-flag and sound-id constants in §2.14; the state constants `STATE_NN_*` of the 34 modes), L5 (committed buildable tree) is done (`roms/jp_rev_a/src/`, §1.4); L6 is partial (the name / comment charset and the ROM tables written in it: the keyboard pages and the voiced-mark maps, §16.27; the international / Gold set: `roms/us_eu/disasm/charset_us.csv`).
 * Coverage of the Japanese ROM: §13 (core), §16.14-§16.21 and §16.26 (later runs, forcing), `roms/jp_rev_a/assets/witness_jp.csv`, the map `jp_rom_reachability_map.png`. The international and Gold ROMs have a static trace (`roms/us_eu/trace/trace_us.json`, `roms/gold/trace/trace_gold.json`, 0 unresolved) and their own runs in the core
   (`coverage/tools/coverage_run.py` with `GBCAM_ROM` / `GBCAM_TRACE` / `GBCAM_ROOTS` / `GBCAM_SYM` set to the build: `roms/us_eu/trace/cov_us_runs.npz`, `roms/gold/trace/cov_gold_runs.npz`; SETUP.md); behavioural parity was checked in BGB (§16.11, §16.12).

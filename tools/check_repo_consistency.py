@@ -165,6 +165,10 @@ for _t, _f, _r, _sym in (('jp', 'jp_rev_a', A.rom, 'pocketcamera_jp.sym'), ('us'
         shutil.rmtree(_tmp, ignore_errors=True)
     _m = subprocess.run([sys.executable, 'tools/sram_map.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('sram', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
+# the WRAM summary and INDEX.md of the ported builds (tools/port_wram_index.py)
+for _t in ('us', 'gold'):
+    _m = subprocess.run([sys.executable, 'tools/port_wram_index.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('wram', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 # the settled-unused and doubts lists of the ported builds are what tools/port_settled.py makes from their final names
 for _t in ('us', 'gold'):
     _m = subprocess.run([sys.executable, 'tools/port_settled.py', '--tag', _t, '--check'], capture_output=True, text=True, cwd=ROOT)
