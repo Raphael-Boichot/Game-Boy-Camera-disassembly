@@ -32,7 +32,8 @@ bank,addr,name,conf,source,evidence
 00,342E,BIT_COUNT,I,hand,"adds popcount(byte) + 2 x popcount(next byte) through the table at 04:4100 into BC, eight times per call from SCREEN_CHECK: the dark pixels of 2bpp rows (C); BIT_COUNT is the routine the source text left in the ROM describes for this (docs §18.14), so the name is I"
 00,35BD,ParaSet_ByMode,I,hand,dispatch on the low nibble of A (cp 0..n) to per-mode register settings; called by PARA_SET and the settings screen
 00,3C9A,NO_DITHER_PAT,I,hand,"dither order pattern 0 of SET_DITH_MATRIX (table base $3C9A, 16 bytes of $08: no dither); the old table $2A has NO_DITHER_PAT 16 bytes before BAYER_PAT, as here, but an all-$08 pattern is too plain to match by its bytes"
-01,5C81,Data_01_5C81_SIMO,I,symtab_asset,SIMO in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
+02,42E1,Unused_TCRF_ArrowCursor_TopRow_Gfx,I,hand,"TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: the arrow-on-a-string cursor, top row (tiles $2E-$2F of the sheet Gfx_02_4001_FNTOOE2; bottom row at 02:43E1); exact match of the TCRF image; copied to VRAM with the sheet in the L2 runs, but no map or sprite of this build is known to draw tiles $2E/$2F/$3E/$3F"
+02,43E1,Unused_TCRF_ArrowCursor_BottomRow_Gfx,I,hand,"TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: the arrow-on-a-string cursor, bottom row (tiles $3E-$3F of Gfx_02_4001_FNTOOE2; top row at 02:42E1)"
 02,6581,Data_02_6581_PROGRAM,I,symtab_asset,PROGRAM in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
 03,7481,Data_03_7481_BG_F_SCR,I,symtab_asset,BG_F_SCR in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
 03,76C1,Data_03_76C1_BG_EDIT,I,symtab_asset,BG_EDIT in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
@@ -43,11 +44,3 @@ bank,addr,name,conf,source,evidence
 04,4E01,Data_04_4E01_KAO_1,I,symtab_asset,KAO_1 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
 04,5C01,Data_04_5C01_KAO_2,I,symtab_asset,KAO_2 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
 04,6A01,Data_04_6A01_KAO_3,I,symtab_asset,KAO_3 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-05,4001,Data_05_4001_HOI_U,I,symtab_asset,HOI_U in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-05,4E01,Data_05_4E01_HOI_D,I,symtab_asset,HOI_D in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-05,5C01,Data_05_5C01_HOI_L,I,symtab_asset,HOI_L in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-05,6A01,Data_05_6A01_HOI_R,I,symtab_asset,HOI_R in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-06,4001,Data_06_4001_FACE5,I,symtab_asset,FACE5 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-06,4E01,Data_06_4E01_FACE6,I,symtab_asset,FACE6 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-06,5C01,Data_06_5C01_FACE7,I,symtab_asset,FACE7 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled
-06,6A01,Data_06_6A01_FACE8,I,symtab_asset,FACE8 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled

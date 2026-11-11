@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """L3 names of the early prototype: merge the name layers into roms/prototype_debagame/disasm/sym_names_proto.csv (the input of sym_build).
 
-  tools/proto_names.py [--min-port 16] [--auto AUTO.csv] [--match MATCH.csv] [--symtab SYMTAB.csv] [--trace TRACE.json] [--out OUT.csv] [--doubts OUT.md]
+  tools/proto_names.py [--min-port 16] [--auto AUTO.csv] [--match MATCH.csv] [--symtab SYMTAB.csv] [--trace TRACE.json] [--out OUT.csv] [--doubts OUT.md] [--texts TEXTS.csv]
 
 Layers, lowest first (a later layer replaces the name at the same address; a name `-` deletes):
   1. auto   disasm/layers/sym_names_proto_auto.csv (tools/proto_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, tag C
@@ -23,6 +23,12 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
             longest pattern, and is tagged ? when two names tie. Tag C at --min-port bytes or more, I below. The note gives the table,
             the old address, the length and the match kind.
   4. hand   disasm/layers/sym_names_proto_hand.csv (every row with its reason)
+  4b. copies  an exact copy (in bytes nothing identifies) of an identified block of 32+ bytes: Leftover_BB_AAAA_<block name>, tag I,
+            with the block's type row (a copy of a routine is typed data). Padding-like runs inside a copy do not stop it.
+  4c. text   every text type row: Leftover_BB_AAAA_AsmSource (assembler source in clear) or _SrcListing (file.dmg(line) : text lines), tag I.
+  5b. PC RAM a leftover gap run that holds strings of the development PC's memory (Windows paths, the DOS environment):
+            Leftover_BB_AAAA_PcRam, tag I. --texts writes every text in clear (the text rows and the PC strings) to
+            assets/text_sections_proto.csv.
 Checks: one name per address and one address per name (a clash aborts), valid rgbasm labels, every routine entry of the trace
 (call targets, jump-table entries, vectors, the entry) named. --doubts writes the doubts list: every name not tagged C but the leftovers, with its note (OUT.md, and the same rows as OUT.csv
 beside it); the leftovers, whose I tag is final, go to sym_settled_unused_proto.csv beside it.
@@ -34,7 +40,7 @@ ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=
 ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
 ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
 ap.add_argument('--hand', default=D + 'disasm/layers/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
-ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv')
+ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv'); ap.add_argument('--texts', default=D + 'assets/text_sections_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
 a = ap.parse_args()
 names = {}
@@ -81,6 +87,7 @@ for ad, rs in sorted(byaddr.items()):
 for r in csv.DictReader(open(a.hand)): put(int(r['bank'], 16), int(r['addr'], 16), r['name'], r['conf'], r['note'], r['source'])
 # 5. gaps: unidentified bytes get a Data_ label at their start
 ROMB = open(a.rom, 'rb').read(); TR = json.load(open(a.trace))
+COPYNOTE = 'leftover copy of '
 cov_ = bytearray(len(ROMB))
 for k, n in TR['code'].items():
     o = int(k[3:], 16) if k.startswith('00:') else int(k[:2], 16) * 0x4000 + int(k[3:], 16) - 0x4000
@@ -88,9 +95,11 @@ for k, n in TR['code'].items():
 for k in TR['inline']:
     o = int(k[3:], 16) if k.startswith('00:') else int(k[:2], 16) * 0x4000 + int(k[3:], 16) - 0x4000
     cov_[o] = 1
-for r in csv.DictReader(open(a.types)):
+TYPES = [r for r in csv.DictReader(open(a.types)) if not r['note'].startswith(COPYNOTE)]     # without the rows of an earlier run of step 4b
+for r in TYPES:
     b = int(r['bank'], 16); s0, e0 = int(r['start'], 16), int(r['end'], 16)
     for ad in range(s0, e0): cov_[ad if b == 0 else b * 0x4000 + ad - 0x4000] = 1
+idcov_ = bytearray(cov_)                              # identified bytes only (trace and type rows), without the padding runs
 i = 0
 while i < len(ROMB):                                   # padding: 16+ equal $00 / $FF
     j = i
@@ -99,6 +108,61 @@ while i < len(ROMB):                                   # padding: 16+ equal $00 
         for k in range(i, j): cov_[k] = 1
     i = j
 import bisect
+# 4b. leftover copies (owner rule 2026-11-11): an exact copy of an identified block (a named asset, map, table or routine whose bytes are all
+#     typed or traced, 32 bytes or more, not one repeated byte) that lies in bytes nothing identifies inherits the block: it is named
+#     Leftover_BB_AAAA_<name of the block>, tag I, and gets the block's type row (a copy of a routine is typed data: this build never runs it)
+def _flat(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
+_lbl = sorted(names); _src = []
+TYPESTART = {}
+for r in TYPES: TYPESTART[(int(r['bank'], 16), int(r['start'], 16))] = max(TYPESTART.get((int(r['bank'], 16), int(r['start'], 16)), 0), int(r['end'], 16))
+for i_, (b, ad) in enumerate(_lbl):
+    nm = names[(b, ad)][0]
+    if nm.startswith(('Leftover_', 'BankNumber_')) or re.match(r'(Data|Code|Gfx|Map|Src|JumpTable|Unk)_[0-9A-F]{2}_[0-9A-F]{4}$', nm): continue
+    nb, na = _lbl[i_ + 1] if i_ + 1 < len(_lbl) else (b + 1, 0)
+    end = na if nb == b else (0x4000 if b == 0 else 0x8000)
+    t_ = TYPESTART.get((b, ad))
+    if t_ is not None: end = min(end, t_)          # a block with its own type row ends with it (the bytes after it may be untyped)
+    o0, o1 = _flat(b, ad), _flat(b, ad) + (end - ad)
+    if o1 - o0 < 32 or len(set(ROMB[o0:o1])) == 1 or not all(cov_[o0:o1]): continue
+    _src.append((o1 - o0, b, ad, o0, o1, nm))
+TYPEAT = {}
+for r in TYPES: TYPEAT[(int(r['bank'], 16), int(r['start'], 16))] = r
+copy_types = []; ncopy = 0
+for ln, b, ad, o0, o1, nm in sorted(_src, reverse=True):
+    blob = ROMB[o0:o1]; i_ = ROMB.find(blob)
+    while i_ >= 0:
+        if i_ != o0 and (i_ >> 14) == ((i_ + ln - 1) >> 14) and not any(idcov_[i_:i_ + ln]):   # padding-like runs inside a copy (white rows of a picture) do not stop it
+            cb = i_ >> 14; ca = i_ if cb == 0 else 0x4000 + (i_ & 0x3FFF)
+            put(cb, ca, 'Leftover_%02X_%04X_%s' % (cb, ca, nm), 'I', 'leftover: an exact copy of %s (%02X:%04X, %d bytes) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)' % (nm, b, ad, ln), 'copy')
+            t_ = TYPEAT.get((b, ad))
+            copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + ln), t_['type'] if t_ else 'data', (t_['width'] if t_ else '') or '',
+                               COPYNOTE + '%s (%02X:%04X)%s' % (nm, b, ad, '' if t_ else ': a copy of code, typed data (this build never runs it)')])
+            for k in range(i_, i_ + ln): cov_[k] = 1; idcov_[k] = 1
+            ncopy += 1
+        i_ = ROMB.find(blob, i_ + 1)
+with open(a.types, 'w', newline='') as f:     # the type table with the copies' rows (rerunning this script gives the same file)
+    w_ = csv.writer(f, lineterminator='\n'); w_.writerow(['bank', 'start', 'end', 'type', 'width', 'note'])
+    for r in TYPES: w_.writerow([r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']])
+    w_.writerows(copy_types)
+# 4c. leftover text (owner 2026-11-11): the text type rows (proto_types.py: printable ASCII / Shift-JIS) are pieces of the developers' PC files
+#     that the build tool left in unused ROM space. Leftover_BB_AAAA_AsmSource: assembler source in clear (instructions, DEFB / DB, comments);
+#     Leftover_BB_AAAA_SrcListing: a listing of that source, one `file.dmg(line) : text` line per hit (a grep output). Tag I, final.
+#     A row that starts on the bank-number byte (BB:4000, read by the self-test) is labelled from BB:4001.
+ASMRE = re.compile(rb'\t(DEFB|DEFW|DB|DW|LD|LDH|CALL|JP|JR|RET|RETI|INC|DEC|PUSH|POP|AND|OR|XOR|CP|ADD|ADC|SUB|SBC|EQU|BIT|SET|RES|RLCA|RRCA|SWAP|SRL|SLA|DS)\b', re.I)
+LISTRE = re.compile(rb'[A-Za-z0-9_]+\.(dmg|DMG|inc|INC|asm|ASM)\(\d+\) :')
+TEXTROWS = []
+for r in TYPES:
+    if r['type'] != 'text': continue
+    b = int(r['bank'], 16); s0, e0 = int(r['start'], 16), int(r['end'], 16)
+    if s0 == 0x4000 and names.get((b, 0x4000), [''])[0].startswith('BankNumber_'): s0 = 0x4001
+    t = ROMB[_flat(b, s0):_flat(b, s0) + e0 - s0]
+    nl, na = len(LISTRE.findall(t)), len(ASMRE.findall(t))
+    what = 'SrcListing' if nl > na else 'AsmSource'
+    old = names.get((b, s0))
+    if old and not re.match(r'(Text|Data)_[0-9A-F]{2}_[0-9A-F]{4}$', old[0]) and not old[0].startswith('Leftover_'): sys.exit('proto_names: text row %02X:%04X under %s' % (b, s0, old[0]))
+    put(b, s0, 'Leftover_%02X_%04X_%s' % (b, s0, what), 'I', 'leftover text: %d bytes of %s (%d listing lines, %d assembler lines) that nothing in this build reads (never read nor run in the L2 runs)' % (
+        e0 - s0, 'a listing of the developers\' source (file.dmg(line) : text)' if what == 'SrcListing' else 'the developers\' assembler source in clear', nl, na), 'text')
+    TEXTROWS.append((b, s0, e0, what, nl, na))
 ngap = 0
 import numpy as _np                       # what the L2 runs read or executed (trace/cov_proto_runs.npz): a gap that is used is not a leftover
 _z = _np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
@@ -120,6 +184,34 @@ for o in range(len(ROMB)):
             put(b, ad, 'Leftover_%02X_%04X' % (b, ad), 'I', 'leftover: %d bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)' % (e_ - o), 'gap')
         ngap += 1
         bisect.insort(lst, ad)
+# 5b. leftover PC memory (owner 2026-11-11): a leftover run whose bytes hold strings of the development PC's memory (Windows paths, the
+#     DOS environment, Windows module names) is a piece of that PC's RAM that the build tool wrote into unused ROM space:
+#     Leftover_BB_AAAA_PcRam, tag I, final. The run is the span of the gap label (to the next label of the bank); only the strings are proven.
+PCRE = re.compile(rb'[A-Z]:\\[A-Za-z]|WINDOWS VMM|[A-Z0-9]{3,8}\.(DLL|EXE|VXD|DRV)\b|COMSPEC=|winbootdir=')
+npc = 0; PCRAM = []
+_all = sorted(names)
+for i_, (b, ad) in enumerate(_all):
+    nm, c, note, src = names[(b, ad)]
+    if src != 'gap' or not nm.startswith('Leftover_'): continue
+    nb, na = _all[i_ + 1] if i_ + 1 < len(_all) else (b + 1, 0)
+    end = na if nb == b else 0x8000
+    t = ROMB[_flat(b, ad):_flat(b, ad) + end - ad]
+    hits = [m for m in PCRE.finditer(t)]
+    if not hits: continue
+    strs = []                              # the printable string around each hit (a NUL-terminated string of the PC memory)
+    for m in hits:
+        i0, i1 = m.start(), m.end()
+        while i0 > 0 and 0x20 <= t[i0 - 1] < 0x7F: i0 -= 1
+        while i1 < len(t) and 0x20 <= t[i1] < 0x7F: i1 += 1
+        if not strs or strs[-1][0] != ad + i0: strs.append((ad + i0, t[i0:i1].decode('latin1')))
+    ex = [x for _, x in strs[:3]]
+    allstr = []                           # every string of the run for the text listing: 6+ printable bytes ending on a NUL, half of them letters
+    for m in re.finditer(rb'[\x20-\x7e]{6,}(?=\x00)', t):
+        x = m.group()
+        if sum(1 for ch in x if 0x41 <= ch <= 0x5A or 0x61 <= ch <= 0x7A) * 2 >= len(x): allstr.append((ad + m.start(), x.decode('latin1')))
+    names[(b, ad)] = ['Leftover_%02X_%04X_PcRam' % (b, ad), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X) that hold %d strings of the development PC\'s RAM (%s ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory' % (
+        end - ad, b, ad, end - 1, len(strs), ' / '.join(x[:40] for x in ex)), 'ram']
+    PCRAM.append((b, ad, end, allstr)); npc += 1
 # 6. code after a data label: a <routine>_Part<AAAA> label (the Japanese convention for a piece of a parent block) at the first traced
 #    instruction that a non-code label would own, so that the code keeps the name and the colour of its routine
 codeat = set()
@@ -153,16 +245,31 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] != 'gap')
-settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] == 'gap')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+FINAL = ('gap', 'copy', 'text', 'ram')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] not in FINAL)
+settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FINAL)
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        w.writerow(['%02X' % b, '%04X' % ad, nm, c, 'leftover', int(re.search(r'(\d+) bytes', note).group(1)), note, 'tools/proto_names.py: no type row, traced instruction or reader, and trace/cov_proto_runs.npz neither reads nor runs them'])
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
+        w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
+                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block, in bytes no type row, traced instruction or reader covers',
+                     'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers'}[src]])
+with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
+    w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])
+    rows_ = []
+    for b, s0, e0, what, nl, na in TEXTROWS:
+        t = ROMB[_flat(b, s0):_flat(b, s0) + e0 - s0].decode('cp932', 'replace')
+        rows_.append((b, s0, e0, {'AsmSource': 'assembler source (leftover)', 'SrcListing': 'source listing (leftover)'}[what], 'Leftover_%02X_%04X_%s' % (b, s0, what), t.count('\r\n'),
+                      re.sub(r'\s+', ' ', t[:80]).strip()))
+    for b, ad, end, strs in PCRAM:
+        for o_, x in strs:
+            rows_.append((b, o_, o_ + len(x), 'PC memory string (leftover)', 'Leftover_%02X_%04X_PcRam' % (b, ad), 1, x[:80]))
+    for b, s0, e0, k, lb, nl, smp in sorted(rows_): w.writerow(['%02X' % b, '%04X' % s0, '%04X' % e0, e0 - s0, k, lb, nl, smp])
 with open(a.doubts, 'w') as f:
     f.write('# Prototype: names not tagged C (doubts list)\n\nGenerated by `tools/proto_names.py` from the name layers (%d names: C %d / I %d / ? %d). '
-            'Every name below is a hypothesis until the code or an emulator confirms it. Not listed: the %d leftovers (`Leftover_BB_AAAA`, tag I, final), in `sym_settled_unused_proto.csv`.\n\n| address | name | tag | source | reason |\n|---|---|---|---|---|\n' % (
-                len(names), tags['C'], tags['I'], tags['?'], sum(1 for v in names.values() if v[1] != 'C' and v[3] == 'gap')))
+            'Every name below is a hypothesis until the code or an emulator confirms it. Not listed: the %d leftovers (`Leftover_BB_AAAA`, with the `_<name>` of the block they copy, `_AsmSource` / `_SrcListing` for text, `_PcRam` for PC memory; tag I, final), in `sym_settled_unused_proto.csv`.\n\n| address | name | tag | source | reason |\n|---|---|---|---|---|\n' % (
+                len(names), tags['C'], tags['I'], tags['?'], sum(1 for v in names.values() if v[1] != 'C' and v[3] in FINAL)))
     for (b, ad), (nm, c, note, src) in doubt: f.write('| %02X:%04X | %s | %s | %s | %s |\n' % (b, ad, nm, c, src, note.replace('|', '/')))
 with open(os.path.splitext(a.doubts)[0] + '.csv', 'w', newline='') as f:      # the same list as a table (HOWTO_NEW_ROM.md section 0.1: sym_unconclusive_<tag>.csv/.md)
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'source', 'evidence'])

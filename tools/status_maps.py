@@ -50,6 +50,7 @@ for k, (folder, pre, title, md5) in ROMS.items():
     if os.path.exists(grp): cmd += ['--groups', grp]     # the ROM's own modes and name prefixes for the code colours
     covf = E('port', 'cov_jp_in_%s.npz' % pre)
     if os.path.exists(covf): cmd += ['--cov', covf]      # the Japanese runs carried by the port: read bytes are never padding or fill
+    if k == 'proto': cmd += ['--leftover-kinds']      # the prototype's leftovers: source text, PC memory, copies of code (tools/proto_names.py)
     cmd += ['--outline', 'none']      # no outline (owner 2026-11-01): what differs from the Japanese ROM goes to a text summary
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=REPO)
     if r.returncode: sys.exit('%s: %s' % (k, (r.stderr or r.stdout)[-800:]))

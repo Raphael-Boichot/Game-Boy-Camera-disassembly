@@ -99,6 +99,12 @@ CATS = [
 ]
 if DIFF or UNCLAIMED:
     _io = [k for k, _, _ in CATS].index('OTHER'); CATS[_io] = ('OTHER', 'Code with no function group', CATS[_io][2])
+LKINDS = '--leftover-kinds' in a      # a build with leftovers of its own making (the prototype): three kinds of their own, before UNCERTAIN
+if LKINDS:
+    _iu = [k for k, _, _ in CATS].index('UNC')
+    CATS[_iu:_iu] = [('SRC',   'Leftover text in clear: the developers\' assembler source and listings of it (Leftover_*_AsmSource / _SrcListing)', (40, 40, 40)),
+                     ('PCRAM', 'Leftover PC memory: RAM of the development PC (DOS environment, Windows names) left by the build tool (Leftover_*_PcRam)', (0, 200, 180)),
+                     ('LCODE', 'Leftover copies of code: routines of this or an older build that this build never runs (Leftover_*_<routine>)', (110, 100, 30))]
 if UNCLAIMED:
     CATS.insert(len(CATS) - 1, ('NONE', 'NOT ANALYSED YET: no label, type row or trace says what these bytes are', (96, 112, 140)))
 KEY = {k: i for i, (k, _, _) in enumerate(CATS)}
@@ -156,7 +162,14 @@ def data_kind(name):
     if p in ('Map', 'BgMap'): return 'MAP'
     if re.search(r'(PalTrnData|Palettes)$', name): return 'PALT'                      # colour data: Sgb_PalTrnData, Sgb_BorderPalettes
     if p == 'Sgb': return 'T_UI' if 'BorderTiles' in name else ('MAP' if 'BorderMap' in name else 'TBL')
-    if p in ('Src', 'Data', 'Leftover'): return 'UNC'                                   # Leftover_: bytes nothing reads (owner rule 2026-11-11), kind not settled
+    if p == 'Leftover':                       # Leftover_BB_AAAA[_<what>] (owner rule 2026-11-11): bytes nothing in this build reads
+        m = re.match(r'Leftover_[0-9A-F]{2}_[0-9A-F]{4}_(.+)$', name)
+        if not m: return 'UNC'                                                           # kind not settled
+        if m.group(1) in ('AsmSource', 'SrcListing'): return 'SRC' if LKINDS else 'UNC'
+        if m.group(1) == 'PcRam': return 'PCRAM' if LKINDS else 'UNC'
+        if m.group(1) in CODENAMES: return 'LCODE' if LKINDS else 'UNC'                   # a copy of a routine: never run here
+        return data_kind(m.group(1))                                                    # a copy of a named block keeps the block's kind
+    if p in ('Src', 'Data'): return 'UNC'                                   # Leftover_: bytes nothing reads (owner rule 2026-11-11), kind not settled
     return 'TBL'
 
 # ---- labels ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -168,6 +181,7 @@ for _fn in NAMES:
         else: _lab[_k] = r
 labels = sorted(_lab.items(), key=lambda x: x[0])
 loff = np.array([o for o, _ in labels] or [-1], np.int64); L = len(labels)
+CODENAMES = {r['name'] for o, r in labels if cls[o] in b'CFN'}                             # labels on proven code (a leftover copy of one is code never run)
 l_code = np.zeros(max(L, 1), np.uint8); l_data = np.zeros(max(L, 1), np.uint8)
 for i, (o, r) in enumerate(labels):
     _g = code_group(r['name'])
@@ -250,7 +264,7 @@ def font(sz, bold=False):
     return ImageFont.load_default(size=sz)
 F1, F2, F3, F3B, FB, FK = font(46, True), font(28), font(27), font(30, True), font(32, True), font(22)
 SHORT = {'SYS': 'system code', 'CAM': 'camera code', 'ALBUM': 'album code', 'EDIT': 'editor code', 'LINK': 'link code', 'PRINT': 'print code', 'GAME': 'game code', 'DJ': 'D.J. code',
-         'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
+         'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'SRC': 'source text', 'PCRAM': 'PC memory', 'LCODE': 'code copies', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
          'OAM': 'sprite layouts', 'SOUND': 'sound data', 'TBL': 'tables / text', 'PALT': 'palettes', 'UNC': 'UNCERTAIN', 'FILL': '$FF fill', 'PAD': 'padding', 'NONE': 'not analysed'}
 def ramp(c):                      # 4 shades of one colour: 0 = lightest ... 3 = darkest (the 2 bits of a tile pixel)
     mix = lambda t, k: tuple(int(round(255 * (1 - k) + v * k)) if t == 'w' else int(round(v * k)) for v in c)

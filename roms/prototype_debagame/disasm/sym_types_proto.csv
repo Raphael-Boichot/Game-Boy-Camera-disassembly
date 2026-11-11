@@ -205,3 +205,130 @@ bank,start,end,type,width,note
 03,5A41,7241,data,16,Gfx: 2bpp tiles copied to VRAM by 00:1291
 03,7241,7481,data,32,Map: tile-map rows copied to the BG map by 00:129D
 04,4300,4400,data,16,"Zoom_TableA: 256-byte lookup read by ImageCopy_Mode06 (ld b,$43 / ld a,[bc], 16 sites; the L2 runs read all of $4310-$43FF); its first 16 bytes are $00, which the padding rule took for padding"
+30,4201,4E01,data,16,TCRF unused asset (tiles): see its name
+30,4E01,5C01,data,16,TCRF unused asset (tiles): see its name
+30,5C01,6A01,data,16,TCRF unused asset (tiles): see its name
+30,6A01,7801,data,16,TCRF unused asset (tiles): see its name
+01,5C81,6A81,data,16,TCRF unused asset (tiles): see its name
+05,4001,4E01,data,16,TCRF unused asset (tiles): see its name
+05,4E01,5C01,data,16,TCRF unused asset (tiles): see its name
+05,5C01,6A01,data,16,TCRF unused asset (tiles): see its name
+05,6A01,7801,data,16,TCRF unused asset (tiles): see its name
+06,4001,4E01,data,16,TCRF unused asset (tiles): see its name
+06,4E01,5C01,data,16,TCRF unused asset (tiles): see its name
+06,5C01,6A01,data,16,TCRF unused asset (tiles): see its name
+06,6A01,7801,data,16,TCRF unused asset (tiles): see its name
+02,7581,7D81,data,16,TCRF unused asset (tiles): see its name
+38,5001,5601,data,16,TCRF unused asset (tiles): see its name
+38,5801,5A41,data,32,TCRF unused asset (tile map): see its name
+2F,5A41,7241,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
+2E,4401,5801,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
+39,4401,5801,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
+32,6A01,7801,data,16,leftover copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx (06:6A01)
+33,6A01,7801,data,16,leftover copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx (06:6A01)
+34,6A01,7801,data,16,leftover copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx (06:6A01)
+32,5C01,6A01,data,16,leftover copy of Unused_TCRF_FaceDrawing3_FACE7_Gfx (06:5C01)
+33,5C01,6A01,data,16,leftover copy of Unused_TCRF_FaceDrawing3_FACE7_Gfx (06:5C01)
+34,5C01,6A01,data,16,leftover copy of Unused_TCRF_FaceDrawing3_FACE7_Gfx (06:5C01)
+32,4E01,5C01,data,16,leftover copy of Unused_TCRF_FaceDrawing2_FACE6_Gfx (06:4E01)
+33,4E01,5C01,data,16,leftover copy of Unused_TCRF_FaceDrawing2_FACE6_Gfx (06:4E01)
+34,4E01,5C01,data,16,leftover copy of Unused_TCRF_FaceDrawing2_FACE6_Gfx (06:4E01)
+31,6A01,7801,data,16,leftover copy of Unused_TCRF_FacePhoto10_HOI_R_Gfx (05:6A01)
+31,5C01,6A01,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
+31,4E01,5C01,data,16,leftover copy of Unused_TCRF_FacePhoto8_HOI_D_Gfx (05:4E01)
+2D,5C81,6A81,data,16,leftover copy of Unused_TCRF_FacePhoto5_SIMO_Gfx (01:5C81)
+38,5C81,6A81,data,16,leftover copy of Unused_TCRF_FacePhoto5_SIMO_Gfx (01:5C81)
+2E,7581,7D81,data,16,leftover copy of Unused_TCRF_EditorUI_Gfx (02:7581)
+39,7581,7D81,data,16,leftover copy of Unused_TCRF_EditorUI_Gfx (02:7581)
+21,66F5,69D5,data,16,leftover copy of Gfx_02_4001_FNTOOE2 (02:4001)
+23,5795,59D5,data,32,leftover copy of Map_03_7241_BG_CONF (03:7241)
+2F,7241,7481,data,32,leftover copy of Map_03_7241_BG_CONF (03:7241)
+3A,7241,7481,data,32,leftover copy of Map_03_7241_BG_CONF (03:7241)
+22,7D25,7F65,data,32,leftover copy of Map_03_5801_BG_MOVIE (03:5801)
+2F,5801,5A41,data,32,leftover copy of Map_03_5801_BG_MOVIE (03:5801)
+3A,5801,5A41,data,32,leftover copy of Map_03_5801_BG_MOVIE (03:5801)
+22,4A7D,4CBD,data,32,leftover copy of Map_02_6341_BGPROTEC (02:6341)
+2E,6341,6581,data,32,leftover copy of Map_02_6341_BGPROTEC (02:6341)
+39,6341,6581,data,32,leftover copy of Map_02_6341_BGPROTEC (02:6341)
+22,4837,4A77,data,32,leftover copy of Map_02_6101_BG_DUMP (02:6101)
+2E,6101,6341,data,32,leftover copy of Map_02_6101_BG_DUMP (02:6101)
+39,6101,6341,data,32,leftover copy of Map_02_6101_BG_DUMP (02:6101)
+22,45F1,4831,data,32,leftover copy of Map_02_5EC1_BGSRAM3 (02:5EC1)
+2E,5EC1,6101,data,32,leftover copy of Map_02_5EC1_BGSRAM3 (02:5EC1)
+39,5EC1,6101,data,32,leftover copy of Map_02_5EC1_BGSRAM3 (02:5EC1)
+22,43AB,45EB,data,32,leftover copy of Map_02_5C81_BGSRAM2 (02:5C81)
+2E,5C81,5EC1,data,32,leftover copy of Map_02_5C81_BGSRAM2 (02:5C81)
+39,5C81,5EC1,data,32,leftover copy of Map_02_5C81_BGSRAM2 (02:5C81)
+2E,5A41,5C81,data,32,leftover copy of Map_02_5A41_BGSRAM1 (02:5A41)
+39,5A41,5C81,data,32,leftover copy of Map_02_5A41_BGSRAM1 (02:5A41)
+2E,5801,5A41,data,32,leftover copy of Map_02_5801_BG_BANK (02:5801)
+39,5801,5A41,data,32,leftover copy of Map_02_5801_BG_BANK (02:5801)
+21,5689,58C9,data,32,leftover copy of Map_01_5A41_MENU1 (01:5A41)
+2D,5A41,5C81,data,32,leftover copy of Map_01_5A41_MENU1 (01:5A41)
+21,69F5,6AD5,data,,"leftover copy of Gfx_02_4301_FNTOOE2_Tiles30to3D (02:4301): a copy of code, typed data (this build never runs it)"
+2E,4301,43E1,data,,"leftover copy of Gfx_02_4301_FNTOOE2_Tiles30to3D (02:4301): a copy of code, typed data (this build never runs it)"
+39,4301,43E1,data,,"leftover copy of Gfx_02_4301_FNTOOE2_Tiles30to3D (02:4301): a copy of code, typed data (this build never runs it)"
+20,496A,49EE,data,,"leftover copy of KAO_ANIME (00:09E5): a copy of code, typed data (this build never runs it)"
+2C,49EB,4A6F,data,,"leftover copy of KAO_ANIME (00:09E5): a copy of code, typed data (this build never runs it)"
+37,4CE5,4D69,data,,"leftover copy of KAO_ANIME (00:09E5): a copy of code, typed data (this build never runs it)"
+1D,45B2,462F,data,,"leftover copy of VB_PROTECT (00:1B35): a copy of code, typed data (this build never runs it)"
+20,5AA4,5B21,data,,"leftover copy of VB_PROTECT (00:1B35): a copy of code, typed data (this build never runs it)"
+2C,5B07,5B84,data,,"leftover copy of VB_PROTECT (00:1B35): a copy of code, typed data (this build never runs it)"
+20,5056,50B7,data,,"leftover copy of CHANGE_PALETTE (00:10C5): a copy of code, typed data (this build never runs it)"
+2C,50CB,512C,data,,"leftover copy of CHANGE_PALETTE (00:10C5): a copy of code, typed data (this build never runs it)"
+20,47E8,4837,data,,"leftover copy of VB_SRAM_MENU (00:0863): a copy of code, typed data (this build never runs it)"
+2C,4869,48B8,data,,"leftover copy of VB_SRAM_MENU (00:0863): a copy of code, typed data (this build never runs it)"
+20,5199,51E1,data,,"leftover copy of H_BLANK_TX (00:1208): a copy of code, typed data (this build never runs it)"
+2C,520E,5256,data,,"leftover copy of H_BLANK_TX (00:1208): a copy of code, typed data (this build never runs it)"
+37,5857,589F,data,,"leftover copy of H_BLANK_TX (00:1208): a copy of code, typed data (this build never runs it)"
+20,4837,487F,data,,"leftover copy of SRAM_VERIFY (00:08B2): a copy of code, typed data (this build never runs it)"
+2C,48B8,4900,data,,"leftover copy of SRAM_VERIFY (00:08B2): a copy of code, typed data (this build never runs it)"
+20,564F,5690,data,,"leftover copy of PUT_CHG_T (00:16E6): a copy of code, typed data (this build never runs it)"
+2C,56B8,56F9,data,,"leftover copy of PUT_CHG_T (00:16E6): a copy of code, typed data (this build never runs it)"
+1D,4573,45B2,data,,"leftover copy of ON_TEST (00:1AF6): a copy of code, typed data (this build never runs it)"
+20,5A65,5AA4,data,,"leftover copy of ON_TEST (00:1AF6): a copy of code, typed data (this build never runs it)"
+2C,5AC8,5B07,data,,"leftover copy of ON_TEST (00:1AF6): a copy of code, typed data (this build never runs it)"
+1D,4534,4573,data,,"leftover copy of OFF_TEST (00:1AB7): a copy of code, typed data (this build never runs it)"
+20,5A26,5A65,data,,"leftover copy of OFF_TEST (00:1AB7): a copy of code, typed data (this build never runs it)"
+2C,5A89,5AC8,data,,"leftover copy of OFF_TEST (00:1AB7): a copy of code, typed data (this build never runs it)"
+1D,44FA,4534,data,,"leftover copy of PROT_TEST (00:1A7D): a copy of code, typed data (this build never runs it)"
+20,59EC,5A26,data,,"leftover copy of PROT_TEST (00:1A7D): a copy of code, typed data (this build never runs it)"
+2C,5A4F,5A89,data,,"leftover copy of PROT_TEST (00:1A7D): a copy of code, typed data (this build never runs it)"
+20,487F,48B7,data,,"leftover copy of SRAM_WRITE (00:08FA): a copy of code, typed data (this build never runs it)"
+2C,4900,4938,data,,"leftover copy of SRAM_WRITE (00:08FA): a copy of code, typed data (this build never runs it)"
+20,5690,56C6,data,,"leftover copy of PUT_OFS (00:1727): a copy of code, typed data (this build never runs it)"
+2C,56F9,572F,data,,"leftover copy of PUT_OFS (00:1727): a copy of code, typed data (this build never runs it)"
+1D,495D,4992,data,,"leftover copy of GALLERY_OBJ_SET (00:1EC1): a copy of code, typed data (this build never runs it)"
+20,5E3F,5E74,data,,"leftover copy of GALLERY_OBJ_SET (00:1EC1): a copy of code, typed data (this build never runs it)"
+2C,5E96,5ECB,data,,"leftover copy of GALLERY_OBJ_SET (00:1EC1): a copy of code, typed data (this build never runs it)"
+37,6A92,6AC7,data,,"leftover copy of GALLERY_OBJ_SET (00:1EC1): a copy of code, typed data (this build never runs it)"
+1D,5FCF,6003,data,,"leftover copy of OFFSET_DOWN (00:37D8): a copy of code, typed data (this build never runs it)"
+20,7483,74B7,data,,"leftover copy of OFFSET_DOWN (00:37D8): a copy of code, typed data (this build never runs it)"
+2C,7498,74CC,data,,"leftover copy of OFFSET_DOWN (00:37D8): a copy of code, typed data (this build never runs it)"
+1D,475D,478E,data,,"leftover copy of PUT_BYTE_OBJ2 (00:1CCC): a copy of code, typed data (this build never runs it)"
+20,5C41,5C72,data,,"leftover copy of PUT_BYTE_OBJ2 (00:1CCC): a copy of code, typed data (this build never runs it)"
+2C,5C9E,5CCF,data,,"leftover copy of PUT_BYTE_OBJ2 (00:1CCC): a copy of code, typed data (this build never runs it)"
+37,689A,68CB,data,,"leftover copy of PUT_BYTE_OBJ2 (00:1CCC): a copy of code, typed data (this build never runs it)"
+20,4253,4284,data,,"leftover copy of INKEY (00:02E6): a copy of code, typed data (this build never runs it)"
+2C,42EC,431D,data,,"leftover copy of INKEY (00:02E6): a copy of code, typed data (this build never runs it)"
+37,45F3,4624,data,,"leftover copy of INKEY (00:02E6): a copy of code, typed data (this build never runs it)"
+1D,43F2,4422,data,,leftover copy of CONF_OBJ_PAT (00:197D)
+20,58E6,5916,data,,leftover copy of CONF_OBJ_PAT (00:197D)
+2C,594F,597F,data,,leftover copy of CONF_OBJ_PAT (00:197D)
+37,61EB,621B,data,,leftover copy of CONF_OBJ_PAT (00:197D)
+20,4C96,4CC6,data,,"leftover copy of VB_SRAM_AGING (00:0D0B): a copy of code, typed data (this build never runs it)"
+2C,4D11,4D41,data,,"leftover copy of VB_SRAM_AGING (00:0D0B): a copy of code, typed data (this build never runs it)"
+20,511B,513D,data,,"leftover copy of BUNKATU_HYOUJI (00:118A): a copy of code, typed data (this build never runs it)"
+2C,5190,51B2,data,,"leftover copy of BUNKATU_HYOUJI (00:118A): a copy of code, typed data (this build never runs it)"
+20,50F9,511B,data,,"leftover copy of CONTRAST_HYOUJI (00:1168): a copy of code, typed data (this build never runs it)"
+2C,516E,5190,data,,"leftover copy of CONTRAST_HYOUJI (00:1168): a copy of code, typed data (this build never runs it)"
+20,56C6,56E7,data,,"leftover copy of Config_PutHexC0F9 (00:175D): a copy of code, typed data (this build never runs it)"
+2C,572F,5750,data,,"leftover copy of Config_PutHexC0F9 (00:175D): a copy of code, typed data (this build never runs it)"
+2E,43E1,4401,data,,"leftover copy of Unused_TCRF_ArrowCursor_BottomRow_Gfx (02:43E1): a copy of code, typed data (this build never runs it)"
+39,43E1,4401,data,,"leftover copy of Unused_TCRF_ArrowCursor_BottomRow_Gfx (02:43E1): a copy of code, typed data (this build never runs it)"
+21,69D5,69F5,data,,"leftover copy of Unused_TCRF_ArrowCursor_TopRow_Gfx (02:42E1): a copy of code, typed data (this build never runs it)"
+2E,42E1,4301,data,,"leftover copy of Unused_TCRF_ArrowCursor_TopRow_Gfx (02:42E1): a copy of code, typed data (this build never runs it)"
+39,42E1,4301,data,,"leftover copy of Unused_TCRF_ArrowCursor_TopRow_Gfx (02:42E1): a copy of code, typed data (this build never runs it)"
+1D,5FAF,5FCF,data,,"leftover copy of CHECK_BLACK (00:37B8): a copy of code, typed data (this build never runs it)"
+20,7463,7483,data,,"leftover copy of CHECK_BLACK (00:37B8): a copy of code, typed data (this build never runs it)"
+2C,7478,7498,data,,"leftover copy of CHECK_BLACK (00:37B8): a copy of code, typed data (this build never runs it)"

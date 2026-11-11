@@ -55,9 +55,9 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | Level | Status | Left to do |
 |---|---|---|
 | L0 | done | - |
-| L1 | done | 526,366 bytes (50 %) of uncertain kind on the layout map: the 109 leftover runs (98,130 B, `Leftover_BB_AAAA`) and the assets of the older builds named from their symbol tables (`Data_BB_AAAA_<name>`, I, kind not settled). Their kinds are an L6 question (what the older builds used them for). |
+| L1 | done | 359,102 bytes (34 %) of uncertain kind on the layout map (2026-11-11, after the TCRF assets, the leftover copies, the source text and the PC memory got their kinds): the 152 unidentified leftover runs (`Leftover_BB_AAAA`) and the assets of the older builds named from their symbol tables (`Data_BB_AAAA_<name>`, I, kind not settled). Their kinds are an L6 question (what the older builds used them for). |
 | L2 | done | 398 red bytes, all in bank `$00` (the timer interrupt, the self-test error paths, the link code): classify them. |
-| L3 | done | - (2026-11-11: 0 placeholder; the 109 leftovers are `Leftover_BB_AAAA`, I, owner rule; `ImageCopy_ModeTable` named; `Zoom_TableA` typed in full). Optional: confirm the 52 I names (developers' names matched from the two older builds) in the code or in BGB. |
+| L3 | done | - (2026-11-11: 0 placeholder; the 322 leftovers are `Leftover_BB_AAAA[_<what>]`, I, owner rule; the TCRF unused assets named `Unused_TCRF_*`; `ImageCopy_ModeTable` named; `Zoom_TableA` typed in full). Optional: confirm the 45 I names (developers' names matched from the two older builds) in the code or in BGB. |
 | L4 | not started | Small: the WRAM table (`GAME_SEQ` and the test variables), the constants, the SRAM map of the test patterns (AGING, PROTECT). |
 | L5 | not started | A `tools/make_source.py` preset whose build skips rgbfix, so that the image as dumped rebuilds byte-exact. |
 | L6 | not started | 1. Its text (the title screen in kana). 2. Its relation to the two older builds (the leftover symbol tables): the kinds of the leftover assets and runs (L1). |

@@ -1,0 +1,19 @@
+item,bank,start,end,kind,verdict,tag,evidence
+1,01,5C81,6A81,picture 128x112 (224 tiles),unused (TCRF photos 4 and 5),C,"Unused_TCRF_FacePhoto5_SIMO_Gfx; SIMO in both old symbol tables; equals the TCRF photo 5 pixel for pixel, and photo 4 with the palette inverted; never read nor run in the L2 runs (trace/cov_proto_runs.npz)"
+2,02,42E1,4301,"tiles 2 x 1 (cursor, top row)",unused (TCRF cursor),I,"Unused_TCRF_ArrowCursor_TopRow_Gfx; equals the top half of the TCRF cursor; inside the live sheet FNTOOE2, read with it in the L2 runs, never seen on a screen they reached"
+3,02,43E1,4401,"tiles 2 x 1 (cursor, bottom row)",unused (TCRF cursor),I,"Unused_TCRF_ArrowCursor_BottomRow_Gfx; the bottom half of the TCRF cursor, one tile row (16 tiles) below the top row in the 16-tile-wide sheet"
+4,02,7581,7D81,tiles 16 x 8 (editor UI),unused (TCRF editor UI),C,"Unused_TCRF_EditorUI_Gfx; equals the TCRF picture (LP, SEQ, LPE, EDIT, A + ... CHANGE) pixel for pixel; never read nor run in the L2 runs"
+5,05,4001,4E01,picture 128x112 (224 tiles),unused (TCRF photo 7),C,Unused_TCRF_FacePhoto7_HOI_U_Gfx; HOI_U in the old symbol tables; pixel match; never read
+6,05,4E01,5C01,picture 128x112 (224 tiles),unused (TCRF photo 8),C,Unused_TCRF_FacePhoto8_HOI_D_Gfx; HOI_D; pixel match; never read
+7,05,5C01,6A01,picture 128x112 (224 tiles),unused (TCRF photo 9),C,Unused_TCRF_FacePhoto9_HOI_L_Gfx; HOI_L; pixel match; never read
+8,05,6A01,7801,picture 128x112 (224 tiles),unused (TCRF photo 10),C,Unused_TCRF_FacePhoto10_HOI_R_Gfx; HOI_R; pixel match; never read
+9,06,4001,4E01,picture 128x112 (224 tiles),unused (TCRF drawing 1),C,Unused_TCRF_FaceDrawing1_FACE5_Gfx; FACE5; pixel match; never read
+10,06,4E01,5C01,picture 128x112 (224 tiles),unused (TCRF drawing 2),C,Unused_TCRF_FaceDrawing2_FACE6_Gfx; FACE6; pixel match; never read
+11,06,5C01,6A01,picture 128x112 (224 tiles),unused (TCRF drawing 3),C,Unused_TCRF_FaceDrawing3_FACE7_Gfx; FACE7; pixel match; never read
+12,06,6A01,7801,picture 128x112 (224 tiles),unused (TCRF drawing 4),C,Unused_TCRF_FaceDrawing4_FACE8_Gfx; FACE8; pixel match; never read
+13,30,4201,4E01,"picture 128x112, tile rows 2-13 (192 tiles)",unused (TCRF photo 6),C,Unused_TCRF_FacePhoto6_Rows2To13_Gfx; equals rows 2-13 of the TCRF photo 6; rows 0-1 (30:4001-4200) are overwritten by leftover text; never read
+14,30,4E01,5C01,picture 128x112 (224 tiles),unused (TCRF photo 1),C,Unused_TCRF_FacePhoto1_Gfx; pixel match; never read
+15,30,5C01,6A01,picture 128x112 (224 tiles),unused (TCRF photo 2),C,Unused_TCRF_FacePhoto2_Gfx; pixel match; never read
+16,30,6A01,7801,picture 128x112 (224 tiles),unused (TCRF photo 3),C,Unused_TCRF_FacePhoto3_Gfx; pixel match; never read
+17,38,5001,5601,"tiles (96, $00-$5F)",unused (TCRF NEO logo),C,"Unused_TCRF_TitleLogoNEO_Gfx; the tiles of the TCRF logo ""デバガメ テスター NEO""; never read"
+18,38,5801,5A41,BG map 18 x 32 (old title layout),unused (TCRF NEO logo),C,"Unused_TCRF_TitleLogoNEO_Map; the old ""Ver1.00"" title layout (as TITLE1 01:5801); drawn with 38:5001 loaded as tiles $00-$5F it reproduces the TCRF logo; never read"

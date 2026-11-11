@@ -1,0 +1,122 @@
+bank,start,end,bytes,kind,label,lines,sample
+04,4F18,4F36,30,PC memory string (leftover),Leftover_04_4E4E_PcRam,1,C:\WINDOWS\SYSTEM\KERNEL32.DLL
+04,5570,5576,6,PC memory string (leftover),Leftover_04_4E4E_PcRam,1,MS-IME
+04,55F0,55F9,9,PC memory string (leftover),Leftover_04_4E4E_PcRam,1,MSIMEGUID
+04,5670,5677,7,PC memory string (leftover),Leftover_04_4E4E_PcRam,1,DEFROMA
+04,57F0,57FA,10,PC memory string (leftover),Leftover_04_4E4E_PcRam,1,MSIMECOLOR
+04,5870,5878,8,PC memory string (leftover),Leftover_04_4E4E_PcRam,1,MSIMEKEY
+05,7C00,7C1E,30,PC memory string (leftover),Leftover_05_7801_PcRam,1,C:\WINDOWS\SYSTEM\KERNEL32.DLL
+0C,4001,4100,255,assembler source (leftover),Leftover_0C_4001_AsmSource,25,";43 LD (BC),A INC C LD A,(HLI) ;44 LD (BC),A INC C LD A,(HLI)"
+0C,4104,4200,252,assembler source (leftover),Leftover_0C_4104_AsmSource,25,"A INC C LD A,(HLI) ;4A LD (BC),A INC C LD A,(HLI) ;4B LD (BC)"
+0D,4001,4100,255,assembler source (leftover),Leftover_0D_4001_AsmSource,18,"; LD ($2000),A ; LD HL,FACE3 ;1枚目の絵をバッファに ld a,$4 ld ($2000),a ld hl,ka"
+0D,4104,4200,252,assembler source (leftover),Leftover_0D_4104_AsmSource,20,"LD A,04 LD (PICTURE_F),A JR NC_PICT PICT4 ; LD A,$06 ; LD ($2000),A ;"
+12,4001,4100,255,assembler source (leftover),Leftover_12_4001_AsmSource,4,: BufPointer ds 2 ;送信バッファポインタ siowork.dmg(51) : BufPointer_base ds 2 ;送信バッファア
+12,4104,42F4,496,assembler source (leftover),Leftover_12_4104_AsmSource,4,: PrnDataAddress ds 2 ;------ＮｏｔＵｓｅｄ siowork.dmg(55) : SioCheckSum_S ds 2 ;送信
+13,4001,4100,255,source listing (leftover),Leftover_13_4001_SrcListing,9,: FB31A DS 1 equ.dmg(307) : FB31B DS 1 equ.dmg(308) : FB32A DS 1 equ.dmg(3
+13,4104,7FFF,16123,source listing (leftover),Leftover_13_4104_SrcListing,7,: DOING2 ; バッファからVRAMへの転送を行う f_screen.dmg(175) : VB_F_SCR gallery.dmg(14)
+14,4001,4100,255,assembler source (leftover),Leftover_14_4001_AsmSource,9,c_0d equ $8d def.dmg(176) : c_0e equ $8e def.dmg(177) : c_0f equ $8f def.dmg(
+14,4104,7FFF,16123,source listing (leftover),Leftover_14_4104_SrcListing,9,equ $96 def.dmg(185) : c_h equ $97 def.dmg(186) : c_i equ $98 def.dmg(187) :
+15,4001,4100,255,source listing (leftover),Leftover_15_4001_SrcListing,8,ANK33 GROUP 33 bk7.dmg(194) : BANK34 GROUP 34 bk7.dmg(201) : BANK35 GROUP 35
+15,4104,7FFF,16123,source listing (leftover),Leftover_15_4104_SrcListing,8,41 GROUP 41 bk7.dmg(250) : BANK42 GROUP 42 bk7.dmg(257) : BANK43 GROUP 43 bk7
+16,4001,4100,255,assembler source (leftover),Leftover_16_4001_AsmSource,5,"0,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00"
+16,4104,7FFF,16123,assembler source (leftover),Leftover_16_4104_AsmSource,3,",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,"
+17,4001,4100,255,assembler source (leftover),Leftover_17_4001_AsmSource,4,"9C,$2E,$D0,$0F,$EA,$07,$64,$03 DEFB $C0,$80,$80,$40,$40,$00,$60,$00,$C0,$20,$8"
+17,4104,7FFF,16123,assembler source (leftover),Leftover_17_4104_AsmSource,4,"$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$"
+1A,4001,4100,255,assembler source (leftover),Leftover_1A_4001_AsmSource,5,"0,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00"
+1A,4104,4200,252,assembler source (leftover),Leftover_1A_4104_AsmSource,3,",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,"
+1A,7208,7228,32,PC memory string (leftover),Leftover_1A_4200_PcRam,1,C:\Program Files\TAC95\TAC32.EXE
+1A,7280,7295,21,PC memory string (leftover),Leftover_1A_4200_PcRam,1,winbootdir=C:\WINDOWS
+1A,72A0,72BE,30,PC memory string (leftover),Leftover_1A_4200_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
+1A,72C0,72CB,11,PC memory string (leftover),Leftover_1A_4200_PcRam,1,PROMPT=$p$g
+1A,72D0,73E2,274,PC memory string (leftover),Leftover_1A_4200_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
+1A,73F0,73FC,12,PC memory string (leftover),Leftover_1A_4200_PcRam,1,TEMP=C:\TEMP
+1A,7400,740B,11,PC memory string (leftover),Leftover_1A_4200_PcRam,1,TMP=C:\TEMP
+1A,7410,7418,8,PC memory string (leftover),Leftover_1A_4200_PcRam,1,TZ=JST-9
+1A,7420,7432,18,PC memory string (leftover),Leftover_1A_4200_PcRam,1,NWLANGUAGE=NIHONGO
+1A,7440,7455,21,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADEXE=C:\ORCADEXE\
+1A,7460,7475,21,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADESP=C:\ORCADESP\
+1A,7480,7493,19,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADPROJ=C:\ORCAD\
+1A,74A0,74B6,22,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADUSER=C:\ORCADESP\
+1A,74C0,74C8,8,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ISDP=340
+1A,74D0,74DC,12,PC memory string (leftover),Leftover_1A_4200_PcRam,1,META=c:\meta
+1A,74E0,74EC,12,PC memory string (leftover),Leftover_1A_4200_PcRam,1,METAUSER=c:\
+1A,74F0,74FB,11,PC memory string (leftover),Leftover_1A_4200_PcRam,1,CMDLINE=WIN
+1A,7500,7511,17,PC memory string (leftover),Leftover_1A_4200_PcRam,1,windir=C:\WINDOWS
+1B,4001,4100,255,assembler source (leftover),Leftover_1B_4001_AsmSource,4,"FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF DEFB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$F"
+1B,4104,4200,252,assembler source (leftover),Leftover_1B_4104_AsmSource,4,"$C0,$C0,$E0,$C0,$E0,$C0,$E0,$C0,$E0,$C0,$80,$E0,$E0,$C0 DEFB $00,$00,$00,$00,$"
+1E,53FB,56D0,725,assembler source (leftover),Leftover_1E_53FB_AsmSource,56,"B_TH2COUNT ;最初のキャラクタの1行目 LD HL,$14 ADD HL,DE LD D,H LD E,L CALL BI"
+1E,56D7,7FFF,10536,assembler source (leftover),Leftover_1E_56D7_AsmSource,706,"11を0,1,2,3 ; として足しあわせる。 ; bc : bit counter ; de : チェックする画"
+1F,4200,56D0,5328,assembler source (leftover),Leftover_1F_4200_AsmSource,308,"LD (AKARUSA),A ;目標値をワークに LD A,$00 LD ($4000),A ;ＲＡＭバンクの変更 ;---"
+1F,56D7,7FFF,10536,assembler source (leftover),Leftover_1F_56D7_AsmSource,705,"11を0,1,2,3 ; として足しあわせる。 ; bc : bit counter ; de : チェックする画"
+20,4001,4100,255,assembler source (leftover),Leftover_20_4001_AsmSource,6,",$00,$00 ;0155 DEFB $00,$00,$00,$00,$00,$00,$00,$00 DEFB $1F,$10,$1F,$10,$1F"
+20,4104,4200,252,assembler source (leftover),Leftover_20_4104_AsmSource,6,"0 ;0158 DEFB $00,$00,$00,$00,$00,$00,$00,$00 DEFB $7F,$78,$7F,$40,$7F,$60,$3"
+21,4001,4100,255,assembler source (leftover),Leftover_21_4001_AsmSource,6,"D,$ED,$6D,$6D DEFB $00,$00,$06,$06,$0F,$0F,$E6,$E6 ;00F4 DEFB $36,$B6,$36,$B"
+21,4104,4200,252,assembler source (leftover),Leftover_21_4104_AsmSource,6,"67,$67 DEFB $00,$00,$80,$80,$80,$80,$9C,$9C ;00F7 DEFB $B6,$B6,$B6,$B6,$B6,$"
+22,4001,4100,255,assembler source (leftover),Leftover_22_4001_AsmSource,6,",$00,$00,$00 ;0092 DEFB $00,$00,$00,$00,$30,$38,$30,$38 DEFB $00,$00,$00,$00"
+22,4104,4200,252,assembler source (leftover),Leftover_22_4104_AsmSource,6,"0,$30 ;0095 DEFB $20,$30,$20,$30,$10,$18,$08,$0C DEFB $00,$00,$20,$30,$10,$1"
+23,4001,4100,255,assembler source (leftover),Leftover_23_4001_AsmSource,6,"4,$89,$8D,$82,$8A DEFB $00,$00,$00,$00,$C0,$C0,$20,$70 ;0031 DEFB $10,$18,$0"
+23,4104,4200,252,assembler source (leftover),Leftover_23_4104_AsmSource,6,"05,$13,$13 DEFB $00,$00,$38,$38,$47,$6F,$80,$C0 ;0034 DEFB $8C,$8C,$A0,$A0,$"
+24,4200,56D0,5328,assembler source (leftover),Leftover_24_4200_AsmSource,308,"LD (AKARUSA),A ;目標値をワークに LD A,$00 LD ($4000),A ;ＲＡＭバンクの変更 ;---"
+24,56D7,8000,10537,assembler source (leftover),Leftover_24_56D7_AsmSource,707,"11を0,1,2,3 ; として足しあわせる。 ; bc : bit counter ; de : チェックする画"
+25,41FE,8000,15874,assembler source (leftover),Leftover_25_41FE_AsmSource,786,"�`B $59,$70,$87,$03,$03,$04 DB $5A,$70,$86,$03,$03,$04 DB $5B,$70,$85,$03,$0"
+26,4200,56D0,5328,assembler source (leftover),Leftover_26_4200_AsmSource,308,"LD (AKARUSA),A ;目標値をワークに LD A,$00 LD ($4000),A ;ＲＡＭバンクの変更 ;---"
+26,56D7,8000,10537,assembler source (leftover),Leftover_26_56D7_AsmSource,707,"11を0,1,2,3 ; として足しあわせる。 ; bc : bit counter ; de : チェックする画"
+27,4001,4100,255,assembler source (leftover),Leftover_27_4001_AsmSource,8,"AA,$AA,$AA,$AA,$AA,$AA,$AA DEFB $AA,$AA,$AA,$B6,$1D,$A0,$A0,$A0,$A0 DEFB"
+27,4104,8000,16124,assembler source (leftover),Leftover_27_4104_AsmSource,797,"A0,$A0,$1F DEFB $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA DEFB $AA,$AA,$AA,$AA,$AA,$AA"
+28,4001,4100,255,assembler source (leftover),Leftover_28_4001_AsmSource,6,",$5C,$5C ;0155 DEFB $98,$98,$18,$18,$1E,$1E,$00,$00 DEFB $1B,$18,$1B,$18,$1C"
+28,4104,4200,252,assembler source (leftover),Leftover_28_4104_AsmSource,6,"0 ;0158 DEFB $FF,$00,$FF,$00,$FF,$00,$FF,$00 DEFB $E0,$1F,$FC,$03,$FC,$03,$F"
+29,4001,4100,255,assembler source (leftover),Leftover_29_4001_AsmSource,6,"D,$ED,$6D,$6D DEFB $00,$00,$06,$06,$0F,$0F,$E6,$E6 ;00F4 DEFB $36,$B6,$36,$B"
+29,4104,4201,253,assembler source (leftover),Leftover_29_4104_AsmSource,6,"67,$67 DEFB $00,$00,$80,$80,$80,$80,$9C,$9C ;00F7 DEFB $B6,$B6,$B6,$B6,$B6,$"
+2A,4001,4100,255,assembler source (leftover),Leftover_2A_4001_AsmSource,6,",$00,$FF,$00 ;0092 DEFB $FF,$00,$FF,$38,$EF,$28,$FF,$38 DEFB $00,$00,$00,$00"
+2A,4104,4200,252,assembler source (leftover),Leftover_2A_4104_AsmSource,6,"0,$30 ;0095 DEFB $20,$30,$20,$30,$10,$18,$08,$0C DEFB $00,$00,$20,$30,$10,$1"
+2B,4001,4100,255,assembler source (leftover),Leftover_2B_4001_AsmSource,6,"0,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ;0031 DEFB $00,$00,$0"
+2B,4104,4200,252,assembler source (leftover),Leftover_2B_4104_AsmSource,6,"00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ;0034 DEFB $00,$00,$00,$00,$"
+2B,4205,4214,15,PC memory string (leftover),Leftover_2B_4200_PcRam,1,WINDOWS VMM 4.0
+2B,4273,427D,10,PC memory string (leftover),Leftover_2B_4200_PcRam,1,PIFMGR.DLL
+2B,4305,430D,8,PC memory string (leftover),Leftover_2B_4200_PcRam,1,Terminal
+2B,4371,4377,6,PC memory string (leftover),Leftover_2B_4200_PcRam,1,DOSIME
+2F,4001,4100,255,assembler source (leftover),Leftover_2F_4001_AsmSource,11,"8E,$03,$05,$05 DB $47,$58,$8B,$03,$05,$05 DB $48,$58,$88,$02,$04,$05 DB"
+2F,4104,4200,252,assembler source (leftover),Leftover_2F_4104_AsmSource,10,",$58,$73,$02,$03,$05 DB $50,$58,$70,$02,$03,$04 DB $51,$58,$6D,$02,$03,$04"
+30,4001,4100,255,assembler source (leftover),Leftover_30_4001_AsmSource,9,////////////////////////////////////////////// ;===========================
+30,4104,4200,252,assembler source (leftover),Leftover_30_4104_AsmSource,19,";------------------------- LD A,$10 ; RAMBK $10 LD ($4000),A LD B,$70"
+31,4001,4100,255,assembler source (leftover),Leftover_31_4001_AsmSource,16,"_CNTR3),A LD DE,$FFDF ; 21Hより下は使えないので ADD HL,DE JR C,_SET_OK LD A,$"
+31,4104,4200,252,assembler source (leftover),Leftover_31_4104_AsmSource,16,"更する LD A,(B_CNTR3) LD (CNTR3),A RET ;========================"
+36,4205,4214,15,PC memory string (leftover),Leftover_36_4001_PcRam,1,WINDOWS VMM 4.0
+36,4273,427D,10,PC memory string (leftover),Leftover_36_4001_PcRam,1,PIFMGR.DLL
+36,4305,430D,8,PC memory string (leftover),Leftover_36_4001_PcRam,1,Terminal
+36,4371,4377,6,PC memory string (leftover),Leftover_36_4001_PcRam,1,DOSIME
+3D,5014,5021,13,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ir=C:\WINDOWS
+3D,5022,5040,30,PC memory string (leftover),Leftover_3D_4001_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
+3D,5041,504C,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PROMPT=$p$g
+3D,504D,515F,274,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
+3D,5160,516C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TEMP=C:\TEMP
+3D,516D,5178,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TMP=C:\TEMP
+3D,5179,5181,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TZ=JST-9
+3D,5182,5194,18,PC memory string (leftover),Leftover_3D_4001_PcRam,1,NWLANGUAGE=NIHONGO
+3D,5195,51AA,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADEXE=C:\ORCADEXE\
+3D,51AB,51C0,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADESP=C:\ORCADESP\
+3D,51C1,51D4,19,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADPROJ=C:\ORCAD\
+3D,51D5,51EB,22,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADUSER=C:\ORCADESP\
+3D,51EC,51F4,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ISDP=340
+3D,51F5,5201,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,META=c:\meta
+3D,5202,520E,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,METAUSER=c:\
+3D,520F,521A,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,CMDLINE=WIN
+3D,521B,522C,17,PC memory string (leftover),Leftover_3D_4001_PcRam,1,windir=C:\WINDOWS
+3D,61A8,61C8,32,PC memory string (leftover),Leftover_3D_4001_PcRam,1,C:\Program Files\TAC95\TAC32.EXE
+3D,6220,6235,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,winbootdir=C:\WINDOWS
+3D,6240,625E,30,PC memory string (leftover),Leftover_3D_4001_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
+3D,6260,626B,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PROMPT=$p$g
+3D,6270,6382,274,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
+3D,6390,639C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TEMP=C:\TEMP
+3D,63A0,63AB,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TMP=C:\TEMP
+3D,63B0,63B8,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TZ=JST-9
+3D,63C0,63D2,18,PC memory string (leftover),Leftover_3D_4001_PcRam,1,NWLANGUAGE=NIHONGO
+3D,63E0,63F5,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADEXE=C:\ORCADEXE\
+3D,6400,6415,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADESP=C:\ORCADESP\
+3D,6420,6433,19,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADPROJ=C:\ORCAD\
+3D,6440,6456,22,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADUSER=C:\ORCADESP\
+3D,6460,6468,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ISDP=340
+3D,6470,647C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,META=c:\meta
+3D,6480,648C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,METAUSER=c:\
+3D,6490,649B,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,CMDLINE=WIN
+3D,64A0,64B1,17,PC memory string (leftover),Leftover_3D_4001_PcRam,1,windir=C:\WINDOWS

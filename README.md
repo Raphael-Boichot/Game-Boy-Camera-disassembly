@@ -107,7 +107,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets*: first pass done in the core and BGB runs (2026-11-08): [`assets/never_reached_kitty.csv`](roms/hello_kitty/assets/never_reached_kitty.csv), with its picture and counts in [`roms/hello_kitty/`](roms/hello_kitty/README.md).
 
-**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 done (every routine named; the 109 runs that nothing reads are `Leftover_BB_AAAA`), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
+**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 done (every routine named; the 322 leftovers are `Leftover_BB_AAAA`, with the block they copy, `_AsmSource` / `_SrcListing` or `_PcRam` as suffix when known), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
 
 ![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
 
@@ -117,7 +117,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 ![Screens (GAME_SEQ) reached in BGB](roms/prototype_debagame/proto_screen_tree.png)
 
-*Never-reached assets*: not investigated yet.
+*Never-reached assets*: the TCRF unused graphics (fourteen pictures, the editor UI, the NEO logo with its tile map, the arrow cursor) are located byte-exact and named `Unused_TCRF_*` (2026-11-11): [`assets/never_reached_proto.csv`](roms/prototype_debagame/assets/never_reached_proto.csv); every text in clear (source, listings, PC memory strings) in [`assets/text_sections_proto.csv`](roms/prototype_debagame/assets/text_sections_proto.csv).
 
 The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds, and every reachability map but the Japanese one by `python3 tools/reach_map.py --tag TAG ROM`: rerun them after any work on these ROMs.
 

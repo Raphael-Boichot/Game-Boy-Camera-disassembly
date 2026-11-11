@@ -1,2 +1,18 @@
 bank,start,end,type,width,note
 04,4300,4400,data,16,"Zoom_TableA: 256-byte lookup read by ImageCopy_Mode06 (ld b,$43 / ld a,[bc], 16 sites; the L2 runs read all of $4310-$43FF); its first 16 bytes are $00, which the padding rule took for padding"
+30,4201,4E01,data,16,TCRF unused asset (tiles): see its name
+30,4E01,5C01,data,16,TCRF unused asset (tiles): see its name
+30,5C01,6A01,data,16,TCRF unused asset (tiles): see its name
+30,6A01,7801,data,16,TCRF unused asset (tiles): see its name
+01,5C81,6A81,data,16,TCRF unused asset (tiles): see its name
+05,4001,4E01,data,16,TCRF unused asset (tiles): see its name
+05,4E01,5C01,data,16,TCRF unused asset (tiles): see its name
+05,5C01,6A01,data,16,TCRF unused asset (tiles): see its name
+05,6A01,7801,data,16,TCRF unused asset (tiles): see its name
+06,4001,4E01,data,16,TCRF unused asset (tiles): see its name
+06,4E01,5C01,data,16,TCRF unused asset (tiles): see its name
+06,5C01,6A01,data,16,TCRF unused asset (tiles): see its name
+06,6A01,7801,data,16,TCRF unused asset (tiles): see its name
+02,7581,7D81,data,16,TCRF unused asset (tiles): see its name
+38,5001,5601,data,16,TCRF unused asset (tiles): see its name
+38,5801,5A41,data,32,TCRF unused asset (tile map): see its name
