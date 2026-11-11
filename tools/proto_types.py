@@ -5,7 +5,8 @@
         --sites roms/prototype_debagame/assets/copy_sites_proto.csv --rommap roms/prototype_debagame/trace/rom_map_proto.csv \
         --names roms/prototype_debagame/disasm/sym_names_proto.csv --symtab roms/prototype_debagame/disasm/leftover_symtab_proto.csv
 
-All outputs are generated (never edit them; hand rows go in disasm/sym_types_proto_hand.csv, applied after these by sym_build.py).
+All outputs are generated (never edit them). Hand type rows go in disasm/layers/sym_types_proto_hand.csv: they are appended to
+sym_types_proto.csv after the generated rows (a later row wins in sym_build.py), so sym_types_proto.csv stays the final table.
   copy_sites_proto.csv  every traced call of a copy routine with the constants found on the straight line before it
                         (bank, source, destination, length; '' = not a constant), the routine and the kind of destination
   sym_types_proto.csv   bank,start,end,type,width,note rows, in this order (a later row wins in sym_build.py):
@@ -176,8 +177,10 @@ for (b, st), lst in sorted(srcs.items()):
     add(b, st, st + ln, typ, wd, note)
     names.append([b, st, '%s_%02X_%04X' % (pre, b, st), 'C', note])
 
-with open(a.types, 'w', newline='') as f:
-    w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'type', 'width', 'note']); w.writerows(rows)
+HAND = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'prototype_debagame', 'disasm', 'layers', 'sym_types_proto_hand.csv')
+hand_rows = [[r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']] for r in csv.DictReader(open(HAND, encoding='utf-8'))] if os.path.exists(HAND) else []
+with open(a.types, 'w', newline='') as f:      # the generated rows, then the hand layer (a later row wins in sym_build.py)
+    w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'type', 'width', 'note']); w.writerows(rows); w.writerows(hand_rows)
 with open(a.names, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for b, ad, n_, c, note in sorted(names, key=lambda x: (x[0], x[1])): w.writerow(['%02X' % b, '%04X' % ad, n_, c, note, 'proto_types'])

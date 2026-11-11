@@ -1,12 +1,12 @@
 bank,addr,name,conf,note,source
 00,0040,Vec_VBlank,C,interrupt vector $40: jp VBLANK handler 00:01E3,hand
-00,0043,Data_00_0043,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,0043,Leftover_00_0043,I,"leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,0048,Vec_LcdStat,C,interrupt vector $48: jp HBLK 00:1250,hand
-00,004B,Data_00_004B,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,004B,Leftover_00_004B,I,"leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,0050,Vec_Timer,C,interrupt vector $50: jp TIMER_INT 00:1266 (never enabled by a constant write to IE: observed_proto.md),hand
-00,0053,Data_00_0053,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,0053,Leftover_00_0053,I,"leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,0058,Vec_Serial,C,interrupt vector $58: jp SIO_INT 00:034B,hand
-00,005B,Data_00_005B,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,005B,Leftover_00_005B,I,"leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,0100,Entry,C,cartridge entry point: nop; jp $0150,hand
 00,0150,RESET,C,"the boot code: Entry (00:0100), rst $00, rst $08 and the A+B+Select+Start reset (00:01C7) jump here; RESET at $0150 in both old symbol tables (the Japanese ROM calls its own Boot_ColdStart)",hand
 00,01FE,MAIN_SUB,C,"developers' name: same code as MAIN_SUB in the old build of table 2A at old 0204 and 35 at old 0204 (124 bytes, masked match)",port_old
@@ -23,7 +23,7 @@ bank,addr,name,conf,note,source
 00,0413,OBJP_DEF_SET,I,"developers' name: same code as OBJP_DEF_SET in the old build of table 2A at old 0419 and 35 at old 0713 (13 bytes, exact match)",port_old
 00,0420,Bgp_SetDefault,C,"ld a,$E4; ldh [rBGP],a; ldh [BGPW $FFAE],a: the default palette and its shadow",hand
 00,0422,BGP_SET,I,"developers' name: same code as BGP_SET in the old build of table 2A at old 0428 and 35 at old 0722 (5 bytes, exact match)",port_old
-00,0427,Data_00_0427,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,0427,Leftover_00_0427,I,"leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,042E,SCYX_SET0,I,"developers' name: same code as SCYX_SET0 in the old build of table 2A at old 0434 and 35 at old 072E (15 bytes, exact match)",port_old
 00,043D,SOUND_P,I,"developers' name: the same bytes as the data label SOUND_P in the old build of table 2A at old 0443 and 35 at old 073D (6 bytes, data match)",port_old
 00,0443,SOUND_PE,I,"developers' name: the same bytes as the data label SOUND_PE in the old build of table 2A at old 0449 and 35 at old 0743 (6 bytes, data match)",port_old
@@ -40,7 +40,7 @@ bank,addr,name,conf,note,source
 00,05A9,MKMENU_END,I,"developers' name: same code as MKMENU_END in the old build of table 2A at old 05AF and 35 at old 08A9 (12 bytes, exact match)",port_old
 00,05B5,MAIN_MENU,C,"developers' name: same code as MAIN_MENU in the old build of table 2A at old 05BB and 35 at old 08B5 (166 bytes, masked match)",port_old
 00,065B,DOG_ANIME,C,"developers' name: same code as DOG_ANIME in the old build of table 2A at old 0661 and 35 at old 095B (70 bytes, exact match)",port_old
-00,06A1,Data_00_06A1,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,06A1,Leftover_00_06A1,I,"leftover: 3 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,06A4,BankTest_InitScreen,I,"LCDCOFF, VRAM_CLR, DMACLR, then falls into CB2 (bank 2 selected for the BANK screen); called once",hand
 00,06AD,CB2,C,"developers' name: same code as CB2 in the old build of table 2A at old 06B3 and 35 at old 09AD (53 bytes, masked match)",port_old
 00,06E2,BANK_TEST,C,"developers' name: same code as BANK_TEST in the old build of table 2A at old 06E8 and 35 at old 09E2 (85 bytes, masked match)",port_old
@@ -64,7 +64,7 @@ bank,addr,name,conf,note,source
 00,0B41,SRAM_AGING,C,"developers' name: same code as SRAM_AGING in the old build of table 2A at old 0B47 and 35 at old 0E41 (148 bytes, masked match)",port_old
 00,0BD5,AGE_DEC,C,"developers' name: same code as AGE_DEC in the old build of table 2A at old 0BDB and 35 at old 0ED5 (123 bytes, masked match)",port_old
 00,0C50,Aging_FillSram,C,"for SRAM bank D: writes the pattern B,B,C,C over $A000-$BFFF (ld [$4000],d; ld [hl+],a ...); called by SRAM_AGING four times",hand
-00,0CC0,Data_00_0CC0,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,0CC0,Leftover_00_0CC0,I,"leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,0CC1,AGING_ERROR,C,"developers' name: same code as AGING_ERROR in the old build of table 2A at old 0CC7 and 35 at old 0FC1 (55 bytes, masked match)",port_old
 00,0CF8,PUT_BYTE,C,"developers' name: same code as PUT_BYTE in the old build of table 2A at old 0CFE and 35 at old 0FF8 (19 bytes, exact match)",port_old
 00,0D0B,VB_SRAM_AGING,C,"developers' name: same code as VB_SRAM_AGING in the old build of table 2A at old 0D11 and 35 at old 100B (48 bytes, exact match)",port_old
@@ -76,7 +76,7 @@ bank,addr,name,conf,note,source
 00,0E9F,MAKE_MOVIE,C,"developers' name: same code as MAKE_MOVIE in the old build of table 2A at old 0EA5 (107 bytes, masked match)",port_old
 00,0F0A,PARA_SET,C,"developers' name: same code as PARA_SET in the old build of table 2A at old 0F10 (102 bytes, masked match)",port_old
 00,0F70,Seq06_MovieMain,C,"GAME_SEQ $06 handler of MAIN_SUB; MOVIE TEST in BGB (menu entry 4 -> GAME_SEQ $06, port/menu_paths_proto.csv)",hand
-00,0FF2,Data_00_0FF2,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,0FF2,Leftover_00_0FF2,I,"leftover: 45 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,101F,Seq06_MovieMain_Part101F,C,continuation of Seq06_MovieMain after a data label or a never-traced byte,part
 00,1094,GET_A_IMMAGE,C,"developers' name: same code as GET_A_IMMAGE in the old build of table 2A at old 109A (49 bytes, masked match)",port_old
 00,10C5,CHANGE_PALETTE,C,"developers' name: same code as CHANGE_PALETTE in the old build of table 2A at old 10CB (97 bytes, exact match)",port_old
@@ -85,7 +85,7 @@ bank,addr,name,conf,note,source
 00,1168,CONTRAST_HYOUJI,C,"developers' name: same code as CONTRAST_HYOUJI in the old build of table 2A at old 116E (34 bytes, exact match)",port_old
 00,118A,BUNKATU_HYOUJI,C,"developers' name: same code as BUNKATU_HYOUJI in the old build of table 2A at old 1190 (34 bytes, exact match)",port_old
 00,11AC,Obj_PutHexDigits,I,"writes OAM entries from $C02C: Y $10, X $30, then the high nibble of A, and so on: the two nibbles of A as sprites",hand
-00,1207,Data_00_1207,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,1207,Leftover_00_1207,I,"leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,1208,H_BLANK_TX,C,"developers' name: same code as H_BLANK_TX in the old build of table 2A at old 120E and 35 at old 1857 (72 bytes, exact match)",port_old
 00,1250,HBLK,I,"developers' name: same code as HBLK in the old build of table 2A at old 1256 and 35 at old 189F (14 bytes, exact match)",port_old
 00,125E,WAIT_DONE_VBLNK,I,"developers' name: same code as WAIT_DONE_VBLNK in the old build of table 2A at old 1264 and 35 at old 18AD (8 bytes, masked match)",port_old
@@ -94,7 +94,7 @@ bank,addr,name,conf,note,source
 00,1275,MAKE_CONFIG,C,"developers' name: same code as MAKE_CONFIG in the old build of table 2A at old 127B (135 bytes, masked match)",port_old
 00,12FC,Seq09_ConfigMain,C,"GAME_SEQ $09 handler of MAIN_SUB; the settings screen in BGB (Start on MOVIE TEST -> GAME_SEQ $09, port/menu_paths_proto.csv)",hand
 00,1528,Config_PutItem,I,"dispatch on R0 ($FF88) to the PUT_ routines of the settings screen (PUT_DITH_PAT, PUT_MODE ...)",hand
-00,1533,Data_00_1533,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,1533,Leftover_00_1533,I,"leftover: 2 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,1535,Config_PutItem_Part1535,C,continuation of Config_PutItem after a data label or a never-traced byte,part
 00,158D,CONF_SET_OBJ,C,"developers' name: same code as CONF_SET_OBJ in the old build of table 2A at old 1569 (173 bytes, masked match)",port_old
 00,163A,Stub_Ret_163A,C,"a lone ret (the byte before PUT_MODE), called twice",hand
@@ -135,42 +135,42 @@ bank,addr,name,conf,note,source
 00,1E6D,H_BLANK_TX2,C,"developers' name: same code as H_BLANK_TX2 in the old build of table 2A at old 1E42 and 35 at old 2A3E (84 bytes, masked match)",port_old
 00,1EC1,GALLERY_OBJ_SET,C,"developers' name: same code as GALLERY_OBJ_SET in the old build of table 2A at old 1E96 and 35 at old 2A92 (53 bytes, exact match)",port_old
 00,1EF6,OamDma_Run,C,call $FFB6 (the OAM DMA stub Data_00_0317 copied to HRAM); ret,hand
-00,1EFA,Data_00_1EFA,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
-00,1FF2,ImageCopy_Mode00,C,entry 0 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,1FFE,ImageCopy_Mode01,C,entry 1 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,20DE,ImageCopy_Mode02,C,entry 2 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,21BF,Data_00_21BF,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
-00,21C0,ImageCopy_Mode03,C,entry 3 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,224B,ImageCopy_Mode04,C,entry 4 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,22D6,ImageCopy_Mode05,C,entry 5 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,235E,ImageCopy_Mode06,C,entry 6 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,24A0,ImageCopy_Mode07,C,entry 7 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2645,ImageCopy_Mode08,C,entry 8 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2942,ImageCopy_Mode09,C,entry 9 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2948,ImageCopy_Mode10,C,entry 10 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,294E,ImageCopy_Mode11,C,entry 11 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2954,ImageCopy_Mode12,C,entry 12 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,295A,ImageCopy_Mode13,C,entry 13 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,29B3,ImageCopy_Mode14,C,entry 14 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A0B,ImageCopy_Mode15,C,entry 15 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A17,ImageCopy_Mode16,C,entry 16 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A23,ImageCopy_Mode17,C,entry 17 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A29,ImageCopy_Mode18,C,entry 18 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A2F,ImageCopy_Mode19,C,entry 19 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A3B,ImageCopy_Mode20,C,entry 20 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A47,ImageCopy_Mode21,C,entry 21 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A53,ImageCopy_Mode22,C,entry 22 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2A5F,ImageCopy_Mode23,C,entry 23 of JumpTable_00_3822: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
-00,2AB8,ImageCopy_Mode24_None,C,entry 24 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2AB9,ImageCopy_Mode25_None,C,entry 25 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2ABA,ImageCopy_Mode26_None,C,entry 26 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2ABB,ImageCopy_Mode27_None,C,entry 27 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2ABC,ImageCopy_Mode28_None,C,entry 28 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2ABD,ImageCopy_Mode29_None,C,entry 29 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2ABE,ImageCopy_Mode30_None,C,entry 30 of JumpTable_00_3822: a lone ret (no copy),hand
-00,2ABF,ImageCopy_Mode31_None,C,entry 31 of JumpTable_00_3822: a lone ret (no copy),hand
+00,1EFA,Leftover_00_1EFA,I,"leftover: 248 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+00,1FF2,ImageCopy_Mode00,C,entry 0 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,1FFE,ImageCopy_Mode01,C,entry 1 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,20DE,ImageCopy_Mode02,C,entry 2 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,21BF,Leftover_00_21BF,I,"leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+00,21C0,ImageCopy_Mode03,C,entry 3 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,224B,ImageCopy_Mode04,C,entry 4 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,22D6,ImageCopy_Mode05,C,entry 5 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,235E,ImageCopy_Mode06,C,entry 6 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,24A0,ImageCopy_Mode07,C,entry 7 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2645,ImageCopy_Mode08,C,entry 8 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2942,ImageCopy_Mode09,C,entry 9 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2948,ImageCopy_Mode10,C,entry 10 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,294E,ImageCopy_Mode11,C,entry 11 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2954,ImageCopy_Mode12,C,entry 12 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,295A,ImageCopy_Mode13,C,entry 13 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,29B3,ImageCopy_Mode14,C,entry 14 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A0B,ImageCopy_Mode15,C,entry 15 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A17,ImageCopy_Mode16,C,entry 16 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A23,ImageCopy_Mode17,C,entry 17 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A29,ImageCopy_Mode18,C,entry 18 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A2F,ImageCopy_Mode19,C,entry 19 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A3B,ImageCopy_Mode20,C,entry 20 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A47,ImageCopy_Mode21,C,entry 21 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A53,ImageCopy_Mode22,C,entry 22 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2A5F,ImageCopy_Mode23,C,entry 23 of ImageCopy_ModeTable: copies a slice of the picture from SRAM ($A000-$BFFF) to WRAM ($D000-$DFFF),hand
+00,2AB8,ImageCopy_Mode24_None,C,entry 24 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2AB9,ImageCopy_Mode25_None,C,entry 25 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2ABA,ImageCopy_Mode26_None,C,entry 26 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2ABB,ImageCopy_Mode27_None,C,entry 27 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2ABC,ImageCopy_Mode28_None,C,entry 28 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2ABD,ImageCopy_Mode29_None,C,entry 29 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2ABE,ImageCopy_Mode30_None,C,entry 30 of ImageCopy_ModeTable: a lone ret (no copy),hand
+00,2ABF,ImageCopy_Mode31_None,C,entry 31 of ImageCopy_ModeTable: a lone ret (no copy),hand
 00,2AC0,ImageCopy_Common2AC0,C,shared tail of the image-copy modes 9-12 (each sets DE and jumps here: jp $2AC0),hand
-00,2C4A,Data_00_2C4A,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,2C4A,Leftover_00_2C4A,I,"leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,2C4B,ImageCopy_Common2C4B,C,shared tail of the image-copy modes 17 and 18 (each sets DE and jumps here: jp $2C4B),hand
 00,2EF5,Copy_Pages,C,"unrolled copy: B pages of 256 bytes from HL to DE (ld a,[hl+]; ld [de],a; inc e; ... inc d; dec b; jp nz)",hand
 00,31FB,MAKE_EMI,C,"developers' name: same code as MAKE_EMI in the old build of table 2A at old 29ED (115 bytes, masked match)",port_old
@@ -180,18 +180,18 @@ bank,addr,name,conf,note,source
 00,32B8,N_OBJ_HYOUJI,I,"developers' name: same code as N_OBJ_HYOUJI in the old build of table 2A at old 2AAA (14 bytes, exact match)",port_old
 00,32C6,N_OBJ_HYOUJI2,C,"developers' name: same code as N_OBJ_HYOUJI2 in the old build of table 2A at old 2AB8 (29 bytes, exact match)",port_old
 00,32E3,Akarusa_Apply,I,"stores A in $C164 (AKARUSA in table $2A), returns when the mode in $C0F2 is 6, else selects SRAM bank 0 and ROM bank 4 (ld [$4000],0; ld [$2000],4) and goes on; not read further",hand
-00,33A6,Data_00_33A6,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,33A6,Leftover_00_33A6,I,"leftover: 52 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,33DA,SCREEN_CHECK,C,"developers' name: same code as SCREEN_CHECK in the old build of table 2A at old 314B (84 bytes, masked match)",port_old
 00,342E,BIT_COUNT,I,"adds popcount(byte) + 2 x popcount(next byte) through the table at 04:4100 into BC, eight times per call from SCREEN_CHECK: the dark pixels of 2bpp rows (C); BIT_COUNT is the routine the source text left in the ROM describes for this (docs §18.14), so the name is I",hand
 00,3447,SET_DITH_MATRIX,C,"developers' name: same code as SET_DITH_MATRIX in the old build of table 2A at old 31B8 (374 bytes, masked match)",port_old
 00,35BD,ParaSet_ByMode,I,dispatch on the low nibble of A (cp 0..n) to per-mode register settings; called by PARA_SET and the settings screen,hand
-00,35DE,Data_00_35DE,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,35DE,Leftover_00_35DE,I,"leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 00,35DF,ParaSet_ByMode_Part35DF,C,continuation of ParaSet_ByMode after a data label or a never-traced byte,part
 00,3732,Sensor_FillDitherFlat,C,"SRAM bank $10 (camera registers): writes $80, or $55 when the mode in $C0F2 is 6, to the 48 dither registers from $A006",hand
 00,37B8,CHECK_BLACK,C,"developers' name: same code as CHECK_BLACK in the old build of table 2A at old 3478 (32 bytes, exact match)",port_old
 00,37D8,OFFSET_DOWN,C,"developers' name: same code as OFFSET_DOWN in the old build of table 2A at old 3498 (52 bytes, exact match)",port_old
-00,380C,ImageCopy_Dispatch,C,"A (BUNKATU_MODE $C167, from GET_A_IMMAGE 00:10A7) and $1F, x2: jp through JumpTable_00_3822 to one of 32 SRAM-to-WRAM copies",hand
-00,3822,JumpTable_00_3822,C,word table of the jump at 00:3821 (index masked to 0-31 at 00:380C),proto_types
+00,380C,ImageCopy_Dispatch,C,"A (BUNKATU_MODE $C167, from GET_A_IMMAGE 00:10A7) and $1F, x2: jp through ImageCopy_ModeTable to one of 32 SRAM-to-WRAM copies",hand
+00,3822,ImageCopy_ModeTable,C,"the 32 words of ImageCopy_Dispatch (00:380C): BUNKATU_MODE ($C167) and $1F, x2, selects the SRAM-to-WRAM copy routine ImageCopy_Mode00-1F",hand
 00,3862,CONTRAST_ROWS,C,"SET_DITH_MATRIX (00:3447) takes row C (1-131, the CONTRAST value $C165) of this table, 6 bytes per row (three bases, three widths; docs §18.14): $3862-$3B73",hand
 00,3C9A,NO_DITHER_PAT,I,"dither order pattern 0 of SET_DITH_MATRIX (table base $3C9A, 16 bytes of $08: no dither); the old table $2A has NO_DITHER_PAT 16 bytes before BAYER_PAT, as here, but an all-$08 pattern is too plain to match by its bytes",hand
 00,3CAA,BAYER_PAT,C,"developers' name: the same bytes as the data label BAYER_PAT in the old build of table 2A at old 3806 (16 bytes, data match)",port_old
@@ -202,13 +202,13 @@ bank,addr,name,conf,note,source
 00,3CFA,CONCENT_PAT,C,"developers' name: the same bytes as the data label CONCENT_PAT in the old build of table 2A at old 3856 (96 bytes, data match)",port_old
 00,3D5A,CHG_TIME_TBL_U,C,"developers' name: the same bytes as the data label CHG_TIME_TBL_U in the old build of table 2A at old 38B6 (169 bytes, data match)",port_old
 00,3E03,CHG_TIME_TBL_D,C,"developers' name: the same bytes as the data label CHG_TIME_TBL_D in the old build of table 2A at old 395F (256 bytes, data match)",port_old
-00,3FFF,Data_00_3FFF,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+00,3FFF,Leftover_00_3FFF,I,"leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 01,4000,BankNumber_01_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 01,4001,Gfx_01_4001_FNTOOE1,C,"FNTOOE1 in both old symbol tables (same bank and address); this build copies the block here: Gfx: 2bpp tiles copied to VRAM by 00:04C3, 00:0560",symtab_asset
 01,5801,Map_01_5801_TITLE1,C,TITLE1 in both old symbol tables (same bank and address); this build copies the block here: Map: tile-map rows copied to the BG map by 00:04CF,symtab_asset
 01,5A41,Map_01_5A41_MENU1,C,MENU1 in both old symbol tables (same bank and address); this build copies the block here: Map: tile-map rows copied to the BG map by 00:056C,symtab_asset
 01,5C81,Data_01_5C81_SIMO,I,SIMO in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-01,5E21,Data_01_5E21,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+01,5E21,Leftover_01_5E21,I,"leftover: 111 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 01,7FFF,BankNumber_01_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 02,4000,BankNumber_02_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 02,4001,Gfx_02_4001_FNTOOE2,C,"FNTOOE2 in both old symbol tables (same bank and address); this build copies the block here: Gfx: 2bpp tiles copied to VRAM by 00:06C0, 00:0797, 00:094E, 00:0A85, 00:0D57, 00:19C9",symtab_asset
@@ -219,7 +219,7 @@ bank,addr,name,conf,note,source
 02,6101,Map_02_6101_BG_DUMP,C,BG_DUMP in both old symbol tables (same bank and address); this build copies the block here: Map: tile-map rows copied to the BG map by 00:0D63,symtab_asset
 02,6341,Map_02_6341_BGPROTEC,C,BGPROTEC in both old symbol tables (same bank and address); this build copies the block here: Map: tile-map rows copied to the BG map by 00:19D5,symtab_asset
 02,6581,Data_02_6581_PROGRAM,I,PROGRAM in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-02,6D83,Data_02_6D83,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+02,6D83,Leftover_02_6D83,I,"leftover: 508 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 02,7FFF,BankNumber_02_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 03,4000,BankNumber_03_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 03,4001,Gfx_03_4001_FNTOOE3,C,"FNTOOE3 in both old symbol tables (same bank and address); this build copies the block here: Gfx: 2bpp tiles copied to VRAM by 00:0EBF, 00:1D7D, 00:3217",symtab_asset
@@ -235,282 +235,281 @@ bank,addr,name,conf,note,source
 04,4100,BitCount_Table,C,"256-byte popcount table (entry n = number of 1 bits of n), read by BIT_COUNT (00:3433, 00:343E) in the L2 runs",hand
 04,4200,BitReverse_Table,C,"256-byte bit-reversal table ($01 -> $80, $02 -> $40 ...), read by ImageCopy_Mode01 in the L2 runs (a mirrored picture: I)",hand
 04,4300,Zoom_TableA,I,"256-byte table (0 for n < $10, then 3, 12 ... by ranges), read by ImageCopy_Mode06 with BitDouble_Table in the L2 runs; role not decoded",hand
-04,4310,Data_04_4310,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
 04,4400,BitDouble_Table,C,"256-byte table that doubles each bit of a nibble ($01 -> $03, $02 -> $0C ...: 4 pixels -> 8), read by ImageCopy_Mode06 in the L2 runs (a 2x zoom: I)",hand
 04,4500,HalfBits_Table,I,"256-byte table keeping every other bit (00 00 01 01 00 00 01 01 02 02 03 03 ...), read by ImageCopy_Mode08 in the L2 runs (a reduction: I)",hand
-04,4BF0,Data_04_4BF0,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+04,4BF0,Leftover_04_4BF0,I,"leftover: 11 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 04,4E01,Data_04_4E01_KAO_1,I,KAO_1 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-04,4E4E,Data_04_4E4E,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+04,4E4E,Leftover_04_4E4E,I,"leftover: 11 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 04,5C01,Data_04_5C01_KAO_2,I,KAO_2 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-04,6270,Data_04_6270,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+04,6270,Leftover_04_6270,I,"leftover: 80 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 04,6A01,Data_04_6A01_KAO_3,I,KAO_3 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-04,72C2,Data_04_72C2,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+04,72C2,Leftover_04_72C2,I,"leftover: 25 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 04,7FFF,BankNumber_04_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 05,4000,BankNumber_05_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 05,4001,Data_05_4001_HOI_U,I,HOI_U in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-05,404D,Data_05_404D,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+05,404D,Leftover_05_404D,I,"leftover: 68 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 05,4E01,Data_05_4E01_HOI_D,I,HOI_D in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-05,4E33,Data_05_4E33,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+05,4E33,Leftover_05_4E33,I,"leftover: 141 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 05,5C01,Data_05_5C01_HOI_L,I,HOI_L in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-05,5C4F,Data_05_5C4F,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+05,5C4F,Leftover_05_5C4F,I,"leftover: 129 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 05,6A01,Data_05_6A01_HOI_R,I,HOI_R in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-05,6A40,Data_05_6A40,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+05,6A40,Leftover_05_6A40,I,"leftover: 161 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 05,7FFF,BankNumber_05_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 06,4000,BankNumber_06_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 06,4001,Data_06_4001_FACE5,I,FACE5 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-06,4491,Data_06_4491,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+06,4491,Leftover_06_4491,I,"leftover: 184 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 06,4E01,Data_06_4E01_FACE6,I,FACE6 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-06,5291,Data_06_5291,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+06,5291,Leftover_06_5291,I,"leftover: 192 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 06,5C01,Data_06_5C01_FACE7,I,FACE7 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-06,62A1,Data_06_62A1,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+06,62A1,Leftover_06_62A1,I,"leftover: 464 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 06,6A01,Data_06_6A01_FACE8,I,FACE8 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-06,6EB1,Data_06_6EB1,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+06,6EB1,Leftover_06_6EB1,I,"leftover: 192 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 06,7FFF,BankNumber_06_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 07,4000,BankNumber_07_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-07,4101,Data_07_4101,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+07,4101,Leftover_07_4101,I,"leftover: 3 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 07,7FFF,BankNumber_07_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 08,4000,BankNumber_08_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-08,4001,Data_08_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+08,4001,Leftover_08_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 08,7FFF,BankNumber_08_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 09,4000,BankNumber_09_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-09,4001,Data_09_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+09,4001,Leftover_09_4001,I,"leftover: 4277 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 09,7FFF,BankNumber_09_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0A,4000,BankNumber_0A_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-0A,4001,Data_0A_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0A,4001,Leftover_0A_4001,I,"leftover: 1672 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0A,7FFF,BankNumber_0A_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0B,4000,BankNumber_0B_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-0B,4001,Data_0B_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0B,4001,Leftover_0B_4001,I,"leftover: 956 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0B,7FFF,BankNumber_0B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0C,4000,BankNumber_0C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0C,4001,Text_0C_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-0C,4100,Data_0C_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0C,4100,Leftover_0C_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0C,4104,Text_0C_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-0C,4200,Data_0C_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0C,4200,Leftover_0C_4200,I,"leftover: 149 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0C,7FFF,BankNumber_0C_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0D,4000,BankNumber_0D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0D,4001,Text_0D_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-0D,4100,Data_0D_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0D,4100,Leftover_0D_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0D,4104,Text_0D_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-0D,4200,Data_0D_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0D,4200,Leftover_0D_4200,I,"leftover: 84 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0D,7FFF,BankNumber_0D_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0E,4000,BankNumber_0E_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-0E,4001,Data_0E_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0E,4001,Leftover_0E_4001,I,"leftover: 33 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0E,7FFF,BankNumber_0E_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0F,4000,BankNumber_0F_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-0F,4001,Data_0F_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+0F,4001,Leftover_0F_4001,I,"leftover: 8191 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 0F,7FFF,BankNumber_0F_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 10,4000,BankNumber_10_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-10,4001,Data_10_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+10,4001,Leftover_10_4001,I,"leftover: 570 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 10,7FFF,BankNumber_10_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 11,4000,BankNumber_11_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-11,4001,Data_11_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+11,4001,Leftover_11_4001,I,"leftover: 569 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 11,7FFF,BankNumber_11_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 12,4000,BankNumber_12_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 12,4001,Text_12_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-12,4100,Data_12_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+12,4100,Leftover_12_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 12,4104,Text_12_4104,C,"leftover text block, 496 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-12,42F4,Data_12_42F4,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+12,42F4,Leftover_12_42F4,I,"leftover: 15627 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 12,7FFF,BankNumber_12_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 13,4000,BankNumber_13_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 13,4001,Text_13_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-13,4100,Data_13_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+13,4100,Leftover_13_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 13,4104,Text_13_4104,C,"leftover text block, 16123 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 13,7FFF,BankNumber_13_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 14,4000,BankNumber_14_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 14,4001,Text_14_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-14,4100,Data_14_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+14,4100,Leftover_14_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 14,4104,Text_14_4104,C,"leftover text block, 16123 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 14,7FFF,BankNumber_14_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 15,4000,BankNumber_15_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 15,4001,Text_15_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-15,4100,Data_15_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+15,4100,Leftover_15_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 15,4104,Text_15_4104,C,"leftover text block, 16123 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 15,7FFF,BankNumber_15_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 16,4000,BankNumber_16_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 16,4001,Text_16_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-16,4100,Data_16_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+16,4100,Leftover_16_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 16,4104,Text_16_4104,C,"leftover text block, 16123 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 16,7FFF,BankNumber_16_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 17,4000,BankNumber_17_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 17,4001,Text_17_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-17,4100,Data_17_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+17,4100,Leftover_17_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 17,4104,Text_17_4104,C,"leftover text block, 16123 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 17,7FFF,BankNumber_17_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 18,4000,BankNumber_18_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-18,4001,Data_18_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+18,4001,Leftover_18_4001,I,"leftover: 400 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 18,7FFF,BankNumber_18_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 19,4000,BankNumber_19_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-19,4001,Data_19_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+19,4001,Leftover_19_4001,I,"leftover: 16382 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 19,7FFF,BankNumber_19_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1A,4000,BankNumber_1A_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1A,4001,Text_1A_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1A,4100,Data_1A_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1A,4100,Leftover_1A_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1A,4104,Text_1A_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1A,4200,Data_1A_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1A,4200,Leftover_1A_4200,I,"leftover: 23 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1A,7FFF,BankNumber_1A_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1B,4000,BankNumber_1B_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1B,4001,Text_1B_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1B,4100,Data_1B_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1B,4100,Leftover_1B_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1B,4104,Text_1B_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1B,5000,Data_1B_5000,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1B,5000,Leftover_1B_5000,I,"leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1B,7FFF,BankNumber_1B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1C,4000,BankNumber_1C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1C,4001,Data_1C_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1C,4001,Leftover_1C_4001,I,"leftover: 32 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1C,7FFF,BankNumber_1C_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1D,4000,BankNumber_1D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1D,4021,Data_1D_4021,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1D,4021,Leftover_1D_4021,I,"leftover: 41 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1D,7FFF,BankNumber_1D_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1E,4000,BankNumber_1E_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1E,4001,Data_1E_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1E,4001,Leftover_1E_4001,I,"leftover: 1451 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1E,53FB,Text_1E_53FB,C,"leftover text block, 725 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1E,56D0,Data_1E_56D0,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1E,56D0,Leftover_1E_56D0,I,"leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1E,56D7,Text_1E_56D7,C,"leftover text block, 10536 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 1E,7FFF,BankNumber_1E_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1F,4000,BankNumber_1F_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1F,4001,Data_1F_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1F,4001,Leftover_1F_4001,I,"leftover: 32 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1F,4200,Text_1F_4200,C,"leftover text block, 5328 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1F,56D0,Data_1F_56D0,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+1F,56D0,Leftover_1F_56D0,I,"leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1F,56D7,Text_1F_56D7,C,"leftover text block, 10536 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 1F,7FFF,BankNumber_1F_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 20,4000,BankNumber_20_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 20,4001,Text_20_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-20,4100,Data_20_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+20,4100,Leftover_20_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 20,4104,Text_20_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-20,4200,Data_20_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+20,4200,Leftover_20_4200,I,"leftover: 14095 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 20,7FFF,BankNumber_20_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 21,4000,BankNumber_21_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 21,4001,Text_21_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-21,4100,Data_21_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+21,4100,Leftover_21_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 21,4104,Text_21_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-21,421F,Data_21_421F,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+21,421F,Leftover_21_421F,I,"leftover: 108 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 21,7FFF,BankNumber_21_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 22,4000,BankNumber_22_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 22,4001,Text_22_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-22,4100,Data_22_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+22,4100,Leftover_22_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 22,4104,Text_22_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-22,4200,Data_22_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+22,4200,Leftover_22_4200,I,"leftover: 2816 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 22,7FFF,BankNumber_22_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 23,4000,BankNumber_23_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 23,4001,Text_23_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-23,4100,Data_23_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+23,4100,Leftover_23_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 23,4104,Text_23_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-23,4365,Data_23_4365,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+23,4365,Leftover_23_4365,I,"leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 23,7FFF,BankNumber_23_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 24,4000,BankNumber_24_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-24,4001,Data_24_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+24,4001,Leftover_24_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 24,4200,Text_24_4200,C,"leftover text block, 5328 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-24,56D0,Data_24_56D0,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+24,56D0,Leftover_24_56D0,I,"leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 24,56D7,Text_24_56D7,C,"leftover text block, 10537 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 24,7FFF,BankNumber_24_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 25,4000,BankNumber_25_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-25,4001,Data_25_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+25,4001,Leftover_25_4001,I,"leftover: 509 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 25,41FE,Text_25_41FE,C,"leftover text block, 15874 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 25,7FFF,BankNumber_25_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 26,4000,BankNumber_26_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-26,4001,Data_26_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+26,4001,Leftover_26_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 26,4200,Text_26_4200,C,"leftover text block, 5328 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-26,56D0,Data_26_56D0,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+26,56D0,Leftover_26_56D0,I,"leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 26,56D7,Text_26_56D7,C,"leftover text block, 10537 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 26,7FFF,BankNumber_26_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 27,4000,BankNumber_27_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 27,4001,Text_27_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-27,4100,Data_27_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+27,4100,Leftover_27_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 27,4104,Text_27_4104,C,"leftover text block, 16124 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 27,7FFF,BankNumber_27_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 28,4000,BankNumber_28_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 28,4001,Text_28_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-28,4100,Data_28_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+28,4100,Leftover_28_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 28,4104,Text_28_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-28,4200,Data_28_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+28,4200,Leftover_28_4200,I,"leftover: 199 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 28,7FFF,BankNumber_28_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 29,4000,BankNumber_29_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 29,4001,Text_29_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-29,4100,Data_29_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+29,4100,Leftover_29_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 29,4104,Text_29_4104,C,"leftover text block, 253 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-29,4201,Data_29_4201,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+29,4201,Leftover_29_4201,I,"leftover: 58 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 29,7FFF,BankNumber_29_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2A,4000,BankNumber_2A_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2A,4001,Text_2A_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-2A,4100,Data_2A_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2A,4100,Leftover_2A_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2A,4104,Text_2A_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-2A,4200,Data_2A_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2A,4200,Leftover_2A_4200,I,"leftover: 411 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2A,4B7F,OldSymbolTable_2A_4B7F,C,"binary symbol table of an older build, 674 records (tools/proto_symtab.py)",proto_types
-2A,6CC9,Data_2A_6CC9,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2A,6CC9,Leftover_2A_6CC9,I,"leftover: 2359 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2A,7FFF,BankNumber_2A_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2B,4000,BankNumber_2B_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2B,4001,Text_2B_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-2B,4100,Data_2B_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2B,4100,Leftover_2B_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2B,4104,Text_2B_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-2B,4200,Data_2B_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2B,4200,Leftover_2B_4200,I,"leftover: 27 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2B,7FFF,BankNumber_2B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2C,4000,BankNumber_2C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-2C,4001,Data_2C_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2C,4001,Leftover_2C_4001,I,"leftover: 14621 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2C,7FFF,BankNumber_2C_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2D,4000,BankNumber_2D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-2D,4001,Data_2D_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2D,4001,Leftover_2D_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2D,7FFF,BankNumber_2D_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2E,4000,BankNumber_2E_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-2E,4001,Data_2E_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2E,4001,Leftover_2E_4001,I,"leftover: 400 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2E,7FFF,BankNumber_2E_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2F,4000,BankNumber_2F_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2F,4001,Text_2F_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-2F,4100,Data_2F_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2F,4100,Leftover_2F_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2F,4104,Text_2F_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-2F,4200,Data_2F_4200,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+2F,4200,Leftover_2F_4200,I,"leftover: 145 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2F,7FFF,BankNumber_2F_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 30,4000,BankNumber_30_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 30,4001,Text_30_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-30,4100,Data_30_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+30,4100,Leftover_30_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 30,4104,Text_30_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-30,4232,Data_30_4232,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+30,4232,Leftover_30_4232,I,"leftover: 22 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 30,7FFF,BankNumber_30_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 31,4000,BankNumber_31_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 31,4001,Text_31_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-31,4100,Data_31_4100,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+31,4100,Leftover_31_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 31,4104,Text_31_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-31,4225,Data_31_4225,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+31,4225,Leftover_31_4225,I,"leftover: 140 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 31,7FFF,BankNumber_31_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 32,4000,BankNumber_32_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-32,4001,Data_32_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+32,4001,Leftover_32_4001,I,"leftover: 95 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 32,7FFF,BankNumber_32_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 33,4000,BankNumber_33_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-33,4001,Data_33_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+33,4001,Leftover_33_4001,I,"leftover: 1106 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 33,7FFF,BankNumber_33_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 34,4000,BankNumber_34_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-34,4021,Data_34_4021,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+34,4021,Leftover_34_4021,I,"leftover: 16 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 34,7FFF,BankNumber_34_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 35,4000,BankNumber_35_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-35,4027,Data_35_4027,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+35,4027,Leftover_35_4027,I,"leftover: 66 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 35,4A91,OldSymbolTable_35_4A91,C,"binary symbol table of an older build, 705 records (tools/proto_symtab.py)",proto_types
-35,6D1C,Data_35_6D1C,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+35,6D1C,Leftover_35_6D1C,I,"leftover: 2284 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 35,7FFF,BankNumber_35_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 36,4000,BankNumber_36_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-36,4001,Data_36_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+36,4001,Leftover_36_4001,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 36,7FFF,BankNumber_36_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 37,4000,BankNumber_37_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-37,4001,Data_37_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+37,4001,Leftover_37_4001,I,"leftover: 91 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 37,7FFF,BankNumber_37_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 38,4000,BankNumber_38_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-38,4021,Data_38_4021,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+38,4021,Leftover_38_4021,I,"leftover: 16 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 38,7FFF,BankNumber_38_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 39,4000,BankNumber_39_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-39,407A,Data_39_407A,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+39,407A,Leftover_39_407A,I,"leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 39,7FFF,BankNumber_39_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3A,4000,BankNumber_3A_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3A,4001,Data_3A_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+3A,4001,Leftover_3A_4001,I,"leftover: 656 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3A,7FFF,BankNumber_3A_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3B,4000,BankNumber_3B_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3B,4001,Data_3B_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+3B,4001,Leftover_3B_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3B,7FFF,BankNumber_3B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3C,4000,BankNumber_3C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3C,4001,Data_3C_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+3C,4001,Leftover_3C_4001,I,"leftover: 510 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3C,7FFF,BankNumber_3C_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3D,4000,BankNumber_3D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3D,4001,Data_3D_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+3D,4001,Leftover_3D_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3D,7FFF,BankNumber_3D_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3E,4000,BankNumber_3E_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3E,4001,Data_3E_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+3E,4001,Leftover_3E_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3E,7FFF,BankNumber_3E_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3F,4000,BankNumber_3F_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3F,4001,Data_3F_4001,C,"start of bytes that nothing identifies yet (no type row, trace or name): kind not settled",gap
+3F,4001,Leftover_3F_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3F,7FFF,BankNumber_3F_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types

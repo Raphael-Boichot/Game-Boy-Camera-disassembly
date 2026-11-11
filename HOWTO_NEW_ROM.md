@@ -24,7 +24,7 @@ Do L0-L2 first (a few passes), but **start L4 and L5 as soon as L2 exists**: thi
 **How a status is written** (every ROM, every README): each level is `done`, `partial: <what is left, with a count>` or `not started`, with the file that proves it. A level is `done` only when its test above holds in full for that ROM:
 
 * L2 `done` needs both halves, proven (0 unresolved) and observed (a coverage file of runs of this ROM); a trace alone is `partial: static only`.
-* L3 `done` needs every routine **and** every data block named, no placeholder (`Data_BB_AAAA`, `Code_BB_AAAA`), and the doubts list; routines named but data left at placeholders is `partial: N placeholder names`.
+* L3 `done` needs every routine **and** every data block named, no placeholder (`Data_BB_AAAA`, `Code_BB_AAAA`), and the doubts list; routines named but data left at placeholders is `partial: N placeholder names`. A run of bytes that nothing in the build reads, runs or explains (no type row, no traced instruction, no reader, and the L2 runs neither read nor execute it) is not a placeholder: it is named `Leftover_BB_AAAA`, tag I, final, and listed in `sym_settled_unused_<tag>.csv` (owner rule 2026-11-11)
 
 ## 0.1 One layout for every ROM folder (target, 2026-11-09)
 

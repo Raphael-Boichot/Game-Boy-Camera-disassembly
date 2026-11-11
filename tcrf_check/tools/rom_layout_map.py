@@ -156,7 +156,7 @@ def data_kind(name):
     if p in ('Map', 'BgMap'): return 'MAP'
     if re.search(r'(PalTrnData|Palettes)$', name): return 'PALT'                      # colour data: Sgb_PalTrnData, Sgb_BorderPalettes
     if p == 'Sgb': return 'T_UI' if 'BorderTiles' in name else ('MAP' if 'BorderMap' in name else 'TBL')
-    if p in ('Src', 'Data'): return 'UNC'
+    if p in ('Src', 'Data', 'Leftover'): return 'UNC'                                   # Leftover_: bytes nothing reads (owner rule 2026-11-11), kind not settled
     return 'TBL'
 
 # ---- labels ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

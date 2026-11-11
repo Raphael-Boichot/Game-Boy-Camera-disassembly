@@ -204,3 +204,4 @@ bank,start,end,type,width,note
 03,5801,5A41,data,32,"Map: tile-map rows copied to the BG map by 00:0ECB, 00:1D89, 00:3223"
 03,5A41,7241,data,16,Gfx: 2bpp tiles copied to VRAM by 00:1291
 03,7241,7481,data,32,Map: tile-map rows copied to the BG map by 00:129D
+04,4300,4400,data,16,"Zoom_TableA: 256-byte lookup read by ImageCopy_Mode06 (ld b,$43 / ld a,[bc], 16 sites; the L2 runs read all of $4310-$43FF); its first 16 bytes are $00, which the padding rule took for padding"

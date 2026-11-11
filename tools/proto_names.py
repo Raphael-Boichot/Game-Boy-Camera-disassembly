@@ -5,6 +5,7 @@
 
 Layers, lowest first (a later layer replaces the name at the same address; a name `-` deletes):
   1. auto   disasm/layers/sym_names_proto_auto.csv (tools/proto_types.py --names): Gfx_ / Map_ / Data_ / JumpTable_ BB_AAAA, tag C
+     (a run of bytes that no layer names and that the L2 runs never read nor execute becomes Leftover_BB_AAAA, tag I: owner rule 2026-11-11)
   2. assets the banked labels of the two leftover symbol tables (disasm/leftover_symtab_proto.csv, kind label, value $4000-$7FFF,
             byte2 = the bank): all 31 have the same bank and address in both tables. Named as the Japanese ROM names its assets, the
             developers' name as suffix (owner, 2026-11-09): Gfx_BB_AAAA_NAME / Map_BB_AAAA_NAME, tag C, when this build copies a typed
@@ -23,7 +24,8 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
             the old address, the length and the match kind.
   4. hand   disasm/layers/sym_names_proto_hand.csv (every row with its reason)
 Checks: one name per address and one address per name (a clash aborts), valid rgbasm labels, every routine entry of the trace
-(call targets, jump-table entries, vectors, the entry) named. --doubts writes the doubts list: every name not tagged C, with its note (OUT.md, and the same rows as OUT.csv beside it).
+(call targets, jump-table entries, vectors, the entry) named. --doubts writes the doubts list: every name not tagged C but the leftovers, with its note (OUT.md, and the same rows as OUT.csv
+beside it); the leftovers, whose I tag is final, go to sym_settled_unused_proto.csv beside it.
 Prints `proto_names: N names, tags {...}; routine entries R, unnamed U`.
 """
 import csv, json, os, re, sys, argparse, collections
@@ -98,6 +100,9 @@ while i < len(ROMB):                                   # padding: 16+ equal $00 
     i = j
 import bisect
 ngap = 0
+import numpy as _np                       # what the L2 runs read or executed (trace/cov_proto_runs.npz): a gap that is used is not a leftover
+_z = _np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
+RUNX = (_z['exec'][:len(ROMB)] > 0) | (_z['dread'][:len(ROMB)] > 0)
 byb = collections.defaultdict(list)
 for (b, ad) in names: byb[b].append(ad)
 for b in byb: byb[b].sort()
@@ -107,7 +112,13 @@ for o in range(len(ROMB)):
         if (b, ad) in names: continue
         lst = byb[b]; i_ = bisect.bisect_right(lst, ad) - 1
         if i_ < 0 or names[(b, lst[i_])][3] == 'gap': continue      # nothing before it in the bank, or a gap label already owns it
-        put(b, ad, 'Data_%02X_%04X' % (b, ad), 'C', 'start of bytes that nothing identifies yet (no type row, trace or name): kind not settled', 'gap'); ngap += 1
+        e_ = o + 1
+        while e_ < len(ROMB) and not cov_[e_] and (e_ & 0x3FFF): e_ += 1
+        if RUNX[o:e_].any():      # read or run in the L2 runs: something uses it, so the kind is still to settle (a placeholder)
+            put(b, ad, 'Data_%02X_%04X' % (b, ad), 'C', 'start of bytes that nothing identifies yet (no type row, trace or name), read or run in the L2 runs: kind not settled', 'gap')
+        else:                     # owner rule 2026-11-11: bytes that nothing reads, runs or explains are leftovers, named Leftover_BB_AAAA, tag I
+            put(b, ad, 'Leftover_%02X_%04X' % (b, ad), 'I', 'leftover: %d bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)' % (e_ - o), 'gap')
+        ngap += 1
         bisect.insort(lst, ad)
 # 6. code after a data label: a <routine>_Part<AAAA> label (the Japanese convention for a piece of a parent block) at the first traced
 #    instruction that a non-code label would own, so that the code keeps the name and the colour of its routine
@@ -142,11 +153,16 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C')
+doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] != 'gap')
+settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] == 'gap')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
+    w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
+    for (b, ad), (nm, c, note, src) in settled:
+        w.writerow(['%02X' % b, '%04X' % ad, nm, c, 'leftover', int(re.search(r'(\d+) bytes', note).group(1)), note, 'tools/proto_names.py: no type row, traced instruction or reader, and trace/cov_proto_runs.npz neither reads nor runs them'])
 with open(a.doubts, 'w') as f:
     f.write('# Prototype: names not tagged C (doubts list)\n\nGenerated by `tools/proto_names.py` from the name layers (%d names: C %d / I %d / ? %d). '
-            'Every name below is a hypothesis until the code or an emulator confirms it.\n\n| address | name | tag | source | reason |\n|---|---|---|---|---|\n' % (
-                len(names), tags['C'], tags['I'], tags['?']))
+            'Every name below is a hypothesis until the code or an emulator confirms it. Not listed: the %d leftovers (`Leftover_BB_AAAA`, tag I, final), in `sym_settled_unused_proto.csv`.\n\n| address | name | tag | source | reason |\n|---|---|---|---|---|\n' % (
+                len(names), tags['C'], tags['I'], tags['?'], sum(1 for v in names.values() if v[1] != 'C' and v[3] == 'gap')))
     for (b, ad), (nm, c, note, src) in doubt: f.write('| %02X:%04X | %s | %s | %s | %s |\n' % (b, ad, nm, c, src, note.replace('|', '/')))
 with open(os.path.splitext(a.doubts)[0] + '.csv', 'w', newline='') as f:      # the same list as a table (HOWTO_NEW_ROM.md section 0.1: sym_unconclusive_<tag>.csv/.md)
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'source', 'evidence'])

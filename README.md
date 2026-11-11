@@ -10,7 +10,7 @@
 | Game Boy Camera (USA, Europe) | done | done | done | done | done | done | partial |
 | Game Boy Camera Gold (USA) | done | done | done | done | done | done | partial |
 | Pocket Camera (Hello Kitty) | done | done | done | partial | not started | not started | not started |
-| Pocket Camera Prototype (Japan) ("DEBAGAME") | done | done | done | partial | not started | not started | not started |
+| Pocket Camera Prototype (Japan) ("DEBAGAME") | done | done | done | done | not started | not started | not started |
 
 **The purpose of this project is not to make alternative Game Boy Camera roms as best open source alternatives yet exist, but to understand finely a piece of video game history and reveal definitively all the possible secrets buried into the code.**
 
@@ -107,7 +107,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets*: first pass done in the core and BGB runs (2026-11-08): [`assets/never_reached_kitty.csv`](roms/hello_kitty/assets/never_reached_kitty.csv), with its picture and counts in [`roms/hello_kitty/`](roms/hello_kitty/README.md).
 
-**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L2 done, L3 partial (every routine named; 111 data labels are still placeholders), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
+**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 done (every routine named; the 109 runs that nothing reads are `Leftover_BB_AAAA`), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
 
 ![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
 
@@ -129,7 +129,7 @@ The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python
 | Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | L0-L5 done (ported from the Japanese tables, docs §1.5: L2 static and observed 97.1 %; L3 C 5,281 / I 130, I = unused, by evidence; L5 `make TREE=us_eu check`), L6 partial (character set and keyboard tables as text) |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | L0-L5 done (ported as the international ROM: L3 C 5,280 / I 130; L5 `make TREE=gold check`), L6 partial (character set) |
 | Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L2 done (own trace, 0 unresolved, observed in the core and BGB; symbol file, round trip byte-exact), L3 partial (every routine named; 822 placeholder data names), L4-L6 not started |
-| Pocket Camera Prototype (Japan) ("DEBAGAME") | `19b50a5f67ef4f0d015e7d813370756e` as dumped (`1d8097de3497db8b182bcd2a984b6063`: the header-patched copy for BGB) | [`roms/prototype_debagame/`](roms/prototype_debagame/) | L0-L2 done (own trace, 0 unresolved, all code in bank $00; symbol file, round trip byte-exact without rgbfix; 97 % of the code run, 13 screens confirmed in BGB), L3 partial (every routine named, mostly with the developers' names from two older builds; 111 placeholder data names), L4-L6 not started |
+| Pocket Camera Prototype (Japan) ("DEBAGAME") | `19b50a5f67ef4f0d015e7d813370756e` as dumped (`1d8097de3497db8b182bcd2a984b6063`: the header-patched copy for BGB) | [`roms/prototype_debagame/`](roms/prototype_debagame/) | L0-L2 done (own trace, 0 unresolved, all code in bank $00; symbol file, round trip byte-exact without rgbfix; 97 % of the code run, 13 screens confirmed in BGB), L3 done (every routine named, mostly with the developers' names from two older builds; 109 leftover runs named `Leftover_BB_AAAA`, I), L4-L6 not started |
 
 The ROMs are not in the repository (md5 values in §1.1; the owner supplies them outside it).
 

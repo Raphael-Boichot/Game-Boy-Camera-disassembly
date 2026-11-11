@@ -55,17 +55,17 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | Level | Status | Left to do |
 |---|---|---|
 | L0 | done | - |
-| L1 | done | 526,606 bytes (50 %) of uncertain kind, almost all in the leftover banks of the older builds: settled in L3 or by the owner's rule below. |
+| L1 | done | 526,366 bytes (50 %) of uncertain kind on the layout map: the 109 leftover runs (98,130 B, `Leftover_BB_AAAA`) and the assets of the older builds named from their symbol tables (`Data_BB_AAAA_<name>`, I, kind not settled). Their kinds are an L6 question (what the older builds used them for). |
 | L2 | done | 398 red bytes, all in bank `$00` (the timer interrupt, the self-test error paths, the link code): classify them. |
-| L3 | partial | 1. **The owner's rule first**: how to name the 110 leftover byte runs that nothing reads (for example `Leftover_BB_AAAA`), and whether the leftover banks get one block name per old bank. 2. The 52 I names (developers' names matched from the two older builds): confirm them in the code or in BGB. |
+| L3 | done | - (2026-11-11: 0 placeholder; the 109 leftovers are `Leftover_BB_AAAA`, I, owner rule; `ImageCopy_ModeTable` named; `Zoom_TableA` typed in full). Optional: confirm the 52 I names (developers' names matched from the two older builds) in the code or in BGB. |
 | L4 | not started | Small: the WRAM table (`GAME_SEQ` and the test variables), the constants, the SRAM map of the test patterns (AGING, PROTECT). |
 | L5 | not started | A `tools/make_source.py` preset whose build skips rgbfix, so that the image as dumped rebuilds byte-exact. |
-| L6 | not started | 1. Its text (the title screen in kana). 2. Its relation to the two older builds (the leftover symbol tables). |
+| L6 | not started | 1. Its text (the title screen in kana). 2. Its relation to the two older builds (the leftover symbol tables): the kinds of the leftover assets and runs (L1). |
 
 ## Order of work, across ROMs
 
 1. ~~**Quick consistency**~~ done 2026-11-10: `docs/01` §1.2 refreshed; 0 red bytes on the international and Gold maps; their WRAM summaries and `INDEX.md`; the 32 uncertain Japanese bytes named.
-2. **The owner's naming rule for the prototype's leftover bytes**, then the prototype's L3 (small; closes one ROM's L3).
+2. ~~**The prototype's L3**~~ done 2026-11-11 (owner rule: `Leftover_BB_AAAA`, tag I).
 3. **Hello Kitty L3**: the data kinds, then the 822 placeholder names (the largest naming job, about 3-4 sessions).
 4. **L2 red classification of Hello Kitty and the prototype** (7,607 and 398 bytes; easier once the L3 names exist).
 5. **The tools L4 relies on** (step 7 of the audit): one convention for the arrays of the coverage files (`ex` / `dr` in the Japanese, international and Gold files, `exec` / `dread` in Hello Kitty and the prototype), `tools/wram_db.py` checked on every trace format, the BGB scripts with dead `package/` paths; otherwise each L4 grows new one-off scripts.
