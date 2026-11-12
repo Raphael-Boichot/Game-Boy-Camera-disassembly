@@ -43,9 +43,9 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | Level | Status | Left to do |
 |---|---|---|
 | L0 | done | - |
-| L1 | done | Every byte is typed, but 204,703 bytes (19.5 %) are of uncertain kind on the layout map (`UNC`): settled in L3. |
+| L1 | done | Every byte is typed; 51,557 bytes (4.9 %) stay of uncertain kind on the layout map (2026-11-12, 204,703 before the data names): the `Src_` blocks copied into WRAM buffers and never seen in VRAM, and the 110 leftovers. Their kinds are an L6 question. |
 | L2 | done | 7,607 bytes of proven code that no run executed and nothing explains (red on the reachability map): classify them (dead, gated, forced only), as the 1,192 Japanese bytes were. |
-| L3 | partial | 1. The kinds of the 204,703 uncertain bytes (loaders, copy sites, the display tracker). 2. The 822 placeholder names, named by kind and consumer. 3. The 15 doubts (`disasm/sym_unconclusive_kitty.csv`). |
+| L3 | done | - (2026-11-12: 0 placeholder; every data block named by kind and consumer, `tools/kitty_data_names.py`; 110 leftovers `Leftover_BB_AAAA`, I, owner rule; 40 doubts in `disasm/sym_unconclusive_kitty.md`, 14 of them final). Optional: the 27 data names whose context is only the engine that reads them (`ObjScript_02_4654_Object_RunAll` ...), from runs that reach their screen. |
 | L4 | not started | 1. The WRAM access and summary tables (`tools/wram_db.py` reads this trace format). 2. RAM names with a scope per row. 3. Constants: modes and states (`disasm/mode_names_kitty.csv` exists), keys, sound ids. 4. The SRAM access table and map (`tools/sram_db.py` reads this trace format; the layout needs real Kitty saves; the Kitt counter and its unlock thresholds belong here). |
 | L5 | not started | A `tools/make_source.py` preset for this ROM; a source tree that builds byte-exact. |
 | L6 | not started | 1. Its character set (kana; the image-effect names drawn as sprite text). 2. The Kitt unlock milestones read in the code. 3. Owner validation of names. |
@@ -66,7 +66,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 
 1. ~~**Quick consistency**~~ done 2026-11-10: `docs/01` §1.2 refreshed; 0 red bytes on the international and Gold maps; their WRAM summaries and `INDEX.md`; the 32 uncertain Japanese bytes named.
 2. ~~**The prototype's L3**~~ done 2026-11-11 (owner rule: `Leftover_BB_AAAA`, tag I).
-3. **Hello Kitty L3**: the data kinds, then the 822 placeholder names (the largest naming job, about 3-4 sessions).
+3. ~~**Hello Kitty L3**~~ done 2026-11-12 (data names by kind and consumer; leftovers by the owner rule).
 4. **L2 red classification of Hello Kitty and the prototype** (7,607 and 398 bytes; easier once the L3 names exist).
 5. **The tools L4 relies on** (step 7 of the audit): one convention for the arrays of the coverage files (`ex` / `dr` in the Japanese, international and Gold files, `exec` / `dread` in Hello Kitty and the prototype), `tools/wram_db.py` checked on every trace format, the BGB scripts with dead `package/` paths; otherwise each L4 grows new one-off scripts.
 6. **Hello Kitty L4** (WRAM, RAM names, constants, SRAM with real saves; several sessions), then **the prototype's L4** (about one).

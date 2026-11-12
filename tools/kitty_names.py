@@ -16,12 +16,15 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
             ModeMM_<Name>, its state table ModeMM_StateTable, each state handler ModeMM_StateSS (a handler shared by several states
             gets the first); the tag of the mode name, C for the state handlers (read from the trace's tables).
   4. hand   disasm/layers/sym_names_kitty_hand.csv
+  5. data   tools/kitty_data_names.py: every placeholder data label named by kind and consumer, never-read stretches Leftover_BB_AAAA
+            (owner rule 2026-11-11), labels on inline arguments dropped (needs --rom, and --jp for the exact Japanese copies)
 Checks: one name per address, one address per name (a clash aborts), names are valid rgbasm labels.
 """
 import csv, json, re, sys, argparse, collections
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
 ap.add_argument('--auto', default='roms/hello_kitty/disasm/layers/sym_names_kitty_auto.csv'); ap.add_argument('--out', default='roms/hello_kitty/disasm/sym_names_kitty.csv')
-ap.add_argument('--trace', default='roms/hello_kitty/trace/trace_kitty.json'); a = ap.parse_args()
+ap.add_argument('--trace', default='roms/hello_kitty/trace/trace_kitty.json')
+ap.add_argument('--rom', default='/root/work/roms/pocketcamera_kitty.gb'); ap.add_argument('--jp', default='/root/work/roms/pocketcamera_jp.gb'); a = ap.parse_args()
 D = 'roms/hello_kitty/disasm/'
 names = {}   # (bank, addr) -> [name, conf, note, source]
 def put(b, ad, nm, conf, note, src):
@@ -72,6 +75,9 @@ for i, rec in enumerate(modes):
         seen.add((sb, sa))
         put(sb, sa, 'Mode%s_State%02X' % (m, s), 'C', 'handler of state $%02X of mode $%s (word %d of Mode%s_StateTable)' % (s, m, s, m), 'modes')
 for r in csv.DictReader(open(D + 'layers/sym_names_kitty_hand.csv')): put(int(r['bank'], 16), int(r['addr'], 16), r['name'], r['conf'], r['note'], r['source'])
+import os; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import kitty_data_names
+dst = kitty_data_names.run(names, D, a.rom, a.jp, T, put)        # 5. data names by kind and consumer (tools/kitty_data_names.py)
+print('kitty_names: data layer %s' % dict(dst))
 # checks
 bad = [nm for nm, *_ in names.values() if not re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', nm)]
 dup = [n for n, c in collections.Counter(v[0] for v in names.values()).items() if c > 1]

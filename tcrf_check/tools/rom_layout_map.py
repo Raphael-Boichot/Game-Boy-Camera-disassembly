@@ -152,7 +152,8 @@ def data_kind(name):
         return 'T_UI' if re.search(r'_Gfx(_|$)', name) else ('MAP' if re.search(r'(Tilemap|_Map(_|$))', name) else 'TBL')
     p = prefix(name)
     if p in ('Song', 'Sfx', 'Snd', 'DjSnd'): return 'SOUND'
-    if p in ('OamList', 'OamPtrTbl'): return 'OAM'
+    if p in ('OamList', 'OamPtrTbl', 'ObjScript'): return 'OAM'                          # ObjScript: the Hello Kitty object engine's records
+    if p == 'Frame': return 'T_FRM'                                                     # Frame_BB_AAAA_<context>: Hello Kitty print / camera frame tiles
     if p == 'AlbumB': return 'T_PHO' if re.search(r'_(Tiles|Thumb)$', name) else 'TBL'
     if p == 'StampCat': return 'T_STP' if name.endswith('_Gfx') else 'TBL'
     if p in ('WildFrame', 'Border') or name.startswith('Border'):
