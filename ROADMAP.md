@@ -43,12 +43,12 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | Level | Status | Left to do |
 |---|---|---|
 | L0 | done | - |
-| L1 | done | Every byte is typed; 51,557 bytes (4.9 %) stay of uncertain kind on the layout map (2026-11-12, 204,703 before the data names): the `Src_` blocks copied into WRAM buffers and never seen in VRAM, and the 110 leftovers. Their kinds are an L6 question. |
+| L1 | done | Every byte is typed; 23,319 bytes (2.2 %) stay of uncertain kind on the layout map (2026-11-12: 51,557 before the owner's kinds by eye, 204,703 before the data names; the largest rest is the bottom half of bank `$0D`, 4,576 B): the `Src_` blocks copied into WRAM buffers and never seen in VRAM, and the 110 leftovers. Their kinds are an L6 question. |
 | L2 | done | - (2026-11-12: the 7,607 red bytes classified by their way in, `trace/red_kitty.csv`: GATE 4,310, BEHIND 1,573, TABLE 1,438, FORCED 263, HAND 20, VECTOR 3; I). Optional: hand verdicts (dead / reachable) for the largest gates, the linked exchange first, as the Japanese ones (docs §16.21). |
 | L3 | done | - (2026-11-12: 0 placeholder; every data block named by kind and consumer, `tools/kitty_data_names.py`; 110 leftovers `Leftover_BB_AAAA`, I, owner rule; 40 doubts in `disasm/sym_unconclusive_kitty.md`, 14 of them final). |
 | L4 | not started | 1. The WRAM access and summary tables (`tools/wram_db.py` reads this trace format). 2. RAM names with a scope per row. 3. Constants: modes and states (`disasm/mode_names_kitty.csv` exists), keys, sound ids. 4. The SRAM access table and map (`tools/sram_db.py` reads this trace format; the layout needs real Kitty saves; the Kitt counter and its unlock thresholds belong here). |
 | L5 | not started | A `tools/make_source.py` preset for this ROM; a source tree that builds byte-exact. |
-| L6 | not started | 1. Its character set (kana; the image-effect names drawn as sprite text). 2. The Kitt unlock milestones read in the code. 3. The kinds of the 51,557 uncertain bytes (L1: `Src_` blocks copied into WRAM buffers, the leftovers) and the 27 data names whose context is only the engine that reads them (runs that reach their screens). 4. Owner validation of names. |
+| L6 | not started | 1. Its character set (kana; the image-effect names drawn as sprite text). 2. The Kitt unlock milestones read in the code. 3. The kinds of the 23,319 uncertain bytes (L1: `Src_` blocks copied into WRAM buffers, the leftovers) and the 27 data names whose context is only the engine that reads them (runs that reach their screens). 4. Owner validation of names. |
 
 ## Pocket Camera Prototype (Japan) ("DEBAGAME")
 
@@ -68,7 +68,7 @@ The owner wants Hello Kitty and the prototype taken as far as the Japanese ROM a
 
 | Level | The Japanese ROM has | Hello Kitty lacks | The prototype lacks |
 |---|---|---|---|
-| L1 | 0 bytes of uncertain kind on the layout map | 51,557 uncertain bytes: the `Src_` blocks copied into WRAM buffers (their consumer not seen), the 110 leftovers | 136,182 uncertain bytes: the unidentified buffers (a decision for the owner), the old builds' assets known only by name |
+| L1 | 0 bytes of uncertain kind on the layout map | 23,319 uncertain bytes: the `Src_` blocks copied into WRAM buffers (their consumer not seen), the 110 leftovers | 136,182 uncertain bytes: the unidentified buffers (a decision for the owner), the old builds' assets known only by name |
 | L2 | every never-run byte either run by a forced run (WRAM / SRAM pokes, `force_open.py`) or given a hand verdict (dead / unreachable, purple on the map: docs §16.21, §16.26) | the 7,607 red bytes are classified by their gate (I) but not opened: no forced runs on the gates, no hand verdicts, nothing purple | the 398 red bytes: same; and the BGB runs of the tester (aging error, `4M NG`) are not recorded as coverage |
 | L3 | every name with its tag, the doubts list with verdicts, owner answers | the 40 doubts, settled where a BGB run can | the 45 doubts (the developers' names matched from the older builds), settled in the code or BGB |
 | L4 | `wram/` (access tables per area, summary, `INDEX.md`), `sram/` (access table, map), `pocketcamera_jp_ram.sym`, constants (modes, keys, sounds) applied in the source | all of it (not started) | - (done 2026-11-12) |

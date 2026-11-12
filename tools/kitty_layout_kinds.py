@@ -15,6 +15,8 @@ same evidence, evidence()) are drawn UNCERTAIN by tcrf_check/tools/rom_layout_ma
   2 tiles / map, C: a copy routine called with a constant source copies them to tile memory / to a BG map (assets/copy_sites_kitty.csv)
   3 sound, C: the first instruction that read them is in bank $0F, the sound driver (trace/cov_kitty_runs.npz, reader)
   4 sprite layouts and object scripts, I: the first instruction that read them is the object engine (00:1F00-00:2242)
+  6 owner, I: the kind the owner gives a bank range by eye (assets/layout_kind_owner_kitty.csv, 2026-11-12), for the bytes no rule above
+    types; for the layout map only (the names of tools/kitty_data_names.py keep rules 0-4)
 One row per run of equal kind inside one block: bank, start, end (exclusive), kind (T_UI / MAP / SOUND / OAM), ev, label, basis.
 The rest of each block stays UNCERTAIN. Prints the bytes per kind and per evidence (the Kitty README quotes them).
 """
@@ -74,6 +76,12 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--track', default=os.path.join(KD, 'trace', 'display_kitty.npz'))
     ap.add_argument('--out', default=os.path.join(KD, 'assets', 'layout_kind_overrides_kitty.csv')); ap.add_argument('rom'); a = ap.parse_args()
     KIND, EV, code = evidence(a.rom, a.track)
+    # rule 6, the owner's kinds by eye: for the layout map only (tools/kitty_data_names.py keeps the evidence of rules 0-4 for the names)
+    _ok = ~code                    # runs of $00 / $FF inside these ranges are part of the assets (the owner's reading of the whole range)
+    KK = {'T_UI': 1, 'MAP': 2, 'SOUND': 3, 'OAM': 4, 'T_FRM': 5, 'PALT': 6, 'TBL': 7}
+    for r in csv.DictReader(open(os.path.join(KD, 'assets', 'layout_kind_owner_kitty.csv'), encoding='utf-8')):
+        b = int(r['bank'], 16); o0, o1 = off(b, int(r['start'], 16)), off(b, int(r['end'], 16))
+        m = np.zeros(N, bool); m[o0:o1] = True; m &= _ok & (KIND == 0); KIND[m] = KK[r['kind']]; EV[m] = 6
     names = {}
     for r in csv.DictReader(open(os.path.join(KD, 'disasm', 'sym_names_kitty.csv'))): names[off(int(r['bank'], 16), int(r['addr'], 16))] = r['name']
     lo = sorted(names)
@@ -88,7 +96,8 @@ if __name__ == '__main__':
     KN = {1: 'T_UI', 2: 'MAP', 3: 'SOUND', 4: 'OAM', 5: 'T_FRM', 6: 'PALT', 7: 'TBL'}
     EVT = {1: ('C', 'seen in VRAM %s while the core corpora were replayed (tools/kitty_display_track.py)'), 2: ('C', 'copied to %s by a copy routine with a constant source (assets/copy_sites_kitty.csv)'),
            3: ('C', 'first read by the sound driver (bank $0F) in the core runs'), 4: ('I', 'first read by the object engine (00:1F00-00:2242) in the core runs'),
-           5: ('C', 'role from its loader: print frame (table 01:687D), camera-frame picture (table 07:41CE) or Super Game Boy transfer (bank $08)')}
+           5: ('C', 'role from its loader: print frame (table 01:687D), camera-frame picture (table 07:41CE) or Super Game Boy transfer (bank $08)'),
+           6: ('I', 'owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv')}
     rows = []; tot = collections.Counter()
     nz = np.flatnonzero(KIND)
     if len(nz):
