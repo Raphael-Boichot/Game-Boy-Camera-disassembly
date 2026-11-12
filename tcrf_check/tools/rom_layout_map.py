@@ -168,8 +168,9 @@ def data_kind(name):
         if not m: return 'UNC'                                                           # kind not settled
         if m.group(1) in ('AsmSource', 'SrcListing'): return 'SRC' if LKINDS else 'UNC'
         if m.group(1) == 'PcRam': return 'PCRAM' if LKINDS else 'UNC'
-        if m.group(1) in CODENAMES: return 'LCODE' if LKINDS else 'UNC'                   # a copy of a routine: never run here
-        return data_kind(m.group(1))                                                    # a copy of a named block keeps the block's kind
+        base = re.sub(r'(_Variant(Part[0-9A-F]{4})?|_Part[0-9A-F]{4})$', '', m.group(1))      # a part or a variant of a block keeps the block's kind
+        if base in CODENAMES: return 'LCODE' if LKINDS else 'UNC'                          # a copy of a routine: never run here
+        return data_kind(base)                                                    # a copy of a named block keeps the block's kind
     if p in ('Src', 'Data'): return 'UNC'                                   # Leftover_: bytes nothing reads (owner rule 2026-11-11), kind not settled
     return 'TBL'
 

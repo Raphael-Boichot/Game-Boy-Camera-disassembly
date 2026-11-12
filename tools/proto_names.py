@@ -140,6 +140,89 @@ for ln, b, ad, o0, o1, nm in sorted(_src, reverse=True):
             for k in range(i_, i_ + ln): cov_[k] = 1; idcov_[k] = 1
             ncopy += 1
         i_ = ROMB.find(blob, i_ + 1)
+# 4b-2. partial and misaligned copies, then variants (owner 2026-11-12: "pattern analysis from known assets", only this ROM's assets).
+#     Partial: any run of 32+ bytes of bytes nothing identifies that equals a run of an identified block (any offset in either, so a copy
+#     cut at another address or shifted by some bytes is found): Leftover_BB_AAAA_<block>_PartAAAA (AAAA: the address in the block where
+#     the copied run starts), tag I, the block's type. Variant: a run of 128+ such bytes whose bytes equal those of one identified block at
+#     one fixed shift for 60 % or more (an older or edited version: seeds of 8 equal bytes vote for the shift):
+#     Leftover_BB_AAAA_<block>_Variant[PartAAAA], tag I, the block's type, the share of equal bytes in the note.
+import numpy as _np
+SRCB = {}                                          # flat offset -> index of the identified block that holds it
+for k_, (ln, b, ad, o0, o1, nm) in enumerate(_src):
+    for o in range(o0, o1): SRCB.setdefault(o, k_)
+def _addr(o): return (o >> 14, o if o < 0x4000 else 0x4000 + (o & 0x3FFF))
+def _copyrow(cb, ca, ln, k_, nm2, note2, src):
+    ln_, b, ad, o0, o1, nm = _src[k_]; t_ = TYPEAT.get((b, ad))
+    put(cb, ca, nm2, 'I', note2, src)
+    copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + ln), t_['type'] if t_ else 'data', (t_['width'] if t_ else '') or '',
+                       COPYNOTE + '%s (%02X:%04X)%s' % (nm, b, ad, '' if t_ else ': a copy of code, typed data (this build never runs it)')])
+    f0 = _flat(cb, ca)
+    for k in range(f0, f0 + ln): cov_[k] = 1; idcov_[k] = 1
+W16 = {}
+for o in sorted(SRCB):
+    w = ROMB[o:o + 16]
+    if SRCB.get(o + 15) == SRCB[o] and len(set(w)) >= 3:
+        l_ = W16.setdefault(w, [])
+        if len(l_) < 4: l_.append(o)
+npart = 0; i_ = 0; NR = len(ROMB)
+while i_ < NR - 16:
+    if idcov_[i_] or ROMB[i_:i_ + 16] not in W16: i_ += 1; continue
+    best = None
+    for s_ in W16[ROMB[i_:i_ + 16]]:
+        k_ = SRCB[s_]; o0, o1 = _src[k_][3], _src[k_][4]
+        if o0 <= i_ < o1: continue
+        lo = 0
+        while i_ - lo - 1 >= 0 and s_ - lo - 1 >= o0 and ROMB[i_ - lo - 1] == ROMB[s_ - lo - 1] and not idcov_[i_ - lo - 1] and ((i_ - lo - 1) >> 14) == (i_ >> 14): lo += 1
+        hi = 16
+        while i_ + hi < NR and s_ + hi < o1 and ROMB[i_ + hi] == ROMB[s_ + hi] and not idcov_[i_ + hi] and ((i_ + hi) >> 14) == (i_ >> 14): hi += 1
+        if not best or lo + hi > best[0]: best = (lo + hi, i_ - lo, s_ - lo, k_)
+    if best and best[0] >= 32:
+        ln, d_, s_, k_ = best; cb, ca = _addr(d_); nm = _src[k_][5]; sb, sa = _addr(s_)
+        whole = s_ == _src[k_][3] and ln == _src[k_][4] - _src[k_][3]
+        nm2 = 'Leftover_%02X_%04X_%s' % (cb, ca, nm) + ('' if whole else '_Part%04X' % sa)
+        _copyrow(cb, ca, ln, k_, nm2, 'leftover: an exact copy of %d bytes of %s (from %02X:%04X%s) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)' % (
+            ln, nm, sb, sa, '' if whole else ', a part of the block'), 'copy')
+        npart += 1; i_ = d_ + ln
+    else: i_ += 1
+W8 = {}
+for o in sorted(SRCB):
+    w = ROMB[o:o + 8]
+    if SRCB.get(o + 7) == SRCB[o] and len(set(w)) >= 3:
+        l_ = W8.setdefault(w, [])
+        if len(l_) < 4: l_.append(o)
+nvar = 0
+runs_ = []; i_ = 0
+while i_ < NR:                                     # runs of bytes nothing identifies (padding runs included: a picture has white rows)
+    if idcov_[i_]: i_ += 1; continue
+    j_ = i_
+    while j_ < NR and not idcov_[j_] and (j_ >> 14) == (i_ >> 14): j_ += 1
+    if j_ - i_ >= 128: runs_.append((i_, j_))
+    i_ = j_
+Ra_ = _np.frombuffer(ROMB, _np.uint8)
+for r0, r1 in runs_:
+    todo = [(r0, r1)]
+    for _it in range(4):
+        nxt = []
+        for t0, t1 in todo:
+            if t1 - t0 < 128: continue
+            votes = collections.Counter()
+            for o in range(t0, t1 - 8):
+                for s_ in W8.get(ROMB[o:o + 8], ()): votes[(s_ - o, SRCB[s_])] += 1
+            if not votes: continue
+            (dl, k_), v = votes.most_common(1)[0]
+            if v < 3: continue
+            o0, o1 = _src[k_][3], _src[k_][4]
+            a0, a1 = max(t0, o0 - dl), min(t1, o1 - dl)
+            if a1 - a0 < 128 or (a0 < o1 and a1 > o0): continue            # too short, or overlapping its own source
+            ratio = float((Ra_[a0:a1] == Ra_[a0 + dl:a1 + dl]).mean())
+            if ratio < 0.6 or len(set(ROMB[a0:a1])) < 3: continue
+            cb, ca = _addr(a0); sb, sa = _addr(a0 + dl); nm = _src[k_][5]
+            whole = a0 + dl == o0
+            _copyrow(cb, ca, a1 - a0, k_, 'Leftover_%02X_%04X_%s_Variant%s' % (cb, ca, nm, '' if whole else 'Part%04X' % sa),
+                     'leftover: a variant of %d bytes of %s (from %02X:%04X): %.0f %% of the bytes equal at that shift, an older or edited version; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)' % (
+                         a1 - a0, nm, sb, sa, 100 * ratio), 'variant')
+            nvar += 1; nxt += [(t0, a0), (a1, t1)]
+        todo = nxt
 with open(a.types, 'w', newline='') as f:     # the type table with the copies' rows (rerunning this script gives the same file)
     w_ = csv.writer(f, lineterminator='\n'); w_.writerow(['bank', 'start', 'end', 'type', 'width', 'note'])
     for r in TYPES: w_.writerow([r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']])
@@ -245,15 +328,15 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-FINAL = ('gap', 'copy', 'text', 'ram')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+FINAL = ('gap', 'copy', 'variant', 'text', 'ram')      # the leftovers: their I tag is final (owner rule 2026-11-11)
 doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] not in FINAL)
 settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FINAL)
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
         w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
-                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block, in bytes no type row, traced instruction or reader covers',
+                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers',
                      'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers'}[src]])
 with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])
