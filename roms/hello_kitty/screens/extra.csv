@@ -1,5 +1,5 @@
 mode,state,picture,how,parent,key,note
-05,06,extra_05_06.png,forced (I): ModeTable slot $01 patched to mode $05,,,
+05,06,extra_05_06.png,"album stamp icon (the second icon of the binder), A: the stamp screen over the photo (owner, 2026-11-12)",03:02,Down A (stamp icon),
 06,1F,extra_06_1F.png,printing a photo with the printer helper on the link,02:06,START (printer on the link),
 06,21,extra_06_21.png,printing a photo with the printer helper on the link,06:1F,wait,
 06,24,extra_06_24.png,"printing with the printer kept busy (PRN_POLLS), A starts the game",06:21,A (printer kept busy),
@@ -29,3 +29,4 @@ mode,state,picture,how,parent,key,note
 02,01-S1,extra_02_01_show1.png,"A on the ? lens: a Hello Kitty slide show in the live view frame (still mode $02 state $01; owner, 2026-11-12)",02:01-L,A (? lens),
 02,01-S2,extra_02_01_show2.png,the slide show a few seconds later,,,
 02,01-S3,extra_02_01_show3.png,the slide show later still,,,
+05,06-W,extra_05_06_w.png,"START: the stamp window, 8 pages (Right Right to the tabs, Up / Down); screens/stamps_kitty.png",05:06,START,

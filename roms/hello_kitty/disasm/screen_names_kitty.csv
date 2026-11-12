@@ -7,7 +7,7 @@ mode,state,name,tag,evidence
 02,06,Take photos: photo taken (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
 03,02,View photos: album,C,BGB screenshot (binder page with the side tools; reached by みる)
 04,01,Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel,C,BGB screenshot (スクラッチカード 15パズル スライドショー いちごチャンネル)
-05,06,Stamp window (stamps on a photo),I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+05,06,Stamps: the stamp screen over the photo,C,"BGB screenshot (album, stamp icon, A; START opens the stamp window)"
 06,03,Printing: choose the print frame (Left / Right),C,BGB screenshot (the photo in one of six print frames; reached from the print icon of the album)
 06,0A,Printing: START photo and album page / A photo / B cancel,C,BGB screenshot (START プリント A プリント B やめる)
 06,1F,Printing: please wait (A spin / B cancel),C,BGB screenshot with the printer helper (まってね; A くるくる B やめる)
@@ -65,3 +65,4 @@ mode,state,name,tag,evidence
 02,01-S1,Take photos: the "?" lens slide show,C,BGB screenshot (A on the ? lens; pictures change every few seconds)
 02,01-S2,Take photos: slide show (later),C,BGB screenshot
 02,01-S3,Take photos: slide show (later),C,BGB screenshot
+05,06-W,Stamps: the stamp window (8 pages),C,"BGB screenshot (START on the stamp screen; Right Right reach the page tabs; screens/stamps_kitty.png shows every page)"
