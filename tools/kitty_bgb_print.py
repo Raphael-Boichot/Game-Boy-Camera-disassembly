@@ -8,7 +8,7 @@ frames (or the --play pattern of held keys, repeated, to play the game shown whi
 on 127.0.0.1:8793; BGB writes the screen and state at the end, the helper the printed pages. Default path: take a photo
 (title A, Take A, shutter A) and print it (START on the photo-taken screen). Writes OUT_DIR/print_NNNNN.png (screen after N
 frames), modes.csv (frames, mode, state) and OUT_DIR/run_NNNNN/ (the helper's printer_log.json and page_NN.png).
-With BGB_WP set (a BGB -wp list, as tcrf_check/tools/bgb_run.py takes it) the run logs the watchpoint hits into run_NNNNN/debugmsg.txt.
+BGB_HF: the headless flag (default -hf; -headless when -hf hangs at the link handshake, as in the sandbox of 2026-11-12). With BGB_WP set (a BGB -wp list, as tcrf_check/tools/bgb_run.py takes it) the run logs the watchpoint hits into run_NNNNN/debugmsg.txt.
 """
 import sys, os, csv, argparse, subprocess, shutil, time
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
@@ -34,7 +34,7 @@ for n in [int(x) for x in a.frames.split(',')]:
     d = os.path.join(a.out, 'run_%05d' % n); os.makedirs(d, exist_ok=True)
     open(d + '/s.dem', 'wb').write(pre + tail + bytes(1)); shutil.copy(a.save, d + '/s.sav')
     srv = PrinterServer(a.port, d).start(); time.sleep(1)
-    subprocess.run(['xvfb-run', '-a', 'wine', bgb + '/bgb.exe', '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', bgb + '/bgb.ini', '-rom', os.path.abspath(a.rom),
+    subprocess.run(['xvfb-run', '-a', 'wine', bgb + '/bgb.exe', os.environ.get('BGB_HF', '-hf'), '-nowarn', '-nowriteini', '-nobattsave', '-ini', bgb + '/bgb.ini', '-rom', os.path.abspath(a.rom),
                     '-demoplay', d + '/s.dem', '-screenonexit', d + '/s.bmp', '-stateonexit', d + '/s.sna', '-loadbatt', d + '/s.sav',
                     '-connect', '127.0.0.1:%d' % a.port] + (['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1'] if os.environ.get('BGB_WP') else []), env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
     srv.stop()

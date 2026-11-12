@@ -47,7 +47,7 @@ mode,state,name,tag,evidence
 11,0C,Strawberry Channel: picture paused (Print / Keep / Cancel),C,BGB screenshot (START プリント A きろく B やめる)
 12,01,"Slide show settings (start, speed, order)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 12,04,Slide show playing,C,BGB screenshot (the stored photos one after another; BGB's test picture)
-14,01,Print error (#01 to #04),C,BGB screenshots with the printer helper: #02 no answer or bit 4; #01 bit 7; #03 bit 5; #04 bit 6 (screens/print_errors.png)
+14,01,"Print error: #01-#04, picture 1 of 4",C,"BGB screenshots (also START or A in the album print, mode $06 state $0A, with no printer) with the printer helper: #02 no answer or bit 4; #01 bit 7; #03 bit 5; #04 bit 6 (screens/print_errors.png); the picture is one of four, drawn at random by Mode14_State00 (Rng_Next & 3, table 06:4464: 3E:5C00 / 3E:6A00 / 3F:4000 / 3D:6A00); the message slides from right to left under it"
 17,01,Print error,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 18,01,Pompompurin picture,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 19,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
@@ -55,3 +55,8 @@ mode,state,name,tag,evidence
 1B,01,Printing: catch-the-apples game while the printer works,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1C,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1E,00,Screen fade between modes,C,BGB screenshot (screen fading out)
+06,04,Printing: the album page print (Up / Down scroll it),C,BGB screenshot (Up / Down on the print frame: mode $06 state $02 then $04; Left / Right back to the frame)
+06,0F,Printing: print intensity while START is held (うすい / こい),C,BGB screenshot (START held on the print frame; Up / Down move the squirrel on the scale)
+14,01-2,"Print error: picture 2 of 4",C,BGB screenshot (printing with no printer on the link; record 1 of 06:4464)
+14,01-3,"Print error: picture 3 of 4",C,BGB screenshot (record 2 of 06:4464)
+14,01-4,"Print error: picture 4 of 4",C,BGB screenshot (record 3 of 06:4464)
