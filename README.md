@@ -119,6 +119,8 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets*: the TCRF unused graphics (fourteen pictures, the editor UI, the NEO logo with its tile map, the arrow cursor) are located byte-exact and named `Unused_TCRF_*` (2026-11-11): [`assets/never_reached_proto.csv`](roms/prototype_debagame/assets/never_reached_proto.csv); every text in clear (source, listings, PC memory strings) in [`assets/text_sections_proto.csv`](roms/prototype_debagame/assets/text_sections_proto.csv).
 
+*Unused bytes, two categories* (2026-11-12): every layout map outlines, inside the tiles, the unused blocks **documented by TCRF** (orange) and those **not documented by TCRF** (cyan), from `roms/<folder>/assets/unused_<tag>.csv` (`tools/unused_table.py`). TCRF is credited only for what its pages show; the repository keeps no TCRF content, only links ([`tcrf_check/TCRF_SOURCES.md`](tcrf_check/TCRF_SOURCES.md)).
+
 The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds, and every reachability map but the Japanese one by `python3 tools/reach_map.py --tag TAG ROM`: rerun them after any work on these ROMs.
 
 ## ROMs

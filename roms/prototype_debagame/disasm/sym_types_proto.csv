@@ -221,6 +221,10 @@ bank,start,end,type,width,note
 02,7581,7D81,data,16,TCRF unused asset (tiles): see its name
 38,5001,5601,data,16,TCRF unused asset (tiles): see its name
 38,5801,5A41,data,32,TCRF unused asset (tile map): see its name
+02,6581,6D81,data,16,"PROGRAM of the old symbol tables: 128 tiles (2,048 B), the first 4 drawn (an outline), 124 blank; nothing in this build reads them (owner 2026-11-12: unused tiles)"
+23,60E1,62E1,data,16,"tile rows 0-1 (the top of the head) of face photo 6, whose rows 2-13 are at 30:4201 (bank $30 has source text over its rows 0-1); the rows that follow here, 23:62E1-63E0, equal 30:4201-42FF byte for byte"
+1D,4001,4201,data,16,"an edited version of face photo 8 (05:4E01), tile rows 2-3: 75 % of the non-blank bytes equal at that place"
+1C,4001,4201,data,16,two tile rows of a head (hair against a textured background) that no picture of this ROM holds
 2F,5A41,7241,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 2E,4401,5801,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
 39,4401,5801,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
@@ -240,6 +244,8 @@ bank,start,end,type,width,note
 38,5C81,6A81,data,16,leftover copy of Unused_TCRF_FacePhoto5_SIMO_Gfx (01:5C81)
 2E,7581,7D81,data,16,leftover copy of Unused_TCRF_EditorUI_Gfx (02:7581)
 39,7581,7D81,data,16,leftover copy of Unused_TCRF_EditorUI_Gfx (02:7581)
+2E,6581,6D81,data,16,leftover copy of Unused_PROGRAM_Gfx (02:6581)
+39,6581,6D81,data,16,leftover copy of Unused_PROGRAM_Gfx (02:6581)
 21,66F5,69D5,data,16,leftover copy of Gfx_02_4001_FNTOOE2 (02:4001)
 23,5795,59D5,data,32,leftover copy of Map_03_7241_BG_CONF (03:7241)
 2F,7241,7481,data,32,leftover copy of Map_03_7241_BG_CONF (03:7241)
@@ -287,8 +293,6 @@ bank,start,end,type,width,note
 18,405D,4101,data,16,leftover copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx (06:6A01)
 18,4104,4200,data,16,leftover copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx (06:6A01)
 19,4104,4200,data,16,leftover copy of Unused_TCRF_FaceDrawing2_FACE6_Gfx (06:4E01)
-1C,41FE,4256,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
-1D,4044,407B,data,16,leftover copy of Unused_TCRF_FacePhoto8_HOI_D_Gfx (05:4E01)
 1D,51D2,5202,data,,"leftover copy of ImageCopy_Mode13 (00:295A): a copy of code, typed data (this build never runs it)"
 1D,5202,5232,data,,"leftover copy of ImageCopy_Mode13 (00:295A): a copy of code, typed data (this build never runs it)"
 1D,5232,5262,data,,"leftover copy of ImageCopy_Mode13 (00:295A): a copy of code, typed data (this build never runs it)"
@@ -360,6 +364,7 @@ bank,start,end,type,width,note
 21,7EF5,7F19,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
 21,7F1F,7FFF,data,32,leftover copy of Map_02_5801_BG_BANK (02:5801)
 22,4200,43A5,data,32,leftover copy of Map_02_5A41_BGSRAM1 (02:5A41)
+22,4CC3,50BD,data,16,leftover copy of Unused_PROGRAM_Gfx (02:6581)
 22,54CF,55CF,data,16,leftover copy of Gfx_03_4001_FNTOOE3 (03:4001)
 22,55CF,55EF,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
 22,55FE,56E1,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
@@ -382,8 +387,7 @@ bank,start,end,type,width,note
 23,4F6B,5365,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 23,536B,5765,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 23,576A,5791,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
-23,62AF,6307,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
-23,6307,64DB,data,16,leftover copy of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (30:4201)
+23,62E1,64DB,data,16,leftover copy of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (30:4201)
 23,64E1,68DB,data,16,leftover copy of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (30:4201)
 23,68E1,6CDB,data,16,leftover copy of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (30:4201)
 23,6CE1,6EF3,data,16,leftover copy of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (30:4201)
@@ -514,6 +518,31 @@ bank,start,end,type,width,note
 3A,6943,7241,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 1D,46A4,4737,data,,"leftover copy of PIC_SAVE (00:1BCA): a copy of code, typed data (this build never runs it)"
 1E,5251,53FB,data,,leftover copy of OldSymbolTable_2A_4B7F (2A:4B7F)
+02,6EA1,6EB0,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+02,6F93,70F1,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+0E,4101,4158,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+1D,6B6B,6B73,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+1D,6F6D,6F75,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+1D,736F,7377,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+1D,7771,7779,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+1D,7B73,7B7B,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+1E,4833,483B,data,16,leftover copy of Unused_TCRF_FacePhoto5_SIMO_Gfx (01:5C81)
+1E,4C35,4C3D,data,16,leftover copy of Unused_TCRF_FacePhoto5_SIMO_Gfx (01:5C81)
+1E,5037,503F,data,16,leftover copy of Unused_TCRF_FacePhoto5_SIMO_Gfx (01:5C81)
+22,55EF,55FE,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+22,56E1,58C3,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+22,6CF5,70A5,data,16,leftover copy of Gfx_03_4001_FNTOOE3 (03:4001)
+22,70F7,74A5,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
+22,74F7,78A5,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
+23,4367,4715,data,16,leftover copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx (05:5C01)
+29,7A76,7C25,data,16,leftover copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx (06:6A01)
+2E,6EA1,6EB0,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+2E,6F93,70F1,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+38,5C26,5C2F,data,32,leftover copy of Map_01_5A41_MENU1 (01:5A41)
+39,6EA1,6EB0,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+39,6F93,70F1,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+3A,6705,6741,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
+3A,6801,683D,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 1D,442A,448A,data,,older build: MK_PROTECT (code never run here; tools/proto_oldbuilds.py)
 1D,448A,44FA,data,,older build: PROTECT_TEST (code never run here; tools/proto_oldbuilds.py)
 1D,44FA,4534,data,,older build: PROT_TEST (code never run here; tools/proto_oldbuilds.py)

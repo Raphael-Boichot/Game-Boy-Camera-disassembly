@@ -50,27 +50,30 @@ Leftover_1E_4431::
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1E_4439_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part5C81::
     INCBIN "data/bank_1e/Leftover_1E_4439_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part5C81.bin" ; $4439, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1E_4833::
+; I: leftover: 8 bytes between two pieces of a copy of Unused_TCRF_FacePhoto5_SIMO_Gfx at the same shift, where this
+; copy differs from the block (01:607B; 0 % of the bytes equal): an edited version; nothing in this build reads, runs
+; or explains it (never read nor run in the L2 runs)
+Leftover_1E_4833_Unused_TCRF_FacePhoto5_SIMO_Gfx_VariantPart607B::
     db $95, $a0, $ff, $03, $d0, $06, $7b, $60
 
 ; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto5_SIMO_Gfx (from 01:607B, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1E_483B_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part607B::
     INCBIN "data/bank_1e/Leftover_1E_483B_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part607B.bin" ; $483B, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1E_4C35::
+; I: leftover: 8 bytes between two pieces of a copy of Unused_TCRF_FacePhoto5_SIMO_Gfx at the same shift, where this
+; copy differs from the block (01:6475; 0 % of the bytes equal): an edited version; nothing in this build reads, runs
+; or explains it (never read nor run in the L2 runs)
+Leftover_1E_4C35_Unused_TCRF_FacePhoto5_SIMO_Gfx_VariantPart6475::
     db $a8, $a0, $ff, $03, $d0, $06, $75, $64
 
 ; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto5_SIMO_Gfx (from 01:6475, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1E_4C3D_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part6475::
     INCBIN "data/bank_1e/Leftover_1E_4C3D_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part6475.bin" ; $4C3D, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1E_5037::
+; I: leftover: 8 bytes between two pieces of a copy of Unused_TCRF_FacePhoto5_SIMO_Gfx at the same shift, where this
+; copy differs from the block (01:686F; 0 % of the bytes equal): an edited version; nothing in this build reads, runs
+; or explains it (never read nor run in the L2 runs)
+Leftover_1E_5037_Unused_TCRF_FacePhoto5_SIMO_Gfx_VariantPart686F::
     db $62, $a0, $17, $02, $d0, $06, $6f, $68
 
 ; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto5_SIMO_Gfx (from 01:686F, a part of the block) that

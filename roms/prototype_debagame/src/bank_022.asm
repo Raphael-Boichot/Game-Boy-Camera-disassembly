@@ -63,18 +63,18 @@ Leftover_22_4A77::
 ; explains (never read nor run in the L2 runs)
 Leftover_22_4A7D_Map_02_6341_BGPROTEC::
     INCBIN "data/bank_22/Leftover_22_4A7D_Map_02_6341_BGPROTEC.bin" ; $4A7D, 576 bytes
-; I: leftover: 67 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_22_4CBD::
-    db $01, $02, $81, $65, $fa, $03, $00, $00, $00, $00, $07, $00, $0f, $07, $18, $08
-    db $30, $10, $30, $10, $30, $10, $30, $10, $30, $10, $30, $10, $30, $10, $18, $08
-    db $0f, $07, $07, $00, $00, $00, $00, $00, $00, $00, $e0, $00, $f0, $e0, $18, $10
-    db $0c, $08, $0c, $08, $0c, $08, $0c, $08, $0c, $08, $0c, $08, $0c, $08, $18, $10
-    db $f0, $e0, $e0
+    db $01, $02, $81, $65, $fa, $03
 
-    ; padding
-    ds $3bd, $00
-
+; I: leftover: an exact copy of 1018 bytes of Unused_PROGRAM_Gfx (from 02:6581, a part of the block) that nothing in
+; this build reads, runs or explains (never read nor run in the L2 runs)
+Leftover_22_4CC3_Unused_PROGRAM_Gfx_Part6581::
+    INCBIN "data/bank_22/Leftover_22_4CC3_Unused_PROGRAM_Gfx_Part6581.bin" ; $4CC3, 1018 bytes
+; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs)
+Leftover_22_50BD::
     db $01, $02, $7b, $69, $fa, $03
 
     ; padding
@@ -93,9 +93,10 @@ Leftover_22_55CF_Gfx_01_4001_FNTOOE1_Part4901::
     db $00, $00, $44, $66, $44, $66, $44, $66, $47, $65, $39, $2d, $39, $29, $10, $18
     db $00, $00, $00, $00, $00, $00, $ce, $eb, $3c, $ae, $e8, $fc, $08, $8c, $c8, $ec
 
-; I: leftover: 15 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_22_55EF::
+; I: leftover: 15 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:4921; 33 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_22_55EF_Gfx_01_4001_FNTOOE1_VariantPart4921::
     db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $38, $ef, $28, $ff
 
 ; I: leftover: an exact copy of 227 bytes of Gfx_01_4001_FNTOOE1 (from 01:4930, a part of the block) that nothing in
@@ -117,37 +118,11 @@ Leftover_22_55FE_Gfx_01_4001_FNTOOE1_Part4930::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00
 
-; I: leftover: 350 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_22_56E1::
-    db $20, $30, $30, $38, $38, $3c, $3c, $3e, $38, $3c, $30, $38, $20, $30, $33, $00
-    db $33, $00, $cc, $00, $cc, $00, $33, $03, $34, $04, $c9, $08, $cb, $09, $33, $00
-    db $33, $00, $cc, $00, $cc, $00, $ff, $ff, $00, $00, $00, $ff, $ff, $ff, $33, $00
-    db $33, $00, $cc, $00, $cc, $00, $f3, $c0, $33, $60, $5c, $30, $9c, $30, $39, $0b
-    db $39, $0b, $c9, $0b, $c9, $0b, $39, $0b, $39, $0b, $c9, $0b, $c9, $0b, $93, $b0
-    db $93, $b0, $9c, $b0, $9c, $b0, $93, $b0, $93, $b0, $9c, $b0, $9c, $b0, $3b, $09
-    db $39, $08, $cc, $04, $cf, $03, $33, $00, $33, $00, $cc, $00, $cc, $00, $ff, $ff
-    db $00, $ff, $00, $00, $ff, $ff, $33, $00, $33, $00, $cc, $00, $cc, $00, $93, $30
-    db $53, $30, $ac, $60, $cc, $c0, $33, $00, $33, $00, $cc, $00, $cc, $00, $33, $00
-    db $33, $00, $cc, $00, $cc, $00, $33, $00, $33, $00, $cc, $00, $cc, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $20, $30, $20, $30, $40, $60, $ff, $00
-    db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
-    db $ff, $00, $ff, $ee, $bb, $aa, $bb, $ba, $d7, $d6, $ef, $6c, $ff, $38, $00, $00
-    db $04, $0c, $0c, $1c, $1c, $3c, $3c, $7c, $1c, $3c, $0c, $1c, $04, $0c, $00, $00
-    db $20, $30, $30, $38, $38, $3c, $3c, $3e, $38, $3c, $30, $38, $20, $30, $ff, $01
-    db $ff, $ff, $86, $86, $ab, $ab, $ab, $ab, $aa, $aa, $ff, $ff, $ff, $00, $ff, $e0
-    db $3f, $20, $ff, $e0, $7f, $60, $bf, $a0, $7f, $60, $ff, $c0, $ff, $00, $ff, $03
-    db $fe, $7e, $d5, $55, $d6, $56, $d7, $57, $c4, $c4, $bf, $bf, $ff, $e0, $ff, $c0
-    db $7f, $40, $ff, $c0, $ff, $c0, $7f, $40, $ff, $c0, $ff, $80, $ff, $00, $33, $00
-    db $3f, $3c, $e6, $66, $da, $5a, $5b, $5a, $5b, $5a, $e6, $66, $fc, $3c, $33, $00
-    db $3f, $1c, $f4, $34, $e4, $24, $37, $34, $37, $14, $d4, $14, $dc, $1c, $33, $00
-    db $3f, $3c, $e6, $66, $da, $5a, $77, $76, $6f, $6e, $c2, $42, $fe, $7e
-
-    ; padding
-    ds $7e, $00
-
-    db $01, $02, $6f, $71, $fa, $03
-
+; I: leftover: 482 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy
+; differs from the block (01:4A13; 52 % of the bytes equal): an edited version; nothing in this build reads, runs or
+; explains it (never read nor run in the L2 runs)
+Leftover_22_56E1_Gfx_01_4001_FNTOOE1_VariantPart4A13::
+    INCBIN "data/bank_22/Leftover_22_56E1_Gfx_01_4001_FNTOOE1_VariantPart4A13.bin" ; $56E1, 482 bytes
 ; I: leftover: an exact copy of 1018 bytes of Gfx_01_4001_FNTOOE1 (from 01:4BEF, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_22_58C3_Gfx_01_4001_FNTOOE1_Part4BEF::
@@ -204,14 +179,11 @@ Leftover_22_68F5::
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_22_68FB_Gfx_03_4001_FNTOOE3_Part43FB::
     INCBIN "data/bank_22/Leftover_22_68FB_Gfx_03_4001_FNTOOE3_Part43FB.bin" ; $68FB, 1018 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_22_6CF5::
-    db $01, $03, $f5, $47, $fa, $03
-
-    ; padding
-    ds $3aa, $00
-
+; I: leftover: 944 bytes between two pieces of a copy of Gfx_03_4001_FNTOOE3 at the same shift, where this copy
+; differs from the block (03:47F5; 99 % of the bytes equal): an edited version; nothing in this build reads, runs or
+; explains it (never read nor run in the L2 runs)
+Leftover_22_6CF5_Gfx_03_4001_FNTOOE3_VariantPart47F5::
+    INCBIN "data/bank_22/Leftover_22_6CF5_Gfx_03_4001_FNTOOE3_VariantPart47F5.bin" ; $6CF5, 944 bytes
 ; I: leftover: an exact copy of 82 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:60E1, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_22_70A5_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
@@ -222,14 +194,11 @@ Leftover_22_70A5_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $01, $03
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_22_70F7::
-    db $ef, $4b, $fa, $03
-
-    ; padding
-    ds $3aa, $00
-
+; I: leftover: 942 bytes between two pieces of a copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx at the same shift, where
+; this copy differs from the block (05:6133; 45 % of the bytes equal): an edited version; nothing in this build reads,
+; runs or explains it (never read nor run in the L2 runs)
+Leftover_22_70F7_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133::
+    INCBIN "data/bank_22/Leftover_22_70F7_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133.bin" ; $70F7, 942 bytes
 ; I: leftover: an exact copy of 82 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:60E1, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_22_74A5_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
@@ -240,14 +209,11 @@ Leftover_22_74A5_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $01, $03
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_22_74F7::
-    db $e9, $4f, $fa, $03
-
-    ; padding
-    ds $3aa, $00
-
+; I: leftover: 942 bytes between two pieces of a copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx at the same shift, where
+; this copy differs from the block (05:6133; 45 % of the bytes equal): an edited version; nothing in this build reads,
+; runs or explains it (never read nor run in the L2 runs)
+Leftover_22_74F7_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133::
+    INCBIN "data/bank_22/Leftover_22_74F7_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133.bin" ; $74F7, 942 bytes
 ; I: leftover: an exact copy of 82 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:60E1, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_22_78A5_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::

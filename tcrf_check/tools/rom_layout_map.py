@@ -43,6 +43,15 @@ UNCLAIMED = '--unclaimed' in a
 if UNCLAIMED: a.remove('--unclaimed')
 OUTLINE = opt('--outline', 'diff' if DIFF else 'reach'); NOTE1 = opt('--note1', None); NOTE2 = opt('--note2', None)
 NAMES = [x for x in NAMES if x != 'none']; TYPES = [x for x in TYPES if x != 'none']
+# the unused bytes in two categories (owner 2026-11-12; tools/unused_table.py): documented by TCRF or not, outlined inside the tiles
+UCATS = opt('--unused-cats', 'auto')
+if UCATS == 'auto':
+    UCATS = 'none'
+    for _n in NAMES:
+        _m = re.search(r'sym_names_(\w+?)\.csv$', _n)
+        if _m:
+            _c = os.path.join(os.path.dirname(os.path.dirname(_n)), 'assets', 'unused_%s.csv' % _m.group(1))
+            if os.path.exists(_c): UCATS = _c; break
 if MAP == 'none':
     import tempfile
     MAP = os.path.join(tempfile.mkdtemp(prefix='layout_'), 'rom_map.csv')
@@ -168,6 +177,7 @@ def data_kind(name):
         if not m: return 'UNC'                                                           # kind not settled
         if m.group(1) in ('AsmSource', 'SrcListing'): return 'SRC' if LKINDS else 'UNC'
         if m.group(1) == 'PcRam': return 'PCRAM' if LKINDS else 'UNC'
+        if m.group(1) == 'Tiles': return 'T_UI'                                           # Leftover_BB_AAAA_Tiles: 2bpp tiles of no known block (owner 2026-11-12)
         base = re.sub(r'(_Variant(Part[0-9A-F]{4})?|_Part[0-9A-F]{4})$', '', m.group(1))      # a part or a variant of a block keeps the block's kind
         if base in CODENAMES: return 'LCODE' if LKINDS else 'UNC'                          # a copy of a routine: never run here
         return data_kind(base)                                                    # a copy of a named block keeps the block's kind
@@ -278,6 +288,13 @@ FAM[KEY['FILL']] = [(250, 246, 236), (240, 230, 210), (226, 210, 180), (196, 176
 BG, INK = 4 * len(CATS), 4 * len(CATS) + 1
 pal = [c for f in FAM for c in f] + [(255, 255, 255), (0, 0, 0), (214, 20, 40), (0, 70, 220), (110, 110, 110), (205, 0, 160)]
 RED, BLUE, GREYI, CROSS = INK + 1, INK + 2, INK + 3, INK + 4
+pal += [(255, 120, 0), (0, 180, 215)]; UTC, UNT = INK + 5, INK + 6           # unused: documented by TCRF (orange), not documented by TCRF (cyan)
+ust = np.zeros(N, np.uint8); ucount = [0, 0, 0]
+if UCATS != 'none' and os.path.exists(UCATS):
+    for r in csv.DictReader(open(UCATS, encoding='utf-8')):
+        o0 = flat(int(r['bank'], 16), int(r['addr'], 16)); v_ = 1 if r['category'] == 'tcrf' else 2
+        seg = ust[o0:o0 + int(r['bytes'])]; seg[seg == 0] = v_
+    ucount = [0] + [int((ust == v_).sum()) for v_ in (1, 2)]
 # a tile row is two bytes: the kind of the pair is the one with the lower rank (UNCERTAIN first, then code, then data, padding last)
 RANKK = np.zeros(len(CATS), np.int32); order = [KEY['UNC']] + list(range(11)) + list(range(11, len(CATS) - 1)) + [KEY['PAD']]
 order = [k for i, k in enumerate(order) if k not in order[:i]]
@@ -325,6 +342,10 @@ MTXT = {'reach': {0: 'never-run code, proven dead (evidence I; docs §16.15, 16.
 for m, col in ((0, INK), (1, RED), (2, BLUE)):
     if m in MTXT: LG.append(('mark', col, fmt(mk_tot[m]) + ' B', MTXT[m]))
 LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
+if UCATS != 'none':
+    LG.append(('head', 'INNER OUTLINE: unused bytes, in two categories (%s, tools/unused_table.py)' % os.path.relpath(UCATS, REPO)))
+    LG.append(('imark', UTC, fmt(ucount[1]) + ' B', 'unused, documented by TCRF (the TCRF page and section of each block are in the table; tcrf_check/tcrf_documented.csv)'))
+    LG.append(('imark', UNT, fmt(ucount[2]) + ' B', 'unused, not documented by TCRF (found by this project: Unused_* and Leftover_* names%s)' % (', and the really unused assets of docs 16.24' if 'jp_rev_a' in UCATS else '')))
 if OUTLINE == 'none':
     notes = ['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.', 'Per bank, under its number: the two largest kinds (padding excluded).']
 elif not DIFF:
@@ -389,6 +410,19 @@ for b in range(banks):
     for ty, tx in zip(*np.nonzero(padtile[b])):
         x0 = gx + int(tx) * T; y0 = gy + int(ty) * T
         d.line([x0 + 1, y0 + 1, x0 + T - 2, y0 + T - 2], fill=CROSS, width=1); d.line([x0 + T - 2, y0 + 1, x0 + 1, y0 + T - 2], fill=CROSS, width=1)
+if ucount[1] or ucount[2]:       # inner outline of the unused tiles: TCRF wins over not-TCRF inside a tile; drawn 3 px inside the tile edge
+    _ut = ust.reshape(banks, BTH, BTW, 16); UT = np.where((_ut == 1).any(3), 1, np.where((_ut == 2).any(3), 2, 0))
+    for b in range(banks):
+        gx = LEFT + (b % BCOLS) * (PW + GX); gy = ROWY[b // BCOLS] + GYR[b // BCOLS]; M = UT[b]
+        for ty, tx in zip(*np.nonzero(M)):
+            c_ = M[ty, tx]; col = UTC if c_ == 1 else UNT; x0 = gx + int(tx) * T; y0 = gy + int(ty) * T
+            for dx, dy, edge in ((-1, 0, 'L'), (1, 0, 'R'), (0, -1, 'T'), (0, 1, 'B')):
+                nx, ny = tx + dx, ty + dy
+                if 0 <= nx < BTW and 0 <= ny < BTH and M[ny, nx] == c_: continue
+                if edge == 'L': d.line([x0 + 3, y0, x0 + 3, y0 + T - 1], fill=col, width=2)
+                if edge == 'R': d.line([x0 + T - 4, y0, x0 + T - 4, y0 + T - 1], fill=col, width=2)
+                if edge == 'T': d.line([x0, y0 + 3, x0 + T - 1, y0 + 3], fill=col, width=2)
+                if edge == 'B': d.line([x0, y0 + T - 4, x0 + T - 1, y0 + T - 4], fill=col, width=2)
 # ---- text
 yy = 18
 for l in title_lines: d.text((LEFT, yy), l, fill=INK, font=F1); yy += 58
@@ -405,6 +439,8 @@ for e, y0, lines in lay:
         for s_ in range(4): d.rectangle([LEFT + s_ * 34, y0 + 3, LEFT + s_ * 34 + 32, y0 + 29], fill=e[1] * 4 + s_)
     elif e[0] == 'mark':
         d.rectangle([LEFT + 10, y0 + 3, LEFT + 120, y0 + 29], outline=e[1], width=4)
+    elif e[0] == 'imark':
+        d.rectangle([LEFT + 10, y0 + 3, LEFT + 120, y0 + 29], fill=(255, 255, 255), outline=e[1], width=3)
     elif e[0] == 'cross':
         d.rectangle([LEFT + 10, y0 + 3, LEFT + 120, y0 + 29], fill=FAM[KEY['PAD']][1]); d.line([LEFT + 14, y0 + 6, LEFT + 116, y0 + 26], fill=CROSS, width=3); d.line([LEFT + 116, y0 + 6, LEFT + 14, y0 + 26], fill=CROSS, width=3)
     cnt = e[2] if e[0] != 'cross' else fmt(n_padtile) + ' tiles'

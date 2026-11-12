@@ -8,87 +8,15 @@ SECTION "ROM Bank $01d", ROMX[$4000], BANK[$1d]
 BankNumber_1D_4000::
     db $1d
 
-    ; padding
-    ds $20, $00
-
-; I: leftover: 35 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: an edited version of tile rows 2-3 of face photo 8 (512 bytes; 05:5001-5200): 75 % of the non-blank
+; bytes equal (the hair), the rest redrawn; nothing in this build reads it
+; (assets/reconstructed/FacePhoto8_variant_1D.png; owner 2026-11-12)
+Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001::
+    INCBIN "data/bank_1d/Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001.bin" ; $4001, 512 bytes
+; I: leftover: 497 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
-Leftover_1D_4021::
-    db $08, $07, $0b, $05, $03, $0f, $19, $07, $27, $1f, $77, $1f, $4f, $3f, $1f, $7f
-    db $ff, $ff, $fd, $ff, $bf, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $df
-
-; I: leftover: an exact copy of 55 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:5044, a part of the block) that
-; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_1D_4044_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part5044::
-    db $ff, $ff, $ff, $5f, $ff, $bf, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff
-
-; I: leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_407B::
-    db $fd, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $f7, $ff, $ff, $ff, $dd, $ff, $ff, $ff, $77, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $77, $ff, $ff, $ff, $fd, $ff, $ff, $ff, $f7, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $7f, $ff, $f8, $fe, $c7, $fc, $ff, $fe, $74, $ff, $fe, $ff
-    db $d4, $ff, $fe, $ff, $77, $ff, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $80, $00, $80, $00, $00, $80, $0f, $0f, $07, $07, $00, $00, $00, $00, $00, $00
-    db $01, $01, $01, $01, $01, $01, $fc, $fc, $f8, $f8, $00, $00, $07, $07, $0f, $0f
-    db $ff, $ff, $ff, $ff, $ff, $ff, $00, $00, $00, $00, $00, $00, $00, $00, $e0, $e0
-    db $f0, $f0, $f8, $f8, $78, $00, $90, $da, $c1
-
-    ; padding
-    ds $17, $00
-
-    db $01, $00, $01, $00, $00, $01, $9f, $7f, $37, $5f, $8f, $7f, $1f, $7f, $3f, $ff
-    db $5f, $ff, $ff, $ff, $df, $7f, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $fe, $ff, $dd, $ff, $ff, $ff, $f7, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $80, $80, $00, $c0, $c0, $80, $20, $c0, $80, $e0
-    db $50, $e0, $f0, $e0, $40, $f0, $01, $01, $01, $01, $01, $01, $01, $01, $00, $00
-    db $00, $00, $00, $00, $00, $00, $ff, $ff, $f7, $f7, $c7, $c7, $cf, $cf, $0f, $0f
-    db $1f, $1f, $1e, $1e, $1c, $1c, $38, $38, $38, $38, $78, $78, $f8, $f8, $f8, $f8
-    db $f0, $f0, $00, $00, $00, $3d, $18, $f9, $11, $06, $98, $01, $03, $00, $cd, $bf
-    db $02, $11, $26, $98, $01, $03, $00, $cd, $bf, $02, $c9, $29, $2a, $2b, $39, $3a
-    db $3b, $81, $60, $60, $91, $60, $60, $82, $60, $60, $92, $60, $60, $83, $60, $60
-    db $93, $60, $60, $84, $60, $60, $94, $60, $60, $85, $60, $60, $95, $60, $60, $86
-    db $60, $60, $96, $60, $60, $87, $60, $60, $97, $60, $60, $88, $60, $60, $98, $60
-    db $60, $89, $60, $60, $99, $60, $60, $81, $80, $60, $91, $90, $60, $81, $81, $60
-    db $91, $91, $60, $2e, $2f, $46, $47, $48, $49, $60, $60, $60, $60, $60, $60, $3e
-    db $3f, $56, $57, $58, $59, $60, $60, $60, $60, $60, $60, $0a, $0b, $20, $21, $22
-    db $23, $24, $25, $26, $60, $60, $60, $1a, $1b, $30, $31, $32, $33, $34, $35, $36
-    db $60, $60, $60, $0c, $0d, $20, $21, $22, $23, $24, $25, $26, $60, $60, $60, $1c
-    db $1d, $30, $31, $32, $33, $34, $35, $36, $60, $60, $60, $00, $01, $02, $03, $04
-    db $20, $21, $22, $23, $24, $25, $26, $10, $11, $12, $13, $14, $30, $31, $32, $33
-    db $34, $35, $36, $0a, $0b, $20, $21, $22, $60, $60, $60, $60, $60, $60, $60, $1a
-    db $1b, $30, $31, $32, $60, $60, $60, $60, $60, $60, $60, $0c, $0d, $20, $21, $22
-    db $60, $60, $60, $60, $60, $60, $60, $1c, $1d, $30, $31, $32, $60, $60, $60, $60
-    db $60, $60, $60, $00, $01, $02, $03, $04, $20, $21, $22, $60, $60, $60, $60, $10
-    db $11, $12, $13, $14, $30, $31, $32, $60, $60, $60, $60, $85, $80, $44, $60, $95
-    db $90, $54, $60, $87, $85, $44, $60, $97, $95, $54, $60, $81, $80, $80, $44, $91
-    db $90, $90, $54, $81, $82, $85, $44, $91, $92, $95, $54, $82, $80, $80, $44, $92
-    db $90, $90, $54, $83, $80, $80, $44, $93, $90, $90, $54, $84, $80, $80, $44, $94
-    db $90, $90, $54, $85, $80, $80, $44, $95, $90, $90, $54, $80, $42, $80, $43, $90
-    db $52, $90, $53, $80, $42, $85, $43, $90, $52, $95, $53, $81, $42, $80, $43, $91
-    db $52, $90, $53, $81, $42, $85, $43, $91, $52, $95, $53, $82, $42, $80, $43, $92
-    db $52, $90, $53, $82, $42, $85, $43, $92, $52, $95, $53, $83, $42, $80, $43, $93
-    db $52, $90, $53, $83, $42, $85, $43, $93, $52, $95, $53, $4a, $4b, $4c, $4d, $60
-    db $60, $60, $60, $60, $60, $60, $60, $60, $60, $5a, $5b, $5c, $5d, $60, $60, $60
-    db $60, $60, $60, $60, $60, $60, $60, $2c, $2d, $46, $47, $48, $49, $ac, $ad, $ae
-    db $af, $0e, $0f, $2c, $2d, $3c, $3d, $56, $57, $58, $59, $bc, $bd, $be, $bf, $1e
-    db $1f, $3c, $3d, $2e, $2f, $46, $47, $48, $49, $ac, $ad, $ae, $af, $0e, $0f, $2c
-    db $2d, $3e, $3f, $56, $57, $58, $59, $bc, $bd, $be, $bf, $1e, $1f, $3c, $3d, $4e
-    db $4f, $cc, $cd, $ce, $cf, $5e, $5f, $dc, $dd, $de, $df, $cc, $cd, $ce, $cf, $60
-    db $60, $dc, $dd, $de, $df, $60, $60
-
+Leftover_1D_4201::
+    INCBIN "data/bank_1d/Leftover_1D_4201.bin" ; $4201, 497 bytes
 ; I: leftover: an exact copy of CONF_OBJ_PAT (00:197D, 48 bytes) that nothing in this build reads, runs or explains
 ; (never read nor run in the L2 runs)
 Leftover_1D_43F2_CONF_OBJ_PAT::
@@ -1196,45 +1124,50 @@ Leftover_1D_6067::
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1D_6771_Gfx_01_4001_FNTOOE1_Part4001::
     INCBIN "data/bank_1d/Leftover_1D_6771_Gfx_01_4001_FNTOOE1_Part4001.bin" ; $6771, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_6B6B::
+; I: leftover: 8 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:43FB; 0 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_1D_6B6B_Gfx_01_4001_FNTOOE1_VariantPart43FB::
     db $7d, $a0, $ff, $03, $d0, $06, $fb, $43
 
 ; I: leftover: an exact copy of 1018 bytes of Gfx_01_4001_FNTOOE1 (from 01:43FB, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1D_6B73_Gfx_01_4001_FNTOOE1_Part43FB::
     INCBIN "data/bank_1d/Leftover_1D_6B73_Gfx_01_4001_FNTOOE1_Part43FB.bin" ; $6B73, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_6F6D::
+; I: leftover: 8 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:47F5; 0 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_1D_6F6D_Gfx_01_4001_FNTOOE1_VariantPart47F5::
     db $ac, $a0, $ff, $03, $d0, $06, $f5, $47
 
 ; I: leftover: an exact copy of 1018 bytes of Gfx_01_4001_FNTOOE1 (from 01:47F5, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1D_6F75_Gfx_01_4001_FNTOOE1_Part47F5::
     INCBIN "data/bank_1d/Leftover_1D_6F75_Gfx_01_4001_FNTOOE1_Part47F5.bin" ; $6F75, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_736F::
+; I: leftover: 8 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:4BEF; 0 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_1D_736F_Gfx_01_4001_FNTOOE1_VariantPart4BEF::
     db $74, $a0, $ff, $03, $d0, $06, $ef, $4b
 
 ; I: leftover: an exact copy of 1018 bytes of Gfx_01_4001_FNTOOE1 (from 01:4BEF, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1D_7377_Gfx_01_4001_FNTOOE1_Part4BEF::
     INCBIN "data/bank_1d/Leftover_1D_7377_Gfx_01_4001_FNTOOE1_Part4BEF.bin" ; $7377, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_7771::
+; I: leftover: 8 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:4FE9; 12 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_1D_7771_Gfx_01_4001_FNTOOE1_VariantPart4FE9::
     db $19, $a0, $ff, $03, $d0, $06, $e9, $4f
 
 ; I: leftover: an exact copy of 1018 bytes of Gfx_01_4001_FNTOOE1 (from 01:4FE9, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_1D_7779_Gfx_01_4001_FNTOOE1_Part4FE9::
     INCBIN "data/bank_1d/Leftover_1D_7779_Gfx_01_4001_FNTOOE1_Part4FE9.bin" ; $7779, 1018 bytes
-; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_7B73::
+; I: leftover: 8 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:53E3; 0 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_1D_7B73_Gfx_01_4001_FNTOOE1_VariantPart53E3::
     db $dd, $a0, $ff, $03, $d0, $06, $e3, $53
 
 ; I: leftover: an exact copy of 1018 bytes of Gfx_01_4001_FNTOOE1 (from 01:53E3, a part of the block) that nothing in

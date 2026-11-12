@@ -12,15 +12,16 @@ BankNumber_0E_4000::
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_0E_4001_Gfx_01_4001_FNTOOE1_Part4AA0::
     INCBIN "data/bank_0e/Leftover_0E_4001_Gfx_01_4001_FNTOOE1_Part4AA0.bin" ; $4001, 256 bytes
-; I: leftover: 3 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_0E_4101::
-    db $80, $64, $c2
-
-    ; padding
-    ds $4c, $00
-
-    db $74, $a0, $ff, $03, $d0, $06, $ef, $4b
+; I: leftover: 87 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:4BA0; 87 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_0E_4101_Gfx_01_4001_FNTOOE1_VariantPart4BA0::
+    db $80, $64, $c2, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $74
+    db $a0, $ff, $03, $d0, $06, $ef, $4b
 
 ; I: leftover: an exact copy of 168 bytes of Gfx_01_4001_FNTOOE1 (from 01:4BEF, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)

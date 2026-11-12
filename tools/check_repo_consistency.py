@@ -308,6 +308,13 @@ if getattr(A, 'rom_proto', None) and os.path.isdir(_PR + 'src'):
             elif open(rp, 'rb').read() != rd(_PR + 'disasm/rom_operands_proto.csv').encode('utf-8'): bad('proto', _PR + 'disasm/rom_operands_proto.csv is not fresh')
             else: ok('proto', 'L5: roms/prototype_debagame/src/ fresh (%d files), builds md5 19b50a5f67ef4f0d015e7d813370756e (no rgbfix)' % len(a_))
     shutil.rmtree(_tmp, ignore_errors=True)
+# ------------------------------------------------------------------ unused bytes in two categories, documented by TCRF or not (tools/unused_table.py, owner 2026-11-12)
+_m = subprocess.run([sys.executable, 'tools/unused_table.py', '--check'], capture_output=True, text=True, cwd=ROOT)
+(ok if not _m.returncode else bad)('unused', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-400:])
+if os.path.isdir(os.path.join(ROOT, 'source', 'Unused_graphics_TCRF')): bad('tcrf', 'source/Unused_graphics_TCRF/ is back: the repository keeps no TCRF content, only links (tcrf_check/TCRF_SOURCES.md, owner 2026-11-12)')
+if getattr(A, 'rom_proto', None):
+    _m = subprocess.run([sys.executable, 'tools/proto_reconstruct.py', A.rom_proto, '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('proto', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 # ------------------------------------------------------------------ kinds: the name prefix against the copy destination
 _kb = []
 for _t in ('jp_rev_a', 'us_eu', 'gold', 'prototype_debagame'):

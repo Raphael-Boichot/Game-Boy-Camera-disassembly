@@ -1,0 +1,68 @@
+bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
+00,0004,0008,4,Unused_Rst00_Tail,data,not_tcrf,,,
+00,03D4,03DB,7,Unused_Irq_DisableVBlank,data,not_tcrf,,,
+00,03DB,03E2,7,Unused_Irq_EnableVBlank,data,not_tcrf,,,
+00,05A2,05A9,7,Unused_Delay_Short,data,not_tcrf,,,
+00,0734,0794,96,Unused_Vram_CopyFromBank_8,data,not_tcrf,,,
+00,07E6,07F7,17,Unused_Vram_OrByteSafe,data,not_tcrf,,,
+00,07F7,0808,17,Unused_Vram_AndByteSafe,data,not_tcrf,,,
+00,0808,0816,14,Unused_Vram_ReadByteSafe,data,not_tcrf,,,
+00,0816,0881,107,Unused_Vram_CopyViaVBlank,data,not_tcrf,,,
+00,1D31,1D3E,13,Unused_Prn_QueueBreak,data,not_tcrf,,,
+00,1D58,1D59,1,Unused_Prn_Ret,data,not_tcrf,,,
+00,2F84,2F8A,6,Unused_Delay_BC,data,not_tcrf,,,
+00,2F8A,2F94,10,Unused_Str_MainPass,data,not_tcrf,,,
+02,46E6,46E9,3,Unused_Photo_SaveReceived_Far_Stray46E6,data,not_tcrf,,,
+03,69DC,69E4,8,Unused_HotSpotFx_PageFlipTbl,data,not_tcrf,,,
+04,4D09,4D1B,18,Unused_Mode0F_State09_EraseOne_Tbl4D09,data,not_tcrf,,,
+04,63AD,63BC,15,Unused_LoadTilemap24_7120,data,not_tcrf,,,
+04,63BC,63CB,15,Unused_LoadTilemap25_4B00,data,not_tcrf,,,
+04,7C49,7C80,55,Unused_Mode0A_PhotoStepWrap,data,not_tcrf,,,
+05,61E1,61F8,23,Unused_DjEd_LoadPerformerTiles9100,data,not_tcrf,,,
+05,7F04,7F1B,23,Unused_Ball_LoadGfx9100,data,not_tcrf,,,
+05,7F1B,7F32,23,Unused_Ball_LoadGfx9480,data,not_tcrf,,,
+06,4AE7,4B06,31,Unused_Mode16_LoadPageTiles,data,not_tcrf,,,
+06,71D0,7212,66,Unused_Shoot_TimerKeys,data,not_tcrf,,,
+07,41C8,41CE,6,Unused_Mode0E_GotoState12,data,not_tcrf,,,
+07,48CB,490D,66,Unused_Link_DrawLamps,data,not_tcrf,,,
+07,490D,4963,86,Unused_Link_FlickerLamp3,data,not_tcrf,,,
+07,4A0A,4A4B,65,Unused_Link_DrawPhotoNumber,data,not_tcrf,,,
+07,4B80,4B9A,26,Unused_Link_LoadTiles,data,not_tcrf,,,
+07,4B9A,4BA1,7,Unused_Link_WriteHexByte,data,not_tcrf,,,
+07,4BA1,4BA7,6,Unused_Link_WriteHexNibble,data,not_tcrf,,,
+07,4BA7,4BC5,30,Unused_Link_SumSlotBuffer,data,not_tcrf,,,
+07,4FFA,4FFD,3,Unused_LinkPick_LoadPhotoIndexB,data,not_tcrf,,,
+09,54ED,54F6,9,Unused_Kb_LoadGlyphSetC,code,not_tcrf,,,
+09,568D,56AC,31,Unused_OwnerCard_DrawBloodType,data,not_tcrf,,,
+09,5D21,5D27,6,Unused_Kb_Page0_Press_Dakuten,data,not_tcrf,,,
+09,5D37,5D3D,6,Unused_Kb_Page0_Press_Handakuten,code,not_tcrf,,,
+09,5D44,5D8A,70,Unused_Kb_ApplyMarkTable,code,not_tcrf,,,
+09,6D83,6D95,18,Unused_Run_Sub16,data,not_tcrf,,,
+09,7288,72AA,34,Unused_Run_LoadCharacterGraphicsD,data,not_tcrf,,,
+0A,4C53,4C6C,25,Unused_Cam_FactoryMeasure2_Tail,data,not_tcrf,,,
+0A,7CE6,7CEC,6,Unused_Cam_FarStub_GainProbe,data,not_tcrf,,,
+0A,7CEC,7CF2,6,Unused_Cam_FarStub_FactoryMeasure1,data,not_tcrf,,,
+0D,7660,77E0,384,Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Unused Graphics,"the four kanji 'Middle, Before, After, Have'"
+10,7A80,7AA0,32,Unused_TCRF_SoundPrintModulationIcon_TopRow_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Game Boy Printer,unused SOUND print modulation icon
+10,7B80,7BA0,32,Unused_TCRF_SoundPrintModulationIcon_BottomRow_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Game Boy Printer,unused SOUND print modulation icon
+11,5800,7000,6144,Unused_TCRF_HandNewspaperFrames_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Unused Graphic Bank 11,a hand flipping through a newspaper
+13,5CA0,5D00,96,Unused_TCRF_AlbumHandGestures_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Album Bank,unused hand gestures along the album selection hands
+15,4480,4490,16,Unused_TCRF_JapaneseMenuTile_CircledX_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
+15,4500,4510,16,Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
+15,4580,4590,16,Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
+18,5A50,5AB0,96,Unused_TCRF_MarginPrint_BFilmRoll_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Print Option,unused B film roll
+18,5F90,6050,192,Unused_TCRF_MarginPrint_OutlinedText_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Print Option,unused margin print font
+1A,7D80,7E00,128,Unused_TCRF_PhotoOption_BCancel_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Photo Option,an early 'B CANCEL' button
+1C,5920,5B20,512,Unused_TCRF_HotSpotEffectIcons_Extra_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Unused Hot Spot Effects,eight extra Hot Spot icons
+1E,6620,6A00,992,Unused_TCRF_CannotCombineSamePicture_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Unused Graphics,'Cannot combine same picture' message
+1F,46DD,46E5,8,Unused_Sfx1_Init_46DD,code,not_tcrf,,,
+1F,4A6E,4A76,8,Unused_Sfx1_Step_4A6E,data,not_tcrf,,,
+1F,4FC9,4FCF,6,Unused_Snd_SetFreeze,data,not_tcrf,,,
+1F,5256,525D,7,Unused_Snd_Sfx_LoadNR2x,data,not_tcrf,,,
+1F,53C4,53F2,46,Unused_Snd_SongPan_Load,data,not_tcrf,,,
+1F,53F2,541A,40,Unused_Snd_Pan_Step,data,not_tcrf,,,
+1F,574E,577C,46,Unused_Snd_Vib_Tail,data,not_tcrf,,,
+1F,7FF3,7FF6,3,Unused_Snd_StopEntry,data,not_tcrf,,,
+33,6800,7980,4480,Unused_WildFrame7_Tiles,data,not_tcrf,,,
+33,7980,7D00,896,Unused_WildFrame7_LateralStrips,data,not_tcrf,,,
+33,7D00,8000,768,Unused_WildFrame7_TilesTail,data,not_tcrf,,,

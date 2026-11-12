@@ -43,9 +43,10 @@ Unused_TCRF_TitleLogoNEO_Map::
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_38_5A41_Map_01_5A41_MENU1_Part5A41::
     INCBIN "data/bank_38/Leftover_38_5A41_Map_01_5A41_MENU1_Part5A41.bin" ; $5A41, 485 bytes
-; I: leftover: 9 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_38_5C26::
+; I: leftover: 9 bytes between two pieces of a copy of Map_01_5A41_MENU1 at the same shift, where this copy differs
+; from the block (01:5C26; 78 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_38_5C26_Map_01_5A41_MENU1_VariantPart5C26::
     db $c8, $cf, $c9, $a0, $a0, $a0, $a0, $a0, $a0
 
 ; I: leftover: an exact copy of 51 bytes of Map_01_5A41_MENU1 (from 01:5AEF, a part of the block) that nothing in this

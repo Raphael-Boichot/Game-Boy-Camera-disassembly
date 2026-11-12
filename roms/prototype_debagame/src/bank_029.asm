@@ -229,10 +229,11 @@ Leftover_29_79EC_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part6FD0::
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
 
-; I: leftover: 431 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_29_7A76::
-    INCBIN "data/bank_29/Leftover_29_7A76.bin" ; $7A76, 431 bytes
+; I: leftover: 431 bytes between two pieces of a copy of Unused_TCRF_FaceDrawing4_FACE8_Gfx at the same shift, where
+; this copy differs from the block (06:705A; 54 % of the bytes equal): an edited version; nothing in this build reads,
+; runs or explains it (never read nor run in the L2 runs)
+Leftover_29_7A76_Unused_TCRF_FaceDrawing4_FACE8_Gfx_VariantPart705A::
+    INCBIN "data/bank_29/Leftover_29_7A76_Unused_TCRF_FaceDrawing4_FACE8_Gfx_VariantPart705A.bin" ; $7A76, 431 bytes
 ; I: leftover: an exact copy of 862 bytes of Unused_TCRF_FaceDrawing2_FACE6_Gfx (from 06:4E01, a part of the block)
 ; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_29_7C25_Unused_TCRF_FaceDrawing2_FACE6_Gfx_Part4E01::

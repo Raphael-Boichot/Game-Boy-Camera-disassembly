@@ -2,6 +2,8 @@
 
 AI slop, do not trust until human validation.
 
+**No TCRF content is kept here** (owner, 2026-11-12): the TCRF pages and their revisions are linked in [`TCRF_SOURCES.md`](TCRF_SOURCES.md); `tcrf_documented.csv` lists which unused blocks of each ROM a TCRF page shows (with its section), read by `tools/unused_table.py`.
+
 * `TCRF_CHECKLIST.md` / `.csv`: 54 items (unlock-gated content, TCRF "unused" sections, Japanese side of "Regional Differences"), each with ROM location, coverage computed from `coverage/v8/merged_v8/cov.npz`, finding, evidence tag (C traced, I inferred, ? not located) and asset files. The reasoning is in docs §15.
 * `assets/`: everything retrieved (Album B, wild frames, frames, stamps, 68 composed screens, hot-spot icons, located unused graphics, the two confirmation runs). Added with docs §16: `assets/bgb/` (`results/*.txt` of the BGB checks and the BGB-vs-core sweep tables; the demo files, state files and per-run screenshots are not kept), `assets/atlas2/{JP,INTL,INTL2}/result.json` (what each joypad path reached on the Japanese ROM, the same inputs on the international ROM, and a native exploration of the international ROM; the screenshots are not kept), `assets/intl_compare/` (Japanese / international pairs, the mirrored-main-menu probe, Album B pages with and without the CoroCoro tag, `boot_flags.txt`, `menus_not_in_guide.png`).
 * `BGB_TEST_SHEET.md`: what was run in BGB (8 checks, results).

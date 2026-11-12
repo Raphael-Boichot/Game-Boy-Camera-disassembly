@@ -52,17 +52,11 @@ Map_02_6101_BG_DUMP::
 ; copied to the BG map by 00:19D5
 Map_02_6341_BGPROTEC::
     INCBIN "data/bank_02/Map_02_6341_BGPROTEC.tilemap" ; $6341, 576 bytes
-; I: PROGRAM in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs):
-; kind not settled
-Data_02_6581_PROGRAM::
-    db $00, $00, $00, $00, $07, $00, $0f, $07, $18, $08, $30, $10, $30, $10, $30, $10
-    db $30, $10, $30, $10, $30, $10, $30, $10, $18, $08, $0f, $07, $07, $00, $00, $00
-    db $00, $00, $00, $00, $e0, $00, $f0, $e0, $18, $10, $0c, $08, $0c, $08, $0c, $08
-    db $0c, $08, $0c, $08, $0c, $08, $0c, $08, $18, $10, $f0, $e0, $e0
-
-    ; padding
-    ds $7c3, $00
-
+; I: PROGRAM in both old symbol tables at this bank and address: 128 tiles (2048 bytes), the first 4 drawn (an
+; outline) and 124 blank (02:6581-6D80); this build neither copies nor reads them (L2 runs); unused tiles, not
+; documented by TCRF (owner 2026-11-12)
+Unused_PROGRAM_Gfx::
+    INCBIN "data/bank_02/Unused_PROGRAM_Gfx.2bpp" ; $6581, 2048 bytes
 ; I: leftover: an exact copy of 256 bytes of Gfx_03_4001_FNTOOE3 (from 03:4001, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_02_6D81_Gfx_03_4001_FNTOOE3_Part4001::
@@ -73,9 +67,10 @@ Leftover_02_6E81_Gfx_01_4001_FNTOOE1_Part4901::
     db $00, $00, $44, $66, $44, $66, $44, $66, $47, $65, $39, $2d, $39, $29, $10, $18
     db $00, $00, $00, $00, $00, $00, $ce, $eb, $3c, $ae, $e8, $fc, $08, $8c, $c8, $ec
 
-; I: leftover: 15 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_02_6EA1::
+; I: leftover: 15 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy differs
+; from the block (01:4921; 33 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_02_6EA1_Gfx_01_4001_FNTOOE1_VariantPart4921::
     db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $38, $ef, $28, $ff
 
 ; I: leftover: an exact copy of 227 bytes of Gfx_01_4001_FNTOOE1 (from 01:4930, a part of the block) that nothing in
@@ -97,10 +92,11 @@ Leftover_02_6EB0_Gfx_01_4001_FNTOOE1_Part4930::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00
 
-; I: leftover: 350 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_02_6F93::
-    INCBIN "data/bank_02/Leftover_02_6F93.bin" ; $6F93, 350 bytes
+; I: leftover: 350 bytes between two pieces of a copy of Gfx_01_4001_FNTOOE1 at the same shift, where this copy
+; differs from the block (01:4A13; 36 % of the bytes equal): an edited version; nothing in this build reads, runs or
+; explains it (never read nor run in the L2 runs)
+Leftover_02_6F93_Gfx_01_4001_FNTOOE1_VariantPart4A13::
+    INCBIN "data/bank_02/Leftover_02_6F93_Gfx_01_4001_FNTOOE1_VariantPart4A13.bin" ; $6F93, 350 bytes
 ; I: leftover: an exact copy of 1168 bytes of Gfx_01_4001_FNTOOE1 (from 01:4B71, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_02_70F1_Gfx_01_4001_FNTOOE1_Part4B71::

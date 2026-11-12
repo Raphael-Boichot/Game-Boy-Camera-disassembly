@@ -24,9 +24,10 @@ Leftover_3A_5801_Map_03_5801_BG_MOVIE::
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_3A_5A41_Gfx_03_5A41_CONF2_Part5A41::
     INCBIN "data/bank_3a/Leftover_3A_5A41_Gfx_03_5A41_CONF2_Part5A41.bin" ; $5A41, 3268 bytes
-; I: leftover: 60 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_3A_6705::
+; I: leftover: 60 bytes between two pieces of a copy of Gfx_03_5A41_CONF2 at the same shift, where this copy differs
+; from the block (03:6705; 15 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_3A_6705_Gfx_03_5A41_CONF2_VariantPart6705::
     db $30, $31, $1f, $3f, $1c, $1e, $18, $18, $18, $19, $1f, $3f, $00, $00, $00, $20
     db $e0, $f0, $f1, $f9, $00, $00, $00, $00, $c1, $e3, $e1, $f1, $00, $00, $40, $40
     db $60, $68, $f9, $fb, $61, $f1, $60, $68, $fe, $fe, $ff, $ef, $00, $00, $00, $00
@@ -48,9 +49,10 @@ Leftover_3A_6741_Gfx_03_5A41_CONF2_Part6741::
     db $46, $66, $c4, $ce, $cc, $cc, $cc, $cc, $c4, $ce, $c6, $c7, $81, $c3, $00, $00
     db $00, $00, $70, $70, $30, $30, $30, $30, $20, $70, $60, $60, $c0, $e0, $00, $00
 
-; I: leftover: 60 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_3A_6801::
+; I: leftover: 60 bytes between two pieces of a copy of Gfx_03_5A41_CONF2 at the same shift, where this copy differs
+; from the block (03:6801; 12 % of the bytes equal): an edited version; nothing in this build reads, runs or explains
+; it (never read nor run in the L2 runs)
+Leftover_3A_6801_Gfx_03_5A41_CONF2_VariantPart6801::
     db $30, $38, $34, $36, $32, $33, $21, $71, $63, $63, $44, $66, $88, $d8, $00, $00
     db $61, $71, $41, $e1, $81, $c1, $00, $80, $e1, $e1, $38, $7c, $08, $18, $00, $00
     db $eb, $fb, $f8, $78, $e1, $e1, $7b, $7f, $f3, $fb, $61, $61, $20, $20, $00, $00

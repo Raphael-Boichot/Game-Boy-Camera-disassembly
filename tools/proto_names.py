@@ -168,7 +168,7 @@ for i_, (b, ad) in enumerate(_lbl):
     _src.append((o1 - o0, b, ad, o0, o1, nm))
 TYPEAT = {}
 for r in TYPES: TYPEAT[(int(r['bank'], 16), int(r['start'], 16))] = r
-copy_types = []; ncopy = 0
+copy_types = []; ncopy = 0; COPYSH = {}                 # COPYSH: flat offset of a copied byte -> (shift to its source, block, bank, addr)
 for ln, b, ad, o0, o1, nm in sorted(_src, reverse=True):
     blob = ROMB[o0:o1]; i_ = ROMB.find(blob)
     while i_ >= 0:
@@ -178,7 +178,7 @@ for ln, b, ad, o0, o1, nm in sorted(_src, reverse=True):
             t_ = TYPEAT.get((b, ad))
             copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + ln), t_['type'] if t_ else 'data', (t_['width'] if t_ else '') or '',
                                COPYNOTE + '%s (%02X:%04X)%s' % (nm, b, ad, '' if t_ else ': a copy of code, typed data (this build never runs it)')])
-            for k in range(i_, i_ + ln): cov_[k] = 1; idcov_[k] = 1
+            for k in range(i_, i_ + ln): cov_[k] = 1; idcov_[k] = 1; COPYSH[k] = (o0 - i_, nm, b, ad)
             ncopy += 1
         i_ = ROMB.find(blob, i_ + 1)
 # 4b-2. partial and misaligned copies, then variants (owner 2026-11-12: "pattern analysis from known assets", only this ROM's assets).
@@ -192,13 +192,15 @@ SRCB = {}                                          # flat offset -> index of the
 for k_, (ln, b, ad, o0, o1, nm) in enumerate(_src):
     for o in range(o0, o1): SRCB.setdefault(o, k_)
 def _addr(o): return (o >> 14, o if o < 0x4000 else 0x4000 + (o & 0x3FFF))
-def _copyrow(cb, ca, ln, k_, nm2, note2, src):
+def _copyrow(cb, ca, ln, k_, nm2, note2, src, sh=None):
     ln_, b, ad, o0, o1, nm = _src[k_]; t_ = TYPEAT.get((b, ad))
     put(cb, ca, nm2, 'I', note2, src)
     copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + ln), t_['type'] if t_ else 'data', (t_['width'] if t_ else '') or '',
                        COPYNOTE + '%s (%02X:%04X)%s' % (nm, b, ad, '' if t_ else ': a copy of code, typed data (this build never runs it)')])
     f0 = _flat(cb, ca)
-    for k in range(f0, f0 + ln): cov_[k] = 1; idcov_[k] = 1
+    for k in range(f0, f0 + ln):
+        cov_[k] = 1; idcov_[k] = 1
+        if sh is not None: COPYSH[k] = (sh, nm, b, ad)
 W16 = {}
 for o in sorted(SRCB):
     w = ROMB[o:o + 16]
@@ -222,7 +224,7 @@ while i_ < NR - 16:
         whole = s_ == _src[k_][3] and ln == _src[k_][4] - _src[k_][3]
         nm2 = 'Leftover_%02X_%04X_%s' % (cb, ca, nm) + ('' if whole else '_Part%04X' % sa)
         _copyrow(cb, ca, ln, k_, nm2, 'leftover: an exact copy of %d bytes of %s (from %02X:%04X%s) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)' % (
-            ln, nm, sb, sa, '' if whole else ', a part of the block'), 'copy')
+            ln, nm, sb, sa, '' if whole else ', a part of the block'), 'copy', sh=s_ - d_)
         npart += 1; i_ = d_ + ln
     else: i_ += 1
 W8 = {}
@@ -261,9 +263,32 @@ for r0, r1 in runs_:
             whole = a0 + dl == o0
             _copyrow(cb, ca, a1 - a0, k_, 'Leftover_%02X_%04X_%s_Variant%s' % (cb, ca, nm, '' if whole else 'Part%04X' % sa),
                      'leftover: a variant of %d bytes of %s (from %02X:%04X): %.0f %% of the bytes equal at that shift, an older or edited version; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)' % (
-                         a1 - a0, nm, sb, sa, 100 * ratio), 'variant')
+                         a1 - a0, nm, sb, sa, 100 * ratio), 'variant', sh=dl)
             nvar += 1; nxt += [(t0, a0), (a1, t1)]
         todo = nxt
+# 4b-3. seams (owner 2026-11-12: the glyphs of banks $02 / $3A that the copies left out): a run of 8 to 1,024 bytes that nothing identifies,
+#     right after a copy (whole, part or variant) of a block and right before bytes that continue the same block at the same shift (a copy
+#     of it at that shift give or take 8 bytes, as in bank $22 where 6-byte seams cut the copies, or bytes equal to it for 28 of 32), is
+#     the same block edited there: Leftover_BB_AAAA_<block>_VariantPartAAAA, tag I, the
+#     block's type, the share of equal bytes in the note (the run is where this copy differs from the block: other glyphs, another picture).
+nseam = 0; i_ = 0
+while i_ < NR:
+    if idcov_[i_]: i_ += 1; continue
+    j_ = i_
+    while j_ < NR and not idcov_[j_] and (j_ >> 14) == (i_ >> 14): j_ += 1
+    L = COPYSH.get(i_ - 1)
+    if L and 8 <= j_ - i_ <= 1024 and ((i_ - 1) >> 14) == (i_ >> 14) and len(set(ROMB[i_:j_])) >= 3:
+        sh, nm, sb0, sa0 = L; Rr = COPYSH.get(j_)
+        cont = (Rr is not None and abs(Rr[0] - sh) <= 8 and Rr[1] == nm) or sum(x == y for x, y in zip(ROMB[j_:j_ + 32], ROMB[j_ + sh:j_ + sh + 32])) >= 28
+        k_ = next((k for k, x in enumerate(_src) if x[5] == nm), None)
+        if cont and k_ is not None and _src[k_][3] <= i_ + sh and j_ + sh <= _src[k_][4]:
+            cb, ca = _addr(i_); sb, sa = _addr(i_ + sh)
+            ratio = float((Ra_[i_:j_] == Ra_[i_ + sh:j_ + sh]).mean())
+            _copyrow(cb, ca, j_ - i_, k_, 'Leftover_%02X_%04X_%s_VariantPart%04X' % (cb, ca, nm, sa),
+                     'leftover: %d bytes between two pieces of a copy of %s at the same shift, where this copy differs from the block (%02X:%04X; %.0f %% of the bytes equal): an edited version; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)' % (
+                         j_ - i_, nm, sb, sa, 100 * ratio), 'variant', sh=sh)
+            nseam += 1
+    i_ = j_
 with open(a.types, 'w', newline='') as f:     # the type table with the copies' rows (rerunning this script gives the same file)
     w_ = csv.writer(f, lineterminator='\n'); w_.writerow(['bank', 'start', 'end', 'type', 'width', 'note'])
     for r in TYPES: w_.writerow([r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']])
@@ -381,16 +406,17 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib', 'tiles')      # the leftovers: their I tag is final (owner rule 2026-11-11)
 doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] not in FINAL)
 settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FINAL)
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory', 'tiles': 'leftover tiles'}[src]
         w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
                     'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers', 'oldlib': 'a routine or block of an older build\'s bank 0 (disasm/printer_lib_proto.csv, disasm/oldbuilds_proto.csv), in bytes no type row, traced instruction or reader covers',
-                     'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers'}[src]])
+                     'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers',
+                     'tiles': 'a hand type row (2bpp tiles, disasm/layers/sym_types_proto_hand.csv) that no traced instruction or copy site reads'}[src]])
 with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])
     rows_ = []

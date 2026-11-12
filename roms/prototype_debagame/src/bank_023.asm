@@ -36,14 +36,11 @@ Leftover_23_4315_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $01, $03
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_23_4367::
-    db $3b, $5e, $fa, $03
-
-    ; padding
-    ds $3aa, $00
-
+; I: leftover: 942 bytes between two pieces of a copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx at the same shift, where
+; this copy differs from the block (05:6133; 45 % of the bytes equal): an edited version; nothing in this build reads,
+; runs or explains it (never read nor run in the L2 runs)
+Leftover_23_4367_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133::
+    INCBIN "data/bank_23/Leftover_23_4367_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133.bin" ; $4367, 942 bytes
 ; I: leftover: an exact copy of 82 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:60E1, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_23_4715_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
@@ -114,160 +111,16 @@ Leftover_23_5795_Map_03_7241_BG_CONF::
 ; I: leftover: 1804 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_23_59D5::
-    db $01, $03, $81, $74, $40, $02, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $80, $81, $82, $83, $84, $85, $86, $87
-    db $88, $89, $8a, $8b, $8c, $8d, $8e, $8f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $90, $91, $92, $93, $94, $95, $96, $97
-    db $98, $99, $9a, $9b, $9c, $9d, $9e, $9f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $a0, $a1, $a2, $a3, $a4, $a5, $a6, $a7
-    db $a8, $a9, $aa, $ab, $ac, $ad, $ae, $af, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $b0, $b1, $b2, $b3, $b4, $b5, $b6, $b7
-    db $b8, $b9, $ba, $bb, $bc, $bd, $be, $bf, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $c0, $c1, $c2, $c3, $c4, $c5, $c6, $c7
-    db $c8, $c9, $ca, $cb, $cc, $cd, $ce, $cf, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $d0, $d1, $d2, $d3, $d4, $d5, $d6, $d7
-    db $d8, $d9, $da, $db, $dc, $dd, $de, $df, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $e0, $e1, $e2, $e3, $e4, $e5, $e6, $e7
-    db $e8, $e9, $ea, $eb, $ec, $ed, $ee, $ef, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $f0, $f1, $f2, $f3, $f4, $f5, $f6, $f7
-    db $f8, $f9, $fa, $fb, $fc, $fd, $fe, $ff, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $00, $01, $02, $03, $04, $05, $06, $07
-    db $08, $09, $0a, $0b, $0c, $0d, $0e, $0f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $10, $11, $12, $13, $14, $15, $16, $17
-    db $18, $19, $1a, $1b, $1c, $1d, $1e, $1f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $20, $21, $22, $23, $24, $25, $26, $27
-    db $28, $29, $2a, $2b, $2c, $2d, $2e, $2f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $30, $31, $32, $33, $34, $35, $36, $37
-    db $38, $39, $3a, $3b, $3c, $3d, $3e, $3f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $40, $41, $42, $43, $44, $45, $46, $47
-    db $48, $49, $4a, $4b, $4c, $4d, $4e, $4f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $50, $51, $52, $53, $54, $55, $56, $57
-    db $58, $59, $5a, $5b, $5c, $5d, $5e, $5f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $60, $61, $62, $63, $64, $65, $66, $67
-    db $68, $69, $6a, $6b, $6c, $6d, $6e, $6f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $70, $71, $72, $73, $74, $75, $76, $77
-    db $78, $79, $7a, $7b, $7c, $7d, $7e, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f, $7f
-    db $7f, $7f, $7f, $7f, $7f, $7f, $01, $03, $c1, $76, $fa, $03, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $0d, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $80, $80, $a0, $81, $81, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $b4
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $2d, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $0d, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $b5
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $2d, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $0d, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0e, $0f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $b6
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $1f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $2d, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2f, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
-    db $aa, $aa, $aa, $aa, $aa, $aa, $01, $03, $bb, $7a, $06, $00, $aa, $aa, $aa, $aa
-    db $aa, $aa, $01, $03, $c1, $7a, $a0, $00, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $68
-    db $69, $6a, $6b, $6c, $6d, $6e, $6f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $78
-    db $79, $7a, $7b, $7c, $7d, $7e, $7f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $47, $48
-    db $49, $4a, $4b, $4c, $4d, $4e, $4f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $57, $58
-    db $59, $5a, $5b, $5c, $5d, $5e, $5f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $01, $03, $ff, $7f, $01, $00, $03, $01
-    db $04, $00, $40, $01, $00, $04, $01, $04, $01, $40, $fa, $03
-
-    ; padding
-    ds $4e, $00
-
-    db $05, $03, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $51, $04, $d7, $28
-    db $75, $ff, $00, $00, $00, $00, $00, $00, $40, $00, $e1, $00, $2d, $d0, $61, $be
-    db $40, $ff, $03, $00, $00, $07, $03, $0f, $73, $1f, $cb, $3f, $97, $7f, $2f, $ff
-    db $7f, $ff, $be, $ff, $54, $ff, $ea, $ff, $fd, $ff, $bf, $ff, $75, $ff, $bf, $ff
-    db $7f, $ff, $ae, $f8, $76, $fd, $be, $ff, $5f, $ff, $ff, $ff, $d5, $ff, $bf, $ff
-    db $55, $ff, $00, $00, $00, $00, $20, $80, $4c, $f0, $fc, $f8, $d5, $fe, $fe, $ff
-    db $7f, $ff, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $40, $80
-    db $50, $e0
-
-    ; padding
-    ds $7a, $00
-
-    db $01, $00, $00, $01, $03, $01, $0b, $07, $05, $1f, $0f, $3f, $17, $7f, $bf, $7f
-    db $5f, $ff, $ff, $ff, $7f, $ff, $ef, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $f7, $ff, $fa, $ff, $7f, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $7d, $ff, $fb, $ff, $57, $ff, $ff, $ff
-    db $f7, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $f5, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $df, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $5f, $ff, $ff, $ff, $f7, $ff, $ff, $ff
-    db $dd, $ff, $ff, $ff, $fd, $ff, $f8, $e0, $d4, $f8, $fe, $f8, $f5, $fe, $ff, $fe
-    db $fd, $ff, $ff, $ff, $fd, $ff, $00, $00, $00, $00, $00, $00, $00, $00, $80, $00
-    db $40, $80, $e0, $80
-
-; I: leftover: an exact copy of 88 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:61DF, a part of the block) that
-; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_23_62AF_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part61DF::
-    db $c0, $e0, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00
-
-; I: leftover: an exact copy of 468 bytes of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (from 30:4227, a part of the block)
+    INCBIN "data/bank_23/Leftover_23_59D5.bin" ; $59D5, 1804 bytes
+; I: leftover: tile rows 0-1 of face photo 6 (the top of the head, 512 bytes); rows 2-13 are
+; Unused_TCRF_FacePhoto6_Rows2To13_Gfx (30:4201), whose rows 0-1 bank $30 lost under source text; here the rows that
+; follow (23:62E1-63E0) equal 30:4201-42FF byte for byte, so these two rows complete the picture ...
+Leftover_23_60E1_Unused_TCRF_FacePhoto6_Rows0To1_Gfx::
+    INCBIN "data/bank_23/Leftover_23_60E1_Unused_TCRF_FacePhoto6_Rows0To1_Gfx.2bpp" ; $60E1, 512 bytes
+; I: leftover: an exact copy of 506 bytes of Unused_TCRF_FacePhoto6_Rows2To13_Gfx (from 30:4201, a part of the block)
 ; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_23_6307_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part4227::
-    INCBIN "data/bank_23/Leftover_23_6307_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part4227.bin" ; $6307, 468 bytes
+Leftover_23_62E1_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part4201::
+    INCBIN "data/bank_23/Leftover_23_62E1_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part4201.bin" ; $62E1, 506 bytes
 ; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_23_64DB::

@@ -1,0 +1,17 @@
+roms,pattern,page,section,what
+jp us gold,^Unused_TCRF_KanjiMiddleBeforeAfterHave_,https://tcrf.net/Game_Boy_Camera,Unused Graphics,"the four kanji 'Middle, Before, After, Have'"
+jp us gold,^Unused_TCRF_CannotCombineSamePicture_,https://tcrf.net/Game_Boy_Camera,Unused Graphics,"'Cannot combine same picture' message"
+jp us gold,^Unused_TCRF_JapaneseMenuTile_CircledX,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
+jp us gold,^Unused_TCRF_PhotoOption_BCancel_,https://tcrf.net/Game_Boy_Camera,Photo Option,"an early 'B CANCEL' button"
+jp us gold,^Unused_TCRF_AlbumHandGestures_,https://tcrf.net/Game_Boy_Camera,Album Bank,unused hand gestures along the album selection hands
+jp us gold,^Unused_TCRF_SoundPrintModulationIcon_,https://tcrf.net/Game_Boy_Camera,Game Boy Printer,unused SOUND print modulation icon
+jp us gold,^Unused_TCRF_MarginPrint_BFilmRoll_,https://tcrf.net/Game_Boy_Camera,Print Option,unused B film roll
+jp us gold,^Unused_TCRF_MarginPrint_OutlinedText_,https://tcrf.net/Game_Boy_Camera,Print Option,unused margin print font
+jp us gold,^Unused_TCRF_HandNewspaperFrames_,https://tcrf.net/Game_Boy_Camera,Unused Graphic Bank 11,a hand flipping through a newspaper
+jp us gold,^Unused_TCRF_HotSpotEffectIcons_Extra_,https://tcrf.net/Game_Boy_Camera,Unused Hot Spot Effects,eight extra Hot Spot icons
+kitty,Pompompurin|^Unused_Mode18_,https://tcrf.net/Hello_Kitty_Pocket_Camera,Pompompurin Picture,an apparently unused picture of Pompompurin (Game Genie 183-63B-E6E)
+proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_(FacePhoto|FaceDrawing)(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_EditorUI(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,UI elements for some sort of editor
+proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_TitleLogoNEO(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the 'Debagame Tester NEO' title logo"
+proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_ArrowCursor(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,an arrow hanging from a string (an earlier menu cursor)
+proto,^Leftover_[0-9A-F]{2}_[0-9A-F]{4}_AsmSource$,https://tcrf.net/Proto:Game_Boy_Camera,Source Code,large chunks of commented source code found throughout the ROM
