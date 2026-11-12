@@ -20,19 +20,31 @@ The work is produced by AI (Claude), from reading the code and running it in emu
 
 Two maps per ROM, each in one legend for every ROM: the layout map, what each byte is (code by function, data by kind; grey-blue is what is not analysed yet: it gives way to the colours as the work on a ROM lands), and the reachability map, what the runs reached (the colours of the Japanese map, `tools/reach_draw.py`). The layout maps are shown below, the reachability maps in each ROM's folder.
 
-**Pocket Camera (Japan) (Rev A)**: outlines = the unused bytes, in three categories, as on every layout map (below); what no emulator run reached is the reachability map in [`roms/jp_rev_a/`](roms/jp_rev_a/README.md).
+Every ROM below has the same five parts: **ROM layout** (what each byte is), **Screens reached in BGB**, **Unused assets** (the sheet of what the build never shows), **Highlights** (the most interesting of them) and **Trivia** (hidden screens, button combinations and codes, each checked in the code or in BGB; empty when there is nothing).
+
+*The outline of every layout map* (owner, 2026-11-12): only the unused bytes, in three categories, the same for every ROM: **unused code** (black: routines the build never runs, copies of routines left in the ROM, and for the Japanese ROM its proven-dead code), **unused assets documented by TCRF** (orange) and **unused assets not documented by TCRF** (cyan), from `roms/<folder>/assets/unused_<tag>.csv` (`tools/unused_table.py`); an asset and its tile map share a category. Nothing else is outlined (the differences from the Japanese ROM and what no run reached stay in the csv files and the reachability maps). TCRF is credited only for what its pages show; the repository keeps no TCRF content, only links ([`tcrf_check/TCRF_SOURCES.md`](tcrf_check/TCRF_SOURCES.md)).
+
+*The screen trees* (all ROMs): power-on at the left, each column one step further; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws them.
+
+### Pocket Camera (Japan) (Rev A)
+
+The reference build: L0-L5 done, L6 partial ([`roms/jp_rev_a/`](roms/jp_rev_a/README.md); the reachability map, what the emulator runs reached, is there).
+
+**ROM layout**
 
 ![What each byte of the Japanese ROM is: code by function, data by kind](roms/jp_rev_a/jp_rom_layout_map.png)
 
-*Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
+**Screens reached in BGB** (2026-11-08; the boot row holds the boot screen, the calibration check and the factory calibration)
 
 ![Screens (mode, state) reached in BGB](roms/jp_rev_a/jp_screen_tree.png)
 
-*Never-reached assets of the Japanese ROM*: the assets that no emulator replay put on screen in a run without state pokes (unused maps beside their tile sets, TCRF graphics, blocks never shown or shown only in forced runs, scraps, sounds never requested; docs §16.24, list in [`really_unused.md`](tcrf_check/assets/unidentified/really_unused.md)).
+**Unused assets**: the assets that no emulator replay put on screen in a run without state pokes (unused maps beside their tile sets, TCRF graphics, blocks never shown or shown only in forced runs, scraps, sounds never requested; docs §16.24, list in [`really_unused.md`](tcrf_check/assets/unidentified/really_unused.md)).
 
 ![The never-reached assets of the Japanese ROM](tcrf_check/assets/unidentified/really_unused.png)
 
-*The two unused full screens, large*: left, the alternate stand-by screen of the image exchange (map `23:5CC0` with the tiles `14:4000`); right, the one-page main menu with the "DEBA GAME" logo (map `25:7820` with the tiles `17:5500`). No code loads either of them, in either ROM (docs §16.24, §16.25).
+**Highlights**
+
+*The two unused full screens*: left, the alternate stand-by screen of the image exchange (map `23:5CC0` with the tiles `14:4000`); right, the one-page main menu with the "DEBA GAME" logo (map `25:7820` with the tiles `17:5500`). No code loads either of them, in either ROM (docs §16.24, §16.25).
 
 ![The unused image-exchange stand-by screen and the unused "DEBA GAME" one-page main menu, side by side](tcrf_check/assets/unidentified/unused_screens_pair.png)
 
@@ -40,37 +52,42 @@ Two maps per ROM, each in one legend for every ROM: the layout map, what each by
 
 ![The camera ball head turn of the main menu: the animation the game plays beside the unused twin set](tcrf_check/assets/unidentified/main_menu_head_turn_used_vs_unused.gif)
 
-*The hand flipping a newspaper* (TCRF B16, `11:5800-693F`): nine 40 x 40 sprite frames, arranged by the sprite list `$BA`, that no code draws. Animated from the ROM tiles at 4x in slot order (0 to 8 and back); the order and the speed are chosen here, since no code plays them (docs §16.24).
+*The hand flipping a newspaper* (documented by [TCRF](https://tcrf.net/Game_Boy_Camera#Unused_Graphic_Bank_11), `11:5800-693F`): nine 40 x 40 sprite frames, arranged by the sprite list `$BA`, that no code draws. Animated from the ROM tiles at 4x in slot order (0 to 8 and back); the order and the speed are chosen here, since no code plays them (docs §16.24).
 
 ![The unused hand flipping a newspaper, its nine frames animated from the ROM tiles](tcrf_check/assets/unidentified/11_5800_hand_newspaper.gif)
 
-*The two hidden boot screens and how to open them* (hold the buttons while switching the camera on): the **factory calibration** (every button, or a blank calibration record: STORE / PLEASE WAIT, then STORE / END; it measures the sensor and stores the calibration vector) and the **fast calibration sanity check** (every button except B: it measures again, writes nothing, and shows OK or NG for the two highest-gain references), BGB screenshots from synthetic saves (docs §8).
+*An unused result message* (all three retail ROMs, not on TCRF): the result screen has 15 text strips; no code ever asks for strip `$07`, 「まだおしえたらん」 ("I won't tell you yet") in the Japanese ROM, which the international build replaced by a blank strip (docs §16.32, with the other 14 texts and the printer conditions behind *Print error #01-#04*):
+
+![The 15 result messages, international and Japanese](tcrf_check/assets/unused/result_messages_jp_vs_intl.png)
+
+**Trivia**
+
+*The two hidden boot screens* (hold the buttons while switching the camera on): the **factory calibration** (every button, or a blank calibration record: STORE / PLEASE WAIT, then STORE / END; it measures the sensor and stores the calibration vector) and the **fast calibration sanity check** (every button except B: it measures again, writes nothing, and shows OK or NG for the two highest-gain references), BGB screenshots from synthetic saves (docs §8).
 
 ![The factory calibration and the fast calibration sanity check, with the button combinations that open them](tcrf_check/assets/secret/secret_calibration_screens.png)
 
-*The real credits, Japanese vs international* (unlocked by a RUN! RUN! RUN! record of 22:00 or lower, then USER > CREDITS): the international build drops the "One Love" page and plays two scenes of Nintendo's arcade game Sheriff instead, one of them in a credits state that the Japanese ROM does not have (BGB screenshots, docs §1.5).
+*The real credits* are unlocked by a RUN! RUN! RUN! record of 22:00 or lower, then USER > CREDITS (the code reads the stored record `[$DAA7:$DAA6] >= $7799`; docs §15.2, §16.4). Below, the intro pages in the Japanese and international ROMs (BGB): the international build drops the "One Love" page and plays two scenes of Nintendo's arcade game Sheriff instead (docs §1.5).
 
 ![The intro pages of the real credits in the Japanese and international ROMs](tcrf_check/assets/credits_intl/credits_intro_jp_vs_intl.png)
 
-**Game Boy Camera (USA, Europe)**: ported from the Japanese tables.
+*Inputs and codes* (each checked in the code, in the project's core and in BGB; docs §15, §16.18; the lines of the [GameFAQs cheats page](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) and of [TCRF](https://tcrf.net/Game_Boy_Camera) are credited where they come from):
 
-![What each byte of the international ROM is](roms/us_eu/us_rom_layout_map.png)
+| What | How | Source, check |
+|---|---|---|
+| Erase all saved data | hold Start + Select at power-on: a prompt, A erases, B boots normally (boot code `09:5FAC-5FDA`) | GameFAQs; core and BGB, C |
+| Erase all photos at once | in the erase picker, hold Select + Start + Up, A confirms, B cancels | GameFAQs; core, C |
+| Title screen: Mario dances faster / slower | hold Up / Down on the title screen | GameFAQs; BGB, C |
+| VIEW menu: the face-in-face animation faster / slower | hold Up / Down | GameFAQs; core and BGB, C |
+| D.J.: the hidden song "London Bridge" | SE 9 on the performance screen, then A pressed repeatedly | GameFAQs; code, C |
+| Stamps go the other way | hold A with a stamp selected (3 s by the code, not 2) | GameFAQs; BGB, C |
+| Print the music | on the SOUND I page hold Start, then A | GameFAQs; BGB with the printer, C |
+| RUN! RUN! RUN!: raise the flag | after winning, tap A as fast as possible | GameFAQs; BGB, C |
+| RUN! RUN! RUN! itself | 2,000 points or more in Space Fever II | GameFAQs; core, C |
+| The title music in full | Game Genie `453-B48-E6E` + `454-388-E6E` | TCRF; the patched byte is the song request at `08:73B4` / `08:7438`, C |
+| The eight extra hot-spot effects | Game Genie `0FD-199-F76` | TCRF; raises `ld d,$07` at `03:6D18` to `$0F`, C |
+| Receive by browsing the partner's album | Game Genie `00A-CEB-3AE` on both Game Boys (below) | this project; BGB, C |
 
-*What the runs reached*: the reachability map is in [`roms/us_eu/`](roms/us_eu/README.md), in the legend of the Japanese map.
-
-*Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
-
-![Screens (mode, state) reached in BGB](roms/us_eu/us_screen_tree.png)
-
-*Never-reached assets* (first pass, 2026-10-31, from about 55 minutes of the international coverage run (twice cut by a container restart; state kept on the branch `wip/intl-coverage-state`); table [`never_reached_us.csv`](roms/us_eu/assets/never_reached_us.csv)): of the 131 never-reached assets of the Japanese ROM (27,156 bytes), 90 are in this ROM byte for byte at the same address and 5 more elsewhere (in banks $25 and $26, which moved: the "DEBA GAME" menu map, the unused photo screen and picture, the option-page head rows). The leftovers survive here: the unused exchange stand-by screen, the "DEBA GAME" menu, the hand-and-newspaper frames, the ball-head frames F5-F8, the other TCRF graphics. None of these 95 blocks was read in an organic run of the international core (the only organic reads are 8 small blocks of 2 to 10 bytes, mostly the Space Fever II HUD bytes that the Japanese ROM also reads without showing them). 11 are not in this ROM: six slots of the Japanese font, two tile sets of bank $15 and three small blocks. The sheet below draws them from the international ROM's own bytes (each block checked against its Japanese source; the Gold ROM has the same bytes), with two Japanese blocks of the name font that the international keyboard cannot type; the unused exchange stand-by screen and the "DEBA GAME" menu are left out (they are in the Japanese picture above). Whether a block reaches the screen is still to be confirmed by international display replays (`tools/intl_jp_leftovers_sheet.py`).
-
-![The Japanese assets left in the international ROM and never shown](tcrf_check/assets/unused/intl_jp_leftovers.png)
-
-*Hidden in the international USER planet map* (TCRF, Regional Differences, "Space"): the top three rows are drawn black, but the tiles of the Japanese sky are still loaded; put back from BGB's VRAM (docs/20):
-
-![The international USER planet map and its hidden sky](tcrf_check/assets/hidden/planet_hidden_sky.png)
-
-*Receiving by browsing the partner's album cannot work, and a Game Genie code that makes it work* (international, Gold and Japanese ROMs). When the player who starts the exchange chooses to receive, the game asks the partner for a page of 8 thumbnails and waits for it at most 180 frames, 3 seconds (`LinkPick_RequestRemotePage`, `07:5126`; the counter is `Link_TimeoutTick`). A page is 2,055 byte exchanges, and each exchange costs about 5,980 CPU cycles (8 bits at the fixed serial clock of 8,192 Hz, a 275 µs timer pause that the code inserts between bytes, and the interrupt handlers of both units): about 175 frames on the wire alone, before the partner has even loaded its 8 thumbnails. In BGB, two linked units, the first page arrives after 201 frames and the next one, asked for with the receiver's D-pad, after 207: both too late, so the receiver always lands on the link error screen (message `$0C`). Since the delay comes from the clock rates and the code, a real Game Boy cannot do better. Exchanges started by the sender do not browse and are not affected. The Game Genie code below removes the deadline (`dec [hl]` -> `nop`, the only bank whose byte matches is bank 7); with it on both Game Boys, the receiver browses the partner's album page by page with the D-pad, picks a photo, the partner confirms with A and the photo is transferred (BGB, docs §1.5). Side effect: every link time-out is gone, so a cable pulled during a transfer leaves both units waiting instead of showing the error screen.
+*Receiving by browsing the partner's album cannot work, and a Game Genie code that makes it work* (Japanese, international and Gold ROMs). When the player who starts the exchange chooses to receive, the game asks the partner for a page of 8 thumbnails and waits for it at most 180 frames, 3 seconds (`LinkPick_RequestRemotePage`, `07:5126`; the counter is `Link_TimeoutTick`). A page is 2,055 byte exchanges, and each exchange costs about 5,980 CPU cycles (8 bits at the fixed serial clock of 8,192 Hz, a 275 µs timer pause that the code inserts between bytes, and the interrupt handlers of both units): about 175 frames on the wire alone, before the partner has even loaded its 8 thumbnails. In BGB, two linked units, the first page arrives after 201 frames and the next one, asked for with the receiver's D-pad, after 207: both too late, so the receiver always lands on the link error screen (message `$0C`). Since the delay comes from the clock rates and the code, a real Game Boy cannot do better. Exchanges started by the sender do not browse and are not affected. The Game Genie code below removes the deadline (`dec [hl]` -> `nop`, the only bank whose byte matches is bank 7); with it on both Game Boys, the receiver browses the partner's album page by page with the D-pad, picks a photo, the partner confirms with A and the photo is transferred (BGB, docs §1.5). Side effect: every link time-out is gone, so a cable pulled during a transfer leaves both units waiting instead of showing the error screen.
 
 | ROM | Game Genie | patch |
 |---|---|---|
@@ -79,47 +96,125 @@ Two maps per ROM, each in one legend for every ROM: the layout map, what each by
 
 The codes are derived from the byte changes that were tested in BGB, not tried on a Game Genie: digits 1-2 = new value, 3-6 = address, 7 and 9 = the expected old value `$35` (the 8th digit is not part of either). The Hello Kitty and prototype ROMs have no such routine.
 
-*An unused result message* (all three ROMs, not on TCRF): the result screen has 15 text strips; no code ever asks for strip `$07`, 「まだおしえたらん」 ("I won't tell you yet") in the Japanese ROM, which the international build replaced by a blank strip (docs §16.32, with the other 14 texts and the printer conditions behind *Print error #01-#04*):
+### Game Boy Camera (USA, Europe)
 
-![The 15 result messages, international and Japanese](tcrf_check/assets/unused/result_messages_jp_vs_intl.png)
+Ported from the Japanese tables: L0-L5 done, L6 partial ([`roms/us_eu/`](roms/us_eu/README.md); the reachability map is there).
+
+**ROM layout**
+
+![What each byte of the international ROM is](roms/us_eu/us_rom_layout_map.png)
+
+**Screens reached in BGB** (2026-11-08)
+
+![Screens (mode, state) reached in BGB](roms/us_eu/us_screen_tree.png)
+
+**Unused assets** (first pass, 2026-10-31, from about 55 minutes of the international coverage run (twice cut by a container restart; state kept on the branch `wip/intl-coverage-state`); table [`never_reached_us.csv`](roms/us_eu/assets/never_reached_us.csv)): of the 131 never-reached assets of the Japanese ROM (27,156 bytes), 90 are in this ROM byte for byte at the same address and 5 more elsewhere (in banks $25 and $26, which moved: the "DEBA GAME" menu map, the unused photo screen and picture, the option-page head rows). The leftovers survive here: the unused exchange stand-by screen, the "DEBA GAME" menu, the hand-and-newspaper frames, the ball-head frames F5-F8, the other TCRF graphics. None of these 95 blocks was read in an organic run of the international core (the only organic reads are 8 small blocks of 2 to 10 bytes, mostly the Space Fever II HUD bytes that the Japanese ROM also reads without showing them). 11 are not in this ROM: six slots of the Japanese font, two tile sets of bank $15 and three small blocks. The sheet below draws them from the international ROM's own bytes (each block checked against its Japanese source; the Gold ROM has the same bytes), with two Japanese blocks of the name font that the international keyboard cannot type; the unused exchange stand-by screen and the "DEBA GAME" menu are left out (they are in the Japanese section). Whether a block reaches the screen is still to be confirmed by international display replays (`tools/intl_jp_leftovers_sheet.py`).
+
+![The Japanese assets left in the international ROM and never shown](tcrf_check/assets/unused/intl_jp_leftovers.png)
+
+**Highlights**
+
+*Hidden in the USER planet map* ([TCRF, Regional Differences](https://tcrf.net/Game_Boy_Camera/Regional_Differences), "Space"): the top three rows are drawn black, but the tiles of the Japanese sky are still loaded; put back from BGB's VRAM (docs/20):
+
+![The international USER planet map and its hidden sky](tcrf_check/assets/hidden/planet_hidden_sky.png)
 
 *An unused wild frame* (international and Gold ROMs, not on TCRF): the wild-frame table keeps 8 pages but the picker offers 7; the 8th is the Super Mario World frame without its TM mark (docs/20):
 
 ![The Super Mario World wild frame and its unused copy without TM](tcrf_check/assets/hidden/wild_frame_smw_unused.png)
 
-**Game Boy Camera Gold (USA)**: ported from the Japanese symbol file with the international tools (L0-L5: names, types, constants, the code executed in the coverage runs and BGB scenarios, and an editable source tree `roms/gold/src/` built by `make TREE=gold check`, byte-exact; L6: its character set and keyboard tables as text, shared with the international ROM). Besides its new assets (Zelda stamps instead of Pokémon, the three Zelda pictures of album B), one routine changed: `Photo_RenumberVector` (02:4466) repairs a damaged photo order table instead of counting bad entries as photos ([`roms/gold/`](roms/gold/)).
+*The unused result message*: strip `$07` is blank here (the Japanese section shows both builds).
+
+**Trivia**
+
+| What | How | Source, check |
+|---|---|---|
+| The real credits (with the two Sheriff scenes) | a RUN! RUN! RUN! record of 22:00 or lower, then USER > CREDITS | GameFAQs; BGB with the unlocking saves, C (docs §1.5) |
+| The 14 album B unlock conditions (B17-B30) | the counters of the GameFAQs list, at the page's thresholds; B19 needs 15 transferred pictures, not 5 | GameFAQs; the unlock routine `02:4D01` called at and below each threshold, C (docs §16.18) |
+| Stamps go the other way | hold A with a stamp selected | GameFAQs; BGB on both ROMs, C |
+| Receive by browsing the partner's album | Game Genie `00A-8BB-3AE` on both Game Boys (Japanese section) | this project; BGB, C |
+
+### Game Boy Camera Gold (USA)
+
+Ported from the Japanese symbol file with the international tools: L0-L5 done (an editable source tree `roms/gold/src/` built by `make TREE=gold check`, byte-exact), L6 partial (its character set and keyboard tables as text, shared with the international ROM). Besides its new assets (Zelda stamps instead of Pokémon, the three Zelda pictures of album B), one routine changed: `Photo_RenumberVector` (02:4466) repairs a damaged photo order table instead of counting bad entries as photos ([`roms/gold/`](roms/gold/README.md); the reachability map is there).
+
+**ROM layout**
 
 ![What each byte of the Gold ROM is](roms/gold/gold_rom_layout_map.png)
 
-*What the runs reached*: the reachability map is in [`roms/gold/`](roms/gold/README.md), in the legend of the Japanese map.
+**Screens reached in BGB**: no BGB screen capture of this ROM yet; its menus are the international ones.
 
-*Never-reached assets* (2026-11-02, from three one-hour coverage runs of the Gold ROM in the project's core: a fresh start, the unlocking saves and a third seed; `tools/never_reached_gold.py`): of the 131 never-reached assets of the Japanese ROM, 86 are in the Gold ROM (81 at the same address, 5 moved) and no organic Gold run read them, the same leftovers as in the international ROM ([`never_reached_gold.csv`](roms/gold/assets/never_reached_gold.csv)); 9 small blocks were read (the Space Fever II HUD bytes, as in the other builds, and the TCRF album hand gestures `13:5CA0`, which a larger tile copy of the album screen loads without showing them). The Gold edition's own content (18 blocks whose bytes differ from the international ROM: the Zelda stamps of banks $2B / $2C, the three Zelda pictures of album B with their thumbnails, the album B slot and gate tables, two icon sources) is a plain asset substitution: the same code loads it from the same places as the international stamps and album B pictures, so any player sees it. The automatic runs simply did not get there in normal play, in either build (the international run did not read the international stamps and album B pictures at these addresses either); they were read only by runs with forced states ([`gold_own_never_read.csv`](roms/gold/assets/gold_own_never_read.csv)). This is a limit of the runs, not unused content.
+**Unused assets** (2026-11-02, from three one-hour coverage runs of the Gold ROM in the project's core: a fresh start, the unlocking saves and a third seed; `tools/never_reached_gold.py`): of the 131 never-reached assets of the Japanese ROM, 86 are in the Gold ROM (81 at the same address, 5 moved) and no organic Gold run read them, the same leftovers as in the international ROM, with the same bytes (the sheet of the international section) ([`never_reached_gold.csv`](roms/gold/assets/never_reached_gold.csv)); 9 small blocks were read (the Space Fever II HUD bytes, as in the other builds, and the TCRF album hand gestures `13:5CA0`, which a larger tile copy of the album screen loads without showing them). The Gold edition's own content (18 blocks whose bytes differ from the international ROM: the Zelda stamps of banks $2B / $2C, the three Zelda pictures of album B with their thumbnails, the album B slot and gate tables, two icon sources) is a plain asset substitution: the same code loads it from the same places as the international stamps and album B pictures, so any player sees it. The automatic runs simply did not get there in normal play, in either build (the international run did not read the international stamps and album B pictures at these addresses either); they were read only by runs with forced states ([`gold_own_never_read.csv`](roms/gold/assets/gold_own_never_read.csv)). This is a limit of the runs, not unused content.
 
-**Pocket Camera (Hello Kitty)** (prototype): L0-L2 done (2026-11-07: intake, own tracer, every byte typed, byte-exact round trip with the symbol file, 0 unresolved indirect sites, code observed in the core and in BGB); L3 done (2026-11-12: every routine entry and every data block named, 2,218 names of which 150 are not C: 109 leftovers `Leftover_BB_AAAA` by the owner rule, 41 in the doubts list; the data blocks by kind and consumer, as the Japanese ones; an unused-asset pass; [`roms/hello_kitty/`](roms/hello_kitty/README.md)); L4-L6 not started.
+**Highlights**: the unused Super Mario World wild frame of the international section is here too; the Gold edition has no unused content of its own.
+
+**Trivia**
+
+| What | How | Source, check |
+|---|---|---|
+| Receive by browsing the partner's album | Game Genie `00A-8BB-3AE` on both Game Boys (Japanese section) | this project; BGB, C |
+
+### Pocket Camera (Hello Kitty) (prototype)
+
+L0-L3 done (2026-11-12: every routine entry and every data block named, 2,218 names of which 150 are not C: 109 leftovers `Leftover_BB_AAAA` by the owner rule, 41 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4-L6 not started ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
+
+**ROM layout**
 
 ![What each byte of the Hello Kitty ROM is](roms/hello_kitty/kitty_rom_layout_map.png)
 
-*What the runs reached*: the reachability map is in [`roms/hello_kitty/`](roms/hello_kitty/README.md), in the legend of the Japanese map.
-
-*Screens reached in BGB* (2026-11-08): power-on at the left, each column one step further; the boot row holds the boot screen, the calibration check and the factory calibration; one panel per mode (or part of one) with its BGB screenshots at 1x, each arrow labelled with its keys, a two-headed arrow when B leads back (measured in BGB, `tools/screen_cancel.py`), grey notes under a screenshot for the keys inside the panel and for B elsewhere. Drawn by `tools/make_screen_trees.py`; the checker redraws it.
+**Screens reached in BGB** (2026-11-08; the forced screens are marked as such)
 
 ![Screens (mode, state) reached in BGB](roms/hello_kitty/kitty_screen_tree.png)
 
-*Never-reached assets*: first pass done in the core and BGB runs (2026-11-08): [`assets/never_reached_kitty.csv`](roms/hello_kitty/assets/never_reached_kitty.csv), with its picture and counts in [`roms/hello_kitty/`](roms/hello_kitty/README.md).
+**Unused assets** (core and BGB runs, 2026-11-08; [`assets/never_reached_kitty.csv`](roms/hello_kitty/assets/never_reached_kitty.csv), counts in [`roms/hello_kitty/`](roms/hello_kitty/README.md)):
 
-**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 done (every routine named; the 1,346 leftovers are `Leftover_BB_AAAA`, with the block they copy (whole, a part or a variant), `_AsmSource` / `_SrcListing` or `_PcRam` as suffix when known), L4-L5 done (2026-11-12: RAM names, mostly the developers' from the older builds' symbol tables, the `SEQ_*` constants, and an editable source tree `roms/prototype_debagame/src/` built by `make TREE=prototype_debagame check`, byte-exact without rgbfix), L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
+![The never-reached assets of the Hello Kitty ROM](roms/hello_kitty/assets/never_reached_kitty.png)
+
+**Highlights** (`tools/kitty_unused_highlights.py`): the two pictures of bank `$11` are the records of the table `00:249D` that `Photo_LoadEmptyPicture` (`00:24A6`) loads. Record 1, the "no photo" picture (しゃしんがない), is what the stamp window, the album, the slide show and `Mode09_State01` show for a photo slot without a photo (when `Photo_FindSlotA` returns carry); no recorded run took that branch. Record 0, Hello Kitty in a frame with the logo, is never requested: all six calls pass A = 1. Modes `$17` (the print error screen) and `$18` (the Pompompurin picture, documented by [TCRF](https://tcrf.net/Hello_Kitty_Pocket_Camera)) are reached in BGB only with the mode byte forced; no code outside mode `$18` sets mode `$18`.
+
+![The two bank $11 pictures and the screens of modes $17 and $18](roms/hello_kitty/assets/highlights_kitty.png)
+
+**Trivia**
+
+| What | How | Source, check |
+|---|---|---|
+| The Pompompurin picture | Game Genie `183-63B-E6E` | TCRF (not tested here); BGB shows the screen with the mode byte forced to `$18`, I |
+
+### Pocket Camera Prototype (Japan) ("DEBAGAME")
+
+A hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: L0-L3 done (every routine named; the 1,346 leftovers are `Leftover_BB_AAAA`, with the block they copy (whole, a part or a variant), `_AsmSource` / `_SrcListing` or `_PcRam` as suffix when known), L4-L5 done (2026-11-12: RAM names, mostly the developers' from the older builds' symbol tables, the `SEQ_*` constants, and an editable source tree `roms/prototype_debagame/src/` built by `make TREE=prototype_debagame check`, byte-exact without rgbfix), L6 not started ([`roms/prototype_debagame/`](roms/prototype_debagame/README.md); the reachability map is there). Its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
+
+**ROM layout**
 
 ![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
 
-*What the runs reached*: the reachability map is in [`roms/prototype_debagame/`](roms/prototype_debagame/README.md), in the legend of the Japanese map.
-
-*Screens reached in BGB* (2026-11-09; the BGB copy of the ROM, blank SRAM): power-on at the left, each column one step further; the prototype has no (mode, state) pair, so each panel is one value of its screen variable `GAME_SEQ` (`$C0A0`) and `$00` is the screen as reached; `$01` marks two screens that need a condition: AGING running after PROTECT TEST > OFF (without it the SRAM is write-protected and AGING stops at the first byte) and COM counting with a second unit linked (two BGB instances). A two-headed arrow means B leads back (B held: the AGING screen reads the keys once per cycle). Captured by `tools/proto_bgb_screens.py`, drawn by `tools/make_screen_trees.py`; the checker redraws it.
+**Screens reached in BGB** (2026-11-09; the BGB copy of the ROM, blank SRAM): the prototype has no (mode, state) pair, so each panel is one value of its screen variable `GAME_SEQ` (`$C0A0`) and `$00` is the screen as reached; `$01` marks two screens that need a condition (Trivia below). A two-headed arrow means B leads back (B held: the AGING screen reads the keys once per cycle). Captured by `tools/proto_bgb_screens.py`.
 
 ![Screens (GAME_SEQ) reached in BGB](roms/prototype_debagame/proto_screen_tree.png)
 
-*Never-reached assets*: the TCRF unused graphics (fourteen pictures, the editor UI, the NEO logo with its tile map, the arrow cursor) are located byte-exact and named `Unused_TCRF_*` (2026-11-11): [`assets/never_reached_proto.csv`](roms/prototype_debagame/assets/never_reached_proto.csv); every text in clear (source, listings, PC memory strings) in [`assets/text_sections_proto.csv`](roms/prototype_debagame/assets/text_sections_proto.csv).
+**Unused assets** (`tools/proto_unused_sheet.py`; every unused block in [`assets/unused_proto.csv`](roms/prototype_debagame/assets/unused_proto.csv); every text in clear, source, listings and PC memory strings, in [`assets/text_sections_proto.csv`](roms/prototype_debagame/assets/text_sections_proto.csv)): the graphics documented by [TCRF](https://tcrf.net/Proto:Game_Boy_Camera) (fourteen pictures, the NEO logo, the editor UI, the arrow cursor), located byte-exact and named `Unused_TCRF_*`, and what this project found besides them.
 
-*The outline of every layout map* (owner, 2026-11-12): only the unused bytes, in three categories, the same for every ROM: **unused code** (black: routines the build never runs, copies of routines left in the ROM, and for the Japanese ROM its proven-dead code), **unused assets documented by TCRF** (orange) and **unused assets not documented by TCRF** (cyan), from `roms/<folder>/assets/unused_<tag>.csv` (`tools/unused_table.py`). Nothing else is outlined (the differences from the Japanese ROM and what no run reached stay in the csv files and the reachability maps). TCRF is credited only for what its pages show; the repository keeps no TCRF content, only links ([`tcrf_check/TCRF_SOURCES.md`](tcrf_check/TCRF_SOURCES.md)).
+![The unused assets of the prototype](roms/prototype_debagame/assets/unused_sheet_proto.png)
+
+**Highlights**
+
+*Face photo 6, whole*: bank `$30` lost its two top rows under source text; bank `$23` still holds them (`23:60E1`), followed by rows equal to `30:4201-43FF` byte for byte (`tools/proto_reconstruct.py`).
+
+![Face photo 6, rebuilt](roms/prototype_debagame/assets/reconstructed/FacePhoto6_whole.png)
+
+*An edited photo 8 in bank `$1D`*: tile rows 2-3 of the hair, 75 % of the bytes equal, marks drawn over the rest (left; the original at the right). Bank `$1C` holds the top of yet another head that no picture of the ROM contains.
+
+![Photo 8 with the bank $1D rows, and the original](roms/prototype_debagame/assets/reconstructed/FacePhoto8_variant_1D.png)
+
+*The editor UI is a screen*: the picture TCRF shows is the unused tile map `BG_F_SCR` (`03:7481`) drawn with the editor tiles (`02:7581`, ids `$80-$FF`); and the settings font of bank `$3A` is an older one, with 反転 where bank `$03` has パレット (both in the sheet above).
+
+**Trivia**
+
+| What | How | Source, check |
+|---|---|---|
+| SRAM AGING runs | first PROTECT TEST > OFF: otherwise the SRAM is write-protected and AGING stops at the first byte (ERROR 00:A000 55->00) | BGB, C |
+| COM counts | two Testers linked: A on either makes the number count 00-FF in a loop on both screens | [TCRF](https://tcrf.net/Proto:Game_Boy_Camera); BGB with two instances, C |
+| Restart | A + B + Select + Start at any time | code and core, C |
+| MOVIE TEST: brightness target | Up / Down move AKARUSA (`$C164`), the target of the exposure loop, `$00-$A8` (not on TCRF) | code and core, C |
 
 The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds, and every reachability map but the Japanese one by `python3 tools/reach_map.py --tag TAG ROM`: rerun them after any work on these ROMs.
 
