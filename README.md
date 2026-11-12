@@ -153,7 +153,7 @@ Ported from the Japanese symbol file with the international tools: L0-L5 done (a
 
 ### Pocket Camera (Hello Kitty) (prototype)
 
-L0-L3 done (2026-11-12: every routine entry and every data block named, 2,218 names of which 150 are not C: 109 leftovers `Leftover_BB_AAAA` by the owner rule, 41 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4-L6 not started ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
+L0-L3 done (2026-11-12: every routine entry and every data block named, 2,224 names of which 150 are not C: 109 leftovers `Leftover_BB_AAAA` by the owner rule, 41 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4-L6 not started ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
 
 **ROM layout**
 

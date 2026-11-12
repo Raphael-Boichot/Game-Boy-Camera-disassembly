@@ -16,7 +16,8 @@ has no evidence for stays empty:
               run only read, never executed, is red too)
   YELLOW      asset data that no organic run read and that the ROM's never-reached table calls unused (assets/never_reached_<tag>.csv:
               ported builds, the rows found at the same address or moved; Hello Kitty, the verdicts `unused...`)
-  ORANGE      data never read but explained by a type row of disasm/sym_types_<tag>.csv or an inline table of the trace (class T)
+  ORANGE      data never read but explained by a type row of disasm/sym_types_<tag>.csv or an inline table of the trace (class T),
+              or (Hello Kitty) by a `used...` verdict of assets/never_reached_kitty.csv (read in BGB or on a Super Game Boy, not in the runs)
   GREY-BLUE   data never read and explained by nothing yet
   muted red / beige  never-read runs of 16+ x $00 (padding) / $FF (fill)
 Prints one line `<tag>_reach: blue N, red N, grey-blue N, orange N, padding N, fill N, light blue N, green N, purple N, yellow N bytes`
@@ -64,7 +65,7 @@ if os.path.exists(nr):
         b = int(r['bank'], 16); o1, o2 = off(b, int(r['start'], 16)), off(b, int(r['end'], 16)) + 1
         if r['class'] == 'JP_EQUIV': green[o1:o2] = True
         elif r['class'] in ('JP_DEAD', 'UNUSED', 'UNREACHABLE'): dead[o1:o2] = True
-unused = np.zeros(N, bool)
+unused = np.zeros(N, bool); used_x = np.zeros(N, bool)
 nrc = os.path.join(D, 'assets', 'never_reached_%s.csv' % T)
 if os.path.exists(nrc):
     for r in csv.DictReader(open(nrc, encoding='utf-8')):
@@ -73,12 +74,14 @@ if os.path.exists(nrc):
                 b, ad = r['%s_addr' % T].split(':'); o = off(int(b, 16), int(ad, 16)); unused[o:o + int(r['bytes'])] = True
         elif r.get('verdict', '').startswith('unused'):
             b = int(r['bank'], 16); unused[off(b, int(r['start'], 16)):off(b, int(r['end'], 16))] = True
+        elif r.get('verdict', '').startswith('used'):    # Hello Kitty: never read in the runs, shown used elsewhere (BGB, SGB): explained
+            b = int(r['bank'], 16); used_x[off(b, int(r['start'], 16)):off(b, int(r['end'], 16))] = True
 pad, fill = RD.runs16(rom)
 cat = np.zeros(N, np.uint8)                                  # 0 blue
 nh = ~hit
-cat[nh & ~code & typed] = 4                                   # orange
-cat[nh & ~code & ~typed] = 9                                  # grey-blue
-cat[nh & ~code & ~typed & pad] = 3; cat[nh & ~code & ~typed & fill] = 8
+cat[nh & ~code & (typed | used_x)] = 4                        # orange
+cat[nh & ~code & ~typed & ~used_x] = 9                                  # grey-blue
+cat[nh & ~code & ~typed & ~used_x & pad] = 3; cat[nh & ~code & ~typed & ~used_x & fill] = 8
 cat[nh & unused] = 7                                          # yellow
 nx = ~ex & code                                               # proven code counts as reached only when executed (a read of code bytes is not a run)
 cat[nx] = 2                                                   # red

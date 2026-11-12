@@ -55,8 +55,9 @@ mode,state,name,tag,evidence
 1B,01,Printing: catch-the-apples game while the printer works,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1C,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1E,00,Screen fade between modes,C,BGB screenshot (screen fading out)
-06,04,Printing: the album page print (Up / Down scroll it),C,BGB screenshot (Up / Down on the print frame: mode $06 state $02 then $04; Left / Right back to the frame)
+06,04,"Printing: choose a wild frame (six; Up / Down)",C,"BGB screenshot (Up / Down on the print frame: mode $06 state $02 then $04; the Hello Kitty pattern, the house, the stickers, Kitty's Family, MEMO, HELLO KITTY; Left / Right back to the frames)"
 06,0F,Printing: print intensity while START is held (うすい / こい),C,BGB screenshot (START held on the print frame; Up / Down move the squirrel on the scale)
 14,01-2,"Print error: picture 2 of 4",C,BGB screenshot (printing with no printer on the link; record 1 of 06:4464)
 14,01-3,"Print error: picture 3 of 4",C,BGB screenshot (record 2 of 06:4464)
 14,01-4,"Print error: picture 4 of 4",C,BGB screenshot (record 3 of 06:4464)
+06,06,Printing: the photo in the wild frame (A prints),C,BGB screenshot (A on the wild frame chooser; the side borders are the last 56 tiles of the frame block)
