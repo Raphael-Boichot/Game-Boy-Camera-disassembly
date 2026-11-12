@@ -346,7 +346,7 @@ LG.append(('mark', UNT, fmt(mk_tot[2]) + ' B', 'unused assets not documented by 
 LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
 notes = (['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.'] if UNCLAIMED else []) + \
         ['Not outlined: every byte that this build uses or that no name calls unused, and padding.' + (' No emulator run of this ROM: the code colour is its static trace.' if DIFF else ''),
-         'Per bank, under its number: the two largest kinds (padding excluded) and the unused bytes of the three categories.']
+         'Per bank, under its number: the two largest kinds (padding excluded) and its unused bytes documented by TCRF.']
 notes.insert(0, 'Padding rule: only runs of 16+ x $00 that no run reached (no run of this ROM: all of them) are padding; $FF is never padding: a $FF run that no run reads, outside the assets, is "fill"; one that is read keeps the kind of its block (no run of this ROM: no fill).')
 for n_ in notes: LG.append(('note', n_))
 TXW = W - LEFT - 20; SW = 150; CW = 250              # swatch width, count column width
@@ -361,7 +361,7 @@ for e in LG:
     else: lines = wrap(e[-1], F3, TXW - SW - CW - 30); lay.append((e, y, lines)); y += 35 * len(lines) + 4
 TOP = y + 40
 PADT = 70                                              # wide space above a bank header, narrow space under it: the header sits with its own bank (owner 2026-11-01)
-_hdr_names = ['unused code', 'TCRF', 'not TCRF']
+_hdr_names = ['', 'TCRF', '']                       # under a bank's number: its TCRF-documented unused bytes only (owner 2026-11-12)
 def _hdr_n(b):        # lines of outline counts under the two kinds of bank b (0 when the map has no outline)
     if not any(mk_bank[b][m] and n for m, n in enumerate(_hdr_names)): return 0
     return len(wrap('  '.join('%s %s' % (n, fmt(int(mk_bank[b][m]))) for m, n in enumerate(_hdr_names) if mk_bank[b][m] and n), FK, PW + GX - 6)[:2])

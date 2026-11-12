@@ -14,3 +14,4 @@ bank,addr,group,why,settle
 06,4176,unused,the mode table entry of mode $18 (unused),final
 05,47E5,unused,called only by Mode02_State0C; nothing enters that state (byte search: no store of state $0C for mode $02 and no ModeState_Set / inline / saved return with (2; $0C)),final
 05,4D10,unused,state $0C of mode $02: nothing enters it (byte search: no store of state $0C for mode $02 and no ModeState_Set / inline / saved return with (2; $0C)),final
+11,6000,unused,"record 0 of the table 00:249D; Photo_LoadEmptyPicture is called from six places, each with ld a, $01 just before (record 1, 11:7000): nothing asks for record 0, so no run can show it (code read, 2026-11-12)",final

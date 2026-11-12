@@ -1953,7 +1953,8 @@
 10:5ee0 Gfx_10_5EE0_Mode05_StampWindow_State06
 11:4000 Gfx_11_4000_Mode0B_NameCardEdit_State08
 11:5fe0 Src_11_5FE0_Mode0B_NameCardEdit_State10
-11:6017 Leftover_11_6017
+11:6000 Unused_Photo_EmptyPicture0_Gfx
+11:7000 Gfx_11_7000_Photo_LoadEmptyPicture
 12:40e0 Gfx_12_40E0_Vram_CopyHBlank
 12:4120 Gfx_12_4120_Vram_CopyHBlank
 12:4143 Leftover_12_4143
