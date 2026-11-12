@@ -22,6 +22,7 @@ The picture is drawn with PIL, screenshots scaled by an integer --scale with nea
 sharp square; the forced screens go into the first empty area big enough for them. --font scales the text (default 1.3).
 """
 import argparse, csv, os, subprocess, tempfile, collections, shlex, textwrap
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__))); import gb_palette
 from PIL import Image, ImageDraw, ImageFont
 ap = argparse.ArgumentParser()
 ap.add_argument('out'); ap.add_argument('--title', required=True); ap.add_argument('--explore', action='append', default=[])
@@ -310,7 +311,7 @@ for (pts, lab, two, lp), dsh in zip(draw_edges, dashes):
     d.text((lx - tw / 2, ly - 8 * Z), lab, fill=c_, font=FK)
 def draw_cell(k, path, x, y, dashed=False):
     for i, l in enumerate(caption(k)): d.text((x, y + i * LH), l, fill=INK, font=FC)
-    im = Image.open(path).convert('RGB').resize((IW, IH), Image.NEAREST)
+    im = gb_palette.gray(Image.open(path)).resize((IW, IH), Image.NEAREST)      # BGB greens -> the project's greys (tools/gb_palette.py)
     img.paste(im, (int(x), int(y + CAPH)))
     d.rectangle([x - 1, y + CAPH - 1, x + IW, y + CAPH + IH], outline=(150, 150, 150))
     for i, l in enumerate(came_from(k)): d.text((x, y + CAPH + IH + 2 + i * LH), l, fill=(110, 110, 110), font=FC)

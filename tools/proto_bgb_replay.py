@@ -56,6 +56,7 @@ if a.csv:
         w = csv.DictWriter(f, ['dir', 'game_seq', 'frames', 'bgb_game_seq', 'bgb_rombank', 'match'], lineterminator='\n'); w.writeheader(); w.writerows(rows)
 if a.sheet:
     from PIL import ImageDraw
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import gb_palette
     dname, png = a.sheet.split('=', 1)
     shots = [(r['game_seq'], os.path.join(a.out, '%s_seq_%s.png' % (dname, r['game_seq']))) for r in rows if r['dir'] == dname]
     shots = [(s_, p_) for s_, p_ in shots if os.path.exists(p_)]
@@ -63,5 +64,5 @@ if a.sheet:
     sheet = Image.new('RGB', (cols * (W + 8) + 8, ((len(shots) + cols - 1) // cols) * (H + pad + 8) + 8), 'white'); d = ImageDraw.Draw(sheet)
     for i, (s_, p_) in enumerate(shots):
         x = 8 + (i % cols) * (W + 8); y = 8 + (i // cols) * (H + pad + 8)
-        d.text((x, y), 'GAME_SEQ $' + s_, fill='black'); sheet.paste(Image.open(p_).convert('RGB'), (x, y + pad))
+        d.text((x, y), 'GAME_SEQ $' + s_, fill='black'); sheet.paste(gb_palette.gray(Image.open(p_)), (x, y + pad))     # BGB greens -> the project's greys
     sheet.save(png)

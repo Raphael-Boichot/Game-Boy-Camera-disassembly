@@ -11,6 +11,7 @@ roms/hello_kitty/assets/highlights_kitty.png.
 """
 import argparse, io, os, sys
 from PIL import Image, ImageDraw, ImageFont
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import gb_palette     # BGB greens -> the project's greys
 HERE = os.path.dirname(os.path.abspath(__file__)); KD = os.path.join(os.path.dirname(HERE), 'roms', 'hello_kitty')
 OUT = os.path.join(KD, 'assets', 'highlights_kitty.png')
 ap = argparse.ArgumentParser(); ap.add_argument('rom'); ap.add_argument('--check', action='store_true'); a = ap.parse_args()
@@ -23,8 +24,8 @@ def pic(b, ad, n):
             for x in range(8): im.putpixel((k % 16 * 8 + x, k // 16 * 8 + y), pal[((lo >> (7 - x)) & 1) | (((hi >> (7 - x)) & 1) << 1)])
     return im.convert('RGB')
 items = [('11:6000, never requested', pic(0x11, 0x6000, 0xE00)), ('11:7000, a photo slot without a photo', pic(0x11, 0x7000, 0xE00)),
-         ('mode $17, print error (BGB, forced)', Image.open(os.path.join(KD, 'screens', 'extra_17_01.png')).convert('RGB')),
-         ('mode $18, Pompompurin (BGB, forced)', Image.open(os.path.join(KD, 'screens', 'extra_18_01.png')).convert('RGB'))]
+         ('mode $17, print error (BGB, forced)', gb_palette.gray(Image.open(os.path.join(KD, 'screens', 'extra_17_01.png')))),
+         ('mode $18, Pompompurin (BGB, forced)', gb_palette.gray(Image.open(os.path.join(KD, 'screens', 'extra_18_01.png'))))]
 p = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'; F = ImageFont.truetype(p, 13) if os.path.exists(p) else ImageFont.load_default()
 S = 2; GAP = 16; W = sum(max(i.width * S, 180) for _, i in items) + GAP * (len(items) + 1); H = max(i.height for _, i in items) * S + 40
 im = Image.new('RGB', (W, H), (255, 255, 255)); d = ImageDraw.Draw(im); x = GAP
