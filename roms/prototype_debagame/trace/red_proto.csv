@@ -1,0 +1,30 @@
+bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
+00,0050,0052,3,Vec_Timer,VECTOR,,timer,,00:0050<-- timer
+00,0274,0279,6,MAIN_SUB,GATE,00:026E,jr nz (20 04) [branch],MAIN_SUB,00:0274<-00:026E branch
+00,036A,0386,29,SIO_INT,GATE,00:0361,jr z (28 07) [branch],SIO_INT,00:036A<-00:0361 branch; 00:0371<-00:035D branch; 00:037C<-00:0357 branch
+00,0713,0725,19,BANK_TEST,GATE,00:0703,jr nz (20 0e) [branch],BANK_TEST,00:0713<-00:0703 branch; 00:0713<-00:0709 branch
+00,076A,077A,17,TEST4M,GATE,00:074E,jr z (28 1a) [branch],TEST4M,00:076A<-00:074E branch
+00,0880,088B,12,VB_SRAM_MENU,GATE,00:087E,jr nz (20 0c) [after cc],VB_SRAM_MENU,00:0880<-00:087E after cc
+00,08D5,08F3,31,SRAM_VERIFY,GATE,00:08D3,jr nz (20 1f) [after cc],SRAM_VERIFY,00:08D5<-00:08D3 after cc
+00,0AC6,0AC7,2,MK_SRAM_AGING,GATE,00:0ABF,jr nz (20 05) [branch],MK_SRAM_AGING,00:0AC6<-00:0ABF branch
+00,0C12,0C2F,30,AGE_DEC,GATE,00:0C10,jr nz (20 1e) [after cc],AGE_DEC,00:0C12<-00:0C10 after cc
+00,0C39,0C3F,7,AGE_DEC,BEHIND,00:0C12,behind AGE_DEC,AGE_DEC,00:0C39<-00:0C14 branch
+00,10DF,10DF,1,CHANGE_PALETTE,GATE,00:10DD,jr z (28 3a) [after cc],CHANGE_PALETTE,00:10DF<-00:10DD after cc
+00,10FA,1108,15,CHANGE_PALETTE,GATE,00:10D5,jr z (28 23) [branch],CHANGE_PALETTE,00:10FA<-00:10D5 branch
+00,1266,126A,5,TIMER_INT,BEHIND,00:0050,behind Vec_Timer,Vec_Timer,00:1266<-00:0050 jp
+00,130B,1364,90,Seq09_ConfigMain,GATE,00:1301,jr z (28 08) [branch],Seq09_ConfigMain,00:130B<-00:1301 branch; 00:130B<-00:1305 branch; 00:130B<-00:1309 after cc
+00,1557,155B,5,Config_PutItem_Part1535,GATE,00:1555,jr nz (20 05) [after cc],Config_PutItem_Part1535,00:1557<-00:1555 after cc
+00,1569,156D,5,Config_PutItem_Part1535,GATE,00:1567,jr nz (20 05) [after cc],Config_PutItem_Part1535,00:1569<-00:1567 after cc
+00,1572,1576,5,Config_PutItem_Part1535,GATE,00:1570,jr nz (20 05) [after cc],Config_PutItem_Part1535,00:1572<-00:1570 after cc
+00,157B,157F,5,Config_PutItem_Part1535,GATE,00:1579,jr nz (20 05) [after cc],Config_PutItem_Part1535,00:157B<-00:1579 after cc
+00,172E,1731,4,PUT_OFS,GATE,00:172C,jr z (28 04) [after cc],PUT_OFS,00:172E<-00:172C after cc
+00,1AEF,1AF5,7,OFF_TEST,GATE,00:1AD2,jr nz (20 1b) [branch],OFF_TEST,00:1AEF<-00:1AD2 branch; 00:1AEF<-00:1ADE branch
+00,1B2E,1B34,7,ON_TEST,GATE,00:1B11,jr nz (20 1b) [branch],ON_TEST,00:1B2E<-00:1B11 branch; 00:1B2E<-00:1B1D branch
+00,1B85,1B90,12,VB_PROTECT,GATE,00:1B83,jr nz (20 0c) [after cc],VB_PROTECT,00:1B85<-00:1B83 after cc
+00,1BA1,1BB0,16,VB_PROTECT,GATE,00:1B93,jr nz (20 0c) [branch],VB_PROTECT,00:1BA1<-00:1B93 branch
+00,1BD9,1BD9,1,PIC_SAVE,GATE,00:1BD6,jp z (ca 9b 1c) [after cc],PIC_SAVE,00:1BD9<-00:1BD6 after cc
+00,328F,32A7,25,EMI_MAIN,GATE,00:328E,ret z (c8) [after cc],EMI_MAIN,00:328F<-00:328E after cc; 00:3295<-00:3282 branch
+00,32C6,32E2,29,N_OBJ_HYOUJI2,BEHIND,00:328F,behind EMI_MAIN,EMI_MAIN,00:32C6<-00:329A call
+00,3339,3339,1,Akarusa_Apply,GATE,00:3337,jr nc (30 01) [after cc],Akarusa_Apply,00:3339<-00:3337 after cc
+00,3369,3369,1,Akarusa_Apply,GATE,00:3367,jr nc (30 01) [after cc],Akarusa_Apply,00:3369<-00:3367 after cc
+00,37C9,37D0,8,CHECK_BLACK,GATE,00:37C7,jr nz (20 f8) [after cc],CHECK_BLACK,00:37C9<-00:37C7 after cc

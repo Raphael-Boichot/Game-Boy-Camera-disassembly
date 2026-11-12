@@ -426,6 +426,16 @@ if A.rom_kitty:
             elif tuple(int(x) for x in mm.groups()) != (sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']):
                 bad('kitty', 'roms/hello_kitty/README.md: doubts quoted %s, the list gives %d / %d / %d / %d' % (mm.group(0)[-90:], sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']))
         # the reachability picture (tools/reach_map.py --tag kitty): redrawn and compared, its counts quoted in the Kitty README
+        # the classification of the red bytes (tools/red_classify.py, roadmap item 4): regenerated and compared, its total quoted in the README
+        rc = _run('tools/red_classify.py', '--tag', 'kitty', A.rom_kitty, '--out', os.path.join(tk, 'red.csv'))
+        mrc = re.search(r'kitty_red: (\d+) bytes in (\d+) pieces: (.*)', rc.stdout)
+        if rc.returncode or not mrc: bad('kitty', 'tools/red_classify.py --tag kitty failed: %s' % (rc.stderr or rc.stdout)[-300:])
+        elif open(os.path.join(tk, 'red.csv'), 'rb').read() != open(KD + 'trace/red_kitty.csv', 'rb').read(): bad('kitty', 'trace/red_kitty.csv is not what tools/red_classify.py makes today: rerun it')
+        else:
+            qq = re.search(r'Classified \(2026-11-12, `tools/red_classify.py`\)\.\*\* ([\d,]+) bytes in ([\d,]+) pieces', open(KD + 'README.md').read())
+            if not qq or (int(qq.group(1).replace(',', '')), int(qq.group(2).replace(',', ''))) != (int(mrc.group(1)), int(mrc.group(2))):
+                bad('kitty', 'roms/hello_kitty/README.md does not quote the red classification (%s bytes in %s pieces)' % (mrc.group(1), mrc.group(2)))
+            else: ok('kitty', 'trace/red_kitty.csv fresh: %s' % mrc.group(3))
         rp = os.path.join(tk, 'reach.png'); r5 = _run('tools/reach_map.py', '--tag', 'kitty', A.rom_kitty, rp)
         m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)
         if r5.returncode or not m5: bad('kitty', 'tools/reach_map.py --tag kitty failed: %s' % (r5.stderr or r5.stdout)[-300:])
@@ -491,6 +501,12 @@ if A.rom_proto:
         else:
             if open(PD + 'trace/observed_proto.md', 'rb').read() != open(j('ob.md'), 'rb').read(): bad('proto', 'trace/observed_proto.md is not what tools/proto_observed.py writes today')
             else: ok('proto', 'observed_proto.md fresh')
+            prc = _runp('tools/red_classify.py', '--tag', 'proto', A.rom_proto, '--out', j('red.csv'))      # the classification of the red bytes
+            mprc = re.search(r'proto_red: (\d+) bytes in (\d+) pieces', prc.stdout)
+            if prc.returncode or not mprc or open(j('red.csv'), 'rb').read() != open(PD + 'trace/red_proto.csv', 'rb').read(): bad('proto', 'trace/red_proto.csv is not what tools/red_classify.py makes today: rerun it')
+            elif not re.search(r'Classified \(2026-11-12, `tools/red_classify.py`\)\.\*\* %s bytes in %s pieces' % (format(int(mprc.group(1)), ','), mprc.group(2)), open(PD + 'README.md').read()):
+                bad('proto', 'roms/prototype_debagame/README.md does not quote the red classification (%s bytes in %s pieces)' % mprc.groups())
+            else: ok('proto', 'trace/red_proto.csv fresh')
             p5 = _runp('tools/reach_map.py', '--tag', 'proto', A.rom_proto, j('reach.png'))      # the coverage map, shown in roms/prototype_debagame/README.md
             if p5.returncode: bad('proto', 'tools/reach_map.py --tag proto failed: %s' % (p5.stderr or p5.stdout)[-300:])
             elif not same_png(j('reach.png'), PD + 'proto_rom_reachability_map.png'): bad('proto', 'proto_rom_reachability_map.png is not what tools/reach_map.py --tag proto draws today: rerun it')

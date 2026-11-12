@@ -44,7 +44,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 |---|---|---|
 | L0 | done | - |
 | L1 | done | Every byte is typed; 51,557 bytes (4.9 %) stay of uncertain kind on the layout map (2026-11-12, 204,703 before the data names): the `Src_` blocks copied into WRAM buffers and never seen in VRAM, and the 110 leftovers. Their kinds are an L6 question. |
-| L2 | done | 7,607 bytes of proven code that no run executed and nothing explains (red on the reachability map, checked 2026-11-12; the other 5,682 never-run bytes are already classified: 4,155 effect, 670 gate, 857 forced-mode): classify them (dead, gated, forced only), as the 1,192 Japanese bytes were; most are in bank `$06` (the exchange states that need a follower) and bank `$00` (`Link_Irq_Connected`, branches of `Prn_SendData`). |
+| L2 | done | - (2026-11-12: the 7,607 red bytes classified by their way in, `trace/red_kitty.csv`: GATE 4,310, BEHIND 1,573, TABLE 1,438, FORCED 263, HAND 20, VECTOR 3; I). Optional: hand verdicts (dead / reachable) for the largest gates, the linked exchange first, as the Japanese ones (docs §16.21). |
 | L3 | done | - (2026-11-12: 0 placeholder; every data block named by kind and consumer, `tools/kitty_data_names.py`; 110 leftovers `Leftover_BB_AAAA`, I, owner rule; 40 doubts in `disasm/sym_unconclusive_kitty.md`, 14 of them final). |
 | L4 | not started | 1. The WRAM access and summary tables (`tools/wram_db.py` reads this trace format). 2. RAM names with a scope per row. 3. Constants: modes and states (`disasm/mode_names_kitty.csv` exists), keys, sound ids. 4. The SRAM access table and map (`tools/sram_db.py` reads this trace format; the layout needs real Kitty saves; the Kitt counter and its unlock thresholds belong here). |
 | L5 | not started | A `tools/make_source.py` preset for this ROM; a source tree that builds byte-exact. |
@@ -56,7 +56,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 |---|---|---|
 | L0 | done | - |
 | L1 | done | 171,154 bytes (16 %) of uncertain kind on the layout map (2026-11-12; 526,366 on 2026-11-10): the 364 unidentified leftover runs (109,647 B, `Leftover_BB_AAAA`) and the old builds' assets named from their symbol tables (`Data_BB_AAAA_<name>`, I). Settled since: the TCRF assets, 467 copies and 10 variants of identified blocks (any offset, any alignment), the source text, 14 PC-memory runs (strings, x86 code, in-memory symbol records), the printer library. What stays is an L6 question (below). |
-| L2 | done | 398 red bytes, all in bank `$00` (the timer interrupt, the self-test error paths, the link code; checked 2026-11-12): classify them. |
+| L2 | done | - (2026-11-12: the 398 red bytes classified, `trace/red_proto.csv`: GATE 354, BEHIND 41, VECTOR 3; I). Optional: credit the BGB runs of the tester (they are not in the coverage arrays). |
 | L3 | done | - (2026-11-11, extended 2026-11-12: 0 placeholder; 1,064 leftovers `Leftover_BB_AAAA[_<what>]`, 986 of them I and 78 C (the printer library routines whose address and name a symbol table gives), owner rule; the TCRF unused assets named `Unused_TCRF_*`). Optional: confirm the 45 I names (developers' names matched from the two older builds) in the code or in BGB. |
 | L4 | not started | Small: the WRAM table (`GAME_SEQ` and the test variables), the constants, the SRAM map of the test patterns (AGING, PROTECT). |
 | L5 | not started | A `tools/make_source.py` preset whose build skips rgbfix, so that the image as dumped rebuilds byte-exact. |
@@ -68,7 +68,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 2. ~~**The prototype's L3**~~ done 2026-11-11 (owner rule: `Leftover_BB_AAAA`, tag I).
 3. ~~**Hello Kitty L3**~~ done 2026-11-12 (data names by kind and consumer; leftovers by the owner rule).
    - ~~**The prototype's leftovers**~~ (owner requests, 2026-11-11 / 12): the TCRF unused assets located and named; copies, parts and variants of identified blocks; PC memory by strings, x86 code and in-memory symbol records; the printer library of the older builds. Uncertain bytes 526,366 -> 171,154.
-4. **L2 red classification of Hello Kitty and the prototype** (7,607 and 398 bytes; the L3 names now exist).
+4. ~~**L2 red classification of Hello Kitty and the prototype**~~ done 2026-11-12 (`tools/red_classify.py`: every red piece with its way in and its gate).
 5. **The prototype's older builds** (L6 items 2-3 of the prototype, about one session): name the rest of their bank-0 code from tables `$2A` / `$35` as the printer library was, find the copies in banks `$1D` / `$20`, and place the third build of bank `$11`. Cheap now that the tools exist, and it settles more uncertain bytes.
 6. **The tools L4 relies on** (step 7 of the audit): one convention for the arrays of the coverage files (`ex` / `dr` in the Japanese, international and Gold files, `exec` / `dread` in Hello Kitty and the prototype), `tools/wram_db.py` checked on every trace format, the BGB scripts with dead `package/` paths; otherwise each L4 grows new one-off scripts.
 7. **Hello Kitty L4** (WRAM, RAM names, constants, SRAM with real saves; several sessions), then **the prototype's L4** (about one).
