@@ -62,15 +62,31 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | L5 | not started | A `tools/make_source.py` preset whose build skips rgbfix, so that the image as dumped rebuilds byte-exact. |
 | L6 | not started | 1. Its text (the title screen in kana). 2. **The rest of the older builds' bank-0 code**: banks `$2C` and `$37` hold the bank 0 of the builds of tables `$2A` / `$35`, banks `$1D` and `$20` two more builds; only the printer library is named so far (`disasm/printer_lib_proto.csv`): the other labels of the two tables can name the rest the same way (C in `$2C` / `$37`, copies found by their bytes in `$1D` / `$20`). 3. **Three builds, not two**: the in-memory symbol records of bank `$11` (`disasm/leftover_symtab_mem_proto.csv`) belong to a third build; place the four code banks and the three symbol lists in one build history. 4. The 364 unidentified leftover runs: byte-per-pixel buffers in rows of 381 bytes (banks `$0C`-`$10`, the same rows as the PC memory of `$08`-`$0B`), ASCII-digit buffers (`$12`-`$19`), bank `$3C`: no counterpart among this ROM's assets, no proof of PC memory; not aging patterns (the aging code computes them). 5. The kinds of the old builds' assets named from their symbol tables (`PROGRAM`, `BG_F_SCR`, `BG_EDIT`, `BG_EDITW`, `HOI_0`, `KAO_1`-`3`). |
 
+## Target: the Japanese ROM's depth at every level (owner, 2026-11-12)
+
+The owner wants Hello Kitty and the prototype taken as far as the Japanese ROM at each level, not only to the test of `HOWTO_NEW_ROM.md` §0. What the Japanese ROM has at each level, and what each of the two ROMs still lacks for it:
+
+| Level | The Japanese ROM has | Hello Kitty lacks | The prototype lacks |
+|---|---|---|---|
+| L1 | 0 bytes of uncertain kind on the layout map | 51,557 uncertain bytes: the `Src_` blocks copied into WRAM buffers (their consumer not seen), the 110 leftovers | 171,154 uncertain bytes: the older builds' code beyond the printer library, the unidentified buffers, the old builds' assets known only by name |
+| L2 | every never-run byte either run by a forced run (WRAM / SRAM pokes, `force_open.py`) or given a hand verdict (dead / unreachable, purple on the map: docs §16.21, §16.26) | the 7,607 red bytes are classified by their gate (I) but not opened: no forced runs on the gates, no hand verdicts, nothing purple | the 398 red bytes: same; and the BGB runs of the tester (aging error, `4M NG`) are not recorded as coverage |
+| L3 | every name with its tag, the doubts list with verdicts, owner answers | the 40 doubts, settled where a BGB run can | the 45 doubts (the developers' names matched from the older builds), settled in the code or BGB |
+| L4 | `wram/` (access tables per area, summary, `INDEX.md`), `sram/` (access table, map), `pocketcamera_jp_ram.sym`, constants (modes, keys, sounds) applied in the source | all of it (not started) | all of it, small (`GAME_SEQ`, the test variables, the SRAM test patterns) |
+| L5 | `src/`: split files, assets as sources, `make` checks the md5 | a `make_source.py` preset and its tree | the same, with the build that skips rgbfix |
+| L6 | partial: charset and texts, owner validation, open questions of `docs/12` | the kana set, the Kitt milestones, owner validation | the title text, the history of the four older builds and their three symbol lists |
+
 ## Order of work, across ROMs
 
-1. ~~**Quick consistency**~~ done 2026-11-10: `docs/01` §1.2 refreshed; 0 red bytes on the international and Gold maps; their WRAM summaries and `INDEX.md`; the 32 uncertain Japanese bytes named.
-2. ~~**The prototype's L3**~~ done 2026-11-11 (owner rule: `Leftover_BB_AAAA`, tag I).
-3. ~~**Hello Kitty L3**~~ done 2026-11-12 (data names by kind and consumer; leftovers by the owner rule).
-   - ~~**The prototype's leftovers**~~ (owner requests, 2026-11-11 / 12): the TCRF unused assets located and named; copies, parts and variants of identified blocks; PC memory by strings, x86 code and in-memory symbol records; the printer library of the older builds. Uncertain bytes 526,366 -> 171,154.
-4. ~~**L2 red classification of Hello Kitty and the prototype**~~ done 2026-11-12 (`tools/red_classify.py`: every red piece with its way in and its gate).
-5. **The prototype's older builds** (L6 items 2-3 of the prototype, about one session): name the rest of their bank-0 code from tables `$2A` / `$35` as the printer library was, find the copies in banks `$1D` / `$20`, and place the third build of bank `$11`. Cheap now that the tools exist, and it settles more uncertain bytes.
-6. **The tools L4 relies on** (step 7 of the audit): one convention for the arrays of the coverage files (`ex` / `dr` in the Japanese, international and Gold files, `exec` / `dread` in Hello Kitty and the prototype), `tools/wram_db.py` checked on every trace format, the BGB scripts with dead `package/` paths; otherwise each L4 grows new one-off scripts.
-7. **Hello Kitty L4** (WRAM, RAM names, constants, SRAM with real saves; several sessions), then **the prototype's L4** (about one).
-8. **Hello Kitty and prototype L5**: source trees through new `make_source.py` presets (about one session each).
-9. **L6 everywhere** (open-ended): the shared retail source, character sets and texts, the open questions of `docs/12`, owner validation of names (with the printer routines' developers' names), the remaining uncertain bytes of Hello Kitty and the prototype.
+Done: 1. quick consistency (2026-11-10); 2. the prototype's L3 (2026-11-11); 3. Hello Kitty L3 (2026-11-12); the prototype's leftovers (2026-11-11 / 12: TCRF assets, copies, parts, variants, PC memory, the printer library; uncertain bytes 526,366 -> 171,154); 4. the red bytes of both ROMs classified (2026-11-12, `tools/red_classify.py`).
+
+The parity program, cheapest and most enabling first (sessions are estimates):
+
+5. **Prototype L1** (about 1 session): name the rest of the older builds' bank-0 code from tables `$2A` / `$35` as the printer library was (banks `$2C` / `$37`, copies in `$1D` / `$20`), place the third build of bank `$11`, give kinds to the old builds' named assets; then decide the unidentified buffers with the owner.
+6. **The tools L4 relies on** (about 1 session; step 7 of the audit): one convention for the arrays of the coverage files (`ex` / `dr` against `exec` / `dread`), `tools/wram_db.py` and `tools/sram_db.py` checked on the Kitty and prototype trace formats, the BGB scripts with dead `package/` paths.
+7. **Prototype L4 and L5** (1-2 sessions): `wram/` and `sram/` as the Japanese ones, RAM names and constants, then a `make_source.py` preset whose build skips rgbfix: the first ROM after the three retail ones to reach L5.
+8. **Prototype L2 to the Japanese depth** (about 1 session): record the tester's BGB runs as coverage (execution watchpoints, as for Hello Kitty), then hand verdicts or forced runs for the rest of the 398 bytes.
+9. **Hello Kitty L2 to the Japanese depth** (2-3 sessions): forced runs on the gates of `trace/red_kitty.csv` (WRAM / SRAM pokes; the linked exchange with two BGB instances; every sound id requested), then hand verdicts (dead / unreachable, purple) for what cannot run.
+10. **Hello Kitty L1 to 0 uncertain bytes** (1-2 sessions): follow the `Src_` blocks into their WRAM buffers (who reads the buffer, what it becomes on screen), and the kinds of the leftovers.
+11. **Hello Kitty L4** (3-4 sessions: WRAM, HRAM, SRAM with real saves, RAM names, constants), then **Hello Kitty L5** (1-2 sessions).
+12. **L3 doubts of both ROMs** settled by BGB runs where a run can (alongside 8-9).
+13. **L6 everywhere** (open-ended): the shared retail source, character sets and texts, the open questions of `docs/12`, owner validation of names (with the printer routines' developers' names), the build history of the prototype.
