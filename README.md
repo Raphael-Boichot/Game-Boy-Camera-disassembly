@@ -195,10 +195,6 @@ A hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ve
 
 **Highlights**
 
-*Face photo 6, whole*: bank `$30` lost its two top rows under source text; bank `$23` still holds them (`23:60E1`), followed by rows equal to `30:4201-43FF` byte for byte (`tools/proto_reconstruct.py`).
-
-![Face photo 6, rebuilt](roms/prototype_debagame/assets/reconstructed/FacePhoto6_whole.png)
-
 *An edited photo 8 in bank `$1D`*: tile rows 2-3 of the hair, 75 % of the bytes equal, marks drawn over the rest (left; the original at the right).
 
 ![Photo 8 with the bank $1D rows, and the original](roms/prototype_debagame/assets/reconstructed/FacePhoto8_variant_1D.png)

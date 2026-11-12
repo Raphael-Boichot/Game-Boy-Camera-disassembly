@@ -3,9 +3,6 @@
 
   tools/proto_reconstruct.py PROTO.gb [--check]
 
-  FacePhoto6_whole.png      face photo 6 (128 x 112): tile rows 0-1 from 23:60E1 (Leftover_23_60E1_Unused_TCRF_FacePhoto6_Rows0To1_Gfx),
-                            rows 2-13 from 30:4201 (Unused_TCRF_FacePhoto6_Rows2To13_Gfx); in bank $23 the two rows are followed by
-                            rows 2-3 equal to 30:4201-43FF byte for byte, which ties them to this picture.
   FacePhoto8_variant_1D.png face photo 8 (05:4E01) with its tile rows 2-3 replaced by the edited version of bank $1D
                             (Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001), next to the original.
   FacePhoto10_variant_1C.png face photo 10 (05:6A01) with its tile rows 6-7 replaced by the edited strip of bank $1C
@@ -39,8 +36,7 @@ def p10v():                     # photo 10 on a 19-tile-wide canvas; rows 6-7, c
     for r in range(2):
         for c in range(16): o = ((6 + r) * 19 + c + 3) * 16; b[o:o + 16] = s1c[(r * 16 + c) * 16:(r * 16 + c + 1) * 16]
     return bytes(b)
-pics = {'FacePhoto6_whole.png': img(g(0x23, 0x60E1, 512) + g(0x30, 0x4201, 3072)),
-        'FacePhoto8_variant_1D.png': side(img(p8[:512] + g(0x1D, 0x4001, 512) + p8[1024:]), img(p8)),
+pics = {'FacePhoto8_variant_1D.png': side(img(p8[:512] + g(0x1D, 0x4001, 512) + p8[1024:]), img(p8)),
         'FacePhoto10_variant_1C.png': side(img(p10v(), w=19), img(p10))}
 bad = 0
 for nm, im in pics.items():
