@@ -38,7 +38,7 @@ import csv, json, os, re, sys, argparse, collections
 D = 'roms/prototype_debagame/'
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
 ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
-ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--symtab-mem', default=D + 'disasm/leftover_symtab_mem_proto.csv'); ap.add_argument('--printer-lib', default=D + 'disasm/printer_lib_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
+ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--symtab-mem', default=D + 'disasm/leftover_symtab_mem_proto.csv'); ap.add_argument('--printer-lib', default=D + 'disasm/printer_lib_proto.csv'); ap.add_argument('--oldbuilds', default=D + 'disasm/oldbuilds_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
 ap.add_argument('--hand', default=D + 'disasm/layers/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
 ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv'); ap.add_argument('--texts', default=D + 'assets/text_sections_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
@@ -57,6 +57,9 @@ for (nm, b, v), tabs in sorted(lab.items(), key=lambda k: (k[0][1], k[0][2])):
     old = names.get((b, v))     # Japanese naming (owner, 2026-11-09): the block's kind prefix and own address, the developers' name as suffix
     if old and re.match(r'(Gfx|Map)_[0-9A-F]{2}_[0-9A-F]{4}$', old[0]):
         put(b, v, '%s_%s' % (old[0], nm), 'C', '%s in both old symbol tables (same bank and address); this build copies the block here: %s' % (nm, old[2]), 'symtab_asset')
+    elif nm.startswith('BG_'):                    # every BG_ block that this build copies is a BG map (BG_BANK, BG_MOVIE, BG_CONF ...): roadmap step 5
+        put(b, v, 'Map_%02X_%04X_%s' % (b, v, nm), 'I', '%s in %s old symbol table%s at this bank and address; this build neither copies nor reads it (L2 runs); a BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the menu maps)' % (
+            nm, 'both' if len(tabs) == 2 else 'one', 's' if len(tabs) == 2 else ''), 'symtab_asset')
     else: put(b, v, 'Data_%02X_%04X_%s' % (b, v, nm), 'I', '%s in %s old symbol table%s at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled' % (
         nm, 'both' if len(tabs) == 2 else 'one', 's' if len(tabs) == 2 else ''), 'symtab_asset')
 # 3. port from the old builds
@@ -95,7 +98,7 @@ for k, n in TR['code'].items():
 for k in TR['inline']:
     o = int(k[3:], 16) if k.startswith('00:') else int(k[:2], 16) * 0x4000 + int(k[3:], 16) - 0x4000
     cov_[o] = 1
-TYPES = [r for r in csv.DictReader(open(a.types)) if not r['note'].startswith(COPYNOTE)]     # without the rows of an earlier run of step 4b
+TYPES = [r for r in csv.DictReader(open(a.types)) if not r['note'].startswith((COPYNOTE, 'older build: ', 'printer library of an older build'))]     # without the rows of an earlier run of step 4b
 for r in TYPES:
     b = int(r['bank'], 16); s0, e0 = int(r['start'], 16), int(r['end'], 16)
     for ad in range(s0, e0): cov_[ad if b == 0 else b * 0x4000 + ad - 0x4000] = 1
@@ -111,25 +114,41 @@ import bisect
 # 4a. the printer library of the older builds (owner 2026-11-12; tools/proto_printer_lib.py -> disasm/printer_lib_proto.csv): every routine
 #     and data block from SIOINT to STARTSTRINGTRANS in banks $2C / $37 (the bank 0 of the builds of tables $2A / $35: the address and the
 #     developers' name come from the table, tag C) and their copies in banks $1D / $20 (found by their bytes, tag I):
-#     Leftover_BB_AAAA_<developers' name>, code that this build never runs (typed data), with the Japanese Prn_* routine it matches
-LIBROWS = []; LIBTYPES = []
+#     Leftover_BB_AAAA_<developers' name>, code that this build never runs (typed data), with the Japanese Prn_* routine it matches.
+#     Step 5 of the roadmap (2026-11-12): the same for every other bank-0 label of the two tables (tools/proto_oldbuilds.py ->
+#     disasm/oldbuilds_proto.csv: code or data, C at the table address, I for the copies of the code found in banks $1D / $20)
+LIBROWS = []; LIBTYPES = []      # (offset, bank, addr, developers' name, is data, tag, what, default size, tool)
+def _o(x): b_, a_ = int(x[:2], 16), int(x[3:], 16); return a_ if b_ == 0 else b_ * 0x4000 + a_ - 0x4000
 if os.path.exists(a.printer_lib):
-    def _o(x): b_, a_ = int(x[:2], 16), int(x[3:], 16); return a_ if b_ == 0 else b_ * 0x4000 + a_ - 0x4000
-    LIB = list(csv.DictReader(open(a.printer_lib)))
-    for r in LIB:
-        for col, tg in (('b2C', 'C'), ('b37', 'C'), ('b1D', 'I'), ('b20', 'I')):
-            if r[col]: LIBROWS.append((_o(r[col]), int(r[col][:2], 16), int(r[col][3:], 16), r, tg, col))
-    LIBROWS.sort(key=lambda x: x[0])
-    for k_, (o_, cb, ca, r, tg, col) in enumerate(LIBROWS):         # each piece runs to the next piece of the same bank (the last: its size in $2C)
-        nxt = LIBROWS[k_ + 1][0] if k_ + 1 < len(LIBROWS) and LIBROWS[k_ + 1][1] == cb else o_ + int(r['size'])
-        isdata = r['dev_name'].startswith(('PACKET', 'PREAMBLEDATA'))
+    for r in csv.DictReader(open(a.printer_lib)):
         jp = ', the Japanese %s (%s, %s match, instruction ratio %s)' % (r['jp_name'], r['jp_addr'], r['jp_match'], r['jp_ratio']) if r['jp_match'] in ('exact', 'near') else (
              ', no Japanese counterpart of 0.8 or more' if r['jp_match'] == 'none' else ', too short to pair with a Japanese routine')
-        how = 'address and name from symbol table $%s' % ('2A' if col == 'b2C' else '35') if tg == 'C' else 'found by its bytes (16-bit operands masked) in the order of bank $2C'
-        put(cb, ca, 'Leftover_%02X_%04X_%s' % (cb, ca, r['dev_name']), tg, 'leftover: %d bytes of %s %s of the printer library of an older build%s; %s; %s' % (
-            nxt - o_, 'data' if isdata else 'code', r['dev_name'], jp, how, 'nothing in this build reads it' if isdata else 'code that this build never runs (typed data)'), 'oldlib')
-        LIBTYPES.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + nxt - o_), 'data', '', 'printer library of an older build: %s (%s; tools/proto_printer_lib.py)' % (r['dev_name'], 'data' if isdata else 'code never run here')])
-        for k in range(o_, nxt): cov_[k] = 1; idcov_[k] = 1
+        for col, tg in (('b2C', 'C'), ('b37', 'C'), ('b1D', 'I'), ('b20', 'I')):
+            if r[col]:
+                how = 'address and name from symbol table $%s' % ('2A' if col == 'b2C' else '35') if tg == 'C' else 'found by its bytes (16-bit operands masked) in the order of bank $2C'
+                LIBROWS.append((_o(r[col]), int(r[col][:2], 16), int(r[col][3:], 16), r['dev_name'], r['dev_name'].startswith(('PACKET', 'PREAMBLEDATA')), tg,
+                                'of the printer library of an older build%s; %s' % (jp, how), int(r['size']), 'tools/proto_printer_lib.py'))
+if os.path.exists(a.oldbuilds):                      # step 5 of the roadmap (2026-11-12): the rest of the older builds' bank 0
+    for r in csv.DictReader(open(a.oldbuilds)):
+        if r['kind'] == 'skipped': continue
+        cols = [('addr', 'C')] + ([('copy_1D', 'I'), ('copy_20', 'I')] if r['kind'] == 'code' else [])
+        for col, tg in cols:
+            if r[col]:
+                how = 'address and name from symbol table $%s%s' % (r['table'], ', called in its bank' if r['called'] == 'yes' else '') if col == 'addr' else 'found by its bytes (16-bit operands masked) near its place in bank $2C'
+                LIBROWS.append((_o(r[col]), int(r[col][:2], 16), int(r[col][3:], 16), r['dev_name'], r['kind'] == 'data', tg,
+                                'of the bank 0 of an older build (%s); %s' % ('the build of table $%s' % r['table'] if col == 'addr' else 'bank $%s' % r[col][:2], how), int(r['size']), 'tools/proto_oldbuilds.py'))
+LIBROWS.sort(key=lambda x: x[0])
+_seen_lib = set()
+for k_, (o_, cb, ca, dn, isdata, tg, what, size, tool) in enumerate(LIBROWS):    # each piece runs to the next piece of the same bank (the last: its size)
+    if o_ in _seen_lib: continue
+    _seen_lib.add(o_)
+    nx_ = next((x for x in LIBROWS[k_ + 1:] if x[0] > o_), None)
+    nxt = nx_[0] if nx_ and nx_[1] == cb else o_ + size
+    nxt = min(nxt, o_ + size) if tool == 'tools/proto_oldbuilds.py' else nxt
+    put(cb, ca, 'Leftover_%02X_%04X_%s' % (cb, ca, dn), tg, 'leftover: %d bytes of %s %s %s; %s' % (
+        nxt - o_, 'data' if isdata else 'code', dn, what, 'nothing in this build reads it' if isdata else 'code that this build never runs (typed data)'), 'oldlib')
+    LIBTYPES.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + nxt - o_), 'data', '', 'older build: %s (%s; %s)' % (dn, 'data' if isdata else 'code never run here', tool)])
+    for k in range(o_, nxt): cov_[k] = 1; idcov_[k] = 1
 # 4b. leftover copies (owner rule 2026-11-11): an exact copy of an identified block (a named asset, map, table or routine whose bytes are all
 #     typed or traced, 32 bytes or more, not one repeated byte) that lies in bytes nothing identifies inherits the block: it is named
 #     Leftover_BB_AAAA_<name of the block>, tag I, and gets the block's type row (a copy of a routine is typed data: this build never runs it)
@@ -368,9 +387,9 @@ settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FIN
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover printer library', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
         w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
-                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers', 'oldlib': 'a routine or block of the older builds\' printer library (disasm/printer_lib_proto.csv), in bytes no type row, traced instruction or reader covers',
+                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers', 'oldlib': 'a routine or block of an older build\'s bank 0 (disasm/printer_lib_proto.csv, disasm/oldbuilds_proto.csv), in bytes no type row, traced instruction or reader covers',
                      'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers'}[src]])
 with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])

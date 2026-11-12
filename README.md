@@ -107,7 +107,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets*: first pass done in the core and BGB runs (2026-11-08): [`assets/never_reached_kitty.csv`](roms/hello_kitty/assets/never_reached_kitty.csv), with its picture and counts in [`roms/hello_kitty/`](roms/hello_kitty/README.md).
 
-**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 done (every routine named; the 986 leftovers are `Leftover_BB_AAAA`, with the block they copy (whole, a part or a variant), `_AsmSource` / `_SrcListing` or `_PcRam` as suffix when known), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
+**Pocket Camera Prototype (Japan) ("DEBAGAME")**: L0-L3 done (every routine named; the 1,346 leftovers are `Leftover_BB_AAAA`, with the block they copy (whole, a part or a variant), `_AsmSource` / `_SrcListing` or `_PcRam` as suffix when known), L4-L6 not started (`roms/prototype_debagame/README.md`). The ROM is a hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ver10.24: its running code is bank `$00` alone, traced with 0 unresolved sites and 97 % of it run in the core, and its 13 screens reached in BGB (SRAM, bank, protect and sensor tests).
 
 ![What each byte of the early prototype ROM is](roms/prototype_debagame/proto_rom_layout_map.png)
 
