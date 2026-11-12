@@ -191,6 +191,7 @@ for i, (o, r) in enumerate(labels):
         l_code[i] = l_code[i - 1]      # --groups: code under an automatic data label follows inline parameters (Copy_FarInline ...): the routine before it owns it
     else: l_code[i] = KEY[_g]
     k = data_kind(r['name'])
+    if LKINDS and r['name'].startswith('Leftover_') and 'code that this build never runs' in (r.get('note') or ''): k = 'LCODE'    # old builds' code (the printer library)
     if r['conf'] == '?' and k == 'TBL': k = 'UNC'                                          # role doubtful AND no kind in the name
     l_data[i] = KEY[k]
 idx = np.searchsorted(loff, np.arange(N), 'right') - 1

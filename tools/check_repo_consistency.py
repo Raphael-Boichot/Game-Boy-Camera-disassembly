@@ -450,7 +450,8 @@ if A.rom_proto:
     p2 = _runp('tools/proto_types.py', A.rom_proto, j('t.json'), '--types', j('ty.csv'), '--sites', j('cs.csv'), '--rommap', j('rm.csv'),
                '--names', j('na.csv'), '--symtab', j('st.csv')) if not p1.returncode else p1
     p2b = _runp('tools/proto_match_old.py', A.rom_proto, j('st.csv'), j('t.json'), j('mo.csv')) if not p2.returncode else p2      # L3
-    p2c = _runp('tools/proto_names.py', '--auto', j('na.csv'), '--match', j('mo.csv'), '--symtab', j('st.csv'), '--symtab-mem', j('stm.csv'), '--trace', j('t.json'),
+    p2l = _runp('tools/proto_printer_lib.py', A.rom_proto, A.rom or '/root/work/roms/pocketcamera_jp.gb', '--symtab', j('st.csv'), '--out', j('pl.csv'))     # the old builds' printer library
+    p2c = _runp('tools/proto_names.py', '--auto', j('na.csv'), '--match', j('mo.csv'), '--symtab', j('st.csv'), '--symtab-mem', j('stm.csv'), '--printer-lib', j('pl.csv'), '--trace', j('t.json'),
                 '--types', j('ty.csv'), '--rom', A.rom_proto, '--out', j('nm.csv'), '--doubts', j('dq.md'), '--texts', j('tx.csv')) if not p2b.returncode else p2b
     if p2c.returncode: p2 = p2c
     p3 = _runp('tools/sym_build.py', A.rom_proto, '--names', j('nm.csv'), '--types', j('ty.csv'), '--trace', j('t.json'),
@@ -460,7 +461,7 @@ if A.rom_proto:
         stale = [f for f, g in (('disasm/leftover_symtab_proto.csv', 'st.csv'), ('trace/trace_proto.json', 't.json'), ('trace/trace_proto_unresolved.md', 'u.md'),
                                 ('disasm/sym_types_proto.csv', 'ty.csv'), ('assets/copy_sites_proto.csv', 'cs.csv'), ('trace/rom_map_proto.csv', 'rm.csv'),
                                 ('disasm/layers/sym_names_proto_auto.csv', 'na.csv'), ('disasm/match_old_proto.csv', 'mo.csv'),
-                                ('disasm/sym_names_proto.csv', 'nm.csv'), ('disasm/sym_unconclusive_proto.md', 'dq.md'), ('disasm/sym_unconclusive_proto.csv', 'dq.csv'), ('disasm/sym_settled_unused_proto.csv', 'sym_settled_unused_proto.csv'), ('disasm/leftover_symtab_mem_proto.csv', 'stm.csv'), ('assets/text_sections_proto.csv', 'tx.csv'), ('pocketcamera_proto.sym', 'p.sym'))
+                                ('disasm/sym_names_proto.csv', 'nm.csv'), ('disasm/sym_unconclusive_proto.md', 'dq.md'), ('disasm/sym_unconclusive_proto.csv', 'dq.csv'), ('disasm/sym_settled_unused_proto.csv', 'sym_settled_unused_proto.csv'), ('disasm/leftover_symtab_mem_proto.csv', 'stm.csv'), ('disasm/printer_lib_proto.csv', 'pl.csv'), ('assets/text_sections_proto.csv', 'tx.csv'), ('pocketcamera_proto.sym', 'p.sym'))
                  if not os.path.exists(PD + f) or open(PD + f, 'rb').read() != open(j(g), 'rb').read()]
         if stale: bad('proto', 'not what the prototype pipeline makes today (SETUP.md, prototype): %s' % ', '.join(stale))
         else: ok('proto', 'symbol tables, trace, types, copy sites, byte classes, old-build matches, names, doubts list and pocketcamera_proto.sym fresh')

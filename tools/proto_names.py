@@ -38,7 +38,7 @@ import csv, json, os, re, sys, argparse, collections
 D = 'roms/prototype_debagame/'
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
 ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
-ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--symtab-mem', default=D + 'disasm/leftover_symtab_mem_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
+ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--symtab-mem', default=D + 'disasm/leftover_symtab_mem_proto.csv'); ap.add_argument('--printer-lib', default=D + 'disasm/printer_lib_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
 ap.add_argument('--hand', default=D + 'disasm/layers/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
 ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv'); ap.add_argument('--texts', default=D + 'assets/text_sections_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
@@ -108,6 +108,28 @@ while i < len(ROMB):                                   # padding: 16+ equal $00 
         for k in range(i, j): cov_[k] = 1
     i = j
 import bisect
+# 4a. the printer library of the older builds (owner 2026-11-12; tools/proto_printer_lib.py -> disasm/printer_lib_proto.csv): every routine
+#     and data block from SIOINT to STARTSTRINGTRANS in banks $2C / $37 (the bank 0 of the builds of tables $2A / $35: the address and the
+#     developers' name come from the table, tag C) and their copies in banks $1D / $20 (found by their bytes, tag I):
+#     Leftover_BB_AAAA_<developers' name>, code that this build never runs (typed data), with the Japanese Prn_* routine it matches
+LIBROWS = []; LIBTYPES = []
+if os.path.exists(a.printer_lib):
+    def _o(x): b_, a_ = int(x[:2], 16), int(x[3:], 16); return a_ if b_ == 0 else b_ * 0x4000 + a_ - 0x4000
+    LIB = list(csv.DictReader(open(a.printer_lib)))
+    for r in LIB:
+        for col, tg in (('b2C', 'C'), ('b37', 'C'), ('b1D', 'I'), ('b20', 'I')):
+            if r[col]: LIBROWS.append((_o(r[col]), int(r[col][:2], 16), int(r[col][3:], 16), r, tg, col))
+    LIBROWS.sort(key=lambda x: x[0])
+    for k_, (o_, cb, ca, r, tg, col) in enumerate(LIBROWS):         # each piece runs to the next piece of the same bank (the last: its size in $2C)
+        nxt = LIBROWS[k_ + 1][0] if k_ + 1 < len(LIBROWS) and LIBROWS[k_ + 1][1] == cb else o_ + int(r['size'])
+        isdata = r['dev_name'].startswith(('PACKET', 'PREAMBLEDATA'))
+        jp = ', the Japanese %s (%s, %s match, instruction ratio %s)' % (r['jp_name'], r['jp_addr'], r['jp_match'], r['jp_ratio']) if r['jp_match'] in ('exact', 'near') else (
+             ', no Japanese counterpart of 0.8 or more' if r['jp_match'] == 'none' else ', too short to pair with a Japanese routine')
+        how = 'address and name from symbol table $%s' % ('2A' if col == 'b2C' else '35') if tg == 'C' else 'found by its bytes (16-bit operands masked) in the order of bank $2C'
+        put(cb, ca, 'Leftover_%02X_%04X_%s' % (cb, ca, r['dev_name']), tg, 'leftover: %d bytes of %s %s of the printer library of an older build%s; %s; %s' % (
+            nxt - o_, 'data' if isdata else 'code', r['dev_name'], jp, how, 'nothing in this build reads it' if isdata else 'code that this build never runs (typed data)'), 'oldlib')
+        LIBTYPES.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + nxt - o_), 'data', '', 'printer library of an older build: %s (%s; tools/proto_printer_lib.py)' % (r['dev_name'], 'data' if isdata else 'code never run here')])
+        for k in range(o_, nxt): cov_[k] = 1; idcov_[k] = 1
 # 4b. leftover copies (owner rule 2026-11-11): an exact copy of an identified block (a named asset, map, table or routine whose bytes are all
 #     typed or traced, 32 bytes or more, not one repeated byte) that lies in bytes nothing identifies inherits the block: it is named
 #     Leftover_BB_AAAA_<name of the block>, tag I, and gets the block's type row (a copy of a routine is typed data: this build never runs it)
@@ -226,7 +248,7 @@ for r0, r1 in runs_:
 with open(a.types, 'w', newline='') as f:     # the type table with the copies' rows (rerunning this script gives the same file)
     w_ = csv.writer(f, lineterminator='\n'); w_.writerow(['bank', 'start', 'end', 'type', 'width', 'note'])
     for r in TYPES: w_.writerow([r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']])
-    w_.writerows(copy_types)
+    w_.writerows(copy_types + LIBTYPES)
 # 4c. leftover text (owner 2026-11-11): the text type rows (proto_types.py: printable ASCII / Shift-JIS) are pieces of the developers' PC files
 #     that the build tool left in unused ROM space. Leftover_BB_AAAA_AsmSource: assembler source in clear (instructions, DEFB / DB, comments);
 #     Leftover_BB_AAAA_SrcListing: a listing of that source, one `file.dmg(line) : text` line per hit (a grep output). Tag I, final.
@@ -340,15 +362,15 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-FINAL = ('gap', 'copy', 'variant', 'text', 'ram')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib')      # the leftovers: their I tag is final (owner rule 2026-11-11)
 doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] not in FINAL)
 settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FINAL)
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover printer library', 'text': 'leftover text', 'ram': 'leftover PC memory'}[src]
         w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
-                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers',
+                    'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers', 'oldlib': 'a routine or block of the older builds\' printer library (disasm/printer_lib_proto.csv), in bytes no type row, traced instruction or reader covers',
                      'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers'}[src]])
 with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])
