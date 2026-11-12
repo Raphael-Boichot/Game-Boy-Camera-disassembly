@@ -320,6 +320,8 @@ if getattr(A, 'rom_proto', None):
 if getattr(A, 'rom_kitty', None):
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
+    _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 # ------------------------------------------------------------------ kinds: the name prefix against the copy destination
 _kb = []
 for _t in ('jp_rev_a', 'us_eu', 'gold', 'prototype_debagame'):
