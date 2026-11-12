@@ -757,8 +757,8 @@ if A.rom:
         n += quoted('layout legend', r'tile maps ([\d,]+) B \(\d+\.\d %\), sprite layouts ([\d,]+) B, sound data ([\d,]+) B, palettes ([\d,]+) B \(.*?\), other tables and text ([\d,]+) B \(.*?\), \*\*uncertain ([\d,]+) B\*\*, `\$FF` fill ([\d,]+) B \(\d+\.\d %\), and padding ([\d,]+) B \(',
                     lambda m: ((K['MAP'], K['OAM'], K['SOUND'], K['PALT'], K['TBL'], K['UNC'], K['FILL'], K['PAD']), tuple(num(m.group(i)) for i in range(1, 9))), docs=('README.md',), need=('README.md',))
         n += quoted('layout legend', r'\(([\d,]+) tiles, ([\d,]+) B of the padding;', lambda m: ((int(pt.group(1)), int(pt.group(2))), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
-        n += quoted('layout legend', r'code that never ran \(([\d,]+) B\), red = unused data \(([\d,]+) B\), blue = identified data the v8 run never read \(([\d,]+) B\); padding is never touched by definition \(([\d,]+) B\)',
-                    lambda m: (tuple(int(x) for x in mk.groups()), tuple(num(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
+        n += quoted('layout legend', r'unused code \(black, ([\d,]+) B\), unused assets documented by TCRF \(orange, ([\d,]+) B\), unused assets not documented by TCRF \(cyan, ([\d,]+) B\)',
+                    lambda m: (tuple(int(x) for x in mk.groups()[:3]), tuple(num(m.group(i)) for i in range(1, 4))), docs=('README.md',), need=('README.md',))
         n += quoted('layout overrides', r'the (\d+) `Src_\*` / `Data_\*` blocks \(([\d,]+) B in banks[^)]*\) are ([\d,]+) B of tile maps .*? and ([\d,]+) B of tile sets',
                     lambda m: ((OVN, OVB, OV['MAP'], OV['T_UI']), tuple(num(m.group(i)) for i in range(1, 5))), docs=('README.md',), need=('README.md',))
         # the graphic spans tagged `?` (a `?` label on a Gfx type row; its extent is the type row) and the total of the formerly uncertain bytes

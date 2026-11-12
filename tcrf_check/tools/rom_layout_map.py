@@ -245,7 +245,18 @@ mark[cat == 3] = 3; mark[cat == 4] = 2; mark[(cat == 7) | ((cat == 2) & ~is_code
 if DIFF:                                             # outline = difference from the Japanese ROM: 0 code new or changed (black), 2 data that differs (blue)
     _d = np.load(DIFF)['diff']; mark = np.full(N, 255, np.uint8); mark[_d == 1] = 0; mark[(_d == 2) & (kind != KEY['PAD'])] = 2
 cmark = mark.copy()                                    # the csv keeps these counts whatever the outline (owner 2026-11-01: differences in the csv, not in the picture)
-if OUTLINE == 'none': mark = np.full(N, 255, np.uint8)
+# the outline (owner 2026-11-12): only the unused bytes, in three categories, on every map: 0 unused code (traced code that no run runs or
+# that the names call unused, copies of routines that this build never runs, and the Japanese proven-dead code), 1 unused assets documented by
+# TCRF, 2 unused assets not documented by TCRF (roms/<folder>/assets/unused_<tag>.csv, tools/unused_table.py); code wins over data in a tile
+ust = np.zeros(N, np.uint8)
+if UCATS != 'none' and os.path.exists(UCATS):
+    for r in csv.DictReader(open(UCATS, encoding='utf-8')):
+        o0 = flat(int(r['bank'], 16), int(r['addr'], 16)); v_ = 1 if r['category'] == 'tcrf' else 2
+        seg = ust[o0:o0 + int(r['bytes'])]; seg[seg == 0] = v_
+mark = np.full(N, 255, np.uint8)
+mark[ust == 2] = 2; mark[ust == 1] = 1
+mark[(ust > 0) & (is_code | (kind == KEY.get('LCODE', -1)))] = 0
+if OUTLINE == 'reach' and not DIFF: mark[(cat == 6) | ((cat == 2) & is_code)] = 0      # the Japanese proven-dead code (docs 16.15, 16.21)
 
 big_unused = {}
 if os.path.exists(UNUSED):
@@ -289,12 +300,7 @@ BG, INK = 4 * len(CATS), 4 * len(CATS) + 1
 pal = [c for f in FAM for c in f] + [(255, 255, 255), (0, 0, 0), (214, 20, 40), (0, 70, 220), (110, 110, 110), (205, 0, 160)]
 RED, BLUE, GREYI, CROSS = INK + 1, INK + 2, INK + 3, INK + 4
 pal += [(255, 120, 0), (0, 180, 215)]; UTC, UNT = INK + 5, INK + 6           # unused: documented by TCRF (orange), not documented by TCRF (cyan)
-ust = np.zeros(N, np.uint8); ucount = [0, 0, 0]
-if UCATS != 'none' and os.path.exists(UCATS):
-    for r in csv.DictReader(open(UCATS, encoding='utf-8')):
-        o0 = flat(int(r['bank'], 16), int(r['addr'], 16)); v_ = 1 if r['category'] == 'tcrf' else 2
-        seg = ust[o0:o0 + int(r['bytes'])]; seg[seg == 0] = v_
-    ucount = [0] + [int((ust == v_).sum()) for v_ in (1, 2)]
+
 # a tile row is two bytes: the kind of the pair is the one with the lower rank (UNCERTAIN first, then code, then data, padding last)
 RANKK = np.zeros(len(CATS), np.int32); order = [KEY['UNC']] + list(range(11)) + list(range(11, len(CATS) - 1)) + [KEY['PAD']]
 order = [k for i, k in enumerate(order) if k not in order[:i]]
@@ -327,32 +333,20 @@ def wrap(text, fnt, maxw):
 LG = []          # entries: ('head', text) | ('cat', i, count, text) | ('mark', colour, count, text) | ('cross', count, text) | ('note', text)
 subtitle = []
 if NOTE1 is not None: subtitle = [NOTE1, NOTE2 or '']
-elif not DIFF: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes); the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that no run reached. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).' % (BTW, BTH)]
-else: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that differ from the Japanese ROM (docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.' % (BTW, BTH)]
+elif not DIFF: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes); the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that hold unused bytes: unused code, unused assets documented by TCRF, unused assets not documented by TCRF. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).' % (BTW, BTH)]
+else: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that hold unused bytes: unused code, unused assets documented by TCRF, unused assets not documented by TCRF (the differences from the Japanese ROM are counted in the csv, docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.' % (BTW, BTH)]
 LG.append(('head', 'CODE (traced instructions), by the function of the routine that owns them'))
 for i in range(11): LG.append(('cat', i, fmt(tot_cat[i]) + ' B  ' + pct(tot_cat[i]), CATS[i][1]))
 LG.append(('head', 'DATA, by what the bytes are (identified even when no code calls them)'))
 for j in range(11, len(CATS)): LG.append(('cat', j, fmt(tot_cat[j]) + ' B  ' + pct(tot_cat[j]), CATS[j][1]))
-LG.append(('head', {'reach': 'OUTLINE: tiles that no run reached (16-byte tiles)', 'diff': 'OUTLINE: tiles that differ from the Japanese ROM (16-byte tiles)',
-                    'none': 'OUTLINE: none yet (no run and no comparison for this ROM)'}[OUTLINE]))
-MTXT = {'reach': {0: 'never-run code, proven dead (evidence I; docs §16.15, 16.21)', 1: 'data that no run shows or reads: the REALLY unused assets (I; docs §16.24)',
-                  2: 'identified data the v8 run never read (I; docs §16.13)'},
-        'diff': {0: 'code new or changed in this build (no JP instruction pairs with it as the same code)', 2: 'data that differs from the Japanese bytes (new pictures, English text, moved tables)'},
-        'none': {}}[OUTLINE]
-for m, col in ((0, INK), (1, RED), (2, BLUE)):
-    if m in MTXT: LG.append(('mark', col, fmt(mk_tot[m]) + ' B', MTXT[m]))
+LG.append(('head', 'OUTLINE: the tiles (16 bytes) that hold unused bytes, in three categories%s' % (' (%s, tools/unused_table.py)' % os.path.relpath(UCATS, REPO) if UCATS != 'none' else '')))
+LG.append(('mark', INK, fmt(mk_tot[0]) + ' B', 'unused code: routines this build never runs (Unused_* names%s), and copies of routines left in the ROM' % (', the proven-dead code of docs 16.15 / 16.21' if OUTLINE == 'reach' and not DIFF else '')))
+LG.append(('mark', UTC, fmt(mk_tot[1]) + ' B', 'unused assets documented by TCRF (the TCRF page and section of each block are in the table; tcrf_check/tcrf_documented.csv, links in tcrf_check/TCRF_SOURCES.md)'))
+LG.append(('mark', UNT, fmt(mk_tot[2]) + ' B', 'unused assets not documented by TCRF (found by this project: Unused_* and Leftover_* names%s)' % (', and the really unused assets of docs 16.24' if 'jp_rev_a' in UCATS else '')))
 LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
-if UCATS != 'none':
-    LG.append(('head', 'INNER OUTLINE: unused bytes, in two categories (%s, tools/unused_table.py)' % os.path.relpath(UCATS, REPO)))
-    LG.append(('imark', UTC, fmt(ucount[1]) + ' B', 'unused, documented by TCRF (the TCRF page and section of each block are in the table; tcrf_check/tcrf_documented.csv)'))
-    LG.append(('imark', UNT, fmt(ucount[2]) + ' B', 'unused, not documented by TCRF (found by this project: Unused_* and Leftover_* names%s)' % (', and the really unused assets of docs 16.24' if 'jp_rev_a' in UCATS else '')))
-if OUTLINE == 'none':
-    notes = ['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.', 'Per bank, under its number: the two largest kinds (padding excluded).']
-elif not DIFF:
-    notes = ['Not outlined: everything that at least one run executed, read or showed, and padding.', 'Per bank, under its number: the two largest kinds (padding excluded) and the unreachable bytes.']
-else:
-    notes = ['Not outlined: code paired with the Japanese code (identical, or another address operand), data equal to its Japanese bytes, and padding. No emulator run of this ROM: the code colour is its static trace.',
-             'Per bank, under its number: the two largest kinds (padding excluded) and the bytes that differ from the Japanese ROM.']
+notes = (['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.'] if UNCLAIMED else []) + \
+        ['Not outlined: every byte that this build uses or that no name calls unused, and padding.' + (' No emulator run of this ROM: the code colour is its static trace.' if DIFF else ''),
+         'Per bank, under its number: the two largest kinds (padding excluded) and the unused bytes of the three categories.']
 notes.insert(0, 'Padding rule: only runs of 16+ x $00 that no run reached (no run of this ROM: all of them) are padding; $FF is never padding: a $FF run that no run reads, outside the assets, is "fill"; one that is read keeps the kind of its block (no run of this ROM: no fill).')
 for n_ in notes: LG.append(('note', n_))
 TXW = W - LEFT - 20; SW = 150; CW = 250              # swatch width, count column width
@@ -367,9 +361,9 @@ for e in LG:
     else: lines = wrap(e[-1], F3, TXW - SW - CW - 30); lay.append((e, y, lines)); y += 35 * len(lines) + 4
 TOP = y + 40
 PADT = 70                                              # wide space above a bank header, narrow space under it: the header sits with its own bank (owner 2026-11-01)
-_hdr_names = ['dead', 'unused', 'unread'] if not DIFF else ['new code', '', 'changed']
+_hdr_names = ['unused code', 'TCRF', 'not TCRF']
 def _hdr_n(b):        # lines of outline counts under the two kinds of bank b (0 when the map has no outline)
-    if OUTLINE == 'none' or not any(mk_bank[b][m] and n for m, n in enumerate(_hdr_names)): return 0
+    if not any(mk_bank[b][m] and n for m, n in enumerate(_hdr_names)): return 0
     return len(wrap('  '.join('%s %s' % (n, fmt(int(mk_bank[b][m]))) for m, n in enumerate(_hdr_names) if mk_bank[b][m] and n), FK, PW + GX - 6)[:2])
 # each row of banks gets the header height its banks need: number (42) + two kinds (2 x 28) + the count lines (28 each) + 6 px, so the text sits on its bank
 GYR = [PADT + 98 + 28 * max(_hdr_n(b) for b in range(r * BCOLS, min(BANKS, (r + 1) * BCOLS))) + 6 for r in range(BROWS)]
@@ -379,13 +373,13 @@ canvas = np.full((H, W), BG, np.uint8)
 for b in range(banks):
     gx = LEFT + (b % BCOLS) * (PW + GX); gy = ROWY[b // BCOLS] + GYR[b // BCOLS]
     canvas[gy:gy + PH, gx:gx + PW] = np.kron(per[b], np.ones((S, S), np.uint8))
-# outline the tiles that no run reached: per tile the worst mark (never-run code > unused data > unread identified); padding is not outlined
+# outline the tiles that hold unused bytes: per tile the first category (unused code > TCRF-documented > not TCRF-documented)
 tilemark = np.full((banks, BTH, BTW), 255, np.uint8)
 for b in range(banks):
     m = mark[b * 0x4000:(b + 1) * 0x4000].reshape(BTH, BTW, 16)
     for c_ in (2, 1, 0):
         has = (m == c_).any(2); tilemark[b][has] = c_
-LINEC = {0: INK, 1: RED, 2: BLUE}
+LINEC = {0: INK, 1: UTC, 2: UNT}
 T = 8 * S
 for b in range(banks):
     gx = LEFT + (b % BCOLS) * (PW + GX); gy = ROWY[b // BCOLS] + GYR[b // BCOLS]
@@ -410,19 +404,6 @@ for b in range(banks):
     for ty, tx in zip(*np.nonzero(padtile[b])):
         x0 = gx + int(tx) * T; y0 = gy + int(ty) * T
         d.line([x0 + 1, y0 + 1, x0 + T - 2, y0 + T - 2], fill=CROSS, width=1); d.line([x0 + T - 2, y0 + 1, x0 + 1, y0 + T - 2], fill=CROSS, width=1)
-if ucount[1] or ucount[2]:       # inner outline of the unused tiles: TCRF wins over not-TCRF inside a tile; drawn 3 px inside the tile edge
-    _ut = ust.reshape(banks, BTH, BTW, 16); UT = np.where((_ut == 1).any(3), 1, np.where((_ut == 2).any(3), 2, 0))
-    for b in range(banks):
-        gx = LEFT + (b % BCOLS) * (PW + GX); gy = ROWY[b // BCOLS] + GYR[b // BCOLS]; M = UT[b]
-        for ty, tx in zip(*np.nonzero(M)):
-            c_ = M[ty, tx]; col = UTC if c_ == 1 else UNT; x0 = gx + int(tx) * T; y0 = gy + int(ty) * T
-            for dx, dy, edge in ((-1, 0, 'L'), (1, 0, 'R'), (0, -1, 'T'), (0, 1, 'B')):
-                nx, ny = tx + dx, ty + dy
-                if 0 <= nx < BTW and 0 <= ny < BTH and M[ny, nx] == c_: continue
-                if edge == 'L': d.line([x0 + 3, y0, x0 + 3, y0 + T - 1], fill=col, width=2)
-                if edge == 'R': d.line([x0 + T - 4, y0, x0 + T - 4, y0 + T - 1], fill=col, width=2)
-                if edge == 'T': d.line([x0, y0 + 3, x0 + T - 1, y0 + 3], fill=col, width=2)
-                if edge == 'B': d.line([x0, y0 + T - 4, x0 + T - 1, y0 + T - 4], fill=col, width=2)
 # ---- text
 yy = 18
 for l in title_lines: d.text((LEFT, yy), l, fill=INK, font=F1); yy += 58
@@ -439,8 +420,7 @@ for e, y0, lines in lay:
         for s_ in range(4): d.rectangle([LEFT + s_ * 34, y0 + 3, LEFT + s_ * 34 + 32, y0 + 29], fill=e[1] * 4 + s_)
     elif e[0] == 'mark':
         d.rectangle([LEFT + 10, y0 + 3, LEFT + 120, y0 + 29], outline=e[1], width=4)
-    elif e[0] == 'imark':
-        d.rectangle([LEFT + 10, y0 + 3, LEFT + 120, y0 + 29], fill=(255, 255, 255), outline=e[1], width=3)
+
     elif e[0] == 'cross':
         d.rectangle([LEFT + 10, y0 + 3, LEFT + 120, y0 + 29], fill=FAM[KEY['PAD']][1]); d.line([LEFT + 14, y0 + 6, LEFT + 116, y0 + 26], fill=CROSS, width=3); d.line([LEFT + 116, y0 + 6, LEFT + 14, y0 + 26], fill=CROSS, width=3)
     cnt = e[2] if e[0] != 'cross' else fmt(n_padtile) + ' tiles'
@@ -455,8 +435,7 @@ for b in range(banks):
         yk = gy + 42 + 28 * n_
         d.rectangle([gx, yk + 3, gx + 18, yk + 21], fill=CATS[i][2], outline=(60, 60, 60))
         d.text((gx + 26, yk), '%s %d %%' % (SHORT[CATS[i][0]], round(100 * pb[i] / 0x4000)), fill=INK, font=FK)
-    names = ['dead', 'unused', 'unread'] if not DIFF else ['new code', '', 'changed']
-    parts = [(n, int(mk_bank[b][m])) for m, n in enumerate(names) if m < len(names) and mk_bank[b][m] and n and OUTLINE != 'none']
+    parts = [(n, int(mk_bank[b][m])) for m, n in enumerate(_hdr_names) if mk_bank[b][m] and n]
     if parts:
         for k_, l in enumerate(wrap('  '.join('%s %s' % (n, fmt(v)) for n, v in parts), FK, PW + GX - 6)[:2]): d.text((gx, gy + 98 + 28 * k_), l, fill=INK, font=FK)
 img.save(OUT, optimize=True)

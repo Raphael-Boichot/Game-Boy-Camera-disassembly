@@ -1,5 +1,6 @@
 bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 00,0004,0008,4,Unused_Rst00_Tail,data,not_tcrf,,,
+00,0367,0368,1,Reti_Unused,code,not_tcrf,,,
 00,03D4,03DB,7,Unused_Irq_DisableVBlank,data,not_tcrf,,,
 00,03DB,03E2,7,Unused_Irq_EnableVBlank,data,not_tcrf,,,
 00,05A2,05A9,7,Unused_Delay_Short,data,not_tcrf,,,
@@ -8,12 +9,14 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 00,07F7,0808,17,Unused_Vram_AndByteSafe,data,not_tcrf,,,
 00,0808,0816,14,Unused_Vram_ReadByteSafe,data,not_tcrf,,,
 00,0816,0881,107,Unused_Vram_CopyViaVBlank,data,not_tcrf,,,
+00,1AA4,1AB4,16,Prn_Unused1AA4,data,not_tcrf,,,
 00,1D31,1D3E,13,Unused_Prn_QueueBreak,data,not_tcrf,,,
 00,1D58,1D59,1,Unused_Prn_Ret,data,not_tcrf,,,
 00,2F84,2F8A,6,Unused_Delay_BC,data,not_tcrf,,,
 00,2F8A,2F94,10,Unused_Str_MainPass,data,not_tcrf,,,
 02,46E6,46E9,3,Unused_Photo_SaveReceived_Far_Stray46E6,data,not_tcrf,,,
 03,69DC,69E4,8,Unused_HotSpotFx_PageFlipTbl,data,not_tcrf,,,
+03,6F77,6F78,1,Mode1A_State0B_Unused,data,not_tcrf,,,
 04,4D09,4D1B,18,Unused_Mode0F_State09_EraseOne_Tbl4D09,data,not_tcrf,,,
 04,63AD,63BC,15,Unused_LoadTilemap24_7120,data,not_tcrf,,,
 04,63BC,63CB,15,Unused_LoadTilemap25_4B00,data,not_tcrf,,,
@@ -37,6 +40,10 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 09,5D21,5D27,6,Unused_Kb_Page0_Press_Dakuten,data,not_tcrf,,,
 09,5D37,5D3D,6,Unused_Kb_Page0_Press_Handakuten,code,not_tcrf,,,
 09,5D44,5D8A,70,Unused_Kb_ApplyMarkTable,code,not_tcrf,,,
+09,64B2,64B8,6,Mode21_State08_Unused,data,not_tcrf,,,
+09,64B8,64BE,6,Mode21_State09_Unused,data,not_tcrf,,,
+09,64BE,64C4,6,Mode21_State0A_Unused,data,not_tcrf,,,
+09,673E,673F,1,Mode21_State0D_Unused,data,not_tcrf,,,
 09,6D83,6D95,18,Unused_Run_Sub16,data,not_tcrf,,,
 09,7288,72AA,34,Unused_Run_LoadCharacterGraphicsD,data,not_tcrf,,,
 0A,4C53,4C6C,25,Unused_Cam_FactoryMeasure2_Tail,data,not_tcrf,,,
@@ -50,6 +57,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 15,4480,4490,16,Unused_TCRF_JapaneseMenuTile_CircledX_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
 15,4500,4510,16,Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
 15,4580,4590,16,Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Main Menu,an unknown tile found only in the Japanese main menu
+17,5500,6800,4864,Gfx_17_5500_Unused_MainMenuTiles,data,not_tcrf,,,
 18,5A50,5AB0,96,Unused_TCRF_MarginPrint_BFilmRoll_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Print Option,unused B film roll
 18,5F90,6050,192,Unused_TCRF_MarginPrint_OutlinedText_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Print Option,unused margin print font
 1A,7D80,7E00,128,Unused_TCRF_PhotoOption_BCancel_Gfx,data,tcrf,https://tcrf.net/Game_Boy_Camera,Photo Option,an early 'B CANCEL' button
@@ -63,6 +71,17 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 1F,53F2,541A,40,Unused_Snd_Pan_Step,data,not_tcrf,,,
 1F,574E,577C,46,Unused_Snd_Vib_Tail,data,not_tcrf,,,
 1F,7FF3,7FF6,3,Unused_Snd_StopEntry,data,not_tcrf,,,
+24,57E0,58E0,256,Gfx_24_57E0_Unused_Link_LoadTiles,data,not_tcrf,,,
+25,73A0,75E0,576,Map_25_73A0_Unused_PhotoScreen,data,not_tcrf,,,
+25,75E0,7820,576,Map_25_75E0_Unused_MainMenu,data,not_tcrf,,,
+26,4500,4880,896,Map_26_4500_Unused_IconFrame,data,not_tcrf,,,
+26,6E40,7080,576,Map_26_6E40_Unused_Picture,data,not_tcrf,,,
 33,6800,7980,4480,Unused_WildFrame7_Tiles,data,not_tcrf,,,
 33,7980,7D00,896,Unused_WildFrame7_LateralStrips,data,not_tcrf,,,
 33,7D00,8000,768,Unused_WildFrame7_TilesTail,data,not_tcrf,,,
+36,4000,4E00,3584,AlbumB_UnusedSlotA_Tiles,data,not_tcrf,,,
+36,4E00,4F00,256,AlbumB_UnusedSlotA_Thumb,data,not_tcrf,,,
+36,4F00,5000,256,AlbumB_UnusedSlotA_Footer,data,not_tcrf,,,
+36,5000,5E00,3584,AlbumB_UnusedSlotB_Tiles,data,not_tcrf,,,
+36,5E00,5F00,256,AlbumB_UnusedSlotB_Thumb,data,not_tcrf,,,
+36,5F00,6000,256,AlbumB_UnusedSlotB_Footer,data,not_tcrf,,,

@@ -20,7 +20,7 @@ The work is produced by AI (Claude), from reading the code and running it in emu
 
 Two maps per ROM, each in one legend for every ROM: the layout map, what each byte is (code by function, data by kind; grey-blue is what is not analysed yet: it gives way to the colours as the work on a ROM lands), and the reachability map, what the runs reached (the colours of the Japanese map, `tools/reach_draw.py`). The layout maps are shown below, the reachability maps in each ROM's folder.
 
-**Pocket Camera (Japan) (Rev A)**: outlines = what no emulator run reached (the full reachability map is in [`roms/jp_rev_a/`](roms/jp_rev_a/README.md)).
+**Pocket Camera (Japan) (Rev A)**: outlines = the unused bytes, in three categories, as on every layout map (below); what no emulator run reached is the reachability map in [`roms/jp_rev_a/`](roms/jp_rev_a/README.md).
 
 ![What each byte of the Japanese ROM is: code by function, data by kind](roms/jp_rev_a/jp_rom_layout_map.png)
 
@@ -119,7 +119,7 @@ The codes are derived from the byte changes that were tested in BGB, not tried o
 
 *Never-reached assets*: the TCRF unused graphics (fourteen pictures, the editor UI, the NEO logo with its tile map, the arrow cursor) are located byte-exact and named `Unused_TCRF_*` (2026-11-11): [`assets/never_reached_proto.csv`](roms/prototype_debagame/assets/never_reached_proto.csv); every text in clear (source, listings, PC memory strings) in [`assets/text_sections_proto.csv`](roms/prototype_debagame/assets/text_sections_proto.csv).
 
-*Unused bytes, two categories* (2026-11-12): every layout map outlines, inside the tiles, the unused blocks **documented by TCRF** (orange) and those **not documented by TCRF** (cyan), from `roms/<folder>/assets/unused_<tag>.csv` (`tools/unused_table.py`). TCRF is credited only for what its pages show; the repository keeps no TCRF content, only links ([`tcrf_check/TCRF_SOURCES.md`](tcrf_check/TCRF_SOURCES.md)).
+*The outline of every layout map* (owner, 2026-11-12): only the unused bytes, in three categories, the same for every ROM: **unused code** (black: routines the build never runs, copies of routines left in the ROM, and for the Japanese ROM its proven-dead code), **unused assets documented by TCRF** (orange) and **unused assets not documented by TCRF** (cyan), from `roms/<folder>/assets/unused_<tag>.csv` (`tools/unused_table.py`). Nothing else is outlined (the differences from the Japanese ROM and what no run reached stay in the csv files and the reachability maps). TCRF is credited only for what its pages show; the repository keeps no TCRF content, only links ([`tcrf_check/TCRF_SOURCES.md`](tcrf_check/TCRF_SOURCES.md)).
 
 The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python3 tools/status_maps.py --gold GOLD.gb --kitty KITTY.gb --proto PROTO.gb`, which reads whatever names, types and trace each folder holds, and every reachability map but the Japanese one by `python3 tools/reach_map.py --tag TAG ROM`: rerun them after any work on these ROMs.
 

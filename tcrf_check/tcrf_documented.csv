@@ -15,3 +15,4 @@ proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_EditorUI(?!.*_Variant),ht
 proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_TitleLogoNEO(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the 'Debagame Tester NEO' title logo"
 proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Unused_TCRF_ArrowCursor(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,an arrow hanging from a string (an earlier menu cursor)
 proto,^Leftover_[0-9A-F]{2}_[0-9A-F]{4}_AsmSource$,https://tcrf.net/Proto:Game_Boy_Camera,Source Code,large chunks of commented source code found throughout the ROM
+proto,^(Leftover_[0-9A-F]{2}_[0-9A-F]{4}_)?Map_03_(7481_BG_F_SCR|76C1_BG_EDIT)(?!W)(?!.*_Variant),https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"

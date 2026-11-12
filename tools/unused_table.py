@@ -8,10 +8,12 @@ label of the bank, as tcrf_check/tools/rom_layout_map.py counts it), its kind (c
   tcrf       the content is documented on a TCRF page: the row of tcrf_check/tcrf_documented.csv whose pattern matches the name gives
              the page and its section (TCRF is credited only there: the repository holds no copy of TCRF's pages or pictures, only links)
   not_tcrf   unused in this build and not documented by TCRF: found by this project
-Unused = the name says so: `Unused_*` (code or data this build never runs or reads, docs §16.24), `Leftover_*` (Hello Kitty and the
+Unused = the name says so: `Unused_*` or `*_Unused*` (code or data this build never runs or reads, docs §16.24), `Leftover_*` (Hello Kitty and the
 prototype: bytes nothing in the build reads, owner rule 2026-11-11), the names a TCRF row matches (they are unused by that row), and for
 the Japanese ROM the really unused assets of docs §16.24 (tcrf_check/assets/unidentified/really_unused.csv, tiers 'no loader', 'never
-shown', 'forced only': the red outline of its layout picture).
+shown', 'forced only'), and the prototype's assets named from the older builds' tables that this build neither copies nor reads.
+An asset goes with its tile map (owner 2026-11-12): a map that draws the tiles of a TCRF-documented asset is tcrf (its row in
+tcrf_check/tcrf_documented.csv says which tiles it draws).
 A copy or part of a TCRF-documented block is tcrf; a variant (`_Variant`: an edited version, not the content TCRF shows) is not_tcrf.
 tcrf_check/tools/rom_layout_map.py reads the table and outlines both categories on the layout picture of the ROM.
 """
@@ -26,6 +28,7 @@ for tag in a.tag:
     D = os.path.join(REPO, 'roms', ROMS[tag])
     rows = [r for r in csv.DictReader(open(os.path.join(D, 'disasm', 'sym_names_%s.csv' % tag), encoding='utf-8')) if r['name'] not in ('', '-')]
     labs = sorted((fl(int(r['bank'], 16), int(r['addr'], 16)), int(r['bank'], 16), int(r['addr'], 16), r['name']) for r in rows)
+    notes = {(int(r['bank'], 16), int(r['addr'], 16)): r.get('note', '') for r in rows}
     code = set()
     rm = os.path.join(D, 'trace', 'rom_map_%s.csv' % tag)
     if os.path.exists(rm):
@@ -39,7 +42,8 @@ for tag in a.tag:
     out = []
     for i, (o, b, ad, nm) in enumerate(labs):
         hit = next((d for d in docs if re.search(d['pattern'], nm)), None)
-        if not (nm.startswith(('Unused_', 'Leftover_')) or hit or nm in really): continue
+        note_ = notes.get((b, ad), '')
+        if not (nm.startswith(('Unused_', 'Leftover_')) or '_Unused' in nm or hit or nm in really or 'this build neither copies nor reads it' in note_): continue
         nb = labs[i + 1] if i + 1 < len(labs) else None
         end = nb[0] if nb and nb[1] == b and (b != 0 or nb[0] < 0x4000) else fl(b, 0x8000 if b else 0x4000)
         if nb and nb[0] >> 14 != o >> 14: end = (o >> 14 << 14) + 0x4000

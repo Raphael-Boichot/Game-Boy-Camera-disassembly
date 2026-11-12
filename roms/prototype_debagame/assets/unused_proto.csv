@@ -26,9 +26,16 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 02,6F93,70F1,350,Leftover_02_6F93_Gfx_01_4001_FNTOOE1_VariantPart4A13,data,not_tcrf,,,
 02,70F1,7581,1168,Leftover_02_70F1_Gfx_01_4001_FNTOOE1_Part4B71,data,not_tcrf,,,
 02,7581,7FFF,2686,Unused_TCRF_EditorUI_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,UI elements for some sort of editor
+03,7481,76C1,576,Map_03_7481_BG_F_SCR,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
+03,76C1,7AC1,1024,Map_03_76C1_BG_EDIT,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
+03,7AC1,7FFF,1342,Map_03_7AC1_BG_EDITW,data,not_tcrf,,,
+04,4001,4100,255,Data_04_4001_HOI_0,data,not_tcrf,,,
 04,4BF0,4E01,529,Leftover_04_4BF0,data,not_tcrf,,,
+04,4E01,4E4E,77,Data_04_4E01_KAO_1,data,not_tcrf,,,
 04,4E4E,5C01,3507,Leftover_04_4E4E_PcRam,data,not_tcrf,,,
+04,5C01,6270,1647,Data_04_5C01_KAO_2,data,not_tcrf,,,
 04,6270,6A01,1937,Leftover_04_6270,data,not_tcrf,,,
+04,6A01,72C2,2241,Data_04_6A01_KAO_3,data,not_tcrf,,,
 04,72C2,7FFF,3389,Leftover_04_72C2,data,not_tcrf,,,
 05,4001,4E01,3584,Unused_TCRF_FacePhoto7_HOI_U_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,4E01,5C01,3584,Unused_TCRF_FacePhoto8_HOI_D_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"

@@ -91,6 +91,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 14,5800,7000,6144,Gfx_14_5800_PompompurinPicture,data,tcrf,https://tcrf.net/Hello_Kitty_Pocket_Camera,Pompompurin Picture,an apparently unused picture of Pompompurin (Game Genie 183-63B-E6E)
 14,7483,8000,2941,Leftover_14_7483,data,not_tcrf,,,
 16,7025,8000,4059,Leftover_16_7025,data,not_tcrf,,,
+18,5800,7001,6145,Gfx_18_5800_Unused_Mode18_State00,data,not_tcrf,,,
 18,7001,8000,4095,Leftover_18_7001,data,not_tcrf,,,
 1B,69A2,6A00,94,Leftover_1B_69A2,data,not_tcrf,,,
 1B,6AA2,6B00,94,Leftover_1B_6AA2,data,not_tcrf,,,
@@ -109,6 +110,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 27,7014,75E0,1484,Leftover_27_7014,data,not_tcrf,,,
 2E,7800,7C00,1024,Map_2E_7800_PompompurinPicture,data,tcrf,https://tcrf.net/Hello_Kitty_Pocket_Camera,Pompompurin Picture,an apparently unused picture of Pompompurin (Game Genie 183-63B-E6E)
 2F,61E1,63E0,511,Leftover_2F_61E1,data,not_tcrf,,,
+31,64F0,6770,640,Gfx_31_64F0_Unused_Link_LoadTiles,data,not_tcrf,,,
 31,7CB0,7EF0,576,Leftover_31_7CB0,data,not_tcrf,,,
 33,6C57,6E50,505,Leftover_33_6C57,data,not_tcrf,,,
 33,71F0,7210,32,Leftover_33_71F0,data,not_tcrf,,,
