@@ -273,9 +273,44 @@ if A.roundtrip and getattr(A, 'rom_gold', None) and os.path.isdir('roms/gold/src
         elif open(rp, 'rb').read() != rd('roms/gold/disasm/rom_operands_gold.csv').encode('utf-8'): bad('port', 'roms/gold/disasm/rom_operands_gold.csv is not fresh')
         else: ok('port', 'roms/gold/src/ fresh (%d files), builds md5 b2999cfb6dacb439f501a71f30f91762' % len(a_))
     shutil.rmtree(tmpg, ignore_errors=True)
+# ------------------------------------------------------------------ L4 / L5 of the prototype (roadmap step 7): RAM tables fresh, roms/prototype_debagame/src/ fresh and byte-exact
+_PR = 'roms/prototype_debagame/'
+if getattr(A, 'rom_proto', None) and os.path.isdir(_PR + 'src'):
+    _tmp = tempfile.mkdtemp(prefix='cons_proto_')
+    _m = subprocess.run([sys.executable, 'tools/wram_db.py', A.rom_proto, _PR + 'trace/trace_proto.json', _PR + 'pocketcamera_proto.sym', os.path.join(_tmp, 'w')], capture_output=True, text=True, cwd=ROOT)
+    for _k in ('access', 'summary'):
+        if _m.returncode or open(os.path.join(_tmp, 'w_%s.csv' % _k), encoding='utf-8').read() != rd(_PR + 'wram/wram_%s_proto.csv' % _k): bad('proto', _PR + 'wram/wram_%s_proto.csv is not what tools/wram_db.py writes today' % _k)
+    _m = subprocess.run([sys.executable, 'tools/sram_db.py', A.rom_proto, _PR + 'trace/trace_proto.json', _PR + 'pocketcamera_proto.sym', os.path.join(_tmp, 's.csv')], capture_output=True, text=True, cwd=ROOT)
+    if _m.returncode or open(os.path.join(_tmp, 's.csv'), encoding='utf-8').read() != rd(_PR + 'sram/sram_access_proto.csv'): bad('proto', _PR + 'sram/sram_access_proto.csv is not what tools/sram_db.py writes today')
+    _m = subprocess.run([sys.executable, 'tools/sram_map.py', '--tag', 'proto', '--check'], capture_output=True, text=True, cwd=ROOT)
+    (ok if not _m.returncode else bad)('proto', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
+    _m = subprocess.run([sys.executable, 'tools/proto_ram_names.py', A.rom_proto, '--out', os.path.join(_tmp, 'n.csv')], capture_output=True, text=True, cwd=ROOT)
+    if _m.returncode or open(os.path.join(_tmp, 'n.csv'), encoding='utf-8').read() != rd(_PR + 'disasm/ram_names_proto.csv'): bad('proto', _PR + 'disasm/ram_names_proto.csv is not what tools/proto_ram_names.py writes today')
+    _m = subprocess.run([sys.executable, 'tools/ram_names.py', '--names', _PR + 'disasm/ram_names_proto.csv', '--inc', _PR + 'disasm/ram_proto.inc', '--sym', _PR + 'pocketcamera_proto_ram.sym', '--check'], capture_output=True, text=True, cwd=ROOT)
+    if _m.returncode: bad('proto', 'ram_proto.inc / pocketcamera_proto_ram.sym are not what tools/ram_names.py writes: %s' % _m.stdout.strip())
+    _raw = []
+    for _f in sorted(glob.glob(_PR + 'src/bank_*.asm')):
+        for _l in open(_f, encoding='utf-8'):
+            _c = _l.split(';', 1)[0]
+            _mm = re.search(r'\b(?:ld|ldh)\b[^;]*\[\$([0-9a-fA-F]{2,4})\]', _c)
+            if _mm and (0xC000 <= int(_mm.group(1), 16) < 0xE000 or 0xFF80 <= int(_mm.group(1), 16) < 0xFFFF or len(_mm.group(1)) == 2 and int(_mm.group(1), 16) >= 0x80): _raw.append(_l.strip()[:60])
+    if _raw: bad('proto', 'roms/prototype_debagame/src/ keeps %d raw RAM operands: %s' % (len(_raw), _raw[:3]))
+    else: ok('proto', 'L4: roms/prototype_debagame/src/ has no raw WRAM / HRAM operand of ld / ldh (%d RAM names)' % (sum(1 for _ in open(_PR + 'disasm/ram_names_proto.csv')) - 1))
+    if A.roundtrip:
+        fr = os.path.join(_tmp, 'src'); rp = os.path.join(_tmp, 'rom_operands_proto.csv')
+        ms = subprocess.run([sys.executable, 'tools/make_source.py', '--tree', 'prototype_debagame', '--rom', A.rom_proto, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fr, '--report', rp, '--check'], capture_output=True, text=True)
+        if ms.returncode: bad('proto', 'make_source.py --tree prototype_debagame failed: %s' % (ms.stderr or ms.stdout)[-300:])
+        else:
+            def walkp(r): return sorted(os.path.relpath(os.path.join(dp, f), r) for dp, _, fs in os.walk(r) for f in fs)
+            a_, b_ = walkp(fr), walkp(_PR + 'src')
+            dif = sorted(set(a_) ^ set(b_)) + [f for f in a_ if f in set(b_) and open(os.path.join(fr, f), 'rb').read() != open(os.path.join(_PR + 'src', f), 'rb').read()]
+            if dif: bad('proto', 'roms/prototype_debagame/src/ is not what make_source.py --tree prototype_debagame writes (%d files differ: %s)' % (len(dif), dif[:4]))
+            elif open(rp, 'rb').read() != rd(_PR + 'disasm/rom_operands_proto.csv').encode('utf-8'): bad('proto', _PR + 'disasm/rom_operands_proto.csv is not fresh')
+            else: ok('proto', 'L5: roms/prototype_debagame/src/ fresh (%d files), builds md5 19b50a5f67ef4f0d015e7d813370756e (no rgbfix)' % len(a_))
+    shutil.rmtree(_tmp, ignore_errors=True)
 # ------------------------------------------------------------------ kinds: the name prefix against the copy destination
 _kb = []
-for _t in ('jp_rev_a', 'us_eu', 'gold'):
+for _t in ('jp_rev_a', 'us_eu', 'gold', 'prototype_debagame'):
     for _f in sorted(glob.glob('roms/%s/src/bank_*.asm' % _t)):
         for _l in open(_f, encoding='utf-8'):
             _m = re.match(r'\s+farcopy \w+, (\w+)(?: \+ \$[0-9A-Fa-f]+)?, \$([0-9a-f]{4}), \$[0-9a-f]{4}', _l)

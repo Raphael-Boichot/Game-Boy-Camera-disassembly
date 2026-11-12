@@ -55,6 +55,16 @@ TREES['gold'] = dict(dir=_GO, rom='gbcam_gold.gb', sym=os.path.join(_GO, 'gbcam_
                      cov=os.path.join(_GO, 'port', 'cov_jp_in_gold.npz'), report=os.path.join(_GOD, 'rom_operands_gold.csv'),
                      manual=os.path.join(_GOD, 'rom_operands_manual_gold.csv'), readers='port', suffix='gold')
 TREES['us_eu']['suffix'] = 'us'
+_PR = os.path.join(REPO, 'roms', 'prototype_debagame'); _PRD = os.path.join(_PR, 'disasm')     # the prototype (L4 / L5, 2026-11-12, roadmap step 7)
+TREES['prototype_debagame'] = dict(dir=_PR, rom='pocketcamera_proto.gb', sym=os.path.join(_PR, 'pocketcamera_proto.sym'), trace=os.path.join(_PR, 'trace', 'trace_proto.json'),
+                     names=[os.path.join(_PRD, 'sym_names_proto.csv')], md5='19b50a5f67ef4f0d015e7d813370756e',
+                     title='Pocket Camera Prototype (Japan) ("DEBAGAME")', nofix=True,      # the image as dumped: its header was never fixed, no rgbfix
+                     fix=['--ram-names', os.path.join(_PRD, 'ram_names_proto.csv'), '--ram-access', os.path.join(_PR, 'wram', 'wram_access_proto.csv'),
+                          '--ram-exclude', os.path.join(_PRD, 'ram_exclude_proto.csv'), '--ram-highbyte', os.path.join(_PRD, 'ram_highbyte_proto.csv'),
+                          '--const-names', os.path.join(_PRD, 'const_names_proto.csv'), '--const-types', os.path.join(_PRD, 'const_types_proto.csv'),
+                          '--const-tables', os.path.join(_PRD, 'const_tables_proto.csv'), '--const-sounds', os.path.join(_PRD, 'sound_names_proto.csv')],
+                     cov=os.path.join(_PR, 'trace', 'cov_proto_runs.npz'), report=os.path.join(_PRD, 'rom_operands_proto.csv'),
+                     manual=None, readers={}, suffix='proto')
 T = TREES['jp_rev_a']
 BIG = 256          # a plain db block of this size or more goes to a .bin file even when it is not an asset
 NOTE = 300         # characters of a label note kept in the source
@@ -97,7 +107,7 @@ def build(src, rom_out, rgbds=None):
     run(['rgbasm', '-I', b + os.sep, '-I', src + os.sep, '-o', o, os.path.join(src, 'game.asm')], env=env)
     shutil.rmtree(b)
     run(['rgblink', '-o', rom_out, o], env=env)
-    run(['rgbfix', '-v', '-p', '255', rom_out], env=env)
+    if not T.get('nofix'): run(['rgbfix', '-v', '-p', '255', rom_out], env=env)      # the prototype is built as dumped (no rgbfix)
     os.remove(o)
     return hashlib.md5(open(rom_out, 'rb').read()).hexdigest()
 
@@ -340,7 +350,7 @@ def use_macros(out, sym=None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--rom', required=True); ap.add_argument('--mgbdis', default=os.environ.get('MGBDIS', '/home/claude/tc/mgbdis/mgbdis.py'))
-    ap.add_argument('--tree', default='jp_rev_a', choices=sorted(TREES), help='which ROM: jp_rev_a (default), us_eu or gold (the tables ported from the Japanese ones)')
+    ap.add_argument('--tree', default='jp_rev_a', choices=sorted(TREES), help='which ROM: jp_rev_a (default), us_eu or gold (the tables ported from the Japanese ones), prototype_debagame')
     ap.add_argument('--out', default=None); ap.add_argument('--check', action='store_true'); ap.add_argument('--rgbds', default=os.environ.get('RGBDS'))
     ap.add_argument('--report', default=None, help='the operand decisions (tools/rom_operands.py)')
     a = ap.parse_args()
@@ -442,7 +452,7 @@ def main():
             if os.path.exists(os.path.join(lst, inc)): shutil.copy(os.path.join(lst, inc), os.path.join(out, ren.get(inc, inc)))
         g = open(os.path.join(lst, 'game.asm'), encoding='utf-8').read().split('\n')
         g = [re.sub(r'INCLUDE "(ram_jp|const_jp)\.inc"', lambda m: 'INCLUDE "%s"' % ren[m.group(1) + '.inc'], l) for l in g]
-        g = ['; %s (SGB Enhanced), md5 %s.' % (T['title'], MD5),
+        g = ['; %s%s, md5 %s.' % (T['title'], '' if T.get('nofix') else ' (SGB Enhanced)', MD5),
              '; The editable source tree (L5), written by tools/make_source.py; build it with `make` at the top of the repository.', ''] + [l for l in g if l.startswith('INCLUDE')]
         g.insert(max(i for i, l in enumerate(g) if re.match(r'INCLUDE "(const_\w+|charmap_\w+)\.inc"', l)) + 1, 'INCLUDE "macros.inc"')
         open(os.path.join(out, 'game.asm'), 'w', encoding='utf-8', newline='\n').write('\n'.join(g) + '\n')

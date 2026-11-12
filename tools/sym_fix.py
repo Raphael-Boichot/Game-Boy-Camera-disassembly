@@ -151,7 +151,7 @@ if a.ram:
         for r in csv.DictReader(open(_hb, encoding='utf-8')):
             if r['name'] not in _rn: sys.exit('ram_highbyte_jp.csv: no RAM name %s' % r['name'])
             RAM_HIGH[(int(r['bank'], 16), int(r['pc'], 16))] = _rn[r['name']]
-    RAM_INC = ram_names.inc_text(RAM_ROWS)
+    RAM_INC = ram_names.inc_text(RAM_ROWS, a.ram_names)
     RAM_TOK = re.compile(r'\$[0-9a-f]{4}\b')
 # ---- L4: constants
 CONST = None
@@ -191,6 +191,7 @@ if a.const:
     C_LDA = re.compile(r'^ld a, \$([0-9a-f]{2})$'); C_ST = re.compile(r'^(?:ld|ldh) \[(\w+)\], a$'); C_LD = re.compile(r'^(?:ld|ldh) a, \[(\w+)\]$')
     C_CPAND = re.compile(r'^(cp|and) \$([0-9a-f]{2})$'); C_BIT = re.compile(r'^bit ([0-7]), a$'); C_LDHL = re.compile(r'^ld a, \[hl\+?\]$')
     C_KEEP = re.compile(r'^(?:bit [0-7], a|cp \S.*|(?:jr|jp) (?:nz|z|nc|c), \S+|ret (?:nz|z|nc|c)|ld [bcdehl], a|ld \[[^\]]+\], a|ldh \[[^\]]+\], a|push af)$')
+    C_JRCC = re.compile(r'^(?:jr|jp) (?:nz|z), (\w+)$'); C_ZERO = re.compile(r'^(?:or|and) a$'); C_NOFALL = re.compile(r'^(?:ret|reti|jp \S+|jr \S+|jp hl)$')
     C_HLADD = re.compile(r'^add hl, (?:bc|de)$'); C_LDHLLAB = re.compile(r'^ld hl, ([A-Za-z_]\w*)$')
 def const_code_pass(bank, out):
     """constants in the instructions of one bank (out = its lines, already renamed by the RAM pass); straight-line rules, see the docstring (6)"""
@@ -204,10 +205,13 @@ def const_code_pass(bank, out):
         brk[k] = any(x.strip() and not x.strip().startswith(';') for ln in out[P[k - 1]['i'] + 1:P[k]['i']] for x in ln.split('\n')) or '\n' in out[P[k - 1]['i']]
     def put(k, new, key):
         if P[k]['ins'] != new: P[k]['ins'] = new; stats['const_' + key] += 1
-    def window(k, g):
-        j = k + 1
-        while j < n and not brk[j]:
-            t = P[j]['ins']; m = C_BIT.match(t)
+    def window(k, g, seen=None):
+        j = k + 1; seen = seen if seen is not None else set(); chain = []
+        while j < n and (not brk[j] or j == k + 1 and k in seen):
+            t = P[j]['ins']; mj = C_JRCC.match(t)
+            if mj: chain.append(mj.group(1))
+            elif C_ZERO.match(t): j += 1; continue
+            m = C_BIT.match(t)
             if m:
                 nm = CONST.bit(g, int(m.group(1)))
                 if nm: put(j, 'bit %s, a' % nm, g)
@@ -220,6 +224,22 @@ def const_code_pass(bank, out):
                 j += 1; continue
             if C_KEEP.match(t): j += 1; continue
             break
+        # a compare chain (`cp $01 / jr nz, next / call ... / ret / next: cp $02 ...`): the jump target of a conditional jump of the window keeps A when it is
+        # entered by that jump alone (the instruction before it does not fall through, the bank names it once more: that jump) and starts with a compare
+        for lab in chain:
+            x = C_LABIDX.get(lab)
+            if x is None or x in seen or C_REFS.get(lab, 0) != 1 or not C_NOFALL.match(P[x - 1]['ins']) or not C_CPAND.match(P[x]['ins']): continue
+            seen.add(x - 1); window(x - 1, g, seen)
+    C_LABIDX = {}; C_REFS = collections.Counter()
+    for k in range(n):
+        for ln in out[P[k - 1]['i'] + 1:P[k]['i']] if k else []:
+            for x in ln.split('\n'):
+                ml = re.match(r'^(\w+):{1,2}\s*$', x.strip())
+                if ml: C_LABIDX[ml.group(1)] = k
+    for x in '\n'.join(out).split('\n'):
+        x = x.split(';', 1)[0]
+        if not re.match(r'^\s*\w+:{1,2}\s*$', x):
+            for w0 in re.findall(r'[A-Za-z_]\w*', x): C_REFS[w0] += 1
     for k in range(n):
         t = P[k]['ins']
         m = C_LDA.match(t)

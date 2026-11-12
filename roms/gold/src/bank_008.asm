@@ -331,7 +331,7 @@ jr_008_42af:
 
 
 jr_008_42c5:
-    and $03                                       ; $42C5
+    and PADF_A | PADF_B                           ; $42C5
     ret z                                         ; $42C7
 
     push af                                       ; $42C8

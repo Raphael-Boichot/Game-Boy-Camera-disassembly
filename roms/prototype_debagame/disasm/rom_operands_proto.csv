@@ -1,0 +1,68 @@
+bank,site,kind,operand,value,target,expression,evidence,read
+00,00:016B,?,bc,$2000,,,overwritten before any use,
+00,00:0178,?,bc,$1000,,,overwritten before any use,
+00,00:0185,?,bc,$1000,,,overwritten before any use,
+00,00:0340,?,bc,$0800,,,overwritten before any use,
+00,00:04BA,?,hl,$4001,,,dereferenced at 00:02B9; the mapped bank is unknown,
+00,00:04C0,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:04C6,?,hl,$5801,,,dereferenced at 00:02B9; the mapped bank is unknown,
+00,00:04CC,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0557,ptr,hl,$4001,01:4001,Gfx_01_4001_FNTOOE1,C: dereferenced at 00:02B9 (bank 01 mapped); that instruction read the target block in the runs,yes
+00,00:055D,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0563,ptr,hl,$5A41,01:5A41,Map_01_5A41_MENU1,C: dereferenced at 00:02B9 (bank 01 mapped); that instruction read the target block in the runs,yes
+00,00:0569,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:06B7,ptr,hl,$4001,02:4001,Gfx_02_4001_FNTOOE2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:06BD,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:06C3,ptr,hl,$5801,02:5801,Map_02_5801_BG_BANK,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:06C9,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:06FF,?,[abs],$4000,,,the mapped bank is unknown,
+00,00:0705,?,[abs],$7FFF,,,the mapped bank is unknown,
+00,00:073F,?,[abs],$4000,,,the mapped bank is unknown,
+00,00:0745,?,[abs],$7FFF,,,the mapped bank is unknown,
+00,00:078E,ptr,hl,$4001,02:4001,Gfx_02_4001_FNTOOE2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:0794,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:079A,ptr,hl,$5A41,02:5A41,Map_02_5A41_BGSRAM1,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:07A0,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:08B4,num,bc,$55AA,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:08FC,num,bc,$55AA,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0945,ptr,hl,$4001,02:4001,Gfx_02_4001_FNTOOE2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:094B,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0951,ptr,hl,$5C81,02:5C81,Map_02_5C81_BGSRAM2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:0957,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0A7C,ptr,hl,$4001,02:4001,Gfx_02_4001_FNTOOE2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:0A82,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0A88,ptr,hl,$5EC1,02:5EC1,Map_02_5EC1_BGSRAM3,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:0A8E,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0BD7,num,bc,$55AA,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0C04,num,bc,$55AA,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0D4E,ptr,hl,$4001,02:4001,Gfx_02_4001_FNTOOE2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:0D54,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0D5A,ptr,hl,$6101,02:6101,Map_02_6101_BG_DUMP,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:0D60,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0EB6,ptr,hl,$4001,03:4001,Gfx_03_4001_FNTOOE3,C: dereferenced at 00:02B9 (bank 03 mapped),yes
+00,00:0EBC,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0EC2,ptr,hl,$5801,03:5801,Map_03_5801_BG_MOVIE,C: dereferenced at 00:02B9 (bank 03 mapped); that instruction read the target block in the runs,yes
+00,00:0EC8,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:10E0,num,de,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:10EC,num,de,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:10FA,num,de,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1109,num,de,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1119,num,de,$0700,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1288,ptr,hl,$5A41,03:5A41,Gfx_03_5A41_CONF2,C: dereferenced at 00:02B9 (bank 03 mapped); that instruction read the target block in the runs,yes
+00,00:128E,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1294,ptr,hl,$7241,03:7241,Map_03_7241_BG_CONF,C: dereferenced at 00:02B9 (bank 03 mapped); that instruction read the target block in the runs,yes
+00,00:129A,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:19C0,ptr,hl,$4001,02:4001,Gfx_02_4001_FNTOOE2,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:19C6,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:19CC,ptr,hl,$6341,02:6341,Map_02_6341_BGPROTEC,C: dereferenced at 00:02B9 (bank 02 mapped); that instruction read the target block in the runs,yes
+00,00:19D2,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1CAC,?,bc,$1000,,,the walk ends without a use,
+00,00:1D74,ptr,hl,$4001,03:4001,Gfx_03_4001_FNTOOE3,C: dereferenced at 00:02B9 (bank 03 mapped),yes
+00,00:1D7A,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1D80,ptr,hl,$5801,03:5801,Map_03_5801_BG_MOVIE,C: dereferenced at 00:02B9 (bank 03 mapped); that instruction read the target block in the runs,yes
+00,00:1D86,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:1DAA,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:320E,ptr,hl,$4001,03:4001,Gfx_03_4001_FNTOOE3,C: dereferenced at 00:2EF5 (bank 03 mapped); that instruction read the target block in the runs,yes
+00,00:3214,?,bc,$1800,,,the walk ends without a use,
+00,00:321A,ptr,hl,$5801,03:5801,Map_03_5801_BG_MOVIE,C: dereferenced at 00:02B9 (bank 03 mapped); that instruction read the target block in the runs,yes
+00,00:3220,num,bc,$0240,,,"C: read as bytes (arithmetic, comparison) before any dereference",

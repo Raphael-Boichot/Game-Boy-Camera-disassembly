@@ -1,0 +1,164 @@
+addr,size,name,scope,tag,desc
+c000,2,wOBJRAM,*,C,"name of table $2A at this address; the routines GALLERY_OBJ_SET, MAIN_MENU, MAKE_CONFIG touch it here and in that build; kinds PRW"
+c002,1,wDOG_ANIME_C002,*,I,"no table names it: named after the routine that touches it most (DOG_ANIME 3, GAME_TITL 2, MAIN_MENU 2); kinds PW"
+c003,1,wKAO_ANIME_C003,*,I,no table names it: named after the routine that touches it most (KAO_ANIME 2); kinds W
+c004,2,wMAIN_MENU_C004,*,I,"no table names it: named after the routine that touches it most (MAIN_MENU 1, SRAM_MENU 1, SRAM_DATA_SEL 1); kinds PW"
+c006,1,wDOG_ANIME_C006,*,I,"no table names it: named after the routine that touches it most (DOG_ANIME 3, GAME_TITL 2, MAIN_MENU 2); kinds PW"
+c007,1,wKAO_ANIME_C007,*,I,no table names it: named after the routine that touches it most (KAO_ANIME 2); kinds W
+c008,1,wRESET_C008,*,I,no table names it: named after the routine that touches it most (RESET 1); kinds R
+c00a,1,wGAME_TITL_C00A,*,I,no table names it: named after the routine that touches it most (GAME_TITL 2); kinds W
+c00e,1,wGAME_TITL_C00E,*,I,no table names it: named after the routine that touches it most (GAME_TITL 2); kinds W
+c014,4,wPUT_BYTE_OBJ2_C014,*,I,no table names it: named after the routine that touches it most (PUT_BYTE_OBJ2 1); kinds P
+c018,2,wPIC_SAVE_C018,*,I,no table names it: named after the routine that touches it most (PIC_SAVE 2); kinds P
+c01a,1,wPIC_SAVE_C01A,*,I,no table names it: named after the routine that touches it most (PIC_SAVE 1); kinds R
+c01c,8,wAKARUSA_HYOUJI_C01C,*,I,no table names it: named after the routine that touches it most (AKARUSA_HYOUJI 1); kinds P
+c024,4,wCONTRAST_HYOUJI_C024,*,I,no table names it: named after the routine that touches it most (CONTRAST_HYOUJI 1); kinds P
+c028,4,wBUNKATU_HYOUJI_C028,*,I,no table names it: named after the routine that touches it most (BUNKATU_HYOUJI 1); kinds P
+c02c,24,wObj_PutHexDigits_C02C,*,I,no table names it: named after the routine that touches it most (Obj_PutHexDigits 1); kinds P
+c044,4,wCONTRAST_HYOUJI_C044,*,I,no table names it: named after the routine that touches it most (CONTRAST_HYOUJI 1); kinds P
+c048,88,wBUNKATU_HYOUJI_C048,*,I,no table names it: named after the routine that touches it most (BUNKATU_HYOUJI 1); kinds P
+c0a0,1,wGAME_SEQ,*,C,"name of table $2A at this address; the routines CB2, MAKE_CONFIG, MAKE_EMI touch it here and in that build; kinds RW"
+c0a1,1,wMEN_FADE_F,*,C,"name of table $2A at this address; the routines MEN_FADE, MEN_FADE_END touch it here and in that build; kinds RW"
+c0a2,1,wMEN_FADE_T,*,C,name of table $2A at this address; the routines MEN_FADE touch it here and in that build; kinds RW
+c0a3,1,wMEN_FADE_C,*,C,name of table $2A at this address; the routines MEN_FADE touch it here and in that build; kinds P
+c0a4,1,wMEN_CHG_F,*,C,"name of table $2A at this address; the routines GAME_TITL, MEN_FADE_END touch it here and in that build; kinds RW"
+c0a6,1,wTITLE_FLAG,*,C,name of table $2A at this address; the routines GAME_TITL touch it here and in that build; kinds RW
+c0bd,1,wINF_CUR,*,C,"name of table $2A at this address; the routines BANK_TEST, EMI_MAIN, GAME_TITL touch it here and in that build; kinds RW"
+c0be,1,wLOOP_COUNT,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds RW
+c0c2,1,wHBLANK_F,*,C,"name of table $2A at this address; the routines HBLK, H_BLANK_TX2, MAKE_GALLERY touch it here and in that build; kinds RW"
+c0c3,1,wRAM_BANK_BUF,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, SET_DITH_MATRIX touch it here and in that build; kinds RW"
+c0c4,1,wVRAM_ADD_L,*,C,"name of table $2A at this address; the routines H_BLANK_TX, H_BLANK_TX2, MAKE_MOVIE touch it here and in that build; kinds PRW"
+c0c5,1,wVRAM_ADD_H,*,C,"name of table $2A at this address; the routines H_BLANK_TX, H_BLANK_TX2, PUT_PICTURE touch it here and in that build; kinds RW"
+c0c6,1,wIMMAGE_ADD_L,*,C,"name of table $2A at this address; the routines H_BLANK_TX, H_BLANK_TX2, MAKE_MOVIE touch it here and in that build; kinds PRW"
+c0c7,1,wIMMAGE_ADD_H,*,C,"name of table $2A at this address; the routines H_BLANK_TX, H_BLANK_TX2 touch it here and in that build; kinds RW"
+c0c9,1,wDRAWING_F,*,C,"name of table $2A at this address; the routines MAKE_GALLERY, PARA_SET, VB_MOVIE touch it here and in that build; kinds RW"
+c0cb,1,wSAVE_FLAG,*,C,"name of table $2A at this address; the routines MK_PIC_SAVE, PIC_SAVE touch it here and in that build; kinds RW"
+c0cc,1,wPICT_NUM,*,C,"name of table $2A at this address; the routines GALLERY_OBJ_SET, MAKE_GALLERY, PICT_SAVE_GO touch it here and in that build; kinds RW"
+c0cd,1,wPP_FLAG,*,C,name of table $2A at this address; the routines PUT_PICTURE touch it here and in that build; kinds RW
+c0cf,1,wTIME_CT,*,C,name of table $2A at this address; the routines TIMER_INT touch it here and in that build; kinds P
+c0d0,1,wMABIKI2,*,C,name of table $2A at this address; the routines GAME_INIT touch it here and in that build; kinds PW
+c0d1,1,wTEST,*,C,name of table $2A at this address; the routines MAKE_MOVIE touch it here and in that build; kinds RW
+c0d2,1,wTEST1,*,I,"name of table $2A ($2A: TEST1; $35: OK_FLAG); no routine of this build that touches it touches it in the older build (checked: Akarusa_Apply, Obj_PutHexDigits); kinds RW"
+c0d3,1,wTEST2,*,I,"name of table $2A ($2A: TEST2; $35: AGE_CNT_L); no routine of this build that touches it touches it in the older build (checked: Akarusa_Apply, Obj_PutHexDigits); kinds RW"
+c0d4,1,wGAME_SSEQ,*,C,"name of table $2A at this address; the routines EMI_MAIN, MAKE_EMI touch it here and in that build; kinds RW"
+c0d5,1,wMY_OBJ_X,*,C,name of table $2A at this address; the routines MAKE_EMI touch it here and in that build; kinds W
+c0d6,1,wMY_OBJ_Y,*,C,name of table $2A at this address; the routines MAKE_EMI touch it here and in that build; kinds W
+c0d7,1,wN_COM_FLG,*,C,"name of table $2A at this address; the routines EMI_MAIN, MAKE_EMI, N_TU_SIN touch it here and in that build; kinds RW"
+c0d8,1,wS_DATA,*,C,name of table $2A at this address; the routines SIO_INT touch it here and in that build; kinds W
+c0d9,1,wOK_FLAG,*,C,"name of table $2A at this address; the routines MK_PROTECT, MK_SRAM_MENU, OFF_TEST touch it here and in that build; kinds RW"
+c0da,1,wAGE_CNT_L,*,C,"name of table $2A at this address; the routines PAT_END, SRAM_AGING, VB_SRAM_AGING touch it here and in that build; kinds RW"
+c0db,1,wAGE_CNT_H,*,C,"name of table $2A at this address; the routines PAT_END, SRAM_AGING, VB_SRAM_AGING touch it here and in that build; kinds RW"
+c0dc,1,wE_DATA,*,C,"name of table $2A at this address; the routines AGE_DEC, AGING_ERROR touch it here and in that build; kinds RW"
+c0dd,1,wR_DATA,*,C,"name of table $2A at this address; the routines AGE_DEC, AGING_ERROR, N_OBJ_HYOUJI2 touch it here and in that build; kinds RW"
+c0de,1,wE_BANK,*,C,"name of table $2A at this address; the routines AGE_DEC, AGING_ERROR touch it here and in that build; kinds RW"
+c0df,1,wE_ADDR_H,*,C,"name of table $2A at this address; the routines AGE_DEC, AGING_ERROR touch it here and in that build; kinds RW"
+c0e0,1,wE_ADDR_L,*,C,"name of table $2A at this address; the routines AGE_DEC, AGING_ERROR touch it here and in that build; kinds RW"
+c0e1,1,wAGE_ERROR,*,C,"name of table $2A at this address; the routines AGING_ERROR, PAT_END, SRAM_AGING touch it here and in that build; kinds RW"
+c0e2,1,wDUMP_ADR_H,*,C,"name of table $2A at this address; the routines DUMP_1MEN, GAME_INIT, SRAM_DUMP touch it here and in that build; kinds RW"
+c0e3,1,wDUMP_ADR_L,*,C,"name of table $2A at this address; the routines DUMP_1MEN, GAME_INIT, SRAM_DUMP touch it here and in that build; kinds RW"
+c0e4,1,wDUMP_BANK,*,C,"name of table $2A at this address; the routines DUMP_1MEN, GAME_INIT, SRAM_DUMP touch it here and in that build; kinds RW"
+c0e5,1,wPANASI,*,C,name of table $2A at this address; the routines MAKE_MOVIE touch it here and in that build; kinds RW
+c0e6,1,wPANASI2,*,I,name of table $2A ($2A: PANASI2; $35: B_EDGE); no routine of this build that touches it touches it in the older build (checked: Seq09_ConfigMain); kinds RW
+c0e7,1,wCNF_CUR,*,C,name of table $2A at this address; the routines MAKE_CONFIG touch it here and in that build; kinds RW
+c0e9,1,wDITHER,*,C,"name of table $2A at this address; the routines PARA_SET, PUT_DITH_PAT touch it here and in that build; kinds RW"
+c0ea,1,wYURAGI,*,I,name of table $2A ($2A: YURAGI; $35: B_CHG_T0); no routine of this build that touches it touches it in the older build (checked: GAME_INIT); kinds W
+c0ec,1,wS0,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds PR
+c0ed,1,wS1,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c0ee,1,wS2,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c0ef,1,wW0,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c0f0,1,wW1,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c0f1,1,wW2,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c0f2,1,wB_MODE,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, PARA_SET, PUT_EDGE touch it here and in that build; kinds RW"
+c0f7,1,wPALETTE,*,C,"name of table $2A at this address; the routines GET_A_IMMAGE, PUT_PALETTE touch it here and in that build; kinds RW"
+c0f8,1,wB_CNTR0,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, GET_A_IMMAGE, PARA_SET touch it here and in that build; kinds RW"
+c0f9,1,wB_CNTR1,*,C,name of table $2A at this address; the routines CONF_SET_OBJ touch it here and in that build; kinds RW
+c0fa,1,wB_CNTR2,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, PUT_CHG_T touch it here and in that build; kinds RW"
+c0fb,1,wB_CNTR3,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, PUT_CHG_T touch it here and in that build; kinds RW"
+c0fc,1,wB_CNTR4,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, PUT_VREF touch it here and in that build; kinds RW"
+c0fd,1,wB_CNTR5,*,C,"name of table $2A at this address; the routines CONF_SET_OBJ, OFFSET_DOWN, PUT_OFS touch it here and in that build; kinds RW"
+c0fe,1,wB_TH000,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds PR
+c0ff,1,wB_TH010,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c100,1,wB_TH020,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c101,1,wB_TH030,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c102,1,wB_TH100,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c103,1,wB_TH110,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c104,1,wB_TH120,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c105,1,wB_TH130,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c106,1,wB_TH200,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c107,1,wB_TH210,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c108,1,wB_TH220,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c109,1,wB_TH230,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c10a,1,wB_TH300,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c10b,1,wB_TH310,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c10c,1,wB_TH320,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c10d,1,wB_TH330,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c10e,1,wB_TH001,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c10f,1,wB_TH011,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c110,1,wB_TH021,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c111,1,wB_TH031,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c112,1,wB_TH101,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c113,1,wB_TH111,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c114,1,wB_TH121,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c115,1,wB_TH131,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c116,1,wB_TH201,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c117,1,wB_TH211,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c118,1,wB_TH221,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c119,1,wB_TH231,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c11a,1,wB_TH301,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c11b,1,wB_TH311,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c11c,1,wB_TH321,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c11d,1,wB_TH331,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c11e,1,wB_TH002,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c11f,1,wB_TH012,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c120,1,wB_TH022,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c121,1,wB_TH032,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c122,1,wB_TH102,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c123,1,wB_TH112,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c124,1,wB_TH122,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c125,1,wB_TH132,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c126,1,wB_TH202,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c127,1,wB_TH212,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c128,1,wB_TH222,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c129,1,wB_TH232,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c12a,1,wB_TH302,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c12b,1,wB_TH312,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c12c,1,wB_TH322,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c12d,1,wB_TH332,*,C,name of table $2A at this address; the routines SET_DITH_MATRIX touch it here and in that build; kinds R
+c161,1,wCONF_MODE,*,I,name of table $2A ($2A: CONF_MODE; $35: FB01A); no routine of this build that touches it touches it in the older build (checked: GAME_INIT); kinds W
+c162,1,wNUM_IN_F,*,C,name of table $2A at this address; the routines MAKE_CONFIG touch it here and in that build; kinds W
+c163,1,wAUTO_MODE,*,I,name of table $2A ($2A: AUTO_MODE; $35: FB02A); no routine of this build that touches it touches it in the older build (checked: GAME_INIT); kinds W
+c164,1,wAKARUSA,*,C,"name of table $2A at this address; the routines GET_A_IMMAGE, MAKE_MOVIE touch it here and in that build; kinds RW"
+c165,1,wCONTRAST,*,C,"name of table $2A at this address; the routines MAKE_MOVIE, PARA_SET touch it here and in that build; kinds RW"
+c166,1,wCHANGE_TH_FLAG,*,I,name of table $2A ($2A: CHANGE_TH_FLAG; $35: FB03B); no routine of this build that touches it touches it in the older build (checked: GAME_INIT); kinds W
+c167,1,wBUNKATU_MODE,*,C,"name of table $2A at this address; the routines GET_A_IMMAGE, MAKE_MOVIE touch it here and in that build; kinds RW"
+c168,1,wIKKAI_FLAG,*,I,"name of table $2A ($2A: IKKAI_FLAG; $35: FB10B); no routine of this build that touches it touches it in the older build (checked: GAME_INIT, Seq06_MovieMain); kinds RW"
+d000,128,wB_ADR,*,C,"name of table $2A at this address; the routines CHANGE_PALETTE, PICT_SAVE_GO touch it here and in that build; kinds P"
+d080,256,wImageCopy_Mode01_D080,*,I,"no table names it: named after the routine that touches it most (ImageCopy_Mode01 1, ImageCopy_Mode10 1, ImageCopy_Mode14 1); kinds P"
+d340,192,wImageCopy_Mode23_D340,*,I,no table names it: named after the routine that touches it most (ImageCopy_Mode23 1); kinds P
+d400,256,wImageCopy_Mode22_D400,*,I,no table names it: named after the routine that touches it most (ImageCopy_Mode22 1); kinds P
+d60e,242,wImageCopy_Mode03_D60E,*,I,no table names it: named after the routine that touches it most (ImageCopy_Mode03 1); kinds P
+d700,128,wImageCopy_Mode03_D700,*,I,"no table names it: named after the routine that touches it most (ImageCopy_Mode03 1, ImageCopy_Mode11 1, ImageCopy_Mode16 1); kinds P"
+d780,256,wImageCopy_Mode12_D780,*,I,no table names it: named after the routine that touches it most (ImageCopy_Mode12 1); kinds P
+da00,256,wImageCopy_Mode20_DA00,*,I,no table names it: named after the routine that touches it most (ImageCopy_Mode20 1); kinds P
+dd0e,256,wImageCopy_Mode04_DD0E,*,I,no table names it: named after the routine that touches it most (ImageCopy_Mode04 1); kinds P
+dfff,1,wRESET_DFFF,*,I,no table names it: named after the routine that touches it most (RESET 1); kinds P
+ff80,1,hCNT1,*,C,"name of table $2A at this address; the routines INKEY, SRAM_DUMP touch it here and in that build; kinds PRW"
+ff81,1,hTRG1,*,C,"name of table $2A at this address; the routines BANK_TEST, EMI_MAIN, GAME_TITL touch it here and in that build; kinds RW"
+ff85,1,hVBFLG,*,C,"name of table $2A at this address; the routines MAIN_MENU, SRAM_VERIFY, SRAM_WRITE touch it here and in that build; kinds RW"
+ff88,1,hR0,*,C,"name of table $2A at this address; the routines BANK_TEST, CB2, GALLERY_OBJ_SET touch it here and in that build; kinds RW"
+ff89,1,hR1,*,C,"name of table $2A at this address; the routines DUMP_1MEN, GALLERY_OBJ_SET, PUT_BYTE_OBJ2 touch it here and in that build; kinds RW"
+ff8a,1,hR2,*,I,"the same name in both tables; no routine of this build that touches it touches it in the older build (checked: ImageCopy_Common2AC0, ImageCopy_Common2C4B, ImageCopy_Mode08); kinds RW"
+ff8b,1,hR3,*,C,name of table $2A at this address; the routines H_BLANK_TX2 touch it here and in that build; kinds W
+ffa0,1,hSCXW,*,C,"name of table $2A at this address; the routines MAKE_EMI, SCYX_SET0 touch it here and in that build; kinds W"
+ffa1,1,hSCYW,*,C,"name of table $2A at this address; the routines MAKE_EMI, SCYX_SET0 touch it here and in that build; kinds W"
+ffa2,1,hSCYD,*,C,name of table $2A at this address; the routines SCYX_SET0 touch it here and in that build; kinds W
+ffa5,1,hOBJ_CT,*,C,"name of table $2A at this address; the routines DOG_ANIME, MAIN_MENU touch it here and in that build; kinds RW"
+ffa6,3,hOBJ_CT2,*,C,"name of table $2A at this address; the routines DOG_ANIME, KAO_ANIME, MK_PROTECT touch it here and in that build; kinds PRW"
+ffa9,1,hMAIN_AFURE,*,C,"name of table $2A at this address; the routines MAIN_MENU, SRAM_VERIFY, SRAM_WRITE touch it here and in that build; kinds RW"
+ffaa,2,hFLMCNT,*,C,name of table $35 at this address; the routines MAIN_SUB touch it here and in that build; kinds P
+ffac,1,hOBP0W,*,C,"name of table $2A at this address; the routines MAKE_EMI, MEN_FADE, OBJP_DEF_SET touch it here and in that build; kinds RW"
+ffad,1,hOBP1W,*,C,"name of table $2A at this address; the routines MAKE_EMI, OBJP_DEF_SET touch it here and in that build; kinds W"
+ffae,1,hBGPW,*,C,"name of table $2A at this address; the routines BGP_SET, MAKE_EMI, MEN_FADE touch it here and in that build; kinds RW"
+ffdf,17,hAkarusa_Apply_FFDF,*,I,no table names it: named after the routine that touches it most (Akarusa_Apply 1); kinds P
+fff0,13,hSET_DITH_MATRIX_FFF0,*,I,no table names it: named after the routine that touches it most (SET_DITH_MATRIX 2); kinds P
+fffd,1,hBANK_BUF,*,C,"name of table $2A at this address; the routines CB2, MAKE_CONFIG, MAKE_EMI touch it here and in that build; kinds RW"

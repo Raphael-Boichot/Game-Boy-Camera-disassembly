@@ -1,0 +1,2 @@
+variable,group,note
+wGAME_SEQ,seq,running sequence: MAIN_SUB (00:01FE) and VBLANK_SUB (00:027A) dispatch on it; $0E does nothing

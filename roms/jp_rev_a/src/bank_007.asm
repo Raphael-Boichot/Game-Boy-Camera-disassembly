@@ -155,7 +155,7 @@ jr_007_4146:
 
 
 jr_007_4151:
-    cp $02                                        ; $4151
+    cp PADF_B                                     ; $4151
     jr nz, jr_007_416f                            ; $4153
 
     call Link_Stop                                ; $4155
@@ -5874,7 +5874,7 @@ Mode0D_State01_Hub::
 
 
 jr_007_6bf2:
-    and $03                                       ; $6BF2
+    and PADF_A | PADF_B                           ; $6BF2
     ret z                                         ; $6BF4
 
     ld [wAbResult], a                             ; $6BF5
