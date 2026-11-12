@@ -290,7 +290,7 @@ for r in TYPES:
 ngap = 0
 import numpy as _np                       # what the L2 runs read or executed (trace/cov_proto_runs.npz): a gap that is used is not a leftover
 _z = _np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
-RUNX = (_z['exec'][:len(ROMB)] > 0) | (_z['dread'][:len(ROMB)] > 0)
+RUNX = (_z['ex'][:len(ROMB)] > 0) | (_z['dr'][:len(ROMB)] > 0)
 byb = collections.defaultdict(list)
 for (b, ad) in names: byb[b].append(ad)
 for b in byb: byb[b].sort()

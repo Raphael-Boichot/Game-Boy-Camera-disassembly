@@ -15,7 +15,7 @@ formatted SRAM with 999,999 Kitts, 'nokitts' = the same with 0 Kitts; 'photo:' b
 (Select + Start = $0C opens the erase-all-data question, mode $00 state $02); 'wait:N' first = N more idle frames after the boot
 (the Strawberry Channel picks a random page: the waits 0-52 give all eight pages of channel 6, the staff credits). The forced paths patch entry $01 of ModeTable (00:0D00) with the mode
 of their name, as tools/kitty_bgb_forced_modes.py does (a copy of the ROM in memory; evidence I: never a way the game runs).
-Writes two coverage files in the format of tools/kitty_coverage.py (exec / dread / reader): the organic paths and the forced
+Writes two coverage files in the format of tools/kitty_coverage.py (ex / dr / rdr, the keys of the Japanese coverage files): the organic paths and the forced
 ones, and a report: path, end mode:state, the modes seen in order.
 """
 import sys, os, csv, argparse
@@ -78,7 +78,7 @@ for name, m in FORCED:
     keys = taps('A') + [core_mask(BIT['A'])] * 4 + [0] * 600 + [core_mask(BIT['B'])] * 6 + [0] * 120 + [core_mask(BIT['Select'])] * 6 + [0] * 300
     r = run(bytes(rb), SAVES['kitts'], keys, []); frc = acc(frc, r)
     rows.append([name, 'forced', 'A (mode $%02X in ModeTable slot $01), play, B, Select' % m, r[0][-1], ' '.join(x for x in r[0] if not x.startswith('1E'))]); print(*rows[-1][:4], flush=True)
-np.savez_compressed(a.out, exec=org[0], dread=org[1], reader=org[2]); np.savez_compressed(a.forced_out, exec=frc[0], dread=frc[1], reader=frc[2])
+np.savez_compressed(a.out, ex=org[0], dr=org[1], rdr=org[2]); np.savez_compressed(a.forced_out, ex=frc[0], dr=frc[1], rdr=frc[2])
 with open(a.report, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['path', 'kind', 'keys', 'end', 'modes']); w.writerows(rows)
 print('kitty_core_paths: %d organic paths, %d forced; read bytes %d / %d' % (len(PATHS), len(FORCED), int((org[1] > 0).sum()), int((frc[1] > 0).sum())))

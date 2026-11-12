@@ -74,6 +74,8 @@ roms/<folder>/
     cov_<tag>_runs.npz              organic runs of THIS ROM, merged (core)
     cov_<tag>_bgb.npz, cov_<tag>_forced.npz, cov_<tag>_witness.npz               BGB-observed, forced, witness runs
     rom_map_<tag>.csv               every byte: code / data, executed / read / never
+    cov_<tag>_*.npz                 the coverage arrays of the runs, one key convention for every ROM (2026-11-12): ex (executed),
+                                    dr (read as data), rdr (the first reader, 0x80000000 | bank << 16 | pc), as the Japanese files
   port/                             ported builds only (us, gold): the machinery of tools/port_build.py
     code_map_<tag>.csv, map_segments_<tag>.csv, map_inserted_<tag>.csv, diff_<tag>.npz,
     port_report_<tag>.csv, port_l4_report_<tag>.csv, hand_queue_<tag>.csv, never_run_<tag>.csv,

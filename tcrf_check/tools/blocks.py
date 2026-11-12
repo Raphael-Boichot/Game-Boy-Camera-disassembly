@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Basic blocks of the statically traced code (package/trace/trace_jp.json) for the BGB re-trace.
+"""Basic blocks of the statically traced code (roms/jp_rev_a/trace/trace_jp.json, or package/trace/trace_jp.json in the old tree: paths.py) for the BGB re-trace.
 A block head is: a root / entry of the trace, a jump / call / rst target, or the instruction after any jump, call, ret, rst.
 blocks() -> (heads, members): heads = sorted list of (bank, addr); members[(bank, addr)] = list of (bank, addr, length) of the instructions
 that execute whenever the head executes (straight-line run up to the next head or a terminator).

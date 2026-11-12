@@ -2,7 +2,7 @@
 """Replay a coverage corpus (JSONL of root specs and key-action nodes, see lib.Corpus) depth-first in the display-tracking core (gbcov_display.c, docs §16.24),
 restoring the parent's snapshot for every child, and accumulate which ROM bytes reach the screen (disp, disp_fr, disp_fro), which sound ids are requested / started (snd)
 and the first node that did it.  Nodes marked tainted (state pokes somewhere in the lineage) run with the organic flag off.
-usage: display_replay.py CORPUS.jsonl OUT.npz [maxnodes]          (GBCAM_ROOT = the working root with saves/, saves_unl/ and package/trace/trace_jp.json; build libgbcov_display.so first)"""
+usage: display_replay.py CORPUS.jsonl OUT.npz [maxnodes]          (GBCAM_ROOT = the working root with saves/ and saves_unl/; the trace from paths.trace_jp(); build libgbcov_display.so first)"""
 import sys, os, json, time, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
@@ -11,7 +11,7 @@ ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')
 g.load_rom(os.environ.get('GBCAM_ROM', ROOT + '/pocketcamera_jp.gb'))
 import json as _j
 # known-code bitmap, as lib.load_known()
-t=_j.load(open(ROOT+'/package/trace/trace_jp.json')); K=np.zeros(1<<20,np.uint8)
+t=_j.load(open(__import__('paths').trace_jp())); K=np.zeros(1<<20,np.uint8)
 for k,n in t['code'].items():
     if n>0:
         b,a=k.split(':'); b=int(b,16); a=int(a,16); K[a if b==0 and a<0x4000 else b*0x4000+a-0x4000]=1

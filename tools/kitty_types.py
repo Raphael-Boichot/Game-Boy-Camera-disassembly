@@ -100,7 +100,7 @@ if a.observed:
     import numpy as np
     dr = None; rdr = None
     for f in a.observed:
-        z = np.load(f); d_ = z['dread'] > 0; r_ = z['reader'].astype(np.uint64)
+        z = np.load(f); d_ = z['dr'] > 0; r_ = z['rdr'].astype(np.uint64)
         if dr is None: dr, rdr = d_.copy(), r_.copy()
         else: rdr = np.where(rdr == 0, r_, rdr); dr |= d_
     # the reader routine of an instruction = the nearest trace entry at or below it in its bank (unrolled copies read
@@ -126,7 +126,7 @@ if a.observed:
     if cur: obs_rows.append(cur)
     exb = None
     for f in a.observed:
-        e_ = np.load(f)['exec'] > 0; exb = e_ if exb is None else (exb | e_)
+        e_ = np.load(f)['ex'] > 0; exb = e_ if exb is None else (exb | e_)
     nexe = sum(1 for (b_, ad_), n_ in code.items() for i_ in range(n_) if exb[off(b_, ad_ + i_)])
     print('observed: %d of %d code bytes executed in the runs (core, and BGB breakpoints on block heads), %d ROM bytes read as data in the core' % (nexe, sum(code.values()), int(dr.sum())))
     obs_rows = [[b, s0, e0, 'data', '', 'read in the core runs by %s%s' % (', '.join('%02X:%04X' % r for r, _ in c.most_common(4)), ' ...' if len(c) > 4 else '')]

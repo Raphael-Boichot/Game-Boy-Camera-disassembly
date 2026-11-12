@@ -292,7 +292,7 @@ if a.observed:
     import numpy as np
     ex = None
     for f in a.observed:
-        e = np.load(f)['exec']; ex = (e == 1) if ex is None else (ex | (e == 1))
+        e = np.load(f)['ex']; ex = (e == 1) if ex is None else (ex | (e == 1))
     for o in np.nonzero(ex)[0]:
         o = int(o); b = o >> 14; ad = o if b == 0 else (o & 0x3FFF) + 0x4000; bb = 0 if ad < 0x4000 else b
         if (bb, ad) in code: continue

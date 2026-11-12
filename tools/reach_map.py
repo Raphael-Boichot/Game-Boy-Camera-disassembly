@@ -44,11 +44,11 @@ def arr(z, *keys):
     return np.zeros(N, bool)
 ex = np.zeros(N, bool); rd = np.zeros(N, bool)
 for f in sorted(glob.glob(os.path.join(D, 'trace', 'cov_%s_*.npz' % T))) + sorted(glob.glob(os.path.join(D, 'trace', 'wp_exec_%s.npz' % T))):
-    z = np.load(f); ex |= arr(z, 'exec', 'ex'); rd |= arr(z, 'dread', 'dr')
+    z = np.load(f); ex |= arr(z, 'ex'); rd |= arr(z, 'dr')
 hit = ex | rd
 forced = np.zeros(N, bool)
 for f in sorted(glob.glob(os.path.join(D, 'trace', 'forced_*.npz'))):
-    z = np.load(f); forced |= arr(z, 'exec', 'ex') | arr(z, 'dread', 'dr')
+    z = np.load(f); forced |= arr(z, 'ex') | arr(z, 'dr')
 forced &= ~hit
 code = np.zeros(N, bool); typed = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(D, 'trace', 'rom_map_%s.csv' % T))):

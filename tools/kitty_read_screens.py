@@ -51,7 +51,7 @@ def score(): return int((G.cov_exec() > 0).sum()) + int((G.cov_dread() > 0).sum(
 play(0, 250)
 corpus = [G.snapshot()]; best = score(); t0 = time.time(); last = t0; steps = 0
 def dump():
-    np.savez_compressed(a.out, first=first, next=nxt, dread=G.cov_dread().copy(), reader=G.cov_reader().copy())
+    np.savez_compressed(a.out, first=first, next=nxt, dr=G.cov_dread().copy(), rdr=G.cov_reader().copy())
     print('%5.1f min  steps %d  corpus %d  read %d' % ((time.time() - t0) / 60, steps, len(corpus), int(seen.sum())), flush=True)
 while time.time() - t0 < a.minutes * 60:
     i = rnd.randrange(len(corpus)) if rnd.random() < 0.8 else len(corpus) - 1 - rnd.randrange(min(5, len(corpus)))

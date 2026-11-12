@@ -11,7 +11,7 @@ usage: display_node_max.py OUT.csv SPANS CORPUS.jsonl [CORPUS.jsonl ...]
   SPANS   BB:AAAA-BBBB[,BB:AAAA-BBBB ...]      ROM spans (bank : first address - last address, hex)
   OUT.csv one row per (corpus path relative to GBCAM_ROOT, span), appended (the header is written when the file is new): corpus, span, nodes, nodes_diverged, org_max_frames_one_node, org_max_node, org_max_sig,
           org_nodes_with_frames, any_max_frames_one_node, any_max_node, any_max_sig, any_nodes_ge_15
-(GBCAM_ROOT = the working root with saves/, saves_unl/ and package/trace/trace_jp.json; build libgbcov_display.so first, GBCOV_LIB points to another build)"""
+(GBCAM_ROOT = the working root with saves/ and saves_unl/; the trace from paths.trace_jp(); build libgbcov_display.so first, GBCOV_LIB points to another build)"""
 
 import sys, os, json, time, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +21,7 @@ ROOT = os.environ.get('GBCAM_ROOT', '/home/claude/gbcam_jp')
 g.load_rom(os.environ.get('GBCAM_ROM', ROOT + '/pocketcamera_jp.gb'))
 import json as _j
 # known-code bitmap, as lib.load_known()
-t=_j.load(open(ROOT+'/package/trace/trace_jp.json')); K=np.zeros(1<<20,np.uint8)
+t=_j.load(open(__import__('paths').trace_jp())); K=np.zeros(1<<20,np.uint8)
 for k,n in t['code'].items():
     if n>0:
         b,a=k.split(':'); b=int(b,16); a=int(a,16); K[a if b==0 and a<0x4000 else b*0x4000+a-0x4000]=1

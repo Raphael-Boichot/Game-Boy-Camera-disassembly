@@ -12,7 +12,7 @@ import sys, os, csv, numpy as np
 from collections import Counter
 z = np.load(sys.argv[1]); ex = z['ex'] != 0; oex = z['oex'] != 0; dr = z['dr'] != 0; odr = z['odr'] != 0
 _pz = np.load(sys.argv[4] if len(sys.argv) > 4 else os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
-PEX = _pz['exec'] != 0; PDR = _pz['dread'] != 0
+PEX = _pz['ex'] != 0; PDR = _pz['dr'] != 0
 PROTO = set()       # ids of group D: coverage from the prototype runs
 def fo(bank, a): return bank * 0x4000 + (a - 0x4000) if bank else a
 def R(bank, a, b): return (fo(bank, a), fo(bank, b) + 1)           # inclusive end

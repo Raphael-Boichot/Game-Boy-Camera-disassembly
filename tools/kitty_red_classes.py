@@ -57,11 +57,11 @@ for r in H:
         b, a, n = ins[o]; bw[o:o + n] = 1
         if ROM[o] in STOP: break
         o += n
-np.savez_compressed(os.path.join(P, 'wp_exec_kitty.npz'), exec=bw, dread=np.zeros(N, np.uint8))
+np.savez_compressed(os.path.join(P, 'wp_exec_kitty.npz'), ex=bw, dr=np.zeros(N, np.uint8))
 ex = np.zeros(N, bool)
-for f in sorted(glob.glob(os.path.join(P, 'cov_kitty_*.npz'))) + [os.path.join(P, 'wp_exec_kitty.npz')]: ex |= np.load(f)['exec'][:N] > 0
+for f in sorted(glob.glob(os.path.join(P, 'cov_kitty_*.npz'))) + [os.path.join(P, 'wp_exec_kitty.npz')]: ex |= np.load(f)['ex'][:N] > 0
 red = code & ~ex
-def lay(f): z = np.load(os.path.join(P, f)); return (z['exec'][:N] > 0) & red
+def lay(f): z = np.load(os.path.join(P, f)); return (z['ex'][:N] > 0) & red
 fe, fg, fm = lay('forced_effects_kitty.npz'), lay('forced_gates_kitty.npz'), lay('forced_kitty.npz')
 cls = np.full(N, '', object)
 cls[red] = 'not-run'; cls[red & fm] = 'forced-mode'; cls[red & fg & ~fm] = 'gate'; cls[red & fe & ~fg & ~fm] = 'effect'

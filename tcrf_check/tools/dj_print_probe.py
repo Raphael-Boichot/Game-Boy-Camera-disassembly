@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g
 import numpy as np, blocks as B
 hit = json.load(open('unlock_runs/dj_hit.json'))
-d = bytearray(open('package/coverage/saves/%s.sav' % hit['base'], 'rb').read())
+d = bytearray(open(os.path.join(__import__('paths').saves_dir(), '%s.sav' % hit['base']), 'rb').read())
 for name, off, x in hit['edits']: d[off] ^= x
 g.set_organic(1); g.reset(bytes(d)); g.L.gb_attach_printer(1); g.run(300)
 for k, w in hit['seq']:

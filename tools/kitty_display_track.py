@@ -61,7 +61,7 @@ for spec in a.run:
         if i % 200 == 0: print('%s: entry %d / %d, frames %d, samples %d, tiles %d, rows %d, %.0f s' % (d, i, len(K), frames, samples, len(tiles), len(rows), time.time() - t0), flush=True)
     snaps.clear()
 rom = open(a.rom, 'rb').read(); N = len(rom)
-rd = np.load(os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'cov_kitty_runs.npz'))['dread'] > 0
+rd = np.load(os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'cov_kitty_runs.npz'))['dr'] > 0
 ok = np.convolve(rd.astype(np.int32), np.ones(16, np.int32), 'full')[15:15 + N] == 16        # window o..o+15 all read (index = start)
 T = np.zeros(N, np.uint8); M = np.zeros(N, np.uint8)
 for o in np.flatnonzero(ok[:N - 15]):

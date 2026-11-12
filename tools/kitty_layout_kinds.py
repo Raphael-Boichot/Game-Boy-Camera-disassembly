@@ -64,7 +64,7 @@ def evidence(rom_path, track, kd=KD):
         if not r['src'] or not r['src_bank'] or not r['len'] or r['dst_kind'] not in ('tiles', 'map') or int(r['src'], 16) >= 0x8000: continue
         o = off(int(r['src_bank'], 16), int(r['src'], 16)); cs[o:o + int(r['len'], 16)] = 1 if r['dst_kind'] == 'tiles' else 2
     put(cs == 1, 1, 2); put(cs == 2, 2, 2)
-    rd = np.load(os.path.join(kd, 'trace', 'cov_kitty_runs.npz'))['reader'].astype(np.int64)
+    rd = np.load(os.path.join(kd, 'trace', 'cov_kitty_runs.npz'))['rdr'].astype(np.int64)
     rb = (rd >> 16) & 0xFF; pc = rd & 0xFFFF
     put((rd != 0) & (rb == 0x0F) & (pc >= 0x4000), 3, 3)
     put((rd != 0) & (pc >= 0x1F00) & (pc < 0x2243), 4, 4)

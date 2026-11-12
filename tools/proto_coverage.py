@@ -40,7 +40,7 @@ note_mode([0] * 250)
 best = score(); t0 = time.time(); last_dump = t0; steps = 0
 def dump():
     ex = G.cov_exec().copy(); dr = G.cov_dread().copy(); rd = G.cov_reader().copy()
-    np.savez_compressed(os.path.join(a.out, 'cov.npz'), exec=ex, dread=dr, reader=rd)
+    np.savez_compressed(os.path.join(a.out, 'cov.npz'), ex=ex, dr=dr, rdr=rd)
     with open(os.path.join(a.out, 'modes.csv'), 'w', newline='') as f:
         w = csv.writer(f, lineterminator='\n'); w.writerow(['game_seq', 'frames', 'keys'])
         for m, h in sorted(modes.items()): w.writerow(['%02X' % m, len(h), ''.join('%02x' % k for k in h)])

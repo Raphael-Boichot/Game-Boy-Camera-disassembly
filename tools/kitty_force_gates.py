@@ -23,7 +23,7 @@ T = json.load(open(os.path.join(KD, 'trace', 'trace_kitty.json')))
 code = np.zeros(N, bool)
 for k, n in T['code'].items(): o = off(int(k[:2], 16), int(k[3:], 16)); code[o:o + n] = True
 ex = np.zeros(N, bool)
-for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['exec'][:N] > 0
+for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['ex'][:N] > 0
 red = code & ~ex
 gates = [r for r in csv.DictReader(open(os.path.join(KD, 'trace', 'gates_kitty.csv'))) if r['site'][:2] in banks]
 G.load_rom(ROMP); G.reset(bytes(0x20000)); G.run(600); sav = bytes(G.sram())
@@ -45,7 +45,7 @@ for g in gates:
     newred = int((e & red).sum())
     rows.append([g['site'], g['routine'], g['branch'], g['first_red'], 'yes' if e[o] else 'no', newred, '%02X:%02X' % (G.peek(0xFF8D), G.peek(0xFF8E))])
     print(*rows[-1], flush=True)
-np.savez_compressed(os.path.join(KD, 'trace', 'forced_gates_kitty.npz'), exec=U_ex, dread=U_rd)
+np.savez_compressed(os.path.join(KD, 'trace', 'forced_gates_kitty.npz'), ex=U_ex, dr=U_rd)
 with open(os.path.join(KD, 'trace', 'forced_gates_kitty.csv'), 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['site', 'routine', 'branch', 'first_red', 'site_ran', 'red_bytes_run', 'end']); w.writerows(rows)
 print('kitty_force_gates: %d gates, %d ran, %d red bytes run in at least one' % (len(rows), sum(1 for r in rows if r[4] == 'yes'), int(((U_ex > 0) & red).sum())))

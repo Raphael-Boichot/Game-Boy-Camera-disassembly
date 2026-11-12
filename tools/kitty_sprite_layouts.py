@@ -16,7 +16,7 @@ import os
 d=open(os.environ.get('KITTY_ROM','/root/work/roms/pocketcamera_kitty.gb'),'rb').read()
 def off(b,a): return a if b==0 else b*0x4000+a-0x4000
 z=np.load('roms/hello_kitty/trace/cov_kitty_runs.npz'); p=np.load('roms/hello_kitty/trace/cov_kitty_paths.npz'); bg=np.load('roms/hello_kitty/trace/cov_kitty_bgb.npz')
-rd=(z['dread']>0)|(p['dread']>0)|(bg['dread']>0)
+rd=(z['dr']>0)|(p['dr']>0)|(bg['dr']>0)
 T=json.load(open('roms/hello_kitty/trace/trace_kitty.json')); code=set()
 for r in csv.DictReader(open('roms/hello_kitty/trace/rom_map_kitty.csv')):
     if r['class']=='C':

@@ -20,7 +20,7 @@ T = json.load(open(os.path.join(KD, 'trace', 'trace_kitty.json')))
 code = np.zeros(N, bool)
 for k, n in T['code'].items(): o = off(int(k[:2], 16), int(k[3:], 16)); code[o:o + n] = True
 ex = np.zeros(N, bool)
-for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['exec'][:N] > 0
+for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['ex'][:N] > 0
 red = code & ~ex
 o = off(5, 0x4A85); assert ROM[o:o + 2] == b'\x09\x7e', 'not the expected live-view code'
 G.load_rom(ROMP); G.reset(bytes(0x20000)); G.run(600); sav = bytes(G.sram())
@@ -35,7 +35,7 @@ for e in range(0x60):
     G.load_rom(tmp); G.restore(snap); G.cov_exec()[:] = 0; G.cov_dread()[:] = 0; G.run(240)
     x = np.array(G.cov_exec())[:N] > 0; U_ex += x; U_rd += np.array(G.cov_dread())[:N] > 0
     rows.append(['%02X' % e, '04:%04X' % (ROM[tab + 2 * e] | ROM[tab + 2 * e + 1] << 8), int((x & red).sum()), '%02X:%02X' % (G.peek(0xFF8D), G.peek(0xFF8E))])
-np.savez_compressed(os.path.join(KD, 'trace', 'forced_effects_kitty.npz'), exec=U_ex, dread=U_rd)
+np.savez_compressed(os.path.join(KD, 'trace', 'forced_effects_kitty.npz'), ex=U_ex, dr=U_rd)
 with open(os.path.join(KD, 'trace', 'forced_effects_kitty.csv'), 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['effect', 'handler', 'red_bytes_run', 'end']); w.writerows(rows)
 print('kitty_force_effects: %d effects, %d red bytes run in at least one, %d bank 04 red bytes left' % (

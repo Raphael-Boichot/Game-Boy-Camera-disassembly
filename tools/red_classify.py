@@ -40,9 +40,9 @@ def arr(z, *ks):
     return np.zeros(N, bool)
 ex = np.zeros(N, bool); forced = np.zeros(N, bool)
 for f in sorted(glob.glob(os.path.join(D, 'trace', 'cov_%s_*.npz' % T))) + sorted(glob.glob(os.path.join(D, 'trace', 'wp_exec_%s.npz' % T))):
-    ex |= arr(np.load(f), 'exec', 'ex')
+    ex |= arr(np.load(f), 'ex')
 for f in sorted(glob.glob(os.path.join(D, 'trace', 'forced_*.npz'))):
-    z = np.load(f); forced |= arr(z, 'exec', 'ex') | arr(z, 'dread', 'dr')
+    z = np.load(f); forced |= arr(z, 'ex') | arr(z, 'dr')
 code = np.zeros(N, bool)
 for r in csv.DictReader(open(os.path.join(D, 'trace', 'rom_map_%s.csv' % T))):
     if r['class'] == 'C': o = off(int(r['bank'], 16), int(r['start'], 16)); code[o:o + int(r['length'])] = True

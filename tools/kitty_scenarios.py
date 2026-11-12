@@ -10,7 +10,7 @@ a list of (core key mask, frames) held from power-on, the frames to run, and the
 Keys are written as the BGB demo byte (A=1 B=2 Select=4 Start=8 Right=$10 Left=$20 Up=$40 Down=$80), the convention of the
 game's own key byte ($D8D8 holds the keys read at boot: $FD = every key but B, as in the Japanese ROM); the core's mask has the
 nibbles swapped (direction keys low), converted here.
-Writes OUT_DIR/cov_scenarios.npz (exec / dread / reader of all core runs, the format of tools/kitty_coverage.py),
+Writes OUT_DIR/cov_scenarios.npz (ex / dr / rdr of all core runs, the format of tools/kitty_coverage.py),
 OUT_DIR/scenarios.csv (scenario, modes in order with the frame of each change, in the core and at each BGB screenshot) and
 OUT_DIR/kitty_scen_NAME_FRAME.png (BGB).
 """
@@ -61,7 +61,7 @@ for name, sram, keys, frames, shots in SCEN:
         if os.path.exists(os.path.join(tmp, 's.bmp')): Image.open(os.path.join(tmp, 's.bmp')).save(os.path.join(a.out, pic))
         rows.append([name, 'bgb frame %d' % n, '%02X:%02X' % (h[0x0D], h[0x0E]) if len(h) > 0x0E else '?', pic])
     shutil.rmtree(tmp, ignore_errors=True)
-np.savez_compressed(os.path.join(a.out, 'cov_scenarios.npz'), exec=ex, dread=dr, reader=rd)
+np.savez_compressed(os.path.join(a.out, 'cov_scenarios.npz'), ex=ex, dr=dr, rdr=rd)
 with open(os.path.join(a.out, 'scenarios.csv'), 'w', newline='') as f:
     w = csv.writer(f); w.writerow(['scenario', 'where', 'modes', 'picture']); w.writerows(rows)
 for r in rows: print(*r)

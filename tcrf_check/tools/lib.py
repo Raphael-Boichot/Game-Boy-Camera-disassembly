@@ -1,13 +1,13 @@
 """Helper layer over the package core (coverage/src/gbcov.py): path setup, ROM load, screen render, corpus replay."""
 import sys, os, json
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
-sys.path.insert(0, os.path.join(ROOT, 'package', 'coverage', 'src')); sys.path.insert(0, HERE)
+sys.path.insert(0, HERE); import paths as _paths; sys.path.insert(0, _paths.core_dir())     # the repository layout or the old package/ tree
 import numpy as np
 import gbcov as g
 import render2 as R
 ROM = os.environ.get('GBCAM_ROM', os.path.join(ROOT, 'pocketcamera_jp.gb'))
 g.load_rom(ROM)
-TRACE = os.path.join(ROOT, 'package', 'trace', 'trace_jp.json')
+TRACE = _paths.trace_jp()
 def load_known():
     t = json.load(open(TRACE)); K = np.zeros(g.ROMSZ, np.uint8)
     for k, n in t['code'].items():

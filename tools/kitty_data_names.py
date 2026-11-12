@@ -33,7 +33,7 @@ def run(names, D, rom, jp, T, put):
     JR = open(jp, 'rb').read() if jp and os.path.exists(jp) else None
     tr = D.replace('disasm/', 'trace/'); asd = D.replace('disasm/', 'assets/')
     def load(f):
-        z = np.load(tr + f); return z['exec'] > 0, z['dread'] > 0, (z['reader'] if 'reader' in z.files else np.zeros(N, np.uint32))
+        z = np.load(tr + f); return z['ex'] > 0, z['dr'] > 0, (z['rdr'] if 'rdr' in z.files else np.zeros(N, np.uint32))
     org = np.zeros(N, bool); frc = np.zeros(N, bool); rdr = np.zeros(N, np.uint32)
     for f in ('cov_kitty_runs.npz', 'cov_kitty_paths.npz', 'cov_kitty_bgb.npz'):
         if os.path.exists(tr + f):

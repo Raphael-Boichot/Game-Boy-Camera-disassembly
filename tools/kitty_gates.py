@@ -20,7 +20,7 @@ ins = {}
 for k, n in T['code'].items():
     b, a = int(k[:2], 16), int(k[3:], 16); ins[off(b, a)] = (b, a, n)
 ex = np.zeros(N, bool)
-for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['exec'][:N] > 0
+for f in sorted(glob.glob(os.path.join(KD, 'trace', 'cov_kitty_*.npz'))) + glob.glob(os.path.join(KD, 'trace', 'wp_exec_kitty.npz')): ex |= np.load(f)['ex'][:N] > 0
 code = np.zeros(N, bool)
 for o, (b, a, n) in ins.items(): code[o:o + n] = True
 red = code & ~ex

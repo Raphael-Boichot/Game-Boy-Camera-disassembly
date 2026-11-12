@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Turn BGB logging-breakpoint hits on never-run block heads into an `exec` array for the Kitty pipeline (L2 observed in BGB).
+"""Turn BGB logging-breakpoint hits on never-run block heads into an `ex` array for the Kitty pipeline (L2 observed in BGB).
 
   tools/kitty_bgb_hits.py ROM TRACE.json HEADS.json OUT.npz HITS.csv [HITS.csv ...]
 
@@ -34,6 +34,6 @@ for b, a in sorted(seen):
         cur += n; first = False
         if R[o] in (0xC9, 0xD9, 0xC3, 0x18, 0xE9): break
         if cur in (0x4000, 0x8000): break
-np.savez_compressed(out, exec=ex, dread=np.zeros(N, np.uint8), reader=np.zeros(N, np.uint32))
+np.savez_compressed(out, ex=ex, dr=np.zeros(N, np.uint8), rdr=np.zeros(N, np.uint32))
 print('kitty_bgb_hits: %d of %d block heads hit (control hits %d), %d bytes credited' % (len(seen & heads), len(heads), ctrl, int((ex > 0).sum())))
 if ctrl == 0: raise SystemExit('the control breakpoint was never hit: the -wp list did not work')

@@ -22,11 +22,11 @@ if a.merge:
     ex = dr = rd = None
     for f in a.merge:
         z = np.load(f)
-        if ex is None: ex, dr, rd = (z['exec'] > 0).astype(np.uint8), z['dread'].copy(), z['reader'].copy()
+        if ex is None: ex, dr, rd = (z['ex'] > 0).astype(np.uint8), z['dr'].copy(), z['rdr'].copy()
         else:
-            ex |= (z['exec'] > 0).astype(np.uint8); dr = np.maximum(dr, z['dread']); rd = np.where(rd != 0, rd, z['reader'])
-    np.savez_compressed(a.runs, exec=ex, dread=dr, reader=rd)
-z = np.load(a.runs); ex = z['exec'] > 0
+            ex |= (z['ex'] > 0).astype(np.uint8); dr = np.maximum(dr, z['dr']); rd = np.where(rd != 0, rd, z['rdr'])
+    np.savez_compressed(a.runs, ex=ex, dr=dr, rdr=rd)
+z = np.load(a.runs); ex = z['ex'] > 0
 T = json.load(open(a.trace))
 def off(k): b, ad = int(k[:2], 16), int(k[3:], 16); return ad if ad < 0x4000 else b * 0x4000 + ad - 0x4000
 code = sorted((off(k), n, k) for k, n in T['code'].items())
