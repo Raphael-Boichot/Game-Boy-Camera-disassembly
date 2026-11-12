@@ -10,6 +10,7 @@ bank,start,end,bytes,kind,label,lines,sample
 0C,4104,4200,252,assembler source (leftover),Leftover_0C_4104_AsmSource,25,"A INC C LD A,(HLI) ;4A LD (BC),A INC C LD A,(HLI) ;4B LD (BC)"
 0D,4001,4100,255,assembler source (leftover),Leftover_0D_4001_AsmSource,18,"; LD ($2000),A ; LD HL,FACE3 ;1枚目の絵をバッファに ld a,$4 ld ($2000),a ld hl,ka"
 0D,4104,4200,252,assembler source (leftover),Leftover_0D_4104_AsmSource,20,"LD A,04 LD (PICTURE_F),A JR NC_PICT PICT4 ; LD A,$06 ; LD ($2000),A ;"
+11,6B2E,6CA9,379,PC memory string (leftover),Leftover_11_4001_PcRam,1,00000000000000000000000000000000000000000000000000000000000000000000000000PPPPPP
 12,4001,4100,255,assembler source (leftover),Leftover_12_4001_AsmSource,4,: BufPointer ds 2 ;送信バッファポインタ siowork.dmg(51) : BufPointer_base ds 2 ;送信バッファア
 12,4104,42F4,496,assembler source (leftover),Leftover_12_4104_AsmSource,4,: PrnDataAddress ds 2 ;------ＮｏｔＵｓｅｄ siowork.dmg(55) : SioCheckSum_S ds 2 ;送信
 13,4001,4100,255,source listing (leftover),Leftover_13_4001_SrcListing,9,: FB31A DS 1 equ.dmg(307) : FB31B DS 1 equ.dmg(308) : FB32A DS 1 equ.dmg(3

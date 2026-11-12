@@ -38,7 +38,7 @@ import csv, json, os, re, sys, argparse, collections
 D = 'roms/prototype_debagame/'
 ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=16)
 ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
-ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
+ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--symtab-mem', default=D + 'disasm/leftover_symtab_mem_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
 ap.add_argument('--hand', default=D + 'disasm/layers/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
 ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv'); ap.add_argument('--texts', default=D + 'assets/text_sections_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
@@ -270,7 +270,14 @@ for o in range(len(ROMB)):
 # 5b. leftover PC memory (owner 2026-11-11): a leftover run whose bytes hold strings of the development PC's memory (Windows paths, the
 #     DOS environment, Windows module names) is a piece of that PC's RAM that the build tool wrote into unused ROM space:
 #     Leftover_BB_AAAA_PcRam, tag I, final. The run is the span of the gap label (to the next label of the bank); only the strings are proven.
+#     Also (owner 2026-11-12) a run with 2+ x86 function prologues (55 8B EC) or 5+ in-memory symbol records (the linker's symbol list,
+#     tools/proto_symtab.py --out-mem): the memory of the PC that linked the ROM.
 PCRE = re.compile(rb'[A-Z]:\\[A-Za-z]|WINDOWS VMM|[A-Z0-9]{3,8}\.(DLL|EXE|VXD|DRV)\b|COMSPEC=|winbootdir=')
+X86RE = re.compile(rb'\x55\x8B\xEC')            # push bp / mov bp,sp: an x86 function prologue ($EC is no Game Boy opcode)
+MEMSYM = set()                                  # the in-memory symbol records (tools/proto_symtab.py --out-mem): the linker's symbol list
+_mp = a.symtab_mem
+if os.path.exists(_mp):
+    for r in csv.DictReader(open(_mp)): o_ = int(r['file_offset'], 16); MEMSYM.add((o_ >> 14, 0x4000 + (o_ & 0x3FFF)))
 npc = 0; PCRAM = []
 _all = sorted(names)
 for i_, (b, ad) in enumerate(_all):
@@ -280,7 +287,8 @@ for i_, (b, ad) in enumerate(_all):
     end = na if nb == b else 0x8000
     t = ROMB[_flat(b, ad):_flat(b, ad) + end - ad]
     hits = [m for m in PCRE.finditer(t)]
-    if not hits: continue
+    x86 = len(X86RE.findall(t)); mem = sum(1 for (mb, mo) in MEMSYM if mb == b and ad <= mo < end)
+    if not hits and x86 < 2 and mem < 5: continue
     strs = []                              # the printable string around each hit (a NUL-terminated string of the PC memory)
     for m in hits:
         i0, i1 = m.start(), m.end()
@@ -292,8 +300,12 @@ for i_, (b, ad) in enumerate(_all):
     for m in re.finditer(rb'[\x20-\x7e]{6,}(?=\x00)', t):
         x = m.group()
         if sum(1 for ch in x if 0x41 <= ch <= 0x5A or 0x61 <= ch <= 0x7A) * 2 >= len(x): allstr.append((ad + m.start(), x.decode('latin1')))
-    names[(b, ad)] = ['Leftover_%02X_%04X_PcRam' % (b, ad), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X) that hold %d strings of the development PC\'s RAM (%s ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory' % (
-        end - ad, b, ad, end - 1, len(strs), ' / '.join(x[:40] for x in ex)), 'ram']
+    evs = []
+    if strs: evs.append('%d strings of the development PC\'s RAM (%s ...)' % (len(strs), ' / '.join(x[:40] for x in ex)))
+    if x86 >= 2: evs.append('%d x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode)' % x86)
+    if mem >= 5: evs.append('%d records of the linker\'s symbol list as held in memory (disasm/leftover_symtab_mem_proto.csv)' % mem)
+    names[(b, ad)] = ['Leftover_%02X_%04X_PcRam' % (b, ad), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X) that hold %s, and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory' % (
+        end - ad, b, ad, end - 1, '; '.join(evs)), 'ram']
     PCRAM.append((b, ad, end, allstr)); npc += 1
 # 6. code after a data label: a <routine>_Part<AAAA> label (the Japanese convention for a piece of a parent block) at the first traced
 #    instruction that a non-code label would own, so that the code keeps the name and the colour of its routine

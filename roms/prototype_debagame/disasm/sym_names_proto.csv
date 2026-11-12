@@ -248,7 +248,7 @@ bank,addr,name,conf,note,source
 04,4500,HalfBits_Table,I,"256-byte table keeping every other bit (00 00 01 01 00 00 01 01 02 02 03 03 ...), read by ImageCopy_Mode08 in the L2 runs (a reduction: I)",hand
 04,4BF0,Leftover_04_4BF0,I,"leftover: 11 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 04,4E01,Data_04_4E01_KAO_1,I,KAO_1 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
-04,4E4E,Leftover_04_4E4E_PcRam,I,"leftover PC memory: 3507 bytes (04:4E4E-5C00) that hold 1 strings of the development PC's RAM (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory",ram
+04,4E4E,Leftover_04_4E4E_PcRam,I,"leftover PC memory: 3507 bytes (04:4E4E-5C00) that hold 1 strings of the development PC's RAM (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 04,5C01,Data_04_5C01_KAO_2,I,KAO_2 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
 04,6270,Leftover_04_6270,I,"leftover: 80 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 04,6A01,Data_04_6A01_KAO_3,I,KAO_3 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind not settled,symtab_asset
@@ -259,7 +259,7 @@ bank,addr,name,conf,note,source
 05,4E01,Unused_TCRF_FacePhoto8_HOI_D_Gfx,C,"TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 8 of 10, head turned down (HOI_D), a 128 x 112 camera picture (3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2 runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of this build reaches it",hand
 05,5C01,Unused_TCRF_FacePhoto9_HOI_L_Gfx,C,"TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 9 of 10, head turned left (HOI_L), a 128 x 112 camera picture (3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2 runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of this build reaches it",hand
 05,6A01,Unused_TCRF_FacePhoto10_HOI_R_Gfx,C,"TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 10 of 10, head turned right (HOI_R), a 128 x 112 camera picture (3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2 runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of this build reaches it",hand
-05,7801,Leftover_05_7801_PcRam,I,"leftover PC memory: 2046 bytes (05:7801-7FFE) that hold 1 strings of the development PC's RAM (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory",ram
+05,7801,Leftover_05_7801_PcRam,I,"leftover PC memory: 2046 bytes (05:7801-7FFE) that hold 1 strings of the development PC's RAM (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 05,7FFF,BankNumber_05_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 06,4000,BankNumber_06_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 06,4001,Unused_TCRF_FaceDrawing1_FACE5_Gfx,C,"TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face drawing 1 of 4 (FACE5 in the old symbol tables), a 128 x 112 picture (224 tiles in row order, 3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2 runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of this build reaches it",hand
@@ -272,16 +272,16 @@ bank,addr,name,conf,note,source
 07,4101,Leftover_07_4101,I,"leftover: 3 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 07,7FFF,BankNumber_07_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 08,4000,BankNumber_08_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-08,4001,Leftover_08_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+08,4001,Leftover_08_4001_PcRam,I,"leftover PC memory: 16382 bytes (08:4001-7FFE) that hold 2 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 08,7FFF,BankNumber_08_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 09,4000,BankNumber_09_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-09,4001,Leftover_09_4001,I,"leftover: 4277 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+09,4001,Leftover_09_4001_PcRam,I,"leftover PC memory: 16382 bytes (09:4001-7FFE) that hold 2 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 09,7FFF,BankNumber_09_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0A,4000,BankNumber_0A_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-0A,4001,Leftover_0A_4001,I,"leftover: 1672 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+0A,4001,Leftover_0A_4001_PcRam,I,"leftover PC memory: 16382 bytes (0A:4001-7FFE) that hold 19 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 0A,7FFF,BankNumber_0A_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0B,4000,BankNumber_0B_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-0B,4001,Leftover_0B_4001,I,"leftover: 956 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+0B,4001,Leftover_0B_4001_PcRam,I,"leftover PC memory: 16382 bytes (0B:4001-7FFE) that hold 3 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 0B,7FFF,BankNumber_0B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0C,4000,BankNumber_0C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 0C,4001,Leftover_0C_4001_AsmSource,I,"leftover text: 255 bytes of the developers' assembler source in clear (0 listing lines, 19 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
@@ -312,7 +312,7 @@ bank,addr,name,conf,note,source
 10,41A7,Leftover_10_41A7,I,"leftover: 148 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 10,7FFF,BankNumber_10_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 11,4000,BankNumber_11_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-11,4001,Leftover_11_4001,I,"leftover: 569 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+11,4001,Leftover_11_4001_PcRam,I,"leftover PC memory: 16382 bytes (11:4001-7FFE) that hold 34 records of the linker's symbol list as held in memory (disasm/leftover_symtab_mem_proto.csv), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 11,7FFF,BankNumber_11_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 12,4000,BankNumber_12_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 12,4001,Leftover_12_4001_AsmSource,I,"leftover text: 255 bytes of the developers' assembler source in clear (3 listing lines, 4 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
@@ -361,7 +361,7 @@ bank,addr,name,conf,note,source
 1A,4001,Leftover_1A_4001_AsmSource,I,"leftover text: 255 bytes of the developers' assembler source in clear (0 listing lines, 4 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
 1A,4100,Leftover_1A_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1A,4104,Leftover_1A_4104_AsmSource,I,"leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 3 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
-1A,4200,Leftover_1A_4200_PcRam,I,"leftover PC memory: 15871 bytes (1A:4200-7FFE) that hold 11 strings of the development PC's RAM (C:\Program Files\TAC95\TAC32.EXE / winbootdir=C:\WINDOWS / COMSPEC=C:\WINDOWS\COMMAND.COM ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory",ram
+1A,4200,Leftover_1A_4200_PcRam,I,"leftover PC memory: 15871 bytes (1A:4200-7FFE) that hold 11 strings of the development PC's RAM (C:\Program Files\TAC95\TAC32.EXE / winbootdir=C:\WINDOWS / COMSPEC=C:\WINDOWS\COMMAND.COM ...), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 1A,7FFF,BankNumber_1A_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1B,4000,BankNumber_1B_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1B,4001,Leftover_1B_4001_AsmSource,I,"leftover text: 255 bytes of the developers' assembler source in clear (0 listing lines, 4 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
@@ -733,11 +733,11 @@ bank,addr,name,conf,note,source
 24,56D7,Leftover_24_56D7_AsmSource,I,"leftover text: 10537 bytes of the developers' assembler source in clear (0 listing lines, 463 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
 24,7FFF,BankNumber_24_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 25,4000,BankNumber_25_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-25,4001,Leftover_25_4001,I,"leftover: 509 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+25,4001,Leftover_25_4001_PcRam,I,"leftover PC memory: 509 bytes (25:4001-41FD) that hold 2 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 25,41FE,Leftover_25_41FE_AsmSource,I,"leftover text: 15874 bytes of the developers' assembler source in clear (0 listing lines, 511 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
 25,7FFF,BankNumber_25_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 26,4000,BankNumber_26_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-26,4001,Leftover_26_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+26,4001,Leftover_26_4001_PcRam,I,"leftover PC memory: 511 bytes (26:4001-41FF) that hold 3 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 26,4200,Leftover_26_4200_AsmSource,I,"leftover text: 5328 bytes of the developers' assembler source in clear (0 listing lines, 182 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
 26,56D0,Leftover_26_56D0,I,"leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 26,56D7,Leftover_26_56D7_AsmSource,I,"leftover text: 10537 bytes of the developers' assembler source in clear (0 listing lines, 463 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
@@ -850,10 +850,10 @@ bank,addr,name,conf,note,source
 2B,4001,Leftover_2B_4001_AsmSource,I,"leftover text: 255 bytes of the developers' assembler source in clear (0 listing lines, 6 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
 2B,4100,Leftover_2B_4100,I,"leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2B,4104,Leftover_2B_4104_AsmSource,I,"leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 6 assembler lines) that nothing in this build reads (never read nor run in the L2 runs)",text
-2B,4200,Leftover_2B_4200_PcRam,I,"leftover PC memory: 15871 bytes (2B:4200-7FFE) that hold 2 strings of the development PC's RAM (WINDOWS VMM 4.0 / PIFMGR.DLL ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory",ram
+2B,4200,Leftover_2B_4200_PcRam,I,"leftover PC memory: 15871 bytes (2B:4200-7FFE) that hold 2 strings of the development PC's RAM (WINDOWS VMM 4.0 / PIFMGR.DLL ...), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 2B,7FFF,BankNumber_2B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 2C,4000,BankNumber_2C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-2C,4001,Leftover_2C_4001,I,"leftover: 747 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
+2C,4001,Leftover_2C_4001_PcRam,I,"leftover PC memory: 747 bytes (2C:4001-42EB) that hold 3 x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 2C,42EC,Leftover_2C_42EC_INKEY,I,"leftover: an exact copy of INKEY (00:02E6, 49 bytes) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)",copy
 2C,431D,Leftover_2C_431D,I,"leftover: 82 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 2C,436F,Leftover_2C_436F_SIO_INT_Part0369,I,"leftover: an exact copy of 35 bytes of SIO_INT (from 00:0369, a part of the block) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)",copy
@@ -1102,7 +1102,7 @@ bank,addr,name,conf,note,source
 35,7DA3,Leftover_35_7DA3_Unused_TCRF_FacePhoto1_Gfx_Part55F5,I,"leftover: an exact copy of 604 bytes of Unused_TCRF_FacePhoto1_Gfx (from 30:55F5, a part of the block) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)",copy
 35,7FFF,BankNumber_35_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 36,4000,BankNumber_36_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-36,4001,Leftover_36_4001_PcRam,I,"leftover PC memory: 1023 bytes (36:4001-43FF) that hold 2 strings of the development PC's RAM (WINDOWS VMM 4.0 / PIFMGR.DLL ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory",ram
+36,4001,Leftover_36_4001_PcRam,I,"leftover PC memory: 1023 bytes (36:4001-43FF) that hold 2 strings of the development PC's RAM (WINDOWS VMM 4.0 / PIFMGR.DLL ...), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 36,4400,Leftover_36_4400_Unused_TCRF_FacePhoto2_Gfx_Part5C46,I,"leftover: an exact copy of 949 bytes of Unused_TCRF_FacePhoto2_Gfx (from 30:5C46, a part of the block) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)",copy
 36,47B5,Leftover_36_47B5,I,"leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 36,47BB,Leftover_36_47BB_Unused_TCRF_FacePhoto2_Gfx_Part5FFB,I,"leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto2_Gfx (from 30:5FFB, a part of the block) that nothing in this build reads, runs or explains (never read nor run in the L2 runs)",copy
@@ -1259,7 +1259,7 @@ bank,addr,name,conf,note,source
 3C,4001,Leftover_3C_4001,I,"leftover: 510 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 3C,7FFF,BankNumber_3C_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3D,4000,BankNumber_3D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-3D,4001,Leftover_3D_4001_PcRam,I,"leftover PC memory: 16382 bytes (3D:4001-7FFE) that hold 21 strings of the development PC's RAM (ir=C:\WINDOWS / COMSPEC=C:\WINDOWS\COMMAND.COM / PATH=C:\Program Files\TAC95;C:\Program F ...) and that nothing in this build reads, runs or explains; only the strings are proven, the rest of the run is taken as the same memory",ram
+3D,4001,Leftover_3D_4001_PcRam,I,"leftover PC memory: 16382 bytes (3D:4001-7FFE) that hold 21 strings of the development PC's RAM (ir=C:\WINDOWS / COMSPEC=C:\WINDOWS\COMMAND.COM / PATH=C:\Program Files\TAC95;C:\Program F ...), and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory",ram
 3D,7FFF,BankNumber_3D_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3E,4000,BankNumber_3E_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 3E,4001,Leftover_3E_4001,I,"leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
