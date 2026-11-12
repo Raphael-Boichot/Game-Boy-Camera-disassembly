@@ -13,7 +13,7 @@ path may inject printer replies (cmd 1 INIT, 2 PRINT, 4 DATA, 15 INQUIRY; n-th p
 formatted SRAM with 999,999 Kitts, 'nokitts' = the same with 0 Kitts; 'photo:' before a path = first take and keep one photo
 (title A, take A, shutter A, keep A, B to the main menu); 'hold:KK' first = the key byte KK held for 80 frames from power-on
 (Select + Start = $0C opens the erase-all-data question, mode $00 state $02); 'wait:N' first = N more idle frames after the boot
-(the Strawberry Channel picks a random page: the waits 0-52 give all eight pages of channel 6, the staff credits). The forced paths patch entry $01 of ModeTable (00:0D00) with the mode
+(the Strawberry Channel picks a random page: the waits 0-52 give all eight pages of channel 6, the staff credits). Key tokens: 'K+L*N' holds K and L for N frames (no free frames after); a path whose injections contain 'noprinter' runs with nothing on the link. The forced paths patch entry $01 of ModeTable (00:0D00) with the mode
 of their name, as tools/kitty_bgb_forced_modes.py does (a copy of the ROM in memory; evidence I: never a way the game runs).
 Writes two coverage files in the format of tools/kitty_coverage.py (ex / dr / rdr, the keys of the Japanese coverage files): the organic paths and the forced
 ones, and a report: path, end mode:state, the modes seen in order.
@@ -38,18 +38,30 @@ PATHS = [  # name, save, path, free frames, printer injections
 ] + [('strawberry_ch6_credits_w%d' % w, 'kitts', 'wait:%d A Up A Up A Right Right Right Right Right Right' % w, 12000, []) for w in (0, 7, 14, 19, 21, 28, 35, 52)] + [
     ('strawberry_no_kitts', 'nokitts', 'A Up A Up A A B A A B', 900, []),
     ('strawberry_no_kitts_right', 'nokitts', 'A Up A Up A Right Right A Right A', 900, []),
-]
+] + [  # owner-guided BGB paths of 2026-11-12 / 13 (README: wild frames, print intensity, print without a printer, lenses, stamps)
+    ('album_print_wild%d' % n, 'kitts', ALB + ' - Up -' + ' Down -' * n + ' A - A A', 3000, []) for n in range(6)] + [
+    ('album_print_intensity', 'kitts', ALB + ' - Start*150 Start+Up*8 Start*30 Start+Down*8 Start*30', 300, []),
+] + [('print_noprinter_w%d' % w, 'kitts', 'A A A' + ' -' * w + ' Start', 600, ['noprinter']) for w in range(8)] + [
+    ('album_print_noprinter', 'kitts', ALB + ' A A', 600, ['noprinter']),
+] + [('lens_up%d' % n, 'kitts', 'A - A - Down - Down -' + ' Up' * n + ' -', 200, []) for n in range(1, 10)] + [
+    ('lens_fun%d' % n, 'kitts', 'A - A - Down - Down -' + ' Down' * n + ' - A', 600, []) for n in range(11)] + [
+    ('lens_slideshow', 'kitts', 'A - A - Down - Down - A', 3200, []),
+] + [('stamps_page%d' % p_, 'kitts', 'photo: - - Down A - Down A - Start -' + ' Right Right' + ' Down' * p_ + ' Left' + ' Down' * 16, 120, []) for p_ in range(8)]
 FORCED = [('forced_mode_%02X' % m, m) for m in (0x13, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D)]
 BIT = dict(A=1, B=2, Select=4, Start=8, Right=0x10, Left=0x20, Up=0x40, Down=0x80)
 def core_mask(b): return ((b << 4) | (b >> 4)) & 0xFF      # the core's key byte has the nibbles swapped (tools/kitty_scenarios.py)
-def taps(path): return [x for k in path.split() for x in ([core_mask(BIT[k])] * 8 if k != '-' else [0] * 8) + [0] * 90]
+def tap(k):                                                 # 'K' = 8 frames held then 90 free; 'K+L*N' = K and L held N frames, nothing after; '-' = idle
+    if k == '-': return [0] * 98
+    keys, n = (k.split('*') + [None])[:2]; b = core_mask(sum(BIT[x] for x in keys.split('+')))
+    return [b] * int(n) if n else [b] * 8 + [0] * 90
+def taps(path): return [x for k in path.split() for x in tap(k)]
 G.load_rom(a.rom); G.reset(bytes(0x20000)); G.run(600); base = bytearray(bytes(G.sram()))
 SAVES = {'kitts': bytes(base[:0x100A]) + b'\x99\x99\x99' + bytes(base[0x100D:]), 'nokitts': bytes(base[:0x100A]) + b'\x00\x00\x00' + bytes(base[0x100D:])}
 romb = bytearray(open(a.rom, 'rb').read())
 def run(rom_bytes, save, keys, inj, hold=None):
     p = os.path.join('/tmp', 'kitty_core_paths_%d.gb' % os.getpid()); open(p, 'wb').write(rom_bytes)
-    G.load_rom(p); G.reset(save); G.L.gb_cov_clear(); G.L.gb_printer_model(1); G.L.gb_attach_printer(1); G.L.gb_printer_inject_clear()
-    for c, n, s, k in inj: G.L.gb_printer_inject(c, n, s, k)
+    G.load_rom(p); G.reset(save); G.L.gb_cov_clear(); G.L.gb_printer_model(1); G.L.gb_attach_printer(0 if 'noprinter' in inj else 1); G.L.gb_printer_inject_clear()
+    for c, n, s, k in [x for x in inj if x != 'noprinter']: G.L.gb_printer_inject(c, n, s, k)
     if hold is not None:                                  # keys held from power-on (the game reads them once at boot, $D8D8)
         G.keys(core_mask(hold))
         for _ in range(80): G.run(1)

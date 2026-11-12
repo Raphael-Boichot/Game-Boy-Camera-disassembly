@@ -376,9 +376,7 @@ bank,addr,name,conf,note,source
 01,59C6,ScriptSlots_Run,C,runs one step of each busy slot of $DC67 (far called from banks 0 and 7),hand 2026-11-08
 01,5A2B,ScriptSlot_LoadToHram,C,20 bytes at HL into hFFDA-hFFED,hand 2026-11-08
 01,5A36,ScriptSlot_SaveFromHram,C,hFFDA-hFFED into the 20 bytes at HL,hand 2026-11-08
-01,6050,Mode1D_CopyDescriptors_Tbl6050,C,read in the runs by Mode1D_CopyDescriptors; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz),data
-01,6410,Leftover_01_6410,I,leftover: 960 bytes (01:6410-67CF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-01,67D0,Mode06_State1B_Tbl67D0,C,named by the code of Mode06_State1B (01:7344); read in the runs by Mode06_State1B; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz),data
+01,6050,Mode1D_CopyDescriptors_Tbl6050,C,"read in the runs by Mode1D_CopyDescriptors, Mode06_State1B; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz)",data
 01,67D4,Number_DrawTwoDigits,C,A as two BCD digits (00:0C9A) with the 8x8 digits of 0C:7C40 at DE (HBlank copy),hand 2026-11-08
 01,67F6,Number_DrawDigit,C,digit A of 0C:7C40 into HL,hand 2026-11-08
 01,680C,PrintGame_DrawAppleCount,C,"[$D94F], the apples caught in the printing game, as three tall digits (hundreds / tens / units) of 0C:7E40 into $8400; runs in mode $06 state $23, when the game starts while the printer works (BGB 2026-11-08, print with the printer helper on the link); state $23 also draws [$D94F] and [$DAD8] with Number_DrawTwoDigits and, when [$D951] is set, adds [$D94F] to the Kitts (Kitts_Add)",hand 2026-11-08
@@ -714,8 +712,7 @@ bank,addr,name,conf,note,source
 02,7175,PrintGame_ObjRandomStart,C,"a random start: x = [$D94C] + rnd(0-$7F) + $10, y = $28 + rnd(0-$0F); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 02,7190,ObjScript_02_7190_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_JumpRandom, Object_CreateWithParam",data
 02,71EA,PrintGame_ObjEndIfNoneLeft,C,"Obj_End when no fruit is left ([$D950] = 0); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
-02,71F2,ObjScript_02_71F2_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Vram_CopyHBlank",data
-02,72D6,ObjScript_02_72D6_PrintGame_ObjEndIfNoneLeft,C,"read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, ObjCmd_SetPos",data
+02,71F2,ObjScript_02_71F2_PrintGame_ObjEndIfNoneLeft,C,"read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Vram_CopyHBlank",data
 02,7345,ObjScript_02_7345_Object_CreateWithParam,C,read in the runs by Object_CreateWithParam,data
 02,734B,Obj_ScriptNop,C,"push hl / pop hl, carry set: a script command that does nothing; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 02,734F,ObjScript_02_734F_Object_RunAll,C,"read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetPos",data
@@ -731,9 +728,10 @@ bank,addr,name,conf,note,source
 02,761E,Leftover_02_761E,I,leftover: 104 bytes (02:761E-7685) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,7686,ObjScript_02_7686_Object_RunAll,I,"read in the runs by Object_RunAll, ObjCmd_SetSprite, ObjCmd_SetCallback; the rest of Data_02_75F0 after a leftover stretch",data
 02,769E,ObjScript_02_769E_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_JumpRandom",data
-02,76AB,Leftover_02_76AB,I,leftover: 36 bytes (02:76AB-76CE) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+02,76AD,Leftover_02_76AD,I,leftover: 34 bytes (02:76AD-76CE) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,76CF,ObjScript_02_76CF_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump",data
-02,76EB,Leftover_02_76EB,I,leftover: 58 bytes (02:76EB-7724) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+02,76EB,ObjScript_02_76EB_Object_RunAll,C,read in the runs by Object_RunAll,data
+02,76F3,Leftover_02_76F3,I,leftover: 50 bytes (02:76F3-7724) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,7725,ObjScript_02_7725_PrintGame_ShowResult,C,"named by the code of PrintGame_ShowResult (02:77CF); read in the runs by Object_RunAll, ObjCmd_Jump",data
 02,7767,Leftover_02_7767,I,leftover: 44 bytes (02:7767-7792) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,7793,PrintGame_ShowResult,C,"the apples caught [$D94F] against the record [$DAD8] (Counters_Load first): a new record, 50 or more, 30 or more, or less pick the message (02:7777 ...); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
@@ -813,9 +811,7 @@ bank,addr,name,conf,note,source
 03,52F0,Leftover_03_52F0,I,leftover: 104 bytes (03:52F0-5357) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 03,5358,OamList_03_5358_Mode04_PlayMenu_State01,C,read in the runs by Obj_DrawSprite; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
 03,5BF0,Leftover_03_5BF0,I,leftover: 332 bytes (03:5BF0-5D3B) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,5D3C,OamList_03_5D3C_Mode06_Printing_State0D,C,read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State0D (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
-03,5D70,Leftover_03_5D70,I,leftover: 52 bytes (03:5D70-5DA3) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,5DA4,OamList_03_5DA4_Mode06_Printing_State1F,C,read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
+03,5D3C,OamList_03_5D3C_Mode06_Printing_State1F,C,read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
 03,60E4,OamList_03_60E4_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data
 03,6218,Leftover_03_6218,I,leftover: 196 bytes (03:6218-62DB) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 03,62DC,OamList_03_62DC_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data

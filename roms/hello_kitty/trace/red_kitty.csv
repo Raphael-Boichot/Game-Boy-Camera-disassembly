@@ -59,11 +59,11 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 01,697A,697C,3,Print_LoadFrameGfx,GATE,01:6978,jr nz (20 0c) [after cc],Print_LoadFrameGfx,01:697A<-01:6978 after cc
 01,6984,6985,2,Print_LoadFrameGfx,BEHIND,01:697A,behind Print_LoadFrameGfx,Print_LoadFrameGfx,01:6984<-01:697A after call
 01,6CCF,6CD3,5,Mode06_State04,GATE,01:6CCD,jr z (28 05) [after cc],Mode06_State04,01:6CCF<-01:6CCD after cc
-01,701D,70AC,144,Mode06_State12,TABLE,,table 01:769C,,01:701D<-- table 01:769C; 01:701D<-- record table 01:769C; 01:705E<-- table 01:769C; 01:705E<-- record table 01:769C
+01,7092,7098,7,Mode06_State13,GATE,01:7090,jr z (28 07) [after cc],Mode06_State13,01:7092<-01:7090 after cc
 01,7246,7248,3,Mode06_State18,GATE,01:7244,jr z (28 0c) [after cc],Mode06_State18,01:7246<-01:7244 after cc
 01,7250,7251,2,Mode06_State18,BEHIND,01:7246,behind Mode06_State18,Mode06_State18,01:7250<-01:7246 after call
 01,72AF,72B1,3,Mode06_State19,GATE,01:72A1,jr z (28 0c) [branch],Mode06_State19,01:72AF<-01:72A1 branch
-01,75A9,7652,170,Mode06_State25,TABLE,,table 01:769C,,01:75A9<-- table 01:769C; 01:75A9<-- record table 01:769C; 01:75CF<-- table 01:769C; 01:75CF<-- record table 01:769C; 01:75F5<-- table 01:769C; 01:75F5<-- record table 01:769C
+01,7623,763A,24,Mode06_State27,GATE,01:7621,jr z (28 18) [after cc],Mode06_State27,01:7623<-01:7621 after cc
 02,4A98,4A9D,6,KeyPrompt_SoundCh1,TABLE,,table 02:4A8A (call $0194),,02:4A98<-- table 02:4A8A (call $0194); 02:4A98<-- table 02:4A8A
 02,5344,5345,2,Puzzle15_ShuffleCheckDir,GATE,02:5342,jr nz (20 25) [after cc],Puzzle15_ShuffleCheckDir,02:5344<-02:5342 after cc
 02,5EE0,5EE5,6,TakePhotos_ObjMoveB,GATE,02:5EDE,jr nz (20 06) [after cc],TakePhotos_ObjMoveB,02:5EE0<-02:5EDE after cc
