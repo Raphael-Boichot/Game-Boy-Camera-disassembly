@@ -224,7 +224,7 @@ bank,start,end,type,width,note
 02,6581,6D81,data,16,"PROGRAM of the old symbol tables: 128 tiles (2,048 B), the first 4 drawn (an outline), 124 blank; nothing in this build reads them (owner 2026-11-12: unused tiles)"
 23,60E1,62E1,data,16,"tile rows 0-1 (the top of the head) of face photo 6, whose rows 2-13 are at 30:4201 (bank $30 has source text over its rows 0-1); the rows that follow here, 23:62E1-63E0, equal 30:4201-42FF byte for byte"
 1D,4001,4201,data,16,"an edited version of face photo 8 (05:4E01), tile rows 2-3: 75 % of the non-blank bytes equal at that place"
-1C,4001,4201,data,16,two tile rows of a head (hair against a textured background) that no picture of this ROM holds
+1C,4001,4201,data,16,"an edited version of face photo 10 (05:6A01), tile rows 6-7 placed 3 tiles to the left: 82 % of the pixels equal at that place"
 2F,5A41,7241,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 2E,4401,5801,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
 39,4401,5801,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"

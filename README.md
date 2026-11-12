@@ -66,10 +66,6 @@ The reference build: L0-L5 done, L6 partial ([`roms/jp_rev_a/`](roms/jp_rev_a/RE
 
 ![The factory calibration and the fast calibration sanity check, with the button combinations that open them](tcrf_check/assets/secret/secret_calibration_screens.png)
 
-*The real credits* are unlocked by a RUN! RUN! RUN! record of 22:00 or lower, then USER > CREDITS (the code reads the stored record `[$DAA7:$DAA6] >= $7799`; docs §15.2, §16.4). Below, the intro pages in the Japanese and international ROMs (BGB): the international build drops the "One Love" page and plays two scenes of Nintendo's arcade game Sheriff instead (docs §1.5).
-
-![The intro pages of the real credits in the Japanese and international ROMs](tcrf_check/assets/credits_intl/credits_intro_jp_vs_intl.png)
-
 *Inputs and codes* (each checked in the code, in the project's core and in BGB; docs §15, §16.18; the lines of the [GameFAQs cheats page](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) and of [TCRF](https://tcrf.net/Game_Boy_Camera) are credited where they come from):
 
 | What | How | Source, check |
@@ -203,9 +199,13 @@ A hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ve
 
 ![Face photo 6, rebuilt](roms/prototype_debagame/assets/reconstructed/FacePhoto6_whole.png)
 
-*An edited photo 8 in bank `$1D`*: tile rows 2-3 of the hair, 75 % of the bytes equal, marks drawn over the rest (left; the original at the right). Bank `$1C` holds the top of yet another head that no picture of the ROM contains.
+*An edited photo 8 in bank `$1D`*: tile rows 2-3 of the hair, 75 % of the bytes equal, marks drawn over the rest (left; the original at the right).
 
 ![Photo 8 with the bank $1D rows, and the original](roms/prototype_debagame/assets/reconstructed/FacePhoto8_variant_1D.png)
+
+*An edited photo 10 in bank `$1C`*: tile rows 6-7 (the eye and the glasses), set 3 tiles to the left, every tile retouched (82 % of the pixels equal), a hand-drawn mark at the end (left; the original at the right).
+
+![Photo 10 with the bank $1C rows, and the original](roms/prototype_debagame/assets/reconstructed/FacePhoto10_variant_1C.png)
 
 *The editor UI is a screen*: the picture TCRF shows is the unused tile map `BG_F_SCR` (`03:7481`) drawn with the editor tiles (`02:7581`, ids `$80-$FF`); and the settings font of bank `$3A` is an older one, with 反転 where bank `$03` has パレット (both in the sheet above).
 

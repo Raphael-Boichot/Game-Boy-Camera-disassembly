@@ -8,10 +8,10 @@ SECTION "ROM Bank $01c", ROMX[$4000], BANK[$1c]
 BankNumber_1C_4000::
     db $1c
 
-; I: leftover tiles: two tile rows (512 bytes) of a head, hair against a textured background, that no picture of this
-; ROM holds (compared with the 14 pictures at every row and shift, plain and inverted); the rest of that picture is
-; not in the ROM; nothing in this build reads it ...
-Leftover_1C_4001_Tiles::
+; I: leftover: an edited version of tile rows 6-7 of face photo 10 (512 bytes; 05:7001-7200), placed 3 tiles to the
+; left (its tile c is column c + 3 of the photo; 82 % of the pixels equal there, every tile retouched: the eye and the
+; glasses), its last 3 columns a hand-drawn mark; nothing in this build ...
+Leftover_1C_4001_Unused_TCRF_FacePhoto10_HOI_R_Gfx_VariantPart7001::
     db $02, $01, $01, $00, $01, $00, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $ff, $ff, $ff, $ff, $bf, $ff, $bf, $7f, $7f, $ff, $bf, $7f, $ff, $3f, $7f, $3f
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff

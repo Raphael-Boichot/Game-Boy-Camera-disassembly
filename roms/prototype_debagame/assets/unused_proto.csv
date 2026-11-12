@@ -106,7 +106,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 1B,4100,4104,4,Leftover_1B_4100,data,not_tcrf,,,
 1B,4104,5000,3836,Leftover_1B_4104_AsmSource,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Source Code,large chunks of commented source code found throughout the ROM
 1B,5000,7FFF,12287,Leftover_1B_5000,data,not_tcrf,,,
-1C,4001,5000,4095,Leftover_1C_4001_Tiles,data,not_tcrf,,,
+1C,4001,5000,4095,Leftover_1C_4001_Unused_TCRF_FacePhoto10_HOI_R_Gfx_VariantPart7001,data,not_tcrf,,,
 1C,5000,7FFF,12287,Leftover_1C_5000,data,not_tcrf,,,
 1D,4001,4201,512,Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001,data,not_tcrf,,,
 1D,4201,43F2,497,Leftover_1D_4201,data,not_tcrf,,,

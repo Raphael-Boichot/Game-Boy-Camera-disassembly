@@ -9,7 +9,7 @@ Two parts, as the categories of assets/unused_proto.csv (tools/unused_table.py):
     palette inverted, as TCRF shows it; photo 6 with its two top rows from bank $23), the NEO title logo (its map drawn with its
     tiles), the editor UI (the map BG_F_SCR drawn with the editor tiles at ids $80-$FF and the settings font CONF2 below), the
     arrow cursor;
-  not documented by TCRF: the edited rows of photo 8 (bank $1D), the head top of bank $1C, the PROGRAM tiles, the settings-font
+  not documented by TCRF: the edited rows of photo 8 (bank $1D) and of photo 10 (bank $1C), the PROGRAM tiles, the settings-font
     glyph of bank $3A (反転 where bank $03 has パレット), the edited glyphs of the font copies (02:6EA1, 02:6F93 against FNTOOE1).
 Every picture is drawn from the ROM bytes (white / light grey / dark grey / black), x2, with its address, size and label.
 """
@@ -30,6 +30,12 @@ def tmap(mp, cols, rows, src, show=(20, 18)):
     return im
 from PIL import Image
 PHOTO = 3584
+P10 = g(0x05, 0x6A01, PHOTO); s1c = g(0x1C, 0x4001, 512); p10 = bytearray(19 * 14 * 16)   # photo 10 on a canvas 3 tiles wider
+for r in range(14):
+    for c in range(16): o = (r * 19 + c) * 16; p10[o:o + 16] = P10[(r * 16 + c) * 16:(r * 16 + c + 1) * 16]
+for r in range(2):                    # the $1C strip sits 3 tiles left of its place: its tile c is column c + 3 (its last 3, the mark, right of the photo)
+    for c in range(16): o = ((6 + r) * 19 + c + 3) * 16; p10[o:o + 16] = s1c[(r * 16 + c) * 16:(r * 16 + c + 1) * 16]
+p10v = bytes(p10)
 p6 = g(0x23, 0x60E1, 512) + g(0x30, 0x4201, 3072); p8 = g(0x05, 0x4E01, PHOTO)
 pics = [('photo 1', '30:4E01', tiles(g(0x30, 0x4E01, PHOTO))), ('photo 2', '30:5C01', tiles(g(0x30, 0x5C01, PHOTO))), ('photo 3', '30:6A01', tiles(g(0x30, 0x6A01, PHOTO))),
         ('photo 4 = photo 5 inverted', '01:5C81', tiles(g(0x01, 0x5C81, PHOTO), inv=True)), ('photo 5 SIMO', '01:5C81', tiles(g(0x01, 0x5C81, PHOTO))),
@@ -43,7 +49,7 @@ cur = tiles(g(0x02, 0x42E1, 32) + g(0x02, 0x43E1, 32), w=2)
 tcrf = [('NEO title logo', 'map 38:5801, tiles 38:5001', neo), ('editor UI: map BG_F_SCR', '03:7481 + tiles 02:7581', edit), ('arrow cursor', '02:42E1 + 02:43E1', cur.resize((64, 64), Image.NEAREST))]
 glyph = lambda b: tiles(g(b, 0x6701, 64) + g(b, 0x6801, 64), w=4)
 own = [('photo 8 rows 2-3, edited', '1D:4001 (left) / 05:5001', side(tiles(p8[:512] + g(0x1D, 0x4001, 512) + p8[1024:]), tiles(p8))),
-       ('a head top found nowhere else', '1C:4001', tiles(g(0x1C, 0x4001, 512))),
+       ('photo 10 rows 6-7, edited', '1C:4001 (left) / 05:7001', side(tiles(p10v, w=19), tiles(P10))),
        ('PROGRAM, 4 drawn tiles of 128', '02:6581', tiles(g(0x02, 0x6581, 64), w=4).resize((64, 16), Image.NEAREST)),
        ('settings glyph: 反転 (3A) / パレット (03)', '3A:6701 / 03:6701', side(glyph(0x3A).resize((64, 32), Image.NEAREST), glyph(0x03).resize((64, 32), Image.NEAREST))),
        ('font copy, edited glyphs (02) / FNTOOE1 (01)', '02:6E81 / 01:4901', side(tiles(g(0x02, 0x6E81, 0x280)), tiles(g(0x01, 0x4901, 0x280))))]

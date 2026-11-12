@@ -8,7 +8,10 @@
                             rows 2-3 equal to 30:4201-43FF byte for byte, which ties them to this picture.
   FacePhoto8_variant_1D.png face photo 8 (05:4E01) with its tile rows 2-3 replaced by the edited version of bank $1D
                             (Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001), next to the original.
-  HeadTop_1C.png            the two tile rows of bank $1C (Leftover_1C_4001_Tiles): the top of a head that no picture of the ROM holds.
+  FacePhoto10_variant_1C.png face photo 10 (05:6A01) with its tile rows 6-7 replaced by the edited strip of bank $1C
+                            (Leftover_1C_4001_Unused_TCRF_FacePhoto10_HOI_R_Gfx_VariantPart7001), next to the original: the strip
+                            sits 3 tiles to the left of its place (its tile c is column c + 3 of the photo); its last 3 columns
+                            (a hand-drawn mark) stand right of the picture, on a canvas 3 tiles wider.
 Every picture is drawn 2x, white / light grey / dark grey / black, as the camera tiles are stored (16 tiles per row).
 """
 import argparse, io, os, sys
@@ -28,10 +31,17 @@ def side(*ims):
     W = sum(i.width for i in ims) + 8 * (len(ims) - 1); H = max(i.height for i in ims); c = Image.new('L', (W, H), 255); x = 0
     for i in ims: c.paste(i, (x, 0)); x += i.width + 8
     return c
-p8 = g(0x05, 0x4E01, 3584)
+p8 = g(0x05, 0x4E01, 3584); p10 = g(0x05, 0x6A01, 3584); s1c = g(0x1C, 0x4001, 512)
+def p10v():                     # photo 10 on a 19-tile-wide canvas; rows 6-7, column c + 3 <- tile c of the $1C strip (c = 0..15:
+    b = bytearray(19 * 14 * 16)  # its last 3 tiles, the hand-drawn mark, land in columns 16-18, right of the picture)
+    for r in range(14):
+        for c in range(16): o = (r * 19 + c) * 16; b[o:o + 16] = p10[(r * 16 + c) * 16:(r * 16 + c + 1) * 16]
+    for r in range(2):
+        for c in range(16): o = ((6 + r) * 19 + c + 3) * 16; b[o:o + 16] = s1c[(r * 16 + c) * 16:(r * 16 + c + 1) * 16]
+    return bytes(b)
 pics = {'FacePhoto6_whole.png': img(g(0x23, 0x60E1, 512) + g(0x30, 0x4201, 3072)),
         'FacePhoto8_variant_1D.png': side(img(p8[:512] + g(0x1D, 0x4001, 512) + p8[1024:]), img(p8)),
-        'HeadTop_1C.png': img(g(0x1C, 0x4001, 512))}
+        'FacePhoto10_variant_1C.png': side(img(p10v(), w=19), img(p10))}
 bad = 0
 for nm, im in pics.items():
     buf = io.BytesIO(); im.resize((im.width * 2, im.height * 2), Image.NEAREST).save(buf, 'PNG'); p = os.path.join(OUT, nm)

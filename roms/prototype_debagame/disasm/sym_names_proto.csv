@@ -370,7 +370,7 @@ bank,addr,name,conf,note,source
 1B,5000,Leftover_1B_5000,I,"leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1B,7FFF,BankNumber_1B_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1C,4000,BankNumber_1C_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1C,4001,Leftover_1C_4001_Tiles,I,"leftover tiles: two tile rows (512 bytes) of a head, hair against a textured background, that no picture of this ROM holds (compared with the 14 pictures at every row and shift, plain and inverted); the rest of that picture is not in the ROM; nothing in this build reads it (assets/reconstructed/HeadTop_1C.png; owner 2026-11-12)",tiles
+1C,4001,Leftover_1C_4001_Unused_TCRF_FacePhoto10_HOI_R_Gfx_VariantPart7001,I,"leftover: an edited version of tile rows 6-7 of face photo 10 (512 bytes; 05:7001-7200), placed 3 tiles to the left (its tile c is column c + 3 of the photo; 82 % of the pixels equal there, every tile retouched: the eye and the glasses), its last 3 columns a hand-drawn mark; nothing in this build reads it (assets/reconstructed/FacePhoto10_variant_1C.png; owner 2026-11-12)",variant
 1C,5000,Leftover_1C_5000,I,"leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no reader; never read nor run in the L2 runs)",gap
 1C,7FFF,BankNumber_1C_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1D,4000,BankNumber_1D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
