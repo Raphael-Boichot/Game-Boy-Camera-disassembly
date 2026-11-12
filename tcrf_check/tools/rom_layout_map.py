@@ -333,8 +333,8 @@ def wrap(text, fnt, maxw):
 LG = []          # entries: ('head', text) | ('cat', i, count, text) | ('mark', colour, count, text) | ('cross', count, text) | ('note', text)
 subtitle = []
 if NOTE1 is not None: subtitle = [NOTE1, NOTE2 or '']
-elif not DIFF: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes); the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that hold unused bytes: unused code, unused assets documented by TCRF, unused assets not documented by TCRF. Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).' % (BTW, BTH)]
-else: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that hold unused bytes: unused code, unused assets documented by TCRF, unused assets not documented by TCRF (the differences from the Japanese ROM are counted in the csv, docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.' % (BTW, BTH)]
+elif not DIFF: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes); the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that hold unused bytes (legend: OUTLINE). Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).' % (BTW, BTH)]
+else: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that hold unused bytes (legend: OUTLINE; the differences from the Japanese ROM are counted in the csv, docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.' % (BTW, BTH)]
 LG.append(('head', 'CODE (traced instructions), by the function of the routine that owns them'))
 for i in range(11): LG.append(('cat', i, fmt(tot_cat[i]) + ' B  ' + pct(tot_cat[i]), CATS[i][1]))
 LG.append(('head', 'DATA, by what the bytes are (identified even when no code calls them)'))
@@ -346,7 +346,7 @@ LG.append(('mark', UNT, fmt(mk_tot[2]) + ' B', 'unused assets not documented by 
 LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
 notes = (['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.'] if UNCLAIMED else []) + \
         ['Not outlined: every byte that this build uses or that no name calls unused, and padding.' + (' No emulator run of this ROM: the code colour is its static trace.' if DIFF else ''),
-         'Per bank, under its number: the two largest kinds (padding excluded) and its unused bytes documented by TCRF.']
+         'Per bank, under its number: the two largest kinds (padding excluded).']
 notes.insert(0, 'Padding rule: only runs of 16+ x $00 that no run reached (no run of this ROM: all of them) are padding; $FF is never padding: a $FF run that no run reads, outside the assets, is "fill"; one that is read keeps the kind of its block (no run of this ROM: no fill).')
 for n_ in notes: LG.append(('note', n_))
 TXW = W - LEFT - 20; SW = 150; CW = 250              # swatch width, count column width
@@ -361,7 +361,7 @@ for e in LG:
     else: lines = wrap(e[-1], F3, TXW - SW - CW - 30); lay.append((e, y, lines)); y += 35 * len(lines) + 4
 TOP = y + 40
 PADT = 70                                              # wide space above a bank header, narrow space under it: the header sits with its own bank (owner 2026-11-01)
-_hdr_names = ['', 'TCRF', '']                       # under a bank's number: its TCRF-documented unused bytes only (owner 2026-11-12)
+_hdr_names = ['', '', '']                           # under a bank's number: its two largest kinds only (owner 2026-11-12)
 def _hdr_n(b):        # lines of outline counts under the two kinds of bank b (0 when the map has no outline)
     if not any(mk_bank[b][m] and n for m, n in enumerate(_hdr_names)): return 0
     return len(wrap('  '.join('%s %s' % (n, fmt(int(mk_bank[b][m]))) for m, n in enumerate(_hdr_names) if mk_bank[b][m] and n), FK, PW + GX - 6)[:2])
