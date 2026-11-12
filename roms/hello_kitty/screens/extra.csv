@@ -30,3 +30,4 @@ mode,state,picture,how,parent,key,note
 02,01-S2,extra_02_01_show2.png,the slide show a few seconds later,,,
 02,01-S3,extra_02_01_show3.png,the slide show later still,,,
 05,06-W,extra_05_06_w.png,"START: the stamp window, 8 pages (Right Right to the tabs, Up / Down); screens/stamps_kitty.png",05:06,START,
+03,05-N,extra_03_05_noslot.png,"forced (I): Photo_FindSlotA (01:4D81) patched to return carry (scf; jp Far_ReturnSramBank): the photo view draws the no-photo picture 11:7000 of Photo_LoadEmptyPicture; no key path found",03:02,A (no slot for the photo),

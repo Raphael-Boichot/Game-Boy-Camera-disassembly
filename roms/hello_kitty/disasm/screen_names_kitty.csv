@@ -66,3 +66,4 @@ mode,state,name,tag,evidence
 02,01-S2,Take photos: slide show (later),C,BGB screenshot
 02,01-S3,Take photos: slide show (later),C,BGB screenshot
 05,06-W,Stamps: the stamp window (8 pages),C,"BGB screenshot (START on the stamp screen; Right Right reach the page tabs; screens/stamps_kitty.png shows every page)"
+03,05-N,View photos: the no-photo picture (forced),I,"BGB screenshot of a patched copy: Photo_FindSlotA always fails; the picture 11:7000 (しゃしんがないよ) that Photo_LoadEmptyPicture draws when a photo number has no slot"
