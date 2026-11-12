@@ -25,3 +25,7 @@ mode,state,picture,how,parent,key,note
 14,01-3,extra_14_01_3.png,"print without a printer: record 2 of 06:4464 (3F:4000)",,,
 14,01-4,extra_14_01_4.png,"print without a printer: record 3 of 06:4464 (3D:6A00)",,,
 06,06,extra_06_06.png,album print: A on a wild frame shows the photo in it,06:04,A,
+02,01-L,extra_02_01_lens.png,"live view, Down Down: おもしろレンズ Ⓐ, the lens chooser; the ? lens (owner, 2026-11-12)",02:01,Down Down,
+02,01-S1,extra_02_01_show1.png,"A on the ? lens: a Hello Kitty slide show in the live view frame (still mode $02 state $01; owner, 2026-11-12)",02:01-L,A (? lens),
+02,01-S2,extra_02_01_show2.png,the slide show a few seconds later,,,
+02,01-S3,extra_02_01_show3.png,the slide show later still,,,

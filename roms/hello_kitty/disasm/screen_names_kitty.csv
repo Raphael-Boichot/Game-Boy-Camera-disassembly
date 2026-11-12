@@ -61,3 +61,7 @@ mode,state,name,tag,evidence
 14,01-3,"Print error: picture 3 of 4",C,BGB screenshot (record 2 of 06:4464)
 14,01-4,"Print error: picture 4 of 4",C,BGB screenshot (record 3 of 06:4464)
 06,06,Printing: the photo in the wild frame (A prints),C,BGB screenshot (A on the wild frame chooser; the side borders are the last 56 tiles of the frame block)
+02,01-L,"Take photos: the lens chooser (omoshiro lens A, Down Down)",C,BGB screenshot (owner's key path: title A, take A, Down, Down)
+02,01-S1,Take photos: the "?" lens slide show,C,BGB screenshot (A on the ? lens; pictures change every few seconds)
+02,01-S2,Take photos: slide show (later),C,BGB screenshot
+02,01-S3,Take photos: slide show (later),C,BGB screenshot

@@ -177,6 +177,7 @@ L0-L3 done (2026-11-12: every routine entry and every data block named, 2,224 na
 |---|---|---|
 | The Pompompurin picture | Game Genie `183-63B-E6E` | TCRF (not tested here); BGB shows the screen with the mode byte forced to `$18`, I |
 | Print intensity | album print, on the print frame: hold START, then Up / Down move the squirrel between うすい (light) and こい (dark) | owner; BGB, C |
+| The ? lens slide show | camera live view, Down, Down (おもしろレンズ Ⓐ), A on the "?" lens, then wait: Hello Kitty pictures one after another in the camera frame | owner; BGB, C |
 | Four print error pictures | print with no printer connected: error #02 with one of four pictures drawn at random (`Rng_Next & 3`, table `06:4464`), the message sliding under it | owner; BGB (12 runs), C |
 
 ### Pocket Camera Prototype (Japan) ("DEBAGAME")
