@@ -73,7 +73,7 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 02:7793,PrintGame_ShowResult,18,0,0,0,0,18
 02:7BDA,Exchange_ObjFollowD9FD,9,0,0,0,9,0
 04:4A3E,Cam_PopcountLevel,6,0,6,0,0,0
-04:4AF8,Cam_MainDispatch_EnterBand1,52,0,0,0,0,52
+04:4AF8,Cam_MainDispatch_EnterBand1,52,0,0,0,52,0
 04:4B2C,Cam_MainDispatch_Band1,74,0,16,0,0,58
 04:4B76,Cam_MainDispatch_EnterBand0,52,0,0,0,52,0
 04:4BAA,Cam_MainDispatch_Band2,122,0,122,0,0,0

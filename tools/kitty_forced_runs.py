@@ -15,6 +15,10 @@ Batches:
   state   the 65 (mode, state) pairs that own a never-run piece of trace/red_kitty.csv (TABLE, GATE or BEHIND; listed below): the mode reached by the first organic path of trace/paths_kitty.csv that enters it, then the state
           byte hMODE_STATE ($FF8E) poked 150 frames after the path entered that mode (a mode that no path of the list
           enters is poked itself from the main menu: $FF8D = mode, $FF8E = 0, 150 frames); 600 frames with A, B, Start, the arrows tapped.
+  sensor  the auto-exposure driven by a fake light (owner, 2026-11-13): in the live view, the live view with fun lens A, and
+          the Strawberry Channel camera, the sensor's picture buffer (SRAM bank 0 $A100-$AEFF) overwritten every frame with a
+          plane of one byte ($FF dark, $00 bright, $55, $AA, ramps both ways, a flicker), 1,200 frames, then A (a shot) and
+          300 frames more; and the first boot (128 KiB of $00, the sensor calibration) under the same planes.
 """
 import sys, os, csv, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); KD = os.path.join(REPO, 'roms', 'hello_kitty')
@@ -86,6 +90,33 @@ for (m, st), n in want.items():
     G.restore(snap[m][0]); G.L.gb_cov_clear(); G.poke(0xFF8E, st)
     for kk in [0] * 120 + PRESS + [0] * 300: G.keys(kk); G.run(1)
     G.keys(0); acc(); rows.append(['state', 'mode%02X_state%02X' % (m, st), '%s, 150 frames into mode $%02X: $FF8E = $%02X' % (snap[m][1], m, st), ms()])
+# sensor: the camera's picture buffer replaced by a plane of one byte value, every frame (owner, 2026-11-13: no need for real
+# pictures, a byte plane is enough to drive the auto-exposure); bank 0 $A100-$AEFF of SRAM, where the sensor's capture lands
+SEQS = [('dark', [0xFF]), ('bright', [0x00]), ('grey55', [0x55]), ('greyAA', [0xAA]), ('dark_to_bright', [0xFF, 0xAA, 0x55, 0x00]),
+        ('bright_to_dark', [0x00, 0x55, 0xAA, 0xFF]), ('flicker', [0x00, 0xFF] * 4)]
+for where, keys in (('live view', taps('A')), ('live view, fun lens A', taps('A - Down - Down -')), ('strawberry channel camera', None)):
+    if keys is None:
+        r = [x for x in paths if x['path'].startswith('strawberry')]
+        if not r: continue
+        k = r[0]['keys']; G.load_rom(a.rom); G.reset(KITTS); G.L.gb_attach_printer(1); G.run(700)
+        for kk in taps(k) + [0] * 300: G.keys(kk); G.run(1)
+    else:
+        G.restore(menu)
+        for kk in keys + [0] * 120: G.keys(kk); G.run(1)
+    G.keys(0); s0 = G.snapshot(); m0 = ms()
+    for nm, vals in SEQS:
+        G.restore(s0); G.L.gb_cov_clear(); sr = G.sram()
+        for v in vals:
+            for _ in range(1200 // len(vals)):
+                G.run(1); sr[0x000:0xF00] = v
+        G.keys(core_mask(BIT['A'])); G.run(8); G.keys(0)          # a shutter press on the forced light
+        for _ in range(300): G.run(1); sr[0x000:0xF00] = vals[-1]
+        acc(); rows.append(['sensor', '%s_%s' % (where.replace(' ', '_').replace(',', ''), nm), '%s (%s): SRAM $A100-$AEFF = %s every frame, then A' % (where, m0, '/'.join('$%02X' % v for v in vals)), ms()])
+for nm, vals in SEQS:                              # the first boot (all-$00 SRAM: the sensor calibration of Cam_CalibVector_*) under the same planes
+    G.load_rom(a.rom); G.reset(bytes(0x20000)); G.L.gb_cov_clear(); G.L.gb_attach_printer(1); sr = G.sram()
+    for v in vals:
+        for _ in range(1200 // len(vals)): G.run(1); sr[0x000:0xF00] = v
+    acc(); rows.append(['sensor', 'first_boot_%s' % nm, 'first boot from 128 KiB of $00: SRAM $A100-$AEFF = %s every frame' % '/'.join('$%02X' % v for v in vals), ms()])
 np.savez_compressed(a.out, ex=tot[0], dr=tot[1])
 with open(a.report, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['batch', 'run', 'poke', 'end']); w.writerows(rows)

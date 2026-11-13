@@ -36,7 +36,7 @@ RULES = [
      'the branch for a photo number with no slot (Photo_FindSlotA fails): the album keeps its numbers compact (BGB 2026-11-12: deleting photo 01 of two renumbers the other); shown only with Photo_FindSlotA patched'),
     ('LINK', 'I', lambda o, g: re.match(r'(Mode0[789]_|Link_|Exchange_|Counters_AddReceived|CardStats_|KeyPrompt_LoadSoundsB|FrameRec_LoadTilesScreenOff)', o) or re.match(r'(Mode0[789]_|Link_|Exchange_)', g),
      'the exchange: a reply or a command of the partner that the ten BGB exchanges of 2026-11-13 did not send'),
-    ('SENSOR', 'I', lambda o, g: re.match(r'(Cam_|Mode02_State0[CDE]|Mode11_State0E)', o) or g.startswith('Cam_'), 'a branch on the sensor picture (another light level than the runs saw)'),
+    ('SENSOR', 'I', lambda o, g: re.match(r'(Cam_|Mode02_State0[CDE]|Mode11_State0E)', o) or g.startswith('Cam_'), 'a branch on the sensor picture: another light level than the runs saw; the fake-light runs of tools/kitty_forced_runs.py (a byte plane written over SRAM $A000-$AEFF every frame, 2026-11-13) move the exposure ($DA17-$DA18) but leave the gain band $DA08 at 5, so the bands $08 / $0A (Cam_MainDispatch_Band3 / 4) and their neighbours stay unrun'),
     ('PRINTER', 'I', lambda o, g: re.match(r'(Prn_|Mode06_|Mode1D_|PrintGame_|Print)', o) or re.match(r'(Prn_|Mode06_|Mode1D_)', g), 'a branch on the printer replies or on a print frame descriptor that the prints did not produce'),
     ('SGB', 'I', lambda o, g: o.startswith('Sgb_'), 'a Super Game Boy path the SGB runs did not take'),
     ('LINK', 'I', lambda o, g: o.startswith('Counters_AddExchanged'), 'the counter of exchanged photos: after an exchange path the BGB exchanges did not finish'),

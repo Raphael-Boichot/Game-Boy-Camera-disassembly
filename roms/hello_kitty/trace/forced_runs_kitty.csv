@@ -199,3 +199,31 @@ state,mode0E_state1E,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode 
 state,mode08_state03,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $03",08:03
 state,mode0F_state0D,"main menu, $FF8D = $0F, $FF8E = $00, 150 frames into mode $0F: $FF8E = $0D",04:01
 state,mode0E_state0F,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $0F",0E:0F
+sensor,live_view_dark,"live view (02:01): SRAM $A100-$AEFF = $FF every frame, then A",02:06
+sensor,live_view_bright,"live view (02:01): SRAM $A100-$AEFF = $00 every frame, then A",02:06
+sensor,live_view_grey55,"live view (02:01): SRAM $A100-$AEFF = $55 every frame, then A",02:06
+sensor,live_view_greyAA,"live view (02:01): SRAM $A100-$AEFF = $AA every frame, then A",02:06
+sensor,live_view_dark_to_bright,"live view (02:01): SRAM $A100-$AEFF = $FF/$AA/$55/$00 every frame, then A",02:06
+sensor,live_view_bright_to_dark,"live view (02:01): SRAM $A100-$AEFF = $00/$55/$AA/$FF every frame, then A",02:06
+sensor,live_view_flicker,"live view (02:01): SRAM $A100-$AEFF = $00/$FF/$00/$FF/$00/$FF/$00/$FF every frame, then A",02:06
+sensor,live_view_fun_lens_A_dark,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $FF every frame, then A",02:01
+sensor,live_view_fun_lens_A_bright,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $00 every frame, then A",02:01
+sensor,live_view_fun_lens_A_grey55,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $55 every frame, then A",02:01
+sensor,live_view_fun_lens_A_greyAA,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $AA every frame, then A",02:01
+sensor,live_view_fun_lens_A_dark_to_bright,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $FF/$AA/$55/$00 every frame, then A",02:01
+sensor,live_view_fun_lens_A_bright_to_dark,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $00/$55/$AA/$FF every frame, then A",02:01
+sensor,live_view_fun_lens_A_flicker,"live view, fun lens A (02:01): SRAM $A100-$AEFF = $00/$FF/$00/$FF/$00/$FF/$00/$FF every frame, then A",02:01
+sensor,strawberry_channel_camera_dark,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $FF every frame, then A",11:07
+sensor,strawberry_channel_camera_bright,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $00 every frame, then A",11:07
+sensor,strawberry_channel_camera_grey55,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $55 every frame, then A",11:07
+sensor,strawberry_channel_camera_greyAA,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $AA every frame, then A",11:07
+sensor,strawberry_channel_camera_dark_to_bright,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $FF/$AA/$55/$00 every frame, then A",11:07
+sensor,strawberry_channel_camera_bright_to_dark,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $00/$55/$AA/$FF every frame, then A",11:07
+sensor,strawberry_channel_camera_flicker,"strawberry channel camera (04:01): SRAM $A100-$AEFF = $00/$FF/$00/$FF/$00/$FF/$00/$FF every frame, then A",11:07
+sensor,first_boot_dark,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $FF every frame,00:08
+sensor,first_boot_bright,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $00 every frame,00:08
+sensor,first_boot_grey55,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $55 every frame,00:08
+sensor,first_boot_greyAA,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $AA every frame,00:08
+sensor,first_boot_dark_to_bright,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $FF/$AA/$55/$00 every frame,00:08
+sensor,first_boot_bright_to_dark,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $00/$55/$AA/$FF every frame,00:08
+sensor,first_boot_flicker,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $00/$FF/$00/$FF/$00/$FF/$00/$FF every frame,00:08

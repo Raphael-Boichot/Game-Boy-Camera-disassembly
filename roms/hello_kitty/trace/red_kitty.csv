@@ -68,8 +68,6 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 02,74D0,74D6,7,PrintGame_ObjKitty,GATE,02:74CE,jr z (28 07) [after cc],PrintGame_ObjKitty,02:74D0<-02:74CE after cc,PRINTER
 02,77A6,77B2,13,PrintGame_ShowResult,GATE,02:77A4,jr nc (30 0d) [after cc],PrintGame_ShowResult,02:77A6<-02:77A4 after cc,PRINTER
 02,77D4,77D8,5,PrintGame_ShowResult,BEHIND,02:77A6,behind PrintGame_ShowResult,PrintGame_ShowResult,02:77D4<-02:77A8 branch; 02:77D4<-02:77AC branch,PRINTER
-04,4AF8,4B05,14,Cam_MainDispatch_EnterBand1,GATE,04:4AE4,jp c (da f8 4a) [branch],Cam_PopcountLevel,04:4AF8<-04:4AE4 branch,SENSOR
-04,4B07,4B2B,37,Cam_MainDispatch_EnterBand1,FORCED,04:4B06,af [after insn],Cam_MainDispatch_EnterBand1,04:4B07<-04:4B06 after insn,SENSOR
 04,4B3C,4B75,58,Cam_MainDispatch_Band1,FORCED,04:4B39,jp nc (d2 eb 4c) [after cc],Cam_MainDispatch_Band1,04:4B3C<-04:4B39 after cc,SENSOR
 04,4C75,4CB1,61,Cam_MainDispatch_Band3,FORCED,04:4C3B,jr nc (30 38) [branch],Cam_MainDispatch_Band3,04:4C75<-04:4C3B branch,SENSOR
 04,4CBA,4CEA,49,Cam_MainDispatch_Band4,FORCED,04:4CB8,jr c (38 31) [after cc],Cam_MainDispatch_Band4,04:4CBA<-04:4CB8 after cc,SENSOR
