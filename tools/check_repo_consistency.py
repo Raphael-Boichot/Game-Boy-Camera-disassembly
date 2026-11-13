@@ -331,6 +331,8 @@ if getattr(A, 'rom_kitty', None):
     else: ok('kitty', 'forced runs fresh (%s)' % _m.stdout.strip())
     _m = subprocess.run([sys.executable, 'tools/kitty_red_verdicts.py', '--check'], capture_output=True, text=True, cwd=ROOT)   # a verdict per never-run piece
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
+    _m = subprocess.run([sys.executable, 'tools/kitty_jp_crosscheck.py', '--check'], capture_output=True, text=True, cwd=ROOT)   # each never-run piece against the Japanese ROM
+    (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)

@@ -251,3 +251,10 @@ gain,band0A_plane00,"live view: $DA08 = $0A, SRAM $A000-$AEFF = $00 every frame"
 gain,band0A_planeFF,"live view: $DA08 = $0A, SRAM $A000-$AEFF = $FF every frame",02:01
 gain,band0B_plane00,"live view: $DA08 = $0B, SRAM $A000-$AEFF = $00 every frame",02:01
 gain,band0B_planeFF,"live view: $DA08 = $0B, SRAM $A000-$AEFF = $FF every frame",02:01
+calib,factory_calibration_plane_FF,boot from 128 KiB of $AA: SRAM $A000-$A0FF = $FF every frame,0D:04
+calib,factory_calibration_plane_FF_then_00,boot from 128 KiB of $AA: SRAM $A000-$A0FF = $FF then $00 from frame 1100 every frame,0D:05
+calib,quick_check_plane_FF,boot with every key but B held ($FD): SRAM $A000-$A0FF = $FF every frame,0D:02
+calib,quick_check_plane_FF_then_00,boot with every key but B held ($FD): SRAM $A000-$A0FF = $FF then $00 from frame 1100 every frame,0D:02
+printer,compress,"camera print ('A A A Start'): $DD0A = 1, $DCEB-$DCFC = 9 x $0280, $DCFD-$DD05 = 0 every frame",02:06
+printer,compress_data_error,"camera print ('A A A Start'): $DD0A = 1, $DCEB-$DCFC = 9 x $0280, $DCFD-$DD05 = 0 every frame, DATA packet 1 answered $01",02:06
+printer,init_status_10,"camera print ('A A A Start'): INIT answered $10 (packet error; no RAM poked; the Japanese status-bit runs, docs §16.16)",14:01

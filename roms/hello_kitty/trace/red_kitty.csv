@@ -12,11 +12,10 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 00,0706,0725,32,Vram_CopyHBlank,GATE,00:06B1,jr z (28 53) [branch],Vram_CopyHBlank,00:0706<-00:06B1 branch,ARGS
 00,0942,0A4D,268,FrameRec_LoadTilesScreenOff,BEHIND,06:6ACF,behind Mode09_State0B,Mode09_State0B,00:0A30<-06:6B46 call,LINK
 00,0C9F,0C9F,1,Bin_ToBcd,GATE,00:0CA2,jr nc (30 fb) [branch],Bin_ToBcd,00:0C9F<-00:0CA2 branch,ARGS
-00,0E24,0E31,14,Prn_CheckTxDone,GATE,00:0E22,jr z (28 18) [after cc],Prn_CheckTxDone,00:0E24<-00:0E22 after cc; 00:0E30<-00:0E1A branch; 00:0E30<-00:0E1E branch,PRINTER
-00,0EB4,0ED7,36,Prn_SendData,GATE,00:0EB2,jr z (28 24) [after cc],Prn_SendData,00:0EB4<-00:0EB2 after cc,PRINTER
-00,0F1B,0F71,87,Prn_SendData,GATE,00:0F18,jp z (ca 7b 0f) [after cc],Prn_SendData,00:0F1B<-00:0F18 after cc; 00:0F6B<-00:0EF3 branch,PRINTER
-00,0FC6,0FD0,11,Prn_SendInquiry,GATE,00:0FC4,jr z (28 0b) [after cc],Prn_SendInquiry,00:0FC6<-00:0FC4 after cc,PRINTER
-00,0FD7,0FDA,4,Prn_SendInquiry,GATE,00:0FD5,jr z (28 04) [after cc],Prn_SendInquiry,00:0FD7<-00:0FD5 after cc,PRINTER
+00,0E30,0E31,2,Prn_CheckTxDone,GATE,00:0E1A,jr nz (20 14) [branch],Prn_CheckTxDone,00:0E30<-00:0E1A branch; 00:0E30<-00:0E1E branch,PRINTER
+00,0F6B,0F71,7,Prn_SendData_Abort,GATE,00:0EF3,jp nz (c2 6b 0f) [branch],Prn_SendData,00:0F6B<-00:0EF3 branch,PRINTER
+00,0FC6,0FD0,11,Prn_SendInquiry,GATE,00:0FC4,jr z (28 0b) [after cc],Prn_SendInquiry,00:0FC6<-00:0FC4 after cc,UNREACHABLE
+00,0FD7,0FDA,4,Prn_SendInquiry,GATE,00:0FD5,jr z (28 04) [after cc],Prn_SendInquiry,00:0FD7<-00:0FD5 after cc,UNREACHABLE
 00,1300,1304,5,Link_SerialIrq,GATE,00:12E2,jr z (28 1c) [branch],Link_SerialIrq,00:1300<-00:12E2 branch,LINK
 00,1352,1361,16,Link_Irq_InfoStage,GATE,00:1350,jr z (28 32) [after cc],Link_Irq_InfoStage,00:1352<-00:1350 after cc; 00:135A<-00:1348 branch,LINK
 00,1374,137B,8,Link_Irq_InfoStage,GATE,00:1372,jr z (28 10) [after cc],Link_Irq_InfoStage,00:1374<-00:1372 after cc,LINK
@@ -37,7 +36,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 00,236B,236E,4,Mode1D_ReadByteFromBank,GATE,00:235A,jr nz (20 0f) [branch],Mode1D_ReadByteFromBank,00:236B<-00:235A branch,PRINTER
 00,23AF,2440,146,Mode1D_InterleaveTileRows,BEHIND,00:2318,behind Mode1D_RenderBand,Mode1D_RenderBand,00:23AF<-00:231A call,PRINTER
 00,256F,25A0,50,Photo_LoadEmptyThumb,BEHIND,02:63A1,behind Album_ObjLoadSlot,Album_ObjLoadSlot,00:256F<-02:63A3 call; 00:256F<-05:7062 call; 00:256F<-05:716E call,UNREACHABLE
-00,25AD,25BB,15,Img_ReduceToThumbnail,GATE,00:25AB,jr nc (30 0f) [after cc],Img_ReduceToThumbnail,00:25AD<-00:25AB after cc,ARGS
+00,25AD,25BB,15,Img_ReduceToThumbnail,GATE,00:25AB,jr nc (30 0f) [after cc],Img_ReduceToThumbnail,00:25AD<-00:25AB after cc,UNREACHABLE
 00,2638,2641,10,Img_ReduceToThumbnail,GATE,00:2636,jr nc (30 0a) [after cc],Img_ReduceToThumbnail,00:2638<-00:2636 after cc,ARGS
 01,4F42,4FC5,132,Photos_LoadPage8,GATE,01:4F3F,cd 65 01 [after call],Photos_LoadPage8,01:4F42<-01:4F3F after call; 01:4F6F<-06:6B41 far call from 06:6B41,UNREACHABLE
 01,569F,56B0,18,RecordBook_CountHundreds,GATE,01:5699,jr c (38 04) [branch],RecordBook_CountHundreds,01:569F<-01:5699 branch,GAME
@@ -68,16 +67,11 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 02,74D0,74D6,7,PrintGame_ObjKitty,GATE,02:74CE,jr z (28 07) [after cc],PrintGame_ObjKitty,02:74D0<-02:74CE after cc,PRINTER
 02,77A6,77B2,13,PrintGame_ShowResult,GATE,02:77A4,jr nc (30 0d) [after cc],PrintGame_ShowResult,02:77A6<-02:77A4 after cc,PRINTER
 02,77D4,77D8,5,PrintGame_ShowResult,BEHIND,02:77A6,behind PrintGame_ShowResult,PrintGame_ShowResult,02:77D4<-02:77A8 branch; 02:77D4<-02:77AC branch,PRINTER
-04,4FC1,4FC9,9,Cam_CalibSanityCheck_Measure,GATE,04:4FBF,jr c (38 09) [after cc],Cam_CalibSanityCheck_Measure,04:4FC1<-04:4FBF after cc,SENSOR
-04,4FDD,4FE5,9,Cam_CalibSanityCheck_Measure,GATE,04:4FDB,jr c (38 09) [after cc],Cam_CalibSanityCheck_Measure,04:4FDD<-04:4FDB after cc,SENSOR
-04,4FF8,5005,14,Cam_CalibSanityCheck_Measure,GATE,04:4FF6,jr c (38 0e) [after cc],Cam_CalibSanityCheck_Measure,04:4FF8<-04:4FF6 after cc,SENSOR
 04,507D,5084,8,Cam_CalibVector_VerifyChecksum,FORCED,04:507B,jr nz (20 08) [after cc],Cam_CalibVector_VerifyChecksum,04:507D<-04:507B after cc,SENSOR
 04,50B5,50BD,9,Cam_CalibVector_VerifyChecksum,FORCED,04:50B3,jr nz (20 09) [after cc],Cam_CalibVector_VerifyChecksum,04:50B5<-04:50B3 after cc,SENSOR
 04,50C5,50E3,31,Cam_CalibVector_VerifyChecksum,BEHIND,04:50B5,behind Cam_CalibVector_VerifyChecksum,Cam_CalibVector_VerifyChecksum,04:50C5<-04:50BC jr,SENSOR
 04,5103,511E,28,Cam_CalibVector_VerifyChecksum,BEHIND,04:50B5,behind Cam_CalibVector_VerifyChecksum,Cam_CalibVector_VerifyChecksum,04:5103<-04:50BA branch,SENSOR
-04,58D5,5949,117,Cam_ThresholdConverge,GATE,04:58D2,jp z (ca 4a 59) [after cc],Cam_ThresholdConverge,04:58D5<-04:58D2 after cc,SENSOR
 05,4357,4357,1,Mode00_State07,GATE,05:42C2,jp nz (c2 57 43) [branch],Mode00_State07,05:4357<-05:42C2 branch,INPUT
-05,444E,4467,26,Mode0D_State01,GATE,05:444C,jr nz (20 1a) [after cc],Mode0D_State01,05:444E<-05:444C after cc,INPUT
 05,4499,44A0,8,Mode0D_State02,GATE,05:4497,jr z (28 08) [after cc],Mode0D_State02,05:4499<-05:4497 after cc,INPUT
 05,4517,451E,8,Mode0D_State05,GATE,05:4515,jr z (28 08) [after cc],Mode0D_State05,05:4517<-05:4515 after cc,INPUT
 05,47E5,4801,29,Unused_TakePhotos_SetPlaneMasks,BEHIND,05:4D10,behind Unused_Mode02_State0C,Unused_Mode02_State0C,05:47E5<-05:4D13 call,UNREACHABLE

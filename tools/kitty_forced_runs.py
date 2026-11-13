@@ -21,6 +21,16 @@ Batches:
           300 frames more; and the first boot (128 KiB of $00, the sensor calibration) under the same planes.
   gain    the gain band of the auto-exposure ($DA08) poked to 0-11 in the live view, under a $00 and a $FF plane, 600 frames
           each: the bands $08 and $0A (Cam_MainDispatch_Band3 / Band4) that the fake light alone never reaches.
+  calib   the two boot routes of the Japanese ROM into the sensor calibration (docs §16.19 / §16.20, README "Boot conditions"):
+          a save of 128 KiB of $AA (blank vector: the factory calibration, mode $0D state 3) and every key but B held at
+          power-on (combo $FD: the quick factory check, mode $0D state 0), each under a byte plane written every frame over
+          SRAM bank 0 $A000-$A0FF (where Cam_PixelTestHelper reads its 12 pixels): $FF, and $FF then $00 from frame 1,100
+          (the threshold scan has to see the test pass and then fail); 4,000 frames (cross-check of 2026-11-13,
+          trace/jp_crosscheck_kitty.csv).
+  printer the Japanese printer_dc0b recipe (docs §16.21): an album print from the camera ('A A A Start') with the
+          compression switch $DD0A (the Japanese $DC0B; read at 00:0EAB / 00:0F1E, written nowhere in the ROM) poked to 1
+          and the size / flag tables $DCEB / $DCFD filled (9 x $0280, 0) every frame, with and without a DATA error; and
+          the same print with the INIT packet answered $10 (packet error, as the Japanese status-bit runs of docs §16.16).
 """
 import sys, os, csv, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); KD = os.path.join(REPO, 'roms', 'hello_kitty')
@@ -129,6 +139,24 @@ for band in range(12):
         G.restore(s0); G.L.gb_cov_clear(); sr = G.sram(); G.poke(0xDA08, band)
         for _ in range(600): G.run(1); sr[0x000:0xF00] = v
         acc(); rows.append(['gain', 'band%02X_plane%02X' % (band, v), 'live view: $DA08 = $%02X, SRAM $A000-$AEFF = $%02X every frame' % (band, v), ms()])
+# calib: the Japanese boot routes into the calibration, with the owner's byte plane over the 12 test pixels (2026-11-13)
+for route, sram, hold in (('factory_calibration', b'\xaa' * 0x20000, 0), ('quick_check', bytes(0x20000), core_mask(0xFF & ~BIT['B']))):
+    for nm, plane in (('plane_FF', lambda f: 0xFF), ('plane_FF_then_00', lambda f: 0xFF if f < 1100 else 0x00)):
+        G.load_rom(a.rom); G.reset(sram); G.L.gb_cov_clear(); G.L.gb_attach_printer(1)
+        for f in range(4000):
+            G.keys(hold if f < 120 else 0); G.run(1); G.sram()[0x000:0x100] = plane(f)
+        acc(); rows.append(['calib', '%s_%s' % (route, nm), '%s: SRAM $A000-$A0FF = %s every frame' % ('boot from 128 KiB of $AA' if route[0] == 'f' else 'boot with every key but B held ($FD)', nm[6:].replace('_then_', ' then ').replace('FF', '$FF').replace('00', '$00 from frame 1100')), ms()])
+# printer: the compression switch of the printer engine, as the Japanese printer_dc0b / printer_dc0b_retry
+for nm, inj in (('compress', []), ('compress_data_error', [(4, 1, 0x01, 1)]), ('init_status_10', [(1, 1, 0x10, 1)])):
+    G.load_rom(a.rom); G.reset(KITTS); G.L.gb_cov_clear(); G.L.gb_printer_model(1); G.L.gb_attach_printer(1); G.L.gb_printer_inject_clear()
+    for c, n, s_, k in inj: G.L.gb_printer_inject(c, n, s_, k)
+    G.run(700)
+    for kk in taps('A A A')[:] + tap('Start')[:8] + [0] * 2000:
+        G.keys(kk); G.run(1)
+        if nm.startswith('init'): continue                         # a printer reply only: no RAM poke
+        G.poke(0xDD0A, 1)
+        for j in range(9): G.poke(0xDCEB + 2 * j, 0x80); G.poke(0xDCEC + 2 * j, 0x02); G.poke(0xDCFD + j, 0)
+    acc(); rows.append(['printer', nm, "camera print ('A A A Start'): INIT answered $10 (packet error; no RAM poked; the Japanese status-bit runs, docs §16.16)" if nm.startswith('init') else "camera print ('A A A Start'): $DD0A = 1, $DCEB-$DCFC = 9 x $0280, $DCFD-$DD05 = 0 every frame" + (', DATA packet 1 answered $01' if inj else ''), ms()])
 np.savez_compressed(a.out, ex=tot[0], dr=tot[1])
 with open(a.report, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['batch', 'run', 'poke', 'end']); w.writerows(rows)

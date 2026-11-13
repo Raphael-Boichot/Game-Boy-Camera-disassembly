@@ -15,8 +15,8 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 00:0A30,FrameRec_LoadDefaultScreenOff,30,0,0,0,0,30
 00:0B2E,Fade_GoToC,4,0,0,0,4,0
 00:0C9A,Bin_ToBcd,1,0,0,0,0,1
-00:0DFF,Prn_CheckTxDone,14,0,0,0,0,14
-00:0E7B,Prn_SendData,116,0,0,0,0,116
+00:0DFF,Prn_CheckTxDone,14,0,0,0,12,2
+00:0E7B,Prn_SendData,116,0,0,0,116,0
 00:0F6B,Prn_SendData_Abort,7,0,0,0,0,7
 00:0FBF,Prn_SendInquiry,15,0,0,0,0,15
 00:12C9,Link_SerialIrq,5,0,0,0,0,5
@@ -82,12 +82,12 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 04:4CF8,Cam_LoadRegisterSet,5,0,5,0,0,0
 04:4D46,Cam_Dither_RampB,262,0,262,0,0,0
 04:4E4C,Cam_Dither_Flat,27,0,27,0,0,0
-04:4F9A,Cam_CalibSanityCheck_Measure,32,0,0,0,0,32
+04:4F9A,Cam_CalibSanityCheck_Measure,32,0,0,0,32,0
 04:5051,Cam_CalibVector_VerifyChecksum,118,0,42,0,0,76
 04:511F,Cam_Calib_CopyFromSram,18,0,18,0,0,0
 04:5131,Cam_Calib_CopyToSram,28,0,28,0,0,0
 04:52AF,Cam_ExposureBandSelect,72,0,72,0,0,0
-04:58AB,Cam_ThresholdConverge,117,0,0,0,0,117
+04:58AB,Cam_ThresholdConverge,117,0,0,0,117,0
 04:62AB,Fx09_Reduce2xQuadTL,6,6,0,0,0,0
 04:62B1,Fx0A_Reduce2xQuadTR,6,6,0,0,0,0
 04:62B7,Fx0B_Reduce2xQuadBL,6,6,0,0,0,0
@@ -172,7 +172,7 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 04:7427,FxShared_ReduceBody_G2_GroupTop,138,138,0,0,0,0
 04:74B1,FxShared_ReduceBody_G2_OuterLoopTail,17,17,0,0,0,0
 05:42BB,Mode00_State07,1,0,0,0,0,1
-05:4415,Mode0D_State01,26,0,0,0,0,26
+05:4415,Mode0D_State01,26,0,0,0,26,0
 05:4492,Mode0D_State02,8,0,0,0,0,8
 05:4510,Mode0D_State05,8,0,0,0,0,8
 05:47E5,Unused_TakePhotos_SetPlaneMasks,29,0,0,0,0,29

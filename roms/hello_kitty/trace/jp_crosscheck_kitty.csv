@@ -1,0 +1,214 @@
+bank,start,end,bytes,owner,kitty_verdict,jp_addr,jp_routine,jp_fate,category
+00,001A,0023,10,Rst18_JumpTable,ARGS,,,,NO_JP
+00,0060,0062,3,Vec_Joypad,UNREACHABLE,,,,NO_JP
+00,0153,015A,8,Call_DE,ARGS,,,,NO_JP
+00,02B0,02B0,1,Copy_Unrolled,ARGS,,,,NO_JP
+00,02C0,02C6,7,Copy_FarUnrolled,ARGS,,,,NO_JP
+00,036F,0374,6,Delay_Frames_Busy,ARGS,00:08F3,Delay_Frames_Busy (same code),executed 6 / 6 B,JP_RAN
+00,041A,041C,3,Rng_Init,ARGS,00:0929,Rng_Init (same code),executed 3 / 3 B,JP_RAN
+00,0610,0627,24,Vram_FillSafe,ARGS,,,,NO_JP
+00,0638,066D,54,Vram_FillSafe,ARGS,,,,NO_JP
+00,06B4,06C3,16,Vram_CopyHBlank,ARGS,,,,NO_JP
+00,0706,0725,32,Vram_CopyHBlank,ARGS,,,,NO_JP
+00,0942,0A4D,268,FrameRec_LoadTilesScreenOff,LINK,,,,NO_JP
+00,0C9F,0C9F,1,Bin_ToBcd,ARGS,,,,NO_JP
+00,0E30,0E31,2,Prn_CheckTxDone,PRINTER,00:19A0,Prn_CheckTxDone (same code),executed 2 / 2 B,JP_RAN
+00,0F6B,0F71,7,Prn_SendData_Abort,PRINTER,00:1ACB,Prn_SendData_Abort (same code),"never run, no verdict",JP_RED
+00,0FC6,0FD0,11,Prn_SendInquiry,UNREACHABLE,00:1B25,Prn_SendInquiry (same code),verdict UNREACHABLE,JP_VERDICT
+00,0FD7,0FDA,4,Prn_SendInquiry,UNREACHABLE,00:1B36,Prn_SendInquiry (same code),verdict UNREACHABLE,JP_VERDICT
+00,1300,1304,5,Link_SerialIrq,LINK,00:2B20,Link_SerialIrq (same code),"never run, no verdict",JP_RED
+00,1352,1361,16,Link_Irq_InfoStage,LINK,00:2B72,Link_Irq_InfoStage (same code),executed 16 / 16 B,JP_RAN
+00,1374,137B,8,Link_Irq_InfoStage,LINK,00:2B94,Link_Irq_InfoStage (same code),executed 8 / 8 B,JP_RAN
+00,14A7,14CE,40,Link_Irq_HalfDone,LINK,00:2CC7,Link_Irq_HalfDone (same code),executed 40 / 40 B,JP_RAN
+00,15D8,15D9,2,Link_SendHello29,LINK,00:2DF8,Link_SendHello29 (same code),executed 2 / 2 B,JP_RAN
+00,1652,1653,2,Link_UpdateInfoByte,LINK,00:2E72,Link_UpdateInfoByte (same code),executed 2 / 2 B,JP_RAN
+00,171C,1762,71,VramQueue_Run,UNREACHABLE,,,,NO_JP
+00,18C6,18CE,9,Lcdc_SetCallback,LINK,,,,NO_JP
+00,1923,192D,11,Stat_SetTileToggleAt4F_B,LINK,,,,NO_JP
+00,1BF4,1BF4,1,Frame_UpdateAll,UNREACHABLE,,,,NO_JP
+00,1ECF,1ED4,6,ObjCmd_SoundCh1,ARGS,,,,NO_JP
+00,207E,2086,9,Object_CreateWithParam,ARGS,,,,NO_JP
+00,20E5,20E7,3,Object_RunAll,ARGS,,,,NO_JP
+00,21E7,21EF,9,Objects_DrawAll,ARGS,,,,NO_JP
+00,2251,2260,16,Obj_SoundCh1,ARGS,,,,NO_JP
+00,2318,231E,7,Mode1D_RenderBand,PRINTER,00:31B2,Mode1D_RenderBand (same code),executed 7 / 7 B,JP_RAN
+00,2328,232C,5,Mode1D_RenderBand,PRINTER,00:31C2,Mode1D_RenderBand (same code),executed 5 / 5 B,JP_RAN
+00,236B,236E,4,Mode1D_ReadByteFromBank,PRINTER,00:3205,Mode1D_ReadByteFromBank (same code),executed 4 / 4 B,JP_RAN
+00,23AF,2440,146,Mode1D_InterleaveTileRows,PRINTER,00:3249,Mode1D_InterleaveTileRows (same code),executed 146 / 146 B,JP_RAN
+00,256F,25A0,50,Photo_LoadEmptyThumb,UNREACHABLE,,,,NO_JP
+00,25AD,25BB,15,Img_ReduceToThumbnail,UNREACHABLE,00:258F,Img_ReduceToThumbnail (edited copy 0.949),verdict UNREACHABLE,JP_VERDICT
+00,2638,2641,10,Img_ReduceToThumbnail,ARGS,00:261A,Img_ReduceToThumbnail (edited copy 0.949),executed 10 / 10 B,JP_RAN
+01,4F42,4FC5,132,Photos_LoadPage8,UNREACHABLE,,,,NO_JP
+01,569F,56B0,18,RecordBook_CountHundreds,GAME,,,,NO_JP
+01,56BA,56BC,3,RecordBook_CountTens,GAME,,,,NO_JP
+01,58C7,58D6,16,ScriptCmd_SoundCh1,ARGS,,,,NO_JP
+01,5994,5997,4,ScriptSlots_Add,ARGS,,,,NO_JP
+01,6948,6958,17,Print_SetFrameSide,PRINTER,,,,NO_JP
+01,697A,697C,3,Print_LoadFrameGfx,PRINTER,,,,NO_JP
+01,6984,6985,2,Print_LoadFrameGfx,PRINTER,,,,NO_JP
+01,6CCF,6CD3,5,Mode06_State04,PRINTER,,,,NO_JP
+01,7092,7098,7,Mode06_State13,PRINTER,,,,NO_JP
+01,72AF,72B1,3,Mode06_State19,PRINTER,,,,NO_JP
+01,7623,763A,24,Mode06_State27,PRINTER,,,,NO_JP
+02,4A98,4A9D,6,KeyPrompt_SoundCh1,ARGS,,,,NO_JP
+02,5344,5345,2,Puzzle15_ShuffleCheckDir,GAME,,,,NO_JP
+02,5EE0,5EE5,6,TakePhotos_ObjMoveB,INPUT,,,,NO_JP
+02,63A1,63B5,21,Album_ObjLoadSlot,UNREACHABLE,,,,NO_JP
+02,6487,648A,4,Album_ObjFollowDAA6,INPUT,,,,NO_JP
+02,6CDA,6CDA,1,Stamp_ObjStep0B,INPUT,,,,NO_JP
+02,7114,7117,4,PrintGame_ClampSpeed,PRINTER,,,,NO_JP
+02,7381,738B,11,PrintGame_ClampX,PRINTER,,,,NO_JP
+02,7390,739A,11,PrintGame_ClampX,PRINTER,,,,NO_JP
+02,73CD,73D7,11,PrintGame_SpeedFromKeys,PRINTER,,,,NO_JP
+02,73DF,73E9,11,PrintGame_SpeedFromKeys,PRINTER,,,,NO_JP
+02,73EE,73F6,9,PrintGame_SpeedFromKeys,PRINTER,,,,NO_JP
+02,73FF,73FF,1,PrintGame_SpeedFromKeys,PRINTER,,,,NO_JP
+02,7465,746F,11,PrintGame_SaveKittyPos,PRINTER,,,,NO_JP
+02,74D0,74D6,7,PrintGame_ObjKitty,PRINTER,,,,NO_JP
+02,77A6,77B2,13,PrintGame_ShowResult,PRINTER,,,,NO_JP
+02,77D4,77D8,5,PrintGame_ShowResult,PRINTER,,,,NO_JP
+04,507D,5084,8,Cam_CalibVector_VerifyChecksum,SENSOR,,,,NO_JP
+04,50B5,50BD,9,Cam_CalibVector_VerifyChecksum,SENSOR,,,,NO_JP
+04,50C5,50E3,31,Cam_CalibVector_VerifyChecksum,SENSOR,,,,NO_JP
+04,5103,511E,28,Cam_CalibVector_VerifyChecksum,SENSOR,,,,NO_JP
+05,4357,4357,1,Mode00_State07,INPUT,,,,NO_JP
+05,4499,44A0,8,Mode0D_State02,INPUT,,,,NO_JP
+05,4517,451E,8,Mode0D_State05,INPUT,,,,NO_JP
+05,47E5,4801,29,Unused_TakePhotos_SetPlaneMasks,UNREACHABLE,,,,NO_JP
+05,4BB0,4BB7,8,Mode02_State06,INPUT,,,,NO_JP
+05,4D10,4D18,9,Unused_Mode02_State0C,UNREACHABLE,,,,NO_JP
+05,4D1C,4D20,5,Unused_Mode02_State0C,UNREACHABLE,,,,NO_JP
+05,4EEE,4EF5,8,TakePhotos_PlaceFrameObjects,INPUT,,,,NO_JP
+05,4EFE,4F05,8,TakePhotos_PlaceFrameObjects,INPUT,,,,NO_JP
+05,4F9C,4F9D,2,TakePhotos_FrameCallback,INPUT,,,,NO_JP
+05,4FD4,4FD5,2,TakePhotos_FrameCallback,INPUT,,,,NO_JP
+05,5047,505C,22,TakePhotos_FrameCallback2,INPUT,,,,NO_JP
+05,525E,527F,34,Mode02_State0E,SENSOR,,,,NO_JP
+05,529C,529E,3,Mode02_State0E,SENSOR,,,,NO_JP
+05,52A2,52A9,8,Mode02_State0E,SENSOR,,,,NO_JP
+05,5680,5680,1,Stamp_ArrangeGfx,INPUT,,,,NO_JP
+05,56CB,56CB,1,Stamp_ArrangeMaskInverted,INPUT,,,,NO_JP
+05,5F80,5F85,6,Stamp_SetShiftMasks,INPUT,,,,NO_JP
+05,6043,6047,5,Mode05_State00,INPUT,,,,NO_JP
+05,6303,6303,1,AlbumText_CursorUpdate,INPUT,,,,NO_JP
+05,6474,6478,5,Text_CopyBigLineVram,ARGS,,,,NO_JP
+05,64E6,64E6,1,Digits_LowNibbleTileAddr,ARGS,,,,NO_JP
+05,6501,6501,1,Digits_HighNibbleTileAddr,ARGS,,,,NO_JP
+05,662F,6631,3,Mode03_State0A,INPUT,,,,NO_JP
+05,6639,663B,3,Mode03_State0A,INPUT,,,,NO_JP
+05,6643,6644,2,Mode03_State0A,INPUT,,,,NO_JP
+05,6C0A,6C13,10,Mode03_State06,UNREACHABLE,,,,NO_JP
+05,6E69,6E6A,2,Photo_DrawNumber,INPUT,,,,NO_JP
+05,7060,706C,13,Mode03_State00,UNREACHABLE,,,,NO_JP
+05,716C,7178,13,Mode03_State01,UNREACHABLE,,,,NO_JP
+05,7263,7268,6,Mode03_State02,INPUT,,,,NO_JP
+05,738C,7395,10,Mode03_State04,UNREACHABLE,,,,NO_JP
+05,73FD,7406,10,Mode03_State05,UNREACHABLE,,,,NO_JP
+05,75AB,75B0,6,Mode03_State11,INPUT,,,,NO_JP
+06,401D,401F,3,Mode15_State00,UNREACHABLE,,,,NO_JP
+06,4023,4025,3,Mode15_State00,UNREACHABLE,,,,NO_JP
+06,4031,4048,24,Mode15_State00,UNREACHABLE,,,,NO_JP
+06,4051,4053,3,Mode15_FadeOut15,UNREACHABLE,,,,NO_JP
+06,4075,407D,9,Mode16_State00,UNREACHABLE,,,,NO_JP
+06,4081,4083,3,Mode16_State00,UNREACHABLE,,,,NO_JP
+06,408F,40A6,24,Mode16_State00,UNREACHABLE,,,,NO_JP
+06,40AF,40B1,3,Mode16_FadeOut16,UNREACHABLE,,,,NO_JP
+06,4951,4951,1,NameCardEdit_PhotoCursorUpdate,INPUT,,,,NO_JP
+06,4BE1,4BF8,24,IdCard_DrawIdNumber,INPUT,,,,NO_JP
+06,4D65,4D66,2,IdCard_DrawBirthdayDigit,INPUT,,,,NO_JP
+06,4E02,4E03,2,IdCard_DrawSexToPrintBuf,INPUT,,,,NO_JP
+06,4E3A,4E3C,3,NameCardEdit_FieldAction,INPUT,,,,NO_JP
+06,4E4D,4E4F,3,NameCardEdit_FieldAction,INPUT,,,,NO_JP
+06,537D,537D,1,Mode0B_State05,INPUT,,,,NO_JP
+06,590E,5917,10,Bcd_DrawDigit,ARGS,,,,NO_JP
+06,5A8D,5AA2,22,Counters_AddExchanged,LINK,,,,NO_JP
+06,5FF8,605A,99,KeyPrompt_LoadSoundsB,LINK,,,,NO_JP
+06,609A,60B6,29,Counters_AddReceived,LINK,,,,NO_JP
+06,60E7,6124,62,Exchange_RequestPage,LINK,,,,NO_JP
+06,614B,614D,3,PhotoTrain_LoadPageMap,INPUT,,,,NO_JP
+06,6179,617F,7,PhotoTrain_FillEmptyTiles,INPUT,,,,NO_JP
+06,6681,6688,8,Mode08_State02,LINK,,,,NO_JP
+06,66EB,66F2,8,Mode08_State05,LINK,,,,NO_JP
+06,66F4,6713,32,Mode08_State03,LINK,,,,NO_JP
+06,67C8,67D1,10,Mode09_State01,LINK,,,,NO_JP
+06,681E,6825,8,Mode09_State02,LINK,,,,NO_JP
+06,68C0,68F9,58,Mode09_State03,LINK,,,,NO_JP
+06,6903,6908,6,Mode09_State05,LINK,,,,NO_JP
+06,696F,69D3,101,Mode09_State06,LINK,,,,NO_JP
+06,6AA3,6AAA,8,Mode09_State0A,LINK,,,,NO_JP
+06,6ACF,6B04,54,Mode09_State0B,LINK,,,,NO_JP
+06,6B09,6B0B,3,Mode09_State0C,LINK,,,,NO_JP
+06,6B13,6B15,3,Mode09_State0C,LINK,,,,NO_JP
+06,6B1D,6B2B,15,Mode09_State0C,LINK,,,,NO_JP
+06,6B2F,6B82,84,Mode09_State0C,LINK,,,,NO_JP
+06,6B8D,6BD2,70,Mode09_State0C,LINK,,,,NO_JP
+06,6BFE,6C47,74,Mode09_State0F,LINK,,,,NO_JP
+06,6CC7,6CDF,25,CardStats_IncDA64,LINK,,,,NO_JP
+07,411F,4126,8,Mode1B_State01,UNREACHABLE,,,,NO_JP
+07,4423,443A,24,FrameCorner_Draw,INPUT,,,,NO_JP
+07,4503,4512,16,CameraFrame_Type24,INPUT,,,,NO_JP
+07,5283,5289,7,Mode11_State0A,INPUT,,,,NO_JP
+07,52BA,52C1,8,Mode11_State0C,INPUT,,,,NO_JP
+07,53C2,53E3,34,Mode11_State0E,SENSOR,,,,NO_JP
+07,5400,5407,8,Mode11_State0E,SENSOR,,,,NO_JP
+07,540B,5412,8,Mode11_State0E,SENSOR,,,,NO_JP
+07,557D,5582,6,Puzzle15_IsSolved,GAME,,,,NO_JP
+07,59FE,5A02,5,Mode0F_State02,GAME,,,,NO_JP
+07,5B8C,5B8E,3,Puzzle15_FadeToState0C,GAME,,,,NO_JP
+07,5B92,5B9A,9,Puzzle15_FadeToState0C,GAME,,,,NO_JP
+07,5BDB,5BFA,32,Puzzle15_FrameCallback,GAME,,,,NO_JP
+07,5BFE,5C11,20,Puzzle15_FrameCallback,GAME,,,,NO_JP
+07,5CC6,5CCE,9,Puzzle15_SetState0C,GAME,,,,NO_JP
+07,5CFF,5D08,10,Puzzle15_FrameCallback2,GAME,,,,NO_JP
+07,5D0C,5D15,10,Puzzle15_FrameCallback2,GAME,,,,NO_JP
+07,5E8B,5E8E,4,Scratch_HasPrize3,GAME,,,,NO_JP
+07,5F0F,5F12,4,Scratch_PrizeTable,GAME,,,,NO_JP
+07,60E5,60EA,6,Mode10_State00,GAME,,,,NO_JP
+07,6172,6177,6,Mode10_State01,GAME,,,,NO_JP
+07,6289,628C,4,Mode10_State04,GAME,,,,NO_JP
+07,65C2,65D6,21,KittHost_TextStep,GAME,,,,NO_JP
+07,65EE,65F4,7,KittHost_TextStep,GAME,,,,NO_JP
+07,68A9,68C2,26,KittHost_PayPuzzle,SAVE,,,,NO_JP
+07,690C,6920,21,Mode0E_State09,GAME,,,,NO_JP
+07,6A2D,6A30,4,Mode0E_State0F,GAME,,,,NO_JP
+07,6A9A,6AB3,26,KittHost_PayScratch,SAVE,,,,NO_JP
+07,6BBE,6BC7,10,Mode0E_State1E,GAME,,,,NO_JP
+08,6AD8,6ADC,5,Sgb_SendPacket,SGB,00:1CD0,Sgb_SendPacket (edited copy 0.964),executed 2 / 5 B,JP_PART
+08,6B0A,6B44,59,Sgb_VramTransferInline,SGB,,,,NO_JP
+08,6B51,6B5B,11,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B5F,6B61,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B64,6B66,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B6A,6B6C,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B6F,6B71,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B75,6B77,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B7A,6B7C,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B80,6B82,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B85,6B87,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B8B,6B8D,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B90,6B92,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B96,6B98,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6B9B,6B9D,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BA1,6BA3,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BA6,6BA8,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BAC,6BAE,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BB1,6BB3,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BB7,6BB9,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BBC,6BBE,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BC2,6BC4,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BC7,6BC9,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BCD,6BCF,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BD2,6BD4,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BD8,6BDA,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BDD,6BDF,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BE3,6BE5,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BE8,6BEA,3,Sgb_InitDataSnd,SGB,,,,NO_JP
+08,6BF7,6C12,28,Sgb_FreezeScreen,SGB,,,,NO_JP
+08,6C1F,6C36,24,Sgb_UnfreezeScreen,SGB,,,,NO_JP
+08,6C92,6C98,7,Sgb_Detect,SGB,,,,NO_JP
+0F,45EB,45EB,1,Sfx1_Step_05,SOUND,1F:4623,Sfx1_Step_05_KeyStart (same code),executed 1 / 1 B,JP_RAN
+0F,479A,479A,1,Sfx1_Step_06_0D,SOUND,1F:47D2,Sfx1_Step_06_0D_KeySelect_SpaceFeverBigEnemyKill (same code),executed 1 / 1 B,JP_RAN
+0F,51FA,51FB,2,Snd_Sfx_Start,SOUND,1F:522A,Snd_Sfx_Start (same code),verdict UNREACHABLE,JP_VERDICT
+0F,5204,520B,8,Snd_Sfx_Start,SOUND,1F:5234,Snd_Sfx_Start (same code),verdict UNREACHABLE,JP_VERDICT
+0F,54B0,54CC,29,Snd_Op9E_SetDurTable,SOUND,1F:5550,Snd_Op9E_SetDurTable (same code),executed 29 / 29 B,JP_RAN
+0F,5591,559C,12,Snd_Trk_NoteOn,SOUND,1F:5631,Snd_Trk_NoteOn (same code),executed 12 / 12 B,JP_RAN
+0F,56A5,56AF,11,Snd_Trk_UpdateChannel,SOUND,,,,NO_JP
