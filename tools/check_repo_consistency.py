@@ -329,6 +329,8 @@ if getattr(A, 'rom_kitty', None):
          any((np.load(os.path.join(_t, 'f.npz'))[k] != np.load(os.path.join(_kd, 'forced_kitty_runs.npz'))[k]).any() for k in ('ex', 'dr')):
         bad('kitty', 'trace/forced_kitty_runs.npz / forced_runs_kitty.csv are not what tools/kitty_forced_runs.py makes today')
     else: ok('kitty', 'forced runs fresh (%s)' % _m.stdout.strip())
+    _m = subprocess.run([sys.executable, 'tools/kitty_red_verdicts.py', '--check'], capture_output=True, text=True, cwd=ROOT)   # a verdict per never-run piece
+    (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)

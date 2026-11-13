@@ -150,7 +150,7 @@ RV = os.path.join(D, 'trace', 'red_verdicts_%s.csv' % T)          # hand verdict
 if os.path.exists(RV):
     V = {(r['bank'], r['start']): r['class'] for r in csv.DictReader(open(RV))}
     HDR.append('verdict'); out = [o + [V.get((o[0], o[1]), '')] for o in out]
-    print('%s_red verdicts: %s' % (T, ', '.join('%s %d' % (k, sum(o[3] for o in out if o[-1] == k)) for k in ('UNREACHABLE', 'FAULT', 'RUN', 'DATA', ''))))
+    print('%s_red verdicts: %s' % (T, ', '.join('%s %d' % (k or 'none', sum(o[3] for o in out if o[-1] == k)) for k in sorted({o[-1] for o in out}))))
 with open(OUT, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(HDR); w.writerows(out)
 print('%s_red: %d bytes in %d pieces: %s' % (T, int(red.sum()), len(rows), ', '.join('%s %d' % (k, tot[k]) for k in ('GATE', 'FORCED', 'TABLE', 'BEHIND', 'VECTOR', 'HAND', 'NONE'))))

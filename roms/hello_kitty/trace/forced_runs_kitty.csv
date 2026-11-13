@@ -196,3 +196,6 @@ state,mode10_state04,"main menu, $FF8D = $10, $FF8E = $00, 150 frames into mode 
 state,mode0E_state09,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $09",0F:05
 state,mode0E_state0D,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $0D",0E:13
 state,mode0E_state1E,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $1E",04:01
+state,mode08_state03,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $03",08:03
+state,mode0F_state0D,"main menu, $FF8D = $0F, $FF8E = $00, 150 frames into mode $0F: $FF8E = $0D",04:01
+state,mode0E_state0F,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $0F",0E:0F

@@ -25,7 +25,6 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 00:15CD,Link_SendHello29,2,0,0,0,0,2
 00:1648,Link_UpdateInfoByte,2,0,0,0,0,2
 00:1717,VramQueue_Run,71,0,0,0,0,71
-00:176A,Boot,109,0,0,0,0,109
 00:18BF,Lcdc_SetCallback,9,0,0,0,0,9
 00:1923,Stat_SetTileToggleAt4F_B,11,0,0,0,0,11
 00:1AC5,Frame_UpdateAll,1,0,0,0,0,1
@@ -293,9 +292,9 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 07:5CC6,Puzzle15_SetState0C,9,0,0,0,0,9
 07:5CCF,Puzzle15_FrameCallback2,20,0,0,0,0,20
 07:5D3D,Mode0F_State0C,96,0,0,0,96,0
-07:5D9D,Mode0F_State0D,88,0,0,0,0,88
-07:5DF5,Mode0F_State0E,15,0,0,0,0,15
-07:5E04,Mode0F_State0F,60,0,0,0,0,60
+07:5D9D,Mode0F_State0D,88,0,0,0,88,0
+07:5DF5,Mode0F_State0E,15,0,0,0,15,0
+07:5E04,Mode0F_State0F,60,0,0,0,60,0
 07:5E78,Scratch_HasPrize3,4,0,0,0,0,4
 07:5F05,Scratch_PrizeTable,4,0,0,0,0,4
 07:605C,Mode10_State00,6,0,0,0,0,6

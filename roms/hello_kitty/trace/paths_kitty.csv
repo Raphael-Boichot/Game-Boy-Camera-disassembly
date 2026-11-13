@@ -70,6 +70,8 @@ lens_fun8,organic,A - A - Down - Down - Down Down Down Down Down Down Down Down 
 lens_fun9,organic,A - A - Down - Down - Down Down Down Down Down Down Down Down Down - A,02:01,00:08 01:00 01:02 02:00 02:01
 lens_fun10,organic,A - A - Down - Down - Down Down Down Down Down Down Down Down Down Down - A,02:01,00:08 01:00 01:02 02:00 02:01
 lens_slideshow,organic,A - A - Down - Down - A,02:01,00:08 01:00 01:02 02:00 02:01
+soft_reset_menu,organic,A - A+B+Select+Start*20,00:08,00:08 01:00 01:02 00:00 00:04 00:05 00:06 00:07 00:08
+soft_reset_camera,organic,A - A - A+B+Select+Start*20,00:08,00:08 01:00 01:02 02:00 02:01 00:00 00:04 00:05 00:06 00:07 00:08
 stamps_page0,organic,photo: - - Down A - Down A - Start - Right Right Left Down Down Down Down Down Down Down Down Down Down Down Down Down Down Down Down,05:06,00:08 01:00 01:02 02:00 02:01 02:03 02:06 02:07 02:01 01:00 01:02 03:00 03:02 05:00 05:06
 stamps_page1,organic,photo: - - Down A - Down A - Start - Right Right Down Left Down Down Down Down Down Down Down Down Down Down Down Down Down Down Down Down,05:06,00:08 01:00 01:02 02:00 02:01 02:03 02:06 02:07 02:01 01:00 01:02 03:00 03:02 05:00 05:06
 stamps_page2,organic,photo: - - Down A - Down A - Start - Right Right Down Down Left Down Down Down Down Down Down Down Down Down Down Down Down Down Down Down Down,05:06,00:08 01:00 01:02 02:00 02:01 02:03 02:06 02:07 02:01 01:00 01:02 03:00 03:02 05:00 05:06

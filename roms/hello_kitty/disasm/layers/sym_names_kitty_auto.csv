@@ -16,6 +16,12 @@ bank,addr,name,conf,note,source
 00,17B7,Data_00_17B7,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 00,17BD,Data_00_17BD,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
 00,17DD,Data_00_17DD,C,read in the core runs by 00:1AB7,kitty_types
+00,182C,Data_00_182C,C,read in the core runs by 00:01F2,kitty_types
+00,1833,Data_00_1833,C,read in the core runs by 00:01F2,kitty_types
+00,183D,Data_00_183D,C,read in the core runs by 00:01F2,kitty_types
+00,185E,Data_00_185E,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
+00,1864,Data_00_1864,C,"read in the core runs by 00:1AB7, 00:1680",kitty_types
+00,187E,Data_00_187E,C,read in the core runs by 00:1AB7,kitty_types
 00,1BF5,Data_00_1BF5,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1CAB,Data_00_1CAB,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types
 00,1CBA,Data_00_1CBA,C,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ...",kitty_types

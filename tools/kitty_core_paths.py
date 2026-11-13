@@ -46,6 +46,8 @@ PATHS = [  # name, save, path, free frames, printer injections
 ] + [('lens_up%d' % n, 'kitts', 'A - A - Down - Down -' + ' Up' * n + ' -', 200, []) for n in range(1, 10)] + [
     ('lens_fun%d' % n, 'kitts', 'A - A - Down - Down -' + ' Down' * n + ' - A', 600, []) for n in range(11)] + [
     ('lens_slideshow', 'kitts', 'A - A - Down - Down - A', 3200, []),
+    ('soft_reset_menu', 'kitts', 'A - A+B+Select+Start*20', 900, []),           # A+B+Select+Start: Frame_UpdateAll jumps to the reset at 00:1810 (2026-11-13)
+    ('soft_reset_camera', 'kitts', 'A - A - A+B+Select+Start*20', 900, []),
 ] + [('stamps_page%d' % p_, 'kitts', 'photo: - - Down A - Down A - Start -' + ' Right Right' + ' Down' * p_ + ' Left' + ' Down' * 16, 120, []) for p_ in range(8)]
 FORCED = [('forced_mode_%02X' % m, m) for m in (0x13, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D)]
 BIT = dict(A=1, B=2, Select=4, Start=8, Right=0x10, Left=0x20, Up=0x40, Down=0x80)

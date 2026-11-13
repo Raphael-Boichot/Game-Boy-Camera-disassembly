@@ -16,6 +16,12 @@ bank,start,end,type,width,note
 00,17B7,17BA,data,,"read in the core runs by 00:1AB7, 00:1680"
 00,17BD,17BF,data,,"read in the core runs by 00:1AB7, 00:1680"
 00,17DD,17E0,data,,read in the core runs by 00:1AB7
+00,182C,1830,data,,read in the core runs by 00:01F2
+00,1833,1837,data,,read in the core runs by 00:01F2
+00,183D,1841,data,,read in the core runs by 00:01F2
+00,185E,1861,data,,"read in the core runs by 00:1AB7, 00:1680"
+00,1864,1866,data,,"read in the core runs by 00:1AB7, 00:1680"
+00,187E,1881,data,,read in the core runs by 00:1AB7
 00,1BF5,1C8C,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
 00,1CAB,1CB1,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
 00,1CBA,1D47,data,,"read in the core runs by 00:1FCC, 00:2127, 00:021C, 00:2087 ..."
