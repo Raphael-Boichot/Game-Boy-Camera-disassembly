@@ -19,7 +19,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 00,0FD7,0FDA,4,Prn_SendInquiry,GATE,00:0FD5,jr z (28 04) [after cc],Prn_SendInquiry,00:0FD7<-00:0FD5 after cc,PRINTER
 00,1300,1304,5,Link_SerialIrq,GATE,00:12E2,jr z (28 1c) [branch],Link_SerialIrq,00:1300<-00:12E2 branch,LINK
 00,1352,1361,16,Link_Irq_InfoStage,GATE,00:1350,jr z (28 32) [after cc],Link_Irq_InfoStage,00:1352<-00:1350 after cc; 00:135A<-00:1348 branch,LINK
-00,1374,1383,16,Link_Irq_InfoStage,GATE,00:1372,jr z (28 10) [after cc],Link_Irq_InfoStage,00:1374<-00:1372 after cc; 00:137C<-00:136B branch,LINK
+00,1374,137B,8,Link_Irq_InfoStage,GATE,00:1372,jr z (28 10) [after cc],Link_Irq_InfoStage,00:1374<-00:1372 after cc,LINK
 00,14A7,14CE,40,Link_Irq_HalfDone,GATE,00:13EA,jp z (ca a7 14) [branch],Link_Irq_Connected,00:14A7<-00:13EA branch; 00:14A7<-00:14A5 after cc,LINK
 00,15D8,15D9,2,Link_SendHello29,GATE,00:15D6,jr z (28 02) [after cc],Link_SendHello29,00:15D8<-00:15D6 after cc,LINK
 00,1652,1653,2,Link_UpdateInfoByte,GATE,00:1650,jr z (28 02) [after cc],Link_UpdateInfoByte,00:1652<-00:1650 after cc,LINK

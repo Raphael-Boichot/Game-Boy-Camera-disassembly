@@ -38,6 +38,7 @@ RULES = [
     ('UNREACHABLE', 'I', lambda o, g: KEY in NOSLOT, 'a jr c after Photo_FindSlotA (01:4D81) failed: a photo number with no slot; the album keeps its numbers compact (BGB 2026-11-12); shown only with Photo_FindSlotA patched'),
     ('UNREACHABLE', 'I', lambda o, g: o in ('Photos_LoadPage8', 'Photo_LoadEmptyThumb', 'Photo_LoadEmptyPicture') or g in ('Photos_LoadPage8', 'Album_ObjLoadSlot'),
      'the branch for a photo number with no slot (Photo_FindSlotA fails): the album keeps its numbers compact (BGB 2026-11-12: deleting photo 01 of two renumbers the other); shown only with Photo_FindSlotA patched'),
+    ('LINK', 'I', lambda o, g: GATE == '06:6ACF' or KEY == '06:6ACF', 'behind the wait of Mode09_State0B on $DD4E, which only Link_Irq_HalfDone sets: the end of an 8-page ($800-byte) transfer, asked by a command with bit 7 (Exchange_RequestPage, 06:60CB; length $08 at 00:142B / 00:1453); in BGB the request is sent (both units on receive, exchange2_both_take, 13 linked runs in all) but no partner serves it, and the waiting side leaves on its $B4-frame countdown to print error 14:01'),
     ('LINK', 'I', lambda o, g: re.match(r'(Mode0[789]_|Link_|Exchange_|Counters_AddReceived|CardStats_|KeyPrompt_LoadSoundsB|FrameRec_LoadTilesScreenOff)', o) or re.match(r'(Mode0[789]_|Link_|Exchange_)', g),
      'the exchange: a reply or a command of the partner that the ten BGB exchanges of 2026-11-13 did not send'),
     ('SENSOR', 'I', lambda o, g: re.match(r'(Cam_|Mode02_State0[CDE]|Mode11_State0E)', o) or g.startswith('Cam_'), 'a branch on the sensor picture: another light level than the runs saw; the fake-light runs of tools/kitty_forced_runs.py (a byte plane written over SRAM $A000-$AEFF every frame, 2026-11-13) move the exposure ($DA17-$DA18) but leave the gain band $DA08 at 5, so the bands $08 / $0A (Cam_MainDispatch_Band3 / 4) and their neighbours stay unrun'),
@@ -56,7 +57,7 @@ RULES = [
 ]
 out = []
 for r in csv.DictReader(open(os.path.join(P, 'red_kitty.csv'))):
-    o, g = r['owner'], r['gate_owner'] or ''; KEY = '%s:%s' % (r['bank'], r['start'])
+    o, g = r['owner'], r['gate_owner'] or ''; KEY = '%s:%s' % (r['bank'], r['start']); GATE = r['gate']
     if r['class'] == 'BEHIND': g = r['gate_owner'] or r['gate_insn'].replace('behind ', '')
     for cls, ev, f, why in RULES:
         if f(o, g): break

@@ -20,7 +20,7 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 00:0F6B,Prn_SendData_Abort,7,0,0,0,0,7
 00:0FBF,Prn_SendInquiry,15,0,0,0,0,15
 00:12C9,Link_SerialIrq,5,0,0,0,0,5
-00:131A,Link_Irq_InfoStage,32,0,0,0,0,32
+00:131A,Link_Irq_InfoStage,24,0,0,0,0,24
 00:14A7,Link_Irq_HalfDone,40,0,0,0,0,40
 00:15CD,Link_SendHello29,2,0,0,0,0,2
 00:1648,Link_UpdateInfoByte,2,0,0,0,0,2
