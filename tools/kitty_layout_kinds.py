@@ -15,6 +15,15 @@ same evidence, evidence()) are drawn UNCERTAIN by tcrf_check/tools/rom_layout_ma
   2 tiles / map, C: a copy routine called with a constant source copies them to tile memory / to a BG map (assets/copy_sites_kitty.csv)
   3 sound, C: the first instruction that read them is in bank $0F, the sound driver (trace/cov_kitty_runs.npz, reader)
   4 sprite layouts and object scripts, I: the first instruction that read them is the object engine (00:1F00-00:2242)
+  7 loader tables, C (layout map only, 2026-11-13, roadmap step 10: the Src_ blocks followed into their buffers): the eight stamp
+    category records of 05:5425 read by Stamp_SelectCategory / Stamp_LoadGfx / Stamp_LoadMask / Stamp_LoadSmallTiles (per
+    category: the graphics, bank rec[2] from rec[0-1], pages x [$D9D4] bytes, T_STP; the masks of each of the four variant
+    records, bank [$D9E0] (not $00 / $FF), half that length, TBL as the Japanese StampCat masks: copied into $C5A0, inverted into
+    $C1E0 and sent to VRAM $8C00, so the display tracker cannot see them; the two $60-byte small-tile blocks of bank $0D, T_UI);
+    the frame records of 05:69E7 read by FrameRec_LoadMap / FrameRec_LoadTiles (6 bytes each while the banks are valid, TBL;
+    each map, 136 bytes, written into the BG map with $A0 added by Map_Write5PlusA0Safe, MAP)
+  8 hand reading, I: assets/leftover_kinds_kitty.csv, one kind per label still left (format of the bytes, the neighbours, the
+    Japanese copies; OTHER is code that nothing references)
   6 owner, I: the kind the owner gives a bank range by eye (assets/layout_kind_owner_kitty.csv, 2026-11-12), for the bytes no rule above
     types; for the layout map only (the names of tools/kitty_data_names.py keep rules 0-4)
 One row per run of equal kind inside one block: bank, start, end (exclusive), kind (T_UI / MAP / SOUND / OAM), ev, label, basis.
@@ -76,9 +85,27 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--track', default=os.path.join(KD, 'trace', 'display_kitty.npz'))
     ap.add_argument('--out', default=os.path.join(KD, 'assets', 'layout_kind_overrides_kitty.csv')); ap.add_argument('rom'); a = ap.parse_args()
     KIND, EV, code = evidence(a.rom, a.track)
+    # rule 7, the loader tables of the stamps and of the camera-frame records (C)
+    R7 = bytes(np.frombuffer(open(a.rom, 'rb').read(), np.uint8)); B5 = off(5, 0x4000) - 0x4000
+    def put7(o0, n, k):
+        m = np.zeros(N, bool); m[o0:o0 + n] = True; m &= ~code & (KIND == 0); KIND[m] = k; EV[m] = 7
+    for c in range(8):
+        rec = R7[B5 + 0x5425 + 8 * c:B5 + 0x5425 + 8 * c + 8]; p1 = rec[4] | rec[5] << 8; p2 = rec[6] | rec[7] << 8
+        cat = R7[B5 + p1:B5 + p1 + 16]; d4 = cat[6] | cat[7] << 8
+        put7(off(rec[2], rec[0] | rec[1] << 8), rec[3] * d4, 8)
+        for j in range(4):
+            q = R7[B5 + p2 + 8 * j:B5 + p2 + 8 * j + 8]
+            if q[2] not in (0, 0xFF): put7(off(q[2], q[0] | q[1] << 8), rec[3] * d4 // 2, 7)
+            for e in (4, 6): put7(off(0x0D, q[e] | q[e + 1] << 8), 0x60, 1)
+    i = 0
+    while True:
+        q = R7[B5 + 0x69E7 + 6 * i:B5 + 0x69E7 + 6 * i + 6]
+        if not (1 <= q[5] < 0x40 and 0x40 <= q[4] < 0x80 and 1 <= q[2] < 0x40 and 0x40 <= q[1] < 0x80): break
+        put7(off(q[5], q[3] | q[4] << 8), 136, 2); i += 1
+    put7(off(5, 0x69E7), 6 * i, 7)
     # rule 6, the owner's kinds by eye: for the layout map only (tools/kitty_data_names.py keeps the evidence of rules 0-4 for the names)
     _ok = ~code                    # runs of $00 / $FF inside these ranges are part of the assets (the owner's reading of the whole range)
-    KK = {'T_UI': 1, 'MAP': 2, 'SOUND': 3, 'OAM': 4, 'T_FRM': 5, 'PALT': 6, 'TBL': 7}
+    KK = {'T_UI': 1, 'MAP': 2, 'SOUND': 3, 'OAM': 4, 'T_FRM': 5, 'PALT': 6, 'TBL': 7, 'T_STP': 8, 'OTHER': 9}
     for r in csv.DictReader(open(os.path.join(KD, 'assets', 'layout_kind_owner_kitty.csv'), encoding='utf-8')):
         b = int(r['bank'], 16); o0, o1 = off(b, int(r['start'], 16)), off(b, int(r['end'], 16))
         m = np.zeros(N, bool); m[o0:o1] = True; m &= _ok & (KIND == 0); KIND[m] = KK[r['kind']]; EV[m] = 6
@@ -90,14 +117,20 @@ if __name__ == '__main__':
         e = lo[i + 1] if i + 1 < len(lo) else N
         e = min(e, (o // 0x4000 + 1) * 0x4000)
         owner[o:e] = o
+    # rule 8, the hand reading of each label still left (I)
+    byname = {v: k for k, v in names.items()}
+    for r in csv.DictReader(open(os.path.join(KD, 'assets', 'leftover_kinds_kitty.csv'), encoding='utf-8')):
+        o = byname[r['label']]; m = (owner == o) & ~code & (KIND == 0); KIND[m] = KK[r['kind']]; EV[m] = 8
     isdata = (owner >= 0) & ~code
     isdata[isdata] = [names[o].startswith(NOKIND) for o in owner[isdata]]
     KIND[~isdata] = 0
-    KN = {1: 'T_UI', 2: 'MAP', 3: 'SOUND', 4: 'OAM', 5: 'T_FRM', 6: 'PALT', 7: 'TBL'}
+    KN = {1: 'T_UI', 2: 'MAP', 3: 'SOUND', 4: 'OAM', 5: 'T_FRM', 6: 'PALT', 7: 'TBL', 8: 'T_STP', 9: 'OTHER'}
     EVT = {1: ('C', 'seen in VRAM %s while the core corpora were replayed (tools/kitty_display_track.py)'), 2: ('C', 'copied to %s by a copy routine with a constant source (assets/copy_sites_kitty.csv)'),
            3: ('C', 'first read by the sound driver (bank $0F) in the core runs'), 4: ('I', 'first read by the object engine (00:1F00-00:2242) in the core runs'),
            5: ('C', 'role from its loader: print frame (table 01:687D), camera-frame picture (table 07:41CE) or Super Game Boy transfer (bank $08)'),
-           6: ('I', 'owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv')}
+           6: ('I', 'owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv'),
+           7: ('C', 'loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)'),
+           8: ('I', 'hand reading of the bytes (assets/leftover_kinds_kitty.csv)')}
     rows = []; tot = collections.Counter()
     nz = np.flatnonzero(KIND)
     if len(nz):
@@ -111,6 +144,6 @@ if __name__ == '__main__':
         w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'kind', 'ev', 'label', 'basis']); w.writerows(rows)
     by_kind = collections.Counter()
     for (k, ev), v in tot.items(): by_kind[k] += v
-    print('kitty_layout_kinds: %d rows, %d bytes of kind-less blocks given a kind (T_UI %d, MAP %d, SOUND %d, OAM %d, T_FRM %d, PALT %d, TBL %d); %d bytes of kind-less blocks left' % (
-        len(rows), sum(tot.values()), by_kind['T_UI'], by_kind['MAP'], by_kind['SOUND'], by_kind['OAM'], by_kind['T_FRM'], by_kind['PALT'], by_kind['TBL'], int((isdata & (KIND == 0)).sum())))
+    print('kitty_layout_kinds: %d rows, %d bytes of kind-less blocks given a kind (T_UI %d, MAP %d, SOUND %d, OAM %d, T_FRM %d, PALT %d, TBL %d, T_STP %d, OTHER %d); %d bytes of kind-less blocks left' % (
+        len(rows), sum(tot.values()), by_kind['T_UI'], by_kind['MAP'], by_kind['SOUND'], by_kind['OAM'], by_kind['T_FRM'], by_kind['PALT'], by_kind['TBL'], by_kind['T_STP'], by_kind['OTHER'], int((isdata & (KIND == 0)).sum())))
     print('by evidence rule:', {('%s/%d' % k): v for k, v in sorted(tot.items())})

@@ -336,13 +336,15 @@ if NOTE1 is not None: subtitle = [NOTE1, NOTE2 or '']
 elif not DIFF: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes); the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that hold unused bytes (legend: OUTLINE). Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).' % (BTW, BTH)]
 else: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that hold unused bytes (legend: OUTLINE; the differences from the Japanese ROM are counted in the csv, docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.' % (BTW, BTH)]
 LG.append(('head', 'CODE (traced instructions), by the function of the routine that owns them'))
-for i in range(11): LG.append(('cat', i, fmt(tot_cat[i]) + ' B  ' + pct(tot_cat[i]), CATS[i][1]))
+for i in range(11):                # a category with no byte in this ROM is left out of the legend (owner, 2026-11-13)
+    if tot_cat[i]: LG.append(('cat', i, fmt(tot_cat[i]) + ' B  ' + pct(tot_cat[i]), CATS[i][1]))
 LG.append(('head', 'DATA, by what the bytes are (identified even when no code calls them)'))
-for j in range(11, len(CATS)): LG.append(('cat', j, fmt(tot_cat[j]) + ' B  ' + pct(tot_cat[j]), CATS[j][1]))
+for j in range(11, len(CATS)):
+    if tot_cat[j]: LG.append(('cat', j, fmt(tot_cat[j]) + ' B  ' + pct(tot_cat[j]), CATS[j][1]))
 LG.append(('head', 'OUTLINE: the tiles (16 bytes) that hold unused bytes, in three categories%s' % (' (%s, tools/unused_table.py)' % os.path.relpath(UCATS, REPO) if UCATS != 'none' else '')))
-LG.append(('mark', INK, fmt(mk_tot[0]) + ' B', 'unused code: routines this build never runs (Unused_* names%s), and copies of routines left in the ROM' % (', the proven-dead code of docs 16.15 / 16.21' if OUTLINE == 'reach' and not DIFF else '')))
-LG.append(('mark', UTC, fmt(mk_tot[1]) + ' B', 'unused assets documented by TCRF (the TCRF page and section of each block are in the table; tcrf_check/tcrf_documented.csv, links in tcrf_check/TCRF_SOURCES.md)'))
-LG.append(('mark', UNT, fmt(mk_tot[2]) + ' B', 'unused assets not documented by TCRF (found by this project: Unused_* and Leftover_* names%s)' % (', and the really unused assets of docs 16.24' if 'jp_rev_a' in UCATS else '')))
+if mk_tot[0]: LG.append(('mark', INK, fmt(mk_tot[0]) + ' B', 'unused code: routines this build never runs (Unused_* names%s), and copies of routines left in the ROM' % (', the proven-dead code of docs 16.15 / 16.21' if OUTLINE == 'reach' and not DIFF else '')))
+if mk_tot[1]: LG.append(('mark', UTC, fmt(mk_tot[1]) + ' B', 'unused assets documented by TCRF (the TCRF page and section of each block are in the table; tcrf_check/tcrf_documented.csv, links in tcrf_check/TCRF_SOURCES.md)'))
+if mk_tot[2]: LG.append(('mark', UNT, fmt(mk_tot[2]) + ' B', 'unused assets not documented by TCRF (found by this project: Unused_* and Leftover_* names%s)' % (', and the really unused assets of docs 16.24' if 'jp_rev_a' in UCATS else '')))
 LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
 notes = (['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.'] if UNCLAIMED else []) + \
         ['Not outlined: every byte that this build uses or that no name calls unused, and padding.' + (' No emulator run of this ROM: the code colour is its static trace.' if DIFF else ''),
