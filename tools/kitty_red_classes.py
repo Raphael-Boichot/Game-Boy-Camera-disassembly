@@ -12,6 +12,7 @@ as observed: trace/wp_exec_kitty.npz (exec, evidence C). The other red bytes are
   effect      run only by a picture effect that table 05:4C5F never selects, forced in trace/forced_effects_kitty.npz
   gate        run when one sensor-bank gate is inverted, trace/forced_gates_kitty.npz
   forced-mode run only in modes reached by patching the mode table, trace/forced_kitty.npz
+  forced-run  run only by a request or a state byte poked in WRAM (tools/kitty_forced_runs.py), trace/forced_kitty_runs.npz
   not-run     run by none of these
 Per routine: red bytes per class (trace/red_classes_kitty.csv). Forced classes are evidence I: a forced run is not a way the game runs.
 """
@@ -63,15 +64,16 @@ for f in sorted(glob.glob(os.path.join(P, 'cov_kitty_*.npz'))) + [os.path.join(P
 red = code & ~ex
 def lay(f): z = np.load(os.path.join(P, f)); return (z['ex'][:N] > 0) & red
 fe, fg, fm = lay('forced_effects_kitty.npz'), lay('forced_gates_kitty.npz'), lay('forced_kitty.npz')
+fr = lay('forced_kitty_runs.npz') if os.path.exists(os.path.join(P, 'forced_kitty_runs.npz')) else np.zeros(N, bool)
 cls = np.full(N, '', object)
-cls[red] = 'not-run'; cls[red & fm] = 'forced-mode'; cls[red & fg & ~fm] = 'gate'; cls[red & fe & ~fg & ~fm] = 'effect'
+cls[red] = 'not-run'; cls[red & fr] = 'forced-run'; cls[red & fm] = 'forced-mode'; cls[red & fg & ~fm] = 'gate'; cls[red & fe & ~fg & ~fm] = 'effect'
 names = {}
 for l in open(os.path.join(KD, 'pocketcamera_kitty.sym')):
     p = l.split()
     if len(p) == 2 and ':' in p[0] and not p[1].startswith(('.', 'jr_', 'Jump_', 'Call_')): names[off(int(p[0][:2], 16), int(p[0][3:], 16))] = p[1]
 K = sorted(names)
 def routine(o): i = bisect.bisect_right(K, o) - 1; return K[i] if i >= 0 else 0
-C = ['effect', 'gate', 'forced-mode', 'not-run']; per = collections.defaultdict(collections.Counter)
+C = ['effect', 'gate', 'forced-mode', 'forced-run', 'not-run']; per = collections.defaultdict(collections.Counter)
 for o in np.nonzero(red)[0]: per[routine(int(o))][cls[o]] += 1
 rows = []
 for k in sorted(per):

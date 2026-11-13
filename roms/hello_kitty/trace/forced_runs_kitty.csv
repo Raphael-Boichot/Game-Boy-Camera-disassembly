@@ -1,0 +1,198 @@
+batch,run,poke,end
+sound,song_01,01:02: $D068 = $01,01:02
+sound,song_02,01:02: $D068 = $02,01:02
+sound,song_03,01:02: $D068 = $03,01:02
+sound,song_04,01:02: $D068 = $04,01:02
+sound,song_05,01:02: $D068 = $05,01:02
+sound,song_06,01:02: $D068 = $06,01:02
+sound,song_07,01:02: $D068 = $07,01:02
+sound,song_08,01:02: $D068 = $08,01:02
+sound,song_09,01:02: $D068 = $09,01:02
+sound,song_0A,01:02: $D068 = $0A,01:02
+sound,song_0B,01:02: $D068 = $0B,01:02
+sound,song_0C,01:02: $D068 = $0C,01:02
+sound,song_0D,01:02: $D068 = $0D,01:02
+sound,song_0E,01:02: $D068 = $0E,01:02
+sound,song_0F,01:02: $D068 = $0F,01:02
+sound,song_10,01:02: $D068 = $10,01:02
+sound,song_11,01:02: $D068 = $11,01:02
+sound,song_12,01:02: $D068 = $12,01:02
+sound,song_13,01:02: $D068 = $13,01:02
+sound,song_14,01:02: $D068 = $14,01:02
+sound,song_15,01:02: $D068 = $15,01:02
+sound,song_16,01:02: $D068 = $16,01:02
+sound,song_17,01:02: $D068 = $17,01:02
+sound,song_18,01:02: $D068 = $18,01:02
+sound,song_19,01:02: $D068 = $19,01:02
+sound,song_1A,01:02: $D068 = $1A,01:02
+sound,song_1B,01:02: $D068 = $1B,01:02
+sound,song_1C,01:02: $D068 = $1C,01:02
+sound,song_1D,01:02: $D068 = $1D,01:02
+sound,song_1E,01:02: $D068 = $1E,01:02
+sound,song_1F,01:02: $D068 = $1F,01:02
+sound,song_20,01:02: $D068 = $20,01:02
+sound,song_21,01:02: $D068 = $21,01:02
+sound,song_22,01:02: $D068 = $22,01:02
+sound,song_23,01:02: $D068 = $23,01:02
+sound,song_24,01:02: $D068 = $24,01:02
+sound,song_25,01:02: $D068 = $25,01:02
+sound,song_26,01:02: $D068 = $26,01:02
+sound,song_27,01:02: $D068 = $27,01:02
+sound,song_28,01:02: $D068 = $28,01:02
+sound,song_29,01:02: $D068 = $29,01:02
+sound,song_2A,01:02: $D068 = $2A,01:02
+sound,song_2B,01:02: $D068 = $2B,01:02
+sound,song_2C,01:02: $D068 = $2C,01:02
+sound,song_2D,01:02: $D068 = $2D,01:02
+sound,song_2E,01:02: $D068 = $2E,01:02
+sound,song_2F,01:02: $D068 = $2F,01:02
+sound,sfx1_01,01:02: $D060 = $01,01:02
+sound,sfx1_02,01:02: $D060 = $02,01:02
+sound,sfx1_03,01:02: $D060 = $03,01:02
+sound,sfx1_04,01:02: $D060 = $04,01:02
+sound,sfx1_05,01:02: $D060 = $05,01:02
+sound,sfx1_06,01:02: $D060 = $06,01:02
+sound,sfx1_07,01:02: $D060 = $07,01:02
+sound,sfx1_08,01:02: $D060 = $08,01:02
+sound,sfx1_09,01:02: $D060 = $09,01:02
+sound,sfx1_0A,01:02: $D060 = $0A,01:02
+sound,sfx1_0B,01:02: $D060 = $0B,01:02
+sound,sfx1_0C,01:02: $D060 = $0C,01:02
+sound,sfx1_0D,01:02: $D060 = $0D,01:02
+sound,sfx1_0E,01:02: $D060 = $0E,01:02
+sound,sfx1_0F,01:02: $D060 = $0F,01:02
+sound,sfx1_10,01:02: $D060 = $10,01:02
+sound,sfx1_11,01:02: $D060 = $11,01:02
+sound,sfx1_12,01:02: $D060 = $12,01:02
+sound,sfx1_13,01:02: $D060 = $13,01:02
+sound,sfx1_14,01:02: $D060 = $14,01:02
+sound,sfx1_15,01:02: $D060 = $15,01:02
+sound,sfx1_16,01:02: $D060 = $16,01:02
+sound,sfx1_17,01:02: $D060 = $17,01:02
+sound,sfx1_18,01:02: $D060 = $18,01:02
+sound,sfx1_19,01:02: $D060 = $19,01:02
+sound,sfx1_1A,01:02: $D060 = $1A,01:02
+sound,sfx1_1B,01:02: $D060 = $1B,01:02
+sound,sfx1_1C,01:02: $D060 = $1C,01:02
+sound,sfx1_1D,01:02: $D060 = $1D,01:02
+sound,sfx1_1E,01:02: $D060 = $1E,01:02
+sound,sfx1_1F,01:02: $D060 = $1F,01:02
+sound,sfx1_20,01:02: $D060 = $20,01:02
+sound,sfx1_21,01:02: $D060 = $21,01:02
+sound,sfx1_22,01:02: $D060 = $22,01:02
+sound,sfx1_23,01:02: $D060 = $23,01:02
+sound,sfx1_24,01:02: $D060 = $24,01:02
+sound,sfx1_25,01:02: $D060 = $25,01:02
+sound,sfx1_26,01:02: $D060 = $26,01:02
+sound,sfx1_27,01:02: $D060 = $27,01:02
+sound,sfx1_28,01:02: $D060 = $28,01:02
+sound,sfx1_29,01:02: $D060 = $29,01:02
+sound,sfx1_2A,01:02: $D060 = $2A,01:02
+sound,sfx1_2B,01:02: $D060 = $2B,01:02
+sound,sfx1_2C,01:02: $D060 = $2C,01:02
+sound,sfx1_2D,01:02: $D060 = $2D,01:02
+sound,sfx1_2E,01:02: $D060 = $2E,01:02
+sound,sfx1_2F,01:02: $D060 = $2F,01:02
+sound,sfx1_30,01:02: $D060 = $30,01:02
+sound,sfx1_31,01:02: $D060 = $31,01:02
+sound,sfx1_32,01:02: $D060 = $32,01:02
+sound,sfx1_33,01:02: $D060 = $33,01:02
+sound,sfx1_34,01:02: $D060 = $34,01:02
+sound,sfx1_35,01:02: $D060 = $35,01:02
+sound,sfx1_36,01:02: $D060 = $36,01:02
+sound,sfx1_37,01:02: $D060 = $37,01:02
+sound,sfx1_38,01:02: $D060 = $38,01:02
+sound,sfx1_39,01:02: $D060 = $39,01:02
+sound,sfx1_3A,01:02: $D060 = $3A,01:02
+sound,sfx1_3B,01:02: $D060 = $3B,01:02
+sound,sfx1_3C,01:02: $D060 = $3C,01:02
+sound,sfx1_3D,01:02: $D060 = $3D,01:02
+sound,sfx1_3E,01:02: $D060 = $3E,01:02
+sound,sfx3_01,01:02: $D070 = $01,01:02
+sound,sfx3_02,01:02: $D070 = $02,01:02
+sound,sfx3_03,01:02: $D070 = $03,01:02
+sound,sfx3_04,01:02: $D070 = $04,01:02
+sound,sfx3_05,01:02: $D070 = $05,01:02
+sound,sfx3_06,01:02: $D070 = $06,01:02
+sound,sfx3_07,01:02: $D070 = $07,01:02
+sound,sfx3_08,01:02: $D070 = $08,01:02
+sound,sfx3_09,01:02: $D070 = $09,01:02
+sound,sfx4_01,01:02: $D078 = $01,01:02
+sound,sfx4_02,01:02: $D078 = $02,01:02
+sound,sfx4_03,01:02: $D078 = $03,01:02
+sound,sfx4_04,01:02: $D078 = $04,01:02
+sound,sfx4_05,01:02: $D078 = $05,01:02
+sound,sfx4_06,01:02: $D078 = $06,01:02
+sound,sfx4_07,01:02: $D078 = $07,01:02
+sound,sfx4_08,01:02: $D078 = $08,01:02
+sound,sfx4_09,01:02: $D078 = $09,01:02
+sound,sfx4_0A,01:02: $D078 = $0A,01:02
+sound,sfx4_0B,01:02: $D078 = $0B,01:02
+sound,sfx4_0C,01:02: $D078 = $0C,01:02
+sound,sfx4_0D,01:02: $D078 = $0D,01:02
+sound,sfx4_0E,01:02: $D078 = $0E,01:02
+sound,sfx4_0F,01:02: $D078 = $0F,01:02
+sound,sfx4_10,01:02: $D078 = $10,01:02
+sound,sfx4_11,01:02: $D078 = $11,01:02
+state,mode06_state04,"album_print_start, 150 frames into mode $06: $FF8E = $04",06:0A
+state,mode06_state13,"album_print_start, 150 frames into mode $06: $FF8E = $13",06:1A
+state,mode06_state18,"album_print_start, 150 frames into mode $06: $FF8E = $18",06:1F
+state,mode06_state19,"album_print_start, 150 frames into mode $06: $FF8E = $19",06:1A
+state,mode06_state27,"album_print_start, 150 frames into mode $06: $FF8E = $27",06:0A
+state,mode00_state07,"main menu, $FF8D = $00, $FF8E = $00, 150 frames into mode $00: $FF8E = $07",02:06
+state,mode0D_state01,"main menu, $FF8D = $0D, $FF8E = $00, 150 frames into mode $0D: $FF8E = $01",0D:01
+state,mode0D_state02,"main menu, $FF8D = $0D, $FF8E = $00, 150 frames into mode $0D: $FF8E = $02",0D:02
+state,mode0D_state05,"main menu, $FF8D = $0D, $FF8E = $00, 150 frames into mode $0D: $FF8E = $05",0D:05
+state,mode02_state02,"album_print_start, 150 frames into mode $02: $FF8E = $02",02:02
+state,mode02_state04,"album_print_start, 150 frames into mode $02: $FF8E = $04",0B:04
+state,mode02_state06,"album_print_start, 150 frames into mode $02: $FF8E = $06",0B:04
+state,mode02_state0A,"album_print_start, 150 frames into mode $02: $FF8E = $0A",02:0A
+state,mode02_state0D,"album_print_start, 150 frames into mode $02: $FF8E = $0D",02:06
+state,mode02_state0E,"album_print_start, 150 frames into mode $02: $FF8E = $0E",02:06
+state,mode05_state00,"stamps_page0, 150 frames into mode $05: $FF8E = $00",03:02
+state,mode05_state01,"stamps_page0, 150 frames into mode $05: $FF8E = $01",03:02
+state,mode03_state0A,"album_print_start, 150 frames into mode $03: $FF8E = $0A",03:0B
+state,mode03_state06,"album_print_start, 150 frames into mode $03: $FF8E = $06",03:0B
+state,mode03_state00,"album_print_start, 150 frames into mode $03: $FF8E = $00",03:05
+state,mode03_state01,"album_print_start, 150 frames into mode $03: $FF8E = $01",03:05
+state,mode03_state02,"album_print_start, 150 frames into mode $03: $FF8E = $02",05:06
+state,mode03_state04,"album_print_start, 150 frames into mode $03: $FF8E = $04",03:05
+state,mode03_state05,"album_print_start, 150 frames into mode $03: $FF8E = $05",03:05
+state,mode03_state11,"album_print_start, 150 frames into mode $03: $FF8E = $11",03:05
+state,mode15_state00,"mode $15: not entered, even poked",
+state,mode16_state00,"mode $16: not entered, even poked",
+state,mode0B_state05,"main menu, $FF8D = $0B, $FF8E = $00, 150 frames into mode $0B: $FF8E = $05",0A:02
+state,mode07_state02,"main menu, $FF8D = $07, $FF8E = $00, 150 frames into mode $07: $FF8E = $02",0B:04
+state,mode07_state03,"main menu, $FF8D = $07, $FF8E = $00, 150 frames into mode $07: $FF8E = $03",09:0A
+state,mode07_state04,"main menu, $FF8D = $07, $FF8E = $00, 150 frames into mode $07: $FF8E = $04",09:0A
+state,mode08_state00,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $00",08:00
+state,mode08_state01,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $01",08:01
+state,mode08_state02,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $02",08:02
+state,mode08_state04,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $04",08:04
+state,mode08_state05,"main menu, $FF8D = $08, $FF8E = $00, 150 frames into mode $08: $FF8E = $05",08:05
+state,mode09_state01,"mode $09: not entered, even poked",
+state,mode09_state02,"mode $09: not entered, even poked",
+state,mode09_state03,"mode $09: not entered, even poked",
+state,mode09_state05,"mode $09: not entered, even poked",
+state,mode09_state06,"mode $09: not entered, even poked",
+state,mode09_state08,"mode $09: not entered, even poked",
+state,mode09_state0A,"mode $09: not entered, even poked",
+state,mode09_state0C,"mode $09: not entered, even poked",
+state,mode09_state0E,"mode $09: not entered, even poked",
+state,mode09_state0F,"mode $09: not entered, even poked",
+state,mode09_state07,"mode $09: not entered, even poked",
+state,mode12_state02,"main menu, $FF8D = $12, $FF8E = $00, 150 frames into mode $12: $FF8E = $02",12:01
+state,mode12_state03,"main menu, $FF8D = $12, $FF8E = $00, 150 frames into mode $12: $FF8E = $03",12:04
+state,mode11_state0A,"strawberry_no_kitts, 150 frames into mode $11: $FF8E = $0A",11:0C
+state,mode11_state0C,"strawberry_no_kitts, 150 frames into mode $11: $FF8E = $0C",11:0C
+state,mode11_state0D,"strawberry_no_kitts, 150 frames into mode $11: $FF8E = $0D",11:07
+state,mode11_state0E,"strawberry_no_kitts, 150 frames into mode $11: $FF8E = $0E",11:07
+state,mode0F_state02,"main menu, $FF8D = $0F, $FF8E = $00, 150 frames into mode $0F: $FF8E = $02",0F:02
+state,mode0F_state04,"main menu, $FF8D = $0F, $FF8E = $00, 150 frames into mode $0F: $FF8E = $04",0F:04
+state,mode0F_state0C,"main menu, $FF8D = $0F, $FF8E = $00, 150 frames into mode $0F: $FF8E = $0C",0F:0C
+state,mode10_state00,"main menu, $FF8D = $10, $FF8E = $00, 150 frames into mode $10: $FF8E = $00",10:02
+state,mode10_state01,"main menu, $FF8D = $10, $FF8E = $00, 150 frames into mode $10: $FF8E = $01",10:02
+state,mode10_state04,"main menu, $FF8D = $10, $FF8E = $00, 150 frames into mode $10: $FF8E = $04",10:04
+state,mode0E_state09,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $09",0F:05
+state,mode0E_state0D,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $0D",0E:13
+state,mode0E_state1E,"main menu, $FF8D = $0E, $FF8E = $00, 150 frames into mode $0E: $FF8E = $1E",04:01

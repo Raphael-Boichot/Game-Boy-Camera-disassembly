@@ -1,5 +1,5 @@
 bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
-00,0018,0023,12,Rst18_JumpTable,HAND,,rst $18 body,,00:0018<-- rst $18 body
+00,001A,0023,10,Rst18_JumpTable,FORCED,00:0019,e1 [after insn],Rst18_JumpTable,00:001A<-00:0019 after insn
 00,0060,0062,3,Vec_Joypad,VECTOR,,joypad,,00:0060<-- joypad
 00,0153,015A,8,Call_DE,HAND,,helper,,00:0153<-- helper; 00:0155<-- helper
 00,02B0,02B0,1,Copy_Unrolled,GATE,00:02AE,jr nz (20 e5) [after cc],Copy_Unrolled,00:02B0<-00:02AE after cc
@@ -10,9 +10,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 00,0638,066D,54,Vram_FillSafe,BEHIND,00:0610,behind Vram_FillSafe,Vram_FillSafe,00:0638<-00:0611 branch; 00:0649<-00:0614 branch; 00:065B<-00:0617 branch
 00,06B4,06C3,16,Vram_CopyHBlank,GATE,00:06A5,jr z (28 0d) [branch],Vram_CopyHBlank,00:06B4<-00:06A5 branch
 00,0706,0725,32,Vram_CopyHBlank,GATE,00:06B1,jr z (28 53) [branch],Vram_CopyHBlank,00:0706<-00:06B1 branch
-00,0942,0A4D,268,FrameRec_LoadTilesScreenOff,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,00:0A30<-06:6B46 call
-00,0B34,0B36,3,Fade_GoToC,GATE,00:0B31,cd 5d 20 [after call],Fade_GoToC,00:0B34<-00:0B31 after call
-00,0B39,0B39,1,Fade_GoToC,BEHIND,00:0B34,behind Fade_GoToC,Fade_GoToC,00:0B39<-00:0B34 after call
+00,0942,0A4D,268,FrameRec_LoadTilesScreenOff,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,00:0A30<-06:6B46 call
 00,0C9F,0C9F,1,Bin_ToBcd,GATE,00:0CA2,jr nc (30 fb) [branch],Bin_ToBcd,00:0C9F<-00:0CA2 branch
 00,0E24,0E31,14,Prn_CheckTxDone,GATE,00:0E22,jr z (28 18) [after cc],Prn_CheckTxDone,00:0E24<-00:0E22 after cc; 00:0E30<-00:0E1A branch; 00:0E30<-00:0E1E branch
 00,0EB4,0ED7,36,Prn_SendData,GATE,00:0EB2,jr z (28 24) [after cc],Prn_SendData,00:0EB4<-00:0EB2 after cc
@@ -33,8 +31,8 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 00,1861,1863,3,Boot,BEHIND,00:1810,behind Boot,Boot,00:1861<-00:185B after call
 00,1866,187D,24,Boot,BEHIND,00:1810,behind Boot,Boot,00:1866<-00:1861 after call
 00,1881,1890,16,Boot,BEHIND,00:1810,behind Boot,Boot,00:1881<-00:187B after call
-00,18C6,18CE,9,Lcdc_SetCallback,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,00:18C6<-00:192B jp
-00,1923,192D,11,Stat_SetTileToggleAt4F_B,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,00:1923<-06:6B26 call
+00,18C6,18CE,9,Lcdc_SetCallback,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,00:18C6<-00:192B jp
+00,1923,192D,11,Stat_SetTileToggleAt4F_B,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,00:1923<-06:6B26 call
 00,1BF4,1BF4,1,Frame_UpdateAll,BEHIND,00:0060,behind Vec_Joypad,Vec_Joypad,00:1BF4<-00:0060 jp
 00,1ECF,1ED4,6,ObjCmd_SoundCh1,TABLE,,table 00:1EC1 (call $0194),,00:1ECF<-- table 00:1EC1 (call $0194); 00:1ECF<-- table 00:1EC1
 00,207E,2086,9,Object_CreateWithParam,GATE,00:207C,jr nz (20 f3) [after cc],Object_CreateWithParam,00:207E<-00:207C after cc
@@ -45,11 +43,9 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 00,2328,232C,5,Mode1D_RenderBand,GATE,00:2326,jr z (28 05) [after cc],Mode1D_RenderBand,00:2328<-00:2326 after cc
 00,236B,236E,4,Mode1D_ReadByteFromBank,GATE,00:235A,jr nz (20 0f) [branch],Mode1D_ReadByteFromBank,00:236B<-00:235A branch
 00,23AF,2440,146,Mode1D_InterleaveTileRows,BEHIND,00:2318,behind Mode1D_RenderBand,Mode1D_RenderBand,00:23AF<-00:231A call
-00,24A6,24DF,58,Photo_LoadEmptyPicture,BEHIND,05:6043,behind Mode05_State00,Mode05_State00,00:24A6<-05:6045 call; 00:24A6<-05:6C0C call; 00:24A6<-05:738E call; 00:24A6<-05:73FF call; 00:24A6<-06:67CA call; 00:24A6<-07:4A44 call
 00,256F,25A0,50,Photo_LoadEmptyThumb,BEHIND,02:63A1,behind Album_ObjLoadSlot,Album_ObjLoadSlot,00:256F<-02:63A3 call; 00:256F<-05:7062 call; 00:256F<-05:716E call
 00,25AD,25BB,15,Img_ReduceToThumbnail,GATE,00:25AB,jr nc (30 0f) [after cc],Img_ReduceToThumbnail,00:25AD<-00:25AB after cc
 00,2638,2641,10,Img_ReduceToThumbnail,GATE,00:2636,jr nc (30 0a) [after cc],Img_ReduceToThumbnail,00:2638<-00:2636 after cc
-01,4B61,4BB0,80,Photo_LoadToVram,BEHIND,05:521A,behind Mode02_State0D,Mode02_State0D,01:4B61<-05:5229 far call from 05:5229
 01,4F42,4FC5,132,Photos_LoadPage8,GATE,01:4F3F,cd 65 01 [after call],Photos_LoadPage8,01:4F42<-01:4F3F after call; 01:4F6F<-06:6B41 far call from 06:6B41
 01,569F,56B0,18,RecordBook_CountHundreds,GATE,01:5699,jr c (38 04) [branch],RecordBook_CountHundreds,01:569F<-01:5699 branch
 01,56BA,56BC,3,RecordBook_CountTens,GATE,01:56B7,jp z (ca 8c 56) [after cc],RecordBook_CountTens,01:56BA<-01:56B7 after cc
@@ -60,8 +56,6 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 01,6984,6985,2,Print_LoadFrameGfx,BEHIND,01:697A,behind Print_LoadFrameGfx,Print_LoadFrameGfx,01:6984<-01:697A after call
 01,6CCF,6CD3,5,Mode06_State04,GATE,01:6CCD,jr z (28 05) [after cc],Mode06_State04,01:6CCF<-01:6CCD after cc
 01,7092,7098,7,Mode06_State13,GATE,01:7090,jr z (28 07) [after cc],Mode06_State13,01:7092<-01:7090 after cc
-01,7246,7248,3,Mode06_State18,GATE,01:7244,jr z (28 0c) [after cc],Mode06_State18,01:7246<-01:7244 after cc
-01,7250,7251,2,Mode06_State18,BEHIND,01:7246,behind Mode06_State18,Mode06_State18,01:7250<-01:7246 after call
 01,72AF,72B1,3,Mode06_State19,GATE,01:72A1,jr z (28 0c) [branch],Mode06_State19,01:72AF<-01:72A1 branch
 01,7623,763A,24,Mode06_State27,GATE,01:7621,jr z (28 18) [after cc],Mode06_State27,01:7623<-01:7621 after cc
 02,4A98,4A9D,6,KeyPrompt_SoundCh1,TABLE,,table 02:4A8A (call $0194),,02:4A98<-- table 02:4A8A (call $0194); 02:4A98<-- table 02:4A8A
@@ -81,9 +75,9 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 02,74D0,74D6,7,PrintGame_ObjKitty,GATE,02:74CE,jr z (28 07) [after cc],PrintGame_ObjKitty,02:74D0<-02:74CE after cc
 02,77A6,77B2,13,PrintGame_ShowResult,GATE,02:77A4,jr nc (30 0d) [after cc],PrintGame_ShowResult,02:77A6<-02:77A4 after cc
 02,77D4,77D8,5,PrintGame_ShowResult,BEHIND,02:77A6,behind PrintGame_ShowResult,PrintGame_ShowResult,02:77D4<-02:77A8 branch; 02:77D4<-02:77AC branch
-02,7C02,7C0A,9,Exchange_ObjFollowD9FD,GATE,02:7BFF,cd 25 22 [after call],Exchange_ObjFollowD9FD,02:7C02<-02:7BFF after call
-04,4AF8,4B2B,52,Cam_MainDispatch_EnterBand1,GATE,04:4AE4,jp c (da f8 4a) [branch],Cam_PopcountLevel,04:4AF8<-04:4AE4 branch
-04,4B3C,4BA9,110,Cam_MainDispatch_Band1,FORCED,04:4B39,jp nc (d2 eb 4c) [after cc],Cam_MainDispatch_Band1,04:4B3C<-04:4B39 after cc; 04:4B76<-04:4B30 branch
+04,4AF8,4B05,14,Cam_MainDispatch_EnterBand1,GATE,04:4AE4,jp c (da f8 4a) [branch],Cam_PopcountLevel,04:4AF8<-04:4AE4 branch
+04,4B07,4B2B,37,Cam_MainDispatch_EnterBand1,FORCED,04:4B06,af [after insn],Cam_MainDispatch_EnterBand1,04:4B07<-04:4B06 after insn
+04,4B3C,4B75,58,Cam_MainDispatch_Band1,FORCED,04:4B39,jp nc (d2 eb 4c) [after cc],Cam_MainDispatch_Band1,04:4B3C<-04:4B39 after cc
 04,4C75,4CB1,61,Cam_MainDispatch_Band3,FORCED,04:4C3B,jr nc (30 38) [branch],Cam_MainDispatch_Band3,04:4C75<-04:4C3B branch
 04,4CBA,4CEA,49,Cam_MainDispatch_Band4,FORCED,04:4CB8,jr c (38 31) [after cc],Cam_MainDispatch_Band4,04:4CBA<-04:4CB8 after cc
 04,4FC1,4FC9,9,Cam_CalibSanityCheck_Measure,GATE,04:4FBF,jr c (38 09) [after cc],Cam_CalibSanityCheck_Measure,04:4FC1<-04:4FBF after cc
@@ -98,27 +92,22 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 05,444E,4467,26,Mode0D_State01,GATE,05:444C,jr nz (20 1a) [after cc],Mode0D_State01,05:444E<-05:444C after cc
 05,4499,44A0,8,Mode0D_State02,GATE,05:4497,jr z (28 08) [after cc],Mode0D_State02,05:4499<-05:4497 after cc
 05,4517,451E,8,Mode0D_State05,GATE,05:4515,jr z (28 08) [after cc],Mode0D_State05,05:4517<-05:4515 after cc
-05,47E5,4801,29,Unused_TakePhotos_SetPlaneMasks,BEHIND,05:4CF4,behind Mode02_State0A,Mode02_State0A,05:47E5<-05:4D13 call
-05,4A4F,4A4F,1,Mode02_State02,TABLE,,table 05:52B6,,05:4A4F<-- table 05:52B6; 05:4A4F<-- record table 05:52B6
-05,4B1B,4B31,23,Mode02_State04,TABLE,,table 05:52B6,,05:4B1B<-- table 05:52B6; 05:4B1B<-- record table 05:52B6
+05,47E5,4801,29,Unused_TakePhotos_SetPlaneMasks,BEHIND,05:4D10,behind Unused_Mode02_State0C,Unused_Mode02_State0C,05:47E5<-05:4D13 call
 05,4BB0,4BB7,8,Mode02_State06,GATE,05:4BAE,jr nz (20 08) [after cc],Mode02_State06,05:4BB0<-05:4BAE after cc
-05,4CF4,4D18,37,Mode02_State0A,TABLE,,table 05:52B6,,05:4CF4<-- table 05:52B6; 05:4CF4<-- record table 05:52B6; 05:4D10<-- table 05:52B6; 05:4D10<-- record table 05:52B6
-05,4D1C,4D20,5,Unused_Mode02_State0C,BEHIND,05:4CF4,behind Mode02_State0A,Mode02_State0A,05:4D1C<-05:4D16 after call
+05,4D10,4D18,9,Unused_Mode02_State0C,TABLE,,table 05:52B6,,05:4D10<-- table 05:52B6; 05:4D10<-- record table 05:52B6
+05,4D1C,4D20,5,Unused_Mode02_State0C,BEHIND,05:4D10,behind Unused_Mode02_State0C,Unused_Mode02_State0C,05:4D1C<-05:4D16 after call
 05,4EEE,4EF5,8,TakePhotos_PlaceFrameObjects,GATE,05:4EEC,jr z (28 08) [after cc],TakePhotos_PlaceFrameObjects,05:4EEE<-05:4EEC after cc
 05,4EFE,4F05,8,TakePhotos_PlaceFrameObjects,GATE,05:4EFC,jr z (28 08) [after cc],TakePhotos_PlaceFrameObjects,05:4EFE<-05:4EFC after cc
 05,4F9C,4F9D,2,TakePhotos_FrameCallback,GATE,05:4F9A,jr nz (20 02) [after cc],TakePhotos_FrameCallback,05:4F9C<-05:4F9A after cc
 05,4FD4,4FD5,2,TakePhotos_FrameCallback,GATE,05:4FD2,jr nz (20 02) [after cc],TakePhotos_FrameCallback,05:4FD4<-05:4FD2 after cc
 05,5047,505C,22,TakePhotos_FrameCallback2,GATE,05:5045,jr z (28 16) [after cc],TakePhotos_FrameCallback2,05:5047<-05:5045 after cc
-05,51E5,5201,29,Mode02_State0D,TABLE,,table 05:52B6,,05:51E5<-- table 05:52B6; 05:51E5<-- record table 05:52B6
-05,5205,520E,10,Mode02_State0D,BEHIND,05:51E5,behind Mode02_State0D,Mode02_State0D,05:5205<-05:51FF after call
-05,521A,5289,112,Mode02_State0D,TABLE,,table 05:52B6,,05:521A<-05:520C after call; 05:5244<-- table 05:52B6; 05:5244<-- record table 05:52B6
-05,528D,529E,18,Mode02_State0E,BEHIND,05:521A,behind Mode02_State0D,Mode02_State0D,05:528D<-05:5287 after call; 05:5295<-05:5249 branch
-05,52A2,52AA,9,Mode02_State0E,BEHIND,05:521A,behind Mode02_State0D,Mode02_State0D,05:52A2<-05:529C after call; 05:52AA<-05:529A branch
+05,525E,527F,34,Mode02_State0E,FORCED,05:525C,jr c (38 22) [after cc],Mode02_State0E,05:525E<-05:525C after cc
+05,529C,529E,3,Mode02_State0E,FORCED,05:529A,jr z (28 0e) [after cc],Mode02_State0E,05:529C<-05:529A after cc
+05,52A2,52A9,8,Mode02_State0E,BEHIND,05:529C,behind Mode02_State0E,Mode02_State0E,05:52A2<-05:529C after call
 05,5680,5680,1,Stamp_ArrangeGfx,GATE,05:567E,jr nc (30 01) [after cc],Stamp_ArrangeGfx,05:5680<-05:567E after cc
 05,56CB,56CB,1,Stamp_ArrangeMaskInverted,GATE,05:56C9,jr nc (30 01) [after cc],Stamp_ArrangeMaskInverted,05:56CB<-05:56C9 after cc
 05,5F80,5F85,6,Stamp_SetShiftMasks,GATE,05:5F6C,jr nz (20 12) [branch],Stamp_SetShiftMasks,05:5F80<-05:5F6C branch
 05,6043,6047,5,Mode05_State00,GATE,05:6037,jr c (38 0a) [branch],Mode05_State00,05:6043<-05:6037 branch
-05,60AB,60AF,5,Mode05_State01,GATE,05:6080,jr nz (20 29) [branch],Mode05_State01,05:60AB<-05:6080 branch; 05:60AB<-05:6087 branch
 05,6303,6303,1,AlbumText_CursorUpdate,GATE,05:6301,jr z (28 0a) [after cc],AlbumText_CursorUpdate,05:6303<-05:6301 after cc
 05,6474,6478,5,Text_CopyBigLineVram,GATE,05:6472,jr nz (20 05) [after cc],Text_CopyBigLineVram,05:6474<-05:6472 after cc
 05,64E6,64E6,1,Digits_LowNibbleTileAddr,GATE,05:64E4,jr nz (20 01) [after cc],Digits_LowNibbleTileAddr,05:64E6<-05:64E4 after cc
@@ -151,7 +140,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 06,537D,537D,1,Mode0B_State05,GATE,06:537B,jr z (28 35) [after cc],Mode0B_State05,06:537D<-06:537B after cc
 06,590E,5917,10,Bcd_DrawDigit,GATE,06:590C,jr nz (20 0a) [after cc],Bcd_DrawDigit,06:590E<-06:590C after cc
 06,5A8D,5AA2,22,Counters_AddExchanged,GATE,06:5A8A,cd 5b 01 [after call],Counters_AddExchanged,06:5A8D<-06:5A8A after call
-06,5FF8,605A,99,KeyPrompt_LoadSoundsB,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,06:5FF8<-06:6B7D far call from 06:6B7D
+06,5FF8,605A,99,KeyPrompt_LoadSoundsB,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,06:5FF8<-06:6B7D far call from 06:6B7D
 06,6070,6078,9,Link_SumSlotBuffer,GATE,06:606E,jr nz (20 f4) [after cc],Link_SumSlotBuffer,06:6070<-06:606E after cc
 06,6082,6085,4,Link_CountdownDA00,GATE,06:6080,jr nz (20 01) [after cc],Link_CountdownDA00,06:6082<-06:6080 after cc; 06:6083<-06:6080 branch
 06,608E,60B7,42,Counters_AddReceived,GATE,06:608B,cd 5b 01 [after call],Counters_AddReceived,06:608E<-06:608B after call
@@ -159,8 +148,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 06,614B,614D,3,PhotoTrain_LoadPageMap,GATE,06:6148,cd 60 02 [after call],PhotoTrain_LoadPageMap,06:614B<-06:6148 after call
 06,6179,617F,7,PhotoTrain_FillEmptyTiles,GATE,06:6176,cd 60 02 [after call],PhotoTrain_FillEmptyTiles,06:6179<-06:6176 after call
 06,6278,6278,1,Mode07_State02,GATE,06:6275,cd c8 01 [after call],Mode07_State02,06:6278<-06:6275 after call
-06,62ED,62F8,12,Mode07_State03,TABLE,,table 06:6323,,06:62ED<-- table 06:6323; 06:62ED<-- record table 06:6323
-06,6300,6317,24,Mode07_State04,GATE,06:62FE,jr z (28 17) [after cc],Mode07_State04,06:6300<-06:62FE after cc; 06:6317<-06:62FE branch
+06,6307,630E,8,Mode07_State04,FORCED,06:6305,jr nz (20 08) [after cc],Mode07_State04,06:6307<-06:6305 after cc
 06,65CC,65E1,22,Mode08_State00,GATE,06:65CA,jr nz (20 fc) [after cc],Mode08_State00,06:65CC<-06:65CA after cc
 06,65E9,6604,28,Mode08_State00,BEHIND,06:65CC,behind Mode08_State00,Mode08_State00,06:65E9<-06:65DF after call
 06,6608,6627,32,Mode08_State00,BEHIND,06:65CC,behind Mode08_State00,Mode08_State00,06:6608<-06:6602 after call
@@ -184,40 +172,27 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 06,6881,68F9,121,Mode09_State03,TABLE,,table 06:6CF7,,06:6881<-06:6874 after call; 06:68D2<-- table 06:6CF7; 06:68D2<-- record table 06:6CF7
 06,6901,691E,30,Mode09_State05,GATE,06:68FE,cd 79 60 [after call],Mode09_State05,06:6901<-06:68FE after call
 06,6925,69D4,176,Mode09_State06,GATE,06:6923,jr nz (20 4a) [after cc],Mode09_State06,06:6925<-06:6923 after cc; 06:696F<-06:6923 branch
-06,69EB,6A00,22,Exchange_InitScreen,GATE,06:69E9,jr nz (20 fc) [after cc],Exchange_InitScreen,06:69EB<-06:69E9 after cc
-06,6A08,6A0A,3,Exchange_InitScreen,BEHIND,06:69EB,behind Exchange_InitScreen,Exchange_InitScreen,06:6A08<-06:69FE after call
-06,6A12,6A19,8,Exchange_InitScreen,BEHIND,06:69EB,behind Exchange_InitScreen,Exchange_InitScreen,06:6A12<-06:6A08 after call
-06,6A1D,6A1F,3,Exchange_InitScreen,BEHIND,06:69EB,behind Exchange_InitScreen,Exchange_InitScreen,06:6A1D<-06:6A17 after call
-06,6A2A,6A4D,36,Exchange_InitScreen,BEHIND,06:69EB,behind Exchange_InitScreen,Exchange_InitScreen,06:6A2A<-06:6A1D after call
-06,6A51,6A58,8,Mode09_State08,GATE,06:6A4E,cd d5 69 [after call],Mode09_State08,06:6A51<-06:6A4E after call
-06,6A65,6B04,160,Mode09_State0A,GATE,06:6A63,jr z (28 25) [after cc],Mode09_State0A,06:6A65<-06:6A63 after cc; 06:6A8A<-06:6A63 branch; 06:6ABB<-- table 06:6CF7; 06:6ABB<-- record table 06:6CF7; 06:6AD4<-- table 06:6CF7; 06:6AD4<-- record table 06:6CF7
-06,6B09,6B0B,3,Mode09_State0C,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,06:6B09<-06:6B02 after call
-06,6B13,6B15,3,Mode09_State0C,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,06:6B13<-06:6B09 after call
-06,6B1D,6B2B,15,Mode09_State0C,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,06:6B1D<-06:6B13 after call
-06,6B2F,6B82,84,Mode09_State0C,BEHIND,06:6A65,behind Mode09_State0A,Mode09_State0A,06:6B2F<-06:6B29 after call
+06,6A65,6A89,37,Mode09_State0A,GATE,06:6A63,jr z (28 25) [after cc],Mode09_State0A,06:6A65<-06:6A63 after cc
+06,6A8D,6B04,120,Mode09_State0A,FORCED,06:6A8C,ret z (c8) [after cc],Mode09_State0A,06:6A8D<-06:6A8C after cc; 06:6AB3<-06:6A67 branch; 06:6ABB<-- table 06:6CF7; 06:6ABB<-- record table 06:6CF7; 06:6AD4<-- table 06:6CF7; 06:6AD4<-- record table 06:6CF7
+06,6B09,6B0B,3,Mode09_State0C,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,06:6B09<-06:6B02 after call
+06,6B13,6B15,3,Mode09_State0C,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,06:6B13<-06:6B09 after call
+06,6B1D,6B2B,15,Mode09_State0C,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,06:6B1D<-06:6B13 after call
+06,6B2F,6B82,84,Mode09_State0C,BEHIND,06:6A8D,behind Mode09_State0A,Mode09_State0A,06:6B2F<-06:6B29 after call
 06,6B8D,6BD2,70,Mode09_State0C,TABLE,,table 06:6CF7,,06:6B8D<-06:6B80 after call; 06:6B9F<-- table 06:6CF7; 06:6B9F<-- record table 06:6CF7; 06:6BC3<-- table 06:6CF7; 06:6BC3<-- record table 06:6CF7
 06,6BDA,6BF7,30,Mode09_State0E,GATE,06:6BD7,cd 79 60 [after call],Mode09_State0E,06:6BDA<-06:6BD7 after call
 06,6BFE,6CAA,173,Mode09_State0F,GATE,06:6BFC,jr nz (20 4a) [after cc],Mode09_State0F,06:6BFE<-06:6BFC after cc; 06:6C48<-06:6BFC branch
 06,6CB2,6CBA,9,Mode09_State07,GATE,06:6CB0,jr nz (20 08) [after cc],Mode09_State07,06:6CB2<-06:6CB0 after cc; 06:6CBA<-06:6CB0 branch
 06,6CC7,6CEB,37,CardStats_IncDA64,GATE,06:6CC5,jr z (28 05) [after cc],CardStats_IncDA64,06:6CC7<-06:6CC5 after cc; 06:6CCC<-06:6CC5 branch
-06,6CF4,6CF6,3,Mode09_ExchangeCommunicating,GATE,06:6CF1,cd 89 01 [after call],Mode09_ExchangeCommunicating,06:6CF4<-06:6CF1 after call
 07,411F,4126,8,Mode1B_State01,FORCED,07:411D,jr z (28 08) [after cc],Mode1B_State01,07:411F<-07:411D after cc
 07,4423,443A,24,FrameCorner_Draw,GATE,07:43F6,jp z (ca 23 44) [branch],FrameCorner_Draw,07:4423<-07:43F6 branch; 07:442B<-07:43FB branch; 07:4433<-07:4400 branch
 07,4503,4512,16,CameraFrame_Type24,GATE,07:449B,e9 [hand table 07:449C (jp hl at 07:449B)],CameraFrame_RunType,07:4503<-07:449B hand table 07:449C (jp hl at 07:449B); 07:4503<-- table 07:449C; 07:4505<-07:449B hand table 07:449C (jp hl at 07:449B); 07:4505<-- table 07:449C; 07:4507<-07:449B hand table 07:449C (jp hl at 07:449B); 07:4507<-- table 07:449C
-07,49BC,49BF,4,Mode12_State02,GATE,07:49AA,jr c (38 10) [branch],Mode12_State02,07:49BC<-07:49AA branch
-07,4A42,4A4B,10,Mode12_State03,GATE,07:4A36,jr c (38 0a) [branch],Mode12_State03,07:4A42<-07:4A36 branch
-07,51CE,51E4,23,Mode11_State0A,TABLE,,table 07:541F,,07:51CE<-- table 07:541F; 07:51CE<-- record table 07:541F
 07,5283,5289,7,Mode11_State0A,GATE,07:5277,jr c (38 0a) [branch],Mode11_State0A,07:5283<-07:5277 branch
 07,52BA,52C1,8,Mode11_State0C,GATE,07:52B8,jr nz (20 08) [after cc],Mode11_State0C,07:52BA<-07:52B8 after cc
-07,5349,5365,29,Mode11_State0D,TABLE,,table 07:541F,,07:5349<-- table 07:541F; 07:5349<-- record table 07:541F
-07,5369,536B,3,Mode11_State0D,BEHIND,07:5349,behind Mode11_State0D,Mode11_State0D,07:5369<-07:5363 after call
-07,5377,53ED,119,Mode11_State0D,TABLE,,table 07:541F,,07:5377<-07:5369 after call; 07:53A8<-- table 07:541F; 07:53A8<-- record table 07:541F
-07,53F1,5407,23,Mode11_State0E,BEHIND,07:5377,behind Mode11_State0D,Mode11_State0D,07:53F1<-07:53EB after call; 07:53F9<-07:53AD branch
-07,540B,5413,9,Mode11_State0E,BEHIND,07:5377,behind Mode11_State0D,Mode11_State0D,07:540B<-07:5405 after call; 07:5413<-07:53FE branch
+07,53C2,53E3,34,Mode11_State0E,FORCED,07:53C0,jr c (38 22) [after cc],Mode11_State0E,07:53C2<-07:53C0 after cc
+07,5400,5407,8,Mode11_State0E,FORCED,07:53FE,jr z (28 13) [after cc],Mode11_State0E,07:5400<-07:53FE after cc
+07,540B,5412,8,Mode11_State0E,BEHIND,07:5400,behind Mode11_State0E,Mode11_State0E,07:540B<-07:5405 after call
 07,557D,5582,6,Puzzle15_IsSolved,GATE,07:557B,jr nz (20 06) [after cc],Puzzle15_IsSolved,07:557D<-07:557B after cc
 07,59FE,5A02,5,Mode0F_State02,GATE,07:59FC,jr nz (20 05) [after cc],Mode0F_State02,07:59FE<-07:59FC after cc
-07,5A7E,5AA2,37,Mode0F_State04,TABLE,,table 07:5E4B,,07:5A7E<-- table 07:5E4B; 07:5A7E<-- table 07:5AB8; 07:5A7E<-- table 07:5AC4; 07:5A7E<-- record table 07:5E4B
-07,5AAE,5AB1,4,Mode0F_State04,BEHIND,07:5A7E,behind Mode0F_State04,Mode0F_State04,07:5AAE<-07:5AA0 after call
 07,5B8C,5B8E,3,Puzzle15_FadeToState0C,TABLE,,table 07:5B7D (call $0194),,07:5B8C<-- table 07:5B7D (call $0194); 07:5B8C<-- table 07:5B7D
 07,5B92,5B9A,9,Puzzle15_FadeToState0C,BEHIND,07:5B8C,behind Puzzle15_FadeToState0C,Puzzle15_FadeToState0C,07:5B92<-07:5B8C after call
 07,5BDB,5BFA,32,Puzzle15_FrameCallback,BEHIND,07:5B8C,behind Puzzle15_FadeToState0C,Puzzle15_FadeToState0C,07:5BDB<-07:5B8C far callback (args of 07:5B8C)
@@ -225,7 +200,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 07,5CC6,5CCE,9,Puzzle15_SetState0C,TABLE,,table 07:5CAE (call $0194),,07:5CC6<-- table 07:5CAE (call $0194); 07:5CC6<-- table 07:5CAE
 07,5CFF,5D08,10,Puzzle15_FrameCallback2,GATE,07:5CFD,jr nz (20 17) [after cc],Puzzle15_FrameCallback2,07:5CFF<-07:5CFD after cc
 07,5D0C,5D15,10,Puzzle15_FrameCallback2,BEHIND,07:5CFF,behind Puzzle15_FrameCallback2,Puzzle15_FrameCallback2,07:5D0C<-07:5D06 after call
-07,5D3D,5E3F,259,Mode0F_State0C,TABLE,,table 07:5E4B,,07:5D3D<-07:5AAE call; 07:5D3D<-- table 07:5E4B; 07:5D3D<-- record table 07:5E4B; 07:5D9D<-- table 07:5E4B; 07:5D9D<-- record table 07:5E4B; 07:5DF5<-- table 07:5E4B
+07,5D9D,5E3F,163,Mode0F_State0D,TABLE,,table 07:5E4B,,07:5D9D<-- table 07:5E4B; 07:5D9D<-- record table 07:5E4B; 07:5DF5<-- table 07:5E4B; 07:5DF5<-- record table 07:5E4B; 07:5E04<-- table 07:5E4B; 07:5E04<-- record table 07:5E4B
 07,5E8B,5E8E,4,Scratch_HasPrize3,GATE,07:5E82,jr z (28 07) [branch],Scratch_HasPrize3,07:5E8B<-07:5E82 branch
 07,5F0F,5F12,4,Scratch_PrizeTable,GATE,07:5F09,jr nz (20 04) [branch],Scratch_PrizeTable,07:5F0F<-07:5F09 branch; 07:5F0F<-07:5F17 branch
 07,60E5,60EA,6,Mode10_State00,GATE,07:60E3,jr nc (30 06) [after cc],Mode10_State00,07:60E5<-07:60E3 after cc
@@ -235,7 +210,7 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 07,65EE,65F4,7,KittHost_TextStep,GATE,07:65AD,jp z (ca ee 65) [branch],KittHost_TextStep,07:65EE<-07:65AD branch
 07,68A9,68C2,26,KittHost_PayPuzzle,GATE,07:6880,jr c (38 27) [branch],KittHost_PayPuzzle,07:68A9<-07:6880 branch
 07,690C,6920,21,Mode0E_State09,GATE,07:68F3,jr z (28 17) [branch],Mode0E_State09,07:690C<-07:68F3 branch
-07,69A7,6A3A,148,Mode0E_State0D,TABLE,,table 07:6BD4,,07:69A7<-- table 07:6BD4; 07:69A7<-- record table 07:6BD4; 07:69B5<-- table 07:6BD4; 07:69B5<-- record table 07:6BD4; 07:69EF<-- table 07:6BD4; 07:69EF<-- record table 07:6BD4
+07,6A2D,6A30,4,Mode0E_State0F,FORCED,07:6A2B,jr nz (20 04) [after cc],Mode0E_State0F,07:6A2D<-07:6A2B after cc
 07,6A9A,6AB3,26,KittHost_PayScratch,GATE,07:6A71,jr c (38 27) [branch],KittHost_PayScratch,07:6A9A<-07:6A71 branch
 07,6BBE,6BC7,10,Mode0E_State1E,GATE,07:6BB2,jr z (28 0a) [branch],Mode0E_State1E,07:6BBE<-07:6BB2 branch
 08,6AD8,6ADC,5,Sgb_SendPacket,GATE,08:6AD6,jr z (28 05) [after cc],Sgb_SendPacket,08:6AD8<-08:6AD6 after cc
@@ -270,48 +245,8 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways
 08,6BF7,6C12,28,Sgb_FreezeScreen,GATE,08:6BF5,jr z (28 19) [after cc],Sgb_FreezeScreen,08:6BF7<-08:6BF5 after cc; 08:6C10<-08:6BF5 branch
 08,6C1F,6C36,24,Sgb_UnfreezeScreen,GATE,08:6C1C,cd 64 03 [after call],Sgb_UnfreezeScreen,08:6C1F<-08:6C1C after call
 08,6C92,6C98,7,Sgb_Detect,GATE,08:6C8F,cd 9b 6a [after call],Sgb_Detect,08:6C92<-08:6C8F after call
-0F,4339,4340,8,Sfx1_Init_04,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4339<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4339<-- table 0F:41C9
-0F,4347,435B,21,Sfx1_Init_3B,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4347<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4347<-- table 0F:41C9; 0F:434F<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:434F<-- table 0F:4245
-0F,43AF,43C1,19,Sfx1_Init_24,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:43AF<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:43AF<-- table 0F:41C9; 0F:43B7<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:43B7<-- table 0F:4245
-0F,43D4,43F1,30,Sfx1_Step_26,GATE,0F:52E7,e9 [hand table 0F:4245 (jp hl at 0F:52E7)],Snd_RunSfx1,0F:43D4<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:43D4<-- table 0F:4245
-0F,43FC,441C,33,Sfx1_Init_25,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:43FC<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:43FC<-- table 0F:41C9; 0F:4404<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:4404<-- table 0F:4245
-0F,4422,4429,8,Sfx1_Init_27,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4422<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4422<-- table 0F:41C9
-0F,44CC,44D3,8,Sfx1_Init_1C,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:44CC<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:44CC<-- table 0F:41C9
-0F,44DC,44F4,25,Sfx1_Init_1B,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:44DC<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:44DC<-- table 0F:41C9; 0F:44E9<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:44E9<-- table 0F:4245
 0F,45EB,45EB,1,Sfx1_Step_05,GATE,0F:45E8,jp z (ca 5e 47) [after cc],Sfx1_Step_05,0F:45EB<-0F:45E8 after cc
-0F,4606,4637,50,Sfx1_Init_0A,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4606<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4606<-- table 0F:41C9; 0F:460E<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:460E<-- table 0F:4245
-0F,4671,4678,8,Sfx1_Init_21,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4671<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4671<-- table 0F:41C9
-0F,467E,4685,8,Sfx1_Init_22,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:467E<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:467E<-- table 0F:41C9
-0F,4748,4758,17,Sfx1_Init_1F,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4748<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4748<-- table 0F:41C9
 0F,479A,479A,1,Sfx1_Step_06_0D,GATE,0F:4798,jr z (28 c4) [after cc],Sfx1_Step_06_0D,0F:479A<-0F:4798 after cc
-0F,47E7,4806,32,Sfx1_Init_14,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:47E7<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:47E7<-- table 0F:41C9; 0F:47F4<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:47F4<-- table 0F:4245
-0F,480C,482B,32,Sfx1_Init_15,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:480C<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:480C<-- table 0F:41C9; 0F:4819<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:4819<-- table 0F:4245
-0F,4831,4840,16,Sfx1_Init_18,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4831<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4831<-- table 0F:41C9; 0F:4839<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4839<-- table 0F:41C9
-0F,4858,4863,12,Sfx1_Init_0C,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4858<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4858<-- table 0F:41C9
-0F,4933,493A,8,Sfx1_Init_2E,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4933<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4933<-- table 0F:41C9
-0F,4940,4962,35,Sfx1_Init_32,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4940<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4940<-- table 0F:41C9; 0F:494B<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:494B<-- table 0F:4245
-0F,498B,49C7,61,Sfx1_Init_33,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:498B<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:498B<-- table 0F:41C9; 0F:499B<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:499B<-- table 0F:4245
-0F,4AEC,4B02,23,Sfx1_Init_39,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4AEC<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4AEC<-- table 0F:41C9; 0F:4AF9<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:4AF9<-- table 0F:4245
-0F,4BDE,4BFE,33,Sfx1_Init_13,GATE,0F:52D9,e9 [hand table 0F:41C9 (jp hl at 0F:52D9)],Snd_RunSfx1,0F:4BDE<-0F:52D9 hand table 0F:41C9 (jp hl at 0F:52D9); 0F:4BDE<-- table 0F:41C9; 0F:4BE6<-0F:52E7 hand table 0F:4245 (jp hl at 0F:52E7); 0F:4BE6<-- table 0F:4245
-0F,4CB4,4CDB,40,Sfx4_Init_09,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4CB4<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4CB4<-- table 0F:42E9; 0F:4CBC<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4CBC<-- table 0F:430D
-0F,4CFD,4D46,74,Sfx4_Init_05,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4CFD<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4CFD<-- table 0F:42E9; 0F:4D14<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4D14<-- table 0F:42E9; 0F:4D1C<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4D1C<-- table 0F:430D
-0F,4D5B,4D7C,34,Sfx4_Init_01,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4D5B<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4D5B<-- table 0F:42E9; 0F:4D63<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4D63<-- table 0F:430D
-0F,4D81,4D88,8,Sfx4_Init_0D,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4D81<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4D81<-- table 0F:42E9
-0F,4D8D,4D94,8,Sfx4_Init_0F,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4D8D<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4D8D<-- table 0F:42E9
-0F,4DC6,4DDC,23,Sfx4_Init_0E,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4DC6<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4DC6<-- table 0F:42E9; 0F:4DCE<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4DCE<-- table 0F:430D
-0F,4DF6,4E15,32,Sfx4_Init_07,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4DF6<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4DF6<-- table 0F:42E9; 0F:4DFE<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4DFE<-- table 0F:430D; 0F:4E0B<-0F:4DDB jr
-0F,4E91,4EAD,29,Sfx4_Init_11,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4E91<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4E91<-- table 0F:42E9; 0F:4E99<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4E99<-- table 0F:430D
-0F,4EB2,4EB9,8,Sfx4_Init_08,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4EB2<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4EB2<-- table 0F:42E9
-0F,4EDF,4EF9,27,Sfx4_Init_03,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4EDF<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4EDF<-- table 0F:42E9; 0F:4EF1<-0F:4F1D jr
-0F,4EFE,4F1E,33,Sfx4_Init_10,GATE,0F:52F9,e9 [hand table 0F:42E9 (jp hl at 0F:52F9)],Snd_RunSfx4,0F:4EFE<-0F:52F9 hand table 0F:42E9 (jp hl at 0F:52F9); 0F:4EFE<-- table 0F:42E9; 0F:4F06<-0F:5307 hand table 0F:430D (jp hl at 0F:5307); 0F:4F06<-- table 0F:430D
-0F,4F44,4F8D,74,Sfx3_Init_07,GATE,0F:52B9,e9 [hand table 0F:42C1 (jp hl at 0F:52B9)],Snd_RunSfx3,0F:4F44<-0F:52B9 hand table 0F:42C1 (jp hl at 0F:52B9); 0F:4F44<-- table 0F:42C1; 0F:4F6A<-0F:52C7 hand table 0F:42D5 (jp hl at 0F:52C7); 0F:4F6A<-- table 0F:42D5
-0F,5029,505A,50,Sfx3_Step_02,GATE,0F:52C7,e9 [hand table 0F:42D5 (jp hl at 0F:52C7)],Snd_RunSfx3,0F:5029<-0F:52C7 hand table 0F:42D5 (jp hl at 0F:52C7); 0F:5029<-- table 0F:42D5; 0F:504D<-0F:52B9 hand table 0F:42C1 (jp hl at 0F:52B9); 0F:504D<-- table 0F:42C1
-0F,5060,5073,20,Sfx3_Step_04,GATE,0F:52C7,e9 [hand table 0F:42D5 (jp hl at 0F:52C7)],Snd_RunSfx3,0F:5060<-0F:52C7 hand table 0F:42D5 (jp hl at 0F:52C7); 0F:5060<-- table 0F:42D5
-0F,507B,5088,14,Sfx3_Init_04,GATE,0F:52B9,e9 [hand table 0F:42C1 (jp hl at 0F:52B9)],Snd_RunSfx3,0F:507B<-0F:52B9 hand table 0F:42C1 (jp hl at 0F:52B9); 0F:507B<-- table 0F:42C1
-0F,50BA,50DF,38,Sfx3_Step_05_0A,GATE,0F:52C7,e9 [hand table 0F:42D5 (jp hl at 0F:52C7)],Snd_RunSfx3,0F:50BA<-0F:52C7 hand table 0F:42D5 (jp hl at 0F:52C7); 0F:50BA<-- table 0F:42D5; 0F:50BA<-- table 0F:42D5; 0F:50D2<-0F:52B9 hand table 0F:42C1 (jp hl at 0F:52B9); 0F:50D2<-- table 0F:42C1; 0F:50D2<-- table 0F:42C1
-0F,50E5,511A,54,Sfx3_Init_06,GATE,0F:52B9,e9 [hand table 0F:42C1 (jp hl at 0F:52B9)],Snd_RunSfx3,0F:50E5<-0F:52B9 hand table 0F:42C1 (jp hl at 0F:52B9); 0F:50E5<-- table 0F:42C1; 0F:50F7<-0F:52C7 hand table 0F:42D5 (jp hl at 0F:52C7); 0F:50F7<-- table 0F:42D5
-0F,5138,513F,8,Sfx3_Begin_Wave518A,BEHIND,0F:50E5,behind Sfx3_Init_06,Sfx3_Init_06,0F:5138<-0F:50E5 call
-0F,5158,515D,6,Sfx3_Begin_Wave517A,BEHIND,0F:4F44,behind Sfx3_Init_07,Sfx3_Init_07,0F:5158<-0F:4F44 call
 0F,51FA,51FB,2,Snd_Sfx_Start,GATE,0F:51F8,jr z (28 12) [after cc],Snd_Sfx_Start,0F:51FA<-0F:51F8 after cc
 0F,5204,520B,8,Snd_Sfx_Start,GATE,0F:51F4,jr z (28 0e) [branch],Snd_Sfx_Start,0F:5204<-0F:51F4 branch
 0F,54B0,54CC,29,Snd_Op9E_SetDurTable,GATE,0F:553B,jp z (ca b0 54) [branch],Snd_Trk_FetchOp,0F:54B0<-0F:553B branch; 0F:54C4<-0F:5540 branch

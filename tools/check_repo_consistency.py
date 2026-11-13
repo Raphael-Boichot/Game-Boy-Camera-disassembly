@@ -320,6 +320,15 @@ if getattr(A, 'rom_proto', None):
     _m = subprocess.run([sys.executable, 'tools/proto_red_bgb.py', A.rom_proto, '--check'], capture_output=True, text=True, cwd=ROOT)   # the tester's BGB runs as coverage
     (ok if not _m.returncode else bad)('proto', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 if getattr(A, 'rom_kitty', None):
+    import numpy as np
+    _t = tempfile.mkdtemp()                       # the forced runs of step 9 (tools/kitty_forced_runs.py) are deterministic: rerun and compare
+    _m = subprocess.run([sys.executable, 'tools/kitty_forced_runs.py', A.rom_kitty, '--out', os.path.join(_t, 'f.npz'), '--report', os.path.join(_t, 'f.csv')], capture_output=True, text=True, cwd=ROOT)
+    _kd = os.path.join(ROOT, 'roms', 'hello_kitty', 'trace')
+    if _m.returncode: bad('kitty', 'tools/kitty_forced_runs.py failed: %s' % (_m.stderr or _m.stdout)[-300:])
+    elif open(os.path.join(_t, 'f.csv'), 'rb').read() != open(os.path.join(_kd, 'forced_runs_kitty.csv'), 'rb').read() or \
+         any((np.load(os.path.join(_t, 'f.npz'))[k] != np.load(os.path.join(_kd, 'forced_kitty_runs.npz'))[k]).any() for k in ('ex', 'dr')):
+        bad('kitty', 'trace/forced_kitty_runs.npz / forced_runs_kitty.csv are not what tools/kitty_forced_runs.py makes today')
+    else: ok('kitty', 'forced runs fresh (%s)' % _m.stdout.strip())
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
