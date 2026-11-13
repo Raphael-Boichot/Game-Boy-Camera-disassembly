@@ -19,6 +19,8 @@ Batches:
           the Strawberry Channel camera, the sensor's picture buffer (SRAM bank 0 $A100-$AEFF) overwritten every frame with a
           plane of one byte ($FF dark, $00 bright, $55, $AA, ramps both ways, a flicker), 1,200 frames, then A (a shot) and
           300 frames more; and the first boot (128 KiB of $00, the sensor calibration) under the same planes.
+  gain    the gain band of the auto-exposure ($DA08) poked to 0-11 in the live view, under a $00 and a $FF plane, 600 frames
+          each: the bands $08 and $0A (Cam_MainDispatch_Band3 / Band4) that the fake light alone never reaches.
 """
 import sys, os, csv, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); KD = os.path.join(REPO, 'roms', 'hello_kitty')
@@ -117,6 +119,16 @@ for nm, vals in SEQS:                              # the first boot (all-$00 SRA
     for v in vals:
         for _ in range(1200 // len(vals)): G.run(1); sr[0x000:0xF00] = v
     acc(); rows.append(['sensor', 'first_boot_%s' % nm, 'first boot from 128 KiB of $00: SRAM $A100-$AEFF = %s every frame' % '/'.join('$%02X' % v for v in vals), ms()])
+# gain: the auto-exposure's gain band $DA08 poked in the live view (0-11), under a dark and a bright plane (2026-11-13: the fake
+# light alone leaves it at 5; with it poked, Cam_MainDispatch runs Band1-4)
+G.restore(menu)
+for kk in taps('A') + [0] * 120: G.keys(kk); G.run(1)
+G.keys(0); s0 = G.snapshot()
+for band in range(12):
+    for v in (0x00, 0xFF):
+        G.restore(s0); G.L.gb_cov_clear(); sr = G.sram(); G.poke(0xDA08, band)
+        for _ in range(600): G.run(1); sr[0x000:0xF00] = v
+        acc(); rows.append(['gain', 'band%02X_plane%02X' % (band, v), 'live view: $DA08 = $%02X, SRAM $A000-$AEFF = $%02X every frame' % (band, v), ms()])
 np.savez_compressed(a.out, ex=tot[0], dr=tot[1])
 with open(a.report, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['batch', 'run', 'poke', 'end']); w.writerows(rows)

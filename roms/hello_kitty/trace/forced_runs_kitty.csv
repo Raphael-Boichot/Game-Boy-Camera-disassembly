@@ -227,3 +227,27 @@ sensor,first_boot_greyAA,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $AA 
 sensor,first_boot_dark_to_bright,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $FF/$AA/$55/$00 every frame,00:08
 sensor,first_boot_bright_to_dark,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $00/$55/$AA/$FF every frame,00:08
 sensor,first_boot_flicker,first boot from 128 KiB of $00: SRAM $A100-$AEFF = $00/$FF/$00/$FF/$00/$FF/$00/$FF every frame,00:08
+gain,band00_plane00,"live view: $DA08 = $00, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band00_planeFF,"live view: $DA08 = $00, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band01_plane00,"live view: $DA08 = $01, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band01_planeFF,"live view: $DA08 = $01, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band02_plane00,"live view: $DA08 = $02, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band02_planeFF,"live view: $DA08 = $02, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band03_plane00,"live view: $DA08 = $03, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band03_planeFF,"live view: $DA08 = $03, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band04_plane00,"live view: $DA08 = $04, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band04_planeFF,"live view: $DA08 = $04, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band05_plane00,"live view: $DA08 = $05, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band05_planeFF,"live view: $DA08 = $05, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band06_plane00,"live view: $DA08 = $06, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band06_planeFF,"live view: $DA08 = $06, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band07_plane00,"live view: $DA08 = $07, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band07_planeFF,"live view: $DA08 = $07, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band08_plane00,"live view: $DA08 = $08, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band08_planeFF,"live view: $DA08 = $08, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band09_plane00,"live view: $DA08 = $09, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band09_planeFF,"live view: $DA08 = $09, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band0A_plane00,"live view: $DA08 = $0A, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band0A_planeFF,"live view: $DA08 = $0A, SRAM $A000-$AEFF = $FF every frame",02:01
+gain,band0B_plane00,"live view: $DA08 = $0B, SRAM $A000-$AEFF = $00 every frame",02:01
+gain,band0B_planeFF,"live view: $DA08 = $0B, SRAM $A000-$AEFF = $FF every frame",02:01

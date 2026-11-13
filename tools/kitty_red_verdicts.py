@@ -19,6 +19,10 @@ is the routine the piece lies in, the gate owner the routine of the branch it ha
   PRINTER      a branch on the printer's replies or on a print frame's descriptors (Prn_*, Mode06_*, Mode1D_*, PrintGame_*);
   SGB          a Super Game Boy feature the SGB runs did not use (Sgb_*);
   SAVE         needs another save (the Kitt payments of the games with too few Kitts);
+  SOUND        a track opcode or branch not met in the first 300 frames of every song and effect id;
+  GAME         an outcome of a Kitt game the runs did not produce;
+  ARGS         a path of a shared helper for an argument no caller passed in the runs;
+  INPUT        a menu value, card field or key sequence the runs did not use;
   OPEN         not examined yet.
 Only UNREACHABLE is drawn purple; the other classes stay red, with their reason.
 """
@@ -26,7 +30,7 @@ import sys, os, csv, re, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); P = os.path.join(REPO, 'roms', 'hello_kitty', 'trace')
 ap = argparse.ArgumentParser(); ap.add_argument('--check', action='store_true'); a = ap.parse_args()
 NOSLOT = {'05:7060', '05:716C', '05:6C0A', '05:738C', '05:73FD', '05:6045', '06:67CA', '07:4A44'}   # pieces after the six callers' jr c (hand, 2026-11-13)
-DEAD_MODES = r'Mode(13|15|16|17|18|19|1A|1B|1C)_State'
+DEAD_MODES = r'Mode(13|15|16|17|18|19|1A|1B|1C)_(State|FadeOut)'
 RULES = [
     ('UNREACHABLE', 'C', lambda o, g: re.match(DEAD_MODES, o) or re.match(DEAD_MODES, g),
      'a state of a mode that nothing enters ($13, $15-$1D: no code stores it as a constant outside its own state $00; README, "The modes seen only by forcing")'),
@@ -38,7 +42,15 @@ RULES = [
      'the exchange: a reply or a command of the partner that the ten BGB exchanges of 2026-11-13 did not send'),
     ('SENSOR', 'I', lambda o, g: re.match(r'(Cam_|Mode02_State0[CDE]|Mode11_State0E)', o) or g.startswith('Cam_'), 'a branch on the sensor picture: another light level than the runs saw; the fake-light runs of tools/kitty_forced_runs.py (a byte plane written over SRAM $A000-$AEFF every frame, 2026-11-13) move the exposure ($DA17-$DA18) but leave the gain band $DA08 at 5, so the bands $08 / $0A (Cam_MainDispatch_Band3 / 4) and their neighbours stay unrun'),
     ('PRINTER', 'I', lambda o, g: re.match(r'(Prn_|Mode06_|Mode1D_|PrintGame_|Print)', o) or re.match(r'(Prn_|Mode06_|Mode1D_)', g), 'a branch on the printer replies or on a print frame descriptor that the prints did not produce'),
+    ('UNREACHABLE', 'C', lambda o, g: o == 'VramQueue_Run', 'the VRAM queue at $D700 is always empty: the three stores to its count $D881 store 0 (00:17CB, 00:1872, 00:1B4C) and no other code names $D881 or $D700'),
+    ('UNREACHABLE', 'I', lambda o, g: o == 'Vec_Joypad' or g == 'Vec_Joypad', 'the joypad interrupt: never raised in the runs, its bit apparently never set in IE'),
     ('SGB', 'I', lambda o, g: o.startswith('Sgb_'), 'a Super Game Boy path the SGB runs did not take'),
+    ('SOUND', 'I', lambda o, g: o.startswith(('Snd_', 'Sfx')), 'a track opcode or branch that the first 300 frames of each song and effect id (all requested, tools/kitty_forced_runs.py) did not meet'),
+    ('GAME', 'I', lambda o, g: not o.startswith('KittHost_Pay') and re.match(r'(Puzzle15_|Scratch_|KittHost_|Mode0E_|Mode0F_|Mode10_|RecordBook_)', o), 'an outcome of a Kitt game the runs did not produce (a solved puzzle, a prize, a record)'),
+    ('ARGS', 'I', lambda o, g: re.match(r'(Vram_|Copy_|Call_DE|Rst18_|Bcd_|Bin_ToBcd|Digits_|Delay_Frames|Object_|Objects_|Img_ReduceToThumbnail|Text_CopyBigLineVram|ScriptSlots_Add|Obj_SoundCh1|ObjCmd_SoundCh1|ScriptCmd_SoundCh1|KeyPrompt_SoundCh1|Rng_Init)', o),
+     'a path of a shared helper for an argument or a table entry that no caller passed in the runs (a short length, a digit value, a sound channel command)'),
+    ('INPUT', 'I', lambda o, g: re.match(r'(IdCard_|NameCardEdit_|Stamp_|Album|Photo_DrawNumber|TakePhotos_|CameraFrame_|FrameCorner_|PhotoTrain_|Mode0[0-5BD]_|Mode11_)', o),
+     'a menu value, a card field or a key sequence that the runs did not use'),
     ('LINK', 'I', lambda o, g: o.startswith('Counters_AddExchanged'), 'the counter of exchanged photos: after an exchange path the BGB exchanges did not finish'),
     ('SAVE', 'I', lambda o, g: o.startswith('KittHost_Pay'), 'the Kitt payment fails (a far call to 06:5B59 with the price returns carry): a save with fewer Kitts than the price; the runs start with 999,999 or 0 Kitts and do not open this game with 0'),
 ]
