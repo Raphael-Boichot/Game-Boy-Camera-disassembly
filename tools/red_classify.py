@@ -145,8 +145,14 @@ for j, (s, e, ways) in enumerate(rows):
         behind[j] += n
     out.append(['%02X' % ((s >> 14) if s >= 0x4000 else 0), key(s)[3:], key(e)[3:], n, owner(s), c, g, gi, go,
                 '; '.join('%s<-%s %s' % (key(k), key(src) if src is not None else '-', kd) for k, src, kd in ways[:6])])
+HDR = ['bank', 'start', 'end', 'bytes', 'owner', 'class', 'gate', 'gate_insn', 'gate_owner', 'ways']
+RV = os.path.join(D, 'trace', 'red_verdicts_%s.csv' % T)          # hand verdicts (prototype, 2026-11-13): one per piece, by its start
+if os.path.exists(RV):
+    V = {(r['bank'], r['start']): r['class'] for r in csv.DictReader(open(RV))}
+    HDR.append('verdict'); out = [o + [V.get((o[0], o[1]), '')] for o in out]
+    print('%s_red verdicts: %s' % (T, ', '.join('%s %d' % (k, sum(o[3] for o in out if o[-1] == k)) for k in ('UNREACHABLE', 'FAULT', 'RUN', 'DATA', ''))))
 with open(OUT, 'w', newline='') as f:
-    w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'owner', 'class', 'gate', 'gate_insn', 'gate_owner', 'ways']); w.writerows(out)
+    w = csv.writer(f, lineterminator='\n'); w.writerow(HDR); w.writerows(out)
 print('%s_red: %d bytes in %d pieces: %s' % (T, int(red.sum()), len(rows), ', '.join('%s %d' % (k, tot[k]) for k in ('GATE', 'FORCED', 'TABLE', 'BEHIND', 'VECTOR', 'HAND', 'NONE'))))
 for j, n in behind.most_common(12):
     s = rows[j][0]; print('  %6d B  %s %-28s %s %s' % (n, key(s), owner(s)[:28], cls[j], out[j][7][:70]))

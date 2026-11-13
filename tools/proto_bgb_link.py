@@ -9,7 +9,8 @@ lists in the format of tcrf_check/tools/bgb_run.py (`KEYS:hold:wait,...`, played
 each demo is padded with empty frames to --frames so that both instances run the same length. At the end, for each instance:
 GAME_SEQ ($C0A0), the link role $C0D7 (0 none, 1 follower: the first byte received was $00, 2 master: the first byte received was
 the idle $FE), the shown value $C0DD, and the screen OUTPREFIX_<n>.png.
-Menu path to COM: title A, then Down x5 on the menu (SRAM TEST ... COM), A.
+Menu path to COM: title A, then Down x5 on the menu (SRAM TEST ... COM), A. BGB_WP (a -wp list) logs watchpoint hits to
+/home/claude/bgbp_<n>/debugmsg.txt (tools/proto_red_bgb.py).
 """
 import sys, os, subprocess, time, shutil, argparse
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tcrf_check', 'tools'))
@@ -31,6 +32,9 @@ for n, seq, net in ((1, a.seq1, ['-listen', '127.0.0.1:8766']), (2, a.seq2, ['-c
         if os.path.exists(f): os.remove(f)
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(d, 'bgb.exe'), '-headless', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(d, 'bgb.ini'),
            '-rom', rom, '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav'] + net
+    if os.environ.get('BGB_WP'):                  # logging watchpoints (as tcrf_check/tools/bgb_run.py): hits go to <instance dir>/debugmsg.txt
+        cmd += ['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1']
+        if os.path.exists(os.path.join(d, 'debugmsg.txt')): os.remove(os.path.join(d, 'debugmsg.txt'))
     procs.append(subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE))
     if n == 1: time.sleep(4)
 for p in procs:

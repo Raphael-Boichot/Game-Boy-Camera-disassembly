@@ -317,6 +317,8 @@ if getattr(A, 'rom_proto', None):
     (ok if not _m.returncode else bad)('proto', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/proto_unused_sheet.py', A.rom_proto, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('proto', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
+    _m = subprocess.run([sys.executable, 'tools/proto_red_bgb.py', A.rom_proto, '--check'], capture_output=True, text=True, cwd=ROOT)   # the tester's BGB runs as coverage
+    (ok if not _m.returncode else bad)('proto', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
 if getattr(A, 'rom_kitty', None):
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])

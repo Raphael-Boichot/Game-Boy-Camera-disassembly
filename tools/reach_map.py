@@ -11,7 +11,8 @@ has no evidence for stays empty:
   light blue  executed or read only in a forced run: trace/forced_*.npz
   GREEN       (ported builds) never run here but the same code as a Japanese routine that ran: class JP_EQUIV of port/never_run_<tag>.csv
   PURPLE      (ported builds) never run and proven dead, unused or unreachable: classes JP_DEAD, UNUSED and UNREACHABLE of
-              port/never_run_<tag>.csv
+              port/never_run_<tag>.csv; (prototype) classes UNREACHABLE and FAULT (runs only on a faulty cartridge) of
+              trace/red_verdicts_<tag>.csv, whose class RUN counts as executed
   RED         proven code (class C of trace/rom_map_<tag>.csv) that no run executed and nothing above explains (a code byte that a
               run only read, never executed, is red too)
   YELLOW      asset data that no organic run read and that the ROM's never-reached table calls unused (assets/never_reached_<tag>.csv:
@@ -65,6 +66,13 @@ if os.path.exists(nr):
         b = int(r['bank'], 16); o1, o2 = off(b, int(r['start'], 16)), off(b, int(r['end'], 16)) + 1
         if r['class'] == 'JP_EQUIV': green[o1:o2] = True
         elif r['class'] in ('JP_DEAD', 'UNUSED', 'UNREACHABLE'): dead[o1:o2] = True
+rv = os.path.join(D, 'trace', 'red_verdicts_%s.csv' % T)   # hand verdicts on never-run code (prototype, 2026-11-13)
+run_x = np.zeros(N, bool)
+if os.path.exists(rv):
+    for r in csv.DictReader(open(rv)):
+        b = int(r['bank'], 16); o1, o2 = off(b, int(r['start'], 16)), off(b, int(r['end'], 16)) + 1
+        if r['class'] in ('UNREACHABLE', 'FAULT'): dead[o1:o2] = True
+        elif r['class'] == 'RUN': run_x[o1:o2] = True
 unused = np.zeros(N, bool); used_x = np.zeros(N, bool)
 nrc = os.path.join(D, 'assets', 'never_reached_%s.csv' % T)
 if os.path.exists(nrc):
@@ -83,6 +91,7 @@ cat[nh & ~code & (typed | used_x)] = 4                        # orange
 cat[nh & ~code & ~typed & ~used_x] = 9                                  # grey-blue
 cat[nh & ~code & ~typed & ~used_x & pad] = 3; cat[nh & ~code & ~typed & ~used_x & fill] = 8
 cat[nh & unused] = 7                                          # yellow
+ex = ex | run_x                                               # RUN verdicts: code shown run by the flow (prototype)
 nx = ~ex & code                                               # proven code counts as reached only when executed (a read of code bytes is not a run)
 cat[nx] = 2                                                   # red
 cat[nx & green] = 5; cat[nx & dead] = 6                       # green / purple (ported builds)
