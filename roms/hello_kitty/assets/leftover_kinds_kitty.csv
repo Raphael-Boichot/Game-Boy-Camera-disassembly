@@ -62,3 +62,4 @@ Src_11_5FE0_Mode0B_NameCardEdit_State10,T_UI,I,"two blank tiles (32 x $00) copie
 Leftover_22_7FE0,MAP,I,"a tile map row: one tile id ($A8) repeated, after Map_22_7D40"
 Leftover_33_71F0,MAP,I,"a tile map row: consecutive tile ids ($88-$90) with $E0 / $E2 / $F8 borders, after Map_33_7030"
 Src_04_4923_Mode00_BootAndTitle_State00,TBL,I,the same bytes as the Japanese Cam_DitherRamp_ParamsA region (0A:7C23)
+Leftover_0F_7E43,SOUND,I,"sound data in the sound bank: the last 70 bytes of the track that Snd_0F_7DE8_EntryOf572F starts (0F:7DE8-7E88 was one never-read block before the puzzle runs of 2026-11-14 read part of it), the same note and opcode bytes ($9D, $A1-$A6)"

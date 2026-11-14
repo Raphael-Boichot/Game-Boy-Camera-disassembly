@@ -46,6 +46,8 @@ What it checks (each line of the report is one check)
   headsets   (with --rom) why the ball head animation is stored twice: the frames F0-F4 and F5-F9 differ only inside the ids $20-$2F (10 or 11 tiles of 16), set A meets the body strip 16:5580 (seam 47-48) and set B the strip 11:4000 (41-42), each twice worse on the other, F4 and F9 carry the collar tiles of their strip byte for byte; the README paragraph of 16.24 that quotes them
   roundtrip  (--roundtrip) mgbdis + rgbasm rebuild the ROM from the sym byte-exact, plain, after sym_fix.py --tables, and after sym_fix.py --tables --ram (RAM names; the listing keeps only the excluded numbers); the plain listing's own labels are counted (`jr_` / `Jump_` / `Call_`, quoted in the README L5 row)
   kinds      in the three source trees, a block named as tiles (Gfx_ / Sheet_ / Font_) is not copied by `farcopy` to the BG map ($9800-$9FFF), and a block named as a map (Map_ / BgMap_) is not copied below $9800 (the layout maps take the kind from the name: 2026-11-02, bank $20)
+  facts      every figure tagged <!--f:KEY--> in README.md, ROADMAP.md and roms/*/README.md equals what tools/facts.py computes from the files (and the
+             current figures of the roadmap's status tables carry a tag); every ROM with never-run code gives each piece a verdict
   source     (--roundtrip) roms/jp_rev_a/src/ is exactly what tools/make_source.py writes, and it builds the ROM byte-exact (PNG -> 2bpp, rgbasm, rgblink, rgbfix); the README sentence that quotes its counts
 
 Frozen inputs that are NOT regenerated: roms/jp_rev_a/experiments/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
@@ -65,7 +67,8 @@ A = ap.parse_args()
 os.chdir(ROOT)
 FAIL = []; WARN = []; SKIP = []
 def P(p): return os.path.join(ROOT, p)
-def rd(p): return open(P(p), encoding='utf-8').read()
+def rd(p): return re.sub(r'<!--f:[^>]*-->', '', open(P(p), encoding='utf-8').read())     # the tags of tools/facts.py are invisible to the quoted-count checks
+def _untag(t): return re.sub(r'<!--f:[^>]*-->', '', t)
 def num(s): return int(s.replace(',', ''))
 def fmt(n): return '{:,}'.format(n)
 def ok(name, msg=''):
@@ -333,6 +336,8 @@ if getattr(A, 'rom_kitty', None):
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_jp_crosscheck.py', '--check'], capture_output=True, text=True, cwd=ROOT)   # each never-run piece against the Japanese ROM
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
+    _m = subprocess.run([sys.executable, 'tools/kitty_puzzle.py', A.rom_kitty, '--core', '--check'], capture_output=True, text=True, cwd=ROOT)   # the 15 puzzle campaign (deterministic)
+    (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
@@ -449,14 +454,14 @@ if A.rom_kitty:
             if open(os.path.join(tk, 'kinds.csv'), 'rb').read() != open(KD + 'assets/layout_kind_overrides_kitty.csv', 'rb').read():
                 bad('kitty', 'assets/layout_kind_overrides_kitty.csv is not what tools/kitty_layout_kinds.py makes today: rerun it, then tools/status_maps.py --kitty')
             else: ok('kitty', 'layout_kind_overrides_kitty.csv fresh')
-            mm = re.search(r'([\d,]+) bytes of kind-less blocks given a kind, ([\d,]+) left uncertain', open(KD + 'README.md').read())   # need= the L3 bullet, Data kinds of the layout map
+            mm = re.search(r'([\d,]+) bytes of kind-less blocks given a kind, ([\d,]+) left uncertain', _untag(open(KD + 'README.md').read()))   # need= the L3 bullet, Data kinds of the layout map
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the data kinds (need=N bytes of kind-less blocks given a kind, M left uncertain)')
             elif (int(mm.group(1).replace(',', '')), int(mm.group(2).replace(',', ''))) != (int(m6.group(1)), int(m6.group(2))):
                 bad('kitty', 'roms/hello_kitty/README.md: data kinds quoted %s, tools/kitty_layout_kinds.py gives %s / %s' % (mm.group(0), m6.group(1), m6.group(2)))
         # the unused-asset table (hand-made, assets/never_reached_kitty.csv): its counts quoted in the Kitty README, its picture present
         _ua = list(csv.DictReader(open(KD + 'assets/never_reached_kitty.csv', encoding='utf-8')))
         _uv = collections.Counter(r['verdict'] for r in _ua)
-        mm = re.search(r'never_reached_kitty\.csv\)\s+lists (\d+) items: (\d+) unused, (\d+) unused because only an unreachable mode loads them, (\d+) used but not read in the runs, (\d+) open', open(KD + 'README.md', encoding='utf-8').read())   # need= the unused-assets paragraph
+        mm = re.search(r'never_reached_kitty\.csv\)\s+lists (\d+) items: (\d+) unused, (\d+) unused because only an unreachable mode loads them, (\d+) used but not read in the runs, (\d+) open', _untag(open(KD + 'README.md', encoding='utf-8').read()))   # need= the unused-assets paragraph
         want = (len(_ua), _uv['unused'], _uv['unused (unreachable mode)'], sum(v for k, v in _uv.items() if k.startswith('used')), _uv['open'])
         if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/never_reached_kitty.csv (need=lists N items: a unused, b unused because only an unreachable mode loads them, c used but not read in the runs, d open)')
         elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: unused assets quoted %s, the table gives %s' % (mm.groups(), want))
@@ -464,14 +469,14 @@ if A.rom_kitty:
         else: ok('kitty', 'unused-asset table and its README quote agree (%d items)' % len(_ua))
         # the never-read sprite layouts (tools/kitty_sprite_layouts.py): its counts quoted in the Kitty README
         _sl = list(csv.DictReader(open(KD + 'assets/sprite_layouts_unread_kitty.csv', encoding='utf-8'))); _sc = collections.Counter(r['class'] for r in _sl)
-        mm = re.search(r'([\d,]+) layouts \(([\d,]+) bytes\) are never read in the runs.*?; (\d+) are named only by object scripts of bank `\$02` that no run started.*?, (\d+) by words that a run read.*?, (\d+) only from code, (\d+) by nothing', open(KD + 'README.md', encoding='utf-8').read(), re.S)   # need= the sprite-layout paragraph
+        mm = re.search(r'([\d,]+) layouts \(([\d,]+) bytes\) are never read in the runs.*?; (\d+) are named only by object scripts of bank `\$02` that no run started.*?, (\d+) by words that a run read.*?, (\d+) only from code, (\d+) by nothing', _untag(open(KD + 'README.md', encoding='utf-8').read()), re.S)   # need= the sprite-layout paragraph
         want = (len(_sl), sum(int(r['bytes']) for r in _sl), _sc['unread-data-ref'], _sc['read-ref'], _sc['code-ref'], _sc['none'])
         if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes assets/sprite_layouts_unread_kitty.csv (need=N layouts (B bytes) are never read in the runs ... a ... b ... c only from code, d by nothing)')
         elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: sprite layouts quoted %s, the table gives %s' % (mm.groups(), want))
         else: ok('kitty', 'never-read sprite layouts quoted as in the table (%d)' % len(_sl))
         # the screens the core runs reach (tools/kitty_modes_seen.py): the counts quoted in the Kitty README
         _ms = list(csv.DictReader(open(KD + 'trace/modes_seen_kitty.csv'))); want = (len(_ms), sum(r['check'] == 'end' for r in _ms), sum(r['check'] != 'end' for r in _ms))
-        mm = re.search(r'modes_seen_kitty\.csv\)?, written by `tools/kitty_modes_seen\.py` from the four corpora: (\d+) \(mode, state\) pairs.*?; (\d+) of them end on their pair when replayed from a cold boot in the core, (\d+) ', open(KD + 'README.md', encoding='utf-8').read())   # need= the screens-reached bullet
+        mm = re.search(r'modes_seen_kitty\.csv\)?, written by `tools/kitty_modes_seen\.py` from the four corpora: (\d+) \(mode, state\) pairs.*?; (\d+) of them end on their pair when replayed from a cold boot in the core, (\d+) ', _untag(open(KD + 'README.md', encoding='utf-8').read()))   # need= the screens-reached bullet
         if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes trace/modes_seen_kitty.csv (need=written by `tools/kitty_modes_seen.py` from the four corpora: N (mode, state) pairs ...; a of them end on their pair when replayed from a cold boot in the core, b ...)')
         elif tuple(int(x) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: screens reached quoted %s, trace/modes_seen_kitty.csv gives %s' % (mm.groups(), want))
         elif any(not r['keys'] or len(r['keys']) != 2 * int(r['frames']) for r in _ms): bad('kitty', 'trace/modes_seen_kitty.csv: a row whose key history does not have one byte per frame')
@@ -479,7 +484,7 @@ if A.rom_kitty:
         # the never-run code (tools/kitty_red_classes.py, tools/kitty_gates.py): the classes quoted in the Kitty README
         _rc = list(csv.DictReader(open(KD + 'trace/red_classes_kitty.csv', encoding='utf-8'))); _ng = len(list(csv.DictReader(open(KD + 'trace/gates_kitty.csv'))))
         _cl = ['effect', 'gate', 'forced-mode', 'not-run']; want = tuple([sum(int(r['red_bytes']) for r in _rc), _ng] + [sum(int(r[c]) for r in _rc) for c in _cl])
-        mm = re.search(r'never-run code \(.*?\.\*\* ([\d,]+) bytes of the trace never ran.*?lists the (\d+) executed conditional branches.*?\* ([\d,]+) bytes, effect:.*?\* ([\d,]+) bytes, gate:.*?\* ([\d,]+) bytes, forced-mode:.*?\* ([\d,]+) bytes, not-run:', open(KD + 'README.md', encoding='utf-8').read(), re.S)   # need= the never-run paragraph
+        mm = re.search(r'never-run code \(.*?\.\*\* ([\d,]+) bytes of the trace never ran.*?lists the (\d+) executed conditional branches.*?\* ([\d,]+) bytes, effect:.*?\* ([\d,]+) bytes, gate:.*?\* ([\d,]+) bytes, forced-mode:.*?\* ([\d,]+) bytes, not-run:', _untag(open(KD + 'README.md', encoding='utf-8').read()), re.S)   # need= the never-run paragraph
         if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes trace/red_classes_kitty.csv (need=never-run code (...).** N bytes of the trace never ran ... lists the G executed conditional branches ... * a bytes, effect: ... * b bytes, gate: ... * c bytes, forced-mode: ... * d bytes, not-run:)')
         elif tuple(int(x.replace(',', '')) for x in mm.groups()) != want: bad('kitty', 'roms/hello_kitty/README.md: never-run code quoted %s, the tables give %s' % (mm.groups(), want))
         else: ok('kitty', 'never-run code classes quoted as in trace/red_classes_kitty.csv (%d bytes)' % want[0])
@@ -489,7 +494,7 @@ if A.rom_kitty:
         else:
             ok('kitty', 'doubts list sym_unconclusive_kitty fresh')
             _dg = collections.Counter(r['group'] for r in csv.DictReader(open(KD + 'disasm/sym_unconclusive_kitty.csv')))
-            mm = re.search(r'Doubts list \([^)]*\)\.\*\* (\d+) names: (\d+) in modes reached only by forcing, (\d+) in states the runs did not reach, (\d+) settled as unused', open(KD + 'README.md').read())   # need= the doubts bullet
+            mm = re.search(r'Doubts list \([^)]*\)\.\*\* (\d+) names: (\d+) in modes reached only by forcing, (\d+) in states the runs did not reach, (\d+) settled as unused', _untag(open(KD + 'README.md').read()))   # need= the doubts bullet
             if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the doubts list (need=Doubts list (...).** N names: a in modes reached only by forcing, b in states the runs did not reach, c settled as unused)')
             elif tuple(int(x) for x in mm.groups()) != (sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']):
                 bad('kitty', 'roms/hello_kitty/README.md: doubts quoted %s, the list gives %d / %d / %d / %d' % (mm.group(0)[-90:], sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']))
@@ -500,7 +505,7 @@ if A.rom_kitty:
         if rc.returncode or not mrc: bad('kitty', 'tools/red_classify.py --tag kitty failed: %s' % (rc.stderr or rc.stdout)[-300:])
         elif open(os.path.join(tk, 'red.csv'), 'rb').read() != open(KD + 'trace/red_kitty.csv', 'rb').read(): bad('kitty', 'trace/red_kitty.csv is not what tools/red_classify.py makes today: rerun it')
         else:
-            qq = re.search(r'Classified \(2026-11-12, `tools/red_classify.py`\)\.\*\* ([\d,]+) bytes in ([\d,]+) pieces', open(KD + 'README.md').read())
+            qq = re.search(r'Classified \(2026-11-12, `tools/red_classify.py`\)\.\*\* ([\d,]+) bytes in ([\d,]+) pieces', _untag(open(KD + 'README.md').read()))
             if not qq or (int(qq.group(1).replace(',', '')), int(qq.group(2).replace(',', ''))) != (int(mrc.group(1)), int(mrc.group(2))):
                 bad('kitty', 'roms/hello_kitty/README.md does not quote the red classification (%s bytes in %s pieces)' % (mrc.group(1), mrc.group(2)))
             else: ok('kitty', 'trace/red_kitty.csv fresh: %s' % mrc.group(3))
@@ -508,10 +513,10 @@ if A.rom_kitty:
         m5 = re.search(r'kitty_reach: blue (\d+), red (\d+), grey-blue (\d+), orange (\d+)', r5.stdout)
         if r5.returncode or not m5: bad('kitty', 'tools/reach_map.py --tag kitty failed: %s' % (r5.stderr or r5.stdout)[-300:])
         else:
-            if '](kitty_rom_reachability_map.png)' not in open(KD + 'README.md').read(): bad('maps', 'roms/hello_kitty/README.md does not show kitty_rom_reachability_map.png')
+            if '](kitty_rom_reachability_map.png)' not in _untag(open(KD + 'README.md').read()): bad('maps', 'roms/hello_kitty/README.md does not show kitty_rom_reachability_map.png')
             if not same_png(rp, KD + 'kitty_rom_reachability_map.png'): bad('kitty', 'kitty_rom_reachability_map.png is not what tools/reach_map.py --tag kitty draws today: rerun it')
             else: ok('kitty', 'kitty_rom_reachability_map.png fresh')
-            KR = open(KD + 'README.md').read()
+            KR = _untag(open(KD + 'README.md').read())
             for what, pat, val in (('red bytes', r'([\d,]+) bytes of proven code never executed \(red', m5.group(2)), ('grey-blue bytes', r'([\d,]+) bytes of data never read and explained by nothing \(grey-blue', m5.group(3)),
                                    ('orange bytes', r'([\d,]+) bytes never read but explained by a loader site or a table \(orange', m5.group(4)), ('blue bytes', r'([\d,]+) bytes executed or read \(blue', m5.group(1))):
                 mm = re.search(pat, KR)     # need= the sentence of the L2 section, What is still missing
@@ -573,7 +578,7 @@ if A.rom_proto:
             prc = _runp('tools/red_classify.py', '--tag', 'proto', A.rom_proto, '--out', j('red.csv'))      # the classification of the red bytes
             mprc = re.search(r'proto_red: (\d+) bytes in (\d+) pieces', prc.stdout)
             if prc.returncode or not mprc or open(j('red.csv'), 'rb').read() != open(PD + 'trace/red_proto.csv', 'rb').read(): bad('proto', 'trace/red_proto.csv is not what tools/red_classify.py makes today: rerun it')
-            elif not re.search(r'Classified \(2026-11-12, `tools/red_classify.py`\)\.\*\* %s bytes in %s pieces' % (format(int(mprc.group(1)), ','), mprc.group(2)), open(PD + 'README.md').read()):
+            elif not re.search(r'Classified \(2026-11-12, `tools/red_classify.py`\)\.\*\* %s bytes in %s pieces' % (format(int(mprc.group(1)), ','), mprc.group(2)), _untag(open(PD + 'README.md').read())):
                 bad('proto', 'roms/prototype_debagame/README.md does not quote the red classification (%s bytes in %s pieces)' % mprc.groups())
             else: ok('proto', 'trace/red_proto.csv fresh')
             p5 = _runp('tools/reach_map.py', '--tag', 'proto', A.rom_proto, j('reach.png'))      # the coverage map, shown in roms/prototype_debagame/README.md
@@ -1383,6 +1388,23 @@ tm = rd('tcrf_check/TCRF_CHECKLIST.md'); tc = open(P('tcrf_check/TCRF_CHECKLIST.
 ids_md = sorted(set(re.findall(r'^\| ([A-Z]\d\d) \|', tm, re.M))); ids_csv = sorted(set(re.findall(r'^"?([A-Z]\d\d)"?,', tc, re.M)))
 if ids_md != ids_csv: bad('tcrf', 'checklist ids differ: md %s csv %s' % (ids_md, ids_csv))
 else: ok('tcrf', '%d checklist ids in both files' % len(ids_md))
+
+# ------------------------------------------------------------------ facts: every figure tagged <!--f:KEY--> in the READMEs and ROADMAP.md (tools/facts.py)
+_fa = [sys.executable, 'tools/facts.py']
+for _t in ('us', 'gold', 'kitty', 'proto'):
+    if getattr(A, 'rom_' + _t, None): _fa += ['--rom-' + _t, getattr(A, 'rom_' + _t)]
+_docs = ['README.md', 'ROADMAP.md'] + sorted(os.path.relpath(f, ROOT) for f in glob.glob(os.path.join(ROOT, 'roms', '*', 'README.md')))
+if all(getattr(A, 'rom_' + _t, None) for _t in ('us', 'gold', 'kitty', 'proto')):
+    _m = subprocess.run(_fa + ['--check'] + _docs, capture_output=True, text=True, cwd=ROOT)
+    for _l in _m.stdout.strip().split('\n')[:-1]: bad('facts', _l)
+    (ok if not _m.returncode else bad)('facts', _m.stdout.strip().split('\n')[-1][-300:] if _m.stdout.strip() else (_m.stderr or '')[-300:])
+    _j = json.loads(subprocess.run(_fa + ['--json'], capture_output=True, text=True, cwd=ROOT).stdout)
+    # the same rule for every ROM whose L2 is done: no never-run code without a verdict (red with no reason)
+    for _t in ('us', 'gold', 'kitty', 'proto'):
+        if _j.get('%s.unverdicted' % _t, 0): bad('facts', '%s: %d never-run pieces have no verdict row (trace/red_verdicts_%s.csv)' % (_t, _j['%s.unverdicted' % _t], _t))
+        elif _j.get('%s.reach.red' % _t, 0) and '%s.unverdicted' % _t not in _j: bad('facts', '%s: %d red bytes and no verdict table' % (_t, _j['%s.reach.red' % _t]))
+    ok('facts', 'every ROM with never-run code gives each piece a verdict (us, gold, kitty, proto)')
+else: ok('facts', 'skipped: needs --rom-us, --rom-gold, --rom-kitty and --rom-proto')
 
 # ------------------------------------------------------------------ round trip
 if A.roundtrip:

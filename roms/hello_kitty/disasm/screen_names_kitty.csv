@@ -38,7 +38,7 @@ mode,state,name,tag,evidence
 0E,14,Scratch card: paying the Kitts,C,BGB screenshot (Kitt coin shown)
 0E,16,Scratch card: scratch two spots to find a pair,C,BGB screenshot (2かしょえらんで おなじものを そろえてね)
 0E,20,Scratch card: quit in the middle? (quit / continue),C,BGB screenshot (まだ とちゅうよ やめちゃう? やめる / つづける)
-0F,05,15 puzzle board,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+0F,05,15 puzzle: the deal (the board shuffled by random slides),C,"passed through on the way to the board (BGB and the core, tools/kitty_puzzle.py)"
 10,02,Scratch card board,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 10,02,Scratch card board,C,BGB screenshot (SCRATCH CARD; six hidden spots and a hand pointer)
 10,04,Scratch card: spots scratched (prizes in Kitts),C,BGB screenshot (cherries 20 Kitt / bears 40 Kitt under the scratched spots)
@@ -48,7 +48,7 @@ mode,state,name,tag,evidence
 12,01,"Slide show settings (start, speed, order)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 12,04,Slide show playing,C,BGB screenshot (the stored photos one after another; BGB's test picture)
 14,01,"Print error: #01-#04, picture 1 of 4",C,"BGB screenshots (also START or A in the album print, mode $06 state $0A, with no printer) with the printer helper: #02 no answer or bit 4; #01 bit 7; #03 bit 5; #04 bit 6 (screens/print_errors.png); the picture is one of four, drawn at random by Mode14_State00 (Rng_Next & 3, table 06:4464: 3E:5C00 / 3E:6A00 / 3F:4000 / 3D:6A00); the message slides from right to left under it"
-17,01,Print error,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
+17,01,"Print error, unnumbered (not the error screen $14)",I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 18,01,Pompompurin picture,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 19,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
 1A,01,Empty photo frame,I,"BGB screenshot of a forced run (ModeTable slot $01 patched): what the mode draws, not a way the game reaches it"
@@ -67,3 +67,8 @@ mode,state,name,tag,evidence
 02,01-S3,Take photos: slide show (later),C,BGB screenshot
 05,06-W,Stamps: the stamp window (8 pages),C,"BGB screenshot (START on the stamp screen; Right Right reach the page tabs; screens/stamps_kitty.png shows every page)"
 03,05-N,View photos: the no-photo picture (forced),I,"BGB screenshot of a patched copy: Photo_FindSlotA always fails; the picture 11:7000 (しゃしんがないよ) that Photo_LoadEmptyPicture draws when a photo number has no slot"
+0F,0A,15 puzzle: a drawing,C,BGB screenshot (tools/kitty_puzzle.py: the board dealt)
+0F,0B,15 puzzle: a photo,C,BGB screenshot (tools/kitty_puzzle.py: the board dealt)
+0F,0C,15 puzzle: the live camera,C,BGB screenshot (tools/kitty_puzzle.py: the board dealt)
+0F,0F,15 puzzle: solved,C,BGB screenshot (tools/kitty_puzzle.py: after the solver's slides)
+0E,11,15 puzzle: stop in the middle? (yes / no),C,BGB screenshot (tools/kitty_puzzle.py: B on the board)

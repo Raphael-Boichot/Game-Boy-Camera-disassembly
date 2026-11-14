@@ -1,5 +1,5 @@
 bank,start,end,bytes,owner,kitty_verdict,jp_addr,jp_routine,jp_fate,category
-00,001A,0023,10,Rst18_JumpTable,ARGS,,,,NO_JP
+00,0018,0023,12,Rst18_JumpTable,ARGS,,,,NO_JP
 00,0060,0062,3,Vec_Joypad,UNREACHABLE,,,,NO_JP
 00,0153,015A,8,Call_DE,ARGS,,,,NO_JP
 00,02B0,02B0,1,Copy_Unrolled,ARGS,,,,NO_JP
@@ -120,7 +120,6 @@ bank,start,end,bytes,owner,kitty_verdict,jp_addr,jp_routine,jp_fate,category
 06,4E3A,4E3C,3,NameCardEdit_FieldAction,INPUT,,,,NO_JP
 06,4E4D,4E4F,3,NameCardEdit_FieldAction,INPUT,,,,NO_JP
 06,537D,537D,1,Mode0B_State05,INPUT,,,,NO_JP
-06,590E,5917,10,Bcd_DrawDigit,ARGS,,,,NO_JP
 06,5A8D,5AA2,22,Counters_AddExchanged,LINK,,,,NO_JP
 06,5FF8,605A,99,KeyPrompt_LoadSoundsB,LINK,,,,NO_JP
 06,609A,60B6,29,Counters_AddReceived,LINK,,,,NO_JP
@@ -152,15 +151,6 @@ bank,start,end,bytes,owner,kitty_verdict,jp_addr,jp_routine,jp_fate,category
 07,53C2,53E3,34,Mode11_State0E,SENSOR,,,,NO_JP
 07,5400,5407,8,Mode11_State0E,SENSOR,,,,NO_JP
 07,540B,5412,8,Mode11_State0E,SENSOR,,,,NO_JP
-07,557D,5582,6,Puzzle15_IsSolved,GAME,,,,NO_JP
-07,59FE,5A02,5,Mode0F_State02,GAME,,,,NO_JP
-07,5B8C,5B8E,3,Puzzle15_FadeToState0C,GAME,,,,NO_JP
-07,5B92,5B9A,9,Puzzle15_FadeToState0C,GAME,,,,NO_JP
-07,5BDB,5BFA,32,Puzzle15_FrameCallback,GAME,,,,NO_JP
-07,5BFE,5C11,20,Puzzle15_FrameCallback,GAME,,,,NO_JP
-07,5CC6,5CCE,9,Puzzle15_SetState0C,GAME,,,,NO_JP
-07,5CFF,5D08,10,Puzzle15_FrameCallback2,GAME,,,,NO_JP
-07,5D0C,5D15,10,Puzzle15_FrameCallback2,GAME,,,,NO_JP
 07,5E8B,5E8E,4,Scratch_HasPrize3,GAME,,,,NO_JP
 07,5F0F,5F12,4,Scratch_PrizeTable,GAME,,,,NO_JP
 07,60E5,60EA,6,Mode10_State00,GAME,,,,NO_JP
@@ -168,9 +158,6 @@ bank,start,end,bytes,owner,kitty_verdict,jp_addr,jp_routine,jp_fate,category
 07,6289,628C,4,Mode10_State04,GAME,,,,NO_JP
 07,65C2,65D6,21,KittHost_TextStep,GAME,,,,NO_JP
 07,65EE,65F4,7,KittHost_TextStep,GAME,,,,NO_JP
-07,68A9,68C2,26,KittHost_PayPuzzle,SAVE,,,,NO_JP
-07,690C,6920,21,Mode0E_State09,GAME,,,,NO_JP
-07,6A2D,6A30,4,Mode0E_State0F,GAME,,,,NO_JP
 07,6A9A,6AB3,26,KittHost_PayScratch,SAVE,,,,NO_JP
 07,6BBE,6BC7,10,Mode0E_State1E,GAME,,,,NO_JP
 08,6AD8,6ADC,5,Sgb_SendPacket,SGB,00:1CD0,Sgb_SendPacket (edited copy 0.964),executed 2 / 5 B,JP_PART

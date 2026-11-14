@@ -78,6 +78,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 0F,46D3,46FD,42,Leftover_0F_46D3,data,not_tcrf,,,
 0F,6CC2,6DF1,303,Leftover_0F_6CC2,data,not_tcrf,,,
 0F,7BB1,7D71,448,Leftover_0F_7BB1,data,not_tcrf,,,
+0F,7E43,7E89,70,Leftover_0F_7E43,data,not_tcrf,,,
 10,5803,5900,253,Leftover_10_5803,data,not_tcrf,,,
 10,5A03,5B00,253,Leftover_10_5A03,data,not_tcrf,,,
 11,6000,7000,4096,Unused_Photo_EmptyPicture0_Gfx,data,not_tcrf,,,

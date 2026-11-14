@@ -2,7 +2,7 @@ bank,start,end,type,width,note
 00,0000,0008,data,,"read in the core runs by 02:4E73, 0F:536F, 00:0008, 00:0010 ..."
 00,0024,002A,data,,"read in the core runs by 02:4E73, 0F:536F, 00:0008, 00:0010 ..."
 00,0468,049E,data,,read in the core runs by 00:042A
-00,052E,0535,data,,read in the core runs by 00:0512
+00,052D,0535,data,,read in the core runs by 00:0512
 00,0B1F,0B21,data,,read in the core runs by 00:01D1
 00,0B2B,0B2D,data,,read in the core runs by 00:01D1
 00,0BF9,0C23,data,,"read in the core runs by 06:55F3, 00:0BBB, 06:560F"
@@ -82,7 +82,7 @@ bank,start,end,type,width,note
 01,72BC,72C6,data,,"read in the core runs by 00:0245, 00:032D"
 01,749D,74A7,data,,read in the core runs by 00:032D
 01,769C,76F2,data,,read in the core runs by 00:0189
-02,4008,40BC,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
+02,4008,40C8,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
 02,4110,42E0,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
 02,42F4,42FC,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
 02,4310,4334,data,,"read in the core runs by 00:2127, 00:2136, 00:1F1E"
@@ -121,19 +121,17 @@ bank,start,end,type,width,note
 02,52A6,52E7,data,,"read in the core runs by 00:2127, 00:1F10, 00:1F1E, 00:1F16 ..."
 02,530D,5315,data,,read in the core runs by 00:0194
 02,5387,538D,data,,read in the core runs by 00:2087
-02,539F,53BD,data,,"read in the core runs by 00:2127, 00:1F6D, 00:2087, 00:2136 ..."
+02,539F,53DB,data,,"read in the core runs by 00:2127, 00:1F6D, 00:2087, 00:2136 ..."
 02,54E3,5643,data,,"read in the core runs by 00:2127, 00:1F10, 00:1F47, 02:542C ..."
 02,565E,5662,data,,"read in the core runs by 00:2127, 00:1F1E"
 02,5691,569E,data,,"read in the core runs by 00:2087, 00:1FCC, 00:2127, 00:1F1E ..."
 02,56A9,56DC,data,,"read in the core runs by 00:2087, 00:1FCC, 00:2127, 00:1F1E ..."
 02,5726,5730,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F1E"
 02,5736,573C,data,,"read in the core runs by 00:2127, 00:2087, 00:1F16, 00:1F1E"
-02,584A,58AC,data,,"read in the core runs by 02:57F8, 02:57A5, 00:2127, 00:2087 ..."
-02,5900,5944,data,,"read in the core runs by 00:2087, 00:2127, 02:57A5, 02:57F8 ..."
+02,584A,5944,data,,"read in the core runs by 00:2087, 00:2127, 02:57A5, 02:57F8 ..."
 02,594D,5971,data,,"read in the core runs by 00:2087, 00:2127, 02:57A5, 02:57F8 ..."
-02,598B,59D6,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 00:2136"
-02,5A21,5AF1,data,,"read in the core runs by 00:1FCC, 00:2127, 02:4D44, 00:2087 ..."
-02,5AFF,5B0D,data,,"read in the core runs by 00:1FCC, 00:2127, 02:4D44, 00:2087 ..."
+02,598B,5AF1,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 02:4D44 ..."
+02,5AFF,5B0D,data,,"read in the core runs by 00:1FCC, 00:2127, 00:2087, 02:4D44 ..."
 02,5B35,5B51,data,,"read in the core runs by 02:5B0D, 00:2087"
 02,5B67,5B77,data,,"read in the core runs by 00:2087, 00:2127, 00:1F1E, 00:2136 ..."
 02,5B83,5BD9,data,,"read in the core runs by 00:2087, 00:2127, 00:1F1E, 00:2136 ..."
@@ -204,12 +202,8 @@ bank,start,end,type,width,note
 02,7EB2,7ED0,data,,"read in the core runs by 00:2127, 00:1F10, 00:2087"
 02,7F75,7F97,data,,"read in the core runs by 00:2127, 00:1F10, 00:2087"
 02,7FBA,7FC2,data,,"read in the core runs by 00:2127, 00:2136"
-03,4118,41AC,data,,read in the core runs by 00:21A7
-03,4240,44B4,data,,read in the core runs by 00:21A7
-03,452C,466C,data,,read in the core runs by 00:21A7
-03,4700,4898,data,,read in the core runs by 00:21A7
-03,48E0,49A8,data,,read in the core runs by 00:21A7
-03,49D0,5160,data,,read in the core runs by 00:21A7
+03,4118,4898,data,,read in the core runs by 00:21A7
+03,48E0,5160,data,,read in the core runs by 00:21A7
 03,51C0,5208,data,,read in the core runs by 00:21A7
 03,5250,5280,data,,read in the core runs by 00:21A7
 03,52E0,52F0,data,,read in the core runs by 00:21A7
@@ -416,7 +410,7 @@ bank,start,end,type,width,note
 07,41CE,4312,data,,read in the core runs by 07:43EE
 07,449C,44CC,data,,read in the core runs by 07:448F
 07,4501,4503,data,,read in the core runs by 07:44DC
-07,470B,470F,data,,read in the core runs by 07:46ED
+07,470B,471F,data,,read in the core runs by 07:46ED
 07,4812,4828,data,,"read in the core runs by 07:47BF, 07:4751"
 07,48A5,48AA,data,,read in the core runs by 07:4894
 07,48C4,48C7,data,,"read in the core runs by 00:0245, 00:02F9, 00:1AB7"
@@ -463,20 +457,24 @@ bank,start,end,type,width,note
 07,5A27,5A32,data,,"read in the core runs by 00:02F9, 00:0206"
 07,5A36,5A41,data,,"read in the core runs by 00:02F9, 00:0206"
 07,5A5F,5A6A,data,,read in the core runs by 00:02F9
-07,5AB8,5ABE,data,,"read in the core runs by 00:0245, 00:0194"
-07,5AC4,5ACA,data,,"read in the core runs by 00:0245, 00:0194"
-07,5ACD,5AD4,data,,"read in the core runs by 00:0245, 00:0194"
-07,5AD7,5ADE,data,,"read in the core runs by 00:0245, 00:0194"
-07,5AE1,5AE8,data,,"read in the core runs by 00:0245, 00:0194"
-07,5AEB,5AF2,data,,"read in the core runs by 00:0245, 00:0194"
-07,5AF5,5AFC,data,,"read in the core runs by 00:0245, 00:0194"
+07,5AA3,5AAE,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5AB8,5ABE,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5AC4,5ACA,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5ACD,5AD4,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5AD7,5ADE,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5AE1,5AE8,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5AEB,5AF2,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
+07,5AF5,5AFC,data,,"read in the core runs by 00:0245, 00:02F9, 00:0194"
 07,5B1E,5B21,data,,read in the core runs by 00:1AB7
-07,5B7D,5B81,data,,read in the core runs by 00:0194
+07,5B7D,5B83,data,,"read in the core runs by 00:0194, 00:1AB7"
+07,5B8F,5B92,data,,"read in the core runs by 00:0194, 00:1AB7"
 07,5BB5,5BB8,data,,read in the core runs by 00:1AB7
+07,5BFB,5BFE,data,,read in the core runs by 00:1AB7
 07,5CA5,5CA8,data,,"read in the core runs by 00:0194, 00:1AB7"
-07,5CAE,5CB2,data,,"read in the core runs by 00:0194, 00:1AB7"
+07,5CAE,5CB4,data,,"read in the core runs by 00:0194, 00:1AB7"
+07,5D09,5D0C,data,,read in the core runs by 00:1AB7
 07,5D27,5D2A,data,,read in the core runs by 00:1AB7
-07,5E4B,5E63,data,,read in the core runs by 00:0189
+07,5E4B,5E6B,data,,read in the core runs by 00:0189
 07,5F41,5F6D,data,,"read in the core runs by 07:5EAD, 07:5F6D, 07:5E8F"
 07,6076,6079,data,,read in the core runs by 00:1AB7
 07,60AE,60B5,data,,"read in the core runs by 00:0245, 00:02F9"
@@ -488,10 +486,7 @@ bank,start,end,type,width,note
 07,6156,6161,data,,read in the core runs by 00:02F9
 07,623A,6240,data,,read in the core runs by 07:61B3
 07,626F,627B,data,,read in the core runs by 07:6260
-07,62C6,6362,data,,"read in the core runs by 07:6580, 00:0189"
-07,637F,6395,data,,read in the core runs by 07:6580
-07,63EE,6406,data,,read in the core runs by 07:6580
-07,6423,6476,data,,read in the core runs by 07:6580
+07,62C6,6476,data,,"read in the core runs by 07:6580, 00:0189"
 07,6493,6504,data,,read in the core runs by 07:6580
 07,655C,657B,data,,read in the core runs by 07:6580
 07,668C,6726,data,,"read in the core runs by 07:667A, 07:6580"
@@ -642,8 +637,8 @@ bank,start,end,type,width,note
 0F,6CAD,6CB5,data,,read in the core runs by 0F:543A
 0F,6DF1,7A96,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5259 ..."
 0F,7AC7,7BB1,data,,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380"
-0F,7D71,7DE8,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
-0F,7E89,7EE0,data,,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380"
+0F,7D71,7E2E,data,,"read in the core runs by 0F:543A, 0F:536F, 0F:537A, 0F:5380"
+0F,7E43,7EE0,data,,"read in the core runs by 0F:543A, 0F:537A, 0F:536F, 0F:5380"
 10,4000,54A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
 10,5500,55A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"
 10,5600,56A0,data,,"read in the core runs by 00:067E, 00:066E, 00:06F3"

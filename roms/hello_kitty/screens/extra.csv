@@ -7,7 +7,6 @@ mode,state,picture,how,parent,key,note
 0D,02,extra_0D_02.png,every key but B held at power-on,,,
 0D,04,extra_0D_04.png,boot with a blank SRAM ($AA),,,
 0D,05,extra_0D_05.png,boot with a blank SRAM ($AA),,,
-0F,05,extra_0F_05.png,forced (I): ModeTable slot $01 patched to mode $0F,,,
 17,01,extra_17_01.png,forced (I): ModeTable slot $01 patched to mode $17,,,
 18,01,extra_18_01.png,forced (I): ModeTable slot $01 patched to mode $18,04:01,no menu item (removed?),Select → Play menu
 19,01,extra_19_01.png,forced (I): ModeTable slot $01 patched to mode $19,,,
@@ -31,3 +30,8 @@ mode,state,picture,how,parent,key,note
 02,01-S3,extra_02_01_show3.png,the slide show later still,,,
 05,06-W,extra_05_06_w.png,"START: the stamp window, 8 pages (Right Right to the tabs, Up / Down); screens/stamps_kitty.png",05:06,START,
 03,05-N,extra_03_05_noslot.png,"forced (I): Photo_FindSlotA (01:4D81) patched to return carry (scf; jp Far_ReturnSramBank): the photo view draws the no-photo picture 11:7000 of Photo_LoadEmptyPicture; no key path found",03:02,A (no slot for the photo),
+0F,0A,puzzle_drawing_1_dealt.png,"the 15 puzzle with a drawing: the board dealt (BGB, tools/kitty_puzzle.py; the five drawings come in order, counter $DAD9)",0E:0A,A (drawing),
+0F,0B,puzzle_photo_dealt.png,"the 15 puzzle with a photo of the album (offered once the five drawings are solved)",0E:0A,Down A (photo),
+0F,0C,puzzle_camera_dealt.png,"the 15 puzzle on the live camera picture (offered once the five drawings are solved)",0E:0A,Down Down A (camera),
+0F,0F,puzzle_drawing_1_end.png,"solved with the slides of tools/puzzle15.py; the ten games: screens/puzzles_kitty.png",0F:0A,slides (solved),
+0E,11,puzzle_quit_question.png,"B on the board: stop? (Up A: yes, back to the Play menu; A: no, back to the board)",0F:0A,B,

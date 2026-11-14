@@ -7,7 +7,7 @@ roms/*/port/*.npy
 *.sav
 *.srm
 # exception (owner 2026-11-02): the calibration example saves, which hold no photo (empty slots, bank 0 = sensor noise)
-!tcrf_check/assets/sensor/calibration_saves/*.sav
+!sensor/calibration_saves/*.sav
 # ROM images are never committed (owner 2026-11-03: no original Game Boy Camera ROM in the repository)
 *.gb
 *.gbc

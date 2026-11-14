@@ -1,5 +1,5 @@
 bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
-00,001A,0023,10,Rst18_JumpTable,FORCED,00:0019,e1 [after insn],Rst18_JumpTable,00:001A<-00:0019 after insn,ARGS
+00,0018,0023,12,Rst18_JumpTable,HAND,,rst $18 body,,00:0018<-- rst $18 body,ARGS
 00,0060,0062,3,Vec_Joypad,VECTOR,,joypad,,00:0060<-- joypad,UNREACHABLE
 00,0153,015A,8,Call_DE,HAND,,helper,,00:0153<-- helper; 00:0155<-- helper,ARGS
 00,02B0,02B0,1,Copy_Unrolled,GATE,00:02AE,jr nz (20 e5) [after cc],Copy_Unrolled,00:02B0<-00:02AE after cc,ARGS
@@ -120,7 +120,6 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 06,4E3A,4E3C,3,NameCardEdit_FieldAction,GATE,06:4E37,jp z (ca dd 4e) [after cc],NameCardEdit_FieldAction,06:4E3A<-06:4E37 after cc,INPUT
 06,4E4D,4E4F,3,NameCardEdit_FieldAction,GATE,06:4E4B,jr z (28 03) [after cc],NameCardEdit_FieldAction,06:4E4D<-06:4E4B after cc,INPUT
 06,537D,537D,1,Mode0B_State05,GATE,06:537B,jr z (28 35) [after cc],Mode0B_State05,06:537D<-06:537B after cc,INPUT
-06,590E,5917,10,Bcd_DrawDigit,GATE,06:590C,jr nz (20 0a) [after cc],Bcd_DrawDigit,06:590E<-06:590C after cc,ARGS
 06,5A8D,5AA2,22,Counters_AddExchanged,GATE,06:5A8A,cd 5b 01 [after call],Counters_AddExchanged,06:5A8D<-06:5A8A after call,LINK
 06,5FF8,605A,99,KeyPrompt_LoadSoundsB,BEHIND,06:6ACF,behind Mode09_State0B,Mode09_State0B,06:5FF8<-06:6B7D far call from 06:6B7D,LINK
 06,609A,60B6,29,Counters_AddReceived,GATE,06:6098,jr z (28 07) [after cc],Counters_AddReceived,06:609A<-06:6098 after cc; 06:60A1<-06:6098 branch,LINK
@@ -152,15 +151,6 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 07,53C2,53E3,34,Mode11_State0E,FORCED,07:53C0,jr c (38 22) [after cc],Mode11_State0E,07:53C2<-07:53C0 after cc,SENSOR
 07,5400,5407,8,Mode11_State0E,FORCED,07:53FE,jr z (28 13) [after cc],Mode11_State0E,07:5400<-07:53FE after cc,SENSOR
 07,540B,5412,8,Mode11_State0E,BEHIND,07:5400,behind Mode11_State0E,Mode11_State0E,07:540B<-07:5405 after call,SENSOR
-07,557D,5582,6,Puzzle15_IsSolved,GATE,07:557B,jr nz (20 06) [after cc],Puzzle15_IsSolved,07:557D<-07:557B after cc,GAME
-07,59FE,5A02,5,Mode0F_State02,GATE,07:59FC,jr nz (20 05) [after cc],Mode0F_State02,07:59FE<-07:59FC after cc,GAME
-07,5B8C,5B8E,3,Puzzle15_FadeToState0C,TABLE,,table 07:5B7D (call $0194),,07:5B8C<-- table 07:5B7D (call $0194); 07:5B8C<-- table 07:5B7D,GAME
-07,5B92,5B9A,9,Puzzle15_FadeToState0C,BEHIND,07:5B8C,behind Puzzle15_FadeToState0C,Puzzle15_FadeToState0C,07:5B92<-07:5B8C after call,GAME
-07,5BDB,5BFA,32,Puzzle15_FrameCallback,BEHIND,07:5B8C,behind Puzzle15_FadeToState0C,Puzzle15_FadeToState0C,07:5BDB<-07:5B8C far callback (args of 07:5B8C),GAME
-07,5BFE,5C11,20,Puzzle15_FrameCallback,BEHIND,07:5B8C,behind Puzzle15_FadeToState0C,Puzzle15_FadeToState0C,07:5BFE<-07:5BF8 after call; 07:5C0F<-07:5BF6 branch,GAME
-07,5CC6,5CCE,9,Puzzle15_SetState0C,TABLE,,table 07:5CAE (call $0194),,07:5CC6<-- table 07:5CAE (call $0194); 07:5CC6<-- table 07:5CAE,GAME
-07,5CFF,5D08,10,Puzzle15_FrameCallback2,GATE,07:5CFD,jr nz (20 17) [after cc],Puzzle15_FrameCallback2,07:5CFF<-07:5CFD after cc,GAME
-07,5D0C,5D15,10,Puzzle15_FrameCallback2,BEHIND,07:5CFF,behind Puzzle15_FrameCallback2,Puzzle15_FrameCallback2,07:5D0C<-07:5D06 after call,GAME
 07,5E8B,5E8E,4,Scratch_HasPrize3,GATE,07:5E82,jr z (28 07) [branch],Scratch_HasPrize3,07:5E8B<-07:5E82 branch,GAME
 07,5F0F,5F12,4,Scratch_PrizeTable,GATE,07:5F09,jr nz (20 04) [branch],Scratch_PrizeTable,07:5F0F<-07:5F09 branch; 07:5F0F<-07:5F17 branch,GAME
 07,60E5,60EA,6,Mode10_State00,GATE,07:60E3,jr nc (30 06) [after cc],Mode10_State00,07:60E5<-07:60E3 after cc,GAME
@@ -168,9 +158,6 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 07,6289,628C,4,Mode10_State04,GATE,07:6287,jr nz (20 04) [after cc],Mode10_State04,07:6289<-07:6287 after cc,GAME
 07,65C2,65D6,21,KittHost_TextStep,GATE,07:65A3,jp z (ca c2 65) [branch],KittHost_TextStep,07:65C2<-07:65A3 branch,GAME
 07,65EE,65F4,7,KittHost_TextStep,GATE,07:65AD,jp z (ca ee 65) [branch],KittHost_TextStep,07:65EE<-07:65AD branch,GAME
-07,68A9,68C2,26,KittHost_PayPuzzle,GATE,07:6880,jr c (38 27) [branch],KittHost_PayPuzzle,07:68A9<-07:6880 branch,SAVE
-07,690C,6920,21,Mode0E_State09,GATE,07:68F3,jr z (28 17) [branch],Mode0E_State09,07:690C<-07:68F3 branch,GAME
-07,6A2D,6A30,4,Mode0E_State0F,FORCED,07:6A2B,jr nz (20 04) [after cc],Mode0E_State0F,07:6A2D<-07:6A2B after cc,GAME
 07,6A9A,6AB3,26,KittHost_PayScratch,GATE,07:6A71,jr c (38 27) [branch],KittHost_PayScratch,07:6A9A<-07:6A71 branch,SAVE
 07,6BBE,6BC7,10,Mode0E_State1E,GATE,07:6BB2,jr z (28 0a) [branch],Mode0E_State1E,07:6BBE<-07:6BB2 branch,GAME
 08,6AD8,6ADC,5,Sgb_SendPacket,GATE,08:6AD6,jr z (28 05) [after cc],Sgb_SendPacket,08:6AD8<-08:6AD6 after cc,SGB
