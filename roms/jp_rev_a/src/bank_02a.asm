@@ -104,7 +104,7 @@ Gfx_2A_44D4_FontSlot26::
 Gfx_2A_44F4_FontSlots27to28::
     INCBIN "data/bank_2a/Gfx_2A_44F4_FontSlots27to28.2bpp" ; $44F4, 16 bytes
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 256 tiles. L3 pass 2026-10-26: read in BGB in 4
-; replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_2A_4504::
     INCBIN "data/bank_2a/Sheet_MiscellaneousStampsJpn_2A_4504.bin" ; $4504, 1311 bytes
 ; C: 23 bytes inside slot $51 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot);
@@ -127,7 +127,7 @@ Gfx_2A_4A4E_FontSlot52::
     ds $10, $00
 
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 441 tiles. L3 pass 2026-10-26: read in BGB in 4
-; replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_2A_4A6A::
     INCBIN "data/bank_2a/Sheet_MiscellaneousStampsJpn_2A_4A6A.bin" ; $4A6A, 1782 bytes
 ; C: tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them). glyph bytes of the name /
@@ -352,7 +352,7 @@ Font_2A_5E84_GlyphF5::
     ds $162, $00
 
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 2379 tiles. L3 pass 2026-10-26: read in BGB in 6
-; replay(s) of the organic corpus, modes 08 09 0A (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 08 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_2A_5FFA::
     INCBIN "data/bank_2a/Sheet_MiscellaneousStampsJpn_2A_5FFA.bin" ; $5FFA, 6 bytes
 ; C: stamp categories 4 and 5 (same graphics, different mask fill): small kana, 245 items x $20 B (2 tiles)

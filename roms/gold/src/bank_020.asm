@@ -15,49 +15,49 @@ Gfx_20_4800_CreditsSheriffBonus::
     INCBIN "data/bank_20/Gfx_20_4800_CreditsSheriffBonus.2bpp" ; $4800, 1536 bytes
 ; C: copied to VRAM/WRAM by Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes
-; 08 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode08_State0C_RecordInit reads them in this ...
+; 08 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode08_State0C_RecordInit reads them in ...
 Gfx_20_4E00_Mode08_State0C_RecordInit::
     INCBIN "data/bank_20/Gfx_20_4E00_Mode08_State0C_RecordInit.2bpp" ; $4E00, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes
-; 08 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode08_State0C_RecordInit reads them in this ...
+; 08 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode08_State0C_RecordInit reads them in ...
 Gfx_20_5600_Mode08_State0C_RecordInit::
     INCBIN "data/bank_20/Gfx_20_5600_Mode08_State0C_RecordInit.2bpp" ; $5600, 1280 bytes
 ; C: copied to VRAM/WRAM by Mode08_State06_EditorInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode08_State06_EditorInit reads them in this build (coverage call site or ...
+; in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but Mode08_State06_EditorInit reads them in this build (coverage call ...
 Gfx_20_5B00_Mode08_State06_EditorInit::
     INCBIN "data/bank_20/Gfx_20_5B00_Mode08_State06_EditorInit.2bpp" ; $5B00, 1408 bytes
 ; C: copied to VRAM/WRAM by Mode08_State06_EditorInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode08_State06_EditorInit reads them in this build (coverage call site or ...
+; in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but Mode08_State06_EditorInit reads them in this build (coverage call ...
 Gfx_20_6080_Mode08_State06_EditorInit::
     INCBIN "data/bank_20/Gfx_20_6080_Mode08_State06_EditorInit.2bpp" ; $6080, 1088 bytes
 ; C: far pointer loaded by Kb_Page0_Press, OwnerCard_LoadGenderTiles (ld a,BANK; ld hl,ADDR; call banked copy/far
 ; call); length 32 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes
-; 08 (tcrf_check/assets/l3_names/)
+; 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_64C0_OwnerCard_LoadGenderTiles::
     INCBIN "data/bank_20/Gfx_20_64C0_OwnerCard_LoadGenderTiles.2bpp" ; $64C0, 96 bytes
 ; C: far pointer loaded by OwnerCard_DrawBloodLow (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Src_20_6520_OwnerCard_DrawBloodLow::
     INCBIN "data/bank_20/Src_20_6520_OwnerCard_DrawBloodLow.bin" ; $6520, 4 bytes
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 58 tiles. L3 pass 2026-10-26: read in BGB in 3 replay(s)
-; of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_20_6524::
     INCBIN "data/bank_20/Sheet_MiscellaneousStampsJpn_20_6524.bin" ; $6524, 316 bytes
 ; C: far pointer loaded by OwnerCard_LoadBirthNumberTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Src_20_6660_OwnerCard_LoadBirthNumberTiles::
     INCBIN "data/bank_20/Src_20_6660_OwnerCard_LoadBirthNumberTiles.bin" ; $6660, 32 bytes
 ; C: far pointer loaded by OwnerCard_LoadBloodTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/); C: an operand pointing here is paired by the port with a ...
+; (roms/jp_rev_a/experiments/l3_names/); C: an operand pointing here is paired by the port ...
 Gfx_20_6680_OwnerCard_LoadBloodTiles::
     INCBIN "data/bank_20/Gfx_20_6680_OwnerCard_LoadBloodTiles.bin" ; $6680, 42 bytes
-; C: tiles: BGB, menu walk node U11 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by DjPerf_Equaliser
+; C: tiles: BGB, menu walk node U11 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by DjPerf_Equaliser
 Gfx_20_66AA_DjPerf_Equaliser::
     INCBIN "data/bank_20/Gfx_20_66AA_DjPerf_Equaliser.bin" ; $66AA, 22 bytes
 ; C: inside the 0x300 bytes 64C0-67C0 that Kb_Page0_Press copies to $8800 (copy site 09:5CF9); was Gfx_20_66C0_Unref;
@@ -66,7 +66,7 @@ Gfx_20_66AA_DjPerf_Equaliser::
 Gfx_20_66C0_Kb_Page0_Press_ToPage1::
     INCBIN "data/bank_20/Gfx_20_66C0_Kb_Page0_Press_ToPage1.2bpp" ; $66C0, 256 bytes
 ; C: copied to VRAM/WRAM by Mode08_State06_EditorInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_67C0_Mode08_State06_EditorInit::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $7c, $7c, $82, $c6, $fe, $fe
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $fe, $fe, $00, $00, $00, $00
@@ -76,22 +76,22 @@ Gfx_20_67C0_Mode08_State06_EditorInit::
 
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in this ...
+; 15 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in ...
 Gfx_20_6800_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6800_Mode15_State01_TimerInit.2bpp" ; $6800, 1600 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in this ...
+; 15 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in ...
 Gfx_20_6E40_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6E40_Mode15_State01_TimerInit.2bpp" ; $6E40, 128 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6EC0_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6EC0_Mode15_State01_TimerInit.2bpp" ; $6EC0, 96 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in this ...
+; 15 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in ...
 Gfx_20_6F20_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6F20_Mode15_State01_TimerInit.2bpp" ; $6F20, 448 bytes
 ; C: digit table: Mode15_DrawTwoDigitsInterval (06:43F3) copies 16 bytes (1 tile) from $70E0 + digit x 16; 10 entries
@@ -104,7 +104,7 @@ Gfx_20_7180_Mode15_DrawTwoDigits::
     INCBIN "data/bank_20/Gfx_20_7180_Mode15_DrawTwoDigits.2bpp" ; $7180, 320 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in this ...
+; 15 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode15_State01_TimerInit reads them in ...
 Gfx_20_72C0_Mode15_State01_TimerInit::
     db $07, $07, $19, $1e, $24, $3b, $48, $77, $40, $7f, $90, $ef, $90, $ef, $80, $ff
     db $e0, $e0, $f8, $f8, $fc, $1c, $fe, $8e, $fe, $46, $ff, $a7, $ff, $a7, $ff, $47
@@ -141,7 +141,7 @@ Gfx_20_72C0_Mode15_State01_TimerInit::
 
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_74F0_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_74F0_Mode15_State01_TimerInit.2bpp" ; $74F0, 16 bytes
 ; C: BG map, not tiles: Album_ShowPageScreen, Album_ShowPageScreenB, Album_LoadBorderScreen, Album_LoadSliderScreen,
@@ -171,7 +171,7 @@ Map_20_7C80_MainMenu_SlideC_Tbl0_1::
 ; C: loaded by Mem_CopyFromBank at 05:43A6: Map $1C0 bytes to $9E00 (this build's trace)
 Map_20_7E40_Mode1F_State04_PerformanceSetup::
     INCBIN "data/bank_20/Map_20_7E40_Mode1F_State04_PerformanceSetup.tilemap" ; $7E40, 192 bytes
-; C: BG map: BGB, menu walk node P37 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM map; read by DjPerf_Equaliser
+; C: BG map: BGB, menu walk node P37 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM map; read by DjPerf_Equaliser
 Map_20_7F00_DjPerf_Equaliser::
     INCBIN "data/bank_20/Map_20_7F00_DjPerf_Equaliser.tilemap" ; $7F00, 256 bytes

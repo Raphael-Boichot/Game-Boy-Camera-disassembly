@@ -208,40 +208,40 @@ Gfx_14_6800_Mode0D_State00_Init::
     INCBIN "data/bank_14/Gfx_14_6800_Mode0D_State00_Init.2bpp" ; $6800, 2048 bytes
 ; C: far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1072 from the
 ; nearby ld bc. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 10
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_7000_PenMenu_Build::
     INCBIN "data/bank_14/Gfx_14_7000_PenMenu_Build.2bpp" ; $7000, 1072 bytes
 ; C: copied to VRAM/WRAM by Mode10_State02_Setup, Mode10_State0A_SaveResult (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_7430_Mode10_State02_Setup::
     INCBIN "data/bank_14/Gfx_14_7430_Mode10_State02_Setup.2bpp" ; $7430, 432 bytes
 ; C: far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read
-; in BGB in 7 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; in BGB in 7 replay(s) of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_75E0_PenMenu_Build::
     INCBIN "data/bank_14/Gfx_14_75E0_PenMenu_Build.2bpp" ; $75E0, 32 bytes
 ; C: far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from the
 ; nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 10
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_7600_PenMenu_Build::
     INCBIN "data/bank_14/Gfx_14_7600_PenMenu_Build.2bpp" ; $7600, 176 bytes
 ; C: Spriter's Resource sheet "Miscellaneous - Doodle Rips", 70 tiles. L3 pass 2026-10-26: read in BGB in 2 replay(s)
-; of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousDoodleRips_14_76B0::
     INCBIN "data/bank_14/Sheet_MiscellaneousDoodleRips_14_76B0.2bpp" ; $76B0, 848 bytes
 ; C: far pointer loaded by PenMenu_Build (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_7A00_PenMenu_Build::
     INCBIN "data/bank_14/Gfx_14_7A00_PenMenu_Build.2bpp" ; $7A00, 128 bytes
 ; C: Spriter's Resource sheet "Miscellaneous - Doodle Rips", 63 tiles. L3 pass 2026-10-26: read in BGB in 4 replay(s)
-; of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousDoodleRips_14_7A80::
     INCBIN "data/bank_14/Sheet_MiscellaneousDoodleRips_14_7A80.2bpp" ; $7A80, 944 bytes
 ; C: copied to VRAM/WRAM by Mode10_State02_Setup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 7 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; BGB in 7 replay(s) of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_7E30_Mode10_State02_Setup::
     INCBIN "data/bank_14/Gfx_14_7E30_Mode10_State02_Setup.2bpp" ; $7E30, 208 bytes
 ; C: copied to VRAM/WRAM by Mode10_State02_Setup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 7 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; BGB in 7 replay(s) of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_14_7F00_Mode10_State02_Setup::
     db $00, $00, $fc, $fc, $84, $84, $bc, $bc, $a0, $a0, $a0, $a0, $e0, $e0, $00, $00
     db $3c, $3c, $42, $42, $81, $81, $81, $81, $81, $81, $81, $81, $42, $42, $3c, $3c

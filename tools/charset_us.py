@@ -6,7 +6,7 @@
 The glyph of code c is the 8 x 16 pair of 2bpp tiles at 2A:4000 + (c-1) x 32 in every build (Glyph_LoadFromCharCode, international 09:4806; the
 keyboard lists of Kb_LoadGlyphList hold slot = code - 1).  A code whose glyph bytes equal a Japanese glyph takes that glyph's character (C, the
 bytes; where two Japanese codes share one glyph, O / 0 and the long-vowel mark / hyphen, the place in the run decides); the 33 glyphs that are not
-in the Japanese font (the accented capitals and small letters, ß, &, a third face icon) were read by eye from tcrf_check/assets/l3_by_eye/font_2A_4000_intl.png
+in the Japanese font (the accented capitals and small letters, ß, &, a third face icon) were read by eye from roms/jp_rev_a/experiments/l3_by_eye/font_2A_4000_intl.png
 (C, by eye).  Codes typed by the international keyboard (lists A and B, 09:54C6 / 54DE) keep the plain character; a second code with the same
 glyph gets a tag in angle brackets (`<jp_a>`: the Japanese Latin block $C9-$F5 and two marks of the kana block kept unchanged, `<blank_A5>`; the keyboard's codes first, then the international block $56-$C8), since a charmap entry is one string.
 The comment editor types from a grid of 5 per row over the codes $56-$C8 (CommentEditor_ReadDirections 09:44F9 keeps the cell in $55-$C7, CommentEditor_CtrlGrid 09:43F7 stores cell + 1).

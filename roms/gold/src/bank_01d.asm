@@ -26,12 +26,12 @@ Gfx_1D_4800_Mode1F_State09_PageSound1::
     INCBIN "data/bank_1d/Gfx_1D_4800_Mode1F_State09_PageSound1.2bpp" ; $4800, 512 bytes
 ; C: far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 768
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in the scenarios dj_perf_start_noise 1F:0A, dj_print_noise
-; 1F:0A (tcrf_check/assets/l3_names/scen_hits*.csv); C: the bytes changed ...
+; 1F:0A (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); C: the bytes ...
 Gfx_1D_4A00_Mode1F_State0A_PageSound2::
     INCBIN "data/bank_1d/Gfx_1D_4A00_Mode1F_State0A_PageSound2.2bpp" ; $4A00, 768 bytes
 ; C: far pointer loaded by Mode1F_State0A_PageSound2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in the scenarios dj_perf_start_noise 1F:0A, dj_print_noise
-; 1F:0A (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:0A (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_1D_4D00_Mode1F_State0A_PageSound2::
     INCBIN "data/bank_1d/Gfx_1D_4D00_Mode1F_State0A_PageSound2.2bpp" ; $4D00, 512 bytes
 ; C: picture 3 of the shared result / error screen 09:7290 (table 09:7332, 0xE00 bytes: $9000 + $8800 + $8000 parts);
@@ -39,7 +39,7 @@ Gfx_1D_4D00_Mode1F_State0A_PageSound2::
 Gfx_1D_4F00_ResultPic3_Equator_Tune2A::
     INCBIN "data/bank_1d/Gfx_1D_4F00_ResultPic3_Equator_Tune2A.2bpp" ; $4F00, 3584 bytes
 ; C: copied to VRAM/WRAM by Mode20_State02_GameSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1D_5D00_Mode20_State02_GameSetup::
     db $00, $00, $00, $00, $03, $00, $0d, $03, $17, $0f, $1f, $0f, $2f, $1f, $3f, $1f
     db $60, $60, $78, $78, $7f, $7f, $7f, $7f, $3f, $3f, $0f, $0f, $03, $03, $01, $01
@@ -363,7 +363,7 @@ Gfx_1D_724E_Parlor_Page0::
     INCBIN "data/bank_1d/Gfx_1D_724E_Parlor_Page0.bin" ; $724E, 82 bytes
 ; C: Spriter's Resource sheet "Menus - Shoot Menu", 69 tiles | also inside record 1 of page 0 of Parlor_PageTbl
 ; (1D:6B00 +$0800 -> $9000, C). L3 pass 2026-10-26: read in BGB in 90 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MenusShootMenu_1D_72A0::
     INCBIN "data/bank_1d/Sheet_MenusShootMenu_1D_72A0.bin" ; $72A0, 913 bytes
 ; C: inside record 2 of page 0 (1D:7300 +$0800 -> $8800, VRAM $8B31 onward) of Parlor_PageTbl (04:7436), loaded by
@@ -412,27 +412,27 @@ Gfx_1D_78E0_StampCategoryIcons::
     INCBIN "data/bank_1d/Gfx_1D_78E0_StampCategoryIcons.2bpp" ; $78E0, 96 bytes
 ; C: target 5 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 ->
 ; $8800, C). L3 pass 2026-10-26: read in BGB in 90 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl1) are the readers ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl1) are the ...
 Src_1D_7940_Tbl539D_5::
     INCBIN "data/bank_1d/Src_1D_7940_Tbl539D_5.bin" ; $7940, 96 bytes
 ; C: target 0 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 ->
 ; $8800, C). L3 pass 2026-10-26: read in BGB in 90 replay(s) of the organic corpus, modes 01 11
-; (tcrf_check/assets/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl1) are the ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl1) are ...
 Src_1D_79A0_Tbl539D_0::
     INCBIN "data/bank_1d/Src_1D_79A0_Tbl539D_0.bin" ; $79A0, 96 bytes
 ; C: target 16 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 ->
 ; $8800, C). L3 pass 2026-10-26: read in BGB in 90 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl1) are the ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl1) are ...
 Src_1D_7A00_Tbl539D_16::
     INCBIN "data/bank_1d/Src_1D_7A00_Tbl539D_16.bin" ; $7A00, 96 bytes
 ; C: target 17 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 ->
 ; $8800, C). L3 pass 2026-10-26: read in BGB in 90 replay(s) of the organic corpus, modes 01 11
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Src_1D_7A60_Tbl539D_17::
     INCBIN "data/bank_1d/Src_1D_7A60_Tbl539D_17.bin" ; $7A60, 96 bytes
 ; C: target 23 of the {lo,hi,bank} table 04:539D | also inside record 2 of page 0 of Parlor_PageTbl (1D:7300 +$0800 ->
 ; $8800, C). L3 pass 2026-10-26: read in BGB in 90 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl2) are the ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers here (Stamp_CatIconSrcTbl2) are ...
 Src_1D_7AC0_Tbl539D_23::
     INCBIN "data/bank_1d/Src_1D_7AC0_Tbl539D_23.bin" ; $7AC0, 129 bytes
 ; C: stamp category icon tiles: read by Stamp_LoadCategoryIcons (67 of 93 read bytes); the earlier name
@@ -498,6 +498,6 @@ Src_1D_7F40_Tbl539D_20::
 
 ; C: far pointer loaded by Mode12_State08_ToolsMenu (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 20 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_1D_7FC0_Mode12_State08_ToolsMenu::
     INCBIN "data/bank_1d/Map_1D_7FC0_Mode12_State08_ToolsMenu.tilemap" ; $7FC0, 64 bytes

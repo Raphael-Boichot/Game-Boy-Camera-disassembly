@@ -40,7 +40,7 @@ The reference build: L0-L5 done, L6 partial ([`roms/jp_rev_a/`](roms/jp_rev_a/RE
 
 ![Screens (mode, state) reached in BGB](roms/jp_rev_a/jp_screen_tree.png)
 
-**Unused assets** (`tools/retail_unused_sheet.py`): the assets that no emulator replay put on screen in a run without state pokes (TCRF graphics, the unused screens drawn from their maps, blocks never shown or shown only in forced runs; docs §16.24). The scraps, the sounds never requested and the evidence of each block are in [`really_unused.md`](tcrf_check/assets/unidentified/really_unused.md) and its evidence sheet [`really_unused.png`](tcrf_check/assets/unidentified/really_unused.png).
+**Unused assets** (`tools/retail_unused_sheet.py`): the assets that no emulator replay put on screen in a run without state pokes (TCRF graphics, the unused screens drawn from their maps, blocks never shown or shown only in forced runs; docs §16.24). The scraps, the sounds never requested and the evidence of each block are in [`really_unused.md`](roms/jp_rev_a/experiments/unidentified/really_unused.md) and its evidence sheet [`really_unused.png`](tcrf_check/assets/unidentified/really_unused.png).
 
 ![The unused assets of the Japanese ROM](roms/jp_rev_a/assets/unused_sheet_jp.png)
 
@@ -48,25 +48,25 @@ The reference build: L0-L5 done, L6 partial ([`roms/jp_rev_a/`](roms/jp_rev_a/RE
 
 *The two unused full screens*: left, the alternate stand-by screen of the image exchange (map `23:5CC0` with the tiles `14:4000`); right, the one-page main menu with the "DEBA GAME" logo (map `25:7820` with the tiles `17:5500`). No code loads either of them, in either ROM (docs §16.24, §16.25).
 
-![The unused image-exchange stand-by screen and the unused "DEBA GAME" one-page main menu, side by side](tcrf_check/assets/unidentified/unused_screens_pair.png)
+![The unused image-exchange stand-by screen and the unused "DEBA GAME" one-page main menu, side by side](roms/jp_rev_a/experiments/unidentified/unused_screens_pair.png)
 
 *The unused ball head animation*: left, the head turn the main menu plays (frames F4 to F0 and back, on the front body); right, the twin set of frames F9 to F5 and back that no code plays (`MainMenu_SlideA_Tbl2` / `Tbl3` have no caller; same heads, another collar, on the back body it fits). A red line marks the unused tiles: the head frames F5 to F8, which nothing reads (F9 is the resting head of the menu's lower page, and the back body is used). Drawn from the ROM tiles at 4x on the game's timing (docs §16.24).
 
-![The camera ball head turn of the main menu: the animation the game plays beside the unused twin set](tcrf_check/assets/unidentified/main_menu_head_turn_used_vs_unused.gif)
+![The camera ball head turn of the main menu: the animation the game plays beside the unused twin set](roms/jp_rev_a/experiments/unidentified/main_menu_head_turn_used_vs_unused.gif)
 
 *The hand flipping a newspaper* (documented by [TCRF](https://tcrf.net/Game_Boy_Camera#Unused_Graphic_Bank_11), `11:5800-693F`): nine 40 x 40 sprite frames, arranged by the sprite list `$BA`, that no code draws. Animated from the ROM tiles at 4x in slot order (0 to 8 and back); the order and the speed are chosen here, since no code plays them (docs §16.24).
 
-![The unused hand flipping a newspaper, its nine frames animated from the ROM tiles](tcrf_check/assets/unidentified/11_5800_hand_newspaper.gif)
+![The unused hand flipping a newspaper, its nine frames animated from the ROM tiles](roms/jp_rev_a/experiments/unidentified/11_5800_hand_newspaper.gif)
 
 *An unused result message* (all three retail ROMs, not on TCRF): the result screen has 15 text strips; no code ever asks for strip `$07`, 「まだおしえたらん」 ("I won't tell you yet") in the Japanese ROM, which the international build replaced by a blank strip (docs §16.32, with the other 14 texts and the printer conditions behind *Print error #01-#04*):
 
-![The 15 result messages, international and Japanese](tcrf_check/assets/unused/result_messages_jp_vs_intl.png)
+![The 15 result messages, international and Japanese](roms/jp_rev_a/experiments/unused/result_messages_jp_vs_intl.png)
 
 **Trivia**
 
 *The two hidden boot screens* (hold the buttons while switching the camera on): the **factory calibration** (every button, or a blank calibration record: STORE / PLEASE WAIT, then STORE / END; it measures the sensor and stores the calibration vector) and the **fast calibration sanity check** (every button except B: it measures again, writes nothing, and shows OK or NG for the two highest-gain references), BGB screenshots from synthetic saves (docs §8).
 
-![The factory calibration and the fast calibration sanity check, with the button combinations that open them](tcrf_check/assets/secret/secret_calibration_screens.png)
+![The factory calibration and the fast calibration sanity check, with the button combinations that open them](roms/jp_rev_a/experiments/secret/secret_calibration_screens.png)
 
 *Inputs and codes* (each checked in the code, in the project's core and in BGB; docs §15, §16.18; the lines of the [GameFAQs cheats page](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) and of [TCRF](https://tcrf.net/Game_Boy_Camera) are credited where they come from):
 
@@ -240,7 +240,9 @@ The ROMs are not in the repository (md5 values in §1.1; the owner supplies them
 | [`roms/jp_rev_a/`](roms/jp_rev_a/) | the Japanese Rev A disassembly: the symbol file `pocketcamera_jp.sym` (every byte typed and named), the RAM symbols, `disasm/` (the name, type, constant and charset tables the listing is built from, the rename log, the owner's answers), `wram/` (WRAM / HRAM map and the static trace), `assets/` (asset catalog, layout and reach tables), the two ROM maps |
 | [`docs/`](docs/) | the project notes, one file per section (memory maps, SRAM, boot, sensor, link cable, printing, coverage, TCRF, menus and the international ROM, open questions); [`docs/index.md`](docs/index.md) maps every `§N.M` to its file; [`docs/19_sensor_guide.md`](docs/19_sensor_guide.md) is a readable guide to the sensor: registers, offset search, calibration vector, auto-exposure |
 | [`tools/`](tools/) | the pipeline: static tracer, symbol-file builder, listing post-processor (`sym_fix.py`: tables, RAM names, constants, charmap), RAM / constant / state / charmap generators, doubts list, consistency checker |
-| [`tcrf_check/`](tcrf_check/) | the evidence: BGB harness and probes, TCRF checklist, sensor, printer and link tools, and their results (`tcrf_check/assets/`) |
+| [`tcrf_check/`](tcrf_check/) | TCRF only: the checklist of what the TCRF pages document, the pictures that answer its rows, the picture-matching tools |
+| [`roms/jp_rev_a/experiments/`](roms/jp_rev_a/experiments/), [`tools/jp/`](tools/jp/) | the Japanese-ROM experiments (BGB harness and probes, printer and link runs, forced runs, display tracking) and their scripts |
+| [`sensor/`](sensor/) | the sensor: real calibration saves, BGB sensor recordings, checks |
 | [`coverage/`](coverage/) | the project's own emulator core, fuzzer and coverage results |
 | [`link_protocol/`](link_protocol/) | Game Link Cable captures between two emulated cameras |
 | [`source/`](source/) | the owner's material: source pack, Spriters Resource sheets, TCRF pages and pictures, the cameras' SRAM summary |
@@ -356,10 +358,10 @@ Every public source the project used since the start, in one place. None of them
 - [Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor), folders `Research on real camera 2024` and `Research on real Camera`
   - *What the project took from it:* the owner's bus-analyser recordings of two real cameras (boot, calibration, a calibration under strong light, normal use, the Hello Kitty and prototype ROMs, a zeroed vector) and the saves before and after a calibration
   - *Where:* §18.4-18.6, §18.13
-  - *How it reached the project:* supplied by the owner on 2026-10-26; decoded by `tcrf_check/tools/sensor_more_recordings.py`
+  - *How it reached the project:* supplied by the owner on 2026-10-26; decoded by `tools/jp/sensor_more_recordings.py`
 - [untoxa's gb-photo](https://github.com/untoxa/gb-photo)
   - *What the project took from it:* only named, to identify the third-party save (`2022-03-05`) whose unused bytes hold its settings; not read as a source
   - *Where:* §3.8
   - *How it reached the project:* identified from the save content
 
-Not public, so not listed above: the 33 real saves are the owner's own data (§3, §11); the three calibration saves of camera `CE10245109` (dark, intense light, varying light, §18.13), which hold no photo, are the one exception, kept as examples in `tcrf_check/assets/sensor/calibration_saves/`; the bus-analyser workbooks are public, in the sensor repository above; the ROMs themselves are not listed (md5 values in §1.1).
+Not public, so not listed above: the 33 real saves are the owner's own data (§3, §11); the three calibration saves of camera `CE10245109` (dark, intense light, varying light, §18.13), which hold no photo, are the one exception, kept as examples in `sensor/calibration_saves/`; the bus-analyser workbooks are public, in the sensor repository above; the ROMs themselves are not listed (md5 values in §1.1).

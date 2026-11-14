@@ -13,7 +13,7 @@ taps of the 8 keys, holds, and chords of two keys). Writes to OUT_DIR, every few
                core mask, from a cold boot, the 250 boot frames included) that first reached it: replayable as it is
   corpus.jsonl the input history of each corpus entry (replayable: frames of key bytes from a cold boot, in the core's mask:
                direction keys in the low nibble, buttons high; a BGB demo byte has the nibbles swapped)
-The core is not the judge for pictures (CLAUDE.md): screenshots come from BGB (tcrf_check/tools/bgb_run.py).
+The core is not the judge for pictures (CLAUDE.md): screenshots come from BGB (tools/jp/bgb_run.py).
 """
 import sys, os, json, time, random, argparse, csv
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'coverage', 'src'))

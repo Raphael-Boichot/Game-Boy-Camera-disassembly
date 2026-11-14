@@ -4,7 +4,7 @@
   tools/kitty_layout_kinds.py KITTY_ROM [--track roms/hello_kitty/trace/display_kitty.npz] [--out roms/hello_kitty/assets/layout_kind_overrides_kitty.csv]
 
 Labels whose name carries no kind (Data_, Src_, Leftover_; tools/kitty_data_names.py names the other blocks with their kind from the
-same evidence, evidence()) are drawn UNCERTAIN by tcrf_check/tools/rom_layout_map.py. This script gives a kind to the bytes of those blocks from five kinds of evidence, the first that applies wins:
+same evidence, evidence()) are drawn UNCERTAIN by tools/rom_layout_map.py. This script gives a kind to the bytes of those blocks from five kinds of evidence, the first that applies wins:
   0 role, C: the Japanese kinds where a loader of this ROM proves the role of the asset (code read, the runs and BGB show the loader at work):
     T_FRM the six print frames (blocks of $1500 named by the table 01:687D that PrintFrame_LoadTiles reads) and the 108 camera-frame
           pictures ($380 each, named by the table 07:41CE that FrameCorner_Draw reads);

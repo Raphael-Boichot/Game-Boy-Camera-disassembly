@@ -17,7 +17,7 @@ instruction and the straight line after it up to the first jump, call or return 
 with the core coverage.
 """
 import sys, os, csv, json, argparse, hashlib, collections
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tools', 'jp'))
 import numpy as np
 PD = os.path.join(REPO, 'roms', 'prototype_debagame', 'trace'); HITS = os.path.join(PD, 'red_bgb_hits_proto.csv'); NPZ = os.path.join(PD, 'wp_exec_proto.npz')
 N = 0x100000

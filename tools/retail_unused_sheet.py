@@ -4,7 +4,7 @@ owner 2026-11-12): roms/<folder>/assets/unused_sheet_<tag>.png.
 
   tools/retail_unused_sheet.py --tag jp|us|gold ROM [--check]
 
-The blocks are the REALLY unused assets of the Japanese ROM (tcrf_check/assets/unidentified/really_unused.csv, docs §16.24: the TCRF
+The blocks are the REALLY unused assets of the Japanese ROM (roms/jp_rev_a/experiments/unidentified/really_unused.csv, docs §16.24: the TCRF
 graphics, and the tiers 'no loader', 'never shown' and 'forced only'), found again in the international and Gold ROMs at the address of
 roms/<folder>/assets/never_reached_<tag>.csv (rows 'same address' and 'moved'; the other rows are left out). The two unused screens are
 drawn from their maps with their tile sets ($8000 addressing); the two maps without a known tile set as their byte values in grey.
@@ -21,7 +21,7 @@ ap = argparse.ArgumentParser(); ap.add_argument('--tag', required=True, choices=
 R = open(a.rom, 'rb').read(); D, TITLE = DIRS[a.tag]
 def fl(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
 def g(b, ad, n): return R[fl(b, ad):fl(b, ad) + n]
-JPR = [r for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv'), encoding='utf-8'))
+JPR = [r for r in csv.DictReader(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'experiments', 'unidentified', 'really_unused.csv'), encoding='utf-8'))
        if r['tier'] in ('TCRF', 'no loader', 'never shown', 'forced only')]
 where = {}
 if a.tag != 'jp':
@@ -68,6 +68,6 @@ if a.tag != 'jp':
     own.append(('name font: the Japanese Latin block, codes $C9-$F5', '2A:4000 + (c - 1) x 32', glyphs(list(range(0xC9, 0xF6)))))
 OUT = os.path.join(REPO, 'roms', D, 'assets', 'unused_sheet_%s.png' % a.tag)
 sys.exit(A_.sheet('Unused assets, %s' % TITLE,
-                  'Drawn from the ROM bytes x2 (16 tiles per row as stored): the REALLY unused assets of docs 16.24%s; scraps and sounds in tcrf_check/assets/unidentified/really_unused.md.' % ('' if a.tag == 'jp' else ', found again in this ROM'),
+                  'Drawn from the ROM bytes x2 (16 tiles per row as stored): the REALLY unused assets of docs 16.24%s; scraps and sounds in roms/jp_rev_a/experiments/unidentified/really_unused.md.' % ('' if a.tag == 'jp' else ', found again in this ROM'),
                   [('Documented by TCRF (https://tcrf.net/Game_Boy_Camera)', A_.TCRF_COL, tcrf), ('Not documented by TCRF (found by this project)', A_.OWN_COL, own)],
                   OUT, a.check, 'retail_unused_sheet %s' % a.tag))

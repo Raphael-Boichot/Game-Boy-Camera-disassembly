@@ -16,7 +16,7 @@ Steps (each writes into --dir; see each script's docstring):
       and by hand, never here; they are kept across re-ports)
   6. tools/merge_name_layers.py  the final tables disasm/sym_names_<s>.csv / sym_types_<s>.csv (port < loaders < reads < checked < hand);
      tools/sym_build.py          the symbol file (<dir>/<sym>) from them
-  7a. tools/port_diff_bytes.py, tools/port_layout_kinds.py, tcrf_check/tools/rom_layout_map.py: the picture <dir>/<s>_rom_layout_map.png
+  7a. tools/port_diff_bytes.py, tools/port_layout_kinds.py, tools/rom_layout_map.py: the picture <dir>/<s>_rom_layout_map.png
       (kind of every byte, no outline: the differences go to a text summary) and layout_by_bank_<s>.csv
   7. tools/port_queue.py         hand-work queue (port/hand_queue_<s>.csv); tools/port_cov.py: the Japanese coverage through the maps (port/cov_jp_in_<s>.npz)
   7b. tools/wram_db.py + tools/port_l4.py (L4 tables: RAM names, access sites, constants) and tools/state_names.py (the state constants
@@ -75,7 +75,7 @@ run(py, 'tools/port_diff_bytes.py', a.jp, a.other, npy, cmap, trace, os.path.joi
 os.makedirs(os.path.join(D, 'assets'), exist_ok=True)
 run(py, 'tools/port_layout_kinds.py', a.jp, a.other, os.path.join(P, 'port_report_%s.csv' % S), os.path.join(D, 'assets', 'layout_kind_overrides_%s.csv' % S))
 if not a.no_map:
-  run(py, 'tcrf_check/tools/rom_layout_map.py', os.path.join(D, '%s_rom_layout_map.png' % S), '--rom', a.other, '--map', os.path.join(TP, 'rom_map_%s.csv' % S), '--assets', 'none',
+  run(py, 'tools/rom_layout_map.py', os.path.join(D, '%s_rom_layout_map.png' % S), '--rom', a.other, '--map', os.path.join(TP, 'rom_map_%s.csv' % S), '--assets', 'none',
     '--witness', 'none', '--reach', 'none', '--unused', 'none', '--kinds', os.path.join(D, 'assets', 'layout_kind_overrides_%s.csv' % S),
       '--names', finaln, '--types', finalt,
       *(['--cov', os.path.join(P, 'cov_jp_in_%s.npz' % S)] if os.path.exists(os.path.join(P, 'cov_jp_in_%s.npz' % S)) else []),

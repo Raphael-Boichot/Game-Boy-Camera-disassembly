@@ -412,7 +412,7 @@ jr_006_4367:
 
 
 ; C: Left / Right arrow sprites; BGB watchpoint pass 2026-10-25: ran only in mode 15 (5632 hits in 16 runs: 15:02
-; x3263 15:06 x1118 15:07 x1251; tcrf_check/assets/mode_state_wp/)
+; x3263 15:06 x1118 15:07 x1251; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode15_DrawArrows::
     ldh a, [hKeysHeld]                            ; $4377
     bit PADB_LEFT, a                              ; $4379
@@ -448,7 +448,7 @@ jr_006_4393:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 15 (8762 hits in 16 runs: 15:02 x6526 15:06 x2236;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode15_DrawSecondsSprite::
     cpl                                           ; $439C
     inc a                                         ; $439D
@@ -459,7 +459,7 @@ Mode15_DrawSecondsSprite::
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 15 (6912 hits in 12 runs: 15:03 x3162 15:07 x2502 15:08 x1248;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode15_DrawOkSprite::
     ld a, $4d                                     ; $43A6
     call Oam_AddMeta_B01_5D2B                     ; $43A8
@@ -467,7 +467,7 @@ Mode15_DrawOkSprite::
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 15 (2205 hits in 12 runs: 15:03 x1581 15:08 x624;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode15_DrawBlinkSprite::
     ldh a, [hFrameCounter]                        ; $43AC
     and $07                                       ; $43AE
@@ -518,7 +518,7 @@ jr_006_43c7:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 15 (14 hits in 6 runs: 15:05 x14;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode15_DrawTwoDigitsInterval::
     ld c, $00                                     ; $43F3
 
@@ -552,7 +552,7 @@ jr_006_43fe:
 
 
 ; C: interval text in tile writes; BGB watchpoint pass 2026-10-25: ran only in mode 15 (18 hits in 6 runs: 15:05 x14
-; 15:06 x4; tcrf_check/assets/mode_state_wp/)
+; 15:06 x4; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode15_DrawIntervalText::
     and a                                         ; $4422
     jr nz, jr_006_4456                            ; $4423
@@ -801,7 +801,7 @@ Mode16_MenuCursorPosTbl::
     db $4c, $30, $5c, $30, $6c, $30, $7c, $30
 
 ; C: option 1 (opt1_row / opt1_value); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 03 (6460 hits in
-; 14 runs: 16:03 x6460; tcrf_check/assets/mode_state_wp/)
+; 14 runs: 16:03 x6460; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_State03_TrickLensesMenu::
     call Mode16_DrawCaptionBlink                  ; $465C
     ld hl, wOpt1Row                               ; $465F
@@ -880,7 +880,7 @@ Mode16_TrickLensIconSrcTbl::
     dwb Gfx_0D_6800_Icon06_46E6
 
 ; C: option 2 (opt2_row / opt2_value); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 04 (1914 hits in
-; 4 runs: 16:04 x1914; tcrf_check/assets/mode_state_wp/)
+; 4 runs: 16:04 x1914; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_State04_MontageMenu::
     call Mode16_DrawCaptionBlink                  ; $4701
     ld hl, wOpt2Row                               ; $4704
@@ -954,7 +954,7 @@ Mode16_MontageIconSrcTbl::
     dwb Gfx_0D_6F00_Icon06_4786
 
 ; C: option 3 (two toggles); BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 05 (22910 hits in 13 runs:
-; 16:05 x22910; tcrf_check/assets/mode_state_wp/)
+; 16:05 x22910; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_State05_PanoramaMenu::
     call Mode16_DrawPanoramaHint                  ; $479B
     ld hl, wOpt3Cursor                            ; $479E
@@ -1002,7 +1002,7 @@ jr_006_47e0:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 16 (11455 hits in 13 runs: 16:05 x11455;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_DrawPanoramaHint::
     ldh a, [hFrameCounter]                        ; $4802
     bit 3, a                                      ; $4804
@@ -1028,8 +1028,8 @@ jr_006_4819:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 16 (11455 hits in 13 runs: 16:05 x11455;
-; tcrf_check/assets/mode_state_wp/); C: the routine is executed in this build's coverage run and at most a quarter of
-; its Japanese instructions are unpaired
+; roms/jp_rev_a/experiments/mode_state_wp/); C: the routine is executed in this build's coverage run and at most a
+; quarter of its Japanese instructions are unpaired
 Mode16_DrawPanoramaToggles::
     ld a, [wOpt3ToggleA]                          ; $482A
     xor $01                                       ; $482D
@@ -1074,8 +1074,8 @@ Mode16_PanoramaRowPosTbl::
     db $60, $36, $68, $36, $70, $36, $78, $36
 
 ; C: option 4: game or Game Face editor; BGB watchpoint pass 2026-10-25: ran only in mode 16 and state 06 (6704 hits
-; in 7 runs: 16:06 x6704; tcrf_check/assets/mode_state_wp/); C: the routine is executed in this build's coverage run
-; and at most a quarter of its Japanese instructions are unpaired
+; in 7 runs: 16:06 x6704; roms/jp_rev_a/experiments/mode_state_wp/); C: the routine is executed in this build's
+; coverage run and at most a quarter of its Japanese instructions are unpaired
 Mode16_State06_GameFaceMenu::
     ld hl, wOpt4Cursor                            ; $4871
     ld c, $02                                     ; $4874
@@ -1336,7 +1336,7 @@ Mode16_CursorAnimTbl::
     db $30, $09, $31, $09, $32, $09, $31, $09
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 16 (8374 hits in 17 runs: 16:03 x6460 16:04 x1914;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_DrawIcon::
     sla a                                         ; $4A92
     ld c, a                                       ; $4A94
@@ -1451,7 +1451,7 @@ Mode16_PageTilesSrcTbl::
     dwb Gfx_0D_5300_Strip06_4B06
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 16 (172 hits in 24 runs: 16:00 x100 16:01 x56 16:03 x10 16:04
-; x6; tcrf_check/assets/mode_state_wp/)
+; x6; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_LoadIconTiles::
     ld c, a                                       ; $4B12
     sla a                                         ; $4B13
@@ -1530,7 +1530,7 @@ Mode16_BuildList0::
 
 
 ; C: two rows; BGB watchpoint pass 2026-10-25: ran only in mode 16 (8 hits in 4 runs: 16:04 x8;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_BuildList2::
     ld bc, $0002                                  ; $4B6B
     call Wait_Frames                              ; $4B6E
@@ -1594,7 +1594,7 @@ jr_006_4bad:
 
 
 ; C: four rows; BGB watchpoint pass 2026-10-25: ran only in mode 16 (34 hits in 13 runs: 16:01 x8 16:05 x26;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_BuildList4::
     ld bc, $0002                                  ; $4BBF
     call Wait_Frames                              ; $4BC2
@@ -1658,7 +1658,7 @@ jr_006_4c01:
 
 
 ; C: six rows; BGB watchpoint pass 2026-10-25: ran only in mode 16 (38 hits in 7 runs: 16:01 x8 16:06 x30;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_BuildList6::
     ld bc, $0002                                  ; $4C13
     call Wait_Frames                              ; $4C16
@@ -1733,7 +1733,7 @@ jr_006_4c64:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 16 (4187 hits in 17 runs: 16:03 x3230 16:04 x957;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode16_DrawCaptionBlink::
     ldh a, [hFrameCounter]                        ; $4C76
     bit 3, a                                      ; $4C78
@@ -1947,7 +1947,8 @@ jr_006_4e21:
     ret                                           ; $4E2E
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 19 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 19 replay(s) of the organic corpus, modes 17
+; (roms/jp_rev_a/experiments/l3_names/)
 Compose_DrawLayoutBlink::
     ldh a, [hFrameCounter]                        ; $4E2F
     bit 4, a                                      ; $4E31
@@ -1973,7 +1974,7 @@ Compose_DrawLayoutCursor::
 
 
 ; C: auto: 6 bytes, bytes; referenced by Compose_DrawLayoutCursor. L3 pass 2026-10-26: read in BGB in 19 replay(s) of
-; the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Compose_DrawLayoutCursor_Tbl4E4B::
     db $10, $10, $4c, $10, $60, $4d
 
@@ -2042,7 +2043,7 @@ jr_006_4eb8:
 
 
 ; C: auto: 4 bytes, bytes; referenced by Mode17_State02_Split_Cursor. L3 pass 2026-10-26: read in BGB in 16 replay(s)
-; of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State02_Split_Cursor_Tbl4EC8::
     db $03, $04, $05, $06
 
@@ -2120,7 +2121,7 @@ Compose_Split_DrawCursor::
 
 
 ; C: auto: 8 bytes, bytes; referenced by Compose_Split_DrawCursor. L3 pass 2026-10-26: read in BGB in 18 replay(s) of
-; the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Compose_Split_DrawCursor_Tbl4F3A::
     db $28, $08, $50, $08, $28, $78, $50, $78
 
@@ -2153,7 +2154,7 @@ jr_006_4f5b:
 
 
 ; C: auto: 4 bytes, word table; referenced by Mode17_State03_Split_Pick1. L3 pass 2026-10-26: read in BGB in 16
-; replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State03_Split_Pick1_PtrTbl4F79::
     dw $4a49
     dw $4a4b
@@ -2187,7 +2188,7 @@ jr_006_4f96:
 
 
 ; C: auto: 4 bytes, word table; referenced by Mode17_State04_Split_Pick2. L3 pass 2026-10-26: read in BGB in 2
-; replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State04_Split_Pick2_PtrTbl4FB4::
     dw $4a49
     dw $4a4b
@@ -2221,7 +2222,7 @@ jr_006_4fd1:
 
 
 ; C: auto: 4 bytes, word table; referenced by Mode17_State05_Split_Pick3. L3 pass 2026-10-26: read in BGB in 1
-; replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State05_Split_Pick3_PtrTbl4FEF::
     dw $504f
     dw $5051
@@ -2255,7 +2256,7 @@ jr_006_500c:
 
 
 ; C: auto: 4 bytes, word table; referenced by Mode17_State06_Split_Pick4. L3 pass 2026-10-26: read in BGB in 1
-; replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State06_Split_Pick4_PtrTbl502A::
     dw $504f
     dw $5051
@@ -2300,7 +2301,8 @@ jr_006_5065:
     ret                                           ; $5074
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 17
+; (roms/jp_rev_a/experiments/l3_names/)
 Compose_Split_DrawMakeBlink::
     ldh a, [hFrameCounter]                        ; $5075
     bit 4, a                                      ; $5077
@@ -2444,7 +2446,7 @@ jr_006_51ba:
 
 
 ; C: auto: 2 bytes, bytes; referenced by Mode17_State0A_Fusion_Cursor. L3 pass 2026-10-26: read in BGB in 1 replay(s)
-; of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State0A_Fusion_Cursor_Tbl51CA::
     dw $0c0b
 
@@ -2500,7 +2502,7 @@ Compose_Fusion_DrawCursor::
 
 
 ; C: auto: 4 bytes, bytes; referenced by Compose_Fusion_DrawCursor. L3 pass 2026-10-26: read in BGB in 4 replay(s) of
-; the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Compose_Fusion_DrawCursor_Tbl5216::
     db $28, $08, $28, $78
 
@@ -2533,7 +2535,7 @@ jr_006_5233:
 
 
 ; C: auto: 4 bytes, word table; referenced by Mode17_State0B_Fusion_Pick1. L3 pass 2026-10-26: read in BGB in 1
-; replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Mode17_State0B_Fusion_Pick1_PtrTbl5251::
     dw $4a49
     dw $4a4b
@@ -2613,7 +2615,8 @@ jr_006_52c7:
     ret                                           ; $52D6
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 17
+; (roms/jp_rev_a/experiments/l3_names/)
 Compose_Fusion_DrawMakeBlink::
     ldh a, [hFrameCounter]                        ; $52D7
     bit 4, a                                      ; $52D9
@@ -2977,7 +2980,8 @@ jr_006_5630:
     ret                                           ; $5636
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 17
+; (roms/jp_rev_a/experiments/l3_names/)
 Compose_WriteTilePair::
     ld a, [de]                                    ; $5637
     call Vram_WriteByteSafe                       ; $5638
@@ -3029,7 +3033,8 @@ jr_006_5677:
     ret                                           ; $567D
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 17
+; (roms/jp_rev_a/experiments/l3_names/)
 Compose_WriteTilePairB::
     ld a, [de]                                    ; $567E
     call Vram_WriteByteSafe                       ; $567F
@@ -3201,7 +3206,8 @@ jr_006_575a:
     ret                                           ; $576A
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 16 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 16 replay(s) of the organic corpus, modes 17
+; (roms/jp_rev_a/experiments/l3_names/)
 Compose_DrawPhotoCursor::
     ldh a, [hFrameCounter]                        ; $576B
     srl a                                         ; $576D
@@ -3693,7 +3699,7 @@ jr_006_5a99:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (56 hits in 3 runs: 18:03 x56;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_DrawPrintLabel::
     ld bc, $1662                                  ; $5ABD
     ld a, $5c                                     ; $5AC0
@@ -3702,7 +3708,7 @@ Mode18_DrawPrintLabel::
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (50 hits in 4 runs: 18:03 x50;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_DrawCancelLabel::
     ld bc, $1673                                  ; $5AC6
     ld a, $5d                                     ; $5AC9
@@ -3799,7 +3805,7 @@ jr_006_5b3d:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (2096 hits in 8 runs: 18:01 x2096;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_Pick1_Left::
     bit 5, b                                      ; $5B45
     jr z, jr_006_5b54                             ; $5B47
@@ -3825,7 +3831,7 @@ jr_006_5b54:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (2096 hits in 8 runs: 18:01 x2096;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_Pick1_Right::
     bit 7, b                                      ; $5B63
     jr z, jr_006_5b75                             ; $5B65
@@ -3884,7 +3890,7 @@ jr_006_5ba6:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (13800 hits in 3 runs: 18:02 x13800;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_Pick2_Up::
     bit 6, b                                      ; $5BAE
     jr z, jr_006_5bbd                             ; $5BB0
@@ -3910,7 +3916,7 @@ jr_006_5bbd:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (13800 hits in 3 runs: 18:02 x13800;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_Pick2_Down::
     bit 5, b                                      ; $5BCC
     jr z, jr_006_5bde                             ; $5BCE
@@ -3939,7 +3945,7 @@ jr_006_5bde:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (1048 hits in 8 runs: 18:01 x1048;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_Pick1_DrawCursor::
     ld a, [wSelSlot]                              ; $5BEE
     sla a                                         ; $5BF1
@@ -3991,7 +3997,7 @@ Mode18_Pick1_CursorAnimTbl::
     db $54, $05, $55, $05, $56, $05, $ff
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (6900 hits in 3 runs: 18:02 x6900;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_Pick2_DrawCursor::
     ld a, [wSelSlot]                              ; $5C34
     sla a                                         ; $5C37
@@ -4046,7 +4052,7 @@ Mode18_Pick2_CursorAnimTbl::
     db $57, $05, $58, $05, $59, $05, $ff
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (16140 hits in 9 runs: 18:00 x28 18:01 x2096 18:02 x13800
-; 18:03 x216; tcrf_check/assets/mode_state_wp/)
+; 18:03 x216; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_DrawArrows::
     ld bc, $7034                                  ; $5C7A
     ld a, $5a                                     ; $5C7D
@@ -4058,7 +4064,7 @@ Mode18_DrawArrows::
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (28 hits in 9 runs: 18:00 x28;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_LoadAllThumbs::
     ld hl, wBurstPhotos                           ; $5C8B
     ld c, $00                                     ; $5C8E
@@ -4219,7 +4225,7 @@ Mode18_LoadThumb_Tbl5D43::
     dwb Gfx_11_7E00_Icon06_5D43
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (44 hits in 9 runs: 18:00 x28 18:01 x16;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_DrawThumbFrame::
     push af                                       ; $5D5B
     push bc                                       ; $5D5C
@@ -4277,7 +4283,7 @@ jr_006_5da4:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 18 (78 hits in 3 runs: 18:00 x30 18:01 x48;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode18_LoadTileIndexed::
     swap a                                        ; $5DC6
     ld c, a                                       ; $5DC8
@@ -4629,7 +4635,7 @@ Mode14_State01_LiveView_OptionKey::
 
 
 ; C: auto: 88 bytes, bytes; referenced by Shoot_CallVariantHandler, Shoot_SetupCapture. L3 pass 2026-10-26: read in
-; BGB in 71 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; BGB in 71 replay(s) of the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_CallVariantHandler_Tbl60DE::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $01, $01, $01, $01
     db $02, $02, $02, $02, $03, $03, $03, $03, $04, $04, $04, $04, $05, $05, $05, $05
@@ -4744,7 +4750,8 @@ jr_006_61a8:
     ret                                           ; $61D9
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawOptionPanel::
     call Oam_ClearShadow                          ; $61DA
     rst Rst08_WaitVBlank                          ; $61DD
@@ -4841,7 +4848,8 @@ Shoot_DrawVariantIcon::
     inc e                                         ; $62C4
     inc e                                         ; $62C5
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawIconBits::
     push bc                                       ; $62C6
     ld a, d                                       ; $62C7
@@ -4863,7 +4871,7 @@ jr_006_62d5:
 
 
 ; C: auto: 66 bytes, bytes; referenced by Shoot_DrawVariantIcon. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawVariantIcon_Tbl62D9::
     db $03, $00, $34, $4f, $46, $57, $01, $00, $34, $4f, $00, $00, $02, $00, $46, $57
     db $00, $00, $03, $00, $34, $4f, $46, $57, $03, $00, $34, $4f, $46, $57, $02, $00
@@ -4871,7 +4879,8 @@ Shoot_DrawVariantIcon_Tbl62D9::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $03, $00, $34, $4f
     db $46, $57
 
-; C: L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawBurstIcon::
     ld a, [wShootVariant]                         ; $631B
     cp $13                                        ; $631E
@@ -5057,7 +5066,8 @@ Shoot_ShutterVariant3::
     ret                                           ; $644B
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawTimerJitter::
     ldh a, [hFrameCounter]                        ; $644C
     and $01                                       ; $644E
@@ -5173,7 +5183,8 @@ jr_006_650b:
     ret                                           ; $6513
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawShotJitter::
     ldh a, [hFrameCounter]                        ; $6514
     and $01                                       ; $6516
@@ -5626,7 +5637,8 @@ jr_006_6833:
     ret                                           ; $684A
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_ReadKeysB::
     ldh a, [hKeysNewRepeat]                       ; $684B
     ld b, a                                       ; $684D
@@ -5655,7 +5667,8 @@ jr_006_6861:
     ret                                           ; $6867
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorB::
     ld a, [wChoiceCursorA]                        ; $6868
     sla a                                         ; $686B
@@ -5701,12 +5714,12 @@ jr_006_689c:
 
 
 ; C: auto: 10 bytes, bytes; referenced by Shoot_Options_DrawCursorB. L3 pass 2026-10-26: read in BGB in 3 replay(s) of
-; the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorB_Tbl68A6::
     db $18, $90, $30, $90, $48, $90, $60, $90, $78, $90
 
 ; C: auto: 6 bytes, bytes; referenced by Shoot_Options_DrawCursorB. L3 pass 2026-10-26: read in BGB in 3 replay(s) of
-; the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorB_Tbl68B0::
     db $a0, $10, $a1, $0b, $a1, $ff
 
@@ -5781,7 +5794,8 @@ jr_006_6901:
     ret                                           ; $6918
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_ReadKeysC::
     ldh a, [hKeysNewRepeat]                       ; $6919
     ld b, a                                       ; $691B
@@ -5830,7 +5844,8 @@ jr_006_692f:
     ret                                           ; $696D
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorC::
     ld a, [wChoiceCursorA]                        ; $696E
     sla a                                         ; $6971
@@ -5876,12 +5891,12 @@ jr_006_69a2:
 
 
 ; C: auto: 6 bytes, tile data; referenced by Shoot_Options_DrawCursorC. L3 pass 2026-10-26: read in BGB in 1 replay(s)
-; of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorC_Gfx69AC::
     db $10, $28, $10, $50, $10, $78
 
 ; C: auto: 6 bytes, bytes; referenced by Shoot_Options_DrawCursorC. L3 pass 2026-10-26: read in BGB in 1 replay(s) of
-; the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorC_Tbl69B2::
     db $a0, $10, $a1, $0b, $a1, $ff
 
@@ -5978,7 +5993,8 @@ jr_006_6a41:
     ret                                           ; $6A58
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_ReadKeysD::
     ldh a, [hKeysNewRepeat]                       ; $6A59
     ld b, a                                       ; $6A5B
@@ -6028,7 +6044,8 @@ jr_006_6a6f:
     ret                                           ; $6AB0
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorD::
     ld a, [wChoiceCursorA]                        ; $6AB1
     sla a                                         ; $6AB4
@@ -6074,7 +6091,7 @@ jr_006_6ae5:
 
 
 ; C: auto: 52 bytes, tile data; referenced by Shoot_Options_DrawCursorD. L3 pass 2026-10-26: read in BGB in 1
-; replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorD_Gfx6AEF::
     db $80, $10, $80, $28, $80, $48, $80, $60, $80, $78, $80, $90, $80, $48, $80, $60
     db $80, $78, $80, $90, $80, $48, $80, $60, $80, $78, $80, $90, $80, $48, $80, $60
@@ -6082,7 +6099,7 @@ Shoot_Options_DrawCursorD_Gfx6AEF::
     db $80, $78, $80, $90
 
 ; C: auto: 6 bytes, bytes; referenced by Shoot_Options_DrawCursorD. L3 pass 2026-10-26: read in BGB in 1 replay(s) of
-; the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_Options_DrawCursorD_Tbl6B23::
     db $bc, $10, $bd, $0b, $bd, $ff
 
@@ -6104,7 +6121,7 @@ Mode14_State09_LeaveByVariant::
 
 
 ; C: auto: 44 bytes, bytes; referenced by Mode14_State09_LeaveByVariant. L3 pass 2026-10-26: read in BGB in 62
-; replay(s) of the organic corpus, modes 01 14 15 16 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 01 14 15 16 (roms/jp_rev_a/experiments/l3_names/)
 Mode14_State09_LeaveByVariant_Tbl6B4E::
     db MODE_SHOOT_PARLOR, STATE_01_INTRO, MODE_SELF_TIMER_INTERVAL, STATE_15_TIMER_INIT, MODE_SELF_TIMER_INTERVAL, STATE_15_INTERVAL_INIT, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW
     db MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW, MODE_SHUTTERBUG_MAGIC, STATE_16_REDRAW
@@ -6158,11 +6175,13 @@ jr_006_6c1c:
     ret                                           ; $6C54
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_LoadEffectGfx::
     ld a, [wShootEffectSel]                       ; $6C55
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_LoadEffectGfxA::
     ld c, a                                       ; $6C58
     sla a                                         ; $6C59
@@ -6192,7 +6211,7 @@ Shoot_LoadEffectGfxA::
 
 
 ; C: auto: 120 bytes, bytes; referenced by Shoot_LoadEffectGfxA. L3 pass 2026-10-26: read in BGB in 72 replay(s) of
-; the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_LoadEffectGfxA_Tbl6C78::
     db $00, $00, $00, $00, $00, $ff, $ff, $00, $00, $00, $ff, $ff, $00, $00, $ff, $00
     db $00, $00, $00, $ff, $00, $00, $00, $ff, $00, $00, $ff, $00, $ff, $00, $00, $ff
@@ -6203,7 +6222,8 @@ Shoot_LoadEffectGfxA_Tbl6C78::
     db $ff, $00, $ff, $ff, $00, $00, $ff, $00, $ff, $00, $ff, $ff, $00, $ff, $ff, $00
     db $ff, $00, $ff, $ff, $ff, $ff, $00, $ff
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_ClearEffectTiles::
     call Shoot_ClearVram8900                      ; $6CF0
 
@@ -6257,7 +6277,7 @@ jr_006_6d2f:
 
 
 ; C: $F0 tiles of $FF. L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_ClearVram8900::
     ld hl, $ff40                                  ; $6D38
     bit 7, [hl]                                   ; $6D3B
@@ -6286,7 +6306,8 @@ jr_006_6d4e:
     ret                                           ; $6D59
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_ClearVram8900Small::
     ld hl, $ff40                                  ; $6D5A
     bit 7, [hl]                                   ; $6D5D
@@ -6326,7 +6347,8 @@ jr_006_6d78:
     ret                                           ; $6D8E
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_ClearVram8B00::
     ld hl, $ff40                                  ; $6D8F
     bit 7, [hl]                                   ; $6D92
@@ -6513,7 +6535,8 @@ Shoot_LoadTimerScreen_Tbl6E36::
     db $d0, $8a, $30, $00, $ff, $40, $46, $17, $00, $89, $20, $00, $60, $46, $17, $00
     db $8a, $20, $00, $ff
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawPhotosLeft::
     ld a, [wPhotoCount]                           ; $70B6
     cpl                                           ; $70B9
@@ -6534,7 +6557,8 @@ jr_006_70c7:
     ret                                           ; $70CD
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 21 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 21 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawTimerMinutes::
     ld a, [wTimerMinutes]                         ; $70CE
     and a                                         ; $70D1
@@ -6565,7 +6589,8 @@ jr_006_7103:
     ret                                           ; $7109
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawShotsLeftTimer::
     ld a, [wShotsLeft]                            ; $710A
     ld c, $00                                     ; $710D
@@ -6584,7 +6609,8 @@ jr_006_7118:
     ret                                           ; $711E
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawTwoDigitsAt::
     push af                                       ; $711F
     ld a, c                                       ; $7120
@@ -6594,7 +6620,8 @@ Shoot_DrawTwoDigitsAt::
     ret                                           ; $7128
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_DrawDigitAt::
     ld c, a                                       ; $7129
     ld b, $00                                     ; $712A
@@ -6617,7 +6644,7 @@ Shoot_DrawDigitAt::
 
 
 ; C: copies when the LCD is on; safe copy otherwise. L3 pass 2026-10-26: executed in BGB in 72 replay(s) of the
-; organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Shoot_CopyTileSafe::
     push hl                                       ; $714B
     ld hl, $ff40                                  ; $714C
@@ -6686,7 +6713,8 @@ jr_006_7199:
 Shoot_ResetTimer_Tbl719D::
     db $05, $0a, $0f, $1e, $3c
 
-; C: L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic corpus, modes 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Shoot_SetCaptureMode::
     ld a, [wShootVariant]                         ; $71A2
     ld c, $01                                     ; $71A5
@@ -8028,8 +8056,8 @@ Shoot_PlayShutterSound::
 
 
 ; C: auto: 8 bytes, bytes; referenced by Shoot_PlayShutterSound. L3 pass 2026-10-26: read in BGB in 8 replay(s) of the
-; organic corpus, modes 14 (tcrf_check/assets/l3_names/); C: the 8 bytes of the Japanese type row are equal here (the
-; change is after the block)
+; organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/); C: the 8 bytes of the Japanese type row are equal
+; here (the change is after the block)
 Shoot_PlayShutterSound_Tbl7849::
     db SFX1_SHUTTER_SOUND_1, SNDCH_SFX1  ; #1
     db SFX3_SHUTTER_SOUND_2, SNDCH_SFX3  ; #2

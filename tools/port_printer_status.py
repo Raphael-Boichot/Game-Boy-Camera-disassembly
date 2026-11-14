@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Every printer status the Camera can receive, injected in the project's core, for the international and Gold ROMs (counterpart of the Japanese
-tcrf_check/tools/printer_status.py, docs §16.16).  The printer stand-in of the core answers like the real-trace model (gb_printer_model(1)); a variant
+tools/jp/printer_status.py, docs §16.16).  The printer stand-in of the core answers like the real-trace model (gb_printer_model(1)); a variant
 restores the snapshot taken just before the print key, replaces the status byte of chosen packets (gb_printer_inject: command, n-th packet, status, packets in a row)
 and runs FRAMES frames.
 Scenarios (joypad routes found in the core on the international ROM, the same on Gold):
@@ -13,11 +13,11 @@ Variant sets:
          tools/port_bgb_witness.py)
 usage: GBCAM_ROM=ROM port_printer_status.py OUTDIR card|dj [all,grid,absent] [--frames N] [--never roms/<f>/port/never_run_<s>.csv]
 Output: OUTDIR/status_runs.csv (variant, injection, end mode:state, mode:state path, packets, replies, never-run bytes hit, $DC27 last status, $DBCF error number - 1),
-        OUTDIR/exec.npz ('ex' = union of the bytes executed by every variant, for port_never_run.py).   PYTHONPATH: coverage/src and tcrf_check/tools."""
+        OUTDIR/exec.npz ('ex' = union of the bytes executed by every variant, for port_never_run.py).   PYTHONPATH: coverage/src and tools/jp."""
 import sys, os, csv, collections
 import numpy as np, ctypes as C
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
-sys.path.insert(0, os.path.join(ROOT, 'tcrf_check', 'tools')); sys.path.insert(0, os.path.join(ROOT, 'coverage', 'src'))
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'jp')); sys.path.insert(0, os.path.join(ROOT, 'coverage', 'src'))
 import lib; from lib import g
 a = sys.argv[1:]
 def opt(n, d=None):

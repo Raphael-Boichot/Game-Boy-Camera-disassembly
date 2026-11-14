@@ -16,7 +16,7 @@ OUT_DIR/kitty_scen_NAME_FRAME.png (BGB).
 """
 import sys, os, csv, argparse, subprocess, shutil
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
-sys.path.insert(0, os.path.join(REPO, 'coverage', 'src')); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
+sys.path.insert(0, os.path.join(REPO, 'coverage', 'src')); sys.path.insert(0, os.path.join(REPO, 'tools', 'jp'))
 import numpy as np, gbcov as G
 from bgb_run import read_state
 from PIL import Image

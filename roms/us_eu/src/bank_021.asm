@@ -5,28 +5,28 @@
 SECTION "ROM Bank $021", ROMX[$4000], BANK[$21]
 
 ; C: copied to VRAM/WRAM by Mode07_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 13 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode07_State00_Init reads them in this build (coverage call site or loader ...
+; in 13 replay(s) of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode07_State00_Init reads them in this build (coverage call site or ...
 Gfx_21_4000_Mode07_State00_Init::
     INCBIN "data/bank_21/Gfx_21_4000_Mode07_State00_Init.2bpp" ; $4000, 1872 bytes
 ; C: far pointer loaded by SpaceFever_LoadHudTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_4750_SpaceFever_LoadHudTiles::
     INCBIN "data/bank_21/Gfx_21_4750_SpaceFever_LoadHudTiles.2bpp" ; $4750, 176 bytes
 ; C: copied to VRAM/WRAM by Mode07_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 13 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; in 13 replay(s) of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_4800_Mode07_State00_Init::
     INCBIN "data/bank_21/Gfx_21_4800_Mode07_State00_Init.2bpp" ; $4800, 80 bytes
 ; C: far pointer loaded by SpaceFever_LoadHudTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_4850_SpaceFever_LoadHudTiles::
     INCBIN "data/bank_21/Gfx_21_4850_SpaceFever_LoadHudTiles.2bpp" ; $4850, 944 bytes
 ; C: Spriter's Resource sheet "Minigames - Space Fever II", 157 tiles. L3 pass 2026-10-26: read in BGB in 11 replay(s)
-; of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MinigamesSpaceFeverIi_21_49FC_Part4C00::
     INCBIN "data/bank_21/Sheet_MinigamesSpaceFeverIi_21_49FC_Part4C00.2bpp" ; $4C00, 96 bytes
 ; C: far pointer loaded by SpaceFever_DrawBestHud (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 11 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 11 replay(s) of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_4C60_SpaceFever_DrawBestHud::
     INCBIN "data/bank_21/Gfx_21_4C60_SpaceFever_DrawBestHud.2bpp" ; $4C60, 160 bytes
 ; C: tens digits 0-3 of the photo number on the comment card: 4 entries of 0x40 bytes (4 tiles each), $4D00 + 0x40 x
@@ -40,11 +40,11 @@ Gfx_21_4D00_CommentCard_DrawPhotoNumber_Tens::
 Gfx_21_4E00_CommentCard_DrawPhotoNumber_Ones::
     INCBIN "data/bank_21/Gfx_21_4E00_CommentCard_DrawPhotoNumber_Ones.2bpp" ; $4E00, 640 bytes
 ; C: far pointer loaded by CommentCard_DrawDigit (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_5080_CommentCard_DrawDigit::
     INCBIN "data/bank_21/Gfx_21_5080_CommentCard_DrawDigit.2bpp" ; $5080, 1120 bytes
 ; C: far pointer loaded by CommentCard_DrawBlood_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_54E0_CommentCard_DrawBlood_Far::
     INCBIN "data/bank_21/Gfx_21_54E0_CommentCard_DrawBlood_Far.2bpp" ; $54E0, 320 bytes
 ; C: far pointer loaded by CommentCard_DrawNibble (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
@@ -53,16 +53,16 @@ Gfx_21_54E0_CommentCard_DrawBlood_Far::
 Src_21_5620_CommentCard_DrawNibble::
     INCBIN "data/bank_21/Src_21_5620_CommentCard_DrawNibble.bin" ; $5620, 160 bytes
 ; C: far pointer loaded by CommentCard_DrawNumber (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_56C0_CommentCard_DrawNumber::
     INCBIN "data/bank_21/Gfx_21_56C0_CommentCard_DrawNumber.2bpp" ; $56C0, 16 bytes
 ; C: far pointer loaded by CommentCard_DrawGender_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_56D0_CommentCard_DrawGender_Far::
     INCBIN "data/bank_21/Gfx_21_56D0_CommentCard_DrawGender_Far.2bpp" ; $56D0, 192 bytes
 ; C: far pointer loaded by CommentCard_DrawCopyBadge_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 224 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 0A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_5790_CommentCard_DrawCopyBadge_Far::
     INCBIN "data/bank_21/Gfx_21_5790_CommentCard_DrawCopyBadge_Far.2bpp" ; $5790, 224 bytes
 ; C: far pointer loaded by CommentCard_DrawCopyBadge_Far (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
@@ -90,7 +90,7 @@ Gfx_21_5870_CommentCard_DrawCopyBadge_Far::
 
 ; C: Spriter's Resource sheet "Menus - Shoot Menu", 51 tiles | also inside record 1 of page 2 of Parlor_PageTbl
 ; (21:5A00 +$0800 -> $9000, C). L3 pass 2026-10-26: read in BGB in 28 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MenusShootMenu_21_5A10::
     INCBIN "data/bank_21/Sheet_MenusShootMenu_21_5A10.bin" ; $5A10, 545 bytes
 ; C: inside record 1 of page 2 (21:5A00 +$0800 -> $9000, VRAM $9231 onward) of Parlor_PageTbl (04:7436), loaded by
@@ -226,16 +226,16 @@ Bank21_ZeroFill_6B91::
 
 ; C: far pointer loaded by Mode19_State00_CopyrightScreens (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 1536 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 136 replay(s) of the organic corpus, modes 19
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_6BC0_Mode19_State00_CopyrightScreens::
     INCBIN "data/bank_21/Gfx_21_6BC0_Mode19_State00_CopyrightScreens.2bpp" ; $6BC0, 1536 bytes
 ; C: copied to VRAM/WRAM by Mode19_State00_CopyrightScreens (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 205 replay(s) of the organic corpus, modes 19 (tcrf_check/assets/l3_names/)
+; read in BGB in 205 replay(s) of the organic corpus, modes 19 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_21_71C0_Mode19_State00_CopyrightScreens::
     INCBIN "data/bank_21/Gfx_21_71C0_Mode19_State00_CopyrightScreens.2bpp" ; $71C0, 1536 bytes
 ; C: copied to VRAM/WRAM by BorderPicker_Substate0_Init, WildFramePicker_Substate0_Init
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 12 replay(s) of the organic corpus, modes
-; 09 0A 12 1C (tcrf_check/assets/l3_names/); C: the bytes changed but BorderPicker_Substate0_Init ...
+; 09 0A 12 1C (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_21_77C0_BorderPicker_Substate0_Init::
     INCBIN "data/bank_21/Gfx_21_77C0_BorderPicker_Substate0_Init.2bpp" ; $77C0, 1008 bytes
 ; C: far pointer loaded by BorderPicker_AnimateIcon, WildFramePicker_AnimateIcon (ld a,BANK; ld hl,ADDR; call banked
@@ -256,11 +256,11 @@ Gfx_21_7BC0_BorderPicker_AnimateIcon_Frames1to4::
     ds $c0, $00
 
 ; C: copied to VRAM/WRAM by CommentEditor_Sub0_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/); C: the bytes changed but
-; CommentEditor_Sub0_Init reads them in this build (coverage call site or ...
+; BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but CommentEditor_Sub0_Init reads them in this build (coverage call ...
 Map_21_7CC0_CommentEditor_Sub0_Init::
     INCBIN "data/bank_21/Map_21_7CC0_CommentEditor_Sub0_Init.tilemap" ; $7CC0, 576 bytes
 ; C: copied to VRAM/WRAM by CommentEditor_Sub0_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Map_21_7F00_CommentEditor_Sub0_Init::
     INCBIN "data/bank_21/Map_21_7F00_CommentEditor_Sub0_Init.tilemap" ; $7F00, 256 bytes

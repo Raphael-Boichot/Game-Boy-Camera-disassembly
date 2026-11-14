@@ -5,7 +5,7 @@
 
 PROTO_BGB.gb is the header-patched copy (md5 1d8097de...; BGB only, owner's rule 2026-11-08). Instance 1 listens, instance 2 connects
 (127.0.0.1:8766), both from 128 KiB of $00, both headless (`-headless`: linked runs stall with `-hf`, SETUP.md). SEQ_1 / SEQ_2 are key
-lists in the format of tcrf_check/tools/bgb_run.py (`KEYS:hold:wait,...`, played after the 250-frame boot hold and 400 free frames);
+lists in the format of tools/jp/bgb_run.py (`KEYS:hold:wait,...`, played after the 250-frame boot hold and 400 free frames);
 each demo is padded with empty frames to --frames so that both instances run the same length. At the end, for each instance:
 GAME_SEQ ($C0A0), the link role $C0D7 (0 none, 1 follower: the first byte received was $00, 2 master: the first byte received was
 the idle $FE), the shown value $C0DD, and the screen OUTPREFIX_<n>.png.
@@ -13,7 +13,7 @@ Menu path to COM: title A, then Down x5 on the menu (SRAM TEST ... COM), A. BGB_
 /home/claude/bgbp_<n>/debugmsg.txt (tools/proto_red_bgb.py).
 """
 import sys, os, subprocess, time, shutil, argparse
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tools', 'jp'))
 import bgb_run as B
 from PIL import Image
 ap = argparse.ArgumentParser(); ap.add_argument('rom'); ap.add_argument('out'); ap.add_argument('seq1'); ap.add_argument('seq2')
@@ -32,7 +32,7 @@ for n, seq, net in ((1, a.seq1, ['-listen', '127.0.0.1:8766']), (2, a.seq2, ['-c
         if os.path.exists(f): os.remove(f)
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(d, 'bgb.exe'), '-headless', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(d, 'bgb.ini'),
            '-rom', rom, '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav'] + net
-    if os.environ.get('BGB_WP'):                  # logging watchpoints (as tcrf_check/tools/bgb_run.py): hits go to <instance dir>/debugmsg.txt
+    if os.environ.get('BGB_WP'):                  # logging watchpoints (as tools/jp/bgb_run.py): hits go to <instance dir>/debugmsg.txt
         cmd += ['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1']
         if os.path.exists(os.path.join(d, 'debugmsg.txt')): os.remove(os.path.join(d, 'debugmsg.txt'))
     procs.append(subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE))

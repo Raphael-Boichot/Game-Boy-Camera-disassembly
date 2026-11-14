@@ -15,7 +15,7 @@ frames, picture). Long jobs: run it in the background (setsid nohup); it writes 
 """
 import sys, os, csv, argparse, subprocess, shutil, concurrent.futures as CF
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
-sys.path.insert(0, os.path.join(REPO, 'coverage', 'src')); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
+sys.path.insert(0, os.path.join(REPO, 'coverage', 'src')); sys.path.insert(0, os.path.join(REPO, 'tools', 'jp'))
 from bgb_run import read_state
 from PIL import Image
 ap = argparse.ArgumentParser()

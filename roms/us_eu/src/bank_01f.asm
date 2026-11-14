@@ -102,7 +102,7 @@ Snd_Trk4_InstrTbl::
     db $80, $4b, $00, $00, $2c
 
 ; C: single byte $80 between the instrument table and the waves. L3 pass 2026-10-26: read in BGB in 26 replay(s) of
-; the organic corpus, modes 00 08 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 00 08 (roms/jp_rev_a/experiments/l3_names/)
 Snd_Pad_40F1::
     db $80
 

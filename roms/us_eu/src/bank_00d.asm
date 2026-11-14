@@ -5,18 +5,18 @@
 SECTION "ROM Bank $00d", ROMX[$4000], BANK[$d]
 
 ; C: copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 16 (tcrf_check/assets/l3_names/); L3 same: the
-; readers here (Mode16_State00_Init, Mode16_State01_Redraw) are the ...
+; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 16 (roms/jp_rev_a/experiments/l3_names/); L3
+; same: the readers here (Mode16_State00_Init, Mode16_State01_Redraw) are ...
 Gfx_0D_4000_Mode16_State00_Init::
     INCBIN "data/bank_0d/Gfx_0D_4000_Mode16_State00_Init.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 16 (tcrf_check/assets/l3_names/); L3 same: the
-; readers here (Mode16_State00_Init, Mode16_State01_Redraw) are the ...
+; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 16 (roms/jp_rev_a/experiments/l3_names/); L3
+; same: the readers here (Mode16_State00_Init, Mode16_State01_Redraw) are ...
 Gfx_0D_4800_Mode16_State00_Init::
     INCBIN "data/bank_0d/Gfx_0D_4800_Mode16_State00_Init.2bpp" ; $4800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode16_State00_Init, Mode16_State01_Redraw (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 16 (tcrf_check/assets/l3_names/); L3 same: the
-; readers here (Mode16_State00_Init, Mode16_State01_Redraw) are the ...
+; 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 16 (roms/jp_rev_a/experiments/l3_names/); L3
+; same: the readers here (Mode16_State00_Init, Mode16_State01_Redraw) are ...
 Gfx_0D_5000_Mode16_State00_Init::
     INCBIN "data/bank_0d/Gfx_0D_5000_Mode16_State00_Init.2bpp" ; $5000, 768 bytes
 ; C: entry 3 of the {lo,hi,bank} table 06:4B17, 640 bytes each (constant pitch); C: entry 3 of this build's table
@@ -153,6 +153,6 @@ Unused_TCRF_KanjiMiddleBeforeAfterHave_Gfx::
 Gfx_0D_77E0_FillPatternTiles_Cont::
     INCBIN "data/bank_0d/Gfx_0D_77E0_FillPatternTiles_Cont.2bpp" ; $77E0, 288 bytes
 ; C: copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 33 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/)
+; in BGB in 33 replay(s) of the organic corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0D_7900_Mode0F_State05_ConfirmInit::
     INCBIN "data/bank_0d/Gfx_0D_7900_Mode0F_State05_ConfirmInit.2bpp" ; $7900, 1792 bytes

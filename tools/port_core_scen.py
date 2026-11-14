@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Targeted scenarios in the project's core (coverage/src/gbcov.c) for the international and Gold ROMs, joypad only (no RAM poke): the international
-counterparts of the Japanese tcrf_check/tools/dj_fields.py and the D.J. score print of bgb_dj_print.py.  The routes were found in the core on the
+counterparts of the Japanese tools/jp/dj_fields.py and the D.J. score print of bgb_dj_print.py.  The routes were found in the core on the
 international ROM (lib.play key probes from the boot; written here so that they are not rediscovered):
   main menu  A at the title -> 00:01; Down, A -> Space Fever II (07:01); A -> first wave (07:02); Right held 24 frames with A pulsed every 4 frames from frame 6
              shoots the D.J. ship -> mode $1F (1F:01); A, A, A (source, song, performer menus) -> 1F:05 performance; Select -> SOUND I page (1F:09); Select again -> SOUND II (1F:0A), NOISE (1F:0B).
@@ -8,10 +8,10 @@ international ROM (lib.play key probes from the boot; written here so that they 
 Scenario dj: breadth-first search over single taps (Right, Left, Up, Down, A, Select) from the SOUND I page, state key = (mode, state, the three field cursors
 $D8C8 / $D8F3 / $D8FA, the wave length $D985), depth <= DEPTH; then the print from every page reached, and from every state whose $D985 differs.
 usage: GBCAM_ROM=ROM port_core_scen.py OUT.npz [SAV] [--depth N]     OUT.npz: 'ex' = every byte the core executed in this run (union; port_never_run.py reads it)
-PYTHONPATH must hold coverage/src and tcrf_check/tools."""
+PYTHONPATH must hold coverage/src and tools/jp."""
 import sys, os, time
 import numpy as np
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tcrf_check', 'tools')); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'coverage', 'src'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tools', 'jp')); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'coverage', 'src'))
 import lib; from lib import g
 a = sys.argv[1:]
 DEPTH = int(a[a.index('--depth') + 1]) if '--depth' in a else 14

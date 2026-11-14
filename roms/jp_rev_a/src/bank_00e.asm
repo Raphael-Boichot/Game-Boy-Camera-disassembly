@@ -72,6 +72,6 @@ Gfx_0E_7B80_Head::
     INCBIN "data/bank_0e/Gfx_0E_7B80_Head.2bpp" ; $7B80, 896 bytes
 ; C: far pointer loaded by Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked
 ; copy/far call); length 288 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 6 replay(s) of the organic
-; corpus, modes 1A (tcrf_check/assets/l3_names/)
+; corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 Map_0E_7F00_Mode1A_State04_PlaceOrDelete::
     INCBIN "data/bank_0e/Map_0E_7F00_Mode1A_State04_PlaceOrDelete.tilemap" ; $7F00, 256 bytes

@@ -15,7 +15,7 @@ Gfx_1B_4000_Mode1C_State08_PrintJob::
 Gfx_1B_4800_Mode1C_State08_PrintJob::
     INCBIN "data/bank_1b/Gfx_1B_4800_Mode1C_State08_PrintJob.2bpp" ; $4800, 2048 bytes
 ; C: copied to VRAM/WRAM by CommentEditor_Sub0_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 2 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; BGB in 2 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1B_5000_CommentEditor_Sub0_Init::
     db $00, $00, $7c, $7c, $7c, $44, $7c, $5c, $70, $50, $70, $70, $00, $00, $00, $00
     db $00, $00, $00, $00, $1f, $00, $0f, $00, $07, $00, $03, $00, $01, $00, $00, $00
@@ -25,8 +25,8 @@ Gfx_1B_5000_CommentEditor_Sub0_Init::
     ds $d0, $00
 
 ; C: copied to VRAM/WRAM by Mode20_State09_ResultInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 1 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode20_State09_ResultInit reads them in this build (coverage call site or ...
+; in BGB in 1 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but Mode20_State09_ResultInit reads them in this build (coverage call ...
 Gfx_1B_5100_Mode20_State09_ResultInit::
     INCBIN "data/bank_1b/Gfx_1B_5100_Mode20_State09_ResultInit.2bpp" ; $5100, 4096 bytes
 ; C: copied to VRAM/WRAM by Mode21_State02_RaceSceneInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
@@ -64,12 +64,12 @@ Gfx_1B_6FC0_Mode21_State05_ReadySteadyGo::
 
 ; C: copied to VRAM/WRAM by Mode1D_State06_LoadWaitScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
 ; read in BGB in the scenarios err_card_inq80 1D:06, print_batch_1E 1D:06, print_card_1C 1D:06, print_single_1C 1D:06
-; (tcrf_check/assets/l3_names/scen_hits*.csv); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); C: the bytes ...
 Gfx_1B_7100_Mode1D_State06_LoadWaitScreen::
     INCBIN "data/bank_1b/Gfx_1B_7100_Mode1D_State06_LoadWaitScreen.2bpp" ; $7100, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode1D_State06_LoadWaitScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
 ; read in BGB in the scenarios err_card_inq80 1D:06, print_batch_1E 1D:06, print_card_1C 1D:06, print_single_1C 1D:06
-; (tcrf_check/assets/l3_names/scen_hits*.csv); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); C: the bytes ...
 Gfx_1B_7900_Mode1D_State06_LoadWaitScreen::
     db $f4, $fb, $f5, $fa, $f8, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $f7, $0f, $f7, $ff, $ff, $f7, $fb, $f7, $fb, $f7, $f9, $f7, $fd, $f3, $ff, $f0

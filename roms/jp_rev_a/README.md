@@ -26,7 +26,7 @@ MD5 `fdcfe686cf4df461e870b6e53b2b5a8b`, 1 MiB, MBC: MAC-GBD (camera cartridge). 
 | `sram/` | the cartridge RAM map as a table (`sram_map_jp.csv`, 71 rows, from docs §3) and the SRAM access sites of the code (`sram_access_jp.csv`) |
 | `assets/` | asset catalog, per-bank layout, reach and witness tables, layout kind evidence, bank atlas |
 | `captures/` | three emulator screens of the erase-all dialog |
-| `jp_rom_layout_map.png`, `jp_rom_reachability_map.png` | what each byte is, and what the runs reached (drawn by `tcrf_check/tools/rom_layout_map.py` / `rom_reach_map.py`) |
+| `jp_rom_layout_map.png`, `jp_rom_reachability_map.png` | what each byte is, and what the runs reached (drawn by `tools/rom_layout_map.py` / `rom_reach_map.py`) |
 
 *What the runs reached* (`jp_rom_reachability_map.png`: executed or read, forced only, never reached; legend in the picture):
 

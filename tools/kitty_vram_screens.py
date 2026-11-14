@@ -4,7 +4,7 @@ from a cold boot with the same demo timing as the explorer, two BGB workers). Wr
 screen MM_SS (VRAM), lcdc_MM_SS, oam_MM_SS. Used by tools/kitty_draw_layouts.py."""
 import sys,os,csv,subprocess,shutil,concurrent.futures,queue
 import numpy as np
-sys.path.insert(0,'/home/claude/game-boy-camera-disassembly/tcrf_check/tools'); sys.path.insert(0,'/home/claude/game-boy-camera-disassembly/coverage/src')
+sys.path.insert(0,'/home/claude/game-boy-camera-disassembly/tools/jp'); sys.path.insert(0,'/home/claude/game-boy-camera-disassembly/coverage/src')
 from bgb_run import read_state
 import gbcov as G
 ROM='/root/work/roms/pocketcamera_kitty.gb'; SC='/home/claude/game-boy-camera-disassembly/roms/hello_kitty/screens/'

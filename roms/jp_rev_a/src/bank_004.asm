@@ -188,7 +188,7 @@ jr_004_412f:
 
 
 ; C: background scroll wobble from the table at 417D. L3 pass 2026-10-26: executed in BGB in 81 replay(s) of the
-; organic corpus, modes 0A 0F 11 1A 1C (tcrf_check/assets/l3_names/)
+; organic corpus, modes 0A 0F 11 1A 1C (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_Wobble::
     ldh a, [hFrameCounter]                        ; $415C
     bit 1, a                                      ; $415E
@@ -216,7 +216,7 @@ jr_004_416f:
 
 
 ; C: 16 {scx. L3 pass 2026-10-26: read in BGB in 81 replay(s) of the organic corpus, modes 0A 0F 11 1A 1C
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_WobbleTbl::
     db $00, $00, $00, $00, $01, $00, $01, $00, $00, $00, $00, $00, $01, $00, $01, $00
     db $00, $00, $00, $00, $01, $00, $01, $00, $00, $fe, $ff, $ff, $00, $00, $01, $01
@@ -247,7 +247,7 @@ jr_004_41a6:
 
 
 ; C: 8 {y. L3 pass 2026-10-26: read in BGB in 81 replay(s) of the organic corpus, modes 0A 0F 10 11 1A 1C
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_CursorPosTbl::
     db $48, $18, $70, $18, $20, $40, $48, $40, $70, $40, $20, $68, $48, $68, $70, $68
 
@@ -438,7 +438,7 @@ jr_004_43c9:
 
 
 ; C: loads the 16-tile thumbnail to $8700. L3 pass 2026-10-26: executed in BGB in 76 replay(s) of the organic corpus,
-; modes 0A 0F 10 11 1A (tcrf_check/assets/l3_names/)
+; modes 0A 0F 10 11 1A (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_LoadBigThumb::
     ld a, [wPhotoIndex]                           ; $43D8
     ldh [hFarcallAArg], a                         ; $43DB
@@ -452,7 +452,7 @@ PhotoPicker_LoadBigThumb::
 
 
 ; C: clears the tile slot of the current photo. L3 pass 2026-10-26: executed in BGB in 76 replay(s) of the organic
-; corpus, modes 0A 0F 10 11 1A (tcrf_check/assets/l3_names/)
+; corpus, modes 0A 0F 10 11 1A (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_ClearThumbSlot::
     ld a, [wPhotoIndex]                           ; $43F3
     cp $1e                                        ; $43F6
@@ -620,12 +620,12 @@ PhotoPicker_IconTbl::
     dwb Gfx_13_6E00_Icon04_44DC
 
 ; C: page tab tiles of the current photo. L3 pass 2026-10-26: executed in BGB in 81 replay(s) of the organic corpus,
-; modes 0A 0F 10 11 1A 1C (tcrf_check/assets/l3_names/)
+; modes 0A 0F 10 11 1A 1C (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_LoadPageTabs::
     ld a, [wPhotoIndex]                           ; $44F1
 
 ; C: same for the photo in A. L3 pass 2026-10-26: executed in BGB in 81 replay(s) of the organic corpus, modes 0A 0F
-; 10 11 1A 1C (tcrf_check/assets/l3_names/)
+; 10 11 1A 1C (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_LoadPageTabsFor::
     cp $1e                                        ; $44F4
     jr c, jr_004_44fa                             ; $44F6
@@ -659,12 +659,13 @@ jr_004_44fa:
     ret                                           ; $4528
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 0F
+; (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_LoadPageTabs2::
     ld a, [wPhotoIndex]                           ; $4529
 
 ; C: L3 pass 2026-10-26: executed in BGB in 29 replay(s) of the organic corpus, modes 0F 11
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_LoadPageTabs2For::
     cp $1e                                        ; $452C
     jr c, jr_004_4532                             ; $452E
@@ -699,7 +700,7 @@ jr_004_4532:
 
 
 ; C: tile-map transition to the next page. L3 pass 2026-10-26: executed in BGB in 29 replay(s) of the organic corpus,
-; modes 11 (tcrf_check/assets/l3_names/)
+; modes 11 (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_PageTransitionNext::
     ld a, [wPickerCursorTarget]                   ; $4561
     call PhotoPicker_LoadPageTabs2For             ; $4564
@@ -724,7 +725,7 @@ PhotoPicker_PageTransitionNext::
 
 
 ; C: tile-map transition to the previous page. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic
-; corpus, modes 0F (tcrf_check/assets/l3_names/)
+; corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/)
 PhotoPicker_PageTransitionPrev::
     ld a, [wPickerCursorTarget]                   ; $45CF
     call PhotoPicker_LoadPageTabs2                ; $45D2
@@ -2040,7 +2041,7 @@ jr_004_5036:
 
 
 ; C: plays sound $45 and builds four quadrant tiles of the erase animation; BGB watchpoint pass 2026-10-25: ran only
-; in mode 0F (18 hits in 9 runs: 0F:07 x18; tcrf_check/assets/mode_state_wp/)
+; in mode 0F (18 hits in 9 runs: 0F:07 x18; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0F_EraseJingleTiles::
     play_music MUSIC_ERASE_JINGLE                 ; $5044
     ld de, $c0c0                                  ; $504b: $11 $c0 $c0 (a number, not a RAM address: ram_exclude)
@@ -2114,12 +2115,12 @@ jr_004_508d:
 
 
 ; C: table read by 5044; BGB watchpoint pass 2026-10-25: ran only in mode 0F (144 hits in 1 runs: 0F:07 x144;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0F_EraseTileTbl::
     db $1f, $1d, $1b, $19, $17, $15, $13, $11, $0e, $0c, $0a, $08, $06, $04, $02, $00
 
 ; C: copies one tile piece from a bank to VRAM (A bit 7 selects $9000 or $8800); BGB watchpoint pass 2026-10-25: ran
-; only in mode 0F (3806 hits in 9 runs: 0F:07 x3806; tcrf_check/assets/mode_state_wp/)
+; only in mode 0F (3806 hits in 9 runs: 0F:07 x3806; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0F_CopyPieceToVram::
     push bc                                       ; $50AF
     push de                                       ; $50B0
@@ -2698,7 +2699,7 @@ Stamp_IconSrcMaskTbl::
     db $20, $00
 
 ; C: auto: 11 bytes, bytes; referenced by Stamp_BuildGraphicsLayer, Stamp_BuildMaskLayer. L3 pass 2026-10-26: read in
-; BGB in 33 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; BGB in 33 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Stamp_BuildGraphicsLayer_Tbl54E0::
     db $04, $02, $04, $04, $05, $05, $05, $06, $01, $02, $01
 
@@ -2706,7 +2707,7 @@ Stamp_BuildGraphicsLayer_Tbl54E0::
     db $02, $02, $02, $02, $02, $02, $02
 
 ; C: auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s)
-; of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Stamp_DrawPaletteCursor_PtrTbl5502::
     dw Stamp_DrawPaletteCursor_PtrTbl5502 + $22
     dw Stamp_DrawPaletteCursor_PtrTbl5502 + $56
@@ -2758,19 +2759,19 @@ Stamp_DrawPaletteCursor_PtrTbl5502::
     dw $6051
 
 ; C: auto: 17 bytes, bytes; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s) of
-; the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Stamp_DrawPaletteCursor_Tbl5562::
     db $33, $3b, $3d, $3f, $37, $37, $37, $37, $37, $37, $37, $37, $37, $37, $37, $37
     db $37
 
 ; C: auto: 17 bytes, bytes; referenced by Main_Entry. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic
-; corpus, modes 19 (tcrf_check/assets/l3_names/)
+; corpus, modes 19 (roms/jp_rev_a/experiments/l3_names/)
 Main_Entry_Tbl5573::
     db $00, $02, $01, $01, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
     db $04
 
 ; C: auto: 118 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the
-; organic corpus, modes 11 19 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 11 19 (roms/jp_rev_a/experiments/l3_names/)
 Stamp_PaletteInput_Tbl5584::
     dw Stamp_PaletteInput_Tbl5584 + $22
     dw Stamp_PaletteInput_Tbl5584 + $62
@@ -2797,7 +2798,7 @@ Stamp_PaletteInput_Tbl5584::
     db $fc, $03, $f9, $0a
 
 ; C: auto: 17 bytes, bytes; referenced by Stamp_PaletteInput. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the
-; organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Stamp_PaletteInput_Tbl55FA::
     db $13, $0e, $09, $04, $2f, $2f, $10, $10, $0f, $0f, $02, $02, $0a, $0a, $10, $10
     db $0b
@@ -2881,7 +2882,7 @@ Stamp_MirrorBuffer_Gfx568C::
     db $02
 
 ; C: auto: 92 bytes, bytes; referenced by Stamp_Commit. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic
-; corpus, modes 11 (tcrf_check/assets/l3_names/)
+; corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Stamp_Commit_Tbl569D::
     dw Stamp_Commit_Tbl569D + $22
     dw Stamp_Commit_Tbl569D + $44
@@ -4938,13 +4939,14 @@ jr_004_6341:
     ret                                           ; $6353
 
 
-; C: L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 10
+; (roms/jp_rev_a/experiments/l3_names/)
 PenMenu_CursorPosTbl::
     db $03, $02, $09, $5b, $14, $5b, $2d, $5b, $45, $5b, $5e, $58, $1d, $58, $3b, $58
     db $5e
 
 ; C: auto: 3 bytes, bytes; referenced by PenMenu_DrawCursor. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the
-; organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 PenMenu_DrawCursor_Tbl6365::
     db $23, $23, $29
 
@@ -5072,7 +5074,8 @@ Pen_DrawCursor::
     ret                                           ; $644B
 
 
-; C: L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes 10
+; (roms/jp_rev_a/experiments/l3_names/)
 Pen_CursorSpriteTbl::
     db $2b, $2c, $2d, $2e, $2f, $30, $31, $32
 
@@ -5314,12 +5317,12 @@ jr_004_656e:
 
 
 ; C: auto: 16 bytes, bytes; referenced by Pen_Update. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 10 (tcrf_check/assets/l3_names/)
+; corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Pen_Update_Tbl657C::
     db $ff, $81, $ff, $71, $ff, $81, $ff, $71, $fd, $82, $fd, $72, $fc, $84, $fc, $74
 
 ; C: auto: 114 bytes, bytes; referenced by Pen_Update. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 10 (tcrf_check/assets/l3_names/)
+; corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Pen_Update_Tbl658C::
     db $ff, $ff, $bc, $bf, $ab, $af, $9f, $a4, $95, $9a, $8d, $93, $86, $8c, $80, $86
     db $7a, $80, $74, $7b, $6f, $77, $6b, $72, $67, $6e, $62, $6a, $5e, $66, $5b, $63
@@ -5376,12 +5379,12 @@ jr_004_6610:
 
 
 ; C: auto: 8 bytes, bytes; referenced by Pen_Draw. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic
-; corpus, modes 10 (tcrf_check/assets/l3_names/)
+; corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Pen_Draw_Tbl6648::
     db $00, $00, $00, $00, $fe, $fe, $fc, $fc
 
 ; C: auto: 108 bytes, bytes; referenced by Pen_Draw. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic
-; corpus, modes 10 (tcrf_check/assets/l3_names/)
+; corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Pen_Draw_Tbl6650::
     db $10, $14, $18, $1c, $23, $27, $2b, $2f, $36, $3a, $3e, $42, $49, $4d, $51, $55
     db $88, $08
@@ -5539,7 +5542,7 @@ PenMenu_BuildSize::
 
 
 ; C: auto: 8 bytes, word table; referenced by PenMenu_BuildSize. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 PenMenu_BuildSize_PtrTbl67A5::
     dw Map_24_4B20_PenMenuSizePanel0
     dw Map_24_4C00_PenMenuSizePanel1
@@ -5571,7 +5574,7 @@ PenMenu_BuildPattern::
 
 
 ; C: auto: 8 bytes, word table; referenced by PenMenu_BuildPattern. L3 pass 2026-10-26: read in BGB in 2 replay(s) of
-; the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 PenMenu_BuildPattern_PtrTbl67EF::
     dw Map_24_4E60_PenMenuPatternPanel0
     dw Map_24_4F40_PenMenuPatternPanel1
@@ -5603,7 +5606,7 @@ PenMenu_BuildSpeed::
 
 
 ; C: auto: 6 bytes, word table; referenced by PenMenu_BuildSpeed. L3 pass 2026-10-26: read in BGB in 1 replay(s) of
-; the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 PenMenu_BuildSpeed_PtrTbl6839::
     dw Map_24_76C0_PenMenuSpeedPanel0
     dw Map_24_77A0_PenMenuSpeedPanel1
@@ -6343,7 +6346,7 @@ Album_ShowPageScreen::
 
 
 ; C: same with other palettes. L3 pass 2026-10-26: executed in BGB in 41 replay(s) of the organic corpus, modes 09
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Album_ShowPageScreenB::
     call Oam_ClearShadow                          ; $6E3D
     ld a, DMGPAL_0123_NORMAL                      ; $6E40
@@ -6438,7 +6441,7 @@ jr_004_6eeb:
 
 
 ; C: metasprite $0D at (0. L3 pass 2026-10-26: executed in BGB in 42 replay(s) of the organic corpus, modes 09
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Slider_DrawBar::
     ld bc, $0800                                  ; $6EF4
     ld a, $0d                                     ; $6EF7
@@ -7091,12 +7094,13 @@ jr_004_731c:
 
 
 ; C: auto: 31 bytes, bytes; referenced by Parlor_AnimQueenSprite. L3 pass 2026-10-26: read in BGB in 88 replay(s) of
-; the organic corpus, modes 01 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 01 (roms/jp_rev_a/experiments/l3_names/)
 Parlor_AnimQueenSprite_Tbl7321::
     db $31, $51, $62, $51, $12, $32, $51, $61, $51, $0c, $31, $51, $62, $51, $0a, $32
     db $51, $61, $51, $0c, $31, $51, $62, $51, $0a, $32, $51, $61, $51, $0e, $ff
 
-; C: L3 pass 2026-10-26: executed in BGB in 24 replay(s) of the organic corpus, modes 01 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 24 replay(s) of the organic corpus, modes 01
+; (roms/jp_rev_a/experiments/l3_names/)
 Parlor_AnimateB::
     ld a, [wSpriteAnimTick]                       ; $7340
     inc a                                         ; $7343
@@ -7134,7 +7138,8 @@ Parlor_AnimateB_PtrTbl7372::
     dw Map_23_7040_Parlor_Page1
     dw Map_23_7280_Parlor_Page1_AltTopRows
 
-; C: L3 pass 2026-10-26: executed in BGB in 27 replay(s) of the organic corpus, modes 01 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 27 replay(s) of the organic corpus, modes 01
+; (roms/jp_rev_a/experiments/l3_names/)
 Parlor_AnimateC::
     ld a, [wSpriteAnimFrame]                      ; $7376
     sla a                                         ; $7379
@@ -7169,12 +7174,12 @@ jr_004_739d:
 
 
 ; C: auto: 9 bytes, bytes; referenced by Parlor_AnimateC. L3 pass 2026-10-26: read in BGB in 27 replay(s) of the
-; organic corpus, modes 01 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 01 (roms/jp_rev_a/experiments/l3_names/)
 Parlor_AnimateC_Tbl73A2::
     db $e0, $04, $e1, $04, $e2, $04, $00, $08, $ff
 
 ; C: metasprites $DD / $DE. L3 pass 2026-10-26: executed in BGB in 88 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Parlor_DrawPortraits::
     ld bc, $3151                                  ; $73AB
     ld a, $dd                                     ; $73AE
@@ -7802,11 +7807,13 @@ jr_004_7865:
     ret                                           ; $786E
 
 
-; C: L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 09 0A
+; (roms/jp_rev_a/experiments/l3_names/)
 AlbumPage_ChoiceAPosTbl::
     db $17, $10, $57, $10
 
-; C: L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 09 0A
+; (roms/jp_rev_a/experiments/l3_names/)
 AlbumPage_ArrowAnimTbl::
     db $bc, $10, $bd, $0b, $bd, $ff
 
@@ -7965,12 +7972,12 @@ jr_004_794a:
 
 
 ; C: auto: 4 bytes, bytes; referenced by AlbumPage_DrawChoiceB. L3 pass 2026-10-26: read in BGB in 43 replay(s) of the
-; organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 AlbumPage_DrawChoiceB_Tbl7954::
     db $19, $90, $59, $90
 
 ; C: auto: 6 bytes, bytes; referenced by AlbumPage_DrawChoiceB. L3 pass 2026-10-26: read in BGB in 43 replay(s) of the
-; organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 AlbumPage_DrawChoiceB_Tbl7958::
     db $a0, $10, $a1, $0b, $a1, $ff
 
@@ -8098,7 +8105,7 @@ jr_004_7a24:
 
 
 ; C: auto: 6 bytes, bytes; referenced by AlbumPage_DrawUp. L3 pass 2026-10-26: read in BGB in 63 replay(s) of the
-; organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 AlbumPage_DrawUp_Tbl7A2E::
     db $a0, $10, $a1, $0b, $a1, $ff
 
@@ -8226,7 +8233,7 @@ jr_004_7afa:
 
 
 ; C: auto: 6 bytes, bytes; referenced by AlbumPage_DrawDown. L3 pass 2026-10-26: read in BGB in 35 replay(s) of the
-; organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 AlbumPage_DrawDown_Tbl7B04::
     db $bc, $10, $bd, $0b, $bd, $ff
 

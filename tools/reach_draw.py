@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The one legend and the one drawing of every reachability map (HOWTO_NEW_ROM.md section 0.1, rule 4).
 
-Imported by tcrf_check/tools/rom_reach_map.py (the Japanese ROM) and tools/reach_map.py (every other ROM). A category keeps its
+Imported by tools/rom_reach_map.py (the Japanese ROM) and tools/reach_map.py (every other ROM). A category keeps its
 number, its colour and its meaning in every map; a ROM simply has no bytes in the categories it has no evidence for.
 
   0 blue        executed or read in a run without state pokes (organic)

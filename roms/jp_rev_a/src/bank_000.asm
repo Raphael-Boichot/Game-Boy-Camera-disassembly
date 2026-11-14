@@ -650,7 +650,7 @@ jr_000_0402:
 
 ; C: waits for LY in 1..$8D and STAT mode 0 (sync before a short VRAM burst). L3 pass 2026-10-26: executed in BGB in
 ; 203 replay(s) of the organic corpus, modes 00 01 02 03 06 07 08 09 0A 0E 0F 10 11 12 14 15 16 17 18 19 1A 1B 1C 1E
-; 20 (tcrf_check/assets/l3_names/)
+; 20 (roms/jp_rev_a/experiments/l3_names/)
 Vram_WaitHBlankLine::
     ldh a, [rLY]                                  ; $0406
     cp $01                                        ; $0408
@@ -1046,7 +1046,7 @@ jr_000_0581:
 
 
 ; C: 4 bytes per HBlank window. L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 07 10
-; 20 (tcrf_check/assets/l3_names/)
+; 20 (roms/jp_rev_a/experiments/l3_names/)
 Vram_CopyFromBank_4::
     bit 7, h                                      ; $0586
     jr nz, jr_000_0599                            ; $0588
@@ -2651,7 +2651,7 @@ jr_000_0ce1:
 
 
 ; C: returns 1/2/3/4 for the first set of bits 5/4/6/7 (left right up down). L3 pass 2026-10-26: executed in BGB in 2
-; replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Joy_DpadBitToIndex::
     bit 5, a                                      ; $0CF2
     jr z, jr_000_0cf9                             ; $0CF4
@@ -2801,7 +2801,7 @@ jr_000_0d76:
 
 
 ; C: draws a BG map (HL. L3 pass 2026-10-26: executed in BGB in 89 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_SpiralWipeIn::
     push af                                       ; $0DA0
     push hl                                       ; $0DA1
@@ -2965,7 +2965,7 @@ jr_000_0e5a:
 
 
 ; C: fills the BG map with $FF in a spiral order (20x17). L3 pass 2026-10-26: executed in BGB in 85 replay(s) of the
-; organic corpus, modes 01 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 01 (roms/jp_rev_a/experiments/l3_names/)
 Map_SpiralWipeOut::
     ld a, $00                                     ; $0E67
     ld hl, Gfx_WipeTile                           ; $0E69
@@ -3101,7 +3101,7 @@ jr_000_0efb:
 
 
 ; C: 16-byte tile used by the wipes. L3 pass 2026-10-26: read in BGB in 89 replay(s) of the organic corpus, modes 01
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_WipeTile::
     INCBIN "data/bank_00/Gfx_WipeTile.2bpp" ; $0F06, 16 bytes
 ; C: serial interrupt body of the printer driver
@@ -3794,7 +3794,8 @@ jr_000_1313:
 
 
 ; C: auto: 3 bytes, bytes; referenced by DjSnd_StepNoise. L3 pass 2026-10-26: read in BGB in the scenarios dj_editor
-; 1F:05, dj_editor 1F:09, dj_editor_sound2 1F:05, dj_editor_sound2 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:05, dj_editor 1F:09, dj_editor_sound2 1F:05, dj_editor_sound2 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjSnd_StepNoise_Tbl1350::
     db $80, $88, $08
 
@@ -4301,7 +4302,7 @@ Img_AndMaskTiles_Ptrs::
     db $00, $c0, $80, $c0, $00, $c7, $80, $c7
 
 ; C: A<$80: A = photo_vector_ram[A]. L3 pass 2026-10-26: executed in BGB in 55 replay(s) of the organic corpus, modes
-; 0F 12 1A (tcrf_check/assets/l3_names/)
+; 0F 12 1A (roms/jp_rev_a/experiments/l3_names/)
 Vec_GetPhotoVectorByte::
     push bc                                       ; $15ED
     push de                                       ; $15EE
@@ -4323,7 +4324,7 @@ jr_000_15fc:
 
 
 ; C: A<$80: far call 02:444D. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Vec_GetPhotoVectorByteFar::
     push bc                                       ; $1600
     push de                                       ; $1601
@@ -5855,7 +5856,7 @@ Blit_MaskTbl_Copy_Dead::
     db $ff, $7f, $3f, $1f, $0f, $07, $03, $01, $ff, $80, $c0, $e0, $f0, $f8, $fc, $fe
 
 ; C: computes the tile address for one cell through the row table 00:2170 and stores a patch record. L3 pass
-; 2026-10-26: executed in BGB in 7 replay(s) of the organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
+; 2026-10-26: executed in BGB in 7 replay(s) of the organic corpus, modes 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_MakePatchEntry::
     push de                                       ; $1EEE
     ld a, c                                       ; $1EEF
@@ -5893,7 +5894,7 @@ Blit_MakePatchEntry::
 
 
 ; C: builds the 5-byte patch list at $C800 for the destination rectangle. L3 pass 2026-10-26: executed in BGB in 7
-; replay(s) of the organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_BuildPatchList::
     push bc                                       ; $1F1A
     ld hl, hBlitWidth                             ; $1F1B
@@ -5941,7 +5942,7 @@ jr_000_1f39:
 
 
 ; C: derives the shift page and the left / right edge masks from the x offset and width. L3 pass 2026-10-26: executed
-; in BGB in 7 replay(s) of the organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
+; in BGB in 7 replay(s) of the organic corpus, modes 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_PrepareMasks::
     ld a, b                                       ; $1F51
     and $07                                       ; $1F52
@@ -5998,12 +5999,12 @@ jr_000_1f9d:
 
 
 ; C: 8 byte mask table indexed by x mod 8. L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes
-; 10 11 (tcrf_check/assets/l3_names/)
+; 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_LeftMaskTbl::
     db $ff, $7f, $3f, $1f, $0f, $07, $03, $01
 
 ; C: 9 byte mask table indexed by (x+w) mod 8. L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus,
-; modes 10 11 (tcrf_check/assets/l3_names/)
+; modes 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_RightMaskTbl::
     db $ff, $80, $c0, $e0, $f0, $f8, $fc, $fe
 
@@ -6393,7 +6394,7 @@ jr_000_215d:
     jr jr_000_2140                                ; $216E
 
 ; C: 18 words: pointer to the VRAM address row of each tile row. L3 pass 2026-10-26: read in BGB in 7 replay(s) of the
-; organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_TileRowPtrTbl::
     dw Blit_TileAddrTbl
     dw Blit_TileAddrTbl + $28
@@ -6415,7 +6416,7 @@ Blit_TileRowPtrTbl::
     dw Blit_TileAddrTbl + $2A8
 
 ; C: 18 rows x 20 words: low/high byte of the VRAM address of each tile cell (2 bytes per entry). L3 pass 2026-10-26:
-; read in BGB in 7 replay(s) of the organic corpus, modes 10 11 (tcrf_check/assets/l3_names/)
+; read in BGB in 7 replay(s) of the organic corpus, modes 10 11 (roms/jp_rev_a/experiments/l3_names/)
 Blit_TileAddrTbl::
     INCBIN "data/bank_00/Blit_TileAddrTbl.bin" ; $2194, 720 bytes
 ; C: adds an OAM list from the pointer table 02:6E4B (A = index) at the OAM cursor; BC = Y/X offset
@@ -6771,7 +6772,7 @@ jr_000_2617:
 
 
 ; C: two bytes through the table at $37xx -> one 2-bit value (b + 2*c). L3 pass 2026-10-26: executed in BGB in 3
-; replay(s) of the organic corpus, modes 10 14 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 10 14 (roms/jp_rev_a/experiments/l3_names/)
 Img_PairLookup::
     push bc                                       ; $261B
     push hl                                       ; $261C
@@ -6794,7 +6795,7 @@ Img_PairLookup::
 
 
 ; C: packs four rows of 2-bit values into BC after adding the dither offsets D / E. L3 pass 2026-10-26: executed in
-; BGB in 3 replay(s) of the organic corpus, modes 10 14 (tcrf_check/assets/l3_names/)
+; BGB in 3 replay(s) of the organic corpus, modes 10 14 (roms/jp_rev_a/experiments/l3_names/)
 Img_PackQuadBits::
     ld bc, $0000                                  ; $2631
     ld a, $04                                     ; $2634
@@ -7164,7 +7165,7 @@ jr_000_27f0:
 
 
 ; C: 2:1 reduction to $C000-$C1BF (6 callers in bank 06). L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the
-; organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Img_ReduceHalfTo224Wide::
     push bc                                       ; $27F4
     push de                                       ; $27F5
@@ -7351,7 +7352,7 @@ Img_CombineNibbleMap::
 
 
 ; C: adds 2 and keeps 2-bit level planes of an 8x2 block. L3 pass 2026-10-26: executed in BGB in 19 replay(s) of the
-; organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Img_QuantizeBlockRound::
     push de                                       ; $28D8
     ld de, $000c                                  ; $28D9
@@ -7402,7 +7403,7 @@ jr_000_28e1:
 
 
 ; C: same with the dither offsets D / E. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus,
-; modes 12 1E (tcrf_check/assets/l3_names/)
+; modes 12 1E (roms/jp_rev_a/experiments/l3_names/)
 Img_QuantizeBlockDither::
     ld bc, $0000                                  ; $2925
     ld a, $02                                     ; $2928
@@ -7457,7 +7458,7 @@ jr_000_296a:
 
 
 ; C: draws the thumbnail frame and the bottom line at pixel row 27. L3 pass 2026-10-26: executed in BGB in 3 replay(s)
-; of the organic corpus, modes 10 14 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 10 14 (roms/jp_rev_a/experiments/l3_names/)
 Thumb_DrawFrame::
     push bc                                       ; $296F
     push de                                       ; $2970
@@ -7617,7 +7618,7 @@ Thumb_CopyBadgeTbl::
     db $fc, $00
 
 ; C: calls 1F:7FF6 (sound init) from bank 0. L3 pass 2026-10-26: executed in BGB in 204 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Snd_Init_Tramp::
     ldh a, [hRomBankShadow]                       ; $2A23
     push af                                       ; $2A25
@@ -7917,7 +7918,7 @@ jr_000_2ba4:
 
 
 ; C: connected: bulk data / sync exchange. L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:08,
-; link_exchange 0E:0B, link_exchange 0E:10, link_exchange 0E:12 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; link_exchange 0E:0B, link_exchange 0E:10, link_exchange 0E:12 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Link_Irq_Connected::
     ld a, [wLnkStage]                             ; $2BC6
     and a                                         ; $2BC9
@@ -8141,7 +8142,7 @@ Link_Irq_Abort_ClearState::
     jr Link_Irq_Exit                              ; $2D33
 
 ; C: re-arms the timer for the next byte. L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:01,
-; link_exchange 0E:08, link_exchange 0E:0B, link_exchange 0E:10 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; link_exchange 0E:08, link_exchange 0E:0B, link_exchange 0E:10 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Link_Irq_StartTimer::
     ld a, SCF_START                               ; $2D35
     ldh [rSC], a                                  ; $2D37
@@ -8491,19 +8492,20 @@ Mode_Table::
     dwb Mode21_RunRunRun
 
 ; C: 16 signed deltas added to scroll Y per frame for the popup slide (03:43EF). L3 pass 2026-10-26: read in BGB in 91
-; replay(s) of the organic corpus, modes 09 0A 12 14 1C (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 09 0A 12 14 1C (roms/jp_rev_a/experiments/l3_names/)
 Slide_ScyDeltaTbl::
     db $ff, $fa, $f7, $fa, $ff, $03, $04, $03, $00, $ff, $fe, $ff, $00, $00, $01, $00
 
 ; C: auto: 48 bytes, bytes; referenced by Mode09_State03_PageLeft, Mode09_State04_PageRight, Mode09_State05_PageUp. L3
-; pass 2026-10-26: read in BGB in 66 replay(s) of the organic corpus, modes 09 0A 14 (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 66 replay(s) of the organic corpus, modes 09 0A 14
+; (roms/jp_rev_a/experiments/l3_names/)
 Mode09_State03_PageLeft_Tbl2FB5::
     db $ff, $fa, $f7, $fa, $ff, $03, $04, $03, $00, $ff, $fe, $ff, $00, $00, $01, $00
     db $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $00, $00, $04, $04
     db $02, $02, $02, $02, $00, $00, $fd, $fd, $fd, $fd, $fe, $fe, $fe, $fe, $fe, $fe
 
 ; C: 36 deltas added to window Y per frame for the window slide (03:5F55). L3 pass 2026-10-26: read in BGB in 25
-; replay(s) of the organic corpus, modes 10 11 12 1A (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 10 11 12 1A (roms/jp_rev_a/experiments/l3_names/)
 Slide_WyDeltaTbl::
     db $18, $16, $0b, $02, $ff, $fd, $fa, $f9, $fa, $ff, $07, $09, $06, $02, $00, $00
     db $ff, $fe, $fe, $ff, $00, $03, $03, $01, $00, $00, $00, $00, $ff, $00, $00, $01
@@ -8750,7 +8752,7 @@ jr_000_31c7:
 
 
 ; C: A -> D (high nibble) and E (low nibble << 4); BGB watchpoint pass 2026-10-25: ran only in mode 1D (1840 hits in 2
-; runs: 1D:03 x1840; tcrf_check/assets/mode_state_wp/)
+; runs: 1D:03 x1840; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_SplitNibbles::
     push af                                       ; $31CF
     swap a                                        ; $31D0
@@ -8765,7 +8767,7 @@ Mode1D_SplitNibbles::
 
 
 ; C: A -> DE; BGB watchpoint pass 2026-10-25: ran only in mode 1D (272 hits in 1 runs: 1D:03 x272;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_ByteToDE::
     push af                                       ; $31DC
     ld e, a                                       ; $31DD
@@ -8775,7 +8777,7 @@ Mode1D_ByteToDE::
 
 
 ; C: A and 3 selects a 4-byte entry of a source table; returns DE; BGB watchpoint pass 2026-10-25: ran only in mode 1D
-; (2112 hits in 2 runs: 1D:03 x2112; tcrf_check/assets/mode_state_wp/)
+; (2112 hits in 2 runs: 1D:03 x2112; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_ReadSrcEntry::
     and $03                                       ; $31E2
     sla a                                         ; $31E4
@@ -8792,7 +8794,7 @@ Mode1D_ReadSrcEntry::
 
 
 ; C: reads [HL] of bank A into C; BGB watchpoint pass 2026-10-25: ran only in mode 1D (272 hits in 1 runs: 1D:03 x272;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_ReadByteFromBank::
     bit 7, h                                      ; $31F2
     jr nz, jr_000_3205                            ; $31F4
@@ -8984,7 +8986,7 @@ jr_000_32cf:
 
 
 ; C: fills the band buffer with zero bytes; BGB watchpoint pass 2026-10-25: ran only in mode 1D (224 hits in 1 runs:
-; 1D:03 x224; tcrf_check/assets/mode_state_wp/)
+; 1D:03 x224; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_FillBlank::
     xor a                                         ; $32DB
 
@@ -9279,7 +9281,7 @@ Mode1D_State0B_Return::
 
 
 ; C: blinking sprite while printing; BGB watchpoint pass 2026-10-25: ran only in mode 1D (246 hits in 2 runs: 1D:06 x3
-; 1D:07 x243; tcrf_check/assets/mode_state_wp/)
+; 1D:07 x243; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_DrawBusyIcon::
     ldh a, [hFrameCounter]                        ; $34B3
     srl a                                         ; $34B5
@@ -9293,7 +9295,7 @@ Mode1D_DrawBusyIcon::
 
 
 ; C: 15 sprite pieces of the TV animation; BGB watchpoint pass 2026-10-25: ran only in mode 1D (2284 hits in 11 runs:
-; 1D:01 x30 1D:02 x60 1D:03 x46 1D:04 x2136 1D:05 x12; tcrf_check/assets/mode_state_wp/)
+; 1D:01 x30 1D:02 x60 1D:03 x46 1D:04 x2136 1D:05 x12; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_DrawTvAnimation::
     ld hl, Mode1D_TvAnimTbl                       ; $34C6
     ldh a, [hFrameCounter]                        ; $34C9
@@ -9335,7 +9337,7 @@ jr_000_34ef:
 
 
 ; C: 15 x {x; BGB watchpoint pass 2026-10-25: ran only in mode 1D (33360 hits in 4 runs: 1D:01 x150 1D:02 x300 1D:03
-; x690 1D:04 x32040 1D:05 x180; tcrf_check/assets/mode_state_wp/)
+; x690 1D:04 x32040 1D:05 x180; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1D_TvAnimTbl::
     db $22, $25, $22, $35, $22, $45, $22, $55, $22, $65, $32, $25, $32, $35, $32, $45
     db $32, $55, $32, $65, $42, $25, $42, $35, $42, $45, $42, $55, $42, $65

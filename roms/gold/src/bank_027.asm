@@ -22,7 +22,7 @@ Map_27_5070_Mode21_State00_Init::
     INCBIN "data/bank_27/Map_27_5070_Mode21_State00_Init.tilemap" ; $5070, 2 bytes
 ; C: far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_DrawPrintScreen (ld a,BANK; ld hl,ADDR; call banked
 ; copy/far call). L3 pass 2026-10-26: read in BGB in 71 replay(s) of the organic corpus, modes 09 0A 1C
-; (tcrf_check/assets/l3_names/); L3 relabel: loaded here by Mode21_State00_Init (coverage: 64 ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 relabel: loaded here by Mode21_State00_Init ...
 Map_27_5072_Mode21_State00_Init::
     INCBIN "data/bank_27/Map_27_5072_Mode21_State00_Init.tilemap" ; $5072, 64 bytes
 ; C: far pointer loaded by Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode0E_State04_PickDone,
@@ -30,15 +30,15 @@ Map_27_5072_Mode21_State00_Init::
 ; replay(s), modes 09 0A 1C (states 09:01 0A:03 09:02 1C:03 0A:04), not only by ...
 Map_27_50B2_Mode21_State00_Init::
     INCBIN "data/bank_27/Map_27_50B2_Mode21_State00_Init.tilemap" ; $50B2, 81 bytes
-; C: BG map: BGB, menu walk node P10 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM map; read by Mode21_State00_Init
+; C: BG map: BGB, menu walk node P10 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM map; read by Mode21_State00_Init
 Map_27_5103_Mode21_State00_Init::
     INCBIN "data/bank_27/Map_27_5103_Mode21_State00_Init.tilemap" ; $5103, 45 bytes
 ; C: loaded by Vram_CopyFromBank at 09:617D: Map $40 bytes to $98C0 (this build's trace)
 Map_27_5130_PickCharacter_BlinkRows::
     INCBIN "data/bank_27/Map_27_5130_PickCharacter_BlinkRows.tilemap" ; $5130, 64 bytes
-; C: BG map: BGB, menu walk node P10 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM map; read by Mode21_State00_Init
+; C: BG map: BGB, menu walk node P10 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM map; read by Mode21_State00_Init
 Map_27_5170_Mode21_State00_Init::
     INCBIN "data/bank_27/Map_27_5170_Mode21_State00_Init.tilemap" ; $5170, 320 bytes
 ; C: loaded by Vram_CopyFromBank at 09:618C: Map $40 bytes to $98C0 (this build's trace)
@@ -73,8 +73,8 @@ Map_27_5570_Mode08_State14_CreditsSheriffHelp::
 Map_27_55B0_Mode08_State14_CreditsSheriffHelp::
     INCBIN "data/bank_27/Map_27_55B0_Mode08_State14_CreditsSheriffHelp.tilemap" ; $55B0, 32 bytes
 ; C: copied to VRAM/WRAM by Mode04_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 37 replay(s) of the organic corpus, modes 04 (tcrf_check/assets/l3_names/); L3 relabel: loaded here by
-; Credits_PageB_RowValue (listing: the only routine that names it); the Japanese ...
+; in 37 replay(s) of the organic corpus, modes 04 (roms/jp_rev_a/experiments/l3_names/); L3 relabel: loaded here by
+; Credits_PageB_RowValue (listing: the only routine that names it); the ...
 Map_27_55D0_Credits_PageB_RowValue::
     INCBIN "data/bank_27/Map_27_55D0_Credits_PageB_RowValue.tilemap" ; $55D0, 352 bytes
 ; C: loaded by Vram_CopyFromBank at 09:4F81: Map $C0 bytes to $9980 (this build's trace)
@@ -84,7 +84,7 @@ Map_27_5730_Mode08_State14_CreditsSheriffHelp::
 Map_27_57F0_Mode08_State15_CreditsSheriffBonus::
     INCBIN "data/bank_27/Map_27_57F0_Mode08_State15_CreditsSheriffBonus.tilemap" ; $57F0, 32 bytes
 ; C: small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs; it start. L3 pass
-; 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 TileSet_27_5810::
     INCBIN "data/bank_27/TileSet_27_5810.bin" ; $5810, 512 bytes
 ; C: far pointer loaded by PhotoPicker_PageTransitionNext, PhotoPicker_PageTransitionPrev, LinkPick_PageTurnNext,
@@ -123,33 +123,33 @@ Map_27_63D0_Mode1F_State05_Performance::
 Map_27_64B0_Mode1F_State06_SavePanel::
     INCBIN "data/bank_27/Map_27_64B0_Mode1F_State06_SavePanel.tilemap" ; $64B0, 224 bytes
 ; C: copied to VRAM/WRAM by MainMenu_LoadBackground (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 72 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; MainMenu_LoadBackground reads them in this build (coverage call site or ...
+; BGB in 72 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; MainMenu_LoadBackground reads them in this build (coverage call site ...
 Map_27_6590_MainMenu_LoadBackground::
     INCBIN "data/bank_27/Map_27_6590_MainMenu_LoadBackground.tilemap" ; $6590, 448 bytes
 ; C: target 7 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 19 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/); L3 entry:
-; entry 7 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the earlier ...
+; 2026-10-26: read in BGB in 19 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/); L3
+; entry: entry 7 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the ...
 Src_27_6750_ViewMenu_AnimateBackground_7::
     INCBIN "data/bank_27/Src_27_6750_ViewMenu_AnimateBackground_7.bin" ; $6750, 384 bytes
 ; C: target 6 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 19 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/); L3 entry:
-; entry 6 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the earlier ...
+; 2026-10-26: read in BGB in 19 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/); L3
+; entry: entry 6 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the ...
 Src_27_68D0_ViewMenu_AnimateBackground_6::
     INCBIN "data/bank_27/Src_27_68D0_ViewMenu_AnimateBackground_6.bin" ; $68D0, 384 bytes
 ; C: target 1 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 35 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/); L3 entry:
-; entry 1 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the earlier ...
+; 2026-10-26: read in BGB in 35 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/); L3
+; entry: entry 1 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the ...
 Src_27_6A50_ViewMenu_AnimateBackground_1::
     INCBIN "data/bank_27/Src_27_6A50_ViewMenu_AnimateBackground_1.bin" ; $6A50, 384 bytes
 ; C: target 2 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 34 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/); L3 entry:
-; entry 2 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the earlier ...
+; 2026-10-26: read in BGB in 34 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/); L3
+; entry: entry 2 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the ...
 Src_27_6BD0_ViewMenu_AnimateBackground_2::
     INCBIN "data/bank_27/Src_27_6BD0_ViewMenu_AnimateBackground_2.bin" ; $6BD0, 384 bytes
 ; C: target 5 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 31 replay(s) of the organic corpus, modes 02 07 (tcrf_check/assets/l3_names/); L3 entry:
-; entry 5 of the pointer table ViewMenu_AnimateBackground_Map5368 here; the ...
+; 2026-10-26: read in BGB in 31 replay(s) of the organic corpus, modes 02 07 (roms/jp_rev_a/experiments/l3_names/); L3
+; entry: entry 5 of the pointer table ViewMenu_AnimateBackground_Map5368 here; ...
 Src_27_6D50_ViewMenu_AnimateBackground_5::
     INCBIN "data/bank_27/Src_27_6D50_ViewMenu_AnimateBackground_5.bin" ; $6D50, 1002 bytes
 ; C: read in the coverage run (22 of 22 bytes); call sites ViewMenu_AnimateBackground x8; first-read mode:state 02:01
@@ -158,12 +158,12 @@ Src_27_713A_ViewMenu_AnimateBackground::
     INCBIN "data/bank_27/Src_27_713A_ViewMenu_AnimateBackground.bin" ; $713A, 22 bytes
 ; C: far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 288 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Map_27_7150_Mode12_State1D_SortDialogOpen::
     INCBIN "data/bank_27/Map_27_7150_Mode12_State1D_SortDialogOpen.tilemap" ; $7150, 288 bytes
 ; C: far pointer loaded by Mode12_State17_ExitDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 288 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Map_27_7270_Mode12_State17_ExitDialogOpen::
     INCBIN "data/bank_27/Map_27_7270_Mode12_State17_ExitDialogOpen.tilemap" ; $7270, 288 bytes
 ; C: target 36 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset. L3 pass
@@ -173,7 +173,7 @@ Src_27_7390_Tbl539D_36::
     INCBIN "data/bank_27/Src_27_7390_Tbl539D_36.bin" ; $7390, 288 bytes
 ; C: far pointer loaded by SaveDialog_Substate0_Init (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 10 11 1A
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Map_27_74B0_SaveDialog_Substate0_Init::
     INCBIN "data/bank_27/Map_27_74B0_SaveDialog_Substate0_Init.tilemap" ; $74B0, 288 bytes
 ; C: far pointer loaded by Stamp_ReloadTilemapIfDifferent (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
@@ -182,7 +182,7 @@ Map_27_74B0_SaveDialog_Substate0_Init::
 Map_27_75D0_Stamp_ReloadTilemapIfDifferent::
     INCBIN "data/bank_27/Map_27_75D0_Stamp_ReloadTilemapIfDifferent.tilemap" ; $75D0, 288 bytes
 ; C: target 34 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Src_27_76F0_Tbl539D_34::
     INCBIN "data/bank_27/Src_27_76F0_Tbl539D_34.bin" ; $76F0, 288 bytes
 ; C: target 37 of the {lo,hi,bank} table 04:539D; extent not known: runs to the next pointer or asset. L3 pass
@@ -192,7 +192,7 @@ Src_27_7810_Tbl539D_37::
     INCBIN "data/bank_27/Src_27_7810_Tbl539D_37.bin" ; $7810, 288 bytes
 ; C: far pointer loaded by Mode12_State14_SaveDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 288 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Map_27_7930_Mode12_State14_SaveDialogOpen::
     INCBIN "data/bank_27/Map_27_7930_Mode12_State14_SaveDialogOpen.tilemap" ; $7930, 244 bytes
 ; C: the blocks on both sides are MAP (layout kinds) and the reader is Mode12_State14_SaveDialogOpen: taken as part of
@@ -202,37 +202,37 @@ Map_27_7A24_Mode12_State14_SaveDialogOpen::
     INCBIN "data/bank_27/Map_27_7A24_Mode12_State14_SaveDialogOpen.tilemap" ; $7A24, 44 bytes
 ; C: far pointer loaded by Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_27_7A50_Mode1A_State09_ExitDialog::
     INCBIN "data/bank_27/Map_27_7A50_Mode1A_State09_ExitDialog.tilemap" ; $7A50, 128 bytes
 ; C: far pointer loaded by HotSpotEd_DialogChoiceB (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/); L3 loader: HotSpotEd_DialogChoiceB loads it in this build ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 loader: HotSpotEd_DialogChoiceB loads it in ...
 Map_27_7AD0_HotSpotEd_DialogChoiceB::
     INCBIN "data/bank_27/Map_27_7AD0_HotSpotEd_DialogChoiceB.tilemap" ; $7AD0, 96 bytes
 ; C: far pointer loaded by HotSpotEd_DialogChoiceB, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked
 ; copy/far call); length 64 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic
-; corpus, modes 1A (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed ...
 Map_27_7B30_Mode1A_State09_ExitDialog::
     INCBIN "data/bank_27/Map_27_7B30_Mode1A_State09_ExitDialog.tilemap" ; $7B30, 64 bytes
 ; C: far pointer loaded by Mode1A_State03_Browse (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 288 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_27_7B70_Mode1A_State03_Browse::
     INCBIN "data/bank_27/Map_27_7B70_Mode1A_State03_Browse.tilemap" ; $7B70, 128 bytes
 ; C: far pointer loaded by HotSpotEd_DialogChoiceA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_27_7BF0_HotSpotEd_DialogChoiceA::
     INCBIN "data/bank_27/Map_27_7BF0_HotSpotEd_DialogChoiceA.tilemap" ; $7BF0, 96 bytes
 ; C: far pointer loaded by HotSpotEd_DialogChoiceA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_27_7C50_HotSpotEd_DialogChoiceA::
     INCBIN "data/bank_27/Map_27_7C50_HotSpotEd_DialogChoiceA.tilemap" ; $7C50, 64 bytes
 ; C: far pointer loaded by Mode12_State1A_ClearDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 288 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Map_27_7C90_Mode12_State1A_ClearDialogOpen::
     INCBIN "data/bank_27/Map_27_7C90_Mode12_State1A_ClearDialogOpen.tilemap" ; $7C90, 244 bytes
 ; C: the blocks on both sides are MAP (layout kinds) and the reader is PhotoPicker_PageTransitionNext: taken as part

@@ -10,7 +10,7 @@ mode, state, key, base (the (mode, state) the path ends on in this run), to (whe
 the screen of the row: only those rows are evidence). A row whose `to` is another screen of the tree is a cancel edge (evidence C).
 """
 import sys, os, csv, argparse, subprocess, shutil, concurrent.futures, queue
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tools', 'jp'))
 from bgb_run import read_state
 ap = argparse.ArgumentParser(); ap.add_argument('rom'); ap.add_argument('screens'); ap.add_argument('out')
 ap.add_argument('--save', default=None); ap.add_argument('--key', default='B'); ap.add_argument('--mode-addr', default='FF8D'); ap.add_argument('--state-addr', default='FF8E')

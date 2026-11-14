@@ -44,8 +44,8 @@ Gfx_10_5880_StockFace5_Expr3::
 ; (coverage/results/merged_state/cov.npz, first read in mode 1F); C: the bytes changed but ...
 Gfx_10_5C00_Mode1F_State00_TitleInit::
     INCBIN "data/bank_10/Gfx_10_5C00_Mode1F_State00_TitleInit.2bpp" ; $5C00, 5760 bytes
-; C: tiles: BGB, menu walk node P30 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by Mode1F_State00_TitleInit
+; C: tiles: BGB, menu walk node P30 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by Mode1F_State00_TitleInit
 Gfx_10_7280_Mode1F_State00_TitleInit::
     INCBIN "data/bank_10/Gfx_10_7280_Mode1F_State00_TitleInit.2bpp" ; $7280, 384 bytes
 ; C: numeral table: DjTitle_LoadNumeralTile (05:423A) copies 32 bytes from $7400 + A x 32; 10 entries = 7400-7540 (the

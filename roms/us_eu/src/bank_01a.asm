@@ -43,17 +43,17 @@ Gfx_1A_5182_Unref::
     ds $24, $00
 
 ; C: copied to VRAM/WRAM by Mode08_State03_CardInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode08_State03_CardInit reads them in this build (coverage call site or loader ...
+; BGB in 1 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode08_State03_CardInit reads them in this build (coverage call site ...
 Gfx_1A_5200_Mode08_State03_CardInit::
     INCBIN "data/bank_1a/Gfx_1A_5200_Mode08_State03_CardInit.2bpp" ; $5200, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State03_CardInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode08_State03_CardInit reads them in this build (coverage call site or loader ...
+; BGB in 1 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode08_State03_CardInit reads them in this build (coverage call site ...
 Gfx_1A_5A00_Mode08_State03_CardInit::
     INCBIN "data/bank_1a/Gfx_1A_5A00_Mode08_State03_CardInit.2bpp" ; $5A00, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State03_CardInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; BGB in 1 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1A_6200_Mode08_State03_CardInit::
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $07, $fe, $0f, $fe, $1f, $fc, $1f, $f8, $3f, $f0, $7f, $e0, $ff, $c0, $ff, $80
@@ -82,22 +82,22 @@ Gfx_1A_6200_Mode08_State03_CardInit::
     ds $a0, $00
 
 ; C: copied to VRAM/WRAM by Mode20_State00_MenuInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 6 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; BGB in 6 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1A_6400_Mode20_State00_MenuInit::
     INCBIN "data/bank_1a/Gfx_1A_6400_Mode20_State00_MenuInit.2bpp" ; $6400, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode20_State00_MenuInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 6 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode20_State00_MenuInit reads them in this build (coverage call site or loader ...
+; BGB in 6 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode20_State00_MenuInit reads them in this build (coverage call site ...
 Gfx_1A_6C00_Mode20_State00_MenuInit::
     INCBIN "data/bank_1a/Gfx_1A_6C00_Mode20_State00_MenuInit.2bpp" ; $6C00, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode20_State00_MenuInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 6 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode20_State00_MenuInit reads them in this build (coverage call site or loader ...
+; BGB in 6 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode20_State00_MenuInit reads them in this build (coverage call site ...
 Gfx_1A_7400_Mode20_State00_MenuInit::
     INCBIN "data/bank_1a/Gfx_1A_7400_Mode20_State00_MenuInit.2bpp" ; $7400, 512 bytes
 ; C: far pointer loaded by Album_LoadBorderScreen, Album_ShowPageScreenB (ld a,BANK; ld hl,ADDR; call banked copy/far
 ; call); length 1792 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 71 replay(s) of the organic corpus,
-; modes 09 0A (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; modes 09 0A (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed ...
 Gfx_1A_7600_Album_ShowPageScreenB::
     INCBIN "data/bank_1a/Gfx_1A_7600_Album_ShowPageScreenB.2bpp" ; $7600, 1680 bytes
 ; C: two 8 x 8 tiles that make one 16 x 8 px glyph (a small arrow: a triangle over a dash tail, by eye) between the
@@ -106,7 +106,7 @@ Gfx_1A_7600_Album_ShowPageScreenB::
 Gfx_1A_7C90_Album_ShowPageScreenB_ArrowGlyph::
     INCBIN "data/bank_1a/Gfx_1A_7C90_Album_ShowPageScreenB_ArrowGlyph.2bpp" ; $7C90, 32 bytes
 ; C: continues Gfx_1A_7600_Album_ShowPageScreenB (after the arrow glyph at 1A:7C90). L3 pass 2026-10-26: read in BGB
-; in 71 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; in 71 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1A_7600_Album_ShowPageScreenB_Cont::
     INCBIN "data/bank_1a/Gfx_1A_7600_Album_ShowPageScreenB_Cont.2bpp" ; $7CB0, 208 bytes
 ; I: TCRF unused graphic "B CANCEL" (circled B + the word CANCEL, 6 tiles): exact match of the TCRF image (2x upscale,

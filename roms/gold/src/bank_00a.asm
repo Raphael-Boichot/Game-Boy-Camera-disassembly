@@ -5,7 +5,7 @@
 SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic
-; corpus, modes 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_MainDispatch::
     ld [wCamBrightnessSetpoint], a                ; $4000
     ld a, $00                                     ; $4003
@@ -397,7 +397,7 @@ Cam_MainDispatch_WriteExposure::
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_BuildDitherMatrix::
     ld a, $10                                     ; $42BA
     ld [rRAMB], a                                 ; $42BC
@@ -624,7 +624,7 @@ jr_00a_441d:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_Dither_RampA::
     ld a, [wDitherParams]                         ; $4427
     ld b, a                                       ; $442A
@@ -891,7 +891,7 @@ jr_00a_45c8:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_Calib_ValidityCheck::
     call Cam_Calib_ReadPrimaryCopy                ; $45C9
     or a                                          ; $45CC
@@ -972,7 +972,7 @@ jr_00a_4641:
     ldh [hScratchA], a                            ; $4643
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_Calib_EchoCompare::
     ld a, $08                                     ; $4645
     ld [rRAMB], a                                 ; $4647
@@ -1118,7 +1118,7 @@ jr_00a_46eb:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_Calib_Loader::
     ld a, $02                                     ; $46FD
     ld [rRAMB], a                                 ; $46FF
@@ -1152,7 +1152,7 @@ jr_00a_471a:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_Calib_BootMeasureSeq::
     ld a, $a0                                     ; $4724
     ldh [hScratchC], a                            ; $4726
@@ -1308,7 +1308,7 @@ jr_00a_482d:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_ExposureBandSelect::
     ld a, $10                                     ; $4859
     ld [rRAMB], a                                 ; $485B
@@ -1665,7 +1665,7 @@ jr_00a_496e:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_ORegister_SAR_Search::
     ld a, $10                                     ; $4B6A
     ld [rRAMB], a                                 ; $4B6C
@@ -1747,7 +1747,7 @@ jr_00a_4bc5:
     jr nz, jr_00a_4bbd                            ; $4BEA
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_ORegister_SAR_Tail::
     ld a, $a0                                     ; $4BEC
     ld [wCamA005Shadow], a                        ; $4BEE
@@ -1798,7 +1798,7 @@ jr_00a_4c21:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_PixelTestHelper::
     ld h, a                                       ; $4C30
     xor a                                         ; $4C31
@@ -2317,7 +2317,7 @@ jr_00a_4f9d:
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic
-; corpus, modes 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_PopcountSampleLoop::
     ld a, $0a                                     ; $4FBD
     ldh [hScratchA], a                            ; $4FBF
@@ -2446,7 +2446,7 @@ jr_00a_5041:
     jr jr_00a_5041                                ; $508F
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic
-; corpus, modes 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_PopcountSampleLoop_inner::
     ld h, HIGH(Cam_PopcountTable256)              ; $5091
     ld a, [de]                                    ; $5093
@@ -2471,7 +2471,7 @@ Cam_PopcountSampleLoop_inner::
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_LiveInit::
     call Cam_ExposureBandSelect                   ; $50AA
     ld a, $10                                     ; $50AD
@@ -2641,8 +2641,8 @@ Cam_EffectJumpTbl::
     dw Fx5F_Nop
 
 ; C: plain copy of the photo; reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 00; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx00_CopyRows_A100toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 00; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx00_CopyRows_A100toC000
 Fx00_Copy::
     ld hl, $a100                                  ; $54DA
     ld de, wPhotoImage                            ; $54DD
@@ -2652,8 +2652,8 @@ Fx00_Copy::
 
 
 ; C: left half of the picture = right half of the photo mirrored; reads x 64-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 01;22; scratch FF8A-FF8D loops; selected
-; by the game (06:60DB); was Fx01_MirrorCopy_A180toC080
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 01;22; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx01_MirrorCopy_A180toC080
 Fx01_MirrorRtoL::
     ld hl, $a180                                  ; $54E6
     ld de, wPhotoImage + $80                      ; $54E9
@@ -2715,8 +2715,8 @@ jr_00a_5521:
     jr jr_00a_54f2                                ; $552C
 
 ; C: right half of the picture = left half of the photo mirrored; reads x 0-63, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 02;21; scratch FF8A-FF8D loops; selected
-; by the game (06:60DB); was Fx02_MirrorCopy_A100toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 02;21; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx02_MirrorCopy_A100toC000
 Fx02_MirrorLtoR::
     ld hl, $a100                                  ; $552E
     ld de, wPhotoImage                            ; $5531
@@ -2779,8 +2779,8 @@ jr_00a_5569:
     jr jr_00a_553a                                ; $5575
 
 ; C: top half of the picture = bottom half of the photo flipped upside down; reads x 0-127, y 56-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 03;44; scratch FF8A-FF8D loops; selected
-; by the game (06:60DB); was Fx03_Copy_A800toC60E
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 03;44; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx03_Copy_A800toC60E
 Fx03_MirrorBtoT::
     ld hl, $a800                                  ; $5577
     ld bc, wPhotoImage + $60e                     ; $557A
@@ -2837,8 +2837,8 @@ jr_00a_55ac:
     jr jr_00a_5584                                ; $55B8
 
 ; C: bottom half of the picture = top half of the photo flipped upside down; reads x 0-127, y 0-55; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 04;43; scratch FF8A-FF8D loops; selected
-; by the game (06:60DB); was Fx04_Copy_A100toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 04;43; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx04_Copy_A100toC000
 Fx04_MirrorTtoB::
     ld hl, $a100                                  ; $55BA
     ld de, wPhotoImage                            ; $55BD
@@ -2895,8 +2895,8 @@ jr_00a_55ef:
     jr jr_00a_55c7                                ; $55FB
 
 ; C: the middle band of the photo stretched to double height; reads x 0-127, y 24-79; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 05; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx05_Copy_A400toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 05; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx05_Copy_A400toC000
 Fx05_StretchV2x::
     ld hl, $a400                                  ; $55FD
     ld de, wPhotoImage                            ; $5600
@@ -2972,8 +2972,8 @@ jr_00a_5648:
     jr jr_00a_5607                                ; $564F
 
 ; C: the middle columns of the photo stretched to double width; reads x 32-95, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 06; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx06_Copy_A140toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 06; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx06_Copy_A140toC000
 Fx06_StretchH2x::
     ld hl, $a140                                  ; $5651
     ld de, wPhotoImage                            ; $5654
@@ -3030,8 +3030,8 @@ jr_00a_5689:
     jr jr_00a_565b                                ; $5693
 
 ; C: the centre of the photo magnified x2 (both axes); reads x 32-95, y 24-79; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 07; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx07_Copy_A440toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 07; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx07_Copy_A440toC000
 Fx07_Zoom2x::
     ld hl, $a440                                  ; $5695
     ld de, wPhotoImage                            ; $5698
@@ -3175,8 +3175,8 @@ jr_00a_572d:
 
 
 ; C: the photo reduced to half size (every second pixel and row) and tiled 2 x 2; reads x 0-126, y 0-110; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 08; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx08_Reduce79_A100toC000
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 08; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx08_Reduce79_A100toC000
 Fx08_Reduce2xTile2x2::
     ld hl, $a100                                  ; $573C
     ld de, wPhotoImage                            ; $573F
@@ -3388,8 +3388,8 @@ jr_00a_582a:
 
 ; C: the photo reduced to half size (every second pixel and row) into the TL quadrant (56 of 224 tiles; the rest of
 ; the buffer is left alone); reads x 0-126, y 0-110; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C000; then shared body 0A:6866 (b=$79 reduce
-; table); ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); stub: DE := C000; then shared body 0A:6866 (b=$79
+; reduce ...
 Fx09_Reduce2xQuadTL::
     ld de, wPhotoImage                            ; $583B
     jp FxShared_ReduceBody_G0                     ; $583E
@@ -3397,8 +3397,8 @@ Fx09_Reduce2xQuadTL::
 
 ; C: the photo reduced to half size (every second pixel and row) into the TR quadrant (56 of 224 tiles; the rest of
 ; the buffer is left alone); reads x 0-126, y 0-110; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C080; then shared body 0A:6866 (b=$79 reduce
-; table); ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); stub: DE := C080; then shared body 0A:6866 (b=$79
+; reduce ...
 Fx0A_Reduce2xQuadTR::
     ld de, wPhotoImage + $80                      ; $5841
     jp FxShared_ReduceBody_G0                     ; $5844
@@ -3406,8 +3406,8 @@ Fx0A_Reduce2xQuadTR::
 
 ; C: the photo reduced to half size (every second pixel and row) into the BL quadrant (56 of 224 tiles; the rest of
 ; the buffer is left alone); reads x 0-126, y 0-110; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C700; then shared body 0A:6866 (b=$79 reduce
-; table); ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); stub: DE := C700; then shared body 0A:6866 (b=$79
+; reduce ...
 Fx0B_Reduce2xQuadBL::
     ld de, wEffRegionRow7                         ; $5847
     jp FxShared_ReduceBody_G0                     ; $584A
@@ -3415,16 +3415,16 @@ Fx0B_Reduce2xQuadBL::
 
 ; C: the photo reduced to half size (every second pixel and row) into the BR quadrant (56 of 224 tiles; the rest of
 ; the buffer is left alone); reads x 0-126, y 0-110; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); stub: DE := C780; then shared body 0A:6866 (b=$79 reduce
-; table); ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); stub: DE := C780; then shared body 0A:6866 (b=$79
+; reduce ...
 Fx0C_Reduce2xQuadBR::
     ld de, wEffRegionRow7Right                    ; $584D
     jp FxShared_ReduceBody_G0                     ; $5850
 
 
 ; C: copy of part of the photo (LeftHalf) (112 of 224 tiles; the rest of the buffer is left alone); reads x 0-63, y
-; 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 0D; scratch
-; FF8A-FF8D loops; never selected by the game (06:60DB does not produce this ...
+; 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 0D; scratch
+; FF8A-FF8D loops; never selected by the game (06:60DB does not produce ...
 Fx0D_CopyLeftHalf::
     ld hl, $a100                                  ; $5853
     ld de, wPhotoImage                            ; $5856
@@ -3463,8 +3463,8 @@ jr_00a_589a:
     jr jr_00a_585d                                ; $58A8
 
 ; C: copy of part of the photo (RightHalf) (112 of 224 tiles; the rest of the buffer is left alone); reads x 64-127, y
-; 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 0E; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was Fx0E_Copy_A180toC080
+; 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 0E; scratch
+; FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx0E_CopyRightHalf::
     ld hl, $a180                                  ; $58AA
     ld de, wPhotoImage + $80                      ; $58AD
@@ -3502,8 +3502,8 @@ jr_00a_58f1:
     jr jr_00a_58b4                                ; $58FE
 
 ; C: copy of part of the photo (TopHalf) (112 of 224 tiles; the rest of the buffer is left alone); reads x 0-127, y
-; 0-55; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 0F; scratch FF8A-FF8D
-; loops; never selected by the game (06:60DB does not produce this slot); ...
+; 0-55; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 0F; scratch
+; FF8A-FF8D loops; never selected by the game (06:60DB does not produce ...
 Fx0F_CopyTopHalf::
     ld hl, $a100                                  ; $5900
     ld de, wPhotoImage                            ; $5903
@@ -3513,8 +3513,8 @@ Fx0F_CopyTopHalf::
 
 
 ; C: copy of part of the photo (BottomHalf) (112 of 224 tiles; the rest of the buffer is left alone); reads x 0-127, y
-; 56-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 10; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was Fx10_CopyRows_A800toC700
+; 56-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 10; scratch
+; FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx10_CopyBottomHalf::
     ld hl, $a800                                  ; $590C
     ld de, wEffRegionRow7                         ; $590F
@@ -3524,8 +3524,8 @@ Fx10_CopyBottomHalf::
 
 
 ; C: copy of part of the photo (Quads TR BL) (112 of 224 tiles; the rest of the buffer is left alone); reads x 0-127,
-; y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 11; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was Fx11_Copy_A180toC080
+; y 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 11;
+; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx11_CopyQuads_TR_BL::
     ld hl, $a180                                  ; $5918
     ld de, wPhotoImage + $80                      ; $591B
@@ -3577,8 +3577,8 @@ jr_00a_5964:
     jr jr_00a_5962                                ; $599F
 
 ; C: copy of part of the photo (Quads TR BL BR) (168 of 224 tiles; the rest of the buffer is left alone); reads x
-; 0-127, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 12; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was Fx12_Copy_A180toC080
+; 0-127, y 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 12;
+; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx12_CopyQuads_TR_BL_BR::
     ld hl, $a180                                  ; $59A1
     ld de, wPhotoImage + $80                      ; $59A4
@@ -3605,8 +3605,8 @@ jr_00a_59ab:
     jr jr_00a_59a9                                ; $59E7
 
 ; C: copy of part of the photo (Top10Rows) (160 of 224 tiles; the rest of the buffer is left alone); reads x 0-127, y
-; 0-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 13; scratch FF8A-FF8D
-; loops; never selected by the game (06:60DB does not produce this ...
+; 0-79; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 13; scratch
+; FF8A-FF8D loops; never selected by the game (06:60DB does not produce ...
 Fx13_CopyTop10Rows::
     ld hl, $a100                                  ; $59E9
     ld de, wPhotoImage                            ; $59EC
@@ -3616,8 +3616,8 @@ Fx13_CopyTop10Rows::
 
 
 ; C: copy of part of the photo (Bottom4Rows) (64 of 224 tiles; the rest of the buffer is left alone); reads x 0-127, y
-; 80-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 14; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was Fx14_CopyRows_AB00toCA00
+; 80-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 14; scratch
+; FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx14_CopyBottom4Rows::
     ld hl, $ab00                                  ; $59F5
     ld de, wEffRegionRow10                        ; $59F8
@@ -3627,8 +3627,8 @@ Fx14_CopyBottom4Rows::
 
 
 ; C: copy of part of the photo (Top4Rows) (64 of 224 tiles; the rest of the buffer is left alone); reads x 0-127, y
-; 0-31; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 15; scratch FF8A-FF8D
-; loops; never selected by the game (06:60DB does not produce this slot); ...
+; 0-31; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 15; scratch
+; FF8A-FF8D loops; never selected by the game (06:60DB does not produce ...
 Fx15_CopyTop4Rows::
     ld hl, $a100                                  ; $5A01
     ld de, wPhotoImage                            ; $5A04
@@ -3638,8 +3638,8 @@ Fx15_CopyTop4Rows::
 
 
 ; C: copy of part of the photo (Bottom10Rows) (160 of 224 tiles; the rest of the buffer is left alone); reads x 0-127,
-; y 32-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 16; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; y 32-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 16;
+; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx16_CopyBottom10Rows::
     ld hl, $a500                                  ; $5A0D
     ld de, wEffRegionRow4                         ; $5A10
@@ -3649,7 +3649,7 @@ Fx16_CopyBottom10Rows::
 
 
 ; C: copy of part of the photo (Window) (80 of 224 tiles; the rest of the buffer is left alone); reads x 24-103, y
-; 24-87; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 17; scratch
+; 24-87; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 17; scratch
 ; FF8A-FF8D loops; selected by the game (06:60DB); was Fx17_Copy_A430toC330
 Fx17_CopyWindow::
     ld hl, $a430                                  ; $5A19
@@ -3689,7 +3689,7 @@ jr_00a_5a60:
     jr jr_00a_5a23                                ; $5A6E
 
 ; C: copy of part of the photo (QuadBR) (56 of 224 tiles; the rest of the buffer is left alone); reads x 64-127, y
-; 56-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 18; scratch
+; 56-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 18; scratch
 ; FF8A-FF8D loops; selected by the game (06:60DB); was Fx18_Copy_A880toC780
 Fx18_CopyQuadBR::
     ld hl, $a880                                  ; $5A70
@@ -3752,8 +3752,8 @@ Fx1F_Nop::
 
 
 ; C: the photo flipped left-right; reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 20; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx20_MirrorCopy_A100toC0F0
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 20; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx20_MirrorCopy_A100toC0F0
 Fx20_FlipH::
     ld hl, $a100                                  ; $5ABD
     ld de, wPhotoImage + $f0                      ; $5AC0
@@ -3873,8 +3873,8 @@ jr_00a_5b2b:
 
 
 ; C: top half of the picture = bottom half of the photo flipped upside down; = slot 03 applied to the photo flipped
-; left-right; reads x 0-127, y 56-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect
-; table slot(s) 23; scratch FF8A-FF8D loops; selected by the game (06:60DB); ...
+; left-right; reads x 0-127, y 56-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv);
+; effect table slot(s) 23; scratch FF8A-FF8D loops; selected by the game ...
 Fx23_MirrorBtoT_OnFlipH::
     ld hl, $a800                                  ; $5B37
     ld de, wPhotoImage + $7f0                     ; $5B3A
@@ -3941,8 +3941,8 @@ jr_00a_5b78:
     jr jr_00a_5b44                                ; $5B84
 
 ; C: bottom half of the picture = top half of the photo flipped upside down; = slot 04 applied to the photo flipped
-; left-right; reads x 0-127, y 0-55; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table
-; slot(s) 24; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; left-right; reads x 0-127, y 0-55; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv);
+; effect table slot(s) 24; scratch FF8A-FF8D loops; selected by the game ...
 Fx24_MirrorTtoB_OnFlipH::
     ld hl, $a100                                  ; $5B86
     ld de, wPhotoImage + $f0                      ; $5B89
@@ -4009,8 +4009,8 @@ jr_00a_5bc7:
     jr jr_00a_5b93                                ; $5BD3
 
 ; C: the middle band of the photo stretched to double height; = slot 05 applied to the photo flipped left-right; reads
-; x 0-127, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 25;
-; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; x 0-127, y 24-79; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s)
+; 25; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx25_StretchV2x_OnFlipH::
     ld hl, $a400                                  ; $5BD5
     ld de, wPhotoImage + $f0                      ; $5BD8
@@ -4101,7 +4101,7 @@ jr_00a_5c2e:
 
 ; C: the middle columns of the photo stretched to double width; = slot 06 applied to the photo flipped left-right;
 ; reads x 32-95, y 0-111; grey levels: identity except 36 px that follow the wrong table byte 0A:774D (14336 px); BGB
-; hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect ...
+; hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); ...
 Fx26_StretchH2x_OnFlipH::
     ld hl, $a140                                  ; $5C3A
     ld de, wPhotoImage + $f0                      ; $5C3D
@@ -4160,7 +4160,7 @@ jr_00a_5c72:
 
 ; C: the centre of the photo magnified x2 (both axes); = slot 07 applied to the photo flipped left-right; reads x
 ; 32-95, y 24-79; grey levels: identity except 24 px that follow the wrong table byte 0A:774D (14336 px); BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect ...
 Fx27_Zoom2x_OnFlipH::
     ld hl, $a440                                  ; $5C80
     ld de, wPhotoImage + $f0                      ; $5C83
@@ -4304,8 +4304,8 @@ jr_00a_5d18:
 
 
 ; C: the photo reduced to half size (every second pixel and row) and tiled 2 x 2; = slot 08 with its picture flipped
-; left-right; reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table
-; slot(s) 28; scratch FF8A-FF8D loops; selected by the game (06:60DB); ...
+; left-right; reads x 0-126, y 0-110; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv);
+; effect table slot(s) 28; scratch FF8A-FF8D loops; selected by the game ...
 Fx28_Reduce2xTile2x2_FlipH::
     ld hl, $a100                                  ; $5D27
     ld de, wPhotoImage + $70                      ; $5D2A
@@ -4550,7 +4550,7 @@ Fx2C_Reduce2xQuadBR_FlipH::
 
 ; C: copy of part of the photo (LeftHalf); = slot 0D applied to the photo flipped left-right (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 64-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 2D; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 2D; scratch FF8A-FF8D loops; ...
 Fx2D_CopyLeftHalf_OnFlipH::
     ld hl, $a180                                  ; $5E40
     ld de, wPhotoImage + $70                      ; $5E43
@@ -4605,8 +4605,7 @@ jr_00a_5e72:
 
 ; C: copy of part of the photo (RightHalf); = slot 0E applied to the photo flipped left-right (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-63, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 2E; scratch FF8A-FF8D loops; selected by
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 2E; scratch FF8A-FF8D loops; ...
 Fx2E_CopyRightHalf_OnFlipH::
     ld hl, $a100                                  ; $5E7F
     ld de, wPhotoImage + $f0                      ; $5E82
@@ -4662,7 +4661,8 @@ jr_00a_5eb1:
 
 ; C: copy of part of the photo (TopHalf); = slot 0F applied to the photo flipped left-right (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 0-55; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 2F; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 2F; scratch FF8A-FF8D loops;
+; never ...
 Fx2F_CopyTopHalf_OnFlipH::
     ld hl, $a100                                  ; $5EBF
     ld de, wPhotoImage + $f0                      ; $5EC2
@@ -4716,8 +4716,7 @@ jr_00a_5ef1:
 
 ; C: copy of part of the photo (BottomHalf); = slot 10 applied to the photo flipped left-right (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 56-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 30; scratch FF8A-FF8D loops; selected
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 30; scratch FF8A-FF8D loops; ...
 Fx30_CopyBottomHalf_OnFlipH::
     ld hl, $a800                                  ; $5EFC
     ld de, wPhotoImage + $7f0                     ; $5EFF
@@ -4771,8 +4770,7 @@ jr_00a_5f2e:
 
 ; C: copy of part of the photo (Quads TR BL); = slot 11 applied to the photo flipped left-right (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 31; scratch FF8A-FF8D loops; selected
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 31; scratch FF8A-FF8D loops; ...
 Fx31_CopyQuads_TR_BL_OnFlipH::
     ld hl, $a100                                  ; $5F39
     ld de, wPhotoImage + $f0                      ; $5F3C
@@ -4880,7 +4878,7 @@ jr_00a_5fac:
 
 ; C: copy of part of the photo (Quads TR BL BR); = slot 12 applied to the photo flipped left-right (168 of 224 tiles;
 ; the rest of the buffer is left alone); reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 32; scratch FF8A-FF8D loops; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 32; scratch FF8A-FF8D ...
 Fx32_CopyQuads_TR_BL_BR_OnFlipH::
     ld hl, $a100                                  ; $5FB9
     ld de, wPhotoImage + $f0                      ; $5FBC
@@ -4987,7 +4985,7 @@ jr_00a_602c:
 
 ; C: copy of part of the photo (Top10Rows); = slot 13 applied to the photo flipped left-right (160 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 0-79; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 33; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 33; scratch FF8A-FF8D loops; ...
 Fx33_CopyTop10Rows_OnFlipH::
     ld hl, $a100                                  ; $6037
     ld de, wPhotoImage + $f0                      ; $603A
@@ -5041,8 +5039,7 @@ jr_00a_6069:
 
 ; C: copy of part of the photo (Bottom4Rows); = slot 14 applied to the photo flipped left-right (64 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 80-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 34; scratch FF8A-FF8D loops; selected
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 34; scratch FF8A-FF8D loops; ...
 Fx34_CopyBottom4Rows_OnFlipH::
     ld hl, $ab00                                  ; $6074
     ld de, wPhotoImage + $af0                     ; $6077
@@ -5096,7 +5093,8 @@ jr_00a_60a6:
 
 ; C: copy of part of the photo (Top4Rows); = slot 15 applied to the photo flipped left-right (64 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 0-31; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 35; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 35; scratch FF8A-FF8D loops;
+; never ...
 Fx35_CopyTop4Rows_OnFlipH::
     ld hl, $a100                                  ; $60B1
     ld de, wPhotoImage + $f0                      ; $60B4
@@ -5150,7 +5148,7 @@ jr_00a_60e3:
 
 ; C: copy of part of the photo (Bottom10Rows); = slot 16 applied to the photo flipped left-right (160 of 224 tiles;
 ; the rest of the buffer is left alone); reads x 0-127, y 32-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 36; scratch FF8A-FF8D loops; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 36; scratch FF8A-FF8D ...
 Fx36_CopyBottom10Rows_OnFlipH::
     ld hl, $a500                                  ; $60EE
     ld de, wPhotoImage + $4f0                     ; $60F1
@@ -5204,8 +5202,7 @@ jr_00a_6120:
 
 ; C: copy of part of the photo (Window); = slot 17 applied to the photo flipped left-right (80 of 224 tiles; the rest
 ; of the buffer is left alone); reads x 24-103, y 24-87; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 37; scratch FF8A-FF8D loops; selected by
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 37; scratch FF8A-FF8D loops; ...
 Fx37_CopyWindow_OnFlipH::
     ld hl, $a430                                  ; $612B
     ld de, wPhotoImage + $3c0                     ; $612E
@@ -5261,8 +5258,7 @@ jr_00a_615d:
 
 ; C: copy of part of the photo (QuadBR); = slot 18 applied to the photo flipped left-right (56 of 224 tiles; the rest
 ; of the buffer is left alone); reads x 0-63, y 56-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 38; scratch FF8A-FF8D loops; selected by
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 38; scratch FF8A-FF8D loops; ...
 Fx38_CopyQuadBR_OnFlipH::
     ld hl, $a800                                  ; $616B
     ld de, wPhotoImage + $7f0                     ; $616E
@@ -5352,8 +5348,8 @@ Fx3F_Nop::
 
 
 ; C: the photo flipped upside down; reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 40; scratch FF8A-FF8D loops; selected by
-; the game (06:60DB); was Fx40_Copy_A100toCD0E
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 40; scratch FF8A-FF8D loops;
+; selected by the game (06:60DB); was Fx40_Copy_A100toCD0E
 Fx40_FlipV::
     ld hl, $a100                                  ; $61B2
     ld bc, wPhotoImage + $d0e                     ; $61B5
@@ -5452,8 +5448,8 @@ jr_00a_620d:
     jr jr_00a_61bc                                ; $6219
 
 ; C: left half of the picture = right half of the photo mirrored; = slot 01 applied to the photo flipped upside down;
-; reads x 64-127, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s)
-; 41; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; reads x 64-127, y 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table
+; slot(s) 41; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx41_MirrorRtoL_OnFlipV::
     ld hl, $a180                                  ; $621B
     ld de, wPhotoImage + $d8e                     ; $621E
@@ -5520,8 +5516,8 @@ jr_00a_625c:
     jr jr_00a_6227                                ; $6267
 
 ; C: right half of the picture = left half of the photo mirrored; = slot 02 applied to the photo flipped upside down;
-; reads x 0-63, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 42;
-; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; reads x 0-63, y 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table
+; slot(s) 42; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx42_MirrorLtoR_OnFlipV::
     ld hl, $a100                                  ; $6269
     ld de, wPhotoImage + $d0e                     ; $626C
@@ -5589,8 +5585,8 @@ jr_00a_62aa:
     jr jr_00a_6275                                ; $62B6
 
 ; C: the middle band of the photo stretched to double height; = slot 05 with its picture flipped upside down; reads x
-; 0-127, y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 45; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; 0-127, y 24-79; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 45;
+; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx45_StretchV2x_FlipV::
     ld hl, $a400                                  ; $62B8
     ld de, wPhotoImage + $d0c                     ; $62BB
@@ -5674,8 +5670,8 @@ jr_00a_630d:
     jr jr_00a_62c2                                ; $6316
 
 ; C: the middle columns of the photo stretched to double width; = slot 06 applied to the photo flipped upside down;
-; reads x 32-95, y 0-111; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 46;
-; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
+; reads x 32-95, y 0-111; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table
+; slot(s) 46; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx46_StretchH2x_OnFlipV::
     ld hl, $a140                                  ; $6318
     ld de, wPhotoImage + $d0e                     ; $631B
@@ -5744,8 +5740,8 @@ jr_00a_635e:
     jr jr_00a_6322                                ; $6368
 
 ; C: the centre of the photo magnified x2 (both axes); = slot 07 with its picture flipped upside down; reads x 32-95,
-; y 24-79; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 47; scratch
-; FF8A-FF8D loops; selected by the game (06:60DB); was Fx47_Copy_A440toCD0C
+; y 24-79; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 47;
+; scratch FF8A-FF8D loops; selected by the game (06:60DB); was ...
 Fx47_Zoom2x_FlipV::
     ld hl, $a440                                  ; $636A
     ld de, wPhotoImage + $d0c                     ; $636D
@@ -5889,8 +5885,8 @@ jr_00a_6402:
 
 
 ; C: the photo reduced to half size (every second pixel and row) and tiled 2 x 2; = slot 08 with its picture flipped
-; upside down; reads x 0-126, y 0-110; BGB hook run (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect
-; table slot(s) 48; scratch FF8A-FF8D loops; selected by the game (06:60DB); ...
+; upside down; reads x 0-126, y 0-110; BGB hook run (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv);
+; effect table slot(s) 48; scratch FF8A-FF8D loops; selected by the game ...
 Fx48_Reduce2xTile2x2_FlipV::
     ld hl, $a100                                  ; $6411
     ld de, wPhotoImage + $60e                     ; $6414
@@ -6139,7 +6135,7 @@ Fx4C_Reduce2xQuadBR_FlipV::
 
 ; C: copy of part of the photo (LeftHalf); = slot 0D applied to the photo flipped upside down (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-63, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 4D; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 4D; scratch FF8A-FF8D loops; ...
 Fx4D_CopyLeftHalf_OnFlipV::
     ld hl, $a100                                  ; $652E
     ld bc, wPhotoImage + $d0e                     ; $6531
@@ -6192,8 +6188,7 @@ jr_00a_655c:
 
 ; C: copy of part of the photo (RightHalf); = slot 0E applied to the photo flipped upside down (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 64-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 4E; scratch FF8A-FF8D loops; selected
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 4E; scratch FF8A-FF8D loops; ...
 Fx4E_CopyRightHalf_OnFlipV::
     ld hl, $a180                                  ; $656A
     ld bc, wPhotoImage + $d8e                     ; $656D
@@ -6245,7 +6240,7 @@ jr_00a_6598:
 
 ; C: copy of part of the photo (TopHalf); = slot 0F applied to the photo flipped upside down (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 56-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 4F; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 4F; scratch FF8A-FF8D loops; ...
 Fx4F_CopyTopHalf_OnFlipV::
     ld hl, $a800                                  ; $65A5
     ld bc, wPhotoImage + $60e                     ; $65A8
@@ -6296,8 +6291,7 @@ jr_00a_65d3:
 
 ; C: copy of part of the photo (BottomHalf); = slot 10 applied to the photo flipped upside down (112 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 0-55; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 50; scratch FF8A-FF8D loops; selected
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 50; scratch FF8A-FF8D loops; ...
 Fx50_CopyBottomHalf_OnFlipV::
     ld hl, $a100                                  ; $65DE
     ld bc, wPhotoImage + $d0e                     ; $65E1
@@ -6348,7 +6342,7 @@ jr_00a_660c:
 
 ; C: copy of part of the photo (Quads TR BL); = slot 11 applied to the photo flipped upside down (112 of 224 tiles;
 ; the rest of the buffer is left alone); reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 51; scratch FF8A-FF8D loops; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 51; scratch FF8A-FF8D loops; ...
 Fx51_CopyQuads_TR_BL_OnFlipV::
     ld hl, $a100                                  ; $6617
     ld bc, wPhotoImage + $d0e                     ; $661A
@@ -6450,7 +6444,7 @@ jr_00a_6682:
 
 ; C: copy of part of the photo (Quads TR BL BR); = slot 12 applied to the photo flipped upside down (168 of 224 tiles;
 ; the rest of the buffer is left alone); reads x 0-127, y 0-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 52; scratch FF8A-FF8D loops; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 52; scratch FF8A-FF8D ...
 Fx52_CopyQuads_TR_BL_BR_OnFlipV::
     ld hl, $a100                                  ; $668F
     ld bc, wPhotoImage + $d0e                     ; $6692
@@ -6550,7 +6544,7 @@ jr_00a_66f7:
 
 ; C: copy of part of the photo (Top10Rows); = slot 13 applied to the photo flipped upside down (160 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 32-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 53; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 53; scratch FF8A-FF8D loops; ...
 Fx53_CopyTop10Rows_OnFlipV::
     ld hl, $a500                                  ; $6704
     ld bc, wPhotoImage + $90e                     ; $6707
@@ -6601,8 +6595,7 @@ jr_00a_6732:
 
 ; C: copy of part of the photo (Bottom4Rows); = slot 14 applied to the photo flipped upside down (64 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 0-31; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 54; scratch FF8A-FF8D loops; selected
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 54; scratch FF8A-FF8D loops; ...
 Fx54_CopyBottom4Rows_OnFlipV::
     ld hl, $a100                                  ; $673D
     ld bc, wPhotoImage + $d0e                     ; $6740
@@ -6653,7 +6646,7 @@ jr_00a_676b:
 
 ; C: copy of part of the photo (Top4Rows); = slot 15 applied to the photo flipped upside down (64 of 224 tiles; the
 ; rest of the buffer is left alone); reads x 0-127, y 80-111; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 55; scratch FF8A-FF8D loops; never ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 55; scratch FF8A-FF8D loops; ...
 Fx55_CopyTop4Rows_OnFlipV::
     ld hl, $ab00                                  ; $6776
     ld bc, wPhotoImage + $30e                     ; $6779
@@ -6704,7 +6697,7 @@ jr_00a_67a4:
 
 ; C: copy of part of the photo (Bottom10Rows); = slot 16 applied to the photo flipped upside down (160 of 224 tiles;
 ; the rest of the buffer is left alone); reads x 0-127, y 0-79; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 56; scratch FF8A-FF8D loops; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 56; scratch FF8A-FF8D loops; ...
 Fx56_CopyBottom10Rows_OnFlipV::
     ld hl, $a100                                  ; $67AF
     ld bc, wPhotoImage + $d0e                     ; $67B2
@@ -6755,8 +6748,7 @@ jr_00a_67dd:
 
 ; C: copy of part of the photo (Window); = slot 17 applied to the photo flipped upside down (80 of 224 tiles; the rest
 ; of the buffer is left alone); reads x 24-103, y 24-87; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 57; scratch FF8A-FF8D loops; selected by
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 57; scratch FF8A-FF8D loops; ...
 Fx57_CopyWindow_OnFlipV::
     ld hl, $a430                                  ; $67E8
     ld bc, wPhotoImage + $a3e                     ; $67EB
@@ -6809,8 +6801,7 @@ jr_00a_6816:
 
 ; C: copy of part of the photo (QuadBR); = slot 18 applied to the photo flipped upside down (56 of 224 tiles; the rest
 ; of the buffer is left alone); reads x 64-127, y 0-55; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); effect table slot(s) 58; scratch FF8A-FF8D loops; selected by
-; ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); effect table slot(s) 58; scratch FF8A-FF8D loops; ...
 Fx58_CopyQuadBR_OnFlipV::
     ld hl, $a180                                  ; $6824
     ld bc, wPhotoImage + $d8e                     ; $6827
@@ -6897,7 +6888,7 @@ Fx5F_Nop::
 
 ; C: shared body of slots 09-0C (the stubs Fx09-Fx0C load DE with the destination quadrant): reduces the photo to half
 ; size (every second pixel and row, sx = 2x, sy = 2y) into the 64 x 56 pixel quadrant at DE; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); b=$79 selects the ...
 FxShared_ReduceBody_G0::
     ld hl, $a100                                  ; $6866
     ld b, HIGH(Cam_ReduceTbl_Lo)                  ; $6869
@@ -7032,7 +7023,7 @@ jr_00a_68f5:
 
 ; C: shared body of slots 29-2C (the photo flipped left-right first): reduces the photo to half size (every second
 ; pixel and row, sx = -2x + 126 or -2x + 254, sy = 2y) into the 64 x 56 pixel quadrant at DE; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce table
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); b=$79 selects the ...
 FxShared_ReduceBody_G1::
     ld hl, $a100                                  ; $6906
     ld b, HIGH(Cam_ReduceTbl_Hi)                  ; $6909
@@ -7170,7 +7161,7 @@ jr_00a_6999:
 
 ; C: shared body of slots 49-4C (the photo flipped upside down first): reduces the photo to half size (every second
 ; pixel and row, sx = 2x, sy = -2y + 110 or -2y + 222) into the 64 x 56 pixel quadrant at DE; BGB hook run
-; (tcrf_check/assets/effect_slots/effect_slots_bgb.csv); b=$79 selects the reduce ...
+; (roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv); b=$79 selects the ...
 FxShared_ReduceBody_G2::
     ld hl, $a100                                  ; $69AA
     ld b, HIGH(Cam_ReduceTbl_Lo)                  ; $69AD
@@ -7314,7 +7305,7 @@ FxShared_ReduceBody_G2_OuterLoopTail::
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_BootSelfTest_Entry::
     ldh a, [hKeysHeld]                            ; $6A52
     cp PADF_A | PADF_SELECT | PADF_START | PADF_RIGHT | PADF_LEFT | PADF_UP | PADF_DOWN ; $6A54
@@ -7508,7 +7499,7 @@ Cam_ReduceTbl_Hi::
     ASSERT LOW(Cam_ReduceTbl_Hi) == 0 ; read as a page: HIGH(Cam_ReduceTbl_Hi) with the index in the low byte
     INCBIN "data/bank_0a/Cam_ReduceTbl_Hi.bin" ; $7A00, 256 bytes
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 71 replay(s) of the organic
-; corpus, modes 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_ExposureShiftTable::
     db $02
     db $03
@@ -7672,7 +7663,7 @@ Cam_ExposureShiftTable::
     db $03
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_ORegSAR_Table_Above::
     db $b0, $81, $81, $83, $82, $85, $85, $87, $84, $89, $89, $8b, $8a, $8d, $8d, $8f
     db $88, $91, $91, $93, $92, $95, $95, $97, $94, $99, $99, $9b, $9a, $9d, $9d, $9f
@@ -7680,7 +7671,7 @@ Cam_ORegSAR_Table_Above::
     db $b8, $b1, $b3, $b3, $b6, $b5, $b7, $b7, $bc, $b9, $bb, $bb, $be, $bd, $bf, $bf
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_ORegSAR_Table_Below::
     db $90, $82, $83, $84, $86, $86, $87, $88, $8c, $8a, $8b, $8c, $8e, $8e, $8f, $90
     db $98, $92, $93, $94, $96, $96, $97, $98, $9c, $9a, $9b, $9c, $9e, $9e, $9f, $9f
@@ -7688,7 +7679,7 @@ Cam_ORegSAR_Table_Below::
     db $a8, $b0, $b1, $b2, $b2, $b4, $b5, $b6, $b4, $b8, $b9, $ba, $ba, $bc, $bd, $be
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 26 replay(s) of the organic
-; corpus, modes 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_DitherRamp_ParamsA::
     db $80, $8f, $d0, $e6, $82, $90, $c8, $e3, $84, $90, $c0, $e0, $85, $91, $b8, $dd
     db $86, $91, $b1, $db, $87, $92, $aa, $d8, $88, $92, $a5, $d5, $89, $92, $a2, $d2
@@ -7696,7 +7687,7 @@ Cam_DitherRamp_ParamsA::
     db $8e, $92, $9b, $a5, $8f, $92, $99, $a0, $90, $92, $97, $9a, $92, $92, $92, $92
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic
-; corpus, modes 00 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_DitherRamp_ParamsB::
     db $80, $94, $dc, $ff, $82, $95, $d2, $ff, $84, $96, $ca, $ff, $86, $96, $c4, $ff
     db $88, $97, $be, $ff, $8a, $97, $b8, $ff, $8b, $98, $b2, $f5, $8c, $98, $ac, $eb
@@ -7742,7 +7733,7 @@ Cam_FarStub_BuildDitherMatrix::
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 71 replay(s) of the organic
-; corpus, modes 14 (tcrf_check/assets/l3_names/)
+; corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Cam_FarStub_MainDispatch::
     call Cam_MainDispatch                         ; $7CF8
     jp Far_Call_Return                            ; $7CFB
@@ -7755,7 +7746,7 @@ Cam_FarStub_DispatchEffect::
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_FarStub_ValidityCheck::
     call Cam_Calib_ValidityCheck                  ; $7D04
     jp Far_Call_Return                            ; $7D07
@@ -7769,7 +7760,7 @@ Cam_FarStub_FullCalibration::
 
 
 ; C: from the previous .sym (camera / sensor code. L3 pass 2026-10-26: executed in BGB in 205 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Cam_FarStub_LiveInit::
     call Cam_LiveInit                             ; $7D10
     jp Far_Call_Return                            ; $7D13

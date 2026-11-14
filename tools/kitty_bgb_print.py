@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Print from the Hello Kitty ROM in BGB with the project's Game Boy Printer helper on the link (tcrf_check/tools/bgb_printer.py).
+"""Print from the Hello Kitty ROM in BGB with the project's Game Boy Printer helper on the link (tools/jp/bgb_printer.py).
 
   tools/kitty_bgb_print.py ROM OUT_DIR --save S [--path 'A A A Start'] [--frames 300,600,...] [--play 'Left:20,Right:20']
 
@@ -8,10 +8,10 @@ frames (or the --play pattern of held keys, repeated, to play the game shown whi
 on 127.0.0.1:8793; BGB writes the screen and state at the end, the helper the printed pages. Default path: take a photo
 (title A, Take A, shutter A) and print it (START on the photo-taken screen). Writes OUT_DIR/print_NNNNN.png (screen after N
 frames), modes.csv (frames, mode, state) and OUT_DIR/run_NNNNN/ (the helper's printer_log.json and page_NN.png).
-BGB_HF: the headless flag (default -hf; -headless when -hf hangs at the link handshake, as in the sandbox of 2026-11-12). With BGB_WP set (a BGB -wp list, as tcrf_check/tools/bgb_run.py takes it) the run logs the watchpoint hits into run_NNNNN/debugmsg.txt.
+BGB_HF: the headless flag (default -hf; -headless when -hf hangs at the link handshake, as in the sandbox of 2026-11-12). With BGB_WP set (a BGB -wp list, as tools/jp/bgb_run.py takes it) the run logs the watchpoint hits into run_NNNNN/debugmsg.txt.
 """
 import sys, os, csv, argparse, subprocess, shutil, time
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tools', 'jp'))
 from bgb_run import read_state
 from bgb_printer import PrinterServer
 from PIL import Image

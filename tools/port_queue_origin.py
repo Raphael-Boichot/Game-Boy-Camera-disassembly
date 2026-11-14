@@ -7,7 +7,7 @@ SYM gives the queue routines: Vq_Process .. the label after Vq_RunStream, and Ir
 The corpus is replayed depth first (each entry's own actions once, from its parent's snapshot); saves are looked up as lib.SAV does (tcrf_check/saves*).
 OUT.npz: qsite, qsite2, qsite3 = (0x80000000 | bank << 16 | pc) of the writer and its two callers, 0 where no queue routine read the byte;
          site, site2, dr, rdr = the read sites of this replay (set GBCAM_SITE_ALL=1), in the format of a coverage cov.npz (tools/port_check_names4.py reads them).
-PYTHONPATH: coverage/src and tcrf_check/tools."""
+PYTHONPATH: coverage/src and tools/jp."""
 import sys, os, time
 import numpy as np
 a = sys.argv[1:]
@@ -21,7 +21,7 @@ lab = sorted(v[1] for k, v in S.items() if v[0] == 0)
 def nxt(n): return min(x for x in lab if x > S[n][1]) - 1
 os.environ['GBCAM_QPC'] = '%x-%x,%x-%x' % (S['Vq_Process'][1], nxt('Vq_RunStream'), S['Irq_VBlank_CopyRequest'][1], nxt('Irq_VBlank_CopyRequest'))
 print('GBCAM_QPC', os.environ['GBCAM_QPC'], flush=True)
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tools', 'jp'))
 import lib; from lib import g
 C = lib.Corpus(corpus); kids = {}
 for i, e in C.E.items(): kids.setdefault(e.get('parent', -1), []).append(i)

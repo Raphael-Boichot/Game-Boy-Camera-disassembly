@@ -301,7 +301,7 @@ jr_008_4257:
 
 
 ; C: Select = option page; Start = toggle extra copy; A/B = leave; BGB watchpoint pass 2026-10-25: ran only in mode 1C
-; and state 03 (21106 hits in 22 runs: 1C:03 x21106; tcrf_check/assets/mode_state_wp/)
+; and state 03 (21106 hits in 22 runs: 1C:03 x21106; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_State03_PrintMain::
     call Mode1C_DrawJitterSprite                  ; $4291
     ldh a, [hKeysHeld]                            ; $4294
@@ -350,7 +350,7 @@ jr_008_42c5:
 
 
 ; C: random 1-px jitter of sprite $79/$7A; BGB watchpoint pass 2026-10-25: ran only in mode 1C (10553 hits in 22 runs:
-; 1C:03 x10553; tcrf_check/assets/mode_state_wp/)
+; 1C:03 x10553; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_DrawJitterSprite::
     ldh a, [hFrameCounter]                        ; $42E3
     and $01                                       ; $42E5
@@ -390,7 +390,7 @@ jr_008_42f5:
 
 
 ; C: Up -> density; Down -> second option; B/Select back; BGB watchpoint pass 2026-10-25: ran only in mode 1C and
-; state 04 (5627 hits in 13 runs: 1C:04 x5627; tcrf_check/assets/mode_state_wp/)
+; state 04 (5627 hits in 13 runs: 1C:04 x5627; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_State04_OptionsMenu::
     ld a, [wBlinkCounter]                         ; $4329
     inc a                                         ; $432C
@@ -604,7 +604,7 @@ jr_008_4485:
 
 
 ; C: Left/Right toggles D674; two tile variants; BGB watchpoint pass 2026-10-25: ran only in mode 1C and state 06
-; (3256 hits in 10 runs: 1C:06 x3256; tcrf_check/assets/mode_state_wp/)
+; (3256 hits in 10 runs: 1C:06 x3256; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_State06_OptionToggle::
     call Mode1C_ReadToggleKeys                    ; $4489
     call Mode1C_DrawToggleArrow                   ; $448C
@@ -690,7 +690,7 @@ jr_008_4502:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 1C (7 hits in 7 runs: 1C:06 x7;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_LoadToggleTiles::
     ld a, [wChoiceCursorA]                        ; $4508
     and a                                         ; $450B
@@ -727,7 +727,7 @@ jr_008_453a:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 1C (1712 hits in 10 runs: 1C:06 x1712;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_DrawToggleArrow::
     ld a, [wChoiceCursorA]                        ; $4545
     sla a                                         ; $4548
@@ -773,7 +773,7 @@ jr_008_4579:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 1C (710 hits in 2 runs: 1C:06 x710;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1C_ToggleArrowPosTbl::
     db $80, $28, $80, $78
 
@@ -1042,8 +1042,8 @@ Mode1C_State0E_AfterWildFrame::
 
 
 ; C: tilemap 27:4472 and border tiles; BGB watchpoint pass 2026-10-25: ran only in mode 1C (4 hits in 2 runs: 1C:05
-; x4; tcrf_check/assets/mode_state_wp/); C: the routine is executed in this build's coverage run and at most a quarter
-; of its Japanese instructions are unpaired
+; x4; roms/jp_rev_a/experiments/mode_state_wp/); C: the routine is executed in this build's coverage run and at most a
+; quarter of its Japanese instructions are unpaired
 Mode1C_DrawPrintScreen::
     call Oam_ClearShadow                          ; $47ED
     farcopy Vram_CopyFromBank, Gfx_08_48B1_Mode1C_DrawPrintScreen, $8ff0, $0010 ; $47F0
@@ -1082,8 +1082,8 @@ jr_008_484e:
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 1C (30 hits in 13 runs: 1C:03 x30;
-; tcrf_check/assets/mode_state_wp/); C: the routine is executed in this build's coverage run and at most a quarter of
-; its Japanese instructions are unpaired
+; roms/jp_rev_a/experiments/mode_state_wp/); C: the routine is executed in this build's coverage run and at most a
+; quarter of its Japanese instructions are unpaired
 Mode1C_DrawOptionScreen::
     call Oam_ClearShadow                          ; $4859
     farcopy Vram_CopyFromBank, Gfx_08_48B1_Mode1C_DrawPrintScreen, $8ff0, $0010 ; $485C
@@ -1488,7 +1488,8 @@ jr_008_4b8d:
 Print_BitMaskTbl::
     db $80, $40, $20, $10, $08, $04, $02, $01
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_DrawPageArrow::
     ld bc, $1c40                                  ; $4B9A
     ld a, $ac                                     ; $4B9D
@@ -1497,7 +1498,8 @@ Print_DrawPageArrow::
     ret                                           ; $4BA3
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_DrawPageIcon::
     ld bc, $5046                                  ; $4BA4
     ld a, $af                                     ; $4BA7
@@ -1535,12 +1537,12 @@ jr_008_4bb6:
 
 
 ; C: 3 x (x; y; sprite). L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1E
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_CursorSpriteTbl::
     db $40, $19, $b0, $60, $1a, $b0, $74, $65, $b1
 
 ; C: A = digit; copies 2 tiles from 20:7180. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus,
-; modes 1E (tcrf_check/assets/l3_names/)
+; modes 1E (roms/jp_rev_a/experiments/l3_names/)
 Print_DrawDigitTiles::
     swap a                                        ; $4BD7
     ld c, a                                       ; $4BD9
@@ -1646,7 +1648,8 @@ jr_008_4c3e:
     ret                                           ; $4C43
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_DrawPageNumbers::
     ld c, $00                                     ; $4C44
     ld a, [wPrintCursor]                          ; $4C46
@@ -1670,7 +1673,8 @@ jr_008_4c51:
     ret                                           ; $4C5B
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_DrawSelectionDigits::
     ldh [hScratchA], a                            ; $4C5C
     cp $1e                                        ; $4C5E
@@ -1732,12 +1736,13 @@ jr_008_4c9d:
     ret                                           ; $4CB0
 
 
-; C: L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_SelectMarkTbl::
     db $c0, $c0, $30, $30, $0c, $0c, $03, $03
 
 ; C: auto: 4 bytes, word table; referenced by Print_DrawSelectionDigits. L3 pass 2026-10-26: read in BGB in 1
-; replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 1E (roms/jp_rev_a/experiments/l3_names/)
 Print_DrawSelectionDigits_PtrTbl4CB9::
     dw $5256
     dw $5450
@@ -1919,7 +1924,8 @@ jr_008_4da5:
     ret                                           ; $4DB3
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_LoadSelectedDigit::
     xor a                                         ; $4DB4
     ld [wPrintMarkerBlinkA], a                    ; $4DB5
@@ -1949,7 +1955,8 @@ jr_008_4dd0:
     call Print_LoadDigitTile                      ; $4DD5
     pop af                                        ; $4DD8
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1E
+; (roms/jp_rev_a/experiments/l3_names/)
 Print_LoadDigitTile::
     swap a                                        ; $4DD9
     ld c, a                                       ; $4DDB
@@ -2246,7 +2253,7 @@ jr_008_4fbb:
 
 
 ; C: page slide. L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 0A 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 BorderPicker_SlideToPrevious::
     push af                                       ; $4FBF
     ld a, [wBorderNumber]                         ; $4FC0
@@ -2292,7 +2299,8 @@ jr_008_4ff0:
     ret                                           ; $500D
 
 
-; C: L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 0A 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 0A 12
+; (roms/jp_rev_a/experiments/l3_names/)
 BorderPicker_SlideTblA::
     db $a8, $00, $3f, $78, $00, $6f, $50, $00, $97, $30, $20, $00, $18, $00, $00, $08
     db $00, $00, $00, $00, $00
@@ -2618,7 +2626,7 @@ WildFramePicker_Substate0_Init::
 
 
 ; C: fills 4*B bytes with A. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 1C
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Wild_FillBytes4::
     ld [hl+], a                                   ; $5273
     ld [hl+], a                                   ; $5274
@@ -2901,7 +2909,7 @@ WildFramePicker_LoadPage::
 
 
 ; C: Vram_CopyFromBank then bank++ on address wrap. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic
-; corpus, modes 1C (tcrf_check/assets/l3_names/)
+; corpus, modes 1C (roms/jp_rev_a/experiments/l3_names/)
 Wild_CopyBlockAdvance::
     push af                                       ; $5449
     call Vram_CopyFromBank                        ; $544A
@@ -2916,7 +2924,7 @@ Wild_CopyBlockAdvance::
 
 
 ; C: far: called from the print job (08:4675). L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic
-; corpus, modes 1C (tcrf_check/assets/l3_names/)
+; corpus, modes 1C (roms/jp_rev_a/experiments/l3_names/)
 WildFrame_LoadForPrintJob::
     ld a, [wPageIndex8]                           ; $5457
     ld c, a                                       ; $545A
@@ -2957,7 +2965,7 @@ jr_008_5480:
 
 
 ; C: far: called from state 2 (08:4254). L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus,
-; modes 1C (tcrf_check/assets/l3_names/)
+; modes 1C (roms/jp_rev_a/experiments/l3_names/)
 WildFrame_LoadForPrintScreen::
     ld a, [wPageIndex8]                           ; $5486
     ld c, a                                       ; $5489
@@ -2983,7 +2991,8 @@ WildFrame_LoadForPrintScreen::
     jp Far_Call_Return                            ; $54BA
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1C (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1C
+; (roms/jp_rev_a/experiments/l3_names/)
 Wild_MemCopyAdvance::
     push af                                       ; $54BD
     call Mem_CopyFromBank                         ; $54BE
@@ -3415,7 +3424,7 @@ Title_LoadScene::
 
 
 ; C: 3-byte {lo;hi;bank}: 3E:4000. L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic corpus, modes 19
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Title_SceneTbl::
     dwb Gfx_3E_4000_TitleScene
     dwb Gfx_3E_4E00_TitleScene

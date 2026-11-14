@@ -6,7 +6,7 @@ SECTION "ROM Bank $029", ROMX[$4000], BANK[$29]
 
 ; C: 234 records of 32 bytes (5-byte header + tile numbers, $FF/$FE = blank): ScrollEngine_Sub1_FetchRow loads bank
 ; $29 and addresses $4000 + row*32 (ScrollEngine_RowToOffset). L3 pass 2026-10-26: read in BGB in 2 replay(s) of the
-; organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Credits_ScrollRowTbl::
     db $01, $00, $03, $04, $01, $ff, $ff, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe, $fe
     db $fe, $fe, $fe, $fe, $fe, $fe, $fe, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff

@@ -104,7 +104,7 @@ Gfx_2A_44D4_FontSlot26::
 Gfx_2A_44F4_FontSlots27to28::
     INCBIN "data/bank_2a/Gfx_2A_44F4_FontSlots27to28.2bpp" ; $44F4, 16 bytes
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 256 tiles. L3 pass 2026-10-26: read in BGB in 4
-; replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_2A_4504::
     INCBIN "data/bank_2a/Sheet_MiscellaneousStampsJpn_2A_4504.bin" ; $4504, 1311 bytes
 ; C: 23 bytes inside slot $51 of the glyph font at 2A:4000 (32 B = 2 tiles per glyph, address = $4000 + 32 x slot);
@@ -127,53 +127,53 @@ Gfx_2A_4A4E_FontSlot52::
     ds $10, $00
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: the small kana ぇ ぉ (end), A-Z, _ ' , .,
-; the accented capitals Á Â À Ä É Ê È Ë Í Ï Ó Ö Ú Ü Ñ, -, & ! ?, a blank ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: the small kana ぇ ぉ (end), A-Z, _
+; ' , ., the accented capitals Á Â À Ä É Ê È Ë Í Ï Ó Ö Ú Ü Ñ, -, & ! ?, a ...
 Gfx_2A_4A6A_FontLatinCapitals::
     INCBIN "data/bank_2a/Gfx_2A_4A6A_FontLatinCapitals.bin" ; $4A6A, 1782 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: e (the Japanese name described the
-; katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: e (the Japanese name described
+; the katakana slot); same bytes at the same address in the international ROM
 Font_2A_5160_Glyph_e::
     INCBIN "data/bank_2a/Font_2A_5160_Glyph_e.2bpp" ; $5160, 32 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: f-m (the Japanese name described the
-; katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: f-m (the Japanese name described
+; the katakana slot); same bytes at the same address in the international ...
 Font_2A_5180_Glyphs_f_to_m::
     INCBIN "data/bank_2a/Font_2A_5180_Glyphs_f_to_m.2bpp" ; $5180, 256 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: n o (the Japanese name described the
-; katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: n o (the Japanese name described
+; the katakana slot); same bytes at the same address in the international ...
 Font_2A_5280_Glyphs_n_o::
     INCBIN "data/bank_2a/Font_2A_5280_Glyphs_n_o.2bpp" ; $5280, 64 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: p-u (the Japanese name described the
-; katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: p-u (the Japanese name described
+; the katakana slot); same bytes at the same address in the international ...
 Font_2A_52C0_Glyphs_p_to_u::
     INCBIN "data/bank_2a/Font_2A_52C0_Glyphs_p_to_u.2bpp" ; $52C0, 192 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: v w (the Japanese name described the
-; katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: v w (the Japanese name described
+; the katakana slot); same bytes at the same address in the international ...
 Font_2A_5380_Glyphs_v_w::
     INCBIN "data/bank_2a/Font_2A_5380_Glyphs_v_w.2bpp" ; $5380, 64 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: x (the Japanese name described the
-; katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: x (the Japanese name described
+; the katakana slot); same bytes at the same address in the international ROM
 Font_2A_53C0_Glyph_x::
     INCBIN "data/bank_2a/Font_2A_53C0_Glyph_x.2bpp" ; $53C0, 32 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: y (first 26 bytes) (the Japanese name
-; described the katakana slot); same bytes at the same address in the ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: y (first 26 bytes) (the Japanese
+; name described the katakana slot); same bytes at the same address in the ...
 Font_2A_53E0_Glyph_y::
     INCBIN "data/bank_2a/Font_2A_53E0_Glyph_y.bin" ; $53E0, 26 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: the end of y and the first byte of z
-; (the Japanese name described the katakana slot); same bytes at the same ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: the end of y and the first byte
+; of z (the Japanese name described the katakana slot); same bytes at the ...
 Font_2A_53FA_Glyphs_y_z_Part::
     INCBIN "data/bank_2a/Font_2A_53FA_Glyphs_y_z_Part.bin" ; $53FA, 7 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: z and the start of a middle dot (the
-; Japanese name described the katakana slot); same bytes at the same address in ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: z and the start of a middle dot
+; (the Japanese name described the katakana slot); same bytes at the same ...
 Font_2A_5401_Glyphs_z_MidDot::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $7c, $7c, $04
     db $04, $08, $08, $10, $10, $20, $20, $7c, $7c
@@ -185,8 +185,8 @@ Font_2A_5401_Glyphs_z_MidDot::
     db $30
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: middle dot, start of ~ (the Japanese
-; name described the katakana slot); same bytes at the same address in the ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: middle dot, start of ~ (the
+; Japanese name described the katakana slot); same bytes at the same address in ...
 Font_2A_5430_Glyphs_MidDot_Tilde::
     db $30, $30, $00, $00, $00, $00, $00, $00, $00, $00
 
@@ -199,8 +199,8 @@ Font_2A_5430_Glyphs_MidDot_Tilde::
     db $32
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: ~ and the start of a telephone icon (the
-; Japanese name described the katakana slot); same bytes at the same ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: ~ and the start of a telephone
+; icon (the Japanese name described the katakana slot); same bytes at the ...
 Font_2A_5452_Glyphs_Tilde_Phone::
     db $00, $00, $00, $00, $00, $00, $00, $00
 
@@ -221,8 +221,8 @@ Font_2A_5452_Glyphs_Tilde_Phone::
     db $7c
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: the telephone icon, start of a blank
-; glyph (the Japanese name described the katakana slot); same bytes at the same ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: the telephone icon, start of a
+; blank glyph (the Japanese name described the katakana slot); same bytes at ...
 Font_2A_5470_Glyphs_Phone_Blank::
     db $7c, $54, $7c, $7c, $7c, $54, $7c, $7c, $7c, $54
 
@@ -233,8 +233,8 @@ Font_2A_5470_Glyphs_Phone_Blank::
     ds $16, $00
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: a blank glyph, start of á (the Japanese
-; name described the katakana slot); same bytes at the same address in the ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: a blank glyph, start of á (the
+; Japanese name described the katakana slot); same bytes at the same address ...
 Font_2A_5492_Glyphs_Blank_aAcute::
     db $00, $00
 
@@ -251,18 +251,18 @@ Font_2A_5492_Glyphs_Blank_aAcute::
     db $18
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: á, start of â (the Japanese name
-; described the katakana slot); same bytes at the same address in the international ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: á, start of â (the Japanese name
+; described the katakana slot); same bytes at the same address in the ...
 Font_2A_54B0_Glyphs_aAcute_aCirc::
     INCBIN "data/bank_2a/Font_2A_54B0_Glyphs_aAcute_aCirc.2bpp" ; $54B0, 32 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: â, start of à (the Japanese name
-; described the katakana slot); same bytes at the same address in the international ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: â, start of à (the Japanese name
+; described the katakana slot); same bytes at the same address in the ...
 Font_2A_54D0_Glyphs_aCirc_aGrave::
     INCBIN "data/bank_2a/Font_2A_54D0_Glyphs_aCirc_aGrave.2bpp" ; $54D0, 32 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: à, start of ä (the Japanese name
-; described the katakana slot); same bytes at the same address in the international ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: à, start of ä (the Japanese name
+; described the katakana slot); same bytes at the same address in the ...
 Font_2A_54F0_Glyphs_aGrave_aUmlaut::
     db $28, $28, $48, $48, $48, $48, $48, $48, $34, $34
 
@@ -279,27 +279,27 @@ Font_2A_54F0_Glyphs_aGrave_aUmlaut::
     db $28
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: ä, start of é (the Japanese name
-; described the katakana slot); same bytes at the same address in the international ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: ä, start of é (the Japanese name
+; described the katakana slot); same bytes at the same address in the ...
 Font_2A_5512_Glyphs_aUmlaut_eAcute::
     INCBIN "data/bank_2a/Font_2A_5512_Glyphs_aUmlaut_eAcute.bin" ; $5512, 24 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: é ê è ë í ï ó ö ú ü ñ ç ß, three small
-; faces, 0-9 (the Japanese name described the katakana slot); same bytes at ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: é ê è ë í ï ó ö ú ü ñ ç ß, three
+; small faces, 0-9 (the Japanese name described the katakana slot); same ...
 Font_2A_552A_LowerAccentsFacesDigits::
     INCBIN "data/bank_2a/Font_2A_552A_LowerAccentsFacesDigits.bin" ; $552A, 817 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: end of 9, /, start of : (the Japanese
-; name described the katakana slot); same bytes at the same address in the ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: end of 9, /, start of : (the
+; Japanese name described the katakana slot); same bytes at the same address in ...
 Font_2A_585B_Glyphs_9_Slash_Colon::
     INCBIN "data/bank_2a/Font_2A_585B_Glyphs_9_Slash_Colon.bin" ; $585B, 31 bytes
-; C: tiles: BGB, menu walk node U00 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by Kb_LoadGlyphList
+; C: tiles: BGB, menu walk node U00 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by Kb_LoadGlyphList
 Gfx_2A_587A_Kb_LoadGlyphList::
     INCBIN "data/bank_2a/Gfx_2A_587A_Kb_LoadGlyphList.bin" ; $587A, 30 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: end of :, a second ~, start of " (the
-; Japanese name described the katakana slot); same bytes at the same address ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: end of :, a second ~, start of "
+; (the Japanese name described the katakana slot); same bytes at the same ...
 Font_2A_5898_Glyphs_Colon_Tilde_Quote::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $64, $64, $98, $98
     db $00, $00, $00, $00, $00, $00
@@ -307,8 +307,8 @@ Font_2A_5898_Glyphs_Colon_Tilde_Quote::
     ; padding
     ds $14, $00
 
-; C: tiles: BGB, menu walk node U11 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by Kb_LoadGlyphList
+; C: tiles: BGB, menu walk node U11 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by Kb_LoadGlyphList
 Gfx_2A_58C2_Kb_LoadGlyphList::
     db $6c, $6c, $24, $24, $48, $48
 
@@ -316,21 +316,21 @@ Gfx_2A_58C2_Kb_LoadGlyphList::
     ds $e, $00
 
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: ", start of @ (the Japanese name
-; described the katakana slot); same bytes at the same address in the international ...
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: ", start of @ (the Japanese name
+; described the katakana slot); same bytes at the same address in the ...
 Font_2A_58D6_Glyphs_Quote_At::
     db $00, $00, $00, $00, $00, $00
 
     ; padding
     ds $8, $00
 
-; C: tiles: BGB, menu walk node U11 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by Kb_LoadGlyphList
+; C: tiles: BGB, menu walk node U11 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by Kb_LoadGlyphList
 Gfx_2A_58E4_Kb_LoadGlyphList::
     INCBIN "data/bank_2a/Gfx_2A_58E4_Kb_LoadGlyphList.bin" ; $58E4, 18 bytes
 ; C: glyph font 2A:4000 (32 B = an 8 x 16 glyph); in this build the Japanese katakana area 2A:4A60-5909 holds the
-; Latin set drawn on tcrf_check/assets/l3_by_eye/font_2A_4A60_jp_vs_intl.png: end of @ (the Japanese name described
-; the katakana slot); same bytes at the same address in the international ROM
+; Latin set drawn on roms/jp_rev_a/experiments/l3_by_eye/font_2A_4A60_jp_vs_intl.png: end of @ (the Japanese name
+; described the katakana slot); same bytes at the same address in the ...
 Font_2A_58F6_Glyph_At_Part::
     db $38, $38, $00, $00
 
@@ -394,7 +394,7 @@ Font_2A_5E84_GlyphF5::
     ds $162, $00
 
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 2379 tiles. L3 pass 2026-10-26: read in BGB in 6
-; replay(s) of the organic corpus, modes 08 09 0A (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 08 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_2A_5FFA::
     INCBIN "data/bank_2a/Sheet_MiscellaneousStampsJpn_2A_5FFA.bin" ; $5FFA, 6 bytes
 ; C: font base handed to Glyph_LoadFromCharCode at 09:47C7 and 09:55A8 (owner card, keyboard); the Japanese name was

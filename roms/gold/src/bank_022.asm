@@ -35,36 +35,36 @@ Gfx_22_56A0_CreditsGirlFrame07_Part5740::
 Gfx_22_5B00_CreditsGirlFrame11_Part5BA0::
     INCBIN "data/bank_22/Gfx_22_5B00_CreditsGirlFrame11_Part5BA0.2bpp" ; $5BA0, 928 bytes
 ; C: far pointer loaded by Mode20_State02_GameSetup (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 08 20 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 08 20 (roms/jp_rev_a/experiments/l3_names/)
 Map_22_5F40_Mode20_State02_GameSetup::
     INCBIN "data/bank_22/Map_22_5F40_Mode20_State02_GameSetup.tilemap" ; $5F40, 192 bytes
 ; C: copied to VRAM/WRAM by Ball_MenuLoadRow (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in
-; 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; 4 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Map_22_5F40_Ball_MenuLoadRow_Part6000::
     INCBIN "data/bank_22/Map_22_5F40_Ball_MenuLoadRow_Part6000.tilemap" ; $6000, 832 bytes
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/)
 Map_22_6340_Mode06_State00_Init::
     INCBIN "data/bank_22/Map_22_6340_Mode06_State00_Init.tilemap" ; $6340, 1024 bytes
 ; C: copied to VRAM/WRAM by Mode11_State02_Setup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 35 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode11_State02_Setup reads them in this build (coverage call site or loader ...
+; BGB in 35 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode11_State02_Setup reads them in this build (coverage call site or ...
 Gfx_22_6740_Mode11_State02_Setup::
     INCBIN "data/bank_22/Gfx_22_6740_Mode11_State02_Setup.2bpp" ; $6740, 208 bytes
 ; C: copied to VRAM/WRAM by Mode11_State02_Setup, Mode11_State08_SaveResult (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 35 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 35 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_22_6810_Mode11_State02_Setup::
     INCBIN "data/bank_22/Gfx_22_6810_Mode11_State02_Setup.2bpp" ; $6810, 640 bytes
 ; C: far pointer loaded by Mode11_State04_Place (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 35 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 35 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_22_6A90_Mode11_State04_Place::
     INCBIN "data/bank_22/Gfx_22_6A90_Mode11_State04_Place.2bpp" ; $6A90, 16 bytes
 ; C: far pointer loaded by Mode1A_State02_Setup (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 45 replay(s) of the organic corpus, modes 11 1A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 45 replay(s) of the organic corpus, modes 11 1A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_22_6AA0_Mode1A_State02_Setup::
     INCBIN "data/bank_22/Gfx_22_6AA0_Mode1A_State02_Setup.2bpp" ; $6AA0, 16 bytes
 ; C: copied to VRAM/WRAM by Mode11_State02_Setup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 35 replay(s) of the organic corpus, modes 11 (tcrf_check/assets/l3_names/)
+; BGB in 35 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_22_6AB0_Mode11_State02_Setup::
     db $00, $00, $fc, $fc, $fc, $84, $fc, $bc, $e0, $a0, $e0, $a0, $e0, $a0, $e0, $e0
 
@@ -77,7 +77,7 @@ Gfx_22_6AB0_Mode11_State02_Setup::
 Map_22_6B40_Mode12_State00_Init::
     INCBIN "data/bank_22/Map_22_6B40_Mode12_State00_Init.tilemap" ; $6B40, 672 bytes
 ; C: far pointer loaded by Mode12_State06_ToolsOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Map_22_6DE0_Mode12_State06_ToolsOpen::
     INCBIN "data/bank_22/Map_22_6DE0_Mode12_State06_ToolsOpen.tilemap" ; $6DE0, 352 bytes
 ; C: frame 8 of the staff-roll dancer (a dancing girl, not identified): {lo,hi,bank,duration} table 09:509C (13
@@ -95,7 +95,7 @@ Map_22_7340_Mode21_State02_RaceSceneInit::
 Map_22_7340_Mode21_PickCharacterKeys_Part7440::
     INCBIN "data/bank_22/Map_22_7340_Mode21_PickCharacterKeys_Part7440.tilemap" ; $7440, 768 bytes
 ; C: copied to VRAM/WRAM by Mode20_State02_GameSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Map_22_7740_Mode20_State02_GameSetup::
     INCBIN "data/bank_22/Map_22_7740_Mode20_State02_GameSetup.tilemap" ; $7740, 1024 bytes
 ; C: copied to VRAM/WRAM by Mode1F_State04_PerformanceSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:

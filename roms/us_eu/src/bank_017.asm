@@ -35,27 +35,27 @@ Gfx_17_4680_Mode0F_State05_ConfirmInit::
 Gfx_17_4680_Compose_Split_DrawMakeBlink_Part4690::
     INCBIN "data/bank_17/Gfx_17_4680_Compose_Split_DrawMakeBlink_Part4690.2bpp" ; $4690, 16 bytes
 ; C: far pointer loaded by Mode0F_State05_ConfirmInit (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 88 replay(s) of the organic corpus, modes 0F 14 1C (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 88 replay(s) of the organic corpus, modes 0F 14 1C (roms/jp_rev_a/experiments/l3_names/)
 Gfx_17_46A0_Mode0F_State05_ConfirmInit::
     INCBIN "data/bank_17/Gfx_17_46A0_Mode0F_State05_ConfirmInit.2bpp" ; $46A0, 96 bytes
 ; C: far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 256 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads them in ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads ...
 Gfx_17_4700_Shoot_LoadBurstIcons::
     INCBIN "data/bank_17/Gfx_17_4700_Shoot_LoadBurstIcons.2bpp" ; $4700, 64 bytes
 ; C: far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads them in ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads ...
 Gfx_17_4740_Shoot_LoadBurstIcons::
     INCBIN "data/bank_17/Gfx_17_4740_Shoot_LoadBurstIcons.2bpp" ; $4740, 64 bytes
 ; C: far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 128 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads them in ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads ...
 Gfx_17_4780_Shoot_LoadBurstIcons::
     INCBIN "data/bank_17/Gfx_17_4780_Shoot_LoadBurstIcons.2bpp" ; $4780, 64 bytes
 ; C: far pointer loaded by Shoot_LoadBurstIcons (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the
 ; nearby ld bc. L3 pass 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads them in ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Shoot_LoadBurstIcons reads ...
 Gfx_17_47C0_Shoot_LoadBurstIcons::
     INCBIN "data/bank_17/Gfx_17_47C0_Shoot_LoadBurstIcons.2bpp" ; $47C0, 64 bytes
 ; C: far pointer loaded by Compose_DrawFreeCount, Shoot_DrawShotsLeft, Unused_Link_DrawPhotoNumber (ld a,BANK; ld
@@ -69,7 +69,7 @@ Gfx_17_4800_Compose_DrawFreeCount::
 Gfx_17_4820_Shoot_DrawShotsLeft_Digits1to9::
     INCBIN "data/bank_17/Gfx_17_4820_Shoot_DrawShotsLeft_Digits1to9.2bpp" ; $4820, 288 bytes
 ; C: copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_17_4940_Mode14_State00_Init::
     INCBIN "data/bank_17/Gfx_17_4940_Mode14_State00_Init.2bpp" ; $4940, 16 bytes
 ; C: far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Shoot_DrawTimerMinutes (ld a,BANK; ld
@@ -78,27 +78,27 @@ Gfx_17_4940_Mode14_State00_Init::
 Gfx_17_4950_Shoot_DrawTimerMinutes::
     INCBIN "data/bank_17/Gfx_17_4950_Shoot_DrawTimerMinutes.2bpp" ; $4950, 16 bytes
 ; C: copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_17_4960_Mode14_State00_Init::
     INCBIN "data/bank_17/Gfx_17_4960_Mode14_State00_Init.2bpp" ; $4960, 32 bytes
 ; C: copied to VRAM/WRAM by Mode17_State08_Split_Build, Mode17_State0E_Fusion_Build, Mode14_State00_Init,
 ; Shoot_RestoreViewScreen, Mode14_State0C_Reinit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/); ...
+; BGB in 72 replay(s) of the organic corpus, modes 14 ...
 Gfx_17_4980_Mode17_State08_Split_Build::
     INCBIN "data/bank_17/Gfx_17_4980_Mode17_State08_Split_Build.2bpp" ; $4980, 224 bytes
 ; C: far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (ld
 ; a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 80 replay(s) of the organic
-; corpus, modes 14 1C (tcrf_check/assets/l3_names/); L3 same: the readers here ...
+; corpus, modes 14 1C (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers ...
 Gfx_17_4A60_Mode0E_State04_PickDone::
     INCBIN "data/bank_17/Gfx_17_4A60_Mode0E_State04_PickDone.2bpp" ; $4A60, 256 bytes
 ; C: far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (ld
 ; a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 80 replay(s) of the organic
-; corpus, modes 14 1C (tcrf_check/assets/l3_names/); L3 same: the readers here ...
+; corpus, modes 14 1C (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers ...
 Gfx_17_4B60_Mode0E_State04_PickDone::
     INCBIN "data/bank_17/Gfx_17_4B60_Mode0E_State04_PickDone.2bpp" ; $4B60, 48 bytes
 ; C: far pointer loaded by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond, Mode1C_State02_ShowPrintScreen (ld
 ; a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 80 replay(s) of the organic
-; corpus, modes 14 1C (tcrf_check/assets/l3_names/); L3 same: the readers here ...
+; corpus, modes 14 1C (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers ...
 Gfx_17_4B90_Mode0E_State04_PickDone::
     INCBIN "data/bank_17/Gfx_17_4B90_Mode0E_State04_PickDone.2bpp" ; $4B90, 80 bytes
 ; C: far pointer loaded by Shoot_DrawTimerMinutes (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from
@@ -112,17 +112,17 @@ Gfx_17_4BE0_Shoot_DrawTimerMinutes::
 
 ; C: far pointer loaded by Shoot_DrawOptionPanel (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 1024 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Shoot_DrawOptionPanel reads them ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Shoot_DrawOptionPanel ...
 Gfx_17_4C00_Shoot_DrawOptionPanel::
     INCBIN "data/bank_17/Gfx_17_4C00_Shoot_DrawOptionPanel.2bpp" ; $4C00, 1024 bytes
 ; C: far pointer loaded by Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Mode14_State04_OptionsPage ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_17_5000_Mode14_State04_OptionsPage::
     INCBIN "data/bank_17/Gfx_17_5000_Mode14_State04_OptionsPage.2bpp" ; $5000, 512 bytes
 ; C: far pointer loaded by Mode14_State04_OptionsPage (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_17_5200_Mode14_State04_OptionsPage::
     db $00, $00, $7f, $00, $78, $03, $60, $0f, $60, $0f, $43, $1e, $43, $1e, $43, $1e
     db $00, $01, $ff, $01, $3f, $e1, $0f, $f9, $0f, $f9, $87, $3d, $87, $3d, $87, $3d
@@ -151,11 +151,11 @@ Gfx_17_5400_Shoot_LoadBurstIcons::
     INCBIN "data/bank_17/Gfx_17_5400_Shoot_LoadBurstIcons.2bpp" ; $5400, 64 bytes
 ; C: copied to VRAM/WRAM by Mode14_State00_Init, Shoot_RestoreViewScreen, Mode14_State0C_Reinit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes
-; 14 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode14_State00_Init reads them in ...
+; 14 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode14_State00_Init reads ...
 Gfx_17_5440_Mode14_State00_Init::
     INCBIN "data/bank_17/Gfx_17_5440_Mode14_State00_Init.2bpp" ; $5440, 160 bytes
 ; C: copied to VRAM/WRAM by Mode14_State00_Init, Mode14_State0C_Reinit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 72 replay(s) of the organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_17_54E0_Mode14_State00_Init::
     INCBIN "data/bank_17/Gfx_17_54E0_Mode14_State00_Init.2bpp" ; $54E0, 32 bytes
 ; C: tile block (304 tiles, 4,864 bytes) of an unused one-page main menu: the map 25:7820 uses ids 0-233 of it and BGB
@@ -185,7 +185,7 @@ Src_17_7900_Mode13_State00_Init::
     INCBIN "data/bank_17/Src_17_7900_Mode13_State00_Init.bin" ; $7900, 64 bytes
 ; C: 28 tiles of a vertical tick (a rule) and blanks; the Japanese bytes here are letter tiles of the animation title
 ; (sheet "Menus - Animation Title"), replaced in this build; read by Mode13_State00_Init (coverage); drawn in
-; tcrf_check/assets/l3_by_eye/sheets_jp_vs_intl.png
+; roms/jp_rev_a/experiments/l3_by_eye/sheets_jp_vs_intl.png
 Gfx_17_7940_AnimTitleTickTiles::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00

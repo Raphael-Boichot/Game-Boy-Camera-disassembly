@@ -10,22 +10,22 @@ SECTION "ROM Bank $036", ROMX[$4000], BANK[$36]
 AlbumB_UnusedSlotA_Tiles::
     INCBIN "data/bank_36/AlbumB_UnusedSlotA_Tiles.2bpp" ; $4000, 3584 bytes
 ; C: blank thumbnail of the unused slot. L3 pass 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes
-; 18 (tcrf_check/assets/l3_names/)
+; 18 (roms/jp_rev_a/experiments/l3_names/)
 AlbumB_UnusedSlotA_Thumb::
     INCBIN "data/bank_36/AlbumB_UnusedSlotA_Thumb.bin" ; $4E00, 256 bytes
 ; I: footer with the 'Magic' signature and checksum bytes (README 3.3)
 AlbumB_UnusedSlotA_Footer::
     INCBIN "data/bank_36/AlbumB_UnusedSlotA_Footer.bin" ; $4F00, 256 bytes
 ; C: blank picture; second slot before the table range. L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic
-; corpus, modes 09 0F 1E (tcrf_check/assets/l3_names/)
+; corpus, modes 09 0F 1E (roms/jp_rev_a/experiments/l3_names/)
 AlbumB_UnusedSlotB_Tiles::
     INCBIN "data/bank_36/AlbumB_UnusedSlotB_Tiles.2bpp" ; $5000, 3584 bytes
 ; C: blank thumbnail. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 09 1E
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AlbumB_UnusedSlotB_Thumb::
     INCBIN "data/bank_36/AlbumB_UnusedSlotB_Thumb.bin" ; $5E00, 256 bytes
 ; C: footer with the 'Magic' signature. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 09
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AlbumB_UnusedSlotB_Footer::
     INCBIN "data/bank_36/AlbumB_UnusedSlotB_Footer.bin" ; $5F00, 256 bytes
 ; C: 128x112 picture, 14 x 16 tiles

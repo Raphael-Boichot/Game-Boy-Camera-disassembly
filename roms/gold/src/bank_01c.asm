@@ -17,8 +17,8 @@ Sheet_MenusShootMenu_1C_4010::
 ; data by its look (I); L3 module: read here by Parlor_LoadPage (1150), of ...
 Gfx_1C_4241_Parlor_Page1::
     INCBIN "data/bank_1c/Gfx_1C_4241_Parlor_Page1.bin" ; $4241, 607 bytes
-; C: tiles: BGB, menu walk node H00 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by Mode01_State03
+; C: tiles: BGB, menu walk node H00 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by Mode01_State03
 Gfx_1C_44A0_Mode01_State03::
     INCBIN "data/bank_1c/Gfx_1C_44A0_Mode01_State03.2bpp" ; $44A0, 16 bytes
 ; C: inside record 1 of page 1 (1C:4000 +$0800 -> $9000, VRAM $94B0 onward) of Parlor_PageTbl (04:7436), loaded by
@@ -31,8 +31,8 @@ Gfx_1C_44B0_Parlor_Page1::
 ; international ROM
 Sheet_MenusShootMenu_1C_4670::
     INCBIN "data/bank_1c/Sheet_MenusShootMenu_1C_4670.bin" ; $4670, 1993 bytes
-; C: tiles: BGB, menu walk node H00 (tcrf_check/tools/guide_nodes.py, the international ROM, same bytes here): its
-; first 16 bytes are in VRAM tile data; read by Mode01_State03
+; C: tiles: BGB, menu walk node H00 (tools/jp/guide_nodes.py, the international ROM, same bytes here): its first 16
+; bytes are in VRAM tile data; read by Mode01_State03
 Gfx_1C_4E39_Mode01_State03::
     db $00, $ff, $ff, $00, $00, $00, $00, $d3, $d3, $00, $00, $00, $ff, $00, $00, $ff
     db $00, $ff, $ff, $00, $00, $00, $00, $99, $99, $00, $00, $00, $ff, $00, $00, $ff
@@ -56,7 +56,7 @@ Gfx_1C_4F00_Mode01_State03::
     INCBIN "data/bank_1c/Gfx_1C_4F00_Mode01_State03.2bpp" ; $4F00, 96 bytes
 ; C: copied to VRAM/WRAM by Mode1A_State02_Setup (roms/jp_rev_a/assets/catalog_jp.csv) | also inside record 2 of page
 ; 1 of Parlor_PageTbl (1C:4800 +$0800 -> $8800, C). L3 pass 2026-10-26: read in BGB in 24 replay(s) of the organic
-; corpus, modes 01 1A (tcrf_check/assets/l3_names/); C: the bytes changed ...
+; corpus, modes 01 1A (roms/jp_rev_a/experiments/l3_names/); C: the bytes ...
 Gfx_1C_4F60_Mode1A_State02_Setup::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $ff, $ff, $ff, $ff, $bb, $99, $bb, $99, $bb, $99, $bb, $99, $bb, $81, $83, $81
@@ -97,16 +97,16 @@ Gfx_1C_5160_Mode1A_State02_Setup::
     INCBIN "data/bank_1c/Gfx_1C_5160_Mode1A_State02_Setup.2bpp" ; $5160, 64 bytes
 ; C: far pointer loaded by Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld a,BANK; ld hl,ADDR; call banked
 ; copy/far call); length 512 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 6 replay(s) of the organic
-; corpus, modes 1A (tcrf_check/assets/l3_names/)
+; corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete::
     INCBIN "data/bank_1c/Gfx_1C_51A0_Mode1A_State04_PlaceOrDelete.2bpp" ; $51A0, 512 bytes
 ; C: copied to VRAM/WRAM by Mode1A_State02_Setup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 10 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; BGB in 10 replay(s) of the organic corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_53A0_Mode1A_State02_Setup::
     INCBIN "data/bank_1c/Gfx_1C_53A0_Mode1A_State02_Setup.2bpp" ; $53A0, 608 bytes
 ; C: far pointer loaded by Album_ShowPageScreenB, Album_LoadBorderScreen, Shoot_DrawOptionPanel,
 ; Mode1C_DrawOptionScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 76
-; replay(s) of the organic corpus, modes 09 0A 14 1A 1C (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 09 0A 14 1A 1C (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_5600_Album_ShowPageScreenB::
     INCBIN "data/bank_1c/Gfx_1C_5600_Album_ShowPageScreenB.2bpp" ; $5600, 32 bytes
 ; I: 64 bytes of tiles (by eye) between the copied blocks 1C:5600 ($20 bytes) and the digit tiles 1C:5660; bytes equal
@@ -125,7 +125,7 @@ Gfx_1C_570E_HotSpotEd_ShowJump::
     INCBIN "data/bank_1c/Gfx_1C_570E_HotSpotEd_ShowJump.bin" ; $570E, 2 bytes
 ; C: far pointer loaded by HotSpotEd_ShowJump (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 16 from the
 ; nearby ld bc. L3 pass 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_5710_HotSpotEd_ShowJump::
     INCBIN "data/bank_1c/Gfx_1C_5710_HotSpotEd_ShowJump.2bpp" ; $5710, 16 bytes
 ; I: 64 bytes (4 tiles) read by HotSpotEd_CopyNumberTile (from HotSpotEd_ShowSound) in this build, all of them
@@ -139,7 +139,8 @@ Gfx_1C_5720_HotSpotEd_CopyNumberTile::
 Gfx_1C_5760_HotSpotEd_ShowEffectIcon::
     INCBIN "data/bank_1c/Gfx_1C_5760_HotSpotEd_ShowEffectIcon.2bpp" ; $5760, 320 bytes
 ; C: copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 0F 1A (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 0F 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_58A0_Mode0C_State02_Setup::
     INCBIN "data/bank_1c/Gfx_1C_58A0_Mode0C_State02_Setup.2bpp" ; $58A0, 128 bytes
 ; I: TCRF unused graphics: the 8 extra hot-spot effect icons (32 tiles); on screen only in runs that force the effect
@@ -153,7 +154,7 @@ Unused_TCRF_HotSpotEffectIcons_Extra_Gfx::
 Gfx_1C_5B20_Parlor_LoadPage_Cont::
     INCBIN "data/bank_1c/Gfx_1C_5B20_Parlor_LoadPage_Cont.2bpp" ; $5B20, 64 bytes
 ; C: copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_5B60_Mode0C_State02_Setup::
     INCBIN "data/bank_1c/Gfx_1C_5B60_Mode0C_State02_Setup.2bpp" ; $5B60, 32 bytes
 ; C: far pointer loaded by Mode1A_State02_Setup, Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows,
@@ -176,7 +177,7 @@ Gfx_1C_5BE0_Mode09_State02_PhotoArrows::
 Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux::
     INCBIN "data/bank_1c/Gfx_1C_5C20_Mode09_State02_PhotoArrows_Aux.2bpp" ; $5C20, 64 bytes
 ; C: copied to VRAM/WRAM by Mode0C_State02_Setup, Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1C_5C60_Mode0C_State02_Setup::
     INCBIN "data/bank_1c/Gfx_1C_5C60_Mode0C_State02_Setup.2bpp" ; $5C60, 32 bytes
 ; C: far pointer loaded by Mode1A_State02_Setup, Mode09_State02_PhotoArrows, Mode0A_State04_PhotoArrows,
@@ -201,12 +202,12 @@ TileGap_1C_5D20::
     INCBIN "data/bank_1c/TileGap_1C_5D20.2bpp" ; $5D20, 64 bytes
 ; C: far pointer loaded by HotSpotEd_ShowJumpThumb, Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld
 ; a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in
-; 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; 6 replay(s) of the organic corpus, modes 1A ...
 Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete::
     INCBIN "data/bank_1c/Gfx_1C_5D60_Mode1A_State04_PlaceOrDelete.2bpp" ; $5D60, 192 bytes
 ; C: far pointer loaded by HotSpotEd_ShowJumpThumb, Mode1A_State04_PlaceOrDelete, Mode1A_State09_ExitDialog (ld
 ; a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in
-; 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; 6 replay(s) of the organic corpus, modes 1A ...
 Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete::
     INCBIN "data/bank_1c/Gfx_1C_5E20_Mode1A_State04_PlaceOrDelete.2bpp" ; $5E20, 64 bytes
 ; C: copied to VRAM/WRAM by Link_ShowScreenA, Link_ShowScreenB (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
@@ -271,15 +272,15 @@ Gfx_1C_7260_Mode1F_State08_EditPagesSetup::
 Gfx_1C_7860_Mode1F_State08_EditPagesSetup::
     INCBIN "data/bank_1c/Gfx_1C_7860_Mode1F_State08_EditPagesSetup.2bpp" ; $7860, 1024 bytes
 ; C: copied to VRAM/WRAM by Mode08_CreditsReal (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 6 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in 6 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Map_1C_7C60_Mode08_CreditsReal::
     INCBIN "data/bank_1c/Map_1C_7C60_Mode08_CreditsReal.tilemap" ; $7C60, 160 bytes
 ; C: far pointer loaded by Mode08_State13_CreditsPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Map_1C_7D00_Mode08_State13_CreditsPageA::
     INCBIN "data/bank_1c/Map_1C_7D00_Mode08_State13_CreditsPageA.tilemap" ; $7D00, 416 bytes
 ; C: far pointer loaded by Mode08_State13_CreditsPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 352
 ; from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Map_1C_7EA0_Mode08_State13_CreditsPageA::
     INCBIN "data/bank_1c/Map_1C_7EA0_Mode08_State13_CreditsPageA.tilemap" ; $7EA0, 352 bytes

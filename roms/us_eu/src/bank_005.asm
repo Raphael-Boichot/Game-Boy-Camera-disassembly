@@ -702,8 +702,8 @@ jr_005_446d:
 
 
 ; C: A: stores the tune (02:4A6B); slides the panel away; BGB watchpoint pass 2026-10-25: ran only in mode 1F and
-; state 06 (5044 hits in 2 runs: 1F:06 x5044; tcrf_check/assets/mode_state_wp/); C: the routine is executed in this
-; build's coverage run and at most a quarter of its Japanese instructions are ...
+; state 06 (5044 hits in 2 runs: 1F:06 x5044; roms/jp_rev_a/experiments/mode_state_wp/); C: the routine is executed in
+; this build's coverage run and at most a quarter of its Japanese ...
 Mode1F_State06_SavePanel::
     call DjPerf_UpdatePerformerTiles              ; $44A8
     ldh a, [hKeysNew]                             ; $44AB
@@ -737,8 +737,8 @@ jr_005_44ce:
 
 
 ; C: A: back to the title; B: back to the performance; BGB watchpoint pass 2026-10-25: ran only in mode 1F and state
-; 07 (4322 hits in 1 runs: 1F:07 x4322; tcrf_check/assets/mode_state_wp/); C: the routine is executed in this build's
-; coverage run and at most a quarter of its Japanese instructions are ...
+; 07 (4322 hits in 1 runs: 1F:07 x4322; roms/jp_rev_a/experiments/mode_state_wp/); C: the routine is executed in this
+; build's coverage run and at most a quarter of its Japanese instructions ...
 Mode1F_State07_QuitPanel::
     call DjPerf_UpdatePerformerTiles              ; $44FA
     ldh a, [hKeysNew]                             ; $44FD
@@ -1095,7 +1095,8 @@ jr_005_48be:
 
 
 ; C: tab sprite $A6. L3 pass 2026-10-26: executed in BGB in the scenarios dj_perf_start_noise 1F:0A,
-; dj_perf_start_noise 1F:0B, dj_print_noise 1F:0A, dj_print_noise 1F:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_perf_start_noise 1F:0B, dj_print_noise 1F:0A, dj_print_noise 1F:0B
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjEd_DrawPageTabNoise::
     ld bc, $062f                                  ; $48C7
     ld a, $a6                                     ; $48CA
@@ -1631,7 +1632,7 @@ DjEd_DrawNoteColumn_Tbl4B5C::
     db $6f, $6f, $84, $7d, $00, $ab
 
 ; C: NOISE width flag sprite. L3 pass 2026-10-26: executed in BGB in the scenarios dj_perf_start_noise 1F:0B,
-; dj_print_noise 1F:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print_noise 1F:0B (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjEd_DrawWidthFlag::
     ld c, a                                       ; $4BC2
     ld b, $00                                     ; $4BC3
@@ -2371,7 +2372,7 @@ DjPerf_PerformerScript_Tbl507D::
 
 ; C: auto: 5 bytes, bytes; referenced by DjPerf_PerformerScript. L3 pass 2026-10-26: read in BGB in the scenarios
 ; dj_editor 1F:05, dj_editor_sound2 1F:05, dj_perf_start 1F:05, dj_perf_start_noise 1F:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPerf_PerformerScript_Tbl5082::
     db $20, $22, $50, $60, $03
 
@@ -2525,7 +2526,7 @@ jr_005_5153:
 
 ; C: auto: 10 bytes, bytes; referenced by DjPerf_AnimateSpeakerBlink. L3 pass 2026-10-26: read in BGB in the scenarios
 ; dj_editor 1F:05, dj_editor_sound2 1F:05, dj_perf_start 1F:05, dj_perf_start_noise 1F:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPerf_AnimateSpeakerBlink_Tbl515F::
     db $2e, $37, $78, $73, $00, $09, $0e, $80, $7a, $01
 
@@ -2646,26 +2647,26 @@ DjPerf_Equaliser_PtrTbl521E::
 
 ; C: auto: 4 bytes, word table; referenced by DjPerf_Equaliser. L3 pass 2026-10-26: read in BGB in the scenarios
 ; dj_editor 1F:05, dj_editor_sound2 1F:05, dj_perf_start 1F:05, dj_perf_start_noise 1F:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPerf_Equaliser_PtrTbl5222::
     dw $5150
     dw $5352
 
 ; C: auto: 4 bytes, bytes; referenced by DjPerf_Equaliser. L3 pass 2026-10-26: read in BGB in the scenarios dj_editor
 ; 1F:05, dj_editor_sound2 1F:05, dj_perf_start 1F:05, dj_perf_start_noise 1F:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPerf_Equaliser_Tbl5226::
     db $50, $51, $52, $20
 
 ; C: auto: 4 bytes, bytes; referenced by DjPerf_Equaliser. L3 pass 2026-10-26: read in BGB in the scenarios dj_editor
 ; 1F:05, dj_editor_sound2 1F:05, dj_perf_start 1F:05, dj_perf_start_noise 1F:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPerf_Equaliser_Tbl522A::
     db $1c, $1d, $24, $2d
 
 ; C: auto: 4 bytes, tile map; referenced by DjPerf_Equaliser. L3 pass 2026-10-26: read in BGB in the scenarios
 ; dj_editor 1F:05, dj_editor_sound2 1F:05, dj_perf_start 1F:05, dj_perf_start_noise 1F:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPerf_Equaliser_Map522E::
     db $14, $15, $6e, $6e
 
@@ -4194,7 +4195,7 @@ DjPrint_RowTbl::
     dw DjPrintRow_Text6
 
 ; C: fixed text line of the score sheet (rows 0 / 4). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print
-; 1F:09, err_dj_dataFF 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09, err_dj_dataFF 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text0::
     ld hl, DjPrintRow_Text0_Tbl5A6F               ; $5A69
     jp DjPrint_RenderTextRow                      ; $5A6C
@@ -4205,7 +4206,7 @@ DjPrintRow_Text0_Tbl5A6F::
     db $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b, $8b
 
 ; C: fixed text line (rows 1 / 3). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text1::
     ld hl, DjPrintRow_Text1_Tbl5A89               ; $5A83
     jp DjPrint_RenderTextRow                      ; $5A86
@@ -4217,60 +4218,60 @@ DjPrintRow_Text1_Tbl5A89::
     db $8b, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $8b
 
 ; C: fixed text line (row 2). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text2::
     ld hl, DjPrintRow_Text2_Tbl5AA3               ; $5A9D
     jp DjPrint_RenderTextRow                      ; $5AA0
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_Text2. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv); L3 owner: named after its reader DjPrintRow_Text2, which reads it
-; here
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); L3 owner: named after its reader DjPrintRow_Text2, which
+; reads it here
 DjPrintRow_Text2_Tbl5AA3::
     db $8b, $9f, $9f, $9f, $9f, $9f, $83, $81, $68, $6f, $6f, $88, $4d, $67, $9f, $9f
     db $9f, $9f, $9f, $8b
 
 ; C: fixed text line (row 6). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text3::
     ld hl, DjPrintRow_Text3_Tbl5ABD               ; $5AB7
     jp DjPrint_RenderTextRow                      ; $5ABA
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_Text3. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text3_Tbl5ABD::
     db $4d, $4d, $4d, $4d, $4d, $4d, $4d, $00, $01, $02, $03, $04, $07, $4d, $4d, $4d
     db $4d, $4d, $4d, $4d
 
 ; C: fixed text line (row 16). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text4::
     ld hl, DjPrintRow_Text4_Tbl5AD7               ; $5AD1
     jp DjPrint_RenderTextRow                      ; $5AD4
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_Text4. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text4_Tbl5AD7::
     db $4d, $4d, $4d, $4d, $4d, $4d, $4d, $00, $01, $02, $03, $04, $08, $4d, $4d, $4d
     db $4d, $4d, $4d, $4d
 
 ; C: fixed text line (row 30). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text5::
     ld hl, DjPrintRow_Text5_Tbl5AF1               ; $5AEB
     jp DjPrint_RenderTextRow                      ; $5AEE
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_Text5. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text5_Tbl5AF1::
     db $4d, $4d, $4d, $4d, $4d, $4d, $4d, $03, $01, $05, $00, $06, $4d, $4d, $4d, $4d
     db $4d, $4d, $4d, $4d
 
 ; C: fixed text line (row 38). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text6::
     ld hl, DjPrintRow_Text6_Tbl5B0B               ; $5B05
     jp DjPrint_RenderTextRow                      ; $5B08
@@ -4281,14 +4282,14 @@ DjPrintRow_Text6_Tbl5B0B::
     db $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d, $4d
 
 ; C: fixed text line (rows 7 / 17 / 31). L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text7::
     ld hl, DjPrintRow_Text7_Tbl5B25               ; $5B1F
     jp DjPrint_RenderTextRow                      ; $5B22
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_Text7. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Text7_Tbl5B25::
     db $6d, $6e, $83, $64, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
@@ -4493,13 +4494,13 @@ jr_005_5c12:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_NsNotes3. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_NsNotes3_Tbl5C32::
     db $9f, $9f, $9f, $9f, $9f, $4f, $9f, $9f, $9f, $9f, $4f, $9f, $9f, $9f, $9f, $4f
     db $9f, $9f, $9f, $9f
 
 ; C: auto: 24 bytes, bytes; referenced by DjPrintRow_NsNotes3. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_NsNotes3_Tbl5C46::
     db $09, $9f, $09, $20, $0a, $9f, $0a, $20, $0b, $9f, $0c, $9f, $0c, $20, $0d, $9f
     db $0d, $20, $0e, $9f, $0e, $20, $0f, $9f
@@ -4533,13 +4534,13 @@ jr_005_5c66:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_S1Duty. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S1Duty_Tbl5C84::
     db $63, $84, $83, $88, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
 
 ; C: auto: 3 bytes, bytes; referenced by DjPrintRow_S1Duty. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S1Duty_Tbl5C98::
     db $2c, $2e, $40
 
@@ -4602,7 +4603,7 @@ jr_005_5cd1:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_NsEnvelope. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_NsEnvelope_Tbl5CFE::
     db $64, $6d, $85, $5f, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
@@ -4628,7 +4629,7 @@ jr_005_5d1a:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_S2WavePattern. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S2WavePattern_Tbl5D2F::
     db $64, $6d, $85, $5f, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
@@ -4691,13 +4692,13 @@ jr_005_5d6f:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_S2Modulation. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S2Modulation_Tbl5D9C::
     db $6c, $6e, $63, $5f, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
 
 ; C: auto: 3 bytes, bytes; referenced by DjPrintRow_S2Modulation. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S2Modulation_Tbl5DB0::
     db $46, $44, $4a
 
@@ -4744,7 +4745,7 @@ jr_005_5dd3:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_NsLoop. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_NsLoop_Tbl5DE7::
     db $6b, $6e, $6e, $6f, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
@@ -4770,13 +4771,13 @@ jr_005_5e03:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_Tempo. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_Tempo_Tbl5E18::
     db $83, $64, $6c, $6f, $6e, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
 
 ; C: SOUND II wave title line. L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S2WaveTitle::
     ld hl, DjPrintRow_S2WaveTitle_Tbl5E5E         ; $5E2C
     ld de, wTextLineSrc                           ; $5E2F
@@ -4813,7 +4814,7 @@ jr_005_5e58:
 
 
 ; C: auto: 20 bytes, bytes; referenced by DjPrintRow_S2WaveTitle. L3 pass 2026-10-26: read in BGB in the scenarios
-; dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; dj_print 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrintRow_S2WaveTitle_Tbl5E5E::
     db $86, $60, $85, $64, $4e, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
     db $9f, $9f, $9f, $9f
@@ -5040,7 +5041,8 @@ DjPrint_DrawRuler::
     call DjPrint_RulerShort                       ; $5F87
     ld hl, wBandBuffer + $110                     ; $5F8A
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_RulerLong::
     ld b, $08                                     ; $5F8D
 
@@ -5063,7 +5065,8 @@ jr_005_5f9a:
     ret                                           ; $5F9F
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_RulerShort::
     ld b, $08                                     ; $5FA0
 
@@ -5086,7 +5089,8 @@ jr_005_5fad:
     ret                                           ; $5FB2
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_FillCol::
     ld a, $ff                                     ; $5FB3
     ld de, $000f                                  ; $5FB5
@@ -5102,7 +5106,8 @@ jr_005_5fba:
     ret                                           ; $5FC0
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_FillRow::
     ld a, $ff                                     ; $5FC1
     ld de, $0010                                  ; $5FC3
@@ -5117,7 +5122,8 @@ jr_005_5fc8:
     ret                                           ; $5FCD
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PlotBars4::
     push de                                       ; $5FCE
     cp $04                                        ; $5FCF
@@ -5162,7 +5168,8 @@ jr_005_5fff:
     ret                                           ; $6000
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PlotBars4B::
     push de                                       ; $6001
     cp $04                                        ; $6002
@@ -5208,7 +5215,7 @@ jr_005_6032:
 
 
 ; C: ORs C into three bytes at HL. L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_OrC3::
     ld a, [hl]                                    ; $6034
     or c                                          ; $6035
@@ -5231,7 +5238,8 @@ DjPrint_OrC3::
     ret                                           ; $6046
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PutDash::
     ld a, $30                                     ; $6047
     ld [de], a                                    ; $6049
@@ -5239,7 +5247,8 @@ DjPrint_PutDash::
     ret                                           ; $604B
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PutDigitOrBlank::
     and a                                         ; $604C
     jr nz, jr_005_6054                            ; $604D
@@ -5257,7 +5266,8 @@ jr_005_6054:
     ret                                           ; $6058
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PutNumber2::
     ld c, $00                                     ; $6059
 
@@ -5287,7 +5297,8 @@ jr_005_606d:
     ret                                           ; $6072
 
 
-; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_print 1F:09
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PutTempo::
     ld bc, $0000                                  ; $6073
 
@@ -5479,7 +5490,7 @@ jr_005_6155:
 
 
 ; C: auto: 32 bytes, bytes; referenced by DjPrint_PutTempo. L3 pass 2026-10-26: read in BGB in the scenarios dj_print
-; 1F:09 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; 1F:09 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjPrint_PutTempo_Tbl615A::
     db $9f, $2b, $9f, $9f, $9f, $3b, $9f, $9f, $4c, $2b, $4c, $9f, $4c, $3b, $9f, $9f
     db $5c, $2b, $5c, $9f, $5c, $3b, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f, $9f
@@ -6731,7 +6742,7 @@ jr_005_692f:
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios dj_perf_start_noise 1F:0A, dj_print_noise 1F:0A
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 DjS2_DrawAllValues::
     ld a, [wLoopLengths + $1]                     ; $6955
     call DjEd_DrawLoopDigitsAndPrint              ; $6958
@@ -8710,7 +8721,8 @@ jr_005_75d2:
     ret                                           ; $75DA
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuDrawCursor::
     ld a, [wMenuRow]                              ; $75DB
     ld c, a                                       ; $75DE
@@ -8739,18 +8751,20 @@ Ball_MenuDrawCursor::
 
 
 ; C: auto: 12 bytes, bytes; referenced by Ball_MenuDrawCursor. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuDrawCursor_Tbl7602::
     db $08, $60, $08, $70, $08, $80, $88, $60, $88, $70, $88, $80
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimate::
     call Ball_MenuAnimB                           ; $760E
     call Ball_MenuAnimC                           ; $7611
     ret                                           ; $7614
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimB::
     ld a, [wMenuRow]                              ; $7615
     and a                                         ; $7618
@@ -8802,16 +8816,17 @@ jr_005_763a:
 
 
 ; C: auto: 6 bytes, bytes; referenced by Ball_MenuAnimB. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 20 (tcrf_check/assets/l3_names/)
+; corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimB_Tbl7658::
     db $18, $60, $18, $70, $18, $80
 
 ; C: auto: 4 bytes, bytes; referenced by Ball_MenuAnimB. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 20 (tcrf_check/assets/l3_names/)
+; corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimB_Tbl765E::
     db $84, $85, $86, $85
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimC::
     ld a, [wMenuRow]                              ; $7662
     and a                                         ; $7665
@@ -8863,16 +8878,17 @@ jr_005_7687:
 
 
 ; C: auto: 6 bytes, bytes; referenced by Ball_MenuAnimC. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 20 (tcrf_check/assets/l3_names/)
+; corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimC_Tbl76A5::
     db $80, $60, $80, $70, $80, $80
 
 ; C: auto: 4 bytes, bytes; referenced by Ball_MenuAnimC. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 20 (tcrf_check/assets/l3_names/)
+; corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimC_Tbl76AB::
     db $81, $82, $83, $82
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimA::
     ld a, [wMenuAnimATick]                        ; $76AF
     inc a                                         ; $76B2
@@ -8913,16 +8929,17 @@ jr_005_76c4:
 
 
 ; C: auto: 4 bytes, bytes; referenced by Ball_MenuAnimA. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic
-; corpus, modes 20 (tcrf_check/assets/l3_names/)
+; corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimA_Tbl76E6::
     db $11, $30, $91, $30
 
 ; C: auto: 12 bytes, bytes; referenced by Ball_MenuAnimA. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuAnimA_Tbl76EA::
     db $87, $88, $89, $8a, $8b, $8c, $8d, $8c, $8b, $8a, $89, $88
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawMenuBall::
     ld bc, $1870                                  ; $76F6
     add $7e                                       ; $76F9
@@ -8930,7 +8947,8 @@ Ball_DrawMenuBall::
     ret                                           ; $76FE
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_MenuBlinkSelection::
     ldh [hScratchA], a                            ; $76FF
     call Oam_HideUnused                           ; $7701
@@ -9041,7 +9059,7 @@ Mode20_State03_GameStart::
 
 
 ; C: auto: 4 bytes, bytes; referenced by Mode20_State03_GameStart, Mode20_State07_Pause. L3 pass 2026-10-26: read in
-; BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; BGB in 4 replay(s) of the organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Mode20_State03_GameStart_Tbl77F2::
     db MUSIC_BALL_BGM_1, SNDCH_MUSIC  ; #1
     db MUSIC_BALL_BGM_2, SNDCH_MUSIC  ; #2
@@ -9161,7 +9179,8 @@ jr_005_78ba:
     ret                                           ; $78D9
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Mode20_State07_Pause::
     call Ball_DrawHud                             ; $78DA
     call Ball_DrawPlayer                          ; $78DD
@@ -9193,7 +9212,8 @@ jr_005_7909:
     ret                                           ; $7918
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawPauseText::
     ld bc, $5048                                  ; $7919
     ld a, $b7                                     ; $791C
@@ -9374,11 +9394,12 @@ Ball_DrawPlayer::
 
 
 ; C: auto: 12 bytes, bytes; referenced by Ball_DrawPlayer. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawPlayer_Tbl7A61::
     db $20, $b5, $70, $b4, $28, $b1, $78, $b2, $30, $b3, $80, $b6
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_ScrollBg::
     ld a, [wBallPlayerPos]                        ; $7A6D
     sla a                                         ; $7A70
@@ -9394,11 +9415,12 @@ Ball_ScrollBg::
 
 
 ; C: auto: 6 bytes, bytes; referenced by Ball_ScrollBg. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic
-; corpus, modes 20 (tcrf_check/assets/l3_names/)
+; corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_ScrollBg_Tbl7A80::
     db $e8, $08, $98, $00, $c0, $f8
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_PoseScroll::
     ld a, [wBallPlayerPos]                        ; $7A86
     ld c, a                                       ; $7A89
@@ -9418,12 +9440,12 @@ Ball_PoseScroll::
 
 
 ; C: auto: 3 bytes, bytes; referenced by Ball_PoseScroll. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_PoseScroll_Tbl7AA1::
     db $08, $00, $f8
 
 ; C: auto: 3 bytes, bytes; referenced by Ball_PoseScroll. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_PoseScroll_Tbl7AA4::
     db $00, $48, $90
 
@@ -9539,7 +9561,7 @@ jr_005_7b32:
 
 
 ; C: auto: 2 bytes, bytes; referenced by Ball_StepObjects. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_StepObjects_Tbl7B55::
     dw $0c30
 
@@ -9555,7 +9577,7 @@ Ball_StepObjects_Tbl7B57::
     db $55, $35, $55, $35
 
 ; C: auto: 3 bytes, bytes; referenced by Ball_StepObjects. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_StepObjects_Tbl7BBB::
     db $08, $0a, $0c
 
@@ -9611,19 +9633,19 @@ jr_005_7c06:
 
 
 ; C: auto: 20 bytes, bytes; referenced by Ball_DrawObjects. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawObjects_Tbl7C0B::
     db $88, $17, $63, $28, $4a, $2b, $32, $33, $20, $44, $20, $5c, $32, $6d, $4a, $75
     db $63, $78, $88, $7e
 
 ; C: auto: 24 bytes, bytes; referenced by Ball_DrawObjects. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawObjects_Tbl7C1F::
     db $88, $17, $63, $18, $4a, $1b, $32, $22, $1d, $2f, $12, $44, $12, $5c, $1d, $71
     db $32, $7e, $4a, $85, $63, $88, $88, $7e
 
 ; C: auto: 28 bytes, bytes; referenced by Ball_DrawObjects. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawObjects_Tbl7C37::
     db $88, $17, $63, $08, $48, $0b, $30, $12, $1a, $1d, $09, $2d, $05, $44, $05, $5c
     db $09, $73, $1a, $83, $30, $8e, $48, $95, $63, $98, $88, $7e
@@ -9862,7 +9884,8 @@ jr_005_7d81:
     ret                                           ; $7D98
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic corpus, modes 20
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_DrawHud::
     ld bc, $8808                                  ; $7D99
     ld a, $b8                                     ; $7D9C
@@ -9871,7 +9894,7 @@ Ball_DrawHud::
 
 
 ; C: game-over blink. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 20
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Ball_FlipPalettes::
     push af                                       ; $7DA2
     ldh a, [hBgpShadow]                           ; $7DA3
@@ -10178,8 +10201,8 @@ jr_005_7f44:
 
 
 ; C: auto: 3 bytes, bytes; referenced by Ball_PickGfxBank. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 20 (tcrf_check/assets/l3_names/); L3 owner: named after its reader Ball_PickGfxBank, which
-; reads it here
+; organic corpus, modes 20 (roms/jp_rev_a/experiments/l3_names/); L3 owner: named after its reader Ball_PickGfxBank,
+; which reads it here
 Ball_PickGfxBank_Tbl7F4E::
     db $00
 

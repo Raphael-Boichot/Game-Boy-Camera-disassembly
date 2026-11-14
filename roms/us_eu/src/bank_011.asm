@@ -18,18 +18,18 @@ Gfx_11_4500_MainMenu_IconStripB_F5::
 Gfx_11_4A00_MainMenu_IconStripB_F6::
     INCBIN "data/bank_11/Gfx_11_4A00_MainMenu_IconStripB_F6.2bpp" ; $4A00, 1280 bytes
 ; C: copied to VRAM/WRAM by MainMenu_LoadBaseTiles, MainMenu_DrawUpperItem0 (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/); C: the
-; bytes changed but MainMenu_LoadBaseTiles reads them in this build ...
+; pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/);
+; C: the bytes changed but MainMenu_LoadBaseTiles reads them in this ...
 Gfx_11_4F00_MainMenu_LoadBaseTiles::
     INCBIN "data/bank_11/Gfx_11_4F00_MainMenu_LoadBaseTiles.2bpp" ; $4F00, 256 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/); L3 relabel:
-; loaded here by MainMenu_LoadBaseTiles (coverage: 512 of 512 read bytes); the ...
+; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/); L3
+; relabel: loaded here by MainMenu_LoadBaseTiles (coverage: 512 of 512 read ...
 Gfx_11_5000_MainMenu_LoadBaseTiles::
     INCBIN "data/bank_11/Gfx_11_5000_MainMenu_LoadBaseTiles.2bpp" ; $5000, 512 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem0 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/); L3 relabel: loaded here by Mode00_State00_Init ...
+; (roms/jp_rev_a/experiments/l3_names/); L3 relabel: loaded here by Mode00_State00_Init ...
 Gfx_11_5200_Mode00_State00_Init::
     INCBIN "data/bank_11/Gfx_11_5200_Mode00_State00_Init.2bpp" ; $5200, 256 bytes
 ; C: main-menu tiles: read by Mode00_State00_Init (85 bytes), MainMenu_LoadBaseTiles (53), Mode18_State00_Init (36),
@@ -334,8 +334,8 @@ Unused_TCRF_HandNewspaperFrames_Gfx::
     ds $6c0, $00
 
 ; C: copied to VRAM/WRAM by Mode18_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode18_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode18_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_11_7000_Mode18_State00_Init::
     INCBIN "data/bank_11/Gfx_11_7000_Mode18_State00_Init.2bpp" ; $7000, 512 bytes
 ; C: entry 0 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)
@@ -354,17 +354,17 @@ Gfx_11_7500_Icon06_5D43::
 Gfx_11_7600_Icon06_5D43::
     INCBIN "data/bank_11/Gfx_11_7600_Icon06_5D43.2bpp" ; $7600, 256 bytes
 ; C: copied to VRAM/WRAM by Compose_DrawJitter (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/); L3 relabel: loaded here by
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/); L3 relabel: loaded here by
 ; Mode18_State00_Init (coverage: 256 of 256 read bytes); the Japanese name ...
 Gfx_11_7000_Mode18_State00_Init_Part7700::
     INCBIN "data/bank_11/Gfx_11_7000_Mode18_State00_Init_Part7700.2bpp" ; $7700, 256 bytes
 ; C: copied to VRAM/WRAM by Mode18_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode18_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode18_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_11_7800_Mode18_State00_Init::
     INCBIN "data/bank_11/Gfx_11_7800_Mode18_State00_Init.2bpp" ; $7800, 1088 bytes
 ; C: far pointer loaded by Mode18_DrawThumbFrame (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7C40_Mode18_DrawThumbFrame::
     INCBIN "data/bank_11/Gfx_11_7C40_Mode18_DrawThumbFrame.2bpp" ; $7C40, 192 bytes
 ; C: entry 5 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)
@@ -374,6 +374,6 @@ Gfx_11_7D00_Icon06_5D43::
 Gfx_11_7E00_Icon06_5D43::
     INCBIN "data/bank_11/Gfx_11_7E00_Icon06_5D43.2bpp" ; $7E00, 256 bytes
 ; C: copied to VRAM/WRAM by Compose_DrawJitter (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7800_Compose_DrawJitter_Part7F00::
     INCBIN "data/bank_11/Gfx_11_7800_Compose_DrawJitter_Part7F00.2bpp" ; $7F00, 256 bytes

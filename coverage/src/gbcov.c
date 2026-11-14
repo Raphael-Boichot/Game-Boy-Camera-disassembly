@@ -101,7 +101,7 @@ static void req(int bit){ g.io[0x0F] |= (1<<bit); }
    plog = every reply given (command, status). Not part of the snapshot: call gb_printer_inject_clear() at the start of a run. */
 static uint8_t inj_cmd[16], inj_st[16]; static uint16_t inj_nth[16], inj_cnt[16]; static int inj_n;
 static uint8_t plog_cmd[8192], plog_rx[8192]; static int plog_n;
-static int pr_real;   /* gb_printer_model(1): replies copied from the real printer traces (as tcrf_check/tools/bgb_printer.py): INIT 00, first DATA 00, later DATA 08, PRINT 08, INQUIRY 06 x18, 04 x2, then 00 */
+static int pr_real;   /* gb_printer_model(1): replies copied from the real printer traces (as tools/jp/bgb_printer.py): INIT 00, first DATA 00, later DATA 08, PRINT 08, INQUIRY 06 x18, 04 x2, then 00 */
 static uint8_t printer_xfer(uint8_t tx){
   uint8_t rx=0x00;
   switch(g.pr_state){

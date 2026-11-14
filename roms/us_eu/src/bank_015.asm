@@ -5,7 +5,7 @@
 SECTION "ROM Bank $015", ROMX[$4000], BANK[$15]
 
 ; C: copied to VRAM/WRAM by MainMenu_LoadBackground (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_4000_MainMenu_LoadBackground::
     INCBIN "data/bank_15/Gfx_15_4000_MainMenu_LoadBackground.2bpp" ; $4000, 1152 bytes
 ; I: TCRF unused graphic: the circled X tile of the Japanese main-menu bank (copy 1 of 3, same tile at 15:4500 and
@@ -14,7 +14,7 @@ Gfx_15_4000_MainMenu_LoadBackground::
 Unused_TCRF_JapaneseMenuTile_CircledX_Gfx::
     INCBIN "data/bank_15/Unused_TCRF_JapaneseMenuTile_CircledX_Gfx.2bpp" ; $4480, 16 bytes
 ; C: continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block). L3 pass
-; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_4490_MainMenu_LoadBackground_Cont::
     INCBIN "data/bank_15/Gfx_15_4490_MainMenu_LoadBackground_Cont.2bpp" ; $4490, 112 bytes
 ; I: TCRF unused graphic: circled X, copy 2 of 3. L3 pass 2026-10-26: copied to VRAM with the block around it (read in
@@ -23,7 +23,7 @@ Gfx_15_4490_MainMenu_LoadBackground_Cont::
 Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx::
     INCBIN "data/bank_15/Unused_TCRF_JapaneseMenuTile_CircledX_Copy2_Gfx.2bpp" ; $4500, 16 bytes
 ; C: continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block). L3 pass
-; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_4510_MainMenu_LoadBackground_Cont::
     INCBIN "data/bank_15/Gfx_15_4510_MainMenu_LoadBackground_Cont.2bpp" ; $4510, 112 bytes
 ; I: TCRF unused graphic: circled X, copy 3 of 3. L3 pass 2026-10-26: copied to VRAM with the block around it (read in
@@ -32,17 +32,17 @@ Gfx_15_4510_MainMenu_LoadBackground_Cont::
 Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx::
     INCBIN "data/bank_15/Unused_TCRF_JapaneseMenuTile_CircledX_Copy3_Gfx.2bpp" ; $4580, 16 bytes
 ; C: continues the span of Gfx_15_4000_MainMenu_LoadBackground (the label before the TCRF-unused block). L3 pass
-; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_4590_MainMenu_LoadBackground_Cont::
     INCBIN "data/bank_15/Gfx_15_4590_MainMenu_LoadBackground_Cont.2bpp" ; $4590, 112 bytes
 ; C: copied to VRAM/WRAM by Mode00_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode00_State00_Init reads them in this build (coverage call site or loader ...
+; in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode00_State00_Init reads them in this build (coverage call site or ...
 Gfx_15_4600_Mode00_State00_Init::
     INCBIN "data/bank_15/Gfx_15_4600_Mode00_State00_Init.2bpp" ; $4600, 768 bytes
 ; C: copied to VRAM/WRAM by Mode00_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode00_State00_Init reads them in this build (coverage call site or loader ...
+; in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode00_State00_Init reads them in this build (coverage call site or ...
 Gfx_15_4900_Mode00_State00_Init::
     INCBIN "data/bank_15/Gfx_15_4900_Mode00_State00_Init.2bpp" ; $4900, 256 bytes
 ; C: copied to VRAM/WRAM by MainMenu_TransitionToLowerPage, Mode00_State04_Item3_Doodle, Mode00_State06_Item5_Special,
@@ -67,12 +67,12 @@ Gfx_15_4D00_MainMenu_LoadBackground::
     INCBIN "data/bank_15/Gfx_15_4D00_MainMenu_LoadBackground.2bpp" ; $4D00, 256 bytes
 ; C: copied to VRAM/WRAM by Mode00_State03_Item2_Arcade, MainMenu_LoadBaseTiles, MainMenu_DrawUpperItem2
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes
-; 00 (tcrf_check/assets/l3_names/); C: the bytes changed but MainMenu_LoadBaseTiles ...
+; 00 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_15_4E00_MainMenu_LoadBaseTiles::
     INCBIN "data/bank_15/Gfx_15_4E00_MainMenu_LoadBaseTiles.2bpp" ; $4E00, 512 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem2 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 14 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/); C: the bytes changed but MainMenu_DrawUpperItem2 reads ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but MainMenu_DrawUpperItem2 ...
 Gfx_15_5000_MainMenu_DrawUpperItem2::
     INCBIN "data/bank_15/Gfx_15_5000_MainMenu_DrawUpperItem2.2bpp" ; $5000, 512 bytes
 ; C: tile data with no direct pointer in the code (, same bank/neighbour of MainMenu_DrawUpperItem2); classified from
@@ -81,8 +81,8 @@ Gfx_15_5000_MainMenu_DrawUpperItem2::
 Gfx_15_5200_MainMenu_DrawUpperItem2_Aux::
     INCBIN "data/bank_15/Gfx_15_5200_MainMenu_DrawUpperItem2_Aux.2bpp" ; $5200, 512 bytes
 ; C: copied to VRAM/WRAM by Mode00_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode00_State00_Init reads them in this build (coverage call site or loader ...
+; in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode00_State00_Init reads them in this build (coverage call site or ...
 Gfx_15_5400_Mode00_State00_Init::
     INCBIN "data/bank_15/Gfx_15_5400_Mode00_State00_Init.2bpp" ; $5400, 256 bytes
 ; I: 256 bytes of tiles (4 distinct byte values, drawn by eye: tile graphics) between two copied blocks: the copy of
@@ -91,20 +91,20 @@ Gfx_15_5400_Mode00_State00_Init::
 Gfx_15_5500_Unref::
     INCBIN "data/bank_15/Gfx_15_5500_Unref.2bpp" ; $5500, 256 bytes
 ; C: copied to VRAM/WRAM by Mode00_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_5600_Mode00_State00_Init::
     INCBIN "data/bank_15/Gfx_15_5600_Mode00_State00_Init.2bpp" ; $5600, 256 bytes
 ; C: copied to VRAM/WRAM by Mode04_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 37 replay(s) of the organic corpus, modes 04 (tcrf_check/assets/l3_names/)
+; in 37 replay(s) of the organic corpus, modes 04 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_5700_Mode04_State00_Init::
     INCBIN "data/bank_15/Gfx_15_5700_Mode04_State00_Init.2bpp" ; $5700, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode04_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 37 replay(s) of the organic corpus, modes 04 (tcrf_check/assets/l3_names/)
+; in 37 replay(s) of the organic corpus, modes 04 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_15_5F00_Mode04_State00_Init::
     INCBIN "data/bank_15/Gfx_15_5F00_Mode04_State00_Init.2bpp" ; $5F00, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode04_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 37 replay(s) of the organic corpus, modes 04 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode04_State00_Init reads them in this build (coverage call site or loader ...
+; in 37 replay(s) of the organic corpus, modes 04 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode04_State00_Init reads them in this build (coverage call site or ...
 Gfx_15_6700_Mode04_State00_Init::
     INCBIN "data/bank_15/Gfx_15_6700_Mode04_State00_Init.2bpp" ; $6700, 1280 bytes
 ; C: far pointer loaded by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB (ld a,BANK; ld hl,ADDR; call
@@ -114,12 +114,12 @@ Gfx_15_6C00_Mode0E_State06_ExchangeSetup::
     INCBIN "data/bank_15/Gfx_15_6C00_Mode0E_State06_ExchangeSetup.2bpp" ; $6C00, 768 bytes
 ; C: copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in the scenarios link_exchange 0E:06,
-; link_exchange 0E:0A (tcrf_check/assets/l3_names/scen_hits*.csv); L3 loader: Mode0E_State06_ExchangeSetup ...
+; link_exchange 0E:0A (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); L3 loader: ...
 Gfx_15_6C00_Mode0E_State06_ExchangeSetup_Part6F00::
     INCBIN "data/bank_15/Gfx_15_6C00_Mode0E_State06_ExchangeSetup_Part6F00.2bpp" ; $6F00, 1280 bytes
 ; C: copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in the scenarios link_exchange 0E:06,
-; link_exchange 0E:0A (tcrf_check/assets/l3_names/scen_hits*.csv); L3 same: the readers here ...
+; link_exchange 0E:0A (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); L3 same: the readers here ...
 Gfx_15_7400_Mode0E_State06_ExchangeSetup::
     INCBIN "data/bank_15/Gfx_15_7400_Mode0E_State06_ExchangeSetup.2bpp" ; $7400, 1792 bytes
 ; C: the blocks on both sides are T_UI (layout kinds) and the reader is Mode0E_State0A_ExchangeSetupB: taken as part
@@ -140,6 +140,6 @@ Gfx_15_7B84_Mode0E_State0A_ExchangeSetupB::
     INCBIN "data/bank_15/Gfx_15_7B84_Mode0E_State0A_ExchangeSetupB.bin" ; $7B84, 124 bytes
 ; C: copied to VRAM/WRAM by Mode0E_State06_ExchangeSetup, Mode0E_State0A_ExchangeSetupB
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in the scenarios link_exchange 0E:06,
-; link_exchange 0E:0A (tcrf_check/assets/l3_names/scen_hits*.csv); L3 same: the readers here ...
+; link_exchange 0E:0A (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); L3 same: the readers here ...
 Gfx_15_7C00_Mode0E_State06_ExchangeSetup::
     INCBIN "data/bank_15/Gfx_15_7C00_Mode0E_State06_ExchangeSetup.2bpp" ; $7C00, 1024 bytes

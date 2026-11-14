@@ -3,7 +3,7 @@
 
   tools/reach_map.py --tag us|gold|kitty|proto ROM.gb [OUT.png]     (default roms/<folder>/<tag>_rom_reachability_map.png)
 
-The legend, the colours and the drawing are those of the Japanese map (tools/reach_draw.py; tcrf_check/tools/rom_reach_map.py), so a
+The legend, the colours and the drawing are those of the Japanese map (tools/reach_draw.py; tools/rom_reach_map.py), so a
 colour means the same thing in every map. The inputs are the files of the ROM folder (HOWTO_NEW_ROM.md section 0.1); a category the ROM
 has no evidence for stays empty:
   blue        executed or read in a run: every trace/cov_<tag>_*.npz (core runs, BGB runs, witness and key-path replays) and

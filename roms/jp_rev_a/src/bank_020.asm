@@ -5,52 +5,52 @@
 SECTION "ROM Bank $020", ROMX[$4000], BANK[$20]
 
 ; C: copied to VRAM/WRAM by Mode08_State14_CreditsPageB (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 2 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; read in BGB in 2 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_4000_Mode08_State14_CreditsPageB::
     INCBIN "data/bank_20/Gfx_20_4000_Mode08_State14_CreditsPageB.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State14_CreditsPageB (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 2 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; read in BGB in 2 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_4800_Mode08_State14_CreditsPageB::
     INCBIN "data/bank_20/Gfx_20_4800_Mode08_State14_CreditsPageB.2bpp" ; $4800, 1536 bytes
 ; C: copied to VRAM/WRAM by Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes
-; 08 (tcrf_check/assets/l3_names/)
+; 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_4E00_Mode08_State0C_RecordInit::
     INCBIN "data/bank_20/Gfx_20_4E00_Mode08_State0C_RecordInit.2bpp" ; $4E00, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State0C_RecordInit, Mode08_State0F_HiScoreInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes
-; 08 (tcrf_check/assets/l3_names/)
+; 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_5600_Mode08_State0C_RecordInit::
     INCBIN "data/bank_20/Gfx_20_5600_Mode08_State0C_RecordInit.2bpp" ; $5600, 1280 bytes
 ; C: copied to VRAM/WRAM by Mode08_State06_EditorInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_5B00_Mode08_State06_EditorInit::
     INCBIN "data/bank_20/Gfx_20_5B00_Mode08_State06_EditorInit.2bpp" ; $5B00, 1408 bytes
 ; C: copied to VRAM/WRAM by Mode08_State06_EditorInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6080_Mode08_State06_EditorInit::
     INCBIN "data/bank_20/Gfx_20_6080_Mode08_State06_EditorInit.2bpp" ; $6080, 1088 bytes
 ; C: far pointer loaded by Kb_Page0_Press, OwnerCard_LoadGenderTiles (ld a,BANK; ld hl,ADDR; call banked copy/far
 ; call); length 32 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes
-; 08 (tcrf_check/assets/l3_names/)
+; 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_64C0_OwnerCard_LoadGenderTiles::
     INCBIN "data/bank_20/Gfx_20_64C0_OwnerCard_LoadGenderTiles.2bpp" ; $64C0, 96 bytes
 ; C: far pointer loaded by OwnerCard_DrawBloodLow (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 32 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Src_20_6520_OwnerCard_DrawBloodLow::
     INCBIN "data/bank_20/Src_20_6520_OwnerCard_DrawBloodLow.bin" ; $6520, 4 bytes
 ; C: Spriter's Resource sheet "Miscellaneous - Stamps (JPN)", 58 tiles. L3 pass 2026-10-26: read in BGB in 3 replay(s)
-; of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Sheet_MiscellaneousStampsJpn_20_6524::
     INCBIN "data/bank_20/Sheet_MiscellaneousStampsJpn_20_6524.bin" ; $6524, 316 bytes
 ; C: far pointer loaded by OwnerCard_LoadBirthNumberTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Src_20_6660_OwnerCard_LoadBirthNumberTiles::
     INCBIN "data/bank_20/Src_20_6660_OwnerCard_LoadBirthNumberTiles.bin" ; $6660, 32 bytes
 ; C: far pointer loaded by OwnerCard_LoadBloodTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 64 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6680_OwnerCard_LoadBloodTiles::
     db $00, $00, $00, $00, $00, $00, $07, $07, $0c, $0c, $0c, $0c, $0c, $0c, $01, $01
     db $00, $00, $00, $00, $00, $00, $80, $80, $c0, $c0, $c0, $c0, $c0, $c0, $80, $80
@@ -63,7 +63,7 @@ Gfx_20_6680_OwnerCard_LoadBloodTiles::
 Gfx_20_66C0_Kb_Page0_Press::
     INCBIN "data/bank_20/Gfx_20_66C0_Kb_Page0_Press.2bpp" ; $66C0, 256 bytes
 ; C: copied to VRAM/WRAM by Mode08_State06_EditorInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_67C0_Mode08_State06_EditorInit::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $7c, $7c, $82, $c6, $fe, $fe
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $fe, $fe, $00, $00, $00, $00
@@ -73,22 +73,22 @@ Gfx_20_67C0_Mode08_State06_EditorInit::
 
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6800_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6800_Mode15_State01_TimerInit.2bpp" ; $6800, 1600 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6E40_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6E40_Mode15_State01_TimerInit.2bpp" ; $6E40, 128 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6EC0_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6EC0_Mode15_State01_TimerInit.2bpp" ; $6EC0, 96 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_6F20_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_6F20_Mode15_State01_TimerInit.2bpp" ; $6F20, 448 bytes
 ; C: digit table: Mode15_DrawTwoDigitsInterval (06:43F3) copies 16 bytes (1 tile) from $70E0 + digit x 16; 10 entries
@@ -101,7 +101,7 @@ Gfx_20_7180_Mode15_DrawTwoDigits::
     INCBIN "data/bank_20/Gfx_20_7180_Mode15_DrawTwoDigits.2bpp" ; $7180, 320 bytes
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_72C0_Mode15_State01_TimerInit::
     db $07, $07, $19, $1e, $24, $3b, $48, $77, $40, $7f, $90, $ef, $90, $ef, $80, $ff
     db $e0, $e0, $f8, $f8, $fc, $1c, $fe, $8e, $fe, $46, $ff, $a7, $ff, $a7, $ff, $47
@@ -138,14 +138,14 @@ Gfx_20_72C0_Mode15_State01_TimerInit::
 
 ; C: copied to VRAM/WRAM by Mode15_State01_TimerInit, Mode15_State05_IntervalInit
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 25 replay(s) of the organic corpus, modes
-; 15 (tcrf_check/assets/l3_names/)
+; 15 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_74F0_Mode15_State01_TimerInit::
     INCBIN "data/bank_20/Gfx_20_74F0_Mode15_State01_TimerInit.2bpp" ; $74F0, 16 bytes
 ; C: copied to VRAM/WRAM by Mode1D_State01_LoadScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 11 replay(s) of the organic corpus, modes 1D (tcrf_check/assets/l3_names/)
+; in BGB in 11 replay(s) of the organic corpus, modes 1D (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_7500_Mode1D_State01_LoadScreen::
     INCBIN "data/bank_20/Gfx_20_7500_Mode1D_State01_LoadScreen.2bpp" ; $7500, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode1D_State01_LoadScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 11 replay(s) of the organic corpus, modes 1D (tcrf_check/assets/l3_names/)
+; in BGB in 11 replay(s) of the organic corpus, modes 1D (roms/jp_rev_a/experiments/l3_names/)
 Gfx_20_7D00_Mode1D_State01_LoadScreen::
     INCBIN "data/bank_20/Gfx_20_7D00_Mode1D_State01_LoadScreen.2bpp" ; $7D00, 768 bytes

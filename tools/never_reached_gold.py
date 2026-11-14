@@ -5,7 +5,7 @@ GBCAM_ROM = the Gold ROM: a fresh run, a run on the unlocking saves and a third 
   tools/never_reached_gold.py JP.gb INTL.gb GOLD.gb OUTDIR COV.npz [COV.npz ...]
 
 Two tables (OUTDIR):
-  never_reached_gold.csv   the never-reached assets of the Japanese ROM (tcrf_check/assets/unidentified/really_unused.csv, tiers other than shown) found in the
+  never_reached_gold.csv   the never-reached assets of the Japanese ROM (roms/jp_rev_a/experiments/unidentified/really_unused.csv, tiers other than shown) found in the
                                  Gold ROM (same address / moved / absent) and how many of their bytes the Gold runs read (any run / organic runs only)
   gold_own_never_read.csv        the data blocks of the Gold ROM whose bytes differ from the international ROM at the same address (the Gold edition's own content) and
                                  that no organic Gold run read; plus the counts of those that were read
@@ -20,7 +20,7 @@ dr = np.zeros(len(G), bool); odr = np.zeros(len(G), bool)
 for c in COVS:
     z = np.load(c); dr |= z['dr'][:len(G)] > 0; odr |= z['odr'][:len(G)] > 0
 # ---- A: the Japanese never-reached assets in the Gold ROM
-rows = list(csv.DictReader(open(os.path.join(ROOT, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv'), encoding='utf-8')))
+rows = list(csv.DictReader(open(os.path.join(ROOT, 'roms', 'jp_rev_a', 'experiments', 'unidentified', 'really_unused.csv'), encoding='utf-8')))
 outA = []
 for r in rows:
     if r['tier'] == 'shown': continue

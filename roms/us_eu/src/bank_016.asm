@@ -84,12 +84,12 @@ Gfx_16_7980_MainMenu_BallHeadAnim_F8_Unref::
 Gfx_16_7B80_MainMenu_BallHeadAnim_F9::
     INCBIN "data/bank_16/Gfx_16_7B80_MainMenu_BallHeadAnim_F9.2bpp" ; $7B80, 512 bytes
 ; C: copied to VRAM/WRAM by Mode18_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode18_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode18_State00_Init reads them in this build (coverage call site or loader ...
 Map_16_7D80_Mode18_State00_Init::
     INCBIN "data/bank_16/Map_16_7D80_Mode18_State00_Init.tilemap" ; $7D80, 576 bytes
 ; C: copied to VRAM/WRAM by Mode18_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 3 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode18_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 3 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode18_State00_Init reads them in this build (coverage call site or loader ...
 Map_16_7FC0_Mode18_State00_Init::
     INCBIN "data/bank_16/Map_16_7FC0_Mode18_State00_Init.tilemap" ; $7FC0, 64 bytes

@@ -5,19 +5,19 @@
 SECTION "ROM Bank $00f", ROMX[$4000], BANK[$f]
 
 ; C: copied to VRAM/WRAM by Mode08_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 15 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in 15 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_4000_Mode08_State00_Init::
     INCBIN "data/bank_0f/Gfx_0F_4000_Mode08_State00_Init.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 15 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in 15 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_4800_Mode08_State00_Init::
     INCBIN "data/bank_0f/Gfx_0F_4800_Mode08_State00_Init.2bpp" ; $4800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 15 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in 15 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_5000_Mode08_State00_Init::
     INCBIN "data/bank_0f/Gfx_0F_5000_Mode08_State00_Init.2bpp" ; $5000, 1280 bytes
 ; C: far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 15 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 15 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_5500_UserMap_LoadPlanetTiles::
     INCBIN "data/bank_0f/Gfx_0F_5500_UserMap_LoadPlanetTiles.2bpp" ; $5500, 640 bytes
 ; C: 40 tiles (640 bytes) copied whole to $8500 by UserMap_LoadPlanetTiles (copy site 09:51DC,
@@ -27,7 +27,7 @@ Gfx_0F_5780_UserMap_LoadPlanetTiles::
     INCBIN "data/bank_0f/Gfx_0F_5780_UserMap_LoadPlanetTiles.2bpp" ; $5780, 640 bytes
 ; C: far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 640 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 8 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_5A00_UserMap_LoadPlanetTiles::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -68,7 +68,7 @@ Gfx_0F_5A00_UserMap_LoadPlanetTiles::
 
 ; C: far pointer loaded by UserMap_LoadPlanetTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 640 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes 08
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_5C80_UserMap_LoadPlanetTiles::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -137,6 +137,6 @@ Gfx_0F_7400_Head::
 Gfx_0F_7780_Head::
     INCBIN "data/bank_0f/Gfx_0F_7780_Head.2bpp" ; $7780, 896 bytes
 ; C: copied to VRAM/WRAM by Boot_EraseAllPrompt_Far (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in
-; BGB in 2 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; BGB in 2 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0F_7B00_Boot_EraseAllPrompt_Far::
     INCBIN "data/bank_0f/Gfx_0F_7B00_Boot_EraseAllPrompt_Far.2bpp" ; $7B00, 1280 bytes

@@ -18,17 +18,17 @@ Gfx_3F_5C00_TitleScene::
     INCBIN "data/bank_3f/Gfx_3F_5C00_TitleScene.2bpp" ; $5C00, 3584 bytes
 ; C: copied to VRAM/WRAM by Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic corpus, modes
-; 19 (tcrf_check/assets/l3_names/); C: the bytes changed but Mode19_State01_TitleFirst reads them in this ...
+; 19 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode19_State01_TitleFirst reads them ...
 Gfx_3F_6A00_Mode19_State01_TitleFirst::
     INCBIN "data/bank_3f/Gfx_3F_6A00_Mode19_State01_TitleFirst.2bpp" ; $6A00, 1792 bytes
 ; C: copied to VRAM/WRAM by Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic corpus, modes
-; 19 (tcrf_check/assets/l3_names/)
+; 19 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_3F_7100_Mode19_State01_TitleFirst::
     INCBIN "data/bank_3f/Gfx_3F_7100_Mode19_State01_TitleFirst.2bpp" ; $7100, 384 bytes
 ; C: copied to VRAM/WRAM by Mode19_State00_CopyrightScreens, Mode19_State01_TitleFirst, Mode19_State02_TitleFromMenu
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 205 replay(s) of the organic corpus, modes
-; 19 (tcrf_check/assets/l3_names/); L3 same: the readers here ...
+; 19 (roms/jp_rev_a/experiments/l3_names/); L3 same: the readers here ...
 Map_3F_7280_Mode19_State00_CopyrightScreens::
     db $c0, $c1, $c2, $c3, $c4, $c5, $c6, $c7, $c8, $c9, $ca, $cb, $cc, $cd, $ce, $cf, $d0, $d1, $d2, $d3, $00, $01, $02, $00, $03, $04, $00, $05, $06, $05, $ff, $ff
     db $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $9a, $9b, $9c, $9d, $9e, $9f, $b4, $b5, $b6, $b7, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $00, $ff

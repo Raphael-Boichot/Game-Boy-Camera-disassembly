@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Hot-spot effects and sounds on the international / Gold ROMs (counterpart of tcrf_check/tools/hotspot_effects.py; a FORCED witness: one WRAM poke).
+"""Hot-spot effects and sounds on the international / Gold ROMs (counterpart of tools/jp/hotspot_effects.py; a FORCED witness: one WRAM poke).
 Replays the cheapest corpus entry in mode $0C state 3 (a photo shown with the hot-spot pointer, waiting for A / B), arms hot spot 0 of the displayed photo
 at the pointer cell ($D667 / $D668) by writing the WRAM mirror (flag $D643, X $D648, Y $D64D, sound $D652, effect $D657, jump $D65C) and presses A.
 Variants: every effect 0-15 with no sound ($FF), then effect $FF (none) with sounds 0-$1F (HotSpot_PlayJingle, the two-frame wait new in this build).
 usage: GBCAM_ROM=ROM port_hotspot_forced.py CORPUS OUT.npz         ('ex' = bytes executed by the variants beyond the replay, for port_never_run.py)
-PYTHONPATH: coverage/src and tcrf_check/tools; the corpus' saves must be in tcrf_check/saves or saves_unl (links to the save folders, not committed)."""
+PYTHONPATH: coverage/src and tools/jp; the corpus' saves must be in tcrf_check/saves or saves_unl (links to the save folders, not committed)."""
 import sys, os
 import numpy as np
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tools', 'jp'))
 import lib; from lib import g
 C = lib.Corpus(sys.argv[1]); out = sys.argv[2]
 i = C.best((0x0C, 3))

@@ -16,7 +16,7 @@ Writes OUT_DIR/<dir>_seq_XX.png (160 x 144, BGB) and the CSV (dir, game_seq, fra
 the repository: a run from a real save can show its photos (CLAUDE.md).
 """
 import sys, os, json, csv, argparse, subprocess, hashlib
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tools', 'jp'))
 import bgb_run as B
 from PIL import Image
 ap = argparse.ArgumentParser()

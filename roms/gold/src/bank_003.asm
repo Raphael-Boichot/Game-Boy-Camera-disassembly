@@ -324,7 +324,7 @@ jr_003_4260:
 
 
 ; C: animated hand sprite beside the speed digits. L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawSpeedHand::
     ld a, [wSpriteAnimFrame + $4]                 ; $4266
     sla a                                         ; $4269
@@ -366,7 +366,7 @@ jr_003_4295:
 
 
 ; C: auto: 8 bytes, tile data; referenced by AnimEd_DrawSpeedHand. L3 pass 2026-10-26: read in BGB in 9 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawSpeedHand_Gfx429D::
     db $6e, $04, $6f, $04, $70, $07, $ff, $0a
 
@@ -479,7 +479,7 @@ jr_003_435e:
 
 
 ; C: animated hand sprite beside the loop indicator. L3 pass 2026-10-26: executed in BGB in 4 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawLoopHand::
     ld a, [wSpriteAnimFrame + $5]                 ; $4364
     sla a                                         ; $4367
@@ -521,7 +521,7 @@ jr_003_4393:
 
 
 ; C: auto: 8 bytes, tile map; referenced by AnimEd_DrawLoopHand. L3 pass 2026-10-26: read in BGB in 4 replay(s) of the
-; organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawLoopHand_Map439B::
     db $71, $04, $72, $04, $73, $07, $ff, $0a
 
@@ -693,7 +693,7 @@ jr_003_44bf:
 
 
 ; C: draws the tool menu cursor sprite. L3 pass 2026-10-26: executed in BGB in 20 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ToolsMenuCursor::
     ld a, [wEditorMenuOption]                     ; $44CA
     ld c, a                                       ; $44CD
@@ -711,7 +711,7 @@ AnimEd_ToolsMenuCursor::
 
 
 ; C: auto: 5 bytes, bytes; referenced by AnimEd_ToolsMenuCursor. L3 pass 2026-10-26: read in BGB in 20 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ToolsMenuCursor_Tbl44E2::
     db $08, $28, $48, $68, $88
 
@@ -842,7 +842,7 @@ jr_003_45ad:
 
 
 ; C: animated start of a range. L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Mode12_State0A_RangeAnim::
     xor a                                         ; $45BD
     ld [wSpriteAnimFrame + $7], a                 ; $45BE
@@ -1018,7 +1018,7 @@ jr_003_4692:
 
 
 ; C: draws a range-edit arrow sprite. L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus, modes
-; 12 (tcrf_check/assets/l3_names/)
+; 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawRangeArrow::
     push bc                                       ; $46FD
     push de                                       ; $46FE
@@ -1054,7 +1054,7 @@ jr_003_4724:
 
 
 ; C: advances the range arrow animation. L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_StepRangeAnim::
     push bc                                       ; $4727
     push de                                       ; $4728
@@ -1147,12 +1147,12 @@ jr_003_478b:
 
 
 ; C: auto: 3 bytes, bytes; referenced by AnimEd_StepRangeAnim. L3 pass 2026-10-26: read in BGB in 12 replay(s) of the
-; organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_StepRangeAnim_Tbl4794::
     db $02, $00, $02
 
 ; C: auto: 164 bytes, bytes; referenced by AnimEd_DrawRangeArrow. L3 pass 2026-10-26: read in BGB in 12 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawRangeArrow_Tbl4797::
     db $63, $02, $00, $02, $63, $05, $00, $00, $63, $01, $fe, $00, $63, $03, $02, $00
     db $63, $01, $02, $00, $63, $02, $fe, $00, $63, $01, $00, $01, $63, $14, $00, $00
@@ -1261,7 +1261,8 @@ jr_003_48bc:
     ret                                           ; $48C7
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawRangeEndCursor::
     ld a, [wRangeDirection]                       ; $48C8
     and a                                         ; $48CB
@@ -1458,7 +1459,7 @@ jr_003_49a4:
 
 
 ; C: confirm animation of the range arrows. L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_RangeConfirmAnim::
     xor a                                         ; $49D9
     ld [wSpriteAnimFrame + $8], a                 ; $49DA
@@ -1625,7 +1626,7 @@ jr_003_4ab5:
 
 
 ; C: blinking digits of the loop count. L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawLoopCountSprite::
     ld hl, wBlinkCounter                          ; $4AE8
     inc [hl]                                      ; $4AEB
@@ -2442,7 +2443,7 @@ jr_003_50df:
 
 
 ; C: draws the sort dialog cursor. L3 pass 2026-10-26: executed in BGB in 3 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_SortChoiceCursor::
     ld a, [wAutofillMode]                         ; $50EA
     ld hl, wSpriteAnimFrame + $d                  ; $50ED
@@ -2492,12 +2493,12 @@ jr_003_511a:
 
 
 ; C: auto: 3 bytes, bytes; referenced by AnimEd_SortChoiceCursor. L3 pass 2026-10-26: read in BGB in 3 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_SortChoiceCursor_Tbl5131::
     db $9c, $98, $9a
 
 ; C: auto: 3 bytes, bytes; referenced by AnimEd_SortChoiceCursor. L3 pass 2026-10-26: read in BGB in 3 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_SortChoiceCursor_Tbl5134::
     db $97, $99, $9b
 
@@ -2669,7 +2670,7 @@ jr_003_526d:
 
 
 ; C: animated hand beside the border digits. L3 pass 2026-10-26: executed in BGB in 7 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawBorderHand::
     ld a, [wSpriteAnimFrame + $4]                 ; $5273
     sla a                                         ; $5276
@@ -2711,7 +2712,7 @@ jr_003_52a2:
 
 
 ; C: auto: 8 bytes, tile data; referenced by AnimEd_DrawBorderHand. L3 pass 2026-10-26: read in BGB in 7 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawBorderHand_Gfx52AA::
     db $6e, $04, $6f, $04, $70, $07, $ff, $0a
 
@@ -2931,13 +2932,13 @@ jr_003_5413:
 
 
 ; C: auto: 18 bytes, bytes; referenced by AnimEd_DrawEntryCursor. L3 pass 2026-10-26: read in BGB in 22 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawEntryCursor_Tbl541B::
     db $50, $04, $51, $04, $52, $07, $53, $04, $54, $04, $55, $07, $7a, $04, $7a, $04
     db $7a, $07
 
 ; C: animated pointer sprite (position from the table at 5466). L3 pass 2026-10-26: executed in BGB in 22 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawHandSprite::
     ld a, [wCurEntryIndex]                        ; $542D
     and $7f                                       ; $5430
@@ -3017,7 +3018,7 @@ jr_003_548e:
 
 
 ; C: auto: 94 bytes, bytes; referenced by AnimEd_DrawHandSprite. L3 pass 2026-10-26: read in BGB in 22 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawHandSprite_Tbl5496::
     db $60, $18, $60, $20, $60, $28, $60, $30, $60, $38, $60, $40, $60, $48, $60, $50
     db $60, $58, $60, $60, $60, $68, $60, $70, $60, $78, $60, $80, $60, $88, $70, $10
@@ -3027,13 +3028,13 @@ AnimEd_DrawHandSprite_Tbl5496::
     db $80, $58, $80, $60, $80, $68, $80, $70, $80, $78, $80, $80, $80, $88
 
 ; C: auto: 24 bytes, bytes; referenced by AnimEd_DrawHandSprite. L3 pass 2026-10-26: read in BGB in 22 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawHandSprite_Tbl54F4::
     db $91, $04, $92, $04, $93, $07, $8e, $04, $8f, $04, $90, $07, $94, $04, $95, $04
     db $96, $07, $74, $04, $74, $04, $74, $04
 
 ; C: auto: 24 bytes, bytes; referenced by AnimEd_DrawHandSprite. L3 pass 2026-10-26: read in BGB in 19 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawHandSprite_Tbl550C::
     db $88, $07, $89, $04, $8a, $04, $60, $07, $61, $04, $62, $04, $8b, $07, $8c, $04
     db $8d, $04, $74, $04, $74, $04, $74, $04
@@ -3148,7 +3149,7 @@ jr_003_5593:
 
 
 ; C: Left / Right repeat -> -1 / +1 with a blip. L3 pass 2026-10-26: executed in BGB in 20 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ReadStepKeys::
     bit 5, b                                      ; $55B0
     jr z, jr_003_55bd                             ; $55B2
@@ -3219,7 +3220,8 @@ jr_003_55e8:
     ret                                           ; $5609
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_CursorLeftRight::
     bit 5, b                                      ; $560A
     jr z, jr_003_5617                             ; $560C
@@ -3239,7 +3241,7 @@ jr_003_5617:
 
 
 ; C: moves by 16 entries (one row). L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes
-; 12 (tcrf_check/assets/l3_names/)
+; 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_CursorUpDown::
     bit 6, b                                      ; $5623
     jr z, jr_003_5634                             ; $5625
@@ -3357,7 +3359,7 @@ AnimEd_Decor_CtxEntryTbl::
     dw AnimEd_Ctx2_Decor
 
 ; C: context 0: draws the tool bar tiles. L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx0_Decor::
     ld a, [wAnimLoopFlag]                         ; $56C1
     and a                                         ; $56C4
@@ -3508,13 +3510,13 @@ jr_003_5772:
 
 
 ; C: auto: 24 bytes, tile map; referenced by AnimEd_Ctx0_Decor. L3 pass 2026-10-26: read in BGB in 22 replay(s) of the
-; organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx0_Decor_Map57D6::
     db $77, $7d, $79, $7c, $78, $88, $8a, $fe, $7a, $fe, $79, $86, $78, $88, $8a, $fe
     db $7a, $fe, $79, $86, $78, $88, $fe, $fe
 
 ; C: context 1: border animation (sprites and tiles). L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the
-; organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx1_Decor::
     ld bc, $1e0a                                  ; $57EE
 
@@ -3570,7 +3572,8 @@ jr_003_584a:
     call AnimEd_CoroYield                         ; $5852
     jr jr_003_584a                                ; $5855
 
-; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx1_BorderSprite::
     push bc                                       ; $5857
     push hl                                       ; $5858
@@ -3590,7 +3593,7 @@ AnimEd_Ctx1_BorderSprite::
 
 
 ; C: auto: 8 bytes, word table; referenced by AnimEd_Ctx1_BorderSprite. L3 pass 2026-10-26: read in BGB in 22
-; replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx1_BorderSprite_PtrTbl586F::
     dw $4342
     dw $4544
@@ -3598,7 +3601,7 @@ AnimEd_Ctx1_BorderSprite_PtrTbl586F::
     dw $4847
 
 ; C: context 2: second border animation. L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx2_Decor::
     ld bc, $1e0a                                  ; $5877
 
@@ -3681,7 +3684,7 @@ jr_003_58f1:
     jr jr_003_58f1                                ; $58FC
 
 ; C: carry if the tile column is within the inner range. L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the
-; organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx2_InRange::
     push af                                       ; $58FE
     ld a, l                                       ; $58FF
@@ -3703,7 +3706,8 @@ jr_003_590d:
     ret                                           ; $590F
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx2_BorderSprite::
     push bc                                       ; $5910
     push hl                                       ; $5911
@@ -3723,7 +3727,7 @@ AnimEd_Ctx2_BorderSprite::
 
 
 ; C: auto: 8 bytes, word table; referenced by AnimEd_Ctx2_BorderSprite. L3 pass 2026-10-26: read in BGB in 22
-; replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_Ctx2_BorderSprite_PtrTbl5928::
     dw $4a49
     dw $4c4b
@@ -3731,8 +3735,8 @@ AnimEd_Ctx2_BorderSprite_PtrTbl5928::
     dw $4f4e
 
 ; C: sets the three exit contexts and draws the transition tiles. L3 pass 2026-10-26: executed in BGB in 2 replay(s)
-; of the organic corpus, modes 12 (tcrf_check/assets/l3_names/); C: the routine is executed in this build's coverage
-; run and at most a quarter of its Japanese instructions are unpaired
+; of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/); C: the routine is executed in this build's
+; coverage run and at most a quarter of its Japanese instructions are ...
 AnimEd_StartExitTransition::
     ld a, $80                                     ; $5930
     ld [wSpriteAnimTick], a                       ; $5932
@@ -3801,7 +3805,7 @@ AnimEd_StartExitTransition::
 
 
 ; C: same switch as 5649 for the exit contexts. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_CoroYield_B::
     push af                                       ; $59DF
     push bc                                       ; $59E0
@@ -3867,7 +3871,7 @@ AnimEd_Exit_CtxEntryTbl::
     dw AnimEd_ExitCtx2
 
 ; C: exit context 0. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx0::
     ld hl, $99c0                                  ; $5A27
     ld a, $03                                     ; $5A2A
@@ -3961,7 +3965,7 @@ jr_003_5aa4:
 
 
 ; C: exit context 1. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx1::
     ld bc, $1e0f                                  ; $5AAA
 
@@ -4017,7 +4021,8 @@ jr_003_5b08:
     call AnimEd_CoroYield_B                       ; $5B0B
     jr jr_003_5b08                                ; $5B0E
 
-; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx1_Sprite::
     push bc                                       ; $5B10
     push hl                                       ; $5B11
@@ -4037,7 +4042,7 @@ AnimEd_ExitCtx1_Sprite::
 
 
 ; C: auto: 8 bytes, word table; referenced by AnimEd_ExitCtx1_Sprite. L3 pass 2026-10-26: read in BGB in 2 replay(s)
-; of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx1_Sprite_PtrTbl5B28::
     dw $4342
     dw $4544
@@ -4045,7 +4050,7 @@ AnimEd_ExitCtx1_Sprite_PtrTbl5B28::
     dw $4847
 
 ; C: exit context 2. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx2::
     ld bc, $1e0f                                  ; $5B30
 
@@ -4129,7 +4134,8 @@ jr_003_5bae:
     call AnimEd_CoroYield_B                       ; $5BB1
     jr jr_003_5bae                                ; $5BB4
 
-; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx2_InRange::
     push af                                       ; $5BB6
     ld a, l                                       ; $5BB7
@@ -4151,7 +4157,8 @@ jr_003_5bc5:
     ret                                           ; $5BC7
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx2_Sprite::
     push bc                                       ; $5BC8
     push hl                                       ; $5BC9
@@ -4171,7 +4178,7 @@ AnimEd_ExitCtx2_Sprite::
 
 
 ; C: auto: 8 bytes, word table; referenced by AnimEd_ExitCtx2_Sprite. L3 pass 2026-10-26: read in BGB in 2 replay(s)
-; of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_ExitCtx2_Sprite_PtrTbl5BE0::
     dw $4a49
     dw $4c4b
@@ -4179,7 +4186,7 @@ AnimEd_ExitCtx2_Sprite_PtrTbl5BE0::
     dw $4f4e
 
 ; C: two fixed sprites of the editor frame. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus,
-; modes 12 (tcrf_check/assets/l3_names/)
+; modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawFrameSprites::
     ld a, $49                                     ; $5BE8
     ld bc, $020d                                  ; $5BEA
@@ -4479,7 +4486,7 @@ jr_003_5de8:
 
 
 ; C: tiles for the highlighted tool menu entry. L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_LoadMenuTiles::
     ld a, [wEditorMenuOption]                     ; $5DFE
     sla a                                         ; $5E01
@@ -4675,7 +4682,8 @@ jr_003_5f0c:
     ret                                           ; $5F19
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawSpark::
     ld hl, wSparkLife                             ; $5F1A
     add hl, de                                    ; $5F1D
@@ -4713,12 +4721,12 @@ AnimEd_DrawSpark::
 
 
 ; C: auto: 16 bytes, bytes; referenced by AnimEd_DrawSpark. L3 pass 2026-10-26: read in BGB in 20 replay(s) of the
-; organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_DrawSpark_Tbl5F4B::
     db $00, $fc, $f9, $f6, $f4, $f2, $f1, $f0, $f0, $f1, $f2, $f4, $f6, $f9, $fc, $00
 
 ; C: copies a digit glyph from bank 0C to VRAM. L3 pass 2026-10-26: executed in BGB in 22 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_CopyDigitTile::
     swap a                                        ; $5F5B
     ld c, a                                       ; $5F5D
@@ -4748,7 +4756,7 @@ jr_003_5f76:
     jr jr_003_5f76                                ; $5F7C
 
 ; C: moves the window up with the table 00:2FE5 and runs the contexts. L3 pass 2026-10-26: executed in BGB in 6
-; replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_WindowSlideIn::
     play_sfx1 SFX1_PANEL_OPEN                     ; $5F7E
     ld hl, Slide_WyDeltaTbl                       ; $5F85
@@ -4768,7 +4776,8 @@ jr_003_5f8a:
     jp hl                                         ; $5F98
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_WindowSlideIn_Resume::
     call Oam_HideUnused                           ; $5F99
     rst Rst08_WaitVBlank                          ; $5F9C
@@ -4785,7 +4794,7 @@ AnimEd_WindowSlideIn_Resume::
 
 
 ; C: reverse slide. L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_WindowSlideOut::
     play_sfx1 SFX1_PANEL_CLOSE                    ; $5FA7
     ld hl, Slide_WyDeltaTbl                       ; $5FAE
@@ -4805,7 +4814,8 @@ jr_003_5fb3:
     jp hl                                         ; $5FC1
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 12
+; (roms/jp_rev_a/experiments/l3_names/)
 AnimEd_WindowSlideOut_Resume::
     call Oam_HideUnused                           ; $5FC2
     rst Rst08_WaitVBlank                          ; $5FC5
@@ -6759,7 +6769,7 @@ HotSpotEd_LoadSpotFields::
 
 
 ; C: A opens the sound picker; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 04 (6412 hits in 16 runs:
-; 1A:04 x6412; tcrf_check/assets/mode_state_wp/)
+; 1A:04 x6412; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1A_State04_PlaceOrDelete::
     call HotSpotEd_MoveSpot                       ; $6C29
     call HotSpotEd_DrawSlots                      ; $6C2C
@@ -6951,7 +6961,7 @@ jr_003_6d98:
 
 
 ; C: A confirms with the button animation; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 08 (1120 hits
-; in 5 runs: 1A:08 x1120; tcrf_check/assets/mode_state_wp/)
+; in 5 runs: 1A:08 x1120; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1A_State08_PickConfirm::
     call HotSpotEd_DrawSoundIcon                  ; $6DA9
     call HotSpotEd_DrawEffectIcon                 ; $6DAC
@@ -6999,7 +7009,7 @@ jr_003_6deb:
 
 
 ; C: keep / discard dialog; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 09 (1368 hits in 2 runs:
-; 1A:09 x1368; tcrf_check/assets/mode_state_wp/)
+; 1A:09 x1368; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1A_State09_ExitDialog::
     call HotSpotEd_DialogChoiceA                  ; $6E00
     ldh a, [hKeysNew]                             ; $6E03
@@ -7045,7 +7055,7 @@ Mode1A_State09_ExitDialog_Cancel::
 
 
 ; C: Left / Right toggles dialog_choice and swaps the dialog tiles. L3 pass 2026-10-26: executed in BGB in 2 replay(s)
-; of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DialogChoiceA::
     ldh a, [hKeysNew]                             ; $6EA0
     ld b, a                                       ; $6EA2
@@ -7081,7 +7091,7 @@ jr_003_6ece:
 
 
 ; C: delete this hot spot? dialog; BGB watchpoint pass 2026-10-25: ran only in mode 1A and state 0A (252 hits in 1
-; runs: 1A:0A x252; tcrf_check/assets/mode_state_wp/)
+; runs: 1A:0A x252; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode1A_State0A_DeleteDialog::
     call HotSpotEd_DialogChoiceB                  ; $6EDD
     ldh a, [hKeysNew]                             ; $6EE0
@@ -7131,7 +7141,7 @@ jr_003_6f24:
 
 
 ; C: same for the delete dialog. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DialogChoiceB::
     ldh a, [hKeysNew]                             ; $6F3A
     ld b, a                                       ; $6F3C
@@ -7317,7 +7327,7 @@ jr_003_7036:
 
 
 ; C: E = bit mask of the fields (sound / effect / jump) that are set. L3 pass 2026-10-26: executed in BGB in 8
-; replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_SlotIconFlags::
     ld hl, wHotspotBlock + $f                     ; $703C
     add hl, bc                                    ; $703F
@@ -7350,7 +7360,7 @@ jr_003_705d:
 
 
 ; C: B / C = screen position of slot C. L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus,
-; modes 1A (tcrf_check/assets/l3_names/)
+; modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_SlotXY::
     ld hl, wHotspotBlock                          ; $705E
     add hl, bc                                    ; $7061
@@ -7390,7 +7400,7 @@ jr_003_7083:
 
 
 ; C: sprite animation lists per slot state. L3 pass 2026-10-26: read in BGB in 10 replay(s) of the organic corpus,
-; modes 1A (tcrf_check/assets/l3_names/)
+; modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_SlotAnimTbl::
     db $08, $0a, $14, $1e, $28, $36, $4c, $62, $c4, $06, $ff, $be, $06, $c6, $06, $c7
     db $06, $c6, $06, $c7, $06, $ff, $c4, $06, $c5, $06, $c4, $06, $be, $06, $be, $06
@@ -7446,7 +7456,7 @@ jr_003_7149:
 
 
 ; C: auto: 8 bytes, bytes; referenced by HotSpotEd_DrawPointer. L3 pass 2026-10-26: read in BGB in 9 replay(s) of the
-; organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; organic corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DrawPointer_Tbl7156::
     db $a0, $06, $a1, $06, $9f, $06, $9f, $ff
 
@@ -7493,7 +7503,7 @@ jr_003_718e:
 
 
 ; C: auto: 8 bytes, bytes; referenced by HotSpotEd_DrawSlotPointer. L3 pass 2026-10-26: read in BGB in 10 replay(s) of
-; the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DrawSlotPointer_Tbl719B::
     db $bc, $06, $bd, $06, $bb, $06, $bb, $ff
 
@@ -7530,7 +7540,8 @@ jr_003_71d0:
     ret                                           ; $71D4
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_PointerMoveX::
     bit 5, b                                      ; $71D5
     jr z, jr_003_71e4                             ; $71D7
@@ -7555,7 +7566,8 @@ jr_003_71e4:
     ret                                           ; $71F2
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_PointerMoveY::
     bit 6, b                                      ; $71F3
     jr z, jr_003_7202                             ; $71F5
@@ -7611,7 +7623,8 @@ HotSpotEd_SlotMove::
     ret                                           ; $7243
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_SlotMoveX::
     bit 5, b                                      ; $7244
     jr z, jr_003_7253                             ; $7246
@@ -7636,7 +7649,8 @@ jr_003_7253:
     ret                                           ; $7261
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_SlotMoveUp::
     bit 6, b                                      ; $7262
     ret z                                         ; $7264
@@ -7667,7 +7681,8 @@ HotSpotEd_MoveSpot::
     ret                                           ; $728C
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_MoveSpotX::
     bit 5, b                                      ; $728D
     jr z, jr_003_729c                             ; $728F
@@ -7692,7 +7707,8 @@ jr_003_729c:
     ret                                           ; $72AA
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_MoveSpotY::
     bit 6, b                                      ; $72AB
     jr z, jr_003_72ba                             ; $72AD
@@ -7828,7 +7844,7 @@ jr_003_7349:
 
 
 ; C: slides a dialog out. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DialogSlideOut::
     play_sfx1 SFX1_PANEL_OPEN                     ; $7376
     ld hl, Slide_WyDeltaTbl                       ; $737D
@@ -7851,7 +7867,7 @@ jr_003_7382:
 
 
 ; C: slides a dialog in. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DialogSlideIn::
     play_sfx1 SFX1_PANEL_CLOSE                    ; $7391
     xor a                                         ; $7398
@@ -7874,7 +7890,8 @@ jr_003_739e:
     ret                                           ; $73AC
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DrawSoundIcon::
     ld a, [wHsSelected]                           ; $73AD
     ld c, a                                       ; $73B0
@@ -7905,7 +7922,8 @@ jr_003_73c5:
     ret                                           ; $73D0
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DrawEffectIcon::
     ld a, [wHsSelected]                           ; $73D1
     ld c, a                                       ; $73D4
@@ -7929,7 +7947,8 @@ jr_003_73e3:
     ret                                           ; $73EE
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DrawJumpIcon::
     ld a, [wHsSelected]                           ; $73EF
     ld c, a                                       ; $73F2
@@ -7953,7 +7972,8 @@ jr_003_7401:
     ret                                           ; $740C
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_DrawButtonIcon::
     ld b, $82                                     ; $740D
     ldh a, [hWyShadow]                            ; $740F
@@ -8098,7 +8118,7 @@ jr_003_74cb:
 
 
 ; C: two digit tiles from bank 1C. L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_ShowNumber::
     push af                                       ; $74CE
     ld a, [wPickerScrollPhase]                    ; $74CF
@@ -8135,7 +8155,8 @@ jr_003_74ef:
     pop bc                                        ; $74F3
     pop af                                        ; $74F4
 
-; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 5 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_CopyNumberTile::
     swap a                                        ; $74F5
     add b                                         ; $74F7
@@ -8178,7 +8199,7 @@ HotSpotEd_ShowEffect_CopyThumb::
 
 
 ; C: thumbnail of the jump target. L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_ShowJumpThumb::
     ld a, [wHsSelected]                           ; $7533
     ld c, a                                       ; $7536
@@ -8285,7 +8306,8 @@ jr_003_75db:
     ret                                           ; $75DD
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 1A
+; (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_PickerScrollStep::
     bit 7, b                                      ; $75DE
     jr z, jr_003_75e9                             ; $75E0
@@ -8335,7 +8357,7 @@ jr_003_7603:
 
 
 ; C: zeroes the pointer animation state. L3 pass 2026-10-26: executed in BGB in 10 replay(s) of the organic corpus,
-; modes 1A (tcrf_check/assets/l3_names/)
+; modes 1A (roms/jp_rev_a/experiments/l3_names/)
 HotSpotEd_ClearAnim::
     ld hl, wSpriteAnimFrame                       ; $7607
     ld de, wSpriteAnimTick                        ; $760A
@@ -8536,7 +8558,7 @@ Mode06_State01_Choose::
 
 
 ; C: moves the window Y following the table at 779E. L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic
-; corpus, modes 06 (tcrf_check/assets/l3_names/)
+; corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/)
 LinkMenu_AnimateWindow::
     ld a, [wSpriteAnimFrame]                      ; $77A2
     sla a                                         ; $77A5
@@ -8569,7 +8591,7 @@ jr_003_77c7:
 
 
 ; C: pairs {wy. L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 LinkMenu_WindowAnimTbl::
     db $16, $05, $17, $06, $18, $08, $19, $09, $1a, $0d, $19, $09, $18, $08, $17, $06
     db $16, $05, $15, $06, $14, $08, $13, $09, $12, $0d, $13, $09, $14, $08, $15, $06
@@ -8645,7 +8667,7 @@ LinkMenu_TargetModeTbl::
     db MODE_PRINT_MENU, MODE_LINK_TRANSFER
 
 ; C: L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 06 0E 1B
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 LinkMenu_DrawCursor::
     ld bc, $4a36                                  ; $7866
     ld a, [wLinkMenuCursor]                       ; $7869
@@ -8695,7 +8717,7 @@ jr_003_789e:
 
 
 ; C: sweeping spark sprite. L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 06 0E 1B
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 LinkMenu_DrawSpark::
     ld hl, wSweepPos16                            ; $78A8
     ld a, [hl]                                    ; $78AB
@@ -8722,7 +8744,7 @@ LinkMenu_DrawSpark::
 
 
 ; C: highlight tiles of the selected item. L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus,
-; modes 06 0E 1B (tcrf_check/assets/l3_names/)
+; modes 06 0E 1B (roms/jp_rev_a/experiments/l3_names/)
 LinkMenu_LoadTilesSelected::
     push af                                       ; $78C9
     ld a, [wLinkMenuCursor]                       ; $78CA
@@ -8741,8 +8763,8 @@ jr_003_78ee:
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in 9 replay(s) of the organic corpus, modes 06 0E 1B
-; (tcrf_check/assets/l3_names/); C: the routine is executed in this build's coverage run and at most a quarter of its
-; Japanese instructions are unpaired
+; (roms/jp_rev_a/experiments/l3_names/); C: the routine is executed in this build's coverage run and at most a quarter
+; of its Japanese instructions are unpaired
 LinkMenu_LoadTilesDeselected::
     push af                                       ; $78F0
     ld a, [wLinkMenuCursor]                       ; $78F1
@@ -9141,7 +9163,8 @@ jr_003_7bbf:
 DoodleMenu_TargetModeTbl::
     db MODE_STAMP, MODE_PAINT
 
-; C: L3 pass 2026-10-26: executed in BGB in 35 replay(s) of the organic corpus, modes 04 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 35 replay(s) of the organic corpus, modes 04
+; (roms/jp_rev_a/experiments/l3_names/)
 DoodleMenu_DrawCursor::
     ld a, [wBlinkHold]                            ; $7BCC
     and a                                         ; $7BCF
@@ -9201,7 +9224,8 @@ jr_003_7c13:
     ret                                           ; $7C1B
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 35 replay(s) of the organic corpus, modes 04 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 35 replay(s) of the organic corpus, modes 04
+; (roms/jp_rev_a/experiments/l3_names/)
 DoodleMenu_DrawBlinker::
     ldh a, [hFrameCounter]                        ; $7C1C
     bit 4, a                                      ; $7C1E
@@ -9366,7 +9390,7 @@ EditMenu_TargetModeTbl::
     db MODE_DELETE_PHOTO, MODE_ANIMATION_EDITOR
 
 ; C: L3 pass 2026-10-26: executed in BGB in 30 replay(s) of the organic corpus, modes 05 0F 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 EditMenu_AnimateIcons::
     ld bc, $0300                                  ; $7D55
 
@@ -9440,19 +9464,19 @@ jr_003_7d95:
 
 
 ; C: auto: 6 bytes, bytes; referenced by EditMenu_AnimateIcons. L3 pass 2026-10-26: read in BGB in 30 replay(s) of the
-; organic corpus, modes 05 0F 12 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 05 0F 12 (roms/jp_rev_a/experiments/l3_names/)
 EditMenu_AnimateIcons_Tbl7DAA::
     db $0b, $67, $6e, $08, $19, $36
 
 ; C: auto: 43 bytes, bytes; referenced by EditMenu_AnimateIcons. L3 pass 2026-10-26: read in BGB in 30 replay(s) of
-; the organic corpus, modes 05 0F 12 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 05 0F 12 (roms/jp_rev_a/experiments/l3_names/)
 EditMenu_AnimateIcons_Tbl7DB0::
     db $03, $10, $1d, $e3, $04, $ff, $00, $e4, $04, $ff, $02, $e3, $04, $e4, $04, $ff
     db $04, $e5, $04, $ff, $00, $e6, $04, $ff, $02, $e5, $04, $e6, $04, $ff, $04, $00
     db $04, $ff, $00, $e8, $04, $e9, $04, $ea, $04, $ff, $00
 
 ; C: L3 pass 2026-10-26: executed in BGB in 30 replay(s) of the organic corpus, modes 05 0F 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 EditMenu_DrawBlinker::
     ld hl, wSpriteXCounter                        ; $7DDB
     inc [hl]                                      ; $7DDE
@@ -9503,7 +9527,8 @@ jr_003_7e0e:
 jr_003_7e19:
     ld [wEditMenuCursor], a                       ; $7E19
 
-; C: L3 pass 2026-10-26: executed in BGB in 30 replay(s) of the organic corpus, modes 05 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 30 replay(s) of the organic corpus, modes 05
+; (roms/jp_rev_a/experiments/l3_names/)
 EditMenu_ResetIconAnim::
     and a                                         ; $7E1C
     jr nz, jr_003_7e2f                            ; $7E1D

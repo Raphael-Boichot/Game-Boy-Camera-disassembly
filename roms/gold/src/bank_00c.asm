@@ -6,29 +6,29 @@ SECTION "ROM Bank $00c", ROMX[$4000], BANK[$c]
 
 ; C: copied to VRAM/WRAM by Mode12_State00_Init, Mode12_State13_TestEnd, Mode12_State22_BorderPickerReturn
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes
-; 12 (tcrf_check/assets/l3_names/)
+; 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_4000_Mode12_State00_Init::
     INCBIN "data/bank_0c/Gfx_0C_4000_Mode12_State00_Init.2bpp" ; $4000, 1280 bytes
 ; C: far pointer loaded by Mode12_State1F_SortDialogClose (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_4500_Mode12_State1F_SortDialogClose::
     INCBIN "data/bank_0c/Gfx_0C_4500_Mode12_State1F_SortDialogClose.2bpp" ; $4500, 256 bytes
 ; C: far pointer loaded by Mode12_State16_SaveDialogClose, Mode12_State19_ExitDialogClose,
 ; Mode12_State1C_ClearDialogClose (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB
-; in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_4600_Mode12_State16_SaveDialogClose::
     INCBIN "data/bank_0c/Gfx_0C_4600_Mode12_State16_SaveDialogClose.2bpp" ; $4600, 704 bytes
 ; C: far pointer loaded by Mode12_State03_EditSpeed, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld
 ; hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_48C0_Mode12_State0F_ClearAll::
     INCBIN "data/bank_0c/Gfx_0C_48C0_Mode12_State0F_ClearAll.2bpp" ; $48C0, 96 bytes
 ; C: far pointer loaded by Mode12_State20_BorderRow (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_4920_Mode12_State20_BorderRow::
     INCBIN "data/bank_0c/Gfx_0C_4920_Mode12_State20_BorderRow.2bpp" ; $4920, 48 bytes
 ; C: far pointer loaded by Mode12_State03_EditSpeed (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_4950_Mode12_State03_EditSpeed::
     INCBIN "data/bank_0c/Gfx_0C_4950_Mode12_State03_EditSpeed.2bpp" ; $4950, 784 bytes
 ; C: far pointer loaded by Mode12_State16_SaveDialogClose, Mode12_State19_ExitDialogClose,
@@ -37,26 +37,26 @@ Gfx_0C_4950_Mode12_State03_EditSpeed::
 Gfx_0C_4C60_Mode12_State16_SaveDialogClose::
     INCBIN "data/bank_0c/Gfx_0C_4C60_Mode12_State16_SaveDialogClose.2bpp" ; $4C60, 240 bytes
 ; C: far pointer loaded by Mode12_State07_ToolsSlideIn (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/); C: the bytes
-; changed but Mode12_State07_ToolsSlideIn reads them in this build ...
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/); C:
+; the bytes changed but Mode12_State07_ToolsSlideIn reads them in this build ...
 Gfx_0C_4D50_Mode12_State07_ToolsSlideIn::
     INCBIN "data/bank_0c/Gfx_0C_4D50_Mode12_State07_ToolsSlideIn.2bpp" ; $4D50, 672 bytes
 ; C: far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_4FF0_AnimEd_ShowEntryValue::
     INCBIN "data/bank_0c/Gfx_0C_4FF0_AnimEd_ShowEntryValue.2bpp" ; $4FF0, 272 bytes
 ; C: far pointer loaded by AnimEd_LoadEntryThumb, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld hl,ADDR;
 ; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5100_Mode12_State0F_ClearAll::
     INCBIN "data/bank_0c/Gfx_0C_5100_Mode12_State0F_ClearAll.2bpp" ; $5100, 1024 bytes
 ; C: far pointer loaded by AnimEd_StartExitTransition, Mode12_State0F_ClearAll, Mode12_State10_Pack (ld a,BANK; ld
 ; hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5500_Mode12_State0F_ClearAll::
     INCBIN "data/bank_0c/Gfx_0C_5500_Mode12_State0F_ClearAll.2bpp" ; $5500, 624 bytes
 ; C: far pointer loaded by AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26:
-; read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5770_AnimEd_ShowLoopFlag::
     INCBIN "data/bank_0c/Gfx_0C_5770_AnimEd_ShowLoopFlag.2bpp" ; $5770, 144 bytes
 ; I: animation-editor label tiles: read by Mode12_State00_Init (229 bytes; mode $12 is the animation editor),
@@ -70,7 +70,7 @@ Gfx_0C_5800_AnimEdMenuLabelsAlt::
 Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1::
     INCBIN "data/bank_0c/Gfx_0C_5A40_AnimEd_LoadMenuTiles_Entries0to1.2bpp" ; $5A40, 256 bytes
 ; C: far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5B40_AnimEd_ShowEntryValue::
     INCBIN "data/bank_0c/Gfx_0C_5B40_AnimEd_ShowEntryValue.2bpp" ; $5B40, 32 bytes
 ; C: far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call) | also entries 3
@@ -79,42 +79,42 @@ Gfx_0C_5B40_AnimEd_ShowEntryValue::
 Gfx_0C_5B60_AnimEd_ShowEntryValue::
     INCBIN "data/bank_0c/Gfx_0C_5B60_AnimEd_ShowEntryValue.2bpp" ; $5B60, 288 bytes
 ; C: far pointer loaded by AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26:
-; read in BGB in 1 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; read in BGB in 1 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5C80_AnimEd_ShowLoopFlag::
     INCBIN "data/bank_0c/Gfx_0C_5C80_AnimEd_ShowLoopFlag.2bpp" ; $5C80, 32 bytes
 ; C: far pointer loaded by AnimEd_Ctx0_Decor, AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call).
-; L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5CA0_AnimEd_Ctx0_Decor::
     INCBIN "data/bank_0c/Gfx_0C_5CA0_AnimEd_Ctx0_Decor.2bpp" ; $5CA0, 32 bytes
 ; C: far pointer loaded by AnimEd_Ctx0_Decor, AnimEd_ShowLoopFlag (ld a,BANK; ld hl,ADDR; call banked copy/far call).
-; L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5CC0_AnimEd_Ctx0_Decor::
     INCBIN "data/bank_0c/Gfx_0C_5CC0_AnimEd_Ctx0_Decor.2bpp" ; $5CC0, 128 bytes
 ; C: far pointer loaded by Mode12_State03_EditSpeed, Mode12_State22_BorderPickerReturn (ld a,BANK; ld hl,ADDR; call
 ; banked copy/far call). L3 pass 2026-10-26: read in BGB in 7 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5D40_Mode12_State22_BorderPickerReturn::
     INCBIN "data/bank_0c/Gfx_0C_5D40_Mode12_State22_BorderPickerReturn.2bpp" ; $5D40, 48 bytes
 ; C: far pointer loaded by Mode12_State01_Browse, Mode12_State09_RangeBrowse, Mode12_State20_BorderRow (ld a,BANK; ld
 ; hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5D70_Mode12_State01_Browse::
     INCBIN "data/bank_0c/Gfx_0C_5D70_Mode12_State01_Browse.2bpp" ; $5D70, 48 bytes
 ; C: far pointer loaded by Mode12_State01_Browse, Mode12_State09_RangeBrowse, Mode12_State22_BorderPickerReturn (ld
 ; a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic
-; corpus, modes 12 (tcrf_check/assets/l3_names/)
+; corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5DA0_Mode12_State01_Browse::
     INCBIN "data/bank_0c/Gfx_0C_5DA0_Mode12_State01_Browse.2bpp" ; $5DA0, 192 bytes
 ; C: far pointer loaded by AnimEd_CopyDigitTile (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Src_0C_5E60_AnimEd_CopyDigitTile::
     INCBIN "data/bank_0c/Src_0C_5E60_AnimEd_CopyDigitTile.bin" ; $5E60, 320 bytes
 ; C: far pointer loaded by AnimEd_ShowEntryValue (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 23 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5FA0_AnimEd_ShowEntryValue::
     INCBIN "data/bank_0c/Gfx_0C_5FA0_AnimEd_ShowEntryValue.2bpp" ; $5FA0, 64 bytes
 ; C: far pointer loaded by Mode12_State04_ToggleLoop (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_5FE0_Mode12_State04_ToggleLoop::
     INCBIN "data/bank_0c/Gfx_0C_5FE0_Mode12_State04_ToggleLoop.2bpp" ; $5FE0, 32 bytes
 ; C: far pointer loaded by Mode12_State04_ToggleLoop (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
@@ -124,22 +124,22 @@ Gfx_0C_6000_Mode12_State04_ToggleLoop::
     INCBIN "data/bank_0c/Gfx_0C_6000_Mode12_State04_ToggleLoop.2bpp" ; $6000, 32 bytes
 ; C: far pointer loaded by AnimEd_Ctx0_Decor (ld a,BANK; ld hl,ADDR; call banked copy/far call) | also entry 2 (6100
 ; -> $8E50, 0x80 bytes) of AnimEd_LoadMenuTiles_Tbl5DF1 (03:5DF1). L3 pass 2026-10-26: read in BGB in 23 replay(s) of
-; the organic corpus, modes 12 (tcrf_check/assets/l3_names/); L3 same: ...
+; the organic corpus, modes 12 (roms/jp_rev_a/experiments/l3_names/); L3 ...
 Gfx_0C_6020_AnimEd_Ctx0_Decor::
     INCBIN "data/bank_0c/Gfx_0C_6020_AnimEd_Ctx0_Decor.2bpp" ; $6020, 352 bytes
 ; C: far pointer loaded by Mode12_State14_SaveDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 992 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_0C_6180_Mode12_State14_SaveDialogOpen::
     INCBIN "data/bank_0c/Gfx_0C_6180_Mode12_State14_SaveDialogOpen.2bpp" ; $6180, 992 bytes
 ; C: far pointer loaded by Mode12_State1A_ClearDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 880 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_0C_6560_Mode12_State1A_ClearDialogOpen::
     INCBIN "data/bank_0c/Gfx_0C_6560_Mode12_State1A_ClearDialogOpen.2bpp" ; $6560, 464 bytes
 ; C: far pointer loaded by Mode12_State17_ExitDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 896 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 5 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_0C_6730_Mode12_State17_ExitDialogOpen::
     INCBIN "data/bank_0c/Gfx_0C_6730_Mode12_State17_ExitDialogOpen.2bpp" ; $6730, 416 bytes
 ; C: animation-editor label strips: read by Mode12_State17_ExitDialogOpen (960 bytes; mode $12 is the animation
@@ -186,12 +186,12 @@ Gfx_0C_6C00_AnimEd_LoadMenuTiles_Aux::
     INCBIN "data/bank_0c/Gfx_0C_6C00_AnimEd_LoadMenuTiles_Aux.2bpp" ; $6C00, 48 bytes
 ; C: far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 880 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_0C_6C30_Mode12_State1D_SortDialogOpen::
     INCBIN "data/bank_0c/Gfx_0C_6C30_Mode12_State1D_SortDialogOpen.2bpp" ; $6C30, 880 bytes
 ; C: far pointer loaded by Mode12_State1D_SortDialogOpen (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 656 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 3 replay(s) of the organic corpus, modes 12
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen::
     db $ff, $e6, $ff, $97, $ff, $97, $ff, $97, $ff, $f6, $ff, $96, $ff, $96, $ff, $96
     db $ff, $4e, $ff, $59, $ff, $d9, $ff, $d8, $ff, $d8, $ff, $59, $ff, $59, $ff, $4e
@@ -239,29 +239,29 @@ Gfx_0C_6FA0_Mode12_State1D_SortDialogOpen::
     ds $5d0, $00
 
 ; C: copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 42 replay(s) of the organic corpus, modes 09 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 42 replay(s) of the organic corpus, modes 09 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_7800_Mode09_State00_Init::
     INCBIN "data/bank_0c/Gfx_0C_7800_Mode09_State00_Init.2bpp" ; $7800, 256 bytes
 ; C: far pointer loaded by Album_LoadSliderScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 45 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 45 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_7900_Album_LoadSliderScreen::
     INCBIN "data/bank_0c/Gfx_0C_7900_Album_LoadSliderScreen.2bpp" ; $7900, 48 bytes
 ; C: far pointer loaded by Mode09_State00_Init, Album_ShowPageScreen, Mode0A_State02_Setup, Album_LoadSliderScreen,
 ; Mode0D_State06_PlayInit (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass 2026-10-26: read in BGB in 75
-; replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 09 0A ...
 Gfx_0C_7930_Mode09_State00_Init::
     INCBIN "data/bank_0c/Gfx_0C_7930_Mode09_State00_Init.2bpp" ; $7930, 112 bytes
 ; C: far pointer loaded by Album_LoadSliderScreen, Mode0A_State02_Setup (ld a,BANK; ld hl,ADDR; call banked copy/far
 ; call). L3 pass 2026-10-26: read in BGB in 75 replay(s) of the organic corpus, modes 09 0A
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_79A0_Mode0A_State02_Setup::
     INCBIN "data/bank_0c/Gfx_0C_79A0_Mode0A_State02_Setup.2bpp" ; $79A0, 352 bytes
 ; C: copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 42 replay(s) of the organic corpus, modes 09 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 42 replay(s) of the organic corpus, modes 09 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_7B00_Mode09_State00_Init::
     INCBIN "data/bank_0c/Gfx_0C_7B00_Mode09_State00_Init.2bpp" ; $7B00, 256 bytes
 ; C: far pointer loaded by Album_LoadSliderScreen (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 45 replay(s) of the organic corpus, modes 09 0A (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 45 replay(s) of the organic corpus, modes 09 0A (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_7C00_Album_LoadSliderScreen::
     INCBIN "data/bank_0c/Gfx_0C_7C00_Album_LoadSliderScreen.2bpp" ; $7C00, 512 bytes
 ; C: numeral table: Album_LoadNumeralTile (04:6F80) copies 32 bytes (2 tiles, 8 x 16 pixels) from $7E00 + A x 32 (swap
@@ -297,6 +297,6 @@ Gfx_0C_7E00_Album_LoadNumeralTile::
     ds $50, $00
 
 ; C: copied to VRAM/WRAM by Mode09_State00_Init, Album_ShowPageScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 42 replay(s) of the organic corpus, modes 09 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 42 replay(s) of the organic corpus, modes 09 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_0C_7FD0_Mode09_State00_Init::
     INCBIN "data/bank_0c/Gfx_0C_7FD0_Mode09_State00_Init.2bpp" ; $7FD0, 48 bytes

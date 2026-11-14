@@ -3,7 +3,7 @@
 
   tools/status_maps.py [--gold GOLD.gb] [--kitty KITTY.gb] [--proto PROTO.gb] [--out-dir DIR]
 
-Each ROM given is drawn by tcrf_check/tools/rom_layout_map.py into roms/<folder>/<prefix>_rom_layout_map.png (and
+Each ROM given is drawn by tools/rom_layout_map.py into roms/<folder>/<prefix>_rom_layout_map.png (and
 roms/<folder>/assets/layout_by_bank_<prefix>.csv), with --unclaimed: every byte that no label owns and no trace runs is
 NOT ANALYSED YET (grey-blue), padding (runs of 16+ x 00 / FF) is shown as padding. The inputs are read when they exist, so the
 picture fills in by itself as the work lands, with no change to this script:
@@ -11,7 +11,7 @@ picture fills in by itself as the work lands, with no change to this script:
   roms/<folder>/trace/rom_map_<prefix>.csv                                                             byte classes of a trace
   roms/<folder>/port/diff_<prefix>.npz, port/cov_jp_in_<prefix>.npz                                    a ported build: per-bank differences, the Japanese runs
 The Japanese picture (roms/jp_rev_a/jp_rom_layout_map.png) and the international one (roms/us_eu/us_rom_layout_map.png) are drawn by
-their own pipelines (tcrf_check/tools/rom_layout_map.py defaults; tools/port_build.py).
+their own pipelines (tools/rom_layout_map.py defaults; tools/port_build.py).
 """
 import argparse, os, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
@@ -37,7 +37,7 @@ for k, (folder, pre, title, md5) in ROMS.items():
     started = bool(names or os.path.exists(rmap))
     out = a.out_dir or D; os.makedirs(os.path.join(out, 'assets') if not a.out_dir else out, exist_ok=True)
     png = os.path.join(out, '%s_rom_layout_map.png' % pre); csv_ = os.path.join(out, 'assets', 'layout_by_bank_%s.csv' % pre) if not a.out_dir else os.path.join(out, 'layout_by_bank_%s.csv' % pre)
-    cmd = [sys.executable, os.path.join(REPO, 'tcrf_check', 'tools', 'rom_layout_map.py'), png, '--rom', rom, '--map', rmap if os.path.exists(rmap) else 'none',
+    cmd = [sys.executable, os.path.join(REPO, 'tools', 'rom_layout_map.py'), png, '--rom', rom, '--map', rmap if os.path.exists(rmap) else 'none',
            '--assets', 'none', '--witness', 'none', '--reach', 'none', '--unused', 'none', '--kinds', kinds if os.path.exists(kinds) else 'none', '--unclaimed',
            '--names', ','.join(names) or 'none', '--types', ','.join(types) or 'none', '--csv', csv_,
            '--title', '%s: what is in each of the 64 banks (the ROM drawn as 2bpp tiles)%s' % (title, '' if started else ': NOT STARTED YET'),

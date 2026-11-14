@@ -11,10 +11,10 @@
   hsound  the hot-spot editor's sound-$1F case of HotSpotEd_ShowSoundTile (new code of this build, 03:7479): STUDIO (Select), Right, A -> SPECIAL 03:01, A -> 1A:01,
           A (photo) 1A:03, A (slot) 1A:04, A -> SOUND picker 1A:05; Up until the slot's sound ($D652 + slot $D5D0) is $1F; then A x6 (EFFECT, JUMP, confirm,
           browse, exit dialog 1A:09, whose PickerSlideIn shows the sound tile, back to 1A:05).  Joypad only, unlocking save.
-usage: GBCAM_ROM=ROM port_l2_rest.py OUT.npz [gate,crown,slider,hsound]      ('ex' = every byte executed by the scenarios, routes included; PYTHONPATH coverage/src:tcrf_check/tools)"""
+usage: GBCAM_ROM=ROM port_l2_rest.py OUT.npz [gate,crown,slider,hsound]      ('ex' = every byte executed by the scenarios, routes included; PYTHONPATH coverage/src:tools/jp)"""
 import sys, os
 import numpy as np
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'tools', 'jp'))
 import lib; from lib import g
 import sram_analyze as S
 out = sys.argv[1]; which = (sys.argv[2] if len(sys.argv) > 2 else 'gate,crown,slider,hsound').split(',')

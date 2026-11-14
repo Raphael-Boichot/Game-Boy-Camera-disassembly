@@ -4,18 +4,18 @@
   tools/unused_table.py [--tag jp|us|gold|kitty|proto ...] [--check]
 
 Writes roms/<folder>/assets/unused_<tag>.csv: one row per label that names bytes this build never uses, with its span (to the next
-label of the bank, as tcrf_check/tools/rom_layout_map.py counts it), its kind (code: proven instructions, else data) and its category:
+label of the bank, as tools/rom_layout_map.py counts it), its kind (code: proven instructions, else data) and its category:
   tcrf       the content is documented on a TCRF page: the row of tcrf_check/tcrf_documented.csv whose pattern matches the name gives
              the page and its section (TCRF is credited only there: the repository holds no copy of TCRF's pages or pictures, only links)
   not_tcrf   unused in this build and not documented by TCRF: found by this project
 Unused = the name says so: `Unused_*` or `*_Unused*` (code or data this build never runs or reads, docs §16.24), `Leftover_*` (Hello Kitty and the
 prototype: bytes nothing in the build reads, owner rule 2026-11-11), the names a TCRF row matches (they are unused by that row), and for
-the Japanese ROM the really unused assets of docs §16.24 (tcrf_check/assets/unidentified/really_unused.csv, tiers 'no loader', 'never
+the Japanese ROM the really unused assets of docs §16.24 (roms/jp_rev_a/experiments/unidentified/really_unused.csv, tiers 'no loader', 'never
 shown', 'forced only'), and the prototype's assets named from the older builds' tables that this build neither copies nor reads.
 An asset goes with its tile map (owner 2026-11-12): a map that draws the tiles of a TCRF-documented asset is tcrf (its row in
 tcrf_check/tcrf_documented.csv says which tiles it draws).
 A copy or part of a TCRF-documented block is tcrf; a variant (`_Variant`: an edited version, not the content TCRF shows) is not_tcrf.
-tcrf_check/tools/rom_layout_map.py reads the table and outlines both categories on the layout picture of the ROM.
+tools/rom_layout_map.py reads the table and outlines both categories on the layout picture of the ROM.
 """
 import argparse, csv, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
@@ -37,7 +37,7 @@ for tag in a.tag:
     docs = [d for d in DOC if tag in d['roms'].split()]
     really = set()
     if tag == 'jp':
-        for r in csv.DictReader(open(os.path.join(REPO, 'tcrf_check', 'assets', 'unidentified', 'really_unused.csv'), encoding='utf-8')):
+        for r in csv.DictReader(open(os.path.join(REPO, 'roms', 'jp_rev_a', 'experiments', 'unidentified', 'really_unused.csv'), encoding='utf-8')):
             if r['tier'] in ('no loader', 'never shown', 'forced only'): really.add(r['name'])
     out = []
     for i, (o, b, ad, nm) in enumerate(labs):

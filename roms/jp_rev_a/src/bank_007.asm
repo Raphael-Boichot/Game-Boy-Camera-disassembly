@@ -232,7 +232,7 @@ Unused_Mode0E_GotoState12::
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:01
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Link_AnimateLamps::
     ld a, [wSavedDc52]                            ; $41CE
     and a                                         ; $41D1
@@ -260,7 +260,7 @@ jr_007_41e6:
 
 
 ; C: blinking text. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 0E
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Link_DrawPressAText::
     ldh a, [hFrameCounter]                        ; $41F8
     bit 4, a                                      ; $41FA
@@ -285,7 +285,7 @@ jr_007_4222:
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:01
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Link_AnimateStep3::
     ld a, [wSavedDc52]                            ; $4231
     and a                                         ; $4234
@@ -446,7 +446,7 @@ jr_007_4352:
 
 
 ; C: auto: 72 bytes, bytes; referenced by Link_DrawAnimatorSlot. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the
-; organic corpus, modes 0E (tcrf_check/assets/l3_names/)
+; organic corpus, modes 0E (roms/jp_rev_a/experiments/l3_names/)
 Link_DrawAnimatorSlot_Tbl4354::
     db $c0, $c1, $20, $bf, $c2, $20, $ff, $00, $00, $c6, $c7, $20, $c5, $c8, $20, $ff
     db $03, $00, $c0, $c2, $20, $ff, $06, $00, $c6, $c8, $20, $ff, $08, $00, $bd, $00
@@ -490,7 +490,7 @@ Mode0E_State03_PickPhoto::
 
 
 ; C: after the dialog: loads the chosen photo into the link buffer; BGB watchpoint pass 2026-10-25: ran only in mode
-; 0E and state 04 (2 hits in 2 runs: 0E:04 x2; tcrf_check/assets/mode_state_wp/)
+; 0E and state 04 (2 hits in 2 runs: 0E:04 x2; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0E_State04_PickDone::
     ld a, [wAbResult]                             ; $43D6
     cp $02                                        ; $43D9
@@ -576,7 +576,7 @@ jr_007_44db:
 
 
 ; C: bars and lamps for the exchange (first direction); BGB watchpoint pass 2026-10-25: ran only in mode 0E and state
-; 06 (4 hits in 2 runs: 0E:06 x4; tcrf_check/assets/mode_state_wp/)
+; 06 (4 hits in 2 runs: 0E:06 x4; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0E_State06_ExchangeSetup::
     ld a, LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $44F4
     ldh [hLcdcShadow], a                          ; $44F6
@@ -623,8 +623,8 @@ jr_007_458a:
 
 
 ; C: progress bars; direction 1; ran only in mode 0E and state 07 on the initiator that receives (872 hits); FORCED
-; run (2026-10-25, tcrf_check/tools/bgb_link_rx.py): receiver-initiated link exchange between two BGB instances with
-; the link deadline disabled (07:4ACE dec [hl] -> nop; without it every ...
+; run (2026-10-25, tools/jp/bgb_link_rx.py): receiver-initiated link exchange between two BGB instances with the link
+; deadline disabled (07:4ACE dec [hl] -> nop; without it every BGB-to-BGB ...
 Mode0E_State07_ExchangeBarsA::
     ld a, $01                                     ; $4599
     ld [wLinkBarDir], a                           ; $459B
@@ -655,7 +655,7 @@ jr_007_45c4:
 
 
 ; C: bars; direction 0; watchdog; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 08 (1640 hits in 2
-; runs: 0E:08 x1640; tcrf_check/assets/mode_state_wp/)
+; runs: 0E:08 x1640; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0E_State08_ExchangeWaitA::
     xor a                                         ; $45D2
     ld [wLinkBarDir], a                           ; $45D3
@@ -709,7 +709,7 @@ jr_007_4622:
 
 
 ; C: second direction; BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 0A (4 hits in 2 runs: 0E:0A x4;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0E_State0A_ExchangeSetupB::
     ld a, LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $4645
     ldh [hLcdcShadow], a                          ; $4647
@@ -735,7 +735,7 @@ Mode0E_State0A_ExchangeSetupB::
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 0B (2352 hits in 2 runs: 0E:0B x2352;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0E_State0B_ExchangeBarsB::
     ld a, $01                                     ; $46BC
     ld [wLinkBarDir], a                           ; $46BE
@@ -795,9 +795,9 @@ jr_007_4725:
     jp Mode0E_LeaveToLinkMenu                     ; $472B
 
 
-; C: receiver-initiated link exchange in BGB (tcrf_check/tools/bgb_link_rx.py, 2026-10-25): ran only in mode 0E and
-; state 0C (720 hits in 2 runs, responder that sends, JP-JP and international initiator;
-; tcrf_check/assets/mode_state_wp/): waits for wLnkHalfDone after a thumbnail page is armed, 180-frame ...
+; C: receiver-initiated link exchange in BGB (tools/jp/bgb_link_rx.py, 2026-10-25): ran only in mode 0E and state 0C
+; (720 hits in 2 runs, responder that sends, JP-JP and international initiator;
+; roms/jp_rev_a/experiments/mode_state_wp/): waits for wLnkHalfDone after a thumbnail page is armed, 180-frame ...
 Mode0E_State0C_ExchangeWaitB::
     xor a                                         ; $472E
     ld [wLinkBarDir], a                           ; $472F
@@ -825,7 +825,7 @@ jr_007_474f:
 
 ; C: clears the slot buffer and prepares the second photo; ran only in mode 0E and state 0D on the responder that
 ; sends (2 hits): it builds the confirmation screen of the photo the initiator asked for; FORCED run (2026-10-25,
-; tcrf_check/tools/bgb_link_rx.py): receiver-initiated link exchange between two ...
+; tools/jp/bgb_link_rx.py): receiver-initiated link exchange between two BGB ...
 Mode0E_State0D_PickSecond::
     ld a, LCDCF_WIN9C00 | LCDCF_OBJON | LCDCF_BGON ; $4759
     ldh [hLcdcShadow], a                          ; $475B
@@ -879,7 +879,7 @@ Mode0E_State0D_PickSecond::
 
 ; C: the sending responder's confirmation dialog (README 14.3, 14.7): A -> state 0F (ready, the photo is sent), B ->
 ; wLnkReadyTx = $EF (refuse) and state 0A; ran only in mode 0E and state 0E (778 hits) and the confirm A took it to
-; 0F; FORCED run (2026-10-25, tcrf_check/tools/bgb_link_rx.py): ...
+; 0F; FORCED run (2026-10-25, tools/jp/bgb_link_rx.py): receiver-initiated ...
 Mode0E_State0E_ResponderConfirmSend::
     call Link_DrawAbortJitter                     ; $4831
     ldh a, [hKeysNew]                             ; $4834
@@ -905,8 +905,8 @@ jr_007_484f:
 
 
 ; C: lnk_ready_tx := 1; ran only in mode 0E and state 0F (2 hits): wLnkReadyTx := 1 after the A of the confirmation
-; dialog; FORCED run (2026-10-25, tcrf_check/tools/bgb_link_rx.py): receiver-initiated link exchange between two BGB
-; instances with the link deadline disabled (07:4ACE dec [hl] -> nop; ...
+; dialog; FORCED run (2026-10-25, tools/jp/bgb_link_rx.py): receiver-initiated link exchange between two BGB instances
+; with the link deadline disabled (07:4ACE dec [hl] -> nop; without it ...
 Mode0E_State0F_Ready::
     call Mode0E_State0A_ExchangeSetupB            ; $486D
     ld a, $01                                     ; $4870
@@ -915,7 +915,7 @@ Mode0E_State0F_Ready::
 
 
 ; C: BGB watchpoint pass 2026-10-25: ran only in mode 0E and state 10 (1640 hits in 2 runs: 0E:10 x1640;
-; tcrf_check/assets/mode_state_wp/)
+; roms/jp_rev_a/experiments/mode_state_wp/)
 Mode0E_State10_ExchangeWaitC::
     xor a                                         ; $4876
     ld [wLinkBarDir], a                           ; $4877
@@ -1243,7 +1243,7 @@ jr_007_4a5c:
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:05
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Link_DrawAbortJitter::
     ldh a, [hFrameCounter]                        ; $4A8E
     and $01                                       ; $4A90
@@ -1647,7 +1647,7 @@ LinkPick_DrawCursor::
 
 
 ; C: auto: 16 bytes, bytes; referenced by LinkPick_DrawCursor. L3 pass 2026-10-26: read in BGB in the scenarios
-; link_exchange 0E:03 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; link_exchange 0E:03 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_DrawCursor_Tbl4DB0::
     db $48, $18, $70, $18, $20, $40, $48, $40, $70, $40, $20, $68, $48, $68, $70, $68
 
@@ -1808,7 +1808,7 @@ LinkPick_LoadThumbOfCursor::
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:03
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_LoadBigThumb::
     ld a, [wPhotoIndex]                           ; $4F2B
     call LinkPick_ThumbBufferAddress              ; $4F2E
@@ -1819,7 +1819,7 @@ LinkPick_LoadBigThumb::
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:03
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_ClearThumbSlot::
     ld a, [wPhotoIndex]                           ; $4F3B
     and $07                                       ; $4F3E
@@ -1904,7 +1904,7 @@ LinkPick_LoadMessageStrip::
 
 
 ; C: auto: 45 bytes, tile data; referenced by LinkPick_LoadMessageStrip. L3 pass 2026-10-26: read in BGB in the
-; scenarios link_exchange 0E:03 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; scenarios link_exchange 0E:03 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_LoadMessageStrip_Gfx4FAA::
     dwb Gfx_0E_4000_MsgStrip
     dwb Gfx_0E_4280_MsgStrip
@@ -1959,12 +1959,12 @@ LinkPick_LoadIcon_Gfx4FF6::
     dwb Gfx_13_6E00_Icon04_44DC
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:03
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_LoadPhotoIndex::
     ld a, [wPhotoIndex]                           ; $500B
 
 ; C: L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:03
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_PageTilesRight::
     push af                                       ; $500E
     and $18                                       ; $500F
@@ -2085,7 +2085,7 @@ LinkPick_NoPhotoHere::
 
 
 ; C: H = $C0 + (A and 7). L3 pass 2026-10-26: executed in BGB in the scenarios link_exchange 0E:03
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 LinkPick_ThumbBufferAddress::
     and $07                                       ; $5160
     add $c0                                       ; $5162
@@ -2351,17 +2351,18 @@ ViewMenu_DrawCursor::
 
 
 ; C: auto: 4 bytes, bytes; referenced by ViewMenu_DrawCursor. L3 pass 2026-10-26: read in BGB in 35 replay(s) of the
-; organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 ViewMenu_DrawCursor_Tbl5340::
     db $54, $09, $54, $89
 
 ; C: auto: 4 bytes, word table; referenced by ViewMenu_DrawCursor. L3 pass 2026-10-26: read in BGB in 35 replay(s) of
-; the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 ViewMenu_DrawCursor_PtrTbl5344::
     dw $7577
     dw $7578
 
-; C: L3 pass 2026-10-26: executed in BGB in 33 replay(s) of the organic corpus, modes 0A (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 33 replay(s) of the organic corpus, modes 0A
+; (roms/jp_rev_a/experiments/l3_names/)
 ViewMenu_DrawCursorOnce::
     ld a, [wYesnoH]                               ; $5348
     sla a                                         ; $534B
@@ -2382,7 +2383,7 @@ ViewMenu_DrawCursorOnce::
 
 
 ; C: auto: 4 bytes, bytes; referenced by ViewMenu_DrawCursorOnce. L3 pass 2026-10-26: read in BGB in 33 replay(s) of
-; the organic corpus, modes 0A (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 0A (roms/jp_rev_a/experiments/l3_names/)
 ViewMenu_DrawCursorOnce_Tbl5365::
     db $53, $09, $53, $89
 
@@ -2431,7 +2432,7 @@ jr_007_538a:
 
 
 ; C: auto: 24 bytes, tile map; referenced by ViewMenu_AnimateBackground. L3 pass 2026-10-26: read in BGB in 35
-; replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 ViewMenu_AnimateBackground_Map53A6::
     dwb Src_26_55C0_Tbl53A6_0
     dwb Src_27_63F0_Tbl53A6_1
@@ -2774,7 +2775,7 @@ jr_007_5640:
 
 
 ; C: game over: choice menu (wave still drawn). L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic
-; corpus, modes 07 (tcrf_check/assets/l3_names/)
+; corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Mode07_State03_TargetMenuA::
     call SpaceFever_DrawShots                     ; $5650
     call SpaceFever_WaveStep                      ; $5653
@@ -2810,7 +2811,7 @@ jr_007_5683:
 
 
 ; C: choice menu (Up/Down; A = go; B = leave). L3 pass 2026-10-26: executed in BGB in 11 replay(s) of the organic
-; corpus, modes 07 (tcrf_check/assets/l3_names/)
+; corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 Mode07_State04_TargetMenuB::
     call SpaceFever_ReadChoice                    ; $5689
     call SpaceFever_DrawChoiceCursor              ; $568C
@@ -2912,7 +2913,7 @@ SpaceFever_ChoiceCursorXTbl::
     dw $8050
 
 ; C: auto: 12 bytes, bytes; referenced by SpaceFever_DrawChoiceCursor. L3 pass 2026-10-26: read in BGB in 12 replay(s)
-; of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_DrawChoiceCursor_Tbl5749::
     db $00, $04, $08, $0c, $10, $14, $18, $14, $10, $0c, $08, $04
 
@@ -3017,7 +3018,7 @@ jr_007_57c5:
 
 
 ; C: auto: 26 bytes, bytes; referenced by SpaceFever_DrawPlayer. L3 pass 2026-10-26: read in BGB in 13 replay(s) of
-; the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_DrawPlayer_Tbl57CA::
     db $4f, $10, $ff, $00, $50, $04, $51, $04, $52, $04, $53, $04, $52, $04, $53, $04
     db $52, $02, $53, $02, $00, $60, $00, $10, $ff, $0b
@@ -3386,12 +3387,12 @@ jr_007_5a11:
 
 
 ; C: path length byte. L3 pass 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave0_PathEnd::
     db $ff
 
 ; C: auto: 18 bytes, bytes; referenced by SpaceFever_Wave0_Init. L3 pass 2026-10-26: read in BGB in 13 replay(s) of
-; the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave0_Init_Tbl5A39::
     db $01, $27, $cd, $00, $de, $00, $cd, $00, $00, $01, $e0, $cd, $01, $de, $00, $cd
     db $ff, $00
@@ -3470,7 +3471,7 @@ SpaceFever_Wave0_Play::
 
 
 ; C: starts the death animation of a hit target. L3 pass 2026-10-26: executed in BGB in 13 replay(s) of the organic
-; corpus, modes 07 (tcrf_check/assets/l3_names/)
+; corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave0_ReapKilled::
     ld de, $0002                                  ; $5AC9
 
@@ -3536,7 +3537,7 @@ jr_007_5b14:
 
 
 ; C: auto: 24 bytes, bytes; referenced by SpaceFever_Wave0_Play. L3 pass 2026-10-26: read in BGB in 13 replay(s) of
-; the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave0_Play_Tbl5B20::
     db $56, $10, $ff, $00, $55, $10, $ff, $02, $54, $10, $ff, $04, $5a, $03, $5b, $04
     db $5c, $04, $00, $10, $00, $10, $ff, $0a
@@ -3577,12 +3578,12 @@ SpaceFever_Wave1_Init::
 
 
 ; C: auto: 9 bytes, bytes; referenced by SpaceFever_Wave1_Init. L3 pass 2026-10-26: read in BGB in 12 replay(s) of the
-; organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave1_Init_Tbl5B82::
     db $80, $90, $a0, $b0, $c0, $e0, $f0, $ff, $e0
 
 ; C: auto: 221 bytes, bytes; referenced by SpaceFever_Wave1_Init. L3 pass 2026-10-26: read in BGB in 12 replay(s) of
-; the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave1_Init_Tbl5B8B::
     db $02, $28, $01, $80, $00, $02, $01, $00, $80, $01, $05, $00, $01, $00, $01, $00
     db $80, $01, $05, $00, $01, $00, $01, $00, $80, $01, $05, $00, $01, $00, $01, $00
@@ -3673,7 +3674,8 @@ SpaceFever_Wave1_Play::
     ret                                           ; $5CE3
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 12 replay(s) of the organic corpus, modes 07
+; (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave1_ReapKilled::
     ld de, $0001                                  ; $5CE4
 
@@ -3711,7 +3713,7 @@ jr_007_5d0f:
 
 
 ; C: auto: 12 bytes, bytes; referenced by SpaceFever_Wave1_Play. L3 pass 2026-10-26: read in BGB in 12 replay(s) of
-; the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave1_Play_Tbl5D15::
     db $59, $10, $ff, $00, $5a, $04, $5b, $06, $00, $10, $ff, $04
 
@@ -3751,12 +3753,12 @@ SpaceFever_Wave2_Init::
 
 
 ; C: auto: 9 bytes, bytes; referenced by SpaceFever_Wave2_Init. L3 pass 2026-10-26: read in BGB in 8 replay(s) of the
-; organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave2_Init_Tbl5D6B::
     db $80, $90, $a0, $b0, $c0, $e0, $f0, $ff, $a4
 
 ; C: auto: 152 bytes, bytes; referenced by SpaceFever_Wave2_Init. L3 pass 2026-10-26: read in BGB in 8 replay(s) of
-; the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave2_Init_Tbl5D74::
     db $01, $3f, $85, $00, $01, $ff, $84, $00, $01, $ff, $85, $00, $01, $ff, $85, $00
     db $01, $ff, $85, $00, $01, $ff, $81, $00, $01, $ff, $81, $00, $01, $ff, $81, $00
@@ -3849,7 +3851,8 @@ SpaceFever_Wave2_Play::
     ret                                           ; $5E92
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 8 replay(s) of the organic corpus, modes 07
+; (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave2_ReapKilled::
     ld de, $0001                                  ; $5E93
 
@@ -3887,7 +3890,7 @@ jr_007_5ebe:
 
 
 ; C: enemy shoots when low enough and fewer than 5 bullets are up. L3 pass 2026-10-26: executed in BGB in 8 replay(s)
-; of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave2_EnemyFire::
     ld de, $0001                                  ; $5EC4
 
@@ -3925,7 +3928,7 @@ jr_007_5eed:
 
 
 ; C: auto: 12 bytes, bytes; referenced by SpaceFever_Wave2_Play. L3 pass 2026-10-26: read in BGB in 8 replay(s) of the
-; organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_Wave2_Play_Tbl5EF3::
     db $58, $10, $ff, $00, $5a, $04, $5b, $06, $00, $10, $ff, $04
 
@@ -4553,7 +4556,7 @@ jr_007_6400:
 
 
 ; C: auto: 8 bytes, bytes; referenced by SpaceFever_MoveEnemy. L3 pass 2026-10-26: read in BGB in 12 replay(s) of the
-; organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 07 (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_MoveEnemy_Tbl641C::
     db $01, $02, $04, $08, $10, $20, $40, $80
 
@@ -5416,7 +5419,8 @@ jr_007_68aa:
     ret                                           ; $68B1
 
 
-; C: L3 pass 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 13 replay(s) of the organic corpus, modes 07
+; (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_DigitTileTbl::
     db $60, $61, $62, $63, $64, $65, $64, $66, $67, $68, $69, $6a, $69, $57, $64, $63
     db $60, $58, $60, $68, $bf, $bf
@@ -5568,7 +5572,8 @@ jr_007_697e:
     ret                                           ; $698E
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 7 replay(s) of the organic corpus, modes 07 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 7 replay(s) of the organic corpus, modes 07
+; (roms/jp_rev_a/experiments/l3_names/)
 SpaceFever_ClearVramBlock::
     push hl                                       ; $698F
     ld h, d                                       ; $6990
@@ -5693,7 +5698,7 @@ jr_007_6a62:
 
 
 ; C: album-full message. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 10
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 SaveDialog_Substate3_FullInit::
     farcopy Vram_CopyFromBank, Gfx_1E_7800_SaveDialog_Substate3_FullInit, $8b00, $04f0 ; $6A76
     farcopy Vram_CopyFromBank, Map_24_7C20_SaveDialog_Substate3_FullInit_Part7EE0, $9c00, $0120 ; $6A84
@@ -5706,7 +5711,8 @@ SaveDialog_Substate3_FullInit::
     jp Far_Call_Return                            ; $6AA0
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 10
+; (roms/jp_rev_a/experiments/l3_names/)
 SaveDialog_Substate4_WaitKey::
     ldh a, [hKeysNew]                             ; $6AA3
     and PADF_A | PADF_B                           ; $6AA5
@@ -6853,7 +6859,7 @@ Mode00_State00_Init::
 
 
 ; C: auto: 7 bytes, bytes; referenced by Mode00_State00_Init. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the
-; organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Mode00_State00_Init_Tbl7259::
     db $01, $02, $03, $04, $05, $06, $07
 
@@ -7456,7 +7462,7 @@ MainMenu_NoDrawCallback::
 
 
 ; C: state 1 / 2 / 3 by menu_sel_upper. L3 pass 2026-10-26: executed in BGB in 33 replay(s) of the organic corpus,
-; modes 00 (tcrf_check/assets/l3_names/)
+; modes 00 (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_ReturnToUpperItem::
     cp $01                                        ; $7795
     jr nz, jr_007_77a4                            ; $7797
@@ -7527,7 +7533,7 @@ MainMenu_ItemModeTbl::
     db MODE_SHOOT_PARLOR, MODE_VIEW_MENU, MODE_ARCADE_SPACE_FEVER, MODE_DOODLE_MENU, MODE_LINK_MENU, MODE_SPECIAL_MENU, MODE_EDIT_MENU, MODE_NONE
 
 ; C: L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_LoadIconTilesA::
     ld a, [wMenuItem]                             ; $780C
     and a                                         ; $780F
@@ -7551,7 +7557,7 @@ jr_007_7834:
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_LoadIconTilesB::
     ld a, [wMenuItem]                             ; $7843
     cp $03                                        ; $7846
@@ -7567,7 +7573,7 @@ jr_007_7859:
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_LoadBaseTiles::
     farcopy Mem_CopyFromBank, Gfx_11_4F00_MainMenu_LoadBaseTiles, $8000, $0300 ; $7868
     farcopy Mem_CopyFromBank, Gfx_15_4E00_MainMenu_LoadBaseTiles, $8300, $0200 ; $7876
@@ -7575,7 +7581,7 @@ MainMenu_LoadBaseTiles::
 
 
 ; C: L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_LoadBackground::
     farcopy Mem_CopyFromBank, Map_26_5A00_MainMenu_LoadBackground, $9800, $0240 ; $7885
     farcopy Mem_CopyFromBank, Gfx_15_4000_MainMenu_LoadBackground, $8800, $0600 ; $7893
@@ -7667,7 +7673,7 @@ jr_007_7922:
 
 
 ; C: loop tail. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_StepIconAnimators_Next::
     pop hl                                        ; $792D
     pop de                                        ; $792E
@@ -7811,7 +7817,7 @@ jr_007_7a3a:
 
 
 ; C: auto: 18 bytes, tile data; referenced by MainMenu_DrawUpperItem2. L3 pass 2026-10-26: read in BGB in 14 replay(s)
-; of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 MainMenu_DrawUpperItem2_Gfx7A43::
     db $2d, $2f, $81, $50
     dw MainMenu_IconCallback0

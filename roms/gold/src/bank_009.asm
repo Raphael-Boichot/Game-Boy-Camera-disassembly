@@ -1620,7 +1620,7 @@ jr_009_49c4:
 
 
 ; C: auto: 4 bytes, bytes; referenced by Mode08_State02_PlanetOpen. L3 pass 2026-10-26: read in BGB in 14 replay(s) of
-; the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Mode08_State02_PlanetOpen_Tbl49D1::
     db $03, $0c, $0f, $12
 
@@ -1679,7 +1679,8 @@ Mode08_State04_CardShow::
     ret                                           ; $4A7F
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_BlinkTitle::
     ldh a, [hFrameCounter]                        ; $4A80
     and $07                                       ; $4A82
@@ -1957,7 +1958,8 @@ jr_009_4d0e:
     ret                                           ; $4D85
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 6 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 Mode08_CreditsReal::
     ld a, LCDCF_WIN9C00 | LCDCF_BGON              ; $4D86
     ldh [hLcdcShadow], a                          ; $4D88
@@ -2068,7 +2070,7 @@ Credits_PageA_FadeIn::
 
 ; C: credits state $14, new in this build (the Japanese table has 25 states, this one 26): the first scene of
 ; Nintendo's arcade game Sheriff, "HELP!" (the cowboy on his horse, the captive and the bandit), maps 27:5370-5730;
-; BGB 2026-10-31 (tcrf_check/assets/credits_intl/, 540 frames after A on CREDITS). ...
+; BGB 2026-10-31 (roms/jp_rev_a/experiments/credits_intl/, 540 frames after A on ...
 Mode08_State14_CreditsSheriffHelp::
     ldh a, [hKeysNew]                             ; $4E9F
     bit PADB_B, a                                 ; $4EA1
@@ -2404,7 +2406,7 @@ jr_009_5126:
 
 
 ; C: 2 bytes: OAM tile-number offset of the dancer sprite, indexed by the buffer toggle $C005. L3 pass 2026-10-26:
-; read in BGB in 2 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; read in BGB in 2 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Credits_ScrollSpriteTileTbl::
     dw $5000
 
@@ -2708,7 +2710,8 @@ jr_009_5324:
     ret                                           ; $535B
 
 
-; C: L3 pass 2026-10-26: read in BGB in 15 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: read in BGB in 15 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 UserMap_DecoLimitTbl::
     db $0d, $10, $07, $17
 
@@ -2742,7 +2745,7 @@ UserMap_CursorPosTbl::
     db $50, $45, $49, $70, $6c, $6d, $77, $91
 
 ; C: auto: 4 bytes, word table; referenced by UserMap_DrawCursor. L3 pass 2026-10-26: read in BGB in 15 replay(s) of
-; the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 UserMap_DrawCursor_PtrTbl538E::
     dw $6f6f
     dw $716f
@@ -2824,7 +2827,7 @@ jr_009_53e4:
 
 
 ; C: busy loop of 8 iterations used by the statistics screen. L3 pass 2026-10-26: executed in BGB in 26 replay(s) of
-; the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Record_Delay8::
     ld a, $08                                     ; $53FB
 
@@ -3209,7 +3212,7 @@ OwnerCard_DrawGender::
 
 
 ; C: auto: 3 bytes, tile map; referenced by OwnerCard_DrawGender. L3 pass 2026-10-26: read in BGB in 1 replay(s) of
-; the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawGender_Map55E8::
     db $aa, $a6, $a8
 
@@ -3354,7 +3357,7 @@ Unused_OwnerCard_DrawBloodType::
 
 
 ; C: auto: 10 bytes, tile map; referenced by OwnerCard_DrawBloodType. L3 pass 2026-10-26: read in BGB in 1 replay(s)
-; of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawBloodType_Map56AC::
     db $ff, $af, $ff, $ac, $ff, $ad, $ff, $ae, $ac, $ad
 
@@ -3391,7 +3394,8 @@ OwnerCard_LoadBirthNumberTiles_NonZero::
     ret                                           ; $56E3
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawBloodHigh::
     push bc                                       ; $56E4
     push hl                                       ; $56E5
@@ -3407,7 +3411,8 @@ OwnerCard_DrawBloodHigh::
     ret                                           ; $56F6
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawBloodLow::
     and a                                         ; $56F7
     jr z, jr_009_56fb                             ; $56F8
@@ -3439,7 +3444,8 @@ OwnerCard_DrawNumber_NonZero::
     ret                                           ; $5718
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawBloodHighB::
     push bc                                       ; $5719
     push hl                                       ; $571A
@@ -3455,7 +3461,8 @@ OwnerCard_DrawBloodHighB::
     ret                                           ; $572B
 
 
-; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; C: L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the organic corpus, modes 08
+; (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawBloodLowB::
     ld h, d                                       ; $572C
     ld l, e                                       ; $572D
@@ -3482,7 +3489,7 @@ jr_009_5732:
 
 
 ; C: auto: 11 bytes, bytes; referenced by OwnerCard_DrawBloodLowB. L3 pass 2026-10-26: read in BGB in 1 replay(s) of
-; the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 OwnerCard_DrawBloodLowB_Tbl5749::
     db $92, $94, $96, $98, $9a, $9c, $9e, $a0, $a2, $a4, $aa
 
@@ -7385,7 +7392,7 @@ ResultScreen_PictureTbl::
     dwb Gfx_1D_4F00_ResultPic3_Equator_Tune2A
 
 ; C: auto: 8 bytes, bytes; referenced by ResultScreen_Substate0_Init. L3 pass 2026-10-26: read in BGB in 31 replay(s)
-; of the organic corpus, modes 01 14 17 1D (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 01 14 17 1D (roms/jp_rev_a/experiments/l3_names/)
 ResultScreen_Substate0_Init_Tbl73A7::
     db MUSIC_WHO_ARE_YOU_RUNNING_FROM_1, SNDCH_MUSIC  ; #1
     db MUSIC_TOTAKA_TUNE, SNDCH_MUSIC  ; #2

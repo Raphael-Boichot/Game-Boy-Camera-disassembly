@@ -18,36 +18,36 @@ Gfx_11_4500_MainMenu_IconStripB_F5::
 Gfx_11_4A00_MainMenu_IconStripB_F6::
     INCBIN "data/bank_11/Gfx_11_4A00_MainMenu_IconStripB_F6.2bpp" ; $4A00, 1280 bytes
 ; C: copied to VRAM/WRAM by MainMenu_LoadBaseTiles, MainMenu_DrawUpperItem0 (roms/jp_rev_a/assets/catalog_jp.csv). L3
-; pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_4F00_MainMenu_LoadBaseTiles::
     INCBIN "data/bank_11/Gfx_11_4F00_MainMenu_LoadBaseTiles.2bpp" ; $4F00, 256 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_5000_MainMenu_DrawUpperItem1::
     INCBIN "data/bank_11/Gfx_11_5000_MainMenu_DrawUpperItem1.2bpp" ; $5000, 512 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem0 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_5200_MainMenu_DrawUpperItem0::
     INCBIN "data/bank_11/Gfx_11_5200_MainMenu_DrawUpperItem0.2bpp" ; $5200, 256 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_5300_MainMenu_DrawUpperItem1::
     INCBIN "data/bank_11/Gfx_11_5300_MainMenu_DrawUpperItem1.2bpp" ; $5300, 256 bytes
 ; C: inside the 512-byte block 5300-5500 that MainMenu_DrawUpperItem1 copies (copy site 07:79E1); what the frames show
 ; is by eye. L3 pass 2026-10-26: read in BGB in 77 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_5400_MainMenuUpperItemFramesA::
     INCBIN "data/bank_11/Gfx_11_5400_MainMenuUpperItemFramesA.2bpp" ; $5400, 256 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem0 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_5500_MainMenu_DrawUpperItem0::
     INCBIN "data/bank_11/Gfx_11_5500_MainMenu_DrawUpperItem0.2bpp" ; $5500, 256 bytes
 ; C: far pointer loaded by MainMenu_DrawUpperItem1 (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 512 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_5600_MainMenu_DrawUpperItem1::
     INCBIN "data/bank_11/Gfx_11_5600_MainMenu_DrawUpperItem1.2bpp" ; $5600, 512 bytes
 ; C: nine sprite frames of a hand flipping a newspaper (TCRF B16, Unused Graphic Bank 11): 25 tiles per frame in
@@ -335,7 +335,7 @@ Unused_TCRF_HandNewspaperFrames_Gfx::
     ds $6c0, $00
 
 ; C: copied to VRAM/WRAM by Mode18_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7000_Mode18_State00_Init::
     INCBIN "data/bank_11/Gfx_11_7000_Mode18_State00_Init.2bpp" ; $7000, 512 bytes
 ; C: entry 0 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)
@@ -354,15 +354,15 @@ Gfx_11_7500_Icon06_5D54::
 Gfx_11_7600_Icon06_5D54::
     INCBIN "data/bank_11/Gfx_11_7600_Icon06_5D54.2bpp" ; $7600, 256 bytes
 ; C: copied to VRAM/WRAM by Compose_DrawJitter (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7000_Compose_DrawJitter_Part7700::
     INCBIN "data/bank_11/Gfx_11_7000_Compose_DrawJitter_Part7700.2bpp" ; $7700, 256 bytes
 ; C: copied to VRAM/WRAM by Mode18_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7800_Mode18_State00_Init::
     INCBIN "data/bank_11/Gfx_11_7800_Mode18_State00_Init.2bpp" ; $7800, 1088 bytes
 ; C: far pointer loaded by Mode18_DrawThumbFrame (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7C40_Mode18_DrawThumbFrame::
     INCBIN "data/bank_11/Gfx_11_7C40_Mode18_DrawThumbFrame.2bpp" ; $7C40, 192 bytes
 ; C: entry 5 of the {lo,hi,bank} table 06:5D54, 256 bytes each (constant pitch)
@@ -372,6 +372,6 @@ Gfx_11_7D00_Icon06_5D54::
 Gfx_11_7E00_Icon06_5D54::
     INCBIN "data/bank_11/Gfx_11_7E00_Icon06_5D54.2bpp" ; $7E00, 256 bytes
 ; C: copied to VRAM/WRAM by Compose_DrawJitter (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 18 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_11_7800_Compose_DrawJitter_Part7F00::
     INCBIN "data/bank_11/Gfx_11_7800_Compose_DrawJitter_Part7F00.2bpp" ; $7F00, 256 bytes

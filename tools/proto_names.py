@@ -13,7 +13,7 @@ Layers, lowest first (a later layer replaces the name at the same address; a nam
             old builds that this build neither copies nor reads in the L2 runs: kind not settled).
   5. gaps   after the layers: Data_BB_AAAA, tag C, at the start of every run of bytes that no type row, traced instruction or inline
             table covers and that is not padding (16+ equal $00 / $FF), when no name stands there: the Japanese convention for a block
-            whose kind is not settled, so that the label before it does not claim it (tcrf_check/tools/rom_layout_map.py: Data_ = UNCERTAIN);
+            whose kind is not settled, so that the label before it does not claim it (tools/rom_layout_map.py: Data_ = UNCERTAIN);
             only where the label before it in the bank is not already such a gap label (padding between two gaps needs no new label).
   6. parts  <routine>_Part<AAAA>, tag C, at the first traced instruction after a non-code label (a gap label on a never-traced byte
             inside a routine): the code keeps its routine's name and colour.

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Targeted BGB scenarios for the international and Gold ROMs (L2 "observed"): every block head of the traced code that the merged coverage never executed
 gets a *logging* breakpoint (BGB writes the head to debugmsg.txt and goes on), a scenario is replayed (joypad demo file), and the heads hit are recorded.
-A scenario may attach the Game Boy Printer helper (tcrf_check/tools/bgb_printer.py, optional status injection PRN_ERR) or a second BGB instance on the
-link cable (-listen / -connect, both instances logged).  This is the international counterpart of the Japanese witness runs (tcrf_check/tools/witness_map.py).
+A scenario may attach the Game Boy Printer helper (tools/jp/bgb_printer.py, optional status injection PRN_ERR) or a second BGB instance on the
+link cable (-listen / -connect, both instances logged).  This is the international counterpart of the Japanese witness runs (tools/jp/witness_map.py).
 
 usage: port_bgb_witness.py - SCENARIOS.json OUTDIR [--only NAME,NAME] [--worker K/N]
-       port_bgb_witness.py TREE --merge OUTDIR OUT.npz          the members of every head hit (tools: tcrf_check/tools/blocks.py) as an 'ex' array, for port_never_run.py
+       port_bgb_witness.py TREE --merge OUTDIR OUT.npz          the members of every head hit (tools: tools/jp/blocks.py) as an 'ex' array, for port_never_run.py
 TREE = us_eu | gold (for --merge; a scenario's instances each get the never-run heads of their own ROM).   Results: OUTDIR/results.jsonl (one line per scenario and instance, resumable), OUTDIR/<name>/ (demo, state, screenshot, printer pages).
 Scenario (one JSON object): name, rom (intl | gold | a path), sav (path), seq ('KEY:hold:wait,...', KEY may be A+B or '-'), combo (keys held at boot, default '-'),
   free (frames after the boot hold, default 403), tail (default 600), printer (bool), prn_err (PRN_ERR string, bgb_printer.py), env (dict),
@@ -14,7 +14,7 @@ Scenario (one JSON object): name, rom (intl | gold | a path), sav (path), seq ('
 """
 import sys, os, json, shutil, subprocess, time, collections
 import numpy as np
-HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); TT = os.path.join(ROOT, 'tcrf_check', 'tools')
+HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); TT = os.path.join(ROOT, 'tools', 'jp')
 sys.path.insert(0, TT)
 import blocks as B, bgb_run
 ROMS = dict(intl=os.environ.get('ROM_US', '/root/work/roms/gbcam_us.gb'), gold=os.environ.get('ROM_GOLD', '/root/work/roms/gbcam_gold.gb'))

@@ -40,7 +40,7 @@ if [ "${1:-}" != "--no-wine" ]; then
     (dpkg --add-architecture i386; apt-get update -q >/dev/null 2>&1; DEBIAN_FRONTEND=noninteractive apt-get install -y -q wine64 wine32:i386 xvfb >/dev/null 2>&1) || echo "apt install failed"
   fi
   command -v wine >/dev/null && echo "wine: $(wine --version 2>/dev/null)" || echo "WINE MISSING"
-  # the harness (tcrf_check/tools/bgb_run.py) runs BGB in WINEPREFIX=/root/wineprefix; a prefix made before wine32 was installed has no syswow64 and must be remade
+  # the harness (tools/jp/bgb_run.py) runs BGB in WINEPREFIX=/root/wineprefix; a prefix made before wine32 was installed has no syswow64 and must be remade
   export WINEPREFIX=/root/wineprefix WINEDEBUG=-all
   if [ -d "$WINEPREFIX" ] && [ ! -d "$WINEPREFIX/drive_c/windows/syswow64" ]; then rm -rf "$WINEPREFIX"; fi
   [ -d "$WINEPREFIX/drive_c/windows/syswow64" ] || timeout 120 xvfb-run -a wineboot -i >/dev/null 2>&1
@@ -51,7 +51,7 @@ if [ "${1:-}" != "--no-wine" ]; then
   [ -f "$BGB_DIR/bgb.ini" ] && echo "bgb: $BGB_DIR (bgb.exe md5 $(md5sum "$BGB_DIR/bgb.exe" | cut -c1-32))" || echo "BGB INI MISSING"
   # smoke test through the harness itself (a real demo file; -demoplay /dev/null gives no screenshot)
   sm=$(mktemp -d); head -c 131072 /dev/zero > "$sm/zero.sav"; rm -f /tmp/bgb_smoke.bmp
-  (cd "$REPO" && BGB_DIR="$BGB_DIR" timeout 120 python3 tcrf_check/tools/bgb_run.py "$ROMDIR/pocketcamera_jp.gb" "$sm/zero.sav" "$sm/smoke" '-:1:0' >/dev/null 2>&1)
+  (cd "$REPO" && BGB_DIR="$BGB_DIR" timeout 120 python3 tools/jp/bgb_run.py "$ROMDIR/pocketcamera_jp.gb" "$sm/zero.sav" "$sm/smoke" '-:1:0' >/dev/null 2>&1)
   [ -f "$sm/smoke.bmp" ] && cp "$sm/smoke.bmp" /tmp/bgb_smoke.bmp
   [ -f /tmp/bgb_smoke.bmp ] && echo "bgb smoke run: ok" || echo "bgb smoke run: no screenshot (check wine32:i386 and WINEPREFIX=/root/wineprefix, SETUP.md table)"
 fi

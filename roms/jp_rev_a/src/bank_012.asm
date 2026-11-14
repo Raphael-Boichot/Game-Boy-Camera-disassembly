@@ -5,31 +5,31 @@
 SECTION "ROM Bank $012", ROMX[$4000], BANK[$12]
 
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_4000_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4000_Mode06_State00_Init.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_4800_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4800_Mode06_State00_Init.2bpp" ; $4800, 176 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesSelected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_48B0_LinkMenu_LoadTilesSelected::
     INCBIN "data/bank_12/Gfx_12_48B0_LinkMenu_LoadTilesSelected.2bpp" ; $48B0, 240 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesDeselected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_49A0_LinkMenu_LoadTilesDeselected::
     INCBIN "data/bank_12/Gfx_12_49A0_LinkMenu_LoadTilesDeselected.2bpp" ; $49A0, 160 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesDeselected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_4A40_LinkMenu_LoadTilesDeselected::
     INCBIN "data/bank_12/Gfx_12_4A40_LinkMenu_LoadTilesDeselected.2bpp" ; $4A40, 240 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesSelected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_4B30_LinkMenu_LoadTilesSelected::
     INCBIN "data/bank_12/Gfx_12_4B30_LinkMenu_LoadTilesSelected.2bpp" ; $4B30, 1232 bytes
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_5000_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_5000_Mode06_State00_Init.2bpp" ; $5000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode21_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: not reached
@@ -48,11 +48,11 @@ Gfx_12_6000_Mode21_State00_Init::
 Gfx_12_6800_Mode21_State00_Init::
     INCBIN "data/bank_12/Gfx_12_6800_Mode21_State00_Init.2bpp" ; $6800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode03_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 23 replay(s) of the organic corpus, modes 03 (tcrf_check/assets/l3_names/)
+; in 23 replay(s) of the organic corpus, modes 03 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_7000_Mode03_State00_Init::
     INCBIN "data/bank_12/Gfx_12_7000_Mode03_State00_Init.2bpp" ; $7000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode03_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 23 replay(s) of the organic corpus, modes 03 (tcrf_check/assets/l3_names/)
+; in 23 replay(s) of the organic corpus, modes 03 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_7800_Mode03_State00_Init::
     db $ff, $ff, $7b, $39, $7b, $39, $7b, $39, $00, $00, $7b, $00, $7b, $39, $7b, $39
     db $7f, $7f, $bf, $3f, $ff, $ff, $3f, $1f, $de, $0e, $ef, $ce, $ef, $cf, $ef, $cf

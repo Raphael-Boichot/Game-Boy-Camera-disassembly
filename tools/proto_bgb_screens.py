@@ -5,14 +5,14 @@
 
 PROTO_BGB.gb is the header-patched copy (md5 1d8097de...; BGB only). The prototype has no (mode, state) pair: a screen is a GAME_SEQ
 value ($C0A0), written here as mode = GAME_SEQ and state 00. Every screen is one BGB run from 128 KiB of $00 along a key path from
-the title (keys in the format of tcrf_check/tools/bgb_run.py, after the 250-frame boot hold and 400 free frames, 200 free frames
+the title (keys in the format of tools/jp/bgb_run.py, after the 250-frame boot hold and 400 free frames, 200 free frames
 after the last key); the row keeps it only when BGB ends on the GAME_SEQ expected (same = yes). cancel.csv: the same path, then B
 held for 240 frames (the AGING screen reads the keys once per cycle, so a short B is lost there), and where GAME_SEQ ends.
 extra.csv: two screens that need a condition: AGING running after PROTECT TEST > OFF (state 01), and COM counting with a second
 unit linked (state 01, tools/proto_bgb_link.py, two BGB instances).
 """
 import sys, os, csv, argparse, subprocess, hashlib, shutil
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); sys.path.insert(0, os.path.join(REPO, 'tools', 'jp'))
 import bgb_run as B
 from PIL import Image
 ap = argparse.ArgumentParser(); ap.add_argument('rom'); ap.add_argument('--out', default=os.path.join(REPO, 'roms', 'prototype_debagame', 'screens')); a = ap.parse_args()

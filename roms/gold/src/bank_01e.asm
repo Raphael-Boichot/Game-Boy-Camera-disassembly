@@ -14,17 +14,17 @@ Gfx_1E_4000_ResultPic2_RibbonWoman_Tune30::
 Gfx_1E_4E00_ResultPic0_StarFace_Tune28::
     INCBIN "data/bank_1e/Gfx_1E_4E00_ResultPic0_StarFace_Tune28.2bpp" ; $4E00, 3584 bytes
 ; C: copied to VRAM/WRAM by Mode17_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 19 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode17_State00_Init reads them in this build (coverage call site or loader ...
+; in 19 replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode17_State00_Init reads them in this build (coverage call site or ...
 Gfx_1E_5C00_Mode17_State00_Init::
     INCBIN "data/bank_1e/Gfx_1E_5C00_Mode17_State00_Init.2bpp" ; $5C00, 768 bytes
 ; C: copied to VRAM/WRAM by Mode17_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 19 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode17_State00_Init reads them in this build (coverage call site or loader ...
+; in 19 replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode17_State00_Init reads them in this build (coverage call site or ...
 Gfx_1E_5F00_Mode17_State00_Init::
     INCBIN "data/bank_1e/Gfx_1E_5F00_Mode17_State00_Init.2bpp" ; $5F00, 1408 bytes
 ; C: copied to VRAM/WRAM by Mode17_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 19 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; in 19 replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1E_6480_Mode17_State00_Init::
     INCBIN "data/bank_1e/Gfx_1E_6480_Mode17_State00_Init.2bpp" ; $6480, 48 bytes
 ; C: 2 tiles, the letters A and B (rendered): Compose_DrawPhotoNumber (06:569E) copies 16 bytes from $64B0 + (album 0
@@ -36,11 +36,11 @@ Gfx_1E_64B0_Compose_DrawPhotoNumber_AlbumLetter::
 Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits::
     INCBIN "data/bank_1e/Gfx_1E_64D0_Compose_DrawPhotoNumber_Digits.2bpp" ; $64D0, 160 bytes
 ; C: copied to VRAM/WRAM by Mode17_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 19 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; in 19 replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1E_6570_Mode17_State00_Init::
     INCBIN "data/bank_1e/Gfx_1E_6570_Mode17_State00_Init.2bpp" ; $6570, 16 bytes
 ; C: copied to VRAM/WRAM by Mode17_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 19 replay(s) of the organic corpus, modes 17 (tcrf_check/assets/l3_names/)
+; in 19 replay(s) of the organic corpus, modes 17 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_1E_6580_Mode17_State00_Init::
     INCBIN "data/bank_1e/Gfx_1E_6580_Mode17_State00_Init.2bpp" ; $6580, 16 bytes
 ; C: 4 tiles (6590, 65A0, 65B0, 65C0) of which Mode17_State00_Init (06:4D3A-4D62) reads only the second 8 bytes (rows
@@ -123,7 +123,7 @@ Gfx_1E_6A00_ResultPic1_WavyBrowFace_Tune29Totaka::
     INCBIN "data/bank_1e/Gfx_1E_6A00_ResultPic1_WavyBrowFace_Tune29Totaka.2bpp" ; $6A00, 3584 bytes
 ; C: far pointer loaded by SaveDialog_Substate3_FullInit (ld a,BANK; ld hl,ADDR; call banked copy/far call); length
 ; 1264 from the nearby ld bc. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 10
-; (tcrf_check/assets/l3_names/); C: the bytes changed but ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but ...
 Gfx_1E_7800_SaveDialog_Substate3_FullInit::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $ff, $ff, $ff, $ff, $ff, $e0, $e0, $e0, $e0, $e0, $ff, $ff, $ff, $ff, $ff, $ff

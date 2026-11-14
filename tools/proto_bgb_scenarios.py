@@ -5,7 +5,7 @@ without the write protection switched off.
   tools/proto_bgb_scenarios.py PROTO_BGB.gb OUT_DIR [--paths roms/prototype_debagame/trace/menu_paths_proto.csv] [--aging roms/prototype_debagame/trace/aging_bgb_proto.csv]
 
 PROTO_BGB.gb is the header-patched copy (md5 1d8097de...; BGB only). Each scenario is one BGB run from 128 KiB of $00 (keys in the
-format of tcrf_check/tools/bgb_run.py, after the 250-frame boot hold and 400 free frames, then 200 free frames); the end state gives
+format of tools/jp/bgb_run.py, after the 250-frame boot hold and 400 free frames, then 200 free frames); the end state gives
 GAME_SEQ ($C0A0) and the SRAM. --paths: one row per menu path (path, keys, GAME_SEQ in BGB). --aging: the AGING screen on the
 55,55,AA,AA pattern, once straight from the menu and once after PROTECT TEST > OFF (the only code that writes $0A to $0000, the
 SRAM write enable, with PICT_SAVE_GO): GAME_SEQ, the aging COUNT ($C0DA-$C0DB), the error flag ($C0E1) and the error record
@@ -16,7 +16,7 @@ COUNT restart; 55,55,AA,AA, then B held and A at once: does DATA SELECT keep the
 bytes of SRAM bank 0 and the most frequent byte of banks 0 and 15.
 """
 import sys, os, csv, argparse, collections
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tcrf_check', 'tools'))
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, '..', 'tools', 'jp'))
 import bgb_run as B
 from PIL import Image
 D = 'roms/prototype_debagame/trace/'

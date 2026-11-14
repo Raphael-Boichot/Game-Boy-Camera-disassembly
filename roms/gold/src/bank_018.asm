@@ -5,21 +5,21 @@
 SECTION "ROM Bank $018", ROMX[$4000], BANK[$18]
 
 ; C: copied to VRAM/WRAM by Mode05_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 32 replay(s) of the organic corpus, modes 05 (tcrf_check/assets/l3_names/)
+; in 32 replay(s) of the organic corpus, modes 05 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_18_4000_Mode05_State00_Init::
     INCBIN "data/bank_18/Gfx_18_4000_Mode05_State00_Init.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode05_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 32 replay(s) of the organic corpus, modes 05 (tcrf_check/assets/l3_names/)
+; in 32 replay(s) of the organic corpus, modes 05 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_18_4800_Mode05_State00_Init::
     INCBIN "data/bank_18/Gfx_18_4800_Mode05_State00_Init.2bpp" ; $4800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode05_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 32 replay(s) of the organic corpus, modes 05 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode05_State00_Init reads them in this build (coverage call site or loader ...
+; in 32 replay(s) of the organic corpus, modes 05 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode05_State00_Init reads them in this build (coverage call site or ...
 Gfx_18_5000_Mode05_State00_Init::
     INCBIN "data/bank_18/Gfx_18_5000_Mode05_State00_Init.2bpp" ; $5000, 1136 bytes
 ; C: copied to VRAM/WRAM by Mode1E_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode1E_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 1 replay(s) of the organic corpus, modes 1E (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode1E_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_18_5470_Mode1E_State00_Init::
     INCBIN "data/bank_18/Gfx_18_5470_Mode1E_State00_Init.2bpp" ; $5470, 1504 bytes
 ; I: TCRF unused graphic: film roll with a B for the margin-print option (6 tiles); loaded with the option screen but
@@ -33,8 +33,8 @@ Unused_TCRF_MarginPrint_BFilmRoll_Gfx::
 Gfx_18_5AB0_Mode1E_State00_Init_Cont::
     INCBIN "data/bank_18/Gfx_18_5AB0_Mode1E_State00_Init_Cont.2bpp" ; $5AB0, 448 bytes
 ; C: copied to VRAM/WRAM by Mode1E_State00_Init, Print_LoadDigitTile (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass
-; 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1E (tcrf_check/assets/l3_names/); C: the bytes
-; changed but Mode1E_State00_Init reads them in this build (coverage call ...
+; 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1E (roms/jp_rev_a/experiments/l3_names/); C: the
+; bytes changed but Mode1E_State00_Init reads them in this build ...
 Gfx_18_5C70_Mode1E_State00_Init::
     INCBIN "data/bank_18/Gfx_18_5C70_Mode1E_State00_Init.2bpp" ; $5C70, 800 bytes
 ; I: TCRF unused graphic: outlined Japanese text of the margin-print option (12 tiles); never stably on screen (README
@@ -48,58 +48,59 @@ Unused_TCRF_MarginPrint_OutlinedText_Gfx::
 Gfx_18_6050_Mode1C_DrawOptionScreen_Cont::
     INCBIN "data/bank_18/Gfx_18_6050_Mode1C_DrawOptionScreen_Cont.2bpp" ; $6050, 1056 bytes
 ; C: copied to VRAM/WRAM by Mode1B_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 1B (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode1B_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 1B (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode1B_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_18_6470_Mode1B_State00_Init::
     INCBIN "data/bank_18/Gfx_18_6470_Mode1B_State00_Init.2bpp" ; $6470, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode1B_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 1B (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode1B_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 1B (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode1B_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_18_6C70_Mode1B_State00_Init::
     INCBIN "data/bank_18/Gfx_18_6C70_Mode1B_State00_Init.2bpp" ; $6C70, 1936 bytes
 ; C: far pointer loaded by Mode1C_DrawOptionScreen, Mode1C_State02_ShowPrintScreen (ld a,BANK; ld hl,ADDR; call banked
 ; copy/far call). L3 pass 2026-10-26: read in BGB in 18 replay(s) of the organic corpus, modes 1B 1C
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_18_7400_Mode1C_State02_ShowPrintScreen::
     INCBIN "data/bank_18/Gfx_18_7400_Mode1C_State02_ShowPrintScreen.2bpp" ; $7400, 112 bytes
 ; C: copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 9 replay(s) of the organic corpus, modes 1C (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode1C_State02_ShowPrintScreen reads them in this build (coverage call ...
+; read in BGB in 9 replay(s) of the organic corpus, modes 1C (roms/jp_rev_a/experiments/l3_names/); C: the bytes
+; changed but Mode1C_State02_ShowPrintScreen reads them in this build ...
 Gfx_18_7400_Mode1C_State02_ShowPrintScreen_Part7470::
     INCBIN "data/bank_18/Gfx_18_7400_Mode1C_State02_ShowPrintScreen_Part7470.2bpp" ; $7470, 1168 bytes
 ; C: far pointer loaded by Mode1C_LoadToggleTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the organic corpus, modes 1C
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Mode1C_LoadToggleTiles reads them ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode1C_LoadToggleTiles ...
 Gfx_18_7900_Mode1C_LoadToggleTiles::
     INCBIN "data/bank_18/Gfx_18_7900_Mode1C_LoadToggleTiles.2bpp" ; $7900, 192 bytes
 ; C: far pointer loaded by Mode1C_LoadToggleTiles (ld a,BANK; ld hl,ADDR; call banked copy/far call); length 192 from
 ; the nearby ld bc. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 1C
-; (tcrf_check/assets/l3_names/); C: the bytes changed but Mode1C_LoadToggleTiles reads them ...
+; (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode1C_LoadToggleTiles ...
 Gfx_18_79C0_Mode1C_LoadToggleTiles::
     INCBIN "data/bank_18/Gfx_18_79C0_Mode1C_LoadToggleTiles.2bpp" ; $79C0, 192 bytes
 ; C: copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen, Mode1C_State04_OptionsMenu
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes
-; 1C (tcrf_check/assets/l3_names/)
+; 1C (roms/jp_rev_a/experiments/l3_names/)
 Gfx_18_7A80_Mode1C_State02_ShowPrintScreen::
     INCBIN "data/bank_18/Gfx_18_7A80_Mode1C_State02_ShowPrintScreen.2bpp" ; $7A80, 128 bytes
 ; C: copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 9 replay(s) of the organic corpus, modes 1C (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode1C_State02_ShowPrintScreen reads them in this build (coverage call ...
+; read in BGB in 9 replay(s) of the organic corpus, modes 1C (roms/jp_rev_a/experiments/l3_names/); C: the bytes
+; changed but Mode1C_State02_ShowPrintScreen reads them in this build ...
 Gfx_18_7B00_Mode1C_State02_ShowPrintScreen::
     INCBIN "data/bank_18/Gfx_18_7B00_Mode1C_State02_ShowPrintScreen.2bpp" ; $7B00, 160 bytes
 ; C: copied to VRAM/WRAM by Mode0E_State04_PickDone, Mode0E_State0D_PickSecond (roms/jp_rev_a/assets/catalog_jp.csv).
-; L3 pass 2026-10-26: read in BGB in the scenarios link_exchange 0E:04 (tcrf_check/assets/l3_names/scen_hits*.csv); C:
-; the bytes changed but Mode0E_State04_PickDone reads them in this ...
+; L3 pass 2026-10-26: read in BGB in the scenarios link_exchange 0E:04
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv); C: the bytes changed but Mode0E_State04_PickDone reads them in
+; ...
 Gfx_18_7BA0_Mode0E_State04_PickDone::
     INCBIN "data/bank_18/Gfx_18_7BA0_Mode0E_State04_PickDone.2bpp" ; $7BA0, 160 bytes
 ; C: copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 33 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode0F_State05_ConfirmInit reads them in this build (coverage call site or ...
+; in BGB in 33 replay(s) of the organic corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but Mode0F_State05_ConfirmInit reads them in this build (coverage call ...
 Gfx_18_7C40_Mode0F_State05_ConfirmInit::
     INCBIN "data/bank_18/Gfx_18_7C40_Mode0F_State05_ConfirmInit.2bpp" ; $7C40, 288 bytes
 ; C: copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 33 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode0F_State05_ConfirmInit reads them in this build (coverage call site or ...
+; in BGB in 33 replay(s) of the organic corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but Mode0F_State05_ConfirmInit reads them in this build (coverage call ...
 Gfx_18_7D60_Mode0F_State05_ConfirmInit::
     INCBIN "data/bank_18/Gfx_18_7D60_Mode0F_State05_ConfirmInit.2bpp" ; $7D60, 32 bytes
 ; C: tile data with no direct pointer in the code (, same bank/neighbour of Mode0F_State04_LeaveSelected); classified
@@ -107,13 +108,13 @@ Gfx_18_7D60_Mode0F_State05_ConfirmInit::
 Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux::
     INCBIN "data/bank_18/Gfx_18_7D80_Mode0F_State04_LeaveSelected_Aux.2bpp" ; $7D80, 256 bytes
 ; C: copied to VRAM/WRAM by Mode0F_State05_ConfirmInit (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
-; in BGB in 33 replay(s) of the organic corpus, modes 0F (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode0F_State05_ConfirmInit reads them in this build (coverage call site or ...
+; in BGB in 33 replay(s) of the organic corpus, modes 0F (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed
+; but Mode0F_State05_ConfirmInit reads them in this build (coverage call ...
 Gfx_18_7E80_Mode0F_State05_ConfirmInit::
     INCBIN "data/bank_18/Gfx_18_7E80_Mode0F_State05_ConfirmInit.2bpp" ; $7E80, 224 bytes
 ; C: copied to VRAM/WRAM by Mode1C_State02_ShowPrintScreen, Mode1C_DrawPrintScreen
 ; (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes
-; 1C (tcrf_check/assets/l3_names/); C: the bytes changed but Mode1C_State02_ShowPrintScreen reads them in ...
+; 1C (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but Mode1C_State02_ShowPrintScreen reads ...
 Gfx_18_7F60_Mode1C_State02_ShowPrintScreen::
     db $0f, $0f, $3f, $38, $7f, $60, $7f, $40, $ff, $c5, $ff, $80, $ff, $80, $ff, $9a
     db $f0, $f0, $fc, $1c, $fe, $06, $fe, $02, $ff, $b3, $ff, $01, $ff, $01, $ff, $a9

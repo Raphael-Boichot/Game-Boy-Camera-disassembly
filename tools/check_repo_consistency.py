@@ -31,14 +31,14 @@ What it checks (each line of the report is one check)
   docnames   every `Gfx_BB_AAAA_...` / `Map_` / `Src_` / `Data_` / `Sheet_` label quoted in README, CLAUDE.md, the skill and the HOWTO is a label of sym_names_jp.csv (or the start of one)
   bankpics   (needs --rom) roms/jp_rev_a/disasm/sym_unconclusive_banks/*.png equal a fresh tools/bank_pics.py run
   tcrf       tcrf_check/TCRF_CHECKLIST.md and .csv list the same ids
-  effects    tcrf_check/assets/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
+  effects    roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv has the 96 slots of the jump table 0A:541A in order, each row's entry address (needs --rom) and label equal the ROM and sym_names_jp.csv;
              the counts quoted in docs §16.28 (slots that write, lone rets, routines, slots the game selects, flip relations, grey-level checks) equal the csv; every tcrf_check/ file a label note cites exists
   ram        roms/jp_rev_a/disasm/ram_names_jp.csv (the RAM names, docs §2.13): identifiers and prefixes, no clash with a ROM label, roms/jp_rev_a/disasm/ram_jp.inc and pocketcamera_jp_ram.sym equal a fresh tools/ram_names.py run, every access of
              roms/jp_rev_a/wram/wram_access_jp.csv inside $C000-$DFFF / $FF80-$FFFE resolves to exactly one name for its bank, routine and instruction (the pointer loads of ram_exclude_jp.csv are numbers); the counts the README quotes
-  forced     tcrf_check/assets/unidentified/forced_first_readers.csv equals a fresh tcrf_check/tools/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
-  printwatch tcrf_check/assets/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
-  seamoffsets tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
-  patternmatch tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
+  forced     roms/jp_rev_a/experiments/unidentified/forced_first_readers.csv equals a fresh tools/jp/forced_first_readers.py run on coverage/v8/merged_v8/cov.npz; the README sentences of 16.24 that quote it
+  printwatch roms/jp_rev_a/experiments/unidentified/map_26_7080_print_watch.csv (BGB read watch on 26:7080-72BF during two prints of copied Album B pictures: 0 hits, controls > 0), the organic coverage of Album B and of the maps next to 26:7080, the count of the byte pair 80 70 against the proven code; the README sentences of 16.25.2 that quote them
+  seamoffsets roms/jp_rev_a/experiments/unidentified/map_26_7080_seam_offsets.csv (seam search of 26:7080 at every byte offset: 13 variants, ratio best / control column consistent, none below 0.70 where a true block gives 0.33-0.37); the README sentences of 16.25.2 that quote them
+  patternmatch roms/jp_rev_a/experiments/unidentified/map_26_7080_pattern_match.csv (pattern of repeated ids of 26:7080 and two control maps against every window of both ROMs: a counterpart scores 1.000, no other window 0.20 or more); the README sentences of 16.25.2 that quote them
   handspan   (with --rom) the span 11:5800-693F has fewer different tiles (130 of 276, 95 blank) than the 245 ids of 26:7080 and its four natural layouts cost 0.7 per pixel or more; the README sentence of 16.25.2 that quotes them
   oamlist    (with --rom) no call of Oam_AddMeta_B01_4000 (00:24AF) has a literal id $A6-$BB, no organic run reads those 22 OAM lists ($BA = the hand flipping a newspaper), the README sentence of 16.24 that quotes the call and list counts
   statsplit  what STAT handler 1 splits (docs §2, interrupt map): the census table of the screens that run the split, the ROM sites that turn the interrupt on and off, the README sentences that quote them
@@ -48,7 +48,7 @@ What it checks (each line of the report is one check)
   kinds      in the three source trees, a block named as tiles (Gfx_ / Sheet_ / Font_) is not copied by `farcopy` to the BG map ($9800-$9FFF), and a block named as a map (Map_ / BgMap_) is not copied below $9800 (the layout maps take the kind from the name: 2026-11-02, bank $20)
   source     (--roundtrip) roms/jp_rev_a/src/ is exactly what tools/make_source.py writes, and it builds the ROM byte-exact (PNG -> 2bpp, rgbasm, rgblink, rgbfix); the README sentence that quotes its counts
 
-Frozen inputs that are NOT regenerated: tcrf_check/assets/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
+Frozen inputs that are NOT regenerated: roms/jp_rev_a/experiments/unidentified/open_assets.csv (the candidate list that display_report.py reads; the checker only compares the README's sentences with it).
 Real exceptions (a Map type row that is not a multiple of 32 bytes, a Gfx label on a Map row, datasheet section numbers) are listed in ODD_MAP_ROWS, GFX_ON_MAP and EXTERNAL_REFS with the reason.
 
 Add a quoted number here when the README starts quoting a new one: the point of this file is that a change of a label, a type row or a span
@@ -232,7 +232,7 @@ if os.path.exists(US + 'disasm/sym_names_us.csv'):
                 (ok if md == '42d2f65e2549be9d1d126a6828b5d1c1' else bad)('port', 'international round trip %s: md5 %s' % (tag, md))
             # the layout picture of the international ROM (README, after the Japanese one) is what rom_layout_map.py draws today
             pu = os.path.join(tmp, 'us_map.png'); D_ = US + 'disasm/'
-            rr = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', pu, '--rom', A.rom_us, '--map', US + 'trace/rom_map_us.csv', '--assets', 'none', '--witness', 'none',
+            rr = subprocess.run([sys.executable, 'tools/rom_layout_map.py', pu, '--rom', A.rom_us, '--map', US + 'trace/rom_map_us.csv', '--assets', 'none', '--witness', 'none',
                                  '--reach', 'none', '--unused', 'none', '--kinds', US + 'assets/layout_kind_overrides_us.csv',
                                  '--names', D_ + 'sym_names_us.csv',
                                  '--types', D_ + 'sym_types_us.csv', '--diff', US + 'port/diff_us.npz', '--cov', US + 'port/cov_jp_in_us.npz', '--csv', os.path.join(tmp, 'us_layout.csv'),
@@ -701,7 +701,7 @@ if BYTES:
     n += quoted('padding', r'padding ([\d,]+) \(([\d,]+) B less than before the L3 pass', lambda m: ((BYTES['padding'], PAD_BEFORE_L3 - BYTES['padding']), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
     n += quoted('data bytes', r', data ([\d,]+) \(with a row width', lambda m: ((BYTES['data'],), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 # the open-assets sheet (a frozen candidate list read by display_report.py): its csv and the sentences about it
-OA = list(csv.DictReader(open(P('tcrf_check/assets/unidentified/open_assets.csv'), encoding='utf-8')))
+OA = list(csv.DictReader(open(P('roms/jp_rev_a/experiments/unidentified/open_assets.csv'), encoding='utf-8')))
 OA_ROWS = len(OA); OA_BYTES = sum(int(r['bytes']) for r in OA); OA_K = collections.Counter(r['name'].split('_')[0] for r in OA)
 OA_UNREF = sum(1 for r in OA if r['name'].endswith('_Unref') and r['name'].split('_')[0] in ('Gfx', 'Sheet', 'Map'))
 OA_GR = OA_K['Gfx'] + OA_K['Sheet'] + OA_K['Map']
@@ -713,10 +713,10 @@ n += quoted('open assets', r'snapshot, (\d+) rows in the csv', lambda m: ((OA_RO
 n += quoted('open assets', r'\((\d+) rows, ([\d,]+) B after §16\.25', lambda m: ((OA_ROWS, OA_BYTES), (int(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ really-unused totals, tiers, per-bank table
-RU = list(csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/really_unused.csv'))))
+RU = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/experiments/unidentified/really_unused.csv'))))
 tier_n = collections.Counter(); tier_b = collections.Counter()
 for r in RU: tier_n[r['tier']] += 1; tier_b[r['tier']] += int(r['bytes'])
-md = rd('tcrf_check/assets/unidentified/really_unused.md').split('\n')
+md = rd('roms/jp_rev_a/experiments/unidentified/really_unused.md').split('\n')
 mdtot = [l for l in md if l.startswith('| | **')]
 if len(mdtot) != 1: bad('sheet', 'really_unused.md has no single total row')
 else:
@@ -751,7 +751,7 @@ for r in LB:
 # yellow bytes need the ROM (rom_reach_map.py)
 if A.rom:
     tmp = tempfile.mkdtemp(prefix='cons_y_')
-    r = subprocess.run([sys.executable, 'tcrf_check/tools/rom_reach_map.py', '--rom', A.rom, os.path.join(tmp, 'x.png')], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, 'tools/rom_reach_map.py', '--rom', A.rom, os.path.join(tmp, 'x.png')], capture_output=True, text=True)
     if r.returncode: bad('yellow', 'rom_reach_map.py failed: %s' % (r.stderr or r.stdout).strip()[-200:])
     else:
         m = re.search(r'unused (\d+) (\d+) ', r.stdout); YB, YS = int(m.group(1)), int(m.group(2))
@@ -760,7 +760,7 @@ if A.rom:
         n += quoted('yellow', r'(?:The yellow layer is|\d,\d{3} B of them are yellow|yellow bytes of the map at the top of this README:) ?([\d,]+) B', lambda m: ((YB,), (num(m.group(1)),)), docs=('README.md',))
         n += quoted('yellow', r'yellow takes ([\d,]+) B from orange, ([\d,]+) B from blue and ([\d,]+) B from light blue', lambda m: (tuple(int(m2.group(i)) for i in (1, 2, 3)), tuple(num(m.group(i)) for i in (1, 2, 3))), docs=('README.md',), need=('README.md',))
         if cmp_png := os.path.join(ROOT, 'roms', 'jp_rev_a', 'jp_rom_reachability_map.png'):
-            if not same_png(cmp_png, os.path.join(tmp, 'x.png')): bad('yellow', 'jp_rom_reachability_map.png is stale: run tcrf_check/tools/rom_reach_map.py (and rom_layout_map.py)')
+            if not same_png(cmp_png, os.path.join(tmp, 'x.png')): bad('yellow', 'jp_rom_reachability_map.png is stale: run tools/rom_reach_map.py (and rom_layout_map.py)')
             else: ok('yellow', 'roms/jp_rev_a/jp_rom_reachability_map.png fresh')
     shutil.rmtree(tmp, ignore_errors=True)
 else:
@@ -768,10 +768,10 @@ else:
 # layout map: the picture, the per-bank csv and the sentences of the README that quote its legend (needs the ROM)
 if A.rom:
     tmp = tempfile.mkdtemp(prefix='cons_l_')
-    r = subprocess.run([sys.executable, 'tcrf_check/tools/rom_layout_map.py', os.path.join(tmp, 'l.png'), '--rom', A.rom, '--csv', os.path.join(tmp, 'l.csv')], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, 'tools/rom_layout_map.py', os.path.join(tmp, 'l.png'), '--rom', A.rom, '--csv', os.path.join(tmp, 'l.csv')], capture_output=True, text=True)
     if r.returncode: bad('layout', 'rom_layout_map.py failed: %s' % (r.stderr or r.stdout).strip()[-200:])
     else:
-        if not same_png(os.path.join(tmp, 'l.png'), P('roms/jp_rev_a/jp_rom_layout_map.png')): bad('layout', 'jp_rom_layout_map.png is stale: run tcrf_check/tools/rom_layout_map.py OUT.png --rom ROM')
+        if not same_png(os.path.join(tmp, 'l.png'), P('roms/jp_rev_a/jp_rom_layout_map.png')): bad('layout', 'jp_rom_layout_map.png is stale: run tools/rom_layout_map.py OUT.png --rom ROM')
         if open(os.path.join(tmp, 'l.csv'), 'rb').read() != open(P('roms/jp_rev_a/assets/layout_by_bank_jp.csv'), 'rb').read(): bad('layout', 'roms/jp_rev_a/assets/layout_by_bank_jp.csv is stale: run rom_layout_map.py --csv roms/jp_rev_a/assets/layout_by_bank_jp.csv')
         K = {m.group(1): num(m.group(2)) for m in re.finditer(r'^([A-Z_]+)\s+([\d,]+)\s+[\d.]+ %', r.stdout, re.M)}
         tiles = K['T_UI'] + K['T_STP'] + K['T_FRM'] + K['T_PHO']
@@ -806,7 +806,7 @@ ok('quoted', '%d quoted sentences checked' % n)
 rows_md = [l for l in md if l.startswith('| `') and l.count('|') >= 6]
 rd_lines = set(README.split('\n'))
 miss = [l.split('|')[1].strip() for l in rows_md if l not in rd_lines]
-for s in miss: bad('sheet', 'README copy of the really_unused.md row %s is missing or differs: copy the row from tcrf_check/assets/unidentified/really_unused.md' % s)
+for s in miss: bad('sheet', 'README copy of the really_unused.md row %s is missing or differs: copy the row from roms/jp_rev_a/experiments/unidentified/really_unused.md' % s)
 if not miss: ok('sheet', '%d rows of really_unused.md are in the README verbatim' % len(rows_md))
 HAND_TAIL = [l for l in md if l.startswith('*Withdrawn after the L3 pass')]
 if not HAND_TAIL: bad('sheet', 'really_unused.md lost its hand-kept tail ("*Withdrawn after the L3 pass...*"): display_report.py overwrites it, restore it from git')
@@ -878,7 +878,7 @@ if not miss: ok('files', 'README links exist; %d distinct § references, %d with
 # `file.csv` (N rows)
 for m in re.finditer(r'`((?:[\w.\-]+/)*[\w.\-]+\.csv)` \(([\d,]+) rows', README):
     f = m.group(1)
-    cands = [f] + [os.path.join(d, f) for d in ('roms/jp_rev_a/assets', 'roms/jp_rev_a/disasm', 'tcrf_check/assets/unidentified')]
+    cands = [f] + [os.path.join(d, f) for d in ('roms/jp_rev_a/assets', 'roms/jp_rev_a/disasm', 'roms/jp_rev_a/experiments/unidentified')]
     pth = next((c for c in cands if os.path.exists(P(c))), None)
     if not pth: warn('csvrows', '%s is quoted with %s rows but was not found' % (f, m.group(2))); continue
     rows = len(list(csv.reader(open(P(pth), encoding='utf-8')))) - 1
@@ -912,7 +912,7 @@ else:
     skip('bankpics', 'no --rom: bank pictures not checked')
 
 # ------------------------------------------------------------------ the 96 effect slots (docs §16.28)
-EF_CSV = 'tcrf_check/assets/effect_slots/effect_slots_bgb.csv'
+EF_CSV = 'roms/jp_rev_a/experiments/effect_slots/effect_slots_bgb.csv'
 EF = list(csv.DictReader(io.StringIO(rd(EF_CSV))))
 NAME_AT = {(r['bank'].upper(), r['addr'].upper()): r['name'] for r in NAMES}
 ef_bad = 0
@@ -999,14 +999,14 @@ if not RAM_BAD:
     quoted('ram exclusions', r'([\d,]+) pointer loads of the table are numbers that only look like addresses', lambda m: ((len(RAM_EXCL),), (num(m.group(1)),)), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ first readers of the forced-only data bytes (docs §16.24)
-FR_FILE = 'tcrf_check/assets/unidentified/forced_first_readers.csv'
+FR_FILE = 'roms/jp_rev_a/experiments/unidentified/forced_first_readers.csv'
 try:
     FR = list(csv.DictReader(io.StringIO(rd(FR_FILE))))
 except Exception as e:
     FR = []; bad('forced', '%s does not load: %s' % (FR_FILE, e))
 if FR:
     tmp = tempfile.mkdtemp(prefix='cons_f_')
-    r = subprocess.run([sys.executable, 'tcrf_check/tools/forced_first_readers.py', P('coverage/v8/merged_v8/cov.npz'), os.path.join(tmp, 'f.csv')], capture_output=True, text=True, cwd=ROOT)
+    r = subprocess.run([sys.executable, 'tools/jp/forced_first_readers.py', P('coverage/v8/merged_v8/cov.npz'), os.path.join(tmp, 'f.csv')], capture_output=True, text=True, cwd=ROOT)
     if r.returncode != 0: bad('forced', 'forced_first_readers.py failed: %s' % r.stderr.strip()[-200:])
     elif open(os.path.join(tmp, 'f.csv'), encoding='utf-8').read() != rd(FR_FILE): bad('forced', '%s is not what forced_first_readers.py writes from coverage/v8/merged_v8/cov.npz (run it)' % FR_FILE)
     shutil.rmtree(tmp, ignore_errors=True)
@@ -1020,7 +1020,7 @@ if FR:
     quoted('forced spans', r'(\d+) of the (\d+) spans of `really_unused.csv` that have such bytes have `Prn_SendPacketByte` as their most frequent first reader', lambda m: ((FR_PRN, len(FR_SP)), (num(m.group(1)), num(m.group(2)))), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ 26:7080 and the printing of Album B (docs §16.25.2)
-PW_FILE = 'tcrf_check/assets/unidentified/map_26_7080_print_watch.csv'
+PW_FILE = 'roms/jp_rev_a/experiments/unidentified/map_26_7080_print_watch.csv'
 try:
     PW = list(csv.DictReader(io.StringIO(rd(PW_FILE))))
 except Exception as e:
@@ -1056,7 +1056,7 @@ if PW:
     if cov[3] != 576 or cov[4] != 576: bad('printwatch', '26:4C80 / 26:72C0 organic reads are %d / %d of 576, the README says 576 each' % (cov[3], cov[4]))
 
 # ------------------------------------------------------------------ 26:7080 seam search at every byte offset (docs §16.25.2)
-SO_FILE = 'tcrf_check/assets/unidentified/map_26_7080_seam_offsets.csv'
+SO_FILE = 'roms/jp_rev_a/experiments/unidentified/map_26_7080_seam_offsets.csv'
 try:
     SO = list(csv.DictReader(io.StringIO(rd(SO_FILE))))
 except Exception as e:
@@ -1084,7 +1084,7 @@ if SO:
         bad('seamoffsets', '%s lacks the variant %s' % (SO_FILE, e))
 
 # ------------------------------------------------------------------ 26:7080 pattern of repeated ids against every map window (docs §16.25.2)
-PM_FILE = 'tcrf_check/assets/unidentified/map_26_7080_pattern_match.csv'
+PM_FILE = 'roms/jp_rev_a/experiments/unidentified/map_26_7080_pattern_match.csv'
 try:
     PM = list(csv.DictReader(io.StringIO(rd(PM_FILE))))
 except Exception as e:
@@ -1107,7 +1107,7 @@ if PM:
 
 # ------------------------------------------------------------------ 26:7080 against the tiles of the hand-newspaper span 11:5800 (docs §16.25.2)
 if A.rom:
-    sys.path.insert(0, P('tcrf_check/tools'))
+    sys.path.insert(0, P('tools/jp'))
     import map_vs_span_layouts as MVS
     hn_ids, (hn_dist, hn_blank, hn_ff), hn_c = MVS.costs(open(A.rom, 'rb').read(), 0x26, 0x7080, 0x11, 0x5800, 276, 25, 512, 0)
     hn_order = ['contiguous ascending', 'contiguous descending', 'slots ascending', 'slots descending']
@@ -1122,7 +1122,7 @@ if A.rom:
 
 # ------------------------------------------------------------------ the ball head animation is stored twice: two collars for two bodies (docs §16.24)
 if A.rom:
-    sys.path.insert(0, P('tcrf_check/tools'))
+    sys.path.insert(0, P('tools/jp'))
     import head_sets as HS
     hs_rom = open(A.rom, 'rb').read()
     hs_d = HS.pair_diffs(hs_rom)
@@ -1150,7 +1150,7 @@ if A.rom:
 
 # ------------------------------------------------------------------ nothing draws the OAM list $BA of the hand flipping a newspaper (docs §16.24)
 if A.rom:
-    sys.path.insert(0, P('tcrf_check/tools'))
+    sys.path.insert(0, P('tools/jp'))
     import oam_list_use as OL
     ol_rom = open(A.rom, 'rb').read(); ol_ids = list(range(0xA6, 0xBC)); ol_s = OL.summary(ol_rom, ol_ids)
     ol_cov = P('coverage/v8/merged_v8/cov.npz'); ol_org = None
@@ -1167,7 +1167,7 @@ if A.rom:
         quoted('oam list', r'\((\d+) of the (\d+) lists are unread in organic runs\)', lambda m: ((ol_org[0], 249), (int(m.group(1)), int(m.group(2)))), docs=('README.md',), need=('README.md',))
 
 # ------------------------------------------------------------------ the main menu turning its page, the whole screen (docs §16.24)
-SG = 'tcrf_check/assets/unidentified/main_menu_page_turn.gif'
+SG = 'roms/jp_rev_a/experiments/unidentified/main_menu_page_turn.gif'
 try:
     from PIL import Image as _Im, ImageSequence as _Seq
     _g = _Im.open(P(SG)); sg_n = sum(1 for _ in _Seq.Iterator(_g)); _g.seek(0)
@@ -1182,7 +1182,7 @@ except Exception as e:
     bad('screengif', '%s does not load: %s' % (SG, e))
 
 # ------------------------------------------------------------------ what STAT handler 1 splits (docs §2, interrupt map)
-SS = 'tcrf_check/assets/unidentified/stat_split_census.csv'
+SS = 'roms/jp_rev_a/experiments/unidentified/stat_split_census.csv'
 try:
     ss_rows = list(csv.DictReader(io.StringIO(rd(SS))))
     ss_on = [r for r in ss_rows if r['stat_irq'] == 'on']; ss_h1 = [r for r in ss_on if r['handler'] == '1']
@@ -1212,7 +1212,7 @@ except Exception as e:
     bad('statsplit', '%s does not load or does not parse: %s' % (SS, e))
 
 # ------------------------------------------------------------------ RAM runtime check (BGB, docs §2.13)
-PR_DIR = 'tcrf_check/assets/wram_probe/'
+PR_DIR = 'roms/jp_rev_a/experiments/wram_probe/'
 try:
     PR_W = list(csv.DictReader(io.StringIO(rd(PR_DIR + 'watch.csv'))))
     PR_N = list(csv.DictReader(io.StringIO(rd(PR_DIR + 'names.csv'))))
@@ -1323,8 +1323,8 @@ if not CN_BAD:
 # ------------------------------------------------------------------ sound names (L4, docs §2.14 and 16.24)
 SND_BAD = 0
 SND_ROWS = list(csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/sound_names_jp.csv'))))
-SND_INV = {(r['channel'], r['id'].upper()): r for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/sound_inventory.csv')))}
-SND_UNUSED = {(r['channel'], r['id'].upper()) for r in csv.DictReader(io.StringIO(rd('tcrf_check/assets/unidentified/really_unused_sounds.csv')))}
+SND_INV = {(r['channel'], r['id'].upper()): r for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/experiments/unidentified/sound_inventory.csv')))}
+SND_UNUSED = {(r['channel'], r['id'].upper()) for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/experiments/unidentified/really_unused_sounds.csv')))}
 SND_OWNER = {r['key'] for r in csv.DictReader(io.StringIO(rd('roms/jp_rev_a/disasm/owner_answers_jp.csv')))}
 SND_PREFIX = {'music': 'MUSIC_', 'sfx1': 'SFX1_', 'sfx3': 'SFX3_', 'sfx4': 'SFX4_'}
 SND_CONTROL = {('music', 'FE'), ('music', 'FF')}              # requests of the song mailbox that are engine commands, not songs

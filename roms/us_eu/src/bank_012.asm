@@ -8,42 +8,42 @@ SECTION "ROM Bank $012", ROMX[$4000], BANK[$12]
 Gfx_12_4000_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4000_Mode06_State00_Init.2bpp" ; $4000, 16 bytes
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode06_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode06_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_12_4010_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4010_Mode06_State00_Init.2bpp" ; $4010, 2032 bytes
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode06_State00_Init reads them in this build (coverage call site or loader layer): ...
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode06_State00_Init reads them in this build (coverage call site or loader ...
 Gfx_12_4800_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4800_Mode06_State00_Init.2bpp" ; $4800, 176 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesSelected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (tcrf_check/assets/l3_names/); L3 relabel:
-; loaded here by Mode06_State00_Init (coverage: 224 of 224 read bytes); the ...
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (roms/jp_rev_a/experiments/l3_names/); L3
+; relabel: loaded here by Mode06_State00_Init (coverage: 224 of 224 read ...
 Gfx_12_48B0_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_48B0_Mode06_State00_Init.2bpp" ; $48B0, 224 bytes
 ; C: loaded by Vram_CopyFromBank at 03:7902: Gfx $A0 bytes to $8990 (this build's trace)
 Gfx_12_4990_LinkMenu_LoadTilesDeselected::
     INCBIN "data/bank_12/Gfx_12_4990_LinkMenu_LoadTilesDeselected.2bpp" ; $4990, 16 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesDeselected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (tcrf_check/assets/l3_names/); L3 relabel:
-; loaded here by Mode06_State00_Init (coverage: 144 of 144 read bytes); ...
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (roms/jp_rev_a/experiments/l3_names/); L3
+; relabel: loaded here by Mode06_State00_Init (coverage: 144 of 144 read ...
 Gfx_12_49A0_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_49A0_Mode06_State00_Init.2bpp" ; $49A0, 144 bytes
 ; C: loaded by Vram_CopyFromBank at 03:78EB: Gfx $E0 bytes to $8A30 (this build's trace)
 Gfx_12_4A30_LinkMenu_LoadTilesSelected::
     INCBIN "data/bank_12/Gfx_12_4A30_LinkMenu_LoadTilesSelected.2bpp" ; $4A30, 16 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesDeselected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (tcrf_check/assets/l3_names/); L3 relabel:
-; loaded here by Mode06_State00_Init (coverage: 208 of 208 read bytes); ...
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 1B (roms/jp_rev_a/experiments/l3_names/); L3
+; relabel: loaded here by Mode06_State00_Init (coverage: 208 of 208 read ...
 Gfx_12_4A40_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4A40_Mode06_State00_Init.2bpp" ; $4A40, 208 bytes
 ; C: loaded by Vram_CopyFromBank at 03:78DB: Gfx $A0 bytes to $8990 (this build's trace)
 Gfx_12_4B10_LinkMenu_LoadTilesSelected::
     INCBIN "data/bank_12/Gfx_12_4B10_LinkMenu_LoadTilesSelected.2bpp" ; $4B10, 32 bytes
 ; C: far pointer loaded by LinkMenu_LoadTilesSelected (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (tcrf_check/assets/l3_names/); L3 relabel:
-; loaded here by Mode06_State00_Init (coverage: 128 of 128 read bytes); the ...
+; 2026-10-26: read in BGB in 9 replay(s) of the organic corpus, modes 06 0E (roms/jp_rev_a/experiments/l3_names/); L3
+; relabel: loaded here by Mode06_State00_Init (coverage: 128 of 128 read ...
 Gfx_12_4B30_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_4B30_Mode06_State00_Init.2bpp" ; $4B30, 128 bytes
 ; C: loaded by Vram_CopyFromBank at 03:7912: Gfx $20 bytes to $8A30 (this build's trace)
@@ -53,7 +53,7 @@ Gfx_12_4BB0_LinkMenu_LoadTilesDeselected::
 Gfx_12_4E40_LinkMenu_LoadTilesDeselected::
     INCBIN "data/bank_12/Gfx_12_4E40_LinkMenu_LoadTilesDeselected.2bpp" ; $4E40, 448 bytes
 ; C: copied to VRAM/WRAM by Mode06_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 9 replay(s) of the organic corpus, modes 06 (tcrf_check/assets/l3_names/)
+; in 9 replay(s) of the organic corpus, modes 06 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_12_5000_Mode06_State00_Init::
     INCBIN "data/bank_12/Gfx_12_5000_Mode06_State00_Init.2bpp" ; $5000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode21_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: not reached
@@ -72,13 +72,13 @@ Gfx_12_6000_Mode21_State00_Init::
 Gfx_12_6800_Mode21_State00_Init::
     INCBIN "data/bank_12/Gfx_12_6800_Mode21_State00_Init.2bpp" ; $6800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode03_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 23 replay(s) of the organic corpus, modes 03 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode03_State00_Init reads them in this build (coverage call site or loader ...
+; in 23 replay(s) of the organic corpus, modes 03 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode03_State00_Init reads them in this build (coverage call site or ...
 Gfx_12_7000_Mode03_State00_Init::
     INCBIN "data/bank_12/Gfx_12_7000_Mode03_State00_Init.2bpp" ; $7000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode03_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 23 replay(s) of the organic corpus, modes 03 (tcrf_check/assets/l3_names/); C: the bytes changed but
-; Mode03_State00_Init reads them in this build (coverage call site or loader ...
+; in 23 replay(s) of the organic corpus, modes 03 (roms/jp_rev_a/experiments/l3_names/); C: the bytes changed but
+; Mode03_State00_Init reads them in this build (coverage call site or ...
 Gfx_12_7800_Mode03_State00_Init::
     db $10, $1f, $10, $1f, $0f, $0f, $03, $07, $1f, $0f, $1f, $1f, $1f, $3f, $7f, $3f
     db $0b, $f1, $2f, $ce, $70, $bf, $c0, $7f, $80, $ff, $06, $f9, $06, $f9, $00, $ff

@@ -9,7 +9,7 @@ Blocks (file offsets; Data_injector.m uses 1-based Matlab indices, converted her
   default      Album B unlock: the 18 counter bytes $10BB-$10CC set to $99 in the settings block $1000-$10D6 and in its echo $10D9-$11AF (+$D9),
                each with its checksum (sum + $4E, xor ^ $54 over the 215 bytes ending in 'Magic', stored at $10D7-$10D8 / $11B0-$11B1; sram_analyze.blk_ok), and the CoroCoro tag
                $1FFD-$1FFF = 56 56 53 ("VVS").  These two are what the unlocking saves of the project carry: unl_CE10238211 (kept as
-               tcrf_check/assets/bgb_printer/print_features/unl_CE10238211_tagtest.sav) differs from coverage/saves/CE10238211.sav in exactly
+               roms/jp_rev_a/experiments/bgb_printer/print_features/unl_CE10238211_tagtest.sav) differs from coverage/saves/CE10238211.sav in exactly
                these bytes, apart from the owner / photo fields of its own tag test at $19F00-$19FB7.
   --hello-kitty  the Hello Kitty Pocket Camera animation unlock of Data_injector.m: 23 bytes at $1000-$1016 (13 x $99, 60 00 00 00 00, "Magic"),
                main copy only ("no echo on this one").  On every other camera $1000-$102E is the slide-show list (docs §16.19), so this

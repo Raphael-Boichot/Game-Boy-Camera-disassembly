@@ -96,7 +96,7 @@ jr_002_4037:
 
 
 ; C: Z if one of the two copies (AF55 / AFB1) of the tag block carries Magic. L3 pass 2026-10-26: executed in BGB in
-; 203 replay(s) of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; 203 replay(s) of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_CheckTagMagic::
     ld hl, $af55                                  ; $405E
     call Sram_CompareMagicAt                      ; $4061
@@ -105,7 +105,7 @@ Sram_CheckTagMagic::
     ld hl, $afb1                                  ; $4065
 
 ; C: compares 5 bytes at HL+DE with the Magic string. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the
-; organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_CompareMagicAt::
     push de                                       ; $4068
     add hl, de                                    ; $4069
@@ -128,7 +128,7 @@ jr_002_4078:
 
 
 ; C: Z if one of the two copies (B0D2 / B1AB) carries Magic. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of
-; the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_CheckSettingsMagic::
     ld hl, $b0d2                                  ; $407A
     call Sram_CompareMagic                        ; $407D
@@ -137,7 +137,7 @@ Sram_CheckSettingsMagic::
     ld hl, $b1ab                                  ; $4081
 
 ; C: compares 5 bytes at HL with the Magic string. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic
-; corpus, modes 00 (tcrf_check/assets/l3_names/)
+; corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_CompareMagic::
     ld de, Sram_MagicString                       ; $4084
     ld c, $05                                     ; $4087
@@ -157,7 +157,7 @@ jr_002_4092:
 
 
 ; C: Z if one of the two copies (B1D0 / B1F5) carries Magic. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of
-; the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_CheckVectorMagic::
     ld hl, $b1d0                                  ; $4093
     call Sram_CompareMagic_B                      ; $4096
@@ -166,7 +166,7 @@ Sram_CheckVectorMagic::
     ld hl, $b1f5                                  ; $409A
 
 ; C: same compare (second copy). L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Sram_CompareMagic_B::
     ld de, Sram_MagicString                       ; $409D
     ld c, $05                                     ; $40A0
@@ -186,7 +186,7 @@ jr_002_40ab:
 
 
 ; C: Z if one of the two copies (AFCA / AFE3) carries Magic. L3 pass 2026-10-26: executed in BGB in 203 replay(s) of
-; the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_CheckOwnerMagic::
     ld hl, $afca                                  ; $40AC
     call Sram_CompareMagic_C                      ; $40AF
@@ -195,7 +195,7 @@ Sram_CheckOwnerMagic::
     ld hl, $afe3                                  ; $40B3
 
 ; C: same compare (third copy). L3 pass 2026-10-26: executed in BGB in 203 replay(s) of the organic corpus, modes 00
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Sram_CompareMagic_C::
     ld de, Sram_MagicString                       ; $40B6
     ld c, $05                                     ; $40B9
@@ -481,7 +481,7 @@ jr_002_41d9:
 
 
 ; C: auto: 90 bytes, bytes; referenced by Sram_FormatSettingsBlocks. L3 pass 2026-10-26: read in BGB in 69 replay(s)
-; of the organic corpus, modes 00 (tcrf_check/assets/l3_names/)
+; of the organic corpus, modes 00 (roms/jp_rev_a/experiments/l3_names/)
 Sram_FormatSettingsBlocks_Tbl41F3::
     db $09, $8f, $00, $00, $0d, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $55, $55, $55, $55, $00, $00, $00, $00, $ff, $ff, $ff, $ff
@@ -1509,12 +1509,12 @@ jr_002_47b1:
 
 
 ; C: auto: 3 bytes, bytes; referenced by Photo_SaveShot_Far. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the
-; organic corpus, modes 14 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 14 (roms/jp_rev_a/experiments/l3_names/)
 Photo_SaveShot_Far_Tbl47CA::
     db $00, $c0, $00
 
 ; C: copies C bytes from DE to HL. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Mem_CopyShort::
     ld a, [de]                                    ; $47CD
     ld [hl+], a                                   ; $47CE
@@ -1526,7 +1526,7 @@ Mem_CopyShort::
 
 
 ; C: writes C zero bytes at HL. L3 pass 2026-10-26: executed in BGB in 2 replay(s) of the organic corpus, modes 14
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Mem_ZeroShort::
     xor a                                         ; $47D4
 
@@ -1540,7 +1540,7 @@ jr_002_47d5:
 
 
 ; C: rewrites the image + thumbnail of an existing slot. L3 pass 2026-10-26: executed in BGB in 1 replay(s) of the
-; organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Photo_StoreImage_Far::
     cp $1e                                        ; $47DB
     jp nc, Far_Call_Return                        ; $47DD
@@ -1601,7 +1601,7 @@ jr_002_4832:
 
 
 ; C: auto: 3 bytes, bytes; referenced by Photo_StoreImage_Far. L3 pass 2026-10-26: read in BGB in 1 replay(s) of the
-; organic corpus, modes 10 (tcrf_check/assets/l3_names/)
+; organic corpus, modes 10 (roms/jp_rev_a/experiments/l3_names/)
 Photo_StoreImage_Far_Tbl4846::
     db $00, $c0, $00
 
@@ -2642,8 +2642,8 @@ jr_002_4db7:
 
 
 ; C: auto: 8 bytes, bytes; referenced by AlbumB_CheckGate. L3 pass 2026-10-26: read in BGB in 6 replay(s) of the
-; organic corpus, modes 18 (tcrf_check/assets/l3_names/); L3 owner: named after its reader AlbumB_CheckGate, which
-; reads it here; Gold: bytes equal to the international block 02:4DB7 (L3, ...
+; organic corpus, modes 18 (roms/jp_rev_a/experiments/l3_names/); L3 owner: named after its reader AlbumB_CheckGate,
+; which reads it here; Gold: bytes equal to the international block 02:4DB7 ...
 AlbumB_CheckGate_Tbl4DCE::
     db $01, $00, $02, $00, $04, $00, $08, $00
 
@@ -3278,7 +3278,7 @@ jr_002_512f:
 
 
 ; C: loads the eight thumbnails of a page (AE00 area of the slots). L3 pass 2026-10-26: executed in BGB in the
-; scenarios link_exchange 0E:03 (tcrf_check/assets/l3_names/scen_hits*.csv)
+; scenarios link_exchange 0E:03 (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Album_LoadThumbPage_Far::
     and $18                                       ; $5133
     ld c, a                                       ; $5135

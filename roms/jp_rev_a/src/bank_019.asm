@@ -5,46 +5,46 @@
 SECTION "ROM Bank $019", ROMX[$4000], BANK[$19]
 
 ; C: copied to VRAM/WRAM by Mode0E_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 2 replay(s) of the organic corpus, modes 0E (tcrf_check/assets/l3_names/)
+; in 2 replay(s) of the organic corpus, modes 0E (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_4000_Mode0E_State00_Init::
     INCBIN "data/bank_19/Gfx_19_4000_Mode0E_State00_Init.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode0E_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 2 replay(s) of the organic corpus, modes 0E (tcrf_check/assets/l3_names/)
+; in 2 replay(s) of the organic corpus, modes 0E (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_4800_Mode0E_State00_Init::
     INCBIN "data/bank_19/Gfx_19_4800_Mode0E_State00_Init.2bpp" ; $4800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode0E_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 2 replay(s) of the organic corpus, modes 0E (tcrf_check/assets/l3_names/)
+; in 2 replay(s) of the organic corpus, modes 0E (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_5000_Mode0E_State00_Init::
     INCBIN "data/bank_19/Gfx_19_5000_Mode0E_State00_Init.2bpp" ; $5000, 608 bytes
 ; C: far pointer loaded by Mode08_State13_CreditsPageA (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes 08 0E (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 6 replay(s) of the organic corpus, modes 08 0E (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_5260_Mode08_State13_CreditsPageA::
     INCBIN "data/bank_19/Gfx_19_5260_Mode08_State13_CreditsPageA.2bpp" ; $5260, 1440 bytes
 ; C: copied to VRAM/WRAM by Mode08_State13_CreditsPageA (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; read in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_5260_Mode08_State13_CreditsPageA_Part5800::
     INCBIN "data/bank_19/Gfx_19_5260_Mode08_State13_CreditsPageA_Part5800.2bpp" ; $5800, 608 bytes
 ; C: copied to VRAM/WRAM by Mode08_State13_CreditsPageA (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; read in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_5A60_Mode08_State13_CreditsPageA::
     INCBIN "data/bank_19/Gfx_19_5A60_Mode08_State13_CreditsPageA.2bpp" ; $5A60, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_State13_CreditsPageA (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26:
-; read in BGB in 4 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; read in BGB in 4 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_19_6260_Mode08_State13_CreditsPageA::
     INCBIN "data/bank_19/Gfx_19_6260_Mode08_State13_CreditsPageA.2bpp" ; $6260, 512 bytes
 ; C: copied to VRAM/WRAM by Mode21_State0B_ResultSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
 ; in BGB in the scenarios run_race_fast 21:0B, run_race_result 21:0B, run_race_slow 21:0B
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_6460_Mode21_State0B_ResultSetup::
     INCBIN "data/bank_19/Gfx_19_6460_Mode21_State0B_ResultSetup.2bpp" ; $6460, 256 bytes
 ; C: copied to VRAM/WRAM by Mode21_State0B_ResultSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
 ; in BGB in the scenarios run_race_fast 21:0B, run_race_result 21:0B, run_race_slow 21:0B
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_6560_Mode21_State0B_ResultSetup::
     INCBIN "data/bank_19/Gfx_19_6560_Mode21_State0B_ResultSetup.2bpp" ; $6560, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode21_State0B_ResultSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read
 ; in BGB in the scenarios run_race_fast 21:0B, run_race_result 21:0B, run_race_slow 21:0B
-; (tcrf_check/assets/l3_names/scen_hits*.csv)
+; (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_6D60_Mode21_State0B_ResultSetup::
     INCBIN "data/bank_19/Gfx_19_6D60_Mode21_State0B_ResultSetup.2bpp" ; $6D60, 1024 bytes
 ; C: copied to VRAM/WRAM by Run_PodiumSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: no organic run
@@ -73,23 +73,23 @@ Gfx_19_7160_Run_PodiumSetup_Part7206::
 Gfx_19_7160_Run_PodiumSetup_Part7207::
     INCBIN "data/bank_19/Gfx_19_7160_Run_PodiumSetup_Part7207.bin" ; $7207, 265 bytes
 ; C: copied to VRAM/WRAM by Run_PodiumSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in
-; the scenarios run_race_slow 21:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; the scenarios run_race_slow 21:0B (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_7310_Run_PodiumSetup::
     INCBIN "data/bank_19/Gfx_19_7310_Run_PodiumSetup.bin" ; $7310, 4 bytes
 ; C: bytes of a 2bpp tile block that no copy reads (organic readers on both sides). L3 pass 2026-10-26: read in BGB in
-; the scenarios run_race_slow 21:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; the scenarios run_race_slow 21:0B (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_7310_Run_PodiumSetup_Part7314::
     INCBIN "data/bank_19/Gfx_19_7310_Run_PodiumSetup_Part7314.bin" ; $7314, 3 bytes
 ; C: copied to VRAM/WRAM by Run_PodiumSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in
-; the scenarios run_race_slow 21:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; the scenarios run_race_slow 21:0B (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_7310_Run_PodiumSetup_Part7317::
     INCBIN "data/bank_19/Gfx_19_7310_Run_PodiumSetup_Part7317.bin" ; $7317, 33 bytes
 ; C: bytes of a 2bpp tile block that no copy reads (organic readers on both sides). L3 pass 2026-10-26: read in BGB in
-; the scenarios run_race_slow 21:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; the scenarios run_race_slow 21:0B (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_7310_Run_PodiumSetup_Part7338::
     INCBIN "data/bank_19/Gfx_19_7310_Run_PodiumSetup_Part7338.bin" ; $7338, 8 bytes
 ; C: copied to VRAM/WRAM by Run_PodiumSetup (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB in
-; the scenarios run_race_slow 21:0B (tcrf_check/assets/l3_names/scen_hits*.csv)
+; the scenarios run_race_slow 21:0B (roms/jp_rev_a/experiments/l3_names/scen_hits*.csv)
 Gfx_19_7310_Run_PodiumSetup_Part7340::
     db $87, $fc, $87, $fc, $8f, $f8, $8f, $fb, $9d, $f6, $9f, $f4, $be, $e9, $b4, $fb
     db $e6, $1d, $fb, $07, $ff, $7e, $ff, $80, $ff, $00, $83, $7c, $00, $ff, $7c, $ff
@@ -228,7 +228,7 @@ Gfx_19_77E0_Mode0F_State0A_EraseAll::
     ds $95, $00
 
 ; C: target 4 of the {lo,hi,bank} table 07:53A6; extent not known: runs to the next pointer or asset. L3 pass
-; 2026-10-26: read in BGB in 34 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 34 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 Src_19_7E60_Tbl53A6_4::
     INCBIN "data/bank_19/Src_19_7E60_Tbl53A6_4.bin" ; $7E60, 384 bytes
 ; C: the 8 x 8 1-bit mask of the large pen, pattern 0: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this

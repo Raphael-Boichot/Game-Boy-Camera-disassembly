@@ -1,11 +1,21 @@
-# tcrf_check: TCRF documented content checked against the Japanese Pocket Camera ROM
+# tcrf_check: what TCRF documents, checked against the ROMs
 
 AI slop, do not trust until human validation.
 
-**No TCRF content is kept here** (owner, 2026-11-12): the TCRF pages and their revisions are linked in [`TCRF_SOURCES.md`](TCRF_SOURCES.md); `tcrf_documented.csv` lists which unused blocks of each ROM a TCRF page shows (with its section), read by `tools/unused_table.py`.
+Only TCRF material is kept here (owner, 2026-11-14): the checklist of what the TCRF pages document, the pictures that answer each of
+its rows, and the tools that compare a ROM with a TCRF picture. Everything else that used to sit here moved on 2026-11-14:
+the Japanese-ROM experiments to [`roms/jp_rev_a/experiments/`](../roms/jp_rev_a/experiments/), their scripts to
+[`tools/jp/`](../tools/jp/), the two map tools (`rom_layout_map.py`, `rom_reach_map.py`, `rom_reach_classes.py`) to [`tools/`](../tools/),
+and the sensor material (the real calibration saves, the BGB sensor recordings) to [`sensor/`](../sensor/).
 
-* `TCRF_CHECKLIST.md` / `.csv`: 54 items (unlock-gated content, TCRF "unused" sections, Japanese side of "Regional Differences"), each with ROM location, coverage computed from `coverage/v8/merged_v8/cov.npz`, finding, evidence tag (C traced, I inferred, ? not located) and asset files. The reasoning is in docs §15.
-* `assets/`: everything retrieved (Album B, wild frames, frames, stamps, 68 composed screens, hot-spot icons, located unused graphics, the two confirmation runs). Added with docs §16: `assets/bgb/` (`results/*.txt` of the BGB checks and the BGB-vs-core sweep tables; the demo files, state files and per-run screenshots are not kept), `assets/atlas2/{JP,INTL,INTL2}/result.json` (what each joypad path reached on the Japanese ROM, the same inputs on the international ROM, and a native exploration of the international ROM; the screenshots are not kept), `assets/intl_compare/` (Japanese / international pairs, the mirrored-main-menu probe, Album B pages with and without the CoroCoro tag, `boot_flags.txt`, `menus_not_in_guide.png`).
-* `BGB_TEST_SHEET.md`: what was run in BGB (8 checks, results).
-* `shots/`: emulator screenshots (credits, CoroCoro screen, wild frames, album, SGB border, stamps).
-* `tools/`: the scripts (one copy of each). They were run from a working tree whose layout was `package/coverage/src` (here `coverage/src`), `saves/`, `unlock_runs/`; `paths.py` (2026-11-12) finds the core and the Japanese trace in the repository or in that old tree, `GBCAM_SAVES` points to the saves, `GBCAM_ROM` overrides the ROM. Rebuild the native core from `coverage/src` first (see `coverage/README.md`); `coverage/src/gbcov8.c` is the core used for v8. The two ROM maps are drawn by `rom_reach_map.py` (what the runs reached) and `rom_layout_map.py` (what each byte is), which share `rom_reach_classes.py`.
+**No TCRF content is kept here** (owner, 2026-11-12): the TCRF pages and their revisions are linked in [`TCRF_SOURCES.md`](TCRF_SOURCES.md).
+
+* `TCRF_CHECKLIST.md` / `.csv`: the TCRF items (A unlock-gated content, B TCRF "unused" sections, C the Japanese side of "Regional
+  Differences", D the prototype page), each with ROM location, coverage, finding, evidence tag (C, I, ?) and the files that answer it.
+  Generator: `tools/tcrf_checklist.py`. The reasoning is in docs §15 and §20.
+* `tcrf_documented.csv`: which unused blocks of each ROM a TCRF page shows (with its section), read by `tools/unused_table.py`.
+* `assets/`: only the files a checklist row cites (Album B, wild frames, frames and stamp sheets, hot-spot icons, the composed screens and
+  located unused graphics of the B and C rows, the two hidden pictures of docs §20). A row that cites a file elsewhere names its path.
+* `shots/`: emulator screenshots of the checklist rows (credits, CoroCoro screens, wild frames, album, SGB border, stamps).
+* `tools/`: `tcrf_checklist.py`, and the three tools that compare a ROM with a picture saved from a TCRF page
+  (`tcrf_exact_match.py`, `tcrf_cell_rebuild.py`, `run_star_pair.py`).

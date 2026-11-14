@@ -5,15 +5,15 @@
 SECTION "ROM Bank $013", ROMX[$4000], BANK[$13]
 
 ; C: copied to VRAM/WRAM by Mode02_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 35 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; in 35 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_4000_Mode02_State00_Init::
     INCBIN "data/bank_13/Gfx_13_4000_Mode02_State00_Init.2bpp" ; $4000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode02_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 35 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; in 35 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_4800_Mode02_State00_Init::
     INCBIN "data/bank_13/Gfx_13_4800_Mode02_State00_Init.2bpp" ; $4800, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode02_State00_Init (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 35 replay(s) of the organic corpus, modes 02 (tcrf_check/assets/l3_names/)
+; in 35 replay(s) of the organic corpus, modes 02 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_5000_Mode02_State00_Init::
     INCBIN "data/bank_13/Gfx_13_5000_Mode02_State00_Init.2bpp" ; $5000, 2048 bytes
 ; C: copied to VRAM/WRAM by PhotoPicker_Init, PhotoPicker_LoadPageTabsFor, PhotoPicker_LoadPageTabs2For,
@@ -27,11 +27,13 @@ Gfx_13_5800_Mode0F_State00_Init::
 Gfx_13_5830_PhotoPicker_LoadPageTabsFor::
     INCBIN "data/bank_13/Gfx_13_5830_PhotoPicker_LoadPageTabsFor.2bpp" ; $5830, 80 bytes
 ; C: far pointer loaded by Mode0F_State0A_EraseAll (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 83 replay(s) of the organic corpus, modes 0A 0F 10 11 1A 1C (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 83 replay(s) of the organic corpus, modes 0A 0F 10 11 1A 1C
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_5880_Mode0F_State0A_EraseAll::
     INCBIN "data/bank_13/Gfx_13_5880_Mode0F_State0A_EraseAll.2bpp" ; $5880, 208 bytes
 ; C: far pointer loaded by Mode0F_DrawCopyCount (ld a,BANK; ld hl,ADDR; call banked copy/far call). L3 pass
-; 2026-10-26: read in BGB in 83 replay(s) of the organic corpus, modes 0A 0F 10 11 1A 1C (tcrf_check/assets/l3_names/)
+; 2026-10-26: read in BGB in 83 replay(s) of the organic corpus, modes 0A 0F 10 11 1A 1C
+; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_5950_Mode0F_DrawCopyCount::
     INCBIN "data/bank_13/Gfx_13_5950_Mode0F_DrawCopyCount.2bpp" ; $5950, 848 bytes
 ; C: TCRF unused hand gestures, exact match: the TCRF picture (Game_Boy_Camera_Unused_Album_Hand_Gestures.png, a 2x
@@ -41,12 +43,12 @@ Unused_TCRF_AlbumHandGestures_Gfx::
     INCBIN "data/bank_13/Unused_TCRF_AlbumHandGestures_Gfx.2bpp" ; $5CA0, 96 bytes
 ; C: continues the sheet 13:5800-67FF that the album loaders copy whole to $8000 (copy site 04:403B, 4,096 B); the
 ; label before is the TCRF hand-gesture block 13:5CA0. L3 pass 2026-10-26: read in BGB in 83 replay(s) of the organic
-; corpus, modes 0A 0F 10 11 1A 1C (tcrf_check/assets/l3_names/)
+; corpus, modes 0A 0F 10 11 1A 1C (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_5D00_Mode0F_State00_Init_Cont::
     INCBIN "data/bank_13/Gfx_13_5D00_Mode0F_State00_Init_Cont.2bpp" ; $5D00, 1792 bytes
 ; C: far pointer loaded by LinkPick_LoadPageThumbs, PhotoPicker_LoadPageThumbs (ld a,BANK; ld hl,ADDR; call banked
 ; copy/far call). L3 pass 2026-10-26: read in BGB in 83 replay(s) of the organic corpus, modes 0A 0F 10 11 1A 1C
-; (tcrf_check/assets/l3_names/)
+; (roms/jp_rev_a/experiments/l3_names/)
 Src_13_6400_PhotoPicker_LoadPageThumbs::
     INCBIN "data/bank_13/Src_13_6400_PhotoPicker_LoadPageThumbs.bin" ; $6400, 1024 bytes
 ; C: entry 0 of the {lo,hi,bank} table 04:44DC, 256 bytes each (constant pitch)
@@ -90,10 +92,10 @@ Gfx_13_6E00_Icon04_44DC::
     ds $100, $00
 
 ; C: copied to VRAM/WRAM by Mode08_CreditsReal (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 6 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in 6 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_7000_Mode08_CreditsReal::
     INCBIN "data/bank_13/Gfx_13_7000_Mode08_CreditsReal.2bpp" ; $7000, 2048 bytes
 ; C: copied to VRAM/WRAM by Mode08_CreditsReal (roms/jp_rev_a/assets/catalog_jp.csv). L3 pass 2026-10-26: read in BGB
-; in 6 replay(s) of the organic corpus, modes 08 (tcrf_check/assets/l3_names/)
+; in 6 replay(s) of the organic corpus, modes 08 (roms/jp_rev_a/experiments/l3_names/)
 Gfx_13_7800_Mode08_CreditsReal::
     INCBIN "data/bank_13/Gfx_13_7800_Mode08_CreditsReal.2bpp" ; $7800, 2048 bytes
