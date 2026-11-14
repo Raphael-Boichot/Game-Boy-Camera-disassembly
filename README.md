@@ -2,6 +2,8 @@
 
 # Game Boy Camera disassembly - the definitive version
 
+Because who else can do that ?
+
 **Levels** (`HOWTO_NEW_ROM.md` section 0; what is left for each level, and in which order: [`ROADMAP.md`](ROADMAP.md)):
 
 | ROM | L0 | L1 | L2 | L3 | L4 | L5 | L6 |
