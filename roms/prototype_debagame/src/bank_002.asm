@@ -12,17 +12,18 @@ BankNumber_02_4000::
 ; copied to VRAM by 00:06C0, 00:0797, 00:094E, 00:0A85, 00:0D57, 00:19C9
 Gfx_02_4001_FNTOOE2::
     INCBIN "data/bank_02/Gfx_02_4001_FNTOOE2.2bpp" ; $4001, 736 bytes
-; I: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: the arrow-on-a-string cursor, top row (tiles $2E-$2F
-; of the sheet Gfx_02_4001_FNTOOE2; bottom row at 02:43E1); exact match of the TCRF image; copied to VRAM with the
-; sheet in the L2 runs, but no map or sprite of this build is known to ...
+; C: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: the arrow-on-a-string cursor, top row (tiles $2E-$2F
+; of the sheet Gfx_02_4001_FNTOOE2; bottom row at 02:43E1); exact match of the TCRF image; BGB (roadmap step 12,
+; 2026-11-15, tools/proto_bgb_tiles.py, trace/bgb_tiles_proto.csv): on every ...
 Unused_TCRF_ArrowCursor_TopRow_Gfx::
     INCBIN "data/bank_02/Unused_TCRF_ArrowCursor_TopRow_Gfx.2bpp" ; $42E1, 32 bytes
 ; C: the sheet Gfx_02_4001_FNTOOE2 again after the cursor top row (the Japanese convention for the tiles around an
 ; unused row: Gfx_BB_AAAA_<sheet>_TilesXXtoYY)
 Gfx_02_4301_FNTOOE2_Tiles30to3D::
     INCBIN "data/bank_02/Gfx_02_4301_FNTOOE2_Tiles30to3D.2bpp" ; $4301, 224 bytes
-; I: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: the arrow-on-a-string cursor, bottom row (tiles
-; $3E-$3F of Gfx_02_4001_FNTOOE2; top row at 02:42E1)
+; C: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: the arrow-on-a-string cursor, bottom row (tiles
+; $3E-$3F of Gfx_02_4001_FNTOOE2; top row at 02:42E1); BGB (roadmap step 12, 2026-11-15, tools/proto_bgb_tiles.py,
+; trace/bgb_tiles_proto.csv): on every screen of screens/explore.csv the sheet ...
 Unused_TCRF_ArrowCursor_BottomRow_Gfx::
     INCBIN "data/bank_02/Unused_TCRF_ArrowCursor_BottomRow_Gfx.2bpp" ; $43E1, 32 bytes
 ; C: the sheet Gfx_02_4001_FNTOOE2 again after the cursor bottom row, to its end

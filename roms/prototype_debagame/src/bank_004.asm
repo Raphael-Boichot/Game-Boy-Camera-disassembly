@@ -35,16 +35,19 @@ BitCount_Table::
 ; picture: I)
 BitReverse_Table::
     INCBIN "data/bank_04/BitReverse_Table.bin" ; $4200, 256 bytes
-; I: 256-byte table (0 for n < $10, then 3, 12 ... by ranges), read by ImageCopy_Mode06 with BitDouble_Table in the L2
-; runs; role not decoded
-Zoom_TableA::
-    INCBIN "data/bank_04/Zoom_TableA.bin" ; $4300, 256 bytes
-; C: 256-byte table that doubles each bit of a nibble ($01 -> $03, $02 -> $0C ...: 4 pixels -> 8), read by
-; ImageCopy_Mode06 in the L2 runs (a 2x zoom: I)
+; C: 256-byte table: entry n is the high nibble of n with each bit doubled (n = $10 -> $03, $20 -> $0C ...; 4 pixels
+; -> 8), checked on all 256 bytes (roadmap step 12, 2026-11-15); read by ImageCopy_Mode06 with BitDouble_Table (the
+; low nibble) in the L2 runs: the 2x horizontal zoom (was Zoom_TableA)
+BitDoubleHigh_Table::
+    INCBIN "data/bank_04/BitDoubleHigh_Table.bin" ; $4300, 256 bytes
+; C: 256-byte table: entry n is the low nibble of n with each bit doubled ($01 -> $03, $02 -> $0C ...; 4 pixels -> 8),
+; checked on all 256 bytes; read by ImageCopy_Mode06 with BitDoubleHigh_Table (the high nibble) in the L2 runs: the 2x
+; zoom
 BitDouble_Table::
     INCBIN "data/bank_04/BitDouble_Table.bin" ; $4400, 256 bytes
-; I: 256-byte table keeping every other bit (00 00 01 01 00 00 01 01 02 02 03 03 ...), read by ImageCopy_Mode08 in the
-; L2 runs (a reduction: I)
+; C: 256-byte table: entry n packs bits 1, 3, 5 and 7 of n into bits 0-3 (00 00 01 01 00 00 01 01 02 02 03 03 ...),
+; checked on all 256 bytes (roadmap step 12, 2026-11-15); read by ImageCopy_Mode08 in the L2 runs: every other pixel
+; kept, a 1/2 reduction
 HalfBits_Table::
     db $00, $00, $01, $01, $00, $00, $01, $01, $02, $02, $03, $03, $02, $02, $03, $03
     db $00, $00, $01, $01, $00, $00, $01, $01, $02, $02, $03, $03, $02, $02, $03, $03

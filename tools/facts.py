@@ -17,7 +17,8 @@ Keys (TAG = jp, us, gold, kitty, proto):
   TAG.never_run          bytes of trace/red_TAG.csv (red + purple: the code no run executed), kitty and proto; TAG.never_run_pieces
   TAG.redclass.CLASS     bytes per way in of trace/red_TAG.csv (GATE, BEHIND, TABLE, FORCED, HAND, VECTOR)
   TAG.verdict.CLASS      bytes per verdict class of trace/red_verdicts_TAG.csv (kitty, proto); TAG.unverdicted: never-run pieces with no verdict row
-  TAG.names, TAG.names.C / I / Q   rows of disasm/sym_names_TAG.csv and per tag (Q = '?'); TAG.leftovers: its Leftover_* names
+  TAG.names, TAG.names.C / I / Q   rows of disasm/sym_names_TAG.csv and per tag (Q = '?'); TAG.leftovers: its Leftover_* names (TAG.leftovers.C / I: per tag);
+                                   TAG.settled: rows of disasm/sym_settled_unused_TAG.csv (the leftovers settled as unused, tag I, final)
   TAG.doubts, TAG.doubts.GROUP   rows of disasm/sym_unconclusive_TAG.csv, and per group where the table has one
   kitty.jpx.CATEGORY     bytes per category of trace/jp_crosscheck_kitty.csv (NO_JP, JP_RAN, JP_VERDICT, JP_RED, JP_PART)
   kitty.puzzle.bgb_games / bgb_solved / core_games / core_solved   tools/kitty_puzzle.py (trace/puzzle_{bgb,core}_kitty.csv)
@@ -77,6 +78,9 @@ def facts():
             F['%s.names.Q' % t] = 0
             for k, v in collections.Counter(r['conf'] for r in rows).items(): F['%s.names.%s' % (t, {'?': 'Q'}.get(k, k))] = v
             F['%s.leftovers' % t] = sum(r['name'].startswith('Leftover_') for r in rows)
+            for c_ in 'CI': F['%s.leftovers.%s' % (t, c_)] = sum(r['name'].startswith('Leftover_') and r['conf'] == c_ for r in rows)
+        p = os.path.join(REPO, 'roms', d, 'disasm', 'sym_settled_unused_%s.csv' % t)
+        if os.path.exists(p): F['%s.settled' % t] = sum(1 for _ in csv.DictReader(open(p, encoding='utf-8')))
     for t, d in DIRS.items():                          # the doubts lists (tools/make_doubts.py, kitty_doubts.py, proto_names.py)
         p = os.path.join(REPO, 'roms', d, 'disasm', 'sym_unconclusive_%s.csv' % t)
         if os.path.exists(p):

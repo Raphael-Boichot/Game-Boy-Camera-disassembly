@@ -242,7 +242,7 @@
 04:4001 Data_04_4001_HOI_0
 04:4100 BitCount_Table
 04:4200 BitReverse_Table
-04:4300 Zoom_TableA
+04:4300 BitDoubleHigh_Table
 04:4400 BitDouble_Table
 04:4500 HalfBits_Table
 04:4bf0 Leftover_04_4BF0

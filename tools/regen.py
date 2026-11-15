@@ -55,6 +55,12 @@ def kitty_steps(K, J):
 def proto_steps(Q):
     PD = 'roms/prototype_debagame/'
     return [
+        ('types', lambda: [PY, 'tools/proto_types.py', Q, PD + 'trace/trace_proto.json', '--types', PD + 'disasm/sym_types_proto.csv', '--sites', PD + 'assets/copy_sites_proto.csv',
+                           '--rommap', PD + 'trace/rom_map_proto.csv', '--names', PD + 'disasm/layers/sym_names_proto_auto.csv', '--symtab', PD + 'disasm/leftover_symtab_proto.csv']),   # with the hand type layer
+        ('names', lambda: [PY, 'tools/proto_names.py', '--rom', Q]),            # the name layers (the hand layer last) -> names, doubts, leftovers
+        ('sym', lambda: [PY, 'tools/sym_build.py', Q, '--names', PD + 'disasm/sym_names_proto.csv', '--types', PD + 'disasm/sym_types_proto.csv', '--trace', PD + 'trace/trace_proto.json',
+                         '--out', PD + 'pocketcamera_proto.sym', '--report']),
+        ('source', lambda: [PY, 'tools/make_source.py', '--tree', 'prototype_debagame', '--rom', Q, '--check']),   # L5: the source tree (rgbds on the PATH)
         ('red_classify', lambda: [PY, 'tools/red_classify.py', '--tag', 'proto', Q, '--out', PD + 'trace/red_proto.csv']),
         ('reach_map', lambda: [PY, 'tools/reach_map.py', '--tag', 'proto', Q, PD + 'proto_rom_reachability_map.png']),
         ('layout_map', lambda: [PY, 'tools/status_maps.py', '--proto', Q]),

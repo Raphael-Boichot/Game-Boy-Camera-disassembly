@@ -652,8 +652,9 @@ jr_000_02b8:
     ret                                           ; $02B8
 
 
-; I: developers' name: same code as DATA_MOV in the old build of table 2A at old 02BF and 35 at old 02BF (9 bytes,
-; exact match)
+; C: developers' name: same code as DATA_MOV in the old build of table 2A at old 02BF and 35 at old 02BF (9 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): copies BC bytes from HL to DE (ld a,[hl+] / ld [de],a / inc
+; de / dec bc until BC = 0): a data move
 DATA_MOV::
     ld a, [hl+]                                   ; $02B9
     ld [de], a                                    ; $02BA
@@ -666,8 +667,9 @@ DATA_MOV::
     ret                                           ; $02C1
 
 
-; I: developers' name: same code as DMACLR in the old build of table 2A at old 02C8 and 35 at old 05CF (11 bytes,
-; exact match)
+; C: developers' name: same code as DMACLR in the old build of table 2A at old 02C8 and 35 at old 05CF (11 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): xor a, then $A0 bytes of zeros at wOBJRAM (the OAM shadow, 40
+; sprites): a DMA buffer clear
 DMACLR::
     xor a                                         ; $02C2
     ld hl, wOBJRAM                                ; $02C3
@@ -736,8 +738,9 @@ INKEY::
     ret                                           ; $0316
 
 
-; I: developers' name: the same bytes as the data label DMADATA in the old build of table 2A at old 031D and 35 at old
-; 0624 (10 bytes, data match)
+; C: developers' name: the same bytes as the data label DMADATA in the old build of table 2A at old 031D and 35 at old
+; 0624 (10 bytes, data match); code read (roadmap step 12, 2026-11-15): ld a,$C0 / ldh [rDMA],a / ld a,$40 / dec a /
+; jr nz / ret, the OAM DMA routine, which the boot code copies to HRAM ...
 DMADATA::
     db $3e, $c0, $e0, $46, $3e, $40, $3d, $20, $fd, $c9
 
@@ -882,8 +885,9 @@ jr_000_0398:
     ret                                           ; $0412
 
 
-; I: developers' name: same code as OBJP_DEF_SET in the old build of table 2A at old 0419 and 35 at old 0713 (13
-; bytes, exact match)
+; C: developers' name: same code as OBJP_DEF_SET in the old build of table 2A at old 0419 and 35 at old 0713 (13
+; bytes, exact match); code read (roadmap step 12, 2026-11-15): writes $E4 to OBP0 and OBP1 and to their shadows
+; hOBP0W / hOBP1W: the default object palettes
 OBJP_DEF_SET::
     ld a, $e4                                     ; $0413
     ldh [rOBP0], a                                ; $0415
@@ -898,8 +902,8 @@ OBJP_DEF_SET::
 Bgp_SetDefault::
     ld a, $e4                                     ; $0420
 
-; I: developers' name: same code as BGP_SET in the old build of table 2A at old 0428 and 35 at old 0722 (5 bytes,
-; exact match)
+; C: developers' name: same code as BGP_SET in the old build of table 2A at old 0428 and 35 at old 0722 (5 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): writes A to BGP and to its shadow hBGPW
 BGP_SET::
     ldh [rBGP], a                                 ; $0422
     ldh [hBGPW], a                                ; $0424
@@ -911,8 +915,9 @@ BGP_SET::
 Leftover_00_0427::
     db $f0, $ae, $0f, $cd, $22, $04, $c9
 
-; I: developers' name: same code as SCYX_SET0 in the old build of table 2A at old 0434 and 35 at old 072E (15 bytes,
-; exact match)
+; C: developers' name: same code as SCYX_SET0 in the old build of table 2A at old 0434 and 35 at old 072E (15 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): writes 0 to SCY and SCX and to their shadows (hSCYW, hSCYD,
+; hSCXW)
 SCYX_SET0::
     ld a, $00                                     ; $042E
     ldh [rSCY], a                                 ; $0430
@@ -924,13 +929,15 @@ SCYX_SET0::
     ret                                           ; $043C
 
 
-; I: developers' name: the same bytes as the data label SOUND_P in the old build of table 2A at old 0443 and 35 at old
-; 073D (6 bytes, data match)
+; C: developers' name: the same bytes as the data label SOUND_P in the old build of table 2A at old 0443 and 35 at old
+; 073D (6 bytes, data match); code read (roadmap step 12, 2026-11-15): ld a,$3E / ld [$DC60],a / ret: stores sound id
+; $3E at $DC60; called by nothing in this build
 SOUND_P::
     db $3e, $3e, $ea, $60, $dc, $c9
 
-; I: developers' name: the same bytes as the data label SOUND_PE in the old build of table 2A at old 0449 and 35 at
-; old 0743 (6 bytes, data match)
+; C: developers' name: the same bytes as the data label SOUND_PE in the old build of table 2A at old 0449 and 35 at
+; old 0743 (6 bytes, data match); code read (roadmap step 12, 2026-11-15): ld a,$3F / ld [$DC60],a / ret: stores sound
+; id $3F at $DC60, the pair of SOUND_P; called by nothing in this build
 SOUND_PE::
     db $3e, $3f, $ea, $60, $dc, $c9
 
@@ -940,7 +947,8 @@ MEN_FADE_CLR::
     db $af, $ea, $a1, $c0, $ea, $a2, $c0, $ea, $a3, $c0, $ea, $a4, $c0, $ea, $a5, $c0
     db $c9
 
-; I: writes 1 to $C0A1, MEN_FADE_F in both old symbol tables (same address)
+; C: code read (roadmap step 12, 2026-11-15): writes 1 to wMEN_FADE_F ($C0A1, MEN_FADE_F in both old symbol tables),
+; which MEN_FADE_END clears: the start of the menu fade
 MenFade_Start::
     ld a, $01                                     ; $045A
     ld [wMEN_FADE_F], a                           ; $045C
@@ -989,8 +997,9 @@ jr_000_0472:
     ret                                           ; $0495
 
 
-; I: developers' name: same code as MEN_FADE_END in the old build of table 2A at old 049C and 35 at old 0796 (10
-; bytes, exact match)
+; C: developers' name: same code as MEN_FADE_END in the old build of table 2A at old 049C and 35 at old 0796 (10
+; bytes, exact match); code read (roadmap step 12, 2026-11-15): clears wMEN_FADE_F (the flag MenFade_Start sets) and
+; sets wMEN_CHG_F to 1: the end of the menu fade
 MEN_FADE_END::
     xor a                                         ; $0496
     ld [wMEN_FADE_F], a                           ; $0497
@@ -1164,8 +1173,9 @@ jr_000_0583:
     ld a, $c7                                     ; $05A5
     ldh [rLCDC], a                                ; $05A7
 
-; I: developers' name: same code as MKMENU_END in the old build of table 2A at old 05AF and 35 at old 08A9 (12 bytes,
-; exact match)
+; C: developers' name: same code as MKMENU_END in the old build of table 2A at old 05AF and 35 at old 08A9 (12 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): sets wGAME_SEQ to SEQ_MAIN_MENU and restores the ROM bank
+; pushed by the menu (hBANK_BUF, $2100): the end of a menu
 MKMENU_END::
     ld a, SEQ_MAIN_MENU                           ; $05A9
     ld [wGAME_SEQ], a                             ; $05AB
@@ -1352,7 +1362,8 @@ jr_000_0696:
 Leftover_00_06A1::
     db $c9, $c9, $c9
 
-; I: LCDCOFF, VRAM_CLR, DMACLR, then falls into CB2 (bank 2 selected for the BANK screen); called once
+; C: code read (roadmap step 12, 2026-11-15): calls LCDCOFF, VRAM_CLR and DMACLR, then goes on into the BANK screen
+; setup; one caller (call z at 00:0611)
 BankTest_InitScreen::
     call LCDCOFF                                  ; $06A4
     call VRAM_CLR                                 ; $06A7
@@ -2101,8 +2112,9 @@ jr_000_0abd:
 jr_000_0ac6:
     jr PAT_END                                    ; $0AC6
 
-; I: developers' name: same code as PAT_SET in the old build of table 2A at old 0ACE and 35 at old 0DC8 (10 bytes,
-; exact match)
+; C: developers' name: same code as PAT_SET in the old build of table 2A at old 0ACE and 35 at old 0DC8 (10 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): copies 11 bytes from HL to BC; its callers at 00:0A9D-0AC1
+; pass PAT_DEC, PAT_0F, PAT_5A, PAT_00 and PAT_FF: it sets the aging pattern ...
 PAT_SET::
     ld d, $0b                                     ; $0AC8
 
@@ -2151,28 +2163,33 @@ jr_000_0ae2:
     ret                                           ; $0B09
 
 
-; I: developers' name: the same bytes as the data label PAT_DEC in the old build of table 2A at old 0B10 and 35 at old
-; 0E0A (11 bytes, data match)
+; C: developers' name: the same bytes as the data label PAT_DEC in the old build of table 2A at old 0B10 and 35 at old
+; 0E0A (11 bytes, data match); code read (roadmap step 12, 2026-11-15): the text DECREMENT, a aging pattern name that
+; PAT_SET copies (ld hl, PAT_DEC at 00:0A9D)
 PAT_DEC::
     db $c4, $c5, $c3, $d2, $c5, $cd, $c5, $ce, $d4, $a0, $a0
 
-; I: developers' name: the same bytes as the data label PAT_0F in the old build of table 2A at old 0B1B and 35 at old
-; 0E15 (11 bytes, data match)
+; C: developers' name: the same bytes as the data label PAT_0F in the old build of table 2A at old 0B1B and 35 at old
+; 0E15 (11 bytes, data match); code read (roadmap step 12, 2026-11-15): a aging pattern name that PAT_SET copies (ld
+; hl, PAT_0F at 00:0AA6)
 PAT_0F::
     db $80, $80, $ab, $80, $80, $ab, $8f, $8f, $ab, $8f, $8f
 
-; I: developers' name: the same bytes as the data label PAT_5A in the old build of table 2A at old 0B26 and 35 at old
-; 0E20 (11 bytes, data match)
+; C: developers' name: the same bytes as the data label PAT_5A in the old build of table 2A at old 0B26 and 35 at old
+; 0E20 (11 bytes, data match); code read (roadmap step 12, 2026-11-15): a aging pattern name that PAT_SET copies (ld
+; hl, PAT_5A at 00:0AAF)
 PAT_5A::
     db $85, $85, $ab, $85, $85, $ab, $8a, $8a, $ab, $8a, $8a
 
-; I: developers' name: the same bytes as the data label PAT_00 in the old build of table 2A at old 0B31 and 35 at old
-; 0E2B (11 bytes, data match)
+; C: developers' name: the same bytes as the data label PAT_00 in the old build of table 2A at old 0B31 and 35 at old
+; 0E2B (11 bytes, data match); code read (roadmap step 12, 2026-11-15): the text ALL 00, a aging pattern name that
+; PAT_SET copies (ld hl, PAT_00 at 00:0AB8)
 PAT_00::
     db $c1, $cc, $cc, $a0, $80, $80, $a0, $a0, $a0, $a0, $a0
 
-; I: developers' name: the same bytes as the data label PAT_FF in the old build of table 2A at old 0B3C and 35 at old
-; 0E36 (11 bytes, data match)
+; C: developers' name: the same bytes as the data label PAT_FF in the old build of table 2A at old 0B3C and 35 at old
+; 0E36 (11 bytes, data match); code read (roadmap step 12, 2026-11-15): the text ALL FF, a aging pattern name that
+; PAT_SET copies (ld hl, PAT_FF at 00:0AC1)
 PAT_FF::
     db $c1, $cc, $cc, $a0, $8f, $8f, $a0, $a0, $a0, $a0, $a0
 
@@ -3336,8 +3353,9 @@ BUNKATU_HYOUJI::
     ret                                           ; $11AB
 
 
-; I: writes OAM entries from $C02C: Y $10, X $30, then the high nibble of A, and so on: the two nibbles of A as
-; sprites
+; C: code read (roadmap step 12, 2026-11-15): writes two OAM entries from $C02C (Y $10, X $30, then X + 8) whose tiles
+; are the high and low nibbles of A: the hex digits drawn as sprites ("3A" top left of screens/screen_06_00.png, MOVIE
+; TEST)
 Obj_PutHexDigits::
     ld b, a                                       ; $11AC
     ld hl, wObj_PutHexDigits_C02C                 ; $11AD
@@ -3468,8 +3486,9 @@ jr_000_1232:
     ret                                           ; $124F
 
 
-; I: developers' name: same code as HBLK in the old build of table 2A at old 1256 and 35 at old 189F (14 bytes, exact
-; match)
+; C: developers' name: same code as HBLK in the old build of table 2A at old 1256 and 35 at old 189F (14 bytes, exact
+; match); code read (roadmap step 12, 2026-11-15): the LCD STAT handler (vector $48 jumps here): writes B, C, D, E at
+; HL, sets wHBLANK_F, reti
 HBLK::
     ld a, b                                       ; $1250
     ld [hl+], a                                   ; $1251
@@ -3484,8 +3503,8 @@ HBLK::
     reti                                          ; $125D
 
 
-; I: developers' name: same code as WAIT_DONE_VBLNK in the old build of table 2A at old 1264 and 35 at old 18AD (8
-; bytes, masked match)
+; C: developers' name: same code as WAIT_DONE_VBLNK in the old build of table 2A at old 1264 and 35 at old 18AD (8
+; bytes, masked match); code read (roadmap step 12, 2026-11-15): loops until LY is 0: waits for the end of VBlank
 WAIT_DONE_VBLNK::
     ldh a, [rLY]                                  ; $125E
     cp $00                                        ; $1260
@@ -3494,16 +3513,18 @@ WAIT_DONE_VBLNK::
     ret                                           ; $1265
 
 
-; I: developers' name: same code as TIMER_INT in the old build of table 2A at old 126C and 35 at old 18B5 (5 bytes,
-; exact match)
+; C: developers' name: same code as TIMER_INT in the old build of table 2A at old 126C and 35 at old 18B5 (5 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): the timer handler (vector $50 jumps here): increments
+; wTIME_CT, reti
 TIMER_INT::
     ld hl, wTIME_CT                               ; $1266
     inc [hl]                                      ; $1269
     reti                                          ; $126A
 
 
-; I: developers' name: same code as VB_MOVIE in the old build of table 2A at old 1271 and 35 at old 18BA (10 bytes,
-; exact match)
+; C: developers' name: same code as VB_MOVIE in the old build of table 2A at old 1271 and 35 at old 18BA (10 bytes,
+; exact match); code read (roadmap step 12, 2026-11-15): calls the OAM DMA routine in HRAM ($FFB6, DMADATA) and tests
+; wDRAWING_F: VBlank work
 VB_MOVIE::
     call $ffb6                                    ; $126B
     ld a, [wDRAWING_F]                            ; $126E
@@ -3987,7 +4008,8 @@ jr_000_1521:
     ret                                           ; $1527
 
 
-; I: dispatch on R0 ($FF88) to the PUT_ routines of the settings screen (PUT_DITH_PAT, PUT_MODE ...)
+; C: code read (roadmap step 12, 2026-11-15): dispatches on hR0 ($FF88) to the PUT_ routines of the settings screen
+; (1: PUT_DITH_PAT; 2: PUT_MODE, PUT_VREF; 3: PUT_EDGE, PUT_VREF; 4: PUT_VREF ...)
 Config_PutItem::
     ldh a, [hR0]                                  ; $1528
     cp $01                                        ; $152A
@@ -4255,7 +4277,8 @@ jr_000_1699:
     ret                                           ; $16AB
 
 
-; I: prints one of two texts ($1911 table, step $1C) chosen by bit 7 of $C0FD
+; C: code read (roadmap step 12, 2026-11-15): prints one of two entries of ZERO0 ($1911, step $1C) chosen by bit 7 of
+; wB_CNTR5 ($C0FD)
 Config_PutC0FDFlag::
     ld hl, ZERO0                                  ; $16AC
     ld de, $001c                                  ; $16AF
@@ -4287,7 +4310,9 @@ jr_000_16c5:
     ret                                           ; $16D7
 
 
-; I: developers' name: same code as PUT_PALETTE in the old build of table 2A at old 16AA (14 bytes, exact match)
+; C: developers' name: same code as PUT_PALETTE in the old build of table 2A at old 16AA (14 bytes, exact match); code
+; read (roadmap step 12, 2026-11-15): writes wPALETTE + $80 and + $90 to the BG map at $9A06 / $9A26: the palette
+; setting shown as two tiles
 PUT_PALETTE::
     ld a, [wPALETTE]                              ; $16D8
     add $80                                       ; $16DB
@@ -4414,9 +4439,9 @@ DITH_P0::
     db $88, $60, $60, $98, $60, $60, $89, $60, $60, $99, $60, $60, $81, $80, $60, $91
     db $90, $60, $81, $81, $60, $91, $91, $60
 
-; I: tile rows printed by PUT_MODE (00:163B): 5 entries of $18 bytes (two rows of 12 tiles), one per camera mode (C);
-; the old table $2A names the same kind of table MODE0, next to EDGE0 / VREF0 / ZERO0 / REV0, which match by their
-; bytes (its own bytes changed)
+; C: C: positional (roadmap step 12, 2026-11-15): in table $2A MODE0 (old 17BB) lies between DITH_P0 (old 1773 ->
+; 17A1) and EDGE0 (old 1863 -> 1891), both matched by their bytes with the same shift +$2E, and 17BB + $2E = 17E9;
+; PUT_MODE (00:163B) reads it as 5 entries of $18 bytes (two rows of 12 tiles), ...
 MODE0::
     db $2e, $2f, $46, $47, $48, $49, $60, $60, $60, $60, $60, $60, $3e, $3f, $56, $57
     db $58, $59, $60, $60, $60, $60, $60, $60, $0a, $0b, $20, $21, $22, $23, $24, $25
@@ -5274,8 +5299,9 @@ jr_000_1e4b:
     ret                                           ; $1E5C
 
 
-; I: developers' name: same code as PUT_PICTURE in the old build of table 2A at old 1E32 and 35 at old 2A2E (15 bytes,
-; masked match)
+; C: developers' name: same code as PUT_PICTURE in the old build of table 2A at old 1E32 and 35 at old 2A2E (15 bytes,
+; masked match); code read (roadmap step 12, 2026-11-15): while wVRAM_ADD_H is below $96 calls H_BLANK_TX2 (the
+; H-blank picture transfer), then clears wPP_FLAG: puts the picture into VRAM
 PUT_PICTURE::
     ld a, [wVRAM_ADD_H]                           ; $1E5D
     sub $96                                       ; $1E60
@@ -8685,7 +8711,9 @@ jr_000_32af:
     ret                                           ; $32B7
 
 
-; I: developers' name: same code as N_OBJ_HYOUJI in the old build of table 2A at old 2AAA (14 bytes, exact match)
+; C: developers' name: same code as N_OBJ_HYOUJI in the old build of table 2A at old 2AAA (14 bytes, exact match);
+; code read (roadmap step 12, 2026-11-15): writes OAM entry 0 (Y $54, X $50, tile 0, attributes 0): puts one sprite on
+; screen (hyouji: display)
 N_OBJ_HYOUJI::
     ld hl, wOBJRAM                                ; $32B8
     ld a, $54                                     ; $32BB
@@ -8718,8 +8746,9 @@ N_OBJ_HYOUJI2::
     ret                                           ; $32E2
 
 
-; I: stores A in $C164 (AKARUSA in table $2A), returns when the mode in $C0F2 is 6, else selects SRAM bank 0 and ROM
-; bank 4 (ld [$4000],0; ld [$2000],4) and goes on; not read further
+; C: code read (roadmap step 12, 2026-11-15): stores A in wAKARUSA ($C164, AKARUSA in table $2A: brightness), returns
+; in mode 6, else selects SRAM bank 0 and ROM bank 4, runs SCREEN_CHECK on the picture at $A000 and compares the dark-
+; pixel count with wAKARUSA, with the exposure wB_CNTR2 / wB_CNTR3 at ...
 Akarusa_Apply::
     ld [wAKARUSA], a                              ; $32E3
     ld a, [wB_MODE]                               ; $32E6
@@ -8914,9 +8943,9 @@ jr_000_33de:
     ldh [hR0], a                                  ; $342A
     jr jr_000_33de                                ; $342C
 
-; I: adds popcount(byte) + 2 x popcount(next byte) through the table at 04:4100 into BC, eight times per call from
-; SCREEN_CHECK: the dark pixels of 2bpp rows (C); BIT_COUNT is the routine the source text left in the ROM describes
-; for this (docs §18.14), so the name is I
+; C: C: positional (roadmap step 12, 2026-11-15): in table $2A BIT_COUNT (old 319F) lies between SCREEN_CHECK (old
+; 314B -> 33DA) and SET_DITH_MATRIX (old 31B8 -> 3447), both matched by their code with the same shift +$28F, and 319F
+; + $28F = 342E; code read: adds popcount(byte) + 2 x popcount(next byte) ...
 BIT_COUNT::
     ld h, $41                                     ; $342E
     ld a, [de]                                    ; $3430
@@ -9180,8 +9209,8 @@ jr_000_34d6:
     ret                                           ; $35BC
 
 
-; I: dispatch on the low nibble of A (cp 0..n) to per-mode register settings; called by PARA_SET and the settings
-; screen
+; C: code read (roadmap step 12, 2026-11-15): dispatches on the low nibble of A (cp 0, 1, 2, 3 ...) to per-mode camera
+; register settings; called by PARA_SET (00:0F0D), Seq09_ConfigMain (00:1409, 00:1498) and CONF_SET_OBJ (00:159C)
 ParaSet_ByMode::
     ld b, a                                       ; $35BD
     and $0f                                       ; $35BE
@@ -9631,8 +9660,9 @@ ImageCopy_ModeTable::
 ; bases, three widths; docs §18.14): $3862-$3B73
 CONTRAST_ROWS::
     INCBIN "data/bank_00/CONTRAST_ROWS.bin" ; $3862, 1080 bytes
-; I: dither order pattern 0 of SET_DITH_MATRIX (table base $3C9A, 16 bytes of $08: no dither); the old table $2A has
-; NO_DITHER_PAT 16 bytes before BAYER_PAT, as here, but an all-$08 pattern is too plain to match by its bytes
+; C: C: positional (roadmap step 12, 2026-11-15): in table $2A NO_DITHER_PAT (old 37F6) is 16 bytes before BAYER_PAT
+; (old 3806 -> 3CAA, shift +$4A4, with HARF_PAT and SCREW_PAT after it at the same shift), and 37F6 + $4A4 = 3C9A;
+; code read: SET_DITH_MATRIX takes its order patterns from the table base ...
 NO_DITHER_PAT::
     db $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08
 
