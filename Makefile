@@ -1,5 +1,6 @@
 # Build from an editable source tree (L5): roms/jp_rev_a/src/ (default) or, with TREE=us_eu, roms/us_eu/src/ (the international ROM), with TREE=gold, roms/gold/src/ (the Gold edition),
-# with TREE=prototype_debagame, roms/prototype_debagame/src/ (the "DEBAGAME" prototype: no rgbfix, its header was never fixed).
+# with TREE=prototype_debagame, roms/prototype_debagame/src/ (the "DEBAGAME" prototype: no rgbfix, its header was never fixed),
+# with TREE=hello_kitty, roms/hello_kitty/src/ (Pocket Camera Hello Kitty).
 # Needs rgbds 1.0.4 (rgbasm, rgblink, rgbfix, rgbgfx) in PATH, or RGBDS=/path/to/rgbds/ (with the trailing slash).
 #   make [TREE=us_eu]         build/jp_rev_a/pocketcamera_jp.gb (build/us_eu/gbcam_us.gb)
 #   make check [TREE=us_eu]   ... and compare its md5 with the original ROM
@@ -24,6 +25,9 @@ else ifeq ($(TREE),prototype_debagame)
 ROM_MD5 := 19b50a5f67ef4f0d015e7d813370756e
 NAME    := pocketcamera_proto
 NOFIX   := 1
+else ifeq ($(TREE),hello_kitty)
+ROM_MD5 := 0a323bddc4f0159cea76cf44ed0c1a3c
+NAME    := pocketcamera_kitty
 else
 ROM_MD5 := fdcfe686cf4df461e870b6e53b2b5a8b
 NAME    := pocketcamera_jp

@@ -1,0 +1,637 @@
+bank,site,kind,operand,value,target,expression,evidence,read
+00,00:0364,num,de,$06D6,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:0517,ptr,hl,$052C,00:052C,Rng_Scaled + $1A,C: dereferenced at 00:051B (bank 00 mapped),no
+00,00:0788,ptr,bc,$69E7,05:69E7,Src_05_68D7_Mode02_TakePhotos_State01 + $110,C: dereferenced at 00:07AE (bank 05 mapped); that instruction read the target block in the runs,yes
+00,00:079D,ptr,de,$7530,23:7530,Gfx_23_7530_Mode02_TakePhotos_State00,C: dereferenced at 00:066F (bank 23 mapped),yes
+00,00:07C0,?,bc,$05E0,,,the walk ends without a use,
+00,00:07D8,ptr,bc,$69E7,05:69E7,Src_05_68D7_Mode02_TakePhotos_State01 + $110,C: dereferenced at 00:07E6 (bank 05 mapped); that instruction read the target block in the runs,yes
+00,00:086A,ptr,bc,$69E7,05:69E7,Src_05_68D7_Mode02_TakePhotos_State01 + $110,C: dereferenced at 00:0878 (bank 05 mapped),yes
+00,00:0925,ptr,de,$7530,23:7530,Gfx_23_7530_Mode02_TakePhotos_State00,C: dereferenced at 00:066F (bank 23 mapped),yes
+00,00:094D,ptr,bc,$69E7,05:69E7,Src_05_68D7_Mode02_TakePhotos_State01 + $110,C: dereferenced at 00:0973 (bank 05 mapped),yes
+00,00:0962,ptr,de,$7530,23:7530,Gfx_23_7530_Mode02_TakePhotos_State00,C: dereferenced at 00:021C (bank 23 mapped); that instruction read the target block in the runs,yes
+00,00:0985,num,bc,$05E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:099D,ptr,bc,$69E7,05:69E7,Src_05_68D7_Mode02_TakePhotos_State01 + $110,C: dereferenced at 00:09AB (bank 05 mapped),yes
+00,00:0A31,ptr,de,$7530,23:7530,Gfx_23_7530_Mode02_TakePhotos_State00,C: dereferenced at 00:021C (bank 23 mapped); that instruction read the target block in the runs,yes
+00,00:0A58,ptr,bc,$69E7,05:69E7,Src_05_68D7_Mode02_TakePhotos_State01 + $110,C: dereferenced at 00:0A63 (bank 05 mapped),yes
+00,00:0ED8,?,bc,$0280,,,stored to wPrnDataLen for later use: not followed,
+00,00:0F1B,?,bc,$0280,,,stored to wPrnDataLen for later use: not followed,
+00,00:103C,?,hl,$1014,,,stored to wPrnSrcPtr for later use: not followed,
+00,00:1052,ptr,hl,$101C,00:101C,Prn_SyncBytes + $A,C: dereferenced at 00:03A2 (bank 00 mapped),yes
+00,00:10BA,ptr,[abs],$1020,00:1020,Prn_SyncBytes + $E,C: ROM byte read by its address (bank 00 mapped),yes
+00,00:10E1,?,hl,$1030,,,stored to wPrnSrcPtr for later use: not followed,
+00,00:10EE,?,hl,$1020,,,stored to wPrnSrcPtr for later use: not followed,
+00,00:1D55,?,de,$1CD4,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+00,00:1DA4,?,de,$1D62,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+00,00:1F0B,?,bc,$7FFF,,,the walk ends without a use,
+00,00:2215,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+00,00:24B1,ptr,hl,$249D,00:249D,Print_StreamFromD3F4 + $4F,C: dereferenced at 00:24B5 (bank 00 mapped),no
+00,00:24C3,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:24CA,?,de,$0800,,,added to HL before the dereference: a bank-0 base or an offset,
+00,00:24D3,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:257A,ptr,hl,$249D,00:249D,Print_StreamFromD3F4 + $4F,C: dereferenced at 00:257E (bank 00 mapped),no
+00,00:2594,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:2653,ptr,h,$37,00:3700,HIGH(Img_PairLookupTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+00,00:2659,ptr,h,$37,00:3700,HIGH(Img_PairLookupTbl),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+00,00:2A92,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+00,00:2C75,ptr,call,$5308,0F:5308,Snd_Init,C: call target with bank 0F written to the MBC just before,yes
+00,00:2C89,ptr,call,$5337,0F:5337,Snd_Tick,C: call target with bank 0F written to the MBC just before,yes
+01,01:475B,?,bc,$1E00,,,overwritten before any use,
+01,01:4802,?,bc,$0F55,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:480D,ptr,hl,$0F00,00:0F00,Prn_SendData_0F00,C: dereferenced at 01:4714 (bank 00 mapped),yes
+01,01:4813,ptr,hl,$0F5A,00:0F5A,Prn_SendData + $DF,C: dereferenced at 01:47E5 (bank 00 mapped),no
+01,01:491E,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4931,num,bc,$2000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4944,num,bc,$0FF0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4950,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4964,num,bc,$2000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:497D,num,bc,$1FF0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4991,num,bc,$2000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:49D2,num,bc,$0FB8,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:49DA,num,bc,$0F55,,,"C: written through at 01:470B: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:49E3,ptr,hl,$0F00,00:0F00,Prn_SendData_0F00,C: dereferenced at 01:4714 (bank 00 mapped),yes
+01,01:49E9,num,hl,$0F5A,,,"C: written through at 01:472B: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:49F4,ptr,hl,$0F00,00:0F00,Prn_SendData_0F00,C: dereferenced at 00:021C (bank 00 mapped),yes
+01,01:49FA,num,hl,$0F5C,,,"C: written through at 00:021D: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:4AF5,num,bc,$0690,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4B28,num,bc,$0F00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4B34,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4B40,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4B48,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:4B7F,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4B87,?,de,$0800,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:4B90,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4B98,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:4BCF,num,bc,$0F00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4BD7,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:4C0E,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4C1B,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4C43,num,bc,$0F00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4C4E,num,bc,$0F00,,,"C: written through at 00:021D: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:4C5A,num,bc,$0F55,,,"C: written through at 01:470B: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:4C63,ptr,hl,$0F00,00:0F00,Prn_SendData_0F00,C: dereferenced at 01:4714 (bank 00 mapped),yes
+01,01:4C69,num,hl,$0F5A,,,"C: written through at 01:472B: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:4C74,ptr,hl,$0F00,00:0F00,Prn_SendData_0F00,C: dereferenced at 00:021C (bank 00 mapped),yes
+01,01:4C7A,num,hl,$0F5C,,,"C: written through at 00:021D: a RAM / VRAM address reached by adding to it, not a ROM pointer",
+01,01:4CA3,num,bc,$0690,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4CC9,num,bc,$0690,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4F04,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4F0C,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:4F44,ptr,de,$7800,17:7800,Gfx_17_7800_NeverRead,C: dereferenced at 00:0295 (bank 17 mapped),no
+01,01:4F57,?,de,$0E00,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:4F8D,num,bc,$0F00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4F99,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4FA5,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:4FAD,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
+01,01:50A5,?,hl,$7C20,,,stored to hPuzzle15_ScriptSetMapPtrPrev_FFE6 for later use: not followed,
+01,01:67FC,ptr,hl,$7C40,0C:7C40,Gfx_0C_7C40_Mode0A_NameCard_State01,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,yes
+01,01:683C,ptr,hl,$7E40,0C:7E40,Gfx_0C_7E20_Copy_DEtoHL + $20,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,no
+01,01:68A3,?,bc,$03C0,,,the walk ends without a use,
+01,01:68AE,?,bc,$0280,,,the walk ends without a use,
+01,01:68B9,?,bc,$0280,,,the walk ends without a use,
+01,01:68C4,?,bc,$08C0,,,the walk ends without a use,
+01,01:68DE,?,hl,$03C0,,,dereferenced at 00:066F; the mapped bank is unknown,
+01,01:68E8,?,bc,$0280,,,the walk ends without a use,
+01,01:68F3,?,bc,$0280,,,the walk ends without a use,
+01,01:69A4,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:69BC,ptr,bc,$69E3,01:69E3,Print_LoadItemPicture_Tbl69DD + $6,C: dereferenced at 01:69C0 (bank 01 mapped); that instruction read the target block in the runs,yes
+01,01:69C9,num,bc,$0650,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6AF6,num,bc,$2020,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6B39,ptr,de,$7350,23:7350,Gfx_23_7350_Mode02_TakePhotos_State00,C: dereferenced at 00:021C (bank 23 mapped); that instruction read the target block in the runs,yes
+01,01:6B3F,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6B47,ptr,de,$75F0,31:75F0,Gfx_31_75F0_Mode02_TakePhotos_State00,C: dereferenced at 00:021C (bank 31 mapped); that instruction read the target block in the runs,yes
+01,01:6B4D,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6B5B,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6B67,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6B96,ptr,de,$7800,20:7800,Map_20_7800_Mode06_Printing_State02,C: dereferenced at 00:021C (bank 20 mapped); that instruction read the target block in the runs,yes
+01,01:6B9E,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6BA4,ptr,de,$7A60,20:7A60,Map_20_7A60_Mode06_Printing_State02,C: dereferenced at 00:021C (bank 20 mapped); that instruction read the target block in the runs,yes
+01,01:6BAC,num,bc,$0120,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+01,01:6E7A,ptr,de,$7EF0,1B:7EF0,Gfx_1B_7EF0_Mode06_Printing_State0D,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+01,01:6F03,?,bc,$01C0,,,the walk ends without a use,
+01,01:6F09,ptr,de,$7860,20:7860,Map_20_7860_Mode06_Printing_State0F,C: dereferenced at 00:066F (bank 20 mapped); that instruction read the target block in the runs,yes
+01,01:6F17,ptr,de,$7A60,20:7A60,Map_20_7A60_Mode06_Printing_State02,C: dereferenced at 00:066F (bank 20 mapped); that instruction read the target block in the runs,yes
+01,01:7344,ptr,hl,$67D0,01:67D0,Mode1D_CopyDescriptors_Tbl6050 + $780,C: dereferenced at 01:7348 (bank 01 mapped); that instruction read the target block in the runs,yes
+01,01:74A7,ptr,de,$5800,18:5800,Gfx_18_5800_Unused_Mode18_State00,C: dereferenced at 00:066F (bank 18 mapped),no
+01,01:74AF,?,bc,$1800,,,the walk ends without a use,
+01,01:74BD,ptr,de,$7800,32:7800,Map_32_7800_Mode1B_PrintingAppleGame_State00,C: dereferenced at 00:066F (bank 32 mapped),no
+01,01:74C5,?,bc,$0240,,,the walk ends without a use,
+01,PrintFrame_Select_Tbl687D,ptr,record,$4000,1B:4000,Frame_1B_4000_Mode06_Printing_State02,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,PrintFrame_Select_Tbl687D,ptr,record,$4000,1A:4000,Frame_1A_4000_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,PrintFrame_Select_Tbl687D,ptr,record,$5800,1A:5800,Frame_1A_5800_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,PrintFrame_Select_Tbl687D,ptr,record,$5800,19:5800,Frame_19_5800_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,PrintFrame_Select_Tbl687D,ptr,record,$4000,19:4000,Frame_19_4000_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,PrintFrame_Select_Tbl687D,ptr,record,$4000,18:4000,Frame_18_4000_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,Print_LoadItemPicture_Tbl69DD,ptr,record,$6B70,2F:6B70,Gfx_2F_6B70_Mode0A_NameCard_State01,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 01:69C0, the next byte is its bank",yes
+01,Print_LoadItemPicture_Tbl69DD,ptr,record,$75E0,27:75E0,Gfx_27_75E0_Mode0A_NameCard_State03,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 01:69C0, the next byte is its bank",yes
+01,Print_LoadItemPicture_Tbl69DD,ptr,record,$6B80,26:6B80,Gfx_26_6B80_Mode0A_NameCard_State01,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 01:69C0, the next byte is its bank",yes
+01,Print_LoadItemPicture_Tbl69DD,ptr,record,$7E40,1C:7E40,Gfx_1C_7E40_Mode0A_NameCard_State03,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_1C_7E40_Mode0A_NameCard_State03; the word was read by 01:69C0, the next byte is its bank",yes
+02,02:502C,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:5076,ptr,hl,$507E,02:507E,Puzzle15_ObjFrameByD97C + $E,C: dereferenced at 02:507A (bank 02 mapped); that instruction read the target block in the runs,no
+02,02:50BD,?,de,$40A8,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:51BB,?,de,$50B8,,,the walk ends without a use,
+02,02:52E8,?,de,$5074,,,the walk ends without a use,
+02,02:54BB,?,de,$5052,,,the walk ends without a use,
+02,02:54C9,?,de,$553D,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:5B2A,?,bc,$0240,,,the walk ends without a use,
+02,02:5EA7,?,bc,$054C,,,the walk ends without a use,
+02,02:5ED2,?,de,$5F08,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:5EE0,?,de,$5F00,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:5EE8,?,bc,$054C,,,the walk ends without a use,
+02,02:5F1E,?,bc,$0666,,,the walk ends without a use,
+02,02:64B7,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:64C2,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:64EC,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:64F8,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+02,02:64FE,ptr,de,$7C00,20:7C00,Map_20_7C00_Mode06_Printing_State07,C: dereferenced at 00:066F (bank 20 mapped); that instruction read the target block in the runs,yes
+02,02:6506,?,bc,$01C0,,,the walk ends without a use,
+02,02:6B15,?,de,$6C5C,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6B66,?,hl,$0100,,,stored to hCopyReqSrcDstCnt for later use: not followed,
+02,02:6B9C,?,hl,$0100,,,stored to hCopyReqSrcDstCnt + $2 for later use: not followed,
+02,02:6C03,?,de,$6C4A,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6C8D,?,de,$6D05,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6C99,?,de,$6CFB,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6CC6,?,de,$6CF3,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6CD4,?,de,$6CE3,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6E40,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6E4E,?,de,$6E7F,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6E5C,?,de,$6E87,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:6FD6,?,de,$6F7E,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:7017,?,de,$6F96,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:710F,?,hl,$0180,,,the walk ends without a use,
+02,02:711D,?,bc,$0180,,,the walk ends without a use,
+02,02:714B,?,de,$71D2,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:7168,ptr,de,$70D8,02:70D8,ObjScript_02_7044_PrintGame_ObjCheckLanded + $94,C: dereferenced at 00:2091 (bank 02 mapped),no
+02,02:74D0,?,de,$7646,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:74DE,?,de,$7753,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:77AE,?,hl,$7777,,,the walk ends without a use,
+02,02:77D4,?,hl,$7753,,,the walk ends without a use,
+02,02:794E,?,hl,$4858,,,the walk ends without a use,
+02,02:79E5,ptr,hl,$7A6B,02:7A6B,ObjScript_02_7A35_NameCardEdit_ObjFieldTick + $36,C: dereferenced at 02:79E9 (bank 02 mapped); that instruction read the target block in the runs,yes
+02,02:7A29,ptr,hl,$7A6B,02:7A6B,ObjScript_02_7A35_NameCardEdit_ObjFieldTick + $36,C: dereferenced at 02:7A2D (bank 02 mapped),yes
+02,02:7BBB,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:7BFC,?,de,$7C0C,,,stored to hObjCmd_SetCallback_FFC7 for later use: not followed,
+02,Album_MenuItemGfx_Tbl4F7A,ptr,record,$4600,0D:4600,Gfx_0D_4600_Mode03_ViewAlbum_State02,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs; the word was read by 02:4F68,yes
+02,Album_MenuItemGfx_Tbl4F7A,ptr,record,$4700,0D:4700,Gfx_0D_4700_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs; the word was read by 02:4F68,yes
+02,Album_MenuItemGfx_Tbl4F7A,ptr,record,$4800,0D:4800,Gfx_0D_4800_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs; the word was read by 02:4F68,yes
+02,Album_MenuItemGfx_Tbl4F7A,ptr,record,$4900,0D:4900,Gfx_0D_4900_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs; the word was read by 02:4F68,yes
+02,Album_MenuItemGfx_Tbl4F7A,ptr,record,$4A00,0D:4A00,Gfx_0D_4A00_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs; the word was read by 02:4F68,yes
+02,Album_MenuItemGfx_Tbl4F7A,ptr,record,$4B00,0D:4B00,Gfx_0D_4B00_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs; the word was read by 02:4F68,yes
+02,ObjScript_02_5B35_PlayMenu_ObjItemRecord,ptr,record,$7000,1A:7000,Map_1A_7000_Mode04_PlayMenu_State00,C: dereferenced at 00:066F (bank 1A mapped); that instruction read the target block in the runs; the word was read by 02:5B24,yes
+02,ObjScript_02_5B35_PlayMenu_ObjItemRecord,ptr,record,$7800,1A:7800,Map_1A_7800_Mode04_PlayMenu_State01,C: dereferenced at 00:066F (bank 1A mapped); that instruction read the target block in the runs; the word was read by 02:5B24,yes
+02,ObjScript_02_5B35_PlayMenu_ObjItemRecord,ptr,record,$7C00,1A:7C00,Map_1A_7C00_Mode04_PlayMenu_State01,C: dereferenced at 00:066F (bank 1A mapped); that instruction read the target block in the runs; the word was read by 02:5B24,yes
+04,04:49FC,ptr,hl,$4A07,04:4A07,Cam_PopcountLevelByIndex + $F,C: dereferenced at 04:4A00 (bank 04 mapped); that instruction read the target block in the runs,no
+04,04:4A6B,num,bc,$4800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:4D05,ptr,hl,$4920,04:4920,Leftover_04_4901 + $1F,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
+04,04:4D10,ptr,hl,$4960,04:4960,Leftover_04_4944 + $1C,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
+04,04:4D1A,ptr,hl,$4920,04:4920,Leftover_04_4901 + $1F,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
+04,04:4D1F,ptr,hl,$4920,04:4920,Leftover_04_4901 + $1F,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
+04,04:5011,num,lo/hi,$7F7E,,,I: two bytes stored to wCamCalibVector; no label at that address (data),
+04,04:566D,num,hl,$48A0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5672,num,hl,$48E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+04,04:5AFC,ptr,h,$40,04:4000,HIGH(Cam_PopcountTable256),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+04,04:5B07,ptr,h,$40,04:4000,HIGH(Cam_PopcountTable256),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
+04,04:61B2,ptr,b,$46,04:4600,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+04,04:6E87,ptr,b,$46,04:4600,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+04,04:72D9,ptr,b,$46,04:4600,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+04,04:741D,ptr,b,$46,04:4600,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
+05,05:4019,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:42CD,ptr,hl,$6900,1B:6900,Gfx_1B_6900_Mode00_BootAndTitle_State08,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+05,05:42DE,ptr,de,$7C80,2E:7C80,Map_2E_7C80_Mode00_BootAndTitle_State00,C: dereferenced at 00:066F (bank 2E mapped); that instruction read the target block in the runs,yes
+05,05:42E4,?,bc,$01C0,,,the walk ends without a use,
+05,05:42EC,num,bc,$7250,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:42F5,num,bc,$5C3E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:42FE,num,bc,$5666,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4307,num,bc,$3C14,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4310,num,bc,$5310,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4319,num,bc,$6C14,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4334,num,bc,$6C8C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:433D,num,bc,$5390,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4346,num,bc,$3C8C,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4468,ptr,de,$6C50,31:6C50,Gfx_31_6C50_Mode02_TakePhotos_State01,C: dereferenced at 00:066F (bank 31 mapped); that instruction read the target block in the runs,yes
+05,05:44F6,ptr,de,$7380,31:7380,Map_31_7380_Mode02_TakePhotos_State08,C: dereferenced at 00:066F (bank 31 mapped); that instruction read the target block in the runs,yes
+05,05:45A0,num,bc,$1B19,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45A9,num,bc,$1B89,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45B2,num,bc,$4318,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45BB,num,bc,$4387,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45C4,num,bc,$6B19,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:45CD,num,bc,$6B89,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4616,num,bc,$1B19,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:461F,num,bc,$1B89,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4628,num,bc,$4318,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4631,num,bc,$4387,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:463A,num,bc,$6B19,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4643,num,bc,$6B89,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:46DF,ptr,de,$6A00,26:6A00,Map_26_6A00_Mode01_MainMenu_State05,C: dereferenced at 00:021C (bank 26 mapped),yes
+05,05:46E7,num,bc,$0180,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:47EE,ptr,hl,$4802,05:4802,Unused_TakePhotos_SetPlaneMasks + $1D,C: dereferenced at 05:47F2 (bank 05 mapped),no
+05,05:49AB,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4AAE,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4ABA,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4B07,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4B13,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4C30,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4C3C,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:4CC8,ptr,de,$7950,23:7950,Gfx_23_7950_Mode02_TakePhotos_State01,C: dereferenced at 00:066F (bank 23 mapped); that instruction read the target block in the runs,yes
+05,05:4CD0,?,bc,$0300,,,the walk ends without a use,
+05,05:4DF5,num,bc,$4850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5477,ptr,hl,$5425,05:5425,Mode02_StateTable + $16F,C: dereferenced at 05:5482 (bank 05 mapped); that instruction read the target block in the runs,yes
+05,05:54DF,?,bc,$0100,,,the walk ends without a use,
+05,05:54EA,ptr,de,$7150,23:7150,Map_23_7150_Stamp_LoadWindowMapDefault,C: dereferenced at 00:066F (bank 23 mapped); that instruction read the target block in the runs,yes
+05,05:54F0,?,bc,$0100,,,the walk ends without a use,
+05,05:5587,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5593,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:5ECC,ptr,hl,$5B66,05:5B66,Stamp_CursorUpdate_Tbl5A14 + $152,C: dereferenced at 05:5ED0 (bank 05 mapped); that instruction read the target block in the runs,yes
+05,05:5F4D,ptr,hl,$5F8E,05:5F8E,Stamp_SetShiftMasks_Tbl5F86 + $8,C: dereferenced at 05:5F51 (bank 05 mapped); that instruction read the target block in the runs,yes
+05,05:6048,num,bc,$2020,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6051,num,bc,$3800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6060,num,bc,$4850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:60DD,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:60E9,num,bc,$0180,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6152,?,bc,$0200,,,the walk ends without a use,
+05,05:625D,ptr,bc,$6189,05:6189,Mode05_StateTable + $18,C: dereferenced at 05:6274 (bank 05 mapped); that instruction read the target block in the runs,yes
+05,05:62AC,ptr,hl,$617F,05:617F,Mode05_StateTable + $E,C: dereferenced at 05:62B0 (bank 05 mapped); that instruction read the target block in the runs,yes
+05,05:64EA,?,hl,$7B40,,,the walk ends without a use,
+05,05:6505,?,hl,$7B40,,,the walk ends without a use,
+05,05:6593,ptr,hl,$7AE0,0C:7AE0,Gfx_0C_7AE0_Mode03_ViewAlbum_State0B,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
+05,05:65C1,ptr,hl,$7A40,0C:7A40,Gfx_0C_7A40_Mode03_ViewAlbum_State0B,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
+05,05:65E0,?,bc,$0140,,,added to HL before the dereference: a bank-0 base or an offset,
+05,05:65E9,ptr,de,$4000,09:4000,Font16x16_Bank09,"C: dereferenced at 00:066F (bank 09 mapped); that instruction read the target block in the runs; the listing had NameCard_MakeIdNumber (bank 05), the wrong bank",yes
+05,05:65F2,?,bc,$0280,,,the walk ends without a use,
+05,05:66A6,num,bc,$3800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6C14,num,bc,$2020,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:6D8F,?,de,$6000,,,the walk ends without a use,
+05,05:6DBE,?,de,$6E50,,,the walk ends without a use,
+05,05:6E1F,ptr,de,$7FA0,30:7FA0,Gfx_30_7FA0_Mode02_TakePhotos_State08,C: dereferenced at 00:066F (bank 30 mapped); that instruction read the target block in the runs,yes
+05,05:6E48,ptr,de,$7F40,1D:7F40,Gfx_1D_7F40_Mode0B_NameCardEdit_State0A,C: dereferenced at 00:066F (bank 1D mapped); that instruction read the target block in the runs,yes
+05,05:6E72,ptr,hl,$7840,0C:7840,Gfx_0C_4000_Mode05_StampWindow_State06 + $3840,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,yes
+05,05:6E8C,ptr,hl,$7940,0C:7940,Gfx_0C_7920_Mode02_TakePhotos_State06 + $20,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,yes
+05,05:6EE4,ptr,de,$4600,0D:4600,Gfx_0D_4600_Mode03_ViewAlbum_State02,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs,yes
+05,05:6EF2,ptr,de,$4700,0D:4700,Gfx_0D_4700_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs,yes
+05,05:6EFD,ptr,de,$4800,0D:4800,Gfx_0D_4800_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs,yes
+05,05:6F08,ptr,de,$4900,0D:4900,Gfx_0D_4900_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs,yes
+05,05:6F16,ptr,de,$4A00,0D:4A00,Gfx_0D_4A00_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs,yes
+05,05:6F21,ptr,de,$4B00,0D:4B00,Gfx_0D_4B00_Album_LoadTilesBank0D,C: dereferenced at 00:066F (bank 0D mapped); that instruction read the target block in the runs,yes
+05,05:6F2F,ptr,de,$5380,15:5380,Gfx_15_5380_Mode03_ViewAlbum_State02,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:6F3D,ptr,de,$5440,15:5440,Gfx_15_5440_Album_LoadTilesBank15,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:6F48,ptr,de,$5500,15:5500,Gfx_15_5500_Album_LoadTilesBank15,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:6F53,ptr,de,$44C0,15:44C0,Gfx_15_44C0_Album_LoadTilesBank15,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:6F61,ptr,de,$4580,15:4580,Gfx_15_4580_Album_LoadTilesBank15,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:6F6C,ptr,de,$4640,15:4640,Gfx_15_4640_Album_LoadTilesBank15,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:7034,ptr,de,$5000,15:5000,Gfx_15_5000_Mode03_ViewAlbum_State02,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:703C,?,bc,$0370,,,the walk ends without a use,
+05,05:7094,num,bc,$4438,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:7140,ptr,de,$5000,15:5000,Gfx_15_5000_Mode03_ViewAlbum_State02,C: dereferenced at 00:066F (bank 15 mapped),yes
+05,05:7148,?,bc,$0370,,,the walk ends without a use,
+05,05:71A0,num,bc,$4438,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+05,05:75C5,ptr,de,$1C27,00:1C27,ObjScript_00_1BF5_Mode03_ViewAlbum_State13 + $32,C: dereferenced at 00:2091 (bank 02 mapped),yes
+06,06:4017,num,bc,$4850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:406F,num,bc,$4850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4075,num,bc,$7070,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:41B3,num,bc,$3800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4495,num,bc,$1800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:44A7,ptr,hl,$4464,06:4464,Mode14_State01_Tbl43FF + $65,C: dereferenced at 06:44AB (bank 06 mapped); that instruction read the target block in the runs,yes
+06,06:44B4,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:44BE,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:44CC,ptr,hl,$4450,06:4450,Mode14_State01_Tbl43FF + $51,C: dereferenced at 06:44D0 (bank 06 mapped); that instruction read the target block in the runs,no
+06,06:44D3,ptr,hl,$57C0,1C:57C0,Gfx_1C_4000_Mode05_StampWindow_State06 + $17C0,C: dereferenced at 00:021C (bank 1C mapped),no
+06,06:44DC,num,bc,$0280,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:4520,ptr,hl,$4470,06:4470,Mode14_State01_Tbl43FF + $71,C: dereferenced at 06:4524 (bank 06 mapped); that instruction read the target block in the runs,yes
+06,06:4569,ptr,hl,$443C,06:443C,Mode14_State01_Tbl43FF + $3D,C: dereferenced at 06:456D (bank 06 mapped); that instruction read the target block in the runs,no
+06,06:4681,ptr,hl,$4640,06:4640,Mode14_StateTable + $4,C: dereferenced at 06:4685 (bank 06 mapped); that instruction read the target block in the runs,yes
+06,06:4691,?,bc,$0240,,,the walk ends without a use,
+06,06:4732,ptr,hl,$47B1,06:47B1,Menu06_CursorUpdate_Tbl4781 + $30,C: dereferenced at 06:4736 (bank 06 mapped); that instruction read the target block in the runs,yes
+06,06:4744,?,bc,$0240,,,the walk ends without a use,
+06,06:483F,ptr,hl,$49DC,06:49DC,NameCardEdit_PhotoCursorUpdate_Tbl49D2 + $A,C: dereferenced at 06:4843 (bank 06 mapped); that instruction read the target block in the runs,yes
+06,06:4886,ptr,hl,$49DC,06:49DC,NameCardEdit_PhotoCursorUpdate_Tbl49D2 + $A,C: dereferenced at 06:488A (bank 06 mapped),yes
+06,06:4925,ptr,hl,$49DC,06:49DC,NameCardEdit_PhotoCursorUpdate_Tbl49D2 + $A,C: dereferenced at 06:4929 (bank 06 mapped),yes
+06,06:4B46,ptr,hl,$4B87,06:4B87,Obj_KeyMaskStep + $49,C: dereferenced at 06:4B72 (bank 06 mapped); that instruction read the target block in the runs,no
+06,06:4B5E,?,de,$7FC0,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+06,06:4BCC,?,de,$7C40,,,the walk ends without a use,
+06,06:4BE7,ptr,de,$7CE0,0C:7CE0,Gfx_0C_7CE0_Mode0C_RecordBook_State01,C: dereferenced at 00:066F (bank 0C mapped),no
+06,06:4CB2,?,de,$6E50,,,the walk ends without a use,
+06,06:4D92,ptr,de,$7FA0,30:7FA0,Gfx_30_7FA0_Mode02_TakePhotos_State08,C: dereferenced at 00:066F (bank 30 mapped); that instruction read the target block in the runs,yes
+06,06:4DB7,ptr,de,$7FA0,30:7FA0,Gfx_30_7FA0_Mode02_TakePhotos_State08,C: dereferenced at 00:021C (bank 30 mapped),yes
+06,06:4DE0,ptr,de,$7F40,1D:7F40,Gfx_1D_7F40_Mode0B_NameCardEdit_State0A,C: dereferenced at 00:066F (bank 1D mapped); that instruction read the target block in the runs,yes
+06,06:4E09,ptr,de,$7F40,1D:7F40,Gfx_1D_7F40_Mode0B_NameCardEdit_State0A,C: dereferenced at 00:021C (bank 1D mapped),yes
+06,06:4F2C,ptr,de,$6000,12:6000,Gfx_12_5FE0_Mode0B_NameCardEdit_State08 + $20,C: dereferenced at 00:066F (bank 12 mapped); that instruction read the target block in the runs,yes
+06,06:4F35,?,bc,$0140,,,the walk ends without a use,
+06,06:4F49,ptr,de,$6E50,33:6E50,Gfx_33_6E50_Mode0B_NameCardEdit_State0C,C: dereferenced at 00:066F (bank 33 mapped); that instruction read the target block in the runs,yes
+06,06:4F52,?,bc,$0140,,,the walk ends without a use,
+06,06:4F5D,ptr,de,$7FA0,30:7FA0,Gfx_30_7FA0_Mode02_TakePhotos_State08,C: dereferenced at 00:066F (bank 30 mapped); that instruction read the target block in the runs,yes
+06,06:4F6E,ptr,de,$7F40,1D:7F40,Gfx_1D_7F40_Mode0B_NameCardEdit_State0A,C: dereferenced at 00:066F (bank 1D mapped); that instruction read the target block in the runs,yes
+06,06:512F,?,bc,$0160,,,the walk ends without a use,
+06,06:513D,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:526A,ptr,de,$7640,22:7640,Map_22_7640_Mode0B_NameCardEdit_State04,C: dereferenced at 00:066F (bank 22 mapped); that instruction read the target block in the runs,yes
+06,06:5270,?,bc,$0160,,,the walk ends without a use,
+06,06:5278,ptr,de,$7A40,22:7A40,Map_22_7A40_Mode0B_NameCardEdit_State03,C: dereferenced at 00:066F (bank 22 mapped); that instruction read the target block in the runs,yes
+06,06:527E,?,bc,$0100,,,the walk ends without a use,
+06,06:5286,ptr,de,$5800,1B:5800,Gfx_1B_5800_Mode0B_NameCardEdit_State04,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+06,06:5338,num,bc,$01E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5384,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5390,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:539E,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:53AA,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:53B8,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:53C4,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:5406,ptr,de,$7B40,22:7B40,Map_22_7B40_Mode0B_NameCardEdit_State08,C: dereferenced at 00:066F (bank 22 mapped); that instruction read the target block in the runs,yes
+06,06:540C,?,bc,$0100,,,the walk ends without a use,
+06,06:5414,ptr,de,$5900,1B:5900,Gfx_1B_5900_Mode0B_NameCardEdit_State08,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+06,06:545E,ptr,de,$7D40,22:7D40,Map_22_7D40_Mode0B_NameCardEdit_State0A,C: dereferenced at 00:066F (bank 22 mapped); that instruction read the target block in the runs,yes
+06,06:5464,?,bc,$0100,,,the walk ends without a use,
+06,06:546C,ptr,de,$5B00,1B:5B00,Gfx_1B_5B00_Mode0B_NameCardEdit_State0A,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+06,06:54B1,ptr,de,$7C40,22:7C40,Map_22_7C40_Mode0B_NameCardEdit_State0C,C: dereferenced at 00:066F (bank 22 mapped); that instruction read the target block in the runs,yes
+06,06:54B7,?,bc,$0100,,,the walk ends without a use,
+06,06:54BF,ptr,de,$5A00,1B:5A00,Gfx_1B_5A00_Mode0B_NameCardEdit_State0C,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+06,06:5509,ptr,de,$77A0,22:77A0,Map_22_77A0_Mode0B_NameCardEdit_State0E,C: dereferenced at 00:066F (bank 22 mapped); that instruction read the target block in the runs,yes
+06,06:550F,?,bc,$0100,,,the walk ends without a use,
+06,06:5517,ptr,de,$5C00,1B:5C00,Gfx_1B_5C00_Mode0B_NameCardEdit_State0E,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs,yes
+06,06:55F8,?,bc,$0BF9,,,added to HL before the dereference: a bank-0 base or an offset,
+06,06:5605,?,bc,$0680,,,the walk ends without a use,
+06,06:56B5,?,bc,$01A0,,,the walk ends without a use,
+06,06:5743,?,de,$5673,,,the walk ends without a use,
+06,06:5771,?,de,$5589,,,the walk ends without a use,
+06,06:584D,ptr,hl,$7D00,0C:7D00,Gfx_0C_7CE0_Mode0C_RecordBook_State01 + $20,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
+06,06:5861,ptr,de,$7920,0C:7920,Gfx_0C_7920_Mode02_TakePhotos_State06,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
+06,06:5901,ptr,hl,$7C40,0C:7C40,Gfx_0C_7C40_Mode0A_NameCard_State01,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
+06,06:5915,ptr,de,$7CE0,0C:7CE0,Gfx_0C_7CE0_Mode0C_RecordBook_State01,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,no
+06,06:5959,ptr,hl,$7C40,0C:7C40,Gfx_0C_7C40_Mode0A_NameCard_State01,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,yes
+06,06:596D,ptr,de,$7CE0,0C:7CE0,Gfx_0C_7CE0_Mode0C_RecordBook_State01,C: dereferenced at 00:066F (bank 0C mapped),no
+06,06:5D36,?,de,$5732,,,the walk ends without a use,
+06,06:5D41,?,de,$574C,,,the walk ends without a use,
+06,06:5D4C,?,de,$5779,,,the walk ends without a use,
+06,06:5D57,?,de,$57C1,,,the walk ends without a use,
+06,06:5D62,?,de,$57EE,,,the walk ends without a use,
+06,06:605E,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6112,ptr,de,$7800,17:7800,Gfx_17_7800_NeverRead,C: dereferenced at 00:021C (bank 17 mapped),no
+06,06:6117,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:613A,ptr,hl,$6129,06:6129,Exchange_RequestPage + $71,C: dereferenced at 06:613E (bank 06 mapped),no
+06,06:6143,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:616E,ptr,de,$7800,17:7800,Gfx_17_7800_NeverRead,C: dereferenced at 00:021C (bank 17 mapped),no
+06,06:6171,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6223,num,bc,$580E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:62E0,ptr,hl,$62E8,06:62E8,Mode07_State02_62E8,C: dereferenced at 06:62E4 (bank 06 mapped),yes
+06,06:6658,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,06:6892,ptr,de,$1EB4,00:1EB4,Leftover_00_1E20 + $94,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6898,ptr,de,$1E1B,00:1E1B,Gfx_00_1DAB_Mode12_SlideShow_State00 + $70,C: dereferenced at 00:2091 (bank 02 mapped),yes
+06,06:689E,ptr,de,$1E44,00:1E44,Leftover_00_1E20 + $24,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6A3B,ptr,de,$1EB4,00:1EB4,Leftover_00_1E20 + $94,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6A41,ptr,de,$1E1B,00:1E1B,Gfx_00_1DAB_Mode12_SlideShow_State00 + $70,C: dereferenced at 00:2091 (bank 02 mapped),yes
+06,06:6A47,ptr,de,$1E44,00:1E44,Leftover_00_1E20 + $24,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6B6B,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+06,KeyPrompt_LoadSounds_Tbl5F7F,ptr,record,$5DFA,06:5DFA,KeyPrompt_LoadSounds_Tbl5DFA,C: dereferenced at 06:5FA8 (bank 06 mapped); the word was read by 06:5F9E,yes
+06,KeyPrompt_LoadSounds_Tbl5F7F,ptr,record,$5EB8,06:5EB8,KeyPrompt_LoadSounds_Tbl5EB8,C: dereferenced at 06:5FA8 (bank 06 mapped); the word was read by 06:5F9E,yes
+06,Menu06_CursorUpdate_Tbl4781,ptr,record,$5D00,1B:5D00,Gfx_1B_5D00_Mode0B_NameCardEdit_State10,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs; the word was read by 06:473D,yes
+06,Mode14_State01_Tbl43FF,ptr,record,$43FF,06:43FF,Mode14_State01_Tbl43FF,C: dereferenced at 06:4577 (bank 06 mapped); the word was read by 06:456D,yes
+06,Mode14_State01_Tbl43FF,ptr,record,$4000,3F:4000,Gfx_3F_4000_Mode14_MessageScreen_State01,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 06:44AB, the next byte is its bank",yes
+06,Mode14_StateTable,ptr,record,$5D00,1B:5D00,Gfx_1B_5D00_Mode0B_NameCardEdit_State10,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs; the word was read by 06:468A,yes
+06,Mode14_StateTable,ptr,record,$5D00,1B:5D00,Gfx_1B_5D00_Mode0B_NameCardEdit_State10,C: dereferenced at 00:066F (bank 1B mapped); that instruction read the target block in the runs; the word was read by 06:468A,yes
+07,07:402E,num,bc,$3800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4174,num,bc,$3800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4513,?,de,$6D54,,,the walk ends without a use,
+07,07:452E,?,de,$6D54,,,the walk ends without a use,
+07,07:453F,?,de,$6D54,,,the walk ends without a use,
+07,07:4567,?,de,$6E05,,,the walk ends without a use,
+07,07:4582,?,de,$6E05,,,the walk ends without a use,
+07,07:4593,?,de,$6DAF,,,the walk ends without a use,
+07,07:45C5,?,de,$6E5B,,,the walk ends without a use,
+07,07:45CF,?,de,$6E5B,,,the walk ends without a use,
+07,07:45DC,?,de,$6E5B,,,the walk ends without a use,
+07,07:45F0,?,de,$6E5B,,,the walk ends without a use,
+07,07:45FD,?,de,$6E5B,,,the walk ends without a use,
+07,07:4621,?,de,$6E5B,,,the walk ends without a use,
+07,07:462B,?,de,$6E5B,,,the walk ends without a use,
+07,07:4642,?,de,$6E5B,,,the walk ends without a use,
+07,07:4663,?,de,$6E5B,,,the walk ends without a use,
+07,07:4670,?,de,$6E5B,,,the walk ends without a use,
+07,07:467D,?,de,$6E5B,,,the walk ends without a use,
+07,07:4687,?,de,$6E5B,,,the walk ends without a use,
+07,07:4691,?,de,$6E5B,,,the walk ends without a use,
+07,07:469B,?,de,$6E5B,,,the walk ends without a use,
+07,07:46A8,?,de,$6E5B,,,the walk ends without a use,
+07,07:46B2,?,de,$6E5B,,,the walk ends without a use,
+07,07:46BC,?,de,$6E5B,,,the walk ends without a use,
+07,07:46C9,?,de,$6E5B,,,the walk ends without a use,
+07,07:46D3,?,de,$6E5B,,,the walk ends without a use,
+07,07:46E0,?,de,$6E5B,,,the walk ends without a use,
+07,07:48FD,ptr,de,$1CCE,00:1CCE,Gfx_00_1CBA_Mode12_SlideShow_State01 + $14,C: dereferenced at 00:2091 (bank 02 mapped),yes
+07,07:490F,?,de,$549F,,,the walk ends without a use,
+07,07:4E61,ptr,hl,$4E4B,07:4E4B,Mode13_StateTable + $3AC,C: dereferenced at 07:4E65 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:4EFB,ptr,hl,$4EEE,07:4EEE,StrawberryCh_PageAddr_Tbl4E70 + $7E,C: dereferenced at 07:4EFF (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:4F11,ptr,hl,$4EE0,07:4EE0,StrawberryCh_PageAddr_Tbl4E70 + $70,C: dereferenced at 07:4F15 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:4FAB,num,bc,$0400,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:4FCB,ptr,de,$63F0,25:63F0,Gfx_25_63F0_Mode11_StrawberryChannel_State00,C: dereferenced at 00:066F (bank 25 mapped),yes
+07,07:4FD1,?,bc,$0210,,,the walk ends without a use,
+07,07:502E,?,de,$53BE,,,the walk ends without a use,
+07,07:5045,?,de,$5338,,,the walk ends without a use,
+07,07:50EF,ptr,de,$5C00,25:5C00,Gfx_25_5C00_Mode11_StrawberryChannel_State00,C: dereferenced at 00:066F (bank 25 mapped),yes
+07,07:50F5,?,bc,$0400,,,the walk ends without a use,
+07,07:514F,?,de,$52B2,,,the walk ends without a use,
+07,07:516C,?,de,$527C,,,the walk ends without a use,
+07,07:518A,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5196,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:51BA,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:51C6,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:521B,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5227,num,bc,$0600,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5248,?,de,$52B2,,,the walk ends without a use,
+07,07:5258,ptr,de,$63F0,25:63F0,Gfx_25_63F0_Mode11_StrawberryChannel_State00,C: dereferenced at 00:066F (bank 25 mapped),yes
+07,07:525E,?,bc,$0210,,,the walk ends without a use,
+07,07:5327,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5333,num,bc,$0200,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:54A1,?,de,$5430,,,the walk ends without a use,
+07,07:54E2,?,de,$527C,,,the walk ends without a use,
+07,07:5947,?,hl,$7C20,,,the walk ends without a use,
+07,07:598D,?,de,$7E20,,,the walk ends without a use,
+07,07:5B65,num,bc,$1820,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5B6E,num,bc,$1820,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5C34,num,bc,$48C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5C65,?,de,$5240,,,the walk ends without a use,
+07,07:5C70,num,bc,$0790,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5C79,num,bc,$1008,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5C82,num,bc,$1820,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5C8B,num,bc,$484F,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5C94,ptr,de,$6BC0,24:6BC0,Gfx_24_6BC0_Mode0F_FifteenPuzzle_State00,C: dereferenced at 00:066F (bank 24 mapped),yes
+07,07:5D6D,num,bc,$0E00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5DD6,ptr,de,$7840,26:7840,Map_26_7840_Mode0F_FifteenPuzzle_State00,C: dereferenced at 00:066F (bank 26 mapped),yes
+07,07:5DDC,?,bc,$0220,,,the walk ends without a use,
+07,07:5DE4,num,bc,$48C0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5F0F,?,hl,$5F21,,,the walk ends without a use,
+07,07:5F19,?,hl,$5F51,,,the walk ends without a use,
+07,07:5F78,ptr,hl,$5F61,07:5F61,Scratch_PrizeTable_Tbl5F41 + $20,C: dereferenced at 07:5F7C (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:5F82,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5F95,ptr,hl,$5F65,07:5F65,Scratch_PrizeTable_Tbl5F41 + $24,C: dereferenced at 07:5F99 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:5F9F,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5FB2,ptr,hl,$5F69,07:5F69,Scratch_PrizeTable_Tbl5F41 + $28,C: dereferenced at 07:5FB6 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:5FBC,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5FCD,ptr,hl,$5F61,07:5F61,Scratch_PrizeTable_Tbl5F41 + $20,C: dereferenced at 07:5FD1 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:5FD7,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5FE5,ptr,hl,$5F65,07:5F65,Scratch_PrizeTable_Tbl5F41 + $24,C: dereferenced at 07:5FE9 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:5FEF,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:5FFD,ptr,hl,$5F69,07:5F69,Scratch_PrizeTable_Tbl5F41 + $28,C: dereferenced at 07:6001 (bank 07 mapped); that instruction read the target block in the runs,yes
+07,07:6007,num,bc,$0230,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6026,?,de,$5052,,,the walk ends without a use,
+07,07:6047,?,de,$5052,,,the walk ends without a use,
+07,07:676B,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:67A2,?,de,$66C0,,,stored to wKittHost_SetTextPtr_D941 for later use: not followed,
+07,07:67E3,?,de,$66F4,,,stored to wKittHost_SetTextPtr_D941 for later use: not followed,
+07,07:67E9,?,de,$66A6,,,stored to wKittHost_TextStep_D944 for later use: not followed,
+07,07:67FE,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6820,num,bc,$4890,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:684E,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6857,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:68FC,ptr,de,$593E,02:593E,ObjScript_02_5900_Mode0E_KittGamesHost_State0A + $3E,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
+07,07:68FF,ptr,bc,$596B,02:596B,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $1E,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
+07,07:6904,ptr,de,$5920,02:5920,ObjScript_02_5900_Mode0E_KittGamesHost_State0A + $20,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
+07,07:6907,ptr,bc,$5965,02:5965,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $18,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
+07,07:6913,ptr,de,$58FA,02:58FA,Leftover_02_58AC + $4E,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
+07,07:6916,ptr,bc,$595F,02:595F,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $12,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
+07,07:691B,ptr,de,$58D4,02:58D4,Leftover_02_58AC + $28,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
+07,07:691E,ptr,bc,$5959,02:5959,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $C,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
+07,07:6922,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6929,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:696C,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6975,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:69A7,num,bc,$4890,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A3F,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6A48,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6AD3,num,bc,$4890,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6AFD,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B06,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B38,num,bc,$4890,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,07:6B91,num,bc,$4890,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+07,Mode0E_State00_Tbl668C,ptr,record,$637F,07:637F,KittHost_TextStep_Tbl637F,C: dereferenced at 07:659B (bank 07 mapped); the word was read by 07:6591,yes
+07,Mode0E_State00_Tbl668C,ptr,record,$63EE,07:63EE,KittHost_TextStep_Tbl63EE,C: dereferenced at 07:659B (bank 07 mapped); the word was read by 07:6591,yes
+07,Mode0E_State00_Tbl668C,ptr,record,$6423,07:6423,KittHost_TextStep_Tbl6423,C: dereferenced at 07:659B (bank 07 mapped); the word was read by 07:6591,yes
+07,Mode0E_State00_Tbl668C,ptr,record,$6493,07:6493,KittHost_TextStep_Tbl6493,C: dereferenced at 07:659B (bank 07 mapped); the word was read by 07:6591,yes
+07,Mode0E_State00_Tbl668C,ptr,record,$655C,07:655C,KittHost_TextStep_Tbl655C,C: dereferenced at 07:659B (bank 07 mapped); the word was read by 07:6591,yes
+07,Mode13_StateTable,ptr,record,$4000,38:4000,Gfx_38_4000_Mode11_StrawberryChannel_State04,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$6A00,35:6A00,Gfx_35_6A00_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,36:4000,Gfx_36_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,37:4000,Gfx_37_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,1F:4000,Gfx_1F_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,20:4000,Gfx_20_4000_IdCard_NameGlyphAddr,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,1E:4000,Gfx_1E_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,29:4000,Gfx_29_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,2A:4000,Gfx_2A_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,28:4000,Gfx_28_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,26:4000,Gfx_26_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,27:4000,Gfx_27_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,2B:4000,Gfx_2B_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,2E:4000,Gfx_2E_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,2C:4000,Gfx_2C_4000_Mode02_TakePhotos_State01,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,2D:4000,Gfx_2D_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,21:4000,Gfx_21_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,24:4000,Gfx_24_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,25:4000,Gfx_25_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,23:4000,Gfx_23_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,22:4000,Gfx_22_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,3D:4000,Gfx_3D_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,3C:4000,Gfx_3C_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4000,3B:4000,Gfx_3B_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,Mode13_StateTable,ptr,record,$4E00,31:4E00,Gfx_31_4E00_Mode02_TakePhotos_State08,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_31_4E00_Mode02_TakePhotos_State08; the word was read by 07:4411, the next byte is its bank",no
+07,Mode13_StateTable,ptr,record,$4000,3E:4000,Gfx_3E_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
+07,StrawberryCh_PageAddr_Tbl4E70,ptr,record,$4E70,07:4E70,StrawberryCh_PageAddr_Tbl4E70,C: dereferenced at 07:4F21 (bank 07 mapped); the word was read by 07:4F15,yes
+08,08:6A86,num,de,$1B58,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:6B04,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+08,08:6BFF,ptr,hl,$40B0,08:40B0,Leftover_08_4020 + $90,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+08,08:6C27,ptr,hl,$40C0,08:40C0,Leftover_08_4020 + $A0,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+08,08:6C3C,ptr,hl,$4010,08:4010,Sgb_MltReqPackets + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
+0F,0F:433B,ptr,hl,$4334,0F:4334,Sfx4_StepTbl + $27,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4349,ptr,hl,$4342,0F:4342,Sfx1_Ret4341 + $1,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:437D,ptr,hl,$4361,0F:4361,Snd_0F_435C_Mode02_TakePhotos_State01 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:43A4,ptr,hl,$4388,0F:4388,Snd_0F_4383_Mode02_TakePhotos_State01 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:43B1,ptr,hl,$43AA,0F:43AA,Sfx1_Step_2A + $15,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:43BC,ptr,hl,$43AA,0F:43AA,Sfx1_Step_2A + $15,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:43EC,ptr,hl,$43C7,0F:43C7,Snd_0F_43C2_Mode07_Exchange_State02 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:43FE,ptr,hl,$43F2,0F:43F2,Sfx1_Step_26 + $1E,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4411,ptr,hl,$43F2,0F:43F2,Sfx1_Step_26 + $1E,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4417,ptr,hl,$43F7,0F:43F7,Sfx1_Step_26 + $23,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4424,ptr,hl,$441D,0F:441D,Sfx1_Step_25 + $19,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:447F,ptr,hl,$445F,0F:445F,Snd_0F_445A_Mode07_Exchange_State02 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:44B3,ptr,hl,$4490,0F:4490,Snd_0F_448B_Mode00_BootAndTitle_State08 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:44CE,ptr,hl,$44C7,0F:44C7,Sfx1_Init_0B + $9,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:44E3,ptr,hl,$44D7,0F:44D7,Sfx1_Init_1C + $B,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:44EE,ptr,bc,$44D4,0F:44D4,Sfx1_Init_1C + $8,C: dereferenced at 0F:456E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:452B,ptr,hl,$451A,0F:451A,Snd_0F_4514_Mode03_ViewAlbum_State02 + $6,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:455F,ptr,bc,$4542,0F:4542,Snd_0F_453D_Mode01_MainMenu_State02 + $5,C: dereferenced at 0F:456E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:45A4,ptr,hl,$4584,0F:4584,Snd_0F_457F_Mode02_TakePhotos_State06 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:45D1,ptr,hl,$45B5,0F:45B5,Snd_0F_45B0_Mode02_TakePhotos_State00 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:45D8,ptr,hl,$45BA,0F:45BA,Snd_0F_45B0_Mode02_TakePhotos_State00 + $A,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:45DF,ptr,hl,$45B5,0F:45B5,Snd_0F_45B0_Mode02_TakePhotos_State00 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4608,ptr,hl,$45EF,0F:45EF,Sfx1_Step_05 + $28,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4622,ptr,hl,$45F9,0F:45F9,Sfx1_Step_05 + $32,C: dereferenced at 0F:4626 (bank 0F mapped),no
+0F,0F:4632,ptr,hl,$45F4,0F:45F4,Sfx1_Step_05 + $2D,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4659,ptr,hl,$463D,0F:463D,Snd_0F_4638_Mode0B_NameCardEdit_State08 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4673,ptr,hl,$466C,0F:466C,Sfx1_Init_20 + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4680,ptr,hl,$4679,0F:4679,Sfx1_Init_21 + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:474A,ptr,hl,$4743,0F:4743,Sfx1_10_DigitPtr + $F,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:479B,ptr,hl,$4777,0F:4777,Snd_0F_4772_Mode02_TakePhotos_State06 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:47C8,ptr,hl,$47A6,0F:47A6,Sfx1_Data_47A1 + $5,C: dereferenced at 0F:47CC (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:47EE,ptr,hl,$47E2,0F:47E2,Sfx1_Step_09 + $26,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4813,ptr,hl,$4807,0F:4807,Sfx1_Step_14 + $13,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4833,ptr,hl,$482C,0F:482C,Sfx1_Step_15 + $13,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:483B,ptr,hl,$4841,0F:4841,Sfx1_Init_12 + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:488A,ptr,hl,$48B8,0F:48B8,Snd_0F_48B4_Mode10_ScratchCard_State02 + $4,C: dereferenced at 0F:488E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:48C7,ptr,hl,$48BC,0F:48BC,Snd_0F_48B4_Mode10_ScratchCard_State02 + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4933,ptr,hl,$492E,0F:492E,Snd_0F_4929_Mode10_ScratchCard_State04 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4942,ptr,hl,$493B,0F:493B,Sfx1_Init_2E + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4957,ptr,hl,$4963,0F:4963,Sfx1_Step_32 + $18,C: dereferenced at 0F:495B (bank 0F mapped),no
+0F,0F:4992,ptr,hl,$4986,0F:4986,Sfx1_Step_32 + $3B,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:49A7,ptr,hl,$49C8,0F:49C8,Sfx1_Step_33 + $2D,C: dereferenced at 0F:49AB (bank 0F mapped),no
+0F,0F:4A25,ptr,hl,$49FF,0F:49FF,Sfx1_34_SeqRegs + $28,C: dereferenced at 0F:4A29 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4AAE,ptr,hl,$4A92,0F:4A92,Snd_0F_4A8D_Mode02_TakePhotos_State06 + $5,C: dereferenced at 0F:4B58 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4AD5,ptr,hl,$4AB9,0F:4AB9,Snd_0F_4AB4_Mode05_StampWindow_State03 + $5,C: dereferenced at 0F:4B58 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4AF3,ptr,hl,$4ADA,0F:4ADA,Sfx1_Step_37 + $A,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4AFE,ptr,hl,$4ADF,0F:4ADF,Sfx1_Step_37 + $F,C: dereferenced at 0F:4B58 (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4B24,ptr,hl,$4B08,0F:4B08,Snd_0F_4B03_Mode02_TakePhotos_State01 + $5,C: dereferenced at 0F:4B58 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4B4B,ptr,hl,$4B2E,0F:4B2E,Sfx1_Data_4B29 + $5,C: dereferenced at 0F:4B58 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4B8F,ptr,hl,$4B6C,0F:4B6C,Sfx1_Data_4B67 + $5,C: dereferenced at 0F:4BBB (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4BB7,ptr,hl,$4B99,0F:4B99,Snd_0F_4B94_Mode02_TakePhotos_State05 + $5,C: dereferenced at 0F:4BBB (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4BE0,ptr,hl,$4BCC,0F:4BCC,Sfx1_Step_11 + $21,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4BF2,ptr,hl,$4BD1,0F:4BD1,Sfx1_Step_11 + $26,C: dereferenced at 0F:4BF6 (bank 0F mapped),no
+0F,0F:4C24,ptr,hl,$4C04,0F:4C04,Sfx1_Data_4BFF + $5,C: dereferenced at 0F:4C28 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4C36,ptr,[abs],$4C34,0F:4C34,Snd_0F_4C31_Mode01_MainMenu_State05 + $3,C: ROM byte read by its address (bank 0F mapped),yes
+0F,0F:4C74,ptr,hl,$4C8B,0F:4C8B,Snd_0F_4C86_Mode01_MainMenu_State05 + $5,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4C7A,ptr,hl,$4C90,0F:4C90,Snd_0F_4C86_Mode01_MainMenu_State05 + $A,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4C80,ptr,hl,$4C95,0F:4C95,Snd_0F_4C86_Mode01_MainMenu_State05 + $F,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4CB6,ptr,hl,$4CA8,0F:4CA8,Snd_0F_4C86_Mode01_MainMenu_State05 + $22,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4CD0,ptr,hl,$4CAC,0F:4CAC,Snd_0F_4C86_Mode01_MainMenu_State05 + $26,C: dereferenced at 0F:4CD4 (bank 0F mapped),no
+0F,0F:4D04,ptr,hl,$4CF9,0F:4CF9,Sfx4_Step_09 + $3D,C: dereferenced at 0F:4D08 (bank 0F mapped),no
+0F,0F:4D0B,ptr,hl,$4CE9,0F:4CE9,Sfx4_Step_09 + $2D,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4D16,ptr,hl,$4CE5,0F:4CE5,Sfx4_Step_09 + $29,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4D2F,ptr,hl,$4CDC,0F:4CDC,Sfx4_Step_09 + $20,C: dereferenced at 0F:4D33 (bank 0F mapped),no
+0F,0F:4D41,ptr,hl,$4CE9,0F:4CE9,Sfx4_Step_09 + $2D,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4D5D,ptr,hl,$4D57,0F:4D57,Sfx4_Init_0B + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4D77,ptr,hl,$4D4B,0F:4D4B,Snd_0F_4D47_Mode05_StampWindow_State06 + $4,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4D83,ptr,hl,$4D7D,0F:4D7D,Sfx4_Step_01 + $1A,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4D8F,ptr,hl,$4D89,0F:4D89,Sfx4_Init_0D + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4DC8,ptr,hl,$4D95,0F:4D95,Sfx4_Init_0F + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4DD8,ptr,hl,$4D99,0F:4D99,Sfx4_Init_0F + $C,C: dereferenced at 0F:4E0E (bank 0F mapped),no
+0F,0F:4DF8,ptr,hl,$4DDD,0F:4DDD,Sfx4_Step_0E + $F,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4E08,ptr,hl,$4DE1,0F:4DE1,Sfx4_Step_0E + $13,C: dereferenced at 0F:4E0E (bank 0F mapped),no
+0F,0F:4E20,ptr,hl,$4E1A,0F:4E1A,Snd_0F_4E16_Mode03_ViewAlbum_State0D + $4,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4E45,ptr,hl,$4E3F,0F:4E3F,Snd_0F_4E3B_Mode03_ViewAlbum_State0B + $4,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4E6E,ptr,hl,$4E68,0F:4E68,Snd_0F_4E64_Mode0B_NameCardEdit_State08 + $4,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4E93,ptr,hl,$4E8D,0F:4E8D,Sfx4_Step_04 + $19,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4EA8,ptr,hl,$4E8D,0F:4E8D,Sfx4_Step_04 + $19,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4EB4,ptr,hl,$4EAE,0F:4EAE,Sfx4_Step_11 + $15,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4EE1,ptr,hl,$4ED2,0F:4ED2,Sfx4_Init_0C + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4EEE,ptr,hl,$4ED6,0F:4ED6,Sfx4_Init_0C + $C,C: dereferenced at 0F:4EF2 (bank 0F mapped),no
+0F,0F:4F00,ptr,hl,$4ED2,0F:4ED2,Sfx4_Init_0C + $8,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4F1A,ptr,hl,$4F1F,0F:4F1F,Sfx4_Step_10 + $19,C: dereferenced at 0F:4EF2 (bank 0F mapped),no
+0F,0F:4F47,ptr,[abs],$4F42,0F:4F42,Sfx4_Stop + $15,C: ROM byte read by its address (bank 0F mapped),no
+0F,0F:4F4D,ptr,[abs],$4F43,0F:4F43,Sfx4_Stop + $16,C: ROM byte read by its address (bank 0F mapped),no
+0F,0F:4F55,ptr,hl,$4F3F,0F:4F3F,Sfx4_Stop + $12,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:4FAE,ptr,hl,$4F99,0F:4F99,Snd_0F_4F94_Mode00_BootAndTitle_State08 + $5,C: dereferenced at 0F:4FDE (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:4FD6,ptr,hl,$4FC1,0F:4FC1,Snd_0F_4FBC_Mode01_MainMenu_State06 + $5,C: dereferenced at 0F:4FDE (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:5083,ptr,hl,$505B,0F:505B,Sfx3_Init_02 + $E,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:50DA,ptr,hl,$50B5,0F:50B5,Sfx3_Init_01 + $E,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:50ED,ptr,hl,$50E0,0F:50E0,Sfx3_Init_05_0A + $E,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:5133,ptr,hl,$51CA,0F:51CA,Sfx3_Wave_519A + $30,C: dereferenced at 0F:5259 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:513B,ptr,hl,$518A,0F:518A,Sfx3_Begin + $29,C: dereferenced at 0F:5259 (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:514B,ptr,hl,$51AA,0F:51AA,Sfx3_Wave_519A + $10,C: dereferenced at 0F:5259 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:5153,ptr,hl,$51BA,0F:51BA,Sfx3_Wave_519A + $20,C: dereferenced at 0F:5259 (bank 0F mapped); that instruction read the target block in the runs,yes
+0F,0F:515B,ptr,hl,$517A,0F:517A,Sfx3_Begin + $19,C: dereferenced at 0F:5259 (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:53CA,num,bc,$0410,,,"C: read as bytes (arithmetic, comparison) before any dereference",
+0F,0F:559D,ptr,hl,$4037,0F:4037,Leftover_0F_4025_Snd_LengthTbl + $12,C: dereferenced at 0F:55A1 (bank 0F mapped); that instruction read the target block in the runs,no
+0F,0F:55B3,ptr,hl,$40C9,0F:40C9,Snd_FreqTbl + $90,C: dereferenced at 0F:55B7 (bank 0F mapped); that instruction read the target block in the runs,no

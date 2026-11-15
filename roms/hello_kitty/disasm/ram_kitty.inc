@@ -5,6 +5,7 @@ DEF wLinkBuffer                EQU $c000 ; I 4096  the Japanese wLinkBuffer, thr
 DEF wPhotoImage                EQU $c000 ; I 3584  the Japanese wPhotoImage, through 43 paired access sites (01:4771, 01:479d, 04:5f4d, 04:5f
 DEF wCardPhotos                EQU $c230 ; C 1680  the three photos of the name card, 3 x $230 bytes (35 tiles each, $C230 / $C460 / $C690): 
 DEF wBlitPatchList             EQU $c800 ; I 1442  the Japanese wBlitPatchList, through 1 paired access site (05:5f96); same code; shares byt
+DEF wLinkSenderGender          EQU $cfff ; C 1  the last byte of the 4 KiB link buffer: the sender stores byte $0D of its ID card there (0
 DEF wSnd_Init_D000             EQU $d000 ; I 1  touched by Snd_Init (1)
 DEF wSndTranspose              EQU $d001 ; C 1  the Japanese wSndTranspose, through 3 paired access sites (0f:5383, 0f:54ca, 0f:558b); sam
 DEF wSndDurTabLo               EQU $d002 ; C 1  the Japanese wSndDurTabLo, through 2 paired access sites (0f:54b6, 0f:555a); same code
@@ -32,7 +33,7 @@ DEF wPrintSrcTable             EQU $d382 ; C 16  the Japanese wPrintSrcTable, th
 DEF wPrintSrcTable2            EQU $d392 ; C 16  the Japanese wPrintSrcTable2, through 1 paired access site (00:230b); same code
 DEF wMode06_State00_D3A2       EQU $d3a2 ; I 1  touched by Mode06_State00 (1), Mode06_State11 (1), Mode06_State14 (1)
 DEF wPrintBandDesc             EQU $d3a4 ; C 80  the Japanese wPrintBandDesc, through 1 paired access site (00:22c7); same code
-DEF wPrint_StreamFromD3F4_D3F4 EQU $d3f4 ; I 1  touched by Print_StreamFromD3F4 (2), Print_SetFrameSide (2), Mode06_State1B (2)
+DEF wPrint_StreamFromD3F4      EQU $d3f4 ; I 1  touched by Print_StreamFromD3F4 (2), Print_SetFrameSide (2), Mode06_State1B (2)
 DEF wPrint_StreamFromD3F4_D3F5 EQU $d3f5 ; I 1  touched by Print_StreamFromD3F4 (2), Print_SetFrameSide (2), Mode06_State1B (2)
 DEF wPrint_SetFrameSide_D3F6   EQU $d3f6 ; I 1  touched by Print_SetFrameSide (2), Print_StreamFromD3F4 (1), Print_LoadItemPicture (1)
 DEF wMode06_State1C_D3F7       EQU $d3f7 ; I 1  touched by Mode06_State1C (2), Mode06_State1D (2), Mode06_State1E (2)
@@ -173,12 +174,12 @@ DEF wPuzzle15_SavePos_D973     EQU $d973 ; I 1  touched by Puzzle15_SavePos (1),
 DEF wPuzzleKind                EQU $d974 ; C 1  the puzzle's picture: 0 a drawing, 1 a photo of the album, 2 the live camera (chosen on th
 DEF wPuzzle15_ObjWaitMove_D975 EQU $d975 ; I 1  touched by Puzzle15_ObjWaitMove (1), Puzzle15_ObjMoving (1), Puzzle15_ObjToCell (1)
 DEF wPuzzle15_ShuffleCheckDir_D976 EQU $d976 ; I 1  touched by Puzzle15_ShuffleCheckDir (4), Puzzle15_ShuffleDirRight (1)
-DEF wPuzzle15_ObjSetCC_D977_D977 EQU $d977 ; I 1  touched by Puzzle15_ObjSetCC_D977 (1), Puzzle15_ObjSetCE_D977 (1), Mode0F_State00 (1)
-DEF wPuzzle15_ObjSetCC_D978_D978 EQU $d978 ; I 1  touched by Puzzle15_ObjSetCC_D978 (1), Puzzle15_ObjSetCE_D978 (1), Mode0F_State00 (1)
+DEF wPuzzle15_ObjSetCC_D977    EQU $d977 ; I 1  touched by Puzzle15_ObjSetCC_D977 (1), Puzzle15_ObjSetCE_D977 (1), Mode0F_State00 (1)
+DEF wPuzzle15_ObjSetCC_D978    EQU $d978 ; I 1  touched by Puzzle15_ObjSetCC_D978 (1), Puzzle15_ObjSetCE_D978 (1), Mode0F_State00 (1)
 DEF wPuzzle15_ScriptedKey_D979 EQU $d979 ; I 1  touched by Puzzle15_ScriptedKey (2), Puzzle15_ShuffleInit (1)
 DEF wPuzzlePicture             EQU $d97a ; C 1  the drawing (0-4) or the photo of the puzzle, from wPuzzleDrawingsDone or Rng_Scaled (Mode
-DEF wScript_LoadCounterD97B_D97B EQU $d97b ; I 1  touched by Script_LoadCounterD97B (1), Script_SaveCounterD97B (1), Mode0F_State00 (1)
-DEF wScript_SetD97C_D97C       EQU $d97c ; I 1  touched by Script_SetD97C (1), Puzzle15_ObjFrameByD97C (1), Mode0F_State00 (1)
+DEF wScript_LoadCounterD97B    EQU $d97b ; I 1  touched by Script_LoadCounterD97B (1), Script_SaveCounterD97B (1), Mode0F_State00 (1)
+DEF wScript_SetD97C            EQU $d97c ; I 1  touched by Script_SetD97C (1), Puzzle15_ObjFrameByD97C (1), Mode0F_State00 (1)
 DEF wNameCardEdit_PhotoCursorUpdate_D97D EQU $d97d ; I 1  touched by NameCardEdit_PhotoCursorUpdate (4), Obj_KeyMaskStep (3), Menu06_CursorUpdate (1
 DEF wNameCardEdit_PhotoCursorUpdate_D97E EQU $d97e ; I 1  touched by NameCardEdit_PhotoCursorUpdate (4), NameCardEdit_ObjFieldTick (2), Menu06_Curso
 DEF wNameCardEdit_PhotoCursorUpdate_D97F EQU $d97f ; I 1  touched by NameCardEdit_PhotoCursorUpdate (4), NameCardEdit_FieldAction (4), NameCardEdit_
@@ -197,7 +198,7 @@ DEF wPrint_LoadItemPicture_D98B EQU $d98b ; I 1  touched by Print_LoadItemPictur
 DEF wAlbumText_CursorUpdate_D98C EQU $d98c ; I 1  touched by AlbumText_CursorUpdate (5), AlbumText_ObjCursor (2), Text_CursorRight (2)
 DEF wAlbumText_CursorUpdate_D98D EQU $d98d ; I 2  touched by AlbumText_CursorUpdate (2)
 DEF wAlbumText_CursorUpdate_D98F EQU $d98f ; I 1  touched by AlbumText_CursorUpdate (4), Mode03_State0A (1)
-DEF wAlbumText_ObjPosFromD990_D990 EQU $d990 ; I 1  touched by AlbumText_ObjPosFromD990 (1), AlbumText_CursorUpdate (1), Mode03_State0A (1)
+DEF wAlbumText_ObjPosFromD990  EQU $d990 ; I 1  touched by AlbumText_ObjPosFromD990 (1), AlbumText_CursorUpdate (1), Mode03_State0A (1)
 DEF wAlbumText_CursorUpdate_D991 EQU $d991 ; I 1  touched by AlbumText_CursorUpdate (2), AlbumText_ObjPosFromD990 (1), Mode03_State0A (1)
 DEF wAlbumText_CursorUpdate_D992 EQU $d992 ; I 1  touched by AlbumText_CursorUpdate (5), Text_LoadBigGlyphPage (1), Mode03_State0A (1)
 DEF wStamp_ObjPlaceOnStart_D993 EQU $d993 ; I 1  touched by Stamp_ObjPlaceOnStart (3), Stamp_CursorUpdate (2), Mode05_State01 (2)
@@ -322,11 +323,11 @@ DEF wObject_CreateWithParam_DAEE EQU $daee ; I 256  touched by Object_CreateWith
 DEF wObject_RunAll_DC5E        EQU $dc5e ; I 1  touched by Object_RunAll (1), Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1)
 DEF wObject_RunAll_DC5F        EQU $dc5f ; I 1  touched by Object_RunAll (1), Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1)
 DEF wObjects_Freeze_DC60       EQU $dc60 ; I 1  touched by Objects_Freeze (1), Objects_Unfreeze (1), Object_RunAll (1)
-DEF wObjCmd_SetDC61_DC61       EQU $dc61 ; I 1  touched by ObjCmd_SetDC61 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)
+DEF wObjCmd_SetDC61            EQU $dc61 ; I 1  touched by ObjCmd_SetDC61 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)
 DEF wObjCmd_SetDC61_DC62       EQU $dc62 ; I 1  touched by ObjCmd_SetDC61 (1)
-DEF wObjCmd_SetDC63_DC63       EQU $dc63 ; I 1  touched by ObjCmd_SetDC63 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)
+DEF wObjCmd_SetDC63            EQU $dc63 ; I 1  touched by ObjCmd_SetDC63 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)
 DEF wObjCmd_SetDC63_DC64       EQU $dc64 ; I 1  touched by ObjCmd_SetDC63 (1)
-DEF wObjCmd_SetDC65_DC65       EQU $dc65 ; I 1  touched by ObjCmd_SetDC65 (1), KittHost_YesNoCursor (1)
+DEF wObjCmd_SetDC65            EQU $dc65 ; I 1  touched by ObjCmd_SetDC65 (1), KittHost_YesNoCursor (1)
 DEF wObjCmd_SetDC65_DC66       EQU $dc66 ; I 1  touched by ObjCmd_SetDC65 (1)
 DEF wScriptSlots_Tick_DC67     EQU $dc67 ; I 120  touched by ScriptSlots_Tick (1), ScriptSlots_Clear (1), ScriptSlots_Add (1)
 DEF wScriptSlots_Run_DCDF      EQU $dcdf ; I 1  touched by ScriptSlots_Run (1)

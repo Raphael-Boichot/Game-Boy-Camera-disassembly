@@ -3,6 +3,7 @@ c000,4096,wLinkBuffer,Link_Init;Link_QueueCommand;Link_QueuePageRequest,I,"the J
 c000,3584,wPhotoImage,Fx00_Copy;Fx01_MirrorRtoL;Fx02_MirrorLtoR;Fx03_MirrorBtoT;Fx04_MirrorTtoB;Fx05_StretchV2x;Fx06_StretchH2x;Fx0D_CopyLeftHalf;Fx0E_CopyRightHalf;Fx0F_CopyTopHalf;Fx11_CopyQuads_TR_BL;Fx12_CopyQuads_TR_BL_BR;Fx13_CopyTop10Rows;Fx25_StretchV2x_OnFlipH;Fx26_StretchH2x_OnFlipH;Fx2D_CopyLeftHalf_OnFlipH;Fx2E_CopyRightHalf_OnFlipH;Fx31_CopyQuads_TR_BL_OnFlipH;Fx32_CopyQuads_TR_BL_BR_OnFlipH;Fx37_CopyWindow_OnFlipH;Fx38_CopyQuadBR_OnFlipH;Fx40_FlipV;Fx41_MirrorRtoL_OnFlipV;Fx42_MirrorLtoR_OnFlipV;Fx45_StretchV2x_FlipV;Fx46_StretchH2x_OnFlipV;Fx4D_CopyLeftHalf_OnFlipV;Fx4E_CopyRightHalf_OnFlipV;Fx4F_CopyTopHalf_OnFlipV;Fx51_CopyQuads_TR_BL_OnFlipV;Fx52_CopyQuads_TR_BL_BR_OnFlipV;Fx53_CopyTop10Rows_OnFlipV;Fx54_CopyBottom4Rows_OnFlipV;Fx57_CopyWindow_OnFlipV;Fx58_CopyQuadBR_OnFlipV;Link_SumSlotBuffer;Sram_ComputeImageChecksums,I,"the Japanese wPhotoImage, through 43 paired access sites (01:4771, 01:479d, 04:5f4d, 04:5f59, ...); same code; 7 other paired sites point elsewhere; shares bytes with wBlitPatchList, wEffRegionRow10, wEffRegionRow7 (an overlay: scoped to its routines)"
 c230,1680,wCardPhotos,Sram_LoadCardPhotos;Sram_StoreCardPhotos;Mode0B_State05,C,"the three photos of the name card, 3 x $230 bytes (35 tiles each, $C230 / $C460 / $C690): Mode0B_State05 copies the reduced photo from $C000 into the box [$D980] and to VRAM $9170; saved at SRAM bank 0 $B1FC by Sram_StoreCardPhotos (hand 2026-11-15)"
 c800,1442,wBlitPatchList,Blit_ApplyPatchList,I,"the Japanese wBlitPatchList, through 1 paired access site (05:5f96); same code; shares bytes with wLinkBuffer, wPhotoImage (an overlay: scoped to its routines)"
+cfff,1,wLinkSenderGender,*,C,"the last byte of the 4 KiB link buffer: the sender stores byte $0D of its ID card there (06:67F0, 06:6B62; bit 0 boy, bit 1 girl), the receiver reads it to count the photo as received from a boy or a girl (Counters_AddReceived) (hand 2026-11-15)"
 d000,1,wSnd_Init_D000,*,I,touched by Snd_Init (1)
 d001,1,wSndTranspose,*,C,"the Japanese wSndTranspose, through 3 paired access sites (0f:5383, 0f:54ca, 0f:558b); same code"
 d002,1,wSndDurTabLo,*,C,"the Japanese wSndDurTabLo, through 2 paired access sites (0f:54b6, 0f:555a); same code"
@@ -30,7 +31,7 @@ d382,16,wPrintSrcTable,*,C,"the Japanese wPrintSrcTable, through 1 paired access
 d392,16,wPrintSrcTable2,*,C,"the Japanese wPrintSrcTable2, through 1 paired access site (00:230b); same code"
 d3a2,1,wMode06_State00_D3A2,*,I,"touched by Mode06_State00 (1), Mode06_State11 (1), Mode06_State14 (1)"
 d3a4,80,wPrintBandDesc,*,C,"the Japanese wPrintBandDesc, through 1 paired access site (00:22c7); same code"
-d3f4,1,wPrint_StreamFromD3F4_D3F4,*,I,"touched by Print_StreamFromD3F4 (2), Print_SetFrameSide (2), Mode06_State1B (2)"
+d3f4,1,wPrint_StreamFromD3F4,*,I,"touched by Print_StreamFromD3F4 (2), Print_SetFrameSide (2), Mode06_State1B (2)"
 d3f5,1,wPrint_StreamFromD3F4_D3F5,*,I,"touched by Print_StreamFromD3F4 (2), Print_SetFrameSide (2), Mode06_State1B (2)"
 d3f6,1,wPrint_SetFrameSide_D3F6,*,I,"touched by Print_SetFrameSide (2), Print_StreamFromD3F4 (1), Print_LoadItemPicture (1)"
 d3f7,1,wMode06_State1C_D3F7,*,I,"touched by Mode06_State1C (2), Mode06_State1D (2), Mode06_State1E (2)"
@@ -171,12 +172,12 @@ d973,1,wPuzzle15_SavePos_D973,*,I,"touched by Puzzle15_SavePos (1), Puzzle15_Cel
 d974,1,wPuzzleKind,*,C,"the puzzle's picture: 0 a drawing, 1 a photo of the album, 2 the live camera (chosen on the Kitt host's screen $0E:$0A; Mode0F_State02 / 03 / 04, Puzzle15_FadeToState0C)  (hand 2026-11-15)"
 d975,1,wPuzzle15_ObjWaitMove_D975,*,I,"touched by Puzzle15_ObjWaitMove (1), Puzzle15_ObjMoving (1), Puzzle15_ObjToCell (1)"
 d976,1,wPuzzle15_ShuffleCheckDir_D976,*,I,"touched by Puzzle15_ShuffleCheckDir (4), Puzzle15_ShuffleDirRight (1)"
-d977,1,wPuzzle15_ObjSetCC_D977_D977,*,I,"touched by Puzzle15_ObjSetCC_D977 (1), Puzzle15_ObjSetCE_D977 (1), Mode0F_State00 (1)"
-d978,1,wPuzzle15_ObjSetCC_D978_D978,*,I,"touched by Puzzle15_ObjSetCC_D978 (1), Puzzle15_ObjSetCE_D978 (1), Mode0F_State00 (1)"
+d977,1,wPuzzle15_ObjSetCC_D977,*,I,"touched by Puzzle15_ObjSetCC_D977 (1), Puzzle15_ObjSetCE_D977 (1), Mode0F_State00 (1)"
+d978,1,wPuzzle15_ObjSetCC_D978,*,I,"touched by Puzzle15_ObjSetCC_D978 (1), Puzzle15_ObjSetCE_D978 (1), Mode0F_State00 (1)"
 d979,1,wPuzzle15_ScriptedKey_D979,*,I,"touched by Puzzle15_ScriptedKey (2), Puzzle15_ShuffleInit (1)"
 d97a,1,wPuzzlePicture,*,C,"the drawing (0-4) or the photo of the puzzle, from wPuzzleDrawingsDone or Rng_Scaled (Mode0F_State02 / 03)  (hand 2026-11-15)"
-d97b,1,wScript_LoadCounterD97B_D97B,*,I,"touched by Script_LoadCounterD97B (1), Script_SaveCounterD97B (1), Mode0F_State00 (1)"
-d97c,1,wScript_SetD97C_D97C,*,I,"touched by Script_SetD97C (1), Puzzle15_ObjFrameByD97C (1), Mode0F_State00 (1)"
+d97b,1,wScript_LoadCounterD97B,*,I,"touched by Script_LoadCounterD97B (1), Script_SaveCounterD97B (1), Mode0F_State00 (1)"
+d97c,1,wScript_SetD97C,*,I,"touched by Script_SetD97C (1), Puzzle15_ObjFrameByD97C (1), Mode0F_State00 (1)"
 d97d,1,wNameCardEdit_PhotoCursorUpdate_D97D,*,I,"touched by NameCardEdit_PhotoCursorUpdate (4), Obj_KeyMaskStep (3), Menu06_CursorUpdate (1)"
 d97e,1,wNameCardEdit_PhotoCursorUpdate_D97E,*,I,"touched by NameCardEdit_PhotoCursorUpdate (4), NameCardEdit_ObjFieldTick (2), Menu06_CursorUpdate (2)"
 d97f,1,wNameCardEdit_PhotoCursorUpdate_D97F,*,I,"touched by NameCardEdit_PhotoCursorUpdate (4), NameCardEdit_FieldAction (4), NameCardEdit_ObjFieldTick (2)"
@@ -195,7 +196,7 @@ d98b,1,wPrint_LoadItemPicture_D98B,*,I,"touched by Print_LoadItemPicture (1), Ob
 d98c,1,wAlbumText_CursorUpdate_D98C,*,I,"touched by AlbumText_CursorUpdate (5), AlbumText_ObjCursor (2), Text_CursorRight (2)"
 d98d,2,wAlbumText_CursorUpdate_D98D,*,I,touched by AlbumText_CursorUpdate (2)
 d98f,1,wAlbumText_CursorUpdate_D98F,*,I,"touched by AlbumText_CursorUpdate (4), Mode03_State0A (1)"
-d990,1,wAlbumText_ObjPosFromD990_D990,*,I,"touched by AlbumText_ObjPosFromD990 (1), AlbumText_CursorUpdate (1), Mode03_State0A (1)"
+d990,1,wAlbumText_ObjPosFromD990,*,I,"touched by AlbumText_ObjPosFromD990 (1), AlbumText_CursorUpdate (1), Mode03_State0A (1)"
 d991,1,wAlbumText_CursorUpdate_D991,*,I,"touched by AlbumText_CursorUpdate (2), AlbumText_ObjPosFromD990 (1), Mode03_State0A (1)"
 d992,1,wAlbumText_CursorUpdate_D992,*,I,"touched by AlbumText_CursorUpdate (5), Text_LoadBigGlyphPage (1), Mode03_State0A (1)"
 d993,1,wStamp_ObjPlaceOnStart_D993,*,I,"touched by Stamp_ObjPlaceOnStart (3), Stamp_CursorUpdate (2), Mode05_State01 (2)"
@@ -320,11 +321,11 @@ daee,256,wObject_CreateWithParam_DAEE,*,I,"touched by Object_CreateWithParam (1)
 dc5e,1,wObject_RunAll_DC5E,*,I,"touched by Object_RunAll (1), Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1)"
 dc5f,1,wObject_RunAll_DC5F,*,I,"touched by Object_RunAll (1), Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1)"
 dc60,1,wObjects_Freeze_DC60,*,I,"touched by Objects_Freeze (1), Objects_Unfreeze (1), Object_RunAll (1)"
-dc61,1,wObjCmd_SetDC61_DC61,*,I,"touched by ObjCmd_SetDC61 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)"
+dc61,1,wObjCmd_SetDC61,*,I,"touched by ObjCmd_SetDC61 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)"
 dc62,1,wObjCmd_SetDC61_DC62,*,I,touched by ObjCmd_SetDC61 (1)
-dc63,1,wObjCmd_SetDC63_DC63,*,I,"touched by ObjCmd_SetDC63 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)"
+dc63,1,wObjCmd_SetDC63,*,I,"touched by ObjCmd_SetDC63 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)"
 dc64,1,wObjCmd_SetDC63_DC64,*,I,touched by ObjCmd_SetDC63 (1)
-dc65,1,wObjCmd_SetDC65_DC65,*,I,"touched by ObjCmd_SetDC65 (1), KittHost_YesNoCursor (1)"
+dc65,1,wObjCmd_SetDC65,*,I,"touched by ObjCmd_SetDC65 (1), KittHost_YesNoCursor (1)"
 dc66,1,wObjCmd_SetDC65_DC66,*,I,touched by ObjCmd_SetDC65 (1)
 dc67,120,wScriptSlots_Tick_DC67,*,I,"touched by ScriptSlots_Tick (1), ScriptSlots_Clear (1), ScriptSlots_Add (1)"
 dcdf,1,wScriptSlots_Run_DCDF,*,I,touched by ScriptSlots_Run (1)

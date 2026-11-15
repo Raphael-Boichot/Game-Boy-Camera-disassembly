@@ -8,8 +8,8 @@
 Why: a new run (a coverage file, a BGB hit table, a forced run) changes the trace, the types, the names, the never-run tables, their
 verdicts, the maps, the sheets, the doubts list and the figures the READMEs quote, and each has its own tool. Run by hand, a step
 gets forgotten or runs in the wrong order (the verdict column of trace/red_kitty.csv needs red_classify, the verdicts, then
-red_classify again), and a stale file or figure turns up days later. This tool runs the whole chain; then
-tools/check_repo_consistency.py compares everything and tools/facts.py lists the figures to quote (tag them <!--f:KEY-->).
+red_classify again), and a stale file or figure turns up days later. This tool runs the whole chain, then rewrites every tagged
+figure of README.md, ROADMAP.md and roms/*/README.md (tools/facts.py --fix); tools/check_repo_consistency.py compares everything.
 
 The expensive producers (core corpora, BGB campaigns, tools/kitty_core_paths.py, tools/kitty_puzzle.py --bgb) are not rerun: they
 are the evidence. The deterministic core ones are (kitty_forced_runs.py, kitty_puzzle.py --core), and the checker reruns them too.
@@ -49,6 +49,7 @@ def kitty_steps(K, J):
         ('unused_sheet', lambda: [PY, 'tools/kitty_unused_sheet.py', K]),
         ('highlights', lambda: [PY, 'tools/kitty_unused_highlights.py', K]),
         ('trees', lambda: [PY, 'tools/make_screen_trees.py']),
+        ('source', lambda: [PY, 'tools/make_source.py', '--tree', 'hello_kitty', '--rom', K, '--check']),   # L5: the source tree (rgbds on the PATH)
     ]
 
 def proto_steps(Q):
@@ -78,4 +79,10 @@ for name, cmd in steps:
     last = (r.stdout.strip().split('\n') or [''])[-1][:160]
     if r.returncode: sys.exit('regen: %s failed:\n%s' % (name, (r.stderr or r.stdout)[-800:]))
     print('        %.0f s  %s' % (time.time() - t, last), flush=True)
-print('regen: done; now run tools/check_repo_consistency.py, and tools/facts.py for the figures to quote (tagged <!--f:KEY-->)')
+if not a.dry:                                   # the tagged figures of the docs follow the files (tools/facts.py --fix, 2026-11-15)
+    docs = ['README.md', 'ROADMAP.md'] + sorted(os.path.relpath(f, REPO) for f in glob.glob(os.path.join(REPO, 'roms', '*', 'README.md')))
+    fx = [PY, 'tools/facts.py'] + (['--rom-kitty', a.kitty] if a.kitty else []) + (['--rom-proto', a.proto] if a.proto else []) + ['--fix'] + docs
+    r = subprocess.run(fx, cwd=REPO, capture_output=True, text=True)
+    for l in r.stdout.strip().split('\n'):
+        if l and ' 0 figure(s)' not in l: print('regen: ' + l)
+print('regen: done; now run tools/check_repo_consistency.py; a new figure to quote: tools/facts.py lists the keys (tag it <!--f:KEY-->)')

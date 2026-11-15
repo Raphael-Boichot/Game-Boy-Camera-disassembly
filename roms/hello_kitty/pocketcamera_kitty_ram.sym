@@ -3,6 +3,7 @@
 00:C000 wPhotoImage
 00:C230 wCardPhotos
 00:C800 wBlitPatchList
+00:CFFF wLinkSenderGender
 00:D000 wSnd_Init_D000
 00:D001 wSndTranspose
 00:D002 wSndDurTabLo
@@ -30,7 +31,7 @@
 00:D392 wPrintSrcTable2
 00:D3A2 wMode06_State00_D3A2
 00:D3A4 wPrintBandDesc
-00:D3F4 wPrint_StreamFromD3F4_D3F4
+00:D3F4 wPrint_StreamFromD3F4
 00:D3F5 wPrint_StreamFromD3F4_D3F5
 00:D3F6 wPrint_SetFrameSide_D3F6
 00:D3F7 wMode06_State1C_D3F7
@@ -171,12 +172,12 @@
 00:D974 wPuzzleKind
 00:D975 wPuzzle15_ObjWaitMove_D975
 00:D976 wPuzzle15_ShuffleCheckDir_D976
-00:D977 wPuzzle15_ObjSetCC_D977_D977
-00:D978 wPuzzle15_ObjSetCC_D978_D978
+00:D977 wPuzzle15_ObjSetCC_D977
+00:D978 wPuzzle15_ObjSetCC_D978
 00:D979 wPuzzle15_ScriptedKey_D979
 00:D97A wPuzzlePicture
-00:D97B wScript_LoadCounterD97B_D97B
-00:D97C wScript_SetD97C_D97C
+00:D97B wScript_LoadCounterD97B
+00:D97C wScript_SetD97C
 00:D97D wNameCardEdit_PhotoCursorUpdate_D97D
 00:D97E wNameCardEdit_PhotoCursorUpdate_D97E
 00:D97F wNameCardEdit_PhotoCursorUpdate_D97F
@@ -195,7 +196,7 @@
 00:D98C wAlbumText_CursorUpdate_D98C
 00:D98D wAlbumText_CursorUpdate_D98D
 00:D98F wAlbumText_CursorUpdate_D98F
-00:D990 wAlbumText_ObjPosFromD990_D990
+00:D990 wAlbumText_ObjPosFromD990
 00:D991 wAlbumText_CursorUpdate_D991
 00:D992 wAlbumText_CursorUpdate_D992
 00:D993 wStamp_ObjPlaceOnStart_D993
@@ -320,11 +321,11 @@
 00:DC5E wObject_RunAll_DC5E
 00:DC5F wObject_RunAll_DC5F
 00:DC60 wObjects_Freeze_DC60
-00:DC61 wObjCmd_SetDC61_DC61
+00:DC61 wObjCmd_SetDC61
 00:DC62 wObjCmd_SetDC61_DC62
-00:DC63 wObjCmd_SetDC63_DC63
+00:DC63 wObjCmd_SetDC63
 00:DC64 wObjCmd_SetDC63_DC64
-00:DC65 wObjCmd_SetDC65_DC65
+00:DC65 wObjCmd_SetDC65
 00:DC66 wObjCmd_SetDC65_DC66
 00:DC67 wScriptSlots_Tick_DC67
 00:DCDF wScriptSlots_Run_DCDF

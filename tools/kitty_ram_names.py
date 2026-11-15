@@ -133,6 +133,7 @@ for ad in rest:
     fn = re.sub(r'_Part[0-9A-F]{4}$', '', fn)
     if re.fullmatch(r'[0-9A-Fa-f]{2}:[0-9A-Fa-f]{4}', fn): fn = 'Code' + fn.replace(':', '_')
     n = '%s%s_%04X' % ('h' if ad >= 0xFF80 else 'w', fn, ad)
+    if fn.upper().endswith('%04X' % ad): n = '%s%s' % ('h' if ad >= 0xFF80 else 'w', fn)      # the routine already names the address (Puzzle15_ObjSetCC_D977)
     i = bisect.bisect_right(allstarts, ad); nxt = allstarts[i] if i < len(allstarts) else ad + 1
     size = min(256, nxt - ad) if 'P' in kinds[ad] and nxt > ad else 1
     if n in used: n += '_'

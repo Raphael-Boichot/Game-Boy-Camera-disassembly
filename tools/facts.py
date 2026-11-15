@@ -33,6 +33,7 @@ DIRS = {'jp': 'jp_rev_a', 'us': 'us_eu', 'gold': 'gold', 'kitty': 'hello_kitty',
 ap = argparse.ArgumentParser()
 for t in DIRS: ap.add_argument('--rom-' + t)
 ap.add_argument('--json', action='store_true'); ap.add_argument('--check', nargs='+')
+ap.add_argument('--fix', nargs='+', help='rewrite every tagged figure of these files with the value the files give today (2026-11-15)')
 a = ap.parse_args()
 
 def facts():
@@ -117,6 +118,19 @@ def facts():
     return F
 
 F = facts()
+if a.fix:                                                    # the figures follow the files: no figure has to be retyped by hand
+    for f in a.fix:
+        p = os.path.join(REPO, f) if not os.path.isabs(f) else f; txt = open(p, encoding='utf-8').read(); ch = []
+        def sub(m):
+            k = m.group(1)
+            if k not in F: return m.group(0)
+            new = format(F[k], ',') if (',' in m.group(2) or F[k] >= 10000) else str(F[k])
+            if new != m.group(2): ch.append('%s %s -> %s' % (k, m.group(2), new))
+            return '<!--f:%s-->%s' % (k, new)
+        t2 = re.sub(r'<!--f:([\w.\- ]+?)-->(\d[\d,]*\d|\d)', sub, txt)
+        if t2 != txt: open(p, 'w', encoding='utf-8', newline='\n').write(t2)
+        print('facts: %s: %d figure(s) rewritten%s' % (f, len(ch), (': ' + '; '.join(ch)) if ch else ''))
+    sys.exit(0)
 if a.check:
     bad = 0; n = 0
     for f in a.check:

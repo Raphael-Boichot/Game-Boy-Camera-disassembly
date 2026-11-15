@@ -16,7 +16,7 @@ Everything in src/ is overwritten: edit the tables of roms/jp_rev_a/disasm/ and 
 `--check` assembles the new tree with rgbasm / rgblink / rgbfix (rgbds 1.0.4 in PATH, or RGBDS=dir) and requires md5 fdcfe686cf4df461e870b6e53b2b5a8b.
 The Makefile at the top of the repository builds it: `make` (build/jp_rev_a/pocketcamera_jp.gb), `make check`, `make source ROM=... MGBDIS=...`."""
 import sys as _s; _s.path.insert(0, __import__('os').path.dirname(__import__('os').path.abspath(__file__)))
-import argparse, csv, hashlib, os, re, shutil, subprocess, sys, tempfile, textwrap
+import argparse, bisect, csv, hashlib, os, re, shutil, subprocess, sys, tempfile, textwrap
 
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
 JP = os.path.join(REPO, 'roms', 'jp_rev_a')
@@ -65,6 +65,20 @@ TREES['prototype_debagame'] = dict(dir=_PR, rom='pocketcamera_proto.gb', sym=os.
                           '--const-tables', os.path.join(_PRD, 'const_tables_proto.csv'), '--const-sounds', os.path.join(_PRD, 'sound_names_proto.csv')],
                      cov=os.path.join(_PR, 'trace', 'cov_proto_runs.npz'), report=os.path.join(_PRD, 'rom_operands_proto.csv'),
                      manual=None, readers={}, suffix='proto')
+_HK = os.path.join(REPO, 'roms', 'hello_kitty'); _HKD = os.path.join(_HK, 'disasm')     # Hello Kitty (L5, 2026-11-15, roadmap step 11): its own trace, names and L4 tables
+TREES['hello_kitty'] = dict(dir=_HK, rom='pocketcamera_kitty.gb', sym=os.path.join(_HK, 'pocketcamera_kitty.sym'), trace=os.path.join(_HK, 'trace', 'trace_kitty.json'),
+                     names=[os.path.join(_HKD, 'sym_names_kitty.csv')], md5='0a323bddc4f0159cea76cf44ed0c1a3c', title='Pocket Camera Hello Kitty (Japan)',
+                     fix=['--ram-names', os.path.join(_HKD, 'ram_names_kitty.csv'), '--ram-access', os.path.join(_HK, 'wram', 'wram_access_kitty.csv'),
+                          '--ram-exclude', os.path.join(_HKD, 'ram_exclude_kitty.csv'), '--ram-highbyte', os.path.join(_HKD, 'ram_highbyte_kitty.csv'),
+                          '--const-names', os.path.join(_HKD, 'const_names_kitty.csv'), '--const-types', os.path.join(_HKD, 'const_types_kitty.csv'),
+                          '--const-tables', os.path.join(_HKD, 'const_tables_kitty.csv'), '--const-sounds', os.path.join(_HKD, 'sound_names_kitty.csv'),
+                          '--state-names', os.path.join(_HKD, 'state_names_kitty.csv'), '--text-tables', 'none'],
+                     cov=os.path.join(_HK, 'trace', 'cov_kitty_runs.npz'), report=os.path.join(_HKD, 'rom_operands_kitty.csv'),
+                     manual=None, readers={}, suffix='kitty',
+                     far=[('Far_Call', 'b', 'hl'), ('Far_CallKeepA', 'b', 'hl'), ('Far_Jump', 'a', 'hl'), ('Mode1D_ReadByteFromBank', 'a', 'hl'),
+                          ('Copy_FarDEtoHL', 'a', 'de'), ('Copy_FarUnrolled', 'a', 'de'), ('Copy_FarInverted', 'a', 'de'), ('Vram_CopyHBlankFar', 'a', 'de'),
+                          ('Object_Create', '=02', 'de'), ('Object_CreateWithParam', '=02', 'de')],
+                     mode_calls=('Fade_GoTo', 'Fade_GoToB', 'ModeState_Set', 'Mode_SaveReturnD8F2', 'Mode_SaveReturnD93D'), mode_inline=('ModeState_SetInline',))
 T = TREES['jp_rev_a']
 BIG = 256          # a plain db block of this size or more goes to a .bin file even when it is not an asset
 NOTE = 300         # characters of a label note kept in the source
@@ -117,6 +131,7 @@ FAR = ('Vram_CopyFromBank', 'Vram_CopyFromBankAuto', 'Vram_CopyFromBank_4', 'Mem
 
 
 def far_labels(out):
+    if T.get('far'): return far_labels_spec(out)
     """`ld a, $BB` + `ld hl, $XXXX` before a call to a routine of FAR (a = bank, hl = address): write `ld a, BANK(Label)` / `ld hl, Label`
     when a label of the tree sits at BB:XXXX. Same bytes; the data or code can then move and the call follows it."""
     files = sorted(f for f in os.listdir(out) if re.match(r'bank_[0-9a-f]{3}\.asm$', f))
@@ -147,6 +162,73 @@ def far_labels(out):
                 break
         if ch: open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(L))
     return dict(far=done, far_left=left)
+
+
+def far_labels_spec(out):
+    """A bank and an address handed together to a banked routine: write `BANK(Label)` / `Label` when a label of the tree sits at that
+    bank:address. Same bytes; the data or code can then move and the call follows it. The routines and their registers come from the
+    tree's `far` spec, (routine, bank register `a` / `b` or a fixed bank `=BB`, pointer register `hl` / `de`) (Hello Kitty, 2026-11-15;
+    the other trees keep far_labels). An operand that mgbdis already wrote as a label of the current bank (a wrong-bank
+    label) is replaced the same way."""
+    spec = T['far']
+    by = {}
+    for callee, breg, preg in spec: by.setdefault(callee, []).append((breg, preg))
+    files = sorted(f for f in os.listdir(out) if re.match(r'bank_[0-9a-f]{3}\.asm$', f))
+    defined = set()
+    for f in files:
+        defined.update(re.findall(r'^([A-Za-z_]\w*)::?\s*$', open(os.path.join(out, f), encoding='utf-8').read(), re.M))
+    at = {}; addr_of = {}
+    for l in open(T['sym'], encoding='utf-8'):
+        m = re.match(r'([0-9a-fA-F]{2}):([0-9a-fA-F]{4}) (\S+)', l)
+        if m and m.group(3) in defined:
+            k = (int(m.group(1), 16), int(m.group(2), 16)); at.setdefault(k, m.group(3)); addr_of[m.group(3)] = k
+    done = left = inside = 0
+    keys = sorted(at); code_at = set()
+    def col(code, cm): return ((code.ljust(50) if len(code) < 50 else code + ' ') + (cm or '').strip()).rstrip()      # the comment column kept
+    CALL = re.compile(r'^\s+(?:call|jp) (?:(?:nz|z|nc|c), )?(\w+)')
+    for f in files:
+        p = os.path.join(out, f); L = open(p, encoding='utf-8').read().split('\n'); ch = False
+        for i, l in enumerate(L):
+            m2 = re.match(r'(\s+ld (hl|de), )(?:\$([4-7][0-9a-f]{3})|([A-Za-z_]\w*))(\s.*)?$', l)
+            if not m2: continue
+            preg = m2.group(2)
+            if m2.group(3): v = int(m2.group(3), 16)
+            elif m2.group(4) in addr_of and 0x4000 <= addr_of[m2.group(4)][1] < 0x8000: v = addr_of[m2.group(4)][1]
+            else: continue
+            sp = None; q = i + 1                       # the call that takes it, with no reload of the pointer register before
+            while q < len(L) and q <= i + 4:
+                mc = CALL.match(L[q])
+                if mc:
+                    sp = next(((b, r) for b, r in by.get(mc.group(1), []) if r == preg), None); break
+                if re.match(r'\s+(ld %s,|pop %s|ret\b)' % (preg, preg), L[q]) or re.match(r'^\S', L[q]): break
+                q += 1
+            if not sp: continue
+            breg = sp[0]; bline = None
+            if breg.startswith('='): bk = int(breg[1:], 16)
+            else:                                      # the bank: `ld b, $BB` / `ld a, $BB` up to 4 lines before or between
+                bk = None
+                for r in list(range(i - 1, max(i - 5, -1), -1)) + list(range(i + 1, q)):
+                    if re.match(r'^\S', L[r]): break
+                    mb = re.match(r'(\s+ld %s, )\$([0-9a-f]{2})(\s.*)?$' % breg, L[r])
+                    if mb: bk = int(mb.group(2), 16); bline = (r, mb); break
+                    if re.match(r'\s+(ld %s,|pop (af|bc)|call |rst )' % breg, L[r]) and r < i: break
+                if bk is None: continue
+            lab = at.get((bk, v))
+            if not lab:                                # inside a block: `Block + $N` (the label before it in that bank, at most $400 back)
+                j = bisect.bisect_right(keys, (bk, v)) - 1
+                if j >= 0 and keys[j][0] == bk and 0 < v - keys[j][1] <= 0x400 and (bk, v) not in code_at:
+                    base = at[keys[j]]; lab = '%s + $%X' % (base, v - keys[j][1]); inside += 1
+                    if bline: r, mb = bline; L[r] = col(mb.group(1) + 'BANK(%s)' % base, mb.group(3))
+                    L[i] = col(m2.group(1) + lab, m2.group(5)); done += 1; ch = True; continue
+                left += 1
+                if os.environ.get("FAR_DEBUG"): print("far left", f, i, bk, hex(v), L[i].strip()[:50], file=sys.stderr)
+                continue
+            if m2.group(4) == lab and not bline: continue
+            if bline:
+                r, mb = bline; L[r] = col(mb.group(1) + 'BANK(%s)' % lab, mb.group(3))
+            L[i] = col(m2.group(1) + lab, m2.group(5)); done += 1; ch = True
+        if ch: open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(L))
+    return dict(far=done, far_left=left, far_inside=inside)
 
 
 MACROS = """; Macros of the Pocket Camera source tree, written by tools/make_source.py. Each one assembles to the same bytes as the lines it replaces.
@@ -291,6 +373,46 @@ def jp_far_records(T):
 
 
 SYMBANK = {}
+def mode_consts(out):
+    """`ld b, $MM` / `ld c, $SS` before a call that takes a mode in B and a state in C (the tree's `mode_calls`), and the inline
+    `dw $SSMM` after ModeState_SetInline: written with the MODE_ / STATE_ constants of the tree (disasm/const_names_TAG.csv,
+    state_names_TAG.csv). Same bytes (Hello Kitty, 2026-11-15)."""
+    D = os.path.join(T['dir'], 'disasm'); tag = T['suffix']
+    MODE = {int(r['value'], 16): r['name'] for r in csv.DictReader(open(os.path.join(D, 'const_names_%s.csv' % tag), encoding='utf-8')) if r['group'] == 'mode'}
+    STATE = {(int(r['group'][6:], 16), int(r['value'], 16)): r['name'] for r in csv.DictReader(open(os.path.join(D, 'state_names_%s.csv' % tag), encoding='utf-8'))}
+    def col(code, cm): return ((code.ljust(50) if len(code) < 50 else code + ' ') + (cm or '').strip()).rstrip()
+    nm = ns = ni = 0
+    for f in sorted(x for x in os.listdir(out) if re.match(r'bank_[0-9a-f]{3}\.asm$', x)):
+        p = os.path.join(out, f); L = open(p, encoding='utf-8').read().split('\n'); ch = False
+        for i, l in enumerate(L):
+            mc = re.match(r'\s+(?:call|jp) (\w+)', l)
+            if not mc: continue
+            if mc.group(1) in T['mode_calls']:
+                rb = rc = None
+                for r in range(i - 1, max(i - 5, -1), -1):
+                    if re.match(r'^\S', L[r]) or re.match(r'\s+(call|jp|jr|ret|rst)\b', L[r]): break
+                    if rb is None and re.match(r'\s+ld b,', L[r]): rb = r
+                    if rc is None and re.match(r'\s+ld c,', L[r]): rc = r
+                if rb is None: continue
+                mb = re.match(r'(\s+ld b, )\$([0-9a-f]{2})(\s.*)?$', L[rb])
+                if not mb: continue
+                mo = int(mb.group(2), 16)
+                if mo in MODE: L[rb] = col(mb.group(1) + MODE[mo], mb.group(3)); nm += 1; ch = True
+                if rc is not None:
+                    m2 = re.match(r'(\s+ld c, )\$([0-9a-f]{2})(\s.*)?$', L[rc])
+                    if m2 and (mo, int(m2.group(2), 16)) in STATE: L[rc] = col(m2.group(1) + STATE[(mo, int(m2.group(2), 16))], m2.group(3)); ns += 1; ch = True
+            elif mc.group(1) in T.get('mode_inline', ()):
+                j = i + 1
+                while j < len(L) and not L[j].strip(): j += 1
+                md = re.match(r'(\s+)dw \$([0-9a-f]{2})([0-9a-f]{2})(\s.*)?$', L[j]) if j < len(L) else None
+                if not md: continue
+                st, mo = int(md.group(2), 16), int(md.group(3), 16)
+                if mo not in MODE: continue
+                L[j] = col(md.group(1) + 'db %s, %s' % (MODE[mo], STATE.get((mo, st), '$%02X' % st)), md.group(4)); ni += 1; ch = True
+        if ch: open(p, 'w', encoding='utf-8', newline='\n').write('\n'.join(L))
+    return dict(mode_b=nm, state_c=ns, mode_inline=ni)
+
+
 def use_macros(out, sym=None):
     """Rewrite the five patterns of MACROS (on adjacent lines only, so no label can sit inside one); the first line's address comment stays."""
     SYMBANK.clear()
@@ -436,6 +558,7 @@ def main():
                 outl.append(line.rstrip()); i += 1
             open(os.path.join(out, f), 'w', encoding='utf-8', newline='\n').write('\n'.join(outl).rstrip('\n') + '\n')
         stats.update(far_labels(out))
+        if T.get('mode_calls'): stats.update(mode_consts(out))
         import rom_operands
         readers = T['readers']
         if readers == 'port':                      # the STRUCT_READERS sites of the Japanese build at their address in this one (instruction map)

@@ -546,7 +546,8 @@ def apply(out, sym, rom, cov=None, report=None, names=None, manual_csv=None, rea
                 return ('?', None, None, 'dereferenced at %s; the mapped bank is unknown' % ('%02X:%04X' % r[3] if len(r) > 3 and r[3][1] is not None else '?'))
             if r[2]: return ('ptr', r[1], r[2], 'C: handed with its bank in A to a banked copy, a far call or the far return')
             seen = len(r) > 3 and r[1] in read_by(r[3], v)
-            return ('ptr', r[1], None, 'C: dereferenced at %02X:%04X (bank %02X mapped)%s' % (r[3][0], r[3][1] or 0, r[1], '; that instruction read the target block in the runs' if seen else ''))
+            bk = '%02X' % r[1] if isinstance(r[1], int) else 'read from the record'     # 'BYTE': the bank byte of a {lo, hi, bank} record mapped by an MBC write (Hello Kitty, 2026-11-15)
+            return ('ptr', r[1], None, 'C: dereferenced at %02X:%04X (bank %s mapped)%s' % (r[3][0], r[3][1] or 0, bk, '; that instruction read the target block in the runs' if seen else ''))
         if r[0] == 'saved':
             return ('?', None, None, 'stored to %s for later use: not followed' % r[2])
         if r[0] == 'num': return ('num', None, None, 'C: read as bytes (arithmetic, comparison) before any dereference')

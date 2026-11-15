@@ -341,6 +341,28 @@ if getattr(A, 'rom_kitty', None):
     if A.rom:                                                      # L4: RAM / SRAM tables, RAM names, constants, the SRAM map on the game's own saves
         _m = subprocess.run([sys.executable, 'tools/kitty_l4.py', A.rom_kitty, A.rom, '--check'], capture_output=True, text=True, cwd=ROOT)
         (ok if not _m.returncode else bad)('kitty', 'L4: ' + (_m.stdout + _m.stderr).strip().replace('\n', ' / ')[-400:])
+    _KD = 'roms/hello_kitty/'                                      # L5: no raw RAM operand in the tree; with --roundtrip, the tree is fresh and builds byte-exact
+    _raw = []
+    for _f in sorted(glob.glob(_KD + 'src/bank_*.asm')):
+        for _l in open(_f, encoding='utf-8'):
+            _c = _l.split(';', 1)[0]
+            _mm = re.search(r'\b(?:ld|ldh)\b[^;]*\[\$([0-9a-fA-F]{2,4})\]', _c)
+            if _mm and (0xC000 <= int(_mm.group(1), 16) < 0xE000 or 0xFF80 <= int(_mm.group(1), 16) < 0xFFFF or len(_mm.group(1)) == 2 and int(_mm.group(1), 16) >= 0x80): _raw.append(_l.strip()[:60])
+    if not glob.glob(_KD + 'src/bank_*.asm'): bad('kitty', _KD + 'src/ is missing')
+    elif _raw: bad('kitty', _KD + 'src/ keeps %d raw RAM operands: %s' % (len(_raw), _raw[:3]))
+    else: ok('kitty', 'L5: roms/hello_kitty/src/ has no raw WRAM / HRAM operand of ld / ldh')
+    if A.roundtrip:
+        _tmp = tempfile.mkdtemp(prefix='cons_kitty_'); fr = os.path.join(_tmp, 'src'); rp = os.path.join(_tmp, 'rom_operands_kitty.csv')
+        ms = subprocess.run([sys.executable, 'tools/make_source.py', '--tree', 'hello_kitty', '--rom', A.rom_kitty, '--mgbdis', A.mgbdis, '--rgbds', A.rgbds, '--out', fr, '--report', rp, '--check'], capture_output=True, text=True, cwd=ROOT)
+        if ms.returncode: bad('kitty', 'make_source.py --tree hello_kitty failed: %s' % (ms.stderr or ms.stdout)[-300:])
+        else:
+            def walkk(r): return sorted(os.path.relpath(os.path.join(dp, f), r) for dp, _, fs in os.walk(r) for f in fs)
+            a_, b_ = walkk(fr), walkk(_KD + 'src')
+            dif = sorted(set(a_) ^ set(b_)) + [f for f in a_ if f in set(b_) and open(os.path.join(fr, f), 'rb').read() != open(os.path.join(_KD + 'src', f), 'rb').read()]
+            if dif: bad('kitty', 'roms/hello_kitty/src/ is not what make_source.py --tree hello_kitty writes (%d files differ: %s)' % (len(dif), dif[:4]))
+            elif open(rp, 'rb').read() != open(_KD + 'disasm/rom_operands_kitty.csv', 'rb').read(): bad('kitty', _KD + 'disasm/rom_operands_kitty.csv is not fresh')
+            else: ok('kitty', 'L5: roms/hello_kitty/src/ fresh (%d files), builds md5 0a323bddc4f0159cea76cf44ed0c1a3c' % len(a_))
+        shutil.rmtree(_tmp, ignore_errors=True)
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
