@@ -23,15 +23,28 @@ Leftover_20_4100::
 Leftover_20_4103_AsmSource::
     db $c1, "0", $09, ";0158", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$7F,$78,$7F,$40,$7F,$60,$3F,$3E", $09, ";0159", $0d, $0a, $09, "DEFB", $09, "$01,$01,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$FE,$02,$FE,$02,$FE,$02,$FC,$04", $09, ";015A", $0d, $0a, $09, "DEFB", $09, "$FC,$FC,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$30,$30,$60,$60,$60,$60,$30,$3"
 
-; I: leftover: 83 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 38 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_20_4200::
     db $04, $cd, $11, $0d, $c9, $fe, $0a, $20, $04, $cd, $07, $1b, $c9, $fe, $09, $20
     db $04, $cd, $04, $15, $c9, $fe, $0b, $20, $01, $c9, $fe, $0d, $20, $03, $cd, $cb
-    db $1e, $fe, $0e, $20, $00, $c9, $2a, $12, $13, $0b, $78, $b1, $20, $f8, $c9, $af
-    db $21, $00, $c0, $06, $a0, $22, $05, $20, $fc, $c9, $f0, $ff, $e0, $89, $cb, $87
-    db $e0, $ff, $f0, $44, $fe, $91, $20, $fa, $f0, $40, $e6, $7f, $e0, $40, $f0, $89
-    db $e0, $ff, $c9
+    db $1e, $fe, $0e, $20, $00, $c9
+
+; I: leftover: 9 bytes of code DATA_MOV of the bank 0 of an older build (bank $20); found by its bytes (16-bit
+; operands masked) near its place in bank $2C; code that this build never runs (typed data)
+Leftover_20_4226_DATA_MOV::
+    db $2a, $12, $13, $0b, $78, $b1, $20, $f8, $c9
+
+; I: leftover: 11 bytes of code DMACLR of the bank 0 of an older build (bank $20); found by its bytes (16-bit operands
+; masked) near its place in bank $2C; code that this build never runs (typed data)
+Leftover_20_422F_DMACLR::
+    db $af, $21, $00, $c0, $06, $a0, $22, $05, $20, $fc, $c9
+
+; I: leftover: 25 bytes of code LCDCOFF of the bank 0 of an older build (bank $20); found by its bytes (16-bit
+; operands masked) near its place in bank $2C; code that this build never runs (typed data)
+Leftover_20_423A_LCDCOFF::
+    db $f0, $ff, $e0, $89, $cb, $87, $e0, $ff, $f0, $44, $fe, $91, $20, $fa, $f0, $40
+    db $e6, $7f, $e0, $40, $f0, $89, $e0, $ff, $c9
 
 ; I: leftover: 49 bytes of code INKEY of the bank 0 of an older build (bank $20); found by its bytes (16-bit operands
 ; masked) near its place in bank $2C; code that this build never runs (typed data)

@@ -8,9 +8,9 @@ SECTION "ROM Bank $025", ROMX[$4000], BANK[$25]
 BankNumber_25_4000::
     db $25
 
-; I: leftover PC memory: 509 bytes (25:4001-41FD) that hold 2 x86 function prologues (55 8B EC: push bp / mov bp,sp;
-; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest
-; of the run is taken as the same memory
+; I: leftover PC memory: 509 bytes (25:4001-41FD), the 512-byte blocks of a leftover run that hold 2 x86 function
+; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 2 in the whole leftover run); nothing in this
+; build reads, runs or explains them; only those proofs are proven, the rest ...
 Leftover_25_4001_PcRam::
     INCBIN "data/bank_25/Leftover_25_4001_PcRam.bin" ; $4001, 509 bytes
 ; I: leftover text: 15874 bytes of the developers' assembler source in clear (0 listing lines, 511 assembler lines)

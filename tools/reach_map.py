@@ -97,10 +97,10 @@ cat[nx] = 2                                                   # red
 cat[nx & green] = 5; cat[nx & dead] = 6                       # green / purple (ported builds)
 cat[forced] = 1                                               # light blue: only in forced runs
 n = lambda m: int(m.sum()); cnt = {c: n(cat == c) for c in range(10)}
-pc = lambda v: '%s B, %.1f %%' % (format(v, ','), 100 * v / N)
+pc = lambda v: RD.pc(v, N)                                   # the common format (<0.1 % for a few bytes)
 c_code = n(code); c_ran = n(code & ex)
 items = [(0, 'blue: executed or read in a run (%s)  (%s)' % (RUNS[T], pc(cnt[0])))]
-if cnt[1] or T in FORCED: items.append((1, 'light blue: executed or read only in forced runs (%s)  (%s)' % (FORCED.get(T, 'state pokes'), pc(cnt[1]))))
+items.append((1, 'light blue: executed or read only in forced runs (%s)  (%s)' % (FORCED.get(T, 'state pokes'), pc(cnt[1]))))
 if os.path.exists(nr):
     items.append((5, 'GREEN: code no run of this ROM executed, the same code as a Japanese routine that ran (credited by equivalence)  (%s)' % pc(cnt[5])))
     items.append((6, 'PURPLE: code that never ran and is proven dead or unused (as in the Japanese ROM, or unused here)  (%s)' % pc(cnt[6])))
@@ -111,7 +111,7 @@ items += [(4, 'ORANGE: data that no run read, explained by a loader site, a tabl
           (3, 'muted red: never-read runs of 16+ x $00, padding  (%s)' % pc(cnt[3])),
           (8, 'beige: never-read runs of 16+ x $FF, fill  (%s)' % pc(cnt[8]))]
 note = ('Shade inside a colour = the tile pixel (2 bits), so graphics, text and code all stay visible. A 2-byte tile row takes the worst colour of its two bytes '
-        '(red > purple > grey-blue > yellow > orange > fill > padding > green > light blue > blue).' + (' Light blue is not a way the game runs.' if T in FORCED else ''))
+        '({ORDER}).' + (' Light blue is not a way the game runs.' if cnt[1] else ''))
 RD.draw(rom, cat, '%s: what the runs reached, the whole ROM drawn as 2bpp tiles, 64 banks of 16 KB' % title,
         'Each bank = 16 x 64 tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row, in the colours of the Japanese reachability map (tools/reach_draw.py). Red and grey-blue are what is still missing.',
         items, note, OUT)

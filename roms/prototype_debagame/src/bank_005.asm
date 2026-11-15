@@ -28,10 +28,9 @@ Unused_TCRF_FacePhoto9_HOI_L_Gfx::
 ; L2 runs (trace/cov_proto_runs.npz); no type row, copy site or pointer ...
 Unused_TCRF_FacePhoto10_HOI_R_Gfx::
     INCBIN "data/bank_05/Unused_TCRF_FacePhoto10_HOI_R_Gfx.2bpp" ; $6A01, 3584 bytes
-; I: leftover PC memory: 2046 bytes (05:7801-7FFE) that hold 1 strings of the development PC's RAM
-; (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...), and that nothing in this build reads, runs or explains; only those are proven,
-; the rest of the run is taken as the same memory
-Leftover_05_7801_PcRam::
+; I: leftover: 1023 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs); no proof of PC memory in them
+Leftover_05_7801::
     db $89, $8a, $04, $cd, $56, $28, $5b, $00, $d1, $e8, $83, $e0, $01, $85, $c0, $0f
     db $84, $dd, $04, $00, $00, $8b, $56, $10, $8b, $4a, $04, $8a, $01, $24, $ff, $33
     db $d2, $8a, $d0, $8b, $ca, $03, $c9, $8d, $0c, $89, $8a, $04, $cd, $56, $28, $5b
@@ -95,6 +94,10 @@ Leftover_05_7801_PcRam::
     ; padding
     ds $e2, $00
 
+; I: leftover PC memory: 512 bytes (05:7C00-7DFF), the 512-byte blocks of a leftover run that hold 1 strings of the
+; development PC's RAM (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...); nothing in this build reads, runs or explains them; only
+; those proofs are proven, the rest of each block is taken as the same ...
+Leftover_05_7C00_PcRam::
     db $43, $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53, $5c, $53, $59, $53, $54, $45
     db $4d, $5c, $4b, $45, $52, $4e, $45, $4c, $33, $32, $2e, $44, $4c, $4c
 
@@ -109,9 +112,21 @@ Leftover_05_7801_PcRam::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $61, $00, $00, $00, $01, $00
     db $00, $00, $10
 
-    ; padding
-    ds $294, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00
 
+; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs); no proof of PC memory in them
+Leftover_05_7E00::
+    INCBIN "data/bank_05/Leftover_05_7E00.bin" ; $7E00, 511 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_05_7FFF::
     db $05

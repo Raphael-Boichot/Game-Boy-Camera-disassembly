@@ -29,29 +29,31 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 03,7481,76C1,576,Map_03_7481_BG_F_SCR,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
 03,76C1,7AC1,1024,Map_03_76C1_BG_EDIT,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
 03,7AC1,7FFF,1342,Map_03_7AC1_BG_EDITW,data,not_tcrf,,,
-04,4001,4100,255,Data_04_4001_HOI_0,data,not_tcrf,,,
-04,4BF0,4E01,529,Leftover_04_4BF0,data,not_tcrf,,,
-04,4E01,4E4E,77,Data_04_4E01_KAO_1,data,not_tcrf,,,
-04,4E4E,5C01,3507,Leftover_04_4E4E_PcRam,data,not_tcrf,,,
-04,5C01,6270,1647,Data_04_5C01_KAO_2,data,not_tcrf,,,
-04,6270,6A01,1937,Leftover_04_6270,data,not_tcrf,,,
-04,6A01,72C2,2241,Data_04_6A01_KAO_3,data,not_tcrf,,,
-04,72C2,7FFF,3389,Leftover_04_72C2,data,not_tcrf,,,
+04,4001,4100,255,Leftover_04_4001,data,not_tcrf,,,
+04,4BF0,4E00,528,Leftover_04_4BF0,data,not_tcrf,,,
+04,4E00,5000,512,Leftover_04_4E00_PcRam,data,not_tcrf,,,
+04,5000,7FFF,12287,Leftover_04_5000,data,not_tcrf,,,
 05,4001,4E01,3584,Unused_TCRF_FacePhoto7_HOI_U_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,4E01,5C01,3584,Unused_TCRF_FacePhoto8_HOI_D_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,5C01,6A01,3584,Unused_TCRF_FacePhoto9_HOI_L_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,6A01,7801,3584,Unused_TCRF_FacePhoto10_HOI_R_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-05,7801,7FFF,2046,Leftover_05_7801_PcRam,data,not_tcrf,,,
+05,7801,7C00,1023,Leftover_05_7801,data,not_tcrf,,,
+05,7C00,7E00,512,Leftover_05_7C00_PcRam,data,not_tcrf,,,
+05,7E00,7FFF,511,Leftover_05_7E00,data,not_tcrf,,,
 06,4001,4E01,3584,Unused_TCRF_FaceDrawing1_FACE5_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 06,4E01,5C01,3584,Unused_TCRF_FaceDrawing2_FACE6_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 06,5C01,6A01,3584,Unused_TCRF_FaceDrawing3_FACE7_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 06,6A01,7A00,4095,Unused_TCRF_FaceDrawing4_FACE8_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 06,7A00,7FFF,1535,Leftover_06_7A00,data,not_tcrf,,,
 07,4101,7FFF,16126,Leftover_07_4101,data,not_tcrf,,,
-08,4001,7FFF,16382,Leftover_08_4001_PcRam,data,not_tcrf,,,
-09,4001,7FFF,16382,Leftover_09_4001_PcRam,data,not_tcrf,,,
-0A,4001,7FFF,16382,Leftover_0A_4001_PcRam,data,not_tcrf,,,
-0B,4001,7FFF,16382,Leftover_0B_4001_PcRam,data,not_tcrf,,,
+08,4001,4200,511,Leftover_08_4001_PcRam,data,not_tcrf,,,
+08,4200,7FFF,15871,Leftover_08_4200,data,not_tcrf,,,
+09,4001,4200,511,Leftover_09_4001_PcRam,data,not_tcrf,,,
+09,4200,7FFF,15871,Leftover_09_4200,data,not_tcrf,,,
+0A,4001,4200,511,Leftover_0A_4001_PcRam,data,not_tcrf,,,
+0A,4200,7FFF,15871,Leftover_0A_4200,data,not_tcrf,,,
+0B,4001,4200,511,Leftover_0B_4001_PcRam,data,not_tcrf,,,
+0B,4200,7FFF,15871,Leftover_0B_4200,data,not_tcrf,,,
 0C,4001,4100,255,Leftover_0C_4001_AsmSource,data,not_tcrf,,,
 0C,4100,4104,4,Leftover_0C_4100_PcRam,data,not_tcrf,,,
 0C,4104,4200,252,Leftover_0C_4104_AsmSource,data,not_tcrf,,,
@@ -70,7 +72,8 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 10,413B,4179,62,Leftover_10_413B,data,not_tcrf,,,
 10,4179,41A7,46,Leftover_10_4179_WANKO_Part056F,data,not_tcrf,,,
 10,41A7,7FFF,15960,Leftover_10_41A7,data,not_tcrf,,,
-11,4001,7FFF,16382,Leftover_11_4001_PcRam,data,not_tcrf,,,
+11,4001,4200,511,Leftover_11_4001_PcRam,data,not_tcrf,,,
+11,4200,7FFF,15871,Leftover_11_4200,data,not_tcrf,,,
 12,4001,4100,255,Leftover_12_4001_AsmSource,data,not_tcrf,,,
 12,4100,4104,4,Leftover_12_4100_PcRam,data,not_tcrf,,,
 12,4104,42F4,496,Leftover_12_4104_AsmSource,data,not_tcrf,,,
@@ -101,7 +104,9 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 1A,4001,4100,255,Leftover_1A_4001_AsmSource,data,not_tcrf,,,
 1A,4100,4104,4,Leftover_1A_4100_PcRam,data,not_tcrf,,,
 1A,4104,4200,252,Leftover_1A_4104_AsmSource,data,not_tcrf,,,
-1A,4200,7FFF,15871,Leftover_1A_4200_PcRam,data,not_tcrf,,,
+1A,4200,7200,12288,Leftover_1A_4200,data,not_tcrf,,,
+1A,7200,7600,1024,Leftover_1A_7200_PcRam,data,not_tcrf,,,
+1A,7600,7FFF,2559,Leftover_1A_7600,data,not_tcrf,,,
 1B,4001,4100,255,Leftover_1B_4001_AsmSource,data,not_tcrf,,,
 1B,4100,4104,4,Leftover_1B_4100_PcRam,data,not_tcrf,,,
 1B,4104,5000,3836,Leftover_1B_4104_AsmSource,data,not_tcrf,,,
@@ -248,9 +253,9 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 1D,7B7B,7F75,1018,Leftover_1D_7B7B_Gfx_01_4001_FNTOOE1_Part53E3,data,not_tcrf,,,
 1D,7F75,7FA9,52,Leftover_1D_7F75,data,not_tcrf,,,
 1D,7FA9,7FFF,86,Leftover_1D_7FA9_Map_01_5801_TITLE1_Part5801,data,not_tcrf,,,
-1E,4001,4101,256,Leftover_1E_4001_Unused_TCRF_FacePhoto3_Gfx_Part7001,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+1E,4001,4101,256,Leftover_1E_4001_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part7001,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 1E,4101,4104,3,Leftover_1E_4101,data,not_tcrf,,,
-1E,4104,4200,252,Leftover_1E_4104_Unused_TCRF_FacePhoto3_Gfx_Part7104,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+1E,4104,4200,252,Leftover_1E_4104_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part7104,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 1E,4200,4431,561,Leftover_1E_4200_Map_01_5A41_MENU1_Part5A50,data,not_tcrf,,,
 1E,4431,4439,8,Leftover_1E_4431,data,not_tcrf,,,
 1E,4439,4833,1018,Leftover_1E_4439_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part5C81,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
@@ -262,14 +267,17 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 1E,503F,5251,530,Leftover_1E_503F_Unused_TCRF_FacePhoto5_SIMO_Gfx_Part686F,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 1E,5251,53FB,426,Leftover_1E_5251_OldSymbolTable_2A_4B7F_VariantPart4DEC,data,not_tcrf,,,
 1E,53FB,7FFF,11268,Leftover_1E_53FB_AsmSource,data,not_tcrf,,,
-1F,4001,4101,256,Leftover_1F_4001_Unused_TCRF_FacePhoto1_Gfx_Part5001,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+1F,4001,4101,256,Leftover_1F_4001_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part5001,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 1F,4101,4104,3,Leftover_1F_4101,data,not_tcrf,,,
-1F,4104,4200,252,Leftover_1F_4104_Unused_TCRF_FacePhoto1_Gfx_Part5104,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+1F,4104,4200,252,Leftover_1F_4104_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part5104,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 1F,4200,7FFF,15871,Leftover_1F_4200_AsmSource,data,not_tcrf,,,
 20,4001,4100,255,Leftover_20_4001_AsmSource,data,not_tcrf,,,
 20,4100,4103,3,Leftover_20_4100,data,not_tcrf,,,
 20,4103,4200,253,Leftover_20_4103_AsmSource,data,not_tcrf,,,
-20,4200,4253,83,Leftover_20_4200,data,not_tcrf,,,
+20,4200,4226,38,Leftover_20_4200,data,not_tcrf,,,
+20,4226,422F,9,Leftover_20_4226_DATA_MOV,data,not_tcrf,,,
+20,422F,423A,11,Leftover_20_422F_DMACLR,data,not_tcrf,,,
+20,423A,4253,25,Leftover_20_423A_LCDCOFF,data,not_tcrf,,,
 20,4253,4284,49,Leftover_20_4253_INKEY,data,not_tcrf,,,
 20,4284,42A8,36,Leftover_20_4284,data,not_tcrf,,,
 20,42A8,42B8,16,Leftover_20_42A8_VRAM_CLR,data,not_tcrf,,,
@@ -589,24 +597,24 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 23,5791,5795,4,Leftover_23_5791,data,not_tcrf,,,
 23,5795,59D5,576,Leftover_23_5795_Map_03_7241_BG_CONF,data,not_tcrf,,,
 23,59D5,60E1,1804,Leftover_23_59D5,data,not_tcrf,,,
-23,60E1,62E1,512,Leftover_23_60E1_Unused_TCRF_FacePhoto6_Rows0To1_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-23,62E1,64DB,506,Leftover_23_62E1_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part4201,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,60E1,62E1,512,Leftover_23_60E1_Unused_TCRF_FacePhoto6_HOI_0_Rows0To1_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,62E1,64DB,506,Leftover_23_62E1_Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx_Part4201,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,64DB,64E1,6,Leftover_23_64DB_LoadRecord,data,not_tcrf,,,
-23,64E1,68DB,1018,Leftover_23_64E1_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part43FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,64E1,68DB,1018,Leftover_23_64E1_Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx_Part43FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,68DB,68E1,6,Leftover_23_68DB_LoadRecord,data,not_tcrf,,,
-23,68E1,6CDB,1018,Leftover_23_68E1_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part47F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,68E1,6CDB,1018,Leftover_23_68E1_Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx_Part47F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,6CDB,6CE1,6,Leftover_23_6CDB_LoadRecord,data,not_tcrf,,,
-23,6CE1,6EF3,530,Leftover_23_6CE1_Unused_TCRF_FacePhoto6_Rows2To13_Gfx_Part4BEF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,6CE1,6EF3,530,Leftover_23_6CE1_Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx_Part4BEF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,6EF3,6EF9,6,Leftover_23_6EF3_LoadRecord,data,not_tcrf,,,
-23,6EF9,72F3,1018,Leftover_23_6EF9_Unused_TCRF_FacePhoto1_Gfx_Part4E01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,6EF9,72F3,1018,Leftover_23_6EF9_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part4E01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,72F3,72F9,6,Leftover_23_72F3_LoadRecord,data,not_tcrf,,,
-23,72F9,76F3,1018,Leftover_23_72F9_Unused_TCRF_FacePhoto1_Gfx_Part51FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,72F9,76F3,1018,Leftover_23_72F9_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part51FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,76F3,76F9,6,Leftover_23_76F3_LoadRecord,data,not_tcrf,,,
-23,76F9,7AF3,1018,Leftover_23_76F9_Unused_TCRF_FacePhoto1_Gfx_Part55F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,76F9,7AF3,1018,Leftover_23_76F9_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part55F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,7AF3,7AF9,6,Leftover_23_7AF3_LoadRecord,data,not_tcrf,,,
-23,7AF9,7D0B,530,Leftover_23_7AF9_Unused_TCRF_FacePhoto1_Gfx_Part59EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,7AF9,7D0B,530,Leftover_23_7AF9_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part59EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,7D0B,7D11,6,Leftover_23_7D0B_LoadRecord,data,not_tcrf,,,
-23,7D11,7FFF,750,Leftover_23_7D11_Unused_TCRF_FacePhoto2_Gfx_Part5C01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+23,7D11,7FFF,750,Leftover_23_7D11_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 24,4001,4200,511,Leftover_24_4001,data,not_tcrf,,,
 24,4200,7FFF,15871,Leftover_24_4200_AsmSource,data,not_tcrf,,,
 25,4001,41FE,509,Leftover_25_4001_PcRam,data,not_tcrf,,,
@@ -619,19 +627,19 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 28,4001,4100,255,Unused_TCRF_AsmSource2_Part3,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Source Code,"the two commented assembly listings it shows (banks $26 and $27-$28, assets/tcrf_source_proto.csv); the other source text of the ROM is not shown there"
 28,4100,4104,4,Leftover_28_4100_PcRam,data,not_tcrf,,,
 28,4104,4200,252,Unused_TCRF_AsmSource2_Part4,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Source Code,"the two commented assembly listings it shows (banks $26 and $27-$28, assets/tcrf_source_proto.csv); the other source text of the ROM is not shown there"
-28,4200,450B,779,Leftover_28_4200_Unused_TCRF_FacePhoto2_Gfx_Part60EA,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,4200,450B,779,Leftover_28_4200_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part60EA,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,450B,4511,6,Leftover_28_450B_LoadRecord,data,not_tcrf,,,
-28,4511,490B,1018,Leftover_28_4511_Unused_TCRF_FacePhoto2_Gfx_Part63F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,4511,490B,1018,Leftover_28_4511_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part63F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,490B,4911,6,Leftover_28_490B_LoadRecord,data,not_tcrf,,,
-28,4911,4B23,530,Leftover_28_4911_Unused_TCRF_FacePhoto2_Gfx_Part67EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,4911,4B23,530,Leftover_28_4911_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part67EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,4B23,4B29,6,Leftover_28_4B23_LoadRecord,data,not_tcrf,,,
-28,4B29,4F23,1018,Leftover_28_4B29_Unused_TCRF_FacePhoto3_Gfx_Part6A01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,4B29,4F23,1018,Leftover_28_4B29_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part6A01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,4F23,4F29,6,Leftover_28_4F23_LoadRecord,data,not_tcrf,,,
-28,4F29,5323,1018,Leftover_28_4F29_Unused_TCRF_FacePhoto3_Gfx_Part6DFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,4F29,5323,1018,Leftover_28_4F29_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part6DFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,5323,5329,6,Leftover_28_5323_LoadRecord,data,not_tcrf,,,
-28,5329,5723,1018,Leftover_28_5329_Unused_TCRF_FacePhoto3_Gfx_Part71F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,5329,5723,1018,Leftover_28_5329_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part71F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,5723,5729,6,Leftover_28_5723_LoadRecord,data,not_tcrf,,,
-28,5729,593B,530,Leftover_28_5729_Unused_TCRF_FacePhoto3_Gfx_Part75EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+28,5729,593B,530,Leftover_28_5729_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part75EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,593B,594F,20,Leftover_28_593B,data,not_tcrf,,,
 28,594F,5D49,1018,Leftover_28_594F_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part4001,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 28,5D49,5D4F,6,Leftover_28_5D49_LoadRecord,data,not_tcrf,,,
@@ -711,8 +719,15 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 2B,4001,4100,255,Leftover_2B_4001_AsmSource,data,not_tcrf,,,
 2B,4100,4104,4,Leftover_2B_4100_PcRam,data,not_tcrf,,,
 2B,4104,4200,252,Leftover_2B_4104_AsmSource,data,not_tcrf,,,
-2B,4200,7FFF,15871,Leftover_2B_4200_PcRam,data,not_tcrf,,,
-2C,4001,42EC,747,Leftover_2C_4001_PcRam,data,not_tcrf,,,
+2B,4200,4400,512,Leftover_2B_4200_PcRam,data,not_tcrf,,,
+2B,4400,7FFF,15359,Leftover_2B_4400,data,not_tcrf,,,
+2C,4001,4200,511,Leftover_2C_4001_PcRam,data,not_tcrf,,,
+2C,4200,4204,4,Leftover_2C_4200,data,not_tcrf,,,
+2C,4204,4280,124,Leftover_2C_4204_MAIN_SUB,data,not_tcrf,,,
+2C,4280,42BF,63,Leftover_2C_4280_VBLANK_SUB,data,not_tcrf,,,
+2C,42BF,42C8,9,Leftover_2C_42BF_DATA_MOV,data,not_tcrf,,,
+2C,42C8,42D3,11,Leftover_2C_42C8_DMACLR,data,not_tcrf,,,
+2C,42D3,42EC,25,Leftover_2C_42D3_LCDCOFF,data,not_tcrf,,,
 2C,42EC,431D,49,Leftover_2C_42EC_INKEY,data,not_tcrf,,,
 2C,431D,4327,10,Leftover_2C_431D_DMADATA,data,not_tcrf,,,
 2C,4327,4341,26,Leftover_2C_4327_CLRCHR_SET,data,not_tcrf,,,
@@ -967,10 +982,10 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 30,4001,4100,255,Leftover_30_4001_AsmSource,data,not_tcrf,,,
 30,4100,4104,4,Leftover_30_4100_PcRam,data,not_tcrf,,,
 30,4104,4201,253,Leftover_30_4104_AsmSource,data,not_tcrf,,,
-30,4201,4E01,3072,Unused_TCRF_FacePhoto6_Rows2To13_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-30,4E01,5C01,3584,Unused_TCRF_FacePhoto1_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-30,5C01,6A01,3584,Unused_TCRF_FacePhoto2_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-30,6A01,7801,3584,Unused_TCRF_FacePhoto3_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+30,4201,4E01,3072,Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+30,4E01,5C01,3584,Unused_TCRF_FacePhoto1_KAO_1_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+30,5C01,6A01,3584,Unused_TCRF_FacePhoto2_KAO_2_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+30,6A01,7801,3584,Unused_TCRF_FacePhoto3_KAO_3_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 30,7801,7FFF,2046,Leftover_30_7801,data,not_tcrf,,,
 31,4001,4100,255,Leftover_31_4001_AsmSource,data,not_tcrf,,,
 31,4100,4104,4,Leftover_31_4100_PcRam,data,not_tcrf,,,
@@ -992,9 +1007,9 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 32,78F4,78FA,6,Leftover_32_78F4,data,not_tcrf,,,
 32,78FA,7A00,262,Leftover_32_78FA_Unused_TCRF_FacePhoto10_HOI_R_Gfx_Part71F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 32,7A00,7A0B,11,Leftover_32_7A00,data,not_tcrf,,,
-32,7A0B,7C1D,530,Leftover_32_7A0B_Unused_TCRF_FacePhoto1_Gfx_Part59EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+32,7A0B,7C1D,530,Leftover_32_7A0B_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part59EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 32,7C1D,7C23,6,Leftover_32_7C1D_LoadRecord,data,not_tcrf,,,
-32,7C23,7FFF,988,Leftover_32_7C23_Unused_TCRF_FacePhoto2_Gfx_Part5C01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+32,7C23,7FFF,988,Leftover_32_7C23_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 33,4001,4200,511,Leftover_33_4001,data,not_tcrf,,,
 33,4200,4E01,3073,Leftover_33_4200_Unused_TCRF_FaceDrawing1_FACE5_Gfx_Part4200,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 33,4E01,5C01,3584,Leftover_33_4E01_Unused_TCRF_FaceDrawing2_FACE6_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
@@ -1029,27 +1044,28 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 35,479A,4929,399,Leftover_35_479A_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part7672,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 35,4929,4A91,360,Leftover_35_4929,data,not_tcrf,,,
 35,6D1C,7600,2276,Leftover_35_6D1C,data,not_tcrf,,,
-35,7600,799D,925,Leftover_35_7600_Unused_TCRF_FacePhoto1_Gfx_Part4E5E,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+35,7600,799D,925,Leftover_35_7600_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part4E5E,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 35,799D,79A3,6,Leftover_35_799D_LoadRecord,data,not_tcrf,,,
-35,79A3,7D9D,1018,Leftover_35_79A3_Unused_TCRF_FacePhoto1_Gfx_Part51FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+35,79A3,7D9D,1018,Leftover_35_79A3_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part51FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 35,7D9D,7DA3,6,Leftover_35_7D9D_LoadRecord,data,not_tcrf,,,
-35,7DA3,7FFF,604,Leftover_35_7DA3_Unused_TCRF_FacePhoto1_Gfx_Part55F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-36,4001,4400,1023,Leftover_36_4001_PcRam,data,not_tcrf,,,
-36,4400,47B5,949,Leftover_36_4400_Unused_TCRF_FacePhoto2_Gfx_Part5C46,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+35,7DA3,7FFF,604,Leftover_35_7DA3_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part55F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,4001,4200,511,Leftover_36_4001,data,not_tcrf,,,
+36,4200,4400,512,Leftover_36_4200_PcRam,data,not_tcrf,,,
+36,4400,47B5,949,Leftover_36_4400_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C46,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,47B5,47BB,6,Leftover_36_47B5_LoadRecord,data,not_tcrf,,,
-36,47BB,4BB5,1018,Leftover_36_47BB_Unused_TCRF_FacePhoto2_Gfx_Part5FFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,47BB,4BB5,1018,Leftover_36_47BB_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5FFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,4BB5,4BBB,6,Leftover_36_4BB5_LoadRecord,data,not_tcrf,,,
-36,4BBB,4FB5,1018,Leftover_36_4BBB_Unused_TCRF_FacePhoto2_Gfx_Part63F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,4BBB,4FB5,1018,Leftover_36_4BBB_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part63F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,4FB5,4FBB,6,Leftover_36_4FB5_LoadRecord,data,not_tcrf,,,
-36,4FBB,51CD,530,Leftover_36_4FBB_Unused_TCRF_FacePhoto2_Gfx_Part67EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,4FBB,51CD,530,Leftover_36_4FBB_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part67EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,51CD,51D3,6,Leftover_36_51CD_LoadRecord,data,not_tcrf,,,
-36,51D3,55CD,1018,Leftover_36_51D3_Unused_TCRF_FacePhoto3_Gfx_Part6A01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,51D3,55CD,1018,Leftover_36_51D3_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part6A01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,55CD,55D3,6,Leftover_36_55CD_LoadRecord,data,not_tcrf,,,
-36,55D3,59CD,1018,Leftover_36_55D3_Unused_TCRF_FacePhoto3_Gfx_Part6DFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,55D3,59CD,1018,Leftover_36_55D3_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part6DFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,59CD,59D3,6,Leftover_36_59CD_LoadRecord,data,not_tcrf,,,
-36,59D3,5DCD,1018,Leftover_36_59D3_Unused_TCRF_FacePhoto3_Gfx_Part71F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,59D3,5DCD,1018,Leftover_36_59D3_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part71F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,5DCD,5DD3,6,Leftover_36_5DCD_LoadRecord,data,not_tcrf,,,
-36,5DD3,5FE5,530,Leftover_36_5DD3_Unused_TCRF_FacePhoto3_Gfx_Part75EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
+36,5DD3,5FE5,530,Leftover_36_5DD3_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part75EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,5FE5,5FF9,20,Leftover_36_5FE5,data,not_tcrf,,,
 36,5FF9,63F3,1018,Leftover_36_5FF9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part4001,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,63F3,63F9,6,Leftover_36_63F3_LoadRecord,data,not_tcrf,,,
@@ -1360,6 +1376,10 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 3A,7481,7FFF,2942,Leftover_3A_7481,data,not_tcrf,,,
 3B,4001,7FFF,16382,Leftover_3B_4001,data,not_tcrf,,,
 3C,4001,7FFF,16382,Leftover_3C_4001,data,not_tcrf,,,
-3D,4001,7FFF,16382,Leftover_3D_4001_PcRam,data,not_tcrf,,,
+3D,4001,5000,4095,Leftover_3D_4001,data,not_tcrf,,,
+3D,5000,5400,1024,Leftover_3D_5000_PcRam,data,not_tcrf,,,
+3D,5400,6000,3072,Leftover_3D_5400,data,not_tcrf,,,
+3D,6000,6600,1536,Leftover_3D_6000_PcRam,data,not_tcrf,,,
+3D,6600,7FFF,6655,Leftover_3D_6600,data,not_tcrf,,,
 3E,4001,7FFF,16382,Leftover_3E_4001,data,not_tcrf,,,
 3F,4001,7FFF,16382,Leftover_3F_4001,data,not_tcrf,,,

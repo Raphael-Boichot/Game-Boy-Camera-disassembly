@@ -4,6 +4,7 @@
   tools/regen.py --kitty KITTY.gb --jp JP.gb [--from STEP] [--dry]
   tools/regen.py --proto PROTO.gb
   tools/regen.py --trees
+  tools/regen.py --maps --jp JP.gb [--us US.gb] [--gold GOLD.gb] [--kitty KITTY.gb] [--proto PROTO.gb]   (only the maps)
 
 Why: a new run (a coverage file, a BGB hit table, a forced run) changes the trace, the types, the names, the never-run tables, their
 verdicts, the maps, the sheets, the doubts list and the figures the READMEs quote, and each has its own tool. Run by hand, a step
@@ -17,6 +18,8 @@ are the evidence. The deterministic core ones are (kitty_forced_runs.py, kitty_p
 import sys, os, glob, subprocess, argparse, time
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
 ap = argparse.ArgumentParser(); ap.add_argument('--kitty'); ap.add_argument('--jp'); ap.add_argument('--proto'); ap.add_argument('--trees', action='store_true')
+ap.add_argument('--maps', action='store_true', help='redraw only the layout and reachability maps of every ROM given (one set of rules: tools/rom_layout_map.py, tools/reach_draw.py)')
+ap.add_argument('--us'); ap.add_argument('--gold')
 ap.add_argument('--from', dest='start', default=None, help='skip the steps before this one'); ap.add_argument('--dry', action='store_true')
 a = ap.parse_args()
 PY = sys.executable
@@ -54,10 +57,19 @@ def kitty_steps(K, J):
 
 def proto_steps(Q):
     PD = 'roms/prototype_debagame/'
-    return [
+    J = a.jp or '/root/work/roms/pocketcamera_jp.gb'                            # the printer library is matched against the Japanese ROM
+    D = PD + 'disasm/'
+    return [   # the chain of the checker (tools/check_repo_consistency.py, prototype), in its order (2026-11-15: regen had skipped the first steps)
+        ('symtab', lambda: [PY, 'tools/proto_symtab.py', Q, '--out', D + 'leftover_symtab_proto.csv', '--out-mem', D + 'leftover_symtab_mem_proto.csv']),
+        ('trace', lambda: [PY, 'tools/proto_trace.py', Q, PD + 'trace/trace_proto.json', '--roots', PD + 'trace/extra_roots_proto.json', '--report', PD + 'trace/trace_proto_unresolved.md']),
         ('types', lambda: [PY, 'tools/proto_types.py', Q, PD + 'trace/trace_proto.json', '--types', PD + 'disasm/sym_types_proto.csv', '--sites', PD + 'assets/copy_sites_proto.csv',
                            '--rommap', PD + 'trace/rom_map_proto.csv', '--names', PD + 'disasm/layers/sym_names_proto_auto.csv', '--symtab', PD + 'disasm/leftover_symtab_proto.csv']),   # with the hand type layer
+        ('match_old', lambda: [PY, 'tools/proto_match_old.py', Q, D + 'leftover_symtab_proto.csv', PD + 'trace/trace_proto.json', D + 'match_old_proto.csv']),
+        ('printer_lib', lambda: [PY, 'tools/proto_printer_lib.py', Q, J, '--symtab', D + 'leftover_symtab_proto.csv', '--out', D + 'printer_lib_proto.csv']),
+        ('oldbuilds', lambda: [PY, 'tools/proto_oldbuilds.py', Q, '--symtab', D + 'leftover_symtab_proto.csv', '--printer-lib', D + 'printer_lib_proto.csv', '--out', D + 'oldbuilds_proto.csv']),
         ('names', lambda: [PY, 'tools/proto_names.py', '--rom', Q]),            # the name layers (the hand layer last) -> names, doubts, leftovers
+        ('ram_names', lambda: [PY, 'tools/proto_ram_names.py', Q, '--out', D + 'ram_names_proto.csv']),     # the RAM names (they quote routine names)
+        ('ram_inc', lambda: [PY, 'tools/ram_names.py', '--names', D + 'ram_names_proto.csv', '--inc', D + 'ram_proto.inc', '--sym', PD + 'pocketcamera_proto_ram.sym']),
         ('sym', lambda: [PY, 'tools/sym_build.py', Q, '--names', PD + 'disasm/sym_names_proto.csv', '--types', PD + 'disasm/sym_types_proto.csv', '--trace', PD + 'trace/trace_proto.json',
                          '--out', PD + 'pocketcamera_proto.sym', '--report']),
         ('source', lambda: [PY, 'tools/make_source.py', '--tree', 'prototype_debagame', '--rom', Q, '--check']),   # L5: the source tree (rgbds on the PATH)
@@ -68,13 +80,32 @@ def proto_steps(Q):
         ('trees', lambda: [PY, 'tools/make_screen_trees.py']),
     ]
 
+def map_steps():
+    """Every layout and reachability map of the ROMs given, drawn by the two shared tools (owner 2026-11-15: one set of rules for every map:
+    the same kind has the same colour in every ROM, a kind with no byte in a ROM leaves its legend, a few bytes read <0.1 %, never 0.0 %)."""
+    st = []
+    if a.jp:
+        st += [('jp.layout_map', lambda: [PY, 'tools/rom_layout_map.py', 'roms/jp_rev_a/jp_rom_layout_map.png', '--rom', a.jp, '--csv', 'roms/jp_rev_a/assets/layout_by_bank_jp.csv']),
+               ('jp.reach_map', lambda: [PY, 'tools/rom_reach_map.py', '--rom', a.jp, 'roms/jp_rev_a/jp_rom_reachability_map.png'])]
+    if a.us:
+        U = 'roms/us_eu/'
+        st += [('us.layout_map', lambda: [PY, 'tools/rom_layout_map.py', U + 'us_rom_layout_map.png', '--rom', a.us, '--map', U + 'trace/rom_map_us.csv', '--assets', 'none', '--witness', 'none',
+                                          '--reach', 'none', '--unused', 'none', '--kinds', U + 'assets/layout_kind_overrides_us.csv', '--names', U + 'disasm/sym_names_us.csv',
+                                          '--types', U + 'disasm/sym_types_us.csv', '--diff', U + 'port/diff_us.npz', '--cov', U + 'port/cov_jp_in_us.npz', '--csv', U + 'assets/layout_by_bank_us.csv',
+                                          '--outline', 'none', '--title', 'Game Boy Camera (USA, Europe): what is in each of the 64 banks (the ROM drawn as 2bpp tiles)']),
+               ('us.reach_map', lambda: [PY, 'tools/reach_map.py', '--tag', 'us', a.us, U + 'us_rom_reachability_map.png'])]
+    for t, f, r in (('gold', 'gold', a.gold), ('kitty', 'hello_kitty', a.kitty), ('proto', 'prototype_debagame', a.proto)):
+        if r: st += [(t + '.layout_map', lambda t=t, r=r: [PY, 'tools/status_maps.py', '--' + t, r]),
+                     (t + '.reach_map', lambda t=t, f=f, r=r: [PY, 'tools/reach_map.py', '--tag', t, r, 'roms/%s/%s_rom_reachability_map.png' % (f, t)])]
+    return st
 steps = []
-if a.kitty:
+if a.maps: steps = map_steps()
+elif a.kitty:
     if not a.jp: sys.exit('regen: --kitty needs --jp (the Japanese ROM: the match tables and the names)')
     steps += [('kitty.' + n, f) for n, f in kitty_steps(a.kitty, a.jp)]
-if a.proto: steps += [('proto.' + n, f) for n, f in proto_steps(a.proto)]
+if a.proto and not a.maps: steps += [('proto.' + n, f) for n, f in proto_steps(a.proto)]
 if a.trees and not (a.kitty or a.proto): steps += [('trees', lambda: [PY, 'tools/make_screen_trees.py'])]
-if not steps: ap.error('nothing to do: give --kitty / --proto / --trees')
+if not steps: ap.error('nothing to do: give --kitty / --proto / --trees / --maps')
 on = a.start is None
 for name, cmd in steps:
     if not on and name.split('.')[-1] != a.start and name != a.start: continue

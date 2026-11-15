@@ -8,18 +8,18 @@ SECTION "ROM Bank $01e", ROMX[$4000], BANK[$1e]
 BankNumber_1E_4000::
     db $1e
 
-; I: leftover: an exact copy of 256 bytes of Unused_TCRF_FacePhoto3_Gfx (from 30:7001, a part of the block) that
+; I: leftover: an exact copy of 256 bytes of Unused_TCRF_FacePhoto3_KAO_3_Gfx (from 30:7001, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_1E_4001_Unused_TCRF_FacePhoto3_Gfx_Part7001::
-    INCBIN "data/bank_1e/Leftover_1E_4001_Unused_TCRF_FacePhoto3_Gfx_Part7001.bin" ; $4001, 256 bytes
+Leftover_1E_4001_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part7001::
+    INCBIN "data/bank_1e/Leftover_1E_4001_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part7001.bin" ; $4001, 256 bytes
 ; I: leftover: 3 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_1E_4101::
     db $c0, $64, $c2
 
-; I: leftover: an exact copy of 252 bytes of Unused_TCRF_FacePhoto3_Gfx (from 30:7104, a part of the block) that
+; I: leftover: an exact copy of 252 bytes of Unused_TCRF_FacePhoto3_KAO_3_Gfx (from 30:7104, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_1E_4104_Unused_TCRF_FacePhoto3_Gfx_Part7104::
+Leftover_1E_4104_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part7104::
     db $e3, $be, $41, $14, $eb, $8a, $75, $2b, $ff, $00, $ff, $aa, $ff, $8e, $11, $14
     db $8b, $48, $87, $88, $e7, $36, $c1, $a8, $f3, $2a, $d5, $88, $ff, $ac, $51, $53
     db $a8, $ff, $00, $51, $ae, $22, $dd, $49, $be, $f0, $1f, $0e, $ff, $a2, $5d, $70

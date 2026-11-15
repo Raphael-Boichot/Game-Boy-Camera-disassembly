@@ -111,8 +111,8 @@ if DIFF or UNCLAIMED:
 LKINDS = '--leftover-kinds' in a      # a build with leftovers of its own making (the prototype): three kinds of their own, before UNCERTAIN
 if LKINDS:
     _iu = [k for k, _, _ in CATS].index('UNC')
-    CATS[_iu:_iu] = [('TSRC',  'Leftover assembler source shown by TCRF (Proto:Game Boy Camera, section Source Code): its two listings (Unused_TCRF_AsmSource1 / 2*)', (190, 60, 0)),
-                     ('SRC',   'Leftover text in clear: the developers\' assembler source and listings of it (Leftover_*_AsmSource / _SrcListing)', (40, 40, 40)),
+    CATS[_iu:_iu] = [('TSRC',  'Raw assembly code shown by TCRF (Proto:Game Boy Camera, section Source Code): the two listings of the developers\' assembler source in plain text (Unused_TCRF_AsmSource1 / 2*)', (190, 60, 0)),
+                     ('SRC',   'Raw assembly code: the rest of the developers\' assembler source and its listings, in plain text (Leftover_*_AsmSource / _SrcListing)', (40, 40, 40)),
                      ('PCRAM', 'Leftover PC memory: RAM of the development PC (DOS environment, Windows names, x86 code, load-record headers) left by the build tool (Leftover_*_PcRam / _LoadRecord)', (0, 200, 180)),
                      ('LCODE', 'Leftover copies of code: routines of this or an older build that this build never runs (Leftover_*_<routine>)', (110, 100, 30))]
 if UNCLAIMED:
@@ -291,7 +291,7 @@ def font(sz, bold=False):
     return ImageFont.load_default(size=sz)
 F1, F2, F3, F3B, FB, FK = font(46, True), font(28), font(27), font(30, True), font(32, True), font(22)
 SHORT = {'SYS': 'system code', 'CAM': 'camera code', 'ALBUM': 'album code', 'EDIT': 'editor code', 'LINK': 'link code', 'PRINT': 'print code', 'GAME': 'game code', 'DJ': 'D.J. code',
-         'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'SRC': 'source text', 'TSRC': 'TCRF source', 'PCRAM': 'PC memory', 'LCODE': 'code copies', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
+         'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'SRC': 'raw assembly', 'TSRC': 'raw assembly (TCRF)', 'PCRAM': 'PC memory', 'LCODE': 'code copies', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
          'OAM': 'sprite layouts', 'SOUND': 'sound data', 'TBL': 'tables / text', 'PALT': 'palettes', 'UNC': 'UNCERTAIN', 'FILL': '$FF fill', 'PAD': 'padding', 'NONE': 'not analysed'}
 def ramp(c):                      # 4 shades of one colour: 0 = lightest ... 3 = darkest (the 2 bits of a tile pixel)
     mix = lambda t, k: tuple(int(round(255 * (1 - k) + v * k)) if t == 'w' else int(round(v * k)) for v in c)
@@ -319,7 +319,8 @@ per = pix.reshape(banks, BTH, BTW, 8, 8).transpose(0, 1, 3, 2, 4).reshape(banks,
 S = 2; GX, LEFT = 18, 40
 PW, PH = 8 * BTW * S, 8 * BTH * S                      # one bank in pixels
 W = LEFT + BCOLS * (PW + GX) + 22
-pct = lambda x: '%.1f %%' % (100 * x / N)
+import reach_draw as _RD
+pct = lambda x: _RD.pct(x, N)                 # the common format of every map: a category with bytes never reads 0.0 % (owner 2026-11-15)
 fmt = lambda x: format(int(x), ',')
 _scratch = ImageDraw.Draw(Image.new('L', (8, 8)))
 def wrap(text, fnt, maxw):
@@ -338,18 +339,20 @@ subtitle = []
 if NOTE1 is not None: subtitle = [NOTE1, NOTE2 or '']
 elif not DIFF: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (symbol file labels and the v8 coverage classes); the shade inside a colour is the tile pixel (2 bits), so graphics, text and code all stay visible. An outline marks the tiles (16 bytes) that hold unused bytes (legend: OUTLINE). Kind evidence per label: roms/jp_rev_a/disasm/sym_names_jp.csv (C / I / ?).' % (BTW, BTH)]
 else: subtitle = ['Each bank = %d x %d tiles = 16,384 bytes, banks $00..$3F left to right, top to bottom, 8 banks per row. The colour is the KIND of the bytes (the symbol file ported from the Japanese tables and the static trace of this ROM: no emulator run of it exists). The shade is the tile pixel (2 bits). An outline marks the tiles (16 bytes) that hold unused bytes (legend: OUTLINE; the differences from the Japanese ROM are counted in the csv, docs 1.5). Kind evidence: roms/us_eu/disasm/sym_names_us*.csv.' % (BTW, BTH)]
-LG.append(('head', 'CODE (traced instructions), by the function of the routine that owns them'))
+padtile = (kind.reshape(N // 0x4000, BTH, BTW, 16) == KEY['PAD']).all(3); n_padtile = int(padtile.sum())
+# the common rules of every map (owner 2026-11-15): a category, a heading or a note with nothing to show in this ROM is left out
+if tot_cat[:11].sum(): LG.append(('head', 'CODE (traced instructions), by the function of the routine that owns them'))
 for i in range(11):                # a category with no byte in this ROM is left out of the legend (owner, 2026-11-13)
     if tot_cat[i]: LG.append(('cat', i, fmt(tot_cat[i]) + ' B  ' + pct(tot_cat[i]), CATS[i][1]))
-LG.append(('head', 'DATA, by what the bytes are (identified even when no code calls them)'))
+if tot_cat[11:].sum(): LG.append(('head', 'DATA, by what the bytes are (identified even when no code calls them)'))
 for j in range(11, len(CATS)):
     if tot_cat[j]: LG.append(('cat', j, fmt(tot_cat[j]) + ' B  ' + pct(tot_cat[j]), CATS[j][1]))
-LG.append(('head', 'OUTLINE: the tiles (16 bytes) that hold unused bytes, in three categories%s' % (' (%s, tools/unused_table.py)' % os.path.relpath(UCATS, REPO) if UCATS != 'none' else '')))
+if mk_tot[:3].sum() or n_padtile: LG.append(('head', 'OUTLINE: the tiles (16 bytes) that hold unused bytes, in three categories%s' % (' (%s, tools/unused_table.py)' % os.path.relpath(UCATS, REPO) if UCATS != 'none' else '')))
 if mk_tot[0]: LG.append(('mark', INK, fmt(mk_tot[0]) + ' B', 'unused code: routines this build never runs (Unused_* names%s), and copies of routines left in the ROM' % (', the proven-dead code of docs 16.15 / 16.21' if OUTLINE == 'reach' and not DIFF else '')))
 if mk_tot[1]: LG.append(('mark', UTC, fmt(mk_tot[1]) + ' B', 'unused assets documented by TCRF (the TCRF page and section of each block are in the table; tcrf_check/tcrf_documented.csv, links in tcrf_check/TCRF_SOURCES.md)'))
 if mk_tot[2]: LG.append(('mark', UNT, fmt(mk_tot[2]) + ' B', 'unused assets not documented by TCRF (found by this project: Unused_* and Leftover_* names%s)' % (', and the really unused assets of docs 16.24' if 'jp_rev_a' in UCATS else '')))
-LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
-notes = (['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.'] if UNCLAIMED else []) + \
+if n_padtile: LG.append(('cross', fmt(n_padtile) if False else None, 'CROSS: a pure padding tile (all 16 bytes are never-reached $00 padding)'))
+notes = (['Grey-blue = not analysed yet: the colours replace it as names, types and a trace are added to this ROM.'] if UNCLAIMED and 'NONE' in KEY and tot_cat[KEY['NONE']] else []) + \
         ['Not outlined: every byte that this build uses or that no name calls unused, and padding.' + (' No emulator run of this ROM: the code colour is its static trace.' if DIFF else ''),
          'Per bank, under its number: the two largest kinds (padding excluded).']
 notes.insert(0, 'Padding rule: only runs of 16+ x $00 that no run reached (no run of this ROM: all of them) are padding; $FF is never padding: a $FF run that no run reads, outside the assets, is "fill"; one that is read keeps the kind of its block (no run of this ROM: no fill).')
@@ -403,7 +406,6 @@ for b in range(banks):
                 if edge == 'B': canvas[y0 + T - 2:y0 + T, x0:x0 + T] = col
 img = Image.fromarray(canvas, 'P'); img.putpalette([v for c in pal for v in c] + [0] * (768 - 3 * len(pal)))
 d = ImageDraw.Draw(img)
-padtile = (kind.reshape(banks, BTH, BTW, 16) == KEY['PAD']).all(3); n_padtile = int(padtile.sum())
 for b in range(banks):
     gx = LEFT + (b % BCOLS) * (PW + GX); gy = ROWY[b // BCOLS] + GYR[b // BCOLS]
     for ty, tx in zip(*np.nonzero(padtile[b])):
@@ -445,5 +447,5 @@ for b in range(banks):
         for k_, l in enumerate(wrap('  '.join('%s %s' % (n, fmt(v)) for n, v in parts), FK, PW + GX - 6)[:2]): d.text((gx, gy + 98 + 28 * k_), l, fill=INK, font=FK)
 img.save(OUT, optimize=True)
 print(img.size, os.path.getsize(OUT), 'bytes')
-for i, (k, tx, c) in enumerate(CATS): print('%-6s %9s  %5s  %s' % (k, fmt(tot_cat[i]), pct(tot_cat[i]), tx[:60]))
+for i, (k, tx, c) in enumerate(CATS): print('%-6s %9s  %5s  %s' % (k, fmt(tot_cat[i]), '%.1f %%' % (100 * tot_cat[i] / N), tx[:60]))
 print('marks', [int(x) for x in mk_tot]); print('pure padding tiles', n_padtile, 16 * n_padtile, 'B')

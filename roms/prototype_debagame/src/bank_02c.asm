@@ -8,11 +8,52 @@ SECTION "ROM Bank $02c", ROMX[$4000], BANK[$2c]
 BankNumber_2C_4000::
     db $2c
 
-; I: leftover PC memory: 747 bytes (2C:4001-42EB) that hold 3 x86 function prologues (55 8B EC: push bp / mov bp,sp;
-; $EC is no Game Boy opcode), and that nothing in this build reads, runs or explains; only those are proven, the rest
-; of the run is taken as the same memory
+; I: leftover PC memory: 511 bytes (2C:4001-41FF), the 512-byte blocks of a leftover run that hold 3 x86 function
+; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 3 in the whole leftover run); nothing in this
+; build reads, runs or explains them; only those proofs are proven, the rest ...
 Leftover_2C_4001_PcRam::
-    INCBIN "data/bank_2c/Leftover_2C_4001_PcRam.bin" ; $4001, 747 bytes
+    INCBIN "data/bank_2c/Leftover_2C_4001_PcRam.bin" ; $4001, 511 bytes
+; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs); no proof of PC memory in them
+Leftover_2C_4200::
+    db $d1, $c1, $f1, $d9
+
+; C: leftover: 124 bytes of code MAIN_SUB of the bank 0 of an older build (the build of table $2A); address and name
+; from symbol table $2A; code that this build never runs (typed data)
+Leftover_2C_4204_MAIN_SUB::
+    db $21, $aa, $ff, $34, $fa, $a0, $c0, $b7, $20, $04, $cd, $92, $03, $c9, $fe, $01
+    db $20, $04, $cd, $f5, $04, $c9, $fe, $02, $20, $04, $cd, $bb, $05, $c9, $fe, $03
+    db $20, $04, $cd, $e8, $06, $c9, $fe, $04, $20, $04, $cd, $ef, $07, $c9, $fe, $05
+    db $20, $04, $cd, $95, $09, $c9, $fe, $06, $20, $04, $cd, $76, $0f, $c9, $fe, $07
+    db $20, $04, $cd, $47, $0b, $c9, $fe, $08, $20, $04, $cd, $88, $0d, $c9, $fe, $09
+    db $20, $04, $cd, $02, $13, $c9, $fe, $0a, $20, $04, $cd, $df, $19, $c9, $fe, $0b
+    db $20, $04, $cd, $60, $2a, $c9, $fe, $0c, $20, $04, $cd, $9c, $1b, $c9, $fe, $0d
+    db $20, $04, $cd, $af, $1d, $c9, $fe, $0e, $20, $01, $c9, $c9
+
+; C: leftover: 63 bytes of code VBLANK_SUB of the bank 0 of an older build (the build of table $2A); address and name
+; from symbol table $2A; code that this build never runs (typed data)
+Leftover_2C_4280_VBLANK_SUB::
+    db $cd, $b6, $ff, $fa, $a0, $c0, $fe, $06, $20, $04, $cd, $71, $12, $c9, $fe, $04
+    db $20, $04, $cd, $69, $08, $c9, $fe, $07, $20, $04, $cd, $11, $0d, $c9, $fe, $0a
+    db $20, $04, $cd, $07, $1b, $c9, $fe, $09, $20, $04, $cd, $04, $15, $c9, $fe, $0b
+    db $20, $01, $c9, $fe, $0d, $20, $03, $cd, $cb, $1e, $fe, $0e, $20, $00, $c9
+
+; C: leftover: 9 bytes of code DATA_MOV of the bank 0 of an older build (the build of table $2A); address and name
+; from symbol table $2A, called in its bank; code that this build never runs (typed data)
+Leftover_2C_42BF_DATA_MOV::
+    db $2a, $12, $13, $0b, $78, $b1, $20, $f8, $c9
+
+; C: leftover: 11 bytes of code DMACLR of the bank 0 of an older build (the build of table $2A); address and name from
+; symbol table $2A, called in its bank; code that this build never runs (typed data)
+Leftover_2C_42C8_DMACLR::
+    db $af, $21, $00, $c0, $06, $a0, $22, $05, $20, $fc, $c9
+
+; C: leftover: 25 bytes of code LCDCOFF of the bank 0 of an older build (the build of table $2A); address and name
+; from symbol table $2A, called in its bank; code that this build never runs (typed data)
+Leftover_2C_42D3_LCDCOFF::
+    db $f0, $ff, $e0, $89, $cb, $87, $e0, $ff, $f0, $44, $fe, $91, $20, $fa, $f0, $40
+    db $e6, $7f, $e0, $40, $f0, $89, $e0, $ff, $c9
+
 ; C: leftover: 49 bytes of code INKEY of the bank 0 of an older build (the build of table $2A); address and name from
 ; symbol table $2A; code that this build never runs (typed data)
 Leftover_2C_42EC_INKEY::

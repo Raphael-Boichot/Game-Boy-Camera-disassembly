@@ -13,9 +13,9 @@ BankNumber_30_4000::
 Leftover_30_4001_AsmSource::
     db "//////////////////////////////////////////////", $0d, $0a, $0d, $0a, $0d, $0a, ";=====================================================", $0d, $0a, ";", $0d, $0a, ";   ", $83, "I", $83, "t", $83, "Z", $83, "b", $83, "g", $92, $b2, $90, $ae, $0d, $0a, ";", $0d, $0a, ";  ", $e8, $87, $92, "l", $82, $aa, $95, $cf, $8d, "X", $82, $b3, $82, $ea, $82, $e9, $82, $cc, $82, $c5, $81, "A", $82, $b1, $82, $cc, $8c, $e3, $83, "f", $83, "B", $83, "U", $82, $cc, $90, $dd, $92, $e8, $82, $f0, $82, $b7, $82, $e9, $82, $b1, $82, $c6, $0d, $0a, ";=====================================================", $0d, $0a, "GET_OFFSET"
 
-; I: leftover PC memory: 4 bytes (30:4100-4103) that hold the dword $C2650000, a 4 KB-aligned address of the Windows
-; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
-; this build reads, runs or explains; only those are proven, the rest of ...
+; I: leftover PC memory: 4 bytes (30:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C2650000,
+; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
+; banks that hold one; nothing in this build reads, runs or explains them; ...
 Leftover_30_4100_PcRam::
     db $00, $00, $65, $c2
 
@@ -30,23 +30,23 @@ Leftover_30_4104_AsmSource::
 ; C: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 6 of 10 (the frown), tile rows 2-13 of a
 ; 128 x 112 camera picture (224 tiles in row order from 30:4001); its rows 0-1 (30:4001-4200) were overwritten by
 ; leftover source text, so only 3,072 of the 3,584 bytes survive: 192 of 224 ...
-Unused_TCRF_FacePhoto6_Rows2To13_Gfx::
-    INCBIN "data/bank_30/Unused_TCRF_FacePhoto6_Rows2To13_Gfx.2bpp" ; $4201, 3072 bytes
+Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx::
+    INCBIN "data/bank_30/Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx.2bpp" ; $4201, 3072 bytes
 ; C: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 1 of 10, a 128 x 112 camera picture (224
 ; tiles in row order, 3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2
 ; runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of ...
-Unused_TCRF_FacePhoto1_Gfx::
-    INCBIN "data/bank_30/Unused_TCRF_FacePhoto1_Gfx.2bpp" ; $4E01, 3584 bytes
+Unused_TCRF_FacePhoto1_KAO_1_Gfx::
+    INCBIN "data/bank_30/Unused_TCRF_FacePhoto1_KAO_1_Gfx.2bpp" ; $4E01, 3584 bytes
 ; C: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 2 of 10, a 128 x 112 camera picture (224
 ; tiles in row order, 3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2
 ; runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of ...
-Unused_TCRF_FacePhoto2_Gfx::
-    INCBIN "data/bank_30/Unused_TCRF_FacePhoto2_Gfx.2bpp" ; $5C01, 3584 bytes
+Unused_TCRF_FacePhoto2_KAO_2_Gfx::
+    INCBIN "data/bank_30/Unused_TCRF_FacePhoto2_KAO_2_Gfx.2bpp" ; $5C01, 3584 bytes
 ; C: TCRF Proto:Game Boy Camera (Debagame Tester) unused graphic: face photo 3 of 10, a 128 x 112 camera picture (224
 ; tiles in row order, 3,584 B); pixel match against the TCRF image, 0 differing tiles; never read nor run in the L2
 ; runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of ...
-Unused_TCRF_FacePhoto3_Gfx::
-    INCBIN "data/bank_30/Unused_TCRF_FacePhoto3_Gfx.2bpp" ; $6A01, 3584 bytes
+Unused_TCRF_FacePhoto3_KAO_3_Gfx::
+    INCBIN "data/bank_30/Unused_TCRF_FacePhoto3_KAO_3_Gfx.2bpp" ; $6A01, 3584 bytes
 ; I: leftover: 864 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_30_7801::

@@ -13,9 +13,9 @@ BankNumber_15_4000::
 Leftover_15_4001_SrcListing::
     db "ANK33", $09, "GROUP", $09, "33", $0d, $0a, "bk7.dmg(194) : BANK34", $09, "GROUP", $09, "34", $0d, $0a, "bk7.dmg(201) : BANK35", $09, "GROUP", $09, "35", $0d, $0a, "bk7.dmg(208) : BANK36", $09, "GROUP", $09, "36", $0d, $0a, "bk7.dmg(215) : BANK37", $09, "GROUP", $09, "37", $0d, $0a, "bk7.dmg(222) : BANK38", $09, "GROUP", $09, "38", $0d, $0a, "bk7.dmg(229) : BANK39", $09, "GROUP", $09, "39", $0d, $0a, "bk7.dmg(236) : BANK40", $09, "GROUP", $09, "40", $0d, $0a, "bk7.dmg(243) : "
 
-; I: leftover PC memory: 4 bytes (15:4100-4103) that hold the dword $C21AA000, a 4 KB-aligned address of the Windows
-; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
-; this build reads, runs or explains; only those are proven, the rest of ...
+; I: leftover PC memory: 4 bytes (15:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C21AA000,
+; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
+; banks that hold one; nothing in this build reads, runs or explains them; ...
 Leftover_15_4100_PcRam::
     db $00, $a0, $1a, $c2
 

@@ -54,8 +54,29 @@ def _font(sz, bold=True):
     return ImageFont.load_default(size=sz)
 
 
+def pct(v, n):
+    """The one percentage format of every map (owner 2026-11-15): a category that holds bytes never reads 0.0 %."""
+    x = 100.0 * v / n
+    return '<0.1 %' if 0 < x < 0.05 else '%.1f %%' % x
+
+
+def pc(v, n):
+    return '%s B, %s' % (format(int(v), ','), pct(v, n))
+
+
+def order(cat):
+    """The worst-of-two-bytes order, with only the colours this map holds."""
+    have = set(np.unique(cat).tolist())
+    return ' > '.join(NAMES[c].lower() for c in WORST if c in have)
+
+
 def draw(rom, cat, title, sub, items, note, out):
-    """rom: uint8 array; cat: uint8 array of categories (0-9) per byte; items: [(category, legend text)]; writes the PNG to out."""
+    """rom: uint8 array; cat: uint8 array of categories (0-9) per byte; items: [(category, legend text)]; writes the PNG to out.
+    The common rules of every map (owner 2026-11-15): a category with no byte in this ROM leaves the legend, and {ORDER} in the note
+    becomes the worst-of-two-bytes order of the colours this map holds."""
+    have = set(np.unique(cat).tolist())
+    items = [(c, t) for c, t in items if c in have]
+    note = note.replace('{ORDER}', order(cat))
     N = len(rom); rank = np.zeros(10, int)
     for k, c in enumerate(reversed(WORST)): rank[c] = k
     back = np.argsort(rank)

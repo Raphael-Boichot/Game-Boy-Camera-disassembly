@@ -8,9 +8,9 @@ SECTION "ROM Bank $004", ROMX[$4000], BANK[$4]
 BankNumber_04_4000::
     db $04
 
-; I: HOI_0 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind
-; not settled
-Data_04_4001_HOI_0::
+; I: leftover: 255 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs)
+Leftover_04_4001::
     db $83, $7e, $5c, $00, $75, $0e, $c7, $46, $5c, $01, $00, $00, $00, $89, $7e, $58
     db $8b, $fe, $eb, $b5, $8b, $5b, $10, $eb, $d8, $eb, $ae, $85, $ff, $74, $27, $8b
     db $c7, $8b, $78, $58, $8b, $40, $18, $85, $c0, $74, $f0, $8b, $10, $83, $7a, $5c
@@ -69,8 +69,8 @@ HalfBits_Table::
     ; padding
     ds $5f0, $00
 
-; I: leftover: 11 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
+; I: leftover: 528 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs); no proof of PC memory in them
 Leftover_04_4BF0::
     db $6d, $73, $69, $6d, $65, $39, $35, $2e, $69, $6e, $69
 
@@ -91,21 +91,18 @@ Leftover_04_4BF0::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00
+    db $00
 
-; I: KAO_1 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind
-; not settled
-Data_04_4E01_KAO_1::
+; I: leftover PC memory: 512 bytes (04:4E00-4FFF), the 512-byte blocks of a leftover run that hold 1 strings of the
+; development PC's RAM (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...); nothing in this build reads, runs or explains them; only
+; those proofs are proven, the rest of each block is taken as the same ...
+Leftover_04_4E00_PcRam::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; I: leftover PC memory: 3507 bytes (04:4E4E-5C00) that hold 1 strings of the development PC's RAM
-; (C:\WINDOWS\SYSTEM\KERNEL32.DLL ...), and that nothing in this build reads, runs or explains; only those are proven,
-; the rest of the run is taken as the same memory
-Leftover_04_4E4E_PcRam::
     db $4d, $53, $49, $4d, $45, $00, $35, $2e, $69, $6e, $69
 
     ; padding
@@ -114,8 +111,25 @@ Leftover_04_4E4E_PcRam::
     db $43, $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53, $5c, $53, $59, $53, $54, $45
     db $4d, $5c, $4b, $45, $52, $4e, $45, $4c, $33, $32, $2e, $44, $4c, $4c
 
-    ; padding
-    ds $ea, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+
+; I: leftover: 12287 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs); no proof of PC memory in them
+Leftover_04_5000::
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
     db $04, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $ac, $c5, $57, $81
     db $00, $00, $00, $00, $00, $00, $00, $00, $04, $00, $00, $00, $00, $00, $00, $00
@@ -226,41 +240,18 @@ Leftover_04_4E4E_PcRam::
 
     db $02
 
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    ; padding
+    ds $79f, $00
 
-; I: KAO_2 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind
-; not settled
-Data_04_5C01_KAO_2::
-    INCBIN "data/bank_04/Data_04_5C01_KAO_2.bin" ; $5C01, 1647 bytes
-; I: leftover: 80 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_04_6270::
-    INCBIN "data/bank_04/Leftover_04_6270.bin" ; $6270, 1937 bytes
-; I: KAO_3 in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs): kind
-; not settled
-Data_04_6A01_KAO_3::
-    INCBIN "data/bank_04/Data_04_6A01_KAO_3.bin" ; $6A01, 2241 bytes
-; I: leftover: 25 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_04_72C2::
+    db $01, $00, $00, $00, $df, $3f, $40, $00, $29, $4d, $40, $00, $4f, $39, $40, $00
+    db $c8, $26, $40, $00, $78, $1b, $40, $00, $1f, $2b, $40, $00, $74, $3d, $40, $00
+    db $25, $48, $40, $00, $e7, $1f, $40, $00, $c3, $1f, $40, $00, $12, $20, $40, $00
+    db $e9, $3f, $40, $00, $7f, $39, $40, $00, $5c, $f0, $4f, $00, $20, $00, $00, $00
+    db $70, $22, $40, $00, $3d, $20, $40, $00, $9c, $3f, $40, $00, $00, $00, $c4, $7f
+
+    ; padding
+    ds $1002, $00
+
     db $60, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $50, $00, $00, $00, $01, $00, $00, $00, $10
 

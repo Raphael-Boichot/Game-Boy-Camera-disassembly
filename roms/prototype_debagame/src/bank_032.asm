@@ -108,20 +108,20 @@ Leftover_32_78FA_Unused_TCRF_FacePhoto10_HOI_R_Gfx_Part71F5::
 Leftover_32_7A00::
     db $a0, $34, $c0, $98, $e0, $01, $04, $ef, $59, $12, $02
 
-; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto1_Gfx (from 30:59EF, a part of the block) that
+; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto1_KAO_1_Gfx (from 30:59EF, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_32_7A0B_Unused_TCRF_FacePhoto1_Gfx_Part59EF::
-    INCBIN "data/bank_32/Leftover_32_7A0B_Unused_TCRF_FacePhoto1_Gfx_Part59EF.bin" ; $7A0B, 530 bytes
+Leftover_32_7A0B_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part59EF::
+    INCBIN "data/bank_32/Leftover_32_7A0B_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part59EF.bin" ; $7A0B, 530 bytes
 ; I: leftover load-record header, 6 bytes: 01 04 01 5C FA 03 = type 1, bank $04, load address $5C01, $03FA (1018) data
 ; bytes after it (they run past the end of the bank); a record of an older build's image as a download stream in the
 ; PC's memory, that nothing in this build reads
 Leftover_32_7C1D_LoadRecord::
     db $01, $04, $01, $5c, $fa, $03
 
-; I: leftover: an exact copy of 988 bytes of Unused_TCRF_FacePhoto2_Gfx (from 30:5C01, a part of the block) that
+; I: leftover: an exact copy of 988 bytes of Unused_TCRF_FacePhoto2_KAO_2_Gfx (from 30:5C01, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_32_7C23_Unused_TCRF_FacePhoto2_Gfx_Part5C01::
-    INCBIN "data/bank_32/Leftover_32_7C23_Unused_TCRF_FacePhoto2_Gfx_Part5C01.bin" ; $7C23, 988 bytes
+Leftover_32_7C23_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C01::
+    INCBIN "data/bank_32/Leftover_32_7C23_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C01.bin" ; $7C23, 988 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_32_7FFF::
     db $32

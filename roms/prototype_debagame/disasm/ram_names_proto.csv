@@ -1,5 +1,5 @@
 addr,size,name,scope,tag,desc
-c000,2,wOBJRAM,*,C,"name of table $2A at this address; the routines GALLERY_OBJ_SET, MAIN_MENU, MAKE_CONFIG touch it here and in that build; kinds PRW"
+c000,2,wOBJRAM,*,C,"name of table $2A at this address; the routines DMACLR, GALLERY_OBJ_SET, MAIN_MENU touch it here and in that build; kinds PRW"
 c002,1,wDOG_ANIME_C002,*,I,"no table names it: named after the routine that touches it most (DOG_ANIME 3, GAME_TITL 2, MAIN_MENU 2); kinds PW"
 c003,1,wKAO_ANIME_C003,*,I,no table names it: named after the routine that touches it most (KAO_ANIME 2); kinds W
 c004,2,wMAIN_MENU_C004,*,I,"no table names it: named after the routine that touches it most (MAIN_MENU 1, SRAM_MENU 1, SRAM_DATA_SEL 1); kinds PW"
@@ -17,7 +17,7 @@ c028,4,wBUNKATU_HYOUJI_C028,*,I,no table names it: named after the routine that 
 c02c,24,wObj_PutHexDigits_C02C,*,I,no table names it: named after the routine that touches it most (Obj_PutHexDigits 1); kinds P
 c044,4,wCONTRAST_HYOUJI_C044,*,I,no table names it: named after the routine that touches it most (CONTRAST_HYOUJI 1); kinds P
 c048,88,wBUNKATU_HYOUJI_C048,*,I,no table names it: named after the routine that touches it most (BUNKATU_HYOUJI 1); kinds P
-c0a0,1,wGAME_SEQ,*,C,"name of table $2A at this address; the routines CB2, MAKE_CONFIG, MAKE_EMI touch it here and in that build; kinds RW"
+c0a0,1,wGAME_SEQ,*,C,"name of table $2A at this address; the routines CB2, MAIN_SUB, MAKE_CONFIG touch it here and in that build; kinds RW"
 c0a1,1,wMEN_FADE_F,*,C,"name of table $2A at this address; the routines MEN_FADE, MEN_FADE_END touch it here and in that build; kinds RW"
 c0a2,1,wMEN_FADE_T,*,C,name of table $2A at this address; the routines MEN_FADE touch it here and in that build; kinds RW
 c0a3,1,wMEN_FADE_C,*,C,name of table $2A at this address; the routines MEN_FADE touch it here and in that build; kinds P
@@ -146,7 +146,7 @@ ff80,1,hCNT1,*,C,"name of table $2A at this address; the routines INKEY, SRAM_DU
 ff81,1,hTRG1,*,C,"name of table $2A at this address; the routines BANK_TEST, EMI_MAIN, GAME_TITL touch it here and in that build; kinds RW"
 ff85,1,hVBFLG,*,C,"name of table $2A at this address; the routines MAIN_MENU, SRAM_VERIFY, SRAM_WRITE touch it here and in that build; kinds RW"
 ff88,1,hR0,*,C,"name of table $2A at this address; the routines BANK_TEST, CB2, GALLERY_OBJ_SET touch it here and in that build; kinds RW"
-ff89,1,hR1,*,C,"name of table $2A at this address; the routines DUMP_1MEN, GALLERY_OBJ_SET, PUT_BYTE_OBJ2 touch it here and in that build; kinds RW"
+ff89,1,hR1,*,C,"name of table $2A at this address; the routines DUMP_1MEN, GALLERY_OBJ_SET, LCDCOFF touch it here and in that build; kinds RW"
 ff8a,1,hR2,*,I,"the same name in both tables; no routine of this build that touches it touches it in the older build (checked: ImageCopy_Common2AC0, ImageCopy_Common2C4B, ImageCopy_Mode08); kinds RW"
 ff8b,1,hR3,*,C,name of table $2A at this address; the routines H_BLANK_TX2 touch it here and in that build; kinds W
 ffa0,1,hSCXW,*,C,"name of table $2A at this address; the routines MAKE_EMI, SCYX_SET0 touch it here and in that build; kinds W"
@@ -155,7 +155,7 @@ ffa2,1,hSCYD,*,C,name of table $2A at this address; the routines SCYX_SET0 touch
 ffa5,1,hOBJ_CT,*,C,"name of table $2A at this address; the routines DOG_ANIME, MAIN_MENU touch it here and in that build; kinds RW"
 ffa6,3,hOBJ_CT2,*,C,"name of table $2A at this address; the routines DOG_ANIME, KAO_ANIME, MK_PROTECT touch it here and in that build; kinds PRW"
 ffa9,1,hMAIN_AFURE,*,C,"name of table $2A at this address; the routines MAIN_MENU, SRAM_VERIFY, SRAM_WRITE touch it here and in that build; kinds RW"
-ffaa,2,hFLMCNT,*,C,name of table $35 at this address; the routines MAIN_SUB touch it here and in that build; kinds P
+ffaa,2,hFLMCNT,*,C,name of table $2A at this address; the routines MAIN_SUB touch it here and in that build; kinds P
 ffac,1,hOBP0W,*,C,"name of table $2A at this address; the routines MAKE_EMI, MEN_FADE, OBJP_DEF_SET touch it here and in that build; kinds RW"
 ffad,1,hOBP1W,*,C,"name of table $2A at this address; the routines MAKE_EMI, OBJP_DEF_SET touch it here and in that build; kinds W"
 ffae,1,hBGPW,*,C,"name of table $2A at this address; the routines BGP_SET, MAKE_EMI, MEN_FADE touch it here and in that build; kinds RW"

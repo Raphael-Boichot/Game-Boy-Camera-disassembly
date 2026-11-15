@@ -3,11 +3,11 @@ table,dev_name,kind,size,addr,copy_1D,copy_20,called,why
 2A,MAIN,skipped,19,2C:41C7,,,,inside the PC memory or the source text that overwrote this part of the bank
 2A,VBWAIT,skipped,12,2C:41DA,,,,inside the PC memory or the source text that overwrote this part of the bank
 2A,VBLK,skipped,30,2C:41E6,,,,inside the PC memory or the source text that overwrote this part of the bank
-2A,MAIN_SUB,skipped,124,2C:4204,,,,inside the PC memory or the source text that overwrote this part of the bank
-2A,VBLANK_SUB,skipped,63,2C:4280,,,,inside the PC memory or the source text that overwrote this part of the bank
-2A,DATA_MOV,skipped,9,2C:42BF,,,,inside the PC memory or the source text that overwrote this part of the bank
-2A,DMACLR,skipped,11,2C:42C8,,,,inside the PC memory or the source text that overwrote this part of the bank
-2A,LCDCOFF,skipped,25,2C:42D3,,,,inside the PC memory or the source text that overwrote this part of the bank
+2A,MAIN_SUB,code,124,2C:4204,,,no,
+2A,VBLANK_SUB,code,63,2C:4280,,,no,
+2A,DATA_MOV,code,9,2C:42BF,,20:4226,yes,
+2A,DMACLR,code,11,2C:42C8,,20:422F,yes,
+2A,LCDCOFF,code,25,2C:42D3,,20:423A,yes,
 2A,INKEY,code,49,2C:42EC,,20:4253,no,
 2A,DMADATA,data,10,2C:431D,,,no,
 2A,CLRCHR_SET,data,26,2C:4327,,,no,
