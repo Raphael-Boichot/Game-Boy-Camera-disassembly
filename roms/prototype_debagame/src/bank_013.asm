@@ -13,9 +13,10 @@ BankNumber_13_4000::
 Leftover_13_4001_SrcListing::
     db ": FB31A", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(307) : FB31B", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(308) : FB32A", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(309) : FB32B", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(310) : FB33A", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(311) : FB33B", $09, $09, "DS", $09, "1", $0d, $0a, "f_screen.dmg(14) : MK_F_SCR", $0d, $0a, "f_screen.dmg(112) : F_SCR_MODE", $0d, $0a, "f_screen.dmg(136) : PRES", $0d, $0a, "f_screen.dmg("
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_13_4100::
+; I: leftover PC memory: 4 bytes (13:4100-4103) that hold the dword $C21E0000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_13_4100_PcRam::
     db $00, $00, $1e, $c2
 
 ; I: leftover text: 16123 bytes of a listing of the developers' source (file.dmg(line) : text) (6 listing lines, 0

@@ -28,9 +28,10 @@ Leftover_35_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part4F59::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $5f, $ff
     db $bf, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_35_4100::
+; I: leftover PC memory: 4 bytes (35:4100-4103) that hold the dword $C216E000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_35_4100_PcRam::
     db $00, $e0, $16, $c2
 
 ; I: leftover: an exact copy of 252 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:505C, a part of the block) that
@@ -57,9 +58,10 @@ Leftover_35_4104_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part505C::
 ; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_35_4200_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part70E4::
     INCBIN "data/bank_35/Leftover_35_4200_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part70E4.bin" ; $4200, 273 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_35_4311::
+; I: leftover load-record header, 6 bytes: 01 06 F5 71 FA 03 = type 1, bank $06, load address $71F5, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_35_4311_LoadRecord::
     db $01, $06, $f5, $71, $fa, $03
 
 ; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FaceDrawing4_FACE8_Gfx (from 06:71F5, a part of the block)
@@ -103,18 +105,20 @@ Leftover_35_6D1C::
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_35_7600_Unused_TCRF_FacePhoto1_Gfx_Part4E5E::
     INCBIN "data/bank_35/Leftover_35_7600_Unused_TCRF_FacePhoto1_Gfx_Part4E5E.bin" ; $7600, 925 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_35_799D::
+; I: leftover load-record header, 6 bytes: 01 04 FB 51 FA 03 = type 1, bank $04, load address $51FB, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_35_799D_LoadRecord::
     db $01, $04, $fb, $51, $fa, $03
 
 ; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto1_Gfx (from 30:51FB, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_35_79A3_Unused_TCRF_FacePhoto1_Gfx_Part51FB::
     INCBIN "data/bank_35/Leftover_35_79A3_Unused_TCRF_FacePhoto1_Gfx_Part51FB.bin" ; $79A3, 1018 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_35_7D9D::
+; I: leftover load-record header, 6 bytes: 01 04 F5 55 FA 03 = type 1, bank $04, load address $55F5, $03FA (1018) data
+; bytes after it (they run past the end of the bank); a record of an older build's image as a download stream in the
+; PC's memory, that nothing in this build reads
+Leftover_35_7D9D_LoadRecord::
     db $01, $04, $f5, $55, $fa, $03
 
 ; I: leftover: an exact copy of 604 bytes of Unused_TCRF_FacePhoto1_Gfx (from 30:55F5, a part of the block) that

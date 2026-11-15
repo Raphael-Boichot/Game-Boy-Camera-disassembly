@@ -13,9 +13,10 @@ BankNumber_2B_4000::
 Leftover_2B_4001_AsmSource::
     db "0,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $09, ";0031", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $09, ";0032", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $09, ";0033", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$"
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_2B_4100::
+; I: leftover PC memory: 4 bytes (2B:4100-4103) that hold the dword $C25CD000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_2B_4100_PcRam::
     db $00, $d0, $5c, $c2
 
 ; I: leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 6 assembler lines) that

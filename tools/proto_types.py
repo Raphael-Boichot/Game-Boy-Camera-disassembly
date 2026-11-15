@@ -14,6 +14,8 @@ sym_types_proto.csv after the generated rows (a later row wins in sym_build.py),
      1. text   runs of 32 or more bytes that are printable ASCII (with tab, CR, LF) or Shift-JIS pairs (lead $81-$9F / $E0-$EF, trail
                $40-$7E / $80-$FC), lie outside the code, tables and copy sources, hold at least one CR LF line end and at least 8
                distinct byte values: the developers' leftover text (source lines, assembler listings). Typed by the bytes only.
+               Single bytes $A1-$DF are text too (the half-width katakana of Shift-JIS, as in 00､01､10､11: 2026-11-15); the dword at
+               BB:4100 of 49 banks, a 4 KB-aligned address $C2xxx000 (the Windows 9x system arena), is kept out of the text (PC memory).
                Runs without a line end stay data: byte tables of bank 0 (00:17A1, 00:1904) and tile-like patterns (04:4340) are
                printable too, and short NUL-separated strings (the DOS environment) are under 32 bytes or have no line end.
      2. data   the two leftover linker symbol tables (records listed by tools/proto_symtab.py), one row per table.
@@ -114,6 +116,11 @@ for s in sites:
             srcs[(b, st)].append((ln, s['dst_kind'], '%s:%s' % (s['bank'], s['site'])))
             for k in range(ln): taken.add(off(b, st + k))
 
+PAGEDW = []                                # the dword at BB:4100 that holds a 4 KB-aligned address $C2xxx000 (2026-11-15): PC memory, not text
+for b in range(1, 64):
+    o_ = off(b, 0x4100); d_ = ROM[o_:o_ + 4]
+    if d_[0] == 0 and d_[1] & 0x0F == 0 and d_[3] == 0xC2 and not any(o_ + k in taken for k in range(4)):
+        PAGEDW.append(b); taken.update(range(o_, o_ + 4))
 rows = []; names = []
 def add(b, s, e, typ, width, note):
     if e > s: rows.append(['%02X' % b, '%04X' % s, '%04X' % e, typ, '' if width is None else str(width), note])
@@ -124,7 +131,7 @@ add(0, 0x0104, 0x0150, 'data', None, 'cartridge header: Nintendo logo, title, co
 def textlen(i):
     """length of the text unit at file offset i (1 ASCII, 2 Shift-JIS pair), 0 if not text"""
     c = ROM[i]
-    if 0x20 <= c < 0x7F or c in (0x09, 0x0A, 0x0D): return 1
+    if 0x20 <= c < 0x7F or c in (0x09, 0x0A, 0x0D) or 0xA1 <= c <= 0xDF: return 1     # with the half-width katakana of Shift-JIS (2026-11-15)
     if (0x81 <= c <= 0x9F or 0xE0 <= c <= 0xEF) and i + 1 < len(ROM) and (0x40 <= ROM[i + 1] <= 0x7E or 0x80 <= ROM[i + 1] <= 0xFC): return 2
     return 0
 ntext = 0

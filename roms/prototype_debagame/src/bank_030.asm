@@ -13,9 +13,10 @@ BankNumber_30_4000::
 Leftover_30_4001_AsmSource::
     db "//////////////////////////////////////////////", $0d, $0a, $0d, $0a, $0d, $0a, ";=====================================================", $0d, $0a, ";", $0d, $0a, ";   ", $83, "I", $83, "t", $83, "Z", $83, "b", $83, "g", $92, $b2, $90, $ae, $0d, $0a, ";", $0d, $0a, ";  ", $e8, $87, $92, "l", $82, $aa, $95, $cf, $8d, "X", $82, $b3, $82, $ea, $82, $e9, $82, $cc, $82, $c5, $81, "A", $82, $b1, $82, $cc, $8c, $e3, $83, "f", $83, "B", $83, "U", $82, $cc, $90, $dd, $92, $e8, $82, $f0, $82, $b7, $82, $e9, $82, $b1, $82, $c6, $0d, $0a, ";=====================================================", $0d, $0a, "GET_OFFSET"
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_30_4100::
+; I: leftover PC memory: 4 bytes (30:4100-4103) that hold the dword $C2650000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_30_4100_PcRam::
     db $00, $00, $65, $c2
 
 ; I: leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 14 assembler lines) that

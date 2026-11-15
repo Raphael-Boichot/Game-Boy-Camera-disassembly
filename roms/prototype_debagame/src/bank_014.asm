@@ -13,9 +13,10 @@ BankNumber_14_4000::
 Leftover_14_4001_AsmSource::
     db "c_0d", $09, "equ", $09, "$8d", $0d, $0a, "def.dmg(176) : c_0e", $09, "equ", $09, "$8e", $0d, $0a, "def.dmg(177) : c_0f", $09, "equ", $09, "$8f", $0d, $0a, "def.dmg(178) : c_a", $09, "equ", $09, "$90", $0d, $0a, "def.dmg(179) : c_b", $09, "equ", $09, "$91", $0d, $0a, "def.dmg(180) : c_c", $09, "equ", $09, "$92", $0d, $0a, "def.dmg(181) : c_d", $09, "equ", $09, "$93", $0d, $0a, "def.dmg(182) : c_e", $09, "equ", $09, "$94", $0d, $0a, "def.dmg(183) : c_f", $09, "equ", $09, "$95", $0d, $0a, "def.dmg(184) : "
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_14_4100::
+; I: leftover PC memory: 4 bytes (14:4100-4103) that hold the dword $C25FC000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_14_4100_PcRam::
     db $00, $c0, $5f, $c2
 
 ; I: leftover text: 16123 bytes of a listing of the developers' source (file.dmg(line) : text) (9 listing lines, 8

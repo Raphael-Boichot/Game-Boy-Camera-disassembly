@@ -101,16 +101,14 @@ bank,addr,name,conf,note,source
 1D,4000,BankNumber_1D_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1D,7FFF,BankNumber_1D_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1E,4000,BankNumber_1E_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1E,53FB,Text_1E_53FB,C,"leftover text block, 725 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1E,56D7,Text_1E_56D7,C,"leftover text block, 10536 bytes (typed .text by its bytes: not read by the traced code)",proto_types
+1E,53FB,Text_1E_53FB,C,"leftover text block, 11268 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 1E,7FFF,BankNumber_1E_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 1F,4000,BankNumber_1F_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-1F,4200,Text_1F_4200,C,"leftover text block, 5328 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-1F,56D7,Text_1F_56D7,C,"leftover text block, 10536 bytes (typed .text by its bytes: not read by the traced code)",proto_types
+1F,4200,Text_1F_4200,C,"leftover text block, 15871 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 1F,7FFF,BankNumber_1F_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 20,4000,BankNumber_20_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 20,4001,Text_20_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-20,4104,Text_20_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
+20,4103,Text_20_4103,C,"leftover text block, 253 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 20,7FFF,BankNumber_20_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 21,4000,BankNumber_21_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 21,4001,Text_21_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
@@ -118,22 +116,20 @@ bank,addr,name,conf,note,source
 21,7FFF,BankNumber_21_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 22,4000,BankNumber_22_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 22,4001,Text_22_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-22,4104,Text_22_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
+22,4104,Text_22_4104,C,"leftover text block, 261 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 22,7FFF,BankNumber_22_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 23,4000,BankNumber_23_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 23,4001,Text_23_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 23,4104,Text_23_4104,C,"leftover text block, 252 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 23,7FFF,BankNumber_23_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 24,4000,BankNumber_24_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-24,4200,Text_24_4200,C,"leftover text block, 5328 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-24,56D7,Text_24_56D7,C,"leftover text block, 10537 bytes (typed .text by its bytes: not read by the traced code)",proto_types
+24,4200,Text_24_4200,C,"leftover text block, 15872 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 24,7FFF,BankNumber_24_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 25,4000,BankNumber_25_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 25,41FE,Text_25_41FE,C,"leftover text block, 15874 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 25,7FFF,BankNumber_25_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 26,4000,BankNumber_26_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
-26,4200,Text_26_4200,C,"leftover text block, 5328 bytes (typed .text by its bytes: not read by the traced code)",proto_types
-26,56D7,Text_26_56D7,C,"leftover text block, 10537 bytes (typed .text by its bytes: not read by the traced code)",proto_types
+26,4200,Text_26_4200,C,"leftover text block, 15872 bytes (typed .text by its bytes: not read by the traced code)",proto_types
 26,7FFF,BankNumber_26_7FFF,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 27,4000,BankNumber_27_4000,C,"the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)",proto_types
 27,4001,Text_27_4001,C,"leftover text block, 255 bytes (typed .text by its bytes: not read by the traced code)",proto_types

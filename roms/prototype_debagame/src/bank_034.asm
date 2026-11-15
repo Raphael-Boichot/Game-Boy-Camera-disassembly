@@ -300,9 +300,10 @@ Leftover_34_7E95_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part6D7F::
     db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
     db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_34_7F11::
+; I: leftover load-record header, 6 bytes: 01 06 FB 6D FA 03 = type 1, bank $06, load address $6DFB, $03FA (1018) data
+; bytes after it (they run past the end of the bank); a record of an older build's image as a download stream in the
+; PC's memory, that nothing in this build reads
+Leftover_34_7F11_LoadRecord::
     db $01, $06, $fb, $6d, $fa, $03
 
 ; I: leftover: an exact copy of 108 bytes of Unused_TCRF_FaceDrawing1_FACE5_Gfx (from 06:42E3, a part of the block)

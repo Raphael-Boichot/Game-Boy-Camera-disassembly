@@ -18,7 +18,10 @@ Keys (TAG = jp, us, gold, kitty, proto):
   TAG.redclass.CLASS     bytes per way in of trace/red_TAG.csv (GATE, BEHIND, TABLE, FORCED, HAND, VECTOR)
   TAG.verdict.CLASS      bytes per verdict class of trace/red_verdicts_TAG.csv (kitty, proto); TAG.unverdicted: never-run pieces with no verdict row
   TAG.names, TAG.names.C / I / Q   rows of disasm/sym_names_TAG.csv and per tag (Q = '?'); TAG.leftovers: its Leftover_* names (TAG.leftovers.C / I: per tag);
-                                   TAG.settled, TAG.settled.GROUP: rows of disasm/sym_settled_unused_TAG.csv (settled as unused, final) and per group
+                                   TAG.settled, TAG.settled.GROUP, TAG.settled_bytes.GROUP: rows of disasm/sym_settled_unused_TAG.csv (settled as unused, final),
+                                   per group, and their bytes per group
+  proto.text.KIND / proto.text_bytes.KIND   blocks and bytes of assets/text_sections_proto.csv by kind (tcrf: the listings TCRF shows,
+                                   asm: the other assembler source, listing, pcstring)
   TAG.doubts, TAG.doubts.GROUP   rows of disasm/sym_unconclusive_TAG.csv, and per group where the table has one
   kitty.jpx.CATEGORY     bytes per category of trace/jp_crosscheck_kitty.csv (NO_JP, JP_RAN, JP_VERDICT, JP_RED, JP_PART)
   kitty.puzzle.bgb_games / bgb_solved / core_games / core_solved   tools/kitty_puzzle.py (trace/puzzle_{bgb,core}_kitty.csv)
@@ -83,6 +86,12 @@ def facts():
         if os.path.exists(p):
             rows = list(csv.DictReader(open(p, encoding='utf-8'))); F['%s.settled' % t] = len(rows)
             for k, v in collections.Counter(r['group'] for r in rows).items(): F['%s.settled.%s' % (t, k.replace(' ', '_'))] = v
+            for r in rows: F['%s.settled_bytes.%s' % (t, r['group'].replace(' ', '_'))] = F.get('%s.settled_bytes.%s' % (t, r['group'].replace(' ', '_')), 0) + int(r['size'])
+    p = os.path.join(REPO, 'roms', 'prototype_debagame', 'assets', 'text_sections_proto.csv')     # the prototype's text in clear by kind
+    if os.path.exists(p):
+        for r in csv.DictReader(open(p, encoding='utf-8')):
+            k = 'tcrf' if r['label'].startswith('Unused_TCRF_AsmSource') else {'assembler source (leftover)': 'asm', 'source listing (leftover)': 'listing', 'PC memory string (leftover)': 'pcstring'}[r['kind']]
+            F['proto.text.%s' % k] = F.get('proto.text.%s' % k, 0) + 1; F['proto.text_bytes.%s' % k] = F.get('proto.text_bytes.%s' % k, 0) + int(r['bytes'])
     for t, d in DIRS.items():                          # the doubts lists (tools/make_doubts.py, kitty_doubts.py, proto_names.py)
         p = os.path.join(REPO, 'roms', d, 'disasm', 'sym_unconclusive_%s.csv' % t)
         if os.path.exists(p):

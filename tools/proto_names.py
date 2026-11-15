@@ -40,7 +40,7 @@ ap = argparse.ArgumentParser(); ap.add_argument('--min-port', type=int, default=
 ap.add_argument('--auto', default=D + 'disasm/layers/sym_names_proto_auto.csv'); ap.add_argument('--match', default=D + 'disasm/match_old_proto.csv')
 ap.add_argument('--symtab', default=D + 'disasm/leftover_symtab_proto.csv'); ap.add_argument('--symtab-mem', default=D + 'disasm/leftover_symtab_mem_proto.csv'); ap.add_argument('--printer-lib', default=D + 'disasm/printer_lib_proto.csv'); ap.add_argument('--oldbuilds', default=D + 'disasm/oldbuilds_proto.csv'); ap.add_argument('--trace', default=D + 'trace/trace_proto.json')
 ap.add_argument('--hand', default=D + 'disasm/layers/sym_names_proto_hand.csv'); ap.add_argument('--rom', default='/root/work/roms/pocketcamera_proto.gb')
-ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv'); ap.add_argument('--texts', default=D + 'assets/text_sections_proto.csv')
+ap.add_argument('--types', default=D + 'disasm/sym_types_proto.csv'); ap.add_argument('--texts', default=D + 'assets/text_sections_proto.csv'); ap.add_argument('--tcrf-source', default=D + 'assets/tcrf_source_proto.csv')
 ap.add_argument('--out', default=D + 'disasm/sym_names_proto.csv'); ap.add_argument('--doubts', default=D + 'disasm/sym_unconclusive_proto.md')
 a = ap.parse_args()
 names = {}
@@ -312,6 +312,27 @@ for r in TYPES:
     put(b, s0, 'Leftover_%02X_%04X_%s' % (b, s0, what), 'I', 'leftover text: %d bytes of %s (%d listing lines, %d assembler lines) that nothing in this build reads (never read nor run in the L2 runs)' % (
         e0 - s0, 'a listing of the developers\' source (file.dmg(line) : text)' if what == 'SrcListing' else 'the developers\' assembler source in clear', nl, na), 'text')
     TEXTROWS.append((b, s0, e0, what, nl, na))
+# 4c-2. the two listings TCRF shows (owner 2026-11-15; assets/tcrf_source_proto.csv, tools/proto_tcrf_source.py): a text row that lies in
+#     the range of a listing's own place (kind tcrf) is Unused_TCRF_AsmSource<n>, its next pieces _Part2, _Part3 ... (the bank stamps and
+#     the PC-memory dwords at BB:4100 cut the listing), tag C: TCRF shows these bytes. A row in the range of a copy (another stage of the
+#     same file) keeps its Leftover_ name, with the copy in its note.
+TCRFSRC = [r for r in csv.DictReader(open(a.tcrf_source))] if os.path.exists(a.tcrf_source) else []
+_fl = lambda b, ad: b * 0x4000 + ad - 0x4000
+for r_ in TCRFSRC:
+    lo_, hi_ = _fl(int(r_['bank'], 16), int(r_['start'], 16)), _fl(int(r_['end_bank'], 16), int(r_['end'], 16))
+    part = 0
+    for i_, (b, s0, e0, what, nl, na) in enumerate(TEXTROWS):
+        f0, f1 = _fl(b, s0), _fl(b, e0)
+        if min(f1, hi_) - max(f0, lo_) < 0.9 * (f1 - f0): continue
+        if r_['kind'] == 'tcrf':
+            part += 1
+            put(b, s0, 'Unused_TCRF_AsmSource%s%s' % (r_['listing'], '_Part%d' % part if part > 1 else ''), 'C',
+                'leftover text: %d bytes of the developers\' assembler source in clear, piece %d of the listing %s that TCRF shows (Proto:Game Boy Camera, section Source Code: %s of %s lines found here in order, %s:%s-%s:%s, assets/tcrf_source_proto.csv); nothing in this build reads it' % (
+                    e0 - s0, part, r_['listing'], r_['lines_in_order'], r_['lines'], r_['bank'], r_['start'], r_['end_bank'], r_['end']), 'text')
+        else:
+            nm_, c_, note_, src_ = names[(b, s0)]
+            put(b, s0, nm_, c_, note_ + '; a copy of the listing %s that TCRF shows at another stage of the file (%s of its %s lines found here in order, %s:%s-%s:%s, assets/tcrf_source_proto.csv)' % (
+                r_['listing'], r_['lines_in_order'], r_['lines'], r_['bank'], r_['start'], r_['end_bank'], r_['end']), src_)
 ngap = 0
 import numpy as _np                       # what the L2 runs read or executed (trace/cov_proto_runs.npz): a gap that is used is not a leftover
 _z = _np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
@@ -337,7 +358,8 @@ for o in range(len(ROMB)):
 #     DOS environment, Windows module names) is a piece of that PC's RAM that the build tool wrote into unused ROM space:
 #     Leftover_BB_AAAA_PcRam, tag I, final. The run is the span of the gap label (to the next label of the bank); only the strings are proven.
 #     Also (owner 2026-11-12) a run with 2+ x86 function prologues (55 8B EC) or 5+ in-memory symbol records (the linker's symbol list,
-#     tools/proto_symtab.py --out-mem): the memory of the PC that linked the ROM.
+#     tools/proto_symtab.py --out-mem): the memory of the PC that linked the ROM. And (2026-11-15) the 4-byte gap at BB:4100 that holds a
+#     4 KB-aligned address $C2xxx000 (the Windows 9x system arena; tools/proto_types.py keeps it out of the text).
 PCRE = re.compile(rb'[A-Z]:\\[A-Za-z]|WINDOWS VMM|[A-Z0-9]{3,8}\.(DLL|EXE|VXD|DRV)\b|COMSPEC=|winbootdir=')
 X86RE = re.compile(rb'\x55\x8B\xEC')            # push bp / mov bp,sp: an x86 function prologue ($EC is no Game Boy opcode)
 MEMSYM = set()                                  # the in-memory symbol records (tools/proto_symtab.py --out-mem): the linker's symbol list
@@ -354,7 +376,8 @@ for i_, (b, ad) in enumerate(_all):
     t = ROMB[_flat(b, ad):_flat(b, ad) + end - ad]
     hits = [m for m in PCRE.finditer(t)]
     x86 = len(X86RE.findall(t)); mem = sum(1 for (mb, mo) in MEMSYM if mb == b and ad <= mo < end)
-    if not hits and x86 < 2 and mem < 5: continue
+    pagedw = ad == 0x4100 and end == 0x4104 and t[0] == 0 and t[1] & 0x0F == 0 and t[3] == 0xC2     # a 4 KB-aligned address $C2xxx000 (2026-11-15)
+    if not hits and x86 < 2 and mem < 5 and not pagedw: continue
     strs = []                              # the printable string around each hit (a NUL-terminated string of the PC memory)
     for m in hits:
         i0, i1 = m.start(), m.end()
@@ -369,10 +392,25 @@ for i_, (b, ad) in enumerate(_all):
     evs = []
     if strs: evs.append('%d strings of the development PC\'s RAM (%s ...)' % (len(strs), ' / '.join(x[:40] for x in ex)))
     if x86 >= 2: evs.append('%d x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode)' % x86)
+    if pagedw: evs.append('the dword $%08X, a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one' % int.from_bytes(t[:4], 'little'))
     if mem >= 5: evs.append('%d records of the linker\'s symbol list as held in memory (disasm/leftover_symtab_mem_proto.csv)' % mem)
     names[(b, ad)] = ['Leftover_%02X_%04X_PcRam' % (b, ad), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X) that hold %s, and that nothing in this build reads, runs or explains; only those are proven, the rest of the run is taken as the same memory' % (
         end - ad, b, ad, end - 1, '; '.join(evs)), 'ram']
     PCRAM.append((b, ad, end, allstr)); npc += 1
+# 5c. load records (2026-11-15): a 6-byte leftover gap 01 BB LL LH NL NH (type 1, bank, load address, length up to $3FA) whose payload
+#     ends on the next such header (or runs past the end of the bank) is the header of a record of a download stream: an older build's
+#     image cut in 1 KB packets (6 + 1,018 bytes) for the development hardware, held in the PC's memory with its payload (the copies around it).
+#     Leftover_BB_AAAA_LoadRecord, tag I, final.
+nrec = 0
+for (b, ad) in sorted(names):
+    nm, c, note, src = names[(b, ad)]
+    if src != 'gap' or not note.startswith('leftover: 6 bytes'): continue
+    h = ROMB[_flat(b, ad):_flat(b, ad) + 6]; ln = h[4] | h[5] << 8; nx = _flat(b, ad) + 6 + ln
+    if h[0] != 1 or h[1] >= 0x40 or not 0 < ln <= 0x3FA: continue
+    if not (nx >= _flat(b, 0x8000) or (ROMB[nx] == 1 and ROMB[nx + 1] < 0x40)): continue
+    names[(b, ad)] = ['Leftover_%02X_%04X_LoadRecord' % (b, ad), 'I', 'leftover load-record header, 6 bytes: 01 %02X %02X %02X %02X %02X = type 1, bank $%02X, load address $%04X, $%04X (%d) data bytes after it (%s); a record of an older build\'s image as a download stream in the PC\'s memory, that nothing in this build reads' % (
+        h[1], h[2], h[3], h[4], h[5], h[1], h[2] | h[3] << 8, ln, ln, 'the next header follows them' if nx < _flat(b, 0x8000) else 'they run past the end of the bank'), 'record']
+    nrec += 1
 # 6. code after a data label: a <routine>_Part<AAAA> label (the Japanese convention for a piece of a parent block) at the first traced
 #    instruction that a non-code label would own, so that the code keeps the name and the colour of its routine
 codeat = set()
@@ -406,23 +444,24 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib', 'tiles')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib', 'tiles', 'record')      # the leftovers: their I tag is final (owner rule 2026-11-11)
 doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] not in FINAL)
 settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FINAL)
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory', 'tiles': 'leftover tiles'}[src]
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory', 'tiles': 'leftover tiles', 'record': 'leftover load record'}[src]
         w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
                     'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers', 'oldlib': 'a routine or block of an older build\'s bank 0 (disasm/printer_lib_proto.csv, disasm/oldbuilds_proto.csv), in bytes no type row, traced instruction or reader covers',
                      'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers',
-                     'tiles': 'a hand type row (2bpp tiles, disasm/layers/sym_types_proto_hand.csv) that no traced instruction or copy site reads'}[src]])
+                     'tiles': 'a hand type row (2bpp tiles, disasm/layers/sym_types_proto_hand.csv) that no traced instruction or copy site reads',
+                     'record': 'a 6-byte header 01 bank address length whose length leads to the next header (or past the bank end), in bytes no type row, traced instruction or reader covers'}[src]])
 with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])
     rows_ = []
     for b, s0, e0, what, nl, na in TEXTROWS:
         t = ROMB[_flat(b, s0):_flat(b, s0) + e0 - s0].decode('cp932', 'replace')
-        rows_.append((b, s0, e0, {'AsmSource': 'assembler source (leftover)', 'SrcListing': 'source listing (leftover)'}[what], 'Leftover_%02X_%04X_%s' % (b, s0, what), t.count('\r\n'),
+        rows_.append((b, s0, e0, {'AsmSource': 'assembler source (leftover)', 'SrcListing': 'source listing (leftover)'}[what], names[(b, s0)][0], t.count('\r\n'),
                       re.sub(r'\s+', ' ', t[:80]).strip()))
     for b, ad, end, strs in PCRAM:
         for o_, x in strs:

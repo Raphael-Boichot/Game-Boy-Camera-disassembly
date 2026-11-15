@@ -20,23 +20,19 @@ bank,start,end,type,width,note
 1A,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 1B,4001,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 1B,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-1E,53FB,56D0,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-1E,56D7,7FFF,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-1F,4200,56D0,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-1F,56D7,7FFF,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
+1E,53FB,7FFF,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
+1F,4200,7FFF,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 20,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-20,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
+20,4103,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 21,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 21,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 22,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-22,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
+22,4104,4209,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 23,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 23,4104,4200,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-24,4200,56D0,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-24,56D7,8000,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
+24,4200,8000,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 25,41FE,8000,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-26,4200,56D0,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
-26,56D7,8000,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
+26,4200,8000,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 27,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 27,4104,8000,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
 28,4000,4100,text,,"leftover text (ASCII / Shift-JIS bytes, not read by the traced code)"
@@ -363,7 +359,7 @@ bank,start,end,type,width,note
 21,7AF5,7EEF,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
 21,7EF5,7F19,data,,"leftover copy of Gfx_02_4401_FNTOOE2_Tiles40to17F (02:4401): a copy of code, typed data (this build never runs it)"
 21,7F1F,7FFF,data,32,leftover copy of Map_02_5801_BG_BANK (02:5801)
-22,4200,43A5,data,32,leftover copy of Map_02_5A41_BGSRAM1 (02:5A41)
+22,4209,43A5,data,32,leftover copy of Map_02_5A41_BGSRAM1 (02:5A41)
 22,4CC3,50BD,data,16,leftover copy of Unused_PROGRAM_Gfx (02:6581)
 22,54CF,55CF,data,16,leftover copy of Gfx_03_4001_FNTOOE3 (03:4001)
 22,55CF,55EF,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)

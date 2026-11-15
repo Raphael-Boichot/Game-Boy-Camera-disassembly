@@ -268,9 +268,10 @@ Leftover_33_78A5_Gfx_01_4001_FNTOOE1_Part4BEF::
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_33_7A00_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part616A::
     INCBIN "data/bank_33/Leftover_33_7A00_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part616A.bin" ; $7A00, 651 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_33_7C8B::
+; I: leftover load-record header, 6 bytes: 01 05 F5 63 FA 03 = type 1, bank $05, load address $63F5, $03FA (1018) data
+; bytes after it (they run past the end of the bank); a record of an older build's image as a download stream in the
+; PC's memory, that nothing in this build reads
+Leftover_33_7C8B_LoadRecord::
     db $01, $05, $f5, $63, $fa, $03
 
 ; I: leftover: an exact copy of 878 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:63F5, a part of the block) that

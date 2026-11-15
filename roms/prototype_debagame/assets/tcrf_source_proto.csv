@@ -1,0 +1,7 @@
+listing,kind,bank,start,end_bank,end,bytes,lines,lines_in_order
+1,tcrf,26,4201,26,7FFF,15870,818,818
+1,copy,24,4201,24,7FF9,15864,818,817
+1,copy,1F,4201,1F,7FEA,15849,818,815
+1,copy,1E,578D,1E,7FEB,10334,818,565
+2,tcrf,27,4001,28,4200,16895,657,657
+2,copy,25,435A,25,7FEB,15505,657,618

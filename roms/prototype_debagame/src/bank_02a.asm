@@ -13,9 +13,10 @@ BankNumber_2A_4000::
 Leftover_2A_4001_AsmSource::
     db ",$00,$FF,$00", $09, ";0092", $0d, $0a, $09, "DEFB", $09, "$FF,$00,$FF,$38,$EF,$28,$FF,$38", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$10,$18,$00,$00", $09, ";0093", $0d, $0a, $09, "DEFB", $09, "$00,$00,$10,$18,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$10,$18,$00,$00", $09, ";0094", $0d, $0a, $09, "DEFB", $09, "$00,$00,$10,$18,$20,$30,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$08,$0C,$10,$1"
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_2A_4100::
+; I: leftover PC memory: 4 bytes (2A:4100-4103) that hold the dword $C25D3000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_2A_4100_PcRam::
     db $00, $30, $5d, $c2
 
 ; I: leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 6 assembler lines) that
@@ -38,9 +39,10 @@ Leftover_2A_4200_Unused_TCRF_FaceDrawing1_FACE5_Gfx_Part44D0::
 ; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_2A_4267_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part705D::
     INCBIN "data/bank_2a/Leftover_2A_4267_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part705D.bin" ; $4267, 408 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_2A_43FF::
+; I: leftover load-record header, 6 bytes: 01 06 F5 71 FA 03 = type 1, bank $06, load address $71F5, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_2A_43FF_LoadRecord::
     db $01, $06, $f5, $71, $fa, $03
 
 ; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FaceDrawing4_FACE8_Gfx (from 06:71F5, a part of the block)

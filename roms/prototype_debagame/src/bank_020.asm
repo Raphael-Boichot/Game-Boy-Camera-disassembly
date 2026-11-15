@@ -13,15 +13,15 @@ BankNumber_20_4000::
 Leftover_20_4001_AsmSource::
     db ",$00,$00", $09, ";0155", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$1F,$10,$1F,$10,$1F,$10,$1F,$1F", $09, ";0156", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$FF,$78,$FF,$00,$FF,$00,$FF,$FF", $09, ";0157", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$C0,$40,$C0,$40,$C0,$40,$C"
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 3 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_20_4100::
-    db $00, $f0, $fa, $c1
+    db $00, $f0, $fa
 
-; I: leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 6 assembler lines) that
+; I: leftover text: 253 bytes of the developers' assembler source in clear (0 listing lines, 6 assembler lines) that
 ; nothing in this build reads (never read nor run in the L2 runs)
-Leftover_20_4104_AsmSource::
-    db "0", $09, ";0158", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$7F,$78,$7F,$40,$7F,$60,$3F,$3E", $09, ";0159", $0d, $0a, $09, "DEFB", $09, "$01,$01,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$FE,$02,$FE,$02,$FE,$02,$FC,$04", $09, ";015A", $0d, $0a, $09, "DEFB", $09, "$FC,$FC,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$30,$30,$60,$60,$60,$60,$30,$3"
+Leftover_20_4103_AsmSource::
+    db $c1, "0", $09, ";0158", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$7F,$78,$7F,$40,$7F,$60,$3F,$3E", $09, ";0159", $0d, $0a, $09, "DEFB", $09, "$01,$01,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$FE,$02,$FE,$02,$FE,$02,$FC,$04", $09, ";015A", $0d, $0a, $09, "DEFB", $09, "$FC,$FC,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$30,$30,$60,$60,$60,$60,$30,$3"
 
 ; I: leftover: 83 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
@@ -62,9 +62,10 @@ Leftover_20_42B8_SIO_INT::
     db $c0, $f0, $01, $ea, $dd, $c0, $3c, $ea, $d8, $c0, $e0, $01, $e1, $d1, $c1, $f1
     db $d9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_42F9::
+; I: leftover load-record header, 6 bytes: 01 00 92 03 2E 01 = type 1, bank $00, load address $0392, $012E (302) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_42F9_LoadRecord::
     db $01, $00, $92, $03, $2e, $01
 
 ; I: leftover: 31 bytes of code GAME_INIT of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -139,9 +140,10 @@ Leftover_20_4413_MEN_FADE_DEC::
     db $4f, $1e, $04, $06, $00, $79, $e6, $03, $28, $01, $3d, $b0, $47, $cb, $08, $cb
     db $08, $cb, $09, $cb, $09, $1d, $20, $ed, $78, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_442D::
+; I: leftover load-record header, 6 bytes: 01 00 C0 04 EA 01 = type 1, bank $00, load address $04C0, $01EA (490) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_442D_LoadRecord::
     db $01, $00, $c0, $04, $ea, $01
 
 ; I: leftover: 37 bytes of code TITL_GAMEN of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -479,9 +481,10 @@ Leftover_20_4DDA_DUMP_1MEN::
     db $0e, $13, $0d, $79, $b7, $20, $f5, $23, $23, $23, $23, $23, $23, $23, $23, $23
     db $23, $23, $23, $f0, $89, $3d, $e0, $89, $b7, $20, $d7, $3e, $c7, $e0, $40, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_4E2A::
+; I: leftover load-record header, 6 bytes: 01 00 A5 0E D6 03 = type 1, bank $00, load address $0EA5, $03D6 (982) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_4E2A_LoadRecord::
     db $01, $00, $a5, $0e, $d6, $03
 
 ; I: leftover: 107 bytes of code MAKE_MOVIE of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -595,9 +598,10 @@ Leftover_20_51F7::
 Leftover_20_51FC_VB_MOVIE::
     db $cd, $b6, $ff, $fa, $c9, $c0, $e6, $ff, $c8, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_5206::
+; I: leftover load-record header, 6 bytes: 01 00 7B 12 FA 03 = type 1, bank $00, load address $127B, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_5206_LoadRecord::
     db $01, $00, $7b, $12, $fa, $03
 
 ; I: leftover: 135 bytes of code MAKE_CONFIG of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -723,9 +727,10 @@ Leftover_20_58E6_CONF_OBJ_PAT::
     db $80, $80, $80, $00, $80, $88, $80, $00, $88, $80, $80, $00, $88, $88, $80, $00
     db $90, $80, $80, $00, $90, $88, $80, $00, $98, $80, $80, $00, $98, $88, $80, $00
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_5916::
+; I: leftover load-record header, 6 bytes: 01 00 7F 19 05 02 = type 1, bank $00, load address $197F, $0205 (517) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_5916_LoadRecord::
     db $01, $00, $7f, $19, $05, $02
 
 ; I: leftover: 96 bytes of code MK_PROTECT of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -785,9 +790,10 @@ Leftover_20_5AA4_VB_PROTECT::
     db $3e, $cf, $ea, $4e, $99, $3e, $cb, $ea, $4f, $99, $18, $10, $fe, $06, $20, $0c
     db $3e, $ce, $ea, $4e, $99, $3e, $c7, $ea, $4f, $99, $18, $00, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_5B21::
+; I: leftover load-record header, 6 bytes: 01 00 84 1B AF 01 = type 1, bank $00, load address $1B84, $01AF (431) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_5B21_LoadRecord::
     db $01, $00, $84, $1b, $af, $01
 
 ; I: leftover: 24 bytes of code MK_PIC_SAVE of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -913,9 +919,10 @@ Leftover_20_5E74_VB_GALLERY::
     db $2a, $02, $0c, $2a, $02, $0c, $79, $82, $20, $01, $04, $78, $ea, $c5, $c0, $79
     db $ea, $c4, $c0, $7c, $ea, $c7, $c0, $7d, $ea, $c6, $c0, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_5F70::
+; I: leftover load-record header, 6 bytes: 01 00 C7 1F 57 00 = type 1, bank $00, load address $1FC7, $0057 (87) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_5F70_LoadRecord::
     db $01, $00, $c7, $1f, $57, $00
 
 ; I: leftover: 67 bytes of code PRINT_GO_GO of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -938,9 +945,10 @@ Leftover_20_5FBA_SIOWATCHDOG2::
     db $fa, $6c, $c3, $a7, $c0, $21, $6f, $c3, $34, $7e, $fe, $06, $d8, $af, $77, $cd
     db $e9, $2e, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_5FCD::
+; I: leftover load-record header, 6 bytes: 01 00 1E 20 FA 03 = type 1, bank $00, load address $201E, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_5FCD_LoadRecord::
     db $01, $00, $1e, $20, $fa, $03
 
 ; I: leftover: 32 bytes of code TENSOU_YOKO of the bank 0 of an older build (bank $20); found by its bytes (16-bit
@@ -1261,9 +1269,10 @@ Leftover_20_6A7F_N_OBJ_HYOUJI2::
     db $21, $02, $c0, $fa, $dd, $c0, $cb, $3f, $cb, $3f, $cb, $3f, $cb, $3f, $22, $23
     db $3e, $54, $22, $3e, $58, $22, $fa, $dd, $c0, $e6, $0f, $22, $c9
 
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_20_6A9C::
+; I: leftover load-record header, 6 bytes: 01 00 D5 2A 36 00 = type 1, bank $00, load address $2AD5, $0036 (54) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_20_6A9C_LoadRecord::
     db $01, $00, $d5, $2a, $36, $00
 
 ; I: leftover: 23 bytes of code SIOINT of the printer library of an older build, the Japanese Prn_SerialIrq (00:0F16,

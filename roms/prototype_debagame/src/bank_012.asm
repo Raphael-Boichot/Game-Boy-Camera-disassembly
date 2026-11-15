@@ -13,9 +13,10 @@ BankNumber_12_4000::
 Leftover_12_4001_AsmSource::
     db ": BufPointer", $09, $09, "ds", $09, "2", $09, ";", $91, $97, $90, "M", $83, "o", $83, "b", $83, "t", $83, "@", $83, "|", $83, "C", $83, $93, $83, "^", $0d, $0a, "siowork.dmg(51) : BufPointer_base", $09, $09, "ds", $09, "2", $09, ";", $91, $97, $90, "M", $83, "o", $83, "b", $83, "t", $83, "@", $83, "A", $83, "h", $83, $8c, $83, "X", $0d, $0a, "siowork.dmg(52) : BufPointer_base1", $09, "ds", $09, "2", $09, ";", $91, $97, $90, "M", $83, "o", $83, "b", $83, "t", $83, "@", $83, "A", $83, "h", $83, $8c, $83, "X", $91, $d2, $94, $f0, $82, "P", $0d, $0a, "siowork.dmg(53) : BufPointer_base2", $09, "ds", $09, "2", $09, ";", $91, $97, $90, "M", $83, "o", $83, "b", $83, "t", $83, "@", $83, "A", $83, "h", $83, $8c, $83, "X", $91, $d2, $94, $f0, $82, "Q", $0d, $0a, "siowork.dmg("
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_12_4100::
+; I: leftover PC memory: 4 bytes (12:4100-4103) that hold the dword $C2604000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_12_4100_PcRam::
     db $00, $40, $60, $c2
 
 ; I: leftover text: 496 bytes of the developers' assembler source in clear (4 listing lines, 4 assembler lines) that

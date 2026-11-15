@@ -13,9 +13,10 @@ BankNumber_31_4000::
 Leftover_31_4001_AsmSource::
     db "_CNTR3),A", $0d, $0a, $0d, $0a, $09, "LD", $09, "DE,$FFDF", $09, $09, "; 21H", $82, $e6, $82, $e8, $89, $ba, $82, $cd, $8e, "g", $82, $a6, $82, $c8, $82, $a2, $82, $cc, $82, $c5, $0d, $0a, $09, "ADD", $09, "HL,DE", $0d, $0a, $09, "JR", $09, "C,_SET_OK", $0d, $0a, $0d, $0a, $09, "LD", $09, "A,$00", $0d, $0a, $09, "LD", $09, "(B_CNTR2),A", $09, $09, "; ", $8b, $ad, $90, $a7, $93, "I", $82, $c9, "21H", $82, $c9, $82, $b7, $82, $e9, $0d, $0a, $09, "LD", $09, "A,$21", $0d, $0a, $09, "LD", $09, "(B_CNTR3),A", $0d, $0a, $0d, $0a, "_SET_OK", $0d, $0a, $09, "LD", $09, "A,$10", $0d, $0a, $09, "LD", $09, "($4000),A", $09, $09, "; RAM BANK", $82, $cc, $95, $cf, $8d, "X", $0d, $0a, $09, $0d, $0a, $09, "LD", $09, "A,(B_CNTR2)", $0d, $0a, $09, "LD", $09, "(CNTR2),A", $09, $09, ";", $8e, $c0, $8d, $db
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_31_4100::
+; I: leftover PC memory: 4 bytes (31:4100-4103) that hold the dword $C25DB000, a 4 KB-aligned address of the Windows
+; 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one, and that nothing in
+; this build reads, runs or explains; only those are proven, the rest of ...
+Leftover_31_4100_PcRam::
     db $00, $b0, $5d, $c2
 
 ; I: leftover text: 252 bytes of the developers' assembler source in clear (0 listing lines, 5 assembler lines) that

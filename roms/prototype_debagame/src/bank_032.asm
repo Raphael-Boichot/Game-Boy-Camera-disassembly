@@ -112,9 +112,10 @@ Leftover_32_7A00::
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_32_7A0B_Unused_TCRF_FacePhoto1_Gfx_Part59EF::
     INCBIN "data/bank_32/Leftover_32_7A0B_Unused_TCRF_FacePhoto1_Gfx_Part59EF.bin" ; $7A0B, 530 bytes
-; I: leftover: 6 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_32_7C1D::
+; I: leftover load-record header, 6 bytes: 01 04 01 5C FA 03 = type 1, bank $04, load address $5C01, $03FA (1018) data
+; bytes after it (they run past the end of the bank); a record of an older build's image as a download stream in the
+; PC's memory, that nothing in this build reads
+Leftover_32_7C1D_LoadRecord::
     db $01, $04, $01, $5c, $fa, $03
 
 ; I: leftover: an exact copy of 988 bytes of Unused_TCRF_FacePhoto2_Gfx (from 30:5C01, a part of the block) that
