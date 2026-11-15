@@ -1,0 +1,26 @@
+variable,group,note
+hMode,mode,the mode (Mode_Set); the main loop dispatches on it
+hMenuMode,mode,the mode a menu item names
+wReturnMode,mode,mode saved by Mode_SaveReturnD93D
+wReturnModeB,mode,mode saved by Mode_SaveReturnD8F2
+wKeysHeld,pad,"bit 7 Down .. bit 0 A, 1 = held (Joy_Read)"
+wKeysNew,pad,same layout: newly pressed
+wKeysNewRepeat,pad,same layout: new press or auto-repeat
+wKeysPrev,pad,same layout: the frame before
+wLcdcShadow,lcdc,copied to rLCDC by the VBlank handler
+hLcdcShadow,lcdc,LCDC latched by the VBlank handler
+wBgpShadow,dmgpal,copied to rBGP by the VBlank handler
+wObp0Shadow,dmgpal,copied to rOBP0
+wObp1Shadow,dmgpal,copied to rOBP1
+wPaletteTarget,dmgpal,"the palettes a fade ends on (BGP, OBP0, OBP1)"
+wSndSfx1,sfx1,request mailbox of effect channel 1
+wSndMusicReq,music,song mailbox
+wSndSfx3,sfx3,request mailbox of effect channel 3
+wSndSfx4,sfx4,request mailbox of effect channel 4
+rLCDC,lcdc,LCD control register
+rIE,ie,interrupt enable register
+rSC,sc,serial control register
+rP1,p1,joypad select lines
+rBGP,dmgpal,BG palette register
+rOBP0,dmgpal,sprite palette 0 register
+rOBP1,dmgpal,sprite palette 1 register

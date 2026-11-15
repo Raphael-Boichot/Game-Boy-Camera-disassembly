@@ -319,14 +319,14 @@ bank,addr,name,conf,note,source
 01,4A13,Sram_FormatVector,C,"bank 0: the slot table $B1B2 cleared (30 bytes), Magic, checksum, echo at $B1D7",hand 2026-11-08
 01,4A60,Sram_FormatIdCard,C,"bank 1: the ID card record $AFB8 cleared ($12 bytes), Magic, checksum, echo at $AFD1",hand 2026-11-08
 01,4AA9,Sram_FormatCounters,C,bank 0: the counters $B000-$B011 cleared and the Magic written at $B012,hand 2026-11-08
-01,4ADF,Sram_ClearB1FC,C,bank 0: $690 bytes from $B1FC cleared (the block that 01:4C93 loads into $C230); code read (the use of the block $B1FC / $C230 is not known),hand 2026-11-08
+01,4ADF,Sram_ClearCardPhotos,C,"bank 0: $690 bytes from $B1FC cleared: the three photos of the name card (05:41B2 at boot, 0F:4AFE); code read",hand 2026-11-15
 01,4B0A,Photo_LoadToBufferAndVram,C,"photo slot A: $F00 bytes into $C000, then $800 into tiles $9000 and $600 into $8000 (HBlank copy), its $55 bytes of information into $DA52",hand 2026-11-08
 01,4B61,Photo_LoadToVram,C,photo slot A straight into tiles $9000 / $8000 and its information into $DA52,hand 2026-11-08
 01,4BB1,Photo_LoadToBuffer,C,photo slot A: $F00 bytes into $C000 and its information into $DA52,hand 2026-11-08
 01,4BF0,Photo_LoadTiles8800,C,photo slot A: $E00 bytes into tiles $8800 and into $C000,hand 2026-11-08
 01,4C2B,Photo_Store,C,"photo slot A: $C000 ($F00 bytes) and the information $DA52 ($55 bytes) into SRAM, Magic, checksum and echo",hand 2026-11-08
-01,4C93,Sram_LoadB1FC,C,bank 0: $690 bytes from $B1FC into $C230; code read (the use of the block $B1FC / $C230 is not known),hand 2026-11-08
-01,4CB2,Sram_StoreB1FC,C,bank 0: $690 bytes from $C230 into $B1FC; code read (the use of the block $B1FC / $C230 is not known),hand 2026-11-08
+01,4C93,Sram_LoadCardPhotos,C,"bank 0: $690 bytes from $B1FC into $C230: the three photos of the name card, 3 x $230 bytes (35 tiles each; Mode0B_State05 makes them from the album photos picked at $0B:$04, the card screens and 07:608D / 07:6122 load them); code read",hand 2026-11-15
+01,4CB2,Sram_StoreCardPhotos,C,"bank 0: $690 bytes from $C230 into $B1FC: the three photos of the name card (called from Mode0B_State06, 06:53E0, when the card is finished); code read",hand 2026-11-15
 01,4D62,Sram_LoadVector,C,bank 0: the slot table $B1B2 (30 bytes) into $DAA9,hand 2026-11-08
 01,4D81,Photo_FindSlotA,C,"A = $FF goes to Photo_FindSlot_Far, else A - 1 first",hand 2026-11-08
 01,4D9F,Photo_AddToVector,C,"slot A of $DAA9 gets the next order number, then Photo_RenumberVector and Photo_CountUsed",hand 2026-11-08
@@ -1047,3 +1047,15 @@ bank,addr,name,conf,note,source
 07,6395,KittHost_TextStep_Tbl6395,C,"the 15 puzzle's text script of the Kitt host (the word at 07:669C of Mode0E_State00_Tbl668C), read by KittHost_TextStep since the puzzle runs of 2026-11-14 (tools/kitty_puzzle.py); was Mode0E_State00_Tbl668C_Entry6395, never read",hand 2026-11-14
 07,63EE,KittHost_TextStep_Tbl63EE,C,"a text script of the Kitt host, read by KittHost_TextStep; kept as a label since the puzzle runs of 2026-11-14 joined the read spans",hand 2026-11-14
 07,6423,KittHost_TextStep_Tbl6423,C,"a text script of the Kitt host, read by KittHost_TextStep; kept as a label since the puzzle runs of 2026-11-14 joined the read spans",hand 2026-11-14
+01,4000,Leftover_01_4000_SinTable,C,"leftover: 512 bytes (01:4000-41FF) 256 signed words round(256 sin(2 pi i / 256)), the low bytes at $4000-$40FF and the high bytes at $4100-$41FF (checked: 0 errors); no proven instruction points at it and no run reads it",hand 2026-11-15
+01,4200,Leftover_01_4200_CosTable,C,"leftover: 512 bytes (01:4200-43FF) 256 signed words round(256 cos(2 pi i / 256)), low bytes $4200-$42FF, high bytes $4300-$43FF (checked: 0 errors); never read",hand 2026-11-15
+01,4400,Leftover_01_4400_Zero,C,"leftover: 768 bytes (01:4400-46FF) 768 bytes of $00 between the cosine table and Sram_WriteMagic_Tbl4700 (three more 256-byte pages, empty); never read",hand 2026-11-15
+03,4000,Leftover_03_4000_OamList,C,"leftover: 100 bytes (03:4000-4063) sprite layout of 25 records (y, x, tile, attribute; bit 0 of the attribute ends the list, as Obj_DrawSprite reads it): a 5 x 5 block of tiles $00-$44; nothing points at it, never drawn",hand 2026-11-15
+03,4064,Leftover_03_4064_OamList,C,leftover: 100 bytes (03:4064-40C7) sprite layout of 25 records: the 5 x 5 block of tiles $80-$C4; never drawn,hand 2026-11-15
+03,40C8,Leftover_03_40C8_OamList,C,"leftover: 40 bytes (03:40C8-40EF) sprite layout of 10 records: two rows of five, tiles $00-$14; never drawn",hand 2026-11-15
+03,40F0,Leftover_03_40F0_OamList,C,"leftover: 40 bytes (03:40F0-4117) sprite layout of 10 records: two rows of five, tiles $80-$94; never drawn",hand 2026-11-15
+0F,4000,Leftover_0F_4000_Snd_NoiseNR43Tbl,C,"leftover: 37 bytes (0F:4000-4024) 37 bytes, the same as the Japanese Snd_NoiseNR43Tbl (1F:4000, the NR43 value per noise note); this sound engine does not read them",hand 2026-11-15
+0F,4025,Leftover_0F_4025_Snd_LengthTbl,C,"leftover: 20 bytes (0F:4025-4038) 20 bytes, the same as the Japanese Snd_LengthTbl (1F:4025); not read here; 0F:559D adds the note offset to $4037, two bytes before Snd_FreqTbl, so its last two bytes are only the base of a 1-based index",hand 2026-11-15
+12,4000,Leftover_12_4000_Tiles,I,"leftover: 224 bytes (12:4000-40DF) 14 2bpp tiles of kana-like glyphs (seen as tiles); nothing points at them, never read",hand 2026-11-15
+16,4000,Leftover_16_4000_Tiles,I,"leftover: 6144 bytes (16:4000-57FF) 384 2bpp tiles, mostly blank, with parts of frames and of kana glyphs (seen as tiles); nothing points at them, never read",hand 2026-11-15
+02,4000,Leftover_02_4000_ObjScript,C,"leftover: 8 bytes (02:4000-4007) an object script of the form of the next one (02:4008): two words, then the command $1F1E (ObjCmd_Jump) back to $4000, a loop; nothing points at it and no run reads it",hand 2026-11-15

@@ -226,8 +226,9 @@ if os.path.exists(KINDS):
     for r in csv.DictReader(open(KINDS, encoding='utf-8')):
         o0, o1 = flat(int(r['bank'], 16), int(r['start'], 16)), flat(int(r['bank'], 16), int(r['end'], 16))
         seg = kind[o0:o1]; hit = (seg == KEY['UNC']) & ~is_code[o0:o1]
-        if not hit.any() and (seg[~is_code[o0:o1]] == KEY[r['kind']]).all(): continue      # the block was renamed with its kind since (e.g. Src_ -> Map_): the row agrees, nothing to do
-        assert hit.any(), 'no uncertain byte left in %s' % r['label']
+        _rest = seg[~is_code[o0:o1] & ~np.isin(seg, [KEY['PAD'], KEY['FILL']])]
+        if not hit.any() and (_rest == KEY[r['kind']]).all(): continue      # the block was renamed with its kind since (e.g. Src_ -> Map_), or its kind came first: the row agrees (its runs of $00 / $FF stay padding / fill), nothing to do
+        assert hit.any(), 'no uncertain byte left in %s (kinds there: %s)' % (r['label'], {k: int((seg == v).sum()) for k, v in KEY.items() if (seg == v).any()})
         seg[hit] = KEY[r['kind']]; OVR[r['kind']] = OVR.get(r['kind'], 0) + int(hit.sum()); OVR['rows'] = OVR.get('rows', 0) + 1
 print('layout overrides', OVR.get('rows', 0), 'rows', {k: v for k, v in sorted(OVR.items()) if k != 'rows'}, 'bytes', sum(v for k, v in OVR.items() if k != 'rows'))
 _u = np.flatnonzero(kind == KEY['UNC'])

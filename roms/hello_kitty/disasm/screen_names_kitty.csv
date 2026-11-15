@@ -1,4 +1,5 @@
 mode,state,name,tag,evidence
+00,02,Boot: throw away all the save data?,C,"BGB screenshot (セーブデータをすべて ポイッしますか? A…はい B…いいえ; Select + Start held at power-on, Mode00_State00)"
 00,05,Boot: copyright notice,C,BGB screenshot (Nintendo / Sanrio copyright lines)
 00,08,Title screen,C,BGB screenshot (Hello Kitty Pocket Camera logo)
 01,02,Main menu: Take / View / Play,C,BGB screenshot (とる みる あそぶ; START = option menu)

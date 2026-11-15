@@ -1,0 +1,81 @@
+channel,id,name,tag,sites,desc,evidence
+music,01,MUSIC_BOOT_AND_TITLE,C,3,started on: BootAndTitle,05:407F 05:4108 05:4243 | Mode00_State00 (00:00 BootAndTitle); Mode00_State01 (00:01 BootAndTitle); Mode00_State04 (00:04 BootAndTitle)
+music,02,MUSIC_BOOT_AND_TITLE_00_06,C,1,started on: BootAndTitle,05:42AC | Mode00_State06 (00:06 BootAndTitle)
+music,03,MUSIC_MAIN_MENU,C,2,started on: MainMenu,05:45DB 05:471D | Mode01_State00 (01:00 MainMenu); Mode01_State03 (01:03 MainMenu)
+music,04,MUSIC_VIEW_ALBUM,C,2,started on: ViewAlbum,05:701F 05:712B | Mode03_State00 (03:00 ViewAlbum); Mode03_State01 (03:01 ViewAlbum)
+music,08,MUSIC_STRAWBERRY_CHANNEL_TUNE_4,C,1,started on: StrawberryChannel,07:50CE | StrawberryCh_Music4 (11:04 StrawberryChannel)
+music,09,MUSIC_STRAWBERRY_CHANNEL_TUNE_2,C,1,started on: StrawberryChannel,07:50BA | StrawberryCh_Music2 (11:04 StrawberryChannel)
+music,0A,MUSIC_STRAWBERRY_CHANNEL_TUNE_1,C,1,started on: StrawberryChannel,07:50B0 | StrawberryCh_Music1 (11:04 StrawberryChannel)
+music,0B,MUSIC_STRAWBERRY_CHANNEL_TUNE_3,C,1,started on: StrawberryChannel,07:50C4 | StrawberryCh_Music3 (11:04 StrawberryChannel)
+music,0C,MUSIC_STRAWBERRY_CHANNEL_TUNE_0,C,1,started on: StrawberryChannel,07:50A6 | StrawberryCh_Music0 (11:04 StrawberryChannel)
+music,0D,MUSIC_SLIDE_SHOW,C,1,started on: SlideShow,07:48E9 | Mode12_State00 (12:00 SlideShow)
+music,0E,MUSIC_SLIDE_SHOW_12_02,C,1,started on: SlideShow,07:498B | Mode12_State02 (12:02 SlideShow)
+music,0F,MUSIC_STRAWBERRY_CHANNEL_TUNE_6,C,1,started on: StrawberryChannel,07:50E2 | StrawberryCh_Music6 (11:04 StrawberryChannel)
+music,11,MUSIC_VIEW_ALBUM_03_04,C,3,started on: ViewAlbum; FactoryCheck,05:43F9 05:44E7 05:7365 | Mode0D_State00 (0D:00 FactoryCheck); Mode0D_State03 (0D:03 FactoryCheck); Mode03_State04 (03:04 ViewAlbum)
+music,12,MUSIC_STAMP_WINDOW,C,1,started on: StampWindow,05:6025 | Mode05_State00 (05:00 StampWindow)
+music,13,MUSIC_VIEW_ALBUM_03_06,C,1,started on: ViewAlbum,05:6BE3 | Mode03_State06 (03:06 ViewAlbum)
+music,14,MUSIC_PRINTING,C,1,started on: Printing,01:6ACB | Mode06_State00 (06:00 Printing)
+music,15,MUSIC_FIFTEEN_PUZZLE,C,1,started on: FifteenPuzzle,07:5AFD | Puzzle15_LoadGfx (0F:00 FifteenPuzzle)
+music,16,MUSIC_SCRATCH_CARD,C,3,started on: ScratchCard; Quick factory check: please wait,05:445D 07:60C0 07:614D | Mode0D_State01 (0D:01 Quick factory check: please wait); Mode10_State00 (10:00 ScratchCard); Mode10_State01 (10:01 ScratchCard)
+music,17,MUSIC_VIEW_ALBUM_03_0C,C,1,started on: ViewAlbum,05:746B | Mode03_State0C (03:0C ViewAlbum)
+music,18,MUSIC_VIEW_ALBUM_03_10,C,1,started on: ViewAlbum,05:7546 | Mode03_State10 (03:10 ViewAlbum)
+music,1C,MUSIC_PRINTING_06_23,C,2,started on: Printing; PrintingAppleGame,01:74CC 07:40CC | Mode06_State23 (06:23 Printing); Mode1B_State00 (1B:00 PrintingAppleGame)
+music,1D,MUSIC_PRINTING_06_18,C,2,started on: Printing,01:7274 01:72C7 | Mode06_State18 (06:18 Printing); Mode06_State19 (06:19 Printing)
+music,1E,MUSIC_NAME_CARD,C,1,started on: NameCard,06:5673 | Mode0A_State00 (0A:00 NameCard)
+music,1F,MUSIC_NAME_CARD_EDIT,C,1,started on: NameCardEdit,06:50DD | NameCardEdit_RedrawScreen (0B:0F NameCardEdit)
+music,20,MUSIC_VIEW_ALBUM_03_0A,C,1,started on: ViewAlbum,05:6699 | Mode03_State0A (03:0A ViewAlbum)
+music,21,MUSIC_EXCHANGE,C,1,started on: Exchange,06:6202 | Mode07_State00 (07:00 Exchange)
+music,22,MUSIC_STRAWBERRY_CHANNEL_TUNE_5,C,1,started on: StrawberryChannel,07:50D8 | StrawberryCh_Music5 (11:04 StrawberryChannel)
+music,23,MUSIC_EXCHANGE_PHOTO_TRAIN,C,1,started on: ExchangePhotoTrain,06:663D | Mode08_State00 (08:00 ExchangePhotoTrain)
+music,24,MUSIC_EXCHANGE_COMMUNICATING,C,2,started on: ExchangeCommunicating,06:688C 06:6A35 | Mode09_State03 (09:03 ExchangeCommunicating); Exchange_InitScreen
+music,26,MUSIC_RECORD_BOOK,C,1,started on: RecordBook,06:5D29 | Mode0C_State00 (0C:00 RecordBook)
+music,27,MUSIC_27,C,1,started by TakePhotos_FrameCallback3,05:5195 | TakePhotos_FrameCallback3
+music,28,MUSIC_TAKE_PHOTOS,C,3,started on: TakePhotos; Take photos: camera view,05:4A42 05:4B5E 05:4F56 | Mode02_State00 (02:00 TakePhotos); Mode02_State04 (02:04 TakePhotos); TakePhotos_FrameCallback (02:01 Take photos: camera view)
+music,29,MUSIC_TAKE_PHOTOS_02_0D,C,3,started on: TakePhotos; StrawberryChannel; Quick factory check: please wait,05:4477 05:5206 07:5378 | Mode0D_State01 (0D:01 Quick factory check: please wait); Mode02_State0D (02:0D TakePhotos); Mode11_State0D (11:0D StrawberryChannel)
+music,2A,MUSIC_PLAY_MENU,C,1,started on: PlayMenu,07:6C73 | Mode04_State00 (04:00 PlayMenu)
+music,2B,MUSIC_KITT_GAMES_HOST,C,1,started on: KittGamesHost,07:6784 | Mode0E_State00 (0E:00 KittGamesHost)
+music,2C,MUSIC_FIFTEEN_PUZZLE_0F_0D,C,1,started on: FifteenPuzzle,07:5DB1 | Mode0F_State0D (0F:0D FifteenPuzzle)
+music,2D,MUSIC_KITT_GAMES_HOST_0E_01,C,1,started on: KittGamesHost,07:67BB | Mode0E_State01 (0E:01 KittGamesHost)
+music,2E,MUSIC_STRAWBERRY_CHANNEL,C,3,started on: StrawberryChannel,07:5086 07:5160 07:5284 | Mode11_State03 (11:03 StrawberryChannel); Mode11_State04 (11:04 StrawberryChannel); Mode11_State0A (11:0A StrawberryChannel)
+music,3F,MUSIC_FACTORY_CALIBRATION_PLEASE_WAIT,C,1,started on: Factory calibration: please wait,05:4505 | Mode0D_State04 (0D:04 Factory calibration: please wait)
+music,FF,MUSIC_STOP,C,1,stops the song (as the Japanese MUSIC_STOP),07:4FB2 | Mode11_State00 (11:00 StrawberryChannel)
+sfx1,01,SFX1_01,C,4,an effect id of channel sfx1,"05:508E 05:50AB 07:4940 07:5501 | TakePhotos_FrameCallback2 (02:01 Take photos: camera view); Mode12_State01 (12:01 Slide show settings (start, speed, order)); StrawberryCh_LockedNoticeCallback"
+sfx1,02,SFX1_02,C,5,an effect id of channel sfx1,02:5298 05:5054 05:5071 05:6305 06:499F | Puzzle15_ShuffleTick (0F:05 15 puzzle: the deal (the board shuffled by random slides)); TakePhotos_FrameCallback2 (02:01 Take photos: camera view); AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo)
+sfx1,03,SFX1_03,C,15,an effect id of channel sfx1,01:6ED0 01:6EEB 02:5B5A 05:592B 05:73DA 06:474D 06:573D 06:576B ... | Mode06_State0D (06:0D Printing); Title_ObjKeys (00:05 Boot: copyright notice); Stamp_CursorUpdate; Mode03_State05 (03:05 ViewAlbum); Menu06_CursorUpdate; Mode0A_State01 (0A:01 Name card: the finished ID card (its three photos take turns))
+sfx1,05,SFX1_05,C,6,an effect id of channel sfx1,01:6C42 01:6D21 02:5973 02:715F 05:4F4F 05:6C8F | Mode06_State03 (06:03 Printing: choose the print frame (Left / Right)); Mode06_State06 (06:06 Printing: the photo in the wild frame (A prints)); KittHost_ObjShowKitts (0E:08 15 puzzle: paying the Kitts); PrintGame_ObjFall; TakePhotos_FrameCallback (02:01 Take photos: camera view); Mode03_State07 (03:07 ViewAlbum)
+sfx1,08,SFX1_08,C,1,an effect id of channel sfx1,05:467D | Mode01_State02 (01:02 Main menu: Take / View / Play)
+sfx1,0B,SFX1_0B,C,2,an effect id of channel sfx1,01:6BF8 05:51CF | Mode06_State02 (06:02 Printing); TakePhotos_FrameCallback3
+sfx1,0E,SFX1_0E,C,1,an effect id of channel sfx1,07:5496 | StrawberryCh_LockedCallback
+sfx1,0F,SFX1_0F,C,1,an effect id of channel sfx1,07:54D7 | StrawberryCh_LockedNoticeCallback
+sfx1,10,SFX1_10,C,1,an effect id of channel sfx1,07:622F | Mode10_State03 (10:03 ScratchCard)
+sfx1,11,SFX1_11,C,2,an effect id of channel sfx1,"05:519C 06:4547 | TakePhotos_FrameCallback3; Mode14_State01 (14:01 Print error: #01-#04, picture 1 of 4)"
+sfx1,16,SFX1_16,C,3,an effect id of channel sfx1,01:6C0D 01:6C1C 02:51A3 | Mode06_State02 (06:02 Printing); Puzzle15_ObjTick
+sfx1,17,SFX1_EXCHANGE_COMMUNICATING_17,I,2,every site in Mode09,06:6914 06:6BED | Mode09_State05 (09:05 ExchangeCommunicating); Mode09_State0E (09:0E ExchangeCommunicating)
+sfx1,19,SFX1_19,C,7,an effect id of channel sfx1,05:59BF 05:6332 06:4966 06:5221 06:55AA 06:5710 07:5E0C | Stamp_CursorUpdate; AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); Mode0B_State02 (0B:02 NameCardEdit); Mode0B_State10 (0B:10 Name card: take your photo); Mode0A_State01 (0A:01 Name card: the finished ID card (its three photos take turns))
+sfx1,1A,SFX1_1A,C,3,an effect id of channel sfx1,07:49E7 07:5D1E 07:6194 | SlideShow_FrameCallback; Puzzle15_FrameCallback2 (0F:0A 15 puzzle: a drawing); Mode10_State02 (10:02 Scratch card board)
+sfx1,1D,SFX1_1D,C,4,an effect id of channel sfx1,01:6E9B 05:5028 05:6355 06:49BC | Mode06_State0D (06:0D Printing); TakePhotos_FrameCallback2 (02:01 Take photos: camera view); AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo)
+sfx1,1E,SFX1_EXCHANGE_1E,I,2,every site in Mode07,06:6281 06:6293 | Mode07_State02 (07:02 Exchange: give or receive)
+sfx1,20,SFX1_20,C,7,an effect id of channel sfx1,05:5909 05:597F 05:62B7 05:62BF 05:62D4 06:48EB 06:490E | Stamp_CursorUpdate; AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo)
+sfx1,23,SFX1_23,C,3,an effect id of channel sfx1,05:59B7 05:7298 05:72CB | Stamp_CursorUpdate; Mode03_State02 (03:02 View photos: album)
+sfx1,28,SFX1_28,C,1,an effect id of channel sfx1,05:5121 | TakePhotos_FrameCallback3
+sfx1,29,SFX1_29,C,1,an effect id of channel sfx1,06:6267 | Mode07_State02 (07:02 Exchange: give or receive)
+sfx1,2A,SFX1_2A,C,1,an effect id of channel sfx1,05:50F8 | TakePhotos_FrameCallback3
+sfx1,2F,SFX1_2F,C,3,an effect id of channel sfx1,05:722C 07:5D00 07:61FE | Mode03_State02 (03:02 View photos: album); Puzzle15_FrameCallback2 (0F:0A 15 puzzle: a drawing); Mode10_State03 (10:03 ScratchCard)
+sfx1,31,SFX1_31,C,1,an effect id of channel sfx1,05:59E2 | Stamp_CursorUpdate
+sfx1,34,SFX1_MENU07_34,I,4,every site in Menu07,07:477B 07:4790 07:47A1 07:47B8 | Menu07_CursorUpdate
+sfx1,35,SFX1_35,C,1,an effect id of channel sfx1,05:6091 | Mode05_State01 (05:01 StampWindow)
+sfx1,36,SFX1_TAKE_PHOTOS_36,I,2,every site in TakePhotos,05:4F8B 05:4FC2 | TakePhotos_FrameCallback (02:01 Take photos: camera view)
+sfx1,38,SFX1_38,C,3,an effect id of channel sfx1,05:5146 06:495D 07:545C | TakePhotos_FrameCallback3; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); StrawberryCh_FrameCallbackA (11:02 StrawberryChannel)
+sfx1,3A,SFX1_3A,C,1,an effect id of channel sfx1,02:74BF | PrintGame_ObjKitty
+sfx1,3C,SFX1_3C,C,2,an effect id of channel sfx1,02:4ED3 05:730A | Album_CursorUpdate; Mode03_State02 (03:02 View photos: album)
+sfx3,03,SFX3_03,C,1,an effect id of channel sfx3,02:6FD0 | AppleGame_ObjCatch (06:1B Printing)
+sfx3,08,SFX3_08,C,4,an effect id of channel sfx3,05:4796 05:50DD 05:7271 07:6CB2 | Mode01_State05 (01:05 Option menu: Name / Record book / Exchange); TakePhotos_FrameCallback3; Mode03_State02 (03:02 View photos: album); Mode04_State01 (04:01 Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel)
+sfx3,09,SFX3_09,C,14,an effect id of channel sfx3,01:6BCD 02:7003 05:413D 05:4699 05:609D 05:66CC 05:6C39 05:73B8 ... | Mode06_State02 (06:02 Printing); AppleGame_ObjCatch (06:1B Printing); Mode00_State02 (00:02 Boot: throw away all the save data?); Mode01_State02 (01:02 Main menu: Take / View / Play); Mode05_State01 (05:01 StampWindow); Mode03_State0B (03:0B ViewAlbum)
+sfx4,02,SFX4_02,C,1,an effect id of channel sfx4,0F:451F | Sfx1_Init_3C_3D_3E (03:02 View photos: album)
+sfx4,03,SFX4_03,C,1,an effect id of channel sfx4,0F:43D9 | Sfx1_Step_26
+sfx4,04,SFX4_04,C,3,an effect id of channel sfx4,05:631A 06:4988 0F:47DA | AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); Sfx1_Step_09 (06:07 Printing)
+sfx4,06,SFX4_06,C,1,an effect id of channel sfx4,0F:4354 | Sfx1_Step_3B
+sfx4,0A,SFX4_0A,C,2,an effect id of channel sfx4,05:411F 05:71FA | Mode00_State02 (00:02 Boot: throw away all the save data?); Mode03_State02 (03:02 View photos: album)
+sfx4,0B,SFX4_0B,C,1,an effect id of channel sfx4,02:6BD1 | Stamp_ObjPlaceOnStart
+sfx4,0C,SFX4_0C,C,1,an effect id of channel sfx4,05:639E | AlbumText_CursorUpdate
+sfx4,12,SFX4_12,C,1,an effect id of channel sfx4,05:636F | AlbumText_CursorUpdate

@@ -257,6 +257,9 @@ bank,addr,name,conf,note,source
 00,2C7F,Snd_Tick_Tramp,C,"calls Snd_Tick (0F:5337) in the sound bank: the effects of channels 1, 3 and 4 and the music, then the requests $D060-$D078 cleared; code read",hand 2026-11-08
 00,2E00,Src_00_2E00_Mode05_StampWindow_State06,C,"read in the runs by Copy_DEtoHL, Snd_Tick_Tramp; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz)",data
 00,3700,Img_PairLookupTbl,C,"the same 2304 bytes as the Japanese Img_PairLookupTbl (00:3700); read in the runs by Stamp_BlitFromD9F3, Blit_MaskPass_SrcB, Img_PairLookup; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz)",data
+01,4000,Leftover_01_4000_SinTable,C,"leftover: 512 bytes (01:4000-41FF) 256 signed words round(256 sin(2 pi i / 256)), the low bytes at $4000-$40FF and the high bytes at $4100-$41FF (checked: 0 errors); no proven instruction points at it and no run reads it",hand 2026-11-15
+01,4200,Leftover_01_4200_CosTable,C,"leftover: 512 bytes (01:4200-43FF) 256 signed words round(256 cos(2 pi i / 256)), low bytes $4200-$42FF, high bytes $4300-$43FF (checked: 0 errors); never read",hand 2026-11-15
+01,4400,Leftover_01_4400_Zero,C,"leftover: 768 bytes (01:4400-46FF) 768 bytes of $00 between the cosine table and Sram_WriteMagic_Tbl4700 (three more 256-byte pages, empty); never read",hand 2026-11-15
 01,4700,Sram_WriteMagic_Tbl4700,C,"named by the code of Sram_WriteMagic, Sram_CompareMagic (01:4705 01:47CC); read in the runs by Sram_WriteMagic, Sram_CompareMagic; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz)",data
 01,4705,Sram_WriteMagic,C,the 5 bytes of Data_01_4700 (the Magic string) at HL,hand 2026-11-08
 01,4711,Sram_Checksum,C,"HL = checksum of BC bytes at DE: L = sum, H = xor of the bytes",hand 2026-11-08
@@ -276,14 +279,14 @@ bank,addr,name,conf,note,source
 01,4A13,Sram_FormatVector,C,"bank 0: the slot table $B1B2 cleared (30 bytes), Magic, checksum, echo at $B1D7",hand 2026-11-08
 01,4A60,Sram_FormatIdCard,C,"bank 1: the ID card record $AFB8 cleared ($12 bytes), Magic, checksum, echo at $AFD1",hand 2026-11-08
 01,4AA9,Sram_FormatCounters,C,bank 0: the counters $B000-$B011 cleared and the Magic written at $B012,hand 2026-11-08
-01,4ADF,Sram_ClearB1FC,C,bank 0: $690 bytes from $B1FC cleared (the block that 01:4C93 loads into $C230); code read (the use of the block $B1FC / $C230 is not known),hand 2026-11-08
+01,4ADF,Sram_ClearCardPhotos,C,"bank 0: $690 bytes from $B1FC cleared: the three photos of the name card (05:41B2 at boot, 0F:4AFE); code read",hand 2026-11-15
 01,4B0A,Photo_LoadToBufferAndVram,C,"photo slot A: $F00 bytes into $C000, then $800 into tiles $9000 and $600 into $8000 (HBlank copy), its $55 bytes of information into $DA52",hand 2026-11-08
 01,4B61,Photo_LoadToVram,C,photo slot A straight into tiles $9000 / $8000 and its information into $DA52,hand 2026-11-08
 01,4BB1,Photo_LoadToBuffer,C,photo slot A: $F00 bytes into $C000 and its information into $DA52,hand 2026-11-08
 01,4BF0,Photo_LoadTiles8800,C,photo slot A: $E00 bytes into tiles $8800 and into $C000,hand 2026-11-08
 01,4C2B,Photo_Store,C,"photo slot A: $C000 ($F00 bytes) and the information $DA52 ($55 bytes) into SRAM, Magic, checksum and echo",hand 2026-11-08
-01,4C93,Sram_LoadB1FC,C,bank 0: $690 bytes from $B1FC into $C230; code read (the use of the block $B1FC / $C230 is not known),hand 2026-11-08
-01,4CB2,Sram_StoreB1FC,C,bank 0: $690 bytes from $C230 into $B1FC; code read (the use of the block $B1FC / $C230 is not known),hand 2026-11-08
+01,4C93,Sram_LoadCardPhotos,C,"bank 0: $690 bytes from $B1FC into $C230: the three photos of the name card, 3 x $230 bytes (35 tiles each; Mode0B_State05 makes them from the album photos picked at $0B:$04, the card screens and 07:608D / 07:6122 load them); code read",hand 2026-11-15
+01,4CB2,Sram_StoreCardPhotos,C,"bank 0: $690 bytes from $C230 into $B1FC: the three photos of the name card (called from Mode0B_State06, 06:53E0, when the card is finished); code read",hand 2026-11-15
 01,4D62,Sram_LoadVector,C,bank 0: the slot table $B1B2 (30 bytes) into $DAA9,hand 2026-11-08
 01,4D81,Photo_FindSlotA,C,"A = $FF goes to Photo_FindSlot_Far, else A - 1 first",hand 2026-11-08
 01,4D86,Photo_FindSlot_Far,C,"same code as the Japanese Photo_FindSlot_Far (02:444D, 25 bytes, masked match)",port_jp
@@ -434,6 +437,7 @@ bank,addr,name,conf,note,source
 01,7653,Mode06_State28,C,handler of state $28 of mode $06 (word 40 of Mode06_StateTable),modes
 01,7691,Mode06_Printing,C,"ModeTable entry $06: BGB screens with the printer helper on the link (06:1F please wait, 06:21, 06:24 the fruit game); forced alone it shows an empty frame",modes
 01,769C,Mode06_StateTable,C,"state table of mode $06, read by $0189 with hFF8E",modes
+02,4000,Leftover_02_4000_ObjScript,C,"leftover: 8 bytes (02:4000-4007) an object script of the form of the next one (02:4008): two words, then the command $1F1E (ObjCmd_Jump) back to $4000, a loop; nothing points at it and no run reads it",hand 2026-11-15
 02,4008,ObjScript_02_4008_Mode0F_FifteenPuzzle_State0A,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,40BC,Leftover_02_40BC,I,leftover: 84 bytes (02:40BC-410F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,4110,ObjScript_02_4110_Mode00_BootAndTitle_State00,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
@@ -791,6 +795,10 @@ bank,addr,name,conf,note,source
 02,7FB9,Obj_NullCallback,C,ret: the callback of objects that do nothing each frame,hand 2026-11-08
 02,7FBA,ObjScript_02_7FBA_Puzzle15_ObjWaitMove,C,"named by the code of Puzzle15_ObjWaitMove, Scratch_ObjCountdown (02:50A5 02:568B); read in the runs by Object_RunAll; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,7FC2,Objects_ClearAll,C,"00:20D4, then the 16 object slots at $DAEE cleared (23 bytes each); called by every screen set-up",hand 2026-11-08
+03,4000,Leftover_03_4000_OamList,C,"leftover: 100 bytes (03:4000-4063) sprite layout of 25 records (y, x, tile, attribute; bit 0 of the attribute ends the list, as Obj_DrawSprite reads it): a 5 x 5 block of tiles $00-$44; nothing points at it, never drawn",hand 2026-11-15
+03,4064,Leftover_03_4064_OamList,C,leftover: 100 bytes (03:4064-40C7) sprite layout of 25 records: the 5 x 5 block of tiles $80-$C4; never drawn,hand 2026-11-15
+03,40C8,Leftover_03_40C8_OamList,C,"leftover: 40 bytes (03:40C8-40EF) sprite layout of 10 records: two rows of five, tiles $00-$14; never drawn",hand 2026-11-15
+03,40F0,Leftover_03_40F0_OamList,C,"leftover: 40 bytes (03:40F0-4117) sprite layout of 10 records: two rows of five, tiles $80-$94; never drawn",hand 2026-11-15
 03,4118,OamList_03_4118_Mode0E_KittGamesHost_State13,C,read in the runs by Obj_DrawSprite; first read on the screen Mode0E_KittGamesHost_State13 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
 03,41AC,Leftover_03_41AC,I,leftover: 148 bytes (03:41AC-423F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 03,4240,OamList_03_4240_Mode0E_KittGamesHost_State13,C,read in the runs by Obj_DrawSprite; first read on the screen Mode0E_KittGamesHost_State13 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py; the rest of Data_03_4118 after a leftover stretch,data
@@ -1669,6 +1677,8 @@ bank,addr,name,conf,note,source
 0D,7EC0,Gfx_0D_7EC0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0E,4000,Gfx_0E_4000_Mode05_StampWindow_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0E,6800,Gfx_0E_6800_Mode06_Printing_State18,C,"named by the code of Mode06_State18, Mode06_State19 (01:7226 01:7283); read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
+0F,4000,Leftover_0F_4000_Snd_NoiseNR43Tbl,C,"leftover: 37 bytes (0F:4000-4024) 37 bytes, the same as the Japanese Snd_NoiseNR43Tbl (1F:4000, the NR43 value per noise note); this sound engine does not read them",hand 2026-11-15
+0F,4025,Leftover_0F_4025_Snd_LengthTbl,C,"leftover: 20 bytes (0F:4025-4038) 20 bytes, the same as the Japanese Snd_LengthTbl (1F:4025); not read here; 0F:559D adds the note offset to $4037, two bytes before Snd_FreqTbl, so its last two bytes are only the base of a 1-based index",hand 2026-11-15
 0F,4039,Snd_FreqTbl,C,"the same 307 bytes as the Japanese Snd_FreqTbl (1F:4039); read in the runs by Snd_Trk_NoteOn, Snd_LoadWaveRam; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz)",data
 0F,416C,Snd_0F_416C_Mode00_BootAndTitle_State00,C,"read in the runs by Snd_Trk_FetchOp, Snd_Trk_NoteOn; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
 0F,41C9,Sfx1_InitTbl,C,62 words: channel-1 effect init handlers by sound id 1..$3E (the same layout as the Japanese Sfx1_InitTbl of bank $1F),hand 2026-11-08
@@ -1953,6 +1963,7 @@ bank,addr,name,conf,note,source
 11,5FE0,Src_11_5FE0_Mode0B_NameCardEdit_State10,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz),data
 11,6000,Unused_Photo_EmptyPicture0_Gfx,I,"record 0 of the table 00:249D that Photo_LoadEmptyPicture (00:24A6) reads ({$6000, $11}: $800 bytes of tiles for $9000, then $600 for $8000): a full picture, Hello Kitty in a frame with the HelloKitty logo; never requested: all six calls (05:6045, 05:6C0C, 05:738E, 05:73FF, 06:67CA, 07:4A44) pass A = 1 (owner 2026-11-12: full images); unused, not documented by TCRF",hand 2026-11-12
 11,7000,Gfx_11_7000_Photo_LoadEmptyPicture,C,"record 1 of the table 00:249D ({$7000, $11}), loaded by Photo_LoadEmptyPicture (00:24A6) as $800 bytes of tiles at $9000 and $600 at $8000: the picture shown for a photo slot without a photo (Kitty with a teddy bear, しゃしんがない 'no photo'); every caller asks for it when Photo_FindSlotA (01:4D81) returns carry: the stamp window (Mode05_State00), the album (Mode03_State04, 05, 06), Mode09_State01 ([$D9FB]) and the slide show (Mode12_State03); no recorded run took that branch (code read, owner 2026-11-12)",hand 2026-11-12
+12,4000,Leftover_12_4000_Tiles,I,"leftover: 224 bytes (12:4000-40DF) 14 2bpp tiles of kana-like glyphs (seen as tiles); nothing points at them, never read",hand 2026-11-15
 12,40E0,Gfx_12_40E0_Vram_CopyHBlank,C,read in the runs by Vram_CopyHBlank; kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 12,4120,Gfx_12_4120_Vram_CopyHBlank,C,read in the runs by Vram_CopyHBlank; kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 12,4143,Leftover_12_4143,I,leftover: 125 bytes (12:4143-41BF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
@@ -1988,6 +1999,7 @@ bank,addr,name,conf,note,source
 15,7400,Map_15_7400_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 15,7800,Map_15_7800_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 15,7C00,Map_15_7C00_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
+16,4000,Leftover_16_4000_Tiles,I,"leftover: 6144 bytes (16:4000-57FF) 384 2bpp tiles, mostly blank, with parts of frames and of kana glyphs (seen as tiles); nothing points at them, never read",hand 2026-11-15
 16,5800,Gfx_16_5800_Mode04_PlayMenu_State00,C,read in the runs by Copy_DEtoHL; first read on the screen Mode04_PlayMenu_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 16,7025,Leftover_16_7025,I,leftover: 4059 bytes (16:7025-7FFF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 17,4000,Gfx_17_4000_Photos_LoadPage8,C,named by the code of Photos_LoadPage8 (01:4F54); read in the runs by Copy_DEtoHL; first read on the screen Mode0B_NameCardEdit_State0F (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data

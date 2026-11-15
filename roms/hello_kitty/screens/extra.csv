@@ -1,4 +1,5 @@
 mode,state,picture,how,parent,key,note
+00,02,extra_00_02.png,"Select + Start held at power-on: throw away all the save data? (A: yes, Sram_Format, then the copyright screen; B: no, the title screen; tools/kitty_sram_saves.py --bgb)",,,
 05,06,extra_05_06.png,"album stamp icon (the second icon of the binder), A: the stamp screen over the photo (owner, 2026-11-12)",03:02,Down A (stamp icon),
 06,1F,extra_06_1F.png,printing a photo with the printer helper on the link,02:06,START (printer on the link),
 06,21,extra_06_21.png,printing a photo with the printer helper on the link,06:1F,wait,

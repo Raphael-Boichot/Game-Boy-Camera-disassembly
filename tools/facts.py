@@ -21,6 +21,11 @@ Keys (TAG = jp, us, gold, kitty, proto):
   TAG.doubts, TAG.doubts.GROUP   rows of disasm/sym_unconclusive_TAG.csv, and per group where the table has one
   kitty.jpx.CATEGORY     bytes per category of trace/jp_crosscheck_kitty.csv (NO_JP, JP_RAN, JP_VERDICT, JP_RED, JP_PART)
   kitty.puzzle.bgb_games / bgb_solved / core_games / core_solved   tools/kitty_puzzle.py (trace/puzzle_{bgb,core}_kitty.csv)
+  TAG.ram, TAG.ram.C / I     rows of disasm/ram_names_TAG.csv and per tag (every ROM that has the table)
+  kitty.ram.hand / jp / auto  its rows by source (tools/kitty_ram_names.py: the hand layer, a paired Japanese site, routine + address)
+  TAG.wram.sites / addrs     rows of wram/wram_access_TAG.csv and its distinct addresses; TAG.sram.sites: rows of sram/sram_access_TAG.csv
+  TAG.sram.rows              rows of sram/sram_map_TAG.csv; kitty.sram.checks / failed: rows of sram/sram_saves_kitty.csv and those not ok
+  TAG.const.mode / state / sound   named modes (const_names_TAG.csv group mode), states (state_names_TAG.csv), sound ids (sound_names_TAG.csv)
 """
 import sys, os, csv, re, json, argparse, subprocess, tempfile, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE)
@@ -78,6 +83,33 @@ def facts():
         c = collections.Counter()
         for r in csv.DictReader(open(p)): c[r['category']] += int(r['bytes'])
         for k, v in c.items(): F['kitty.jpx.%s' % k] = v
+    for t, d in DIRS.items():                                            # L4: RAM names, RAM / SRAM sites, SRAM map, constants
+        D = os.path.join(REPO, 'roms', d)
+        def rd(*q): return list(csv.DictReader(open(os.path.join(D, *q), encoding='utf-8'))) if os.path.exists(os.path.join(D, *q)) else None
+        r = rd('disasm', 'ram_names_%s.csv' % t)
+        if r is not None:
+            F['%s.ram' % t] = len(r)
+            for k, v in collections.Counter(x['tag'] for x in r).items(): F['%s.ram.%s' % (t, k)] = v
+        r = rd('wram', 'wram_access_%s.csv' % t)
+        if r is not None: F['%s.wram.sites' % t] = len(r); F['%s.wram.addrs' % t] = len({x['addr'] for x in r})
+        r = rd('sram', 'sram_access_%s.csv' % t)
+        if r is not None: F['%s.sram.sites' % t] = len(r)
+        r = rd('sram', 'sram_map_%s.csv' % t)
+        if r is not None: F['%s.sram.rows' % t] = len(r)
+        r = rd('disasm', 'const_names_%s.csv' % t)
+        if r is not None: F['%s.const.mode' % t] = sum(x['group'] == 'mode' for x in r)
+        r = rd('disasm', 'state_names_%s.csv' % t)
+        if r is not None: F['%s.const.state' % t] = len(r)
+        r = rd('disasm', 'sound_names_%s.csv' % t)
+        if r is not None: F['%s.const.sound' % t] = len(r)
+    p = os.path.join(REPO, 'roms', 'hello_kitty', 'disasm', 'ram_names_kitty.csv')
+    if os.path.exists(p):
+        HN = {x['name'] for x in csv.DictReader(open(os.path.join(REPO, 'roms', 'hello_kitty', 'disasm', 'layers', 'ram_names_kitty_hand.csv'), encoding='utf-8'))}
+        c = collections.Counter('hand' if x['name'] in HN else ('jp' if x['desc'].startswith('the Japanese') else 'auto') for x in csv.DictReader(open(p, encoding='utf-8')))
+        for k, v in c.items(): F['kitty.ram.%s' % k] = v
+    p = os.path.join(REPO, 'roms', 'hello_kitty', 'sram', 'sram_saves_kitty.csv')
+    if os.path.exists(p):
+        r = list(csv.DictReader(open(p, encoding='utf-8'))); F['kitty.sram.checks'] = len(r); F['kitty.sram.failed'] = sum(x['result'] != 'ok' for x in r)
     for w in ('bgb', 'core'):
         p = os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'puzzle_%s_kitty.csv' % w)
         if os.path.exists(p):

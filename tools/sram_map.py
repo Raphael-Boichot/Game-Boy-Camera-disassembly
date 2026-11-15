@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """The SRAM map files of a ROM (HOWTO_NEW_ROM.md section 0.1, rule 5): check the Japanese map, carry it to the ported builds.
 
-  tools/sram_map.py --tag jp|us|gold|proto [--check]
+  tools/sram_map.py --tag jp|us|gold|proto|kitty [--check]
 
 proto roms/prototype_debagame/sram/sram_map_proto.csv is a hand table of its own (2026-11-12): checked and indexed as the Japanese one.
+kitty roms/hello_kitty/sram/sram_map_kitty.csv, a hand table of its own (2026-11-15, roadmap step 11): checked and indexed the same way
+      (slots 2-30 through the rows of slot 1); tools/kitty_sram_saves.py checks it on the saves the game writes.
 
 jp    roms/jp_rev_a/sram/sram_map_jp.csv is the hand table (transcribed from docs §3 on 2026-11-09; edit it with the notes). The script
       checks it (no two rows overlap; every SRAM access site of roms/jp_rev_a/sram/sram_access_jp.csv whose RAM bank is known falls
@@ -15,9 +17,9 @@ us, gold  writes roms/<folder>/sram/sram_map_<tag>.csv: the Japanese rows, with 
 The access tables are written by tools/sram_db.py. --check compares the files with a fresh run and exits 1 when one differs.
 """
 import argparse, collections, csv, io, os, re, sys
-FOLDER = {'jp': 'jp_rev_a', 'us': 'us_eu', 'gold': 'gold', 'proto': 'prototype_debagame'}
-TITLE = {'jp': 'Pocket Camera (Japan) (Rev A)', 'us': 'Game Boy Camera (USA, Europe)', 'gold': 'Game Boy Camera Gold (USA)', 'proto': 'Pocket Camera Prototype (Japan) ("DEBAGAME")'}
-OWN = ('jp', 'proto')        # the ROMs whose map is a hand table of their own (the prototype's layout is not the Japanese one, 2026-11-12)
+FOLDER = {'jp': 'jp_rev_a', 'us': 'us_eu', 'gold': 'gold', 'proto': 'prototype_debagame', 'kitty': 'hello_kitty'}
+TITLE = {'jp': 'Pocket Camera (Japan) (Rev A)', 'us': 'Game Boy Camera (USA, Europe)', 'gold': 'Game Boy Camera Gold (USA)', 'proto': 'Pocket Camera Prototype (Japan) ("DEBAGAME")', 'kitty': 'Pocket Camera Hello Kitty (Japan)'}
+OWN = ('jp', 'proto', 'kitty')   # the ROMs whose map is a hand table of their own (the prototype's layout is not the Japanese one, 2026-11-12; Hello Kitty's shares parts of it, 2026-11-15)
 ap = argparse.ArgumentParser(); ap.add_argument('--tag', required=True, choices=sorted(FOLDER)); ap.add_argument('--check', action='store_true')
 a = ap.parse_args(); T = a.tag; D = os.path.join('roms', FOLDER[T]); SD = os.path.join(D, 'sram')
 JM = os.path.join(SD, 'sram_map_%s.csv' % T) if T in OWN else os.path.join('roms', 'jp_rev_a', 'sram', 'sram_map_jp.csv')
@@ -27,7 +29,7 @@ out = {}; fail = []
 span = sorted((int(r['flat_start'], 16), int(r['flat_end'], 16)) for r in rows)
 fail += ['rows overlap at %05X' % b[0] for a_, b in zip(span, span[1:]) if b[0] <= a_[1]]
 def inside(f):
-    if T == 'jp' and 0x2000 <= f < 0x20000 and not any(s <= f <= e for s, e in span): f = 0x2000 + (f - 0x2000) % 0x1000
+    if T in ('jp', 'kitty') and 0x2000 <= f < 0x20000 and not any(s <= f <= e for s, e in span): f = 0x2000 + (f - 0x2000) % 0x1000
     return any(s <= f <= e for s, e in span)
 known = [r for r in acc if r['flat'] not in ('', 'sensor')]
 fail += ['site %s:%s (%s) at flat %s is outside every row' % (r['bank'], r['pc'], r['function'], r['flat']) for r in known if not inside(int(r['flat'], 16))]
@@ -57,6 +59,9 @@ md = ['# sram/ - cartridge RAM of %s' % TITLE[T], '',
       '| File | Content |', '|---|---|']
 if T == 'proto':
     md += ['| `sram_map_proto.csv` | the map, one row per block (%d rows): flat range, RAM bank and CPU range, block, field, tag, routines, note. The hand table (2026-11-12, roadmap step 7), from the access sites and the README (the tester: AGING, PROTECT, GALLERY); the layout is this build\'s own, not the Japanese one |' % len(rows)]
+elif T == 'kitty':
+    md += ['| `sram_map_kitty.csv` | the map, one row per block or field (%d rows): flat range, RAM bank and CPU range, block, field, tag C / I / N, routines, note. The hand table (2026-11-15, roadmap step 11), from the code of bank $01 (`Sram_*`, `Photo_*`, `Counters_*`) and of the calibration (bank $04); the rows of photo slot 1 stand for the 30 slots. Shared with the Japanese layout: the photo slots, the photo vector, the ID card (the Japanese owner block), the RNG seed and the calibration record; its own: the counters block `$B000-$B016` (no checksum), the three name card photos `$B1FC-$B88B`, no settings block, no Game Face |' % len(rows),
+           '| `sram_saves_kitty.csv` | the map checked on six saves the game writes in the core (`tools/kitty_sram_saves.py`): formatted, factory-fresh ($AA), two photos, 999,999 Kitts, the erase screen answered B and A. Every byte written lies in a written row, every Magic, checksum and echo holds |']
 elif T == 'jp':
     md += ['| `sram_map_jp.csv` | the map, one row per block or field (%d rows): flat range, RAM bank and CPU range, block, field, tag C / I / B / F / N / ?, the routines that write or read it, note. The hand table: transcribed from docs §3 (2026-11-09), which keeps the full text, the save evidence (docs §11) and the checksum rules; edit both together |' % len(rows)]
 else:
@@ -64,7 +69,8 @@ else:
 md += ['| `sram_access_%s.csv` | every proven instruction whose operand is an SRAM address: kind (R read, W write, P pointer load), bank, pc, routine, the RAM bank when the straight-line code before it selects a constant one, the flat offset (`tools/sram_db.py`) |' % T, '',
        'Access sites: %d (P %d, R %d, W %d); RAM bank known statically for %d (%d of them the sensor window; the %d others all fall inside a row of the map). '
        % (len(acc), k['P'], k['R'], k['W'], kb + se, se, kb) +
-       ('The bank of the other sites comes from a register argument or a caller (the storage manager of bank 2 selects it before the copies; docs §3.5).' if T != 'proto' else 'The bank of the other sites comes from a register or a caller: the image-copy modes, PICT_SAVE_GO and MAKE_GALLERY (the photo number), the tests (a loop over the 16 banks).')]
+       ('The bank of the other sites comes from a register argument or a caller (`Sram_PhotoSlotAddr` for the photo slots: RAM bank (N + 1) / 2, `$A000` / `$B000`). Two P sites of bank $05 (05:4E06, 05:6048) load $B050 / $B850 as object coordinates (`Object_CreateWithParam`, BC = x / y), not SRAM.' if T == 'kitty' else
+        'The bank of the other sites comes from a register argument or a caller (the storage manager of bank 2 selects it before the copies; docs §3.5).' if T != 'proto' else 'The bank of the other sites comes from a register or a caller: the image-copy modes, PICT_SAVE_GO and MAKE_GALLERY (the photo number), the tests (a loop over the 16 banks).')]
 if T not in OWN:
     md += ['', 'Same layout as the Japanese ROM (C, static): each of the %d access sites of this build pairs, through `port/code_map_%s.csv`, with a Japanese site of the same kind at the same SRAM address, and no site is new. ' % (pairs, T) +
            ('The one routine of the Gold edition that differs, `Photo_RenumberVector` (02:4466), repairs the state vector it reads: the layout is the same, the rule for a damaged vector is not (docs §16.34).' if T == 'gold' else

@@ -1,0 +1,705 @@
+addr,region,reads,writes,ptr_loads,banks,top_functions,written_consts
+c000,WRAM,0,0,59,00:6 01:14 02:1 04:12 05:9 06:11 07:6,Photo_LoadEmptyThumb:2 Photo_LoadToBufferAndVram:2 Photo_LoadThumbToVram:2 Photo_LoadToVramScreenOff:2,
+c050,WRAM,0,0,1,06:1,06:5320:1,
+c070,WRAM,0,0,3,04:3,Fx28_Reduce2xTile2x2_FlipH:1 Fx29_Reduce2xQuadTL_FlipH:1 Fx2D_CopyLeftHalf_OnFlipH:1,
+c080,WRAM,0,0,6,04:5 07:1,Fx01_MirrorRtoL:1 Fx0A_Reduce2xQuadTR:1 Fx0E_CopyRightHalf:1 Fx11_CopyQuads_TR_BL:1,
+c0f0,WRAM,0,0,12,04:12,Fx20_FlipH:1 Fx24_MirrorTtoB_OnFlipH:1 Fx25_StretchV2x_OnFlipH:1 Fx26_StretchH2x_OnFlipH:1,
+c1e0,WRAM,0,0,3,05:3,Stamp_LoadSelected:1 Stamp_ArrangeMaskInverted:1 Stamp_MirrorIfFlagged:1,
+c200,WRAM,0,0,4,05:2 07:2,Mode02_State05:1 05:4c23:1 Mode11_State0B:1 07:531a:1,
+c230,WRAM,0,0,3,01:2 06:1,Sram_LoadCardPhotos:1 Sram_StoreCardPhotos:1 06:537e:1,
+c30e,WRAM,0,0,1,04:1,Fx55_CopyTop4Rows_OnFlipV:1,
+c330,WRAM,0,0,1,04:1,Fx17_CopyWindow:1,
+c3c0,WRAM,0,0,4,04:1 05:3,Fx37_CopyWindow_OnFlipH:1 Stamp_LoadGfx:1 Stamp_ArrangeGfx:1 Stamp_MirrorIfFlagged:1,
+c400,WRAM,0,0,1,04:1,Fx16_CopyBottom10Rows:1,
+c460,WRAM,0,0,1,06:1,06:5398:1,
+c4e0,WRAM,0,0,1,05:1,05:6544:1,
+c4f0,WRAM,0,0,1,04:1,Fx36_CopyBottom10Rows_OnFlipH:1,
+c5a0,WRAM,0,0,4,05:4,Stamp_LoadMask:1 05:563a:1 Stamp_ArrangeMaskInverted:1 Stamp_MirrorIfFlagged:1,
+c600,WRAM,0,0,1,05:1,Digits_CopyDA60:1,
+c60e,WRAM,0,0,4,04:4,Fx03_MirrorBtoT:1 Fx48_Reduce2xTile2x2_FlipV:1 Fx49_Reduce2xQuadTL_FlipV:1 Fx4F_CopyTopHalf_OnFlipV:1,
+c680,WRAM,0,0,1,05:1,05:6573:1,
+c68e,WRAM,0,0,3,04:3,Fx4A_Reduce2xQuadTR_FlipV:1 04:70c4:1 04:7139:1,
+c690,WRAM,0,0,1,06:1,06:53b2:1,
+c6a0,WRAM,0,0,1,05:1,05:65a7:1,
+c6fe,WRAM,0,0,1,04:1,Fx23_MirrorBtoT_OnFlipH:1,
+c700,WRAM,0,0,4,04:3 07:1,Fx03_MirrorBtoT:1 Fx0B_Reduce2xQuadBL:1 Fx10_CopyBottomHalf:1 FrameCorner_DrawBottomLeft:1,
+c770,WRAM,0,0,2,04:2,Fx2B_Reduce2xQuadBL_FlipH:1 04:69ea:1,
+c780,WRAM,0,0,3,04:2 07:1,Fx0C_Reduce2xQuadBR:1 Fx18_CopyQuadBR:1 FrameCorner_DrawBottomRight:1,
+c7f0,WRAM,0,0,5,04:5,Fx23_MirrorBtoT_OnFlipH:1 Fx2C_Reduce2xQuadBR_FlipH:1 Fx30_CopyBottomHalf_OnFlipH:1 04:6a6a:1,
+c800,WRAM,0,0,11,01:3 02:1 05:4 06:1 07:2,Photo_LoadToBufferAndVram:1 Photo_LoadToVramScreenOff:1 Mode06_State01:1 Printing_ObjPhotoToVram:1,
+c802,WRAM,0,0,2,00:2,.code:1da:1 Blit_MaskPass_SrcA:1,
+c803,WRAM,0,0,1,00:1,Stamp_BlitFromD9F3:1,
+c90e,WRAM,0,0,1,04:1,Fx53_CopyTop10Rows_OnFlipV:1,
+ca00,WRAM,0,0,1,04:1,Fx14_CopyBottom4Rows:1,
+ca3e,WRAM,0,0,1,04:1,Fx57_CopyWindow_OnFlipV:1,
+caf0,WRAM,0,0,1,04:1,Fx34_CopyBottom4Rows_OnFlipH:1,
+cb70,WRAM,0,0,1,06:1,06:4db2:1,
+cb90,WRAM,0,0,1,06:1,06:4e04:1,
+cbb0,WRAM,0,0,1,01:1,Print_LoadItemPicture:1,
+cd0c,WRAM,0,0,2,04:2,Fx45_StretchV2x_FlipV:1 Fx47_Zoom2x_FlipV_GroupTop:1,
+cd0e,WRAM,0,0,11,04:11,Fx04_MirrorTtoB:1 Fx40_FlipV:1 Fx42_MirrorLtoR_OnFlipV:1 Fx46_StretchH2x_OnFlipV:1,
+cd8e,WRAM,0,0,4,04:4,Fx41_MirrorRtoL_OnFlipV:1 Fx4C_Reduce2xQuadBR_FlipV:1 Fx4E_CopyRightHalf_OnFlipV:1 Fx58_CopyQuadBR_OnFlipV:1,
+cde0,WRAM,0,0,1,06:1,IdCard_DrawNameToPrintBuf:1,
+cdfe,WRAM,0,0,1,04:1,Fx24_MirrorTtoB_OnFlipH:1,
+ce00,WRAM,0,0,8,00:4 05:2 07:2,.code:27:4 Mode02_State05:1 05:4c23:1 Mode11_State0B:1,
+cf00,WRAM,0,0,5,06:5,IdCard_DrawBirthdayToPrintBuf:1 06:67d2:1 06:696f:1 06:6b53:1,
+cfff,WRAM,1,2,0,06:3,Counters_AddReceived:1 06:67d2:1 06:6b53:1,
+d000,WRAM,0,0,1,0f:1,Snd_Init:1,
+d001,WRAM,1,1,1,0f:3,Snd_SongInit:1 Snd_Op9F_SetTranspose:1 Snd_Trk_NoteOn:1,
+d002,WRAM,0,1,1,0f:2,Snd_Op9E_SetDurTable:1 Snd_Trk_FetchOp:1,
+d003,WRAM,0,1,2,0f:3,Sfx1_Step_10:1 Sfx1_Part4731:1 Snd_Op9E_SetDurTable:1,
+d008,WRAM,0,2,1,0f:3,0f:48af:1 Sfx1_Init_34:1 Snd_StopSong:1,00:1
+d009,WRAM,0,1,0,0f:1,Snd_StopSong:1,
+d00a,WRAM,0,1,0,0f:1,Snd_StopSong:1,
+d00d,WRAM,1,0,0,0f:1,Snd_Op9D_SetInstrument:1,
+d00e,WRAM,0,1,0,0f:1,Snd_StopSong:1,
+d010,WRAM,0,0,3,0f:3,Snd_SongInit:2 Snd_MusicTick:1,
+d012,WRAM,0,0,1,0f:1,Snd_SongInit:1,
+d014,WRAM,0,0,1,0f:1,Snd_SongInit:1,
+d01e,WRAM,0,1,1,0f:2,0f:53d0:1 0f:5652:1,00:1
+d01f,WRAM,0,1,2,0f:3,Sfx1_Stop:1 0f:51fc:1 Snd_SilenceChannels:1,
+d020,WRAM,0,0,2,0f:2,Snd_SongInit:2,
+d024,WRAM,0,0,1,0f:1,Snd_SongInit:1,
+d02e,WRAM,0,1,1,0f:2,0f:53d0:1 0f:5652:1,
+d02f,WRAM,0,1,0,0f:1,Snd_SilenceChannels:1,
+d030,WRAM,0,0,2,0f:2,Snd_SongInit:2,
+d034,WRAM,0,0,1,0f:1,Snd_SongInit:1,
+d036,WRAM,1,0,0,0f:1,Sfx3_Stop:1,
+d037,WRAM,1,0,0,0f:1,Sfx3_Stop:1,
+d038,WRAM,1,0,0,0f:1,Snd_Trk_Sustain:1,
+d03e,WRAM,0,1,1,0f:2,0f:53d0:1 0f:5652:1,
+d03f,WRAM,1,1,3,0f:5,Sfx3_Stop:1 Sfx3_Begin:1 0f:5204:1 Snd_SilenceChannels:1,
+d040,WRAM,0,0,2,0f:2,Snd_SongInit:2,
+d044,WRAM,0,0,2,0f:2,Snd_SongInit:1 0f:55b7:1,
+d046,WRAM,0,0,1,0f:1,0f:55af:1,
+d04f,WRAM,0,1,2,0f:3,Sfx4_Stop:1 0f:520c:1 Snd_SilenceChannels:1,
+d050,WRAM,4,1,2,0f:7,0f:5415:1 Snd_Trk_Sustain:1 Snd_MusicTick:1 Snd_Trk_NoteOn:1,01:1
+d051,WRAM,3,2,0,0f:5,Sfx3_Begin:1 .code:41:1 Sfx3_Part5236:1 Snd_Trk_UpdateChannel:1,
+d055,WRAM,0,2,0,0f:2,Snd_StopSong:1 0f:5365:1,01:2
+d060,WRAM,0,94,1,00:2 01:9 02:8 05:33 06:18 07:23 0f:2,.code:6c:1 .code:252:1 .code:22:1 01:6bf7:1,03:15 20:7 19:7 05:6 02:5 1d:4
+d061,WRAM,0,2,0,0f:2,Sfx1_Stop:1 Snd_SilenceChannels:1,00:2
+d063,WRAM,0,1,0,0f:1,0f:4562:1,
+d064,WRAM,0,2,24,0f:26,Sfx1_Step_28:1 Sfx1_Step_2A:1 Sfx1_Step_26:1 Sfx1_Step_25:1,00:2
+d066,WRAM,2,7,7,0f:16,.code:20:2 Sfx1_Step_08:2 .code:2b:1 Sfx1_Step_0E:1,60:2 01:1 40:1 85:1 b0:1
+d067,WRAM,4,11,0,0f:15,.code:17:3 .code:19:2 0f:4915:2 .code:1e:1,87:6 83:1 85:1 f0:1 86:1
+d068,WRAM,0,63,1,00:2 01:5 02:1 05:24 06:8 07:22 0f:2,.code:1a:6 .code:3:2 ObjCmd_SoundCh1:1 Obj_SoundCh1:1,01:3 11:3 16:3 29:3 28:3 2e:3
+d069,WRAM,0,1,2,0f:3,Snd_StopSong:1 0f:54a7:1 Snd_MusicTick:1,00:1
+d070,WRAM,0,24,1,00:2 01:2 02:3 05:9 06:6 07:1 0f:2,ObjCmd_SoundCh2:1 Obj_SoundCh2:1 ScriptCmd_SoundCh2:1 01:6bcc:1,09:14 08:4 03:1
+d071,WRAM,0,2,1,0f:3,Sfx3_Stop:1 Sfx3_Begin:1 Snd_SilenceChannels:1,00:1
+d074,WRAM,0,1,9,0f:10,.code:32:2 Sfx3_StepAdvance:1 .code:1f:1 .code:28:1,00:1
+d075,WRAM,1,8,0,0f:9,.code:4a:1 Sfx3_StepAdvance:1 0f:4f79:1 Sfx3_Init_03:1,f0:1 e0:1 60:1 10:1 80:1
+d076,WRAM,1,4,0,0f:5,.code:4a:1 Sfx3_StepAdvance:1 0f:4f79:1 .code:95:1,23:1
+d078,WRAM,0,16,1,00:2 01:1 02:2 05:5 06:1 0f:6,ObjCmd_SoundCh3:1 Obj_SoundCh3:1 ScriptCmd_SoundCh3:1 KeyPrompt_SoundCh3:1,04:3 0a:2 0b:1 12:1 0c:1 06:1
+d079,WRAM,0,2,0,0f:2,Sfx4_Stop:1 Snd_SilenceChannels:1,00:1
+d07c,WRAM,0,0,10,0f:10,Sfx4_Step_09:1 Sfx4_Step_06:1 Sfx4_Step_01:1 Sfx4_Step_0E:1,
+d07d,WRAM,0,0,2,0f:2,Sfx4_Step_06:1 Sfx4_Step_06_LoadNR4x:1,
+d100,WRAM,0,0,3,00:2 01:1,Mode1D_RenderBand:1 Print_StreamFromD3F4:1 Mode06_State1F:1,
+d102,WRAM,0,0,2,00:2,00:25db:1 00:25e7:1,
+d104,WRAM,0,0,1,00:1,00:25e7:1,
+d380,WRAM,1,8,0,01:9,Mode06_State10:1 Mode06_State11:1 01:702d:1 01:706e:1,10:6 00:2
+d381,WRAM,1,10,0,01:11,Mode06_State10:1 01:6f90:1 Mode06_State11:1 01:702d:1,00:9 03:1
+d382,WRAM,0,8,1,00:1 01:8,00:22cf:1 Photo_LoadToBufferAndVram:1 Photo_LoadToVram:1 Photo_LoadToBuffer:1,00:3
+d383,WRAM,0,8,0,01:8,Photo_LoadToBufferAndVram:1 Photo_LoadToVram:1 Photo_LoadToBuffer:1 Photo_LoadTiles8800:1,c0:3
+d384,WRAM,0,8,0,01:8,Photo_LoadToBufferAndVram:1 Photo_LoadToVram:1 Photo_LoadToBuffer:1 Photo_LoadTiles8800:1,00:3
+d386,WRAM,4,6,0,00:4 01:2 05:4,PrintFrame_Select:2 .code:a0:2 FrameRec_LoadMap:1 FrameRec_LoadMapWin:1,
+d387,WRAM,4,5,0,00:4 01:1 05:4,.code:a0:2 FrameRec_LoadMap:1 FrameRec_LoadMapWin:1 FrameRec_LoadMapScreenOff:1,
+d388,WRAM,2,5,0,00:6 01:1,FrameRec_LoadMap:1 FrameRec_LoadMapWin:1 FrameRec_LoadMapScreenOff:1 FrameRec_SetRecords:1,
+d38a,WRAM,0,1,0,01:1,PrintFrame_Select:1,
+d38b,WRAM,0,1,0,01:1,PrintFrame_Select:1,
+d38c,WRAM,0,1,0,01:1,PrintFrame_Select:1,
+d38f,WRAM,0,1,0,01:1,PrintFrame_Select:1,
+d390,WRAM,0,1,0,01:1,PrintFrame_Select:1,
+d392,WRAM,0,0,1,00:1,00:22fd:1,
+d396,WRAM,0,3,0,00:3,00:07ae:1 00:0973:1 FrameRec_SetRecords:1,
+d397,WRAM,0,3,0,00:3,00:07ae:1 00:0973:1 FrameRec_SetRecords:1,
+d398,WRAM,0,3,0,00:3,00:07ae:1 00:0973:1 FrameRec_SetRecords:1,
+d3a2,WRAM,1,3,0,01:4,Mode06_State00:1 Mode06_State11:1 Mode06_State14:1 Mode06_State1B:1,00:2 01:1
+d3a4,WRAM,0,0,2,00:1 01:1,Mode1D_RenderBand:1 Mode06_State1B:1,
+d3f4,WRAM,2,10,0,00:2 01:10,Mode06_State1B:2 Print_StreamFromD3F4:1 00:2469:1 Print_SetFrameSide:1,00:3 50:2 b0:1
+d3f5,WRAM,2,10,0,00:2 01:10,Mode06_State1B:2 Print_StreamFromD3F4:1 00:2469:1 Print_SetFrameSide:1,5b:1 5f:1 69:1
+d3f6,WRAM,1,8,0,00:1 01:8,Print_StreamFromD3F4:1 Print_SetFrameSide:1 01:6959:1 Print_LoadItemPicture:1,23:2 31:1
+d3f7,WRAM,3,11,0,01:14,Mode06_State1C:2 Mode06_State1D:2 Mode06_State1E:2 Mode06_State1A:1,00:1
+d3f9,WRAM,1,11,0,01:12,01:6f95:1 Mode06_State11:1 Mode06_State14:1 Mode06_State16:1,00:7 01:4
+d3fa,WRAM,1,10,0,00:1 01:10,00:2324:1 Mode06_State1A:1 Mode06_State1E:1 01:7447:1,01:1
+d3fb,WRAM,2,12,0,00:1 01:13,00:22cf:1 Mode06_State1A:1 01:738f:1 Mode06_State1D:1,01:4
+d3fc,WRAM,4,7,2,01:13,Mode06_State24:2 Mode06_State27:2 Mode06_State00:1 01:6dd7:1,
+d400,WRAM,0,0,7,05:2 06:3 07:2,Mode0B_State04:2 Mode02_State05:1 05:4c23:1 06:5320:1,
+d600,WRAM,0,0,1,00:1,.code:a7:1,
+d700,WRAM,0,0,1,00:1,.code:6e:1,
+d800,WRAM,7,16,4,00:2 01:12 02:4 04:1 05:1 06:7,NameCard_ScriptStepRight:2 NameCard_ScriptDrawStep:2 NameCard_ScriptStepLeft:2 NameCard_ScriptDrawStepLeft:2,00:4 40:1 c0:1 90:1
+d801,WRAM,3,2,0,00:1 06:4,06:461c:2 00:196e:1 .code:6f:1 06:4559:1,00:1
+d810,WRAM,0,0,5,00:1 01:2 06:2,.code:5b:2 06:45b7:2 Map_CopyColumnToD810:1,
+d880,WRAM,2,7,0,00:8 06:1,00:03c6:1 Oam_HideUnused:1 00:03dd:1 00:1773:1,00:6
+d881,WRAM,1,3,0,00:4,00:1763:1 00:1773:1 00:1820:1 00:1b3f:1,
+d882,WRAM,5,5,34,00:8 01:9 02:8 05:8 06:6 07:4 08:1,.code:9e:2 Lcd_SetupInlineNoIE:2 .code:b7:2 Stamp_ObjSlideOut:2,00:1
+d883,WRAM,3,1,2,00:1 02:4 08:1,Fade_StartOut:2 00:0381:1 .code:5a:1 .code:87:1,
+d884,WRAM,2,1,0,00:1 02:2,Fade_StartOut:2 00:0381:1,
+d885,WRAM,2,1,0,00:1 02:2,Fade_StartOut:2 00:0381:1,
+d886,WRAM,1,3,0,00:3 02:1,.code:9e:1 Lcd_SetupInlineNoIE:1 00:1a29:1 .code:85:1,
+d887,WRAM,0,2,0,00:2,.code:9e:1 Lcd_SetupInlineNoIE:1,
+d888,WRAM,0,2,0,00:2,.code:9e:1 Lcd_SetupInlineNoIE:1,
+d889,WRAM,0,10,0,00:2 02:8,.code:9e:1 Lcd_SetupInlineNoIE:1 02:7887:1 02:7895:1,
+d88a,WRAM,0,13,0,00:13,Stat_SetIdle:1 Stat_SetTileToggleAt4F:1 Stat_SetTileToggleAt4F_B:1 Stat_SetTileToggleBAt4F:1,4f:4 ff:1 1f:1 07:1 17:1 27:1
+d88b,WRAM,2,2,10,00:4 06:10,.code:9e:2 Lcd_SetupInlineNoIE:2 .code:2c:1 06:65ff:1,
+d88c,WRAM,0,2,2,00:2 02:2,.code:9e:1 Lcd_SetupInlineNoIE:1 .code:5a:1 .code:87:1,
+d88d,WRAM,0,2,0,00:2,.code:9e:1 Lcd_SetupInlineNoIE:1,
+d88e,WRAM,0,2,0,00:2,.code:9e:1 Lcd_SetupInlineNoIE:1,
+d88f,WRAM,0,2,2,02:4,.code:5a:1 Fade_StartIn:1 .code:87:1 Fade_StartOut:1,00:1
+d890,WRAM,0,2,0,02:2,Fade_StartIn:1 Fade_StartOut:1,
+d891,WRAM,0,2,0,02:2,Fade_StartIn:1 Fade_StartOut:1,
+d892,WRAM,0,2,0,02:2,Fade_StartIn:1 Fade_StartOut:1,
+d893,WRAM,0,2,0,02:2,Fade_StartIn:1 Fade_StartOut:1,
+d894,WRAM,0,2,0,02:2,Fade_StartIn:1 Fade_StartOut:1,
+d895,WRAM,1,1,0,00:1 05:1,00:1820:1 05:40ae:1,01:1
+d896,WRAM,1,0,81,00:4 01:18 02:2 05:18 06:22 07:18,01:6bcc:2 01:6dac:2 01:6dd7:2 01:6e14:2,
+d898,WRAM,1,2,0,00:3,00:041d:1 00:042a:1 00:043c:1,
+d899,WRAM,2,2,0,00:4,Rng_Init:1 .code:8e:1 00:1773:1 00:1820:1,ff:2
+d89a,WRAM,1,1,0,00:2,Rng_Next:1 00:03ff:1,
+d89b,WRAM,0,0,4,00:4,00:03ff:1 00:042a:1 .code:8e:1 00:04af:1,
+d8b3,WRAM,0,0,1,00:1,00:04af:1,
+d8ba,WRAM,0,0,1,00:1,.code:8e:1,
+d8d1,WRAM,0,1,0,00:1,00:041d:1,
+d8d2,WRAM,2,0,0,00:2,00:1773:1 .code:f9:1,
+d8d3,WRAM,0,0,19,01:7 02:9 05:3,Mode06_State0E:1 .code:2b8:1 Mode06_State04:1 Mode06_State06:1,
+d8d4,WRAM,25,19,0,01:3 02:18 05:9 06:7 07:7,Mode01_State01:2 Mode0B_State01:2 Mode06_State1A:1 Mode06_State1F:1,01:11 00:8
+d8d6,WRAM,1,1,0,00:2,.code:5f:1 Joy_Read:1,
+d8d7,WRAM,1,1,0,00:2,.code:5f:1 Joy_Read:1,
+d8d8,WRAM,24,3,0,00:4 01:3 02:12 05:6 06:2,Joy_Read:2 06:4b6a:2 00:1b3f:1 00:1b60:1,
+d8d9,WRAM,109,10,0,00:1 01:8 02:39 05:25 06:25 07:21,KeyPrompt_Keys4B1C:3 Mode06_State03:2 Mode06_State06:2 KeyPrompt_Keys4ADB:2,00:5
+d8da,WRAM,40,2,0,00:1 01:10 02:10 05:16 06:4 07:1,02:64b2:2 06:4b6a:2 00:16d5:1 01:6c57:1,
+d8db,WRAM,0,1,0,00:1,Joy_Read:1,
+d8dc,WRAM,0,0,1,00:1,Joy_Read:1,
+d8df,WRAM,33,3,0,01:6 02:1 05:15 06:9 07:5,Mode06_State0A:1 01:6dac:1 01:6dd7:1 Mode06_State0B:1,
+d8e0,WRAM,51,53,0,00:1 01:6 02:30 05:10 06:14 07:43,Mode06_State21:2 Mode01_State06:2 .code:36:2 StrawberryCh_LockedCallback:2,00:24 01:10 ff:6 02:5 04:5 08:3
+d8e1,WRAM,7,2,0,02:7 06:2,KeyPrompt_TickA:1 KeyPrompt_TickB:1 KeyPrompt_TickC:1 KeyPrompt_TickD:1,
+d8e2,WRAM,1,0,1,05:1 06:1,05:4036:1 Mode0B_State10:1,
+d8e3,WRAM,3,1,0,00:1 08:3,00:17da:1 Sgb_InitDataSnd:1 Sgb_FreezeScreen:1 Sgb_UnfreezeScreen:1,
+d8e4,WRAM,2,4,0,00:2 08:4,Sgb_FreezeScreen:2 Sgb_UnfreezeScreen:2 00:1773:1 00:1820:1,ff:1 00:1
+d8e5,WRAM,1,2,0,00:1 01:1 06:1,.code:1b:1 .code:c:1 .code:1a:1,00:1 02:1
+d8e6,WRAM,0,0,4,02:2 06:2,KeyPrompt_Keys4ADB:1 KeyPrompt_Keys4B06:1 .code:194:1 KeyPrompt_LoadSoundsB:1,
+d8e8,WRAM,0,0,2,02:2,KeyPrompt_Keys4AF0:1 KeyPrompt_Keys4B1C:1,
+d8ea,WRAM,0,0,1,02:1,KeyPrompt_Keys4B3A:1,
+d8ec,WRAM,2,1,0,00:1 06:2,Message_Show:1 .code:6f:1 06:4561:1,
+d8ed,WRAM,2,3,2,06:7,06:45b7:2 .code:6f:1 06:4561:1 06:4587:1,00:2
+d8ee,WRAM,2,2,0,06:4,06:45b7:3 .code:6f:1,14:1
+d8ef,WRAM,2,6,0,06:4 07:4,.code:6f:1 06:4587:1 06:459c:1 06:45b7:1,00:6
+d8f0,WRAM,2,6,0,06:4 07:4,.code:6f:1 06:4587:1 06:459c:1 06:45b7:1,40:4 60:2
+d8f1,WRAM,2,6,0,06:4 07:4,.code:6f:1 06:4587:1 06:459c:1 06:45b7:1,11:4 12:2
+d8f2,WRAM,1,1,0,00:1 06:1,Mode_SaveReturnD8F2:1 Mode14_State01:1,
+d8f3,WRAM,1,1,0,00:1 06:1,Mode_SaveReturnD8F2:1 Mode14_State01:1,
+d8f4,WRAM,52,26,0,01:2 02:24 05:15 06:17 07:20,02:4d44:2 02:4e93:2 02:542c:2 02:5480:2,01:4 00:3
+d8f5,WRAM,2,4,0,05:6,Mode00_State04:1 .code:1a:1 Mode01_State01:1 Mode01_State02:1,00:1
+d8f6,WRAM,2,4,0,05:6,Mode00_State04:1 Mode01_State03:1 Mode01_State04:1 Mode01_State05:1,
+d8f7,WRAM,2,5,0,05:7,Mode00_State04:1 .code:44:1 .code:13:1 Mode03_State02:1,
+d8f8,WRAM,1,3,0,05:1 07:3,Mode00_State04:1 .code:7:1 Mode04_State01:1 07:6caa:1,
+d8f9,WRAM,2,4,0,05:1 06:5,Mode00_State04:1 NameCardEdit_RedrawScreen:1 Mode0B_State01:1 .code:7a:1,00:1
+d8fa,WRAM,1,4,0,06:5,.code:1a:1 06:65c8:1 06:6689:1 06:669e:1,00:1
+d8fb,WRAM,1,2,0,07:3,.code:1a:1 Mode12_State01:1 07:4938:1,
+d8fc,WRAM,2,3,0,02:1 05:4,Mode02_State01:2 .code:2f:1 .code:26:1 05:510d:1,00:1
+d8fd,WRAM,9,5,0,02:1 05:13,.code:2f:1 .code:26:1 Mode02_State01:1 .code:4f:1,08:3 13:1 00:1
+d8fe,WRAM,6,8,0,02:1 05:13,05:510d:3 05:4c05:2 .code:2f:1 .code:26:1,00:4
+d8ff,WRAM,2,5,0,05:1 07:6,.code:18a:2 TakePhotos_ResetFrameState:1 07:4330:1 FrameAnim_KeyAddrA:1,ff:3 00:1
+d900,WRAM,2,3,0,05:1 07:4,FrameAnim_StepB:2 TakePhotos_ResetFrameState:1 07:435e:1 FrameAnim_KeyAddrB:1,00:1
+d901,WRAM,2,3,0,05:1 07:4,FrameAnim_StepC:2 TakePhotos_ResetFrameState:1 07:438c:1 FrameAnim_KeyAddrC:1,00:1
+d902,WRAM,2,3,0,05:1 07:4,FrameAnim_StepD:2 TakePhotos_ResetFrameState:1 07:43ba:1 FrameAnim_KeyAddrD:1,00:1
+d903,WRAM,0,4,1,05:1 07:4,TakePhotos_ResetFrameState:1 .code:18a:1 07:431f:1 Mode11_State00:1,01:3
+d904,WRAM,0,2,1,05:1 07:2,TakePhotos_ResetFrameState:1 FrameAnim_StepB:1 07:434d:1,
+d905,WRAM,0,2,1,05:1 07:2,TakePhotos_ResetFrameState:1 FrameAnim_StepC:1 07:437b:1,
+d906,WRAM,0,2,1,05:1 07:2,TakePhotos_ResetFrameState:1 FrameAnim_StepD:1 07:43a9:1,
+d907,WRAM,5,2,0,00:2 07:5,07:4771:2 07:4797:2 .code:15:1 SlideShow_ObjFollowD907:1,
+d908,WRAM,3,2,0,00:2 07:3,.code:15:1 SlideShow_ObjFollowD908:1 07:478b:1 07:47b2:1,00:1 01:1
+d927,WRAM,0,1,1,07:2,.code:11:1 07:4a6f:1,
+d928,WRAM,1,2,0,07:3,Mode12_State02:1 Mode12_State03:1 07:4a17:1,00:1
+d929,WRAM,0,0,1,07:1,07:4a1c:1,
+d92a,WRAM,8,2,0,02:1 07:9,.code:13:1 .code:17:1 .code:45:1 StrawberryCh_PageAddr:1,06:1 00:1
+d92b,WRAM,1,2,0,07:3,.code:45:1 StrawberryCh_PageAddr:1 Mode11_State00:1,
+d92c,WRAM,2,4,0,02:2 07:4,.code:1d:1 StrawberryCh_DotHidden:1 Mode11_State00:1 Mode11_State05:1,ff:2 00:1
+d92d,WRAM,1,3,0,05:1 07:3,TakePhotos_ResetFrameState:1 FrameCorner_Draw:1 .code:17:1 Mode0F_State00:1,ce:2
+d92e,WRAM,1,3,0,05:1 07:3,TakePhotos_ResetFrameState:1 FrameCorner_Draw:1 .code:17:1 Mode0F_State00:1,41:2
+d92f,WRAM,1,3,0,05:3 07:1,05:4f9e:1 05:4fd6:1 05:518d:1 .code:25:1,00:3
+d930,WRAM,1,1,0,05:2,Unused_Mode02_State0C:1 .code:44:1,00:1
+d931,WRAM,27,10,0,01:10 02:12 05:9 06:2 07:4,.code:1a:7 Mode06_State00:2 01:6f36:2 .code:26:2,00:2 18:1
+d932,WRAM,17,2,6,01:2 02:4 05:9 06:2 07:8,.code:e:2 Mode07_State01:2 01:4767:1 Sram_FormatVector:1,00:1
+d933,WRAM,34,6,1,01:3 02:11 05:27,.code:b:4 05:7285:3 05:72c3:3 .code:e:2,
+d934,WRAM,9,3,0,01:3 06:9,Mode0A_State00:2 NameCard_ScriptStartRight:1 NameCard_ScriptStartLeft:1 Print_LoadItemPicture:1,06:1 00:1
+d935,WRAM,9,3,0,01:4 02:8,02:662d:2 02:6649:2 PrintFrame_Select:1 Mode06_State00:1,00:1 05:1
+d936,WRAM,0,1,1,02:1 05:1,Album_ObjFollowDAA6:1 Mode03_State04:1,
+d937,WRAM,6,3,3,06:12,06:5819:3 06:58d1:3 06:5929:3 06:5844:1,
+d938,WRAM,3,6,0,06:9,.code:5c:1 Bcd_DrawDigitTall:1 06:5844:1 .code:101:1,00:3
+d939,WRAM,1,1,0,01:1 02:1,Mode06_State1A:1 .code:e:1,
+d93a,WRAM,1,1,0,01:1 02:1,Mode06_State1A:1 .code:e:1,
+d93b,WRAM,5,11,0,01:16,.code:45:2 PrintScript_SameState:2 Mode06_State1A:2 01:6f95:1,0d:2 13:1 19:1 1f:1 25:1 2b:1
+d93c,WRAM,5,11,0,01:16,.code:45:2 PrintScript_SameState:2 Mode06_State1A:2 01:6f95:1,6a:8
+d93d,WRAM,2,1,0,00:1 01:2,Mode_SaveReturnD93D:1 01:68fd:1 01:7682:1,
+d93e,WRAM,2,1,0,00:1 01:2,Mode_SaveReturnD93D:1 01:68fd:1 01:7682:1,
+d93f,WRAM,5,4,2,07:11,Mode0F_State00:1 Mode0F_State0F:1 07:5e23:1 Mode10_State00:1,00:1
+d940,WRAM,5,4,0,07:9,Mode0F_State00:1 Mode10_State00:1 Mode10_State03:1 07:6209:1,
+d941,WRAM,1,1,0,07:2,KittHost_SetTextPtr:1 KittHost_NextTextByte:1,
+d942,WRAM,1,1,0,07:2,KittHost_SetTextPtr:1 KittHost_NextTextByte:1,
+d943,WRAM,0,18,1,07:19,07:5d16:1 07:5e33:1 Mode10_State02:1 07:629a:1,1c:4 20:2 08:2 10:2 18:2 2c:1
+d944,WRAM,1,1,0,07:2,07:6580:1 KittHost_SetTablePtr:1,
+d945,WRAM,1,1,0,07:2,07:6580:1 KittHost_SetTablePtr:1,
+d946,WRAM,1,2,0,07:3,07:6580:1 .code:36:1 Mode0E_State02:1,
+d947,WRAM,2,3,2,07:7,07:660e:2 07:6580:1 07:65c2:1 07:65d7:1,00:1
+d948,WRAM,2,3,0,07:5,07:660e:3 .code:36:1 Mode0E_State02:1,
+d949,WRAM,0,1,1,06:2,Kitts_CheckAfford:2,
+d94a,WRAM,0,1,0,06:1,Kitts_CheckAfford:1,
+d94b,WRAM,0,1,0,06:1,Kitts_CheckAfford:1,
+d94c,WRAM,2,3,0,00:1 02:4,00:21c6:1 PrintGame_ObjRandomStart:1 .code:23:1 02:7465:1,00:1 60:1
+d94d,WRAM,1,2,0,02:3,.code:b2:1 .code:23:1 .code:b:1,80:1
+d94e,WRAM,1,2,0,02:3,.code:b2:1 .code:23:1 .code:b:1,78:1
+d94f,WRAM,6,5,0,01:7 02:2 07:2,01:7486:2 .code:1e:2 PrintGame_DrawAppleCount:1 Mode06_State10:1,00:5
+d950,WRAM,1,9,0,01:8 02:1 07:1,Mode06_State10:1 Mode06_State11:1 01:702d:1 01:706e:1,09:3 07:3 03:2 05:1
+d951,WRAM,1,8,0,01:9,Mode06_State10:1 Mode06_State11:1 01:702d:1 01:706e:1,00:7 01:1
+d952,WRAM,0,0,7,02:1 07:6,02:5480:1 .code:b2:1 Scratch_HasPrize3:1 07:5ef2:1,
+d957,WRAM,0,0,1,07:1,Scratch_FindMarkedBack:1,
+d959,WRAM,1,1,1,07:3,07:5ead:2 Scratch_DealSpots:1,
+d95a,WRAM,1,1,0,07:2,07:5ead:2,
+d95b,WRAM,1,1,0,07:2,.code:109:1 Scratch_ReloadCardArt:1,
+d95c,WRAM,1,1,0,07:2,.code:109:1 Scratch_ReloadCardArt:1,
+d95d,WRAM,1,1,0,07:2,.code:109:1 Scratch_ReloadCardArt:1,
+d95e,WRAM,0,1,1,02:1 07:1,02:5480:1 Mode10_State00:1,
+d95f,WRAM,0,2,0,02:1 07:1,02:5480:1 07:6036:1,
+d960,WRAM,0,0,5,07:5,Puzzle15_ResetBoard:1 Puzzle15_IsSolved:1 Puzzle15_CellAddr:1 Puzzle15_CellAddrPrev:1,
+d970,WRAM,10,1,2,02:6 07:7,02:5115:2 02:5138:2 02:5346:1 02:5352:1,03:1
+d971,WRAM,10,1,2,02:6 07:7,02:515a:2 02:517d:2 02:535d:1 02:5369:1,
+d972,WRAM,3,2,0,07:5,Puzzle15_SavePos:1 Puzzle15_CellAddrPrev:1 Puzzle15_ScreenPosAddrPrev:1 Puzzle15_MapAddrPrev:1,
+d973,WRAM,3,2,0,07:5,Puzzle15_SavePos:1 Puzzle15_CellAddrPrev:1 Puzzle15_ScreenPosAddrPrev:1 Puzzle15_MapAddrPrev:1,
+d974,WRAM,5,1,0,07:6,Puzzle15_DispatchA:1 .code:6:1 Mode0F_State00:1 Mode0F_State08:1,
+d975,WRAM,3,0,2,02:4 07:1,.code:2f:1 Puzzle15_ObjMoving:1 .code:22:1 Puzzle15_ObjDrawCell:1,
+d976,WRAM,0,4,1,02:5,02:5323:1 02:5346:1 02:5352:1 02:535d:1,10:1 20:1 80:1 40:1
+d977,WRAM,2,3,0,02:2 07:3,.code:7:1 .code:8:1 Mode0F_State00:1 Puzzle15_FrameCallback:1,04:2 20:1
+d978,WRAM,2,3,0,02:2 07:3,.code:7:2 Mode0F_State00:1 Puzzle15_FrameCallback:1 Mode0F_State05:1,fc:2 e0:1
+d979,WRAM,1,1,1,02:1 07:2,Puzzle15_ScriptedKey:2 Puzzle15_ShuffleInit:1,00:1
+d97a,WRAM,2,2,0,07:4,07:5a03:1 Puzzle15_LoadPicture:1 Mode0F_State03:1 Puzzle15_InitScreen:1,
+d97b,WRAM,1,2,0,01:2 07:1,.code:16:1 Script_SaveCounterD97B:1 Mode0F_State00:1,0f:1
+d97c,WRAM,3,2,0,01:1 02:1 07:3,Script_SetD97C:1 .code:e:1 Mode0F_State00:1 Mode0F_State0D:1,10:1
+d97d,WRAM,3,2,5,06:10,.code:29:2 06:4754:1 06:4952:1 06:4983:1,00:1
+d97e,WRAM,9,2,0,02:3 06:8,.code:45:2 .code:11:1 06:46eb:1 06:4754:1,
+d97f,WRAM,12,8,0,02:2 06:18,.code:45:2 06:49a7:2 06:49bb:2 IdCard_DrawNameChar:2,00:4
+d980,WRAM,1,1,0,06:2,06:4e50:1 Mode0B_State05:1,
+d981,WRAM,0,0,7,06:7,06:49b5:1 Mode0B_State01:1 Mode0B_State03:1 Mode0B_State07:1,
+d982,WRAM,5,7,0,06:12,06:48f2:2 06:4900:2 06:496c:1 NameCardEdit_LoadKanaPage:1,
+d983,WRAM,4,7,0,06:11,06:487e:2 06:4837:1 06:491d:1 06:496c:1,00:5
+d984,WRAM,1,3,0,06:4,NameCardEdit_PhotoCursorUpdate:1 06:4837:1 06:487e:1 NameCardEdit_RedrawScreen:1,88:1
+d985,WRAM,0,5,1,06:6,06:4900:1 Mode0B_State03:1 Mode0B_State07:1 Mode0B_State09:1,01:3 30:1 02:1
+d986,WRAM,0,5,1,06:6,06:49a7:1 Mode0B_State03:1 Mode0B_State07:1 Mode0B_State09:1,00:2 02:1 08:1 07:1
+d987,WRAM,1,0,0,06:1,Mode0B_State07:1,
+d988,WRAM,1,1,0,06:2,NameCardEdit_RedrawScreen:1 Mode0B_State07:1,00:1
+d989,WRAM,1,0,0,06:1,Mode0B_State0B:1,
+d98a,WRAM,1,1,0,06:2,NameCardEdit_RedrawScreen:1 Mode0B_State0B:1,
+d98b,WRAM,1,2,0,01:1 02:2,Print_LoadItemPicture:1 .code:1b:1 Obj_ClearD98B:1,00:1
+d98c,WRAM,10,3,0,02:2 05:11,02:77fa:2 05:6354:2 Text_CursorRight:2 Text_DrawBigCharAtCursor:2,00:1
+d98d,WRAM,0,0,2,05:2,05:621c:1 05:630d:1,
+d98f,WRAM,3,2,0,05:5,05:625d:2 05:62ee:1 05:6331:1 .code:29:1,0d:1
+d990,WRAM,1,2,0,02:1 05:2,AlbumText_ObjPosFromD990:1 05:625d:1 .code:29:1,94:1
+d991,WRAM,2,2,0,02:1 05:3,AlbumText_ObjPosFromD990:1 AlbumText_CursorUpdate:1 05:625d:1 .code:29:1,88:1
+d992,WRAM,4,3,0,05:7,05:62be:2 05:62d3:2 05:6331:1 Text_LoadBigGlyphPage:1,00:1
+d993,WRAM,2,1,7,02:4 05:6,02:6ae1:2 Mode05_State01:2 .code:3e:1 02:6b9f:1,02:1
+d994,WRAM,10,19,0,02:17 05:4 06:8,.code:a7:4 .code:b7:2 Stamp_ObjSlideOut:2 AlbumText_ObjSlideOut:2,01:8 00:5 02:3 03:3
+d995,WRAM,0,1,0,05:1,.code:44:1,00:1
+d996,WRAM,9,4,0,02:1 05:12,02:6ae1:1 .code:f4:1 Stamp_LoadPageTiles:1 Stamp_LoadGfx:1,
+d997,WRAM,3,3,0,02:1 05:5,05:5996:2 02:6ae1:1 05:5495:1 05:592a:1,00:1
+d998,WRAM,0,0,8,02:1 05:7,02:6ae1:1 Stamp_LoadPageTiles:1 Stamp_LoadGfx:1 Stamp_LoadMask:1,
+d9a8,WRAM,5,3,0,02:1 05:7,05:58a2:2 02:6ae1:1 Stamp_LoadGfx:1 Stamp_LoadMask:1,02:1
+d9a9,WRAM,2,2,0,02:1 05:3,02:6ae1:1 Stamp_CursorUpdate:1 05:58a2:1 05:59be:1,
+d9aa,WRAM,2,2,0,02:1 05:3,02:6ae1:1 Stamp_CursorUpdate:1 05:58a2:1 05:59be:1,
+d9ab,WRAM,1,1,0,02:1 05:1,02:6b9f:1 .code:12c:1,
+d9ac,WRAM,1,1,0,02:1 05:1,02:6b9f:1 .code:12c:1,
+d9ad,WRAM,4,1,0,02:3 05:2,02:6b9f:1 Stamp_ObjClampX:1 02:6ca2:1 05:54b7:1,
+d9ae,WRAM,4,1,0,02:3 05:2,02:6b9f:1 02:6c23:1 02:6ca2:1 05:54b7:1,
+d9af,WRAM,1,1,0,02:1 05:1,02:6ae1:1 05:59e1:1,
+d9b0,WRAM,1,1,0,02:1 05:1,02:6ae1:1 05:59e1:1,
+d9b1,WRAM,0,0,2,02:1 05:1,02:6ae1:1 05:59e1:1,
+d9c1,WRAM,1,1,0,02:1 05:1,02:6ae1:1 05:59e1:1,
+d9c2,WRAM,1,2,0,02:1 05:2,02:6ae1:1 05:59be:1 .code:44:1,34:1
+d9c3,WRAM,1,2,0,02:1 05:2,02:6ae1:1 05:59be:1 .code:44:1,78:1
+d9c4,WRAM,1,2,0,05:3,05:5866:1 05:59be:1 .code:44:1,04:1
+d9c5,WRAM,1,2,0,05:3,05:5866:1 05:59be:1 .code:44:1,45:1
+d9c6,WRAM,2,0,1,05:3,.code:f4:1 Stamp_LoadPageTiles:1 Stamp_LoadGfx:1,
+d9c7,WRAM,2,0,0,05:2,Stamp_LoadPageTiles:1 Stamp_LoadGfx:1,
+d9c8,WRAM,2,0,0,05:2,Stamp_LoadPageTiles:1 Stamp_LoadGfx:1,
+d9c9,WRAM,1,0,0,05:1,05:596a:1,
+d9ca,WRAM,1,0,0,05:1,05:5482:1,
+d9cb,WRAM,1,0,0,05:1,05:5482:1,
+d9cc,WRAM,1,0,0,05:1,05:5495:1,
+d9cd,WRAM,1,0,0,05:1,05:5495:1,
+d9ce,WRAM,1,0,1,05:2,05:5482:1 05:58a2:1,
+d9cf,WRAM,1,0,0,05:1,05:58a2:1,
+d9d0,WRAM,1,0,0,05:1,Stamp_LoadWindowMap:1,
+d9d1,WRAM,1,0,0,05:1,Stamp_LoadWindowMap:1,
+d9d2,WRAM,1,0,0,05:1,Stamp_LoadPageTiles:1,
+d9d3,WRAM,1,0,0,05:1,Stamp_LoadPageTiles:1,
+d9d4,WRAM,3,0,0,05:3,Stamp_LoadPageTiles:1 Stamp_LoadGfx:1 Stamp_LoadMask:1,
+d9d5,WRAM,3,0,0,05:3,Stamp_LoadPageTiles:1 Stamp_LoadGfx:1 Stamp_LoadMask:1,
+d9d6,WRAM,5,0,0,05:5,Stamp_LoadGfx:2 Stamp_LoadMask:2 05:563a:1,
+d9d7,WRAM,5,0,0,05:5,Stamp_LoadGfx:2 Stamp_LoadMask:2 05:563a:1,
+d9da,WRAM,6,0,0,05:6,05:54b7:1 Stamp_ArrangeGfx:1 Stamp_ArrangeMaskInverted:1 Stamp_MirrorGfx:1,
+d9db,WRAM,3,0,0,05:3,05:54b7:1 Stamp_ArrangeGfx:1 Stamp_ArrangeMaskInverted:1,
+d9de,WRAM,1,0,1,05:2,05:5495:1 Stamp_LoadMask:1,
+d9df,WRAM,1,0,0,05:1,Stamp_LoadMask:1,
+d9e0,WRAM,2,0,0,05:2,Stamp_LoadMask:2,
+d9e1,WRAM,3,0,0,05:3,Stamp_MirrorIfFlagged:1 Stamp_BlitOnPhoto:1 Stamp_SetShiftMasks:1,
+d9e2,WRAM,1,0,0,05:1,Stamp_LoadSmallTiles:1,
+d9e3,WRAM,1,0,0,05:1,Stamp_LoadSmallTiles:1,
+d9e4,WRAM,1,0,0,05:1,Stamp_LoadSmallTiles:1,
+d9e5,WRAM,1,0,0,05:1,Stamp_LoadSmallTiles:1,
+d9e6,WRAM,4,1,0,00:3 05:2,Blit_BuildPatchList:2 .code:1da:1 Blit_MaskPass_SrcA:1 Stamp_BlitFromD9F3:1,
+d9e7,WRAM,4,1,0,00:3 05:2,00:2ad4:1 00:2b53:1 00:2bd4:1 Blit_BuildPatchList:1,
+d9e8,WRAM,3,1,0,00:3 05:1,00:2ad4:1 00:2b53:1 00:2bd4:1 Stamp_SetShiftMasks:1,
+d9e9,WRAM,3,2,0,00:3 05:2,00:2aec:1 00:2b6e:1 00:2c0c:1 Stamp_SetShiftMasks:1,f0:1
+d9ea,WRAM,4,1,0,00:4 05:1,00:2be2:2 00:2aec:1 00:2b6e:1 Stamp_SetShiftMasks:1,
+d9eb,WRAM,4,4,0,00:8,00:2aec:2 00:2b6e:2 00:2c0c:2 00:2be2:1,
+d9ec,WRAM,2,2,0,00:4,00:2c0c:2 00:2be2:1 00:2c05:1,
+d9ed,WRAM,0,1,4,00:4 05:1,00:2c0c:2 00:2aec:1 00:2b6e:1 Stamp_SetShiftMasks:1,
+d9ee,WRAM,2,1,4,00:6 05:1,00:2c0c:2 00:2ad4:1 00:2aec:1 00:2b53:1,
+d9ef,WRAM,0,1,1,00:1 05:1,00:2c0c:1 Stamp_SetShiftMasks:1,
+d9f0,WRAM,0,1,2,00:2 05:1,00:2aec:1 00:2b6e:1 Stamp_SetShiftMasks:1,
+d9f1,WRAM,2,1,2,05:5,Stamp_SetShiftMasks:3 .code:12c:1 Blit_BuildPatchList:1,
+d9f2,WRAM,1,1,0,05:2,.code:12c:1 Blit_BuildPatchList:1,
+d9f3,WRAM,2,1,0,00:2 05:1,Blit_MaskPass_SrcA:1 Stamp_BlitFromD9F3:1 .code:12c:1,c0:1
+d9f4,WRAM,2,1,0,00:2 05:1,Blit_MaskPass_SrcA:1 Stamp_BlitFromD9F3:1 .code:12c:1,c3:1
+d9f5,WRAM,2,1,0,00:2 05:1,Blit_MaskPass_SrcA:1 Stamp_BlitFromD9F3:1 .code:12c:1,00:1
+d9f6,WRAM,1,1,0,00:1 05:1,.code:1da:1 .code:12c:1,a0:1
+d9f7,WRAM,1,1,0,00:1 05:1,.code:1da:1 .code:12c:1,c5:1
+d9f8,WRAM,1,1,0,00:1 05:1,.code:1da:1 .code:12c:1,00:1
+d9fb,WRAM,5,2,0,06:7,.code:1a:1 06:6760:1 06:68c0:1 Mode09_State06:1,01:1
+d9fc,WRAM,4,1,1,06:6,06:60db:1 .code:1a:1 06:65ff:1 Mode08_State01:1,00:1
+d9fd,WRAM,8,3,0,02:1 06:10,.code:32:1 Exchange_RequestPage:1 Mode07_State02:1 06:6279:1,00:1 01:1
+d9fe,WRAM,1,8,0,06:9,Mode09_State04:1 Mode09_State05:1 06:6909:1 06:69e7:1,01:3 00:3 ff:2
+d9ff,WRAM,2,1,0,06:3,06:60db:1 06:60fe:1 06:65ff:1,
+da00,WRAM,0,4,1,06:5,Link_CountdownDA00:1 06:60cb:1 06:6839:1 Mode09_State0A:1,b4:2 00:2
+da01,WRAM,0,4,0,06:4,06:60cb:1 06:6839:1 Mode09_State0A:1 06:6a8a:1,00:2 02:2
+da02,WRAM,0,1,0,06:1,06:6064:1,
+da03,WRAM,0,1,0,06:1,06:6064:1,
+da04,WRAM,5,0,1,04:6,04:4d2b:3 Cam_Dither_RampA:2 Cam_Dither_Flat:1,
+da05,WRAM,7,0,0,04:7,04:4d2b:3 Cam_Dither_RampA:3 Cam_Dither_Flat:1,
+da06,WRAM,7,0,0,04:7,04:4d2b:3 Cam_Dither_RampA:3 Cam_Dither_Flat:1,
+da07,WRAM,2,0,0,04:2,04:4d2b:1 Cam_Dither_RampA:1,
+da08,WRAM,16,11,0,04:20 05:3 06:2 07:2,Cam_MainDispatch_Band1:2 Cam_MainDispatch_Band2:2 04:4bf7:2 04:4c75:2,08:2 0a:1 00:1
+da09,WRAM,6,1,0,04:7,Cam_MainDispatch_EnterBand1:1 Cam_MainDispatch_EnterBand0:1 04:4bf7:1 Cam_LoadRegisterSet:1,
+da0a,WRAM,6,4,0,04:10,04:4ab2:1 Cam_MainDispatch_Band1:1 04:4c75:1 04:4d0a:1,04:2 05:2
+da15,WRAM,12,5,0,04:14 05:1 06:1 07:1,04:5194:1 04:52ba:1 04:5300:1 04:53ca:1,02:5
+da16,WRAM,1,38,0,04:39,04:53ca:12 Cam_FactoryMeasure2:12 04:4ab2:1 Cam_MainDispatch_EnterBand1:1,
+da17,WRAM,2,17,0,04:19,04:53ca:5 04:4a73:1 04:4ab2:1 Cam_MainDispatch_EnterBand1:1,00:2 0d:1 35:1 0b:1 85:1 45:1
+da18,WRAM,2,18,0,04:20,04:53ca:5 04:4ab2:2 04:4a73:1 Cam_MainDispatch_EnterBand1:1,00:5 10:1 48:1 80:1 1f:1
+da19,WRAM,19,40,0,04:59,04:53ca:24 Cam_FactoryMeasure2:12 04:5194:2 04:51df:2,
+da1a,WRAM,19,27,0,04:46,04:53ca:12 Cam_FactoryMeasure2:12 04:52e3:2 Cam_MainDispatch_EnterBand1:1,bf:1 9f:1 a0:1
+da1b,WRAM,4,4,0,04:1 05:3 06:2 07:2,Cam_LiveInit:1 Mode02_State01:1 05:4ac7:1 Mode02_State0A:1,07:2
+da1c,WRAM,9,4,0,04:5 05:3 06:3 07:2,Mode0B_State03:2 Cam_MainDispatch_Band1:1 Cam_MainDispatch_Band2:1 04:4bf7:1,08:2
+da1d,WRAM,1,4,0,04:2 05:1 06:1 07:1,04:4d2b:1 Cam_LiveInit:1 Mode02_State01:1 Mode0B_State03:1,01:2
+da1e,WRAM,6,4,0,02:2 05:6 07:2,05:5040:2 05:505d:2 .code:6a:1 TakePhotos_ObjPosFromDA1E:1,07:2
+da1f,WRAM,7,4,0,02:1 05:7 07:3,.code:26:2 05:507a:2 05:5097:2 Mode0F_State04:2,08:2
+da20,WRAM,2,2,0,05:2 07:2,.code:26:1 Mode02_State01:1 Mode0F_State04:1 Mode0F_State0C:1,01:2
+da21,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da22,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da23,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da24,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da25,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da26,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da27,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da28,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da29,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da2a,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da2b,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da2c,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da2d,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da2e,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da2f,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da30,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da31,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da32,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da33,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da34,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da35,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da36,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da37,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da38,WRAM,1,1,0,04:2,04:53ca:1 Cam_FactoryMeasure2:1,
+da39,WRAM,1,2,4,04:7,Cam_Calib_ValidityCheck:1 Cam_Calib_CopyFromSram:1 Cam_Calib_CopyToSram:1 04:5330:1,7e:1
+da3a,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:5351:1 Cam_FactoryMeasure2:1,7f:1
+da3b,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:536d:1 Cam_FactoryMeasure2:1,7f:1
+da3c,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:5389:1 Cam_FactoryMeasure2:1,7f:1
+da3d,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:5330:1 Cam_FactoryMeasure2:1,7e:1
+da3e,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:5351:1 Cam_FactoryMeasure2:1,7d:1
+da3f,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:536d:1 Cam_FactoryMeasure2:1,7e:1
+da40,WRAM,1,2,0,04:3,Cam_Calib_ValidityCheck:1 04:5389:1 Cam_FactoryMeasure2:1,7e:1
+da41,WRAM,2,2,0,04:4,Cam_Calib_ValidityCheck:1 04:5330:1 04:5351:1 Cam_FactoryMeasure2:1,7d:1
+da42,WRAM,2,2,0,04:4,Cam_Calib_ValidityCheck:1 04:536d:1 04:5389:1 Cam_FactoryMeasure2:1,7e:1
+da43,WRAM,3,2,0,04:4 05:1,Cam_CalibSanityCheck_Measure:1 Cam_Calib_ValidityCheck:1 04:5216:1 Cam_FactoryMeasure2:1,7d:1
+da44,WRAM,3,2,0,04:4 05:1,04:4fd3:1 Cam_Calib_ValidityCheck:1 04:524d:1 Cam_FactoryMeasure2:1,6a:1
+da45,WRAM,1,1,0,04:2,Cam_MainDispatch_EnterBand0:1 04:5194:1,
+da46,WRAM,2,1,0,04:3,Cam_MainDispatch_EnterBand1:1 04:4bf7:1 04:51df:1,
+da47,WRAM,3,1,0,04:4,Cam_MainDispatch_Band1:1 04:4c75:1 04:5216:1 Cam_LiveInit:1,
+da48,WRAM,2,1,0,04:3,Cam_MainDispatch_Band2:1 Cam_MainDispatch_Band4:1 04:524d:1,
+da49,WRAM,1,1,0,04:2,Cam_MainDispatch_Band3:1 04:5283:1,
+da4a,WRAM,1,1,0,04:2,Cam_MainDispatch_EnterBand0:1 04:5194:1,
+da4b,WRAM,2,1,0,04:3,Cam_MainDispatch_EnterBand1:1 04:4bf7:1 04:51df:1,
+da4c,WRAM,3,1,0,04:4,Cam_MainDispatch_Band1:1 04:4c75:1 04:5216:1 Cam_LiveInit:1,
+da4d,WRAM,2,1,0,04:3,Cam_MainDispatch_Band2:1 Cam_MainDispatch_Band4:1 04:524d:1,
+da4e,WRAM,1,1,0,04:2,Cam_MainDispatch_Band3:1 04:5283:1,
+da4f,WRAM,1,4,0,04:5,04:5178:1 04:5330:1 04:5351:1 04:536d:1,
+da50,WRAM,1,4,0,04:5,04:5194:1 04:5330:1 04:5351:1 04:536d:1,
+da51,WRAM,1,4,0,04:5,04:51df:1 04:5330:1 04:5351:1 04:536d:1,
+da52,WRAM,0,0,10,01:6 06:4,Photo_LoadToBufferAndVram:1 Photo_LoadToVram:1 Photo_LoadToBuffer:1 Photo_Store:1,
+da56,WRAM,0,0,1,05:1,Text_SmallGlyphAddrDA56:1,
+da5f,WRAM,2,0,0,05:2,05:6573:1 05:65a7:1,
+da60,WRAM,0,0,2,05:2,Digits_LowNibbleTileAddr:1 Digits_HighNibbleTileAddr:1,
+da64,WRAM,0,0,1,06:1,CardStats_IncDA64:1,
+da66,WRAM,0,0,1,06:1,06:6cd7:1,
+da67,WRAM,0,0,7,05:7,05:6396:1 Text_PutCharAtCursor:1 Text_PutCharAt:1 Text_DrawSmallLine:1,
+da80,WRAM,0,0,1,05:1,05:6367:1,
+da81,WRAM,0,0,1,05:1,05:6367:1,
+da85,WRAM,1,2,0,00:1 05:2,.code:27:1 05:721c:1 Mode03_State11:1,01:2
+da86,WRAM,0,1,0,01:1,01:4777:1,
+da87,WRAM,0,1,0,01:1,01:47a3:1,
+da88,WRAM,0,0,1,06:1,06:6ce1:1,
+daa6,WRAM,9,13,0,01:6 02:2 05:5 06:5 07:4,.code:1a:4 Mode06_State00:1 01:6bcc:1 01:6dac:1,00:5
+daa9,WRAM,0,0,8,01:8,Photo_AddToVector:2 01:4745:1 Photo_CountUsed:1 .code:264:1,
+dac9,WRAM,1,0,3,01:3 06:1,Counters_Load:1 Counters_Store:1 .code:c:1 Counters_AddTaken:1,
+daca,WRAM,1,0,1,01:1 06:1,.code:c:1 RecordBook_DrawCounters:1,
+dacb,WRAM,1,0,1,01:1 06:1,.code:c:1 Counters_AddErased:1,
+dacc,WRAM,1,0,1,01:1 06:1,.code:c:1 RecordBook_DrawCounters:1,
+dacd,WRAM,1,0,1,01:1 06:1,.code:1f:1 Counters_AddExchanged:1,
+dace,WRAM,1,0,1,01:1 06:1,.code:1f:1 RecordBook_DrawCounters:1,
+dacf,WRAM,1,0,1,01:1 06:1,.code:1f:1 .code:1e:1,
+dad0,WRAM,1,0,1,01:1 06:1,.code:1f:1 RecordBook_DrawCounters:1,
+dad1,WRAM,1,0,2,01:1 06:2,.code:3a:1 RecordBook_DrawCounters:1 Counters_AddReceived:1,
+dad2,WRAM,1,0,1,01:1 06:1,.code:3a:1 RecordBook_DrawCounters:1,
+dad3,WRAM,1,0,2,06:3,.code:65:1 Kitts_Subtract:1 Kitts_CheckAfford:1,
+dad4,WRAM,1,0,0,06:1,Kitts_CheckAfford:1,
+dad5,WRAM,1,0,4,06:5,RecordBook_DrawCounters:1 .code:87:1 Kitts_DrawAt9420:1 Kitts_DrawAt9420Vram:1,
+dad6,WRAM,5,2,0,00:1 01:4 02:2,01:6ebc:2 01:6ed7:2 Prn_QueuePrint:1 .code:73:1,
+dad7,WRAM,1,3,0,06:4,Mode0A_State00:1 Mode0A_State01:1 06:579a:1 06:57c5:1,
+dad8,WRAM,2,1,1,01:1 02:2 07:1,01:7486:1 .code:46:1 02:77b3:1 .code:1e:1,
+dad9,WRAM,4,1,0,07:5,Mode0E_State0F:3 .code:2f:1 Mode0E_State09:1,
+dada,WRAM,5,1,0,05:2 06:2 07:2,05:41a2:1 Mode01_State05:1 Mode0B_State01:1 06:5199:1,ff:1
+dadb,WRAM,0,0,6,01:2 05:2 06:2,Sram_LoadIdCard:1 Sram_StoreIdCard:1 .code:6a:1 05:400e:1,
+dadf,WRAM,0,0,5,05:1 06:4,NameCard_DrawName:1 IdCard_DrawName:1 IdCard_DrawNameToPrintBuf:1 IdCard_DrawNameChar:1,
+dae8,WRAM,9,0,2,05:2 06:9,NameCard_DrawBloodType:1 NameCard_DrawSex:1 IdCard_DrawBloodType:1 IdCard_DrawBloodTypeToPrintBuf:1,
+dae9,WRAM,0,0,6,05:1 06:5,NameCard_DrawBirthday:1 IdCard_DrawBirthday:1 IdCard_DrawBirthdayToPrintBuf:1 IdCard_DrawBirthdayDigit:1,
+daee,WRAM,0,0,4,00:3 02:1,Object_Create:1 00:20e8:1 Objects_DrawAll:1 .code:18:1,
+dc5e,WRAM,5,1,0,00:1 02:2 05:2 06:1,00:20f7:1 Scratch_ObjPlace:1 02:6ca2:1 Stamp_CursorUpdate:1,
+dc5f,WRAM,5,1,0,00:1 02:2 05:2 06:1,00:20f7:1 Scratch_ObjPlace:1 02:6ca2:1 Stamp_CursorUpdate:1,
+dc60,WRAM,1,2,0,00:3,Objects_Freeze:1 Objects_Unfreeze:1 Object_RunAll:1,ff:1 00:1
+dc61,WRAM,0,1,5,00:1 02:4 07:1,ObjCmd_SetDC61:1 02:4d44:1 02:4e93:1 02:542c:1,
+dc62,WRAM,0,1,0,00:1,ObjCmd_SetDC61:1,
+dc63,WRAM,0,1,5,00:1 02:4 07:1,ObjCmd_SetDC63:1 02:4d83:1 02:4eda:1 02:5480:1,
+dc64,WRAM,0,1,0,00:1,ObjCmd_SetDC63:1,
+dc65,WRAM,0,1,1,00:1 02:1,ObjCmd_SetDC65:1 02:57f2:1,
+dc66,WRAM,0,1,0,00:1,ObjCmd_SetDC65:1,
+dc67,WRAM,0,0,4,00:1 01:3,ScriptSlots_Tick:1 .code:d5:1 ScriptSlots_Add:1 ScriptSlots_Run:1,
+dcdf,WRAM,0,1,0,01:1,01:59cb:1,
+dce0,WRAM,0,1,0,01:1,01:59cb:1,
+dce1,WRAM,0,1,0,00:1,Prn_ReceiveStatus:1,
+dce2,WRAM,0,1,0,00:1,Prn_ReceiveStatus:1,
+dceb,WRAM,0,0,2,00:2,00:0e92:1 00:0f13:1,
+dcfd,WRAM,0,0,2,00:2,00:0e92:1 00:0f13:1,
+dd07,WRAM,1,1,0,00:1 01:1,Prn_QueuePrint:1 Mode06_State22:1,01:1
+dd08,WRAM,1,1,0,00:1 01:1,Prn_QueuePrint:1 01:7451:1,
+dd09,WRAM,1,1,0,00:1 01:1,Prn_QueuePrint:1 01:7451:1,e4:1
+dd0a,WRAM,2,0,0,00:2,00:0e92:1 00:0f13:1,
+dd0b,WRAM,1,4,0,00:5,00:0e92:2 00:0f13:2 Prn_QueueData:1,
+dd0c,WRAM,8,9,0,00:17,Prn_CheckTxDone:2 Prn_SendData:2 00:12ac:2 Prn_VBlankPoll:1,00:2 07:1
+dd0d,WRAM,2,4,0,00:6,Prn_CheckTxDone:2 00:0dee:1 00:0e64:1 00:1115:1,
+dd0e,WRAM,1,2,0,00:3,Prn_ResetPacketState:1 Prn_SerialStep:1 Prn_SendSyncByte:1,00:1
+dd0f,WRAM,1,1,1,00:3,Prn_ResetPacketState:1 00:114d:1 00:11db:1,
+dd10,WRAM,1,1,2,00:4,Prn_ResetPacketState:1 00:114d:1 00:11db:1 00:11e5:1,
+dd11,WRAM,1,1,1,00:3,Prn_ResetPacketState:1 00:114d:1 Prn_SendChecksumByte:1,
+dd12,WRAM,1,3,0,00:4,Prn_QueuePacket:1 00:11ca:1 00:11e5:1 Prn_RestoreHeaderPtr:1,
+dd13,WRAM,1,3,0,00:4,Prn_QueuePacket:1 00:11ca:1 00:11e5:1 Prn_RestoreHeaderPtr:1,
+dd14,WRAM,1,1,0,00:2,Prn_QueuePacket:1 Prn_RestoreHeaderPtr:1,
+dd15,WRAM,1,1,0,00:2,Prn_QueuePacket:1 Prn_RestoreHeaderPtr:1,
+dd16,WRAM,1,1,0,00:2,Prn_QueueData:1 00:11e5:1,
+dd17,WRAM,1,1,0,00:2,Prn_QueueData:1 00:11e5:1,
+dd18,WRAM,2,4,3,00:9,Prn_SendSyncByte:3 Prn_SendPacketByte:2 Prn_ResetPacketState:1 00:1115:1,00:2 01:1
+dd19,WRAM,1,2,0,00:3,Prn_ResetPacketState:1 Prn_SendPacketByte:1 00:11e5:1,
+dd1a,WRAM,1,3,0,00:4,Prn_QueuePacket:1 Prn_SendPacketByte:1 00:11e5:1 Prn_RestoreHeaderPtr:1,
+dd1b,WRAM,1,3,0,00:4,Prn_QueuePacket:1 Prn_SendPacketByte:1 00:11e5:1 Prn_RestoreHeaderPtr:1,
+dd1c,WRAM,1,1,0,00:2,Prn_QueuePacket:1 Prn_RestoreHeaderPtr:1,
+dd1d,WRAM,1,1,0,00:2,Prn_QueuePacket:1 Prn_RestoreHeaderPtr:1,
+dd1e,WRAM,3,2,0,00:5,00:0f48:2 00:0f60:1 Prn_QueueData:1 00:11e5:1,
+dd1f,WRAM,3,2,0,00:5,00:0f48:2 00:0f60:1 Prn_QueueData:1 00:11e5:1,
+dd20,WRAM,0,1,0,00:1,00:0e92:1,
+dd21,WRAM,0,1,0,00:1,00:0e92:1,
+dd22,WRAM,1,2,1,00:4,Prn_SendPacketByte:2 Prn_ResetPacketState:1 Prn_SendChecksumByte:1,
+dd23,WRAM,1,2,0,00:3,Prn_SendPacketByte:2 Prn_ResetPacketState:1,
+dd24,WRAM,2,5,0,00:7,Prn_ClearTxFlags:1 Prn_CheckTxDone:1 00:0ee1:1 Prn_QueuePacket:1,00:3 01:1
+dd25,WRAM,0,1,1,00:2,Prn_ResetPacketState:1 Prn_SendTrailerByte:1,
+dd26,WRAM,19,2,0,00:15 01:6,00:0ee1:3 Prn_CheckTxDone:2 Prn_VBlankPoll:1 .code:91:1,
+dd27,WRAM,2,3,0,00:3 01:2,.code:91:1 00:121e:1 Prn_SendTrailerByte:1 01:692b:1,
+dd28,WRAM,1,1,0,00:2,Prn_SendPacketByte:1 00:121e:1,
+dd29,WRAM,0,2,0,00:2,.code:39:1 Prn_ClearTxFlags:1,01:1
+dd2a,WRAM,3,1,0,00:4,Prn_QueuePacket:1 .code:56a:1 00:110b:1 Prn_ReceiveStatus:1,
+dd2b,WRAM,2,2,0,00:4,00:0f72:1 Prn_QueuePacket:1 00:11e5:1 00:12bb:1,00:1
+dd2c,WRAM,0,1,3,00:4,Prn_QueuePrint:2 Prn_QueueData:2,
+dd2d,WRAM,0,1,0,00:1,Prn_QueueData:1,
+dd2e,WRAM,0,1,0,00:1,Prn_QueueData:1,
+dd2f,WRAM,0,1,0,00:1,Prn_QueueData:1,
+dd30,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd31,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd32,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd33,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd34,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd35,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd36,WRAM,0,1,0,00:1,Prn_QueuePrint:1,00:1
+dd37,WRAM,0,1,0,00:1,Prn_QueuePrint:1,
+dd3a,WRAM,5,5,0,00:10,Prn_VBlankPoll:1 Prn_ClearTxFlags:1 Prn_SendInit:1 00:0e54:1,00:2
+dd3b,WRAM,1,2,0,00:3,Prn_ResetPacketState:1 Prn_SendData_Abort:1 Prn_SerialStep:1,01:1
+dd3c,WRAM,1,1,0,00:1 01:1,00:0f7c:1 Mode06_State1F:1,
+dd3d,WRAM,2,1,1,00:4,00:0e92:2 00:0ee1:1 00:0f13:1,
+dd3f,WRAM,1,2,1,00:2 01:2,Prn_VBlankPoll:1 Prn_CheckTxDone:1 Mode06_State23:1 01:7486:1,00:1 03:1
+dd40,WRAM,2,3,0,00:3 01:1 06:1,.code:91:1 .code:f9:1 00:1b8f:1 .code:c:1,01:1 00:1
+dd41,WRAM,1,3,0,00:4,Prn_VBlankPoll:1 Prn_ResetPacketState:1 00:0e54:1 00:12a3:1,01:1
+dd42,WRAM,4,7,0,00:11,Link_Irq_StartTimer:3 00:1384:2 00:12ee:1 00:1305:1,00:2
+dd43,WRAM,2,6,0,00:5 06:3,Link_SerialIrq:1 00:1384:1 Link_Irq_Abort_ClearState:1 Link_Init:1,00:3 01:1
+dd44,WRAM,7,5,0,00:11 06:1,Link_SerialIrq:1 00:12ee:1 00:1305:1 Link_Irq_InfoStage:1,01:1
+dd45,WRAM,2,5,0,00:7,Link_QueuePageRequest:2 Link_Irq_HalfDone:1 Link_Irq_Abort_ClearState:1 Link_Init:1,00:1
+dd46,WRAM,2,8,0,00:9 06:1,00:1480:2 00:141b:1 00:143b:1 00:144b:1,10:3 08:2
+dd47,WRAM,1,2,0,00:3,Link_Irq_BulkData:1 Link_Irq_Abort_ClearState:1 Link_Init:1,c0:1
+dd48,WRAM,1,2,0,00:3,Link_Irq_BulkData:1 Link_Irq_Abort_ClearState:1 Link_Init:1,00:1
+dd49,WRAM,1,4,0,00:5,00:1480:1 Link_Irq_Abort_ClearState:1 Link_Init:1 Link_QueueCommand:1,
+dd4a,WRAM,1,4,0,00:5,00:1480:1 Link_Irq_Abort_ClearState:1 Link_Init:1 Link_QueueCommand:1,
+dd4b,WRAM,2,5,0,00:7,00:1480:2 00:1384:1 Link_Irq_BulkData:1 Link_Irq_HalfDone:1,ff:1
+dd4c,WRAM,2,5,0,00:6 06:1,00:1384:1 Link_Irq_BulkData:1 00:1480:1 Link_Irq_HalfDone:1,
+dd4d,WRAM,2,3,0,00:3 06:2,00:1384:1 Link_Irq_Abort_ClearState:1 Link_Init:1 06:6909:1,00:1 01:1
+dd4e,WRAM,3,4,0,00:3 06:4,00:13c3:1 Link_Irq_HalfDone:1 Link_Init:1 06:60db:1,00:2 01:1
+dd4f,WRAM,1,5,0,00:5 06:1,00:1343:1 00:135a:1 00:1362:1 00:137c:1,01:1 03:1 02:1 04:1
+dd50,WRAM,4,7,0,00:11,Link_Irq_Connected:2 Link_SerialIrq:1 00:130d:1 00:13cc:1,01:1 00:1
+dd51,WRAM,2,4,0,00:4 06:2,Link_Irq_InfoStage:2 00:1362:1 Link_Init:1 Mode07_State02:1,00:2 01:1
+dd52,WRAM,2,2,0,00:3 06:1,Link_Init:1 Link_SendHello29:1 Link_UpdateInfoByte:1 Mode07_State01:1,
+dd53,WRAM,3,3,0,00:6,00:130d:1 00:1343:1 Link_Init:1 00:15da:1,
+dd54,WRAM,5,3,1,00:6 06:3,00:133c:1 00:1362:1 Link_Irq_Abort_ClearState:1 Link_Init:1,
+dd55,WRAM,3,6,0,00:8 06:1,Link_QueueCommand:2 Link_Irq_Connected:1 00:141b:1 Link_Irq_HalfDone:1,ef:1
+dd56,WRAM,2,2,0,00:4,Link_Irq_InfoStage:2 00:1362:1 Link_Init:1,
+dd57,WRAM,2,3,0,00:4 06:1,Link_Irq_InfoStage:1 00:1343:1 Link_Irq_Abort_ClearState:1 Link_Init:1,
+dd58,WRAM,4,5,0,00:8 06:1,00:1401:2 00:141b:1 00:143b:1 00:144b:1,00:1
+dd59,WRAM,2,7,0,00:6 06:3,00:141b:1 00:143b:1 00:145f:1 Link_Init:1,
+dd5a,WRAM,2,6,0,00:4 06:4,00:13dd:1 00:13f0:1 00:13f9:1 Link_Init:1,01:3 ef:1
+dd5b,WRAM,1,3,0,00:4,00:13cc:1 00:13dd:1 00:13f0:1 Link_Init:1,
+dd5c,WRAM,0,3,0,00:3,00:1300:1 Link_Irq_Abort_ClearState:1 Link_Init:1,01:1
+dd5d,WRAM,1,3,0,00:4,Link_Irq_Connected:1 00:1401:1 Link_Irq_Abort_ClearState:1 Link_Init:1,
+dfdf,WRAM,0,0,1,07:1,Mode11_State00:1,
+dfff,WRAM,0,0,2,00:2,00:1773:1 00:1820:1,
+fe80,OAM/IO,0,0,2,02:2,PrintGame_ClampSpeed:1 02:7118:1,
+ff00,OAM/IO,21,8,3,00:12 02:2 07:1 08:17,Sgb_Detect:17 Joy_Read:11 00:16d5:1 02:6b4f:1,30:4 20:2 10:2
+ff01,OAM/IO,8,18,0,00:25 06:1,Prn_SendPacketByte:2 Prn_SendTrailerByte:2 .code:91:1 00:1115:1,00:5 12:2 29:1
+ff02,OAM/IO,1,23,0,00:23 06:1,00:1115:2 Prn_SendSyncByte:2 Prn_SendPacketByte:2 Prn_SendChecksumByte:2,81:9 01:5 80:5
+ff04,OAM/IO,12,0,0,0f:12,.code:15:2 .code:31:2 .code:18:2 .code:2a:1,
+ff05,OAM/IO,0,2,0,00:2,Link_TimerIrq:1 Link_Init:1,ee:1
+ff06,OAM/IO,0,1,0,00:1,Link_Init:1,ee:1
+ff07,OAM/IO,0,3,0,00:3,Link_Irq_StartTimer:1 Link_TimerIrq:1 Link_Init:1,02:2 06:1
+ff0f,OAM/IO,0,2,0,00:2,Boot:1 00:1810:1,00:2
+ff10,OAM/IO,0,2,0,0f:2,Sfx1_Stop:1 Snd_SilenceChannels:1,00:1
+ff11,OAM/IO,0,1,0,0f:1,0f:4905:1,b8:1
+ff12,OAM/IO,0,5,0,0f:5,0f:4562:1 Sfx1_Stop:1 Sfx1_Step_09:1 0f:4905:1,08:2 d2:1
+ff13,OAM/IO,0,16,0,0f:16,0f:4455:1 0f:4562:1 Sfx1_Step_0A:1 .code:2a:1,
+ff14,OAM/IO,0,11,0,0f:11,0f:4562:1 Sfx1_Step_0A:1 Sfx1_Stop:1 Sfx1_Step_09:1,c7:4 80:2 87:2
+ff17,OAM/IO,0,1,0,0f:1,Snd_SilenceChannels:1,
+ff19,OAM/IO,0,1,0,0f:1,Snd_SilenceChannels:1,
+ff1a,OAM/IO,0,7,0,0f:7,.code:1f:1 .code:32:1 0f:4fd9:1 Sfx3_Stop:1,80:1 00:1
+ff1b,OAM/IO,0,1,0,0f:1,0f:4fd9:1,f6:1
+ff1c,OAM/IO,0,1,0,0f:1,Snd_Trk_Sustain:1,40:1
+ff1d,OAM/IO,0,7,0,0f:7,0f:4f79:1 0f:4fd9:1 0f:500e:1 0f:503e:1,
+ff1e,OAM/IO,0,2,0,0f:2,0f:4f79:1 0f:4fd9:1,c7:1
+ff21,OAM/IO,0,2,0,0f:2,Sfx4_Stop:1 Snd_SilenceChannels:1,08:1
+ff22,OAM/IO,0,4,0,0f:4,Sfx4_Step_09:1 Sfx4_Step_06:1 0f:4e0b:1 0f:4ef1:1,
+ff23,OAM/IO,0,4,0,0f:4,Sfx4_Step_09:1 0f:4ef1:1 Sfx4_Stop:1 Snd_SilenceChannels:1,80:3
+ff24,OAM/IO,0,1,0,0f:1,Snd_Init:1,77:1
+ff25,OAM/IO,0,3,0,0f:3,Snd_StopSong:1 Snd_Init:1 0f:5365:1,ff:3
+ff26,OAM/IO,0,1,0,0f:1,Snd_Init:1,80:1
+ff40,OAM/IO,2,13,13,00:13 01:5 02:3 06:5 08:2,08:6b16:2 Rst08_WaitVBlank:1 .code:9e:1 Lcd_SetupInlineNoIE:1,00:3 81:1
+ff41,OAM/IO,45,2,10,00:52 05:1 06:2 07:2,.code:9e:1 Lcd_SetupInlineNoIE:1 00:0560:1 00:0573:1,
+ff42,OAM/IO,0,2,0,00:2,.code:f9:1 00:1b8f:1,
+ff43,OAM/IO,0,5,0,00:5,00:196e:1 00:19ff:1 00:1a29:1 .code:f9:1,
+ff44,OAM/IO,15,0,0,00:14 05:1,00:0381:1 .code:46:1 00:0556:1 00:1773:1,
+ff45,OAM/IO,0,5,0,00:5,00:1943:1 00:19a1:1 00:19ff:1 .code:f9:1,7f:1 4f:1 6f:1
+ff47,OAM/IO,0,6,0,00:4 08:2,00:1773:1 00:1810:1 .code:f9:1 00:1b8f:1,00:1 e4:1
+ff48,OAM/IO,0,4,0,00:4,00:1773:1 00:1810:1 .code:f9:1 00:1b8f:1,
+ff49,OAM/IO,0,4,0,00:4,00:1773:1 00:1810:1 .code:f9:1 00:1b8f:1,
+ff4a,OAM/IO,0,3,0,00:3,00:19a1:1 .code:f9:1 00:1b8f:1,
+ff4b,OAM/IO,0,2,0,00:2,.code:f9:1 00:1b8f:1,
+ff88,HRAM,0,0,1,00:1,00:2524:1,
+ff8a,HRAM,12,13,0,00:25,Far_CallKeepA:2 Copy_FarDEtoHL:2 Copy_FarInverted:2 Copy_FarUnrolled:2,
+ff8b,HRAM,35,78,0,00:105 05:2 08:6,Copy_FarDEtoHL:3 Copy_FarUnrolled:3 Vram_CopyHBlankFar:3 FrameRec_LoadMap:3,05:6 02:2 0f:2
+ff8c,HRAM,31,106,0,00:9 01:88 04:26 05:5 06:7 07:2,Sram_Format:4 Sram_VerifyPhotoInfo:3 Sram_VerifyVector:3 Sram_VerifyIdCard:3,10:18 00:16 02:10 08:6 01:5
+ff8d,HRAM,8,6,0,00:3 02:2 05:8 07:1,Mode_Set:2 00:0cf5:1 Fade_SetModeFromObject:1 Fade_End:1,
+ff8e,HRAM,40,132,1,00:2 01:35 02:10 05:43 06:25 07:58,State_Set:2 01:6bf7:2 01:6c57:2 01:6c6d:2,02:18 07:11 06:10 08:9 03:9 01:9
+ff8f,HRAM,0,1,0,00:1,Mode_Set:1,
+ff90,HRAM,2,4,0,00:1 01:5,State_Set:1 01:6bf7:1 01:6c57:1 01:6c6d:1,
+ff95,HRAM,10,6,0,00:1 02:5 05:4 07:6,Mode_Set:1 02:4d83:1 02:4eda:1 02:5480:1,01:1
+ff96,HRAM,8,7,0,00:1 02:4 05:4 06:5 07:1,State_Set:1 02:4d83:1 02:4eda:1 02:5480:1,01:2
+ff97,HRAM,1,1,0,00:2,Serial_SetFarCallback:1 00:1b6c:1,
+ff98,HRAM,1,1,0,00:2,Serial_SetFarCallback:1 00:1b6c:1,
+ff99,HRAM,1,1,0,00:2,Serial_SetFarCallback:1 00:1b6c:1,
+ff9a,HRAM,0,6,1,00:3 06:4,.code:f9:2 00:1b6c:1 06:5fa8:1 06:5fef:1,01:3 00:3
+ff9c,HRAM,0,1,1,00:2,Rst08_WaitVBlank:1 00:1b3f:1,01:1
+ff9d,HRAM,7,1,0,00:2 02:5 07:1,00:1b3f:2 02:4aca:1 .code:11e:1 .code:15:1,
+ff9e,HRAM,3,3,0,00:6,Copy_Inline:2 Copy_FarInline:2 Map_CopyRect:1 00:22b3:1,
+ff9f,HRAM,3,3,0,00:6,Copy_Inline:2 Copy_FarInline:2 Map_CopyRect:1 00:22b6:1,
+ffa0,HRAM,1,1,0,00:2,Copy_FarInline:2,
+ffa3,HRAM,0,1,0,00:1,00:18de:1,01:1
+ffa4,HRAM,1,3,0,00:4,Lcdc_SetCallback:1 .code:20b:1 .code:f9:1 00:1b8f:1,
+ffa5,HRAM,1,3,0,00:4,Lcdc_SetCallback:1 .code:20b:1 .code:f9:1 00:1b8f:1,
+ffa6,HRAM,2,1,0,00:3,.code:17:1 .code:f9:1 00:1b8f:1,
+ffa7,HRAM,2,1,0,00:3,.code:17:1 .code:f9:1 00:1b8f:1,
+ffa8,HRAM,0,2,5,00:7,Stat_TileToggle:1 Stat_TileToggleB:1 Stat_TileToggleC:1 Stat_TileToggleD:1,
+ffa9,HRAM,4,2,0,00:6,00:190a:1 00:1943:1 00:19cb:1 00:1a5c:1,
+ffae,HRAM,0,1,0,05:1,.code:1d:1,
+ffaf,HRAM,0,1,0,05:1,.code:1d:1,
+ffb0,HRAM,0,1,0,05:1,.code:1d:1,
+ffb1,HRAM,0,1,0,05:1,.code:1d:1,
+ffb2,HRAM,0,1,0,05:1,.code:1d:1,
+ffb3,HRAM,70,133,0,04:189 05:14,04:59d9:3 04:4a5f:2 04:5a08:2 04:5a2c:2,07:30 0e:15 00:6 0a:5 04:4 01:3
+ffb4,HRAM,63,119,0,04:182,04:4a73:2 04:567f:2 04:59d9:2 04:5a08:2,08:30 10:23 0a:3 06:1
+ffb5,HRAM,27,31,0,04:58,04:61c0:4 04:622a:4 04:67ab:4 04:6815:4,a0:5
+ffb6,HRAM,66,134,0,04:199 05:1,Cam_CalibSanityCheck_Measure:3 04:607f:3 04:6117:3 04:61c0:3,08:37 04:24 02:3 82:2 10:2 24:1
+ffb7,HRAM,27,10,0,04:36 05:1,Cam_FactoryMeasure2:12 04:58d5:3 04:5909:3 Cam_ThresholdConverge_Up:3,80:1
+ffb8,HRAM,3,4,1,04:6 05:1 06:1,04:4fd3:1 04:4fe6:1 04:5905:1 04:5937:1,24:1 25:1
+ffb9,HRAM,2,2,0,04:3 05:1,04:4fd3:1 04:4fe6:1 04:4fef:1 Mode0D_State01:1,
+ffba,HRAM,1,2,0,04:2 05:1,04:4fef:1 04:5006:1 Mode0D_State01:1,00:1 ff:1
+ffbb,HRAM,1,2,0,04:3,Cam_ORegister_SAR_Search:1 04:55e0:1 04:560d:1,00:1 ff:1
+ffc3,HRAM,1,1,0,00:1 02:1,ObjCmd_End:1 .code:32:1,00:1
+ffc4,HRAM,1,1,0,00:1 02:1,ObjCmd_End:1 .code:32:1,
+ffc5,HRAM,2,3,0,00:3 05:2,00:20f7:1 00:213f:1 00:2205:1 05:5866:1,
+ffc6,HRAM,2,3,0,00:3 05:2,00:20f7:1 00:213f:1 00:2205:1 05:5866:1,
+ffc7,HRAM,1,3,0,00:4,ObjCmd_SetCallback:1 00:20f7:1 .code:19:1 Obj_SetCallback:1,b9:1
+ffc8,HRAM,1,3,0,00:4,ObjCmd_SetCallback:1 00:20f7:1 .code:19:1 Obj_SetCallback:1,7f:1
+ffc9,HRAM,1,7,0,00:3 02:4 05:1,00:20f7:1 00:2145:1 00:2205:1 02:4ad3:1,01:2 20:1 80:1 03:1
+ffca,HRAM,1,7,0,00:3 02:4 05:1,00:20f7:1 00:2145:1 00:2205:1 02:4ad3:1,00:5
+ffcb,HRAM,4,12,0,00:2 02:14,02:6ff6:2 ObjCmd_SetSpeed:1 Obj_ApplySpeed:1 02:4aa8:1,00:7
+ffcc,HRAM,4,14,0,00:2 02:16,.code:7:2 02:6ff6:2 ObjCmd_SetSpeed:1 Obj_ApplySpeed:1,
+ffcd,HRAM,16,22,0,00:2 02:36,Obj_AdvanceFrame30:3 02:6d5c:2 02:6db8:2 .code:a7:2,00:3
+ffce,HRAM,16,24,0,00:2 02:38,Obj_AdvanceFrame30:3 .code:8:2 02:6d5c:2 02:6db8:2,
+ffcf,HRAM,0,5,1,00:2 02:2 04:1 07:1,00:2136:1 Obj_HideSprite:1 02:50eb:1 Puzzle15_ObjArrived:1,00:2
+ffd0,HRAM,0,5,1,00:2 02:2 04:1 07:1,00:2136:1 Obj_HideSprite:1 02:50eb:1 Puzzle15_ObjArrived:1,00:1
+ffd1,HRAM,19,6,0,00:4 02:15 06:4 07:2,Obj_ApplySpeed:2 .code:1b:1 .code:15:1 02:4d24:1,00:3 ff:1
+ffd2,HRAM,21,42,0,00:4 02:46 05:3 06:7 07:3,02:6b9f:3 .code:1b:2 Obj_ApplySpeed:2 PrintGame_ClampX:2,c0:2 50:1 98:1 90:1 08:1 97:1
+ffd3,HRAM,21,11,0,00:4 02:22 06:4 07:2,Obj_ApplySpeed:2 .code:a7:2 .code:1b:1 .code:15:1,00:7
+ffd4,HRAM,35,43,0,00:4 02:62 05:4 06:5 07:3,.code:a7:4 02:6b9f:3 Obj_ApplySpeed:2 .code:b7:2,39:3 58:1 78:1 a0:1
+ffd7,HRAM,2,3,0,00:3 02:2,ObjCmd_Loop:2 ObjCmd_SetLoop:1 .code:36:1 Obj_AdvanceFrame30:1,
+ffd8,HRAM,8,15,11,00:6 02:28,.code:15:2 .code:12:2 PrintGame_ObjFall:2 SlideShow_ObjFollowD907:1,0f:1 14:1 6c:1 3c:1 17:1
+ffd9,HRAM,3,4,2,00:1 02:6 06:2,.code:32:2 ObjCmd_SetPosRel:1 KeyPrompt_Accept:1 KeyPrompt_Wait:1,
+ffda,HRAM,0,2,0,01:2,.code:4d:1 ScriptCmd_End:1,00:2
+ffdb,HRAM,2,4,0,01:6,.code:2e:2 01:5a05:2 .code:4d:1 ScriptCmd_End:1,
+ffdc,HRAM,1,2,0,00:1 01:2,ScriptSlot_StartScript:1 01:59cb:1 01:5a11:1,
+ffdd,HRAM,1,2,0,00:1 01:2,ScriptSlot_StartScript:1 01:59cb:1 01:5a11:1,
+ffde,HRAM,1,0,0,01:1,01:59cb:1,
+ffdf,HRAM,1,0,0,01:1,01:59cb:1,
+ffe0,HRAM,1,2,0,00:1 01:2,ScriptSlot_StartScript:1 01:59cb:1 01:5a17:1,
+ffe1,HRAM,0,2,0,00:1 01:1,ScriptSlot_StartScript:1 ScriptCmd_SetE1:1,00:1
+ffe2,HRAM,0,1,0,01:1,ScriptCmd_SetE1:1,
+ffe3,HRAM,1,5,1,01:6 07:1,ScriptCmd_AddE3:2 ScriptCmd_AddE3_B:2 .code:16:1 ScriptCmd_SetE3:1,
+ffe4,HRAM,1,5,0,01:5 07:1,ScriptCmd_AddE3_B:2 .code:16:1 ScriptCmd_AddE3:1 ScriptCmd_SetE3:1,
+ffe5,HRAM,0,1,0,01:1,ScriptCmd_SetE5:1,
+ffe6,HRAM,0,2,0,01:2,.code:2e:1 01:5a05:1,
+ffe7,HRAM,0,2,0,01:2,.code:2e:1 01:5a05:1,
+ffe8,HRAM,0,1,0,01:1,ScriptCmd_SetE8:1,
+ffe9,HRAM,2,4,0,01:6,ScriptCmd_Loop:2 .code:16:1 Script_SaveCounterD97B:1 RecordBook_CountSetLoop:1,
+ffea,HRAM,4,4,8,01:16,.code:3a:5 .code:c:2 .code:1f:2 .code:f:1,
+ffeb,HRAM,5,4,0,01:9,.code:c:2 NameCard_ScriptStartRight:1 NameCard_ScriptDrawStep:1 NameCard_ScriptStartLeft:1,
+ffec,HRAM,2,1,0,01:3,.code:30:2 .code:4d:1,
+fff0,HRAM,0,0,4,02:3 04:1,02:6b4f:1 02:6b85:1 02:73f7:1 04:4ab2:1,
+fff3,HRAM,0,0,1,0f:1,Sfx3_Step_07:1,
+fff8,HRAM,0,0,3,02:3,Scratch_ObjPlace:1 02:6ca2:1 .code:3e:1,
+fffa,HRAM,0,0,3,05:2 06:1,Stamp_CursorUpdate:1 AlbumText_CursorUpdate:1 NameCardEdit_PhotoCursorUpdate:1,
+fffe,HRAM,0,0,3,00:2 0f:1,Boot:1 00:1810:1 0f:56ab:1,

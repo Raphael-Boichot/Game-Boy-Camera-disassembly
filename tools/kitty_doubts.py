@@ -13,8 +13,9 @@ script stops otherwise. Group `unused` is a final verdict (nothing can reach the
 import csv, os, sys, collections, io
 KD = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'roms', 'hello_kitty', 'disasm')
 names = list(csv.DictReader(open(os.path.join(KD, 'sym_names_kitty.csv'), encoding='utf-8')))
-doubt = {(r['bank'], r['addr']): r for r in names if r['conf'] != 'C' and r['source'] != 'data_left'}
-settled = [r for r in names if r['source'] == 'data_left']        # the leftovers (owner rule 2026-11-11): tag I, final, not doubtful
+def leftover(r): return r['source'] == 'data_left' or (r['name'].startswith('Leftover_') and r['source'].startswith('hand'))   # + the hand-read ones (2026-11-15)
+doubt = {(r['bank'], r['addr']): r for r in names if r['conf'] != 'C' and not leftover(r)}
+settled = [r for r in names if leftover(r)]                       # the leftovers (owner rule 2026-11-11): final, not doubtful
 G = {(r['bank'], r['addr']): r for r in csv.DictReader(open(os.path.join(KD, 'doubts_groups_kitty.csv'), encoding='utf-8'))}
 AUTO = {'data': ('forced only', 'its bytes are read only in forced runs (state pokes), not in an organic run', 'an organic run (core or BGB) that reads them'),
         'data_entry': ('not run', 'no run reads its bytes; a table of the same bank points to it (the word in the evidence)', 'a run that reaches the entry of that table')}
@@ -48,7 +49,8 @@ md = '\n'.join(L)
 c2 = io.StringIO(); w2 = csv.writer(c2, lineterminator='\n'); w2.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
 for r in settled:
     w2.writerow([r['bank'], r['addr'], r['name'], r['conf'], 'leftover', int(r['note'].split(' bytes')[0].split()[-1]), r['note'],
-                 'tools/kitty_data_names.py: no run (core, BGB, core paths, forced) reads or executes these bytes, no code names their address, no table of the bank points to them'])
+                 'tools/kitty_data_names.py: no run (core, BGB, core paths, forced) reads or executes these bytes, no code names their address, no table of the bank points to them'
+                 if r['source'] == 'data_left' else 'hand reading (%s): the bytes before the first label of the bank; no run (core, BGB, core paths, forced) reads them, no proven instruction of the bank loads an address inside them' % r['source']])
 out = {os.path.join(KD, 'sym_unconclusive_kitty.csv'): c.getvalue(), os.path.join(KD, 'sym_unconclusive_kitty.md'): md, os.path.join(KD, 'sym_settled_unused_kitty.csv'): c2.getvalue()}
 if '--check' in sys.argv:
     stale = [p for p, t in out.items() if not os.path.exists(p) or open(p, encoding='utf-8').read() != t]

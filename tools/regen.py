@@ -36,6 +36,7 @@ def kitty_steps(K, J):
         ('sym', lambda: [PY, 'tools/sym_build.py', K, '--names', KD + 'disasm/sym_names_kitty.csv', '--types', KD + 'disasm/sym_types_kitty.csv', '--trace', KD + 'trace/trace_kitty.json',
                          '--out', KD + 'pocketcamera_kitty.sym', '--report']),
         ('doubts', lambda: [PY, 'tools/kitty_doubts.py']),
+        ('l4', lambda: [PY, 'tools/kitty_l4.py', K, J]),                      # RAM / SRAM tables, RAM names, constants, the save checks
         ('red_classes', lambda: [PY, 'tools/kitty_red_classes.py', K]),
         ('red_classify', lambda: [PY, 'tools/red_classify.py', '--tag', 'kitty', K, '--out', KD + 'trace/red_kitty.csv']),
         ('verdicts', lambda: [PY, 'tools/kitty_red_verdicts.py']),

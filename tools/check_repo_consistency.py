@@ -338,6 +338,9 @@ if getattr(A, 'rom_kitty', None):
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_puzzle.py', A.rom_kitty, '--core', '--check'], capture_output=True, text=True, cwd=ROOT)   # the 15 puzzle campaign (deterministic)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip()[-300:])
+    if A.rom:                                                      # L4: RAM / SRAM tables, RAM names, constants, the SRAM map on the game's own saves
+        _m = subprocess.run([sys.executable, 'tools/kitty_l4.py', A.rom_kitty, A.rom, '--check'], capture_output=True, text=True, cwd=ROOT)
+        (ok if not _m.returncode else bad)('kitty', 'L4: ' + (_m.stdout + _m.stderr).strip().replace('\n', ' / ')[-400:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_highlights.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)
     (ok if not _m.returncode else bad)('kitty', (_m.stdout or _m.stderr).strip().replace('\n', ' / ')[-300:])
     _m = subprocess.run([sys.executable, 'tools/kitty_unused_sheet.py', A.rom_kitty, '--check'], capture_output=True, text=True, cwd=ROOT)

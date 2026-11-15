@@ -1,0 +1,41 @@
+save,check,result,detail
+formatted,coverage,ok,0 byte(s) outside the written rows
+formatted,magic,ok,"counters yes, vector yes, ID card yes, photo slots signed 30 of 30"
+formatted,checksums,ok,32 checked
+formatted,echoes,ok,32 checked
+formatted,calibration,ok,$AFF0 = 00 00; vector absent (all zero)
+formatted,values,ok,"taken 0000, Kitts 000000, print intensity 60, vector slots used 0"
+factory,coverage,ok,0 byte(s) outside the written rows
+factory,magic,ok,"counters yes, vector yes, ID card yes, photo slots signed 30 of 30"
+factory,checksums,ok,32 checked
+factory,echoes,ok,32 checked
+factory,calibration,ok,$AFF0 = AA AA; vector invalid
+factory,values,ok,"taken 0000, Kitts 000000, print intensity 60, vector slots used 0"
+two_photos,coverage,ok,0 byte(s) outside the written rows
+two_photos,magic,ok,"counters yes, vector yes, ID card yes, photo slots signed 30 of 30"
+two_photos,checksums,ok,32 checked
+two_photos,echoes,ok,32 checked
+two_photos,calibration,ok,$AFF0 = 00 00; vector absent (all zero)
+two_photos,values,ok,"taken 0002, Kitts 000002, print intensity 60, vector slots used 2"
+puzzle_kitts,coverage,ok,0 byte(s) outside the written rows
+puzzle_kitts,magic,ok,"counters yes, vector yes, ID card yes, photo slots signed 30 of 30"
+puzzle_kitts,checksums,ok,32 checked
+puzzle_kitts,echoes,ok,32 checked
+puzzle_kitts,calibration,ok,$AFF0 = 00 00; vector absent (all zero)
+puzzle_kitts,values,ok,"taken 0002, Kitts 999999, print intensity 60, vector slots used 2"
+kept,coverage,ok,0 byte(s) outside the written rows
+kept,magic,ok,"counters yes, vector yes, ID card yes, photo slots signed 30 of 30"
+kept,checksums,ok,32 checked
+kept,echoes,ok,32 checked
+kept,calibration,ok,$AFF0 = 00 00; vector absent (all zero)
+kept,values,ok,"taken 0002, Kitts 999999, print intensity 60, vector slots used 2"
+erased,coverage,ok,0 byte(s) outside the written rows
+erased,magic,ok,"counters yes, vector yes, ID card yes, photo slots signed 30 of 30"
+erased,checksums,ok,32 checked
+erased,echoes,ok,32 checked
+erased,calibration,ok,$AFF0 = 1B 13; vector absent (all zero)
+erased,values,ok,"taken 0000, Kitts 000000, print intensity 60, vector slots used 0"
+two_photos,expected,ok,"two photos taken and kept: counter 2, two slots in the vector"
+puzzle_kitts,expected,ok,"999,999 Kitts kept over a power cycle (no checksum on the counters)"
+kept,expected,ok,screen $00:$02 with Select + Start; B keeps every byte of the saved data (all but the image buffer and the RNG seed)
+erased,expected,ok,"A: every counter, the Kitts and the album cleared, 1B 13 at $AFF0 of bank 2 (Sram_Format), the blocks signed again"

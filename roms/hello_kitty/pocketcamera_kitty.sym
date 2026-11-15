@@ -256,6 +256,9 @@
 00:2c7f Snd_Tick_Tramp
 00:2e00 Src_00_2E00_Mode05_StampWindow_State06
 00:3700 Img_PairLookupTbl
+01:4000 Leftover_01_4000_SinTable
+01:4200 Leftover_01_4200_CosTable
+01:4400 Leftover_01_4400_Zero
 01:4700 Sram_WriteMagic_Tbl4700
 01:4705 Sram_WriteMagic
 01:4711 Sram_Checksum
@@ -275,14 +278,14 @@
 01:4a13 Sram_FormatVector
 01:4a60 Sram_FormatIdCard
 01:4aa9 Sram_FormatCounters
-01:4adf Sram_ClearB1FC
+01:4adf Sram_ClearCardPhotos
 01:4b0a Photo_LoadToBufferAndVram
 01:4b61 Photo_LoadToVram
 01:4bb1 Photo_LoadToBuffer
 01:4bf0 Photo_LoadTiles8800
 01:4c2b Photo_Store
-01:4c93 Sram_LoadB1FC
-01:4cb2 Sram_StoreB1FC
+01:4c93 Sram_LoadCardPhotos
+01:4cb2 Sram_StoreCardPhotos
 01:4d62 Sram_LoadVector
 01:4d81 Photo_FindSlotA
 01:4d86 Photo_FindSlot_Far
@@ -433,6 +436,7 @@
 01:7653 Mode06_State28
 01:7691 Mode06_Printing
 01:769c Mode06_StateTable
+02:4000 Leftover_02_4000_ObjScript
 02:4008 ObjScript_02_4008_Mode0F_FifteenPuzzle_State0A
 02:40bc Leftover_02_40BC
 02:4110 ObjScript_02_4110_Mode00_BootAndTitle_State00
@@ -790,6 +794,10 @@
 02:7fb9 Obj_NullCallback
 02:7fba ObjScript_02_7FBA_Puzzle15_ObjWaitMove
 02:7fc2 Objects_ClearAll
+03:4000 Leftover_03_4000_OamList
+03:4064 Leftover_03_4064_OamList
+03:40c8 Leftover_03_40C8_OamList
+03:40f0 Leftover_03_40F0_OamList
 03:4118 OamList_03_4118_Mode0E_KittGamesHost_State13
 03:41ac Leftover_03_41AC
 03:4240 OamList_03_4240_Mode0E_KittGamesHost_State13
@@ -1668,6 +1676,8 @@
 0d:7ec0 Gfx_0D_7EC0_Mode05_StampWindow_State06
 0e:4000 Gfx_0E_4000_Mode05_StampWindow_State06
 0e:6800 Gfx_0E_6800_Mode06_Printing_State18
+0f:4000 Leftover_0F_4000_Snd_NoiseNR43Tbl
+0f:4025 Leftover_0F_4025_Snd_LengthTbl
 0f:4039 Snd_FreqTbl
 0f:416c Snd_0F_416C_Mode00_BootAndTitle_State00
 0f:41c9 Sfx1_InitTbl
@@ -1952,6 +1962,7 @@
 11:5fe0 Src_11_5FE0_Mode0B_NameCardEdit_State10
 11:6000 Unused_Photo_EmptyPicture0_Gfx
 11:7000 Gfx_11_7000_Photo_LoadEmptyPicture
+12:4000 Leftover_12_4000_Tiles
 12:40e0 Gfx_12_40E0_Vram_CopyHBlank
 12:4120 Gfx_12_4120_Vram_CopyHBlank
 12:4143 Leftover_12_4143
@@ -1987,6 +1998,7 @@
 15:7400 Map_15_7400_Mode03_ViewAlbum_State03
 15:7800 Map_15_7800_Mode03_ViewAlbum_State03
 15:7c00 Map_15_7C00_Mode03_ViewAlbum_State03
+16:4000 Leftover_16_4000_Tiles
 16:5800 Gfx_16_5800_Mode04_PlayMenu_State00
 16:7025 Leftover_16_7025
 17:4000 Gfx_17_4000_Photos_LoadPage8
@@ -2371,7 +2383,7 @@
 01:4341 .data:7f
 01:43c0 .padding:3e
 01:43fe .data:2
-01:4400 .padding:300
+01:4400 .data:300:10
 01:4700 .data:5
 01:4705 .code:5d9
 01:4cde .data:84

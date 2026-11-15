@@ -1,0 +1,65 @@
+group,value,name,tag,desc
+state_00,02,STATE_00_BOOT_THROW_AWAY_ALL_SAVE,C,screen: Boot: throw away all the save data?
+state_00,05,STATE_00_BOOT_COPYRIGHT_NOTICE,C,screen: Boot: copyright notice
+state_00,08,STATE_00_TITLE_SCREEN,C,screen: Title screen
+state_01,02,STATE_01_MAIN_MENU_TAKE_VIEW_PLAY,C,screen: Main menu: Take / View / Play
+state_01,05,STATE_01_OPTION_MENU_NAME_RECORD_BOOK,C,screen: Option menu: Name / Record book / Exchange
+state_02,01,STATE_02_TAKE_PHOTOS_CAMERA_VIEW,C,screen: Take photos: camera view
+state_02,06,STATE_02_TAKE_PHOTOS_PHOTO_TAKEN,C,screen: Take photos: photo taken (Print / Keep / Cancel)
+state_03,02,STATE_03_VIEW_PHOTOS_ALBUM,C,screen: View photos: album
+state_04,01,STATE_04_PLAY_MENU_SCRATCH_CARD_15,C,screen: Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel
+state_05,06,STATE_05_STAMPS_STAMP_SCREEN_PHOTO,C,screen: Stamps: the stamp screen over the photo
+state_06,03,STATE_06_PRINTING_CHOOSE_PRINT_FRAME,C,screen: Printing: choose the print frame (Left / Right)
+state_06,04,STATE_06_PRINTING_CHOOSE_WILD_FRAME,C,screen: Printing: choose a wild frame (six; Up / Down)
+state_06,06,STATE_06_PRINTING_PHOTO_WILD_FRAME,C,screen: Printing: the photo in the wild frame (A prints)
+state_06,0a,STATE_06_PRINTING_START_PHOTO_ALBUM_PAGE,C,screen: Printing: START photo and album page / A photo / B cancel
+state_06,0f,STATE_06_PRINTING_PRINT_INTENSITY_START_HELD,C,screen: Printing: print intensity while START is held (うすい / こい)
+state_06,1f,STATE_06_PRINTING_PLEASE_WAIT,C,screen: Printing: please wait (A spin / B cancel)
+state_06,21,STATE_06_PRINTING_CAR_DRIVES_OFF,C,screen: Printing: the car drives off
+state_06,24,STATE_06_PRINTING_CATCH_FALLING_FRUITS_EARN,C,screen: Printing: catch the falling fruits to earn Kitts
+state_07,02,STATE_07_EXCHANGE_GIVE_OR_RECEIVE,C,screen: Exchange: give or receive
+state_08,02,STATE_08_EXCHANGE_PICK_PHOTO_GIVE,C,screen: Exchange: pick the photo to give (photo train)
+state_09,0a,STATE_09_EXCHANGE_RECEIVING,C,screen: Exchange: receiving (please wait)
+state_0a,01,STATE_0A_NAME_CARD_FINISHED_ID_CARD,C,screen: Name card: the finished ID card (its three photos take turns)
+state_0a,02,STATE_0A_NAME_CARD_CHANGE_PRINT_CANCEL,C,screen: Name card: change / print / cancel
+state_0b,04,STATE_0B_NAME_CARD_CHOOSE_PHOTO,C,screen: Name card: choose a photo
+state_0b,08,STATE_0B_NAME_CARD_TYPE_YOUR_NAME,C,screen: Name card: type your name
+state_0b,0a,STATE_0B_NAME_CARD_CHOOSE_BLOOD_TYPE,C,screen: Name card: choose the blood type
+state_0b,0c,STATE_0B_NAME_CARD_TYPE_BIRTHDAY,C,screen: Name card: type the birthday
+state_0b,0e,STATE_0B_NAME_CARD_CHOOSE_BOY_OR,C,screen: Name card: choose boy or girl
+state_0b,10,STATE_0B_NAME_CARD_TAKE_YOUR_PHOTO,C,screen: Name card: take your photo
+state_0c,01,STATE_0C_RECORD_BOOK_PHOTO_COUNTERS_KITTS,C,screen: Record book: photo counters and Kitts
+state_0d,01,STATE_0D_QUICK_FACTORY_CHECK_PLEASE_WAIT,C,screen: Quick factory check: please wait
+state_0d,02,STATE_0D_QUICK_FACTORY_CHECK_RESULT,C,screen: Quick factory check: result
+state_0d,04,STATE_0D_FACTORY_CALIBRATION_PLEASE_WAIT,C,screen: Factory calibration: please wait
+state_0d,05,STATE_0D_FACTORY_CALIBRATION_DONE,C,screen: Factory calibration: done
+state_0e,03,STATE_0E_KITT_GAMES_GOODBYE,C,screen: Kitt games: goodbye
+state_0e,05,STATE_0E_SCRATCH_CARD_WELCOME,C,screen: Scratch card: welcome
+state_0e,07,STATE_0E_15_PUZZLE_25_KITTS_PLAY,C,screen: 15 puzzle: 25 Kitts a play - play?
+state_0e,08,STATE_0E_15_PUZZLE_PAYING_KITTS,C,screen: 15 puzzle: paying the Kitts
+state_0e,0a,STATE_0E_15_PUZZLE_CHOOSE_DRAWING_OR,C,screen: 15 puzzle: choose a drawing or a photo
+state_0e,11,STATE_0E_15_PUZZLE_STOP_MIDDLE,C,screen: 15 puzzle: stop in the middle? (yes / no)
+state_0e,13,STATE_0E_SCRATCH_CARD_10_KITTS_CARD,C,screen: Scratch card: 10 Kitts a card - try?
+state_0e,14,STATE_0E_SCRATCH_CARD_PAYING_KITTS,C,screen: Scratch card: paying the Kitts
+state_0e,16,STATE_0E_SCRATCH_CARD_SCRATCH_TWO_SPOTS,C,screen: Scratch card: scratch two spots to find a pair
+state_0e,20,STATE_0E_SCRATCH_CARD_QUIT_MIDDLE,C,screen: Scratch card: quit in the middle? (quit / continue)
+state_0f,05,STATE_0F_15_PUZZLE_DEAL,C,screen: 15 puzzle: the deal (the board shuffled by random slides)
+state_0f,0a,STATE_0F_15_PUZZLE_DRAWING,C,screen: 15 puzzle: a drawing
+state_0f,0b,STATE_0F_15_PUZZLE_PHOTO,C,screen: 15 puzzle: a photo
+state_0f,0c,STATE_0F_15_PUZZLE_LIVE_CAMERA,C,screen: 15 puzzle: the live camera
+state_0f,0f,STATE_0F_15_PUZZLE_SOLVED,C,screen: 15 puzzle: solved
+state_10,02,STATE_10_SCRATCH_CARD_BOARD,C,screen: Scratch card board
+state_10,04,STATE_10_SCRATCH_CARD_SPOTS_SCRATCHED,C,screen: Scratch card: spots scratched (prizes in Kitts)
+state_11,07,STATE_11_STRAWBERRY_CHANNEL_STORY_PICTURES,C,screen: Strawberry Channel: story pictures (Left / Right turn the page)
+state_11,08,STATE_11_STRAWBERRY_CHANNEL_TOO_FEW_KITTS,C,screen: Strawberry Channel: too few Kitts (snow; A shows the price)
+state_11,0c,STATE_11_STRAWBERRY_CHANNEL_PICTURE_PAUSED,C,screen: Strawberry Channel: picture paused (Print / Keep / Cancel)
+state_12,01,STATE_12_SLIDE_SHOW_SETTINGS,I,"screen: Slide show settings (start, speed, order)"
+state_12,04,STATE_12_SLIDE_SHOW_PLAYING,C,screen: Slide show playing
+state_14,01,STATE_14_PRINT_ERROR_01_04_PICTURE,C,"screen: Print error: #01-#04, picture 1 of 4"
+state_17,01,STATE_17_PRINT_ERROR_UNNUMBERED,I,"screen: Print error, unnumbered (not the error screen $14)"
+state_18,01,STATE_18_POMPOMPURIN_PICTURE,I,screen: Pompompurin picture
+state_19,01,STATE_19_EMPTY_PHOTO_FRAME,I,screen: Empty photo frame
+state_1a,01,STATE_1A_EMPTY_PHOTO_FRAME,I,screen: Empty photo frame
+state_1b,01,STATE_1B_PRINTING_CATCH_APPLES_GAME_PRINTER,I,screen: Printing: catch-the-apples game while the printer works
+state_1c,01,STATE_1C_EMPTY_PHOTO_FRAME,I,screen: Empty photo frame
+state_1e,00,STATE_1E_SCREEN_FADE_BETWEEN_MODES,C,screen: Screen fade between modes

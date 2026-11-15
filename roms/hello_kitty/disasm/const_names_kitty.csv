@@ -1,0 +1,34 @@
+group,value,name,tag,desc
+mode,00,MODE_BOOT_AND_TITLE,C,BGB screens 00:05 (copyright) and 00:08 (title)
+mode,01,MODE_MAIN_MENU,C,BGB screens 01:02 (Take / View / Play) and 01:05 (option menu)
+mode,02,MODE_TAKE_PHOTOS,C,BGB screens 02:01 (camera view) and 02:06 (photo taken)
+mode,03,MODE_VIEW_ALBUM,C,BGB screen 03:02 (album binder)
+mode,04,MODE_PLAY_MENU,C,BGB screen 04:01 (scratch card / 15 puzzle / slide show / Strawberry Channel)
+mode,05,MODE_STAMP_WINDOW,C,forced BGB screen (stamp window); reached in the core runs (from the album)
+mode,06,MODE_PRINTING,C,"BGB screens with the printer helper on the link (06:1F please wait, 06:21, 06:24 the fruit game); forced alone it shows an empty frame"
+mode,07,MODE_EXCHANGE,C,BGB screen 07:02 (give / receive)
+mode,08,MODE_EXCHANGE_PHOTO_TRAIN,C,BGB linked exchange (two units): the giving unit chooses its photo on the photo train (states $00-$05)
+mode,09,MODE_EXCHANGE_COMMUNICATING,C,BGB linked exchange (two units): giving states $01-$05
+mode,0A,MODE_NAME_CARD,C,BGB screens 0A:01 (the finished card) and 0A:02 (change / print / cancel)
+mode,0B,MODE_NAME_CARD_EDIT,C,BGB screens 0B:04 / 08 / 0A / 0C / 0E / 10 (photos
+mode,0C,MODE_RECORD_BOOK,C,BGB screen 0C:01 (photo counters and Kitts)
+mode,0D,MODE_FACTORY_CHECK,C,BGB screens 0D:01-02 (quick factory check) and 0D:04-05 (factory calibration); boot conditions
+mode,0E,MODE_KITT_GAMES_HOST,C,BGB screens 0E:03-16 (the host who asks for the Kitts of the scratch card and the 15 puzzle)
+mode,0F,MODE_FIFTEEN_PUZZLE,C,forced BGB screen (15 puzzle board); reached in the core runs (from the Play menu)
+mode,10,MODE_SCRATCH_CARD,C,BGB screen 10:02 (scratch card board)
+mode,11,MODE_STRAWBERRY_CHANNEL,C,BGB screens 11:07 (photo story) and 11:0C (paused: print / keep / cancel)
+mode,12,MODE_SLIDE_SHOW,C,BGB screens 12:01 (settings) and 12:04 (playing)
+mode,13,MODE_BACK_TO_MAIN_MENU13,I,forced: returns to mode 01 at once (no screen of its own)
+mode,14,MODE_MESSAGE_SCREEN,C,BGB screen 14:01 (print error; the same screen says there is no photo to give)
+mode,15,MODE_FADE_OUT15,I,forced: goes to the fade (mode 1E) at once
+mode,16,MODE_FADE_OUT16,I,forced: goes to the fade (mode 1E) at once
+mode,17,MODE_PRINT_ERROR,I,forced BGB screen (print error)
+mode,18,MODE_POMPOMPURIN_PICTURE,I,forced BGB screen (Pompompurin picture)
+mode,19,MODE_EMPTY_FRAME19,I,forced BGB screen (an empty photo frame)
+mode,1A,MODE_EMPTY_FRAME1_A,I,forced BGB screen (an empty photo frame)
+mode,1B,MODE_PRINTING_APPLE_GAME,I,forced BGB screen (printing: catch the apples while the printer works)
+mode,1C,MODE_EMPTY_FRAME1_C,I,forced BGB screen (an empty photo frame)
+mode,1D,MODE_BACK_TO_MAIN_MENU1_D,I,forced: returns to mode 01 at once (no screen of its own)
+mode,1E,MODE_SCREEN_FADE,C,BGB screen 1E:00 (the screen fading between modes)
+dmgpal,E4,DMGPAL_0123_NORMAL,C,"Game Boy palette byte (bits 1-0 = shade of colour 0 ... bits 7-6 = colour 3): colours 0-3 shown as shades 0-3 (white, light grey, dark grey, black): the normal palette (the Japanese row; 112 use(s) in the inline records of Lcd_SetupInline here)"
+dmgpal,00,DMGPAL_0000_WHITE,C,"Game Boy palette byte (bits 1-0 = shade of colour 0 ... bits 7-6 = colour 3): every colour white (blank screen, start of a fade in) (the Japanese row; 3 use(s) in the inline records of Lcd_SetupInline here)"
