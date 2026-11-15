@@ -52,37 +52,37 @@ DEF MUSIC_TITLE                EQU $01 ; C music: title scene, first run and ret
 DEF MUSIC_CREDITS_PAGE_B       EQU $02 ; C music: USER section, credits page B (Mode08 state 14)
 DEF MUSIC_CREDITS              EQU $03 ; C music: USER section, the credits (Mode08_CreditsReal)
 DEF MUSIC_SHUTTERBUG           EQU $04 ; C music: SHUTTERBUG menu (Mode16 init and redraw) and the panorama print screen (Mode18 init)
-DEF MUSIC_MAIN_MENU            EQU $05 ; C music: main menu (Mode00 init)
+DEF MUSIC_MAIN_MENU            EQU $05 ; C music: main menu (Mode00 init); also hot-spot sound list (#52: song 20 of the hot-spot sound pick
 DEF MUSIC_SHOOT_INTRO_A        EQU $06 ; C music: SHOOT parlor, intro page A (Mode01 state 00)
 DEF MUSIC_SHOOT_INTRO_B        EQU $07 ; C music: SHOOT parlor, intro page B (Mode01 state 03)
 DEF MUSIC_TIMER_PRINT_OPTIONS_ALIAS_08 EQU $08 ; C music: same data as song 0D, requested by nothing; owner by ear (2026-10-18): waiting loop before
 DEF MUSIC_SHOW_MENU            EQU $09 ; C music: SHOW menu: slide show / animation / hot-spot (Mode0B init)
 DEF MUSIC_DOODLE_MENU          EQU $0a ; C music: Doodle menu: STAMP / PAINT (Mode04 init)
 DEF MUSIC_EDIT_MENU            EQU $0b ; C music: Edit menu: ALBUM / ANIMATION (Mode05 init)
-DEF MUSIC_LINK_MENU            EQU $0c ; C music: LINK menu: PRINT / TRANSFER (Mode06 init)
+DEF MUSIC_LINK_MENU            EQU $0c ; C music: LINK menu: PRINT / TRANSFER (Mode06 init); also hot-spot sound list (#49: song 17 of the h
 DEF MUSIC_TIMER_PRINT_OPTIONS  EQU $0d ; C music: waiting loop of the self-timer and interval setup (Mode15) and of the several-photo print 
 DEF MUSIC_SHOOT_INTRO_C        EQU $0e ; C music: SHOOT parlor, intro page C (Mode01 state 06)
 DEF MUSIC_PHOTO_PICKER         EQU $0f ; C music: photo picker: delete / copy browse, album confirm, link photo pick (Mode0F, 07:4C7F)
 DEF MUSIC_SLIDESHOW_TUNE_31    EQU $10 ; C music: in no code path: only the slide-show player list (#31) and the hot-spot sound list (#33)
 DEF MUSIC_JINGLE               EQU $11 ; C music: short jingle: credits entry, the fast calibration sanity check and the factory calibration
-DEF MUSIC_SLIDESHOW_TUNE_03    EQU $12 ; C music: in no code path: only the slide-show player list (#3)
-DEF MUSIC_SLIDESHOW_TUNE_04    EQU $13 ; C music: in no code path: only the slide-show player list (#4)
-DEF MUSIC_SLIDESHOW_TUNE_05    EQU $14 ; C music: in no code path: only the slide-show player list (#5)
-DEF MUSIC_SLIDESHOW_PLAY_ALIAS_15 EQU $15 ; C music: same data as song 21; only the slide-show player list (#6)
+DEF MUSIC_SLIDESHOW_TUNE_03    EQU $12 ; C music: in no code path: only the slide-show player list (#3); also hot-spot sound list (#35: song
+DEF MUSIC_SLIDESHOW_TUNE_04    EQU $13 ; C music: in no code path: only the slide-show player list (#4); also hot-spot sound list (#36: song
+DEF MUSIC_SLIDESHOW_TUNE_05    EQU $14 ; C music: in no code path: only the slide-show player list (#5); also hot-spot sound list (#37: song
+DEF MUSIC_SLIDESHOW_PLAY_ALIAS_15 EQU $15 ; C music: same data as song 21; only the slide-show player list (#6); also hot-spot sound list (#38:
 DEF MUSIC_CALIB_SANITY_OK      EQU $16 ; C music: fast calibration sanity check: the OK verdict (all buttons except B; Cam_CalibSanityCheck)
-DEF MUSIC_SLIDESHOW_TUNE_08    EQU $17 ; C music: in no code path: only the slide-show player list (#8)
-DEF MUSIC_SLIDESHOW_TUNE_09    EQU $18 ; C music: in no code path: only the slide-show player list (#9)
-DEF MUSIC_JAMBO_NINTENDO_ALIAS_19 EQU $19 ; C music: same data as song 2A; only the slide-show player list (#10)
-DEF MUSIC_TIMER_PRINT_OPTIONS_ALIAS_1A EQU $1a ; C music: same data as song 0D; only the slide-show player list (#11)
-DEF MUSIC_SLIDESHOW_TUNE_12    EQU $1b ; C music: in no code path: only the slide-show player list (#12)
+DEF MUSIC_SLIDESHOW_TUNE_08    EQU $17 ; C music: in no code path: only the slide-show player list (#8); also hot-spot sound list (#40: song
+DEF MUSIC_SLIDESHOW_TUNE_09    EQU $18 ; C music: in no code path: only the slide-show player list (#9); also hot-spot sound list (#41: song
+DEF MUSIC_JAMBO_NINTENDO_ALIAS_19 EQU $19 ; C music: same data as song 2A; only the slide-show player list (#10); also hot-spot sound list (#42
+DEF MUSIC_TIMER_PRINT_OPTIONS_ALIAS_1A EQU $1a ; C music: same data as song 0D; only the slide-show player list (#11); also hot-spot sound list (#43
+DEF MUSIC_SLIDESHOW_TUNE_12    EQU $1b ; C music: in no code path: only the slide-show player list (#12); also hot-spot sound list (#44: son
 DEF MUSIC_BEETHOVEN_5TH_INTRO  EQU $1c ; C music: same data as song 47; only the slide-show player list (#13); owner by ear (2026-10-18), on
-DEF MUSIC_SLIDESHOW_TUNE_14    EQU $1d ; C music: in no code path: only the slide-show player list (#14)
-DEF MUSIC_TITLE_ALIAS_1E       EQU $1e ; C music: same data as song 01; only the slide-show player list (#15)
-DEF MUSIC_SPACE_FEVER_1F       EQU $1f ; I music: no caller and no list; owner by ear: "from Space Fever (likely)"
-DEF MUSIC_SLIDESHOW_INIT       EQU $20 ; C music: slide-show hub (Mode0D init); also slide-show player list (#18)
+DEF MUSIC_SLIDESHOW_TUNE_14    EQU $1d ; C music: in no code path: only the slide-show player list (#14); also hot-spot sound list (#46: son
+DEF MUSIC_TITLE_ALIAS_1E       EQU $1e ; C music: same data as song 01; only the slide-show player list (#15); also hot-spot sound list (#47
+DEF MUSIC_HOTSPOT_SONG_16      EQU $1f ; C music: only the hot-spot sound list (#48): song 16 of the hot-spot sound picker, which shows entr
+DEF MUSIC_SLIDESHOW_INIT       EQU $20 ; C music: slide-show hub (Mode0D init); also slide-show player list (#18); also hot-spot sound list 
 DEF MUSIC_SLIDESHOW_PLAY       EQU $21 ; C music: slide-show playback (Mode0D state 06)
 DEF MUSIC_SLIDESHOW_TUNE_01    EQU $22 ; C music: in no code path: only the slide-show player list (#1)
-DEF MUSIC_ANIMATION_EDITOR     EQU $23 ; C music: animation editor (Mode12 init); also slide-show player list (#19)
+DEF MUSIC_ANIMATION_EDITOR     EQU $23 ; C music: animation editor (Mode12 init); also slide-show player list (#19); also hot-spot sound lis
 DEF MUSIC_STAMP                EQU $24 ; C music: STAMP tool (Mode11 setup)
 DEF MUSIC_PAINT                EQU $25 ; C music: PAINT tool (Mode10 setup); also slide-show player list (#32)
 DEF MUSIC_TRANSFER_SEND        EQU $26 ; C music: print engine transfer screen, send init (Mode1D state 02)
@@ -90,36 +90,36 @@ DEF MUSIC_TRANSFER_PRINT       EQU $27 ; C music: print job: waiting jingle whil
 DEF MUSIC_WHO_ARE_YOU_RUNNING_FROM_1 EQU $28 ; C music: shared result / error screen, tune 1 of 4; owner by ear: "Who are you running from 1" (sur
 DEF MUSIC_TOTAKA_TUNE          EQU $29 ; C music: shared result / error screen, tune 2 of 4; also the NG verdict of the fast calibration san
 DEF MUSIC_JAMBO_NINTENDO       EQU $2a ; C music: shared result / error screen, tune 4 of 4; owner by ear: "Jambo Nintendo !" (sure)
-DEF MUSIC_BALL_GAME_OVER       EQU $2b ; C music: BALL game over (Mode20 state 06)
+DEF MUSIC_BALL_GAME_OVER       EQU $2b ; C music: BALL game over (Mode20 state 06); also hot-spot sound list (#64: song 32 of the hot-spot s
 DEF MUSIC_BALL_MENU            EQU $2c ; C music: BALL menu (Mode20 state 00)
 DEF MUSIC_BALL_BGM_2           EQU $2d ; C music: BALL in-game music, second pick of the list at 05:781B; owner by ear: "Ball BGM" (sure)
-DEF MUSIC_BALL_BGM_1           EQU $2e ; C music: BALL in-game music, first pick of the list at 05:781B; also slide-show player list (#21)
+DEF MUSIC_BALL_BGM_1           EQU $2e ; C music: BALL in-game music, first pick of the list at 05:781B; also slide-show player list (#21); 
 DEF MUSIC_DJ_TITLE             EQU $2f ; C music: D.J. title (Mode1F state 00)
 DEF MUSIC_WHO_ARE_YOU_RUNNING_FROM_2 EQU $30 ; C music: shared result / error screen, tune 3 of 4; owner by ear: "Who are you running from 2" (sur
 DEF MUSIC_SPACE_FEVER_START    EQU $31 ; C music: Space Fever II start (Mode07 state 01)
 DEF MUSIC_SPACE_FEVER_MAIN     EQU $32 ; C music: Space Fever II main theme: restarted when a boss is gone (SpaceFever_Boss_EndA); owner by 
-DEF MUSIC_SLIDESHOW_TUNE_23    EQU $33 ; C music: in no code path: only the slide-show player list (#23)
-DEF MUSIC_USER_SCREENS         EQU $34 ; C music: USER section (Mode08 init); also slide-show player list (#22)
+DEF MUSIC_SLIDESHOW_TUNE_23    EQU $33 ; C music: in no code path: only the slide-show player list (#23); also hot-spot sound list (#55: son
+DEF MUSIC_USER_SCREENS         EQU $34 ; C music: USER section (Mode08 init); also slide-show player list (#22); also hot-spot sound list (#
 DEF MUSIC_RECORD_HI_SCORE      EQU $35 ; C music: record and hi-score screens (Mode08 states 0C and 0F)
 DEF MUSIC_SPECIAL_MENU         EQU $36 ; C music: Special menu (Mode03 init)
-DEF MUSIC_COMPOSE              EQU $37 ; C music: COMPOSE: split / fusion (Mode17 init); also slide-show player list (#24)
-DEF MUSIC_COMMENT_EDITOR       EQU $38 ; C music: comment editor (CommentEditor_Sub0_Init); also slide-show player list (#25)
+DEF MUSIC_COMPOSE              EQU $37 ; C music: COMPOSE: split / fusion (Mode17 init); also slide-show player list (#24); also hot-spot so
+DEF MUSIC_COMMENT_EDITOR       EQU $38 ; C music: comment editor (CommentEditor_Sub0_Init); also slide-show player list (#25); also hot-spot
 DEF MUSIC_VIEW_MENU            EQU $39 ; C music: VIEW menu (Mode02 init)
 DEF MUSIC_ALBUM_VIEWER         EQU $3a ; C music: album viewer and print screen (Modes 09, 0A, 0F confirm, 1C); also slide-show player list 
-DEF MUSIC_OWNER_CARD           EQU $3b ; C music: owner card and its editor (Mode08 states 03 and 06); also slide-show player list (#27)
+DEF MUSIC_OWNER_CARD           EQU $3b ; C music: owner card and its editor (Mode08 states 03 and 06); also slide-show player list (#27); al
 DEF MUSIC_RUN_PICK_CHARACTER   EQU $3c ; C music: RUN! RUN! RUN!: pick a character (Mode21_PickCharacterTbl); also slide-show player list (#
 DEF MUSIC_RUN_COUNTDOWN        EQU $3d ; C music: RUN! RUN! RUN!: countdown (Mode21 state 04)
 DEF MUSIC_RUN_READY_STEADY_GO  EQU $3e ; C music: RUN! RUN! RUN!: ready, steady, go (Mode21 state 05)
 DEF MUSIC_RUN_RACE             EQU $3f ; C music: RUN! RUN! RUN!: the race (Mode21 state 06); also the end of the factory calibration (STORE
 DEF MUSIC_RUN_RESULT_SETUP     EQU $40 ; C music: RUN! RUN! RUN!: result setup and screen (Mode21 states 0B, 0C); also slide-show player lis
 DEF MUSIC_RUN_RESULT           EQU $41 ; C music: RUN! RUN! RUN!: result screen (Mode21 state 0C); also slide-show player list (#7)
-DEF MUSIC_SPACE_FEVER_BOSS     EQU $42 ; C music: Space Fever II boss fight (SpaceFever_Boss_Init); also slide-show player list (#30)
+DEF MUSIC_SPACE_FEVER_BOSS     EQU $42 ; C music: Space Fever II boss fight (SpaceFever_Boss_Init); also slide-show player list (#30); also 
 DEF MUSIC_RUN_RACE_SCENE       EQU $43 ; C music: RUN! RUN! RUN!: race scene init (Mode21 state 02); also slide-show player list (#16)
 DEF MUSIC_LINK_EXCHANGE_SETUP  EQU $44 ; C music: link exchange setup (Mode0E states 06 and 0A); same data as 11, owner by ear (2026-10-13):
 DEF MUSIC_ERASE_JINGLE         EQU $45 ; C music: photo erase (Mode0F_EraseJingleTiles)
 DEF MUSIC_USER_MAP_SCROLL_OUT  EQU $46 ; C music: USER map scroll-out (UserMap_ScrollOut)
 DEF MUSIC_BEETHOVEN_5TH_INTRO_ALIAS_47 EQU $47 ; C music: same data as song 1C, requested by nothing; owner by ear (2026-10-18): Beethoven 5th symph
-DEF MUSIC_ERROR_MESSAGE_INCOMPLETE EQU $48 ; I music: no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete
+DEF MUSIC_ERROR_MESSAGE_INCOMPLETE EQU $48 ; I music: no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete; fina
 DEF MUSIC_HOLD                 EQU $fe ; C music: engine control: this frame runs effect 1 only, the song and effects 3 and 4 do not advance
 DEF MUSIC_STOP                 EQU $ff ; C music: engine control: stop the song (Snd_RequestSong -> Snd_StopSong)
 DEF SFX1_KEY_LEFT_RIGHT        EQU $01 ; C sfx1: Left and Right in the shared key helper Snd_KeyBlips; many editors use it as their plain t

@@ -1401,6 +1401,12 @@ for r in SND_ROWS:
         if e.startswith('owner:'):
             if e[6:] not in SND_OWNER: bad('sound', '%s: %s is not a row of owner_answers_jp.csv' % (tag, e)); SND_BAD += 1
             continue
+        m = re.fullmatch(r'cov:org:([0-9A-F]{2}):([0-9A-F]{4})', e)        # 2026-11-15: an organic read or run of that byte in the v8 merged coverage
+        if m:
+            bk, ad = int(m.group(1), 16), int(m.group(2), 16); o = ad if bk == 0 else bk * 0x4000 + ad - 0x4000
+            import numpy as _npc; _zc = _npc.load(P('coverage/v8/merged_v8/cov.npz'))
+            if not (_zc['odr'][o] or _zc['oex'][o]): bad('sound', '%s: %s, but no organic run of the v8 coverage read or ran that byte' % (tag, e)); SND_BAD += 1
+            continue
         bad('sound', '%s: unknown evidence token %r' % (tag, e)); SND_BAD += 1
     if cited != ss[:5]: bad('sound', '%s: the evidence cites %s, the first request sites in the ROM are %s' % (tag, ['%02X:%04X' % c for c in cited], ['%02X:%04X' % c for c in ss[:5]])); SND_BAD += 1
 SND_ID = [r for r in SND_NAMED if (r['channel'], r['id'].upper()) not in SND_CONTROL]

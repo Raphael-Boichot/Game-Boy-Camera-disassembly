@@ -3,37 +3,37 @@ music,01,MUSIC_TITLE,C,2,"title scene, first run and return from the menu (Mode1
 music,02,MUSIC_CREDITS_PAGE_B,C,1,"USER section, credits page B (Mode08 state 14)",09:4F61
 music,03,MUSIC_CREDITS,C,1,"USER section, the credits (Mode08_CreditsReal)",09:4DD9
 music,04,MUSIC_SHUTTERBUG,C,3,SHUTTERBUG menu (Mode16 init and redraw) and the panorama print screen (Mode18 init),06:454B 06:45CE 06:5A03
-music,05,MUSIC_MAIN_MENU,C,1,main menu (Mode00 init),07:7246 list:03:61FD#20
+music,05,MUSIC_MAIN_MENU,C,1,"main menu (Mode00 init); also hot-spot sound list (#52: song 20 of the hot-spot sound picker, 2026-11-15)",07:7246 list:03:61FD#20 list:03:7615#52
 music,06,MUSIC_SHOOT_INTRO_A,C,1,"SHOOT parlor, intro page A (Mode01 state 00)",04:6FC5
 music,07,MUSIC_SHOOT_INTRO_B,C,1,"SHOOT parlor, intro page B (Mode01 state 03)",04:7094
 music,08,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_08,C,0,"same data as song 0D, requested by nothing; owner by ear (2026-10-18): waiting loop before / after the several-photo print mode (image selection menu)",same:0D same:1A owner:snd_music_08 owner:snd_music_08_review
 music,09,MUSIC_SHOW_MENU,C,1,SHOW menu: slide show / animation / hot-spot (Mode0B init),03:7953
 music,0A,MUSIC_DOODLE_MENU,C,1,Doodle menu: STAMP / PAINT (Mode04 init),03:7B10
 music,0B,MUSIC_EDIT_MENU,C,1,Edit menu: ALBUM / ANIMATION (Mode05 init),03:7C6A
-music,0C,MUSIC_LINK_MENU,C,1,LINK menu: PRINT / TRANSFER (Mode06 init),03:772A list:03:61FD#17
+music,0C,MUSIC_LINK_MENU,C,1,"LINK menu: PRINT / TRANSFER (Mode06 init); also hot-spot sound list (#49: song 17 of the hot-spot sound picker, 2026-11-15)",03:772A list:03:61FD#17 list:03:7615#49
 music,0D,MUSIC_TIMER_PRINT_OPTIONS,C,3,waiting loop of the self-timer and interval setup (Mode15) and of the several-photo print options (Mode1E); same data as 08 and 1A,06:40AB 06:41EE 08:48F0 same:08 same:1A
 music,0E,MUSIC_SHOOT_INTRO_C,C,1,"SHOOT parlor, intro page C (Mode01 state 06)",04:713B
 music,0F,MUSIC_PHOTO_PICKER,C,4,"photo picker: delete / copy browse, album confirm, link photo pick (Mode0F, 07:4C7F)",04:4088 04:470F 04:47BA 07:4C7F
 music,10,MUSIC_SLIDESHOW_TUNE_31,C,0,in no code path: only the slide-show player list (#31) and the hot-spot sound list (#33),list:03:61FD#31 list:03:7615#33
 music,11,MUSIC_JINGLE,C,3,"short jingle: credits entry, the fast calibration sanity check and the factory calibration (start of both); also slide-show player list (#2) and hot-spot sound list (#34)",09:4D7C 0A:6AE6 0A:6BB5 list:03:61FD#2 list:03:7615#34 same:44
-music,12,MUSIC_SLIDESHOW_TUNE_03,C,0,in no code path: only the slide-show player list (#3),list:03:61FD#3
-music,13,MUSIC_SLIDESHOW_TUNE_04,C,0,in no code path: only the slide-show player list (#4),list:03:61FD#4
-music,14,MUSIC_SLIDESHOW_TUNE_05,C,0,in no code path: only the slide-show player list (#5),list:03:61FD#5
-music,15,MUSIC_SLIDESHOW_PLAY_ALIAS_15,C,0,same data as song 21; only the slide-show player list (#6),list:03:61FD#6 same:21
-music,16,MUSIC_CALIB_SANITY_OK,C,1,fast calibration sanity check: the OK verdict (all buttons except B; Cam_CalibSanityCheck),0A:6B39
-music,17,MUSIC_SLIDESHOW_TUNE_08,C,0,in no code path: only the slide-show player list (#8),list:03:61FD#8
-music,18,MUSIC_SLIDESHOW_TUNE_09,C,0,in no code path: only the slide-show player list (#9),list:03:61FD#9
-music,19,MUSIC_JAMBO_NINTENDO_ALIAS_19,C,0,same data as song 2A; only the slide-show player list (#10),list:03:61FD#10 same:2A
-music,1A,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_1A,C,0,same data as song 0D; only the slide-show player list (#11),list:03:61FD#11 same:08 same:0D
-music,1B,MUSIC_SLIDESHOW_TUNE_12,C,0,in no code path: only the slide-show player list (#12),list:03:61FD#12
-music,1C,MUSIC_BEETHOVEN_5TH_INTRO,C,0,"same data as song 47; only the slide-show player list (#13); owner by ear (2026-10-18), on 47: Beethoven 5th symphony intro",list:03:61FD#13 same:47
-music,1D,MUSIC_SLIDESHOW_TUNE_14,C,0,in no code path: only the slide-show player list (#14),list:03:61FD#14
-music,1E,MUSIC_TITLE_ALIAS_1E,C,0,same data as song 01; only the slide-show player list (#15),list:03:61FD#15 same:01
-music,1F,MUSIC_SPACE_FEVER_1F,I,0,"no caller and no list; owner by ear: ""from Space Fever (likely)""",owner:snd_music_1F
-music,20,MUSIC_SLIDESHOW_INIT,C,1,slide-show hub (Mode0D init); also slide-show player list (#18),07:6BA6 list:03:61FD#18
+music,12,MUSIC_SLIDESHOW_TUNE_03,C,0,"in no code path: only the slide-show player list (#3); also hot-spot sound list (#35: song 3 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#3 list:03:7615#35
+music,13,MUSIC_SLIDESHOW_TUNE_04,C,0,"in no code path: only the slide-show player list (#4); also hot-spot sound list (#36: song 4 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#4 list:03:7615#36
+music,14,MUSIC_SLIDESHOW_TUNE_05,C,0,"in no code path: only the slide-show player list (#5); also hot-spot sound list (#37: song 5 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#5 list:03:7615#37
+music,15,MUSIC_SLIDESHOW_PLAY_ALIAS_15,C,0,"same data as song 21; only the slide-show player list (#6); also hot-spot sound list (#38: song 6 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#6 same:21 list:03:7615#38
+music,16,MUSIC_CALIB_SANITY_OK,C,1,"fast calibration sanity check: the OK verdict (all buttons except B; Cam_CalibSanityCheck); also hot-spot sound list (#39: song 7 of the hot-spot sound picker, 2026-11-15)",0A:6B39 list:03:7615#39
+music,17,MUSIC_SLIDESHOW_TUNE_08,C,0,"in no code path: only the slide-show player list (#8); also hot-spot sound list (#40: song 8 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#8 list:03:7615#40
+music,18,MUSIC_SLIDESHOW_TUNE_09,C,0,"in no code path: only the slide-show player list (#9); also hot-spot sound list (#41: song 9 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#9 list:03:7615#41
+music,19,MUSIC_JAMBO_NINTENDO_ALIAS_19,C,0,"same data as song 2A; only the slide-show player list (#10); also hot-spot sound list (#42: song 10 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#10 same:2A list:03:7615#42
+music,1A,MUSIC_TIMER_PRINT_OPTIONS_ALIAS_1A,C,0,"same data as song 0D; only the slide-show player list (#11); also hot-spot sound list (#43: song 11 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#11 same:08 same:0D list:03:7615#43
+music,1B,MUSIC_SLIDESHOW_TUNE_12,C,0,"in no code path: only the slide-show player list (#12); also hot-spot sound list (#44: song 12 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#12 list:03:7615#44
+music,1C,MUSIC_BEETHOVEN_5TH_INTRO,C,0,"same data as song 47; only the slide-show player list (#13); owner by ear (2026-10-18), on 47: Beethoven 5th symphony intro; also hot-spot sound list (#45: song 13 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#13 same:47 list:03:7615#45
+music,1D,MUSIC_SLIDESHOW_TUNE_14,C,0,"in no code path: only the slide-show player list (#14); also hot-spot sound list (#46: song 14 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#14 list:03:7615#46
+music,1E,MUSIC_TITLE_ALIAS_1E,C,0,"same data as song 01; only the slide-show player list (#15); also hot-spot sound list (#47: song 15 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#15 same:01 list:03:7615#47
+music,1F,MUSIC_HOTSPOT_SONG_16,C,0,"only the hot-spot sound list (#48): song 16 of the hot-spot sound picker, which shows entries 33-64 as songs 1-32 (HotSpotEd_ShowSound) and wraps at $40 (HotSpotEd_PickerScroll); the v8 corpus played it in an organic run, read by the sound driver (Snd_Tick_Tramp, 00:0333) in the picker state (Mode1A_State05_PickSound) (2026-11-15); owner by ear: ""from Space Fever (likely)""",list:03:7615#48 cov:org:1F:7EEE owner:snd_music_1F
+music,20,MUSIC_SLIDESHOW_INIT,C,1,"slide-show hub (Mode0D init); also slide-show player list (#18); also hot-spot sound list (#50: song 18 of the hot-spot sound picker, 2026-11-15)",07:6BA6 list:03:61FD#18 list:03:7615#50
 music,21,MUSIC_SLIDESHOW_PLAY,C,1,slide-show playback (Mode0D state 06),07:70C7 same:15
 music,22,MUSIC_SLIDESHOW_TUNE_01,C,0,in no code path: only the slide-show player list (#1),list:03:61FD#1
-music,23,MUSIC_ANIMATION_EDITOR,C,1,animation editor (Mode12 init); also slide-show player list (#19),03:4092 list:03:61FD#19
+music,23,MUSIC_ANIMATION_EDITOR,C,1,"animation editor (Mode12 init); also slide-show player list (#19); also hot-spot sound list (#51: song 19 of the hot-spot sound picker, 2026-11-15)",03:4092 list:03:61FD#19 list:03:7615#51
 music,24,MUSIC_STAMP,C,1,STAMP tool (Mode11 setup),04:5855
 music,25,MUSIC_PAINT,C,1,PAINT tool (Mode10 setup); also slide-show player list (#32),04:6181 list:03:61FD#32
 music,26,MUSIC_TRANSFER_SEND,C,1,"print engine transfer screen, send init (Mode1D state 02)",00:30C4
@@ -41,36 +41,36 @@ music,27,MUSIC_TRANSFER_PRINT,C,1,print job: waiting jingle while the printer pr
 music,28,MUSIC_WHO_ARE_YOU_RUNNING_FROM_1,C,0,"shared result / error screen, tune 1 of 4; owner by ear: ""Who are you running from 1"" (sure)",list:09:733E#1 owner:snd_music_28
 music,29,MUSIC_TOTAKA_TUNE,C,1,"shared result / error screen, tune 2 of 4; also the NG verdict of the fast calibration sanity check (all buttons except B)",0A:6B50 list:09:733E#2
 music,2A,MUSIC_JAMBO_NINTENDO,C,0,"shared result / error screen, tune 4 of 4; owner by ear: ""Jambo Nintendo !"" (sure)",list:09:733E#4 same:19 owner:snd_music_2A
-music,2B,MUSIC_BALL_GAME_OVER,C,1,BALL game over (Mode20 state 06),05:789B
+music,2B,MUSIC_BALL_GAME_OVER,C,1,"BALL game over (Mode20 state 06); also hot-spot sound list (#64: song 32 of the hot-spot sound picker, 2026-11-15)",05:789B list:03:7615#64
 music,2C,MUSIC_BALL_MENU,C,1,BALL menu (Mode20 state 00),05:755E
 music,2D,MUSIC_BALL_BGM_2,C,0,"BALL in-game music, second pick of the list at 05:781B; owner by ear: ""Ball BGM"" (sure)",list:05:781B#2 owner:snd_music_2D
-music,2E,MUSIC_BALL_BGM_1,C,0,"BALL in-game music, first pick of the list at 05:781B; also slide-show player list (#21)",list:03:61FD#21 list:05:781B#1
+music,2E,MUSIC_BALL_BGM_1,C,0,"BALL in-game music, first pick of the list at 05:781B; also slide-show player list (#21); also hot-spot sound list (#53: song 21 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#21 list:05:781B#1 list:03:7615#53
 music,2F,MUSIC_DJ_TITLE,C,1,D.J. title (Mode1F state 00),05:4086
 music,30,MUSIC_WHO_ARE_YOU_RUNNING_FROM_2,C,0,"shared result / error screen, tune 3 of 4; owner by ear: ""Who are you running from 2"" (sure)",list:09:733E#3 owner:snd_music_30
 music,31,MUSIC_SPACE_FEVER_START,C,1,Space Fever II start (Mode07 state 01),07:557C
 music,32,MUSIC_SPACE_FEVER_MAIN,C,2,Space Fever II main theme: restarted when a boss is gone (SpaceFever_Boss_EndA); owner by ear: main theme during play,07:62EB 07:62F8 owner:snd_music_32
-music,33,MUSIC_SLIDESHOW_TUNE_23,C,0,in no code path: only the slide-show player list (#23),list:03:61FD#23
-music,34,MUSIC_USER_SCREENS,C,1,USER section (Mode08 init); also slide-show player list (#22),09:4944 list:03:61FD#22
+music,33,MUSIC_SLIDESHOW_TUNE_23,C,0,"in no code path: only the slide-show player list (#23); also hot-spot sound list (#55: song 23 of the hot-spot sound picker, 2026-11-15)",list:03:61FD#23 list:03:7615#55
+music,34,MUSIC_USER_SCREENS,C,1,"USER section (Mode08 init); also slide-show player list (#22); also hot-spot sound list (#54: song 22 of the hot-spot sound picker, 2026-11-15)",09:4944 list:03:61FD#22 list:03:7615#54
 music,35,MUSIC_RECORD_HI_SCORE,C,2,record and hi-score screens (Mode08 states 0C and 0F),09:4C45 09:4CCB
 music,36,MUSIC_SPECIAL_MENU,C,1,Special menu (Mode03 init),07:5414
-music,37,MUSIC_COMPOSE,C,1,COMPOSE: split / fusion (Mode17 init); also slide-show player list (#24),06:4D70 list:03:61FD#24
-music,38,MUSIC_COMMENT_EDITOR,C,1,comment editor (CommentEditor_Sub0_Init); also slide-show player list (#25),09:4377 list:03:61FD#25
+music,37,MUSIC_COMPOSE,C,1,"COMPOSE: split / fusion (Mode17 init); also slide-show player list (#24); also hot-spot sound list (#56: song 24 of the hot-spot sound picker, 2026-11-15)",06:4D70 list:03:61FD#24 list:03:7615#56
+music,38,MUSIC_COMMENT_EDITOR,C,1,"comment editor (CommentEditor_Sub0_Init); also slide-show player list (#25); also hot-spot sound list (#57: song 25 of the hot-spot sound picker, 2026-11-15)",09:4377 list:03:61FD#25 list:03:7615#57
 music,39,MUSIC_VIEW_MENU,C,1,VIEW menu (Mode02 init),07:522C
-music,3A,MUSIC_ALBUM_VIEWER,C,4,"album viewer and print screen (Modes 09, 0A, 0F confirm, 1C); also slide-show player list (#26)",04:4B9C 04:6901 04:7583 08:4284 list:03:61FD#26
-music,3B,MUSIC_OWNER_CARD,C,2,owner card and its editor (Mode08 states 03 and 06); also slide-show player list (#27),09:4A52 09:4B73 list:03:61FD#27
-music,3C,MUSIC_RUN_PICK_CHARACTER,C,1,RUN! RUN! RUN!: pick a character (Mode21_PickCharacterTbl); also slide-show player list (#28),09:6099 list:03:61FD#28
+music,3A,MUSIC_ALBUM_VIEWER,C,4,"album viewer and print screen (Modes 09, 0A, 0F confirm, 1C); also slide-show player list (#26); also hot-spot sound list (#58: song 26 of the hot-spot sound picker, 2026-11-15)",04:4B9C 04:6901 04:7583 08:4284 list:03:61FD#26 list:03:7615#58
+music,3B,MUSIC_OWNER_CARD,C,2,"owner card and its editor (Mode08 states 03 and 06); also slide-show player list (#27); also hot-spot sound list (#59: song 27 of the hot-spot sound picker, 2026-11-15)",09:4A52 09:4B73 list:03:61FD#27 list:03:7615#59
+music,3C,MUSIC_RUN_PICK_CHARACTER,C,1,"RUN! RUN! RUN!: pick a character (Mode21_PickCharacterTbl); also slide-show player list (#28); also hot-spot sound list (#60: song 28 of the hot-spot sound picker, 2026-11-15)",09:6099 list:03:61FD#28 list:03:7615#60
 music,3D,MUSIC_RUN_COUNTDOWN,C,1,RUN! RUN! RUN!: countdown (Mode21 state 04),09:6236
 music,3E,MUSIC_RUN_READY_STEADY_GO,C,1,"RUN! RUN! RUN!: ready, steady, go (Mode21 state 05)",09:6346
-music,3F,MUSIC_RUN_RACE,C,2,"RUN! RUN! RUN!: the race (Mode21 state 06); also the end of the factory calibration (STORE / END)",09:639A 0A:6BD7
-music,40,MUSIC_RUN_RESULT_SETUP,C,2,"RUN! RUN! RUN!: result setup and screen (Mode21 states 0B, 0C); also slide-show player list (#29)",09:64D2 09:667E list:03:61FD#29
+music,3F,MUSIC_RUN_RACE,C,2,"RUN! RUN! RUN!: the race (Mode21 state 06); also the end of the factory calibration (STORE / END); also hot-spot sound list (#63: song 31 of the hot-spot sound picker, 2026-11-15)",09:639A 0A:6BD7 list:03:7615#63
+music,40,MUSIC_RUN_RESULT_SETUP,C,2,"RUN! RUN! RUN!: result setup and screen (Mode21 states 0B, 0C); also slide-show player list (#29); also hot-spot sound list (#61: song 29 of the hot-spot sound picker, 2026-11-15)",09:64D2 09:667E list:03:61FD#29 list:03:7615#61
 music,41,MUSIC_RUN_RESULT,C,1,RUN! RUN! RUN!: result screen (Mode21 state 0C); also slide-show player list (#7),09:6691 list:03:61FD#7
-music,42,MUSIC_SPACE_FEVER_BOSS,C,1,Space Fever II boss fight (SpaceFever_Boss_Init); also slide-show player list (#30),07:6127 list:03:61FD#30
+music,42,MUSIC_SPACE_FEVER_BOSS,C,1,"Space Fever II boss fight (SpaceFever_Boss_Init); also slide-show player list (#30); also hot-spot sound list (#62: song 30 of the hot-spot sound picker, 2026-11-15)",07:6127 list:03:61FD#30 list:03:7615#62
 music,43,MUSIC_RUN_RACE_SCENE,C,1,RUN! RUN! RUN!: race scene init (Mode21 state 02); also slide-show player list (#16),09:61E3 list:03:61FD#16
 music,44,MUSIC_LINK_EXCHANGE_SETUP,C,2,"link exchange setup (Mode0E states 06 and 0A); same data as 11, owner by ear (2026-10-13): credits, short",07:455F 07:46B0 same:11 owner:snd_music_44
 music,45,MUSIC_ERASE_JINGLE,C,1,photo erase (Mode0F_EraseJingleTiles),04:5047
 music,46,MUSIC_USER_MAP_SCROLL_OUT,C,1,USER map scroll-out (UserMap_ScrollOut),09:52A2
 music,47,MUSIC_BEETHOVEN_5TH_INTRO_ALIAS_47,C,0,"same data as song 1C, requested by nothing; owner by ear (2026-10-18): Beethoven 5th symphony intro",same:1C owner:snd_music_47 owner:snd_music_47_review
-music,48,MUSIC_ERROR_MESSAGE_INCOMPLETE,I,0,"no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete",owner:snd_music_48
+music,48,MUSIC_ERROR_MESSAGE_INCOMPLETE,I,0,"no caller and no list; owner by ear (2026-10-13): the error message tune, incomplete; final (2026-11-15): no request site, in none of the six sound lists (all 64 hot-spot entries included) and never read by the driver in an organic run of the v8 corpus",owner:snd_music_48
 music,FE,MUSIC_HOLD,C,1,"engine control: this frame runs effect 1 only, the song and effects 3 and 4 do not advance (Snd_Tick_MusicHold)",05:43EF
 music,FF,MUSIC_STOP,C,13,engine control: stop the song (Snd_RequestSong -> Snd_StopSong),03:6104 03:6416 03:6B17 03:75FB 03:7607
 sfx1,01,SFX1_KEY_LEFT_RIGHT,C,87,Left and Right in the shared key helper Snd_KeyBlips; many editors use it as their plain tick,00:2AAC 00:2AB7 03:4420 03:4429 03:48E7 list:03:7615#18
@@ -108,7 +108,7 @@ sfx1,20,SFX1_STEP_FAST,C,12,"direction keys on a counter or a two-way choice (lo
 sfx1,21,SFX1_STEP_VALUE,C,6,"direction keys stepping a photo or stock value, a toggle, a keyboard page",03:553D 03:5572 08:4540 09:4447 09:5C23
 sfx1,22,SFX1_DIRECTION_KEY,C,7,"direction keys in the animation tools menu, the print density and the comment editor",03:44BE 08:4462 09:4505 09:4516 09:4526
 sfx1,23,SFX1_BALL_POINT,C,1,BALL: a point is scored (Ball_AddPoint); same data as 2B,05:7D50 same:2B
-sfx1,24,SFX1_UNREQUESTED_24_FALLING_TONE,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II; the handlers (Sfx1_Init_24_LoopTone, Sfx1_Step_24_LoopTone) make a falling tone of about 910 Hz that retriggers every 21 frames and never stops by itself (BGB, 45 s), which fits no named moment",owner:snd_sfx1_24 owner:snd_sfx1_24_review
+sfx1,24,SFX1_UNREQUESTED_24_FALLING_TONE,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear: Space Fever II probably (2026-10-13), uncertain (2026-10-18); its neighbours 25-27 are Space Fever II; the handlers (Sfx1_Init_24_LoopTone, Sfx1_Step_24_LoopTone) make a falling tone of about 910 Hz that retriggers every 21 frames and never stops by itself (BGB, 45 s), which fits no named moment; final (2026-11-15): no request site, in none of the six sound lists (all 64 hot-spot entries included) and never run in an organic run of the v8 corpus",owner:snd_sfx1_24 owner:snd_sfx1_24_review
 sfx1,25,SFX1_SPACE_FEVER_START,C,1,Space Fever II: the game starts (SpaceFever_Wave0_Init),07:5A2F
 sfx1,26,SFX1_SPACE_FEVER_BOSS_DEATH,C,1,Space Fever II: the boss is destroyed (SpaceFever_BossHit); owner by ear: boss death; same data as 1E,07:675C same:1E owner:snd_sfx1_26
 sfx1,27,SFX1_SPACE_FEVER_WAVE0_END,C,1,"Space Fever II: the opening wave is over, wave state 2 follows (SpaceFever_Wave0_Play)",07:5ABF
@@ -138,10 +138,10 @@ sfx1,3E,SFX1_SPACE_FEVER_PLAYER_DEATH_JINGLE_ALIAS_3E,C,0,"same data as 3C, requ
 sfx3,01,SFX3_MAIN_MENU_SHOOT,C,3,main menu: the cursor goes to SHOOT (Mode00_State01_Item0_Shoot); also hot-spot sound list (#21),07:7293 07:72B2 07:72D4 list:03:7615#21
 sfx3,02,SFX3_MAIN_MENU_VIEW_ARCADE,C,4,"main menu: Mode00 items VIEW and Arcade, return to the upper page; link exchange bars half done; also hot-spot sound list (#22)",07:45AE 07:731D 07:73A9 07:777E list:03:7615#22
 sfx3,03,SFX3_SPACE_FEVER_BOSS_HIT,C,1,Space Fever II: the boss is hit (SpaceFever_BossHit),07:6749
-sfx3,04,SFX3_UNREQUESTED_04,I,0,no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear (2026-10-13): unsure; no answer on 2026-10-18,owner:snd_sfx3_04
+sfx3,04,SFX3_UNREQUESTED_04,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); owner by ear (2026-10-13): unsure; no answer on 2026-10-18; final (2026-11-15): no request site, in none of the six sound lists and never run in an organic run of the v8 corpus",owner:snd_sfx3_04
 sfx3,05,SFX3_SHUTTER_SOUND_3,C,0,third of the four shutter sounds (list at 06:7845); same data as 0A; also hot-spot sound list (#23),list:03:7615#23 list:06:7845#3 same:0A
 sfx3,06,SFX3_SHUTTER_SOUND_2,C,0,second of the four shutter sounds (list at 06:7845); also hot-spot sound list (#24),list:03:7615#24 list:06:7845#2
-sfx3,07,SFX3_UNREQUESTED_07,I,0,no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); no answer from the owner,
+sfx3,07,SFX3_UNREQUESTED_07,I,0,"no caller and no list: named by its channel and id only (owner rule 2026-10-26: no ear review); no answer from the owner; final (2026-11-15): no request site, in none of the six sound lists and never run in an organic run of the v8 corpus",
 sfx3,08,SFX3_DELETE_DIALOG_FIRST,C,1,hot-spot editor delete dialog: A on the first choice (Mode1A_State0A_DeleteDialog),03:6EF3
 sfx3,09,SFX3_DELETE_DIALOG_SECOND,C,1,hot-spot editor delete dialog: A on the second choice,03:6F2B
 sfx3,0A,SFX3_SHUTTER_SOUND_3_ALIAS_0A,C,0,"same data as 05, requested by nothing",same:05
