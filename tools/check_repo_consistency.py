@@ -519,10 +519,11 @@ if A.rom_kitty:
         else:
             ok('kitty', 'doubts list sym_unconclusive_kitty fresh')
             _dg = collections.Counter(r['group'] for r in csv.DictReader(open(KD + 'disasm/sym_unconclusive_kitty.csv')))
-            mm = re.search(r'Doubts list \([^)]*\)\.\*\* (\d+) names: (\d+) in modes reached only by forcing, (\d+) in states the runs did not reach, (\d+) settled as unused', _untag(open(KD + 'README.md').read()))   # need= the doubts bullet
-            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the doubts list (need=Doubts list (...).** N names: a in modes reached only by forcing, b in states the runs did not reach, c settled as unused)')
-            elif tuple(int(x) for x in mm.groups()) != (sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']):
-                bad('kitty', 'roms/hello_kitty/README.md: doubts quoted %s, the list gives %d / %d / %d / %d' % (mm.group(0)[-90:], sum(_dg.values()), _dg['forced only'], _dg['not run'], _dg['unused']))
+            _du = sum(r['group'] == 'unused' for r in csv.DictReader(open(KD + 'disasm/sym_settled_unused_kitty.csv')))   # proven unused: out of the list, as in the Japanese ROM
+            mm = re.search(r'Doubts list \([^)]*\)\.\*\* (\d+) names: (\d+) in modes reached only by forcing, (\d+) in states the runs did not reach; not counted: (\d+) settled as unused', _untag(open(KD + 'README.md').read()))   # need= the doubts bullet
+            if not mm: bad('kitty', 'roms/hello_kitty/README.md no longer quotes the doubts list (need=Doubts list (...).** N names: a in modes reached only by forcing, b in states the runs did not reach; not counted: c settled as unused)')
+            elif tuple(int(x) for x in mm.groups()) != (sum(_dg.values()), _dg['forced only'], _dg['not run'], _du):
+                bad('kitty', 'roms/hello_kitty/README.md: doubts quoted %s, the list gives %d / %d / %d / %d' % (mm.group(0)[-90:], sum(_dg.values()), _dg['forced only'], _dg['not run'], _du))
         # the reachability picture (tools/reach_map.py --tag kitty): redrawn and compared, its counts quoted in the Kitty README
         # the classification of the red bytes (tools/red_classify.py, roadmap item 4): regenerated and compared, its total quoted in the README
         rc = _run('tools/red_classify.py', '--tag', 'kitty', A.rom_kitty, '--out', os.path.join(tk, 'red.csv'))
