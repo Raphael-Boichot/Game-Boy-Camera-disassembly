@@ -12,7 +12,8 @@ Gfx_23_4000_Mode11_StrawberryChannel_State07::
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_23_4E00_Mode10_ScratchCard_State02::
     INCBIN "data/bank_23/Gfx_23_4E00_Mode10_ScratchCard_State02.2bpp" ; $4E00, 3408 bytes
-; I: named by the code of Mode03_State0A (05:6639); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; C: named by the code of Mode03_State0A (05:6639); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
+; album_even); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_23_5B50_Mode03_ViewAlbum_State0A::
     INCBIN "data/bank_23/Map_23_5B50_Mode03_ViewAlbum_State0A.tilemap" ; $5B50, 1024 bytes
 ; C: named by the code of Mode03_State0A (05:664F); read in the runs by Copy_DEtoHL; first read on the screen

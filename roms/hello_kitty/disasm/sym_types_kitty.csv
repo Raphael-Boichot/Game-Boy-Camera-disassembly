@@ -176,7 +176,7 @@ bank,start,end,type,width,note
 02,7345,734B,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E"
 02,734F,735F,data,,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E"
 02,75F0,761E,data,,"read in the core runs by 00:2127, 00:2087, 00:1F1E, 00:2136 ..."
-02,769E,76AD,data,,"read in the core runs by 00:1FF8, 00:2127, 00:2136"
+02,7686,76B7,data,,"read in the core runs by 00:2127, 00:2136, 00:1FF8, 00:1F7F ..."
 02,76CF,76D3,data,,"read in the core runs by 00:2127, 00:2136"
 02,76EB,76F3,data,,"read in the core runs by 00:2127, 00:2136"
 02,7725,7749,data,,"read in the core runs by 00:2127, 00:2136"
@@ -209,9 +209,8 @@ bank,start,end,type,width,note
 03,52E0,52F0,data,,read in the core runs by 00:21A7
 03,5358,5BF0,data,,read in the core runs by 00:21A7
 03,5D3C,60C4,data,,read in the core runs by 00:21A7
-03,60E4,61E0,data,,read in the core runs by 00:21A7
-03,62DC,62FC,data,,read in the core runs by 00:21A7
-03,631C,633C,data,,read in the core runs by 00:21A7
+03,60E4,6218,data,,read in the core runs by 00:21A7
+03,62DC,633C,data,,read in the core runs by 00:21A7
 03,637C,639C,data,,read in the core runs by 00:21A7
 03,63FC,641C,data,,read in the core runs by 00:21A7
 03,645C,6524,data,,read in the core runs by 00:21A7

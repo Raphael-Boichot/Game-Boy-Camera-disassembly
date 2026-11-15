@@ -3875,9 +3875,6 @@ Snd_0F_572F_Mode00_BootAndTitle_State00::
     db $41, $9c, $57, $98, $57, $00, $00, $00, $00, $a0, $57, $00, $00, $a7, $57, $00
     db $00, $9d, $81, $00, $80, $a5, $01, $00, $9d, $a2, $00, $80, $a5, $01, $00
 
-; I: never read in the runs, but Snd_0F_572F_Mode00_BootAndTitle_State00 points to it (the word at 0F:5739): 43 bytes
-; (0F:57AE-57D8) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Snd_0F_57AE_EntryOf572F::
     db $00, $94, $41, $c9, $57, $b9, $57, $00, $00, $00, $00, $bf, $57, $ff, $ff, $b9
     db $57, $9d, $41, $00, $80, $a1, $32, $01, $01, $3a, $00, $1e, $58, $ff, $ff, $e4
     db $57, $9d, $31, $00, $80, $a1, $01, $01, $1e, $22, $00
@@ -3885,29 +3882,12 @@ Snd_0F_57AE_EntryOf572F::
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
 ; Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_57D9_Mode04_PlayMenu_State01::
-    INCBIN "data/bank_0f/Snd_0F_57D9_Mode04_PlayMenu_State01.bin" ; $57D9, 568 bytes
-; I: never read in the runs, but Snd_0F_572F_Mode00_BootAndTitle_State00 points to it (the word at 0F:5737): 143 bytes
-; (0F:5A11-5A9F) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Snd_0F_5A11_EntryOf572F::
-    db $00, $84, $41, $1c, $5a, $22, $5a, $28, $5a, $00, $00, $2e, $5a, $ff, $ff, $1c
-    db $5a, $54, $5a, $ff, $ff, $22, $5a, $7a, $5a, $ff, $ff, $28, $5a, $9d, $a1, $00
-    db $c0, $a2, $02, $01, $30, $01, $2c, $01, $28, $01, $24, $01, $28, $01, $2c, $01
-    db $30, $01, $02, $01, $30, $01, $2c, $01, $28, $01, $24, $24, $01, $24, $2e, $2e
-    db $2e, $01, $00, $9d, $72, $00, $c0, $a2, $1a, $52, $18, $52, $14, $52, $10, $52
-    db $0c, $54, $10, $54, $14, $54, $18, $54, $1a, $52, $18, $52, $14, $52, $10, $52
-    db $0c, $0c, $01, $0c, $16, $16, $16, $01, $00, $9d, $22, $41, $20, $a2, $32, $70
-    db $01, $58, $44, $70, $01, $58, $01, $5c, $40, $5c, $01, $74, $01, $5c, $01, $70
-    db $48, $58, $01, $70, $01, $58, $3c, $01, $01, $3c, $01, $2e, $2e, $01, $00
-
+    INCBIN "data/bank_0f/Snd_0F_57D9_Mode04_PlayMenu_State01.bin" ; $57D9, 711 bytes
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
 ; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
 ; tools/kitty_layout_kinds.py
 Snd_0F_5AA0_Mode05_StampWindow_State06::
-    INCBIN "data/bank_0f/Snd_0F_5AA0_Mode05_StampWindow_State06.bin" ; $5AA0, 3313 bytes
-; I: never read in the runs, but Snd_0F_572F_Mode00_BootAndTitle_State00 points to it (the word at 0F:5775): 497 bytes
-; (0F:6791-6981) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Snd_0F_6791_EntryOf572F::
-    INCBIN "data/bank_0f/Snd_0F_6791_EntryOf572F.bin" ; $6791, 497 bytes
+    INCBIN "data/bank_0f/Snd_0F_5AA0_Mode05_StampWindow_State06.bin" ; $5AA0, 3810 bytes
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
 ; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
 ; tools/kitty_layout_kinds.py
@@ -3935,18 +3915,10 @@ Snd_0F_6CAD_Snd_Trk_FetchByte::
 Leftover_0F_6CC2::
     INCBIN "data/bank_0f/Leftover_0F_6CC2.bin" ; $6CC2, 303 bytes
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
-; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
-; tools/kitty_layout_kinds.py
+; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint
+; (trace/bgb_reads_kitty.csv: exchange); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_6DF1_Mode11_StrawberryChannel_State07::
-    INCBIN "data/bank_0f/Snd_0F_6DF1_Mode11_StrawberryChannel_State07.bin" ; $6DF1, 3237 bytes
-; I: never read in the runs, but Snd_0F_572F_Mode00_BootAndTitle_State00 points to it (the word at 0F:5773): 49 bytes
-; (0F:7A96-7AC6) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Snd_0F_7A96_EntryOf572F::
-    db $00, $94, $41, $00, $00, $a1, $7a, $00, $00, $00, $00, $a7, $7a, $ff, $ff, $a1
-    db $7a, $9d, $93, $00, $80, $a8, $3c, $a2, $3c, $44, $4e, $a4, $4a, $a3, $44, $3c
-    db $a7, $3a, $a2, $3c, $40, $a7, $3a, $a3, $36, $a2, $32, $36, $a7, $3c, $a2, $01
-    db $00
-
+    INCBIN "data/bank_0f/Snd_0F_6DF1_Mode11_StrawberryChannel_State07.bin" ; $6DF1, 3286 bytes
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen
 ; Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
 ; tools/kitty_layout_kinds.py
@@ -3980,38 +3952,28 @@ Snd_0F_7D71_Snd_Trk_FetchByte::
     db $54, $3a, $00, $9d, $93, $00, $80, $a2, $4a, $a1, $4a, $3c, $44, $48, $a4, $4a
     db $00, $9d, $53, $00, $80, $a1, $44, $44, $44, $a6, $4a, $a2, $4e, $a3, $52, $a2
     db $4e, $4a, $00, $9d, $22, $41, $20, $a3, $3a, $a2, $4a, $a2, $40, $a7, $01, $00
-    db $9d, $42, $41, $20, $a5, $01, $00
-
-; I: never read in the runs, but Snd_0F_572F_Mode00_BootAndTitle_State00 points to it (the word at 0F:5785): 91 bytes
-; (0F:7DE8-7E42) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Snd_0F_7DE8_EntryOf572F::
-    db $00, $94, $41, $f3, $7d, $fb, $7d, $03, $7e, $00, $00, $0b, $7e, $1f, $7e, $ff
-    db $ff, $f5, $7d, $43, $7e, $57, $7e, $ff, $ff, $fd, $7d, $6d, $7e, $7f, $7e, $ff
-    db $ff, $05, $7e, $9d, $93, $00, $80, $a3, $3a, $a2, $3a, $3a, $3c, $a1, $40, $44
-    db $a2, $48, $01, $48, $a8, $4a, $00, $9d, $53, $00, $80, $a2, $3a, $3c, $a3, $40
-    db $4a, $a2, $48, $44, $40, $3c
+    db $9d, $42, $41, $20, $a5, $01, $00, $00, $94, $41, $f3, $7d, $fb, $7d, $03, $7e
+    db $00, $00, $0b, $7e, $1f, $7e, $ff, $ff, $f5, $7d, $43, $7e, $57, $7e, $ff, $ff
+    db $fd, $7d, $6d, $7e, $7f, $7e, $ff, $ff, $05, $7e, $9d, $93, $00, $80, $a3, $3a
+    db $a2, $3a, $3a, $3c, $a1, $40, $44, $a2, $48, $01, $48, $a8, $4a, $00, $9d, $53
+    db $00, $80, $a2, $3a, $3c, $a3, $40, $4a, $a2, $48, $44, $40, $3c
 
     db $a7, $3a, $a2, $3c, $a3, $40, $a2, $4a, $4e, $a3, $52, $4a, $a2, $40, $a7, $4e
     db $a4, $4a, $a3, $01, $00
 
-; I: leftover: 70 bytes (0F:7E43-7E88) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_0F_7E43::
+; C: read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen
+; Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+Snd_0F_7E43_Mode12_SlideShow_State01::
     db $9d, $93, $00, $80, $a2, $32, $32, $32, $32, $36, $a1, $32, $3c, $a2, $40, $01
     db $40, $a8, $40, $00, $9d, $53, $00, $80, $a5, $01, $01, $a2, $40, $44, $a3, $48
     db $40, $a2, $32, $a7, $44, $a4, $40, $a3, $01, $00, $9d, $42, $41, $20, $a4, $01
     db $a3, $01, $a2, $4e, $01, $4e, $a2, $52, $01, $a4, $01, $00, $9d, $42, $41, $20
-    db $a5, $01, $01, $01, $01, $00
-
-; C: read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen
-; Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
-; tools/kitty_layout_kinds.py; the rest of Data_0F_7E43 after a leftover stretch
-Snd_0F_7E89_Mode12_SlideShow_State01::
-    db $00, $94, $41, $00, $00, $94, $7e, $00, $00, $00, $00, $9a, $7e, $ff, $ff, $94
-    db $7e, $9d, $e1, $00, $80, $a2, $4a, $a1, $4a, $a2, $48, $44, $40, $3c, $3a, $36
-    db $a3, $32, $a2, $32, $a4, $32, $a3, $01, $00, $00, $94, $41, $00, $00, $bd, $7e
-    db $00, $00, $00, $00, $c3, $7e, $ff, $ff, $bd, $7e, $9d, $94, $00, $80, $a3, $52
-    db $4a, $a7, $4e, $a2, $58, $52, $4e, $4a, $a4, $4e, $a2, $01, $a7, $48, $a2, $48
-    db $48, $4a, $4e, $48, $a5, $4c, $00
+    db $a5, $01, $01, $01, $01, $00, $00, $94, $41, $00, $00, $94, $7e, $00, $00, $00
+    db $00, $9a, $7e, $ff, $ff, $94, $7e, $9d, $e1, $00, $80, $a2, $4a, $a1, $4a, $a2
+    db $48, $44, $40, $3c, $3a, $36, $a3, $32, $a2, $32, $a4, $32, $a3, $01, $00, $00
+    db $94, $41, $00, $00, $bd, $7e, $00, $00, $00, $00, $c3, $7e, $ff, $ff, $bd, $7e
+    db $9d, $94, $00, $80, $a3, $52, $4a, $a7, $4e, $a2, $58, $52, $4e, $4a, $a4, $4e
+    db $a2, $01, $a7, $48, $a2, $48, $48, $4a, $4e, $48, $a5, $4c, $00
 
     ; padding
     ds $110, $00

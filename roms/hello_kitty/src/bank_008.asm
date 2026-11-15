@@ -59,7 +59,8 @@ Sgb_PalTrnData::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $ff
 
-; I: kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
+; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
 Gfx_08_4247_Sgb_VramTransferInline::
     db $0c, $3f, $dc, $df, $bf, $df, $3f, $ff, $3e, $f3, $3c, $fd, $02, $fd, $06, $0c
     db $0c, $1c, $1c, $9f, $9f, $1f, $1f, $3e, $3e, $30, $30, $00, $00, $04, $04, $ff
@@ -419,7 +420,8 @@ Gfx_08_4247_Sgb_VramTransferInline::
 
     db $a1, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; I: kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
+; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb); kind MAP from the evidence of
+; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
 Map_08_6226_Sgb_VramTransferInline::
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
@@ -586,7 +588,8 @@ Map_08_6226_Sgb_VramTransferInline::
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
 
-; I: kind PALT from the evidence of tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
+; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb); kind PALT from the evidence of
+; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
 Pal_08_6A26_Sgb_VramTransferInline_Palettes::
     db $e5, $62, $1f, $7f, $7f, $7f, $5f, $29, $41, $7c, $de, $79, $de, $7a, $3e, $7b
     db $7f, $0f, $7f, $3b, $df, $4f, $1d, $13, $7d, $37, $4a, $29, $f7, $5e, $ff, $7f

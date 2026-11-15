@@ -590,8 +590,8 @@ Gfx_0D_5F00_Mode05_StampWindow_State06::
     ; padding
     ds $40, $00
 
-; I: named by the code of Mode03_State0A, Print_LoadFrameGfx (05:662F 01:697A); kind T_UI from the evidence of
-; tools/kitty_layout_kinds.py
+; C: named by the code of Mode03_State0A, Print_LoadFrameGfx (05:662F 01:697A); read in BGB by a read watchpoint
+; (trace/bgb_reads_kitty.csv: album_even); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_6000_Mode03_ViewAlbum_State0A::
     INCBIN "data/bank_0d/Gfx_0D_6000_Mode03_ViewAlbum_State0A.2bpp" ; $6000, 1024 bytes
 ; C: named by the code of Mode03_State0A, Print_LoadFrameGfx (05:6645 01:6986); read in the runs by Copy_DEtoHL; first

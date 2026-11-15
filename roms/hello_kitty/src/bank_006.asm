@@ -328,33 +328,9 @@ Mode19_StateTable::
     db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $ff
 
 ; C: read in the runs by Mode14_State01; first read on the screen Mode14_MessageScreen_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full)
 Mode14_State01_Tbl42CD::
-    db $9f, $5d, $a0, $68, $9d, $7e, $84, $64, $18, $86, $fd, $3f, $2f, $10, $fe, $2e
-    db $86, $00, $0f, $28, $0b, $01, $22, $18, $15, $86, $fd, $09, $02, $05, $2f, $fe
-    db $0b, $12, $1f, $1e, $0b, $4e, $02, $27, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $ff, $9f, $5d, $a0, $68, $9d, $7e, $84, $64, $19, $86, $11, $14, $32, $4b, $12
-    db $01, $1e, $0c, $05, $7c, $86, $86, $86, $9f, $5d, $a0, $68, $9d, $7e, $84, $64
-    db $18, $86, $fd, $3f, $2f, $35, $2f, $fe, $32, $86, $19, $01, $4b, $12, $01, $1e
-    db $0c, $05, $7c, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $ff, $fd, $9d, $7e, $84
-    db $68, $60, $a4, $7f, $fe, $32, $86, $11, $1e, $4b, $12, $01, $1e, $0d, $2f, $05
-    db $7c, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $ff, $9f, $5d, $a0, $68, $9d, $7e
-    db $84, $64, $18, $86, $fd, $3f, $2f, $35, $2f, $fe, $2e, $86, $01, $2b, $14, $04
-    db $0b, $12, $1f, $12, $17, $31, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $ff
-
-; I: never read in the runs, but Mode14_State01_Tbl43FF points to it (the word at 06:444C): 67 bytes (06:43BC-43FE)
-; that no run reads or executes and that no code names (owner rule 2026-11-11)
-Mode14_State01_Tbl43FF_Entry43BC::
-    db $04, $13, $22, $3c, $10, $18, $86, $55, $7f, $96, $75, $15, $86, $fd, $00, $06
-    db $fe, $32, $86, $00, $29, $1e, $0d, $2f, $27, $86, $86, $86, $86, $55, $7f, $96
-    db $75, $15, $fd, $00, $06, $fe, $2e, $86, $11, $07, $4b, $12, $22, $28, $4b, $12
-    db $17, $31, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $ff
-
+    INCBIN "data/bank_06/Mode14_State01_Tbl42CD.bin" ; $42CD, 306 bytes
 ; C: read in the runs by Mode14_State01, Mode14_State00; first read on the screen Mode14_MessageScreen_State01
 ; (trace/read_screens_kitty.npz)
 Mode14_State01_Tbl43FF::
@@ -3704,7 +3680,7 @@ Mode0C_StateTable::
     db $89, $a0, $00, $70, $74, $af, $4c, $00, $00, $00
 
 ; C: read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode05_StampWindow_State03
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)
 KeyPrompt_LoadSounds_Tbl5DFA::
     db $17, $01, $16, $01, $3a, $01, $00, $5d, $10, $00, $86, $40, $01, $50, $5e, $c7
     db $4c, $00, $59, $10, $00, $88, $a0, $00, $30, $74, $cd, $4c, $00, $55, $10, $00
@@ -3717,12 +3693,13 @@ KeyPrompt_LoadSounds_Tbl5DFA::
     db $a0, $00, $30, $74, $e5, $4c, $00, $56, $10, $00, $89, $a0, $00, $70, $74, $eb
     db $4c, $00, $00, $00
 
-; I: never read in the runs, but KeyPrompt_LoadSounds_Tbl5F7F points to it (the word at 06:5F89): 42 bytes
-; (06:5E8E-5EB7) that no run reads or executes and that no code names (owner rule 2026-11-11)
-KeyPrompt_LoadSounds_Tbl5F7F_Entry5E8E::
-    db $29, $01, $37, $01, $00, $00, $00, $54, $10, $00, $88, $a0, $00, $20, $20, $79
-    db $4c, $00, $58, $10, $00, $88, $a0, $00, $30, $74, $f1, $4c, $00, $55, $10, $00
-    db $89, $a0, $00, $70, $74, $f7, $4c, $00, $00, $00
+    db $29, $01, $37, $01, $00, $00
+
+; I: leftover: 36 bytes (06:5E94-5EB7) that no run reads or executes and that no code names (owner rule 2026-11-11)
+Leftover_06_5E94::
+    db $00, $54, $10, $00, $88, $a0, $00, $20, $20, $79, $4c, $00, $58, $10, $00, $88
+    db $a0, $00, $30, $74, $f1, $4c, $00, $55, $10, $00, $89, $a0, $00, $70, $74, $f7
+    db $4c, $00, $00, $00
 
 ; C: read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode03_ViewAlbum_State0D
 ; (trace/read_screens_kitty.npz)
@@ -4839,11 +4816,11 @@ jr_006_6839:
     ld a, MUSIC_EXCHANGE_COMMUNICATING            ; $688C
     ld [wSndMusicReq], a                          ; $688E
     pop af                                        ; $6891
-    ld de, Leftover_00_1E20 + $94                 ; $6892
+    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $109 ; $6892
     call Object_Create                            ; $6895
     ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $70 ; $6898
     call Object_Create                            ; $689B
-    ld de, Leftover_00_1E20 + $24                 ; $689E
+    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $99 ; $689E
     call Object_Create                            ; $68A1
     ld a, [wMode07_State02_D9FD]                  ; $68A4
     and a                                         ; $68A7
@@ -5070,11 +5047,11 @@ jr_006_69e7:
     ld a, MUSIC_EXCHANGE_COMMUNICATING            ; $6A35
     ld [wSndMusicReq], a                          ; $6A37
     pop af                                        ; $6A3A
-    ld de, Leftover_00_1E20 + $94                 ; $6A3B
+    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $109 ; $6A3B
     call Object_Create                            ; $6A3E
     ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $70 ; $6A41
     call Object_Create                            ; $6A44
-    ld de, Leftover_00_1E20 + $24                 ; $6A47
+    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $99 ; $6A47
     call Object_Create                            ; $6A4A
     ret                                           ; $6A4D
 

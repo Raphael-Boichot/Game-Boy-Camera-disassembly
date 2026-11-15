@@ -63,6 +63,8 @@ bank,start,end,class,evidence,verdict
 02,73DF,73E9,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
 02,73EE,73F6,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
 02,73FF,73FF,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
+02,7437,743D,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
+02,7445,744B,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
 02,7465,746F,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
 02,74D0,74D6,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"
 02,77A6,77B2,PRINTER,I,"a branch on the printer replies or on a print frame descriptor that the prints did not produce"

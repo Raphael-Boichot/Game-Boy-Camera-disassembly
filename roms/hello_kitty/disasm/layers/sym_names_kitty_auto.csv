@@ -176,7 +176,7 @@ bank,addr,name,conf,note,source
 02,7345,Data_02_7345,C,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E",kitty_types
 02,734F,Data_02_734F,C,"read in the core runs by 00:2087, 00:2127, 00:1F3A, 00:1F1E",kitty_types
 02,75F0,Data_02_75F0,C,"read in the core runs by 00:2127, 00:2087, 00:1F1E, 00:2136 ...",kitty_types
-02,769E,Data_02_769E,C,"read in the core runs by 00:1FF8, 00:2127, 00:2136",kitty_types
+02,7686,Data_02_7686,C,"read in the core runs by 00:2127, 00:2136, 00:1FF8, 00:1F7F ...",kitty_types
 02,76CF,Data_02_76CF,C,"read in the core runs by 00:2127, 00:2136",kitty_types
 02,76EB,Data_02_76EB,C,"read in the core runs by 00:2127, 00:2136",kitty_types
 02,7725,Data_02_7725,C,"read in the core runs by 00:2127, 00:2136",kitty_types
@@ -211,7 +211,6 @@ bank,addr,name,conf,note,source
 03,5D3C,Data_03_5D3C,C,read in the core runs by 00:21A7,kitty_types
 03,60E4,Data_03_60E4,C,read in the core runs by 00:21A7,kitty_types
 03,62DC,Data_03_62DC,C,read in the core runs by 00:21A7,kitty_types
-03,631C,Data_03_631C,C,read in the core runs by 00:21A7,kitty_types
 03,637C,Data_03_637C,C,read in the core runs by 00:21A7,kitty_types
 03,63FC,Data_03_63FC,C,read in the core runs by 00:21A7,kitty_types
 03,645C,Data_03_645C,C,read in the core runs by 00:21A7,kitty_types

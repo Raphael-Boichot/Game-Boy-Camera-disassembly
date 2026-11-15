@@ -23,12 +23,10 @@ ObjScript_02_4008_Mode0F_FifteenPuzzle_State0A::
     db $10, $80, $38, $48, $10, $80, $40, $48, $1e, $1f, $80, $40, $10, $80, $48, $48
     db $10, $80, $4c, $48, $1e, $1f, $94, $40, $0a, $80, $e0, $48, $1e, $1f, $a0, $40
     db $10, $80, $50, $48, $1e, $1f, $a8, $40, $10, $80, $40, $49, $1e, $1f, $b0, $40
-    db $10, $80, $68, $49
+    db $10, $80, $68, $49, $1e, $1f, $b8, $40, $10, $80, $a8, $49, $1e, $1f, $c0, $40
 
-; I: leftover: 84 bytes (02:40BC-410F) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_40BC::
-    db $1e, $1f, $b8, $40, $10, $80, $a8, $49, $1e, $1f, $c0, $40
-
+; I: leftover: 72 bytes (02:40C8-410F) that no run reads or executes and that no code names (owner rule 2026-11-11)
+Leftover_02_40C8::
     db $0a, $80, $f0, $48, $1e, $1f, $c8, $40, $0a, $80, $f8, $48, $1e, $1f, $d0, $40
     db $0a, $80, $04, $49, $1e, $1f, $d8, $40, $0a, $80, $0c, $49, $1e, $1f, $e0, $40
     db $0a, $80, $18, $49, $1e, $1f, $e8, $40, $0a, $80, $24, $49, $1e, $1f, $f0, $40
@@ -136,9 +134,41 @@ ObjScript_02_46A0_Mode07_Exchange_State02::
     db $10, $80, $14, $65, $26, $80, $1c, $65, $10, $80, $14, $65, $0d, $80, $0c, $65
     db $09, $80, $04, $65, $1e, $1f, $e4, $46
 
-; I: leftover: 292 bytes (02:4728-484B) that no run reads or executes and that no code names (owner rule 2026-11-11)
+; I: leftover: 164 bytes (02:4728-47CB) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_02_4728::
-    INCBIN "data/bank_02/Leftover_02_4728.bin" ; $4728, 292 bytes
+    db $05, $80, $6c, $65, $07, $80, $b4, $65, $11, $80, $fc, $65, $07, $80, $b4, $65
+    db $05, $80, $6c, $65, $1e, $1f, $28, $47, $05, $80, $40, $66, $07, $80, $88, $66
+    db $11, $80, $d0, $66, $07, $80, $88, $66, $05, $80, $40, $66, $1e, $1f, $40, $47
+    db $10, $80, $24, $65, $1e, $1f, $58, $47, $10, $80, $14, $67, $1e, $1f, $60, $47
+    db $10, $80, $5c, $67, $1e, $1f, $68, $47, $10, $80, $a4, $67, $10, $80, $24, $65
+    db $1e, $1f, $70, $47, $10, $80, $ec, $67, $1e, $1f, $7c, $47, $0c, $80, $5c, $68
+    db $80, $80, $cc, $68, $1e, $1f, $84, $47, $05, $80, $6c, $69, $0a, $80, $cc, $69
+    db $05, $80, $6c, $69, $0a, $80, $2c, $6a, $1e, $1f, $90, $47, $05, $80, $94, $6a
+    db $0a, $80, $f4, $6a, $05, $80, $94, $6a, $0a, $80, $54, $6b, $1e, $1f, $a4, $47
+    db $07, $80, $dc, $6b, $05, $80, $cc, $6b, $0a, $80, $bc, $6b, $06, $80, $cc, $6b
+    db $1e, $1f, $b8, $47
+
+; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_02_46A0 after a leftover
+; stretch
+Src_02_47CC_Mode07_Exchange_State02::
+    INCBIN "data/bank_02/Src_02_47CC_Mode07_Exchange_State02.bin" ; $47CC, 8 bytes
+; I: leftover: 60 bytes (02:47D4-480F) that no run reads or executes and that no code names (owner rule 2026-11-11)
+Leftover_02_47D4::
+    db $03, $80, $24, $6c, $05, $80, $ec, $6b, $03, $80, $24, $6c, $1e, $1f, $d4, $47
+    db $03, $80, $24, $6c, $1e, $1f, $e4, $47, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
+    db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
+    db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $1e, $1f, $ec, $47
+
+; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_02_46A0 after a leftover
+; stretch
+Src_02_4810_Mode07_Exchange_State02::
+    INCBIN "data/bank_02/Src_02_4810_Mode07_Exchange_State02.bin" ; $4810, 20 bytes
+; I: leftover: 40 bytes (02:4824-484B) that no run reads or executes and that no code names (owner rule 2026-11-11)
+Leftover_02_4824::
+    db $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80, $d4, $6d, $50, $80, $e4, $6c
+    db $1e, $1f, $24, $48, $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80, $d4, $6d
+    db $50, $80, $34, $6d, $1e, $1f, $38, $48
+
 ; C: named by the code of AlbumText_ObjCursor (02:7816); read in the runs by Object_RunAll, ObjCmd_Jump; first read on
 ; the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
@@ -2104,26 +2134,16 @@ ObjScript_02_584A_KittHost_YesNoCursor::
     db $01, $00, $1e, $1f, $60, $40, $68, $58, $b9, $7f, $b2, $4d, $50, $58, $ff, $ff
     db $01, $01, $50, $61, $50, $68, $ff, $ff, $00, $00, $61, $61, $65, $1f, $86, $58
     db $ee, $1e, $0d, $00, $f8, $1e, $19, $00, $1e, $1f, $74, $58, $96, $58, $b9, $7f
-    db $b2, $4d
-
-; I: leftover: 84 bytes (02:58AC-58FF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_58AC::
-    db $50, $58, $ff, $ff, $02, $01, $20, $ff, $50, $60, $ff, $ff, $00, $02, $31, $ff
-    db $50, $68, $ff, $ff, $01, $00, $42, $ff, $65, $1f, $ac, $58, $ee, $1e, $19, $00
-    db $f8, $1e, $19, $00, $1e, $1f, $74, $58, $c4, $58, $b9, $7f, $b2, $4d, $50, $58
-    db $ff, $ff, $01, $01, $20, $ff, $50, $68, $ff, $ff, $00, $00, $42, $ff, $65, $1f
-    db $da, $58, $ee, $1e, $19, $00, $f8, $1e, $19, $00, $1e, $1f, $74, $58, $ea, $58
-    db $b9, $7f, $b2, $4d
-
-; C: read in the runs by KittHost_YesNoCursor, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode0E_KittGamesHost_State0A (trace/read_screens_kitty.npz); kind OAM from the evidence of
-; tools/kitty_layout_kinds.py; the rest of Data_02_584A after a leftover stretch
-ObjScript_02_5900_Mode0E_KittGamesHost_State0A::
-    db $50, $58, $ff, $ff, $01, $01, $20, $ff, $50, $68, $ff, $ff, $00, $00, $31, $ff
-    db $65, $1f, $00, $59, $ee, $1e, $19, $00, $f8, $1e, $19, $00, $1e, $1f, $74, $58
-    db $10, $59, $b9, $7f, $b2, $4d, $50, $58, $ff, $ff, $ff, $ff, $20, $ff, $65, $1f
-    db $26, $59, $ee, $1e, $19, $00, $f8, $1e, $19, $00, $1e, $1f, $74, $58, $2e, $59
-    db $b9, $7f, $b2, $4d
+    db $b2, $4d, $50, $58, $ff, $ff, $02, $01, $20, $ff, $50, $60, $ff, $ff, $00, $02
+    db $31, $ff, $50, $68, $ff, $ff, $01, $00, $42, $ff, $65, $1f, $ac, $58, $ee, $1e
+    db $19, $00, $f8, $1e, $19, $00, $1e, $1f, $74, $58, $c4, $58, $b9, $7f, $b2, $4d
+    db $50, $58, $ff, $ff, $01, $01, $20, $ff, $50, $68, $ff, $ff, $00, $00, $42, $ff
+    db $65, $1f, $da, $58, $ee, $1e, $19, $00, $f8, $1e, $19, $00, $1e, $1f, $74, $58
+    db $ea, $58, $b9, $7f, $b2, $4d, $50, $58, $ff, $ff, $01, $01, $20, $ff, $50, $68
+    db $ff, $ff, $00, $00, $31, $ff, $65, $1f, $00, $59, $ee, $1e, $19, $00, $f8, $1e
+    db $19, $00, $1e, $1f, $74, $58, $10, $59, $b9, $7f, $b2, $4d, $50, $58, $ff, $ff
+    db $ff, $ff, $20, $ff, $65, $1f, $26, $59, $ee, $1e, $19, $00, $f8, $1e, $19, $00
+    db $1e, $1f, $74, $58, $2e, $59, $b9, $7f, $b2, $4d
 
 ; C: ends when $D8E0 bit 2 is set
 KittHost_ObjEndOnD8E0Bit2::
@@ -2165,42 +2185,11 @@ Obj_SetD8E0One_B::
     ret                                           ; $598A
 
 
-; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
+; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, PlayMenu_CursorUpdate; first read on the screen
 ; Mode0E_KittGamesHost_State08 (trace/read_screens_kitty.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_598B_Mode0E_KittGamesHost_State08::
-    db $cc, $1f, $20, $00, $60, $6f, $60, $99, $e0, $00, $1b, $01, $80, $1c, $46, $cc
-    db $1f, $20, $00, $00, $72, $60, $99, $e0, $00, $1b, $cc, $1f, $20, $00, $e0, $72
-    db $60, $99, $e0, $00, $1b, $71, $59, $cc, $1f, $20, $00, $c0, $73, $60, $99, $e0
-    db $00, $1b, $01, $80, $00, $00, $cc, $1f, $20, $00, $60, $6f, $60, $99, $e0, $00
-    db $1b, $84, $59, $02, $1f, $8b, $59, $b9, $7f, $b2, $4d
-
-; I: leftover: 75 bytes (02:59D6-5A20) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_59D6::
-    db $cc, $1f, $20, $00, $60, $6f, $60, $99, $e0, $00, $1b, $01, $80, $1c, $46, $cc
-    db $1f, $20, $00, $c0, $73, $60, $99, $e0, $00, $1b, $cc, $1f, $20, $00, $e0, $72
-    db $60, $99, $e0, $00, $1b, $71, $59, $cc, $1f, $20, $00, $00, $72, $60, $99, $e0
-    db $00, $1b, $01, $80, $00, $00, $cc, $1f, $20, $00, $60, $6f, $60, $99, $e0, $00
-    db $1b, $84, $59, $02, $1f, $d6, $59, $b9, $7f, $b2, $4d
-
-; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, PlayMenu_CursorUpdate; first read on the screen
-; Mode0E_KittGamesHost_State14 (trace/read_screens_kitty.npz); kind OAM from the evidence of
-; tools/kitty_layout_kinds.py; the rest of Data_02_598B after a leftover stretch
-ObjScript_02_5A21_Mode0E_KittGamesHost_State14::
-    db $cc, $1f, $20, $00, $60, $77, $60, $99, $e0, $00, $1b, $01, $80, $1c, $46, $cc
-    db $1f, $20, $00, $00, $7a, $60, $99, $e0, $00, $1b, $cc, $1f, $20, $00, $e0, $7a
-    db $60, $99, $e0, $00, $1b, $71, $59, $cc, $1f, $20, $00, $c0, $7b, $60, $99, $e0
-    db $00, $1b, $01, $80, $00, $00, $cc, $1f, $20, $00, $60, $77, $60, $99, $e0, $00
-    db $1b, $84, $59, $02, $1f, $21, $5a, $b9, $7f, $b2, $4d, $cc, $1f, $20, $00, $60
-    db $77, $60, $99, $e0, $00, $1b, $01, $80, $1c, $46, $cc, $1f, $20, $00, $c0, $7b
-    db $60, $99, $e0, $00, $1b, $cc, $1f, $20, $00, $e0, $7a, $60, $99, $e0, $00, $1b
-    db $71, $59, $cc, $1f, $20, $00, $00, $7a, $60, $99, $e0, $00, $1b, $01, $80, $00
-    db $00, $cc, $1f, $20, $00, $60, $77, $60, $99, $e0, $00, $1b, $84, $59, $02, $1f
-    db $6c, $5a, $b9, $7f, $b2, $4d, $0c, $14, $ff, $ff, $03, $01, $0e, $01, $0c, $34
-    db $ff, $ff, $00, $02, $0e, $00, $0c, $54, $ff, $ff, $01, $03, $12, $00, $0c, $74
-    db $ff, $ff, $02, $00, $11, $00, $e4, $1e, $16, $00, $ee, $1e, $05, $00, $3a, $1f
-    db $62, $23, $65, $1f, $b7, $5a, $1e, $1f, $f4, $44, $d7, $5a, $fd, $4c, $b2, $4d
-
+    INCBIN "data/bank_02/ObjScript_02_598B_Mode0E_KittGamesHost_State08.bin" ; $598B, 358 bytes
 ; C: restarts the object script 02:5AFF when $D8F4 changes; runs in the Play menu (mode $04)
 PlayMenu_ObjFollowItem::
     ld hl, hPuzzle15_ObjMoving_FFD8               ; $5AF1
@@ -4559,9 +4548,35 @@ jr_002_7400:
 
     db $cb, $78, $28, $09, $21, $80, $01, $09, $d8, $01, $80, $fe, $c9, $21, $80, $fe
     db $09, $d0, $01, $80, $01, $c9, $cb, $78, $28, $09, $21, $80, $01, $09, $d8, $01
-    db $80, $fe, $c9, $21, $80, $fe, $09, $d0, $01, $80, $01, $c9, $fa, $d8, $d8, $cb
-    db $6f, $28, $07, $21, $f0, $ff, $09, $4d, $44, $c9, $fa, $d8, $d8, $cb, $67, $28
-    db $07, $21, $10, $00, $09, $4d, $44, $c9, $c9
+    db $80, $fe, $c9, $21, $80, $fe, $09, $d0, $01, $80, $01, $c9
+
+Call_002_7430:
+    ld a, [wKeysHeld]                             ; $7430
+    bit PADB_LEFT, a                              ; $7433
+    jr z, jr_002_743e                             ; $7435
+
+    ld hl, hStamp_ObjPlaceOnStart_FFF0            ; $7437
+    add hl, bc                                    ; $743A
+    ld c, l                                       ; $743B
+    ld b, h                                       ; $743C
+    ret                                           ; $743D
+
+
+jr_002_743e:
+    ld a, [wKeysHeld]                             ; $743E
+    bit PADB_RIGHT, a                             ; $7441
+    jr z, jr_002_744c                             ; $7443
+
+    ld hl, $0010                                  ; $7445
+    add hl, bc                                    ; $7448
+    ld c, l                                       ; $7449
+    ld b, h                                       ; $744A
+    ret                                           ; $744B
+
+
+jr_002_744c:
+    ret                                           ; $744C
+
 
 ; C: Kitty position into $D94D / $D94E, and [$D94C] = x - $50 kept in 0-$5F (where the next fruit falls); first run in
 ; the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game,
@@ -4615,7 +4630,7 @@ PrintGame_ObjKitty::
     ld a, SFX1_3A                                 ; $74BF
     ld [wSndSfx1], a                              ; $74C1
     pop af                                        ; $74C4
-    ld de, ObjScript_02_7686_Object_RunAll        ; $74C5
+    ld de, ObjScript_02_7686_PrintGame_ObjKitty   ; $74C5
     call Call_000_2205                            ; $74C8
     ret                                           ; $74CB
 
@@ -4652,14 +4667,58 @@ jr_002_74e5:
     db $73, $cd, $4d, $74, $fa, $d9, $d8, $cb, $47, $28, $0e, $f5, $3e, $3a, $ea, $60
     db $d0, $f1, $11, $86, $76, $cd, $05, $22, $c9, $fa, $d8, $d8, $cb, $6f, $28, $07
     db $11, $1e, $76, $cd, $05, $22, $c9, $fa, $d8, $d8, $cb, $67, $20, $0b, $78, $b1
-    db $20, $07, $11, $0e, $76, $cd, $05, $22, $c9, $c9, $21, $40, $00, $09, $4d, $44
-    db $c9, $cd, $a2, $73, $cd, $70, $75, $fa, $d8, $d8, $cb, $47, $20, $07, $cb, $78
-    db $28, $03, $01, $00, $00, $f0, $d4, $fe, $78, $38, $0d, $3e, $78, $e0, $d4, $01
-    db $00, $00, $11, $fe, $75, $cd, $05, $22, $cd, $a9, $73, $cd, $74, $73, $cd, $30
-    db $74, $cd, $7b, $73, $cd, $4d, $74, $c9, $cd, $a2, $73, $cd, $70, $75, $fa, $d8
-    db $d8, $cb, $47, $20, $07, $cb, $78, $28, $03, $01, $00, $00, $f0, $d4, $fe, $78
-    db $38, $0d, $3e, $78, $e0, $d4, $01, $00, $00, $11, $0e, $76, $cd, $05, $22, $cd
-    db $a9, $73, $cd, $74, $73, $cd, $30, $74, $cd, $7b, $73, $cd, $4d, $74, $c9
+    db $20, $07, $11, $0e, $76, $cd, $05, $22, $c9, $c9
+
+Call_002_7570:
+    ld hl, $0040                                  ; $7570
+    add hl, bc                                    ; $7573
+    ld c, l                                       ; $7574
+    ld b, h                                       ; $7575
+    ret                                           ; $7576
+
+
+    db $cd, $a2, $73, $cd, $70, $75, $fa, $d8, $d8, $cb, $47, $20, $07, $cb, $78, $28
+    db $03, $01, $00, $00, $f0, $d4, $fe, $78, $38, $0d, $3e, $78, $e0, $d4, $01, $00
+    db $00, $11, $fe, $75, $cd, $05, $22, $cd, $a9, $73, $cd, $74, $73, $cd, $30, $74
+    db $cd, $7b, $73, $cd, $4d, $74, $c9
+
+    call Obj_GetSpriteBC                          ; $75AE
+    call Call_002_7570                            ; $75B1
+    ld a, [wKeysHeld]                             ; $75B4
+    bit PADB_A, a                                 ; $75B7
+    jr nz, jr_002_75c2                            ; $75B9
+
+    bit 7, b                                      ; $75BB
+    jr z, jr_002_75c2                             ; $75BD
+
+    ld bc, $0000                                  ; $75BF
+
+jr_002_75c2:
+    ldh a, [hStamp_ObjSlideIn_FFD4]               ; $75C2
+    cp $78                                        ; $75C4
+    jr c, PrintGame_ObjKittyJump                  ; $75C6
+
+    ld a, $78                                     ; $75C8
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $75CA
+    ld bc, $0000                                  ; $75CC
+    ld de, $760e                                  ; $75CF
+    call Call_000_2205                            ; $75D2
+
+; C: object callback of Kitty's jump in the fruit game (script 02:7686, started by A in PrintGame_ObjKitty):
+; Obj_SetSpriteBC, then the rest of PrintGame_ObjKittyJumpStep; first run in the core path album_print_fruit_A
+; (tools/kitty_core_paths.py, 2026-11-15); code read
+PrintGame_ObjKittyJump::
+    call Obj_SetSpriteBC                          ; $75D5
+
+; C: the jump step: Obj_GetSpeed, 02:7430, PrintGame_ClampX, PrintGame_SaveKittyPos (the moves of PrintGame_ObjKitty
+; without the keys), ret; first run in the core path album_print_fruit_A (2026-11-15); code read
+PrintGame_ObjKittyJumpStep::
+    call Obj_GetSpeed                             ; $75D8
+    call Call_002_7430                            ; $75DB
+    call PrintGame_ClampX                         ; $75DE
+    call PrintGame_SaveKittyPos                   ; $75E1
+    ret                                           ; $75E4
+
 
 ; C: $D94D = $80, $D94E = $78 (not run in the core)
 Obj_SetD94D::
@@ -4686,21 +4745,16 @@ Leftover_02_761E::
     db $7f, $1f, $00, $fb, $16, $1f, $77, $75, $04, $80, $50, $62, $04, $80, $6c, $62
     db $04, $80, $88, $62, $1e, $1f, $7e, $76
 
-; I: read in the runs by Object_RunAll, ObjCmd_SetSprite, ObjCmd_SetCallback; the rest of Data_02_75F0 after a
-; leftover stretch
-ObjScript_02_7686_Object_RunAll::
+; C: named by the code of PrintGame_ObjKitty (02:74C5); read in the runs by Object_RunAll, ObjCmd_JumpRandom,
+; ObjCmd_SetSprite
+ObjScript_02_7686_PrintGame_ObjKitty::
     db $7f, $1f, $00, $fb, $16, $1f, $ae, $75, $04, $80, $c4, $61, $04, $80, $e0, $61
-    db $04, $80, $fc, $61, $1e, $1f, $96, $76
+    db $04, $80, $fc, $61, $1e, $1f, $96, $76, $10, $80, $dc, $62, $f8, $1f, $05, $af
+    db $76, $bb, $76, $cf, $76, $eb, $76, $ff, $76, $04, $80, $fc, $62, $70, $80, $dc
+    db $62
 
-; C: read in the runs by Object_RunAll, ObjCmd_JumpRandom
-ObjScript_02_769E_Object_RunAll::
-    db $10, $80, $dc, $62, $f8, $1f, $05, $af, $76, $bb, $76, $cf, $76, $eb, $76
-
-; I: leftover: 34 bytes (02:76AD-76CE) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_76AD::
-    db $ff, $76, $04, $80, $fc, $62, $70, $80, $dc, $62, $1e, $1f, $af, $76, $04, $80
-    db $fc, $62, $04, $80, $dc, $62, $04, $80, $fc, $62, $70, $80, $dc, $62, $1e, $1f
-    db $bb, $76
+    db $1e, $1f, $af, $76, $04, $80, $fc, $62, $04, $80, $dc, $62, $04, $80, $fc, $62
+    db $70, $80, $dc, $62, $1e, $1f, $bb, $76
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump
 ObjScript_02_76CF_Object_RunAll::

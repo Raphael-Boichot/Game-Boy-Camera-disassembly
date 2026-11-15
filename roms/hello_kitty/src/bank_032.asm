@@ -16,8 +16,8 @@ Map_32_7800_Mode1B_PrintingAppleGame_State00::
 ; Mode0A_NameCard_State00 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_32_7A40_Mode0A_NameCard_State00::
     INCBIN "data/bank_32/Map_32_7A40_Mode0A_NameCard_State00.tilemap" ; $7A40, 576 bytes
-; I: named by the code of Mode09_State03, Exchange_InitScreen (06:685A 06:6A08); kind MAP from the evidence of
-; tools/kitty_layout_kinds.py
+; C: named by the code of Mode09_State03, Exchange_InitScreen (06:685A 06:6A08); read in BGB by a read watchpoint
+; (trace/bgb_reads_kitty.csv: exchange); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_32_7C80_Mode09_ExchangeCommunicating_State03::
     INCBIN "data/bank_32/Map_32_7C80_Mode09_ExchangeCommunicating_State03.tilemap" ; $7C80, 576 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08

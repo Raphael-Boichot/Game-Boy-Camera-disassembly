@@ -155,7 +155,7 @@ Ported from the Japanese symbol file with the international tools: L0-L5 done (a
 
 ### Pocket Camera (Hello Kitty) (prototype)
 
-L0-L3 done (2026-11-12: every routine entry and every data block named, <!--f:kitty.names-->2,233 names of which <!--f:kitty.names.I-->150 are not C: <!--f:kitty.leftovers-->120 leftovers `Leftover_BB_AAAA` by the owner rule, <!--f:kitty.doubts-->40 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4 done (2026-11-15: <!--f:kitty.ram-->478 names of RAM variables, the SRAM map checked on the game's own saves, the constants), L5 done (`roms/hello_kitty/src/`, `make TREE=hello_kitty check` byte-exact), L6 not started ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
+L0-L3 done (2026-11-12: every routine entry and every data block named, <!--f:kitty.names-->2,219 names of which <!--f:kitty.names.I-->127 are not C: <!--f:kitty.leftovers-->113 leftovers `Leftover_BB_AAAA` by the owner rule, <!--f:kitty.doubts-->24 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4 done (2026-11-15: <!--f:kitty.ram-->478 names of RAM variables, the SRAM map checked on the game's own saves, the constants), L5 done (`roms/hello_kitty/src/`, `make TREE=hello_kitty check` byte-exact), L6 not started ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
 
 **ROM layout**
 

@@ -21,6 +21,9 @@ Keys (TAG = jp, us, gold, kitty, proto):
   TAG.doubts, TAG.doubts.GROUP   rows of disasm/sym_unconclusive_TAG.csv, and per group where the table has one
   kitty.jpx.CATEGORY     bytes per category of trace/jp_crosscheck_kitty.csv (NO_JP, JP_RAN, JP_VERDICT, JP_RED, JP_PART)
   kitty.puzzle.bgb_games / bgb_solved / core_games / core_solved   tools/kitty_puzzle.py (trace/puzzle_{bgb,core}_kitty.csv)
+  kitty.code.bytes / executed / never_ran   proven code bytes (trace/trace_kitty.json) and those an organic core run executed (cov_kitty_*.npz)
+  kitty.redcls.total / effect / gate / forced-mode / not-run, kitty.gates   trace/red_classes_kitty.csv, trace/gates_kitty.csv
+  kitty.types.padding / typed / default, kitty.kinds.given / left   tools/sym_build.py --report and tools/kitty_layout_kinds.py (with --rom-kitty)
   TAG.ram, TAG.ram.C / I     rows of disasm/ram_names_TAG.csv and per tag (every ROM that has the table)
   kitty.ram.hand / jp / auto  its rows by source (tools/kitty_ram_names.py: the hand layer, a paired Japanese site, routine + address)
   TAG.wram.sites / addrs     rows of wram/wram_access_TAG.csv and its distinct addresses; TAG.sram.sites: rows of sram/sram_access_TAG.csv
@@ -71,6 +74,7 @@ def facts():
         p = os.path.join(REPO, 'roms', d, 'disasm', 'sym_names_%s.csv' % t)
         if os.path.exists(p):
             rows = list(csv.DictReader(open(p, encoding='utf-8'))); F['%s.names' % t] = len(rows)
+            F['%s.names.Q' % t] = 0
             for k, v in collections.Counter(r['conf'] for r in rows).items(): F['%s.names.%s' % (t, {'?': 'Q'}.get(k, k))] = v
             F['%s.leftovers' % t] = sum(r['name'].startswith('Leftover_') for r in rows)
     for t, d in DIRS.items():                          # the doubts lists (tools/make_doubts.py, kitty_doubts.py, proto_names.py)
@@ -108,6 +112,35 @@ def facts():
         HN = {x['name'] for x in csv.DictReader(open(os.path.join(REPO, 'roms', 'hello_kitty', 'disasm', 'layers', 'ram_names_kitty_hand.csv'), encoding='utf-8'))}
         c = collections.Counter('hand' if x['name'] in HN else ('jp' if x['desc'].startswith('the Japanese') else 'auto') for x in csv.DictReader(open(p, encoding='utf-8')))
         for k, v in c.items(): F['kitty.ram.%s' % k] = v
+    KD = os.path.join(REPO, 'roms', 'hello_kitty')                  # the counts of the Kitty L1 / L2 bullets (2026-11-15: they had to be retyped)
+    p = os.path.join(KD, 'trace', 'trace_kitty.json')
+    if os.path.exists(p):
+        import json; import numpy as np; from glob import glob as _glob
+        tr = json.load(open(p))['code']; ex = np.zeros(0x200000, bool)
+        for f in _glob(os.path.join(KD, "trace", "cov_kitty_*.npz")):
+            e = np.load(f)['ex']; ex[:len(e)] |= e > 0
+        def fl(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
+        F['kitty.code.bytes'] = sum(tr.values()); F['kitty.code.executed'] = sum(n for k, n in tr.items() if ex[fl(int(k[:2], 16), int(k[3:], 16))])
+        F['kitty.code.never_ran'] = F['kitty.code.bytes'] - F['kitty.code.executed']
+    p = os.path.join(KD, 'trace', 'red_classes_kitty.csv')
+    if os.path.exists(p):
+        rc = list(csv.DictReader(open(p, encoding='utf-8'))); F['kitty.redcls.total'] = sum(int(r['red_bytes']) for r in rc)
+        for c in ('effect', 'gate', 'forced-mode', 'not-run'): F['kitty.redcls.%s' % c] = sum(int(r[c]) for r in rc)
+        F['kitty.gates'] = len(list(csv.DictReader(open(os.path.join(KD, 'trace', 'gates_kitty.csv')))))
+    if a.rom_kitty:                                                 # the type counts of tools/sym_build.py and the data kinds of tools/kitty_layout_kinds.py
+        _sp = __import__("subprocess")
+        tk = __import__("tempfile").mkdtemp(prefix="facts_kitty_")
+        r3 = _sp.run([sys.executable, os.path.join(REPO, "tools", "sym_build.py"), a.rom_kitty, '--names', os.path.join(KD, 'disasm', 'sym_names_kitty.csv'),
+                             '--types', os.path.join(KD, 'disasm', 'sym_types_kitty.csv'), '--trace', os.path.join(KD, 'trace', 'trace_kitty.json'), '--out', os.path.join(tk, 'k.sym'), '--report'],
+                            capture_output=True, text=True, cwd=REPO)
+        m3 = re.search(r'bytes by type: (\{.*\})', r3.stdout); m4 = re.search(r'still on the default typing \(\.data, 16 per row\): (\d+)', r3.stdout)
+        if m3 and m4:
+            import ast
+            BYK = ast.literal_eval(m3.group(1)); F['kitty.types.padding'] = BYK['padding']; F['kitty.types.default'] = int(m4.group(1)); F['kitty.types.typed'] = BYK['data'] - int(m4.group(1))
+        r6 = _sp.run([sys.executable, os.path.join(REPO, "tools", "kitty_layout_kinds.py"), a.rom_kitty, '--out', os.path.join(tk, 'kinds.csv')], capture_output=True, text=True, cwd=REPO)
+        m6 = re.search(r'kitty_layout_kinds: \d+ rows, (\d+) bytes of kind-less blocks given a kind .*?; (\d+) bytes of kind-less blocks left', r6.stdout)
+        if m6: F['kitty.kinds.given'] = int(m6.group(1)); F['kitty.kinds.left'] = int(m6.group(2))
+        __import__("shutil").rmtree(tk, ignore_errors=True)
     p = os.path.join(REPO, 'roms', 'hello_kitty', 'sram', 'sram_saves_kitty.csv')
     if os.path.exists(p):
         r = list(csv.DictReader(open(p, encoding='utf-8'))); F['kitty.sram.checks'] = len(r); F['kitty.sram.failed'] = sum(x['result'] != 'ok' for x in r)

@@ -13,9 +13,11 @@ Gfx_17_4000_Photos_LoadPage8::
 ; kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_17_5800_Mode01_MainMenu_State00::
     INCBIN "data/bank_17/Gfx_17_5800_Mode01_MainMenu_State00.2bpp" ; $5800, 6144 bytes
-; I: named by the code of Mode08_State00 (06:65DF); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; C: named by the code of Mode08_State00 (06:65DF); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
+; exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_17_7000_Mode08_ExchangePhotoTrain_State00::
     INCBIN "data/bank_17/Gfx_17_7000_Mode08_ExchangePhotoTrain_State00.2bpp" ; $7000, 2048 bytes
-; I: kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py
 Gfx_17_7800_NeverRead::
     INCBIN "data/bank_17/Gfx_17_7800_NeverRead.2bpp" ; $7800, 2048 bytes

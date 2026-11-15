@@ -164,7 +164,7 @@ d8d3,WRAM,0,0,19,01:7 02:9 05:3,Mode06_State0E:1 .code:2b8:1 Mode06_State04:1 Mo
 d8d4,WRAM,25,19,0,01:3 02:18 05:9 06:7 07:7,Mode01_State01:2 Mode0B_State01:2 Mode06_State1A:1 Mode06_State1F:1,01:11 00:8
 d8d6,WRAM,1,1,0,00:2,.code:5f:1 Joy_Read:1,
 d8d7,WRAM,1,1,0,00:2,.code:5f:1 Joy_Read:1,
-d8d8,WRAM,24,3,0,00:4 01:3 02:12 05:6 06:2,Joy_Read:2 06:4b6a:2 00:1b3f:1 00:1b60:1,
+d8d8,WRAM,27,3,0,00:4 01:3 02:15 05:6 06:2,Joy_Read:2 06:4b6a:2 00:1b3f:1 00:1b60:1,
 d8d9,WRAM,109,10,0,00:1 01:8 02:39 05:25 06:25 07:21,KeyPrompt_Keys4B1C:3 Mode06_State03:2 Mode06_State06:2 KeyPrompt_Keys4ADB:2,00:5
 d8da,WRAM,40,2,0,00:1 01:10 02:10 05:16 06:4 07:1,02:64b2:2 06:4b6a:2 00:16d5:1 01:6c57:1,
 d8db,WRAM,0,1,0,00:1,Joy_Read:1,
@@ -245,9 +245,9 @@ d948,WRAM,2,3,0,07:5,07:660e:3 .code:36:1 Mode0E_State02:1,
 d949,WRAM,0,1,1,06:2,Kitts_CheckAfford:2,
 d94a,WRAM,0,1,0,06:1,Kitts_CheckAfford:1,
 d94b,WRAM,0,1,0,06:1,Kitts_CheckAfford:1,
-d94c,WRAM,2,3,0,00:1 02:4,00:21c6:1 PrintGame_ObjRandomStart:1 .code:23:1 02:7465:1,00:1 60:1
-d94d,WRAM,1,2,0,02:3,.code:b2:1 .code:23:1 .code:b:1,80:1
-d94e,WRAM,1,2,0,02:3,.code:b2:1 .code:23:1 .code:b:1,78:1
+d94c,WRAM,2,3,0,00:1 02:4,00:21c6:1 PrintGame_ObjRandomStart:1 PrintGame_SaveKittyPos:1 02:7465:1,00:1 60:1
+d94d,WRAM,1,2,0,02:3,.code:b2:1 PrintGame_SaveKittyPos:1 Obj_SetD94D:1,80:1
+d94e,WRAM,1,2,0,02:3,.code:b2:1 PrintGame_SaveKittyPos:1 Obj_SetD94D:1,78:1
 d94f,WRAM,6,5,0,01:7 02:2 07:2,01:7486:2 .code:1e:2 PrintGame_DrawAppleCount:1 Mode06_State10:1,00:5
 d950,WRAM,1,9,0,01:8 02:1 07:1,Mode06_State10:1 Mode06_State11:1 01:702d:1 01:706e:1,09:3 07:3 03:2 05:1
 d951,WRAM,1,8,0,01:9,Mode06_State10:1 Mode06_State11:1 01:702d:1 01:706e:1,00:7 01:1
@@ -675,7 +675,7 @@ ffd0,HRAM,0,5,1,00:2 02:2 04:1 07:1,00:2136:1 Obj_HideSprite:1 02:50eb:1 Puzzle1
 ffd1,HRAM,19,6,0,00:4 02:15 06:4 07:2,Obj_ApplySpeed:2 .code:1b:1 .code:15:1 02:4d24:1,00:3 ff:1
 ffd2,HRAM,21,42,0,00:4 02:46 05:3 06:7 07:3,02:6b9f:3 .code:1b:2 Obj_ApplySpeed:2 PrintGame_ClampX:2,c0:2 50:1 98:1 90:1 08:1 97:1
 ffd3,HRAM,21,11,0,00:4 02:22 06:4 07:2,Obj_ApplySpeed:2 .code:a7:2 .code:1b:1 .code:15:1,00:7
-ffd4,HRAM,35,43,0,00:4 02:62 05:4 06:5 07:3,.code:a7:4 02:6b9f:3 Obj_ApplySpeed:2 .code:b7:2,39:3 58:1 78:1 a0:1
+ffd4,HRAM,36,44,0,00:4 02:64 05:4 06:5 07:3,.code:a7:4 02:6b9f:3 Obj_ApplySpeed:2 .code:b7:2,39:3 78:2 58:1 a0:1
 ffd7,HRAM,2,3,0,00:3 02:2,ObjCmd_Loop:2 ObjCmd_SetLoop:1 .code:36:1 Obj_AdvanceFrame30:1,
 ffd8,HRAM,8,15,11,00:6 02:28,.code:15:2 .code:12:2 PrintGame_ObjFall:2 SlideShow_ObjFollowD907:1,0f:1 14:1 6c:1 3c:1 17:1
 ffd9,HRAM,3,4,2,00:1 02:6 06:2,.code:32:2 ObjCmd_SetPosRel:1 KeyPrompt_Accept:1 KeyPrompt_Wait:1,
@@ -698,7 +698,7 @@ ffe9,HRAM,2,4,0,01:6,ScriptCmd_Loop:2 .code:16:1 Script_SaveCounterD97B:1 Record
 ffea,HRAM,4,4,8,01:16,.code:3a:5 .code:c:2 .code:1f:2 .code:f:1,
 ffeb,HRAM,5,4,0,01:9,.code:c:2 NameCard_ScriptStartRight:1 NameCard_ScriptDrawStep:1 NameCard_ScriptStartLeft:1,
 ffec,HRAM,2,1,0,01:3,.code:30:2 .code:4d:1,
-fff0,HRAM,0,0,4,02:3 04:1,02:6b4f:1 02:6b85:1 02:73f7:1 04:4ab2:1,
+fff0,HRAM,0,0,5,02:4 04:1,02:6b4f:1 02:6b85:1 02:73f7:1 .code:40:1,
 fff3,HRAM,0,0,1,0f:1,Sfx3_Step_07:1,
 fff8,HRAM,0,0,3,02:3,Scratch_ObjPlace:1 02:6ca2:1 .code:3e:1,
 fffa,HRAM,0,0,3,05:2 06:1,Stamp_CursorUpdate:1 AlbumText_CursorUpdate:1 NameCardEdit_PhotoCursorUpdate:1,

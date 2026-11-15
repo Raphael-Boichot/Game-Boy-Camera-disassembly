@@ -67,9 +67,9 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 02:710B,PrintGame_ClampSpeed,4,0,0,0,0,4
 02:7121,PrintGame_ObjFall,25,0,0,25,0,0
 02:737B,PrintGame_ClampX,22,0,0,0,0,22
-02:73C6,PrintGame_SpeedFromKeys,32,0,0,0,0,32
+02:73C6,PrintGame_SpeedFromKeys,46,0,0,0,0,46
 02:744D,PrintGame_SaveKittyPos,11,0,0,0,0,11
-02:74AB,PrintGame_ObjKitty,28,0,0,21,0,7
+02:74AB,PrintGame_ObjKitty,14,0,0,7,0,7
 02:7793,PrintGame_ShowResult,18,0,0,0,0,18
 02:7BDA,Exchange_ObjFollowD9FD,9,0,0,0,9,0
 04:4A3E,Cam_PopcountLevel,6,0,6,0,0,0

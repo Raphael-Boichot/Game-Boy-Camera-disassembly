@@ -15,3 +15,5 @@ bank,addr,group,why,settle
 05,47E5,unused,called only by Mode02_State0C; nothing enters that state (byte search: no store of state $0C for mode $02 and no ModeState_Set / inline / saved return with (2; $0C)),final
 05,4D10,unused,state $0C of mode $02: nothing enters it (byte search: no store of state $0C for mode $02 and no ModeState_Set / inline / saved return with (2; $0C)),final
 11,6000,unused,"record 0 of the table 00:249D; Photo_LoadEmptyPicture is called from six places, each with ld a, $01 just before (record 1, 11:7000): nothing asks for record 0, so no run can show it (code read, 2026-11-12)",final
+14,4000,unused,"loaded only by Mode17_State00 (06:40CD: Copy_FarInline 14:4000, $1800 bytes to $8000; no other copy record names it: byte search of the inline records), and nothing enters mode $17 (06:410D, the row above; its own copy of the third error picture)",final
+2D,7A00,unused,"the part of Map_2D_7820 that Mode17_State00 copies (06:40D7: Copy_FarInline 2D:7820, $400 bytes to $9800), the only record that names it; nothing enters mode $17 (06:410D)",final

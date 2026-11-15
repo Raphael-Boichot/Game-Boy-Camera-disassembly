@@ -4858,12 +4858,12 @@ Mode0E_State09::
     cp $00                                        ; $68F8
     jr nz, jr_007_6904                            ; $68FA
 
-    ld de, ObjScript_02_5900_Mode0E_KittGamesHost_State0A + $3E ; $68FC
+    ld de, ObjScript_02_584A_KittHost_YesNoCursor + $F4 ; $68FC
     ld bc, ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $1E ; $68FF
     jr jr_007_6921                                ; $6902
 
 jr_007_6904:
-    ld de, ObjScript_02_5900_Mode0E_KittGamesHost_State0A + $20 ; $6904
+    ld de, ObjScript_02_584A_KittHost_YesNoCursor + $D6 ; $6904
     ld bc, ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $18 ; $6907
     jr jr_007_6921                                ; $690A
 
@@ -4872,12 +4872,12 @@ jr_007_690c:
     cp $00                                        ; $690F
     jr nz, jr_007_691b                            ; $6911
 
-    ld de, Leftover_02_58AC + $4E                 ; $6913
+    ld de, ObjScript_02_584A_KittHost_YesNoCursor + $B0 ; $6913
     ld bc, ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $12 ; $6916
     jr jr_007_6921                                ; $6919
 
 jr_007_691b:
-    ld de, Leftover_02_58AC + $28                 ; $691B
+    ld de, ObjScript_02_584A_KittHost_YesNoCursor + $8A ; $691B
     ld bc, ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $C ; $691E
 
 jr_007_6921:
@@ -5028,7 +5028,7 @@ Mode0E_State0E::
     res 0, [hl]                                   ; $69DE
     pop hl                                        ; $69E0
     ld bc, $804d                                  ; $69E1
-    ld de, Leftover_02_59D6 + $45                 ; $69E4
+    ld de, ObjScript_02_598B_Mode0E_KittGamesHost_State08 + $90 ; $69E4
     call Object_CreateWithParam                   ; $69E7
     ld a, $0f                                     ; $69EA
     ldh [hState], a                               ; $69EC
@@ -5137,7 +5137,7 @@ KittHost_PayScratch::
     res 0, [hl]                                   ; $6A89
     pop hl                                        ; $6A8B
     ld bc, $804d                                  ; $6A8C
-    ld de, ObjScript_02_5A21_Mode0E_KittGamesHost_State14 + $45 ; $6A8F
+    ld de, ObjScript_02_598B_Mode0E_KittGamesHost_State08 + $DB ; $6A8F
     call Object_CreateWithParam                   ; $6A92
     ld a, $14                                     ; $6A95
     ldh [hState], a                               ; $6A97
@@ -5307,7 +5307,7 @@ Mode0E_State19::
     res 0, [hl]                                   ; $6B6F
     pop hl                                        ; $6B71
     ld bc, $804d                                  ; $6B72
-    ld de, ObjScript_02_5A21_Mode0E_KittGamesHost_State14 + $90 ; $6B75
+    ld de, ObjScript_02_598B_Mode0E_KittGamesHost_State08 + $126 ; $6B75
     call Object_CreateWithParam                   ; $6B78
     ld a, $1a                                     ; $6B7B
     ldh [hState], a                               ; $6B7D
@@ -5449,7 +5449,7 @@ Mode04_State00::
     ld b, BANK(ScriptSlots_Clear)                 ; $6C57
     ld hl, ScriptSlots_Clear                      ; $6C59
     call Far_Call                                 ; $6C5C
-    ld de, ObjScript_02_5A21_Mode0E_KittGamesHost_State14 + $CA ; $6C5F
+    ld de, ObjScript_02_598B_Mode0E_KittGamesHost_State08 + $160 ; $6C5F
     call Object_Create                            ; $6C62
     ld de, ObjScript_02_5B35_PlayMenu_ObjItemRecord + $10 ; $6C65
     call Object_Create                            ; $6C68

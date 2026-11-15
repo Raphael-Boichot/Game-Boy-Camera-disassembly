@@ -474,7 +474,7 @@ DEF hScriptCmd_Loop_FFE9       EQU $ffe9 ; I 1  touched by ScriptCmd_Loop (2), S
 DEF hRecordBook_GetReceivedX11_FFEA EQU $ffea ; I 1  touched by RecordBook_GetReceivedX11 (5), Menu_ScriptOnItemChange (1), NameCard_ScriptStar
 DEF hRecordBook_CountHundreds_FFEB EQU $ffeb ; I 1  touched by RecordBook_CountHundreds (3), NameCard_ScriptStartRight (1), NameCard_ScriptDra
 DEF hScriptCmd_AddEC_FFEC      EQU $ffec ; I 1  touched by ScriptCmd_AddEC (2), RecordBook_VineFrame (1)
-DEF hStamp_ObjPlaceOnStart_FFF0 EQU $fff0 ; I 3  touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (1), Cam_PopcountLevel (1)
+DEF hStamp_ObjPlaceOnStart_FFF0 EQU $fff0 ; I 3  touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), Cam_PopcountLevel (1)
 DEF hSfx3_Step_07_FFF3         EQU $fff3 ; I 5  touched by Sfx3_Step_07 (1)
 DEF hScratch_ObjPlace_FFF8     EQU $fff8 ; I 2  touched by Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1), PrintGame_SpeedFromKeys (1)
 DEF hStamp_CursorUpdate_FFFA   EQU $fffa ; I 4  touched by Stamp_CursorUpdate (1), AlbumText_CursorUpdate (1), NameCardEdit_PhotoCursorUpd

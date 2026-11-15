@@ -28,6 +28,7 @@ ap.add_argument('--report', default=os.path.join(KD, 'trace', 'paths_kitty.csv')
 ALB = 'photo: - - Down A Down Down A'                      # main menu -> album -> third icon (print): mode $06 state $03
 PATHS = [  # name, save, path, free frames, printer injections
     ('album_print_start', 'kitts', ALB + ' Right A Start', 4000, []),
+    ('album_print_fruit_A', 'kitts', ALB + ' Right A Start' + ' A' * 40, 1500, []),      # A during the fruit game: Kitty jumps (02:74C5, script 02:7686; 2026-11-15)
 ] + [('album_print_frame%d' % n, 'kitts', ALB + ' Right' * n + ' A A', 2500, []) for n in range(6)] + [
     ('print_err_init_ff', 'kitts', 'A A A Start', 1500, [(1, 1, 0xFF, 1)]),
     ('print_err_inq3_10', 'kitts', 'A A A Start', 1500, [(15, 3, 0x10, 1)]),

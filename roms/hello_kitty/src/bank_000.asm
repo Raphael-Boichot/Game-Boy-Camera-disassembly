@@ -4918,20 +4918,7 @@ SlideShow_ObjFollowD908::
 ; read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_00_1DAB_Mode12_SlideShow_State00::
-    INCBIN "data/bank_00/Gfx_00_1DAB_Mode12_SlideShow_State00.bin" ; $1DAB, 117 bytes
-; I: leftover: 154 bytes (00:1E20-1EB9) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_00_1E20::
-    db $7f, $16, $1f, $f4, $1d, $6d, $1f, $00, $02, $1e, $1f, $10, $48, $3a, $1f, $30
-    db $50, $1e, $1f, $10, $48, $cd, $d8, $1d, $fa, $fe, $d9, $fe, $ff, $c0, $11, $21
-    db $1e, $c3, $05, $22, $2d, $1e, $35, $1e, $b9, $7f, $3a, $1f, $30, $50, $54, $4a
-    db $16, $1f, $7c, $1e, $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80, $d4, $6d
-    db $50, $80, $34, $6d, $09, $1f, $16, $1f, $98, $1e, $03, $80, $84, $6d, $03, $80
-    db $a4, $6d, $03, $80, $d4, $6d, $50, $80, $e4, $6c, $09, $1f, $cd, $b1, $1d, $fa
-    db $fe, $d9, $fe, $ff, $11, $ba, $7f, $cc, $05, $22, $fa, $fe, $d9, $fe, $00, $20
-    db $06, $11, $66, $1e, $cd, $05, $22, $c9, $cd, $b1, $1d, $fa, $fe, $d9, $fe, $ff
-    db $11, $ba, $7f, $cc, $05, $22, $fa, $fe, $d9, $fe, $01, $20, $06, $11, $50, $1e
-    db $cd, $05, $22, $c9, $4a, $1e, $b9, $7f, $b9, $7f
-
+    INCBIN "data/bank_00/Gfx_00_1DAB_Mode12_SlideShow_State00.bin" ; $1DAB, 271 bytes
 ; C: {id, channel 0-3}: the sound into $D060 / $D068 / $D070 / $D078
 ObjCmd_Sound::
     push hl                                       ; $1EBA

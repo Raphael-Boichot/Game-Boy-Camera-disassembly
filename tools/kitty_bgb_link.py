@@ -24,6 +24,7 @@ ap.add_argument('--give', default='A A A A B B B Start Up A Left A - A - A - A -
 ap.add_argument('--take', default='A Start Up A Right A - A - A - A - A - A - A - A - A')
 ap.add_argument('--frames-after', type=int, default=2400); ap.add_argument('--boot', type=int, default=700)
 ap.add_argument('--save', default=None, help='start from this SRAM image (e.g. the Hello Kitty unlocking save of tools/make_unlocked_saves.py --hello-kitty) instead of the core-formatted one')
+ap.add_argument('--save-take', default=None, help='the receiver starts from this SRAM image instead (e.g. a full album, 2026-11-15)')
 a = ap.parse_args(); os.makedirs(a.out, exist_ok=True)
 import gbcov as G
 G.load_rom(a.rom); G.reset(bytes(0x20000)); G.run(600); sav = bytearray(bytes(G.sram())); sav[0x100A:0x100D] = b'\x99\x99\x99'
@@ -36,12 +37,13 @@ dg, dr = demo(a.give), demo(a.take); n = max(len(dg), len(dr)) + a.frames_after
 dg += bytes(n - len(dg)); dr += bytes(n - len(dr))
 wp = ','.join(l.strip() for l in open(a.wp_file) if l.strip()) if a.wp_file else None
 procs = {}
+sav_take = bytearray(open(a.save_take, 'rb').read()) if a.save_take else sav
 for role, d, link in (('giver', dg, ['-listen', '127.0.0.1:8766']), ('receiver', dr, ['-connect', '127.0.0.1:8766'])):
     bgb = '/home/claude/bgbl_kitty_%s' % role
     if not os.path.isdir(bgb): shutil.copytree('/home/claude/bgbx', bgb)
     if os.path.exists(os.path.join(bgb, 'debugmsg.txt')): os.remove(os.path.join(bgb, 'debugmsg.txt'))
     p = os.path.join(a.out, role)
-    open(p + '.dem', 'wb').write(d); open(p + '.sav', 'wb').write(sav)
+    open(p + '.dem', 'wb').write(d); open(p + '.sav', 'wb').write(sav if role == 'giver' else sav_take)
     for f in (p + '.sna', p + '.bmp'):
         if os.path.exists(f): os.remove(f)
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(bgb, 'bgb.exe'), os.environ.get('BGB_HF', '-headless'), '-nowarn', '-nowriteini', '-ini', os.path.join(bgb, 'bgb.ini'),

@@ -29,7 +29,7 @@ same evidence, evidence()) are drawn UNCERTAIN by tools/rom_layout_map.py. This 
 One row per run of equal kind inside one block: bank, start, end (exclusive), kind (T_UI / MAP / SOUND / OAM), ev, label, basis.
 The rest of each block stays UNCERTAIN. Prints the bytes per kind and per evidence (the Kitty README quotes them).
 """
-import os, csv, argparse, bisect, collections
+import os, sys, csv, argparse, bisect, collections
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); KD = os.path.join(REPO, 'roms', 'hello_kitty')
 N = 0x100000
@@ -119,7 +119,10 @@ if __name__ == '__main__':
         owner[o:e] = o
     # rule 8, the hand reading of each label still left (I)
     byname = {v: k for k, v in names.items()}
-    for r in csv.DictReader(open(os.path.join(KD, 'assets', 'leftover_kinds_kitty.csv'), encoding='utf-8')):
+    _lk = list(csv.DictReader(open(os.path.join(KD, 'assets', 'leftover_kinds_kitty.csv'), encoding='utf-8')))
+    _gone = [r['label'] for r in _lk if r['label'] not in byname]
+    if _gone: sys.exit('kitty_layout_kinds: assets/leftover_kinds_kitty.csv names labels that no longer exist (new runs moved the leftovers): %s' % ', '.join(_gone))
+    for r in _lk:
         o = byname[r['label']]; m = (owner == o) & ~code & (KIND == 0); KIND[m] = KK[r['kind']]; EV[m] = 8
     isdata = (owner >= 0) & ~code
     isdata[isdata] = [names[o].startswith(NOKIND) for o in owner[isdata]]

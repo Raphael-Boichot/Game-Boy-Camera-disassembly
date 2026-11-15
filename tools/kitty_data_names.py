@@ -35,12 +35,22 @@ def run(names, D, rom, jp, T, put):
     def load(f):
         z = np.load(tr + f); return z['ex'] > 0, z['dr'] > 0, (z['rdr'] if 'rdr' in z.files else np.zeros(N, np.uint32))
     org = np.zeros(N, bool); frc = np.zeros(N, bool); rdr = np.zeros(N, np.uint32)
-    for f in ('cov_kitty_runs.npz', 'cov_kitty_paths.npz', 'cov_kitty_bgb.npz'):
+    import glob                                                   # every organic run file (the puzzle runs of 2026-11-14 were missing: 2026-11-15)
+    first = ['cov_kitty_runs.npz', 'cov_kitty_paths.npz', 'cov_kitty_bgb.npz']
+    rest = sorted(os.path.basename(x) for x in glob.glob(tr + 'cov_kitty_*.npz') + glob.glob(tr + 'wp_exec_kitty.npz') if os.path.basename(x) not in first)
+    for f in first + rest:
         if os.path.exists(tr + f):
             ex, dr, rd = load(f); org |= dr | ex; m = (rdr == 0) & (rd > 0); rdr[m] = rd[m]
-    for f in ('forced_kitty.npz', 'forced_gates_kitty.npz', 'forced_effects_kitty.npz'):
+    ffirst = ['forced_kitty.npz', 'forced_gates_kitty.npz', 'forced_effects_kitty.npz']
+    for f in ffirst + sorted(os.path.basename(x) for x in glob.glob(tr + 'forced_*.npz') if os.path.basename(x) not in ffirst):
         if os.path.exists(tr + f):
             ex, dr, rd = load(f); frc |= dr | ex; m = (rdr == 0) & (rd > 0); rdr[m] = rd[m]
+    bgbr = {}                                                     # BGB read watchpoints (tools/kitty_bgb_reads.py, 2026-11-15): a byte BGB read in an organic run
+    if os.path.exists(tr + 'bgb_reads_kitty.csv'):
+        for r in csv.DictReader(open(tr + 'bgb_reads_kitty.csv', encoding='utf-8')):
+            if r['kind'] == 'r' and int(r['hits']) > 0:
+                o_ = fl(int(r['bank'], 16), int(r['addr'], 16)); e_ = fl(int(r['bank'], 16), int(r.get('end') or r['addr'], 16))
+                for x_ in range(o_, e_ + 1): org[x_] = True; bgbr[x_] = r['scenario']
     read = org | frc
     disp = np.load(tr + 'display_kitty.npz'); dt, dm = disp['tiles'] > 0, disp['map'] > 0
     rs = np.load(tr + 'read_screens_kitty.npz') if os.path.exists(tr + 'read_screens_kitty.npz') else None
@@ -180,6 +190,8 @@ def run(names, D, rom, jp, T, put):
         if ref: ev.append('named by the code of %s (%s)' % (', '.join(ref[:3]), ' '.join(hx(x) for x in refs[o][:3])))
         if rd: ev.append('read in the runs by %s' % ', '.join(n for n, _ in rd.most_common(3)))
         if scr: ev.append('first read on the screen %s (trace/read_screens_kitty.npz)' % scr)
+        bh = sorted({bgbr[x] for x in bgbr if o <= x < e})
+        if bh: ev.append('read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: %s)' % ', '.join(bh))
         jn = None
         if JN is not None and e - o >= 16:
             j = JR.find(R[o:e])

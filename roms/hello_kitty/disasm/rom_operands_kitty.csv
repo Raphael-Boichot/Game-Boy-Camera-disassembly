@@ -163,6 +163,7 @@ bank,site,kind,operand,value,target,expression,evidence,read
 02,02:7168,ptr,de,$70D8,02:70D8,ObjScript_02_7044_PrintGame_ObjCheckLanded + $94,C: dereferenced at 00:2091 (bank 02 mapped),no
 02,02:74D0,?,de,$7646,,,stored to hObject_RunAll_FFC5 for later use: not followed,
 02,02:74DE,?,de,$7753,,,stored to hObject_RunAll_FFC5 for later use: not followed,
+02,02:75CF,?,de,$760E,,,stored to hObject_RunAll_FFC5 for later use: not followed,
 02,02:77AE,?,hl,$7777,,,the walk ends without a use,
 02,02:77D4,?,hl,$7753,,,the walk ends without a use,
 02,02:794E,?,hl,$4858,,,the walk ends without a use,
@@ -371,12 +372,12 @@ bank,site,kind,operand,value,target,expression,evidence,read
 06,06:6223,num,bc,$580E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 06,06:62E0,ptr,hl,$62E8,06:62E8,Mode07_State02_62E8,C: dereferenced at 06:62E4 (bank 06 mapped),yes
 06,06:6658,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-06,06:6892,ptr,de,$1EB4,00:1EB4,Leftover_00_1E20 + $94,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6892,ptr,de,$1EB4,00:1EB4,Gfx_00_1DAB_Mode12_SlideShow_State00 + $109,C: dereferenced at 00:2091 (bank 02 mapped),no
 06,06:6898,ptr,de,$1E1B,00:1E1B,Gfx_00_1DAB_Mode12_SlideShow_State00 + $70,C: dereferenced at 00:2091 (bank 02 mapped),yes
-06,06:689E,ptr,de,$1E44,00:1E44,Leftover_00_1E20 + $24,C: dereferenced at 00:2091 (bank 02 mapped),no
-06,06:6A3B,ptr,de,$1EB4,00:1EB4,Leftover_00_1E20 + $94,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:689E,ptr,de,$1E44,00:1E44,Gfx_00_1DAB_Mode12_SlideShow_State00 + $99,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6A3B,ptr,de,$1EB4,00:1EB4,Gfx_00_1DAB_Mode12_SlideShow_State00 + $109,C: dereferenced at 00:2091 (bank 02 mapped),no
 06,06:6A41,ptr,de,$1E1B,00:1E1B,Gfx_00_1DAB_Mode12_SlideShow_State00 + $70,C: dereferenced at 00:2091 (bank 02 mapped),yes
-06,06:6A47,ptr,de,$1E44,00:1E44,Leftover_00_1E20 + $24,C: dereferenced at 00:2091 (bank 02 mapped),no
+06,06:6A47,ptr,de,$1E44,00:1E44,Gfx_00_1DAB_Mode12_SlideShow_State00 + $99,C: dereferenced at 00:2091 (bank 02 mapped),no
 06,06:6B6B,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 06,KeyPrompt_LoadSounds_Tbl5F7F,ptr,record,$5DFA,06:5DFA,KeyPrompt_LoadSounds_Tbl5DFA,C: dereferenced at 06:5FA8 (bank 06 mapped); the word was read by 06:5F9E,yes
 06,KeyPrompt_LoadSounds_Tbl5F7F,ptr,record,$5EB8,06:5EB8,KeyPrompt_LoadSounds_Tbl5EB8,C: dereferenced at 06:5FA8 (bank 06 mapped); the word was read by 06:5F9E,yes
@@ -479,13 +480,13 @@ bank,site,kind,operand,value,target,expression,evidence,read
 07,07:6820,num,bc,$4890,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 07,07:684E,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 07,07:6857,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-07,07:68FC,ptr,de,$593E,02:593E,ObjScript_02_5900_Mode0E_KittGamesHost_State0A + $3E,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
+07,07:68FC,ptr,de,$593E,02:593E,ObjScript_02_584A_KittHost_YesNoCursor + $F4,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
 07,07:68FF,ptr,bc,$596B,02:596B,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $1E,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
-07,07:6904,ptr,de,$5920,02:5920,ObjScript_02_5900_Mode0E_KittGamesHost_State0A + $20,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
+07,07:6904,ptr,de,$5920,02:5920,ObjScript_02_584A_KittHost_YesNoCursor + $D6,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
 07,07:6907,ptr,bc,$5965,02:5965,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $18,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,yes
-07,07:6913,ptr,de,$58FA,02:58FA,Leftover_02_58AC + $4E,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
+07,07:6913,ptr,de,$58FA,02:58FA,ObjScript_02_584A_KittHost_YesNoCursor + $B0,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
 07,07:6916,ptr,bc,$595F,02:595F,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $12,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
-07,07:691B,ptr,de,$58D4,02:58D4,Leftover_02_58AC + $28,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
+07,07:691B,ptr,de,$58D4,02:58D4,ObjScript_02_584A_KittHost_YesNoCursor + $8A,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
 07,07:691E,ptr,bc,$5959,02:5959,ObjScript_02_594D_Mode0E_KittGamesHost_State13 + $C,C: dereferenced at 00:2091 (bank 02 mapped); that instruction read the target block in the runs,no
 07,07:6922,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 07,07:6929,num,bc,$5850,,,"C: read as bytes (arithmetic, comparison) before any dereference",
