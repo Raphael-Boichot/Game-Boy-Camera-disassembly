@@ -1,0 +1,4 @@
+route,mode_state_at_A000_write,capture_starts,printer_pages,end_mode_state
+album,00:00,111,1,1C:03
+single,00:00,111,1,1C:03
+multi,00:00,111,2,1E:01
