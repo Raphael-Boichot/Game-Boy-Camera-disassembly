@@ -106,8 +106,7 @@ Rebuilding the default block from the ROM (`bank2:$4183`: `FE`×47, `00`, `00`×
 | `F30-F32` ≠ 0 | 3 slots, same save (the `1A` fill) |
 | `F33` = 1 (album copy) | 6 slots, all in `2022-02-02` |
 
-(The two battery-loss saves are in these counts only through `2021-05-19_2`: 29 slots listed, 27 match.) The mismatching `F34` values fit in-camera editing (the editor's save-back `$47C4` rewrites image + thumbnail but not `F34-F35`);
-this is plausible, **not proven** for those saves.
+(The two battery-loss saves are in these counts only through `2021-05-19_2`: 29 slots listed, 27 match.) The mismatching `F34` values fit in-camera editing: the editor's save-back `$47C4` rewrites image + thumbnail but not `F34-F35`, and a run of the game shows it (C, 2026-11-15: `tools/jp/f34_edit_check.py`, `roms/jp_rev_a/experiments/f34_edit/f34_edit_check.json`: two photos shot from a blank SRAM, photo 1 opened in the paint tool, drawn on and saved; its image now sums to `7C1E` while `F34-F35` keeps the `AE24` of the shot, photo 2 still matches). That each of the 52 slots of the real saves was edited is plausible (I), **not proven** for those saves: an edit leaves no other trace in the tag.
 
 ### 11.6 Boot seed byte (`$02FFF`)
 

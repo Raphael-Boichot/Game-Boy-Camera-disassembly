@@ -1,0 +1,59 @@
+{
+ "stages": [
+  {
+   "stage": "two photos shot and stored",
+   "state": "14:01",
+   "slots": [
+    {
+     "slot": 1,
+     "stored_F34_F35": "AE24",
+     "image_sum_xor": "AE24",
+     "match": true
+    },
+    {
+     "slot": 2,
+     "stored_F34_F35": "C1AF",
+     "image_sum_xor": "C1AF",
+     "match": true
+    }
+   ]
+  },
+  {
+   "stage": "paint tool open on photo 1",
+   "state": "10:03",
+   "slots": [
+    {
+     "slot": 1,
+     "stored_F34_F35": "AE24",
+     "image_sum_xor": "AE24",
+     "match": true
+    },
+    {
+     "slot": 2,
+     "stored_F34_F35": "C1AF",
+     "image_sum_xor": "C1AF",
+     "match": true
+    }
+   ]
+  },
+  {
+   "stage": "drawn on, then saved (B, A: yes)",
+   "state": "10:09",
+   "slots": [
+    {
+     "slot": 1,
+     "stored_F34_F35": "AE24",
+     "image_sum_xor": "7C1E",
+     "match": false
+    },
+    {
+     "slot": 2,
+     "stored_F34_F35": "C1AF",
+     "image_sum_xor": "C1AF",
+     "match": true
+    }
+   ]
+  }
+ ],
+ "save_back_call_07_6A4E_ran": true
+}

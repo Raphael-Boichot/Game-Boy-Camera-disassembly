@@ -5,6 +5,7 @@
 - `tools/jp/frame_line_stats.py` — per-line statistics of one full 128 x 128 frame supplied as a PNG (flat lines, test pixels, column 0); writes `sensor/frame_line_stats_owner.csv` (numbers only, the picture is not in git; §9)
 - `tools/jp/sensor_pixel_map.py` — the figure of §18.3: calibration test pixels, exposure metering reads (addresses read from the ROM bytes), shown area and the saturated lines on the 128 x 128 raw frame
 - `tools/jp/sensor_meter_lib.py` — the 14-opcode executor that reads the 168 metering addresses of `Cam_PopcountSampleLoop` out of the ROM bytes (used by `sensor_meter_geom.py`, `sensor_pixel_map.py` and `sensor_meter_reads_bgb.py`)
+- `tools/jp/f34_edit_check.py` — a core run of the Japanese ROM, keys only: two photos shot from a blank SRAM, photo 1 drawn on in the paint tool and saved; shows that the save-back keeps the `F34-F35` image checksum of the shot (docs §3.8, §11.5; `roms/jp_rev_a/experiments/f34_edit/f34_edit_check.json`)
 - `tools/jp/sensor_meter_reads_bgb.py` — logs in BGB every read of `$A000-$AFFF` at `0A:5093` / `0A:509E` during a live-view run and compares the addresses with the executor's list (§10-B); writes `sensor/meter_reads_bgb.csv` and `meter_reads_bgb.txt`
 - `tools/ram_census.py` — full WRAM/HRAM access census from an mgbdis disassembly
 - `tools/asset_catalog.py` — enumerates every banked graphics/tilemap copy call site
