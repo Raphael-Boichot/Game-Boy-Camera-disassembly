@@ -1,4 +1,4 @@
-# WORK IN PROGRESS
+# WORK IN PROGRESS / DO NOT TRUST
 
 # Game Boy Camera disassembly - the definitive (?) version
 
