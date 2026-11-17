@@ -10,7 +10,7 @@ Eventually, ROM disassembly became the only way to push further and finally brin
 
 Then, parallel to all this, LLMs arrived. By early 2026, they had become reliable enough to genuinely assist with code disassembly. Because my deep knowledge of how the camera sensor (and the camera ROMs in general) works allowed me to reliably validate or reject any guess or output the AI produced, I realized I had no excuse not to try. It suddenly felt realistically feasible without completely hijacking my personal life.
 
-So, here is the project. Like all my previous work, it will be improved step by step—and as always, take it for what it is: free, passionate, and built for the love of tinkering.
+So, here is the project. Like all my previous work, it will be improved step by step—and as always, take it for what it is: free, passionate, and built for the love of tinkering. Not satisfied by the project? Just move away.
 
 ### Project summary
 
