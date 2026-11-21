@@ -281,6 +281,8 @@ static void wr(uint16_t a, uint8_t v){
 }
 
 /* ---- time ---- */
+static uint32_t vblanks;   /* V-Blank starts (LY reaches 144, LCD on): BGB's demo takes one byte per such frame (tools/jp/bgb_run.py core_demo) */
+uint32_t gb_vblanks(void){ return vblanks; }
 static void tick_hw(int cyc){
   g.cycles+=cyc;
   /* timer */
@@ -294,7 +296,7 @@ static void tick_hw(int cyc){
   /* lcd */
   if(g.lcd_on){
     g.line_cycle+=cyc;
-    while(g.line_cycle>=456){ g.line_cycle-=456; g.ly++; if(g.ly==144){ req(0); } if(g.ly>153){ g.ly=0; g.frame++; } lcd_stat_eval(); }
+    while(g.line_cycle>=456){ g.line_cycle-=456; g.ly++; if(g.ly==144){ req(0); vblanks++; } if(g.ly>153){ g.ly=0; g.frame++; } lcd_stat_eval(); }
     lcd_stat_eval();
   } else { /* LCD off: frames still counted by cycle */
     static uint32_t acc=0; acc+=cyc; if(acc>=70224){ acc-=70224; g.frame++; }

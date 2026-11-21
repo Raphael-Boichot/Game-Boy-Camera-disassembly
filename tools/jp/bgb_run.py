@@ -4,6 +4,11 @@ Library + CLI.  CLI: bgb_run.py ROM SAV OUTPREFIX 'Right:8:5,A:8:30,...' [--comb
 Sequence items are KEYS:hold:wait, KEYS joined with '+' (Right Left Up Down A B Select Start), frames at 59.7 Hz.
 Environment: BGB_DIR (the BGB folder), BGB_WP (a -wp list: every run() then logs the hits of those watchpoints to BGB_DIR/debugmsg.txt), BGB_HF = the headless flags (default -hf; in the sandbox of 2026-10-11 a run with -demoplay and the printer link (-connect) hung at the link handshake with -hf,
 `BGB_HF=-headless` works: it is not run-fast, but a linked BGB runs at about 50-60 frames per second anyway).
+BGB's demo player takes one demo byte per frame it shows: while the LCD is off it does not advance (measured 2026-11-21 on corpus path 1E:01:
+the gap between two presses grew by exactly the LCD-off time, 5.6 and 9.3 frames), whereas the core (coverage/src/gbcov.c) counts a frame
+every 70,224 cycles with the LCD off. A sequence timed on the core therefore lands later in BGB after every LCD-off stretch (the boot, screen
+loads). core_demo() builds the demo by stepping the core and giving BGB one byte per V-Blank start of the core (coverage/src/gbcov.c gb_vblanks), so both see the same keys at the
+same game moment; run(..., demo=bytes) plays it instead of make_demo(seq).
 Joypad bits of the BGB demo byte: low nibble A=1 B=2 Select=4 Start=8, high nibble Right=$10 Left=$20 Up=$40 Down=$80 (checked on the camera)."""
 import sys, os, subprocess, struct, shutil
 BGB = os.environ.get('BGB_DIR', '/home/claude/bgbx')
@@ -20,16 +25,32 @@ def make_demo(seq, combo=0, free=400, boot_hold=250, tail=90):
         b += bytes([mask(keys)]) * hold + bytes(wait)
     b += bytes(tail)
     return bytes(b)
+def core_demo(seq, sav, combo=0, free=400, printer=0, boot_hold=250, tail=90):
+    """The demo of seq as the core plays it (combo and seq keys in the core's mask = the corpus spec), one byte per V-Blank start
+    (see the module note). Returns (demo bytes, core (mode, state) at the end, core frames without a V-Blank start, i.e. LCD off)."""
+    import lib; from lib import g
+    names = [(g.RIGHT, 'Right'), (g.LEFT, 'Left'), (g.UP, 'Up'), (g.DOWN, 'Down'), (g.A, 'A'), (g.B, 'B'), (g.SELECT, 'Select'), (g.START, 'Start')]
+    def core(k): return sum(m for m, n in names if n in k.split('+'))
+    g.set_organic(1); g.reset(sav); g.L.gb_attach_printer(printer)
+    dem = bytearray(); off = [0]
+    def frames(ck, db, n):
+        for _ in range(n):
+            v0 = g.L.gb_vblanks(); g.keys(ck); g.run(1); v = g.L.gb_vblanks() - v0
+            dem.extend(bytes([db]) * v); off[0] += v == 0                 # one byte per V-Blank start: none with the LCD off, two if it came back on within the frame
+    frames(combo, mask('+'.join(n for m, n in names if combo & m)), boot_hold); frames(0, 0, free)
+    for keys, hold, wait in seq: frames(core(keys), mask(keys), hold); frames(0, 0, wait)
+    frames(0, 0, tail)
+    return bytes(dem), lib.cur(), off[0]
 def read_state(path):
     d = open(path, 'rb').read(); i = 0; out = {}
     while i < len(d):
         j = d.index(b'\0', i); name = d[i:j].decode('latin1'); sz = int.from_bytes(d[j + 1:j + 5], 'little')
         out[name] = d[j + 5:j + 5 + sz]; i = j + 5 + sz
     return out
-def run(rom, sav, prefix, seq, combo=0, free=400, br=None, timeout=900, extra=(), tail=90):
+def run(rom, sav, prefix, seq, combo=0, free=400, br=None, timeout=900, extra=(), tail=90, demo=None):
     os.makedirs(os.path.dirname(os.path.abspath(prefix)), exist_ok=True)
     dem, sna, bmp = prefix + '.dem', prefix + '.sna', prefix + '.bmp'
-    open(dem, 'wb').write(make_demo(seq, combo, free, tail=tail))
+    open(dem, 'wb').write(demo if demo is not None else make_demo(seq, combo, free, tail=tail))
     sv = prefix + '.sav'
     if sav is not None: shutil.copy(sav, sv)
     for f in (sna, bmp):

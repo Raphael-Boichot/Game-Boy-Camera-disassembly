@@ -14,7 +14,7 @@ L.gb_run_frames.argtypes = [C.c_int]; L.gb_run_frame.restype = C.c_int
 L.gb_peek.argtypes = [C.c_uint16]; L.gb_peek.restype = C.c_uint8
 L.gb_poke.argtypes = [C.c_uint16, C.c_uint8]
 L.gb_pc.restype = C.c_uint16; L.gb_rombank.restype = C.c_uint8
-L.gb_frame.restype = C.c_uint32; L.gb_cycles.restype = C.c_uint64
+L.gb_frame.restype = C.c_uint32; L.gb_vblanks.restype = C.c_uint32; L.gb_cycles.restype = C.c_uint64
 for n in ('gb_cnt_exec', 'gb_cnt_dread', 'gb_cnt_ram'): getattr(L, n).restype = C.c_uint64
 for n in ('gb_cov_exec_ptr', 'gb_cov_dread_ptr', 'gb_cov_ram_ptr', 'gb_cov_reader_ptr', 'gb_sram_ptr', 'gb_wram_ptr'):
     getattr(L, n).restype = C.c_void_p

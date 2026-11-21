@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Replay, in BGB, the key sequence that reaches (mode,state) SIG in my corpus, on ROM (JP or international).
-usage: bgb_sig.py CORPUS ROM OUTDIR SIG [SIG ...]   -> OUTDIR/MM_SS.bmp/.sna, prints mode:state reached in BGB."""
+usage: bgb_sig.py CORPUS ROM OUTDIR SIG [SIG ...]   -> OUTDIR/MM_SS.bmp/.sna, prints mode:state reached in BGB.
+BGB_LCD_SYNC=1: the demo is built by bgb_run.core_demo (one byte per V-Blank start of the core, 2026-11-21) instead of the 3-frame shift BGB_SHIFT;
+the line then also gives the core's own end state."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g
@@ -19,6 +21,10 @@ def seq_for(sig):
             seq.append((names(a[0]), int(a[1]), int(a[2])))
     return sp, seq, i
 if __name__ == '__main__':
+    if os.environ.get('BGB_LCD_SYNC') and len(sys.argv) > 5:     # one process per path: the core's LCD-off frame counter (a static in gbcov.c)
+        import subprocess                                       # survives g.reset, so a demo built after another path can be one frame off
+        for sig in sys.argv[4:]: subprocess.run([sys.executable] + sys.argv[:4] + [sig])
+        sys.exit(0)
     for sig in sys.argv[4:]:
         r = seq_for(sig)
         if r is None: print(sig, 'no entry'); continue
@@ -29,5 +35,9 @@ if __name__ == '__main__':
         if sp['sav'] in ('_ff', '_zero'):                       # synthetic all-FF / all-00 saves used by the explorer
             sav = os.path.join(out, sp['sav'] + '.sav'); open(sav, 'wb').write((b'\xff' if sp['sav'] == '_ff' else b'\0') * 0x20000)
         if sp.get('printer'): print(sig, 'SKIP (printer attached in the corpus path)', flush=True); continue
-        res = bgb_run.run(rom, sav, '%s/%s' % (out, sig.replace(':', '_')), seq, combo=0 if not sp['combo'] else bgb_run.mask(names(sp['combo'])), free=sp['free'] + int(os.environ.get('BGB_SHIFT', 0)))
-        print(sig, 'entry', i, 'BGB rc', res['rc'], 'mode:state = %02X:%02X' % (res['mode'] or 0, res['state'] or 0) if res['mode'] is not None else 'no state', 'PC', hex(res['pc'] or 0), flush=True)
+        demo = tail = None
+        if os.environ.get('BGB_LCD_SYNC'):
+            sb = open(sav, 'rb').read() if sav else b'\xff' * 0x20000
+            demo, cend, off = bgb_run.core_demo(seq, sb, sp['combo'], sp['free'], tail=90); tail = ' core %02X:%02X, core frames with the LCD off %d' % (cend + (off,))
+        res = bgb_run.run(rom, sav, '%s/%s' % (out, sig.replace(':', '_')), seq, combo=0 if not sp['combo'] else bgb_run.mask(names(sp['combo'])), free=sp['free'] + int(os.environ.get('BGB_SHIFT', 0)), demo=demo)
+        print(sig, 'entry', i, 'BGB rc', res['rc'], 'mode:state = %02X:%02X' % (res['mode'] or 0, res['state'] or 0) if res['mode'] is not None else 'no state', 'PC', hex(res['pc'] or 0), tail or '', flush=True)
