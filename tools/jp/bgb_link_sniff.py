@@ -24,7 +24,7 @@ def mk(role,extra,dem_frames):
         if os.path.exists(f): os.remove(f)
     d='/home/claude/bgbpr91'
     cmd=['xvfb-run','-a','wine',d+'/bgb.exe','-hf','-nowarn','-nowriteini','-nobattsave','-ini',d+'/bgb.ini','-rom',ROM,'-demoplay',p+'.dem','-stateonexit',p+'.sna','-screenonexit',p+'.bmp','-loadbatt',p+'.sav']+extra
-    return subprocess.Popen(cmd,env=dict(os.environ,WINEDEBUG='-all',WINEPREFIX='/root/wineprefix'),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    return subprocess.Popen(cmd,env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'},WINEDEBUG='-all',WINEPREFIX='/root/wineprefix'),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 pa=mk('listener',['-listen','127.0.0.1:8765'],200); time.sleep(4)
 pb=mk('client',['-connect','127.0.0.1:8766'],200)
 c,_=srv.accept(); u=socket.socket(); u.connect(('127.0.0.1',8765))

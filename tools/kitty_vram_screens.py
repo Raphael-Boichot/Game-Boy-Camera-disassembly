@@ -20,7 +20,7 @@ def run(name,keys,save=None):
         dem=bytes(3+700)+b''.join(bytes([KEYS[k]])*8+bytes(90) for k in keys)+bytes(60)
         open(t+'/k.dem','wb').write(dem); open(t+'/k.sav','wb').write(open(save,'rb').read() if save else sav)
         if os.path.exists(t+'/k.sna'): os.remove(t+'/k.sna')
-        subprocess.run(['xvfb-run','-a','wine',bgb+'/bgb.exe','-hf','-nowarn','-nowriteini','-nobattsave','-ini',bgb+'/bgb.ini','-rom',ROM,'-demoplay',t+'/k.dem','-stateonexit',t+'/k.sna','-loadbatt',t+'/k.sav'],env=dict(os.environ,WINEDEBUG='-all',WINEPREFIX='/root/wineprefix'),capture_output=True,timeout=300)
+        subprocess.run(['xvfb-run','-a','wine',bgb+'/bgb.exe','-hf','-nowarn','-nowriteini','-nobattsave','-ini',bgb+'/bgb.ini','-rom',ROM,'-demoplay',t+'/k.dem','-stateonexit',t+'/k.sna','-loadbatt',t+'/k.sav'],env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'},WINEDEBUG='-all',WINEPREFIX='/root/wineprefix'),capture_output=True,timeout=300)
         s=read_state(t+'/k.sna'); h=s['HRAM']
         return name,'%02X:%02X'%(h[0x0D],h[0x0E]),np.frombuffer(s['VRAM'][:0x1800],np.uint8).copy(),s['LCDC'][0],np.frombuffer(s['OAM'],np.uint8).copy()
     finally: FREE.put(w)

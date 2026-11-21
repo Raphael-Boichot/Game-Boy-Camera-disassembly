@@ -61,7 +61,7 @@ def endstate(prefix):
 def run_one(sc, k):
     out = os.path.join(OUTDIR, sc['name']); os.makedirs(out, exist_ok=True)
     br = never_br(sc.get('heads', sc.get('rom', 'intl')))      # 'heads': whose never-run heads, when 'rom' is a path (a patched copy)
-    da = bgbdir(2 * k); env = dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix', **sc.get('env', {}))
+    da = bgbdir(2 * k); env = dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix', **sc.get('env', {}))
     if sc.get('prn_err'): env['PRN_ERR'] = sc['prn_err']
     for d in (da,):
         if os.path.exists(os.path.join(d, 'debugmsg.txt')): os.remove(os.path.join(d, 'debugmsg.txt'))

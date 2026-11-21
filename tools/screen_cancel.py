@@ -41,7 +41,7 @@ def run(keys):
         if os.path.exists(os.path.join(tmp, 'k.sna')): os.remove(os.path.join(tmp, 'k.sna'))
         subprocess.run(['xvfb-run', '-a', 'wine', os.path.join(bgb, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(bgb, 'bgb.ini'),
                         '-rom', os.path.abspath(a.rom), '-demoplay', os.path.join(tmp, 'k.dem'), '-stateonexit', os.path.join(tmp, 'k.sna'),
-                        '-loadbatt', os.path.join(tmp, 'k.sav')], env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=300)
+                        '-loadbatt', os.path.join(tmp, 'k.sav')], env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=300)
         st = read_state(os.path.join(tmp, 'k.sna')) if os.path.exists(os.path.join(tmp, 'k.sna')) else {}
         m, s = byte(st, MA), byte(st, SA)
         return '%02X:%02X' % (m, s) if m is not None and s is not None else '?'

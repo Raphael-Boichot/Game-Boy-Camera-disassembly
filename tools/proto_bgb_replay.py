@@ -36,7 +36,7 @@ def bgb(prefix, keys, sav):
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(B.BGB, 'bgb.exe'), os.environ.get('BGB_HF', '-hf'), '-nowarn', '-nowriteini', '-nobattsave',
            '-ini', os.path.join(B.BGB, 'bgb.ini'), '-rom', os.path.abspath(a.rom), '-demoplay', os.path.abspath(dem),
            '-stateonexit', os.path.abspath(sna), '-screenonexit', os.path.abspath(bmp), '-loadbatt', os.path.abspath(sv)]
-    subprocess.run(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
+    subprocess.run(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
     return (B.read_state(sna) if os.path.exists(sna) else {}), bmp
 rows = []
 for d in a.dirs:

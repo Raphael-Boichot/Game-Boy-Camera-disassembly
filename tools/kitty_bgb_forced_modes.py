@@ -37,7 +37,7 @@ for m in [int(x, 16) for x in a.modes.split(',')]:
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(bgb, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(bgb, 'bgb.ini'),
            '-rom', os.path.join(tmp, 'f.gb'), '-demoplay', os.path.join(tmp, 'f.dem'), '-stateonexit', os.path.join(tmp, 'f.sna'),
            '-screenonexit', os.path.join(tmp, 'f.bmp'), '-loadbatt', os.path.join(tmp, 'f.sav')]
-    subprocess.run(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=300)
+    subprocess.run(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=300)
     st = read_state(os.path.join(tmp, 'f.sna')) if os.path.exists(os.path.join(tmp, 'f.sna')) else {}
     h = st.get('HRAM', b''); pic = 'kitty_forced_mode_%02X.png' % m
     if os.path.exists(os.path.join(tmp, 'f.bmp')): Image.open(os.path.join(tmp, 'f.bmp')).save(os.path.join(a.out, pic))

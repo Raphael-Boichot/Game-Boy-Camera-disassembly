@@ -43,7 +43,7 @@ def run(rom, sav, prefix, seq, combo=0, free=400, br=None, timeout=900, extra=()
         cmd += ['-wp', wp, '-setting', 'DebugMsgFile=1']
         if os.path.exists(os.path.join(BGB, 'debugmsg.txt')): os.remove(os.path.join(BGB, 'debugmsg.txt'))
     cmd += list(extra)
-    env = dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix')
+    env = dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix')
     r = subprocess.run(cmd, env=env, capture_output=True, timeout=timeout)
     st = read_state(sna) if os.path.exists(sna) else {}
     w = st.get('WRAM', b'')

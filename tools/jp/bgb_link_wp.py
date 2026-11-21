@@ -31,7 +31,7 @@ def start(role, sav, seq, extra):
     d = DIRS[role]
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(d, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(d, 'bgb.ini'),
            '-rom', rom, '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav', '-setting', 'DebugMsgFile=1'] + extra
-    return subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.Popen(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 t0 = time.time()
 pa = start('sender', sa, SEND, ['-listen', '127.0.0.1:8765'] + (['-wp', os.environ['WPS_SENDER']] if os.environ.get('WPS_SENDER') else [])); time.sleep(4)
 pb = start('receiver', sb, RECV, ['-connect', '127.0.0.1:8765', '-wp', WPS])      # (env WPS_SENDER = a -wp list for the sender too, see the line above)

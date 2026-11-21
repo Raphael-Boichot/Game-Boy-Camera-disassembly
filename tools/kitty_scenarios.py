@@ -55,7 +55,7 @@ for name, sram, keys, frames, shots in SCEN:
         subprocess.run(['xvfb-run', '-a', 'wine', os.path.join(bgb, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(bgb, 'bgb.ini'),
                         '-rom', os.path.abspath(a.rom), '-demoplay', os.path.join(tmp, 's.dem'), '-stateonexit', os.path.join(tmp, 's.sna'),
                         '-screenonexit', os.path.join(tmp, 's.bmp'), '-loadbatt', os.path.join(tmp, 's.sav')],
-                       env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=600)
+                       env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=600)
         st = read_state(os.path.join(tmp, 's.sna')) if os.path.exists(os.path.join(tmp, 's.sna')) else {}
         h = st.get('HRAM', b''); pic = 'kitty_scen_%s_%d.png' % (name, n)
         if os.path.exists(os.path.join(tmp, 's.bmp')): Image.open(os.path.join(tmp, 's.bmp')).save(os.path.join(a.out, pic))

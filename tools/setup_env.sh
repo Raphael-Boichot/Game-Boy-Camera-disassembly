@@ -41,7 +41,7 @@ if [ "${1:-}" != "--no-wine" ]; then
   fi
   command -v wine >/dev/null && echo "wine: $(wine --version 2>/dev/null)" || echo "WINE MISSING"
   # the harness (tools/jp/bgb_run.py) runs BGB in WINEPREFIX=/root/wineprefix; a prefix made before wine32 was installed has no syswow64 and must be remade
-  export WINEPREFIX=/root/wineprefix WINEDEBUG=-all
+  export WINEPREFIX=/root/wineprefix WINEDEBUG=-all; unset TMPDIR    # 2026-11-21: wine aborts at start (free(): invalid pointer) when TMPDIR is set in this sandbox
   if [ -d "$WINEPREFIX" ] && [ ! -d "$WINEPREFIX/drive_c/windows/syswow64" ]; then rm -rf "$WINEPREFIX"; fi
   [ -d "$WINEPREFIX/drive_c/windows/syswow64" ] || timeout 120 xvfb-run -a wineboot -i >/dev/null 2>&1
   mkdir -p "$BGB_DIR"; [ -f "$BGB_DIR/bgb.exe" ] || cp "$ROMDIR/bgb.exe" "$BGB_DIR/bgb.exe"

@@ -49,7 +49,7 @@ for role, d, link in (('giver', dg, ['-listen', '127.0.0.1:8766']), ('receiver',
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(bgb, 'bgb.exe'), os.environ.get('BGB_HF', '-headless'), '-nowarn', '-nowriteini', '-ini', os.path.join(bgb, 'bgb.ini'),
            '-rom', os.path.abspath(a.rom), '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav'] + link
     if wp: cmd += ['-wp', wp, '-setting', 'DebugMsgFile=1']
-    procs[role] = subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    procs[role] = subprocess.Popen(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if role == 'giver': time.sleep(4)
 for r, p in procs.items():
     try: p.wait(timeout=1200)

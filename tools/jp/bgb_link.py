@@ -20,7 +20,7 @@ def start(role, sav, seq, extra):
         if os.path.exists(f): os.remove(f)
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(bgb_run.BGB, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(bgb_run.BGB, 'bgb.ini'),
            '-rom', rom, '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav'] + extra
-    return subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.Popen(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 t0 = time.time()
 pa = start('sender', sa, SEND, ['-listen', '127.0.0.1:8765']); time.sleep(4)
 pb = start('receiver', sb, RECV, ['-connect', '127.0.0.1:8765'])

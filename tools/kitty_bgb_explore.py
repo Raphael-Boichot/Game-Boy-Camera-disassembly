@@ -62,7 +62,7 @@ def _run(w, path):
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(bgb, 'bgb.exe'), '-hf', '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(bgb, 'bgb.ini'),
            '-rom', os.path.abspath(a.rom), '-demoplay', os.path.join(tmp, 'k.dem'), '-stateonexit', os.path.join(tmp, 'k.sna'),
            '-screenonexit', os.path.join(tmp, 'k.bmp'), '-loadbatt', os.path.join(tmp, 'k.sav')]
-    try: subprocess.run(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=300)
+    try: subprocess.run(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=300)
     except subprocess.TimeoutExpired: return path, None, None
     st = read_state(os.path.join(tmp, 'k.sna')) if os.path.exists(os.path.join(tmp, 'k.sna')) else {}
     m_, s_ = st_byte(st, MA), st_byte(st, SA)

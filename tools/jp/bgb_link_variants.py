@@ -45,7 +45,7 @@ def start(role, sav, seq, extra, rom=rom):
         if os.path.exists(f): os.remove(f)
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(d, 'bgb.exe'), os.environ.get('BGB_HF', '-hf'), '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(d, 'bgb.ini'),
            '-rom', rom, '-demoplay', p + '.dem', '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav', '-br', BR, '-setting', 'DebugMsgFile=1'] + extra
-    return subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    return subprocess.Popen(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 if not os.environ.get('POST_ONLY'):     # POST_ONLY=1: do not run, only read the debugmsg files of an earlier run and write the heads file again
     sav_s, sav_r = edit(sa, gs, False), edit(sb, gr, True)
     t0 = time.time(); port = os.environ.get('LINK_PORT', '8766')

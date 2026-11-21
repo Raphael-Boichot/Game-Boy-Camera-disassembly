@@ -35,7 +35,7 @@ for n, seq, net in ((1, a.seq1, ['-listen', '127.0.0.1:8766']), (2, a.seq2, ['-c
     if os.environ.get('BGB_WP'):                  # logging watchpoints (as tools/jp/bgb_run.py): hits go to <instance dir>/debugmsg.txt
         cmd += ['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1']
         if os.path.exists(os.path.join(d, 'debugmsg.txt')): os.remove(os.path.join(d, 'debugmsg.txt'))
-    procs.append(subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE))
+    procs.append(subprocess.Popen(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE))
     if n == 1: time.sleep(4)
 for p in procs:
     try: p.wait(timeout=600)

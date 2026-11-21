@@ -57,7 +57,7 @@ def run_in(mine, prefix, seq, extra):
     open(dem, 'wb').write(bgb_run.make_demo(seq, 0, 400, tail=2400)); shutil.copy(SAV, sv)
     cmd = ['xvfb-run', '-a', 'wine', os.path.join(mine, 'bgb.exe'), os.environ.get('BGB_HF', '-headless'), '-nowarn', '-nowriteini', '-nobattsave', '-ini', os.path.join(mine, 'bgb.ini'),
            '-rom', os.path.abspath(a.rom), '-demoplay', dem, '-stateonexit', sna, '-screenonexit', bmp, '-loadbatt', sv] + extra
-    subprocess.run(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=3600)
+    subprocess.run(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=3600)
     st = bgb_run.read_state(sna) if os.path.exists(sna) else {}
     w = st.get('WRAM', b'')
     return dict(mode=w[0x15CE] if len(w) > 0x15CF else None, state=w[0x15CF] if len(w) > 0x15CF else None)

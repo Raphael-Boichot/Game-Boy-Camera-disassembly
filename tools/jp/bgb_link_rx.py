@@ -37,7 +37,7 @@ def start(role, rom, sav, seq, wp, link):
     cmd = ['xvfb-run', '-a', 'wine', d + '/bgb.exe', os.environ.get('BGB_HF', '-headless'), '-nowarn', '-nowriteini', '-nobattsave', '-ini', d + '/bgb.ini', '-rom', rom, '-demoplay', p + '.dem',
            '-stateonexit', p + '.sna', '-screenonexit', p + '.bmp', '-loadbatt', p + '.sav', '-setting', 'DebugMsgFile=1', '-setting', 'SystemMode=0',
            '-wp', ','.join(x for x in (wp, CTL) if x)] + link
-    return subprocess.Popen(cmd, env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE), d, p
+    return subprocess.Popen(cmd, env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), stdout=subprocess.PIPE, stderr=subprocess.PIPE), d, p
 os.makedirs(os.path.dirname(prefix), exist_ok=True); t0 = time.time()
 pi, di, xi = start('init', rom_i, sav_i, INIT, WPI, ['-listen', '127.0.0.1:8766']); time.sleep(4)
 pr, dr, xr = start('resp', rom_r, sav_r, RESP, WPR, ['-connect', '127.0.0.1:8766'])

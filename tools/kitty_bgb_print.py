@@ -36,7 +36,7 @@ for n in [int(x) for x in a.frames.split(',')]:
     srv = PrinterServer(a.port, d).start(); time.sleep(1)
     subprocess.run(['xvfb-run', '-a', 'wine', bgb + '/bgb.exe', os.environ.get('BGB_HF', '-hf'), '-nowarn', '-nowriteini', '-nobattsave', '-ini', bgb + '/bgb.ini', '-rom', os.path.abspath(a.rom),
                     '-demoplay', d + '/s.dem', '-screenonexit', d + '/s.bmp', '-stateonexit', d + '/s.sna', '-loadbatt', d + '/s.sav',
-                    '-connect', '127.0.0.1:%d' % a.port] + (['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1'] if os.environ.get('BGB_WP') else []), env=dict(os.environ, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
+                    '-connect', '127.0.0.1:%d' % a.port] + (['-wp', os.environ['BGB_WP'], '-setting', 'DebugMsgFile=1'] if os.environ.get('BGB_WP') else []), env=dict({k: v for k, v in os.environ.items() if k != 'TMPDIR'}, WINEDEBUG='-all', WINEPREFIX='/root/wineprefix'), capture_output=True, timeout=900)
     srv.stop()
     if os.environ.get('BGB_WP') and os.path.exists(bgb + '/debugmsg.txt'): shutil.move(bgb + '/debugmsg.txt', d + '/debugmsg.txt')
     try: srv.write_log()
