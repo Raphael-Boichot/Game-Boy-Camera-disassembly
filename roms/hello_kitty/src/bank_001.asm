@@ -7,78 +7,11 @@ SECTION "ROM Bank $001", ROMX[$4000], BANK[$1]
 ; C: leftover: 512 bytes (01:4000-41FF) 256 signed words round(256 sin(2 pi i / 256)), the low bytes at $4000-$40FF
 ; and the high bytes at $4100-$41FF (checked: 0 errors); no proven instruction points at it and no run reads it
 Leftover_01_4000_SinTable::
-    db $00, $06, $0d, $13, $19, $1f, $26, $2c, $32, $38, $3e, $44, $4a, $50, $56, $5c
-    db $62, $68, $6d, $73, $79, $7e, $84, $89, $8e, $93, $98, $9d, $a2, $a7, $ac, $b1
-    db $b5, $b9, $be, $c2, $c6, $ca, $ce, $d1, $d5, $d8, $dc, $df, $e2, $e5, $e7, $ea
-    db $ed, $ef, $f1, $f3, $f5, $f7, $f8, $fa, $fb, $fc, $fd, $fe, $ff, $ff, $00, $00
-    db $00, $00, $00, $ff, $ff, $fe, $fd, $fc, $fb, $fa, $f8, $f7, $f5, $f3, $f1, $ef
-    db $ed, $ea, $e7, $e5, $e2, $df, $dc, $d8, $d5, $d1, $ce, $ca, $c6, $c2, $be, $b9
-    db $b5, $b1, $ac, $a7, $a2, $9d, $98, $93, $8e, $89, $84, $7e, $79, $73, $6d, $68
-    db $62, $5c, $56, $50, $4a, $44, $3e, $38, $32, $2c, $26, $1f, $19, $13, $0d, $06
-    db $00, $fa, $f3, $ed, $e7, $e1, $da, $d4, $ce, $c8, $c2, $bc, $b6, $b0, $aa, $a4
-    db $9e, $98, $93, $8d, $87, $82, $7c, $77, $72, $6d, $68, $63, $5e, $59, $54, $4f
-    db $4b, $47, $42, $3e, $3a, $36, $32, $2f, $2b, $28, $24, $21, $1e, $1b, $19, $16
-    db $13, $11, $0f, $0d, $0b, $09, $08, $06, $05, $04, $03, $02, $01, $01, $00, $00
-    db $00, $00, $00, $01, $01, $02, $03, $04, $05, $06, $08, $09, $0b, $0d, $0f, $11
-    db $13, $16, $19, $1b, $1e, $21, $24, $28, $2b, $2f, $32, $36, $3a, $3e, $42, $47
-    db $4b, $4f, $54, $59, $5e, $63, $68, $6d, $72, $77, $7c, $82, $87, $8d, $93, $98
-    db $9e, $a4, $aa, $b0, $b6, $bc, $c2, $c8, $ce, $d4, $da, $e1, $e7, $ed, $f3, $fa
-
-    ; padding
-    ds $3e, $00
-
-    db $01, $01, $01, $01, $01
-
-    ; padding
-    ds $3e, $00
-
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-
+    INCBIN "data/bank_01/Leftover_01_4000_SinTable.bin" ; $4000, 512 bytes
 ; C: leftover: 512 bytes (01:4200-43FF) 256 signed words round(256 cos(2 pi i / 256)), low bytes $4200-$42FF, high
 ; bytes $4300-$43FF (checked: 0 errors); never read
 Leftover_01_4200_CosTable::
-    db $00, $00, $00, $ff, $ff, $fe, $fd, $fc, $fb, $fa, $f8, $f7, $f5, $f3, $f1, $ef
-    db $ed, $ea, $e7, $e5, $e2, $df, $dc, $d8, $d5, $d1, $ce, $ca, $c6, $c2, $be, $b9
-    db $b5, $b1, $ac, $a7, $a2, $9d, $98, $93, $8e, $89, $84, $7e, $79, $73, $6d, $68
-    db $62, $5c, $56, $50, $4a, $44, $3e, $38, $32, $2c, $26, $1f, $19, $13, $0d, $06
-    db $00, $fa, $f3, $ed, $e7, $e1, $da, $d4, $ce, $c8, $c2, $bc, $b6, $b0, $aa, $a4
-    db $9e, $98, $93, $8d, $87, $82, $7c, $77, $72, $6d, $68, $63, $5e, $59, $54, $4f
-    db $4b, $47, $42, $3e, $3a, $36, $32, $2f, $2b, $28, $24, $21, $1e, $1b, $19, $16
-    db $13, $11, $0f, $0d, $0b, $09, $08, $06, $05, $04, $03, $02, $01, $01, $00, $00
-    db $00, $00, $00, $01, $01, $02, $03, $04, $05, $06, $08, $09, $0b, $0d, $0f, $11
-    db $13, $16, $19, $1b, $1e, $21, $24, $28, $2b, $2f, $32, $36, $3a, $3e, $42, $47
-    db $4b, $4f, $54, $59, $5e, $63, $68, $6d, $72, $77, $7c, $82, $87, $8d, $93, $98
-    db $9e, $a4, $aa, $b0, $b6, $bc, $c2, $c8, $ce, $d4, $da, $e1, $e7, $ed, $f3, $fa
-    db $00, $06, $0d, $13, $19, $1f, $26, $2c, $32, $38, $3e, $44, $4a, $50, $56, $5c
-    db $62, $68, $6d, $73, $79, $7e, $84, $89, $8e, $93, $98, $9d, $a2, $a7, $ac, $b1
-    db $b5, $b9, $be, $c2, $c6, $ca, $ce, $d1, $d5, $d8, $dc, $df, $e2, $e5, $e7, $ea
-    db $ed, $ef, $f1, $f3, $f5, $f7, $f8, $fa, $fb, $fc, $fd, $fe, $ff, $ff, $00, $00
-    db $01, $01, $01
-
-    ; padding
-    ds $3e, $00
-
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-    db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
-
-    ; padding
-    ds $3e, $00
-
-    db $01, $01
-
+    INCBIN "data/bank_01/Leftover_01_4200_CosTable.bin" ; $4200, 512 bytes
 ; C: leftover: 768 bytes (01:4400-46FF) 768 bytes of $00 between the cosine table and Sram_WriteMagic_Tbl4700 (three
 ; more 256-byte pages, empty); never read
 Leftover_01_4400_Zero::

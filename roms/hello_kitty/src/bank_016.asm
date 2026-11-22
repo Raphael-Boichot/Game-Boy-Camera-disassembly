@@ -176,7 +176,20 @@ Leftover_16_4000_Tiles::
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode04_PlayMenu_State00 (trace/read_screens_kitty.npz);
 ; kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_16_5800_Mode04_PlayMenu_State00::
-    INCBIN "data/bank_16/Gfx_16_5800_Mode04_PlayMenu_State00.bin" ; $5800, 6181 bytes
-; I: leftover: 4059 bytes (16:7025-7FFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_16_7025::
-    INCBIN "data/bank_16/Leftover_16_7025.bin" ; $7025, 4059 bytes
+    INCBIN "data/bank_16/Gfx_16_5800_Mode04_PlayMenu_State00.2bpp" ; $5800, 6144 bytes
+; I: leftover: 1024 bytes (16:7000-73FF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the
+; rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it
+Leftover_16_7000_Map::
+    INCBIN "data/bank_16/Leftover_16_7000_Map.tilemap" ; $7000, 1024 bytes
+; I: leftover: 1024 bytes (16:7400-77FF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the
+; rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it
+Leftover_16_7400_Map::
+    INCBIN "data/bank_16/Leftover_16_7400_Map.tilemap" ; $7400, 1024 bytes
+; I: leftover: 1024 bytes (16:7800-7BFF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the
+; rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it
+Leftover_16_7800_Map::
+    INCBIN "data/bank_16/Leftover_16_7800_Map.tilemap" ; $7800, 1024 bytes
+; I: leftover: 1024 bytes (16:7C00-7FFF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the
+; rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it
+Leftover_16_7C00_Map::
+    INCBIN "data/bank_16/Leftover_16_7C00_Map.tilemap" ; $7C00, 1024 bytes

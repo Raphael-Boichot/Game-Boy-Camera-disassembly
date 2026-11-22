@@ -70,7 +70,7 @@ add(0x26, 0x4500, 0x487F, 'bg_tilemap', '18-row map (0x240 bytes): 16x14 photo-a
 add(0x27, 0x4772, 0x486F, 'bg_tilemap', 'eight blank rows ($FD) after the 22-row map copied from 27:44B2 and before the map copied from 27:4870; filler, not an asset', 'neighbours 27:44B2 and 27:4870', 'I')
 add(0x27, 0x4AB0, 0x4CAF, 'tile_data', 'small 2bpp tile set (round shapes, then $FF / $00 filler) read in part only by forced runs; it starts after the last row of the map copied from 27:4870 (0x240 bytes, 4870-4AAF)', 'unknown', 'I')
 # --- Japanese alphabet glyphs
-add(0x28, 0x51B8, 0x53C9, 'kana_text_glyphs', 'white-on-black Japanese text glyph tiles (kana strings)', 'text engine readers 00:061D-0639', 'I')
+add(0x28, 0x5180, 0x53FF, 'kana_text_glyphs', 'white-on-black Japanese text glyph tiles (kana strings): message strip 7 of the table 09:739E (Gfx_28_5180_MsgStripB, 640 bytes); its never-read $FF bytes are black tile rows, not padding (owner 2026-11-22; until then the row ran 51B8-53C9, the runs of $FF left out)', 'text engine readers 00:061D-0639', 'I')
 for s, e in auto_runs(0x2A, gap=8):
     add(0x2A, s, e, 'kana_glyph_tiles', 'tiles of the small kana / ASCII font (voiced and semi-voiced kana variants among them)', 'text engine readers 00:061D-0639', 'I', 'Stamps (JPN): the font block is bracketed "Unused?"')
 # --- wild frame lateral strips (never-read part of every wild frame sheet)

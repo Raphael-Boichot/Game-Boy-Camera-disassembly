@@ -8,9 +8,10 @@ SECTION "ROM Bank $01c", ROMX[$4000], BANK[$1c]
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1C_4000_Mode05_StampWindow_State06::
     INCBIN "data/bank_1c/Gfx_1C_4000_Mode05_StampWindow_State06.bin" ; $4000, 8666 bytes
-; I: leftover: 2534 bytes (1C:61DA-6BBF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_1C_61DA::
-    INCBIN "data/bank_1c/Leftover_1C_61DA.bin" ; $61DA, 2534 bytes
+; I: leftover: 2534 bytes (1C:61DA-6BBF) of message-strip tiles, white kana on black (drawn as 2bpp tiles aligned on
+; 1C:61D0), the last two tiles all $FF (black); no run reads them and no code names them
+Leftover_1C_61DA_Tiles::
+    INCBIN "data/bank_1c/Leftover_1C_61DA_Tiles.bin" ; $61DA, 2534 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1C_6BC0_Mode14_MessageScreen_State01::

@@ -219,10 +219,11 @@ Gfx_33_5CBA_Mode10_ScratchCard_State02::
 ; Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_33_6A00_Mode14_MessageScreen_State00::
-    INCBIN "data/bank_33/Map_33_6A00_Mode14_MessageScreen_State00.tilemap" ; $6A00, 599 bytes
-; I: leftover: 505 bytes (33:6C57-6E4F) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_33_6C57::
-    INCBIN "data/bank_33/Leftover_33_6C57.bin" ; $6C57, 505 bytes
+    INCBIN "data/bank_33/Map_33_6A00_Mode14_MessageScreen_State00.tilemap" ; $6A00, 576 bytes
+; I: leftover: 528 bytes (33:6C40-6E4F), 33 tiles, white kana and Latin letters on black (STRAT ...), drawn as 2bpp
+; tiles; the first tile all $FF (black); no run reads them and no code names them
+Leftover_33_6C40_Tiles::
+    INCBIN "data/bank_33/Leftover_33_6C40_Tiles.2bpp" ; $6C40, 528 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State0C
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_33_6E50_Mode0B_NameCardEdit_State0C::

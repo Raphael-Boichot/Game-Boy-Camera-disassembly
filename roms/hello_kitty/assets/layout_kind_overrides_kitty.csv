@@ -126,9 +126,14 @@ bank,start,end,kind,ev,label,basis
 12,7FE0,8000,T_UI,I,Src_12_7FE0_Mode03_ViewAlbum_State02,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 13,7D74,7F00,MAP,I,Leftover_13_7D74,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 13,7FA3,8000,MAP,I,Leftover_13_7FA3,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
-14,7483,8000,MAP,I,Leftover_14_7483,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+14,7400,7800,MAP,I,Leftover_14_7400_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+14,7800,7C00,MAP,I,Leftover_14_7800_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+14,7C00,8000,MAP,I,Leftover_14_7C00_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 16,4000,5800,T_UI,I,Leftover_16_4000_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
-16,7025,8000,MAP,I,Leftover_16_7025,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+16,7000,7400,MAP,I,Leftover_16_7000_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+16,7400,7800,MAP,I,Leftover_16_7400_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+16,7800,7C00,MAP,I,Leftover_16_7800_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+16,7C00,8000,MAP,I,Leftover_16_7C00_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 18,7001,8000,T_UI,I,Leftover_18_7001,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 1B,69A2,6A00,MAP,I,Leftover_1B_69A2,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 1B,6AA2,6B00,MAP,I,Leftover_1B_6AA2,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
@@ -139,15 +144,15 @@ bank,start,end,kind,ev,label,basis
 1B,74A0,7600,MAP,I,Leftover_1B_74A0,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 1B,7840,7A00,MAP,I,Leftover_1B_7840,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 1B,7CA0,7EF0,MAP,I,Leftover_1B_7CA0,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
-1C,61DA,6BC0,T_UI,I,Leftover_1C_61DA,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+1C,61DA,6BC0,T_UI,I,Leftover_1C_61DA_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 20,7B80,7C00,MAP,I,Leftover_20_7B80,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 22,7FE0,8000,MAP,I,Leftover_22_7FE0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 23,6C70,6D50,MAP,I,Leftover_23_6C70,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 26,7A60,7C20,MAP,I,Leftover_26_7A60,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-2F,61E1,63E0,T_UI,I,Leftover_2F_61E1,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+2F,61E0,63E0,T_UI,I,Leftover_2F_61E0_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 31,7CB0,7EF0,MAP,I,Leftover_31_7CB0,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 31,7EF0,8000,MAP,C,Src_31_7EF0_Mode02_TakePhotos_State01,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
-33,6C57,6E50,T_UI,I,Leftover_33_6C57,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
+33,6C40,6E50,T_UI,I,Leftover_33_6C40_Tiles,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 33,71F0,7210,MAP,I,Leftover_33_71F0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 35,7BB8,7C40,MAP,C,Src_35_7BB8_Mode06_Printing_State0D,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 35,7C40,7CC8,MAP,C,Leftover_35_7C40,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"

@@ -12,10 +12,11 @@ Frame_2F_4000_Mode02_TakePhotos_State01::
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_2F_4000
 ; after a leftover stretch
 Gfx_2F_5C00_Mode02_TakePhotos_State08::
-    INCBIN "data/bank_2f/Gfx_2F_5C00_Mode02_TakePhotos_State08.bin" ; $5C00, 1505 bytes
-; I: leftover: 511 bytes (2F:61E1-63DF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_2F_61E1::
-    INCBIN "data/bank_2f/Leftover_2F_61E1.bin" ; $61E1, 511 bytes
+    INCBIN "data/bank_2f/Gfx_2F_5C00_Mode02_TakePhotos_State08.2bpp" ; $5C00, 1504 bytes
+; I: leftover: 512 bytes (2F:61E0-63DF), 32 tiles, white kana and icons on black, drawn as 2bpp tiles; their $FF rows
+; are black; no run reads them and no code names them
+Leftover_2F_61E0_Tiles::
+    INCBIN "data/bank_2f/Leftover_2F_61E0_Tiles.2bpp" ; $61E0, 512 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_2F_63E0_Mode02_TakePhotos_State01::

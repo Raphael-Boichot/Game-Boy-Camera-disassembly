@@ -4,7 +4,7 @@
   tools/kitty_types.py ROM roms/hello_kitty/trace/trace_kitty.json --types roms/hello_kitty/disasm/sym_types_kitty.csv \
                        --sites roms/hello_kitty/assets/copy_sites_kitty.csv
 
-Writes (both generated, never edit them; hand rows go in sym_types_kitty_hand.csv, applied after these by sym_build.py):
+Writes (both generated, never edit them; hand rows go in disasm/layers/sym_types_kitty_hand.csv, appended last by this tool):
   copy_sites_kitty.csv  every traced call of a copy routine with the constants found on the straight line before it
                         (bank, source, destination, length; '' = not a constant), the routine and the kind of destination
   --observed COV.npz    (repeatable) bytes the core read as data and no other row types: one `data` row per run of read bytes (gaps of up
@@ -167,6 +167,13 @@ for b, s, e, t, wd, note in obs_rows:
         while j < e and (b, j) not in cbytes: j += 1
         obs_out.append(['%02X' % b, '%04X' % i, '%04X' % j, t, wd, note]); i = j
 out = obs_out + out
+# hand rows (disasm/layers/sym_types_kitty_hand.csv, each with its reason in the note), written last: never-read bytes whose kind is read
+# from their bytes, not from a traced copy (2026-11-22: the $FF rows of the stored maps, the leftover maps and tiles, the sine tables)
+HAND = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'roms', 'hello_kitty', 'disasm', 'layers', 'sym_types_kitty_hand.csv')   # the repository's, wherever --types writes
+if os.path.exists(HAND):
+    for r in csv.DictReader(open(HAND)):
+        if any((int(r['bank'], 16), i) in cbytes for i in range(int(r['start'], 16), int(r['end'], 16))): sys.exit('kitty_types: hand row %s:%s overlaps code' % (r['bank'], r['start']))
+        out.append([r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']])
 with open(a.types, 'w', newline='') as f:
     w = csv.writer(f); w.writerow(['bank', 'start', 'end', 'type', 'width', 'note']); w.writerows(out)
 c = collections.Counter(x['dst_kind'] or '?' for x in sites); full = sum(1 for x in sites if x['src_bank'] and x['src'] and x['len'])

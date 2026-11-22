@@ -1,7 +1,7 @@
 label,kind,ev,reason
 Src_00_2E00_Mode05_StampWindow_State06,TBL,I,"nine 256-byte lookup tables (2,304 bytes) in front of Img_PairLookupTbl (00:3700, nine 256-byte tables too), all $00 but the last 15 bytes (36F1-36FF: $01 $01 $02 $10 $11 $11 $12 ..., a nibble-pair pattern); read by Copy_DEtoHL in the corpus, the read not reproduced"
 Leftover_03_6524,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
-Leftover_33_6C57,T_UI,I,"2bpp tiles: plane pairs of 8 rows after a run of $FF, before Gfx_33_6E50"
+Leftover_33_6C40_Tiles,T_UI,I,"2bpp tiles: plane pairs of 8 rows, the first tile all $FF (black), before Gfx_33_6E50 (label moved from 33:6C57 to the first tile, 2026-11-22)"
 Leftover_0F_7BB1,SOUND,I,"sound data in the sound bank, between Snd_ blocks: track headers and note streams (opcodes $9D, $A1-$A6), or a copy of the Japanese Sfx1_10_DigitRegs"
 Leftover_26_7A60,MAP,I,"a tile map: one tile id ($7F) repeated, between two Map_ blocks"
 Leftover_03_6FB4,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"

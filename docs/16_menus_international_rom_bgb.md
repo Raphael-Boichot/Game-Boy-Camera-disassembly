@@ -219,7 +219,7 @@ Table (one row per box of the charts; the node ids are the keys of `roms/jp_rev_
 
 | region (never-read, non-padding bytes) | bytes | what it is | tag |
 |---|---|---|---|
-| wild-frame sheets: `31:6CD6-6CFF`, `32:4180-44FF`, `33:61F0-64FF`, `33:7980-7CBB` (the strips of frames 05 and 06, `32:7180-74FF` and `33:4980-4CFF`, are all `$FF` and counted as padding; frames 01 and 04 are read in forced runs) | 2,089 | the **lateral border strips** of the 8 wild frames (below) | **C** (6 frames), I (2) |
+| wild-frame sheets: `31:6CD6-6CFF`, `32:4180-44FF`, `33:61F0-64FF`, `33:7980-7CBB` (the strips of frames 05 and 06, `32:7180-74FF` and `33:4980-4CFF`, are all `$FF`: black tile rows of the strips, counted as padding when this table was made and green on the map since the `$FF` rule of 2026-10-31 (the lateral strips are used, §16.13 (1)); frames 01 and 04 are read in forced runs) | 2,089 | the **lateral border strips** of the 8 wild frames (below) | **C** (6 frames), I (2) |
 | `2A` (56 runs) | 1,959 | tiles of the small kana / ASCII font: voiced and semi-voiced katakana, Latin letters | I |
 | `25`, `26`, `27` | 1,280 | rows of 32-column BG tilemaps (below) | I |
 | `14:4000-4553` | 1,117 | the banner part of a banner + dithered picture block | I |
