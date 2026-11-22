@@ -73,7 +73,7 @@ BGB with the helper, photos 0, 1, 2 marked (`pc_927_multi3`): **three PRINT comm
 | `feed9` | Right × 7 (feed 9, the cap of `Mode1E_ReadMarginKeys` `08:4958`) | `$19`, `$09`, `$03` | same three photos, 9 after each but the last |
 | `bloodB` / `bloodO` / `bloodAB` | Start (card), A | photo `$10`, card `$13` | card letter **B** with ♂, **O** with ♀, **AB** with "?"; birth `22 33 44 55` → **1122 / 3344** |
 
-The feed values are therefore 0-9 on paper as in the code; with the printer firmware each unit is one cam revolution, about 1 s of paper feed (the printer doc's emulator measurements, 17.10), so 9 is about 9 s between two photos (I: not timed). In every job BGB returned to the screen it printed from (`1C:03`, `1E:01`) at the end of the demo, while my core was still in the job (`1D:05`): its printer model answers busy for longer than the helper's 20 polls, so this is a timing difference of the two printers, not of the game.
+The feed values are therefore 0-9 on paper as in the code; with the printer firmware each unit is one cam revolution, about 1 s of paper feed (the printer doc's emulator measurements, 17.10), so 9 is about 9 s between two photos (I: not timed). In every job BGB returned to the screen it printed from (`1C:03`, `1E:01`) at the end of the demo, while my core was still in the job (`1D:05`): its printer model answers busy for longer than the helper's 20 polls, so this is a timing difference of the two printers, not of the game. Rerun 2026-11-22 with the demos of §16.6 (one lead byte: BGB applies the first demo byte at power-on): the same 18 pages pixel for pixel, the same packets, the same end screens (C).
 
 ### 17.6 The TRIPY-H music score print (C)
 
