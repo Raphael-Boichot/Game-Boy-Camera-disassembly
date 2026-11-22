@@ -25,7 +25,7 @@ meaningful names, **as established in the sensor-register pass (§18.6)** and ch
 
 ```
 # ---- once per live-preview frame, after a capture completes (Cam_MainDispatch, A = $D59A) ----
-# start (Cam_LiveInit 0A:50AA, and again on every entry to the SHOOT live view): band 2, e = $1000 (65.5 ms), setpoint 84
+# start (Cam_LiveInit 0A:50AA, and again on every entry to the SHOOT live view): band 2, e = $1000 (62.5 ms; datasheet: 65.5 ms), setpoint 84
 # the bank-6 frame loop skips the whole step in parts 2-4 of a panorama (exposure frozen, §18.6)
 def Cam_MainDispatch(setpoint):                      # setpoint = D59A, default 84 (the BRIGHTNESS key)
     select_SRAM_bank(0)                              # the frame buffer, not general SRAM
@@ -35,7 +35,7 @@ def Cam_MainDispatch(setpoint):                      # setpoint = D59A, default 
     while sigma >= setpoint and level < 159:
         sigma -= setpoint; level += 1                # (the remainder is dropped)
     s = ShiftTable[level]                            # 160 bytes at 0A:7B00
-    e = D596:D597                                    # sensor registers C1:C0; exposure = e * 16 us
+    e = D596:D597                                    # sensor registers C1:C0; exposure = e * 15.26 us (datasheet: e * 16 us)
     if level >= 36: e = min(e + (e >> s), 0xFFFF)    # large sum = dark picture -> longer exposure
     else:           e = e - (e >> s)
     # s = 16 (level 35, 36, 37): e >> 16 = 0, no change
@@ -63,6 +63,6 @@ The loop samples 168 tile rows of the frame every frame (centre-weighted, §B), 
 §18.6) when the exposure leaves the band's range. The loop does not compare the measurement with a target taken from the
 SRAM calibration vector: the vector does not enter the loop; it only decides, at boot, which V and offset O each band uses (§6, §18.4), through five of its 12 references chosen by the gain probe (§18.15). It still matters to the loop: the offsets set each band's black level, so a vector whose band references are far apart (a factory calibration made in the light) makes the picture jump at a band switch by more than the hysteresis, and the loop flips between two bands: the violent jittering seen on camera `CE10245109` (§18.13).
 
-**Gains (C for the code, §18.15).** Bands 0-2 run at the gain chosen by the boot's probe (14-18.5 dB for bands 0 and 1, 20 or 21.5 dB for band 2); bands 3 and 4 are 26 and 32 dB on every camera. The two real cameras of the bus recordings both took g = 0, so the 6 dB steps of the band switches 1→2, 2→3, 3→4 and the reload ratios of §18.6 are those of g = 0; with g = 1-3 the step 1→2 is 4.5 or 3 dB. The switch 0→1 keeps the gain and changes the mode (H-edge to 2-D edge, the datasheet's 0.768 ms limit).
+**Gains (C for the code, §18.15).** Bands 0-2 run at the gain chosen by the boot's probe (14-18.5 dB for bands 0 and 1, 20 or 21.5 dB for band 2); bands 3 and 4 are 26 and 32 dB on every camera. The two real cameras of the bus recordings both took g = 0, so the 6 dB steps of the band switches 1→2, 2→3, 3→4 and the reload ratios of §18.6 are those of g = 0; with g = 1-3 the step 1→2 is 4.5 or 3 dB. The switch 0→1 keeps the gain and changes the mode (H-edge to 2-D edge, the datasheet's 0.768 ms limit, `$0030` steps = 0.732 ms at the camera's clock).
 
 ---

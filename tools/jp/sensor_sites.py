@@ -7,8 +7,8 @@ import sys, json, csv, collections
 
 REG = {0xA000: ('A000', 'control', 'control: bit 0 = start (write) / busy (read), polled until clear; bits 2-1 = P/M selector (Pan Docs)'),
        0xA001: ('A001', 'reg1 (001)', 'N VH1 VH0 G4-G0'),
-       0xA002: ('A002', 'reg2 (010)', 'C1 exposure high byte (4.096 ms)'),
-       0xA003: ('A003', 'reg3 (011)', 'C0 exposure low byte (16 us)'),
+       0xA002: ('A002', 'reg2 (010)', 'C1 exposure high byte (3.906 ms; datasheet: 4.096 ms)'),
+       0xA003: ('A003', 'reg3 (011)', 'C0 exposure low byte (15.26 us; datasheet: 16 us)'),
        0xA004: ('A004', 'reg7 (111)', 'E3-E0 I V2-V0'),
        0xA005: ('A005', 'reg0 (000)', 'Z1 Z0 O5-O0')}
 

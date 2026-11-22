@@ -4,6 +4,7 @@
    sar_traces.png          : the offset register O (signed, in steps of 32 mV) of every capture of the boot and calibration recordings: one successive-approximation search per column group
 usage: sensor_plots.py ASSET_DIR      (reads ASSET_DIR/{boot,calibration,live}_rows.csv, writes the two PNG files there)"""
 import sys, os, csv
+STEP_MS = 16 / 1048.576   # ms per exposure step: 16 PHI clocks at 1,048,576 Hz (Pan Docs, Game Boy Camera); the datasheet's nominal step is 16 us
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -26,10 +27,10 @@ def main(d):
     fig, ax = plt.subplots(figsize=(10, 4.6))
     for k, col in BAND_COL.items():
         xs = [i for i, r in enumerate(live) if (r['reg1'] in ('E0', 'E1', 'E2', 'E3') if k == 'E0' else r['reg1'] == k)]
-        ax.plot(xs, [int(live[i]['C1'] + live[i]['C0'], 16) * 0.016 for i in xs], 'o', ms=3.5, color=col, label=BAND_NAME[k])
-    ax.set_yscale('log'); ax.set_xlabel('register load number (normal-use recording)'); ax.set_ylabel('exposure time C (ms), log scale')
-    for e, t in ((0x30, '0.768 ms: datasheet minimum for vertical / 2-D edge modes'), (0x1200, 'band 1 -> 2 at $1200'), (0x6000, 'band 2 -> 3 at $6000'), (0xC000, 'band 3 -> 4 at $C000')):
-        ax.axhline(e * 0.016, color='#888', lw=0.7, ls=':'); ax.text(1, e * 0.016 * 1.06, t, ha='left', va='bottom', fontsize=7, color='#555')
+        ax.plot(xs, [int(live[i]['C1'] + live[i]['C0'], 16) * STEP_MS for i in xs], 'o', ms=3.5, color=col, label=BAND_NAME[k])
+    ax.set_yscale('log'); ax.set_xlabel('register load number (normal-use recording)'); ax.set_ylabel('exposure C (ms, 15.26 us per step), log')
+    for e, t in ((0x30, '$0030 = 0.732 ms (datasheet: 0.768 ms), its minimum for vertical / 2-D edge modes'), (0x1200, 'band 1 -> 2 at $1200'), (0x6000, 'band 2 -> 3 at $6000'), (0xC000, 'band 3 -> 4 at $C000')):
+        ax.axhline(e * STEP_MS, color='#888', lw=0.7, ls=':'); ax.text(1, e * STEP_MS * 1.06, t, ha='left', va='bottom', fontsize=7, color='#555')
     ax.legend(fontsize=7, loc='lower right'); ax.set_title('Auto-exposure of the real camera: five gain / mode bands (docs §18.7)')
     fig.tight_layout(); fig.savefig(os.path.join(d, 'live_exposure_bands.png'), dpi=140); plt.close(fig)
 

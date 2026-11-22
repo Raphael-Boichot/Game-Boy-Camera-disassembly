@@ -38,7 +38,7 @@ def decode(d):
     """datasheet names of one row"""
     r0, r1, r7 = d['reg0'], d['reg1'], d['reg7']
     o = r0 & 0x3F
-    return dict(Z=r0 >> 6, O=o, Ovolt=((o - 0x20) if o & 0x20 else -o) * 0.032, N=r1 >> 7, VH=(r1 >> 5) & 3, G=r1 & 0x1F, E=r7 >> 4, I=(r7 >> 3) & 1, V=r7 & 7, C_ms=d['C'] * 0.016)
+    return dict(Z=r0 >> 6, O=o, Ovolt=((o - 0x20) if o & 0x20 else -o) * 0.032, N=r1 >> 7, VH=(r1 >> 5) & 3, G=r1 & 0x1F, E=r7 >> 4, I=(r7 >> 3) & 1, V=r7 & 7, C_ms=d['C'] * 16 / 1048.576, C_ms_ds=d['C'] * 0.016)   # real: 16 PHI clocks per step (Pan Docs, Game Boy Camera); datasheet: 16 us
 
 
 def mode_name(d):
@@ -76,10 +76,10 @@ if __name__ == '__main__':
     for name, fn in (('boot', boot), ('calibration', calib), ('live', live)):
         rows = rows_of(fn)
         with open(os.path.join(out, name + '_rows.csv'), 'w', newline='') as f:
-            w = csv.writer(f); w.writerow(['idx', 'reg0', 'reg1', 'C1', 'C0', 'P', 'M', 'X', 'reg7', 'Z', 'O', 'O_volt', 'N', 'VH', 'G', 'E', 'I', 'V', 'C_ms', 'mode'])
+            w = csv.writer(f); w.writerow(['idx', 'reg0', 'reg1', 'C1', 'C0', 'P', 'M', 'X', 'reg7', 'Z', 'O', 'O_volt', 'N', 'VH', 'G', 'E', 'I', 'V', 'C_ms', 'C_ms_datasheet', 'mode'])
             for i, d in enumerate(rows):
                 x = decode(d); w.writerow([i, '%02X' % d['reg0'], '%02X' % d['reg1'], '%02X' % (d['C'] >> 8), '%02X' % (d['C'] & 255), '%02X' % d['P'], '%02X' % d['M'], '%02X' % d['X'], '%02X' % d['reg7'],
-                                           x['Z'], x['O'], '%.3f' % x['Ovolt'], x['N'], x['VH'], x['G'], x['E'], x['I'], x['V'], '%.3f' % x['C_ms'], mode_name(d)])
+                                           x['Z'], x['O'], '%.3f' % x['Ovolt'], x['N'], x['VH'], x['G'], x['E'], x['I'], x['V'], '%.3f' % x['C_ms'], '%.3f' % x['C_ms_ds'], mode_name(d)])
         print('==', name, len(rows), 'rows')
         if name == 'live':
             for i, n, d in runs(rows)[:0]: pass

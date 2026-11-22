@@ -39,7 +39,7 @@ else:                                            table = $7C20   (default)
 ```
 
 So `$7C20` serves bands 0, 1, 3 and 4 and **`$7C60` only while the active gain is `$d589`, i.e. in
-band 2** (2-D edge mode, gain index 4 / 5, exposures 55-364 ms, §18.6): `$d589` is 4 or 5 for
+band 2** (2-D edge mode, gain index 4 / 5, exposures 53-347 ms (datasheet: 55-364 ms), §18.6): `$d589` is 4 or 5 for
 every unit, and band 2 is the second band of the live view, not a bright-scene special case. What
 band 2 gains from a table of its own is not established (?). The row index is the CONTRAST key
 (1-16, default 8): row 1 = `80 8F D0 E6` (thresholds spread over `$80-$E6`), row 8 = `89 92 A2 D2`,

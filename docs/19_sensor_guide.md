@@ -23,7 +23,7 @@ flowchart LR
 | sensor register | written at | what it sets | values the ROM uses |
 |---|---|---|---|
 | reg 1 `N VH G` | `$A001` | edge mode (N, VH) and analog gain G | `$20` H-edge 14 dB, `$E0-$E5` 2-D edge 14-21.5 dB, `$E8` 2-D 26 dB, `$0A` plain positive image 32 dB; `$00-$03` in the gain probe |
-| reg 2-3 `C` | `$A002-$A003` | exposure time = C x 16 µs (big-endian) | `$0010` (0.256 ms) … `$FFFF` (1.05 s) |
+| reg 2-3 `C` | `$A002-$A003` | exposure time = C x 15.26 µs (16 cartridge clocks per step, Pan Docs; datasheet: 16 µs) (big-endian) | `$0010` (0.244 ms; datasheet: 0.256 ms) … `$FFFF` (1.00 s; datasheet: 1.05 s) |
 | reg 7 `E I V` | `$A004` | edge ratio E, invert I, reference voltage V (x 0.5 V) | E = 0 (50 %) live, E = 2 (100 %) in some boot points; I = 0; V = 3 (1.5 V), 5 in the gain probe |
 | reg 0 `Z O` | `$A005` | zero-point mode Z and **offset O** (6-bit sign + magnitude, 32 mV per step) | `$80 \| O`: Z = 10; `$A0` = 0 V, `$BF` = +0.99 V, `$9F` = −0.99 V |
 | matrix | `$A006-$A035` | the 48 thresholds of the 2-bit quantiser | a flat value (all 48 equal) for measurements; the dither ramp for pictures |
@@ -43,7 +43,7 @@ To measure, the ROM fills the whole matrix with one value `t` (a *flat matrix*):
 | the gain probe and the five boot searches, factory part 2 | `$A002` (tile 0) | x 1-3, y 1-4 | top-left corner, in the 8 lines above the photo (the photo is lines 8-119): never visible in a picture |
 | factory part 1 | `$A082` (tile 8) | x 65-67, y 1-4 | top centre, same hidden band |
 
-**The criterion in pixel values (C).** "Pass" = at least 9 of the 12 pixels are black at threshold `t`. Lowering the offset O darkens the output (after a pass the search raises O, after a fail it lowers it, 19.4; the prototype source says it in words, 19.9), so the offset search ends on **the highest O at which 9 of the 12 pixels still read black**: the fourth-lightest of the 12 pixels sits at threshold `t`. A few bright or noisy pixels (up to 3) do not change the result. These are scene pixels, not shielded reference pixels (C for one frame, §18.9); the very short exposures of the measuring captures (0.256 ms) stand in for darkness (I), except under a strong light (19.6).
+**The criterion in pixel values (C).** "Pass" = at least 9 of the 12 pixels are black at threshold `t`. Lowering the offset O darkens the output (after a pass the search raises O, after a fail it lowers it, 19.4; the prototype source says it in words, 19.9), so the offset search ends on **the highest O at which 9 of the 12 pixels still read black**: the fourth-lightest of the 12 pixels sits at threshold `t`. A few bright or noisy pixels (up to 3) do not change the result. These are scene pixels, not shielded reference pixels (C for one frame, §18.9); the very short exposures of the measuring captures (0.244 ms; datasheet: 0.256 ms) stand in for darkness (I), except under a strong light (19.6).
 
 Three procedures are built from that one test:
 
@@ -86,7 +86,7 @@ The pass / fail of each capture is not on the bus; it is read back from which ta
 
 **What each byte is.** Byte *k* is the flat threshold at which a dark frame flips, measured at the factory in one register set (§18.5):
 
-| bytes | register set measured (all at 0.256 ms) | used at boot by | for live band |
+| bytes | register set measured (all at 0.244 ms (datasheet: 0.256 ms)) | used at boot by | for live band |
 |---|---|---|---|
 | 0-3 | H-edge 50 %, G = 0 / 1 / 2 / 3 | search 1 (byte *g*, *g* = gain probe result) | band 0 |
 | 4-7 | H-edge 100 %, G = 0 / 1 / 2 / 3 | search 2 (byte 4 + *g*) | band 1 |
@@ -108,7 +108,7 @@ flowchart TB
   V --> S5["search 5: byte 11<br/>positive 32 dB"] --> B4["O of band 4"]
 ```
 
-Bands 1-3 run in 2-D edge mode, but the boot measures them in H-edge mode with E = 2: the measuring exposure (0.256 ms) is below the datasheet's 0.768 ms minimum for the 2-D modes, so the nearest allowed mode stands in (I, §18.4).
+Bands 1-3 run in 2-D edge mode, but the boot measures them in H-edge mode with E = 2: the measuring exposure (0.244 ms; datasheet: 0.256 ms) is below the datasheet's 0.768 ms minimum for the 2-D modes, so the nearest allowed mode stands in (I, §18.4).
 
 **So the vector changes slowly, the offsets at every boot (I):** the references are fixed at the factory; the offsets follow the sensor's drift (temperature, supply, ageing) because they are re-found each time against those references.
 
@@ -116,17 +116,17 @@ Bands 1-3 run in 2-D edge mode, but the boot measures them in H-edge mode with E
 
 It runs on the first boot of a camera whose vector is twelve `$AA` (the factory calibration: `STORE PLEASE WAIT`, `Cam_FullCalibration` `0A:4947`), or as a measurement only in the fast calibration sanity check (hold every key but B at power-on, §18.5):
 
-1. **12 offset searches** at the 12 register sets (part 1, `Cam_FactoryMeasure1`), with a flat matrix `$80` and long exposures: 0.768 ms (H-edge), 36.9 ms, 131 ms, 205 ms and 524 ms (2-D and positive modes). They find a (V, O) per register set.
-2. **12 threshold scans** (part 2, `Cam_FactoryMeasure2` + `Cam_ThresholdConverge`) at 0.256 ms with those (V, O): each scan's result is one vector byte. A scan lasts about `$81 − byte` captures, which is how the vector was predicted from the bus recording (11 of 12 bytes within ±1, §18.13).
+1. **12 offset searches** at the 12 register sets (part 1, `Cam_FactoryMeasure1`), with a flat matrix `$80` and long exposures: 0.732 ms (datasheet: 0.768 ms) (H-edge), 35.2 ms (datasheet: 36.9 ms), 125 ms (datasheet: 131 ms), 195 ms (datasheet: 205 ms) and 500 ms (datasheet: 524 ms) (2-D and positive modes). They find a (V, O) per register set.
+2. **12 threshold scans** (part 2, `Cam_FactoryMeasure2` + `Cam_ThresholdConverge`) at 0.244 ms (datasheet: 0.256 ms) with those (V, O): each scan's result is one vector byte. A scan lasts about `$81 − byte` captures, which is how the vector was predicted from the bus recording (11 of 12 bytes within ±1, §18.13).
 3. `Cam_CommitVectorToSRAM` writes the 12 bytes and their checksums to both copies (not the two tolerance bytes), and the camera stays on that screen until power is cycled.
 
 The **fast calibration sanity check** runs parts 1 and 2 without storing, then compares bytes 10 and 11 with the stored ones: |difference| ≤ `$AFF0` and ≤ `$AFF1` (the tolerance bytes of the save: `1B 13` = 27 and 19 in retail saves, `AA AA` = 170 after a factory calibration from a blank save, which does not write them) shows "OK", else "NG" (§8).
 
-**What the two parts achieve (I, consistent with every C fact above).** Part 1 is a real dark-level calibration: in the dark, at each band's own exposure, it finds the offset that puts that register set's dark level, dark current at that exposure included, at the threshold `$80`. Part 2 then records, with those offsets but at 0.256 ms, at which threshold the same dark pixels sit: the vector byte is the short-exposure image of "true black for that register set". At every boot the camera can then re-find each band's dark-room offset in a fast 0.256 ms capture, in whatever light, by searching for the offset that puts the pixels back at the stored byte; only the sensor's drift since the factory is corrected. Camera 1's vector fits this: the bytes fall as the band's exposure x gain (and so its dark current) grows:
+**What the two parts achieve (I, consistent with every C fact above).** Part 1 is a real dark-level calibration: in the dark, at each band's own exposure, it finds the offset that puts that register set's dark level, dark current at that exposure included, at the threshold `$80`. Part 2 then records, with those offsets but at 0.244 ms (datasheet: 0.256 ms), at which threshold the same dark pixels sit: the vector byte is the short-exposure image of "true black for that register set". At every boot the camera can then re-find each band's dark-room offset in a fast 0.244 ms (datasheet: 0.256 ms) capture, in whatever light, by searching for the offset that puts the pixels back at the stored byte; only the sensor's drift since the factory is corrected. Camera 1's vector fits this: the bytes fall as the band's exposure x gain (and so its dark current) grows:
 
 | bytes | 0-3 | 4-7 | 8-9 | 10 | 11 |
 |---|---|---|---|---|---|
-| band exposure in part 1 | 0.768 ms | 36.9 ms | 131 ms | 205 ms | 524 ms (32 dB) |
+| band exposure in part 1 | 0.732 ms (datasheet: 0.768 ms) | 35.2 ms (datasheet: 36.9 ms) | 125 ms (datasheet: 131 ms) | 195 ms (datasheet: 205 ms) | 500 ms (datasheet: 524 ms) (32 dB) |
 | camera 1 | `7E 7D 7D 80` | `7D 7C 7D 7B` | `7C 7B` | `79` | `6A` |
 
 If the prototype's "`$55` = 1 V" (19.9) gives the scale of the thresholds, `$80` is 1.5 V, the reference voltage V = 3 of every retail measuring and live capture, and the bytes `7E`-`79` sit 20-80 mV below it, `6A` about 0.25 V below (I).
@@ -139,7 +139,7 @@ If the prototype's "`$55` = 1 V" (19.9) gives the scale of the thresholds, `$80`
 
 What supports it: the retail captures run with the sensor reference at V = 3 = 1.5 V (the datasheet's 0.5 V steps), a covered sensor's output should sit close to that reference, and every normal vector does sit just below `$80` (`$7E`-`$79`); a 0-3 V window centred on 1.5 V also suits a converter reading a signal that swings around the reference. What it rests on: a single comment and the assumption that `$00` is 0 V; if the zero is elsewhere, both the step and the 3.0 V top change. A second fixed point would settle it (a datasheet value for the MAC-GBD's comparator range, or a voltage measured on its reference pins). The matrix bytes are comparator thresholds, three per 2-bit output cell: the MAC-GBD works as a 2-bit flash converter whose three levels can be set separately for each cell, which is how the dithering is done (§7).
 
-**It must run in the dark (C, §18.13).** Camera 2 recorded the factory calibration twice. In ordinary room light: 164 captures, offsets `$A9-$B1`, scans of 3-8 captures. Under a strong light source: 540 captures; from the 36.9 ms points on the searches must lower V (3 → 1) and end on offsets `$93-$9F`, and the scans take 15-94 captures. The long exposures of part 1 are meant for darkness; under light they measure the light, and the references stored would be wrong for good (I).
+**It must run in the dark (C, §18.13).** Camera 2 recorded the factory calibration twice. In ordinary room light: 164 captures, offsets `$A9-$B1`, scans of 3-8 captures. Under a strong light source: 540 captures; from the 35.2 ms (datasheet: 36.9 ms) points on the searches must lower V (3 → 1) and end on offsets `$93-$9F`, and the scans take 15-94 captures. The long exposures of part 1 are meant for darkness; under light they measure the light, and the references stored would be wrong for good (I).
 
 ### 19.7 The auto-exposure in live view (C)
 
@@ -152,11 +152,11 @@ Each frame (bank 6 loop, `Cam_MainDispatch` `0A:4000`):
 
 | band | register set | exposure range | up when → reload | down when → reload |
 |---|---|---|---|---|
-| 0 | H-edge, 14-18.5 dB (gain from the probe) | 0.26-0.70 ms | e ≥ 0.768 ms → 1.15 ms | (floor 0.256 ms) |
-| 1 | 2-D edge, 14-18.5 dB (gain from the probe) | 1.15-66 ms | ≥ 73.7 ms → 55.3 ms | < 0.78 ms → 0.50 ms |
-| 2 | 2-D edge, 20 / 21.5 dB | 55-364 ms | ≥ 393 ms → 217 ms | < 32.8 ms → 45.1 ms |
-| 3 | 2-D edge, 26 dB | 217-705 ms | ≥ 786 ms → 545 ms | < 164 ms → 283 ms |
-| 4 | positive image, 32 dB | 545-1,049 ms | (saturates) | < 393 ms → 573 ms |
+| 0 | H-edge, 14-18.5 dB (gain from the probe) | 0.24-0.67 ms (datasheet: 0.26-0.70 ms) | e ≥ 0.732 ms (datasheet: 0.768 ms) → 1.10 ms (datasheet: 1.15 ms) | (floor 0.244 ms; datasheet: 0.256 ms) |
+| 1 | 2-D edge, 14-18.5 dB (gain from the probe) | 1.10-63 ms (datasheet: 1.15-66 ms) | ≥ 70.3 ms (datasheet: 73.7 ms) → 52.7 ms (datasheet: 55.3 ms) | < 0.75 ms (datasheet: 0.78 ms) → 0.47 ms (datasheet: 0.50 ms) |
+| 2 | 2-D edge, 20 / 21.5 dB | 53-347 ms (datasheet: 55-364 ms) | ≥ 375 ms (datasheet: 393 ms) → 207 ms (datasheet: 217 ms) | < 31.3 ms (datasheet: 32.8 ms) → 43.0 ms (datasheet: 45.1 ms) |
+| 3 | 2-D edge, 26 dB | 207-672 ms (datasheet: 217-705 ms) | ≥ 750 ms (datasheet: 786 ms) → 520 ms (datasheet: 545 ms) | < 156 ms (datasheet: 164 ms) → 270 ms (datasheet: 283 ms) |
+| 4 | positive image, 32 dB | 520-1,000 ms (datasheet: 545-1,049 ms) | (saturates) | < 375 ms (datasheet: 393 ms) → 547 ms (datasheet: 573 ms) |
 
 The switch 0 → 1 keeps the gain, changes the mode and lengthens the exposure x 1.5; the switches 1 → 2, 2 → 3 and 3 → 4 add 6 dB of gain (x 2; for a probe winner g = 0, the case of every real camera recorded so far: with g = 1-3 the step 1 → 2 is 4.5 or 3 dB, §18.15) and cut the exposure to 55-75 %, so exposure x gain rises by 10-50 %; every downward switch lowers it by 14-31 %. The overlap is a hysteresis: after a switch the picture lands inside the new band's range, so the loop has no reason to switch straight back (I, §18.6), as long as the bands' black levels agree; a vector made in the light breaks that and the loop flips between two bands (§18.13). 207 of 207 recorded steps and 2,377 of 2,377 BGB steps follow this rule (C). CONTRAST and the option cross change only the dither matrix, never a sensor register; a photo is a live frame (C, §18.7).
 
@@ -175,7 +175,7 @@ What the recordings show (§18.13):
 
 The prototype ROM (`roms/prototype_debagame/`) carries plain-text leftovers of the developers' source, with Japanese comments, in banks `$1E-$27` (§18.14). Its sensor driver measured the dark level differently:
 
-* **`GET_OFFSET`**: fill the matrix with `$55` (commented "threshold `$55` (1 V)"; `$80` for mode 6 in the version the prototype runs, `$70` in older copies), set the exposure ("charge time") to `$0021` (0.53 ms; `$0000`, the datasheet's optical black, in one older version), start the offset at `$3F` (+0.99 V) and **lower it one step per capture** (+31 … 0, −1 … −31): a linear search of up to 63 captures, where the retail successive approximation needs 8.
+* **`GET_OFFSET`**: fill the matrix with `$55` (commented "threshold `$55` (1 V)"; `$80` for mode 6 in the version the prototype runs, `$70` in older copies), set the exposure ("charge time") to `$0021` (0.50 ms (datasheet: 0.53 ms); `$0000`, the datasheet's optical black, in one older version), start the offset at `$3F` (+0.99 V) and **lower it one step per capture** (+31 … 0, −1 … −31): a linear search of up to 63 captures, where the retail successive approximation needs 8.
 * **`CHECK_BLACK`**: "black level reached" when **every pixel of the probe area is black** (all bytes `$FF`): one whole tile at `$A770` (64 pixels, x 56-63, y 56-63: the middle of the picture) in the version the prototype runs, one full line of 128 pixels at y = 109 (`$AD0A`) in an older one. The retail criterion is 9 of 12 pixels in a hidden corner.
 * **The auto-exposure** counts the black pixels of the middle 8 x 7 tiles (a checkerboard of 448 bytes), compares the count with a target (`AKARUSA`, "brightness"), changes the exposure by `e >> s` from tables (the retail scheme, 19.7) and refuses exposures below `$21` ("below `$21` is unusable"): the prototype recording of camera 1 never goes below `$0022` (§18.13).
 * **One register set**: the modes are set by name (negative image, horizontal / vertical / 2-D edge enhancement, edge extraction) with no gain or offset per band; the prototype recording runs one register set only.
