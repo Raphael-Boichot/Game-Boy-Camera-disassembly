@@ -8,7 +8,7 @@ This file holds the rules and the layout. Numbers and findings live in `docs/` (
 `bash tools/setup_env.sh` (toolchain, ROMs, Wine, BGB; idempotent) and read `SETUP.md`: where everything lands, which tool answers which question (listing and scripts for the ROM, the core for behaviour, BGB only for screenshots, sound and confirmations), and the working rules: script long tasks in the background rather than reasoning through them, write down every procedure that works, push at the end of every large task and before a session ends.
 
 ## Rules of the work
-* Evidence tags: **C** = code-traced, screenshot, or reproduced in an emulator / BGB; **I** = inferred; **?** = inconclusive. Never guess and never invent an address; say what was not
+* Evidence tags: **C** = code-traced, screenshot, or reproduced in an emulator / BGB, and since 2026-11-22 the sentence names the source (code, core, BGB, hardware; "forced" for a forced run), `CONTRIBUTING.md` "Evidence rules"; **I** = inferred; **?** = inconclusive. `CONTRIBUTING.md` is the human entry point (agent-neutral): keep it in step with this file and `SETUP.md`. Never guess and never invent an address; say what was not
   checked. Everything in `README.md` and `docs/` is AI work waiting for human validation (the owner's header says "Work in progress, stay tuned"). Update `docs/` (and `README.md` when a status changes) and
   `tcrf_check/TCRF_CHECKLIST.{md,csv}` (generator `tcrf_check/tools/tcrf_checklist.py`) together. TCRF flags in answers come from that checklist only.
 * The README states the current finding, not the history of how it was found: when a statement turns out wrong, correct it in place and do not keep "earlier version said" notes,
