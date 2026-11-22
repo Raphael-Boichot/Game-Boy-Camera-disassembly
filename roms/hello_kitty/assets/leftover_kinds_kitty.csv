@@ -5,7 +5,6 @@ Leftover_33_6C40_Tiles,T_UI,I,"2bpp tiles: plane pairs of 8 rows, the first tile
 Leftover_0F_7BB1,SOUND,I,"sound data in the sound bank, between Snd_ blocks: track headers and note streams (opcodes $9D, $A1-$A6), or a copy of the Japanese Sfx1_10_DigitRegs"
 Leftover_26_7A60,MAP,I,"a tile map: one tile id ($7F) repeated, between two Map_ blocks"
 Leftover_03_6FB4,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
-Leftover_02_7CAC,OTHER,I,"code never referenced: object callbacks (ld b,$06 ; ld hl,$643D ; call Far_Call ; ret ...; ten far calls through 00:015B / 00:0165)"
 Leftover_03_5BF0,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_03_7188,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_0F_6CC2,SOUND,I,"sound data in the sound bank, between Snd_ blocks: track headers and note streams (opcodes $9D, $A1-$A6), or a copy of the Japanese Sfx1_10_DigitRegs"
@@ -13,12 +12,10 @@ Leftover_02_4728,OAM,I,"object scripts: the command records of the ObjScript blo
 Leftover_23_6C70,MAP,I,"a tile map: rows of tile ids ($82 $83, $A0-$A4, $B9-$BD) with the blank id $7E, between two Map_ blocks of the stamp window"
 Leftover_03_72E4,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_01_5165,TBL,I,script records: the 17-byte records of Script_01_510A continued (38 52 nn 00 FC 58 0F 3C 80 Cn 50 31 52 01 59 + pointer)
-Leftover_03_6218,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_08_4020,TBL,I,Super Game Boy packets: the same bytes as the Japanese Sgb_PalSetPacket and the packets after it (0B:4020)
 Leftover_20_7B80,MAP,I,"a tile map: one tile id ($9F) repeated, between two Map_ blocks"
 Leftover_07_4829,OTHER,I,"code never referenced: fills $D909-$D926 with $FF and jumps to 00:0173 (ld hl,$D909 ; ld a,$FF ; ld c,$1E ; ld [hl+],a ; dec c ; jr nz ; jp $0173 ...)"
 Leftover_02_6E95,OTHER,I,"code never referenced: an object callback (ld a,[$D8D8] ; bit 3,a ; jr nz ; jp $2212 ; ret ; call $6E95 ...)"
-Leftover_02_761E,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_03_52F0,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_02_62AA,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_02_48EC,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
@@ -33,12 +30,9 @@ Leftover_03_4898,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; t
 Leftover_03_5208,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_03_633C,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_03_639C,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
-Leftover_03_641E,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_04_4944,TBL,I,the same bytes as the Japanese Cam_DitherRamp_ParamsA (0A:7C44)
-Leftover_02_76F3,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_07_59BE,TBL,I,key bits ($10 / $20 / $40 / $80) continuing Puzzle15_ScriptedKey_Tbl59AF
 Leftover_03_6EB8,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
-Leftover_02_56DC,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_02_4628,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_02_7767,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Src_00_0BF9_NameCard_LoadBackgroundTiles,TBL,I,"seven 6-byte loader records (tiles pointer + bank, map pointer + bank) read by NameCard_LoadBackgroundTiles"
@@ -53,25 +47,19 @@ Leftover_33_71F0,MAP,I,"a tile map row: consecutive tile ids ($88-$90) with $E0 
 Src_04_4923_Mode00_BootAndTitle_State00,TBL,I,the same bytes as the Japanese Cam_DitherRamp_ParamsA region (0A:7C23)
 Leftover_01_4000_SinTable,TBL,C,"a sine table: 256 words in two byte pages, equal to round(256 sin) (hand 2026-11-15)"
 Leftover_01_4200_CosTable,TBL,C,"a cosine table: 256 words in two byte pages, equal to round(256 cos) (hand 2026-11-15)"
-Leftover_01_4400_Zero,TBL,I,"three 256-byte pages of $00 after the two tables (hand 2026-11-15)"
+Leftover_01_4400_Zero,TBL,I,three 256-byte pages of $00 after the two tables (hand 2026-11-15)
 Leftover_03_4000_OamList,OAM,C,"4-byte sprite records ending on bit 0 of the attribute, the format Obj_DrawSprite reads (hand 2026-11-15)"
-Leftover_03_4064_OamList,OAM,C,"4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)"
-Leftover_03_40C8_OamList,OAM,C,"4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)"
-Leftover_03_40F0_OamList,OAM,C,"4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)"
-Leftover_0F_4000_Snd_NoiseNR43Tbl,SOUND,C,"the bytes of the Japanese Snd_NoiseNR43Tbl (hand 2026-11-15)"
-Leftover_0F_4025_Snd_LengthTbl,SOUND,C,"the bytes of the Japanese Snd_LengthTbl (hand 2026-11-15)"
+Leftover_03_4064_OamList,OAM,C,4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)
+Leftover_03_40C8_OamList,OAM,C,4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)
+Leftover_03_40F0_OamList,OAM,C,4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)
+Leftover_0F_4000_Snd_NoiseNR43Tbl,SOUND,C,the bytes of the Japanese Snd_NoiseNR43Tbl (hand 2026-11-15)
+Leftover_0F_4025_Snd_LengthTbl,SOUND,C,the bytes of the Japanese Snd_LengthTbl (hand 2026-11-15)
 Leftover_16_4000_Tiles,T_UI,I,"2bpp tiles: mostly blank, parts of frames and glyphs (hand 2026-11-15)"
 Leftover_02_4000_ObjScript,OAM,C,"an object script: two words and a jump to itself, the form of ObjScript_02_4008 (hand 2026-11-15)"
 Leftover_02_40C8,OAM,I,"object scripts: n $80 pointer records and $1E $1F jumps, as the ObjScript blocks on both sides (2026-11-15)"
-Src_02_47CC_Mode07_Exchange_State02,OAM,I,"an object script read in the forced runs of mode $07 (n $80 pointer records, a $1E $1F jump to itself) (2026-11-15)"
-Leftover_02_47D4,OAM,I,"object scripts: n $80 pointer records and $1E $1F jumps (2026-11-15)"
-Src_02_4810_Mode07_Exchange_State02,OAM,I,"an object script read in the forced runs of mode $07 (2026-11-15)"
-Leftover_02_4824,OAM,I,"object scripts: n $80 pointer records and $1E $1F jumps (2026-11-15)"
-Src_03_6BEC_Mode07_Exchange_State02,OAM,I,"sprite layouts (y, x, tile, attribute records) read in the forced runs of mode $07 (2026-11-15)"
+Leftover_02_4824,OAM,I,object scripts: n $80 pointer records and $1E $1F jumps (2026-11-15)
 Leftover_03_6C24,OAM,I,"sprite layouts: 4-byte records, attribute $10 / $11 (2026-11-15)"
-Src_03_6C5C_Mode07_Exchange_State02,OAM,I,"sprite layouts read in the forced runs of mode $07 (2026-11-15)"
-Leftover_03_6C74,OAM,I,"sprite layouts: 4-byte records, attribute $10 / $11 (2026-11-15)"
-Src_03_6D34_Mode07_Exchange_State02,OAM,I,"sprite layouts read in the forced runs of mode $07 (2026-11-15)"
-Leftover_04_4853,TBL,I,"a table of small values ($03 runs) between the camera tables Cam_PopcountLevel_Tbl481E and 04:48B9 (2026-11-15)"
+Leftover_04_4853,TBL,I,a table of small values ($03 runs) between the camera tables Cam_PopcountLevel_Tbl481E and 04:48B9 (2026-11-15)
 Src_04_48B9_Mode02_TakePhotos_State01,TBL,I,"a table of rising bytes ($99-$B8...) after the camera tables, read in a forced run of mode $02 (2026-11-15)"
-Leftover_06_5E94,TBL,I,"36 bytes after the 6-byte key-prompt record 06:5E8E (read in BGB) and before KeyPrompt_LoadSounds_Tbl5EB8: table bytes of the same area (2026-11-15)"
+Leftover_02_7CB5,OTHER,I,"the rest of the former Leftover_02_7CAC (2026-11-22, its object scripts 02:7DC7-7E31 now read): object-script records (16 1F / 1E 1F commands) then code never referenced: object callbacks (push hl ; ld b,$06 ; ld hl,$6180 ; call 00:015B ...; far calls through 00:015B / 00:0165)"
+Leftover_03_6A94,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute $10 / $30), between the OamList blocks 03:67EC and 03:6BBC (2026-11-22)"

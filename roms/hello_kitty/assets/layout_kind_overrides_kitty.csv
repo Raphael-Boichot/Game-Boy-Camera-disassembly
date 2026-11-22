@@ -10,22 +10,15 @@ bank,start,end,kind,ev,label,basis
 02,4334,4358,OAM,I,Leftover_02_4334,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,4578,45C0,OAM,I,Leftover_02_4578,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,4628,4654,OAM,I,Leftover_02_4628,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,4728,47CC,OAM,I,Leftover_02_4728,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,47CC,47D4,OAM,I,Src_02_47CC_Mode07_Exchange_State02,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,47D4,4810,OAM,I,Leftover_02_47D4,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,4810,4824,OAM,I,Src_02_4810_Mode07_Exchange_State02,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
+02,4728,4790,OAM,I,Leftover_02_4728,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,4824,484C,OAM,I,Leftover_02_4824,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,48EC,494C,OAM,I,Leftover_02_48EC,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,4954,49B4,OAM,I,Leftover_02_4954,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,49BC,4A14,OAM,I,Leftover_02_49BC,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,56DC,5702,OAM,I,Leftover_02_56DC,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,5708,570F,OAM,I,Leftover_02_56DC,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,62AA,630C,OAM,I,Leftover_02_62AA,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,6E95,6EFF,OTHER,I,Leftover_02_6E95,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,761E,7686,OAM,I,Leftover_02_761E,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,76F3,7725,OAM,I,Leftover_02_76F3,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,7767,7793,OAM,I,Leftover_02_7767,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-02,7CAC,7E32,OTHER,I,Leftover_02_7CAC,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
+02,7CB5,7DC7,OTHER,I,Leftover_02_7CB5,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 02,7F97,7FB9,OAM,I,Leftover_02_7F97,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,4000,4064,OAM,I,Leftover_03_4000_OamList,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,4064,40C8,OAM,I,Leftover_03_4064_OamList,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
@@ -37,16 +30,11 @@ bank,start,end,kind,ev,label,basis
 03,5280,52E0,OAM,I,Leftover_03_5280,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,52F0,5358,OAM,I,Leftover_03_52F0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,5BF0,5D3C,OAM,I,Leftover_03_5BF0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,6218,62DC,OAM,I,Leftover_03_6218,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,633C,637C,OAM,I,Leftover_03_633C,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,639C,63DC,OAM,I,Leftover_03_639C,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,641E,645C,OAM,I,Leftover_03_641E,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,6524,6BEC,OAM,I,Leftover_03_6524,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,6BEC,6C24,OAM,I,Src_03_6BEC_Mode07_Exchange_State02,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
+03,6524,67EC,OAM,I,Leftover_03_6524,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
+03,6A94,6BBC,OAM,I,Leftover_03_6A94,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,6C24,6C5C,OAM,I,Leftover_03_6C24,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,6C5C,6C74,OAM,I,Src_03_6C5C_Mode07_Exchange_State02,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,6C74,6D34,OAM,I,Leftover_03_6C74,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-03,6D34,6E14,OAM,I,Src_03_6D34_Mode07_Exchange_State02,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,6EB8,6EE8,OAM,I,Leftover_03_6EB8,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,6FB4,7148,OAM,I,Leftover_03_6FB4,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,7188,72D0,OAM,I,Leftover_03_7188,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
@@ -61,12 +49,11 @@ bank,start,end,kind,ev,label,basis
 05,68D7,69E7,MAP,C,Src_05_68D7_Mode02_TakePhotos_State01,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 05,69E7,6A7D,TBL,C,Src_05_68D7_Mode02_TakePhotos_State01,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 05,6A7D,6AAD,TBL,C,Leftover_05_6A7D,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
-06,5E94,5EB8,TBL,I,Leftover_06_5E94,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 07,4829,4894,OTHER,I,Leftover_07_4829,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 07,57DB,57FB,TBL,I,Leftover_07_57DB,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 07,59BE,59EF,TBL,I,Leftover_07_59BE,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 08,4020,40D0,TBL,I,Leftover_08_4020,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-0C,7860,7920,T_UI,I,Leftover_0C_7860,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+0C,7880,7920,T_UI,I,Leftover_0C_7880,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 0C,7A60,7AE0,T_UI,I,Leftover_0C_7A60,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 0C,7B05,7B40,T_UI,I,Leftover_0C_7B05,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 0C,7B51,7C40,T_UI,I,Leftover_0C_7B51,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
@@ -116,12 +103,12 @@ bank,start,end,kind,ev,label,basis
 0F,46D3,46FD,SOUND,I,Leftover_0F_46D3,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 0F,6CC2,6DF1,SOUND,I,Leftover_0F_6CC2,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 0F,7BB1,7D71,SOUND,I,Leftover_0F_7BB1,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-10,5803,5900,T_UI,I,Leftover_10_5803,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+10,5800,5900,T_UI,I,Src_10_5800_Copy_DEtoHL,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 10,5A03,5B00,T_UI,I,Leftover_10_5A03,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 11,5FE0,6000,T_UI,I,Src_11_5FE0_Mode0B_NameCardEdit_State10,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 12,7FE0,8000,T_UI,I,Src_12_7FE0_Mode03_ViewAlbum_State02,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 13,7D74,7F00,MAP,I,Leftover_13_7D74,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
-13,7FA3,8000,MAP,I,Leftover_13_7FA3,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+13,7FC0,8000,MAP,I,Src_13_7FC0_Map_CopyRect,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 14,7400,7800,MAP,I,Leftover_14_7400_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 14,7800,7C00,MAP,I,Leftover_14_7800_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 14,7C00,8000,MAP,I,Leftover_14_7C00_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
@@ -140,18 +127,20 @@ bank,start,end,kind,ev,label,basis
 1B,74A0,7600,MAP,I,Leftover_1B_74A0,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 1B,7840,7A00,MAP,I,Leftover_1B_7840,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 1B,7CA0,7EF0,MAP,I,Leftover_1B_7CA0,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
-1C,61DA,6BC0,T_UI,I,Leftover_1C_61DA_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 20,7B80,7C00,MAP,I,Leftover_20_7B80,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 22,7FE0,8000,MAP,I,Leftover_22_7FE0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 23,6C70,6D50,MAP,I,Leftover_23_6C70,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 26,7A60,7C20,MAP,I,Leftover_26_7A60,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-2F,61E0,63E0,T_UI,I,Leftover_2F_61E0_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+2F,61E0,63F0,T_UI,I,Leftover_2F_61E0_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+2F,63F0,6520,T_UI,C,Leftover_2F_61E0_Tiles,seen in VRAM tile memory while the core corpora were replayed (tools/kitty_display_track.py)
+2F,6520,6530,T_UI,I,Leftover_2F_61E0_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+2F,6530,6790,T_UI,C,Leftover_2F_61E0_Tiles,seen in VRAM tile memory while the core corpora were replayed (tools/kitty_display_track.py)
+2F,6790,67A0,T_UI,I,Leftover_2F_61E0_Tiles,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+2F,67A0,67B0,T_UI,C,Leftover_2F_61E0_Tiles,seen in VRAM tile memory while the core corpora were replayed (tools/kitty_display_track.py)
 31,7CB0,7EF0,MAP,I,Leftover_31_7CB0,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 31,7EF0,8000,MAP,C,Src_31_7EF0_Mode02_TakePhotos_State01,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 33,6C40,6E50,T_UI,I,Leftover_33_6C40_Tiles,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 33,71F0,7210,MAP,I,Leftover_33_71F0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-35,7BB8,7C40,MAP,C,Src_35_7BB8_Mode06_Printing_State0D,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
-35,7C40,7CC8,MAP,C,Leftover_35_7C40,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
-35,7CC8,7DDD,MAP,C,Src_35_7CC8_Mode03_ViewAlbum_State11,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
+35,7BB8,7DDD,MAP,C,Src_35_7BB8_Mode06_Printing_State0D,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 35,7DDD,7E60,MAP,C,Leftover_35_7DDD,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 35,7EED,7F70,MAP,C,Leftover_35_7EED,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"

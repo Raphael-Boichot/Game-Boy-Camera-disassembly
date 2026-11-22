@@ -306,26 +306,10 @@ Gfx_35_6A00_Mode11_StrawberryChannel_State07::
     ; padding
     ds $10, $00
 
-; C: read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen Mode06_Printing_State0D
-; (trace/read_screens_kitty.npz)
+; C: read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, Map_WritePairsPlusA0; first read on the screen
+; Mode06_Printing_State0D (trace/read_screens_kitty.npz)
 Src_35_7BB8_Mode06_Printing_State0D::
-    INCBIN "data/bank_35/Src_35_7BB8_Mode06_Printing_State0D.bin" ; $7BB8, 136 bytes
-; I: leftover: 136 bytes (35:7C40-7CC7) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_35_7C40::
-    db $00, $01, $02, $03, $04, $05, $06, $04, $07, $08, $09, $0a, $0b, $0c, $0d, $0e
-    db $2b, $2c, $2d, $2e, $0f, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $1a
-    db $1b, $1c, $1d, $1e, $2f, $30, $31, $32, $04, $04, $04, $04, $04, $04, $04, $04
-    db $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
-    db $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
-    db $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
-    db $1f, $20, $33, $34, $21, $22, $35, $36, $23, $24, $37, $38, $25, $26, $39, $3a
-    db $27, $28, $3b, $3c, $29, $2a, $3d, $3e, $04, $04, $04, $04, $04, $04, $04, $04
-    db $04, $04, $04, $04, $04, $04, $04, $04
-
-; C: read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, MapRows_Copy13; first read on the screen
-; Mode03_ViewAlbum_State11 (trace/read_screens_kitty.npz)
-Src_35_7CC8_Mode03_ViewAlbum_State11::
-    INCBIN "data/bank_35/Src_35_7CC8_Mode03_ViewAlbum_State11.bin" ; $7CC8, 277 bytes
+    INCBIN "data/bank_35/Src_35_7BB8_Mode06_Printing_State0D.bin" ; $7BB8, 549 bytes
 ; I: leftover: 131 bytes (35:7DDD-7E5F) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_35_7DDD::
     db $00, $01, $02, $03, $04, $05, $06, $07, $00, $00, $00, $00, $00, $00, $00, $00

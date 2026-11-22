@@ -51,11 +51,11 @@ sfx1,10,SFX1_10,C,1,an effect id of channel sfx1,07:622F | Mode10_State03 (10:03
 sfx1,11,SFX1_11,C,2,an effect id of channel sfx1,"05:519C 06:4547 | TakePhotos_FrameCallback3; Mode14_State01 (14:01 Print error: #01-#04, picture 1 of 4)"
 sfx1,16,SFX1_16,C,3,an effect id of channel sfx1,01:6C0D 01:6C1C 02:51A3 | Mode06_State02 (06:02 Printing); Puzzle15_ObjTick
 sfx1,17,SFX1_EXCHANGE_COMMUNICATING_17,I,2,every site in Mode09,06:6914 06:6BED | Mode09_State05 (09:05 ExchangeCommunicating); Mode09_State0E (09:0E ExchangeCommunicating)
-sfx1,19,SFX1_19,C,7,an effect id of channel sfx1,05:59BF 05:6332 06:4966 06:5221 06:55AA 06:5710 07:5E0C | Stamp_CursorUpdate; AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); Mode0B_State02 (0B:02 NameCardEdit); Mode0B_State10 (0B:10 Name card: take your photo); Mode0A_State01 (0A:01 Name card: the finished ID card (its three photos take turns))
+sfx1,19,SFX1_19,C,8,an effect id of channel sfx1,05:59BF 05:6332 06:4966 06:5221 06:55AA 06:5710 06:64EB 07:5E0C | Stamp_CursorUpdate; AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); Mode0B_State02 (0B:02 NameCardEdit); Mode0B_State10 (0B:10 Name card: take your photo); Mode0A_State01 (0A:01 Name card: the finished ID card (its three photos take turns))
 sfx1,1A,SFX1_1A,C,3,an effect id of channel sfx1,07:49E7 07:5D1E 07:6194 | SlideShow_FrameCallback; Puzzle15_FrameCallback2 (0F:0A 15 puzzle: a drawing); Mode10_State02 (10:02 Scratch card board)
 sfx1,1D,SFX1_1D,C,4,an effect id of channel sfx1,01:6E9B 05:5028 05:6355 06:49BC | Mode06_State0D (06:0D Printing); TakePhotos_FrameCallback2 (02:01 Take photos: camera view); AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo)
 sfx1,1E,SFX1_EXCHANGE_1E,I,2,every site in Mode07,06:6281 06:6293 | Mode07_State02 (07:02 Exchange: give or receive)
-sfx1,20,SFX1_20,C,7,an effect id of channel sfx1,05:5909 05:597F 05:62B7 05:62BF 05:62D4 06:48EB 06:490E | Stamp_CursorUpdate; AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo)
+sfx1,20,SFX1_20,C,8,an effect id of channel sfx1,05:5909 05:597F 05:62B7 05:62BF 05:62D4 06:48EB 06:490E 06:64D9 | Stamp_CursorUpdate; AlbumText_CursorUpdate; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); Mode07_Exchange (07:00 Exchange)
 sfx1,23,SFX1_23,C,3,an effect id of channel sfx1,05:59B7 05:7298 05:72CB | Stamp_CursorUpdate; Mode03_State02 (03:02 View photos: album)
 sfx1,28,SFX1_28,C,1,an effect id of channel sfx1,05:5121 | TakePhotos_FrameCallback3
 sfx1,29,SFX1_29,C,1,an effect id of channel sfx1,06:6267 | Mode07_State02 (07:02 Exchange: give or receive)
@@ -66,8 +66,9 @@ sfx1,34,SFX1_MENU07_34,I,4,every site in Menu07,07:477B 07:4790 07:47A1 07:47B8 
 sfx1,35,SFX1_35,C,1,an effect id of channel sfx1,05:6091 | Mode05_State01 (05:01 StampWindow)
 sfx1,36,SFX1_TAKE_PHOTOS_36,I,2,every site in TakePhotos,05:4F8B 05:4FC2 | TakePhotos_FrameCallback (02:01 Take photos: camera view)
 sfx1,38,SFX1_38,C,3,an effect id of channel sfx1,05:5146 06:495D 07:545C | TakePhotos_FrameCallback3; NameCardEdit_PhotoCursorUpdate (0B:04 Name card: choose a photo); StrawberryCh_FrameCallbackA (11:02 StrawberryChannel)
-sfx1,3A,SFX1_3A,C,1,an effect id of channel sfx1,02:74BF | PrintGame_ObjKitty
+sfx1,3A,SFX1_3A,C,4,an effect id of channel sfx1,02:7484 02:74BF 02:74FD 02:7542 | PrintGame_SaveKittyPos; PrintGame_ObjKitty
 sfx1,3C,SFX1_3C,C,2,an effect id of channel sfx1,02:4ED3 05:730A | Album_CursorUpdate; Mode03_State02 (03:02 View photos: album)
+sfx3,01,SFX3_MODE07_EXCHANGE_01,I,2,every site in Mode07_Exchange,06:655F 06:657E | Mode07_Exchange (07:00 Exchange)
 sfx3,03,SFX3_03,C,1,an effect id of channel sfx3,02:6FD0 | AppleGame_ObjCatch (06:1B Printing)
 sfx3,08,SFX3_08,C,4,an effect id of channel sfx3,05:4796 05:50DD 05:7271 07:6CB2 | Mode01_State05 (01:05 Option menu: Name / Record book / Exchange); TakePhotos_FrameCallback3; Mode03_State02 (03:02 View photos: album); Mode04_State01 (04:01 Play menu: Scratch card / 15 puzzle / Slide show / Strawberry Channel)
 sfx3,09,SFX3_09,C,14,an effect id of channel sfx3,01:6BCD 02:7003 05:413D 05:4699 05:609D 05:66CC 05:6C39 05:73B8 ... | Mode06_State02 (06:02 Printing); AppleGame_ObjCatch (06:1B Printing); Mode00_State02 (00:02 Boot: throw away all the save data?); Mode01_State02 (01:02 Main menu: Take / View / Play); Mode05_State01 (05:01 StampWindow); Mode03_State0B (03:0B ViewAlbum)

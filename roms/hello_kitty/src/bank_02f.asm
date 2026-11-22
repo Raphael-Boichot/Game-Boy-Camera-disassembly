@@ -16,11 +16,7 @@ Gfx_2F_5C00_Mode02_TakePhotos_State08::
 ; I: leftover: 512 bytes (2F:61E0-63DF), 32 tiles, white kana and icons on black, drawn as 2bpp tiles; their $FF rows
 ; are black; no run reads them and no code names them
 Leftover_2F_61E0_Tiles::
-    INCBIN "data/bank_2f/Leftover_2F_61E0_Tiles.2bpp" ; $61E0, 512 bytes
-; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_2F_63E0_Mode02_TakePhotos_State01::
-    INCBIN "data/bank_2f/Gfx_2F_63E0_Mode02_TakePhotos_State01.2bpp" ; $63E0, 976 bytes
+    INCBIN "data/bank_2f/Leftover_2F_61E0_Tiles.2bpp" ; $61E0, 1488 bytes
 ; C: named by the code of Mode06_State18, Mode06_State19 (01:7230 01:728D); read in the runs by Copy_DEtoHL; first
 ; read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py

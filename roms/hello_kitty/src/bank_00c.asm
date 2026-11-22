@@ -7,11 +7,9 @@ SECTION "ROM Bank $00c", ROMX[$4000], BANK[$c]
 ; C: read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_4000_Mode05_StampWindow_State06::
-    INCBIN "data/bank_0c/Gfx_0C_4000_Mode05_StampWindow_State06.2bpp" ; $4000, 14432 bytes
-; I: leftover: 192 bytes (0C:7860-791F) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_0C_7860::
-    db $7f, $4e, $7f, $42, $ff, $ee, $7f, $48, $ff, $ee, $7f, $70, $1f, $1f, $00, $00
-    db $7f, $4e, $7f, $42, $ff, $ee, $7f, $42, $ff, $ee, $7f, $70, $1f, $1f, $00, $00
+    INCBIN "data/bank_0c/Gfx_0C_4000_Mode05_StampWindow_State06.2bpp" ; $4000, 14464 bytes
+; I: leftover: 160 bytes (0C:7880-791F) that no run reads or executes and that no code names (owner rule 2026-11-11)
+Leftover_0C_7880::
     db $7f, $4a, $7f, $4a, $ff, $ee, $7f, $42, $ff, $e2, $7f, $70, $1f, $1f, $00, $00
     db $7f, $4e, $7f, $48, $ff, $ee, $7f, $42, $ff, $ee, $7f, $70, $1f, $1f, $00, $00
     db $7f, $4e, $7f, $48, $ff, $ee, $7f, $4a, $ff, $ee, $7f, $70, $1f, $1f, $00, $00

@@ -176,7 +176,12 @@ bank,addr,name,conf,note,source
 00,1D5C,Gfx_00_1D5C_Mode12_SlideShow_State00,C,"named by the code of Mode12_State00 (07:4903); read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Object_CreateWithParam; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 00,1D96,SlideShow_ObjSaveD908,C,hFFD8 = $D908 (script callback),hand 2026-11-08
 00,1D9D,SlideShow_ObjFollowD908,C,restarts the script 00:1D62 when $D908 changes,hand 2026-11-08
-00,1DAB,Gfx_00_1DAB_Mode12_SlideShow_State00,C,"named by the code of Mode12_State00 (07:4909); read in the runs by Copy_DEtoHL, Object_CreateWithParam; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
+00,1DAB,Gfx_00_1DAB_Mode12_SlideShow_State00,C,"named by the code of Mode12_State00 (07:4909); read in the runs by Copy_DEtoHL, Object_CreateWithParam; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz)",data
+00,1DE8,Gfx_00_1DE8_SlideShow_ObjFollowD908,C,named by the code of SlideShow_ObjFollowD908 (00:1E15); read in the runs by Copy_DEtoHL; kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+00,1E04,Gfx_00_1E04_Copy_DEtoHL,C,read in the runs by Copy_DEtoHL; kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+00,1E1B,ObjScript_00_1E1B_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:6898 06:6A41); read in the runs by SlideShow_ObjFollowD908, Object_RunAll, Copy_DEtoHL",data
+00,1E44,ObjScript_00_1E44_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:689E 06:6A47); read in the runs by SlideShow_ObjFollowD908, Object_RunAll, Object_CreateWithParam",data
+00,1EB4,ObjScript_00_1EB4_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:6892 06:6A3B); read in the runs by Object_CreateWithParam",data
 00,1EBA,ObjCmd_Sound,C,"{id, channel 0-3}: the sound into $D060 / $D068 / $D070 / $D078",hand 2026-11-08
 00,1EC1,ObjCmd_Sound_JumpTbl1EC1,C,read in the runs by JumpTable_Inline; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz),data
 00,1EC9,ObjCmd_SoundCh0,C,channel 0 of ObjCmd_Sound: $D060,hand 2026-11-08
@@ -450,12 +455,11 @@ bank,addr,name,conf,note,source
 02,45C0,ObjScript_02_45C0_Mode06_Printing_State0D,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode06_Printing_State0D (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,45F4,ObjScript_02_45F4_Mode06_Printing_State1F,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,4628,Leftover_02_4628,I,leftover: 44 bytes (02:4628-4653) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-02,4654,ObjScript_02_4654_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump",data
-02,46A0,ObjScript_02_46A0_Mode07_Exchange_State02,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
-02,4728,Leftover_02_4728,I,leftover: 164 bytes (02:4728-47CB) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-02,47CC,Src_02_47CC_Mode07_Exchange_State02,C,read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_02_46A0 after a leftover stretch,data
-02,47D4,Leftover_02_47D4,I,leftover: 60 bytes (02:47D4-480F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-02,4810,Src_02_4810_Mode07_Exchange_State02,C,read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_02_46A0 after a leftover stretch,data
+02,4654,ObjScript_02_4654_Mode07_Exchange_State02,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
+02,4728,Leftover_02_4728,I,leftover: 104 bytes (02:4728-478F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+02,4790,ObjScript_02_4790_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump",data
+02,47B8,ObjScript_02_47B8_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)",data
+02,47EC,ObjScript_02_47EC_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)",data
 02,4824,Leftover_02_4824,I,leftover: 40 bytes (02:4824-484B) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,484C,ObjScript_02_484C_AlbumText_ObjCursor,C,"named by the code of AlbumText_ObjCursor (02:7816); read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,48A8,ObjScript_02_48A8_Mode0B_NameCardEdit_State10,C,"read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
@@ -565,8 +569,8 @@ bank,addr,name,conf,note,source
 02,567C,Scratch_ObjCountdown,C,hFFD8 - 1; at 0 $D8E0 = 0 and back to 02:5662; runs on its screen (10:02) in the core replays (port/entry_modes_kitty.csv); code read,hand 2026-11-08
 02,5691,ObjScript_02_5691_Mode10_ScratchCard_State03,C,"read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_Jump; first read on the screen Mode10_ScratchCard_State03 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,569E,Scratch_ObjEndCountdown,C,hFFD8 - 1; at 0 $D8E0 = 8; runs on its screen (10:03) in the core replays (port/entry_modes_kitty.csv); code read,hand 2026-11-08
-02,56A9,ObjScript_02_56A9_Mode10_ScratchCard_State02,C,"read in the runs by Object_CreateWithParam, ObjCmd_CopyAtLine20, Object_RunAll; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
-02,56DC,Leftover_02_56DC,I,leftover: 51 bytes (02:56DC-570E) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+02,56A9,ObjScript_02_56A9_Mode10_ScratchCard_State02,C,"read in the runs by ObjCmd_CopyAtLine20, Object_CreateWithParam, Object_RunAll; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
+02,5702,ObjScript_02_5702_Object_CreateWithParam,C,read in the runs by Object_CreateWithParam,data
 02,570F,KittHost_ObjBlink,C,blinks on hFF9D bit 3 ($C0 = hidden); runs on its screen (0E:05) in the core replays (port/entry_modes_kitty.csv); code read,hand 2026-11-08
 02,5726,ObjScript_02_5726_Mode0E_KittGamesHost_State05,C,"read in the runs by Object_RunAll, ObjCmd_SetCallback, ObjCmd_Jump; first read on the screen Mode0E_KittGamesHost_State05 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,5730,KittHost_ObjSaveD2,C,hFFD8 = hFFD2 (script callback),hand 2026-11-08
@@ -708,6 +712,7 @@ bank,addr,name,conf,note,source
 02,7023,ObjScript_02_7023_Mode06_Printing_State1F,C,read in the runs by Object_CreateWithParam; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz),data
 02,7029,PrintGame_ObjCheckLanded,C,"the falling fruit at the bottom (hFFD2 = $D0 / $D1): $D8E0 = 8, speed 0, callback cleared; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 02,7044,ObjScript_02_7044_PrintGame_ObjCheckLanded,C,"read in the runs by PrintGame_ObjCheckLanded, Object_RunAll, Object_CreateWithParam",data
+02,70A9,ObjScript_02_70A9_PrintGame_ObjCheckLanded,C,"read in the runs by ObjCmd_JumpByByte, PrintGame_ObjCheckLanded, Object_RunAll",data
 02,70DE,PrintGame_ObjCheckCatch,C,"is the fruit within 8 pixels of Kitty ($D94D / $D94E); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 02,7104,PrintGame_AddGravity,C,"BC + $20 (the fall speed grows); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
 02,710B,PrintGame_ClampSpeed,C,"BC kept between -$180 and +$180; first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
@@ -729,12 +734,7 @@ bank,addr,name,conf,note,source
 02,75D5,PrintGame_ObjKittyJump,C,"object callback of Kitty's jump in the fruit game (script 02:7686, started by A in PrintGame_ObjKitty): Obj_SetSpriteBC, then the rest of PrintGame_ObjKittyJumpStep; first run in the core path album_print_fruit_A (tools/kitty_core_paths.py, 2026-11-15); code read",hand 2026-11-15
 02,75D8,PrintGame_ObjKittyJumpStep,C,"the jump step: Obj_GetSpeed, 02:7430, PrintGame_ClampX, PrintGame_SaveKittyPos (the moves of PrintGame_ObjKitty without the keys), ret; first run in the core path album_print_fruit_A (2026-11-15); code read",hand 2026-11-15
 02,75E5,Obj_SetD94D,C,"$D94D = $80, $D94E = $78 (not run in the core)",hand 2026-11-08
-02,75F0,ObjScript_02_75F0_Object_RunAll,C,"read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_Jump",data
-02,761E,Leftover_02_761E,I,leftover: 104 bytes (02:761E-7685) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-02,7686,ObjScript_02_7686_PrintGame_ObjKitty,C,"named by the code of PrintGame_ObjKitty (02:74C5); read in the runs by Object_RunAll, ObjCmd_JumpRandom, ObjCmd_SetSprite",data
-02,76CF,ObjScript_02_76CF_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump",data
-02,76EB,ObjScript_02_76EB_Object_RunAll,C,read in the runs by Object_RunAll,data
-02,76F3,Leftover_02_76F3,I,leftover: 50 bytes (02:76F3-7724) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+02,75F0,ObjScript_02_75F0_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_Jump, ObjCmd_SetCallback",data
 02,7725,ObjScript_02_7725_PrintGame_ShowResult,C,"named by the code of PrintGame_ShowResult (02:77CF); read in the runs by Object_RunAll, ObjCmd_Jump",data
 02,7767,Leftover_02_7767,I,leftover: 44 bytes (02:7767-7792) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 02,7793,PrintGame_ShowResult,C,"the apples caught [$D94F] against the record [$DAD8] (Counters_Load first): a new record, 50 or more, 30 or more, or less pick the message (02:7777 ...); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read",hand 2026-11-08
@@ -780,8 +780,10 @@ bank,addr,name,conf,note,source
 02,7C3F,ObjScript_02_7C3F_Mode07_Exchange_State02,C,"read in the runs by Object_RunAll, ObjCmd_SetPos, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,7C5F,Obj_SetD882Bit3,C,$D882 bit 3 set (script callback),hand 2026-11-08
 02,7C68,ObjScript_02_7C68_Mode07_Exchange_State02,C,"read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_JumpByByte; first read on the screen Mode07_Exchange_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
-02,7CAC,Leftover_02_7CAC,I,leftover: 396 bytes (02:7CAC-7E37) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-02,7E38,ObjScript_02_7E38_Mode0C_RecordBook_State01,C,"read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
+02,7CB5,Leftover_02_7CB5,I,leftover: 274 bytes (02:7CB5-7DC6) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+02,7DC7,ObjScript_02_7DC7_Obj_SetD882Bit3,C,"read in the runs by Obj_SetD882Bit3, Object_RunAll, ObjCmd_SetFrac",data
+02,7DF0,ObjScript_02_7DF0_Object_RunAll,C,"read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Obj_SetD882Bit3",data
+02,7E32,ObjScript_02_7E32_Mode0C_RecordBook_State01,C,"read in the runs by ObjCmd_CopyAtLine20, Object_CreateWithParam, Object_RunAll; first read on the screen Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py",data
 02,7E58,Fade_StepIn,C,adds one step of the three palettes $D88C-$D88E (each pair of bits) to the accumulators $D88F-$D894 and writes the result into $D883-$D885 (fade in); code read,hand 2026-11-08
 02,7E89,Fade_StartIn,C,"keys blocked ($D8D4 = 1), the accumulators $D88F-$D894 cleared (the start of a fade in from white); code read",hand 2026-11-08
 02,7EA2,Fade_SetModeFromObject,C,the fade object at its end: mode hFF8D = hFFD4 and state hFF8E = hFFD2 (its parameters from $0B16 / $0B22); the only way a fade changes the mode,hand 2026-11-08
@@ -811,23 +813,17 @@ bank,addr,name,conf,note,source
 03,5358,OamList_03_5358_Mode04_PlayMenu_State01,C,read in the runs by Obj_DrawSprite; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
 03,5BF0,Leftover_03_5BF0,I,leftover: 332 bytes (03:5BF0-5D3B) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 03,5D3C,OamList_03_5D3C_Mode06_Printing_State1F,C,read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
-03,60E4,OamList_03_60E4_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data
-03,6218,Leftover_03_6218,I,leftover: 196 bytes (03:6218-62DB) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,62DC,OamList_03_62DC_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data
 03,633C,Leftover_03_633C,I,leftover: 64 bytes (03:633C-637B) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 03,637C,OamList_03_637C_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data
 03,639C,Leftover_03_639C,I,leftover: 64 bytes (03:639C-63DB) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,63DC,OamList_03_63DC_Obj_DrawSprite,I,read in the runs by Obj_DrawSprite; the rest of Data_03_637C after a leftover stretch,data
-03,63FC,OamList_03_63FC_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data
-03,641E,Leftover_03_641E,I,leftover: 62 bytes (03:641E-645B) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,645C,OamList_03_645C_Mode07_Exchange_State02,C,read in the runs by Obj_DrawSprite; first read on the screen Mode07_Exchange_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
-03,6524,Leftover_03_6524,I,leftover: 1736 bytes (03:6524-6BEB) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,6BEC,Src_03_6BEC_Mode07_Exchange_State02,C,read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_03_645C after a leftover stretch,data
+03,63DC,OamList_03_63DC_PrintGame_Kitty,C,"a frame of Kitty in the print fruit game: the loop 02:76CF of her script 02:7686 (PrintGame_ObjKitty, after A) shows 03:637C for $70 frames, then this one; read in the core when the print lasts long enough (tools/kitty_rare_runs.py, print_game: 40 more busy replies of the printer); also drawn by mode $1B, never entered (forced run)",hand 2026-11-22
+03,63FC,OamList_03_63FC_Obj_DrawSprite,C,"sprite layouts read in the runs by Obj_DrawSprite (frames of the object scripts of bank $02; 03:641E-645B read since the runs of 2026-11-22, 03:645C on the exchange screen, mode $07); a hand label since the Kitty frame 03:63DC got its own (2026-11-22)",hand 2026-11-22
+03,6524,Leftover_03_6524,I,leftover: 712 bytes (03:6524-67EB) that no run reads or executes and that no code names (owner rule 2026-11-11); a hand label since the labels 03:63DC / 03:63FC are hand ones (2026-11-22),hand 2026-11-22
+03,67EC,OamList_03_67EC_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite,data
+03,6A94,Leftover_03_6A94,I,leftover: 296 bytes (03:6A94-6BBB) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+03,6BBC,OamList_03_6BBC_Obj_DrawSprite,C,read in the runs by Obj_DrawSprite; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange),data
 03,6C24,Leftover_03_6C24,I,leftover: 56 bytes (03:6C24-6C5B) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,6C5C,Src_03_6C5C_Mode07_Exchange_State02,C,read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_03_645C after a leftover stretch,data
-03,6C74,Leftover_03_6C74,I,leftover: 192 bytes (03:6C74-6D33) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-03,6D34,Src_03_6D34_Mode07_Exchange_State02,C,read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_03_645C after a leftover stretch,data
-03,6E14,OamList_03_6E14_Mode0B_NameCardEdit_State10,C,read in the runs by Obj_DrawSprite; first read on the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
+03,6C5C,OamList_03_6C5C_Mode0B_NameCardEdit_State10,C,read in the runs by Obj_DrawSprite; first read on the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
 03,6EB8,Leftover_03_6EB8,I,leftover: 48 bytes (03:6EB8-6EE7) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 03,6EE8,OamList_03_6EE8_Mode0B_NameCardEdit_State10,C,read in the runs by Obj_DrawSprite; first read on the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py,data
 03,6FB4,Leftover_03_6FB4,I,leftover: 404 bytes (03:6FB4-7147) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
@@ -1112,7 +1108,7 @@ bank,addr,name,conf,note,source
 05,68D7,Src_05_68D7_Mode02_TakePhotos_State01,C,"read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, FrameRec_LoadTiles; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)",data
 05,6A7D,Leftover_05_6A7D,I,leftover: 48 bytes (05:6A7D-6AAC) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 05,6AAD,FrameRec_LoadTiles_Tbl6AAD,C,"read in the runs by FrameRec_LoadTiles, FrameRec_LoadMap; first read on the screen Mode02_TakePhotos_State09 (trace/read_screens_kitty.npz)",data
-05,6AC5,FrameRec_LoadMap_Tbl6AC5,C,"read in the runs by FrameRec_LoadMap, FrameRec_LoadTiles; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)",data
+05,6AC5,FrameRec_LoadMap_Tbl6AC5,C,"read in the runs by FrameRec_LoadMap, FrameRec_LoadTiles, FrameRec_LoadTilesScreenOff; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)",data
 05,6B97,Mode03_State06,C,handler of state $06 of mode $03 (word 6 of Mode03_StateTable),modes
 05,6C31,Mode03_State07,C,handler of state $07 of mode $03 (word 7 of Mode03_StateTable),modes
 05,6CA5,Mode03_State08,C,handler of state $08 of mode $03 (word 8 of Mode03_StateTable),modes
@@ -1167,8 +1163,7 @@ bank,addr,name,conf,note,source
 06,41EF,Mode19_State01,C,handler of state $01 of mode $19 (word 1 of Mode19_StateTable),modes
 06,41FE,Mode19_EmptyFrame19,I,ModeTable entry $19: forced BGB screen (an empty photo frame),modes
 06,4209,Mode19_StateTable,C,"state table of mode $19, read by $0189 with hFF8E",modes
-06,42CD,Mode14_State01_Tbl42CD,C,read in the runs by Mode14_State01; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full),data
-06,43FF,Mode14_State01_Tbl43FF,C,"read in the runs by Mode14_State01, Mode14_State00; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz)",data
+06,420D,Mode14_State01_Tbl420D,C,"read in the runs by Mode14_State01, Mode14_State00; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full)",data
 06,4478,Mode14_State00,C,handler of state $00 of mode $14 (word 0 of Mode14_StateTable),modes
 06,453F,Mode14_State01,C,handler of state $01 of mode $14 (word 1 of Mode14_StateTable),modes
 06,4631,Mode14_MessageScreen,C,ModeTable entry $14: BGB screen 14:01 (print error; the same screen says there is no photo to give),modes
@@ -1254,22 +1249,20 @@ bank,addr,name,conf,note,source
 06,5D75,Mode0C_State01,C,handler of state $01 of mode $0C (word 1 of Mode0C_StateTable),modes
 06,5D8C,Mode0C_RecordBook,C,ModeTable entry $0C: BGB screen 0C:01 (photo counters and Kitts),modes
 06,5D97,Mode0C_StateTable,C,"state table of mode $0C, read by $0189 with hFF8E",modes
-06,5DFA,KeyPrompt_LoadSounds_Tbl5DFA,C,read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode05_StampWindow_State03 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange),data
-06,5E94,Leftover_06_5E94,I,leftover: 36 bytes (06:5E94-5EB7) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-06,5EB8,KeyPrompt_LoadSounds_Tbl5EB8,C,read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode03_ViewAlbum_State0D (trace/read_screens_kitty.npz),data
-06,5F55,KeyPrompt_LoadSounds_Tbl5F7F_Entry5F55,I,"never read in the runs, but KeyPrompt_LoadSounds_Tbl5F7F points to it (the word at 06:5F93): 42 bytes (06:5F55-5F7E) that no run reads or executes and that no code names (owner rule 2026-11-11)",data_entry
-06,5F7F,KeyPrompt_LoadSounds_Tbl5F7F,C,"named by the code of KeyPrompt_LoadSounds, KeyPrompt_LoadSoundsB (06:5F9A 06:5FFD); read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz)",data
+06,5DFA,KeyPrompt_LoadSounds_Tbl5DFA,C,"read in the runs by KeyPrompt_LoadSounds, KeyPrompt_LoadSoundsB; first read on the screen Mode05_StampWindow_State03 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)",data
 06,5F95,KeyPrompt_LoadSounds,C,the three key-prompt sound pairs $D8E6-$D8EB from record A of the pointer table 06:5F7F (read by KeyPrompt_*); runs in the camera (mode $02),hand 2026-11-08
-06,5FF8,KeyPrompt_LoadSoundsB,I,"the same code again, called from mode $09 (forced only); not run in the core",hand 2026-11-08
+06,5FF8,KeyPrompt_LoadSoundsB,C,"KeyPrompt_LoadSounds again (the same code), called only from Mode09_State0C with A = $0A (06:6B76): the giving unit asked for a photo by a leading receiver; run in the linked cores (tools/kitty_core_link.py, recv_leads, 2026-11-22)",hand 2026-11-22
 06,605B,Link_SumSlotBuffer,C,"same code as the Japanese Unused_Link_SumSlotBuffer (07:4BEA, 30 bytes); here it runs: mode $09 state $01 on the giving unit of the linked exchange (BGB 2026-11-08)",hand 2026-11-08
 06,6079,Link_CountdownDA00,C,$DA00-$DA01 - 1; Z when it reaches 0,hand 2026-11-08
 06,6086,Counters_AddReceived,C,"received boy $DAD1 and girl $DAD2 + 1 in BCD (at most 99) by the bits 0 / 1 of [$CFFF], counters loaded and saved",hand 2026-11-08
 06,60B8,Exchange_RequestPage,C,"runs in mode $08 state $01 in the linked exchange (BGB 2026-11-08, two units)",hand 2026-11-08
+06,6129,PhotoTrain_LoadPageMap_Tbl6129,C,named by the code of PhotoTrain_LoadPageMap (06:613A); read in the runs by PhotoTrain_LoadPageMap,data
 06,6134,PhotoTrain_LoadPageMap,C,"the map of page A (pointer table 06:6129, bank $16) into HL ($9800 in mode $08 state $00); runs in the linked exchange (BGB 2026-11-08)",hand 2026-11-08
 06,6168,PhotoTrain_FillEmptyTiles,C,"8 x the same 256 bytes of 17:7800 (the empty-slot picture) into $9000-$97FF; mode $08 state $00, runs in the linked exchange (BGB 2026-11-08)",hand 2026-11-08
 06,6198,Mode07_State00,C,handler of state $00 of mode $07 (word 0 of Mode07_StateTable),modes
 06,6235,Mode07_State01,C,handler of state $01 of mode $07 (word 1 of Mode07_StateTable),modes
 06,6256,Mode07_State02,C,handler of state $02 of mode $07 (word 2 of Mode07_StateTable),modes
+06,62E9,Mode07_State02_Tbl62E9,C,read in the runs by Mode07_State02,data
 06,62ED,Mode07_State03,C,handler of state $03 of mode $07 (word 3 of Mode07_StateTable),modes
 06,62F9,Mode07_State04,C,handler of state $04 of mode $07 (word 4 of Mode07_StateTable),modes
 06,6318,Mode07_Exchange,C,ModeTable entry $07: BGB screen 07:02 (give / receive),modes
@@ -1485,7 +1478,7 @@ bank,addr,name,conf,note,source
 07,5EF1,Scratch_PickFreeSpot,C,a random spot (Rng_Scaled 6) of $D952 that is still 0,hand 2026-11-08
 07,5F05,Scratch_PrizeTable,C,"HL = 07:5F41, or 07:5F21 when $DADA is not 0",hand 2026-11-08
 07,5F13,Scratch_PrizeTableB,C,"HL = 07:5F51, or 07:5F31 when $DADA is not 0",hand 2026-11-08
-07,5F41,Scratch_PrizeTable_Tbl5F41,C,"named by the code of Scratch_PrizeTable (07:5F0B); read in the runs by Scratch_DealSpots, Scratch_PickCardArt; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz)",data
+07,5F21,Scratch_PrizeTable_Tbl5F21,C,"named by the code of Scratch_PrizeTable (07:5F0F); read in the runs by Scratch_DealSpots, Scratch_PickCardArt; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz)",data
 07,5F6D,Scratch_PickCardArt,C,"one of two card pictures at random ($D95B), $230 bytes of bank $33 into $8F40",hand 2026-11-08
 07,5FC7,Scratch_ReloadCardArt,C,the card picture $D95B again into $8F40,hand 2026-11-08
 07,6012,Scratch_FirstMarkedSpot,C,the first spot with bit 7 set into $D8F4,hand 2026-11-08
@@ -1507,9 +1500,6 @@ bank,addr,name,conf,note,source
 07,6395,KittHost_TextStep_Tbl6395,C,"the 15 puzzle's text script of the Kitt host (the word at 07:669C of Mode0E_State00_Tbl668C), read by KittHost_TextStep since the puzzle runs of 2026-11-14 (tools/kitty_puzzle.py); was Mode0E_State00_Tbl668C_Entry6395, never read",hand 2026-11-14
 07,63EE,KittHost_TextStep_Tbl63EE,C,"a text script of the Kitt host, read by KittHost_TextStep; kept as a label since the puzzle runs of 2026-11-14 joined the read spans",hand 2026-11-14
 07,6423,KittHost_TextStep_Tbl6423,C,"a text script of the Kitt host, read by KittHost_TextStep; kept as a label since the puzzle runs of 2026-11-14 joined the read spans",hand 2026-11-14
-07,6493,KittHost_TextStep_Tbl6493,C,read in the runs by KittHost_TextStep; first read on the screen Mode0E_KittGamesHost_State03 (trace/read_screens_kitty.npz),data
-07,6504,Mode0E_State00_Tbl668C_Entry6504,I,"never read in the runs, but Mode0E_State00_Tbl668C points to it (the word at 07:66B8): 88 bytes (07:6504-655B) that no run reads or executes and that no code names (owner rule 2026-11-11)",data_entry
-07,655C,KittHost_TextStep_Tbl655C,C,read in the runs by KittHost_TextStep; first read on the screen Mode0E_KittGamesHost_State03 (trace/read_screens_kitty.npz),data
 07,657B,KittHost_TextStep,C,when hFF9D bit 0 is clear: the text of entry [$D946] of the pointer table [$D944]; runs on its screen (0E:03) in the core replays (port/entry_modes_kitty.csv); code read,hand 2026-11-08
 07,6668,KittHost_SetTextPtr,C,$D941-$D942 = DE,hand 2026-11-08
 07,6671,KittHost_SetTablePtr,C,$D944-$D945 = DE,hand 2026-11-08
@@ -1585,7 +1575,7 @@ bank,addr,name,conf,note,source
 0B,4000,Gfx_0B_4000_Mode05_StampWindow_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0B,7F00,Gfx_0B_7F00_Mode0A_NameCard_State00,C,"named by the code of Mode0A_State00, Print_LoadItemPicture (06:5626 01:69AA); read in the runs by Copy_DEtoHL; first read on the screen Mode0A_NameCard_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 0C,4000,Gfx_0C_4000_Mode05_StampWindow_State06,C,"read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
-0C,7860,Leftover_0C_7860,I,leftover: 192 bytes (0C:7860-791F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+0C,7880,Leftover_0C_7880,I,leftover: 160 bytes (0C:7880-791F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 0C,7920,Gfx_0C_7920_Mode02_TakePhotos_State06,C,"read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 0C,7A40,Gfx_0C_7A40_Mode03_ViewAlbum_State0B,C,read in the runs by Copy_DEtoHL; first read on the screen Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0C,7A60,Leftover_0C_7A60,I,leftover: 128 bytes (0C:7A60-7ADF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
@@ -1928,12 +1918,8 @@ bank,addr,name,conf,note,source
 0F,572F,Snd_0F_572F_Mode00_BootAndTitle_State00,C,"read in the runs by Snd_Sfx_Lookup, Snd_Trk_FetchByte, Snd_Copy2; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
 0F,57D9,Snd_0F_57D9_Mode04_PlayMenu_State01,C,"read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
 0F,5AA0,Snd_0F_5AA0_Mode05_StampWindow_State06,C,"read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
-0F,6982,Snd_0F_6982_Mode02_TakePhotos_State01,C,"read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
-0F,6C3F,Snd_0F_6C3F_Snd_Trk_FetchByte,C,read in the runs by Snd_Trk_FetchByte,data
-0F,6CAD,Snd_0F_6CAD_Snd_Trk_FetchByte,C,read in the runs by Snd_Trk_FetchByte,data
 0F,6CC2,Leftover_0F_6CC2,I,leftover: 303 bytes (0F:6CC2-6DF0) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 0F,6DF1,Snd_0F_6DF1_Mode11_StrawberryChannel_State07,C,"read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
-0F,7AC7,Snd_0F_7AC7_Mode0C_RecordBook_State01,C,"read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
 0F,7BB1,Leftover_0F_7BB1,I,leftover: 448 bytes (0F:7BB1-7D70) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 0F,7D71,Snd_0F_7D71_Snd_Trk_FetchByte,C,"read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
 0F,7E43,Snd_0F_7E43_Mode12_SlideShow_State01,C,"read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py",data
@@ -1941,7 +1927,7 @@ bank,addr,name,conf,note,source
 10,5500,Gfx_10_5500_Mode02_TakePhotos_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 10,5600,Gfx_10_5600_Mode03_ViewAlbum_State11,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State11 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 10,5700,Gfx_10_5700_Mode02_TakePhotos_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-10,5803,Leftover_10_5803,I,leftover: 253 bytes (10:5803-58FF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+10,5800,Src_10_5800_Copy_DEtoHL,C,read in the runs by Copy_DEtoHL,data
 10,5900,Gfx_10_5900_Mode0A_NameCard_State02,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode0A_NameCard_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 10,5A03,Leftover_10_5A03,I,leftover: 253 bytes (10:5A03-5AFF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 10,5B00,Gfx_10_5B00_Mode03_ViewAlbum_State09,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State09 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
@@ -1962,7 +1948,7 @@ bank,addr,name,conf,note,source
 13,7F00,Map_13_7F00_Mode10_ScratchCard_State02,C,read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 13,7F40,Map_13_7F40_Mode10_ScratchCard_State02,C,read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 13,7F80,Map_13_7F80_Mode10_ScratchCard_State02,C,read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
-13,7FA3,Leftover_13_7FA3,I,leftover: 93 bytes (13:7FA3-7FFF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
+13,7FC0,Src_13_7FC0_Map_CopyRect,C,read in the runs by Map_CopyRect,data
 14,4000,Gfx_14_4000_Copy_DEtoHL,I,read in the runs by Copy_DEtoHL; kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 14,5800,Gfx_14_5800_PompompurinPicture,C,"tiles of the Pompompurin picture copied to $8000 by Unused_Mode18_State00 (06:4133, 6,144 bytes); no other loader",hand 2026-11-08
 14,7000,Map_14_7000_Mode02_TakePhotos_State08,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
@@ -1990,8 +1976,8 @@ bank,addr,name,conf,note,source
 16,7C00,Leftover_16_7C00_Map,I,"leftover: 1024 bytes (16:7C00-7FFF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it",hand 2026-11-22
 17,4000,Gfx_17_4000_Photos_LoadPage8,C,named by the code of Photos_LoadPage8 (01:4F54); read in the runs by Copy_DEtoHL; first read on the screen Mode0B_NameCardEdit_State0F (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 17,5800,Gfx_17_5800_Mode01_MainMenu_State00,C,read in the runs by Copy_DEtoHL; first read on the screen Mode01_MainMenu_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-17,7000,Gfx_17_7000_Mode08_ExchangePhotoTrain_State00,C,named by the code of Mode08_State00 (06:65DF); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-17,7800,Gfx_17_7800_NeverRead,C,read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+17,7000,Gfx_17_7000_Mode08_ExchangePhotoTrain_State00,C,named by the code of Mode08_State00 (06:65DF); read in the runs by Copy_DEtoHL; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+17,7800,Gfx_17_7800_Copy_DEtoHL,C,"read in the runs by Copy_DEtoHL, Copy_Unrolled; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 18,4000,Frame_18_4000_Mode06_Printing_State07,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State07 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py,data
 18,5180,Frame_18_5180_WildFrameSides,C,"the last $380 bytes (56 tiles) of print frame block 5 of table 01:687D: the left and right borders of a wild frame, read only when a wild frame is printed (BGB 2026-11-12: with the six blocks filled with $FF, each of the six wild frames prints black side borders beside the photo); PrintFrame_LoadTiles copies the first $1180 bytes only",hand 2026-11-12
 18,5800,Gfx_18_5800_Unused_Mode18_State00,C,"named by the code of Unused_Mode18_State00, Mode1B_State00 (06:4133 07:40A3); read in the runs by Vram_CopyHBlank; kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
@@ -2039,16 +2025,14 @@ bank,addr,name,conf,note,source
 1B,7CA0,Leftover_1B_7CA0,I,leftover: 592 bytes (1B:7CA0-7EEF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 1B,7EF0,Gfx_1B_7EF0_Mode06_Printing_State0D,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State0D (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 1C,4000,Gfx_1C_4000_Mode05_StampWindow_State06,C,"read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
-1C,61DA,Leftover_1C_61DA_Tiles,I,"leftover: 2534 bytes (1C:61DA-6BBF) of message-strip tiles, white kana on black (drawn as 2bpp tiles aligned on 1C:61D0), the last two tiles all $FF (black); no run reads them and no code names them",hand 2026-11-22
-1C,6BC0,Gfx_1C_6BC0_Mode14_MessageScreen_State01,C,read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-1C,6E40,Map_1C_6E40_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_1C_6BC0 after a leftover stretch,data
+1C,61C0,Gfx_1C_61C0_MessageStrips,C,"the picture strips of messages 0 / 8, 1, 2 and 3 of the message screen (mode $14), $280 bytes each at 1C:57C0 + the offsets of 06:4450 ($0A00, $0C80, $0F00, $1180), copied to $8800 by Mode14_State00 (06:44E1); white kana on black; read in the core: message 0 in tools/kitty_rare_runs.py (album full on a copy), 1, 2, 3 and 8 in tools/kitty_core_link.py (no photo to give / to receive, cable pulled, receiving album full); screens/link_core_kitty.png",hand 2026-11-22
 1C,7240,Map_1C_7240_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 1C,7640,Map_1C_7640_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 1C,7A40,Map_1C_7A40_Mode03_ViewAlbum_State03,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 1C,7E40,Gfx_1C_7E40_Mode0A_NameCard_State03,C,"read in the runs by Map_CopyColumnToD810, Vram_CopyHBlank; first read on the screen Mode0A_NameCard_State03 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 1C,7E60,Map_1C_7E60_Mode0A_NameCard_State03,C,"read in the runs by Map_CopyColumnToD810, Vram_CopyHBlank, Print_StreamFromD3F4; first read on the screen Mode0A_NameCard_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_1C_7E40 after a leftover stretch",data
 1D,4000,Gfx_1D_4000_Mode12_SlideShow_State00,C,named by the code of Mode12_State00 (07:48D4); read in the runs by Copy_DEtoHL; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-1D,5600,Gfx_1D_5600_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:6850 06:69FE); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
+1D,5600,Gfx_1D_5600_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:6850 06:69FE); read in the runs by Copy_DEtoHL; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 1D,6B00,Gfx_1D_6B00_Mode07_Exchange_State00,C,named by the code of Mode07_State00 (06:61AF); read in the runs by Copy_DEtoHL; first read on the screen Mode07_Exchange_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 1D,7F40,Gfx_1D_7F40_Mode0B_NameCardEdit_State0A,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State0A (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 1E,4000,Gfx_1E_4000_Mode11_StrawberryChannel_State07,C,read in the runs by Copy_Unrolled_B; first read on the screen Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
@@ -2131,8 +2115,8 @@ bank,addr,name,conf,note,source
 2B,7F10,Map_2B_7F10_Mode0A_NameCard_State01,C,"read in the runs by Map_CopyColumnToD810, Vram_CopyHBlank, Print_StreamFromD3F4; first read on the screen Mode0A_NameCard_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_2B_4000 after a leftover stretch",data
 2C,4000,Gfx_2C_4000_Mode02_TakePhotos_State01,C,"read in the runs by Vram_CopyHBlank, Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 2C,78D0,Gfx_2C_78D0_Mode09_ExchangeCommunicating_State0C,C,named by the code of Mode09_State0C (06:6B13); read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-2C,7AB0,Map_2C_7AB0_Mode09_ExchangeCommunicating_State0C,I,kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2C_78D0 after a leftover stretch,data
-2C,7CD0,Gfx_2C_7CD0_Mode02_TakePhotos_State01,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+2C,7AB0,Map_2C_7AB0_Copy_DEtoHL,C,read in the runs by Copy_DEtoHL; kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2C_78D0 after a leftover stretch,data
+2C,7CD0,Gfx_2C_7CD0_Mode02_TakePhotos_State01,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2C_78D0 after a leftover stretch,data
 2D,4000,Gfx_2D_4000_Mode11_StrawberryChannel_State07,C,"read in the runs by Copy_Unrolled_B, Vram_CopyHBlank; first read on the screen Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 2D,7820,Gfx_2D_7820_Mode17_PrintError_State00,C,named by the code of Mode17_State00 (06:40D7); read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 2D,7A00,Map_2D_7A00_Copy_DEtoHL,I,read in the runs by Copy_DEtoHL; kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2D_7820 after a leftover stretch,data
@@ -2146,7 +2130,6 @@ bank,addr,name,conf,note,source
 2F,4000,Frame_2F_4000_Mode02_TakePhotos_State01,C,read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py,data
 2F,5C00,Gfx_2F_5C00_Mode02_TakePhotos_State08,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_2F_4000 after a leftover stretch,data
 2F,61E0,Leftover_2F_61E0_Tiles,I,"leftover: 512 bytes (2F:61E0-63DF), 32 tiles, white kana and icons on black, drawn as 2bpp tiles; their $FF rows are black; no run reads them and no code names them",hand 2026-11-22
-2F,63E0,Gfx_2F_63E0_Mode02_TakePhotos_State01,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 2F,67B0,Gfx_2F_67B0_Mode06_Printing_State18,C,"named by the code of Mode06_State18, Mode06_State19 (01:7230 01:728D); read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 2F,6970,Gfx_2F_6970_Mode06_Printing_State18,C,"named by the code of Mode06_State18, Mode06_State19 (01:7252 01:72AF); read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 2F,69C0,Map_2F_69C0_Mode14_MessageScreen_State01,C,read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2F_6970 after a leftover stretch,data
@@ -2183,8 +2166,8 @@ bank,addr,name,conf,note,source
 32,4000,Frame_32_4000_Mode02_TakePhotos_State01,C,read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py,data
 32,7800,Map_32_7800_Mode1B_PrintingAppleGame_State00,C,named by the code of Mode1B_State00 (07:40AD); read in the runs by Vram_CopyHBlank; kind MAP from the evidence of tools/kitty_layout_kinds.py,data
 32,7A40,Map_32_7A40_Mode0A_NameCard_State00,C,named by the code of Mode0A_State00 (06:563A); read in the runs by Copy_DEtoHL; first read on the screen Mode0A_NameCard_State00 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
-32,7C80,Map_32_7C80_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:685A 06:6A08); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind MAP from the evidence of tools/kitty_layout_kinds.py",data
-32,7EC0,Gfx_32_7EC0_Mode02_TakePhotos_State08,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+32,7C80,Map_32_7C80_Mode09_ExchangeCommunicating_State03,C,"named by the code of Mode09_State03, Exchange_InitScreen (06:685A 06:6A08); read in the runs by Copy_DEtoHL; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind MAP from the evidence of tools/kitty_layout_kinds.py",data
+32,7EC0,Gfx_32_7EC0_Mode02_TakePhotos_State08,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_32_7C80 after a leftover stretch,data
 33,4000,Frame_33_4000_Mode02_TakePhotos_State01,C,"read in the runs by Copy_Unrolled_B, Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py",data
 33,5CBA,Gfx_33_5CBA_Mode10_ScratchCard_State02,C,read in the runs by Copy_DEtoHL; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_33_4000 after a leftover stretch,data
 33,6A00,Map_33_6A00_Mode14_MessageScreen_State00,C,named by the code of Mode14_State00 (06:44E4); read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py,data
@@ -2196,9 +2179,7 @@ bank,addr,name,conf,note,source
 34,4000,Frame_34_4000_Mode02_TakePhotos_State01,C,"read in the runs by Copy_Unrolled_B, Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py",data
 35,4000,Frame_35_4000_Mode02_TakePhotos_State01,C,read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py,data
 35,6A00,Gfx_35_6A00_Mode11_StrawberryChannel_State07,C,"read in the runs by Copy_Unrolled_B, MapRows_Copy13, Map_Write5PlusA0Safe; first read on the screen Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_35_4000 after a leftover stretch",data
-35,7BB8,Src_35_7BB8_Mode06_Printing_State0D,C,"read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen Mode06_Printing_State0D (trace/read_screens_kitty.npz)",data
-35,7C40,Leftover_35_7C40,I,leftover: 136 bytes (35:7C40-7CC7) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-35,7CC8,Src_35_7CC8_Mode03_ViewAlbum_State11,C,"read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, MapRows_Copy13; first read on the screen Mode03_ViewAlbum_State11 (trace/read_screens_kitty.npz)",data
+35,7BB8,Src_35_7BB8_Mode06_Printing_State0D,C,"read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, Map_WritePairsPlusA0; first read on the screen Mode06_Printing_State0D (trace/read_screens_kitty.npz)",data
 35,7DDD,Leftover_35_7DDD,I,leftover: 131 bytes (35:7DDD-7E5F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
 35,7E60,Gfx_35_7E60_Mode02_TakePhotos_State01,C,"read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 35,7EED,Leftover_35_7EED,I,leftover: 131 bytes (35:7EED-7F6F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left

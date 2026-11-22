@@ -314,38 +314,10 @@ Mode19_StateTable::
     dw Mode19_State00
     dw Mode19_State01
 
-    db $0b, $4c, $0b, $2f, $2e, $9f, $56, $a0, $0b, $12, $86, $55, $7f, $96, $75, $15
-    db $86, $fd, $00, $06, $fe, $2e, $86, $11, $07, $4b, $12, $17, $31, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $ff, $04, $13, $22, $3c, $10, $15, $86, $00, $35, $2a
-    db $0b, $4c, $0b, $2f, $2e, $86, $13, $4b, $12, $17, $31, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $ff, $04, $13, $22, $3c, $10, $19, $86, $0b, $4c, $0b, $2f, $2e
-    db $86, $22, $4b, $12, $01, $1e, $0d, $2f, $27, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $ff, $fd, $11, $02, $0b, $2f, $5d, $a4, $98, $7f, $fe, $32, $86, $16, $08
-    db $12, $01, $1e, $0d, $2f, $05, $7c, $86, $86, $86, $86, $86, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $ff
-
-; C: read in the runs by Mode14_State01; first read on the screen Mode14_MessageScreen_State01
-; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full)
-Mode14_State01_Tbl42CD::
-    INCBIN "data/bank_06/Mode14_State01_Tbl42CD.bin" ; $42CD, 306 bytes
 ; C: read in the runs by Mode14_State01, Mode14_State00; first read on the screen Mode14_MessageScreen_State01
-; (trace/read_screens_kitty.npz)
-Mode14_State01_Tbl43FF::
-    db $55, $7f, $96, $75, $15, $86, $fd, $0b, $4c, $0b, $2f, $fe, $32, $86, $00, $29
-    db $1e, $0d, $2f, $27, $86, $86, $86, $86, $fd, $0b, $4c, $0b, $2f, $fe, $2e, $86
-    db $13, $4b, $12, $05, $28, $86, $1e, $0f, $06, $12, $17, $31, $86, $86, $86, $86
-    db $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $86, $ff, $0d, $42, $43
-    db $42, $71, $42, $9f, $42, $cd, $42, $0e, $43, $59, $43, $87, $43, $bc, $43
-    dw Mode14_State01_Tbl43FF
-    db $00, $0a, $80, $0c, $00, $0f, $80, $11, $00, $00, $80, $02, $00, $05, $80, $07
-    db $00, $0a, $00, $14, $00, $5c, $3e, $00, $6a, $3e
-    dwb Gfx_3F_4000_Mode14_MessageScreen_State01
-    db $00, $6a, $3d, $10, $02, $19, $02, $1a, $02, $1b, $02
-
-
+; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full)
+Mode14_State01_Tbl420D::
+    INCBIN "data/bank_06/Mode14_State01_Tbl420D.bin" ; $420D, 619 bytes
 ; C: handler of state $00 of mode $14 (word 0 of Mode14_StateTable)
 Mode14_State00::
     di                                            ; $4478
@@ -368,7 +340,7 @@ Mode14_State00::
     add c                                         ; $44A3
     ld c, a                                       ; $44A4
     ld b, $00                                     ; $44A5
-    ld hl, Mode14_State01_Tbl43FF + $65           ; $44A7
+    ld hl, Mode14_State01_Tbl420D + $257          ; $44A7
     add hl, bc                                    ; $44AA
     ld a, [hl+]                                   ; $44AB
     ld e, a                                       ; $44AC
@@ -387,7 +359,7 @@ Mode14_State00::
     sla a                                         ; $44C7
     ld c, a                                       ; $44C9
     ld b, $00                                     ; $44CA
-    ld hl, Mode14_State01_Tbl43FF + $51           ; $44CC
+    ld hl, Mode14_State01_Tbl420D + $243          ; $44CC
     add hl, bc                                    ; $44CF
     ld a, [hl+]                                   ; $44D0
     ld e, a                                       ; $44D1
@@ -427,7 +399,7 @@ Mode14_State00::
     and $06                                       ; $451B
     ld c, a                                       ; $451D
     ld b, $00                                     ; $451E
-    ld hl, Mode14_State01_Tbl43FF + $71           ; $4520
+    ld hl, Mode14_State01_Tbl420D + $263          ; $4520
     add hl, bc                                    ; $4523
     ld a, [hl+]                                   ; $4524
     ld [wSndMusicReq], a                          ; $4525
@@ -470,7 +442,7 @@ jr_006_4561:
     sla a                                         ; $4564
     ld c, a                                       ; $4566
     ld b, $00                                     ; $4567
-    ld hl, Mode14_State01_Tbl43FF + $3D           ; $4569
+    ld hl, Mode14_State01_Tbl420D + $22F          ; $4569
     add hl, bc                                    ; $456C
     ld a, [hl+]                                   ; $456D
     ld h, [hl]                                    ; $456E
@@ -605,9 +577,9 @@ dw Mode14_State01
 ; C: the item record [$D8F4] (8 bytes at hFFD1-hFFD3) gives the cursor position hFFD2 / hFFD4, then a 4-byte record of
 ; 06:4640 by item; runs in the name card editor (mode $0B state $10)
 NameCardEdit_CursorPlace::
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4658
+    ldh a, [hMode07_StateTable_FFD1]              ; $4658
     ld c, a                                       ; $465A
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $465B
+    ldh a, [hMode07_StateTable_FFD3]              ; $465B
     ld b, a                                       ; $465D
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $465E
     ld l, a                                       ; $4661
@@ -620,7 +592,7 @@ NameCardEdit_CursorPlace::
     rl h                                          ; $466E
     add hl, bc                                    ; $4670
     ld a, [hl+]                                   ; $4671
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4672
+    ldh [hMode07_StateTable_FFD2], a              ; $4672
     ld a, [hl+]                                   ; $4674
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4675
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4677
@@ -683,9 +655,9 @@ Menu06_CursorUpdate::
     jp nz, Jump_006_4754                          ; $46C8
 
 jr_006_46cb:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $46CB
+    ldh a, [hMode07_StateTable_FFD1]              ; $46CB
     ld c, a                                       ; $46CD
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $46CE
+    ldh a, [hMode07_StateTable_FFD3]              ; $46CE
     ld b, a                                       ; $46D0
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $46D1
     ld l, a                                       ; $46D4
@@ -698,16 +670,16 @@ jr_006_46cb:
     rl h                                          ; $46E1
     add hl, bc                                    ; $46E3
     ld a, [hl+]                                   ; $46E4
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $46E5
+    ldh [hMode07_StateTable_FFD2], a              ; $46E5
     ld a, [hl+]                                   ; $46E7
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $46E8
     ret                                           ; $46EA
 
 
 jr_006_46eb:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $46EB
+    ldh a, [hMode07_StateTable_FFD1]              ; $46EB
     ld c, a                                       ; $46ED
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $46EE
+    ldh a, [hMode07_StateTable_FFD3]              ; $46EE
     ld b, a                                       ; $46F0
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $46F1
     ld l, a                                       ; $46F4
@@ -735,7 +707,7 @@ jr_006_46eb:
     rl h                                          ; $471A
     add hl, bc                                    ; $471C
     ld a, [hl+]                                   ; $471D
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $471E
+    ldh [hMode07_StateTable_FFD2], a              ; $471E
     ld a, [hl+]                                   ; $4720
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4721
     ld bc, $0004                                  ; $4723
@@ -771,9 +743,9 @@ jr_006_4753:
 
 
 Jump_006_4754:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4754
+    ldh a, [hMode07_StateTable_FFD1]              ; $4754
     ld c, a                                       ; $4756
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4757
+    ldh a, [hMode07_StateTable_FFD3]              ; $4757
     ld b, a                                       ; $4759
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $475A
     ld l, a                                       ; $475D
@@ -791,7 +763,7 @@ Jump_006_4754:
     ld a, [hl+]                                   ; $4772
     ldh [hMenuState], a                           ; $4773
     ld a, $01                                     ; $4775
-    ld [wMode06_State21_D8E0], a                  ; $4777
+    ld [wMode07_StateTable_D8E0], a               ; $4777
     ld hl, wNameCardEdit_PhotoCursorUpdate_D97D   ; $477A
     inc [hl]                                      ; $477D
     jp Obj_End                                    ; $477E
@@ -816,11 +788,11 @@ NameCardEdit_PhotoCursorCallback::
 ; C: object callback in the photo choice of the name card (mode $0B state $04): position from [$DC5E] and $D984, steps
 ; by $D994; runs on its screen (0B:04) in the core replays (port/entry_modes_kitty.csv); code read
 NameCardEdit_PhotoCursorUpdate::
-    ld a, [wObject_RunAll_DC5E]                   ; $47CB
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E] ; $47CB
     ld l, a                                       ; $47CE
-    ld a, [wObject_RunAll_DC5F]                   ; $47CF
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F] ; $47CF
     ld h, a                                       ; $47D2
-    ld de, hStamp_CursorUpdate_FFFA               ; $47D3
+    ld de, hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA ; $47D3
     add hl, de                                    ; $47D6
     ld a, [wNameCardEdit_PhotoCursorUpdate_D984]  ; $47D7
     add [hl]                                      ; $47DA
@@ -839,7 +811,7 @@ NameCardEdit_PhotoCursorUpdate::
 jr_006_47ea:
     call Obj_HideSprite                           ; $47EA
     ld a, $01                                     ; $47ED
-    ld [wMode06_State21_D8E0], a                  ; $47EF
+    ld [wMode07_StateTable_D8E0], a               ; $47EF
     ld a, $01                                     ; $47F2
     ldh [hMenuState], a                           ; $47F4
     push hl                                       ; $47F6
@@ -904,7 +876,7 @@ jr_006_4837:
     rl h                                          ; $4856
     add hl, bc                                    ; $4858
     ld a, [hl+]                                   ; $4859
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $485A
+    ldh [hMode07_StateTable_FFD2], a              ; $485A
     ld a, [hl+]                                   ; $485C
     ld [wNameCardEdit_PhotoCursorUpdate_D984], a  ; $485D
     ld bc, $0004                                  ; $4860
@@ -971,7 +943,7 @@ jr_006_487e:
     rl h                                          ; $48C0
     add hl, bc                                    ; $48C2
     ld a, [hl+]                                   ; $48C3
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $48C4
+    ldh [hMode07_StateTable_FFD2], a              ; $48C4
     ld a, [hl+]                                   ; $48C6
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $48C7
     ld [wNameCardEdit_PhotoCursorUpdate_D984], a  ; $48C9
@@ -1178,7 +1150,7 @@ Obj_KeyMaskStep::
     ld b, $00                                     ; $4B44
     ld hl, Obj_KeyMaskStep + $49                  ; $4B46
     add hl, bc                                    ; $4B49
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $4B4A
+    ldh a, [hMode07_StateTable_FFD2]              ; $4B4A
     ld c, a                                       ; $4B4C
     ld a, [wNameCardEdit_PhotoCursorUpdate_D97D]  ; $4B4D
     cp c                                          ; $4B50
@@ -1202,7 +1174,7 @@ jr_006_4b69:
 
 jr_006_4b6a:
     ld a, [wNameCardEdit_PhotoCursorUpdate_D97D]  ; $4B6A
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4B6D
+    ldh [hMode07_StateTable_FFD2], a              ; $4B6D
     ld a, [wKeysHeld]                             ; $4B6F
     and [hl]                                      ; $4B72
     ld [wKeysHeld], a                             ; $4B73
@@ -2313,7 +2285,7 @@ Mode0B_State02::
 
 
 jr_006_5219:
-    ld a, [wMode06_State21_D8E0]                  ; $5219
+    ld a, [wMode07_StateTable_D8E0]               ; $5219
     bit 0, a                                      ; $521C
     jr z, jr_006_5236                             ; $521E
 
@@ -2350,7 +2322,7 @@ Bank06_FrameCallback::
     ld b, BANK(Bank06_FrameUpdate)                ; $5248
     ld hl, Bank06_FrameUpdate                     ; $524A
     call Far_Call                                 ; $524D
-    ld a, [wMode06_State21_D8E0]                  ; $5250
+    ld a, [wMode07_StateTable_D8E0]               ; $5250
     bit 0, a                                      ; $5253
     jr z, jr_006_5267                             ; $5255
 
@@ -2570,7 +2542,7 @@ Mode0B_State06::
 
 ; C: handler of state $08 of mode $0B (word 8 of Mode0B_StateTable)
 Mode0B_State08::
-    ld a, [wMode06_State21_D8E0]                  ; $53F5
+    ld a, [wMode07_StateTable_D8E0]               ; $53F5
     bit 0, a                                      ; $53F8
     jr z, jr_006_5405                             ; $53FA
 
@@ -2779,7 +2751,7 @@ Mode0B_State10::
 
 
 jr_006_55a2:
-    ld a, [wMode06_State21_D8E0]                  ; $55A2
+    ld a, [wMode07_StateTable_D8E0]               ; $55A2
     bit 0, a                                      ; $55A5
     jr z, jr_006_55c5                             ; $55A7
 
@@ -3609,7 +3581,7 @@ Mode0C_State00::
     ld [wSndMusicReq], a                          ; $5D2B
     pop af                                        ; $5D2E
     ei                                            ; $5D2F
-    ld de, ObjScript_02_7E38_Mode0C_RecordBook_State01 + $1A ; $5D30
+    ld de, ObjScript_02_7E32_Mode0C_RecordBook_State01 + $20 ; $5D30
     call Object_Create                            ; $5D33
     ld de, $5732                                  ; $5D36
     ld b, BANK(ScriptSlots_Add)                   ; $5D39
@@ -3679,66 +3651,18 @@ Mode0C_StateTable::
     db $4c, $00, $54, $10, $00, $88, $a0, $00, $30, $74, $a9, $4c, $00, $56, $10, $00
     db $89, $a0, $00, $70, $74, $af, $4c, $00, $00, $00
 
-; C: read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode05_StampWindow_State03
-; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)
+; C: read in the runs by KeyPrompt_LoadSounds, KeyPrompt_LoadSoundsB; first read on the screen
+; Mode05_StampWindow_State03 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint
+; (trace/bgb_reads_kitty.csv: exchange)
 KeyPrompt_LoadSounds_Tbl5DFA::
-    db $17, $01, $16, $01, $3a, $01, $00, $5d, $10, $00, $86, $40, $01, $50, $5e, $c7
-    db $4c, $00, $59, $10, $00, $88, $a0, $00, $30, $74, $cd, $4c, $00, $55, $10, $00
-    db $89, $a0, $00, $70, $74, $d3, $4c, $00, $00, $00, $29, $01, $37, $01, $00, $00
-    db $00, $54, $10, $00, $88, $a0, $00, $20, $20, $5b, $4c, $e0, $5e, $10, $00, $8a
-    db $20, $01, $50, $5e, $d9, $4c, $00, $54, $10, $00, $88, $a0, $00, $30, $74, $e5
-    db $4c, $00, $56, $10, $00, $89, $a0, $00, $70, $74, $eb, $4c, $00, $00, $00, $29
-    db $01, $37, $01, $00, $00, $00, $54, $10, $00, $88, $a0, $00, $20, $20, $5b, $4c
-    db $00, $60, $10, $00, $8a, $00, $01, $50, $5e, $df, $4c, $00, $54, $10, $00, $88
-    db $a0, $00, $30, $74, $e5, $4c, $00, $56, $10, $00, $89, $a0, $00, $70, $74, $eb
-    db $4c, $00, $00, $00
-
-    db $29, $01, $37, $01, $00, $00
-
-; I: leftover: 36 bytes (06:5E94-5EB7) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_06_5E94::
-    db $00, $54, $10, $00, $88, $a0, $00, $20, $20, $79, $4c, $00, $58, $10, $00, $88
-    db $a0, $00, $30, $74, $f1, $4c, $00, $55, $10, $00, $89, $a0, $00, $70, $74, $f7
-    db $4c, $00, $00, $00
-
-; C: read in the runs by KeyPrompt_LoadSounds; first read on the screen Mode03_ViewAlbum_State0D
-; (trace/read_screens_kitty.npz)
-KeyPrompt_LoadSounds_Tbl5EB8::
-    db $0a, $04, $09, $03, $00, $00, $00, $54, $10, $00, $88, $a0, $00, $20, $20, $61
-    db $4c, $00, $54, $10, $00, $88, $a0, $00, $30, $74, $a9, $4c, $00, $56, $10, $00
-    db $89, $a0, $00, $70, $74, $af, $4c, $00, $00, $00, $17, $01, $06, $01, $0e, $01
-    db $00, $5c, $10, $00, $86, $00, $01, $50, $5e, $c1, $4c, $00, $59, $10, $00, $88
-    db $a0, $00, $30, $74, $b5, $4c, $00, $55, $10, $00, $89, $a0, $00, $70, $74, $bb
-    db $4c, $00, $00, $00, $16, $01, $06, $01, $00, $00, $00, $5b, $10, $00, $88, $a0
-    db $00, $30, $74, $a9, $4c, $00, $55, $10, $00, $89, $a0, $00, $70, $74, $af, $4c
-    db $00, $00, $00, $2f, $01, $09, $03, $00, $00, $00, $54, $10, $00, $88, $a0, $00
-    db $20, $20, $61, $4c, $00, $54, $10, $00, $88, $a0, $00, $30, $74, $a9, $4c, $00
-    db $56, $10, $00, $89, $a0, $00, $70, $74, $af, $4c, $00, $00, $00
-
-; I: never read in the runs, but KeyPrompt_LoadSounds_Tbl5F7F points to it (the word at 06:5F93): 42 bytes
-; (06:5F55-5F7E) that no run reads or executes and that no code names (owner rule 2026-11-11)
-KeyPrompt_LoadSounds_Tbl5F7F_Entry5F55::
-    db $29, $01, $37, $01, $00, $00, $00, $54, $10, $00, $88, $a0, $00, $20, $20, $7f
-    db $4c, $00, $58, $10, $00, $88, $a0, $00, $30, $74, $f1, $4c, $00, $55, $10, $00
-    db $89, $a0, $00, $70, $74, $f7, $4c, $00, $00, $00
-
-; C: named by the code of KeyPrompt_LoadSounds, KeyPrompt_LoadSoundsB (06:5F9A 06:5FFD); read in the runs by
-; KeyPrompt_LoadSounds; first read on the screen Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz)
-KeyPrompt_LoadSounds_Tbl5F7F::
-    db $9b, $5d, $d0, $5d
-    dw KeyPrompt_LoadSounds_Tbl5DFA
-    db $24, $5e, $59, $5e, $8e, $5e
-    dw KeyPrompt_LoadSounds_Tbl5EB8
-    db $e2, $5e, $0c, $5f, $2b, $5f, $55, $5f
-
-
+    INCBIN "data/bank_06/KeyPrompt_LoadSounds_Tbl5DFA.bin" ; $5DFA, 411 bytes
 ; C: the three key-prompt sound pairs $D8E6-$D8EB from record A of the pointer table 06:5F7F (read by KeyPrompt_*);
 ; runs in the camera (mode $02)
 KeyPrompt_LoadSounds::
     sla a                                         ; $5F95
     ld c, a                                       ; $5F97
     ld b, $00                                     ; $5F98
-    ld hl, KeyPrompt_LoadSounds_Tbl5F7F           ; $5F9A
+    ld hl, KeyPrompt_LoadSounds_Tbl5DFA + $185    ; $5F9A
     add hl, bc                                    ; $5F9D
     ld a, [hl+]                                   ; $5F9E
     ld c, a                                       ; $5F9F
@@ -3817,12 +3741,14 @@ jr_006_5fef:
     jp Far_Return                                 ; $5FF5
 
 
-; I: the same code again, called from mode $09 (forced only); not run in the core
+; C: KeyPrompt_LoadSounds again (the same code), called only from Mode09_State0C with A = $0A (06:6B76): the giving
+; unit asked for a photo by a leading receiver; run in the linked cores (tools/kitty_core_link.py, recv_leads,
+; 2026-11-22)
 KeyPrompt_LoadSoundsB::
     sla a                                         ; $5FF8
     ld c, a                                       ; $5FFA
     ld b, $00                                     ; $5FFB
-    ld hl, KeyPrompt_LoadSounds_Tbl5F7F           ; $5FFD
+    ld hl, KeyPrompt_LoadSounds_Tbl5DFA + $185    ; $5FFD
     add hl, bc                                    ; $6000
     ld a, [hl+]                                   ; $6001
     ld c, a                                       ; $6002
@@ -4014,7 +3940,7 @@ jr_006_60db:
     and a                                         ; $60E4
     jr z, jr_006_60db                             ; $60E5
 
-    ld hl, wExchange_RequestPage_D9FC             ; $60E7
+    ld hl, wMode07_StateTable_D9FC                ; $60E7
     ld a, [wExchange_RequestPage_D9FF]            ; $60EA
     sra a                                         ; $60ED
     sra a                                         ; $60EF
@@ -4048,7 +3974,7 @@ jr_006_6105:
 
 jr_006_6111:
     push bc                                       ; $6111
-    ld de, Gfx_17_7800_NeverRead                  ; $6112
+    ld de, Gfx_17_7800_Copy_DEtoHL                ; $6112
     ld a, $17                                     ; $6115
     ld bc, $0100                                  ; $6117
     call Copy_FarDEtoHL                           ; $611A
@@ -4066,7 +3992,11 @@ jr_006_6125:
     jp Far_ReturnSramBank                         ; $6126
 
 
-    db $00, $70, $00, $74, $00, $78, $00, $7c, $21, $00, $98
+; C: named by the code of PhotoTrain_LoadPageMap (06:613A); read in the runs by PhotoTrain_LoadPageMap
+PhotoTrain_LoadPageMap_Tbl6129::
+    db $00, $70
+
+    db $00, $74, $00, $78, $00, $7c, $21, $00, $98
 
 ; C: the map of page A (pointer table 06:6129, bank $16) into HL ($9800 in mode $08 state $00); runs in the linked
 ; exchange (BGB 2026-11-08)
@@ -4075,7 +4005,7 @@ PhotoTrain_LoadPageMap::
     sla a                                         ; $6135
     ld c, a                                       ; $6137
     ld b, $00                                     ; $6138
-    ld hl, Exchange_RequestPage + $71             ; $613A
+    ld hl, PhotoTrain_LoadPageMap_Tbl6129         ; $613A
     add hl, bc                                    ; $613D
     ld a, [hl+]                                   ; $613E
     ld e, a                                       ; $613F
@@ -4099,7 +4029,7 @@ PhotoTrain_FillEmptyTiles::
 
 jr_006_616d:
     push bc                                       ; $616D
-    ld de, Gfx_17_7800_NeverRead                  ; $616E
+    ld de, Gfx_17_7800_Copy_DEtoHL                ; $616E
     ld bc, $0100                                  ; $6171
     ld a, $17                                     ; $6174
     call Copy_FarDEtoHL                           ; $6176
@@ -4139,9 +4069,9 @@ Mode07_State00::
     xor a                                         ; $61CD
     ld [wMode08_State02_D8FA], a                  ; $61CE
     xor a                                         ; $61D1
-    ld [wExchange_RequestPage_D9FC], a            ; $61D2
+    ld [wMode07_StateTable_D9FC], a               ; $61D2
     ld a, $01                                     ; $61D5
-    ld [wMode07_State00_D9FB], a                  ; $61D7
+    ld [wMode07_StateTable_D9FB], a               ; $61D7
     ld b, MODE_EXCHANGE_COMMUNICATING             ; $61DA
     ld c, $00                                     ; $61DC
     call Mode_SaveReturnD8F2                      ; $61DE
@@ -4221,7 +4151,7 @@ Mode07_State02::
     ld [wSndSfx1], a                              ; $6269
     pop af                                        ; $626C
     xor a                                         ; $626D
-    ld [wMode06_State21_D8E0], a                  ; $626E
+    ld [wMode07_StateTable_D8E0], a               ; $626E
     ld b, MODE_EXCHANGE                           ; $6271
     ld c, $04                                     ; $6273
     call ModeState_Set                            ; $6275
@@ -4309,12 +4239,14 @@ Mode07_State02_62E8:
     ret                                           ; $62E8
 
 
+; C: read in the runs by Mode07_State02
+Mode07_State02_Tbl62E9::
     db $00, $08, $02, $01
 
 ; C: handler of state $03 of mode $07 (word 3 of Mode07_StateTable)
 Mode07_State03::
     xor a                                         ; $62ED
-    ld [wMode06_State21_D8E0], a                  ; $62EE
+    ld [wMode07_StateTable_D8E0], a               ; $62EE
     ld b, MODE_EXCHANGE                           ; $62F1
     ld c, $04                                     ; $62F3
     call ModeState_Set                            ; $62F5
@@ -4323,7 +4255,7 @@ Mode07_State03::
 
 ; C: handler of state $04 of mode $07 (word 4 of Mode07_StateTable)
 Mode07_State04::
-    ld a, [wMode06_State21_D8E0]                  ; $62F9
+    ld a, [wMode07_StateTable_D8E0]               ; $62F9
     bit 2, a                                      ; $62FC
     jr z, jr_006_6317                             ; $62FE
 
@@ -4364,47 +4296,261 @@ Mode07_StateTable::
     dw Mode07_State03
     dw Mode07_State04
 
-    db $40, $1c, $ff, $02, $ff, $03, $01, $00, $40, $1c, $00, $02, $ff, $04, $01, $00
-    db $68, $1c, $01, $49, $ff, $05, $02, $00, $20, $4c, $ff, $04, $00, $06, $03, $00
-    db $48, $4c, $03, $05, $01, $07, $04, $00, $70, $4c, $04, $4c, $02, $08, $05, $00
-    db $28, $7c, $ff, $07, $03, $ff, $06, $00, $50, $7c, $06, $08, $04, $ff, $07, $00
-    db $78, $7c, $07, $4f, $05, $ff, $08, $00, $40, $1c, $82, $0b, $ff, $0c, $09, $00
-    db $40, $1c, $82, $0b, $ff, $0d, $09, $00, $68, $1c, $0a, $52, $ff, $0e, $0a, $00
-    db $20, $4c, $85, $0d, $09, $0f, $0b, $00, $48, $4c, $0c, $0e, $0a, $10, $0c, $00
-    db $70, $4c, $0d, $55, $0b, $11, $0d, $00, $28, $7c, $88, $10, $0c, $ff, $0e, $00
-    db $50, $7c, $0f, $11, $0d, $ff, $0f, $00, $78, $7c, $10, $58, $0e, $ff, $10, $00
-    db $40, $1c, $8b, $14, $ff, $15, $11, $00, $40, $1c, $8b, $14, $ff, $16, $11, $00
-    db $68, $1c, $13, $5b, $ff, $17, $12, $00, $20, $4c, $8e, $16, $12, $18, $13, $00
-    db $48, $4c, $15, $17, $13, $19, $14, $00, $70, $4c, $16, $5e, $14, $1a, $15, $00
-    db $28, $7c, $91, $19, $15, $ff, $16, $00, $50, $7c, $18, $1a, $16, $ff, $17, $00
-    db $78, $7c, $19, $61, $17, $ff, $18, $00, $40, $1c, $94, $1d, $ff, $1e, $19, $00
-    db $40, $1c, $94, $1d, $ff, $1f, $19, $00, $68, $1c, $1c, $ff, $ff, $20, $1a, $00
-    db $20, $4c, $97, $1f, $1b, $21, $1b, $00, $48, $4c, $1e, $20, $1c, $ff, $1c, $00
-    db $70, $4c, $1f, $ff, $1d, $ff, $1d, $00, $28, $7c, $9a, $ff, $1e, $ff, $1e, $00
-    db $cd, $43, $64, $c3, $73, $01, $fa, $d4, $d8, $a7, $20, $21, $11, $02, $00, $fa
-    db $da, $d8, $cb, $6f, $20, $37, $1c, $cb, $67, $20, $32, $1c, $cb, $77, $20, $2d
-    db $1c, $cb, $7f, $20, $28, $1c, $fa, $d9, $d8, $cb, $47, $20, $76, $f0, $d1, $4f
-    db $f0, $d3, $47, $fa, $f4, $d8, $6f, $26, $00, $cb, $25, $cb, $14, $cb, $25, $cb
-    db $14, $cb, $25, $cb, $14, $09, $2a, $e0, $d2, $2a, $e0, $d4, $c9, $f0, $d1, $4f
-    db $f0, $d3, $47, $fa, $f4, $d8, $6f, $26, $00, $cb, $25, $cb, $14, $cb, $25, $cb
-    db $14, $cb, $25, $cb, $14, $09, $19, $7e, $fe, $ff, $28, $36, $f5, $e6, $3f, $ea
-    db $f4, $d8, $6f, $26, $00, $cb, $25, $cb, $14, $cb, $25, $cb, $14, $cb, $25, $cb
-    db $14, $09, $2a, $e0, $d2, $2a, $e0, $d4, $01, $04, $00, $09, $7e, $ea, $fb, $d9
-    db $f1, $cb, $7f, $c2, $54, $65, $cb, $77, $c2, $73, $65, $f5, $3e, $20, $ea, $60
-    db $d0, $f1, $c9, $21, $ff, $d9, $fa, $fb, $d9, $3d, $be, $3f, $d8, $f5, $3e, $19
-    db $ea, $60, $d0, $f1, $f0, $d1, $4f, $f0, $d3, $47, $fa, $f4, $d8, $6f, $26, $00
-    db $cb, $25, $cb, $14, $cb, $25, $cb, $14, $cb, $25, $cb, $14, $09, $19, $2a, $e0
-    db $95, $2a, $e0, $96, $3e, $01, $ea, $e0, $d8, $f0, $d2, $e0, $d8, $fe, $50, $38
-    db $08, $11, $fc, $7d, $cd, $05, $22, $18, $06, $11, $f0, $7d, $cd, $05, $22, $3e
-    db $d0, $e0, $d2, $fa, $fb, $d9, $3d, $e6, $07, $0e, $00, $47, $21, $00, $c0, $09
-    db $e5, $5d, $54, $21, $00, $87, $01, $00, $01, $cd, $6e, $06, $e1, $11, $00, $00
-    db $01, $00, $01, $cd, $3a, $02, $c9, $3e, $04, $ea, $e0, $d8, $af, $e0, $cf, $e0
-    db $d0, $f5, $3e, $01, $ea, $70, $d0, $f1, $fa, $fc, $d9, $3d, $ea, $fc, $d9, $11
-    db $b5, $7c, $cd, $05, $22, $c9, $3e, $04, $ea, $e0, $d8, $af, $e0, $cf, $e0, $d0
-    db $f5, $3e, $01, $ea, $70, $d0, $f1, $fa, $fc, $d9, $3c, $ea, $fc, $d9, $11, $45
-    db $7d, $cd, $05, $22, $c9, $f0, $d1, $4f, $f0, $d3, $47, $fa, $f4, $d8, $6f, $26
-    db $00, $cb, $25, $cb, $14, $cb, $25, $cb, $14, $cb, $25, $cb, $14, $09, $2a, $e0
-    db $d2, $e0, $d8, $2a, $e0, $d4, $c3, $73, $01
+    db $40, $1c, $ff, $02, $ff, $03, $01, $00
+
+    db $40, $1c, $00, $02, $ff, $04, $01, $00, $68, $1c, $01, $49, $ff, $05, $02, $00
+    db $20, $4c, $ff, $04, $00, $06, $03, $00, $48, $4c, $03, $05, $01, $07, $04, $00
+    db $70, $4c, $04, $4c, $02, $08, $05, $00, $28, $7c, $ff, $07, $03, $ff, $06, $00
+    db $50, $7c, $06, $08, $04, $ff, $07, $00, $78, $7c, $07, $4f, $05, $ff, $08, $00
+    db $40, $1c, $82, $0b, $ff, $0c, $09, $00, $40, $1c, $82, $0b, $ff, $0d, $09, $00
+    db $68, $1c, $0a, $52, $ff, $0e, $0a, $00, $20, $4c, $85, $0d, $09, $0f, $0b, $00
+    db $48, $4c, $0c, $0e, $0a, $10, $0c, $00, $70, $4c, $0d, $55, $0b, $11, $0d, $00
+    db $28, $7c, $88, $10, $0c, $ff, $0e, $00, $50, $7c, $0f, $11, $0d, $ff, $0f, $00
+    db $78, $7c, $10, $58, $0e, $ff, $10, $00, $40, $1c, $8b, $14, $ff, $15, $11, $00
+    db $40, $1c, $8b, $14, $ff, $16, $11, $00, $68, $1c, $13, $5b, $ff, $17, $12, $00
+    db $20, $4c, $8e, $16, $12, $18, $13, $00, $48, $4c, $15, $17, $13, $19, $14, $00
+    db $70, $4c, $16, $5e, $14, $1a, $15, $00, $28, $7c, $91, $19, $15, $ff, $16, $00
+    db $50, $7c, $18, $1a, $16, $ff, $17, $00, $78, $7c, $19, $61, $17, $ff, $18, $00
+    db $40, $1c, $94, $1d, $ff, $1e, $19, $00, $40, $1c, $94, $1d, $ff, $1f, $19, $00
+    db $68, $1c, $1c, $ff, $ff, $20, $1a, $00, $20, $4c, $97, $1f, $1b, $21, $1b, $00
+    db $48, $4c, $1e, $20, $1c, $ff, $1c, $00, $70, $4c, $1f, $ff, $1d, $ff, $1d, $00
+    db $28, $7c, $9a, $ff, $1e, $ff, $1e, $00
+
+    call Call_006_6443                            ; $643D
+    jp Far_Return                                 ; $6440
+
+
+Call_006_6443:
+    ld a, [wFadeRunning]                          ; $6443
+    and a                                         ; $6446
+    jr nz, jr_006_646a                            ; $6447
+
+    ld de, $0002                                  ; $6449
+    ld a, [wKeysNewRepeat]                        ; $644C
+    bit PADB_LEFT, a                              ; $644F
+    jr nz, jr_006_648a                            ; $6451
+
+    inc e                                         ; $6453
+    bit 4, a                                      ; $6454
+    jr nz, jr_006_648a                            ; $6456
+
+    inc e                                         ; $6458
+    bit 6, a                                      ; $6459
+    jr nz, jr_006_648a                            ; $645B
+
+    inc e                                         ; $645D
+    bit 7, a                                      ; $645E
+    jr nz, jr_006_648a                            ; $6460
+
+    inc e                                         ; $6462
+    ld a, [wKeysNew]                              ; $6463
+    bit PADB_A, a                                 ; $6466
+    jr nz, jr_006_64e0                            ; $6468
+
+jr_006_646a:
+    ldh a, [hMode07_StateTable_FFD1]              ; $646A
+    ld c, a                                       ; $646C
+    ldh a, [hMode07_StateTable_FFD3]              ; $646D
+    ld b, a                                       ; $646F
+    ld a, [wMenu07_CursorUpdate_D8F4]             ; $6470
+    ld l, a                                       ; $6473
+    ld h, $00                                     ; $6474
+    sla l                                         ; $6476
+    rl h                                          ; $6478
+    sla l                                         ; $647A
+    rl h                                          ; $647C
+    sla l                                         ; $647E
+    rl h                                          ; $6480
+    add hl, bc                                    ; $6482
+    ld a, [hl+]                                   ; $6483
+    ldh [hMode07_StateTable_FFD2], a              ; $6484
+    ld a, [hl+]                                   ; $6486
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $6487
+    ret                                           ; $6489
+
+
+jr_006_648a:
+    ldh a, [hMode07_StateTable_FFD1]              ; $648A
+    ld c, a                                       ; $648C
+    ldh a, [hMode07_StateTable_FFD3]              ; $648D
+    ld b, a                                       ; $648F
+    ld a, [wMenu07_CursorUpdate_D8F4]             ; $6490
+    ld l, a                                       ; $6493
+    ld h, $00                                     ; $6494
+    sla l                                         ; $6496
+    rl h                                          ; $6498
+    sla l                                         ; $649A
+    rl h                                          ; $649C
+    sla l                                         ; $649E
+    rl h                                          ; $64A0
+    add hl, bc                                    ; $64A2
+    add hl, de                                    ; $64A3
+    ld a, [hl]                                    ; $64A4
+    cp $ff                                        ; $64A5
+    jr z, jr_006_64df                             ; $64A7
+
+    push af                                       ; $64A9
+    and $3f                                       ; $64AA
+    ld [wMenu07_CursorUpdate_D8F4], a             ; $64AC
+    ld l, a                                       ; $64AF
+    ld h, $00                                     ; $64B0
+    sla l                                         ; $64B2
+    rl h                                          ; $64B4
+    sla l                                         ; $64B6
+    rl h                                          ; $64B8
+    sla l                                         ; $64BA
+    rl h                                          ; $64BC
+    add hl, bc                                    ; $64BE
+    ld a, [hl+]                                   ; $64BF
+    ldh [hMode07_StateTable_FFD2], a              ; $64C0
+    ld a, [hl+]                                   ; $64C2
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $64C3
+    ld bc, $0004                                  ; $64C5
+    add hl, bc                                    ; $64C8
+    ld a, [hl]                                    ; $64C9
+    ld [wMode07_StateTable_D9FB], a               ; $64CA
+    pop af                                        ; $64CD
+    bit 7, a                                      ; $64CE
+    jp nz, Jump_006_6554                          ; $64D0
+
+    bit 6, a                                      ; $64D3
+    jp nz, Jump_006_6573                          ; $64D5
+
+    push af                                       ; $64D8
+    ld a, SFX1_20                                 ; $64D9
+    ld [wSndSfx1], a                              ; $64DB
+    pop af                                        ; $64DE
+
+jr_006_64df:
+    ret                                           ; $64DF
+
+
+jr_006_64e0:
+    ld hl, wExchange_RequestPage_D9FF             ; $64E0
+    ld a, [wMode07_StateTable_D9FB]               ; $64E3
+    dec a                                         ; $64E6
+    cp [hl]                                       ; $64E7
+    ccf                                           ; $64E8
+    ret c                                         ; $64E9
+
+    push af                                       ; $64EA
+    ld a, SFX1_19                                 ; $64EB
+    ld [wSndSfx1], a                              ; $64ED
+    pop af                                        ; $64F0
+    ldh a, [hMode07_StateTable_FFD1]              ; $64F1
+    ld c, a                                       ; $64F3
+    ldh a, [hMode07_StateTable_FFD3]              ; $64F4
+    ld b, a                                       ; $64F6
+    ld a, [wMenu07_CursorUpdate_D8F4]             ; $64F7
+    ld l, a                                       ; $64FA
+    ld h, $00                                     ; $64FB
+    sla l                                         ; $64FD
+    rl h                                          ; $64FF
+    sla l                                         ; $6501
+    rl h                                          ; $6503
+    sla l                                         ; $6505
+    rl h                                          ; $6507
+    add hl, bc                                    ; $6509
+    add hl, de                                    ; $650A
+    ld a, [hl+]                                   ; $650B
+    ldh [hMenuMode], a                            ; $650C
+    ld a, [hl+]                                   ; $650E
+    ldh [hMenuState], a                           ; $650F
+    ld a, $01                                     ; $6511
+    ld [wMode07_StateTable_D8E0], a               ; $6513
+    ldh a, [hMode07_StateTable_FFD2]              ; $6516
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $6518
+    cp $50                                        ; $651A
+    jr c, jr_006_6526                             ; $651C
+
+    ld de, $7dfc                                  ; $651E
+    call Call_000_2205                            ; $6521
+    jr jr_006_652c                                ; $6524
+
+jr_006_6526:
+    ld de, $7df0                                  ; $6526
+    call Call_000_2205                            ; $6529
+
+jr_006_652c:
+    ld a, $d0                                     ; $652C
+    ldh [hMode07_StateTable_FFD2], a              ; $652E
+    ld a, [wMode07_StateTable_D9FB]               ; $6530
+    dec a                                         ; $6533
+    and $07                                       ; $6534
+    ld c, $00                                     ; $6536
+    ld b, a                                       ; $6538
+    ld hl, $c000                                  ; $6539
+    add hl, bc                                    ; $653C
+    push hl                                       ; $653D
+    ld e, l                                       ; $653E
+    ld d, h                                       ; $653F
+    ld hl, $8700                                  ; $6540
+    ld bc, $0100                                  ; $6543
+    call Vram_CopyHBlank                          ; $6546
+    pop hl                                        ; $6549
+    ld de, $0000                                  ; $654A
+    ld bc, $0100                                  ; $654D
+    call Mem_FillWord                             ; $6550
+    ret                                           ; $6553
+
+
+Jump_006_6554:
+    ld a, $04                                     ; $6554
+    ld [wMode07_StateTable_D8E0], a               ; $6556
+    xor a                                         ; $6559
+    ldh [hCopyReqSrcDstCnt + $4], a               ; $655A
+    ldh [hMode07_StateTable_FFD0], a              ; $655C
+    push af                                       ; $655E
+    ld a, SFX3_MODE07_EXCHANGE_01                 ; $655F
+    ld [wSndSfx3], a                              ; $6561
+    pop af                                        ; $6564
+    ld a, [wMode07_StateTable_D9FC]               ; $6565
+    dec a                                         ; $6568
+    ld [wMode07_StateTable_D9FC], a               ; $6569
+    ld de, $7cb5                                  ; $656C
+    call Call_000_2205                            ; $656F
+    ret                                           ; $6572
+
+
+Jump_006_6573:
+    ld a, $04                                     ; $6573
+    ld [wMode07_StateTable_D8E0], a               ; $6575
+    xor a                                         ; $6578
+    ldh [hCopyReqSrcDstCnt + $4], a               ; $6579
+    ldh [hMode07_StateTable_FFD0], a              ; $657B
+    push af                                       ; $657D
+    ld a, SFX3_MODE07_EXCHANGE_01                 ; $657E
+    ld [wSndSfx3], a                              ; $6580
+    pop af                                        ; $6583
+    ld a, [wMode07_StateTable_D9FC]               ; $6584
+    inc a                                         ; $6587
+    ld [wMode07_StateTable_D9FC], a               ; $6588
+    ld de, $7d45                                  ; $658B
+    call Call_000_2205                            ; $658E
+    ret                                           ; $6591
+
+
+    ldh a, [hMode07_StateTable_FFD1]              ; $6592
+    ld c, a                                       ; $6594
+    ldh a, [hMode07_StateTable_FFD3]              ; $6595
+    ld b, a                                       ; $6597
+    ld a, [wMenu07_CursorUpdate_D8F4]             ; $6598
+    ld l, a                                       ; $659B
+    ld h, $00                                     ; $659C
+    sla l                                         ; $659E
+    rl h                                          ; $65A0
+    sla l                                         ; $65A2
+    rl h                                          ; $65A4
+    sla l                                         ; $65A6
+    rl h                                          ; $65A8
+    add hl, bc                                    ; $65AA
+    ld a, [hl+]                                   ; $65AB
+    ldh [hMode07_StateTable_FFD2], a              ; $65AC
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $65AE
+    ld a, [hl+]                                   ; $65B0
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $65B1
+    jp Far_Return                                 ; $65B3
+
 
 ; C: handler of state $00 of mode $08 (word 0 of Mode08_StateTable)
 Mode08_State00::
@@ -4453,7 +4599,7 @@ jr_006_65ff:
     ld b, BANK(PhotoTrain_FillEmptyTiles)         ; $6608
     ld hl, PhotoTrain_FillEmptyTiles              ; $660A
     call Far_Call                                 ; $660D
-    ld a, [wExchange_RequestPage_D9FC]            ; $6610
+    ld a, [wMode07_StateTable_D9FC]               ; $6610
     ld de, $9800                                  ; $6613
     ld b, BANK(PhotoTrain_LoadPageMap)            ; $6616
     ld hl, PhotoTrain_LoadPageMap                 ; $6618
@@ -4478,7 +4624,7 @@ jr_006_65ff:
 
 ; C: handler of state $01 of mode $08 (word 1 of Mode08_StateTable)
 Mode08_State01::
-    ld a, [wExchange_RequestPage_D9FC]            ; $6644
+    ld a, [wMode07_StateTable_D9FC]               ; $6644
     ld b, BANK(Exchange_RequestPage)              ; $6647
     ld hl, Exchange_RequestPage                   ; $6649
     call Far_CallKeepA                            ; $664C
@@ -4488,7 +4634,7 @@ Mode08_State01::
     ld hl, $9000                                  ; $6655
     ld bc, $0800                                  ; $6658
     call Vram_CopyHBlank                          ; $665B
-    ld de, Leftover_02_7CAC + $186                ; $665E
+    ld de, ObjScript_02_7E32_Mode0C_RecordBook_State01 ; $665E
     call Object_Create                            ; $6661
     ld b, MODE_EXCHANGE_PHOTO_TRAIN               ; $6664
     ld c, STATE_08_EXCHANGE_PICK_PHOTO_GIVE       ; $6666
@@ -4506,7 +4652,7 @@ Jump_006_666c:
 
 ; C: handler of state $02 of mode $08 (word 2 of Mode08_StateTable)
 Mode08_State02::
-    ld a, [wMode06_State21_D8E0]                  ; $667A
+    ld a, [wMode07_StateTable_D8E0]               ; $667A
     bit 2, a                                      ; $667D
     jr z, jr_006_6689                             ; $667F
 
@@ -4517,7 +4663,7 @@ Mode08_State02::
 
 
 jr_006_6689:
-    ld a, [wMode06_State21_D8E0]                  ; $6689
+    ld a, [wMode07_StateTable_D8E0]               ; $6689
     bit 0, a                                      ; $668C
     jr z, jr_006_669e                             ; $668E
 
@@ -4556,7 +4702,7 @@ jr_006_66c2:
 ; C: handler of state $04 of mode $08 (word 4 of Mode08_StateTable)
 Mode08_State04::
     xor a                                         ; $66C3
-    ld [wMode06_State21_D8E0], a                  ; $66C4
+    ld [wMode07_StateTable_D8E0], a               ; $66C4
     ld b, MODE_EXCHANGE_PHOTO_TRAIN               ; $66C7
     ld c, $05                                     ; $66C9
     call ModeState_Set                            ; $66CB
@@ -4565,7 +4711,7 @@ Mode08_State04::
 
 ; C: handler of state $05 of mode $08 (word 5 of Mode08_StateTable)
 Mode08_State05::
-    ld a, [wMode06_State21_D8E0]                  ; $66CF
+    ld a, [wMode07_StateTable_D8E0]               ; $66CF
     bit 0, a                                      ; $66D2
     jr z, jr_006_66f3                             ; $66D4
 
@@ -4595,8 +4741,8 @@ jr_006_66f3:
 ; C: handler of state $03 of mode $08 (word 3 of Mode08_StateTable)
 Mode08_State03::
     xor a                                         ; $66F4
-    ld [wMode06_State21_D8E0], a                  ; $66F5
-    ld a, [wExchange_RequestPage_D9FC]            ; $66F8
+    ld [wMode07_StateTable_D8E0], a               ; $66F5
+    ld a, [wMode07_StateTable_D9FC]               ; $66F8
     ld b, BANK(Exchange_RequestPage)              ; $66FB
     ld hl, Exchange_RequestPage                   ; $66FD
     call Far_CallKeepA                            ; $6700
@@ -4695,7 +4841,7 @@ jr_006_6760:
 
     db $87, $e4, $d0, $e4, $10, $10, $00, $00, $ff, $40
 
-    ld a, [wMode07_State00_D9FB]                  ; $67A8
+    ld a, [wMode07_StateTable_D9FB]               ; $67A8
     ld b, BANK(Photo_FindSlotA)                   ; $67AB
     ld hl, Photo_FindSlotA                        ; $67AD
     call Far_CallKeepA                            ; $67B0
@@ -4816,17 +4962,17 @@ jr_006_6839:
     ld a, MUSIC_EXCHANGE_COMMUNICATING            ; $688C
     ld [wSndMusicReq], a                          ; $688E
     pop af                                        ; $6891
-    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $109 ; $6892
+    ld de, ObjScript_00_1EB4_Mode09_ExchangeCommunicating_State03; $6892
     call Object_Create                            ; $6895
-    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $70 ; $6898
+    ld de, ObjScript_00_1E1B_Mode09_ExchangeCommunicating_State03; $6898
     call Object_Create                            ; $689B
-    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $99 ; $689E
+    ld de, ObjScript_00_1E44_Mode09_ExchangeCommunicating_State03; $689E
     call Object_Create                            ; $68A1
     ld a, [wMode07_State02_D9FD]                  ; $68A4
     and a                                         ; $68A7
     jr nz, jr_006_68c0                            ; $68A8
 
-    ld a, [wExchange_RequestPage_D9FC]            ; $68AA
+    ld a, [wMode07_StateTable_D9FC]               ; $68AA
     ld [wLnkSlot], a                              ; $68AD
     ld a, $01                                     ; $68B0
     ld [wLnkReadyTx], a                           ; $68B2
@@ -4838,7 +4984,7 @@ jr_006_6839:
 
 
 jr_006_68c0:
-    ld a, [wMode07_State00_D9FB]                  ; $68C0
+    ld a, [wMode07_StateTable_D9FB]               ; $68C0
     dec a                                         ; $68C3
     ld [wLnkSlot], a                              ; $68C4
     call Link_QueueCommand                        ; $68C7
@@ -4851,7 +4997,7 @@ jr_006_68c0:
 ; C: handler of state $04 of mode $09 (word 4 of Mode09_StateTable)
 Mode09_State04::
     ld a, $01                                     ; $68D2
-    ld [wMode09_State05_D9FE], a                  ; $68D4
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $68D4
     ld a, [wLnkHalfDone]                          ; $68D7
     cp $01                                        ; $68DA
     jr nz, jr_006_68ec                            ; $68DC
@@ -4885,7 +5031,7 @@ jr_006_68ec:
 ; C: handler of state $05 of mode $09 (word 5 of Mode09_StateTable)
 Mode09_State05::
     xor a                                         ; $68FA
-    ld [wMode09_State05_D9FE], a                  ; $68FB
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $68FB
     call Link_CountdownDA00                       ; $68FE
     jr nz, jr_006_6909                            ; $6901
 
@@ -4900,7 +5046,7 @@ jr_006_6909:
     ret z                                         ; $690D
 
     ld a, $ff                                     ; $690E
-    ld [wMode09_State05_D9FE], a                  ; $6910
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $6910
     push af                                       ; $6913
     ld a, SFX1_EXCHANGE_COMMUNICATING_17          ; $6914
     ld [wSndSfx1], a                              ; $6916
@@ -4923,7 +5069,7 @@ Mode09_State06::
     ld b, BANK(Counters_AddExchanged)             ; $692C
     ld hl, Counters_AddExchanged                  ; $692E
     call Far_Call                                 ; $6931
-    ld a, [wMode07_State00_D9FB]                  ; $6934
+    ld a, [wMode07_StateTable_D9FB]               ; $6934
     ld b, BANK(Photo_FindSlotA)                   ; $6937
     ld hl, Photo_FindSlotA                        ; $6939
     call Far_CallKeepA                            ; $693C
@@ -5030,7 +5176,7 @@ jr_006_69e7:
     db $80, $7c, $32, $00, $98, $40, $02
 
     ld a, $01                                     ; $6A12
-    ld [wMode09_State05_D9FE], a                  ; $6A14
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $6A14
     call Serial_SetFarCallback                    ; $6A17
 
     dwb Frame_UpdateAll
@@ -5047,11 +5193,11 @@ jr_006_69e7:
     ld a, MUSIC_EXCHANGE_COMMUNICATING            ; $6A35
     ld [wSndMusicReq], a                          ; $6A37
     pop af                                        ; $6A3A
-    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $109 ; $6A3B
+    ld de, ObjScript_00_1EB4_Mode09_ExchangeCommunicating_State03; $6A3B
     call Object_Create                            ; $6A3E
-    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $70 ; $6A41
+    ld de, ObjScript_00_1E1B_Mode09_ExchangeCommunicating_State03; $6A41
     call Object_Create                            ; $6A44
-    ld de, Gfx_00_1DAB_Mode12_SlideShow_State00 + $99 ; $6A47
+    ld de, ObjScript_00_1E44_Mode09_ExchangeCommunicating_State03; $6A47
     call Object_Create                            ; $6A4A
     ret                                           ; $6A4D
 
@@ -5068,7 +5214,7 @@ Mode09_State08::
 ; C: handler of state $0A of mode $09 (word 10 of Mode09_StateTable)
 Mode09_State0A::
     ld a, $01                                     ; $6A59
-    ld [wMode09_State05_D9FE], a                  ; $6A5B
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $6A5B
     ld a, [wLnkCmdRx]                             ; $6A5E
     bit 7, a                                      ; $6A61
     jr z, jr_006_6a8a                             ; $6A63
@@ -5099,7 +5245,7 @@ jr_006_6a8a:
 
     and $1f                                       ; $6A8D
     inc a                                         ; $6A8F
-    ld [wMode07_State00_D9FB], a                  ; $6A90
+    ld [wMode07_StateTable_D9FB], a               ; $6A90
     ld a, $00                                     ; $6A93
     ld [wMode09_State0A_DA00], a                  ; $6A95
     ld a, $02                                     ; $6A98
@@ -5131,7 +5277,7 @@ jr_006_6ab3:
 ; C: handler of state $0B of mode $09 (word 11 of Mode09_StateTable)
 Mode09_State0B::
     xor a                                         ; $6ABB
-    ld [wMode09_State05_D9FE], a                  ; $6ABC
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $6ABC
     call Link_CountdownDA00                       ; $6ABF
     jr nz, jr_006_6aca                            ; $6AC2
 
@@ -5193,7 +5339,7 @@ jr_006_6aeb:
 
     dwb Frame_UpdateAll
 
-    ld a, [wMode07_State00_D9FB]                  ; $6B2F
+    ld a, [wMode07_StateTable_D9FB]               ; $6B2F
     ld b, BANK(Photo_FindSlotA)                   ; $6B32
     ld hl, Photo_FindSlotA                        ; $6B34
     call Far_CallKeepA                            ; $6B37
@@ -5286,7 +5432,7 @@ Mode09_State09::
 ; C: handler of state $0E of mode $09 (word 14 of Mode09_StateTable)
 Mode09_State0E::
     xor a                                         ; $6BD3
-    ld [wMode09_State05_D9FE], a                  ; $6BD4
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $6BD4
     call Link_CountdownDA00                       ; $6BD7
     jr nz, jr_006_6be2                            ; $6BDA
 
@@ -5301,7 +5447,7 @@ jr_006_6be2:
     ret z                                         ; $6BE6
 
     ld a, $ff                                     ; $6BE7
-    ld [wMode09_State05_D9FE], a                  ; $6BE9
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $6BE9
     push af                                       ; $6BEC
     ld a, SFX1_EXCHANGE_COMMUNICATING_17          ; $6BED
     ld [wSndSfx1], a                              ; $6BEF
@@ -5324,7 +5470,7 @@ Mode09_State0F::
     ld b, BANK(Counters_AddExchanged)             ; $6C05
     ld hl, Counters_AddExchanged                  ; $6C07
     call Far_Call                                 ; $6C0A
-    ld a, [wMode07_State00_D9FB]                  ; $6C0D
+    ld a, [wMode07_StateTable_D9FB]               ; $6C0D
     ld b, BANK(Photo_FindSlotA)                   ; $6C10
     ld hl, Photo_FindSlotA                        ; $6C12
     call Far_CallKeepA                            ; $6C15
@@ -5402,7 +5548,7 @@ jr_006_6ca3:
 
 ; C: handler of state $07 of mode $09 (word 7 of Mode09_StateTable)
 Mode09_State07::
-    ld a, [wMode09_State05_D9FE]                  ; $6CAB
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $6CAB
     cp $f0                                        ; $6CAE
     jr nz, jr_006_6cba                            ; $6CB0
 

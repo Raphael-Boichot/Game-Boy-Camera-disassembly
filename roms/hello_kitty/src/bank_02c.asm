@@ -12,10 +12,12 @@ Gfx_2C_4000_Mode02_TakePhotos_State01::
 ; Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_2C_78D0_Mode09_ExchangeCommunicating_State0C::
     INCBIN "data/bank_2c/Gfx_2C_78D0_Mode09_ExchangeCommunicating_State0C.2bpp" ; $78D0, 480 bytes
-; I: kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2C_78D0 after a leftover stretch
-Map_2C_7AB0_Mode09_ExchangeCommunicating_State0C::
-    INCBIN "data/bank_2c/Map_2C_7AB0_Mode09_ExchangeCommunicating_State0C.tilemap" ; $7AB0, 544 bytes
+; C: read in the runs by Copy_DEtoHL; kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of
+; Map_2C_78D0 after a leftover stretch
+Map_2C_7AB0_Copy_DEtoHL::
+    INCBIN "data/bank_2c/Map_2C_7AB0_Copy_DEtoHL.tilemap" ; $7AB0, 544 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_2C_78D0
+; after a leftover stretch
 Gfx_2C_7CD0_Mode02_TakePhotos_State01::
     INCBIN "data/bank_2c/Gfx_2C_7CD0_Mode02_TakePhotos_State01.2bpp" ; $7CD0, 816 bytes

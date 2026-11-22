@@ -70,6 +70,7 @@ typedef struct {
   uint8_t link_on, link_ev, link_out;   /* link_ev: 1 = this unit started a master transfer (byte link_out), 2 = this unit armed external-clock reception */
 } GB;
 static GB g;
+static uint8_t line_regs[154*6];   /* per screen line, the LCDC, SCY, SCX, BGP, WY, WX it ended with (for drawing a state: tools/core_screen.py); not part of the state */
 static uint32_t cur_fetch_pc_bank;
 
 size_t gb_state_size(void){ return sizeof(GB); }
@@ -254,7 +255,7 @@ static void tick_hw(int cyc){
   /* lcd */
   if(g.lcd_on){
     g.line_cycle+=cyc;
-    while(g.line_cycle>=456){ g.line_cycle-=456; g.ly++; if(g.ly==144){ req(0); } if(g.ly>153){ g.ly=0; g.frame++; } lcd_stat_eval(); }
+    while(g.line_cycle>=456){ g.line_cycle-=456; if(g.ly<154){ uint8_t*q=line_regs+6*g.ly; q[0]=g.io[0x40]; q[1]=g.io[0x42]; q[2]=g.io[0x43]; q[3]=g.io[0x47]; q[4]=g.io[0x4A]; q[5]=g.io[0x4B]; } g.ly++; if(g.ly==144){ req(0); } if(g.ly>153){ g.ly=0; g.frame++; } lcd_stat_eval(); }
     lcd_stat_eval();
   } else { /* LCD off: frames still counted by cycle */
     g.lcdoff_acc+=cyc; if(g.lcdoff_acc>=70224){ g.lcdoff_acc-=70224; g.frame++; }
@@ -480,3 +481,4 @@ int32_t gb_link_cd(void){ return g.serial_cd; }
 uint8_t gb_link_sc(void){ return g.io[0x02]; } uint8_t gb_link_sb(void){ return g.io[0x01]; }
 void gb_link_set_rx(uint8_t rx){ g.serial_rx=rx; }
 void gb_link_deliver(uint8_t rx,int32_t cd){ g.serial_rx=rx; g.serial_cd=cd>0?cd:1; }
+const uint8_t* gb_line_regs_ptr(void){ return line_regs; }

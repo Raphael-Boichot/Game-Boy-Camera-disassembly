@@ -488,7 +488,7 @@ Jump_005_4357:
 ; C: handler of state $08 of mode $00 (word 8 of Mode00_StateTable)
 Mode00_State08::
     call Rng_Next                                 ; $4358
-    ld a, [wMode06_State21_D8E0]                  ; $435B
+    ld a, [wMode07_StateTable_D8E0]               ; $435B
     bit 2, a                                      ; $435E
     jr z, jr_005_436a                             ; $4360
 
@@ -893,7 +893,7 @@ Mode01_State01::
 
 ; C: handler of state $02 of mode $01 (word 2 of Mode01_StateTable)
 Mode01_State02::
-    ld a, [wMode06_State21_D8E0]                  ; $4657
+    ld a, [wMode07_StateTable_D8E0]               ; $4657
     bit 0, a                                      ; $465A
     jr z, jr_005_466e                             ; $465C
 
@@ -1034,7 +1034,7 @@ Mode01_State04::
 
 ; C: handler of state $05 of mode $01 (word 5 of Mode01_StateTable)
 Mode01_State05::
-    ld a, [wMode06_State21_D8E0]                  ; $475E
+    ld a, [wMode07_StateTable_D8E0]               ; $475E
     bit 0, a                                      ; $4761
     jr z, jr_005_4788                             ; $4763
 
@@ -1092,14 +1092,14 @@ jr_005_47b0:
 
 ; C: handler of state $06 of mode $01 (word 6 of Mode01_StateTable)
 Mode01_State06::
-    ld a, [wMode06_State21_D8E0]                  ; $47B1
+    ld a, [wMode07_StateTable_D8E0]               ; $47B1
     bit 0, a                                      ; $47B4
     jr z, jr_005_47cb                             ; $47B6
 
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $47B8
     ld [wMode01_State05_D8F6], a                  ; $47BB
     xor a                                         ; $47BE
-    ld [wMode06_State21_D8E0], a                  ; $47BF
+    ld [wMode07_StateTable_D8E0], a               ; $47BF
     ldh a, [hMenuMode]                            ; $47C2
     ldh [hMode], a                                ; $47C4
     ldh a, [hMenuState]                           ; $47C6
@@ -3170,14 +3170,14 @@ Stamp_CursorCallback::
 ; C: object callback: position from $D9A9-$D9AA; in step $D994 = 0 shows it (00:222C), = 2 reads the D-pad ($D8DA) to
 ; move it; runs on its screen (05:06) in the core replays (port/entry_modes_kitty.csv); code read
 Stamp_CursorUpdate::
-    ld a, [wObject_RunAll_DC5E]                   ; $5844
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E] ; $5844
     ld l, a                                       ; $5847
-    ld a, [wObject_RunAll_DC5F]                   ; $5848
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F] ; $5848
     ld h, a                                       ; $584B
-    ld de, hStamp_CursorUpdate_FFFA               ; $584C
+    ld de, hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA ; $584C
     add hl, de                                    ; $584F
     ld a, [wStamp_CursorUpdate_D9A9]              ; $5850
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5853
+    ldh [hMode07_StateTable_FFD2], a              ; $5853
     ld a, [wStamp_CursorUpdate_D9AA]              ; $5855
     add [hl]                                      ; $5858
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $5859
@@ -3275,7 +3275,7 @@ jr_005_58a2:
     rl h                                          ; $58E5
     add hl, bc                                    ; $58E7
     ld a, [hl+]                                   ; $58E8
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $58E9
+    ldh [hMode07_StateTable_FFD2], a              ; $58E9
     ld [wStamp_CursorUpdate_D9A9], a              ; $58EB
     ld a, [hl+]                                   ; $58EE
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $58EF
@@ -3999,11 +3999,11 @@ Cursor_Callback61FF::
 ; C: object callback like Stamp_CursorUpdate with $D991: shows it in step $D994 = 0, moves it with the D-pad in step
 ; 2; runs in the album text window (mode $03 state $0B)
 AlbumText_CursorUpdate::
-    ld a, [wObject_RunAll_DC5E]                   ; $61FF
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E] ; $61FF
     ld l, a                                       ; $6202
-    ld a, [wObject_RunAll_DC5F]                   ; $6203
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F] ; $6203
     ld h, a                                       ; $6206
-    ld de, hStamp_CursorUpdate_FFFA               ; $6207
+    ld de, hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA ; $6207
     add hl, de                                    ; $620A
     ld a, [wAlbumText_CursorUpdate_D991]          ; $620B
     add [hl]                                      ; $620E
@@ -4099,7 +4099,7 @@ jr_005_625d:
     rl h                                          ; $6293
     add hl, bc                                    ; $6295
     ld a, [hl+]                                   ; $6296
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $6297
+    ldh [hMode07_StateTable_FFD2], a              ; $6297
     ld [wAlbumText_ObjPosFromD990], a             ; $6299
     ld a, [hl+]                                   ; $629C
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $629D
@@ -5082,8 +5082,8 @@ FrameRec_LoadTiles_Tbl6AAD::
     db $40, $6c, $33, $d8, $7d, $35, $10, $7e, $2f, $e8, $7e, $35, $00, $70, $27, $30
     db $7b, $35
 
-; C: read in the runs by FrameRec_LoadMap, FrameRec_LoadTiles; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz)
+; C: read in the runs by FrameRec_LoadMap, FrameRec_LoadTiles, FrameRec_LoadTilesScreenOff; first read on the screen
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
 FrameRec_LoadMap_Tbl6AC5::
     db $30, $6f, $2f, $a8, $7a, $35, $10, $7b, $27, $b8, $7b, $35, $b0, $76, $2f, $c8
     db $7c, $35, $f0, $5f, $2f, $40, $7c, $35, $10, $62, $31, $30, $7c, $33, $e0, $7f
@@ -5610,11 +5610,49 @@ jr_005_6e6b:
     jp Far_Return                                 ; $6E9D
 
 
-    db $a7, $20, $02, $3e, $01, $cd, $9a, $0c, $79, $fe, $31, $20, $02, $0e, $aa, $c5
-    db $79, $e6, $f0, $4f, $06, $00, $21, $40, $78, $09, $5d, $54, $3e, $0c, $21, $b0
-    db $87, $01, $10, $00, $cd, $60, $02, $c1, $79, $e6, $0f, $cb, $37, $4f, $06, $00
-    db $21, $40, $79, $09, $5d, $54, $3e, $0c, $21, $d0, $87, $01, $10, $00, $cd, $60
-    db $02, $c3, $73, $01
+    and a                                         ; $6EA0
+    jr nz, jr_005_6ea5                            ; $6EA1
+
+    ld a, $01                                     ; $6EA3
+
+jr_005_6ea5:
+    call Bin_ToBcd                                ; $6EA5
+    ld a, c                                       ; $6EA8
+    cp $31                                        ; $6EA9
+    jr nz, jr_005_6eaf                            ; $6EAB
+
+    ld c, $aa                                     ; $6EAD
+
+jr_005_6eaf:
+    push bc                                       ; $6EAF
+    ld a, c                                       ; $6EB0
+    and $f0                                       ; $6EB1
+    ld c, a                                       ; $6EB3
+    ld b, $00                                     ; $6EB4
+    ld hl, Gfx_0C_4000_Mode05_StampWindow_State06 + $3840 ; $6EB6
+    add hl, bc                                    ; $6EB9
+    ld e, l                                       ; $6EBA
+    ld d, h                                       ; $6EBB
+    ld a, $0c                                     ; $6EBC
+    ld hl, $87b0                                  ; $6EBE
+    ld bc, $0010                                  ; $6EC1
+    call Copy_FarDEtoHL                           ; $6EC4
+    pop bc                                        ; $6EC7
+    ld a, c                                       ; $6EC8
+    and $0f                                       ; $6EC9
+    swap a                                        ; $6ECB
+    ld c, a                                       ; $6ECD
+    ld b, $00                                     ; $6ECE
+    ld hl, Gfx_0C_7920_Mode02_TakePhotos_State06 + $20 ; $6ED0
+    add hl, bc                                    ; $6ED3
+    ld e, l                                       ; $6ED4
+    ld d, h                                       ; $6ED5
+    ld a, $0c                                     ; $6ED6
+    ld hl, $87d0                                  ; $6ED8
+    ld bc, $0010                                  ; $6EDB
+    call Copy_FarDEtoHL                           ; $6EDE
+    jp Far_Return                                 ; $6EE1
+
 
 ; C: five blocks of $C0 bytes from bank $0D ($4600-$4A00) into $9380 and $84C0; mode $03 state $00; runs on its screen
 ; (03:00) in the core replays (port/entry_modes_kitty.csv); code read
@@ -5949,7 +5987,7 @@ jr_005_7179:
 
 ; C: handler of state $02 of mode $03 (word 2 of Mode03_StateTable)
 Mode03_State02::
-    ld a, [wMode06_State21_D8E0]                  ; $71BC
+    ld a, [wMode07_StateTable_D8E0]               ; $71BC
     bit 0, a                                      ; $71BF
     jr z, jr_005_71d7                             ; $71C1
 
@@ -6413,7 +6451,7 @@ jr_005_74cd:
 ; C: handler of state $0E of mode $03 (word 14 of Mode03_StateTable)
 Mode03_State0E::
     xor a                                         ; $74CE
-    ld [wMode06_State21_D8E0], a                  ; $74CF
+    ld [wMode07_StateTable_D8E0], a               ; $74CF
     call Rng_Next                                 ; $74D2
     and $06                                       ; $74D5
     ld c, a                                       ; $74D7
@@ -6438,7 +6476,7 @@ Mode03_State0E_Tbl74EE::
 
 ; C: handler of state $0F of mode $03 (word 15 of Mode03_StateTable)
 Mode03_State0F::
-    ld a, [wMode06_State21_D8E0]                  ; $74F6
+    ld a, [wMode07_StateTable_D8E0]               ; $74F6
     and a                                         ; $74F9
     ret z                                         ; $74FA
 
@@ -6554,7 +6592,7 @@ jr_005_75c0:
 ; C: handler of state $12 of mode $03 (word 18 of Mode03_StateTable)
 Mode03_State12::
     xor a                                         ; $75C1
-    ld [wMode06_State21_D8E0], a                  ; $75C2
+    ld [wMode07_StateTable_D8E0], a               ; $75C2
     ld de, ObjScript_00_1BF5_Mode03_ViewAlbum_State13 + $32 ; $75C5
     call Object_Create                            ; $75C8
     ld de, ObjScript_00_1CAB_Mode03_ViewAlbum_State12; $75CB
@@ -6566,7 +6604,7 @@ Mode03_State12::
 
 ; C: handler of state $13 of mode $03 (word 19 of Mode03_StateTable)
 Mode03_State13::
-    ld a, [wMode06_State21_D8E0]                  ; $75D6
+    ld a, [wMode07_StateTable_D8E0]               ; $75D6
     and a                                         ; $75D9
     ret z                                         ; $75DA
 

@@ -103,6 +103,7 @@ DEF SFX1_TAKE_PHOTOS_36        EQU $36 ; I sfx1: every site in TakePhotos
 DEF SFX1_38                    EQU $38 ; C sfx1: an effect id of channel sfx1
 DEF SFX1_3A                    EQU $3a ; C sfx1: an effect id of channel sfx1
 DEF SFX1_3C                    EQU $3c ; C sfx1: an effect id of channel sfx1
+DEF SFX3_MODE07_EXCHANGE_01    EQU $01 ; I sfx3: every site in Mode07_Exchange
 DEF SFX3_03                    EQU $03 ; C sfx3: an effect id of channel sfx3
 DEF SFX3_08                    EQU $08 ; C sfx3: an effect id of channel sfx3
 DEF SFX3_09                    EQU $09 ; C sfx3: an effect id of channel sfx3

@@ -7,20 +7,12 @@ SECTION "ROM Bank $01c", ROMX[$4000], BANK[$1c]
 ; C: read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1C_4000_Mode05_StampWindow_State06::
-    INCBIN "data/bank_1c/Gfx_1C_4000_Mode05_StampWindow_State06.bin" ; $4000, 8666 bytes
-; I: leftover: 2534 bytes (1C:61DA-6BBF) of message-strip tiles, white kana on black (drawn as 2bpp tiles aligned on
-; 1C:61D0), the last two tiles all $FF (black); no run reads them and no code names them
-Leftover_1C_61DA_Tiles::
-    INCBIN "data/bank_1c/Leftover_1C_61DA_Tiles.bin" ; $61DA, 2534 bytes
-; C: read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_1C_6BC0_Mode14_MessageScreen_State01::
-    INCBIN "data/bank_1c/Gfx_1C_6BC0_Mode14_MessageScreen_State01.2bpp" ; $6BC0, 640 bytes
-; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_1C_6BC0
-; after a leftover stretch
-Map_1C_6E40_Mode03_ViewAlbum_State03::
-    INCBIN "data/bank_1c/Map_1C_6E40_Mode03_ViewAlbum_State03.tilemap" ; $6E40, 1024 bytes
+    INCBIN "data/bank_1c/Gfx_1C_4000_Mode05_StampWindow_State06.2bpp" ; $4000, 8640 bytes
+; C: the picture strips of messages 0 / 8, 1, 2 and 3 of the message screen (mode $14), $280 bytes each at 1C:57C0 +
+; the offsets of 06:4450 ($0A00, $0C80, $0F00, $1180), copied to $8800 by Mode14_State00 (06:44E1); white kana on
+; black; read in the core: message 0 in tools/kitty_rare_runs.py (album full ...
+Gfx_1C_61C0_MessageStrips::
+    INCBIN "data/bank_1c/Gfx_1C_61C0_MessageStrips.2bpp" ; $61C0, 4224 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State03
 ; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_1C_7240_Mode03_ViewAlbum_State03::

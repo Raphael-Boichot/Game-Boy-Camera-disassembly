@@ -112,29 +112,25 @@ Leftover_02_4628::
     db $04, $80, $54, $60, $04, $80, $58, $60, $03, $80, $5c, $60, $03, $80, $6c, $60
     db $03, $80, $7c, $60, $03, $80, $8c, $60, $1e, $1f, $28, $46
 
-; C: read in the runs by Object_RunAll, ObjCmd_Jump
-ObjScript_02_4654_Object_RunAll::
+; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02
+; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+ObjScript_02_4654_Mode07_Exchange_State02::
     db $10, $80, $9c, $60, $1e, $1f, $54, $46, $10, $80, $ac, $60, $1e, $1f, $5c, $46
-
     db $0c, $80, $bc, $60, $0c, $80, $c0, $60, $1e, $1f, $64, $46, $01, $80, $c4, $60
     db $01, $80, $c8, $60, $1e, $1f, $70, $46, $01, $80, $cc, $60, $01, $80, $d0, $60
     db $1e, $1f, $7c, $46, $01, $80, $d4, $60, $01, $80, $d8, $60, $1e, $1f, $88, $46
-    db $01, $80, $dc, $60, $01, $80, $e0, $60, $1e, $1f, $94, $46
+    db $01, $80, $dc, $60, $01, $80, $e0, $60, $1e, $1f, $94, $46, $10, $80, $e4, $60
+    db $1e, $1f, $a0, $46, $10, $80, $f4, $60, $10, $80, $5c, $61, $1e, $1f, $a8, $46
+    db $10, $80, $5c, $64, $1e, $1f, $b4, $46, $10, $80, $74, $64, $1e, $1f, $bc, $46
+    db $10, $80, $8c, $64, $1e, $1f, $c4, $46, $10, $80, $9c, $64, $1e, $1f, $cc, $46
+    db $10, $80, $b4, $64, $1e, $1f, $d4, $46, $10, $80, $cc, $64, $1e, $1f, $dc, $46
+    db $07, $80, $dc, $64, $09, $80, $e4, $64, $0d, $80, $ec, $64, $10, $80, $f4, $64
+    db $26, $80, $fc, $64, $10, $80, $f4, $64, $0d, $80, $ec, $64, $09, $80, $e4, $64
+    db $07, $80, $dc, $64, $09, $80, $04, $65, $0d, $80, $0c, $65, $10, $80, $14, $65
+    db $26, $80, $1c, $65, $10, $80, $14, $65, $0d, $80, $0c, $65, $09, $80, $04, $65
+    db $1e, $1f, $e4, $46
 
-; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
-ObjScript_02_46A0_Mode07_Exchange_State02::
-    db $10, $80, $e4, $60, $1e, $1f, $a0, $46, $10, $80, $f4, $60, $10, $80, $5c, $61
-    db $1e, $1f, $a8, $46, $10, $80, $5c, $64, $1e, $1f, $b4, $46, $10, $80, $74, $64
-    db $1e, $1f, $bc, $46, $10, $80, $8c, $64, $1e, $1f, $c4, $46, $10, $80, $9c, $64
-    db $1e, $1f, $cc, $46, $10, $80, $b4, $64, $1e, $1f, $d4, $46, $10, $80, $cc, $64
-    db $1e, $1f, $dc, $46, $07, $80, $dc, $64, $09, $80, $e4, $64, $0d, $80, $ec, $64
-    db $10, $80, $f4, $64, $26, $80, $fc, $64, $10, $80, $f4, $64, $0d, $80, $ec, $64
-    db $09, $80, $e4, $64, $07, $80, $dc, $64, $09, $80, $04, $65, $0d, $80, $0c, $65
-    db $10, $80, $14, $65, $26, $80, $1c, $65, $10, $80, $14, $65, $0d, $80, $0c, $65
-    db $09, $80, $04, $65, $1e, $1f, $e4, $46
-
-; I: leftover: 164 bytes (02:4728-47CB) that no run reads or executes and that no code names (owner rule 2026-11-11)
+; I: leftover: 104 bytes (02:4728-478F) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_02_4728::
     db $05, $80, $6c, $65, $07, $80, $b4, $65, $11, $80, $fc, $65, $07, $80, $b4, $65
     db $05, $80, $6c, $65, $1e, $1f, $28, $47, $05, $80, $40, $66, $07, $80, $88, $66
@@ -142,27 +138,33 @@ Leftover_02_4728::
     db $10, $80, $24, $65, $1e, $1f, $58, $47, $10, $80, $14, $67, $1e, $1f, $60, $47
     db $10, $80, $5c, $67, $1e, $1f, $68, $47, $10, $80, $a4, $67, $10, $80, $24, $65
     db $1e, $1f, $70, $47, $10, $80, $ec, $67, $1e, $1f, $7c, $47, $0c, $80, $5c, $68
-    db $80, $80, $cc, $68, $1e, $1f, $84, $47, $05, $80, $6c, $69, $0a, $80, $cc, $69
-    db $05, $80, $6c, $69, $0a, $80, $2c, $6a, $1e, $1f, $90, $47, $05, $80, $94, $6a
-    db $0a, $80, $f4, $6a, $05, $80, $94, $6a, $0a, $80, $54, $6b, $1e, $1f, $a4, $47
+    db $80, $80, $cc, $68, $1e, $1f, $84, $47
+
+; C: read in the runs by Object_RunAll, ObjCmd_Jump
+ObjScript_02_4790_Object_RunAll::
+    db $05, $80, $6c, $69, $0a, $80, $cc, $69, $05, $80, $6c, $69, $0a, $80, $2c, $6a
+    db $1e, $1f, $90, $47
+
+    db $05, $80, $94, $6a, $0a, $80, $f4, $6a, $05, $80, $94, $6a, $0a, $80, $54, $6b
+    db $1e, $1f, $a4, $47
+
+; C: read in the runs by Object_RunAll, ObjCmd_Jump; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
+; exchange)
+ObjScript_02_47B8_Object_RunAll::
     db $07, $80, $dc, $6b, $05, $80, $cc, $6b, $0a, $80, $bc, $6b, $06, $80, $cc, $6b
-    db $1e, $1f, $b8, $47
+    db $1e, $1f, $b8, $47, $10, $80, $ec, $6b, $1e, $1f, $cc, $47
 
-; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_02_46A0 after a leftover
-; stretch
-Src_02_47CC_Mode07_Exchange_State02::
-    INCBIN "data/bank_02/Src_02_47CC_Mode07_Exchange_State02.bin" ; $47CC, 8 bytes
-; I: leftover: 60 bytes (02:47D4-480F) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_47D4::
     db $03, $80, $24, $6c, $05, $80, $ec, $6b, $03, $80, $24, $6c, $1e, $1f, $d4, $47
-    db $03, $80, $24, $6c, $1e, $1f, $e4, $47, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
-    db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
-    db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $1e, $1f, $ec, $47
+    db $03, $80, $24, $6c, $1e, $1f, $e4, $47
 
-; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); the rest of Data_02_46A0 after a leftover
-; stretch
-Src_02_4810_Mode07_Exchange_State02::
-    INCBIN "data/bank_02/Src_02_4810_Mode07_Exchange_State02.bin" ; $4810, 20 bytes
+; C: read in the runs by Object_RunAll, ObjCmd_Jump; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
+; exchange)
+ObjScript_02_47EC_Object_RunAll::
+    db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
+    db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
+    db $1e, $1f, $ec, $47, $01, $80, $5c, $6c, $01, $80, $64, $6c, $01, $80, $6c, $6c
+    db $01, $80, $70, $6c, $1e, $1f, $10, $48
+
 ; I: leftover: 40 bytes (02:4824-484B) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_02_4824::
     db $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80, $d4, $6d, $50, $80, $e4, $6c
@@ -328,14 +330,14 @@ jr_002_4aa8:
     ldh [hCopyReqSrcDstCnt + $2], a               ; $4AAD
     ldh [hCopyReqSrcDstCnt + $3], a               ; $4AAF
     ld a, $0f                                     ; $4AB1
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $4AB3
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $4AB3
     ld de, KeyPrompt_Wait                         ; $4AB5
     jp Obj_SetCallback                            ; $4AB8
 
 
 ; C: hFFD8 - 1; at 0 the key into $D8DF and the object ends (00:2212)
 KeyPrompt_Wait::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $4ABB
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $4ABB
     dec [hl]                                      ; $4ABE
     jr nz, jr_002_4aca                            ; $4ABF
 
@@ -614,9 +616,27 @@ Obj_DrawPhotoIndex::
     ret                                           ; $4C22
 
 
-    db $e5, $fa, $fb, $d9, $06, $05, $21, $5c, $6e, $cd, $65, $01, $e1, $37, $c9, $e5
-    db $fa, $fb, $d9, $06, $05, $21, $a0, $6e, $cd, $65, $01, $e1, $37, $c9, $e5, $3e
-    db $01, $06, $05, $21, $5c, $6e, $cd, $65, $01, $e1, $37, $c9
+    push hl                                       ; $4C23
+    ld a, [wMode07_StateTable_D9FB]               ; $4C24
+    ld b, BANK(Photo_DrawNumber)                  ; $4C27
+    ld hl, Photo_DrawNumber                       ; $4C29
+    call Far_CallKeepA                            ; $4C2C
+    pop hl                                        ; $4C2F
+    scf                                           ; $4C30
+    ret                                           ; $4C31
+
+
+    push hl                                       ; $4C32
+    ld a, [wMode07_StateTable_D9FB]               ; $4C33
+    ld b, BANK(Photo_DrawNumber)                  ; $4C36
+    ld hl, Photo_DrawNumber + $44                 ; $4C38
+    call Far_CallKeepA                            ; $4C3B
+    pop hl                                        ; $4C3E
+    scf                                           ; $4C3F
+    ret                                           ; $4C40
+
+
+    db $e5, $3e, $01, $06, $05, $21, $5c, $6e, $cd, $65, $01, $e1, $37, $c9
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_Jump; first read on the screen
 ; Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
@@ -631,9 +651,7 @@ ObjScript_02_4C4F_Mode02_TakePhotos_State06::
     db $b9, $7f, $91, $4c, $b6, $4b, $b9, $7f, $a3, $4c, $b6, $4b, $b9, $7f, $85, $4c
     db $8c, $4b, $b9, $7f, $8b, $4c, $a1, $4b, $b9, $7f, $9d, $4c, $e0, $4b, $b9, $7f
     db $97, $4c, $e0, $4b, $b9, $7f, $85, $4c, $62, $4b, $b9, $7f, $8b, $4c, $77, $4b
-    db $b9, $7f
-
-    db $85, $4c, $62, $4b, $b9, $7f, $8b, $4c, $77, $4b, $b9, $7f
+    db $b9, $7f, $85, $4c, $62, $4b, $b9, $7f, $8b, $4c, $77, $4b, $b9, $7f
 
 ; C: menu cursor object of the Play menu: D-pad through the 8-byte item records (table 02:5AB7), A copies the target
 ; mode and state into hFF95-hFF96 and sets $D8E0 = 1
@@ -665,9 +683,9 @@ PlayMenu_CursorUpdate::
     jr nz, jr_002_4d83                            ; $4D22
 
 jr_002_4d24:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4D24
+    ldh a, [hMode07_StateTable_FFD1]              ; $4D24
     ld c, a                                       ; $4D26
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4D27
+    ldh a, [hMode07_StateTable_FFD3]              ; $4D27
     ld b, a                                       ; $4D29
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4D2A
     ld l, a                                       ; $4D2D
@@ -680,16 +698,16 @@ jr_002_4d24:
     rl h                                          ; $4D3A
     add hl, bc                                    ; $4D3C
     ld a, [hl+]                                   ; $4D3D
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4D3E
+    ldh [hMode07_StateTable_FFD2], a              ; $4D3E
     ld a, [hl+]                                   ; $4D40
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4D41
     ret                                           ; $4D43
 
 
 jr_002_4d44:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4D44
+    ldh a, [hMode07_StateTable_FFD1]              ; $4D44
     ld c, a                                       ; $4D46
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4D47
+    ldh a, [hMode07_StateTable_FFD3]              ; $4D47
     ld b, a                                       ; $4D49
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4D4A
     ld l, a                                       ; $4D4D
@@ -717,7 +735,7 @@ jr_002_4d44:
     rl h                                          ; $4D73
     add hl, bc                                    ; $4D75
     ld a, [hl+]                                   ; $4D76
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4D77
+    ldh [hMode07_StateTable_FFD2], a              ; $4D77
     ld a, [hl+]                                   ; $4D79
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4D7A
     ld hl, wObjCmd_SetDC61                        ; $4D7C
@@ -728,9 +746,9 @@ jr_002_4d82:
 
 
 jr_002_4d83:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4D83
+    ldh a, [hMode07_StateTable_FFD1]              ; $4D83
     ld c, a                                       ; $4D85
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4D86
+    ldh a, [hMode07_StateTable_FFD3]              ; $4D86
     ld b, a                                       ; $4D88
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4D89
     ld l, a                                       ; $4D8C
@@ -748,7 +766,7 @@ jr_002_4d83:
     ld a, [hl+]                                   ; $4DA0
     ldh [hMenuState], a                           ; $4DA1
     ld a, $01                                     ; $4DA3
-    ld [wMode06_State21_D8E0], a                  ; $4DA5
+    ld [wMode07_StateTable_D8E0], a               ; $4DA5
     call Obj_ClearCallback                        ; $4DA8
     ld hl, wObjCmd_SetDC63                        ; $4DAB
     call Obj_Sound                                ; $4DAE
@@ -758,7 +776,7 @@ jr_002_4d83:
 ; C: $D8E0 = 0
 Obj_ClearD8E0::
     xor a                                         ; $4DB2
-    ld [wMode06_State21_D8E0], a                  ; $4DB3
+    ld [wMode07_StateTable_D8E0], a               ; $4DB3
     ret                                           ; $4DB6
 
 
@@ -833,9 +851,9 @@ Album_CursorUpdate::
     jr nz, jr_002_4eda                            ; $4E71
 
 jr_002_4e73:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4E73
+    ldh a, [hMode07_StateTable_FFD1]              ; $4E73
     ld c, a                                       ; $4E75
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4E76
+    ldh a, [hMode07_StateTable_FFD3]              ; $4E76
     ld b, a                                       ; $4E78
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4E79
     ld l, a                                       ; $4E7C
@@ -848,16 +866,16 @@ jr_002_4e73:
     rl h                                          ; $4E89
     add hl, bc                                    ; $4E8B
     ld a, [hl+]                                   ; $4E8C
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4E8D
+    ldh [hMode07_StateTable_FFD2], a              ; $4E8D
     ld a, [hl+]                                   ; $4E8F
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4E90
     ret                                           ; $4E92
 
 
 jr_002_4e93:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4E93
+    ldh a, [hMode07_StateTable_FFD1]              ; $4E93
     ld c, a                                       ; $4E95
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4E96
+    ldh a, [hMode07_StateTable_FFD3]              ; $4E96
     ld b, a                                       ; $4E98
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4E99
     ld l, a                                       ; $4E9C
@@ -885,7 +903,7 @@ jr_002_4e93:
     rl h                                          ; $4EC2
     add hl, bc                                    ; $4EC4
     ld a, [hl+]                                   ; $4EC5
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4EC6
+    ldh [hMode07_StateTable_FFD2], a              ; $4EC6
     ld a, [hl+]                                   ; $4EC8
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4EC9
     ld hl, wObjCmd_SetDC61                        ; $4ECB
@@ -908,9 +926,9 @@ jr_002_4eda:
     and a                                         ; $4EDD
     jr z, jr_002_4ed2                             ; $4EDE
 
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $4EE0
+    ldh a, [hMode07_StateTable_FFD1]              ; $4EE0
     ld c, a                                       ; $4EE2
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $4EE3
+    ldh a, [hMode07_StateTable_FFD3]              ; $4EE3
     ld b, a                                       ; $4EE5
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $4EE6
     ld l, a                                       ; $4EE9
@@ -991,7 +1009,7 @@ Album_MenuItemGfx_Tbl4F7A::
 ; C: $D8E0 = 1 (script callback)
 Obj_SetD8E0One::
     ld a, $01                                     ; $4F92
-    ld [wMode06_State21_D8E0], a                  ; $4F94
+    ld [wMode07_StateTable_D8E0], a               ; $4F94
     scf                                           ; $4F97
     ret                                           ; $4F98
 
@@ -1015,7 +1033,7 @@ StrawberryCh_DotPosition::
     ld hl, StrawberryCh_DotPosition_Tbl4FEB       ; $4FE0
     add hl, bc                                    ; $4FE3
     ld a, [hl+]                                   ; $4FE4
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $4FE5
+    ldh [hMode07_StateTable_FFD2], a              ; $4FE5
     ld a, [hl+]                                   ; $4FE7
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $4FE8
     ret                                           ; $4FEA
@@ -1035,7 +1053,7 @@ StrawberryCh_DotTick::
     ret z                                         ; $5000
 
     ld a, $c0                                     ; $5001
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5003
+    ldh [hMode07_StateTable_FFD2], a              ; $5003
     ld de, StrawberryCh_DotHidden                 ; $5005
     jp Obj_SetCallback                            ; $5008
 
@@ -1059,7 +1077,7 @@ ObjScript_02_5016_Mode11_StrawberryChannel_State00::
 ; C: hFFD8 - 1 ends it; a key ($D8D9 & $33) ends it early; runs on its screen (11:04 11:07) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 StrawberryCh_HintTick::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $501C
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $501C
     dec [hl]                                      ; $501F
     jp z, Obj_End                                 ; $5020
 
@@ -1089,7 +1107,7 @@ Puzzle15_ObjFrameByD97C::
     ld hl, Puzzle15_ObjFrameByD97C + $E           ; $5076
     add hl, bc                                    ; $5079
     ld a, [hl]                                    ; $507A
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $507B
+    ldh [hMode07_StateTable_FFD2], a              ; $507B
     ret                                           ; $507D
 
 
@@ -1121,7 +1139,7 @@ Puzzle15_ObjMoving::
     bit 0, a                                      ; $50AE
     jr nz, jr_002_50c3                            ; $50B0
 
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $50B2
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $50B2
     dec [hl]                                      ; $50B5
     ret nz                                        ; $50B6
 
@@ -1133,7 +1151,7 @@ Puzzle15_ObjMoving::
 
 jr_002_50c3:
     ld a, $14                                     ; $50C3
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $50C5
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $50C5
     ret                                           ; $50C7
 
 
@@ -1145,7 +1163,7 @@ ObjScript_02_50C8_Mode0F_FifteenPuzzle_State0A::
 ; C: ends when $D8E0 bit 2 is set; animates on hFF9D bit 3; runs on its screen (0F:05) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 Puzzle15_ObjTick::
-    ld a, [wMode06_State21_D8E0]                  ; $50CE
+    ld a, [wMode07_StateTable_D8E0]               ; $50CE
     bit 2, a                                      ; $50D1
     jp nz, Obj_End                                ; $50D3
 
@@ -1165,7 +1183,7 @@ Puzzle15_ObjTick::
 jr_002_50eb:
     xor a                                         ; $50EB
     ldh [hCopyReqSrcDstCnt + $4], a               ; $50EC
-    ldh [hObject_RunAll_FFD0], a                  ; $50EE
+    ldh [hMode07_StateTable_FFD0], a              ; $50EE
 
 jr_002_50f0:
     ld a, [wKeysNew]                              ; $50F0
@@ -1189,7 +1207,7 @@ jr_002_50f0:
 
 Jump_002_510d:
     ld a, $02                                     ; $510D
-    ld [wMode06_State21_D8E0], a                  ; $510F
+    ld [wMode07_StateTable_D8E0], a               ; $510F
     jp Obj_End                                    ; $5112
 
 
@@ -1283,7 +1301,7 @@ Puzzle15_ObjArrived::
     ld b, BANK(Puzzle15_ScreenPosPrev)            ; $51AA
     ld hl, Puzzle15_ScreenPosPrev                 ; $51AC
     call Far_Call                                 ; $51AF
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $51B2
+    ldh a, [hMode07_StateTable_FFD2]              ; $51B2
     cp c                                          ; $51B4
     ret nz                                        ; $51B5
 
@@ -1310,10 +1328,10 @@ Puzzle15_ObjArrived::
     ld a, c                                       ; $51DB
     ld [de], a                                    ; $51DC
     xor a                                         ; $51DD
-    ldh [hPlayMenu_CursorUpdate_FFD1], a          ; $51DE
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $51E0
+    ldh [hMode07_StateTable_FFD1], a              ; $51DE
+    ldh [hMode07_StateTable_FFD3], a              ; $51E0
     ldh [hCopyReqSrcDstCnt + $4], a               ; $51E2
-    ldh [hObject_RunAll_FFD0], a                  ; $51E4
+    ldh [hMode07_StateTable_FFD0], a              ; $51E4
     ld de, ObjScript_02_51EC_Puzzle15_ObjArrived  ; $51E6
     jp Jump_000_2205                              ; $51E9
 
@@ -1464,7 +1482,7 @@ Puzzle15_ShuffleStartScript::
 ; C: Puzzle15_ScriptedKey with hFFD8 (script callback)
 Puzzle15_ShuffleScriptedKey::
     push hl                                       ; $52F6
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $52F7
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $52F7
     ld b, BANK(Puzzle15_ScriptedKey)              ; $52F9
     ld hl, Puzzle15_ScriptedKey                   ; $52FB
     call Far_CallKeepA                            ; $52FE
@@ -1585,7 +1603,7 @@ jr_002_5369:
 ; C: $D8E0 = 4 (script callback)
 Obj_SetD8E0Four::
     ld a, $04                                     ; $5374
-    ld [wMode06_State21_D8E0], a                  ; $5376
+    ld [wMode07_StateTable_D8E0], a               ; $5376
     scf                                           ; $5379
     ret                                           ; $537A
 
@@ -1594,7 +1612,7 @@ Obj_SetD8E0Four::
 Puzzle15_ShuffleInit::
     call Rng_Next                                 ; $537B
     and $03                                       ; $537E
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $5380
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $5380
     xor a                                         ; $5382
     ld [wPuzzle15_ScriptedKey_D979], a            ; $5383
     ret                                           ; $5386
@@ -1607,12 +1625,12 @@ ObjScript_02_5387_Mode0F_FifteenPuzzle_State05::
 
 ; C: when hFFD2 reaches $CA: $D8E0 = 1 and the object stops
 Puzzle15_ObjEndAtCA::
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $538D
+    ldh a, [hMode07_StateTable_FFD2]              ; $538D
     cp $ca                                        ; $538F
     ret nz                                        ; $5391
 
     ld a, $01                                     ; $5392
-    ld [wMode06_State21_D8E0], a                  ; $5394
+    ld [wMode07_StateTable_D8E0], a               ; $5394
     xor a                                         ; $5397
     ldh [hCopyReqSrcDstCnt], a                    ; $5398
     ldh [hCopyReqSrcDstCnt + $1], a               ; $539A
@@ -1660,9 +1678,9 @@ Scratch_CursorUpdate::
     jp nz, Jump_002_54db                          ; $5405
 
 jr_002_5408:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $5408
+    ldh a, [hMode07_StateTable_FFD1]              ; $5408
     ld c, a                                       ; $540A
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $540B
+    ldh a, [hMode07_StateTable_FFD3]              ; $540B
     ld b, a                                       ; $540D
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $540E
     ld l, a                                       ; $5411
@@ -1675,8 +1693,8 @@ jr_002_5408:
     rl h                                          ; $541E
     add hl, bc                                    ; $5420
     ld a, [hl+]                                   ; $5421
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5422
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $5424
+    ldh [hMode07_StateTable_FFD2], a              ; $5422
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $5424
     ld a, [hl+]                                   ; $5426
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $5427
     ldh [hScratch_CursorUpdate_FFD9], a           ; $5429
@@ -1684,9 +1702,9 @@ jr_002_5408:
 
 
 jr_002_542c:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $542C
+    ldh a, [hMode07_StateTable_FFD1]              ; $542C
     ld c, a                                       ; $542E
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $542F
+    ldh a, [hMode07_StateTable_FFD3]              ; $542F
     ld b, a                                       ; $5431
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5432
     ld l, a                                       ; $5435
@@ -1714,8 +1732,8 @@ jr_002_542c:
     rl h                                          ; $545B
     add hl, bc                                    ; $545D
     ld a, [hl+]                                   ; $545E
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $545F
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $5461
+    ldh [hMode07_StateTable_FFD2], a              ; $545F
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $5461
     ld a, [hl+]                                   ; $5463
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $5464
     ldh [hScratch_CursorUpdate_FFD9], a           ; $5466
@@ -1751,9 +1769,9 @@ Jump_002_5480:
     ld a, [hl]                                    ; $5490
     and $0f                                       ; $5491
     ld [wScratch_CursorUpdate_D95F], a            ; $5493
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $5496
+    ldh a, [hMode07_StateTable_FFD1]              ; $5496
     ld c, a                                       ; $5498
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $5499
+    ldh a, [hMode07_StateTable_FFD3]              ; $5499
     ld b, a                                       ; $549B
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $549C
     ld l, a                                       ; $549F
@@ -1771,7 +1789,7 @@ Jump_002_5480:
     ld a, [hl+]                                   ; $54B3
     ldh [hMenuState], a                           ; $54B4
     ld a, $01                                     ; $54B6
-    ld [wMode06_State21_D8E0], a                  ; $54B8
+    ld [wMode07_StateTable_D8E0], a               ; $54B8
     ld de, $5052                                  ; $54BB
     ld b, BANK(ScriptSlots_Add)                   ; $54BE
     ld hl, ScriptSlots_Add                        ; $54C0
@@ -1792,7 +1810,7 @@ jr_002_54da:
 
 Jump_002_54db:
     ld a, $02                                     ; $54DB
-    ld [wMode06_State21_D8E0], a                  ; $54DD
+    ld [wMode07_StateTable_D8E0], a               ; $54DD
     jp Obj_End                                    ; $54E0
 
 
@@ -1804,7 +1822,7 @@ ObjScript_02_54E3_Scratch_CursorUpdate::
 ; C: $D8E0 = 4 (script callback)
 Obj_SetD8E0Four_B::
     ld a, $04                                     ; $5643
-    ld [wMode06_State21_D8E0], a                  ; $5645
+    ld [wMode07_StateTable_D8E0], a               ; $5645
     scf                                           ; $5648
     ret                                           ; $5649
 
@@ -1812,14 +1830,14 @@ Obj_SetD8E0Four_B::
 ; C: position from the record at [$DC5E] - 8; runs on its screen (10:02) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 Scratch_ObjPlace::
-    ld a, [wObject_RunAll_DC5E]                   ; $564A
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E] ; $564A
     ld l, a                                       ; $564D
-    ld a, [wObject_RunAll_DC5F]                   ; $564E
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F] ; $564E
     ld h, a                                       ; $5651
     ld bc, hScratch_ObjPlace_FFF8                 ; $5652
     add hl, bc                                    ; $5655
     ld a, [hl+]                                   ; $5656
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5657
+    ldh [hMode07_StateTable_FFD2], a              ; $5657
     inc hl                                        ; $5659
     ld a, [hl+]                                   ; $565A
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $565B
@@ -1835,7 +1853,7 @@ ObjScript_02_565E_Scratch_ObjTick::
 ; C: waits for $D8E0 bit 0, then a $6C-frame countdown (02:567C); runs on its screen (10:02) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 Scratch_ObjTick::
-    ld a, [wMode06_State21_D8E0]                  ; $5662
+    ld a, [wMode07_StateTable_D8E0]               ; $5662
     bit 0, a                                      ; $5665
     jr nz, jr_002_566c                            ; $5667
 
@@ -1844,7 +1862,7 @@ Scratch_ObjTick::
 
 jr_002_566c:
     ld a, $6c                                     ; $566C
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $566E
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $566E
     ld de, Scratch_ObjCountdown                   ; $5670
     call Obj_SetCallback                          ; $5673
     ld de, ObjScript_02_565E_Scratch_ObjTick      ; $5676
@@ -1854,12 +1872,12 @@ jr_002_566c:
 ; C: hFFD8 - 1; at 0 $D8E0 = 0 and back to 02:5662; runs on its screen (10:02) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 Scratch_ObjCountdown::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $567C
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $567C
     dec [hl]                                      ; $567F
     ret nz                                        ; $5680
 
     xor a                                         ; $5681
-    ld [wMode06_State21_D8E0], a                  ; $5682
+    ld [wMode07_StateTable_D8E0], a               ; $5682
     ld de, Scratch_ObjTick                        ; $5685
     call Obj_SetCallback                          ; $5688
     ld de, ObjScript_02_7FBA_Puzzle15_ObjWaitMove ; $568B
@@ -1873,29 +1891,33 @@ ObjScript_02_5691_Mode10_ScratchCard_State03::
 
 ; C: hFFD8 - 1; at 0 $D8E0 = 8; runs on its screen (10:03) in the core replays (port/entry_modes_kitty.csv); code read
 Scratch_ObjEndCountdown::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $569E
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $569E
     dec [hl]                                      ; $56A1
     ret nz                                        ; $56A2
 
     ld a, $08                                     ; $56A3
-    ld [wMode06_State21_D8E0], a                  ; $56A5
+    ld [wMode07_StateTable_D8E0], a               ; $56A5
     ret                                           ; $56A8
 
 
-; C: read in the runs by Object_CreateWithParam, ObjCmd_CopyAtLine20, Object_RunAll; first read on the screen
+; C: read in the runs by ObjCmd_CopyAtLine20, Object_CreateWithParam, Object_RunAll; first read on the screen
 ; Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_56A9_Mode10_ScratchCard_State02::
     db $97, $56, $9e, $56, $b2, $4d, $75, $1f, $78, $1e, $1f, $5c, $41, $af, $56, $9e
     db $56, $b2, $4d, $cc, $1f, $08, $00, $00, $7c, $00, $99, $34, $00, $13, $cc, $1f
     db $08, $00, $40, $7d, $00, $99, $34, $00, $13, $1e, $1f, $bc, $56, $bc, $56, $b9
-    db $7f, $b9, $7f
+    db $7f, $b9, $7f, $cc, $1f, $08, $00, $30, $c2, $d0, $95, $e0, $01, $00, $cc, $1f
+    db $08, $00, $60, $c4, $d0, $95, $e0, $01, $00, $cc, $1f, $08, $00, $90, $c6, $d0
+    db $95, $e0, $01, $00, $1e, $1f, $dc, $56
 
-; I: leftover: 51 bytes (02:56DC-570E) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_56DC::
-    db $cc, $1f, $08, $00, $30, $c2, $d0, $95, $e0, $01, $00, $cc, $1f, $08, $00, $60
-    db $c4, $d0, $95, $e0, $01, $00, $cc, $1f, $08, $00, $90, $c6, $d0, $95, $e0, $01
-    db $00, $1e, $1f, $dc, $56, $c9, $dc, $56, $01, $57, $b9, $7f, $c9, $00, $40, $08
-    db $57, $b9, $7f
+    ret                                           ; $5701
+
+
+; C: read in the runs by Object_CreateWithParam
+ObjScript_02_5702_Object_CreateWithParam::
+    db $dc, $56, $01, $57, $b9, $7f
+
+    db $c9, $00, $40, $08, $57, $b9, $7f
 
 ; C: blinks on hFF9D bit 3 ($C0 = hidden); runs on its screen (0E:05) in the core replays
 ; (port/entry_modes_kitty.csv); code read
@@ -1908,10 +1930,10 @@ KittHost_ObjBlink::
     jr jr_002_571b                                ; $5717
 
 jr_002_5719:
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $5719
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $5719
 
 jr_002_571b:
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $571B
+    ldh [hMode07_StateTable_FFD2], a              ; $571B
     ld a, [wKeysNew]                              ; $571D
     and PADF_A | PADF_B                           ; $5720
     jp nz, Obj_End                                ; $5722
@@ -1927,8 +1949,8 @@ ObjScript_02_5726_Mode0E_KittGamesHost_State05::
 
 ; C: hFFD8 = hFFD2 (script callback)
 KittHost_ObjSaveD2::
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $5730
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $5732
+    ldh a, [hMode07_StateTable_FFD2]              ; $5730
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $5732
     scf                                           ; $5734
     ret                                           ; $5735
 
@@ -1940,12 +1962,12 @@ ObjScript_02_5736_Mode0E_KittGamesHost_State15::
 
 ; C: hFFD8 - 1; at 0 $D8E0 = 1 and the object ends
 KittHost_ObjCountdown::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $573C
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $573C
     dec [hl]                                      ; $573F
     ret nz                                        ; $5740
 
     ld a, $01                                     ; $5741
-    ld [wMode06_State21_D8E0], a                  ; $5743
+    ld [wMode07_StateTable_D8E0], a               ; $5743
     jp Obj_End                                    ; $5746
 
 
@@ -1989,14 +2011,14 @@ jr_002_577a:
     jr z, jr_002_5785                             ; $577E
 
     ld a, $c0                                     ; $5780
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5782
+    ldh [hMode07_StateTable_FFD2], a              ; $5782
     ret                                           ; $5784
 
 
 jr_002_5785:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $5785
+    ldh a, [hMode07_StateTable_FFD1]              ; $5785
     ld c, a                                       ; $5787
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $5788
+    ldh a, [hMode07_StateTable_FFD3]              ; $5788
     ld b, a                                       ; $578A
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $578B
     ld l, a                                       ; $578E
@@ -2009,16 +2031,16 @@ jr_002_5785:
     rl h                                          ; $579B
     add hl, bc                                    ; $579D
     ld a, [hl+]                                   ; $579E
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $579F
+    ldh [hMode07_StateTable_FFD2], a              ; $579F
     ld a, [hl+]                                   ; $57A1
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $57A2
     ret                                           ; $57A4
 
 
 jr_002_57a5:
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $57A5
+    ldh a, [hMode07_StateTable_FFD1]              ; $57A5
     ld c, a                                       ; $57A7
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $57A8
+    ldh a, [hMode07_StateTable_FFD3]              ; $57A8
     ld b, a                                       ; $57AA
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $57AB
     ld l, a                                       ; $57AE
@@ -2046,7 +2068,7 @@ jr_002_57a5:
     rl h                                          ; $57D4
     add hl, bc                                    ; $57D6
     ld a, [hl+]                                   ; $57D7
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $57D8
+    ldh [hMode07_StateTable_FFD2], a              ; $57D8
     ld a, [hl+]                                   ; $57DA
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $57DB
     ld hl, wObjCmd_SetDC61                        ; $57DD
@@ -2091,24 +2113,24 @@ jr_002_57f8:
     ld d, [hl]                                    ; $5813
     call Call_000_2205                            ; $5814
     ld a, $3c                                     ; $5817
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $5819
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $5819
     ld de, KittHost_ObjCountdown                  ; $581B
     call Obj_SetCallback                          ; $581E
     ld a, $50                                     ; $5821
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5823
+    ldh [hMode07_StateTable_FFD2], a              ; $5823
     ld a, $58                                     ; $5825
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $5827
     ld a, $04                                     ; $5829
-    ld [wMode06_State21_D8E0], a                  ; $582B
+    ld [wMode07_StateTable_D8E0], a               ; $582B
     ret                                           ; $582E
 
 
 ; C: the item record [$D8F4] of the table at hFFD1-hFFD3; runs on its screen (0E:13) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 KittHost_ItemRecord::
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $582F
+    ldh a, [hMode07_StateTable_FFD1]              ; $582F
     ld c, a                                       ; $5831
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $5832
+    ldh a, [hMode07_StateTable_FFD3]              ; $5832
     ld b, a                                       ; $5834
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5835
     ld l, a                                       ; $5838
@@ -2147,7 +2169,7 @@ ObjScript_02_584A_KittHost_YesNoCursor::
 
 ; C: ends when $D8E0 bit 2 is set
 KittHost_ObjEndOnD8E0Bit2::
-    ld a, [wMode06_State21_D8E0]                  ; $5944
+    ld a, [wMode07_StateTable_D8E0]               ; $5944
     bit 2, a                                      ; $5947
     jp nz, Obj_End                                ; $5949
 
@@ -2180,7 +2202,7 @@ KittHost_ObjShowKitts::
 ; C: $D8E0 = 1 (script callback)
 Obj_SetD8E0One_B::
     ld a, $01                                     ; $5984
-    ld [wMode06_State21_D8E0], a                  ; $5986
+    ld [wMode07_StateTable_D8E0], a               ; $5986
     scf                                           ; $5989
     ret                                           ; $598A
 
@@ -2192,7 +2214,7 @@ ObjScript_02_598B_Mode0E_KittGamesHost_State08::
     INCBIN "data/bank_02/ObjScript_02_598B_Mode0E_KittGamesHost_State08.bin" ; $598B, 358 bytes
 ; C: restarts the object script 02:5AFF when $D8F4 changes; runs in the Play menu (mode $04)
 PlayMenu_ObjFollowItem::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $5AF1
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $5AF1
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5AF4
     cp [hl]                                       ; $5AF7
     ld de, ObjScript_02_5AFF_PlayMenu_ObjFollowItem; $5AF8
@@ -2212,7 +2234,7 @@ ObjScript_02_5AFF_PlayMenu_ObjFollowItem::
 PlayMenu_ObjItemRecord::
     push hl                                       ; $5B0D
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5B0E
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $5B11
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $5B11
     sla a                                         ; $5B13
     sla a                                         ; $5B15
     ld c, a                                       ; $5B17
@@ -2220,7 +2242,7 @@ PlayMenu_ObjItemRecord::
     ld hl, ObjScript_02_5B35_PlayMenu_ObjItemRecord; $5B1A
     add hl, bc                                    ; $5B1D
     ld a, [hl+]                                   ; $5B1E
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5B1F
+    ldh [hMode07_StateTable_FFD2], a              ; $5B1F
     ld a, [hl+]                                   ; $5B21
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $5B22
     ld a, [hl+]                                   ; $5B24
@@ -2274,7 +2296,7 @@ ObjScript_02_5B67_Title_ObjKeys::
 ; C: $D8E0 = 4 (script callback)
 Obj_SetD8E0Four_C::
     ld a, $04                                     ; $5B77
-    ld [wMode06_State21_D8E0], a                  ; $5B79
+    ld [wMode07_StateTable_D8E0], a               ; $5B79
     scf                                           ; $5B7C
     ret                                           ; $5B7D
 
@@ -2282,7 +2304,7 @@ Obj_SetD8E0Four_C::
 ; C: $D8E0 = 0
 Obj_ClearD8E0_B::
     xor a                                         ; $5B7E
-    ld [wMode06_State21_D8E0], a                  ; $5B7F
+    ld [wMode07_StateTable_D8E0], a               ; $5B7F
     ret                                           ; $5B82
 
 
@@ -2299,7 +2321,7 @@ ObjScript_02_5B83_Mode00_BootAndTitle_State00::
 
 ; C: skips two script bytes when $D8F4 equals hFFD8; code read; runs on the title and the main menu
 Menu_ObjSkipIfSameItem::
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $5BD9
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $5BD9
     ld c, a                                       ; $5BDB
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5BDC
     cp c                                          ; $5BDF
@@ -2359,7 +2381,7 @@ jr_002_5c0e:
 ; (port/entry_modes_kitty.csv); code read
 MainMenu_ObjTick::
     call Menu_EndOnStart                          ; $5C0F
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $5C12
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $5C12
     ld c, a                                       ; $5C14
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5C15
     cp c                                          ; $5C18
@@ -2399,7 +2421,7 @@ MainMenu_ObjTickB::
     call Menu_EndOnStart                          ; $5CB3
     ld a, [wMenu07_CursorUpdate_D8F4]             ; $5CB6
     ld c, a                                       ; $5CB9
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $5CBA
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $5CBA
     cp c                                          ; $5CBC
     jr z, jr_002_5ccd                             ; $5CBD
 
@@ -2438,7 +2460,7 @@ Obj_BlockKeys::
     ld a, $01                                     ; $5D73
     ld [wFadeRunning], a                          ; $5D75
     xor a                                         ; $5D78
-    ld [wMode06_State21_D8E0], a                  ; $5D79
+    ld [wMode07_StateTable_D8E0], a               ; $5D79
     ret                                           ; $5D7C
 
 
@@ -2449,7 +2471,7 @@ MainMenu_PickMode01::
     ld a, $01                                     ; $5D81
     ldh [hMenuState], a                           ; $5D83
     ld a, $01                                     ; $5D85
-    ld [wMode06_State21_D8E0], a                  ; $5D87
+    ld [wMode07_StateTable_D8E0], a               ; $5D87
     xor a                                         ; $5D8A
     ld [wFadeRunning], a                          ; $5D8B
     scf                                           ; $5D8E
@@ -2519,7 +2541,7 @@ TakePhotos_ObjPosDelta::
     bit PADB_START, a                             ; $5E97
     jp z, Obj_End                                 ; $5E99
 
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $5E9C
+    ldh a, [hMode07_StateTable_FFD3]              ; $5E9C
     xor $ff                                       ; $5E9E
     ld e, a                                       ; $5EA0
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $5EA1
@@ -2590,7 +2612,7 @@ TakePhotos_ObjPosFromDA1E::
     add $20                                       ; $5EF3
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $5EF5
     ld a, $98                                     ; $5EF7
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5EF9
+    ldh [hMode07_StateTable_FFD2], a              ; $5EF9
     pop hl                                        ; $5EFB
     scf                                           ; $5EFC
     ret                                           ; $5EFD
@@ -2615,7 +2637,7 @@ TakePhotos_ObjPosFromDA1F::
     call Mul_8x16                                 ; $5F25
     ld a, h                                       ; $5F28
     add $20                                       ; $5F29
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $5F2B
+    ldh [hMode07_StateTable_FFD2], a              ; $5F2B
     ret                                           ; $5F2D
 
 
@@ -2793,9 +2815,9 @@ ObjScript_02_5FF8_Mode02_TakePhotos_State08::
 
 ; C: hFFD8 + 1; ends at $78 frames or on a key; code read; runs in the camera view
 Obj_Timeout78::
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $60C8
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $60C8
     inc a                                         ; $60CA
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $60CB
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $60CB
     cp $78                                        ; $60CD
     jp z, Obj_End                                 ; $60CF
 
@@ -3151,7 +3173,7 @@ Obj_ShowBgClearD8E0::
     ld hl, wMode06_State0E_D8D3                   ; $64C9
     res 6, [hl]                                   ; $64CC
     xor a                                         ; $64CE
-    ld [wMode06_State21_D8E0], a                  ; $64CF
+    ld [wMode07_StateTable_D8E0], a               ; $64CF
     ret                                           ; $64D2
 
 
@@ -3160,7 +3182,7 @@ Printing_ObjToState05::
     ld a, $05                                     ; $64D3
     ldh [hState], a                               ; $64D5
     ld a, $02                                     ; $64D7
-    ld [wMode06_State21_D8E0], a                  ; $64D9
+    ld [wMode07_StateTable_D8E0], a               ; $64D9
     scf                                           ; $64DC
     ret                                           ; $64DD
 
@@ -3560,11 +3582,11 @@ jr_002_6b9f:
     ldh [hCopyReqSrcDstCnt + $3], a               ; $6BA3
     ld a, [wStamp_ObjPlaceOnStart_D9AD]           ; $6BA5
     ld e, a                                       ; $6BA8
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6BA9
+    ldh a, [hMode07_StateTable_FFD2]              ; $6BA9
     sub e                                         ; $6BAB
     jp c, Jump_002_6ae1                           ; $6BAC
 
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6BAF
+    ldh a, [hMode07_StateTable_FFD2]              ; $6BAF
     add e                                         ; $6BB1
     cp $a0                                        ; $6BB2
     jp nc, Jump_002_6ae1                          ; $6BB4
@@ -3590,7 +3612,7 @@ jr_002_6b9f:
     pop af                                        ; $6BD6
     ld hl, wStamp_ObjPlaceOnStart_D993            ; $6BD7
     set 2, [hl]                                   ; $6BDA
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6BDC
+    ldh a, [hMode07_StateTable_FFD2]              ; $6BDC
     ld [wStamp_ObjPlaceOnStart_D9AB], a           ; $6BDE
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $6BE1
     ld [wStamp_ObjPlaceOnStart_D9AC], a           ; $6BE3
@@ -3636,7 +3658,7 @@ Stamp_ObjClampX::
     push hl                                       ; $6C0A
     ld a, [wStamp_ObjPlaceOnStart_D9AD]           ; $6C0B
     ld e, a                                       ; $6C0E
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6C0F
+    ldh a, [hMode07_StateTable_FFD2]              ; $6C0F
     ld c, a                                       ; $6C11
     sub e                                         ; $6C12
     jr c, jr_002_6c1d                             ; $6C13
@@ -3652,7 +3674,7 @@ jr_002_6c1d:
     xor $ff                                       ; $6C1D
     inc a                                         ; $6C1F
     add c                                         ; $6C20
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $6C21
+    ldh [hMode07_StateTable_FFD2], a              ; $6C21
 
 jr_002_6c23:
     ld a, [wStamp_ObjPlaceOnStart_D9AE]           ; $6C23
@@ -3715,15 +3737,15 @@ jr_002_6ca2:
     ld e, a                                       ; $6CA5
     ld a, [wStamp_ObjPlaceOnStart_D9AE]           ; $6CA6
     ld d, a                                       ; $6CA9
-    ld a, [wObject_RunAll_DC5E]                   ; $6CAA
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E] ; $6CAA
     ld l, a                                       ; $6CAD
-    ld a, [wObject_RunAll_DC5F]                   ; $6CAE
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F] ; $6CAE
     ld h, a                                       ; $6CB1
     ld bc, hScratch_ObjPlace_FFF8                 ; $6CB2
     add hl, bc                                    ; $6CB5
     ld a, [hl+]                                   ; $6CB6
     sub e                                         ; $6CB7
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $6CB8
+    ldh [hMode07_StateTable_FFD2], a              ; $6CB8
     inc hl                                        ; $6CBA
     ld a, [hl+]                                   ; $6CBB
     sub d                                         ; $6CBC
@@ -3780,7 +3802,7 @@ Stamp_ObjSlideIn::
     jr c, jr_002_6d5c                             ; $6D2A
 
     xor a                                         ; $6D2C
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $6D2D
+    ldh [hMode07_StateTable_FFD3], a              ; $6D2D
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $6D2F
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $6D31
     xor $ff                                       ; $6D33
@@ -3839,7 +3861,7 @@ Stamp_ObjSlideOut::
     jr c, jr_002_6db8                             ; $6D7D
 
     xor a                                         ; $6D7F
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $6D80
+    ldh [hMode07_StateTable_FFD3], a              ; $6D80
     ld a, $39                                     ; $6D82
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $6D84
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $6D86
@@ -3903,7 +3925,7 @@ ObjScript_02_6DD0_Mode05_StampWindow_State06::
 ; C: the distance between the object position and its target; runs on its screen (06:0D) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 Printing_ObjPosDelta::
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $6E06
+    ldh a, [hMode07_StateTable_FFD3]              ; $6E06
     xor $ff                                       ; $6E08
     ld e, a                                       ; $6E0A
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $6E0B
@@ -3982,7 +4004,7 @@ Printing_ObjPosFromDAD6::
     add $18                                       ; $6E6E
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $6E70
     ld a, $90                                     ; $6E72
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $6E74
+    ldh [hMode07_StateTable_FFD2], a              ; $6E74
     pop hl                                        ; $6E76
     scf                                           ; $6E77
     ret                                           ; $6E78
@@ -4054,7 +4076,7 @@ AppleGame_ObjKeys::
 
 
 jr_002_6f4d:
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6F4D
+    ldh a, [hMode07_StateTable_FFD2]              ; $6F4D
     cp $d0                                        ; $6F4F
     jr z, jr_002_6f57                             ; $6F51
 
@@ -4082,7 +4104,7 @@ ObjScript_02_6F60_Mode06_Printing_State1F::
 
 ; C: $D886 = $49 - hFFD2; runs on its screen (06:1B) in the core replays (port/entry_modes_kitty.csv); code read
 AppleGame_ObjSetD886::
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6F9E
+    ldh a, [hMode07_StateTable_FFD2]              ; $6F9E
     xor $ff                                       ; $6FA0
     add $49                                       ; $6FA2
     ld [wScxShadow], a                            ; $6FA4
@@ -4092,7 +4114,7 @@ AppleGame_ObjSetD886::
 ; C: by the frame hFFD2 ($C0, $C1, $C2 ...); runs on its screen (06:20) in the core replays
 ; (port/entry_modes_kitty.csv); code read
 AppleGame_ObjFruitKind::
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6FA8
+    ldh a, [hMode07_StateTable_FFD2]              ; $6FA8
     cp $c0                                        ; $6FAA
     jr z, jr_002_6fba                             ; $6FAC
 
@@ -4107,7 +4129,7 @@ AppleGame_ObjFruitKind::
 
 jr_002_6fba:
     ld a, $04                                     ; $6FBA
-    ld [wMode06_State21_D8E0], a                  ; $6FBC
+    ld [wMode07_StateTable_D8E0], a               ; $6FBC
     xor a                                         ; $6FBF
     ldh [hCopyReqSrcDstCnt], a                    ; $6FC0
     ldh [hCopyReqSrcDstCnt + $1], a               ; $6FC2
@@ -4134,7 +4156,7 @@ AppleGame_ObjCatch::
 
 jr_002_6fdc:
     call AppleGame_ObjSetD886                     ; $6FDC
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $6FDF
+    ldh a, [hMode07_StateTable_FFD2]              ; $6FDF
     cp $d0                                        ; $6FE1
     jr z, jr_002_6fe9                             ; $6FE3
 
@@ -4143,7 +4165,7 @@ jr_002_6fdc:
 
 jr_002_6fe9:
     ld a, $08                                     ; $6FE9
-    ld [wMode06_State21_D8E0], a                  ; $6FEB
+    ld [wMode07_StateTable_D8E0], a               ; $6FEB
     xor a                                         ; $6FEE
     ldh [hCopyReqSrcDstCnt], a                    ; $6FEF
     ldh [hCopyReqSrcDstCnt + $1], a               ; $6FF1
@@ -4156,7 +4178,7 @@ jr_002_6ff6:
     jr z, jr_002_701d                             ; $6FFB
 
     ld a, $02                                     ; $6FFD
-    ld [wMode06_State21_D8E0], a                  ; $6FFF
+    ld [wMode07_StateTable_D8E0], a               ; $6FFF
     push af                                       ; $7002
     ld a, SFX3_09                                 ; $7003
     ld [wSndSfx3], a                              ; $7005
@@ -4180,7 +4202,7 @@ jr_002_701d:
 ; C: $D8E0 = 0
 Obj_ClearD8E0_C::
     xor a                                         ; $701E
-    ld [wMode06_State21_D8E0], a                  ; $701F
+    ld [wMode07_StateTable_D8E0], a               ; $701F
     ret                                           ; $7022
 
 
@@ -4194,7 +4216,7 @@ ObjScript_02_7023_Mode06_Printing_State1F::
 ; states $23 / $24); code read
 PrintGame_ObjCheckLanded::
     call AppleGame_ObjSetD886                     ; $7029
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $702C
+    ldh a, [hMode07_StateTable_FFD2]              ; $702C
     cp $d0                                        ; $702E
     jr z, jr_002_7036                             ; $7030
 
@@ -4203,7 +4225,7 @@ PrintGame_ObjCheckLanded::
 
 jr_002_7036:
     ld a, $08                                     ; $7036
-    ld [wMode06_State21_D8E0], a                  ; $7038
+    ld [wMode07_StateTable_D8E0], a               ; $7038
     xor a                                         ; $703B
     ldh [hCopyReqSrcDstCnt], a                    ; $703C
     ldh [hCopyReqSrcDstCnt + $1], a               ; $703E
@@ -4220,14 +4242,55 @@ ObjScript_02_7044_PrintGame_ObjCheckLanded::
     db $b9, $7f, $1e, $70, $3a, $1f, $08, $10, $1e, $1f, $14, $46, $58, $70, $b9, $7f
     db $b9, $7f
 
-    db $21, $f0, $ff, $09, $4d, $44, $c9, $cd, $a2, $73, $cd, $66, $70, $cd, $a9, $73
-    db $f0, $d4, $fe, $f0, $d2, $12, $22, $c9, $e5, $f0, $d4, $d6, $28, $cb, $2f, $cb
-    db $2f, $cb, $2f, $e0, $d8, $4f, $06, $00, $21, $a7, $70, $09, $fa, $4f, $d9, $86
-    db $ea, $4f, $d9, $11, $a0, $97, $06, $01, $21, $d4, $67, $cd, $65, $01, $e1, $37
-    db $c9, $04, $04, $04, $03, $03, $03, $02, $02, $02, $01, $01, $01, $01, $7e, $70
-    db $7f, $1f, $00, $01, $09, $20, $d8, $ff, $94, $46, $94, $46, $94, $46, $88, $46
-    db $88, $46, $88, $46, $7c, $46, $7c, $46, $7c, $46, $70, $46, $70, $46, $70, $46
-    db $70, $46, $b4, $70, $6d, $70, $b9, $7f
+Call_002_7066:
+    ld hl, hStamp_ObjPlaceOnStart_FFF0            ; $7066
+    add hl, bc                                    ; $7069
+    ld c, l                                       ; $706A
+    ld b, h                                       ; $706B
+    ret                                           ; $706C
+
+
+    call Obj_GetSpriteBC                          ; $706D
+    call Call_002_7066                            ; $7070
+    call Obj_SetSpriteBC                          ; $7073
+    ldh a, [hStamp_ObjSlideIn_FFD4]               ; $7076
+    cp $f0                                        ; $7078
+    jp nc, Obj_End                                ; $707A
+
+    ret                                           ; $707D
+
+
+    push hl                                       ; $707E
+    ldh a, [hStamp_ObjSlideIn_FFD4]               ; $707F
+    sub $28                                       ; $7081
+    sra a                                         ; $7083
+    sra a                                         ; $7085
+    sra a                                         ; $7087
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $7089
+    ld c, a                                       ; $708B
+    ld b, $00                                     ; $708C
+    ld hl, ObjScript_02_7044_PrintGame_ObjCheckLanded + $63 ; $708E
+    add hl, bc                                    ; $7091
+    ld a, [wMode06_State23_D94F]                  ; $7092
+    add [hl]                                      ; $7095
+    ld [wMode06_State23_D94F], a                  ; $7096
+    ld de, $97a0                                  ; $7099
+    ld b, BANK(Number_DrawTwoDigits)              ; $709C
+    ld hl, Number_DrawTwoDigits                   ; $709E
+    call Far_CallKeepA                            ; $70A1
+    pop hl                                        ; $70A4
+    scf                                           ; $70A5
+    ret                                           ; $70A6
+
+
+    db $04, $04
+
+; C: read in the runs by ObjCmd_JumpByByte, PrintGame_ObjCheckLanded, Object_RunAll
+ObjScript_02_70A9_PrintGame_ObjCheckLanded::
+    db $04, $03, $03, $03, $02, $02, $02, $01, $01, $01, $01, $7e, $70, $7f, $1f, $00
+    db $01, $09, $20, $d8, $ff, $94, $46, $94, $46, $94, $46, $88, $46, $88, $46, $88
+    db $46, $7c, $46, $7c, $46, $7c, $46, $70, $46, $70, $46, $70, $46, $70, $46, $b4
+    db $70, $6d, $70, $b9, $7f
 
 ; C: is the fruit within 8 pixels of Kitty ($D94D / $D94E); first run in the core replays of tools/kitty_core_paths.py
 ; (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 / $24); code read
@@ -4237,7 +4300,7 @@ PrintGame_ObjCheckCatch::
     ld c, a                                       ; $70E3
     sub $10                                       ; $70E4
     ld b, a                                       ; $70E6
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $70E7
+    ldh a, [hMode07_StateTable_FFD2]              ; $70E7
     sub $08                                       ; $70E9
     cp c                                          ; $70EB
     ret nc                                        ; $70EC
@@ -4309,12 +4372,12 @@ PrintGame_ObjFall::
     jr c, jr_002_7156                             ; $712E
 
     xor a                                         ; $7130
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $7131
+    ldh [hMode07_StateTable_FFD3], a              ; $7131
     ld a, $78                                     ; $7133
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $7135
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $7137
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $7137
     inc a                                         ; $7139
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $713A
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $713A
     cp $03                                        ; $713C
     jr nc, jr_002_7153                            ; $713E
 
@@ -4344,8 +4407,8 @@ jr_002_7156:
     ld [wSndSfx1], a                              ; $7161
     pop af                                        ; $7164
     call Obj_End                                  ; $7165
-    ld de, ObjScript_02_7044_PrintGame_ObjCheckLanded + $94 ; $7168
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $716B
+    ld de, ObjScript_02_70A9_PrintGame_ObjCheckLanded + $2F ; $7168
+    ldh a, [hMode07_StateTable_FFD2]              ; $716B
     ld c, a                                       ; $716D
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $716E
     ld b, a                                       ; $7170
@@ -4366,7 +4429,7 @@ PrintGame_ObjRandomStart::
     ld a, [wPrintGame_SaveKittyPos_D94C]          ; $717C
     add c                                         ; $717F
     add $10                                       ; $7180
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $7182
+    ldh [hMode07_StateTable_FFD2], a              ; $7182
     call Rng_Next                                 ; $7184
     and $0f                                       ; $7187
     add $28                                       ; $7189
@@ -4433,15 +4496,15 @@ Obj_GetSpeed::
 ; tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 /
 ; $24); code read
 PrintGame_ClampX::
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $737B
+    ldh a, [hMode07_StateTable_FFD2]              ; $737B
     cp $08                                        ; $737D
     jr nc, jr_002_738c                            ; $737F
 
     ld bc, $0000                                  ; $7381
     ld a, $00                                     ; $7384
-    ldh [hPlayMenu_CursorUpdate_FFD1], a          ; $7386
+    ldh [hMode07_StateTable_FFD1], a              ; $7386
     ld a, $08                                     ; $7388
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $738A
+    ldh [hMode07_StateTable_FFD2], a              ; $738A
 
 jr_002_738c:
     cp $98                                        ; $738C
@@ -4449,9 +4512,9 @@ jr_002_738c:
 
     ld bc, $0000                                  ; $7390
     ld a, $ff                                     ; $7393
-    ldh [hPlayMenu_CursorUpdate_FFD1], a          ; $7395
+    ldh [hMode07_StateTable_FFD1], a              ; $7395
     ld a, $97                                     ; $7397
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $7399
+    ldh [hMode07_StateTable_FFD2], a              ; $7399
 
 jr_002_739b:
     ld a, c                                       ; $739B
@@ -4481,8 +4544,26 @@ Obj_SetSpriteBC::
     ret                                           ; $73AF
 
 
-    db $cb, $78, $28, $09, $21, $80, $01, $09, $d8, $01, $80, $fe, $c9, $21, $80, $fe
-    db $09, $d0, $01, $80, $01, $c9
+Call_002_73b0:
+    bit 7, b                                      ; $73B0
+    jr z, jr_002_73bd                             ; $73B2
+
+    ld hl, $0180                                  ; $73B4
+    add hl, bc                                    ; $73B7
+    ret c                                         ; $73B8
+
+    ld bc, $fe80                                  ; $73B9
+    ret                                           ; $73BC
+
+
+jr_002_73bd:
+    ld hl, $fe80                                  ; $73BD
+    add hl, bc                                    ; $73C0
+    ret nc                                        ; $73C1
+
+    ld bc, $0180                                  ; $73C2
+    ret                                           ; $73C5
+
 
 ; C: Left / Right held ($D8D8 bits 5 / 4): the speed BC - 8 / + 8, kept in range; first run in the core replays of
 ; tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game, mode $06 states $23 /
@@ -4582,11 +4663,11 @@ jr_002_744c:
 ; the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end with the fruit game,
 ; mode $06 states $23 / $24); code read
 PrintGame_SaveKittyPos::
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $744D
+    ldh a, [hMode07_StateTable_FFD2]              ; $744D
     ld [wPrintGame_ObjCheckCatch_D94D], a         ; $744F
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $7452
     ld [wPrintGame_ObjCheckCatch_D94E], a         ; $7454
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $7457
+    ldh a, [hMode07_StateTable_FFD2]              ; $7457
     sub $50                                       ; $7459
     jr c, jr_002_7465                             ; $745B
 
@@ -4609,10 +4690,46 @@ jr_002_746a:
     ret                                           ; $746F
 
 
-    db $cd, $74, $73, $cd, $c6, $73, $cd, $7b, $73, $cd, $4d, $74, $fa, $d9, $d8, $cb
-    db $47, $28, $0e, $f5, $3e, $3a, $ea, $60, $d0, $f1, $11, $6e, $76, $cd, $05, $22
-    db $c9, $78, $b1, $28, $07, $11, $1e, $76, $cd, $05, $22, $c9, $fa, $d9, $d8, $cb
-    db $4f, $28, $07, $11, $53, $77, $cd, $05, $22, $c9, $c9
+    call Obj_GetSpeed                             ; $7470
+    call PrintGame_SpeedFromKeys                  ; $7473
+    call PrintGame_ClampX                         ; $7476
+    call PrintGame_SaveKittyPos                   ; $7479
+    ld a, [wKeysNew]                              ; $747C
+    bit PADB_A, a                                 ; $747F
+    jr z, jr_002_7491                             ; $7481
+
+    push af                                       ; $7483
+    ld a, SFX1_3A                                 ; $7484
+    ld [wSndSfx1], a                              ; $7486
+    pop af                                        ; $7489
+    ld de, $766e                                  ; $748A
+    call Call_000_2205                            ; $748D
+    ret                                           ; $7490
+
+
+jr_002_7491:
+    ld a, b                                       ; $7491
+    or c                                          ; $7492
+    jr z, jr_002_749c                             ; $7493
+
+    ld de, $761e                                  ; $7495
+    call Call_000_2205                            ; $7498
+    ret                                           ; $749B
+
+
+jr_002_749c:
+    ld a, [wKeysNew]                              ; $749C
+    bit PADB_B, a                                 ; $749F
+    jr z, jr_002_74aa                             ; $74A1
+
+    ld de, $7753                                  ; $74A3
+    call Call_000_2205                            ; $74A6
+    ret                                           ; $74A9
+
+
+jr_002_74aa:
+    ret                                           ; $74AA
+
 
 ; C: Kitty: speed from the keys, x clamped, position saved; A ($D8D9 bit 0) jumps (sound $3A on channel 1, script
 ; 02:7686); first run in the core replays of tools/kitty_core_paths.py (port/cov_kitty_paths.npz: the prints that end
@@ -4630,7 +4747,7 @@ PrintGame_ObjKitty::
     ld a, SFX1_3A                                 ; $74BF
     ld [wSndSfx1], a                              ; $74C1
     pop af                                        ; $74C4
-    ld de, ObjScript_02_7686_PrintGame_ObjKitty   ; $74C5
+    ld de, $7686                                  ; $74C5
     call Call_000_2205                            ; $74C8
     ret                                           ; $74CB
 
@@ -4659,15 +4776,97 @@ jr_002_74e5:
     ret                                           ; $74E5
 
 
-    db $cd, $74, $73, $cd, $c6, $73, $cd, $b0, $73, $cd, $7b, $73, $cd, $4d, $74, $fa
-    db $d9, $d8, $cb, $47, $28, $0e, $f5, $3e, $3a, $ea, $60, $d0, $f1, $11, $6e, $76
-    db $cd, $05, $22, $c9, $fa, $d8, $d8, $cb, $67, $28, $07, $11, $46, $76, $cd, $05
-    db $22, $c9, $fa, $d8, $d8, $cb, $6f, $20, $0b, $78, $b1, $20, $07, $11, $fe, $75
-    db $cd, $05, $22, $c9, $c9, $cd, $74, $73, $cd, $c6, $73, $cd, $b0, $73, $cd, $7b
-    db $73, $cd, $4d, $74, $fa, $d9, $d8, $cb, $47, $28, $0e, $f5, $3e, $3a, $ea, $60
-    db $d0, $f1, $11, $86, $76, $cd, $05, $22, $c9, $fa, $d8, $d8, $cb, $6f, $28, $07
-    db $11, $1e, $76, $cd, $05, $22, $c9, $fa, $d8, $d8, $cb, $67, $20, $0b, $78, $b1
-    db $20, $07, $11, $0e, $76, $cd, $05, $22, $c9, $c9
+    call Obj_GetSpeed                             ; $74E6
+    call PrintGame_SpeedFromKeys                  ; $74E9
+    call Call_002_73b0                            ; $74EC
+    call PrintGame_ClampX                         ; $74EF
+    call PrintGame_SaveKittyPos                   ; $74F2
+    ld a, [wKeysNew]                              ; $74F5
+    bit PADB_A, a                                 ; $74F8
+    jr z, jr_002_750a                             ; $74FA
+
+    push af                                       ; $74FC
+    ld a, SFX1_3A                                 ; $74FD
+    ld [wSndSfx1], a                              ; $74FF
+    pop af                                        ; $7502
+    ld de, $766e                                  ; $7503
+    call Call_000_2205                            ; $7506
+    ret                                           ; $7509
+
+
+jr_002_750a:
+    ld a, [wKeysHeld]                             ; $750A
+    bit PADB_RIGHT, a                             ; $750D
+    jr z, jr_002_7518                             ; $750F
+
+    ld de, $7646                                  ; $7511
+    call Call_000_2205                            ; $7514
+    ret                                           ; $7517
+
+
+jr_002_7518:
+    ld a, [wKeysHeld]                             ; $7518
+    bit PADB_LEFT, a                              ; $751B
+    jr nz, jr_002_752a                            ; $751D
+
+    ld a, b                                       ; $751F
+    or c                                          ; $7520
+    jr nz, jr_002_752a                            ; $7521
+
+    ld de, $75fe                                  ; $7523
+    call Call_000_2205                            ; $7526
+    ret                                           ; $7529
+
+
+jr_002_752a:
+    ret                                           ; $752A
+
+
+    call Obj_GetSpeed                             ; $752B
+    call PrintGame_SpeedFromKeys                  ; $752E
+    call Call_002_73b0                            ; $7531
+    call PrintGame_ClampX                         ; $7534
+    call PrintGame_SaveKittyPos                   ; $7537
+    ld a, [wKeysNew]                              ; $753A
+    bit PADB_A, a                                 ; $753D
+    jr z, jr_002_754f                             ; $753F
+
+    push af                                       ; $7541
+    ld a, SFX1_3A                                 ; $7542
+    ld [wSndSfx1], a                              ; $7544
+    pop af                                        ; $7547
+    ld de, $7686                                  ; $7548
+    call Call_000_2205                            ; $754B
+    ret                                           ; $754E
+
+
+jr_002_754f:
+    ld a, [wKeysHeld]                             ; $754F
+    bit PADB_LEFT, a                              ; $7552
+    jr z, jr_002_755d                             ; $7554
+
+    ld de, $761e                                  ; $7556
+    call Call_000_2205                            ; $7559
+    ret                                           ; $755C
+
+
+jr_002_755d:
+    ld a, [wKeysHeld]                             ; $755D
+    bit PADB_RIGHT, a                             ; $7560
+    jr nz, jr_002_756f                            ; $7562
+
+    ld a, b                                       ; $7564
+    or c                                          ; $7565
+    jr nz, jr_002_756f                            ; $7566
+
+    ld de, $760e                                  ; $7568
+    call Call_000_2205                            ; $756B
+    ret                                           ; $756E
+
+
+jr_002_756f:
+    ret                                           ; $756F
+
 
 Call_002_7570:
     ld hl, $0040                                  ; $7570
@@ -4677,10 +4876,36 @@ Call_002_7570:
     ret                                           ; $7576
 
 
-    db $cd, $a2, $73, $cd, $70, $75, $fa, $d8, $d8, $cb, $47, $20, $07, $cb, $78, $28
-    db $03, $01, $00, $00, $f0, $d4, $fe, $78, $38, $0d, $3e, $78, $e0, $d4, $01, $00
-    db $00, $11, $fe, $75, $cd, $05, $22, $cd, $a9, $73, $cd, $74, $73, $cd, $30, $74
-    db $cd, $7b, $73, $cd, $4d, $74, $c9
+    call Obj_GetSpriteBC                          ; $7577
+    call Call_002_7570                            ; $757A
+    ld a, [wKeysHeld]                             ; $757D
+    bit PADB_A, a                                 ; $7580
+    jr nz, jr_002_758b                            ; $7582
+
+    bit 7, b                                      ; $7584
+    jr z, jr_002_758b                             ; $7586
+
+    ld bc, $0000                                  ; $7588
+
+jr_002_758b:
+    ldh a, [hStamp_ObjSlideIn_FFD4]               ; $758B
+    cp $78                                        ; $758D
+    jr c, jr_002_759e                             ; $758F
+
+    ld a, $78                                     ; $7591
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $7593
+    ld bc, $0000                                  ; $7595
+    ld de, $75fe                                  ; $7598
+    call Call_000_2205                            ; $759B
+
+jr_002_759e:
+    call Obj_SetSpriteBC                          ; $759E
+    call Obj_GetSpeed                             ; $75A1
+    call Call_002_7430                            ; $75A4
+    call PrintGame_ClampX                         ; $75A7
+    call PrintGame_SaveKittyPos                   ; $75AA
+    ret                                           ; $75AD
+
 
     call Obj_GetSpriteBC                          ; $75AE
     call Call_002_7570                            ; $75B1
@@ -4729,59 +4954,16 @@ Obj_SetD94D::
     ret                                           ; $75EF
 
 
-; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_Jump
+; C: read in the runs by Object_RunAll, ObjCmd_Jump, ObjCmd_SetCallback
 ObjScript_02_75F0_Object_RunAll::
-    db $f6, $75, $b9, $7f, $e5, $75, $3a, $1f, $50, $78, $1e, $1f, $0e, $76, $16, $1f
-    db $70, $74, $0c, $80, $50, $62, $40, $80, $50, $62, $1e, $1f, $9e, $76, $16, $1f
-    db $ab, $74, $0c, $80, $c4, $61, $40, $80, $c4, $61, $1e, $1f, $9e, $76
-
-; I: leftover: 104 bytes (02:761E-7685) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_761E::
-    db $16, $1f, $e6, $74, $04, $80, $50, $62, $04, $80, $6c, $62, $06, $80, $88, $62
-    db $04, $80, $6c, $62, $04, $80, $50, $62, $04, $80, $a4, $62, $06, $80, $c0, $62
-    db $04, $80, $a4, $62, $1e, $1f, $22, $76, $16, $1f, $2b, $75, $04, $80, $c4, $61
-    db $04, $80, $e0, $61, $06, $80, $fc, $61, $04, $80, $e0, $61, $04, $80, $c4, $61
-    db $04, $80, $18, $62, $06, $80, $34, $62, $04, $80, $18, $62, $1e, $1f, $4a, $76
-    db $7f, $1f, $00, $fb, $16, $1f, $77, $75, $04, $80, $50, $62, $04, $80, $6c, $62
-    db $04, $80, $88, $62, $1e, $1f, $7e, $76
-
-; C: named by the code of PrintGame_ObjKitty (02:74C5); read in the runs by Object_RunAll, ObjCmd_JumpRandom,
-; ObjCmd_SetSprite
-ObjScript_02_7686_PrintGame_ObjKitty::
-    db $7f, $1f, $00, $fb, $16, $1f, $ae, $75, $04, $80, $c4, $61, $04, $80, $e0, $61
-    db $04, $80, $fc, $61, $1e, $1f, $96, $76, $10, $80, $dc, $62, $f8, $1f, $05, $af
-    db $76, $bb, $76, $cf, $76, $eb, $76, $ff, $76, $04, $80, $fc, $62, $70, $80, $dc
-    db $62
-
-    db $1e, $1f, $af, $76, $04, $80, $fc, $62, $04, $80, $dc, $62, $04, $80, $fc, $62
-    db $70, $80, $dc, $62, $1e, $1f, $bb, $76
-
-; C: read in the runs by Object_RunAll, ObjCmd_Jump
-ObjScript_02_76CF_Object_RunAll::
-    db $70, $80, $7c, $63
-
-    db $04, $80, $dc, $63, $04, $80, $7c, $63, $04, $80, $dc, $63, $60, $80, $7c, $63
-    db $60, $80, $dc, $62, $1e, $1f, $cf, $76
-
-; C: read in the runs by Object_RunAll
-ObjScript_02_76EB_Object_RunAll::
-    db $08, $80, $c4, $61, $08, $80, $dc, $62
-
-; I: leftover: 50 bytes (02:76F3-7724) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_76F3::
-    db $08, $80, $50, $62, $58, $80, $dc, $62, $1e, $1f, $eb, $76, $08, $80, $1c, $64
-    db $08, $80, $dc, $62, $08, $80, $3c, $64, $58, $80, $dc, $62, $1e, $1f, $ff, $76
-    db $e5, $fa, $d8, $da, $11, $d0, $97, $06, $01, $21, $d4, $67, $cd, $65, $01, $e1
-    db $37, $c9
-
+    INCBIN "data/bank_02/ObjScript_02_75F0_Object_RunAll.bin" ; $75F0, 309 bytes
 ; C: named by the code of PrintGame_ShowResult (02:77CF); read in the runs by Object_RunAll, ObjCmd_Jump
 ObjScript_02_7725_PrintGame_ShowResult::
     db $08, $80, $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $08, $80, $dc, $62
     db $08, $80, $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $10, $80, $dc, $62
-    db $28, $80, $fc, $63
-
-    db $13, $77, $70, $80, $dc, $62, $1e, $1f, $25, $77, $08, $80, $1c, $63, $08, $80
-    db $dc, $62, $08, $80, $1c, $63, $08, $80, $dc, $62, $1e, $1f, $53, $77
+    db $28, $80, $fc, $63, $13, $77, $70, $80, $dc, $62, $1e, $1f, $25, $77, $08, $80
+    db $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $08, $80, $dc, $62, $1e, $1f
+    db $53, $77
 
 ; I: leftover: 44 bytes (02:7767-7792) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_02_7767::
@@ -4866,10 +5048,10 @@ jr_002_77fa:
     ld hl, AlbumText_ObjCursor_Tbl781D            ; $7802
     add hl, bc                                    ; $7805
     ld a, [hl+]                                   ; $7806
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $7807
+    ldh [hMode07_StateTable_FFD2], a              ; $7807
     ld a, [hl+]                                   ; $7809
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $780A
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $780C
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $780C
     ld a, [wAlbumText_CursorUpdate_D98C]          ; $780F
     cp [hl]                                       ; $7812
     ld [hl], a                                    ; $7813
@@ -4911,7 +5093,7 @@ AlbumText_ObjSlideIn::
     jr c, jr_002_7895                             ; $7863
 
     xor a                                         ; $7865
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $7866
+    ldh [hMode07_StateTable_FFD3], a              ; $7866
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $7868
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $786A
     xor $ff                                       ; $786C
@@ -4970,7 +5152,7 @@ AlbumText_ObjSlideOut::
     jr c, jr_002_78e9                             ; $78B6
 
     xor a                                         ; $78B8
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $78B9
+    ldh [hMode07_StateTable_FFD3], a              ; $78B9
     ld a, $39                                     ; $78BB
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $78BD
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $78BF
@@ -5039,7 +5221,7 @@ AlbumText_ObjCursorCallback::
 ; C: hFFD2 / hFFD4 = $D990 / $D991, HL = 02:4858 (script callback)
 AlbumText_ObjPosFromD990::
     ld a, [wAlbumText_ObjPosFromD990]             ; $7944
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $7947
+    ldh [hMode07_StateTable_FFD2], a              ; $7947
     ld a, [wAlbumText_CursorUpdate_D991]          ; $7949
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $794C
     ld hl, $4858                                  ; $794E
@@ -5175,10 +5357,10 @@ NameCardEdit_ObjFieldTick::
     ld b, $00                                     ; $7A0E
     add hl, bc                                    ; $7A10
     ld a, [hl+]                                   ; $7A11
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $7A12
+    ldh [hMode07_StateTable_FFD2], a              ; $7A12
     ld a, [hl+]                                   ; $7A14
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $7A15
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $7A17
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $7A17
     ld a, [wNameCardEdit_PhotoCursorUpdate_D97F]  ; $7A1A
     cp [hl]                                       ; $7A1D
     ld [hl], a                                    ; $7A1E
@@ -5221,7 +5403,7 @@ NameCardEdit_ObjSlideIn::
     jr c, jr_002_7ab6                             ; $7A84
 
     xor a                                         ; $7A86
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $7A87
+    ldh [hMode07_StateTable_FFD3], a              ; $7A87
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $7A89
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $7A8B
     xor $ff                                       ; $7A8D
@@ -5280,7 +5462,7 @@ NameCardEdit_ObjSlideOut::
     jr c, jr_002_7b0a                             ; $7AD7
 
     xor a                                         ; $7AD9
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $7ADA
+    ldh [hMode07_StateTable_FFD3], a              ; $7ADA
     ld a, $39                                     ; $7ADC
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $7ADE
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $7AE0
@@ -5353,7 +5535,7 @@ NameCardEdit_ObjPhotoCursor::
 ; C: $D8E0 = 0, NameCardEdit_LoadFieldGlyphs
 NameCardEdit_ObjLoadField::
     xor a                                         ; $7B6E
-    ld [wMode06_State21_D8E0], a                  ; $7B6F
+    ld [wMode07_StateTable_D8E0], a               ; $7B6F
     ld b, BANK(NameCardEdit_LoadFieldGlyphs)      ; $7B72
     ld hl, NameCardEdit_LoadFieldGlyphs           ; $7B74
     call Far_Call                                 ; $7B77
@@ -5371,7 +5553,7 @@ ObjScript_02_7B7B_Mode0B_NameCardEdit_State10::
 
 ; C: when $D8E0 bit 0 is set: hidden and the script 02:7FC0
 Obj_EndOnD8E0Bit0::
-    ld a, [wMode06_State21_D8E0]                  ; $7BB1
+    ld a, [wMode07_StateTable_D8E0]               ; $7BB1
     bit 0, a                                      ; $7BB4
     jr z, jr_002_7bc1                             ; $7BB6
 
@@ -5443,7 +5625,7 @@ jr_002_7bf6:
     ld de, $7c0c                                  ; $7BFC
     call Obj_SetCallback                          ; $7BFF
     ld a, $17                                     ; $7C02
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $7C04
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $7C04
     xor a                                         ; $7C06
     ldh [hCopyReqSrcDstCnt + $2], a               ; $7C07
     ldh [hCopyReqSrcDstCnt + $3], a               ; $7C09
@@ -5452,8 +5634,32 @@ jr_002_7c0b:
     ret                                           ; $7C0B
 
 
-    db $f0, $d8, $a7, $28, $13, $3d, $e0, $d8, $f0, $9d, $e6, $04, $28, $05, $f0, $d7
-    db $e0, $d4, $c9, $3e, $c0, $e0, $d4, $c9, $3e, $04, $ea, $e0, $d8, $c9
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $7C0C
+    and a                                         ; $7C0E
+    jr z, jr_002_7c24                             ; $7C0F
+
+    dec a                                         ; $7C11
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $7C12
+    ldh a, [hFrameCounter]                        ; $7C14
+    and $04                                       ; $7C16
+    jr z, jr_002_7c1f                             ; $7C18
+
+    ldh a, [hObjCmd_Loop_FFD7]                    ; $7C1A
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $7C1C
+    ret                                           ; $7C1E
+
+
+jr_002_7c1f:
+    ld a, $c0                                     ; $7C1F
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $7C21
+    ret                                           ; $7C23
+
+
+jr_002_7c24:
+    ld a, $04                                     ; $7C24
+    ld [wMode07_StateTable_D8E0], a               ; $7C26
+    ret                                           ; $7C29
+
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetPos, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02
 ; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
@@ -5495,14 +5701,60 @@ ObjScript_02_7C68_Mode07_Exchange_State02::
     db $09, $20, $fd, $d9, $49, $7c, $72, $7c, $98, $7c, $da, $7b, $b9, $7f, $e4, $46
     db $b9, $7f, $b9, $7f
 
-; I: leftover: 396 bytes (02:7CAC-7E37) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_02_7CAC::
-    INCBIN "data/bank_02/Leftover_02_7CAC.bin" ; $7CAC, 396 bytes
-; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
+    ld b, BANK(Mode07_StateTable)                 ; $7CAC
+    ld hl, Mode07_StateTable + $11A               ; $7CAE
+    call Far_Call                                 ; $7CB1
+    ret                                           ; $7CB4
+
+
+; I: leftover: 274 bytes (02:7CB5-7DC6) that no run reads or executes and that no code names (owner rule 2026-11-11)
+Leftover_02_7CB5::
+    INCBIN "data/bank_02/Leftover_02_7CB5.bin" ; $7CB5, 274 bytes
+; C: read in the runs by Obj_SetD882Bit3, Object_RunAll, ObjCmd_SetFrac
+ObjScript_02_7DC7_Obj_SetD882Bit3::
+    db $65, $1f, $2d, $63, $d5, $7d, $16, $1f, $ac, $7c, $1e, $1f, $b8, $47
+
+    push hl                                       ; $7DD5
+    ld b, BANK(Mode07_StateTable)                 ; $7DD6
+    ld hl, Mode07_StateTable + $26F               ; $7DD8
+    call Far_Call                                 ; $7DDB
+    pop hl                                        ; $7DDE
+    scf                                           ; $7DDF
+    ret                                           ; $7DE0
+
+
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $7DE1
+    ld b, a                                       ; $7DE3
+    ldh a, [hMode07_StateTable_FFD2]              ; $7DE4
+    cp b                                          ; $7DE6
+    jr nz, jr_002_7def                            ; $7DE7
+
+    ld de, $7e08                                  ; $7DE9
+    call Call_000_2205                            ; $7DEC
+
+jr_002_7def:
+    ret                                           ; $7DEF
+
+
+; C: read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Obj_SetD882Bit3
+ObjScript_02_7DF0_Object_RunAll::
+    db $16, $1f, $e1, $7d, $6d, $1f, $00, $fe, $1e, $1f, $90, $47, $16, $1f, $e1, $7d
+    db $6d, $1f, $00, $02, $1e, $1f, $a4, $47, $16, $1f, $b9, $7f, $6d, $1f, $00, $00
+    db $10, $80, $ec, $67, $0c, $80, $5c, $68, $cc, $1f, $00, $00, $00, $c0, $00, $90
+    db $00, $08, $00, $20, $80, $cc, $68, $2b, $7e, $02, $1f
+
+    ld a, $01                                     ; $7E2B
+    ld [wMode07_StateTable_D8E0], a               ; $7E2D
+    scf                                           ; $7E30
+    ret                                           ; $7E31
+
+
+; C: read in the runs by ObjCmd_CopyAtLine20, Object_CreateWithParam, Object_RunAll; first read on the screen
 ; Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
-ObjScript_02_7E38_Mode0C_RecordBook_State01::
-    db $cc, $1f, $10, $00, $10, $71, $30, $90, $10, $00, $25, $cc, $1f, $10, $00, $20
-    db $71, $30, $90, $10, $00, $25, $1e, $1f, $38, $7e, $38, $7e, $b9, $7f, $b9, $7f
+ObjScript_02_7E32_Mode0C_RecordBook_State01::
+    db $c7, $7d, $b9, $7f, $b2, $4d, $cc, $1f, $10, $00, $10, $71, $30, $90, $10, $00
+    db $25, $cc, $1f, $10, $00, $20, $71, $30, $90, $10, $00, $25, $1e, $1f, $38, $7e
+    db $38, $7e, $b9, $7f, $b9, $7f
 
 ; C: adds one step of the three palettes $D88C-$D88E (each pair of bits) to the accumulators $D88F-$D894 and writes
 ; the result into $D883-$D885 (fade in); code read
@@ -5565,7 +5817,7 @@ Fade_SetModeFromObject::
     push hl                                       ; $7EA2
     xor a                                         ; $7EA3
     ld [wFadeRunning], a                          ; $7EA4
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $7EA7
+    ldh a, [hMode07_StateTable_FFD2]              ; $7EA7
     ldh [hState], a                               ; $7EA9
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $7EAB
     ldh [hMode], a                                ; $7EAD
@@ -5579,10 +5831,9 @@ Fade_SetModeFromObject::
 ; tools/kitty_layout_kinds.py
 ObjScript_02_7EB2_Mode00_BootAndTitle_State00::
     db $58, $7e, $10, $1f, $04, $00, $58, $7e, $10, $1f, $04, $00, $58, $7e, $10, $1f
-    db $04, $00, $58, $7e, $a2, $7e, $02, $1f, $b2, $7e, $b9, $7f, $89, $7e
-
-    db $58, $7e, $10, $1f, $01, $00, $58, $7e, $10, $1f, $01, $00, $58, $7e, $10, $1f
-    db $01, $00, $58, $7e, $a2, $7e, $02, $1f, $d0, $7e, $b9, $7f, $89, $7e
+    db $04, $00, $58, $7e, $a2, $7e, $02, $1f, $b2, $7e, $b9, $7f, $89, $7e, $58, $7e
+    db $10, $1f, $01, $00, $58, $7e, $10, $1f, $01, $00, $58, $7e, $10, $1f, $01, $00
+    db $58, $7e, $a2, $7e, $02, $1f, $d0, $7e, $b9, $7f, $89, $7e
 
 ; C: the same step subtracted (fade out); code read
 Fade_StepOut::
@@ -5665,7 +5916,7 @@ Fade_End::
     push hl                                       ; $7F65
     xor a                                         ; $7F66
     ld [wFadeRunning], a                          ; $7F67
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $7F6A
+    ldh a, [hMode07_StateTable_FFD2]              ; $7F6A
     ldh [hState], a                               ; $7F6C
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $7F6E
     ldh [hMode], a                                ; $7F70

@@ -8,8 +8,9 @@ SECTION "ROM Bank $01d", ROMX[$4000], BANK[$1d]
 ; Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1D_4000_Mode12_SlideShow_State00::
     INCBIN "data/bank_1d/Gfx_1D_4000_Mode12_SlideShow_State00.2bpp" ; $4000, 5632 bytes
-; C: named by the code of Mode09_State03, Exchange_InitScreen (06:6850 06:69FE); read in BGB by a read watchpoint
-; (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; C: named by the code of Mode09_State03, Exchange_InitScreen (06:6850 06:69FE); read in the runs by Copy_DEtoHL; read
+; in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py
 Gfx_1D_5600_Mode09_ExchangeCommunicating_State03::
     INCBIN "data/bank_1d/Gfx_1D_5600_Mode09_ExchangeCommunicating_State03.2bpp" ; $5600, 5376 bytes
 ; C: named by the code of Mode07_State00 (06:61AF); read in the runs by Copy_DEtoHL; first read on the screen

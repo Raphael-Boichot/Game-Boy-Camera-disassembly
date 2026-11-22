@@ -4827,7 +4827,7 @@ Gfx_00_1C40_Mode03_ViewAlbum_State13::
 ; C: $D8E0 = $FF (script callback)
 Script_SetD8E0FF::
     ld a, $ff                                     ; $1C8C
-    ld [wMode06_State21_D8E0], a                  ; $1C8E
+    ld [wMode07_StateTable_D8E0], a               ; $1C8E
     scf                                           ; $1C91
     ret                                           ; $1C92
 
@@ -4874,14 +4874,14 @@ Gfx_00_1CBA_Mode12_SlideShow_State01::
 ; C: hFFD8 = $D907 (script callback)
 SlideShow_ObjSaveD907::
     ld a, [wMenu07_CursorUpdate_D907]             ; $1D47
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $1D4A
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $1D4A
     scf                                           ; $1D4C
     ret                                           ; $1D4D
 
 
 ; C: restarts the script 00:1CD4 when $D907 changes
 SlideShow_ObjFollowD907::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $1D4E
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $1D4E
     ld a, [wMenu07_CursorUpdate_D907]             ; $1D51
     cp [hl]                                       ; $1D54
     ld de, $1cd4                                  ; $1D55
@@ -4898,14 +4898,14 @@ Gfx_00_1D5C_Mode12_SlideShow_State00::
 ; C: hFFD8 = $D908 (script callback)
 SlideShow_ObjSaveD908::
     ld a, [wMenu07_CursorUpdate_D908]             ; $1D96
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $1D99
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $1D99
     scf                                           ; $1D9B
     ret                                           ; $1D9C
 
 
 ; C: restarts the script 00:1D62 when $D908 changes
 SlideShow_ObjFollowD908::
-    ld hl, hPuzzle15_ObjMoving_FFD8               ; $1D9D
+    ld hl, hExchange_ObjFollowD9FD_FFD8           ; $1D9D
     ld a, [wMenu07_CursorUpdate_D908]             ; $1DA0
     cp [hl]                                       ; $1DA3
     ld de, $1d62                                  ; $1DA4
@@ -4915,10 +4915,139 @@ SlideShow_ObjFollowD908::
 
 
 ; C: named by the code of Mode12_State00 (07:4909); read in the runs by Copy_DEtoHL, Object_CreateWithParam; first
-; read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
-; tools/kitty_layout_kinds.py
+; read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz)
 Gfx_00_1DAB_Mode12_SlideShow_State00::
-    INCBIN "data/bank_00/Gfx_00_1DAB_Mode12_SlideShow_State00.bin" ; $1DAB, 271 bytes
+    INCBIN "data/bank_00/Gfx_00_1DAB_Mode12_SlideShow_State00.bin" ; $1DAB, 6 bytes
+Call_000_1db1:
+    ld a, [wScxShadow]                            ; $1DB1
+    inc a                                         ; $1DB4
+    ld [wScxShadow], a                            ; $1DB5
+    ldh a, [hCopyReqSrcDstCnt + $2]               ; $1DB8
+    ld l, a                                       ; $1DBA
+    ldh a, [hCopyReqSrcDstCnt + $3]               ; $1DBB
+    ld h, a                                       ; $1DBD
+    ld bc, $000a                                  ; $1DBE
+    add hl, bc                                    ; $1DC1
+    ld a, l                                       ; $1DC2
+    ldh [hCopyReqSrcDstCnt + $2], a               ; $1DC3
+    ld a, h                                       ; $1DC5
+    ldh [hCopyReqSrcDstCnt + $3], a               ; $1DC6
+    ldh a, [hStamp_ObjSlideIn_FFD4]               ; $1DC8
+    ld b, a                                       ; $1DCA
+    ldh a, [hObjCmd_Loop_FFD7]                    ; $1DCB
+    cp b                                          ; $1DCD
+    jr nc, jr_000_1dd7                            ; $1DCE
+
+    xor a                                         ; $1DD0
+    ldh [hCopyReqSrcDstCnt + $2], a               ; $1DD1
+    ld a, $ff                                     ; $1DD3
+    ldh [hCopyReqSrcDstCnt + $3], a               ; $1DD5
+
+jr_000_1dd7:
+    ret                                           ; $1DD7
+
+
+Call_000_1dd8:
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E] ; $1DD8
+    ld l, a                                       ; $1DDB
+    ld a, [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F] ; $1DDC
+    ld h, a                                       ; $1DDF
+    ld bc, hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA ; $1DE0
+    add hl, bc                                    ; $1DE3
+    ld a, [hl+]                                   ; $1DE4
+    ldh [hStamp_ObjSlideIn_FFD4], a               ; $1DE5
+    ret                                           ; $1DE7
+
+
+; C: named by the code of SlideShow_ObjFollowD908 (00:1E15); read in the runs by Copy_DEtoHL; kind T_UI from the
+; evidence of tools/kitty_layout_kinds.py
+Gfx_00_1DE8_SlideShow_ObjFollowD908::
+    db $16, $1f, $f4, $1d, $6d, $1f, $00, $02, $1e, $1f, $ec, $47
+
+    ldh a, [hMode07_StateTable_FFD2]              ; $1DF4
+    cp $c0                                        ; $1DF6
+    ret c                                         ; $1DF8
+
+    xor a                                         ; $1DF9
+    ldh [hCopyReqSrcDstCnt + $2], a               ; $1DFA
+    ld a, $f0                                     ; $1DFC
+    ld [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE], a ; $1DFE
+    jp Obj_End                                    ; $1E01
+
+
+; C: read in the runs by Copy_DEtoHL; kind T_UI from the evidence of tools/kitty_layout_kinds.py
+Gfx_00_1E04_Copy_DEtoHL::
+    db $3a, $1f, $30, $50, $1e, $1f, $cc, $47
+
+    call Call_000_1dd8                            ; $1E0C
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $1E0F
+    cp $ff                                        ; $1E12
+    ret nz                                        ; $1E14
+
+    ld de, Gfx_00_1DE8_SlideShow_ObjFollowD908    ; $1E15
+    jp Jump_000_2205                              ; $1E18
+
+
+; C: named by the code of Mode09_State03, Exchange_InitScreen (06:6898 06:6A41); read in the runs by
+; SlideShow_ObjFollowD908, Object_RunAll, Copy_DEtoHL
+ObjScript_00_1E1B_Mode09_ExchangeCommunicating_State03::
+    db $04, $1e, $0c, $1e, $b9, $7f, $16, $1f, $f4, $1d, $6d, $1f, $00, $02, $1e, $1f
+    db $10, $48, $3a, $1f, $30, $50, $1e, $1f, $10, $48
+
+    call Call_000_1dd8                            ; $1E35
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $1E38
+    cp $ff                                        ; $1E3B
+    ret nz                                        ; $1E3D
+
+    ld de, $1e21                                  ; $1E3E
+    jp Jump_000_2205                              ; $1E41
+
+
+; C: named by the code of Mode09_State03, Exchange_InitScreen (06:689E 06:6A47); read in the runs by
+; SlideShow_ObjFollowD908, Object_RunAll, Object_CreateWithParam
+ObjScript_00_1E44_Mode09_ExchangeCommunicating_State03::
+    db $2d, $1e, $35, $1e, $b9, $7f, $3a, $1f, $30, $50, $54, $4a, $16, $1f, $7c, $1e
+    db $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80, $d4, $6d, $50, $80, $34, $6d
+    db $09, $1f, $16, $1f, $98, $1e, $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80
+    db $d4, $6d, $50, $80, $e4, $6c, $09, $1f
+
+    call Call_000_1db1                            ; $1E7C
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $1E7F
+    cp $ff                                        ; $1E82
+    ld de, $7fba                                  ; $1E84
+    call z, Call_000_2205                         ; $1E87
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $1E8A
+    cp $00                                        ; $1E8D
+    jr nz, jr_000_1e97                            ; $1E8F
+
+    ld de, $1e66                                  ; $1E91
+    call Call_000_2205                            ; $1E94
+
+jr_000_1e97:
+    ret                                           ; $1E97
+
+
+    call Call_000_1db1                            ; $1E98
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $1E9B
+    cp $ff                                        ; $1E9E
+    ld de, $7fba                                  ; $1EA0
+    call z, Call_000_2205                         ; $1EA3
+    ld a, [wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE] ; $1EA6
+    cp $01                                        ; $1EA9
+    jr nz, jr_000_1eb3                            ; $1EAB
+
+    ld de, $1e50                                  ; $1EAD
+    call Call_000_2205                            ; $1EB0
+
+jr_000_1eb3:
+    ret                                           ; $1EB3
+
+
+; C: named by the code of Mode09_State03, Exchange_InitScreen (06:6892 06:6A3B); read in the runs by
+; Object_CreateWithParam
+ObjScript_00_1EB4_Mode09_ExchangeCommunicating_State03::
+    db $4a, $1e, $b9, $7f, $b9, $7f
+
 ; C: {id, channel 0-3}: the sound into $D060 / $D068 / $D070 / $D078
 ObjCmd_Sound::
     push hl                                       ; $1EBA
@@ -5071,10 +5200,10 @@ ObjCmd_Loop::
 ; C: hFFD2 / hFFD4 = the next two bytes, fractions hFFD1 / hFFD3 = 0
 ObjCmd_SetPos::
     xor a                                         ; $1F3A
-    ldh [hPlayMenu_CursorUpdate_FFD1], a          ; $1F3B
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $1F3D
+    ldh [hMode07_StateTable_FFD1], a              ; $1F3B
+    ldh [hMode07_StateTable_FFD3], a              ; $1F3D
     ld a, [hl+]                                   ; $1F3F
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $1F40
+    ldh [hMode07_StateTable_FFD2], a              ; $1F40
     ld a, [hl+]                                   ; $1F42
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $1F43
     scf                                           ; $1F45
@@ -5083,9 +5212,9 @@ ObjCmd_SetPos::
 
 ; C: hFFD2 / hFFD4 = hFFD8 / hFFD9 + the next two bytes
 ObjCmd_SetPosRel::
-    ldh a, [hPuzzle15_ObjMoving_FFD8]             ; $1F47
+    ldh a, [hExchange_ObjFollowD9FD_FFD8]         ; $1F47
     add [hl]                                      ; $1F49
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $1F4A
+    ldh [hMode07_StateTable_FFD2], a              ; $1F4A
     inc hl                                        ; $1F4C
     ldh a, [hScratch_CursorUpdate_FFD9]           ; $1F4D
     add [hl]                                      ; $1F4F
@@ -5100,9 +5229,9 @@ ObjCmd_SetPosRel::
 ; C: hFFD1 / hFFD3 = the next two bytes
 ObjCmd_SetFrac::
     ld a, [hl+]                                   ; $1F65
-    ldh [hPlayMenu_CursorUpdate_FFD1], a          ; $1F66
+    ldh [hMode07_StateTable_FFD1], a              ; $1F66
     ld a, [hl+]                                   ; $1F68
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $1F69
+    ldh [hMode07_StateTable_FFD3], a              ; $1F69
     scf                                           ; $1F6B
     ret                                           ; $1F6C
 
@@ -5120,7 +5249,7 @@ ObjCmd_SetSpeed::
 ; C: hFFD8 = the next byte
 ObjCmd_SetD8::
     ld a, [hl+]                                   ; $1F75
-    ldh [hPuzzle15_ObjMoving_FFD8], a             ; $1F76
+    ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $1F76
     scf                                           ; $1F78
     ret                                           ; $1F79
 
@@ -5447,9 +5576,9 @@ jr_000_20f7:
     push bc                                       ; $20F7
     push hl                                       ; $20F8
     ld a, l                                       ; $20F9
-    ld [wObject_RunAll_DC5E], a                   ; $20FA
+    ld [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E], a ; $20FA
     ld a, h                                       ; $20FD
-    ld [wObject_RunAll_DC5F], a                   ; $20FE
+    ld [wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F], a ; $20FE
     inc hl                                        ; $2101
     ld a, [hl-]                                   ; $2102
     cp $80                                        ; $2103
@@ -5497,7 +5626,7 @@ jr_000_2136:
     ld a, [hl+]                                   ; $2139
     ldh [hCopyReqSrcDstCnt + $4], a               ; $213A
     ld a, [hl+]                                   ; $213C
-    ldh [hObject_RunAll_FFD0], a                  ; $213D
+    ldh [hMode07_StateTable_FFD0], a              ; $213D
 
 jr_000_213f:
     ld a, l                                       ; $213F
@@ -5565,19 +5694,19 @@ Obj_ApplySpeed::
     ld c, a                                       ; $217D
     ldh a, [hCopyReqSrcDstCnt + $1]               ; $217E
     ld b, a                                       ; $2180
-    ldh a, [hPlayMenu_CursorUpdate_FFD1]          ; $2181
+    ldh a, [hMode07_StateTable_FFD1]              ; $2181
     add c                                         ; $2183
-    ldh [hPlayMenu_CursorUpdate_FFD1], a          ; $2184
-    ldh a, [hKittHost_YesNoCursor_FFD2]           ; $2186
+    ldh [hMode07_StateTable_FFD1], a              ; $2184
+    ldh a, [hMode07_StateTable_FFD2]              ; $2186
     adc b                                         ; $2188
-    ldh [hKittHost_YesNoCursor_FFD2], a           ; $2189
+    ldh [hMode07_StateTable_FFD2], a              ; $2189
     ldh a, [hCopyReqSrcDstCnt + $2]               ; $218B
     ld c, a                                       ; $218D
     ldh a, [hCopyReqSrcDstCnt + $3]               ; $218E
     ld b, a                                       ; $2190
-    ldh a, [hPlayMenu_CursorUpdate_FFD3]          ; $2191
+    ldh a, [hMode07_StateTable_FFD3]              ; $2191
     add c                                         ; $2193
-    ldh [hPlayMenu_CursorUpdate_FFD3], a          ; $2194
+    ldh [hMode07_StateTable_FFD3], a              ; $2194
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $2196
     adc b                                         ; $2198
     ldh [hStamp_ObjSlideIn_FFD4], a               ; $2199
@@ -5726,7 +5855,7 @@ Obj_HideSprite::
     ld a, $00                                     ; $222C
     ldh [hCopyReqSrcDstCnt + $4], a               ; $222E
     ld a, $00                                     ; $2230
-    ldh [hObject_RunAll_FFD0], a                  ; $2232
+    ldh [hMode07_StateTable_FFD0], a              ; $2232
     ret                                           ; $2234
 
 

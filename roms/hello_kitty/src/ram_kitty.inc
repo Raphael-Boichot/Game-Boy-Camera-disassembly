@@ -78,7 +78,7 @@ DEF wKeysNewRepeat             EQU $d8da ; C 1  the keys pressed this frame or r
 DEF wKeysPrev                  EQU $d8db ; C 1  the keys held the frame before: Joy_Read copies wKeysHeld here first ; named as the Japane
 DEF wKeyRepeatCounter          EQU $d8dc ; C 1  the frames left before the next repeat, counted down by Joy_Read while the same keys stay 
 DEF wMode06_State0A_D8DF       EQU $d8df ; I 1  touched by Mode06_State0A (3), Mode06_State0B (3), Mode02_State06 (3)
-DEF wMode06_State21_D8E0       EQU $d8e0 ; I 1  touched by Mode06_State21 (2), Puzzle15_ObjTick (2), Scratch_CursorUpdate (2)
+DEF wMode07_StateTable_D8E0    EQU $d8e0 ; I 1  touched by Mode07_StateTable (3), Mode06_State21 (2), Puzzle15_ObjTick (2)
 DEF wKeyPrompt_TickA_D8E1      EQU $d8e1 ; I 1  touched by KeyPrompt_TickA (1), KeyPrompt_TickB (1), KeyPrompt_TickC (1)
 DEF wNameCard_MakeIdNumber_D8E2 EQU $d8e2 ; I 1  touched by NameCard_MakeIdNumber (1), Mode0B_State10 (1)
 DEF wBoot_D8E3                 EQU $d8e3 ; I 1  touched by Boot (1), Sgb_InitDataSnd (1), Sgb_FreezeScreen (1)
@@ -95,7 +95,7 @@ DEF wMode14_State01_D8F0       EQU $d8f0 ; I 1  touched by Mode14_State01 (3), K
 DEF wMode14_State01_D8F1       EQU $d8f1 ; I 1  touched by Mode14_State01 (3), KittHost_TextStep (3), Mode14_State00 (1)
 DEF wReturnModeB               EQU $d8f2 ; C 1  a mode saved by Mode_SaveReturnD8F2 (b), the mode the print error screen $14 goes back to 
 DEF wReturnStateB              EQU $d8f3 ; C 1  its state, saved by Mode_SaveReturnD8F2 (c)  (hand 2026-11-15)
-DEF wMenu07_CursorUpdate_D8F4  EQU $d8f4 ; I 1  touched by Menu07_CursorUpdate (6), Scratch_CursorUpdate (5), PlayMenu_CursorUpdate (4)
+DEF wMenu07_CursorUpdate_D8F4  EQU $d8f4 ; I 1  touched by Menu07_CursorUpdate (6), Scratch_CursorUpdate (5), Mode07_StateTable (5)
 DEF wMode01_State02_D8F5       EQU $d8f5 ; I 1  touched by Mode01_State02 (3), Mode00_State04 (1), Mode01_State00 (1)
 DEF wMode01_State05_D8F6       EQU $d8f6 ; I 1  touched by Mode01_State05 (2), Mode00_State04 (1), Mode01_State03 (1)
 DEF wMode03_State02_D8F7       EQU $d8f7 ; I 1  touched by Mode03_State02 (4), Mode00_State04 (1), Mode03_State00 (1)
@@ -154,7 +154,7 @@ DEF wKittsCheckTmp             EQU $d949 ; C 3  Kitts_CheckAfford copies the Kit
 DEF wPrintGame_SaveKittyPos_D94C EQU $d94c ; I 1  touched by PrintGame_SaveKittyPos (3), Objects_DrawAll (1), PrintGame_ObjRandomStart (1)
 DEF wPrintGame_ObjCheckCatch_D94D EQU $d94d ; I 1  touched by PrintGame_ObjCheckCatch (1), PrintGame_SaveKittyPos (1), Obj_SetD94D (1)
 DEF wPrintGame_ObjCheckCatch_D94E EQU $d94e ; I 1  touched by PrintGame_ObjCheckCatch (1), PrintGame_SaveKittyPos (1), Obj_SetD94D (1)
-DEF wMode06_State23_D94F       EQU $d94f ; I 1  touched by Mode06_State23 (2), PrintGame_ShowResult (2), Mode1B_State00 (2)
+DEF wMode06_State23_D94F       EQU $d94f ; I 1  touched by Mode06_State23 (2), ObjScript_02_7044_PrintGame_ObjCheckLanded (2), PrintGame_S
 DEF wMode06_State10_D950       EQU $d950 ; I 1  touched by Mode06_State10 (1), Mode06_State11 (1), Mode06_State12 (1)
 DEF wMode06_State10_D951       EQU $d951 ; I 1  touched by Mode06_State10 (1), Mode06_State11 (1), Mode06_State12 (1)
 DEF wScratch_CursorUpdate_D952 EQU $d952 ; I 5  touched by Scratch_CursorUpdate (1), Scratch_ClearSpots (1), Scratch_HasPrize3 (1)
@@ -269,11 +269,11 @@ DEF wBlit_MaskPass_SrcA_D9F5   EQU $d9f5 ; I 1  touched by Blit_MaskPass_SrcA (1
 DEF wBlit_MaskPass_SrcB_D9F6   EQU $d9f6 ; I 1  touched by Blit_MaskPass_SrcB (1), Stamp_SetBlitArea (1)
 DEF wBlit_MaskPass_SrcB_D9F7   EQU $d9f7 ; I 1  touched by Blit_MaskPass_SrcB (1), Stamp_SetBlitArea (1)
 DEF wBlit_MaskPass_SrcB_D9F8   EQU $d9f8 ; I 1  touched by Blit_MaskPass_SrcB (1), Stamp_SetBlitArea (1)
-DEF wMode07_State00_D9FB       EQU $d9fb ; I 1  touched by Mode07_State00 (1), Mode09_State01 (1), Mode09_State03 (1)
-DEF wExchange_RequestPage_D9FC EQU $d9fc ; I 1  touched by Exchange_RequestPage (1), Mode07_State00 (1), Mode08_State00 (1)
+DEF wMode07_StateTable_D9FB    EQU $d9fb ; I 1  touched by Mode07_StateTable (3), Obj_DrawPhotoIndex (2), Mode07_State00 (1)
+DEF wMode07_StateTable_D9FC    EQU $d9fc ; I 1  touched by Mode07_StateTable (4), Exchange_RequestPage (1), Mode07_State00 (1)
 DEF wMode07_State02_D9FD       EQU $d9fd ; I 1  touched by Mode07_State02 (4), Exchange_ObjFollowD9FD (1), Exchange_RequestPage (1)
-DEF wMode09_State05_D9FE       EQU $d9fe ; I 1  touched by Mode09_State05 (2), Mode09_State0E (2), Mode09_State04 (1)
-DEF wExchange_RequestPage_D9FF EQU $d9ff ; I 1  touched by Exchange_RequestPage (2), Mode08_State00 (1)
+DEF wObjScript_00_1E44_Mode09_ExchangeCommunicating_State03_D9FE EQU $d9fe ; I 1  touched by ObjScript_00_1E44_Mode09_ExchangeCommunicating_State03 (4), Mode09_State05 (2),
+DEF wExchange_RequestPage_D9FF EQU $d9ff ; I 1  touched by Exchange_RequestPage (2), Mode07_StateTable (1), Mode08_State00 (1)
 DEF wMode09_State0A_DA00       EQU $da00 ; I 1  touched by Mode09_State0A (2), Link_CountdownDA00 (1), Exchange_RequestPage (1)
 DEF wMode09_State0A_DA01       EQU $da01 ; I 1  touched by Mode09_State0A (2), Exchange_RequestPage (1), Mode09_State03 (1)
 DEF wUnusedLinkBufXor          EQU $da02 ; I 1  the Japanese wUnusedLinkBufXor, through 1 paired access site (06:6071); same code
@@ -320,8 +320,8 @@ DEF wPuzzleDrawingsDone        EQU $dad9 ; C 1  the 15 puzzle drawings solved (0
 DEF wNameCardMade              EQU $dada ; C 1  $FF once the name card is finished (06:5199, then Counters_Store; counters block, SRAM $B0
 DEF wIdCard                    EQU $dadb ; C 18  the ID card record, $12 bytes, loaded from SRAM $AFB8 (bank 1) by Sram_LoadIdCard and stor
 DEF wObject_CreateWithParam_DAEE EQU $daee ; I 256  touched by Object_CreateWithParam (1), Object_RunAll (1), Objects_DrawAll (1)
-DEF wObject_RunAll_DC5E        EQU $dc5e ; I 1  touched by Object_RunAll (1), Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1)
-DEF wObject_RunAll_DC5F        EQU $dc5f ; I 1  touched by Object_RunAll (1), Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1)
+DEF wGfx_00_1DAB_Mode12_SlideShow_State00_DC5E EQU $dc5e ; I 1  touched by Gfx_00_1DAB_Mode12_SlideShow_State00 (1), Object_RunAll (1), Scratch_ObjPlace (
+DEF wGfx_00_1DAB_Mode12_SlideShow_State00_DC5F EQU $dc5f ; I 1  touched by Gfx_00_1DAB_Mode12_SlideShow_State00 (1), Object_RunAll (1), Scratch_ObjPlace (
 DEF wObjects_Freeze_DC60       EQU $dc60 ; I 1  touched by Objects_Freeze (1), Objects_Unfreeze (1), Object_RunAll (1)
 DEF wObjCmd_SetDC61            EQU $dc61 ; I 1  touched by ObjCmd_SetDC61 (1), PlayMenu_CursorUpdate (1), Album_CursorUpdate (1)
 DEF wObjCmd_SetDC61_DC62       EQU $dc62 ; I 1  touched by ObjCmd_SetDC61 (1)
@@ -447,13 +447,13 @@ DEF hObjCmd_SetCallback_FFC8   EQU $ffc8 ; I 1  touched by ObjCmd_SetCallback (1
 DEF hObject_RunAll_FFC9        EQU $ffc9 ; I 1  touched by Object_RunAll (2), Objects_DrawAll (1), KeyPrompt_Wait (1)
 DEF hObject_RunAll_FFCA        EQU $ffca ; I 1  touched by Object_RunAll (2), Objects_DrawAll (1), KeyPrompt_Wait (1)
 DEF hCopyReqSrcDstCnt          EQU $ffcb ; I 5  the Japanese hCopyReqSrcDstCnt, through 1 paired access site (04:4b2c); same code
-DEF hObject_RunAll_FFD0        EQU $ffd0 ; I 1  touched by Object_RunAll (1), Obj_HideSprite (1), Puzzle15_ObjTick (1)
-DEF hPlayMenu_CursorUpdate_FFD1 EQU $ffd1 ; I 1  touched by PlayMenu_CursorUpdate (3), Album_CursorUpdate (3), Scratch_CursorUpdate (3)
-DEF hKittHost_YesNoCursor_FFD2 EQU $ffd2 ; I 1  touched by KittHost_YesNoCursor (4), Stamp_ObjPlaceOnStart (3), PrintGame_ClampX (3)
-DEF hPlayMenu_CursorUpdate_FFD3 EQU $ffd3 ; I 1  touched by PlayMenu_CursorUpdate (3), Album_CursorUpdate (3), Scratch_CursorUpdate (3)
-DEF hStamp_ObjSlideIn_FFD4     EQU $ffd4 ; I 1  touched by Stamp_ObjSlideIn (4), Stamp_ObjSlideOut (4), AlbumText_ObjSlideIn (4)
-DEF hObjCmd_Loop_FFD7          EQU $ffd7 ; I 1  touched by ObjCmd_Loop (2), ObjCmd_SetLoop (1), Obj_CopyD4ToD7 (1)
-DEF hPuzzle15_ObjMoving_FFD8   EQU $ffd8 ; I 1  touched by Puzzle15_ObjMoving (2), Scratch_CursorUpdate (2), Obj_Timeout78 (2)
+DEF hMode07_StateTable_FFD0    EQU $ffd0 ; I 1  touched by Mode07_StateTable (2), Object_RunAll (1), Obj_HideSprite (1)
+DEF hMode07_StateTable_FFD1    EQU $ffd1 ; I 1  touched by Mode07_StateTable (4), PlayMenu_CursorUpdate (3), Album_CursorUpdate (3)
+DEF hMode07_StateTable_FFD2    EQU $ffd2 ; I 1  touched by Mode07_StateTable (5), KittHost_YesNoCursor (4), Stamp_ObjPlaceOnStart (3)
+DEF hMode07_StateTable_FFD3    EQU $ffd3 ; I 1  touched by Mode07_StateTable (4), PlayMenu_CursorUpdate (3), Album_CursorUpdate (3)
+DEF hStamp_ObjSlideIn_FFD4     EQU $ffd4 ; I 1  touched by Stamp_ObjSlideIn (4), Stamp_ObjSlideOut (4), PrintGame_ObjKitty (4)
+DEF hObjCmd_Loop_FFD7          EQU $ffd7 ; I 1  touched by ObjCmd_Loop (2), Gfx_00_1DAB_Mode12_SlideShow_State00 (1), ObjCmd_SetLoop (1)
+DEF hExchange_ObjFollowD9FD_FFD8 EQU $ffd8 ; I 1  touched by Exchange_ObjFollowD9FD (3), Puzzle15_ObjMoving (2), Scratch_CursorUpdate (2)
 DEF hScratch_CursorUpdate_FFD9 EQU $ffd9 ; I 1  touched by Scratch_CursorUpdate (2), Exchange_ObjFollowD9FD (2), NameCardEdit_PhotoCursorU
 DEF hRecordBook_VineFrame_FFDA EQU $ffda ; I 1  touched by RecordBook_VineFrame (1), ScriptCmd_End (1)
 DEF hPuzzle15_ScriptSetMapPtrPrev_FFDB EQU $ffdb ; I 1  touched by Puzzle15_ScriptSetMapPtrPrev (2), ScriptSlots_Run (2), RecordBook_VineFrame (1)
@@ -474,8 +474,8 @@ DEF hScriptCmd_Loop_FFE9       EQU $ffe9 ; I 1  touched by ScriptCmd_Loop (2), S
 DEF hRecordBook_GetReceivedX11_FFEA EQU $ffea ; I 1  touched by RecordBook_GetReceivedX11 (5), Menu_ScriptOnItemChange (1), NameCard_ScriptStar
 DEF hRecordBook_CountHundreds_FFEB EQU $ffeb ; I 1  touched by RecordBook_CountHundreds (3), NameCard_ScriptStartRight (1), NameCard_ScriptDra
 DEF hScriptCmd_AddEC_FFEC      EQU $ffec ; I 1  touched by ScriptCmd_AddEC (2), RecordBook_VineFrame (1)
-DEF hStamp_ObjPlaceOnStart_FFF0 EQU $fff0 ; I 3  touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), Cam_PopcountLevel (1)
+DEF hStamp_ObjPlaceOnStart_FFF0 EQU $fff0 ; I 3  touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), ObjScript_02_7044_Print
 DEF hSfx3_Step_07_FFF3         EQU $fff3 ; I 5  touched by Sfx3_Step_07 (1)
 DEF hScratch_ObjPlace_FFF8     EQU $fff8 ; I 2  touched by Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1), PrintGame_SpeedFromKeys (1)
-DEF hStamp_CursorUpdate_FFFA   EQU $fffa ; I 4  touched by Stamp_CursorUpdate (1), AlbumText_CursorUpdate (1), NameCardEdit_PhotoCursorUpd
+DEF hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA EQU $fffa ; I 4  touched by Gfx_00_1DAB_Mode12_SlideShow_State00 (1), Stamp_CursorUpdate (1), AlbumText_Cur
 DEF hBoot_FFFE                 EQU $fffe ; I 1  touched by Boot (2), Snd_Trk_UpdateChannel (1)

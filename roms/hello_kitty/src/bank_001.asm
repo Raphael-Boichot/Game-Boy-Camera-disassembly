@@ -1274,7 +1274,7 @@ jr_001_4f34:
     call Far_CallKeepA                            ; $4F3F
     jr nc, jr_001_4f4f                            ; $4F42
 
-    ld de, Gfx_17_7800_NeverRead                  ; $4F44
+    ld de, Gfx_17_7800_Copy_DEtoHL                ; $4F44
     ld a, $17                                     ; $4F47
     pop hl                                        ; $4F49
     call Copy_FarUnrolled                         ; $4F4A
@@ -1355,9 +1355,7 @@ Photo_LoadToVramScreenOff::
 Script_01_5000_Mode10_ScratchCard_State02::
     db $19, $59, $98, $1e, $59, $05, $07, $0c, $59, $13, $30, $50, $57, $59, $5f, $d9
     db $18, $50, $1e, $50, $24, $50, $2a, $50, $01, $80, $00, $7f, $dc, $58, $01, $80
-    db $40, $7f, $dc, $58, $01, $80, $80, $7f, $dc, $58
-
-    db $01, $80, $c0, $7f, $dc, $58
+    db $40, $7f, $dc, $58, $01, $80, $80, $7f, $dc, $58, $01, $80, $c0, $7f, $dc, $58
 
 ; C: script callback: hFFE3-hFFE4 = word [$D8F4] of 01:5046
 Puzzle15_ScriptSetPtrByItem::
@@ -1501,7 +1499,7 @@ Script_01_5240_Mode0F_FifteenPuzzle_State08::
 ; C: script callback: $D8E0 = 0
 Script_ClearD8E0::
     xor a                                         ; $5244
-    ld [wMode06_State21_D8E0], a                  ; $5245
+    ld [wMode07_StateTable_D8E0], a               ; $5245
     scf                                           ; $5248
     ret                                           ; $5249
 
@@ -1955,7 +1953,7 @@ RecordBook_VinePrinted::
 ; C: $D8E0 = $FF
 ScriptCmd_SetD8E0FF::
     ld a, $ff                                     ; $5802
-    ld [wMode06_State21_D8E0], a                  ; $5804
+    ld [wMode07_StateTable_D8E0], a               ; $5804
     scf                                           ; $5807
     ret                                           ; $5808
 
@@ -4160,7 +4158,7 @@ Mode06_State1F::
     cp $f0                                        ; $73E8
     jr nz, jr_001_73f9                            ; $73EA
 
-    ld a, [wMode06_State21_D8E0]                  ; $73EC
+    ld a, [wMode07_StateTable_D8E0]               ; $73EC
     bit 2, a                                      ; $73EF
     jp nz, Jump_001_68fd                          ; $73F1
 
@@ -4194,7 +4192,7 @@ jr_001_740b:
 
 ; C: handler of state $20 of mode $06 (word 32 of Mode06_StateTable)
 Mode06_State20::
-    ld a, [wMode06_State21_D8E0]                  ; $7410
+    ld a, [wMode07_StateTable_D8E0]               ; $7410
     bit 2, a                                      ; $7413
     jp nz, Jump_001_68fd                          ; $7415
 
@@ -4203,11 +4201,11 @@ Mode06_State20::
 
 ; C: handler of state $21 of mode $06 (word 33 of Mode06_StateTable)
 Mode06_State21::
-    ld a, [wMode06_State21_D8E0]                  ; $7419
+    ld a, [wMode07_StateTable_D8E0]               ; $7419
     bit 2, a                                      ; $741C
     jp nz, Jump_001_68fd                          ; $741E
 
-    ld a, [wMode06_State21_D8E0]                  ; $7421
+    ld a, [wMode07_StateTable_D8E0]               ; $7421
     bit 3, a                                      ; $7424
     jr z, jr_001_742f                             ; $7426
 

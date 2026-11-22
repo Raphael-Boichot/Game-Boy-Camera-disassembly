@@ -38,12 +38,7 @@ Map_13_7F40_Mode10_ScratchCard_State02::
 ; C: read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02
 ; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_13_7F80_Mode10_ScratchCard_State02::
-    INCBIN "data/bank_13/Map_13_7F80_Mode10_ScratchCard_State02.tilemap" ; $7F80, 35 bytes
-; I: leftover: 93 bytes (13:7FA3-7FFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_13_7FA3::
-    db $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7
-    db $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $5d, $5e, $5f
-    db $60, $61, $62, $63, $64, $65, $66, $67, $68, $69, $6a, $6b, $6c, $6d, $6e, $6f
-    db $70, $71, $72, $73, $74, $75, $76, $77, $78, $79, $7a, $b3, $b4, $b4, $b5, $b6
-    db $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7
-    db $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7, $b7
+    INCBIN "data/bank_13/Map_13_7F80_Mode10_ScratchCard_State02.tilemap" ; $7F80, 64 bytes
+; C: read in the runs by Map_CopyRect
+Src_13_7FC0_Map_CopyRect::
+    INCBIN "data/bank_13/Src_13_7FC0_Map_CopyRect.bin" ; $7FC0, 64 bytes

@@ -663,14 +663,14 @@ jp_bank,jp_addr,jp_name,jp_tag,bytes,instructions,kitty,hits,kind
 05,401E,Mode1F_State00_TitleInit,C,116,49,,0,
 05,4092,Mode1F_State01_MenuSource,C,84,42,,0,
 05,40E6,DjTitle_ReadSourceKeys,C,33,20,,0,
-05,4107,DjTitle_DrawMenu1,C,13,5,02:75D8,1,masked
+05,4107,DjTitle_DrawMenu1,C,13,5,02:75A1 02:75D8,2,masked
 05,4114,DjTitle_DrawSourceSprite,C,22,11,,0,
 05,412A,DjTitle_DrawArrowLeft,C,27,13,,0,
 05,4145,DjTitle_DrawArrowRight,C,29,14,,0,
 05,4162,DjTitle_DrawPerformer,C,12,5,,0,
 05,416E,Mode1F_State02_MenuSong,C,39,21,,0,
 05,4195,DjTitle_ReadSongKeys,C,36,21,,0,
-05,41B9,DjTitle_DrawMenu2,C,16,6,02:75D5,1,masked
+05,41B9,DjTitle_DrawMenu2,C,16,6,02:759E 02:75D5,2,masked
 05,41C9,DjTitle_DrawFrame2,C,17,7,,0,
 05,41DA,DjTitle_DrawArrowUp2,C,23,11,,0,
 05,41F1,DjTitle_DrawArrowDown2,C,23,11,,0,
@@ -680,7 +680,7 @@ jp_bank,jp_addr,jp_name,jp_tag,bytes,instructions,kitty,hits,kind
 05,423A,DjTitle_LoadNumeralTile,C,22,11,,0,
 05,4250,Mode1F_State03_MenuPerformer,C,123,59,,0,
 05,42CB,DjTitle_ReadPerformerKeys,C,33,20,,0,
-05,42EC,DjTitle_DrawMenu3,C,16,6,02:75D5,1,masked
+05,42EC,DjTitle_DrawMenu3,C,16,6,02:759E 02:75D5,2,masked
 05,42FC,DjTitle_DrawSourceSprite3,C,14,6,,0,
 05,430A,DjTitle_DrawPerformerBlink,C,23,11,,0,
 05,4321,DjTitle_DrawArrowLeft3,C,23,11,,0,
@@ -1258,8 +1258,8 @@ jp_bank,jp_addr,jp_name,jp_tag,bytes,instructions,kitty,hits,kind
 07,64F7,SpaceFever_FireBulletAt,C,59,36,,0,
 07,6532,SpaceFever_DrawBullets,C,37,23,,0,
 07,6557,SpaceFever_DecodePath,C,47,37,,0,
-07,6586,SpaceFever_Collide_Waves,C,13,5,02:75D8,1,masked
-07,6593,SpaceFever_Collide_Boss,C,13,5,02:75D8,1,masked
+07,6586,SpaceFever_Collide_Waves,C,13,5,02:75A1 02:75D8,2,masked
+07,6593,SpaceFever_Collide_Boss,C,13,5,02:75A1 02:75D8,2,masked
 07,65A0,SpaceFever_ShotVsEnemy,C,56,31,,0,
 07,65D8,SpaceFever_EnemyHit,C,63,32,,0,
 07,6617,SpaceFever_EnemyVsPlayer,C,45,24,,0,
@@ -1490,10 +1490,10 @@ jp_bank,jp_addr,jp_name,jp_tag,bytes,instructions,kitty,hits,kind
 09,4A7D,OwnerCard_BlinkTitle,C,75,31,,0,
 09,4AC8,Mode08_State05_CardLeave,C,50,21,,0,
 09,4AFA,Mode08_State06_EditorInit,C,148,57,,0,
-09,4B8E,Mode08_State07_EditName,C,16,6,02:75D5,1,masked
-09,4B9E,Mode08_State08_EditSex,C,13,5,02:75D8,1,masked
-09,4BAB,Mode08_State09_EditBirthDate,C,16,6,02:75D5,1,masked
-09,4BBB,Mode08_State0A_EditBloodType,C,13,5,02:75D8,1,masked
+09,4B8E,Mode08_State07_EditName,C,16,6,02:759E 02:75D5,2,masked
+09,4B9E,Mode08_State08_EditSex,C,13,5,02:75A1 02:75D8,2,masked
+09,4BAB,Mode08_State09_EditBirthDate,C,16,6,02:759E 02:75D5,2,masked
+09,4BBB,Mode08_State0A_EditBloodType,C,13,5,02:75A1 02:75D8,2,masked
 09,4BC8,Mode08_State0B_SaveOwner,C,22,9,,0,
 09,4BDE,Mode08_State0C_RecordInit,C,112,45,,0,
 09,4C58,Mode08_State0E_RecordLeave,C,12,5,,0,

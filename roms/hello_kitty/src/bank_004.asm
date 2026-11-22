@@ -373,7 +373,7 @@ jr_004_4ab2:
     bit 7, a                                      ; $4ADB
     jp nz, Cam_MainDispatch_Band1                 ; $4ADD
 
-    ld de, hObject_RunAll_FFD0                    ; $4AE0
+    ld de, hMode07_StateTable_FFD0                ; $4AE0
     add hl, de                                    ; $4AE3
     jp c, Cam_MainDispatch_EnterBand1             ; $4AE4
 

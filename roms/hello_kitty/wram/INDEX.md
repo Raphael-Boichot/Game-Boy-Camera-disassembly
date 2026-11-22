@@ -2,7 +2,7 @@
 
 | File | Content |
 |---|---|
-| `wram_access_kitty.csv` | every proven access site to `$C000-$DFFF`, `$FF00-$FF7F`, `$FF80-$FFFE` (5693 rows; `tools/wram_db.py` on `trace/trace_kitty.json`; kinds R 2061, W 2866, P 766) |
+| `wram_access_kitty.csv` | every proven access site to `$C000-$DFFF`, `$FF00-$FF7F`, `$FF80-$FFFE` (5798 rows; `tools/wram_db.py` on `trace/trace_kitty.json`; kinds R 2115, W 2911, P 772) |
 | `wram_summary_kitty.csv` | one row per address (704 addresses, 666 of them WRAM / HRAM): reads, writes, pointer loads, banks, routines, written constants |
 
 Written by `tools/kitty_l4.py` (roadmap step 11, 2026-11-15), with the names, the SRAM files and the constants; never edit these files by hand.

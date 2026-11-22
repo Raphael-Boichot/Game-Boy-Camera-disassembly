@@ -173,7 +173,7 @@ bank,addr,name,conf,note,source
 06,5B3A,Kitts_Subtract,C,"the Kitts - DE by 00:0CD3 (the BCD subtraction beside $0CB4), saved; carry returned; runs on its screen (0E:08 0E:14) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
 06,5B59,Kitts_CheckAfford,C,"a copy of the Kitts in $D949 minus DE (00:0CD3), nothing saved: the carry says whether DE Kitts can be paid; runs on its screen (0E:08 0E:14 11:02) in the core replays (port/entry_modes_kitty.csv); code read",hand 2026-11-08
 06,5F95,KeyPrompt_LoadSounds,C,the three key-prompt sound pairs $D8E6-$D8EB from record A of the pointer table 06:5F7F (read by KeyPrompt_*); runs in the camera (mode $02),hand 2026-11-08
-06,5FF8,KeyPrompt_LoadSoundsB,I,"the same code again, called from mode $09 (forced only); not run in the core",hand 2026-11-08
+06,5FF8,KeyPrompt_LoadSoundsB,C,"KeyPrompt_LoadSounds again (the same code), called only from Mode09_State0C with A = $0A (06:6B76): the giving unit asked for a photo by a leading receiver; run in the linked cores (tools/kitty_core_link.py, recv_leads, 2026-11-22)",hand 2026-11-22
 06,6079,Link_CountdownDA00,C,$DA00-$DA01 - 1; Z when it reaches 0,hand 2026-11-08
 06,6086,Counters_AddReceived,C,"received boy $DAD1 and girl $DAD2 + 1 in BCD (at most 99) by the bits 0 / 1 of [$CFFF], counters loaded and saved",hand 2026-11-08
 06,60B8,Exchange_RequestPage,C,"runs in mode $08 state $01 in the linked exchange (BGB 2026-11-08, two units)",hand 2026-11-08
@@ -1070,7 +1070,8 @@ bank,addr,name,conf,note,source
 16,7400,Leftover_16_7400_Map,I,"leftover: 1024 bytes (16:7400-77FF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it",hand 2026-11-22
 16,7800,Leftover_16_7800_Map,I,"leftover: 1024 bytes (16:7800-7BFF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it",hand 2026-11-22
 16,7C00,Leftover_16_7C00_Map,I,"leftover: 1024 bytes (16:7C00-7FFF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the rest $FF: tile number 255, the $FF runs are map data, owner 2026-11-22); no run reads it and no code names it",hand 2026-11-22
-1C,61DA,Leftover_1C_61DA_Tiles,I,"leftover: 2534 bytes (1C:61DA-6BBF) of message-strip tiles, white kana on black (drawn as 2bpp tiles aligned on 1C:61D0), the last two tiles all $FF (black); no run reads them and no code names them",hand 2026-11-22
+1C,61C0,Gfx_1C_61C0_MessageStrips,C,"the picture strips of messages 0 / 8, 1, 2 and 3 of the message screen (mode $14), $280 bytes each at 1C:57C0 + the offsets of 06:4450 ($0A00, $0C80, $0F00, $1180), copied to $8800 by Mode14_State00 (06:44E1); white kana on black; read in the core: message 0 in tools/kitty_rare_runs.py (album full on a copy), 1, 2, 3 and 8 in tools/kitty_core_link.py (no photo to give / to receive, cable pulled, receiving album full); screens/link_core_kitty.png",hand 2026-11-22
+1C,61DA,-,I,replaced by Gfx_1C_61C0_MessageStrips: the strips start at 1C:61C0 (message 0 / 8) and every one is now read (2026-11-22),hand 2026-11-22
 2F,61E1,-,I,replaced by Leftover_2F_61E0_Tiles: the first tile starts at 2F:61E0,hand 2026-11-22
 2F,61E0,Leftover_2F_61E0_Tiles,I,"leftover: 512 bytes (2F:61E0-63DF), 32 tiles, white kana and icons on black, drawn as 2bpp tiles; their $FF rows are black; no run reads them and no code names them",hand 2026-11-22
 33,6C57,-,I,"replaced by Leftover_33_6C40_Tiles: the first tile starts at 33:6C40, after the 576 bytes of Map_33_6A00",hand 2026-11-22
@@ -1082,3 +1083,6 @@ bank,addr,name,conf,note,source
 12,41E3,-,C,"part of Font8x16Thin_Bank12 (12:4000): one label for the whole font, as the Japanese font 2A:4000 (2026-11-22)",hand 2026-11-22
 12,4240,-,C,"part of Font8x16Thin_Bank12 (12:4000): one label for the whole font, as the Japanese font 2A:4000 (2026-11-22)",hand 2026-11-22
 12,4263,-,C,"part of Font8x16Thin_Bank12 (12:4000): one label for the whole font, as the Japanese font 2A:4000 (2026-11-22)",hand 2026-11-22
+03,63DC,OamList_03_63DC_PrintGame_Kitty,C,"a frame of Kitty in the print fruit game: the loop 02:76CF of her script 02:7686 (PrintGame_ObjKitty, after A) shows 03:637C for $70 frames, then this one; read in the core when the print lasts long enough (tools/kitty_rare_runs.py, print_game: 40 more busy replies of the printer); also drawn by mode $1B, never entered (forced run)",hand 2026-11-22
+03,63FC,OamList_03_63FC_Obj_DrawSprite,C,"sprite layouts read in the runs by Obj_DrawSprite (frames of the object scripts of bank $02; 03:641E-645B read since the runs of 2026-11-22, 03:645C on the exchange screen, mode $07); a hand label since the Kitty frame 03:63DC got its own (2026-11-22)",hand 2026-11-22
+03,6524,Leftover_03_6524,I,"leftover: 712 bytes (03:6524-67EB) that no run reads or executes and that no code names (owner rule 2026-11-11); a hand label since the labels 03:63DC / 03:63FC are hand ones (2026-11-22)",hand 2026-11-22

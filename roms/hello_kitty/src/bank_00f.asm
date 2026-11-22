@@ -635,9 +635,7 @@ Sfx1_Step_3C_3D_3E::
 ; C: read in the runs by Sfx1_Step_17, Snd_Sfx_Start; first read on the screen Mode01_MainMenu_State02
 ; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_453D_Mode01_MainMenu_State02::
-    db $00, $80, $00, $ff, $87, $21, $90, $21, $90, $21, $90
-
-    db $21, $90, $00
+    db $00, $80, $00, $ff, $87, $21, $90, $21, $90, $21, $90, $21, $90, $00
 
 ; C: same instructions as the Japanese Sfx1_Init_17 (1F:4583) over the whole routine (5 instructions, to the first ret
 ; / jp), only the addresses differ; code compared
@@ -1669,9 +1667,7 @@ Sfx1_Step_0F::
 ; C: read in the runs by Sfx1_Step_11, Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State05
 ; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4B94_Mode02_TakePhotos_State05::
-    db $4a, $00, $f2, $90, $87, $d3, $b3, $a3, $43, $43, $33
-
-    db $33, $23, $23, $00
+    db $4a, $00, $f2, $90, $87, $d3, $b3, $a3, $43, $43, $33, $33, $23, $23, $00
 
 ; C: Sfx1 init handler of the sound ids $11 (entries of Sfx1_InitTbl)
 Sfx1_Init_11::
@@ -3887,30 +3883,7 @@ Snd_0F_57D9_Mode04_PlayMenu_State01::
 ; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
 ; tools/kitty_layout_kinds.py
 Snd_0F_5AA0_Mode05_StampWindow_State06::
-    INCBIN "data/bank_0f/Snd_0F_5AA0_Mode05_StampWindow_State06.bin" ; $5AA0, 3810 bytes
-; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
-; tools/kitty_layout_kinds.py
-Snd_0F_6982_Mode02_TakePhotos_State01::
-    INCBIN "data/bank_0f/Snd_0F_6982_Mode02_TakePhotos_State01.bin" ; $6982, 701 bytes
-; C: read in the runs by Snd_Trk_FetchByte
-Snd_0F_6C3F_Snd_Trk_FetchByte::
-    db $9d, $a7, $00, $00, $9b, $02, $a8, $01, $01, $a9, $01, $01, $a1, $54, $ac, $01
-    db $a3, $54, $9c, $9d, $78, $00, $80, $a4, $5e, $5a, $58, $56, $54, $01, $a5, $01
-    db $00, $9d, $2d, $7a, $20, $a2, $16, $01, $2e, $01, $2a, $01, $24, $01, $1e, $01
-    db $20, $01, $a9, $22, $01, $24, $a2, $0c, $01, $16, $01
-
-    db $2e, $01, $2a, $01, $24, $01, $1e, $01, $20, $01, $a9, $22, $01, $24, $a2, $2a
-    db $01, $16, $01, $16, $01, $9d, $1d, $7a, $20, $06, $01, $06, $01, $08, $01, $08
-    db $01, $0a, $01, $0a, $01, $a3, $0c, $a5, $01, $a3, $0c, $a9, $01, $01, $0c, $a2
-    db $0c, $01, $00
-
-; C: read in the runs by Snd_Trk_FetchByte
-Snd_0F_6CAD_Snd_Trk_FetchByte::
-    db $9b, $06, $a3, $06, $0b, $06, $0b, $9c
-
-    db $06, $a8, $01, $a3, $01, $0b, $a9, $06, $01, $06, $a3, $10, $00
-
+    INCBIN "data/bank_0f/Snd_0F_5AA0_Mode05_StampWindow_State06.bin" ; $5AA0, 4642 bytes
 ; I: leftover: 303 bytes (0F:6CC2-6DF0) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_0F_6CC2::
     INCBIN "data/bank_0f/Leftover_0F_6CC2.bin" ; $6CC2, 303 bytes
@@ -3918,27 +3891,7 @@ Leftover_0F_6CC2::
 ; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint
 ; (trace/bgb_reads_kitty.csv: exchange); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_6DF1_Mode11_StrawberryChannel_State07::
-    INCBIN "data/bank_0f/Snd_0F_6DF1_Mode11_StrawberryChannel_State07.bin" ; $6DF1, 3286 bytes
-; C: read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen
-; Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
-; tools/kitty_layout_kinds.py
-Snd_0F_7AC7_Mode0C_RecordBook_State01::
-    db $00, $94, $41, $00, $00, $d2, $7a, $00, $00, $00, $00, $d8, $7a, $ff, $ff, $d2
-    db $7a, $9d, $93, $00, $80, $a2, $32, $32, $32, $a3, $32, $a2, $3a, $36, $32, $a3
-    db $30, $a2, $30, $a8, $32, $a2, $3a, $3a, $3a, $a3, $3a, $a2, $40, $3c, $3a, $a3
-    db $36, $a2, $36, $a4, $32, $a2, $01, $00, $00, $94, $41, $00, $00, $0a, $7b, $00
-    db $00, $00, $00, $10, $7b, $ff, $ff, $0a, $7b, $9d, $93, $00, $80, $a2, $40, $40
-    db $40, $44, $40, $3c, $3a, $36, $a3, $32, $3a, $a4, $40, $a2, $44, $44, $44, $40
-    db $48, $48, $48, $44, $a3, $40, $a2, $44, $48, $a4, $4a, $00, $00, $94, $41, $00
-    db $00, $3e, $7b, $00, $00, $00, $00, $44, $7b, $ff, $ff, $3e, $7b, $9d, $93, $00
-    db $80, $a3, $4a, $52, $4e, $4a, $a7, $48, $a1, $44, $48, $a4, $4a, $a3, $4a, $52
-    db $4e, $4a, $a7, $44, $a1, $44, $48, $a4, $4a, $00, $00, $94, $41, $00, $00, $6c
-    db $7b, $00, $00, $00, $00, $74, $7b, $7d, $7b, $ff, $ff, $6e, $7b, $9d, $93, $00
-    db $80, $a0, $3a, $40, $4a, $00, $9d, $5d, $00, $81, $a3, $3a, $40, $4a, $a7, $48
-    db $a2, $44, $a3, $40, $a7, $44, $a2, $3c, $a3, $44, $a4, $40, $a3, $01, $a3, $3c
-    db $a2, $3a, $36, $36, $a7, $40, $a3, $3a, $a2, $32, $36, $3a, $a7, $40, $a3, $3c
-    db $3a, $a7, $36, $a2, $40, $a8, $4a, $a3, $01, $00
-
+    INCBIN "data/bank_0f/Snd_0F_6DF1_Mode11_StrawberryChannel_State07.bin" ; $6DF1, 3520 bytes
 ; I: leftover: 448 bytes (0F:7BB1-7D70) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_0F_7BB1::
     INCBIN "data/bank_0f/Leftover_0F_7BB1.bin" ; $7BB1, 448 bytes

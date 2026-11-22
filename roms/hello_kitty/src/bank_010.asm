@@ -379,24 +379,35 @@ Gfx_10_5600_Mode03_ViewAlbum_State11::
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State06
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5700_Mode02_TakePhotos_State06::
-    INCBIN "data/bank_10/Gfx_10_5700_Mode02_TakePhotos_State06.bin" ; $5700, 259 bytes
-; I: leftover: 253 bytes (10:5803-58FF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_10_5803::
-    db $00
-
-    db $1f, $00, $2f, $1f, $5f, $39, $7f, $30, $bf, $66, $ff, $66, $ff, $60, $bf, $66
-    db $7f, $26, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00, $07, $00, $1f, $03
-    db $9f, $0e, $5f, $88, $bf, $ce, $ff, $c6, $df, $6c, $fd, $6a, $ff, $6a, $df, $6a
-    db $ff, $4a, $bd, $ca, $df, $0d, $1f, $07, $0f, $00, $00, $00, $c0, $00, $ff, $80
-    db $ff, $ff, $ff, $0d, $ef, $dd, $df, $bd, $ef, $1d, $d7, $ad, $ef, $b5, $ef, $b5
-    db $6f, $b5, $ef, $74, $ff, $4e, $ff, $f3, $ff, $00, $00, $00, $7f, $00, $ff, $3f
-    db $ff, $2a, $ff, $ea, $ff, $07, $ff, $ef, $ff, $2a, $ff, $2b, $ff, $2b, $fe, $2b
-    db $ff, $ea, $fe, $cb, $ff, $db, $ff, $f1, $fb, $00, $00, $00, $e0, $00, $ff, $80
-    db $ff, $fe, $ff, $82, $ef, $f6, $df, $ec, $f7, $0e, $eb, $f6, $f7, $fa, $d7, $3a
-    db $f7, $da, $eb, $56, $77, $8e, $ff, $fc, $fe
+    db $00, $00, $00, $00, $1f, $00, $2f, $1f, $5f, $39, $7f, $30, $bf, $66, $ff, $66
+    db $ff, $60, $bf, $66, $7f, $26, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
+    db $00, $00, $03, $00, $9f, $01, $5f, $8e, $bf, $c8, $ff, $c7, $df, $6f, $ff, $68
+    db $ff, $6f, $df, $67, $fd, $4b, $bd, $cb, $db, $0c, $1f, $07, $0f, $00, $00, $00
+    db $00, $00, $ef, $00, $ff, $c7, $7f, $fc, $ff, $0f, $bf, $73, $bf, $72, $ff, $0b
+    db $7f, $b8, $78, $a0, $f3, $c0, $f7, $e3, $f7, $22, $f7, $e3, $f7, $00, $00, $00
+    db $00, $00, $fc, $00, $fc, $f8, $fc, $08, $bf, $d8, $7f, $bb, $ee, $1f, $d7, $ee
+    db $ee, $37, $6f, $37, $ef, $34, $d7, $ec, $ee, $1c, $fe, $f8, $fc, $00, $00, $00
+    db $00, $00, $7e, $00, $7e, $3c, $be, $64, $56, $ec, $fc, $88, $dc, $30, $f8, $60
+    db $f8, $20, $7c, $90, $be, $c8, $d6, $6c, $fe, $24, $7e, $3c, $7e, $00, $00, $00
 
     ; padding
-    ds $63, $00
+    ds $60, $00
+
+; C: read in the runs by Copy_DEtoHL
+Src_10_5800_Copy_DEtoHL::
+    db $00, $00, $00, $00, $1f, $00, $2f, $1f, $5f, $39, $7f, $30, $bf, $66, $ff, $66
+    db $ff, $60, $bf, $66, $7f, $26, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
+    db $07, $00, $1f, $03, $9f, $0e, $5f, $88, $bf, $ce, $ff, $c6, $df, $6c, $fd, $6a
+    db $ff, $6a, $df, $6a, $ff, $4a, $bd, $ca, $df, $0d, $1f, $07, $0f, $00, $00, $00
+    db $c0, $00, $ff, $80, $ff, $ff, $ff, $0d, $ef, $dd, $df, $bd, $ef, $1d, $d7, $ad
+    db $ef, $b5, $ef, $b5, $6f, $b5, $ef, $74, $ff, $4e, $ff, $f3, $ff, $00, $00, $00
+    db $7f, $00, $ff, $3f, $ff, $2a, $ff, $ea, $ff, $07, $ff, $ef, $ff, $2a, $ff, $2b
+    db $ff, $2b, $fe, $2b, $ff, $ea, $fe, $cb, $ff, $db, $ff, $f1, $fb, $00, $00, $00
+    db $e0, $00, $ff, $80, $ff, $fe, $ff, $82, $ef, $f6, $df, $ec, $f7, $0e, $eb, $f6
+    db $f7, $fa, $d7, $3a, $f7, $da, $eb, $56, $77, $8e, $ff, $fc, $fe, $00, $00, $00
+
+    ; padding
+    ds $60, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0A_NameCard_State02
 ; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
