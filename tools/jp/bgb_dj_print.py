@@ -2,7 +2,7 @@
 """Music editor (Trippy-H, mode $1F) and its score print in BGB, with the Game Boy Printer helper (bgb_printer.py) on the link (-connect).
 Route (tools/jp/dj_route.py, found in my core): corpus entry 197 (save _ff, Up held at boot) = Space Fever II; Right held 30 frames and A pulsed from frame 6 shoots the D.J. ship -> 1F:05;
 Select -> 1F:09 (SOUND I page); with --print: Start held 8 frames, Start+A 4 frames, Start 4 frames (05:4744-4758) -> score print (05:5959).
-usage: bgb_dj_print.py OUTDIR [--print] [--noprinter] [--tail FRAMES] [--port N] [--system 0] [--select N] [--seq 'Start:4:120,Start:50:120'] [--br ADDR[,ADDR]]   --select N = extra Select presses (SOUND II, NOISE pages); --seq = more keys (KEY:hold:wait) after the Select presses, before the print keys"""
+usage: bgb_dj_print.py OUTDIR [--print] [--noprinter] [--tail FRAMES] [--port N] [--system 0] [--select N] [--seq 'Start:4:120,Start:50:120'] [--br ADDR[,ADDR]]   --select N = extra Select presses (SOUND II, NOISE pages; the print keys do nothing there, docs §17.6); --seq = more keys (KEY:hold:wait) after the Select presses, before the print keys"""
 import sys, os, json, shutil
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); ROOT = os.path.dirname(HERE)
 args = sys.argv[1:]
