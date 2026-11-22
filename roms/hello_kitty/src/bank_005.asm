@@ -4365,7 +4365,7 @@ Text_SmallGlyphAddr::
     ld b, a                                       ; $63F5
     sla c                                         ; $63F6
     rl b                                          ; $63F8
-    ld hl, NameCard_MakeIdNumber                  ; $63FA
+    ld hl, Font8x16Thin_Bank12                    ; $63FA
     add hl, bc                                    ; $63FD
     ld e, l                                       ; $63FE
     ld d, h                                       ; $63FF
@@ -4412,7 +4412,7 @@ Text_BigGlyphAddr::
     rl b                                          ; $6430
     sla c                                         ; $6432
     rl b                                          ; $6434
-    ld hl, NameCard_MakeIdNumber                  ; $6436
+    ld hl, Font16x16_Bank09                       ; $6436
     add hl, bc                                    ; $6439
     ld e, l                                       ; $643A
     ld d, h                                       ; $643B
@@ -4598,7 +4598,7 @@ Text_SmallGlyphAddrDA56::
     rl b                                          ; $6526
     sla c                                         ; $6528
     rl b                                          ; $652A
-    ld hl, NameCard_MakeIdNumber                  ; $652C
+    ld hl, Font8x16Thin_Bank12                    ; $652C
     add hl, bc                                    ; $652F
     ld e, l                                       ; $6530
     ld d, h                                       ; $6531

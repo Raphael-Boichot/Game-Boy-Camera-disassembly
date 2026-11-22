@@ -251,8 +251,11 @@ bank,site,kind,operand,value,target,expression,evidence,read
 05,05:6152,?,bc,$0200,,,the walk ends without a use,
 05,05:625D,ptr,bc,$6189,05:6189,Mode05_StateTable + $18,C: dereferenced at 05:6274 (bank 05 mapped); that instruction read the target block in the runs,yes
 05,05:62AC,ptr,hl,$617F,05:617F,Mode05_StateTable + $E,C: dereferenced at 05:62B0 (bank 05 mapped); that instruction read the target block in the runs,yes
+05,05:63FA,ptr,expr,NameCard_MakeIdNumber,,Font8x16Thin_Bank12,"C (code read 2026-11-22): Text_SmallGlyphAddr adds 32 (c - 1) to $4000 and Text_DrawSmallLine copies from bank $12 (ld a, $12 at 05:6415): the thin font 12:4000; the listing had NameCard_MakeIdNumber (bank 05), the wrong bank",
+05,05:6436,ptr,expr,NameCard_MakeIdNumber,,Font16x16_Bank09,"C (code read 2026-11-22): Text_BigGlyphAddr adds 64 (c - 1) to $4000 and Text_CopyBigLine copies from bank $09 (ld a, $09 at 05:645C): the 16x16 font 09:4000; the listing had NameCard_MakeIdNumber (bank 05), the wrong bank",
 05,05:64EA,?,hl,$7B40,,,the walk ends without a use,
 05,05:6505,?,hl,$7B40,,,the walk ends without a use,
+05,05:652C,ptr,expr,NameCard_MakeIdNumber,,Font8x16Thin_Bank12,"C (code read 2026-11-22): Text_SmallGlyphAddrDA56 adds 32 (code - 1) to $4000, the same glyph address as Text_SmallGlyphAddr (bank $12, the thin font 12:4000); the listing had NameCard_MakeIdNumber (bank 05), the wrong bank",
 05,05:6593,ptr,hl,$7AE0,0C:7AE0,Gfx_0C_7AE0_Mode03_ViewAlbum_State0B,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
 05,05:65C1,ptr,hl,$7A40,0C:7A40,Gfx_0C_7A40_Mode03_ViewAlbum_State0B,C: dereferenced at 00:021C (bank 0C mapped); that instruction read the target block in the runs,yes
 05,05:65E0,?,bc,$0140,,,added to HL before the dereference: a bank-0 base or an offset,

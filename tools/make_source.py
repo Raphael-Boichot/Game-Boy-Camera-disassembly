@@ -74,7 +74,7 @@ TREES['hello_kitty'] = dict(dir=_HK, rom='pocketcamera_kitty.gb', sym=os.path.jo
                           '--const-tables', os.path.join(_HKD, 'const_tables_kitty.csv'), '--const-sounds', os.path.join(_HKD, 'sound_names_kitty.csv'),
                           '--state-names', os.path.join(_HKD, 'state_names_kitty.csv'), '--text-tables', 'none'],
                      cov=os.path.join(_HK, 'trace', 'cov_kitty_runs.npz'), report=os.path.join(_HKD, 'rom_operands_kitty.csv'),
-                     manual=None, readers={}, suffix='kitty',
+                     manual=os.path.join(_HKD, 'rom_operands_manual_kitty.csv'), readers={}, suffix='kitty',
                      far=[('Far_Call', 'b', 'hl'), ('Far_CallKeepA', 'b', 'hl'), ('Far_Jump', 'a', 'hl'), ('Mode1D_ReadByteFromBank', 'a', 'hl'),
                           ('Copy_FarDEtoHL', 'a', 'de'), ('Copy_FarUnrolled', 'a', 'de'), ('Copy_FarInverted', 'a', 'de'), ('Vram_CopyHBlankFar', 'a', 'de'),
                           ('Object_Create', '=02', 'de'), ('Object_CreateWithParam', '=02', 'de')],

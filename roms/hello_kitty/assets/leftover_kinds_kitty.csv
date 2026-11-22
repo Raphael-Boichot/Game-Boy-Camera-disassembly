@@ -60,7 +60,6 @@ Leftover_03_40C8_OamList,OAM,C,"4-byte sprite records ending on bit 0 of the att
 Leftover_03_40F0_OamList,OAM,C,"4-byte sprite records ending on bit 0 of the attribute (hand 2026-11-15)"
 Leftover_0F_4000_Snd_NoiseNR43Tbl,SOUND,C,"the bytes of the Japanese Snd_NoiseNR43Tbl (hand 2026-11-15)"
 Leftover_0F_4025_Snd_LengthTbl,SOUND,C,"the bytes of the Japanese Snd_LengthTbl (hand 2026-11-15)"
-Leftover_12_4000_Tiles,T_UI,I,"2bpp tiles: equal plane pairs, kana-like glyphs (hand 2026-11-15)"
 Leftover_16_4000_Tiles,T_UI,I,"2bpp tiles: mostly blank, parts of frames and glyphs (hand 2026-11-15)"
 Leftover_02_4000_ObjScript,OAM,C,"an object script: two words and a jump to itself, the form of ObjScript_02_4008 (hand 2026-11-15)"
 Leftover_02_40C8,OAM,I,"object scripts: n $80 pointer records and $1E $1F jumps, as the ObjScript blocks on both sides (2026-11-15)"

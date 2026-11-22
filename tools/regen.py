@@ -36,6 +36,7 @@ def kitty_steps(K, J):
         ('match_jp', lambda: [PY, 'tools/kitty_match_jp.py', J, K, KD + 'disasm/match_jp_kitty.csv']),
         ('similar_jp', lambda: [PY, 'tools/kitty_similar_jp.py', J, K, KD + 'disasm/similar_jp_kitty.csv']),
         ('names', lambda: [PY, 'tools/kitty_names.py', '--rom', K, '--jp', J]),
+        ('charset', lambda: [PY, 'tools/kitty_charset.py', K, J]),          # L6: the name / comment character set, checked glyph by glyph
         ('sym', lambda: [PY, 'tools/sym_build.py', K, '--names', KD + 'disasm/sym_names_kitty.csv', '--types', KD + 'disasm/sym_types_kitty.csv', '--trace', KD + 'trace/trace_kitty.json',
                          '--out', KD + 'pocketcamera_kitty.sym', '--report']),
         ('doubts', lambda: [PY, 'tools/kitty_doubts.py']),

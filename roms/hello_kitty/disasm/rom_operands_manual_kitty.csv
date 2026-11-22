@@ -1,0 +1,4 @@
+site,value,bank,bank_site,expr,evidence
+05:63FA,NameCard_MakeIdNumber,12,05:6415,Font8x16Thin_Bank12,"C (code read 2026-11-22): Text_SmallGlyphAddr adds 32 (c - 1) to $4000 and Text_DrawSmallLine copies from bank $12 (ld a, $12 at 05:6415): the thin font 12:4000; the listing had NameCard_MakeIdNumber (bank 05), the wrong bank"
+05:6436,NameCard_MakeIdNumber,09,05:645C,Font16x16_Bank09,"C (code read 2026-11-22): Text_BigGlyphAddr adds 64 (c - 1) to $4000 and Text_CopyBigLine copies from bank $09 (ld a, $09 at 05:645C): the 16x16 font 09:4000; the listing had NameCard_MakeIdNumber (bank 05), the wrong bank"
+05:652C,NameCard_MakeIdNumber,12,,Font8x16Thin_Bank12,"C (code read 2026-11-22): Text_SmallGlyphAddrDA56 adds 32 (code - 1) to $4000, the same glyph address as Text_SmallGlyphAddr (bank $12, the thin font 12:4000); the listing had NameCard_MakeIdNumber (bank 05), the wrong bank"

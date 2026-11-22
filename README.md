@@ -21,7 +21,7 @@ So, here is the project. Like all my previous work, it will be improved step by 
 | Pocket Camera (Japan) (Rev A) | done | done | done | done | done | done | partial |
 | Game Boy Camera (USA, Europe) | done | done | done | done | done | done | partial |
 | Game Boy Camera Gold (USA) | done | done | done | done | done | done | partial |
-| Pocket Camera (Hello Kitty) | done | done | done | done | done | done | not started |
+| Pocket Camera (Hello Kitty) | done | done | done | done | done | done | partial |
 | Pocket Camera Prototype (Japan) ("DEBAGAME") | done | done | done | done | done | done | partial |
 
 **The purpose of this project is not to make alternative Game Boy Camera roms as best open source alternatives yet exist, but to understand finely a piece of video game history and reveal definitively all the possible secrets buried into the code.**
@@ -165,7 +165,7 @@ Ported from the Japanese symbol file with the international tools: L0-L5 done (a
 
 ### Pocket Camera (Hello Kitty) (prototype)
 
-L0-L3 done (2026-11-12: every routine entry and every data block named, <!--f:kitty.names-->2,224 names of which <!--f:kitty.names.I-->132 are not C: <!--f:kitty.leftovers-->118 leftovers `Leftover_BB_AAAA` by the owner rule, <!--f:kitty.doubts-->7 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4 done (2026-11-15: <!--f:kitty.ram-->478 names of RAM variables, the SRAM map checked on the game's own saves, the constants), L5 done (`roms/hello_kitty/src/`, `make TREE=hello_kitty check` byte-exact), L6 not started ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
+L0-L3 done (2026-11-12: every routine entry and every data block named, <!--f:kitty.names-->2,217 names of which <!--f:kitty.names.I-->128 are not C: <!--f:kitty.leftovers-->114 leftovers `Leftover_BB_AAAA` by the owner rule, <!--f:kitty.doubts-->7 in the doubts list; the data blocks by kind and consumer, as the Japanese ones), L4 done (2026-11-15: <!--f:kitty.ram-->478 names of RAM variables, the SRAM map checked on the game's own saves, the constants), L5 done (`roms/hello_kitty/src/`, `make TREE=hello_kitty check` byte-exact), L6 partial: the character set, 2026-11-22 ([`roms/hello_kitty/`](roms/hello_kitty/README.md); the reachability map is there).
 
 **ROM layout**
 
@@ -238,7 +238,7 @@ The layout maps of the Gold, Hello Kitty and prototype ROMs are drawn by `python
 | Pocket Camera (Japan) (Rev A) (SGB Enhanced) | `fdcfe686cf4df461e870b6e53b2b5a8b` | [`roms/jp_rev_a/`](roms/jp_rev_a/) | L0-L5 done, L6 partial |
 | Game Boy Camera (USA, Europe) (SGB Enhanced) | `42d2f65e2549be9d1d126a6828b5d1c1` | [`roms/us_eu/`](roms/us_eu/) | L0-L5 done (ported from the Japanese tables, docs §1.5: L2 static and observed 97.1 %; L3 C 5,281 / I 130, I = unused, by evidence; L5 `make TREE=us_eu check`), L6 partial (character set and keyboard tables as text) |
 | Game Boy Camera Gold (USA) (SGB Enhanced) | `b2999cfb6dacb439f501a71f30f91762` | [`roms/gold/`](roms/gold/) | L0-L5 done (ported as the international ROM: L3 C 5,280 / I 130; L5 `make TREE=gold check`), L6 partial (character set) |
-| Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L2 done (own trace, 0 unresolved, observed in the core and BGB; symbol file, round trip byte-exact), L3 done (every routine and data block named; 0 placeholder), L4 done (RAM names, SRAM map, constants), L5 done (`src/`, `make TREE=hello_kitty check` byte-exact), L6 not started |
+| Pocket Camera (Hello Kitty) (prototype) | `0a323bddc4f0159cea76cf44ed0c1a3c` | [`roms/hello_kitty/`](roms/hello_kitty/) | L0-L2 done (own trace, 0 unresolved, observed in the core and BGB; symbol file, round trip byte-exact), L3 done (every routine and data block named; 0 placeholder), L4 done (RAM names, SRAM map, constants), L5 done (`src/`, `make TREE=hello_kitty check` byte-exact), L6 partial (the character set, 2026-11-22) |
 | Pocket Camera Prototype (Japan) ("DEBAGAME") | `19b50a5f67ef4f0d015e7d813370756e` as dumped (`1d8097de3497db8b182bcd2a984b6063`: the header-patched copy for BGB) | [`roms/prototype_debagame/`](roms/prototype_debagame/) | L0-L2 done (own trace, 0 unresolved, all code in bank $00; symbol file, round trip byte-exact without rgbfix; 97 % of the code run, 13 screens confirmed in BGB), L3 done (every routine named, mostly with the developers' names from two older builds; 109 leftover runs named `Leftover_BB_AAAA`, I), L4-L5 done (RAM names and `SEQ_*` constants; `make TREE=prototype_debagame check`, no rgbfix), L6 partial (the character set and the screen texts, 2026-11-22) |
 
 The ROMs are not in the repository (md5 values in §1.1; the owner supplies them outside it).

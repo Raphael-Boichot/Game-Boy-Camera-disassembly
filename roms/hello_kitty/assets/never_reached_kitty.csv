@@ -8,7 +8,7 @@ item,bank,start,end,kind,verdict,tag,evidence
 7,19,6980,6D00,56 tiles: left and right borders of a wild frame,used (wild frame print),C,as item 4
 8,19,5180,5500,56 tiles: left and right borders of a wild frame,used (wild frame print),C,as item 4
 9,18,5180,5500,56 tiles: left and right borders of a wild frame,used (wild frame print),C,as item 4
-19,12,4000,5FE0,8x16 font (thin),unused,I,a second 8x16 font (kana / Latin / digits) in the first half of bank $12; the font the game draws is the bold one at 12:6000 (read); 4 tiles of the first half (12:40E0 / 4120 / 41C0 / 4240) are read in the runs and nothing else; no copy site and no pointer names 12:4000
+19,12,4000,5FE0,8x16 font (thin),used,C,"the thin 8x16 font of the name / comment text (Font8x16Thin_Bank12): Text_SmallGlyphAddr (05:63EC) and Text_SmallGlyphAddrDA56 (05:650D) compute 12:4000 + 32 (c - 1) for character code c, Text_DrawSmallLine (05:6401) copies the 30 glyphs of the line at $DA67 from bank $12 into tiles $8100 (code read, 2026-11-22: the verdict was unused, ""no pointer names 12:4000""); 4 glyphs read in the runs, the others only for characters the runs did not type"
 10,14,4000,5800,tiles of the mode $17 picture,unused (unreachable mode),I,loaded only by Mode17 state $00 (06:40CD); no code enters mode $17 (README)
 11,2D,7820,7C20,map of the mode $17 picture,unused (unreachable mode),I,loaded only by Mode17 state $00 (06:40D7)
 12,14,5800,7000,tiles of the Pompompurin picture,unused (unreachable mode),I,loaded only by Mode18 state $00 (06:4133)

@@ -87,10 +87,6 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 10,5803,5900,253,Leftover_10_5803,data,not_tcrf,,,
 10,5A03,5B00,253,Leftover_10_5A03,data,not_tcrf,,,
 11,6000,7000,4096,Unused_Photo_EmptyPicture0_Gfx,data,not_tcrf,,,
-12,4000,40E0,224,Leftover_12_4000_Tiles,data,not_tcrf,,,
-12,4143,41C0,125,Leftover_12_4143,data,not_tcrf,,,
-12,41E3,4240,93,Leftover_12_41E3,data,not_tcrf,,,
-12,4263,5FE0,7549,Leftover_12_4263,data,not_tcrf,,,
 13,7D74,7F00,396,Leftover_13_7D74,data,not_tcrf,,,
 13,7FA3,8000,93,Leftover_13_7FA3,data,not_tcrf,,,
 14,5800,7000,6144,Gfx_14_5800_PompompurinPicture,data,tcrf,https://tcrf.net/Hello_Kitty_Pocket_Camera,Pompompurin Picture,an apparently unused picture of Pompompurin (Game Genie 183-63B-E6E)
