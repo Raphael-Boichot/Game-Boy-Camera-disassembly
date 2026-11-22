@@ -33,7 +33,8 @@ Kitty the script 02:7686 (PrintGame_ObjKitty): a jump, then ObjCmd_JumpRandom pi
 frame 03:637C for $70 frames, then 03:63DC. With the core's printer model (the replies of the real traces: 12 inquiries answered
 busy, $06, during the first print) state $24 lasts 71 frames, less than the jump and the $70 frames; mode $1B (never entered) also
 draws it. The run: the album print path of tools/kitty_core_paths.py (photo, album, print icon, Right, A, Start; printer model 1)
-with inquiries 29-68 answered busy ($06, injected as the printer-error paths of that tool do: 40 more inquiries of printing), then
+with inquiries 29-68 answered busy ($06, injected as the printer-error paths of that tool do: 40 more inquiries of printing, about 4
+seconds; a real printer stays busy at least 9 seconds for a regular image, 9 printer packets: owner, 2026-11-22), then
 in state $24 taps drawn at random (seed 4; A twice in six, B, Left, Right, idle; held 2, 8 or 20 frames, 2, 10, 30 or 130 free),
 each trial from a cold boot, until 03:63DC is read.
 C. Message 0 of the message screen (mode $14: text 06:420D, the strip of tiles at 1C:61C0, shared with message 8): copying a photo in the

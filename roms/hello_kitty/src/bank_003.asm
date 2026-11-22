@@ -141,8 +141,8 @@ Leftover_03_639C::
     db $f8, $08, $3d, $10, $f8, $00, $3c, $10, $08, $0c, $32, $30, $08, $fc, $32, $11
 
 ; C: a frame of Kitty in the print fruit game: the loop 02:76CF of her script 02:7686 (PrintGame_ObjKitty, after A)
-; shows 03:637C for $70 frames, then this one; read in the core when the print lasts long enough
-; (tools/kitty_rare_runs.py, print_game: 40 more busy replies of the printer); also drawn by ...
+; shows 03:637C for $70 frames, then this one; read in the core when the printer stays busy as a real one does, at
+; least 9 seconds for a regular image, owner 2026-11-22 ...
 OamList_03_63DC_PrintGame_Kitty::
     db $02, $04, $2b, $10, $0a, $0c, $2d, $30, $0a, $04, $2e, $10, $0a, $fc, $2d, $10
     db $fa, $08, $21, $10, $fa, $00, $20, $10, $02, $0c, $24, $10, $02, $fc, $22, $11
