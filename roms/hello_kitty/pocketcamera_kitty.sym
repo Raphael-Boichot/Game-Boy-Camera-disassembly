@@ -840,7 +840,7 @@
 04:48e0 Cam_ORegSAR_Table_Below
 04:4920 Cam_DitherRamp_ParamsA
 04:4960 Cam_DitherRamp_ParamsB
-04:49a0 Leftover_04_49A0
+04:49a0 Leftover_04_49A0_Cam_DitherRamp_ParamsUnused
 04:49e0 Cam_CalibSanityCheck_Measure_Far
 04:49f2 Cam_LoadRegisterSet_Far
 04:49f8 Cam_PopcountLevelByIndex

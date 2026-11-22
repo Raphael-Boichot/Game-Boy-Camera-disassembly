@@ -56,4 +56,4 @@ Leftover_02_4824,OAM,I,object scripts: n $80 pointer records and $1E $1F jumps (
 Leftover_03_6C24,OAM,I,"sprite layouts: 4-byte records, attribute $10 / $11 (2026-11-15)"
 Leftover_02_7CB5,OTHER,I,"the rest of the former Leftover_02_7CAC (2026-11-22, its object scripts 02:7DC7-7E31 now read): object-script records (16 1F / 1E 1F commands) then code never referenced: object callbacks (push hl ; ld b,$06 ; ld hl,$6180 ; call 00:015B ...; far calls through 00:015B / 00:0165)"
 Leftover_03_6A94,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute $10 / $30), between the OamList blocks 03:67EC and 03:6BBC (2026-11-22)"
-Leftover_04_49A0,TBL,I,the same 64 bytes as the Japanese Cam_DitherRamp_ParamsUnused (0A:7CA0): 16 rows of 4 bytes like Cam_DitherRamp_ParamsA / B before it
+Leftover_04_49A0_Cam_DitherRamp_ParamsUnused,TBL,I,the same 64 bytes as the Japanese Cam_DitherRamp_ParamsUnused (0A:7CA0): 16 rows of 4 bytes like Cam_DitherRamp_ParamsA / B before it

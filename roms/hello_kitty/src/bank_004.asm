@@ -178,7 +178,7 @@ Cam_DitherRamp_ParamsB::
 
 ; I: leftover: 64 bytes (04:49A0-49DF) that no run reads and that no code names (owner rule 2026-11-11): the same
 ; bytes as the Japanese Cam_DitherRamp_ParamsUnused (0A:7CA0), unused there too
-Leftover_04_49A0::
+Leftover_04_49A0_Cam_DitherRamp_ParamsUnused::
     db $87, $98, $b7, $ff, $88, $98, $b6, $ff, $89, $97, $b3, $ff, $8a, $97, $b0, $fa
     db $8b, $97, $ae, $f0, $8c, $96, $ab, $e6, $8d, $96, $aa, $dc, $8e, $96, $a4, $d4
     db $8f, $96, $a2, $c8, $90, $96, $a0, $be, $91, $96, $9e, $b4, $92, $96, $9c, $ac

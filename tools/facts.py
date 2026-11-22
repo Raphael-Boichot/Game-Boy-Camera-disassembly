@@ -99,6 +99,9 @@ def facts():
             if t == 'kitty': F['kitty.doubts.forced_only'] = F['kitty.doubts.not_run'] = 0    # its two groups, quoted even when empty
             if rows and 'group' in rows[0]:
                 for k, v in collections.Counter(r['group'] for r in rows).items(): F['%s.doubts.%s' % (t, k.replace(' ', '_'))] = v
+    p = os.path.join(REPO, 'roms', 'hello_kitty', 'disasm', 'jp_counterparts_kitty.csv')     # tools/kitty_jp_counterparts.py
+    if os.path.exists(p):
+        for k, v in collections.Counter(r['relation'] for r in csv.DictReader(open(p, encoding='utf-8'))).items(): F['kitty.jpcp.%s' % k] = v
     p = os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'jp_crosscheck_kitty.csv')
     if os.path.exists(p):
         c = collections.Counter()

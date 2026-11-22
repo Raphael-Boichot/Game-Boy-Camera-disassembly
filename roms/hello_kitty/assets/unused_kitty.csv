@@ -38,7 +38,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 03,7188,72D0,328,Leftover_03_7188,data,not_tcrf,,,
 03,72E4,73B0,204,Leftover_03_72E4,data,not_tcrf,,,
 03,73C4,7418,84,Leftover_03_73C4,data,not_tcrf,,,
-04,49A0,49E0,64,Leftover_04_49A0,data,not_tcrf,,,
+04,49A0,49E0,64,Leftover_04_49A0_Cam_DitherRamp_ParamsUnused,data,not_tcrf,,,
 05,47E5,498E,425,Unused_TakePhotos_SetPlaneMasks,code,not_tcrf,,,
 05,4D10,4D21,17,Unused_Mode02_State0C,data,not_tcrf,,,
 05,6A7D,6AAD,48,Leftover_05_6A7D,data,not_tcrf,,,
