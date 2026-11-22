@@ -1,0 +1,41 @@
+kind,name,c1,c2,c3,c4,c5
+columns,"title: build, version",size: B1D B20 T2A T35 THIS,"address: table $2A, this build, table $35, bank-$11 records",,,
+title,"map 01:5801, tile set at flat $04001",THIS,Ver10.24
+title,"map 2D:5801, tile set at flat $B4001",T2A,Ver2.00
+title,"map 38:5801, tile set at flat $E0001",T35,Ver1.00
+title,"map 21:5443, tile set at flat $83C2B",B20,Ver2.00
+size,MK_PROTECT,$60,$60,$60,$60,$60
+size,PROTECT_TEST,$70,$70,$70,$70,$70
+size,PROT_TEST,$3A,$3A,$3A,$3A,$3A
+size,OFF_TEST,$3F,$3F,$3F,$3F,$3F
+size,ON_TEST,$3F,$3F,$3F,$3F,$3F
+size,VB_PROTECT,$91,$83,$7D,$7D,$7D
+size,MK_PIC_SAVE,$18,$18,$18,$18,$18
+size,PIC_SAVE,$DC,$DC,$DC,$DC,$DC
+size,PICT_SAVE_GO,$26,$26,$26,$26,$26
+size,PUT_BYTE_OBJ2,$9D,$9B,$95,$95,$95
+size,MAKE_GALLERY,$FF,$FF,$FF,$FF,$FC
+size,PUT_PICTURE,$10,$10,$10,$10,$10
+size,H_BLANK_TX2,$54,$54,$54,$54,$54
+size,GALLERY_OBJ_SET,$138A,$135E,$1322,$2A1,$1586
+address,MABIKI_BYTE,236C,,314E,36E3
+address,MABIKI_BYTE2,24C7,,32A9,383E
+address,MABIKI_MODE,2297,,3079,360E
+address,MABIKI_MODE2,23CA,,31AC,3741
+address,MAIN,01C7,,01C7,01C4
+address,MAIN_MENU,05BB,05B5,08B5,0919
+address,MAIN_SUB,0204,01FE,0204,01FE
+address,MAKE_BANK,06AA,,09A4,0A08
+address,MAKE_CONFIG,127B,1275,1950,19EE
+address,MAKE_EDIT_DITH,,,,2CBD
+address,MAKE_EMI,29ED,31FB,,3A5E
+address,MAKE_MENU,054A,0544,0844,08A8
+address,MAKE_MOVIE,0EA5,0E9F,119F,1203
+address,MEN_FADE,0466,0460,0760,07C4
+address,MEN_FADE_CLR,044F,0449,0749,07AD
+address,MEN_FADE_DEC,04A6,04A0,07A0,0804
+address,MEN_FADE_END,049C,0496,0796,07FA
+address,MEN_FADE_SET,0460,,075A,07BE
+address,MIRROR_CHR,226A,,3046,35DB
+address,MIRROR_LINE,221C,,2FF8,358D
+address,MIRROR_MODE,20FA,,2FAE,0143

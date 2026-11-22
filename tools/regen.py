@@ -70,6 +70,7 @@ def proto_steps(Q):
         ('oldbuilds', lambda: [PY, 'tools/proto_oldbuilds.py', Q, '--symtab', D + 'leftover_symtab_proto.csv', '--printer-lib', D + 'printer_lib_proto.csv', '--out', D + 'oldbuilds_proto.csv']),
         ('names', lambda: [PY, 'tools/proto_names.py', '--rom', Q]),            # the name layers (the hand layer last) -> names, doubts, leftovers
         ('text', lambda: [PY, 'tools/proto_text.py', Q]),                     # L6: the menu font's character set and the screen texts
+        ('history', lambda: [PY, 'tools/proto_build_history.py', Q]),         # L6: titles, routine sizes and addresses of the older builds
         ('ram_names', lambda: [PY, 'tools/proto_ram_names.py', Q, '--out', D + 'ram_names_proto.csv']),     # the RAM names (they quote routine names)
         ('ram_inc', lambda: [PY, 'tools/ram_names.py', '--names', D + 'ram_names_proto.csv', '--inc', D + 'ram_proto.inc', '--sym', PD + 'pocketcamera_proto_ram.sym']),
         ('sym', lambda: [PY, 'tools/sym_build.py', Q, '--names', PD + 'disasm/sym_names_proto.csv', '--types', PD + 'disasm/sym_types_proto.csv', '--trace', PD + 'trace/trace_proto.json',
