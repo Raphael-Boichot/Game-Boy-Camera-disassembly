@@ -1,0 +1,17 @@
+target_sig,corpus_entry,core_reached,bgb_reached,comparison,save,start_shift
+0B:00,2071,0B:01,0B:01,exact,unl_synth (stand-in for unl_CE10238211),2
+0B:01,293,0B:01,0B:01,exact,unl_synth (stand-in for unl_CE10238211),2
+0C:01,437,0C:01,0C:01,exact,unl_synth (stand-in for unl_CE10238211),2
+0C:03,1034,0C:03,0C:03,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:00,298,0D:01,0D:01,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:01,300,0D:01,0D:01,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:02,303,0D:02,0D:02,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:03,304,0D:03,0D:03,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:04,309,0D:04,0D:04,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:06,387,0D:07,0D:07,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:07,455,0D:07,0D:07,exact,unl_synth (stand-in for unl_CE10238211),2
+0D:08,388,0D:01,0D:01,exact,unl_synth (stand-in for unl_CE10238211),2
+13:01,954,13:01,13:01,exact,unl_synth (stand-in for unl_CE10238211),2
+13:02,995,13:07,13:07,exact,unl_synth (stand-in for unl_CE10238211),2
+13:07,1022,13:07,13:07,exact,unl_synth (stand-in for unl_CE10238211),2
+14:05,185,14:05,14:05,exact,unl_synth (stand-in for unl_PC10696894),2

@@ -1,0 +1,24 @@
+# 2026-11-22. The 16 sweep paths that the explorer started from the owner's unlocked saves (15 unl_CE10238211, 1 unl_PC10696894), replayed
+# from a synthetic stand-in (tools/jp/make_synthetic_unlocked_save.py: new camera, 30 photos of the core's sensor, counters 99, CoroCoro tag).
+# Command: GBCAM_ROM=JP.gb BGB_LCD_SYNC=1 BGB_LCD_FREE_SHIFT=2 BGB_SAV_OVERRIDE=unl_synth.sav tools/jp/bgb_sig.py coverage/v8/unlock_fuzz/f1_organic/corpus.jsonl JP.gb OUT SIG...
+# Same keys as the corpus entries; one demo for both (one byte per V-Blank start of the core); 'core' = my core's end on that demo.
+# Run 1, no shift (BGB_LCD_FREE_SHIFT=0): BGB 0B:00->02:01, 0B:01->07:02, 0C:01->07:02, 0C:03->07:02, 0D:00..0D:03->07:02, 0D:04->07:03, 0D:06->08:07, 0D:07->07:02,
+#   0D:08->08:07, 13:01->07:03, 13:02->07:02, 13:07->07:02, 14:05->14:05 (core: every target). Cause: the first press after the title lands on the
+#   first frame the main menu reads keys; in the core the start shifts 0..+4 reach the target, -1 does not (the paths were found frame by frame),
+#   and BGB behaves like -1. Run 2, shift +2 (the middle of that window):
+0B:00 entry 2071 BGB rc 0 mode:state = 0B:01 PC 0x40  core 0B:01, core frames with the LCD off 317
+0B:01 entry 293 BGB rc 0 mode:state = 0B:01 PC 0x40  core 0B:01, core frames with the LCD off 304
+0C:01 entry 437 BGB rc 0 mode:state = 0C:01 PC 0x40  core 0C:01, core frames with the LCD off 325
+0C:03 entry 1034 BGB rc 0 mode:state = 0C:03 PC 0x40  core 0C:03, core frames with the LCD off 332
+0D:00 entry 298 BGB rc 0 mode:state = 0D:01 PC 0x40  core 0D:01, core frames with the LCD off 309
+0D:01 entry 300 BGB rc 0 mode:state = 0D:01 PC 0x40  core 0D:01, core frames with the LCD off 309
+0D:02 entry 303 BGB rc 0 mode:state = 0D:02 PC 0x40  core 0D:02, core frames with the LCD off 309
+0D:03 entry 304 BGB rc 0 mode:state = 0D:03 PC 0x40  core 0D:03, core frames with the LCD off 309
+0D:04 entry 309 BGB rc 0 mode:state = 0D:04 PC 0x40  core 0D:04, core frames with the LCD off 309
+0D:06 entry 387 BGB rc 0 mode:state = 0D:07 PC 0x40  core 0D:07, core frames with the LCD off 314
+0D:07 entry 455 BGB rc 0 mode:state = 0D:07 PC 0x40  core 0D:07, core frames with the LCD off 314
+0D:08 entry 388 BGB rc 0 mode:state = 0D:01 PC 0x40  core 0D:01, core frames with the LCD off 318
+13:01 entry 954 BGB rc 0 mode:state = 13:01 PC 0x40  core 13:01, core frames with the LCD off 316
+13:02 entry 995 BGB rc 0 mode:state = 13:07 PC 0x40  core 13:07, core frames with the LCD off 319
+13:07 entry 1022 BGB rc 0 mode:state = 13:07 PC 0x40  core 13:07, core frames with the LCD off 319
+14:05 entry 185 BGB rc 0 mode:state = 14:05 PC 0x40  core 14:05, core frames with the LCD off 298
