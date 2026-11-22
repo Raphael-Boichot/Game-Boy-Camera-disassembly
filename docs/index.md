@@ -135,6 +135,7 @@ The project notes (formerly one README) are split into one file per section; the
 | 17.3 | &nbsp;&nbsp;[Single-photo print: mode `$1C` (C)](17_printing.md#173-single-photo-print-mode-1c-c) | `17_printing.md` |
 | 17.4 | &nbsp;&nbsp;[The comment card (Start option): a second page "Camera コメント" (C)](17_printing.md#174-the-comment-card-start-option-a-second-page-camera-コメント-c) | `17_printing.md` |
 | 17.5 | &nbsp;&nbsp;[Printing several photos: mode `$1E` (C)](17_printing.md#175-printing-several-photos-mode-1e-c) | `17_printing.md` |
+| 17.5a | &nbsp;&nbsp;[The print options run on paper: density, border, wild frame, feed 0 and 9, blood types B / O / AB (C)](17_printing.md#175a-the-print-options-run-on-paper-density-border-wild-frame-feed-0-and-9-blood-types-b--o--ab-c) | `17_printing.md` |
 | 17.6 | &nbsp;&nbsp;[The TRIPY-H music score print (C)](17_printing.md#176-the-tripy-h-music-score-print-c) | `17_printing.md` |
 | 17.7 | &nbsp;&nbsp;[Coverage re-trace in BGB: how much of what my core saw does BGB reproduce?](17_printing.md#177-coverage-re-trace-in-bgb-how-much-of-what-my-core-saw-does-bgb-reproduce) | `17_printing.md` |
 | 17.8 | &nbsp;&nbsp;[The page layouts of the print job: the scripts at `08:552E-723D` and the progress packets at `08:54DE` (C)](17_printing.md#178-the-page-layouts-of-the-print-job-the-scripts-at-08552e-723d-and-the-progress-packets-at-0854de-c) | `17_printing.md` |

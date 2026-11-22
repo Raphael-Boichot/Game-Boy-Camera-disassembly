@@ -1,0 +1,1377 @@
+{
+ "packets": [
+  {
+   "t": 43.768,
+   "cmd": 1,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 44.887,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 44.934,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 46.237,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 47.513,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 47.552,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 48.625,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 49.783,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 49.822,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 50.608,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 52.403,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 52.499,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 53.536,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 55.03,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 55.039,
+   "cmd": 4,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 55.073,
+   "cmd": 2,
+   "comp": 0,
+   "len": 4,
+   "checksum_ok": true,
+   "sheets": 1,
+   "margins": "10",
+   "palette": "E4",
+   "exposure": "40",
+   "tile_bytes": 5760,
+   "reply": "08"
+  },
+  {
+   "t": 55.219,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 55.4,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 55.508,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 55.629,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 55.824,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 55.943,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.059,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.163,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.267,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.407,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.487,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.605,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.752,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 56.896,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 57.032,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 57.173,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 57.314,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 57.467,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 57.601,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "04"
+  },
+  {
+   "t": 57.985,
+   "cmd": 1,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 59.186,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 59.267,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 60.241,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 61.342,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 61.402,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 62.765,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 64.251,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 64.298,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 65.793,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 67.453,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 67.53,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 68.951,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 70.26,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 70.293,
+   "cmd": 4,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 70.367,
+   "cmd": 2,
+   "comp": 0,
+   "len": 4,
+   "checksum_ok": true,
+   "sheets": 1,
+   "margins": "00",
+   "palette": "E4",
+   "exposure": "40",
+   "tile_bytes": 5760,
+   "reply": "08"
+  },
+  {
+   "t": 70.538,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 70.671,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 70.785,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 70.902,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.002,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.101,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.2,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.3,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.4,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.501,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.607,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.738,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.819,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 71.918,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 72.045,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 72.146,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 72.272,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 72.398,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 72.533,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "04"
+  },
+  {
+   "t": 72.873,
+   "cmd": 1,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 73.776,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 73.875,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 75.27,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 76.995,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 77.094,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 78.74,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 80.264,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 80.34,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 81.374,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 83.046,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 83.111,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 84.231,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "00"
+  },
+  {
+   "t": 85.557,
+   "cmd": 4,
+   "comp": 0,
+   "len": 640,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 85.591,
+   "cmd": 4,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "08"
+  },
+  {
+   "t": 85.661,
+   "cmd": 2,
+   "comp": 0,
+   "len": 4,
+   "checksum_ok": true,
+   "sheets": 1,
+   "margins": "03",
+   "palette": "E4",
+   "exposure": "40",
+   "tile_bytes": 5760,
+   "reply": "08"
+  },
+  {
+   "t": 85.763,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 85.869,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 85.975,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 86.161,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 86.378,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 86.569,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 86.721,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 86.907,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.067,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.209,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.292,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.413,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.553,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.695,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.842,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 87.977,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 88.128,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 88.269,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "06"
+  },
+  {
+   "t": 88.392,
+   "cmd": 15,
+   "comp": 0,
+   "len": 0,
+   "checksum_ok": true,
+   "reply": "04"
+  }
+ ],
+ "pages": [
+  {
+   "file": "page_01.png",
+   "width": 160,
+   "height": 144,
+   "sheets": 1,
+   "margins": "10",
+   "palette": "E4",
+   "exposure": "40"
+  },
+  {
+   "file": "page_02.png",
+   "width": 160,
+   "height": 144,
+   "sheets": 1,
+   "margins": "00",
+   "palette": "E4",
+   "exposure": "40"
+  },
+  {
+   "file": "page_03.png",
+   "width": 160,
+   "height": 144,
+   "sheets": 1,
+   "margins": "03",
+   "palette": "E4",
+   "exposure": "40"
+  }
+ ],
+ "link_packets": {
+  "1": 1,
+  "108": 3,
+  "106": 74870,
+  "104": 18342
+ },
+ "first_packets": [
+  [
+   2.03,
+   1,
+   1,
+   4,
+   0,
+   0
+  ],
+  [
+   2.03,
+   108,
+   4,
+   0,
+   0,
+   0
+  ],
+  [
+   2.04,
+   108,
+   5,
+   0,
+   0,
+   0
+  ],
+  [
+   2.09,
+   106,
+   0,
+   0,
+   0,
+   11893504
+  ],
+  [
+   2.09,
+   106,
+   0,
+   0,
+   0,
+   11895552
+  ],
+  [
+   2.1,
+   106,
+   0,
+   0,
+   0,
+   11897600
+  ],
+  [
+   2.1,
+   106,
+   0,
+   0,
+   0,
+   11899648
+  ],
+  [
+   2.1,
+   106,
+   0,
+   0,
+   0,
+   11901696
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11903744
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11905792
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11907840
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11909888
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11911936
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11913984
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11916032
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11918080
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11920128
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11922176
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11924224
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11926272
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11928320
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11930368
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11932416
+  ],
+  [
+   2.11,
+   106,
+   0,
+   0,
+   0,
+   11934464
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11936512
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11938560
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11940608
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11942656
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11944704
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11946752
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11948800
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11950848
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11952896
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11954944
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11956992
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11959040
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11961088
+  ],
+  [
+   2.12,
+   106,
+   0,
+   0,
+   0,
+   11963136
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11965184
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11967232
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11969280
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11971328
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11973376
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11975424
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11977472
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11979520
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11981568
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11983616
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11985664
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11987712
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11989760
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11991808
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11993856
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11995904
+  ],
+  [
+   2.13,
+   106,
+   0,
+   0,
+   0,
+   11997952
+  ],
+  [
+   2.14,
+   106,
+   0,
+   0,
+   0,
+   12000000
+  ],
+  [
+   2.14,
+   106,
+   0,
+   0,
+   0,
+   12002048
+  ],
+  [
+   2.14,
+   106,
+   0,
+   0,
+   0,
+   12004096
+  ],
+  [
+   2.14,
+   106,
+   0,
+   0,
+   0,
+   12006144
+  ],
+  [
+   2.14,
+   106,
+   0,
+   0,
+   0,
+   12008192
+  ]
+ ],
+ "printer_bytes": 18342
+}
