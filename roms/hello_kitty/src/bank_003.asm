@@ -128,9 +128,9 @@ Leftover_03_633C::
     db $00, $0c, $29, $10, $00, $04, $28, $10, $00, $fc, $27, $10, $f8, $08, $26, $10
     db $f8, $00, $25, $10, $08, $0c, $37, $30, $08, $04, $38, $10, $08, $fc, $37, $11
 
-; C: read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State24
+; C: read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State19
 ; (trace/read_screens_kitty*.npz)
-OamList_03_637C_Mode06_Printing_State24::
+OamList_03_637C_Mode06_Printing_State19::
     db $0a, $0c, $2d, $30, $0a, $04, $2e, $10, $0a, $fc, $2d, $10, $fa, $08, $21, $10
     db $fa, $00, $20, $10, $02, $0c, $24, $10, $02, $04, $23, $10, $02, $fc, $22, $11
 
@@ -148,11 +148,11 @@ OamList_03_63DC_PrintGame_Kitty::
     db $02, $04, $2b, $10, $0a, $0c, $2d, $30, $0a, $04, $2e, $10, $0a, $fc, $2d, $10
     db $fa, $08, $21, $10, $fa, $00, $20, $10, $02, $0c, $24, $10, $02, $fc, $22, $11
 
-; C: sprite layouts read in the runs by Obj_DrawSprite (frames of the object scripts of bank $02; 03:641E-645B read
-; since the runs of 2026-11-22, 03:645C on the exchange screen, mode $07); a hand label since the Kitty frame 03:63DC
-; got its own (2026-11-22)
-OamList_03_63FC_Obj_DrawSprite::
-    INCBIN "data/bank_03/OamList_03_63FC_Obj_DrawSprite.bin" ; $63FC, 296 bytes
+; C: sprite layouts read by Obj_DrawSprite: 03:63FC first read on the print game's result screen (06:2A;
+; ObjScript_02_7725_PrintGame_ShowResult points to it, 02:7747), 03:641E-645B on the main menu (01:02), 03:645C on the
+; exchange screens (trace/read_screens_kitty_paths.npz, _rare, _link); a hand label ...
+OamList_03_63FC_Mode06_Printing_State2A::
+    INCBIN "data/bank_03/OamList_03_63FC_Mode06_Printing_State2A.bin" ; $63FC, 296 bytes
 ; I: leftover: 712 bytes (03:6524-67EB) that no run reads or executes and that no code names (owner rule 2026-11-11);
 ; a hand label since the labels 03:63DC / 03:63FC are hand ones (2026-11-22)
 Leftover_03_6524::

@@ -13,10 +13,10 @@ Gfx_2D_4000_Mode11_StrawberryChannel_State07::
 ; tools/kitty_layout_kinds.py
 Gfx_2D_7820_Mode17_PrintError_State00::
     INCBIN "data/bank_2d/Gfx_2D_7820_Mode17_PrintError_State00.2bpp" ; $7820, 480 bytes
-; I: read in the runs by Copy_DEtoHL; kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of
-; Map_2D_7820 after a leftover stretch
-Map_2D_7A00_Copy_DEtoHL::
-    INCBIN "data/bank_2d/Map_2D_7A00_Copy_DEtoHL.tilemap" ; $7A00, 544 bytes
+; I: the rest of the map that Mode17_State00 copies to $9800 (06:40D7: Copy_FarInline 2D:7820, $400 bytes); read only
+; in the forced run of mode $17, which nothing enters (tools/kitty_core_paths.py, 2026-11-22)
+Map_2D_7A00_Mode17_PrintError_State00::
+    INCBIN "data/bank_2d/Map_2D_7A00_Mode17_PrintError_State00.tilemap" ; $7A00, 544 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
 ; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_2D_7C20_Mode02_TakePhotos_State08::

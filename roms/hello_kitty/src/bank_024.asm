@@ -28,7 +28,7 @@ Gfx_24_7000_Puzzle15_LoadGfx::
 Gfx_24_7200_Puzzle15_LoadGfx::
     INCBIN "data/bank_24/Gfx_24_7200_Puzzle15_LoadGfx.2bpp" ; $7200, 512 bytes
 ; C: named by the code of Mode00_State01 (05:40DF); read in the runs by Copy_DEtoHL, Vram_CopyHBlank; first read on
-; the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
+; the screen Mode00_BootAndTitle_State04 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_24_7400_Mode00_BootAndTitle_State01::
     INCBIN "data/bank_24/Gfx_24_7400_Mode00_BootAndTitle_State01.2bpp" ; $7400, 3072 bytes

@@ -51,7 +51,6 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 07,4829,4894,107,Leftover_07_4829,data,not_tcrf,,,
 07,57DB,57FB,32,Leftover_07_57DB,data,not_tcrf,,,
 07,59BE,59EF,49,Leftover_07_59BE,data,not_tcrf,,,
-08,4020,40D0,176,Leftover_08_4020,data,not_tcrf,,,
 0C,7880,7920,160,Leftover_0C_7880,data,not_tcrf,,,
 0C,7A60,7AE0,128,Leftover_0C_7A60,data,not_tcrf,,,
 0C,7B05,7B40,59,Leftover_0C_7B05,data,not_tcrf,,,

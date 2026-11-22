@@ -4487,8 +4487,9 @@ Obj_ScriptNop::
     ret                                           ; $734E
 
 
-; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetPos
-ObjScript_02_734F_Object_RunAll::
+; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetPos; first read on the screen
+; Mode06_Printing_State2A (trace/read_screens_kitty*.npz)
+ObjScript_02_734F_Mode06_Printing_State2A::
     db $3a, $1f, $50, $38, $4b, $73, $1e, $1f, $a8, $46, $4f, $73, $b9, $7f, $b9, $7f
 
     db $09, $1f, $f0, $44, $fe, $10, $20, $fa, $fa, $4c, $d9, $e0, $43, $c9, $c9, $5f
@@ -4971,7 +4972,7 @@ Obj_SetD94D::
 ObjScript_02_75F0_Mode06_Printing_State24::
     INCBIN "data/bank_02/ObjScript_02_75F0_Mode06_Printing_State24.bin" ; $75F0, 309 bytes
 ; C: named by the code of PrintGame_ShowResult (02:77CF); read in the runs by Object_RunAll, ObjCmd_Jump; first read
-; on the screen Mode06_Printing_State24 (trace/read_screens_kitty*.npz)
+; on the screen Mode06_Printing_State2A (trace/read_screens_kitty*.npz)
 ObjScript_02_7725_PrintGame_ShowResult::
     db $08, $80, $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $08, $80, $dc, $62
     db $08, $80, $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $10, $80, $dc, $62
@@ -5038,8 +5039,8 @@ jr_002_77d4:
     db $21, $67, $77, $37, $c9
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetPos; first read on the screen
-; Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
-ObjScript_02_77DE_Mode03_ViewAlbum_State0B::
+; Mode06_Printing_State2A (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+ObjScript_02_77DE_Mode06_Printing_State2A::
     db $3a, $1f, $50, $78, $93, $77, $de, $77, $b9, $7f, $b9, $7f, $1e, $1f, $4c, $48
 
 ; C: in step 2 ($D994) follows the text cursor $D98C, else hidden at y $A0; runs in the album text window (mode $03

@@ -279,10 +279,10 @@ Frame_31_4700_Mode02_TakePhotos_State01::
     ; padding
     ds $2c, $00
 
-; C: read in the runs by Copy_Unrolled_B, Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
+; C: read in the runs by Copy_Unrolled_B, Vram_CopyHBlank; first read on the screen Mode11_StrawberryChannel_State07
 ; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_31_4E00_Mode02_TakePhotos_State08::
-    INCBIN "data/bank_31/Gfx_31_4E00_Mode02_TakePhotos_State08.2bpp" ; $4E00, 5872 bytes
+Gfx_31_4E00_Mode11_StrawberryChannel_State07::
+    INCBIN "data/bank_31/Gfx_31_4E00_Mode11_StrawberryChannel_State07.2bpp" ; $4E00, 5872 bytes
 ; C: the same 640 bytes as the Japanese Gfx_24_57E0_Unused_Link_LoadTiles (24:57E0); named by the code of
 ; Mode0D_State00, Mode0D_State03 (05:439C 05:44B6); read in the runs by Vram_CopyHBlank; first read on the screen
 ; Mode11_StrawberryChannel_State00 (trace/read_screens_kitty*.npz)
@@ -352,11 +352,11 @@ Gfx_31_75F0_Mode02_TakePhotos_State00::
 ; tools/kitty_layout_kinds.py
 Gfx_31_7830_Mode00_BootAndTitle_State01::
     INCBIN "data/bank_31/Gfx_31_7830_Mode00_BootAndTitle_State01.2bpp" ; $7830, 336 bytes
-; C: read in the runs by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00
+; C: read in the runs by Copy_DEtoHL; first read on the screen Mode00_BootAndTitle_State04
 ; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_7830
 ; after a leftover stretch
-Map_31_7980_Mode02_TakePhotos_State00::
-    INCBIN "data/bank_31/Map_31_7980_Mode02_TakePhotos_State00.tilemap" ; $7980, 240 bytes
+Map_31_7980_Mode00_BootAndTitle_State04::
+    INCBIN "data/bank_31/Map_31_7980_Mode00_BootAndTitle_State04.tilemap" ; $7980, 240 bytes
 ; C: named by the code of Mode01_State00, Mode01_State03 (05:4558 05:46CF); read in the runs by Copy_DEtoHL; first
 ; read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py

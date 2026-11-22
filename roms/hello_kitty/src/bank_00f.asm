@@ -1638,7 +1638,8 @@ Sfx1_StepRegTable::
     ret                                           ; $4B66
 
 
-; C: the same 20 bytes as the Japanese Sfx1_Data_4B92 (1F:4B92); read in the runs by Sfx1_Step_11, Snd_Sfx_Start
+; C: the same 20 bytes as the Japanese Sfx1_Data_4B92 (1F:4B92); read in the runs by Sfx1_Step_11, Snd_Sfx_Start;
+; first read on the screen Mode11_StrawberryChannel_State08 (trace/read_screens_kitty*.npz)
 Sfx1_Data_4B67::
     db $4c, $c0, $f5, $ee, $87, $e5, $b5, $a5, $b5, $75, $55, $45, $35, $45, $35, $35
     db $35, $25, $25, $00

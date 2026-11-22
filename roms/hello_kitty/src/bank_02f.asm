@@ -43,7 +43,7 @@ Gfx_2F_69F0_Mode06_Printing_State1F::
 Map_2F_6A10_Mode06_Printing_State1F::
     INCBIN "data/bank_2f/Map_2F_6A10_Mode06_Printing_State1F.tilemap" ; $6A10, 96 bytes
 ; C: named by the code of Mode06_State18, Mode06_State19 (01:7246 01:72A3); read in the runs by Copy_DEtoHL; first
-; read on the screen Mode06_Printing_State1F (trace/read_screens_kitty*.npz); kind MAP from the evidence of
+; read on the screen Mode06_Printing_State1C (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_2F_6A70_Mode06_Printing_State18::
     INCBIN "data/bank_2f/Map_2F_6A70_Mode06_Printing_State18.tilemap" ; $6A70, 256 bytes

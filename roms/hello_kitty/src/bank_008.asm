@@ -11,8 +11,10 @@ Sgb_MltReqPackets::
     db $89, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $89, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; I: leftover: 176 bytes (08:4020-40CF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_08_4020::
+; C: Super Game Boy packets, the same bytes as the Japanese Sgb_PalSetPacket and the packets after it (0B:4020):
+; PAL_SET, eight DATA_SND, MASK_EN 1 (08:40B0), MASK_EN 0 (08:40C0); named by the code: Sgb_InitDataSnd sends 08:4020
+; (08:6BC7), Sgb_FreezeScreen 08:40B0 (08:6BFD); formerly a leftover ...
+Sgb_PalSetPacket::
     db $51, $10, $00, $10, $00, $10, $00, $10, $00, $80, $00, $00, $00, $00, $00, $00
     db $79, $5d, $08, $00, $0b, $8c, $d0, $f4, $60, $00, $00, $00, $00, $00, $00, $00
     db $79, $52, $08, $00, $0b, $a9, $e7, $9f, $01, $c0, $7e, $e8, $e8, $e8, $e8, $e0
@@ -25,7 +27,8 @@ Leftover_08_4020::
     db $b9, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $b9, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; C: the same 134 bytes as the Japanese Sgb_AttrTrnPacket (0B:4030)
+; C: the same 134 bytes as the Japanese Sgb_AttrTrnPacket (0B:4030) (a hand label since 2026-11-22: the hand labels
+; 08:4020 / 08:6226 would cover it)
 Sgb_AttrTrnPacket::
     db $a9
 
@@ -35,7 +38,8 @@ Sgb_AttrTrnPacket::
     db $40, $40, $40, $90, $90, $90, $e4, $e4, $e4, $59, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; C: the same 241 bytes as the Japanese Sgb_PalTrnData (0B:40B6)
+; C: the same 241 bytes as the Japanese Sgb_PalTrnData (0B:40B6) (a hand label since 2026-11-22: the hand labels
+; 08:4020 / 08:6226 would cover it)
 Sgb_PalTrnData::
     db $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f
     db $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f, $ff, $7f
@@ -59,9 +63,10 @@ Sgb_PalTrnData::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $ff
 
-; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb); kind T_UI from the evidence of
-; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
-Gfx_08_4247_Sgb_VramTransferInline::
+; C: part of the SGB border data that Sgb_InitDataSnd sends with Sgb_VramTransferInline (08:6BD2 / 6BDD: $1000 bytes
+; from 08:41F6 and 08:5206, the border tiles); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb, at
+; boot on a Super Game Boy)
+Gfx_08_4247_Sgb_InitDataSnd::
     db $0c, $3f, $dc, $df, $bf, $df, $3f, $ff, $3e, $f3, $3c, $fd, $02, $fd, $06, $0c
     db $0c, $1c, $1c, $9f, $9f, $1f, $1f, $3e, $3e, $30, $30, $00, $00, $04, $04, $ff
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $00, $ff
@@ -420,9 +425,9 @@ Gfx_08_4247_Sgb_VramTransferInline::
 
     db $a1, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb); kind MAP from the evidence of
-; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
-Map_08_6226_Sgb_VramTransferInline::
+; C: the SGB border map: the transfer of Sgb_InitDataSnd from 08:6216 (08:6BE8, $1000 bytes), map then palettes
+; (Pal_08_6A26); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb, at boot on a Super Game Boy)
+Map_08_6226_Sgb_InitDataSnd::
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
@@ -589,8 +594,9 @@ Map_08_6226_Sgb_VramTransferInline::
     db $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10, $ac, $10
 
 ; C: read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: sgb); kind PALT from the evidence of
-; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch
-Pal_08_6A26_Sgb_VramTransferInline_Palettes::
+; tools/kitty_layout_kinds.py; the rest of Data_08_4000 after a leftover stretch (a hand label since 2026-11-22: the
+; hand labels 08:4020 / 08:6226 would cover it)
+Pal_08_6A26_Sgb_InitDataSnd_Palettes::
     db $e5, $62, $1f, $7f, $7f, $7f, $5f, $29, $41, $7c, $de, $79, $de, $7a, $3e, $7b
     db $7f, $0f, $7f, $3b, $df, $4f, $1d, $13, $7d, $37, $4a, $29, $f7, $5e, $ff, $7f
     db $e5, $5e, $1f, $7f, $7f, $7f, $5f, $29, $5f, $29, $b2, $7e, $57, $7f, $ba, $7f
@@ -852,7 +858,7 @@ Sgb_InitDataSnd::
 
     call Sgb_SendPacketInline                     ; $6BC7
 
-    dwb Leftover_08_4020
+    dwb Sgb_PalSetPacket
 
     call Delay_Inline                             ; $6BCD
 
@@ -892,8 +898,8 @@ Sgb_FreezeScreen::
     and a                                         ; $6BFA
     jr nz, jr_008_6c10                            ; $6BFB
 
-    ld a, BANK(Leftover_08_4020)                  ; $6BFD
-    ld hl, Leftover_08_4020 + $90                 ; $6BFF
+    ld a, BANK(Sgb_PalSetPacket)                  ; $6BFD
+    ld hl, Sgb_PalSetPacket + $90                 ; $6BFF
     call Sgb_SendPacket                           ; $6C02
     ld bc, $0004                                  ; $6C05
     call Delay_Frames_Busy                        ; $6C08
@@ -916,8 +922,8 @@ Sgb_UnfreezeScreen::
     and a                                         ; $6C22
     jr z, jr_008_6c37                             ; $6C23
 
-    ld a, BANK(Leftover_08_4020)                  ; $6C25
-    ld hl, Leftover_08_4020 + $A0                 ; $6C27
+    ld a, BANK(Sgb_PalSetPacket)                  ; $6C25
+    ld hl, Sgb_PalSetPacket + $A0                 ; $6C27
     call Sgb_SendPacket                           ; $6C2A
     ld bc, $0004                                  ; $6C2D
     call Delay_Frames_Busy                        ; $6C30

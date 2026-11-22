@@ -61,7 +61,7 @@ def taps(path): return [x for k in path.split() for x in tap(k)]
 G.load_rom(a.rom); G.reset(bytes(0x20000)); G.run(600); base = bytearray(bytes(G.sram()))
 SAVES = {'kitts': bytes(base[:0x100A]) + b'\x99\x99\x99' + bytes(base[0x100D:]), 'nokitts': bytes(base[:0x100A]) + b'\x00\x00\x00' + bytes(base[0x100D:])}
 romb = bytearray(open(a.rom, 'rb').read())
-def run(rom_bytes, save, keys, inj, hold=None):
+def run(rom_bytes, save, keys, inj, hold=None, fs=None):
     p = os.path.join('/tmp', 'kitty_core_paths_%d.gb' % os.getpid()); open(p, 'wb').write(rom_bytes)
     G.load_rom(p); G.reset(save); G.L.gb_cov_clear(); G.L.gb_printer_model(1); G.L.gb_attach_printer(0 if 'noprinter' in inj else 1); G.L.gb_printer_inject_clear()
     for c, n, s, k in [x for x in inj if x != 'noprinter']: G.L.gb_printer_inject(c, n, s, k)
@@ -74,6 +74,7 @@ def run(rom_bytes, save, keys, inj, hold=None):
     for k in keys:
         G.keys(k); G.run(1); m = '%02X:%02X' % (G.peek(0xFF8D), G.peek(0xFF8E))
         if not seen or seen[-1] != m: seen.append(m)
+        if fs is not None and G.L.gb_frame() % 8 == 0: fs.update(G.cov_dread(), G.peek(0xFF8D), G.peek(0xFF8E))
     os.remove(p)
     return seen, np.array(G.cov_exec()), np.array(G.cov_dread()), np.array(G.cov_reader())
 def acc(tot, r):
@@ -81,19 +82,20 @@ def acc(tot, r):
     if tot is None: return [ex.copy(), dr.copy(), rd.copy()]
     tot[0] |= ex; tot[1] |= dr; tot[2] = np.where(tot[2] == 0, rd, tot[2]); return tot
 rows = []; org = None; frc = None
+sys.path.insert(0, HERE); import kitty_first_screens; FS = kitty_first_screens.FirstScreens(1 << 20)   # the screen of each byte's first read (organic paths only)
 for name, save, path, free, inj in PATHS:
     hold = int(path.split()[0][5:], 16) if path.startswith('hold:') else None
     extra = int(path.split()[0][5:]) if path.startswith('wait:') else 0
     body = ' '.join(path.split()[1:]) if path.startswith(('hold:', 'wait:')) else path.replace('photo:', '')
     keys = (taps('A A A A B') if path.startswith('photo:') else []) + (taps(body) if body.strip() else []) + [0] * free
-    r = run(romb, SAVES[save], [0] * extra + keys, inj, hold); org = acc(org, r)
+    r = run(romb, SAVES[save], [0] * extra + keys, inj, hold, FS); org = acc(org, r)
     rows.append([name, 'organic', path, r[0][-1], ' '.join(m for m in r[0] if not m.startswith('1E'))]); print(*rows[-1][:4], flush=True)
 for name, m in FORCED:
     rb = bytearray(romb); rb[0x0D03:0x0D06] = romb[0x0D00 + 3 * m:0x0D03 + 3 * m]
     keys = taps('A') + [core_mask(BIT['A'])] * 4 + [0] * 600 + [core_mask(BIT['B'])] * 6 + [0] * 120 + [core_mask(BIT['Select'])] * 6 + [0] * 300
     r = run(bytes(rb), SAVES['kitts'], keys, []); frc = acc(frc, r)
     rows.append([name, 'forced', 'A (mode $%02X in ModeTable slot $01), play, B, Select' % m, r[0][-1], ' '.join(x for x in r[0] if not x.startswith('1E'))]); print(*rows[-1][:4], flush=True)
-np.savez_compressed(a.out, ex=org[0], dr=org[1], rdr=org[2]); np.savez_compressed(a.forced_out, ex=frc[0], dr=frc[1], rdr=frc[2])
+FS.save(os.path.join(os.path.dirname(a.out), 'read_screens_kitty_paths.npz')); np.savez_compressed(a.out, ex=org[0], dr=org[1], rdr=org[2]); np.savez_compressed(a.forced_out, ex=frc[0], dr=frc[1], rdr=frc[2])
 with open(a.report, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['path', 'kind', 'keys', 'end', 'modes']); w.writerows(rows)
 print('kitty_core_paths: %d organic paths, %d forced; read bytes %d / %d' % (len(PATHS), len(FORCED), int((org[1] > 0).sum()), int((frc[1] > 0).sum())))

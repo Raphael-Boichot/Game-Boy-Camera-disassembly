@@ -4,9 +4,9 @@
 
 SECTION "ROM Bank $03f", ROMX[$4000], BANK[$3f]
 
-; C: read in the runs by Copy_Unrolled_B, Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01
+; C: read in the runs by Copy_Unrolled_B, Copy_DEtoHL; first read on the screen Mode11_StrawberryChannel_State07
 ; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_3F_4000_Mode14_MessageScreen_State01::
+Gfx_3F_4000_Mode11_StrawberryChannel_State07::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $fc, $fe, $fc, $fd, $fb, $fd, $f9, $fb, $f6, $fb, $f4, $f3, $e0, $f7, $f0, $e7

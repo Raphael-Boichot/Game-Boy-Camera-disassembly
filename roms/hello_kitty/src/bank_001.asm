@@ -1505,9 +1505,9 @@ Script_ClearD8E0::
 
 
 ; C: read in the runs by ScriptSlots_Run, ScriptCmd_SetE3, ScriptSlots_Add; first read on the screen
-; Mode11_StrawberryChannel_State02 (trace/read_screens_kitty*.npz)
-Script_01_524A_Mode11_StrawberryChannel_State02::
-    INCBIN "data/bank_01/Script_01_524A_Mode11_StrawberryChannel_State02.bin" ; $524A, 490 bytes
+; Mode11_StrawberryChannel_State08 (trace/read_screens_kitty*.npz)
+Script_01_524A_Mode11_StrawberryChannel_State08::
+    INCBIN "data/bank_01/Script_01_524A_Mode11_StrawberryChannel_State08.bin" ; $524A, 490 bytes
 ; C: when $D8F4 differs from hFFEA: hFFEA = $D8F4 and the script 01:5443 is started (00:2263); runs on its screen in
 ; the core replays (port/entry_modes_kitty.csv)
 Menu_ScriptOnItemChange::
@@ -2526,7 +2526,7 @@ PrintFrame_Select_Tbl687D::
     dwb Frame_1A_5800_Mode06_Printing_State07
     dwb Frame_19_5800_Mode06_Printing_State07
     dwb Frame_19_4000_Mode06_Printing_State07
-    dwb Frame_18_4000_Mode06_Printing_State07
+    dwb Frame_18_4000_Mode17_PrintError_State00
 
 ; C: tiles of the record A of 01:687D into $9000; runs on its screen in the core replays (port/entry_modes_kitty.csv)
 PrintFrame_LoadTiles::
@@ -4336,9 +4336,9 @@ jr_001_7486:
     ld hl, wMode06_State0A_D896                   ; $750C
     res 0, [hl]                                   ; $750F
     pop hl                                        ; $7511
-    ld de, ObjScript_02_77DE_Mode03_ViewAlbum_State0B + $6 ; $7512
+    ld de, ObjScript_02_77DE_Mode06_Printing_State2A + $6 ; $7512
     call Object_Create                            ; $7515
-    ld de, ObjScript_02_734F_Object_RunAll + $A   ; $7518
+    ld de, ObjScript_02_734F_Mode06_Printing_State2A + $A ; $7518
     call Object_Create                            ; $751B
     ld de, ObjScript_02_7044_Mode06_Printing_State1F + $1C ; $751E
     call Object_Create                            ; $7521

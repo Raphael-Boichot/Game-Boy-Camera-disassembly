@@ -125,7 +125,7 @@ bank,site,kind,operand,value,target,expression,evidence,read
 01,PrintFrame_Select_Tbl687D,ptr,record,$5800,1A:5800,Frame_1A_5800_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
 01,PrintFrame_Select_Tbl687D,ptr,record,$5800,19:5800,Frame_19_5800_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
 01,PrintFrame_Select_Tbl687D,ptr,record,$4000,19:4000,Frame_19_4000_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
-01,PrintFrame_Select_Tbl687D,ptr,record,$4000,18:4000,Frame_18_4000_Mode06_Printing_State07,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
+01,PrintFrame_Select_Tbl687D,ptr,record,$4000,18:4000,Frame_18_4000_Mode17_PrintError_State00,"C: dereferenced at 00:066F (bank read from the record mapped); the word was read by 01:689A, the next byte is its bank",yes
 01,Print_LoadItemPicture_Tbl69DD,ptr,record,$6B70,2F:6B70,Gfx_2F_6B70_Mode0A_NameCard_State01,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 01:69C0, the next byte is its bank",yes
 01,Print_LoadItemPicture_Tbl69DD,ptr,record,$75E0,27:75E0,Gfx_27_75E0_Mode0A_NameCard_State03,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 01:69C0, the next byte is its bank",yes
 01,Print_LoadItemPicture_Tbl69DD,ptr,record,$6B80,26:6B80,Gfx_26_6B80_Mode0A_NameCard_State01,"C: dereferenced at 00:021C (bank read from the record mapped); the word was read by 01:69C0, the next byte is its bank",yes
@@ -549,13 +549,13 @@ bank,site,kind,operand,value,target,expression,evidence,read
 07,Mode13_StateTable,ptr,record,$4000,3D:4000,Gfx_3D_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
 07,Mode13_StateTable,ptr,record,$4000,3C:4000,Gfx_3C_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
 07,Mode13_StateTable,ptr,record,$4000,3B:4000,Gfx_3B_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
-07,Mode13_StateTable,ptr,record,$4E00,31:4E00,Gfx_31_4E00_Mode02_TakePhotos_State08,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_31_4E00_Mode02_TakePhotos_State08; the word was read by 07:4411, the next byte is its bank",no
+07,Mode13_StateTable,ptr,record,$4E00,31:4E00,Gfx_31_4E00_Mode11_StrawberryChannel_State07,"I: record of the same table, stride 3, not read in the runs; it lands exactly on Gfx_31_4E00_Mode11_StrawberryChannel_State07; the word was read by 07:4411, the next byte is its bank",no
 07,Mode13_StateTable,ptr,record,$4000,3E:4000,Gfx_3E_4000_Mode11_StrawberryChannel_State07,"C: dereferenced at 00:0B6B (bank read from the record mapped); the word was read by 07:4411, the next byte is its bank",yes
 07,StrawberryCh_PageAddr_Tbl4E70,ptr,record,$4E70,07:4E70,StrawberryCh_PageAddr_Tbl4E70,C: dereferenced at 07:4F21 (bank 07 mapped); the word was read by 07:4F15,yes
 08,08:6A86,num,de,$1B58,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 08,08:6B04,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-08,08:6BFF,ptr,hl,$40B0,08:40B0,Leftover_08_4020 + $90,"C: handed with its bank in A to a banked copy, a far call or the far return",no
-08,08:6C27,ptr,hl,$40C0,08:40C0,Leftover_08_4020 + $A0,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+08,08:6BFF,ptr,hl,$40B0,08:40B0,Sgb_PalSetPacket + $90,"C: handed with its bank in A to a banked copy, a far call or the far return",no
+08,08:6C27,ptr,hl,$40C0,08:40C0,Sgb_PalSetPacket + $A0,"C: handed with its bank in A to a banked copy, a far call or the far return",no
 08,08:6C3C,ptr,hl,$4010,08:4010,Sgb_MltReqPackets + $10,"C: handed with its bank in A to a banked copy, a far call or the far return",yes
 0F,0F:433B,ptr,hl,$4334,0F:4334,Sfx4_StepTbl + $27,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no
 0F,0F:4349,ptr,hl,$4342,0F:4342,Sfx1_Ret4341 + $1,C: dereferenced at 0F:522E (bank 0F mapped); that instruction read the target block in the runs,no

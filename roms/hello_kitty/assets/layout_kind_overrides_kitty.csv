@@ -52,7 +52,6 @@ bank,start,end,kind,ev,label,basis
 07,4829,4894,OTHER,I,Leftover_07_4829,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 07,57DB,57FB,TBL,I,Leftover_07_57DB,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 07,59BE,59EF,TBL,I,Leftover_07_59BE,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-08,4020,40D0,TBL,I,Leftover_08_4020,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 0C,7880,7920,T_UI,I,Leftover_0C_7880,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 0C,7A60,7AE0,T_UI,I,Leftover_0C_7A60,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 0C,7B05,7B40,T_UI,I,Leftover_0C_7B05,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"

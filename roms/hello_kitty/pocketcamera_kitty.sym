@@ -318,7 +318,7 @@
 01:523f Script_Nop523F
 01:5240 Script_01_5240_Mode0F_FifteenPuzzle_State08
 01:5244 Script_ClearD8E0
-01:524a Script_01_524A_Mode11_StrawberryChannel_State02
+01:524a Script_01_524A_Mode11_StrawberryChannel_State08
 01:5434 Menu_ScriptOnItemChange
 01:5443 Script_01_5443_Menu_ScriptOnItemChange
 01:54a3 NameCard_ScriptFillD810
@@ -722,7 +722,7 @@
 02:71f2 ObjScript_02_71F2_Mode06_Printing_State24
 02:7345 ObjScript_02_7345_Mode06_Printing_State24
 02:734b Obj_ScriptNop
-02:734f ObjScript_02_734F_Object_RunAll
+02:734f ObjScript_02_734F_Mode06_Printing_State2A
 02:7374 Obj_GetSpeed
 02:737b PrintGame_ClampX
 02:73a2 Obj_GetSpriteBC
@@ -737,7 +737,7 @@
 02:7725 ObjScript_02_7725_PrintGame_ShowResult
 02:7767 Leftover_02_7767
 02:7793 PrintGame_ShowResult
-02:77de ObjScript_02_77DE_Mode03_ViewAlbum_State0B
+02:77de ObjScript_02_77DE_Mode06_Printing_State2A
 02:77ee AlbumText_ObjCursor
 02:781d AlbumText_ObjCursor_Tbl781D
 02:7853 Obj_Ret7853
@@ -813,10 +813,10 @@
 03:5bf0 Leftover_03_5BF0
 03:5d3c OamList_03_5D3C_Mode06_Printing_State1F
 03:633c Leftover_03_633C
-03:637c OamList_03_637C_Mode06_Printing_State24
+03:637c OamList_03_637C_Mode06_Printing_State19
 03:639c Leftover_03_639C
 03:63dc OamList_03_63DC_PrintGame_Kitty
-03:63fc OamList_03_63FC_Obj_DrawSprite
+03:63fc OamList_03_63FC_Mode06_Printing_State2A
 03:6524 Leftover_03_6524
 03:67ec OamList_03_67EC_Mode08_ExchangePhotoTrain_State05
 03:6a94 Leftover_03_6A94
@@ -1554,12 +1554,12 @@
 07:6cc7 Mode04_PlayMenu
 07:6cd2 Mode04_StateTable
 08:4000 Sgb_MltReqPackets
-08:4020 Leftover_08_4020
+08:4020 Sgb_PalSetPacket
 08:40d0 Sgb_AttrTrnPacket
 08:4156 Sgb_PalTrnData
-08:4247 Gfx_08_4247_Sgb_VramTransferInline
-08:6226 Map_08_6226_Sgb_VramTransferInline
-08:6a26 Pal_08_6A26_Sgb_VramTransferInline_Palettes
+08:4247 Gfx_08_4247_Sgb_InitDataSnd
+08:6226 Map_08_6226_Sgb_InitDataSnd
+08:6a26 Pal_08_6A26_Sgb_InitDataSnd_Palettes
 08:6a86 Sgb_Delay
 08:6a92 Sgb_SendPacketInline
 08:6a9b Sgb_SendPacket
@@ -1948,7 +1948,7 @@
 13:7f40 Map_13_7F40_Mode10_ScratchCard_State02
 13:7f80 Map_13_7F80_Mode10_ScratchCard_State02
 13:7fc0 Src_13_7FC0_Mode10_ScratchCard_State02
-14:4000 Gfx_14_4000_Copy_DEtoHL
+14:4000 Gfx_14_4000_Mode17_PrintError_State00
 14:5800 Gfx_14_5800_PompompurinPicture
 14:7000 Map_14_7000_Mode02_TakePhotos_State08
 14:7400 Leftover_14_7400_Map
@@ -1977,7 +1977,7 @@
 17:5800 Gfx_17_5800_Mode01_MainMenu_State00
 17:7000 Gfx_17_7000_Mode08_ExchangePhotoTrain_State00
 17:7800 Gfx_17_7800_Mode08_ExchangePhotoTrain_State00
-18:4000 Frame_18_4000_Mode06_Printing_State07
+18:4000 Frame_18_4000_Mode17_PrintError_State00
 18:5180 Frame_18_5180_WildFrameSides
 18:5800 Gfx_18_5800_Unused_Mode18_State00
 18:7001 Leftover_18_7001
@@ -2118,7 +2118,7 @@
 2c:7cd0 Gfx_2C_7CD0_Mode02_TakePhotos_State01
 2d:4000 Gfx_2D_4000_Mode11_StrawberryChannel_State07
 2d:7820 Gfx_2D_7820_Mode17_PrintError_State00
-2d:7a00 Map_2D_7A00_Copy_DEtoHL
+2d:7a00 Map_2D_7A00_Mode17_PrintError_State00
 2d:7c20 Gfx_2D_7C20_Mode02_TakePhotos_State08
 2e:4000 Gfx_2E_4000_Mode11_StrawberryChannel_State07
 2e:6a1e Frame_2E_6A1E_Mode02_TakePhotos_State01
@@ -2142,7 +2142,7 @@
 30:7fa0 Gfx_30_7FA0_Mode02_TakePhotos_State08
 31:4000 Frame_31_4000_Mode02_TakePhotos_State01
 31:4700 Frame_31_4700_Mode02_TakePhotos_State01
-31:4e00 Gfx_31_4E00_Mode02_TakePhotos_State08
+31:4e00 Gfx_31_4E00_Mode11_StrawberryChannel_State07
 31:64f0 Gfx_31_64F0_Unused_Link_LoadTiles
 31:6770 Gfx_31_6770_Mode00_BootAndTitle_State04
 31:67f0 Map_31_67F0_Mode00_BootAndTitle_State00
@@ -2158,7 +2158,7 @@
 31:73c0 Gfx_31_73C0_Mode02_TakePhotos_State08
 31:75f0 Gfx_31_75F0_Mode02_TakePhotos_State00
 31:7830 Gfx_31_7830_Mode00_BootAndTitle_State01
-31:7980 Map_31_7980_Mode02_TakePhotos_State00
+31:7980 Map_31_7980_Mode00_BootAndTitle_State04
 31:7a70 Map_31_7A70_Mode01_MainMenu_State00
 31:7cb0 Leftover_31_7CB0
 31:7ef0 Src_31_7EF0_Mode02_TakePhotos_State01
@@ -2195,7 +2195,7 @@
 3c:4000 Gfx_3C_4000_Mode11_StrawberryChannel_State07
 3d:4000 Gfx_3D_4000_Mode11_StrawberryChannel_State07
 3e:4000 Gfx_3E_4000_Mode11_StrawberryChannel_State07
-3f:4000 Gfx_3F_4000_Mode14_MessageScreen_State01
+3f:4000 Gfx_3F_4000_Mode11_StrawberryChannel_State07
 00:0000 .data:8
 00:0024 .data:6
 00:002a .padding:16

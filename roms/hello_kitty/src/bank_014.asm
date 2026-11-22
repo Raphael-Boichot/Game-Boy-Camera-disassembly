@@ -4,9 +4,10 @@
 
 SECTION "ROM Bank $014", ROMX[$4000], BANK[$14]
 
-; I: read in the runs by Copy_DEtoHL; kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_14_4000_Copy_DEtoHL::
-    INCBIN "data/bank_14/Gfx_14_4000_Copy_DEtoHL.2bpp" ; $4000, 6144 bytes
+; I: tiles copied to $8000 ($1800 bytes) by Mode17_State00 (06:40CD: Copy_FarInline 14:4000); read only in the forced
+; run of mode $17, which nothing enters (tools/kitty_core_paths.py, 2026-11-22)
+Gfx_14_4000_Mode17_PrintError_State00::
+    INCBIN "data/bank_14/Gfx_14_4000_Mode17_PrintError_State00.2bpp" ; $4000, 6144 bytes
 ; C: tiles of the Pompompurin picture copied to $8000 by Unused_Mode18_State00 (06:4133, 6,144 bytes); no other loader
 Gfx_14_5800_PompompurinPicture::
     INCBIN "data/bank_14/Gfx_14_5800_PompompurinPicture.2bpp" ; $5800, 6144 bytes

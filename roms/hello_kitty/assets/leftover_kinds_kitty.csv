@@ -12,7 +12,6 @@ Leftover_02_4728,OAM,I,"object scripts: the command records of the ObjScript blo
 Leftover_23_6C70,MAP,I,"a tile map: rows of tile ids ($82 $83, $A0-$A4, $B9-$BD) with the blank id $7E, between two Map_ blocks of the stamp window"
 Leftover_03_72E4,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_01_5165,TBL,I,script records: the 17-byte records of Script_01_510A continued (38 52 nn 00 FC 58 0F 3C 80 Cn 50 31 52 01 59 + pointer)
-Leftover_08_4020,TBL,I,Super Game Boy packets: the same bytes as the Japanese Sgb_PalSetPacket and the packets after it (0B:4020)
 Leftover_20_7B80,MAP,I,"a tile map: one tile id ($9F) repeated, between two Map_ blocks"
 Leftover_07_4829,OTHER,I,"code never referenced: fills $D909-$D926 with $FF and jumps to 00:0173 (ld hl,$D909 ; ld a,$FF ; ld c,$1E ; ld [hl+],a ; dec c ; jr nz ; jp $0173 ...)"
 Leftover_02_6E95,OTHER,I,"code never referenced: an object callback (ld a,[$D8D8] ; bit 3,a ; jr nz ; jp $2212 ; ret ; call $6E95 ...)"
