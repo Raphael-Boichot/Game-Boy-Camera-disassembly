@@ -2,7 +2,7 @@ map,rom,row,col,text,kind,codes,evidence
 TITLE1,01:5801,1,4,"logo: デバガメテスター in a black box, SECOND IMPACT below",picture,00-0C,C (BGB): screens/screen_01_00.png
 TITLE1,01:5801,7,12,Ver10.24,text,90 91 81 80 92 82 84,C (BGB): screens/screen_01_00.png
 TITLE1,01:5801,14,3,PUSH ANY BUTTON,text,D0 D5 D3 C8 A0 C1 CE D9 A0 C2 D5 D4 D4 CF CE,C (BGB): screens/screen_01_00.png
-TITLE1,01:5801,16,4,strip: 1997 Nintendo ... Dept. (drawn as one picture of 13 tiles),picture,F0-FC,C (BGB): screens/screen_01_00.png
+TITLE1,01:5801,16,4,"strip: 1997 Nintendo R&E Dept. (drawn as one picture of 13 tiles; the E after R& read by the owner, 2026-11-22)",picture,F0-FC,C (BGB): screens/screen_01_00.png
 MENU1,01:5A41,1,6,header MENU,picture,60-67,C (BGB): screens/screen_02_00.png
 MENU1,01:5A41,5,5,SRAM TEST,text,D3 D2 C1 CD A0 D4 C5 D3 D4,C (BGB): screens/screen_02_00.png
 MENU1,01:5A41,7,5,BANK TEST,text,C2 C1 CE CB A0 D4 C5 D3 D4,C (BGB): screens/screen_02_00.png

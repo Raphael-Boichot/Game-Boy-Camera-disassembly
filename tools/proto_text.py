@@ -40,7 +40,7 @@ with open(a.charset, 'w', newline='') as f:
         ch, cl, note = CS[k]
         w.writerow(['%02X' % k, ch, cl, '01:%04X 02:%04X' % (0x4001 + k * 16, 0x4001 + k * 16), note, 'I'])
 # pictures of codes $00-$7F (tiles 256-383 of the set) and of the copyright strip, named from the BGB screenshots
-PICS = {'TITLE1': [((0x00, 0x5F), 'logo: デバガメテスター in a black box, SECOND IMPACT below'), ((0xF0, 0xFC), 'strip: 1997 Nintendo ... Dept. (drawn as one picture of 13 tiles)')],
+PICS = {'TITLE1': [((0x00, 0x5F), 'logo: デバガメテスター in a black box, SECOND IMPACT below'), ((0xF0, 0xFC), 'strip: 1997 Nintendo R&E Dept. (drawn as one picture of 13 tiles; the E after R& read by the owner, 2026-11-22)')],
         'MENU1': [((0x60, 0x77), 'header MENU')], 'BG_BANK': [((0x00, 0x17), 'header BANK')], 'BGSRAM1': [((0x08, 0x1F), 'header SRAM')],
         'BGSRAM2': [((0x20, 0x2A), 'header DATA SELECT')], 'BGSRAM3': [((0x30, 0x47), 'header AGING'), ((0x2B, 0x2F), 'ERROR on the frame')],
         'BG_DUMP': [((0x3B, 0x3D), 'BANK')], 'BGPROTEC': [((0xE0, 0xEF), 'header PROTECT')]}
