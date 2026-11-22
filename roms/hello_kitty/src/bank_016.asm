@@ -173,8 +173,8 @@ Leftover_16_4000_Tiles::
     ; padding
     ds $90, $00
 
-; C: read in the runs by Copy_DEtoHL; first read on the screen Mode04_PlayMenu_State00 (trace/read_screens_kitty.npz);
-; kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; C: read in the runs by Copy_DEtoHL; first read on the screen Mode04_PlayMenu_State00
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_16_5800_Mode04_PlayMenu_State00::
     INCBIN "data/bank_16/Gfx_16_5800_Mode04_PlayMenu_State00.2bpp" ; $5800, 6144 bytes
 ; I: leftover: 1024 bytes (16:7000-73FF), a BG map of 32 x 32 by its layout (rows of 32 bytes, 20 columns used, the

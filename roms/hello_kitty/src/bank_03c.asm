@@ -5,7 +5,7 @@
 SECTION "ROM Bank $03c", ROMX[$4000], BANK[$3c]
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode11_StrawberryChannel_State07
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_3C_4000_Mode11_StrawberryChannel_State07::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00

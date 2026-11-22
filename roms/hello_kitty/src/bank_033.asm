@@ -5,12 +5,12 @@
 SECTION "ROM Bank $033", ROMX[$4000], BANK[$33]
 
 ; C: read in the runs by Copy_Unrolled_B, Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_33_4000_Mode02_TakePhotos_State01::
     INCBIN "data/bank_33/Frame_33_4000_Mode02_TakePhotos_State01.bin" ; $4000, 7354 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_33_4000
-; after a leftover stretch
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of
+; Data_33_4000 after a leftover stretch
 Gfx_33_5CBA_Mode10_ScratchCard_State02::
     db $3f, $1f, $6f, $30, $df, $60, $67, $78, $3f, $1f, $01, $01, $01, $01, $01, $01
     db $c1, $83, $63, $c6, $be, $7c, $b3, $ce, $fd, $83, $bf, $c1, $5f, $e1, $fe, $7e
@@ -216,7 +216,7 @@ Gfx_33_5CBA_Mode10_ScratchCard_State02::
     ds $e0, $00
 
 ; C: named by the code of Mode14_State00 (06:44E4); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; Mode14_MessageScreen_State01 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_33_6A00_Mode14_MessageScreen_State00::
     INCBIN "data/bank_33/Map_33_6A00_Mode14_MessageScreen_State00.tilemap" ; $6A00, 576 bytes
@@ -225,11 +225,11 @@ Map_33_6A00_Mode14_MessageScreen_State00::
 Leftover_33_6C40_Tiles::
     INCBIN "data/bank_33/Leftover_33_6C40_Tiles.2bpp" ; $6C40, 528 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State0C
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_33_6E50_Mode0B_NameCardEdit_State0C::
     INCBIN "data/bank_33/Gfx_33_6E50_Mode0B_NameCardEdit_State0C.2bpp" ; $6E50, 480 bytes
 ; C: read in the runs by Map_CopyRect; first read on the screen Mode11_StrawberryChannel_State02
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_33_6E50
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Data_33_6E50
 ; after a leftover stretch
 Map_33_7030_Mode11_StrawberryChannel_State02::
     INCBIN "data/bank_33/Map_33_7030_Mode11_StrawberryChannel_State02.tilemap" ; $7030, 448 bytes
@@ -239,7 +239,8 @@ Leftover_33_71F0::
     db $f8, $e2, $e0, $e0, $e0, $88, $89, $8a, $8b, $8c, $8d, $8e, $8f, $90, $ff, $f9
 
 ; C: read in the runs by Map_Write5PlusA0Safe, Vram_CopyHBlank, FrameRec_LoadMap; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py
 Gfx_33_7210_Mode02_TakePhotos_State01::
     db $00, $ff, $7f, $87, $78, $88, $7d, $89, $6f, $9e, $7f, $92, $7f, $93, $7e, $9c
     db $00, $ff, $7f, $00, $ff, $e3, $dc, $3c, $f0, $90, $f0, $e0, $80, $00, $00, $00

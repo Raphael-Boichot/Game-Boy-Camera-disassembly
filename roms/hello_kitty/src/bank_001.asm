@@ -17,7 +17,7 @@ Leftover_01_4200_CosTable::
 Leftover_01_4400_Zero::
     INCBIN "data/bank_01/Leftover_01_4400_Zero.bin" ; $4400, 768 bytes
 ; C: named by the code of Sram_WriteMagic, Sram_CompareMagic (01:4705 01:47CC); read in the runs by Sram_WriteMagic,
-; Sram_CompareMagic; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz)
+; Sram_CompareMagic; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz)
 Sram_WriteMagic_Tbl4700::
     db $4d, $61, $67, $69, $63
 
@@ -1274,7 +1274,7 @@ jr_001_4f34:
     call Far_CallKeepA                            ; $4F3F
     jr nc, jr_001_4f4f                            ; $4F42
 
-    ld de, Gfx_17_7800_Copy_DEtoHL                ; $4F44
+    ld de, Gfx_17_7800_Mode08_ExchangePhotoTrain_State00 ; $4F44
     ld a, $17                                     ; $4F47
     pop hl                                        ; $4F49
     call Copy_FarUnrolled                         ; $4F4A
@@ -1351,7 +1351,7 @@ Photo_LoadToVramScreenOff::
     ds $3a, $00
 
 ; C: read in the runs by ScriptSlots_Run, ScriptCmd_JumpByByte, ScriptCmd_SetE1; first read on the screen
-; Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz)
+; Mode10_ScratchCard_State02 (trace/read_screens_kitty*.npz)
 Script_01_5000_Mode10_ScratchCard_State02::
     db $19, $59, $98, $1e, $59, $05, $07, $0c, $59, $13, $30, $50, $57, $59, $5f, $d9
     db $18, $50, $1e, $50, $24, $50, $2a, $50, $01, $80, $00, $7f, $dc, $58, $01, $80
@@ -1377,7 +1377,7 @@ Puzzle15_ScriptSetPtrByItem::
 
 ; C: named by the code of Puzzle15_ScriptSetPtrByItem (01:5039); read in the runs by ScriptSlots_Run,
 ; Puzzle15_ScriptSetPtrByItem, ScriptSlots_Add; first read on the screen Mode0F_FifteenPuzzle_State05
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Script_01_5046_Puzzle15_ScriptSetPtrByItem::
     db $22, $98, $28, $98, $2e, $98, $42, $99, $48, $99, $4e, $99, $00, $50, $69, $59
     db $19, $59, $98, $1e, $59, $04, $04, $0c, $59, $26, $68, $50, $01, $80, $20, $7e
@@ -1395,7 +1395,7 @@ Puzzle15_ScriptSetMapPtr::
 
 
 ; C: read in the runs by ScriptSlots_Run, ScriptSlots_Add, ScriptCmd_SetE1; first read on the screen
-; Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz)
+; Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz)
 Script_01_5074_Mode0F_FifteenPuzzle_State05::
     db $56, $50, $69, $59, $19, $59, $98, $1e, $59, $04, $04, $0c, $59, $26, $8a, $50
     db $e9, $58, $01, $00, $dc, $58
@@ -1431,12 +1431,12 @@ Puzzle15_ScriptSetMapPtrPrev::
 
 
 ; C: read in the runs by Map_CopyRect, ScriptSlots_Run, ScriptSlots_Add; first read on the screen
-; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_01_50B8_Mode0F_FifteenPuzzle_State0A::
     INCBIN "data/bank_01/Map_01_50B8_Mode0F_FifteenPuzzle_State0A.tilemap" ; $50B8, 82 bytes
 ; C: read in the runs by ScriptSlots_Run, ScriptCmd_JumpByByte, ScriptCmd_Jump; first read on the screen
-; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty.npz)
+; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty*.npz)
 Script_01_510A_Mode0F_FifteenPuzzle_State0A::
     db $5b, $51, $4a, $51, $39, $51, $28, $51, $17, $51, $fc, $58, $0f, $3c, $80, $bd
     db $50, $31, $52, $01, $59, $17, $51, $38, $52, $0f, $00, $fc, $58, $0f, $3c, $80
@@ -1492,7 +1492,7 @@ Script_Nop523F::
 
 
 ; C: named by the code of Mode0F_State08 (07:5C65); read in the runs by ScriptSlots_Add; first read on the screen
-; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty.npz)
+; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty*.npz)
 Script_01_5240_Mode0F_FifteenPuzzle_State08::
     db $de, $50, $3f, $52
 
@@ -1505,7 +1505,7 @@ Script_ClearD8E0::
 
 
 ; C: read in the runs by ScriptSlots_Run, ScriptCmd_SetE3, ScriptSlots_Add; first read on the screen
-; Mode11_StrawberryChannel_State02 (trace/read_screens_kitty.npz)
+; Mode11_StrawberryChannel_State02 (trace/read_screens_kitty*.npz)
 Script_01_524A_Mode11_StrawberryChannel_State02::
     INCBIN "data/bank_01/Script_01_524A_Mode11_StrawberryChannel_State02.bin" ; $524A, 490 bytes
 ; C: when $D8F4 differs from hFFEA: hFFEA = $D8F4 and the script 01:5443 is started (00:2263); runs on its screen in
@@ -1522,7 +1522,7 @@ Menu_ScriptOnItemChange::
 
 
 ; C: named by the code of Menu_ScriptOnItemChange (01:543D); read in the runs by ScriptSlots_Run, ScriptCmd_SetE3,
-; ScriptCmd_JumpByByte; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz)
+; ScriptCmd_JumpByByte; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty*.npz)
 Script_01_5443_Menu_ScriptOnItemChange::
     db $19, $59, $98, $1e, $59, $10, $03, $0c, $59, $25, $11, $59, $04, $00, $01, $80
     db $a0, $7b, $11, $59, $64, $00, $01, $80, $00, $7c, $11, $59, $64, $01, $01, $80
@@ -1603,7 +1603,7 @@ NameCard_ScriptEndTurn::
 
 
 ; C: read in the runs by ScriptSlots_Run, ScriptCmd_SetE3, ScriptCmd_SetE1; first read on the screen
-; Mode0A_NameCard_State03 (trace/read_screens_kitty.npz)
+; Mode0A_NameCard_State03 (trace/read_screens_kitty*.npz)
 Script_01_54FE_Mode0A_NameCard_State03::
     db $0c, $59, $00, $19, $59, $98, $1e, $59, $04, $0d, $a3, $54, $b3, $54, $11, $59
     db $20, $00, $01, $80, $10, $d8, $b3, $54, $11, $59, $24, $00, $01, $80, $10, $d8
@@ -1623,7 +1623,7 @@ NameCard_ScriptNop5576::
     db $22, $c9
 
 ; C: read in the runs by ScriptSlots_Add; first read on the screen Mode0A_NameCard_State03
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Script_01_5589_Mode0A_NameCard_State03::
     db $fe, $54, $76, $55
 
@@ -1697,7 +1697,7 @@ NameCard_ScriptEndTurn_B::
 
 
 ; C: read in the runs by ScriptSlots_Run, ScriptCmd_SetE3, ScriptCmd_SetE1; first read on the screen
-; Mode0A_NameCard_State03 (trace/read_screens_kitty.npz)
+; Mode0A_NameCard_State03 (trace/read_screens_kitty*.npz)
 Script_01_55E8_Mode0A_NameCard_State03::
     db $0c, $59, $00, $19, $59, $98, $1e, $59, $04, $0d, $8d, $55, $9d, $55, $11, $59
     db $30, $00, $01, $80, $10, $d8, $9d, $55, $11, $59, $2c, $00, $01, $80, $10, $d8
@@ -1717,7 +1717,7 @@ NameCard_ScriptNop5660::
     db $22, $c9
 
 ; C: read in the runs by ScriptSlots_Add, Map_CopyRect; first read on the screen Mode0A_NameCard_State03
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Script_01_5673_Mode0A_NameCard_State03::
     db $e8, $55, $60, $56, $03, $02, $01
 
@@ -1807,7 +1807,7 @@ RecordBook_FlowerScript::
     db $59, $f0, $56
 
 ; C: read in the runs by ScriptSlots_Run, RecordBook_CountNone, ScriptCmd_Sound; first read on the screen
-; Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz)
+; Mode0C_RecordBook_State01 (trace/read_screens_kitty*.npz)
 Script_01_5703_Mode0C_RecordBook_State01::
     db $bd, $56, $1a, $57, $3a, $59, $01, $b2, $58, $29, $00, $20, $80, $79, $56, $42
     db $59, $ff, $ff, $01, $59, $07, $57, $dc, $58
@@ -1980,7 +1980,7 @@ ScriptCmd_AddE3::
 
 
 ; C: read in the runs by ScriptSlots_Run, ScriptSlots_Add, ScriptCmd_SetE1; first read on the screen
-; Mode03_ViewAlbum_State0F (trace/read_screens_kitty.npz)
+; Mode03_ViewAlbum_State0F (trace/read_screens_kitty*.npz)
 Script_01_581E_Mode03_ViewAlbum_State0F::
     db $0c, $59, $01, $19, $59, $98, $1e, $59, $10, $01, $11, $59, $84, $00, $fc, $58
     db $0e, $02, $80, $f2, $57, $09, $58, $20, $00, $01, $59, $2f, $58, $02, $58, $dc
@@ -2002,7 +2002,7 @@ ScriptCmd_Sound::
     call JumpTable_Inline                         ; $58B6
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0C_RecordBook_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ScriptCmd_Sound_JumpTbl58B9::
     dw ScriptCmd_SoundCh0
     dw ScriptCmd_SoundCh1
@@ -2400,7 +2400,7 @@ jr_001_5a3a:
     db $00, $9a, $2f, $01, $aa, $00, $9a, $30, $01, $aa, $00, $9a, $31, $01, $ab, $00
 
 ; C: read in the runs by Mode1D_CopyDescriptors, Mode06_State1B; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode1D_CopyDescriptors_Tbl6050::
     INCBIN "data/bank_01/Mode1D_CopyDescriptors_Tbl6050.bin" ; $6050, 1924 bytes
 ; C: A as two BCD digits (00:0C9A) with the 8x8 digits of 0C:7C40 at DE (HBlank copy)
@@ -2478,7 +2478,7 @@ Number_DrawTallDigit::
     swap c                                        ; $6836
     sla c                                         ; $6838
     rl b                                          ; $683A
-    ld hl, Gfx_0C_7E20_Copy_DEtoHL + $20          ; $683C
+    ld hl, Gfx_0C_7E20_Mode06_Printing_State24 + $20 ; $683C
     add hl, bc                                    ; $683F
     ld e, l                                       ; $6840
     ld d, h                                       ; $6841
@@ -2518,7 +2518,8 @@ PrintFrame_Select::
 
 
 ; C: named by the code of PrintFrame_Select, PrintFrame_LoadTiles, PrintFrame_LoadPart (01:6856 01:6896 01:68D5); read
-; in the runs by PrintFrame_LoadTiles; first read on the screen Mode06_Printing_State07 (trace/read_screens_kitty.npz)
+; in the runs by PrintFrame_LoadTiles; first read on the screen Mode06_Printing_State07
+; (trace/read_screens_kitty*.npz)
 PrintFrame_Select_Tbl687D::
     dwb Frame_1B_4000_Mode06_Printing_State02
     dwb Frame_1A_4000_Mode06_Printing_State07
@@ -2748,7 +2749,7 @@ Print_LoadItemPicture::
 
 ; C: named by the code of Print_LoadItemPicture (01:6999); read in the runs by Print_LoadItemPicture,
 ; PrintScript_NextState, Mode06_State1A; first read on the screen Mode06_Printing_State16
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Print_LoadItemPicture_Tbl69DD::
     db $30, $c2, $60, $c4, $90, $c6
     dwb Gfx_2F_6B70_Mode0A_NameCard_State01
@@ -4023,7 +4024,7 @@ Mode06_State1A::
 
     ld de, ObjScript_02_6F60_Mode06_Printing_State1F + $6 ; $7315
     call Object_Create                            ; $7318
-    ld de, ObjScript_02_7044_PrintGame_ObjCheckLanded + $E ; $731B
+    ld de, ObjScript_02_7044_Mode06_Printing_State1F + $E ; $731B
     call Object_Create                            ; $731E
     jr jr_001_7335                                ; $7321
 
@@ -4339,20 +4340,20 @@ jr_001_7486:
     call Object_Create                            ; $7515
     ld de, ObjScript_02_734F_Object_RunAll + $A   ; $7518
     call Object_Create                            ; $751B
-    ld de, ObjScript_02_7044_PrintGame_ObjCheckLanded + $1C ; $751E
+    ld de, ObjScript_02_7044_Mode06_Printing_State1F + $1C ; $751E
     call Object_Create                            ; $7521
-    ld de, ObjScript_02_7345_Object_CreateWithParam ; $7524
+    ld de, ObjScript_02_7345_Mode06_Printing_State24 ; $7524
     call Object_Create                            ; $7527
     jr jr_001_7544                                ; $752A
 
 jr_001_752c:
-    ld de, ObjScript_02_75F0_Object_RunAll        ; $752C
+    ld de, ObjScript_02_75F0_Mode06_Printing_State24 ; $752C
     call Object_Create                            ; $752F
-    ld de, ObjScript_02_7044_PrintGame_ObjCheckLanded + $1C ; $7532
+    ld de, ObjScript_02_7044_Mode06_Printing_State1F + $1C ; $7532
     call Object_Create                            ; $7535
-    ld de, ObjScript_02_7345_Object_CreateWithParam ; $7538
+    ld de, ObjScript_02_7345_Mode06_Printing_State24 ; $7538
     call Object_Create                            ; $753B
-    ld de, ObjScript_02_71F2_PrintGame_ObjEndIfNoneLeft ; $753E
+    ld de, ObjScript_02_71F2_Mode06_Printing_State24 ; $753E
     call Object_Create                            ; $7541
 
 jr_001_7544:

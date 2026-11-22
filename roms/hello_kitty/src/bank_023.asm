@@ -5,11 +5,11 @@
 SECTION "ROM Bank $023", ROMX[$4000], BANK[$23]
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode11_StrawberryChannel_State07
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_23_4000_Mode11_StrawberryChannel_State07::
     INCBIN "data/bank_23/Gfx_23_4000_Mode11_StrawberryChannel_State07.2bpp" ; $4000, 3584 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_23_4E00_Mode10_ScratchCard_State02::
     INCBIN "data/bank_23/Gfx_23_4E00_Mode10_ScratchCard_State02.2bpp" ; $4E00, 3408 bytes
 ; C: named by the code of Mode03_State0A (05:6639); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
@@ -17,19 +17,21 @@ Gfx_23_4E00_Mode10_ScratchCard_State02::
 Map_23_5B50_Mode03_ViewAlbum_State0A::
     INCBIN "data/bank_23/Map_23_5B50_Mode03_ViewAlbum_State0A.tilemap" ; $5B50, 1024 bytes
 ; C: named by the code of Mode03_State0A (05:664F); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_23_5F50_Mode03_ViewAlbum_State0A::
     INCBIN "data/bank_23/Map_23_5F50_Mode03_ViewAlbum_State0A.tilemap" ; $5F50, 1024 bytes
 ; C: named by the code of Mode03_State0A (05:661E); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_23_6350_Mode03_ViewAlbum_State0A::
     INCBIN "data/bank_23/Map_23_6350_Mode03_ViewAlbum_State0A.tilemap" ; $6350, 1024 bytes
 ; C: named by the code of Mode05_State00 (05:5FEA); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode05_StampWindow_State00 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; Mode05_StampWindow_State00 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
+; tools/kitty_layout_kinds.py
 Map_23_6750_Mode05_StampWindow_State00::
     INCBIN "data/bank_23/Map_23_6750_Mode05_StampWindow_State00.tilemap" ; $6750, 1024 bytes
 ; C: named by the code of Mode05_State00 (05:5FF4); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode05_StampWindow_State00 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; Mode05_StampWindow_State00 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
+; tools/kitty_layout_kinds.py
 Map_23_6B50_Mode05_StampWindow_State00::
     INCBIN "data/bank_23/Map_23_6B50_Mode05_StampWindow_State00.tilemap" ; $6B50, 288 bytes
 ; I: leftover: 224 bytes (23:6C70-6D4F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -50,24 +52,25 @@ Leftover_23_6C70::
     db $7e, $8e, $8e, $8e, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_23_6D50_Mode05_StampWindow_State06::
     INCBIN "data/bank_23/Map_23_6D50_Mode05_StampWindow_State06.tilemap" ; $6D50, 1024 bytes
 ; C: named by the code of Stamp_LoadWindowMapDefault (05:54EA); read in the runs by Vram_CopyHBlank; first read on the
-; screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_23_7150_Stamp_LoadWindowMapDefault::
     INCBIN "data/bank_23/Map_23_7150_Stamp_LoadWindowMapDefault.tilemap" ; $7150, 512 bytes
 ; C: named by the code of Mode02_State00, Mode02_State04, Mode03_State04 (05:49B1 05:4B32 05:7334); read in the runs
-; by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00 (trace/read_screens_kitty.npz)
+; by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00 (trace/read_screens_kitty*.npz)
 Gfx_23_7350_Mode02_TakePhotos_State00::
     INCBIN "data/bank_23/Gfx_23_7350_Mode02_TakePhotos_State00.2bpp" ; $7350, 256 bytes
 ; C: named by the code of Mode0A_State00 (06:5630); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode02_TakePhotos_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State00 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py
 Gfx_23_7450_Mode0A_NameCard_State00::
     INCBIN "data/bank_23/Gfx_23_7450_Mode0A_NameCard_State00.2bpp" ; $7450, 224 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Gfx_23_7530_Mode02_TakePhotos_State00::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
@@ -109,7 +112,7 @@ Gfx_23_7530_Mode02_TakePhotos_State00::
     ds $200, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_23_7950_Mode02_TakePhotos_State01::
     db $00, $00, $00, $00, $0f, $0f, $1f, $1f, $eb, $f7, $ff, $e0, $df, $e0, $7f, $40
     db $ff, $c0, $7f, $40, $ff, $c0, $5f, $60, $6f, $70, $18, $1f, $3f, $27, $2f, $3f
@@ -164,6 +167,6 @@ Gfx_23_7950_Mode02_TakePhotos_State01::
     ds $100, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_23_7D50_Mode02_TakePhotos_State08::
     INCBIN "data/bank_23/Gfx_23_7D50_Mode02_TakePhotos_State08.2bpp" ; $7D50, 688 bytes

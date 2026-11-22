@@ -19,11 +19,11 @@ Leftover_0F_4025_Snd_LengthTbl::
     db $08, $00, $00, $0f
 
 ; C: the same 307 bytes as the Japanese Snd_FreqTbl (1F:4039); read in the runs by Snd_Trk_NoteOn, Snd_LoadWaveRam;
-; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz)
+; first read on the screen Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz)
 Snd_FreqTbl::
     INCBIN "data/bank_0f/Snd_FreqTbl.bin" ; $4039, 307 bytes
 ; C: read in the runs by Snd_Trk_FetchOp, Snd_Trk_NoteOn; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_416C_Mode00_BootAndTitle_State00::
     db $03, $06, $0c, $18, $30, $09, $12, $24, $04, $08, $02, $01, $02, $04, $08, $10
     db $20, $40, $0c, $18, $30, $05, $03, $01, $03, $05, $0a, $14, $28, $50, $0f, $1e
@@ -272,7 +272,7 @@ Sfx1_Step_3B::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_435C_Mode02_TakePhotos_State01::
     db $00, $fa, $f0, $a2, $c7, $00, $d0, $f0, $d1, $c7
 
@@ -300,7 +300,7 @@ Sfx1_Step_28::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4383_Mode02_TakePhotos_State01::
     db $00, $f8, $f0, $f2, $c6, $00, $c0, $a9, $f8, $c5
 
@@ -347,7 +347,7 @@ Sfx1_Step_24::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode07_Exchange_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_43C2_Mode07_Exchange_State02::
     db $4c, $c0, $50, $aa, $87
 
@@ -423,7 +423,7 @@ Sfx1_Init_27::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode0A_NameCard_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_442A_Mode0A_NameCard_State02::
     db $00, $80, $e0, $01, $87
 
@@ -464,7 +464,7 @@ jr_00f_4455:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode07_Exchange_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_445A_Mode07_Exchange_State02::
     db $00, $00, $99, $4e, $86, $00, $00, $aa, $b5, $86
 
@@ -501,7 +501,7 @@ jr_00f_4485:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode00_BootAndTitle_State08
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_448B_Mode00_BootAndTitle_State08::
     db $00, $bb, $90, $80, $c7, $00, $ba, $a0, $89, $c7
 
@@ -536,7 +536,7 @@ jr_00f_44b6:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State09
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_44B9_Mode02_TakePhotos_State09::
     db $00, $bd, $f0, $dd, $c7
 
@@ -580,7 +580,7 @@ Sfx1_Step_1B::
     jr jr_00f_4562                                ; $44F3
 
 ; C: read in the runs by Sfx1_Step_17; first read on the screen Mode01_MainMenu_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_44F5_Mode01_MainMenu_State02::
     db $9d, $ac, $c1, $ff, $ac, $00
 
@@ -605,7 +605,7 @@ Sfx1_Step_16::
     jr jr_00f_4562                                ; $4512
 
 ; C: read in the runs by Sfx1_Step_17, Snd_Sfx_Start; first read on the screen Mode03_ViewAlbum_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4514_Mode03_ViewAlbum_State02::
     db $ff, $11, $ac, $ff, $11, $00, $00, $00, $f0, $ac, $85
 
@@ -633,7 +633,7 @@ Sfx1_Step_3C_3D_3E::
     jr jr_00f_4562                                ; $453B
 
 ; C: read in the runs by Sfx1_Step_17, Snd_Sfx_Start; first read on the screen Mode01_MainMenu_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_453D_Mode01_MainMenu_State02::
     db $00, $80, $00, $ff, $87, $21, $90, $21, $90, $21, $90, $21, $90, $00
 
@@ -677,7 +677,7 @@ jr_00f_4562:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_457F_Mode02_TakePhotos_State06::
     db $00, $00, $a9, $8e, $86, $00, $00, $ba, $f5, $86
 
@@ -714,7 +714,7 @@ jr_00f_45aa:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State00
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_45B0_Mode02_TakePhotos_State00::
     db $00, $80, $e1, $ac, $c7, $00, $80, $e1, $c1, $c7, $00, $80, $e1, $d6, $c7
 
@@ -803,7 +803,7 @@ jr_00f_4632:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4638_Mode0B_NameCardEdit_State08::
     db $00, $b5, $b0, $44, $c7, $00, $b5, $20, $44, $c7
 
@@ -831,7 +831,7 @@ Sfx1_Step_02::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode0B_NameCardEdit_State04
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_465F_Mode0B_NameCardEdit_State04::
     db $00, $ba, $e0, $90, $c7
 
@@ -861,7 +861,7 @@ Sfx1_Init_22::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode03_ViewAlbum_State03
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4686_Mode03_ViewAlbum_State03::
     db $00, $f9, $f0, $7d, $c7
 
@@ -873,7 +873,7 @@ Sfx1_Init_23_2B::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode04_PlayMenu_State00
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4693_Mode04_PlayMenu_State00::
     db $00, $ba, $e1, $66, $c7
 
@@ -887,7 +887,7 @@ Sfx1_Init_01::
     db $00, $00, $d1, $c1, $87, $3e, $10, $21, $a0, $46, $c3, $da, $51
 
 ; C: the same 33 bytes as the Japanese Sfx1_10_DigitRegs (1F:46E5); read in the runs by Snd_Sfx_Start; first read on
-; the screen Mode10_ScratchCard_State05 (trace/read_screens_kitty.npz)
+; the screen Mode10_ScratchCard_State05 (trace/read_screens_kitty*.npz)
 Sfx1_10_DigitRegs::
     db $7f, $ae, $e1, $16, $c4
 
@@ -895,7 +895,7 @@ Sfx1_10_DigitRegs::
     db $ae, $e1, $ce, $c5, $77, $ae, $e1, $0a, $c6, $7f, $ae, $e1
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode10_ScratchCard_State05
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_46CE_Mode10_ScratchCard_State05::
     db $5b, $c6, $77, $ae, $e1
 
@@ -906,7 +906,7 @@ Leftover_0F_46D3::
     db $7f, $ae, $e1, $73, $c7, $77, $ae, $e1, $83, $c7
 
 ; C: the same 16 bytes as the Japanese Sfx1_10_DigitIdx (1F:4735); read in the runs by Sfx1_10_DigitPtr; first read on
-; the screen Mode10_ScratchCard_State05 (trace/read_screens_kitty.npz)
+; the screen Mode10_ScratchCard_State05 (trace/read_screens_kitty*.npz)
 Sfx1_10_DigitIdx::
     db $00
 
@@ -994,7 +994,7 @@ Sfx1_Stop::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4772_Mode02_TakePhotos_State06::
     db $4b, $80, $e0, $ee, $87, $53, $80, $d0, $37, $87
 
@@ -1034,7 +1034,7 @@ jr_00f_479b:
 
 
 ; C: the same 19 bytes as the Japanese Sfx1_Data_47D9 (1F:47D9); read in the runs by Sfx1_Step_09, Snd_Sfx_Start;
-; first read on the screen Mode06_Printing_State07 (trace/read_screens_kitty.npz)
+; first read on the screen Mode06_Printing_State07 (trace/read_screens_kitty*.npz)
 Sfx1_Data_47A1::
     db $27, $c0, $e0, $80, $87, $90, $80, $70, $60, $50, $40, $00
 
@@ -1161,7 +1161,7 @@ Sfx1_Init_1D::
     db $7e, $c0, $90, $aa, $c7
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4853_Mode02_TakePhotos_State01::
     db $9e, $00, $d0, $ee, $c7
 
@@ -1177,7 +1177,7 @@ Sfx1_Init_0C::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode01_MainMenu_State05
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4864_Mode01_MainMenu_State05::
     db $7f, $c0, $9a, $34, $c4
 
@@ -1197,7 +1197,7 @@ Sfx1_Init_07::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_487E_Mode10_ScratchCard_State02::
     db $2f, $e9, $f0, $34, $c7
 
@@ -1236,7 +1236,7 @@ jr_00f_48af:
 
 
 ; C: read in the runs by Sfx1_Init_2C, Snd_Sfx_Start; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_48B4_Mode10_ScratchCard_State02::
     db $80, $90, $70, $60, $0a, $07, $0f, $0c, $27, $34, $f0, $34, $c7
 
@@ -1255,7 +1255,7 @@ Sfx1_Init_2D::
     jr jr_00f_48af                                ; $48D7
 
 ; C: read in the runs by Sfx1_Step_2F; first read on the screen Mode10_ScratchCard_State04
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_48D9_Mode10_ScratchCard_State04::
     db $59, $83, $ac, $c1, $d6, $c1, $ac, $83, $59, $00
 
@@ -1310,7 +1310,7 @@ jr_00f_4915:
     jr jr_00f_4905                                ; $4927
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode10_ScratchCard_State04
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4929_Mode10_ScratchCard_State04::
     db $00, $b8, $f0, $06, $c7
 
@@ -1403,7 +1403,7 @@ jr_00f_49b8:
     db $00, $30, $20, $10, $60, $50, $40, $a0, $90, $80, $d0, $c0, $b0, $e0, $11
 
 ; C: the same 66 bytes as the Japanese Sfx1_34_SeqRegs (1F:4A02); read in the runs by Snd_Sfx_Start, Sfx1_Init_34,
-; Sfx1_Step_33; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz)
+; Sfx1_Step_33; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty*.npz)
 Sfx1_34_SeqRegs::
     db $00, $f3, $f0, $06, $c7, $00, $f3, $f0, $21, $c7, $00, $f3, $f0, $39, $c7, $00
     db $f3, $f0, $44, $c7, $00, $f3, $f0, $59, $c7, $00, $f3, $f0, $6b, $c7, $00, $f3
@@ -1439,7 +1439,7 @@ Sfx1_Init_34::
     db $cd, $49, $52, $a7, $ca, $5e, $47, $c9
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode0B_NameCardEdit_State04
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4A3E_Mode0B_NameCardEdit_State04::
     db $00, $80, $50, $b0, $87
 
@@ -1471,7 +1471,7 @@ Sfx1_Step_30::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode0B_NameCardEdit_State04
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4A65_Mode0B_NameCardEdit_State04::
     db $00, $80, $50, $60, $87
 
@@ -1503,7 +1503,7 @@ Sfx1_Step_31::
 
 
 ; C: read in the runs by Sfx1_StepRegTable, Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4A8D_Mode02_TakePhotos_State06::
     db $4d, $80, $f5, $70, $87, $e7, $a7, $77, $d7, $87, $57, $77, $47, $27, $00
 
@@ -1527,7 +1527,7 @@ Sfx1_Step_38::
 
 
 ; C: read in the runs by Sfx1_StepRegTable, Snd_Sfx_Start; first read on the screen Mode05_StampWindow_State03
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4AB4_Mode05_StampWindow_State03::
     db $36, $80, $f5, $e0, $86, $e7, $a7, $77, $d7, $87, $57, $67, $37, $47, $00
 
@@ -1572,7 +1572,7 @@ Sfx1_Step_39::
     jr Sfx1_StepRegTable                          ; $4B01
 
 ; C: read in the runs by Sfx1_StepRegTable, Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4B03_Mode02_TakePhotos_State01::
     db $4e, $00, $f5, $00, $87, $e7, $a7, $77, $d7, $87, $57, $67, $37, $47, $00
 
@@ -1595,7 +1595,7 @@ Sfx1_Step_36::
     jr Sfx1_StepRegTable                          ; $4B27
 
 ; C: the same 16 bytes as the Japanese Sfx1_Data_4B54 (1F:4B54); read in the runs by Sfx1_StepRegTable, Snd_Sfx_Start;
-; first read on the screen Mode05_StampWindow_State03 (trace/read_screens_kitty.npz)
+; first read on the screen Mode05_StampWindow_State03 (trace/read_screens_kitty*.npz)
 Sfx1_Data_4B29::
     db $3d, $c0, $f5, $33, $87, $e7, $b7, $a7, $b7, $77, $57, $47, $37, $37, $27, $00
 
@@ -1665,7 +1665,7 @@ Sfx1_Step_0F::
     jr jr_00f_4bba                                ; $4B92
 
 ; C: read in the runs by Sfx1_Step_11, Snd_Sfx_Start; first read on the screen Mode02_TakePhotos_State05
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4B94_Mode02_TakePhotos_State05::
     db $4a, $00, $f2, $90, $87, $d3, $b3, $a3, $43, $43, $33, $33, $23, $23, $00
 
@@ -1742,7 +1742,7 @@ Sfx1_Step_13::
     jr jr_00f_4bc1                                ; $4BFD
 
 ; C: the same 17 bytes as the Japanese Sfx1_Data_4C2A (1F:4C2A); read in the runs by Sfx1_Step_19_3A, Snd_Sfx_Start;
-; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz)
+; first read on the screen Mode02_TakePhotos_State08 (trace/read_screens_kitty*.npz)
 Sfx1_Data_4BFF::
     db $3b, $80, $f4, $90, $87, $b2, $a2, $82, $72, $62, $43, $43, $33, $23, $23, $13
     db $00
@@ -1775,7 +1775,7 @@ Sfx1_Step_19_3A::
     jr jr_00f_4bc1                                ; $4C2F
 
 ; C: read in the runs by Snd_Sfx_Start, Sfx1_Init_08; first read on the screen Mode01_MainMenu_State05
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4C31_Mode01_MainMenu_State05::
     db $00, $00, $5b, $0a, $86
 
@@ -1843,7 +1843,7 @@ jr_00f_4c80:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode01_MainMenu_State05
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4C86_Mode01_MainMenu_State05::
     db $00, $b9, $72, $9d, $c7, $00, $b9, $92, $a2, $c7, $00, $b9, $c2, $ac, $c7, $00
     db $b9, $e2, $c1, $c7
@@ -1946,7 +1946,7 @@ Sfx4_Step_06_LoadNR4x::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4D47_Mode05_StampWindow_State06::
     db $00, $e1, $25, $80
 
@@ -2069,7 +2069,7 @@ jr_00f_4e0b:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode03_ViewAlbum_State0D
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4E16_Mode03_ViewAlbum_State0D::
     db $00, $e3, $17, $80, $00, $f4, $64, $c0
 
@@ -2102,7 +2102,7 @@ Sfx4_Step_0A::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4E3B_Mode03_ViewAlbum_State0B::
     db $3a, $b4, $14, $c0, $3d, $90, $24, $c0
 
@@ -2137,7 +2137,7 @@ jr_00f_4e5e:
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4E64_Mode0B_NameCardEdit_State08::
     db $00, $a2, $37, $80, $33, $f0, $5f, $c0
 
@@ -2207,7 +2207,7 @@ Sfx4_Init_08::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode03_ViewAlbum_State02
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4EBA_Mode03_ViewAlbum_State02::
     db $00, $74, $5f, $80
 
@@ -2219,7 +2219,7 @@ Sfx4_Init_02::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4EC6_Mode03_ViewAlbum_State0B::
     db $00, $f4, $57, $80
 
@@ -2358,7 +2358,7 @@ jr_00f_4f89:
     db $3e, $01, $ea, $0d, $d0, $c9
 
 ; C: read in the runs by Snd_Sfx_Start, Sfx3_Step_08; first read on the screen Mode00_BootAndTitle_State08
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4F94_Mode00_BootAndTitle_State08::
     db $80, $f2, $20, $39, $c7, $21, $06, $06, $00
 
@@ -2389,7 +2389,7 @@ Sfx3_Init_09::
 
 
 ; C: read in the runs by Snd_Sfx_Start, Sfx3_Step_08; first read on the screen Mode01_MainMenu_State06
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4FBC_Mode01_MainMenu_State06::
     db $80, $f2, $20, $ac, $c7, $b6, $be, $c1, $00
 
@@ -2435,7 +2435,7 @@ Sfx3_Init_08::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_4FF7_Mode06_Printing_State1F::
     db $80, $50, $20, $f0, $c6
 
@@ -2564,7 +2564,7 @@ Sfx3_Init_04::
 
 
 ; C: read in the runs by Snd_Sfx_Start; first read on the screen Mode06_Printing_State05
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_5089_Mode06_Printing_State05::
     db $80, $50, $20, $10, $c4
 
@@ -2766,7 +2766,7 @@ Sfx3_Begin::
     db $f1, $00, $f1, $f1, $f1, $f1, $f1, $f1, $77, $77, $77, $77, $71, $00, $a0, $00
 
 ; C: the same 64 bytes as the Japanese Sfx3_Wave_51CA (1F:51CA); read in the runs by Snd_LoadWaveRam; first read on
-; the screen Mode06_Printing_State1F (trace/read_screens_kitty.npz)
+; the screen Mode06_Printing_State1F (trace/read_screens_kitty*.npz)
 Sfx3_Wave_519A::
     db $12, $13, $32, $3f, $89, $cd, $78, $97, $71, $61, $61, $61, $61, $61, $49, $b9
     db $00, $00, $98, $76, $54, $32, $10, $91, $f8, $76, $04, $32, $12, $38, $e9, $19
@@ -3847,7 +3847,7 @@ jr_00f_56cc:
     jr jr_00f_5691                                ; $56D3
 
 ; C: read in the runs by Snd_Vib_Lookup; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_56D5_Mode00_BootAndTitle_State00::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $10, $00, $0f, $00, $00
     db $11, $00, $0f, $f0, $01, $12, $10, $ff, $ef, $01, $12, $10, $ff, $ef, $01, $12
@@ -3859,7 +3859,7 @@ Snd_0F_56D5_Mode00_BootAndTitle_State00::
     ds $1e, $00
 
 ; C: read in the runs by Snd_Sfx_Lookup, Snd_Trk_FetchByte, Snd_Copy2; first read on the screen
-; Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
+; Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz); kind SOUND from the evidence of
 ; tools/kitty_layout_kinds.py
 Snd_0F_572F_Mode00_BootAndTitle_State00::
     db $8d, $57, $6e, $58, $46, $59, $1e, $70, $11, $5a, $ae, $57, $d9, $57, $fa, $76
@@ -3876,11 +3876,11 @@ Snd_0F_572F_Mode00_BootAndTitle_State00::
     db $57, $9d, $31, $00, $80, $a1, $01, $01, $1e, $22, $00
 
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
-; Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; Mode04_PlayMenu_State01 (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_57D9_Mode04_PlayMenu_State01::
     INCBIN "data/bank_0f/Snd_0F_57D9_Mode04_PlayMenu_State01.bin" ; $57D9, 711 bytes
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
-; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind SOUND from the evidence of
+; Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind SOUND from the evidence of
 ; tools/kitty_layout_kinds.py
 Snd_0F_5AA0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0f/Snd_0F_5AA0_Mode05_StampWindow_State06.bin" ; $5AA0, 4642 bytes
@@ -3888,7 +3888,7 @@ Snd_0F_5AA0_Mode05_StampWindow_State06::
 Leftover_0F_6CC2::
     INCBIN "data/bank_0f/Leftover_0F_6CC2.bin" ; $6CC2, 303 bytes
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Trk_LoadFirstPattern, Snd_Copy2; first read on the screen
-; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint
+; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint
 ; (trace/bgb_reads_kitty.csv: exchange); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_0F_6DF1_Mode11_StrawberryChannel_State07::
     INCBIN "data/bank_0f/Snd_0F_6DF1_Mode11_StrawberryChannel_State07.bin" ; $6DF1, 3520 bytes
@@ -3915,7 +3915,8 @@ Snd_0F_7D71_Snd_Trk_FetchByte::
     db $a4, $4a, $a3, $01, $00
 
 ; C: read in the runs by Snd_Trk_FetchByte, Snd_Copy2, Snd_Trk_LoadFirstPattern; first read on the screen
-; Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; Mode12_SlideShow_State01 (trace/read_screens_kitty*.npz); kind SOUND from the evidence of
+; tools/kitty_layout_kinds.py
 Snd_0F_7E43_Mode12_SlideShow_State01::
     db $9d, $93, $00, $80, $a2, $32, $32, $32, $32, $36, $a1, $32, $3c, $a2, $40, $01
     db $40, $a8, $40, $00, $9d, $53, $00, $80, $a5, $01, $01, $a2, $40, $44, $a3, $48

@@ -5,7 +5,7 @@
 SECTION "ROM Bank $010", ROMX[$4000], BANK[$10]
 
 ; C: named by the code of Mode0B_State04, Mode02_State01, Mode0F_State0C (05:4AC4 06:52FF 06:5342); read in the runs
-; by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_UI
+; by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind T_UI
 ; from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_4000_Mode0B_NameCardEdit_State04::
     db $3f, $00, $7f, $3f, $df, $60, $ff, $40, $ff, $40, $ff, $4e, $ff, $49, $ff, $4c
@@ -343,7 +343,7 @@ Gfx_10_4000_Mode0B_NameCardEdit_State04::
     ds $60, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5500_Mode02_TakePhotos_State06::
     db $00, $00, $00, $00, $1f, $00, $3e, $1f, $7f, $20, $bf, $66, $ff, $66, $ff, $60
     db $ff, $66, $bf, $66, $7f, $20, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
@@ -360,7 +360,7 @@ Gfx_10_5500_Mode02_TakePhotos_State06::
     ds $60, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State11
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5600_Mode03_ViewAlbum_State11::
     db $00, $00, $00, $00, $1f, $00, $3e, $1f, $7f, $20, $bf, $66, $ff, $66, $ff, $60
     db $ff, $66, $bf, $66, $7f, $20, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
@@ -377,7 +377,7 @@ Gfx_10_5600_Mode03_ViewAlbum_State11::
     ds $60, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5700_Mode02_TakePhotos_State06::
     db $00, $00, $00, $00, $1f, $00, $2f, $1f, $5f, $39, $7f, $30, $bf, $66, $ff, $66
     db $ff, $60, $bf, $66, $7f, $26, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
@@ -393,8 +393,9 @@ Gfx_10_5700_Mode02_TakePhotos_State06::
     ; padding
     ds $60, $00
 
-; C: read in the runs by Copy_DEtoHL
-Src_10_5800_Copy_DEtoHL::
+; C: read in the runs by Copy_DEtoHL; first read on the screen Mode09_ExchangeCommunicating_State04
+; (trace/read_screens_kitty*.npz)
+Src_10_5800_Mode09_ExchangeCommunicating_State04::
     db $00, $00, $00, $00, $1f, $00, $2f, $1f, $5f, $39, $7f, $30, $bf, $66, $ff, $66
     db $ff, $60, $bf, $66, $7f, $26, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
     db $07, $00, $1f, $03, $9f, $0e, $5f, $88, $bf, $ce, $ff, $c6, $df, $6c, $fd, $6a
@@ -410,7 +411,7 @@ Src_10_5800_Copy_DEtoHL::
     ds $60, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0A_NameCard_State02
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5900_Mode0A_NameCard_State02::
     INCBIN "data/bank_10/Gfx_10_5900_Mode0A_NameCard_State02.bin" ; $5900, 259 bytes
 ; I: leftover: 253 bytes (10:5A03-5AFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -432,7 +433,7 @@ Leftover_10_5A03::
     ds $63, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State09
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5B00_Mode03_ViewAlbum_State09::
     db $00, $00, $00, $00, $1f, $00, $2f, $1f, $5f, $39, $7f, $30, $bf, $66, $ff, $66
     db $ff, $60, $bf, $66, $7f, $26, $5f, $3f, $36, $0f, $0f, $00, $00, $00, $00, $00
@@ -449,7 +450,7 @@ Gfx_10_5B00_Mode03_ViewAlbum_State09::
     ds $60, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State0A
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5C00_Mode06_Printing_State0A::
     db $00, $00, $00, $00, $0f, $00, $37, $0f, $5f, $3f, $7f, $38, $bf, $73, $ff, $71
     db $ff, $78, $bf, $7c, $7f, $31, $5f, $3f, $37, $0f, $0f, $00, $00, $00, $00, $00
@@ -492,6 +493,6 @@ Gfx_10_5C00_Mode06_Printing_State0A::
     ds $a0, $00
 
 ; C: read in the runs by Copy_DEtoHL, Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_10_5EE0_Mode05_StampWindow_State06::
     INCBIN "data/bank_10/Gfx_10_5EE0_Mode05_StampWindow_State06.2bpp" ; $5EE0, 8480 bytes

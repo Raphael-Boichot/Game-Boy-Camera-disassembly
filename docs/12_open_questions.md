@@ -6,6 +6,6 @@ Only what is still open; what was answered is in the sections named in the conte
 
 **Other**
 - Pan Docs cross-check (§21): eight points where Pan Docs differs from the project's evidence are listed in §21.3, for a possible report to Pan Docs.
-- The open points of the BGB comparison (§16.10, §16.11 "what this walk does not prove", §17). Of the 18 sweep paths that ended in different modes, the two replayable here (`1E:01`, `1E:03`) agree since 2026-11-21 (a timing difference of the replay, §16.6); the 16 others agree since 2026-11-22 on a synthetic stand-in of the owner's unlocked saves, once their start is moved 2 frames into the window where they work (§16.6 row 1). Left: why BGB's main menu reads keys at least one frame later than my core on these demos (I).
+- The open points of the BGB comparison (§16.10, §16.11 "what this walk does not prove", §17). Of the 18 sweep paths that ended in different modes, the two replayable here (`1E:01`, `1E:03`) agree since 2026-11-21 (a timing difference of the replay, §16.6); the 16 others agree since 2026-11-22 on a synthetic stand-in of the owner's unlocked saves, once their start is moved 2 frames into the window where they work (§16.6 row 1). Settled 2026-11-22 (C): the frame was the demo's, BGB takes the first demo byte at power-on, so it saw every key one V-Blank early; with one lead byte the 16 paths and the 30 synthetic-save paths are exact with no start shift (§16.6 row 1).
 
 ---

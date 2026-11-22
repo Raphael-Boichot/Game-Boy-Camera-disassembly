@@ -5,22 +5,22 @@
 SECTION "ROM Bank $013", ROMX[$4000], BANK[$13]
 
 ; C: named by the code of Sram_Format (01:49B7); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_13_4000_Sram_Format::
     INCBIN "data/bank_13/Gfx_13_4000_Sram_Format.2bpp" ; $4000, 8064 bytes
 ; C: named by the code of KittHost_InitScreen (07:675B); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode0E_KittGamesHost_State03 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; Mode0E_KittGamesHost_State03 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_13_5F80_KittHost_InitScreen::
     INCBIN "data/bank_13/Gfx_13_5F80_KittHost_InitScreen.2bpp" ; $5F80, 6144 bytes
 ; C: named by the code of Mode0E_State01 (07:67C1); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode0E_KittGamesHost_State03 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; Mode0E_KittGamesHost_State03 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_13_7780_Mode0E_KittGamesHost_State01::
     INCBIN "data/bank_13/Gfx_13_7780_Mode0E_KittGamesHost_State01.2bpp" ; $7780, 896 bytes
 ; C: named by the code of Mode10_State00, Mode10_State01 (07:60B5 07:613A); read in the runs by Copy_DEtoHL,
-; Vram_CopyHBlank; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind MAP from
+; Vram_CopyHBlank; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty*.npz); kind MAP from
 ; the evidence of tools/kitty_layout_kinds.py
 Map_13_7B00_Mode10_ScratchCard_State00::
     INCBIN "data/bank_13/Map_13_7B00_Mode10_ScratchCard_State00.tilemap" ; $7B00, 628 bytes
@@ -28,17 +28,18 @@ Map_13_7B00_Mode10_ScratchCard_State00::
 Leftover_13_7D74::
     INCBIN "data/bank_13/Leftover_13_7D74.bin" ; $7D74, 396 bytes
 ; C: read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_13_7F00_Mode10_ScratchCard_State02::
     INCBIN "data/bank_13/Map_13_7F00_Mode10_ScratchCard_State02.tilemap" ; $7F00, 64 bytes
 ; C: read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_13_7F40_Mode10_ScratchCard_State02::
     INCBIN "data/bank_13/Map_13_7F40_Mode10_ScratchCard_State02.tilemap" ; $7F40, 64 bytes
 ; C: read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_13_7F80_Mode10_ScratchCard_State02::
     INCBIN "data/bank_13/Map_13_7F80_Mode10_ScratchCard_State02.tilemap" ; $7F80, 64 bytes
-; C: read in the runs by Map_CopyRect
-Src_13_7FC0_Map_CopyRect::
-    INCBIN "data/bank_13/Src_13_7FC0_Map_CopyRect.bin" ; $7FC0, 64 bytes
+; C: read in the runs by Map_CopyRect; first read on the screen Mode10_ScratchCard_State02
+; (trace/read_screens_kitty*.npz)
+Src_13_7FC0_Mode10_ScratchCard_State02::
+    INCBIN "data/bank_13/Src_13_7FC0_Mode10_ScratchCard_State02.bin" ; $7FC0, 64 bytes

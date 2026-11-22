@@ -110,12 +110,12 @@ Cam_PopcountTable256::
     db $00, $c0, $30, $f0, $0c, $cc, $3c, $fc, $03, $c3, $33, $f3, $0f, $cf, $3f, $ff
 
 ; C: the same 542 bytes as the Japanese Cam_ReduceTbl_Lo (0A:7900); read in the runs by Fx08_Reduce2xTile2x2_GroupTop;
-; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 Cam_ReduceTbl_Lo::
     ASSERT LOW(Cam_ReduceTbl_Lo) == 0 ; read as a page: HIGH(Cam_ReduceTbl_Lo) with the index in the low byte
     INCBIN "data/bank_04/Cam_ReduceTbl_Lo.bin" ; $4600, 542 bytes
 ; C: read in the runs by Cam_PopcountLevel; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Cam_PopcountLevel_Tbl481E::
     db $06, $07, $07, $08, $09, $10, $10, $10, $09
 
@@ -137,7 +137,7 @@ Leftover_04_4853::
 Src_04_48B9_Mode02_TakePhotos_State01::
     INCBIN "data/bank_04/Src_04_48B9_Mode02_TakePhotos_State01.bin" ; $48B9, 55 bytes
 ; C: read in the runs by Cam_ORegister_SAR_Tail; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Cam_ORegister_SAR_Tail_Tbl48F0::
     db $98, $92, $93, $94, $96, $96, $97, $98, $9c, $9a, $9b, $9c, $9e, $9e, $9f, $9f
     db $90
@@ -152,7 +152,7 @@ Leftover_04_4901::
 Src_04_4923_Mode00_BootAndTitle_State00::
     INCBIN "data/bank_04/Src_04_4923_Mode00_BootAndTitle_State00.bin" ; $4923, 21 bytes
 ; C: read in the runs by Cam_LoadRegisterSet; first read on the screen Mode02_TakePhotos_State0B
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Cam_LoadRegisterSet_Tbl4938::
     db $88, $92, $a5, $d5, $89, $92, $a2, $d2, $8a, $92, $a1, $c8
 
@@ -164,7 +164,7 @@ Leftover_04_4944::
     db $8a, $97, $b8, $ff, $8b, $98, $b2, $f5
 
 ; C: read in the runs by Cam_LoadRegisterSet; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Cam_LoadRegisterSet_Tbl497C::
     db $8c, $98, $ac, $eb
 
@@ -207,7 +207,7 @@ Cam_PopcountLevelByIndex::
     db $0c, $18, $24, $30, $3c, $48
 
 ; C: read in the runs by Cam_PopcountLevelByIndex; first read on the screen Mode02_TakePhotos_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Cam_PopcountLevelByIndex_Tbl4A0D::
     db $54, $60
 
@@ -2789,7 +2789,7 @@ Cam_DispatchEffect::
 
 
 ; C: named by the code of Cam_DispatchEffect (04:5E78); read in the runs by Cam_DispatchEffect; first read on the
-; screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 Cam_DispatchEffect_JumpTbl5E8A::
     dw Fx00_Copy
     dw Fx01_MirrorRtoL

@@ -5,7 +5,7 @@
 SECTION "ROM Bank $01b", ROMX[$4000], BANK[$1b]
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State02
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_1B_4000_Mode06_Printing_State02::
     INCBIN "data/bank_1b/Frame_1B_4000_Mode06_Printing_State02.bin" ; $4000, 4480 bytes
 ; C: the last $380 bytes (56 tiles) of print frame block 0 of table 01:687D: the left and right borders of a wild
@@ -73,7 +73,7 @@ Frame_1B_5180_WildFrameSides::
     ds $300, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State04
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_5800_Mode0B_NameCardEdit_State04::
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
@@ -94,7 +94,7 @@ Gfx_1B_5800_Mode0B_NameCardEdit_State04::
     ds $20, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_5900_Mode0B_NameCardEdit_State08::
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $fe, $00, $fc, $00, $f8, $00, $f0
     db $ff, $ff, $00, $ff, $00, $ff, $00, $3f, $00, $1f, $00, $0f, $00, $07, $00, $03
@@ -115,7 +115,7 @@ Gfx_1B_5900_Mode0B_NameCardEdit_State08::
     ds $20, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State0C
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_5A00_Mode0B_NameCardEdit_State0C::
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $fe, $00, $fc, $00, $f8, $00, $f0
     db $ff, $ff, $00, $ff, $00, $ff, $00, $3f, $00, $1f, $00, $0f, $00, $07, $00, $03
@@ -136,7 +136,7 @@ Gfx_1B_5A00_Mode0B_NameCardEdit_State0C::
     ds $20, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State0A
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_5B00_Mode0B_NameCardEdit_State0A::
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
@@ -157,7 +157,7 @@ Gfx_1B_5B00_Mode0B_NameCardEdit_State0A::
     ds $20, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State0E
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_5C00_Mode0B_NameCardEdit_State0E::
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $ff, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
@@ -178,7 +178,7 @@ Gfx_1B_5C00_Mode0B_NameCardEdit_State0E::
     ds $20, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_5D00_Mode0B_NameCardEdit_State10::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $20, $20, $fc, $fc, $28, $28
     db $38, $38, $6c, $6c, $aa, $aa, $aa, $aa, $b2, $b2, $54, $54, $00, $00, $00, $00
@@ -365,7 +365,7 @@ Gfx_1B_5D00_Mode0B_NameCardEdit_State10::
     ds $c0, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode00_BootAndTitle_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_6900_Mode00_BootAndTitle_State08::
     INCBIN "data/bank_1b/Gfx_1B_6900_Mode00_BootAndTitle_State08.bin" ; $6900, 162 bytes
 ; I: leftover: 94 bytes (1B:69A2-69FF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -378,7 +378,7 @@ Leftover_1B_69A2::
     db $00, $42, $00, $24, $00, $18, $00, $18, $00, $24, $00, $42, $00, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode00_BootAndTitle_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_6A00_Mode00_BootAndTitle_State08::
     INCBIN "data/bank_1b/Gfx_1B_6A00_Mode00_BootAndTitle_State08.bin" ; $6A00, 162 bytes
 ; I: leftover: 94 bytes (1B:6AA2-6AFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -394,7 +394,7 @@ Leftover_1B_6AA2::
     ds $2, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_6B00_Mode00_BootAndTitle_State00::
     INCBIN "data/bank_1b/Gfx_1B_6B00_Mode00_BootAndTitle_State00.bin" ; $6B00, 162 bytes
 ; I: leftover: 94 bytes (1B:6BA2-6BFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -412,7 +412,7 @@ Leftover_1B_6BA2::
     ds $2, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode00_BootAndTitle_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_6C00_Mode00_BootAndTitle_State08::
     INCBIN "data/bank_1b/Gfx_1B_6C00_Mode00_BootAndTitle_State08.bin" ; $6C00, 162 bytes
 ; I: leftover: 94 bytes (1B:6CA2-6CFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -425,7 +425,7 @@ Leftover_1B_6CA2::
     db $00, $42, $00, $24, $00, $18, $00, $18, $00, $24, $00, $42, $00, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode00_BootAndTitle_State07
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_6D00_Mode00_BootAndTitle_State07::
     INCBIN "data/bank_1b/Gfx_1B_6D00_Mode00_BootAndTitle_State07.bin" ; $6D00, 162 bytes
 ; I: leftover: 94 bytes (1B:6DA2-6DFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -438,7 +438,7 @@ Leftover_1B_6DA2::
     db $00, $42, $00, $24, $00, $18, $00, $18, $00, $24, $00, $42, $00, $00
 
 ; C: named by the code of Mode0E_State00 (07:678A); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode0E_KittGamesHost_State00 (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; Mode0E_KittGamesHost_State00 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_1B_6E00_Mode0E_KittGamesHost_State00::
     INCBIN "data/bank_1b/Map_1B_6E00_Mode0E_KittGamesHost_State00.tilemap" ; $6E00, 576 bytes
@@ -446,14 +446,14 @@ Map_1B_6E00_Mode0E_KittGamesHost_State00::
 Leftover_1B_7040::
     INCBIN "data/bank_1b/Leftover_1B_7040.bin" ; $7040, 448 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0E_KittGamesHost_State08
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_1B_7200_Mode0E_KittGamesHost_State08::
     INCBIN "data/bank_1b/Map_1B_7200_Mode0E_KittGamesHost_State08.tilemap" ; $7200, 672 bytes
 ; I: leftover: 352 bytes (1B:74A0-75FF) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_1B_74A0::
     INCBIN "data/bank_1b/Leftover_1B_74A0.bin" ; $74A0, 352 bytes
 ; C: named by the code of Mode0E_State01 (07:67CB); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode0E_KittGamesHost_State03 (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; Mode0E_KittGamesHost_State03 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_1B_7600_Mode0E_KittGamesHost_State01::
     INCBIN "data/bank_1b/Map_1B_7600_Mode0E_KittGamesHost_State01.tilemap" ; $7600, 576 bytes
@@ -461,7 +461,7 @@ Map_1B_7600_Mode0E_KittGamesHost_State01::
 Leftover_1B_7840::
     INCBIN "data/bank_1b/Leftover_1B_7840.bin" ; $7840, 448 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0E_KittGamesHost_State14
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_1B_7A00_Mode0E_KittGamesHost_State14::
     INCBIN "data/bank_1b/Map_1B_7A00_Mode0E_KittGamesHost_State14.tilemap" ; $7A00, 672 bytes
 ; I: leftover: 592 bytes (1B:7CA0-7EEF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -493,7 +493,7 @@ Leftover_1B_7CA0::
     ds $f0, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State0D
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_1B_7EF0_Mode06_Printing_State0D::
     db $f0, $30, $f0, $10, $f0, $10, $f0, $10, $f0, $10, $f0, $10, $f0, $10, $f0, $30
     db $c0, $c0, $b0, $f0, $f0, $90, $d0, $b0, $70, $70, $00, $00, $00, $00, $00, $00

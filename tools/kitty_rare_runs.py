@@ -58,9 +58,10 @@ def fl(b, ad): return b * 0x4000 + ad - 0x4000
 TEXTS = [(9, fl(7, 0x6504), 28), (10, fl(7, 0x6520), 29), (11, fl(7, 0x653D), 31)]
 BIT = dict(A=1, B=2, Select=4, Start=8, Right=0x10, Left=0x20, Up=0x40, Down=0x80)
 def cm(b): return ((b << 4) | (b >> 4)) & 0xFF                    # the core's key byte: buttons in the high nibble
+import kitty_first_screens; FS = kitty_first_screens.FirstScreens(1 << 20)   # the screen of each byte's first read
 def tap(k, w=90, hold=8):
     if k != '-': G.keys(cm(BIT[k]))
-    G.run(hold); G.keys(0); G.run(w)
+    G.run(hold); G.keys(0); G.run(w); FS.update(G.cov_dread(), G.peek(0xFF8D), G.peek(0xFF8E))
 def ms(): return '%02X:%02X' % (G.peek(0xFF8D), G.peek(0xFF8E))
 def boot(save, n=703, printer=0):
     G.load_rom(a.rom); G.reset(bytes(save)); G.L.gb_printer_model(1); G.L.gb_attach_printer(printer); G.L.gb_printer_inject_clear()
@@ -96,7 +97,9 @@ row = next(r for r in csv.DictReader(open(os.path.join(KD, 'trace', 'modes_seen_
 H = bytes.fromhex(row['keys'])
 def start1():
     boot(KITTS, 250)
-    for j in range(250, len(H)): G.keys(H[j]); G.run(1)
+    for j in range(250, len(H)):
+        G.keys(H[j]); G.run(1)
+        if j % 16 == 0: FS.update(G.cov_dread(), G.peek(0xFF8D), G.peek(0xFF8E))
 tr, seq, modes = search(1, 300, 400, start1, ['A', 'A', 'A', 'B', 'Down', 'Up', 'Right', 'Left'], (10, 20, 40), 4,
                         lambda: G.cov_exec()[fl(7, 0x6BBE)] > 0, (0x0E, 0x10, 0x1E))
 shot('text 9 (07:6504): after a lost card, 1 in 8', 9); G.run(300); rows.append(['rare', 'text 9 (07:6504)', 'formatted, Kitts 999,999', tr, 'modes_seen 0E:1D (%d frames), then ' % len(H) + ' '.join(seq), ' '.join(modes), '%d of 28' % read(0)])
@@ -162,6 +165,7 @@ for i, (lb, im) in enumerate(SHOTS):
     sheet.paste(im.resize((320, 288), Image.NEAREST), (i * W + 8, 36))
     for j, part in enumerate(textwrap.wrap(lb, 46)[:2]): dr.text((i * W + 8, 4 + 14 * j), part, fill=0)
 os.makedirs(os.path.dirname(a.shots), exist_ok=True); sheet.save(a.shots, optimize=True)
+FS.save(os.path.join(os.path.dirname(a.out), 'read_screens_kitty_rare.npz'))
 np.savez_compressed(a.out, ex=np.array(G.cov_exec()), dr=np.array(G.cov_dread()), rdr=np.array(G.cov_reader()))
 with open(a.report, 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['part', 'goal', 'save', 'trial', 'taps', 'modes', 'text_bytes_read']); w.writerows(rows)

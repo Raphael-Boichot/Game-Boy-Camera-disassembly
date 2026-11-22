@@ -315,7 +315,7 @@ Mode19_StateTable::
     dw Mode19_State01
 
 ; C: read in the runs by Mode14_State01, Mode14_State00; first read on the screen Mode14_MessageScreen_State01
-; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full)
+; (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange_full)
 Mode14_State01_Tbl420D::
     INCBIN "data/bank_06/Mode14_State01_Tbl420D.bin" ; $420D, 619 bytes
 ; C: handler of state $00 of mode $14 (word 0 of Mode14_StateTable)
@@ -770,7 +770,7 @@ Jump_006_4754:
 
 
 ; C: read in the runs by Menu06_CursorUpdate, NameCardEdit_CursorPlace; first read on the screen
-; Mode0B_NameCardEdit_State02 (trace/read_screens_kitty.npz)
+; Mode0B_NameCardEdit_State02 (trace/read_screens_kitty*.npz)
 Menu06_CursorUpdate_Tbl4781::
     db $1c, $2c, $ff, $02, $ff, $ff, $00, $03, $1c, $2c, $ff, $04, $ff, $ff, $00, $03
     db $5c, $20, $00, $03, $ff, $04, $01, $07, $8c, $20, $02, $ff, $ff, $05, $02, $09
@@ -1138,7 +1138,7 @@ jr_006_49d1:
 
 
 ; C: named by the code of NameCardEdit_PhotoCursorUpdate (06:4872 06:48DF); read in the runs by
-; NameCardEdit_PhotoCursorUpdate; first read on the screen Mode0B_NameCardEdit_State08 (trace/read_screens_kitty.npz)
+; NameCardEdit_PhotoCursorUpdate; first read on the screen Mode0B_NameCardEdit_State08 (trace/read_screens_kitty*.npz)
 NameCardEdit_PhotoCursorUpdate_Tbl49D2::
     INCBIN "data/bank_06/NameCardEdit_PhotoCursorUpdate_Tbl49D2.bin" ; $49D2, 364 bytes
 ; C: object callback: for step [$D97D] takes {frame, key mask} from 06:4B87 and ANDs the mask into the keys $D8D8;
@@ -1190,7 +1190,7 @@ jr_006_4b6a:
     db $ff
 
 ; C: read in the runs by Obj_KeyMaskStep; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_06_4B88_Mode0B_NameCardEdit_State08::
     db $03, $ff, $03, $ff, $03, $ff, $03, $05, $00, $ff, $01, $ff, $f3, $ff, $f3, $ff
     db $f3, $ff, $f3, $ff, $f3, $ff, $f3, $ff, $f3, $ff, $f3, $ff, $f3, $0d, $00, $ff
@@ -2247,7 +2247,7 @@ jr_006_51c4:
 
 
 ; C: named by the code of Mode0B_State01 (06:5172); read in the runs by Mode0B_State01; first read on the screen
-; Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz)
+; Mode0B_NameCardEdit_State10 (trace/read_screens_kitty*.npz)
 Mode0B_State01_Tbl51DA::
     db $00, $00, $05, $10, $13, $1d
 
@@ -3652,7 +3652,7 @@ Mode0C_StateTable::
     db $89, $a0, $00, $70, $74, $af, $4c, $00, $00, $00
 
 ; C: read in the runs by KeyPrompt_LoadSounds, KeyPrompt_LoadSoundsB; first read on the screen
-; Mode05_StampWindow_State03 (trace/read_screens_kitty.npz); read in BGB by a read watchpoint
+; Mode05_StampWindow_State03 (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint
 ; (trace/bgb_reads_kitty.csv: exchange)
 KeyPrompt_LoadSounds_Tbl5DFA::
     INCBIN "data/bank_06/KeyPrompt_LoadSounds_Tbl5DFA.bin" ; $5DFA, 411 bytes
@@ -3974,7 +3974,7 @@ jr_006_6105:
 
 jr_006_6111:
     push bc                                       ; $6111
-    ld de, Gfx_17_7800_Copy_DEtoHL                ; $6112
+    ld de, Gfx_17_7800_Mode08_ExchangePhotoTrain_State00 ; $6112
     ld a, $17                                     ; $6115
     ld bc, $0100                                  ; $6117
     call Copy_FarDEtoHL                           ; $611A
@@ -3992,7 +3992,8 @@ jr_006_6125:
     jp Far_ReturnSramBank                         ; $6126
 
 
-; C: named by the code of PhotoTrain_LoadPageMap (06:613A); read in the runs by PhotoTrain_LoadPageMap
+; C: named by the code of PhotoTrain_LoadPageMap (06:613A); read in the runs by PhotoTrain_LoadPageMap; first read on
+; the screen Mode08_ExchangePhotoTrain_State00 (trace/read_screens_kitty*.npz)
 PhotoTrain_LoadPageMap_Tbl6129::
     db $00, $70
 
@@ -4029,7 +4030,7 @@ PhotoTrain_FillEmptyTiles::
 
 jr_006_616d:
     push bc                                       ; $616D
-    ld de, Gfx_17_7800_Copy_DEtoHL                ; $616E
+    ld de, Gfx_17_7800_Mode08_ExchangePhotoTrain_State00 ; $616E
     ld bc, $0100                                  ; $6171
     ld a, $17                                     ; $6174
     call Copy_FarDEtoHL                           ; $6176
@@ -4239,7 +4240,8 @@ Mode07_State02_62E8:
     ret                                           ; $62E8
 
 
-; C: read in the runs by Mode07_State02
+; C: read in the runs by Mode07_State02; first read on the screen Mode14_MessageScreen_State00
+; (trace/read_screens_kitty*.npz)
 Mode07_State02_Tbl62E9::
     db $00, $08, $02, $01
 

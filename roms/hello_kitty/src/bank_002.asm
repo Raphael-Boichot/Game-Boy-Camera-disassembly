@@ -10,7 +10,7 @@ Leftover_02_4000_ObjScript::
     db $10, $80, $1c, $46, $1e, $1f, $00, $40
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode0F_FifteenPuzzle_State0A
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4008_Mode0F_FifteenPuzzle_State0A::
     db $08, $80, $64, $46, $1e, $1f, $08, $40, $10, $80, $18, $41, $1e, $1f, $10, $40
     db $10, $80, $ac, $41, $1e, $1f, $18, $40, $10, $80, $40, $42, $1e, $1f, $20, $40
@@ -34,11 +34,11 @@ Leftover_02_40C8::
     db $10, $80, $04, $4b, $1e, $1f, $08, $41
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4110_Mode00_BootAndTitle_State00::
     INCBIN "data/bank_02/ObjScript_02_4110_Mode00_BootAndTitle_State00.bin" ; $4110, 484 bytes
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode01_MainMenu_State02
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_42F4_Mode01_MainMenu_State02::
     db $ff, $80, $d8, $50, $1e, $1f, $f4, $42
 
@@ -46,7 +46,7 @@ ObjScript_02_42F4_Mode01_MainMenu_State02::
     db $1e, $1f, $fc, $42
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode01_MainMenu_State05
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4310_Mode01_MainMenu_State05::
     db $ff, $80, $20, $51, $1e, $1f, $10, $43, $18, $80, $f0, $50, $18, $80, $08, $51
     db $18, $80, $20, $51, $1e, $1f, $18, $43, $17, $80, $38, $51, $17, $80, $4c, $51
@@ -59,7 +59,7 @@ Leftover_02_4334::
     db $1e, $1f, $50, $43
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4358_Mode02_TakePhotos_State01::
     db $04, $80, $d0, $51, $04, $80, $dc, $51, $1e, $1f, $58, $43, $04, $80, $e8, $51
     db $04, $80, $f8, $51, $1e, $1f, $64, $43, $04, $80, $08, $52, $04, $80, $2c, $52
@@ -69,7 +69,7 @@ ObjScript_02_4358_Mode02_TakePhotos_State01::
     db $1e, $1f, $7c, $43
 
 ; C: read in the runs by Object_RunAll; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4398_Mode02_TakePhotos_State01::
     db $12, $80, $50, $52, $0b, $80, $b0, $52, $0e, $80, $c8, $52, $1e, $1f, $98, $43
     db $b0, $80, $e0, $52
@@ -78,7 +78,7 @@ ObjScript_02_4398_Mode02_TakePhotos_State01::
     db $10, $80, $00, $53, $1e, $1f, $bc, $43
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode04_PlayMenu_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_43C4_Mode04_PlayMenu_State01::
     INCBIN "data/bank_02/ObjScript_02_43C4_Mode04_PlayMenu_State01.bin" ; $43C4, 436 bytes
 ; I: leftover: 72 bytes (02:4578-45BF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -90,7 +90,7 @@ Leftover_02_4578::
     db $50, $80, $fc, $5c, $1e, $1f, $9c, $45
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode06_Printing_State0D
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_45C0_Mode06_Printing_State0D::
     db $0f, $80, $3c, $5d, $0e, $80, $70, $5d, $1e, $1f, $c0, $45, $50, $80, $3c, $5d
     db $07, $80, $a4, $5d, $07, $80, $3c, $5d, $07, $80, $a4, $5d, $1e, $1f, $cc, $45
@@ -99,7 +99,7 @@ ObjScript_02_45C0_Mode06_Printing_State0D::
     db $1e, $1f, $e0, $45
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_45F4_Mode06_Printing_State1F::
     db $10, $80, $14, $5f, $10, $80, $78, $5f, $1e, $1f, $f4, $45, $10, $80, $78, $5f
     db $1e, $1f, $00, $46, $10, $80, $d4, $5f, $10, $80, $f4, $5f, $1e, $1f, $08, $46
@@ -113,7 +113,7 @@ Leftover_02_4628::
     db $03, $80, $7c, $60, $03, $80, $8c, $60, $1e, $1f, $28, $46
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4654_Mode07_Exchange_State02::
     db $10, $80, $9c, $60, $1e, $1f, $54, $46, $10, $80, $ac, $60, $1e, $1f, $5c, $46
     db $0c, $80, $bc, $60, $0c, $80, $c0, $60, $1e, $1f, $64, $46, $01, $80, $c4, $60
@@ -140,26 +140,27 @@ Leftover_02_4728::
     db $1e, $1f, $70, $47, $10, $80, $ec, $67, $1e, $1f, $7c, $47, $0c, $80, $5c, $68
     db $80, $80, $cc, $68, $1e, $1f, $84, $47
 
-; C: read in the runs by Object_RunAll, ObjCmd_Jump
-ObjScript_02_4790_Object_RunAll::
+; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode08_ExchangePhotoTrain_State05
+; (trace/read_screens_kitty*.npz)
+ObjScript_02_4790_Mode08_ExchangePhotoTrain_State05::
     db $05, $80, $6c, $69, $0a, $80, $cc, $69, $05, $80, $6c, $69, $0a, $80, $2c, $6a
     db $1e, $1f, $90, $47
 
     db $05, $80, $94, $6a, $0a, $80, $f4, $6a, $05, $80, $94, $6a, $0a, $80, $54, $6b
     db $1e, $1f, $a4, $47
 
-; C: read in the runs by Object_RunAll, ObjCmd_Jump; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
-; exchange)
-ObjScript_02_47B8_Object_RunAll::
+; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode08_ExchangePhotoTrain_State02
+; (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)
+ObjScript_02_47B8_Mode08_ExchangePhotoTrain_State02::
     db $07, $80, $dc, $6b, $05, $80, $cc, $6b, $0a, $80, $bc, $6b, $06, $80, $cc, $6b
     db $1e, $1f, $b8, $47, $10, $80, $ec, $6b, $1e, $1f, $cc, $47
 
     db $03, $80, $24, $6c, $05, $80, $ec, $6b, $03, $80, $24, $6c, $1e, $1f, $d4, $47
     db $03, $80, $24, $6c, $1e, $1f, $e4, $47
 
-; C: read in the runs by Object_RunAll, ObjCmd_Jump; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv:
-; exchange)
-ObjScript_02_47EC_Object_RunAll::
+; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode09_ExchangeCommunicating_State07
+; (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)
+ObjScript_02_47EC_Mode09_ExchangeCommunicating_State07::
     db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
     db $0a, $80, $74, $6c, $0a, $80, $ac, $6c, $0a, $80, $74, $6c, $0a, $80, $ac, $6c
     db $1e, $1f, $ec, $47, $01, $80, $5c, $6c, $01, $80, $64, $6c, $01, $80, $6c, $6c
@@ -172,7 +173,7 @@ Leftover_02_4824::
     db $50, $80, $34, $6d, $1e, $1f, $38, $48
 
 ; C: named by the code of AlbumText_ObjCursor (02:7816); read in the runs by Object_RunAll, ObjCmd_Jump; first read on
-; the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; the screen Mode0B_NameCardEdit_State10 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_484C_AlbumText_ObjCursor::
     db $23, $80, $14, $6e, $20, $80, $24, $6e, $1e, $1f, $4c, $48, $07, $80, $28, $6e
@@ -185,7 +186,7 @@ ObjScript_02_484C_AlbumText_ObjCursor::
     db $1e, $1f, $94, $48
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_48A8_Mode0B_NameCardEdit_State10::
     db $07, $80, $e8, $6e, $05, $80, $f8, $6e, $0a, $80, $08, $6f, $06, $80, $f8, $6e
     db $1e, $1f, $a8, $48, $07, $80, $18, $6f, $05, $80, $28, $6f, $0a, $80, $38, $6f
@@ -203,7 +204,7 @@ Leftover_02_48EC::
     db $10, $80, $f8, $70, $1e, $1f, $3c, $49, $10, $80, $18, $71, $1e, $1f, $44, $49
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_494C_Mode02_TakePhotos_State01::
     db $10, $80, $48, $71, $1e, $1f, $4c, $49
 
@@ -217,7 +218,7 @@ Leftover_02_4954::
     db $10, $80, $b4, $72, $1e, $1f, $a4, $49, $10, $80, $c0, $72, $1e, $1f, $ac, $49
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_49B4_Mode02_TakePhotos_State06::
     db $10, $80, $d0, $72, $1e, $1f, $b4, $49
 
@@ -231,7 +232,7 @@ Leftover_02_49BC::
     db $10, $80, $a0, $73, $1e, $1f, $0c, $4a
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4A14_Mode02_TakePhotos_State06::
     db $10, $80, $b0, $73, $1e, $1f, $14, $4a
 
@@ -239,7 +240,7 @@ ObjScript_02_4A14_Mode02_TakePhotos_State06::
     db $10, $80, $f8, $73, $1e, $1f, $2c, $4a
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Jump; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4A34_Mode02_TakePhotos_State06::
     db $10, $80, $18, $74, $1e, $1f, $34, $4a, $10, $80, $38, $74, $1e, $1f, $3c, $4a
     db $10, $80, $58, $74, $1e, $1f, $44, $4a, $10, $80, $7c, $74, $1e, $1f, $4c, $4a
@@ -293,7 +294,7 @@ KeyPrompt_Accept::
     call JumpTable_Inline                         ; $4A87
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 KeyPrompt_Accept_JumpTbl4A8A::
     dw KeyPrompt_SoundCh0
     dw KeyPrompt_SoundCh1
@@ -639,7 +640,7 @@ Obj_DrawPhotoIndex::
     db $e5, $3e, $01, $06, $05, $21, $5c, $6e, $cd, $65, $01, $e1, $37, $c9
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_Jump; first read on the screen
-; Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State06 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4C4F_Mode02_TakePhotos_State06::
     db $54, $4a, $1e, $1f, $70, $45, $4f, $4c, $e0, $4b, $05, $4c, $4f, $4c, $e0, $4b
     db $14, $4c, $4f, $4c, $e0, $4b, $14, $4c, $4f, $4c, $e0, $4b, $41, $4c, $4f, $4c
@@ -781,7 +782,7 @@ Obj_ClearD8E0::
 
 
 ; C: read in the runs by PlayMenu_CursorUpdate, Object_RunAll, ObjCmd_Wait; first read on the screen
-; Mode01_MainMenu_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode01_MainMenu_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4DB7_Mode01_MainMenu_State02::
     db $28, $1b, $ff, $ff, $02, $01, $02, $00, $28, $43, $ff, $ff, $00, $02, $03, $00
     db $28, $6b, $ff, $ff, $01, $00, $04, $00, $10, $1f, $10, $00, $16, $1f, $eb, $4d
@@ -797,7 +798,7 @@ MainMenu_CursorTick::
 
 
 ; C: named by the code of Mode01_State00 (05:4591); read in the runs by PlayMenu_CursorUpdate, Object_RunAll,
-; Object_CreateWithParam; first read on the screen Mode01_MainMenu_State05 (trace/read_screens_kitty.npz); kind OAM
+; Object_CreateWithParam; first read on the screen Mode01_MainMenu_State05 (trace/read_screens_kitty*.npz); kind OAM
 ; from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4DF2_Mode01_MainMenu_State00::
     db $d7, $4d, $eb, $4d, $b2, $4d, $cf, $4d, $b9, $7f, $b2, $4d, $30, $2e, $ff, $ff
@@ -814,7 +815,7 @@ MainMenu_CursorTickB::
 
 
 ; C: named by the code of Mode01_State03 (05:4716); read in the runs by Object_CreateWithParam; first read on the
-; screen Mode01_MainMenu_State05 (trace/read_screens_kitty.npz)
+; screen Mode01_MainMenu_State05 (trace/read_screens_kitty*.npz)
 ObjScript_02_4E39_Mode01_MainMenu_State03::
     db $22, $4e, $32, $4e, $b2, $4d, $16, $4e, $b9, $7f, $b2, $4d
 
@@ -956,7 +957,7 @@ jr_002_4eda:
 
 
 ; C: read in the runs by Album_CursorUpdate, Object_RunAll, ObjCmd_SetDC61; first read on the screen
-; Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4F15_Mode03_ViewAlbum_State02::
     db $7a, $0b, $ff, $ff, $05, $01, $03, $04, $7a, $23, $ff, $ff, $00, $02, $05, $00
     db $7a, $3b, $ff, $ff, $01, $03, $06, $00, $7a, $53, $ff, $ff, $02, $04, $03, $06
@@ -991,7 +992,7 @@ Album_MenuItemGfx::
 
 
 ; C: named by the code of Album_MenuItemGfx (02:4F64); read in the runs by Album_MenuItemGfx; first read on the screen
-; Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz)
+; Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz)
 Album_MenuItemGfx_Tbl4F7A::
     dw Gfx_0D_4600_Mode03_ViewAlbum_State02
     db $80, $93
@@ -1015,7 +1016,7 @@ Obj_SetD8E0One::
 
 
 ; C: named by the code of Album_CursorUpdate (02:4F08); read in the runs by ObjCmd_CopyAtLine20, Object_RunAll,
-; Object_CreateWithParam; first read on the screen Mode11_StrawberryChannel_State02 (trace/read_screens_kitty.npz);
+; Object_CreateWithParam; first read on the screen Mode11_StrawberryChannel_State02 (trace/read_screens_kitty*.npz);
 ; kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_4F99_Album_CursorUpdate::
     db $59, $4f, $08, $80, $d0, $53, $10, $80, $b8, $53, $92, $4f, $02, $1f, $45, $4f
@@ -1040,7 +1041,7 @@ StrawberryCh_DotPosition::
 
 
 ; C: named by the code of StrawberryCh_DotPosition (02:4FE0); read in the runs by StrawberryCh_DotPosition; first read
-; on the screen Mode11_StrawberryChannel_State04 (trace/read_screens_kitty.npz)
+; on the screen Mode11_StrawberryChannel_State04 (trace/read_screens_kitty*.npz)
 StrawberryCh_DotPosition_Tbl4FEB::
     db $2c, $88, $38, $88, $44, $88, $50, $88, $5c, $88, $68, $88, $74, $88
 
@@ -1070,7 +1071,7 @@ StrawberryCh_DotHidden::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode11_StrawberryChannel_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_5016_Mode11_StrawberryChannel_State00::
     db $94, $41, $f9, $4f, $b9, $7f
 
@@ -1091,7 +1092,7 @@ StrawberryCh_HintTick::
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_JumpByByte; first read on the screen
-; Mode11_StrawberryChannel_State04 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode11_StrawberryChannel_State04 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_5032_Mode11_StrawberryChannel_State04::
     db $3a, $1f, $28, $31, $16, $1f, $1c, $50, $75, $1f, $78, $09, $20, $2a, $d9, $64
@@ -1114,7 +1115,7 @@ Puzzle15_ObjFrameByD97C::
     db $c0, $18, $20, $28, $30, $38, $40, $48, $50, $58, $60, $68
 
 ; C: read in the runs by Object_CreateWithParam, Puzzle15_ObjFrameByD97C, Object_RunAll; first read on the screen
-; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0F_FifteenPuzzle_State0A (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_508A_Mode0F_FifteenPuzzle_State0A::
     db $70, $78, $80, $88, $90, $1e, $1f, $94, $40, $8f, $50, $70, $50, $b9, $7f
@@ -1156,7 +1157,7 @@ jr_002_50c3:
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0F_FifteenPuzzle_State0A
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_50C8_Mode0F_FifteenPuzzle_State0A::
     db $a8, $40, $99, $50, $b9, $7f
 
@@ -1337,8 +1338,8 @@ Puzzle15_ObjArrived::
 
 
 ; C: named by the code of Puzzle15_ObjArrived (02:51E6); read in the runs by Object_RunAll, ObjCmd_SetCallback,
-; ObjCmd_SetSpeed; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz); kind OAM from
-; the evidence of tools/kitty_layout_kinds.py
+; ObjCmd_SetSpeed; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz); kind OAM
+; from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_51EC_Puzzle15_ObjArrived::
     db $16, $1f, $ce, $50, $6d, $1f, $00, $00, $7f, $1f, $00, $00, $fc, $51, $09, $1f
 
@@ -1369,7 +1370,7 @@ Puzzle15_ObjDrawCell::
 
 
 ; C: named by the code of Puzzle15_ObjTick (02:512F); read in the runs by Object_RunAll, ObjCmd_StartSlotScript,
-; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz); kind OAM
+; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz); kind OAM
 ; from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_521E_Puzzle15_ObjTick::
     db $0d, $52, $4a, $20, $74, $50, $16, $1f, $aa, $51, $32, $52, $7f, $1f, $00, $00
@@ -1384,7 +1385,7 @@ Puzzle15_ObjSetCC_D978::
 
 
 ; C: named by the code of Puzzle15_ObjTick (02:5151); read in the runs by Object_RunAll, ObjCmd_StartSlotScript,
-; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz); kind OAM
+; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz); kind OAM
 ; from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5239_Puzzle15_ObjTick::
     db $0d, $52, $4a, $20, $74, $50, $16, $1f, $aa, $51, $4d, $52, $7f, $1f, $00, $00
@@ -1399,7 +1400,7 @@ Puzzle15_ObjSetCC_D977::
 
 
 ; C: named by the code of Puzzle15_ObjTick (02:5174); read in the runs by Object_RunAll, ObjCmd_StartSlotScript,
-; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz); kind OAM
+; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz); kind OAM
 ; from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5254_Puzzle15_ObjTick::
     db $0d, $52, $4a, $20, $74, $50, $16, $1f, $aa, $51, $6d, $1f, $00, $00, $68, $52
@@ -1414,7 +1415,7 @@ Puzzle15_ObjSetCE_D978::
 
 
 ; C: named by the code of Puzzle15_ObjTick (02:5196); read in the runs by Object_RunAll, ObjCmd_StartSlotScript,
-; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz); kind OAM
+; ObjCmd_SetCallback; first read on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz); kind OAM
 ; from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_526F_Puzzle15_ObjTick::
     db $0d, $52, $4a, $20, $74, $50, $16, $1f, $aa, $51, $6d, $1f, $00, $00, $83, $52
@@ -1434,7 +1435,7 @@ Puzzle15_ObjRet528A::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0F_FifteenPuzzle_State05
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_528B_Mode0F_FifteenPuzzle_State05::
     db $ec, $51, $b9, $7f, $8a, $52
 
@@ -1458,7 +1459,7 @@ jr_002_529e:
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Wait, ObjCmd_Jump; first read on the screen
-; Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_52A6_Mode0F_FifteenPuzzle_State05::
     db $10, $1f, $3c, $00, $e7, $52, $10, $1f, $3c, $00, $16, $1f, $91, $52, $25, $1f
@@ -1501,7 +1502,7 @@ jr_002_5305:
     call JumpTable_Inline                         ; $530A
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0F_FifteenPuzzle_State05
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Puzzle15_ShuffleRandomDir_JumpTbl530D::
     dw Puzzle15_ShuffleDirUp
     dw Puzzle15_ShuffleDirDown
@@ -1619,7 +1620,7 @@ Puzzle15_ShuffleInit::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0F_FifteenPuzzle_State05
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_5387_Mode0F_FifteenPuzzle_State05::
     db $a6, $52, $9e, $52, $7b, $53
 
@@ -1638,7 +1639,7 @@ Puzzle15_ObjEndAtCA::
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetSpeed, Object_CreateWithParam; first read on the screen
-; Mode0F_FifteenPuzzle_State07 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0F_FifteenPuzzle_State07 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_539F_Mode0F_FifteenPuzzle_State07::
     db $6d, $1f, $00, $fe, $38, $80, $40, $49, $6d, $1f, $00, $00, $10, $1f, $3c, $00
@@ -1815,7 +1816,7 @@ Jump_002_54db:
 
 
 ; C: named by the code of Scratch_CursorUpdate (02:546F); read in the runs by Object_RunAll, ObjCmd_Wait,
-; ObjCmd_SetPosRel; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind OAM from
+; ObjCmd_SetPosRel; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty*.npz); kind OAM from
 ; the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_54E3_Scratch_CursorUpdate::
     INCBIN "data/bank_02/ObjScript_02_54E3_Scratch_CursorUpdate.bin" ; $54E3, 352 bytes
@@ -1845,7 +1846,7 @@ Scratch_ObjPlace::
 
 
 ; C: named by the code of Scratch_ObjTick (02:5676); read in the runs by Object_RunAll, ObjCmd_Jump; first read on the
-; screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; screen Mode10_ScratchCard_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_565E_Scratch_ObjTick::
     db $1e, $1f, $10, $41
@@ -1885,7 +1886,8 @@ Scratch_ObjCountdown::
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_Jump; first read on the screen
-; Mode10_ScratchCard_State03 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode10_ScratchCard_State03 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
+; tools/kitty_layout_kinds.py
 ObjScript_02_5691_Mode10_ScratchCard_State03::
     db $ba, $7f, $62, $56, $b2, $4d, $75, $1f, $78, $1e, $1f, $50, $41
 
@@ -1901,7 +1903,8 @@ Scratch_ObjEndCountdown::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_CreateWithParam, Object_RunAll; first read on the screen
-; Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode10_ScratchCard_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
+; tools/kitty_layout_kinds.py
 ObjScript_02_56A9_Mode10_ScratchCard_State02::
     db $97, $56, $9e, $56, $b2, $4d, $75, $1f, $78, $1e, $1f, $5c, $41, $af, $56, $9e
     db $56, $b2, $4d, $cc, $1f, $08, $00, $00, $7c, $00, $99, $34, $00, $13, $cc, $1f
@@ -1913,8 +1916,9 @@ ObjScript_02_56A9_Mode10_ScratchCard_State02::
     ret                                           ; $5701
 
 
-; C: read in the runs by Object_CreateWithParam
-ObjScript_02_5702_Object_CreateWithParam::
+; C: read in the runs by Object_CreateWithParam; first read on the screen Mode10_ScratchCard_State02
+; (trace/read_screens_kitty*.npz)
+ObjScript_02_5702_Mode10_ScratchCard_State02::
     db $dc, $56, $01, $57, $b9, $7f
 
     db $c9, $00, $40, $08, $57, $b9, $7f
@@ -1942,7 +1946,7 @@ jr_002_571b:
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetCallback, ObjCmd_Jump; first read on the screen
-; Mode0E_KittGamesHost_State05 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0E_KittGamesHost_State05 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_5726_Mode0E_KittGamesHost_State05::
     db $30, $57, $16, $1f, $0f, $57, $1e, $1f, $08, $40
@@ -1956,7 +1960,7 @@ KittHost_ObjSaveD2::
 
 
 ; C: named by the code of Mode0E_State15, Mode0E_State1D (07:6AD6 07:6B94); read in the runs by
-; Object_CreateWithParam; first read on the screen Mode0E_KittGamesHost_State05 (trace/read_screens_kitty.npz)
+; Object_CreateWithParam; first read on the screen Mode0E_KittGamesHost_State05 (trace/read_screens_kitty*.npz)
 ObjScript_02_5736_Mode0E_KittGamesHost_State15::
     db $26, $57, $b9, $7f, $b9, $7f
 
@@ -2147,7 +2151,7 @@ KittHost_ItemRecord::
 
 
 ; C: named by the code of KittHost_YesNoCursor (02:580D); read in the runs by KittHost_YesNoCursor, Object_RunAll,
-; Object_CreateWithParam; first read on the screen Mode0E_KittGamesHost_State13 (trace/read_screens_kitty.npz); kind
+; Object_CreateWithParam; first read on the screen Mode0E_KittGamesHost_State13 (trace/read_screens_kitty*.npz); kind
 ; OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_584A_KittHost_YesNoCursor::
     db $28, $40, $30, $40, $38, $40, $40, $40, $48, $40, $50, $40, $58, $40, $50, $58
@@ -2177,7 +2181,7 @@ KittHost_ObjEndOnD8E0Bit2::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0E_KittGamesHost_State13
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_594D_Mode0E_KittGamesHost_State13::
     db $10, $40, $44, $59, $b9, $7f, $20, $40, $44, $59, $b9, $7f, $18, $40, $44, $59
     db $b9, $7f, $68, $40, $44, $59, $b9, $7f, $70, $40, $44, $59, $b9, $7f, $78, $40
@@ -2208,7 +2212,7 @@ Obj_SetD8E0One_B::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, PlayMenu_CursorUpdate; first read on the screen
-; Mode0E_KittGamesHost_State08 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0E_KittGamesHost_State08 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_598B_Mode0E_KittGamesHost_State08::
     INCBIN "data/bank_02/ObjScript_02_598B_Mode0E_KittGamesHost_State08.bin" ; $598B, 358 bytes
@@ -2224,7 +2228,7 @@ PlayMenu_ObjFollowItem::
 
 
 ; C: named by the code of PlayMenu_ObjFollowItem (02:5AF8); read in the runs by ObjCmd_JumpByByte, Object_RunAll;
-; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_5AFF_PlayMenu_ObjFollowItem::
     db $0d, $5b, $09, $20, $f4, $d8, $88, $44, $ac, $44, $64, $44, $d0, $44
@@ -2258,7 +2262,7 @@ PlayMenu_ObjItemRecord::
 
 
 ; C: named by the code of PlayMenu_ObjItemRecord (02:5B1A); read in the runs by PlayMenu_ObjItemRecord,
-; Object_CreateWithParam; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz)
+; Object_CreateWithParam; first read on the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty*.npz)
 ObjScript_02_5B35_PlayMenu_ObjItemRecord::
     db $38, $18
     dw Map_1A_7000_Mode04_PlayMenu_State00
@@ -2288,7 +2292,7 @@ Jump_002_5b66:
 
 
 ; C: named by the code of Title_ObjKeys (02:5B60); read in the runs by Object_RunAll, ObjCmd_SetCallback; first read
-; on the screen Mode00_BootAndTitle_State08 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; on the screen Mode00_BootAndTitle_State08 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_5B67_Title_ObjKeys::
     db $16, $1f, $b9, $7f, $02, $80, $34, $50, $30, $80, $38, $50, $77, $5b, $09, $1f
@@ -2309,7 +2313,7 @@ Obj_ClearD8E0_B::
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_Jump; first read on the screen
-; Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_5B83_Mode00_BootAndTitle_State00::
     db $8c, $42, $51, $5b, $7e, $5b, $1e, $1f, $14, $42, $89, $5b, $b9, $7f, $b9, $7f
@@ -2402,7 +2406,7 @@ jr_002_5c29:
 
 
 ; C: named by the code of MainMenu_ObjTick (02:5C1F); read in the runs by Object_RunAll, Object_CreateWithParam,
-; ObjCmd_SetCallback; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty.npz); kind OAM from
+; ObjCmd_SetCallback; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty*.npz); kind OAM from
 ; the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5C2A_MainMenu_ObjTick::
     db $3b, $5c, $68, $5c, $95, $5c, $75, $1f, $00, $16, $1f, $0f, $5c, $1e, $1f, $d8
@@ -2440,7 +2444,7 @@ jr_002_5ccd:
 
 
 ; C: named by the code of MainMenu_ObjTickB (02:5CC3); read in the runs by ObjCmd_CopyAtLine20, Object_RunAll,
-; MainMenu_ObjTickB; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty.npz); kind OAM from
+; MainMenu_ObjTickB; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty*.npz); kind OAM from
 ; the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5CCE_MainMenu_ObjTickB::
     db $d4, $5c, $07, $5d, $3a, $5d, $75, $1f, $00, $cc, $1f, $01, $00, $30, $7b, $c0
@@ -2487,7 +2491,7 @@ Obj_UnblockKeys::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode01_MainMenu_State05 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode01_MainMenu_State05 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5D96_Mode01_MainMenu_State05::
     db $cc, $1f, $01, $00, $90, $7a, $20, $98, $a0, $00, $31, $cc, $1f, $01, $00, $30
     db $7b, $c0, $98, $a0, $00, $31, $cc, $1f, $01, $00, $d0, $7b, $60, $99, $a0, $00
@@ -2526,7 +2530,7 @@ jr_002_5e5a:
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_Jump; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5E6B_Mode02_TakePhotos_State01::
     db $1e, $1f, $4c, $49, $6b, $5e, $4f, $5e, $b9, $7f, $03, $7f, $1f, $00, $08, $1e
     db $1f, $4c, $49, $76, $5e, $4f, $5e, $b9, $7f, $03, $7f, $1f, $00, $f8, $1e, $1f
@@ -2619,7 +2623,7 @@ TakePhotos_ObjPosFromDA1E::
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetCallback; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5EFE_Mode02_TakePhotos_State01::
     db $e7, $5e, $16, $1f, $cb, $5e, $1e, $1f, $7c, $43, $16, $1f, $d9, $5e, $1e, $1f
     db $98, $43, $fe, $5e, $b9, $7f, $b9, $7f
@@ -2642,7 +2646,7 @@ TakePhotos_ObjPosFromDA1F::
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_SetPos; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5F2E_Mode02_TakePhotos_State01::
     db $3a, $1f, $c0, $88, $1e, $1f, $a8, $43, $2e, $5f, $16, $5f, $b9, $7f
 
@@ -2681,7 +2685,7 @@ jr_002_5f5c:
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_5F6B_Mode02_TakePhotos_State01::
     db $58, $43, $3c, $5f, $b9, $7f, $c9, $64, $43, $3c, $5f, $b9, $7f
 
@@ -2797,7 +2801,7 @@ FramePick_LoadAndHide::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode02_TakePhotos_State08 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State08 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_5FF8_Mode02_TakePhotos_State08::
     db $ba, $1e, $19, $00, $cc, $1f, $00, $00, $00, $70, $00, $9c, $80, $02, $19, $cb
     db $5f, $9f, $1c, $cc, $1f, $00, $00, $00, $74, $00, $98, $80, $02, $19, $a3, $5f
@@ -2829,7 +2833,7 @@ Obj_Timeout78::
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_SetPos; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_60DA_Mode02_TakePhotos_State01::
     db $3a, $1f, $18, $4c, $1e, $1f, $04, $44, $3a, $1f, $88, $4c, $1e, $1f, $14, $44
     db $3a, $1f, $51, $1a, $1e, $1f, $24, $44, $3a, $1f, $51, $74, $1e, $1f, $34, $44
@@ -2851,7 +2855,7 @@ Album_Arrow614A::
 
 
 ; C: named by the code of Album_Arrow615F (02:6164); read in the runs by Object_RunAll, ObjCmd_SetCallback; first read
-; on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_6155_Album_Arrow615F::
     db $16, $1f, $4a, $61, $08, $80, $00, $00, $09, $1f
@@ -2868,7 +2872,7 @@ Album_Arrow615F::
 
 
 ; C: named by the code of Album_Arrow614A (02:614F); read in the runs by Object_RunAll, Object_CreateWithParam,
-; ObjCmd_SetPos; first read on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from the
+; ObjCmd_SetPos; first read on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from the
 ; evidence of tools/kitty_layout_kinds.py
 ObjScript_02_616A_Album_Arrow614A::
     db $3a, $1f, $10, $0c, $16, $1f, $5f, $61, $1e, $1f, $c4, $43, $6a, $61, $b9, $7f
@@ -2887,7 +2891,7 @@ Album_Arrow617C::
 
 
 ; C: named by the code of Album_Arrow6194 (02:619C); read in the runs by Object_RunAll, ObjCmd_SetCallback; first read
-; on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_618A_Album_Arrow6194::
     db $16, $1f, $7c, $61, $08, $80, $00, $00, $09, $1f
@@ -2905,7 +2909,7 @@ Album_Arrow6194::
 
 
 ; C: named by the code of Album_Arrow617C (02:6184); read in the runs by Object_RunAll, Object_CreateWithParam,
-; ObjCmd_SetPos; first read on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from the
+; ObjCmd_SetPos; first read on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from the
 ; evidence of tools/kitty_layout_kinds.py
 ObjScript_02_61A2_Album_Arrow617C::
     db $3a, $1f, $60, $0c, $16, $1f, $94, $61, $1e, $1f, $d4, $43, $a2, $61, $b9, $7f
@@ -2934,7 +2938,7 @@ Album_ObjDrawIndex::
 
 
 ; C: named by the code of Album_ObjOnLeftRight (02:61BA); read in the runs by Object_RunAll, Object_CreateWithParam,
-; ObjCmd_SetPos; first read on the screen Mode03_ViewAlbum_State05 (trace/read_screens_kitty.npz); kind OAM from the
+; ObjCmd_SetPos; first read on the screen Mode03_ViewAlbum_State05 (trace/read_screens_kitty*.npz); kind OAM from the
 ; evidence of tools/kitty_layout_kinds.py
 ObjScript_02_61CF_Album_ObjOnLeftRight::
     db $10, $1f, $01, $00, $c0, $61, $3a, $1f, $20, $20, $78, $80, $c0, $51, $3a, $1f
@@ -2950,7 +2954,7 @@ Album_ObjEndOnKey::
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_61F2_Mode05_StampWindow_State06::
     db $78, $80, $e8, $5b, $02, $1f, $f2, $61, $e9, $61, $c0, $61
 
@@ -2966,7 +2970,7 @@ Album_Arrow61FE::
 
 
 ; C: named by the code of Album_Arrow6213 (02:6218); read in the runs by Object_RunAll, ObjCmd_SetCallback; first read
-; on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_6209_Album_Arrow6213::
     db $16, $1f, $fe, $61, $08, $80, $00, $00, $09, $1f
@@ -2983,7 +2987,7 @@ Album_Arrow6213::
 
 
 ; C: named by the code of Album_Arrow61FE (02:6203); read in the runs by Object_RunAll, Object_CreateWithParam,
-; ObjCmd_SetCallback; first read on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind OAM from
+; ObjCmd_SetCallback; first read on the screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind OAM from
 ; the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_621E_Album_Arrow61FE::
     db $16, $1f, $13, $62, $08, $80, $c0, $51, $09, $1f, $1e, $62, $b9, $7f, $c0, $61
@@ -3010,7 +3014,7 @@ Obj_UnblockKeysShowWindow::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State03 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6246_Mode03_ViewAlbum_State03::
     db $cc, $1f, $01, $00, $00, $7c, $00, $98, $40, $02, $21, $6b, $63, $cc, $1f, $01
     db $00, $00, $78, $00, $98, $40, $02, $21, $cc, $1f, $01, $00, $00, $7c, $00, $98
@@ -3031,7 +3035,7 @@ Leftover_02_62AA::
     db $2e, $62
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State03 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_630C_Mode03_ViewAlbum_State03::
     db $cc, $1f, $01, $00, $00, $70, $00, $98, $40, $02, $15, $6b, $63, $7a, $63, $10
     db $1f, $01, $00, $cc, $1f, $01, $00, $00, $74, $00, $98, $40, $02, $15, $cc, $1f
@@ -3089,7 +3093,7 @@ jr_002_63a1:
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode03_ViewAlbum_State03 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State03 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_63B6_Mode03_ViewAlbum_State03::
     db $cc, $1f, $01, $00, $00, $7c, $00, $98, $40, $02, $1f, $6b, $63, $cc, $1f, $01
     db $00, $00, $78, $00, $98, $40, $02, $1f, $cc, $1f, $01, $00, $40, $7a, $00, $98
@@ -3132,7 +3136,7 @@ jr_002_648b:
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam; first read on the screen Mode03_ViewAlbum_State05
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_648E_Mode03_ViewAlbum_State05::
     db $14, $80, $00, $00, $7d, $64, $02, $1f, $8e, $64, $74, $64, $b9, $7f
 
@@ -3228,7 +3232,7 @@ Obj_SetD8D3Bit6::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode06_Printing_State05 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode06_Printing_State05 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6518_Mode06_Printing_State05::
     db $96, $80, $00, $00, $d3, $64, $16, $1f, $bd, $64, $ba, $1e, $01, $02, $cc, $1f
     db $00, $00, $20, $78, $42, $98, $20, $01, $20, $cc, $1f, $01, $00, $20, $7a, $62
@@ -3276,7 +3280,7 @@ Obj_ClearD8D3Bit6::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode06_Printing_State08 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode06_Printing_State08 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_659A_Mode06_Printing_State08::
     db $cc, $1f, $00, $00, $a0, $78, $82, $98, $c0, $01, $20, $7b, $65, $10, $1f, $01
     db $00, $82, $65, $10, $1f, $01, $00, $ba, $1e, $04, $03, $cc, $1f, $00, $00, $40
@@ -3371,7 +3375,7 @@ Obj_SetD8D3Bit7::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Obj_CallClearD882Bit4; first read on the screen
-; Mode06_Printing_State07 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode06_Printing_State07 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6663_Mode06_Printing_State07::
     INCBIN "data/bank_02/ObjScript_02_6663_Mode06_Printing_State07.bin" ; $6663, 994 bytes
 ; C: $D8D3 bit 7 cleared, 00:1A80, PrintFrame_LoadTiles with [$D935]; runs on its screen (06:04 06:08) in the core
@@ -3388,7 +3392,7 @@ PrintFrame_Show::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode06_Printing_State08
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_6A59_Mode06_Printing_State08::
     db $63, $66, $b9, $7f, $45, $6a, $54, $68, $b9, $7f, $45, $6a
 
@@ -3446,7 +3450,7 @@ Stamp_ObjSelectCategoryB::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_6AD4_Mode05_StampWindow_State06::
     db $c5, $6a, $9a, $6a, $cb, $6a
 
@@ -3704,7 +3708,8 @@ jr_002_6c3b:
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetCallback, Object_CreateWithParam; first read on the screen
-; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
+; tools/kitty_layout_kinds.py
 ObjScript_02_6C3E_Mode05_StampWindow_State06::
     db $3a, $1f, $50, $48, $65, $6a, $16, $1f, $da, $6a, $09, $1f, $16, $1f, $b9, $7f
     db $0a, $6c, $01, $80, $00, $00, $65, $6a, $16, $1f, $da, $6a, $09, $1f, $6d, $1f
@@ -3782,7 +3787,8 @@ jr_002_6cda:
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetCallback, ObjCmd_Jump; first read on the screen
-; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
+; tools/kitty_layout_kinds.py
 ObjScript_02_6CDB_Mode05_StampWindow_State06::
     db $16, $1f, $86, $6c, $1e, $1f, $68, $45, $16, $1f, $b9, $7f, $01, $80, $00, $00
     db $16, $1f, $86, $6c, $1e, $1f, $68, $45, $16, $1f, $86, $6c, $1e, $1f, $68, $45
@@ -3915,7 +3921,8 @@ jr_002_6db8:
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetCallback; first read on the screen
-; Mode05_StampWindow_State06 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
+; tools/kitty_layout_kinds.py
 ObjScript_02_6DD0_Mode05_StampWindow_State06::
     db $3a, $1f, $00, $38, $98, $1f, $93, $d9, $01, $ba, $1e, $30, $00, $16, $1f, $19
     db $6d, $7f, $1f, $00, $00, $10, $1f, $01, $00, $a2, $1f, $93, $d9, $01, $16, $1f
@@ -4011,7 +4018,7 @@ Printing_ObjPosFromDAD6::
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetCallback; first read on the screen
-; Mode06_Printing_State0D (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode06_Printing_State0D (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6E79_Mode06_Printing_State0D::
     db $63, $6e, $02, $80, $00, $00, $16, $1f, $55, $6e, $1e, $1f, $c0, $45, $16, $1f
     db $47, $6e, $1e, $1f, $cc, $45, $79, $6e, $33, $6e, $b9, $7f
@@ -4027,7 +4034,7 @@ Leftover_02_6E95::
     db $1e, $1f, $9c, $45, $df, $6e, $b9, $7f, $b9, $7f
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, ObjCmd_Jump; first read on the screen
-; Mode06_Printing_State1F (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode06_Printing_State1F (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6EFF_Mode06_Printing_State1F::
     db $cc, $1f, $08, $00, $70, $69, $00, $9c, $80, $00, $2f, $cc, $1f, $08, $00, $f0
     db $69, $00, $9c, $80, $00, $2f, $1e, $1f, $ff, $6e
@@ -4038,7 +4045,7 @@ Obj_Ret6F19::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_6F1A_Mode06_Printing_State1F::
     db $ff, $6e, $19, $6f, $b9, $7f
 
@@ -4055,7 +4062,7 @@ Printing_ObjSpeedFromD939::
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetPos, ObjCmd_Jump; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6F2E_Mode06_Printing_State1F::
     db $3a, $1f, $cc, $14, $20, $6f, $1e, $1f, $08, $46
 
@@ -4095,7 +4102,7 @@ jr_002_6f5f:
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetCallback; first read on the screen
-; Mode06_Printing_State1F (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode06_Printing_State1F (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_6F60_Mode06_Printing_State1F::
     db $2e, $6f, $38, $6f, $b9, $7f, $2e, $6f, $4d, $6f, $b9, $7f, $16, $1f, $c8, $6f
     db $3a, $1f, $c0, $4c, $20, $6f, $16, $1f, $c8, $6f, $1e, $1f, $f4, $45, $16, $1f
@@ -4207,7 +4214,7 @@ Obj_ClearD8E0_C::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_7023_Mode06_Printing_State1F::
     db $6c, $6f, $b9, $7f, $1e, $70
 
@@ -4236,8 +4243,9 @@ jr_002_7043:
     ret                                           ; $7043
 
 
-; C: read in the runs by PrintGame_ObjCheckLanded, Object_RunAll, Object_CreateWithParam
-ObjScript_02_7044_PrintGame_ObjCheckLanded::
+; C: read in the runs by PrintGame_ObjCheckLanded, Object_RunAll, Object_CreateWithParam; first read on the screen
+; Mode06_Printing_State1F (trace/read_screens_kitty*.npz)
+ObjScript_02_7044_Mode06_Printing_State1F::
     db $16, $1f, $29, $70, $3a, $1f, $c0, $4c, $20, $6f, $1e, $1f, $f4, $45, $44, $70
     db $b9, $7f, $1e, $70, $3a, $1f, $08, $10, $1e, $1f, $14, $46, $58, $70, $b9, $7f
     db $b9, $7f
@@ -4269,7 +4277,7 @@ Call_002_7066:
     ldh [hExchange_ObjFollowD9FD_FFD8], a         ; $7089
     ld c, a                                       ; $708B
     ld b, $00                                     ; $708C
-    ld hl, ObjScript_02_7044_PrintGame_ObjCheckLanded + $63 ; $708E
+    ld hl, ObjScript_02_7044_Mode06_Printing_State1F + $63 ; $708E
     add hl, bc                                    ; $7091
     ld a, [wMode06_State23_D94F]                  ; $7092
     add [hl]                                      ; $7095
@@ -4285,8 +4293,9 @@ Call_002_7066:
 
     db $04, $04
 
-; C: read in the runs by ObjCmd_JumpByByte, PrintGame_ObjCheckLanded, Object_RunAll
-ObjScript_02_70A9_PrintGame_ObjCheckLanded::
+; C: read in the runs by ObjCmd_JumpByByte, PrintGame_ObjCheckLanded, Object_RunAll; first read on the screen
+; Mode06_Printing_State24 (trace/read_screens_kitty*.npz)
+ObjScript_02_70A9_Mode06_Printing_State24::
     db $04, $03, $03, $03, $02, $02, $02, $01, $01, $01, $01, $7e, $70, $7f, $1f, $00
     db $01, $09, $20, $d8, $ff, $94, $46, $94, $46, $94, $46, $88, $46, $88, $46, $88
     db $46, $7c, $46, $7c, $46, $7c, $46, $70, $46, $70, $46, $70, $46, $70, $46, $b4
@@ -4407,7 +4416,7 @@ jr_002_7156:
     ld [wSndSfx1], a                              ; $7161
     pop af                                        ; $7164
     call Obj_End                                  ; $7165
-    ld de, ObjScript_02_70A9_PrintGame_ObjCheckLanded + $2F ; $7168
+    ld de, ObjScript_02_70A9_Mode06_Printing_State24 + $2F ; $7168
     ldh a, [hMode07_StateTable_FFD2]              ; $716B
     ld c, a                                       ; $716D
     ldh a, [hStamp_ObjSlideIn_FFD4]               ; $716E
@@ -4439,8 +4448,9 @@ PrintGame_ObjRandomStart::
     ret                                           ; $718F
 
 
-; C: read in the runs by Object_RunAll, ObjCmd_JumpRandom, Object_CreateWithParam
-ObjScript_02_7190_Object_RunAll::
+; C: read in the runs by Object_RunAll, ObjCmd_JumpRandom, Object_CreateWithParam; first read on the screen
+; Mode06_Printing_State24 (trace/read_screens_kitty*.npz)
+ObjScript_02_7190_Mode06_Printing_State24::
     db $75, $1f, $00, $7f, $1f, $00, $00, $16, $1f, $b9, $7f, $75, $71, $06, $80, $54
     db $60, $06, $80, $58, $60, $05, $80, $54, $60, $05, $80, $58, $60, $04, $80, $54
     db $60, $04, $80, $58, $60, $03, $80, $5c, $60, $03, $80, $6c, $60, $03, $80, $7c
@@ -4458,11 +4468,13 @@ PrintGame_ObjEndIfNoneLeft::
     ret                                           ; $71F1
 
 
-; C: read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Vram_CopyHBlank
-ObjScript_02_71F2_PrintGame_ObjEndIfNoneLeft::
-    INCBIN "data/bank_02/ObjScript_02_71F2_PrintGame_ObjEndIfNoneLeft.bin" ; $71F2, 339 bytes
-; C: read in the runs by Object_CreateWithParam
-ObjScript_02_7345_Object_CreateWithParam::
+; C: read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Vram_CopyHBlank; first read on the screen
+; Mode06_Printing_State24 (trace/read_screens_kitty*.npz)
+ObjScript_02_71F2_Mode06_Printing_State24::
+    INCBIN "data/bank_02/ObjScript_02_71F2_Mode06_Printing_State24.bin" ; $71F2, 339 bytes
+; C: read in the runs by Object_CreateWithParam; first read on the screen Mode06_Printing_State24
+; (trace/read_screens_kitty*.npz)
+ObjScript_02_7345_Mode06_Printing_State24::
     db $0a, $72, $b9, $7f, $b9, $7f
 
 ; C: push hl / pop hl, carry set: a script command that does nothing; first run in the core replays of
@@ -4954,10 +4966,12 @@ Obj_SetD94D::
     ret                                           ; $75EF
 
 
-; C: read in the runs by Object_RunAll, ObjCmd_Jump, ObjCmd_SetCallback
-ObjScript_02_75F0_Object_RunAll::
-    INCBIN "data/bank_02/ObjScript_02_75F0_Object_RunAll.bin" ; $75F0, 309 bytes
-; C: named by the code of PrintGame_ShowResult (02:77CF); read in the runs by Object_RunAll, ObjCmd_Jump
+; C: read in the runs by Object_RunAll, ObjCmd_Jump, ObjCmd_SetCallback; first read on the screen
+; Mode06_Printing_State24 (trace/read_screens_kitty*.npz)
+ObjScript_02_75F0_Mode06_Printing_State24::
+    INCBIN "data/bank_02/ObjScript_02_75F0_Mode06_Printing_State24.bin" ; $75F0, 309 bytes
+; C: named by the code of PrintGame_ShowResult (02:77CF); read in the runs by Object_RunAll, ObjCmd_Jump; first read
+; on the screen Mode06_Printing_State24 (trace/read_screens_kitty*.npz)
 ObjScript_02_7725_PrintGame_ShowResult::
     db $08, $80, $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $08, $80, $dc, $62
     db $08, $80, $1c, $63, $08, $80, $dc, $62, $08, $80, $1c, $63, $10, $80, $dc, $62
@@ -5024,7 +5038,7 @@ jr_002_77d4:
     db $21, $67, $77, $37, $c9
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetPos; first read on the screen
-; Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_77DE_Mode03_ViewAlbum_State0B::
     db $3a, $1f, $50, $78, $93, $77, $de, $77, $b9, $7f, $b9, $7f, $1e, $1f, $4c, $48
 
@@ -5066,7 +5080,7 @@ jr_002_781c:
 
 
 ; C: named by the code of AlbumText_ObjCursor (02:7802); read in the runs by AlbumText_ObjCursor; first read on the
-; screen Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz)
+; screen Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz)
 AlbumText_ObjCursor_Tbl781D::
     db $10, $08, $20, $08, $30, $08, $40, $08, $50, $08, $60, $08, $70, $08, $80, $08
     db $90, $08, $10, $20, $20, $20, $30, $20, $40, $20, $50, $20, $60, $20, $70, $20
@@ -5079,7 +5093,7 @@ Obj_Ret7853::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_7854_Mode03_ViewAlbum_State0B::
     db $ea, $77, $ee, $77, $53, $78
 
@@ -5203,7 +5217,7 @@ jr_002_78e9:
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_Sound; first read on the screen
-; Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7901_Mode03_ViewAlbum_State0B::
     db $3a, $1f, $00, $38, $98, $1f, $8d, $d9, $01, $ba, $1e, $30, $00, $16, $1f, $5a
     db $78, $7f, $1f, $00, $00, $10, $1f, $01, $00, $a2, $1f, $8d, $d9, $01, $ba, $1e
@@ -5230,7 +5244,7 @@ AlbumText_ObjPosFromD990::
 
 
 ; C: read in the runs by Object_RunAll; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7953_Mode03_ViewAlbum_State0B::
     db $44, $79, $1e, $1f, $40, $45
 
@@ -5243,7 +5257,7 @@ AlbumText_ObjLoadGlyphPage::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode0A_NameCard_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode0A_NameCard_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7962_Mode0A_NameCard_State01::
     db $53, $79, $3b, $79, $59, $79, $99, $79, $00, $00, $cc, $1f, $08, $00, $30, $c2
     db $b0, $8b, $30, $02, $00, $99, $79, $01, $00, $cc, $1f, $08, $00, $60, $c4, $b0
@@ -5286,7 +5300,7 @@ Obj_ClearD98B::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0A_NameCard_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_79B4_Mode0A_NameCard_State01::
     db $68, $79, $a4, $79, $af, $79
 
@@ -5308,7 +5322,7 @@ NameCard_ObjCursorPlace::
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_SetFrac; first read on the screen
-; Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0B_NameCardEdit_State10 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_79CD_Mode0B_NameCardEdit_State10::
     db $65, $1f, $81, $47, $16, $1f, $ba, $79, $c3, $79, $cd, $79, $b9, $7f, $b2, $4d
@@ -5330,7 +5344,7 @@ NameCardEdit_ObjFieldPos::
 
 
 ; C: read in the runs by Object_RunAll; first read on the screen Mode0B_NameCardEdit_State04
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_79EE_Mode0B_NameCardEdit_State04::
     db $dd, $79
 
@@ -5385,7 +5399,7 @@ jr_002_7a34:
 
 ; C: named by the code of NameCardEdit_ObjFieldTick (02:7A00); read in the runs by NameCardEdit_ObjFieldTick,
 ; NameCardEdit_ObjFieldPos, Object_CreateWithParam; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_7A35_NameCardEdit_ObjFieldTick::
     db $3f, $7a, $45, $7a, $57, $7a, $59, $7a, $69, $7a, $1c, $2a, $4c, $2a, $7c, $2a
     db $3c, $25, $44, $25, $4c, $25, $54, $25, $5c, $25, $64, $25, $6c, $25, $74, $25
@@ -5513,7 +5527,7 @@ jr_002_7b0a:
 
 
 ; C: read in the runs by Object_RunAll, Object_CreateWithParam, ObjCmd_Sound; first read on the screen
-; Mode0B_NameCardEdit_State04 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0B_NameCardEdit_State04 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_7B22_Mode0B_NameCardEdit_State04::
     db $3a, $1f, $00, $38, $ba, $1e, $30, $00, $16, $1f, $7b, $7a, $7f, $1f, $00, $00
@@ -5543,7 +5557,7 @@ NameCardEdit_ObjLoadField::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll, Object_CreateWithParam; first read on the screen
-; Mode0B_NameCardEdit_State10 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode0B_NameCardEdit_State10 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_7B7B_Mode0B_NameCardEdit_State10::
     db $6c, $7b, $53, $7b, $6e, $7b, $cc, $1f, $01, $00, $30, $c2, $70, $91, $90, $06
@@ -5567,7 +5581,7 @@ jr_002_7bc1:
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_7BC2_Mode0B_NameCardEdit_State10::
     db $81, $7b, $b1, $7b, $b9, $7f
 
@@ -5580,7 +5594,7 @@ Obj_KeyMaskStepCallback::
 
 
 ; C: read in the runs by Object_RunAll; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7BD1_Mode0B_NameCardEdit_State10::
     db $09, $1f
 
@@ -5590,7 +5604,7 @@ Obj_Ret7BD3::
 
 
 ; C: read in the runs by Object_CreateWithParam; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjScript_02_7BD4_Mode0B_NameCardEdit_State10::
     db $d1, $7b, $c8, $7b, $d3, $7b
 
@@ -5662,7 +5676,7 @@ jr_002_7c24:
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetPos, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7C2A_Mode07_Exchange_State02::
     db $36, $7c, $3a, $1f, $14, $20, $54, $4a, $1e, $1f, $b4, $46
 
@@ -5677,7 +5691,7 @@ Obj_ClearD882Bit3::
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetPos, ObjCmd_Jump; first read on the screen Mode07_Exchange_State02
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7C3F_Mode07_Exchange_State02::
     db $3a, $1f, $24, $20, $54, $4a, $1e, $1f, $bc, $46, $3a, $1f, $38, $20, $54, $4a
     db $1e, $1f, $c4, $46, $5f, $7c, $3a, $1f, $6c, $20, $54, $4a, $1e, $1f, $cc, $46
@@ -5693,7 +5707,7 @@ Obj_SetD882Bit3::
 
 
 ; C: read in the runs by Object_CreateWithParam, Object_RunAll, ObjCmd_JumpByByte; first read on the screen
-; Mode07_Exchange_State02 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode07_Exchange_State02 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7C68_Mode07_Exchange_State02::
     db $3a, $1f, $7c, $20, $54, $4a, $1e, $1f, $d4, $46, $3a, $1f, $90, $20, $54, $4a
     db $1e, $1f, $dc, $46, $09, $20, $fd, $d9, $2a, $7c, $53, $7c, $7c, $7c, $da, $7b
@@ -5710,8 +5724,9 @@ ObjScript_02_7C68_Mode07_Exchange_State02::
 ; I: leftover: 274 bytes (02:7CB5-7DC6) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_02_7CB5::
     INCBIN "data/bank_02/Leftover_02_7CB5.bin" ; $7CB5, 274 bytes
-; C: read in the runs by Obj_SetD882Bit3, Object_RunAll, ObjCmd_SetFrac
-ObjScript_02_7DC7_Obj_SetD882Bit3::
+; C: read in the runs by Obj_SetD882Bit3, Object_RunAll, ObjCmd_SetFrac; first read on the screen
+; Mode08_ExchangePhotoTrain_State02 (trace/read_screens_kitty*.npz)
+ObjScript_02_7DC7_Mode08_ExchangePhotoTrain_State02::
     db $65, $1f, $2d, $63, $d5, $7d, $16, $1f, $ac, $7c, $1e, $1f, $b8, $47
 
     push hl                                       ; $7DD5
@@ -5736,8 +5751,9 @@ jr_002_7def:
     ret                                           ; $7DEF
 
 
-; C: read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Obj_SetD882Bit3
-ObjScript_02_7DF0_Object_RunAll::
+; C: read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, Obj_SetD882Bit3; first read on the screen
+; Mode08_ExchangePhotoTrain_State05 (trace/read_screens_kitty*.npz)
+ObjScript_02_7DF0_Mode08_ExchangePhotoTrain_State05::
     db $16, $1f, $e1, $7d, $6d, $1f, $00, $fe, $1e, $1f, $90, $47, $16, $1f, $e1, $7d
     db $6d, $1f, $00, $02, $1e, $1f, $a4, $47, $16, $1f, $b9, $7f, $6d, $1f, $00, $00
     db $10, $80, $ec, $67, $0c, $80, $5c, $68, $cc, $1f, $00, $00, $00, $c0, $00, $90
@@ -5750,7 +5766,7 @@ ObjScript_02_7DF0_Object_RunAll::
 
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_CreateWithParam, Object_RunAll; first read on the screen
-; Mode0C_RecordBook_State01 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode0C_RecordBook_State01 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7E32_Mode0C_RecordBook_State01::
     db $c7, $7d, $b9, $7f, $b2, $4d, $cc, $1f, $10, $00, $10, $71, $30, $90, $10, $00
     db $25, $cc, $1f, $10, $00, $20, $71, $30, $90, $10, $00, $25, $1e, $1f, $38, $7e
@@ -5827,7 +5843,7 @@ Fade_SetModeFromObject::
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Wait, Object_CreateWithParam; first read on the screen
-; Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_7EB2_Mode00_BootAndTitle_State00::
     db $58, $7e, $10, $1f, $04, $00, $58, $7e, $10, $1f, $04, $00, $58, $7e, $10, $1f
@@ -5926,7 +5942,7 @@ Fade_End::
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_Wait, Object_CreateWithParam; first read on the screen
-; Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind OAM from the evidence of
+; Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz); kind OAM from the evidence of
 ; tools/kitty_layout_kinds.py
 ObjScript_02_7F75_Mode00_BootAndTitle_State00::
     db $ee, $7e, $10, $1f, $04, $00, $ee, $7e, $10, $1f, $04, $00, $ee, $7e, $10, $1f
@@ -5945,7 +5961,7 @@ Obj_NullCallback::
 
 
 ; C: named by the code of Puzzle15_ObjWaitMove, Scratch_ObjCountdown (02:50A5 02:568B); read in the runs by
-; Object_RunAll; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty.npz); kind OAM from the
+; Object_RunAll; first read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty*.npz); kind OAM from the
 ; evidence of tools/kitty_layout_kinds.py
 ObjScript_02_7FBA_Puzzle15_ObjWaitMove::
     db $08, $80, $00, $00, $09, $1f, $02, $1f

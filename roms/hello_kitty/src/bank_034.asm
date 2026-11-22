@@ -5,7 +5,7 @@
 SECTION "ROM Bank $034", ROMX[$4000], BANK[$34]
 
 ; C: read in the runs by Copy_Unrolled_B, Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind T_FRM from the evidence of
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of
 ; tools/kitty_layout_kinds.py
 Frame_34_4000_Mode02_TakePhotos_State01::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00

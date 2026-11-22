@@ -5,11 +5,11 @@
 SECTION "ROM Bank $035", ROMX[$4000], BANK[$35]
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_35_4000_Mode02_TakePhotos_State01::
     INCBIN "data/bank_35/Frame_35_4000_Mode02_TakePhotos_State01.bin" ; $4000, 10752 bytes
 ; C: read in the runs by Copy_Unrolled_B, MapRows_Copy13, Map_Write5PlusA0Safe; first read on the screen
-; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; Mode11_StrawberryChannel_State07 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py; the rest of Data_35_4000 after a leftover stretch
 Gfx_35_6A00_Mode11_StrawberryChannel_State07::
     db $55, $aa, $bf, $40, $55, $aa, $ff, $00, $55, $aa, $af, $50, $55, $aa, $ff, $00
@@ -307,7 +307,7 @@ Gfx_35_6A00_Mode11_StrawberryChannel_State07::
     ds $10, $00
 
 ; C: read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, Map_WritePairsPlusA0; first read on the screen
-; Mode06_Printing_State0D (trace/read_screens_kitty.npz)
+; Mode06_Printing_State0D (trace/read_screens_kitty*.npz)
 Src_35_7BB8_Mode06_Printing_State0D::
     INCBIN "data/bank_35/Src_35_7BB8_Mode06_Printing_State0D.bin" ; $7BB8, 549 bytes
 ; I: leftover: 131 bytes (35:7DDD-7E5F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -322,7 +322,7 @@ Leftover_35_7DDD::
     ds $3e, $00
 
 ; C: read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_35_7E60_Mode02_TakePhotos_State01::
     INCBIN "data/bank_35/Gfx_35_7E60_Mode02_TakePhotos_State01.bin" ; $7E60, 141 bytes
 ; I: leftover: 131 bytes (35:7EED-7F6F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -336,6 +336,6 @@ Leftover_35_7EED::
     ds $4f, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_35_7F70_Mode02_TakePhotos_State08::
     INCBIN "data/bank_35/Gfx_35_7F70_Mode02_TakePhotos_State08.2bpp" ; $7F70, 144 bytes

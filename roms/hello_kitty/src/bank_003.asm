@@ -38,7 +38,7 @@ Leftover_03_40F0_OamList::
     db $28, $20, $92, $00, $30, $28, $94, $01
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode0E_KittGamesHost_State13
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_4118_Mode0E_KittGamesHost_State13::
     INCBIN "data/bank_03/OamList_03_4118_Mode0E_KittGamesHost_State13.bin" ; $4118, 1920 bytes
 ; I: leftover: 72 bytes (03:4898-48DF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -50,7 +50,7 @@ Leftover_03_4898::
     db $08, $08, $1a, $10, $08, $00, $18, $11
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode12_SlideShow_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_48E0_Mode12_SlideShow_State01::
     INCBIN "data/bank_03/OamList_03_48E0_Mode12_SlideShow_State01.bin" ; $48E0, 2176 bytes
 ; I: leftover: 96 bytes (03:5160-51BF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -63,7 +63,7 @@ Leftover_03_5160::
     db $08, $09, $13, $40, $08, $01, $12, $40, $10, $09, $03, $40, $10, $01, $02, $41
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_51C0_Mode02_TakePhotos_State01::
     db $10, $08, $7d, $00, $08, $08, $7c, $00, $10, $00, $7b, $00, $08, $00, $7a, $01
     db $3d, $08, $78, $00, $ed, $08, $78, $00, $15, $08, $78, $01, $51, $08, $78, $00
@@ -80,7 +80,7 @@ Leftover_03_5208::
     db $2a, $24, $79, $40, $2a, $04, $79, $41
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_5250_Mode02_TakePhotos_State01::
     db $14, $08, $c5, $00, $14, $00, $c4, $00, $0c, $08, $c3, $00, $04, $08, $c2, $00
     db $0c, $00, $c1, $00, $04, $00, $c0, $01, $14, $08, $cb, $00, $14, $00, $ca, $00
@@ -96,7 +96,7 @@ Leftover_03_5280::
     db $0c, $08, $e1, $00, $04, $08, $e0, $00, $0c, $00, $df, $00, $04, $00, $de, $01
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_52E0_Mode02_TakePhotos_State01::
     db $10, $08, $e7, $00, $08, $08, $e6, $00, $10, $00, $e5, $00, $08, $00, $e4, $01
 
@@ -111,14 +111,14 @@ Leftover_03_52F0::
     db $10, $e4, $61, $00, $08, $e4, $60, $01
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode04_PlayMenu_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_5358_Mode04_PlayMenu_State01::
     INCBIN "data/bank_03/OamList_03_5358_Mode04_PlayMenu_State01.bin" ; $5358, 2200 bytes
 ; I: leftover: 332 bytes (03:5BF0-5D3B) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_03_5BF0::
     INCBIN "data/bank_03/Leftover_03_5BF0.bin" ; $5BF0, 332 bytes
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State1F
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_5D3C_Mode06_Printing_State1F::
     INCBIN "data/bank_03/OamList_03_5D3C_Mode06_Printing_State1F.bin" ; $5D3C, 1536 bytes
 ; I: leftover: 64 bytes (03:633C-637B) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -128,8 +128,9 @@ Leftover_03_633C::
     db $00, $0c, $29, $10, $00, $04, $28, $10, $00, $fc, $27, $10, $f8, $08, $26, $10
     db $f8, $00, $25, $10, $08, $0c, $37, $30, $08, $04, $38, $10, $08, $fc, $37, $11
 
-; C: read in the runs by Obj_DrawSprite
-OamList_03_637C_Obj_DrawSprite::
+; C: read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State24
+; (trace/read_screens_kitty*.npz)
+OamList_03_637C_Mode06_Printing_State24::
     db $0a, $0c, $2d, $30, $0a, $04, $2e, $10, $0a, $fc, $2d, $10, $fa, $08, $21, $10
     db $fa, $00, $20, $10, $02, $0c, $24, $10, $02, $04, $23, $10, $02, $fc, $22, $11
 
@@ -156,14 +157,16 @@ OamList_03_63FC_Obj_DrawSprite::
 ; a hand label since the labels 03:63DC / 03:63FC are hand ones (2026-11-22)
 Leftover_03_6524::
     INCBIN "data/bank_03/Leftover_03_6524.bin" ; $6524, 712 bytes
-; C: read in the runs by Obj_DrawSprite
-OamList_03_67EC_Obj_DrawSprite::
-    INCBIN "data/bank_03/OamList_03_67EC_Obj_DrawSprite.bin" ; $67EC, 680 bytes
+; C: read in the runs by Obj_DrawSprite; first read on the screen Mode08_ExchangePhotoTrain_State05
+; (trace/read_screens_kitty*.npz)
+OamList_03_67EC_Mode08_ExchangePhotoTrain_State05::
+    INCBIN "data/bank_03/OamList_03_67EC_Mode08_ExchangePhotoTrain_State05.bin" ; $67EC, 680 bytes
 ; I: leftover: 296 bytes (03:6A94-6BBB) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_03_6A94::
     INCBIN "data/bank_03/Leftover_03_6A94.bin" ; $6A94, 296 bytes
-; C: read in the runs by Obj_DrawSprite; read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)
-OamList_03_6BBC_Obj_DrawSprite::
+; C: read in the runs by Obj_DrawSprite; first read on the screen Mode09_ExchangeCommunicating_State0A
+; (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange)
+OamList_03_6BBC_Mode09_ExchangeCommunicating_State0A::
     db $08, $10, $58, $70, $08, $f8, $58, $50, $f8, $10, $58, $30, $f8, $f8, $58, $11
     db $09, $11, $58, $70, $09, $f7, $58, $50, $f7, $11, $58, $30, $f7, $f7, $58, $11
     db $0a, $12, $58, $70, $0a, $f6, $58, $50, $f6, $12, $58, $30, $f6, $f6, $58, $11
@@ -179,11 +182,11 @@ Leftover_03_6C24::
     db $10, $00, $22, $10, $10, $f8, $21, $10, $08, $f8, $11, $10, $00, $08, $03, $10
     db $00, $00, $02, $10, $00, $f8, $01, $11
 
-; C: read in the runs by Obj_DrawSprite; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind OAM
+; C: read in the runs by Obj_DrawSprite; first read on the screen Mode09_ExchangeCommunicating_State0A
+; (trace/read_screens_kitty*.npz); read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: exchange); kind OAM
 ; from the evidence of tools/kitty_layout_kinds.py
-OamList_03_6C5C_Mode0B_NameCardEdit_State10::
-    INCBIN "data/bank_03/OamList_03_6C5C_Mode0B_NameCardEdit_State10.bin" ; $6C5C, 604 bytes
+OamList_03_6C5C_Mode09_ExchangeCommunicating_State0A::
+    INCBIN "data/bank_03/OamList_03_6C5C_Mode09_ExchangeCommunicating_State0A.bin" ; $6C5C, 604 bytes
 ; I: leftover: 48 bytes (03:6EB8-6EE7) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_03_6EB8::
     db $14, $fc, $77, $20, $04, $fc, $77, $60, $04, $0c, $77, $40, $14, $0c, $77, $01
@@ -191,7 +194,7 @@ Leftover_03_6EB8::
     db $12, $fe, $77, $20, $06, $0a, $77, $40, $06, $fe, $77, $60, $12, $0a, $77, $01
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_6EE8_Mode0B_NameCardEdit_State10::
     db $14, $dc, $77, $20, $04, $dc, $77, $60, $04, $2c, $77, $40, $14, $2c, $77, $01
     db $13, $dd, $77, $20, $05, $dd, $77, $60, $05, $2b, $77, $40, $13, $2b, $77, $01
@@ -211,7 +214,7 @@ OamList_03_6EE8_Mode0B_NameCardEdit_State10::
 Leftover_03_6FB4::
     INCBIN "data/bank_03/Leftover_03_6FB4.bin" ; $6FB4, 404 bytes
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_7148_Mode02_TakePhotos_State01::
     db $18, $10, $8f, $00, $10, $10, $8e, $00, $08, $10, $8d, $00, $00, $10, $8c, $00
     db $18, $08, $8b, $00, $10, $08, $8a, $00, $08, $08, $89, $00, $00, $08, $88, $00
@@ -222,7 +225,7 @@ OamList_03_7148_Mode02_TakePhotos_State01::
 Leftover_03_7188::
     INCBIN "data/bank_03/Leftover_03_7188.bin" ; $7188, 328 bytes
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_72D0_Mode02_TakePhotos_State06::
     db $08, $14, $88, $00, $08, $0c, $86, $00, $08, $04, $84, $00, $08, $fc, $82, $00
     db $08, $f4, $80, $01
@@ -244,7 +247,7 @@ Leftover_03_72E4::
     db $08, $08, $94, $00, $08, $00, $92, $00, $08, $f8, $90, $01
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_73B0_Mode02_TakePhotos_State06::
     db $08, $14, $98, $00, $08, $0c, $96, $00, $08, $04, $94, $00, $08, $fc, $92, $00
     db $08, $f4, $90, $01
@@ -259,7 +262,7 @@ Leftover_03_73C4::
     db $08, $e8, $90, $01
 
 ; C: read in the runs by Obj_DrawSprite; first read on the screen Mode06_Printing_State0A
-; (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 OamList_03_7418_Mode06_Printing_State0A::
     db $08, $20, $6e, $00, $08, $18, $6c, $00, $08, $10, $6a, $00, $08, $08, $68, $00
     db $08, $00, $66, $00, $08, $f8, $64, $00, $08, $f0, $62, $00, $08, $e8, $60, $01

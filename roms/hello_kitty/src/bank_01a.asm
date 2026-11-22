@@ -5,7 +5,7 @@
 SECTION "ROM Bank $01a", ROMX[$4000], BANK[$1a]
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State07
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_1A_4000_Mode06_Printing_State07::
     INCBIN "data/bank_1a/Frame_1A_4000_Mode06_Printing_State07.bin" ; $4000, 4480 bytes
 ; C: the last $380 bytes (56 tiles) of print frame block 1 of table 01:687D: the left and right borders of a wild
@@ -73,7 +73,7 @@ Frame_1A_5180_WildFrameSides::
     ds $300, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State07
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_1A_5800_Mode06_Printing_State07::
     INCBIN "data/bank_1a/Frame_1A_5800_Mode06_Printing_State07.bin" ; $5800, 4480 bytes
 ; C: the last $380 bytes (56 tiles) of print frame block 2 of table 01:687D: the left and right borders of a wild
@@ -141,15 +141,15 @@ Frame_1A_6980_WildFrameSides::
     ds $300, $00
 
 ; C: named by the code of Mode04_State00 (07:6C24); read in the runs by Copy_DEtoHL, Vram_CopyHBlank; first read on
-; the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; the screen Mode04_PlayMenu_State01 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_1A_7000_Mode04_PlayMenu_State00::
     INCBIN "data/bank_1a/Map_1A_7000_Mode04_PlayMenu_State00.tilemap" ; $7000, 2048 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode04_PlayMenu_State01
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_1A_7800_Mode04_PlayMenu_State01::
     INCBIN "data/bank_1a/Map_1A_7800_Mode04_PlayMenu_State01.tilemap" ; $7800, 1024 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode04_PlayMenu_State01
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_1A_7C00_Mode04_PlayMenu_State01::
     INCBIN "data/bank_1a/Map_1A_7C00_Mode04_PlayMenu_State01.tilemap" ; $7C00, 1024 bytes

@@ -5,7 +5,7 @@
 SECTION "ROM Bank $00c", ROMX[$4000], BANK[$c]
 
 ; C: read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_4000_Mode05_StampWindow_State06::
     INCBIN "data/bank_0c/Gfx_0C_4000_Mode05_StampWindow_State06.2bpp" ; $4000, 14464 bytes
 ; I: leftover: 160 bytes (0C:7880-791F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -22,7 +22,7 @@ Leftover_0C_7880::
     ds $32, $00
 
 ; C: read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7920_Mode02_TakePhotos_State06::
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
@@ -43,7 +43,7 @@ Gfx_0C_7920_Mode02_TakePhotos_State06::
     ds $52, $00
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7A40_Mode03_ViewAlbum_State0B::
     INCBIN "data/bank_0c/Gfx_0C_7A40_Mode03_ViewAlbum_State0B.2bpp" ; $7A40, 32 bytes
 ; I: leftover: 128 bytes (0C:7A60-7ADF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -58,7 +58,7 @@ Leftover_0C_7A60::
     db $74, $78, $66, $66, $64, $66, $78, $7c, $64, $66, $66, $66, $7a, $7c, $00, $00
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7AE0_Mode03_ViewAlbum_State0B::
     INCBIN "data/bank_0c/Gfx_0C_7AE0_Mode03_ViewAlbum_State0B.bin" ; $7AE0, 37 bytes
 ; I: leftover: 59 bytes (0C:7B05-7B3F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -69,7 +69,7 @@ Leftover_0C_7B05::
     db $08, $08, $98, $f0, $f0, $80, $00, $c0, $80, $40, $c0
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode03_ViewAlbum_State0B
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7B40_Mode03_ViewAlbum_State0B::
     INCBIN "data/bank_0c/Gfx_0C_7B40_Mode03_ViewAlbum_State0B.bin" ; $7B40, 17 bytes
 ; I: leftover: 239 bytes (0C:7B51-7C3F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -89,11 +89,11 @@ Leftover_0C_7B51::
     ds $50, $00
 
 ; C: read in the runs by Vram_CopyHBlank, Copy_DEtoHL; first read on the screen Mode0A_NameCard_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7C40_Mode0A_NameCard_State01::
     INCBIN "data/bank_0c/Gfx_0C_7C40_Mode0A_NameCard_State01.2bpp" ; $7C40, 160 bytes
 ; C: read in the runs by Copy_DEtoHL, Vram_CopyHBlank; first read on the screen Mode0C_RecordBook_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7CE0_Mode0C_RecordBook_State01::
     INCBIN "data/bank_0c/Gfx_0C_7CE0_Mode0C_RecordBook_State01.2bpp" ; $7CE0, 160 bytes
 ; I: leftover: 160 bytes (0C:7D80-7E1F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -109,13 +109,14 @@ Leftover_0C_7D80::
     db $00, $ff, $00, $ff, $24, $c3, $5a, $81, $42, $99, $42, $99, $24, $c3, $42, $81
     db $18, $81, $24, $99, $00, $99, $42, $81, $3c, $c3, $00, $ff, $00, $ff, $00, $ff
 
-; C: read in the runs by Copy_DEtoHL, Vram_CopyHBlank; kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_0C_7E20_Copy_DEtoHL::
-    INCBIN "data/bank_0c/Gfx_0C_7E20_Copy_DEtoHL.bin" ; $7E20, 65 bytes
+; C: read in the runs by Copy_DEtoHL, Vram_CopyHBlank; first read on the screen Mode06_Printing_State24
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+Gfx_0C_7E20_Mode06_Printing_State24::
+    INCBIN "data/bank_0c/Gfx_0C_7E20_Mode06_Printing_State24.bin" ; $7E20, 65 bytes
 ; I: leftover: 287 bytes (0C:7E61-7F7F) that no run reads or executes and that no code names (owner rule 2026-11-11)
 Leftover_0C_7E61::
     INCBIN "data/bank_0c/Leftover_0C_7E61.bin" ; $7E61, 287 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0C_7F80_Mode02_TakePhotos_State08::
     INCBIN "data/bank_0c/Gfx_0C_7F80_Mode02_TakePhotos_State08.2bpp" ; $7F80, 128 bytes

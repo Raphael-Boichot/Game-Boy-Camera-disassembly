@@ -81,7 +81,7 @@ bank,site,kind,operand,value,target,expression,evidence,read
 01,01:4CC9,num,bc,$0690,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 01,01:4F04,num,bc,$0380,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 01,01:4F0C,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
-01,01:4F44,ptr,de,$7800,17:7800,Gfx_17_7800_Copy_DEtoHL,C: dereferenced at 00:0295 (bank 17 mapped),no
+01,01:4F44,ptr,de,$7800,17:7800,Gfx_17_7800_Mode08_ExchangePhotoTrain_State00,C: dereferenced at 00:0295 (bank 17 mapped),no
 01,01:4F57,?,de,$0E00,,,added to HL before the dereference: a bank-0 base or an offset,
 01,01:4F8D,num,bc,$0F00,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 01,01:4F99,num,bc,$0800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
@@ -89,7 +89,7 @@ bank,site,kind,operand,value,target,expression,evidence,read
 01,01:4FAD,?,de,$0F00,,,added to HL before the dereference: a bank-0 base or an offset,
 01,01:50A5,?,hl,$7C20,,,stored to hPuzzle15_ScriptSetMapPtrPrev_FFE6 for later use: not followed,
 01,01:67FC,ptr,hl,$7C40,0C:7C40,Gfx_0C_7C40_Mode0A_NameCard_State01,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,yes
-01,01:683C,ptr,hl,$7E40,0C:7E40,Gfx_0C_7E20_Copy_DEtoHL + $20,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,no
+01,01:683C,ptr,hl,$7E40,0C:7E40,Gfx_0C_7E20_Mode06_Printing_State24 + $20,C: dereferenced at 00:066F (bank 0C mapped); that instruction read the target block in the runs,no
 01,01:68A3,?,bc,$03C0,,,the walk ends without a use,
 01,01:68AE,?,bc,$0280,,,the walk ends without a use,
 01,01:68B9,?,bc,$0280,,,the walk ends without a use,
@@ -162,11 +162,11 @@ bank,site,kind,operand,value,target,expression,evidence,read
 02,02:6E5C,?,de,$6E87,,,stored to hObject_RunAll_FFC5 for later use: not followed,
 02,02:6FD6,?,de,$6F7E,,,stored to hObject_RunAll_FFC5 for later use: not followed,
 02,02:7017,?,de,$6F96,,,stored to hObject_RunAll_FFC5 for later use: not followed,
-02,02:708E,ptr,hl,$70A7,02:70A7,ObjScript_02_7044_PrintGame_ObjCheckLanded + $63,C: dereferenced at 02:7095 (bank 02 mapped),no
+02,02:708E,ptr,hl,$70A7,02:70A7,ObjScript_02_7044_Mode06_Printing_State1F + $63,C: dereferenced at 02:7095 (bank 02 mapped),no
 02,02:710F,?,hl,$0180,,,the walk ends without a use,
 02,02:711D,?,bc,$0180,,,the walk ends without a use,
 02,02:714B,?,de,$71D2,,,stored to hObject_RunAll_FFC5 for later use: not followed,
-02,02:7168,ptr,de,$70D8,02:70D8,ObjScript_02_70A9_PrintGame_ObjCheckLanded + $2F,C: dereferenced at 00:2091 (bank 02 mapped),no
+02,02:7168,ptr,de,$70D8,02:70D8,ObjScript_02_70A9_Mode06_Printing_State24 + $2F,C: dereferenced at 00:2091 (bank 02 mapped),no
 02,02:73B4,?,hl,$0180,,,the walk ends without a use,
 02,02:73C2,?,bc,$0180,,,the walk ends without a use,
 02,02:748A,?,de,$766E,,,stored to hObject_RunAll_FFC5 for later use: not followed,
@@ -390,10 +390,10 @@ bank,site,kind,operand,value,target,expression,evidence,read
 06,06:5F9A,ptr,hl,$5F7F,06:5F7F,KeyPrompt_LoadSounds_Tbl5DFA + $185,C: dereferenced at 06:5F9E (bank 06 mapped); that instruction read the target block in the runs,yes
 06,06:5FFD,ptr,hl,$5F7F,06:5F7F,KeyPrompt_LoadSounds_Tbl5DFA + $185,C: dereferenced at 06:6001 (bank 06 mapped),yes
 06,06:605E,num,bc,$1000,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-06,06:6112,ptr,de,$7800,17:7800,Gfx_17_7800_Copy_DEtoHL,C: dereferenced at 00:021C (bank 17 mapped),no
+06,06:6112,ptr,de,$7800,17:7800,Gfx_17_7800_Mode08_ExchangePhotoTrain_State00,C: dereferenced at 00:021C (bank 17 mapped),no
 06,06:6117,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 06,06:6143,num,bc,$0260,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-06,06:616E,ptr,de,$7800,17:7800,Gfx_17_7800_Copy_DEtoHL,C: dereferenced at 00:021C (bank 17 mapped),no
+06,06:616E,ptr,de,$7800,17:7800,Gfx_17_7800_Mode08_ExchangePhotoTrain_State00,C: dereferenced at 00:021C (bank 17 mapped),no
 06,06:6171,num,bc,$0100,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 06,06:6223,num,bc,$580E,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 06,06:62E0,ptr,hl,$62E8,06:62E8,Mode07_State02_62E8,C: dereferenced at 06:62E4 (bank 06 mapped),yes

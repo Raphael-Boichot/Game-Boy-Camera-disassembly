@@ -22,7 +22,7 @@ refuses with B on the photo shown), full_album_receiver (the receiver's
 save holds 30 photos taken by keys in the plain core: A, A, A A thirty times, B three times; the giver leads), cable_pulled (the receiver leads; the cable is taken out when it reaches the photo train,
 08:01, during the first page request: no byte goes through from then on), giver_leads (the receiver waits on "もらう" without pressing A and the giver leads, as the BGB
 exchange of 2026-11-08: the control).
-Writes the coverage of all scenarios (ex / dr / rdr, as the other trace/cov_kitty_*.npz: organic, no poke) and a report: scenario,
+Writes trace/read_screens_kitty_link.npz (the screen of each byte's first read, tools/kitty_first_screens.py) and the coverage of all scenarios (ex / dr / rdr, as the other trace/cov_kitty_*.npz: organic, no poke) and a report: scenario,
 unit, end mode:state, the mode:state changes in order (fades $1E left out), bytes moved, the nonzero bytes of SRAM $2000-$2FFF (the
 first photo slot), and the checked points (executed / read).
 """
@@ -81,18 +81,20 @@ def fl(b, ad): return ad if b == 0 else b * 0x4000 + ad - 0x4000
 CHK = [('x', fl(6, 0x6AD4), 1, 'Mode09_State0C'), ('x', fl(6, 0x5FF8), 1, 'KeyPrompt_LoadSoundsB'), ('r', fl(6, 0x5F55), 42, 'KeyPrompt_LoadSounds_Tbl5F7F_Entry5F55'),
        ('r', fl(0x2C, 0x7AB0), 1, 'Map_2C_7AB0_Mode09_ExchangeCommunicating_State0C'), ('x', fl(6, 0x691F), 1, 'Mode09_State06'), ('x', fl(6, 0x6BF8), 1, 'Mode09_State0F')]
 EX = np.zeros(N, np.uint8); DR = np.zeros(N, np.uint8); RDR = np.zeros(N, np.uint32); rows = []
+import kitty_first_screens; FS = kitty_first_screens.FirstScreens(N)   # the screen of each byte's first read (tools/kitty_first_screens.py)
 for sc in SCEN:
     name, pg, pt, after = sc[:4]; cut = sc[4] if len(sc) > 4 else None; pulled = False; savr = sc[5] if len(sc) > 5 else SAV
     U = []
     for L, role, path in ((LIBS[0], 'giver', pg), (LIBS[1], 'receiver', pt)):
         sv = SAV if role == 'giver' else savr; L.gb_cov_clear(); L.gb_reset(bytes(sv), len(sv)); L.gb_set_organic(1); L.gb_link_enable(1)
-        U.append(dict(L=L, role=role, path=path, t=0, keys=demo(path), modes=[], pend=None))
+        U.append(dict(L=L, role=role, path=path, t=0, keys=demo(path), modes=[], pend=None, lastf=-1, dr=arr(L, 'gb_cov_dread_ptr', N)))
     end = (max(len(u['keys']) for u in U) + after) * FRAME; moved = 0
     while min(u['t'] for u in U) < end:
         i = 0 if U[0]['t'] <= U[1]['t'] else 1; u, p = U[i], U[1 - i]; L, PL = u['L'], p['L']
         f = u['t'] // FRAME; L.gb_set_keys(core_mask(u['keys'][f]) if f < len(u['keys']) else 0)
         r = L.gb_run_link(SL); u['t'] += r >> 2; ev = r & 3
         m = (L.gb_peek(0xFF8D), L.gb_peek(0xFF8E))
+        if u['t'] // FRAME != u['lastf']: u['lastf'] = u['t'] // FRAME; FS.update(u['dr'], *m)
         if m[0] != 0x1E and (not u['modes'] or u['modes'][-1] != m):
             u['modes'].append(m); lb = SHOT_AT.get((name, u['role'], m))
             if cut and (u['role'], m) == cut: pulled = True
@@ -122,7 +124,7 @@ for i, (lb, im) in enumerate(SHOTS):
     sheet.paste(im.resize((320, 288), Image.NEAREST), (x0 + 8, y0 + 36))
     for j, part in enumerate(textwrap.wrap(lb, 48)[:2]): dr.text((x0 + 8, y0 + 4 + 14 * j), part, fill=0)
 os.makedirs(os.path.dirname(a.shots), exist_ok=True); sheet.save(a.shots, optimize=True)
-np.savez_compressed(a.out, ex=EX, dr=DR, rdr=RDR)
+np.savez_compressed(a.out, ex=EX, dr=DR, rdr=RDR); FS.save(os.path.join(os.path.dirname(a.out), 'read_screens_kitty_link.npz'))
 with open(a.report, 'w', newline='', encoding='utf-8') as f:
     w = csv.writer(f, lineterminator='\n')
     w.writerow(['scenario', 'unit', 'taps', 'end', 'modes', 'bytes_moved', 'sram_slot1_nonzero', 'checked']); w.writerows(rows)

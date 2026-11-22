@@ -10,7 +10,7 @@ SECTION "ROM Bank $012", ROMX[$4000], BANK[$12]
 Font8x16Thin_Bank12::
     INCBIN "data/bank_12/Font8x16Thin_Bank12.bin" ; $4000, 8160 bytes
 ; C: read in the runs by Vram_CopyHBlank, Copy_FarInverted; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_12_5FE0_Mode0B_NameCardEdit_State08::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $c0, $00, $33, $00, $0c, $00, $00
@@ -509,6 +509,6 @@ Gfx_12_5FE0_Mode0B_NameCardEdit_State08::
     ds $140, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State02
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_12_7FE0_Mode03_ViewAlbum_State02::
     INCBIN "data/bank_12/Src_12_7FE0_Mode03_ViewAlbum_State02.bin" ; $7FE0, 32 bytes

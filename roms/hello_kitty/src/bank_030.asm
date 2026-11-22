@@ -5,7 +5,7 @@
 SECTION "ROM Bank $030", ROMX[$4000], BANK[$30]
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_30_4000_Mode02_TakePhotos_State01::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $01, $01, $06, $06
@@ -302,15 +302,15 @@ Frame_30_4000_Mode02_TakePhotos_State01::
     ds $11, $00
 
 ; C: read in the runs by Copy_Unrolled_B, Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_30_5180_Mode02_TakePhotos_State01::
     INCBIN "data/bank_30/Frame_30_5180_Mode02_TakePhotos_State01.bin" ; $5180, 9864 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_30_5180
-; after a leftover stretch
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of
+; Data_30_5180 after a leftover stretch
 Gfx_30_7808_Mode02_TakePhotos_State08::
     INCBIN "data/bank_30/Gfx_30_7808_Mode02_TakePhotos_State08.bin" ; $7808, 1944 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_30_7FA0_Mode02_TakePhotos_State08::
     INCBIN "data/bank_30/Gfx_30_7FA0_Mode02_TakePhotos_State08.2bpp" ; $7FA0, 96 bytes

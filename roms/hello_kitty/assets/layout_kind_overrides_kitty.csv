@@ -103,12 +103,12 @@ bank,start,end,kind,ev,label,basis
 0F,46D3,46FD,SOUND,I,Leftover_0F_46D3,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 0F,6CC2,6DF1,SOUND,I,Leftover_0F_6CC2,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 0F,7BB1,7D71,SOUND,I,Leftover_0F_7BB1,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-10,5800,5900,T_UI,I,Src_10_5800_Copy_DEtoHL,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+10,5800,5900,T_UI,I,Src_10_5800_Mode09_ExchangeCommunicating_State04,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 10,5A03,5B00,T_UI,I,Leftover_10_5A03,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 11,5FE0,6000,T_UI,I,Src_11_5FE0_Mode0B_NameCardEdit_State10,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 12,7FE0,8000,T_UI,I,Src_12_7FE0_Mode03_ViewAlbum_State02,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 13,7D74,7F00,MAP,I,Leftover_13_7D74,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
-13,7FC0,8000,MAP,I,Src_13_7FC0_Map_CopyRect,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
+13,7FC0,8000,MAP,I,Src_13_7FC0_Mode10_ScratchCard_State02,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 14,7400,7800,MAP,I,Leftover_14_7400_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 14,7800,7C00,MAP,I,Leftover_14_7800_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"
 14,7C00,8000,MAP,I,Leftover_14_7C00_Map,"owner, by eye (2026-11-12): the kind of this bank range in assets/layout_kind_owner_kitty.csv"

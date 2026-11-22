@@ -5,7 +5,7 @@
 SECTION "ROM Bank $031", ROMX[$4000], BANK[$31]
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_31_4000_Mode02_TakePhotos_State01::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -143,7 +143,7 @@ Frame_31_4000_Mode02_TakePhotos_State01::
     ds $2c, $00
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_31_4700_Mode02_TakePhotos_State01::
     db $81, $03, $01, $01, $00, $01, $01, $01, $07, $03, $06, $04, $00, $00, $00, $00
     db $80, $00, $00, $80, $d8, $a0, $e0, $c0, $e0, $c0, $50, $60, $36, $3c, $18, $1c
@@ -280,21 +280,21 @@ Frame_31_4700_Mode02_TakePhotos_State01::
     ds $2c, $00
 
 ; C: read in the runs by Copy_Unrolled_B, Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_31_4E00_Mode02_TakePhotos_State08::
     INCBIN "data/bank_31/Gfx_31_4E00_Mode02_TakePhotos_State08.2bpp" ; $4E00, 5872 bytes
 ; C: the same 640 bytes as the Japanese Gfx_24_57E0_Unused_Link_LoadTiles (24:57E0); named by the code of
 ; Mode0D_State00, Mode0D_State03 (05:439C 05:44B6); read in the runs by Vram_CopyHBlank; first read on the screen
-; Mode11_StrawberryChannel_State00 (trace/read_screens_kitty.npz)
+; Mode11_StrawberryChannel_State00 (trace/read_screens_kitty*.npz)
 Gfx_31_64F0_Unused_Link_LoadTiles::
     INCBIN "data/bank_31/Gfx_31_64F0_Unused_Link_LoadTiles.2bpp" ; $64F0, 640 bytes
 ; C: named by the code of Mode00_State04 (05:4214); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_31_6770_Mode00_BootAndTitle_State04::
     INCBIN "data/bank_31/Gfx_31_6770_Mode00_BootAndTitle_State04.2bpp" ; $6770, 128 bytes
 ; C: read in the runs by Copy_DEtoHL, Print_StreamFromD3F4; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_6770
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_6770
 ; after a leftover stretch
 Map_31_67F0_Mode00_BootAndTitle_State00::
     INCBIN "data/bank_31/Map_31_67F0_Mode00_BootAndTitle_State00.tilemap" ; $67F0, 512 bytes
@@ -306,58 +306,59 @@ Map_31_69F0_Cam_CalibSanityCheck::
 Map_31_6C30_Cam_CalibSanityCheck_OkRow::
     INCBIN "data/bank_31/Map_31_6C30_Cam_CalibSanityCheck_OkRow.tilemap" ; $6C30, 32 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_31_6C50_Mode02_TakePhotos_State01::
     INCBIN "data/bank_31/Gfx_31_6C50_Mode02_TakePhotos_State01.bin" ; $6C50, 41 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_31_6C50
-; after a leftover stretch
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of
+; Data_31_6C50 after a leftover stretch
 Gfx_31_6C79_Mode02_TakePhotos_State01::
     INCBIN "data/bank_31/Gfx_31_6C79_Mode02_TakePhotos_State01.bin" ; $6C79, 615 bytes
 ; C: named by the code of Mode0C_State00 (06:5CFD); read in the runs by Vram_CopyHBlank; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_31_6EE0_Mode0C_RecordBook_State00::
     INCBIN "data/bank_31/Map_31_6EE0_Mode0C_RecordBook_State00.tilemap" ; $6EE0, 32 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_6EE0
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_6EE0
 ; after a leftover stretch
 Gfx_31_6F00_Mode02_TakePhotos_State01::
     INCBIN "data/bank_31/Gfx_31_6F00_Mode02_TakePhotos_State01.bin" ; $6F00, 468 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_6EE0
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_6EE0
 ; after a leftover stretch
 Map_31_70D4_Mode02_TakePhotos_State01::
     INCBIN "data/bank_31/Map_31_70D4_Mode02_TakePhotos_State01.tilemap" ; $70D4, 108 bytes
 ; C: the same 576 bytes as the Japanese Map_25_5AC0_Cam_FactoryCalibration (25:5AC0); named by the code of
 ; Mode0D_State03 (05:44C0); read in the runs by Copy_DEtoHL, Vram_CopyHBlank; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 Map_31_7140_Cam_FactoryCalibration::
     INCBIN "data/bank_31/Map_31_7140_Cam_FactoryCalibration.tilemap" ; $7140, 576 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_31_7380_Mode02_TakePhotos_State08::
     INCBIN "data/bank_31/Map_31_7380_Mode02_TakePhotos_State08.tilemap" ; $7380, 64 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_7380
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_7380
 ; after a leftover stretch
 Gfx_31_73C0_Mode02_TakePhotos_State08::
     INCBIN "data/bank_31/Gfx_31_73C0_Mode02_TakePhotos_State08.2bpp" ; $73C0, 560 bytes
 ; C: named by the code of Mode02_State00, Mode02_State04, Mode03_State04 (05:49BB 05:4B3C 05:733E); read in the runs
-; by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00 (trace/read_screens_kitty.npz); kind T_UI from
+; by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00 (trace/read_screens_kitty*.npz); kind T_UI from
 ; the evidence of tools/kitty_layout_kinds.py
 Gfx_31_75F0_Mode02_TakePhotos_State00::
     INCBIN "data/bank_31/Gfx_31_75F0_Mode02_TakePhotos_State00.2bpp" ; $75F0, 576 bytes
 ; C: named by the code of Mode00_State01 (05:40E9); read in the runs by Copy_DEtoHL; first read on the screen
-; Mode02_TakePhotos_State00 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; Mode02_TakePhotos_State00 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py
 Gfx_31_7830_Mode00_BootAndTitle_State01::
     INCBIN "data/bank_31/Gfx_31_7830_Mode00_BootAndTitle_State01.2bpp" ; $7830, 336 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode02_TakePhotos_State00
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_7830
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py; the rest of Map_31_7830
 ; after a leftover stretch
 Map_31_7980_Mode02_TakePhotos_State00::
     INCBIN "data/bank_31/Map_31_7980_Mode02_TakePhotos_State00.tilemap" ; $7980, 240 bytes
 ; C: named by the code of Mode01_State00, Mode01_State03 (05:4558 05:46CF); read in the runs by Copy_DEtoHL; first
-; read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty.npz); kind MAP from the evidence of
+; read on the screen Mode01_MainMenu_State02 (trace/read_screens_kitty*.npz); kind MAP from the evidence of
 ; tools/kitty_layout_kinds.py
 Map_31_7A70_Mode01_MainMenu_State00::
     INCBIN "data/bank_31/Map_31_7A70_Mode01_MainMenu_State00.tilemap" ; $7A70, 576 bytes
@@ -365,6 +366,6 @@ Map_31_7A70_Mode01_MainMenu_State00::
 Leftover_31_7CB0::
     INCBIN "data/bank_31/Leftover_31_7CB0.bin" ; $7CB0, 576 bytes
 ; C: read in the runs by MapRows_Copy13, Map_Write5PlusA0Safe, FrameRec_LoadMap; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 Src_31_7EF0_Mode02_TakePhotos_State01::
     INCBIN "data/bank_31/Src_31_7EF0_Mode02_TakePhotos_State01.bin" ; $7EF0, 272 bytes

@@ -991,6 +991,7 @@ Font16x16_Bank09::
     ; padding
     ds $280, $00
 
-; C: read in the runs by Copy_DEtoHL; first read on the screen Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz)
+; C: read in the runs by Copy_DEtoHL; first read on the screen Mode03_ViewAlbum_State0B
+; (trace/read_screens_kitty*.npz)
 Gfx_09_7FC0_Mode03_ViewAlbum_State0B::
     INCBIN "data/bank_09/Gfx_09_7FC0_Mode03_ViewAlbum_State0B.2bpp" ; $7FC0, 64 bytes

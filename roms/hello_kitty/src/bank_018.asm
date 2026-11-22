@@ -5,7 +5,7 @@
 SECTION "ROM Bank $018", ROMX[$4000], BANK[$18]
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State07
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_18_4000_Mode06_Printing_State07::
     INCBIN "data/bank_18/Frame_18_4000_Mode06_Printing_State07.bin" ; $4000, 4480 bytes
 ; C: the last $380 bytes (56 tiles) of print frame block 5 of table 01:687D: the left and right borders of a wild
@@ -73,7 +73,8 @@ Frame_18_5180_WildFrameSides::
     ds $300, $00
 
 ; C: named by the code of Unused_Mode18_State00, Mode1B_State00 (06:4133 07:40A3); read in the runs by
-; Vram_CopyHBlank; kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; Vram_CopyHBlank; first read on the screen Mode06_Printing_State24 (trace/read_screens_kitty*.npz); kind T_UI from
+; the evidence of tools/kitty_layout_kinds.py
 Gfx_18_5800_Unused_Mode18_State00::
     INCBIN "data/bank_18/Gfx_18_5800_Unused_Mode18_State00.bin" ; $5800, 6145 bytes
 ; I: leftover: 4095 bytes (18:7001-7FFF) that no run reads or executes and that no code names (owner rule 2026-11-11)

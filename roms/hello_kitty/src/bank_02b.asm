@@ -5,11 +5,11 @@
 SECTION "ROM Bank $02b", ROMX[$4000], BANK[$2b]
 
 ; C: read in the runs by Copy_Unrolled_B, Vram_CopyHBlank; first read on the screen Mode11_StrawberryChannel_State07
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_2B_4000_Mode11_StrawberryChannel_State07::
     INCBIN "data/bank_2b/Gfx_2B_4000_Mode11_StrawberryChannel_State07.2bpp" ; $4000, 16144 bytes
 ; C: read in the runs by Map_CopyColumnToD810, Vram_CopyHBlank, Print_StreamFromD3F4; first read on the screen
-; Mode0A_NameCard_State01 (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py;
+; Mode0A_NameCard_State01 (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py;
 ; the rest of Data_2B_4000 after a leftover stretch
 Map_2B_7F10_Mode0A_NameCard_State01::
     INCBIN "data/bank_2b/Map_2B_7F10_Mode0A_NameCard_State01.tilemap" ; $7F10, 240 bytes

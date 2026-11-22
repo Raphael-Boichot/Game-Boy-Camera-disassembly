@@ -125,13 +125,13 @@ Mode1B_State00::
     ld b, BANK(Number_DrawTwoDigits)              ; $40F0
     ld hl, Number_DrawTwoDigits                   ; $40F2
     call Far_CallKeepA                            ; $40F5
-    ld de, ObjScript_02_75F0_Object_RunAll        ; $40F8
+    ld de, ObjScript_02_75F0_Mode06_Printing_State24 ; $40F8
     call Object_Create                            ; $40FB
-    ld de, ObjScript_02_7044_PrintGame_ObjCheckLanded + $1C ; $40FE
+    ld de, ObjScript_02_7044_Mode06_Printing_State1F + $1C ; $40FE
     call Object_Create                            ; $4101
-    ld de, ObjScript_02_7345_Object_CreateWithParam ; $4104
+    ld de, ObjScript_02_7345_Mode06_Printing_State24 ; $4104
     call Object_Create                            ; $4107
-    ld de, ObjScript_02_71F2_PrintGame_ObjEndIfNoneLeft ; $410A
+    ld de, ObjScript_02_71F2_Mode06_Printing_State24 ; $410A
     call Object_Create                            ; $410D
     ld b, MODE_PRINTING_APPLE_GAME                ; $4110
     ld c, STATE_1B_PRINTING_CATCH_APPLES_GAME_PRINTER ; $4112
@@ -253,7 +253,7 @@ Mode1C_StateTable::
     dw Mode1C_State01
 
 ; C: read in the runs by FrameCorner_Draw; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 FrameCorner_Draw_Tbl41CE::
     INCBIN "data/bank_07/FrameCorner_Draw_Tbl41CE.bin" ; $41CE, 324 bytes
 ; C: animation channel A of the camera frame: timer $D903 - 1; at 0 the index $D8FF + 1 and the next 5-byte keyframe
@@ -598,7 +598,7 @@ CameraFrame_RunType::
 
 
 ; C: named by the code of CameraFrame_RunType (07:4494); read in the runs by CameraFrame_RunType; first read on the
-; screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 CameraFrame_RunType_JumpTbl449C::
     dw CameraFrame_Type00to03
     dw CameraFrame_Type00to03
@@ -659,7 +659,7 @@ jr_007_44eb:
 
 
 ; C: named by the code of CameraFrame_Type00to03 (07:44E4); read in the runs by CameraFrame_Type00to03; first read on
-; the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 CameraFrame_Type00to03_Tbl4501::
     db $d6, $6c
 
@@ -1003,7 +1003,7 @@ FrameCorner_DrawSet::
 
 
 ; C: named by the code of FrameCorner_DrawSet (07:46F4); read in the runs by FrameCorner_DrawSet; first read on the
-; screen Mode0F_FifteenPuzzle_State00 (trace/read_screens_kitty.npz)
+; screen Mode0F_FifteenPuzzle_State00 (trace/read_screens_kitty*.npz)
 FrameCorner_DrawSet_Tbl470B::
     db $68, $69, $6a, $6b, $4c, $4d, $4e, $4f, $54, $55, $56, $57, $3c, $3d, $3e, $3f
     db $0c, $0d, $0e, $0f
@@ -1181,7 +1181,7 @@ Jump_007_47fe:
 
 
 ; C: read in the runs by Menu07_CursorUpdate; first read on the screen Mode12_SlideShow_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Menu07_CursorUpdate_Tbl4812::
     db $1f, $10, $ff, $ff, $ff, $01, $00, $00, $1f, $27, $ff, $ff, $00, $02, $00, $00
     db $1f, $67, $ff, $ff, $01, $ff
@@ -1212,7 +1212,7 @@ SlideShow_SetInterval::
 
 
 ; C: named by the code of SlideShow_SetInterval (07:489A); read in the runs by SlideShow_SetInterval; first read on
-; the screen Mode12_SlideShow_State02 (trace/read_screens_kitty.npz)
+; the screen Mode12_SlideShow_State02 (trace/read_screens_kitty*.npz)
 SlideShow_SetInterval_Tbl48A5::
     db $5b, $41, $29, $15, $03
 
@@ -1640,7 +1640,7 @@ StrawberryCh_SetCornerTable::
 
 
 ; C: read in the runs by StrawberryCh_PageAddr, StrawberryCh_PickRandomPage; first read on the screen
-; Mode11_StrawberryChannel_State04 (trace/read_screens_kitty.npz)
+; Mode11_StrawberryChannel_State04 (trace/read_screens_kitty*.npz)
 StrawberryCh_PageAddr_Tbl4E70::
     db $15, $6f, $15, $6f, $15, $6f, $15, $6f, $15, $6f, $15, $6f, $15, $6f, $15, $6f
     db $7f, $6f, $7f, $6f, $7f, $6f, $7f, $6f, $7f, $6f, $7f, $6f, $7f, $6f, $7f, $6f
@@ -1698,7 +1698,7 @@ StrawberryCh_PageAddr::
 
 
 ; C: named by the code of StrawberryCh_CheckAfford (07:4F50); read in the runs by StrawberryCh_CheckAfford; first read
-; on the screen Mode11_StrawberryChannel_State04 (trace/read_screens_kitty.npz)
+; on the screen Mode11_StrawberryChannel_State04 (trace/read_screens_kitty*.npz)
 StrawberryCh_CheckAfford_Tbl4F3A::
     db $50, $00, $00, $08, $00, $01, $00, $04, $00, $02, $00, $20, $00, $00
 
@@ -1879,7 +1879,7 @@ StrawberryCh_StartMusic::
     call JumpTable_Inline                         ; $5094
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode11_StrawberryChannel_State04
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 StrawberryCh_StartMusic_JumpTbl5097::
     dw StrawberryCh_Music0
     dw StrawberryCh_Music1
@@ -2709,7 +2709,7 @@ jr_007_55de:
 
 
 ; C: named by the code of Puzzle15_DrawCell (07:55D3); read in the runs by Puzzle15_DrawCell; first read on the screen
-; Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz)
+; Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz)
 Puzzle15_DrawCell_Tbl55FB::
     INCBIN "data/bank_07/Puzzle15_DrawCell_Tbl55FB.bin" ; $55FB, 480 bytes
 ; I: leftover: 32 bytes (07:57DB-57FA) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -2718,7 +2718,7 @@ Leftover_07_57DB::
     db $c0, $cd, $00, $cf, $d0, $cd, $10, $cf, $e0, $cd, $30, $cf, $f0, $cd, $80, $cf
 
 ; C: named by the code of Puzzle15_PosRecord (07:582E); read in the runs by Puzzle15_PosRecord; first read on the
-; screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz)
+; screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz)
 Puzzle15_PosRecord_Tbl57FB::
     db $f0, $48, $f8, $48, $f8, $48, $04, $49, $0c, $49, $e0, $48, $e0, $48, $18, $49
     db $0c, $49, $e0, $48, $e0, $48, $18, $49, $24, $49, $2c, $49, $2c, $49, $38, $49
@@ -2745,7 +2745,7 @@ Puzzle15_PosRecord::
 
 
 ; C: named by the code of Puzzle15_ScreenPosAddrPrev (07:5877); read in the runs by Puzzle15_CursorToCell; first read
-; on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz)
+; on the screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz)
 Puzzle15_ScreenPosAddrPrev_Tbl583B::
     db $20, $18, $40, $18, $60, $18, $80, $18, $20, $38, $40, $38, $60, $38, $80, $38
     db $20, $58, $40, $58, $60, $58, $80, $58, $20, $78, $40, $78, $60, $78, $80, $78
@@ -2808,7 +2808,7 @@ Puzzle15_ScreenPosPrev::
 
 ; C: named by the code of Puzzle15_MapAddrPrev, Puzzle15_DrawBoard, Puzzle15_EmptyCellMapAddr (07:58ED 07:5957
 ; 07:5982); read in the runs by Puzzle15_SetMapPtrPrev; first read on the screen Mode0F_FifteenPuzzle_State05
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Puzzle15_MapAddrPrev_Tbl58B1::
     db $22, $00, $26, $00, $2a, $00, $2e, $00, $a2, $00, $a6, $00, $aa, $00, $ae, $00
     db $22, $01, $26, $01, $2a, $01, $2e, $01, $a2, $01, $a6, $01, $aa, $01, $ae, $01
@@ -2966,7 +2966,7 @@ Puzzle15_ScriptedKey::
 
 
 ; C: named by the code of Puzzle15_ScriptedKey (07:599B); read in the runs by Puzzle15_ScriptedKey; first read on the
-; screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty.npz)
+; screen Mode0F_FifteenPuzzle_State05 (trace/read_screens_kitty*.npz)
 Puzzle15_ScriptedKey_Tbl59AF::
     db $80, $80, $80, $10, $40, $40, $40, $10, $80, $80, $80, $10, $40, $40, $40
 
@@ -3084,7 +3084,7 @@ Puzzle15_DispatchA::
     call JumpTable_Inline                         ; $5AB5
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0F_FifteenPuzzle_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Puzzle15_DispatchA_JumpTbl5AB8::
     dw Mode0F_State02
     dw Mode0F_State03
@@ -3097,7 +3097,7 @@ Puzzle15_DispatchB::
     call JumpTable_Inline                         ; $5AC1
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0F_FifteenPuzzle_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Puzzle15_DispatchB_JumpTbl5AC4::
     dw Puzzle15_LoadPicture
     dw Puzzle15_InitScreen
@@ -3184,7 +3184,7 @@ Mode0F_State00::
     call JumpTable_Inline                         ; $5B7A
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0F_FifteenPuzzle_State05
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode0F_State00_JumpTbl5B7D::
     dw Puzzle15_FadeToState05
     dw Puzzle15_FadeToState05
@@ -3361,7 +3361,7 @@ Mode0F_State08::
     call JumpTable_Inline                         ; $5CAB
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0F_FifteenPuzzle_State0A
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode0F_State08_JumpTbl5CAE::
     dw Puzzle15_SetState0A
     dw Puzzle15_SetState0B
@@ -3784,7 +3784,7 @@ Scratch_PrizeTableB::
     db $21, $31, $5f, $c9
 
 ; C: named by the code of Scratch_PrizeTable (07:5F0F); read in the runs by Scratch_DealSpots, Scratch_PickCardArt;
-; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty.npz)
+; first read on the screen Mode10_ScratchCard_State02 (trace/read_screens_kitty*.npz)
 Scratch_PrizeTable_Tbl5F21::
     db $10, $10, $10, $10, $10, $10, $10, $11, $11, $11, $11, $11, $12, $12, $12, $13
     db $10, $10, $10, $10, $10, $10, $10, $11, $11, $11, $11, $12, $12, $13, $14, $14
@@ -3992,7 +3992,7 @@ Mode10_State00::
     call Far_Call                                 ; $60E0
     jr nc, jr_007_60eb                            ; $60E3
 
-    ld de, ObjScript_02_5702_Object_CreateWithParam ; $60E5
+    ld de, ObjScript_02_5702_Mode10_ScratchCard_State02 ; $60E5
     call Object_Create                            ; $60E8
 
 jr_007_60eb:
@@ -4056,7 +4056,7 @@ Mode10_State01::
     call Far_Call                                 ; $616D
     jr nc, jr_007_6178                            ; $6170
 
-    ld de, ObjScript_02_5702_Object_CreateWithParam ; $6172
+    ld de, ObjScript_02_5702_Mode10_ScratchCard_State02 ; $6172
     call Object_Create                            ; $6175
 
 jr_007_6178:
@@ -4177,7 +4177,7 @@ jr_007_6209:
 
 
 ; C: named by the code of Mode10_State03 (07:61D3); read in the runs by Mode10_State03; first read on the screen
-; Mode10_ScratchCard_State03 (trace/read_screens_kitty.npz)
+; Mode10_ScratchCard_State03 (trace/read_screens_kitty*.npz)
 Mode10_State03_Tbl623A::
     db $20, $00, $40, $00, $60, $00, $00, $01
 
@@ -4226,7 +4226,7 @@ Scratch_PrizeWord::
 
 
 ; C: named by the code of Scratch_PrizeWord (07:6267); read in the runs by Scratch_PrizeWord; first read on the screen
-; Mode10_ScratchCard_State03 (trace/read_screens_kitty.npz)
+; Mode10_ScratchCard_State03 (trace/read_screens_kitty*.npz)
 Scratch_PrizeWord_Tbl626F::
     db $10, $08, $40, $08, $70, $08, $10, $50, $40, $50, $70, $50
 
@@ -4526,7 +4526,7 @@ KittHost_NextTextByte::
 
 
 ; C: named by the code of Mode0E_State00 (07:67A8); read in the runs by KittHost_NextTextByte, KittHost_TextStep;
-; first read on the screen Mode0E_KittGamesHost_State03 (trace/read_screens_kitty.npz)
+; first read on the screen Mode0E_KittGamesHost_State03 (trace/read_screens_kitty*.npz)
 Mode0E_State00_Tbl668C::
     db $d2, $62, $ed, $62, $05, $63, $16, $63, $35, $63, $51, $63, $62, $63
     dw KittHost_TextStep_Tbl637F
@@ -4722,7 +4722,7 @@ Mode0E_State07::
     call JumpTable_Inline                         ; $686E
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0E_KittGamesHost_State08
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode0E_State07_JumpTbl6871::
     dw KittHost_PayPuzzle
     dw KittHost_Text1C
@@ -4924,7 +4924,7 @@ Mode0E_State11::
     call JumpTable_Inline                         ; $698D
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0E_KittGamesHost_State03
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode0E_State11_JumpTbl6990::
     dw KittHost_Text1C_B
     dw KittHost_StartPuzzle
@@ -5069,7 +5069,7 @@ Mode0E_State13::
     call JumpTable_Inline                         ; $6A5F
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0E_KittGamesHost_State14
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode0E_State13_JumpTbl6A62::
     dw KittHost_PayScratch
     dw KittHost_Text10
@@ -5203,7 +5203,7 @@ Mode0E_State20::
     call JumpTable_Inline                         ; $6B1E
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode0E_KittGamesHost_State03
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode0E_State20_JumpTbl6B21::
     dw KittHost_Text10_B
     dw KittHost_StartScratch

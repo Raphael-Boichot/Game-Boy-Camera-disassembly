@@ -152,7 +152,7 @@ d949,3,wKittsCheckTmp,*,C,Kitts_CheckAfford copies the Kitt counter here and sub
 d94c,1,wPrintGame_SaveKittyPos_D94C,*,I,"touched by PrintGame_SaveKittyPos (3), Objects_DrawAll (1), PrintGame_ObjRandomStart (1)"
 d94d,1,wPrintGame_ObjCheckCatch_D94D,*,I,"touched by PrintGame_ObjCheckCatch (1), PrintGame_SaveKittyPos (1), Obj_SetD94D (1)"
 d94e,1,wPrintGame_ObjCheckCatch_D94E,*,I,"touched by PrintGame_ObjCheckCatch (1), PrintGame_SaveKittyPos (1), Obj_SetD94D (1)"
-d94f,1,wMode06_State23_D94F,*,I,"touched by Mode06_State23 (2), ObjScript_02_7044_PrintGame_ObjCheckLanded (2), PrintGame_ShowResult (2)"
+d94f,1,wMode06_State23_D94F,*,I,"touched by Mode06_State23 (2), ObjScript_02_7044_Mode06_Printing_State1F (2), PrintGame_ShowResult (2)"
 d950,1,wMode06_State10_D950,*,I,"touched by Mode06_State10 (1), Mode06_State11 (1), Mode06_State12 (1)"
 d951,1,wMode06_State10_D951,*,I,"touched by Mode06_State10 (1), Mode06_State11 (1), Mode06_State12 (1)"
 d952,5,wScratch_CursorUpdate_D952,*,I,"touched by Scratch_CursorUpdate (1), Scratch_ClearSpots (1), Scratch_HasPrize3 (1)"
@@ -472,7 +472,7 @@ ffe9,1,hScriptCmd_Loop_FFE9,*,I,"touched by ScriptCmd_Loop (2), Script_LoadCount
 ffea,1,hRecordBook_GetReceivedX11_FFEA,*,I,"touched by RecordBook_GetReceivedX11 (5), Menu_ScriptOnItemChange (1), NameCard_ScriptStartRight (1)"
 ffeb,1,hRecordBook_CountHundreds_FFEB,*,I,"touched by RecordBook_CountHundreds (3), NameCard_ScriptStartRight (1), NameCard_ScriptDrawStep (1)"
 ffec,1,hScriptCmd_AddEC_FFEC,*,I,"touched by ScriptCmd_AddEC (2), RecordBook_VineFrame (1)"
-fff0,3,hStamp_ObjPlaceOnStart_FFF0,*,I,"touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), ObjScript_02_7044_PrintGame_ObjCheckLanded (1)"
+fff0,3,hStamp_ObjPlaceOnStart_FFF0,*,I,"touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), ObjScript_02_7044_Mode06_Printing_State1F (1)"
 fff3,5,hSfx3_Step_07_FFF3,*,I,touched by Sfx3_Step_07 (1)
 fff8,2,hScratch_ObjPlace_FFF8,*,I,"touched by Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1), PrintGame_SpeedFromKeys (1)"
 fffa,4,hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA,*,I,"touched by Gfx_00_1DAB_Mode12_SlideShow_State00 (1), Stamp_CursorUpdate (1), AlbumText_CursorUpdate (1)"

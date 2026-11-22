@@ -1546,7 +1546,7 @@ Mode02_State07::
 
 ; C: named by the code of Mode02_State01, TakePhotos_FrameCallback3 (05:4A82 05:5136); read in the runs by
 ; TakePhotos_FrameCallback3, Mode02_State01; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Mode02_State01_Tbl4C5F::
     db $08, $ff, $ff, $ff, $07, $ff, $ff, $ff, $06, $ff, $ff, $ff, $05, $ff, $ff, $ff
     db $03, $ff, $ff, $ff, $04, $ff, $ff, $ff, $01, $ff, $ff, $ff, $02, $ff, $ff, $ff
@@ -1632,7 +1632,7 @@ Unused_Mode02_State0C::
 
 
 ; C: named by the code of TakePhotos_LoadFrameTiles (05:4DD4); read in the runs by TakePhotos_LoadFrameTiles; first
-; read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 TakePhotos_LoadFrameTiles_Tbl4D21::
     db $00, $40, $10, $00, $01, $00, $00, $00, $00, $41, $10, $00, $01, $00, $00, $00
     db $00, $42, $10, $00, $01, $00, $00, $00, $00, $43, $10, $00, $01, $00, $00, $00
@@ -1704,7 +1704,7 @@ jr_005_4e06:
 
 
 ; C: named by the code of TakePhotos_PlaceFrameObjects (05:4EC2); read in the runs by TakePhotos_PlaceFrameObjects;
-; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 TakePhotos_PlaceFrameObjects_Tbl4E10::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
@@ -3459,7 +3459,7 @@ Jump_005_59e1:
 
 
 ; C: named by the code of Stamp_CursorUpdate (05:58FE); read in the runs by Blit_MakePatchEntry, Stamp_CursorUpdate;
-; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz)
+; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz)
 Stamp_CursorUpdate_Tbl5A14::
     INCBIN "data/bank_05/Stamp_CursorUpdate_Tbl5A14.bin" ; $5A14, 1094 bytes
 ; C: $D9F1-$D9F5 from the stamp position and size ($D9AB-$D9AE) and the buffer $C3C0, before Stamp_BlitOnPhoto; runs
@@ -3666,7 +3666,7 @@ jr_005_5f80:
 
 
 ; C: named by the code of Stamp_SetShiftMasks (05:5F37); read in the runs by Stamp_SetShiftMasks; first read on the
-; screen Mode05_StampWindow_State06 (trace/read_screens_kitty.npz)
+; screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz)
 Stamp_SetShiftMasks_Tbl5F86::
     db $ff, $7f, $3f, $1f, $0f, $07, $03, $01, $ff, $80, $c0, $e0, $f0, $f8, $fc, $fe
 
@@ -5065,7 +5065,7 @@ TakePhotos_DrawRowsRightWin::
 
 
 ; C: read in the runs by Map_Write5PlusA0Safe, FrameRec_LoadMap, FrameRec_LoadTiles; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 Src_05_68D7_Mode02_TakePhotos_State01::
     INCBIN "data/bank_05/Src_05_68D7_Mode02_TakePhotos_State01.bin" ; $68D7, 422 bytes
 ; I: leftover: 48 bytes (05:6A7D-6AAC) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -5075,7 +5075,7 @@ Leftover_05_6A7D::
     db $1d, $c8, $7d, $33, $e0, $7f, $1d, $b8, $7c, $33, $e0, $7f, $1d, $b8, $7c, $33
 
 ; C: read in the runs by FrameRec_LoadTiles, FrameRec_LoadMap; first read on the screen Mode02_TakePhotos_State09
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 FrameRec_LoadTiles_Tbl6AAD::
     db $20, $7e, $10, $60, $7e, $35
 
@@ -5083,7 +5083,7 @@ FrameRec_LoadTiles_Tbl6AAD::
     db $7b, $35
 
 ; C: read in the runs by FrameRec_LoadMap, FrameRec_LoadTiles, FrameRec_LoadTilesScreenOff; first read on the screen
-; Mode02_TakePhotos_State01 (trace/read_screens_kitty.npz)
+; Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 FrameRec_LoadMap_Tbl6AC5::
     db $30, $6f, $2f, $a8, $7a, $35, $10, $7b, $27, $b8, $7b, $35, $b0, $76, $2f, $c8
     db $7c, $35, $f0, $5f, $2f, $40, $7c, $35, $10, $62, $31, $30, $7c, $33, $e0, $7f
@@ -6470,7 +6470,7 @@ Mode03_State0E::
 
 
 ; C: named by the code of Mode03_State0E (05:74DA); read in the runs by Mode03_State0E; first read on the screen
-; Mode03_ViewAlbum_State0F (trace/read_screens_kitty.npz)
+; Mode03_ViewAlbum_State0F (trace/read_screens_kitty*.npz)
 Mode03_State0E_Tbl74EE::
     db $3f, $58, $64, $58, $89, $58, $ae, $58
 

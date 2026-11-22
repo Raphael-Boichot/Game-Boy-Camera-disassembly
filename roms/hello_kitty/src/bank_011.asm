@@ -5,7 +5,7 @@
 SECTION "ROM Bank $011", ROMX[$4000], BANK[$11]
 
 ; C: read in the runs by Vram_CopyHBlank, Copy_FarInverted; first read on the screen Mode0B_NameCardEdit_State08
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_11_4000_Mode0B_NameCardEdit_State08::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $20, $20, $fc, $fc, $28, $28
     db $38, $38, $6c, $6c, $aa, $aa, $aa, $aa, $b2, $b2, $54, $54, $00, $00, $00, $00
@@ -502,7 +502,7 @@ Gfx_11_4000_Mode0B_NameCardEdit_State08::
     ds $140, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode0B_NameCardEdit_State10
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_11_5FE0_Mode0B_NameCardEdit_State10::
     INCBIN "data/bank_11/Src_11_5FE0_Mode0B_NameCardEdit_State10.bin" ; $5FE0, 32 bytes
 ; I: record 0 of the table 00:249D that Photo_LoadEmptyPicture (00:24A6) reads ({$6000, $11}: $800 bytes of tiles for

@@ -5,11 +5,11 @@
 SECTION "ROM Bank $038", ROMX[$4000], BANK[$38]
 
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode11_StrawberryChannel_State04
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_38_4000_Mode11_StrawberryChannel_State04::
     INCBIN "data/bank_38/Gfx_38_4000_Mode11_StrawberryChannel_State04.2bpp" ; $4000, 3584 bytes
 ; C: read in the runs by Copy_Unrolled_B; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py; the rest of
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py; the rest of
 ; Data_38_4000 after a leftover stretch
 Frame_38_4E00_Mode02_TakePhotos_State01::
     db $88, $00, $00, $00, $00, $00, $00, $00, $88, $00, $00, $00, $00, $00, $00, $00

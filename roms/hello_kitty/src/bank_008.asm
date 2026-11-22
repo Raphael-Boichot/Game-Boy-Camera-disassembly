@@ -6,7 +6,7 @@ SECTION "ROM Bank $008", ROMX[$4000], BANK[$8]
 
 ; C: the same 32 bytes as the Japanese Sgb_MltReqPackets (0B:4000); named by the code of Sgb_Detect, Sram_Format
 ; (01:4974 08:6C7D 08:6C8C); read in the runs by Sgb_SendPacket; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Sgb_MltReqPackets::
     db $89, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $89, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00

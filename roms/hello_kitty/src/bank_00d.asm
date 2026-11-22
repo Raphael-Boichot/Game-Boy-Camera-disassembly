@@ -5,7 +5,7 @@
 SECTION "ROM Bank $00d", ROMX[$4000], BANK[$d]
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4000_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $03, $03, $04, $07, $08, $0f, $08, $0f
     db $00, $00, $00, $00, $00, $00, $00, $00, $f0, $f0, $08, $f8, $08, $f8, $e8, $f8
@@ -24,7 +24,7 @@ Gfx_0D_4000_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4100_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -43,7 +43,7 @@ Gfx_0D_4100_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4200_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $07, $06, $08, $09, $19, $08
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $01, $00, $9c, $9f, $73, $ff
@@ -62,7 +62,7 @@ Gfx_0D_4200_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4300_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -81,7 +81,7 @@ Gfx_0D_4300_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4400_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $20, $30
@@ -100,7 +100,7 @@ Gfx_0D_4400_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4500_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $e0, $40
@@ -119,7 +119,7 @@ Gfx_0D_4500_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode03_ViewAlbum_State02
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4600_Mode03_ViewAlbum_State02::
     db $ff, $ff, $ff, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c3, $ff, $c7, $fc
     db $ff, $ff, $ff, $ff, $03, $ff, $0d, $fe, $17, $f8, $2f, $f0, $3f, $e0, $5f, $e0
@@ -138,7 +138,7 @@ Gfx_0D_4600_Mode03_ViewAlbum_State02::
     ds $40, $00
 
 ; C: named by the code of Album_LoadTilesBank0D (05:6EF2); read in the runs by Vram_CopyHBlank; first read on the
-; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_0D_4700_Album_LoadTilesBank0D::
     db $ff, $ff, $ff, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff
@@ -158,7 +158,7 @@ Gfx_0D_4700_Album_LoadTilesBank0D::
     ds $40, $00
 
 ; C: named by the code of Album_LoadTilesBank0D (05:6EFD); read in the runs by Vram_CopyHBlank; first read on the
-; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_0D_4800_Album_LoadTilesBank0D::
     db $ff, $ff, $ff, $ff, $cf, $ff, $d8, $f7, $df, $f4, $ff, $f4, $ff, $d4, $fc, $d7
@@ -178,7 +178,7 @@ Gfx_0D_4800_Album_LoadTilesBank0D::
     ds $40, $00
 
 ; C: named by the code of Album_LoadTilesBank0D (05:6F08); read in the runs by Vram_CopyHBlank; first read on the
-; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_0D_4900_Album_LoadTilesBank0D::
     db $ff, $ff, $ff, $ff, $c0, $ff, $c0, $ff, $df, $ff, $df, $f0, $d8, $f7, $db, $f4
@@ -198,7 +198,7 @@ Gfx_0D_4900_Album_LoadTilesBank0D::
     ds $40, $00
 
 ; C: named by the code of Album_LoadTilesBank0D (05:6F16); read in the runs by Vram_CopyHBlank; first read on the
-; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_0D_4A00_Album_LoadTilesBank0D::
     db $ff, $ff, $ff, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c1, $ff
@@ -218,7 +218,7 @@ Gfx_0D_4A00_Album_LoadTilesBank0D::
     ds $40, $00
 
 ; C: named by the code of Album_LoadTilesBank0D (05:6F21); read in the runs by Vram_CopyHBlank; first read on the
-; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; screen Mode03_ViewAlbum_State02 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_0D_4B00_Album_LoadTilesBank0D::
     db $ff, $ff, $ff, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff, $c0, $ff
@@ -238,7 +238,7 @@ Gfx_0D_4B00_Album_LoadTilesBank0D::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4C00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $03, $02
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $5d, $33, $7f, $7f
@@ -257,7 +257,7 @@ Gfx_0D_4C00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4D00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $1c, $1c
@@ -276,7 +276,7 @@ Gfx_0D_4D00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4E00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -295,7 +295,7 @@ Gfx_0D_4E00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_4F00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $04, $0c
@@ -314,7 +314,7 @@ Gfx_0D_4F00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5000_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $0e, $04
@@ -333,7 +333,7 @@ Gfx_0D_5000_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5100_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $03, $00, $03, $03
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $ba, $cc, $fe, $fe
@@ -352,7 +352,7 @@ Gfx_0D_5100_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5200_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $1c, $1c
@@ -371,7 +371,7 @@ Gfx_0D_5200_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5300_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $30, $30, $30, $30
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00, $00, $00
@@ -390,7 +390,7 @@ Gfx_0D_5300_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5400_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Gfx_0D_5400_Mode05_StampWindow_State06.bin" ; $5400, 255 bytes
 ; I: leftover: 2049 bytes (0D:54FF-5CFF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -534,7 +534,7 @@ Leftover_0D_54FF::
     ds $20, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5D00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $30, $30, $30, $30
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00, $e0, $40
@@ -553,7 +553,7 @@ Gfx_0D_5D00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5E00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $30, $30, $33, $32
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $5d, $33, $7f, $7f
@@ -572,7 +572,7 @@ Gfx_0D_5E00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_5F00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $30, $30, $30, $30
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00, $00, $00
@@ -595,7 +595,7 @@ Gfx_0D_5F00_Mode05_StampWindow_State06::
 Gfx_0D_6000_Mode03_ViewAlbum_State0A::
     INCBIN "data/bank_0d/Gfx_0D_6000_Mode03_ViewAlbum_State0A.2bpp" ; $6000, 1024 bytes
 ; C: named by the code of Mode03_State0A, Print_LoadFrameGfx (05:6645 01:6986); read in the runs by Copy_DEtoHL; first
-; read on the screen Mode03_ViewAlbum_State0B (trace/read_screens_kitty.npz); kind T_UI from the evidence of
+; read on the screen Mode03_ViewAlbum_State0B (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
 ; tools/kitty_layout_kinds.py
 Gfx_0D_6400_Mode03_ViewAlbum_State0A::
     db $06, $0e, $1b, $1f, $19, $30, $60, $30, $00, $60, $e0, $40, $40, $c0, $c0, $c0
@@ -673,7 +673,7 @@ Gfx_0D_6400_Mode03_ViewAlbum_State0A::
     ds $a0, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_6900_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $30, $30, $30, $30
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00, $04, $0c
@@ -692,7 +692,7 @@ Gfx_0D_6900_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_6A00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $30, $30, $30, $30
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $00, $00, $0e, $04
@@ -711,7 +711,7 @@ Gfx_0D_6A00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_6B00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $3f, $3f, $3f, $3f, $30, $30, $33, $30, $33, $33
     db $00, $00, $00, $00, $00, $00, $ff, $ff, $ff, $ff, $00, $00, $ba, $cc, $fe, $fe
@@ -730,23 +730,23 @@ Gfx_0D_6B00_Mode05_StampWindow_State06::
     ds $40, $00
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_6C00_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_6C00_Mode05_StampWindow_State06.bin" ; $6C00, 736 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_6EE0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_6EE0_Mode05_StampWindow_State06.bin" ; $6EE0, 224 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_6FC0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_6FC0_Mode05_StampWindow_State06.bin" ; $6FC0, 96 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7020_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7020_Mode05_StampWindow_State06.bin" ; $7020, 544 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7240_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7240_Mode05_StampWindow_State06.bin" ; $7240, 64 bytes
 ; I: leftover: 64 bytes (0D:7280-72BF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -757,7 +757,7 @@ Leftover_0D_7280::
     db $f0, $f0, $f0, $f0, $f0, $f0, $f0, $f8, $0f, $0f, $0f, $0f, $0f, $0f, $0f, $1f
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_72C0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_72C0_Mode05_StampWindow_State06.bin" ; $72C0, 32 bytes
 ; I: leftover: 96 bytes (0D:72E0-733F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -770,11 +770,11 @@ Leftover_0D_72E0::
     db $00, $00, $00, $00, $00, $00, $00, $00, $3f, $1f, $0f, $07, $03, $01, $00, $00
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7340_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7340_Mode05_StampWindow_State06.bin" ; $7340, 128 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_73C0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_73C0_Mode05_StampWindow_State06.bin" ; $73C0, 32 bytes
 ; I: leftover: 128 bytes (0D:73E0-745F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -803,7 +803,7 @@ Leftover_0D_7483::
     db $f3, $ff, $ff, $ff, $ff, $7f, $ff, $ff, $ff, $ff, $ff, $ff, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7500_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7500_Mode05_StampWindow_State06.bin" ; $7500, 320 bytes
 ; C: read in the runs by Copy_DEtoHL
@@ -817,7 +817,7 @@ Leftover_0D_7666::
     db $ff, $ff, $7f, $ff, $ff, $ff, $ff, $ff, $ff, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_76A0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_76A0_Mode05_StampWindow_State06.bin" ; $76A0, 101 bytes
 ; I: leftover: 59 bytes (0D:7705-773F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -828,11 +828,11 @@ Leftover_0D_7705::
     db $ff, $ff, $ff, $3f, $7f, $ff, $ff, $ff, $ff, $ff, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7740_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7740_Mode05_StampWindow_State06.bin" ; $7740, 160 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_77E0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_77E0_Mode05_StampWindow_State06.bin" ; $77E0, 67 bytes
 ; I: leftover: 61 bytes (0D:7823-785F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -843,19 +843,19 @@ Leftover_0D_7823::
     db $fc, $ff, $ff, $ff, $ff, $0f, $0f, $1f, $3f, $ff, $ff, $ff, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7860_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7860_Mode05_StampWindow_State06.bin" ; $7860, 96 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_78C0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_78C0_Mode05_StampWindow_State06.bin" ; $78C0, 96 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7920_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7920_Mode05_StampWindow_State06.bin" ; $7920, 160 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_79C0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_79C0_Mode05_StampWindow_State06.bin" ; $79C0, 32 bytes
 ; I: leftover: 32 bytes (0D:79E0-79FF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -864,7 +864,7 @@ Leftover_0D_79E0::
     db $80, $80, $80, $80, $80, $80, $80, $ff, $01, $01, $01, $01, $01, $01, $01, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7A00_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7A00_Mode05_StampWindow_State06.bin" ; $7A00, 32 bytes
 ; I: leftover: 64 bytes (0D:7A20-7A5F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -875,7 +875,7 @@ Leftover_0D_7A20::
     db $80, $80, $80, $80, $80, $80, $80, $ff, $01, $01, $01, $01, $01, $01, $01, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7A60_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7A60_Mode05_StampWindow_State06.bin" ; $7A60, 32 bytes
 ; I: leftover: 96 bytes (0D:7A80-7ADF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -888,7 +888,7 @@ Leftover_0D_7A80::
     db $c0, $c0, $e0, $f0, $f8, $fc, $ff, $ff, $01, $01, $01, $01, $01, $03, $07, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7AE0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7AE0_Mode05_StampWindow_State06.bin" ; $7AE0, 129 bytes
 ; I: leftover: 63 bytes (0D:7B61-7B9F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -899,19 +899,19 @@ Leftover_0D_7B61::
     db $f8, $f1, $e3, $c7, $cf, $ff, $ff, $3f, $1f, $8f, $c7, $e3, $f3, $ff, $ff
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7BA0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7BA0_Mode05_StampWindow_State06.bin" ; $7BA0, 96 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7C00_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7C00_Mode05_StampWindow_State06.bin" ; $7C00, 224 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7CE0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7CE0_Mode05_StampWindow_State06.bin" ; $7CE0, 160 bytes
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_7D80_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Gfx_0D_7D80_Mode05_StampWindow_State06.2bpp" ; $7D80, 224 bytes
 ; I: leftover: 32 bytes (0D:7E60-7E7F) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -920,7 +920,7 @@ Leftover_0D_7E60::
     db $ef, $f7, $fb, $fd, $fe, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $7f, $9f, $e7, $f8
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_0D_7E80_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Src_0D_7E80_Mode05_StampWindow_State06.bin" ; $7E80, 32 bytes
 ; I: leftover: 32 bytes (0D:7EA0-7EBF) that no run reads or executes and that no code names (owner rule 2026-11-11)
@@ -929,6 +929,6 @@ Leftover_0D_7EA0::
     db $7f, $bf, $bf, $bf, $df, $ef, $f1, $fe, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $00
 
 ; C: read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_0D_7EC0_Mode05_StampWindow_State06::
     INCBIN "data/bank_0d/Gfx_0D_7EC0_Mode05_StampWindow_State06.2bpp" ; $7EC0, 320 bytes

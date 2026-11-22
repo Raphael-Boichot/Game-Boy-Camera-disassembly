@@ -53,7 +53,12 @@ def run(names, D, rom, jp, T, put):
                 for x_ in range(o_, e_ + 1): org[x_] = True; bgbr[x_] = r['scenario']
     read = org | frc
     disp = np.load(tr + 'display_kitty.npz'); dt, dm = disp['tiles'] > 0, disp['map'] > 0
-    rs = np.load(tr + 'read_screens_kitty.npz') if os.path.exists(tr + 'read_screens_kitty.npz') else None
+    rs = None                                       # the first-read screens: the novelty search first, then the targeted runs (2026-11-22: the linked
+    for f_ in [tr + 'read_screens_kitty.npz'] + sorted(glob.glob(tr + 'read_screens_kitty_*.npz')):   # cores, the rare runs); the first file with a value wins
+        if not os.path.exists(f_): continue
+        z_ = np.load(f_)
+        if rs is None: rs = {'first': z_['first'].copy(), 'next': z_['next'].copy()}
+        else: m_ = rs['next'] == 0xFFFF; rs['next'][m_] = z_['next'][m_]; rs['first'][m_] = z_['first'][m_]
     import kitty_layout_kinds                       # the kind evidence of every byte (display tracker, loaders, copy sites, readers)
     KIND, EVK, _c = kitty_layout_kinds.evidence(rom, tr + 'display_kitty.npz', os.path.dirname(os.path.dirname(D)))
     ovk = np.array(['', 'T_UI', 'MAP', 'SOUND', 'OAM', 'T_FRM', 'PALT', 'TBL'])[KIND]
@@ -189,7 +194,7 @@ def run(names, D, rom, jp, T, put):
         ev = []
         if ref: ev.append('named by the code of %s (%s)' % (', '.join(ref[:3]), ' '.join(hx(x) for x in refs[o][:3])))
         if rd: ev.append('read in the runs by %s' % ', '.join(n for n, _ in rd.most_common(3)))
-        if scr: ev.append('first read on the screen %s (trace/read_screens_kitty.npz)' % scr)
+        if scr: ev.append('first read on the screen %s (trace/read_screens_kitty*.npz)' % scr)
         bh = sorted({bgbr[x] for x in bgbr if o <= x < e})
         if bh: ev.append('read in BGB by a read watchpoint (trace/bgb_reads_kitty.csv: %s)' % ', '.join(bh))
         jn = None

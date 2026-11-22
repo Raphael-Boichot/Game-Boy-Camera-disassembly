@@ -5,7 +5,7 @@
 SECTION "ROM Bank $000", ROM0[$0]
 
 ; C: read in the runs by Snd_Trk_LoadFirstPattern; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind SOUND from the evidence of tools/kitty_layout_kinds.py
 Snd_00_0000_Mode00_BootAndTitle_State00::
     db $f3, $c3, $00, $01, $00, $00, $00, $00
 
@@ -50,7 +50,7 @@ RST_20::
 
 
 ; C: read in the runs by Album_CursorUpdate; first read on the screen Mode03_ViewAlbum_State02
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Album_CursorUpdate_Tbl0024::
     db $00, $00, $00, $00
 
@@ -796,7 +796,7 @@ jr_000_043c:
 
 
 ; C: the same 54 bytes as the Japanese Rng_InitOrder (00:0977); read in the runs by Rng_Init; first read on the screen
-; Mode00_BootAndTitle_State00 (trace/read_screens_kitty.npz)
+; Mode00_BootAndTitle_State00 (trace/read_screens_kitty*.npz)
 Rng_InitOrder::
     db $14, $29, $07, $1c, $31, $0f, $24, $02, $17, $2c, $0a, $1f, $34, $12, $27, $05
     db $1a, $2f, $0d, $22, $00, $15, $2a, $08, $1d, $32, $10, $25, $03, $18, $2d, $0b
@@ -936,7 +936,7 @@ Rng_Scaled::
 
     db $00
 
-; C: read in the runs by Rng_Scaled; first read on the screen Mode12_SlideShow_State02 (trace/read_screens_kitty.npz)
+; C: read in the runs by Rng_Scaled; first read on the screen Mode12_SlideShow_State02 (trace/read_screens_kitty*.npz)
 Rng_Scaled_Tbl052D::
     db $08, $10, $18, $20, $28, $30, $38, $40
 
@@ -2182,7 +2182,7 @@ jr_000_0bde:
 
 ; C: named by the code of NameCard_LoadBackgroundTiles (06:55F8); read in the runs by NameCard_LoadBackgroundTiles,
 ; Map_CopyColumnToD810, Mode0A_State00; first read on the screen Mode0A_NameCard_State03
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_00_0BF9_NameCard_LoadBackgroundTiles::
     INCBIN "data/bank_00/Src_00_0BF9_NameCard_LoadBackgroundTiles.bin" ; $0BF9, 42 bytes
 ; C: HL = A x C (B = 0)
@@ -2368,7 +2368,7 @@ ModeTable::
     dwb Mode1D_BackToMainMenu1D
 
 ; C: read in the runs by FarJumpTable_ByA; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 FarJumpTable_ByA_Tbl0D5A::
     dwb Mode1E_ScreenFade
 
@@ -2845,7 +2845,7 @@ Prn_QueuePacket::
 
 ; C: the same 38 bytes as the Japanese Prn_SyncBytes (00:1B71); named by the code of Prn_StartTransmit,
 ; Prn_SendSyncByte (00:1124 00:1173); read in the runs by Prn_SendPacketByte, Mem_Copy, Prn_StartTransmit; first read
-; on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty.npz)
+; on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty*.npz)
 Prn_SyncBytes::
     db $88, $33, $01, $00, $00, $00, $01, $00, $00, $00, $02, $00, $04, $00, $04, $00
     db $00, $00, $04, $00, $00, $00, $08, $00, $00, $00, $08, $00, $00, $00, $0f, $00
@@ -3874,7 +3874,7 @@ jr_000_166f:
 
 
 ; C: read in the runs by OamDma_InstallRoutine; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 OamDma_InstallRoutine_Tbl1676::
     db $3e, $d6, $e0, $46, $3e, $28, $3d, $20, $fd, $c9
 
@@ -4811,7 +4811,7 @@ Jump_000_1bf4:
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_SetPos, ObjCmd_CopyAtLine20; first read on the screen
-; Mode03_ViewAlbum_State13 (trace/read_screens_kitty.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
+; Mode03_ViewAlbum_State13 (trace/read_screens_kitty*.npz); kind OAM from the evidence of tools/kitty_layout_kinds.py
 ObjScript_00_1BF5_Mode03_ViewAlbum_State13::
     db $3a, $1f, $20, $20, $08, $80, $e8, $5b, $3a, $1f, $30, $20, $08, $80, $e8, $5b
     db $3a, $1f, $40, $20, $08, $80, $e8, $5b, $3a, $1f, $50, $20, $08, $80, $e8, $5b
@@ -4820,8 +4820,8 @@ ObjScript_00_1BF5_Mode03_ViewAlbum_State13::
     db $82, $9c, $c0, $01, $22, $9f, $1c, $cc, $1f, $07, $00
 
 ; C: read in the runs by ObjCmd_CopyAtLine20, Object_RunAll; first read on the screen Mode03_ViewAlbum_State13
-; (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of Data_00_1BF5
-; after a leftover stretch
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py; the rest of
+; Data_00_1BF5 after a leftover stretch
 Gfx_00_1C40_Mode03_ViewAlbum_State13::
     INCBIN "data/bank_00/Gfx_00_1C40_Mode03_ViewAlbum_State13.bin" ; $1C40, 76 bytes
 ; C: $D8E0 = $FF (script callback)
@@ -4855,7 +4855,7 @@ Script_SetD882Bit3Wait::
 
 
 ; C: named by the code of Mode03_State12 (05:75CB); read in the runs by Object_CreateWithParam; first read on the
-; screen Mode03_ViewAlbum_State13 (trace/read_screens_kitty.npz)
+; screen Mode03_ViewAlbum_State13 (trace/read_screens_kitty*.npz)
 ObjScript_00_1CAB_Mode03_ViewAlbum_State12::
     db $2d, $1c, $b9, $7f, $b9, $7f
 
@@ -4868,7 +4868,7 @@ Obj_Menu07Cursor::
 
 
 ; C: read in the runs by Object_RunAll, ObjCmd_CopyAtLine20, ObjCmd_Jump; first read on the screen
-; Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+; Mode12_SlideShow_State01 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
 Gfx_00_1CBA_Mode12_SlideShow_State01::
     INCBIN "data/bank_00/Gfx_00_1CBA_Mode12_SlideShow_State01.bin" ; $1CBA, 141 bytes
 ; C: hFFD8 = $D907 (script callback)
@@ -4891,7 +4891,7 @@ SlideShow_ObjFollowD907::
 
 
 ; C: named by the code of Mode12_State00 (07:4903); read in the runs by Object_RunAll, ObjCmd_CopyAtLine20,
-; Object_CreateWithParam; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz); kind T_UI
+; Object_CreateWithParam; first read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty*.npz); kind T_UI
 ; from the evidence of tools/kitty_layout_kinds.py
 Gfx_00_1D5C_Mode12_SlideShow_State00::
     INCBIN "data/bank_00/Gfx_00_1D5C_Mode12_SlideShow_State00.bin" ; $1D5C, 58 bytes
@@ -4915,7 +4915,7 @@ SlideShow_ObjFollowD908::
 
 
 ; C: named by the code of Mode12_State00 (07:4909); read in the runs by Copy_DEtoHL, Object_CreateWithParam; first
-; read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty.npz)
+; read on the screen Mode12_SlideShow_State01 (trace/read_screens_kitty*.npz)
 Gfx_00_1DAB_Mode12_SlideShow_State00::
     INCBIN "data/bank_00/Gfx_00_1DAB_Mode12_SlideShow_State00.bin" ; $1DAB, 6 bytes
 Call_000_1db1:
@@ -4959,8 +4959,9 @@ Call_000_1dd8:
     ret                                           ; $1DE7
 
 
-; C: named by the code of SlideShow_ObjFollowD908 (00:1E15); read in the runs by Copy_DEtoHL; kind T_UI from the
-; evidence of tools/kitty_layout_kinds.py
+; C: named by the code of SlideShow_ObjFollowD908 (00:1E15); read in the runs by Copy_DEtoHL; first read on the screen
+; Mode09_ExchangeCommunicating_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of
+; tools/kitty_layout_kinds.py
 Gfx_00_1DE8_SlideShow_ObjFollowD908::
     db $16, $1f, $f4, $1d, $6d, $1f, $00, $02, $1e, $1f, $ec, $47
 
@@ -4975,8 +4976,9 @@ Gfx_00_1DE8_SlideShow_ObjFollowD908::
     jp Obj_End                                    ; $1E01
 
 
-; C: read in the runs by Copy_DEtoHL; kind T_UI from the evidence of tools/kitty_layout_kinds.py
-Gfx_00_1E04_Copy_DEtoHL::
+; C: read in the runs by Copy_DEtoHL; first read on the screen Mode09_ExchangeCommunicating_State0A
+; (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py
+Gfx_00_1E04_Mode09_ExchangeCommunicating_State0A::
     db $3a, $1f, $30, $50, $1e, $1f, $cc, $47
 
     call Call_000_1dd8                            ; $1E0C
@@ -4989,7 +4991,8 @@ Gfx_00_1E04_Copy_DEtoHL::
 
 
 ; C: named by the code of Mode09_State03, Exchange_InitScreen (06:6898 06:6A41); read in the runs by
-; SlideShow_ObjFollowD908, Object_RunAll, Copy_DEtoHL
+; SlideShow_ObjFollowD908, Object_RunAll, Copy_DEtoHL; first read on the screen Mode09_ExchangeCommunicating_State0F
+; (trace/read_screens_kitty*.npz)
 ObjScript_00_1E1B_Mode09_ExchangeCommunicating_State03::
     db $04, $1e, $0c, $1e, $b9, $7f, $16, $1f, $f4, $1d, $6d, $1f, $00, $02, $1e, $1f
     db $10, $48, $3a, $1f, $30, $50, $1e, $1f, $10, $48
@@ -5004,7 +5007,8 @@ ObjScript_00_1E1B_Mode09_ExchangeCommunicating_State03::
 
 
 ; C: named by the code of Mode09_State03, Exchange_InitScreen (06:689E 06:6A47); read in the runs by
-; SlideShow_ObjFollowD908, Object_RunAll, Object_CreateWithParam
+; SlideShow_ObjFollowD908, Object_RunAll, Object_CreateWithParam; first read on the screen
+; Mode09_ExchangeCommunicating_State0A (trace/read_screens_kitty*.npz)
 ObjScript_00_1E44_Mode09_ExchangeCommunicating_State03::
     db $2d, $1e, $35, $1e, $b9, $7f, $3a, $1f, $30, $50, $54, $4a, $16, $1f, $7c, $1e
     db $03, $80, $84, $6d, $03, $80, $a4, $6d, $03, $80, $d4, $6d, $50, $80, $34, $6d
@@ -5044,7 +5048,7 @@ jr_000_1eb3:
 
 
 ; C: named by the code of Mode09_State03, Exchange_InitScreen (06:6892 06:6A3B); read in the runs by
-; Object_CreateWithParam
+; Object_CreateWithParam; first read on the screen Mode08_ExchangePhotoTrain_State00 (trace/read_screens_kitty*.npz)
 ObjScript_00_1EB4_Mode09_ExchangeCommunicating_State03::
     db $4a, $1e, $b9, $7f, $b9, $7f
 
@@ -5057,7 +5061,7 @@ ObjCmd_Sound::
     call JumpTable_Inline                         ; $1EBE
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 ObjCmd_Sound_JumpTbl1EC1::
     dw ObjCmd_SoundCh0
     dw ObjCmd_SoundCh1
@@ -5870,7 +5874,7 @@ Obj_Sound::
     call JumpTable_Inline                         ; $2240
 
 ; C: read in the runs by JumpTable_Inline; first read on the screen Mode01_MainMenu_State02
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Obj_Sound_JumpTbl2243::
     dw Obj_SoundCh0
     dw Obj_SoundCh1
@@ -6989,7 +6993,7 @@ jr_000_2a6a:
 
 ; C: the same 18 bytes as the Japanese Thumb_CopyBadgeTbl (00:2A11); named by the code of Thumb_DrawCopyBadge
 ; (00:2A65); read in the runs by Thumb_DrawCopyBadge; first read on the screen Mode03_ViewAlbum_State13
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Thumb_CopyBadgeTbl::
     db $02, $fc, $30, $04, $fc, $48, $06, $fc, $40, $08, $fc, $48, $0a, $fc, $30, $0c
     db $fc, $00
@@ -7017,7 +7021,7 @@ jr_000_2ab5:
 
 
 ; C: named by the code of Photo_MakeThumbnail (00:2A98); read in the runs by Img_ReduceToThumbnail; first read on the
-; screen Mode02_TakePhotos_State06 (trace/read_screens_kitty.npz)
+; screen Mode02_TakePhotos_State06 (trace/read_screens_kitty*.npz)
 Photo_MakeThumbnail_Tbl2AB6::
     db $00, $c0, $00
 
@@ -7389,7 +7393,7 @@ Snd_Tick_Tramp::
     ds $159, $00
 
 ; C: read in the runs by Copy_DEtoHL, Snd_Tick_Tramp; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Src_00_2E00_Mode05_StampWindow_State06::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -7407,7 +7411,7 @@ Src_00_2E00_Mode05_StampWindow_State06::
 
 ; C: the same 2304 bytes as the Japanese Img_PairLookupTbl (00:3700); read in the runs by Stamp_BlitFromD9F3,
 ; Blit_MaskPass_SrcB, Img_PairLookup; first read on the screen Mode05_StampWindow_State06
-; (trace/read_screens_kitty.npz)
+; (trace/read_screens_kitty*.npz)
 Img_PairLookupTbl::
     ASSERT LOW(Img_PairLookupTbl) == 0 ; read as a page: HIGH(Img_PairLookupTbl) with the index in the low byte
     INCBIN "data/bank_00/Img_PairLookupTbl.bin" ; $3700, 2304 bytes

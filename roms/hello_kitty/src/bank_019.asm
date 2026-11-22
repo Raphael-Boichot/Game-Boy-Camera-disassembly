@@ -5,7 +5,7 @@
 SECTION "ROM Bank $019", ROMX[$4000], BANK[$19]
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State07
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_19_4000_Mode06_Printing_State07::
     INCBIN "data/bank_19/Frame_19_4000_Mode06_Printing_State07.bin" ; $4000, 4480 bytes
 ; C: the last $380 bytes (56 tiles) of print frame block 4 of table 01:687D: the left and right borders of a wild
@@ -73,7 +73,7 @@ Frame_19_5180_WildFrameSides::
     ds $300, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode06_Printing_State07
-; (trace/read_screens_kitty.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind T_FRM from the evidence of tools/kitty_layout_kinds.py
 Frame_19_5800_Mode06_Printing_State07::
     INCBIN "data/bank_19/Frame_19_5800_Mode06_Printing_State07.bin" ; $5800, 4480 bytes
 ; C: the last $380 bytes (56 tiles) of print frame block 3 of table 01:687D: the left and right borders of a wild
@@ -141,18 +141,18 @@ Frame_19_6980_WildFrameSides::
     ds $300, $00
 
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_19_7000_Mode02_TakePhotos_State08::
     INCBIN "data/bank_19/Map_19_7000_Mode02_TakePhotos_State08.tilemap" ; $7000, 1024 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_19_7400_Mode02_TakePhotos_State08::
     INCBIN "data/bank_19/Map_19_7400_Mode02_TakePhotos_State08.tilemap" ; $7400, 1024 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_19_7800_Mode02_TakePhotos_State08::
     INCBIN "data/bank_19/Map_19_7800_Mode02_TakePhotos_State08.tilemap" ; $7800, 1024 bytes
 ; C: read in the runs by Vram_CopyHBlank; first read on the screen Mode02_TakePhotos_State08
-; (trace/read_screens_kitty.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
+; (trace/read_screens_kitty*.npz); kind MAP from the evidence of tools/kitty_layout_kinds.py
 Map_19_7C00_Mode02_TakePhotos_State08::
     INCBIN "data/bank_19/Map_19_7C00_Mode02_TakePhotos_State08.tilemap" ; $7C00, 1024 bytes

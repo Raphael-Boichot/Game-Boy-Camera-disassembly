@@ -154,7 +154,7 @@ DEF wKittsCheckTmp             EQU $d949 ; C 3  Kitts_CheckAfford copies the Kit
 DEF wPrintGame_SaveKittyPos_D94C EQU $d94c ; I 1  touched by PrintGame_SaveKittyPos (3), Objects_DrawAll (1), PrintGame_ObjRandomStart (1)
 DEF wPrintGame_ObjCheckCatch_D94D EQU $d94d ; I 1  touched by PrintGame_ObjCheckCatch (1), PrintGame_SaveKittyPos (1), Obj_SetD94D (1)
 DEF wPrintGame_ObjCheckCatch_D94E EQU $d94e ; I 1  touched by PrintGame_ObjCheckCatch (1), PrintGame_SaveKittyPos (1), Obj_SetD94D (1)
-DEF wMode06_State23_D94F       EQU $d94f ; I 1  touched by Mode06_State23 (2), ObjScript_02_7044_PrintGame_ObjCheckLanded (2), PrintGame_S
+DEF wMode06_State23_D94F       EQU $d94f ; I 1  touched by Mode06_State23 (2), ObjScript_02_7044_Mode06_Printing_State1F (2), PrintGame_Sh
 DEF wMode06_State10_D950       EQU $d950 ; I 1  touched by Mode06_State10 (1), Mode06_State11 (1), Mode06_State12 (1)
 DEF wMode06_State10_D951       EQU $d951 ; I 1  touched by Mode06_State10 (1), Mode06_State11 (1), Mode06_State12 (1)
 DEF wScratch_CursorUpdate_D952 EQU $d952 ; I 5  touched by Scratch_CursorUpdate (1), Scratch_ClearSpots (1), Scratch_HasPrize3 (1)
@@ -474,7 +474,7 @@ DEF hScriptCmd_Loop_FFE9       EQU $ffe9 ; I 1  touched by ScriptCmd_Loop (2), S
 DEF hRecordBook_GetReceivedX11_FFEA EQU $ffea ; I 1  touched by RecordBook_GetReceivedX11 (5), Menu_ScriptOnItemChange (1), NameCard_ScriptStar
 DEF hRecordBook_CountHundreds_FFEB EQU $ffeb ; I 1  touched by RecordBook_CountHundreds (3), NameCard_ScriptStartRight (1), NameCard_ScriptDra
 DEF hScriptCmd_AddEC_FFEC      EQU $ffec ; I 1  touched by ScriptCmd_AddEC (2), RecordBook_VineFrame (1)
-DEF hStamp_ObjPlaceOnStart_FFF0 EQU $fff0 ; I 3  touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), ObjScript_02_7044_Print
+DEF hStamp_ObjPlaceOnStart_FFF0 EQU $fff0 ; I 3  touched by Stamp_ObjPlaceOnStart (2), PrintGame_SpeedFromKeys (2), ObjScript_02_7044_Mode0
 DEF hSfx3_Step_07_FFF3         EQU $fff3 ; I 5  touched by Sfx3_Step_07 (1)
 DEF hScratch_ObjPlace_FFF8     EQU $fff8 ; I 2  touched by Scratch_ObjPlace (1), Stamp_ObjStepNot0 (1), PrintGame_SpeedFromKeys (1)
 DEF hGfx_00_1DAB_Mode12_SlideShow_State00_FFFA EQU $fffa ; I 4  touched by Gfx_00_1DAB_Mode12_SlideShow_State00 (1), Stamp_CursorUpdate (1), AlbumText_Cur
