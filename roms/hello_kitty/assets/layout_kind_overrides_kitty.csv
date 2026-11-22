@@ -40,12 +40,7 @@ bank,start,end,kind,ev,label,basis
 03,7188,72D0,OAM,I,Leftover_03_7188,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,72E4,73B0,OAM,I,Leftover_03_72E4,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 03,73C4,7418,OAM,I,Leftover_03_73C4,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-04,4853,48B9,TBL,I,Leftover_04_4853,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-04,48B9,48F0,TBL,I,Src_04_48B9_Mode02_TakePhotos_State01,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-04,4901,4923,TBL,I,Leftover_04_4901,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-04,4923,4938,TBL,I,Src_04_4923_Mode00_BootAndTitle_State00,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-04,4944,497C,TBL,I,Leftover_04_4944,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
-04,4980,49E0,TBL,I,Leftover_04_4980,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
+04,49A0,49E0,TBL,I,Leftover_04_49A0,hand reading of the bytes (assets/leftover_kinds_kitty.csv)
 05,68D7,69E7,MAP,C,Src_05_68D7_Mode02_TakePhotos_State01,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 05,69E7,6A7D,TBL,C,Src_05_68D7_Mode02_TakePhotos_State01,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"
 05,6A7D,6AAD,TBL,C,Leftover_05_6A7D,"loader table: a stamp category record of 05:5425 (graphics, masks, small tiles) or a camera-frame record of 05:69E7 (the record table, the 136-byte maps written with $A0 added)"

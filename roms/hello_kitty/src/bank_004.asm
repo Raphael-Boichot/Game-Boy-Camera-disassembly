@@ -109,69 +109,76 @@ Cam_PopcountTable256::
     db $00, $c0, $30, $f0, $0c, $cc, $3c, $fc, $03, $c3, $33, $f3, $0f, $cf, $3f, $ff
     db $00, $c0, $30, $f0, $0c, $cc, $3c, $fc, $03, $c3, $33, $f3, $0f, $cf, $3f, $ff
 
-; C: the same 542 bytes as the Japanese Cam_ReduceTbl_Lo (0A:7900); read in the runs by Fx08_Reduce2xTile2x2_GroupTop;
+; C: the same 512 bytes as the Japanese Cam_ReduceTbl_Lo (0A:7900); read in the runs by Fx08_Reduce2xTile2x2_GroupTop;
 ; first read on the screen Mode02_TakePhotos_State01 (trace/read_screens_kitty*.npz)
 Cam_ReduceTbl_Lo::
     ASSERT LOW(Cam_ReduceTbl_Lo) == 0 ; read as a page: HIGH(Cam_ReduceTbl_Lo) with the index in the low byte
-    INCBIN "data/bank_04/Cam_ReduceTbl_Lo.bin" ; $4600, 542 bytes
-; C: read in the runs by Cam_PopcountLevel; first read on the screen Mode02_TakePhotos_State01
-; (trace/read_screens_kitty*.npz)
-Cam_PopcountLevel_Tbl481E::
+    INCBIN "data/bank_04/Cam_ReduceTbl_Lo.bin" ; $4600, 512 bytes
+; C: the same 160 bytes as the Japanese Cam_ExposureShiftTable (0A:7B00); the camera code of this ROM is the Japanese
+; one (owner, 2026-11-22): Cam_PopcountLevel (04:4A3E, the copy of the Japanese code of Cam_MainDispatch that reads it
+; at 0A:402F) reads [$4800 + level], level 0-$9F (ld bc, $4800, ...
+Cam_ExposureShiftTable::
+    db $02, $03, $03, $03, $04, $03, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
+    db $04, $04, $04, $05, $04, $05, $05, $05, $05, $05, $06, $05, $06, $06
+
     db $06, $07, $07, $08, $09, $10, $10, $10, $09
 
     db $08, $07, $07, $06, $06, $05, $06, $05, $05, $05, $05, $04, $05, $04, $04, $04
     db $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
-    db $04, $04, $04, $04, $04, $04, $04, $04, $04, $03, $03, $03
+    db $04, $04, $04, $04, $04, $04, $04, $04, $04, $03, $03, $03, $03, $03, $03, $03
+    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
+    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
+    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
+    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
+    db $03, $03, $03, $03, $03, $03, $03, $03, $03
 
-; I: leftover: 102 bytes (04:4853-48B8) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_04_4853::
-    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
-    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
-    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
-    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03
-    db $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $b0, $81, $81
-    db $83, $82, $85, $85, $87, $84, $89, $89, $8b, $8a, $8d, $8d, $8f, $88, $91, $91
-    db $93, $92, $95, $95, $97, $94
+; C: the same 64 bytes as the Japanese Cam_ORegSAR_Table_Above (0A:7BA0); the camera code of this ROM is the Japanese
+; one (owner, 2026-11-22): Cam_ORegister_SAR_Tail (04:564A, the Japanese 0A:4BEC, which reads it at 0A:4C0F) reads
+; [$48A0 + (A005 & $3F)] when the picture has bright samples (ld hl, $48a0, ...
+Cam_ORegSAR_Table_Above::
+    db $b0, $81, $81, $83, $82, $85, $85, $87, $84, $89, $89, $8b, $8a, $8d, $8d, $8f
+    db $88, $91, $91, $93, $92, $95, $95, $97, $94, $99, $99, $9b, $9a, $9d, $9d, $9f
+    db $b0, $a1, $a3, $a3, $a6, $a5, $a7, $a7, $ac, $a9, $ab, $ab, $ae, $ad, $af, $af
+    db $b8, $b1, $b3, $b3, $b6, $b5, $b7, $b7, $bc, $b9, $bb, $bb, $be, $bd, $bf, $bf
 
-; I: the rest of Data_04_481E after a leftover stretch
-Src_04_48B9_Mode02_TakePhotos_State01::
-    INCBIN "data/bank_04/Src_04_48B9_Mode02_TakePhotos_State01.bin" ; $48B9, 55 bytes
-; C: read in the runs by Cam_ORegister_SAR_Tail; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty*.npz)
-Cam_ORegister_SAR_Tail_Tbl48F0::
+; C: the same 64 bytes as the Japanese Cam_ORegSAR_Table_Below (0A:7BE0); the camera code of this ROM is the Japanese
+; one (owner, 2026-11-22): Cam_ORegister_SAR_Tail reads [$48E0 + (A005 & $3F)] when it has none (ld hl, $48e0,
+; 04:5672)
+Cam_ORegSAR_Table_Below::
+    db $90, $82, $83, $84, $86, $86, $87, $88, $8c, $8a, $8b, $8c, $8e, $8e, $8f, $90
+
     db $98, $92, $93, $94, $96, $96, $97, $98, $9c, $9a, $9b, $9c, $9e, $9e, $9f, $9f
     db $90
 
-; I: leftover: 34 bytes (04:4901-4922) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_04_4901::
     db $a0, $a1, $a2, $a2, $a4, $a5, $a6, $a4, $a8, $a9, $aa, $aa, $ac, $ad, $ae, $a8
-    db $b0, $b1, $b2, $b2, $b4, $b5, $b6, $b4, $b8, $b9, $ba, $ba, $bc, $bd, $be, $80
-    db $8f, $d0
+    db $b0, $b1, $b2, $b2, $b4, $b5, $b6, $b4, $b8, $b9, $ba, $ba, $bc, $bd, $be
 
-; I: the rest of Data_04_48F0 after a leftover stretch
-Src_04_4923_Mode00_BootAndTitle_State00::
-    INCBIN "data/bank_04/Src_04_4923_Mode00_BootAndTitle_State00.bin" ; $4923, 21 bytes
-; C: read in the runs by Cam_LoadRegisterSet; first read on the screen Mode02_TakePhotos_State0B
-; (trace/read_screens_kitty*.npz)
-Cam_LoadRegisterSet_Tbl4938::
+; C: the same 64 bytes as the Japanese Cam_DitherRamp_ParamsA (0A:7C20), 16 sets of 4 bytes; the camera code of this
+; ROM is the Japanese one (owner, 2026-11-22): Cam_LoadRegisterSet (04:4CF8, the Japanese code that reads it in
+; Cam_BuildDitherMatrix at 0A:42C5) copies set C, the contrast row $DA1F (1-16, ...
+Cam_DitherRamp_ParamsA::
+    db $80, $8f, $d0, $e6, $82, $90, $c8, $e3, $84, $90, $c0, $e0, $85, $91, $b8, $dd
+    db $86, $91, $b1, $db, $87, $92, $aa, $d8
+
     db $88, $92, $a5, $d5, $89, $92, $a2, $d2, $8a, $92, $a1, $c8
 
-; I: leftover: 56 bytes (04:4944-497B) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_04_4944::
     db $8b, $92, $a0, $be, $8c, $92, $9e, $b4, $8d, $92, $9c, $ac, $8e, $92, $9b, $a5
-    db $8f, $92, $99, $a0, $90, $92, $97, $9a, $92, $92, $92, $92, $80, $94, $dc, $ff
-    db $82, $95, $d2, $ff, $84, $96, $ca, $ff, $86, $96, $c4, $ff, $88, $97, $be, $ff
-    db $8a, $97, $b8, $ff, $8b, $98, $b2, $f5
+    db $8f, $92, $99, $a0, $90, $92, $97, $9a, $92, $92, $92, $92
 
-; C: read in the runs by Cam_LoadRegisterSet; first read on the screen Mode00_BootAndTitle_State00
-; (trace/read_screens_kitty*.npz)
-Cam_LoadRegisterSet_Tbl497C::
+; C: the same 64 bytes as the Japanese Cam_DitherRamp_ParamsB (0A:7C60); the camera code of this ROM is the Japanese
+; one (owner, 2026-11-22): Cam_LoadRegisterSet takes $4960 + 4 (C - 1) for the other gain ($DA0A)
+Cam_DitherRamp_ParamsB::
+    db $80, $94, $dc, $ff, $82, $95, $d2, $ff, $84, $96, $ca, $ff, $86, $96, $c4, $ff
+    db $88, $97, $be, $ff, $8a, $97, $b8, $ff, $8b, $98, $b2, $f5
+
     db $8c, $98, $ac, $eb
 
-; I: leftover: 96 bytes (04:4980-49DF) that no run reads or executes and that no code names (owner rule 2026-11-11)
-Leftover_04_4980::
     db $8d, $98, $aa, $dd, $8e, $98, $a8, $d0, $8f, $98, $a6, $c4, $90, $98, $a4, $ba
     db $92, $98, $a1, $b1, $94, $98, $9d, $a8, $96, $98, $99, $a0, $98, $98, $98, $98
+
+; I: leftover: 64 bytes (04:49A0-49DF) that no run reads and that no code names (owner rule 2026-11-11): the same
+; bytes as the Japanese Cam_DitherRamp_ParamsUnused (0A:7CA0), unused there too
+Leftover_04_49A0::
     db $87, $98, $b7, $ff, $88, $98, $b6, $ff, $89, $97, $b3, $ff, $8a, $97, $b0, $fa
     db $8b, $97, $ae, $f0, $8c, $96, $ab, $e6, $8d, $96, $aa, $dc, $8e, $96, $a4, $d4
     db $8f, $96, $a2, $c8, $90, $96, $a0, $be, $91, $96, $9e, $b4, $92, $96, $9c, $ac
@@ -284,7 +291,7 @@ jr_004_4a5f:
 
 jr_004_4a69:
     ldh a, [hScratchA]                            ; $4A69
-    ld bc, $4800                                  ; $4A6B
+    ld bc, Cam_ExposureShiftTable                 ; $4A6B
     add c                                         ; $4A6E
     ld c, a                                       ; $4A6F
     jr nc, jr_004_4a73                            ; $4A70
@@ -646,7 +653,7 @@ Cam_LoadRegisterSet::
     cp b                                          ; $4D02
     jr nz, jr_004_4d0a                            ; $4D03
 
-    ld hl, Leftover_04_4901 + $1F                 ; $4D05
+    ld hl, Cam_DitherRamp_ParamsA                 ; $4D05
     jr jr_004_4d22                                ; $4D08
 
 jr_004_4d0a:
@@ -654,7 +661,7 @@ jr_004_4d0a:
     cp b                                          ; $4D0D
     jr nz, jr_004_4d15                            ; $4D0E
 
-    ld hl, Leftover_04_4944 + $1C                 ; $4D10
+    ld hl, Cam_DitherRamp_ParamsB                 ; $4D10
     jr jr_004_4d22                                ; $4D13
 
 jr_004_4d15:
@@ -662,11 +669,11 @@ jr_004_4d15:
     cp b                                          ; $4D17
     jr nz, jr_004_4d1f                            ; $4D18
 
-    ld hl, Leftover_04_4901 + $1F                 ; $4D1A
+    ld hl, Cam_DitherRamp_ParamsA                 ; $4D1A
     jr jr_004_4d22                                ; $4D1D
 
 jr_004_4d1f:
-    ld hl, Leftover_04_4901 + $1F                 ; $4D1F
+    ld hl, Cam_DitherRamp_ParamsA                 ; $4D1F
 
 jr_004_4d22:
     ld de, $0004                                  ; $4D22
@@ -2016,11 +2023,11 @@ jr_004_565e:
     or a                                          ; $566A
     jr z, jr_004_5672                             ; $566B
 
-    ld hl, $48a0                                  ; $566D
+    ld hl, Cam_ORegSAR_Table_Above                ; $566D
     jr jr_004_5675                                ; $5670
 
 jr_004_5672:
-    ld hl, $48e0                                  ; $5672
+    ld hl, Cam_ORegSAR_Table_Below                ; $5672
 
 jr_004_5675:
     ld a, [wCamA005Shadow]                        ; $5675

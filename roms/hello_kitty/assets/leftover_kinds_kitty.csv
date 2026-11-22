@@ -21,7 +21,6 @@ Leftover_02_48EC,OAM,I,"object scripts: the command records of the ObjScript blo
 Leftover_02_4954,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_03_5160,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_03_5280,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
-Leftover_04_4980,TBL,I,the same bytes as the Japanese Cam_DitherRamp_ParamsB (0A:7C80)
 Leftover_02_49BC,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_03_73C4,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_02_4578,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
@@ -29,7 +28,6 @@ Leftover_03_4898,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; t
 Leftover_03_5208,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_03_633C,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_03_639C,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
-Leftover_04_4944,TBL,I,the same bytes as the Japanese Cam_DitherRamp_ParamsA (0A:7C44)
 Leftover_07_59BE,TBL,I,key bits ($10 / $20 / $40 / $80) continuing Puzzle15_ScriptedKey_Tbl59AF
 Leftover_03_6EB8,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute; the attribute byte in $00-$71 at every fourth byte, bit 0 set on the last record), as the OamList blocks on both sides"
 Leftover_02_4628,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
@@ -38,12 +36,10 @@ Src_00_0BF9_NameCard_LoadBackgroundTiles,TBL,I,"seven 6-byte loader records (til
 Leftover_0F_46D3,SOUND,I,"sound data in the sound bank, between Snd_ blocks: track headers and note streams (opcodes $9D, $A1-$A6), or a copy of the Japanese Sfx1_10_DigitRegs"
 Leftover_02_4334,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
 Leftover_02_7F97,OAM,I,"object scripts: the command records of the ObjScript blocks on both sides (n, $80, pointer; $1E $1F jumps; $CC $1F calls)"
-Leftover_04_4901,TBL,I,the same bytes as the Japanese Cam_ORegSAR_Table_Below (0A:7C01)
 Leftover_07_57DB,TBL,I,address pairs continuing Puzzle15_DrawCell_Tbl55FB (the same $Cx / $Dx layout)
 Src_11_5FE0_Mode0B_NameCardEdit_State10,T_UI,I,"two blank tiles (32 x $00) copied by Vram_CopyHBlank on the name-card editor screen, before Unused_Photo_EmptyPicture0_Gfx"
 Leftover_22_7FE0,MAP,I,"a tile map row: one tile id ($A8) repeated, after Map_22_7D40"
 Leftover_33_71F0,MAP,I,"a tile map row: consecutive tile ids ($88-$90) with $E0 / $E2 / $F8 borders, after Map_33_7030"
-Src_04_4923_Mode00_BootAndTitle_State00,TBL,I,the same bytes as the Japanese Cam_DitherRamp_ParamsA region (0A:7C23)
 Leftover_01_4000_SinTable,TBL,C,"a sine table: 256 words in two byte pages, equal to round(256 sin) (hand 2026-11-15)"
 Leftover_01_4200_CosTable,TBL,C,"a cosine table: 256 words in two byte pages, equal to round(256 cos) (hand 2026-11-15)"
 Leftover_01_4400_Zero,TBL,I,three 256-byte pages of $00 after the two tables (hand 2026-11-15)
@@ -58,7 +54,6 @@ Leftover_02_4000_ObjScript,OAM,C,"an object script: two words and a jump to itse
 Leftover_02_40C8,OAM,I,"object scripts: n $80 pointer records and $1E $1F jumps, as the ObjScript blocks on both sides (2026-11-15)"
 Leftover_02_4824,OAM,I,object scripts: n $80 pointer records and $1E $1F jumps (2026-11-15)
 Leftover_03_6C24,OAM,I,"sprite layouts: 4-byte records, attribute $10 / $11 (2026-11-15)"
-Leftover_04_4853,TBL,I,a table of small values ($03 runs) between the camera tables Cam_PopcountLevel_Tbl481E and 04:48B9 (2026-11-15)
-Src_04_48B9_Mode02_TakePhotos_State01,TBL,I,"a table of rising bytes ($99-$B8...) after the camera tables, read in a forced run of mode $02 (2026-11-15)"
 Leftover_02_7CB5,OTHER,I,"the rest of the former Leftover_02_7CAC (2026-11-22, its object scripts 02:7DC7-7E31 now read): object-script records (16 1F / 1E 1F commands) then code never referenced: object callbacks (push hl ; ld b,$06 ; ld hl,$6180 ; call 00:015B ...; far calls through 00:015B / 00:0165)"
 Leftover_03_6A94,OAM,I,"sprite layouts: 4-byte records (y, x, tile, attribute $10 / $30), between the OamList blocks 03:67EC and 03:6BBC (2026-11-22)"
+Leftover_04_49A0,TBL,I,the same 64 bytes as the Japanese Cam_DitherRamp_ParamsUnused (0A:7CA0): 16 rows of 4 bytes like Cam_DitherRamp_ParamsA / B before it

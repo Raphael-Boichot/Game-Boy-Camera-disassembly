@@ -1,3 +1,1 @@
-bank,addr,name,conf,group,evidence,why_doubtful,what_would_settle_it
-04,48B9,Src_04_48B9_Mode02_TakePhotos_State01,I,forced only,the rest of Data_04_481E after a leftover stretch,"its bytes are read only in forced runs (state pokes), not in an organic run",an organic run (core or BGB) that reads them
-04,4923,Src_04_4923_Mode00_BootAndTitle_State00,I,forced only,the rest of Data_04_48F0 after a leftover stretch,"its bytes are read only in forced runs (state pokes), not in an organic run",an organic run (core or BGB) that reads them
+bank

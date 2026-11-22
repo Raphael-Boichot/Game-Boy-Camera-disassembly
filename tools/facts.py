@@ -96,6 +96,7 @@ def facts():
         p = os.path.join(REPO, 'roms', d, 'disasm', 'sym_unconclusive_%s.csv' % t)
         if os.path.exists(p):
             rows = list(csv.DictReader(open(p, encoding='utf-8'))); F['%s.doubts' % t] = len(rows)
+            if t == 'kitty': F['kitty.doubts.forced_only'] = F['kitty.doubts.not_run'] = 0    # its two groups, quoted even when empty
             if rows and 'group' in rows[0]:
                 for k, v in collections.Counter(r['group'] for r in rows).items(): F['%s.doubts.%s' % (t, k.replace(' ', '_'))] = v
     p = os.path.join(REPO, 'roms', 'hello_kitty', 'trace', 'jp_crosscheck_kitty.csv')

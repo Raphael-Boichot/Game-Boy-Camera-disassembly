@@ -201,14 +201,7 @@ bank,site,kind,operand,value,target,expression,evidence,read
 02,ObjScript_02_5B35_PlayMenu_ObjItemRecord,ptr,record,$7800,1A:7800,Map_1A_7800_Mode04_PlayMenu_State01,C: dereferenced at 00:066F (bank 1A mapped); that instruction read the target block in the runs; the word was read by 02:5B24,yes
 02,ObjScript_02_5B35_PlayMenu_ObjItemRecord,ptr,record,$7C00,1A:7C00,Map_1A_7C00_Mode04_PlayMenu_State01,C: dereferenced at 00:066F (bank 1A mapped); that instruction read the target block in the runs; the word was read by 02:5B24,yes
 04,04:49FC,ptr,hl,$4A07,04:4A07,Cam_PopcountLevelByIndex + $F,C: dereferenced at 04:4A00 (bank 04 mapped); that instruction read the target block in the runs,no
-04,04:4A6B,num,bc,$4800,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-04,04:4D05,ptr,hl,$4920,04:4920,Leftover_04_4901 + $1F,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
-04,04:4D10,ptr,hl,$4960,04:4960,Leftover_04_4944 + $1C,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
-04,04:4D1A,ptr,hl,$4920,04:4920,Leftover_04_4901 + $1F,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
-04,04:4D1F,ptr,hl,$4920,04:4920,Leftover_04_4901 + $1F,C: dereferenced at 04:4D2E (bank 04 mapped); that instruction read the target block in the runs,no
 04,04:5011,num,lo/hi,$7F7E,,,I: two bytes stored to wCamCalibVector; no label at that address (data),
-04,04:566D,num,hl,$48A0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
-04,04:5672,num,hl,$48E0,,,"C: read as bytes (arithmetic, comparison) before any dereference",
 04,04:5AFC,ptr,h,$40,04:4000,HIGH(Cam_PopcountTable256),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
 04,04:5B07,ptr,h,$40,04:4000,HIGH(Cam_PopcountTable256),"C: page of a 256-byte table in H, dereferenced with the low byte as index",yes
 04,04:61B2,ptr,b,$46,04:4600,HIGH(Cam_ReduceTbl_Lo),"C: page of a 256-byte table in B, dereferenced with the low byte as index",yes
