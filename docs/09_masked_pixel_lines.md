@@ -13,10 +13,7 @@ neither touches the masked lines.
 
 **What the code cannot show.** The owner observes that these rows read back a constant saturation voltage (the maximum the sensor can return); that is a property
 of the M64282FP silicon, not something the firmware does: the firmware stores whatever the sensor returns
-at those addresses (?). AntonioND's documentation only says *"the actual sensor image is 128×126 or so"*
-and defines a `GBCAM_SENSOR_EXTRA_LINES=8` margin in the emulator sample code, which is a software margin
-for the edge-enhancement convolution (neighbour pixels past the visible 112 rows), not necessarily the same
-thing as physically masked reference pixels. The header of MAME's `camera.cpp` calls the sensor "128*123
+at those addresses (?). AntonioND's documentation, as Pan Docs carries it (Game Boy Camera, "Capture process timings"), says that *"the sensor transfers are 128×128 pixels, but the upper and lower rows are corrupted"* and that the controller *"ignores the first 8 rows and the last 8 rows"*; its emulator sample code (`GBCAM_SENSOR_EXTRA_LINES = 8`, *"the actual sensor image is 128×126 or so"*) writes only the 112 middle lines, from SRAM `$A100`. Read against this ROM, "ignores" can only mean "does not show": the calibration's pixel test reads lines 1-4 (`$A002-$A008`, `$A082-$A088`, §18.3) at every boot, and the owner's full frame below has data down to line 127, so the cartridge does write all 128 lines to `$A000-$AFFF` (C for what the ROM reads; an emulator that follows the sample code leaves `$A000-$A0FF` and `$AF00-$AFFF` unwritten). The 8-line margin of the sample code is a software margin for the edge-enhancement convolution (neighbour pixels past the visible 112 rows), not necessarily the same thing as physically masked reference pixels. The header of MAME's `camera.cpp` calls the sensor "128*123
 pixel" and its model has 123 sensor lines (`SENSOR_HEIGHT`; §18.12): a second statement of the 123-line
 figure, not a measurement, and MAME never writes y = 123-127, so it does not say what the sensor puts
 there (?).

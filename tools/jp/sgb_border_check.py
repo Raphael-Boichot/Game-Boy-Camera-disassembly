@@ -12,8 +12,9 @@ usage: sgb_border_check.py ROM [--map ROM_MAP.csv] [--capture PNG [--crop X,Y,W,
 What it does: (1) scans the first 16 KB of bank 0 for the sender's calls `ld a,$0B / ld hl,ADDR / call F` (ADDR in $4000-$7FFF) and decodes the 16-byte
 packet found at ADDR (command = header >> 3, length = header & 7). CHR_TRN ($13), PCT_TRN ($14), PAL_TRN ($0B) and ATTR_TRN ($15) are sent by the
 transfer routine, which copies the $1000 bytes that follow the packet to $8800 and shows them as tiles, so the SGB reads ADDR+$10 ... ADDR+$100F.
-(2) renders the border (Pan Docs, "SGB Border"): CHR_TRN data byte 0 bit 0 selects tiles 0-127 or 128-255 (4 bpp, 32 bytes: planes 0/1 in the first 16,
-planes 2/3 in the second 16), PCT_TRN = 32 x 32 map words (tile, attribute: bits 2-4 palette 4-7, bit 6 / 7 flips) followed by 4 palettes of 16 BGR555 words.
+(2) renders the border (Pan Docs, "Border Commands", https://gbdev.io/pandocs/SGB_Command_Border.html): CHR_TRN packet byte 1 (the first after the header) bit 0 selects tiles 0-127 or 128-255 (4 bpp, 32 bytes: planes 0/1 in the first 16,
+planes 2/3 in the second 16), PCT_TRN = 32 x 28 map words (+ one extra row, $700-$73F; tile, attribute: bits 2-4 palette, 4-6 only, bit 6 / 7 flips), then at $800 the palettes 4-6 of 16 BGR555 words
+(the 4th palette slot read below is never selected by the map: Pan Docs says $860-$FFF is not used).
 (3) compares with a capture or a sheet outside the 160 x 144 window in the middle (x 48-207, y 40-183 of the 256 x 224 picture)."""
 import sys, os, re, collections
 from PIL import Image
@@ -126,7 +127,7 @@ def main(a):
     used.update(used_map)
     chr_off = sorted(a2 for a2 in (tiles[0][0], tiles[128][0]))
     print('\nborder: %d of 256 tiles are used by the map, palettes %s' % (len(used_t), sorted(p for p in used_pal)))
-    print('bytes the picture needs: %d tile bytes + %d map bytes (rows 0-27 of the 32 x 32 map) + palettes' % (len(used_t) * 32, len(used_map)))
+    print('bytes the picture needs: %d tile bytes + %d map bytes (rows 0-27 of the 32 x 28 map) + palettes' % (len(used_t) * 32, len(used_map)))
     if cls:
         cnt = collections.Counter(cls.get(x, '?') for x in used)
         print('their coverage classes in the v8 run: %s (U = never read, r = read only in forced runs, R = read organically)' % dict(cnt))

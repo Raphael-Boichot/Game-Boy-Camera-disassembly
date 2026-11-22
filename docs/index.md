@@ -170,3 +170,8 @@ The project notes (formerly one README) are split into one file per section; the
 | 19.10 | &nbsp;&nbsp;[What is still open](19_sensor_guide.md#1910-what-is-still-open) | `19_sensor_guide.md` |
 | 19.11 | &nbsp;&nbsp;[Glossary](19_sensor_guide.md#1911-glossary) | `19_sensor_guide.md` |
 | 20 | [TCRF's regional differences, item by item against the ROMs](20_tcrf_regional_differences.md#20-tcrfs-regional-differences-item-by-item-against-the-roms) | `20_tcrf_regional_differences.md` |
+| 21 | [The project against Pan Docs](21_pandocs_crosscheck.md#21-the-project-against-pan-docs) | `21_pandocs_crosscheck.md` |
+| 21.1 | &nbsp;&nbsp;[Agreement (A)](21_pandocs_crosscheck.md#211-agreement-a) | `21_pandocs_crosscheck.md` |
+| 21.2 | &nbsp;&nbsp;[Corrected by Pan Docs (B)](21_pandocs_crosscheck.md#212-corrected-by-pan-docs-b) | `21_pandocs_crosscheck.md` |
+| 21.3 | &nbsp;&nbsp;[Where Pan Docs differs and the project has evidence (C)](21_pandocs_crosscheck.md#213-where-pan-docs-differs-and-the-project-has-evidence-c) | `21_pandocs_crosscheck.md` |
+| 21.4 | &nbsp;&nbsp;[Open: the exposure step (owner's choice)](21_pandocs_crosscheck.md#214-open-the-exposure-step-owners-choice) | `21_pandocs_crosscheck.md` |

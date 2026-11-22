@@ -21,9 +21,9 @@ def add(b, s, e, typ, desc, ctx, ev, sheet=''):
 # carry data (PAL_TRN, ATTR_TRN, CHR_TRN, PCT_TRN: $1000 bytes after the 16-byte packet) overlap each other.
 SND = 'sender 00:1D38-1EA0'
 add(0x0B, 0x4000, 0x401F, 'sgb_packet', 'MLT_REQ packets: $89 $00 (1 player, 4000) and $89 $01 (2 players, 4010); the multi-player probe 00:1CEA-1D43 sends them to detect the SGB', SND, 'C')
-add(0x0B, 0x4020, 0x402F, 'sgb_packet', 'PAL_SET: $51, palette ids $0010 x 4, $80 (cancel mask); the game window is drawn with palette 16 of the PAL_TRN block (BGB: its 4 colours)', SND, 'C')
+add(0x0B, 0x4020, 0x402F, 'sgb_packet', 'PAL_SET: $51, palette ids $0010 x 4, flags $80 (Pan Docs, PAL_SET byte 9: bit 7 = apply ATF, here ATF 0; bit 6, cancel MASK_EN, is clear); the game window is drawn with palette 16 of the PAL_TRN block (BGB: its 4 colours)', SND, 'C')
 add(0x0B, 0x4030, 0x403F, 'sgb_packet', 'ATTR_TRN packet $A9 $00 (data window 4040-503F)', SND, 'I')
-add(0x0B, 0x4040, 0x40A5, 'sgb_attr_trn_data', 'start of the ATTR_TRN window: zeros up to 409C, then 40 40 40 90 90 90 E4 E4 E4 (not identified; the attribute files are not used by this sequence)', SND, 'I')
+add(0x0B, 0x4040, 0x40A5, 'sgb_attr_trn_data', 'start of the ATTR_TRN window: zeros up to 409C, then 40 40 40 90 90 90 E4 E4 E4 (not identified); ATF 0 = the first 90 bytes, all zero (palette 0 everywhere), is the one PAL_SET applies (flags $80, Pan Docs), the other ATFs are not used by this sequence', SND, 'I')
 add(0x0B, 0x40A6, 0x40B5, 'sgb_packet', 'PAL_TRN packet $59 $00 (data window 40B6-50B5)', SND, 'C')
 add(0x0B, 0x40B6, 0x413D, 'sgb_pal_trn_data', 'SNES system palettes 0-16 (4 BGR555 colours each); id 16 at 4136-413D (FF7F B55A 6B35 6310) is the palette of the game window (BGB: exactly its 4 colours)', SND, 'C')
 add(0x0B, 0x4156, 0x4165, 'sgb_packet', 'CHR_TRN packet $99 $00: tiles 0-127 follow (4166-5165)', SND, 'C')
