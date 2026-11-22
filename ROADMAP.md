@@ -36,7 +36,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | L3 | done | - |
 | L4 | done | - (2026-11-10: `wram/wram_summary_gold.csv` and `wram/INDEX.md`, as the international ROM) |
 | L5 | done | - |
-| L6 | partial | Targeted runs that show its own assets (the Zelda stamps and the album B pictures, read so far only in forced runs; `assets/gold_own_never_read.csv`). |
+| L6 | partial | ~~Targeted runs that show its own assets~~ done 2026-11-22 (`tools/gold_own_assets_run.py`, `assets/gold_own_organic.csv`: album B pictures 6-8 and every Zelda stamp read and shown by key presses only, C, core and BGB). No item of its own left: its L6 follows the Japanese ROM's open questions. |
 
 ## Pocket Camera (Hello Kitty)
 

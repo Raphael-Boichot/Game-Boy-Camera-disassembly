@@ -12,7 +12,7 @@ MD5 `b2999cfb6dacb439f501a71f30f91762`. The international ROM with modified asse
 | L3 | done | `disasm/sym_names_gold.csv`: C 5,280 / I 130 (the I names all final, unused, dead or never loaded: `disasm/sym_settled_unused_gold.csv`), 0 doubts (`disasm/sym_unconclusive_gold.csv`) |
 | L4 | done | `disasm/ram_names_gold.csv` and the constant tables, applied by `tools/sym_fix.py --const` |
 | L5 | done | `src/`, `make TREE=gold check` |
-| L6 | partial | the character set, shared with the international ROM (`disasm/charset_gold.csv`) |
+| L6 | partial | the character set, shared with the international ROM (`disasm/charset_gold.csv`); its own assets read and shown in play (2026-11-22: `assets/gold_own_organic.csv`, `screens/`; the main README, unused assets) |
 
 ![What each byte of the Gold ROM is](gold_rom_layout_map.png)
 
