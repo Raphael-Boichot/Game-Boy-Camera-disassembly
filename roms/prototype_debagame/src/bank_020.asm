@@ -1873,48 +1873,48 @@ Leftover_20_74B7_TRANSFER_TO_BUF::
     db $26, $18, $00, $c9
 
 ; I: leftover: an exact copy of 8 bytes of TRA_BUF_J_TBL (from 2C:7530, under the label
-; Leftover_2C_7530_TRA_BUF_J_TBL); step 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build
+; Leftover_2C_7530_TRA_BUF_J_TBL); step 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build
 ; reads, runs or explains it (never read nor run in the L2 runs)
 Leftover_20_751B_TRA_BUF_J_TBL::
     db $3e, $20, $1e, $20, $fa, $20, $97, $22
 
 ; I: leftover: an exact copy of 702 bytes of CONT_PATTERN (from 2C:7538, under the label
-; Leftover_2C_7538_CONT_PATTERN); step 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build
+; Leftover_2C_7538_CONT_PATTERN); step 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build
 ; reads, runs or explains it (never read nor run in the L2 runs)
 Leftover_20_7523_CONT_PATTERN::
     INCBIN "data/bank_20/Leftover_20_7523_CONT_PATTERN.bin" ; $7523, 702 bytes
 ; I: leftover: an exact copy of 16 bytes of NO_DITHER_PAT (from 2C:77F6, under the label
-; Leftover_2C_77F6_NO_DITHER_PAT); step 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build
+; Leftover_2C_77F6_NO_DITHER_PAT); step 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build
 ; reads, runs or explains it (never read nor run in the L2 runs)
 Leftover_20_77E1_NO_DITHER_PAT::
     db $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08
 
 ; I: leftover: an exact copy of 16 bytes of BAYER_PAT (from 2C:7806, under the label Leftover_2C_7806_BAYER_PAT); step
-; 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build reads, runs or explains it (never read
 ; nor run in the L2 runs)
 Leftover_20_77F1_BAYER_PAT::
     db $00, $08, $02, $0a, $0c, $04, $0e, $06, $03, $0b, $01, $09, $0f, $07, $0d, $05
 
 ; I: leftover: an exact copy of 16 bytes of HARF_PAT (from 2C:7816, under the label Leftover_2C_7816_HARF_PAT); step
-; 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build reads, runs or explains it (never read
 ; nor run in the L2 runs)
 Leftover_20_7801_HARF_PAT::
     db $0a, $04, $06, $08, $0c, $00, $01, $0e, $07, $09, $0b, $05, $03, $0f, $0d, $01
 
 ; I: leftover: an exact copy of 16 bytes of SCREW_PAT (from 2C:7826, under the label Leftover_2C_7826_SCREW_PAT); step
-; 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build reads, runs or explains it (never read
 ; nor run in the L2 runs)
 Leftover_20_7811_SCREW_PAT::
     db $0d, $07, $06, $0c, $08, $01, $00, $05, $09, $02, $03, $04, $0e, $0a, $0b, $0f
 
 ; I: leftover: an exact copy of 16 bytes of SCREW2_PAT (from 2C:7836, under the label Leftover_2C_7836_SCREW2_PAT);
-; step 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build reads, runs or explains it (never
+; step 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build reads, runs or explains it (never
 ; read nor run in the L2 runs)
 Leftover_20_7821_SCREW2_PAT::
     db $0f, $04, $08, $0c, $0b, $00, $01, $05, $07, $03, $02, $09, $0e, $0a, $06, $0d
 
 ; I: leftover: a variant (94 % of the bytes equal) of 16 bytes of TYUUKAN_PAT (from 2C:7846, under the label
-; Leftover_2C_7846_TYUUKAN_PAT); step 4b-4: a run of 1773 bytes, 62 % equal at that shift; nothing in this build
+; Leftover_2C_7846_TYUUKAN_PAT); step 4b-4: a run of 1508 bytes, 73 % equal at that shift; nothing in this build
 ; reads, runs or explains it (never read nor run in the L2 runs)
 Leftover_20_7831_TYUUKAN_PAT_Variant::
     db $0c, $04, $08, $0e, $0b, $00, $02, $06, $07, $03, $01, $0a, $0f, $09, $05, $01
@@ -1982,8 +1982,19 @@ Leftover_20_7841::
     db $05, $04, $05, $05, $06, $03, $04, $04, $05, $04, $05, $05, $06, $04, $05, $05
     db $06, $05, $06, $06, $07, $03, $04, $04, $05, $04, $05, $05, $06, $04, $05, $05
     db $06, $05, $06, $06, $07, $04, $05, $05, $06, $05, $06, $06, $07, $05, $06, $06
-    db $07, $06, $07, $07, $08, $01, $00, $ff, $3f, $01, $00, $00, $01, $01, $00, $40
-    db $01, $00, $01, $01, $01, $01, $40, $fa, $03
+    db $07, $06, $07, $07, $08
+
+; I: leftover load-record header, 6 bytes and its payload, 1 bytes: 01 00 FF 3F 01 00 = type 1, bank $00, load address
+; $3FFF, $0001 (1) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 7 records (owner 2026-11-22: part of the ...
+Leftover_20_7C05_LoadRecord::
+    db $01, $00, $ff, $3f, $01, $00, $00
+
+; I: leftover load-record header, 6 bytes and its payload, 1 bytes: 01 01 00 40 01 00 = type 1, bank $01, load address
+; $4000, $0001 (1) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 7 records (owner 2026-11-22: part of the ...
+Leftover_20_7C0C_LoadRecord::
+    db $01, $01, $00, $40, $01, $00, $01, $01, $01, $01, $40, $fa, $03
 
 ; I: leftover: an exact copy of 998 bytes of Gfx_01_4001_FNTOOE1 (from 01:4001, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)

@@ -169,6 +169,66 @@ for i_, (b, ad) in enumerate(_lbl):
 TYPEAT = {}
 for r in TYPES: TYPEAT[(int(r['bank'], 16), int(r['start'], 16))] = r
 copy_types = []; ncopy = 0; COPYSH = {}                 # COPYSH: flat offset of a copied byte -> (shift to its source, block, bank, addr)
+def _copyrow(cb, ca, ln, k_, nm2, note2, src, sh=None):
+    ln_, b, ad, o0, o1, nm = _src[k_]; t_ = TYPEAT.get((b, ad))
+    put(cb, ca, nm2, 'I', note2, src)
+    copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + ln), t_['type'] if t_ else 'data', (t_['width'] if t_ else '') or '',
+                       COPYNOTE + '%s (%02X:%04X)%s' % (nm, b, ad, '' if t_ else ': a copy of code, typed data (this build never runs it)')])
+    f0 = _flat(cb, ca)
+    for k in range(f0, f0 + ln):
+        cov_[k] = 1; idcov_[k] = 1
+        if sh is not None: COPYSH[k] = (sh, nm, b, ad)
+# 4b-0. load-record chains first (owner 2026-11-22: "bank 29: the big uncertain chunk is part of the surrounding assets"): a run of 2+
+#     headers 01 BB LL LH NL NH (type 1, bank, load address, length up to $3FA) each followed by its payload and then the next header (the
+#     last one may run past the end of the bank) is a download stream of a build's image; the header names its payload's source. A payload
+#     equal byte for byte to this build's bytes at that address is a copy of the identified blocks there, placed by the header and split at
+#     their boundaries (Leftover_BB_AAAA_<block>[_PartAAAA], tag I, the block's type): the search of 4b-2 placed some of them wrongly where
+#     the picture is a periodic pattern ($FF $00 rows) or left them uncertain (1,018 bytes of $FF $00 at 29:6DED). The headers are named
+#     Leftover_BB_AAAA_LoadRecord here when the payload is placed (a payload under 16 bytes that is not placed goes with its header); the
+#     headers of the other payloads are left to step 5c.
+def _hdr(o):
+    h = ROMB[o:o + 6]
+    if len(h) < 6 or h[0] != 1 or h[1] >= 0x40: return None
+    n = h[4] | h[5] << 8; a_ = h[2] | h[3] << 8
+    if not 0 < n <= 0x3FA or not (0x4000 <= a_ < 0x8000 or (h[1] == 0 and a_ < 0x4000)): return None
+    return h[1], a_, n
+_SRCK = {}
+for k_, (ln, b, ad, o0, o1, nm) in enumerate(_src):
+    for o in range(o0, o1): _SRCK.setdefault(o, k_)
+nchain = nrecc = nplace = 0; o = 0; _NB = len(ROMB)
+while o < _NB - 6:
+    x = _hdr(o)
+    if not x or idcov_[o]: o += 1; continue
+    bend = (o | 0x3FFF) + 1; chain = []; q = o
+    while q < bend - 6 and not idcov_[q]:
+        x = _hdr(q)
+        if not x: break
+        chain.append((q, x)); q = q + 6 + x[2]
+    if len(chain) < 2: o += 1; continue
+    nchain += 1
+    for q, (sb_, sa_, n_) in chain:
+        cb, ca = q >> 14, 0x4000 + (q & 0x3FFF); d0 = q + 6; d1 = min(d0 + n_, bend); s0 = _flat(sb_, sa_)
+        equal = ROMB[d0:d1] == ROMB[s0:s0 + (d1 - d0)] and not any(idcov_[d0:d1]) and s0 != d0
+        small = d1 - d0 < 16 and not any(_SRCK.get(s0 + i) is not None for i in range(d1 - d0))
+        if not equal and not small: continue           # a payload of another build: its header is left to step 5c (a 6-byte gap), its bytes to the other steps
+        put(cb, ca, 'Leftover_%02X_%04X_LoadRecord' % (cb, ca), 'I', 'leftover load-record header, 6 bytes%s: 01 %02X %02X %02X %02X %02X = type 1, bank $%02X, load address $%04X, $%04X (%d) data bytes after it (%s); a record of a build\'s image as a download stream, in a chain of %d records (owner 2026-11-22: part of the surrounding assets)' % (
+            (' and its payload, %d bytes' % (d1 - d0)) if small else '', sb_, sa_ & 0xFF, sa_ >> 8, n_ & 0xFF, n_ >> 8, sb_, sa_, n_, n_, 'equal to this build\'s bytes there' if equal else 'not equal to this build\'s bytes there', len(chain)), 'record')
+        nrecc += 1
+        if not equal or small: continue
+        i = 0
+        while i < d1 - d0:
+            k_ = _SRCK.get(s0 + i)
+            if k_ is None: i += 1; continue
+            j = i
+            while j < d1 - d0 and _SRCK.get(s0 + j) == k_: j += 1
+            ln_, b_, ad_, so0, so1, nm_ = _src[k_]; pb, pa = (d0 + i) >> 14, 0x4000 + ((d0 + i) & 0x3FFF); sa2 = ad_ + (s0 + i - so0)
+            whole = s0 + i == so0 and j - i == so1 - so0
+            _copyrow(pb, pa, j - i, k_, 'Leftover_%02X_%04X_%s' % (pb, pa, nm_) + ('' if whole else '_Part%04X' % sa2),
+                     'leftover: an exact copy of %d bytes of %s (from %02X:%04X%s), placed by the load-record header before it (%02X:%04X); nothing in this build reads, runs or explains it (never read nor run in the L2 runs)' % (
+                         j - i, nm_, b_, sa2, '' if whole else ', a part of the block', cb, ca), 'copy', sh=(s0 + i) - (d0 + i))
+            nplace += 1; i = j
+    o = q
+print('step 4b-0: %d load-record chains, %d headers, %d payload pieces placed by their header' % (nchain, nrecc, nplace))
 for ln, b, ad, o0, o1, nm in sorted(_src, reverse=True):
     blob = ROMB[o0:o1]; i_ = ROMB.find(blob)
     while i_ >= 0:
@@ -192,15 +252,6 @@ SRCB = {}                                          # flat offset -> index of the
 for k_, (ln, b, ad, o0, o1, nm) in enumerate(_src):
     for o in range(o0, o1): SRCB.setdefault(o, k_)
 def _addr(o): return (o >> 14, o if o < 0x4000 else 0x4000 + (o & 0x3FFF))
-def _copyrow(cb, ca, ln, k_, nm2, note2, src, sh=None):
-    ln_, b, ad, o0, o1, nm = _src[k_]; t_ = TYPEAT.get((b, ad))
-    put(cb, ca, nm2, 'I', note2, src)
-    copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + ln), t_['type'] if t_ else 'data', (t_['width'] if t_ else '') or '',
-                       COPYNOTE + '%s (%02X:%04X)%s' % (nm, b, ad, '' if t_ else ': a copy of code, typed data (this build never runs it)')])
-    f0 = _flat(cb, ca)
-    for k in range(f0, f0 + ln):
-        cov_[k] = 1; idcov_[k] = 1
-        if sh is not None: COPYSH[k] = (sh, nm, b, ad)
 W16 = {}
 for o in sorted(SRCB):
     w = ROMB[o:o + 16]

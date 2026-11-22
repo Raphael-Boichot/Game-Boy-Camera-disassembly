@@ -35,128 +35,137 @@ Leftover_23_4315_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $01, $03
 
-; I: leftover: 942 bytes between two pieces of a copy of Unused_TCRF_FacePhoto9_HOI_L_Gfx at the same shift, where
-; this copy differs from the block (05:6133; 45 % of the bytes equal): an edited version; nothing in this build reads,
-; runs or explains it (never read nor run in the L2 runs)
-Leftover_23_4367_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133::
-    INCBIN "data/bank_23/Leftover_23_4367_Unused_TCRF_FacePhoto9_HOI_L_Gfx_VariantPart6133.bin" ; $4367, 942 bytes
-; I: leftover: an exact copy of 82 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:60E1, a part of the block) that
-; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_23_4715_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part60E1::
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+; I: leftover load-record header, 6 bytes: 01 03 3B 5E FA 03 = type 1, bank $03, load address $5E3B, $03FA (1018) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_23_4365_LoadRecord::
     db $01, $03
 
 ; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
-Leftover_23_4767::
-    db $35, $62, $fa, $03
+Leftover_23_4367::
+    db $3b, $5e, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:6235, a part of the block) that nothing in
-; this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:5E3B, a part of the block), placed by the
+; load-record header before it (23:4365); nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
+Leftover_23_436B_Gfx_03_5A41_CONF2_Part5E3B::
+    INCBIN "data/bank_23/Leftover_23_436B_Gfx_03_5A41_CONF2_Part5E3B.bin" ; $436B, 1018 bytes
+; I: leftover load-record header, 6 bytes: 01 03 35 62 FA 03 = type 1, bank $03, load address $6235, $03FA (1018) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_23_4765_LoadRecord::
+    db $01, $03, $35, $62, $fa, $03
+
+; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:6235, a part of the block), placed by the
+; load-record header before it (23:4765); nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
 Leftover_23_476B_Gfx_03_5A41_CONF2_Part6235::
     INCBIN "data/bank_23/Leftover_23_476B_Gfx_03_5A41_CONF2_Part6235.bin" ; $476B, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 03 2F 66 FA 03 = type 1, bank $03, load address $662F, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_23_4B65_LoadRecord::
     db $01, $03, $2f, $66, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:662F, a part of the block) that nothing in
-; this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:662F, a part of the block), placed by the
+; load-record header before it (23:4B65); nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
 Leftover_23_4B6B_Gfx_03_5A41_CONF2_Part662F::
     INCBIN "data/bank_23/Leftover_23_4B6B_Gfx_03_5A41_CONF2_Part662F.bin" ; $4B6B, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 03 29 6A FA 03 = type 1, bank $03, load address $6A29, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_23_4F65_LoadRecord::
     db $01, $03, $29, $6a, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:6A29, a part of the block) that nothing in
-; this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:6A29, a part of the block), placed by the
+; load-record header before it (23:4F65); nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
 Leftover_23_4F6B_Gfx_03_5A41_CONF2_Part6A29::
     INCBIN "data/bank_23/Leftover_23_4F6B_Gfx_03_5A41_CONF2_Part6A29.bin" ; $4F6B, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 03 23 6E FA 03 = type 1, bank $03, load address $6E23, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_23_5365_LoadRecord::
     db $01, $03, $23, $6e, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:6E23, a part of the block) that nothing in
-; this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Gfx_03_5A41_CONF2 (from 03:6E23, a part of the block), placed by the
+; load-record header before it (23:5365); nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
 Leftover_23_536B_Gfx_03_5A41_CONF2_Part6E23::
     INCBIN "data/bank_23/Leftover_23_536B_Gfx_03_5A41_CONF2_Part6E23.bin" ; $536B, 1018 bytes
-; I: leftover: 5 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_23_5765::
+; I: leftover load-record header, 6 bytes: 01 03 1D 72 24 00 = type 1, bank $03, load address $721D, $0024 (36) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_23_5765_LoadRecord::
     db $01, $03, $1d, $72, $24
 
-; I: leftover: an exact copy of 39 bytes of Unused_TCRF_FacePhoto9_HOI_L_Gfx (from 05:610C, a part of the block) that
-; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_23_576A_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part610C::
+    ; padding
+    ds $1, $00
+
+; I: leftover: an exact copy of 36 bytes of Gfx_03_5A41_CONF2 (from 03:721D, a part of the block), placed by the load-
+; record header before it (23:5765); nothing in this build reads, runs or explains it (never read nor run in the L2
+; runs)
+Leftover_23_576B_Gfx_03_5A41_CONF2_Part721D::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $01, $03
+    db $00, $00, $00, $00
 
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_23_5791::
-    db $41, $72, $40, $02
+; I: leftover load-record header, 6 bytes: 01 03 41 72 40 02 = type 1, bank $03, load address $7241, $0240 (576) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_23_578F_LoadRecord::
+    db $01, $03, $41, $72, $40, $02
 
-; I: leftover: an exact copy of Map_03_7241_BG_CONF (03:7241, 576 bytes) that nothing in this build reads, runs or
-; explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 576 bytes of Map_03_7241_BG_CONF (from 03:7241), placed by the load-record header
+; before it (23:578F); nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
 Leftover_23_5795_Map_03_7241_BG_CONF::
     INCBIN "data/bank_23/Leftover_23_5795_Map_03_7241_BG_CONF.bin" ; $5795, 576 bytes
 ; I: leftover load-record header, 6 bytes: 01 03 81 74 40 02 = type 1, bank $03, load address $7481, $0240 (576) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_23_59D5_LoadRecord::
-    db $01, $03, $81, $74, $40, $02
-
-; I: leftover: an exact copy of 576 bytes of Map_03_7481_BG_F_SCR (from 03:7481); step 4b-4: a run of 1752 bytes, 73 %
-; equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
-Leftover_23_59DB_Map_03_7481_BG_F_SCR::
-    INCBIN "data/bank_23/Leftover_23_59DB_Map_03_7481_BG_F_SCR.bin" ; $59DB, 576 bytes
+    INCBIN "data/bank_23/Leftover_23_59D5_LoadRecord.bin" ; $59D5, 582 bytes
 ; I: leftover load-record header, 6 bytes: 01 03 C1 76 FA 03 = type 1, bank $03, load address $76C1, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_23_5C1B_LoadRecord::
-    db $01, $03, $c1, $76, $fa, $03
+    INCBIN "data/bank_23/Leftover_23_5C1B_LoadRecord.bin" ; $5C1B, 1024 bytes
+; I: leftover load-record header, 6 bytes and its payload, 6 bytes: 01 03 BB 7A 06 00 = type 1, bank $03, load address
+; $7ABB, $0006 (6) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 22 records (owner 2026-11-22: part of the ...
+Leftover_23_601B_LoadRecord::
+    db $01, $03, $bb, $7a, $06, $00, $aa, $aa, $aa, $aa, $aa, $aa
 
-; I: leftover: a variant (99 % of the bytes equal) of 1024 bytes of Map_03_76C1_BG_EDIT (from 03:76C1); step 4b-4: a
-; run of 1184 bytes, 93 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in
-; the L2 runs)
-Leftover_23_5C21_Map_03_76C1_BG_EDIT_Variant::
-    INCBIN "data/bank_23/Leftover_23_5C21_Map_03_76C1_BG_EDIT_Variant.bin" ; $5C21, 1024 bytes
-; I: leftover: 12 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_23_6021::
-    db $aa, $aa, $aa, $aa, $aa, $aa, $01, $03, $c1, $7a, $a0, $00
+; I: leftover load-record header, 6 bytes: 01 03 C1 7A A0 00 = type 1, bank $03, load address $7AC1, $00A0 (160) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 22 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_23_6027_LoadRecord::
+    db $01, $03, $c1, $7a, $a0, $00, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $68, $69, $6a
+    db $6b, $6c, $6d, $6e, $6f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $78, $79, $7a
+    db $7b, $7c, $7d, $7e, $7f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $47, $48, $49, $4a
+    db $4b, $4c, $4d, $4e, $4f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $57, $58, $59, $5a
+    db $5b, $5c, $5d, $5e, $5f, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac
 
-; I: leftover: an exact copy of 160 bytes of Map_03_7AC1_BG_EDITW (from 03:7AC1); step 4b-4: a run of 172 bytes, 97 %
-; equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
-Leftover_23_602D_Map_03_7AC1_BG_EDITW::
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $68, $69, $6a, $6b, $6c, $6d, $6e, $6f, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $78, $79, $7a, $7b, $7c, $7d, $7e, $7f, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $47, $48, $49, $4a, $4b, $4c, $4d, $4e, $4f, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $57, $58, $59, $5a, $5b, $5c, $5d, $5e, $5f, $ac
-    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+; I: leftover load-record header, 6 bytes and its payload, 1 bytes: 01 03 FF 7F 01 00 = type 1, bank $03, load address
+; $7FFF, $0001 (1) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 22 records (owner 2026-11-22: part of the ...
+Leftover_23_60CD_LoadRecord::
+    db $01, $03, $ff, $7f, $01, $00, $03
 
-; I: leftover: 20 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_23_60CD::
-    db $01, $03, $ff, $7f, $01, $00, $03, $01, $04, $00, $40, $01, $00, $04, $01, $04
-    db $01, $40, $fa, $03
+; I: leftover load-record header, 6 bytes and its payload, 1 bytes: 01 04 00 40 01 00 = type 1, bank $04, load address
+; $4000, $0001 (1) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 22 records (owner 2026-11-22: part of the ...
+Leftover_23_60D4_LoadRecord::
+    db $01, $04, $00, $40, $01, $00, $04, $01, $04, $01, $40, $fa, $03
 
 ; I: leftover: tile rows 0-1 of face photo 6 (the top of the head, 512 bytes); rows 2-13 are
 ; Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx (30:4201), whose rows 0-1 bank $30 lost under source text; here the rows

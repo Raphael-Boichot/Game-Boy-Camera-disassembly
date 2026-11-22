@@ -280,26 +280,21 @@ Leftover_34_6A01_Unused_TCRF_FaceDrawing4_FACE8_Gfx::
     ; padding
     ds $200, $00
 
-; I: leftover: 310 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 272 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_34_7A01::
-    INCBIN "data/bank_34/Leftover_34_7A01.bin" ; $7A01, 310 bytes
-; I: leftover: an exact copy of 862 bytes of Unused_TCRF_FaceDrawing2_FACE6_Gfx (from 06:4E01, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_34_7B37_Unused_TCRF_FaceDrawing2_FACE6_Gfx_Part4E01::
-    INCBIN "data/bank_34/Leftover_34_7B37_Unused_TCRF_FaceDrawing2_FACE6_Gfx_Part4E01.bin" ; $7B37, 862 bytes
-; I: leftover: an exact copy of 124 bytes of Unused_TCRF_FaceDrawing4_FACE8_Gfx (from 06:6D7F, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
-Leftover_34_7E95_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part6D7F::
-    db $fc, $0c, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $07, $f8, $f8, $80, $80
-    db $00, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $ff, $00, $00, $00, $00
-    db $00, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $c0, $7f, $7f, $01, $01
-    db $00, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $c0
-    db $7f, $60, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
-    db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
-    db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
-    db $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
+    INCBIN "data/bank_34/Leftover_34_7A01.bin" ; $7A01, 272 bytes
+; I: leftover load-record header, 6 bytes: 01 06 01 6A FA 03 = type 1, bank $06, load address $6A01, $03FA (1018) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 2 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_34_7B11_LoadRecord::
+    db $01, $06, $01, $6a, $fa, $03
 
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FaceDrawing4_FACE8_Gfx (from 06:6A01, a part of the block),
+; placed by the load-record header before it (34:7B11); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
+Leftover_34_7B17_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part6A01::
+    INCBIN "data/bank_34/Leftover_34_7B17_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part6A01.bin" ; $7B17, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 06 FB 6D FA 03 = type 1, bank $06, load address $6DFB, $03FA (1018) data
 ; bytes after it (they run past the end of the bank); a record of an older build's image as a download stream in the
 ; PC's memory, that nothing in this build reads

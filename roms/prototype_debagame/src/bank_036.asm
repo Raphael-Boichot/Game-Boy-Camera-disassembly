@@ -153,84 +153,104 @@ Leftover_36_5DCD_LoadRecord::
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_36_5DD3_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part75EF::
     INCBIN "data/bank_36/Leftover_36_5DD3_Unused_TCRF_FacePhoto3_KAO_3_Gfx_Part75EF.bin" ; $5DD3, 530 bytes
-; I: leftover: 20 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_36_5FE5::
-    db $01, $04, $ff, $7f, $01, $00, $04, $01, $05, $00, $40, $01, $00, $05, $01, $05
-    db $01, $40, $fa, $03
+; I: leftover load-record header, 6 bytes and its payload, 1 bytes: 01 04 FF 7F 01 00 = type 1, bank $04, load address
+; $7FFF, $0001 (1) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 18 records (owner 2026-11-22: part of the ...
+Leftover_36_5FE5_LoadRecord::
+    db $01, $04, $ff, $7f, $01, $00, $04
 
-; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:4001, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover load-record header, 6 bytes and its payload, 1 bytes: 01 05 00 40 01 00 = type 1, bank $05, load address
+; $4000, $0001 (1) data bytes after it (equal to this build's bytes there); a record of a build's image as a download
+; stream, in a chain of 18 records (owner 2026-11-22: part of the ...
+Leftover_36_5FEC_LoadRecord::
+    db $01, $05, $00, $40, $01, $00, $05
+
+; I: leftover load-record header, 6 bytes: 01 05 01 40 FA 03 = type 1, bank $05, load address $4001, $03FA (1018) data
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
+Leftover_36_5FF3_LoadRecord::
+    db $01, $05, $01, $40, $fa, $03
+
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:4001, a part of the block),
+; placed by the load-record header before it (36:5FF3); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_5FF9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part4001::
     INCBIN "data/bank_36/Leftover_36_5FF9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part4001.bin" ; $5FF9, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 FB 43 FA 03 = type 1, bank $05, load address $43FB, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_63F3_LoadRecord::
     db $01, $05, $fb, $43, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:43FB, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:43FB, a part of the block),
+; placed by the load-record header before it (36:63F3); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_63F9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part43FB::
     INCBIN "data/bank_36/Leftover_36_63F9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part43FB.bin" ; $63F9, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 F5 47 FA 03 = type 1, bank $05, load address $47F5, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_67F3_LoadRecord::
     db $01, $05, $f5, $47, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:47F5, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:47F5, a part of the block),
+; placed by the load-record header before it (36:67F3); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_67F9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part47F5::
     INCBIN "data/bank_36/Leftover_36_67F9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part47F5.bin" ; $67F9, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 EF 4B 12 02 = type 1, bank $05, load address $4BEF, $0212 (530) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_6BF3_LoadRecord::
     db $01, $05, $ef, $4b, $12, $02
 
-; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:4BEF, a part of the block) that
-; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto7_HOI_U_Gfx (from 05:4BEF, a part of the block),
+; placed by the load-record header before it (36:6BF3); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_6BF9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part4BEF::
     INCBIN "data/bank_36/Leftover_36_6BF9_Unused_TCRF_FacePhoto7_HOI_U_Gfx_Part4BEF.bin" ; $6BF9, 530 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 01 4E FA 03 = type 1, bank $05, load address $4E01, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_6E0B_LoadRecord::
     db $01, $05, $01, $4e, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:4E01, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:4E01, a part of the block),
+; placed by the load-record header before it (36:6E0B); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_6E11_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part4E01::
     INCBIN "data/bank_36/Leftover_36_6E11_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part4E01.bin" ; $6E11, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 FB 51 FA 03 = type 1, bank $05, load address $51FB, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_720B_LoadRecord::
     db $01, $05, $fb, $51, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:51FB, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:51FB, a part of the block),
+; placed by the load-record header before it (36:720B); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_7211_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part51FB::
     INCBIN "data/bank_36/Leftover_36_7211_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part51FB.bin" ; $7211, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 F5 55 FA 03 = type 1, bank $05, load address $55F5, $03FA (1018) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_760B_LoadRecord::
     db $01, $05, $f5, $55, $fa, $03
 
-; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:55F5, a part of the block)
-; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 1018 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:55F5, a part of the block),
+; placed by the load-record header before it (36:760B); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_7611_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part55F5::
     INCBIN "data/bank_36/Leftover_36_7611_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part55F5.bin" ; $7611, 1018 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 EF 59 12 02 = type 1, bank $05, load address $59EF, $0212 (530) data
-; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
-; memory, that nothing in this build reads
+; bytes after it (equal to this build's bytes there); a record of a build's image as a download stream, in a chain of
+; 18 records (owner 2026-11-22: part of the surrounding assets)
 Leftover_36_7A0B_LoadRecord::
     db $01, $05, $ef, $59, $12, $02
 
-; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:59EF, a part of the block) that
-; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
+; I: leftover: an exact copy of 530 bytes of Unused_TCRF_FacePhoto8_HOI_D_Gfx (from 05:59EF, a part of the block),
+; placed by the load-record header before it (36:7A0B); nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
 Leftover_36_7A11_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part59EF::
     INCBIN "data/bank_36/Leftover_36_7A11_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part59EF.bin" ; $7A11, 530 bytes
 ; I: leftover load-record header, 6 bytes: 01 05 01 5C FA 03 = type 1, bank $05, load address $5C01, $03FA (1018) data
