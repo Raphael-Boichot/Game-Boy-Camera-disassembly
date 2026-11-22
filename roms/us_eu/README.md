@@ -12,7 +12,7 @@ MD5 `42d2f65e2549be9d1d126a6828b5d1c1`. The international ROM: the same modes an
 | L3 | done | `disasm/sym_names_us.csv`: C 5,281 / I 130 (the I names all final, unused, dead or never loaded: `disasm/sym_settled_unused_us.csv`), 0 doubts (`disasm/sym_unconclusive_us.csv`) |
 | L4 | done | `disasm/ram_names_us.csv` and the constant tables, applied by `tools/sym_fix.py --const` |
 | L5 | done | `src/`, `make TREE=us_eu check` |
-| L6 | partial | the character set and the keyboard tables as text (`disasm/charset_us.csv`, `disasm/text_tables_us.csv`) |
+| L6 | partial | the character set and the keyboard tables as text (`disasm/charset_us.csv`, `disasm/text_tables_us.csv`); display replays of the Japanese leftover blocks (2026-11-22: `assets/display_check_us.csv`, none of the leftovers on screen; the main README, unused assets) |
 
 ![What each byte of the international ROM is](us_rom_layout_map.png)
 

@@ -24,7 +24,7 @@ Written 2026-11-09, after the consistency audit (steps 1-5) and step 6 items 1-2
 | L3 | done | - |
 | L4 | done | - (2026-11-10: `wram/wram_summary_us.csv` and `wram/INDEX.md`: the layout is the Japanese one, 98.8 % of the access sites pair as in Japan) |
 | L5 | done | - |
-| L6 | partial | Display replays to confirm whether the Japanese leftover blocks ever reach the screen (README, never-reached assets). |
+| L6 | partial | ~~Display replays to confirm whether the Japanese leftover blocks ever reach the screen~~ done 2026-11-22 (`tools/intl_display_check.py`, `assets/display_check_us.csv`: of the 95 blocks, 47 bytes in 8 small spans on screen, the same as on the Japanese ROM with the same corpus; the leftovers themselves never; I). No item of its own left: its L6 follows the Japanese ROM's open questions. |
 
 ## Game Boy Camera Gold (USA)
 
