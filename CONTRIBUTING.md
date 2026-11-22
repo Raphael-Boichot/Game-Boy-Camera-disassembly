@@ -74,7 +74,7 @@ Never guess an address or a value. A figure is recomputed before it is quoted. A
 * The project's emulator core draws the VIEW-screen band and one stamp slot wrongly (`docs/15_tcrf_and_unlocks.md`, §15.8): use BGB for every screenshot.
 * The core keeps one internal value across resets inside a process, so a batch of replays can differ from the same replays run one per process (docs §16.6, row 1).
 * BGB's camera sensor is a made-up picture that does not behave like a sensor (docs §18, "Where this comes from"): it reproduces the code path, not decisions that depend on the image.
-* The raw sensor recordings (the owner's three bus-analyser workbooks, docs §18) are not in the repository yet, only their decoded rows (`sensor/*_rows.csv`): `tools/jp/sensor_decode.py` cannot be rerun from a clone.
+* The sensor recordings are in the repository as the owner's workbooks (`sensor/recordings/`); their raw logic-analyser captures (`.sal`) stay in his sensor repository.
 * In this project's sandbox a linked BGB run (printer helper) needs `BGB_HF=-headless` and `PRN_SYNC3_PERIOD=0.002`, and no Xvfb or Wine process left over from an earlier run (docs §17.1).
 
 ## Where to read next

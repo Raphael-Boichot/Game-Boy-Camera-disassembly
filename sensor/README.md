@@ -10,5 +10,6 @@ camera ROM: the Hello Kitty forced runs use the same calibration routes. The doc
 * `calibration_saves/`: three real saves of camera CE10245109 calibrated in the dark, in intense light and in varying light (owner), and
   the blank save of 128 KiB of `$AA` that makes the boot run the factory calibration.
 * `bgb/`: BGB recordings of the register writes and captures (boot, `$AA` boot, `$FD` / `$FF` boot combos, live view in several lights).
+* `recordings/`: the owner's bus-analyser workbooks (camera 1 and camera 2), copied from his sensor repository on 2026-11-22; the CSV files of this folder and of `more_recordings/` are decoded from them (`recordings/README.md`).
 * `more_recordings/`, `dither_variants/`: further captures and the dither tables they gave.
 * The csv / txt files: the register sites, calibration rows, dither matrix order, exposure, SAR and meter checks, the 128 x 128 pixel map.

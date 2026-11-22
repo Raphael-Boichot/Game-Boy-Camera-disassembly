@@ -6,7 +6,9 @@ Source: github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M642
 (camera 2, an earlier unit: boot, two factory resets, normal use, violent exposure changes). The workbooks hold the 64 register bits already
 decoded from the probe wires (the wire order of camera 2 differs, the export handles it); they are read with sensor_decode.rows_of.
 
-usage: sensor_more_recordings.py DIR_2024 DIR_CAMERA2 OUTDIR
+usage: sensor_more_recordings.py DIR_2024 DIR_CAMERA2 OUTDIR [--saves DIR]
+  the workbooks are in the repository since 2026-11-22: sensor/recordings/camera1_2024 and sensor/recordings/camera2; the four saves of the
+  2024 folder (the calibration vectors) stay in the owner's sensor repository (no save in git): --saves points at that folder (default DIR_2024)
   -> OUTDIR/<camera>_<recording>.csv (idx, reg0, reg1, C, P, M, X, reg7), OUTDIR/calibration_vectors.csv (the vectors of the saves of the 2024
      folder) and a report on stdout: offset per band in live view, the groups of the factory runs, the band switches."""
 import sys, os, csv, collections
@@ -20,6 +22,7 @@ SAVES = ('Calibration_procedure.sav', 'Calibrated_Camera.sav', '00_save.sav', 'F
 
 def main():
     d24, d2, out = sys.argv[1:4]
+    dsav = sys.argv[sys.argv.index('--saves') + 1] if '--saves' in sys.argv else d24
     os.makedirs(out, exist_ok=True)
     data = {}
     for cam, names in REC.items():
@@ -34,7 +37,7 @@ def main():
     with open(os.path.join(out, 'calibration_vectors.csv'), 'w', newline='') as fh:
         w = csv.writer(fh, lineterminator='\n'); w.writerow(('save', 'copy', 'tolerances', 'vector', 'checksums', 'checksums_valid'))
         for s in SAVES:
-            b = open(os.path.join(d24, s), 'rb').read()
+            b = open(os.path.join(dsav, s), 'rb').read()
             for o, name in ((0x4FF0, 'bank 2'), (0x11FF0, 'bank 8')):
                 v = b[o + 2:o + 14]; x = 0
                 for y in v: x ^= y
