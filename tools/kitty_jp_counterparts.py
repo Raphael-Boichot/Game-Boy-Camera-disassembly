@@ -9,7 +9,7 @@ For each name of disasm/sym_names_kitty.csv (its block: up to the next name, in 
     addresses masked) or disasm/similar_jp_kitty.csv (a near copy, its ratio given);
   * code not matched so: the nearest Japanese routine (whole ROM, instruction sequence ratio >= 0.75; under 0.9, under 16 instructions,
     or with a second one at 0.9 or more, it counts as ambiguous);
-  * data: the Japanese label holding the same bytes, when the block (16 bytes or more, not one repeated value) is found exactly once
+  * data: the Japanese label holding the same bytes, when the block (16 bytes or more, 3 changes of value or more) is found exactly once
     in the Japanese ROM (at the start of a Japanese label, or inside one: the offset is given);
 then the relation: same (the Kitty name is the Japanese one), same_but_address (the same but for its own address), jp_adds_detail
 (the Japanese name is the Kitty one plus a suffix: its use in the Japanese game), ambiguous (a code match shared by several copies,
@@ -100,7 +100,9 @@ for r in KN:
     cp = code.get(o)
     if cp is None and r['source'] in ('data', 'data_left') or (cp is None and e - o >= 16):
         blk = K[o:e]
-        if e - o >= 16 and len(set(blk)) > 1:
+        chg = sum(1 for i_ in range(1, len(blk)) if blk[i_] != blk[i_ - 1])
+        if e - o >= 16 and chg >= 3:        # 3 changes of value or more (a blank block with one black tile, 2 changes, matched a
+                                            # Japanese blank border by chance)
             j = J.find(blk)
             if j >= 0 and J.find(blk, j + 1) < 0:
                 k = bisect.bisect_right(JO, j) - 1

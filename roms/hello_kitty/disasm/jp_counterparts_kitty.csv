@@ -2032,7 +2032,7 @@ bank,addr,name,tag,layer,relation,jp_name,jp_addr,basis
 23,7150,Map_23_7150_Stamp_LoadWindowMapDefault,C,data,none,,,
 23,7350,Gfx_23_7350_Mode02_TakePhotos_State00,C,data,none,,,
 23,7450,Gfx_23_7450_Mode0A_NameCard_State00,C,data,none,,,
-23,7530,Gfx_23_7530_Mode02_TakePhotos_State00,C,data,differs,Border12_Map,35:5998+78,"data, the same 1056 bytes"
+23,7530,Gfx_23_7530_Mode02_TakePhotos_State00,C,data,none,,,
 23,7950,Gfx_23_7950_Mode02_TakePhotos_State01,C,data,none,,,
 23,7D50,Gfx_23_7D50_Mode02_TakePhotos_State08,C,data,none,,,
 24,4000,Gfx_24_4000_Mode11_StrawberryChannel_State07,C,data,none,,,
