@@ -210,6 +210,10 @@ A hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ve
 
 **Highlights**
 
+*The older builds' title screens* (2026-11-22, `tools/proto_build_history.py`; C for the bytes, I for the order): the spare banks keep the title map of three older builds next to their code. From left to right: this build, SECOND IMPACT Ver10.24 (bank `$01`); SECOND IMPACT Ver2.00 (bank `$2D`, beside the code of symbol table `$2A`); a different title, デバガメテスター NEO Ver1.00, with a new logo (bank `$38`, beside the code of symbol table `$35`); SECOND IMPACT Ver2.00 again (bank `$21`, beside the code of bank `$20`; its logo tiles come out shifted, the tile set being found by one glyph only). Each is drawn with the tile set of its own bank. They give two lines of the tester from Ver2.00: SECOND IMPACT, ending in this build, and NEO ([`roms/prototype_debagame/`](roms/prototype_debagame/README.md), "The bank 0 of the older builds").
+
+![The title screens of the prototype and of three older builds left in its spare banks](roms/prototype_debagame/screens/old_titles_proto.png)
+
 *An edited photo 8 in bank `$1D`*: tile rows 2-3 of the hair, 75 % of the bytes equal, marks drawn over the rest (left; the original at the right).
 
 ![Photo 8 with the bank $1D rows, and the original](roms/prototype_debagame/assets/reconstructed/FacePhoto8_variant_1D.png)
