@@ -6,17 +6,17 @@ bank,start,end,bytes,kind,label,lines,sample
 0D,4001,4100,255,assembler source (leftover),Leftover_0D_4001_AsmSource,18,"; LD ($2000),A ; LD HL,FACE3 ;1枚目の絵をバッファに ld a,$4 ld ($2000),a ld hl,ka"
 0D,4104,4200,252,assembler source (leftover),Leftover_0D_4104_AsmSource,20,"LD A,04 LD (PICTURE_F),A JR NC_PICT PICT4 ; LD A,$06 ; LD ($2000),A ;"
 12,4001,4100,255,assembler source (leftover),Leftover_12_4001_AsmSource,4,: BufPointer ds 2 ;送信バッファポインタ siowork.dmg(51) : BufPointer_base ds 2 ;送信バッファア
-12,4104,42F4,496,assembler source (leftover),Leftover_12_4104_AsmSource,4,: PrnDataAddress ds 2 ;------ＮｏｔＵｓｅｄ siowork.dmg(55) : SioCheckSum_S ds 2 ;送信
+12,4104,4200,252,assembler source (leftover),Leftover_12_4104_AsmSource,4,: PrnDataAddress ds 2 ;------ＮｏｔＵｓｅｄ siowork.dmg(55) : SioCheckSum_S ds 2 ;送信
 13,4001,4100,255,source listing (leftover),Leftover_13_4001_SrcListing,9,: FB31A DS 1 equ.dmg(307) : FB31B DS 1 equ.dmg(308) : FB32A DS 1 equ.dmg(3
-13,4104,7FFF,16123,source listing (leftover),Leftover_13_4104_SrcListing,7,: DOING2 ; バッファからVRAMへの転送を行う f_screen.dmg(175) : VB_F_SCR gallery.dmg(14)
+13,4104,41FD,249,source listing (leftover),Leftover_13_4104_SrcListing,7,: DOING2 ; バッファからVRAMへの転送を行う f_screen.dmg(175) : VB_F_SCR gallery.dmg(14)
 14,4001,4100,255,assembler source (leftover),Leftover_14_4001_AsmSource,9,c_0d equ $8d def.dmg(176) : c_0e equ $8e def.dmg(177) : c_0f equ $8f def.dmg(
-14,4104,7FFF,16123,source listing (leftover),Leftover_14_4104_SrcListing,9,equ $96 def.dmg(185) : c_h equ $97 def.dmg(186) : c_i equ $98 def.dmg(187) :
+14,4104,4200,252,source listing (leftover),Leftover_14_4104_SrcListing,9,equ $96 def.dmg(185) : c_h equ $97 def.dmg(186) : c_i equ $98 def.dmg(187) :
 15,4001,4100,255,source listing (leftover),Leftover_15_4001_SrcListing,8,ANK33 GROUP 33 bk7.dmg(194) : BANK34 GROUP 34 bk7.dmg(201) : BANK35 GROUP 35
-15,4104,7FFF,16123,source listing (leftover),Leftover_15_4104_SrcListing,8,41 GROUP 41 bk7.dmg(250) : BANK42 GROUP 42 bk7.dmg(257) : BANK43 GROUP 43 bk7
+15,4104,4200,252,source listing (leftover),Leftover_15_4104_SrcListing,8,41 GROUP 41 bk7.dmg(250) : BANK42 GROUP 42 bk7.dmg(257) : BANK43 GROUP 43 bk7
 16,4001,4100,255,assembler source (leftover),Leftover_16_4001_AsmSource,5,"0,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00"
-16,4104,7FFF,16123,assembler source (leftover),Leftover_16_4104_AsmSource,3,",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,"
+16,4104,41FF,251,assembler source (leftover),Leftover_16_4104_AsmSource,3,",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,"
 17,4001,4100,255,assembler source (leftover),Leftover_17_4001_AsmSource,4,"9C,$2E,$D0,$0F,$EA,$07,$64,$03 DEFB $C0,$80,$80,$40,$40,$00,$60,$00,$C0,$20,$8"
-17,4104,7FFF,16123,assembler source (leftover),Leftover_17_4104_AsmSource,4,"$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$"
+17,4104,4200,252,assembler source (leftover),Leftover_17_4104_AsmSource,4,"$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$"
 1A,4001,4100,255,assembler source (leftover),Leftover_1A_4001_AsmSource,5,"0,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00"
 1A,4104,4200,252,assembler source (leftover),Leftover_1A_4104_AsmSource,3,",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,"
 1A,7208,7228,32,PC memory string (leftover),Leftover_1A_7200_PcRam,1,C:\Program Files\TAC95\TAC32.EXE

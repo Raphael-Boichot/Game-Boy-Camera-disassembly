@@ -35,7 +35,7 @@ Copy routines (bank 0, read in the listing 2026-11-08):
 The bank of a source at $4000-$7FFF is the bank context the trace recorded at the call site; a site with several contexts or none
 is listed with an empty bank and types nothing.
 """
-import sys, json, csv, argparse, collections, os, hashlib
+import sys, json, csv, argparse, collections, os, hashlib, re
 ap = argparse.ArgumentParser()
 ap.add_argument('rom'); ap.add_argument('trace'); ap.add_argument('--types', required=True); ap.add_argument('--sites', required=True)
 ap.add_argument('--names', required=True); ap.add_argument('--rommap', required=True); ap.add_argument('--symtab', required=True)
@@ -135,6 +135,7 @@ def textlen(i):
     if (0x81 <= c <= 0x9F or 0xE0 <= c <= 0xEF) and i + 1 < len(ROM) and (0x40 <= ROM[i + 1] <= 0x7E or 0x80 <= ROM[i + 1] <= 0xFC): return 2
     return 0
 ntext = 0
+DIGITRUN = re.compile(rb'[\x30-\x3F]{64,}')
 for b in range(64):
     lo, hi = lo_hi(b); i = off(b, lo); end = off(b, lo) + 0x4000
     while i < end:
@@ -143,6 +144,9 @@ for b in range(64):
             L = textlen(j)
             if not L or j + L > end or (L == 2 and j + 1 in taken): break
             j += L
+        m_ = DIGITRUN.search(ROM, i, j)                 # 2026-11-22: a run of 64+ bytes $30-$3F (one digit per byte, no line end) is not text:
+        if m_ and m_.start() == i: i = m_.end(); continue   # the 381-byte grids written as digits that follow the source in banks $13-$17
+        if m_: j = m_.start()                           # (README, L1)
         if j - i >= 32 and b'\r\n' in ROM[i:j] and len(set(ROM[i:j])) >= 8:
             s_ = lo + (i - off(b, lo)); add(b, s_, s_ + (j - i), 'text', None, 'leftover text (ASCII / Shift-JIS bytes, not read by the traced code)'); ntext += j - i
             t0 = s_ + 1 if (s_ == 0x4000 and b and byte(b, 0x4000) == b and byte(b, 0x7FFF) == b) else s_     # the bank-number byte wins (row 3)
