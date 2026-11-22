@@ -2,9 +2,10 @@
 """Music editor (Trippy-H, mode $1F) and its score print in BGB, with the Game Boy Printer helper (bgb_printer.py) on the link (-connect).
 Route (tools/jp/dj_route.py, found in my core): corpus entry 197 (save _ff, Up held at boot) = Space Fever II; Right held 30 frames and A pulsed from frame 6 shoots the D.J. ship -> 1F:05;
 Select -> 1F:09 (SOUND I page); with --print: Start held 8 frames, Start+A 4 frames, Start 4 frames (05:4744-4758) -> score print (05:5959).
-usage: bgb_dj_print.py OUTDIR [--print] [--noprinter] [--tail FRAMES] [--port N] [--system 0] [--select N] [--seq 'Start:4:120,Start:50:120'] [--br ADDR[,ADDR]]   --select N = extra Select presses (SOUND II, NOISE pages; the print keys do nothing there, docs §17.6); --seq = more keys (KEY:hold:wait) after the Select presses, before the print keys"""
+usage: bgb_dj_print.py OUTDIR [--route FILE] [--print] [--noprinter] [--tail FRAMES] [--port N] [--system 0] [--select N] [--seq 'Start:4:120,Start:50:120'] [--br ADDR[,ADDR]]   --select N = extra Select presses (SOUND II, NOISE pages; the print keys do nothing there, docs §17.6); --seq = more keys (KEY:hold:wait) after the Select presses, before the print keys"""
 import sys, os, json, shutil
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); ROOT = os.path.dirname(HERE)
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE); ROOT = os.path.dirname(HERE); REPO = os.path.dirname(ROOT)
+import paths   # the ROM (GBCAM_ROM) and the corpus (working root or coverage/v8/unlock_fuzz/), 2026-11-22
 args = sys.argv[1:]
 def opt(n, d=None, flag=False):
     if n in args:
@@ -13,15 +14,17 @@ def opt(n, d=None, flag=False):
         v = args[i + 1]; del args[i:i + 2]; return v
     return d
 tail = int(opt('--tail', '3000')); port = int(opt('--port', '8791')); system = opt('--system', '0'); noprn = opt('--noprinter', flag=True); doprint = opt('--print', flag=True); br = opt('--br'); extra_seq = opt('--seq'); nsel = int(opt('--select', '0'))
+route_file = opt('--route') or paths._first(os.path.join(ROOT, 'unlock_runs', 'dj_route.json'), os.path.join(REPO, 'roms', 'jp_rev_a', 'experiments', 'bgb_retrace', 'dj_route.json'))
 out = args[0]; os.makedirs(out, exist_ok=True)
 mine = '/home/claude/bgbpr%d' % (port % 100)
 if not os.path.isdir(mine): shutil.copytree('/home/claude/bgbx', mine)
 os.environ['BGB_DIR'] = mine
+os.environ.setdefault('BGB_HF', '-headless'); os.environ.setdefault('PRN_SYNC3_PERIOD', '0.002')   # the linked run stalls after the handshake otherwise (docs §17.1, 2026-11-22)
 import bgb_run
 from bgb_printer import PrinterServer
-route = json.load(open(os.path.join(ROOT, 'unlock_runs', 'dj_route.json')))
+route = json.load(open(route_file))
 C = {}
-for l in open(os.path.join(ROOT, route['corpus'])):
+for l in open(paths.corpus(route['corpus'])):
     if l.strip(): e = json.loads(l); C[e['id']] = e
 p = []; i = route['entry']
 while i >= 0: p.append(i); i = C[i].get('parent', -1)
@@ -45,7 +48,7 @@ if br:                                                  # --br LIST of 'bb:aaaa'
     br = ','.join('%s///%s' % (h, h) if '///' not in h else h for h in br.split(',')); extra += ['-setting', 'DebugMsgFile=1']
     if os.path.exists(os.path.join(mine, 'debugmsg.txt')): os.remove(os.path.join(mine, 'debugmsg.txt'))
 if not noprn: srv = PrinterServer(port, out).start(); extra += ['-connect', '127.0.0.1:%d' % port]
-r = bgb_run.run(os.path.join(ROOT, 'pocketcamera_jp.gb'), sav, out + '/run', seq, combo=bgb_run.mask(names(sp['combo'])), free=sp['free'] + 3, extra=extra, tail=tail, br=br, timeout=900)
+r = bgb_run.run(paths.rom_jp(), sav, out + '/run', seq, combo=bgb_run.mask(names(sp['combo'])), free=sp['free'] + 3, extra=extra, tail=tail, br=br, timeout=900)
 if srv: srv.stop()
 if br:
     import collections

@@ -2,12 +2,14 @@
 """Route to the music editor (Trippy-H, mode $1F) in my core, from the Space Fever II first wave, and its score print.
 Root = corpus entry 197 of unlock_runs/f1_organic (save _ff, Up held at boot -> 07:02); then, per frame: Right held for the first 30 frames, A pulsed 4 on / 4 off from frame 6
 (shoots the D.J. ship: 07:5AFA sets state 5 of mode $07 -> mode $1F), 300 frames in all.  Then Select (-> 1F:09, the SOUND I page), and with --print Start held 8 frames, Start+A 4, Start 4.
-usage: dj_route.py [--print] [--frames-after N]      prints (mode,state) after each step and writes unlock_runs/dj_route.json"""
+usage: dj_route.py [--out FILE]   prints (mode,state) after each step and writes the route (default: roms/jp_rev_a/experiments/bgb_retrace/dj_route.json,
+the committed copy; the ROM is GBCAM_ROM; the corpus is found by paths.corpus: the working root or coverage/v8/unlock_fuzz/)"""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lib; from lib import g
 import blocks as B
-doprint = '--print' in sys.argv
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = sys.argv[sys.argv.index('--out') + 1] if '--out' in sys.argv else os.path.join(REPO, 'roms', 'jp_rev_a', 'experiments', 'bgb_retrace', 'dj_route.json')
 C = lib.Corpus('unlock_runs/f1_organic/corpus.jsonl')
 p = C.path(197); sp = dict(C.E[p[0]]['spec'])
 route = dict(corpus='unlock_runs/f1_organic/corpus.jsonl', entry=197, root=sp, shoot=[])
@@ -22,4 +24,4 @@ g.keys(0); print('after the shooting phase', '%02X:%02X' % lib.cur(), flush=True
 g.run(120); print('+120 idle', '%02X:%02X' % lib.cur())
 g.keys(g.SELECT); g.run(4); g.keys(0); g.run(60); print('Select ->', '%02X:%02X' % lib.cur())
 route['after_shoot_idle'] = 120; route['select'] = [g.SELECT, 4, 60]
-json.dump(route, open('unlock_runs/dj_route.json', 'w'))
+json.dump(route, open(OUT, 'w')); print('route ->', OUT)

@@ -45,7 +45,7 @@ def cur(): return (g.peek(0xD5CE), g.peek(0xD5CF))
 class Corpus:
     def __init__(self, path):
         self.E = {}
-        for l in open(path):
+        for l in open(_paths.corpus(path)):
             if l.strip():
                 e = json.loads(l); self.E[e['id']] = e
     def path(self, i):
