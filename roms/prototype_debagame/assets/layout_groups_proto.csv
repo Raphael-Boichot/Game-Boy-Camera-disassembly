@@ -80,3 +80,4 @@ legend,EDIT,,"SRAM, BANK and PROTECT tests (the colour of the Japanese editors)"
 legend,CAM,,"MOVIE TEST and settings: sensor registers, exposure, dither, image-copy modes"
 legend,ALBUM,,Picture save and GALLERY
 legend,LINK,,COM link test and the serial interrupt
+legend,TBL,,"Other tables (no code, no source): the old builds' symbol tables (label names and addresses), camera sensor and bit lookup tables, and the older builds' copies of them"
