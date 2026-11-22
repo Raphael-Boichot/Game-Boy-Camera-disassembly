@@ -465,13 +465,30 @@ for o in range(len(ROMB)):
 #     Leftover_BB_AAAA_PcRam, tag I, final. Since 2026-11-15 only the 512-byte blocks of the run that hold a proof (below); only the proofs are proven.
 #     Also (owner 2026-11-12) a run with 2+ x86 function prologues (55 8B EC) or 5+ in-memory symbol records (the linker's symbol list,
 #     tools/proto_symtab.py --out-mem): the memory of the PC that linked the ROM. And (2026-11-15) the 4-byte gap at BB:4100 that holds a
-#     4 KB-aligned address $C2xxx000 (the Windows 9x system arena; tools/proto_types.py keeps it out of the text).
+#     4 KB-aligned address $C2xxx000 (the Windows 9x system arena; tools/proto_types.py keeps it out of the text). And (owner 2026-11-22)
+#     a 512-byte block that reads as 16-bit x86 code: a linear decode (capstone, 16-bit mode) finds 8+ near calls (E8 rel16) and 4+
+#     RET / RETF in its bytes of the run, which no 512-byte block of the four retail ROMs does (0 of 8,192: Game Boy code and data).
 PCRE = re.compile(rb'[A-Z]:\\[A-Za-z]|WINDOWS VMM|[A-Z0-9]{3,8}\.(DLL|EXE|VXD|DRV)\b|COMSPEC=|winbootdir=')
 X86RE = re.compile(rb'\x55\x8B\xEC')            # push bp / mov bp,sp: an x86 function prologue ($EC is no Game Boy opcode)
 MEMSYM = set()                                  # the in-memory symbol records (tools/proto_symtab.py --out-mem): the linker's symbol list
 _mp = a.symtab_mem
 if os.path.exists(_mp):
     for r in csv.DictReader(open(_mp)): o_ = int(r['file_offset'], 16); MEMSYM.add((o_ >> 14, 0x4000 + (o_ & 0x3FFF)))
+try:
+    import capstone as _cs
+except ImportError:
+    sys.exit('proto_names: needs capstone (pip install capstone==5.0.7): the x86 proof of step 5b')
+_X86 = _cs.Cs(_cs.CS_ARCH_X86, _cs.CS_MODE_16)
+def x86_code(t):                                 # 16-bit x86 code: 8+ near calls and 4+ returns in a linear decode, 8+ byte values
+    if len(set(t)) < 8: return None
+    pos = calls = rets = 0
+    while pos < len(t):
+        i_ = next(_X86.disasm(t[pos:], pos, count=1), None)
+        if i_ is None: pos += 1; continue
+        if i_.mnemonic == 'call' and i_.bytes[0] == 0xE8: calls += 1
+        elif i_.mnemonic in ('ret', 'retf'): rets += 1
+        pos += i_.size
+    return (calls, rets) if calls >= 8 and rets >= 4 else None
 npc = 0; PCRAM = []
 # The region (owner 2026-11-15, stricter rule): only the 512-byte blocks (aligned on the bank) of the run that hold a proof are PC memory —
 # a string, an x86 prologue (with 2+ in the run), a symbol record (with 5+ in the run), the page dword; the rest of the run stays a plain
@@ -489,8 +506,14 @@ for i_, (b, ad) in enumerate(_all):
     xs = [m.start() for m in X86RE.finditer(t)]
     ms = [mo - ad for (mb, mo) in MEMSYM if mb == b and ad <= mo < end]
     pagedw = ad == 0x4100 and end == 0x4104 and t[0] == 0 and t[1] & 0x0F == 0 and t[3] == 0xC2     # a 4 KB-aligned address $C2xxx000 (2026-11-15)
-    if not hits and len(xs) < 2 and len(ms) < 5 and not pagedw: continue
+    xc = {}                                          # 512-byte block -> (near calls, returns) when its bytes of the run read as x86 code
+    for blk in range(ad & ~(BLK - 1), end, BLK):
+        r0, r1 = max(blk, ad), min(blk + BLK, end)
+        v = x86_code(ROMB[_flat(b, r0):_flat(b, r1)])
+        if v: xc[blk] = v
+    if not hits and len(xs) < 2 and len(ms) < 5 and not pagedw and not xc: continue
     proof = collections.defaultdict(list)            # 512-byte block (bank-aligned address) -> the proofs in it
+    for blk in xc: proof[blk].append(('c', 0, 0))
     for m in hits: proof[(ad + m.start()) & ~(BLK - 1)].append(('s', m.start(), m.end()))
     if len(xs) >= 2:
         for x in xs: proof[(ad + x) & ~(BLK - 1)].append(('x', x, x + 3))
@@ -528,6 +551,8 @@ for i_, (b, ad) in enumerate(_all):
         evs = []
         if strs: evs.append('%d strings of the development PC\'s RAM (%s ...)' % (len(strs), ' / '.join(x[:40] for x in ex)))
         if nx: evs.append('%d x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; %d in the whole leftover run)' % (nx, len(xs)))
+        xcs = [xc[k] for k in sorted(xc) if p0 <= max(k, ad) < p1]
+        if xcs: evs.append('bytes that read as 16-bit x86 code (%s near calls and %s RET / RETF in a linear decode; no 512-byte block of the retail ROMs reaches 8 and 4)' % ('+'.join(str(c) for c, _ in xcs), '+'.join(str(r) for _, r in xcs)))
         if pagedw: evs.append('the dword $%08X, a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one' % int.from_bytes(t[:4], 'little'))
         if nm_: evs.append('%d records of the linker\'s symbol list as held in memory (disasm/leftover_symtab_mem_proto.csv; %d in the whole leftover run)' % (nm_, len(ms)))
         put(b, p0, 'Leftover_%02X_%04X_PcRam' % (b, p0), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X), the 512-byte blocks of a leftover run that hold %s; nothing in this build reads, runs or explains them; only those proofs are proven, the rest of each block is taken as the same memory' % (

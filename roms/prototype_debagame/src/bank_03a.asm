@@ -8,10 +8,11 @@ SECTION "ROM Bank $03a", ROMX[$4000], BANK[$3a]
 BankNumber_3A_4000::
     db $3a
 
-; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_3A_4001::
-    INCBIN "data/bank_3a/Leftover_3A_4001.bin" ; $4001, 511 bytes
+; I: leftover PC memory: 511 bytes (3A:4001-41FF), the 512-byte blocks of a leftover run that hold 1 x86 function
+; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 1 in the whole leftover run); bytes that read
+; as 16-bit x86 code (39 near calls and 15 RET / RETF in a linear decode; no ...
+Leftover_3A_4001_PcRam::
+    INCBIN "data/bank_3a/Leftover_3A_4001_PcRam.bin" ; $4001, 511 bytes
 ; I: leftover: an exact copy of 5633 bytes of Gfx_03_4001_FNTOOE3 (from 03:4200, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_3A_4200_Gfx_03_4001_FNTOOE3_Part4200::

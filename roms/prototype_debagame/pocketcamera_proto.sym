@@ -1367,7 +1367,7 @@
 30:4e01 Unused_TCRF_FacePhoto1_KAO_1_Gfx
 30:5c01 Unused_TCRF_FacePhoto2_KAO_2_Gfx
 30:6a01 Unused_TCRF_FacePhoto3_KAO_3_Gfx
-30:7801 Leftover_30_7801
+30:7801 Leftover_30_7801_PcRam
 30:7a00 Leftover_30_7A00_Map_03_76C1_BG_EDIT_Part7A00
 30:7ac1 Leftover_30_7AC1_Map_03_7AC1_BG_EDITW
 30:7fff BankNumber_30_7FFF
@@ -1379,7 +1379,7 @@
 31:4e01 Leftover_31_4E01_Unused_TCRF_FacePhoto8_HOI_D_Gfx
 31:5c01 Leftover_31_5C01_Unused_TCRF_FacePhoto9_HOI_L_Gfx
 31:6a01 Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx
-31:7801 Leftover_31_7801
+31:7801 Leftover_31_7801_PcRam
 31:7a00 Leftover_31_7A00_Map_03_76C1_BG_EDIT_Part7A00
 31:7ac1 Leftover_31_7AC1_Map_03_7AC1_BG_EDITW
 31:7fff BankNumber_31_7FFF
@@ -1769,7 +1769,7 @@
 39:7581 Leftover_39_7581_Unused_TCRF_EditorUI_Gfx
 39:7fff BankNumber_39_7FFF
 3a:4000 BankNumber_3A_4000
-3a:4001 Leftover_3A_4001
+3a:4001 Leftover_3A_4001_PcRam
 3a:4200 Leftover_3A_4200_Gfx_03_4001_FNTOOE3_Part4200
 3a:5801 Leftover_3A_5801_Map_03_5801_BG_MOVIE
 3a:5a41 Leftover_3A_5A41_Gfx_03_5A41_CONF2_Part5A41
@@ -1784,10 +1784,12 @@
 3a:7ac1 Leftover_3A_7AC1_Map_03_7AC1_BG_EDITW
 3a:7fff BankNumber_3A_7FFF
 3b:4000 BankNumber_3B_4000
-3b:4001 Leftover_3B_4001
+3b:4001 Leftover_3B_4001_PcRam
+3b:4200 Leftover_3B_4200
 3b:7fff BankNumber_3B_7FFF
 3c:4000 BankNumber_3C_4000
-3c:4001 Leftover_3C_4001
+3c:4001 Leftover_3C_4001_PcRam
+3c:4200 Leftover_3C_4200
 3c:7fff BankNumber_3C_7FFF
 3d:4000 BankNumber_3D_4000
 3d:4001 Leftover_3D_4001
@@ -1797,7 +1799,8 @@
 3d:6600 Leftover_3D_6600
 3d:7fff BankNumber_3D_7FFF
 3e:4000 BankNumber_3E_4000
-3e:4001 Leftover_3E_4001
+3e:4001 Leftover_3E_4001_PcRam
+3e:4200 Leftover_3E_4200
 3e:7fff BankNumber_3E_7FFF
 3f:4000 BankNumber_3F_4000
 3f:4001 Leftover_3F_4001
@@ -4784,7 +4787,7 @@
 3a:7fff .data:1
 3b:4000 .data:1
 3b:4001 .data:1ff
-3b:4200 .padding:e00
+3b:4200 .data:e00:10
 3b:5000 .data:5
 3b:5005 .padding:f3
 3b:50f8 .data:1
@@ -4800,7 +4803,7 @@
 3b:7fff .data:1
 3c:4000 .data:1
 3c:4001 .data:1fe
-3c:41ff .padding:e01
+3c:41ff .data:e01:10
 3c:5000 .data:5
 3c:5005 .padding:f3
 3c:50f8 .data:1
@@ -4901,7 +4904,7 @@
 3d:7fff .data:1
 3e:4000 .data:1
 3e:4001 .data:1ff
-3e:4200 .padding:e00
+3e:4200 .data:e00:10
 3e:5000 .data:5
 3e:5005 .padding:f3
 3e:50f8 .data:1

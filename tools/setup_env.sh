@@ -15,6 +15,8 @@ fi
 echo "rgbds: $("$TC/rgbds/rgbasm" -V 2>&1)"
 if [ ! -f "$TC/mgbdis/mgbdis.py" ]; then git clone -q https://github.com/mattcurrie/mgbdis.git "$TC/mgbdis"; fi
 (cd "$TC/mgbdis" && git checkout -q 95d951a) && echo "mgbdis: $(cd "$TC/mgbdis" && git log --oneline -1)"
+# capstone 5.0.7 (Python): the 16-bit x86 decode of the prototype's PC-memory proof (tools/proto_names.py step 5b)
+python3 -c "import capstone" 2>/dev/null || pip install -q --break-system-packages capstone==5.0.7 || echo "pip install capstone failed"
 # 2. ROMs: from the session attachments (/mnt/user-data) or a folder given as ROM_SRC (e.g. the project files fetched with the Projects tool);
 #    no Game Boy Camera ROM is in the repository (owner, 2026-11-03).  BGB still comes from the owner's pack.
 declare -A MD5=([pocketcamera_jp.gb]=fdcfe686cf4df461e870b6e53b2b5a8b [gbcam_us.gb]=42d2f65e2549be9d1d126a6828b5d1c1 [gbcam_gold.gb]=b2999cfb6dacb439f501a71f30f91762

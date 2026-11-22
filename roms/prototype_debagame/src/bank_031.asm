@@ -40,10 +40,11 @@ Leftover_31_5C01_Unused_TCRF_FacePhoto9_HOI_L_Gfx::
 ; reads, runs or explains (never read nor run in the L2 runs)
 Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx::
     INCBIN "data/bank_31/Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx.2bpp" ; $6A01, 3584 bytes
-; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_31_7801::
-    INCBIN "data/bank_31/Leftover_31_7801.bin" ; $7801, 511 bytes
+; I: leftover PC memory: 511 bytes (31:7801-79FF), the 512-byte blocks of a leftover run that hold bytes that read as
+; 16-bit x86 code (18 near calls and 6 RET / RETF in a linear decode; no 512-byte block of the retail ROMs reaches 8
+; and 4); nothing in this build reads, runs or explains them; only those ...
+Leftover_31_7801_PcRam::
+    INCBIN "data/bank_31/Leftover_31_7801_PcRam.bin" ; $7801, 511 bytes
 ; I: leftover: an exact copy of 193 bytes of Map_03_76C1_BG_EDIT (from 03:7A00), a part of the block; step 4b-4: a run
 ; of 353 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the
 ; L2 runs)

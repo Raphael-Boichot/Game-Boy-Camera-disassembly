@@ -9,8 +9,8 @@ BankNumber_0A_4000::
     db $0a
 
 ; I: leftover PC memory: 511 bytes (0A:4001-41FF), the 512-byte blocks of a leftover run that hold 19 x86 function
-; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 19 in the whole leftover run); nothing in this
-; build reads, runs or explains them; only those proofs are proven, the ...
+; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 19 in the whole leftover run); bytes that read
+; as 16-bit x86 code (13 near calls and 20 RET / RETF in a linear decode; ...
 Leftover_0A_4001_PcRam::
     INCBIN "data/bank_0a/Leftover_0A_4001_PcRam.bin" ; $4001, 511 bytes
 ; I: leftover: 15871 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no

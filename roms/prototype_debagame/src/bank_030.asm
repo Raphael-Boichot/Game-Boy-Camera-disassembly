@@ -47,10 +47,11 @@ Unused_TCRF_FacePhoto2_KAO_2_Gfx::
 ; runs (trace/cov_proto_runs.npz); no type row, copy site or pointer of ...
 Unused_TCRF_FacePhoto3_KAO_3_Gfx::
     INCBIN "data/bank_30/Unused_TCRF_FacePhoto3_KAO_3_Gfx.2bpp" ; $6A01, 3584 bytes
-; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_30_7801::
-    INCBIN "data/bank_30/Leftover_30_7801.bin" ; $7801, 511 bytes
+; I: leftover PC memory: 511 bytes (30:7801-79FF), the 512-byte blocks of a leftover run that hold bytes that read as
+; 16-bit x86 code (23 near calls and 8 RET / RETF in a linear decode; no 512-byte block of the retail ROMs reaches 8
+; and 4); nothing in this build reads, runs or explains them; only those ...
+Leftover_30_7801_PcRam::
+    INCBIN "data/bank_30/Leftover_30_7801_PcRam.bin" ; $7801, 511 bytes
 ; I: leftover: an exact copy of 193 bytes of Map_03_76C1_BG_EDIT (from 03:7A00), a part of the block; step 4b-4: a run
 ; of 353 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the
 ; L2 runs)
