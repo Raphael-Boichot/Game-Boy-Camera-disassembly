@@ -1692,4 +1692,21 @@ Src_19_7E60_Tbl53A6_4::
 ; C: tile-map bytes read by ViewMenu_AnimateBackground (all read bytes); entry 1 of Pen_Draw_Tbl65FC too; the earlier
 ; name Map_19_7FE0_Cont
 Map_19_7FE0_ViewMenu_AnimateBackground::
-    INCBIN "data/bank_19/Map_19_7FE0_ViewMenu_AnimateBackground.tilemap" ; $7FE0, 32 bytes
+    INCBIN "data/bank_19/Map_19_7FE0_ViewMenu_AnimateBackground.tilemap" ; $7FE0, 8 bytes
+; C: the 8 x 8 1-bit mask of the large pen, pattern 1: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FE8, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask1::
+    db $3f, $3f, $ff, $ff, $ff, $ff, $ff, $ff
+
+; C: the 8 x 8 1-bit mask of the large pen, pattern 2: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FF0, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask2::
+    db $8f, $07, $07, $07, $8f, $ff, $ff, $ff
+
+; C: the 8 x 8 1-bit mask of the large pen, pattern 3: the large-pen record of Pen_Draw_Tbl6650 (04:6650) for this
+; pattern carries a second pointer, 19:7FF8, that Pen_Draw (04:65FE) passes to Blit_SpriteToBg as source B; read by
+; Blit_MaskPass_SrcB (the coverage runs record 00:1FD9 as its reader). Code ...
+Pen_LargeMask3::
+    db $c3, $81, $00, $00, $00, $00, $81, $c3

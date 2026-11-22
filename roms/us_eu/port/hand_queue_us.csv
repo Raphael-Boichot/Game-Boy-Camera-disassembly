@@ -707,7 +707,7 @@ name_differs,19,6260,,Gfx_19_6260_Mode08_State13_CreditsPageA,content differs: 1
 name_differs,19,6560,,Gfx_19_6560_Mode21_State0B_ResultSetup,content differs: 290 of 2048 bytes
 name_differs,19,7560,,Gfx_19_7560_Mode0F_State0A_EraseAll,content differs: 374 of 640 bytes
 name_differs,19,77e0,,Gfx_19_77E0_Mode0F_State0A_EraseAll,content differs: 516 of 1664 bytes
-name_differs,19,7e60,,Src_19_7E60_Tbl53A6_4,content differs: 148 of 416 bytes
+name_differs,19,7e60,,Src_19_7E60_Tbl53A6_4,content differs: 148 of 384 bytes
 name_differs,1a,4000,,Gfx_1A_4000_Mode1F_State04_PerformanceSetup,content differs: 16 of 3424 bytes
 name_differs,1a,4e00,,Gfx_1A_4E00_Mode1F_State05_Performance,content differs: 601 of 672 bytes
 name_differs,1a,50a0,,Gfx_1A_50A0_Mode1F_State06_SavePanel,content differs: 176 of 192 bytes

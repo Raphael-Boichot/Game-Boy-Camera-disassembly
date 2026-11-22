@@ -2300,7 +2300,22 @@ EraseAnim_Run_Tbl51CD::
     ; padding
     ds $10, $00
 
-    db $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
 
 ; C: adds 2 to the 16 angles
 EraseAnim_Spin::
@@ -2703,8 +2718,29 @@ Stamp_IconSrcMaskTbl::
 Stamp_BuildGraphicsLayer_Tbl54E0::
     db $04, $02, $04, $04, $05, $05, $05, $06, $01, $02, $01
 
-    db $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02
-    db $02, $02, $02, $02, $02, $02, $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
+    db $02
 
 ; C: auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s)
 ; of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)

@@ -9,7 +9,10 @@ RST_00::
     jp Boot                                       ; $0001
 
 
-    db $00, $00, $00, $00
+    db $00
+    db $00
+    db $00
+    db $00
 
 ; C: returns if LCD off; clears vblank_tick then halts until the VBlank handler bumps it (one frame)
 Rst08_WaitVBlank::
@@ -91,28 +94,44 @@ Vec_VBlank::
     jp Irq_VBlank                                 ; $0040
 
 
-    db $00, $00, $00, $00, $00
+    db $00
+    db $00
+    db $00
+    db $00
+    db $00
 
 ; C: jp 033B
 Vec_Stat::
     jp Irq_Stat                                   ; $0048
 
 
-    db $00, $00, $00, $00, $00
+    db $00
+    db $00
+    db $00
+    db $00
+    db $00
 
 ; C: jp 2D50
 Vec_Timer::
     jp Link_TimerIrq                              ; $0050
 
 
-    db $00, $00, $00, $00, $00
+    db $00
+    db $00
+    db $00
+    db $00
+    db $00
 
 ; C: jp 0368
 Vec_Serial::
     jp Irq_Serial                                 ; $0058
 
 
-    db $00, $00, $00, $00, $00
+    db $00
+    db $00
+    db $00
+    db $00
+    db $00
 
 ; C: jp 0389
 Vec_Joypad::
@@ -133,7 +152,22 @@ HeaderLogo::
     db $bb, $bb, $67, $63, $6e, $0e, $ec, $cc, $dd, $dc, $99, $9f, $bb, $b9, $33, $3e
 
 HeaderTitle::
-    db "POCKETCAMERA", $00, $00, $00, $00
+    db $50
+    db $4f
+    db $43
+    db $4b
+    db $45
+    db $54
+    db $43
+    db $41
+    db $4d
+    db $45
+    db $52
+    db $41
+    db $00
+    db $00
+    db $00
+    db $00
 
 HeaderNewLicenseeCode::
     db $30, $31

@@ -5593,8 +5593,7 @@ Pen_Draw_Tbl65FC::
     db $08, $08
     dw TileSet_27_5810 + $70
     db BANK(TileSet_27_5810)
-    dw Map_19_7FE0_ViewMenu_AnimateBackground + $8
-    db BANK(Map_19_7FE0_ViewMenu_AnimateBackground)
+    dwb Pen_LargeMask1
     db $88, $08
     dw TileSet_27_5810 + $A0
     db BANK(TileSet_27_5810)
@@ -5607,8 +5606,7 @@ Pen_Draw_Tbl65FC::
     db $08, $08
     dw TileSet_27_5810 + $B0
     db BANK(TileSet_27_5810)
-    dw Map_19_7FE0_ViewMenu_AnimateBackground + $10
-    db BANK(Map_19_7FE0_ViewMenu_AnimateBackground)
+    dwb Pen_LargeMask2
     db $88, $08
     dw TileSet_27_5810 + $E0
     db BANK(TileSet_27_5810)
@@ -5621,8 +5619,7 @@ Pen_Draw_Tbl65FC::
     db $08, $08
     dw TileSet_27_5810 + $F0
     db BANK(TileSet_27_5810)
-    dw Map_19_7FE0_ViewMenu_AnimateBackground + $18
-    db BANK(Map_19_7FE0_ViewMenu_AnimateBackground)
+    dwb Pen_LargeMask3
 
 ; C: sound $12 and window slide
 PenMenu_SlideOpen::

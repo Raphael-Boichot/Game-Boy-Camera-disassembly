@@ -3786,7 +3786,11 @@ jp_bank,jp_addr,jp_name,new_loc,new_name,fate,why
 19,7340,Gfx_19_7310_Run_PodiumSetup_Part7340,19:7340,Gfx_19_7310_Run_PodiumSetup_Part7340,data,
 19,7560,Gfx_19_7560_Mode0F_State0A_EraseAll,19:7560,Gfx_19_7560_Mode0F_State0A_EraseAll,data-differs,content differs: 374 of 640 bytes
 19,77e0,Gfx_19_77E0_Mode0F_State0A_EraseAll,19:77e0,Gfx_19_77E0_Mode0F_State0A_EraseAll,data-differs,content differs: 516 of 1664 bytes
-19,7e60,Src_19_7E60_Tbl53A6_4,19:7e60,Src_19_7E60_Tbl53A6_4,data-differs,content differs: 148 of 416 bytes
+19,7e60,Src_19_7E60_Tbl53A6_4,19:7e60,Src_19_7E60_Tbl53A6_4,data-differs,content differs: 148 of 384 bytes
+19,7fe0,Pen_LargeMask0,19:7fe0,Pen_LargeMask0,data,
+19,7fe8,Pen_LargeMask1,19:7fe8,Pen_LargeMask1,data,
+19,7ff0,Pen_LargeMask2,19:7ff0,Pen_LargeMask2,data,
+19,7ff8,Pen_LargeMask3,19:7ff8,Pen_LargeMask3,data,
 1a,4000,Gfx_1A_4000_Mode1F_State04_PerformanceSetup,1a:4000,Gfx_1A_4000_Mode1F_State04_PerformanceSetup,data-differs,content differs: 16 of 3424 bytes
 1a,4d60,Gfx_1A_4D60_DjPerf_DrawTempo,1a:4d60,Gfx_1A_4D60_DjPerf_DrawTempo,data,
 1a,4e00,Gfx_1A_4E00_Mode1F_State05_Performance,1a:4e00,Gfx_1A_4E00_Mode1F_State05_Performance,data-differs,content differs: 601 of 672 bytes

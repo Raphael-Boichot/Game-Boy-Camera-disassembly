@@ -835,7 +835,8 @@ bank,start,end,type,width,note
 19,7340,74c0,data,16,JP 19:7340 Gfx
 19,7560,77cc,data,16,JP 19:7560 Gfx
 19,77e0,7dcb,data,16,JP 19:77E0 Gfx
-19,7e60,8000,data,16,JP 19:7E60 Data
+19,7e60,7fe0,data,16,JP 19:7E60 Data
+19,7fe0,8000,data,8,JP 19:7FE0 Data
 1a,4000,4d60,data,16,JP 1A:4000 Gfx
 1a,4d60,4e00,data,16,JP 1A:4D60 Gfx
 1a,4e00,50a0,data,16,JP 1A:4E00 Gfx
@@ -1971,6 +1972,37 @@ bank,start,end,type,width,note
 25,75e0,7820,data,32,JP 25:7820 Map
 27,55d0,5810,data,32,JP 27:4870 Map
 27,5810,5a10,data,16,JP 27:4AB0 Gfx
+00,0004,0008,data,1,JP 00:0004 zeros after the jp of the restart vector 00 (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)
+00,0043,0048,data,1,JP 00:0043 zeros after the jp of Vec_VBlank (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)
+00,004b,0050,data,1,JP 00:004b zeros after the jp of Vec_Stat (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)
+00,0053,0058,data,1,JP 00:0053 zeros after the jp of Vec_Timer (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)
+00,005b,0060,data,1,JP 00:005b zeros after the jp of Vec_Serial (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)
+00,0104,0134,data,16,"JP 00:0104 cartridge header: the Nintendo logo, read by the boot ROM (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+00,0134,0150,data,1,"JP 00:0134 cartridge header: title and fields (checked by the boot ROM, written by rgbfix) (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+00,0f9b,0fab,data,16,"JP 00:0f06 Gfx_WipeTile: one tile of 16 bytes of $FF, all colour 3 (black) (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+00,367b,36f0,data,1,"JP 00:356c Bank00_ZeroFill: 388 bytes of $00 under a label (data, not padding, because of the label) (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+04,521d,522d,data,1,"JP 04:521d the end of EraseAnim_Run_Tbl51CD: 16 bytes of $02, entries of the table (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+04,54a9,54c0,data,1,"JP 04:54eb the end of Stamp_BuildGraphicsLayer_Tbl54E0: 23 bytes of $02, entries of the table (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+0a,7b34,7ba0,data,16,"JP 0A:7b34 the end of Cam_ExposureShiftTable: 28 bytes of $04 then 80 bytes of $03, entries of the table (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+19,77cc,77e0,data,16,"JP 19:77cc Gfx: the end of Gfx_19_7560_Mode0F_State0A_EraseAll, 20 bytes of $FF: black tile rows (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+1a,7cf0,7d00,data,16,"JP 1A:7cf0 Gfx: the end of Gfx_1A_7600_Album_ShowPageScreenB_Cont, one tile of $FF: black (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+1c,5b20,5b60,data,16,"JP 1C:5b20 Gfx: Gfx_1C_5B20_Mode0C_State02_Setup_Cont, 64 bytes of $00: four white tiles (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+1e,6600,6620,data,16,"JP 1E:6600 Gfx: the end of Gfx_1E_6590_Mode17_State00_Init_LowerHalves, two tiles of $FF: black (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+1e,6970,6980,data,16,"JP 1E:6970 Gfx: the end of Unused_TCRF_CannotCombineSamePicture_Gfx, one tile of $FF: black (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+1e,7cf0,7d00,data,16,"JP 1E:7cf0 Gfx: the end of Gfx_1E_7800_SaveDialog_Substate3_FullInit, one tile of $FF: black (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+21,4cc1,4d00,data,16,"JP 21:4cc1 Gfx: the end of Gfx_21_4C60_SpaceFever_DrawBestHud, 63 bytes of $FF: black tile rows (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+21,5940,5950,data,16,"JP 21:5940 Gfx: the end of Gfx_21_5870_CommentCard_DrawCopyBadge_Far, one tile of 16 bytes of $01: a black column at its right edge (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+21,70c0,71c0,data,16,"JP 21:70c0 Gfx: the end of Gfx_21_6BC0_Mode19_State00_CopyrightScreens, 16 tiles of $FF: black (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+24,5700,57e0,data,32,"JP 24:5700 Map: the end of Map_24_5500_PhotoPicker_PageTransitionPrev, 224 bytes of $FF: tile number 255 (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+24,768f,76a0,data,16,"JP 24:768f Map: the end of Map_24_73E0_Album_ShowPageScreenB, 17 bytes of $FF: tile number 255 (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+24,7bd6,7c20,data,16,"JP 24:7bd6 Map: the end of Map_24_7960_Shoot_RestoreViewScreen, 74 bytes of $FF: tile number 255 (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+25,5800,5820,data,32,"JP 25:5800 Map: the end of Map_25_5680_SpaceFever_Boss_EndB, 32 bytes of $BF: tile number $BF (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+27,713a,7150,data,16,JP 27:6ada the end of Src_27_66F0_Tbl53A6_5: 22 bytes of $BF (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)
+27,7244,7270,data,16,"JP 27:6e24 Map: the end of Map_27_6D30_Mode12_State1D_SortDialogOpen, 44 bytes of $0F: tile number $0F (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+27,7364,7390,data,16,"JP 27:6f44 Map: the end of Map_27_6E50_Mode12_State17_ExitDialogOpen, 44 bytes of $FE: tile number $FE (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+27,7a24,7a50,data,16,"JP 27:7604 Map: the end of Map_27_7510_Mode12_State14_SaveDialogOpen, 44 bytes of $FE: tile number $FE (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+27,7d84,7db0,data,16,"JP 27:7964 Map: the end of Map_27_7870_Mode12_State1A_ClearDialogOpen, 44 bytes of $FE: tile number $FE (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
+2a,5a68,5a7a,data,16,"JP 2A:5a68 Gfx: the end of Gfx_2A_59FF_FontSlotsCFtoD3, 18 bytes of $10 (L6 2026-11-22: the last bytes on the default typing; owner: $FF runs are tile or map data)"
 02,4db7,4dbf,data,8,"JP 02:4D80, moved with its name"
 02,7006,700f,data,1,"JP 02:6F3F, moved with its name, cut to $9 bytes at the next name that follows it here"
 04,5391,53be,data,3,"JP 04:539D, moved with its name, cut to $2D bytes at the next name that follows it here 3 tables x 17 {lo"
