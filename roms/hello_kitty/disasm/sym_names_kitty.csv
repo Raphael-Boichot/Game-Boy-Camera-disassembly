@@ -1619,46 +1619,7 @@ bank,addr,name,conf,note,source
 0D,6900,Gfx_0D_6900_Mode05_StampWindow_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0D,6A00,Gfx_0D_6A00_Mode05_StampWindow_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0D,6B00,Gfx_0D_6B00_Mode05_StampWindow_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-0D,6C00,Src_0D_6C00_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,6EE0,Src_0D_6EE0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,6FC0,Src_0D_6FC0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7020,Src_0D_7020_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7240,Src_0D_7240_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7280,Leftover_0D_7280,I,leftover: 64 bytes (0D:7280-72BF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,72C0,Src_0D_72C0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,72E0,Leftover_0D_72E0,I,leftover: 96 bytes (0D:72E0-733F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7340,Src_0D_7340_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,73C0,Src_0D_73C0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,73E0,Leftover_0D_73E0,I,leftover: 128 bytes (0D:73E0-745F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7460,Src_0D_7460_Copy_DEtoHL,C,read in the runs by Copy_DEtoHL,data
-0D,7483,Leftover_0D_7483,I,leftover: 125 bytes (0D:7483-74FF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7500,Src_0D_7500_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7640,Src_0D_7640_Copy_DEtoHL,C,read in the runs by Copy_DEtoHL,data
-0D,7666,Leftover_0D_7666,I,leftover: 58 bytes (0D:7666-769F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,76A0,Src_0D_76A0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7705,Leftover_0D_7705,I,leftover: 59 bytes (0D:7705-773F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7740,Src_0D_7740_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,77E0,Src_0D_77E0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7823,Leftover_0D_7823,I,leftover: 61 bytes (0D:7823-785F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7860,Src_0D_7860_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,78C0,Src_0D_78C0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7920,Src_0D_7920_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,79C0,Src_0D_79C0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,79E0,Leftover_0D_79E0,I,leftover: 32 bytes (0D:79E0-79FF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7A00,Src_0D_7A00_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7A20,Leftover_0D_7A20,I,leftover: 64 bytes (0D:7A20-7A5F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7A60,Src_0D_7A60_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7A80,Leftover_0D_7A80,I,leftover: 96 bytes (0D:7A80-7ADF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7AE0,Src_0D_7AE0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7B61,Leftover_0D_7B61,I,leftover: 63 bytes (0D:7B61-7B9F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7BA0,Src_0D_7BA0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7C00,Src_0D_7C00_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7CE0,Src_0D_7CE0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7D80,Gfx_0D_7D80_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
-0D,7E60,Leftover_0D_7E60,I,leftover: 32 bytes (0D:7E60-7E7F) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7E80,Src_0D_7E80_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz),data
-0D,7EA0,Leftover_0D_7EA0,I,leftover: 32 bytes (0D:7EA0-7EBF) that no run reads or executes and that no code names (owner rule 2026-11-11),data_left
-0D,7EC0,Gfx_0D_7EC0_Mode05_StampWindow_State06,C,read in the runs by Copy_DEtoHL; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
+0D,6C00,Src_0D_6C00_StampCat07_Mask,C,"the masks of the 160 stamps of stamp category 7 (the window's last page, graphics 0E:4000-67FF): 32 bytes a stamp, 0D:6C00 + 32 n for stamp n; named by the code: the four variant records of category 7 (05:5425 + 8 x 7 -> [$D9CC]) give mask bank $0D, offset $6C00, and Stamp_LoadMask (05:55E2) copies [$D9D6] / 2 = 32 bytes from $6C00 + (row x [$D9D4] + (element - 2) x [$D9D6]) / 2 into $C5A0, Stamp_ArrangeMaskInverted inverts them into $C1E0 for VRAM $8C00 (as the Japanese StampCatNN_Mask sheets); every byte read when each stamp is selected (tools/kitty_stamp_sweep.py, 2026-11-22); kind-less prefix kept so that rule 7 of tools/kitty_layout_kinds.py gives the kind (4 of the 5,120 bytes match the display tracker, by chance)",hand 2026-11-22
 0E,4000,Gfx_0E_4000_Mode05_StampWindow_State06,C,read in the runs by Vram_CopyHBlank; first read on the screen Mode05_StampWindow_State06 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py,data
 0E,6800,Gfx_0E_6800_Mode06_Printing_State18,C,"named by the code of Mode06_State18, Mode06_State19 (01:7226 01:7283); read in the runs by Copy_DEtoHL; first read on the screen Mode14_MessageScreen_State01 (trace/read_screens_kitty*.npz); kind T_UI from the evidence of tools/kitty_layout_kinds.py",data
 0F,4000,Leftover_0F_4000_Snd_NoiseNR43Tbl,C,"leftover: 37 bytes (0F:4000-4024) 37 bytes, the same as the Japanese Snd_NoiseNR43Tbl (1F:4000, the NR43 value per noise note); this sound engine does not read them",hand 2026-11-15

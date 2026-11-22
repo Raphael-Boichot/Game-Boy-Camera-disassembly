@@ -589,32 +589,6 @@ bank,addr,name,conf,note,source
 0D,6A00,Data_0D_6A00,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 0D,6B00,Data_0D_6B00,C,"read in the core runs by 00:067E, 00:066E",kitty_types
 0D,6C00,Data_0D_6C00,C,read in the core runs by 00:021C,kitty_types
-0D,6EE0,Data_0D_6EE0,C,read in the core runs by 00:021C,kitty_types
-0D,6FC0,Data_0D_6FC0,C,read in the core runs by 00:021C,kitty_types
-0D,7020,Data_0D_7020,C,read in the core runs by 00:021C,kitty_types
-0D,7240,Data_0D_7240,C,read in the core runs by 00:021C,kitty_types
-0D,72C0,Data_0D_72C0,C,read in the core runs by 00:021C,kitty_types
-0D,7340,Data_0D_7340,C,read in the core runs by 00:021C,kitty_types
-0D,73C0,Data_0D_73C0,C,read in the core runs by 00:021C,kitty_types
-0D,7460,Data_0D_7460,C,read in the core runs by 00:021C,kitty_types
-0D,7500,Data_0D_7500,C,read in the core runs by 00:021C,kitty_types
-0D,7640,Data_0D_7640,C,read in the core runs by 00:021C,kitty_types
-0D,76A0,Data_0D_76A0,C,read in the core runs by 00:021C,kitty_types
-0D,7740,Data_0D_7740,C,read in the core runs by 00:021C,kitty_types
-0D,77E0,Data_0D_77E0,C,read in the core runs by 00:021C,kitty_types
-0D,7860,Data_0D_7860,C,read in the core runs by 00:021C,kitty_types
-0D,78C0,Data_0D_78C0,C,read in the core runs by 00:021C,kitty_types
-0D,7920,Data_0D_7920,C,read in the core runs by 00:021C,kitty_types
-0D,79C0,Data_0D_79C0,C,read in the core runs by 00:021C,kitty_types
-0D,7A00,Data_0D_7A00,C,read in the core runs by 00:021C,kitty_types
-0D,7A60,Data_0D_7A60,C,read in the core runs by 00:021C,kitty_types
-0D,7AE0,Data_0D_7AE0,C,read in the core runs by 00:021C,kitty_types
-0D,7BA0,Data_0D_7BA0,C,read in the core runs by 00:021C,kitty_types
-0D,7C00,Data_0D_7C00,C,read in the core runs by 00:021C,kitty_types
-0D,7CE0,Data_0D_7CE0,C,read in the core runs by 00:021C,kitty_types
-0D,7D80,Data_0D_7D80,C,read in the core runs by 00:021C,kitty_types
-0D,7E80,Data_0D_7E80,C,read in the core runs by 00:021C,kitty_types
-0D,7EC0,Data_0D_7EC0,C,read in the core runs by 00:021C,kitty_types
 0E,4000,Data_0E_4000,C,"read in the core runs by 00:067E, 00:021C, 00:066E, 00:06F3",kitty_types
 0E,6800,Gfx_0E_6800,C,"Gfx: tiles copied to 8000 by 01:7226 ($0245, 6144 bytes)",kitty_types
 0F,4039,Data_0F_4039,C,"read in the core runs by 0F:559D, 0F:5259, 0F:55B7",kitty_types

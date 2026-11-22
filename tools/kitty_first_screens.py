@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """The screen each ROM byte is first read on, kept while a tool plays (the convention of tools/kitty_read_screens.py, 2026-11-12):
 first = (mode << 8 | state) when the byte is first seen read, next = the same, or the first (mode, state) outside the fade $1E that
-follows when the byte was first read during a fade; $FFFF = never read. Used by tools/kitty_core_link.py and tools/kitty_rare_runs.py
-(2026-11-22), whose files trace/read_screens_kitty_<name>.npz tools/kitty_data_names.py reads after trace/read_screens_kitty.npz.
+follows when the byte was first read during a fade; $FFFF = never read. Used by tools/kitty_core_link.py, tools/kitty_rare_runs.py
+and tools/kitty_stamp_sweep.py (2026-11-22), whose files trace/read_screens_kitty_<name>.npz tools/kitty_data_names.py reads after trace/read_screens_kitty.npz.
 """
 import numpy as np
 class FirstScreens:

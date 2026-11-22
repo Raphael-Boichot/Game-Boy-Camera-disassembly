@@ -92,10 +92,17 @@ if __name__ == '__main__':
     for c in range(8):
         rec = R7[B5 + 0x5425 + 8 * c:B5 + 0x5425 + 8 * c + 8]; p1 = rec[4] | rec[5] << 8; p2 = rec[6] | rec[7] << 8
         cat = R7[B5 + p1:B5 + p1 + 16]; d4 = cat[6] | cat[7] << 8
-        put7(off(rec[2], rec[0] | rec[1] << 8), rec[3] * d4, 8)
+        nav = cat[0] | cat[1] << 8; seen = {2}; todo = [2]           # the window's stamp elements: element 2 and those its moves lead to
+        while todo:
+            i_ = todo.pop()
+            for t in R7[B5 + nav + 8 * i_ + 2:B5 + nav + 8 * i_ + 6]:
+                if 2 <= t < 0xF0 and t not in seen: seen.add(t); todo.append(t)
+        vis = len({R7[B5 + nav + 8 * i_ + 1] for i_ in seen})       # rows of stamps on screen: the last scroll row shows vis - 1 more
+        n7 = (rec[3] + vis - 1) * d4                                  # (every one of them selected: tools/kitty_stamp_sweep.py, 2026-11-22)
+        put7(off(rec[2], rec[0] | rec[1] << 8), n7, 8)
         for j in range(4):
             q = R7[B5 + p2 + 8 * j:B5 + p2 + 8 * j + 8]
-            if q[2] not in (0, 0xFF): put7(off(q[2], q[0] | q[1] << 8), rec[3] * d4 // 2, 7)
+            if q[2] not in (0, 0xFF): put7(off(q[2], q[0] | q[1] << 8), n7 // 2, 7)
             for e in (4, 6): put7(off(0x0D, q[e] | q[e + 1] << 8), 0x60, 1)
     i = 0
     while True:
