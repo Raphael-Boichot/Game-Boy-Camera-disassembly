@@ -24,19 +24,19 @@ Gfx_03_5A41_CONF2::
 ; copied to the BG map by 00:129D
 Map_03_7241_BG_CONF::
     INCBIN "data/bank_03/Map_03_7241_BG_CONF.tilemap" ; $7241, 576 bytes
-; I: BG_F_SCR in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs); a
-; BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the
-; menu maps)
+; C: BG_F_SCR in both old symbol tables at this bank and address; a BG map: tile numbers $00-$FF in order (rows 0-7),
+; copied by MAKE_CONFIG instead of BG_CONF it shows the configuration tile set as a sheet, digits, Latin letters and
+; the kana words of the settings (C, BGB, forced: the operand at 00:1295 ...
 Map_03_7481_BG_F_SCR::
     INCBIN "data/bank_03/Map_03_7481_BG_F_SCR.tilemap" ; $7481, 576 bytes
-; I: BG_EDIT in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs); a
-; BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the
-; menu maps)
+; C: BG_EDIT in both old symbol tables at this bank and address; a BG map of 32 rows: three framed boxes of 11 x 7
+; cells (frame tiles $0D-$2F, cells $A0, a few $80 / $81) on the background tile $AA, each with one label tile ($B4,
+; $B5, $B6) at its left; copied by MAKE_CONFIG instead of BG_CONF it draws ...
 Map_03_76C1_BG_EDIT::
     INCBIN "data/bank_03/Map_03_76C1_BG_EDIT.tilemap" ; $76C1, 1024 bytes
-; I: BG_EDITW in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs); a
-; BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the
-; menu maps)
+; C: BG_EDITW in both old symbol tables at this bank and address; a BG map of 5 rows: a block of tiles $47-$4F,
+; $57-$5F, $68-$6F, $78-$7F on the background tile $AC; copied by MAKE_CONFIG instead of BG_CONF it draws that block
+; (C, BGB, forced: the operand at 00:1295 patched) (tools/proto_bgb_bgmaps.py, ...
 Map_03_7AC1_BG_EDITW::
     INCBIN "data/bank_03/Map_03_7AC1_BG_EDITW.tilemap" ; $7AC1, 1342 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)

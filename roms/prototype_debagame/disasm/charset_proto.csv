@@ -1,0 +1,78 @@
+code,char,class,glyph_rom,note,evidence
+80,0,digit,01:4801 02:4801,hexadecimal digits $80-$8F,I
+81,1,digit,01:4811 02:4811,hexadecimal digits $80-$8F,I
+82,2,digit,01:4821 02:4821,hexadecimal digits $80-$8F,I
+83,3,digit,01:4831 02:4831,hexadecimal digits $80-$8F,I
+84,4,digit,01:4841 02:4841,hexadecimal digits $80-$8F,I
+85,5,digit,01:4851 02:4851,hexadecimal digits $80-$8F,I
+86,6,digit,01:4861 02:4861,hexadecimal digits $80-$8F,I
+87,7,digit,01:4871 02:4871,hexadecimal digits $80-$8F,I
+88,8,digit,01:4881 02:4881,hexadecimal digits $80-$8F,I
+89,9,digit,01:4891 02:4891,hexadecimal digits $80-$8F,I
+8A,A,digit,01:48A1 02:48A1,hexadecimal digits $80-$8F,I
+8B,B,digit,01:48B1 02:48B1,hexadecimal digits $80-$8F,I
+8C,C,digit,01:48C1 02:48C1,hexadecimal digits $80-$8F,I
+8D,D,digit,01:48D1 02:48D1,hexadecimal digits $80-$8F,I
+8E,E,digit,01:48E1 02:48E1,hexadecimal digits $80-$8F,I
+8F,F,digit,01:48F1 02:48F1,hexadecimal digits $80-$8F,I
+90,V,letter,01:4901 02:4901,the V of Ver,I
+91,er,letter,01:4911 02:4911,"two letters on one tile, the er of Ver (Ver10.24 on the title)",I
+92,.,punctuation,01:4921 02:4921,,I
+93,:,punctuation,01:4931 02:4931,,I
+94,;,punctuation,01:4941 02:4941,,I
+95,(,punctuation,01:4951 02:4951,,I
+96,),punctuation,01:4961 02:4961,,I
+97,<,punctuation,01:4971 02:4971,,I
+98,>,punctuation,01:4981 02:4981,,I
+99,[,punctuation,01:4991 02:4991,,I
+9A,],punctuation,01:49A1 02:49A1,,I
+9B,+,punctuation,01:49B1 02:49B1,,I
+9C,-,punctuation,01:49C1 02:49C1,,I
+9D,=,punctuation,01:49D1 02:49D1,,I
+9E,×,punctuation,01:49E1 02:49E1,,I
+9F,/,punctuation,01:49F1 02:49F1,,I
+A0, ,space,01:4A01 02:4A01,"blank tile, the inside of the frames",I
+A1,▶,symbol,01:4A11 02:4A11,a small arrow,I
+A2,,frame,01:4A21 02:4A21,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A3,,frame,01:4A31 02:4A31,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A4,,frame,01:4A41 02:4A41,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A5,,frame,01:4A51 02:4A51,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A6,,frame,01:4A61 02:4A61,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A7,,frame,01:4A71 02:4A71,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A8,,frame,01:4A81 02:4A81,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+A9,,frame,01:4A91 02:4A91,"window frame piece (A2 A3 A4 top, A5 A6 sides, A7 A8 A9 bottom)",I
+AA,,background,01:4AA1 02:4AA1,the grey background of the menu screens,I
+AB,",",punctuation,01:4AB1 02:4AB1,,I
+AC,○,symbol,01:4AC1 02:4AC1,FNTOOE2 only (blank in FNTOOE1),I
+AD,×,symbol,01:4AD1 02:4AD1,FNTOOE2 only,I
+AE,→,symbol,01:4AE1 02:4AE1,FNTOOE2 only,I
+B0,○,symbol,01:4B01 02:4B01,"large circle, left half (B0 B1); FNTOOE2 only",I
+B1,,symbol,01:4B11 02:4B11,"large circle, right half",I
+B2,×,symbol,01:4B21 02:4B21,"large cross, left half (B2 B3); FNTOOE2 only",I
+B3,,symbol,01:4B31 02:4B31,"large cross, right half",I
+C1,A,letter,01:4C11 02:4C11,capital letters at $C1-$DA: ASCII + $80,I
+C2,B,letter,01:4C21 02:4C21,capital letters at $C1-$DA: ASCII + $80,I
+C3,C,letter,01:4C31 02:4C31,capital letters at $C1-$DA: ASCII + $80,I
+C4,D,letter,01:4C41 02:4C41,capital letters at $C1-$DA: ASCII + $80,I
+C5,E,letter,01:4C51 02:4C51,capital letters at $C1-$DA: ASCII + $80,I
+C6,F,letter,01:4C61 02:4C61,capital letters at $C1-$DA: ASCII + $80,I
+C7,G,letter,01:4C71 02:4C71,capital letters at $C1-$DA: ASCII + $80,I
+C8,H,letter,01:4C81 02:4C81,capital letters at $C1-$DA: ASCII + $80,I
+C9,I,letter,01:4C91 02:4C91,capital letters at $C1-$DA: ASCII + $80,I
+CA,J,letter,01:4CA1 02:4CA1,capital letters at $C1-$DA: ASCII + $80,I
+CB,K,letter,01:4CB1 02:4CB1,capital letters at $C1-$DA: ASCII + $80,I
+CC,L,letter,01:4CC1 02:4CC1,capital letters at $C1-$DA: ASCII + $80,I
+CD,M,letter,01:4CD1 02:4CD1,capital letters at $C1-$DA: ASCII + $80,I
+CE,N,letter,01:4CE1 02:4CE1,capital letters at $C1-$DA: ASCII + $80,I
+CF,O,letter,01:4CF1 02:4CF1,capital letters at $C1-$DA: ASCII + $80,I
+D0,P,letter,01:4D01 02:4D01,capital letters at $C1-$DA: ASCII + $80,I
+D1,Q,letter,01:4D11 02:4D11,capital letters at $C1-$DA: ASCII + $80,I
+D2,R,letter,01:4D21 02:4D21,capital letters at $C1-$DA: ASCII + $80,I
+D3,S,letter,01:4D31 02:4D31,capital letters at $C1-$DA: ASCII + $80,I
+D4,T,letter,01:4D41 02:4D41,capital letters at $C1-$DA: ASCII + $80,I
+D5,U,letter,01:4D51 02:4D51,capital letters at $C1-$DA: ASCII + $80,I
+D6,V,letter,01:4D61 02:4D61,capital letters at $C1-$DA: ASCII + $80,I
+D7,W,letter,01:4D71 02:4D71,capital letters at $C1-$DA: ASCII + $80,I
+D8,X,letter,01:4D81 02:4D81,capital letters at $C1-$DA: ASCII + $80,I
+D9,Y,letter,01:4D91 02:4D91,capital letters at $C1-$DA: ASCII + $80,I
+DA,Z,letter,01:4DA1 02:4DA1,capital letters at $C1-$DA: ASCII + $80,I

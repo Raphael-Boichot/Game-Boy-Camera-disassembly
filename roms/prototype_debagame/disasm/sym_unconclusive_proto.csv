@@ -1,4 +1,1 @@
 bank,addr,name,conf,source,evidence
-03,7481,Map_03_7481_BG_F_SCR,I,symtab_asset,"BG_F_SCR in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs); a BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the menu maps)"
-03,76C1,Map_03_76C1_BG_EDIT,I,symtab_asset,"BG_EDIT in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs); a BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the menu maps)"
-03,7AC1,Map_03_7AC1_BG_EDITW,I,symtab_asset,"BG_EDITW in both old symbol tables at this bank and address; this build neither copies nor reads it (L2 runs); a BG map by its name (every BG_ block this build copies is one) and its bytes (tile numbers, the common ones of the menu maps)"

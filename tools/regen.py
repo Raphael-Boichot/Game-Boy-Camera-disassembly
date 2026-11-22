@@ -68,6 +68,7 @@ def proto_steps(Q):
         ('printer_lib', lambda: [PY, 'tools/proto_printer_lib.py', Q, J, '--symtab', D + 'leftover_symtab_proto.csv', '--out', D + 'printer_lib_proto.csv']),
         ('oldbuilds', lambda: [PY, 'tools/proto_oldbuilds.py', Q, '--symtab', D + 'leftover_symtab_proto.csv', '--printer-lib', D + 'printer_lib_proto.csv', '--out', D + 'oldbuilds_proto.csv']),
         ('names', lambda: [PY, 'tools/proto_names.py', '--rom', Q]),            # the name layers (the hand layer last) -> names, doubts, leftovers
+        ('text', lambda: [PY, 'tools/proto_text.py', Q]),                     # L6: the menu font's character set and the screen texts
         ('ram_names', lambda: [PY, 'tools/proto_ram_names.py', Q, '--out', D + 'ram_names_proto.csv']),     # the RAM names (they quote routine names)
         ('ram_inc', lambda: [PY, 'tools/ram_names.py', '--names', D + 'ram_names_proto.csv', '--inc', D + 'ram_proto.inc', '--sym', PD + 'pocketcamera_proto_ram.sym']),
         ('sym', lambda: [PY, 'tools/sym_build.py', Q, '--names', PD + 'disasm/sym_names_proto.csv', '--types', PD + 'disasm/sym_types_proto.csv', '--trace', PD + 'trace/trace_proto.json',
