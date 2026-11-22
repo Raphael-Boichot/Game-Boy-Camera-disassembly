@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #define ROMSZ (1<<20)
 static uint8_t rom[ROMSZ]; static int rom_loaded=0;
@@ -137,8 +138,95 @@ static uint8_t printer_xfer(uint8_t tx){
   return rx;
 }
 
-/* ---- camera ---- */
+/* ---- camera: the realistic sensor (opt-in, gb_cam_model(1); 2026-11-22, owner: "do a realistic sensor faker") ----
+   One capture = the M64282FP and the MAC-GBD as this repository knows them (docs §18, §19; sensor/README.md), with the light response
+   of the M64283FP datasheet (Japanese original, 特性曲線 / 感度特性, clamp off, 25 C, infrared-cut filter, Vdd 5 V, Vref 1.5 V, gain 04h =
+   20 dB): the markers of its graph read from the PDF's vectors (sensor/m64283fp_sensitivity_curve.csv), "a sensor with a very similar
+   light behaviour" (owner); the arrays below are generated from that file (tools/sensor_curve_extract.py). Per pixel (x, y) of the scene (illuminance at the sensor face, lux):
+     s   = curve(L, t) / 10 (input-referred: the curve is at 20 dB) + kd t                      light signal + dark current, volts
+     q   = s, or s + a k (enhancement) / a k (extraction, E3), k = 2s - (W + E) (H), 2s - (N + S) (V), 4s - (N + S + E + W) (2-D)
+                                                                                                  (the M64282FP datasheet, §11.6, a = E ratio)
+     V   = Vref + O + G q - 0.028 - G w (- 0.25 G when Z = 00) + noise, clipped to 0-4 V        sensor output, volts (G linear gain)
+     2 bits: 3 if V < thr(t0), 2 if V < thr(t1), 1 if V < thr(t2), else 0, thr(b) = 3.0 V x b / 255, cell 4 (y & 3) + (x & 3) of $A006
+   t = C x 16 / 1,048,576 s. Fitted on camera 1 (I, docs §19): w, the dark level below Vref per unit of gain (9.3 mV positive, 12 + 4a mV
+   H / V edge, 15 + 4a mV 2-D), the -28 mV and kd = 0.011 V/s fit its boot and factory offset searches (sensor/sar_check_real.txt); the
+   threshold scale (the prototype's "$55 = 1 V", docs §19.6), the comparator polarity (MAME, dither-pattern-gen) and the Z = 00 shift
+   (without the zero-point clamp the dark output falls more than the 1 V the gain probe tests at G = 0 on every real camera, docs §18.4)
+   are I. Frame lines 0-119 go to SRAM $A000-$AEFF (the 8 lines above the photo
+   hold the 12 test pixels the ROM reads at $A002 / $A082, docs §19.3). Off (default): the old synthetic picture, unchanged. */
+static int cam_model;
+static float cam_scene[128 * 128], cam_volts[128 * 128];
+static float cam_w_scale = 1.0f, cam_kd = 0.011f, cam_noise = 0.002f;
+static const float CV_T[5] = {16e-6f, 128e-6f, 1e-3f, 10e-3f, 100e-3f};
+static const float CV_SAT[5] = {2200.0f, 2200.0f, 2273.0f, 2096.0f, 2119.0f};          /* mV: the plateaus; 16 / 128 us: not reached in the graph, 2200 (I) */
+static const int CV_N[5] = {5, 9, 7, 6, 3};
+static const float CV_L[5][9] = {{150.1f, 301.9f, 745.4f, 4313.0f, 5465.0f}, {36.39f, 77.63f, 143.6f, 296.4f, 738.0f, 1437.0f, 2919.0f, 4303.0f, 5518.0f}, {8.303f, 16.54f, 36.19f, 77.19f, 142.9f, 294.8f, 740.2f}, {1.368f, 2.454f, 4.423f, 8.373f, 16.5f, 36.54f}, {1.371f, 2.433f, 4.365f}};
+static const float CV_V[5][9] = {{1.887f, 4.014f, 11.23f, 81.72f, 122.6f}, {4.486f, 11.63f, 20.94f, 46.41f, 130.2f, 264.8f, 708.5f, 1254.0f, 1664.0f}, {2.806f, 5.359f, 15.86f, 51.12f, 135.8f, 412.7f, 1707.0f}, {7.546f, 15.14f, 32.44f, 81.53f, 209.4f, 617.3f}, {138.1f, 324.4f, 774.9f}};
+static float cv_series(int j, float L){                /* mV at 20 dB, series j at L lux: log-log between markers, slope 1 below, last slope above */
+  const float *X = CV_L[j], *Y = CV_V[j]; int n = CV_N[j]; float v;
+  if(L <= X[0]) v = Y[0] * (L / X[0]);
+  else { int i = 0; while(i < n - 2 && L > X[i + 1]) i++;
+    float a = logf(Y[i + 1] / Y[i]) / logf(X[i + 1] / X[i]); v = Y[i] * powf(L / X[i], a); }
+  return v > CV_SAT[j] ? CV_SAT[j] : v;
+}
+static float cv_signal(float L, float t){             /* mV at 20 dB: the two series around t, each at the same L t (reciprocity), log-mixed */
+  if(L <= 0 || t <= 0) return 0;
+  float E = L * t; int j = 0;
+  if(t <= CV_T[0]) return cv_series(0, E / CV_T[0]);
+  if(t >= CV_T[4]) return cv_series(4, E / CV_T[4]);
+  while(j < 3 && t > CV_T[j + 1]) j++;
+  float f = logf(t / CV_T[j]) / logf(CV_T[j + 1] / CV_T[j]);
+  float a = cv_series(j, E / CV_T[j]), b = cv_series(j + 1, E / CV_T[j + 1]);
+  if(a <= 0 || b <= 0) return (1 - f) * a + f * b;
+  return expf((1 - f) * logf(a) + f * logf(b));
+}
+static float cam_gauss(void){ float s = 0; for(int k = 0; k < 4; k++){ g.rng ^= g.rng << 13; g.rng ^= g.rng >> 17; g.rng ^= g.rng << 5; s += (g.rng & 0xFFFF) / 65536.0f; } return (s - 2.0f) * 1.7320508f; }
+static void cam_capture_model(void){
+  static const float GDB[16] = {14.0f, 15.5f, 17.0f, 18.5f, 20.0f, 21.5f, 23.0f, 24.5f, 26.0f, 29.0f, 32.0f, 35.0f, 38.0f, 41.0f, 45.5f, 51.5f};
+  static const float ALPHA[8] = {0.5f, 0.75f, 1.0f, 1.25f, 2.0f, 3.0f, 4.0f, 5.0f};
+  static float s[128 * 128];
+  uint8_t r1 = g.cam[1], r7 = g.cam[4], r0 = g.cam[5];
+  int vh = (r1 >> 5) & 3, gi = r1 & 0x1F, e = r7 >> 4, inv = (r7 >> 3) & 1, z = r0 >> 6, o = r0 & 0x3F;
+  if(((g.cam[0] >> 1) & 3) == 0) inv ^= 1;              /* $A000 bits 2-1 = 00: P / M = 00 / 01, the negative image (AntonioND, docs §18.2) */
+  float t = (float)(((uint32_t)g.cam[2] << 8) | g.cam[3]) * 16.0f / 1048576.0f;
+  float G = powf(10.0f, (GDB[gi & 15] + ((gi & 16) ? 6.0f : 0.0f)) / 20.0f), al = ALPHA[e & 7];
+  float vref = 0.5f * (r7 & 7), ov = (o & 0x20 ? 1.0f : -1.0f) * 0.032f * (o & 0x1F);
+  float w = (vh == 0 ? 0.0093f : vh == 3 ? 0.015f + 0.004f * al : 0.012f + 0.004f * al) * cam_w_scale;
+  for(int i = 0; i < 128 * 128; i++) s[i] = (t > 0 ? cv_signal(cam_scene[i], t) * 0.0001f : 0.0f) + cam_kd * t;
+  for(int y = 0; y < 128; y++) for(int x = 0; x < 128; x++){
+    int i = y * 128 + x; float p = s[i], q = p;
+    if(vh){
+      float W = s[y * 128 + (x > 0 ? x - 1 : x)], E_ = s[y * 128 + (x < 127 ? x + 1 : x)];
+      float N_ = s[(y > 0 ? y - 1 : y) * 128 + x], S_ = s[(y < 127 ? y + 1 : y) * 128 + x];
+      float k = vh == 1 ? 2 * p - W - E_ : vh == 2 ? 2 * p - N_ - S_ : 4 * p - N_ - S_ - E_ - W;
+      q = (e & 8) ? al * k : p + al * k;
+    }
+    float v = vref + ov + (inv ? -G * q : G * q) - 0.028f - G * w + (z == 0 ? -0.25f * G : 0.0f) + cam_noise * cam_gauss();
+    if(v < 0) v = 0; if(v > 4.0f) v = 4.0f;
+    cam_volts[i] = v;
+  }
+  for(int y = 0; y < 120; y++) for(int tx = 0; tx < 16; tx++){
+    uint8_t lo = 0, hi = 0;
+    for(int px = 0; px < 8; px++){
+      int x = tx * 8 + px; const uint8_t *th = &g.cam[6 + 3 * (4 * (y & 3) + (x & 3))]; float v = cam_volts[y * 128 + x];
+      int val = v < th[0] * (3.0f / 255) ? 3 : v < th[1] * (3.0f / 255) ? 2 : v < th[2] * (3.0f / 255) ? 1 : 0;
+      lo |= (val & 1) << (7 - px); hi |= ((val >> 1) & 1) << (7 - px);
+    }
+    int off = (y >> 3) * 256 + tx * 16 + (y & 7) * 2; g.sram[off] = lo; g.sram[off + 1] = hi;
+  }
+}
+void gb_cam_model(int on){ cam_model = on; }
+static uint8_t cam_log[8192][6]; static int cam_log_n;           /* every capture started: reg 1, reg 7, reg 0, C1, C0, first matrix byte */
+static void cam_log_capture(void){ if(cam_log_n < 8192){ uint8_t *q = cam_log[cam_log_n]; q[0] = g.cam[1]; q[1] = g.cam[4]; q[2] = g.cam[5]; q[3] = g.cam[2]; q[4] = g.cam[3]; q[5] = g.cam[6]; } cam_log_n++; }
+int gb_cam_log(uint8_t *out, int max){ int n = cam_log_n < max ? cam_log_n : max; if(n > 8192) n = 8192; memcpy(out, cam_log, 6 * n); return cam_log_n; }
+void gb_cam_log_clear(void){ cam_log_n = 0; }
+void gb_cam_scene(const float *lux){ memcpy(cam_scene, lux, sizeof cam_scene); }
+void gb_cam_scene_uniform(float lux){ for(int i = 0; i < 128 * 128; i++) cam_scene[i] = lux; }
+void gb_cam_unit(float w_scale, float kd, float noise){ cam_w_scale = w_scale; cam_kd = kd; cam_noise = noise; }   /* the sensor unit: 1, 0.011, 0.002 = camera 1 */
+float *gb_cam_volts_ptr(void){ return cam_volts; }
+float gb_cam_signal_mv(float lux, float t){ return cv_signal(lux, t); }            /* the curve alone, for checks */
 static void cam_fill(void){
+  if(cam_model){ cam_capture_model(); return; }
   /* synthetic 128x112 image: smooth gradient + noise, stored as 2bpp tiles at SRAM bank 0 $A100.. (offset 0x100) */
   uint32_t r=g.rng;
   for(int t=0;t<224;t++){
@@ -255,6 +343,7 @@ static void wr_io(uint8_t o, uint8_t v){
 }
 
 static int in_q(void);
+static void cam_log_capture(void);
 static void wr(uint16_t a, uint8_t v){
   if(a>=0xC000 && a<0xFFFF && !(a>=0xE000&&a<0xFF80) && !in_q()){ uint16_t i=(a>=0xFF80)?(0x3F80+(a-0xFF80)):(a-0xC000); if(q_n){ qwr[i]=0x80000000u|cur_fetch_pc_bank; q_callers(&qwr2[i],&qwr3[i]); } }
   if(a<0x2000){ g.ramen=v; return; }
@@ -265,7 +354,7 @@ static void wr(uint16_t a, uint8_t v){
   if(a<0xC000){
     if(g.rambank>=0x10){
       uint8_t r=a&0x7F; g.cam[r]=v;
-      if(r==0){ if((v&1) && g.cam_cd==0){ uint32_t ex=((uint32_t)g.cam[2]<<8)|g.cam[3]; g.cam_cd=4*(32446+16*ex); g.cam[0]|=1; } else if(!(v&1)){ } }
+      if(r==0){ if((v&1) && g.cam_cd==0){ uint32_t ex=((uint32_t)g.cam[2]<<8)|g.cam[3]; g.cam_cd=4*(32446+16*ex); g.cam[0]|=1; cam_log_capture(); } else if(!(v&1)){ } }
       return;
     }
     if(g.ramen==0x0A) g.sram[((g.rambank&0xF)<<13)|(a-0xA000)]=v;

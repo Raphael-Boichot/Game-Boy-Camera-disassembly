@@ -12,4 +12,5 @@ camera ROM: the Hello Kitty forced runs use the same calibration routes. The doc
 * `bgb/`: BGB recordings of the register writes and captures (boot, `$AA` boot, `$FD` / `$FF` boot combos, live view in several lights).
 * `recordings/`: the owner's bus-analyser workbooks (camera 1 and camera 2), copied from his sensor repository on 2026-11-22; the CSV files of this folder and of `more_recordings/` are decoded from them (`recordings/README.md`).
 * `more_recordings/`, `dither_variants/`: further captures and the dither tables they gave.
+* `m64283fp_sensitivity_curve.csv`: the light response read from the M64283FP datasheet (`tools/sensor_curve_extract.py`); `model_check.txt`: the core's sensor model against camera 1 (`tools/sensor_model_check.py`, docs §19.12).
 * The csv / txt files: the register sites, calibration rows, dither matrix order, exposure, SAR and meter checks, the 128 x 128 pixel map.

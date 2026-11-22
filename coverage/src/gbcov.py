@@ -113,3 +113,18 @@ def cov_restore(path):
         for k, c in d['csite']: L.gb_bsel_put(2, int(k), int(c))
         for k, c in d['csite_org']: L.gb_bsel_put(3, int(k), int(c))
     return d['bsel']
+# the realistic sensor (gbcov.c, opt-in, 2026-11-22): the scene is the illuminance at the sensor face in lux, 128 x 128 (row-major,
+# frame lines 0-119 reach SRAM $A000-$AEFF); unit = (w_scale, kd V/s, noise V), camera 1 by default (docs §19.12)
+L.gb_cam_model.argtypes = [C.c_int]; L.gb_cam_scene.argtypes = [C.c_void_p]; L.gb_cam_scene_uniform.argtypes = [C.c_float]
+L.gb_cam_unit.argtypes = [C.c_float, C.c_float, C.c_float]; L.gb_cam_volts_ptr.restype = C.c_void_p
+L.gb_cam_signal_mv.argtypes = [C.c_float, C.c_float]; L.gb_cam_signal_mv.restype = C.c_float; L.gb_cam_log.argtypes = [C.c_void_p, C.c_int]
+def cam_model(on=True): L.gb_cam_model(1 if on else 0)
+def cam_scene(lux):
+    if np.isscalar(lux): L.gb_cam_scene_uniform(float(lux)); return
+    a = np.ascontiguousarray(np.asarray(lux, np.float32).reshape(128 * 128)); L.gb_cam_scene(a.ctypes.data)
+def cam_unit(w_scale=1.0, kd=0.011, noise=0.002): L.gb_cam_unit(w_scale, kd, noise)
+def cam_volts(): return _arr(L.gb_cam_volts_ptr(), 128 * 128, C.c_float).reshape(128, 128)
+def cam_signal_mv(lux, t): return L.gb_cam_signal_mv(lux, t)
+def cam_log(maxn=8192):                         # every capture started since cam_log_clear(): reg 1, reg 7, reg 0, C1, C0, first matrix byte
+    b = (C.c_uint8 * (6 * maxn))(); n = L.gb_cam_log(b, maxn); return [bytes(b[6 * i:6 * i + 6]) for i in range(min(n, maxn))]
+def cam_log_clear(): L.gb_cam_log_clear()
