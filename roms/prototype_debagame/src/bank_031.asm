@@ -40,10 +40,32 @@ Leftover_31_5C01_Unused_TCRF_FacePhoto9_HOI_L_Gfx::
 ; reads, runs or explains (never read nor run in the L2 runs)
 Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx::
     INCBIN "data/bank_31/Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx.2bpp" ; $6A01, 3584 bytes
-; I: leftover: 864 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_31_7801::
-    INCBIN "data/bank_31/Leftover_31_7801.bin" ; $7801, 2046 bytes
+    INCBIN "data/bank_31/Leftover_31_7801.bin" ; $7801, 511 bytes
+; I: leftover: an exact copy of 193 bytes of Map_03_76C1_BG_EDIT (from 03:7A00), a part of the block; step 4b-4: a run
+; of 353 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
+Leftover_31_7A00_Map_03_76C1_BG_EDIT_Part7A00::
+    db $aa, $aa, $aa, $aa, $b6, $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0
+    db $a0, $1f, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa, $aa, $aa, $aa, $aa, $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0
+    db $a0, $1f, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa, $aa, $aa, $aa, $aa, $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0
+    db $a0, $1f, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa, $aa, $aa, $aa, $aa, $1d, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0, $a0
+    db $a0, $1f, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa, $aa, $aa, $aa, $aa, $2d, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e, $2e
+    db $2e, $2f, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa, $aa
+    db $aa
+
+; I: leftover: an exact copy of 160 bytes of Map_03_7AC1_BG_EDITW (from 03:7AC1); step 4b-4: a run of 353 bytes, 100 %
+; equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_31_7AC1_Map_03_7AC1_BG_EDITW::
+    INCBIN "data/bank_31/Leftover_31_7AC1_Map_03_7AC1_BG_EDITW.bin" ; $7AC1, 1342 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_31_7FFF::
     db $31

@@ -112,10 +112,52 @@ Leftover_23_5791::
 ; explains (never read nor run in the L2 runs)
 Leftover_23_5795_Map_03_7241_BG_CONF::
     INCBIN "data/bank_23/Leftover_23_5795_Map_03_7241_BG_CONF.bin" ; $5795, 576 bytes
-; I: leftover: 1804 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover load-record header, 6 bytes: 01 03 81 74 40 02 = type 1, bank $03, load address $7481, $0240 (576) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_23_59D5_LoadRecord::
+    db $01, $03, $81, $74, $40, $02
+
+; I: leftover: an exact copy of 576 bytes of Map_03_7481_BG_F_SCR (from 03:7481); step 4b-4: a run of 1752 bytes, 73 %
+; equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_23_59DB_Map_03_7481_BG_F_SCR::
+    INCBIN "data/bank_23/Leftover_23_59DB_Map_03_7481_BG_F_SCR.bin" ; $59DB, 576 bytes
+; I: leftover load-record header, 6 bytes: 01 03 C1 76 FA 03 = type 1, bank $03, load address $76C1, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_23_5C1B_LoadRecord::
+    db $01, $03, $c1, $76, $fa, $03
+
+; I: leftover: a variant (99 % of the bytes equal) of 1024 bytes of Map_03_76C1_BG_EDIT (from 03:76C1); step 4b-4: a
+; run of 1184 bytes, 93 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in
+; the L2 runs)
+Leftover_23_5C21_Map_03_76C1_BG_EDIT_Variant::
+    INCBIN "data/bank_23/Leftover_23_5C21_Map_03_76C1_BG_EDIT_Variant.bin" ; $5C21, 1024 bytes
+; I: leftover: 12 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
-Leftover_23_59D5::
-    INCBIN "data/bank_23/Leftover_23_59D5.bin" ; $59D5, 1804 bytes
+Leftover_23_6021::
+    db $aa, $aa, $aa, $aa, $aa, $aa, $01, $03, $c1, $7a, $a0, $00
+
+; I: leftover: an exact copy of 160 bytes of Map_03_7AC1_BG_EDITW (from 03:7AC1); step 4b-4: a run of 172 bytes, 97 %
+; equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_23_602D_Map_03_7AC1_BG_EDITW::
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $68, $69, $6a, $6b, $6c, $6d, $6e, $6f, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $78, $79, $7a, $7b, $7c, $7d, $7e, $7f, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $47, $48, $49, $4a, $4b, $4c, $4d, $4e, $4f, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $57, $58, $59, $5a, $5b, $5c, $5d, $5e, $5f, $ac
+    db $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac, $ac
+
+; I: leftover: 20 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs)
+Leftover_23_60CD::
+    db $01, $03, $ff, $7f, $01, $00, $03, $01, $04, $00, $40, $01, $00, $04, $01, $04
+    db $01, $40, $fa, $03
+
 ; I: leftover: tile rows 0-1 of face photo 6 (the top of the head, 512 bytes); rows 2-13 are
 ; Unused_TCRF_FacePhoto6_HOI_0_Rows2To13_Gfx (30:4201), whose rows 0-1 bank $30 lost under source text; here the rows
 ; that follow (23:62E1-63E0) equal 30:4201-42FF byte for byte, so these two rows complete the ...

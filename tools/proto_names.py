@@ -289,6 +289,111 @@ while i_ < NR:
                          j_ - i_, nm, sb, sa, 100 * ratio), 'variant', sh=sh)
             nseam += 1
     i_ = j_
+# 4b-4. copies and variants of any named bytes (owner 2026-11-22, prototype option 2): what is left of the plain leftovers (Leftover_BB_AAAA
+#     with no kind) is compared with every byte under a label whose kind is settled (an identified block, a named old-table block, a copy
+#     found above), not only with the blocks of step 4b, so a copy that runs across several blocks or of a block nothing reads is found.
+#     Seeds of 8 equal bytes vote for one shift; the bytes at that shift must be named ones for the whole stretch (a plain leftover never
+#     names another), 16+ bytes with 90 % or more equal, or 128+ bytes with 60 % or more. The stretch is cut where the labels of the
+#     source change, and every piece is named after its source block: Leftover_BB_AAAA_<block>[_PartAAAA | _Variant[PartAAAA]], tag I, the
+#     block's type row (a copy of code: typed data). Bytes read or run in the L2 runs are left to step 5 (Data_ gaps).
+PLAIN = re.compile(r'(Leftover|Data|Code|Src|JumpTable|Unk)_[0-9A-F]{2}_[0-9A-F]{4}$')
+_ln = sorted((_flat(b, ad), names[(b, ad)][0]) for (b, ad) in names)
+_lo = [o for o, _ in _ln]
+_zr = _np.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roms', 'prototype_debagame', 'trace', 'cov_proto_runs.npz'))
+RUNX4 = (_zr['ex'][:len(ROMB)] > 0) | (_zr['dr'][:len(ROMB)] > 0)    # read or run in the L2 runs: not a leftover (step 5 makes it a Data_ gap)
+KN = bytearray(len(ROMB))                          # 1: the byte is identified, or lies in a named block nothing types (its label keeps it at step 5)
+LBL = [0] * len(ROMB)                              # index in _ln of the label that owns the byte (same bank)
+for i_, (o, nm) in enumerate(_ln):
+    e_ = _ln[i_ + 1][0] if i_ + 1 < len(_ln) and (_ln[i_ + 1][0] >> 14) == (o >> 14) else ((o >> 14) + 1) << 14
+    known = not PLAIN.match(nm); untyped = True
+    for k in range(o, min(e_, len(ROMB))):
+        LBL[k] = i_
+        if cov_[k]: untyped = False
+        if known and (idcov_[k] or untyped): KN[k] = 1
+_ctype = {}
+for r in copy_types: _ctype[(int(r[0], 16), int(r[1], 16))] = {'type': r[3], 'width': r[4]}
+def _base(nm):                                     # the block a label stands for: Leftover_BB_AAAA_<block>[_Part.. / _Variant..] -> <block>
+    m = re.match(r'Leftover_[0-9A-F]{2}_[0-9A-F]{4}_(.+)$', nm)
+    if not m: return nm
+    return re.sub(r'(_Variant(Part[0-9A-F]{4})?|_Part[0-9A-F]{4})$', '', m.group(1))
+W8K = {}
+for o in range(len(ROMB) - 8):
+    if KN[o] and KN[o + 7] and (o >> 14) == ((o + 7) >> 14):
+        w = ROMB[o:o + 8]
+        if len(set(w)) >= 3:
+            l_ = W8K.setdefault(w, [])
+            if len(l_) < 6: l_.append(o)
+nany = 0; nany_b = 0
+runs_ = []; i_ = 0
+while i_ < NR:
+    if KN[i_] or idcov_[i_] or RUNX4[i_]: i_ += 1; continue
+    j_ = i_
+    while j_ < NR and not KN[j_] and not idcov_[j_] and not RUNX4[j_] and (j_ >> 14) == (i_ >> 14): j_ += 1
+    if j_ - i_ >= 16: runs_.append((i_, j_))
+    i_ = j_
+for r0, r1 in runs_:
+    todo = [(r0, r1)]
+    for _it in range(6):
+        nxt = []
+        for t0, t1 in todo:
+            if t1 - t0 < 16: continue
+            votes = collections.Counter(); first = {}
+            for o in range(t0, t1 - 7):
+                for s_ in W8K.get(ROMB[o:o + 8], ()):
+                    votes[s_ - o] += 1; first.setdefault(s_ - o, o)
+            if not votes: continue
+            dl, v = votes.most_common(1)[0]
+            if v < 3: continue
+            o = first[dl]; a0 = a1 = o                 # the stretch around the first seed where the bytes at the shift are named, same bank
+            while a0 - 1 >= t0 and KN[a0 - 1 + dl] and ((a0 - 1 + dl) >> 14) == ((o + dl) >> 14): a0 -= 1
+            while a1 < t1 and KN[a1 + dl] and ((a1 + dl) >> 14) == ((o + dl) >> 14): a1 += 1
+            while a0 < a1 and ROMB[a0] != ROMB[a0 + dl]: a0 += 1          # the stretch starts and ends on equal bytes
+            while a1 > a0 and ROMB[a1 - 1] != ROMB[a1 - 1 + dl]: a1 -= 1
+            n_ = a1 - a0
+            if n_ < 16: continue
+            ratio = float((Ra_[a0:a1] == Ra_[a0 + dl:a1 + dl]).mean())
+            if not ((n_ >= 128 and ratio >= 0.6) or ratio >= 0.9) or len(set(ROMB[a0:a1])) < 3: continue
+            pcs = []; p0 = a0
+            while p0 < a1:                             # one piece per label of the source
+                li = LBL[p0 + dl]; p1 = p0 + 1
+                while p1 < a1 and LBL[p1 + dl] == li: p1 += 1
+                pr = float((Ra_[p0:p1] == Ra_[p0 + dl:p1 + dl]).mean())
+                lo_ = _ln[li][0]; hi_ = _ln[li + 1][0] if li + 1 < len(_ln) and (_ln[li + 1][0] >> 14) == (lo_ >> 14) else ((lo_ >> 14) + 1) << 14
+                alt = 0.0                                  # the best match at another shift inside the same source block, over half the piece or more
+                for p in list(range(-64, 0)) + list(range(1, 65)):
+                    q0, q1 = max(p0, lo_ - dl - p), min(p1, hi_ - dl - p)
+                    if 2 * (q1 - q0) >= p1 - p0: alt = max(alt, float((Ra_[q0:q1] == Ra_[q0 + dl + p:q1 + dl + p]).mean()))
+                selfp = max([float((Ra_[p0 + p:p1] == Ra_[p0:p1 - p]).mean()) for p in range(1, min(65, p1 - p0))] or [1.0])   # the piece against itself shifted
+                pcs.append((p0, p1, li, pr, alt, selfp)); p0 = p1
+            #     the shift is proven by one piece of 16+ bytes that equals its source (90 %, or 60 % over 128+ bytes), not as well 1 to 64 bytes
+            #     away inside the same block (by 10 % of its share), and better than it equals itself 1 to 64 bytes away (by 0.1 of a share at
+            #     least): periodic bytes, an unrolled loop or repeated rows, prove no shift (bank $0F: a longer unrolled copy loop than
+            #     VB_GALLERY's, whose start is not in the ROM, matches it at several shifts); then every piece that equals its
+            #     source that well, and not better at another shift close by, is named (the others are tried again at their own shift)
+            okp = lambda p0, p1, pr: pr >= 0.9 or (p1 - p0 >= 128 and pr >= 0.6)
+            if not any(p1 - p0 >= 16 and okp(p0, p1, pr) and alt < 0.9 * pr and pr >= sp + 0.1 for p0, p1, li, pr, alt, sp in pcs): nxt += [(t0, a0), (a1, t1)]; continue
+            left = t0
+            for p0, p1, li, pr, alt, sp in pcs:
+                if not okp(p0, p1, pr) or alt > pr: continue          # it differs, or it matches better at another shift (tried again below)
+                if p0 > left: nxt.append((left, p0))
+                left = p1
+                lo_, lnm = _ln[li]
+                cb, ca = _addr(p0); sb, sa = _addr(p0 + dl); lb, la = _addr(lo_)
+                start = p0 + dl == lo_; bs = _base(lnm)
+                suf = ('' if start else '_Part%04X' % sa) if pr == 1.0 else ('_Variant' if start else '_VariantPart%04X' % sa)
+                t_ = TYPEAT.get((lb, la)) or _ctype.get((lb, la)); nt_ = names[(lb, la)][2] or ''
+                iscode = 'a copy of code' in nt_ or 'code that this build never runs' in nt_ or 'of code ' in nt_ or '%02X:%04X' % (lb, la) in TR['code']
+                put(cb, ca, 'Leftover_%02X_%04X_%s%s' % (cb, ca, bs, suf), 'I',
+                    'leftover: %s of %s of %s (from %02X:%04X%s)%s; step 4b-4: a run of %d bytes, %.0f %% equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)' % (
+                        'an exact copy' if pr == 1.0 else 'a variant (%.0f %% of the bytes equal)' % (100 * pr), '%d byte%s' % (p1 - p0, 's' if p1 - p0 > 1 else ''), bs, sb, sa,
+                        '' if lnm == bs else ', under the label %s' % lnm, '' if start else ', a part of the block', a1 - a0, 100 * ratio) + ('; code that this build never runs (typed data)' if iscode else ''), 'copy' if pr == 1.0 else 'variant')
+                ty, wd = ('data', '') if iscode or not t_ else (t_['type'], t_['width'] or '')
+                copy_types.append(['%02X' % cb, '%04X' % ca, '%04X' % (ca + p1 - p0), ty, wd,
+                                   COPYNOTE + '%s (%02X:%04X)%s' % (bs, lb, la, ': a copy of code, typed data (this build never runs it)' if iscode else '')])
+                for k in range(p0, p1): cov_[k] = 1; idcov_[k] = 1; COPYSH[k] = (dl, bs, lb, la)
+                nany += 1; nany_b += p1 - p0
+            nxt.append((left, t1))
+        todo = nxt
 with open(a.types, 'w', newline='') as f:     # the type table with the copies' rows (rerunning this script gives the same file)
     w_ = csv.writer(f, lineterminator='\n'); w_.writerow(['bank', 'start', 'end', 'type', 'width', 'note'])
     for r in TYPES: w_.writerow([r['bank'], r['start'], r['end'], r['type'], r['width'], r['note']])
@@ -509,3 +614,4 @@ with open(os.path.splitext(a.doubts)[0] + '.csv', 'w', newline='') as f:      # 
 print('proto_names: %d names, tags %s; routine entries %d, unnamed %d%s' % (len(names), dict(sorted(tags.items())), len(ent), len(unnamed),
       (' (' + ' '.join('%04X' % t for t in unnamed) + ')') if unnamed else ''))
 src = collections.Counter(v[3] for v in names.values()); print('by source:', dict(sorted(src.items())))
+print('step 4b-4: %d copies and variants of named bytes, %d bytes' % (nany, nany_b))

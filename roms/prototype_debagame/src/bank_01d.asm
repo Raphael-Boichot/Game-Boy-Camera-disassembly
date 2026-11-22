@@ -13,10 +13,75 @@ BankNumber_1D_4000::
 ; (assets/reconstructed/FacePhoto8_variant_1D.png; owner 2026-11-12)
 Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001::
     INCBIN "data/bank_1d/Leftover_1D_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_VariantPart5001.bin" ; $4001, 512 bytes
-; I: leftover: 497 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_4201::
-    INCBIN "data/bank_1d/Leftover_1D_4201.bin" ; $4201, 497 bytes
+; I: leftover: an exact copy of 21 bytes of PUT_DITH_PAT (from 2C:575E, under the label
+; Leftover_2C_5750_PUT_DITH_PAT), a part of the block; step 4b-4: a run of 497 bytes, 100 % equal at that shift;
+; nothing in this build reads, runs or explains it (never read nor run in the L2 runs); code that this ...
+Leftover_1D_4201_PUT_DITH_PAT_Part575E::
+    db $18, $f9, $11, $06, $98, $01, $03, $00, $cd, $bf, $02, $11, $26, $98, $01, $03
+    db $00, $cd, $bf, $02, $c9
+
+; I: leftover: an exact copy of 72 bytes of DITH_P0 (from 2C:5773, under the label Leftover_2C_5773_DITH_P0); step
+; 4b-4: a run of 497 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
+Leftover_1D_4216_DITH_P0::
+    db $29, $2a, $2b, $39, $3a, $3b, $81, $60, $60, $91, $60, $60, $82, $60, $60, $92
+    db $60, $60, $83, $60, $60, $93, $60, $60, $84, $60, $60, $94, $60, $60, $85, $60
+    db $60, $95, $60, $60, $86, $60, $60, $96, $60, $60, $87, $60, $60, $97, $60, $60
+    db $88, $60, $60, $98, $60, $60, $89, $60, $60, $99, $60, $60, $81, $80, $60, $91
+    db $90, $60, $81, $81, $60, $91, $91, $60
+
+; I: leftover: an exact copy of 168 bytes of MODE0 (from 2C:57BB, under the label Leftover_2C_57BB_MODE0); step 4b-4:
+; a run of 497 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run
+; in the L2 runs)
+Leftover_1D_425E_MODE0::
+    db $2e, $2f, $46, $47, $48, $49, $60, $60, $60, $60, $60, $60, $3e, $3f, $56, $57
+    db $58, $59, $60, $60, $60, $60, $60, $60, $0a, $0b, $20, $21, $22, $23, $24, $25
+    db $26, $60, $60, $60, $1a, $1b, $30, $31, $32, $33, $34, $35, $36, $60, $60, $60
+    db $0c, $0d, $20, $21, $22, $23, $24, $25, $26, $60, $60, $60, $1c, $1d, $30, $31
+    db $32, $33, $34, $35, $36, $60, $60, $60, $00, $01, $02, $03, $04, $20, $21, $22
+    db $23, $24, $25, $26, $10, $11, $12, $13, $14, $30, $31, $32, $33, $34, $35, $36
+    db $0a, $0b, $20, $21, $22, $60, $60, $60, $60, $60, $60, $60, $1a, $1b, $30, $31
+    db $32, $60, $60, $60, $60, $60, $60, $60, $0c, $0d, $20, $21, $22, $60, $60, $60
+    db $60, $60, $60, $60, $1c, $1d, $30, $31, $32, $60, $60, $60, $60, $60, $60, $60
+    db $00, $01, $02, $03, $04, $20, $21, $22, $60, $60, $60, $60, $10, $11, $12, $13
+    db $14, $30, $31, $32, $60, $60, $60, $60
+
+; I: leftover: an exact copy of 64 bytes of EDGE0 (from 2C:5863, under the label Leftover_2C_5863_EDGE0); step 4b-4: a
+; run of 497 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in
+; the L2 runs)
+Leftover_1D_4306_EDGE0::
+    db $85, $80, $44, $60, $95, $90, $54, $60, $87, $85, $44, $60, $97, $95, $54, $60
+    db $81, $80, $80, $44, $91, $90, $90, $54, $81, $82, $85, $44, $91, $92, $95, $54
+    db $82, $80, $80, $44, $92, $90, $90, $54, $83, $80, $80, $44, $93, $90, $90, $54
+    db $84, $80, $80, $44, $94, $90, $90, $54, $85, $80, $80, $44, $95, $90, $90, $54
+
+; I: leftover: an exact copy of 64 bytes of VREF0 (from 2C:58A3, under the label Leftover_2C_58A3_VREF0); step 4b-4: a
+; run of 497 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in
+; the L2 runs)
+Leftover_1D_4346_VREF0::
+    db $80, $42, $80, $43, $90, $52, $90, $53, $80, $42, $85, $43, $90, $52, $95, $53
+    db $81, $42, $80, $43, $91, $52, $90, $53, $81, $42, $85, $43, $91, $52, $95, $53
+    db $82, $42, $80, $43, $92, $52, $90, $53, $82, $42, $85, $43, $92, $52, $95, $53
+    db $83, $42, $80, $43, $93, $52, $90, $53, $83, $42, $85, $43, $93, $52, $95, $53
+
+; I: leftover: an exact copy of 84 bytes of ZERO0 (from 2C:58E3, under the label Leftover_2C_58E3_ZERO0); step 4b-4: a
+; run of 497 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in
+; the L2 runs)
+Leftover_1D_4386_ZERO0::
+    db $4a, $4b, $4c, $4d, $60, $60, $60, $60, $60, $60, $60, $60, $60, $60, $5a, $5b
+    db $5c, $5d, $60, $60, $60, $60, $60, $60, $60, $60, $60, $60, $2c, $2d, $46, $47
+    db $48, $49, $ac, $ad, $ae, $af, $0e, $0f, $2c, $2d, $3c, $3d, $56, $57, $58, $59
+    db $bc, $bd, $be, $bf, $1e, $1f, $3c, $3d, $2e, $2f, $46, $47, $48, $49, $ac, $ad
+    db $ae, $af, $0e, $0f, $2c, $2d, $3e, $3f, $56, $57, $58, $59, $bc, $bd, $be, $bf
+    db $1e, $1f, $3c, $3d
+
+; I: leftover: an exact copy of 24 bytes of REV0 (from 2C:5937, under the label Leftover_2C_5937_REV0); step 4b-4: a
+; run of 497 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in
+; the L2 runs)
+Leftover_1D_43DA_REV0::
+    db $4e, $4f, $cc, $cd, $ce, $cf, $5e, $5f, $dc, $dd, $de, $df, $cc, $cd, $ce, $cf
+    db $60, $60, $dc, $dd, $de, $df, $60, $60
+
 ; I: leftover: an exact copy of CONF_OBJ_PAT (00:197D, 48 bytes) that nothing in this build reads, runs or explains
 ; (never read nor run in the L2 runs)
 Leftover_1D_43F2_CONF_OBJ_PAT::
@@ -141,16 +206,38 @@ Leftover_1D_475D_PUT_BYTE_OBJ2::
     db $f0, $89, $22, $af, $22, $3e, $96, $22, $3e, $78, $22, $f0, $88, $22, $af, $22
     db $c9
 
-; I: leftover: 108 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_478E::
+; I: leftover: an exact copy of 24 bytes of SAVE_SURU (from 00:1CFD); step 4b-4: a run of 100 bytes, 100 % equal at
+; that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_478E_SAVE_SURU::
     db $96, $38, $30, $00, $96, $40, $31, $00, $96, $48, $32, $00, $96, $50, $33, $00
-    db $96, $58, $34, $00, $96, $60, $35, $00, $96, $68, $36, $00, $96, $70, $37, $00
-    db $96, $78, $38, $00, $96, $80, $39, $00, $96, $68, $3a, $00, $96, $70, $3b, $00
-    db $96, $78, $3c, $00, $96, $80, $3d, $00, $96, $40, $40, $00, $96, $48, $41, $00
-    db $96, $50, $42, $00, $96, $58, $43, $00, $96, $60, $44, $00, $96, $40, $45, $00
-    db $96, $48, $46, $00, $96, $50, $47, $00, $96, $58, $48, $00, $96, $60, $49, $00
-    db $96, $68, $4a, $00, $17, $a0, $99, $02, $d0, $05, $33, $1d
+    db $96, $58, $34, $00, $96, $60, $35, $00
+
+; I: leftover: an exact copy of 16 bytes of SAVE_YES (from 00:1D15); step 4b-4: a run of 100 bytes, 100 % equal at
+; that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_47A6_SAVE_YES::
+    db $96, $68, $36, $00, $96, $70, $37, $00, $96, $78, $38, $00, $96, $80, $39, $00
+
+; I: leftover: an exact copy of 16 bytes of SAVE_NO (from 00:1D25); step 4b-4: a run of 100 bytes, 100 % equal at that
+; shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_47B6_SAVE_NO::
+    db $96, $68, $3a, $00, $96, $70, $3b, $00, $96, $78, $3c, $00, $96, $80, $3d, $00
+
+; I: leftover: an exact copy of 20 bytes of NANBANNI (from 00:1D35); step 4b-4: a run of 100 bytes, 100 % equal at
+; that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_47C6_NANBANNI::
+    db $96, $40, $40, $00, $96, $48, $41, $00, $96, $50, $42, $00, $96, $58, $43, $00
+    db $96, $60, $44, $00
+
+; I: leftover: an exact copy of 24 bytes of SAVESIMASITA (from 00:1D49); step 4b-4: a run of 100 bytes, 100 % equal at
+; that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_47DA_SAVESIMASITA::
+    db $96, $40, $45, $00, $96, $48, $46, $00, $96, $50, $47, $00, $96, $58, $48, $00
+    db $96, $60, $49, $00, $96, $68, $4a, $00
+
+; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs)
+Leftover_1D_47F2::
+    db $17, $a0, $99, $02, $d0, $05, $33, $1d
 
 ; I: leftover: 88 bytes of code MAKE_GALLERY of the bank 0 of an older build (bank $1D); found by its bytes (16-bit
 ; operands masked) near its place in bank $2C; code that this build never runs (typed data)
@@ -167,9 +254,10 @@ Leftover_1D_47FA_MAKE_GALLERY::
 Leftover_1D_4852_MAKE_BANK::
     db $cd, $34, $04, $cd, $19, $04, $cd, $26, $04
 
-; I: leftover: 27 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_485B::
+; I: leftover: an exact copy of 27 bytes of MAKE_GALLERY (from 00:1DC2), a part of the block; step 4b-4: a run of 27
+; bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2
+; runs); code that this build never runs (typed data)
+Leftover_1D_485B_MAKE_GALLERY_Part1DC2::
     db $3e, $01, $ea, $c9, $c0, $3e, $01, $e0, $ff, $af, $ea, $c2, $c0, $3e, $08, $e0
     db $41, $3e, $0d, $ea, $a0, $c0, $3e, $c3, $e0, $40, $c9
 
@@ -340,10 +428,33 @@ Leftover_1D_4E4F_MABIKI_BYTE::
     db $80, $00, $09, $77, $01, $80, $f8, $09, $54, $5d, $e1, $c9, $01, $80, $07, $09
     db $77, $01, $80, $00, $09, $77, $01, $80, $f7, $09, $54, $5d, $e1, $c9
 
-; I: leftover: 261 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_4EAD::
-    INCBIN "data/bank_1d/Leftover_1D_4EAD.bin" ; $4EAD, 261 bytes
+; I: leftover: an exact copy of 21 bytes of MABIKI_MODE2 (from 2C:63CA, under the label
+; Leftover_2C_63CA_MABIKI_MODE2); step 4b-4: a run of 21 bytes, 100 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs); code that this build never runs (typed ...
+Leftover_1D_4EAD_MABIKI_MODE2::
+    db $fa, $c3, $c0, $f5, $3e, $00, $ea, $c3, $c0, $ea, $00, $40, $fa, $d0, $c0, $fe
+    db $00, $20, $05, $11, $00
+
+; I: leftover: a variant (74 % of the bytes equal) of 240 bytes of MABIKI_MODE2 (from 2C:63D7, under the label
+; Leftover_2C_63CA_MABIKI_MODE2), a part of the block; step 4b-4: a run of 240 bytes, 74 % equal at that shift;
+; nothing in this build reads, runs or explains it (never read nor run in the L2 ...
+Leftover_1D_4EC2_MABIKI_MODE2_VariantPart63D7::
+    db $d0, $18, $15, $fe, $01, $20, $05, $11, $80, $d0, $18, $0c, $fe, $02, $20, $05
+    db $11, $80, $d7, $18, $03, $11, $00, $d7, $21, $00, $a0, $3c, $fe, $04, $20, $02
+    db $3e, $00, $ea, $d0, $c0, $3e, $07, $ea, $bf, $c0, $3e, $08, $ea, $be, $c0, $cd
+    db $c7, $24, $23, $13, $cd, $c7, $24, $23, $23, $d7, $a0, $ff, $03, $d0, $05, $18
+    db $24, $23, $13, $cd, $c7, $24, $23, $13, $cd, $c7, $24, $23, $23, $23, $13, $cd
+    db $c7, $24, $23, $13, $cd, $c7, $24, $23, $23, $23, $13, $cd, $c7, $24, $23, $13
+    db $cd, $c7, $24, $23, $23, $23, $13, $01, $10, $00, $09, $13, $13, $13, $13, $13
+    db $13, $13, $13, $fa, $be, $c0, $3d, $ea, $be, $c0, $c2, $0e, $24, $e5, $62, $6b
+    db $01, $88, $ff, $09, $54, $5d, $e1, $3e, $08, $ea, $be, $c0, $cd, $c7, $24, $23
+    db $13, $cd, $c7, $24, $23, $23, $23, $13, $cd, $c7, $24, $23, $13, $cd, $c7, $24
+    db $23, $23, $23, $13, $cd, $c7, $24, $23, $13, $cd, $c7, $24, $23, $23, $23, $13
+    db $cd, $c7, $24, $23, $13, $cd, $c7, $24, $23, $23, $23, $13, $01, $10, $00, $09
+    db $13, $13, $13, $13, $13, $13, $13, $13, $fa, $be, $c0, $3d, $ea, $be, $c0, $c2
+    db $63, $24, $fa, $bf, $c0, $3d, $28, $10, $ea, $bf, $c0, $e5, $62, $6b, $01, $78
+    db $00, $09, $54, $5d, $e1, $c3, $09, $24, $f1, $ea, $c3, $c0, $ea, $00, $40, $c9
+
 ; I: leftover: 51 bytes of code MABIKI_BYTE2 of the bank 0 of an older build (bank $1D); found by its bytes (16-bit
 ; operands masked) near its place in bank $2C; code that this build never runs (typed data)
 Leftover_1D_4FB2_MABIKI_BYTE2::
@@ -955,9 +1066,10 @@ Leftover_1D_5E5D_REGISTER_SETTING::
     db $c0, $3e, $e2, $ea, $01, $a0, $ea, $f9, $c0, $78, $e6, $f0, $c6, $03, $cb, $ff
     db $ea, $04, $a0, $ea, $fc, $c0, $c9
 
-; I: leftover: 28 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_1D_5F24::
+; I: leftover: an exact copy of 28 bytes of GET_OFFSET (from 2C:73F5, under the label Leftover_2C_73F5_GET_OFFSET);
+; step 4b-4: a run of 28 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never
+; read nor run in the L2 runs); code that this build never runs (typed data)
+Leftover_1D_5F24_GET_OFFSET::
     db $3e, $10, $ea, $00, $40, $06, $70, $fa, $f2, $c0, $fe, $06, $20, $02, $06, $55
     db $21, $06, $a0, $11, $30, $00, $70, $1b, $7a, $b3, $20, $fa
 
@@ -970,12 +1082,17 @@ Leftover_1D_5F40_Sensor_FillDitherFlat_Part3751::
     db $ea, $00, $a0, $fa, $00, $a0, $cb, $47, $20, $f9, $3e, $10, $ea, $00, $40, $fa
     db $f8, $c0, $cb, $c7, $ea, $00, $a0, $fa, $00, $a0
 
-; I: leftover: 37 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 8 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_1D_5F8A::
-    db $1a, $a0, $ff, $03, $d0, $05, $5b, $34, $cb, $47, $20, $f9, $cd, $78, $34, $b7
-    db $20, $06, $cd, $98, $34, $b7, $28, $e0, $fa, $fa, $c0, $ea, $02, $a0, $fa, $fb
-    db $c0, $ea, $03, $a0, $c9
+    db $1a, $a0, $ff, $03, $d0, $05, $5b, $34
+
+; I: leftover: an exact copy of 29 bytes of GET_OFFSET (from 2C:745B, under the label Leftover_2C_73F5_GET_OFFSET), a
+; part of the block; step 4b-4: a run of 29 bytes, 100 % equal at that shift; nothing in this build reads, runs or
+; explains it (never read nor run in the L2 runs); code that this build ...
+Leftover_1D_5F92_GET_OFFSET_Part745B::
+    db $cb, $47, $20, $f9, $cd, $78, $34, $b7, $20, $06, $cd, $98, $34, $b7, $28, $e0
+    db $fa, $fa, $c0, $ea, $02, $a0, $fa, $fb, $c0, $ea, $03, $a0, $c9
 
 ; I: leftover: 32 bytes of code CHECK_BLACK of the bank 0 of an older build (bank $1D); found by its bytes (16-bit
 ; operands masked) near its place in bank $2C; code that this build never runs (typed data)
@@ -1002,73 +1119,69 @@ Leftover_1D_6003_TRANSFER_TO_BUF::
     db $2f, $35, $af, $ea, $00, $40, $21, $00, $a1, $11, $00, $d0, $06, $0e, $cd, $e7
     db $26, $18, $00, $c9
 
-; I: leftover: 1014 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: an exact copy of 8 bytes of TRA_BUF_J_TBL (from 2C:7530, under the label
+; Leftover_2C_7530_TRA_BUF_J_TBL); step 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_6067_TRA_BUF_J_TBL::
+    db $3e, $20, $1e, $20, $fa, $20, $97, $22
+
+; I: leftover: an exact copy of 702 bytes of CONT_PATTERN (from 2C:7538, under the label
+; Leftover_2C_7538_CONT_PATTERN); step 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_606F_CONT_PATTERN::
+    INCBIN "data/bank_1d/Leftover_1D_606F_CONT_PATTERN.bin" ; $606F, 702 bytes
+; I: leftover: an exact copy of 16 bytes of NO_DITHER_PAT (from 2C:77F6, under the label
+; Leftover_2C_77F6_NO_DITHER_PAT); step 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_632D_NO_DITHER_PAT::
+    db $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08
+
+; I: leftover: an exact copy of 16 bytes of BAYER_PAT (from 2C:7806, under the label Leftover_2C_7806_BAYER_PAT); step
+; 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
+Leftover_1D_633D_BAYER_PAT::
+    db $00, $08, $02, $0a, $0c, $04, $0e, $06, $03, $0b, $01, $09, $0f, $07, $0d, $05
+
+; I: leftover: an exact copy of 16 bytes of HARF_PAT (from 2C:7816, under the label Leftover_2C_7816_HARF_PAT); step
+; 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
+Leftover_1D_634D_HARF_PAT::
+    db $0a, $04, $06, $08, $0c, $00, $01, $0e, $07, $09, $0b, $05, $03, $0f, $0d, $01
+
+; I: leftover: an exact copy of 16 bytes of SCREW_PAT (from 2C:7826, under the label Leftover_2C_7826_SCREW_PAT); step
+; 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build reads, runs or explains it (never read
+; nor run in the L2 runs)
+Leftover_1D_635D_SCREW_PAT::
+    db $0d, $07, $06, $0c, $08, $01, $00, $05, $09, $02, $03, $04, $0e, $0a, $0b, $0f
+
+; I: leftover: an exact copy of 16 bytes of SCREW2_PAT (from 2C:7836, under the label Leftover_2C_7836_SCREW2_PAT);
+; step 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build reads, runs or explains it (never
+; read nor run in the L2 runs)
+Leftover_1D_636D_SCREW2_PAT::
+    db $0f, $04, $08, $0c, $0b, $00, $01, $05, $07, $03, $02, $09, $0e, $0a, $06, $0d
+
+; I: leftover: a variant (94 % of the bytes equal) of 16 bytes of TYUUKAN_PAT (from 2C:7846, under the label
+; Leftover_2C_7846_TYUUKAN_PAT); step 4b-4: a run of 1797 bytes, 60 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_1D_637D_TYUUKAN_PAT_Variant::
+    db $0c, $04, $08, $0e, $0b, $00, $02, $06, $07, $03, $01, $0a, $0f, $09, $05, $95
+
+; I: leftover: 208 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
-Leftover_1D_6067::
-    db $3e, $20, $1e, $20, $fa, $20, $97, $22, $58, $70, $98, $03, $03, $04, $59, $70
-    db $87, $03, $03, $04, $5a, $70, $86, $03, $03, $04, $5b, $70, $85, $03, $03, $04
-    db $5c, $70, $84, $03, $03, $04, $5d, $70, $83, $03, $03, $04, $5e, $70, $82, $03
-    db $03, $04, $5f, $70, $81, $03, $03, $04, $60, $70, $80, $02, $02, $03, $61, $70
-    db $7f, $02, $02, $03, $62, $70, $7e, $02, $02, $03, $63, $70, $7d, $02, $02, $03
-    db $64, $70, $7c, $02, $02, $03, $65, $70, $7b, $02, $02, $03, $66, $70, $7a, $02
-    db $02, $03, $67, $70, $79, $02, $02, $03, $68, $70, $78, $02, $02, $03, $69, $70
-    db $77, $02, $02, $03, $6a, $70, $76, $02, $02, $03, $6b, $70, $75, $02, $02, $03
-    db $6c, $70, $74, $02, $02, $03, $6d, $70, $73, $02, $02, $03, $6e, $70, $72, $02
-    db $02, $03, $6f, $70, $71, $02, $02, $03, $70, $70, $70, $03, $03, $03, $60, $78
-    db $a0, $03, $04, $04, $60, $74, $98, $03, $04, $04, $60, $70, $90, $02, $03, $04
-    db $60, $6c, $84, $02, $03, $04, $60, $68, $78, $02, $02, $03, $68, $78, $98, $02
-    db $03, $04, $70, $80, $a0, $02, $03, $04, $78, $88, $a8, $02, $03, $04, $80, $90
-    db $b0, $02, $03, $04, $40, $60, $a0, $03, $05, $05, $41, $60, $9e, $03, $05, $05
-    db $42, $60, $9c, $03, $05, $05, $43, $60, $9a, $03, $05, $05, $44, $60, $98, $03
-    db $05, $05, $45, $60, $96, $03, $05, $05, $46, $60, $94, $03, $05, $05, $47, $60
-    db $92, $03, $05, $05, $48, $60, $90, $03, $04, $05, $49, $60, $8e, $03, $04, $05
-    db $4a, $60, $8c, $03, $04, $05, $4b, $60, $8a, $03, $04, $05, $4c, $60, $88, $03
-    db $04, $05, $4d, $60, $86, $03, $04, $05, $4e, $60, $84, $03, $04, $05, $4f, $60
-    db $82, $03, $04, $05, $50, $60, $80, $03, $04, $05, $51, $60, $7e, $03, $04, $05
-    db $52, $60, $7c, $03, $04, $05, $53, $60, $7a, $03, $04, $05, $54, $60, $78, $03
-    db $04, $05, $55, $60, $76, $03, $04, $05, $56, $60, $74, $03, $04, $05, $57, $60
-    db $72, $03, $04, $05, $58, $60, $70, $03, $04, $05, $59, $60, $6e, $03, $04, $05
-    db $5a, $60, $6c, $03, $04, $05, $5b, $60, $6a, $03, $04, $05, $5c, $60, $68, $03
-    db $04, $05, $5d, $60, $66, $03, $04, $05, $5e, $60, $64, $03, $04, $05, $5f, $60
-    db $62, $03, $04, $05, $60, $60, $60, $04, $04, $04, $40, $58, $88, $03, $04, $05
-    db $41, $58, $86, $03, $04, $05, $42, $58, $84, $03, $04, $05, $43, $58, $82, $03
-    db $04, $05, $44, $58, $80, $03, $04, $05, $45, $58, $8e, $03, $04, $05, $46, $58
-    db $7c, $03, $04, $05, $47, $58, $7a, $03, $04, $05, $48, $58, $78, $02, $03, $05
-    db $49, $58, $76, $02, $03, $05, $4a, $58, $74, $02, $03, $05, $4b, $58, $72, $02
-    db $03, $05, $4c, $58, $70, $02, $03, $05, $4d, $58, $6e, $02, $03, $05, $4e, $58
-    db $6c, $02, $03, $05, $4f, $58, $6a, $02, $03, $05, $50, $58, $68, $02, $02, $04
-    db $51, $58, $66, $02, $02, $04, $52, $58, $64, $02, $02, $04, $53, $58, $62, $02
-    db $02, $04, $54, $58, $60, $02, $02, $04, $55, $58, $5e, $02, $02, $04, $56, $58
-    db $5c, $02, $02, $04, $57, $58, $5a, $02, $02, $04, $58, $58, $58, $04, $04, $04
-    db $40, $58, $a0, $03, $06, $05, $41, $58, $9d, $03, $06, $05, $42, $58, $9a, $03
-    db $06, $05, $43, $58, $97, $03, $05, $05, $44, $58, $94, $03, $05, $05, $45, $58
-    db $91, $03, $05, $05, $46, $58, $8e, $03, $05, $05, $47, $58, $8b, $03, $05, $05
-    db $48, $58, $88, $02, $04, $05, $49, $58, $85, $02, $04, $05, $4a, $58, $82, $02
-    db $04, $05, $4b, $58, $7f, $02, $04, $05, $4c, $58, $7c, $02, $04, $05, $4d, $58
-    db $79, $02, $04, $05, $4e, $58, $76, $02, $03, $05, $4f, $58, $73, $02, $03, $05
-    db $50, $58, $70, $02, $03, $04, $51, $58, $6d, $02, $03, $04, $52, $58, $6a, $02
-    db $03, $04, $53, $58, $67, $02, $02, $04, $54, $58, $64, $02, $02, $04, $55, $58
-    db $61, $02, $02, $04, $56, $58, $5e, $02, $02, $04, $57, $58, $5b, $02, $02, $04
-    db $58, $58, $58, $04, $04, $04, $08, $08, $08, $08, $08, $08, $08, $08, $08, $08
-    db $08, $08, $08, $08, $08, $08, $00, $08, $02, $0a, $0c, $04, $0e, $06, $03, $0b
-    db $01, $09, $0f, $07, $0d, $05, $0a, $04, $06, $08, $0c, $00, $01, $0e, $07, $09
-    db $0b, $05, $03, $0f, $0d, $01, $0d, $07, $06, $0c, $08, $01, $00, $05, $09, $02
-    db $03, $04, $0e, $0a, $0b, $0f, $0f, $04, $08, $0c, $0b, $00, $01, $05, $07, $03
-    db $02, $09, $0e, $0a, $06, $0d, $0c, $04, $08, $0e, $0b, $00, $02, $06, $07, $03
-    db $01, $0a, $0f, $09, $05, $95, $a0, $b8, $01, $d0, $05, $55, $38, $0d, $0d, $04
-    db $08, $0e, $0a, $00, $01, $07, $06, $03, $02, $0b, $0f, $09, $05, $0c, $0f, $00
-    db $0f, $00, $0f, $0f, $0f, $00, $0f, $00, $0f, $00, $00, $00, $00, $00, $08, $00
-    db $08, $0f, $00, $08, $0f, $08, $08, $0f, $08, $00, $0f, $08, $00, $08, $0f, $00
-    db $00, $00, $00, $0f, $00, $0f, $00, $00, $0f, $00, $00, $0f, $00, $0f, $07, $03
-    db $07, $0b, $03, $00, $03, $07, $07, $03, $07, $0b, $0b, $07, $0b, $0f, $08, $08
-    db $08, $00, $08, $0f, $08, $00, $08, $08, $08, $00, $00, $00, $00, $00, $10, $07
-    db $06, $06, $06, $05, $05, $05, $05, $05, $04, $04, $04, $04, $04, $04, $03, $03
-    db $03, $03, $03, $03, $03, $03, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02
-    db $02, $02, $02, $02, $02, $02, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
+Leftover_1D_638D::
+    db $a0, $b8, $01, $d0, $05, $55, $38, $0d, $0d, $04, $08, $0e, $0a, $00, $01, $07
+    db $06, $03, $02, $0b, $0f, $09, $05, $0c, $0f, $00, $0f, $00, $0f, $0f, $0f, $00
+    db $0f, $00, $0f, $00, $00, $00, $00, $00, $08, $00, $08, $0f, $00, $08, $0f, $08
+    db $08, $0f, $08, $00, $0f, $08, $00, $08, $0f, $00, $00, $00, $00, $0f, $00, $0f
+    db $00, $00, $0f, $00, $00, $0f, $00, $0f, $07, $03, $07, $0b, $03, $00, $03, $07
+    db $07, $03, $07, $0b, $0b, $07, $0b, $0f, $08, $08, $08, $00, $08, $0f, $08, $00
+    db $08, $08, $08, $00, $00, $00, $00, $00, $10, $07, $06, $06, $06, $05, $05, $05
+    db $05, $05, $04, $04, $04, $04, $04, $04, $03, $03, $03, $03, $03, $03, $03, $03
+    db $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02
     db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
     db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
     db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
-    db $01, $01, $01, $01, $01, $01
+    db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
 
     ; padding
     ds $41, $00

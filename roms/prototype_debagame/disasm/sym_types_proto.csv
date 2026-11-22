@@ -539,6 +539,99 @@ bank,start,end,type,width,note
 39,6F93,70F1,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
 3A,6705,6741,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
 3A,6801,683D,data,16,leftover copy of Gfx_03_5A41_CONF2 (03:5A41)
+00,0FF2,101F,data,,"leftover copy of MOVIE_MODE (20:4F01): a copy of code, typed data (this build never runs it)"
+00,1EFA,1FF2,data,,"leftover copy of VB_GALLERY (1D:4992): a copy of code, typed data (this build never runs it)"
+10,4002,4014,data,,"leftover copy of CAMECO_INIT (37:4677): a copy of code, typed data (this build never runs it)"
+10,4014,4015,data,,"leftover copy of INIT_END (37:4712): a copy of code, typed data (this build never runs it)"
+10,4015,4022,data,,"leftover copy of OBJP_DEF_SET (37:4713): a copy of code, typed data (this build never runs it)"
+10,4022,4024,data,,"leftover copy of BGP_DEF_SET (37:4720): a copy of code, typed data (this build never runs it)"
+10,4024,4029,data,,"leftover copy of BGP_SET (37:4722): a copy of code, typed data (this build never runs it)"
+10,4030,403F,data,,"leftover copy of SCYX_SET0 (37:472E): a copy of code, typed data (this build never runs it)"
+10,403F,4045,data,,leftover copy of SOUND_P (37:473D)
+10,4045,404B,data,,leftover copy of SOUND_PE (37:4743)
+10,404B,405C,data,,leftover copy of MEN_FADE_CLR (37:4749)
+10,405C,4062,data,,"leftover copy of MEN_FADE_SET (37:475A): a copy of code, typed data (this build never runs it)"
+10,4062,4098,data,,"leftover copy of MEN_FADE (37:4760): a copy of code, typed data (this build never runs it)"
+10,4098,40A2,data,,"leftover copy of MEN_FADE_END (37:4796): a copy of code, typed data (this build never runs it)"
+10,40A2,40BC,data,,"leftover copy of MEN_FADE_DEC (37:47A0): a copy of code, typed data (this build never runs it)"
+1D,4201,4216,data,,"leftover copy of PUT_DITH_PAT (2C:5750): a copy of code, typed data (this build never runs it)"
+1D,4216,425E,data,,leftover copy of DITH_P0 (2C:5773)
+1D,425E,4306,data,,leftover copy of MODE0 (2C:57BB)
+1D,4306,4346,data,,leftover copy of EDGE0 (2C:5863)
+1D,4346,4386,data,,leftover copy of VREF0 (2C:58A3)
+1D,4386,43DA,data,,leftover copy of ZERO0 (2C:58E3)
+1D,43DA,43F2,data,,leftover copy of REV0 (2C:5937)
+1D,478E,47A6,data,,leftover copy of SAVE_SURU (00:1CFD)
+1D,47A6,47B6,data,,leftover copy of SAVE_YES (00:1D15)
+1D,47B6,47C6,data,,leftover copy of SAVE_NO (00:1D25)
+1D,47C6,47DA,data,,leftover copy of NANBANNI (00:1D35)
+1D,47DA,47F2,data,,leftover copy of SAVESIMASITA (00:1D49)
+1D,485B,4876,data,,"leftover copy of MAKE_GALLERY (00:1D61): a copy of code, typed data (this build never runs it)"
+1D,4EC2,4FB2,data,,"leftover copy of MABIKI_MODE2 (2C:63CA): a copy of code, typed data (this build never runs it)"
+1D,4EAD,4EC2,data,,"leftover copy of MABIKI_MODE2 (2C:63CA): a copy of code, typed data (this build never runs it)"
+1D,5F24,5F40,data,,"leftover copy of GET_OFFSET (2C:73F5): a copy of code, typed data (this build never runs it)"
+1D,5F92,5FAF,data,,"leftover copy of GET_OFFSET (2C:73F5): a copy of code, typed data (this build never runs it)"
+1D,6067,606F,data,,leftover copy of TRA_BUF_J_TBL (2C:7530)
+1D,606F,632D,data,,leftover copy of CONT_PATTERN (2C:7538)
+1D,632D,633D,data,,leftover copy of NO_DITHER_PAT (2C:77F6)
+1D,633D,634D,data,,leftover copy of BAYER_PAT (2C:7806)
+1D,634D,635D,data,,leftover copy of HARF_PAT (2C:7816)
+1D,635D,636D,data,,leftover copy of SCREW_PAT (2C:7826)
+1D,636D,637D,data,,leftover copy of SCREW2_PAT (2C:7836)
+1D,637D,638D,data,,leftover copy of TYUUKAN_PAT (2C:7846)
+20,4200,4226,data,,"leftover copy of VBLANK_SUB (2C:4280): a copy of code, typed data (this build never runs it)"
+20,4284,428E,data,,leftover copy of DMADATA (00:0317)
+20,428E,42A8,data,,leftover copy of CLRCHR_SET (00:0321)
+20,43B0,43B6,data,,leftover copy of SOUND_P (00:043D)
+20,43B6,43BC,data,,leftover copy of SOUND_PE (00:0443)
+20,43BC,43CD,data,,leftover copy of MEN_FADE_CLR (00:0449)
+20,4458,4468,data,,leftover copy of TITLE_OBJ (00:04DF)
+20,4A8F,4A9A,data,,leftover copy of PAT_DEC (2C:4B10)
+20,4A9A,4AA5,data,,leftover copy of PAT_0F (2C:4B1B)
+20,4AA5,4AB0,data,,leftover copy of PAT_5A (2C:4B26)
+20,4AB0,4ABB,data,,leftover copy of PAT_00 (2C:4B31)
+20,4ABB,4AC6,data,,leftover copy of PAT_FF (2C:4B3C)
+20,4AC6,4AFE,data,,"leftover copy of SRAM_AGING (2C:4B47): a copy of code, typed data (this build never runs it)"
+20,4B04,4B1B,data,,"leftover copy of SRAM_AGING (2C:4B47): a copy of code, typed data (this build never runs it)"
+20,50B7,50DA,data,,leftover copy of PUT_BYTE_OBJ (00:1126)
+20,560C,561F,data,,"leftover copy of PUT_VREF (2C:5663): a copy of code, typed data (this build never runs it)"
+20,55F4,5606,data,,"leftover copy of PUT_VREF (2C:5663): a copy of code, typed data (this build never runs it)"
+20,570A,5752,data,,leftover copy of DITH_P0 (2C:5773)
+20,5752,57FA,data,,leftover copy of MODE0 (2C:57BB)
+20,57FA,583A,data,,leftover copy of EDGE0 (2C:5863)
+20,583A,587A,data,,leftover copy of VREF0 (2C:58A3)
+20,587A,58CE,data,,leftover copy of ZERO0 (2C:58E3)
+20,58CE,58E6,data,,leftover copy of REV0 (2C:5937)
+20,5C72,5C8A,data,,leftover copy of SAVE_SURU (00:1CFD)
+20,5C8A,5C9A,data,,leftover copy of SAVE_YES (00:1D15)
+20,5C9A,5CAA,data,,leftover copy of SAVE_NO (00:1D25)
+20,5CAA,5CBE,data,,leftover copy of NANBANNI (00:1D35)
+20,5CBE,5CD6,data,,leftover copy of SAVESIMASITA (00:1D49)
+20,6386,6482,data,,"leftover copy of MABIKI_MODE2 (2C:63CA): a copy of code, typed data (this build never runs it)"
+20,73DA,73F6,data,,"leftover copy of GET_OFFSET (2C:73F5): a copy of code, typed data (this build never runs it)"
+20,751B,7523,data,,leftover copy of TRA_BUF_J_TBL (2C:7530)
+20,7523,77E1,data,,leftover copy of CONT_PATTERN (2C:7538)
+20,77E1,77F1,data,,leftover copy of NO_DITHER_PAT (2C:77F6)
+20,77F1,7801,data,,leftover copy of BAYER_PAT (2C:7806)
+20,7801,7811,data,,leftover copy of HARF_PAT (2C:7816)
+20,7811,7821,data,,leftover copy of SCREW_PAT (2C:7826)
+20,7821,7831,data,,leftover copy of SCREW2_PAT (2C:7836)
+20,7831,7841,data,,leftover copy of TYUUKAN_PAT (2C:7846)
+21,6AD5,6AEF,data,,leftover copy of Unused_TCRF_ArrowCursor_BottomRow_Gfx (02:43E1)
+22,5CC3,5CDB,data,16,leftover copy of Gfx_01_4001_FNTOOE1 (01:4001)
+23,59DB,5C1B,data,,leftover copy of Map_03_7481_BG_F_SCR (03:7481)
+23,5C21,6021,data,,leftover copy of Map_03_76C1_BG_EDIT (03:76C1)
+23,602D,60CD,data,,leftover copy of Map_03_7AC1_BG_EDITW (03:7AC1)
+2F,7481,76C1,data,,leftover copy of Map_03_7481_BG_F_SCR (03:7481)
+2F,76C1,7AC1,data,,leftover copy of Map_03_76C1_BG_EDIT (03:76C1)
+2F,7AC1,7B61,data,,leftover copy of Map_03_7AC1_BG_EDITW (03:7AC1)
+30,7A00,7AC1,data,,leftover copy of Map_03_76C1_BG_EDIT (03:76C1)
+30,7AC1,7B61,data,,leftover copy of Map_03_7AC1_BG_EDITW (03:7AC1)
+31,7A00,7AC1,data,,leftover copy of Map_03_76C1_BG_EDIT (03:76C1)
+31,7AC1,7B61,data,,leftover copy of Map_03_7AC1_BG_EDITW (03:7AC1)
+3A,7481,76C1,data,,leftover copy of Map_03_7481_BG_F_SCR (03:7481)
+3A,76C1,7AC1,data,,leftover copy of Map_03_76C1_BG_EDIT (03:76C1)
+3A,7AC1,7B61,data,,leftover copy of Map_03_7AC1_BG_EDITW (03:7AC1)
 1D,442A,448A,data,,older build: MK_PROTECT (code never run here; tools/proto_oldbuilds.py)
 1D,448A,44FA,data,,older build: PROTECT_TEST (code never run here; tools/proto_oldbuilds.py)
 1D,44FA,4534,data,,older build: PROT_TEST (code never run here; tools/proto_oldbuilds.py)

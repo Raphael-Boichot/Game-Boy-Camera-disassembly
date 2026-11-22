@@ -134,13 +134,18 @@ Leftover_22_56E1_Gfx_01_4001_FNTOOE1_VariantPart4A13::
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_22_58C3_Gfx_01_4001_FNTOOE1_Part4BEF::
     INCBIN "data/bank_22/Leftover_22_58C3_Gfx_01_4001_FNTOOE1_Part4BEF.bin" ; $58C3, 1018 bytes
-; I: leftover: 14 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_22_5CBD::
-    db $01, $02, $69, $75, $fa, $03, $ff, $ff, $ff, $ff, $7e, $7e, $3c, $3c
+; I: leftover load-record header, 6 bytes: 01 02 69 75 FA 03 = type 1, bank $02, load address $7569, $03FA (1018) data
+; bytes after it (the next header follows them); a record of an older build's image as a download stream in the PC's
+; memory, that nothing in this build reads
+Leftover_22_5CBD_LoadRecord::
+    db $01, $02, $69, $75, $fa, $03
 
-    ; padding
-    ds $10, $00
+; I: leftover: an exact copy of 24 bytes of Gfx_01_4001_FNTOOE1 (from 01:4FE9), a part of the block; step 4b-4: a run
+; of 24 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the
+; L2 runs)
+Leftover_22_5CC3_Gfx_01_4001_FNTOOE1_Part4FE9::
+    db $ff, $ff, $ff, $ff, $7e, $7e, $3c, $3c, $00, $00, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00
 
 ; I: leftover: an exact copy of 994 bytes of Unused_TCRF_EditorUI_Gfx (from 02:7581, a part of the block) that nothing
 ; in this build reads, runs or explains (never read nor run in the L2 runs)

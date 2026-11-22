@@ -40,10 +40,18 @@ Leftover_2F_5A41_Gfx_03_5A41_CONF2::
 ; explains (never read nor run in the L2 runs)
 Leftover_2F_7241_Map_03_7241_BG_CONF::
     INCBIN "data/bank_2f/Leftover_2F_7241_Map_03_7241_BG_CONF.bin" ; $7241, 576 bytes
-; I: leftover: 1760 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_2F_7481::
-    INCBIN "data/bank_2f/Leftover_2F_7481.bin" ; $7481, 2942 bytes
+; I: leftover: an exact copy of 576 bytes of Map_03_7481_BG_F_SCR (from 03:7481); step 4b-4: a run of 1760 bytes, 100
+; % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_2F_7481_Map_03_7481_BG_F_SCR::
+    INCBIN "data/bank_2f/Leftover_2F_7481_Map_03_7481_BG_F_SCR.bin" ; $7481, 576 bytes
+; I: leftover: an exact copy of 1024 bytes of Map_03_76C1_BG_EDIT (from 03:76C1); step 4b-4: a run of 1760 bytes, 100
+; % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_2F_76C1_Map_03_76C1_BG_EDIT::
+    INCBIN "data/bank_2f/Leftover_2F_76C1_Map_03_76C1_BG_EDIT.bin" ; $76C1, 1024 bytes
+; I: leftover: an exact copy of 160 bytes of Map_03_7AC1_BG_EDITW (from 03:7AC1); step 4b-4: a run of 1760 bytes, 100
+; % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_2F_7AC1_Map_03_7AC1_BG_EDITW::
+    INCBIN "data/bank_2f/Leftover_2F_7AC1_Map_03_7AC1_BG_EDITW.bin" ; $7AC1, 1342 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_2F_7FFF::
     db $2f

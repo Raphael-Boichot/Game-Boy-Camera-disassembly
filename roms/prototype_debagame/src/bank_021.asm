@@ -181,12 +181,15 @@ Leftover_21_69F5_Gfx_02_4301_FNTOOE2_Tiles30to3D::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-; I: leftover: 38 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: an exact copy of 26 bytes of Unused_TCRF_ArrowCursor_BottomRow_Gfx (from 02:43E1); step 4b-4: a run of
+; 26 bytes, 100 % equal at that shift; nothing in this build reads, runs or explains it (never read nor run in the L2
+; runs)
+Leftover_21_6AD5_Unused_TCRF_ArrowCursor_BottomRow_Gfx::
+    INCBIN "data/bank_21/Leftover_21_6AD5_Unused_TCRF_ArrowCursor_BottomRow_Gfx.bin" ; $6AD5, 26 bytes
+; I: leftover: 12 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
-Leftover_21_6AD5::
-    db $01, $00, $05, $00, $00, $03, $7e, $7f, $7e, $7f, $7e, $7f, $01, $00, $00, $00
-    db $00, $80, $30, $a0, $38, $b0, $fe, $7c, $ff, $7f, $01, $02, $fb, $43, $fa, $03
-    db $fe, $7c, $38, $b0, $30, $20
+Leftover_21_6AEF::
+    db $01, $02, $fb, $43, $fa, $03, $fe, $7c, $38, $b0, $30, $20
 
 ; I: leftover: an exact copy of 1012 bytes of Gfx_02_4401_FNTOOE2_Tiles40to17F (from 02:4401, a part of the block)
 ; that nothing in this build reads, runs or explains (never read nor run in the L2 runs)

@@ -8,10 +8,109 @@ SECTION "ROM Bank $010", ROMX[$4000], BANK[$10]
 BankNumber_10_4000::
     db $10
 
-; I: leftover: 259 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 1 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_10_4001::
-    INCBIN "data/bank_10/Leftover_10_4001.bin" ; $4001, 259 bytes
+    db $84
+
+; I: leftover: an exact copy of 18 bytes of CAMECO_INIT (from 37:4700, under the label Leftover_37_4677_CAMECO_INIT),
+; a part of the block; step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or
+; explains it (never read nor run in the L2 runs); code that this build ...
+Leftover_10_4002_CAMECO_INIT_Part4700::
+    db $07, $3e, $04, $e0, $4b, $3e, $60, $e0, $4a, $3e, $01, $ea, $a0, $c0, $3e, $c7
+    db $e0, $40
+
+; I: leftover: an exact copy of 1 byte of INIT_END (from 37:4712, under the label Leftover_37_4712_INIT_END); step
+; 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never read nor
+; run in the L2 runs); code that this build never runs (typed data)
+Leftover_10_4014_INIT_END::
+    db $c9
+
+; I: leftover: an exact copy of 13 bytes of OBJP_DEF_SET (from 37:4713, under the label
+; Leftover_37_4713_OBJP_DEF_SET); step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs); code that this build never runs (typed ...
+Leftover_10_4015_OBJP_DEF_SET::
+    db $3e, $e4, $e0, $48, $e0, $ac, $3e, $e4, $e0, $49, $e0, $ad, $c9
+
+; I: leftover: an exact copy of 2 bytes of BGP_DEF_SET (from 37:4720, under the label Leftover_37_4720_BGP_DEF_SET);
+; step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never
+; read nor run in the L2 runs); code that this build never runs (typed data)
+Leftover_10_4022_BGP_DEF_SET::
+    db $3e, $e4
+
+; I: leftover: an exact copy of 5 bytes of BGP_SET (from 37:4722, under the label Leftover_37_4722_BGP_SET); step
+; 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never read nor
+; run in the L2 runs); code that this build never runs (typed data)
+Leftover_10_4024_BGP_SET::
+    db $e0, $47, $e0, $ae, $c9
+
+; I: leftover: 7 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs)
+Leftover_10_4029::
+    db $f0, $ae, $0f, $cd, $86, $07, $c9
+
+; I: leftover: an exact copy of 15 bytes of SCYX_SET0 (from 37:472E, under the label Leftover_37_472E_SCYX_SET0); step
+; 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never read nor
+; run in the L2 runs); code that this build never runs (typed data)
+Leftover_10_4030_SCYX_SET0::
+    db $3e, $00, $e0, $42, $e0, $a1, $e0, $a2, $3e, $00, $e0, $43, $e0, $a0, $c9
+
+; I: leftover: an exact copy of 6 bytes of SOUND_P (from 37:473D, under the label Leftover_37_473D_SOUND_P); step
+; 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never read nor
+; run in the L2 runs)
+Leftover_10_403F_SOUND_P::
+    db $3e, $3e, $ea, $60, $dc, $c9
+
+; I: leftover: an exact copy of 6 bytes of SOUND_PE (from 37:4743, under the label Leftover_37_4743_SOUND_PE); step
+; 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never read nor
+; run in the L2 runs)
+Leftover_10_4045_SOUND_PE::
+    db $3e, $3f, $ea, $60, $dc, $c9
+
+; I: leftover: an exact copy of 17 bytes of MEN_FADE_CLR (from 37:4749, under the label
+; Leftover_37_4749_MEN_FADE_CLR); step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs)
+Leftover_10_404B_MEN_FADE_CLR::
+    db $af, $ea, $a1, $c0, $ea, $a2, $c0, $ea, $a3, $c0, $ea, $a4, $c0, $ea, $a5, $c0
+    db $c9
+
+; I: leftover: an exact copy of 6 bytes of MEN_FADE_SET (from 37:475A, under the label Leftover_37_475A_MEN_FADE_SET);
+; step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads, runs or explains it (never
+; read nor run in the L2 runs); code that this build never runs (typed ...
+Leftover_10_405C_MEN_FADE_SET::
+    db $3e, $01, $ea, $a1, $c0, $c9
+
+; I: leftover: a variant (93 % of the bytes equal) of 54 bytes of MEN_FADE (from 37:4760, under the label
+; Leftover_37_4760_MEN_FADE); step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build reads,
+; runs or explains it (never read nor run in the L2 runs); code that this build never ...
+Leftover_10_4062_MEN_FADE_Variant::
+    db $fa, $a1, $c0, $a7, $c8, $fa, $a2, $c0, $a7, $28, $07, $3d, $ea, $a2, $c0, $28
+    db $25, $c9, $21, $a3, $c0, $34, $7e, $fe, $04, $c0, $36, $00, $f0, $ac, $cd, $04
+    db $08, $e0, $ac, $e0, $48, $f0, $ae, $cd, $04, $08, $e0, $ae, $e0, $47, $a7, $c0
+    db $3e, $05, $ea, $a2, $c0, $c9
+
+; I: leftover: an exact copy of 10 bytes of MEN_FADE_END (from 37:4796, under the label
+; Leftover_37_4796_MEN_FADE_END); step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs); code that this build never runs (typed ...
+Leftover_10_4098_MEN_FADE_END::
+    db $af, $ea, $a1, $c0, $3e, $01, $ea, $a4, $c0, $c9
+
+; I: leftover: an exact copy of 26 bytes of MEN_FADE_DEC (from 37:47A0, under the label
+; Leftover_37_47A0_MEN_FADE_DEC); step 4b-4: a run of 239 bytes, 78 % equal at that shift; nothing in this build
+; reads, runs or explains it (never read nor run in the L2 runs); code that this build never runs (typed ...
+Leftover_10_40A2_MEN_FADE_DEC::
+    db $4f, $1e, $04, $06, $00, $79, $e6, $03, $28, $01, $3d, $b0, $47, $cb, $08, $cb
+    db $08, $cb, $09, $cb, $09, $1d, $20, $ed, $78, $c9
+
+; I: leftover: 72 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs)
+Leftover_10_40BC::
+    db $78, $a0, $ef, $01, $d0, $05, $1e, $08, $21, $01, $40, $11, $00, $80, $01, $00
+    db $18, $cd, $03, $03, $21, $01, $58, $11, $00, $98, $01, $40, $02, $cd, $03, $03
+    db $21, $43, $08, $11, $00, $c0, $01, $10, $00, $cd, $03, $03, $c9, $60, $4c, $10
+    db $00, $60, $54, $12, $00, $60, $5c, $14, $00, $60, $64, $16, $00, $fa, $a6, $c0
+    db $3c, $ea, $a6, $c0, $00, $40, $1b, $c2
+
 ; I: leftover: an exact copy of 55 bytes of GAME_TITL (from 00:04FA, a part of the block) that nothing in this build
 ; reads, runs or explains (never read nor run in the L2 runs)
 Leftover_10_4104_GAME_TITL_Part04FA::

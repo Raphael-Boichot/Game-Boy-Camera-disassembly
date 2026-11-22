@@ -3053,9 +3053,10 @@ jr_000_0fe2:
     jp MK_PIC_SAVE                                ; $0FEF
 
 
-; I: leftover: 45 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_00_0FF2::
+; I: leftover: a variant (98 % of the bytes equal) of 45 bytes of MOVIE_MODE (from 20:4F83, under the label
+; Leftover_20_4F01_MOVIE_MODE), a part of the block; step 4b-4: a run of 45 bytes, 98 % equal at that shift; nothing
+; in this build reads, runs or explains it (never read nor run in the L2 runs); ...
+Leftover_00_0FF2_MOVIE_MODE_VariantPart4F83::
     db $fa, $67, $c1, $e6, $f0, $fe, $10, $20, $0e, $fa, $67, $c1, $fe, $11, $28, $15
     db $3e, $11, $ea, $67, $c1, $18, $6e, $fa, $67, $c1, $fe, $21, $28, $07, $3e, $21
     db $ea, $67, $c1, $18, $60, $ee, $01, $ea, $67, $c1, $c3, $b2, $1b
@@ -5436,9 +5437,10 @@ OamDma_Run::
     ret                                           ; $1EF9
 
 
-; I: leftover: 248 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_00_1EFA::
+; I: leftover: an exact copy of 248 bytes of VB_GALLERY (from 1D:4996, under the label Leftover_1D_4992_VB_GALLERY), a
+; part of the block; step 4b-4: a run of 248 bytes, 100 % equal at that shift; nothing in this build reads, runs or
+; explains it (never read nor run in the L2 runs); code that this build ...
+Leftover_00_1EFA_VB_GALLERY_Part4996::
     db $fa, $c7, $c0, $67, $fa, $c6, $c0, $6f, $fa, $c5, $c0, $47, $fa, $c4, $c0, $4f
     db $3e, $00, $57, $2a, $02, $0c, $2a, $02, $0c, $2a, $02, $0c, $2a, $02, $0c, $2a
     db $02, $0c, $2a, $02, $0c, $2a, $02, $0c, $2a, $02, $0c, $2a, $02, $0c, $2a, $02
