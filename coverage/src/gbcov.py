@@ -128,3 +128,8 @@ def cam_signal_mv(lux, t): return L.gb_cam_signal_mv(lux, t)
 def cam_log(maxn=8192):                         # every capture started since cam_log_clear(): reg 1, reg 7, reg 0, C1, C0, first matrix byte
     b = (C.c_uint8 * (6 * maxn))(); n = L.gb_cam_log(b, maxn); return [bytes(b[6 * i:6 * i + 6]) for i in range(min(n, maxn))]
 def cam_log_clear(): L.gb_cam_log_clear()
+def face_lux(scene_lux, reflectance=0.18, transmission=0.9, aperture_mm=2.0, focal_mm=3.5):
+    """Illuminance at the sensor face from the illuminance of the scene (docs §19.12): the lens of the owner's figures, 3.5 mm
+    (35 mm equivalent, crop factor 10) at a 2 mm opening (a working value, left open: ROADMAP item 15), f/1.75."""
+    n = focal_mm / aperture_mm
+    return np.asarray(scene_lux, np.float32) * reflectance * transmission / (4 * n * n)
