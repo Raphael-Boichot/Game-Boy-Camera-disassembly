@@ -135,10 +135,10 @@ def cam_log_clear(): L.gb_cam_log_clear()
 # black-body spectra through a silicon response and an infrared-cut edge at 650-700 nm give 4.5-9 for halogen (2,856-3,200 K), 2-3 for
 # daylight (5,500-6,500 K) (I, computed); white LED and fluorescent light carry almost no infrared (1, I).
 IR_FACTOR = {'halogen': 7.0, 'incandescent': 7.0, 'daylight': 2.5, 'led': 1.0, 'fluorescent': 1.0}
-def face_lux(scene_lux, reflectance=0.18, transmission=0.9, light='daylight', aperture_mm=2.0, focal_mm=3.5):
+def face_lux(scene_lux, reflectance=0.18, transmission=0.9, light='daylight', aperture_mm=1.78, focal_mm=3.5):
     """The scene of the sensor model from the illuminance of the scene (docs §19.12): what the datasheet curve would see at the sensor
-    face. The lens of the owner's figures, 3.5 mm (35 mm equivalent, crop factor 10) at a 2 mm opening (a working value, left open:
-    ROADMAP item 15), f/1.75; transmission 90 % (plastic lens, I); the infrared factor of the light (IR_FACTOR). Reflectance: 18 % grey
+    face. The lens of the owner's figures: 3.5 mm (35 mm equivalent, crop factor 10), aperture opening 1.78 mm (measured by the owner,
+    2026-11-23), f/1.97; transmission 90 % (plastic lens, I); the infrared factor of the light (IR_FACTOR). Reflectance: 18 % grey
     by default (objects reflect infrared differently, foliage much more: not modelled)."""
     n = focal_mm / aperture_mm
     return np.asarray(scene_lux, np.float32) * reflectance * transmission * IR_FACTOR[light] / (4 * n * n)
