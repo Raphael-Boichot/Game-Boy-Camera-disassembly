@@ -13,9 +13,9 @@ BankNumber_1A_4000::
 Leftover_1A_4001_AsmSource::
     db "0,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00"
 
-; I: leftover PC memory: 4 bytes (1A:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C25D0000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (1A:4100-4103), a leftover run that holds the dword $C25D0000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_1A_4100_PcRam::
     db $00, $00, $5d, $c2
 
@@ -24,9 +24,10 @@ Leftover_1A_4100_PcRam::
 Leftover_1A_4104_AsmSource::
     db ",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$0"
 
-; I: leftover: 12288 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs); no proof of PC memory in them
-Leftover_1A_4200::
+; I: leftover PC memory: 15871 bytes (1A:4200-7FFE), a leftover run that holds 11 strings of the development PC's RAM
+; (C:\Program Files\TAC95\TAC32.EXE / winbootdir=C:\WINDOWS / COMSPEC=C:\WINDOWS\COMMAND.COM ...); nothing in this
+; build reads, runs or explains it; only those proofs are proven, the rest ...
+Leftover_1A_4200_PcRam::
     db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $f9, $7d, $09, $a0
     db $0c, $00, $59, $00, $3c, $00, $59
 
@@ -96,17 +97,60 @@ Leftover_1A_4200::
     db $ff, $ff, $ff, $ff, $00, $0a, $00, $00, $ff, $ff, $ff, $ff, $00, $0a, $00, $00
     db $ff, $ff, $ff, $ff, $00, $0a, $00, $00, $ff, $ff, $ff, $ff, $00, $0a, $00, $00
     db $ff, $ff, $ff, $ff, $00, $0a, $00, $00, $ff, $ff, $ff, $ff, $00, $0a, $00, $00
-    db $ff, $ff, $ff, $ff, $00, $0a, $00, $00
+    db $ff, $ff, $ff, $ff, $00, $0a, $00, $00, $08, $02, $8e, $00, $00, $00, $00, $00
+    db $43, $3a, $5c, $50, $72, $6f, $67, $72, $61, $6d, $20, $46, $69, $6c, $65, $73
+    db $5c, $54, $41, $43, $39, $35, $5c, $54, $41, $43, $33, $32, $2e, $45, $58, $45
+    db $00, $00, $00, $00, $00, $00, $00, $00, $80, $02, $8e, $00, $a0, $02, $8e, $00
+    db $c0, $02, $8e, $00, $d0, $02, $8e, $00, $f0, $03, $8e, $00, $00, $04, $8e, $00
+    db $10, $04, $8e, $00, $20, $04, $8e, $00, $40, $04, $8e, $00, $60, $04, $8e, $00
+    db $80, $04, $8e, $00, $a0, $04, $8e, $00, $c0, $04, $8e, $00, $d0, $04, $8e, $00
+    db $e0, $04, $8e, $00, $f0, $04, $8e, $00, $00, $05, $8e, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $77, $69, $6e, $62, $6f, $6f, $74, $64
+    db $69, $72, $3d, $43, $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $43, $4f, $4d, $53, $50, $45, $43, $3d
+    db $43, $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53, $5c, $43, $4f, $4d, $4d, $41
+    db $4e, $44, $2e, $43, $4f, $4d, $00, $00, $50, $52, $4f, $4d, $50, $54, $3d, $24
+    db $70, $24, $67, $00, $00, $00, $00, $00, $50, $41, $54, $48, $3d, $43, $3a, $5c
+    db $50, $72, $6f, $67, $72, $61, $6d, $20, $46, $69, $6c, $65, $73, $5c, $54, $41
+    db $43, $39, $35, $3b, $43, $3a, $5c, $50, $72, $6f, $67, $72, $61, $6d, $20, $46
+    db $69, $6c, $65, $73, $5c, $43, $6f, $6d, $6d, $6f, $6e, $20, $46, $69, $6c, $65
+    db $73, $5c, $43, $4f, $4d, $20, $43, $6f, $72, $70, $6f, $72, $61, $74, $69, $6f
+    db $6e, $3b, $44, $3a, $5c, $42, $43, $35, $5c, $42, $49, $4e, $3b, $43, $3a, $5c
+    db $4d, $45, $54, $41, $3b, $43, $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53, $3b
+    db $43, $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53, $5c, $43, $4f, $4d, $4d, $41
+    db $4e, $44, $3b, $43, $3a, $5c, $44, $4f, $53, $3b, $43, $3a, $5c, $4e, $57, $43
+    db $4c, $49, $45, $4e, $54, $3b, $43, $3a, $5c, $42, $41, $54, $3b, $43, $3a, $5c
+    db $42, $49, $4e, $3b, $43, $3a, $5c, $4f, $52, $43, $41, $44, $45, $58, $45, $3b
+    db $43, $3a, $5c, $50, $31, $57, $3b, $43, $3a, $5c, $44, $45, $42, $41, $47, $41
+    db $4d, $45, $5c, $54, $4f, $4f, $4c, $3b, $43, $3a, $5c, $44, $45, $42, $41, $47
+    db $41, $4d, $45, $5c, $49, $53, $44, $3b, $3b, $43, $3a, $5c, $50, $52, $4f, $47
+    db $52, $41, $7e, $31, $5c, $42, $4f, $52, $4c, $41, $4e, $44, $5c, $43, $42, $55
+    db $49, $4c, $44, $45, $52, $5c, $42, $49, $4e, $3b, $43, $3a, $5c, $50, $52, $4f
+    db $47, $52, $41, $7e, $31, $5c, $42, $4f, $52, $4c, $41, $4e, $44, $5c, $43, $42
+    db $55, $49, $4c, $44, $45, $52, $5c, $42, $49, $4e, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $54, $45, $4d, $50, $3d, $43, $3a, $5c
+    db $54, $45, $4d, $50, $00, $00, $00, $00, $54, $4d, $50, $3d, $43, $3a, $5c, $54
+    db $45, $4d, $50, $00, $00, $00, $00, $00, $54, $5a, $3d, $4a, $53, $54, $2d, $39
+    db $00, $00, $00, $00, $00, $00, $00, $00, $4e, $57, $4c, $41, $4e, $47, $55, $41
+    db $47, $45, $3d, $4e, $49, $48, $4f, $4e, $47, $4f, $00, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $4f, $52, $43, $41, $44, $45, $58, $45
+    db $3d, $43, $3a, $5c, $4f, $52, $43, $41, $44, $45, $58, $45, $5c, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $4f, $52, $43, $41, $44, $45, $53, $50
+    db $3d, $43, $3a, $5c, $4f, $52, $43, $41, $44, $45, $53, $50, $5c, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $4f, $52, $43, $41, $44, $50, $52, $4f
+    db $4a, $3d, $43, $3a, $5c, $4f, $52, $43, $41, $44, $5c, $00, $00, $00, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $4f, $52, $43, $41, $44, $55, $53, $45
+    db $52, $3d, $43, $3a, $5c, $4f, $52, $43, $41, $44, $45, $53, $50, $5c, $00, $00
+    db $00, $00, $00, $00, $00, $00, $00, $00, $49, $53, $44, $50, $3d, $33, $34, $30
+    db $00, $00, $00, $00, $00, $00, $00, $00, $4d, $45, $54, $41, $3d, $63, $3a, $5c
+    db $6d, $65, $74, $61, $00, $00, $00, $00, $4d, $45, $54, $41, $55, $53, $45, $52
+    db $3d, $63, $3a, $5c, $00, $00, $00, $00, $43, $4d, $44, $4c, $49, $4e, $45, $3d
+    db $57, $49, $4e, $00, $00, $00, $00, $00, $77, $69, $6e, $64, $69, $72, $3d, $43
+    db $3a, $5c, $57, $49, $4e, $44, $4f, $57, $53
 
-; I: leftover PC memory: 1024 bytes (1A:7200-75FF), the 512-byte blocks of a leftover run that hold 11 strings of the
-; development PC's RAM (C:\Program Files\TAC95\TAC32.EXE / winbootdir=C:\WINDOWS / COMSPEC=C:\WINDOWS\COMMAND.COM
-; ...); nothing in this build reads, runs or explains them; only those ...
-Leftover_1A_7200_PcRam::
-    INCBIN "data/bank_1a/Leftover_1A_7200_PcRam.bin" ; $7200, 1024 bytes
-; I: leftover: 2559 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs); no proof of PC memory in them
-Leftover_1A_7600::
-    INCBIN "data/bank_1a/Leftover_1A_7600.bin" ; $7600, 2559 bytes
+    ; padding
+    ds $aee, $00
+
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_1A_7FFF::
     db $1a

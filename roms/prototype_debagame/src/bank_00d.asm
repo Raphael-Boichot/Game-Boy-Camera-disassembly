@@ -13,9 +13,9 @@ BankNumber_0D_4000::
 Leftover_0D_4001_AsmSource::
     db ";", $09, "LD", $09, "($2000),A", $0d, $0a, ";", $09, "LD", $09, "HL,FACE3", $09, ";1", $96, $87, $96, $da, $82, $cc, $8a, "G", $82, $f0, $83, "o", $83, "b", $83, "t", $83, "@", $82, $c9, $0d, $0a, $0d, $0a, $09, "ld", $09, "a,$4", $0d, $0a, $09, "ld", $09, "($2000),a", $0d, $0a, $09, "ld", $09, "hl,kao_2", $0d, $0a, $0d, $0a, $09, "LD", $09, "A,03", $0d, $0a, $09, "LD", $09, "(PICTURE_F),A", $0d, $0a, $09, "JR", $09, "NC_PICT", $0d, $0a, $0d, $0a, "PICT3", $0d, $0a, ";", $09, "LD", $09, "A,$05", $0d, $0a, ";", $09, "LD", $09, "($2000),A", $0d, $0a, ";", $09, "LD", $09, "HL,FACE4", $09, ";2", $96, $87, $96, $da, $82, $cc, $8a, "G", $82, $f0, $83, "o", $83, "b", $83, "t", $83, "@", $82, $c9, $0d, $0a, $0d, $0a, $09, "ld", $09, "a,$04", $0d, $0a, $09, "ld", $09, "($2000),a", $0d, $0a, $09, "ld", $09, "hl,kao_3", $0d
 
-; I: leftover PC memory: 4 bytes (0D:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C2610000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (0D:4100-4103), a leftover run that holds the dword $C2610000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_0D_4100_PcRam::
     db $00, $00, $61, $c2
 

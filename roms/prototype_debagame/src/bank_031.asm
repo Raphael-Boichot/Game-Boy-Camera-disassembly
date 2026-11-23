@@ -13,9 +13,9 @@ BankNumber_31_4000::
 Leftover_31_4001_AsmSource::
     db "_CNTR3),A", $0d, $0a, $0d, $0a, $09, "LD", $09, "DE,$FFDF", $09, $09, "; 21H", $82, $e6, $82, $e8, $89, $ba, $82, $cd, $8e, "g", $82, $a6, $82, $c8, $82, $a2, $82, $cc, $82, $c5, $0d, $0a, $09, "ADD", $09, "HL,DE", $0d, $0a, $09, "JR", $09, "C,_SET_OK", $0d, $0a, $0d, $0a, $09, "LD", $09, "A,$00", $0d, $0a, $09, "LD", $09, "(B_CNTR2),A", $09, $09, "; ", $8b, $ad, $90, $a7, $93, "I", $82, $c9, "21H", $82, $c9, $82, $b7, $82, $e9, $0d, $0a, $09, "LD", $09, "A,$21", $0d, $0a, $09, "LD", $09, "(B_CNTR3),A", $0d, $0a, $0d, $0a, "_SET_OK", $0d, $0a, $09, "LD", $09, "A,$10", $0d, $0a, $09, "LD", $09, "($4000),A", $09, $09, "; RAM BANK", $82, $cc, $95, $cf, $8d, "X", $0d, $0a, $09, $0d, $0a, $09, "LD", $09, "A,(B_CNTR2)", $0d, $0a, $09, "LD", $09, "(CNTR2),A", $09, $09, ";", $8e, $c0, $8d, $db
 
-; I: leftover PC memory: 4 bytes (31:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C25DB000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (31:4100-4103), a leftover run that holds the dword $C25DB000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_31_4100_PcRam::
     db $00, $b0, $5d, $c2
 
@@ -40,9 +40,9 @@ Leftover_31_5C01_Unused_TCRF_FacePhoto9_HOI_L_Gfx::
 ; reads, runs or explains (never read nor run in the L2 runs)
 Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx::
     INCBIN "data/bank_31/Leftover_31_6A01_Unused_TCRF_FacePhoto10_HOI_R_Gfx.2bpp" ; $6A01, 3584 bytes
-; I: leftover PC memory: 511 bytes (31:7801-79FF), the 512-byte blocks of a leftover run that hold bytes that read as
-; 16-bit x86 code (18 near calls and 6 RET / RETF in a linear decode; no 512-byte block of the retail ROMs reaches 8
-; and 4); nothing in this build reads, runs or explains them; only those ...
+; I: leftover PC memory: 511 bytes (31:7801-79FF), a leftover run that holds bytes that read as 16-bit x86 code (18
+; near calls and 6 RET / RETF in a linear decode; no 512-byte block of the retail ROMs reaches 8 and 4); nothing in
+; this build reads, runs or explains it; only those proofs are proven, the ...
 Leftover_31_7801_PcRam::
     INCBIN "data/bank_31/Leftover_31_7801_PcRam.bin" ; $7801, 511 bytes
 ; I: leftover: an exact copy of 193 bytes of Map_03_76C1_BG_EDIT (from 03:7A00), a part of the block; step 4b-4: a run

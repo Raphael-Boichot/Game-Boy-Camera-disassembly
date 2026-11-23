@@ -8,9 +8,10 @@ SECTION "ROM Bank $037", ROMX[$4000], BANK[$37]
 BankNumber_37_4000::
     db $37
 
-; I: leftover: 91 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_37_4001::
+; I: leftover PC memory: 335 bytes (37:4001-414F), a leftover run that shares a 16-byte piece (at 37:4001) with the PC
+; memory at 1A:6001 (Leftover_1A_4200_PcRam); nothing in this build reads, runs or explains it (owner 2026-11-23: a
+; similarity with PC memory elsewhere makes the run PC memory)
+Leftover_37_4001_PcRam::
     db $00, $7d, $00, $06, $00, $00, $a0, $04, $08, $00, $a0, $80, $5f, $01, $10, $a0
     db $5f, $01, $10, $c0, $5f, $01, $10, $e0, $5f, $01, $10, $00, $60, $01, $10, $20
     db $60, $01, $10, $40, $60, $01, $10, $60, $60, $01, $10, $80, $60, $01, $10, $a0

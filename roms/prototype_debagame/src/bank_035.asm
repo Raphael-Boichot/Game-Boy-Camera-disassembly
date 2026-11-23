@@ -28,9 +28,9 @@ Leftover_35_4001_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part4F59::
     db $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $5f, $ff
     db $bf, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff, $ff
 
-; I: leftover PC memory: 4 bytes (35:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C216E000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (35:4100-4103), a leftover run that holds the dword $C216E000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_35_4100_PcRam::
     db $00, $e0, $16, $c2
 
@@ -389,10 +389,11 @@ Leftover_35_4A87_LoadRecord::
 ; C: binary symbol table of an older build, 705 records (tools/proto_symtab.py)
 OldSymbolTable_35_4A91::
     INCBIN "data/bank_35/OldSymbolTable_35_4A91.bin" ; $4A91, 8843 bytes
-; I: leftover: 2276 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_35_6D1C::
-    INCBIN "data/bank_35/Leftover_35_6D1C.bin" ; $6D1C, 2276 bytes
+; I: leftover PC memory: 2276 bytes (35:6D1C-75FF), a leftover run that holds 2 names of the old symbol tables as
+; length-prefixed strings (CLRCHR_SET / CNF_CUR), records of a symbol list held in memory; nothing in this build
+; reads, runs or explains it; only those proofs are proven, the rest of the run ...
+Leftover_35_6D1C_PcRam::
+    INCBIN "data/bank_35/Leftover_35_6D1C_PcRam.bin" ; $6D1C, 2276 bytes
 ; I: leftover: an exact copy of 925 bytes of Unused_TCRF_FacePhoto1_KAO_1_Gfx (from 30:4E5E, a part of the block) that
 ; nothing in this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_35_7600_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part4E5E::

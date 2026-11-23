@@ -8,9 +8,9 @@ SECTION "ROM Bank $008", ROMX[$4000], BANK[$8]
 BankNumber_08_4000::
     db $08
 
-; I: leftover PC memory: 511 bytes (08:4001-41FF), the 512-byte blocks of a leftover run that hold 2 x86 function
-; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 2 in the whole leftover run); nothing in this
-; build reads, runs or explains them; only those proofs are proven, the rest ...
+; I: leftover PC memory: 511 bytes (08:4001-41FF), a leftover run that holds 2 x86 function prologues (55 8B EC: push
+; bp / mov bp,sp; $EC is no Game Boy opcode; 2 in the whole leftover run); nothing in this build reads, runs or
+; explains it; only those proofs are proven, the rest of the run is taken as ...
 Leftover_08_4001_PcRam::
     INCBIN "data/bank_08/Leftover_08_4001_PcRam.bin" ; $4001, 511 bytes
 ; I: 15871 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part

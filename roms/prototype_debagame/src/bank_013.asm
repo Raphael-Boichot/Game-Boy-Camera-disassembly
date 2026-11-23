@@ -13,9 +13,9 @@ BankNumber_13_4000::
 Leftover_13_4001_SrcListing::
     db ": FB31A", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(307) : FB31B", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(308) : FB32A", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(309) : FB32B", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(310) : FB33A", $09, $09, "DS", $09, "1", $0d, $0a, "equ.dmg(311) : FB33B", $09, $09, "DS", $09, "1", $0d, $0a, "f_screen.dmg(14) : MK_F_SCR", $0d, $0a, "f_screen.dmg(112) : F_SCR_MODE", $0d, $0a, "f_screen.dmg(136) : PRES", $0d, $0a, "f_screen.dmg("
 
-; I: leftover PC memory: 4 bytes (13:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C21E0000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (13:4100-4103), a leftover run that holds the dword $C21E0000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_13_4100_PcRam::
     db $00, $00, $1e, $c2
 

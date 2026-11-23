@@ -14,9 +14,9 @@ BankNumber_28_4000::
 Unused_TCRF_AsmSource2_Part3::
     db ",$5C,$5C", $09, ";0155", $0d, $0a, $09, "DEFB", $09, "$98,$98,$18,$18,$1E,$1E,$00,$00", $0d, $0a, $09, "DEFB", $09, "$1B,$18,$1B,$18,$1C,$18,$1C,$18", $09, ";0156", $0d, $0a, $09, "DEFB", $09, "$1B,$18,$1B,$18,$1C,$18,$1C,$18", $0d, $0a, $09, "DEFB", $09, "$FF,$09,$FF,$0F,$FF,$09,$FF,$00", $09, ";0157", $0d, $0a, $09, "DEFB", $09, "$FF,$00,$FF,$00,$FF,$00,$FF,$00", $0d, $0a, $09, "DEFB", $09, "$FF,$1F,$FF,$04,$FF,$04,$F"
 
-; I: leftover PC memory: 4 bytes (28:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C21BD000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (28:4100-4103), a leftover run that holds the dword $C21BD000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_28_4100_PcRam::
     db $00, $d0, $1b, $c2
 

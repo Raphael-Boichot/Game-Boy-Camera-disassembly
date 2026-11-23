@@ -8,16 +8,11 @@ SECTION "ROM Bank $02c", ROMX[$4000], BANK[$2c]
 BankNumber_2C_4000::
     db $2c
 
-; I: leftover PC memory: 511 bytes (2C:4001-41FF), the 512-byte blocks of a leftover run that hold 3 x86 function
-; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 3 in the whole leftover run); nothing in this
-; build reads, runs or explains them; only those proofs are proven, the rest ...
+; I: leftover PC memory: 515 bytes (2C:4001-4203), a leftover run that holds 3 x86 function prologues (55 8B EC: push
+; bp / mov bp,sp; $EC is no Game Boy opcode; 3 in the whole leftover run); nothing in this build reads, runs or
+; explains it; only those proofs are proven, the rest of the run is taken as ...
 Leftover_2C_4001_PcRam::
-    INCBIN "data/bank_2c/Leftover_2C_4001_PcRam.bin" ; $4001, 511 bytes
-; I: leftover: 4 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs); no proof of PC memory in them
-Leftover_2C_4200::
-    db $d1, $c1, $f1, $d9
-
+    INCBIN "data/bank_2c/Leftover_2C_4001_PcRam.bin" ; $4001, 515 bytes
 ; C: leftover: 124 bytes of code MAIN_SUB of the bank 0 of an older build (the build of table $2A); address and name
 ; from symbol table $2A; code that this build never runs (typed data)
 Leftover_2C_4204_MAIN_SUB::

@@ -8,9 +8,10 @@ SECTION "ROM Bank $036", ROMX[$4000], BANK[$36]
 BankNumber_36_4000::
     db $36
 
-; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs); no proof of PC memory in them
-Leftover_36_4001::
+; I: leftover PC memory: 1023 bytes (36:4001-43FF), a leftover run that holds 2 strings of the development PC's RAM
+; (WINDOWS VMM 4.0 / PIFMGR.DLL ...); nothing in this build reads, runs or explains it; only those proofs are proven,
+; the rest of the run is taken as the same memory (owner 2026-11-23: any ...
+Leftover_36_4001_PcRam::
     db $c0, $8e, $00, $f0
 
     ; padding
@@ -18,28 +19,8 @@ Leftover_36_4001::
 
     db $ff, $00, $00, $00, $00, $00, $00, $00, $00, $80, $f6, $c1
 
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-
-; I: leftover PC memory: 512 bytes (36:4200-43FF), the 512-byte blocks of a leftover run that hold 2 strings of the
-; development PC's RAM (WINDOWS VMM 4.0 / PIFMGR.DLL ...); nothing in this build reads, runs or explains them; only
-; those proofs are proven, the rest of each block is taken as the same memory
-Leftover_36_4200_PcRam::
-    db $00, $00, $00, $00, $00
+    ; padding
+    ds $101, $00
 
     db $57, $49, $4e, $44, $4f, $57, $53, $20, $56, $4d, $4d, $20, $34, $2e, $30, $00
     db $ff, $ff, $1b, $02, $ac, $01

@@ -29,17 +29,13 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 03,7481,76C1,576,Map_03_7481_BG_F_SCR,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
 03,76C1,7AC1,1024,Map_03_76C1_BG_EDIT,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
 03,7AC1,7FFF,1342,Map_03_7AC1_BG_EDITW,data,not_tcrf,,,
-04,4001,4100,255,Leftover_04_4001,data,not_tcrf,,,
-04,4BF0,4E00,528,Leftover_04_4BF0,data,not_tcrf,,,
-04,4E00,5000,512,Leftover_04_4E00_PcRam,data,not_tcrf,,,
-04,5000,7FFF,12287,Leftover_04_5000,data,not_tcrf,,,
+04,4001,4100,255,Leftover_04_4001_PcRam,data,not_tcrf,,,
+04,4BF0,7FFF,13327,Leftover_04_4BF0_PcRam,data,not_tcrf,,,
 05,4001,4E01,3584,Unused_TCRF_FacePhoto7_HOI_U_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,4E01,5C01,3584,Unused_TCRF_FacePhoto8_HOI_D_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,5C01,6A01,3584,Unused_TCRF_FacePhoto9_HOI_L_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 05,6A01,7801,3584,Unused_TCRF_FacePhoto10_HOI_R_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-05,7801,7C00,1023,Leftover_05_7801,data,not_tcrf,,,
-05,7C00,7E00,512,Leftover_05_7C00_PcRam,data,not_tcrf,,,
-05,7E00,7FFF,511,Leftover_05_7E00,data,not_tcrf,,,
+05,7801,7FFF,2046,Leftover_05_7801_PcRam,data,not_tcrf,,,
 06,4001,4E01,3584,Unused_TCRF_FaceDrawing1_FACE5_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 06,4E01,5C01,3584,Unused_TCRF_FaceDrawing2_FACE6_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 06,5C01,6A01,3584,Unused_TCRF_FaceDrawing3_FACE7_Gfx,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
@@ -89,8 +85,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 10,4179,41A7,46,Leftover_10_4179_WANKO_Part056F,data,not_tcrf,,,
 10,41A7,4200,89,Leftover_10_41A7,data,not_tcrf,,,
 10,4200,7FFF,15871,Leftover_10_4200_Grid381Binary,data,not_tcrf,,,
-11,4001,4200,511,Leftover_11_4001_PcRam,data,not_tcrf,,,
-11,4200,493D,1853,Leftover_11_4200,data,not_tcrf,,,
+11,4001,493D,2364,Leftover_11_4001_PcRam,data,not_tcrf,,,
 11,493D,6701,7620,Leftover_11_493D_Grid381Digits,data,not_tcrf,,,
 11,6701,7FFF,6398,Leftover_11_6701,data,not_tcrf,,,
 12,4001,4100,255,Leftover_12_4001_AsmSource,data,not_tcrf,,,
@@ -132,9 +127,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 1A,4001,4100,255,Leftover_1A_4001_AsmSource,data,not_tcrf,,,
 1A,4100,4104,4,Leftover_1A_4100_PcRam,data,not_tcrf,,,
 1A,4104,4200,252,Leftover_1A_4104_AsmSource,data,not_tcrf,,,
-1A,4200,7200,12288,Leftover_1A_4200,data,not_tcrf,,,
-1A,7200,7600,1024,Leftover_1A_7200_PcRam,data,not_tcrf,,,
-1A,7600,7FFF,2559,Leftover_1A_7600,data,not_tcrf,,,
+1A,4200,7FFF,15871,Leftover_1A_4200_PcRam,data,not_tcrf,,,
 1B,4001,4100,255,Leftover_1B_4001_AsmSource,data,not_tcrf,,,
 1B,4100,4104,4,Leftover_1B_4100_PcRam,data,not_tcrf,,,
 1B,4104,5000,3836,Leftover_1B_4104_AsmSource,data,not_tcrf,,,
@@ -715,7 +708,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 23,7AF9,7D0B,530,Leftover_23_7AF9_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part59EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 23,7D0B,7D11,6,Leftover_23_7D0B_LoadRecord,data,not_tcrf,,,
 23,7D11,7FFF,750,Leftover_23_7D11_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-24,4001,4200,511,Leftover_24_4001,data,not_tcrf,,,
+24,4001,4200,511,Leftover_24_4001_PcRam,data,not_tcrf,,,
 24,4200,7FFF,15871,Leftover_24_4200_AsmSource,data,not_tcrf,,,
 25,4001,41FE,509,Leftover_25_4001_PcRam,data,not_tcrf,,,
 25,41FE,7FFF,15873,Leftover_25_41FE_AsmSource,data,not_tcrf,,,
@@ -864,14 +857,12 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 2A,4B67,4B6E,7,Leftover_2A_4B67_LoadRecord,data,not_tcrf,,,
 2A,4B6E,4B75,7,Leftover_2A_4B6E_LoadRecord,data,not_tcrf,,,
 2A,4B75,4B7F,10,Leftover_2A_4B75_LoadRecord,data,not_tcrf,,,
-2A,6CC9,7FFF,4918,Leftover_2A_6CC9,data,not_tcrf,,,
+2A,6CC9,7FFF,4918,Leftover_2A_6CC9_PcRam,data,not_tcrf,,,
 2B,4001,4100,255,Leftover_2B_4001_AsmSource,data,not_tcrf,,,
 2B,4100,4104,4,Leftover_2B_4100_PcRam,data,not_tcrf,,,
 2B,4104,4200,252,Leftover_2B_4104_AsmSource,data,not_tcrf,,,
-2B,4200,4400,512,Leftover_2B_4200_PcRam,data,not_tcrf,,,
-2B,4400,7FFF,15359,Leftover_2B_4400,data,not_tcrf,,,
-2C,4001,4200,511,Leftover_2C_4001_PcRam,data,not_tcrf,,,
-2C,4200,4204,4,Leftover_2C_4200,data,not_tcrf,,,
+2B,4200,7FFF,15871,Leftover_2B_4200_PcRam,data,not_tcrf,,,
+2C,4001,4204,515,Leftover_2C_4001_PcRam,data,not_tcrf,,,
 2C,4204,4280,124,Leftover_2C_4204_MAIN_SUB,data,not_tcrf,,,
 2C,4280,42BF,63,Leftover_2C_4280_VBLANK_SUB,data,not_tcrf,,,
 2C,42BF,42C8,9,Leftover_2C_42BF_DATA_MOV,data,not_tcrf,,,
@@ -1090,7 +1081,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 2C,795F,7D00,929,Leftover_2C_795F_CHG_TIME_TBL_D,data,not_tcrf,,,
 2C,7D00,7E00,256,Leftover_2C_7D00_MIRROR_TABLE,data,not_tcrf,,,
 2C,7E00,7FFF,511,Leftover_2C_7E00_COUNT_TABLE,data,not_tcrf,,,
-2D,4001,4200,511,Leftover_2D_4001,data,not_tcrf,,,
+2D,4001,4200,511,Leftover_2D_4001_PcRam,data,not_tcrf,,,
 2D,4200,5801,5633,Leftover_2D_4200_Gfx_01_4001_FNTOOE1_Part4200,data,not_tcrf,,,
 2D,5801,58F0,239,Leftover_2D_5801_Unused_TCRF_TitleLogoNEO_Map_Part5801,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,the 'Debagame Tester NEO' title logo
 2D,58F0,58F1,1,Leftover_2D_58F0,data,not_tcrf,,,
@@ -1247,14 +1238,13 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 35,4A79,4A80,7,Leftover_35_4A79_LoadRecord,data,not_tcrf,,,
 35,4A80,4A87,7,Leftover_35_4A80_LoadRecord,data,not_tcrf,,,
 35,4A87,4A91,10,Leftover_35_4A87_LoadRecord,data,not_tcrf,,,
-35,6D1C,7600,2276,Leftover_35_6D1C,data,not_tcrf,,,
+35,6D1C,7600,2276,Leftover_35_6D1C_PcRam,data,not_tcrf,,,
 35,7600,799D,925,Leftover_35_7600_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part4E5E,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 35,799D,79A3,6,Leftover_35_799D_LoadRecord,data,not_tcrf,,,
 35,79A3,7D9D,1018,Leftover_35_79A3_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part51FB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 35,7D9D,7DA3,6,Leftover_35_7D9D_LoadRecord,data,not_tcrf,,,
 35,7DA3,7FFF,604,Leftover_35_7DA3_Unused_TCRF_FacePhoto1_KAO_1_Gfx_Part55F5,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-36,4001,4200,511,Leftover_36_4001,data,not_tcrf,,,
-36,4200,4400,512,Leftover_36_4200_PcRam,data,not_tcrf,,,
+36,4001,4400,1023,Leftover_36_4001_PcRam,data,not_tcrf,,,
 36,4400,47B5,949,Leftover_36_4400_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5C46,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,47B5,47BB,6,Leftover_36_47B5_LoadRecord,data,not_tcrf,,,
 36,47BB,4BB5,1018,Leftover_36_47BB_Unused_TCRF_FacePhoto2_KAO_2_Gfx_Part5FFB,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
@@ -1290,7 +1280,7 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 36,7A11,7C23,530,Leftover_36_7A11_Unused_TCRF_FacePhoto8_HOI_D_Gfx_Part59EF,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
 36,7C23,7C29,6,Leftover_36_7C23_LoadRecord,data,not_tcrf,,,
 36,7C29,7FFF,982,Leftover_36_7C29_Unused_TCRF_FacePhoto9_HOI_L_Gfx_Part5C01,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"fourteen full-size pictures (ten photos, four drawings of a face), and the copies of them"
-37,4001,4150,335,Leftover_37_4001,data,not_tcrf,,,
+37,4001,4150,335,Leftover_37_4001_PcRam,data,not_tcrf,,,
 37,4150,41C7,119,Leftover_37_4150_RESET,data,not_tcrf,,,
 37,41C7,41DA,19,Leftover_37_41C7_MAIN,data,not_tcrf,,,
 37,41DA,41E6,12,Leftover_37_41DA_VBWAIT,data,not_tcrf,,,
@@ -1582,15 +1572,8 @@ bank,addr,end,bytes,name,kind,category,tcrf_page,tcrf_section,tcrf_what
 3A,7481,76C1,576,Leftover_3A_7481_Map_03_7481_BG_F_SCR,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
 3A,76C1,7AC1,1024,Leftover_3A_76C1_Map_03_76C1_BG_EDIT,data,tcrf,https://tcrf.net/Proto:Game_Boy_Camera,Unused Graphics,"the tile maps of the editor UI: their ids $80-$FF draw Unused_TCRF_EditorUI_Gfx (02:7581); BG_F_SCR drawn with it is the picture TCRF shows (an asset goes with its tile map, owner 2026-11-12)"
 3A,7AC1,7FFF,1342,Leftover_3A_7AC1_Map_03_7AC1_BG_EDITW,data,not_tcrf,,,
-3B,4001,4200,511,Leftover_3B_4001_PcRam,data,not_tcrf,,,
-3B,4200,7FFF,15871,Leftover_3B_4200,data,not_tcrf,,,
-3C,4001,4200,511,Leftover_3C_4001_PcRam,data,not_tcrf,,,
-3C,4200,7FFF,15871,Leftover_3C_4200,data,not_tcrf,,,
-3D,4001,5000,4095,Leftover_3D_4001,data,not_tcrf,,,
-3D,5000,5400,1024,Leftover_3D_5000_PcRam,data,not_tcrf,,,
-3D,5400,6000,3072,Leftover_3D_5400,data,not_tcrf,,,
-3D,6000,6600,1536,Leftover_3D_6000_PcRam,data,not_tcrf,,,
-3D,6600,7FFF,6655,Leftover_3D_6600,data,not_tcrf,,,
-3E,4001,4200,511,Leftover_3E_4001_PcRam,data,not_tcrf,,,
-3E,4200,7FFF,15871,Leftover_3E_4200,data,not_tcrf,,,
-3F,4001,7FFF,16382,Leftover_3F_4001,data,not_tcrf,,,
+3B,4001,7FFF,16382,Leftover_3B_4001_PcRam,data,not_tcrf,,,
+3C,4001,7FFF,16382,Leftover_3C_4001_PcRam,data,not_tcrf,,,
+3D,4001,7FFF,16382,Leftover_3D_4001_PcRam,data,not_tcrf,,,
+3E,4001,7FFF,16382,Leftover_3E_4001_PcRam,data,not_tcrf,,,
+3F,4001,7FFF,16382,Leftover_3F_4001_PcRam,data,not_tcrf,,,

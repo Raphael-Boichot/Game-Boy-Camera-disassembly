@@ -13,9 +13,9 @@ BankNumber_22_4000::
 Leftover_22_4001_AsmSource::
     db ",$00,$00,$00", $09, ";0092", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$30,$38,$30,$38", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$10,$18,$00,$00", $09, ";0093", $0d, $0a, $09, "DEFB", $09, "$00,$00,$10,$18,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$10,$18,$00,$00", $09, ";0094", $0d, $0a, $09, "DEFB", $09, "$00,$00,$10,$18,$20,$30,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$08,$0C,$10,$1"
 
-; I: leftover PC memory: 4 bytes (22:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C2606000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (22:4100-4103), a leftover run that holds the dword $C2606000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_22_4100_PcRam::
     db $00, $60, $60, $c2
 

@@ -1,6 +1,13 @@
 bank,start,end,bytes,kind,label,lines,sample
-04,4F18,4F36,30,PC memory string (leftover),Leftover_04_4E00_PcRam,1,C:\WINDOWS\SYSTEM\KERNEL32.DLL
-05,7C00,7C1E,30,PC memory string (leftover),Leftover_05_7C00_PcRam,1,C:\WINDOWS\SYSTEM\KERNEL32.DLL
+04,4BF0,4BFB,11,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,msime95.ini
+04,4CBF,4CC5,6,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,95.ini
+04,4F18,4F36,30,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,C:\WINDOWS\SYSTEM\KERNEL32.DLL
+04,5570,5576,6,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,MS-IME
+04,55F0,55F9,9,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,MSIMEGUID
+04,5670,5677,7,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,DEFROMA
+04,57F0,57FA,10,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,MSIMECOLOR
+04,5870,5878,8,PC memory string (leftover),Leftover_04_4BF0_PcRam,1,MSIMEKEY
+05,7C00,7C1E,30,PC memory string (leftover),Leftover_05_7801_PcRam,1,C:\WINDOWS\SYSTEM\KERNEL32.DLL
 0C,4001,4100,255,assembler source (leftover),Leftover_0C_4001_AsmSource,25,";43 LD (BC),A INC C LD A,(HLI) ;44 LD (BC),A INC C LD A,(HLI)"
 0C,4104,4200,252,assembler source (leftover),Leftover_0C_4104_AsmSource,25,"A INC C LD A,(HLI) ;4A LD (BC),A INC C LD A,(HLI) ;4B LD (BC)"
 0D,4001,4100,255,assembler source (leftover),Leftover_0D_4001_AsmSource,18,"; LD ($2000),A ; LD HL,FACE3 ;1枚目の絵をバッファに ld a,$4 ld ($2000),a ld hl,ka"
@@ -19,24 +26,24 @@ bank,start,end,bytes,kind,label,lines,sample
 17,4104,4200,252,assembler source (leftover),Leftover_17_4104_AsmSource,4,"$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$"
 1A,4001,4100,255,assembler source (leftover),Leftover_1A_4001_AsmSource,5,"0,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00"
 1A,4104,4200,252,assembler source (leftover),Leftover_1A_4104_AsmSource,3,",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 DEFB $00,$00,$00,$00,$00,$00,$00,"
-1A,7208,7228,32,PC memory string (leftover),Leftover_1A_7200_PcRam,1,C:\Program Files\TAC95\TAC32.EXE
-1A,7280,7295,21,PC memory string (leftover),Leftover_1A_7200_PcRam,1,winbootdir=C:\WINDOWS
-1A,72A0,72BE,30,PC memory string (leftover),Leftover_1A_7200_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
-1A,72C0,72CB,11,PC memory string (leftover),Leftover_1A_7200_PcRam,1,PROMPT=$p$g
-1A,72D0,73E2,274,PC memory string (leftover),Leftover_1A_7200_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
-1A,73F0,73FC,12,PC memory string (leftover),Leftover_1A_7200_PcRam,1,TEMP=C:\TEMP
-1A,7400,740B,11,PC memory string (leftover),Leftover_1A_7200_PcRam,1,TMP=C:\TEMP
-1A,7410,7418,8,PC memory string (leftover),Leftover_1A_7200_PcRam,1,TZ=JST-9
-1A,7420,7432,18,PC memory string (leftover),Leftover_1A_7200_PcRam,1,NWLANGUAGE=NIHONGO
-1A,7440,7455,21,PC memory string (leftover),Leftover_1A_7200_PcRam,1,ORCADEXE=C:\ORCADEXE\
-1A,7460,7475,21,PC memory string (leftover),Leftover_1A_7200_PcRam,1,ORCADESP=C:\ORCADESP\
-1A,7480,7493,19,PC memory string (leftover),Leftover_1A_7200_PcRam,1,ORCADPROJ=C:\ORCAD\
-1A,74A0,74B6,22,PC memory string (leftover),Leftover_1A_7200_PcRam,1,ORCADUSER=C:\ORCADESP\
-1A,74C0,74C8,8,PC memory string (leftover),Leftover_1A_7200_PcRam,1,ISDP=340
-1A,74D0,74DC,12,PC memory string (leftover),Leftover_1A_7200_PcRam,1,META=c:\meta
-1A,74E0,74EC,12,PC memory string (leftover),Leftover_1A_7200_PcRam,1,METAUSER=c:\
-1A,74F0,74FB,11,PC memory string (leftover),Leftover_1A_7200_PcRam,1,CMDLINE=WIN
-1A,7500,7511,17,PC memory string (leftover),Leftover_1A_7200_PcRam,1,windir=C:\WINDOWS
+1A,7208,7228,32,PC memory string (leftover),Leftover_1A_4200_PcRam,1,C:\Program Files\TAC95\TAC32.EXE
+1A,7280,7295,21,PC memory string (leftover),Leftover_1A_4200_PcRam,1,winbootdir=C:\WINDOWS
+1A,72A0,72BE,30,PC memory string (leftover),Leftover_1A_4200_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
+1A,72C0,72CB,11,PC memory string (leftover),Leftover_1A_4200_PcRam,1,PROMPT=$p$g
+1A,72D0,73E2,274,PC memory string (leftover),Leftover_1A_4200_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
+1A,73F0,73FC,12,PC memory string (leftover),Leftover_1A_4200_PcRam,1,TEMP=C:\TEMP
+1A,7400,740B,11,PC memory string (leftover),Leftover_1A_4200_PcRam,1,TMP=C:\TEMP
+1A,7410,7418,8,PC memory string (leftover),Leftover_1A_4200_PcRam,1,TZ=JST-9
+1A,7420,7432,18,PC memory string (leftover),Leftover_1A_4200_PcRam,1,NWLANGUAGE=NIHONGO
+1A,7440,7455,21,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADEXE=C:\ORCADEXE\
+1A,7460,7475,21,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADESP=C:\ORCADESP\
+1A,7480,7493,19,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADPROJ=C:\ORCAD\
+1A,74A0,74B6,22,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ORCADUSER=C:\ORCADESP\
+1A,74C0,74C8,8,PC memory string (leftover),Leftover_1A_4200_PcRam,1,ISDP=340
+1A,74D0,74DC,12,PC memory string (leftover),Leftover_1A_4200_PcRam,1,META=c:\meta
+1A,74E0,74EC,12,PC memory string (leftover),Leftover_1A_4200_PcRam,1,METAUSER=c:\
+1A,74F0,74FB,11,PC memory string (leftover),Leftover_1A_4200_PcRam,1,CMDLINE=WIN
+1A,7500,7511,17,PC memory string (leftover),Leftover_1A_4200_PcRam,1,windir=C:\WINDOWS
 1B,4001,4100,255,assembler source (leftover),Leftover_1B_4001_AsmSource,4,"FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF DEFB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$F"
 1B,4104,4200,252,assembler source (leftover),Leftover_1B_4104_AsmSource,4,"$C0,$C0,$E0,$C0,$E0,$C0,$E0,$C0,$E0,$C0,$80,$E0,$E0,$C0 DEFB $00,$00,$00,$00,$"
 1E,53FB,7FFF,11268,assembler source (leftover),Leftover_1E_53FB_AsmSource,762,"B_TH2COUNT ;最初のキャラクタの1行目 LD HL,$14 ADD HL,DE LD D,H LD E,L CALL BI"
@@ -72,42 +79,42 @@ bank,start,end,bytes,kind,label,lines,sample
 30,4104,4200,252,assembler source (leftover),Leftover_30_4104_AsmSource,19,";------------------------- LD A,$10 ; RAMBK $10 LD ($4000),A LD B,$70"
 31,4001,4100,255,assembler source (leftover),Leftover_31_4001_AsmSource,16,"_CNTR3),A LD DE,$FFDF ; 21Hより下は使えないので ADD HL,DE JR C,_SET_OK LD A,$"
 31,4104,4200,252,assembler source (leftover),Leftover_31_4104_AsmSource,16,"更する LD A,(B_CNTR3) LD (CNTR3),A RET ;========================"
-36,4205,4214,15,PC memory string (leftover),Leftover_36_4200_PcRam,1,WINDOWS VMM 4.0
-36,4273,427D,10,PC memory string (leftover),Leftover_36_4200_PcRam,1,PIFMGR.DLL
-36,4305,430D,8,PC memory string (leftover),Leftover_36_4200_PcRam,1,Terminal
-36,4371,4377,6,PC memory string (leftover),Leftover_36_4200_PcRam,1,DOSIME
-3D,5014,5021,13,PC memory string (leftover),Leftover_3D_5000_PcRam,1,ir=C:\WINDOWS
-3D,5022,5040,30,PC memory string (leftover),Leftover_3D_5000_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
-3D,5041,504C,11,PC memory string (leftover),Leftover_3D_5000_PcRam,1,PROMPT=$p$g
-3D,504D,515F,274,PC memory string (leftover),Leftover_3D_5000_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
-3D,5160,516C,12,PC memory string (leftover),Leftover_3D_5000_PcRam,1,TEMP=C:\TEMP
-3D,516D,5178,11,PC memory string (leftover),Leftover_3D_5000_PcRam,1,TMP=C:\TEMP
-3D,5179,5181,8,PC memory string (leftover),Leftover_3D_5000_PcRam,1,TZ=JST-9
-3D,5182,5194,18,PC memory string (leftover),Leftover_3D_5000_PcRam,1,NWLANGUAGE=NIHONGO
-3D,5195,51AA,21,PC memory string (leftover),Leftover_3D_5000_PcRam,1,ORCADEXE=C:\ORCADEXE\
-3D,51AB,51C0,21,PC memory string (leftover),Leftover_3D_5000_PcRam,1,ORCADESP=C:\ORCADESP\
-3D,51C1,51D4,19,PC memory string (leftover),Leftover_3D_5000_PcRam,1,ORCADPROJ=C:\ORCAD\
-3D,51D5,51EB,22,PC memory string (leftover),Leftover_3D_5000_PcRam,1,ORCADUSER=C:\ORCADESP\
-3D,51EC,51F4,8,PC memory string (leftover),Leftover_3D_5000_PcRam,1,ISDP=340
-3D,51F5,5201,12,PC memory string (leftover),Leftover_3D_5000_PcRam,1,META=c:\meta
-3D,5202,520E,12,PC memory string (leftover),Leftover_3D_5000_PcRam,1,METAUSER=c:\
-3D,520F,521A,11,PC memory string (leftover),Leftover_3D_5000_PcRam,1,CMDLINE=WIN
-3D,521B,522C,17,PC memory string (leftover),Leftover_3D_5000_PcRam,1,windir=C:\WINDOWS
-3D,61A8,61C8,32,PC memory string (leftover),Leftover_3D_6000_PcRam,1,C:\Program Files\TAC95\TAC32.EXE
-3D,6220,6235,21,PC memory string (leftover),Leftover_3D_6000_PcRam,1,winbootdir=C:\WINDOWS
-3D,6240,625E,30,PC memory string (leftover),Leftover_3D_6000_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
-3D,6260,626B,11,PC memory string (leftover),Leftover_3D_6000_PcRam,1,PROMPT=$p$g
-3D,6270,6382,274,PC memory string (leftover),Leftover_3D_6000_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
-3D,6390,639C,12,PC memory string (leftover),Leftover_3D_6000_PcRam,1,TEMP=C:\TEMP
-3D,63A0,63AB,11,PC memory string (leftover),Leftover_3D_6000_PcRam,1,TMP=C:\TEMP
-3D,63B0,63B8,8,PC memory string (leftover),Leftover_3D_6000_PcRam,1,TZ=JST-9
-3D,63C0,63D2,18,PC memory string (leftover),Leftover_3D_6000_PcRam,1,NWLANGUAGE=NIHONGO
-3D,63E0,63F5,21,PC memory string (leftover),Leftover_3D_6000_PcRam,1,ORCADEXE=C:\ORCADEXE\
-3D,6400,6415,21,PC memory string (leftover),Leftover_3D_6000_PcRam,1,ORCADESP=C:\ORCADESP\
-3D,6420,6433,19,PC memory string (leftover),Leftover_3D_6000_PcRam,1,ORCADPROJ=C:\ORCAD\
-3D,6440,6456,22,PC memory string (leftover),Leftover_3D_6000_PcRam,1,ORCADUSER=C:\ORCADESP\
-3D,6460,6468,8,PC memory string (leftover),Leftover_3D_6000_PcRam,1,ISDP=340
-3D,6470,647C,12,PC memory string (leftover),Leftover_3D_6000_PcRam,1,META=c:\meta
-3D,6480,648C,12,PC memory string (leftover),Leftover_3D_6000_PcRam,1,METAUSER=c:\
-3D,6490,649B,11,PC memory string (leftover),Leftover_3D_6000_PcRam,1,CMDLINE=WIN
-3D,64A0,64B1,17,PC memory string (leftover),Leftover_3D_6000_PcRam,1,windir=C:\WINDOWS
+36,4205,4214,15,PC memory string (leftover),Leftover_36_4001_PcRam,1,WINDOWS VMM 4.0
+36,4273,427D,10,PC memory string (leftover),Leftover_36_4001_PcRam,1,PIFMGR.DLL
+36,4305,430D,8,PC memory string (leftover),Leftover_36_4001_PcRam,1,Terminal
+36,4371,4377,6,PC memory string (leftover),Leftover_36_4001_PcRam,1,DOSIME
+3D,5014,5021,13,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ir=C:\WINDOWS
+3D,5022,5040,30,PC memory string (leftover),Leftover_3D_4001_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
+3D,5041,504C,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PROMPT=$p$g
+3D,504D,515F,274,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
+3D,5160,516C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TEMP=C:\TEMP
+3D,516D,5178,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TMP=C:\TEMP
+3D,5179,5181,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TZ=JST-9
+3D,5182,5194,18,PC memory string (leftover),Leftover_3D_4001_PcRam,1,NWLANGUAGE=NIHONGO
+3D,5195,51AA,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADEXE=C:\ORCADEXE\
+3D,51AB,51C0,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADESP=C:\ORCADESP\
+3D,51C1,51D4,19,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADPROJ=C:\ORCAD\
+3D,51D5,51EB,22,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADUSER=C:\ORCADESP\
+3D,51EC,51F4,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ISDP=340
+3D,51F5,5201,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,META=c:\meta
+3D,5202,520E,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,METAUSER=c:\
+3D,520F,521A,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,CMDLINE=WIN
+3D,521B,522C,17,PC memory string (leftover),Leftover_3D_4001_PcRam,1,windir=C:\WINDOWS
+3D,61A8,61C8,32,PC memory string (leftover),Leftover_3D_4001_PcRam,1,C:\Program Files\TAC95\TAC32.EXE
+3D,6220,6235,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,winbootdir=C:\WINDOWS
+3D,6240,625E,30,PC memory string (leftover),Leftover_3D_4001_PcRam,1,COMSPEC=C:\WINDOWS\COMMAND.COM
+3D,6260,626B,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PROMPT=$p$g
+3D,6270,6382,274,PC memory string (leftover),Leftover_3D_4001_PcRam,1,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5
+3D,6390,639C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TEMP=C:\TEMP
+3D,63A0,63AB,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TMP=C:\TEMP
+3D,63B0,63B8,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,TZ=JST-9
+3D,63C0,63D2,18,PC memory string (leftover),Leftover_3D_4001_PcRam,1,NWLANGUAGE=NIHONGO
+3D,63E0,63F5,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADEXE=C:\ORCADEXE\
+3D,6400,6415,21,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADESP=C:\ORCADESP\
+3D,6420,6433,19,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADPROJ=C:\ORCAD\
+3D,6440,6456,22,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ORCADUSER=C:\ORCADESP\
+3D,6460,6468,8,PC memory string (leftover),Leftover_3D_4001_PcRam,1,ISDP=340
+3D,6470,647C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,META=c:\meta
+3D,6480,648C,12,PC memory string (leftover),Leftover_3D_4001_PcRam,1,METAUSER=c:\
+3D,6490,649B,11,PC memory string (leftover),Leftover_3D_4001_PcRam,1,CMDLINE=WIN
+3D,64A0,64B1,17,PC memory string (leftover),Leftover_3D_4001_PcRam,1,windir=C:\WINDOWS

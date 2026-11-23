@@ -1,0 +1,65 @@
+category,string,bytes,where,labels
+file name or path,msime95.ini,11,04:4BF0,Leftover_04_4BF0_PcRam
+file name or path,95.ini,6,04:4CBF,Leftover_04_4BF0_PcRam
+file name or path,C:\WINDOWS\SYSTEM\KERNEL32.DLL,30,04:4F18 05:7C00,Leftover_04_4BF0_PcRam Leftover_05_7801_PcRam
+file name or path,C:\Program Files\TAC95\TAC32.EXE,32,1A:7208 3D:61A8,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+file name or path,PIFMGR.DLL,10,2B:4273 36:4273,Leftover_2B_4200_PcRam Leftover_36_4001_PcRam
+environment variable,winbootdir=C:\WINDOWS,21,1A:7280 3D:6220,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,COMSPEC=C:\WINDOWS\COMMAND.COM,30,1A:72A0 3D:5022 3D:6240,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,PROMPT=$p$g,11,1A:72C0 3D:5041 3D:6260,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5\BIN;C:\META;C:\WINDOWS;C:\WINDOWS\COMMAND;C:\DOS;C:\NWCLIENT;C:\BAT;C:\BIN;C:\ORCADEXE;C:\P1W;C:\DEBAGAME\TOOL;C:\DEBAGAME\ISD;;C:\PROGRA~1\BORLAND\CBUILDER\BIN;C:\PROGRA~1\BORLAND\CBUILDER\BIN,274,1A:72D0 3D:504D 3D:6270,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,TEMP=C:\TEMP,12,1A:73F0 3D:5160 3D:6390,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,TMP=C:\TEMP,11,1A:7400 3D:516D 3D:63A0,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,TZ=JST-9,8,1A:7410 3D:5179 3D:63B0,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,NWLANGUAGE=NIHONGO,18,1A:7420 3D:5182 3D:63C0,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,ORCADEXE=C:\ORCADEXE\,21,1A:7440 3D:5195 3D:63E0,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,ORCADESP=C:\ORCADESP\,21,1A:7460 3D:51AB 3D:6400,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,ORCADPROJ=C:\ORCAD\,19,1A:7480 3D:51C1 3D:6420,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,ORCADUSER=C:\ORCADESP\,22,1A:74A0 3D:51D5 3D:6440,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,ISDP=340,8,1A:74C0 3D:51EC 3D:6460,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,META=c:\meta,12,1A:74D0 3D:51F5 3D:6470,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,METAUSER=c:\,12,1A:74E0 3D:5202 3D:6480,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,CMDLINE=WIN,11,1A:74F0 3D:520F 3D:6490,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,windir=C:\WINDOWS,17,1A:7500 3D:521B 3D:64A0,Leftover_1A_4200_PcRam Leftover_3D_4001_PcRam
+environment variable,ir=C:\WINDOWS,13,3D:5014,Leftover_3D_4001_PcRam
+symbol name,LOOP_COUNT,10,11:4009,Leftover_11_4001_PcRam
+symbol name,LOOP_COUNT2,11,11:4018,Leftover_11_4001_PcRam
+symbol name,MABIKI2,7,11:403E,Leftover_11_4001_PcRam
+symbol name,MABIKI_BYTE,11,11:404A,Leftover_11_4001_PcRam
+symbol name,MABIKI_BYTE2,12,11:405E,Leftover_11_4001_PcRam
+symbol name,MABIKI_MODE,11,11:406F,Leftover_11_4001_PcRam
+symbol name,MABIKI_MODE2,12,11:407F,Leftover_11_4001_PcRam
+symbol name,MAIN_AFURE,10,11:4099,Leftover_11_4001_PcRam
+symbol name,MAIN_MENU,9,11:40A8,Leftover_11_4001_PcRam
+symbol name,MAIN_SUB,8,11:40B6,Leftover_11_4001_PcRam
+symbol name,MAKE_BANK,9,11:40C3,Leftover_11_4001_PcRam
+symbol name,MAKE_CONFIG,11,11:40D1,Leftover_11_4001_PcRam
+symbol name,MAKE_EMI,8,11:40F4,Leftover_11_4001_PcRam
+symbol name,MAKE_MENU,9,11:4112,Leftover_11_4001_PcRam
+symbol name,MAKE_MOVIE,10,11:4120,Leftover_11_4001_PcRam
+symbol name,MEN_CHG_F,9,11:4139,Leftover_11_4001_PcRam
+symbol name,MEN_CHG_M,9,11:4147,Leftover_11_4001_PcRam
+symbol name,MEN_FADE,8,11:4155,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_C,10,11:4162,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_CLR,12,11:4171,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_DEC,12,11:4182,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_END,12,11:4193,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_F,10,11:41A4,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_SET,12,11:41B3,Leftover_11_4001_PcRam
+symbol name,MEN_FADE_T,10,11:41C4,Leftover_11_4001_PcRam
+symbol name,MIRROR_CHR,10,11:41D3,Leftover_11_4001_PcRam
+symbol name,MIRROR_LINE,11,11:41E2,Leftover_11_4001_PcRam
+symbol name,MIRROR_MODE,11,11:41F2,Leftover_11_4001_PcRam
+symbol name,CLRCHR_SET,10,35:75DF,Leftover_35_6D1C_PcRam
+symbol name,CNF_CUR,7,35:75EE,Leftover_35_6D1C_PcRam
+other,"7E,VK_F15,vf",12,04:5370,Leftover_04_4BF0_PcRam
+other,MS-IME,6,04:5570,Leftover_04_4BF0_PcRam
+other,MSIMEGUID,9,04:55F0,Leftover_04_4BF0_PcRam
+other,DEFROMA,7,04:5670,Leftover_04_4BF0_PcRam
+other,MSIMECOLOR,10,04:57F0,Leftover_04_4BF0_PcRam
+other,MSIMEKEY,8,04:5870,Leftover_04_4BF0_PcRam
+other,MAKE_EDIT_DITH,14,11:40E1,Leftover_11_4001_PcRam
+other,E_GALLERY,9,11:4104,Leftover_11_4001_PcRam
+other,WINDOWS VMM 4.0,15,2B:4205 36:4205,Leftover_2B_4200_PcRam Leftover_36_4001_PcRam
+other,Terminal,8,2B:4305 36:4305,Leftover_2B_4200_PcRam Leftover_36_4001_PcRam
+other,DOSIME,6,2B:4371 36:4371,Leftover_2B_4200_PcRam Leftover_36_4001_PcRam

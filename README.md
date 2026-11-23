@@ -224,6 +224,77 @@ A hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ve
 
 *The editor UI is a screen*: the picture TCRF shows is the unused tile map `BG_F_SCR` (`03:7481`) drawn with the editor tiles (`02:7581`, ids `$80-$FF`); and the settings font of bank `$3A` is an older one, with 反転 where bank `$03` has パレット (both in the sheet above).
 
+<!-- pcram_strings:begin -->
+*The development PC in the spare banks* (2026-11-23, `tools/proto_pcram_strings.py`; C for the bytes, I for "PC memory"): every ASCII string of the PC-memory leftovers (`Leftover_*_PcRam`, 49 labels), 64 distinct strings: 5 file names or paths, 18 environment variables, 30 symbol names, 11 other (every address in [`assets/pcram_strings_proto.csv`](roms/prototype_debagame/assets/pcram_strings_proto.csv)). A Japanese Windows 95 PC (`WINDOWS VMM 4.0`, MS-IME 95, `TZ=JST-9`), with an assembler toolchain on its PATH.
+
+| Category | String | Where (bank:address) |
+|---|---|---|
+| file name or path | `msime95.ini` | `04:4BF0` |
+| file name or path | `95.ini` | `04:4CBF` |
+| file name or path | `C:\WINDOWS\SYSTEM\KERNEL32.DLL` | `04:4F18`, `05:7C00` |
+| file name or path | `C:\Program Files\TAC95\TAC32.EXE` | `1A:7208`, `3D:61A8` |
+| file name or path | `PIFMGR.DLL` | `2B:4273`, `36:4273` |
+| environment variable | `winbootdir=C:\WINDOWS` | `1A:7280`, `3D:6220` |
+| environment variable | `COMSPEC=C:\WINDOWS\COMMAND.COM` | `1A:72A0`, `3D:5022`, `3D:6240` |
+| environment variable | `PROMPT=$p$g` | `1A:72C0`, `3D:5041`, `3D:6260` |
+| environment variable | `PATH=C:\Program Files\TAC95;C:\Program Files\Common Files\COM Corporation;D:\BC5\BIN;C:\META;C:\WINDOWS;C:\WINDOWS\COMMAND;C:\DOS;C:\NWCLIENT;C:\BAT;C:\BIN;C:\ORCADEXE;C:\P1W;C:\DEBAGAME\TOOL;C:\DEBAGAME\ISD;;C:\PROGRA~1\BORLAND\CBUILDER\BIN;C:\PROGRA~1\BORLAND\CBUILDER\BIN` | `1A:72D0`, `3D:504D`, `3D:6270` |
+| environment variable | `TEMP=C:\TEMP` | `1A:73F0`, `3D:5160`, `3D:6390` |
+| environment variable | `TMP=C:\TEMP` | `1A:7400`, `3D:516D`, `3D:63A0` |
+| environment variable | `TZ=JST-9` | `1A:7410`, `3D:5179`, `3D:63B0` |
+| environment variable | `NWLANGUAGE=NIHONGO` | `1A:7420`, `3D:5182`, `3D:63C0` |
+| environment variable | `ORCADEXE=C:\ORCADEXE\` | `1A:7440`, `3D:5195`, `3D:63E0` |
+| environment variable | `ORCADESP=C:\ORCADESP\` | `1A:7460`, `3D:51AB`, `3D:6400` |
+| environment variable | `ORCADPROJ=C:\ORCAD\` | `1A:7480`, `3D:51C1`, `3D:6420` |
+| environment variable | `ORCADUSER=C:\ORCADESP\` | `1A:74A0`, `3D:51D5`, `3D:6440` |
+| environment variable | `ISDP=340` | `1A:74C0`, `3D:51EC`, `3D:6460` |
+| environment variable | `META=c:\meta` | `1A:74D0`, `3D:51F5`, `3D:6470` |
+| environment variable | `METAUSER=c:\` | `1A:74E0`, `3D:5202`, `3D:6480` |
+| environment variable | `CMDLINE=WIN` | `1A:74F0`, `3D:520F`, `3D:6490` |
+| environment variable | `windir=C:\WINDOWS` | `1A:7500`, `3D:521B`, `3D:64A0` |
+| environment variable | `ir=C:\WINDOWS` | `3D:5014` |
+| symbol name | `LOOP_COUNT` | `11:4009` |
+| symbol name | `LOOP_COUNT2` | `11:4018` |
+| symbol name | `MABIKI2` | `11:403E` |
+| symbol name | `MABIKI_BYTE` | `11:404A` |
+| symbol name | `MABIKI_BYTE2` | `11:405E` |
+| symbol name | `MABIKI_MODE` | `11:406F` |
+| symbol name | `MABIKI_MODE2` | `11:407F` |
+| symbol name | `MAIN_AFURE` | `11:4099` |
+| symbol name | `MAIN_MENU` | `11:40A8` |
+| symbol name | `MAIN_SUB` | `11:40B6` |
+| symbol name | `MAKE_BANK` | `11:40C3` |
+| symbol name | `MAKE_CONFIG` | `11:40D1` |
+| symbol name | `MAKE_EMI` | `11:40F4` |
+| symbol name | `MAKE_MENU` | `11:4112` |
+| symbol name | `MAKE_MOVIE` | `11:4120` |
+| symbol name | `MEN_CHG_F` | `11:4139` |
+| symbol name | `MEN_CHG_M` | `11:4147` |
+| symbol name | `MEN_FADE` | `11:4155` |
+| symbol name | `MEN_FADE_C` | `11:4162` |
+| symbol name | `MEN_FADE_CLR` | `11:4171` |
+| symbol name | `MEN_FADE_DEC` | `11:4182` |
+| symbol name | `MEN_FADE_END` | `11:4193` |
+| symbol name | `MEN_FADE_F` | `11:41A4` |
+| symbol name | `MEN_FADE_SET` | `11:41B3` |
+| symbol name | `MEN_FADE_T` | `11:41C4` |
+| symbol name | `MIRROR_CHR` | `11:41D3` |
+| symbol name | `MIRROR_LINE` | `11:41E2` |
+| symbol name | `MIRROR_MODE` | `11:41F2` |
+| symbol name | `CLRCHR_SET` | `35:75DF` |
+| symbol name | `CNF_CUR` | `35:75EE` |
+| other | `7E,VK_F15,vf` | `04:5370` |
+| other | `MS-IME` | `04:5570` |
+| other | `MSIMEGUID` | `04:55F0` |
+| other | `DEFROMA` | `04:5670` |
+| other | `MSIMECOLOR` | `04:57F0` |
+| other | `MSIMEKEY` | `04:5870` |
+| other | `MAKE_EDIT_DITH` | `11:40E1` |
+| other | `E_GALLERY` | `11:4104` |
+| other | `WINDOWS VMM 4.0` | `2B:4205`, `36:4205` |
+| other | `Terminal` | `2B:4305`, `36:4305` |
+| other | `DOSIME` | `2B:4371`, `36:4371` |
+<!-- pcram_strings:end -->
+
 **Trivia**
 
 | What | How | Source, check |

@@ -13,9 +13,9 @@ BankNumber_2A_4000::
 Leftover_2A_4001_AsmSource::
     db ",$00,$FF,$00", $09, ";0092", $0d, $0a, $09, "DEFB", $09, "$FF,$00,$FF,$38,$EF,$28,$FF,$38", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$10,$18,$00,$00", $09, ";0093", $0d, $0a, $09, "DEFB", $09, "$00,$00,$10,$18,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$10,$18,$00,$00", $09, ";0094", $0d, $0a, $09, "DEFB", $09, "$00,$00,$10,$18,$20,$30,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$08,$0C,$10,$1"
 
-; I: leftover PC memory: 4 bytes (2A:4100-4103), the 512-byte blocks of a leftover run that hold the dword $C25D3000,
-; a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other
-; banks that hold one; nothing in this build reads, runs or explains them; ...
+; I: leftover PC memory: 4 bytes (2A:4100-4103), a leftover run that holds the dword $C25D3000, a 4 KB-aligned address
+; of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one;
+; nothing in this build reads, runs or explains it; only those proofs are ...
 Leftover_2A_4100_PcRam::
     db $00, $30, $5d, $c2
 
@@ -370,10 +370,11 @@ Leftover_2A_4B75_LoadRecord::
 ; C: binary symbol table of an older build, 674 records (tools/proto_symtab.py)
 OldSymbolTable_2A_4B7F::
     INCBIN "data/bank_2a/OldSymbolTable_2A_4B7F.bin" ; $4B7F, 8522 bytes
-; I: leftover: 2359 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_2A_6CC9::
-    INCBIN "data/bank_2a/Leftover_2A_6CC9.bin" ; $6CC9, 4918 bytes
+; I: leftover PC memory: 4918 bytes (2A:6CC9-7FFE), a leftover run that shares a 16-byte piece (at 2A:6D0D) with the
+; PC memory at 35:6D54 (Leftover_35_6D1C_PcRam); nothing in this build reads, runs or explains it (owner 2026-11-23: a
+; similarity with PC memory elsewhere makes the run PC memory)
+Leftover_2A_6CC9_PcRam::
+    INCBIN "data/bank_2a/Leftover_2A_6CC9_PcRam.bin" ; $6CC9, 4918 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_2A_7FFF::
     db $2a

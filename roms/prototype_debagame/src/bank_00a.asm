@@ -8,9 +8,9 @@ SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
 BankNumber_0A_4000::
     db $0a
 
-; I: leftover PC memory: 511 bytes (0A:4001-41FF), the 512-byte blocks of a leftover run that hold 19 x86 function
-; prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; 19 in the whole leftover run); bytes that read
-; as 16-bit x86 code (13 near calls and 20 RET / RETF in a linear decode; ...
+; I: leftover PC memory: 511 bytes (0A:4001-41FF), a leftover run that holds 19 x86 function prologues (55 8B EC: push
+; bp / mov bp,sp; $EC is no Game Boy opcode; 19 in the whole leftover run); bytes that read as 16-bit x86 code (13
+; near calls and 20 RET / RETF in a linear decode; no 512-byte block of ...
 Leftover_0A_4001_PcRam::
     INCBIN "data/bank_0a/Leftover_0A_4001_PcRam.bin" ; $4001, 511 bytes
 ; I: 15871 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part

@@ -8,9 +8,10 @@ SECTION "ROM Bank $03f", ROMX[$4000], BANK[$3f]
 BankNumber_3F_4000::
     db $3f
 
-; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_3F_4001::
+; I: leftover PC memory: 16382 bytes (3F:4001-7FFE), a leftover run that shares a 16-byte piece (at 3F:4001) with the
+; PC memory at 3D:4001 (Leftover_3D_4001_PcRam); nothing in this build reads, runs or explains it (owner 2026-11-23: a
+; similarity with PC memory elsewhere makes the run PC memory)
+Leftover_3F_4001_PcRam::
     db $72, $1f, $26, $8b, $5d, $08, $c1, $eb, $0d, $80, $fb, $01, $74, $22, $80, $fb
     db $05, $74, $1d, $06, $0e, $07, $bf, $c3, $6f, $b9, $10, $00, $f2, $af, $07, $74
     db $0f, $f8, $eb, $0d, $26, $8b, $45, $07, $25, $ff, $01, $3d, $50, $00, $73, $f1

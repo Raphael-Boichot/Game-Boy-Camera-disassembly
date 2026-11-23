@@ -513,13 +513,18 @@ for o in range(len(ROMB)):
         bisect.insort(lst, ad)
 # 5b. leftover PC memory (owner 2026-11-11): a leftover run whose bytes hold strings of the development PC's memory (Windows paths, the
 #     DOS environment, Windows module names) is a piece of that PC's RAM that the build tool wrote into unused ROM space:
-#     Leftover_BB_AAAA_PcRam, tag I, final. Since 2026-11-15 only the 512-byte blocks of the run that hold a proof (below); only the proofs are proven.
+#     Leftover_BB_AAAA_PcRam, tag I, final. Since 2026-11-23 (owner) one sign makes the whole run PC memory (2026-11-15 to -22: only the
+#     512-byte blocks of the run that held a proof); only the proofs are proven.
 #     Also (owner 2026-11-12) a run with 2+ x86 function prologues (55 8B EC) or 5+ in-memory symbol records (the linker's symbol list,
 #     tools/proto_symtab.py --out-mem): the memory of the PC that linked the ROM. And (2026-11-15) the 4-byte gap at BB:4100 that holds a
 #     4 KB-aligned address $C2xxx000 (the Windows 9x system arena; tools/proto_types.py keeps it out of the text). And (owner 2026-11-22)
 #     a 512-byte block that reads as 16-bit x86 code: a linear decode (capstone, 16-bit mode) finds 8+ near calls (E8 rel16) and 4+
 #     RET / RETF in its bytes of the run, which no 512-byte block of the four retail ROMs does (0 of 8,192: Game Boy code and data).
-PCRE = re.compile(rb'[A-Z]:\\[A-Za-z]|WINDOWS VMM|[A-Z0-9]{3,8}\.(DLL|EXE|VXD|DRV)\b|COMSPEC=|winbootdir=')
+PCRE = re.compile(rb'[A-Z]:\\[A-Za-z]|WINDOWS VMM|[A-Z0-9]{3,8}\.(DLL|EXE|VXD|DRV)\b|COMSPEC=|winbootdir='
+                  rb'|(?i:\b[A-Za-z_][A-Za-z0-9_~$-]{1,7}\.(dll|exe|vxd|drv|sys|com|bat|ini|txt|dmg|asm|inc|obj|lib|map|sym|lnk|bin|cpp|c|h))(?![A-Za-z0-9])')
+# (owner 2026-11-23) any sign of PC memory makes the whole leftover run PC memory: a DOS file name (8.3, the extensions of a DOS / Windows
+# system and of the developers' tools: .dmg sources, .obj, .lib, .map ...) counts as a string of the PC's memory; one x86 prologue and one
+# in-memory symbol record count; and a run that shares a 16-byte piece (5+ distinct values) with PC memory elsewhere is PC memory too.
 X86RE = re.compile(rb'\x55\x8B\xEC')            # push bp / mov bp,sp: an x86 function prologue ($EC is no Game Boy opcode)
 MEMSYM = set()                                  # the in-memory symbol records (tools/proto_symtab.py --out-mem): the linker's symbol list
 _mp = a.symtab_mem
@@ -540,11 +545,26 @@ def x86_code(t):                                 # 16-bit x86 code: 8+ near call
         elif i_.mnemonic in ('ret', 'retf'): rets += 1
         pos += i_.size
     return (calls, rets) if calls >= 8 and rets >= 4 else None
+_X86_32 = _cs.Cs(_cs.CS_ARCH_X86, _cs.CS_MODE_32)
+def x86_code32(t):                               # (owner 2026-11-23) 32-bit x86 code: 8+ near calls E8 rel32 whose displacement is under 256 KB
+    if len(set(t)) < 8: return None              # in a linear decode (no 512-byte block of the four retail ROMs has more than 3: 0 of 8,192 reach 8)
+    pos = calls = 0
+    while pos < len(t):
+        i_ = next(_X86_32.disasm(t[pos:], pos, count=1), None)
+        if i_ is None: pos += 1; continue
+        if i_.bytes[0] == 0xE8 and i_.size == 5 and abs(int.from_bytes(i_.bytes[1:], 'little', signed=True)) < 0x40000: calls += 1
+        pos += i_.size
+    return calls if calls >= 8 else None
+SYMN = set()                                     # (owner 2026-11-23) the names of the old symbol tables: one of them as a length-prefixed string
+for r in csv.DictReader(open(a.symtab)):         # (the byte before it is its length) is a record of a symbol list held in the PC's memory
+    if len(r['name']) >= 6: SYMN.add(r['name'].encode('latin1'))
+SYMRE = re.compile(rb'[A-Za-z_][A-Za-z0-9_]{5,31}')
+def sym_names(t):
+    return [(m.start(), m.group().decode('latin1')) for m in SYMRE.finditer(t) if m.group() in SYMN and m.start() > 0 and t[m.start() - 1] == len(m.group())]
 npc = 0; PCRAM = []
-# The region (owner 2026-11-15, stricter rule): only the 512-byte blocks (aligned on the bank) of the run that hold a proof are PC memory —
-# a string, an x86 prologue (with 2+ in the run), a symbol record (with 5+ in the run), the page dword; the rest of the run stays a plain
-# leftover (UNCERTAIN). The 512-byte unit is a convention (I): the bank heads BB:4001-41FF show that the image was overwritten in such
-# pieces, but where one memory record ends is not proven.
+# The region: the whole leftover run (owner 2026-11-23: any sign of PC memory qualifies the run). From 2026-11-15 to 2026-11-22 only the
+# 512-byte blocks (aligned on the bank) that held a proof were PC memory, with 2+ prologues and 5+ symbol records; the 512-byte blocks
+# remain the unit of the x86 decode tests.
 BLK = 0x200
 _all = sorted(names)
 for i_, (b, ad) in enumerate(_all):
@@ -557,25 +577,23 @@ for i_, (b, ad) in enumerate(_all):
     xs = [m.start() for m in X86RE.finditer(t)]
     ms = [mo - ad for (mb, mo) in MEMSYM if mb == b and ad <= mo < end]
     pagedw = ad == 0x4100 and end == 0x4104 and t[0] == 0 and t[1] & 0x0F == 0 and t[3] == 0xC2     # a 4 KB-aligned address $C2xxx000 (2026-11-15)
-    xc = {}                                          # 512-byte block -> (near calls, returns) when its bytes of the run read as x86 code
+    xc = {}; xc32 = {}                               # 512-byte block -> (near calls, returns) when its bytes of the run read as x86 code (16 / 32-bit)
     for blk in range(ad & ~(BLK - 1), end, BLK):
         r0, r1 = max(blk, ad), min(blk + BLK, end)
         v = x86_code(ROMB[_flat(b, r0):_flat(b, r1)])
         if v: xc[blk] = v
-    if not hits and len(xs) < 2 and len(ms) < 5 and not pagedw and not xc: continue
+        v = x86_code32(ROMB[_flat(b, r0):_flat(b, r1)])
+        if v: xc32[blk] = v
+    sn = sym_names(t)
+    if not hits and not xs and not ms and not pagedw and not xc and not xc32 and not sn: continue
     proof = collections.defaultdict(list)            # 512-byte block (bank-aligned address) -> the proofs in it
-    for blk in xc: proof[blk].append(('c', 0, 0))
+    for blk in list(xc) + list(xc32): proof[blk].append(('c', 0, 0))
+    for x, _ in sn: proof[(ad + x) & ~(BLK - 1)].append(('n', x, x + 1))
     for m in hits: proof[(ad + m.start()) & ~(BLK - 1)].append(('s', m.start(), m.end()))
-    if len(xs) >= 2:
-        for x in xs: proof[(ad + x) & ~(BLK - 1)].append(('x', x, x + 3))
-    if len(ms) >= 5:
-        for x in ms: proof[(ad + x) & ~(BLK - 1)].append(('m', x, x + 1))
+    for x in xs: proof[(ad + x) & ~(BLK - 1)].append(('x', x, x + 3))
+    for x in ms: proof[(ad + x) & ~(BLK - 1)].append(('m', x, x + 1))
     if pagedw: proof[ad & ~(BLK - 1)].append(('p', 0, 4))
-    regions = []                                     # [start, end) runs of proof blocks, clipped to the leftover
-    for blk in sorted(proof):
-        r0, r1 = max(blk, ad), min(blk + BLK, end)
-        if regions and regions[-1][1] >= r0: regions[-1][1] = r1
-        else: regions.append([r0, r1])
+    regions = [[ad, end]] if proof else []           # owner 2026-11-23: one sign makes the whole run PC memory (no longer the proof blocks only)
     pieces = []                                      # the run cut into PC-memory regions and the plain leftover between them
     cur = ad
     for r0, r1 in regions:
@@ -604,11 +622,48 @@ for i_, (b, ad) in enumerate(_all):
         if nx: evs.append('%d x86 function prologues (55 8B EC: push bp / mov bp,sp; $EC is no Game Boy opcode; %d in the whole leftover run)' % (nx, len(xs)))
         xcs = [xc[k] for k in sorted(xc) if p0 <= max(k, ad) < p1]
         if xcs: evs.append('bytes that read as 16-bit x86 code (%s near calls and %s RET / RETF in a linear decode; no 512-byte block of the retail ROMs reaches 8 and 4)' % ('+'.join(str(c) for c, _ in xcs), '+'.join(str(r) for _, r in xcs)))
+        x32 = [xc32[k] for k in sorted(xc32) if p0 <= max(k, ad) < p1]
+        if x32: evs.append('bytes that read as 32-bit x86 code (%s near calls E8 rel32 with a displacement under 256 KB in a linear decode; no 512-byte block of the retail ROMs has more than 3)' % '+'.join(str(c) for c in x32))
+        if sn: evs.append('%d names of the old symbol tables as length-prefixed strings (%s), records of a symbol list held in memory' % (len(sn), ' / '.join(x for _, x in sn[:4])))
         if pagedw: evs.append('the dword $%08X, a 4 KB-aligned address of the Windows 9x system arena ($C0000000 up), at offset $100 of the bank, as in the other banks that hold one' % int.from_bytes(t[:4], 'little'))
         if nm_: evs.append('%d records of the linker\'s symbol list as held in memory (disasm/leftover_symtab_mem_proto.csv; %d in the whole leftover run)' % (nm_, len(ms)))
-        put(b, p0, 'Leftover_%02X_%04X_PcRam' % (b, p0), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X), the 512-byte blocks of a leftover run that hold %s; nothing in this build reads, runs or explains them; only those proofs are proven, the rest of each block is taken as the same memory' % (
+        put(b, p0, 'Leftover_%02X_%04X_PcRam' % (b, p0), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X), a leftover run that holds %s; nothing in this build reads, runs or explains it; only those proofs are proven, the rest of the run is taken as the same memory (owner 2026-11-23: any sign of PC memory makes the run PC memory)' % (
             p1 - p0, b, p0, p1 - 1, '; '.join(evs)), 'ram')
         PCRAM.append((b, p0, p1, allstr)); npc += 1
+# 5b-2. similarity (owner 2026-11-23): a plain leftover run that shares a 16-byte piece (5+ distinct values) with a run already taken as PC
+#     memory (above, or found by this step: repeated until nothing changes) is PC memory too
+nsim = 0
+while True:
+    pcw = {}; _all2 = sorted(names)
+    for i2, (b, ad) in enumerate(_all2):
+        nm = names[(b, ad)][0]
+        if not nm.endswith('_PcRam'): continue
+        nb, na = _all2[i2 + 1] if i2 + 1 < len(_all2) else (b + 1, 0)
+        e2 = na if nb == b else (0x4000 if b == 0 else 0x8000); t2 = ROMB[_flat(b, ad):_flat(b, e2)]
+        for k in range(0, len(t2) - 15):
+            w = t2[k:k + 16]
+            if len(set(w)) >= 5: pcw.setdefault(w, (b, ad + k))
+    found = []
+    _all = sorted(names)
+    for i_, (b, ad) in enumerate(_all):
+        nm, c, note, src = names[(b, ad)]
+        if src != 'gap' or not re.match(r'Leftover_[0-9A-F]{2}_[0-9A-F]{4}$', nm): continue
+        nb, na = _all[i_ + 1] if i_ + 1 < len(_all) else (b + 1, 0)
+        end = na if nb == b else (0x4000 if b == 0 else 0x8000)
+        t = ROMB[_flat(b, ad):_flat(b, end)]
+        hit = next(((k, pcw[t[k:k + 16]]) for k in range(0, len(t) - 15) if t[k:k + 16] in pcw), None)
+        if hit:
+            k, (sb, sa) = hit
+            if sb == b and sa >= ad and sa < end: continue
+            found.append((b, ad, end, k, sb, sa))
+    for b, ad, end, k, sb, sa in found:
+        put(b, ad, 'Leftover_%02X_%04X_PcRam' % (b, ad), 'I', 'leftover PC memory: %d bytes (%02X:%04X-%04X), a leftover run that shares a 16-byte piece (at %02X:%04X) with the PC memory at %02X:%04X (%s); nothing in this build reads, runs or explains it (owner 2026-11-23: a similarity with PC memory elsewhere makes the run PC memory)' % (
+            end - ad, b, ad, end - 1, b, ad + k, sb, sa, names[max(x for x in names if x[0] == sb and x[1] <= sa)][0]), 'ram')
+        tt = ROMB[_flat(b, ad):_flat(b, end)]          # its strings for the text listing (as in 5b: 6+ printable bytes ending on a NUL, half letters)
+        PCRAM.append((b, ad, end, [(ad + m.start(), m.group().decode('latin1')) for m in re.finditer(rb'[\x20-\x7e]{6,}(?=\x00)', tt)
+                                   if sum(1 for ch in m.group() if 0x41 <= ch <= 0x5A or 0x61 <= ch <= 0x7A) * 2 >= len(m.group())])); npc += 1; nsim += 1
+    if not found: break
+print('proto_names: step 5b-2: %d leftover runs taken as PC memory by a similarity' % nsim)
 # 5c. load records (2026-11-15): a 6-byte leftover gap 01 BB LL LH NL NH (type 1, bank, load address, length up to $3FA) whose payload
 #     ends on the next such header (or runs past the end of the bank) is the header of a record of a download stream: an older build's
 #     image cut in 1 KB packets (6 + 1,018 bytes) for the development hardware, held in the PC's memory with its payload (the copies around it).

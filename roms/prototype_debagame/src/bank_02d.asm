@@ -8,10 +8,11 @@ SECTION "ROM Bank $02d", ROMX[$4000], BANK[$2d]
 BankNumber_2D_4000::
     db $2d
 
-; I: leftover: 511 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_2D_4001::
-    INCBIN "data/bank_2d/Leftover_2D_4001.bin" ; $4001, 511 bytes
+; I: leftover PC memory: 511 bytes (2D:4001-41FF), a leftover run that holds bytes that read as 32-bit x86 code (17
+; near calls E8 rel32 with a displacement under 256 KB in a linear decode; no 512-byte block of the retail ROMs has
+; more than 3); nothing in this build reads, runs or explains it; only those ...
+Leftover_2D_4001_PcRam::
+    INCBIN "data/bank_2d/Leftover_2D_4001_PcRam.bin" ; $4001, 511 bytes
 ; I: leftover: an exact copy of 5633 bytes of Gfx_01_4001_FNTOOE1 (from 01:4200, a part of the block) that nothing in
 ; this build reads, runs or explains (never read nor run in the L2 runs)
 Leftover_2D_4200_Gfx_01_4001_FNTOOE1_Part4200::

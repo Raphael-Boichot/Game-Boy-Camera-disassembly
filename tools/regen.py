@@ -70,6 +70,7 @@ def proto_steps(Q):
         ('printer_lib', lambda: [PY, 'tools/proto_printer_lib.py', Q, J, '--symtab', D + 'leftover_symtab_proto.csv', '--out', D + 'printer_lib_proto.csv']),
         ('oldbuilds', lambda: [PY, 'tools/proto_oldbuilds.py', Q, '--symtab', D + 'leftover_symtab_proto.csv', '--printer-lib', D + 'printer_lib_proto.csv', '--out', D + 'oldbuilds_proto.csv']),
         ('names', lambda: [PY, 'tools/proto_names.py', '--rom', Q]),            # the name layers (the hand layer last) -> names, doubts, leftovers
+        ('pcram_strings', lambda: [PY, 'tools/proto_pcram_strings.py', Q]),   # the ASCII of the PC-memory leftovers -> CSV and the main README
         ('text', lambda: [PY, 'tools/proto_text.py', Q]),                     # L6: the menu font's character set and the screen texts
         ('history', lambda: [PY, 'tools/proto_build_history.py', Q]),         # L6: titles, routine sizes and addresses of the older builds
         ('ram_names', lambda: [PY, 'tools/proto_ram_names.py', Q, '--out', D + 'ram_names_proto.csv']),     # the RAM names (they quote routine names)
