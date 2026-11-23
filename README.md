@@ -1,10 +1,10 @@
-# HUMAN VALIDATION IN PROGRESS
+oooooooooooooooooooooooooooooooooooooooo m# HUMAN VALIDATION IN PROGRESS
 
 # Game Boy Camera disassembly - the definitive (?) version
 
 ### Forewords from the author, why me, why now
 
-I’ve spent nearly five years reverse-engineering almost anything I could get my hands on regarding the Game Boy Camera and the Game Boy Printer—particularly the trickiest part: the sensor. Of course, this was very much a community effort; I was simply standing on the shoulders of giants and passionate people who have been working on this hardware since 1998.
+I’ve spent nearly five years reverse-engineering almost anything I could get my hands on regarding the Game Boy Camera and the Game Boy Printer—particularly some tricky parts: the sensor behavior and the whole SRAM coverage. Of course, this was very much a community effort; I was simply standing on the shoulders of giants and passionate people who have been working on this hardware since 1998.
 
 Eventually, ROM disassembly became the only way to push further and finally bring this chapter to a close. I procrastinated on it for a long time simply because the sheer amount of work required was daunting and unprecedented. I’m not super comfortable with assembly, but I understand the methodology of code disassembly: trace execution as far as you can and separate the bytes into their respective categories (code, assets, lookup tables, etc.). It was purely a matter of lacking the time and bandwidth.
 
