@@ -55,7 +55,7 @@ b000,P,01,4eca,Counters_Store,00,01000
 b012,P,01,4ed3,Counters_Store,,
 a8a8,P,01,54a4,.code:5b,,
 a8a8,P,01,558e,.code:5b,,
-a320,P,04,4a49,Cam_PopcountLevel,00,00320
+a320,P,04,4a49,Cam_MainDispatch,00,00320
 a001,W,04,4b03,Cam_MainDispatch_EnterBand1,,
 a002,W,04,4b0a,Cam_MainDispatch_EnterBand1,,
 a003,W,04,4b12,Cam_MainDispatch_EnterBand1,,

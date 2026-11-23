@@ -53,14 +53,14 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 02:73A9,Obj_SetSpriteBC,8,0,0,0,0,8
 02:744D,PrintGame_SaveKittyPos,6,0,0,0,0,6
 02:7793,PrintGame_ShowResult,18,0,0,0,0,18
-04:4A3E,Cam_PopcountLevel,6,0,6,0,0,0
+04:4A3E,Cam_MainDispatch,6,0,6,0,0,0
 04:4AF8,Cam_MainDispatch_EnterBand1,52,0,0,0,52,0
 04:4B2C,Cam_MainDispatch_Band1,74,0,16,0,58,0
 04:4B76,Cam_MainDispatch_EnterBand0,52,0,0,0,52,0
 04:4BAA,Cam_MainDispatch_Band2,122,0,122,0,0,0
 04:4C35,Cam_MainDispatch_Band3,125,0,64,0,61,0
 04:4CB2,Cam_MainDispatch_Band4,57,0,8,0,49,0
-04:4CF8,Cam_LoadRegisterSet,5,0,5,0,0,0
+04:4CF8,Cam_BuildDitherMatrix,5,0,5,0,0,0
 04:4D46,Cam_Dither_RampB,262,0,262,0,0,0
 04:4E4C,Cam_Dither_Flat,27,0,27,0,0,0
 04:4F9A,Cam_CalibSanityCheck_Measure,32,0,0,0,32,0
@@ -167,8 +167,8 @@ addr,routine,red_bytes,effect,gate,forced-mode,forced-run,not-run
 05:5018,TakePhotos_FrameCallback2,22,0,0,0,0,22
 05:51E5,Mode02_State0D,81,0,0,0,81,0
 05:5244,Mode02_State0E,97,0,0,0,52,45
-05:564E,Stamp_ArrangeGfx,1,0,0,0,0,1
-05:5695,Stamp_ArrangeMaskInverted,1,0,0,0,0,1
+05:564E,Stamp_BuildGraphicsLayer,1,0,0,0,0,1
+05:5695,Stamp_BuildMaskLayer,1,0,0,0,0,1
 05:5F29,Stamp_SetShiftMasks,6,0,0,0,0,6
 05:5FC9,Mode05_State00,5,0,0,0,0,5
 05:607B,Mode05_State01,5,0,0,0,5,0

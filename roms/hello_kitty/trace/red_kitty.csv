@@ -72,8 +72,8 @@ bank,start,end,bytes,owner,class,gate,gate_insn,gate_owner,ways,verdict
 05,525E,527F,34,Mode02_State0E,FORCED,05:525C,jr c (38 22) [after cc],Mode02_State0E,05:525E<-05:525C after cc,SENSOR
 05,529C,529E,3,Mode02_State0E,FORCED,05:529A,jr z (28 0e) [after cc],Mode02_State0E,05:529C<-05:529A after cc,SENSOR
 05,52A2,52A9,8,Mode02_State0E,BEHIND,05:529C,behind Mode02_State0E,Mode02_State0E,05:52A2<-05:529C after call,SENSOR
-05,5680,5680,1,Stamp_ArrangeGfx,GATE,05:567E,jr nc (30 01) [after cc],Stamp_ArrangeGfx,05:5680<-05:567E after cc,INPUT
-05,56CB,56CB,1,Stamp_ArrangeMaskInverted,GATE,05:56C9,jr nc (30 01) [after cc],Stamp_ArrangeMaskInverted,05:56CB<-05:56C9 after cc,INPUT
+05,5680,5680,1,Stamp_BuildGraphicsLayer,GATE,05:567E,jr nc (30 01) [after cc],Stamp_BuildGraphicsLayer,05:5680<-05:567E after cc,INPUT
+05,56CB,56CB,1,Stamp_BuildMaskLayer,GATE,05:56C9,jr nc (30 01) [after cc],Stamp_BuildMaskLayer,05:56CB<-05:56C9 after cc,INPUT
 05,5F80,5F85,6,Stamp_SetShiftMasks,GATE,05:5F6C,jr nz (20 12) [branch],Stamp_SetShiftMasks,05:5F80<-05:5F6C branch,INPUT
 05,6043,6047,5,Mode05_State00,GATE,05:6037,jr c (38 0a) [branch],Mode05_State00,05:6043<-05:6037 branch,INPUT
 05,6303,6303,1,AlbumText_CursorUpdate,GATE,05:6301,jr z (28 0a) [after cc],AlbumText_CursorUpdate,05:6303<-05:6301 after cc,INPUT

@@ -3138,7 +3138,8 @@ jr_000_0efb:
 ; (roms/jp_rev_a/experiments/l3_names/)
 Gfx_WipeTile::
     INCBIN "data/bank_00/Gfx_WipeTile.2bpp" ; $0F06, 16 bytes
-; C: serial interrupt body of the printer driver
+; C: developers' name SIOINT (the prototype's older builds, printer library at 2C:6AD5, the code the same; alias, I
+; for this ROM, owner 2026-11-23); serial interrupt body of the printer driver
 Prn_SerialIrq::
     push af                                       ; $0F16
     ldh a, [rSC]                                  ; $0F17
@@ -3160,7 +3161,8 @@ jr_000_0f2b:
     reti                                          ; $0F2C
 
 
-; C: every 6th VBlank sends the status poll when the printer is idle
+; C: developers' name SIOWATCHDOG (the prototype's older builds, printer library at 2C:6AEC, the code 97 % the same;
+; alias, I for this ROM, owner 2026-11-23); every 6th VBlank sends the status poll when the printer is idle
 Prn_VBlankPoll::
     ld a, [wPrnState]                             ; $0F2D
     cp $01                                        ; $0F30
@@ -4611,7 +4613,8 @@ jr_000_1768:
     ret                                           ; $176E
 
 
-; C: one serial IRQ step of the printer packet state machine
+; C: developers' name SIOPROC (the prototype's older builds, printer library at 2C:6B0B, the code the same; alias, I
+; for this ROM, owner 2026-11-23); one serial IRQ step of the printer packet state machine
 Prn_SerialStep::
     ld a, [wPrnAbort]                             ; $176F
     and a                                         ; $1772
@@ -4656,7 +4659,8 @@ jr_000_17aa:
     jp Prn_SerialStep_Exit                        ; $17AA
 
 
-; C: sends $88 $33
+; C: developers' name PREAMBLETRANS (the prototype's older builds, printer library at 2C:6B49, the code the same;
+; alias, I for this ROM, owner 2026-11-23); sends $88 $33
 Prn_SendSyncByte::
     ld hl, wPrnTxIdx                              ; $17AD
     ld c, [hl]                                    ; $17B0
@@ -4681,7 +4685,8 @@ Prn_SendSyncByte::
     ret                                           ; $17D1
 
 
-; C: sends one header/data byte and adds it to the checksum
+; C: developers' name TRANSMIT (the prototype's older builds, printer library at 2C:6B6E, the code 95 % the same;
+; alias, I for this ROM, owner 2026-11-23); sends one header/data byte and adds it to the checksum
 Prn_SendPacketByte::
     ld a, [wPrnTxIdx]                             ; $17D2
     ld c, a                                       ; $17D5
@@ -4783,7 +4788,8 @@ jr_000_1866:
     ld [wPrnTxPhase], a                           ; $186D
     call Prn_ResetPacketState                     ; $1870
 
-; C: restores length and pointer for the next section
+; C: developers' name FORRETRY_DATATRANS (the prototype's older builds, printer library at 2C:6C0F, the code the same;
+; alias, I for this ROM, owner 2026-11-23); restores length and pointer for the next section
 Prn_RestoreHeaderPtr::
     ld a, [wPrnHdrLen]                            ; $1873
     ld [wPrnTargetLen], a                         ; $1876
@@ -4796,7 +4802,8 @@ Prn_RestoreHeaderPtr::
     ret                                           ; $188B
 
 
-; C
+; C: developers' name TRANSCHECKSUM (the prototype's older builds, printer library at 2C:6C28, the code the same;
+; alias, I for this ROM, owner 2026-11-23)
 Prn_SendChecksumByte::
     ld c, a                                       ; $188C
     ld b, $00                                     ; $188D
@@ -4813,7 +4820,8 @@ Prn_SendChecksumByte::
     ret                                           ; $18A2
 
 
-; C: two dummy bytes after the checksum; reads device id
+; C: developers' name TRANSDUMMY (the prototype's older builds, printer library at 2C:6C3F, the code the same; alias,
+; I for this ROM, owner 2026-11-23); two dummy bytes after the checksum; reads device id
 Prn_SendTrailerByte::
     ldh a, [rSB]                                  ; $18A3
     ld [wPrnDevId], a                             ; $18A5
@@ -4832,7 +4840,8 @@ Prn_SendTrailerByte::
     ret                                           ; $18BC
 
 
-; C: end of packet: stores the status byte and sets the engine state
+; C: developers' name GETPRINTERSTATUS (the prototype's older builds, printer library at 2C:6C59, the code 90 % the
+; same; alias, I for this ROM, owner 2026-11-23); end of packet: stores the status byte and sets the engine state
 Prn_ReceiveStatus::
     ld a, [wPrnPktType]                           ; $18BD
     ld [wPrnLastType], a                          ; $18C0
@@ -4906,7 +4915,8 @@ Prn_StopSerial2_Dead::
     ldh [rSC], a                                  ; $1910
     ldh [rSB], a                                  ; $1912
 
-; C: clears serial and state; status = $FF
+; C: developers' name SIOINITIALIZE (the prototype's older builds, printer library at 2C:6CE5, the code 90 % the same;
+; alias, I for this ROM, owner 2026-11-23); clears serial and state; status = $FF
 Prn_EngineStop::
     xor a                                         ; $1914
     ldh [rSB], a                                  ; $1915
@@ -4919,14 +4929,16 @@ Prn_EngineStop::
     ret                                           ; $1926
 
 
-; C
+; C: developers' name SIOFLAGINIT (the prototype's older builds, printer library at 2C:6CFD, the code the same; alias,
+; I for this ROM, owner 2026-11-23)
 Prn_ClearTxFlags::
     xor a                                         ; $1927
     ld [wPrnTxPhase], a                           ; $1928
     ld [wPrnIrqSeen], a                           ; $192B
     ld [wPrnTxBusy], a                            ; $192E
 
-; C
+; C: developers' name CLEARFLAGS (the prototype's older builds, printer library at 2C:6D07, the code 96 % the same;
+; alias, I for this ROM, owner 2026-11-23)
 Prn_ResetPacketState::
     xor a                                         ; $1931
     ld [wPrnSyncDone], a                          ; $1932
@@ -4943,7 +4955,8 @@ Prn_ResetPacketState::
     ret                                           ; $1953
 
 
-; C: queues the INITIALIZE command (A=0 ready)
+; C: developers' name CONNECTPRN (the prototype's older builds, printer library at 2C:6D27, the code the same; alias,
+; I for this ROM, owner 2026-11-23); queues the INITIALIZE command (A=0 ready)
 Prn_SendInit::
     ld a, [wPrnTxBusy]                            ; $1954
     and a                                         ; $1957
@@ -4965,7 +4978,8 @@ jr_000_1969:
     jp Prn_StartTransmit                          ; $196C
 
 
-; C: completion routine: carry = packet must be re-sent
+; C: developers' name CHECKENDOFTRANS (the prototype's older builds, printer library at 2C:6D42, the code 81 % the
+; same; alias, I for this ROM, owner 2026-11-23); completion routine: carry = packet must be re-sent
 Prn_CheckTxDone::
     ld a, [wPrnTxPhase]                           ; $196F
     cp $02                                        ; $1972
@@ -5022,7 +5036,8 @@ jr_000_19ae:
     ret                                           ; $19B1
 
 
-; C: queues the PRINT command; returns $F0 while busy
+; C: developers' name INSTRUCTPRN (the prototype's older builds, printer library at 2C:6D85, the code 94 % the same;
+; alias, I for this ROM, owner 2026-11-23); queues the PRINT command; returns $F0 while busy
 Prn_SendPrint::
     ld a, [wPrnState]                             ; $19B2
     cp $01                                        ; $19B5
@@ -5255,7 +5270,8 @@ jr_000_1adc:
     jp Prn_StartTransmit                          ; $1AE8
 
 
-; I: unreferenced
+; I: developers' name BREAKPRN (the prototype's older builds, printer library at 2C:6EB6, the code the same; alias, I
+; for this ROM, owner 2026-11-23); unreferenced
 Prn_SendBreak_Dead::
     ld a, [wPrnState]                             ; $1AEB
     cp $01                                        ; $1AEE
@@ -5297,7 +5313,8 @@ jr_000_1b12:
     jp Prn_StartTransmit                          ; $1B1B
 
 
-; C: queues the INQUIRY command (status poll)
+; C: developers' name NULTRANSPRN (the prototype's older builds, printer library at 2C:6EE9, the code the same; alias,
+; I for this ROM, owner 2026-11-23); queues the INQUIRY command (status poll)
 Prn_SendInquiry::
     ld a, [wPrnState]                             ; $1B1E
     cp $01                                        ; $1B21
@@ -5331,7 +5348,8 @@ jr_000_1b3a:
     jp Prn_StartTransmit                          ; $1B43
 
 
-; C: A = type
+; C: developers' name INITDATATRANS (the prototype's older builds, printer library at 2C:6F11, the code the same;
+; alias, I for this ROM, owner 2026-11-23); A = type
 Prn_QueuePacket::
     ld [wPrnPktType], a                           ; $1B46
     ld a, d                                       ; $1B49
@@ -5354,31 +5372,38 @@ Prn_QueuePacket::
     ret                                           ; $1B70
 
 
-; C: $88 $33
+; C: developers' name PREAMBLEDATA (the prototype's older builds, printer library at 2C:6F3C, the code the same;
+; alias, I for this ROM, owner 2026-11-23); $88 $33
 Prn_SyncBytes::
     dw $3388
 
-; C: INITIALIZE packet
+; C: developers' name PACKET1 (the prototype's older builds, printer library at 2C:6F3E, the code the same; alias, I
+; for this ROM, owner 2026-11-23); INITIALIZE packet
 Prn_PktInit::
     db $01, $00, $00, $00, $01, $00, $00, $00
 
-; C: PRINT header bytes
+; C: developers' name PACKET2 (the prototype's older builds, printer library at 2C:6F46, the code the same; alias, I
+; for this ROM, owner 2026-11-23); PRINT header bytes
 Prn_PktPrintHdr::
     db $02, $00, $04, $00
 
-; C: empty DATA packet (end of data)
+; C: developers' name PACKET6 (the prototype's older builds, printer library at 2C:6F4A, the code the same; alias, I
+; for this ROM, owner 2026-11-23); empty DATA packet (end of data)
 Prn_PktDataEnd::
     db $04, $00, $00, $00, $04, $00, $00, $00
 
-; C
+; C: developers' name PACKET4 (the prototype's older builds, printer library at 2C:6F52, the code the same; alias, I
+; for this ROM, owner 2026-11-23)
 Prn_PktBreak::
     db $08, $00, $00, $00, $08, $00, $00, $00
 
-; C
+; C: developers' name PACKET5 (the prototype's older builds, printer library at 2C:6F5A, the code the same; alias, I
+; for this ROM, owner 2026-11-23)
 Prn_PktInquiry::
     db $0f, $00, $00, $00, $0f, $00, $00, $00
 
-; C
+; C: developers' name PREPAREPACKET1 (the prototype's older builds, printer library at 2C:6F62, the code the same;
+; alias, I for this ROM, owner 2026-11-23)
 Prn_QueueInit::
     ld a, $01                                     ; $1B97
     ld d, $00                                     ; $1B99
@@ -5387,7 +5412,8 @@ Prn_QueueInit::
     jp Prn_QueuePacket                            ; $1BA1
 
 
-; C: builds the PRINT body from sheets / margin / palette / intensity
+; C: developers' name PREPAREPACKET2 (the prototype's older builds, printer library at 2C:6F6F, the code 83 % the
+; same; alias, I for this ROM, owner 2026-11-23); builds the PRINT body from sheets / margin / palette / intensity
 Prn_QueuePrint::
     ld a, $02                                     ; $1BA4
     ld d, $00                                     ; $1BA6
@@ -5431,7 +5457,8 @@ Prn_AddToChecksumDE::
     ret                                           ; $1BFA
 
 
-; C
+; C: developers' name PREPAREPACKET3 (the prototype's older builds, printer library at 2C:6FC9, the code the same;
+; alias, I for this ROM, owner 2026-11-23)
 Prn_QueueData::
     ld a, l                                       ; $1BFB
     ld [wPrnDataPtr], a                           ; $1BFC
@@ -5468,7 +5495,8 @@ Unused_Prn_QueueBreak::
     jp Prn_QueuePacket                            ; $1C39
 
 
-; C
+; C: developers' name PREPAREPACKET5 (the prototype's older builds, printer library at 2C:700A, the code the same;
+; alias, I for this ROM, owner 2026-11-23)
 Prn_QueueInquiry::
     ld a, $05                                     ; $1C3C
     ld d, $00                                     ; $1C3E
@@ -5477,7 +5505,8 @@ Prn_QueueInquiry::
     jp Prn_QueuePacket                            ; $1C46
 
 
-; C
+; C: developers' name PREPAREPACKET6 (the prototype's older builds, printer library at 2C:7017, the code 91 % the
+; same; alias, I for this ROM, owner 2026-11-23)
 Prn_QueueDataEnd::
     ld a, $06                                     ; $1C49
     ld d, $01                                     ; $1C4B
@@ -5491,7 +5520,8 @@ Unused_Prn_Ret::
     ret                                           ; $1C56
 
 
-; C: starts the queued packet and sends the first sync byte
+; C: developers' name STARTSTRINGTRANS (the prototype's older builds, printer library at 2C:7025, the code the same;
+; alias, I for this ROM, owner 2026-11-23); starts the queued packet and sends the first sync byte
 Prn_StartTransmit::
     ld a, [wPrnState]                             ; $1C57
     cp $01                                        ; $1C5A

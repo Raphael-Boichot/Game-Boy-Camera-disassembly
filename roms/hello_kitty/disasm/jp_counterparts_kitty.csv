@@ -843,7 +843,7 @@ bank,addr,name,tag,layer,relation,jp_name,jp_addr,basis
 04,4960,Cam_DitherRamp_ParamsB,C,hand 2026-11-22,same,Cam_DitherRamp_ParamsB,0A:7C60,"data, the same 64 bytes"
 04,49A0,Leftover_04_49A0_Cam_DitherRamp_ParamsUnused,I,hand 2026-11-22,same,Cam_DitherRamp_ParamsUnused,0A:7CA0,"data, the same 64 bytes"
 04,49E0,Cam_CalibSanityCheck_Measure_Far,C,hand 2026-11-08,none,,,
-04,49F2,Cam_LoadRegisterSet_Far,C,hand 2026-11-08,none,,,
+04,49F2,Cam_BuildDitherMatrix_Far,C,hand 2026-11-08,none,,,
 04,49F8,Cam_PopcountLevelByIndex,C,hand 2026-11-08,none,,,
 04,4A0D,Cam_PopcountLevelByIndex_Tbl4A0D,C,data,none,,,
 04,4A17,Cam_ApplyEffectOrFrame,C,hand 2026-11-08,none,,,
@@ -851,14 +851,14 @@ bank,addr,name,tag,layer,relation,jp_name,jp_addr,basis
 04,4A2C,Cam_Calib_ValidityCheck_Far,C,hand 2026-11-08,none,,,
 04,4A32,Cam_FullCalibration_Far,C,hand 2026-11-08,none,,,
 04,4A38,Cam_LiveInit_Far,C,hand 2026-11-08,none,,,
-04,4A3E,Cam_PopcountLevel,C,hand 2026-11-08,differs,Cam_MainDispatch,0A:4000,"code near copy, ratio 0.97 (111 instructions); next 0.14"
+04,4A3E,Cam_MainDispatch,C,hand 2026-11-08,same,Cam_MainDispatch,0A:4000,"code near copy, ratio 0.97 (111 instructions); next 0.14"
 04,4AF8,Cam_MainDispatch_EnterBand1,C,port_jp,same,Cam_MainDispatch_EnterBand1,0A:40BA,"code masked, 52 bytes"
 04,4B2C,Cam_MainDispatch_Band1,C,port_jp,same,Cam_MainDispatch_Band1,0A:40EE,"code masked, 74 bytes"
 04,4B76,Cam_MainDispatch_EnterBand0,C,port_jp,same,Cam_MainDispatch_EnterBand0,0A:4138,"code masked, 52 bytes"
 04,4BAA,Cam_MainDispatch_Band2,C,port_jp,same,Cam_MainDispatch_Band2,0A:416C,"code masked, 139 bytes"
 04,4C35,Cam_MainDispatch_Band3,C,port_jp,same,Cam_MainDispatch_Band3,0A:41F7,"code masked, 125 bytes"
 04,4CB2,Cam_MainDispatch_Band4,C,port_jp,same,Cam_MainDispatch_Band4,0A:4274,"code masked, 57 bytes"
-04,4CF8,Cam_LoadRegisterSet,C,hand 2026-11-08,differs,Cam_BuildDitherMatrix,0A:42BA,"code near copy, ratio 0.99 (45 instructions); next 0.38"
+04,4CF8,Cam_BuildDitherMatrix,C,hand 2026-11-08,same,Cam_BuildDitherMatrix,0A:42BA,"code near copy, ratio 0.99 (45 instructions); next 0.38"
 04,4D46,Cam_Dither_RampB,C,port_jp,same,Cam_Dither_RampB,0A:4306,"code masked, 262 bytes"
 04,4E4C,Cam_Dither_Flat,C,port_jp,same,Cam_Dither_Flat,0A:440C,"code masked, 27 bytes"
 04,4E67,Cam_Dither_RampA,C,port_jp,same,Cam_Dither_RampA,0A:4427,"code masked, 307 bytes"
@@ -1054,12 +1054,12 @@ bank,addr,name,tag,layer,relation,jp_name,jp_addr,basis
 05,5556,Stamp_LoadSelected,C,hand 2026-11-08,none,,,
 05,559C,Stamp_LoadGfx,C,hand 2026-11-08,none,,,
 05,55E2,Stamp_LoadMask,C,hand 2026-11-08,none,,,
-05,564E,Stamp_ArrangeGfx,C,hand 2026-11-08,differs,Stamp_BuildGraphicsLayer,04:5AAD,"code near copy, ratio 0.91 (51 instructions); next 0.86"
-05,5695,Stamp_ArrangeMaskInverted,C,hand 2026-11-08,differs,Stamp_BuildMaskLayer,04:5AFB,"code near copy, ratio 0.91 (55 instructions); next 0.86"
+05,564E,Stamp_BuildGraphicsLayer,C,hand 2026-11-08,same,Stamp_BuildGraphicsLayer,04:5AAD,"code near copy, ratio 0.91 (51 instructions); next 0.86"
+05,5695,Stamp_BuildMaskLayer,C,hand 2026-11-08,same,Stamp_BuildMaskLayer,04:5AFB,"code near copy, ratio 0.91 (55 instructions); next 0.86"
 05,56E0,Stamp_MirrorIfFlagged,C,hand 2026-11-08,none,,,
-05,56FF,Stamp_MirrorGfx,C,hand 2026-11-08,differs,Stamp_MirrorBuffer,04:5E85,"code near copy, ratio 0.94 (75 instructions); next 0.84"
-05,5768,Stamp_MirrorSrcGfx,C,hand 2026-11-08,ambiguous,Stamp_MirrorGfxBuffer,04:5EF8,"code near copy, ratio 0.94 (75 instructions); next 0.90"
-05,57D1,Stamp_MirrorSrcMask,C,hand 2026-11-08,ambiguous,Stamp_MirrorMaskBuffer,04:5F6B,"code near copy, ratio 0.94 (77 instructions); next 0.90"
+05,56FF,Stamp_MirrorBuffer,C,hand 2026-11-08,same,Stamp_MirrorBuffer,04:5E85,"code near copy, ratio 0.94 (75 instructions); next 0.84"
+05,5768,Stamp_MirrorGfxBuffer,C,hand 2026-11-08,same,Stamp_MirrorGfxBuffer,04:5EF8,"code near copy, ratio 0.94 (75 instructions); next 0.90"
+05,57D1,Stamp_MirrorMaskBuffer,C,hand 2026-11-08,same,Stamp_MirrorMaskBuffer,04:5F6B,"code near copy, ratio 0.94 (77 instructions); next 0.90"
 05,583E,Stamp_CursorCallback,C,hand 2026-11-08,none,,,
 05,5844,Stamp_CursorUpdate,C,hand 2026-11-08,none,,,
 05,5A14,Stamp_CursorUpdate_Tbl5A14,C,data,none,,,

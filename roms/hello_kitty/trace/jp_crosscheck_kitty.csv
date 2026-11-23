@@ -72,8 +72,8 @@ bank,start,end,bytes,owner,kitty_verdict,jp_addr,jp_routine,jp_fate,category
 05,525E,527F,34,Mode02_State0E,SENSOR,,,,NO_JP
 05,529C,529E,3,Mode02_State0E,SENSOR,,,,NO_JP
 05,52A2,52A9,8,Mode02_State0E,SENSOR,,,,NO_JP
-05,5680,5680,1,Stamp_ArrangeGfx,INPUT,,,,NO_JP
-05,56CB,56CB,1,Stamp_ArrangeMaskInverted,INPUT,,,,NO_JP
+05,5680,5680,1,Stamp_BuildGraphicsLayer,INPUT,,,,NO_JP
+05,56CB,56CB,1,Stamp_BuildMaskLayer,INPUT,,,,NO_JP
 05,5F80,5F85,6,Stamp_SetShiftMasks,INPUT,,,,NO_JP
 05,6043,6047,5,Mode05_State00,INPUT,,,,NO_JP
 05,6303,6303,1,AlbumText_CursorUpdate,INPUT,,,,NO_JP

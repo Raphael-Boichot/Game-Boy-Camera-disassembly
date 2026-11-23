@@ -1226,8 +1226,8 @@ Mode02_State00::
     ld c, a                                       ; $49F2
     ld a, [wCamGainSel]                           ; $49F3
     ld b, a                                       ; $49F6
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $49F7
-    ld hl, Cam_LoadRegisterSet_Far                ; $49F9
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $49F7
+    ld hl, Cam_BuildDitherMatrix_Far              ; $49F9
     call Far_CallKeepA                            ; $49FC
     call Stat_SetTileToggleAt4F                   ; $49FF
     call Lcd_SetupInline                          ; $4A02
@@ -1338,8 +1338,8 @@ jr_005_4ac7:
     ld c, a                                       ; $4ADC
     ld a, [wCamGainSel]                           ; $4ADD
     ld b, a                                       ; $4AE0
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $4AE1
-    ld hl, Cam_LoadRegisterSet_Far                ; $4AE3
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $4AE1
+    ld hl, Cam_BuildDitherMatrix_Far              ; $4AE3
     call Far_CallKeepA                            ; $4AE6
     ret                                           ; $4AE9
 
@@ -1611,8 +1611,8 @@ Mode02_State0A::
     ld c, a                                       ; $4D02
     ld a, [wCamGainSel]                           ; $4D03
     ld b, a                                       ; $4D06
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $4D07
-    ld hl, Cam_LoadRegisterSet_Far                ; $4D09
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $4D07
+    ld hl, Cam_BuildDitherMatrix_Far              ; $4D09
     call Far_CallKeepA                            ; $4D0C
     ret                                           ; $4D0F
 
@@ -2571,8 +2571,8 @@ Stamp_LoadSmallTiles::
     jp Far_Return                                 ; $5553
 
 
-; C: clears the four stamp buffers (00:01F2 x4), loads graphics and mask (05:559C, 05:55E2), Stamp_ArrangeGfx,
-; Stamp_ArrangeMaskInverted, Stamp_MirrorIfFlagged, then copies $C000 to $8A00 and $C1E0 to $8C00
+; C: clears the four stamp buffers (00:01F2 x4), loads graphics and mask (05:559C, 05:55E2), Stamp_BuildGraphicsLayer,
+; Stamp_BuildMaskLayer, Stamp_MirrorIfFlagged, then copies $C000 to $8A00 and $C1E0 to $8C00
 Stamp_LoadSelected::
     call Mem_ZeroInline                           ; $5556
 
@@ -2592,8 +2592,8 @@ Stamp_LoadSelected::
 
     call Stamp_LoadGfx                            ; $5572
     call Stamp_LoadMask                           ; $5575
-    call Stamp_ArrangeGfx                         ; $5578
-    call Stamp_ArrangeMaskInverted                ; $557B
+    call Stamp_BuildGraphicsLayer                 ; $5578
+    call Stamp_BuildMaskLayer                     ; $557B
     call Stamp_MirrorIfFlagged                    ; $557E
     ld de, $c000                                  ; $5581
     ld hl, $8a00                                  ; $5584
@@ -2712,8 +2712,8 @@ jr_005_563a:
 
 
 ; C: copies the stamp tiles of $C3C0 into the work buffer $C000, [$D9DA] x [$D9DB] tiles, rows interleaved; mode $05
-; (stamp window) setup
-Stamp_ArrangeGfx::
+; (stamp window) setup; the Japanese name (04:5AAD, the same code), owner 2026-11-23; was Stamp_ArrangeGfx
+Stamp_BuildGraphicsLayer::
     ld a, [wStamp_SelectCategory_D9DA]            ; $564E
     ld c, a                                       ; $5651
     ld a, [wStamp_SelectCategory_D9DB]            ; $5652
@@ -2785,8 +2785,9 @@ jr_005_5691:
     ret                                           ; $5694
 
 
-; C: the same for the mask: $C5A0 into $C1E0, every byte complemented (cpl)
-Stamp_ArrangeMaskInverted::
+; C: the same for the mask: $C5A0 into $C1E0, every byte complemented (cpl); the Japanese name (04:5AFB, the same
+; code), owner 2026-11-23; was Stamp_ArrangeMaskInverted
+Stamp_BuildMaskLayer::
     ld a, [wStamp_SelectCategory_D9DA]            ; $5695
     ld c, a                                       ; $5698
     ld a, [wStamp_SelectCategory_D9DB]            ; $5699
@@ -2870,18 +2871,19 @@ Stamp_MirrorIfFlagged::
     ret z                                         ; $56E5
 
     ld hl, $c000                                  ; $56E6
-    call Stamp_MirrorGfx                          ; $56E9
+    call Stamp_MirrorBuffer                       ; $56E9
     ld hl, $c1e0                                  ; $56EC
-    call Stamp_MirrorGfx                          ; $56EF
+    call Stamp_MirrorBuffer                       ; $56EF
     ld hl, $c3c0                                  ; $56F2
-    call Stamp_MirrorSrcGfx                       ; $56F5
+    call Stamp_MirrorGfxBuffer                    ; $56F5
     ld hl, $c5a0                                  ; $56F8
-    call Stamp_MirrorSrcMask                      ; $56FB
+    call Stamp_MirrorMaskBuffer                   ; $56FB
     ret                                           ; $56FE
 
 
-; C: horizontal mirror of a buffer [$D9DA] tiles wide: each byte bit-reversed and swapped with its mirror position
-Stamp_MirrorGfx::
+; C: horizontal mirror of a buffer [$D9DA] tiles wide: each byte bit-reversed and swapped with its mirror position;
+; the Japanese name (04:5E85, the same code), owner 2026-11-23; was Stamp_MirrorGfx
+Stamp_MirrorBuffer::
     push hl                                       ; $56FF
     ld a, [wStamp_SelectCategory_D9DA]            ; $5700
     ld b, a                                       ; $5703
@@ -2972,8 +2974,9 @@ jr_005_5762:
 
 
 ; C: mirror of $C3C0 called beside 05:56FF by Stamp_MirrorIfFlagged (other row size; loop not read in full); runs on
-; its screen (05:06) in the core replays (port/entry_modes_kitty.csv); code read
-Stamp_MirrorSrcGfx::
+; its screen (05:06) in the core replays (port/entry_modes_kitty.csv); code read; the Japanese name (04:5EF8, the same
+; code), owner 2026-11-23; was Stamp_MirrorSrcGfx
+Stamp_MirrorGfxBuffer::
     push hl                                       ; $5768
     ld a, [wStamp_SelectCategory_D9DA]            ; $5769
     ld b, a                                       ; $576C
@@ -3066,8 +3069,9 @@ jr_005_57cb:
 
 
 ; C: mirror of $C5A0 called beside 05:56FF by Stamp_MirrorIfFlagged (other row size; loop not read in full); runs on
-; its screen (05:06) in the core replays (port/entry_modes_kitty.csv); code read
-Stamp_MirrorSrcMask::
+; its screen (05:06) in the core replays (port/entry_modes_kitty.csv); code read; the Japanese name (04:5F6B, the same
+; code), owner 2026-11-23; was Stamp_MirrorSrcMask
+Stamp_MirrorMaskBuffer::
     push hl                                       ; $57D1
     ld a, [wStamp_SelectCategory_D9DA]            ; $57D2
     ld b, a                                       ; $57D5

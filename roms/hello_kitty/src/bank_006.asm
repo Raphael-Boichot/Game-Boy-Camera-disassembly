@@ -2380,8 +2380,8 @@ Mode0B_State03::
     ld c, a                                       ; $52C5
     ld a, [wCamGainSel]                           ; $52C6
     ld b, a                                       ; $52C9
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $52CA
-    ld hl, Cam_LoadRegisterSet_Far                ; $52CC
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $52CA
+    ld hl, Cam_BuildDitherMatrix_Far              ; $52CC
     call Far_CallKeepA                            ; $52CF
     ld de, ObjScript_02_7A35_NameCardEdit_ObjFieldTick + $40 ; $52D2
     call Object_Create                            ; $52D5
@@ -2454,8 +2454,8 @@ jr_006_5345:
     ld c, a                                       ; $535A
     ld a, [wCamGainSel]                           ; $535B
     ld b, a                                       ; $535E
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $535F
-    ld hl, Cam_LoadRegisterSet_Far                ; $5361
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $535F
+    ld hl, Cam_BuildDitherMatrix_Far              ; $5361
     call Far_CallKeepA                            ; $5364
     pop af                                        ; $5367
     ldh [hSram_Format_FF8C], a                    ; $5368

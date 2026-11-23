@@ -115,7 +115,7 @@ Cam_ReduceTbl_Lo::
     ASSERT LOW(Cam_ReduceTbl_Lo) == 0 ; read as a page: HIGH(Cam_ReduceTbl_Lo) with the index in the low byte
     INCBIN "data/bank_04/Cam_ReduceTbl_Lo.bin" ; $4600, 512 bytes
 ; C: the same 160 bytes as the Japanese Cam_ExposureShiftTable (0A:7B00); the camera code of this ROM is the Japanese
-; one (owner, 2026-11-22): Cam_PopcountLevel (04:4A3E, the copy of the Japanese code of Cam_MainDispatch that reads it
+; one (owner, 2026-11-22): Cam_MainDispatch (04:4A3E, the copy of the Japanese code of Cam_MainDispatch that reads it
 ; at 0A:402F) reads [$4800 + level], level 0-$9F (ld bc, $4800, ...
 Cam_ExposureShiftTable::
     db $02, $03, $03, $03, $04, $03, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
@@ -154,8 +154,8 @@ Cam_ORegSAR_Table_Below::
     db $b0, $b1, $b2, $b2, $b4, $b5, $b6, $b4, $b8, $b9, $ba, $ba, $bc, $bd, $be
 
 ; C: the same 64 bytes as the Japanese Cam_DitherRamp_ParamsA (0A:7C20), 16 sets of 4 bytes; the camera code of this
-; ROM is the Japanese one (owner, 2026-11-22): Cam_LoadRegisterSet (04:4CF8, the Japanese code that reads it in
-; Cam_BuildDitherMatrix at 0A:42C5) copies set C, the contrast row $DA1F (1-16, ...
+; ROM is the Japanese one (owner, 2026-11-22): Cam_BuildDitherMatrix (04:4CF8, the Japanese code that reads it in
+; Cam_BuildDitherMatrix at 0A:42C5) copies set C, the contrast row $DA1F ...
 Cam_DitherRamp_ParamsA::
     db $80, $8f, $d0, $e6, $82, $90, $c8, $e3, $84, $90, $c0, $e0, $85, $91, $b8, $dd
     db $86, $91, $b1, $db, $87, $92, $aa, $d8
@@ -166,7 +166,7 @@ Cam_DitherRamp_ParamsA::
     db $8f, $92, $99, $a0, $90, $92, $97, $9a, $92, $92, $92, $92
 
 ; C: the same 64 bytes as the Japanese Cam_DitherRamp_ParamsB (0A:7C60); the camera code of this ROM is the Japanese
-; one (owner, 2026-11-22): Cam_LoadRegisterSet takes $4960 + 4 (C - 1) for the other gain ($DA0A)
+; one (owner, 2026-11-22): Cam_BuildDitherMatrix takes $4960 + 4 (C - 1) for the other gain ($DA0A)
 Cam_DitherRamp_ParamsB::
     db $80, $94, $dc, $ff, $82, $95, $d2, $ff, $84, $96, $ca, $ff, $86, $96, $c4, $ff
     db $88, $97, $be, $ff, $8a, $97, $b8, $ff, $8b, $98, $b2, $f5
@@ -192,9 +192,9 @@ Cam_CalibSanityCheck_Measure_Far::
 
     db $cd, $af, $52, $c3, $73, $01, $cd, $bb, $53, $c3, $73, $01
 
-; C: far wrapper of 04:4CF8
-Cam_LoadRegisterSet_Far::
-    call Cam_LoadRegisterSet                      ; $49F2
+; C: far wrapper of 04:4CF8; renamed with 04:4CF8 (owner 2026-11-23); was Cam_LoadRegisterSet_Far
+Cam_BuildDitherMatrix_Far::
+    call Cam_BuildDitherMatrix                    ; $49F2
     jp Far_Return                                 ; $49F5
 
 
@@ -207,7 +207,7 @@ Cam_PopcountLevelByIndex::
     ld hl, Cam_PopcountLevelByIndex + $F          ; $49FC
     add hl, bc                                    ; $49FF
     ld a, [hl]                                    ; $4A00
-    call Cam_PopcountLevel                        ; $4A01
+    call Cam_MainDispatch                         ; $4A01
     jp Far_Return                                 ; $4A04
 
 
@@ -256,8 +256,9 @@ Cam_LiveInit_Far::
 
 
 ; C: Cam_PopcountSampleLoop over the picture at $A320 (SRAM bank 0), then how many steps of A fit in the count (hFFB3,
-; at most $9F); runs on its screen (02:00) in the core replays (port/entry_modes_kitty.csv); code read
-Cam_PopcountLevel::
+; at most $9F); runs on its screen (02:00) in the core replays (port/entry_modes_kitty.csv); code read; the Japanese
+; name (0A:4000, the same code), owner 2026-11-23; was Cam_PopcountLevel
+Cam_MainDispatch::
     push af                                       ; $4A3E
     ld a, $00                                     ; $4A3F
     ldh [hSram_Format_FF8C], a                    ; $4A41
@@ -450,7 +451,7 @@ Cam_MainDispatch_Band1::
     ld b, a                                       ; $4B6B
     ld a, [wCamContrastRow]                       ; $4B6C
     ld c, a                                       ; $4B6F
-    call Cam_LoadRegisterSet                      ; $4B70
+    call Cam_BuildDitherMatrix                    ; $4B70
     jp Jump_004_4ceb                              ; $4B73
 
 
@@ -513,7 +514,7 @@ Cam_MainDispatch_Band2::
     ld b, a                                       ; $4BEE
     ld a, [wCamContrastRow]                       ; $4BEF
     ld c, a                                       ; $4BF2
-    call Cam_LoadRegisterSet                      ; $4BF3
+    call Cam_BuildDitherMatrix                    ; $4BF3
     ret                                           ; $4BF6
 
 
@@ -540,7 +541,7 @@ jr_004_4bf7:
     ld b, a                                       ; $4C2C
     ld a, [wCamContrastRow]                       ; $4C2D
     ld c, a                                       ; $4C30
-    call Cam_LoadRegisterSet                      ; $4C31
+    call Cam_BuildDitherMatrix                    ; $4C31
     ret                                           ; $4C34
 
 
@@ -601,7 +602,7 @@ jr_004_4c75:
     ld b, a                                       ; $4CA9
     ld a, [wCamContrastRow]                       ; $4CAA
     ld c, a                                       ; $4CAD
-    call Cam_LoadRegisterSet                      ; $4CAE
+    call Cam_BuildDitherMatrix                    ; $4CAE
     ret                                           ; $4CB1
 
 
@@ -644,8 +645,9 @@ jr_004_4ceb:
 
 
 ; C: camera registers (bank $10): picks the 4-byte register set C of 04:4920 or 04:4960 by B against $DA09 / $DA0A;
-; code read; runs at boot (the camera checks)
-Cam_LoadRegisterSet::
+; code read; runs at boot (the camera checks); the Japanese name (0A:42BA, the same code), owner 2026-11-23; was
+; Cam_LoadRegisterSet
+Cam_BuildDitherMatrix::
     ld a, $10                                     ; $4CF8
     ldh [hSram_Format_FF8C], a                    ; $4CFA
     ld [rRAMB], a                                 ; $4CFC
@@ -2758,7 +2760,7 @@ Cam_LiveInit::
     ld c, a                                       ; $5B64
     ld a, [wCamGainSel]                           ; $5B65
     ld b, a                                       ; $5B68
-    call Cam_LoadRegisterSet                      ; $5B69
+    call Cam_BuildDitherMatrix                    ; $5B69
     ret                                           ; $5B6C
 
 

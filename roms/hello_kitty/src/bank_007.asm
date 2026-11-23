@@ -3066,8 +3066,8 @@ Mode0F_State04::
     ld c, a                                       ; $5A93
     ld a, [wCamGainSel]                           ; $5A94
     ld b, a                                       ; $5A97
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $5A98
-    ld hl, Cam_LoadRegisterSet_Far                ; $5A9A
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $5A98
+    ld hl, Cam_BuildDitherMatrix_Far              ; $5A9A
     call Far_CallKeepA                            ; $5A9D
     call Lcd_SetupInline                          ; $5AA0
 
@@ -3505,8 +3505,8 @@ jr_007_5d7a:
     ld c, a                                       ; $5D8F
     ld a, [wCamGainSel]                           ; $5D90
     ld b, a                                       ; $5D93
-    ld b, BANK(Cam_LoadRegisterSet_Far)           ; $5D94
-    ld hl, Cam_LoadRegisterSet_Far                ; $5D96
+    ld b, BANK(Cam_BuildDitherMatrix_Far)         ; $5D94
+    ld hl, Cam_BuildDitherMatrix_Far              ; $5D96
     call Far_CallKeepA                            ; $5D99
     ret                                           ; $5D9C
 

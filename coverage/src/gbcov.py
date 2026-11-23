@@ -134,11 +134,21 @@ def cam_log_clear(): L.gb_cam_log_clear()
 # 1.4 mV/(lx ms) on the curve with the filter (100-1,000 mV), about 7 (C, both from the datasheet; the curve's light taken as halogen, I);
 # black-body spectra through a silicon response and an infrared-cut edge at 650-700 nm give 4.5-9 for halogen (2,856-3,200 K), 2-3 for
 # daylight (5,500-6,500 K) (I, computed); white LED and fluorescent light carry almost no infrared (1, I).
-IR_FACTOR = {'halogen': 7.0, 'incandescent': 7.0, 'daylight': 2.5, 'led': 1.0, 'fluorescent': 1.0}
-def face_lux(scene_lux, reflectance=0.18, transmission=0.9, light='daylight', aperture_mm=1.78, focal_mm=3.5):
+# The values live in sensor/lens_model.csv (owner 2026-11-23: the hypotheses written somewhere and easy to edit): edit them there;
+# the figures below are the fallback when the file is missing.
+LENS = {'focal_mm': 3.5, 'aperture_mm': 1.78, 'transmission': 0.9, 'reflectance': 0.18,
+        'ir_halogen': 7.0, 'ir_incandescent': 7.0, 'ir_daylight': 2.5, 'ir_led': 1.0, 'ir_fluorescent': 1.0}
+_LF = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'sensor', 'lens_model.csv')
+if os.path.exists(_LF):
+    import csv as _csv
+    for _r in _csv.DictReader(open(_LF, encoding='utf-8')): LENS[_r['parameter']] = float(_r['value'])
+IR_FACTOR = {k[3:]: v for k, v in LENS.items() if k.startswith('ir_')}
+def face_lux(scene_lux, reflectance=None, transmission=None, light='daylight', aperture_mm=None, focal_mm=None):
     """The scene of the sensor model from the illuminance of the scene (docs §19.12): what the datasheet curve would see at the sensor
     face. The lens of the owner's figures: 3.5 mm (35 mm equivalent, crop factor 10), aperture opening 1.78 mm (measured by the owner,
     2026-11-23), f/1.97; transmission 90 % (plastic lens, I); the infrared factor of the light (IR_FACTOR). Reflectance: 18 % grey
-    by default (objects reflect infrared differently, foliage much more: not modelled)."""
-    n = focal_mm / aperture_mm
+    by default (objects reflect infrared differently, foliage much more: not modelled). Defaults: sensor/lens_model.csv."""
+    reflectance = LENS['reflectance'] if reflectance is None else reflectance
+    transmission = LENS['transmission'] if transmission is None else transmission
+    n = (LENS['focal_mm'] if focal_mm is None else focal_mm) / (LENS['aperture_mm'] if aperture_mm is None else aperture_mm)
     return np.asarray(scene_lux, np.float32) * reflectance * transmission * IR_FACTOR[light] / (4 * n * n)

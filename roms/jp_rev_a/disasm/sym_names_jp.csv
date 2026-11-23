@@ -87,8 +87,8 @@ bank,addr,name,conf,note,source
 00,0DD4,Map_SpiralWipeIn_CellLoop,C,"per-cell loop top of the spiral wipe: writes one map byte through Vram_WriteByteSafe, waits a frame every 8th cell (branch target; code read 2026-10-19)",hand
 00,0E67,Map_SpiralWipeOut,C,"fills the BG map with $FF in a spiral order (20x17). L3 pass 2026-10-26: executed in BGB in 85 replay(s) of the organic corpus, modes 01 (roms/jp_rev_a/experiments/l3_names/)",hand+auto
 00,0F06,Gfx_WipeTile,C,"16-byte tile used by the wipes. L3 pass 2026-10-26: read in BGB in 89 replay(s) of the organic corpus, modes 01 (roms/jp_rev_a/experiments/l3_names/)",hand+auto
-00,0F16,Prn_SerialIrq,C,serial interrupt body of the printer driver,hand+auto
-00,0F2D,Prn_VBlankPoll,C,every 6th VBlank sends the status poll when the printer is idle,hand+auto
+00,0F16,Prn_SerialIrq,C,"developers' name SIOINT (the prototype's older builds, printer library at 2C:6AD5, the code the same; alias, I for this ROM, owner 2026-11-23); serial interrupt body of the printer driver",hand+auto
+00,0F2D,Prn_VBlankPoll,C,"developers' name SIOWATCHDOG (the prototype's older builds, printer library at 2C:6AEC, the code 97 % the same; alias, I for this ROM, owner 2026-11-23); every 6th VBlank sends the status poll when the printer is idle",hand+auto
 00,0F4F,Math_MulAL,C,HL = A * L (8x8 shift-add),hand+auto
 00,0F9C,Bcd_AddSaturate,C,adds A (BCD) to the B-byte BCD number at HL; saturates at all $99,hand+auto
 00,0FB2,Math_Sin,C,quarter-wave table lookup: A = angle 0..255,hand+auto
@@ -123,48 +123,48 @@ bank,addr,name,conf,note,source
 00,16C4,Gfx_BuildCellMask,C,56 cells of 16 bytes OR-ed to one byte each (tile non-empty mask),hand+auto
 00,16F4,Snd_PlayTagDigits,C,"splits the slot's image checksum (F34 = sum, F35 = xor of the 3,584 photo bytes, copied to $DA8F/$DA90) into four nibbles $DD03-$DD06 and requests sfx1 $10 = the P.VOICE; BGB 2026-10-14: the four nibbles equal F34/F35 for the 21 copied stock pictures in the slide show (P.VOICE option) and for a photo just shot and saved (README 16.27)",hand+auto
 00,1720,ScrollEngine_CopyRowRecords,C,"A = bank, HL = source, DE = row buffer: copies 32-byte row records (1 + 3 + 28 bytes) until 18 rows are copied or a record pair closes (first byte non-zero toggles bit 7 of C); returns the row count in B; only caller 09:403E ScrollEngine_Sub1_FetchRow (credits text scroller, bank $29 script); was Prn_CopyBandRecords",hand
-00,176F,Prn_SerialStep,C,one serial IRQ step of the printer packet state machine,hand+auto
-00,17AD,Prn_SendSyncByte,C,sends $88 $33,hand+auto
-00,17D2,Prn_SendPacketByte,C,sends one header/data byte and adds it to the checksum,hand+auto
-00,1873,Prn_RestoreHeaderPtr,C,restores length and pointer for the next section,hand+auto
-00,188C,Prn_SendChecksumByte,C,,hand+auto
-00,18A3,Prn_SendTrailerByte,C,two dummy bytes after the checksum; reads device id,hand+auto
-00,18BD,Prn_ReceiveStatus,C,end of packet: stores the status byte and sets the engine state,hand+auto
+00,176F,Prn_SerialStep,C,"developers' name SIOPROC (the prototype's older builds, printer library at 2C:6B0B, the code the same; alias, I for this ROM, owner 2026-11-23); one serial IRQ step of the printer packet state machine",hand+auto
+00,17AD,Prn_SendSyncByte,C,"developers' name PREAMBLETRANS (the prototype's older builds, printer library at 2C:6B49, the code the same; alias, I for this ROM, owner 2026-11-23); sends $88 $33",hand+auto
+00,17D2,Prn_SendPacketByte,C,"developers' name TRANSMIT (the prototype's older builds, printer library at 2C:6B6E, the code 95 % the same; alias, I for this ROM, owner 2026-11-23); sends one header/data byte and adds it to the checksum",hand+auto
+00,1873,Prn_RestoreHeaderPtr,C,"developers' name FORRETRY_DATATRANS (the prototype's older builds, printer library at 2C:6C0F, the code the same; alias, I for this ROM, owner 2026-11-23); restores length and pointer for the next section",hand+auto
+00,188C,Prn_SendChecksumByte,C,"developers' name TRANSCHECKSUM (the prototype's older builds, printer library at 2C:6C28, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,18A3,Prn_SendTrailerByte,C,"developers' name TRANSDUMMY (the prototype's older builds, printer library at 2C:6C3F, the code the same; alias, I for this ROM, owner 2026-11-23); two dummy bytes after the checksum; reads device id",hand+auto
+00,18BD,Prn_ReceiveStatus,C,"developers' name GETPRINTERSTATUS (the prototype's older builds, printer library at 2C:6C59, the code 90 % the same; alias, I for this ROM, owner 2026-11-23); end of packet: stores the status byte and sets the engine state",hand+auto
 00,190A,Prn_ReceiveStatus_Ret,C,RET shared by the status-byte tail of Prn_SerialStep (taken when the abort flag DC3C is set) (branch target; code read 2026-10-19),hand
 00,190B,Prn_StopSerial_Dead,I,unreferenced,hand+auto
 00,190E,Prn_SerialStep_Exit,C,RET at 190E shared by the live sync-byte and packet-byte branches of Prn_SerialStep (the dead Prn_StopSerial_Dead bytes sit around it) (branch target; code read 2026-10-19),hand
 00,190F,Prn_StopSerial2_Dead,I,unreferenced,hand+auto
-00,1914,Prn_EngineStop,C,clears serial and state; status = $FF,hand+auto
-00,1927,Prn_ClearTxFlags,C,,hand+auto
-00,1931,Prn_ResetPacketState,C,,hand+auto
-00,1954,Prn_SendInit,C,queues the INITIALIZE command (A=0 ready),hand+auto
-00,196F,Prn_CheckTxDone,C,completion routine: carry = packet must be re-sent,hand+auto
+00,1914,Prn_EngineStop,C,"developers' name SIOINITIALIZE (the prototype's older builds, printer library at 2C:6CE5, the code 90 % the same; alias, I for this ROM, owner 2026-11-23); clears serial and state; status = $FF",hand+auto
+00,1927,Prn_ClearTxFlags,C,"developers' name SIOFLAGINIT (the prototype's older builds, printer library at 2C:6CFD, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,1931,Prn_ResetPacketState,C,"developers' name CLEARFLAGS (the prototype's older builds, printer library at 2C:6D07, the code 96 % the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,1954,Prn_SendInit,C,"developers' name CONNECTPRN (the prototype's older builds, printer library at 2C:6D27, the code the same; alias, I for this ROM, owner 2026-11-23); queues the INITIALIZE command (A=0 ready)",hand+auto
+00,196F,Prn_CheckTxDone,C,"developers' name CHECKENDOFTRANS (the prototype's older builds, printer library at 2C:6D42, the code 81 % the same; alias, I for this ROM, owner 2026-11-23); completion routine: carry = packet must be re-sent",hand+auto
 00,19A2,Prn_Unused19A2,I,unreferenced,hand+auto
-00,19B2,Prn_SendPrint,C,queues the PRINT command; returns $F0 while busy,hand+auto
+00,19B2,Prn_SendPrint,C,"developers' name INSTRUCTPRN (the prototype's older builds, printer library at 2C:6D85, the code 94 % the same; alias, I for this ROM, owner 2026-11-23); queues the PRINT command; returns $F0 while busy",hand+auto
 00,19EB,Prn_SendData,C,queues a DATA packet (HL = band,hand+auto
 00,1A4B,Prn_SendData_QueueAndStart,C,"BC = length, HL = source: Prn_QueueData then Prn_StartTransmit (shared tail of the DATA packet cases) (branch target; code read 2026-10-19)",hand
 00,1A76,Prn_SendData_NextChunk,C,"next band chunk: last chunk when the counter DC3E = 1, else length $0280 or the table value at DBEC (branch target; code read 2026-10-19)",hand
 00,1AC0,Prn_SendData_QueueFromPtr,C,"reload HL from the data pointer DC1F:DC20 and queue (retry sends the same chunk, otherwise the pointer was advanced by $0280) (branch target; code read 2026-10-19)",hand
 00,1ACB,Prn_SendData_Abort,C,"status bit 4 (packet error): sets the abort flag DC3C, clears has-data DC2C and busy DC3B (branch target; code read 2026-10-19)",hand
 00,1ADB,Prn_SendData_RetBusy,C,RET with A = $F0 (printer engine busy) (branch target; code read 2026-10-19),hand
-00,1AEB,Prn_SendBreak_Dead,I,unreferenced,hand+auto
-00,1B1E,Prn_SendInquiry,C,queues the INQUIRY command (status poll),hand+auto
-00,1B46,Prn_QueuePacket,C,A = type,hand+auto
-00,1B71,Prn_SyncBytes,C,$88 $33,hand+auto
-00,1B73,Prn_PktInit,C,INITIALIZE packet,hand+auto
-00,1B7B,Prn_PktPrintHdr,C,PRINT header bytes,hand+auto
-00,1B7F,Prn_PktDataEnd,C,empty DATA packet (end of data),hand+auto
-00,1B87,Prn_PktBreak,C,,hand+auto
-00,1B8F,Prn_PktInquiry,C,,hand+auto
-00,1B97,Prn_QueueInit,C,,hand+auto
-00,1BA4,Prn_QueuePrint,C,builds the PRINT body from sheets / margin / palette / intensity,hand+auto
+00,1AEB,Prn_SendBreak_Dead,I,"developers' name BREAKPRN (the prototype's older builds, printer library at 2C:6EB6, the code the same; alias, I for this ROM, owner 2026-11-23); unreferenced",hand+auto
+00,1B1E,Prn_SendInquiry,C,"developers' name NULTRANSPRN (the prototype's older builds, printer library at 2C:6EE9, the code the same; alias, I for this ROM, owner 2026-11-23); queues the INQUIRY command (status poll)",hand+auto
+00,1B46,Prn_QueuePacket,C,"developers' name INITDATATRANS (the prototype's older builds, printer library at 2C:6F11, the code the same; alias, I for this ROM, owner 2026-11-23); A = type",hand+auto
+00,1B71,Prn_SyncBytes,C,"developers' name PREAMBLEDATA (the prototype's older builds, printer library at 2C:6F3C, the code the same; alias, I for this ROM, owner 2026-11-23); $88 $33",hand+auto
+00,1B73,Prn_PktInit,C,"developers' name PACKET1 (the prototype's older builds, printer library at 2C:6F3E, the code the same; alias, I for this ROM, owner 2026-11-23); INITIALIZE packet",hand+auto
+00,1B7B,Prn_PktPrintHdr,C,"developers' name PACKET2 (the prototype's older builds, printer library at 2C:6F46, the code the same; alias, I for this ROM, owner 2026-11-23); PRINT header bytes",hand+auto
+00,1B7F,Prn_PktDataEnd,C,"developers' name PACKET6 (the prototype's older builds, printer library at 2C:6F4A, the code the same; alias, I for this ROM, owner 2026-11-23); empty DATA packet (end of data)",hand+auto
+00,1B87,Prn_PktBreak,C,"developers' name PACKET4 (the prototype's older builds, printer library at 2C:6F52, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,1B8F,Prn_PktInquiry,C,"developers' name PACKET5 (the prototype's older builds, printer library at 2C:6F5A, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,1B97,Prn_QueueInit,C,"developers' name PREPAREPACKET1 (the prototype's older builds, printer library at 2C:6F62, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,1BA4,Prn_QueuePrint,C,"developers' name PREPAREPACKET2 (the prototype's older builds, printer library at 2C:6F6F, the code 83 % the same; alias, I for this ROM, owner 2026-11-23); builds the PRINT body from sheets / margin / palette / intensity",hand+auto
 00,1BF4,Prn_AddToChecksumDE,C,DE += A,hand+auto
-00,1BFB,Prn_QueueData,C,,hand+auto
+00,1BFB,Prn_QueueData,C,"developers' name PREPAREPACKET3 (the prototype's older builds, printer library at 2C:6FC9, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
 00,1C2F,Unused_Prn_QueueBreak,C,"Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
-00,1C3C,Prn_QueueInquiry,C,,hand+auto
-00,1C49,Prn_QueueDataEnd,C,,hand+auto
+00,1C3C,Prn_QueueInquiry,C,"developers' name PREPAREPACKET5 (the prototype's older builds, printer library at 2C:700A, the code the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
+00,1C49,Prn_QueueDataEnd,C,"developers' name PREPAREPACKET6 (the prototype's older builds, printer library at 2C:7017, the code 91 % the same; alias, I for this ROM, owner 2026-11-23)",hand+auto
 00,1C56,Unused_Prn_Ret,C,"Dead-code root: nothing calls it; assembled as code tagged unused (owner decision 2026-10-26, README 13.6).",hand+auto
-00,1C57,Prn_StartTransmit,C,starts the queued packet and sends the first sync byte,hand+auto
+00,1C57,Prn_StartTransmit,C,"developers' name STARTSTRINGTRANS (the prototype's older builds, printer library at 2C:7025, the code the same; alias, I for this ROM, owner 2026-11-23); starts the queued packet and sends the first sync byte",hand+auto
 00,1C93,Sgb_SendPacket,C,A = bank; HL = packets (16 bytes each,hand+auto
 00,1CDE,Sgb_Delay,C,,hand+auto
 00,1CEA,Sgb_Probe,C,MLT_REQ probe; carry set when a Super Game Boy answers,hand+auto
@@ -1575,10 +1575,10 @@ bank,addr,name,conf,note,source
 04,5307,EraseAnim_DrawParticles,C,writes 16 OAM entries from del_x / del_y at $D4xx (04:530A),hand+auto
 04,531A,EraseAnim_DrawOne,C,one OAM entry: y + 8,hand+auto
 04,5337,Stamp_PageGfxTbl,C,"17 records x 6 B, one per stamp category ([$D63D] x 6): {sheet pointer lo; hi; bank; block bytes lo; hi; blocks}. Stamp_LoadPageGfx (04:589E) steps the pointer by [$D63E] blocks and copies `blocks` consecutive blocks to VRAM $8A00 (categories 2 and 3 have code of their own: $190 + $190 B to $8A00 / $8510, $360 + $60 B). Decoded 2026-10-19; the sheets are the StampCat*_Gfx rows (README 2.6)",hand+auto
-04,539D,Stamp_CatIconSrcTbl1,C,"17 x {lo; hi; bank} by category ([$D63D] x 3): $60 B of icon tiles copied to VRAM $8F00 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows",hand+auto
-04,53D0,Stamp_CatIconSrcTbl2,C,"17 x {lo; hi; bank} by category: $60 B of icon tiles copied to VRAM $8F60 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows",hand+auto
-04,5403,Stamp_CatMapSrcTbl,C,"17 x {lo; hi; bank} by category: the $120 B BG map (9 rows) copied to VRAM $9C00 by Stamp_LoadCategoryIcons; read again by Stamp_ReloadTilemapIfDifferent; the pointers are the Src_*_Tbl539D_* rows",hand+auto
-04,5436,Stamp_IconSrcGfxTbl,C,"17 records x 5 B by category ([$D63D] x 5): {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; Stamp_CopyStampTiles (04:5A73) steps the pointer by [$D63F] stamps and copies one stamp to wIconSrcGfx ($C3C0) in Stamp_PrepareBuffers. Pointers = the StampCat*_Gfx rows. Decoded 2026-10-19",hand+auto
+04,539D,Stamp_CatIconSrcTbl1,C,17 x {lo; hi; bank} by category ([$D63D] x 3): $60 B of icon tiles copied to VRAM $8F00 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows,hand+auto
+04,53D0,Stamp_CatIconSrcTbl2,C,17 x {lo; hi; bank} by category: $60 B of icon tiles copied to VRAM $8F60 by Stamp_LoadCategoryIcons; the pointers are the Src_*_Tbl539D_* rows,hand+auto
+04,5403,Stamp_CatMapSrcTbl,C,17 x {lo; hi; bank} by category: the $120 B BG map (9 rows) copied to VRAM $9C00 by Stamp_LoadCategoryIcons; read again by Stamp_ReloadTilemapIfDifferent; the pointers are the Src_*_Tbl539D_* rows,hand+auto
+04,5436,Stamp_IconSrcGfxTbl,C,17 records x 5 B by category ([$D63D] x 5): {sheet pointer lo; hi; bank; bytes per stamp lo; hi}; Stamp_CopyStampTiles (04:5A73) steps the pointer by [$D63F] stamps and copies one stamp to wIconSrcGfx ($C3C0) in Stamp_PrepareBuffers. Pointers = the StampCat*_Gfx rows. Decoded 2026-10-19,hand+auto
 04,548B,Stamp_IconSrcMaskTbl,C,"17 records x 5 B by category: {mask pointer lo; hi; bank; bytes per stamp lo; hi}: the 1bpp mask of the stamp, copied to wIconSrcMask ($C5A0) in Stamp_PrepareBuffers. Not tile data: records 0-3 and 16 point to the StampCat*_Mask rows, records 4-15 have bank $00 / $FF (no mask: Stamp_CopyStampTiles stops at 04:5A97-5A9B and the caller keeps the constant fill). Decoded 2026-10-19",hand+auto
 04,54E0,Stamp_BuildGraphicsLayer_Tbl54E0,C,"auto: 11 bytes, bytes; referenced by Stamp_BuildGraphicsLayer, Stamp_BuildMaskLayer. L3 pass 2026-10-26: read in BGB in 33 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)",auto
 04,5502,Stamp_DrawPaletteCursor_PtrTbl5502,C,"auto: 96 bytes, word table; referenced by Stamp_DrawPaletteCursor. L3 pass 2026-10-26: read in BGB in 2 replay(s) of the organic corpus, modes 11 (roms/jp_rev_a/experiments/l3_names/)",auto
@@ -2364,7 +2364,7 @@ bank,addr,name,conf,note,source
 06,5C9C,Mode18_LoadAllThumbs,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (28 hits in 9 runs: 18:00 x28; roms/jp_rev_a/experiments/mode_state_wp/),hand+auto
 06,5CB2,Mode18_LoadThumb,C,,hand+auto
 06,5D44,Mode18_LoadThumb_Tbl5D44,C,"2 sets x 4 words ([$D5EA] x 8 + 2 x thumbnail): the VRAM destination of each thumbnail, $9200 $9300 $9400 $9500 / $9500 $8D00 $9600 $8E00; the sources are the records of Mode18_LoadThumb_Tbl5D54 (read 2026-10-19)",hand+auto
-06,5D54,Mode18_LoadThumb_Tbl5D54,C,"2 sets x 4 records {lo; hi; bank} (index [$D5EA] x 4 + thumbnail): $C8 B copied to the matching word of Mode18_LoadThumb_Tbl5D44: 11:7200 7300 7400 7500 / 11:7500 7D00 7600 7E00 (the Gfx_11_*_Icon06_5D54 rows)",hand+auto
+06,5D54,Mode18_LoadThumb_Tbl5D54,C,2 sets x 4 records {lo; hi; bank} (index [$D5EA] x 4 + thumbnail): $C8 B copied to the matching word of Mode18_LoadThumb_Tbl5D44: 11:7200 7300 7400 7500 / 11:7500 7D00 7600 7E00 (the Gfx_11_*_Icon06_5D54 rows),hand+auto
 06,5D6C,Mode18_DrawThumbFrame,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (44 hits in 9 runs: 18:00 x28 18:01 x16; roms/jp_rev_a/experiments/mode_state_wp/),hand+auto
 06,5DD7,Mode18_LoadTileIndexed,C,BGB watchpoint pass 2026-10-25: ran only in mode 18 (78 hits in 3 runs: 18:00 x30 18:01 x48; roms/jp_rev_a/experiments/mode_state_wp/),hand+auto
 06,5DE6,Mode14_ShootLiveView,C,mode 14: live view and shutter,hand+auto

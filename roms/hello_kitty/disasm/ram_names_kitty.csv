@@ -238,8 +238,8 @@ d9d4,1,wStamp_LoadPageTiles_D9D4,*,I,"touched by Stamp_LoadPageTiles (1), Stamp_
 d9d5,1,wStamp_LoadPageTiles_D9D5,*,I,"touched by Stamp_LoadPageTiles (1), Stamp_LoadGfx (1), Stamp_LoadMask (1)"
 d9d6,1,wStamp_LoadMask_D9D6,*,I,"touched by Stamp_LoadMask (3), Stamp_LoadGfx (2)"
 d9d7,1,wStamp_LoadMask_D9D7,*,I,"touched by Stamp_LoadMask (3), Stamp_LoadGfx (2)"
-d9da,1,wStamp_SelectCategory_D9DA,*,I,"touched by Stamp_SelectCategory (1), Stamp_ArrangeGfx (1), Stamp_ArrangeMaskInverted (1)"
-d9db,1,wStamp_SelectCategory_D9DB,*,I,"touched by Stamp_SelectCategory (1), Stamp_ArrangeGfx (1), Stamp_ArrangeMaskInverted (1)"
+d9da,1,wStamp_SelectCategory_D9DA,*,I,"touched by Stamp_SelectCategory (1), Stamp_BuildGraphicsLayer (1), Stamp_BuildMaskLayer (1)"
+d9db,1,wStamp_SelectCategory_D9DB,*,I,"touched by Stamp_SelectCategory (1), Stamp_BuildGraphicsLayer (1), Stamp_BuildMaskLayer (1)"
 d9de,1,wStamp_SelectCategory_D9DE,*,I,"touched by Stamp_SelectCategory (1), Stamp_LoadMask (1)"
 d9df,1,wStamp_LoadMask_D9DF,*,I,touched by Stamp_LoadMask (1)
 d9e0,1,wStamp_LoadMask_D9E0,*,I,touched by Stamp_LoadMask (2)

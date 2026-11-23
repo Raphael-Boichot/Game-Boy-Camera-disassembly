@@ -240,8 +240,8 @@ DEF wStamp_LoadPageTiles_D9D4  EQU $d9d4 ; I 1  touched by Stamp_LoadPageTiles (
 DEF wStamp_LoadPageTiles_D9D5  EQU $d9d5 ; I 1  touched by Stamp_LoadPageTiles (1), Stamp_LoadGfx (1), Stamp_LoadMask (1)
 DEF wStamp_LoadMask_D9D6       EQU $d9d6 ; I 1  touched by Stamp_LoadMask (3), Stamp_LoadGfx (2)
 DEF wStamp_LoadMask_D9D7       EQU $d9d7 ; I 1  touched by Stamp_LoadMask (3), Stamp_LoadGfx (2)
-DEF wStamp_SelectCategory_D9DA EQU $d9da ; I 1  touched by Stamp_SelectCategory (1), Stamp_ArrangeGfx (1), Stamp_ArrangeMaskInverted (1)
-DEF wStamp_SelectCategory_D9DB EQU $d9db ; I 1  touched by Stamp_SelectCategory (1), Stamp_ArrangeGfx (1), Stamp_ArrangeMaskInverted (1)
+DEF wStamp_SelectCategory_D9DA EQU $d9da ; I 1  touched by Stamp_SelectCategory (1), Stamp_BuildGraphicsLayer (1), Stamp_BuildMaskLayer (1
+DEF wStamp_SelectCategory_D9DB EQU $d9db ; I 1  touched by Stamp_SelectCategory (1), Stamp_BuildGraphicsLayer (1), Stamp_BuildMaskLayer (1
 DEF wStamp_SelectCategory_D9DE EQU $d9de ; I 1  touched by Stamp_SelectCategory (1), Stamp_LoadMask (1)
 DEF wStamp_LoadMask_D9DF       EQU $d9df ; I 1  touched by Stamp_LoadMask (1)
 DEF wStamp_LoadMask_D9E0       EQU $d9e0 ; I 1  touched by Stamp_LoadMask (2)

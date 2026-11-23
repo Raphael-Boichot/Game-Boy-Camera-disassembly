@@ -1,0 +1,10 @@
+parameter,value,tag,source,note
+focal_mm,3.5,C,"owner, 2026-11-23","35 mm equivalent, crop factor 10"
+aperture_mm,1.78,C,"owner, 2026-11-23","aperture opening measured with a ruler (f/1.97)"
+transmission,0.9,I,"hypothesis, 2026-11-23","plastic lens; accepted by the owner as a working value (edit here)"
+reflectance,0.18,I,"convention","18 % grey scene; objects reflect infrared differently (foliage much more), not modelled"
+ir_halogen,7.0,I,"M64283FP datasheet, 2026-11-23","10 mV/(lx ms) without filter (halogen) against a median 1.4 mV/(lx ms) on the filtered curve; black-body estimate 4.5-9"
+ir_incandescent,7.0,I,"as halogen","a filament lamp, the halogen figure"
+ir_daylight,2.5,I,"black-body estimate, 2026-11-23","5,500-6,500 K through a silicon response and an infrared-cut edge at 650-700 nm: 2-3"
+ir_led,1.0,I,"hypothesis","white LED: almost no infrared"
+ir_fluorescent,1.0,I,"hypothesis","almost no infrared"
