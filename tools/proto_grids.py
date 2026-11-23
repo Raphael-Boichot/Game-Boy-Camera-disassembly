@@ -2,6 +2,7 @@
 """The prototype's 381-byte grids (2026-11-22): the uncertain runs of banks $08-$19, measured and drawn 381 bytes wide.
 
   tools/proto_grids.py PROTO.gb [--csv roms/prototype_debagame/assets/grids_proto.csv] [--png roms/prototype_debagame/screens/grids_381_proto.png]
+                       [--continuous roms/prototype_debagame/screens/grids_381_continuous_proto.png]
 
 Two forms of one kind of data (C, measured; what the data is stays open, I):
   * binary: banks $08-$10 after their PC-memory head (x86 code at $4000-$41FF): one small value per byte ($00, $01, $03, $80, $81 ...);
@@ -11,6 +12,13 @@ Two forms of one kind of data (C, measured; what the data is stays open, I):
 For each run: the distances between the places where the value changes, the most common ones (in both forms multiples of 381 come
 first: 381, 762, 1,143, 1,524 ...), and the drawing: 381 cells a row, a grey per value (binary: the low nibble, +8 when bit 7 is set;
 digits: the value 0-15), one band per bank.
+Two continuous arrays (2026-11-23, C, measured): the grids do not start anew in each bank. A bank is 16,384 = 43 x 381 + 1 bytes, and the
+row grid of each bank is the next one's shifted by one byte: the same rows repeat between banks at offsets of N x 381 - 1 (banks one apart)
+or N x 381 - 2 (two apart), and with the column taken as (ROM offset mod 381) every feature runs straight through the bank boundaries.
+So banks $08-$10 hold one array (the binary form) and banks $11-$19 another (the digit form), each 381 columns by about 388 rows, laid
+through the ROM image regardless of banks; the bank-number bytes and the 512-byte heads were written over them afterwards. The column
+where a row starts is not known (every start gives the same row-to-row agreement). --continuous draws both arrays that way, column =
+ROM offset mod 381, the heads and bank bytes in green.
 """
 import argparse, csv, os, re, collections, hashlib
 import numpy as np
@@ -18,6 +26,7 @@ from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(HERE); P = os.path.join(REPO, 'roms', 'prototype_debagame')
 ap = argparse.ArgumentParser(); ap.add_argument('rom')
 ap.add_argument('--csv', default=os.path.join(P, 'assets', 'grids_proto.csv')); ap.add_argument('--png', default=os.path.join(P, 'screens', 'grids_381_proto.png'))
+ap.add_argument('--continuous', default=os.path.join(P, 'screens', 'grids_381_continuous_proto.png'))
 a = ap.parse_args(); R = open(a.rom, 'rb').read()
 if hashlib.md5(R).hexdigest() != '19b50a5f67ef4f0d015e7d813370756e': raise SystemExit('proto_grids: expected the image as dumped (md5 19b50a5f...)')
 W = 381
@@ -55,3 +64,17 @@ os.makedirs(os.path.dirname(a.png), exist_ok=True); img.save(a.png, optimize=Tru
 print('proto_grids: %d runs, %d bytes (binary %d, digits %d); runs whose two most common change distances are multiples of 381: %d' % (
     len(rows), sum(r[3] for r in rows), sum(r[3] for r in rows if r[4] == 'binary'), sum(r[3] for r in rows if r[4] == 'digits'),
     sum(1 for r in rows if all(int(d) % W == 0 for d in r[6].split()[:2]))))
+# the two continuous arrays (column = ROM offset mod 381), side by side: binary $08-$10 (grey per value as above), digits $11-$19
+RA = np.frombuffer(R, np.uint8).astype(int); halves = []
+for lo, hi, form in ((0x08 * 0x4000, 0x11 * 0x4000, 'binary'), (0x11 * 0x4000, 0x1A * 0x4000, 'digits')):
+    s0 = lo + ((-lo) % W); n = (hi - s0) // W; m = RA[s0:s0 + n * W].reshape(n, W); off = (np.arange(s0, s0 + n * W) % 0x4000).reshape(n, W)
+    g = (m & 0x0F) + np.where(m & 0x80, 8, 0) if form == 'binary' else np.clip(m - 0x30, 0, 15)
+    rgb = np.stack([255 - np.clip(g, 0, 15) * 16] * 3, -1).astype(np.uint8)
+    if form == 'digits': rgb[(m < 0x30) | (m > 0x3F)] = (255, 200, 200)
+    rgb[off < 0x200] = (120, 190, 120); rgb[(off == 0) | (off == 0x3FFF)] = (0, 200, 0)
+    halves.append(Image.fromarray(rgb).resize((W * Z, n * Z), Image.NEAREST))
+cont = Image.new('RGB', (sum(h.width for h in halves) + 20, max(h.height for h in halves) + 16), (255, 255, 255)); d2 = ImageDraw.Draw(cont); x = 0
+for h, t in zip(halves, ('banks $08-$10 (binary)', 'banks $11-$19 (digits)')):
+    cont.paste(h, (x, 16)); d2.text((x + 2, 2), t + ', column = ROM offset mod 381', fill=(0, 0, 0)); x += h.width + 20
+cont.save(a.continuous, optimize=True)
+print('proto_grids: two continuous arrays of 381 columns (%d and %d rows) -> %s' % (halves[0].height // Z, halves[1].height // Z, os.path.relpath(a.continuous, REPO)))
