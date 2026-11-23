@@ -1,0 +1,20 @@
+printer_timing_check: the camera's byte and packet timing in the core against the printer firmware's limits (docs §17.10)
+limits (printer firmware, 8 MHz crystal): 5.12 ms between two bytes of a packet; 123-133 ms of silence while not printing clears the job
+
+album print, frame 0: 7218 bytes, 81 packets (INIT 1, DATA 12, PRINT 2, INQUIRY 66)
+   longest gap between two bytes of a packet: 1.344 ms (one byte on the link at 8,192 Hz: 0.977 ms)
+   longest silence between two packets while not printing: 90.2 ms (INQUIRY -> INQUIRY)
+   longest silence between any two packets of the job: 190.5 ms (INQUIRY -> INQUIRY)
+   from the last packet before PRINT (INQUIRY) to PRINT: 62.1 ms
+
+album print, frame 3: 7218 bytes, 81 packets (INIT 1, DATA 12, PRINT 2, INQUIRY 66)
+   longest gap between two bytes of a packet: 1.340 ms (one byte on the link at 8,192 Hz: 0.977 ms)
+   longest silence between two packets while not printing: 90.2 ms (INQUIRY -> INQUIRY)
+   longest silence between any two packets of the job: 190.5 ms (INQUIRY -> INQUIRY)
+   from the last packet before PRINT (INQUIRY) to PRINT: 62.1 ms
+
+album print, fruit game: 13442 bytes, 127 packets (INIT 1, DATA 22, PRINT 3, INQUIRY 101)
+   longest gap between two bytes of a packet: 1.344 ms (one byte on the link at 8,192 Hz: 0.977 ms)
+   longest silence between two packets while not printing: 90.2 ms (INQUIRY -> INQUIRY)
+   longest silence between any two packets of the job: 245.1 ms (INQUIRY -> INQUIRY)
+   from the last packet before PRINT (INQUIRY) to PRINT: 62.1 ms

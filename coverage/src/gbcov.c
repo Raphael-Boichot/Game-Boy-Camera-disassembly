@@ -103,8 +103,10 @@ static void req(int bit){ g.io[0x0F] |= (1<<bit); }
 static uint8_t inj_cmd[16], inj_st[16]; static uint16_t inj_nth[16], inj_cnt[16]; static int inj_n;
 static uint8_t plog_cmd[8192], plog_rx[8192]; static int plog_n;
 static int pr_real;   /* gb_printer_model(1): replies copied from the real printer traces (as tools/jp/bgb_printer.py): INIT 00, first DATA 00, later DATA 08, PRINT 08, INQUIRY 06 x18, 04 x2, then 00 */
+static uint64_t ptl_t[65536]; static uint8_t ptl_st[65536], ptl_tx[65536]; static int ptl_n;   /* (2026-11-23) every byte the printer receives: cycle (T-states, 4,194,304 Hz), state before it, the byte */
 static uint8_t printer_xfer(uint8_t tx){
   uint8_t rx=0x00;
+  if(ptl_n<65536){ ptl_t[ptl_n]=g.cycles; ptl_st[ptl_n]=g.pr_state; ptl_tx[ptl_n]=tx; ptl_n++; }
   switch(g.pr_state){
     case 0: if(tx==0x88){g.pr_state=1;} break;
     case 1: if(tx==0x33){g.pr_state=2;} else g.pr_state=(tx==0x88)?1:0; break;
@@ -555,7 +557,8 @@ static int step_cpu(void){
 void gb_set_keys(uint8_t k){ uint8_t old=cur_lines(); g.keys=k; uint8_t nl=cur_lines(); if((old&~nl)&0x0F) req(4); g.last_p1lines=nl; }
 void gb_attach_printer(int on){ g.pr_attached=on; g.pr_state=0; memset(g.pr_n,0,sizeof g.pr_n); }
 void gb_printer_model(int real){ pr_real=real; }
-void gb_printer_inject_clear(void){ inj_n=0; plog_n=0; }
+void gb_printer_inject_clear(void){ inj_n=0; plog_n=0; ptl_n=0; }
+int gb_printer_tlog(uint64_t*t,uint8_t*st,uint8_t*tx,int max){ int n=ptl_n<max?ptl_n:max; memcpy(t,ptl_t,n*sizeof(uint64_t)); memcpy(st,ptl_st,n); memcpy(tx,ptl_tx,n); return ptl_n; }
 int gb_printer_inject(int cmd,int nth,int status,int count){ if(inj_n>=16) return -1; inj_cmd[inj_n]=cmd; inj_nth[inj_n]=nth; inj_st[inj_n]=status; inj_cnt[inj_n]=count; return inj_n++; }
 int gb_printer_log(uint8_t*cmds,uint8_t*rxs,int max){ int n=plog_n<max?plog_n:max; memcpy(cmds,plog_cmd,n); memcpy(rxs,plog_rx,n); return plog_n; }
 

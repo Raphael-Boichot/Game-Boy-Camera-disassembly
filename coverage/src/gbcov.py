@@ -128,6 +128,10 @@ def cam_signal_mv(lux, t): return L.gb_cam_signal_mv(lux, t)
 def cam_log(maxn=8192):                         # every capture started since cam_log_clear(): reg 1, reg 7, reg 0, C1, C0, first matrix byte
     b = (C.c_uint8 * (6 * maxn))(); n = L.gb_cam_log(b, maxn); return [bytes(b[6 * i:6 * i + 6]) for i in range(min(n, maxn))]
 def cam_log_clear(): L.gb_cam_log_clear()
+L.gb_printer_tlog.argtypes = [C.c_void_p, C.c_void_p, C.c_void_p, C.c_int]; L.gb_printer_tlog.restype = C.c_int
+def printer_tlog(maxn=65536):                   # every byte the printer stand-in received since gb_printer_inject_clear(): (cycle, state before it, byte)
+    t = (C.c_uint64 * maxn)(); st = (C.c_uint8 * maxn)(); tx = (C.c_uint8 * maxn)(); n = min(L.gb_printer_tlog(t, st, tx, maxn), maxn)
+    return [(t[i], st[i], tx[i]) for i in range(n)]
 # The infrared factor (docs §19.12): the Game Boy Camera has no infrared filter and the sensor is very sensitive to infrared (owner,
 # 2026-11-23); the datasheet curve the model uses was measured with an infrared-cut filter. The M64283FP datasheet itself gives the
 # factor under halogen light: S = 10 mV/(lx ms) without a filter (its condition 1: halogen, no infrared filter, gain 04h) against a median
