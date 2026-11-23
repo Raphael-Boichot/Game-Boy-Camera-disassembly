@@ -58,10 +58,15 @@ Leftover_18_4104_Unused_TCRF_FaceDrawing4_FACE8_Gfx_Part7104::
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
     db $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff
 
-; I: leftover: 15871 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 1459 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_18_4200::
-    INCBIN "data/bank_18/Leftover_18_4200.bin" ; $4200, 15871 bytes
+    INCBIN "data/bank_18/Leftover_18_4200.bin" ; $4200, 1459 bytes
+; I: 14412 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part
+; of the second of the two arrays of 381 columns laid through the image before the bank heads (banks $11-$19, one code
+; $30-$3F a byte, the value 0-15; tools/proto_grids.py, README, the two ...
+Leftover_18_47B3_Grid381Digits::
+    INCBIN "data/bank_18/Leftover_18_47B3_Grid381Digits.bin" ; $47B3, 14412 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_18_7FFF::
     db $18

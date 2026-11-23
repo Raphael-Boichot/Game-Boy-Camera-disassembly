@@ -24,10 +24,30 @@ Leftover_12_4100_PcRam::
 Leftover_12_4104_AsmSource::
     db ": PrnDataAddress", $09, $09, "ds", $09, "2", $09, ";------", $82, "m", $82, $8f, $82, $94, $82, "t", $82, $93, $82, $85, $82, $84, $0d, $0a, "siowork.dmg(55) : SioCheckSum_S", $09, $09, "ds", $09, "2", $09, ";", $91, $97, $90, "M", $83, "`", $83, "F", $83, "b", $83, "N", $83, "T", $83, $80, $0d, $0a, "siowork.dmg(56) : EndofTrans", $09, $09, "ds", $09, "1", $09, ";", $82, "P", $83, "p", $83, "P", $83, "b", $83, "g", $91, $97, $90, "M", $8f, "I", $97, $b9, $81, "A", $82, "Q", $81, $81, $8a, $ae, $91, "S", $0d, $0a, "siowork.dmg(57) : DummySendF", $09, $09, "ds", $09, "1", $09, ";", $83, "_", $83, "~", $81, "[", $83, "o", $83, "C", $83, "g", $91, $97, $90, "M", $8d, $cf, $82, $dd, $0d, $0a, "siowork.dmg(58) : Printer"
 
-; I: leftover: 15871 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; I: leftover: 1464 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
 ; reader; never read nor run in the L2 runs)
 Leftover_12_4200::
-    INCBIN "data/bank_12/Leftover_12_4200.bin" ; $4200, 15871 bytes
+    INCBIN "data/bank_12/Leftover_12_4200.bin" ; $4200, 1464 bytes
+; I: 6011 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part
+; of the second of the two arrays of 381 columns laid through the image before the bank heads (banks $11-$19, one code
+; $30-$3F a byte, the value 0-15; tools/proto_grids.py, README, the two ...
+Leftover_12_47B8_Grid381Digits::
+    INCBIN "data/bank_12/Leftover_12_47B8_Grid381Digits.bin" ; $47B8, 6011 bytes
+; I: leftover: 84 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
+; reader; never read nor run in the L2 runs), after a run of the second 381-column array
+Leftover_12_5F33::
+    db $00, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30
+    db $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30
+    db $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30
+    db $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30
+    db $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30
+    db $30, $30, $30, $40
+
+; I: 8312 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part
+; of the second of the two arrays of 381 columns laid through the image before the bank heads (banks $11-$19, one code
+; $30-$3F a byte, the value 0-15; tools/proto_grids.py, README, the two ...
+Leftover_12_5F87_Grid381Digits::
+    INCBIN "data/bank_12/Leftover_12_5F87_Grid381Digits.bin" ; $5F87, 8312 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_12_7FFF::
     db $12

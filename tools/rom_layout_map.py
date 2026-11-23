@@ -114,7 +114,8 @@ if LKINDS:
     CATS[_iu:_iu] = [('TSRC',  'Raw assembly code shown by TCRF (Proto:Game Boy Camera, section Source Code): the two listings of the developers\' assembler source in plain text (Unused_TCRF_AsmSource1 / 2*)', (190, 60, 0)),
                      ('SRC',   'Raw assembly code: the rest of the developers\' assembler source and its listings, in plain text (Leftover_*_AsmSource / _SrcListing)', (40, 40, 40)),
                      ('PCRAM', 'Leftover PC memory: RAM of the development PC (DOS environment, Windows names, x86 code, load-record headers) left by the build tool (Leftover_*_PcRam / _LoadRecord)', (0, 200, 180)),
-                     ('LCODE', 'Leftover copies of code: routines of this or an older build that this build never runs (Leftover_*_<routine>)', (110, 100, 30))]
+                     ('LCODE', 'Leftover copies of code: routines of this or an older build that this build never runs (Leftover_*_<routine>)', (110, 100, 30)),
+                     ('ARRAY', 'Structured arrays of unknown kind: the two 381-column arrays laid through banks $08-$10 (one value a byte) and $11-$19 (one code $30-$3F a byte) before the bank heads; typed as arrays, what they hold not known (owner 2026-11-23; Leftover_*_Grid381Binary / _Grid381Digits)', (255, 150, 220))]
 if UNCLAIMED:
     CATS.insert(len(CATS) - 1, ('NONE', 'NOT ANALYSED YET: no label, type row or trace says what these bytes are', (96, 112, 140)))
 KEY = {k: i for i, (k, _, _) in enumerate(CATS)}
@@ -180,6 +181,7 @@ def data_kind(name):
         if m.group(1) in ('AsmSource', 'SrcListing'): return 'SRC' if LKINDS else 'UNC'
         if m.group(1) in ('PcRam', 'LoadRecord'): return 'PCRAM' if LKINDS else 'UNC'      # LoadRecord: a header of a download stream in the PC's memory
         if m.group(1) == 'Tiles': return 'T_UI'                                           # Leftover_BB_AAAA_Tiles: 2bpp tiles of no known block (owner 2026-11-12)
+        if m.group(1).startswith('Grid381'): return 'ARRAY' if LKINDS else 'UNC'          # the prototype's two 381-column arrays (owner 2026-11-23)
         base = re.sub(r'(_Variant(Part[0-9A-F]{4})?|_Part[0-9A-F]{4})$', '', m.group(1))      # a part or a variant of a block keeps the block's kind
         if base in CODENAMES: return 'LCODE' if LKINDS else 'UNC'                          # a copy of a routine: never run here
         return data_kind(base)                                                    # a copy of a named block keeps the block's kind
@@ -291,7 +293,7 @@ def font(sz, bold=False):
     return ImageFont.load_default(size=sz)
 F1, F2, F3, F3B, FB, FK = font(46, True), font(28), font(27), font(30, True), font(32, True), font(22)
 SHORT = {'SYS': 'system code', 'CAM': 'camera code', 'ALBUM': 'album code', 'EDIT': 'editor code', 'LINK': 'link code', 'PRINT': 'print code', 'GAME': 'game code', 'DJ': 'D.J. code',
-         'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'SRC': 'raw assembly', 'TSRC': 'raw assembly (TCRF)', 'PCRAM': 'PC memory', 'LCODE': 'code copies', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
+         'UI': 'menu code', 'SND': 'sound code', 'OTHER': 'other code', 'SRC': 'raw assembly', 'TSRC': 'raw assembly (TCRF)', 'PCRAM': 'PC memory', 'LCODE': 'code copies', 'ARRAY': 'arrays (kind unknown)', 'T_UI': 'tile sets', 'T_STP': 'stamp tiles', 'T_FRM': 'frame tiles', 'T_PHO': 'stock photos', 'MAP': 'tile maps',
          'OAM': 'sprite layouts', 'SOUND': 'sound data', 'TBL': 'tables / text', 'PALT': 'palettes', 'UNC': 'UNCERTAIN', 'FILL': '$FF fill', 'PAD': 'padding', 'NONE': 'not analysed'}
 def ramp(c):                      # 4 shades of one colour: 0 = lightest ... 3 = darkest (the 2 bits of a tile pixel)
     mix = lambda t, k: tuple(int(round(255 * (1 - k) + v * k)) if t == 'w' else int(round(v * k)) for v in c)

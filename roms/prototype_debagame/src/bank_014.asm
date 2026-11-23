@@ -24,10 +24,11 @@ Leftover_14_4100_PcRam::
 Leftover_14_4104_SrcListing::
     db "equ", $09, "$96", $0d, $0a, "def.dmg(185) : c_h", $09, "equ", $09, "$97", $0d, $0a, "def.dmg(186) : c_i", $09, "equ", $09, "$98", $0d, $0a, "def.dmg(187) : c_j", $09, "equ", $09, "$99", $0d, $0a, "def.dmg(188) : c_k", $09, "equ", $09, "$9a", $0d, $0a, "def.dmg(189) : c_l", $09, "equ", $09, "$9b", $0d, $0a, "def.dmg(190) : c_m", $09, "equ", $09, "$9c", $0d, $0a, "def.dmg(191) : c_n", $09, "equ", $09, "$9d", $0d, $0a, "def.dmg(192) : c_o", $09, "equ", $09, "$9e", $0d, $0a, "def.dmg(193) : c_p", $09
 
-; I: leftover: 15871 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_14_4200::
-    INCBIN "data/bank_14/Leftover_14_4200.bin" ; $4200, 15871 bytes
+; I: 15871 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part
+; of the second of the two arrays of 381 columns laid through the image before the bank heads (banks $11-$19, one code
+; $30-$3F a byte, the value 0-15; tools/proto_grids.py, README, the two ...
+Leftover_14_4200_Grid381Digits::
+    INCBIN "data/bank_14/Leftover_14_4200_Grid381Digits.bin" ; $4200, 15871 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_14_7FFF::
     db $14

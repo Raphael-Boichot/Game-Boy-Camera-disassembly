@@ -656,18 +656,19 @@ with open(a.out, 'w', newline='') as f:
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'note', 'source'])
     for (b, ad), (nm, c, note, src) in sorted(names.items()): w.writerow(['%02X' % b, '%04X' % ad, nm, c, note, src])
 tags = collections.Counter(v[1] for v in names.values())
-FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib', 'tiles', 'record')      # the leftovers: their I tag is final (owner rule 2026-11-11)
+FINAL = ('gap', 'copy', 'variant', 'text', 'ram', 'oldlib', 'tiles', 'record', 'array')      # the leftovers: their I tag is final (owner rule 2026-11-11); array: owner 2026-11-23
 doubt = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] not in FINAL)
 settled = sorted((k, v) for k, v in names.items() if v[1] != 'C' and v[3] in FINAL)
 with open(os.path.join(os.path.dirname(a.doubts), 'sym_settled_unused_proto.csv'), 'w', newline='') as f:   # the Japanese columns
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'addr', 'name', 'conf', 'group', 'size', 'evidence', 'proof'])
     for (b, ad), (nm, c, note, src) in settled:
-        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory', 'tiles': 'leftover tiles', 'record': 'leftover load record'}[src]
+        grp = {'gap': 'leftover', 'copy': 'leftover copy', 'variant': 'leftover variant', 'oldlib': 'leftover older build', 'text': 'leftover text', 'ram': 'leftover PC memory', 'tiles': 'leftover tiles', 'record': 'leftover load record', 'array': 'leftover array (kind unknown)'}[src]
         w.writerow(['%02X' % b, '%04X' % ad, nm, c, grp, int(re.search(r'(\d+) bytes', note).group(1)), note,
                     'tools/proto_names.py: %s, and trace/cov_proto_runs.npz neither reads nor runs them' % {'gap': 'no type row, traced instruction or reader', 'copy': 'an exact copy of the named block (or of a part of it), in bytes no type row, traced instruction or reader covers', 'variant': 'equal to the named block at one shift for most of its bytes, in bytes no type row, traced instruction or reader covers', 'oldlib': 'a routine or block of an older build\'s bank 0 (disasm/printer_lib_proto.csv, disasm/oldbuilds_proto.csv), in bytes no type row, traced instruction or reader covers',
                      'text': 'a text type row (printable ASCII / Shift-JIS) that no traced instruction reads', 'ram': 'strings of the PC memory in bytes no type row, traced instruction or reader covers',
                      'tiles': 'a hand type row (2bpp tiles, disasm/layers/sym_types_proto_hand.csv) that no traced instruction or copy site reads',
-                     'record': 'a 6-byte header 01 bank address length whose length leads to the next header (or past the bank end), in bytes no type row, traced instruction or reader covers'}[src]])
+                     'record': 'a 6-byte header 01 bank address length whose length leads to the next header (or past the bank end), in bytes no type row, traced instruction or reader covers',
+                     'array': 'a run of one of the two 381-column arrays (assets/grids_proto.csv, tools/proto_grids.py: its rows run through the bank boundaries) typed as data by a hand type row; what the array holds is not known (owner 2026-11-23: set aside as typed data of unknown kind)'}[src]])
 with open(a.texts, 'w', newline='') as f:   # every text in clear of the image
     w = csv.writer(f, lineterminator='\n'); w.writerow(['bank', 'start', 'end', 'bytes', 'kind', 'label', 'lines', 'sample'])
     rows_ = []

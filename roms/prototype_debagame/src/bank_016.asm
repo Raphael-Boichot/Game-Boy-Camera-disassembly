@@ -24,10 +24,11 @@ Leftover_16_4100_PcRam::
 Leftover_16_4104_AsmSource::
     db ",$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00", $0d, $0a, $09, "DEFB", $09, "$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$"
 
-; I: leftover: 15872 bytes that nothing in this build reads, runs or explains (no type row, no traced instruction, no
-; reader; never read nor run in the L2 runs)
-Leftover_16_41FF::
-    INCBIN "data/bank_16/Leftover_16_41FF.bin" ; $41FF, 15872 bytes
+; I: 15872 bytes: structured array of unknown kind (owner, 2026-11-23: set aside as typed data of unknown kind): part
+; of the second of the two arrays of 381 columns laid through the image before the bank heads (banks $11-$19, one code
+; $30-$3F a byte, the value 0-15; tools/proto_grids.py, README, the two ...
+Leftover_16_41FF_Grid381Digits::
+    INCBIN "data/bank_16/Leftover_16_41FF_Grid381Digits.bin" ; $41FF, 15872 bytes
 ; C: the bank number, compared by the ROM self-test 00:06F5 (BANK_TEST)
 BankNumber_16_7FFF::
     db $16
