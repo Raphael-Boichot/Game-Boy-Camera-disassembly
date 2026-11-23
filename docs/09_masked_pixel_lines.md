@@ -25,7 +25,7 @@ saved photos: the ROM-baked Album B pictures are full 128×128 dumps, and the sa
 used when the live `$A000` capture buffer is moved around in bank $006. Nothing crops or discards rows
 y = 122-127; whatever the sensor returns there is stored like any other pixel data, and the album and print
 screens only show 112 of the 128 rows. A datasheet pointer or probing data would be needed to say more
-(whether the game does anything conditional on that region): see §12.
+(whether the game does anything conditional on that region). (This was listed in §12, the open questions, closed 2026-11-23.)
 
 ---
 

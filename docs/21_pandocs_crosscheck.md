@@ -4,7 +4,7 @@
 
 The owner asked (2026-11-22) to check every claim, comment and name of the project against [Pan Docs](https://gbdev.io/pandocs/), with Pan Docs as the reference. Pan Docs was read from its source (github.com/gbdev/pandocs, commit `f7f7b064`, 2026-11-20). The pages that bear on this project are [Game Boy Camera](https://gbdev.io/pandocs/Gameboy_Camera.html), [Game Boy Printer](https://gbdev.io/pandocs/Gameboy_Printer.html), the SGB pages ([Command Summary](https://gbdev.io/pandocs/SGB_Command_Summary.html), [Palette Commands](https://gbdev.io/pandocs/SGB_Command_Palettes.html), [Border Commands](https://gbdev.io/pandocs/SGB_Command_Border.html)), [The Cartridge Header](https://gbdev.io/pandocs/The_Cartridge_Header.html), [Window](https://gbdev.io/pandocs/Window.html), [Serial Data Transfer](https://gbdev.io/pandocs/Serial_Data_Transfer_(Link_Cable).html), [Timer and Divider Registers](https://gbdev.io/pandocs/Timer_and_Divider_Registers.html), [Interrupts](https://gbdev.io/pandocs/Interrupts.html), [OAM DMA Transfer](https://gbdev.io/pandocs/OAM_DMA_Transfer.html) and [Audio Registers](https://gbdev.io/pandocs/Audio_Registers.html). Checked: the docs, the ROM source comments and names, the tools' texts, and the printer protocol document of the project. The I/O register names of the source come from the community `hardware.inc` (rev 4.8.0), not from this project, and were not reviewed one by one.
 
-Three outcomes: (A) the project agreed, (B) the project was wrong or imprecise by Pan Docs and has been corrected, (C) the project and Pan Docs differ and the project has its own evidence; these are left as they are and listed for a possible report to Pan Docs. One point (21.4), the exposure step, was settled by the owner: both values are now given.
+Three outcomes: (A) the project agreed, (B) the project was wrong or imprecise by Pan Docs and has been corrected, (C) the project and Pan Docs differ and the project has its own evidence: Pan Docs is wrong on these points (owner, 2026-11-23: settled, not an open question; the project keeps its own values). One point (21.4), the exposure step, was settled by the owner: both values are now given.
 
 ### 21.1 Agreement (A)
 
@@ -39,9 +39,9 @@ Three outcomes: (A) the project agreed, (B) the project was wrong or imprecise b
 | 8 | §17.10 "the length of one revolution is still open on the printer side" | (not Pan Docs: the project's own printer document gives about 1 s, the owner's timing) | §17.10 |
 | 9 | README: the SGB page "address not recorded" | the page is [Border Commands](https://gbdev.io/pandocs/SGB_Command_Border.html) | README |
 
-### 21.3 Where Pan Docs differs and the project has evidence (C)
+### 21.3 Where Pan Docs is wrong (C, settled)
 
-These are left as they are. Each could be reported to Pan Docs.
+Settled (owner, 2026-11-23): on each point below Pan Docs is wrong and the project's evidence stands; the project keeps its values and does not follow Pan Docs there. Point 4 rests on the printer's ROM run in an emulator: the figure in real time may still be measured on hardware, which would refine the value, not reopen the point.
 
 | # | Pan Docs says | The project shows | Evidence |
 |---|---|---|---|

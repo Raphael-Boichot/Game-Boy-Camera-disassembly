@@ -58,7 +58,7 @@ The project notes (formerly one README) are split into one file per section; the
 | 11.7 | &nbsp;&nbsp;[CoroCoro tag and the odd `01FFC-01FFF` values](11_sram_evidence_real_saves.md#117-corocoro-tag-and-the-odd-01ffc-01fff-values) | `11_sram_evidence_real_saves.md` |
 | 11.8 | &nbsp;&nbsp;[What the saves cannot tell](11_sram_evidence_real_saves.md#118-what-the-saves-cannot-tell) | `11_sram_evidence_real_saves.md` |
 | 11.9 | &nbsp;&nbsp;[The 14 cameras dumped with their own ROM (October 2026)](11_sram_evidence_real_saves.md#119-the-14-cameras-dumped-with-their-own-rom-october-2026) | `11_sram_evidence_real_saves.md` |
-| 12 | [Open questions](12_open_questions.md#12-open-questions) | `12_open_questions.md` |
+| 12 | [Open questions (closed)](12_open_questions.md#12-open-questions-closed) | `12_open_questions.md` |
 | 13 | [Emulator coverage run: what executes, what never does, and what reads the data banks](13_coverage_run.md#13-emulator-coverage-run-what-executes-what-never-does-and-what-reads-the-data-banks) | `13_coverage_run.md` |
 | 13.1 | &nbsp;&nbsp;[The emulator: a purpose-built core, and what it does not model](13_coverage_run.md#131-the-emulator-a-purpose-built-core-and-what-it-does-not-model) | `13_coverage_run.md` |
 | 13.2 | &nbsp;&nbsp;[Method: organic versus forced, and how branches were flipped](13_coverage_run.md#132-method-organic-versus-forced-and-how-branches-were-flipped) | `13_coverage_run.md` |
@@ -173,5 +173,5 @@ The project notes (formerly one README) are split into one file per section; the
 | 21 | [The project against Pan Docs](21_pandocs_crosscheck.md#21-the-project-against-pan-docs) | `21_pandocs_crosscheck.md` |
 | 21.1 | &nbsp;&nbsp;[Agreement (A)](21_pandocs_crosscheck.md#211-agreement-a) | `21_pandocs_crosscheck.md` |
 | 21.2 | &nbsp;&nbsp;[Corrected by Pan Docs (B)](21_pandocs_crosscheck.md#212-corrected-by-pan-docs-b) | `21_pandocs_crosscheck.md` |
-| 21.3 | &nbsp;&nbsp;[Where Pan Docs differs and the project has evidence (C)](21_pandocs_crosscheck.md#213-where-pan-docs-differs-and-the-project-has-evidence-c) | `21_pandocs_crosscheck.md` |
+| 21.3 | &nbsp;&nbsp;[Where Pan Docs is wrong (C, settled)](21_pandocs_crosscheck.md#213-where-pan-docs-is-wrong-c-settled) | `21_pandocs_crosscheck.md` |
 | 21.4 | &nbsp;&nbsp;[The exposure step: both values (settled)](21_pandocs_crosscheck.md#214-the-exposure-step-both-values-settled) | `21_pandocs_crosscheck.md` |

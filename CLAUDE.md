@@ -88,7 +88,7 @@ This file holds the rules and the layout. Numbers and findings live in `docs/` (
 * **A label that carries an address carries its own** (`Gfx_BB_AAAA_Consumer`); a piece of a parent asset is `_Part<addr>` (own address) or `_Cont`. Exceptions live in the checker's `ODD_MAP_ROWS` / `GFX_ON_MAP` lists, with the reason.
 * **Generated files with hand-kept parts or frozen inputs:** `display_report.py` overwrites the hand tail of `really_unused.md` (restore it from git after every run); `open_assets.csv` is a frozen candidate list that `display_report.py` reads, so it is not
   regenerated from the current doubts list (the README says so). Regenerating the layout / reachability pictures needs `--rom`.
-* Do not recompute what the README already states; check the section list at the top, §12 (open items) and §16.10 first.
+* Do not recompute what the README already states; check the section list at the top and §16.10 first (§12, the open questions, was closed on 2026-11-23: nothing left open).
 
 ## Where things stand (pointers, not numbers)
 * Disassembly levels L0-L6 and the measured counts: docs §1.3. The symbol file (§1.1.1) types every ROM byte and carries 5,349 names tagged C / I / ? (5,262 / 87 / 0); 0 doubtful rows are listed with evidence
@@ -104,5 +104,5 @@ This file holds the rules and the layout. Numbers and findings live in `docs/` (
   lines, carried to the other builds through the byte map where the bytes are equal (like the names), with checker rules (rows on instruction
   starts, no comment dropped when porting, quoted counts). The `.asm` files stay generated: never comment them by hand (a rebuild erases it).
   First content then: bank `$0A` (offset search, gain probe, factory calibration, fast calibration sanity check, boot measurement, auto-exposure).
-* Still open: §12 (SRAM and WRAM lists), §18.9 (sensor), §16.10 (sweep paths where BGB and the core disagree, link byte timing in BGB), §16.11 "what this walk does not prove", the other pages of the
+* Still open: §18.9 (sensor), §16.10 (sweep paths where BGB and the core disagree, link byte timing in BGB), §16.11 "what this walk does not prove", the other pages of the
   international stamp category 3, naming of the ~130 new code roots, texts other than the name / comment fields.
