@@ -4,8 +4,8 @@
   tools/sensor_model_check.py JP.gb KITTY.gb [--out sensor/model_check.txt]
 
 1. Boot: the Japanese ROM booted in the core with the model, the save sensor/calibration_saves/CE10245109_calibration_in_dark.sav with
-   camera 1's recorded vector written in (7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A, docs §18.13; checksums Σ + $0D, XOR + $23), a uniform scene
-   of 0 ... 3,000 lx at the sensor face: each search's captures (reg 0 values) against camera 1's boot on the real bus
+   camera 1's recorded vector written in (7E 7D 7D 80 7D 7C 7D 7B 7C 7B 79 6A, docs §18.13; checksums Σ + $0D, XOR + $23), a uniform scene:
+   the lens covered, then the player's light (the boot runs in it, owner 2026-11-23), through gbcov.face_lux (18 % grey): each search's captures (reg 0 values) against camera 1's boot on the real bus
    (sensor/sar_check_real.txt, "== boot").
 2. Factory calibration: the blank save (128 KiB of $AA) in the dark: the 12 offset searches against camera 1's calibration on the bus
    ("== calibration"), the 12 threshold scans, and the vector it stores against camera 1's.
@@ -43,20 +43,23 @@ def P(s=''): out.append(s); print(s)
 P('sensor_model_check: the core sensor model (gbcov.c gb_cam_model) against camera 1 (docs §19.12)')
 # 1. boot
 R = real('boot'); rb = [r for r in R if r[0] != 0x00]           # the five searches (the gain probe groups apart)
-P('\n1. Boot, camera 1 vector, uniform scene (lux at the sensor face): captures of the five searches; real = camera 1 on the bus')
+P('\n1. Boot, camera 1 vector, uniform scene (through the lens: gbcov.face_lux, 18 %% grey): the five searches; real = camera 1 on the bus, lens covered')
 for r in rb: P('   real          reg1=%02X reg7=%02X C=%s  %s' % (r[0], r[1], r[2], ' '.join(r[3])))
 sav = with_vector(os.path.join(SV, 'CE10245109_calibration_in_dark.sav'), CAM1)
-for lux in (0, 30, 100, 300, 1000, 3000):
-    gr = run(a.jp, sav, float(lux), 300); n = sum(len(g[1]) for g in gr)
+SCENES = [('lens covered', 0.0, None)] + [(nm, float(G.face_lux(sc, light=li)), sc) for nm, sc, li in (
+    ('room, LED, 300 lx', 300, 'led'), ('room, incandescent, 300 lx', 300, 'incandescent'), ('by a window, daylight, 1,000 lx', 1000, 'daylight'),
+    ('outdoors, overcast, 10,000 lx', 10000, 'daylight'), ('outdoors, sun, 100,000 lx', 100000, 'daylight'))]
+for name, lux, sc in SCENES:                                  # the boot runs in the player's light (owner, 2026-11-23)
+    gr = run(a.jp, sav, lux, 300); n = sum(len(g[1]) for g in gr)
     se = [g for g in gr if g[0][0] != 0x00 and not (g[0][0] in (1, 2) and g[0][1] == 5)][:5 + 4]
     exact = 0; lines = []
     for g in se:
         os_ = ' '.join('%02X' % o for o in g[1])
         m = next((r for r in rb if (r[0], r[1]) == (g[0][0], g[0][1])), None)
         same = m is not None and m[3] == os_.split(); exact += same
-        lines.append('   %5d lx      reg1=%02X reg7=%02X C=%02X%02X  %s%s' % (lux, g[0][0], g[0][1], g[0][2], g[0][3], os_, '   = real' if same else ''))
-    P('   -- %d lx: %d captures, gain probe winner G = %d, boot V %s, O %s; %d of 5 searches the same as camera 1' % (
-        lux, n, G.peek(0xD588), ' '.join('%X' % G.peek(0xD5C1 + i) for i in range(5)), ' '.join('%02X' % G.peek(0xD5C6 + i) for i in range(5)), exact))
+        lines.append('   %7.1f lx    reg1=%02X reg7=%02X C=%02X%02X  %s%s' % (lux, g[0][0], g[0][1], g[0][2], g[0][3], os_, '   = real' if same else ''))
+    P('   -- %s (%.1f lx at the face): %d captures, gain probe winner G = %d, boot V %s, O %s; %d of 5 searches the same as camera 1 in the dark' % (
+        name, lux, n, G.peek(0xD588), ' '.join('%X' % G.peek(0xD5C1 + i) for i in range(5)), ' '.join('%02X' % G.peek(0xD5C6 + i) for i in range(5)), exact))
     for l in lines: P(l)
 # 2. factory calibration
 RC = real('calibration')
