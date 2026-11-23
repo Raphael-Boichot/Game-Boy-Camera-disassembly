@@ -1,4 +1,4 @@
-oooooooooooooooooooooooooooooooooooooooo m# HUMAN VALIDATION IN PROGRESS
+# HUMAN VALIDATION IN PROGRESS
 
 # Game Boy Camera disassembly - the definitive (?) version
 
