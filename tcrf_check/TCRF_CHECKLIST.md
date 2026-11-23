@@ -98,4 +98,4 @@ AI slop, do not trust until human validation.
 
 ## Summary
 
-inferred (I): 4 · located / traced (C): 61 · with an open point (?): 3 (of 68 items)
+located / traced (C): 59 · inferred (I): 5 · C with an inferred part (C / I): 4 · with an open point (?): 0 (of 68 items; recounted from the tag column 2026-11-23, the summary had said C 61 / I 4 / ? 3)

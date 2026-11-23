@@ -104,5 +104,5 @@ This file holds the rules and the layout. Numbers and findings live in `docs/` (
   lines, carried to the other builds through the byte map where the bytes are equal (like the names), with checker rules (rows on instruction
   starts, no comment dropped when porting, quoted counts). The `.asm` files stay generated: never comment them by hand (a rebuild erases it).
   First content then: bank `$0A` (offset search, gain probe, factory calibration, fast calibration sanity check, boot measurement, auto-exposure).
-* Still open: §18.9 (sensor), §16.10 (sweep paths where BGB and the core disagree, link byte timing in BGB), §16.11 "what this walk does not prove", the other pages of the
-  international stamp category 3, naming of the ~130 new code roots, texts other than the name / comment fields.
+* Still open: §18.9 and §19.10 (sensor tests on a real camera), §16.10 and §14.9 (link byte timing in BGB; the sweep paths agree since 2026-11-22), §16.11 "what this walk does not prove", the other pages of the
+  international stamp category 3, texts other than the name / comment fields (the ~130 new code roots are named: international L3 done).

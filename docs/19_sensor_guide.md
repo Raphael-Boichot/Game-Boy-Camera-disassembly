@@ -188,8 +188,8 @@ So the retail design kept the idea (an offset search against a flat threshold on
 * Not planned (owner, 2026-11-02: too complicated; the jitter is observed and its vectors are known, §18.13): a recording of the jitter itself (a test: write a vector with byte 10 moved far off, point the camera at a scene that keeps the exposure around 200-400 ms, record the bus: the band should flip between 2 and 3 with the shifted offset).
 * The verdict of the fast calibration sanity check on a real camera (a test: write `1B 13` at flat `$04FF0-$04FFF` of the intense-light save of `CE10245109`, then of its dark save, and boot each with every button except B held, in the dark: NG then OK is predicted, §8).
 * Whether any real camera takes a gain-probe winner g > 0 (bands 0-2 would then run at 15.5-21.5 dB, §18.15; a check: read WRAM `$D588` after power-on on several units).
-* Whether light on the 12 top-edge test pixels shifts the boot offsets (record the five boot offsets with the lens covered and in bright light, §18.9). The core's sensor model predicts it does, from about 100 lx at the sensor face (19.12, I).
-* Bit 1 of `$A000` and the `$D5` matrix of the gain probe's first capture (§18.9).
+* Whether light on the 12 top-edge test pixels shifts the boot offsets (record the five boot offsets with the lens covered and in bright light, §18.9). The core's sensor model predicts it does (19.12, I; `sensor/model_check.txt`): no change up to 22 lx at the sensor face (a room at 300 lx), one offset one step off at 26 lx (daylight by a window), all five moved at 260 lx (overcast outdoors).
+* ~~Bit 1 of `$A000` and the `$D5` matrix of the gain probe's first capture~~ settled (§18.9): bit 1 is a P/M selector, `$D5` is 2.5 V, the probe's Vref (2026-11-15).
 
 ### 19.12 A realistic sensor in the core (2026-11-22; the model I, its checks C)
 

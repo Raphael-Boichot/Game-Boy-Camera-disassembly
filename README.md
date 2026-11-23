@@ -431,7 +431,7 @@ Every public source the project used since the start, in one place. None of them
   - *Where:* §1.1.1, §16.13
   - *How it reached the project:* files supplied by the owner
 - Pan Docs: [Game Boy Camera](https://gbdev.io/pandocs/Gameboy_Camera.html), [Game Boy Printer](https://gbdev.io/pandocs/Gameboy_Printer.html) and the SGB [Border Commands](https://gbdev.io/pandocs/SGB_Command_Border.html) page; checked against the whole of Pan Docs on 2026-11-22 (docs §21)
-  - *What the project took from it:* the `$A000` register (bits 1-2, the P/M bits of its sample code; the meaning of bit 1 stays open, §18) and the SGB border layout (4 bpp tiles, 32 x 28 map cells, palettes 4-5)
+  - *What the project took from it:* the `$A000` register (bits 1-2, the P/M bits of its sample code; bit 1 is a P/M selector, settled in §18.9 from AntonioND's measurements) and the SGB border layout (4 bpp tiles, 32 x 28 map cells, palettes 4-5)
   - *Where:* §16.13, §18
   - *How it reached the project:* consulted as reference
 - [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a, after the v3.0 tag) and rgbds v1.0.4 (`rgbasm`, `rgblink`, `rgbfix`; rgbds address not recorded)
