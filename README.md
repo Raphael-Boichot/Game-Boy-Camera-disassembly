@@ -14,7 +14,7 @@ Then, parallel to all this, LLMs arrived. By early 2026, they had become reliabl
 So, here is the project. Like all my previous work, it will be improved step by step—and as always, take it for what it is: free, passionate, and built for the love of tinkering. Not satisfied by the project? Just move away.
 
 ### Project summary
-
+<!-- CLAUDE-FIXME: add the md5 checksums of all the roms disassembled here in this project-->
 **Levels** (`HOWTO_NEW_ROM.md` section 0; what is left for each level, and in which order: [`ROADMAP.md`](ROADMAP.md)):
 
 | ROM | L0 | L1 | L2 | L3 | L4 | L5 | L6 |
@@ -54,13 +54,13 @@ The reference build: L0-L5 done, L6 partial ([`roms/jp_rev_a/`](roms/jp_rev_a/RE
 **Unused assets** (`tools/retail_unused_sheet.py`): the assets that no emulator replay put on screen in a run without state pokes (TCRF graphics, the unused screens drawn from their maps, blocks never shown or shown only in forced runs; docs §16.24). The scraps, the sounds never requested and the evidence of each block are in [`really_unused.md`](roms/jp_rev_a/experiments/unidentified/really_unused.md) and its evidence sheet [`really_unused.png`](tcrf_check/assets/unidentified/really_unused.png).
 
 ![The unused assets of the Japanese ROM](roms/jp_rev_a/assets/unused_sheet_jp.png)
-
+<!-- CLAUDE-FIXME: use a more compact arrangements so that empty area are minimized-->
 **Highlights**
 
 *The two unused full screens*: left, the alternate stand-by screen of the image exchange (map `23:5CC0` with the tiles `14:4000`); right, the one-page main menu with the "DEBA GAME" logo (map `25:7820` with the tiles `17:5500`). No code loads either of them, in either ROM (docs §16.24, §16.25).
 
 ![The unused image-exchange stand-by screen and the unused "DEBA GAME" one-page main menu, side by side](roms/jp_rev_a/experiments/unidentified/unused_screens_pair.png)
-
+<!-- CLAUDE-FIXME: maybe it would be clearer to present side by side the two stand-by screen (used and unused for japanese rom, then the unused DEBAGAME screen-->
 *The unused ball head animation*: left, the head turn the main menu plays (frames F4 to F0 and back, on the front body); right, the twin set of frames F9 to F5 and back that no code plays (`MainMenu_SlideA_Tbl2` / `Tbl3` have no caller; same heads, another collar, on the back body it fits). A red line marks the unused tiles: the head frames F5 to F8, which nothing reads (F9 is the resting head of the menu's lower page, and the back body is used). Drawn from the ROM tiles at 4x on the game's timing (docs §16.24).
 
 ![The camera ball head turn of the main menu: the animation the game plays beside the unused twin set](roms/jp_rev_a/experiments/unidentified/main_menu_head_turn_used_vs_unused.gif)
@@ -72,13 +72,13 @@ The reference build: L0-L5 done, L6 partial ([`roms/jp_rev_a/`](roms/jp_rev_a/RE
 *An unused result message* (all three retail ROMs, not on TCRF): the result screen has 15 text strips; no code ever asks for strip `$07`, 「まだおしえたらん」 ("I won't tell you yet") in the Japanese ROM, which the international build replaced by a blank strip (docs §16.32, with the other 14 texts and the printer conditions behind *Print error #01-#04*):
 
 ![The 15 result messages, international and Japanese](roms/jp_rev_a/experiments/unused/result_messages_jp_vs_intl.png)
-
+<!-- CLAUDE-FIXME: focus use a red outline for unused set-->
 **Trivia**
 
 *The two hidden boot screens* (hold the buttons while switching the camera on): the **factory calibration** (every button, or a blank calibration record: STORE / PLEASE WAIT, then STORE / END; it measures the sensor and stores the calibration vector) and the **fast calibration sanity check** (every button except B: it measures again, writes nothing, and shows OK or NG for the two highest-gain references), BGB screenshots from synthetic saves (docs §8).
 
 ![The factory calibration and the fast calibration sanity check, with the button combinations that open them](roms/jp_rev_a/experiments/secret/secret_calibration_screens.png)
-
+<!-- CLAUDE-FIXME: use the real CHECK values taken from the factory saves-->
 *Inputs and codes* (each checked in the code, in the project's core and in BGB; docs §15, §16.18; the lines of the [GameFAQs cheats page](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) and of [TCRF](https://tcrf.net/Game_Boy_Camera) are credited where they come from):
 
 | What | How | Source, check |
@@ -155,7 +155,7 @@ Ported from the Japanese symbol file with the international tools: L0-L5 done (a
 **Unused assets** (2026-11-02, from three one-hour coverage runs of the Gold ROM in the project's core: a fresh start, the unlocking saves and a third seed; `tools/never_reached_gold.py`): of the 131 never-reached assets of the Japanese ROM, 86 are in the Gold ROM (81 at the same address, 5 moved) and no organic Gold run read them, the same leftovers as in the international ROM, with the same bytes ([`never_reached_gold.csv`](roms/gold/assets/never_reached_gold.csv); sheet below, `tools/retail_unused_sheet.py --tag gold`); 9 small blocks were read (the Space Fever II HUD bytes, as in the other builds, and the TCRF album hand gestures `13:5CA0`, which a larger tile copy of the album screen loads without showing them). The Gold edition's own content (18 blocks whose bytes differ from the international ROM: the Zelda stamps of banks $2B / $2C, the three Zelda pictures of album B with their thumbnails, the album B slot and gate tables, two icon sources) is a plain asset substitution: the same code loads it from the same places as the international stamps and album B pictures, so any player sees it. The automatic runs simply did not get there in normal play, in either build (the international run did not read the international stamps and album B pictures at these addresses either); they were read only by runs with forced states ([`gold_own_never_read.csv`](roms/gold/assets/gold_own_never_read.csv)). This is a limit of the runs, not unused content: targeted runs by key presses only (2026-11-22, `tools/gold_own_assets_run.py`, [`gold_own_organic.csv`](roms/gold/assets/gold_own_organic.csv); C, core and BGB) open album B pictures 6, 7 and 8 (every byte of the three pictures and thumbnails read, 1,504 to 1,875 bytes of each picture on screen) and place every stamp of the two Zelda categories (6 + 6, the palette's own limit: the bytes left unread in the four stamp blocks are all `$00`, so every byte that holds a Zelda stamp is read); the slot table is read whole and the gate table 28 of its 32 bytes. BGB shows the same screens ([`albumB_photos06_08_bgb.png`](roms/gold/screens/albumB_photos06_08_bgb.png), [`stamps_zelda_bgb.png`](roms/gold/screens/stamps_zelda_bgb.png)). Not read: `Unused_Photo_SaveReceived_Far_Stray46FD` (3 bytes), as its name says.
 
 ![The unused assets of the Gold ROM](roms/gold/assets/unused_sheet_gold.png)
-
+<!-- CLAUDE-FIXME: use a more compact arrangements so that empty area are minimized-->
 **Highlights**: the unused Super Mario World wild frame of the international section is here too; the Gold edition has no unused content of its own.
 
 **Trivia**
@@ -227,7 +227,7 @@ A hardware tester, デバガメテスター ("Debagame Tester") SECOND IMPACT Ve
 
 <!-- pcram_strings:begin -->
 *The development PC in the spare banks* (2026-11-23, `tools/proto_pcram_strings.py`; C for the bytes, I for "PC memory"): every ASCII string of the PC-memory leftovers (`Leftover_*_PcRam`, 49 labels), 64 distinct strings: 5 file names or paths, 18 environment variables, 30 symbol names, 11 other (every address in [`assets/pcram_strings_proto.csv`](roms/prototype_debagame/assets/pcram_strings_proto.csv)). A Japanese Windows 95 PC (`WINDOWS VMM 4.0`, MS-IME 95, `TZ=JST-9`), with an assembler toolchain on its PATH.
-
+<!-- CLAUDE-FIXME: next table in unreadable, too long. Use category and clear separator, change line only for new category, plus the adresses are not displayed correctly in any case, forget them-->
 | Category | String | Where (bank:address) |
 |---|---|---|
 | file name or path | `msime95.ini` | `04:4BF0` |
@@ -384,72 +384,24 @@ Details and counts: [`docs/01_toolchain_and_status.md`](docs/01_toolchain_and_st
 Every public source the project used since the start, in one place. None of them was taken as an authority over the ROM: what a source says and the ROM cannot confirm is tagged **I** or **?** in the sections quoted below, never **C**. The addresses were supplied by the owner on 2026-10-20 (the repository had recorded only some of them); a source with no address is marked "URL not recorded" and no address is guessed.
 
 - The Cutting Room Floor, page [Game Boy Camera](https://tcrf.net/Game_Boy_Camera), revision read: [1968673](https://tcrf.net/index.php?title=Game_Boy_Camera&oldid=1968673)
-  - *What the project took from it:* the list of unused and hidden content that became the TCRF checklist and the `Unused_TCRF_*` labels; the pictures compared with the ROM
-  - *Where:* §15, §16.24, §16.29
-  - *How it reached the project:* printed copy of 2026-09-27 supplied by the owner, read by OCR (the figures and names were checked against the ROM before use)
-- The Cutting Room Floor, page [Game Boy Camera/Regional Differences](https://tcrf.net/Game_Boy_Camera/Regional_Differences), revision read: [1846909](https://tcrf.net/index.php?title=Game_Boy_Camera/Regional_Differences&oldid=1846909)
-  - *What the project took from it:* the documented differences between the Japanese and international builds (only the Japanese side of that page is counted in the checklist)
-  - *Where:* §15
-  - *How it reached the project:* printed copy of 2026-09-27 supplied by the owner, read by OCR
 - Jonathan Traynor's blog post "Secrets of the Pocket Camera" (jofamo.com): [original address](https://www.jofamo.com/blog/secrets-of-the-pocket-camera) (the site is dead), read from the [Wayback Machine copy of 2025-09-27](https://web.archive.org/web/20250927101352/https://www.jofamo.com/blog/secrets-of-the-pocket-camera), 48 pages
-  - *What the project took from it:* the claims about the Album B stock pictures, BGM 04, the P.VOICE and the character table, each compared with the ROM and run in BGB; what the article takes from the guide book, the manual, nintendo.co.jp and Tanaka's tweets was not seen and is not used
-  - *Where:* §16.27
-  - *How it reached the project:* PDF of the Wayback copy supplied by the owner on 2026-10-14
 - [GameFAQs, Game Boy Camera cheats](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) (the game's [FAQ list](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/faqs) was also given by the owner; the README cites no individual FAQ)
-  - *What the project took from it:* the cheat and secret list, every line tried in BGB
-  - *Where:* §16.18 (also cited in §2, §15.4, §16.4, §16.6, §16.17, §17.6)
-  - *How it reached the project:* read on 2026-10-12
 - [Nintendo Wiki (Fandom), Totaka's Song](https://nintendo.fandom.com/wiki/Totaka%27s_Song)
-  - *What the project took from it:* the description of the tune on the "no blank frames" screen
-  - *Where:* §16.20
-  - *How it reached the project:* fetched during the Totaka's Song check
 - [cristofercruz/gb-camera-frames](https://github.com/cristofercruz/gb-camera-frames) (`gbc-fr.py`)
-  - *What the project took from it:* the frame and wild-frame layout constants (flat offsets, tile counts) checked against the ROM
-  - *Where:* §16.23
-  - *How it reached the project:* shallow clone read for the constants
 - [HerrZatacke/dither-pattern-gen](https://github.com/HerrZatacke/dither-pattern-gen) (MIT; read at `master` b153952, 2023-02-10)
-  - *What the project took from it:* the dither-matrix cell order, compared with the ROM and with MAME (a software model: **I** at best)
-  - *Where:* §18.12
-  - *How it reached the project:* read for §18.12
 - MAME, `src/devices/bus/gameboy/camera.cpp` (BSD-3-Clause, header "Vas Crabb")
-  - *What the project took from it:* the MAC-GBD window and a simplified M64282FP model; its header gives the sensor as 128 x 123 pixels
-  - *Where:* §9, §18.12
-  - *How it reached the project:* copy attached by the owner, revision not stated; URL not recorded
 - [Mitsubishi M64282FP datasheet](https://github.com/Raphael-Boichot/Mitsubishi-M64282FP-dashcam/blob/main/Docs%20and%20research/Bibliography/Mitsubishi%20Integrated%20Circuit%20M64282FP%20Image%20Sensor.pdf), ver. 1.1E (the bibliography of the owner's Mitsubishi-M64282FP-dashcam repository)
-  - *What the project took from it:* register names and bit meanings, read against the owner's bus recordings; the datasheet section numbers quoted in the README are the datasheet's own
-  - *Where:* §18 (18.2, 18.8)
-  - *How it reached the project:* document read for §18
 - The Funtography guide: the Internet Archive item [Nintendo Game Boy Camera Funtography Guide](https://archive.org/details/nintendofuntographyguide) (1998, described there as a Nintendo Power guide; this README calls it "the US manual")
-  - *What the project took from it:* the menu names, the five flowcharts (USER, SHOOT, VIEW, PLAY, STUDIO), the build differences it reveals; printed page numbers are the guide's own
-  - *Where:* §16 (introduction, 16.4, 16.5, 16.11)
-  - *How it reached the project:* attached by the owner; address supplied on 2026-10-20
 - [GameFAQs map "Game Boy Camera - Menu Guide"](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/map/63-menu-guide) by FunkyLizard (fan-made, same five sections; the picture itself is titled "Menu of Gamboy Camera")
-  - *What the project took from it:* the second reading of the menu tree, compared with the guide's charts
-  - *Where:* §16.11
-  - *How it reached the project:* attached by the owner on 2026-10-14 with the blog link above
 - [The Spriters Resource, Game Boy Camera](https://www.spriters-resource.com/game_boy_gbc/gameboycamera/): 16 sheets (17 files kept in `source/Spriter_ressources_check/`, one a byte-identical duplicate)
-  - *What the project took from it:* names and layouts of graphics, matched tile by tile against the ROM (`sheet_tile_match.py`); the sheet names in the `Sheet_*` labels
-  - *Where:* §1.1.1, §16.13
-  - *How it reached the project:* files supplied by the owner
 - Pan Docs: [Game Boy Camera](https://gbdev.io/pandocs/Gameboy_Camera.html), [Game Boy Printer](https://gbdev.io/pandocs/Gameboy_Printer.html) and the SGB [Border Commands](https://gbdev.io/pandocs/SGB_Command_Border.html) page; checked against the whole of Pan Docs on 2026-11-22 (docs §21)
-  - *What the project took from it:* the `$A000` register (bits 1-2, the P/M bits of its sample code; bit 1 is a P/M selector, settled in §18.9 from AntonioND's measurements) and the SGB border layout (4 bpp tiles, 32 x 28 map cells, palettes 4-5)
-  - *Where:* §16.13, §18
-  - *How it reached the project:* consulted as reference
 - [mgbdis](https://github.com/mattcurrie/mgbdis) master (commit 95d951a, after the v3.0 tag) and rgbds v1.0.4 (`rgbasm`, `rgblink`, `rgbfix`; rgbds address not recorded)
-  - *What the project took from it:* the disassembler and the assembler of the byte-exact round trip
-  - *Where:* §1.1, §1.1.1, `HOWTO_NEW_ROM.md`
-  - *How it reached the project:* installed in the workspace; versions pinned in §1.1
 - [BGB](https://bgb.bircd.org/) 1.5.x (run under Wine, headless)
-  - *What the project took from it:* the emulator behind every **C** tag marked "BGB": watchpoints, screenshots, the printer helper link
-  - *Where:* §16.6, §17 and the sections that cite it
-  - *How it reached the project:* attached by the owner
 - [Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor), folders `Research on real camera 2024` and `Research on real Camera`
-  - *What the project took from it:* the owner's bus-analyser recordings of two real cameras (boot, calibration, a calibration under strong light, normal use, the Hello Kitty and prototype ROMs, a zeroed vector) and the saves before and after a calibration
-  - *Where:* §18.4-18.6, §18.13
-  - *How it reached the project:* supplied by the owner on 2026-10-26; decoded by `tools/jp/sensor_more_recordings.py`
-- [untoxa's gb-photo](https://github.com/untoxa/gb-photo)
-  - *What the project took from it:* only named, to identify the third-party save (`2022-03-05`) whose unused bytes hold its settings; not read as a source
-  - *Where:* §3.8
-  - *How it reached the project:* identified from the save content
+- [AntonioND/gbcam-rev-engineer](https://github.com/AntonioND/gbcam-rev-engineer)
+- [gbdev.io/pandocs/](https://gbdev.io/pandocs/)
 
-Not public, so not listed above: the 33 real saves are the owner's own data (§3, §11); the three calibration saves of camera `CE10245109` (dark, intense light, varying light, §18.13), which hold no photo, are the one exception, kept as examples in `sensor/calibration_saves/`; the bus-analyser workbooks are public, in the sensor repository above; the ROMs themselves are not listed (md5 values in §1.1).
+## Aknowledgements
+
+- [Cristopher Cruz](https://github.com/cristofercruz) for sharing saves from Japanese Camera from a seller's box (so totally new, out of factory). Saves are undisclosed (but heavily analyzed) following author's request.
+- All people from the Game Boy community that rendered this project possible, to name few: [Untoxa](https://github.com/untoxa) (gb-photo), [Andreas Hahne](https://github.com/HerrZatacke) (sensor sniffing and dither matrix explanation), Jeff Frohwein (the starting point), Rabidrodent (comprehensive assets for validation). List to be continued
