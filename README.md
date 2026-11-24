@@ -1,4 +1,4 @@
-# HUMAN VALIDATION IN PROGRESS
+# Status: under review
 
 # Game Boy Camera disassembly - the definitive (?) version
 
