@@ -400,7 +400,8 @@ Every public source the project used since the start, in one place.
 - [Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor), folders `Research on real camera 2024` and `Research on real Camera`
 - [AntonioND/gbcam-rev-engineer](https://github.com/AntonioND/gbcam-rev-engineer)
 - [gbdev.io/pandocs/](https://gbdev.io/pandocs/)
-<!-- CLAUDE-FIXME: feel free to complete if I forgot a source-->
+- [Raphael-Boichot/Game-Boy-Printer-disassembly](https://github.com/Raphael-Boichot/Game-Boy-Printer-disassembly)
+<!-- CLAUDE-FIXME: feel free to complete if I forgot a source, group by authors-->
 ## Aknowledgements
 
 - [Cristopher Cruz](https://github.com/cristofercruz) for sharing saves from Japanese Camera from a seller's box (so totally new, out of factory). Saves are undisclosed (but heavily analyzed) following author's request.
