@@ -382,7 +382,7 @@ Details and counts: [`docs/01_toolchain_and_status.md`](docs/01_toolchain_and_st
 ## Sources
 
 Every public source the project used since the start, in one place.
-
+<!-- CLAUDE-FIXME: Use a concise description of what have been used -->
 - The Cutting Room Floor, page [Game Boy Camera](https://tcrf.net/Game_Boy_Camera), revision read: [1968673](https://tcrf.net/index.php?title=Game_Boy_Camera&oldid=1968673)
 - Jonathan Traynor's blog post "Secrets of the Pocket Camera" (jofamo.com): [original address](https://www.jofamo.com/blog/secrets-of-the-pocket-camera) (the site is dead), read from the [Wayback Machine copy of 2025-09-27](https://web.archive.org/web/20250927101352/https://www.jofamo.com/blog/secrets-of-the-pocket-camera), 48 pages
 - [GameFAQs, Game Boy Camera cheats](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/cheats) (the game's [FAQ list](https://gamefaqs.gamespot.com/gameboy/564359-game-boy-camera/faqs) was also given by the owner; the README cites no individual FAQ)
@@ -400,8 +400,8 @@ Every public source the project used since the start, in one place.
 - [Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor](https://github.com/Raphael-Boichot/Play-with-the-Game-Boy-Camera-Mitsubishi-M64282FP-sensor), folders `Research on real camera 2024` and `Research on real Camera`
 - [AntonioND/gbcam-rev-engineer](https://github.com/AntonioND/gbcam-rev-engineer)
 - [gbdev.io/pandocs/](https://gbdev.io/pandocs/)
-
+<!-- CLAUDE-FIXME: feel free to complete if I forgot a source-->
 ## Aknowledgements
 
 - [Cristopher Cruz](https://github.com/cristofercruz) for sharing saves from Japanese Camera from a seller's box (so totally new, out of factory). Saves are undisclosed (but heavily analyzed) following author's request.
-- All people from the Game Boy community that rendered this project possible, to name few: [Untoxa](https://github.com/untoxa) (gb-photo), [Andreas Hahne](https://github.com/HerrZatacke) (sensor sniffing and dither matrix explanation), Jeff Frohwein (the starting point), Rabidrodent (comprehensive assets for validation). List to be continued
+- All people from the Game Boy community that rendered this project possible, to name few: [Untoxa](https://github.com/untoxa) (gb-photo), [Andreas Hahne](https://github.com/HerrZatacke) (sensor sniffing and dither matrix explanation), Jeff Frohwein (the starting point), Rabidrodent (comprehensive assets for validation). List to be continued <!-- CLAUDE-FIXME: feel free to complete if I forgot somebody-->
