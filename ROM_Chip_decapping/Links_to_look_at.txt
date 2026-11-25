@@ -1,0 +1,2 @@
+https://github.com/travisgoodspeed/maskromtool
+https://github.com/travisgoodspeed/gbrom-tutorial
