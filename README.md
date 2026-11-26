@@ -9,9 +9,9 @@ I’ve spent nearly five years reverse-engineering almost anything I could get m
 
 Eventually, ROM disassembly became the only way to push further and finally bring this chapter to a close. I procrastinated on it for a long time simply because the sheer amount of work required was daunting and unprecedented. I’m not super comfortable with assembly and low level langages in general, but I understand the methodology of code disassembly: trace code execution as far as you can within all branches and separate the bytes into their respective categories (executable code, assets, sounds, lookup tables, etc.). It was purely a matter of lacking the time I did not have and bandwidth.
 
-Then, parallel to all this, LLMs arrived. By early 2026, they had become reliable enough to genuinely assist with code disassembly without wasting time. Because my deep knowledge of how the camera sensor (and the camera ROMs in general) works allowed me to reliably validate or reject any guess or output the AI produced, I realized I had no excuse not to try. It suddenly felt realistically feasible without completely hijacking my personal life.
+Then, parallel to all this, LLMs arrived. By early 2026, they had become reliable enough to genuinely assist with code disassembly without wasting time. Because my knowledge of how the camera sensor (and the camera ROMs in general) works allowed me to reliably validate or reject any guess or output the AI produced, I realized I had no excuse not to try. It suddenly felt realistically feasible without completely hijacking my personal life.
 
-So, here is the project. Like all my previous work, it will be improved step by step—and as always, take it for what it is: free, passionate, and built for the love of tinkering. Not satisfied by the project? Just move away.
+So, here is the project. Like all my previous work, it will be improved step by step—and as always, take it for what it is: free, passionate, and built for the love of reverse engineering stuff. Not satisfied by the project? Just move away.
 
 ### Project summary
 <!-- CLAUDE-FIXME: add the md5 checksums of all the roms disassembled here in this project-->
